@@ -1,3 +1,12 @@
+## 2026-11-09 (boppyfx1): Boppy's 13 approved effect sheets cut and drawn painted
+- `tools/sprite-bake/bake_boppy_fx.py` cuts the 13 approved `boppy-fx-*` sheets (one item per grid cell, checked on a montage) into 58 pictures in `art/props/boppy` (prefixes cs_ gr_ pa_ rr_ hc_ ld_ ew_ fu_ pp_ sd_ mf_ ny_ fa_). Seeds of Trouble v1 and v2 are byte-identical; v1 is used.
+- Not installed: held objects already painted into the ab frames (cap, dispenser, key ring, packet, pepper, jar, lid, pot, spoon), word cards (the game draws its own words), and props the game keeps (cell bars, recliner, cushion, FAMILY FIRST ticket, fire alarm, catfish, pier post, folding chair, bobber, pond).
+- `engine/boppy-moves.js`: a painted-only scene `ba_art` and an `art:'<slug>'` option on ba_rings, ba_glow, ba_shield, ba_smoke, ba_sparks, ba_cone, ba_blaze. Drawn shapes show only until a picture loads (Amy's pattern). Purged: `ba_splash` (replaced by painted splash, ripple, drops and fish in Patient Angler), `boppy/big_key` (Lockdown uses `boppy/ld_key`, file deleted). Headcount badges 1 to 4 are painted; drawn badges stay for a fifth or later foe.
+- `engine/prop-art.js`: preload line for the 58 pictures; `big_key` removed from its preload list. Tags bumped (`boppyfx1`).
+- `tools/sprite-bake/src/props/props.json` still lists `big_key` in its positional manifest (kept, as with the earlier Boppy purge).
+- Tests: kit_test boppy for all 13 moves, FAILS: [], every painted picture drawn at least once (PAINTED_PROPS), frames looked at (Cap Check, Pepper Breath, Five-Alarm Jar). smoke FAILS: [], tag_check ok, unused_voice 0 on all checks.
+- Not checked: real iPhone playback; the first play of a move can show drawn shapes until the pictures load (preload at 4.8 s).
+
 ## 2026-11-09 (amyfx2): Amy's other 13 effect sheets cut and drawn painted
 - `bake_amy_fx.py` now cuts all 14 approved Amy fx sheets (45 pictures in `art/props/amy`, slugs `pt_`, `rp_`, `ht_`, `gs_`, `iv_`, `pq_`, `dt_`, `bb_`, `hr_`, `om_`, `fs_`, `ns_`, `mu_`). Three sheets (goldstar v2, hill repeats, false start) are cut cell by cell (`'cells'`) because a full-bleed road or track in a cell broke the grouping.
 - Held objects are not installed (already painted into the ab frames). Not installed because no move draws them: door, flag, red ball, cone, hill sign, gel packet, pizza box, bib, finish ring, speed streak and trail, hush twinkle (12 cuts deleted).
