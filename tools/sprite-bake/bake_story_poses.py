@@ -73,8 +73,8 @@ HEAD_OVER, FIG_OVER = 1.06, 1.03
 # chin) is as tall in game rows as the head of the overworld down_stand frame; no head shrink and no figure shrink (match_standing is skipped). The body follows
 # the head, so the mood figure can be taller or shorter than the stand. Matched by FACE, not hair (hair volume differs between the sheets): the standing
 # frame was laid over the happy, proud and unimpressed faces at several sizes, aligned at the eyes, and the size where face width and eye-to-chin agree kept.
-#   id: emotion strip px per standing-frame px at the matched face size (emopause2)
-EMO_HEAD = {'tnb': 1.20, 'grace': 1.10, 'rose': 1.30}
+#   id: emotion strip px per standing-frame px at the matched face size (emopause2). TNB 1.11 (emopause3, Tom 15:23 "why is TNB so much shorter"): his sheet paints a bigger head on a shorter body, so a pure face match (1.20) made him 13% shorter; 1.11 splits it (face about 8% bigger, figure about 7% shorter).
+EMO_HEAD = {'tnb': 1.11, 'grace': 1.10, 'rose': 1.30}
 
 
 def stand_frame(cid):
