@@ -1,3 +1,6 @@
+## 2026-11-09 (npcwalk3): the six approved NPC walk entries also use the hero-only prompt (Art Library json only, no tag)
+- Tom regenerated Gus and the picture still came from the old prompt: the refresh in npcwalk2 skipped approved entries, so Gus kept the Justin layout picture. All 52 `npc-walk-<id>` entries now carry the hero-only prompt (`--refresh` now includes approved entries; status and versions untouched). Gus v2 (made with the old prompt) is not judged against the new prompt.
+
 ## 2026-11-09 (npcwalk2): NPC walk-sheet prompt is hero-only, no Justin layout picture (Art Library json only, no tag)
 - Tom: with Justin's walk sheet attached the generator drew Justins in the cells; without it the poses were wrong. Cause of the second part: the prompt still named a "picture 2" and the profile direction "of picture 2".
 - New generic prompt uses the wording of claude/tom-walk-simple-prompt.txt (the method behind Tom's own walk): the hero is the only attached picture and every pose is described in words; row 2 says back of the head, no face. Held props still left out.

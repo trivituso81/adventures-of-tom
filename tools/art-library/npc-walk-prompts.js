@@ -36,16 +36,16 @@ function build(art) {
   return out;
 }
 module.exports = { build, PROMPT };
-// --refresh: rewrite prompt and refs of entries that are still untouched drafts (no versions, no rejects); approved ones stay as they are.
+// --refresh: rewrite prompt and refs of untouched drafts and of approved entries (status and versions stay; a regenerate then uses the current prompt).
 if (require.main === module) {
   const f = 'data/art-prompts.json', txt = fs.readFileSync(f, 'utf8'), art = JSON.parse(txt);
   const have = new Set(art.entries.map(e => e.id)), add = build(art).filter(e => !have.has(e.id));
   console.log(add.length, 'new entries');
   if (process.argv.includes('--refresh')) {
     const want = new Map(build(art).map(e => [e.id, e])); let n = 0;
-    for (const e of art.entries) { const w = want.get(e.id); if (w && e.status === 'draft' && !e.versions.length && !(e.rejects || []).length) { e.prompt = w.prompt; e.refs = w.refs; n++; } }
+    for (const e of art.entries) { const w = want.get(e.id); if (w && (e.status === 'approved' || (e.status === 'draft' && !e.versions.length && !(e.rejects || []).length))) { e.prompt = w.prompt; e.refs = w.refs; n++; } }
     const out = JSON.stringify(art, null, 1); if (JSON.stringify(JSON.parse(txt), null, 1) !== txt.replace(/\n$/, '')) throw new Error('json does not round-trip');
-    fs.writeFileSync(f, out + (txt.endsWith('\n') ? '\n' : '')); console.log(n, 'draft entries refreshed'); process.exit(0);
+    fs.writeFileSync(f, out + (txt.endsWith('\n') ? '\n' : '')); console.log(n, 'entries refreshed'); process.exit(0);
   }
   if (process.argv.includes('--append')) {
     const tail = '\n  }\n ]\n}'; const body = txt.replace(/\n$/, '');
