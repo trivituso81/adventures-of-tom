@@ -1,3 +1,9 @@
+## 2026-11-09 (upload1): Art Library: UPLOAD MY OWN on every picture (art.html only, no game tag)
+- Tom: wants each character's walk, battle stance 1 and battle stance 2 to be either generated or his own uploaded image, and is open to doing it for every picture. Choice made: every entry (all 698, all tabs) gets an UPLOAD MY OWN button beside GENERATE, one change instead of per-character wiring.
+- How it works: the picture is stored on the phone as the next result (v number, chip "my upload"), then goes through the same tap-to-view, APPROVE and REJECT as a generated one. APPROVE commits it to `art/raw/<tab>/<id>-vK.png` exactly like a generated picture, so the existing bakers and installs see no difference.
+- Details: no xAI key and no spend needed; works even when an entry is blocked on a reference; re-saved as a real PNG (iPhone JPEG or HEIC photos become PNG), long side capped at 4096 px; the entry's prompt is kept so APPROVE does not wipe it. For a sheet, the upload must have the same grid layout as a generated one (walk 3 x 3, battle 4 x 4 or the entry's own grid); the bakers cut by cell, the Library does not check layout.
+- Tests: new `python3 tools/art-library/upload_test.py` (all 698 entries have the button, upload on a battle stance entry and a blocked entry, stored as PNG at original size, approve commits one PNG and keeps the prompt; FAILS: []); review_test.py FAILS: []; validate.js OK. Looked at a 390 px screenshot. NOT tested: real iOS photo picker.
+
 ## 2026-11-09 (tombospace1): six Tombos no longer pile people on top of each other (tag tombospace1)
 
 - Tom (15:32): "yes fix" after a scan of all 50 combos (every figure's position checked frame by frame for cut off at the screen edge and sustained overlap, then the 12 flagged ones rendered). Fact: painted figures are about 95 to 105 px wide, but several combos stood them 35 to 55 px apart.

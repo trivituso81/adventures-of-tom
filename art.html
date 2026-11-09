@@ -128,7 +128,7 @@ header{padding:10px 28px}
 <div id="list"></div>
 <div class="foot">
 <div class="row"><button id="exp" class="small">EXPORT ZIP (all kept results and prompts)</button></div>
-<p class="hint">Each image costs about $0.04 plus $0.01 per reference picture. Results stay on this device (last 5 per picture). APPROVE saves a picture and its prompt into the game's files on GitHub; REJECT saves your note for Claude. Both need the GitHub token.</p>
+<p class="hint">Each generated image costs about $0.04 plus $0.01 per reference picture. Results stay on this device (last 5 per picture). UPLOAD MY OWN (beside GENERATE, on every picture) uses your own image instead: free, no key needed, and it goes through the same APPROVE or REJECT. For a sheet, keep the same grid layout a generated one has. APPROVE saves a picture and its prompt into the game's files on GitHub; REJECT saves your note for Claude. Both need the GitHub token.</p>
 </div>
 </main>
 <div id="rv" hidden role="dialog" aria-label="Review pictures">
@@ -273,10 +273,11 @@ function renderCard(e){
   ((e.refs||[]).length?'<label>Reference pictures sent with it (untick to leave one out; at most 5)</label><div class="refs">'+refs+'</div>':'')+
   '<details class="pr" data-po="'+id+'"'+(UI.po[e.id]?' open':'')+'><summary>Prompt'+(ed?' <span class="chip c-wait">edited</span>':'')+' <span class="hint" style="font-weight:400">tap to read or edit</span></summary><div class="pin">'+(ed?'<button class="small" data-revert="'+id+'">Use the default prompt</button> <span class="hint">(this box holds your own edit, saved on this device)</span>':'<span class="hint">Edit here, it is sent as written.</span>')+'<textarea data-prompt="'+id+'">'+esc(promptOf(e))+'</textarea></div></details>'+
   '<div class="row"><label style="margin:0">Shape</label><select data-ar="'+id+'">'+['3:4','2:3','1:1','4:3','3:2','16:9','9:16','2:1'].map(a=>'<option'+((e.ar||'3:4')===a?' selected':'')+'>'+a+'</option>').join('')+'</select>'+
-  '<button class="gold" data-gen="'+id+'"'+(blk?' disabled':'')+'>GENERATE</button></div>'+
+  '<button class="gold" data-gen="'+id+'"'+(blk?' disabled':'')+'>GENERATE</button>'+
+  '<label class="ownadd" style="margin:0" title="Use your own picture instead of generating one. It goes through the same approve or reject step.">UPLOAD MY OWN<input type="file" accept="image/*" data-upl="'+id+'" style="display:none"></label></div>'+
   '<div class="'+(MSG[e.id]&&MSG[e.id].err?'err':'hint')+'" id="m-'+id+'">'+esc(MSG[e.id]?MSG[e.id].text:'')+'</div>'+
   (rs.length?'<div class="hint">Tap a picture to see it large, then approve or reject.</div>':'')+
-  '<div class="res">'+rs.map(r=>'<div><img data-res="'+esc(r.key)+'" src="'+urlOf(r)+'" alt="Result v'+r.n+'"><span>v'+r.n+'</span>'+(apr(r.n)?' <span class="chip c-approved">approved</span>':rjc(r.n)?' <span class="chip c-rejected">rejected</span>':'')+' <button class="small" data-save="'+esc(r.key)+'">Save</button></div>').join('')+'</div>'+
+  '<div class="res">'+rs.map(r=>'<div><img data-res="'+esc(r.key)+'" src="'+urlOf(r)+'" alt="Result v'+r.n+'"><span>v'+r.n+'</span>'+(r.up?' <span class="chip c-wait">my upload</span>':'')+(apr(r.n)?' <span class="chip c-approved">approved</span>':rjc(r.n)?' <span class="chip c-rejected">rejected</span>':'')+' <button class="small" data-save="'+esc(r.key)+'">Save</button></div>').join('')+'</div>'+
   ((e.versions||[]).length?'<div class="hint ok">Approved: '+e.versions.map(v=>esc(v.file)).join(', ')+'</div>':'')+
   ((e.rejects||[]).length?'<div class="hint">Rejected before: '+e.rejects.length+' (notes are saved for Claude)</div>':'')+'</div>';
 }
@@ -322,7 +323,7 @@ $('q').addEventListener('input',()=>{
 let scrollT; addEventListener('scroll',()=>{ clearTimeout(scrollT); scrollT=setTimeout(()=>{ UI.sy[UI.tab]=Math.round(scrollY); saveUI(); },400); },{passive:true});
 const promptOf=e=>EDITS[e.id]!==undefined?EDITS[e.id]:e.prompt;
 $('list').addEventListener('input',e=>{ const id=e.target.dataset&&e.target.dataset.prompt; if(id){EDITS[id]=e.target.value;saveEdits();} });
-$('list').addEventListener('change',async e=>{ const t=e.target; if(t.dataset.ownadd&&t.files&&t.files[0]){ if(!DB) return toast('This browser would not keep the picture.'); const r={key:'own|'+t.dataset.ownadd,id:'__own',slot:t.dataset.ownadd,blob:t.files[0],t:Date.now()}; await tx('readwrite',s=>s.put(r)); OWN[r.slot]=r; refreshItem(t.dataset.id); return; } if(t.dataset.ref){ USE[t.dataset.ref+'|'+t.dataset.i]=t.checked; refreshItem(t.dataset.ref); } if(t.dataset.ar){const en=ENTRY[t.dataset.ar]; if(en) en.ar=t.value;} });
+$('list').addEventListener('change',async e=>{ const t=e.target; if(t.dataset.upl&&t.files&&t.files[0]){ const f=t.files[0]; t.value=''; return uploadOwn(t.dataset.upl,f); } if(t.dataset.ownadd&&t.files&&t.files[0]){ if(!DB) return toast('This browser would not keep the picture.'); const r={key:'own|'+t.dataset.ownadd,id:'__own',slot:t.dataset.ownadd,blob:t.files[0],t:Date.now()}; await tx('readwrite',s=>s.put(r)); OWN[r.slot]=r; refreshItem(t.dataset.id); return; } if(t.dataset.ref){ USE[t.dataset.ref+'|'+t.dataset.i]=t.checked; refreshItem(t.dataset.ref); } if(t.dataset.ar){const en=ENTRY[t.dataset.ar]; if(en) en.ar=t.value;} });
 $('list').addEventListener('click',async e=>{
   const t=e.target;
   const g=t.closest('[data-grp]'); if(g) return toggleGroup(g.dataset.grp);
@@ -345,6 +346,23 @@ function spendGet(){ let o={total:0,count:0,cap:10}; try{ o=Object.assign(o,JSON
 function spendPaint(){ const o=spendGet(); if($('setupsum')&&typeof setupSum==='function') setupSum(); $('spend').innerHTML='<div class="row"><b style="flex:1">Spent on this device: about $'+o.total.toFixed(2)+' ('+o.count+' pictures). Stops at $'+o.cap.toFixed(0)+'.</b><button class="small" id="capup">+$10</button><button class="small" id="spreset">RESET</button></div>'; }
 $('spend').addEventListener('click',e=>{ const o=spendGet(); if(e.target.id==='capup'){ o.cap+=10; LS.set('aot-art-spend',JSON.stringify(o)); spendPaint(); } if(e.target.id==='spreset'){ o.total=0; o.count=0; LS.set('aot-art-spend',JSON.stringify(o)); spendPaint(); } });
 spendPaint();
+// UPLOAD MY OWN (upload1): your own picture instead of a generated one. It is stored as the next result (v number) and then goes through the same review, APPROVE and REJECT as a generated picture. No key and no cost; works even when the entry is blocked on a reference. The picture is re-saved as a real PNG (the game files are .png) and capped at 4096 px on the long side. The entry's prompt is kept as it is, so APPROVE does not wipe it.
+async function uploadOwn(id,file){
+  const e=DATA.entries.find(x=>x.id===id); if(!e) return;
+  if(!DB) return setMsg(id,'This browser would not keep the picture.',true);
+  if(!/^image\//.test(file.type||'image/')) return setMsg(id,'That file is not a picture.',true);
+  setMsg(id,'Reading your picture...');
+  try{
+    const im=await createImageBitmap(file), sc=Math.min(1,4096/Math.max(im.width,im.height)), c=document.createElement('canvas'); c.width=Math.round(im.width*sc); c.height=Math.round(im.height*sc);
+    c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+    const blob=await new Promise(res=>c.toBlob(res,'image/png')); if(!blob) throw new Error('could not convert it');
+    const have=await results(id), n=(have[0]?have[0].n:0)+1;
+    await tx('readwrite',s=>s.put({key:id+'|'+n,id,n,blob,prompt:promptOf(e),refs:['(my own picture: '+String(file.name||'upload').slice(0,60)+')'],up:true,t:Date.now()}));
+    for(const old of have.slice(KEEP-1)) await tx('readwrite',s=>s.delete(old.key));
+    RES[id]=await results(id); e.status='generated';
+    MSG[id]={text:'Your picture is v'+n+'. Tap it to approve or reject.',err:false}; refreshItem(id);
+  }catch(err){ setMsg(id,'Could not read that picture ('+String(err.message||err)+'). Try a PNG or JPG.',true); }
+}
 async function generate(id,btn){
   const e=DATA.entries.find(x=>x.id===id), key=LS.get('aot-art-key');
   if(!key) return setMsg(id,'Paste the xAI key at the top first.',true);
