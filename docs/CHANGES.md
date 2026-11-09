@@ -1,3 +1,10 @@
+## 2026-11-09 (448): Mirrorball over-the-top takes merged, 8 of 17 (`voice15`)
+- Tom sent local-clips-export_15 (597 clips) after the `mirrorvoice3` settings. Only the 8 new Mirrorball takes (script starts "over-the-top cartoon grande dame") were merged; no other clip in the export was newer than what the game has.
+- Replaced in data/voice/dialog-ch28.js (8 keys, hash-checked; nothing else changed): "Guests! GUESTS!...", "Every full moon, they danced under me...", "I CAUGHT it...", "If I'm the brightest thing in the whole sky...", "Then they can come UP...", "...Fine. The party is over...", "One dance. Before you go...", "Here. One of my little mirrors...".
+- Still the elegant voice14 takes (not re-baked): "...one more song. Just one.", "Every full moon they danced under me. Then the last dance, and the doors closed.", "From the top! Round two!", "Round 2" to "Round 5. The band plays on.", "They said see you next moon. 1971.", "If I'm the brightest thing in the sky, somebody will HAVE to come."
+- Watch: "I CAUGHT it" runs 13.9 s for 14 words with six pauses (likely the gasps and sighs the script asks for); re-bake if it sounds looped.
+- tools/voice-library/harvest.json refreshed by harvest.py (adds the ch9CoatEnd/CardsEnd/BallEnd lines from 429; no game change). Tests: unused_voice 0 on all checks; smoke `FAILS: []`; tag_check ok.
+
 ## 2026-11-09 (gracefx1): Grace's squishy, welcome-back and dumpling-drop effect sheets cut and drawn painted
 - `tools/sprite-bake/bake_grace_fx2.py` cuts the three approved `grace-fx-*` sheets (Squishy Squeeze, Welcome Back, Dumpling Drop; one item per grid cell) into 10 pictures in `art/props/grace` (prefixes sq_, wb_, dd_): `sq_glitter`, `sq_squish`, `wb_rec`, `wb_bubble`, `dd_strawberry`, `dd_cat`, `dd_panda`, `dd_peach`, `dd_toast`, `dd_stars`.
 - Dumpling Drop: the live rain (`SC.gv_rain`, the later definition in engine/grace-moves.js) draws one painted squishy per colour in place of the painted trio. The dizzy stars are one painted star placed at the three orbit points (the sheet painted one star, not a ring of three; the orbit is the game's).
