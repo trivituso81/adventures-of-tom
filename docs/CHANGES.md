@@ -1,3 +1,9 @@
+## 2026-11-09 (crop2): Tom's saved portrait crops re-baked into every portrait and mood face (tag crop2)
+- `python3 tools/sprite-bake/bake_portraits.py` with data/portrait-crops.json (8 saved crops: tnb, tom, grace, rose, amy, deedee, boppy, nara). Justin, Olivia and Ellie keep their default squares (byte for byte the same as before).
+- `bake_emotion_faces.py` re-baked the 8 moods for all 11 characters (portraits/emo/*.webp).
+- Tags: `crop1` moved to `crop2` in index.html (menu.js and emotions.js script tags), engine/menu.js PORTRAITS, and EMO_V in engine/emotions.js (by hand; bump_tags does not know EMO_V).
+- Tests: contact sheets looked at (portraits: 11 faces, same size and eye line; faces: 99 mood frames); tag_check ok; smoke FAILS [].
+
 ## 2026-11-09 (npcvoice2): the Voice Library now shows the rewritten NPC directions
 - Bug (Tom: "i dont see those lines"): the 410 directions rewritten in npcvoice1 were in the index, but the Voice Library on his phone still showed the old ones. Cause: the page prefers the direction a baked clip was made with (read from his ElevenLabs history and kept on the phone) over the written one, and all of these lines are baked. My npcvoice1 check used a fresh browser with no history, so it missed this.
 - Fix: `tools/voice-library/rewritten.json` lists the 410 lines; `make-index.js` marks them `rw` in `data/voice-index.json`; `voices.html` `scriptOf` skips the history direction for a marked line. Tom's own edits on the phone still win. Lines not rewritten behave as before.
