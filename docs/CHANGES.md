@@ -1,3 +1,9 @@
+## 2026-11-08 (amyfx1): Amy's Kettlebell Swing plays her painted effects (pilot for her fx sheets)
+- New `tools/sprite-bake/bake_amy_fx.py` (reuses the cutting of `bake_deedee_fx.py`) cuts the approved `amy-fx-kettlebell-swing-v1` sheet into `art/props/amy/kb_swoosh.webp`, `kb_burst.webp`, `kb_dust.webp`. The two kettlebell pictures on the sheet are not installed: the bell is already painted into her ability frames.
+- `A.kettlebell_swing` (engine/amy-moves.js): dust puff at her feet on the hike back, the swoosh trailing the bell on the swing, the painted burst at impact in place of the drawn star burst (the drawn stars show only until the picture has loaded). The drawn ring and the WHUMP! word stay. Preloaded in engine/prop-art.js.
+- data/art-ingame.json regenerated: also drops the 52 `npc-walk-*` entries whose Library entries the npcff9 change purged.
+- Tags: amy-moves, prop-art, main and index.html to amyfx1. Tests: kit_test amy kettlebell_swing (FAILS: [], all three painted props hit), frames looked at; smoke.py FAILS: [], tag_check ok, unused_voice 0, validate.js OK, in_game --check ok.
+
 ## 2026-11-08 (ch9pose): Chapter 9 at the Rivituso house, Aunt Ellie and the girls stand still
 - Tom (23:28): during chapter 9 (and on the return to the house after the Moon Club) Aunt Ellie stands behind the sofa facing the TV (my reading of "rotary", say if you meant something else), Grace on her left and Rose on her right, and none of the three walk around. The girls used to be placed on wall tiles (5,4) and (7,4); now (7,7), (8,7), (9,7), `ch9Pose` in data/scenes.js.
 - New NPC field `still` (a facing): `updateNPCs` (engine/battle-draw.js) never moves such an NPC and turns it back to its pose after a chat. Undone by `ch9GirlsBack`, so Ellie wanders at (9,9) again in chapter 10.

@@ -507,15 +507,19 @@ const clap=()=>{ (sfx.clap||sfx.bonk)(); };
 
 // ---------- Kettlebell Swing (basic) ----------
 // Sheet: 1 bell between the knees, 2 and 3 swung out front, 4 hiked back, 5 the big swing (impact), 6 standing tall, bell down.
+// Painted effects from amy-fx-kettlebell-swing (tools/sprite-bake/bake_amy_fx.py): dust at the hike, swoosh on the swing, burst at impact.
+SC.az_kbdust=(s,u)=>{ const k=.6+.6*ez(u); gfx.globalAlpha=fade(u,.4)*.9; PROPART.draw('amy/kb_dust',s.x,s.y-14*k,{h:30*k,flip:true}); gfx.globalAlpha=1; };
+SC.az_kbswoosh=(s,u)=>{ const q=ez(u/.35); gfx.globalAlpha=fade(u,.45)*.8; PROPART.draw('amy/kb_swoosh',s.x,s.y,{w:s.w*(.55+.45*q),flip:true,rot:-.15}); gfx.globalAlpha=1; };
+SC.az_kbburst=(s,u)=>{ const g=u<.15?ez(u/.15)*1.25:lerp(1.25,1,cl((u-.15)/.25)); gfx.globalAlpha=fade(u,.55); const ok=PROPART.draw('amy/kb_burst',s.x,s.y,{h:s.h*g,rot:.1}); gfx.globalAlpha=1; if(!ok) SC.av_burst(s,u); };   // drawn stars only until the picture has loaded
 A.kettlebell_swing=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,46),me=ST.unit(m);
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:go(p.x,me)},{t:800,x:p.x,y:p.y,f:'ab_kettle_1'},{t:1100,f:'ab_kettle_4'},{t:1350,f:'ab_kettle_3'},{t:1500,f:'ab_kettle_2',dx:-4},{t:1650,f:'ab_kettle_5',dx:u=>-ez(u)*10},
     {t:2100,f:'ab_kettle_6'},{t:2600,f:back(p.x,me)},{t:3300,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Amy jogs over carrying a very big kettlebell.'); say(m.id,'kettlebell_swing'); sfx.run&&sfx.run(); }],
-    [800,()=>{ sfx.thud(); setMessage('She hikes it back between her knees. Flat back.'); }],
-    [1350,()=>{ sfx.whoosh(); }],
+    [800,()=>{ sfx.thud(); setMessage('She hikes it back between her knees. Flat back.'); scene('az_kbdust',.7,{x:p.x-6,y:p.y}); }],
+    [1350,()=>{ sfx.whoosh(); scene('az_kbswoosh',.45,{x:p.x-50,y:p.y-AH()*.52,w:78}); }],
     ['hf',1650],
-    [1650,()=>{ sfx.bonk(); sfx.thud(); ST.jolt(f,.55); landHit(100); scene('av_big',1,{x:F.x,y:F.top-74,txt:'WHUMP!',c:GOLD,sc:4}); scene('av_ring',.6,{x:F.x+F.w*.3,y:F.mid,r:42}); scene('av_burst',.6,{x:F.x+F.w*.3,y:F.mid,n:8,r:44}); }],
+    [1650,()=>{ sfx.bonk(); sfx.thud(); ST.jolt(f,.55); landHit(100); scene('av_big',1,{x:F.x,y:F.top-74,txt:'WHUMP!',c:GOLD,sc:4}); scene('av_ring',.6,{x:F.x+F.w*.3,y:F.mid,r:42}); scene('az_kbburst',.6,{x:F.x+F.w*.3,y:F.mid,h:76,n:8,r:44}); }],
     [2100,()=>{ scene('av_text',1.1,{st,txt:'HIPS NOT BACK',c:CREAM}); }],
     [3400,'end',res(E2)+'Perfect form. She checked.']]); };
 
