@@ -9,7 +9,6 @@ Rules (one per kind of entry; an entry is flagged only if its status is not "app
 and the game code names that file):
     room-<id>               the installed room painting the entry lists as its layout reference (art/<plate>.webp)
     portrait-<id>           portraits/<id>.png (menu portrait)
-    npc-walk-<name>         art/chars/<name>-ow.webp (overworld walk sheet)
     <who>-battle-stance-<n> art/chars/<who>-battle.webp (battle sheet)
 Kinds the game draws in code, or does not show yet (Tombo and Director's Cut sheets, dungeon finds, story gates,
 area stencils, fx), are not flagged: there is no stand-in picture for them.
@@ -40,9 +39,6 @@ def candidates(e):
     m = re.match(r'^portrait-([a-z0-9]+)$', i)
     if m:
         return ['portraits/%s.png' % m.group(1)]
-    m = re.match(r'^npc-walk-([a-z0-9]+)$', i)
-    if m:
-        return ['art/chars/%s-ow.webp' % m.group(1)]
     m = re.match(r'^([a-z]+)-battle-stance-\d+$', i)
     if m:
         return ['art/chars/%s-battle.webp' % m.group(1)]

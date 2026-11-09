@@ -1,9 +1,7 @@
 // NPC prompts for the Art Library (tab NPCs). Required by make-prompts.js.
-// Two-step method (the one that worked for Grace, CHANGES 99 to 104; replaces the 3 x 2 lineups of 11-05, which came out smooth and cartoon, not in the style key): per group of 2 to 3 NPCs,
-//   npc-scene-<keys>  step 1, the group painted INSIDE the school yard painting (gets the dense brushwork), 4:3
-//   npc-cut-<keys>    step 2, the same picture with everything but the people replaced by flat magenta, 4:3
-// then npc-walk-prompts.js builds one walk sheet per person from the cut. Looks come from the live game palettes
-// (scratchpad dump of LE_PALETTES / LA_PALETTES); roles, ages and heights are written below. Assumptions are flagged in the title where they matter.
+// One hero prompt per person, `npc-photo-<id>` (Final Fantasy IX style template plus details). Looks come from the live game palettes
+// (scratchpad dump of LE_PALETTES / LA_PALETTES); roles, ages and heights are written below. Assumptions are flagged where they matter.
+
 const fs = require('fs');
 const path = require('path');
 const DUMP = process.env.NPC_DUMP || '/tmp/claude-0/-home-claude/39197478-1f17-5382-8d0f-e8b30b410449/scratchpad/dump/npcs.json';
@@ -11,31 +9,6 @@ const SNAP = path.join(__dirname, 'prompts', 'npc-palettes.json');
 let PAL;
 if (fs.existsSync(DUMP)) { const d = JSON.parse(fs.readFileSync(DUMP, 'utf8')); PAL = { ...d.lepal, ...d.lapal }; }
 else PAL = JSON.parse(fs.readFileSync(SNAP, 'utf8'));
-
-const REF_KEY = 'docs/reference/style_key_v1.png';
-const REF_CHART = 'docs/reference/height_chart_v1.png';
-// Approved take per group (Tom's pick), used when a later step chains off it. Default is v1.
-const APPROVED_TAKE = { 'pip-moss-dot': { scene: 3, cut: 2 } };
-const REF_YARD = 'docs/reference/school_style_ref.png';
-
-// Painted cast references (Tom 2026-11-06, replaces the old style key on every NPC entry): finished paintings of party members in the
-// NPC's age band. Bands: children (Grace, Rose), adults (Tom, Amy, then TNB, Justin), older adults 60 and up (Deedee, Boppy). Sex picks the
-// first adult or older sheet. Scene entries attach hero poses, walk entries attach walk sheets. Reference cap is 5 pictures per entry
-// (validate.js), so with the base picture and the height chart there are 3 cast slots for a scene group and 2 for a single walk sheet.
-const CAST_NAME = { grace: 'Grace', rose: 'Rose', tom: 'Tom', amy: 'Amy', tnb: 'TNB', justin: 'Justin', deedee: 'Deedee', boppy: 'Boppy' };
-function castFor(people, kind, slots) {
-  const bandOf = c => c.kind === 'child' ? 'child' : c.age >= 60 ? 'older' : 'adult';
-  const lists = [];
-  const sexes = b => ['m', 'f'].filter(x => people.some(c => bandOf(c) === b && c.sex === x));
-  if (people.some(c => bandOf(c) === 'child')) lists.push(['grace', 'rose']);
-  if (people.some(c => bandOf(c) === 'older')) lists.push(sexes('older').map(x => x === 'f' ? 'deedee' : 'boppy').concat(['deedee', 'boppy']));
-  if (people.some(c => bandOf(c) === 'adult')) lists.push(sexes('adult').map(x => x === 'f' ? 'amy' : 'tom').concat(['amy', 'tom', 'tnb', 'justin']));
-  const out = [];
-  for (let r = 0; out.length < slots && r < 6; r++) for (const l of lists) { const id = l[r]; if (id && !out.includes(id) && out.length < slots) out.push(id); }
-  return { ids: out, refs: out.map(id => `art/raw/characters/${id}-${kind === 'hero' ? 'hero-ref' : 'walk-sheet'}-v1.png`) };
-}
-const range = (from, n) => n === 1 ? `${from}` : `${from} to ${from + n - 1}`;
-const castList = ids => ids.map(i => CAST_NAME[i]).reduce((a, x, i, arr) => a + (i === 0 ? '' : i === arr.length - 1 ? ' and ' : ', ') + x, '');
 
 // ---- color words from hex ----
 const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
@@ -128,83 +101,7 @@ BATCHES.forEach((b, bi) => {
   for (const sz of sizes) { const keys = b.keys.slice(at, at + sz); at += sz; GROUPS.push({ keys, batch: b.title, la: bi + 1 >= 5, id: keys.join('-') }); }
 });
 
-const styleRule = rng => `STYLE RULE (the most important instruction)
-Every person looks painted by the same hand as attachment 1 and the cast paintings (attachment${rng.includes('to') ? 's' : ''} ${rng}): dense painted texture, fine visible brushwork, deep saturated colors, crisp detail on hair strands, fabric folds and shoe edges. Skin, hair and fabric are matte and textured like paint on canvas, and fabric keeps the woven texture of attachment 1. Faces are realistic caricature faces like the faces in the cast paintings, with real skin texture and individual character.`;
-
-function proportions(g) {  // the cast paintings are of the same age band as the people painted
-  const kids = g.keys.some(k => N[k].kind === 'child'), adults = g.keys.some(k => N[k].kind !== 'child');
-  const lines = ['PROPORTIONS (strict)'];
-  if (adults) lines.push('- Every adult has an oversized head about one fifth of the full body height, as large relative to the body as the adults in the cast paintings, a slim, full-length body with realistic proportions below the head, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. All adults have the SAME head size relative to their bodies.');
-  if (kids) lines.push('- Every child has an oversized head a little over one quarter of the full body height, a small body, small hands and small feet, exactly as the children are drawn in the cast paintings.');
-  lines.push('- The head size in the cast paintings wins over any number in this section.');
-  lines.push('- Heights follow the real heights below and the height chart: a taller person stands visibly taller than a shorter one and a child stands clearly shorter than the adults. Heights are measured from the soles of the shoes to the top of the head.');
-  return lines.join('\n');
-}
-
-function lookOf(c) {
-  const p = { ...PAL[c.look], ...(c.over || {}) };
-  const who = c.kind === 'child' ? (c.sex === 'f' ? 'girl' : 'boy') : (c.sex === 'f' ? 'woman' : 'man');
-  const hair = p.hair ? `${cw(p.hair, HAIR)} hair` : 'no hair visible';
-  const hat = p.hat ? `a hat or cap in ${cw(p.hat, CLOTH)}` : 'no hat';
-  const pants = p.pants === p.shirt ? 'matching trousers in the same color' : `trousers in ${cw(p.pants, CLOTH)}`;
-  const old = c.age >= 60 ? ' Older: a softer, more lined face and a slightly gentler posture.' : '';
-  const glasses = c.glasses ? ' Round glasses.' : ' No glasses.';
-  return `${c.name.toUpperCase()}: a ${c.age} year old ${who}, ${c.role}. Real height ${c.ft}. Skin ${cw(p.skin, SKIN)}. ${hair[0].toUpperCase() + hair.slice(1)}. Outfit: a top in ${cw(p.shirt, CLOTH)}, ${pants}, plain simple shoes; ${hat}.${glasses}${old}`;
-}
-
-const names = g => g.keys.map(k => N[k].name);
-const ordinal = ['first', 'second', 'third'];
-
-function scene(g) {
-  const n = g.keys.length, word = n === 2 ? 'two' : 'three';
-  const cast = castFor(g.keys.map(k => N[k]), 'hero', 3), rng = range(2, cast.ids.length), chartNo = 2 + cast.ids.length;
-  const list = g.keys.map((k, i) => `${i + 1}. ${lookOf(N[k])}`).join('\n');
-  const heights = g.keys.map(k => `${N[k].name} is ${N[k].ft}`).join(', ');
-  return `IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image, nothing else.
-
-WHAT THIS IS
-A painting of ${word} townsfolk standing together in the school yard, for "The Adventures of Tom", a family role-playing game. They are painted INSIDE the school yard scene, in the same sitting by the same artist, so that they have exactly the same painted texture as the scene around them. Each is a distinct individual with their own face, build and style.
-
-ATTACHED IMAGES (in this order)
-1. The school yard painting. This is the BACKGROUND and the STYLE TO MATCH. Keep the school building, paths, signs, lamps, parking area and playground exactly as painted, same framing, nothing removed. Match its dense, jewel-toned painted texture, its fine visible brushwork, its deep saturated colors, its warm lamplight and its level of detail in the people.
-${rng}. PAINTED CAST: finished full-body paintings of ${castList(cast.ids)}, the family in this game, ${cast.ids.length === 1 ? 'a person' : 'people'} of about the same age as the people you are painting. Match how they paint people, their faces, hair, clothes and shoes, and the head size and body proportions. Do not copy any of their people, faces or outfits.
-${chartNo}. A HEIGHT CHART of grey shapes. It shows SIZE ONLY. Do not copy the grey shapes, the grid or the text.
-
-${styleRule(rng)}
-
-${proportions(g)}
-
-THE SCENE
-Use the school yard painting as the whole background. The ${word} people below are the only people in the picture. They stand side by side in one straight row across the wide paved walkway in the middle of the picture, in the numbered order below from left to right, all at the same distance from the camera, with their feet on one line on the paving, evenly spaced with clear space between them. Nobody overlaps a neighbour. Each is large in the frame, full body from the top of the hair to the soles of the shoes, so that the face, hair, fabric weave and shoes can be seen in fine detail, while the school yard stays recognizable behind them. Each stands neutral and relaxed, body turned a little (three quarter) toward the viewer, a warm natural smile, face clear and readable, hands empty and relaxed at the sides, both feet flat and fully visible. Each casts a soft shadow on the paving. They are lit by the SAME light as the background: warm orange lamplight from the nearby lamp posts and the school windows, cool blue-violet dusk sky light as fill, with warm rim light on hair and shoulders.
-Heights: ${heights}.
-
-THE ${n} PEOPLE (left to right)
-${list}
-Keep the outfit exactly as given: every color. Never invent a new accessory, hairstyle or color.
-
-NEVER substitute. Draw exactly these ${word} people, in this order, with exactly the colors and heights given. Do not add other people, do not swap faces, do not invent other clothes. No text, no labels, no captions, no speech balloons. Family friendly for ages 6 and up. If anything is unclear, draw each person standing relaxed and smiling in the school yard as described.`;
-}
-
-function cut(g) {
-  const n = g.keys.length, word = n === 2 ? 'two' : 'three';
-  return `IMAGE REQUEST: ONE SINGLE EDIT. Return exactly one image, nothing else.
-
-The attached picture is a finished painting of ${word} people standing in a school yard. Keep the ${word} people EXACTLY as painted: do not redraw, repaint, restyle, sharpen or smooth anything about them. Keep every face, hair strand, piece of clothing, pair of shoes, pose, size, position, color, the lighting and the visible painted brushwork and texture exactly as they are, pixel for pixel in feel.
-
-Change ONLY the background: replace everything that is not one of the ${word} people (the school, the paving, the sky, the lamps, the planters, every shadow on the ground) with one flat solid pure magenta #FF00FF filling the whole rest of the image. No ground, no shadow, no gradient, no border, no text, no labels.
-
-No magenta on the people. No magenta glow, spill, tint or fringe on the edges or hair strands. Keep the edges clean and crisp. Draw nothing new and no one else.`;
-}
-
 const entries = [];
-// Old two-step method (group scene, then cut) is kept ONLY for the approved Pip, Moss and Dot group, whose approved art is installed.
-for (const g of GROUPS.filter(x => x.id === 'pip-moss-dot')) {
-  const grp = g.la ? 'Los Angeles people' : 'Long Island people', nm = names(g).join(', ');
-  g.sceneId = 'npc-scene-' + g.id; g.cutId = 'npc-cut-' + g.id;
-  entries.push({ id: g.sceneId, tab: 'NPCs', group: grp, title: `${nm}: step 1, painted in the school yard (${g.batch})`, ar: '4:3', refs: [REF_YARD, ...castFor(g.keys.map(k => N[k]), 'hero', 3).refs, REF_CHART], prompt: scene(g) });
-  entries.push({ id: g.cutId, tab: 'NPCs', group: grp, title: `${nm}: step 2, cut out on magenta (needs step 1 approved)`, ar: '4:3', refs: [`art/raw/npcs/${g.sceneId}-v${(APPROVED_TAKE[g.id]||{}).scene||1}.png`], prompt: cut(g) });
-}
-
 // Photo to character (Tom 2026-11-08 23:11): every NPC has one prompt, the fixed Final Fantasy IX style template below (verbatim, Tom's words)
 // plus a DETAILS block with that person's look and personality. Never edit the template text; change only the details.
 const FF9_TEMPLATE = `PHOTO TO CHARACTER: FINAL FANTASY IX STYLE
@@ -238,4 +135,4 @@ for (const k of Object.keys(N)) {
   const c = N[k], la = GROUPS.find(g => g.keys.includes(k)).la;
   entries.push({ id: 'npc-photo-' + k, tab: 'NPCs', group: la ? 'Los Angeles people' : 'Long Island people', title: `${c.name}: hero picture, Final Fantasy IX style, ${c.ft} (also the source of the dialog portrait)`, ar: '2:3', refs: [], prompt: FF9_TEMPLATE + '\n\n' + details(c) });
 }
-module.exports = { APPROVED_TAKE, entries, N, BATCHES, GROUPS, PAL, SKIN, HAIR, CLOTH, cw, REF_KEY, REF_CHART, styleRule, castFor, castList, range, lookOf, ordinal };
+module.exports = { entries, N, BATCHES, GROUPS, PAL, SKIN, HAIR, CLOTH, cw };
