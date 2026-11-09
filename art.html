@@ -34,10 +34,15 @@ button.good{background:#2f9e63}button.bad{background:#b4414f}button.armed{outlin
 .ref img{width:84px;height:84px;object-fit:contain;background:#0f0d24;border:1px solid #3a3566;border-radius:8px;display:block}
 .ref input{margin-top:4px}
 .ownadd{display:inline-block;background:#3a3566;color:#fff;border-radius:10px;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer;margin:2px 0 6px}
-.res{display:flex;gap:8px;overflow-x:auto;padding:6px 0}
-.res>div{flex:none;width:156px;text-align:center;font-size:11px;color:#b9b3e6}
-.res img{width:156px;height:156px;object-fit:contain;background:#0f0d24;border:1px solid #3a3566;border-radius:8px;display:block;margin-bottom:4px}
-.res .acts{display:flex;gap:6px;margin-top:6px}.res .acts button{flex:1;padding:4px 2px;min-height:40px;font-size:12px;border-radius:9px}
+.item .row select{width:auto;min-width:110px;flex:1;max-width:180px;padding:10px 12px}
+.res{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:6px 0}
+.res>div{min-width:0;text-align:center;font-size:12px;color:#b9b3e6}
+.res img{width:100%;aspect-ratio:1;object-fit:contain;background:#0f0d24;border:1px solid #3a3566;border-radius:8px;display:block;margin-bottom:4px;cursor:zoom-in}
+details.pr{margin:8px 0 4px;border:1px solid #3a3566;border-radius:10px;background:#0f0d24}
+details.pr>summary{list-style:none;cursor:pointer;min-height:44px;display:flex;align-items:center;gap:8px;padding:6px 12px;font-weight:600;font-size:14px}
+details.pr>summary::-webkit-details-marker{display:none}
+details.pr[open]>summary{border-bottom:1px solid #3a3566}
+details.pr>.pin{padding:8px 10px 10px}
 /* UX rebuild (CHANGES 110): setup fold, search, filters, groups, one-line rows */
 input[type=search]{width:100%;padding:12px;border-radius:10px;border:1px solid #3a3566;background:#0f0d24;color:#fff;font:inherit;font-size:16px;margin:0 0 10px}
 .tab.dim{opacity:.4}
@@ -62,34 +67,55 @@ input[type=search]{width:100%;padding:12px;border-radius:10px;border:1px solid #
 .blk{background:#3a2a44;border:1px solid #6b4a66;border-radius:10px;padding:8px 10px;margin:4px 0 8px;font-size:14px}
 .ref img.miss{border-style:dashed;color:#b9b3e6;font-size:11px;padding:4px;overflow:hidden}
 #setupbar{padding:6px 12px}
-#big{position:fixed;inset:0;background:#000e;display:none;align-items:center;justify-content:center;z-index:20}
-#big img{max-width:100%;max-height:100%;object-fit:contain}
 #toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#ffd34d;color:#241b00;padding:10px 16px;border-radius:12px;font-weight:600;display:none;z-index:30;max-width:90%}
-/* Computer layout (CHANGES 112): at 1000 px and wider the controls sit in a left column that stays in view, the list fills the rest. Phone layout is unchanged. */
-@media (min-width:1000px){
-main{max-width:1680px;display:grid;grid-template-columns:400px minmax(0,1fr);grid-template-rows:1fr auto;column-gap:28px;padding:18px 28px 140px}
+/* Wide layout (CHANGES 112, breakpoint 760 px since uxart1 so iPad portrait gets it): controls in a left column that stays in view, the list fills the rest. */
+@media (min-width:760px){
+main{max-width:1680px;display:grid;grid-template-columns:300px minmax(0,1fr);grid-template-rows:1fr auto;column-gap:20px;padding:18px 20px 140px}
 .side{grid-column:1;grid-row:1;align-self:start;position:sticky;top:76px;max-height:calc(100vh - 160px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
 #list{grid-column:2;grid-row:1/3;min-width:0}
 .foot{grid-column:1;grid-row:2;align-self:end}
-header{padding:10px 28px}
-}
-@media (min-width:1000px){
+header{padding:10px 20px}
 .tabs{flex-wrap:wrap;overflow:visible}
 .card{contain-intrinsic-size:auto 420px}
 .item>.card{padding:16px 20px}
 textarea{min-height:230px;font-size:15px}
-.res{flex-wrap:wrap;overflow:visible;gap:14px}
-.res>div{width:260px;font-size:12px}.res img{width:260px;height:260px;cursor:zoom-in}
+.res{gap:14px}
 .refs{gap:12px}.ref{width:112px}.ref img{width:112px;height:112px}
-#big{cursor:zoom-out}
-.item .row select{width:auto;min-width:110px}
+}
+@media (min-width:1000px){
+main{grid-template-columns:400px minmax(0,1fr);column-gap:28px;padding:18px 28px 140px}
+header{padding:10px 28px}
+.res{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+/* Review viewer (uxart1): one picture at a time, fit to screen, pinch to zoom, decide at the bottom */
+#rv{position:fixed;inset:0;z-index:40;background:#0f0d24;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top)}
+#rv[hidden]{display:none}
+.rvtop{display:flex;align-items:center;gap:8px;padding:6px 10px;border-bottom:1px solid #2c2852;background:#14122b}
+.rvtop .rvt{flex:1;min-width:0;line-height:1.25}.rvtop .rvt b,.rvtop .rvt span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rvtop .rvt span{font-size:12px;color:#b9b3e6}
+.rvtop button{flex:none;min-width:44px}
+.rvmain{flex:1;min-height:0;display:flex;flex-direction:column}
+#rvstage{flex:1;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none;background:#0a0918;user-select:none;-webkit-user-select:none}
+#rvimg{width:100%;height:100%;object-fit:contain;transform-origin:center;-webkit-user-drag:none;pointer-events:none;will-change:transform}
+.rvside{flex:none;padding:8px 12px calc(10px + env(safe-area-inset-bottom));border-top:1px solid #2c2852;background:#17152f}
+#rvchips{display:flex;gap:6px;overflow-x:auto;padding:0 0 8px;scrollbar-width:none;flex-wrap:nowrap}
+#rvchips button{flex:none;min-height:40px;padding:4px 12px;border-radius:16px;background:#0f0d24;border:1px solid #3a3566;font-weight:500}
+#rvchips button.on{background:#7b6cff;border-color:#a89dff}
+#rvchips button.ap{border-color:#2f9e63}#rvchips button.rj{border-color:#b4414f}
+#rvnote{margin:6px 0 8px;padding:10px 12px}
+.rvbtns{display:flex;gap:10px}.rvbtns button{flex:1;min-height:54px;font-size:17px;letter-spacing:.02em}
+#rvmsg{min-height:18px;margin:2px 0}
+@media (min-width:760px),(max-height:520px){
+.rvmain{flex-direction:row}
+.rvside{width:320px;overflow-y:auto;border-top:0;border-left:1px solid #2c2852}
+#rvchips{flex-wrap:wrap;overflow:visible}
 }
 .fprev{display:flex;gap:12px;align-items:center}.fprev .hint{flex:1}
 #fpov{position:fixed;inset:0;z-index:50;background:#14122b}#fpov iframe{border:0;width:100%;height:100%;display:block}
 </style>
 </head>
 <body>
-<header><a class="back" href="index.html" id="back">Back</a><h1>Art Library</h1></header>
+<header><a class="back" href="index.html" id="back">Back</a><h1>Art Library</h1><button class="gold small" id="rvopen">Review</button></header>
 <main>
 <aside class="side">
 <div class="card row" id="setupbar"><b style="flex:1">Setup <span class="hint" id="setupsum"></span></b><button class="small" id="setuptog">Open</button></div>
@@ -105,7 +131,13 @@ textarea{min-height:230px;font-size:15px}
 <p class="hint">Each image costs about $0.04 plus $0.01 per reference picture. Results stay on this device (last 5 per picture). APPROVE saves a picture and its prompt into the game's files on GitHub; REJECT saves your note for Claude. Both need the GitHub token.</p>
 </div>
 </main>
-<div id="big"><img alt=""></div>
+<div id="rv" hidden role="dialog" aria-label="Review pictures">
+<div class="rvtop"><button class="small" id="rvx" aria-label="Close">Close</button><div class="rvt"><b id="rvtitle"></b><span id="rvsub"></span></div><button class="small" id="rvp" aria-label="Previous picture">&lsaquo;</button><button class="small" id="rvn" aria-label="Next picture">&rsaquo;</button></div>
+<div class="rvmain"><div id="rvstage"><img id="rvimg" alt=""></div>
+<div class="rvside"><div class="hint" id="rvcount"></div><div id="rvchips"></div><div class="hint" id="rvhist"></div><div class="hint" id="rvmsg"></div>
+<input type="text" id="rvnote" placeholder="Note for Claude (needed to reject): what is wrong, what to change" autocomplete="off" aria-label="Note for Claude">
+<div class="rvbtns"><button class="bad rvb" id="rvno">REJECT</button><button class="good rvb" id="rvok">APPROVE</button></div></div></div>
+</div>
 <div id="toast"></div>
 <script>
 // Art Library (Phase B). Prompts come from data/art-prompts.json (Claude writes them with tools/art-library/make-prompts.js).
@@ -126,7 +158,7 @@ const toast=m=>{const t=$('toast');t.textContent=m;t.style.display='block';clear
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 let DATA={entries:[]}, EDITS={}, USE={}, MSG={}, NOTES={}, ARMED=null;
 // UX state that survives a reload: last tab and filter, which groups and pictures are open, scroll position per tab (never the search text)
-let UI={tab:'Characters',filter:'todo',q:'',open:{},grp:{},sy:{}};
+let UI={tab:'Characters',filter:'todo',q:'',open:{},grp:{},sy:{},po:{}};   // po = which prompt boxes are open
 try{ const u=JSON.parse(LS.get('aot-art-ui')||'{}'); if(u&&typeof u==='object') Object.assign(UI,u,{q:''}); }catch(e){}
 const saveUI=()=>{ const o=Object.assign({},UI); delete o.q; LS.set('aot-art-ui',JSON.stringify(o)); };
 try{EDITS=JSON.parse(LS.get('aot-art-edits')||'{}')||{};}catch(e){}
@@ -220,7 +252,7 @@ function groupsOf(tab){ const m=new Map(); for(const e of DATA.entries){ if(e.ta
 const gkey=(tab,g)=>tab+'|'+g;
 function groupCount(items){ const done=items.filter(e=>ST[e.id]==='approved').length, wait=items.filter(e=>ST[e.id]==='wait').length; const ig=items.filter(inGame).length; return (wait?wait+' waiting, ':'')+done+' of '+items.length+' approved'+(ig?', '+ig+' in game not approved':''); }
 function paintTabs(){
-  const q=qNow();
+  const q=qNow(); { let w=0; for(const id in ST) if(ST[id]==='wait') w++; $('rvopen').textContent=w?'Review '+w:'Review'; }
   $('tabs').innerHTML=TABS.map(t=>{ const all=DATA.entries.filter(e=>e.tab===t); const hit=q?all.filter(e=>matchQ(e,q)).length:0;
     return '<button class="tab'+(t===UI.tab?' on':'')+(q&&!hit?' dim':'')+'" data-tab="'+t+'">'+t+' '+(q?hit+' found':all.filter(e=>ST[e.id]==='approved').length+'/'+all.length)+'</button>'; }).join('');
 }
@@ -231,19 +263,20 @@ function paintFilters(){
   $('filters').innerHTML=FILTERS.map(f=>'<button class="tab'+(f[0]===UI.filter?' on':'')+'" data-filter="'+f[0]+'">'+f[1]+' '+n(f[0])+'</button>').join('');
 }
 function renderCard(e){
-  const id=esc(e.id), rs=RES[e.id]||[], blk=blockInfo(e);
+  const id=esc(e.id), rs=RES[e.id]||[], blk=blockInfo(e), ed=EDITS[e.id]!==undefined&&EDITS[e.id]!==e.prompt;
   const refs=(e.refs||[]).map((p,i)=>'<label class="ref"><img loading="lazy" decoding="async" src="'+esc(rp(p))+'" data-path="'+esc(rp(p))+'" alt="" onerror="refMiss(this)"><input type="checkbox" data-ref="'+id+'" data-i="'+i+'" '+(USE[e.id+'|'+i]===false?'':'checked')+'> '+esc(rp(p).split('/').pop())+'</label>').join('');
-  return '<div class="card" data-id="'+id+'"><div class="hint">'+esc(e.title)+'</div>'+
+  const apr=n=>(e.versions||[]).some(v=>v.from==='v'+n), rjc=n=>(e.rejects||[]).some(v=>v.from==='v'+n);
+  return '<div class="card" data-id="'+id+'">'+
   (blk?'<div class="blk">Blocked. '+esc(blk.why)+'</div>':'')+
   (inGame(e)?'<div class="ingame">In game, not approved: the game shows '+esc(inGame(e))+' now. That picture was never approved here. Approving this entry clears the flag (Claude then installs the approved picture).</div>':'')+
-  '<label>Prompt (edit here, it is sent as written)'+(EDITS[e.id]!==undefined&&EDITS[e.id]!==e.prompt?' <button class="small" data-revert="'+id+'">Use the default prompt</button> <span class="hint">(this box holds your own edit, saved on this device)</span>':'')+'</label><textarea data-prompt="'+id+'">'+esc(promptOf(e))+'</textarea>'+
   ownHtml(e,id)+
   ((e.refs||[]).length?'<label>Reference pictures sent with it (untick to leave one out; at most 5)</label><div class="refs">'+refs+'</div>':'')+
+  '<details class="pr" data-po="'+id+'"'+(UI.po[e.id]?' open':'')+'><summary>Prompt'+(ed?' <span class="chip c-wait">edited</span>':'')+' <span class="hint" style="font-weight:400">tap to read or edit</span></summary><div class="pin">'+(ed?'<button class="small" data-revert="'+id+'">Use the default prompt</button> <span class="hint">(this box holds your own edit, saved on this device)</span>':'<span class="hint">Edit here, it is sent as written.</span>')+'<textarea data-prompt="'+id+'">'+esc(promptOf(e))+'</textarea></div></details>'+
   '<div class="row"><label style="margin:0">Shape</label><select data-ar="'+id+'">'+['3:4','2:3','1:1','4:3','3:2','16:9','9:16','2:1'].map(a=>'<option'+((e.ar||'3:4')===a?' selected':'')+'>'+a+'</option>').join('')+'</select>'+
   '<button class="gold" data-gen="'+id+'"'+(blk?' disabled':'')+'>GENERATE</button></div>'+
   '<div class="'+(MSG[e.id]&&MSG[e.id].err?'err':'hint')+'" id="m-'+id+'">'+esc(MSG[e.id]?MSG[e.id].text:'')+'</div>'+
-  '<div class="res">'+rs.map(r=>'<div><img data-res="'+esc(r.key)+'" src="'+urlOf(r)+'" alt=""><span>v'+r.n+'</span> <button class="small" data-save="'+esc(r.key)+'">Save</button><div class="acts"><button class="good" data-ok="'+esc(r.key)+'">APPROVE</button><button class="bad" data-no="'+esc(r.key)+'">REJECT</button></div></div>').join('')+'</div>'+
-  (rs.length?'<label>Note for Claude (required for REJECT: what is wrong, what to change)</label><input type="text" data-note="'+id+'" value="'+esc(NOTES[e.id]||'')+'" placeholder="for example: head too small, background not pure magenta">':'')+
+  (rs.length?'<div class="hint">Tap a picture to see it large, then approve or reject.</div>':'')+
+  '<div class="res">'+rs.map(r=>'<div><img data-res="'+esc(r.key)+'" src="'+urlOf(r)+'" alt="Result v'+r.n+'"><span>v'+r.n+'</span>'+(apr(r.n)?' <span class="chip c-approved">approved</span>':rjc(r.n)?' <span class="chip c-rejected">rejected</span>':'')+' <button class="small" data-save="'+esc(r.key)+'">Save</button></div>').join('')+'</div>'+
   ((e.versions||[]).length?'<div class="hint ok">Approved: '+e.versions.map(v=>esc(v.file)).join(', ')+'</div>':'')+
   ((e.rejects||[]).length?'<div class="hint">Rejected before: '+e.rejects.length+' (notes are saved for Claude)</div>':'')+'</div>';
 }
@@ -288,7 +321,7 @@ $('q').addEventListener('input',()=>{
 });
 let scrollT; addEventListener('scroll',()=>{ clearTimeout(scrollT); scrollT=setTimeout(()=>{ UI.sy[UI.tab]=Math.round(scrollY); saveUI(); },400); },{passive:true});
 const promptOf=e=>EDITS[e.id]!==undefined?EDITS[e.id]:e.prompt;
-$('list').addEventListener('input',e=>{ const id=e.target.dataset&&e.target.dataset.prompt; if(id){EDITS[id]=e.target.value;saveEdits();} const nid=e.target.dataset&&e.target.dataset.note; if(nid) NOTES[nid]=e.target.value; });
+$('list').addEventListener('input',e=>{ const id=e.target.dataset&&e.target.dataset.prompt; if(id){EDITS[id]=e.target.value;saveEdits();} });
 $('list').addEventListener('change',async e=>{ const t=e.target; if(t.dataset.ownadd&&t.files&&t.files[0]){ if(!DB) return toast('This browser would not keep the picture.'); const r={key:'own|'+t.dataset.ownadd,id:'__own',slot:t.dataset.ownadd,blob:t.files[0],t:Date.now()}; await tx('readwrite',s=>s.put(r)); OWN[r.slot]=r; refreshItem(t.dataset.id); return; } if(t.dataset.ref){ USE[t.dataset.ref+'|'+t.dataset.i]=t.checked; refreshItem(t.dataset.ref); } if(t.dataset.ar){const en=ENTRY[t.dataset.ar]; if(en) en.ar=t.value;} });
 $('list').addEventListener('click',async e=>{
   const t=e.target;
@@ -297,17 +330,15 @@ $('list').addEventListener('click',async e=>{
   if(t.dataset.ownrm){ await tx('readwrite',s=>s.delete('own|'+t.dataset.ownrm)); delete OWN[t.dataset.ownrm]; return refreshItem(t.dataset.id); }
   if(t.dataset.revert){ delete EDITS[t.dataset.revert]; saveEdits(); return refreshItem(t.dataset.revert); }
   if(t.dataset.gen) return generate(t.dataset.gen,t);
-  if(t.dataset.ok) return decide('ok',t.dataset.ok,t);
-  if(t.dataset.no) return decide('no',t.dataset.no,t);
-  if(t.dataset.res){ const r=(await tx('readonly',s=>s.get(t.dataset.res))); if(r){ $('big').firstElementChild.src=URL.createObjectURL(r.blob); $('big').style.display='flex'; } return; }
+  if(t.dataset.res){ const it=t.closest('.item'); if(it){ const rs=RES[it.dataset.id]||[]; rvOpen(it.dataset.id,Math.max(0,rs.findIndex(r=>r.key===t.dataset.res))); } return; }
   if(t.dataset.save){ const r=await tx('readonly',s=>s.get(t.dataset.save)); if(r) download(r.blob,r.id+'-v'+r.n+'.png'); }
 });
-$('big').onclick=()=>{$('big').style.display='none';};
-addEventListener('keydown',e=>{ if(e.key==='Escape'&&$('big').style.display==='flex') $('big').style.display='none'; });
+// remember which prompt boxes are open (the toggle event does not bubble, so listen in the capture phase)
+$('list').addEventListener('toggle',e=>{ const id=e.target.dataset&&e.target.dataset.po; if(!id) return; if(e.target.open) UI.po[id]=1; else delete UI.po[id]; saveUI(); },true);
 function download(blob,name){ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},2000); }
 // --- generate
 const blobToDataUri=b=>new Promise((res,rej)=>{const f=new FileReader();f.onload=()=>res(f.result);f.onerror=()=>rej(f.error);f.readAsDataURL(b);});
-function setMsg(id,text,err){ MSG[id]={text,err}; const m=$('m-'+id); if(m){m.textContent=text;m.className=err?'err':'hint';} }
+function setMsg(id,text,err){ MSG[id]={text,err}; const m=$('m-'+id); if(m){m.textContent=text;m.className=err?'err':'hint';} if(!$('rv').hidden&&rvId()===id){ $('rvmsg').textContent=text; $('rvmsg').className=err?'err':'hint'; } }
 // --- spend meter (estimate: $0.04 per image + $0.01 per reference picture, counted on this device only)
 const SPEND_PER=0.04, SPEND_REF=0.01;
 function spendGet(){ let o={total:0,count:0,cap:10}; try{ o=Object.assign(o,JSON.parse(LS.get('aot-art-spend')||'{}')); }catch(x){} return o; }
@@ -406,14 +437,15 @@ async function shrinkBig(b){
   }catch(x){ return b; }
 }
 async function decide(kind,resKey,btn){
-  const r=await tx('readonly',s=>s.get(resKey)); if(!r) return;
-  const id=r.id, e=DATA.entries.find(x=>x.id===id); if(!e) return;
-  if(!LS.get('aot-gh-token')) return setMsg(id,'Paste the GitHub token at the top first (the second box).',true);
+  const r=await tx('readonly',s=>s.get(resKey)); if(!r) return false;
+  const id=r.id, e=DATA.entries.find(x=>x.id===id); if(!e) return false;
+  if(!LS.get('aot-gh-token')) return setMsg(id,'Close this, open Setup at the top of the page and paste the GitHub token first.',true), false;
   const note=(NOTES[id]||'').trim();
-  if(kind==='no'&&!note) return setMsg(id,'Type a note for Claude first (the box under the pictures): what is wrong or what to change.',true);
+  if(kind==='no'&&!note){ setMsg(id,'Type a note for Claude first: what is wrong or what to change.',true); if(btn.classList.contains('rvb')) $('rvnote').focus(); return false; }
   const armKey=kind+'|'+resKey;
-  if(ARMED!==armKey){ ARMED=armKey; btn.classList.add('armed'); btn.textContent='TAP AGAIN'; clearTimeout(decide.h); decide.h=setTimeout(()=>{ARMED=null;refreshItem(id);},4000); return; }
-  ARMED=null; clearTimeout(decide.h); document.querySelectorAll('[data-ok],[data-no]').forEach(b=>b.disabled=true);
+  // two taps: the first arms the button (it keeps its width and label; the message line says what the second tap does)
+  if(ARMED!==armKey){ ARMED=armKey; rvDisarm(); btn.classList.add('armed'); setMsg(id,'Tap '+(kind==='ok'?'APPROVE':'REJECT')+' again to confirm (v'+r.n+').'); clearTimeout(decide.h); decide.h=setTimeout(()=>{ if(ARMED===armKey){ ARMED=null; rvDisarm(); setMsg(id,''); } },4000); return false; }
+  ARMED=null; clearTimeout(decide.h); rvDisarm(); document.querySelectorAll('.rvb').forEach(b=>b.disabled=true);
   try{
     const today=new Date().toISOString().slice(0,10), NOWMS=Date.now();
     if(kind==='ok'){
@@ -440,10 +472,80 @@ async function decide(kind,resKey,btn){
       e.rejects=(e.rejects||[]).concat([{date:today,note,from:'v'+r.n,at:NOWMS}]); e.status='rejected'; e.prompt=txt; delete EDITS[id]; saveEdits(); NOTES[id]='';
       MSG[id]={text:'Rejected. Your note is saved for Claude.',err:false};
     }
-    refreshItem(id);
-  }catch(err){ setMsg(id,String(err.message||err),true); }
-  finally{ document.querySelectorAll('[data-ok],[data-no]').forEach(b=>b.disabled=false); }   // success only redraws the decided row, so unlock every other row's buttons too (2026-11-05)
+    refreshItem(id); return true;
+  }catch(err){ setMsg(id,String(err.message||err),true); return false; }
+  finally{ document.querySelectorAll('.rvb').forEach(b=>b.disabled=false); }
 }
+// --- Review viewer (uxart1): the queue is every entry waiting on Tom (all tabs, tab order); tapping a picture opens just that entry's queue position.
+const RV={q:[],i:0,v:0,mode:'queue'};
+const rvId=()=>RV.q[RV.i];
+function waitingIds(){ computeStates(); const o=[]; for(const t of TABS) for(const e of DATA.entries) if(e.tab===t&&ST[e.id]==='wait') o.push(e.id); return o; }
+function rvOpen(id,vi){
+  const w=waitingIds(); if(w.indexOf(id)>=0){ RV.q=w; RV.mode='queue'; } else { RV.q=[id]; RV.mode='one'; }
+  RV.i=RV.q.indexOf(id); RV.v=vi||0; $('rv').hidden=false; document.body.style.overflow='hidden'; rvDraw();
+}
+function rvClose(){ $('rv').hidden=true; document.body.style.overflow=''; ARMED=null; clearTimeout(decide.h); }
+function rvDisarm(){ document.querySelectorAll('.rvb.armed').forEach(b=>b.classList.remove('armed')); }
+function rvDraw(){
+  const id=rvId(), e=ENTRY[id], rs=RES[id]||[]; if(!e) return rvClose(); if(RV.v>=rs.length) RV.v=0;
+  computeStates(); rvDisarm(); ARMED=null; zReset();
+  $('rvtitle').textContent=rowLabel(e); $('rvsub').textContent=e.tab+(e.group&&e.group!==e.tab?' · '+e.group:'')+' · '+STATE_NAME[ST[id]];
+  const left=RV.q.filter(x=>ST[x]==='wait').length;
+  $('rvcount').textContent=RV.mode==='queue'?(RV.i+1)+' of '+RV.q.length+' in this queue · '+left+' still waiting on you':'Not in the waiting queue';
+  const r=rs[RV.v]; if(r) $('rvimg').src=urlOf(r); else $('rvimg').removeAttribute('src');
+  const ap=n=>(e.versions||[]).some(v=>v.from==='v'+n), rj=n=>(e.rejects||[]).some(v=>v.from==='v'+n);
+  $('rvchips').innerHTML=rs.map((x,k)=>'<button data-vi="'+k+'" class="'+(k===RV.v?'on ':'')+(ap(x.n)?'ap ':rj(x.n)?'rj ':'')+'">v'+x.n+(ap(x.n)?' approved':rj(x.n)?' rejected':'')+'</button>').join('');
+  const lr=(e.rejects||[]).slice(-1)[0]; $('rvhist').textContent=lr&&lr.note?'Last rejection note: '+lr.note:'';
+  $('rvnote').value=NOTES[id]||'';
+  const m=MSG[id]; $('rvmsg').textContent=m&&m.err?m.text:''; $('rvmsg').className=m&&m.err?'err':'hint';
+  $('rvok').disabled=$('rvno').disabled=!r;
+  $('rvp').disabled=$('rvn').disabled=RV.q.length<2;
+}
+function rvGo(d){ if(RV.q.length<2) return; RV.i=(RV.i+d+RV.q.length)%RV.q.length; RV.v=0; rvDraw(); }
+function rvVer(d){ const n=(RES[rvId()]||[]).length, v=RV.v+d; if(v<0||v>=n) return; RV.v=v; rvDraw(); }
+async function rvDecide(kind){
+  const id=rvId(), rs=RES[id]||[], r=rs[RV.v]; if(!r) return;
+  NOTES[id]=$('rvnote').value;
+  const done=await decide(kind,r.key,$(kind==='ok'?'rvok':'rvno'));
+  if(!done) return;
+  toast((kind==='ok'?'Approved ':'Rejected ')+rowLabel(ENTRY[id])+' v'+r.n+'.');
+  for(let k=1;k<=RV.q.length;k++){ const j=(RV.i+k)%RV.q.length; if(ST[RV.q[j]]==='wait'){ RV.i=j; RV.v=0; return rvDraw(); } }
+  if(RV.mode==='queue'){ rvClose(); toast('Queue cleared. Nothing else is waiting on you.'); } else rvDraw();
+}
+$('rvx').onclick=rvClose; $('rvp').onclick=()=>rvGo(-1); $('rvn').onclick=()=>rvGo(1);
+$('rvok').onclick=()=>rvDecide('ok'); $('rvno').onclick=()=>rvDecide('no');
+$('rvnote').addEventListener('input',()=>{ const id=rvId(); if(id) NOTES[id]=$('rvnote').value; });
+$('rvchips').addEventListener('click',e=>{ const b=e.target.closest('[data-vi]'); if(b){ RV.v=+b.dataset.vi; rvDraw(); } });
+$('rvopen').onclick=()=>{ const w=waitingIds(); if(!w.length) return toast('Nothing is waiting on you.'); rvOpen(w[0],0); };
+addEventListener('keydown',e=>{
+  if($('rv').hidden) return;
+  if(e.key==='Escape') return rvClose();
+  if(e.target&&e.target.tagName==='INPUT') return;
+  if(e.key==='ArrowRight') rvVer(1); else if(e.key==='ArrowLeft') rvVer(-1); else if(e.key==='ArrowDown'||e.key===']') rvGo(1); else if(e.key==='ArrowUp'||e.key==='[') rvGo(-1);
+});
+// pinch to zoom, drag when zoomed, double tap to zoom, swipe left or right (when not zoomed) to change version, wheel to zoom on a computer
+const Z={s:1,x:0,y:0}, PT=new Map(); let zP=null, zPinched=false, tapT=0, tapX=0, tapY=0;
+function zApply(){ $('rvimg').style.transform='translate('+Z.x+'px,'+Z.y+'px) scale('+Z.s+')'; }
+function zReset(){ Z.s=1; Z.x=0; Z.y=0; zApply(); }
+(function(){
+  const st=$('rvstage');
+  st.addEventListener('pointerdown',ev=>{ try{ st.setPointerCapture(ev.pointerId); }catch(x){} PT.set(ev.pointerId,{x:ev.clientX,y:ev.clientY,x0:ev.clientX,y0:ev.clientY});
+    if(PT.size===2){ zPinched=true; const [a,b]=[...PT.values()]; zP={d:Math.hypot(a.x-b.x,a.y-b.y)||1,s:Z.s,mx:(a.x+b.x)/2,my:(a.y+b.y)/2,x:Z.x,y:Z.y}; } });
+  st.addEventListener('pointermove',ev=>{ const p=PT.get(ev.pointerId); if(!p) return; const dx=ev.clientX-p.x, dy=ev.clientY-p.y; p.x=ev.clientX; p.y=ev.clientY;
+    if(PT.size>=2&&zP){ const [a,b]=[...PT.values()], d=Math.hypot(a.x-b.x,a.y-b.y); Z.s=Math.min(6,Math.max(1,zP.s*d/zP.d)); Z.x=zP.x+((a.x+b.x)/2-zP.mx); Z.y=zP.y+((a.y+b.y)/2-zP.my); zApply(); }
+    else if(Z.s>1.02){ Z.x+=dx; Z.y+=dy; zApply(); } });
+  const end=ev=>{ const p=PT.get(ev.pointerId); if(!p) return; PT.delete(ev.pointerId); if(PT.size<2) zP=null;
+    if(Z.s<=1.02) zReset();
+    if(PT.size) return;
+    const pinched=zPinched; zPinched=false; if(pinched||ev.type!=='pointerup') return;
+    const mx=ev.clientX-p.x0, my=ev.clientY-p.y0;
+    if(Z.s<=1.02&&Math.abs(mx)>60&&Math.abs(mx)>Math.abs(my)*1.5){ rvVer(mx<0?1:-1); return; }
+    if(Math.hypot(mx,my)<10){ const now=Date.now();
+      if(now-tapT<320&&Math.hypot(ev.clientX-tapX,ev.clientY-tapY)<30){ tapT=0; if(Z.s>1.02) zReset(); else { const r=st.getBoundingClientRect(); Z.s=2.5; Z.x=-(ev.clientX-(r.left+r.width/2))*1.5; Z.y=-(ev.clientY-(r.top+r.height/2))*1.5; zApply(); } }
+      else { tapT=now; tapX=ev.clientX; tapY=ev.clientY; } } };
+  st.addEventListener('pointerup',end); st.addEventListener('pointercancel',end);
+  st.addEventListener('wheel',ev=>{ ev.preventDefault(); Z.s=Math.min(6,Math.max(1,Z.s*Math.exp(-ev.deltaY*0.002))); if(Z.s<=1.02){ Z.x=0; Z.y=0; } zApply(); },{passive:false});
+})();
 // --- zip export (store only)
 const CRC=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0;}return b=>{let c=~0;for(let i=0;i<b.length;i++)c=t[(c^b[i])&255]^(c>>>8);return (~c)>>>0;};})();
 async function makeZip(files){

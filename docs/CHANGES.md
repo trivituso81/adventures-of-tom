@@ -1,3 +1,13 @@
+## 2026-11-09 (uxart1): Art Library UX phase 1 (Review viewer, results grid, collapsed prompt, 760 px layout)
+- Source: claude/ux-audit-builders.md findings A1, A2, A3, A6, A7, A8 (Tom named phase 1). art.html only; no game files, so no tag moves.
+- Review viewer: gold "Review N" button in the header (N = entries waiting on Tom, all tabs). Full-screen, one picture fit to the screen, pinch or wheel to zoom, double tap to zoom, drag when zoomed, swipe left or right (not zoomed) to change version, version chips (v3, v2 approved, v1), prev and next entry arrows, Escape closes. Fixed APPROVE and REJECT with the note box under the picture and a "n of m in this queue, k still waiting" line. After a decision it jumps to the next waiting entry; when none is left it closes. Tapping any result picture opens the viewer on that picture.
+- Two-tap confirm kept, but the button keeps its width and label (the message line says "Tap APPROVE again to confirm (v3)"). REJECT with an empty note puts the cursor in the note box.
+- Results are a grid (2 across on a phone, 3 across at 1000 px and wider) instead of a 156 px strip. The inline APPROVE, REJECT and Note field in each cell are gone (purged: `.acts`, `#big` overlay, `data-ok` and `data-no` handlers, `data-note` handler). Cells show an approved or rejected chip per version.
+- Open row order: references, collapsed Prompt box (remembers open state, "edited" chip), Shape + GENERATE on one line, results. The duplicate title line is gone.
+- Breakpoint 1000 to 760 px so iPad portrait gets the side-column layout (column 300 px from 760, 400 px from 1000).
+- Not in this phase: header gear, status pill, filter sheet, two-column open card (phases 3 and 4).
+- Tests: new `tools/art-library/review_test.py` (phone, 820, 1440, landscape; FAILS: []), screenshots tools/shots/art-review-*.png. `tools/art-library/test.py` B4 block updated to the viewer flow but the file still crashes earlier in its Characters checks (pre-existing, assessment item 10). validate.js OK, tag_check ok. Not tested: real iOS touch pinch (headless used mouse and wheel).
+
 ## 2026-11-08 (voice14): Voice export 14 merged, Mirrorball voiced
 - Tom's export 14 (597 clips) is already on main except 17 new `mirrorball` dialogue clips (dialog-ch28): merged. The other 540 clips matched what is installed byte for byte. 38 battle takes for lines the game does not play were left out (same set as export 13, see docs/PURGED_VOICE.md).
 - Purged the 17 old `bigone` stand-in clips for The Mirrorball (ch9, ch26, ch27). Mirrorball is now voiced by its own clips. Tags voice14.
