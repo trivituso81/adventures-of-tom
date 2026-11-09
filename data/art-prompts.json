@@ -14503,7 +14503,7 @@
    "group": "Title and icon"
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 1,
@@ -14513,7 +14513,14 @@
      "at": 1793760644029
     }
    ],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-09",
+     "note": "should be final fantasy 9 inspired",
+     "from": "v3",
+     "at": 1794248150573
+    }
+   ],
    "id": "title-welcome-landscape",
    "tab": "Title",
    "title": "Welcome painting, landscape (new, game uses a crop of the portrait today)",
