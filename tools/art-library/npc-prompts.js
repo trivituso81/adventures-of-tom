@@ -16,7 +16,7 @@ const near = (h, table) => { const c = rgb(h); let best = null, bd = 1e9; for (c
 const SKIN = [['very fair', '#f3d3b8'], ['fair', '#efbc8e'], ['light peach', '#e8b48e'], ['warm tan', '#d0a07a'], ['golden tan', '#c69878'], ['olive tan', '#c08a64'], ['medium brown', '#b8805c'], ['warm brown', '#9e7056'], ['rich brown', '#8a5a3c'], ['deep brown', '#6a4030'], ['very deep brown', '#4f3225'], ['pale grey-white', '#d8d4cc']];
 const HAIR = [['black', '#2a2220'], ['very dark brown', '#3e3433'], ['dark brown', '#5a4030'], ['chestnut brown', '#754e3c'], ['light brown', '#925f42'], ['dark blond', '#b98a5a'], ['golden blond', '#e8c25a'], ['strawberry blond', '#c98a4a'], ['auburn red', '#a8452f'], ['bright red', '#c9463d'], ['silver grey', '#b7b3ad'], ['white', '#e8e4dc'], ['slate violet', '#626175'], ['teal', '#2f6f73'], ['light blond', '#e3dac2'], ['plum', '#5a3a5a']];
 const CLOTH = [['black', '#1b1b1f'], ['charcoal', '#2c2c33'], ['dark grey', '#4a5868'], ['grey', '#9ea3ab'], ['off-white', '#f4f4f0'], ['cream', '#f4ecd2'], ['beige', '#d9c6a0'], ['tan', '#c9b89a'], ['olive brown', '#8a7a5a'], ['brown', '#8a6a48'], ['rust', '#c0613f'], ['red', '#c0392b'], ['coral pink', '#ca7c75'], ['hot pink', '#d65aa0'], ['rose pink', '#f08aa8'], ['orange', '#e2793a'], ['mustard yellow', '#e7b73e'], ['pale yellow', '#f2e2a0'], ['sage green', '#8ca275'], ['grass green', '#6fb35a'], ['forest green', '#3f6a3f'], ['teal', '#3a9ca0'], ['sky blue', '#9ccfd8'], ['cornflower blue', '#7394ae'], ['royal blue', '#2f6fb3'], ['navy', '#2f3a4a'], ['slate blue', '#4a5a8a'], ['lavender', '#a595b8'], ['purple', '#7a3a5a'], ['violet', '#9a7ad0'], ['plum', '#6a4f7a'], ['khaki', '#b2bf86'], ['steel grey-blue', '#63798c'], ['dusty blue', '#77748e'], ['denim blue', '#3f5a74'], ['slate grey', '#3f4650'], ['mint green', '#82a7aa'], ['burnt orange', '#c0613f']];
-const cw = (h, t) => `${near(h, t)} (${h})`;
+const cw = (h, t) => near(h, t);   // color words only (11-09: hex codes removed, fewer words)
 
 // kind: 'adult' | 'child'. sex: m | f. Heights in feet and inches. look = palette key. over = optional palette override.
 const N = {
@@ -122,16 +122,16 @@ function details(c) {
   const hat = p.hat ? `a hat or cap in ${cw(p.hat, CLOTH)}` : 'no hat';
   const pants = p.pants === p.shirt ? 'matching trousers in the same color' : `trousers in ${cw(p.pants, CLOTH)}`;
   const old = c.age >= 60 ? ' Older: a softer, more lined face and a slightly gentler posture.' : '';
-  // Audit 2026-11-09: adults of 18 to 59 with only an age number came out as children (13 of 55). This line is the fix; the template stays verbatim.
-  const grown = c.kind === 'adult' && c.age < 60 ? ` GROWN-UP, NOT A CHILD: ${c.name} is an adult ${who} of ${c.age} and must read as ${c.age} at a glance, never as a child or a teenager. Adult face: a longer face with a defined jaw, a full adult nose, eyes clearly smaller than a child's, a few light lines that fit ${c.age}. Adult body: adult shoulders, adult hands, longer legs. Keep the large head and the charm, but an adult's head on an adult's body.` : '';
-  const teen = c.kind === 'child' && c.age >= 12 ? ` ${c.name} is ${c.age}, a young teenager, clearly older than a small child: a longer face and longer legs.` : '';
+  // 2026-11-09: a long GROWN-UP paragraph here made adults too realistic (6 to 7 heads tall). Tom: fewer words give truer pictures. Keep this to a few words.
+  const grown = c.kind === 'adult' && c.age < 60 ? ' An adult, not a child.' : '';
+  const teen = c.kind === 'child' && c.age >= 12 ? ' A young teenager.' : '';
   const glasses = c.glasses ? 'Round glasses.' : 'No glasses.';
   return `HAND DRAWN FINAL FANTASY IX CHARACTER: ${c.name.toUpperCase()}, a ${c.age} year old ${who}, ${c.role}. Real height ${c.ft}.
 Hand drawn Final Fantasy IX appearance: skin ${cw(p.skin, SKIN)}. ${hair[0].toUpperCase() + hair.slice(1)}. Outfit: a top in ${cw(p.shirt, CLOTH)}, ${pants}, sturdy simple shoes; ${hat}. ${glasses}${old}${grown}${teen}
 Hand drawn Final Fantasy IX personality and expression: ${c.acc}.
 
 PORTRAIT USE: this full body picture is also cropped to make ${c.name}'s dialog portrait. Keep the head large and near the top of the picture, and keep the whole face, both eyes and the mouth fully visible, with no hand, finger, prop or hat brim covering or touching any part of the face.
-NO WRITING: no name, age, height, caption, label, title or signature anywhere on the background. The only lettering allowed is on a prop this person holds or wears.
+No words on the background.
 
 ${FF9_REMINDER(c)}`;
 }

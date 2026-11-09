@@ -1,3 +1,10 @@
+## 2026-11-09 (npchead1): 12 NPC heroes fixed with no new generation; NPC prompt details shortened
+- The `npcaudit1` GROWN-UP paragraph overcorrected: the regenerated adults came out 6 to 7 heads tall and too realistic (Tom). The faces were right, the proportions wrong.
+- New `tools/art-library/npc_head.py`: enlarges the head of an approved hero picture about the neck until it is about a quarter of the height, keeps hands and props as painted, refits the picture. No image credits.
+- Installed as v3 (v2 kept for comparison): Chet, Dash, Wes, Ray, Claudia, Kit, Bean, Luna, Sam, Juniper, Toni, Yesenia. Before and after looked at for all 12.
+- `tools/art-library/npc-prompts.js` details block shortened (Tom: fewer words, truer pictures): GROWN-UP paragraph cut to "An adult, not a child.", hex color codes removed, one-line no-words rule. Template untouched.
+- Still draft: Ryan, Dakota. No game file changed, no tag moves. validate.js OK.
+
 ## 2026-11-09 (448): Mirrorball over-the-top takes merged, 8 of 17 (`voice15`)
 - Tom sent local-clips-export_15 (597 clips) after the `mirrorvoice3` settings. Only the 8 new Mirrorball takes (script starts "over-the-top cartoon grande dame") were merged; no other clip in the export was newer than what the game has.
 - Replaced in data/voice/dialog-ch28.js (8 keys, hash-checked; nothing else changed): "Guests! GUESTS!...", "Every full moon, they danced under me...", "I CAUGHT it...", "If I'm the brightest thing in the whole sky...", "Then they can come UP...", "...Fine. The party is over...", "One dance. Before you go...", "Here. One of my little mirrors...".
