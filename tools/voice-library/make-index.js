@@ -79,7 +79,7 @@ for(const sf of SFILES){
 // Never "natural, conversational": it says nothing. Start from who is speaking and what the punctuation and caps say, so the
 // first take is at least in character; the Library marks these lines "plain direction" so they get a real script when Claude next
 // writes directions (tools/voice-library/merge-directions.py).
-const BASE={tom:'dry, calm',grace:'bright, bossy',rose:'small, earnest, silly',amy:'brisk, coach voice',deedee:'warm, steady',boppy:'playful, joking',tnb:'easy, amused',justin:'direct, serious',sal:'quick, friendly'};
+const BASE={tom:'dry, calm',grace:'bright, bossy',rose:'small, earnest, silly',amy:'brisk, coach voice',deedee:'warm, steady',boppy:'playful, joking',tnb:'easy, amused',justin:'direct, serious',olivia:'fast, wry, newsroom',sal:'quick, friendly'};
 function plain(voice,text){
   const t=text.replace(/\bTa-?ta\b/gi,m=>m===m.toUpperCase()?'TAH TAH':'Tah Tah');
   const d=[]; if(BASE[voice]) d.push(BASE[voice]);
@@ -90,7 +90,7 @@ function plain(voice,text){
 }
 
 // ---------- voices ----------
-const NAMES={tom:'Tom',grace:'Grace',rose:'Rose',amy:'Amy',deedee:'Deedee',boppy:'Boppy',tnb:'TNB',nara:'Nara',justin:'Justin'};
+const NAMES={tom:'Tom',grace:'Grace',rose:'Rose',amy:'Amy',deedee:'Deedee',boppy:'Boppy',tnb:'TNB',nara:'Nara',justin:'Justin',olivia:'Olivia'};
 const voices={};
 function vset(kind,id,v){ if(!v) return; const st=v.settings||{};
   voices[kind+'|'+id]={voice_id:v.voice_id||'',model:v.model||'eleven_v4',stability:st.stability!=null?st.stability:.5,similarity:st.similarity_boost!=null?st.similarity_boost:.85,direction:v.direction||'',
@@ -133,7 +133,7 @@ const fxOf=(voice,speaker,battle)=>battle?voice==='boppy':!!((speaker&&CAST.spea
 // ---------- items ----------
 const files=[], fidx=f=>{ let i=files.indexOf(f); if(i<0){ files.push(f); i=files.length-1; } return i; };
 const items=[];
-const ORDER=['tom','grace','rose','amy','deedee','boppy','tnb','justin','nara'];
+const ORDER=['tom','grace','rose','amy','deedee','boppy','tnb','justin','olivia','nara'];
 for(const ch of ORDER){ const L=LINES[ch]; if(!L) continue;
   const byText=new Map();
   for(const kind in L) for(const t of L[kind]){ if(!byText.has(t)) byText.set(t,[]); const a=byText.get(t); if(!a.includes(kind)) a.push(kind); }

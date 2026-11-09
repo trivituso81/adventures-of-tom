@@ -1,3 +1,11 @@
+## 2026-11-09 (retired1): Voice Library deletes leftover phone clips for purged lines; Olivia's battle lines listed (no tag)
+
+- Tom (14:53): "If the lines are not used they should not be in the voice library." Fact: the library list (`data/voice-index.json`) never held the purged lines, but the phone's saved clips (IndexedDB `aot-local-clips`) still did, and they rode along in exports (local-clips-export_16.json had 73 rows with no listed line).
+- New `data/retired-clips.json`: 66 clip row ids (battle|voice|kind|text) taken from docs/PURGED_VOICE.md, none of them live. `voices.html` (`purgeRetired`) deletes matching saved clips and their takes on load when the line is not in the list, and leaves them out of exports. Tested with seeded clips: the retired Grace "Hi-yah!" clip and its take were removed, a live Olivia clip and take stayed, no page errors.
+- Olivia: her 31 live battle lines in data/lines.js were not in the library list (the list builder's character order skipped her; `tools/voice-library/make-index.js` BASE, NAMES, ORDER now include olivia, voice direction "fast, wry, newsroom"). `data/voice-index.json` rebuilt: 4250 lines (481 battle). Her takes on the phone now attach to their lines.
+- Left alone (not in the purge record, unsure): `battle|justin||OUCH!!!!!!`, `battle|tnb|tombo|Well, well, well...` (old line kinds on the phone).
+- Tests: tag_check ok, unused_voice 0.
+
 ## 2026-11-09 (gracevoice1): Grace voice takes from Tom's export (115 dialogue clips re-recorded, tag gracevoice1)
 
 - Tom sent a Voice Library export (local-clips-export_16.json, made 2026-11-09 22:41 UTC, 711 clips, all voices) with "Grace voice fixes". Filtered to Grace (159 clips) and merged with `tools/voice-library/merge-local.js`.

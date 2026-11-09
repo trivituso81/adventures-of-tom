@@ -196,6 +196,22 @@ const notInGame=it=>{ const l=localFor(it); if(!l||!MERGED) return false; const 
 function getOne(db,st,id){ return new Promise(res=>{ if(!db) return res(null); try{ const q=db.transaction(st).objectStore(st).get(id); q.onsuccess=()=>res(q.result||null); q.onerror=()=>res(null); }catch(e){ res(null); } }); }
 const mp3Of=async(db,st,id)=>{ const r=await getOne(db,st,id); return r?r.mp3:null; };
 let LDB=null, TDB=null;
+// Lines purged from the game (data/retired-clips.json, built from docs/PURGED_VOICE.md): clips for them left on this phone are deleted on load and never exported.
+let RETIRED=new Set();
+async function purgeRetired(){
+  try{ const r=await fetch('data/retired-clips.json?'+Date.now(),{cache:'no-store'}); if(!r.ok) return; RETIRED=new Set((await r.json()).ids||[]); }catch(e){ return; }
+  const ids=[...LOCAL.keys()].filter(id=>RETIRED.has(id));
+  const dead=new Set([...RETIRED].map(id=>{ const p=id.split('|'); return (p[0]==='battle'?'b|':'d|')+p[1]+'|'+p.slice(3).join('|'); }));
+  const live=new Set(IDX.items.map(lk));
+  const takes=[...TAKES.values()].filter(t=>dead.has(t.line)&&!live.has(t.line));
+  if(!ids.length&&!takes.length) return;
+  try{
+    if(ids.length) await tx(LDB,'clips',s=>ids.forEach(id=>s.delete(id)));
+    if(takes.length) await tx(TDB,'takes',s=>takes.forEach(t=>s.delete(t.id)));
+    ids.forEach(id=>LOCAL.delete(id)); takes.forEach(t=>TAKES.delete(t.id));
+    toast('Removed '+ids.length+' saved clips and '+takes.length+' takes for lines the game no longer uses.');
+  }catch(e){}
+}
 const LOCAL=new Map();   // aot-local-clips rows by id, without the audio
 const TAKES=new Map();   // take id -> {id,line,label,script,t}, without the audio
 const takesFor=key=>[...TAKES.values()].filter(t=>t.line===key).sort((a,b)=>a.t-b.t);
@@ -610,7 +626,7 @@ async function exportClips(){
   if(!LOCAL.size||!LDB) return toast('No phone clips yet.');
   // Read the clips one at a time into a growing Blob, so the whole export is never one giant string in memory.
   let blob=new Blob(['{"made":'+JSON.stringify(new Date().toISOString())+',"clips":['],{type:'application/json'}), n=0;
-  await eachBatch(LDB,'clips',20,rows=>{ blob=new Blob([blob,...rows.map(r=>(n++?',':'')+JSON.stringify(r))],{type:'application/json'}); });
+  await eachBatch(LDB,'clips',20,rows=>{ rows=rows.filter(r=>!RETIRED.has(r.id)); blob=new Blob([blob,...rows.map(r=>(n++?',':'')+JSON.stringify(r))],{type:'application/json'}); });
   blob=new Blob([blob,']}'],{type:'application/json'});
   const file=new File([blob],'local-clips-export.json',{type:'application/json'});
   try{ if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:'Phone voice clips'}); return; } }catch(e){ if(e&&e.name==='AbortError') return; }
@@ -646,6 +662,7 @@ async function loadPhone(force){
   LOCAL.clear(); TAKES.clear();
   for(const r of await allSlim(LDB,'clips')) LOCAL.set(r.id,r);
   for(const t of await allSlim(TDB,'takes')) TAKES.set(t.id,t);
+  await purgeRetired();
   try{ localStorage.removeItem('aot-vl-boot'); }catch(e){}
   renderAll();
   loadMerged().then(hashPhone);
