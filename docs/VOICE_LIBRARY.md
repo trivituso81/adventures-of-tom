@@ -80,6 +80,10 @@ How a dry or funny line is directed, on top of the v4 tag rules above (source li
 | Fewer tags on short lines | Short inputs are the least stable; every extra tag adds risk |
 | Never a tag the words do not support | A direction the line cannot carry sounds forced |
 
+## Rewriting directions of baked lines (`npcvoice2`)
+
+The row shows, in order: Tom's edit on the phone, the direction from his ElevenLabs history (what the baked clip was made with), then the written one. So a rewritten direction for a baked line is invisible on his phone unless the line's key is added to `tools/voice-library/rewritten.json` (`voice|text`, quotes straightened), which sets `rw` in the index. Do this for every batch of rewritten directions, and test the page with a seeded `aot-vl-hist` entry, not a fresh browser.
+
 ## Limits
 
 - Phone takes are raw ElevenLabs output: no silence trim, no merge effects (Boppy deepening, Grace shrink, monster and walk-on filters). The card says so for voices that get one; Claude applies them when merging an export.

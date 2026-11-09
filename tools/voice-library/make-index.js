@@ -266,6 +266,11 @@ const recast={}; for(const v in OLDV) recast[v]=OLDV[v].at;
   order.forEach((o,k)=>{ o.it.o=k; const key=keyOf(o.it); if(seen.has(key)){ o.it.dup=1; nd++; } else seen.add(key); if(o.r[0]===999) any++; });
   console.log('story order: total',items.length,'| listed after dedup',items.length-nd,'| duplicates dropped',nd,'| no chapter (Anywhere)',any); }
 items.forEach((it,i)=>it.i=i);
+// Rewritten after the bake (tools/voice-library/rewritten.json): the Library must show the new written direction for these lines,
+// not the direction read back from Tom's ElevenLabs history (which is the one the old clip was made with).
+{ const RW=fs.existsSync('tools/voice-library/rewritten.json')?new Set(JSON.parse(fs.readFileSync('tools/voice-library/rewritten.json','utf8')).keys):new Set();
+  let n=0; for(const it of items) if(it.t==='d'&&RW.has(it.v+'|'+norm(it.x))){ it.rw=1; n++; }
+  console.log('rewritten after bake (history ignored):',n,'of',RW.size); }
 console.log('dialogue lines with no clip:',nNo,'('+nNoVoice+' have no voice cast yet)');
 const who={}; for(const it of items){ const k=it.v; who[k]=who[k]||{id:k,name:vname(k),n:0,family:!!NAMES[k]}; who[k].n++; }
 // Show the accent: write it at the start of EVERY [bracket] of every Boppy and Justin script, the way the baked takes had it
