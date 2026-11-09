@@ -14629,9 +14629,16 @@
    "group": "Title and icon"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-09",
+     "note": "should be \"final fantasy 9\" art style",
+     "from": "v1",
+     "at": 1794248197759
+    }
+   ],
    "id": "portrait-tom",
    "tab": "Portraits",
    "ar": "1:1",
