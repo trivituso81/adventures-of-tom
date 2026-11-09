@@ -8842,7 +8842,7 @@
    "prompt": "PHOTO TO CHARACTER: FINAL FANTASY IX STYLE\nAttach: one photo of one person.\n\nPaint the person in the attached photo  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nKeep this person's hair, face shape, age, build, skin tone, and the same garments and colors.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nHAND DRAWN FINAL FANTASY IX CHARACTER: SAM, a 34 year old woman, a house renovator who lives with Jordan and posts everything online. Real height 5'7\".\nHand drawn Final Fantasy IX appearance: skin fair. Dark blond hair. Outfit: a top in off-white, trousers in dark grey, sturdy simple shoes; no hat. No glasses. An adult, not a child.\nHand drawn Final Fantasy IX personality and expression: a phone held up in one hand, a quick, delighted smile.\n\nPORTRAIT USE: this full body picture is also cropped to make Sam's dialog portrait. Keep the head large and near the top of the picture, and keep the whole face, both eyes and the mouth fully visible, with no hand, finger, prop or hat brim covering or touching any part of the face.\nNo words on the background.\n\nSTYLE REMINDER: this is a hand drawn Final Fantasy IX character. Draw Sam as hand drawn Final Fantasy IX concept art, not a photo, not a 3D render, not pixel art. Hand drawn Final Fantasy IX linework with dark contour lines. Hand drawn Final Fantasy IX chunky brushed shading. Hand drawn Final Fantasy IX proportions: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm. Every part of Sam, the face, the hair, the clothes and the shoes, is hand drawn in the Final Fantasy IX style. Final Fantasy IX, hand drawn, full body, standing ready."
   },
   {
-   "status": "draft",
+   "status": "approved",
    "versions": [
     {
      "n": 0,
@@ -8850,6 +8850,13 @@
      "date": "2026-11-09",
      "from": "v1",
      "at": 1794236727239
+    },
+    {
+     "n": 1,
+     "file": "art/raw/npcs/npc-photo-dakota-v2.png",
+     "date": "2026-11-09",
+     "from": "v3",
+     "at": 1794244492929
     }
    ],
    "rejects": [],
