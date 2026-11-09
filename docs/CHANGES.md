@@ -1,3 +1,5 @@
+## 2026-11-08 (ff9x): NPC prompts repeat "Final Fantasy IX" and "hand drawn" (Tom 23:55). Each npc-photo-* prompt keeps the verbatim template, then the details block labels every line with the style words and ends with a STYLE REMINDER paragraph. About 12 mentions of Final Fantasy IX and 11 of hand drawn per prompt.
+
 ## 2026-11-08 (amyfx1): Amy's Kettlebell Swing plays her painted effects (pilot for her fx sheets)
 - New `tools/sprite-bake/bake_amy_fx.py` (reuses the cutting of `bake_deedee_fx.py`) cuts the approved `amy-fx-kettlebell-swing-v1` sheet into `art/props/amy/kb_swoosh.webp`, `kb_burst.webp`, `kb_dust.webp`. The two kettlebell pictures on the sheet are not installed: the bell is already painted into her ability frames.
 - `A.kettlebell_swing` (engine/amy-moves.js): dust puff at her feet on the hike back, the swoosh trailing the bell on the swing, the painted burst at impact in place of the drawn star burst (the drawn stars show only until the picture has loaded). The drawn ring and the WHUMP! word stay. Preloaded in engine/prop-art.js.

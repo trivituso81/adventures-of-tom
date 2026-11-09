@@ -216,6 +216,8 @@ Keep this person's hair, face shape, age, build, skin tone, and the same garment
 Proportions: about 4 heads tall, simplified expressive face.
 Pose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.
 Plain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.`;
+// Tom 2026-11-08 23:55: repeat "Final Fantasy IX" and "hand drawn" as many times as possible. The template above stays verbatim; this block only reinforces it.
+const FF9_REMINDER = c => `STYLE REMINDER: this is a hand drawn Final Fantasy IX character. Draw ${c.name} as hand drawn Final Fantasy IX concept art, not a photo, not a 3D render, not pixel art. Hand drawn Final Fantasy IX linework with dark contour lines. Hand drawn Final Fantasy IX chunky brushed shading. Hand drawn Final Fantasy IX proportions: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm. Every part of ${c.name}, the face, the hair, the clothes and the shoes, is hand drawn in the Final Fantasy IX style. Final Fantasy IX, hand drawn, full body, standing ready.`;
 function details(c) {
   const p = { ...PAL[c.look], ...(c.over || {}) };
   const who = c.kind === 'child' ? (c.sex === 'f' ? 'girl' : 'boy') : (c.sex === 'f' ? 'woman' : 'man');
@@ -224,9 +226,11 @@ function details(c) {
   const pants = p.pants === p.shirt ? 'matching trousers in the same color' : `trousers in ${cw(p.pants, CLOTH)}`;
   const old = c.age >= 60 ? ' Older: a softer, more lined face and a slightly gentler posture.' : '';
   const glasses = c.glasses ? 'Round glasses.' : 'No glasses.';
-  return `${c.name.toUpperCase()}: a ${c.age} year old ${who}, ${c.role}. Real height ${c.ft}.
-Appearance: skin ${cw(p.skin, SKIN)}. ${hair[0].toUpperCase() + hair.slice(1)}. Outfit: a top in ${cw(p.shirt, CLOTH)}, ${pants}, sturdy simple shoes; ${hat}. ${glasses}${old}
-Personality and expression: ${c.acc}.`;
+  return `HAND DRAWN FINAL FANTASY IX CHARACTER: ${c.name.toUpperCase()}, a ${c.age} year old ${who}, ${c.role}. Real height ${c.ft}.
+Hand drawn Final Fantasy IX appearance: skin ${cw(p.skin, SKIN)}. ${hair[0].toUpperCase() + hair.slice(1)}. Outfit: a top in ${cw(p.shirt, CLOTH)}, ${pants}, sturdy simple shoes; ${hat}. ${glasses}${old}
+Hand drawn Final Fantasy IX personality and expression: ${c.acc}.
+
+${FF9_REMINDER(c)}`;
 }
 for (const k of Object.keys(N)) {
   const c = N[k], la = GROUPS.find(g => g.keys.includes(k)).la;
