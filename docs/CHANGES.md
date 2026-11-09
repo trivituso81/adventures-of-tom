@@ -5525,3 +5525,9 @@ Sheet C (tools/sprite-bake/src/grace-poses-c.png) baked into the wheel atlas: sq
 - The talk gap (`talkGapFrame`, engine/town-render.js) widens indoors by the same ratio so bigger figures still do not touch. The heart over a kiss and the talk arrow already followed `actorK()`.
 - Not scaled: the blocky fallback figures (`drawNpc`), which only appear outdoors, and monsters (they use `mscale`).
 - Tests: `tools/rooms_test.py bakery grands` 0 fails and looked at portrait frames; `tools/smoke.py` FAILS: []. `amyhouse` and `tomhouse` "square plate" check fails before and after (pre-existing: not square plates).
+
+## 2026-11-09: Tom's saved portrait crops applied (crop1)
+- Rebaked `portraits/{tom,tnb,grace,rose,amy,deedee,boppy,nara}.png` from the eight crops Tom saved in `data/portrait-crops.json` (portraits.html), and the 56 mood faces in `portraits/emo/` for the seven people (Nara has no mood set) from the same crops. Justin, Olivia and Ellie keep their FACE squares and are unchanged.
+- Tags: `crop1` on the eight PORTRAITS entries in engine/menu.js, `EMO_V` in engine/emotions.js and its script tag; bump_tags.py does not know EMO_V, so move it by hand next time.
+- Tests: `tools/portraits_test.py` FAILS: []; smoke FAILS: []; tag_check ok; contact sheet of all moods looked at.
+- Not done: removing the FACE/NARA numbers (Justin, Olivia, Ellie still use them).
