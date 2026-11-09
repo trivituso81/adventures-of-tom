@@ -211,4 +211,37 @@ entries.push(editSheet('ch08-fix', 'Chapter 8 Car Barn, pulled lever', 'art/raw/
   'Cell 6 (TURNTABLE LEVER, PULLED): the lever is pulled all the way over. Keep the same base plate, bolts and red round knob as cell 5, but tip the lever forward so it leans down toward the viewer and to the right at a steep angle, almost flat, with the red knob close to the front edge of the base plate. It must look completely different from cell 5, where the lever stands straight up. Cell 5 stays exactly as it is, standing straight up.',
   'Every other cell stays exactly as it is.'
 ]));
+// PARTS sheets (Tom's stop-loss, 2026-11-09 late): the generator copies one pose or one clock state to every cell, so each state is its own big part
+// alone in a cell and the game composes them in code. Used for ch04 (levers, lamps, rig) and the ch10 gate clock (face, peg, one coin slot).
+const PARTS = [
+  { id: 'ch04-parts', strict: true, label: 'Chapter 4, Soundstage 7 (parts)', title: 'Chapter 4 Soundstage 7, parts', items: [
+    ['BLUE BOX BODY, EMPTY', 'A grey steel wall box seen straight from the front with a thick BLUE stripe across its front. In the middle of the front is an empty round dark hole where a toggle lever will be mounted, and above it an empty round dark socket where a lamp will sit. No lever and no lamp are drawn, only the empty box with its two empty openings.'],
+    ['AMBER BOX BODY, EMPTY', 'The same box as cell 1, identical in shape, size and openings, but with a thick AMBER stripe. Empty lever hole and empty lamp socket, no lever, no lamp.'],
+    ['RED BOX BODY, EMPTY', 'The same box as cell 1, identical in shape, size and openings, but with a thick RED stripe. Empty lever hole and empty lamp socket, no lever, no lamp.'],
+    ['TOGGLE LEVER, UP', 'ONE chunky steel toggle lever with a round chrome ball tip and a round mounting collar at the base, drawn alone as a separate piece, standing straight up from its collar. Only the lever, alone, with no box behind it.'],
+    ['TOGGLE LEVER, DOWN', 'The same toggle lever as cell 4, identical in every way, but flipped to point straight DOWN from its collar, the ball tip at the bottom and the collar at the top. Only the lever, alone, with no box behind it.'],
+    ['ROUND LAMP, LIT BLUE', 'ONE small round indicator lamp with a chrome ring, glowing bright blue, drawn alone as a separate piece. Only the lamp, alone, with no box behind it.'],
+    ['ROUND LAMP, LIT AMBER', 'The same round lamp as cell 6, identical in size and ring, but glowing bright amber. Only the lamp, alone.'],
+    ['ROUND LAMP, LIT RED', 'The same round lamp as cell 6, identical in size and ring, but glowing bright red. Only the lamp, alone.'],
+    ['ROUND LAMP, DARK', 'The same round lamp as cell 6, identical in size and ring, but turned completely off: dull dark grey glass with no glow and no color at all. Only the lamp, alone.'],
+    ['LIGHT RIG BAR, NO LAMPS', 'A wide black steel lighting bar drawn alone, with three empty round mounting sockets in a row along its front and three thick cables hanging down from it. No lamps are mounted. Only the bar and its cables.'],
+    ['STAGE LAMP, LIT BLUE', 'ONE big round stage lamp in a black steel housing, shining bright with a BLUE gel cover, drawn alone as a separate piece. Only the lamp, alone, with no bar behind it.'],
+    ['STAGE LAMP, LIT AMBER', 'The same stage lamp as cell 11, identical in size and housing, but shining bright with an AMBER gel cover. Only the lamp, alone.'],
+    ['STAGE LAMP, LIT RED', 'The same stage lamp as cell 11, identical in size and housing, but shining bright with a RED gel cover. Only the lamp, alone.'],
+    ['STAGE LAMP, DARK', 'The same stage lamp as cell 11, identical in size and housing, but turned completely off: dull dark grey glass cover with no glow, no color and no bright center. Only the lamp, alone.'],
+  ] },
+  { id: 'ch10-clock', strict: true, label: 'Chapter 10, Terminal Zero (gate clock parts)', title: 'Chapter 10 Terminal Zero, gate clock parts', items: [
+    ['CLOCK FACE, BLANK', 'A large round airport wall clock seen straight from the front, with a white face, a plain brushed steel rim, and bold black numbers 1 to 12, all clear and correct. The center of the face is completely plain and empty. There are NO hands, NO peg, NO studs, NO dots, NO slots and NO holes anywhere on the face. Only the rim, the white face and the twelve numbers.'],
+    ['CENTER PEG', 'ONE small round gold clock peg with a domed top, drawn alone as a separate piece. Only the peg, alone, with no clock behind it.'],
+    ['COIN SLOT', 'ONE round coin slot, a dark hole with a bright gold rim, drawn alone as a separate piece, seen from the front. Only the slot, alone, with no clock or door behind it.'],
+  ] },
+];
+for (const s of PARTS) {
+  entries.push({
+    id: `prop-find-${s.id}`, tab: 'Props',
+    title: `Dungeon finds, ${s.title} (${s.items.length} parts, each alone)`,
+    ar: '1:1', refs: [REF_KEY],
+    prompt: sheet(s.label, s.items, s.strict),
+  });
+}
 module.exports = { entries, SHEETS, sheet };

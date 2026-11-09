@@ -1,3 +1,7 @@
+## 2026-11-09 (propsparts1): parts-sheet entries for the ch04 switches and the ch10 gate clock (Art Library json only, no tag)
+- Stop-loss (two misses each): the generator copies one lever pose or one clock state to every cell. New method: every state is its own big part alone in a cell, composed in code later.
+- `prop-find-ch04-parts` (14 parts) and `prop-find-ch10-clock` (3 parts), both draft, appended to `data/art-prompts.json` as text (diff is 28 added lines; make-prompts.js not run because it would drop the DC object entries). Nothing generated, cut or wired.
+
 ## 2026-11-09 (bosspond2): The Big One returns to the shore after the fight, with the frown frame (tag bosspond2)
 - Tom: after beating The Big One and coming back, he stood in the pond where nobody could reach him, with the same shocked face. Cause: the story hides him at (15,7) (open water) until the pond scene, and the monster tick recorded that as his `home`; a beaten monster comes back to `home` the next time the map loads. Fix in `STORY_WORLD` (data/scenes.js): `home` is set to the real shore spot (19,11) when he sinks and when he surfaces. The Big Shake (chapter 2, hidden at 0,0) had the same flaw and got the same fix.
 - Once `battle:bigone` is 'win' his `scenePose` is the painted frown frame (`foe:'attack3'`, mirrored toward the party), so the shocked stance frame no longer shows on the map. The dialogue portrait is unchanged.
