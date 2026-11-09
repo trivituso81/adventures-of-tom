@@ -1,3 +1,8 @@
+## 2026-11-08 (tombo11): Props Part A, unreferenced `watering_can` cut
+- Cut `tombo/watering_can`: no engine code drew it (only the prop preload list and the sheet records named it). Removed the file `art/props/tombo/watering_can.webp`, its preload entry in `engine/prop-art.js`, its entries in `tools/tombo_props_map.json`, `tools/sprite-bake/tombo_frames_state.json` (boppy3 object list) and `tools/sprite-bake/src/props/props.json` (id 76).
+- Kept, still drawn in code and waiting on Tom's new painted art (Part B): `palm_tree`, `gold_transfer_card`, `second_gold_transfer_card`, `garden_stake`, `tomato_seedling`, `raised_garden_bed`, `tomato_vine`, `giant_tomato`.
+- Tags: tombo10 to tombo11 (engine/prop-art.js, index.html, engine/main.js stamp). Tests: tag_check ok, smoke.py FAILS: [], tombo_test boppy3, tnb2, nara2 with `--speed2` (FAILS: [] each), unused_voice.py 0 on all checks.
+
 ## 2026-11-08 (tombo10): Tombo batch 5 installed (boppy3, tnb2, tnb3, nara2, nara3)
 - Tom's painted frames replace the drawn scenes: Boppy's garden lesson (boppy3), the subway ride with a silver subway car (tnb2), the cups across the wall (tnb3), Nara's tug of war (nara2) and the Cuddle in the dark (nara3). Dialogue lines and step timing are unchanged.
 - Cut painted props: silver_subway_car, longboard, second_gold_transfer_card, red_cayenne_pepper, handmade_stoneware_mug, second_matching_stoneware_mug, tug_rope and the re-baked palm_tree, gold_transfer_card, garden_stake, giant_tomato, raised_garden_bed, tomato_seedling, tomato_vine, watering_can.
