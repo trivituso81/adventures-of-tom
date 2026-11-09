@@ -1,3 +1,8 @@
+## 2026-11-09 (npcwalk1): 52 NPC walk-sheet entries in the Art Library (json only, no tag)
+- Tom: all 56 NPC heroes are approved, so walk sheets are next. One draft entry `npc-walk-<id>` per townsperson (tab NPCs), source `tools/art-library/npc-walk-prompts.js`. Each attaches that NPC's newest approved hero (v3 head fix for the 12 adjusted ones, v2 for Ryan and Dakota) plus Justin's walk sheet for layout only. One generic short prompt, no per-person words. Same 3 x 3 layout as the other walk sheets (front, back, profile; stand plus two steps).
+- Held props are left out of the walk frames (hands empty), worn items stay. Skipped: Pip, Moss, Dot (walks already installed) and Boomie (own sheet).
+- Appended to `data/art-prompts.json` as text (780 added lines, nothing else changed). validate.js OK. Nothing generated, cut or installed.
+
 ## 2026-11-09 (propsparts1): parts-sheet entries for the ch04 switches and the ch10 gate clock (Art Library json only, no tag)
 - Stop-loss (two misses each): the generator copies one lever pose or one clock state to every cell. New method: every state is its own big part alone in a cell, composed in code later.
 - `prop-find-ch04-parts` (14 parts) and `prop-find-ch10-clock` (3 parts), both draft, appended to `data/art-prompts.json` as text (diff is 28 added lines; make-prompts.js not run because it would drop the DC object entries). Nothing generated, cut or wired.

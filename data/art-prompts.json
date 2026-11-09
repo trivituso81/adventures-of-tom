@@ -15504,6 +15504,786 @@
    ],
    "prompt": "IMAGE REQUEST: ONE SINGLE PROP SHEET. Return exactly one image, nothing else. Follow the numbered list at the bottom exactly.\n\nWHAT THIS IS\nA sheet of find-it objects for \"The Adventures of Tom\", a family role-playing game. This is the sheet for Chapter 10, Terminal Zero (gate clock parts): it holds 3 standalone objects that the player has to find, touch or collect inside a dungeon. They will be cut out and drawn on top of a painted dungeon map, so each one must stand out clearly from a painted background.\n\nATTACHED IMAGES (in this order)\n1. The STYLE KEY, a finished painting of the family in a school yard. Match how it paints: dense painted texture, fine visible brushwork, deep saturated colors, warm light. Do not copy any person, building or scene from it. Paint only the objects listed below.\n\nART STYLE\n- Every object is painted by hand in the style of the attached style key: dense painted texture, fine visible brushwork, deep saturated jewel colors, crisp clean edges, clear readable shapes. Gently simplified, storybook-like shapes.\n- Warm golden key light from the upper left. Shadow on the lower right of each form, and at most a tiny soft contact shadow under each object, no cast shadow on a floor, no ground plane.\n- No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette, no glossy plastic look.\n- Make each object read at a glance: slightly more saturated and a little higher contrast than a normal background object, and give the part the player touches (a switch, a lock, a slot, a handle) the brightest accent color on the object.\n- Three-quarter view from slightly above, unless the list says \"seen from the front\". All objects share one lighting direction and one level of detail. Fun, friendly, a little silly. Family friendly for children aged 6 and up.\n\nTHE SHEET (strict)\n- A grid of 4 columns by 4 rows of square cells, 256 x 256 pixels each, so the full image is 1024 x 1024 pixels. If your tool offers a different size, keep exactly 4 columns and 4 rows and use the largest size available.\n- Exactly 3 objects, one per cell, filled left to right, top to bottom, in the order of the numbered list below. The final cells (numbers 4 to 16) must stay completely empty and transparent, with no number.\n- Each object is drawn complete, centered in its own cell, fully inside it, with at least 12 percent empty margin on every side. Nothing touches or crosses a cell edge. Nothing overlaps a neighbouring cell.\n- Scale every object to fill about 70 to 80 percent of its cell, regardless of its real-world size. Small things are enlarged to the same footprint.\n- Background: fully transparent (PNG with alpha). No grid lines, no borders, no frames, no cell backgrounds, no checkerboard pattern. If your tool cannot output transparency, fill the entire background with one flat solid color, pure magenta #FF00FF, and use no magenta anywhere inside the objects.\n- In the top-left corner of every filled cell, put a small plain white number (with a thin dark outline) matching the list number. These numbers are a guide only and will be cropped off. Do not put any other labels, captions or titles on the sheet. The only text allowed is the text that is part of the object itself, spelled exactly as given in the list.\n\nHARD RULES\n- THE LIST IS COMPLETE AND DELIBERATE. Draw exactly the 3 objects described, one per numbered cell. NEVER substitute, swap in or add other objects, even ones that seem more typical, more common or related to the same theme. If a description is unusual, draw it as written. Every cell must match its numbered description.\n- Where the list says \"the same as cell N\" or \"identical to cell N\", the object must match that cell exactly in shape, size and the position of every part, and only the change the list names may differ. These pairs are swapped in the game when something happens, so they must line up.\n- Objects only. No people, no characters, no hands, no faces on anything unless the list says the object has a face. No creatures except the ones listed.\n- No real brands, logos, trademarks or copyrighted characters.\n- Do not add extra objects, decorations, sparkle bursts, motion lines, glows, smoke or effects beyond what the list describes. Small details the list names (a wisp of steam, a drip, a glint) are fine.\n- Do not skip, merge or reorder any item.\n- STRICT COUNT AND ORDER. The finished sheet has exactly 3 objects, in cells 1 to 3, in exactly the order of the list, with no gaps. Draw each listed object once and only once. Never draw a second copy, a spare, a variant, a duplicate or a related extra object, and never put an object in a cell that belongs to a different number. If an item is a single piece or part (for example one clock hand), draw only that piece alone, never the thing it belongs to.\n- PAIRS DIFFER ON ONE THING. Where a cell says it is the same as another cell, copy that cell exactly and change only the one named thing, and make that change big and obvious at a glance.\n\nTHE 3 OBJECTS (cell number: name, what to draw)\n1. CLOCK FACE, BLANK: A large round airport wall clock seen straight from the front, with a white face, a plain brushed steel rim, and bold black numbers 1 to 12, all clear and correct. The center of the face is completely plain and empty. There are NO hands, NO peg, NO studs, NO dots, NO slots and NO holes anywhere on the face. Only the rim, the white face and the twelve numbers.\n2. CENTER PEG: ONE small round gold clock peg with a domed top, drawn alone as a separate piece. Only the peg, alone, with no clock behind it.\n3. COIN SLOT: ONE round coin slot, a dark hole with a bright gold rim, drawn alone as a separate piece, seen from the front. Only the slot, alone, with no clock or door behind it.",
    "group": "Dungeon finds"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-gus",
+   "tab": "NPCs",
+   "title": "Gus: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-gus-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Long Island people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-bean",
+   "tab": "NPCs",
+   "title": "Bean: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-bean-v3.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Long Island people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-reel",
+   "tab": "NPCs",
+   "title": "Reel: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-reel-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Long Island people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-pruitt",
+   "tab": "NPCs",
+   "title": "Principal Pruitt: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-pruitt-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Long Island people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-delgado",
+   "tab": "NPCs",
+   "title": "Mr. Delgado: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-delgado-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Long Island people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-kowalski",
+   "tab": "NPCs",
+   "title": "Mrs. Kowalski: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-kowalski-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Long Island people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-ike",
+   "tab": "NPCs",
+   "title": "Grandpa Ike: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-ike-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Long Island people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-halverson",
+   "tab": "NPCs",
+   "title": "Mr. Halverson: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-halverson-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Long Island people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-bun",
+   "tab": "NPCs",
+   "title": "Bun: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-bun-v2.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Long Island people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-page",
+   "tab": "NPCs",
+   "title": "Page: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-page-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Long Island people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-fern",
+   "tab": "NPCs",
+   "title": "Fern: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-fern-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Long Island people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-kit",
+   "tab": "NPCs",
+   "title": "Kit: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-kit-v3.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Long Island people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-oolong",
+   "tab": "NPCs",
+   "title": "Oolong: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-oolong-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Long Island people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-luna",
+   "tab": "NPCs",
+   "title": "Luna: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-luna-v3.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Long Island people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-penny",
+   "tab": "NPCs",
+   "title": "Penny: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-penny-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Long Island people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-nickel",
+   "tab": "NPCs",
+   "title": "Nickel: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-nickel-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Long Island people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-sal",
+   "tab": "NPCs",
+   "title": "Sal: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-sal-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Long Island people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-sol",
+   "tab": "NPCs",
+   "title": "Sol: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-sol-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Long Island people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-skye",
+   "tab": "NPCs",
+   "title": "Skye: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-skye-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-chet",
+   "tab": "NPCs",
+   "title": "Chet: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-chet-v3.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-wes",
+   "tab": "NPCs",
+   "title": "Wes: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-wes-v3.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-bev",
+   "tab": "NPCs",
+   "title": "Bev: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-bev-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-priya",
+   "tab": "NPCs",
+   "title": "Priya: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-priya-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-juniper",
+   "tab": "NPCs",
+   "title": "Juniper: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-juniper-v3.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-kenji",
+   "tab": "NPCs",
+   "title": "Kenji: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-kenji-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-sage",
+   "tab": "NPCs",
+   "title": "Sage: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-sage-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-marguerite",
+   "tab": "NPCs",
+   "title": "Marguerite: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-marguerite-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-dolores",
+   "tab": "NPCs",
+   "title": "Dolores: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-dolores-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-dash",
+   "tab": "NPCs",
+   "title": "Dash: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-dash-v3.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-washington",
+   "tab": "NPCs",
+   "title": "Mr. Washington: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-washington-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-marisol",
+   "tab": "NPCs",
+   "title": "Marisol: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-marisol-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-larry",
+   "tab": "NPCs",
+   "title": "Larry: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-larry-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-bernadette",
+   "tab": "NPCs",
+   "title": "Bernadette: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-bernadette-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-odette",
+   "tab": "NPCs",
+   "title": "Miss Odette: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-odette-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-carmen",
+   "tab": "NPCs",
+   "title": "Doña Carmen: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-carmen-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-ray",
+   "tab": "NPCs",
+   "title": "Ray: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-ray-v3.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-toni",
+   "tab": "NPCs",
+   "title": "Toni: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-toni-v3.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-kiki",
+   "tab": "NPCs",
+   "title": "Kiki: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-kiki-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-dana",
+   "tab": "NPCs",
+   "title": "Dana: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-dana-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-alvarez",
+   "tab": "NPCs",
+   "title": "Mrs. Alvarez: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-alvarez-v2.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-beto",
+   "tab": "NPCs",
+   "title": "Don Beto: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-beto-v2.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-tony",
+   "tab": "NPCs",
+   "title": "Tony: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-tony-v2.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-yesenia",
+   "tab": "NPCs",
+   "title": "Yesenia: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-yesenia-v3.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-claudia",
+   "tab": "NPCs",
+   "title": "Claudia: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-claudia-v3.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-kevin",
+   "tab": "NPCs",
+   "title": "Kevin: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-kevin-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-daisy",
+   "tab": "NPCs",
+   "title": "Daisy: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-daisy-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-mateo",
+   "tab": "NPCs",
+   "title": "Mateo: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-mateo-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-sofi",
+   "tab": "NPCs",
+   "title": "Sofi: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-sofi-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-jordan",
+   "tab": "NPCs",
+   "title": "Jordan: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-jordan-v1.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-sam",
+   "tab": "NPCs",
+   "title": "Sam: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-sam-v3.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-dakota",
+   "tab": "NPCs",
+   "title": "Dakota: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-dakota-v2.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "npc-walk-ryan",
+   "tab": "NPCs",
+   "title": "Ryan: walk sheet (hero attached)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/npcs/npc-photo-ryan-v2.png",
+    "art/raw/characters/justin-walk-sheet-v1.png"
+   ],
+   "prompt": "Paint a walking sheet of one person for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at the sides, a calm easy expression.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nWalks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
+   "group": "Los Angeles people"
   }
  ]
 }
