@@ -15613,8 +15613,16 @@
    "group": "Long Island people"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/npcs/npc-walk-kowalski-v1.png",
+     "date": "2026-11-09",
+     "from": "v1",
+     "at": 1794254247874
+    }
+   ],
    "rejects": [],
    "id": "npc-walk-kowalski",
    "tab": "NPCs",
