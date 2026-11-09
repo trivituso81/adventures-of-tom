@@ -3,9 +3,9 @@
 
 Reads the approved files listed in data/art-prompts.json and writes:
   art/welcome.webp       portrait welcome painting (background only; the game draws the family)
-  art/welcome-land.webp  landscape welcome painting
+  art/welcome-land.webp  landscape welcome painting (cut to the painted band: the approved picture has flat cream bars above and below it)
   art/title-logo.webp    title logo with the flat background keyed out (transparent)
-  icon-v8.png            180 x 180 app icon (the white corners outside the painted rounded square are filled from the paint)
+  icon-v9.png            180 x 180 app icon (the white corners outside the painted rounded square are filled from the paint)
 Run from the repo root: python3 tools/title-bake/bake_title.py
 """
 import json
@@ -25,7 +25,14 @@ def approved(eid):
 
 def welcome():
     Image.open(approved('title-welcome-portrait')).convert('RGB').save('art/welcome.webp', quality=88, method=6)
-    Image.open(approved('title-welcome-landscape')).convert('RGB').save('art/welcome-land.webp', quality=88, method=6)
+    # title2: the approved landscape picture is a painted band with flat cream bars above and below and a soft fade at each band edge.
+    # Cut to the painted rows (rows whose pixel spread is above 14), minus 18 px each side for the fade, so the game's cover fit shows no bars.
+    land = Image.open(approved('title-welcome-landscape')).convert('RGB')
+    spread = np.asarray(land).astype(np.float32).std(axis=1).mean(-1)
+    rows = np.where(spread > 14)[0]
+    y0, y1 = int(rows[0]) + 18, int(rows[-1]) - 18 + 1
+    land.crop((0, y0, land.width, y1)).save('art/welcome-land.webp', quality=88, method=6)
+    print('landscape rows', y0, y1)
 
 def logo():
     a = np.asarray(Image.open(approved('title-logo')).convert('RGB')).astype(np.float32)
@@ -64,8 +71,9 @@ def icon():
             mask[lab == lab[cy, cx]] = 255
     mask = cv2.dilate(mask, np.ones((7, 7), np.uint8))
     filled = cv2.inpaint(a[..., ::-1].copy(), mask, 12, cv2.INPAINT_TELEA)[..., ::-1]
-    Image.fromarray(filled).resize((180, 180), Image.LANCZOS).save('icon-v8.png', optimize=True)
+    Image.fromarray(filled).resize((180, 180), Image.LANCZOS).save('icon-v9.png', optimize=True)
     print('icon corners filled', int((mask > 0).sum()), 'px')
 
 if __name__ == '__main__':
     welcome(); logo(); icon()
+    import shutil; shutil.copy('icon-v9.png', 'launch/apple-touch-icon.png')  # the launch page carries the same icon

@@ -1,3 +1,9 @@
+## 2026-11-09 (title2): Approved Title art installed: welcome paintings, logo, app icon (tag title2)
+- Tom: all title images approved (Final Fantasy IX style, Square-based welcome scene). `python3 tools/title-bake/bake_title.py` installed the latest approved version of each: `art/welcome.webp` (portrait v2), `art/welcome-land.webp` (landscape v2), `art/title-logo.webp` (logo v3, magenta keyed out), new app icon `icon-v9.png` (v3: Tom, Rose on his shoulders, Grace). `launch/apple-touch-icon.png` carries the same icon.
+- Choice made: the approved landscape picture is a painted band with flat cream bars above and below. The baker now cuts it to the painted rows (1280 x 468) so no bars show; the sides crop a little on wider phones. If Tom wants the full sky back, regenerate the landscape entry as a full 16:9 picture.
+- Purged: `icon-v2` to `icon-v8.png` (grep 0 outside frozen demo/, which has its own copies). `index.html` icon links now point at `icon-v9.png`; `?v=title1` on the logo and landscape painting became `title2` (index.html, engine/main.js). Art Library icon entry's ref now `icon-v9.png`.
+- Tests: screenshots of the title screen in portrait, landscape 844 x 390 and 16:9 looked at; smoke FAILS []; tag_check ok; validate.js OK.
+
 ## 2026-11-09 (boppy1fix): Boppy 1 "You Hold the Net" placement fixed (tag boppy1fix)
 
 - Tom (14:59): saw a bunch of issues in the Tom and Boppy first combo. Fact (frames rendered portrait and landscape): Tom ran to the left edge of the enemy group (`GR.x0-26`) and was cut in half by the screen edge; Boppy crouched at `GR.x1+40`, 50 px from Tom, so the two (frames about 105 px wide each) fused and sat on the pile, and the landing net drew over Boppy's face. Tom also fell back to the old `aim` frame for about 0.4 s while the monsters were hauled.

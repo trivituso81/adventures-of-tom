@@ -14913,10 +14913,10 @@
    ],
    "id": "title-app-icon",
    "tab": "Title",
-   "title": "App icon (replaces icon-v8.png, shown at 180 x 180)",
+   "title": "App icon (replaces icon-v9.png, shown at 180 x 180)",
    "ar": "1:1",
    "refs": [
-    "icon-v8.png",
+    "icon-v9.png",
     "art/raw/characters/tom-hero-ref-v1.png",
     "art/raw/characters/grace-hero-ref-v1.png",
     "art/raw/characters/rose-hero-ref-v1.png"
