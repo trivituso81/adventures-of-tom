@@ -13285,8 +13285,16 @@
    "group": "Studio and Car Barn"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/prop-find-ch03-v1.png",
+     "date": "2026-11-09",
+     "from": "v1",
+     "at": 1794247851283
+    }
+   ],
    "rejects": [],
    "id": "prop-find-ch03",
    "tab": "Props",
