@@ -73,7 +73,7 @@ NEVER substitute. Do not add extra frames, merge two frames, repeat a pose, or i
 }
 
 const entries = [];
-for (const g of GROUPS) {
+for (const g of GROUPS.filter(x => x.id === 'pip-moss-dot')) {
   const grp = g.la ? 'Walk sheets, Los Angeles' : 'Walk sheets, Long Island';
   g.keys.forEach((k, i) => {
     const c = N[k];

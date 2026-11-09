@@ -197,10 +197,39 @@ No magenta on the people. No magenta glow, spill, tint or fringe on the edges or
 }
 
 const entries = [];
-for (const g of GROUPS) {
+// Old two-step method (group scene, then cut) is kept ONLY for the approved Pip, Moss and Dot group, whose approved art is installed.
+for (const g of GROUPS.filter(x => x.id === 'pip-moss-dot')) {
   const grp = g.la ? 'Los Angeles people' : 'Long Island people', nm = names(g).join(', ');
   g.sceneId = 'npc-scene-' + g.id; g.cutId = 'npc-cut-' + g.id;
   entries.push({ id: g.sceneId, tab: 'NPCs', group: grp, title: `${nm}: step 1, painted in the school yard (${g.batch})`, ar: '4:3', refs: [REF_YARD, ...castFor(g.keys.map(k => N[k]), 'hero', 3).refs, REF_CHART], prompt: scene(g) });
   entries.push({ id: g.cutId, tab: 'NPCs', group: grp, title: `${nm}: step 2, cut out on magenta (needs step 1 approved)`, ar: '4:3', refs: [`art/raw/npcs/${g.sceneId}-v${(APPROVED_TAKE[g.id]||{}).scene||1}.png`], prompt: cut(g) });
+}
+
+// Photo to character (Tom 2026-11-08 23:11): every NPC has one prompt, the fixed Final Fantasy IX style template below (verbatim, Tom's words)
+// plus a DETAILS block with that person's look and personality. Never edit the template text; change only the details.
+const FF9_TEMPLATE = `PHOTO TO CHARACTER: FINAL FANTASY IX STYLE
+Attach: one photo of one person.
+
+Paint the person in the attached photo  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.
+Finish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.
+Keep this person's hair, face shape, age, build, skin tone, and the same garments and colors.
+Proportions: about 4 heads tall, simplified expressive face.
+Pose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.
+Plain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.`;
+function details(c) {
+  const p = { ...PAL[c.look], ...(c.over || {}) };
+  const who = c.kind === 'child' ? (c.sex === 'f' ? 'girl' : 'boy') : (c.sex === 'f' ? 'woman' : 'man');
+  const hair = p.hair ? `${cw(p.hair, HAIR)} hair` : 'no hair visible';
+  const hat = p.hat ? `a hat or cap in ${cw(p.hat, CLOTH)}` : 'no hat';
+  const pants = p.pants === p.shirt ? 'matching trousers in the same color' : `trousers in ${cw(p.pants, CLOTH)}`;
+  const old = c.age >= 60 ? ' Older: a softer, more lined face and a slightly gentler posture.' : '';
+  const glasses = c.glasses ? 'Round glasses.' : 'No glasses.';
+  return `${c.name.toUpperCase()}: a ${c.age} year old ${who}, ${c.role}. Real height ${c.ft}.
+Appearance: skin ${cw(p.skin, SKIN)}. ${hair[0].toUpperCase() + hair.slice(1)}. Outfit: a top in ${cw(p.shirt, CLOTH)}, ${pants}, sturdy simple shoes; ${hat}. ${glasses}${old}
+Personality and expression: ${c.acc}.`;
+}
+for (const k of Object.keys(N)) {
+  const c = N[k], la = GROUPS.find(g => g.keys.includes(k)).la;
+  entries.push({ id: 'npc-photo-' + k, tab: 'NPCs', group: la ? 'Los Angeles people' : 'Long Island people', title: `${c.name}: photo to character, Final Fantasy IX style, ${c.ft}`, ar: '2:3', refs: [], prompt: FF9_TEMPLATE + '\n\n' + details(c) });
 }
 module.exports = { APPROVED_TAKE, entries, N, BATCHES, GROUPS, PAL, SKIN, HAIR, CLOTH, cw, REF_KEY, REF_CHART, styleRule, castFor, castList, range, lookOf, ordinal };

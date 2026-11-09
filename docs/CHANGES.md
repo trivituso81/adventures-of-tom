@@ -1,3 +1,7 @@
+## 2026-11-08 (npcff9): NPC prompts rewritten to the Final Fantasy IX photo-to-character template
+- Tom (23:11): every NPC prompt is now his fixed template, verbatim, plus a details block (age, height, skin, hair, outfit, personality). 56 entries `npc-photo-<id>`, tall 2:3, no reference images (the template says to attach one photo of the person).
+- Purged: the 42 draft group scene and cut entries and the 55 draft walk entries. Kept: the approved Pip, Moss and Dot scene, cut and walk entries (their art is installed). `validate.js` exempts `npc-photo-*` from the style-name ban.
+
 ## 2026-11-08 (safe2): stale cloud-save mentions removed from a followers.js comment and docs/ROADMAP.md. Tags safe1 to safe2.
 
 ## 2026-11-08 (safe1): Safe saves (assessment items 1 to 4)
