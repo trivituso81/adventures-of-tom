@@ -1,3 +1,9 @@
+## 2026-11-09 (amyfx2): Amy's other 13 effect sheets cut and drawn painted
+- `bake_amy_fx.py` now cuts all 14 approved Amy fx sheets (45 pictures in `art/props/amy`, slugs `pt_`, `rp_`, `ht_`, `gs_`, `iv_`, `pq_`, `dt_`, `bb_`, `hr_`, `om_`, `fs_`, `ns_`, `mu_`). Three sheets (goldstar v2, hill repeats, false start) are cut cell by cell (`'cells'`) because a full-bleed road or track in a cell broke the grouping.
+- Held objects are not installed (already painted into the ab frames). Not installed because no move draws them: door, flag, red ball, cone, hill sign, gel packet, pizza box, bib, finish ring, speed streak and trail, hush twinkle (12 cuts deleted).
+- `engine/amy-moves.js`: scene calls take `art:'<slug>'` (burst, ring, dust, glow primitives in av_, a5_ and a6_ blocks, shared through `RFX.amyArt`), plus a new painted-only scene `az_art`. Each painted effect replaces the drawn one: starbursts, rings, sparkles, dust, the green check and circle on the quiz paper, SEE ME sticky notes. Added where nothing was drawn: PEP TALK boost arrows, sound arcs (PEP TALK, Gold-Star whistle, Nobody Leaves bell, False Start whistle), soup steam, ink splat and gold star on Green Pen, A+ over the girls (Surprise Quiz), speed lines (Burpee Blitz), confetti burst, split arrows.
+- Tests: kit_test for all 13 moves, FAILS: [], every new picture drawn at least once (PAINTED_PROPS), frames looked at. Preload line added in `engine/prop-art.js`.
+
 ## 2026-11-09 (npcpurge): old NPC group prompts removed (Tom 06:48)
 - Removed the Pip, Moss and Dot scene, cut and 3 walk Library entries, their generator code (`npc-walk-prompts.js`, scene, cut, cast helpers, `APPROVED_TAKE`) and the `npc-walk` mapping in in_game.py. The NPCs tab now holds only the 56 `npc-photo-*` hero prompts. Approved pictures stay in art/raw/npcs and the installed art is untouched. data/art-ingame.json regenerated. Grep for npc-scene, npc-cut, npc-walk in tools, engine, index.html and art.html: 0.
 

@@ -15,16 +15,40 @@ from bake_deedee_fx import local_bg, groups
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 RAW = os.path.join(ROOT, 'art/raw/characters'); OUT = os.path.join(ROOT, 'art/props/amy')
 MAXSIDE = 220
-# (sheet file stem, slugs in prompt item order)
+# (sheet file stem, slugs in prompt item order[, 'cells']). None = not installed: held objects painted into the ab frames, props the moves do not draw
+# (door, flag, ball, cone, sign, gel, pizza box, bib, streaks), or a stray piece of the sheet.
 SHEETS = [
  ('amy-fx-kettlebell-swing-v1', [None, None, 'kb_swoosh', 'kb_burst', 'kb_dust']),
+ ('amy-fx-pep-talk-v1', ['pt_star', 'pt_ring', 'pt_sparkle', 'pt_arrow', 'pt_waves']),
+ ('amy-fx-red-pen-v1', [None, None, 'rp_circle', 'rp_check', 'rp_star', 'rp_ink']),
+ ('amy-fx-hot-lunch-tray-v1', [None, None, None, 'ht_steam', 'ht_ring', 'ht_sparkle']),
+ ('amy-fx-goldstar-recess-v2', [None, 'gs_star', None, None, 'gs_ring', 'gs_sparkle', 'gs_waves', None], 'cells'),   # item 8 is a stray logo, not installed
+ ('amy-fx-inside-voices-v1', [None, None, 'iv_shock', 'iv_clap', 'iv_hush', None]),
+ ('amy-fx-pop-quiz-v1', [None, None, None, 'pq_flurry', 'pq_aplus', 'pq_burst']),
+ ('amy-fx-detention-ult-v1', [None, None, 'dt_note', None, None, 'dt_shock', 'dt_waves', 'dt_twinkle']),
+ ('amy-fx-burpee-blitz-v1', ['bb_ring', 'bb_burst', 'bb_speed', 'bb_spark', 'bb_gust']),
+ ('amy-fx-hill-repeats-v1', [None, None, None, 'hr_trail', 'hr_stars'], 'cells'),   # full-bleed road in cell 1 confuses the grouping
+ ('amy-fx-oat-milk-please-v2', [None, None, None, None, 'om_ring', 'om_sparkle', None]),   # last piece is a speck of the cell box
+ ('amy-fx-false-start-v1', [None, None, None, None, 'fs_waves', 'fs_burst', 'fs_puff'], 'cells'),   # full-bleed track in cell 3
+ ('amy-fx-negative-split-v1', [None, None, None, 'ns_arrows', 'ns_ring', 'ns_spark']),
+ ('amy-fx-marathon-ult-v1', [None, None, None, None, None, 'mu_confetti', None, None]),
 ]
 def main():
     os.makedirs(OUT, exist_ok=True); written = {}
-    for stem, slugs in SHEETS:
+    for sh in SHEETS:
+        stem, slugs = sh[0], sh[1]; bycell = len(sh) > 2
         im = np.array(Image.open(os.path.join(RAW, stem + '.png')).convert('RGB'))
         bg = local_bg(im); f = im.astype(np.float32); d = np.sqrt(((f - bg) ** 2).sum(2))
-        lab, order = groups(d, len(slugs), d.shape)
+        if bycell:   # one item per cell of the 4 x 3 grid, read row by row; the mask is that cell's inked pieces
+            lab = np.zeros(d.shape, int); ch, cw = d.shape[0] // 3, d.shape[1] // 4; order = []
+            ink = ndi.binary_dilation(ndi.binary_opening(d > 95, np.ones((5, 5))), iterations=6)   # the faint cell box stays under this level
+            for ci in range(len(slugs)):
+                y0, x0 = (ci // 4) * ch, (ci % 4) * cw; I = 10; ink2 = np.zeros_like(ink[y0:y0 + ch, x0:x0 + cw]); ink2[I:-I, I:-I] = ink[y0 + I:y0 + ch - I, x0 + I:x0 + cw - I]; cl, cn = ndi.label(ink2); keep = np.zeros(cl.shape, bool)
+                for k, o in enumerate(ndi.find_objects(cl)):   # drop the faint cell box: a wide, hollow frame
+                    hh, ww = o[0].stop - o[0].start, o[1].stop - o[1].start; fill = (cl[o] == k + 1).sum() / (hh * ww)
+                    if not (hh > .85 * ch and ww > .85 * cw and fill < .35): keep |= cl == k + 1
+                lab[y0:y0 + ch, x0:x0 + cw] = np.where(keep, ci + 1, 0); order.append([ci + 1])
+        else: lab, order = groups(d, len(slugs), d.shape)
         a = np.clip((d - 30) / 130, 0, 1); a = np.where(d > 170, 1, a)
         a3 = np.maximum(a, 1e-3)[..., None]
         rgb = np.clip((f - (1 - a3) * bg) / a3, 0, 255)

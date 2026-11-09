@@ -73,10 +73,19 @@ SC.av_big=(s,u)=>{ let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-
   x=Math.max(w/2+8,Math.min(568-w/2,x)); y=Math.max(sc*5+8,y);
   gfx.globalAlpha=fin(u,.05)*fade(u,.8); gfx.save(); gfx.translate(x,y); gfx.rotate(s.rot||0); gfx.scale(pop,pop); bigWord(s.txt,0,-sc*2.5-ez(u/.3)*4,s.c||GOLD,sc); gfx.restore(); };
 SC.av_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-30); x=p.x; y=p.y; } const w=(s.txt.length*4-1)*(s.sc||2); x=Math.max(w/2+6,Math.min(570-w/2,x)); bigWord(s.txt,x,y-ez(u/.3)*8,s.c||CREAM,s.sc||2); };
-SC.av_burst=(s,u)=>{ const n=s.n||10; for(let k=0;k<n;k++) { const a=k/n*Math.PI*2+(s.seed||0),d=ez(u)*(s.r||48); gfx.globalAlpha=fade(u,.5); star(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.75,(s.sz||7)*(1-u*.5),k%2?(s.c2||GOLD):(s.c||CREAM)); } };
-SC.av_ring=(s,u)=>{ const q=ez(u/.5); gfx.globalAlpha=fade(u,.4)*(1-q*.4); ring(s.x,s.y,8+q*(s.r||40),8+q*(s.r||40)*.75,5,s.c||CREAM); };
-SC.av_dust=(s,u)=>{ for(let k=0;k<(s.n||10);k++) { const a=Math.PI+k/((s.n||10)-1)*Math.PI,d=ez(u)*(s.r||34); gfx.globalAlpha=(1-u)*.85; E(s.x+Math.cos(a)*d*1.4,s.y+Math.sin(a)*d*.5,5*(1-u)+2,4*(1-u)+2,'#e8dcc4'); } };
-SC.av_glow=(s,u)=>{ gfx.globalAlpha=fin(u,.2)*fade(u,.6)*.45; E(s.x,s.y,s.rx||40,s.ry||56,s.c||GOLD); };
+SC.av_burst=(s,u)=>{ if(pBurst(s,u)) return; const n=s.n||10; for(let k=0;k<n;k++) { const a=k/n*Math.PI*2+(s.seed||0),d=ez(u)*(s.r||48); gfx.globalAlpha=fade(u,.5); star(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.75,(s.sz||7)*(1-u*.5),k%2?(s.c2||GOLD):(s.c||CREAM)); } };
+SC.av_ring=(s,u)=>{ if(pRing(s,u)) return; const q=ez(u/.5); gfx.globalAlpha=fade(u,.4)*(1-q*.4); ring(s.x,s.y,8+q*(s.r||40),8+q*(s.r||40)*.75,5,s.c||CREAM); };
+SC.av_dust=(s,u)=>{ if(pDust(s,u)) return; for(let k=0;k<(s.n||10);k++) { const a=Math.PI+k/((s.n||10)-1)*Math.PI,d=ez(u)*(s.r||34); gfx.globalAlpha=(1-u)*.85; E(s.x+Math.cos(a)*d*1.4,s.y+Math.sin(a)*d*.5,5*(1-u)+2,4*(1-u)+2,'#e8dcc4'); } };
+SC.av_glow=(s,u)=>{ if(pGlow(s,u)) return; gfx.globalAlpha=fin(u,.2)*fade(u,.6)*.45; E(s.x,s.y,s.rx||40,s.ry||56,s.c||GOLD); };
+// Painted effects (art/props/amy, bake_amy_fx.py): a scene call with art:'<slug>' draws that picture instead of the drawn shapes (the drawn ones show only until the picture has loaded).
+const pBurst=(s,u)=>{ if(!s.art) return false; const g=u<.15?ez(u/.15)*1.2:lerp(1.2,1,cl((u-.15)/.25)); gfx.globalAlpha=fade(u,.55); const ok=PROPART.draw('amy/'+s.art,s.x,s.y,{h:(s.r||48)*2.2*g}); gfx.globalAlpha=1; return ok; };
+const pRing=(s,u)=>{ if(!s.art) return false; const q=ez(u/.5); gfx.globalAlpha=fade(u,.4)*(1-q*.4); const ok=PROPART.draw('amy/'+s.art,s.x,s.y,{w:(16+q*(s.r||40)*2)*1.15}); gfx.globalAlpha=1; return ok; };
+const pDust=(s,u)=>{ if(!s.art) return false; const k=.6+.4*ez(u),w=(s.r||34)*2.6*k; gfx.globalAlpha=(1-u)*.9; const ok=PROPART.draw('amy/'+s.art,s.x,s.y-w*.16,{w}); gfx.globalAlpha=1; return ok; };
+const pGlow=(s,u)=>{ if(!s.art) return false; gfx.globalAlpha=fin(u,.2)*fade(u,.6); const ok=PROPART.draw('amy/'+s.art,s.x,s.y,{h:(s.ry||56)*2.1}); gfx.globalAlpha=1; return ok; };
+RFX.amyArt={pBurst,pRing,pDust,pGlow};   // the a5_ and a6_ blocks below are separate scopes and pick these up
+// One painted picture on its own: pops in, can rise or fall, sits at x,y or at her head (st, dx, dy). w or h sets the size.
+SC.az_art=(s,u)=>{ let x=s.x,y=s.y; if(s.st) { if(s.st.x==null) return; const p=head(s.st,s.dy||0); x=p.x+(s.dx||0); y=p.y; } const g=s.pop?(u<.15?ez(u/.15)*1.2:lerp(1.2,1,cl((u-.15)/.25))):1;
+  gfx.globalAlpha=fin(u,.1)*fade(u,s.fa||.55)*(s.a||1); PROPART.draw('amy/'+s.art,x,y-(s.rise||0)*ez(u),{w:s.w?s.w*g:null,h:s.h?s.h*g:null,flip:s.flip,rot:s.rot}); gfx.globalAlpha=1; };
 
 // ---------- Hill Repeats (B2; Hill Math numbers) ----------
 // A real hill heaves up out of the ground. She sprints up and down it three times, faster each time, then charges down onto them.
@@ -112,6 +121,7 @@ const BOARD='#2f5a3e',BOARD2='#3c6e4c',WOOD='#9a6a3a',WOOD2='#c48a4a',WOOD3='#6e
 const BLUE='#1f4fae',YEL='#ffd23a',FOIL='#d8dee8',FOIL2='#ffffff',FOIL3='#a8b2c2';
 const CONF=['#ff5a5a','#ffb04a','#ffe08a','#9be39a','#5cb8ff','#c39bff','#ffffff'];
 ST.nw('a5_');
+const {pGlow}=RFX.amyArt;
 if(!sfx.schoolBell) sfx.schoolBell=()=>{ for(let k=0;k<14;k++) tone({type:'square',f0:k%2?1180:1260,dur:.05,vol:.07,delay:k*.055,filter:3000}); };
 if(!sfx.chalk) sfx.chalk=()=>{ noise({dur:.09,vol:.12,f0:5200,f1:3600,type:'bandpass',q:2}); };
 const ASP=()=>BATTLE_SPRITES.amy,AH=()=>ASP().idle.length*ASP().scale;
@@ -126,7 +136,7 @@ SC.a5_big=inBox((s,u)=>{ const pop=u<.12?ez(u/.12)*1.3:lerp(1.3,1,cl((u-.12)/.12
   x=Math.max(w/2+8,Math.min(568-w/2,x)); y=Math.max(sc*5+BAR+16,y);
   gfx.globalAlpha=fin(u,.05)*fade(u,.8); gfx.save(); gfx.translate(x,y); gfx.rotate(s.rot||0); gfx.scale(pop,pop); bigWord(s.txt,0,-sc*2.5-ez(u/.3)*4,s.c||GOLD,sc); gfx.restore(); gfx.globalAlpha=1; });
 SC.a5_flash=(s,u)=>{ gfx.globalAlpha=(1-u)*(s.a||.6); R(0,0,576,324,s.c||'#ffffff'); gfx.globalAlpha=1; };
-SC.a5_glow=(s,u)=>{ gfx.globalAlpha=fin(u,.2)*fade(u,.6)*.4; E(s.x,s.y,s.rx||36,s.ry||50,s.c||GOLD); gfx.globalAlpha=1; };
+SC.a5_glow=(s,u)=>{ if(pGlow(s,u)) return; gfx.globalAlpha=fin(u,.2)*fade(u,.6)*.4; E(s.x,s.y,s.rx||36,s.ry||50,s.c||GOLD); gfx.globalAlpha=1; };
 // A party member who is not the actor, moved on its own path: fn(ms) returns {x,y} offsets from home, frame and rot.
 // 'run'/'runR' resolve to the run cycle (left- or right-facing).
 
@@ -184,7 +194,7 @@ SC.a5_blast=inBox((s,u)=>{ const B=s.B,cx=(B.x0+B.x1)/2,cy=(B.y0+B.y1)/2,W=B.x1-
   gfx.globalAlpha=1; });
 // Red ink circles round every enemy (the engine pops SEE ME itself).
 SC.a5_seeme=inBox((s,u)=>{ s.list.forEach((F,k)=>{ const q=ez((u*1.2-k*.08)/.3); if(q<=0) return; gfx.globalAlpha=fade(u,.8);
-  gfx.strokeStyle=PEN; gfx.lineWidth=4; gfx.beginPath(); gfx.ellipse(F.x,F.mid,F.w*.62,F.h*.62,-.12,-1.3,-1.3+q*Math.PI*2.1); gfx.stroke();
+  if(PROPART.draw('amy/dt_note',F.x,F.mid,{h:Math.max(44,Math.min(80,F.h*.55))*Math.min(1,q*1.3),rot:-.12+k*.06})) return; gfx.strokeStyle=PEN; gfx.lineWidth=4; gfx.beginPath(); gfx.ellipse(F.x,F.mid,F.w*.62,F.h*.62,-.12,-1.3,-1.3+q*Math.PI*2.1); gfx.stroke();
 }); gfx.globalAlpha=1; });
 // The apple bursts into blue sparkles that fly to everyone (the +3 VP).
 SC.a5_vp=(s,u)=>{ for(const q of s.to) for(let k=0;k<5;k++) { const v=cl(u*1.3-k*.06); if(v<=0||v>=1) continue; const x=lerp(s.x,q.x+(k-2)*6,ez(v)),y=lerp(s.y,q.top+10,ez(v))-Math.sin(v*Math.PI)*50;
@@ -306,6 +316,7 @@ const star=(x,y,r,c,rot=0)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); g
 const bigWord=(txt,x,y,c,sc)=>{ const o=Math.max(2,sc*.6); for(const [ox,oy] of [[-o,0],[o,0],[0,-o],[0,o],[-o,-o],[o,o],[-o,o],[o,-o]]) label(txt,x+ox,y+oy,OUT,sc); label(txt,x,y,c,sc); };
 const CREAM='#fff8e8',GOLD='#ffe08a',GOLD2='#ffc23a',RED='#e0402e',PEN='#d8343a',SKY='#9fd8ff',MINT='#8ef0a0',BLUE='#1f4fae',YEL='#ffd23a',WOOD='#9a6a3a',WOOD2='#c48a4a',WOOD3='#6e4824',TRACK='#c86a4a';
 ST.nw('a6_');
+const {pBurst,pRing,pDust,pGlow}=RFX.amyArt;
 const ASP=()=>BATTLE_SPRITES.amy,AH=()=>ASP().idle.length*ASP().scale;
 const head=(st,dy=0)=>({x:st.x,y:st.y-AH()*(st.sc||1)*.74+dy});
 const lift=(f,oy,spin=0,ox=0)=>{ if(!f||f.side!=='foe') return; f.spinAt=performance.now(); f.oy=oy; f.spin=spin; f.ox=ox; };
@@ -331,10 +342,10 @@ window.amyLabPoses=poses;   // the Tombo scenes (engine/battle2-kind.js, Task U)
 SC.a6_big=(s,u)=>{ const pop=u<.12?ez(u/.12)*1.3:lerp(1.3,1,cl((u-.12)/.12)),sc=s.sc||4,w=(s.txt.length*4-1)*sc; let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-34); x=p.x; y=p.y; }
   x=Math.max(w/2+8,Math.min(568-w/2,x)); y=Math.max(sc*5+8,y); gfx.globalAlpha=fin(u,.05)*fade(u,.8); gfx.save(); gfx.translate(x,y); gfx.rotate(s.rot||0); gfx.scale(pop,pop); bigWord(s.txt,0,-sc*2.5-ez(u/.3)*4,s.c||GOLD,sc); gfx.restore(); gfx.globalAlpha=1; };
 SC.a6_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-30); x=p.x; y=p.y; } const w=(s.txt.length*4-1)*(s.sc||2); x=Math.max(w/2+6,Math.min(570-w/2,x)); bigWord(s.txt,x,y-ez(u/.3)*8,s.c||CREAM,s.sc||2); gfx.globalAlpha=1; };
-SC.a6_burst=(s,u)=>{ const n=s.n||10; for(let k=0;k<n;k++) { const a=k/n*Math.PI*2+(s.seed||0),d=ez(u)*(s.r||48); gfx.globalAlpha=fade(u,.5); star(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.75,(s.sz||7)*(1-u*.5),k%2?(s.c2||GOLD):(s.c||CREAM),u*4+k); } gfx.globalAlpha=1; };
-SC.a6_ring=(s,u)=>{ const q=ez(u/.5); gfx.globalAlpha=fade(u,.4)*(1-q*.4); ring(s.x,s.y,8+q*(s.r||40),8+q*(s.r||40)*.75,5,s.c||CREAM); gfx.globalAlpha=1; };
-SC.a6_dust=(s,u)=>{ for(let k=0;k<(s.n||10);k++) { const a=Math.PI+k/((s.n||10)-1)*Math.PI,d=ez(u)*(s.r||34); gfx.globalAlpha=(1-u)*.85; E(s.x+Math.cos(a)*d*1.4,s.y+Math.sin(a)*d*.5,5*(1-u)+2,4*(1-u)+2,'#e8dcc4'); } gfx.globalAlpha=1; };
-SC.a6_glow=(s,u)=>{ gfx.globalAlpha=fin(u,.2)*fade(u,.6)*.45; E(s.x,s.y,s.rx||40,s.ry||56,s.c||GOLD); gfx.globalAlpha=1; };
+SC.a6_burst=(s,u)=>{ if(pBurst(s,u)) return; const n=s.n||10; for(let k=0;k<n;k++) { const a=k/n*Math.PI*2+(s.seed||0),d=ez(u)*(s.r||48); gfx.globalAlpha=fade(u,.5); star(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.75,(s.sz||7)*(1-u*.5),k%2?(s.c2||GOLD):(s.c||CREAM),u*4+k); } gfx.globalAlpha=1; };
+SC.a6_ring=(s,u)=>{ if(pRing(s,u)) return; const q=ez(u/.5); gfx.globalAlpha=fade(u,.4)*(1-q*.4); ring(s.x,s.y,8+q*(s.r||40),8+q*(s.r||40)*.75,5,s.c||CREAM); gfx.globalAlpha=1; };
+SC.a6_dust=(s,u)=>{ if(pDust(s,u)) return; for(let k=0;k<(s.n||10);k++) { const a=Math.PI+k/((s.n||10)-1)*Math.PI,d=ez(u)*(s.r||34); gfx.globalAlpha=(1-u)*.85; E(s.x+Math.cos(a)*d*1.4,s.y+Math.sin(a)*d*.5,5*(1-u)+2,4*(1-u)+2,'#e8dcc4'); } gfx.globalAlpha=1; };
+SC.a6_glow=(s,u)=>{ if(pGlow(s,u)) return; gfx.globalAlpha=fin(u,.2)*fade(u,.6)*.45; E(s.x,s.y,s.rx||40,s.ry||56,s.c||GOLD); gfx.globalAlpha=1; };
 SC.a6_flash=(s,u)=>{ gfx.globalAlpha=(1-u)*(s.a||.7); R(0,0,576,324,s.c||'#ffffff'); gfx.globalAlpha=1; };
 SC.a6_hearts=(s,u)=>{ for(let k=0;k<5;k++) { const q=cl(u*1.4-k*.08); if(q<=0) continue; gfx.globalAlpha=1-q; const x=s.x-20+k*10+Math.sin(q*6+k)*5,y=s.y-q*44,r=5+(k%2)*2,c=k%2?'#ff9ac0':'#ff6b9a'; paintHeart(x,y+r*.3,r*1.15,c); } gfx.globalAlpha=1; };
 // Afterimages of the actor's last positions (s.trail is filled by the move).
@@ -542,13 +553,13 @@ A.pepShow=E2=>{ const {m,fx}=E2,party=b2LiveParty(),others=party.filter(p=>p!==m
   ST.play(E2,[
     [0,()=>{ setMessage('Amy sprints out in front of the whole team.'); say(m.id,'pep_talk'); }],
     [600,()=>{ sfx.thud(); scene('a6_dust',.5,{x:px+14,y:py,r:30,n:8}); }],
-    [700,()=>{ sfx.select(); scene('a6_big',.9,{x:Math.max(90,px-60),y:py-AH()-30,txt:'HEY, TEAM!',c:CREAM,sc:3}); setMessage('Hands round her mouth. Everybody looks up.'); }],
+    [700,()=>{ sfx.select(); scene('a6_big',.9,{x:Math.max(90,px-60),y:py-AH()-30,txt:'HEY, TEAM!',c:CREAM,sc:3}); scene('az_art',.9,{art:'pt_waves',st,dx:36,dy:2,w:64,pop:1}); setMessage('Hands round her mouth. Everybody looks up.'); }],
     [1250,()=>{ sfx.select(); scene('a6_text',.9,{st,txt:'HUDDLE UP!',c:GOLD,sc:2}); }],
     ...visits.map(([ms,o,q])=>[ms,()=>{ scene('a6_callout',(applyAt-ms+900)/1000,{x:q.x,y:q.top-18,txt:o.name.toUpperCase()+'!'}); battle.fx[o.idx].hop=.35; sfx.select(); }]),
     [1800,'She points at every one of them. By name. Loudly.'],
     [squat,()=>{ setMessage('She crouches...'); }],
     ['hf',applyAt],
-    [applyAt,()=>{ E2.apply(); sfx.levelUp(); (sfx.jumpWhistle||sfx.whoosh)(); scene('a6_flash',.25,{a:.35,c:GOLD}); scene('a6_big',1.2,{x:px,y:Math.max(50,py-AH()-70),txt:'LET\'S GO!!',c:GOLD,sc:4,rot:-.06}); for(const o of others) { const q=ST.unit(o); scene('a6_glow',1,{x:q.x,y:q.mid,c:GOLD}); scene('a6_burst',.7,{x:q.x,y:q.top,n:6,r:30}); } setMessage('...and springs straight up. LET\'S GO!'); }],
+    [applyAt,()=>{ E2.apply(); sfx.levelUp(); (sfx.jumpWhistle||sfx.whoosh)(); scene('a6_flash',.25,{a:.35,c:GOLD}); scene('a6_ring',.9,{x:px,y:py-4,r:58,art:'pt_ring'}); scene('a6_big',1.2,{x:px,y:Math.max(50,py-AH()-70),txt:'LET\'S GO!!',c:GOLD,sc:4,rot:-.06}); for(const o of others) { const q=ST.unit(o); scene('a6_glow',1,{x:q.x,y:q.mid,c:GOLD,art:'pt_sparkle',ry:50}); scene('a6_burst',.7,{x:q.x,y:q.top,n:6,r:30,art:'pt_star'}); scene('az_art',1.3,{art:'pt_arrow',x:q.x,y:q.top-26,h:46,rise:22,pop:1}); } setMessage('...and springs straight up. LET\'S GO!'); }],
     [applyAt+420,()=>{ clap(); scene('a6_claps',1.4,{plan}); setMessage('Clap. Clap. Clap. The whole party claps back.'); for(const o of others) dance(o,.9,(q,tt)=>({frame:Math.floor(tt*8)%2?'clap':'idle',dy:-Math.abs(Math.sin(tt*10))*4})); }],
     [applyAt+640,()=>clap()],[applyAt+860,()=>clap()],
     [applyAt+1050,()=>{ scene('a6_text',1,{st,txt:'YOU GOT THIS',c:GOLD,sc:2}); }],
@@ -563,8 +574,8 @@ SC.az_quiz=(s,u)=>{ const ms=s.t*1000,P=s.plan,F=P.F; if(ms<P.paper) return;
   gfx.globalAlpha=1-out; gfx.save(); gfx.translate(x,y+out*30); gfx.rotate(-.06+out*.4); gfx.scale(lerp(1.4,1,g),lerp(1.4,1,g));
   R(-w/2-2,-h/2-2,w+4,h+4,OUT); R(-w/2,-h/2,w,h,CREAM); for(let k=0;k<6;k++) R(-w/2+6,-h/2+18+k*(h-24)/6,w-12,1,'#9fc4f0'); R(-w/2+10,-h/2,2,h,'#f0a0a0'); label('QUIZ',-w/2+20,-h/2+5,'#2b2a26',1);   // plain paper (the painted quiz prop has a red F on it)
   P.strokes.forEach((t0,k)=>{ const q=cl((ms-t0)/200); if(q<=0) return; const cx=-w*.22+k*w*.22,cy=-h*.18+k*h*.16,a=[cx-8,cy],b=[cx-2,cy+7],c=[cx+11,cy-9];
-    const q1=cl(q*2),q2=cl(q*2-1); Ln(a[0],a[1],lerp(a[0],b[0],q1),lerp(a[1],b[1],q1),5,GREEN); if(q2>0) Ln(b[0],b[1],lerp(b[0],c[0],q2),lerp(b[1],c[1],q2),5,GREEN); });
-  for(const c0 of [P.circle,P.circle+350]) if(ms>c0) { const q=ez((ms-c0)/300); gfx.strokeStyle=GREEN; gfx.lineWidth=5; gfx.beginPath(); gfx.ellipse(0,c0>P.circle?3:0,w*.46+(c0>P.circle?5:0),h*.46+(c0>P.circle?4:0),-.1,-1.2,-1.2+q*Math.PI*2.1); gfx.stroke(); }
+    if(PROPART.draw('amy/rp_check',cx+2,cy,{h:22*ez(q)})) return; const q1=cl(q*2),q2=cl(q*2-1); Ln(a[0],a[1],lerp(a[0],b[0],q1),lerp(a[1],b[1],q1),5,GREEN); if(q2>0) Ln(b[0],b[1],lerp(b[0],c[0],q2),lerp(b[1],c[1],q2),5,GREEN); });
+  for(const c0 of [P.circle,P.circle+350]) if(ms>c0) { const q=ez((ms-c0)/300); if(PROPART.draw('amy/rp_circle',0,c0>P.circle?3:0,{w:(w*.98+(c0>P.circle?10:0))*q,h:(h*.95+(c0>P.circle?8:0))*q,rot:c0>P.circle?-.05:-.15})) continue; gfx.strokeStyle=GREEN; gfx.lineWidth=5; gfx.beginPath(); gfx.ellipse(0,c0>P.circle?3:0,w*.46+(c0>P.circle?5:0),h*.46+(c0>P.circle?4:0),-.1,-1.2,-1.2+q*Math.PI*2.1); gfx.stroke(); }
   gfx.restore(); gfx.globalAlpha=1; };
 A.red_pen=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,54),me=ST.unit(m);
   const plan={paper:900,strokes:[1350,1650,1950],circle:2250,peel:3700,F,w:Math.round(cl(F.w*.95,64,110)),h:Math.round(cl(F.h*.9,72,120))};
@@ -578,7 +589,7 @@ A.red_pen=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,54),me=ST.
     ...plan.strokes.map(t=>[t,()=>{ sfx.select(); }]),
     [1350,'One check. Two. Three. She presses hard.'],
     ['hf',2250],
-    [2250,()=>{ sfx.ding(); sfx.bonk(); ST.jolt(f,.5); landHit(100); scene('a6_ring',.6,{x:F.x,y:F.mid,r:50,c:MINT}); scene('a6_big',1.4,{x:F.x,y:F.top-74,txt:'GOOD!',c:MINT,sc:5}); setMessage('A giant green circle round what went right. Twice.'); }],
+    [2250,()=>{ sfx.ding(); sfx.bonk(); ST.jolt(f,.5); landHit(100); scene('az_art',.9,{art:'rp_ink',x:F.x+F.w*.32,y:F.mid+8,h:40,pop:1}); scene('az_art',1.3,{art:'rp_star',x:F.x-F.w*.34,y:F.top+8,h:34,pop:1,rise:14}); scene('a6_big',1.4,{x:F.x,y:F.top-74,txt:'GOOD!',c:MINT,sc:5}); setMessage('A giant green circle round what went right. Twice.'); }],
     [2600,()=>{ sfx.select(); }],
     [2900,()=>{ sfx.click(); scene('a6_text',1.4,{x:F.x,y:F.top-18,txt:'NOW THE REST',c:MINT}); setMessage('Cap on. Now the rest.'); }],
     [4300,'end',res(E2)+'Now it knows exactly what to work on.']]); };
@@ -595,9 +606,9 @@ A.hot_lunch_tray=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFo
   ST.play(E2,[
     [0,()=>{ setMessage(self?'Amy carries a full hot lunch tray. For herself. Teachers eat too.':'Amy carries a full hot lunch tray over to '+t.name+'. Both hands. Careful.'); say(m.id,'hot_lunch_tray'); scene('a6_table',(end-100)/1000,{plan:tp}); }],
     [1300,()=>{ sfx.thud(); setMessage('A lunch table pops up. She holds the tray out.'); }],
-    [give,()=>{ sfx.select(); setMessage('Tomato soup. Grilled cheese triangles. Green beans. An apple, a cookie and almond milk.'); }],
+    [give,()=>{ sfx.select(); scene('az_art',1.6,{art:'ht_steam',x:tx,y:ty-74,h:50,rise:12,a:.9}); setMessage('Tomato soup. Grilled cheese triangles. Green beans. An apple, a cookie and almond milk.'); }],
     ['hf',hit],
-    [hit,()=>{ E2.apply(); sfx.heal(); sfx.ding(); scene('a6_glow',1,{x:H.x,y:H.mid,c:'#ffb45a'}); scene('a6_melt',1.2,{x:H.x,top:H.top,w:H.w,h:H.h}); scene('a6_big',1.2,{x:H.x,y:H.top-60,txt:'HOT LUNCH!',c:'#ffb45a',sc:3}); hopOf(t!==m?t:null); }],
+    [hit,()=>{ E2.apply(); sfx.heal(); sfx.ding(); scene('a6_glow',1,{x:H.x,y:H.mid,c:'#ffb45a',art:'ht_sparkle',ry:50}); scene('a6_ring',.9,{x:H.x,y:H.base-6,r:44,art:'ht_ring'}); scene('a6_melt',1.2,{x:H.x,top:H.top,w:H.w,h:H.h}); scene('a6_big',1.2,{x:H.x,y:H.top-60,txt:'HOT LUNCH!',c:'#ffb45a',sc:3}); hopOf(t!==m?t:null); }],
     [2600,'Dip the sandwich in the soup. That is the correct order.'],
     [end,'end',kindLine(t,'Warm all the way through. Soup first, then recess.')]]); };
 
@@ -616,11 +627,11 @@ A.goldstar_recess=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2Live
     [1000,()=>{ sfx.whoosh(); setMessage('One row each. Three stars each. One empty box each.'); }],
     ...rows.map(r=>[r.at,()=>{ const h=ST.hand(); scene('a6_sticker',.3,{x0:h.x,y0:h.y,x1:PROPART.ready('amy/sticker_chart')?cx+8:cx-cw/2+92+78,y1:cy-(rows.length*28+34)+30+rows.indexOf(r)*28+12}); sfx.select(); }]),
     ...rows.map(r=>[r.at+300,()=>{ sfx.ding(); hopOf(r.u!==m?r.u:null); setMessage('Gold star: '+r.u.name+'.'); }]),
-    [bellAt,()=>{ sfx.whistle(); const h=head(st,6); scene('a6_ring',.6,{x:h.x-14,y:h.y+8,r:30,c:GOLD}); setMessage('Full chart. She blows the recess whistle.'); }],
+    [bellAt,()=>{ sfx.whistle(); const h=head(st,6); scene('a6_ring',.6,{x:h.x-14,y:h.y+8,r:30,c:GOLD,art:'gs_ring'}); scene('az_art',.8,{art:'gs_waves',x:h.x+16,y:h.y+8,w:54,pop:1}); setMessage('Full chart. She blows the recess whistle.'); }],
     ['hf',up],
     [up,()=>{ E2.apply(); sfx.levelUp(); scene('a6_rain',2.2,{x0,x1,y1,n:24}); scene('a6_big',1.6,{x:(x0+x1)/2,y:Math.min(...U.map(q=>q.top))-40,txt:'RECESS!',c:GOLD,sc:4});
-      for(const q of who) { const P=ST.unit(q); scene('a6_glow',1.1,{x:P.x,y:P.mid,c:GOLD}); hopOf(q!==m?q:null); } }],
-    [up+600,()=>{ sfx.ding(); setMessage(foe?'Gold stars everywhere. Even '+foe.name+' gets a few.':'Gold stars for everybody. Rest counts as good work.'); for(const q of who) { const P=ST.unit(q); scene('a6_burst',.8,{x:P.x,y:P.top-6,n:6,r:30,c:GOLD2}); } }],
+      for(const q of who) { const P=ST.unit(q); scene('a6_glow',1.1,{x:P.x,y:P.mid,c:GOLD,art:'gs_sparkle',ry:50}); hopOf(q!==m?q:null); } }],
+    [up+600,()=>{ sfx.ding(); setMessage(foe?'Gold stars everywhere. Even '+foe.name+' gets a few.':'Gold stars for everybody. Rest counts as good work.'); for(const q of who) { const P=ST.unit(q); scene('a6_burst',.8,{x:P.x,y:P.top-6,n:6,r:30,c:GOLD2,art:'gs_star'}); } }],
     [up+2300,'end',foe?kindLine(foe):'The assignment is to stop for a moment.']]); };
 
 // ---------- Inside Voices! (A4) ----------
@@ -641,9 +652,9 @@ A.inside_voices=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(
     ...plan.flicks.map(([a,b])=>[a,()=>{ sfx.click(); setMessage('Lights off.'); }]),
     ...plan.flicks.map(([a,b])=>[b,()=>{ sfx.click(); setMessage('Lights on.'); }]),
     [2400,()=>{ setMessage('The teacher clap. Clap, clap, clap-clap-clap.'); }],
-    ...claps.map(c=>[c,()=>{ clap(); const h=head(st,8); scene('a6_text',.5,{x:h.x-20+(c%2)*40,y:h.y-10,txt:'CLAP',c:GOLD,sc:2}); }]),
+    ...claps.map(c=>[c,()=>{ clap(); const h=head(st,8); scene('a6_text',.5,{x:h.x-20+(c%2)*40,y:h.y-10,txt:'CLAP',c:GOLD,sc:2}); scene('az_art',.4,{art:'iv_clap',x:h.x+14,y:h.y,w:56,pop:1}); }]),
     ['hf',3300],
-    [3300,()=>{ E2.apply(); sfx.stun(); for(const f of list) ST.jolt(f,.2); scene('a6_big',1.3,{x:Gp.x,y:Gp.top-74,txt:'INSIDE VOICES!',c:GOLD,sc:3}); scene('a6_hush',1.6,{list:list.map(f=>ST.foe(f))}); scene('a6_zz',1.4,{x:head(st).x-24,y:head(st).y-16}); }],
+    [3300,()=>{ E2.apply(); sfx.stun(); for(const f of list) ST.jolt(f,.2); scene('a6_big',1.3,{x:Gp.x,y:Gp.top-74,txt:'INSIDE VOICES!',c:GOLD,sc:3}); scene('a6_hush',1.6,{list:list.map(f=>ST.foe(f))}); scene('a6_ring',1.2,{x:Gp.x,y:Gp.base-8,r:Math.max(60,Gp.w*.6),art:'iv_hush'}); scene('a6_ring',.8,{x:Gp.x,y:Gp.mid,r:Math.max(50,Gp.w*.5),art:'iv_shock'}); scene('a6_zz',1.4,{x:head(st).x-24,y:head(st).y-16}); }],
     [3700,'Finger to her lips. Every one of them stops. She waits anyway.'],
     [5300,'end','The room suddenly remembers its manners.']]); };
 
@@ -667,9 +678,9 @@ A.pop_quiz=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),all=waveFoes().leng
     [fast,()=>{ sfx.whoosh(); setMessage('Which somehow go by very, very fast.'); }],
     [drop,()=>{ (sfx.slideWhistle||sfx.whoosh)(); setMessage('TIME. The answer key drops out of the sky. All fifty pages.'); }],
     ['hf',hit],
-    [hit,()=>{ sfx.thud(); sfx.thud(); sfx.bonk(); ST.jolt(f,.7); landHit(100); scene('a6_flash',.18,{a:.45}); scene('a6_dust',.7,{x:F.x,y:F.base,r:70,n:14}); scene('a6_pencils',.9,{x:F.x,y:F.top}); }],
+    [hit,()=>{ sfx.thud(); sfx.thud(); sfx.bonk(); ST.jolt(f,.7); landHit(100); scene('a6_flash',.18,{a:.45}); scene('a6_dust',.7,{x:F.x,y:F.base,r:70,n:14}); scene('a6_pencils',.9,{x:F.x,y:F.top}); scene('az_art',.5,{art:'pq_burst',x:F.x,y:F.mid,h:96,pop:1}); scene('az_art',1,{art:'pq_flurry',x:F.x,y:F.top+10,w:140,rise:24,pop:1}); }],
     [hit+250,()=>{ sfx.ding(); scene('a6_big',1.5,{x:F.x,y:Math.max(40,F.top-pk.h*.3-60),txt:'PENCILS DOWN!',c:CREAM,sc:3}); setMessage('PENCILS DOWN.'); }],
-    [hit+1200,()=>{ if(girls.length) { for(const g of girls) { const q=ST.unit(g); scene('a6_hearts',1,{x:q.x,y:q.top}); battle.fx[g.idx].hop=.3; } sfx.select(); setMessage(girls.map(g=>g.name).join(' and ')+' already know every answer.'); } else setMessage('It didn\'t study.'); }],
+    [hit+1200,()=>{ if(girls.length) { for(const g of girls) { const q=ST.unit(g); scene('a6_hearts',1,{x:q.x,y:q.top}); scene('az_art',1.2,{art:'pq_aplus',x:q.x,y:q.top-34,h:40,rise:14,pop:1}); battle.fx[g.idx].hop=.3; } sfx.select(); setMessage(girls.map(g=>g.name).join(' and ')+' already know every answer.'); } else setMessage('It didn\'t study.'); }],
     [hit+2400,'end',res(E2)+'Pencils down.']]); };
 
 // ---------- Nobody Leaves (A6 ultimate) ----------
@@ -694,14 +705,14 @@ A.detention_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),party=b2
     [1100,()=>{ (sfx.click||sfx.select)(); scene('az_taps',.9,{taps:[0,200,400],x:(B.x0+B.x1)/2,y:B.y0+10}); setMessage('Amy points at the board. Three taps. Eyes up here.'); }],[1300,()=>(sfx.click||sfx.select)()],[1500,()=>(sfx.click||sfx.select)()],
     [1700,()=>{ setMessage('The clock is about to hit 3:00. Freedom.'); (sfx.ting||sfx.ding)(); }],
     [1950,()=>{ sfx.whoosh(); setMessage('She winds it back an hour.'); }],
-    [2400,()=>{ scene('a5_big',1.1,{x:P.clock.x,y:P.clock.y+70,txt:'ONE MORE HOUR',c:SKY,sc:2}); sfx.stun(); }],
+    [2400,()=>{ scene('a5_big',1.1,{x:P.clock.x,y:P.clock.y+70,txt:'ONE MORE HOUR',c:SKY,sc:2}); scene('az_art',.9,{art:'dt_waves',x:P.clock.x,y:P.clock.y+10,w:120,pop:1}); sfx.stun(); }],
     [2450,()=>{ setMessage('Giant chalk writes their lines for them.'); for(let k=0;k<8;k++) b7Later(()=>sfx.chalk(),k*130); }],
     [3650,()=>{ scene('a5_big',.9,{st,txt:'SEE ME.',c:'#ff6a60',sc:3}); sfx.select(); }],
     ['hf',4000],
-    [4000,()=>{ sfx.thud(); sfx.bonk(); (sfx.clang||sfx.thud)(); for(const f of list) ST.jolt(f,.6); landHit(100); scene('a5_flash',.35,{a:.55}); scene('a5_blast',1.2,{B});
+    [4000,()=>{ sfx.thud(); sfx.bonk(); (sfx.clang||sfx.thud)(); for(const f of list) ST.jolt(f,.6); landHit(100); scene('a5_flash',.35,{a:.55}); scene('az_art',.7,{art:'dt_shock',x:Gp.x,y:Gp.mid,h:Math.max(120,Gp.h*1.2),pop:1}); scene('a5_blast',1.2,{B});
       scene('a5_big',1.3,{x:Gp.x,y:Gp.top-74,txt:'NOBODY LEAVES!',c:GOLD,sc:3}); setMessage('The whole board blows apart. Erasers. Chalk dust. Report cards.'); }],
     [4500,()=>{ E2.apply(); sfx.ding(); sfx.levelUp(); scene('a5_seeme',1.7,{list:list.map(f=>ST.foe(f))});
-      scene('a5_vp',1.2,{x:P.px-12,y:P.py-70,to:party.map(p=>ST.unit(p))}); for(const p of party) { const q=ST.unit(p); scene('a5_glow',1,{x:q.x,y:q.mid,c:VPB}); } }],
+      scene('a5_vp',1.2,{x:P.px-12,y:P.py-70,to:party.map(p=>ST.unit(p))}); for(const p of party) { const q=ST.unit(p); scene('a5_glow',1,{x:q.x,y:q.mid,c:VPB,art:'dt_twinkle',ry:30}); } }],
     [5100,()=>{ scene('a5_big',1.1,{st,txt:'NOBODY LEAVES.',c:CREAM,sc:2}); setMessage('Every one of them has to see her after class.'); }],
     [6400,'end',()=>res(E2)+'Nobody leaves. She brought snacks for the long haul.']]); };
 
@@ -726,14 +737,14 @@ A.burpee_blitz=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,56),k
   const st=ST.keys(fx,K),hit=leap+330,bx=Math.min(522,Math.max(54,p.x+100)),by=44;
   ST.play(E2,[
     [0,()=>{ setMessage('Amy drops right in front of it. Burpees. Real ones.'); say(m.id,'burpee_blitz'); scene('a6_count',(leap+1400)/1000,{plan:{marks,show:700,x:bx,y:by}}); scene('a6_beat',(leap+300)/1000,{plan:{beats,x:Math.max(60,Math.min(500,p.x-40)),y:Math.max(44,p.y-AH()-34)}}); }],
-    ...beats.filter(b=>b[1]==='PLANK').map(([ms])=>[ms,()=>{ sfx.thud(); scene('a6_dust',.4,{x:p.x-20,y:p.y,r:26,n:6}); }]),
+    ...beats.filter(b=>b[1]==='PLANK').map(([ms])=>[ms,()=>{ sfx.thud(); scene('a6_dust',.4,{x:p.x-20,y:p.y,r:26,n:6,art:'bb_ring'}); }]),
     ...beats.filter(b=>b[1]==='PUSH').map(([ms])=>[ms,()=>sfx.select()]),
-    ...marks.slice(0,3).map(([ms])=>[ms,()=>{ (sfx.jumpWhistle||sfx.whoosh)(); scene('a6_dust',.4,{x:p.x,y:p.y,r:22,n:6}); }]),
+    ...marks.slice(0,3).map(([ms])=>[ms,()=>{ (sfx.jumpWhistle||sfx.whoosh)(); scene('a6_dust',.4,{x:p.x,y:p.y,r:22,n:6,art:'bb_gust'}); }]),
     [1500,'Down, feet back, push-up, feet in, JUMP. She counts out loud.'],
     [leap-740,()=>{ setMessage('Number four doesn\'t come back down where it started.'); }],
-    [leap,()=>{ (sfx.jumpWhistle||sfx.whoosh)(); sfx.whoosh(); scene('a6_leap',.5,{st}); scene('a6_dust',.6,{x:p.x,y:p.y,r:34,n:10}); }],
+    [leap,()=>{ (sfx.jumpWhistle||sfx.whoosh)(); sfx.whoosh(); scene('a6_leap',.5,{st}); scene('a6_dust',.6,{x:p.x,y:p.y,r:34,n:10,art:'bb_ring'}); scene('az_art',.5,{art:'bb_speed',x:p.x,y:p.y-46,h:64,rise:14}); }],
     ['hf',hit],
-    [hit,()=>{ sfx.bonk(); sfx.ding(); ST.jolt(f,.65); landHit(100); scene('a6_big',1.1,{x:F.x,y:F.top-74,txt:'BURPEE!',c:GOLD,sc:5}); scene('a6_burst',.7,{x:F.x+F.w*.3,y:F.mid,n:10,r:56}); }],
+    [hit,()=>{ sfx.bonk(); sfx.ding(); ST.jolt(f,.65); landHit(100); scene('a6_big',1.1,{x:F.x,y:F.top-74,txt:'BURPEE!',c:GOLD,sc:5}); scene('a6_burst',.7,{x:F.x+F.w*.3,y:F.mid,n:10,r:56,art:'bb_burst'}); scene('az_art',.5,{art:'bb_spark',x:F.x-F.w*.2,y:F.mid-10,h:60,pop:1}); }],
     [leap+2000,'end',res(E2)+'She\'s not even out of breath. She says.']]); };
 
 // ---------- Hill Repeats (B2) ----------
@@ -751,7 +762,7 @@ A.hill_repeats=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m),h
     ...reps.map(([ms])=>[ms,()=>sfx.select()]),
     [hit-520,()=>{ setMessage('Over the top this time. Straight down onto them.'); sfx.whoosh(); }],
     ['hf',hit],
-    [hit,()=>{ sfx.thud(); sfx.bonk(); ST.jolt(f,.55); for(const n of nbs) ST.jolt(n,.35); landHit(100); scene('av_dust',.6,{x:F.x,y:F.base,r:60,n:12}); scene('av_big',1.2,{x:F.x,y:F.top-74,txt:'HILL REPEATS!',c:GOLD,sc:3}); }],
+    [hit,()=>{ sfx.thud(); sfx.bonk(); ST.jolt(f,.55); for(const n of nbs) ST.jolt(n,.35); landHit(100); scene('av_dust',.6,{x:F.x,y:F.base,r:60,n:12,art:'hr_trail'}); scene('az_art',.6,{art:'hr_stars',x:F.x+F.w*.3,y:F.mid-8,h:72,pop:1}); scene('av_big',1.2,{x:F.x,y:F.top-74,txt:'HILL REPEATS!',c:GOLD,sc:3}); }],
     [hit+1800,'end',res(E2)+'Three repeats and a bonus one. Of course.']]); };
 
 // ---------- Almond Milk, Please (B3) ----------
@@ -783,7 +794,7 @@ A.oat_milk_please=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=(t===
   items.push(
     [o+lt.show,()=>{ sfx.whoosh(); setMessage('Out comes her almond milk latte instead.'); }],
     ['hf',o+lt.apply],
-    [o+lt.apply,()=>{ E2.apply(); sfx.heal(); sfx.ding(); scene('av_glow',1,{x:H.x,y:H.mid,c:'#f0d8b0'}); scene('av_text',1.2,{x:H.x,y:H.top-30,txt:'AHH',c:CREAM}); hopOf(t!==m?t:null); }],
+    [o+lt.apply,()=>{ E2.apply(); sfx.heal(); sfx.ding(); scene('av_glow',1,{x:H.x,y:H.mid,c:'#f0d8b0',art:'om_ring',ry:44}); scene('az_art',1.1,{art:'om_sparkle',x:H.x+H.w*.3,y:H.top+6,h:36,rise:8,pop:1}); scene('av_text',1.2,{x:H.x,y:H.top-30,txt:'AHH',c:CREAM}); hopOf(t!==m?t:null); }],
     [end,'end',kindLine(t,'Dairy-free and delicious. She was right.')]);
   ST.play(E2,items); };
 
@@ -800,11 +811,11 @@ A.false_start=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,70),g=
     [1500,()=>{ sfx.select(); setMessage('SET. Her whistle goes in. Nobody move.'); }],
     [1700,'It leans. Early.'],
     [2000,()=>{ sfx.whoosh(); setMessage('It GOES. Before the whistle.'); }],
-    [bang,()=>{ sfx.whistle(); scene('a6_flash',.2,{a:.4}); scene('a6_big',1.2,{x:F.x,y:F.top-80,txt:'FALSE START!',c:GOLD,sc:4}); setMessage('TWEET. FALSE START. Amy is already marching over.'); }],
+    [bang,()=>{ sfx.whistle(); scene('a6_flash',.2,{a:.4}); scene('az_art',.9,{art:'fs_waves',st,dx:34,dy:0,w:78,pop:1}); scene('a6_big',1.2,{x:F.x,y:F.top-80,txt:'FALSE START!',c:GOLD,sc:4}); setMessage('TWEET. FALSE START. Amy is already marching over.'); }],
     [2900,()=>{ sfx.select(); setMessage('She points it back.'); }],
     [3100,()=>{ sfx.whoosh(); setMessage('And marches it all the way back behind the line.'); }],
     ['hf',plan.slam],
-    [plan.slam,()=>{ sfx.thud(); sfx.bonk(); ST.jolt(f,.6); landHit(100); scene('a6_dust',.6,{x:F.x-F.w*.4,y:F.base,r:40,n:10}); scene('a6_big',1,{x:F.x,y:F.top-70,txt:'BACK IN THE BLOCKS',c:CREAM,sc:2}); }],
+    [plan.slam,()=>{ sfx.thud(); sfx.bonk(); ST.jolt(f,.6); landHit(100); scene('a6_dust',.6,{x:F.x-F.w*.4,y:F.base,r:40,n:10,art:'fs_puff'}); scene('az_art',.5,{art:'fs_burst',x:F.x-F.w*.2,y:F.mid,h:84,pop:1}); scene('a6_big',1,{x:F.x,y:F.top-70,txt:'BACK IN THE BLOCKS',c:CREAM,sc:2}); }],
     [3800,()=>{ sfx.ding(); setMessage('She points at the line. Again. From the blocks.'); }],
     [4800,'Try again. From the blocks. It won\'t.'],
     [5900,'end',res(E2)+'The enemy is sent back to its starting block.']]); };
@@ -831,7 +842,7 @@ A.negative_split=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LiveP
     [fast,()=>{ sfx.whoosh(); sfx.run&&sfx.run(); scene('a6_speed',(LAP2+200)/1000,{plan:{st,y0:Math.max(40,Math.min(...U.map(q=>q.top))-20),y1:cy+ry}}); scene('a6_ghost',(LAP2+300)/1000,{st,trail,every:70,n:6,life:380});
       if(!foe) who.filter(u=>u!==m).forEach((p,k)=>danceB(p,(LAP2+200)/1000,(q,tt)=>({dx:Math.sin(tt*20+k)*2,dy:-Math.abs(Math.sin(tt*14+k))*8,frame:Math.floor(tt*10+k)%2?'run':'idle'}))); setMessage('Lap two. Flat out. The whole family picks it up with her.'); }],
     ['hf',hit],
-    [hit,()=>{ E2.apply(); sfx.heal(); sfx.levelUp(); scene('a6_flash',.2,{a:.3,c:MINT}); scene('a6_big',1.3,{x:cx,y:Math.max(60,cy-ry-AH()-50),txt:'NEGATIVE SPLIT!',c:MINT,sc:3}); for(const q of who) { const P=ST.unit(q); scene('a6_glow',.9,{x:P.x,y:P.mid,c:'#ffb45a'}); hopOf(q!==m?q:null); } }],
+    [hit,()=>{ E2.apply(); sfx.heal(); sfx.levelUp(); scene('a6_flash',.2,{a:.3,c:MINT}); scene('a6_big',1.3,{x:cx,y:Math.max(60,cy-ry-AH()-50),txt:'NEGATIVE SPLIT!',c:MINT,sc:3}); for(const q of who) { const P=ST.unit(q); scene('a6_glow',.9,{x:P.x,y:P.mid,c:'#ffb45a',art:'ns_spark',ry:50}); scene('a6_ring',.9,{x:P.x,y:P.base-6,r:40,art:'ns_ring'}); hopOf(q!==m?q:null); } scene('az_art',1.2,{art:'ns_arrows',x:cx,y:Math.max(24,Math.max(60,cy-ry-AH()-50)-40),w:84,pop:1,rise:6}); }],
     [hit+500,'3:58. Fourteen seconds faster. She wrote it down already.'],
     [hit+1800,'end',foe?kindLine(foe):'Faster in the second half. The party picks up the pace.']]); };
 
@@ -868,7 +879,7 @@ A.marathon_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),party=b2L
     ...P.pins.map(b=>[Math.round(b.t),()=>{ sfx.bonk(); }]),
     ['hf',hit],
     [hit,()=>{ sfx.thud(); for(const f of list) ST.jolt(f,.6); landHit(100); scene('a5_flash',.3,{a:.4}); }],
-    [tape,()=>{ sfx.fanfare(); (sfx.cheer||sfx.ding)(); sfx.bonk(); scene('a5_confetti',1.6,{ax,gy:ly}); scene('a5_flash',.3,{a:.4,c:YB});
+    [tape,()=>{ sfx.fanfare(); (sfx.cheer||sfx.ding)(); sfx.bonk(); scene('a5_confetti',1.6,{ax,gy:ly}); scene('az_art',1.6,{art:'mu_confetti',x:ax,y:ly-130,w:150,rise:-40,pop:1,fa:.5}); scene('a5_flash',.3,{a:.4,c:YB});
       scene('a5_big',1.4,{x:Math.max(140,ax+60),y:Gp.top-74,txt:'BOSTON QUALIFIER!',c:YB,sc:3}); setMessage('Amy breaks the tape with her chest. Boston Qualifier!'); scene('a6_bq',1.6,{x:ax,y:BARB+74,delay:.4}); }],
     [3700,()=>{ sfx.ding(); setMessage('2:59:58. Under three hours. A medal, and she did the math already.'); }],
     [3800,()=>{ setMessage('Everybody jogs it out. Hands on heads. Breathe.'); }],
