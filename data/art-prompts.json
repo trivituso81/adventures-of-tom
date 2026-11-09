@@ -15507,8 +15507,16 @@
    "group": "Dungeon finds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/prop-find-ch10-clock-v1.png",
+     "date": "2026-11-09",
+     "from": "v2",
+     "at": 1794255207896
+    }
+   ],
    "rejects": [],
    "id": "prop-find-ch10-clock",
    "tab": "Props",
