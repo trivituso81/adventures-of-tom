@@ -1,3 +1,8 @@
+## 2026-11-09 (grandswalk1): Deedee and Boppy's house walk map from Area Builder export (tag grandswalk1)
+- Tom's export of the grands interior (chapter 20 view, system_hash 9a0b6b50): 14 tiles opened or blocked in the `plateMask`, no door or exit edits. Installed with `tools/apply_walkmap.py`; only the grands mask rows 7 and 11 in `data/maps-le.js` changed.
+- Not applied: (2,6) is walkable in the export but a cookie-counter object covers it, so the installer leaves it blocked. Opening it needs the object moved or shrunk.
+- `tools/reach_test.py grands`: 0 fails. Mask overlay looked at (`tools/shots/mask-grands.png`). `tools/smoke.py` FAILS [].
+- Tags: `data/maps-le.js` and the build stamp in `engine/main.js` moved to grandswalk1.
 ## 2026-11-09 (dcobj1): Director's Cut object sheets entered in the Art Library (no game change)
 - Two new draft entries in `data/art-prompts.json`: `tombo-ff1-dc-objects` (Pottery Lesson, 7 objects) and `tombo-ff2-dc-objects` (Breakfast in Bed, 7 objects). Built from `tools/art-library/tombo-split/dc-ff.js` by `finishEntries(row, true)`; appended as text so every other entry is byte for byte unchanged. `make-prompts.js` was not run. ff3 DC has no object sheet (its beat has no props).
 - `node tools/art-library/validate.js` OK (644 entries). Nothing generated or installed. `tools/art-library/review_test.py` fails the same way on main without this change (no entry to pick), not caused by it.
