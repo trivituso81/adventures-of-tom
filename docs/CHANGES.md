@@ -1,3 +1,10 @@
+## 2026-11-09 (jojobake1): the Jojo bake no longer writes the old battle atlas
+- `tools/sprite-bake/bake_jojo.py` now bakes the overworld only (art/chars/jojo-ow.webp and the overworld part of data/jojo-hires.js). The old battle section is removed: the battle slice, the battle head boxes, the battle walk frames (w_right_*), the battle contact sheet and the bt pack. The sheet's two battle rows are read only so the figure count matches, then dropped.
+- The battle atlas entry in data/jojo-hires.js (atlas.bt and meta.bt) now comes from `bake_jojo_stance.py` (new `bt_rects()` and `bt_meta()`), so a rerun keeps the stance install. The default OW_K is now 6, the value the committed overworld was baked at.
+- Proof: the rerun writes data/jojo-hires.js, art/chars/jojo-ow.webp and art/chars/jojo-bt.webp byte for byte the same as the committed files; `bake_jojo_stance.py` reproduces art/chars/jojo-bt.webp byte for byte. No game file changes, so no tag moved.
+- Fixed `tools/jojo_test.py`: the battle-frames check named the retired poses (b_run and so on); it now names the stance poses the game uses.
+- Table note: `claude/approved-install-table-11-08.md` names `art/chars/jojo-battle.webp`. That file does not exist; the install uses `art/chars/jojo-bt.webp` (kept).
+- Tests: tag_check ok, `tools/jojo_test.py` FAILS [], `IDS=tnb python3 tools/smoke.py` FAILS [], `kit_test tnb --only=round_with_jojo --speed2` FAILS [].
 ## 2026-11-09 (jojostance1): Jojo's battle poses are her approved stance sheets, as drawn
 - Tom (09:02, "Sure whatever I don't care"): install the approved Jojo stance sheets as drawn. The battle look is lavender shirt, dark purple pants, pink bag. The overworld and dialogue Jojo stay blue (no change to art/chars/jojo-ow.webp or the overworld part of data/jojo-hires.js).
 - New `tools/sprite-bake/bake_jojo_stance.py` cuts the 14 frames from `art/raw/characters/jojo-battle-stance-1-v1.png` (4 x 2) and `-2-v1.png` (3 x 2) with battle_sheet_frames' cutter. One uniform scale so the ready pose stands 133 rows (as before). Output: `art/chars/jojo-bt.webp`, 276 x 340 cells.

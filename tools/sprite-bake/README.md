@@ -106,7 +106,7 @@ python3 tools/sprite-bake/hires_install.py /tmp/hires 1.5 amy-battle amy-ko
 | bake_olivia_battle.py (core only; does not reproduce repo files), bake_olivia_ab.py (abilities, ability_frames_olivia.py), bake_olivia_fx.py (props) | 1.5 | olivia-battle, olivia-ko, olivia-ab, art/props/olivia |
 | bake_tomride.py | 1.5 | tomride-battle, tomride-rose |
 | bake_boppy.py, bake_boppy_extra.py | 1.3333333333333333 (boppy-ko: 1.5) | boppy-battle, boppy-extra, boppy-fish, boppy-stock, boppy-pepper, boppy-ko |
-| bake_justin_battle.py (core only), bake_justin_ab.py (abilities, ability_frames_justin.py), bake_justin_fx.py (props), bake_jojo.py, bake_kids.py | 1 (sharpen only) | justin-*, jojo-bt; copy kids.webp by hand (its data file has its own format) |
+| bake_justin_battle.py (core only), bake_justin_ab.py (abilities, ability_frames_justin.py), bake_justin_fx.py (props), bake_jojo.py (overworld; battle atlas is bake_jojo_stance.py), bake_kids.py | 1 (sharpen only) | justin-*, jojo-ow (bake_jojo_stance: jojo-bt); copy kids.webp by hand (its data file has its own format) |
 
 hires.py prints, per sheet, how much it had to copy back from the small sheet (edits painted after scaling). "NOT tracked" means it found no larger source and skipped the sheet. Then bump `ART_V` (`python3 tools/art-library/bump_tags.py <TAG>`), smoke, and look at a fight.
 

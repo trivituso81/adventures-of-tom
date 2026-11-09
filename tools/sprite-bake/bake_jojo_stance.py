@@ -19,6 +19,15 @@ def cut_all():
         out.update(bsf._cut(path, cols, rows, names, ground=bsf._border_ground(path)))
     return out
 
+def bt_rects():
+    """Rect of every battle pose in art/chars/jojo-bt.webp, in the order the sheets are cut (the order main() pastes them)."""
+    names = ['b_' + nm for _, _, _, ns in bsf.SHEETS for nm in ns]
+    return {n: [(i % 7) * CW, (i // 7) * CH, CW, CH] for i, n in enumerate(names)}
+
+def bt_meta():
+    """Cell size in game pixels (cell / K) and the standing height, as data/jojo-hires.js records them."""
+    return {'w': CW // K, 'h': CH // K, 'stand': STAND}
+
 def main():
     frames = cut_all()
     s = (STAND * K) / frames['b_ready'].height          # ready pose stands 133 rows at k=2 (266 px)

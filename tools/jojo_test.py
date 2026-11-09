@@ -38,7 +38,7 @@ with sync_playwright() as pw:
     check('chapter 3: Jojo is in the loft',pg.evaluate("()=>worlds.lofts.npcs.some(n=>n.name==='Jojo')"))
     check('chapter 3: Jojo is only in the loft',pg.evaluate("()=>Object.entries(worlds).filter(([id,w])=>w.npcs.some(n=>n.name==='Jojo')).map(e=>e[0]).join()==='lofts'"))
     check('Jojo is in the loft',pg.evaluate("()=>currentMap.npcs.some(n=>n.name==='Jojo')"))
-    check('battle frames loaded',pg.evaluate("()=>JOJO_BT.ready()&&['b_run','b_xstep','b_reach','b_release','b_follow','b_celeb1','b_celeb2','b_high'].every(n=>JOJO_BT.has(n))"))
+    check('battle frames loaded',pg.evaluate("()=>JOJO_BT.ready()&&['b_ready','b_breath','b_lunge','b_spread','b_cheer','b_power'].every(n=>JOJO_BT.has(n))"))
     # freeze everyone, put Tom next to Jojo, talk
     pg.evaluate("()=>{ for(const n of currentMap.npcs){ n.wander=false; n.moveTimer=1e9; n.move=null; n.path=[]; n.roam=false; } const j=currentMap.npcs.find(n=>n.name==='Jojo'); j.x=8; j.y=6; j.facing='left'; player.x=j.x-1; player.y=j.y; player.facing='right'; player.move=null; camera.snap=true; }"); pg.wait_for_timeout(600)
     shot(pg,'standing')
