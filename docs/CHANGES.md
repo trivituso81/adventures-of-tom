@@ -5,6 +5,11 @@
 - Not changed: the stacked GRUMBLED popups at the end are the shared status popup for each monster piled on the pier (not Boppy 1 code). Boppy 1's Director's Cut is still all old frames.
 - Tests: tombo_test boppy1 portrait and landscape looked at, node --check, tag_check.
 
+## 2026-11-09 (title2): Art Library Title entries use current art and the Final Fantasy IX style (json and Art Library module only, no tag)
+- Tom: the Title section was still using old art. Fact: the welcome entries attached the old `art/welcome.webp` (plaza with a title sign and blurred box) and the app icon entry attached `icon-v7.png`; Tom's 11-09 reject notes on all three said "Final Fantasy 9 art".
+- `title-welcome-portrait` and `title-welcome-landscape`: now attach only `art/town.webp` (the current painted Square) as the place reference; scene names the Square's bakery, library and dome; style block `FF9ST` (Final Fantasy IX background art). `title-app-icon`: attaches `icon-v8.png` (the live icon) plus the Tom, Grace and Rose hero pictures, Rose on shoulders in pink gingham, Grace beside Tom; Final Fantasy IX style. All three back to draft (prior reject notes kept). `title-logo` is approved and unchanged.
+- validate.js OK. Edited the module and spliced the same text into data/art-prompts.json by text (make-prompts.js not run).
+
 ## 2026-11-09 (retired1): Voice Library deletes leftover phone clips for purged lines; Olivia's battle lines listed (no tag)
 
 - Tom (14:53): "If the lines are not used they should not be in the voice library." Fact: the library list (`data/voice-index.json`) never held the purged lines, but the phone's saved clips (IndexedDB `aot-local-clips`) still did, and they rode along in exports (local-clips-export_16.json had 73 rows with no listed line).
