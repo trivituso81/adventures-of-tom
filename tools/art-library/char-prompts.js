@@ -1889,10 +1889,12 @@ for (const id of Object.keys(FX)) {
 // Emotion redo (Tom 2026-11-09, audit: only Boppy and Nara match their heroes; Justin close): prompt v2 in prompts/char-emotion-sheet.txt
 // (hero head-to-body count, ink hatching, hero colors). These entries went back to draft in data/art-prompts.json; earlier versions stay.
 const EMOTION_REDO = ['tom', 'tnb', 'deedee', 'grace', 'olivia', 'amy', 'rose', 'justin'];
+// Tom and Amy (Tom 2026-11-09): the game draws the walk, so the reference is the front standing cell of the walk sheet and the prompt is the short walk-style one.
+const WALK_EMO = ['tom', 'amy'];
 const EMOTION_CAST = { tom: 'Tom', tnb: 'TNB', grace: 'Grace', rose: 'Rose', amy: 'Amy', justin: 'Justin', deedee: 'Deedee', boppy: 'Boppy', ellie: 'Aunt Ellie', olivia: 'Olivia', nara: 'Nara' };
 for (const [id, who] of Object.entries(EMOTION_CAST)) {
   const dog = id === 'nara';   // Nara: her own prompt, dog body language (Tom 2026-11-06 00:09)
-  entries.push({ id: id + '-emotions', tab: 'Characters', group: who, title: who + (dog ? ' emotion sheet: 8 feelings, dog body language' : ' emotion sheet: 8 feelings, full body') + ' (happy, loving, sad, angry, scared, surprised, proud, unimpressed)' + (EMOTION_REDO.includes(id) ? '; redo: match the hero head size, colors and hatch texture' : ''), ar: '2:1', refs: [R + id + '-hero-ref-v1.png'], prompt: P(dog ? 'dog-emotion-sheet.txt' : 'char-emotion-sheet.txt') });
+  entries.push({ id: id + '-emotions', tab: 'Characters', group: who, title: who + (dog ? ' emotion sheet: 8 feelings, dog body language' : ' emotion sheet: 8 feelings, full body') + ' (happy, loving, sad, angry, scared, surprised, proud, unimpressed)' + (WALK_EMO.includes(id) ? '; redo: from the walk-sheet standing picture, short prompt' : EMOTION_REDO.includes(id) ? '; redo: match the hero head size, colors and hatch texture' : ''), ar: '2:1', refs: [R + id + (WALK_EMO.includes(id) ? '-stand-front-v1.png' : '-hero-ref-v1.png')], prompt: P(dog ? 'dog-emotion-sheet.txt' : WALK_EMO.includes(id) ? 'char-emotion-sheet-walk.txt' : 'char-emotion-sheet.txt') });
 }
 entries.push(...require('./jojo-prompts.js').entries);   // Jojo hero, walk, Frisbee Golf frames (Tom 2026-11-06 11:19)
 entries.push(...require('./amy-prompts.js').entries);   // Amy ability and object sheets, 14 moves (Tom 2026-11-06 12:19)
