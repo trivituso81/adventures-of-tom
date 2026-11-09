@@ -1,3 +1,9 @@
+## 2026-11-09 (emopause1): full-body mood poses paused for the 8 characters whose emotion sheets are being redone (tag emopause1)
+- Tom (12:22): "the emotional frames are still larger than the standard pose / hero pose / walking pose."
+- Fact (measured in game rows against each overworld `down_stand`): the mood frames are already as tall or shorter (Tom 36 to 39 rows vs 42), but the painted emotion sheets have a different build: head about a third of the height, broad torso, short legs. Tom's sad frame is as wide as his stand at 94 percent of the height; angry and surprised are 40 to 60 percent wider. A resize matches only one measure: height (emo15, still reads bigger) or bulk (then the figure is about a quarter shorter). Second miss on the same thing, so no third resize (stop-loss).
+- Change: `EMO_POSE_PAUSED` in engine/emotions.js (tom, tnb, grace, rose, amy, deedee, olivia, justin). Those characters stay in their standing frame during a mood line; the dialogue face still changes. Boppy, Aunt Ellie and Nara (approved sheets) keep their mood poses. Remove an id when its redone `<id>-emotions` sheet is approved and installed (claude/next-addendum-emoredo.md). Their `*emo-story.webp` atlases stay until that install replaces them.
+- Tests: ch1Theft scene frames (faces change, Tom and Deedee stand, Boppy poses at normal size), tag_check ok, smoke FAILS [].
+
 ## 2026-11-09 (npcwalk3): the six approved NPC walk entries also use the hero-only prompt (Art Library json only, no tag)
 - Tom regenerated Gus and the picture still came from the old prompt: the refresh in npcwalk2 skipped approved entries, so Gus kept the Justin layout picture. All 52 `npc-walk-<id>` entries now carry the hero-only prompt (`--refresh` now includes approved entries; status and versions untouched). Gus v2 (made with the old prompt) is not judged against the new prompt.
 
