@@ -13416,8 +13416,16 @@
    "group": "Dungeon finds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-find-ch09-v2.png",
+     "date": "2026-11-09",
+     "from": "v1",
+     "at": 1794247948436
+    }
+   ],
    "rejects": [],
    "id": "prop-find-ch09",
    "tab": "Props",
