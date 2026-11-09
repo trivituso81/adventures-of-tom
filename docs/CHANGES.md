@@ -1,6 +1,9 @@
 ## 2026-11-08 (voice14): Voice export 14 merged, Mirrorball voiced
 - Tom's export 14 (597 clips) is already on main except 17 new `mirrorball` dialogue clips (dialog-ch28): merged. The other 540 clips matched what is installed byte for byte. 38 battle takes for lines the game does not play were left out (same set as export 13, see docs/PURGED_VOICE.md).
 - Purged the 17 old `bigone` stand-in clips for The Mirrorball (ch9, ch26, ch27). Mirrorball is now voiced by its own clips. Tags voice14.
+## 2026-11-08 (npchero): every NPC hero prompt is also the dialog portrait source (Tom 00:01)
+- The 56 `npc-photo-*` entries are now titled "hero picture ... (also the source of the dialog portrait)" and carry a PORTRAIT USE paragraph: head large and near the top, whole face visible. Five poses that put a hand or prop over the face were moved to chest height (Page, Daisy, Ryan, Skye, Moss).
+- NOT built yet (no approved NPC hero exists to crop): the baker that crops the head from an approved hero into `portraits/<id>.png` and the `DIALOG_PORTRAIT_IDS` entries in engine/overworld.js. Do it when the first NPC hero is approved; pilot on that one, look at the crop, then batch.
 
 ## 2026-11-08 (ff9x): NPC prompts repeat "Final Fantasy IX" and "hand drawn" (Tom 23:55). Each npc-photo-* prompt keeps the verbatim template, then the details block labels every line with the style words and ends with a STYLE REMINDER paragraph. About 12 mentions of Final Fantasy IX and 11 of hand drawn per prompt.
 

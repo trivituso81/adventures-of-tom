@@ -48,7 +48,7 @@ const cw = (h, t) => `${near(h, t)} (${h})`;
 // kind: 'adult' | 'child'. sex: m | f. Heights in feet and inches. look = palette key. over = optional palette override.
 const N = {
   pip: { name: 'Pip', look: 'pip', sex: 'm', kind: 'child', age: 9, ft: `4'1"`, role: "one of Grace's friends from the Square, about her age", acc: 'holding a small smooth grey pet rock in both palms, a proud little grin' },
-  moss: { name: 'Moss', look: 'moss', sex: 'm', kind: 'child', age: 9, ft: `4'3"`, role: "one of Grace's friends from the Square, about her age", acc: 'head tilted back as if asking a tree for directions, one hand holding a small green leaf' },
+  moss: { name: 'Moss', look: 'moss', sex: 'm', kind: 'child', age: 9, ft: `4'3"`, role: "one of Grace's friends from the Square, about her age", acc: 'head tilted a little to one side, curious, one hand holding a small green leaf' },
   dot: { name: 'Dot', look: 'dot', sex: 'f', kind: 'child', age: 9, ft: `4'0"`, role: "one of Grace's friends from the Square, about her age", acc: 'counting on her fingers, a thoughtful half smile' },
   gus: { name: 'Gus', look: 'gus', sex: 'm', kind: 'adult', age: 72, ft: `5'6"`, role: 'a retired Rivituso Row neighbour who loves sitting', acc: 'a small folding camp stool tucked under one arm, a slightly stooped, easy posture' },
   bean: { name: 'Bean', look: 'bean', sex: 'f', kind: 'adult', age: 34, ft: `5'5"`, role: 'a cheerful Rivituso Row wanderer who is never quite lost', acc: 'a rolled-up paper map in one hand, a puzzled but happy smile' },
@@ -59,7 +59,7 @@ const N = {
   ike: { name: 'Grandpa Ike', look: 'ike', sex: 'm', kind: 'adult', age: 78, ft: `5'5"`, role: "a grandfather visiting the school for his grandson", acc: 'a wooden cane in one hand, a proud, nostalgic smile, shoulders a little rounded' },
   halverson: { name: 'Mr. Halverson', look: 'halverson', sex: 'm', kind: 'adult', age: 41, ft: `5'10"`, role: 'a fourth grade teacher', acc: 'a coffee mug in one hand and a lanyard around his neck, a tired but wry look' },
   bun: { name: 'Bun', look: 'bun', sex: 'f', kind: 'adult', age: 36, ft: `5'4"`, role: 'the baker at Crumb Bakery', acc: 'holding a fresh loaf of bread in both hands, a warm, floury smile' },
-  page: { name: 'Page', look: 'page', sex: 'f', kind: 'adult', age: 38, ft: `5'6"`, role: 'the librarian at The Hush Library', acc: 'a book held to her chest and one finger raised to her lips, asking for quiet', glasses: true },
+  page: { name: 'Page', look: 'page', sex: 'f', kind: 'adult', age: 38, ft: `5'6"`, role: 'the librarian at The Hush Library', acc: 'a book held to her chest and one finger raised at chest height, asking for quiet with a gentle shushing look', glasses: true },
   fern: { name: 'Fern', look: 'fern', sex: 'f', kind: 'adult', age: 45, ft: `5'5"`, role: 'the gardener at Sprout House', acc: 'a small metal watering can in one hand, soil on her gardening gloves' },
   kit: { name: 'Kit', look: 'kit', sex: 'f', kind: 'adult', age: 29, ft: `5'7"`, role: 'the mail carrier at Snail Mail', acc: 'a brown paper parcel tied with string held under one arm, an unhurried, cheerful stance' },
   oolong: { name: 'Oolong', look: 'oolong', sex: 'f', kind: 'adult', age: 68, ft: `5'2"`, role: 'the owner of Kettle Cottage tea shop', acc: 'a small porcelain teacup and saucer held in both hands, a gossipy, twinkling smile' },
@@ -68,7 +68,7 @@ const N = {
   nickel: { name: 'Nickel', look: 'nickel', sex: 'f', kind: 'adult', age: 50, ft: `5'6"`, role: "the shopkeeper of Nickel's, Penny's partner", acc: 'one hand resting on a shop apron pocket, a confident, businesslike smile' },
   sal: { name: 'Sal', look: 'sal', sex: 'm', kind: 'adult', age: 50, ft: `5'8"`, role: 'the driver of the Long Island Taxi, cab seven', acc: 'a set of cab keys dangling from one finger, a relaxed, chatty look' },
   sol: { name: 'Sol', look: 'sol', sex: 'm', kind: 'adult', age: 52, ft: `5'7"`, role: "Sal's cousin, the one driver of Angel City Cab Co.", acc: 'a pair of cab keys in one hand, a dry, knowing smile, family resemblance to Sal' },
-  skye: { name: 'Skye', look: 'skye', sex: 'f', kind: 'adult', age: 24, ft: `5'6"`, role: 'a Downtown LA loft resident who films videos', acc: 'holding a phone out in front of her at arm length as if filming herself, a bright, camera-ready smile' },
+  skye: { name: 'Skye', look: 'skye', sex: 'f', kind: 'adult', age: 24, ft: `5'6"`, role: 'a Downtown LA loft resident who films videos', acc: 'holding a phone low at her chest as if about to film, a bright, camera-ready smile' },
   chet: { name: 'Chet', look: 'chet', sex: 'm', kind: 'adult', age: 30, ft: `5'11"`, role: 'an actor who works as a car valet at a tower', acc: 'a set of car keys held up in one hand, a polished, hopeful, slightly dramatic pose' },
   wes: { name: 'Wes', look: 'wes', sex: 'm', kind: 'adult', age: 33, ft: `5'10"`, role: 'a screenwriter who lives in the lofts', acc: 'a laptop tucked under one arm and a pencil behind his ear, a distracted, thoughtful look' },
   boomie: { name: 'Boomie', look: 'boomie', sex: 'f', kind: 'adult', age: 44, ft: `5'6"`, role: "Tom's friend from Downtown LA, a gospel and soul singer about to go on tour (a human woman)", acc: 'one hand pressed to her heart and the other open wide, mid-song, a huge, kind smile', over: { skin: '#6a4030', hair: '#2a2220', shirt: '#e97c2e', pants: '#2a5286', hat: null } },
@@ -96,13 +96,13 @@ const N = {
   yesenia: { name: 'Yesenia', look: 'yesenia', sex: 'f', kind: 'adult', age: 38, ft: `5'5"`, role: 'a member of the Alvarez household, Tony\'s partner and a busy mother', acc: 'one hand held up like a stop sign and the other on her hip, an alert, frazzled look' },
   claudia: { name: 'Claudia', look: 'claudia', sex: 'f', kind: 'adult', age: 27, ft: `5'4"`, role: 'a night shift nurse in the Alvarez household', acc: 'a stethoscope around her neck and a sleepy, kind smile, holding a travel pillow under one arm' },
   kevin: { name: 'Kevin', look: 'kevin', sex: 'm', kind: 'child', age: 11, ft: `4'8"`, role: 'a boy in the Alvarez household', acc: 'a sports water bottle in one hand and a comically resigned shrug' },
-  daisy: { name: 'Daisy', look: 'daisy', sex: 'f', kind: 'child', age: 13, ft: `5'0"`, role: 'a girl in the Alvarez household who is making a documentary', acc: 'a small handheld video camera held up to one eye, a mischievous, serious-filmmaker smile' },
+  daisy: { name: 'Daisy', look: 'daisy', sex: 'f', kind: 'child', age: 13, ft: `5'0"`, role: 'a girl in the Alvarez household who is making a documentary', acc: 'a small handheld video camera held low at her chest, a mischievous, serious-filmmaker smile' },
   mateo: { name: 'Mateo', look: 'mateo', sex: 'm', kind: 'child', age: 5, ft: `3'6"`, role: 'a little boy in the Alvarez household who loves trucks', acc: 'a toy dump truck held up high in both hands, mouth open in a delighted shout' },
   sofi: { name: 'Sofi', look: 'sofi', sex: 'f', kind: 'child', age: 4, ft: `3'3"`, role: 'the littlest girl in the Alvarez household, who pretends to be a dinosaur', acc: 'both hands curled like little dinosaur claws, a fierce, giggly roar face' },
   jordan: { name: 'Jordan', look: 'jordan', sex: 'm', kind: 'adult', age: 36, ft: `5'10"`, role: 'a house renovator who lives with Sam', acc: 'a tape measure clipped to his belt and a small hammer in one hand, a proud, handy stance' },
   sam: { name: 'Sam', look: 'sam', sex: 'f', kind: 'adult', age: 34, ft: `5'7"`, role: 'a house renovator who lives with Jordan and posts everything online', acc: 'a phone held up in one hand, a quick, delighted smile' },
   dakota: { name: 'Dakota', look: 'dakota', sex: 'f', kind: 'adult', age: 36, ft: `5'8"`, role: 'a homeowner restoring a 1912 house with Ryan', acc: 'a paintbrush held in one hand, a fond, determined smile' },
-  ryan: { name: 'Ryan', look: 'ryan', sex: 'm', kind: 'adult', age: 38, ft: `5'11"`, role: 'a new father and homeowner, Dakota\'s partner', acc: 'one finger pressed to his lips to ask for quiet, a baby monitor in the other hand, exhausted but happy' },
+  ryan: { name: 'Ryan', look: 'ryan', sex: 'm', kind: 'adult', age: 38, ft: `5'11"`, role: 'a new father and homeowner, Dakota\'s partner', acc: 'one finger raised at chest height to ask for quiet, a baby monitor in the other hand, exhausted but happy' },
 };
 
 const BATCHES = [
@@ -230,10 +230,12 @@ function details(c) {
 Hand drawn Final Fantasy IX appearance: skin ${cw(p.skin, SKIN)}. ${hair[0].toUpperCase() + hair.slice(1)}. Outfit: a top in ${cw(p.shirt, CLOTH)}, ${pants}, sturdy simple shoes; ${hat}. ${glasses}${old}
 Hand drawn Final Fantasy IX personality and expression: ${c.acc}.
 
+PORTRAIT USE: this full body picture is also cropped to make ${c.name}'s dialog portrait. Keep the head large and near the top of the picture, and keep the whole face, both eyes and the mouth fully visible, with no hand, prop or hat brim covering any part of the face.
+
 ${FF9_REMINDER(c)}`;
 }
 for (const k of Object.keys(N)) {
   const c = N[k], la = GROUPS.find(g => g.keys.includes(k)).la;
-  entries.push({ id: 'npc-photo-' + k, tab: 'NPCs', group: la ? 'Los Angeles people' : 'Long Island people', title: `${c.name}: photo to character, Final Fantasy IX style, ${c.ft}`, ar: '2:3', refs: [], prompt: FF9_TEMPLATE + '\n\n' + details(c) });
+  entries.push({ id: 'npc-photo-' + k, tab: 'NPCs', group: la ? 'Los Angeles people' : 'Long Island people', title: `${c.name}: hero picture, Final Fantasy IX style, ${c.ft} (also the source of the dialog portrait)`, ar: '2:3', refs: [], prompt: FF9_TEMPLATE + '\n\n' + details(c) });
 }
 module.exports = { APPROVED_TAKE, entries, N, BATCHES, GROUPS, PAL, SKIN, HAIR, CLOTH, cw, REF_KEY, REF_CHART, styleRule, castFor, castList, range, lookOf, ordinal };
