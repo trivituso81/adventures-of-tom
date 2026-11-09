@@ -103,11 +103,14 @@ function twResolve(wx,wy) {
 
 // ---------- Planning ----------
 function twAdjacent(ax,ay,bx,by) { return Math.abs(ax-bx)+Math.abs(ay-by)===1; }
+// A person whose personal-space tiles (right below them, engine/battle-draw.js) Tom cannot stand on is talked to from below them.
+// Returns the talking distance (2 or more), or 0 when Tom can stand right below them.
+function twAcross(n) { let d=1; while(d<6&&personalSpaceNpc(currentMap,n.x,n.y+d)===n) d++; return d>1?d:0; }
 // Tiles to stand on for an intent (before the flood).
 function twStandTiles(I) {
   const out=[];
   const around=(cx,cy)=>{ for(const nm of directionNames) { const d=DIR[nm],x=cx+d.x,y=cy+d.y; if((x===player.x&&y===player.y)||twPassable(x,y,null)) out.push({x,y}); } };
-  if(I.kind==='npc') around(I.npc.x,I.npc.y);
+  if(I.kind==='npc') { around(I.npc.x,I.npc.y); if(twAcross(I.npc)) { const x=I.npc.x,y=I.npc.y+twAcross(I.npc); if((x===player.x&&y===player.y)||twPassable(x,y,null)) out.push({x,y}); } }
   else if(I.kind==='object') { const o=I.obj; for(let y=o.y;y<o.y+o.h;y++) for(let x=o.x;x<o.x+o.w;x++) around(x,y); }
   return out;
 }
@@ -159,7 +162,7 @@ function twStep(dt) {
   } else if(I.kind==='npc') {
     const n=I.npc;
     if(n.hidden||!(currentMap.npcs.includes(n)||followers.includes(n))) { TW.I=null; return; }
-    if(twAdjacent(player.x,player.y,n.x,n.y)) {
+    if(twAdjacent(player.x,player.y,n.x,n.y)||(player.x===n.x&&twAcross(n)&&player.y===n.y+twAcross(n))) {
       if(n.move||n.held) { I.hold=.1; return; }   // let them finish their step
       return twInteract(directionTo(n.x-player.x,n.y-player.y));
     }

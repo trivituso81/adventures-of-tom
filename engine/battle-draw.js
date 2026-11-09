@@ -456,7 +456,60 @@ function canOccupy(map,x,y,who) {
   for(const n of map.npcs)
     if(n!==who&&occupied(n,x,y)&&!restingPassable(n,who)) return false;
 
+  if(who.isPlayer&&personalSpaceNpc(map,x,y)) return false;
+
   return true;
+}
+// Personal space (Tom, 2026-11-09 "too much overlap"): people are drawn 2 to 5 tiles tall, so Tom standing right below a person
+// covered their whole body. Tom may not step onto the tiles directly below a person (not monsters, the dog, followers or hidden
+// actors): enough tiles that his head stays below their waist (psGap: 1 outdoors, 2 in most painted rooms). A and
+// tap-to-talk reach them from there (facingTarget, engine/tapwalk.js). Off during cutscenes so scripted walks are never
+// blocked, and shortened where the tiles are the only way through (psAllowed), so no route is ever walled off.
+function personalSpaceNpc(map,x,y) {
+  if(map!==currentMap||(typeof intro!=='undefined'&&intro.active)) return null;
+  for(const n of map.npcs) {
+    if(n.monster||n.follower||n.dog||n.hidden) continue;
+    for(const p of n.move?[{x:n.x,y:n.y},{x:n.move.tx,y:n.move.ty}]:[n]) {
+      if(p.x!==x||y<=p.y) continue;
+      if(y-p.y<=psAllowed(map,p.x,p.y)) return n;
+    }
+  }
+  return null;
+}
+// Tom's drawn height in tiles at a feet row (actorK in engine/plate.js; 58.1 world px in rooms, about 51 px sprites outdoors).
+function psGap(row) {
+  const H=actorK(row+1)*(currentMap.outside?51:OW_TOM_ROOM_WORLD_H)/T;
+  return Math.max(1,Math.ceil(H*.55)-1);
+}
+// The most tiles below a person at (x,y) that can be closed without cutting the map apart (walls and props only, so it is
+// cached per spot): every open tile beside the closed column must still reach every other one.
+function psAllowed(map,x,y) {
+  const c=map._psCache||(map._psCache=new Map()),id=x+','+y;
+  if(c.has(id)) return c.get(id);
+  let g=psGap(y);
+  for(;g>0;g--) if(psConnected(map,x,y,g)) break;
+  c.set(id,g);
+  return g;
+}
+function psConnected(map,x,y,g) {
+  const closed=new Set(); for(let k=0;k<=g;k++) closed.add(key(x,y+k));
+  const side=[];
+  for(let k=1;k<=g;k++) for(const [dx,dy] of [[-1,0],[1,0],[0,1]]) {
+    const nx=x+dx,ny=y+k+dy;
+    if(!closed.has(key(nx,ny))&&walkable(map,nx,ny)) side.push(key(nx,ny));
+  }
+  if(!walkable(map,x,y+1)) return false;   // nothing to close
+  if(side.length<2) return true;
+  const seen=new Set([side[0]]),q=[side[0]];
+  while(q.length) {
+    const [cx,cy]=q.pop().split(',').map(Number);
+    for(const nm of directionNames) {
+      const d=DIR[nm],nx=cx+d.x,ny=cy+d.y,k=key(nx,ny);
+      if(seen.has(k)||closed.has(k)||!walkable(map,nx,ny)) continue;
+      seen.add(k); q.push(k);
+    }
+  }
+  return side.every(k=>seen.has(k));
 }
 // A monster that was just beaten dozes where it fell (engine/feel.js, 25 s). Tom and the party walk through it, so a monster
 // that ends up on a one-tile boardwalk (the Whispering Marsh) can never wall off the route for good.
@@ -694,6 +747,8 @@ function facingTarget() {
     if(occupied(n,x,y)) return {kind:'npc',value:n,x,y};
   for(const f of followers)
     if(!f.move&&f.x===x&&f.y===y) return {kind:'npc',value:f,x,y};
+  // Facing up at a person's personal-space tile: talk to them across it.
+  if(player.facing==='up'&&!currentMap.objectAt.get(key(x,y))) { const n=personalSpaceNpc(currentMap,x,y); if(n) return {kind:'npc',value:n,x:n.x,y:n.y}; }
 
   const o=currentMap.objectAt.get(key(x,y));
   // A counter with `across:true` lets you talk to whoever stands right behind it (the juice bar's Sage).
