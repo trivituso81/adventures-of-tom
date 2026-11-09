@@ -141,8 +141,7 @@ function saveSnapshot() {
     members:ALL_MEMBERS().map(b6SaveMember),
     opts:typeof b7Opts==='function'?b7Opts():null};   // difficulty, battle speed, High-Five (engine/feel.js)
 }
-// SAVE_CACHE holds the latest copy of every slot. Browser storage alone is not enough: Safari can throw it away when
-// the app closes, so engine/cloud-save.js also keeps each slot with the player's Claude account and fills this cache.
+// SAVE_CACHE holds the latest copy of every slot. Browser storage alone is not enough on iOS, so engine/save-backup.js adds BACK UP and RESTORE files.
 const SAVE_CACHE={};
 function saveRaw(slot) {
   if(typeof SAVE_CACHE[slot]==='string') return SAVE_CACHE[slot];

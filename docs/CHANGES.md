@@ -1,3 +1,5 @@
+## 2026-11-08 (safe2): stale cloud-save mentions removed from a followers.js comment and docs/ROADMAP.md. Tags safe1 to safe2.
+
 ## 2026-11-08 (safe1): Safe saves (assessment items 1 to 4)
 - Item 1: second copy of saves. New `engine/save-backup.js` replaces `engine/cloud-save.js` (the claude.ai account sync never works outside claude.ai; removed with its wrappers, its text and the unused `renderSaves` in followers.js). BACK UP (Load page and Save box) writes all slots to one `.json` file through the share sheet (Save to Files) or a download. RESTORE (Load page, and the title Load page so a wiped phone can recover) reads it and keeps the newer copy per slot. The game also asks the browser to keep its storage (`navigator.storage.persist`).
 - Item 2: Load page, Save box and menu footers now say "Saves are kept on this phone." plus the last backup date or "No backup yet".
