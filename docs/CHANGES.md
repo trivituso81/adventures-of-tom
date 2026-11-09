@@ -1,3 +1,9 @@
+## 2026-11-09 (rowwalk1): Rivituso Row walk map from Area Builder export (tag rowwalk1)
+- Tom's export of the row area (chapter 20 view, system_hash 51b09b43): 18 tiles changed in the `plateMask`, no new doors or exits. Its three door/exit edits (Gregori door at 7,6, the Cattail Pier exit at 12-14,20) are already portals, so nothing was rewired. Installed with `tools/apply_walkmap.py`; only the row mask rows in `data/maps-le.js` changed.
+- `tools/reach_test.py row`: 0 fails. Mask overlay looked at (`tools/shots/mask-row.png`). `tools/smoke.py` FAILS [].
+- Tags: `data/maps-le.js` and the build stamp in `engine/main.js` moved to rowwalk1.
+- Tom: tap Clear all edits for the row map in the Area Builder, since the live map now matches.
+
 ## 2026-11-09 (grandswalk1): Deedee and Boppy's house walk map from Area Builder export (tag grandswalk1)
 - Tom's export of the grands interior (chapter 20 view, system_hash 9a0b6b50): 14 tiles opened or blocked in the `plateMask`, no door or exit edits. Installed with `tools/apply_walkmap.py`; only the grands mask rows 7 and 11 in `data/maps-le.js` changed.
 - Not applied: (2,6) is walkable in the export but a cookie-counter object covers it, so the installer leaves it blocked. Opening it needs the object moved or shrunk.
