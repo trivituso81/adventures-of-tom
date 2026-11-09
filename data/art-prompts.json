@@ -13705,6 +13705,13 @@
      "date": "2026-11-09",
      "from": "v2",
      "at": 1794250918124
+    },
+    {
+     "n": 1,
+     "file": "art/raw/props/prop-find-ch04-fix-v2.png",
+     "date": "2026-11-09",
+     "from": "v3",
+     "at": 1794250946669
     }
    ],
    "rejects": [
