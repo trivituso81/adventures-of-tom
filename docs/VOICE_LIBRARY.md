@@ -67,6 +67,19 @@ The clips live only on Tom's phone until merged. Merge with `node tools/voice-li
 
 A line is baked from the Library like any other: find it with the "No clip yet" filter, make a take, Use it. There is no separate bake list (the Bake Voices page was removed 2026-11-02). New lines reach the Library through `data/lines.js`, scenes and dialogue (`tools/voice-library/harvest.js` reads the known sources) and `tools/voice-library/battle-scripts.json` or `battle-overrides.json` for their scripts.
 
+## Comedy directions (2026-11-09, `npcvoice1`)
+
+How a dry or funny line is directed, on top of the v4 tag rules above (source list in the Project doc `claude/npc-voice-audit-11-09.md`):
+
+| Rule | Why |
+|---|---|
+| The punchline gets its own tag, placed right before it | ElevenLabs: a tag steers what follows it; one tag per beat is easier for the model than several stacked |
+| Underplay it in the character's own way (arch, grave, sincere, serene, offhand, flat, deadpan), not one stock word for everyone | ElevenLabs: tags must suit the voice; a bubbly voice told to be deadpan either ignores it or loses its character |
+| One CAPS word per line, on the word that carries the stress | CAPS adds emphasis; more than one reads as shouting |
+| An ellipsis before the turn | v4 and v3 have no break tags; an ellipsis is the documented pause |
+| Fewer tags on short lines | Short inputs are the least stable; every extra tag adds risk |
+| Never a tag the words do not support | A direction the line cannot carry sounds forced |
+
 ## Limits
 
 - Phone takes are raw ElevenLabs output: no silence trim, no merge effects (Boppy deepening, Grace shrink, monster and walk-on filters). The card says so for voices that get one; Claude applies them when merging an export.

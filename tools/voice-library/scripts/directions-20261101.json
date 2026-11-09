@@ -692,7 +692,7 @@
 "speaker": "Mr. Washington",
 "text": "Such a nice afternoon. It should always be this afternoon.",
 "ctx": "",
-"script": "[dreamy, serene] Such a nice afternoon. [soft, wishful] It should always be this afternoon."
+"script": "[dreamy, serene] Such a nice afternoon. [soft, drawn out] It should ALWAYS be this afternoon."
 },
 {
 "voice": "tom",
@@ -762,7 +762,7 @@
 "speaker": "Miss Odette",
 "text": "Stirring. Stirring. The gumbo never has to be done, baby. Isn’t that nice?",
 "ctx": "",
-"script": "[dreamy, lulling] Stirring. Stirring. The gumbo never has to be done, baby. [soft, content] Isn’t that nice?"
+"script": "[dreamy, lulling] Stirring. ...Stirring. The gumbo NEVER has to be done, baby. [soft, content] Isn’t that nice?"
 },
 {
 "voice": "tnb",
@@ -783,7 +783,7 @@
 "speaker": "Doña Carmen",
 "text": "The pupusas are fine. Everything is fine. It's always this afternoon. Why did I ever flip them?",
 "ctx": "",
-"script": "[brightly hollow, forced] The pupusas are fine. Everything is fine. [dazed, small] It's always this afternoon. [lost, plaintive] Why did I ever flip them?"
+"script": "[cheerful, hollow] The pupusas are fine. EVERYTHING is fine. [dazed, small] It's always this afternoon. [lost, plaintive] Why did I ever flip them?"
 },
 {
 "voice": "tnb",
@@ -972,21 +972,21 @@
 "speaker": "Mr. Washington",
 "text": "...smelled like gumbo on a Saturday night. Zydeco from the boulevard. Kids on every porch.",
 "ctx": "",
-"script": "[warm, dreamy] ...smelled like gumbo on a Saturday night. [rich, nostalgic] Zydeco from the boulevard. [fond, mellow] Kids on every porch."
+"script": "[warm, savoring] ...smelled like gumbo on a Saturday night. [rich, nostalgic] Zydeco from the boulevard. ...Kids on EVERY porch."
 },
 {
 "voice": "washington",
 "speaker": "Mr. Washington",
 "text": "Where was I? Oh. I was done. That was the whole story.",
 "ctx": "",
-"script": "[gentle, bemused] Where was I? Oh. [mellow, amused] I was done. That was the whole story."
+"script": "[gentle, bemused] Where was I? ...Oh. [deadpan, content] I was done. That was the whole story."
 },
 {
 "voice": "washington",
 "speaker": "Mr. Washington",
 "text": "Funny. For a while there I didn't want anything to change. Then I remembered the best parts all came from things changing.",
 "ctx": "",
-"script": "[thoughtful, humbled] Funny. For a while there I didn't want anything to change. [warm, resolute] Then I remembered the best parts all came from things changing."
+"script": "[thoughtful, humbled] Funny. For a while there I didn't want ANYTHING to change. [warm, resolute] Then I remembered... the best parts all came from things changing."
 },
 {
 "voice": "tom",
@@ -1000,7 +1000,7 @@
 "speaker": "Mr. Washington",
 "text": "Keep the old windows. Smart man.",
 "ctx": "",
-"script": "[warm, approving] Keep the old windows. [fond, dry] Smart man."
+"script": "[warm, approving] Keep the old windows. [dry, low] ...Smart man."
 },
 {
 "voice": "tnb",
@@ -1175,7 +1175,7 @@
 "speaker": "Oolong",
 "text": "The kettle says a man in a long coat has been buying up gold coins at Penny’s. Paying double. Never takes his hat off.",
 "ctx": "",
-"script": "[conspiratorial, whispering] The kettle says a man in a long coat has been buying up gold coins at Penny’s. [sly, hushed] Paying double. [ominous, delighted] Never takes his hat off."
+"script": "[conspiratorial, whispering] The kettle says a man in a long coat has been buying up gold coins at Penny’s. [hushed, scandalized] Paying DOUBLE. [ominous, delighted] ...Never takes his hat off."
 },
 {
 "voice": "tom",
@@ -1189,7 +1189,7 @@
 "speaker": "Oolong",
 "text": "The kettle also says it'll rain on Tuesday. The kettle is wrong a lot. Enjoy the pier.",
 "ctx": "",
-"script": "[breezy, merry] The kettle also says it'll rain on Tuesday. [airy, amused] The kettle is wrong a lot. [warm, bright] Enjoy the pier."
+"script": "[breezy, merry] The kettle also says it'll rain on Tuesday. [prim, airy] The kettle is wrong... a lot. [warm, bright] Enjoy the pier."
 },
 {
 "voice": "grace",
@@ -1938,7 +1938,7 @@
 "speaker": "Ray",
 "text": "Sunset Gold Studios. Closed set. Name?",
 "ctx": "Ray",
-"script": "[bored, flat] Sunset Gold Studios. [monotone, flat] Closed set. Name?"
+"script": "[bored, flat] Sunset Gold Studios. Closed set. [monotone, slow] ...Name?"
 },
 {
 "voice": "tnb",
@@ -1952,7 +1952,7 @@
 "speaker": "Ray",
 "text": "I wave at everybody. That's the job. Go on in.",
 "ctx": "Ray",
-"script": "[unbothered, flat] I wave at everybody. That's the job. [lazy, easy] Go on in."
+"script": "[bored, deadpan] I wave at EVERYBODY. That's the job. [flat, slow] Go on in."
 },
 {
 "voice": "dot",
@@ -1973,21 +1973,21 @@
 "speaker": "Kiki",
 "text": "It was right there in Stage 7. Then the fog machine turned itself on, and the lights went out, and things started CLAPPING.",
 "ctx": "Kiki",
-"script": "[spooked, rapid] It was right there in Stage 7. [rising, panicky] Then the fog machine turned itself on, and the lights went out, [aghast, hushed] and things started CLAPPING."
+"script": "[spooked, rapid] It was RIGHT there in Stage 7. [rising, panicky] Then the fog machine turned itself on, and the lights went out, [appalled, hushed] and things started CLAPPING."
 },
 {
 "voice": "la_woman",
 "speaker": "Dana",
 "text": "Dana Park. Director. First feature. Without wardrobe there's no shoot. Without a shoot there's no movie.",
 "ctx": "Dana",
-"script": "[clipped, stressed] Dana Park. Director. First feature. [tight, urgent] Without wardrobe there's no shoot. [grim, flat] Without a shoot there's no movie."
+"script": "[clipped, stressed] Dana Park. Director. First feature. [tight, urgent] Without wardrobe there's no shoot. [grim, flat] Without a shoot... there's no MOVIE."
 },
 {
 "voice": "la_woman",
 "speaker": "Dana",
 "text": "And the Backlot is full of little grumpy things. One of them ate a cue card. One of them is clapping at the horse.",
 "ctx": "Dana",
-"script": "[exasperated, tired] And the Backlot is full of little grumpy things. [incredulous, flat] One of them ate a cue card. [helpless, wry] One of them is clapping at the horse."
+"script": "[exasperated, tired] And the Backlot is full of little grumpy things. [incredulous, flat] One of them ate a cue card. [deadpan, weary] One of them is clapping... at the horse."
 },
 {
 "voice": "tom",
@@ -2015,7 +2015,7 @@
 "speaker": "Toni",
 "text": "Plain roast chicken. No salt, no skin, no sauce. I keep it for the grips. They're also picky.",
 "ctx": "Toni",
-"script": "[proud, matter-of-fact] Plain roast chicken. No salt, no skin, no sauce. [warm, conspiratorial] I keep it for the grips. [wry, dry] They're also picky."
+"script": "[proud, matter-of-fact] Plain roast chicken. No salt, no skin, no sauce. [warm, conspiratorial] I keep it for the grips. [deadpan, dry] ...They're ALSO picky."
 },
 {
 "voice": "tnb",
@@ -2029,7 +2029,7 @@
 "speaker": "Toni",
 "text": "Here. For the road. Don't tell the grips.",
 "ctx": "Toni",
-"script": "[sweet, hushed] Here. For the road. [whispering, merry] Don't tell the grips."
+"script": "[sweet, hushed] Here. For the road. [whispering, mischievous] Don't tell the grips."
 },
 {
 "voice": "tnb",
@@ -2141,7 +2141,7 @@
 "speaker": "Kiki",
 "text": "(on the radio) ...kkkt... Stage 7! The big door just unlocked itself! From the INSIDE! Is that bad? That feels bad.",
 "ctx": "Kiki",
-"script": "[crackly, breathless] (on the radio) ...kkkt... Stage 7! [alarmed, rising] The big door just unlocked itself! From the INSIDE! [small, anxious] Is that bad? That feels bad."
+"script": "[crackly, breathless] (on the radio) ...kkkt... Stage 7! [alarmed, rising] The big door just unlocked itself! From the INSIDE! [small, flat] Is that bad? ...That feels bad."
 },
 {
 "voice": "tnb",
@@ -2386,7 +2386,7 @@
 "speaker": "Kiki",
 "text": "WRAP PARTY AT CRAFTY! Toni made a cake! It's shaped like a clapper! It's not clapping!",
 "ctx": "Kiki",
-"script": "[ecstatic, shrill] WRAP PARTY AT CRAFTY! [gushing, bright] Toni made a cake! It's shaped like a clapper! [giddy, relieved] It's not clapping!"
+"script": "[ecstatic, shrill] WRAP PARTY AT CRAFTY! [gushing, bright] Toni made a cake! It's shaped like a clapper! [relieved, deadpan] ...It's NOT clapping!"
 },
 {
 "voice": "la_woman",
@@ -2414,7 +2414,7 @@
 "speaker": "Dana",
 "text": "And crew jackets. Wrap Party Jackets. Only the crew gets one. You're crew now. Even the dog.",
 "ctx": "Dana",
-"script": "[bright, generous] And crew jackets. Wrap Party Jackets. [warm, explaining] Only the crew gets one. You're crew now. [merry, fond] Even the dog."
+"script": "[bright, generous] And crew jackets. Wrap Party Jackets. Only the crew gets one. [warm, matter-of-fact] You're crew now. [deadpan, fond] ...Even the dog."
 },
 {
 "voice": "tnb",
@@ -2568,14 +2568,14 @@
 "speaker": "Principal Pruitt",
 "text": "Not haunted. Grumpy. Thirty-one years in this building. I know the difference.",
 "ctx": "Principal Pruitt",
-"script": "[stiff, dignified] Not haunted. Grumpy. [firm, weathered] Thirty-one years in this building. I know the difference."
+"script": "[stiff, dignified] Not haunted. ...GRUMPY. [weary, matter-of-fact] Thirty-one years in this building. I know the difference."
 },
 {
 "voice": "michael",
 "speaker": "Principal Pruitt",
 "text": "The bells ring at random. The clocks in the hall all say different times. And the sign-up sheet got up off the table and walked into the school.",
 "ctx": "Principal Pruitt",
-"script": "[weary, matter-of-fact] The bells ring at random. The clocks in the hall all say different times. [deadpan, haunted] And the sign-up sheet got up off the table and walked into the school."
+"script": "[weary, matter-of-fact] The bells ring at random. The clocks in the hall all say different times. [deadpan, haunted] And the sign-up sheet got up off the table... and WALKED into the school."
 },
 {
 "voice": "michael",
@@ -2596,7 +2596,7 @@
 "speaker": "Principal Pruitt",
 "text": "Set every clock in the hall to seven. Seven o’clock. Not seven-thirty. Not six-fifty-nine. Seven.",
 "ctx": "Principal Pruitt",
-"script": "[precise, firm] Set every clock in the hall to seven. Seven o’clock. [insistent, clipped] Not seven-thirty. Not six-fifty-nine. [crisp, final] Seven."
+"script": "[precise, firm] Set every clock in the hall to seven. Seven o’clock. [insistent, clipped] NOT seven-thirty. NOT six-fifty-nine. [deadpan, final] ...Seven."
 },
 {
 "voice": "rose",
@@ -2841,14 +2841,14 @@
 "speaker": "Principal Pruitt",
 "text": "(on the intercom) ...ksssh... Attention, please. The Cafetorium doors are OPEN. Parents, please wait in the hall. There's something in the Cafetorium.",
 "ctx": "Principal Pruitt",
-"script": "[formal, relieved] (on the intercom) ...ksssh... Attention, please. The Cafetorium doors are OPEN. [measured, careful] Parents, please wait in the hall. [low, ominous] There's something in the Cafetorium."
+"script": "[formal, relieved] (on the intercom) ...ksssh... Attention, please. The Cafetorium doors are OPEN. [measured, careful] Parents, please wait in the hall. [deadpan, low] There's... something in the Cafetorium."
 },
 {
 "voice": "michael",
 "speaker": "Principal Pruitt",
 "text": "Mrs. Gregori’s brother, please go into the Cafetorium. Thank you. ...ksssh.",
 "ctx": "Principal Pruitt",
-"script": "[polite, apologetic] Mrs. Gregori’s brother, please go into the Cafetorium. [brisk, formal] Thank you. ...ksssh."
+"script": "[polite, deadpan] Mrs. Gregori’s brother, please go into the Cafetorium. [brisk, formal] Thank you. ...ksssh."
 },
 {
 "voice": "amy",
@@ -3058,14 +3058,14 @@
 "speaker": "Principal Pruitt",
 "text": "Mrs. Gregori. Best conference night in thirty-one years. Not one parent cried. Well. Mr. Delgado. Happy tears.",
 "ctx": "Principal Pruitt",
-"script": "[glowing, formal] Mrs. Gregori. Best conference night in thirty-one years. [dry, warm] Not one parent cried. Well. [fond, soft] Mr. Delgado. Happy tears."
+"script": "[glowing, formal] Mrs. Gregori. Best conference night in thirty-one years. NOT one parent cried. [deadpan, dry] Well. ...Mr. Delgado. [fond, soft] Happy tears."
 },
 {
 "voice": "michael",
 "speaker": "Principal Pruitt",
 "text": "This is for you. My Golden Stopwatch. Thirty-one Field Days. It's never once stopped early.",
 "ctx": "Principal Pruitt",
-"script": "[solemn, touched] This is for you. My Golden Stopwatch. [reverent, proud] Thirty-one Field Days. [tender, hushed] It's never once stopped early."
+"script": "[solemn, touched] This is for you. My Golden Stopwatch. [reverent, proud] Thirty-one Field Days. [deadpan, hushed] It's NEVER once stopped early."
 },
 {
 "voice": "amy",
@@ -3086,7 +3086,7 @@
 "speaker": "Principal Pruitt",
 "text": "And Field Day shirts. Staff shirts. You're all staff now. Even the small loud ones.",
 "ctx": "Principal Pruitt",
-"script": "[cheerful, generous] And Field Day shirts. Staff shirts. [warm, teasing] You're all staff now. [wry, fond] Even the small loud ones."
+"script": "[cheerful, generous] And Field Day shirts. Staff shirts. You're all staff now. [deadpan, fond] ...Even the small LOUD ones."
 },
 {
 "voice": "amy",
@@ -3387,7 +3387,7 @@
 "speaker": "Bernadette",
 "text": "Halt. Neighborhood Watch. State your business.",
 "ctx": "Bernadette",
-"script": "[barking, officious] Halt. Neighborhood Watch. [stern, clipped] State your business."
+"script": "[barking, officious] HALT. Neighborhood Watch. [stern, clipped] State your business."
 },
 {
 "voice": "tom",
@@ -3401,21 +3401,21 @@
 "speaker": "Bernadette",
 "text": "I know who you are. You water your drought garden. Everybody knows.",
 "ctx": "Bernadette",
-"script": "[knowing, smug] I know who you are. [pointed, grudging] You water your drought garden. Everybody knows."
+"script": "[smug, knowing] I know who you are. [grave, pointed] You water your drought garden. ...EVERYBODY knows."
 },
 {
 "voice": "penny",
 "speaker": "Bernadette",
 "text": "Bernadette. Neighborhood Watch Captain, nineteen years. And I'll say it, because nobody else will.",
 "ctx": "Bernadette",
-"script": "[proud, clipped] Bernadette. Neighborhood Watch Captain, nineteen years. [grave, lower] And I'll say it, [hushed, ominous] because nobody else will."
+"script": "[proud, clipped] Bernadette. Neighborhood Watch Captain, NINETEEN years. [grave, hushed] And I'll say it, because nobody else will."
 },
 {
 "voice": "penny",
 "speaker": "Bernadette",
 "text": "The squirrels are organized.",
 "ctx": "Bernadette",
-"script": "[hushed, dead serious] The squirrels are organized."
+"script": "[hushed, deadpan] The squirrels... are ORGANIZED."
 },
 {
 "voice": "tnb",
@@ -3429,14 +3429,14 @@
 "speaker": "Bernadette",
 "text": "Lookouts in the playground. A spy in the community garden. Somebody at the picnic tables stuffing their cheeks with anything that's not nailed down.",
 "ctx": "Bernadette",
-"script": "[conspiratorial, intense] Lookouts in the playground. A spy in the community garden. [disgusted, clipped] Somebody at the picnic tables stuffing their cheeks with anything that's not nailed down."
+"script": "[conspiratorial, intense] Lookouts in the playground. A SPY in the community garden. [appalled, clipped] Somebody at the picnic tables stuffing their cheeks with anything that's not nailed down."
 },
 {
 "voice": "penny",
 "speaker": "Bernadette",
 "text": "And it all goes up THAT tree. The Old Oak. There's a little door in the trunk. I've heard a secret knock. Only bits of it.",
 "ctx": "Bernadette",
-"script": "[hushed, dramatic] And it all goes up THAT tree. The Old Oak. [low, secretive] There's a little door in the trunk. [frustrated, muttering] I've heard a secret knock. Only bits of it."
+"script": "[hushed, intense] And it all goes up THAT tree. The Old Oak. There's a little door in the trunk. [annoyed, muttering] I've heard a secret knock. ...Only bits of it."
 },
 {
 "voice": "tom",
@@ -3450,7 +3450,7 @@
 "speaker": "Bernadette",
 "text": "Clear out those lookouts and your dog can dig. I'll be here. With my clipboard.",
 "ctx": "Bernadette",
-"script": "[commanding, crisp] Clear out those lookouts and your dog can dig. [smug, vigilant] I'll be here. With my clipboard."
+"script": "[commanding, crisp] Clear out those lookouts and your dog can dig. [smug, officious] I'll be here. ...With my clipboard."
 },
 {
 "voice": "tnb",
@@ -4059,14 +4059,14 @@
 "speaker": "Bernadette",
 "text": "Neighborhood Watch Captain’s report: case closed.",
 "ctx": "Bernadette",
-"script": "[crisp, officious] Neighborhood Watch Captain’s report: [grave, clipped] case closed."
+"script": "[crisp, officious] Neighborhood Watch Captain’s report: [grave, flat] case CLOSED."
 },
 {
 "voice": "penny",
 "speaker": "Bernadette",
 "text": "I'd like it noted that I was right.",
 "ctx": "Bernadette",
-"script": "[prim, smug] I'd like it noted that I was right."
+"script": "[prim, smug] I'd like it NOTED... that I was right."
 },
 {
 "voice": "tnb",
@@ -4087,7 +4087,7 @@
 "speaker": "Bernadette",
 "text": "And these. Neighborhood Watch Vests. I give out one every nineteen years. Today I'm giving out three. Even the dog.",
 "ctx": "Bernadette",
-"script": "[ceremonial, gruff] And these. Neighborhood Watch Vests. [solemn, proud] I give out one every nineteen years. [softer, grand] Today I'm giving out three. Even the dog."
+"script": "[solemn, proud] And these. Neighborhood Watch Vests. I give out one every NINETEEN years. [grand, softer] Today I'm giving out three. [grave, clipped] ...Even the dog."
 },
 {
 "voice": "tnb",
@@ -4192,7 +4192,7 @@
 "speaker": "Page",
 "text": "Oh! Tom. Girls. Welcome to the Hush Library. Everything is fine.",
 "ctx": "",
-"script": "[hushed, strained] Oh! Tom. Girls. Welcome to the Hush Library. [bright, unconvincing] Everything is fine."
+"script": "[hushed, strained] Oh! Tom. Girls. Welcome to the Hush Library. [bright, unconvincing] Everything is FINE."
 },
 {
 "voice": "grace",
@@ -4220,7 +4220,7 @@
 "speaker": "Page",
 "text": "...It's not fine. It started a week ago. It comes up from the Stacks, downstairs. The old part.",
 "ctx": "",
-"script": "[deflated, hushed] ...It's not fine. [low, worried] It started a week ago. It comes up from the Stacks, downstairs. [hushed, grave] The old part."
+"script": "[deadpan, hushed] ...It's NOT fine. [low, worried] It started a week ago. It comes up from the Stacks, downstairs. [hushed, grave] ...The old part."
 },
 {
 "voice": "page",
@@ -4241,7 +4241,7 @@
 "speaker": "Page",
 "text": "Books overhear EVERYTHING. That's why we whisper in here. It was never for the people. It's for the books.",
 "ctx": "",
-"script": "[fierce, hushed] Books overhear EVERYTHING. [confiding, whispering] That's why we whisper in here. [tender, solemn] It was never for the people. It's for the books."
+"script": "[appalled, hushed] Books overhear EVERYTHING. [confiding, whispering] That's why we whisper in here. [solemn, matter-of-fact] It was never for the people. ...It's for the books."
 },
 {
 "voice": "rose",
@@ -4262,7 +4262,7 @@
 "speaker": "Page",
 "text": "The Reading Room doors use the old card catalog lock. I lost the password in 1998.",
 "ctx": "",
-"script": "[dry, mortified] The Reading Room doors use the old card catalog lock. [sheepish, quiet] I lost the password in 1998."
+"script": "[precise, hushed] The Reading Room doors use the old card catalog lock. [flat, sheepish] I lost the password... in 1998."
 },
 {
 "voice": "grace",
@@ -4283,7 +4283,7 @@
 "speaker": "Page",
 "text": "Please be careful. And please, don't answer the books. It only encourages them.",
 "ctx": "",
-"script": "[worried, earnest] Please be careful. And please, don't answer the books. [wry, hushed] It only encourages them."
+"script": "[worried, earnest] Please be careful. And PLEASE, don't answer the books. [grave, hushed] ...It only encourages them."
 },
 {
 "voice": "?Whispers",
@@ -4871,7 +4871,7 @@
 "speaker": "Page",
 "text": "Listen. It's quiet. Properly quiet. The good kind. The dictionaries are snoring.",
 "ctx": "",
-"script": "[hushed, content] Listen. It's quiet. Properly quiet. The good kind. [dry, amused] The dictionaries are snoring."
+"script": "[hushed, content] Listen. It's quiet. PROPERLY quiet. The good kind. [deadpan, whispering] ...The dictionaries are snoring."
 },
 {
 "voice": "grace",
@@ -4892,7 +4892,7 @@
 "speaker": "Page",
 "text": "Grace. This is for you. A Gold Library Card. No limit. No late fees. Ever.",
 "ctx": "",
-"script": "[warm, ceremonial] Grace. This is for you. [hushed, proud] A Gold Library Card. [grand, solemn] No limit. No late fees. Ever."
+"script": "[warm, ceremonial] Grace. This is for you. A Gold Library Card. [hushed, solemn] No limit. No late fees. ...EVER."
 },
 {
 "voice": "grace",
@@ -4906,7 +4906,7 @@
 "speaker": "Page",
 "text": "And sweaters. I knit one every winter. I have run out of people. Please take some.",
 "ctx": "",
-"script": "[shy, hopeful] And sweaters. I knit one every winter. [wry, sheepish] I have run out of people. [gentle, pleading] Please take some."
+"script": "[shy, hopeful] And sweaters. I knit one every winter. [flat, sheepish] I have run out of people. [gentle, pleading] ...PLEASE take some."
 },
 {
 "voice": "rose",
@@ -4997,14 +4997,14 @@
 "speaker": "Bernadette",
 "text": "Tom. Good. Neighborhood Watch Captain, potluck committee chair. Forty RSVPs. Thirty-nine dishes. One bread guy.",
 "ctx": "Bernadette",
-"script": "[brisk, officious] Tom. Good. Neighborhood Watch Captain, potluck committee chair. [clipped, measured] Forty RSVPs. Thirty-nine dishes. [dry, pointed] One bread guy."
+"script": "[brisk, officious] Tom. Good. Neighborhood Watch Captain, potluck committee chair. [clipped, precise] Forty RSVPs. Thirty-nine dishes. [deadpan, pointed] ...ONE bread guy."
 },
 {
 "voice": "penny",
 "speaker": "Bernadette",
 "text": "Every pilot light on 2nd Avenue went out at noon. Every one. Including mine. I had a casserole IN there.",
 "ctx": "Bernadette",
-"script": "[clipped, indignant] Every pilot light on 2nd Avenue went out at noon. Every one. [wounded, prim] Including mine. [outraged, shrill] I had a casserole IN there."
+"script": "[clipped, indignant] Every pilot light on 2nd Avenue went out at noon. Every one. [wounded, prim] Including mine. [appalled, shrill] I had a casserole IN there."
 },
 {
 "voice": "tom",
@@ -5018,7 +5018,7 @@
 "speaker": "Bernadette",
 "text": "They said it's the weekend. I said it's the POTLUCK. They hung up. I've filed a report. With myself.",
 "ctx": "Bernadette",
-"script": "[stiff, fuming] They said it's the weekend. [vehement, sharp] I said it's the POTLUCK. [prim, righteous] They hung up. I've filed a report. With myself."
+"script": "[stiff, annoyed] They said it's the weekend. I said it's the POTLUCK. [prim, officious] They hung up. I've filed a report. ...With myself."
 },
 {
 "voice": "olivia",
@@ -5046,7 +5046,7 @@
 "speaker": "Bernadette",
 "text": "The barn? It's been chained up for sixty years. Here. Committee key. I'm the committee. We're closing the boulevard for the tables. Bread by six.",
 "ctx": "Bernadette",
-"script": "[skeptical, brisk] The barn? It's been chained up for sixty years. [crisp, authoritative] Here. Committee key. I'm the committee. [clipped, commanding] We're closing the boulevard for the tables. Bread by six."
+"script": "[skeptical, brisk] The barn? It's been chained up for sixty years. [flat, officious] Here. Committee key. I'm the committee. [clipped, commanding] We're closing the boulevard for the tables. Bread by SIX."
 },
 {
 "voice": "olivia",
@@ -5522,14 +5522,14 @@
 "speaker": "Bernadette",
 "text": "Forty loaves. Six o’clock. On the dot. Potluck committee report: we're a success.",
 "ctx": "Bernadette",
-"script": "[crisp, proud] Forty loaves. Six o’clock. On the dot. [formal, pleased] Potluck committee report: we're a success."
+"script": "[crisp, proud] Forty loaves. Six o’clock. On the DOT. [formal, smug] Potluck committee report: we're a success."
 },
 {
 "voice": "penny",
 "speaker": "Bernadette",
 "text": "The gumbo is hot. The casserole is hot. Everything is hot. I'd like it noted.",
 "ctx": "Bernadette",
-"script": "[smug, prim] The gumbo is hot. The casserole is hot. Everything is hot. [pointed, satisfied] I'd like it noted."
+"script": "[smug, prim] The gumbo is hot. The casserole is hot. EVERYTHING is hot. [grave, pointed] ...I'd like it noted."
 },
 {
 "voice": "tnb",
@@ -5550,14 +5550,14 @@
 "speaker": "Mr. Washington",
 "text": "Tom. Come here. This was my daddy’s. He drove the 7 line out of that barn for thirty years. Night run. He swore by the biscuits.",
 "ctx": "",
-"script": "[warm, slow] Tom. Come here. This was my daddy’s. [fond, reminiscing] He drove the 7 line out of that barn for thirty years. Night run. [gentle, amused] He swore by the biscuits."
+"script": "[warm, slow] Tom. Come here. This was my daddy’s. [fond, reminiscing] He drove the 7 line out of that barn for THIRTY years. Night run. [dry, amused] ...He swore by the biscuits."
 },
 {
 "voice": "washington",
 "speaker": "Mr. Washington",
 "text": "He'd want it on somebody who went back in there and lit that stove. Here.",
 "ctx": "",
-"script": "[quiet, moved] He'd want it on somebody who went back in there and lit that stove. [gentle, soft] Here."
+"script": "[quiet, moved] He'd want it on somebody who went back in there and lit that stove. [gentle, soft] ...Here."
 },
 {
 "voice": "tom",
@@ -5571,7 +5571,7 @@
 "speaker": "Mr. Washington",
 "text": "I know you will. Now stand up straight. He'd say that too.",
 "ctx": "",
-"script": "[warm, knowing] I know you will. [gruff, fond] Now stand up straight. He'd say that too."
+"script": "[warm, knowing] I know you will. [stern, dry] Now stand up straight. ...He'd say that too."
 },
 {
 "voice": "michael",
@@ -5732,7 +5732,7 @@
 "speaker": "Aunt Ellie",
 "text": "Girls. You're staying with me. I brought cards. I cheat. You'll learn a great deal.",
 "ctx": "",
-"script": "[dry, grand] Girls. You're staying with me. [sly, relishing] I brought cards. I cheat. [serene, amused] You'll learn a great deal."
+"script": "[dry, grand] Girls. You're staying with me. I brought cards. [arch, relishing] ...I cheat. [serene, amused] You'll learn a GREAT deal."
 },
 {
 "voice": "deedee",
@@ -5788,14 +5788,14 @@
 "speaker": "Aunt Ellie",
 "text": "Darling, I went to everything. The last dance. A big silver ball turned all night. Then they locked the doors and nobody ever said why.",
 "ctx": "",
-"script": "[grand, breezy] Darling, I went to everything. [dreamy, savoring] The last dance. A big silver ball turned all night. [low, mysterious] Then they locked the doors and nobody ever said why."
+"script": "[grand, breezy] Darling, I went to EVERYTHING. [dreamy, savoring] The last dance. A big silver ball turned all night. [low, hushed] Then they locked the doors... and nobody ever said why."
 },
 {
 "voice": "ellie",
 "speaker": "Aunt Ellie",
 "text": "I left a coat there. Purple velvet. I was in a hurry.",
 "ctx": "",
-"script": "[airy, offhand] I left a coat there. Purple velvet. [sheepish, rueful] I was in a hurry."
+"script": "[airy, offhand] I left a coat there. Purple velvet. [deadpan, dry] ...I was in a hurry."
 },
 {
 "voice": "deedee",
@@ -5816,7 +5816,7 @@
 "speaker": "Luna",
 "text": "Oh! Visitors. At night. Is that... is that an INVITATION?",
 "ctx": "",
-"script": "[startled, delighted] Oh! Visitors. At night. [hushed, giddy] Is that... is that an INVITATION?"
+"script": "[surprised, delighted] Oh! Visitors. At NIGHT. [hushed, giddy] Is that... is that an INVITATION?"
 },
 {
 "voice": "tom",
@@ -5830,7 +5830,7 @@
 "speaker": "Luna",
 "text": "Twelve years I have swept this floor. That little silver door in the back has never once opened. I thought it was a closet.",
 "ctx": "",
-"script": "[wistful, sheepish] Twelve years I have swept this floor. [puzzled, soft] That little silver door in the back has never once opened. [rueful, quiet] I thought it was a closet."
+"script": "[wistful, sheepish] TWELVE years I have swept this floor. That little silver door in the back has never once opened. [sincere, quiet] ...I thought it was a closet."
 },
 {
 "voice": "luna",
@@ -5865,7 +5865,7 @@
 "speaker": "Luna",
 "text": "...It wasn't a closet.",
 "ctx": "",
-"script": "[stunned, whispering] ...It wasn't a closet."
+"script": "[stunned, matter-of-fact] ...It WASN't a closet."
 },
 {
 "voice": "boppy",
@@ -6425,7 +6425,7 @@
 "speaker": "Aunt Ellie",
 "text": "She is. It's frightening. Well? Was there a ball?",
 "ctx": "",
-"script": "[dry, proud] She is. It's frightening. [arch, curious] Well? Was there a ball?"
+"script": "[dry, proud] She is. It's FRIGHTENING. [arch, curious] Well? Was there a ball?"
 },
 {
 "voice": "deedee",
@@ -6446,14 +6446,14 @@
 "speaker": "Aunt Ellie",
 "text": "I left it at the last dance. I was in a hurry. I had a date with a man who turned out to be a disappointment. The coat wasn't.",
 "ctx": "",
-"script": "[wry, grand] I left it at the last dance. I was in a hurry. [arch, deadpan] I had a date with a man who turned out to be a disappointment. [dry, fond] The coat wasn't."
+"script": "[dry, grand] I left it at the last dance. I was in a hurry. [arch, cool] I had a date with a man who turned out to be a DISAPPOINTMENT. [dry, fond] ...The coat wasn't."
 },
 {
 "voice": "ellie",
 "speaker": "Aunt Ellie",
 "text": "It hasn't fit me since 1972. Keep it, Tom. Somebody in this family should wear velvet properly.",
 "ctx": "",
-"script": "[dry, imperious] It hasn't fit me since 1972. [gruff, warm] Keep it, Tom. [arch, amused] Somebody in this family should wear velvet properly."
+"script": "[dry, imperious] It hasn't fit me since 1972. Keep it, Tom. [arch, withering] SOMEBODY in this family should wear velvet properly."
 },
 {
 "voice": "boppy",
@@ -6572,7 +6572,7 @@
 "speaker": "Sal",
 "text": "Cab seven! Everybody in. Long Island Regional. The door nobody uses.",
 "ctx": "",
-"script": "[booming, cheerful] Cab seven! Everybody in. Long Island Regional. [lower, conspiratorial] The door nobody uses."
+"script": "[booming, cheerful] Cab seven! EVERYBODY in. Long Island Regional. [lower, conspiratorial] ...The door nobody uses."
 },
 {
 "voice": "la_woman",
@@ -7209,7 +7209,7 @@
 "speaker": "Aunt Ellie",
 "text": "Sit. Tell me about the airport. Leave nothing out. I'll know.",
 "ctx": "",
-"script": "[imperious, dry] Sit. Tell me about the airport. [arch, warning] Leave nothing out. I'll know."
+"script": "[imperious, dry] Sit. Tell me about the airport. Leave NOTHING out. [arch, warning] ...I'll know."
 },
 {
 "voice": "grace",
@@ -9141,14 +9141,14 @@
 "speaker": "Doña Carmen",
 "text": "...and THEN I told the man, the loroco is not optional. Tom! When did you get here? Why is everything so quiet?",
 "ctx": "Scene ch12Carmen",
-"script": "[indignant, animated] ...and THEN I told the man, the loroco is not optional. [bright, startled] Tom! When did you get here? [confused, hushed] Why is everything so quiet?"
+"script": "[indignant, animated] ...and THEN I told the man, the loroco is NOT optional. [bright, surprised] Tom! When did you get here? [confused, hushed] Why is everything so quiet?"
 },
 {
 "voice": "carmen",
 "speaker": "Doña Carmen",
 "text": "Where did my pupusas go?",
 "ctx": "Scene ch12Carmen",
-"script": "[alarmed, stricken] Where did my pupusas go?"
+"script": "[appalled, sharp] WHERE did my pupusas go?"
 },
 {
 "voice": "tom",
@@ -9162,7 +9162,7 @@
 "speaker": "Doña Carmen",
 "text": "I was what? I had a whole sentence. I lost the sentence. It was a good sentence.",
 "ctx": "Scene ch12Carmen",
-"script": "[baffled, offended] I was what? [mournful, aggrieved] I had a whole sentence. I lost the sentence. [sorrowful, quiet] It was a good sentence."
+"script": "[baffled, offended] I was what? [mournful, matter-of-fact] I had a whole sentence. I lost the sentence. ...It was a GOOD sentence."
 },
 {
 "voice": "grace",
@@ -9176,21 +9176,21 @@
 "speaker": "Doña Carmen",
 "text": "That man stood on my step and said my sign was “too busy.” I said the sign is busy because the food is good.",
 "ctx": "Scene ch12Carmen",
-"script": "[indignant, scornful] That man stood on my step and said my sign was “too busy.” [fierce, proud] I said the sign is busy because the food is good."
+"script": "[indignant, scornful] That man stood on my step and said my sign was “too busy.” [proud, matter-of-fact] I said the sign is busy because the food is GOOD."
 },
 {
 "voice": "carmen",
 "speaker": "Doña Carmen",
 "text": "Go next door. The Alvarez house. They didn’t get any pupusas today. Take these. Feed the children first. The grown-ups will pretend they’re not hungry.",
 "ctx": "Scene ch12Carmen",
-"script": "[brisk, bossy] Go next door. The Alvarez house. They didn’t get any pupusas today. Take these. [firm, tender] Feed the children first. [knowing, wry] The grown-ups will pretend they’re not hungry."
+"script": "[brisk, bossy] Go next door. The Alvarez house. They didn’t get any pupusas today. Take these. [firm, tender] Feed the children first. [dry, knowing] The grown-ups will PRETEND they’re not hungry."
 },
 {
 "voice": "rose",
 "speaker": "Daisy",
 "text": "Tom! Tom! Everybody stopped! Abuela stopped in the middle of saying NO!",
 "ctx": "Scene ch12Alvarez",
-"script": "[breathless, alarmed] Tom! Tom! Everybody stopped! [hushed, awed] Abuela stopped in the middle of saying NO!"
+"script": "[breathless, alarmed] Tom! Tom! Everybody STOPPED! [hushed, amazed] Abuela stopped in the middle of saying NO!"
 },
 {
 "voice": "tom",
@@ -9239,7 +9239,7 @@
 "speaker": "Don Beto",
 "text": "...and that is a FOUL! That is a foul! Who has the remote?",
 "ctx": "Scene ch12Alvarez",
-"script": "[groggy, booming] ...and that is a FOUL! That is a foul! [muddled, confused] Who has the remote?"
+"script": "[groggy, booming] ...and that is a FOUL! That is a foul! [muddled, unbothered] ...Who has the remote?"
 },
 {
 "voice": "amy",
@@ -9253,7 +9253,7 @@
 "speaker": "Tony",
 "text": "Why is there a woman running around my table? Why is it a good idea? It’s a very good idea.",
 "ctx": "Scene ch12Alvarez",
-"script": "[bewildered, tired] Why is there a woman running around my table? [slow, thoughtful] Why is it a good idea? [flat, surrendering] It’s a very good idea."
+"script": "[bewildered, tired] Why is there a woman running around my table? [deadpan, thoughtful] Why is it a good idea? ...It’s a VERY good idea."
 },
 {
 "voice": "amy",
@@ -9267,14 +9267,14 @@
 "speaker": "Mrs. Alvarez",
 "text": "...NO. I said no. Why is everyone in my kitchen? Is that a mother running laps with two little girls?",
 "ctx": "Scene ch12Alvarez",
-"script": "[indignant, groggy] ...NO. I said no. [loud, bewildered] Why is everyone in my kitchen? [softening, amazed] Is that a mother running laps with two little girls?"
+"script": "[indignant, groggy] ...NO. I said no. [loud, bewildered] WHY is everyone in my kitchen? [softening, amazed] Is that a mother running laps with two little girls?"
 },
 {
 "voice": "carmen",
 "speaker": "Mrs. Alvarez",
 "text": "...Okay. That one can stay.",
 "ctx": "Scene ch12Alvarez",
-"script": "[grudging, melting] ...Okay. [warm, firm] That one can stay."
+"script": "[grudging, blunt] ...Okay. [warm, firm] THAT one can stay."
 },
 {
 "voice": "tom",
@@ -9288,7 +9288,7 @@
 "speaker": "Mrs. Alvarez",
 "text": "Take lemons. Take ALL the lemons. Every yard in this city has too many and somebody always leaves them on my step.",
 "ctx": "Scene ch12Alvarez",
-"script": "[brisk, generous] Take lemons. Take ALL the lemons. [wry, exasperated] Every yard in this city has too many and somebody always leaves them on my step."
+"script": "[brisk, generous] Take lemons. Take ALL the lemons. [flat, exasperated] Every yard in this city has too many... and somebody ALWAYS leaves them on my step."
 },
 {
 "voice": "rose",
@@ -9463,14 +9463,14 @@
 "speaker": "Mr. Washington",
 "text": "...and that is why you never trust a Tuesday. Hm? Why is everybody looking at me? Did I fall asleep? Again?",
 "ctx": "Scene ch12After",
-"script": "[slow, rumbling] ...and that is why you never trust a Tuesday. [bewildered, gentle] Hm? Why is everybody looking at me? [wry, sheepish] Did I fall asleep? Again?"
+"script": "[slow, rumbling] ...and THAT is why you never trust a Tuesday. [bewildered, gentle] Hm? Why is everybody looking at me? [unhurried, sheepish] Did I fall asleep? ...Again?"
 },
 {
 "voice": "gus",
 "speaker": "Larry",
 "text": "I’m blowing leaves. The leaf landed. It LANDED. Thirty years I’ve waited. Thank you.",
 "ctx": "Scene ch12After",
-"script": "[gruff, reverent] I’m blowing leaves. The leaf landed. It LANDED. [slow, choked up] Thirty years I’ve waited. [gruff, heartfelt] Thank you."
+"script": "[solemn, amazed] I’m blowing leaves. The leaf landed. It LANDED. [slow, moved] THIRTY years I’ve waited. [deadpan, heartfelt] ...Thank you."
 },
 {
 "voice": "?Marlowe",
@@ -9582,14 +9582,14 @@
 "speaker": "Sol",
 "text": "Tom. Sit. Not that chair. That chair is Sal’s. I keep it warm for him out of spite.",
 "ctx": "Scene ch13Open",
-"script": "[brisk, bossy] Tom. Sit. Not that chair. [petty, proud] That chair is Sal’s. I keep it warm for him out of spite."
+"script": "[brisk, bossy] Tom. Sit. NOT that chair. That chair is Sal’s. [deadpan, smug] I keep it warm for him... out of spite."
 },
 {
 "voice": "sal",
 "speaker": "Sol",
 "text": "Okay. Sal and I are cousins. You know that. What you don’t know is what we do between airport runs.",
 "ctx": "Scene ch13Open",
-"script": "[chatty, conspiratorial] Okay. Sal and I are cousins. You know that. [sly, teasing] What you don’t know is what we do between airport runs."
+"script": "[chatty, conspiratorial] Okay. Sal and I are cousins. You know that. [mischievous, hushed] What you DON’t know is what we do between airport runs."
 },
 {
 "voice": "grace",
@@ -9603,7 +9603,7 @@
 "speaker": "Sol",
 "text": "Letters. Eleven years of letters, Snail Mail to Los Angeles, in the trunks of cabs. Nobody ever opened a bag. Nobody ever asked why two cab companies need a hundred sacks of stamps.",
 "ctx": "Scene ch13Open",
-"script": "[proud, rolling] Letters. Eleven years of letters, Snail Mail to Los Angeles, in the trunks of cabs. [wry, boastful] Nobody ever opened a bag. Nobody ever asked why two cab companies need a hundred sacks of stamps."
+"script": "[proud, hushed] Letters. ELEVEN years of letters, Snail Mail to Los Angeles, in the trunks of cabs. Nobody ever opened a bag. [offhand, smug] Nobody ever asked why two cab companies need a HUNDRED sacks of stamps."
 },
 {
 "voice": "amy",
@@ -9617,28 +9617,28 @@
 "speaker": "Sol",
 "text": "A dispatch network. We call it the Network. We never came up with a better name.",
 "ctx": "Scene ch13Open",
-"script": "[proud, grand] A dispatch network. We call it the Network. [easy, amused] We never came up with a better name."
+"script": "[proud, grand] A dispatch network. We call it the Network. [flat, matter-of-fact] ...We never came up with a better name."
 },
 {
 "voice": "sal",
 "speaker": "Sal",
 "text": "Sol. Sol, come in. It’s Sal. Cab seven says hi. She’s fine. She’s the only thing in town that’s moving.",
 "ctx": "Scene ch13Open",
-"script": "[crackly, brisk] Sol. Sol, come in. It’s Sal. [proud, warm] Cab seven says hi. She’s fine. [wry, dry] She’s the only thing in town that’s moving."
+"script": "[crackly, brisk] Sol. Sol, come in. It’s Sal. Cab seven says hi. She’s fine. [deadpan, dry] She’s the ONLY thing in town that’s moving."
 },
 {
 "voice": "sal",
 "speaker": "Sol",
 "text": "Sal. I have Tom, his sister, two nieces, a boyfriend and a dog in my lobby. Say hi.",
 "ctx": "Scene ch13Open",
-"script": "[loud, showy] Sal. I have Tom, his sister, two nieces, a boyfriend and a dog in my lobby. [cheerful, prompting] Say hi."
+"script": "[loud, matter-of-fact] Sal. I have Tom, his sister, two nieces, a boyfriend and a DOG in my lobby. [deadpan, prompting] ...Say hi."
 },
 {
 "voice": "sal",
 "speaker": "Sal",
 "text": "Tommy! It’s quiet in here. Even the clocks are quiet. Your mother’s in the kitchen. Don’t panic. She’s fine. She just won’t stop baking.",
 "ctx": "Scene ch13Open",
-"script": "[crackly, warm] Tommy! It’s quiet in here. Even the clocks are quiet. [gentle, reassuring] Your mother’s in the kitchen. Don’t panic. She’s fine. [wry, exasperated] She just won’t stop baking."
+"script": "[crackly, warm] Tommy! It’s quiet in here. Even the clocks are quiet. [gentle, reassuring] Your mother’s in the kitchen. Don’t panic. She’s fine. [fond, exasperated] She just WON’t stop baking."
 },
 {
 "voice": "tom",
@@ -9652,14 +9652,14 @@
 "speaker": "Sal",
 "text": "I’m under the dome with a shovel and a very worried shopkeeper. I can’t get out. But I can dig toward you.",
 "ctx": "Scene ch13Open",
-"script": "[gruff, regretful] I’m under the dome with a shovel and a very worried shopkeeper. I can’t get out. [resolute, warm] But I can dig toward you."
+"script": "[matter-of-fact, weary] I’m under the dome with a shovel and a VERY worried shopkeeper. I can’t get out. [resolute, warm] ...But I can dig toward you."
 },
 {
 "voice": "sal",
 "speaker": "Sol",
 "text": "The Sub-Rail. Sal and I bored a tunnel under the Layover, from both coasts, for a hobby. It was supposed to open in 2031. It meets in the middle, right under the dome.",
 "ctx": "Scene ch13Open",
-"script": "[hushed, proud] The Sub-Rail. Sal and I bored a tunnel under the Layover, from both coasts, for a hobby. [sly, casual] It was supposed to open in 2031. It meets in the middle, right under the dome."
+"script": "[hushed, proud] The Sub-Rail. Sal and I bored a tunnel under the Layover, from both coasts, for a HOBBY. [offhand, flat] It was supposed to open in 2031. It meets in the middle, right under the dome."
 },
 {
 "voice": "tnb",
@@ -9673,7 +9673,7 @@
 "speaker": "Sol",
 "text": "We got a very good deal on a drill.",
 "ctx": "Scene ch13Open",
-"script": "[cheerful, proud] We got a very good deal on a drill."
+"script": "[flat, proud] We got a VERY good deal on a drill."
 },
 {
 "voice": "sal",
@@ -9694,7 +9694,7 @@
 "speaker": "Sol",
 "text": "The drill. We call her the Dual-Coast Drill. The kids at the depot call her the Worm. She doesn’t love it.",
 "ctx": "Scene ch13Open",
-"script": "[quick, amused] The drill. We call her the Dual-Coast Drill. [fond, wry] The kids at the depot call her the Worm. She doesn’t love it."
+"script": "[quick, amused] The drill. We call her the Dual-Coast Drill. The kids at the depot call her the Worm. [matter-of-fact, fond] ...She doesn’t love it."
 },
 {
 "voice": "sal",
@@ -9750,7 +9750,7 @@
 "speaker": "Sol",
 "text": "Thirty years. Never lost a passenger. Found two in the trunk. Both were fine.",
 "ctx": "Scene ch13Open",
-"script": "[proud, reassuring] Thirty years. Never lost a passenger. [cheery, casual] Found two in the trunk. Both were fine."
+"script": "[proud, reassuring] Thirty years. NEVER lost a passenger. [deadpan, casual] Found two in the trunk. ...Both were fine."
 },
 {
 "voice": "amy",
@@ -9792,7 +9792,7 @@
 "speaker": "Sol",
 "text": "Out the door, the Metro stairs on the boulevard. Past the turnstile, there’s a door that says EMPLOYEES ONLY. That’s you. You’re employees now.",
 "ctx": "Scene ch13Open",
-"script": "[brisk, instructive] Out the door, the Metro stairs on the boulevard. Past the turnstile, there’s a door that says EMPLOYEES ONLY. [proud, playful] That’s you. You’re employees now."
+"script": "[brisk, matter-of-fact] Out the door, the Metro stairs on the boulevard. Past the turnstile, there’s a door that says EMPLOYEES ONLY. [offhand, proud] That’s you. ...You’re employees now."
 },
 {
 "voice": "tom",
@@ -9869,7 +9869,7 @@
 "speaker": "Nickel",
 "text": "A man in a long coat bought gold coins from our shops. For years. Paid double. Never took his hat off.",
 "ctx": "Scene ch13Depot",
-"script": "[quick, uneasy] A man in a long coat bought gold coins from our shops. For years. Paid double. [slower, guilty] Never took his hat off."
+"script": "[quick, uneasy] A man in a long coat bought gold coins from our shops. For YEARS. Paid double. [slower, guilty] ...Never took his hat off."
 },
 {
 "voice": "amy",
@@ -9883,7 +9883,7 @@
 "speaker": "Nickel",
 "text": "We didn’t know. We thought he was a collector. We took the money. And we kept the best coins in the back, in case he ever paid triple.",
 "ctx": "Scene ch13Depot",
-"script": "[rueful, quick] We didn’t know. We thought he was a collector. [ashamed] We took the money. [small, pained] And we kept the best coins in the back, in case he ever paid triple."
+"script": "[sheepish, quick] We didn’t know. We thought he was a collector. We took the money. [guilty, small] And we kept the best coins in the back, in case he ever paid TRIPLE."
 },
 {
 "voice": "penny",
@@ -9897,7 +9897,7 @@
 "speaker": "Nickel",
 "text": "Eleven coins. Hers and mine. The last of the old gold. They were supposed to be a retirement.",
 "ctx": "Scene ch13Depot",
-"script": "[quiet, heavy] Eleven coins. Hers and mine. The last of the old gold. [wistful, wry] They were supposed to be a retirement."
+"script": "[quiet, heavy] Eleven coins. Hers and mine. The last of the old gold. [flat, wistful] ...They were supposed to be a retirement."
 },
 {
 "voice": "tnb",
@@ -9911,7 +9911,7 @@
 "speaker": "Nickel",
 "text": "Sal says gold remembers being warm. If amber is warmth that got stuck, then gold can give it somewhere to go. He says. I don’t know. He’s a cab driver.",
 "ctx": "Scene ch13Depot",
-"script": "[earnest, unsure] Sal says gold remembers being warm. If amber is warmth that got stuck, then gold can give it somewhere to go. [rueful, quick] He says. I don’t know. [dry] He’s a cab driver."
+"script": "[earnest, unsure] Sal says gold remembers being warm. If amber is warmth that got stuck, then gold can give it somewhere to go. [quick, sheepish] He says. I don’t know. [deadpan, dry] ...He’s a cab driver."
 },
 {
 "voice": "tom",
@@ -9925,7 +9925,7 @@
 "speaker": "Nickel",
 "text": "I’m giving up a drawer. It’s the best drawer I ever had. Go. I’ll bring them down behind you. Sol’s driving me to the second mile marker and making me run.",
 "ctx": "Scene ch13Depot",
-"script": "[light, brave] I’m giving up a drawer. It’s the best drawer I ever had. [brisk, rallying] Go. I’ll bring them down behind you. [wry, quick] Sol’s driving me to the second mile marker and making me run."
+"script": "[brave, matter-of-fact] I’m giving up a drawer. It’s the BEST drawer I ever had. [brisk, rallying] Go. I’ll bring them down behind you. [annoyed, quick] Sol’s driving me to the second mile marker... and making me RUN."
 },
 {
 "voice": "amy",
@@ -10268,7 +10268,7 @@
 "speaker": "Nickel",
 "text": "Tom! Sol drove me to the second mile marker and made me run. I have never been so tired and so right.",
 "ctx": "Scene ch13After",
-"script": "[breathless, triumphant] Tom! Sol drove me to the second mile marker and made me run. [wheezing, proud] I have never been so tired and so right."
+"script": "[breathless, triumphant] Tom! Sol drove me to the second mile marker and made me RUN. [wheezing, proud] I have never been so tired... and so RIGHT."
 },
 {
 "voice": "penny",
@@ -10289,7 +10289,7 @@
 "speaker": "Sal",
 "text": "(through the glass) TOMMY! Over here! Hi! Don’t hug the amber, it’s sticky!",
 "ctx": "Scene ch13After",
-"script": "[muffled, thrilled] (through the glass) TOMMY! Over here! Hi! [quick, warning] Don’t hug the amber, it’s sticky!"
+"script": "[muffled, thrilled] (through the glass) TOMMY! Over here! Hi! [quick, matter-of-fact] Don’t hug the amber, it’s STICKY!"
 },
 {
 "voice": "penny",
@@ -10310,7 +10310,7 @@
 "speaker": "Penny",
 "text": "(through the glass) One. Two. Don’t think about the interest. Three.",
 "ctx": "Scene ch13After",
-"script": "[muffled, tense] (through the glass) One. Two. [quick, pained] Don’t think about the interest. Three."
+"script": "[muffled, tense] (through the glass) One. Two. [quick, pained] Don’t think about the interest. ...Three."
 },
 {
 "voice": "tom",
@@ -10324,7 +10324,7 @@
 "speaker": "Sal",
 "text": "It worked! Gold remembers being warm! I told you! Nobody ever believes the cab driver!",
 "ctx": "Scene ch13After",
-"script": "[loud, overjoyed] It worked! Gold remembers being warm! [gloating, triumphant] I told you! [theatrical, wounded] Nobody ever believes the cab driver!"
+"script": "[loud, overjoyed] It worked! Gold remembers being warm! I TOLD you! [wounded, sarcastic] Nobody EVER believes the cab driver!"
 },
 {
 "voice": "penny",
@@ -10345,28 +10345,28 @@
 "speaker": "Penny",
 "text": "I was saving for a boat.",
 "ctx": "Scene ch13After",
-"script": "[wistful, sheepish] I was saving for a boat."
+"script": "[wistful, flat] I was saving... for a BOAT."
 },
 {
 "voice": "penny",
 "speaker": "Nickel",
 "text": "You don’t know how to drive a boat.",
 "ctx": "Scene ch13After",
-"script": "[dry, fond] You don’t know how to drive a boat."
+"script": "[flat, fond] You don’t know how to DRIVE a boat."
 },
 {
 "voice": "penny",
 "speaker": "Penny",
 "text": "That’s why it was a savings.",
 "ctx": "Scene ch13After",
-"script": "[cheeky, unapologetic] That’s why it was a savings."
+"script": "[cheeky, matter-of-fact] That’s WHY it was a savings."
 },
 {
 "voice": "sal",
 "speaker": "Sal",
 "text": "Tommy. Sol and I started this tunnel in 2011 with a shovel and a very good deal on a drill. I never thought anyone would walk through it.",
 "ctx": "Scene ch13After",
-"script": "[warm, wistful] Tommy. Sol and I started this tunnel in 2011 with a shovel and a very good deal on a drill. [quiet, touched] I never thought anyone would walk through it."
+"script": "[warm, wistful] Tommy. Sol and I started this tunnel in 2011 with a shovel and a VERY good deal on a drill. [quiet, touched] ...I never thought anyone would walk through it."
 },
 {
 "voice": "tom",
@@ -10380,7 +10380,7 @@
 "speaker": "Sal",
 "text": "I’m a cab driver. That’s the whole job.",
 "ctx": "Scene ch13After",
-"script": "[modest, embarrassed] I’m a cab driver. [gruff, warm] That’s the whole job."
+"script": "[modest, flat] I’m a cab driver. [low, warm] ...That’s the whole job."
 },
 {
 "voice": "penny",
@@ -10401,7 +10401,7 @@
 "speaker": "Penny",
 "text": "It was a very good drawer.",
 "ctx": "Scene ch13After",
-"script": "[wobbly, proud] It was a very good drawer."
+"script": "[shaky, proud] It was a VERY good drawer."
 },
 {
 "voice": "tnb",
@@ -14111,7 +14111,7 @@
 "speaker": "Mrs. Alvarez",
 "text": "I heard there was a situation. I brought lemon bars. And peppers. My nephew grows them. They are very hot. A man called Boppy would know what to do.",
 "ctx": "Scene ch19After",
-"script": "[warm, bustling] I heard there was a situation. I brought lemon bars. [proud, firm] And peppers. My nephew grows them. They are very hot. [knowing, decisive] A man called Boppy would know what to do."
+"script": "[warm, bustling] I heard there was a situation. I brought lemon bars. [proud, deadpan] And peppers. My nephew grows them. They are VERY hot. [knowing, matter-of-fact] A man called Boppy would know what to do."
 },
 {
 "voice": "grace",
@@ -14195,7 +14195,7 @@
 "speaker": "Sal",
 "text": "Cab seven! Everybody in. Bring the lasagna on your lap, it holds the heat. Fifty-nine floors, no stops, I am not even charging. I am scared of that tower and I am going anyway.",
 "ctx": "Scene ch19After",
-"script": "[booming, warm] Cab seven! Everybody in. Bring the lasagna on your lap, it holds the heat. [proud, generous] Fifty-nine floors, no stops, I am not even charging. [shaky, resolved] I am scared of that tower and I am going anyway."
+"script": "[booming, warm] Cab seven! Everybody in. Bring the lasagna on your lap, it holds the heat. [proud, generous] Fifty-nine floors, no stops, I am not even CHARGING. [shaky, resolved] I am scared of that tower... and I am going anyway."
 },
 {
 "voice": "tom",
@@ -15021,7 +15021,7 @@
 "speaker": "Sal",
 "text": "Cab seven! Everybody in! I am not charging. I am not even driving. Look UP.",
 "ctx": "Scene ch20Calm",
-"script": "[booming, joyful] Cab seven! Everybody in! [giddy, grand] I am not charging. I am not even driving. [awestruck, hushed] Look UP."
+"script": "[booming, joyful] Cab seven! Everybody in! [giddy, deadpan] I am not charging. I am not even DRIVING. [amazed, hushed] ...Look UP."
 },
 {
 "voice": "tom",
@@ -15070,7 +15070,7 @@
 "speaker": "Sol",
 "text": "A SKYWAY TRAIN?! I do not know what to do with my hands! I am a cab driver!",
 "ctx": "Scene ch20Calm",
-"script": "[flabbergasted, overjoyed] A SKYWAY TRAIN?! [panicked, delighted] I do not know what to do with my hands! [proud, bewildered] I am a cab driver!"
+"script": "[flabbergasted, overjoyed] A SKYWAY TRAIN?! [panicked, delighted] I do not know what to do with my HANDS! [flat, bewildered] ...I am a cab driver!"
 },
 {
 "voice": "sal",
@@ -15364,14 +15364,14 @@
 "speaker": "Mr. Pistachio",
 "text": "PFFF. Thank you. I could see my own eyebrows in there.",
 "ctx": "",
-"script": "[breathless, relieved] PFFF. Thank you. [shaky, dramatic] I could see my own eyebrows in there."
+"script": "[breathless, relieved] PFFF. Thank you. [shaky, flat] I could see my own EYEBROWS in there."
 },
 {
 "voice": "pistachio",
 "speaker": "Mr. Pistachio",
 "text": "It was BRAIN FREEZE. A walking chest freezer. He said birthdays are a scam and nobody came to his.",
 "ctx": "",
-"script": "[dramatic, aghast] It was BRAIN FREEZE. A walking chest freezer. [mocking, indignant] He said birthdays are a scam and nobody came to his."
+"script": "[dramatic, appalled] It was BRAIN FREEZE. A walking chest freezer. [mimicking, indignant] He said birthdays are a SCAM and nobody came to his."
 },
 {
 "voice": "pistachio",
@@ -15847,7 +15847,7 @@
 "speaker": "Mr. Pistachio",
 "text": "You're back! Did you... oh. No scoops. And the little one looks defrosted.",
 "ctx": "",
-"script": "[cheerful, hopeful] You're back! Did you... oh. [deflated, worried] No scoops. And the little one looks defrosted."
+"script": "[cheerful, hopeful] You're back! Did you... oh. [deflated, flat] No scoops. And the little one looks... defrosted."
 },
 {
 "voice": "rose",
@@ -16309,21 +16309,21 @@
 "speaker": "Pip",
 "text": "My rock says happy birthday. He's on the counter. Please don't frost him.",
 "ctx": "",
-"script": "[soft, earnest] My rock says happy birthday. [gentle, worried] He's on the counter. [pleading, quiet] Please don't frost him."
+"script": "[soft, earnest] My rock says happy birthday. He's on the counter. [sincere, pleading] ...Please don't FROST him."
 },
 {
 "voice": "moss",
 "speaker": "Moss",
 "text": "I brought a tree. A small one. It said it wanted to come.",
 "ctx": "",
-"script": "[slow, dreamy] I brought a tree. A small one. [mellow, pleased] It said it wanted to come."
+"script": "[slow, dreamy] I brought a tree. A small one. [serene, mellow] ...It said it wanted to come."
 },
 {
 "voice": "dot",
 "speaker": "Dot",
 "text": "Twelve people, one duck, one cow. I counted twice. The freezer counts as a person.",
 "ctx": "",
-"script": "[crisp, rapid] Twelve people, one duck, one cow. [proud, brisk] I counted twice. [flat, plain] The freezer counts as a person."
+"script": "[crisp, rapid] Twelve people, one duck, one cow. I counted TWICE. [matter-of-fact, flat] ...The freezer counts as a person."
 },
 {
 "voice": "brainfreeze",
@@ -16428,7 +16428,7 @@
 "speaker": "Dot",
 "text": "Nine candles, one breath. I counted. Perfect score.",
 "ctx": "",
-"script": "[crisp, delighted] Nine candles, one breath. I counted. [glowing, proud] Perfect score."
+"script": "[crisp, delighted] Nine candles, one breath. I counted. [deadpan, proud] ...Perfect score."
 },
 {
 "voice": "brainfreeze",
@@ -16526,14 +16526,14 @@
 "speaker": "Pip",
 "text": "Can my rock come? He's never been to a party.",
 "ctx": "",
-"script": "[earnest, soft] Can my rock come? [gently pleading] He's never been to a party."
+"script": "[earnest, soft] Can my rock come? [solemn, sincere] He's NEVER been to a party."
 },
 {
 "voice": "pip",
 "speaker": "Pip",
 "text": "He gets nervous around cake. He'll be fine. He's a rock.",
 "ctx": "",
-"script": "[tender, reassuring] He gets nervous around cake. [sincere, plain] He'll be fine. He's a rock."
+"script": "[tender, reassuring] He gets nervous around cake. [sincere, plain] He'll be fine. ...He's a rock."
 },
 {
 "voice": "rose",
@@ -16547,7 +16547,7 @@
 "speaker": "Pip",
 "text": "Then we'll be there. Both of us. He'll bring a gift. It's a smaller rock.",
 "ctx": "",
-"script": "[relieved, soft] Then we'll be there. Both of us. [proud, hushed] He'll bring a gift. [earnest] It's a smaller rock."
+"script": "[relieved, soft] Then we'll be there. BOTH of us. He'll bring a gift. [sincere, proud] ...It's a smaller rock."
 },
 {
 "voice": "grace",
@@ -16582,7 +16582,7 @@
 "speaker": "Moss",
 "text": "It said nothing. That means yes. Trees are very supportive.",
 "ctx": "",
-"script": "[slow, mellow] It said nothing. [serene, warm] That means yes. Trees are very supportive."
+"script": "[slow, mellow] It said nothing. [unbothered, serene] That means yes. Trees are VERY supportive."
 },
 {
 "voice": "moss",
@@ -16603,7 +16603,7 @@
 "speaker": "Moss",
 "text": "I already did. It said nothing. Very gracious.",
 "ctx": "",
-"script": "[slow, content] I already did. [mellow, pleased] It said nothing. Very gracious."
+"script": "[slow, content] I already did. It said nothing. [serene, pleased] ...Very gracious."
 },
 {
 "voice": "grace",
@@ -16617,14 +16617,14 @@
 "speaker": "Dot",
 "text": "Nine years. Nine scoops. Nine candles. That's twenty-seven nines. I'll be there.",
 "ctx": "",
-"script": "[crisp, delighted] Nine years. Nine scoops. Nine candles. [quick, proud] That's twenty-seven nines. [brisk, firm] I'll be there."
+"script": "[crisp, delighted] Nine years. Nine scoops. Nine candles. [quick, proud] That's TWENTY-SEVEN nines. [flat, firm] I'll be there."
 },
 {
 "voice": "dot",
 "speaker": "Dot",
 "text": "I'll count the guests. Somebody has to.",
 "ctx": "",
-"script": "[brisk, dutiful] I'll count the guests. [dry, flat] Somebody has to."
+"script": "[brisk, dutiful] I'll count the guests. [matter-of-fact, flat] ...SOMEBODY has to."
 },
 {
 "voice": "rose",
@@ -16638,7 +16638,7 @@
 "speaker": "Dot",
 "text": "One duck. Counted.",
 "ctx": "",
-"script": "[crisp, satisfied] One duck. Counted."
+"script": "[deadpan, crisp] One duck. ...Counted."
 },
 {
 "voice": "pip",
@@ -16652,14 +16652,14 @@
 "speaker": "pip",
 "text": "He's shy. Please don't make eye contact.",
 "ctx": "",
-"script": "[hushed, protective] He's shy. [gentle, pleading] Please don't make eye contact."
+"script": "[hushed, protective] He's shy. [solemn, pleading] Please don't make eye contact."
 },
 {
 "voice": "pip",
 "speaker": "pip",
 "text": "Excellent. He's already learned 'stay'.",
 "ctx": "",
-"script": "[delighted, whispering] Excellent. He's already learned 'stay'."
+"script": "[delighted, whispering] Excellent. He's ALREADY learned 'stay'."
 },
 {
 "voice": "moss",
@@ -16673,28 +16673,28 @@
 "speaker": "moss",
 "text": "It said nothing. Very mysterious.",
 "ctx": "",
-"script": "[mellow, impressed] It said nothing. [dreamy] ...Very mysterious."
+"script": "[slow, amazed] It said nothing. [mellow, dreamy] ...VERY mysterious."
 },
 {
 "voice": "moss",
 "speaker": "moss",
 "text": "I think I'm barking up the wrong tree.",
 "ctx": "",
-"script": "[slow, pleased] I think I'm barking up the wrong tree."
+"script": "[slow, smug] I think I'm barking up... the wrong tree."
 },
 {
 "voice": "dot",
 "speaker": "dot",
 "text": "Ten doors and THREE gaps in the trees now. Somebody opened one by the school.",
 "ctx": "",
-"script": "[crisp, excited] Ten doors and THREE gaps in the trees now. [scandalized, quick] Somebody opened one by the school."
+"script": "[crisp, excited] Ten doors and THREE gaps in the trees now. [scandalized, quick] SOMEBODY opened one by the school."
 },
 {
 "voice": "dot",
 "speaker": "dot",
 "text": "I had to start all over. I'm at four hundred and six.",
 "ctx": "",
-"script": "[deflated, aggrieved] I had to start all over. [flat, precise] I'm at four hundred and six."
+"script": "[deflated, annoyed] I had to start ALL over. [flat, precise] ...I'm at four hundred and six."
 },
 {
 "voice": "dot",
@@ -16708,7 +16708,7 @@
 "speaker": "dot",
 "text": "A mud blob ran through the Square with a pie tin. One blob. One tin. I counted.",
 "ctx": "",
-"script": "[fast, indignant] A mud blob ran through the Square with a pie tin. [crisp, precise] One blob. One tin. [proud] I counted."
+"script": "[fast, indignant] A mud blob ran through the Square with a pie tin. [matter-of-fact, precise] One blob. One tin. ...I counted."
 },
 {
 "voice": "dot",
@@ -16729,14 +16729,14 @@
 "speaker": "dot",
 "text": "I've counted them seventeen times.",
 "ctx": "",
-"script": "[proud, precise] I've counted them seventeen times."
+"script": "[proud, precise] I've counted them SEVENTEEN times."
 },
 {
 "voice": "dot",
 "speaker": "dot",
 "text": "Tomorrow I'm moving on to windows.",
 "ctx": "",
-"script": "[brisk, resolved] Tomorrow I'm moving on to windows."
+"script": "[deadpan, resolved] Tomorrow... I'm moving on to windows."
 },
 {
 "voice": "gus",
@@ -16750,28 +16750,28 @@
 "speaker": "gus",
 "text": "My coach is a bench.",
 "ctx": "",
-"script": "[unhurried, deadpan] My coach is a bench."
+"script": "[deadpan, dignified] My coach... is a bench."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "We have a very supportive relationship.",
 "ctx": "",
-"script": "[warm, creaky] We have a very supportive relationship."
+"script": "[deadpan, warm] We have a VERY supportive relationship."
 },
 {
 "voice": "bean",
 "speaker": "bean",
 "text": "A mud blob just ran past me carrying a pie.",
 "ctx": "",
-"script": "[bright, amazed] A mud blob just ran past me carrying a pie."
+"script": "[bright, amazed] A mud blob just ran past me... carrying a PIE."
 },
 {
 "voice": "bean",
 "speaker": "bean",
 "text": "I didn't stop it. I collect wrong turns, not pies.",
 "ctx": "",
-"script": "[breezy, unbothered] I didn't stop it. [cheerful, proud] I collect wrong turns, not pies."
+"script": "[breezy, unbothered] I didn't stop it. [matter-of-fact, cheerful] I collect wrong turns, not pies."
 },
 {
 "voice": "bean",
@@ -16785,42 +16785,42 @@
 "speaker": "bean",
 "text": "He was walking slower than me. Nobody walks slower than me. I collect slow walks too, now.",
 "ctx": "",
-"script": "[marveling, rambling] He was walking slower than me. [astonished] Nobody walks slower than me. [cheerful, pleased] I collect slow walks too, now."
+"script": "[amazed, rambling] He was walking SLOWER than me. NOBODY walks slower than me. [sincere, cheerful] ...I collect slow walks too, now."
 },
 {
 "voice": "bean",
 "speaker": "bean",
 "text": "I'm not lost. I'm collecting wrong turns.",
 "ctx": "",
-"script": "[sunny, breezy] I'm not lost. [proud, bright] I'm collecting wrong turns."
+"script": "[sunny, breezy] I'm not lost. [unbothered, proud] I'm COLLECTING wrong turns."
 },
 {
 "voice": "bean",
 "speaker": "bean",
 "text": "That pond up north owes me an apology.",
 "ctx": "",
-"script": "[breezy, aggrieved] That pond up north owes me an apology."
+"script": "[breezy, annoyed] That pond up north owes me an APOLOGY."
 },
 {
 "voice": "bean",
 "speaker": "bean",
 "text": "Long story. Short socks.",
 "ctx": "",
-"script": "[light, cryptic] Long story. Short socks."
+"script": "[matter-of-fact, breezy] Long story. ...Short socks."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "Your father caught Old Iron-Gill? And let him GO? Forty years of telling that story, and now it's true.",
 "ctx": "",
-"script": "[astonished, gravelly] Your father caught Old Iron-Gill? And let him GO? [dry, wondering] Forty years of telling that story, and now it's true."
+"script": "[amazed, slow] Your father caught Old Iron-Gill? And let him GO? [deadpan, dry] FORTY years of telling that story, and now it's true."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "He came by the shack this morning. The fish, not your father. Just floated there. I think he wanted to say hello.",
 "ctx": "",
-"script": "[quiet, wondering] He came by the shack this morning. [dry] The fish, not your father. [soft, moved] Just floated there. I think he wanted to say hello."
+"script": "[quiet, amazed] He came by the shack this morning. [deadpan, dry] The fish, NOT your father. [soft, moved] Just floated there. I think he wanted to say hello."
 },
 {
 "voice": "gus",
@@ -16834,14 +16834,14 @@
 "speaker": "gus",
 "text": "It went west, into the marsh. The Whispering Marsh. The reeds talk out there. Mostly nonsense.",
 "ctx": "",
-"script": "[low, gravelly] It went west, into the marsh. The Whispering Marsh. [dry, dismissive] The reeds talk out there. Mostly nonsense."
+"script": "[low, slow] It went west, into the marsh. The Whispering Marsh. The reeds talk out there. [deadpan, dismissive] ...Mostly nonsense."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "Bait shack is open. Worms, minnows, and a sandwich I'm not selling.",
 "ctx": "",
-"script": "[dry, gravelly] Bait shack is open. [flat, deadpan] Worms, minnows, and a sandwich I'm not selling."
+"script": "[dry, slow] Bait shack is open. [deadpan, flat] Worms, minnows, and a sandwich I'm NOT selling."
 },
 {
 "voice": "gus",
@@ -16855,140 +16855,140 @@
 "speaker": "gus",
 "text": "They say a catfish lives out there older than the boards. I say they say a lot.",
 "ctx": "",
-"script": "[low, sly] They say a catfish lives out there older than the boards. [dry, skeptical] I say they say a lot."
+"script": "[low, mischievous] They say a catfish lives out there older than the boards. [deadpan, skeptical] I say... they say a LOT."
 },
 {
 "voice": "michael",
 "speaker": "michael",
 "text": "Thirty parents. Zero tears. One very well-behaved pen. Best conference night in thirty-one years.",
 "ctx": "",
-"script": "[tired, deadpan] Thirty parents. Zero tears. [dry] One very well-behaved pen. [warm, proud] Best conference night in thirty-one years."
+"script": "[tired, deadpan] Thirty parents. Zero tears. ...One very well-behaved pen. [warm, proud] Best conference night in thirty-one years."
 },
 {
 "voice": "michael",
 "speaker": "michael",
 "text": "Come to Field Day, Tom. Amy runs the relay. Amy always runs the relay.",
 "ctx": "",
-"script": "[warm, easy] Come to Field Day, Tom. Amy runs the relay. [dry, knowing] Amy always runs the relay."
+"script": "[warm, level] Come to Field Day, Tom. Amy runs the relay. [deadpan, knowing] Amy ALWAYS runs the relay."
 },
 {
 "voice": "michael",
 "speaker": "michael",
 "text": "Conferences start at seven. SEVEN. The bells say otherwise. The bells are wrong.",
 "ctx": "",
-"script": "[stern, exasperated] Conferences start at seven. SEVEN. [flat, irritated] The bells say otherwise. The bells are wrong."
+"script": "[stern, exasperated] Conferences start at seven. SEVEN. [deadpan, annoyed] The bells say otherwise. ...The bells are wrong."
 },
 {
 "voice": "michael",
 "speaker": "michael",
 "text": "Clear the rooms, set the hallway clocks to seven, and the Cafetorium will open. I hope.",
 "ctx": "",
-"script": "[brisk, hopeful] Clear the rooms, set the hallway clocks to seven, and the Cafetorium will open. [small, uncertain] I hope."
+"script": "[brisk, hopeful] Clear the rooms, set the hallway clocks to seven, and the Cafetorium will open. [small, deadpan] ...I hope."
 },
 {
 "voice": "michael",
 "speaker": "michael",
 "text": "Principal Pruitt. Thirty-one years at Long Island Elementary. I've seen everything. Not tonight, though. Tonight is new.",
 "ctx": "",
-"script": "[proud, weathered] Principal Pruitt. Thirty-one years at Long Island Elementary. [seasoned, dry] I've seen everything. [low, excited] Not tonight, though. Tonight is new."
+"script": "[proud, weary] Principal Pruitt. Thirty-one years at Long Island Elementary. I've seen EVERYTHING. [deadpan, low] Not tonight, though. ...Tonight is new."
 },
 {
 "voice": "bean",
 "speaker": "bean",
 "text": "Marco is reading at a third-grade level! Mrs. Gregori showed me the chart. There was a chart!",
 "ctx": "",
-"script": "[giddy, proud] Marco is reading at a third-grade level! [thrilled] Mrs. Gregori showed me the chart. [gleeful, breathless] There was a chart!"
+"script": "[giddy, proud] Marco is reading at a third-grade level! Mrs. Gregori showed me the chart. [gleeful, amazed] There was a CHART!"
 },
 {
 "voice": "bean",
 "speaker": "bean",
 "text": "I cried a little. In the minivan. Don't tell Marco.",
 "ctx": "",
-"script": "[sheepish, tender] I cried a little. In the minivan. [hushed, pleading] Don't tell Marco."
+"script": "[sheepish, tender] I cried a little. In the minivan. [hushed, sincere] ...Don't tell Marco."
 },
 {
 "voice": "bean",
 "speaker": "bean",
 "text": "I'm Marco’s dad. Marco says Mrs. Gregori is the toughest teacher in the whole school.",
 "ctx": "",
-"script": "[friendly, chatty] I'm Marco’s dad. [amused, impressed] Marco says Mrs. Gregori is the toughest teacher in the whole school."
+"script": "[friendly, chatty] I'm Marco’s dad. [amused, impressed] Marco says Mrs. Gregori is the TOUGHEST teacher in the whole school."
 },
 {
 "voice": "bean",
 "speaker": "bean",
 "text": "Marco also says she's his favorite. Please don't tell Marco I told you.",
 "ctx": "",
-"script": "[warm, conspiratorial] Marco also says she's his favorite. [quick, whispering] Please don't tell Marco I told you."
+"script": "[warm, conspiratorial] Marco also says she's his favorite. [quick, whispering] PLEASE don't tell Marco I told you."
 },
 {
 "voice": "oolong",
 "speaker": "oolong",
 "text": "Thirty conferences, nine hundred cookies, one laminator. Everything went on schedule. MY schedule.",
 "ctx": "",
-"script": "[crisp, triumphant] Thirty conferences, nine hundred cookies, one laminator. [smug, pointed] Everything went on schedule. MY schedule."
+"script": "[crisp, triumphant] Thirty conferences, nine hundred cookies, one laminator. [smug, prim] Everything went on schedule. ...MY schedule."
 },
 {
 "voice": "oolong",
 "speaker": "oolong",
 "text": "Tell Mrs. Gregori her bulletin board is the best in the building. Don't tell the other teachers.",
 "ctx": "",
-"script": "[hushed, conspiratorial] Tell Mrs. Gregori her bulletin board is the best in the building. [sly, hushed] Don't tell the other teachers."
+"script": "[hushed, conspiratorial] Tell Mrs. Gregori her bulletin board is the BEST in the building. [mischievous, hushed] ...Don't tell the other teachers."
 },
 {
 "voice": "oolong",
 "speaker": "oolong",
 "text": "Kowalski. PTA president. I brought nine hundred cookies and a laminator.",
 "ctx": "",
-"script": "[brisk, commanding] Kowalski. PTA president. [smug, crisp] I brought nine hundred cookies and a laminator."
+"script": "[brisk, commanding] Kowalski. PTA president. [smug, flat] I brought nine hundred cookies... and a laminator."
 },
 {
 "voice": "oolong",
 "speaker": "oolong",
 "text": "The sign-up sheet RAN AWAY. On little paper legs. I've never been so offended.",
 "ctx": "",
-"script": "[scandalized, shrill] The sign-up sheet RAN AWAY. [incredulous] On little paper legs. [wounded, prim] I've never been so offended."
+"script": "[scandalized, shrill] The sign-up sheet RAN AWAY. On little paper legs. [appalled, prim] I've NEVER been so offended."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "They fixed the bells! In my lifetime! I'm going to tell everyone at the diner.",
 "ctx": "",
-"script": "[delighted, creaky] They fixed the bells! [wondering, amazed] In my lifetime! [chuffed, eager] I'm going to tell everyone at the diner."
+"script": "[delighted, amazed] They fixed the bells! In MY lifetime! [deadpan, eager] I'm going to tell EVERYONE at the diner."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "I'm here for my grandson. He's in the second grade. I was in the second grade here in 1956.",
 "ctx": "",
-"script": "[slow, warm] I'm here for my grandson. He's in the second grade. [dry, wistful] I was in the second grade here in 1956."
+"script": "[slow, warm] I'm here for my grandson. He's in the second grade. [unhurried, wistful] I was in the second grade here... in 1956."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "The bells were wrong in 1956 too. Nobody fixed them. Things were simpler.",
 "ctx": "",
-"script": "[dry, unhurried] The bells were wrong in 1956 too. Nobody fixed them. [fond, wistful] Things were simpler."
+"script": "[dry, unhurried] The bells were wrong in 1956 too. Nobody fixed them. [deadpan, fond] ...Things were simpler."
 },
 {
 "voice": "bun",
 "speaker": "bun",
 "text": "Welcome! Our bread is emotionally available.",
 "ctx": "",
-"script": "[bubbly, bright] Welcome! [pleased, chirpy] Our bread is emotionally available."
+"script": "[bubbly, bright] Welcome! [sincere, chirpy] Our bread is EMOTIONALLY available."
 },
 {
 "voice": "bun",
 "speaker": "bun",
 "text": "The baguettes? A little crusty.",
 "ctx": "",
-"script": "[playful, teasing] The baguettes? [giggly, bright] A little crusty."
+"script": "[playful, teasing] The baguettes? [matter-of-fact, bright] ...A little crusty."
 },
 {
 "voice": "bun",
 "speaker": "bun",
 "text": "Today's special is yesterday's tomorrow toast.",
 "ctx": "",
-"script": "[chipper, proud] Today's special is yesterday's tomorrow toast."
+"script": "[chipper, proud] Today's special is yesterday's... tomorrow toast."
 },
 {
 "voice": "page",
@@ -17002,7 +17002,7 @@
 "speaker": "page",
 "text": "Story time is Saturdays now. The Unread asked for Grace. By name.",
 "ctx": "",
-"script": "[whispering, pleased] Story time is Saturdays now. [hushed, wondering] The Unread asked for Grace. By name."
+"script": "[whispering, pleased] Story time is Saturdays now. [hushed, amazed] The Unread asked for Grace. ...By NAME."
 },
 {
 "voice": "page",
@@ -17016,21 +17016,21 @@
 "speaker": "page",
 "text": "I'm fine. Everything is fine. The dictionaries haven't slept in a week.",
 "ctx": "",
-"script": "[whispering, brittle] I'm fine. Everything is fine. [hushed, haggard] The dictionaries haven't slept in a week."
+"script": "[whispering, brittle] I'm fine. EVERYTHING is fine. [grave, haggard] The dictionaries haven't slept in a week."
 },
 {
 "voice": "page",
 "speaker": "page",
 "text": "It's fine. Everything is fine. Please whisper.",
 "ctx": "",
-"script": "[whispering, strained] It's fine. Everything is fine. [hushed, sharp] Please whisper."
+"script": "[whispering, strained] It's fine. Everything is fine. [hushed, sharp] PLEASE whisper."
 },
 {
 "voice": "page",
 "speaker": "page",
 "text": "...Did you hear that? That wasn't me. I'd know my own shush.",
 "ctx": "",
-"script": "[whispering, spooked] ...Did you hear that? [hushed, rattled] That wasn't me. I'd know my own shush."
+"script": "[whispering, spooked] ...Did you hear that? That wasn't me. [deadpan, hushed] I'd know my OWN shush."
 },
 {
 "voice": "page",
@@ -17044,14 +17044,14 @@
 "speaker": "page",
 "text": "Someone shelved a sandwich under 'S'.",
 "ctx": "",
-"script": "[whispering, scandalized] Someone shelved a sandwich under 'S'."
+"script": "[whispering, scandalized] Someone shelved a sandwich... under 'S'."
 },
 {
 "voice": "page",
 "speaker": "page",
 "text": "Technically correct. Deeply concerning.",
 "ctx": "",
-"script": "[whispering, grave] Technically correct. Deeply concerning."
+"script": "[whispering, flat] Technically correct. ...DEEPLY concerning."
 },
 {
 "voice": "fern",
@@ -17065,84 +17065,84 @@
 "speaker": "fern",
 "text": "They're all called Steve. It saves time.",
 "ctx": "",
-"script": "[gentle, serene] They're all called Steve. [soft, deadpan] It saves time."
+"script": "[gentle, serene] They're ALL called Steve. [soft, matter-of-fact] ...It saves time."
 },
 {
 "voice": "fern",
 "speaker": "fern",
 "text": "Except that one. That's Assistant Steve.",
 "ctx": "",
-"script": "[hushed, fond] Except that one. [affectionate, proud] That's Assistant Steve."
+"script": "[hushed, fond] Except that one. [serene, proud] That's ASSISTANT Steve."
 },
 {
 "voice": "kit",
 "speaker": "kit",
 "text": "Your parcel is arriving any Tuesday now.",
 "ctx": "",
-"script": "[chipper, brisk] Your parcel is arriving any Tuesday now."
+"script": "[chipper, casual] Your parcel is arriving ANY Tuesday now."
 },
 {
 "voice": "kit",
 "speaker": "kit",
 "text": "The snails asked for smaller uniforms.",
 "ctx": "",
-"script": "[cheery, deadpan] The snails asked for smaller uniforms."
+"script": "[cheery, offhand] The snails asked for... smaller uniforms."
 },
 {
 "voice": "kit",
 "speaker": "kit",
 "text": "I deliver good news. Bad news has to walk.",
 "ctx": "",
-"script": "[bright, proud] I deliver good news. [wry, breezy] Bad news has to walk."
+"script": "[bright, proud] I deliver good news. [matter-of-fact, breezy] Bad news has to WALK."
 },
 {
 "voice": "oolong",
 "speaker": "oolong",
 "text": "The kettle is still going on about that man in the long coat. Gold coins. Paying double.",
 "ctx": "",
-"script": "[gossipy, relishing] The kettle is still going on about that man in the long coat. [low, scandalized] Gold coins. Paying double."
+"script": "[gossipy, relishing] The kettle is STILL going on about that man in the long coat. [low, scandalized] Gold coins. Paying double."
 },
 {
 "voice": "oolong",
 "speaker": "oolong",
 "text": "I told it to mind its own business. It's a kettle. It has no business.",
 "ctx": "",
-"script": "[prim, sly] I told it to mind its own business. [dry, flat] It's a kettle. It has no business."
+"script": "[prim, matter-of-fact] I told it to mind its own business. [deadpan, flat] It's a kettle. ...It HAS no business."
 },
 {
 "voice": "oolong",
 "speaker": "oolong",
 "text": "The kettle has been gossiping again.",
 "ctx": "",
-"script": "[hushed, sly] The kettle has been gossiping again."
+"script": "[hushed, conspiratorial] The kettle has been gossiping... again."
 },
 {
 "voice": "oolong",
 "speaker": "oolong",
 "text": "It spilled the tea. Literally.",
 "ctx": "",
-"script": "[delighted, sly] It spilled the tea. [dry, pleased] ...Literally."
+"script": "[delighted, mischievous] It spilled the tea. [matter-of-fact, pleased] ...Literally."
 },
 {
 "voice": "oolong",
 "speaker": "oolong",
 "text": "Please mind the dramatic biscuits.",
 "ctx": "",
-"script": "[breezy, mock serious] Please mind the dramatic biscuits."
+"script": "[prim, deadpan] Please mind the DRAMATIC biscuits."
 },
 {
 "voice": "luna",
 "speaker": "luna",
 "text": "The moon is back. I looked at it for an hour. I didn't even write anything down.",
 "ctx": "",
-"script": "[soft, joyful] The moon is back. I looked at it for an hour. [dreamy, amazed] I didn't even write anything down."
+"script": "[soft, joyful] The moon is back. I looked at it for an HOUR. [dreamy, sheepish] I didn't even write anything down."
 },
 {
 "voice": "luna",
 "speaker": "luna",
 "text": "I swept the club stairs. Twelve years of wondering, and it was just a very dusty party.",
 "ctx": "",
-"script": "[drifting, rueful] I swept the club stairs. [soft, wondering] Twelve years of wondering, and it was just a very dusty party."
+"script": "[drifting, sheepish] I swept the club stairs. [soft, earnest] Twelve years of wondering, and it was just... a very DUSTY party."
 },
 {
 "voice": "luna",
@@ -17156,7 +17156,7 @@
 "speaker": "luna",
 "text": "If you see the moon up there, please tell it to come home. My telescope misses it.",
 "ctx": "",
-"script": "[wistful, tender] If you see the moon up there, please tell it to come home. [small, sincere] My telescope misses it."
+"script": "[wistful, tender] If you see the moon up there, PLEASE tell it to come home. [small, sincere] ...My telescope misses it."
 },
 {
 "voice": "luna",
@@ -17170,7 +17170,7 @@
 "speaker": "luna",
 "text": "It's not behind a cloud. It's just not THERE. I checked four times.",
 "ctx": "",
-"script": "[rattled, insistent] It's not behind a cloud. It's just not THERE. [small, unsettled] I checked four times."
+"script": "[rattled, insistent] It's not behind a cloud. It's just not THERE. [small, sincere] ...I checked four times."
 },
 {
 "voice": "luna",
@@ -17184,35 +17184,35 @@
 "speaker": "luna",
 "text": "It's shaped exactly like my laundry.",
 "ctx": "",
-"script": "[sheepish, soft] It's shaped exactly like my laundry."
+"script": "[sheepish, matter-of-fact] It's shaped EXACTLY like my laundry."
 },
 {
 "voice": "luna",
 "speaker": "luna",
 "text": "Space is asking me to tidy up.",
 "ctx": "",
-"script": "[drifting, resigned] Space is asking me to tidy up."
+"script": "[drifting, resigned] Space is asking me... to tidy up."
 },
 {
 "voice": "penny",
 "speaker": "penny",
 "text": "Welcome to Penny's Pockets. I sell things for pockets. Also things for people.",
 "ctx": "",
-"script": "[bright, brisk] Welcome to Penny's Pockets. I sell things for pockets. [playful, light] Also things for people."
+"script": "[bright, brisk] Welcome to Penny's Pockets. I sell things for pockets. [deadpan, cheerful] ...Also things for people."
 },
 {
 "voice": "penny",
 "speaker": "penny",
 "text": "Gear for the whole family, snacks for fights, and a few things that go POP. Gently.",
 "ctx": "",
-"script": "[quick, chipper] Gear for the whole family, snacks for fights, [bright, teasing] and a few things that go POP. [sweet, hushed] Gently."
+"script": "[quick, chipper] Gear for the whole family, snacks for fights, and a few things that go POP. [sweet, hushed] ...Gently."
 },
 {
 "voice": "penny",
 "speaker": "penny",
 "text": "Got something to sell? I buy almost anything. Not Steve. Never Steve.",
 "ctx": "",
-"script": "[eager, coaxing] Got something to sell? I buy almost anything. [sharp, dramatic] Not Steve. Never Steve."
+"script": "[eager, coaxing] Got something to sell? I buy almost ANYTHING. [flat, sharp] Not Steve. ...NEVER Steve."
 },
 {
 "voice": "penny",
@@ -17226,7 +17226,7 @@
 "speaker": "penny",
 "text": "Browse all you like. Browsing is free. Buying is better.",
 "ctx": "",
-"script": "[easy, breezy] Browse all you like. Browsing is free. [cheeky, sing-song] Buying is better."
+"script": "[breezy, bright] Browse all you like. Browsing is free. [cheeky, flat] ...Buying is BETTER."
 },
 {
 "voice": "penny",
@@ -17240,21 +17240,21 @@
 "speaker": "sal",
 "text": "Long Island Taxi. We go anywhere in town. Town is small, so mostly here.",
 "ctx": "",
-"script": "[fast, friendly] Long Island Taxi. We go anywhere in town. [dry, amused] Town is small, so mostly here."
+"script": "[fast, friendly] Long Island Taxi. We go ANYWHERE in town. [offhand, dry] Town is small, so mostly here."
 },
 {
 "voice": "sal",
 "speaker": "sal",
 "text": "I have one cab. It's cab seven. Cabs one through six are a dream I'm working on.",
 "ctx": "",
-"script": "[proud, grand] I have one cab. It's cab seven. [wistful, amused] Cabs one through six are a dream I'm working on."
+"script": "[proud, grand] I have one cab. It's cab seven. [matter-of-fact, wistful] Cabs one through six... are a dream I'm working on."
 },
 {
 "voice": "sal",
 "speaker": "sal",
 "text": "You just rode with me. You tipped in sourdough starter. Odd. Generous.",
 "ctx": "",
-"script": "[warm, puzzled] You just rode with me. You tipped in sourdough starter. [fond, deadpan] Odd. Generous."
+"script": "[warm, puzzled] You just rode with me. You tipped in sourdough starter. [flat, fond] Odd. ...Generous."
 },
 {
 "voice": "?justin",
@@ -17632,49 +17632,49 @@
 "speaker": "ellie",
 "text": "I had a date with a man who turned out to be a disappointment. The coat wasn't. Keep it warm for me.",
 "ctx": "",
-"script": "[dry, imperious] I had a date with a man who turned out to be a disappointment. [soft, pointed] The coat wasn't. [tender, commanding] Keep it warm for me."
+"script": "[dry, imperious] I had a date with a man who turned out to be a DISAPPOINTMENT. [deadpan, pointed] ...The coat wasn't. [tender, commanding] Keep it warm for me."
 },
 {
 "voice": "ellie",
 "speaker": "ellie",
 "text": "Tom. Stand up straight. There. Now you look like someone I'm related to.",
 "ctx": "",
-"script": "[imperious, crisp] Tom. Stand up straight. [satisfied, dry] There. Now you look like someone I'm related to."
+"script": "[imperious, crisp] Tom. Stand up STRAIGHT. [cool, satisfied] There. Now you look like someone I'm related to."
 },
 {
 "voice": "ellie",
 "speaker": "ellie",
 "text": "Yes, Deedee has an aunt. Yes, I'm older. No, you may not ask by how much.",
 "ctx": "",
-"script": "[arch, dry] Yes, Deedee has an aunt. Yes, I'm older. [crisp, regal] No, you may not ask by how much."
+"script": "[arch, dry] Yes, Deedee has an aunt. Yes, I'm older. [withering, regal] NO, you may not ask by how much."
 },
 {
 "voice": "ellie",
 "speaker": "ellie",
 "text": "I've been to Paris eleven times. Long Island is charming. Like a hat you wear once.",
 "ctx": "",
-"script": "[airy, grand] I've been to Paris eleven times. [dry, sly] Long Island is charming. Like a hat you wear once."
+"script": "[airy, grand] I've been to Paris ELEVEN times. Long Island is charming. [arch, dry] ...Like a hat you wear once."
 },
 {
 "voice": "ellie",
 "speaker": "ellie",
 "text": "Deedee keeps offering me rhubarb crisp. I keep saying yes. That's called manners.",
 "ctx": "",
-"script": "[serene, smug] Deedee keeps offering me rhubarb crisp. I keep saying yes. [arch, dry] That's called manners."
+"script": "[serene, smug] Deedee keeps offering me rhubarb crisp. I keep saying yes. [arch, deadpan] ...That's called MANNERS."
 },
 {
 "voice": "ellie",
 "speaker": "ellie",
 "text": "Boppy says his stomach hurts. I told him to stop eating peppers. He looked at me like I insulted his mother.",
 "ctx": "",
-"script": "[dry, theatrical] Boppy says his stomach hurts. I told him to stop eating peppers. [indignant, wry] He looked at me like I insulted his mother."
+"script": "[dry, matter-of-fact] Boppy says his stomach hurts. I told him to stop eating peppers. [cool, arch] He looked at me like I insulted his MOTHER."
 },
 {
 "voice": "ellie",
 "speaker": "ellie",
 "text": "Grace, darling, that outfit is wonderful. Rose, darling, that outfit is a choice. A brave one.",
 "ctx": "",
-"script": "[warm, gushing] Grace, darling, that outfit is wonderful. [arch, diplomatic] Rose, darling, that outfit is a choice. [gracious, dry] A brave one."
+"script": "[warm, gushing] Grace, darling, that outfit is WONDERFUL. [arch, withering] Rose, darling, that outfit is... a choice. [gracious, dry] A brave one."
 },
 {
 "voice": "ellie",
@@ -17688,77 +17688,77 @@
 "speaker": "ellie",
 "text": "Never apologize for being early, dressing up, or leaving a bad party.",
 "ctx": "",
-"script": "[crisp, regal] Never apologize for being early, dressing up, or leaving a bad party."
+"script": "[crisp, regal] Never apologize for being early, dressing up, or leaving a BAD party."
 },
 {
 "voice": "ellie",
 "speaker": "ellie",
 "text": "Tom, you have a good heart. Now do something about the shoes.",
 "ctx": "",
-"script": "[warm, sincere] Tom, you have a good heart. [dry, pointed] Now do something about the shoes."
+"script": "[warm, sincere] Tom, you have a good heart. [arch, pointed] ...Now do something about the shoes."
 },
 {
 "voice": "ellie",
 "speaker": "ellie",
 "text": "Deedee says I'm sharp. I say everyone else is a little dull.",
 "ctx": "",
-"script": "[dry, haughty] Deedee says I'm sharp. [arch, amused] I say everyone else is a little dull."
+"script": "[dry, haughty] Deedee says I'm sharp. [arch, deadpan] I say everyone else is a little... DULL."
 },
 {
 "voice": "ellie",
 "speaker": "ellie",
 "text": "A good scarf fixes almost anything. Not Boppy. But almost anything.",
 "ctx": "",
-"script": "[breezy, knowing] A good scarf fixes almost anything. [dry, sly] Not Boppy. But almost anything."
+"script": "[breezy, knowing] A good scarf fixes almost anything. [cool, dry] Not Boppy. ...But ALMOST anything."
 },
 {
 "voice": "ellie",
 "speaker": "ellie",
 "text": "Somebody once told me I was too much. I outlived him. I dressed beautifully at the funeral.",
 "ctx": "",
-"script": "[cool, grand] Somebody once told me I was too much. [slow, serene] I outlived him. [glamorous, dry] I dressed beautifully at the funeral."
+"script": "[cool, grand] Somebody once told me I was too much. [withering, serene] I outlived him. [dry, drawn out] ...I dressed BEAUTIFULLY at the funeral."
 },
 {
 "voice": "bun",
 "speaker": "bun",
 "text": "I'm filming a day-in-my-life video. I live in the lofts.",
 "ctx": "",
-"script": "[bubbly, upbeat] I'm filming a day-in-my-life video. [casual, proud] I live in the lofts."
+"script": "[bubbly, upbeat] I'm filming a day-in-my-life video. [casual, smug] I live in the lofts."
 },
 {
 "voice": "bun",
 "speaker": "bun",
 "text": "This is the day. You're in my life now.",
 "ctx": "",
-"script": "[sweet, bright] This is the day. [cheeky, pushy] You're in my life now."
+"script": "[sweet, bright] This is the day. [matter-of-fact, cheerful] ...You're in my life now."
 },
 {
 "voice": "bun",
 "speaker": "bun",
 "text": "Say hi to my eleven followers.",
 "ctx": "",
-"script": "[sing-song, bright] Say hi to my eleven followers."
+"script": "[bright, proud] Say hi to my ELEVEN followers."
 },
 {
 "voice": "bean",
 "speaker": "bean",
 "text": "I'm an actor. Well. I'm an actor who parks cars at a tower.",
 "ctx": "",
-"script": "[easygoing, rambling] I'm an actor. [sheepish, rueful] Well. I'm an actor who parks cars at a tower."
+"script": "[easygoing, proud] I'm an actor. [sheepish, unbothered] Well. ...I'm an actor who parks cars at a tower."
 },
 {
 "voice": "bean",
 "speaker": "bean",
 "text": "I had a callback last week. For a cereal.",
 "ctx": "",
-"script": "[cheerful, hopeful] I had a callback last week. [proud, bright] For a cereal."
+"script": "[cheerful, hopeful] I had a callback last week. [matter-of-fact, proud] ...For a cereal."
 },
 {
 "voice": "bean",
 "speaker": "bean",
 "text": "The cereal went with someone else. It happens.",
 "ctx": "",
-"script": "[light, unbothered] The cereal went with someone else. [breezy, easy] It happens."
+"script": "[casual, unbothered] The cereal went with someone else. [breezy, bright] ...It happens."
 },
 {
 "voice": "page",
@@ -17772,14 +17772,14 @@
 "speaker": "page",
 "text": "Draft forty-one. It's about a man who writes screenplays. It's very personal.",
 "ctx": "",
-"script": "[quiet, precise] Draft forty-one. [low, solemn] It's about a man who writes screenplays. [hushed, earnest] It's very personal."
+"script": "[quiet, precise] Draft FORTY-ONE. It's about a man who writes screenplays. [grave, earnest] ...It's very personal."
 },
 {
 "voice": "page",
 "speaker": "page",
 "text": "He lends me a mug when I'm stuck. I'm stuck a lot. I have nine of his mugs.",
 "ctx": "",
-"script": "[soft, grateful] He lends me a mug when I'm stuck. [droll, whispering] I'm stuck a lot. [dry, sheepish] I have nine of his mugs."
+"script": "[soft, grateful] He lends me a mug when I'm stuck. [flat, whispering] I'm stuck a lot. ...I have NINE of his mugs."
 },
 {
 "voice": "boomie2",
@@ -17793,7 +17793,7 @@
 "speaker": "boomie2",
 "text": "I leave Tuesday for the tour. Atlanta first, then Chicago, then Nashville. One suitcase. Nine dresses.",
 "ctx": "",
-"script": "[warm, bubbling] I leave Tuesday for the tour. Atlanta first, then Chicago, then Nashville. [wry, giggly] One suitcase. Nine dresses."
+"script": "[warm, bubbling] I leave Tuesday for the tour. Atlanta first, then Chicago, then Nashville. [knowing, amused] One suitcase. ...NINE dresses."
 },
 {
 "voice": "boomie2",
@@ -17807,14 +17807,14 @@
 "speaker": "boomie2",
 "text": "Oh, the sun's coming up on my street. Hallelujah, hallelujah! Sorry. I sang that whole sentence.",
 "ctx": "",
-"script": "[singing, glowing] Oh, the sun's coming up on my street. Hallelujah, hallelujah! [giggly, sheepish] Sorry. I sang that whole sentence."
+"script": "[singing, glowing] Oh, the sun's coming up on my street. Hallelujah, hallelujah! [sheepish, matter-of-fact] Sorry. ...I sang that WHOLE sentence."
 },
 {
 "voice": "boomie2",
 "speaker": "boomie2",
 "text": "La la LAAA! Oops. A car alarm went off. That one is on me.",
 "ctx": "",
-"script": "[booming, joyful] La la LAAA! [sheepish, amused] Oops. A car alarm went off. That one is on me."
+"script": "[booming, joyful] La la LAAA! [sheepish, flat] Oops. A car alarm went off. ...That one is on me."
 },
 {
 "voice": "boomie2",
@@ -17828,7 +17828,7 @@
 "speaker": "boomie2",
 "text": "Friday night, front row. I don't start the show without you. Okay, I start. But I look for you.",
 "ctx": "",
-"script": "[soft, sincere] Friday night, front row. I don't start the show without you. [amused, teasing] Okay, I start. [tender, warm] But I look for you."
+"script": "[soft, sincere] Friday night, front row. I don't start the show without you. [knowing, amused] Okay, I start. [tender, warm] But I look for you."
 },
 {
 "voice": "boomie2",
@@ -17849,14 +17849,14 @@
 "speaker": "boomie2",
 "text": "I open with a hymn my grandmother sang. She'd say I'm doing it too loud. She'd be right.",
 "ctx": "",
-"script": "[soft, fond] I open with a hymn my grandmother sang. [dry, tender] She'd say I'm doing it too loud. [warm, rueful] She'd be right."
+"script": "[soft, fond] I open with a hymn my grandmother sang. [dry, tender] She'd say I'm doing it too LOUD. [sheepish, warm] ...She'd be right."
 },
 {
 "voice": "boomie2",
 "speaker": "boomie2",
 "text": "Sol says he parks his cab outside to hear me warm up. I say he's just early.",
 "ctx": "",
-"script": "[amused, smooth] Sol says he parks his cab outside to hear me warm up. [dry, teasing] I say he's just early."
+"script": "[amused, smooth] Sol says he parks his cab outside to hear me warm up. [matter-of-fact, teasing] I say... he's just early."
 },
 {
 "voice": "boomie2",
@@ -17870,7 +17870,7 @@
 "speaker": "boomie2",
 "text": "I sang in the shower this morning. The whole building clapped. Thin walls.",
 "ctx": "",
-"script": "[bright, pleased] I sang in the shower this morning. The whole building clapped. [dry, deadpan] Thin walls."
+"script": "[bright, pleased] I sang in the shower this morning. The WHOLE building clapped. [flat, dry] ...Thin walls."
 },
 {
 "voice": "boomie2",
@@ -17891,14 +17891,14 @@
 "speaker": "pip",
 "text": "It went one block. It cost a dollar. Best dollar of my life.",
 "ctx": "",
-"script": "[sincere, soft] It went one block. It cost a dollar. [glowing, delighted] Best dollar of my life."
+"script": "[sincere, soft] It went ONE block. It cost a dollar. [blissful, glowing] ...Best dollar of my life."
 },
 {
 "voice": "pip",
 "speaker": "pip",
 "text": "Then I ate a pupusa in a market from 1917. I may never go home.",
 "ctx": "",
-"script": "[dreamy, blissful] Then I ate a pupusa in a market from 1917. [soft, certain] I may never go home."
+"script": "[dreamy, blissful] Then I ate a pupusa in a market from 1917. [sincere, soft] ...I may NEVER go home."
 },
 {
 "voice": "olivia",
@@ -18157,70 +18157,70 @@
 "speaker": "Mr. Washington",
 "text": "...and that’s why you never trust a Tuesday. Hm? Did I fall asleep? Again?",
 "ctx": "Talking to Mr. Washington (jpark)",
-"script": "[slow, groggy] ...and that’s why you never trust a Tuesday. [sheepish, wry] Hm? Did I fall asleep? Again?"
+"script": "[slow, groggy] ...and THAT’s why you never trust a Tuesday. [flat, sheepish] Hm? Did I fall asleep? ...Again?"
 },
 {
 "voice": "washington",
 "speaker": "Mr. Washington",
 "text": "Back in 1979, nobody got stuck on a sentence. Well. Harold did.",
 "ctx": "Talking to Mr. Washington (jpark)",
-"script": "[slow, fond] Back in 1979, nobody got stuck on a sentence. [dry, warm] Well... Harold did."
+"script": "[slow, fond] Back in 1979, NOBODY got stuck on a sentence. [deadpan, dry] Well. ...Harold did."
 },
 {
 "voice": "washington",
 "speaker": "washington",
 "text": "That coat looks right on you. My daddy would say so. Then he'd say stand up straight.",
 "ctx": "",
-"script": "[warm, slow] That coat looks right on you. My daddy would say so. [gentle, amused] Then he'd say stand up straight."
+"script": "[warm, slow] That coat looks right on you. My daddy would say so. [dry, amused] Then he'd say... stand up straight."
 },
 {
 "voice": "washington",
 "speaker": "washington",
 "text": "Forty loaves. I ate four. Don't tell Bernadette.",
 "ctx": "",
-"script": "[slow, confiding] Forty loaves. I ate four. [low, sly] Don't tell Bernadette."
+"script": "[slow, confiding] Forty loaves. ...I ate four. [low, mischievous] Don't tell Bernadette."
 },
 {
 "voice": "washington",
 "speaker": "washington",
 "text": "Forty years I've made gumbo for this potluck. Today the stove won't light. The flame just leans. Toward the boulevard.",
 "ctx": "",
-"script": "[slow, worried] Forty years I've made gumbo for this potluck. Today the stove won't light. [low, uneasy] The flame just leans. [hushed, puzzled] Toward the boulevard."
+"script": "[slow, worried] FORTY years I've made gumbo for this potluck. Today the stove won't light. [hushed, uneasy] The flame just leans. ...Toward the boulevard."
 },
 {
 "voice": "washington",
 "speaker": "washington",
 "text": "My daddy drove the 7 line out of the old Car Barn. He said the stove down there could warm a whole street.",
 "ctx": "",
-"script": "[warm, nostalgic] My daddy drove the 7 line out of the old Car Barn. [fond, proud] He said the stove down there could warm a whole street."
+"script": "[warm, nostalgic] My daddy drove the 7 line out of the old Car Barn. [fond, proud] He said the stove down there could warm a WHOLE street."
 },
 {
 "voice": "washington",
 "speaker": "washington",
 "text": "My reading glasses! Found in a hole in the park. I won't ask.",
 "ctx": "",
-"script": "[delighted, gravelly] My reading glasses! Found in a hole in the park. [dry, amused] I won't ask."
+"script": "[delighted, surprised] My reading glasses! Found in a hole in the park. [unhurried, dry] ...I won't ask."
 },
 {
 "voice": "washington",
 "speaker": "washington",
 "text": "Back in 1979 the squirrels were polite. They waited until you finished your sandwich.",
 "ctx": "",
-"script": "[wry, fond] Back in 1979 the squirrels were polite. [dry, slow] They waited until you finished your sandwich."
+"script": "[slow, matter-of-fact] Back in 1979 the squirrels were POLITE. [dry, flat] They waited until you finished your sandwich."
 },
 {
 "voice": "washington",
 "speaker": "washington",
 "text": "Somebody took my reading glasses off the porch rail. I have read the same headline for three days.",
 "ctx": "",
-"script": "[grumbling, put-upon] Somebody took my reading glasses off the porch rail. [weary, dry] I have read the same headline for three days."
+"script": "[grumbling, annoyed] Somebody took my reading glasses off the porch rail. [weary, deadpan] I have read the same headline for THREE days."
 },
 {
 "voice": "washington",
 "speaker": "washington",
 "text": "I think it says WEATHER. It might say WHETHER.",
 "ctx": "",
-"script": "[uncertain, wry] I think it says WEATHER. [dry, flat] It might say WHETHER."
+"script": "[slow, uncertain] I think it says WEATHER. [unhurried, flat] ...It might say WHETHER."
 },
 {
 "voice": "washington",
@@ -18248,21 +18248,21 @@
 "speaker": "washington",
 "text": "That smog had me stuck on one sentence for an hour. At my age I don't have hours to spare.",
 "ctx": "",
-"script": "[slow, weary] That smog had me stuck on one sentence for an hour. [wry, gravelly] At my age I don't have hours to spare."
+"script": "[slow, weary] That smog had me stuck on ONE sentence for an hour. [dry, flat] At my age... I don't have hours to spare."
 },
 {
 "voice": "washington",
 "speaker": "washington",
 "text": "Thank you, Tom. And your young man. And the dog. Especially the dog.",
 "ctx": "",
-"script": "[warm, heartfelt] Thank you, Tom. And your young man. [fond, amused] And the dog. Especially the dog."
+"script": "[warm, heartfelt] Thank you, Tom. And your young man. [deadpan, fond] And the dog. ...ESPECIALLY the dog."
 },
 {
 "voice": "washington",
 "speaker": "washington",
 "text": "Bought this house in 1979. Same porch, same chair, same view.",
 "ctx": "",
-"script": "[slow, contented] Bought this house in 1979. [warm, settled] Same porch, same chair, same view."
+"script": "[slow, contented] Bought this house in 1979. [dry, settled] Same porch, same chair, same view."
 },
 {
 "voice": "washington",
@@ -18276,7 +18276,7 @@
 "speaker": "washington",
 "text": "You're the one fixing up the green house? Keep the old windows. They're better than the new ones.",
 "ctx": "",
-"script": "[warm, curious] You're the one fixing up the green house? [low, firm] Keep the old windows. They're better than the new ones."
+"script": "[warm, curious] You're the one fixing up the green house? [low, firm] KEEP the old windows. They're better than the new ones."
 },
 {
 "voice": "la_woman",
@@ -18297,35 +18297,35 @@
 "speaker": "la_woman",
 "text": "My dog ate a whole loaf. I found him. He was under the table. He's always under the table.",
 "ctx": "",
-"script": "[wry, tired] My dog ate a whole loaf. I found him. [dry, fond] He was under the table. He's always under the table."
+"script": "[dry, tired] My dog ate a WHOLE loaf. I found him. [deadpan, fond] He was under the table. ...He's ALWAYS under the table."
 },
 {
 "voice": "la_woman",
 "speaker": "la_woman",
 "text": "My tamales are cold. My dog is cold. My dog is somewhere. He's probably cold.",
 "ctx": "",
-"script": "[deadpan, drifting] My tamales are cold. My dog is cold. [flat, uncertain] My dog is somewhere. He's probably cold."
+"script": "[deadpan, drifting] My tamales are cold. My dog is cold. [flat, unsure] My dog is... somewhere. He's PROBABLY cold."
 },
 {
 "voice": "la_woman",
 "speaker": "la_woman",
 "text": "Eleven tennis balls! Back! My dog is beside himself. Wherever he is.",
 "ctx": "",
-"script": "[delighted, breathless] Eleven tennis balls! Back! My dog is beside himself. [dry, flat] Wherever he is."
+"script": "[delighted, breathless] ELEVEN tennis balls! Back! My dog is beside himself. [deadpan, flat] ...Wherever he is."
 },
 {
 "voice": "la_woman",
 "speaker": "la_woman",
 "text": "Every tennis ball on the block. Gone. My dog has nothing to ignore now.",
 "ctx": "",
-"script": "[dry, mournful] Every tennis ball on the block. Gone. [deadpan] My dog has nothing to ignore now."
+"script": "[mournful, dry] Every tennis ball on the block. Gone. [deadpan, flat] My dog has NOTHING to ignore now."
 },
 {
 "voice": "la_woman",
 "speaker": "la_woman",
 "text": "There he is. No. That's a squirrel. It's looking at me.",
 "ctx": "",
-"script": "[hopeful, quick] There he is. [flat, uneasy] No. That's a squirrel. It's looking at me."
+"script": "[hopeful, quick] There he is. [deadpan, uneasy] No. That's a squirrel. ...It's LOOKING at me."
 },
 {
 "voice": "la_woman",
@@ -18346,21 +18346,21 @@
 "speaker": "la_woman",
 "text": "I'm walking my dog. He's somewhere.",
 "ctx": "",
-"script": "[distracted, mild] I'm walking my dog. [dry, unbothered] He's somewhere."
+"script": "[distracted, mild] I'm walking my dog. [deadpan, unbothered] He's... somewhere."
 },
 {
 "voice": "la_woman",
 "speaker": "la_woman",
 "text": "My grandparents rented on this block. Now I rent on this block. We're a tradition.",
 "ctx": "",
-"script": "[wry, easygoing] My grandparents rented on this block. Now I rent on this block. [deadpan, proud] We're a tradition."
+"script": "[dry, easygoing] My grandparents rented on this block. Now I rent on this block. [deadpan, proud] ...We're a TRADITION."
 },
 {
 "voice": "la_woman",
 "speaker": "la_woman",
 "text": "There he is. No. That's a lemon.",
 "ctx": "",
-"script": "[hopeful, bright] There he is. [flat, deflated] No. That's a lemon."
+"script": "[hopeful, bright] There he is. [deadpan, deflated] No. ...That's a lemon."
 },
 {
 "voice": "gus",
@@ -18374,35 +18374,35 @@
 "speaker": "Larry",
 "text": "The leaf landed. It LANDED. I’ve been blowing that leaf since the smog. Thank you.",
 "ctx": "Talking to Larry (jpark)",
-"script": "[overcome, thick] The leaf landed. It LANDED. [tired, grateful] I’ve been blowing that leaf since the smog. [warm, sincere] Thank you."
+"script": "[overcome, slow] The leaf landed. It LANDED. [tired, deadpan] I’ve been blowing that leaf since the smog. [warm, sincere] ...Thank you."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "I'm blowing leaves. They're frosty. In LA. I have questions.",
 "ctx": "",
-"script": "[gruff, puzzled] I'm blowing leaves. They're frosty. In LA. [flat, wary] I have questions."
+"script": "[deadpan, puzzled] I'm blowing leaves. They're frosty. In LA. [flat, suspicious] ...I have questions."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "I'm blowing leaves. The squirrels keep blowing them back.",
 "ctx": "",
-"script": "[weary, resigned] I'm blowing leaves. [dry, defeated] The squirrels keep blowing them back."
+"script": "[weary, dignified] I'm blowing leaves. [deadpan, defeated] The squirrels keep blowing them BACK."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "It's a whole system. Their system is better.",
 "ctx": "",
-"script": "[grudging, slow] It's a whole system. [dignified, conceding] Their system is better."
+"script": "[grudging, slow] It's a whole system. [deadpan, dignified] ...Their system is BETTER."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "I'm blowing leaves. The same leaf. Over and over.",
 "ctx": "",
-"script": "[flat, droning] I'm blowing leaves. [slow, hollow] The same leaf. Over and over."
+"script": "[flat, droning] I'm blowing leaves. [slow, hollow] The same leaf. Over... and over."
 },
 {
 "voice": "gus",
@@ -18416,133 +18416,133 @@
 "speaker": "gus",
 "text": "I'm blowing leaves.",
 "ctx": "",
-"script": "[plain, flat] I'm blowing leaves."
+"script": "[deadpan, dignified] I'm blowing leaves."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "Onto the next yard.",
 "ctx": "",
-"script": "[brisk, plain] Onto the next yard."
+"script": "[deadpan, brisk] Onto the next yard."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "Tomorrow, they blow them back. It's a whole system.",
 "ctx": "",
-"script": "[patient, philosophical] Tomorrow, they blow them back. [dry, accepting] It's a whole system."
+"script": "[patient, matter-of-fact] Tomorrow, they blow them back. [deadpan, accepting] ...It's a whole system."
 },
 {
 "voice": "moss",
 "speaker": "moss",
 "text": "Ray here. Shoot wrapped. Nobody got past me. Except the megaphone. And the moths. And the dog.",
 "ctx": "",
-"script": "[tired, gruff] Ray here. Shoot wrapped. Nobody got past me. [sheepish, flat] Except the megaphone. And the moths. [mumbling, low] And the dog."
+"script": "[tired, proud] Ray here. Shoot wrapped. NOBODY got past me. [deadpan, sheepish] Except the megaphone. ...And the moths. [mumbling, low] ...And the dog."
 },
 {
 "voice": "moss",
 "speaker": "moss",
 "text": "Good job, Tom. Don't tell anyone I said good job.",
 "ctx": "",
-"script": "[gruff, embarrassed] Good job, Tom. [low, warning] Don't tell anyone I said good job."
+"script": "[low, grudging] Good job, Tom. [deadpan, warning] Don't tell anyone I said good job."
 },
 {
 "voice": "moss",
 "speaker": "moss",
 "text": "Nobody came through my gate. Nobody with legs.",
 "ctx": "",
-"script": "[proud, deadpan] Nobody came through my gate. [dry, flat] ...Nobody with legs."
+"script": "[proud, slow] NOBODY came through my gate. [deadpan, flat] ...Nobody with legs."
 },
 {
 "voice": "moss",
 "speaker": "moss",
 "text": "Little things, though. Buzzing. Clapping. One of them asked me for a compliment. I said no. I regret it.",
 "ctx": "",
-"script": "[wistful, low] Little things, though. Buzzing. Clapping. [bewildered] One of them asked me for a compliment. [pained, heavy] I said no. I regret it."
+"script": "[low, deadpan] Little things, though. Buzzing. Clapping. One of them asked me for a compliment. [flat, heavy] I said no. ...I regret it."
 },
 {
 "voice": "moss",
 "speaker": "moss",
 "text": "Tom. Plus one dog. Plus one boyfriend who already works here. Fine. Go on in.",
 "ctx": "",
-"script": "[dry, clipped] Tom. Plus one dog. Plus one boyfriend who already works here. [resigned, gruff] Fine. Go on in."
+"script": "[deadpan, slow] Tom. Plus one dog. Plus one boyfriend who ALREADY works here. [resigned, flat] ...Fine. Go on in."
 },
 {
 "voice": "moss",
 "speaker": "moss",
 "text": "Nobody gets past Ray. Except the dog. The dog got past Ray. Don't tell anyone.",
 "ctx": "",
-"script": "[proud, flat] Nobody gets past Ray. [guilty, lower] Except the dog. The dog got past Ray. [pleading, whispering] Don't tell anyone."
+"script": "[proud, flat] NOBODY gets past Ray. [guilty, lower] Except the dog. The dog got past Ray. [hushed, pleading] ...Don't tell anyone."
 },
 {
 "voice": "bun",
 "speaker": "bun",
 "text": "Craft services! Take a bagel. Take two. Nobody is counting. I'm counting.",
 "ctx": "",
-"script": "[bright, chirpy] Craft services! Take a bagel. Take two. Nobody is counting. [quick, deadpan] I'm counting."
+"script": "[bright, chirpy] Craft services! Take a bagel. Take two. NOBODY is counting. [quick, offhand] ...I'm counting."
 },
 {
 "voice": "bun",
 "speaker": "bun",
 "text": "The crew eats like a swarm of locusts. Polite locusts. With lanyards.",
 "ctx": "",
-"script": "[cheerful, amused] The crew eats like a swarm of locusts. [prim, deadpan] Polite locusts. With lanyards."
+"script": "[cheerful, amused] The crew eats like a swarm of locusts. [prim, matter-of-fact] POLITE locusts. ...With lanyards."
 },
 {
 "voice": "dot",
 "speaker": "dot",
 "text": "We WRAPPED! On time! Well. Four hours late. Which is on time for us.",
 "ctx": "",
-"script": "[exhausted, triumphant] We WRAPPED! On time! [rueful, rapid] Well. Four hours late. Which is on time for us."
+"script": "[exhausted, triumphant] We WRAPPED! On time! [matter-of-fact, rapid] Well. ...Four hours late. Which is on time for US."
 },
 {
 "voice": "dot",
 "speaker": "dot",
 "text": "I'm going to sleep for a week. In my car. With the headset on.",
 "ctx": "",
-"script": "[spent, dreamy] I'm going to sleep for a week. [flat, mumbling] In my car. With the headset on."
+"script": "[spent, dreamy] I'm going to sleep for a WEEK. [flat, mumbling] In my car. ...With the headset on."
 },
 {
 "voice": "dot",
 "speaker": "dot",
 "text": "Rack two is still missing. Forty costumes. The actors are filming in bathrobes.",
 "ctx": "",
-"script": "[frazzled, rapid] Rack two is still missing. Forty costumes. [deadpan, defeated] The actors are filming in bathrobes."
+"script": "[frazzled, rapid] Rack two is STILL missing. Forty costumes. [deadpan, defeated] ...The actors are filming in bathrobes."
 },
 {
 "voice": "dot",
 "speaker": "dot",
 "text": "Last thing on my radio before the static was the Stage 7 fog machine. It turned itself on.",
 "ctx": "",
-"script": "[spooked, clipped] Last thing on my radio before the static was the Stage 7 fog machine. [low, ominous] It turned itself on."
+"script": "[spooked, clipped] Last thing on my radio before the static was the Stage 7 fog machine. [low, ominous] ...It turned ITSELF on."
 },
 {
 "voice": "dot",
 "speaker": "dot",
 "text": "Kiki. Production assistant. I have a headset, three radios and zero answers.",
 "ctx": "",
-"script": "[crisp, frazzled] Kiki. Production assistant. [dry, deadpan] I have a headset, three radios and zero answers."
+"script": "[crisp, frazzled] Kiki. Production assistant. [matter-of-fact, rapid] I have a headset, three radios and ZERO answers."
 },
 {
 "voice": "dot",
 "speaker": "dot",
 "text": "If anybody asks, I'm walking somewhere important. I'm always walking somewhere important.",
 "ctx": "",
-"script": "[hushed, hurried] If anybody asks, I'm walking somewhere important. [quick, proud] I'm always walking somewhere important."
+"script": "[hushed, hurried] If anybody asks, I'm walking somewhere important. [flat, proud] I'm ALWAYS walking somewhere important."
 },
 {
 "voice": "la_woman",
 "speaker": "la_woman",
 "text": "We got the shot. All of them. Even the one with the horse.",
 "ctx": "",
-"script": "[relieved, giddy] We got the shot. All of them. [incredulous, breathless] Even the one with the horse."
+"script": "[relieved, giddy] We got the shot. ALL of them. [incredulous, deadpan] ...Even the one with the horse."
 },
 {
 "voice": "la_woman",
 "speaker": "la_woman",
 "text": "Tell TNB the costumes looked incredible. Tell him I said incredible. Tell him twice.",
 "ctx": "",
-"script": "[warm, urgent] Tell TNB the costumes looked incredible. [emphatic, firm] Tell him I said incredible. Tell him twice."
+"script": "[warm, urgent] Tell TNB the costumes looked incredible. Tell him I said INCREDIBLE. [deadpan, quick] ...Tell him twice."
 },
 {
 "voice": "la_woman",
@@ -18556,35 +18556,35 @@
 "speaker": "la_woman",
 "text": "Without a movie I go back to directing car commercials. I love cars. I don't love talking cars.",
 "ctx": "",
-"script": "[wry, sinking] Without a movie I go back to directing car commercials. [wistful] I love cars. [dry, tired] I don't love talking cars."
+"script": "[sarcastic, sinking] Without a movie I go back to directing car commercials. [wistful, tired] I love cars. [deadpan, flat] I DON't love... talking cars."
 },
 {
 "voice": "la_woman",
 "speaker": "la_woman",
 "text": "Dana Park. Director. First feature. Please don't ask me how it's going.",
 "ctx": "",
-"script": "[weary, brisk] Dana Park. Director. First feature. [tense, pleading] Please don't ask me how it's going."
+"script": "[weary, brisk] Dana Park. Director. First feature. [tense, deadpan] PLEASE don't ask me how it's going."
 },
 {
 "voice": "penny",
 "speaker": "penny",
 "text": "Case closed. I've filed my report. With myself. I approved it.",
 "ctx": "",
-"script": "[smug, official] Case closed. I've filed my report. [deadpan, pleased] With myself. I approved it."
+"script": "[smug, officious] Case closed. I've filed my report. [deadpan, pleased] With myself. ...I approved it."
 },
 {
 "voice": "penny",
 "speaker": "penny",
 "text": "I said they were organized. Nobody believed me. Write that down.",
 "ctx": "",
-"script": "[vindicated, sharp] I said they were organized. Nobody believed me. [imperious, clipped] Write that down."
+"script": "[smug, sharp] I SAID they were organized. Nobody believed me. [officious, clipped] ...Write that down."
 },
 {
 "voice": "penny",
 "speaker": "penny",
 "text": "You're a good neighbor, Tom. So is the dog. Mostly the dog.",
 "ctx": "",
-"script": "[warm, approving] You're a good neighbor, Tom. So is the dog. [dry, fond] Mostly the dog."
+"script": "[warm, approving] You're a good neighbor, Tom. So is the dog. [flat, dry] ...MOSTLY the dog."
 },
 {
 "voice": "penny",
@@ -18598,42 +18598,42 @@
 "speaker": "penny",
 "text": "Then the tree. There's a knock. I have only ever heard parts of it.",
 "ctx": "",
-"script": "[hushed, ominous] Then the tree. There's a knock. [uneasy, quieter] I have only ever heard parts of it."
+"script": "[hushed, ominous] Then the tree. There's a knock. [annoyed, quieter] I have only ever heard PARTS of it."
 },
 {
 "voice": "penny",
 "speaker": "penny",
 "text": "Bernadette. Neighborhood Watch Captain, nineteen years. Nothing gets past me.",
 "ctx": "",
-"script": "[crisp, proud] Bernadette. Neighborhood Watch Captain, nineteen years. [confident, firm] Nothing gets past me."
+"script": "[crisp, proud] Bernadette. Neighborhood Watch Captain, nineteen years. [smug, firm] NOTHING gets past me."
 },
 {
 "voice": "penny",
 "speaker": "penny",
 "text": "Except squirrels. I'm working on it.",
 "ctx": "",
-"script": "[sheepish, pained] Except squirrels. [determined, muttering] I'm working on it."
+"script": "[grave, sheepish] Except squirrels. [annoyed, muttering] ...I'm working on it."
 },
 {
 "voice": "luna",
 "speaker": "luna",
 "text": "Welcome to Golden Hour. Every hour is golden hour if you believe.",
 "ctx": "",
-"script": "[dreamy, serene] Welcome to Golden Hour. [soft, glowing] Every hour is golden hour if you believe."
+"script": "[dreamy, serene] Welcome to Golden Hour. [soft, sincere] EVERY hour is golden hour... if you believe."
 },
 {
 "voice": "luna",
 "speaker": "luna",
 "text": "Our oat milk is oat-adjacent.",
 "ctx": "",
-"script": "[airy, earnest] Our oat milk is oat-adjacent."
+"script": "[airy, unbothered] Our oat milk is oat-ADJACENT."
 },
 {
 "voice": "luna",
 "speaker": "luna",
 "text": "Your name is Tom? I wrote TAM. It's basically the same.",
 "ctx": "",
-"script": "[sweet, oblivious] Your name is Tom? I wrote TAM. [dreamy, hopeful] It's basically the same."
+"script": "[sweet, oblivious] Your name is Tom? I wrote TAM. [dreamy, earnest] ...It's basically the same."
 },
 {
 "voice": "kenji",
@@ -18654,63 +18654,63 @@
 "speaker": "kenji",
 "text": "It's not. But you're trying very hard, and I respect that.",
 "ctx": "",
-"script": "[honest, gentle] It's not. [warm, respectful] But you're trying very hard, and I respect that."
+"script": "[blunt, gentle] It's not. [warm, respectful] But you're trying VERY hard, and I respect that."
 },
 {
 "voice": "fern",
 "speaker": "fern",
 "text": "Welcome. Breathe in. Now order.",
 "ctx": "",
-"script": "[calm, soothing] Welcome. Breathe in. [gentle, firm] Now order."
+"script": "[calm, soothing] Welcome. Breathe in. [matter-of-fact, firm] ...Now order."
 },
 {
 "voice": "fern",
 "speaker": "fern",
 "text": "We opened in March. The pupuseria next door has been here since 1994. We're learning a lot.",
 "ctx": "",
-"script": "[serene, mild] We opened in March. [soft, dry] The pupuseria next door has been here since 1994. [gentle, rueful] We're learning a lot."
+"script": "[serene, mild] We opened in March. The pupuseria next door has been here since 1994. [calm, soft] ...We're learning a LOT."
 },
 {
 "voice": "fern",
 "speaker": "fern",
 "text": "Today's special is celery. Doña Carmen says that's not a meal. She's right.",
 "ctx": "",
-"script": "[calm, soothing] Today's special is celery. [serene, amused] Doña Carmen says that's not a meal. She's right."
+"script": "[calm, soothing] Today's special is celery. [serene, matter-of-fact] Doña Carmen says that's not a meal. ...She's right."
 },
 {
 "voice": "penny",
 "speaker": "penny",
 "text": "Welcome to Nickel's. I'm Penny's cousin. Better weather, same prices.",
 "ctx": "",
-"script": "[bright, brisk] Welcome to Nickel's. I'm Penny's cousin. [playful, breezy] Better weather, same prices."
+"script": "[bright, brisk] Welcome to Nickel's. I'm Penny's cousin. [deadpan, breezy] Better weather, same prices."
 },
 {
 "voice": "penny",
 "speaker": "penny",
 "text": "Gear for the whole family, snacks for fights, sunscreen for the soul.",
 "ctx": "",
-"script": "[quick, chipper] Gear for the whole family, snacks for fights, [grand, dreamy] sunscreen for the soul."
+"script": "[quick, chipper] Gear for the whole family, snacks for fights, [matter-of-fact, grand] sunscreen for the SOUL."
 },
 {
 "voice": "penny",
 "speaker": "penny",
 "text": "Got something to sell? I buy almost anything. Penny warned me about Steve.",
 "ctx": "",
-"script": "[eager, coaxing] Got something to sell? I buy almost anything. [hushed, wary] Penny warned me about Steve."
+"script": "[eager, coaxing] Got something to sell? I buy almost ANYTHING. [hushed, suspicious] ...Penny warned me about Steve."
 },
 {
 "voice": "penny",
 "speaker": "penny",
 "text": "Back again! Did you find parking? Nobody finds parking.",
 "ctx": "",
-"script": "[bright, delighted] Back again! Did you find parking? [dry, flat] Nobody finds parking."
+"script": "[bright, delighted] Back again! Did you find parking? [offhand, flat] ...NOBODY finds parking."
 },
 {
 "voice": "penny",
 "speaker": "penny",
 "text": "Browse all you like. Browsing is free in Los Angeles. Nothing else is.",
 "ctx": "",
-"script": "[easy, breezy] Browse all you like. Browsing is free in Los Angeles. [dry, knowing] Nothing else is."
+"script": "[breezy, bright] Browse all you like. Browsing is free in Los Angeles. [flat, knowing] ...Nothing else is."
 },
 {
 "voice": "penny",
@@ -18731,49 +18731,49 @@
 "speaker": "oolong",
 "text": "You're Tom? TNB's Tom! He found a shoe for us once. A lead actor's shoe. Four minutes before the take.",
 "ctx": "",
-"script": "[delighted, gossipy] You're Tom? TNB's Tom! [thrilled, chatty] He found a shoe for us once. A lead actor's shoe. [hushed, dramatic] Four minutes before the take."
+"script": "[delighted, gossipy] You're Tom? TNB's Tom! He found a shoe for us once. A lead actor's shoe. [hushed, amazed] ...FOUR minutes before the take."
 },
 {
 "voice": "oolong",
 "speaker": "oolong",
 "text": "We still talk about the shoe. Tell him there's always a rack here with his name on it.",
 "ctx": "",
-"script": "[misty, affectionate] We still talk about the shoe. [warm, insistent] Tell him there's always a rack here with his name on it."
+"script": "[fond, solemn] We STILL talk about the shoe. [warm, insistent] Tell him there's always a rack here with his name on it."
 },
 {
 "voice": "dolores",
 "speaker": "dolores",
 "text": "Welcome to the Starlite. Built in 1931. The popcorn is newer. A little.",
 "ctx": "",
-"script": "[grand, theatrical] Welcome to the Starlite. Built in 1931. [sly, dry] The popcorn is newer. ...A little."
+"script": "[grand, slow] Welcome to the Starlite. Built in 1931. [cool, dry] The popcorn is newer. ...A little."
 },
 {
 "voice": "dolores",
 "speaker": "dolores",
 "text": "I have run the projector here for forty years. I've seen every movie twice.",
 "ctx": "",
-"script": "[slow, dignified] I have run the projector here for forty years. [dry, amused] I've seen every movie twice."
+"script": "[slow, dignified] I have run the projector here for FORTY years. [arch, amused] I've seen every movie... twice."
 },
 {
 "voice": "dolores",
 "speaker": "dolores",
 "text": "Tonight it's a horror double feature. Your boyfriend would love it. You'd watch it through your fingers.",
 "ctx": "",
-"script": "[silky, relishing] Tonight it's a horror double feature. Your boyfriend would love it. [dry, teasing] You'd watch it through your fingers."
+"script": "[silky, relishing] Tonight it's a horror double feature. Your boyfriend would LOVE it. [dry, teasing] You'd watch it through your fingers."
 },
 {
 "voice": "moss",
 "speaker": "moss",
 "text": "Board Room. We sell boards. We also sit on them.",
 "ctx": "",
-"script": "[slow, mellow] Board Room. We sell boards. [quiet, smug] ...We also sit on them."
+"script": "[slow, mellow] Board Room. We sell boards. [unbothered, smug] ...We also SIT on them."
 },
 {
 "voice": "moss",
 "speaker": "moss",
 "text": "TNB? Longboard guy? He bombed Fargo Street once. No brakes. Legend.",
 "ctx": "",
-"script": "[lazy, impressed] TNB? Longboard guy? He bombed Fargo Street once. [hushed, awed] No brakes. Legend."
+"script": "[lazy, impressed] TNB? Longboard guy? He bombed Fargo Street once. [hushed, amazed] No brakes. ...LEGEND."
 },
 {
 "voice": "moss",
@@ -18787,21 +18787,21 @@
 "speaker": "sal",
 "text": "Angel City Cab Co. I'm Sol. Sal's cousin. Also one cab.",
 "ctx": "",
-"script": "[quick, friendly] Angel City Cab Co. I'm Sol. Sal's cousin. [cheerful, plain] Also one cab."
+"script": "[quick, friendly] Angel City Cab Co. I'm Sol. Sal's cousin. [matter-of-fact, cheerful] ...Also one cab."
 },
 {
 "voice": "sal",
 "speaker": "sal",
 "text": "Cab eight. Sal has cab seven. We don't talk about what happened to the other six.",
 "ctx": "",
-"script": "[proud, brisk] Cab eight. Sal has cab seven. [low, ominous] We don't talk about what happened to the other six."
+"script": "[proud, brisk] Cab eight. Sal has cab seven. [deadpan, ominous] We don't talk about what happened... to the other six."
 },
 {
 "voice": "sal",
 "speaker": "sal",
 "text": "I go to the airport, the airport, and sometimes the airport.",
 "ctx": "",
-"script": "[chatty, dramatic] I go to the airport, the airport, [wry, flat] and sometimes the airport."
+"script": "[chatty, proud] I go to the airport, the airport, [offhand, flat] and sometimes... the airport."
 },
 {
 "voice": "carmen",
@@ -18815,35 +18815,35 @@
 "speaker": "Mrs. Alvarez",
 "text": "I said NO. I lost the sentence. It was a good NO.",
 "ctx": "Talking to Mrs. Alvarez (casa)",
-"script": "[indignant, groggy] I said NO. [flustered, proud] I lost the sentence. It was a good NO."
+"script": "[indignant, groggy] I said NO. [blunt, proud] I lost the sentence. ...It was a GOOD NO."
 },
 {
 "voice": "carmen",
 "speaker": "Mrs. Alvarez",
 "text": "That woman who runs can come back any time. She can run in my kitchen. Tell her.",
 "ctx": "Talking to Mrs. Alvarez (casa)",
-"script": "[warm, commanding] That woman who runs can come back any time. [fond, insistent] She can run in my kitchen. Tell her."
+"script": "[warm, commanding] That woman who runs can come back ANY time. [flat, insistent] She can run in my kitchen. ...Tell her."
 },
 {
 "voice": "carmen",
 "speaker": "carmen",
 "text": "TEN. Ten people in a two-bedroom house from 1912. One bathroom. ONE.",
 "ctx": "",
-"script": "[exasperated, emphatic] TEN. Ten people in a two-bedroom house from 1912. [rising, outraged] One bathroom. ONE."
+"script": "[exasperated, emphatic] TEN. Ten people in a two-bedroom house from 1912. [matter-of-fact, appalled] One bathroom. ...ONE."
 },
 {
 "voice": "carmen",
 "speaker": "carmen",
 "text": "Tony, feet off my table! Kevin, the baby isn't a football! Mateo, give Abuela the remote! ...Tom, mijo, sit. If you can find a chair.",
 "ctx": "",
-"script": "[bellowing, scolding] Tony, feet off my table! Kevin, the baby isn't a football! Mateo, give Abuela the remote! [softening, warm] ...Tom, mijo, sit. [dry, wry] If you can find a chair."
+"script": "[bellowing, scolding] Tony, feet off my table! Kevin, the baby ISN't a football! Mateo, give Abuela the remote! [softening, warm] ...Tom, mijo, sit. [deadpan, dry] If you can find a chair."
 },
 {
 "voice": "carmen",
 "speaker": "carmen",
 "text": "Everybody says, 'Mama, the house is so full of love.' It's full of SOMETHING. Take tamales. Please. I need the room in my fridge.",
 "ctx": "",
-"script": "[dry, mimicking] Everybody says, 'Mama, the house is so full of love.' [exasperated, flat] It's full of SOMETHING. [pressing, pleading] Take tamales. Please. I need the room in my fridge."
+"script": "[sarcastic, mimicking] Everybody says, 'Mama, the house is so full of love.' [blunt, exasperated] It's full of SOMETHING. [pressing, matter-of-fact] Take tamales. Please. I need the room in my fridge."
 },
 {
 "voice": "moss",
@@ -18857,7 +18857,7 @@
 "speaker": "Don Beto",
 "text": "Foul! That was a foul! Wait. Is the game over? What year is it?",
 "ctx": "Talking to Don Beto (casa)",
-"script": "[groggy, indignant] Foul! That was a foul! [confused, dazed] Wait. Is the game over? What year is it?"
+"script": "[groggy, indignant] FOUL! That was a foul! [confused, slow] Wait. Is the game over? ...What YEAR is it?"
 },
 {
 "voice": "moss",
@@ -18871,7 +18871,7 @@
 "speaker": "moss",
 "text": "Ten people. I counted once. Then I lost count. Then I took a nap.",
 "ctx": "",
-"script": "[slow, mellow] Ten people. I counted once. [drowsy, fading] Then I lost count. Then I took a nap."
+"script": "[slow, mellow] Ten people. I counted once. [drowsy, deadpan] Then I lost count. ...Then I took a nap."
 },
 {
 "voice": "michael",
@@ -18885,14 +18885,14 @@
 "speaker": "michael",
 "text": "Me and Yesenia are saving for our own place. In this market? We'll be here until Mateo goes to college.",
 "ctx": "",
-"script": "[calm, tired] Me and Yesenia are saving for our own place. [flat, wry] In this market? [dry, resigned] We'll be here until Mateo goes to college."
+"script": "[calm, tired] Me and Yesenia are saving for our own place. [deadpan, sarcastic] In THIS market? [dry, resigned] We'll be here until Mateo goes to college."
 },
 {
 "voice": "michael",
 "speaker": "michael",
 "text": "The two houses next door sold for more than this whole block cost in 1990. My mom isn't okay about it.",
 "ctx": "",
-"script": "[dry, incredulous] The two houses next door sold for more than this whole block cost in 1990. [flat, wry] My mom isn't okay about it."
+"script": "[matter-of-fact, incredulous] The two houses next door sold for more than this WHOLE block cost in 1990. [deadpan, flat] ...My mom isn't okay about it."
 },
 {
 "voice": "la_woman",
@@ -18906,14 +18906,14 @@
 "speaker": "la_woman",
 "text": "Sofi, no. Sofi. SOFI. ...She bit something. We don't have a dog. I don't know what she bit.",
 "ctx": "",
-"script": "[sharp, escalating] Sofi, no. Sofi. SOFI. [bewildered, flat] ...She bit something. [worried, deadpan] We don't have a dog. I don't know what she bit."
+"script": "[sharp, escalating] Sofi, no. Sofi. SOFI. [bewildered, flat] ...She bit something. [deadpan, worried] We don't HAVE a dog. I don't know what she bit."
 },
 {
 "voice": "la_woman",
 "speaker": "la_woman",
 "text": "Baby Lupita is finally asleep. If you wake her, you're moving in.",
 "ctx": "",
-"script": "[hushed, exhausted] Baby Lupita is finally asleep. [low, threatening] If you wake her, you're moving in."
+"script": "[hushed, exhausted] Baby Lupita is FINALLY asleep. [deadpan, threatening] If you wake her, you're moving in."
 },
 {
 "voice": "luna",
@@ -18927,14 +18927,14 @@
 "speaker": "luna",
 "text": "Night shift nurse. I sleep in the bathtub. It's the only room with a lock.",
 "ctx": "",
-"script": "[exhausted, deadpan] Night shift nurse. I sleep in the bathtub. [drowsy, flat] It's the only room with a lock."
+"script": "[exhausted, deadpan] Night shift nurse. I sleep in the bathtub. [drowsy, flat] ...It's the ONLY room with a lock."
 },
 {
 "voice": "luna",
 "speaker": "luna",
 "text": "Until somebody needs the bathroom. Somebody always needs the bathroom.",
 "ctx": "",
-"script": "[slow, drowsy] Until somebody needs the bathroom. [flat, resigned] ...Somebody always needs the bathroom."
+"script": "[slow, drowsy] Until somebody needs the bathroom. [deadpan, resigned] ...Somebody ALWAYS needs the bathroom."
 },
 {
 "voice": "bean",
@@ -18948,28 +18948,28 @@
 "speaker": "bean",
 "text": "I share the bunk bed with Uncle Tony's exercise bike.",
 "ctx": "",
-"script": "[bored, deadpan] I share the bunk bed with Uncle Tony's exercise bike."
+"script": "[bored, deadpan] I share the bunk bed... with Uncle Tony's exercise bike."
 },
 {
 "voice": "bean",
 "speaker": "bean",
 "text": "It's not a metaphor. The bike is on the top bunk.",
 "ctx": "",
-"script": "[flat, patient] It's not a metaphor. [dry, deadpan] The bike is on the top bunk."
+"script": "[flat, patient] It's NOT a metaphor. [deadpan, dry] ...The bike is on the top bunk."
 },
 {
 "voice": "rose",
 "speaker": "rose",
 "text": "I'm making a documentary about this house. It's a horror movie.",
 "ctx": "",
-"script": "[hushed, serious] I'm making a documentary about this house. [ominous, dramatic] It's a horror movie."
+"script": "[hushed, serious] I'm making a documentary about this house. [solemn, ominous] ...It's a HORROR movie."
 },
 {
 "voice": "rose",
 "speaker": "rose",
 "text": "Scene one: the bathroom line. Scene two: who ate Abuela's last concha.",
 "ctx": "",
-"script": "[hushed, grave] Scene one: the bathroom line. [breathless, scandalized] Scene two: who ate Abuela's last concha."
+"script": "[hushed, grave] Scene one: the bathroom line. [serious, scandalized] Scene two: who ate Abuela's LAST concha."
 },
 {
 "voice": "bean",
@@ -19088,21 +19088,21 @@
 "speaker": "dot",
 "text": "34th floor. From my desk I can see Griffith Park. I've never been to Griffith Park.",
 "ctx": "",
-"script": "[wistful, precise] 34th floor. From my desk I can see Griffith Park. [quiet, rueful] I've never been to Griffith Park."
+"script": "[wistful, precise] 34th floor. From my desk I can see Griffith Park. [flat, quiet] ...I've NEVER been to Griffith Park."
 },
 {
 "voice": "dot",
 "speaker": "dot",
 "text": "My dog is named Bagel. He has more friends in this building than I do.",
 "ctx": "",
-"script": "[fond, bright] My dog is named Bagel. [dry, wry] He has more friends in this building than I do."
+"script": "[fond, bright] My dog is named Bagel. [deadpan, dry] He has more friends in this building... than I do."
 },
 {
 "voice": "dot",
 "speaker": "dot",
 "text": "The pool is on the roof. Nobody swims. Everyone takes photos of the pool.",
 "ctx": "",
-"script": "[crisp, puzzled] The pool is on the roof. Nobody swims. [dry, flat] Everyone takes photos of the pool."
+"script": "[crisp, puzzled] The pool is on the roof. NOBODY swims. [deadpan, flat] Everyone takes PHOTOS of the pool."
 },
 {
 "voice": "odette",
@@ -19123,21 +19123,21 @@
 "speaker": "odette",
 "text": "That smog had me stirring one pot for an hour. Best roux I ever made, though.",
 "ctx": "",
-"script": "[wry, reminiscing] That smog had me stirring one pot for an hour. [warm, proud] Best roux I ever made, though."
+"script": "[dry, amused] That smog had me stirring ONE pot for an hour. [smug, warm] ...Best roux I ever made, though."
 },
 {
 "voice": "odette",
 "speaker": "odette",
 "text": "Sit. Eat. You and that boyfriend earned a bowl today.",
 "ctx": "",
-"script": "[warm, commanding] Sit. Eat. [fond, sly] You and that boyfriend earned a bowl today."
+"script": "[warm, commanding] Sit. Eat. [fond, mischievous] You and that boyfriend EARNED a bowl today."
 },
 {
 "voice": "odette",
 "speaker": "odette",
 "text": "Sit down, baby. Gumbo's on. It's been on since six.",
 "ctx": "",
-"script": "[warm, unhurried] Sit down, baby. Gumbo's on. [sly, proud] It's been on since six."
+"script": "[warm, unhurried] Sit down, baby. Gumbo's on. [knowing, proud] ...It's been on since six."
 },
 {
 "voice": "odette",
@@ -19151,7 +19151,7 @@
 "speaker": "odette",
 "text": "Pralines by the register. Take two. One for you, one for that boyfriend who keeps coming in for the red beans.",
 "ctx": "",
-"script": "[generous, sly] Pralines by the register. Take two. [warm, teasing] One for you, one for that boyfriend who keeps coming in for the red beans."
+"script": "[generous, warm] Pralines by the register. Take two. [dry, teasing] One for you, one for that boyfriend who KEEPS coming in for the red beans."
 },
 {
 "voice": "carmen",
@@ -19165,21 +19165,21 @@
 "speaker": "Doña Carmen",
 "text": "You woke me up with a pupusa. That’s how my mother did it.",
 "ctx": "Talking to Doña Carmen (pupuseria)",
-"script": "[groggy, warm] You woke me up with a pupusa. [soft, proud] That’s how my mother did it."
+"script": "[groggy, warm] You woke me up with a pupusa. [dry, proud] ...That’s how my mother did it."
 },
 {
 "voice": "carmen",
 "speaker": "Doña Carmen",
 "text": "Go save the block. I’ll make more. I’m always making more.",
 "ctx": "Talking to Doña Carmen (pupuseria)",
-"script": "[firm, warm] Go save the block. [tender, hearty] I’ll make more. I’m always making more."
+"script": "[firm, warm] Go save the block. [matter-of-fact, hearty] I’ll make more. I’m ALWAYS making more."
 },
 {
 "voice": "carmen",
 "speaker": "carmen",
 "text": "The pupusas are fine. Everything is fine.",
 "ctx": "",
-"script": "[stiff, cheerful] The pupusas are fine. [brittle, forced] Everything is fine."
+"script": "[stiff, cheerful] The pupusas are fine. [brittle, forced] EVERYTHING is fine."
 },
 {
 "voice": "carmen",
@@ -19193,119 +19193,119 @@
 "speaker": "carmen",
 "text": "I left them on the comal the whole time. They came out perfectly crispy, actually.",
 "ctx": "",
-"script": "[dry, grudging] I left them on the comal the whole time. [reluctant, proud] They came out perfectly crispy, actually."
+"script": "[matter-of-fact, grudging] I left them on the comal the whole time. [flat, proud] They came out perfectly crispy, actually."
 },
 {
 "voice": "carmen",
 "speaker": "carmen",
 "text": "Don't tell the juice bar. They'll want the recipe.",
 "ctx": "",
-"script": "[low, conspiratorial] Don't tell the juice bar. [dry, sly] They'll want the recipe."
+"script": "[low, conspiratorial] Don't tell the juice bar. [dry, smug] They'll want the recipe."
 },
 {
 "voice": "carmen",
 "speaker": "carmen",
 "text": "Bienvenidos! Pupusas revueltas, and curtido on the side. Curtido isn't optional.",
 "ctx": "",
-"script": "[booming, warm] Bienvenidos! Pupusas revueltas, and curtido on the side. [firm, brisk] Curtido isn't optional."
+"script": "[booming, warm] Bienvenidos! Pupusas revueltas, and curtido on the side. [blunt, firm] Curtido ISN't optional."
 },
 {
 "voice": "carmen",
 "speaker": "carmen",
 "text": "I came from San Salvador in 1991. This comal came with me in a suitcase.",
 "ctx": "",
-"script": "[proud, fond] I came from San Salvador in 1991. [warm, amused] This comal came with me in a suitcase."
+"script": "[proud, fond] I came from San Salvador in 1991. [dry, amused] This comal came with me... in a suitcase."
 },
 {
 "voice": "carmen",
 "speaker": "carmen",
 "text": "The juice bar next door asked me what a pupusa is. I gave them three. Now they ask every day.",
 "ctx": "",
-"script": "[amused, warm] The juice bar next door asked me what a pupusa is. I gave them three. [satisfied, hearty] Now they ask every day."
+"script": "[amused, matter-of-fact] The juice bar next door asked me what a pupusa is. I gave them three. [smug, deadpan] ...Now they ask EVERY day."
 },
 {
 "voice": "kit",
 "speaker": "kit",
 "text": "We took it down to the studs. Then we put the studs back. Very authentic.",
 "ctx": "",
-"script": "[chipper, proud] We took it down to the studs. Then we put the studs back. [smug, deadpan] Very authentic."
+"script": "[chipper, proud] We took it down to the studs. Then we put the studs back. [smug, sincere] ...VERY authentic."
 },
 {
 "voice": "kit",
 "speaker": "kit",
 "text": "Have you tried the juice bar on Jefferson? It's so nice the neighborhood is finally getting... options.",
 "ctx": "",
-"script": "[bright, polite] Have you tried the juice bar on Jefferson? [awkward, strained] It's so nice the neighborhood is finally getting... options."
+"script": "[bright, polite] Have you tried the juice bar on Jefferson? [awkward, strained] It's SO nice the neighborhood is finally getting... options."
 },
 {
 "voice": "kit",
 "speaker": "kit",
 "text": "We painted it black. The neighbors call it the haunted house. We're choosing to take that as a compliment.",
 "ctx": "",
-"script": "[cheerful, defensive] We painted it black. The neighbors call it the haunted house. [forced, bright] We're choosing to take that as a compliment."
+"script": "[cheerful, defensive] We painted it black. The neighbors call it the haunted house. [forced, bright] We're CHOOSING to take that as a compliment."
 },
 {
 "voice": "pip",
 "speaker": "pip",
 "text": "Mrs. Alvarez brought us tamales. We posted them. We tagged her. She doesn't have Instagram.",
 "ctx": "",
-"script": "[earnest, soft] Mrs. Alvarez brought us tamales. We posted them. We tagged her. [sheepish, small] She doesn't have Instagram."
+"script": "[earnest, soft] Mrs. Alvarez brought us tamales. We posted them. We tagged her. [sincere, small] ...She doesn't HAVE Instagram."
 },
 {
 "voice": "pip",
 "speaker": "pip",
 "text": "Our mortgage is, um. We don't say the number out loud. The house can hear.",
 "ctx": "",
-"script": "[nervous, whispering] Our mortgage is, um. We don't say the number out loud. [hushed, spooked] The house can hear."
+"script": "[nervous, whispering] Our mortgage is, um. We don't say the number out loud. [hushed, spooked] ...The house can HEAR."
 },
 {
 "voice": "pip",
 "speaker": "pip",
 "text": "Everyone else on this street rents. We think about that a lot. Mostly on podcasts.",
 "ctx": "",
-"script": "[earnest, uneasy] Everyone else on this street rents. We think about that a lot. [dry, sheepish] Mostly on podcasts."
+"script": "[earnest, uneasy] Everyone else on this street rents. We think about that a LOT. [solemn, sheepish] ...Mostly on podcasts."
 },
 {
 "voice": "dot",
 "speaker": "dot",
 "text": "We're restoring the original 1912 windows. It's a whole thing.",
 "ctx": "",
-"script": "[quick, proud] We're restoring the original 1912 windows. [weary, crisp] It's a whole thing."
+"script": "[quick, proud] We're restoring the ORIGINAL 1912 windows. [weary, flat] ...It's a whole thing."
 },
 {
 "voice": "dot",
 "speaker": "dot",
 "text": "Mr. Washington told us the windows are older than his father. He was very serious about it.",
 "ctx": "",
-"script": "[crisp, impressed] Mr. Washington told us the windows are older than his father. [solemn, dry] He was very serious about it."
+"script": "[crisp, impressed] Mr. Washington told us the windows are older than his father. [deadpan, solemn] He was VERY serious about it."
 },
 {
 "voice": "dot",
 "speaker": "dot",
 "text": "Every house on this street has a story. Ours is: the plumbing.",
 "ctx": "",
-"script": "[quick, rueful] Every house on this street has a story. [flat, deadpan] Ours is: ...the plumbing."
+"script": "[quick, sheepish] Every house on this street has a story. [deadpan, flat] Ours is: the PLUMBING."
 },
 {
 "voice": "bean",
 "speaker": "bean",
 "text": "Baby Hudson is asleep. Please whisper. Please. I'm begging.",
 "ctx": "",
-"script": "[whispering, frantic] Baby Hudson is asleep. Please whisper. [hushed, desperate] Please. I'm begging."
+"script": "[whispering, frantic] Baby Hudson is asleep. Please whisper. [hushed, desperate] Please. ...I'm BEGGING."
 },
 {
 "voice": "bean",
 "speaker": "bean",
 "text": "We moved from the Westside for the space. And the character. Mostly the price. Which was still a lot.",
 "ctx": "",
-"script": "[breezy, rambling] We moved from the Westside for the space. And the character. [rueful, mumbling] Mostly the price. [dry, pained] Which was still a lot."
+"script": "[breezy, rambling] We moved from the Westside for the space. And the character. [sheepish, mumbling] Mostly the price. [flat, pained] ...Which was STILL a lot."
 },
 {
 "voice": "bean",
 "speaker": "bean",
 "text": "I work from home. Home is very loud on the Alvarez side. I bought noise-canceling headphones. They lost.",
 "ctx": "",
-"script": "[scattered, bemused] I work from home. Home is very loud on the Alvarez side. [cheerful, defeated] I bought noise-canceling headphones. [flat, resigned] They lost."
+"script": "[scattered, cheerful] I work from home. Home is VERY loud on the Alvarez side. I bought noise-canceling headphones. [defeated, resigned] ...They lost."
 },
 {
 "voice": "mudling",
@@ -23722,14 +23722,14 @@
 "speaker": "sal",
 "text": "Cab seven needs new brakes. She's parked until the part comes in.",
 "ctx": "",
-"script": "[rueful, brisk] Cab seven needs new brakes. [sympathetic, easy] She's parked until the part comes in."
+"script": "[brisk, apologetic] Cab seven needs new brakes. [fond, matter-of-fact] She's parked until the part comes in."
 },
 {
 "voice": "sal",
 "speaker": "sal",
 "text": "Besides, you just got here. Go see your mother. She made crisp.",
 "ctx": "",
-"script": "[warm, friendly] Besides, you just got here. [fond, relishing] Go see your mother. She made crisp."
+"script": "[warm, friendly] Besides, you just got here. Go see your mother. [relishing, drawn out] She made CRISP."
 },
 {
 "voice": "tnb",
@@ -23743,14 +23743,14 @@
 "speaker": "sal",
 "text": "Airport? You JUST landed. The smog has me grounded anyway. I can't see the freeway.",
 "ctx": "",
-"script": "[incredulous, friendly] Airport? You JUST landed. [grumbling, wry] The smog has me grounded anyway. I can't see the freeway."
+"script": "[incredulous, friendly] Airport? You JUST landed. [grumbling, deadpan] The smog has me grounded anyway. I can't SEE the freeway."
 },
 {
 "voice": "sal",
 "speaker": "sal",
 "text": "Go find your boyfriend. He called here twice asking if you landed.",
 "ctx": "",
-"script": "[sly, warm] Go find your boyfriend. [amused, conspiratorial] He called here twice asking if you landed."
+"script": "[mischievous, warm] Go find your boyfriend. [amused, conspiratorial] He called here TWICE asking if you landed."
 },
 {
 "voice": "amy",
@@ -23771,28 +23771,28 @@
 "speaker": "sal",
 "text": "Airport? You just got here. Your father has called the depot four times asking if you landed.",
 "ctx": "",
-"script": "[incredulous, friendly] Airport? You just got here. [amused, gossipy] Your father has called the depot four times asking if you landed."
+"script": "[incredulous, friendly] Airport? You just got here. [amused, gossipy] Your father has called the depot FOUR times asking if you landed."
 },
 {
 "voice": "sal",
 "speaker": "sal",
 "text": "Something about a fish. He sounded very serious about the fish.",
 "ctx": "",
-"script": "[puzzled, amused] Something about a fish. [deadpan, impressed] He sounded very serious about the fish."
+"script": "[puzzled, amused] Something about a fish. [low, impressed] He sounded VERY serious about the fish."
 },
 {
 "voice": "sal",
 "speaker": "sal",
 "text": "Airport? You JUST landed. Your young man is on a shoot. Go watch him be important.",
 "ctx": "",
-"script": "[incredulous, friendly] Airport? You JUST landed. [teasing, fond] Your young man is on a shoot. Go watch him be important."
+"script": "[incredulous, friendly] Airport? You JUST landed. [teasing, matter-of-fact] Your young man is on a shoot. Go watch him be... IMPORTANT."
 },
 {
 "voice": "sal",
 "speaker": "sal",
 "text": "The studio lot is at the east end of the boulevard. Big gate. Grumpy guard.",
 "ctx": "",
-"script": "[helpful, brisk] The studio lot is at the east end of the boulevard. Big gate. [wry, lowered] Grumpy guard."
+"script": "[helpful, brisk] The studio lot is at the east end of the boulevard. Big gate. [flat, lowered] ...Grumpy guard."
 },
 {
 "voice": "deedee",
@@ -23813,28 +23813,28 @@
 "speaker": "sal",
 "text": "Airport? On conference night? Your sister would find me. She'd find me on foot. Fast.",
 "ctx": "",
-"script": "[incredulous, friendly] Airport? On conference night? [dreading, comic] Your sister would find me. [low, wry] She'd find me on foot. Fast."
+"script": "[incredulous, friendly] Airport? On CONFERENCE night? [nervous, deadpan] Your sister would find me. She'd find me on foot. ...Fast."
 },
 {
 "voice": "sal",
 "speaker": "sal",
 "text": "Long Island Elementary is east of the Square. Follow the clipboard.",
 "ctx": "",
-"script": "[friendly, helpful] Long Island Elementary is east of the Square. [dry, knowing] Follow the clipboard."
+"script": "[friendly, helpful] Long Island Elementary is east of the Square. [offhand, knowing] ...Follow the clipboard."
 },
 {
 "voice": "sal",
 "speaker": "sal",
 "text": "Airport? You JUST landed. Your young man called the depot. Something about your bread.",
 "ctx": "",
-"script": "[incredulous, friendly] Airport? You JUST landed. [puzzled, amused] Your young man called the depot. Something about your bread."
+"script": "[incredulous, friendly] Airport? You JUST landed. [puzzled, amused] Your young man called the depot. Something about your... bread."
 },
 {
 "voice": "sal",
 "speaker": "sal",
 "text": "He said, and I quote, \"tell him it's a bread emergency.\" I didn't know bread could have those.",
 "ctx": "",
-"script": "[deadpan, recounting] He said, and I quote, [solemn, mock-urgent] \"tell him it's a bread emergency.\" [baffled, sincere] I didn't know bread could have those."
+"script": "[flat, matter-of-fact] He said, and I quote, \"tell him it's a BREAD emergency.\" [baffled, sincere] ...I didn't know bread could have those."
 },
 {
 "voice": "amy",
@@ -23869,21 +23869,21 @@
 "speaker": "sal",
 "text": "She said, and I quote, \"tell Tata the library is being WEIRD.\" She hung up before I could ask how.",
 "ctx": "",
-"script": "[amused, recounting] She said, and I quote, [shrill, mimicking] \"tell Tah Tah the library is being WEIRD.\" [baffled, dry] She hung up before I could ask how."
+"script": "[amused, matter-of-fact] She said, and I quote, [shrill, mimicking] \"tell Tah Tah the library is being WEIRD.\" [baffled, deadpan] ...She hung up before I could ask how."
 },
 {
 "voice": "sal",
 "speaker": "sal",
 "text": "Airport? You JUST landed. Your young man said, and I quote, \"forty loaves, babe.\"",
 "ctx": "",
-"script": "[incredulous, friendly] Airport? You JUST landed. [puzzled, deadpan] Your young man said, and I quote, \"forty loaves, babe.\""
+"script": "[incredulous, friendly] Airport? You JUST landed. [puzzled, flat] Your young man said, and I quote, \"forty loaves, babe.\""
 },
 {
 "voice": "sal",
 "speaker": "sal",
 "text": "I don't know what that means. It sounded serious.",
 "ctx": "",
-"script": "[baffled, honest] I don't know what that means. [low, wary] It sounded serious."
+"script": "[baffled, sincere] I don't know what that means. [low, matter-of-fact] ...It sounded SERIOUS."
 },
 {
 "voice": "amy",
@@ -23911,14 +23911,14 @@
 "speaker": "sal",
 "text": "Airport? You just got here. Your mother called the depot. Three times. Something about a letter.",
 "ctx": "",
-"script": "[incredulous, friendly] Airport? You just got here. [gossipy, breathless] Your mother called the depot. Three times. [puzzled, dry] Something about a letter."
+"script": "[incredulous, friendly] Airport? You just got here. [gossipy, breathless] Your mother called the depot. THREE times. [puzzled, dry] Something about a letter."
 },
 {
 "voice": "sal",
 "speaker": "sal",
 "text": "She said, and I quote, \"tell him it has a SEAL.\"",
 "ctx": "",
-"script": "[emphatic, mimicking] She said, and I quote, [bright, insistent] \"tell him it has a SEAL.\""
+"script": "[matter-of-fact, amused] She said, and I quote, [bright, insistent] \"tell him it has a SEAL.\""
 },
 {
 "voice": "deedee",
@@ -23939,7 +23939,7 @@
 "speaker": "sal",
 "text": "Airport? Every clock in town says midnight. The planes aren't going anywhere.",
 "ctx": "",
-"script": "[friendly, wry] Airport? Every clock in town says midnight. [dry, matter-of-fact] The planes aren't going anywhere."
+"script": "[friendly, flat] Airport? Every clock in town says midnight. [dry, matter-of-fact] The planes aren't going ANYWHERE."
 },
 {
 "voice": "sal",
@@ -23953,7 +23953,7 @@
 "speaker": "Sal",
 "text": "Airport? Tom. You’re on a layover. I don’t fly layovers. I just wave at them.",
 "ctx": "noflight",
-"script": "[friendly, deadpan] Airport? Tom. You're on a layover. [proud, dry] I don't fly layovers. [cheerful, breezy] I just wave at them."
+"script": "[friendly, deadpan] Airport? Tom. You’re on a layover. [proud, dry] I don’t fly layovers. [cheerful, breezy] ...I just WAVE at them."
 },
 {
 "voice": "sal",
@@ -23974,14 +23974,14 @@
 "speaker": "Sal",
 "text": "Airport? Tom. Your father is standing in the gate in a bucket. Go and see him first.",
 "ctx": "noflight",
-"script": "[friendly, baffled] Airport? Tom. [deadpan, wry] Your father is standing in the gate in a bucket. [warm, nudging] Go and see him first."
+"script": "[friendly, baffled] Airport? Tom. [offhand, matter-of-fact] Your father is standing in the gate... in a BUCKET. [warm, nudging] Go and see him first."
 },
 {
 "voice": "sal",
 "speaker": "Sal",
 "text": "Airport? Tom. Dinner is at six. Five means four thirty.",
 "ctx": "noflight",
-"script": "[friendly, brisk] Airport? Tom. Dinner is at six. [deadpan, knowing] Five means four thirty."
+"script": "[friendly, brisk] Airport? Tom. Dinner is at six. [matter-of-fact, knowing] ...Five means four thirty."
 },
 {
 "voice": "sal",
@@ -24016,7 +24016,7 @@
 "speaker": "Sal",
 "text": "Airport? Tom. Not now. There is a man in a clock who needs dinner.",
 "ctx": "noflight",
-"script": "[friendly, firm] Airport? Tom. Not now. [deadpan, solemn] There is a man in a clock who needs dinner."
+"script": "[friendly, firm] Airport? Tom. Not now. [flat, solemn] There is a man in a clock... who needs DINNER."
 },
 {
 "voice": "amy",
@@ -24044,7 +24044,7 @@
 "speaker": "sal",
 "text": "Airport? On the birthday? Your sister would find me. On foot. In the dark.",
 "ctx": "",
-"script": "[incredulous, friendly] Airport? On the birthday? [dreading, wry] Your sister would find me. On foot. In the dark."
+"script": "[incredulous, friendly] Airport? On the BIRTHDAY? [nervous, deadpan] Your sister would find me. On foot. ...In the dark."
 },
 {
 "voice": "sal",
@@ -24541,14 +24541,14 @@
 "speaker": "sal",
 "text": "Los Angeles again? Cab seven loves this run. She hums the whole way.",
 "ctx": "",
-"script": "[cheerful, proud] Los Angeles again? Cab seven loves this run. [fond, bragging] She hums the whole way."
+"script": "[cheerful, proud] Los Angeles again? Cab seven LOVES this run. [fond, offhand] She hums the whole way."
 },
 {
 "voice": "sal",
 "speaker": "sal",
 "text": "The girls stay home. Amy's rule. I don't argue with Amy.",
 "ctx": "",
-"script": "[friendly, matter-of-fact] The girls stay home. Amy's rule. [dry, meek] I don't argue with Amy."
+"script": "[friendly, matter-of-fact] The girls stay home. Amy's rule. [flat, meek] ...I don't argue with Amy."
 },
 {
 "voice": "grace",
@@ -24611,7 +24611,7 @@
 "speaker": "sal",
 "text": "Airport. Your young man fixed my visor. He made me promise to drive careful. So I'm going the speed limit. Everybody hates it.",
 "ctx": "",
-"script": "[friendly, pleased] Airport. Your young man fixed my visor. He made me promise to drive careful. [wry, grumbling] So I'm going the speed limit. [resigned, comic] Everybody hates it."
+"script": "[friendly, pleased] Airport. Your young man fixed my visor. He made me promise to drive careful. [flat, grumbling] So I'm going the speed limit. ...EVERYBODY hates it."
 },
 {
 "voice": "tnb",
@@ -24646,14 +24646,14 @@
 "speaker": "sal",
 "text": "Back to Los Angeles. Your sister gave me a gold star for using my blinker.",
 "ctx": "",
-"script": "[cheerful, proud] Back to Los Angeles. [delighted, bragging] Your sister gave me a gold star for using my blinker."
+"script": "[cheerful, proud] Back to Los Angeles. [delighted, smug] Your sister gave me a GOLD STAR for using my blinker."
 },
 {
 "voice": "sal",
 "speaker": "sal",
 "text": "The girls stay home. School night. It's always a school night.",
 "ctx": "",
-"script": "[friendly, matter-of-fact] The girls stay home. School night. [dry, resigned] It's always a school night."
+"script": "[friendly, matter-of-fact] The girls stay home. School night. [deadpan, resigned] It's ALWAYS a school night."
 },
 {
 "voice": "grace",
@@ -24716,7 +24716,7 @@
 "speaker": "sal",
 "text": "LAX. I'm taking the long way. There are squirrels on the short way.",
 "ctx": "",
-"script": "[friendly, serious] LAX. I'm taking the long way. [dry, wary] There are squirrels on the short way."
+"script": "[friendly, serious] LAX. I'm taking the long way. [matter-of-fact, suspicious] There are squirrels... on the short way."
 },
 {
 "voice": "tnb",
@@ -24751,14 +24751,14 @@
 "speaker": "sal",
 "text": "Los Angeles again? I'm starting to think you live there.",
 "ctx": "",
-"script": "[friendly, teasing] Los Angeles again? [dry, mock suspicious] I'm starting to think you live there."
+"script": "[friendly, teasing] Los Angeles AGAIN? [flat, suspicious] I'm starting to think you live there."
 },
 {
 "voice": "sal",
 "speaker": "sal",
 "text": "The girls stay home. School tomorrow. Library books are due.",
 "ctx": "",
-"script": "[friendly, matter-of-fact] The girls stay home. School tomorrow. [firm, wry] Library books are due."
+"script": "[friendly, matter-of-fact] The girls stay home. School tomorrow. [flat, firm] ...Library books are due."
 },
 {
 "voice": "grace",
@@ -24807,7 +24807,7 @@
 "speaker": "sal",
 "text": "Airport. No eating in my cab. I can smell the potluck on you. It smells amazing. Still no.",
 "ctx": "",
-"script": "[friendly, firm] Airport. No eating in my cab. [wry, pained] I can smell the potluck on you. It smells amazing. [resolute, regretful] Still no."
+"script": "[friendly, firm] Airport. No eating in my cab. [pained, drawn out] I can smell the potluck on you. It smells AMAZING. [deadpan, regretful] ...Still no."
 },
 {
 "voice": "tnb",
@@ -25031,7 +25031,7 @@
 "speaker": "sal",
 "text": "Airport. Love it. We'll be there in twenty minutes. Or two hours. Nobody knows.",
 "ctx": "",
-"script": "[delighted, cheerful] Airport. Love it. We'll be there in twenty minutes. [fatalistic, dry] Or two hours. Nobody knows."
+"script": "[delighted, cheerful] Airport. Love it. We'll be there in twenty minutes. [offhand, breezy] Or two hours. ...NOBODY knows."
 },
 {
 "voice": "tnb",
@@ -25283,14 +25283,14 @@
 "speaker": "sal",
 "text": "Los Angeles? You got it. Flights leave whenever I get there.",
 "ctx": "",
-"script": "[cheerful, hearty] Los Angeles? You got it. [wry, easy] Flights leave whenever I get there."
+"script": "[cheerful, hearty] Los Angeles? You got it. [deadpan, breezy] Flights leave... whenever I get there."
 },
 {
 "voice": "sal",
 "speaker": "sal",
 "text": "One thing. The girls stay home. Amy's rule. No flying on a school night.",
 "ctx": "",
-"script": "[apologetic, firm] One thing. The girls stay home. [serious, dry] Amy's rule. No flying on a school night."
+"script": "[apologetic, firm] One thing. The girls stay home. [flat, serious] Amy's rule. NO flying on a school night."
 },
 {
 "voice": "sal",

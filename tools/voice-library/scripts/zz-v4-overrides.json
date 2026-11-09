@@ -80,38 +80,38 @@
 },
 {
 "voice": "justin",
-"speaker": "",
+"speaker": "Mr. Halverson",
 "text": "Halverson. Fourth grade. I'm hiding in the staff room. That's allowed. It's in the contract.",
 "ctx": "v4 override",
-"script": "[low, conspiratorial] Halverson. Fourth grade. I'm hiding in the staff room. [tired, flat] That's allowed. [dry, certain] It's in the contract."
+"script": "[low, conspiratorial] Halverson. Fourth grade. I'm hiding in the staff room. [deadpan, flat] That's allowed. ...It's in the contract."
 },
 {
 "voice": "justin",
-"speaker": "",
+"speaker": "Mr. Halverson",
 "text": "If you're hungry, the fridge is a minefield. Every lunch in there has a name on it. Read the labels.",
 "ctx": "v4 override",
-"script": "[warning, deadpan] If you're hungry, the fridge is a minefield. [flat, grave] Every lunch in there has a name on it. [firm, dry] Read the labels."
+"script": "[deadpan, warning] If you're hungry, the fridge is a MINEFIELD. [flat, grave] Every lunch in there has a name on it. ...Read the labels."
 },
 {
 "voice": "justin",
-"speaker": "",
+"speaker": "Mr. Halverson",
 "text": "Conference night is over. I survived. I'm going to sit on this couch until Field Day.",
 "ctx": "v4 override",
-"script": "[exhausted, relieved] Conference night is over. I survived. [deadpan, weary] I'm going to sit on this couch until Field Day."
+"script": "[exhausted, relieved] Conference night is over. I SURVIVED. [deadpan, weary] I'm going to sit on this couch... until Field Day."
 },
 {
 "voice": "justin",
-"speaker": "",
+"speaker": "Mr. Halverson",
 "text": "Deedee’s plate? Oh, everybody waits for Deedee’s plate. She brings one every conference night.",
 "ctx": "v4 override",
-"script": "[brightening, reverent] Deedee’s plate? Oh, everybody waits for Deedee’s plate. [direct, sincere] She brings one every conference night."
+"script": "[brightening, reverent] Deedee’s plate? Oh, EVERYBODY waits for Deedee’s plate. [direct, sincere] She brings one every conference night."
 },
 {
 "voice": "justin",
-"speaker": "",
+"speaker": "Mr. Halverson",
 "text": "Don't tell Gary. Gary eats the whole thing.",
 "ctx": "v4 override",
-"script": "[hushed, conspiratorial] Don't tell Gary. [flat, disapproving] Gary eats the whole thing."
+"script": "[hushed, conspiratorial] Don't tell Gary. [deadpan, annoyed] Gary eats the WHOLE thing."
 },
 {
 "voice": "justin",
@@ -157,17 +157,17 @@
 },
 {
 "voice": "justin",
-"speaker": "",
+"speaker": "Mr. Halverson",
 "text": "Take some for the road. Don't tell Gary.",
 "ctx": "v4 override",
-"script": "[sincere, direct] Take some for the road. [hushed, conspiratorial] Don't tell Gary."
+"script": "[direct, sincere] Take some for the road. [hushed, conspiratorial] ...Don't tell Gary."
 },
 {
 "voice": "justin",
-"speaker": "",
+"speaker": "Mr. Halverson",
 "text": "Every conference night. Twelve years. It's the only reason Gary shows up.",
 "ctx": "v4 override",
-"script": "[tired, sincere] Every conference night. Twelve years. [dry, flat] It's the only reason Gary shows up."
+"script": "[tired, sincere] Every conference night. TWELVE years. [deadpan, flat] ...It's the only reason Gary shows up."
 },
 {
 "voice": "justin",
@@ -209,7 +209,7 @@
 "speaker": "Reel",
 "text": "Your father has been fishing this pier since before the pier. He catches something every day. The size, I round down.",
 "ctx": "v4 override",
-"script": "[slow, fond] Your father has been fishing this pier since before the pier. [matter-of-fact] He catches something every day. [dry, knowing] The size, I round down."
+"script": "[slow, fond] Your father has been fishing this pier since BEFORE the pier. He catches something every day. [deadpan, knowing] The size, I round down."
 },
 {
 "voice": "boppy",
@@ -315,6 +315,167 @@
 "text": "TNB said he'd be home. Spring Street loft.",
 "ctx": "v4 override",
 "script": "[dry, mild] TNB said he'd be home. Spring Street loft."
+},
+{
+"voice": "sal",
+"speaker": "Sal",
+"text": "Airport? Hop in. Cab seven has been waiting all day.",
+"ctx": "v4 override",
+"script": "[quick, friendly] Airport? Hop in. [fond, drawn out] Cab seven has been waiting ALL day."
+},
+{
+"voice": "sal",
+"speaker": "Sal",
+"text": "The girls stay put. Amy's orders. I follow Amy's orders. Everybody does.",
+"ctx": "v4 override",
+"script": "[quick, matter-of-fact] The girls stay put. Amy's orders. [flat, meek] I follow Amy's orders. ...EVERYBODY does."
+},
+{
+"voice": "sal",
+"speaker": "Sal",
+"text": "LAX it is. Seat belts. Your niece is giving me the look.",
+"ctx": "v4 override",
+"script": "[quick, cheerful] LAX it is. Seat belts. [deadpan, nervous] Your niece is giving me... the LOOK."
+},
+{
+"voice": "sal",
+"speaker": "Sal",
+"text": "Girls, out you go. No stowaways. I checked the trunk last time.",
+"ctx": "v4 override",
+"script": "[quick, firm] Girls, out you go. No stowaways. [offhand, knowing] I checked the trunk last time."
+},
+{
+"voice": "sal",
+"speaker": "Sal",
+"text": "Off to the airport. I'll take the scenic route. By scenic I mean the only route.",
+"ctx": "v4 override",
+"script": "[quick, friendly] Off to the airport. I'll take the scenic route. [matter-of-fact, dry] By scenic I mean... the ONLY route."
+},
+{
+"voice": "sal",
+"speaker": "Sal",
+"text": "The girls stay home. It's a school night. Even I know that, and I don't have kids.",
+"ctx": "v4 override",
+"script": "[quick, friendly] The girls stay home. It's a school night. [flat, proud] Even I know that, and I don't HAVE kids."
+},
+{
+"voice": "sal",
+"speaker": "Sal",
+"text": "Airport. Los Angeles. Your usual.",
+"ctx": "v4 override",
+"script": "[quick, deadpan] Airport. Los Angeles. ...Your usual."
+},
+{
+"voice": "sal",
+"speaker": "Sal",
+"text": "Girls, say your goodbyes. I'll keep the meter off. Mostly.",
+"ctx": "v4 override",
+"script": "[quick, friendly] Girls, say your goodbyes. I'll keep the meter off. [offhand, mischievous] ...Mostly."
+},
+{
+"voice": "sal",
+"speaker": "Sal",
+"text": "Los Angeles? Sure. I'll get you there before the sun gets bored.",
+"ctx": "v4 override",
+"script": "[quick, cheerful] Los Angeles? Sure. [matter-of-fact, breezy] I'll get you there before the sun gets BORED."
+},
+{
+"voice": "sal",
+"speaker": "Sal",
+"text": "The girls stay here. Amy's rule number one. There are about forty more.",
+"ctx": "v4 override",
+"script": "[quick, friendly] The girls stay here. Amy's rule number one. [flat, weary] ...There are about FORTY more."
+},
+{
+"voice": "sal",
+"speaker": "Sal",
+"text": "Another flight, another gold star for cab seven.",
+"ctx": "v4 override",
+"script": "[proud, deadpan] Another flight, another gold star... for cab seven."
+},
+{
+"voice": "sal",
+"speaker": "Sal",
+"text": "The girls head home. Straight home. Do not follow the cab.",
+"ctx": "v4 override",
+"script": "[quick, firm] The girls head home. Straight home. [flat, stern] Do NOT follow the cab."
+},
+{
+"voice": "sal",
+"speaker": "Sal",
+"text": "Airport. You've got the look of a man who packed light.",
+"ctx": "v4 override",
+"script": "[quick, friendly] Airport. [matter-of-fact, knowing] You've got the look of a man who packed light."
+},
+{
+"voice": "sal",
+"speaker": "Sal",
+"text": "Girls, back to the house. Your grandmother has pie. That's not a rumor.",
+"ctx": "v4 override",
+"script": "[quick, friendly] Girls, back to the house. Your grandmother has PIE. [flat, grave] ...That's not a rumor."
+},
+{
+"voice": "sal",
+"speaker": "Sal",
+"text": "Los Angeles again. Cab seven is ready.",
+"ctx": "v4 override",
+"script": "[quick, proud] Los Angeles again. Cab seven is READY."
+},
+{
+"voice": "sal",
+"speaker": "Sal",
+"text": "LAX. Sit back. The radio is on something calm.",
+"ctx": "v4 override",
+"script": "[quick, friendly] LAX. Sit back. [deadpan, soothing] The radio is on something... calm."
+},
+{
+"voice": "sal",
+"speaker": "Sal",
+"text": "Off we go. Don't touch the visor. Everybody touches the visor.",
+"ctx": "v4 override",
+"script": "[quick, friendly] Off we go. Don't touch the visor. [offhand, weary] ...EVERYBODY touches the visor."
+},
+{
+"voice": "sal",
+"speaker": "Sal",
+"text": "Airport run. I'll have you there before your coffee gets cold.",
+"ctx": "v4 override",
+"script": "[quick, smug] Airport run. I'll have you there before your coffee gets cold."
+},
+{
+"voice": "sal",
+"speaker": "Sol",
+"text": "Long Island? Sure. I know a shortcut. It's not shorter, but it's mine.",
+"ctx": "v4 override",
+"script": "[quick, friendly] Long Island? Sure. I know a shortcut. [flat, proud] It's not shorter, but it's MINE."
+},
+{
+"voice": "sal",
+"speaker": "Sol",
+"text": "Seat belt, please. It's decorative, but I like when people try.",
+"ctx": "v4 override",
+"script": "[quick, friendly] Seat belt, please. [matter-of-fact, encouraging] It's decorative, but I like when people TRY."
+},
+{
+"voice": "sal",
+"speaker": "Sol",
+"text": "Airport run. Cab traffic, cab snacks, cab opinions. All included.",
+"ctx": "v4 override",
+"script": "[quick, proud] Airport run. Cab traffic, cab snacks, cab OPINIONS. [deadpan, generous] ...All included."
+},
+{
+"voice": "sal",
+"speaker": "Sol",
+"text": "East we go. Don't mind the ketchup stain. It's from last Tuesday.",
+"ctx": "v4 override",
+"script": "[quick, friendly] East we go. Don't mind the ketchup stain. [offhand, matter-of-fact] ...It's from last Tuesday."
+},
+{
+"voice": "sal",
+"speaker": "Sol",
+"text": "Heading home? Say hi to the Atlantic for me. The right ocean.",
+"ctx": "v4 override",
+"script": "[quick, friendly] Heading home? Say hi to the Atlantic for me. [flat, smug] ...The RIGHT ocean."
 }
 ]
 }
