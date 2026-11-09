@@ -7282,9 +7282,16 @@
    "group": "Olivia"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-09",
+     "note": "not needed",
+     "from": "v2",
+     "at": 1794250782937
+    }
+   ],
    "id": "michael-battle-stance-1",
    "tab": "Characters",
    "title": "Michael battle stance sheet 1, 8 frames 4 x 2 (new; copies his hero and walk sheet)",
