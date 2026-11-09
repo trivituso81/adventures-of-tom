@@ -56,4 +56,9 @@ for(const c of clips.filter(c=>c.kind==='dialog')){
   const had=k in D[f].clips;D[f].clips[k]=out;dt.add(f);const s=f+(had?' replaced':' added');dst[s]=(dst[s]||0)+1;
 }
 for(const f of dt){const {L,ci,clips:cl}=D[f];L[ci]='Object.assign(DIALOG_CLIPS.clips,'+JSON.stringify(cl)+');';fs.writeFileSync(OUT+'/data/voice/'+f,L.join('\n'));}
+// Ledger for the Voice Library's "Not in game yet" filter: fingerprint (first 16 hex of SHA-1 of the export's mp3 text, the same
+// text the phone stores) of every clip this run processed. Clips the caller filtered out of the export are not added.
+{const crypto=require('crypto'),LF=DATA+'/merged-takes.json';let H=new Set();try{H=new Set(JSON.parse(fs.readFileSync(LF,'utf8')).hashes);}catch(e){}
+ for(const c of clips)H.add(crypto.createHash('sha1').update(c.mp3).digest('hex').slice(0,16));
+ fs.writeFileSync(OUT+'/data/merged-takes.json',JSON.stringify({note:'Fingerprints of phone clips merged into the game (tools/voice-library/merge-local.js). Read by voices.html.',hashes:[...H].sort()})+'\n');}
 console.log(JSON.stringify({battle:rep,dialogue:dst}));

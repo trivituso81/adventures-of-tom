@@ -109,7 +109,7 @@ header{padding:10px 28px}
     <div class="frow" id="fWho"></div>
     <div class="frow" id="fType"></div>
     <div class="frow" id="fChap"></div>
-    <div class="frow" id="fShow"></div>
+    <div class="frow" id="fShow"></div><div class="hint" id="fShowNote" hidden style="padding:4px 2px"></div>
     <div class="frow" id="fOrder"></div>
     <div class="sum"><span id="count"></span><span class="grow"></span><button class="small" id="clear">Clear</button><button class="small gold" id="selmode">Select all shown</button></div>
   </div>
@@ -184,6 +184,15 @@ function eachBatch(db,st,size,fn){ return new Promise(res=>{ if(!db) return res(
     q.onsuccess=()=>{ const rows=q.result||[]; try{ fn(rows); }catch(e){} if(rows.length<size) return res(); step(rows[rows.length-1].id); }; q.onerror=()=>res(); };
   step(null); }); }
 async function allSlim(db,st){ const out=[]; await eachBatch(db,st,25,rows=>rows.forEach(r=>out.push(slim(r)))); return out; }
+// Not in game yet: data/merged-takes.json lists the fingerprint (first 16 hex of SHA-1 of the stored audio text) of every phone clip
+// Claude has merged into the game's files (tools/voice-library/merge-local.js adds them on each merge). A phone clip whose fingerprint
+// is not in that list has not been built into the game. PH holds each phone clip's fingerprint (computed in the background).
+let MERGED=null; const PH=new Map();
+async function fp(str){ const d=await crypto.subtle.digest('SHA-1',new TextEncoder().encode(str)); return [...new Uint8Array(d)].slice(0,8).map(b=>b.toString(16).padStart(2,'0')).join(''); }
+async function loadMerged(){ try{ const r=await fetch('data/merged-takes.json?'+Date.now(),{cache:'no-store'}); if(r.ok){ const j=await r.json(); MERGED=new Set(j.hashes||[]); } }catch(e){} }
+async function hashPhone(){ if(!LDB||!window.crypto||!crypto.subtle) return; const rows=[]; await eachBatch(LDB,'clips',20,b=>b.forEach(r=>{ if(r&&r.mp3&&!PH.has(r.id)) rows.push([r.id,r.mp3]); }));
+  for(const [id,m] of rows){ try{ PH.set(id,await fp(m)); }catch(e){} } renderFilters(); if(F.show==='pending') renderAll(); }
+const notInGame=it=>{ const l=localFor(it); if(!l||!MERGED) return false; const h=PH.get(l.id); return !!h&&!MERGED.has(h); };
 function getOne(db,st,id){ return new Promise(res=>{ if(!db) return res(null); try{ const q=db.transaction(st).objectStore(st).get(id); q.onsuccess=()=>res(q.result||null); q.onerror=()=>res(null); }catch(e){ res(null); } }); }
 const mp3Of=async(db,st,id)=>{ const r=await getOne(db,st,id); return r?r.mp3:null; };
 let LDB=null, TDB=null;
@@ -353,7 +362,7 @@ function passCh(it,s){ s=s||F.ch; if(!s.size) return true; return it.c.length?it
 // Old voice: a line of a recast voice (IDX.recast: voice -> recast time) that still plays the pre-recast audio here: the baked
 // clip is old (it.ov) and no take was chosen on this device, or the take chosen here was made before the recast.
 function isOld(it){ const at=IDX.recast&&IDX.recast[it.v]; if(!at) return false; const loc=localFor(it); return loc?(loc.t||0)<at:!!it.ov; }
-function passShow(it){ if(F.show==='old') return isOld(it); if(F.show==='phone') return !!localFor(it); if(F.show==='builtin') return !localFor(it)&&it.f>=0; if(F.show==='none') return it.f<0&&!localFor(it); return true; }
+function passShow(it){ if(F.show==='old') return isOld(it); if(F.show==='phone') return !!localFor(it); if(F.show==='builtin') return !localFor(it)&&it.f>=0; if(F.show==='none') return it.f<0&&!localFor(it); if(F.show==='pending') return notInGame(it); return true; }
 // Search forgives spelling: every word typed must appear in the line, its speaker, place, move name or direction, either inside a
 // word or within one typo (two for long words), so "yamamot" finds "Ymamot".
 function lev(a,b){ if(Math.abs(a.length-b.length)>2) return 9; let p=[...Array(b.length+1).keys()];
@@ -378,7 +387,8 @@ function renderFilters(){
   const p=IDX.items.filter(it=>localFor(it)).length, nn=IDX.items.filter(it=>it.f<0&&!localFor(it)).length;
   const nDup=IDX.items.filter(it=>it.dup).length;
   $('fOrder').innerHTML='<span class="lab">Order</span>'+chip('ord','story','Story order (repeats listed once)',F.ord==='story',IDX.items.length-nDup)+chip('ord','old','Old order',F.ord==='old',IDX.items.length);
-  $('fShow').innerHTML='<span class="lab">Show</span>'+chip('show','all','All lines',F.show==='all',IDX.items.length)+chip('show','none','No clip yet',F.show==='none',nn)+chip('show','phone','Re-recorded on this device',F.show==='phone',p)+chip('show','builtin','Built-in clip',F.show==='builtin')+(IDX.recast&&Object.keys(IDX.recast).length?chip('show','old','Old voice',F.show==='old',IDX.items.filter(isOld).length):'');
+  $('fShow').innerHTML='<span class="lab">Show</span>'+chip('show','all','All lines',F.show==='all',IDX.items.length)+chip('show','none','No clip yet',F.show==='none',nn)+chip('show','phone','Re-recorded on this device',F.show==='phone',p)+chip('show','pending','Not in game yet',F.show==='pending',MERGED&&PH.size?IDX.items.filter(notInGame).length:null)+chip('show','builtin','Built-in clip',F.show==='builtin')+(IDX.recast&&Object.keys(IDX.recast).length?chip('show','old','Old voice',F.show==='old',IDX.items.filter(isOld).length):'');
+  { const n=$('fShowNote'); if(F.show==='pending'){ n.textContent=(!MERGED?'The merge list could not be loaded, so nothing can be checked right now.':!PH.size?'Checking your phone clips...':(MERGED.size?'':'Earlier merges were not recorded, so every phone clip is listed until your next export is merged; after that this list is exact. ')+'These phone clips are not built into the game yet. Press Export phone clips and send the file to Claude. Clips for lines the game no longer plays also stay here until you delete them.'); n.hidden=false; } else n.hidden=true; }
 }
 function nFilters(){ return (F.who.size?1:0)+(F.type.size?1:0)+(F.ch.size?1:0)+(F.show!=='all'?1:0)+(F.q.trim()?1:0); }
 function renderSum(){
@@ -638,6 +648,7 @@ async function loadPhone(force){
   for(const t of await allSlim(TDB,'takes')) TAKES.set(t.id,t);
   try{ localStorage.removeItem('aot-vl-boot'); }catch(e){}
   renderAll();
+  loadMerged().then(hashPhone);
 }
 window.__VL={get IDX(){return IDX;},F,SEL,LOCAL,TAKES,lk,visible,newTake,useBuiltIn,builtIn,itemByKey};
 </script>
