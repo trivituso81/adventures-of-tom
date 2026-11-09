@@ -1,3 +1,9 @@
+## 2026-11-09 (npcaudit1): NPC hero prompts fixed after the style audit; 17 entries reopened
+- Audit of all 55 approved `npc-photo-<id>` pictures (Project doc `claude/npc-art-audit-11-09.md`): 13 adults were painted as children, 2 had a name caption painted in, 1 had a finger over the mouth, 2 missed their spec colors.
+- `tools/art-library/npc-prompts.js`, details block only (Tom's template is untouched): a GROWN-UP line for adults of 18 to 59, a young-teenager line for Daisy, a NO WRITING line, and "finger" and "touching" added to the face rule. Ryan's quiet gesture moved to waist height. Bernadette's hat removed (Tom rejected it twice for the hat; the palette had asked for one).
+- `data/art-prompts.json` rebuilt. Set back to draft so Tom can regenerate: Bean, Juniper, Ryan, Bun, Kit, Luna, Chet, Wes, Dash, Ray, Toni, Claudia, Dakota, Yesenia, Sam, Don Beto, Mrs. Alvarez. Their v1 pictures stay as earlier versions for comparison.
+- Tests: make-prompts with no change reproduced the file byte for byte first; validate.js OK; in_game.py --check ok. No game file changed, no tag moves.
+
 ## 2026-11-09 (boppyfx1): Boppy's 13 approved effect sheets cut and drawn painted
 - `tools/sprite-bake/bake_boppy_fx.py` cuts the 13 approved `boppy-fx-*` sheets (one item per grid cell, checked on a montage) into 58 pictures in `art/props/boppy` (prefixes cs_ gr_ pa_ rr_ hc_ ld_ ew_ fu_ pp_ sd_ mf_ ny_ fa_). Seeds of Trouble v1 and v2 are byte-identical; v1 is used.
 - Not installed: held objects already painted into the ab frames (cap, dispenser, key ring, packet, pepper, jar, lid, pot, spoon), word cards (the game draws its own words), and props the game keeps (cell bars, recliner, cushion, FAMILY FIRST ticket, fire alarm, catfish, pier post, folding chair, bobber, pond).

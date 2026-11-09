@@ -56,7 +56,7 @@ const N = {
   washington: { name: 'Mr. Washington', look: 'washington', sex: 'm', kind: 'adult', age: 77, ft: `5'9"`, role: 'a Jefferson Park neighbour who has lived on the same porch since 1979', acc: 'a coffee mug held in one hand, standing relaxed and content, a gentle, settled smile' },
   marisol: { name: 'Marisol', look: 'marisol', sex: 'f', kind: 'adult', age: 40, ft: `5'6"`, role: 'a Jefferson Park neighbour walking her dog', acc: 'holding the looped end of an empty dog leash in one hand, looking amused and a little distracted' },
   larry: { name: 'Larry', look: 'larry', sex: 'm', kind: 'adult', age: 55, ft: `5'9"`, role: 'a Jefferson Park neighbour who blows leaves', acc: 'a handheld leaf blower in one hand pointed at the ground, a cheerful, contented look' },
-  bernadette: { name: 'Bernadette', look: 'bernadette', sex: 'f', kind: 'adult', age: 66, ft: `5'4"`, role: 'the Neighborhood Watch Captain of Old Oak Park for 19 years', acc: 'a small pair of binoculars hanging on her chest and a whistle on a cord, arms folded, a stern but fond look' },
+  bernadette: { name: 'Bernadette', look: 'bernadette', sex: 'f', kind: 'adult', age: 66, ft: `5'4"`, role: 'the Neighborhood Watch Captain of Old Oak Park for 19 years', acc: 'a small pair of binoculars hanging on her chest and a whistle on a cord, arms folded, a stern but fond look', over: { hat: null } },
   odette: { name: 'Miss Odette', look: 'odette', sex: 'f', kind: 'adult', age: 70, ft: `5'4"`, role: "the cook of Odette's Creole Kitchen", acc: 'a long wooden spoon held up like a scepter, a warm, welcoming, motherly smile' },
   carmen: { name: 'Doña Carmen', look: 'carmen', sex: 'f', kind: 'adult', age: 58, ft: `5'3"`, role: 'the owner of Pupuseria La Ceiba', acc: 'a plate of golden pupusas held out with both hands and a clean apron over her clothes, a big welcoming smile' },
   ray: { name: 'Ray', look: 'ray', sex: 'm', kind: 'adult', age: 45, ft: `5'11"`, role: 'the security guard at the Sunset Gold Studios gate', acc: 'a clipboard held against his chest, a firm but friendly stance, feet planted' },
@@ -75,7 +75,7 @@ const N = {
   jordan: { name: 'Jordan', look: 'jordan', sex: 'm', kind: 'adult', age: 36, ft: `5'10"`, role: 'a house renovator who lives with Sam', acc: 'a tape measure clipped to his belt and a small hammer in one hand, a proud, handy stance' },
   sam: { name: 'Sam', look: 'sam', sex: 'f', kind: 'adult', age: 34, ft: `5'7"`, role: 'a house renovator who lives with Jordan and posts everything online', acc: 'a phone held up in one hand, a quick, delighted smile' },
   dakota: { name: 'Dakota', look: 'dakota', sex: 'f', kind: 'adult', age: 36, ft: `5'8"`, role: 'a homeowner restoring a 1912 house with Ryan', acc: 'a paintbrush held in one hand, a fond, determined smile' },
-  ryan: { name: 'Ryan', look: 'ryan', sex: 'm', kind: 'adult', age: 38, ft: `5'11"`, role: 'a new father and homeowner, Dakota\'s partner', acc: 'one finger raised at chest height to ask for quiet, a baby monitor in the other hand, exhausted but happy' },
+  ryan: { name: 'Ryan', look: 'ryan', sex: 'm', kind: 'adult', age: 38, ft: `5'11"`, role: 'a new father and homeowner, Dakota\'s partner', acc: 'one open hand held out low at waist height in a gentle keep-it-down gesture, well below the chin and away from the face, a baby monitor in the other hand, exhausted but happy' },
 };
 
 const BATCHES = [
@@ -122,12 +122,16 @@ function details(c) {
   const hat = p.hat ? `a hat or cap in ${cw(p.hat, CLOTH)}` : 'no hat';
   const pants = p.pants === p.shirt ? 'matching trousers in the same color' : `trousers in ${cw(p.pants, CLOTH)}`;
   const old = c.age >= 60 ? ' Older: a softer, more lined face and a slightly gentler posture.' : '';
+  // Audit 2026-11-09: adults of 18 to 59 with only an age number came out as children (13 of 55). This line is the fix; the template stays verbatim.
+  const grown = c.kind === 'adult' && c.age < 60 ? ` GROWN-UP, NOT A CHILD: ${c.name} is an adult ${who} of ${c.age} and must read as ${c.age} at a glance, never as a child or a teenager. Adult face: a longer face with a defined jaw, a full adult nose, eyes clearly smaller than a child's, a few light lines that fit ${c.age}. Adult body: adult shoulders, adult hands, longer legs. Keep the large head and the charm, but an adult's head on an adult's body.` : '';
+  const teen = c.kind === 'child' && c.age >= 12 ? ` ${c.name} is ${c.age}, a young teenager, clearly older than a small child: a longer face and longer legs.` : '';
   const glasses = c.glasses ? 'Round glasses.' : 'No glasses.';
   return `HAND DRAWN FINAL FANTASY IX CHARACTER: ${c.name.toUpperCase()}, a ${c.age} year old ${who}, ${c.role}. Real height ${c.ft}.
-Hand drawn Final Fantasy IX appearance: skin ${cw(p.skin, SKIN)}. ${hair[0].toUpperCase() + hair.slice(1)}. Outfit: a top in ${cw(p.shirt, CLOTH)}, ${pants}, sturdy simple shoes; ${hat}. ${glasses}${old}
+Hand drawn Final Fantasy IX appearance: skin ${cw(p.skin, SKIN)}. ${hair[0].toUpperCase() + hair.slice(1)}. Outfit: a top in ${cw(p.shirt, CLOTH)}, ${pants}, sturdy simple shoes; ${hat}. ${glasses}${old}${grown}${teen}
 Hand drawn Final Fantasy IX personality and expression: ${c.acc}.
 
-PORTRAIT USE: this full body picture is also cropped to make ${c.name}'s dialog portrait. Keep the head large and near the top of the picture, and keep the whole face, both eyes and the mouth fully visible, with no hand, prop or hat brim covering any part of the face.
+PORTRAIT USE: this full body picture is also cropped to make ${c.name}'s dialog portrait. Keep the head large and near the top of the picture, and keep the whole face, both eyes and the mouth fully visible, with no hand, finger, prop or hat brim covering or touching any part of the face.
+NO WRITING: no name, age, height, caption, label, title or signature anywhere on the background. The only lettering allowed is on a prop this person holds or wears.
 
 ${FF9_REMINDER(c)}`;
 }
