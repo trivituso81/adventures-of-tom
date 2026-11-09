@@ -21,7 +21,8 @@ const EMOTIONS_LIST=["happy","loving","sad","angry","scared","surprised","proud"
 // pose / walking pose"). Their painted emotion sheets have a different build from the walk (head about a third of the height, broad torso, short legs),
 // so no resize can match both height and bulk (emo15 matched height; they still read bigger). They keep the standing frame during a mood line; the
 // dialogue face still changes. Remove an id when its redone emotion sheet (Art Library entry <id>-emotions, emoredo1) is approved and installed.
-const EMO_POSE_PAUSED=new Set(['tom','tnb','grace','rose','amy','deedee','olivia','justin']);
+// TNB, Grace and Rose are back on (Tom 12:37, emopause2): their poses are sized so the head matches the standing head (EMO_HEAD in bake_story_poses.py).
+const EMO_POSE_PAUSED=new Set(['tom','amy','deedee','olivia','justin']);
 function emoActorFor(id,name) {
   const pm=typeof playerMember==='function'?playerMember():null;
   if(pm&&pm.id===id) return typeof roseRider==='function'&&roseRider()?null:player;   // Tom carrying Rose keeps the ride picture

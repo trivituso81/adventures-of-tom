@@ -68,6 +68,14 @@ for _id, _h in EMO_H.items():
 STAND_CHIN = {'tom': 10.3, 'tnb': 11.5, 'grace': 10.8, 'rose': 10.2, 'justin': 9.8, 'boppy': 10.8, 'deedee': 10.3, 'ellie': 10.5, 'olivia': 10.3, 'amy': 10.5}
 HEAD_OVER, FIG_OVER = 1.06, 1.03
 
+# Head-matched emotion size (Tom 2026-11-09 12:37: "TNB, Grace and Rose's proportions look good. the emotional states just need to be sized up according
+# to head shape compared to their standing pose baseline"). For these ids the 8 emotion frames get ONE size factor, set so the painted head (top of hair to
+# chin) is as tall in game rows as the head of the overworld down_stand frame; no head shrink and no figure shrink (match_standing is skipped). The body follows
+# the head, so the mood figure can be taller or shorter than the stand. Matched by FACE, not hair (hair volume differs between the sheets): the standing
+# frame was laid over the happy, proud and unimpressed faces at several sizes, aligned at the eyes, and the size where face width and eye-to-chin agree kept.
+#   id: emotion strip px per standing-frame px at the matched face size (emopause2)
+EMO_HEAD = {'tnb': 1.20, 'grace': 1.10, 'rose': 1.30}
+
 
 def stand_frame(cid):
     import re
@@ -219,7 +227,9 @@ for cid, S in SETS.items():
         figs = {}
         for i, n in enumerate(S['names']):
             c = sh.crop((i * fw, 0, (i + 1) * fw, sh.height)); figs[n] = c.crop(c.getbbox())
-        if not S['k']: S['k'] = max(5, min(10, int(figs[S['ref']].height / S['h'])))
+        if not S['k']:
+            hd = EMO_HEAD.get(S['member'])
+            S['k'] = max(5, min(10, int(hd * stand_frame(S['member'])[1]) if hd else int(figs[S['ref']].height / S['h'])))   # never upscale the painted frames
     elif 'ground' in S: figs = dict(zip(S['names'], cut_cells(key_ground(os.path.join(RAW, S['sheet']), S['ground']), S['cut'][0], S['cut'][1], S['cut'][0] * S['cut'][1])))
     elif 'cut' in S: figs = dict(zip(S['names'], _cut(os.path.join(RAW, S['sheet']), S['cut'][0], S['cut'][1], [n[3:] for n in S['names']] + ['x%d' % i for i in range(S['cut'][0] * S['cut'][1] - len(S['names']))]).values()))
     if S.get('crouch'):
@@ -227,7 +237,9 @@ for cid, S in SETS.items():
         figs[C['name']] = one.resize((round(one.width * C['scale']), round(one.height * C['scale'])), Image.LANCZOS)
     if 'strip' not in S and 'cut' not in S and 'ground' not in S: figs = dict(zip(S['names'], grid(os.path.join(RAW, S['sheet']), 4, 2)))
     f = S['h'] * S['k'] / figs[S['ref']].height
-    if 'strip' in S:
+    if 'strip' in S and S['member'] in EMO_HEAD:
+        f = S['k'] / (EMO_HEAD[S['member']] * stand_frame(S['member'])[1])   # strip px -> standing px -> game rows -> atlas px
+    elif 'strip' in S:
         figs = match_standing(cid, S, figs, f)
     if cid in STRETCH_FIT:
         figs = {n: (im.resize((round(im.width * STRETCH_FIT[cid].get(n, 1.0)), round(im.height * STRETCH_FIT[cid].get(n, 1.0))), Image.LANCZOS) if STRETCH_FIT[cid].get(n, 1.0) != 1.0 else im) for n, im in figs.items()}
