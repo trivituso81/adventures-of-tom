@@ -266,9 +266,9 @@ SCENES.ch1AfterBoss=[
 // 6. Home: half a crisp, Boppy's lure, chapter complete.
 SCENES.ch1End=()=>[
   {flag:'ch1-done',value:'pending'},
-  {place:'Boppy',at:[16,11],dir:'down'},
-  {walk:'tom',to:[[14,11]],speed:.25}, {face:'tom',dir:'up'},
-  {place:'grace',at:[15,12],dir:'up'}, {place:'rose',at:[13,12],dir:'up'}, {place:'deedee',at:[13,11],dir:'right'},
+  {place:'Boppy',at:[8,8],dir:'down'},
+  {walk:'tom',to:[[8,10]],speed:.25}, {face:'tom',dir:'up'},
+  {place:'grace',at:[9,11],dir:'up'}, {place:'rose',at:[7,11],dir:'up'}, {place:'deedee',at:[6,9],dir:'right'},
   {talk:'Boppy',lines:['You found the Big One? I TOLD everybody. Twenty years.']},
   ...(bag.includes('lure')?[
     {talk:'Tom',lines:['It had this stuck in its lip.']},

@@ -1,3 +1,8 @@
+## 2026-11-09 (endstage1): chapter 1 ending scene centered in Deedee and Boppy's house (tag endstage1)
+- Tom (screenshot): the party stood at the far right of the room during Grace's "staying the WHOLE week" talk. Cause: `ch1End` in `data/scenes.js` still used the old room layout (Boppy at column 16, outside the 16-wide room; Tom, Deedee, Grace and Rose at columns 13 to 15).
+- Now Boppy (8,8), Tom (8,10), Grace (9,11), Rose (7,11), Deedee (6,9), all on the open floor in the middle. No spoken line changed.
+- Checked with `tools/boss_stage_test.py` on a custom `ch1End` case in portrait and landscape; frames looked at.
+
 ## 2026-11-09 (rowwalk1): Rivituso Row walk map from Area Builder export (tag rowwalk1)
 - Tom's export of the row area (chapter 20 view, system_hash 51b09b43): 18 tiles changed in the `plateMask`, no new doors or exits. Its three door/exit edits (Gregori door at 7,6, the Cattail Pier exit at 12-14,20) are already portals, so nothing was rewired. Installed with `tools/apply_walkmap.py`; only the row mask rows in `data/maps-le.js` changed.
 - `tools/reach_test.py row`: 0 fails. Mask overlay looked at (`tools/shots/mask-row.png`). `tools/smoke.py` FAILS [].
