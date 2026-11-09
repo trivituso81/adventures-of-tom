@@ -6,10 +6,7 @@ const { sheet } = require('./dungeonfind-prompts');
 const REF_KEY = 'docs/reference/style_key_v1.png';
 const T = (name, d) => [name, d];
 const SHEETS = [
-  { id: 'a', label: 'trails for chapters 1 to 3', title: 'chapters 1 to 3', items: [
-    T('CH1 CRUMB 1, SMALL', 'Three tiny golden pastry crumbs and one flaky crust flake with a dusting of cinnamon sugar, lying together in a loose little pile. The smallest, quietest clue of the trail.'),
-    T('CH1 CRUMB 2, TRAIL', 'A longer scattered line of golden rhubarb crisp crumbs with one sticky pink rhubarb smear and one half crumbled oat cluster, pointing to the right.'),
-    T('CH1 CRUMB 3, BITE', 'A big broken wedge of rhubarb crisp with a huge bite taken out of it, spilling crumbs and pink filling, with one wide toothy bite mark clearly visible.'),
+  { id: 'a', label: 'trails for chapters 2 and 3', title: 'chapters 2 and 3', items: [
     T('CH2 TAR CLUE 1, DRIP', 'A small shiny black tar puddle with three round drips splashed beside it and one bubble on the surface, a faint curl of grey smoke rising from it.'),
     T('CH2 TAR CLUE 2, FOOTPRINT', 'A pair of huge sticky black footprints pressed into a patch of cracked dusty ground, the toes spread wide, thick tar strings stretching up from the heel.'),
     T('CH2 TAR CLUE 3, CRACK', 'A jagged crack in a square of pale cracked ground, dark fumes seeping out of it, little pebbles bouncing on the edge as if something is rumbling below.'),
@@ -76,4 +73,28 @@ const entries = SHEETS.map(s => ({
   ar: '1:1', refs: [REF_KEY],
   prompt: sheet(s.label, s.items).replace('standalone objects that the player has to find, touch or collect inside a dungeon', 'trail clue objects that lead the player, one after another, toward a hidden enemy or boss. Each group of three is in trail order, from the faintest clue to the strongest'),
 }));
+// Chapter 1, Grump Hollow: the rhubarb crumb trail Deedee calls out (Tom 2026-11-09). These replace the three CH1 trail clues that sheet a used to hold.
+// The game shows each group on the painted Hollow right before Deedee speaks: cells 1 to 2 before "Crumbs! Rhubarb crumbs." (ch1Mudling, entrance),
+// cells 3 to 5 before "The crumbs keep going north." (after the Mudling), cells 6 to 9 before "The crumbs go around the pond. Toward Boppy's fishing spot." (after the Pond Grump, heading east).
+const CRUMBS = [
+  T('ENTRANCE CRUMBS, FRESH PILE', 'A tight little pile of chunky golden brown rhubarb crisp crumbs, six or seven of them, with two bright pink red rhubarb smears and one whole toasted oat flake on top, a pinch of white sugar crystals around the base. The brightest and most noticeable crumb group on the sheet.'),
+  T('ENTRANCE CRUMBS, SCATTER', 'About ten chunky golden brown crumbs of different sizes spilled loosely over a wide area with a gap between most of them, one pink red rhubarb smear and one oat flake, no pile. Reads as a first dropped trail.'),
+  T('NORTH TRAIL, NEAR', 'A single wandering line of about eight chunky golden brown crumbs running straight up the cell from the bottom middle to the top middle (inside the cell margin), each crumb a different size, with one pink red rhubarb smear near the bottom. Crumbs are bigger and closer together at the bottom.'),
+  T('NORTH TRAIL, MIDDLE', 'A single wandering line of about seven chunky golden brown crumbs running up the cell from the bottom middle, drifting slightly to the left near the top, with one oat flake and one pink red rhubarb smear. The crumbs are a little smaller and further apart than in cell 3.'),
+  T('NORTH TRAIL, FAR', 'A single line of about six chunky golden brown crumbs running up the cell from the bottom middle, getting smaller and further apart toward the top, ending in one slightly larger crumb with a tiny pink red rhubarb smear on it at the very top.'),
+  T('EAST TRAIL, NEAR', 'A single wandering line of about eight chunky golden brown crumbs running from the left middle of the cell to the right middle, each crumb a different size, with one pink red rhubarb smear near the left end. Crumbs are bigger and closer together on the left.'),
+  T('EAST TRAIL, CURVE', 'A single line of about seven chunky golden brown crumbs entering at the bottom left of the cell and curving gently upward to the right, leaving at the right middle, with one oat flake beside the line and one pink red rhubarb smear on the curve.'),
+  T('EAST TRAIL, MIDDLE', 'A single wandering line of about seven chunky golden brown crumbs running from the left middle to the right middle, drifting slightly downward on the right, with a long smear of pink red rhubarb filling in the middle and one oat flake. Crumbs a little smaller and further apart than in cell 6.'),
+  T('EAST TRAIL, FAR', 'A line of about six chunky golden brown crumbs running from the left middle toward the right, getting smaller and further apart, ending at the right with a small heap of crumbs and one slightly bigger chunk of crisp with a tiny pink red rhubarb smear, as if dropped by someone in a hurry.'),
+];
+const crumbPrompt = sheet('the Grump Hollow crumb trail in chapter 1', CRUMBS)
+  .replace('standalone objects that the player has to find, touch or collect inside a dungeon', 'pieces of a trail of rhubarb crisp crumbs lying on a muddy woodland path beside a pond. A little thief dropped them while running away with a pie. The cells are grouped by where the trail goes: cells 1 and 2 at the start, cells 3 to 5 heading north, cells 6 to 9 curving east. Draw only the crumbs, with no ground, no dirt patch, no shadow patch and no path, because the game lays them on its own painted ground')
+  .replace('on top of a painted dungeon map', 'on top of a painted woodland map')
+  .replace(' and give the part the player touches (a switch, a lock, a slot, a handle) the brightest accent color on the object.', ' and give the pink red rhubarb bits the brightest accent color.')
+  .replace('Make each object read at a glance:', 'The crumbs must read clearly against brown mud, dark green moss and dark brown leaves: give every crumb a darker toasted brown edge and a lighter golden top, and keep the pink red rhubarb bits bright. Draw the crumbs large in the cell, as if magnified, because the game shrinks them a lot. Make each object read at a glance:');
+entries.push({
+  id: 'prop-trail-hollow', tab: 'Props', group: 'Trail clues',
+  title: 'Grump Hollow crumb trail, chapter 1 (9 pieces)',
+  ar: '1:1', refs: [REF_KEY], prompt: crumbPrompt,
+});
 module.exports = { entries, SHEETS };
