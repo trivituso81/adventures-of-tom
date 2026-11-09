@@ -1,3 +1,11 @@
+## 2026-11-09 (gracevoice1): Grace voice takes from Tom's export (115 dialogue clips re-recorded, tag gracevoice1)
+
+- Tom sent a Voice Library export (local-clips-export_16.json, made 2026-11-09 22:41 UTC, 711 clips, all voices) with "Grace voice fixes". Filtered to Grace (159 clips) and merged with `tools/voice-library/merge-local.js`.
+- Result: 115 dialogue clips changed audio (`dialog-ch28.js` 97, `dialog-ch26.js` 11, `dialog-ch10.js` 5, `dialog-ch9.js` 2); durations differ from the baked ones, so they are new takes. All 41 Grace battle takes are byte-identical to the baked audio, so `data/voice/grace.js` did not change. Checked by hashing values: no key outside `grace|` changed, no key added or removed, `voice-clips.js` unchanged.
+- NOT merged (the no-unused-voice rule): 3 Grace battle takes for lines the game no longer plays: `attack` "Hi-yah!", `chalk_up` (renamed bedazzle_blast), and `ymamot` in its old wording ("Ketchup, pickles, cereal, one sock. It's a Ymamot Creation!"). The live Ymamot line is "Ketchup, pickles, cereal, sock. Ymamot Creation!" and still needs its own take.
+- `data/merged-takes.json` updated, `data/voice-index.json` rebuilt. Tags: dialog-ch28.js and dialog-cast.js moved to gracevoice1 (the other chapter files are untagged).
+- Tests: unused_voice 0 (all checks), tag_check ok, `IDS=grace` smoke FAILS [].
+
 ## 2026-11-09 (sync1): Cloud saves in a private GitHub gist
 - Tom: saves should live on GitHub so they survive a deleted app and carry across phones (the safe1 file backup stays as the fallback). New `engine/save-sync.js`: every sync reads the gist's `adventures-of-tom-saves.json`, keeps the newer copy of each slot on this phone (`restoreFromText`, never replaces newer with older), then uploads the merged result. The gist is created private; there is no way to point it at another server (no URL override).
 - Setup: CLOUD SETUP on the Load page (in game) or CLOUD SAVES on the title Load page (new phone). Tom pastes a GitHub token with the Gists permission once per device; it is kept in browser storage only and never written into a save or backup file. A new phone finds the existing gist by its file name. SYNC NOW and CLOUD OFF appear once connected.
