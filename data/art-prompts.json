@@ -13570,8 +13570,16 @@
    "group": "Dungeon finds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/prop-trail-a-v1.png",
+     "date": "2026-11-09",
+     "from": "v1",
+     "at": 1794248045452
+    }
+   ],
    "rejects": [],
    "id": "prop-trail-a",
    "tab": "Props",
