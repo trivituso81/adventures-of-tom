@@ -724,7 +724,7 @@ SCENES.nsTrail=[
 // the family runs for it. The second half of the chapter (five quests) is how they come back.
 SCENES.nsPond=[
   {flag:'ns-pond'},
-  {place:'grace',at:()=>[player.x-1,player.y+1],dir:'right'}, {place:'rose',at:()=>[player.x,player.y+1],dir:'right'}, {face:'tom',dir:'right'},
+  {gather:[19,11]},   // spread out facing the pond, where Brain Freeze comes up (engine/story.js boss staging)
   spawnAt('Pond Grump','grump',[14,13],{dir:'right'}),
   {walk:'Pond Grump',to:[[15,13],[16,13]],speed:.3,onStep:()=>sfx.splat()},
   {talk:'Pond Grump',lines:['Grrrumble. Something moved into my pond. It\'s COLD. I\'m a POND grump, not an ICE grump.']},
@@ -881,7 +881,7 @@ SCENES.nsBoss2=[
 ];
 SCENES.nsPond2=[
   {flag:'ns-pond2'},
-  {place:'grace',at:()=>[player.x-1,player.y+1],dir:'right'}, {place:'rose',at:()=>[player.x,player.y+1],dir:'right'}, {face:'tom',dir:'right'},
+  {gather:[19,11]},   // spread out facing the pond, where Brain Freeze comes up (engine/story.js boss staging)
   {call:()=>{ sfx.thud(); sfx.stun(); }},
   spawnAt('Brain Freeze','brainfreeze',[19,11],{dir:'left',mscale:1.5,carry:'nscow'}),
   {talk:'Brain Freeze',lines:['...You came back.','Nobody comes back.']},

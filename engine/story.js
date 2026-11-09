@@ -277,9 +277,9 @@ const SCENE_OPS={
   call:o=>S.call(o.call),
   step:o=>o.step,
   talk:o=>S.talk(o.talk,Array.isArray(o.lines)?o.lines:[o.lines],o.voice),
-  walk:o=>lazy(()=>{ const a=sceneActor(o.walk); storyHold(a); return S.walk(a,scenePos(o.to),o.speed||.3,o.onStep); }),
-  face:o=>S.call(()=>{ const a=sceneActor(o.face); if(a) a.facing=o.dir; }),
-  place:o=>S.call(()=>{ const a=sceneActor(o.place),[x,y]=scenePos(o.at); if(!a) return; storyHold(a); a.x=x; a.y=y; a.move=null; a.scr=null; if(o.dir) a.facing=o.dir; }),
+  walk:o=>lazy(()=>{ const a=sceneActor(o.walk); storyHold(a); if(a) a.stagePlaced=true; return S.walk(a,scenePos(o.to),o.speed||.3,o.onStep); }),
+  face:o=>S.call(()=>{ const a=sceneActor(o.face); if(a) { a.facing=o.dir; a.stageFaced=true; } }),
+  place:o=>S.call(()=>{ const a=sceneActor(o.place),[x,y]=scenePos(o.at); if(!a) return; storyHold(a); a.stagePlaced=true; a.x=x; a.y=y; a.move=null; a.scr=null; if(o.dir) a.facing=o.dir; }),
   hop:o=>lazy(()=>{ const l=o.lift||[0,0]; return S.hop(sceneActor(o.hop),scenePos(o.from),scenePos(o.to),o.time||.5,o.arc||16,l[0],l[1]); }),
   // Battle poses in a cutscene (Tom, Grace, Rose). {pose:'rose',f:'kneel',dir:'left'} holds a battle frame (hurtPose, kneel, ko, ...) until {pose:'rose',f:null}.
   cam:o=>S.call(()=>{ sceneCam=o.cam||null; }),
@@ -360,6 +360,124 @@ function scenePoseDraw(a,set,k) {
   if(P.dir&&P.dir!==native) rows=rows._mir||(rows._mir=mirrorRows(rows));
   return {rows,k:k*ratio*rel,pal};
 }
+// ---------- Boss staging (Tom, 2026-11-08) ----------
+// "In any scene before or after a boss, the characters in the party spread out so none are overlapping and they all face the
+// right direction." {gather:focus} spreads Tom's party around him on free tiles and turns everyone (Tom too) to face the focus:
+// a boss name, an NPC name, a monster id on this map, [x,y], or a function returning one of those.
+// Figures are about 0.6 tile wide and 2.4 tiles tall, so two people overlap when they share a column within 2 rows; the
+// slots never do that. Party members a scene placed or walked itself (a.stagePlaced) keep their marks and count as taken
+// spots; members a scene turned ({face}) keep their facing. {gather:focus,check:true} only acts when someone overlaps
+// (then it re-spreads) or faces the wrong way (then it turns them). BOSS_STAGE (below) adds these to every boss scene.
+function stageFocus(f) {
+  if(typeof f==='function') f=f();
+  if(Array.isArray(f)&&typeof f[0]==='number') return {x:f[0],y:f[1],seen:true};
+  if(Array.isArray(f)) {   // several candidates (the monster, then the villain who calls it): the first one standing in view, else the first that exists
+    const found=f.map(n=>typeof n==='string'?(sceneActor(n)||currentMap.npcs.find(m=>m.monster===n)):n).filter(Boolean);
+    const a=found.find(n=>!n.hidden)||found[0]; return a?stageFocus(a):null;
+  }
+  if(f&&typeof f==='object'&&'x' in f) { const p=position(f); return {x:Math.round(p.x),y:Math.round(p.y),seen:!f.hidden}; }
+  if(typeof f!=='string') return null;
+  const a=sceneActor(f)||currentMap.npcs.find(n=>n.monster===f)||null;
+  return a?stageFocus(a):null;
+}
+const stageApart=(a,b,rows=3)=>Math.abs(a.x-b.x)>=1||Math.abs(a.y-b.y)>=rows;   // never the same column within two rows
+const stagePos=a=>{ const p=position(a); return {x:Math.round(p.x),y:Math.round(p.y)}; };
+function stageSpots(focus,movers,fixed) {
+  const map=currentMap,tx=player.x,ty=player.y;
+  const dx=focus?focus.x-tx:0,dy=focus?focus.y-ty:1,side=Math.abs(dx)>=Math.abs(dy);
+  const b=side?(dx>0?-1:1):0,v=side?0:(dy<0?1:-1);   // b: one column away from the focus (side bosses); v: one row away (bosses above or below)
+  // Ideal offsets from Tom, best first. Side boss: a zig-zag trailing away from it. Boss above or below: a row abreast, then a staggered second row.
+  const ideal=side?[[b,1],[2*b,-1],[3*b,1],[2*b,2],[4*b,-1],[3*b,-2]]:[[-1,0],[1,0],[-2,v],[2,v],[-3,0],[3,0]];
+  const taken=[{x:tx,y:ty},...fixed];
+  const busy=new Set();
+  for(const n of map.npcs) if(!n.hidden) { const p=stagePos(n); busy.add(key(p.x,p.y)); }
+  // Level 0 is the rule; when a tight room has no such tile, level 1 allows a spot in front of Tom, level 2 a two-row column gap, level 3 any free tile.
+  const ok=(x,y,lv)=>{
+    if(!walkable(map,x,y)||map.portals.has(key(x,y))||busy.has(key(x,y))) return false;
+    if(taken.some(t=>t.x===x&&t.y===y)) return false;
+    if(focus&&lv<3&&Math.max(Math.abs(x-focus.x),Math.abs(y-focus.y))<2) return false;   // not on top of the boss
+    if(focus&&lv<1&&(side?(x-tx)*Math.sign(dx):(y-ty)*Math.sign(dy))>0) return false;   // not in front of Tom
+    return lv>=3||taken.every(t=>stageApart(t,{x,y},lv>=2?2:3));
+  };
+  const out=[];
+  movers.forEach((m,k)=>{
+    const [ox,oy]=ideal[k%ideal.length],ix=tx+ox,iy=ty+oy;
+    let best=ok(ix,iy,0)?{x:ix,y:iy}:null;
+    for(let lv=0;!best&&lv<4;lv++) { let bd=1e9; const R=lv<3?5:8;
+      for(let y=ty-R;y<=ty+R;y++) for(let x=tx-R;x<=tx+R;x++) {
+        if(!ok(x,y,lv)) continue;
+        const d=Math.hypot(x-ix,y-iy)+.35*Math.hypot(x-tx,y-ty);
+        if(d<bd) { bd=d; best={x,y}; } } }
+    if(!best) best=stagePos(m);
+    taken.push(best); out.push(best);
+  });
+  return out;
+}
+function faceToward(a,focus) { if(!a||!focus||!focus.seen) return;   // nobody turns toward a boss that is not in view yet
+  const p=position(a),ddx=focus.x-p.x,ddy=focus.y-p.y; if(ddx||ddy) a.facing=directionTo(ddx,ddy); }
+const faceWant=(a,focus)=>{ const p=position(a),ddx=focus.x-p.x,ddy=focus.y-p.y; return ddx||ddy?directionTo(ddx,ddy):a.facing; };
+function gatherStep(o) {
+  return {start(){
+      this.focus=stageFocus(o.gather); this.movers=[];
+      const all=followers.filter(f=>!f.hidden&&party.includes(f.member)&&!f.seat);
+      const isFixed=f=>f.stagePlaced||f.scenePose||f.scr;
+      const movers=all.filter(f=>!isFixed(f));
+      if(o.check) {
+        const vis=[player,...all].filter(a=>!a.hidden),P=vis.map(stagePos);
+        const crowded=movers.some(f=>{ const i=vis.indexOf(f); return P.some((q,j)=>j!==i&&!stageApart(P[i],q)); });
+        if(!crowded) { if(this.focus&&this.focus.seen) { for(const f of movers) if(!f.stageFaced&&!f.move&&f.facing!==faceWant(f,this.focus)) faceToward(f,this.focus);
+          if(!player.stageFaced&&!player.scenePose&&!player.move) faceToward(player,this.focus); } return; }
+      }
+      const fixed=all.filter(isFixed).map(stagePos);
+      this.movers=movers;
+      const spots=stageSpots(this.focus,movers,fixed);
+      movers.forEach((f,k)=>{ const t=spots[k],p=stagePos(f); f._pf=f.facing; f.x=p.x; f.y=p.y; f.move=null; f.lag=0; f.stageFaced=false;
+        const d=Math.hypot(t.x-f.x,t.y-f.y);
+        if(d>0) { f.facing=directionTo(t.x-f.x,t.y-f.y); f.move={fx:f.x,fy:f.y,tx:t.x,ty:t.y,elapsed:0,duration:Math.max(.22,d*.15)}; } });
+      if(!player.scenePose&&!(o.check&&player.stageFaced)) faceToward(player,this.focus);
+    },
+    update(dt){ let done=true; for(const f of this.movers) if(f.move&&!advanceMove(f,dt)) done=false;
+      if(done) for(const f of this.movers) { if(this.focus&&this.focus.seen) faceToward(f,this.focus); else if(f._pf) f.facing=f._pf; }   // no boss in view yet: keep the way they were facing
+      return done; }};
+}
+SCENE_OPS.gather=gatherStep;
+// Every boss lead-in, fight (and retry) and after scene, with whom the party faces. playScene inserts {gather} just before the
+// scene's first line of dialogue (after any walk-in, spawn or placement steps), unless the scene has its own {gather}.
+const BOSS_STAGE={
+  ch1Pond:'The Big One',ch1AfterBoss:'The Big One',ch2Boss:'The Big Shake',ch2AfterBoss:'The Big Shake',
+  ch3Pool:'Old Iron-Gill',ch3AfterBoss:'Old Iron-Gill',ch4Boss:'The Director’s Cut',ch4AfterBoss:'The Director’s Cut',
+  ch5Boss:'The Red Pen',ch5AfterBoss:'The Red Pen',ch6Boss:'Chairman Cheeks',ch6AfterBoss:'Chairman Cheeks',
+  ch7Boss:'The Unread',ch7AfterBoss:'The Unread',ch8Boss:'Old Ironbelly',ch8AfterBoss:'Old Ironbelly',
+  ch9Boss:'The Mirrorball',ch9AfterBoss:'The Mirrorball',ch10Boss:'The Last Call',ch10AfterBoss:'The Last Call',
+  ch11Vance:['finalcall','Long coat'],ch11After:['finalcall','Long coat'],ch12Prime:['gridlockprime','Marlowe'],ch12After:['gridlockprime','Marlowe'],
+  ch13Worm:'drillworm',ch13After:'drillworm',
+  ch14Gate:()=>typeof ch14Boppy==='function'?ch14Boppy():null,ch14After:()=>typeof ch14Boppy==='function'?ch14Boppy():'Boppy',
+  ch15Open:'HUSH-9',ch15Fight:'HUSH-9',ch15After:'HUSH-9',ch16Open:'Marlowe',ch16Fight:'Marlowe',ch16After:'Marlowe',
+  ch17Vault:'twinlens',ch17Fight:'twinlens',ch17After:'twinlens',ch18Pinnacle:'vance',ch18Fight:'vance',ch18After:'vance',
+  ch19Claim:'censor',ch19Fight:'censor',ch19After:'censor',
+  ch20Heart:'leviathan',ch20Fight1:'leviathan',ch20Shatter:'leviathan',ch20Fight2:'julian',ch20Calm:'julian',
+  nsPond:'Brain Freeze',nsPond2:'Brain Freeze',nsAfterBoss:'Brain Freeze'
+};
+// A boss scene's steps with staging added: one {gather} just before the first line of dialogue (after any walk-in, spawn or
+// placement steps) unless the scene has its own, and a {gather,check} before every later line (also inside if/seq branches,
+// not inside {all}), so the party re-spreads if a walk or a jump crowds it and turns back toward the boss.
+function stageScript(list,focus) {
+  const has=x=>{ if(!x||typeof x!=='object') return false; if(Array.isArray(x)) return x.some(has); if(typeof x.start==='function') return false;
+    if('talk' in x) return true; return ['then','else','seq'].some(k=>x[k]&&has(x[k])); };
+  const own=JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v).includes('"gather"');
+  let first=!own;
+  const walk=steps=>{ const out=[];
+    for(const st of steps) {
+      if(st&&typeof st==='object'&&typeof st.start!=='function'&&!Array.isArray(st)) {
+        if('talk' in st) { out.push(first?{gather:focus}:{gather:focus,check:true}); first=false; out.push(st); continue; }
+        if(has(st)) { if(first) { out.push({gather:focus}); first=false; }
+          const c=Object.assign({},st); for(const k of ['then','else','seq']) if(Array.isArray(c[k])) c[k]=walk(c[k]); out.push(c); continue; }
+      }
+      out.push(st);
+    }
+    return out; };
+  return walk(list);
+}
 function compileScene(list) {
   return list.filter(Boolean).map(st=>{
     if(typeof st.start==='function'&&typeof st.update==='function') return st;
@@ -370,8 +488,11 @@ function compileScene(list) {
 }
 // Play a script: an array of steps, a SCENES id, or a function that returns steps (it runs when the scene starts).
 function playScene(script,opts={}) {
+  const sid=typeof script==='string'?script:null;
   if(typeof script==='string') script=SCENES[script];
-  const list=typeof script==='function'?script(opts.ctx||{}):script;
+  let list=typeof script==='function'?script(opts.ctx||{}):script;
+  for(const f of [...followers,player]) { f.stagePlaced=false; f.stageFaced=false; }
+  if(sid&&BOSS_STAGE[sid]&&Array.isArray(list)) list=stageScript(list,BOSS_STAGE[sid]);
   intro.active=true; intro.phase='scene'; intro.cur=null; intro.fadeLock=false;
   intro.fade=opts.fade||0;
   intro.steps=compileScene(list);
