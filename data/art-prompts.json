@@ -13655,9 +13655,16 @@
    "group": "Dungeon finds"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-09",
+     "note": "switches are not flipped correctly, 2 has a duplicate stray switch",
+     "from": "v1",
+     "at": 1794250751732
+    }
+   ],
    "id": "prop-find-ch04-fix",
    "tab": "Props",
    "title": "Dungeon finds, Chapter 4 Soundstage 7, levers and dead rig (edit of the approved sheet, send the picture listed)",
