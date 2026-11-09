@@ -1,3 +1,8 @@
+## 2026-11-09 (npcwalk2): NPC walk-sheet prompt is hero-only, no Justin layout picture (Art Library json only, no tag)
+- Tom: with Justin's walk sheet attached the generator drew Justins in the cells; without it the poses were wrong. Cause of the second part: the prompt still named a "picture 2" and the profile direction "of picture 2".
+- New generic prompt uses the wording of claude/tom-walk-simple-prompt.txt (the method behind Tom's own walk): the hero is the only attached picture and every pose is described in words; row 2 says back of the head, no face. Held props still left out.
+- 46 untouched draft `npc-walk-<id>` entries refreshed (`node tools/art-library/npc-walk-prompts.js --refresh`). The six already approved (Gus, Bean, Pruitt, Delgado, Kowalski, Ike) are unchanged. Nothing cut or installed.
+
 ## 2026-11-09 (npcwalk1): 52 NPC walk-sheet entries in the Art Library (json only, no tag)
 - Tom: all 56 NPC heroes are approved, so walk sheets are next. One draft entry `npc-walk-<id>` per townsperson (tab NPCs), source `tools/art-library/npc-walk-prompts.js`. Each attaches that NPC's newest approved hero (v3 head fix for the 12 adjusted ones, v2 for Ryan and Dakota) plus Justin's walk sheet for layout only. One generic short prompt, no per-person words. Same 3 x 3 layout as the other walk sheets (front, back, profile; stand plus two steps).
 - Held props are left out of the walk frames (hands empty), worn items stay. Skipped: Pip, Moss, Dot (walks already installed) and Boomie (own sheet).

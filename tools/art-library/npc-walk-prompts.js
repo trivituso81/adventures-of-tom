@@ -1,47 +1,52 @@
 // NPC walk sheets for the Art Library (tab NPCs): one entry `npc-walk-<id>` per townsperson, attaching that person's approved hero
-// (the newest version of `npc-photo-<id>`) plus Justin's walk sheet for layout only. One generic prompt, no per-person words:
-// the look comes from the attached hero. Not in make-prompts.js: entries are appended to data/art-prompts.json as text
+// (the newest version of `npc-photo-<id>`) and nothing else (11-09 12:00: with Justin's sheet attached the generator drew Justins
+// in the cells, and a prompt that names a picture 2 gets wrong poses without it). One generic prompt, no per-person words:
+// the look comes from the attached hero, the poses from the words (same wording as claude/tom-walk-simple-prompt.txt, Tom's walk). Not in make-prompts.js: entries are appended to data/art-prompts.json as text
 // (node tools/art-library/npc-walk-prompts.js --append), the same way as the Tombo split entries.
 // Skipped: pip, moss, dot (approved walks already installed) and boomie (own sheet, BOOMIE_OW).
 const fs = require('fs');
 const SKIP = new Set(['pip', 'moss', 'dot', 'boomie']);
-const LAYOUT = 'art/raw/characters/justin-walk-sheet-v1.png';
-const PROMPT = `Paint a walking sheet of one person for a role-playing game.
+const PROMPT = `Draw the person in the attached picture as a walk sheet.
 
-Picture 1 is the finished painting of the character. Copy it exactly in every frame: the same person, face, hair, clothes, colors, painting style, level of detail and head size compared to the body. Picture 2 is the walking sheet of another character: copy only its layout, figure size and way of drawing walking steps, never the person.
+Keep the person exactly as in the picture: the same face, the same head size compared to the body, the same hair, clothes and shoes, and the same painting style. Do not change proportions from frame to frame. Hands empty: leave out anything the person holds, keep anything worn.
 
-One image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty: leave out anything the person holds, keep anything worn. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.
+One image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, nothing touching a cell edge. No grid lines, numbers, text, shadows or other people.
 
 Row 1, facing the viewer:
-1. Standing, feet together, arms at the sides, a calm easy expression.
-2. A walking step, one foot forward, the opposite arm swinging forward.
-3. The opposite step, the opposite arm swinging forward.
+1. Standing still, feet together, arms at the sides.
+2. Walking toward the viewer, one foot forward, the opposite arm swung forward.
+3. Walking toward the viewer, the other foot forward, the opposite arm swung forward.
 
-Row 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:
-4. Standing, feet together.
-5. A walking step, one foot forward, the opposite arm swinging forward.
-6. The opposite step.
+Row 2, seen from behind, the back of the head and the back of the clothes, no face visible:
+4. Standing still, feet together, arms at the sides.
+5. Walking away from the viewer, one foot forward, the opposite arm swung forward.
+6. Walking away from the viewer, the other foot forward, the opposite arm swung forward.
 
-Row 3, in profile, facing the same way as the profile row of picture 2:
-7. Standing, feet together.
-8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.
-9. The passing step, back foot lifted with a bent knee, body a little higher.
-
-Walks slowly and easily: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.`;
+Row 3, side view, the whole body turned sideways to the viewer, facing the same way in all three cells:
+7. Standing still, feet together, arms at the sides.
+8. Mid-stride, front leg out with the heel down, back leg behind with the heel up, the arms swung opposite to the legs.
+9. Legs passing each other, the back foot lifted with the knee bent, the arms swung the other way.`;
 function build(art) {
   const out = [];
   for (const h of art.entries.filter(e => e.id.startsWith('npc-photo-'))) {
     const k = h.id.slice(10); if (SKIP.has(k)) continue;
     out.push({ status: 'draft', versions: [], rejects: [], id: 'npc-walk-' + k, tab: 'NPCs', title: h.title.split(':')[0] + ': walk sheet (hero attached)', ar: '1:1',
-      refs: [h.versions[h.versions.length - 1].file, LAYOUT], prompt: PROMPT, group: h.group });
+      refs: [h.versions[h.versions.length - 1].file], prompt: PROMPT, group: h.group });
   }
   return out;
 }
 module.exports = { build, PROMPT };
+// --refresh: rewrite prompt and refs of entries that are still untouched drafts (no versions, no rejects); approved ones stay as they are.
 if (require.main === module) {
   const f = 'data/art-prompts.json', txt = fs.readFileSync(f, 'utf8'), art = JSON.parse(txt);
   const have = new Set(art.entries.map(e => e.id)), add = build(art).filter(e => !have.has(e.id));
   console.log(add.length, 'new entries');
+  if (process.argv.includes('--refresh')) {
+    const want = new Map(build(art).map(e => [e.id, e])); let n = 0;
+    for (const e of art.entries) { const w = want.get(e.id); if (w && e.status === 'draft' && !e.versions.length && !(e.rejects || []).length) { e.prompt = w.prompt; e.refs = w.refs; n++; } }
+    const out = JSON.stringify(art, null, 1); if (JSON.stringify(JSON.parse(txt), null, 1) !== txt.replace(/\n$/, '')) throw new Error('json does not round-trip');
+    fs.writeFileSync(f, out + (txt.endsWith('\n') ? '\n' : '')); console.log(n, 'draft entries refreshed'); process.exit(0);
+  }
   if (process.argv.includes('--append')) {
     const tail = '\n  }\n ]\n}'; const body = txt.replace(/\n$/, '');
     if (!body.endsWith(tail)) throw new Error('unexpected json tail');
