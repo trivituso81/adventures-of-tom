@@ -38,6 +38,7 @@ Static site. `index.html` holds the markup, all CSS (portrait and landscape layo
 
 - Three slots plus autosave (every door and after every battle), key prefix `aot-save-` in `localStorage`. A continue prompt appears at startup. Settings keys: `aot-speed`, `aot-hf`, `aot-diff`, `aot-autospend`, `le-sound`, `le-music`, `le-layout`.
 - `engine/save-backup.js` (Tom, 2026-11-08): saves live only in the phone's browser storage, so the game asks the browser to keep it (`navigator.storage.persist`), BACK UP on the Load page and Save box writes every slot to one `.json` file (share sheet, Save to Files), RESTORE reads it back (also on the title Load page, so a wiped phone can recover) and keeps the newer copy per slot. The game autosaves when the app is hidden (not on the title, in a battle, a cutscene or a door transition). A failed autosave warns once per visit (`saveFailed` in `engine/followers.js`). The old claude.ai account sync (`cloud-save.js`) was removed.
+- `engine/save-sync.js` (Tom, 2026-11-09): cloud copy of the saves in a private GitHub gist, merged newer-wins per slot with the phone's saves. Loaded right after save-backup.js; `saveGame` calls `syncQueue()`. The token (Gists permission) lives in browser storage only.
 - Save format is versioned (`migrateSave` in `engine/story.js`). Never change the shape of saved state without a migration.
 
 ## Things hardcoded to the claude.ai artifact (leave alone unless Tom asks)

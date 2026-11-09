@@ -14,8 +14,8 @@ const lastBackup=()=>{ try { return +localStorage.getItem(BACKUP_KEY)||0; } catc
 try { if(navigator.storage&&navigator.storage.persist) navigator.storage.persist().catch(()=>{}); } catch(e) {}
 
 function saveNoteLine() {
-  const t=lastBackup();
-  return 'Saves are kept on this phone. '+(t?'Last backup: '+new Date(t).toLocaleDateString()+'.':'No backup yet. Tap BACK UP to keep a copy off this phone.');
+  const t=lastBackup(),c=typeof syncNoteLine==='function'?syncNoteLine():'';
+  return 'Saves are kept on this phone. '+(c||'Cloud saves are off: tap CLOUD SETUP on the Load page.')+' '+(t?'Last file backup: '+new Date(t).toLocaleDateString()+'.':'No file backup yet.');
 }
 
 function backupText() {
@@ -98,7 +98,7 @@ window.addEventListener('pagehide',hiddenAutosave);
 // Once per visit, after a manual save, remind the player about the backup when there has never been one or the last is over 14 days old.
 let backupTipShown=false;
 function backupTip() {
-  if(backupTipShown) return; const t=lastBackup();
+  if(backupTipShown) return; if(typeof syncOn==='function'&&syncOn()) return; const t=lastBackup();
   if(t&&Date.now()-t<14*864e5) return;
   backupTipShown=true; setTimeout(()=>showToast('Tip: BACK UP on the Load page keeps a copy off this phone.',3.6),1900);
 }

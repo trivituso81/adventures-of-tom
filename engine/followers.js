@@ -141,7 +141,7 @@ function saveSnapshot() {
     members:ALL_MEMBERS().map(b6SaveMember),
     opts:typeof b7Opts==='function'?b7Opts():null};   // difficulty, battle speed, High-Five (engine/feel.js)
 }
-// SAVE_CACHE holds the latest copy of every slot. Browser storage alone is not enough on iOS, so engine/save-backup.js adds BACK UP and RESTORE files.
+// SAVE_CACHE holds the latest copy of every slot. Browser storage alone is not enough on iOS, so engine/save-backup.js adds BACK UP and RESTORE files and engine/save-sync.js keeps a cloud copy in a private gist.
 const SAVE_CACHE={};
 function saveRaw(slot) {
   if(typeof SAVE_CACHE[slot]==='string') return SAVE_CACHE[slot];
@@ -160,6 +160,7 @@ function saveGame(slot,quiet=false) {
   SAVE_CACHE[slot]=raw;
   try { localStorage.setItem(SAVE_PREFIX+slot,raw); } catch(e) { return saveFailed(quiet); }
   if(!quiet) { sfx.pickup(); showToast(slot==='auto'?'Autosaved.':'Saved to slot '+slot+'.',2); if(slot!=='auto'&&typeof backupTip==='function') backupTip(); }
+  if(typeof syncQueue==='function') syncQueue();   // cloud copy in a private gist (engine/save-sync.js); does nothing until the player sets it up
   return true;
 }
 function readSave(slot) { try { const raw=saveRaw(slot); return raw?JSON.parse(raw):null; } catch(e) { return null; } }

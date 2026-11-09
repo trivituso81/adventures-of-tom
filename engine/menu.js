@@ -468,6 +468,8 @@ function renderSaveTab(body) {
   const bk=el('div','mquit-btns');
   bk.appendChild(btn('save-btn','backup','BACK UP',()=>{ doBackup().then(()=>renderMenu()); }));
   bk.appendChild(btn('save-btn','restore','RESTORE',()=>{ pickRestore(msg=>{ showToast(msg,4); renderMenu(); }); }));
+  bk.appendChild(btn('save-btn','cloud',syncButtonLabel(),()=>{ syncTap(msg=>{ showToast(msg,5); renderMenu(); }); }));
+  if(syncOn()) bk.appendChild(btn('save-btn','cloudoff','CLOUD OFF',()=>{ syncOff(); showToast('Cloud saves are off. Your saves stay on this phone.',3.5); renderMenu(); }));
   body.appendChild(list); body.appendChild(hint); body.appendChild(bk);
 }
 
