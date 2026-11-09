@@ -15529,8 +15529,16 @@
    "group": "Long Island people"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/npcs/npc-walk-bean-v1.png",
+     "date": "2026-11-09",
+     "from": "v1",
+     "at": 1794254213948
+    }
+   ],
    "rejects": [],
    "id": "npc-walk-bean",
    "tab": "NPCs",
