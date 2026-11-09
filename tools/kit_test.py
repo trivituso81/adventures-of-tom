@@ -1,7 +1,7 @@
 # Kit test: plays every Option 3 move of the given characters live in a lab fight, checks that the character speaks the move's line
 # and that the effect happened, and saves frames per move (plus a contact sheet) to tools/shots.
 # Usage (repo root):  python3 tools/kit_test.py grace [rose ...] [--speed2] [--only=key,key]
-# Env: PARTY=tom,grace,rose (override party), FRAMES=0.4,1.3,2.3 (seconds to screenshot), KO=<id>, BUFF=1,
+# Env: PARTY=tom,grace,rose (override party), FRAMES=0.4,1.3,2.3 (seconds to screenshot), KO=<id>, BUFF=1, PRELOAD=olivia/fc_jab,... (painted pictures to load before the move),
 #      BUILD (folder to serve, default repo root), CHROMIUM (chromium binary; default Playwright's own).
 # Needs: pip install playwright pillow ; python3 -m playwright install chromium
 # Note: with the stub voice files the "line" check still passes (it watches say(), not audio).
@@ -25,6 +25,7 @@ fails=[]; report=[]
 SETUP="""(cfg)=>{ const L=window.__LE; try{ B7.speed=cfg.speed; }catch(e){}
   window.__said=[]; const os=window.say; window.say=function(id,k){ window.__said.push(id+'.'+k); try{ return os.apply(this,arguments);}catch(e){} };
   window.__errs=window.__errs||[]; splash.active=false; const el=document.getElementById('splash'); if(el) el.hidden=true;
+  if(window.PROPART&&cfg.preload&&cfg.preload.length) PROPART.preload(cfg.preload);   // PRELOAD=olivia/fc_jab,... : painted pictures a move would otherwise only load on first use
   L.b2Start({party:cfg.party,level:30,foes:[['mudling','front'],['mudling','front'],['mudling','back']],bag:[],heart:0,allSkills:true});
   for(const f of L.B2.foes){ f.maxHp=f.hp=99999; f.warmGoal=1e9; }
   return true; }"""
@@ -59,7 +60,7 @@ with sync_playwright() as pw:
         if cid in ('tnb','nara','deedee'): party=['tom','grace','rose',cid]
         if cid=='grace': party=['tom','grace','rose']
         if os.environ.get('PARTY'): party=os.environ['PARTY'].split(',')
-        pg.evaluate(SETUP,{'party':party,'speed':speed})
+        pg.evaluate(SETUP,{'party':party,'speed':speed,'preload':[x for x in os.environ.get('PRELOAD','').split(',') if x]})
         pg.wait_for_function(READY,timeout=30000)
         kit=pg.evaluate(f"()=>window.__LE.B2_SKILLS['{cid}'].o3.map(a=>[a.key,a.target,!!a.kindFoe,!!a.sig])")
         sheet=[]

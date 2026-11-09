@@ -29,6 +29,12 @@ const seq=(list,t0,x,y,extra={})=>{ const out=[]; let t=t0; for(const [f,d,o] of
 const sfxp=n=>{ try { if(sfx[n]) sfx[n](); } catch(e){} };
 
 // ---------- shared scenes ----------
+// Painted effect pictures (art/props/olivia/<prefix>_<name>.webp, cut by tools/sprite-bake/bake_olivia_fx.py). A scene op with art: draws the
+// picture once it has loaded. Until then, or if it is missing, it runs the drawn version named in fb (its options in fbs).
+const oArt=(s,u)=>{ const q=s.pop?(u<.15?ez(u/.15)*1.2:lerp(1.2,1,cl((u-.15)/.25))):1, yy=s.y1!=null?lerp(s.y0,s.y1,ez(cl(u/.6))):s.y-(s.rise||0)*ez(u);
+  gfx.globalAlpha=fin(u,.1)*fade(u,s.fa||.8)*(s.a==null?1:s.a);
+  const ok=PROPART.draw('olivia/'+s.art,s.x,yy,{w:s.w!=null?s.w*q:null,h:s.h!=null?s.h*q:null,rot:s.rot}); gfx.globalAlpha=1; return ok; };
+SC.oz_art=(s,u)=>{ if(!oArt(s,u)&&s.fb) SC[s.fb](s.fbs||{},u); };
 SC.ov_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); label(s.txt,s.x,s.y-ez(u/.3)*8,s.c||CREAM,s.sc||2); };
 SC.ov_sparks=(s,u)=>{ for(let k=0;k<(s.n||8);k++) { const a=k/(s.n||8)*Math.PI*2+(s.seed||0),d=ez(u)*(s.r||26); gfx.globalAlpha=1-u; star(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.8,4*(1-u)+2,k%2?'#fff3a0':(s.c||GOLD),u*3); } };
 SC.ov_ring=(s,u)=>{ const q=ez(u/.55); gfx.globalAlpha=fade(u,.4); gfx.strokeStyle=s.c||CREAM; gfx.lineWidth=4; gfx.beginPath(); gfx.ellipse(s.x,s.y,6+q*(s.r||34),(6+q*(s.r||34))*.8,0,0,Math.PI*2); gfx.stroke(); };
@@ -65,10 +71,10 @@ O.fact_check=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,80),me=
     [0,()=>setMessage('Olivia flips open her notebook.')],
     [200,()=>sfxp('whoosh')],
     [650,()=>{ say(m.id,'fact_check_open'); sfxp('step'); }],
-    [1150,()=>setMessage('She squints. One eyebrow goes up.')],
+    [1150,()=>{ setMessage('She squints. One eyebrow goes up.'); scene('oz_art',1.2,{art:'fc_question',x:p.x+12,y:p.y-me.h-16,h:34,pop:1,fa:.9}); }],
     ['hf',1500],
     [1450,()=>{ say(m.id,'fact_check'); sfxp('bump'); }],
-    [1500,()=>{ setMessage('She jabs the pen at it like a microphone.'); sfxp('bonk'); jitter(f); landHit(100); scene('ov_ring',.6,{x:F.x+F.w*.3,y:F.mid,r:40,c:BLUE}); scene('ov_sparks',.6,{x:F.x+F.w*.3,y:F.mid,n:8,r:30,c:BLUE}); scene('ov_text',1,{x:p.x,y:p.y-me.h-6,txt:'SOURCE?',c:'#ffe08a',sc:3}); }],
+    [1500,()=>{ setMessage('She jabs the pen at it like a microphone.'); sfxp('bonk'); jitter(f); landHit(100); scene('oz_art',.6,{art:'fc_jab',x:F.x+F.w*.3,y:F.mid,w:90,pop:1,fb:'ov_ring',fbs:{x:F.x+F.w*.3,y:F.mid,r:40,c:BLUE}}); scene('oz_art',.6,{art:'fc_sparks',x:F.x+F.w*.3,y:F.mid,w:76,pop:1,fb:'ov_sparks',fbs:{x:F.x+F.w*.3,y:F.mid,n:8,r:30,c:BLUE}}); scene('ov_text',1,{x:p.x,y:p.y-me.h-6,txt:'SOURCE?',c:'#ffe08a',sc:3}); }],
     [3050,'end',res(E2)+'No comment.']]); };
 
 // ---------- SNACK BAG (signature, 4.5 s) ----------
@@ -124,11 +130,11 @@ O.is_this_real=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   ST.play(E2,[
     [0,()=>{ setMessage('Olivia scans it with her phone.'); say(m.id,'is_this_real_hold'); scene('ov_scan',1.6,{x0:me.x-44,y0:me.base-me.h*.62,x1:F.x+F.w*.45,y1:F.mid,hh:F.h*.7,sw:F.h*.18}); sfxp('whoosh'); }],
     [650,()=>{ setMessage('She squints.'); scene('ov_text',1,{x:me.x-10,y:me.base-me.h-10,txt:'ANALYZING...',c:'#9fe6ff',sc:1}); }],
-    [1100,()=>{ setMessage('Wait.'); scene('ov_glitch',1,{x:F.x+F.w*.35,y0:F.top+4,h:F.h*.8}); scene('ov_text',.9,{x:me.x-10,y:me.base-me.h-10,txt:'7 FINGERS',c:'#ff8a8a',sc:1}); }],
+    [1100,()=>{ setMessage('Wait.'); scene('ov_glitch',1,{x:F.x+F.w*.35,y0:F.top+4,h:F.h*.8}); scene('oz_art',1.2,{art:'ir_hand',x:F.x+F.w*.35,y:F.mid,h:70,pop:1,fa:.9}); scene('ov_text',.9,{x:me.x-10,y:me.base-me.h-10,txt:'7 FINGERS',c:'#ff8a8a',sc:1}); }],
     [1700,()=>{ say(m.id,'is_this_real'); setMessage('Too many fingers. Fake.'); }],
     ['hf',1950],
-    [1950,()=>{ sfxp('bonk'); jitter(f); landHit(100); scene('ov_stamp',1.3,{x:F.x+F.w*.35,y:F.mid}); scene('ov_ring',.6,{x:F.x+F.w*.35,y:F.mid,r:44,c:'#ff6a6a'}); scene('ov_sparks',.6,{x:F.x+F.w*.35,y:F.mid,n:9,r:28,c:'#ff6a6a'}); }],
-    [2700,()=>setMessage('It is trying to count its own fingers.')],
+    [1950,()=>{ sfxp('bonk'); jitter(f); landHit(100); scene('oz_art',1.3,{art:'ir_fake',x:F.x+F.w*.35,y:F.mid,w:130,rot:-.25,pop:1,fa:.9,fb:'ov_stamp',fbs:{x:F.x+F.w*.35,y:F.mid}}); scene('ov_ring',.6,{x:F.x+F.w*.35,y:F.mid,r:44,c:'#ff6a6a'}); scene('oz_art',.6,{art:'ir_burst',x:F.x+F.w*.35,y:F.mid,w:76,pop:1,fb:'ov_sparks',fbs:{x:F.x+F.w*.35,y:F.mid,n:9,r:28,c:'#ff6a6a'}}); }],
+    [2700,()=>{ setMessage('It is trying to count its own fingers.'); scene('oz_art',1.1,{art:'ir_stars',x:F.x+F.w*.35,y:F.top-8,w:90,fa:.9}); }],
     [3550,'end',res(E2)+'It has no idea what it is any more.']]); };
 
 // ---------- Inverted Pyramid (6.0 s) ----------
@@ -150,12 +156,12 @@ O.inverted_pyramid=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,9
     [0,()=>setMessage('Olivia puts on her professor face.')],
     [200,()=>sfxp('whoosh')],
     [650,()=>{ say(m.id,'inverted_pyramid_lecture'); sfxp('step'); setMessage('Her students are not here. She lectures anyway.'); }],
-    [1550,()=>{ setMessage('She draws the inverted pyramid in the air.'); scene('ov_pyramid',1.6,{x:p.x-64,y:p.y-me.h*.8,w:96,h:60}); sfxp('whoosh'); }],
-    [2350,()=>{ setMessage('The point comes down.'); sfxp('whoosh'); scene('ov_pyfall',.8,{x:F.x+F.w*.3,y0:F.top-80,y1:F.mid+10,w:84,h:70}); }],
+    [1550,()=>{ setMessage('She draws the inverted pyramid in the air.'); scene('oz_art',1.6,{art:'ip_tri_outline',x:p.x-64,y:p.y-me.h*.8+30,w:96,fa:.95,fb:'ov_pyramid',fbs:{x:p.x-64,y:p.y-me.h*.8,w:96,h:60}}); sfxp('whoosh'); }],
+    [2350,()=>{ setMessage('The point comes down.'); sfxp('whoosh'); scene('oz_art',.8,{art:'ip_tri_solid',x:F.x+F.w*.3,y0:F.top-45,y1:F.mid+45,w:84,fa:.75,fb:'ov_pyfall',fbs:{x:F.x+F.w*.3,y0:F.top-80,y1:F.mid+10,w:84,h:70}}); scene('oz_art',.7,{art:'ip_slam',x:F.x+F.w*.3,y:F.top-30,h:80,fa:.7}); }],
     ['hf',2700],
     [2450,()=>say(m.id,'inverted_pyramid')],
-    [2700,()=>{ sfxp('bonk'); sfxp('thud'); jitter(f); landHit(100); battle.shake=Math.max(battle.shake||0,.4); scene('ov_flash',.2,{a:.4,c:'#fff3a0'}); scene('ov_ring',.7,{x:F.x+F.w*.3,y:F.base-4,r:60,c:GOLD}); scene('ov_poof',.7,{x:F.x+F.w*.3,y:F.base,n:9,r:34,c:'#fff3c0'}); scene('ov_dust',1,{x:F.x-F.w*.4,y:F.base}); scene('ov_sparks',.7,{x:F.x+F.w*.3,y:F.mid,n:14,r:40,c:GOLD}); scene('ov_text',1,{x:p.x,y:p.y-me.h-6,txt:'THE LEDE',c:GOLD,sc:3}); }],
-    [3100,()=>setMessage('Who, what, when, where, WHAM.')],
+    [2700,()=>{ sfxp('bonk'); sfxp('thud'); jitter(f); landHit(100); battle.shake=Math.max(battle.shake||0,.4); scene('ov_flash',.2,{a:.4,c:'#fff3a0'}); scene('ov_ring',.7,{x:F.x+F.w*.3,y:F.base-4,r:60,c:GOLD}); scene('ov_poof',.7,{x:F.x+F.w*.3,y:F.base,n:9,r:34,c:'#fff3c0'}); scene('oz_art',1,{art:'ip_dust',x:F.x-F.w*.4,y:F.base-12,w:110,fb:'ov_dust',fbs:{x:F.x-F.w*.4,y:F.base}}); scene('oz_art',.8,{art:'ip_wham',x:F.x+F.w*.3,y:F.mid,w:120,pop:1,fb:'ov_sparks',fbs:{x:F.x+F.w*.3,y:F.mid,n:14,r:40,c:GOLD}}); scene('ov_text',1,{x:p.x,y:p.y-me.h-6,txt:'THE LEDE',c:GOLD,sc:3}); }],
+    [3100,()=>{ setMessage('Who, what, when, where, WHAM.'); scene('oz_art',1.4,{art:'ip_who_what',x:p.x,y:p.y-me.h-44,h:48,pop:1,fa:.9}); }],
     [3900,'end',res(E2)+'Buried.']]); };
 
 // ---------- Marine Layer (6.5 s) ----------
@@ -168,14 +174,14 @@ O.marine_layer=E2=>{ const {m,fx}=E2,me=ST.unit(m),foes=foesOf(E2),G=ST.group(fo
   K.push({t:3800,x:'home',y:'home',f:'idle'},{t:4300,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
-    [0,()=>{ setMessage('It is a little chilly in Los Angeles.'); sfxp('whoosh'); scene('ov_text',.9,{x:me.x,y:me.base-me.h-8,txt:'BRRR',c:'#cfe0ea',sc:2}); }],
-    [550,()=>setMessage('Hoodie on. Over the dress.')],
+    [0,()=>{ setMessage('It is a little chilly in Los Angeles.'); sfxp('whoosh'); scene('ov_text',.9,{x:me.x,y:me.base-me.h-8,txt:'BRRR',c:'#cfe0ea',sc:2}); scene('oz_art',1.4,{art:'ml_thermo',x:me.x+22,y:me.base-me.h*.5,h:40,pop:1,fa:.9}); }],
+    [550,()=>{ setMessage('Hoodie on. Over the dress.'); scene('oz_art',1.4,{art:'ml_hoodie',x:me.x,y:me.base-me.h*.55,w:50,pop:1,fa:.9}); }],
     [1150,()=>{ say(m.id,'marine_layer'); setMessage('"It\'s sixty-two degrees."'); scene('ov_dim',3.4,{a:.32,c:'#566878'}); scene('ov_text',1.4,{x:me.x,y:me.base-me.h-8,txt:'62 DEGREES',c:'#cfe0ea',sc:2}); }],
-    [1500,()=>{ scene('ov_fog',3.2,{x0:G.x0-20,x1:576,y:G.top+Math.max(20,(G.base-G.top)*.5),sp:Math.max(40,G.base-G.top)}); scene('ov_drizzle',3,{}); scene('ov_streaks',1.2,{x0:G.x0-20,x1:560,y:G.top+20}); }],
+    [1500,()=>{ scene('oz_art',3.2,{art:'ml_fog_bank',x:(G.x0+576)/2,y:G.top+Math.max(20,(G.base-G.top)*.5),w:300,a:.85,fa:.9,fb:'ov_fog',fbs:{x0:G.x0-20,x1:576,y:G.top+Math.max(20,(G.base-G.top)*.5),sp:Math.max(40,G.base-G.top)}}); scene('ov_drizzle',3,{}); scene('oz_art',1.2,{art:'ml_mist',x:(G.x0+560)/2,y:G.top+20,w:260,fa:.9,fb:'ov_streaks',fbs:{x0:G.x0-20,x1:560,y:G.top+20}}); }],
     [1800,()=>say(m.id,'marine_layer_crisis')],
     ['hf',1950],
-    [1950,()=>{ setMessage('This is a crisis.'); sfxp('ding'); landHit(100); for(const f of foes) { const F=ST.unit(f); jitter(f); scene('ov_sparks',.6,{x:F.x+F.w*.3,y:F.mid,n:8,r:24,c:GRAY}); scene('ov_ring',.6,{x:F.x+F.w*.3,y:F.mid,r:36,c:'#dfe6ea'}); } battle.shake=Math.max(battle.shake||0,.25); scene('ov_text',1.2,{x:me.x,y:me.base-me.h-8,txt:'CRISIS',c:'#cfd8de',sc:3}); }],
-    [2500,()=>setMessage('Everyone is cold now. Spiritually.')],
+    [1950,()=>{ setMessage('This is a crisis.'); sfxp('ding'); landHit(100); for(const f of foes) { const F=ST.unit(f); jitter(f); scene('oz_art',.6,{art:'ml_splash',x:F.x+F.w*.3,y:F.mid,w:70,pop:1,fb:'ov_sparks',fbs:{x:F.x+F.w*.3,y:F.mid,n:8,r:24,c:GRAY}}); scene('oz_art',1.6,{art:'ml_sad_cloud',x:F.x+F.w*.3,y:F.top-8,w:70,pop:1,fa:.9}); scene('ov_ring',.6,{x:F.x+F.w*.3,y:F.mid,r:36,c:'#dfe6ea'}); } battle.shake=Math.max(battle.shake||0,.25); scene('ov_text',1.2,{x:me.x,y:me.base-me.h-8,txt:'CRISIS',c:'#cfd8de',sc:3}); }],
+    [2500,()=>{ setMessage('Everyone is cold now. Spiritually.'); for(const f of foes) { const F=ST.unit(f); scene('oz_art',1.4,{art:'ml_snow',x:F.x+F.w*.5,y:F.top-4,w:110,fa:.9}); } }],
     [3100,()=>setMessage('She is from New York. She knows what cold is. This is worse.')],
     [4300,'end',res(E2)+'The marine layer wins again.']]); };
 
@@ -192,15 +198,15 @@ O.double_under=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,100),
     [0,()=>setMessage('Olivia pulls out a jump rope.')],
     [200,()=>sfxp('whoosh')],
     [650,()=>{ say(m.id,'double_under_ready'); }],
-    [1100,()=>{ setMessage('She trips on the first jump.'); sfxp('thud'); say(m.id,'double_under_trip'); scene('ov_poof',.5,{x:p.x,y:p.y,r:20}); scene('ov_text',.8,{x:p.x,y:p.y-me.h-6,txt:'OOF',c:'#ffd6c0',sc:2}); }],
+    [1100,()=>{ setMessage('She trips on the first jump.'); sfxp('thud'); say(m.id,'double_under_trip'); scene('oz_art',.5,{art:'du_dust',x:p.x,y:p.y,w:60,fb:'ov_poof',fbs:{x:p.x,y:p.y,r:20}}); scene('ov_text',.8,{x:p.x,y:p.y-me.h-6,txt:'OOF',c:'#ffd6c0',sc:2}); }],
     [1650,()=>setMessage('Shoes stay on. This is serious.')],
     [1950,()=>{ setMessage('The champion is back.'); scene('ov_sparks',.6,{x:p.x,y:p.y-me.h*.7,n:8,r:26,c:GOLD}); }],
-    [2050,()=>{ sfxp('whoosh'); scene('ov_ropering',.5,{x:p.x,y:p.y-2,r:46}); scene('ov_text',.6,{x:p.x,y:p.y-me.h-6,txt:'X2',c:'#ff9a8a',sc:2}); }],
-    [2450,()=>{ sfxp('whoosh'); scene('ov_ropering',.5,{x:p.x,y:p.y-2,r:46}); scene('ov_text',.6,{x:p.x,y:p.y-me.h-6,txt:'X2 AGAIN',c:'#ff9a8a',sc:2}); }],
-    [2850,()=>{ sfxp('bonk'); jitter(f); landHit(50); scene('ov_ropering',.6,{x:F.x+F.w*.3,y:F.base-4,r:F.w*.5}); scene('ov_sparks',.5,{x:F.x+F.w*.3,y:F.mid,n:8,r:26,c:'#ff9a8a'}); }],
+    [2050,()=>{ sfxp('whoosh'); scene('oz_art',.5,{art:'du_rope_loop',x:p.x,y:p.y-2,w:96,fb:'ov_ropering',fbs:{x:p.x,y:p.y-2,r:46}}); scene('ov_text',.6,{x:p.x,y:p.y-me.h-6,txt:'X2',c:'#ff9a8a',sc:2}); }],
+    [2450,()=>{ sfxp('whoosh'); scene('oz_art',.5,{art:'du_rope_loop',x:p.x,y:p.y-2,w:96,fb:'ov_ropering',fbs:{x:p.x,y:p.y-2,r:46}}); scene('ov_text',.6,{x:p.x,y:p.y-me.h-6,txt:'X2 AGAIN',c:'#ff9a8a',sc:2}); }],
+    [2850,()=>{ sfxp('bonk'); jitter(f); landHit(50); scene('oz_art',.6,{art:'du_ring',x:F.x+F.w*.3,y:F.base-4,w:F.w*.9,fb:'ov_ropering',fbs:{x:F.x+F.w*.3,y:F.base-4,r:F.w*.5}}); scene('oz_art',.5,{art:'du_stars',x:F.x+F.w*.3,y:F.mid,w:90,pop:1,fb:'ov_sparks',fbs:{x:F.x+F.w*.3,y:F.mid,n:8,r:26,c:'#ff9a8a'}}); }],
     ['hf',3050],
     [3000,()=>say(m.id,'double_under')],
-    [3050,()=>{ setMessage('Double under. Whip.'); sfxp('bonk'); sfxp('ding'); jitter(f); landHit(50); battle.shake=Math.max(battle.shake||0,.4); scene('ov_flash',.15,{a:.3,c:'#ffd6c0'}); scene('ov_crack',.5,{x:F.x+F.w*.3,y:F.mid+10}); scene('ov_ring',.6,{x:F.x+F.w*.3,y:F.mid,r:50,c:'#ff6a5a'}); scene('ov_sparks',.7,{x:F.x+F.w*.3,y:F.mid,n:14,r:40,c:'#ff6a5a'}); scene('ov_text',1,{x:p.x,y:p.y-me.h-6,txt:'THERE IT IS',c:'#ffd6c0',sc:3}); }],
+    [3050,()=>{ setMessage('Double under. Whip.'); sfxp('bonk'); sfxp('ding'); jitter(f); landHit(50); battle.shake=Math.max(battle.shake||0,.4); scene('ov_flash',.15,{a:.3,c:'#ffd6c0'}); scene('oz_art',.5,{art:'du_whip',x:F.x+F.w*.3,y:F.mid+10,w:F.w*.8,fb:'ov_crack',fbs:{x:F.x+F.w*.3,y:F.mid+10}}); scene('ov_ring',.6,{x:F.x+F.w*.3,y:F.mid,r:50,c:'#ff6a5a'}); scene('oz_art',.7,{art:'du_gold',x:F.x+F.w*.3,y:F.mid,w:110,pop:1,fb:'ov_sparks',fbs:{x:F.x+F.w*.3,y:F.mid,n:14,r:40,c:'#ff6a5a'}}); scene('ov_text',1,{x:p.x,y:p.y-me.h-6,txt:'THERE IT IS',c:'#ffd6c0',sc:3}); }],
     [3450,()=>setMessage('Nobody in this family beat her at this. Nobody.')],
     [4050,'end',res(E2)+'Still got it.']]); };
 
@@ -216,13 +222,13 @@ O.story_time=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,110),me
     [0,()=>setMessage('Olivia sits down cross-legged.')],
     [200,()=>sfxp('whoosh')],
     [700,()=>{ scene('ov_dim',5.4,{a:.42,c:'#0c1240'}); scene('ov_night',5.2,{x:500,y:46}); scene('ov_spot',5,{x:p.x,y:p.y,r:70}); scene('ov_fireflies',5,{}); setMessage('She opens her own children\'s book.'); }],
-    [1600,()=>{ setMessage('She holds up the first page.'); scene('ov_sparks',.8,{x:p.x-10,y:p.y-me.h*.6,n:8,r:22,c:'#cfd8ff'}); }],
+    [1600,()=>{ setMessage('She holds up the first page.'); scene('ov_sparks',.8,{x:p.x-10,y:p.y-me.h*.6,n:8,r:22,c:'#cfd8ff'}); scene('oz_art',1.8,{art:'st_book_open',x:p.x-10,y:p.y-me.h*.6,w:60,pop:1,fa:.9}); }],
     [2100,()=>{ say(m.id,'story_time'); setMessage('"Once upon a time, in a very quiet house..."'); scene('ov_notes',2.4,{x:p.x-20,y:p.y-me.h*.8}); }],
     ['hf',2400],
-    [2500,()=>{ sfxp('ding'); landHit(100); scene('ov_zzz',2.8,{x:F.x+F.w*.35,y:F.top+10}); scene('ov_sparks',.9,{x:F.x+F.w*.35,y:F.top+20,n:9,r:26,c:'#cfd8ff'}); scene('ov_ring',.8,{x:F.x+F.w*.35,y:F.mid,r:40,c:'#8fa0ff'}); }],
-    [2800,()=>setMessage('She does the voices.')],
+    [2500,()=>{ sfxp('ding'); landHit(100); scene('oz_art',2.8,{art:'st_zzz',x:F.x+F.w*.35,y:F.top+10,w:70,fa:.9,fb:'ov_zzz',fbs:{x:F.x+F.w*.35,y:F.top+10}}); scene('oz_art',2.6,{art:'st_glow',x:F.x+F.w*.35,y:F.mid,w:110,a:.8,fa:.9}); scene('oz_art',.9,{art:'st_stars',x:F.x+F.w*.35,y:F.top+20,w:80,pop:1,fb:'ov_sparks',fbs:{x:F.x+F.w*.35,y:F.top+20,n:9,r:26,c:'#cfd8ff'}}); scene('ov_ring',.8,{x:F.x+F.w*.35,y:F.mid,r:40,c:'#8fa0ff'}); }],
+    [2800,()=>{ setMessage('She does the voices.'); scene('oz_art',1.4,{art:'st_swirl',x:F.x+F.w*.35,y:F.mid,w:90,pop:1,fa:.9}); }],
     [3000,()=>{ setMessage(f.name+' is nodding off.'); }],
-    [3350,()=>{ say(m.id,'story_time_end'); scene('ov_text',1,{x:p.x,y:p.y-me.h-6,txt:'SHHH',c:'#cfd8ff',sc:2}); }],
+    [3350,()=>{ say(m.id,'story_time_end'); scene('ov_text',1,{x:p.x,y:p.y-me.h-6,txt:'SHHH',c:'#cfd8ff',sc:2}); scene('oz_art',1.2,{art:'st_book_closed',x:p.x,y:p.y-me.h*.6,w:50,pop:1,fa:.9}); }],
     [3900,()=>setMessage('Page two is never needed.')],
     [4300,()=>setMessage('She wrote it. She will tell you she wrote it.')],
     [4800,'end',res(E2)+'And everybody went to sleep.']]); };
@@ -261,14 +267,14 @@ O.lachlan_no=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m);
   K.push({t:2300,x:endX,y:by,f:'ab_lk_4'},{t:2800,x:endX,y:by,f:'ab_lk_5'},{t:3350,x:endX,y:by,f:'ab_lk_6'},{t:4100,x:endX,y:by,f:'runR',ease:'lin'},{t:4700,x:'home',y:'home',f:'idle'},{t:5000,f:'idle'});
   ST.keys(fx,K);
   ST.play(E2,[
-    [0,()=>{ setMessage('Olivia spots Lachlan about to climb something.'); say(m.id,'lachlan_no'); scene('ov_flash',.2,{a:.25,c:'#ff8a7a'}); scene('ov_text',1.1,{x:me.x,y:me.base-me.h-6,txt:'LACHLAN, NO!',c:'#ff8a7a',sc:3}); }],
+    [0,()=>{ setMessage('Olivia spots Lachlan about to climb something.'); say(m.id,'lachlan_no'); scene('ov_flash',.2,{a:.25,c:'#ff8a7a'}); scene('ov_text',1.1,{x:me.x,y:me.base-me.h-6,txt:'LACHLAN, NO!',c:'#ff8a7a',sc:3}); scene('oz_art',1.1,{art:'lk_exclaim',x:me.x+18,y:me.base-me.h-14,h:34,pop:1,fa:.9}); }],
     [750,()=>{ setMessage('Full mom sprint.'); sfxp('whoosh'); scene('ov_banner',1,{y:40,txt:'MOM SPEED'}); }],
-    [1150,()=>{ setMessage('The enemy is in the way. The enemy is no longer in the way.'); scene('ov_streaks',.9,{x0:endX,x1:homeX,y:homeY-me.h*.5}); scene('ov_dust',1,{x:homeX-10,y:homeY}); }],
+    [1150,()=>{ setMessage('The enemy is in the way. The enemy is no longer in the way.'); scene('oz_art',.9,{art:'lk_streak',x:(endX+homeX)/2,y:homeY-me.h*.5,w:Math.abs(homeX-endX)+40,fa:.8,fb:'ov_streaks',fbs:{x0:endX,x1:homeX,y:homeY-me.h*.5}}); scene('oz_art',1,{art:'lk_dust',x:homeX-10,y:homeY-6,w:70,fa:.8,fb:'ov_dust',fbs:{x:homeX-10,y:homeY}}); }],
     ['hf',1550],
-    [1550,()=>{ sfxp('bonk'); sfxp('thud'); jitter(f); landHit(100); battle.shake=Math.max(battle.shake||0,.6); scene('ov_flash',.25,{a:.4}); scene('ov_ring',.8,{x:F.x+F.w*.3,y:F.base-4,r:76,c:'#ffd27a'}); scene('ov_poof',.9,{x:F.x+F.w*.3,y:F.base,n:12,r:46}); scene('ov_sparks',.8,{x:F.x+F.w*.3,y:F.mid,n:14,r:40,c:'#ffd27a'}); scene('ov_text',1,{x:F.x+F.w*.3,y:F.top-30,txt:'THROUGH',c:'#ffe08a',sc:3}); }],
+    [1550,()=>{ sfxp('bonk'); sfxp('thud'); jitter(f); landHit(100); battle.shake=Math.max(battle.shake||0,.6); scene('ov_flash',.25,{a:.4}); scene('ov_ring',.8,{x:F.x+F.w*.3,y:F.base-4,r:76,c:'#ffd27a'}); scene('oz_art',.9,{art:'lk_burst2',x:F.x+F.w*.3,y:F.base-18,w:110,pop:1,fb:'ov_poof',fbs:{x:F.x+F.w*.3,y:F.base,n:12,r:46}}); scene('oz_art',.8,{art:'lk_burst',x:F.x+F.w*.3,y:F.mid,w:96,pop:1,fb:'ov_sparks',fbs:{x:F.x+F.w*.3,y:F.mid,n:14,r:40,c:'#ffd27a'}}); scene('ov_text',1,{x:F.x+F.w*.3,y:F.top-30,txt:'THROUGH',c:'#ffe08a',sc:3}); }],
     [1850,()=>{ sfxp('thud'); scene('ov_poof',.7,{x:endX,y:by,n:9,r:30}); scene('ov_dust',.8,{x:endX-40,y:by}); }],
-    [2350,()=>{ say(m.id,'lachlan_no_got'); setMessage('Got him. Got him. We\'re fine.'); }],
-    [3350,()=>{ setMessage('He was holding a stick. Just a stick.'); scene('ov_text',1,{x:endX+10,y:by-me.h-6,txt:'...',c:'#cfd8e6',sc:3}); }],
+    [2350,()=>{ say(m.id,'lachlan_no_got'); setMessage('Got him. Got him. We\'re fine.'); scene('oz_art',1.4,{art:'lk_heart',x:me.x+6,y:me.base-me.h-22,h:30,pop:1,fa:.9}); }],
+    [3350,()=>{ setMessage('He was holding a stick. Just a stick.'); scene('ov_text',1,{x:endX+10,y:by-me.h-6,txt:'...',c:'#cfd8e6',sc:3}); scene('oz_art',1.2,{art:'lk_stick',x:endX+14,y:by-6,h:40,pop:1,fa:.9}); }],
     [3900,()=>setMessage('Michael did not notice. Michael is on a call.')],
     [4300,()=>setMessage('She walks back like nothing happened.')],
     [5000,'end',res(E2)+'He was fine. He was always fine.']]); };
