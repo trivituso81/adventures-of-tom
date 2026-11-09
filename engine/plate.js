@@ -277,6 +277,10 @@ function plateWalkBehind(map,plate,time=0) {
   const zones=map&&PLATE_BEHIND[map.id]; if(!zones||!plate||!plate.img) return;
   const s=T/64, list=[...map.npcs,...followers,player].filter(a=>!a.hidden);   // hidden actors (story monsters tucked away) never pull a slice over
   let ctxDone=false, jarOver=false; const redraw=[], redrawn=[];
+  // Height of a standing actor in art px at a floor y. Painted rooms are drawn in perspective: a 5'11 Tom is about 400 art px tall by the front
+  // half wall, so the old flat 130 let anyone standing a few rows in front of a counter keep their head under the redrawn counter (Tom 2026-11-09:
+  // Amy's head was cut off by the shop counter). 6.6 ft covers the tallest cast member (Justin 6'4) plus hair.
+  const bodyH=fy=>plate.roomScale?roomPxPerFoot(plate.roomScale,fy)*6.6:130;
   for(const z of zones) {
     if(z.pts&&!z.bb) z.bb=[Math.min(...z.pts.map(q=>q[0])),Math.min(...z.pts.map(q=>q[1])),Math.max(...z.pts.map(q=>q[0])),Math.max(...z.pts.map(q=>q[1]))];
     const x0=z.pts?z.bb[0]:z.cx!==undefined?z.cx-z.rx:z.x, x1=z.pts?z.bb[2]:z.cx!==undefined?z.cx+z.rx:z.x+z.w;
@@ -285,7 +289,7 @@ function plateWalkBehind(map,plate,time=0) {
     for(const a of list) {
       const p=position(a), fx=(p.x+.5)*64, fy=(p.y+1)*64;
       if(fy>z.base) continue;                       // feet south of the base: in front of it
-      if(fx+36<x0||fx-36>x1||fy+4<y0||fy-130>y1) continue;   // body box (about 72 x 130 art px) misses the zone
+      if(fx+36<x0||fx-36>x1||fy+4<y0||fy-bodyH(fy)>y1) continue;   // body box (about 72 art px wide, bodyH tall) misses the zone
       hit=true; break;
     }
     if(!hit) continue;
@@ -304,7 +308,7 @@ function plateWalkBehind(map,plate,time=0) {
     // reaches up into the zone would be covered too. Tom 2026-11-01: the party was hidden by the counter. Draw those actors again on top.
     if(z.front) for(const a of list) {
       const p=position(a), fx=(p.x+.5)*64, fy=(p.y+1)*64;
-      if(fy<=z.base||fx+36<x0||fx-36>x1||fy-130>y1) continue;
+      if(fy<=z.base||fx+36<x0||fx-36>x1||fy-bodyH(fy)>y1) continue;
       if(!redraw.includes(a)) redraw.push(a);
     }
   }
