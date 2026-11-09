@@ -8266,6 +8266,12 @@
      "note": "No hat",
      "from": "v1",
      "at": 1794236454251
+    },
+    {
+     "date": "2026-11-09",
+     "note": "Remove hat",
+     "from": "v2",
+     "at": 1794236596785
     }
    ],
    "id": "npc-photo-bernadette",
