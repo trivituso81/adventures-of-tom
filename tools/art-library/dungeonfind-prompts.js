@@ -70,19 +70,19 @@ const SHEETS = [
     ['DOME DOORS', 'A tall pair of dark blue double doors scattered with small silver stars, shut, with a round silver moon shaped lock plate in the center. The lock plate is the brightest part. Seen from the front.'],
     ['JUKEBOX', 'A chunky rounded jukebox with a warm amber lit arch, chrome trim, a row of colored song buttons and a record visible behind curved glass.'],
   ] },
-  { id: 'ch10', label: 'Chapter 10, Terminal Zero', title: 'Chapter 10 Terminal Zero', items: [
-    ['GATE CLOCK, NO HANDS', 'A large round airport wall clock with a white face and bold black numbers 1 to 12 and a small gold peg in the middle, but no hands. Seven small round empty coin slots are spaced evenly around the rim and one bigger round slot sits in the center. The slots are the brightest part. Seen from the front.'],
-    ['CLOCK HAND, HOUR', 'One short thick black clock hand with a spade shaped tip, lying flat as a separate piece with a small round hole at the base.'],
-    ['CLOCK HAND, MINUTE', 'One long slim black clock hand with a pointed tip, lying flat as a separate piece with a small round hole at the base. Same thickness style as cell 2.'],
-    ['CLOCK HAND, SECOND', 'One very long thin red clock hand with a small round counterweight on its tail, lying flat as a separate piece with a small round hole near the tail.'],
-    ['GATE LOCK DOORS', 'A pair of tall steel and cream gate doors, shut, with a big round brass lock plate in the center and seven small round coin slots in a ring around it plus one in the middle. The slots are the brightest part. Seen from the front.'],
+  { id: 'ch10', strict: true, label: 'Chapter 10, Terminal Zero', title: 'Chapter 10 Terminal Zero', items: [
+    ['GATE CLOCK, NO HANDS', 'A large round airport wall clock with a white face and bold black numbers 1 to 12, all clear and correct, and a small gold peg in the middle, with no hands at all. Seven small round coin slots, each a dark hole with a bright gold rim, are spaced evenly around the outer edge of the face like hour marks, and one bigger round coin slot sits in the center below the peg. The eight slots are the brightest part and must be clearly visible. Seen from the front.'],
+    ['CLOCK HAND, HOUR', 'ONE short thick black clock hand with a spade shaped tip, lying flat as a separate piece with a small round hole at the base. Only the hand, alone, with no clock face behind it.'],
+    ['CLOCK HAND, MINUTE', 'ONE long slim black clock hand with a pointed tip, lying flat as a separate piece with a small round hole at the base. Same thickness style as cell 2. Only the hand, alone, with no clock face behind it.'],
+    ['CLOCK HAND, SECOND', 'ONE very long thin red clock hand with a small round counterweight on its tail, lying flat as a separate piece with a small round hole near the tail. Only the hand, alone, with no clock face behind it.'],
+    ['GATE LOCK DOORS', 'A pair of tall steel and cream gate doors, shut, with a big round brass lock plate in the center. Around the plate is a ring of seven small round coin slots, each a dark hole with a bright gold rim, and one more coin slot sits in the middle of the plate, eight slots in all. The slots are the brightest part and must be clearly visible. Seen from the front.'],
     ['PHOTO BOOTH', 'A narrow upright photo booth with a red curtain half drawn, a small round stool visible inside and a small sign on top reading exactly "PHOTOS". Seen from the front.'],
   ] },
-  { id: 'ch11-13', label: 'Chapters 11 and 13, Endless Concourse and Sub-Rail', title: 'Chapters 11 and 13 Concourse and Sub-Rail', items: [
+  { id: 'ch11-13', strict: true, label: 'Chapters 11 and 13, Endless Concourse and Sub-Rail', title: 'Chapters 11 and 13 Concourse and Sub-Rail', items: [
     ['LOST AND FOUND DOOR', 'A small cream door with a round brass handle and a brass plate reading exactly "LOST AND FOUND", with a cardboard box beside it spilling a scarf, a mitten and the handle of an umbrella. Seen from the front.'],
     ['GATE INFINITY DOORS', 'A huge pair of deep navy double doors with a big gold sideways figure eight symbol across both doors and a warm gold light line along the seam where they meet. Seen from the front.'],
-    ['AMBER WALL, GLASS DOORWAY', 'A section of glowing amber colored wall with a tall doorway shaped panel of clear glass set into it, shut tight. Seen from the front.'],
-    ['AMBER WALL, GOLD DOORWAY', 'The same amber wall section as cell 3, identical in every way, but the glass panel has melted away into a gold colored open archway with golden drips at its edges.'],
+    ['AMBER WALL, GLASS DOORWAY', 'A tall section of solid glowing amber colored wall that fills the cell from top to bottom and extends well to the left and right of a tall doorway shaped panel of pale cyan tinted clear glass set into it, with white glare streaks across the glass so the glass is clearly filled in and never empty, shut tight in a thin brass frame. No part of the wall or glass is pink, magenta, red or crimson. Seen from the front.'],
+    ['AMBER WALL, GOLD DOORWAY', 'The same amber wall section as cell 3, identical in every way (same wall, same frame, same size), but the glass panel has melted away: where the glass was is now an open archway filled with a warm dark golden glow, with thick golden drips running down from the top and sides of the frame. No part of it is pink, magenta, red or crimson.'],
   ] },
   { id: 'ch17', label: 'Chapter 17, Glass Tower', title: 'Chapter 17 Glass Tower', items: [
     ['SHELF CASE, DUNMORE', 'A wide steel archive shelf with a glass fronted case holding a tiny amber lit town of snug brick shops with a clock tower in the middle.'],
@@ -95,11 +95,11 @@ const SHEETS = [
     ['SEALED DOOR', 'A tall grey steel door, shut, with six round amber padlock shaped locks in a row across the middle. The locks are the brightest part. Seen from the front.'],
     ['SNOW GLOBE ON A PLINTH', 'A big glass snow globe holding a tiny seaside town with a small round green park and a white fountain, sitting on a tall glass plinth.'],
   ] },
-  { id: 'ch19', label: 'Chapter 19, Dead-Letter Office', title: 'Chapter 19 Dead-Letter Office', items: [
+  { id: 'ch19', strict: true, label: 'Chapter 19, Dead-Letter Office', title: 'Chapter 19 Dead-Letter Office', items: [
     ['MEMORY PAGE, LIT', 'One loose sheet of paper lying flat with handwritten lines and a small drawn heart, its edges tinted warm gold.'],
     ['MEMORY PAGE, FADED', 'The same page as cell 1, identical in shape, size and handwriting, but faded to dim blue grey and the edges are plain with no gold.'],
     ['EMPTY PEDESTAL', 'A small round stone pedestal with a plush dark red cushion on top, empty.'],
-    ['GOLD SQUISHY KEEPSAKE', 'A soft squishy toy shaped like a soup dumpling, in sparkling diamond gold, with pleats on top.'],
+    ['GOLD SQUISHY KEEPSAKE', 'ONE soft squishy toy shaped like a soup dumpling with pleats on top, made entirely of sparkling diamond GOLD: a bright metallic yellow gold surface with tiny glittering diamond facets and glints. It is clearly gold and never beige, tan or cream.'],
     ['PINK RIBBON KEEPSAKE', 'A pink satin hair ribbon tied in a floppy bow with two trailing tails.'],
     ['STOPWATCH KEEPSAKE', 'A silver round stopwatch with a crown button on top, a white face with a red second hand and a short loop of cord.'],
     ['FIRST CUP KEEPSAKE', 'A small lopsided handmade pottery cup in speckled cream clay with an uneven blue glaze and a thumbprint on the side.'],
@@ -133,7 +133,11 @@ const ART = `ART STYLE
 - No thick or black outlines.
 - NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette, no glossy plastic look.`;
 
-function sheet(label, items) {
+const STRICT = n => `
+- STRICT COUNT AND ORDER. The finished sheet has exactly ${n} objects, in cells 1 to ${n}, in exactly the order of the list, with no gaps. Draw each listed object once and only once. Never draw a second copy, a spare, a variant, a duplicate or a related extra object, and never put an object in a cell that belongs to a different number. If an item is a single piece or part (for example one clock hand), draw only that piece alone, never the thing it belongs to.
+- PAIRS DIFFER ON ONE THING. Where a cell says it is the same as another cell, copy that cell exactly and change only the one named thing, and make that change big and obvious at a glance.`;
+
+function sheet(label, items, strict) {
   const n = items.length;
   const list = items.map((p, i) => `${i + 1}. ${p[0]}: ${p[1]}`).join('\n');
   return `IMAGE REQUEST: ONE SINGLE PROP SHEET. Return exactly one image, nothing else. Follow the numbered list at the bottom exactly.
@@ -162,7 +166,7 @@ HARD RULES
 - Objects only. No people, no characters, no hands, no faces on anything unless the list says the object has a face. No creatures except the ones listed.
 - No real brands, logos, trademarks or copyrighted characters.
 - Do not add extra objects, decorations, sparkle bursts, motion lines, glows, smoke or effects beyond what the list describes. Small details the list names (a wisp of steam, a drip, a glint) are fine.
-- Do not skip, merge or reorder any item.
+- Do not skip, merge or reorder any item.${strict ? STRICT(n) : ''}
 
 THE ${n} OBJECTS (cell number: name, what to draw)
 ${list}`;
@@ -172,6 +176,39 @@ const entries = SHEETS.map(s => ({
   id: `prop-find-${s.id}`, tab: 'Props',
   title: `Dungeon finds, ${s.title} (${s.items.length} objects)`,
   ar: '1:1', refs: [REF_KEY],
-  prompt: sheet(s.label, s.items),
+  prompt: sheet(s.label, s.items, s.strict),
 }));
+// EDIT entries (Tom 2026-11-09 audit): the approved sheet is attached and only the named cells change, so the good cells stay as they are.
+// Used where a regenerate keeps ignoring a pose change (ch04 twice, ch08 once): a different method, not a third wording of the same prompt.
+function editSheet(id, title, sheetFile, name, changes) {
+  const list = changes.map((c, i) => `${String.fromCharCode(65 + i)}. ${c}`).join('\n');
+  return {
+    id: `prop-find-${id}`, tab: 'Props', title: `Dungeon finds, ${title} (edit of the approved sheet, send the picture listed)`,
+    ar: '1:1', refs: [sheetFile],
+    prompt: `EDIT THE ATTACHED IMAGE. Return exactly one image, nothing else.
+
+The attached picture is an approved prop sheet for ${name} in "The Adventures of Tom", a family role-playing game: a 4 by 4 grid of square cells, one painted object per cell, a plain solid crimson background, and a small white number in the top-left corner of every filled cell. Keep the painting style, lighting, colors, camera angle, grid, cell positions, background color and white numbers exactly as they are. Every object not named below stays exactly as it is, pixel for pixel where possible. Output the same size and layout. Make only the changes listed here.
+
+CHANGES
+${list}
+
+RULES
+- Do not add, remove, move or resize any object. Do not touch the empty cells.
+- The changed part must be big and obvious at a glance, never subtle.
+- Painted lettering, if any, stays exactly as it is.`
+  };
+}
+entries.push(editSheet('ch04-fix', 'Chapter 4 Soundstage 7, levers and dead rig', 'art/raw/props/prop-find-ch04-v1.png', 'Soundstage 7 (grey junction boxes and a stage light rig)', [
+  'Cells 1, 3 and 5 (the OFF boxes) keep their switch lever pointing DOWN. Do not change them.',
+  'Cells 2, 4 and 6 (the ON boxes): flip the chunky toggle lever to the OPPOSITE position. Today it points down like the OFF boxes; make it point straight UP, standing up above the middle of the box face, clearly the mirror image of the down lever in cells 1, 3 and 5. The lit lamp, the colored stripe and the box stay exactly as they are.',
+  'Cell 7 (the dead light rig): turn all three lamps completely OFF. Each lamp becomes dull dark glass with no glow and no bright center, the blue, amber and red gel colors only a deep muted tint. Cell 8 (the lit rig) stays blazing bright and unchanged.'
+]));
+entries.push(editSheet('ch07-fix', 'Chapter 7 The Stacks, reading room lock', 'art/raw/props/prop-find-ch07-v1.png', 'the Stacks library (catalog cards, doors, a chair)', [
+  'Cell 4 (the READING ROOM doors): remove the brass padlock and keyhole completely. Put a rectangular brass lock plate in the center of the doors that looks like the front of a card catalog drawer: a small round pull knob in the middle and a row of three narrow horizontal card slots across it, the three slots glowing warm amber and the brightest part of the object. There is NO padlock and NO keyhole anywhere on the doors. The doors, the arch, the trim and the small brass plate reading exactly "READING ROOM" stay as they are.',
+  'Every other cell stays exactly as it is.'
+]));
+entries.push(editSheet('ch08-fix', 'Chapter 8 Car Barn, pulled lever', 'art/raw/props/prop-find-ch08-v1.png', 'the Car Barn (pilot lights, a motor, a lever, a lunch pail)', [
+  'Cell 6 (TURNTABLE LEVER, PULLED): the lever is pulled all the way over. Keep the same base plate, bolts and red round knob as cell 5, but tip the lever forward so it leans down toward the viewer and to the right at a steep angle, almost flat, with the red knob close to the front edge of the base plate. It must look completely different from cell 5, where the lever stands straight up. Cell 5 stays exactly as it is, standing straight up.',
+  'Every other cell stays exactly as it is.'
+]));
 module.exports = { entries, SHEETS, sheet };
