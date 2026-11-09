@@ -1,3 +1,7 @@
+## 2026-11-08 (voice14): Voice export 14 merged, Mirrorball voiced
+- Tom's export 14 (597 clips) is already on main except 17 new `mirrorball` dialogue clips (dialog-ch28): merged. The other 540 clips matched what is installed byte for byte. 38 battle takes for lines the game does not play were left out (same set as export 13, see docs/PURGED_VOICE.md).
+- Purged the 17 old `bigone` stand-in clips for The Mirrorball (ch9, ch26, ch27). Mirrorball is now voiced by its own clips. Tags voice14.
+
 ## 2026-11-08 (ff9x): NPC prompts repeat "Final Fantasy IX" and "hand drawn" (Tom 23:55). Each npc-photo-* prompt keeps the verbatim template, then the details block labels every line with the style words and ends with a STYLE REMINDER paragraph. About 12 mentions of Final Fantasy IX and 11 of hand drawn per prompt.
 
 ## 2026-11-08 (amyfx1): Amy's Kettlebell Swing plays her painted effects (pilot for her fx sheets)

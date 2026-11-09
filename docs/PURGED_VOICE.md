@@ -129,3 +129,8 @@ Audio is in git history (the parent of the `deedee1` commit).
 
 38 battle takes that arrived in the export for lines the game does not play: amy hills, hurt, marathon, marathon_ult, tombo2; grace attack, chalk_up, ymamot; rose ymamot; tom controller_tap, crumb_shot, window_seat; tnb tombo, round_with_jojo; and 24 Justin beats (bad_call, breaker_flip, demo_day, drywall, foot_tap, fresh_fit, giant_sneeze, loose_wire_zap, wire_nuts, and one empty-kind OUCH). They were never merged into a committed file; the audio stays in Tom's export.
 
+## 2026-11-08 (voice14): old bigone stand-ins for The Mirrorball
+
+17 dialogue clips under the `bigone` voice (the fallback used until Tom baked The Mirrorball): dialog-ch9 (13: Guests! GUESTS!, I CAUGHT it, Then they can come UP, Every full moon (two takes), One dance, From the top!, Round 2 to 5 The band plays on, one more song, see you next moon), dialog-ch26 (Fine. The party is over; Here. One of my little mirrors) and dialog-ch27 and ch26 (If I'm the brightest thing in the sky, two takes). Replaced by the 17 `mirrorball|` clips in dialog-ch28. Audio is in git history (the parent of the `voice14` commit).
+
+Also dropped, not merged: 38 battle takes in phone export 14 for lines the game does not play (the same 38 as export 13: amy hills, hurt, marathon, marathon_ult, tombo2; grace attack, chalk_up, ymamot; rose ymamot; tom controller_tap, crumb_shot, window_seat; tnb tombo, round_with_jojo; 24 Justin beats). The audio stays in Tom's export.
