@@ -1,3 +1,10 @@
+## 2026-11-09 (447): The Mirrorball goes over the top, a cartoon fancy lady (`mirrorvoice3`)
+- Tom: "I want a more exaggerated over the top almost cartoonish voice of a fancy lady." Same ElevenLabs voice (Oolong's id plus the backup list), no new slot.
+- `tools/voice-library/make-index.js`: `dialog|mirrorball` stability 0 (most expressive), direction "over-the-top cartoon grande dame, hugely exaggerated posh accent, swooping theatrical pitch, campy and dramatic", `ignore_history:true`.
+- voices.html: `scriptOf` skips the ElevenLabs history annotations for a voice with `ignore_history`, so her older elegant takes cannot bring the calm annotations back.
+- Scripts: all 18 written Mirrorball lines in `directions-20261101.json` and `mirrorball-elegant.json` re-annotated (gasping, swooning, trilling, dramatic sighs); the 17th live line ("If I'm the brightest thing in the sky...") had no written script and now has one. Spoken words unchanged. Cast description in data/dialog-cast.js matches.
+- No clips changed: Tom re-bakes her lines in the Voice Library. Tests: voices.html loads with no errors and builds the new text even with an old take in history; smoke `FAILS: []`; tag_check ok; unused_voice 0.
+
 ## 2026-11-09 (npcaudit1): NPC hero prompts fixed after the style audit; 17 entries reopened
 - Audit of all 55 approved `npc-photo-<id>` pictures (Project doc `claude/npc-art-audit-11-09.md`): 13 adults were painted as children, 2 had a name caption painted in, 1 had a finger over the mouth, 2 missed their spec colors.
 - `tools/art-library/npc-prompts.js`, details block only (Tom's template is untouched): a GROWN-UP line for adults of 18 to 59, a young-teenager line for Daisy, a NO WRITING line, and "finger" and "touching" added to the face rule. Ryan's quiet gesture moved to waist height. Bernadette's hat removed (Tom rejected it twice for the hat; the palette had asked for one).

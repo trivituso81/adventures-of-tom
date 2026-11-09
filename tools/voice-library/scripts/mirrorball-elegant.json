@@ -5,63 +5,70 @@
 "voice": "mirrorball",
 "text": "Every full moon they danced under me. Then the last dance, and the doors closed.",
 "ctx": "Monster talk",
-"script": "[dreamy, slow] Every full moon they danced under me. [heavy, sighing] Then the last dance, and the doors closed."
+"script": "[dreamy, trilling, grand] Every full moon they danced under me. [dramatic wail, theatrical] Then the last dance, and the doors closed."
 },
 {
 "voice": "mirrorball",
 "text": "From the top! Round two!",
 "ctx": "Monster talk",
-"script": "[grand, languid] From the top! [poised, bright] Round two!"
+"script": "[booming diva, campy] From the top! [trilling, delighted] Round two!"
 },
 {
 "voice": "mirrorball",
 "text": "Round 2. The band plays on.",
 "ctx": "Monster talk",
-"script": "[grand, languid] Round 2. [wistful, poised] The band plays on."
+"script": "[grandly, trilling, campy] Round 2. [swooping diva, theatrical] The band plays on."
 },
 {
 "voice": "mirrorball",
 "text": "Round 3. The band plays on.",
 "ctx": "Monster talk",
-"script": "[grand, languid] Round 3. [wistful, poised] The band plays on."
+"script": "[grandly, trilling, campy] Round 3. [swooping diva, theatrical] The band plays on."
 },
 {
 "voice": "mirrorball",
 "text": "Round 4. The band plays on.",
 "ctx": "Monster talk",
-"script": "[grand, weary] Round 4. [wistful, languid] The band plays on."
+"script": "[exasperated, posh, theatrical] Round 4. [swooping diva, dramatic] The band plays on."
 },
 {
 "voice": "mirrorball",
 "text": "Round 5. The band plays on.",
 "ctx": "Monster talk",
-"script": "[grand, weary] Round 5. [wistful, poised] The band plays on."
+"script": "[exasperated, posh, theatrical] Round 5. [weary diva, melodramatic] The band plays on."
 },
 {
 "voice": "mirrorball",
 "text": "...one more song. Just one.",
 "ctx": "Monster talk",
-"script": "[faint, breathy] ...one more song. [hushed, pleading] Just one."
+"script": "[fainting, swooning, breathy] ...one more song. [melodramatic plea] Just one."
 },
 {
 "voice": "mirrorball",
 "text": "They said see you next moon. 1971.",
 "ctx": "Monster talk",
-"script": "[soft, aching] They said see you next moon. [fading, fond] 1971."
+"script": "[tragic, quivering, posh] They said see you next moon. [dramatic sigh, fond] 1971."
 },
 {
 "voice": "mirrorball",
 "speaker": "The Mirrorball",
 "text": "...You asked me. Three times. Nobody has asked me to dance since 1971.",
 "ctx": "The Mirrorball",
-"script": "[slow, stunned] ...You asked me. [languid, disbelieving] Three times. [aching, soft] Nobody has asked me to dance since 1971."
+"script": "[gasping, astonished, posh] ...You asked me. [trilling, disbelieving] Three times. [melodramatic sob, theatrical] Nobody has asked me to dance since 1971."
 },
 {
 "voice": "mirrorball",
 "speaker": "The Mirrorball",
 "text": "I don't need the moon. I just needed somebody to ASK.",
 "ctx": "The Mirrorball",
-"script": "[haughty, quietly broken] I don't need the moon. [tender, lingering] I just needed somebody to ASK."
+"script": "[haughty, then crumbling, theatrical] I don't need the moon. [swooning, tender, posh] I just needed somebody to ASK."
+},
+{
+"voice": "mirrorball",
+"speaker": "The Mirrorball",
+"text": "If I'm the brightest thing in the sky, somebody will HAVE to come.",
+"ctx": "The Mirrorball",
+"script": "[grandly, swooping pitch, campy] If I'm the brightest thing in the sky, [booming diva, theatrical] somebody will HAVE to come."
 }
 ]
 }

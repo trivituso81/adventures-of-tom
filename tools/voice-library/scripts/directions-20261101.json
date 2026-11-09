@@ -6222,14 +6222,14 @@
 "speaker": "The Mirrorball",
 "text": "Guests! GUESTS! Oh, at last. Welcome to the Moon Club. Nobody has come up those stairs since 1971.",
 "ctx": "The Mirrorball",
-"script": "[breathy, drawn out, haughty] Guests! GUESTS! [languid, poised] Oh, at last. [warm, slow] Welcome to the Moon Club. [sighing, wistful] Nobody has come up those stairs since 1971."
+"script": "[gasping, swooning, over-the-top posh] Guests! GUESTS! [fluttering, theatrical] Oh, at LAST. [grandly, swooping pitch] Welcome to the Moon Club. [dramatic sigh, melodramatic] Nobody has come up those stairs since 1971."
 },
 {
 "voice": "mirrorball",
 "speaker": "The Mirrorball",
 "text": "Every full moon, they danced under me. Then the last dance. The band said see you next moon. Nobody came back.",
 "ctx": "The Mirrorball",
-"script": "[dreamy, slow] Every full moon, they danced under me. [heavy, sighing] Then the last dance. The band said see you next moon. [small, languid] Nobody came back."
+"script": "[dreamy, trilling, grand] Every full moon, they danced under me. [dramatic wail, theatrical] Then the last dance. The band said see you next moon. [quivering, melodramatic sob] Nobody came back."
 },
 {
 "voice": "tom",
@@ -6243,14 +6243,14 @@
 "speaker": "The Mirrorball",
 "text": "I CAUGHT it. All of it. Every bit of moonlight, right here in me.",
 "ctx": "The Mirrorball",
-"script": "[breathy, haughty] I CAUGHT it. [poised, lingering] All of it. Every bit of moonlight, right here in me."
+"script": "[haughty, trilling, aghast] I CAUGHT it. [swooping, smug, posh] All of it. Every bit of moonlight, right here in me."
 },
 {
 "voice": "mirrorball",
 "speaker": "The Mirrorball",
 "text": "If I'm the brightest thing in the whole sky, somebody will HAVE to come dance. And look. Somebody did.",
 "ctx": "The Mirrorball",
-"script": "[languid, glittering] If I'm the brightest thing in the whole sky, somebody will HAVE to come dance. [hopeful, drawn out] And look. [wistful, poised] Somebody did."
+"script": "[grandly, swooping pitch, campy] If I'm the brightest thing in the whole sky, somebody will HAVE to come dance. [gasping, delighted] And look. [shrieking with joy, over-the-top] Somebody did."
 },
 {
 "voice": "deedee",
@@ -6264,7 +6264,7 @@
 "speaker": "The Mirrorball",
 "text": "Then they can come UP. One more dance. Just one. Everybody, under me, forever.",
 "ctx": "The Mirrorball",
-"script": "[haughty, slow] Then they can come UP. One more dance. Just one. [possessive, languid] Everybody, under me, forever."
+"script": "[sniffy, haughty, posh] Then they can come UP. [melodramatic, pleading] One more dance. Just one. [booming diva, theatrical] Everybody, under me, forever."
 },
 {
 "voice": "boppy",
@@ -6299,7 +6299,7 @@
 "speaker": "The Mirrorball",
 "text": "...Fine. The party is over. It was over in 1971. I just didn't want to be the one to turn off the lights.",
 "ctx": "The Mirrorball",
-"script": "[deflated, sighing] ...Fine. [heavy, languid] The party is over. It was over in 1971. [aching, soft] I just didn't want to be the one to turn off the lights."
+"script": "[enormous dramatic sigh] ...Fine. [tragic, theatrical, posh] The party is over. It was over in 1971. [quivering, melodramatic] I just didn't want to be the one to turn off the lights."
 },
 {
 "voice": "deedee",
@@ -6327,7 +6327,7 @@
 "speaker": "The Mirrorball",
 "text": "One dance. Before you go. Somebody. Please.",
 "ctx": "The Mirrorball",
-"script": "[shy, breathy] One dance. Before you go. [trembling, pleading] Somebody. Please."
+"script": "[fluttering, coy, posh] One dance. Before you go. [trembling, melodramatic plea] Somebody. Please."
 },
 {
 "voice": "deedee",
@@ -6369,7 +6369,7 @@
 "speaker": "The Mirrorball",
 "text": "Here. One of my little mirrors. For the lady who said she'd come back. So you can carry a bit of the moon home.",
 "ctx": "The Mirrorball",
-"script": "[tender, poised] Here. One of my little mirrors. [soft, grateful] For the lady who said she'd come back. [gentle, slow] So you can carry a bit of the moon home."
+"script": "[gushing, swooning, posh] Here. One of my little mirrors. [trilling, grateful] For the lady who said she'd come back. [grandly, sweet] So you can carry a bit of the moon home."
 },
 {
 "voice": "boppy",
@@ -21475,7 +21475,7 @@
 "speaker": "The Mirrorball",
 "text": "Round {n}. The band plays on.",
 "ctx": "Monster talk",
-"script": "[grand, languid] Round {n}. [wistful, poised] The band plays on."
+"script": "[grandly, trilling, campy] Round {n}. [swooping diva, theatrical] The band plays on."
 },
 {
 "voice": "bigone",

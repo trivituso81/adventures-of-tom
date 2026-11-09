@@ -156,7 +156,7 @@ const isDog=it=>it.v==='nara'&&it.t==='b';
 // Direction order: Tom's own edit here, then the direction the baked clip was actually made with (read from his ElevenLabs
 // history, see loadHistory), then the written one in the index.
 let HIST={}; try{ HIST=JSON.parse(localStorage.getItem('aot-vl-hist')||'{}')||{}; }catch(e){}
-const scriptOf=it=>SCRIPTS[lk(it)]!=null?SCRIPTS[lk(it)]:(HIST[lk(it)]!=null?HIST[lk(it)]:(isDog(it)?it.p:it.s));
+const scriptOf=it=>SCRIPTS[lk(it)]!=null?SCRIPTS[lk(it)]:(HIST[lk(it)]!=null&&!(voiceOf(it)||{}).ignore_history?HIST[lk(it)]:(isDog(it)?it.p:it.s));   // ignore_history (index): a recast voice uses its new written scripts
 const hasWritten=it=>HIST[lk(it)]!=null||!it.auto;
 const voiceOf=it=>IDX.voices[(it.t==='b'?'battle|':'dialog|')+it.v];
 const whoName=it=>it.v==='narrator'&&it.sp?'Narrator ('+it.sp+')':it.sp||(WHO[it.v]&&WHO[it.v].name)||it.v;   // narration boxes: the Narrator voice reads them (data/dialog-cast.js)

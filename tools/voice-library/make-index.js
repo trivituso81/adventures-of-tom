@@ -116,11 +116,12 @@ if(voices['dialog|narrator']) voices['dialog|narrator'].direction='theatrical st
 if(voices['dialog|narrator']) voices['dialog|narrator'].speed=1.15; // ElevenLabs speaking rate (0.7 to 1.2); Tom: the narrator spoke too slowly in the preview
 // The Mirrorball (Tom 11-08): Dolores' voice no longer exists on ElevenLabs (404), so she reuses an existing lady voice (no new
 // slot). fallback_ids: voices.html tries the next id when ElevenLabs answers 404 (voice deleted), so one missing voice never blocks a bake.
-// The direction keeps her a fancy lady on every line (Tom 11-08).
+// Tom 11-09: exaggerated, over the top, almost cartoonish fancy lady: stability 0 (most expressive) and a campy direction on every line.
+// ignore_history: voices.html uses the written scripts, not the annotations of her older (elegant) takes in the ElevenLabs history.
 { const LADY=['oolong','odette','luna','penny','carmen'].map(k=>voices['dialog|'+k]&&voices['dialog|'+k].voice_id).filter(Boolean);
   const ids=[...new Set(LADY)];
   if(ids.length){
-    voices['dialog|mirrorball']=Object.assign({},voices['dialog|oolong']||{},{voice_id:ids[0],fallback_ids:ids.slice(1),direction:'fancy, posh, elegant lady, refined and graceful, never gruff'});
+    voices['dialog|mirrorball']=Object.assign({},voices['dialog|oolong']||{},{voice_id:ids[0],fallback_ids:ids.slice(1),stability:0,ignore_history:true,direction:'over-the-top cartoon grande dame, hugely exaggerated posh accent, swooping theatrical pitch, campy and dramatic'});
     if(voices['dialog|dolores']) voices['dialog|dolores'].fallback_ids=ids;   // Dolores' own id is gone too
   } }
 for(const id of ['boppy','justin']) for(const k of ['battle|'+id,'dialog|'+id]){ const v=voices[k]; if(!v) continue;
