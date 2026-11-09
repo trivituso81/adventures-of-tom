@@ -13870,8 +13870,16 @@
    "group": "Story gates"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/prop-gate-jpark-barn-v1.png",
+     "date": "2026-11-09",
+     "from": "v1",
+     "at": 1794248284615
+    }
+   ],
    "rejects": [],
    "id": "prop-gate-jpark-barn",
    "tab": "Props",
