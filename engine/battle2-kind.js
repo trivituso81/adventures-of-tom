@@ -2168,7 +2168,7 @@ B2_TOMBO_ANIM.boppy3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 B2_TOMBO_ANIM.tnb3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty();
   const tsp=BATTLE_SPRITES.tom,nsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,NH=nsp.idle.length*nsp.scale;
-  const by=cl(Math.max(GR.base,T.base-12),236,300),mx=cl(GR.x1+150,GR.x1+110,470),lx=mx-52,rx=mx+52,ml=mx-15,mr=mx+15;
+  const by=cl(Math.max(GR.base,T.base-12),236,300),mx=cl(GR.x1+150,GR.x1+110,440),lx=mx-70,rx=mx+70,ml=mx-34,mr=mx+34;
   const FL=4700,order=order3(list);
   order.forEach((o,i)=>{ o.t=FL+200+Math.max(0,mx-o.q.x)*.6+i*40; });
   const last=order.length?order[order.length-1].t:FL+300;
@@ -2489,8 +2489,8 @@ B2_TOMBO_ANIM.ff2=E2=>{ B2.aim=null;
   const mem=E2.mem,by0=id=>mem.find(p=>p.id===id),amy=by0('amy'),gr=by0('grace'),ro=by0('rose');
   const fxOf=u=>E2.fx[mem.indexOf(u)],list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty(),A=ST.unit(amy);
   const SP=id=>BATTLE_SPRITES[id],Hof=id=>SP(id).idle.length*SP(id).scale,asp=SP(amy.id);
-  const by=cl(Math.max(GR.base,A.base-12),236,296),ax=cl(GR.x1+150,GR.x1+120,460),wx=ax-78,WH=170,gx=ax+40,rx=ax-34;
-  const SPR=5000,V=.42,xL=Math.max(30,GR.x0-24),smash=SPR+(ax-(wx+22))/V,TL=SPR+(ax-xL)/V;
+  const by=cl(Math.max(GR.base,A.base-12),236,296),ax=cl(GR.x1+150,GR.x1+120,460),wx=ax-110,WH=170,gx=ax+62,rx=ax-58;
+  const SPR=5000,V=.42,xL=Math.max(100,GR.x0-24),smash=SPR+(ax-(wx+22))/V,TL=SPR+(ax-xL)/V;
   const order=order3(list).map(o=>{ o.t=SPR+Math.max(0,ax-o.q.x)/V; return o; }).sort((a,b)=>a.t-b.t);
   const last=order.length?order[order.length-1].t:smash+200;
   const P={walk:700,wall0:250,wall1:750,chain0:850,chain1:1150,paper0:1050,paper1:1350,kneel:1250,girls0:1800,girls1:2300,star0:2400,star1:2650,
@@ -2522,8 +2522,8 @@ B2_TOMBO_ANIM.ff2=E2=>{ B2.aim=null;
       else if(ms<P.home) { const k=ez(seg(ms,SPR,SPR+220)); x=lerp(spot.x,sprintX(ms)+dx,k); y=lerp(spot.b,by+dy,k)-Math.abs(Math.sin(ms/55))*5; f=sp.run?runFr(sp,c.t*1.3,-1):sp.act; }
       else { const r=runBack(ms,c,u,dx,dy); x=r.x; y=r.y; f=r.f; }
       s2.x=x; s2.b=y; s2.f=f; return {cx:x,base:y,frame:f}; }); };
-  girl(gr,{x:gx,b:by-6},-1,14,-9,[P.star0,P.star1]);
-  girl(ro,{x:rx,b:by+6},1,-12,8,[P.rib0,P.rib1]);
+  girl(gr,{x:gx,b:by-6},-1,62,-9,[P.star0,P.star1]);
+  girl(ro,{x:rx,b:by+6},1,-66,8,[P.rib0,P.rib1]);
   const show=ms=>ez(seg(ms,0,500))*(1-ez(seg(ms,P.home,P.end-100)));
   const aTop=()=>st.amy.b-st.amy.f.length*asp.scale,aH=()=>st.amy.f.length*asp.scale;
   const shoulder=s=>({x:st.amy.x+s*9,y:aTop()+aH()*.36});
@@ -4108,8 +4108,8 @@ const DOORC='#b8bec8';
 B2_TOMBO_ANIM.tnb2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const list=b2LiveFoes(),GR=ST.group(list),o3=order3(list),party=b2LiveParty();
   const tsp=BATTLE_SPRITES.tom,nsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,TW=tsp.idle[0].length*tsp.scale,NW=nsp.idle[0].length*nsp.scale;
-  const sb=cl(GR.base+4,236,300),fl=sb-6,top=fl-160,dX=cl(GR.x1+56,GR.x1+44,460);
-  const L=660,xS=dX-(L-90),travel=dX+130,nX=dX+34,tTo=dX+88;
+  const sb=cl(GR.base+4,236,300),fl=sb-6,top=fl-160,dX=Math.min(cl(GR.x1+56,GR.x1+44,460),380);
+  const L=660,xS=dX-(L-90),travel=dX+130,nX=dX+30,tTo=dX+135;   // Tom and TNB are about 100 px wide each: not on top of each other
   const P={close0:1300,run0:1200,jam:1900,nline:2000,tline:2500,crouch:2850,tarr:3000,dive:3150,inn:3500,pull:3750,hop:3800,hopEnd:4000,slam:4150,
     lunge:3800,kiss:4450,go:4700,out:5600,dark:5450,home:5800,apply:6000,end:6700};
   // the doors: open, closing, stopped by the board (shoving at it), bounced open by Tom's dive, then SLAM
@@ -4241,7 +4241,7 @@ B2_TOMBO_ANIM.nara2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const P={walk:650,bow:750,nline:900,z0:1700,tline:1900,z1:4700,sit:5050,pet:5350,good:5450,home:5950,end:6650};
   const th0=Math.PI/2-.55,LAPS=2,thOf=ms=>th0+LAPS*Math.PI*2*ez(seg(ms,P.z0,P.z1));
   const ptOf=th=>({x:cx+rx*Math.cos(th),y:cy+ry*Math.sin(th)});
-  const start=ptOf(th0),sitX=tx-46;
+  const start=ptOf(th0),sitX=tx-80;
   // when she runs past each monster (on the leg nearest its feet) and past Tom, sampled along the laps
   const hits=[],toms=[]; { let prev=ptOf(thOf(P.z0));
     for(let ms=P.z0+5;ms<=P.z1;ms+=5) { const th=thOf(ms),p=ptOf(th),down=Math.sin(th)>0;
@@ -4292,7 +4292,7 @@ B2_TOMBO_ANIM.nara2_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [P.sit,()=>{ S('bark'); E2.apply(); setMessage('She stops. She sits. She\'s extremely proud of herself.'); }],
     [P.good,()=>{ S('chime2'); word('GOOD GIRL.',(sT.x+sitX)/2,Math.max(80,sb-TH-34),PINK,3,.9); }],
     [P.end,'end',()=>{ for(const o of o3) { o.f.spin=0; o.f.oy=0; o.f.ox=0; } return (E2.result||'')+' Tom says that was a no. Nara heard a yes.'; }]];
-  toms.slice(0,NO.length).forEach((p,i)=>steps.push([p.t,()=>{ word(NO[i],tx,i%2?Math.max(80,sb-TH-40):Math.max(96,sb-TH-24),CREAM,3,.55); }]));
+  toms.slice(0,NO.length).forEach((p,i)=>steps.push([p.t,()=>{ word(NO[i],tx+(i%2?-40:40),Math.max(56,sb-TH-24-i*20),CREAM,3,.55); }]));
   hits.forEach(h=>steps.push([h.t,()=>{ S('bonk'); S('whoosh'); ST.jolt(h.o.f,.5); scene('dust',.5,{x:h.o.q.x,y:h.o.q.base,n:6,sp:30,up:10});
     if(first.includes(h)) { battle.shakeEnemy=.5; landHit(split100(first.indexOf(h),first.length)); } }]));
   steps.push(['hf',first.length?first[0].t:P.z0+300]);
@@ -5286,8 +5286,8 @@ B2_TOMBO_ANIM.ff2_dc=E2=>{ B2.aim=null;
 B2_TOMBO_ANIM.ff3_dc=E2=>{ B2.aim=null;
   const mem=E2.mem,by0=id=>mem.find(p=>p.id===id),dd=by0('deedee'),bp=by0('boppy'),tom=by0('tom');
   const list=b2LiveFoes(),GR=ST.group(list),o3=order3(list),H=dcHeights(E2),T=ST.unit(tom);
-  const by=cl(Math.max(GR.base-8,T.base),236,292),x0=cl(GR.x1+200,GR.x1+170,500),dist=80;
-  const off={deedee:-34,tom:0,boppy:36},spot={};
+  const by=cl(Math.max(GR.base-8,T.base),236,292),x0=Math.min(cl(GR.x1+200,GR.x1+170,500),430),dist=30;   // painted walkers are about 95 px wide: 86 apart, and they stay on screen
+  const off={deedee:-86,tom:0,boppy:86},spot={};
   for(const id in off) spot[id]={x:x0+off[id],b:by};
   const P={walk:800,go:1000,stop:4300,bline:1900,dline:3000,burst:4500,apply:5300,home:5800,end:6500};
   const wk=ms=>ez(seg(ms,P.go,P.stop));
@@ -5931,7 +5931,7 @@ const loaf=(x,y,sc=1,bite=false)=>{ gfx.save(); gfx.translate(x,y); gfx.scale(sc
 B2_TOMBO_ANIM.deedee3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),D=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list),tgts=list.slice(0,4),n=Math.max(1,tgts.length),share=shares(n);
   const tsp=BATTLE_SPRITES.tom,dsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,DH=dsp.idle.length*dsp.scale;
-  const by=Math.min(312,Math.max(T.base,D.base)),cx=cl(GR.x1+130,210,328),tx=cx-40,dx=cx+50;
+  const by=Math.min(312,Math.max(T.base,D.base)),cx=cl(GR.x1+130,210,328),tx=cx-72,dx=cx+78,dL=Math.max(GR.x0-30,60);   // the broom run stops on screen
   const P={run:600,cloth:1000,wave:1500,bite:2500,salt:3100,spot:3900,broom:4400,sweep0:5000,sweep1:6000,back:6600,apply:7000,end:8800};
   const sT={x:T.x,b:T.base,f:tsp.idle},sD={x:D.x,b:D.base,f:dsp.idle};
   pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp;
@@ -5941,9 +5941,9 @@ B2_TOMBO_ANIM.deedee3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp;
     if(ms<P.run) { const k=ez(ms/P.run); return stand(sD,lerp(c.origX,dx,k),lerp(c.origBase,by,k),runFr(sp,c.t,-1)); }
     if(ms<P.sweep0) { const n=ms<P.bite?1:ms<P.salt?3:ms<P.spot?5:ms<P.broom?4:6; return stand(sD,dx,by,tbf('deedee3','p',n,sp)||sp.idle); }
-    if(ms<P.sweep1) { const q=seg(ms,P.sweep0,P.sweep1); return stand(sD,lerp(dx,GR.x0-30,q),by+Math.sin(c.t*18)*1.5,runFr(sp,c.t,-1)); }
-    if(ms<P.back) return stand(sD,GR.x0-30,by,tbf('deedee3','p',1,sp)||F(sp,'hip'));
-    if(ms<P.end-700) { const k=ez(seg(ms,P.back,P.back+600)); return stand(sD,lerp(GR.x0-30,dx,k),by,k<1?runFr(sp,c.t,1):(ms>P.apply?(tbf('deedee3','p',2,sp)||sp.celeb):(tbf('deedee3','p',6,sp)||F(sp,'spread')))); }
+    if(ms<P.sweep1) { const q=seg(ms,P.sweep0,P.sweep1); return stand(sD,lerp(dx,dL,q),by+Math.sin(c.t*18)*1.5,runFr(sp,c.t,-1)); }
+    if(ms<P.back) return stand(sD,dL,by,tbf('deedee3','p',1,sp)||F(sp,'hip'));
+    if(ms<P.end-700) { const k=ez(seg(ms,P.back,P.back+600)); return stand(sD,lerp(dL,dx,k),by,k<1?runFr(sp,c.t,1):(ms>P.apply?(tbf('deedee3','p',2,sp)||sp.celeb):(tbf('deedee3','p',6,sp)||F(sp,'spread')))); }
     const k=ez(seg(ms,P.end-700,P.end)); return stand(sD,lerp(dx,c.origX,k),lerp(by,c.origBase,k),k<1?runFr(sp,c.t,1):sp.idle); });
   scene('tu_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const g=ez(seg(ms,P.run,P.run+300)); if(g<=0) return; // counter with crumbs
     PROPART.draw('tombo/white_kitchen_counter',cx,by-44*g,{w:132*Math.max(g,.05)}); if(ms<P.sweep1) for(let k=0;k<8;k++) R(cx-50+k*13,by-30+(k%3)*2,3,2,'#c8884a'); }});
@@ -5962,11 +5962,11 @@ B2_TOMBO_ANIM.deedee3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [P.broom,()=>{ S('whoosh'); word('WHO CLEANED THIS?',dx,Math.max(40,by-DH-70),PINK,3,.9); setMessage('A broom appears. Nobody is safe.'); }],
     [P.sweep0,()=>{ S('run'); S('whoosh'); }],
     ['hf',P.sweep0+500]];
-  tgts.forEach((f,k)=>{ const q=ST.foe(f),at=P.sweep0+Math.round(seg(q.x+q.w*.3,dx,GR.x0-30)*(P.sweep1-P.sweep0));
+  tgts.forEach((f,k)=>{ const q=ST.foe(f),at=P.sweep0+Math.round(seg(q.x+q.w*.3,dx,dL)*(P.sweep1-P.sweep0));
     steps.push([at,()=>{ S('bonk'); S('whoosh'); ST.jolt(f,.5); battle.shakeEnemy=.4; scene('tu_dust',.6,{x:q.x,y:q.base,r:40,n:10}); word('SWEPT!',q.x+10,Math.max(56,q.top-70),GOLD,4,.6); landHit(share[k]); }]); });
   steps.push(
     [P.back,()=>{ setMessage('Swept clean. Monsters, crumbs, everything.'); }],
-    [P.apply,()=>{ E2.apply(); for(const p of b2LiveParty()) glowOn(p); S('heal'); S('fanfare'); word('SUNDAY DINNER',cx,Math.max(50,by-DH-80),GOLD,4,1.3); }],
+    [P.apply,()=>{ E2.apply(); for(const p of b2LiveParty()) glowOn(p); S('heal'); S('fanfare'); word('SUNDAY DINNER',cx,30,GOLD,4,1.3); }],
     [P.end,'end',()=>(E2.result||'')+' Three hot dishes on the tray. The bread still needed salt.']);
   ST.play(E2,steps); };
 
