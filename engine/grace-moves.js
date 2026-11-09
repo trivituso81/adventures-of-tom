@@ -574,7 +574,7 @@ SC.gv_big=(s,u)=>{ let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-
 SC.gv_burst=(s,u)=>{ const n=s.n||10; for(let k=0;k<n;k++) { const a=k/n*Math.PI*2+(s.seed||0),d=ez(u)*(s.r||48); gfx.globalAlpha=fade(u,.5); star(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.75,(s.sz||7)*(1-u*.5),k%2?(s.c2||GOLD):(s.c||PINK)); } };
 SC.gv_confetti=(s,u)=>{ const n=s.n||60; for(let k=0;k<n;k++) { const sp=.6+((k*37)%10)/12,x=(k*97+s.seed*13)%576+Math.sin(s.t*3+k)*14,y=-10+((s.t*sp*180)+(k*53)%120)%(340);
   gfx.globalAlpha=fin(u,.05)*fade(u,.85); gfx.save(); gfx.translate(x,y); gfx.rotate(s.t*6+k); R(-3,-2,6,4,CONF[k%CONF.length]); gfx.restore(); } };
-SC.gv_glitter=(s,u)=>{ for(let k=0;k<26;k++) { const a=k*2.4,d=ez(u)*(s.r||70)*(.4+(k%5)/5); gfx.globalAlpha=fade(u,.4); star(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.7,2+(k%3)*1.5,CONF[k%CONF.length]); } };
+SC.gv_glitter=(s,u)=>{ if(s.art) { gfx.globalAlpha=fade(u,.6); if(PROPART.draw('grace/'+s.art,s.x,s.y,{h:s.h||84,sx:1+ez(u)*.25,sy:1+ez(u)*.25})) { gfx.globalAlpha=1; return; } } for(let k=0;k<26;k++) { const a=k*2.4,d=ez(u)*(s.r||70)*(.4+(k%5)/5); gfx.globalAlpha=fade(u,.4); star(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.7,2+(k%3)*1.5,CONF[k%CONF.length]); } };
 SC.gv_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-30); x=p.x; y=p.y; } label(s.txt,x,y-ez(u/.3)*8,s.c||CREAM,s.sc||2); };
 
 // ---------- Cartwheel (basic) ----------
@@ -621,7 +621,7 @@ SC.gv_squish=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,y,sc=.75,sq=0;
     if(ms>P.sq&&ms<P.sq+1100) sq=Math.pow(Math.abs(Math.sin(cl((ms-P.sq)/1100)*Math.PI*3)),1.2)*.95; }
   if(ms>P.back) { const q=ez((ms-P.back)/250),h=hand(); x=lerp(P.x,h.x-10,q); y=lerp(P.y,h.y-10,q); sc=lerp(1.35,.75,q); sq=0; }
   gfx.globalAlpha=1; dumpling(x,y,sq,sc);
-  if(sq>.5) { gfx.globalAlpha=.8; for(let k=0;k<6;k++) { const a=k*Math.PI/3; Ln(x+Math.cos(a)*44,y+Math.sin(a)*28,x+Math.cos(a)*58,y+Math.sin(a)*38,3,CREAM); } } };
+  if(sq>.5) { gfx.globalAlpha=.8; if(!PROPART.draw('grace/sq_squish',x,y,{h:88})) { for(let k=0;k<6;k++) { const a=k*Math.PI/3; Ln(x+Math.cos(a)*44,y+Math.sin(a)*28,x+Math.cos(a)*58,y+Math.sin(a)*38,3,CREAM); } } } };
 G.squishy_squeeze=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,30),self=t===m,goL=sp.x<ST.unit(m).x;   // goL: the ally's spot is left of her home; face the way she walks
   const K=self?[{t:0,x:'home',y:'home',f:'ab_squish_2'},{t:500,f:'ab_squish_5'},{t:1100,f:'ab_squish_3',dy:(u,tt)=>-Math.abs(Math.sin(tt*9))*3},{t:2600,f:'ab_squish_6',hop:10},{t:3000,f:'idle'},{t:3300,x:'home',y:'home',f:'idle'}]
     :[{t:0,x:'home',y:'home',f:goL?'ab_squish_1':'ab_squish_1R',hop:4,hn:6},{t:1000,x:sp.x,y:sp.y,f:'ab_squish_2'},{t:1200,f:'ab_squish_8',dx:u=>-ez(u)*6},{t:2600,f:'ab_squish_6',hop:10},{t:2900,f:goL?'ab_squish_1R':'ab_squish_1',hop:3,hn:5},{t:3900,x:'home',y:'home',f:'idle'}];
@@ -632,7 +632,7 @@ G.squishy_squeeze=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotF
     [plan.sq,()=>{ for(let k=0;k<3;k++) b7Later(()=>sfx.squeak(),k*360); }],
     ['hf',plan.sq+180],
     [plan.sq+180,()=>{ E2.apply(); sfx.ding(); sfx.heal(); scene('gr_glow',1,{x:H.x,y:H.mid,c:GOLD}); scene('gv_big',1.1,{x:H.x,y:H.top-76,txt:'SQUISH!',c:GOLD,sc:4}); hopOf(t!==m?t:null); }],
-    [plan.sq+700,()=>{ scene('gv_glitter',.9,{x:plan.x,y:plan.y,r:60}); }],
+    [plan.sq+700,()=>{ scene('gv_glitter',.9,{x:plan.x,y:plan.y,r:60,art:'sq_glitter',h:84}); }],
     [end,'end',kindLine(t,'The squishy has been squeezed. Everyone feels better.')]]); };
 
 // ---------- Glitter Nails (A2) ----------
@@ -664,10 +664,10 @@ G.glitter_nails=E2=>{ const {m,fx}=E2,who=(E2.targets.length?E2.targets:b2LivePa
 // who answers into the brush and feels much better.
 SC.gv_rec=(s,u)=>{ const B=s.B,ms=s.t*1000,g=ez(ms/250); gfx.globalAlpha=fade(u,.9); const x0=lerp((B.x0+B.x1)/2,B.x0,g),x1=lerp((B.x0+B.x1)/2,B.x1,g);
   gfx.strokeStyle=OUT; gfx.lineWidth=6; gfx.strokeRect(x0,B.y0,x1-x0,B.y1-B.y0); gfx.strokeStyle=CREAM; gfx.lineWidth=3; gfx.setLineDash([8,6]); gfx.strokeRect(x0,B.y0,x1-x0,B.y1-B.y0); gfx.setLineDash([]);
-  if(Math.floor(ms/400)%2) E(x0+12,B.y0+12,5,5,RED); label('REC',x0+32,B.y0+8,CREAM,2);
+  if(Math.floor(ms/400)%2) { if(!PROPART.draw('grace/wb_rec',x0+30,B.y0+22,{h:30})) { E(x0+12,B.y0+12,5,5,RED); label('REC',x0+32,B.y0+8,CREAM,2); } }
   for(const [cx,cy,sx,sy] of [[x0,B.y0,1,1],[x1,B.y0,-1,1],[x0,B.y1,1,-1],[x1,B.y1,-1,-1]]) { Ln(cx,cy,cx+sx*14,cy,4,GOLD); Ln(cx,cy,cx,cy+sy*14,4,GOLD); } };
-SC.gv_bubble=(s,u)=>{ const g=ez(u/.15); gfx.globalAlpha=fade(u,.8); gfx.save(); gfx.translate(s.x,s.y); gfx.scale(g,g); RO(-30,-16,60,26,CREAM);
-  gfx.beginPath(); gfx.moveTo(-6,10); gfx.lineTo(-14,20); gfx.lineTo(4,10); gfx.closePath(); gfx.fillStyle=CREAM; gfx.fill(); if(s.heart) heart(0,-4,8,'#ff6b9a'); else label(s.txt,0,-9,'#5a3a8a',2); gfx.restore(); };
+SC.gv_bubble=(s,u)=>{ const g=ez(u/.15); gfx.globalAlpha=fade(u,.8); gfx.save(); gfx.translate(s.x,s.y); gfx.scale(g,g); if(!PROPART.draw('grace/wb_bubble',0,2,{w:66})) { RO(-30,-16,60,26,CREAM);
+  gfx.beginPath(); gfx.moveTo(-6,10); gfx.lineTo(-14,20); gfx.lineTo(4,10); gfx.closePath(); gfx.fillStyle=CREAM; gfx.fill(); } if(s.heart) heart(0,-4,8,'#ff6b9a'); else label(s.txt,0,-9,'#5a3a8a',2); gfx.restore(); };
 G.welcome_back=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,30),self=t===m,me=ST.unit(m);
   const K=self?[{t:0,x:'home',y:'home',f:'ab_back_3'},{t:500,f:'ab_back_1',hop:10},{t:900,f:'ab_back_2'},{t:1700,f:'ab_back_8'},{t:2300,f:'ab_back_5'},{t:2900,f:'ab_back_4',hop:10},{t:3300,f:'idle'},{t:3600,x:'home',y:'home',f:'idle'}]
     :[{t:0,x:'home',y:'home',f:'run'},{t:800,x:sp.x,y:sp.y,f:'ab_back_1',hop:10},{t:1100,f:'ab_back_2'},{t:1700,f:'ab_back_8',dx:u=>-ez(u)*6},{t:2100,f:'ab_back_5'},{t:2700,f:'ab_back_4',hop:12},{t:3100,f:'runR'},{t:3800,x:'home',y:'home',f:'idle'}];
@@ -709,7 +709,7 @@ SC.gv_rain=(s,u)=>{ const ms=s.t*1000,L=s.L; for(let k=0;k<s.n;k++) { const f=L[
     else { const b=q-1,dir=k%2?1:-1; x=hx+dir*b*90; y=hy-Math.sin(Math.min(1,b)*Math.PI)*46+Math.max(0,b-1)*200; rot=b*6*dir; if(b>2) continue; }
     gfx.globalAlpha=1; gfx.save(); gfx.translate(x,y); gfx.rotate(rot*.3); const C=[null,'#ffc1dc','#c9a6f0','#9fe8ff','#9be39a'][k%5];
     if(!C) dumpling(0,0,q>.95&&q<1.15?.7:0,.42); else { const sq=q>.95&&q<1.15?.6:0; EO(0,0,13*(1+sq*.4),11*(1-sq*.4),C); E(-4,-2,1.6,1.6,OUT); E(4,-2,1.6,1.6,OUT); E(0,3,2,1.4,'#ff6b9a'); } gfx.restore(); } };
-SC.gv_dizzy=(s,u)=>{ for(const f of s.L) { const F=ST.unit(f); for(let k=0;k<3;k++) { const a=s.t*6+k*2.1; gfx.globalAlpha=fade(u,.8); star(F.x+Math.cos(a)*24,F.top-6+Math.sin(a)*6,4,k%2?GOLD:PINK2); } } };
+SC.gv_dizzy=(s,u)=>{ for(const f of s.L) { const F=ST.unit(f); for(let k=0;k<3;k++) { const a=s.t*6+k*2.1; gfx.globalAlpha=fade(u,.8); const px=F.x+Math.cos(a)*24,py=F.top-6+Math.sin(a)*6; if(!PROPART.draw('grace/dd_stars',px,py,{h:16,rot:a})) star(px,py,4,k%2?GOLD:PINK2); } } };
 G.dumpling_drop=E2=>{ const {m,fx}=E2,list=foes(E2),Gp=ST.group(list),p=rowSpot(Gp,52);
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'ab_drop_1',hop:5,hn:6},{t:700,x:p.x,y:p.y,f:'ab_drop_3',hop:12},{t:1000,f:'ab_drop_3',dy:(u,tt)=>-Math.abs(Math.sin(tt*10))*6},{t:1150,f:'ab_drop_2'},{t:2300,f:'ab_drop_4'},{t:2650,f:'ab_drop_5',hop:12},{t:3000,f:'ab_drop_6'},{t:3300,f:'ab_drop_1R',hop:5,hn:4},{t:4000,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
@@ -969,7 +969,8 @@ SC.gv_rain=(s,u)=>{ const ms=s.t*1000,L=s.L,n=6; for(let k=0;k<n;k++) { const f=
     else { const b=q-1,dir=k%2?1:-1; if(b<.18) { const z=Math.sin(b/.18*Math.PI); sqx=1+z*.45; sqy=1-z*.4; x=hx; y=hy+z*6; }
       else { const c=b-.18; x=hx+dir*c*110; y=hy-Math.sin(Math.min(1,c*1.1)*Math.PI)*70+Math.max(0,c-.9)*260; rot=c*5*dir; if(c>1.9) continue; } }
     gfx.globalAlpha=1; gfx.save(); gfx.translate(x,y); gfx.rotate(rot*.3); gfx.scale(sqx,sqy); const C=[null,'#ffc1dc','#c9a6f0','#9fe8ff','#9be39a','#ffd88a'][k%6];
-    if(!C) dumpling(0,0,0,.95); else if(PROPART.draw('grace/plush_squishies',0,0,{h:52})) { /* painted squishy trio */ } else { EO(0,0,26,22,C); E(-9,-6,3,3,OUT); E(9,-6,3,3,OUT); E(-14,2,4,2.5,'#ff9ac0'); E(14,2,4,2.5,'#ff9ac0'); gfx.beginPath(); gfx.arc(0,2,5,.2,Math.PI-.2); gfx.strokeStyle=OUT; gfx.lineWidth=2.5; gfx.stroke(); E(-8,-12,5,3,'#ffffffaa'); }
+    const DD=[null,'dd_strawberry','dd_cat','dd_panda','dd_peach','dd_toast'][k%6];   // one painted squishy per colour (bake_grace_fx2.py)
+    if(!C) dumpling(0,0,0,.95); else if(DD&&PROPART.draw('grace/'+DD,0,0,{h:46})) { /* painted squishy */ } else { EO(0,0,26,22,C); E(-9,-6,3,3,OUT); E(9,-6,3,3,OUT); E(-14,2,4,2.5,'#ff9ac0'); E(14,2,4,2.5,'#ff9ac0'); gfx.beginPath(); gfx.arc(0,2,5,.2,Math.PI-.2); gfx.strokeStyle=OUT; gfx.lineWidth=2.5; gfx.stroke(); E(-8,-12,5,3,'#ffffffaa'); }
     gfx.restore(); if(q>=1&&q<1.2) { gfx.globalAlpha=1-(q-1)/.2; bigWord('SQUISH',hx,hy-34,PINK2,2); } } };
 
 // ---------- Split Leap: a slow-motion freeze at the top ----------

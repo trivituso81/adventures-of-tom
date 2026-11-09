@@ -24,6 +24,7 @@ MIN_SPECK = 14           # smaller loose bits are noise
 # Tom's props replaced by his objects-and-effects sheets (bake_tom_fx.py, 2026-11-06): not written any more.
 REPLACED = {'sleep_mask', 'lie_flat_pod', 'airliner', 'giant_floor_controller', 'wireless_game_controller', 'question_tile', 'no_touching_sign_l', 'no_touching_sign', 'led_face_mask', 'hot_towel', 'gate_scanner', 'gate_0_door', 'false_stamp', 'duvet', 'bread_slice', 'boarding_group_5_sign', 'airline_suite_door', 'skincare_bottles', 'calligraphy_brush', 'kanji_flashcards', 'easel_chart', 'max_gadget_box', 'gadget', 'receipt_roll', 'phone_and_boarding_passes'}
 # Justin's props replaced by his objects-and-effects sheets (bake_justin_fx.py) or dropped because the painted ability frames carry them (couch, wall): not written any more.
+GRACE_REPLACED = {'plush_squishies'}   # replaced by the Dumpling Drop squishies (bake_grace_fx2.py, gracefx1)
 JUSTIN_REPLACED = {'couch', 'wall_intact', 'wire_nut_red', 'wire_nut_yellow', 'wire_nut_blue', 'wire_nut_pink', 'wire_nut_green', 'drywall_sheet', 'drywall_chunk', 'plaster_chunk', 'splintered_stud', 'dust_puff'}
 GRID = {(1484, 1060): (7, 5), (1254, 1254): (4, 4), (1774, 887): (2, 1)}
 
@@ -207,7 +208,7 @@ def main():
                 im = im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))), Image.LANCZOS)
             os.makedirs(os.path.join(OUT, c), exist_ok=True)
             p = os.path.join(OUT, c, slug + '.webp')
-            if not ((c == 'tom' and slug in REPLACED) or (c == 'justin' and slug in JUSTIN_REPLACED)): im.save(p, 'WEBP', lossless=True, quality=100, method=4)
+            if not ((c == 'tom' and slug in REPLACED) or (c == 'justin' and slug in JUSTIN_REPLACED) or (c == 'grace' and slug in GRACE_REPLACED)): im.save(p, 'WEBP', lossless=True, quality=100, method=4)
             done[(c, slug)] = im
     for (sc, ss), (dc, ds) in COPIES:
         os.makedirs(os.path.join(OUT, dc), exist_ok=True)

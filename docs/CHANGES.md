@@ -1,3 +1,13 @@
+## 2026-11-09 (gracefx1): Grace's squishy, welcome-back and dumpling-drop effect sheets cut and drawn painted
+- `tools/sprite-bake/bake_grace_fx2.py` cuts the three approved `grace-fx-*` sheets (Squishy Squeeze, Welcome Back, Dumpling Drop; one item per grid cell) into 10 pictures in `art/props/grace` (prefixes sq_, wb_, dd_): `sq_glitter`, `sq_squish`, `wb_rec`, `wb_bubble`, `dd_strawberry`, `dd_cat`, `dd_panda`, `dd_peach`, `dd_toast`, `dd_stars`.
+- Dumpling Drop: the live rain (`SC.gv_rain`, the later definition in engine/grace-moves.js) draws one painted squishy per colour in place of the painted trio. The dizzy stars are one painted star placed at the three orbit points (the sheet painted one star, not a ring of three; the orbit is the game's).
+- Purged: `grace/plush_squishies` (its picture, its preload entry, and `GRACE_REPLACED` in `tools/sprite-bake/bake_prop_sheets.py` so a rebake does not recreate it). Its entry stays in `tools/sprite-bake/src/props/props.json` (positional manifest, as with `big_key`).
+- Wiring: `gv_squish` burst (`sq_squish`), `gv_glitter` takes `art:` (used by Squishy Squeeze with `sq_glitter`), `gv_bubble` (`wb_bubble`), `gv_rec` (`wb_rec`, on the blink-on frames), `gv_rain` and `gv_dizzy`. Drawn shapes stay as the fallback until a picture loads.
+- Not installed: held objects (squishy, squeezed squishy, hairbrush, backpack, empty backpack, gold squishy already painted as grace/gold_dumpling_hero), the glow, hearts, sparkles and dust pieces (no move draws them as pictures). Word cards are not cut.
+- `engine/prop-art.js`: preload line for the 9 new pictures. Tags bumped (`gracefx1`).
+- Tests: kit_test grace for squishy_squeeze, welcome_back and dumpling_drop, FAILS: [] for all three, every new picture drawn (PAINTED_PROPS). Frames looked at (Dumpling Drop 2, Welcome Back kind 3 for the bubble). smoke (grace, rose) FAILS: [], tag_check ok, unused_voice 0 on all checks.
+- Not checked: real iPhone playback; the first play of a move can show drawn shapes until the pictures load.
+
 ## 2026-11-09 (447): The Mirrorball goes over the top, a cartoon fancy lady (`mirrorvoice3`)
 - Tom: "I want a more exaggerated over the top almost cartoonish voice of a fancy lady." Same ElevenLabs voice (Oolong's id plus the backup list), no new slot.
 - `tools/voice-library/make-index.js`: `dialog|mirrorball` stability 0 (most expressive), direction "over-the-top cartoon grande dame, hugely exaggerated posh accent, swooping theatrical pitch, campy and dramatic", `ignore_history:true`.
