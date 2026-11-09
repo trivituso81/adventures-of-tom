@@ -1,3 +1,8 @@
+## 2026-11-09 (dcobj1): Director's Cut object sheets entered in the Art Library (no game change)
+- Two new draft entries in `data/art-prompts.json`: `tombo-ff1-dc-objects` (Pottery Lesson, 7 objects) and `tombo-ff2-dc-objects` (Breakfast in Bed, 7 objects). Built from `tools/art-library/tombo-split/dc-ff.js` by `finishEntries(row, true)`; appended as text so every other entry is byte for byte unchanged. `make-prompts.js` was not run. ff3 DC has no object sheet (its beat has no props).
+- `node tools/art-library/validate.js` OK (644 entries). Nothing generated or installed. `tools/art-library/review_test.py` fails the same way on main without this change (no entry to pick), not caused by it.
+- Next: Tom presses Generate on `tombo-ff1-dc-objects` (pilot); ff2 waits for the verdict.
+
 ## 2026-11-09 (crumbs2): Grump Hollow crumb trail placed on the map (tag crumbs2)
 - Art Library sheet `prop-trail-hollow` (approved, `art/raw/props/prop-trail-hollow-v1.png`) cut by `tools/sprite-bake/bake_hollow_crumbs.py` into nine pictures, `art/props/hollow/crumb_1..9.webp`. Cells 10 to 16 are empty and not written.
 - Drawn as plate overlays in `engine/plate.js` (`HOLLOW_CRUMBS`, `drawHollowCrumbs`), at half the cut size, under the party. Preloaded in `engine/prop-art.js`.

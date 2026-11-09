@@ -15326,6 +15326,34 @@
    ],
    "prompt": "IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image, nothing else.\n\nThe attached picture is the style key: paint in exactly its painting style.\n\nPaint one picture for the flight scene of the family adventure game \"The Adventures of Tom\". Shape: one landscape picture, 3:2, 1536 x 1024 px. Every coordinate scales with the size.\n\nA painted map of the contiguous United States as an old storybook map, soft parchment-green land with gentle shaded states and tiny trees and mountains, surrounded by plain deep blue ocean (#0152b2) with small lighter wave marks. No state names, no labels, no pins, no text, no compass, no border.\n\nSTYLE\nHand-painted storybook style grown up into rich painted detail: dense jewel-toned painted texture, fine brushwork, deep saturated colors, warm golden light from the upper left, soft warm rim light, no thick outlines. NOT pixel art, NOT retro game art. No people, no text, no letters, no logo, no watermark, no border.",
    "group": "Flight art"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tombo-ff1-dc-objects",
+   "tab": "Characters",
+   "group": "Director's Cut, Pottery Lesson",
+   "title": "Director's Cut: Pottery Lesson (objects)",
+   "ar": "4:3",
+   "refs": [
+    "docs/reference/style_key_v1.png"
+   ],
+   "prompt": "Using the attached picture only as a guide for painting style, color and light, paint one object sheet on a flat solid magenta background (#FF00FF) filling the whole image. Do not draw any person or character from the attached picture. The sheet is a loose grid of four columns and three rows of separate objects, numbered in reading order across each row, and any cell the list does not describe stays empty magenta. Every object stands alone with wide empty magenta space on all sides, nothing touches or overlaps anything else, and there are no labels, numbers, text, lines or borders. No people, no hands, no bodies, no animals.\n\nEvery object is a hand-painted, realistic object with smooth soft shading and warm golden light from above and to one side, in the same brushwork as the attached picture. Three-quarter view from slightly above. Each is a crisp clean silhouette with its full base visible and sitting flat, with no floor, no shadow and no ground. Each object is large in its cell. Not pixel art, not 16-bit.\n\nThe objects, in reading order:\n1. A lump of wet clay: a soft rounded lump of grey brown wet clay, slightly shiny, with a few fingerprint dents.\n2. A spinning pottery wheel: a low round flat metal wheel head on a short sturdy base with a small foot pedal, empty, shown from a three quarter view.\n3. A low round stool: a small round wooden stool with three short splayed legs, natural light wood.\n4. A finished clay vase: a smooth rounded vase with a narrow neck, glazed in a soft teal blue with a creamy rim.\n5. A collapsed clay pot: a slumped lopsided clay pot with sagging sides, grey brown and wet looking.\n6. A pink squishy: a small round soft squishy toy in pale pink with a happy face drawn on it, slightly flattened.\n7. A lump of pink clay: a soft rounded lump of pale pink clay with a smooth surface.\n\nDeliver the image itself."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tombo-ff2-dc-objects",
+   "tab": "Characters",
+   "group": "Director's Cut, Breakfast in Bed",
+   "title": "Director's Cut: Breakfast in Bed (objects)",
+   "ar": "4:3",
+   "refs": [
+    "docs/reference/style_key_v1.png"
+   ],
+   "prompt": "Using the attached picture only as a guide for painting style, color and light, paint one object sheet on a flat solid magenta background (#FF00FF) filling the whole image. Do not draw any person or character from the attached picture. The sheet is a loose grid of four columns and three rows of separate objects, numbered in reading order across each row, and any cell the list does not describe stays empty magenta. Every object stands alone with wide empty magenta space on all sides, nothing touches or overlaps anything else, and there are no labels, numbers, text, lines or borders. No people, no hands, no bodies, no animals.\n\nEvery object is a hand-painted, realistic object with smooth soft shading and warm golden light from above and to one side, in the same brushwork as the attached picture. Three-quarter view from slightly above. Each is a crisp clean silhouette with its full base visible and sitting flat, with no floor, no shadow and no ground. Each object is large in its cell. Not pixel art, not 16-bit.\n\nThe objects, in reading order:\n1. A tall stack of pancakes: a tall wobbly stack of golden brown round pancakes on a plain white round plate, eight pancakes high, a small pat of butter on top.\n2. A big bottle of maple syrup: a large rounded amber glass bottle with a small cap and a plain cream label with no writing, filled with deep amber syrup.\n3. An empty syrup bottle: the same rounded amber glass bottle, empty, upside down, a few sticky drips along its neck.\n4. A breakfast tray: a rectangular pale wooden tray with two small handles and a low rim, empty.\n5. A frying pan: a round black nonstick frying pan with a long dark handle, empty, shown from a three quarter view.\n6. A spatula: a slim flat metal spatula with a wooden handle.\n7. A fork: a shiny silver table fork.\n\nDeliver the image itself."
   }
  ]
 }
