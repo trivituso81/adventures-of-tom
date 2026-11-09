@@ -4,6 +4,11 @@
 - No route can be walled off: `psAllowed` shortens the space where closing it would cut the map apart (walls and props only, cached per spot). Only a moment's block remains when two roaming people stand side by side in a narrow room (casa: Sofi beside Mrs. Alvarez), the same as without the rule.
 - Tested: every map, every person, reachability with and without the rule; talking from the new spot in the lofts (3 tiles), jpark and casa (2 tiles); screenshots looked at in portrait and landscape.
 
+## 2026-11-09 (propsfix3): ch08 pulled lever entry reopened with a steeper tilt (Art Library json only, no tag)
+- Fact: approved `prop-find-ch08-fix-v1.png` cell 6 leans only about 25 degrees from upright; cell 5 is straight up. Poses differ but "pulled" does not read at game size.
+- Change: `prop-find-ch08-fix` back to draft; cell 6 wording now asks for about 70 degrees from upright, knob low by the front right edge of the base. Mirrored in tools/art-library/dungeonfind-prompts.js (json edited as text, make-prompts.js not run). This is the first miss on this lever, so one wording change; a second miss means the lever-down part alone in a cell, composed in code (as the ch04 parts entries).
+- Tests: validate.js OK (698 entries).
+
 ## 2026-11-09 (emopause1): full-body mood poses paused for the 8 characters whose emotion sheets are being redone (tag emopause1)
 - Tom (12:22): "the emotional frames are still larger than the standard pose / hero pose / walking pose."
 - Fact (measured in game rows against each overworld `down_stand`): the mood frames are already as tall or shorter (Tom 36 to 39 rows vs 42), but the painted emotion sheets have a different build: head about a third of the height, broad torso, short legs. Tom's sad frame is as wide as his stand at 94 percent of the height; angry and surprised are 40 to 60 percent wider. A resize matches only one measure: height (emo15, still reads bigger) or bulk (then the figure is about a quarter shorter). Second miss on the same thing, so no third resize (stop-loss).

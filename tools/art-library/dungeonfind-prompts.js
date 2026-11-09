@@ -208,7 +208,7 @@ entries.push(editSheet('ch07-fix', 'Chapter 7 The Stacks, reading room lock', 'a
   'Every other cell stays exactly as it is.'
 ]));
 entries.push(editSheet('ch08-fix', 'Chapter 8 Car Barn, pulled lever', 'art/raw/props/prop-find-ch08-v1.png', 'the Car Barn (pilot lights, a motor, a lever, a lunch pail)', [
-  'Cell 6 (TURNTABLE LEVER, PULLED): the lever is pulled all the way over. Keep the same base plate, bolts and red round knob as cell 5, but tip the lever forward so it leans down toward the viewer and to the right at a steep angle, almost flat, with the red knob close to the front edge of the base plate. It must look completely different from cell 5, where the lever stands straight up. Cell 5 stays exactly as it is, standing straight up.',
+  'Cell 6 (TURNTABLE LEVER, PULLED): the lever is pulled all the way over and lies nearly flat. Keep the same base plate, bolts and red round knob as cell 5, but tip the lever bar about 70 degrees away from upright, so it points toward the lower right and the red knob hangs low, just above the front right edge of the base plate, lower than the top of the pivot bracket. The bar must lean much further than a slight tilt: the knob moves a long way sideways and down from where it is in cell 5. It must look completely different from cell 5, where the lever stands straight up. Cell 5 stays exactly as it is, standing straight up.',
   'Every other cell stays exactly as it is.'
 ]));
 // PARTS sheets (Tom's stop-loss, 2026-11-09 late): the generator copies one pose or one clock state to every cell, so each state is its own big part

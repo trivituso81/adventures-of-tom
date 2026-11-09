@@ -13755,7 +13755,7 @@
    "group": "Dungeon finds"
   },
   {
-   "status": "approved",
+   "status": "draft",
    "versions": [
     {
      "n": 0,
@@ -13773,7 +13773,7 @@
    "refs": [
     "art/raw/props/prop-find-ch08-v1.png"
    ],
-   "prompt": "EDIT THE ATTACHED IMAGE. Return exactly one image, nothing else.\n\nThe attached picture is an approved prop sheet for the Car Barn (pilot lights, a motor, a lever, a lunch pail) in \"The Adventures of Tom\", a family role-playing game: a 4 by 4 grid of square cells, one painted object per cell, a plain solid crimson background, and a small white number in the top-left corner of every filled cell. Keep the painting style, lighting, colors, camera angle, grid, cell positions, background color and white numbers exactly as they are. Every object not named below stays exactly as it is, pixel for pixel where possible. Output the same size and layout. Make only the changes listed here.\n\nCHANGES\nA. Cell 6 (TURNTABLE LEVER, PULLED): the lever is pulled all the way over. Keep the same base plate, bolts and red round knob as cell 5, but tip the lever forward so it leans down toward the viewer and to the right at a steep angle, almost flat, with the red knob close to the front edge of the base plate. It must look completely different from cell 5, where the lever stands straight up. Cell 5 stays exactly as it is, standing straight up.\nB. Every other cell stays exactly as it is.\n\nRULES\n- Do not add, remove, move or resize any object. Do not touch the empty cells.\n- The changed part must be big and obvious at a glance, never subtle.\n- Painted lettering, if any, stays exactly as it is.",
+   "prompt": "EDIT THE ATTACHED IMAGE. Return exactly one image, nothing else.\n\nThe attached picture is an approved prop sheet for the Car Barn (pilot lights, a motor, a lever, a lunch pail) in \"The Adventures of Tom\", a family role-playing game: a 4 by 4 grid of square cells, one painted object per cell, a plain solid crimson background, and a small white number in the top-left corner of every filled cell. Keep the painting style, lighting, colors, camera angle, grid, cell positions, background color and white numbers exactly as they are. Every object not named below stays exactly as it is, pixel for pixel where possible. Output the same size and layout. Make only the changes listed here.\n\nCHANGES\nA. Cell 6 (TURNTABLE LEVER, PULLED): the lever is pulled all the way over and lies nearly flat. Keep the same base plate, bolts and red round knob as cell 5, but tip the lever bar about 70 degrees away from upright, so it points toward the lower right and the red knob hangs low, just above the front right edge of the base plate, lower than the top of the pivot bracket. The bar must lean much further than a slight tilt: the knob moves a long way sideways and down from where it is in cell 5. It must look completely different from cell 5, where the lever stands straight up. Cell 5 stays exactly as it is, standing straight up.\nB. Every other cell stays exactly as it is.\n\nRULES\n- Do not add, remove, move or resize any object. Do not touch the empty cells.\n- The changed part must be big and obvious at a glance, never subtle.\n- Painted lettering, if any, stays exactly as it is.",
    "group": "Dungeon finds"
   },
   {
