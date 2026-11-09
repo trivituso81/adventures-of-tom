@@ -7538,8 +7538,16 @@
    "group": "Test card"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/npcs/npc-photo-pip-v1.png",
+     "date": "2026-11-09",
+     "from": "v2",
+     "at": 1794235803792
+    }
+   ],
    "rejects": [],
    "id": "npc-photo-pip",
    "tab": "NPCs",
