@@ -447,7 +447,7 @@ function targetPicker(id) {
 
 // LOAD: loading asks once before acting. (Saving lives in the HUD save popup below.)
 function renderSaveTab(body) {
-  $('menu-foot').textContent=(typeof cloudAccountLine==='function'?cloudAccountLine():'Saves live in this browser on this device.')+' Save with the disk button on the map. Autosave happens at every door and after each battle.';
+  $('menu-foot').textContent=saveNoteLine()+' Autosave happens at every door, after each battle and when you leave the app.';
   const list=el('div','item-list single');
   for(const slot of SAVE_SLOTS) {
     const sv=readSave(slot);
@@ -465,7 +465,10 @@ function renderSaveTab(body) {
     list.appendChild(row);
   }
   const hint=el('div','menu-empty small','Loading replaces where you are now. Anything since your last save is lost.');
-  body.appendChild(list); body.appendChild(hint);
+  const bk=el('div','mquit-btns');
+  bk.appendChild(btn('save-btn','backup','BACK UP',()=>{ doBackup().then(()=>renderMenu()); }));
+  bk.appendChild(btn('save-btn','restore','RESTORE',()=>{ pickRestore(msg=>{ showToast(msg,4); renderMenu(); }); }));
+  body.appendChild(list); body.appendChild(hint); body.appendChild(bk);
 }
 
 // SAVE POPUP: opened from the HUD save button. Three slots; overwriting asks once. Closes after saving.
@@ -508,9 +511,10 @@ function renderSavePop() {
     list.appendChild(row);
   }
   box.appendChild(list);
-  if(typeof cloudAccountLine==='function') { const acct=el('div','mquit-text macct'+(cloudOn()?' on':''),cloudAccountLine()); acct.id='msave-acct'; box.appendChild(acct); }
-  box.appendChild(el('div','mquit-text','Autosave also happens at every door and after each battle. Load from the menu.'));
-  const row=el('div','mquit-btns one');
+  const acct=el('div','mquit-text macct',saveNoteLine()); acct.id='msave-acct'; box.appendChild(acct);
+  box.appendChild(el('div','mquit-text','Autosave also happens at every door, after each battle and when you leave the app. Load from the menu.'));
+  const row=el('div','mquit-btns');
+  row.appendChild(btn('save-btn','psave-backup','BACK UP',()=>{ doBackup().then(()=>renderSavePop()); }));
   row.appendChild(btn('save-btn mquit-no','psave-close','CLOSE',closeMenu));
   box.appendChild(row); wrap.appendChild(box);
   $('menu').appendChild(wrap);

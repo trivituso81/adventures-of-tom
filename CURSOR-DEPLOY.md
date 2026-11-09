@@ -36,7 +36,7 @@ You are deploying a finished static web game. Do not change any game code. Your 
 
 ## Things that are expected, not bugs
 
-- `engine/cloud-save.js` syncs saves through the claude.ai artifact runtime (`window.claude`). Off claude.ai that object does not exist, so the file silently does nothing and saves live in the browser's local storage only. Do not try to fix or remove it.
+- `engine/save-backup.js` keeps the second copy of saves: BACK UP writes a file, RESTORE reads it, and the game autosaves when the app goes to the background.
 - Saves do not carry over from the claude.ai version: browser storage belongs to each website address. Tom starts fresh on the new URL (or uses the chapter select).
 - Sound starts only after the first tap. That is a browser rule.
 

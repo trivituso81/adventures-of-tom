@@ -23,7 +23,7 @@ Static site. `index.html` holds the markup, all CSS (portrait and landscape layo
 | Battle system 2 (the live one) | `data/battle2-data.js`, `data/progress.js`, `data/abilities.js`, `engine/battle2.js`, `battle2-ui.js`, `battle2-moves.js`, `battle2-kind.js`, `battle2-traits.js`, `data/rose-ride.js`, `engine/rose-ride.js`, `engine/battle2-effects.js`, `engine/progress.js`, `engine/feel.js` | See `BATTLE_SYSTEM.md`. |
 | Overworld | `engine/overworld.js`, `data/font.js`, `data/overworld-sprites.js`, `engine/tiles.js`, `data/villagers.js`, `data/recruit-rig.js`, `data/recruit-sprites.js`, `data/npc-sprites.js`, `engine/gear.js`, `data/tnb-battle.js`, `data/recruit-stances.js`, `data/nara.js` | Dialogue box, movement, camera, all the sprite data. |
 | Renderers | `engine/town-render.js`, `la-render`, `marsh-render`, `backlot-render`, `school-render`, `oak-render`, `library-render`, `barn-render`, `club-render`, `terminal-render`, `infinity-render`, then `engine/draw.js` | One renderer per area look, then the main draw and input. |
-| Story and flow | `engine/intro.js`, `travel.js`, `nara.js`, `story.js`, `bench.js`, `data/scenes.js`, `data/scenes-p2.js`, `data/scenes-ch12.js`, `engine/ch12-render.js`, `engine/splash.js`, `cloud-save.js`, `skip.js`, `chapter-select.js`, `data/dialog-cast.js`, `engine/dialog-voice.js`, `engine/main.js`, `engine/music.js`, `data/songs.js` | Title, flights between towns, the story engine, scenes, startup. |
+| Story and flow | `engine/intro.js`, `travel.js`, `nara.js`, `story.js`, `bench.js`, `data/scenes.js`, `data/scenes-p2.js`, `data/scenes-ch12.js`, `engine/ch12-render.js`, `engine/splash.js`, `save-backup.js`, `skip.js`, `chapter-select.js`, `data/dialog-cast.js`, `engine/dialog-voice.js`, `engine/main.js`, `engine/music.js`, `data/songs.js` | Title, flights between towns, the story engine, scenes, startup. |
 
 ## Content model
 
@@ -37,13 +37,12 @@ Static site. `index.html` holds the markup, all CSS (portrait and landscape layo
 ## Saves and storage
 
 - Three slots plus autosave (every door and after every battle), key prefix `aot-save-` in `localStorage`. A continue prompt appears at startup. Settings keys: `aot-speed`, `aot-hf`, `aot-diff`, `aot-autospend`, `le-sound`, `le-music`, `le-layout`.
-- `engine/cloud-save.js` also mirrors saves to the Claude artifact's private per-player store. **Outside claude.ai that store does not exist**, the file detects that and the game uses `localStorage` only. That is fine for local and GitHub Pages hosting. On a standalone host Safari does not wipe storage the way it can inside the artifact frame.
+- `engine/save-backup.js` (Tom, 2026-11-08): saves live only in the phone's browser storage, so the game asks the browser to keep it (`navigator.storage.persist`), BACK UP on the Load page and Save box writes every slot to one `.json` file (share sheet, Save to Files), RESTORE reads it back (also on the title Load page, so a wiped phone can recover) and keeps the newer copy per slot. The game autosaves when the app is hidden (not on the title, in a battle, a cutscene or a door transition). A failed autosave warns once per visit (`saveFailed` in `engine/followers.js`). The old claude.ai account sync (`cloud-save.js`) was removed.
 - Save format is versioned (`migrateSave` in `engine/story.js`). Never change the shape of saved state without a migration.
 
 ## Things hardcoded to the claude.ai artifact (leave alone unless Tom asks)
 
 - `index.html`: `#boot` is the loading screen (covers the stage until the first frame adds `js-running`; shows Try again only if a script fails or 90 s pass).
-- `engine/cloud-save.js`: the artifact `db` capability (see above).
 
 ## Hosting
 

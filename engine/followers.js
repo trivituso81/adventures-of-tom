@@ -148,14 +148,19 @@ function saveRaw(slot) {
   if(typeof SAVE_CACHE[slot]==='string') return SAVE_CACHE[slot];
   try { return localStorage.getItem(SAVE_PREFIX+slot); } catch(e) { return null; }
 }
+// A failed save always says so. An autosave that fails (storage full) warns once per visit so it never repeats at every door.
+let saveWarned=false;
+function saveFailed(quiet) {
+  if(quiet&&saveWarned) return false;
+  saveWarned=true; showToast(quiet?'Autosave isn\'t working: this phone is out of storage space. Free some space.':'Couldn\'t save here.',quiet?4.5:2.5);
+  return false;
+}
 function saveGame(slot,quiet=false) {
   let raw;
-  try { raw=JSON.stringify(saveSnapshot()); } catch(e) { if(!quiet) showToast('Couldn\'t save here.',2.5); return false; }
+  try { raw=JSON.stringify(saveSnapshot()); } catch(e) { return saveFailed(quiet); }
   SAVE_CACHE[slot]=raw;
-  let local=true; try { localStorage.setItem(SAVE_PREFIX+slot,raw); } catch(e) { local=false; }
-  const cloud=typeof cloudPut==='function'&&cloudPut(slot,raw);
-  if(!local&&!cloud) { if(!quiet) showToast('Couldn\'t save here.',2.5); return false; }
-  if(!quiet) { sfx.pickup(); showToast(slot==='auto'?'Autosaved.':'Saved to slot '+slot+'.',2); }
+  try { localStorage.setItem(SAVE_PREFIX+slot,raw); } catch(e) { return saveFailed(quiet); }
+  if(!quiet) { sfx.pickup(); showToast(slot==='auto'?'Autosaved.':'Saved to slot '+slot+'.',2); if(slot!=='auto'&&typeof backupTip==='function') backupTip(); }
   return true;
 }
 function readSave(slot) { try { const raw=saveRaw(slot); return raw?JSON.parse(raw):null; } catch(e) { return null; } }
@@ -203,21 +208,6 @@ function saveSummary(sv) {
   const d=new Date(sv.when);
   const lead=sv.party[0]||{};
   return (worlds[sv.map]?worlds[sv.map].name:'Town')+' \u00b7 Lv '+lead.level+' \u00b7 '+sv.party.length+' in party \u00b7 '+(sv.coins!=null?sv.coins+' coins \u00b7 ':'')+d.toLocaleDateString()+' '+d.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
-}
-function renderSaves(body) {
-  $('menu-foot').textContent=(typeof cloudOn==='function'&&cloudOn()?'Saves are kept with your Claude account, so closing Safari keeps them.':'Saves live in this browser on this device.')+' Autosave happens at every door and after each battle.';
-  const list=document.createElement('div'); list.className='item-list';
-  for(const slot of SAVE_SLOTS) {
-    const sv=readSave(slot);
-    const row=document.createElement('div'); row.className='save-row';
-    row.innerHTML='<div class="item-icon">'+(slot==='auto'?'\u23F1':'\u{1F4BE}')+'</div><div class="save-copy"><span class="save-name"></span><span class="save-meta"></span></div>';
-    row.querySelector('.save-name').textContent=slot==='auto'?'Autosave':'Slot '+slot;
-    row.querySelector('.save-meta').textContent=saveSummary(sv);
-    if(slot!=='auto') { const b=document.createElement('button'); b.type='button'; b.className='save-btn'; b.textContent='SAVE'; b.addEventListener('click',()=>{ saveGame(slot); renderMenu(); }); row.appendChild(b); }
-    const l=document.createElement('button'); l.type='button'; l.className='save-btn'; l.textContent='LOAD'; l.disabled=!sv; l.addEventListener('click',()=>{ closeMenu(); loadGame(slot); }); row.appendChild(l);
-    list.appendChild(row);
-  }
-  body.appendChild(list);
 }
 function offerRecruit(m,npc) {
   const t=RECRUIT_TALK[m.id];

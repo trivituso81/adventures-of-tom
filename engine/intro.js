@@ -59,13 +59,20 @@ function confirmNew() {
 function loadMenu() {
   const slots=SAVE_SLOTS.filter(s=>readSave(s));
   if(!slots.length) {
-    titleAsk('Load','No saved games yet.',[{label:'START NEW',fn:beginOpening},{label:'BACK',fn:titleMenu}]);
+    titleAsk('Load','No saved games yet.',[{label:'START NEW',fn:beginOpening},restoreOption(),{label:'BACK',fn:titleMenu}]);
     return;
   }
   const nm=s=>s==='auto'?'Autosave':'Slot '+s;
   // Each save's details sit inside its own button; no text block above the buttons and no footer hint.
   titleAsk('Load','',
-    slots.map(s=>({label:nm(s).toUpperCase(),sub:saveSummary(readSave(s)),fn:()=>{ endIntro(); loadGame(s); }})).concat([{label:'BACK',fn:titleMenu}]),'');
+    slots.map(s=>({label:nm(s).toUpperCase(),sub:saveSummary(readSave(s)),fn:()=>{ endIntro(); loadGame(s); }})).concat([restoreOption(),{label:'BACK',fn:titleMenu}]),'');
+}
+// RESTORE FROM BACKUP on the Load page: picks a backup file (engine/save-backup.js), then shows what came back. Holds the title page open meanwhile.
+function restoreOption() {
+  return {label:'RESTORE FROM BACKUP',fn:()=>{
+    splash.asked=true;
+    pickRestore(msg=>titleAsk('Restore',msg,[{label:'LOAD',fn:loadMenu},{label:'BACK',fn:titleMenu}]));
+  }};
 }
 function endIntro() {
   intro.active=false; intro.phase=''; intro.steps=[]; intro.cur=null;
