@@ -410,7 +410,7 @@ const hopOf=u=>{ if(u&&u.side==='party') battle.fx[u.idx].hop=.35; else if(u) ST
 // ---------- Shared scenes ----------
 SC.ro_text=(s,u)=>{ gfx.globalAlpha=fin(u,.1)*fade(u,.8); let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-30); x=p.x; y=p.y; } label(s.txt,x,y-ez(u/.3)*8,s.c||CREAM,s.sc||2); };
 SC.ro_poof=(s,u)=>{ for(let k=0;k<(s.n||8);k++) { const a=k/(s.n||8)*Math.PI*2+s.seed,d=ez(u)*(s.r||26); gfx.globalAlpha=1-u; E(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.6,4*(1-u)+1,4*(1-u)+1,s.c||CREAM); } };
-SC.ro_glow=(s,u)=>{ gfx.globalAlpha=fin(u,.2)*fade(u,.6)*.4; E(s.x,s.y,s.rx||36,s.ry||50,s.c||GOLD); };
+SC.ro_glow=(s,u)=>{ gfx.globalAlpha=fin(u,.2)*fade(u,.6)*.4; if(s.art){ gfx.globalAlpha=fin(u,.2)*fade(u,.6)*.85; if(PROPART.draw('rose/'+s.art,s.x,s.y,{w:(s.rx||36)*2.4,h:(s.ry||50)*2.4})) return; } E(s.x,s.y,s.rx||36,s.ry||50,s.c||GOLD); };
 SC.ro_heart=(s,u)=>{ gfx.globalAlpha=fade(u,.75); heart(s.x,s.y-ez(u)*18,s.r||6,'#ff6b9a'); };
 SC.ro_flakes=(s,u)=>{ for(let k=0;k<8;k++) { const q=cl(u*1.3-k*.04),x=s.x-18+k*5+Math.sin(k*2.3+q*4)*6,y=s.y-s.h*.7+q*(s.h*.7); gfx.globalAlpha=1-q; R(x,y,4,4,k%2?'#e8b048':'#ffd27a'); } };
 // Lamby carried in Rose's arms (follows her hand); s.until (ms after the scene starts) puts him down.
@@ -492,11 +492,11 @@ SC.rv_big=(s,u)=>{ let x=s.x,y=s.y; if(s.st&&s.st.x!=null) { const p=head(s.st,-
   x=Math.max(w/2+8,Math.min(568-w/2,x)); y=Math.max(sc*5+8,y);
   gfx.globalAlpha=fin(u,.05)*fade(u,.8); gfx.save(); gfx.translate(x,y); gfx.rotate(s.rot||0); gfx.scale(pop,pop); bigWord(s.txt,0,-sc*2.5-ez(u/.3)*4,s.c||PINK,sc); gfx.restore(); };
 SC.rv_flash=(s,u)=>{ gfx.globalAlpha=(1-u)*(s.a||.7); R(0,0,576,324,s.c||'#ffffff'); };
-SC.rv_burst=(s,u)=>{ const n=s.n||10; for(let k=0;k<n;k++) { const a=k/n*Math.PI*2+(s.seed||0),d=ez(u)*(s.r||48); gfx.globalAlpha=fade(u,.5);
+SC.rv_burst=(s,u)=>{ const n=s.n||10; if(s.art){ gfx.globalAlpha=fade(u,.5); if(PROPART.draw('rose/'+s.art,s.x,s.y,{w:(s.r||48)*2.6*ez(u)+.1})) return; } for(let k=0;k<n;k++) { const a=k/n*Math.PI*2+(s.seed||0),d=ez(u)*(s.r||48); gfx.globalAlpha=fade(u,.5);
   star(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d*.75,(s.sz||7)*(1-u*.5),k%2?(s.c2||GOLD):(s.c||PINK),u*4+k); } };
 SC.rv_rings=(s,u)=>{ for(let k=0;k<3;k++) { const q=cl(u*1.4-k*.18); if(q<=0||q>=1) continue; gfx.globalAlpha=1-q; gfx.strokeStyle=k%2?GOLD:(s.c||PINK2); gfx.lineWidth=5*(1-q)+1;
   gfx.beginPath(); gfx.ellipse(s.x,s.y,6+q*(s.r||40),5+q*(s.r||40)*.8,0,0,Math.PI*2); gfx.stroke(); } };
-SC.rv_hearts=(s,u)=>{ for(let k=0;k<(s.n||6);k++) { const a=-Math.PI/2+(k-(s.n||6)/2+.5)*.45,d=ez(u)*(s.r||46); gfx.globalAlpha=fade(u,.6); heart(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d,(s.sz||7)*(1-u*.3),k%2?'#ff6b9a':PINK2); } };
+SC.rv_hearts=(s,u)=>{ for(let k=0;k<(s.n||6);k++) { const a=-Math.PI/2+(k-(s.n||6)/2+.5)*.45,d=ez(u)*(s.r||46); gfx.globalAlpha=fade(u,.6); if(s.art&&PROPART.draw('rose/'+s.art,s.x+Math.cos(a)*d,s.y+Math.sin(a)*d,{h:(s.sz||7)*2.6*(1-u*.3)})) continue; heart(s.x+Math.cos(a)*d,s.y+Math.sin(a)*d,(s.sz||7)*(1-u*.3),k%2?'#ff6b9a':PINK2); } };
 
 // ---------- Boop (basic) ----------
 
@@ -523,12 +523,13 @@ SC.rv_preen=(s,u)=>{ const ms=s.t*1000; lift(s.f,-Math.abs(Math.sin(ms/220))*4,M
 const GIG=['HA','HEE','HO','HA','TEE','HA'];
 SC.rv_storm=(s,u)=>{ const G=s.G,ms=s.t*1000,g=ez(ms/450),cx=G.x,cy=Math.max(40,G.top-48),w=(G.w/2+70)*g;
   gfx.globalAlpha=fin(u,.05)*fade(u,.86);
+  if(!PROPART.draw('rose/ts_rainbow',cx,cy,{w:w*1.5+.1,rot:ms/1400})) {
   for(let k=0;k<7;k++) { const a=k/7*Math.PI*2+ms/900; EO(cx+Math.cos(a)*w*.7,cy+Math.sin(a)*14*g,26*g+.1,18*g+.1,k%2?PINK:'#ffd0e2'); }
-  E(cx,cy,w*.8+.1,20*g+.1,'#ffd0e2');
+  E(cx,cy,w*.8+.1,20*g+.1,'#ffd0e2'); }
   for(let k=0;k<22;k++) { const q=((ms/700)+k*.137)%1,x=cx-w+((k*53)%100)/100*w*2,y=cy+10+q*(G.base-cy-6); gfx.globalAlpha=fin(u,.05)*fade(u,.86)*(1-q*.4);
     label(GIG[k%GIG.length],x+Math.sin(ms/200+k)*5,y,k%3?PINK2:CREAM,k%4?2:3); }
   for(let k=0;k<10;k++) { const q=((ms/1300)+k*.1)%1,x=lerp(576,0,q),y=50+((k*37)%140)+Math.sin(ms/240+k)*10; gfx.globalAlpha=fade(u,.86)*.8; label(GIG[(k+2)%GIG.length],x,y,k%2?PINK:GOLD,2); } };
-SC.rv_laughs=(s,u)=>{ const ms=s.t*1000; for(const f of s.list) lift(f,-Math.abs(Math.sin(ms/110+f.idx))*6,Math.sin(ms/90+f.idx)*.12); };
+SC.rv_laughs=(s,u)=>{ const ms=s.t*1000; for(const f of s.list) { lift(f,-Math.abs(Math.sin(ms/110+f.idx))*6,Math.sin(ms/90+f.idx)*.12); const F=ST.unit(f); gfx.globalAlpha=fade(u,.8); PROPART.draw('rose/ts_motion',F.x-F.w*.42,F.top+10,{w:F.w*.75}); PROPART.draw('rose/ts_tears',F.x+F.w*.4,F.mid-6,{h:Math.max(26,F.h*.32)}); } };
 
 // ---------- Lamby Hug (A4) ----------
 // Rose carries Lamby over and squishes him onto a friend for a big hug. Hearts everywhere.
@@ -597,9 +598,10 @@ Rm.piggyback_pounce=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),tom=tomUp(
 SC.rv_night=(s,u)=>{ const ms=s.t*1000+(s.t0||0),g=ez((ms-(s.t0||0))/400)*(ms>s.upAt?1-ez((ms-s.upAt)/400):1); if(g<=0) return;
   const gr=gfx.createRadialGradient(s.x,s.y,24,s.x,s.y,170); gr.addColorStop(0,'rgba(28,36,72,0)'); gr.addColorStop(1,'rgba(20,26,58,.72)');
   gfx.globalAlpha=g; gfx.fillStyle=gr; gfx.fillRect(0,0,576,324);
-  EO(470,46,16,16,'#fff4c8'); E(477,41,13,13,'#2a3460');
+  gfx.globalAlpha=g*.95; if(!PROPART.draw('rose/bs_moon',470,46,{h:40})) { EO(470,46,16,16,'#fff4c8'); E(477,41,13,13,'#2a3460'); }
+  gfx.globalAlpha=g*.9; PROPART.draw('rose/bs_stars',96,50,{w:120});
   for(let k=0;k<14;k++) { const tw=(Math.sin(ms/220+k*1.7)+1)/2; star(30+(k*41)%520,18+(k*29)%80,2+tw*3,'#fff4c8',0); } };
-SC.rv_zzz=(s,u)=>{ for(let k=0;k<3;k++) { const q=((s.t*1000/900)+k/3)%1; gfx.globalAlpha=(1-q)*fade(u,.85); label('Z',s.x+8+q*22+Math.sin(q*6)*4,s.y-q*40,'#cfe0ff',2+(k===1?1:0)); } };
+SC.rv_zzz=(s,u)=>{ const qz=(s.t*1000/1400)%1; gfx.globalAlpha=(1-qz*.6)*fade(u,.85); if(PROPART.draw('rose/bs_zzz',s.x+10+Math.sin(qz*6.28)*3,s.y-qz*26,{w:40})) return; for(let k=0;k<3;k++) { const q=((s.t*1000/900)+k/3)%1; gfx.globalAlpha=(1-q)*fade(u,.85); label('Z',s.x+8+q*22+Math.sin(q*6)*4,s.y-q*40,'#cfe0ff',2+(k===1?1:0)); } };
 Rm.bedtime_story=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t,34),self=t===m;
   // The spoken line is about 7.2 s long (baked clip), so the whole story runs past it: page turns at 3.2 s and 5.0 s,
   // heal at 6.0 s, THE END at 6.5 s, Rose finishes and walks home by about 8.8 s.
@@ -618,7 +620,7 @@ Rm.bedtime_story=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFo
     ...(B2.foes||[]).filter(f=>!f.dead&&f.hp>0).slice(0,4).map((f,i)=>[2800+i*650,()=>{ const F=ST.unit(f); scene('rv_zzz',(healAt+400-2800-i*650)/1000,{x:F.x+F.w*.2,y:F.top}); }]),
     [turn1,()=>{ sfx.whoosh(); }],
     ['hf',healAt],
-    [healAt,()=>{ E2.apply(); sfx.baa(); sfx.heal(); scene('ro_glow',1,{x:H.x,y:H.mid,c:'#ffd27a'}); scene('ro_flakes',1,{x:H.x,y:H.base,h:H.h}); hopOf(t!==m?t:null); }],
+    [healAt,()=>{ E2.apply(); sfx.baa(); sfx.heal(); scene('ro_glow',1,{x:H.x,y:H.mid,c:'#ffd27a',art:'bs_glow',rx:44,ry:44}); scene('ro_flakes',1,{x:H.x,y:H.base,h:H.h}); hopOf(t!==m?t:null); }],
     [turn2,()=>{ sfx.whoosh(); }],
     [endAt,()=>{ scene('rv_big',1.2,{x:bx,y:by-46,txt:'THE END',c:PURP,sc:3}); sfx.ding(); }],
     [end,'end',kindLine(t,'Lamby fell asleep first. He always does.')]]); };
@@ -1425,7 +1427,7 @@ Rm.lamby_hug=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,
     [0,()=>{ setMessage(self?'Rose holds Lamby in one hand and Backup Lamby in the other. Double hug.':'Rose brings Lamby in one hand and Backup Lamby in the other over to '+t.name+'.'); say(m.id,'lamby_hug'); scene('rg_hug',end/1000,{plan,st}); }],
     [press,()=>{ sfx.boing(); }],
     ['hf',press+300],
-    [press+300,()=>{ E2.apply(); sfx.baa(); sfx.baa(.2); sfx.heal(); scene('ro_glow',1,{x:H.x,y:H.mid,c:PINK}); scene('rv_hearts',1.1,{x:H.x,y:H.top+6,n:9,r:64,sz:10}); hopOf(t!==m?t:null); }],
+    [press+300,()=>{ E2.apply(); sfx.baa(); sfx.baa(.2); sfx.heal(); scene('ro_glow',1,{x:H.x,y:H.mid,c:PINK,art:'lh_ring',rx:40,ry:40}); scene('rv_hearts',1.1,{x:H.x,y:H.top+6,n:9,r:64,sz:10,art:'lh_heart'}); hopOf(t!==m?t:null); }],
     [press+700,()=>{ scene('rv_big',1,{x:H.x,y:H.top-80,txt:'DOUBLE SQUEEZE',c:PINK,sc:2}); sfx.ding(); }],
     [end,'end',kindLine(t,'Two Lambys, one hug. One from each side.')]]); };
 
@@ -1470,8 +1472,8 @@ Rm.lookout_lamby=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),me=ST.unit(m)
     [plan.swing,()=>{ sfx.spin?sfx.spin():sfx.whoosh(); setMessage('Wind up...'); }],
     [plan.go,()=>{ sfx.whoosh(); scene('rv_big',.9,{st,txt:'WHEEE!',c:PINK2,sc:3}); setMessage('Both lambs go flying.'); }],
     ['hf',hitA],
-    [hitA,()=>{ sfx.baa(); sfx.bonk(); ST.jolt(f,.4); landHit(50); scene('rv_burst',.5,{x:F.x,y:F.top+8,n:8,r:40,c:PINK2,c2:GOLD}); }],
-    [hitB,()=>{ sfx.bonk(); ST.jolt(f,.4); landHit(50); scene('rg_word',.7,{x:F.x,y:F.top-60,txt:'BONK BONK',c:GOLD,sc:3}); }],
+    [hitA,()=>{ sfx.baa(); sfx.bonk(); ST.jolt(f,.4); landHit(50); scene('rv_burst',.5,{x:F.x,y:F.top+8,n:8,r:40,c:PINK2,c2:GOLD,art:'lk_burst'}); }],
+    [hitB,()=>{ sfx.bonk(); ST.jolt(f,.4); landHit(50); scene('rv_burst',.5,{x:F.x+6,y:F.top-14,n:6,r:34,art:'lk_stars'}); scene('rg_word',.7,{x:F.x,y:F.top-60,txt:'BONK BONK',c:GOLD,sc:3}); }],
     [plan.back,()=>{ sfx.ding(); scene('ro_text',.9,{st,txt:'GOT THEM',c:PINK,sc:2}); }],
     ...(tom?[[2900,()=>{ sfx.jumpWhistle(); }],[3300,()=>{ E2.apply(); battle.fx[tom.idx].hop=.3; }]]:[[3300,()=>{ E2.apply(); sfx.select(); }]]),
     [tom?3500:3900,'end',res(E2)+(tom?'Both Lambys came back. Rose is up on Tom.':'Both Lambys came back. That\'s the rule.')]]); };

@@ -1,3 +1,11 @@
+## 2026-11-09 (rosefx1): Rose's Tickle Storm, Lamby Hug, Lamby Boomerang and Bedtime Story effects painted
+- `tools/sprite-bake/bake_rose_fx2.py` cuts the approved sheets rose-fx-giggle-storm-v1 (v2 and v3 are byte-identical copies), rose-fx-lamby-hug-v1, rose-fx-lookout-lamby-v1 and rose-fx-bedtime-story-v2 into 11 pictures in art/props/rose (prefixes ts_, lh_, lk_, bs_). Cells mode, 4 columns, one item per cell in sheet order. Lamby hug's sheet holds 12 cells (the approved prompt said 6); the extra cells are not installed.
+- Wiring (engine/rose-moves.js): ts_rainbow replaces the drawn storm cloud (drawn shapes stay as fallback), ts_motion and ts_tears at each monster in Tickle Storm's laugh beat, lh_heart on the hug hearts (`art:` on rv_hearts), lh_ring for the hug glow (`art:` on ro_glow), lk_burst and lk_stars on the two Lamby Boomerang hits (`art:` on rv_burst; the BONK BONK hit gets a new burst), bs_moon and bs_stars on the night scene (drawn moon and twinkles stay as fallback), bs_zzz replaces the drawn Z letters, bs_glow on the Bedtime Story heal.
+- Not installed (on purpose): held objects (Lamby, Backup Lamby, the feather, the book), three feathers and three small hearts (one picture holds several items), the sparkle clusters (the moves draw stars), the lamby-hug extras (ribbon, star, cloud, swoosh, trail), the lookout swoosh (the move draws its own trail), the bedtime dream sparkles.
+- Preload line added in engine/prop-art.js (Rose fx, bake_rose_fx2.py).
+- Tests: kit_test rose for giggle_storm, lamby_hug, lookout_lamby, bedtime_story FAILS []; smoke IDS=rose FAILS []; tag_check ok. The lookout burst pictures did not draw in the kit run (they load after the move starts in a fresh test page); they load from the boot preload in play.
+- Tags: rose-moves.js, prop-art.js, main.js stamp and index.html moved to rosefx1.
+
 ## 2026-11-09 (npchead1): 12 NPC heroes fixed with no new generation; NPC prompt details shortened
 - The `npcaudit1` GROWN-UP paragraph overcorrected: the regenerated adults came out 6 to 7 heads tall and too realistic (Tom). The faces were right, the proportions wrong.
 - New `tools/art-library/npc_head.py`: enlarges the head of an approved hero picture about the neck until it is about a quarter of the height, keeps hands and props as painted, refits the picture. No image credits.
