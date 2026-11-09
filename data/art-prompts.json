@@ -13307,9 +13307,16 @@
    "group": "Dungeon finds"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-09",
+     "note": "frame 2 - switch should be flopped up, frame 3 light should be yellow. frame 4 lgith should be switched up frame 6 switch should be up",
+     "from": "v1",
+     "at": 1794247908328
+    }
+   ],
    "id": "prop-find-ch04",
    "tab": "Props",
    "title": "Dungeon finds, Chapter 4 Soundstage 7 (8 objects)",
