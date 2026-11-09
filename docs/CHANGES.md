@@ -1,17 +1,14 @@
-<<<<<<< HEAD
 ## 2026-11-09 (crumbs1): Art Library gets the Grump Hollow crumb sheet (no game files changed)
 - Tom: chapter 1 needs crumb pictures laid on the Hollow map, shown right before Deedee calls out where the crumbs are. New Props entry `prop-trail-hollow` (group Trail clues, tools/art-library/trail-prompts.js): one 9 cell transparent sheet. Cells 1 to 2 entrance crumbs (first callout, "Crumbs! Rhubarb crumbs."), cells 3 to 5 trail heading north (second callout), cells 6 to 9 trail curving east to Boppy's bench (third callout).
 - Replaced: the three CH1 CRUMB cells of `prop-trail-a` are removed (sheet a is now chapters 2 and 3, 6 objects; it was draft with no pictures). docs/DUNGEON_FINDS.md updated.
 - Art Library json regenerated with make-prompts.js: 639 entries, exactly two differ from before (prop-trail-a changed, prop-trail-hollow added); validate.js OK. tools/art-library/test.py still fails as before (pre-existing).
 - Not done yet: nothing is installed or wired. After Tom approves the sheet: cut the pieces, add them as map overlays on the hollow plate, reveal each group in `ch1Mudling` and `ch1Grump` right before Deedee's line.
-=======
 ## 2026-11-09 (notingame1): Voice Library "Not in game yet" filter
 - Tom asked how to see which re-recorded clips are not uploaded yet. The Library only knew "a clip exists on this phone", not whether it was merged, and a phone clip stays on the phone after the merge.
 - `tools/voice-library/merge-local.js` now writes `data/merged-takes.json`: the fingerprint (first 16 hex of SHA-1 of the mp3 text) of every clip a merge processed. `voices.html` fingerprints each phone clip in the background and Show > Not in game yet lists the ones missing from that file, with a count. Raw fingerprints are used because dialogue merges re-encode the audio, so a direct comparison with the built-in clip would not work.
 - `data/merged-takes.json` starts empty (earlier merges were not recorded): until the next export is merged, every phone clip is listed, and the page says so. voices.html carries no `?v=` tag, so no tag moved.
 - Tests: merge-local on a one-clip export wrote the matching fingerprint (checked against sha1 by hand); headless Chrome with two seeded phone clips and a merge list holding one of them: chips show Re-recorded 2, Not in game yet 1, the filter lists the right line, portrait looked at, no page errors; tag_check ok.
 
->>>>>>> c4576dc (Voice Library: Show > Not in game yet filter backed by data/merged-takes.json)
 ## 2026-11-09 (counterhead1): the shop counter no longer cuts off party members standing in front of it
 - Bug (Tom, screenshot of Penny's Pockets): Amy's head was hidden by the painted counter when she stood a few rows in front of it. Cause: `plateWalkBehind` in engine/plate.js redraws the counter over Penny, then redraws anyone standing in front of it so they sit on top, but it only counted an actor as reaching the counter if the actor's head was within 130 art px of its feet. Painted rooms are in perspective and a 5'11 character is about 400 art px tall, so anyone more than about 2 rows in front kept the counter over their head.
 - Fix: the body height in both tests now comes from the room's own perspective scale (`roomPxPerFoot` times 6.6 ft, which covers Justin at 6'4 plus hair); rooms with no scale keep 130. Applies to every zone with a cutout, so Nickel's counter (nickels) gets the same fix.
