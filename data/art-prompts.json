@@ -7127,9 +7127,16 @@
    "group": "Justin"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-09",
+     "note": "no longer needed",
+     "from": "v1",
+     "at": 1794248223244
+    }
+   ],
    "id": "justin-battle-stance-2",
    "tab": "Characters",
    "title": "Justin battle stance sheet 2, 6 frames 3 x 2 (replaces your painted sheet; matches your current sheet 1)",
