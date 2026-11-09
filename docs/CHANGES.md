@@ -1,3 +1,8 @@
+## 2026-11-09 (bosspond1): The Big One scene: he stands further right, faces the party, and no longer looks surprised
+- Tom: in the boss scene the Mudling and The Big One stood too close; The Big One should be further right and facing the party, and not look surprised.
+- Layout (data/scenes.js `ch1Pond`): home spot moved from column 15 to 19 (`MONSTER_SPOTS` in data/monsters.js). The thief now scurries in from the right edge along row 12 and stops at column 16, three tiles from The Big One, who rises after it. Camera held on [16,12] for the scene (`{cam}`) so he is fully in frame in portrait; landscape checked.
+- Face: new scene option `{pose:'The Big One',foe:'attack3',dir:'left'}` (engine/story.js `foePoseRows`, drawn in engine/town-render.js `drawActor`) shows any painted enemy frame by name; the painted enemy sheets face right, so `dir:'left'` mirrors the frame. The scene uses `attack3` (the scowl) in place of the shocked stance frame; cleared before the fight. Other monsters are unchanged.
+- Tests: `tools/boss_stage_test.py` on `ch1Pond` (portrait and landscape): 7 pages, no errors, frames looked at.
 ## 2026-11-09 (crop2): Tom's saved portrait crops re-baked into every portrait and mood face (tag crop2)
 - `python3 tools/sprite-bake/bake_portraits.py` with data/portrait-crops.json (8 saved crops: tnb, tom, grace, rose, amy, deedee, boppy, nara). Justin, Olivia and Ellie keep their default squares (byte for byte the same as before).
 - `bake_emotion_faces.py` re-baked the 8 moods for all 11 characters (portraits/emo/*.webp).

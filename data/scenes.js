@@ -220,28 +220,28 @@ SCENES.ch1Grump=[
 // 4. The pond: the thief hands the tin to The Big One. Boss fight.
 SCENES.ch1Pond=[
   {flag:'ch1-pond'}, {call:()=>storyWorld()},
-  {hide:'The Big One'},
+  {hide:'The Big One'}, {cam:[16,12]},   // hold the camera between the party and the pond edge so The Big One (far right) is fully in frame
   // The painted heist frames (mh_*) face LEFT, toward the party, and already hold the tin, so no separate tin prop here.
-  {spawn:{name:'Big Mudling',monster:'mudling',mscale:1.34,at:[19,11],dir:'left'}},
+  {spawn:{name:'Big Mudling',monster:'mudling',mscale:1.34,at:[21,12],dir:'left'}},
   {pose:'Big Mudling',f:['mh_scurry_a','mh_scurry_b'],fps:6,dir:'left'},
-  {walk:'Big Mudling',to:[[18,11],[17,11]],speed:.3,onStep:()=>sfx.splat()},
+  {walk:'Big Mudling',to:[[20,12],[18,12],[16,12]],speed:.3,onStep:()=>sfx.splat()},
   {pose:'Big Mudling',f:'mh_hug',dir:'left'},
   {talk:'Grace',lines:['THERE! The thief! He still has the tin!']},
   {face:'Big Mudling',dir:'left'},
   {call:()=>{ sfx.splat(); sfx.thud(); }},
-  {show:'The Big One'}, {face:'The Big One',dir:'right'},
+  {pose:'The Big One',foe:'attack3',dir:'left'}, {show:'The Big One'},   // The Big One rises 3 tiles right of the thief (home spot 19,11) and faces the party; attack3 is his frown, the stance frame is the shocked one
   {talk:'The Big One',lines:['GLUB. Is that a pie? For me?']},
   {talk:'Big Mudling',lines:['Blub. For you, boss.']},
   {call:()=>{ const m=sceneActor('Big Mudling'); if(m) m.carry=null; setFlag('ch1-crown'); sfx.pickup(); }},
   {pose:'Big Mudling',f:null},
   {face:'Big Mudling',dir:'right'},
-  {walk:'Big Mudling',to:[[18,11]],speed:.3},
+  {walk:'Big Mudling',to:[[17,12]],speed:.3},
   {call:()=>sfx.splat()}, {despawn:'Big Mudling'},
-  {face:'The Big One',dir:'down'},
   {talk:'The Big One',lines:['It fits. I\'m a king now. GLUB.']},
   {talk:'Deedee',lines:['That\'s my GOOD tin, you overgrown handbag!']},
   {talk:'Rose',lines:['Tata, he looks like a turtle wearing a hat.']},
   {talk:'Tom',lines:['Nobody touches Deedee’s crisp. Everybody ready?']},
+  {pose:'The Big One',f:null},
   {battle:'bigone',tut:'bigone'},
   {if:()=>flag('battle:bigone')!=='win',then:[
     {heal:true},
