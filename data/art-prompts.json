@@ -13892,8 +13892,16 @@
    "group": "Story gates"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/prop-gate-backlot-stage7-v1.png",
+     "date": "2026-11-09",
+     "from": "v1",
+     "at": 1794248290238
+    }
+   ],
    "rejects": [],
    "id": "prop-gate-backlot-stage7",
    "tab": "Props",
