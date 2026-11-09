@@ -1,3 +1,9 @@
+## 2026-11-09 (hollowwalk1): Grump Hollow walk map from Tom's Area Builder export (tag hollowwalk1)
+- Tom's export of the hollow map (chapter 20 view, system_hash 97bdfd46): 28 tiles changed, no door or exit edits, no object conflicts. Installed with `tools/apply_walkmap.py`; only the hollow `plateMask` rows in `data/maps-le.js` changed.
+- `tools/reach_test.py hollow`: 0 fails. Mask overlay looked at (`tools/shots/mask-hollow.png`). `tools/smoke.py` FAILS [].
+- Tags: `data/maps-le.js` and the build stamp in `engine/main.js` moved to hollowwalk1.
+- Tom: tap Clear all edits for the hollow map in the Area Builder, since the live map now matches.
+
 ## 2026-11-09 (propsfix1): Props audit, six sheets sent back to the Art Library (no game files changed)
 - Tom approved every pending Props entry and reported problems. Audit of all 29 pictures: `claude/props-audit-11-09.md` (24 usable, 5 with defects, plus ch04 which the first pass missed: all six junction box levers point down, so ON and OFF differ only by the lamp, and the DEAD light rig has lit lamps).
 - Different method (stop-loss: ch04 had missed the lever twice, ch08 once): three EDIT entries that attach the approved sheet and change only the named cells: `prop-find-ch04-fix` (ON levers up, dead rig dark), `prop-find-ch07-fix` (reading room lock with three card slots, no padlock), `prop-find-ch08-fix` (pulled lever tipped over).
