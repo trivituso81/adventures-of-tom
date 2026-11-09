@@ -4,6 +4,9 @@
 Input : tools/sprite-bake/src/<id>-walk-v1.png (3 rows of 4: down, up, left; each stand, step, stand, step; flat magenta)
 Output: art/chars/<id>-ow.webp (painted frames, 3x the size of the rows), data/townsfolk-hires.js (rows, palette, atlas rects; do not hand-edit)
 Same recipe as bake_ellie.py but the heads are already caricature size, so no head enlargement.
+New Library sheets (11-09): an NPC listed in LIBRARY_WALK is cut from its approved Art Library sheet `art/raw/npcs/npc-walk-<id>-v<N>.png` (3 x 3: front, back, side;
+stand, step, step; the side row faces RIGHT, so it is mirrored here to face left like the old sheets). The background may be magenta or a crimson-pink: it is keyed from
+the border colour (slice_sheet robust). Everyone else still comes from tools/sprite-bake/src/<id>-walk-v1.png. Always run WITHOUT --only: the data file holds every NPC.
 Usage : python3 tools/sprite-bake/bake_townsfolk.py [--only pip,moss] [--contact PATH]
 """
 import argparse, json, os, sys
@@ -29,6 +32,17 @@ CAST = {'pip': 38, 'moss': 48, 'dot': 41, 'gus': 43, 'bean': 46, 'reel': 40, 'pr
         'mateo': 36, 'daisy': 38, 'kevin': 40, 'claudia': 38, 'yesenia': 38, 'tony': 38,
         'ryan': 42, 'dakota': 37, 'sam': 38, 'jordan': 43, 'carmen': 38, 'odette': 36, 'priya': 39, 'sofi': 36,
         'marlowe': 43, 'hush9': 40, 'pistachio': 40, 'vance': 42}
+def purge_bg(img):
+    """A crimson-pink sheet leaves a few background specks between fingers and legs that the border key keeps: red dominant with blue above green
+    (the background's hue). Coral shirts, skin, hair and brown shoes have green above blue, blue hats and jeans have blue above red, so they stay."""
+    from scipy import ndimage as ndi
+    a = np.array(img); r, g, b = [a[:, :, i].astype(int) for i in range(3)]
+    bgl = (a[:, :, 3] > 0) & (r >= b) & (b > g + 12) & (r - g > 80)
+    rim = ndi.binary_dilation(bgl, iterations=1) & ~bgl & (a[:, :, 3] > 0) & (b > g + 4) & (r - g > 60)
+    a[bgl | rim, 3] = 0
+    return Image.fromarray(a, 'RGBA')
+
+LIBRARY_WALK = {'gus': 'art/raw/npcs/npc-walk-gus-v3.png'}   # id -> approved Art Library walk sheet (the newest version of the entry)
 ap = argparse.ArgumentParser()
 ap.add_argument('--only', default=None)
 ap.add_argument('--colors', type=int, default=46)
@@ -176,16 +190,23 @@ for cid, ow_h in CAST.items():
     if args.only and cid not in args.only.split(','):
         continue
     rn = [walk_names[0:4], walk_names[4:8], walk_names[8:12]]
-    try:
+    if cid in LIBRARY_WALK:
+        rn3 = [[f'{d}_{n}' for n in ('stand', 'step1', 'step2')] for d in ('down', 'up', 'left')]
+        poses = slice_sheet(os.path.join(ROOT, LIBRARY_WALK[cid]), rn3, robust=True)
+        poses = {n: purge_bg(v) for n, v in poses.items()}
+        for n in ('left_stand', 'left_step1', 'left_step2'):
+            poses[n] = poses[n].transpose(Image.FLIP_LEFT_RIGHT)
+    else:
+      try:
         poses = slice_sheet(os.path.join(SRC, f'{cid}-walk-v1.png'), rn)
-    except SystemExit:
-        # rows 2 and 3 touch (Kowalski): split the picture at the emptiest line between them, then cut each part on its own
-        im = Image.open(os.path.join(SRC, f'{cid}-walk-v1.png')).convert('RGB'); a = np.array(im).astype(float)
-        fg = (np.minimum(a[:, :, 0], a[:, :, 2]) - a[:, :, 1]) < 120
-        cnt = fg.sum(1); y0 = int(650 + np.argmin(cnt[650:800]))
-        tmp = os.path.join('/tmp', f'{cid}-top.png'); tmp2 = os.path.join('/tmp', f'{cid}-bot.png')
-        im.crop((0, 0, im.width, y0)).save(tmp); im.crop((0, y0, im.width, im.height)).save(tmp2)
-        poses = slice_sheet(tmp, rn[:2]); poses.update(slice_sheet(tmp2, rn[2:]))
+      except SystemExit:
+          # rows 2 and 3 touch (Kowalski): split the picture at the emptiest line between them, then cut each part on its own
+          im = Image.open(os.path.join(SRC, f'{cid}-walk-v1.png')).convert('RGB'); a = np.array(im).astype(float)
+          fg = (np.minimum(a[:, :, 0], a[:, :, 2]) - a[:, :, 1]) < 120
+          cnt = fg.sum(1); y0 = int(650 + np.argmin(cnt[650:800]))
+          tmp = os.path.join('/tmp', f'{cid}-top.png'); tmp2 = os.path.join('/tmp', f'{cid}-bot.png')
+          im.crop((0, 0, im.width, y0)).save(tmp); im.crop((0, y0, im.width, im.height)).save(tmp2)
+          poses = slice_sheet(tmp, rn[:2]); poses.update(slice_sheet(tmp2, rn[2:]))
     fo = ow_h * KW / poses['down_stand'].height
     ow_big = {n: scaled_to(v, fo) for n, v in poses.items() if not n.endswith('stand2')}
     ow_big = tighten(place(ow_big, KW, 'center'), KW)
