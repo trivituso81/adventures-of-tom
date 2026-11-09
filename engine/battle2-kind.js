@@ -2197,9 +2197,7 @@ B2_TOMBO_ANIM.tnb3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     gfx.globalAlpha=k*.22*(1-fk); R(0,0,mx,324,'#ff9a5a'); R(mx,0,576-mx,324,'#6aa8ff'); gfx.globalAlpha=1;
     gfx.globalAlpha=k*ez(seg(ms,300,900))*(1-seg(ms,P.clink,P.clink+400)); const pX=lerp(lx-40,mx-26,fk),sX=lerp(rx+34,mx+20,fk),gy=by-TH-8;
     // palm
-    if(!PROPART.draw('tombo/palm_tree',pX+2,gy+70-47,{h:94})) {
-    Ln(pX,gy+70,pX+4,gy,4,OUT); Ln(pX,gy+70,pX+4,gy,2,'#8a5a30');
-    for(let j=0;j<5;j++) { const a=-Math.PI*.95+j*Math.PI*.22; Ln(pX+4,gy,pX+4+Math.cos(a)*18,gy+Math.sin(a)*10+6,4,'#2a6a3a'); } }
+    PROPART.draw('tombo/palm_tree',pX+2,gy+70-47,{h:94});
     // skyline
     if(!PROPART.draw('tombo/new_york_skyline',sX+4,gy+70-44,{h:88})) for(const [dx,w,h] of [[-8,10,46],[4,12,62],[18,9,38]]) { RO(sX+dx,gy+70-h,w,h,'#3a4a6a'); for(let yy=gy+74-h;yy<gy+66;yy+=8) R(sX+dx+3,yy,3,3,'#ffe08a'); }
     gfx.globalAlpha=1;
@@ -6187,8 +6185,8 @@ B2_TOMBO_ANIM.boppy2_dc=E2=>{ bopPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null
 // A raised bed. Boppy teaches: stake, hole, seedling, water. Tom plants his upside down. Boppy fixes it. Then the
 // tomatoes grow, and grow, and the vines fling giant tomatoes at every monster. Boppy eats a pepper off his own vine.
 // Effects unchanged: biggest Cozy hit on all, they lose a turn, Amber melts off the party, Boppy's Heartburn fills.
-const seedling=(x,y,sc,upside)=>{ if(PROPART.draw('tombo/tomato_seedling',x,y-(upside?-10:10)*sc,{w:32*sc,sy:upside?-1:1})) return; gfx.save(); gfx.translate(x,y); gfx.scale(sc,upside?-sc:sc); LnO(0,0,0,-16,2,'#6fae5a'); EO(-6,-12,6,3,'#6fae5a'); EO(6,-8,6,3,'#6fae5a'); gfx.restore(); };
-const tomato=(x,y,r)=>{ if(PROPART.draw('tombo/giant_tomato',x,y,{w:r*2.3})) return; EO(x,y,r,r*.9,'#e03a2e'); E(x-r*.3,y-r*.35,r*.3,r*.2,'#ff8a80'); R(x-1,y-r*.9-4,2,5,'#4a8a3a'); E(x,y-r*.9,4,2,'#6fae5a'); };
+const seedling=(x,y,sc,upside)=>{ PROPART.draw('tombo/tomato_seedling',x,y-(upside?-10:10)*sc,{w:32*sc,sy:upside?-1:1}); };
+const tomato=(x,y,r)=>{ PROPART.draw('tombo/giant_tomato',x,y,{w:r*2.3}); };
 B2_TOMBO_ANIM.boppy3=E2=>{ bopPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),B=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list),tgts=list.slice(0,4),n=Math.max(1,tgts.length),share=shares(n);
   const TB=(who,n,sp)=>tbf('boppy3',who,n,sp)||sp.idle;   // painted frames (art/tombo/boppy3-*.webp): 'tom' Tom, 'p' Boppy
@@ -6205,15 +6203,14 @@ B2_TOMBO_ANIM.boppy3=E2=>{ bopPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     if(ms<P.end-700) { if(ms<P.steps[2]) return stand(sB,bx,by,TB('p',1,sp)); if(ms<P.steps[3]) return stand(sB,bx,by,TB('p',3,sp)); if(ms<P.tomplant) return stand(sB,bx,by,TB('p',2,sp)); if(ms<P.pepper) return stand(sB,bx,by,ms<P.fix+600?TB('p',4,sp):TB('p',3,sp)); if(ms<P.pepper+500) return stand(sB,bx,by,TB('p',6,sp)); return stand(sB,bx,by,ms<P.apply+600?TB('p',5,sp):TB('p',3,sp)); }
     const k=ez(seg(ms,P.end-700,P.end)); return stand(sB,lerp(bx,c.origX,k),lerp(by,c.origBase,k),k<1?runFr(sp,c.t,1):sp.idle); });
   scene('tu_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const g=ez(seg(ms,P.run,P.run+300)); if(g<=0) return;
-    if(PROPART.draw('tombo/raised_garden_bed',gx,by-20*g,{w:112,h:48*g})) return;
-    RO(gx-50,by-16*g,100,16*g,WOOD2); R(gx-46,by-14*g,92,10*g,'#5a3a24'); R(gx-46,by-14*g,92,3,'#7a5a3a'); }});
+    PROPART.draw('tombo/raised_garden_bed',gx,by-20*g,{w:112,h:48*g}); }});
   scene('tu_draw',P.end/1000,{draw:(s2,u,ms)=>{ if(ms<P.lesson) return; const t=s2.t;
     // the lesson: stake, hole, seedling (Boppy's can is painted in his frame)
-    if(ms>P.steps[0]&&!PROPART.draw('tombo/garden_stake',gx+30,by-38,{h:56})) LnO(gx+30,by-10,gx+30,by-60,3,WOOD3); if(ms>P.steps[1]) E(gx,by-12,8,3,'#2a1a10'); if(ms>P.steps[2]&&ms<P.grow) seedling(gx,by-12,1,false);
+    if(ms>P.steps[0]) PROPART.draw('tombo/garden_stake',gx+30,by-38,{h:56}); if(ms>P.steps[1]) E(gx,by-12,8,3,'#2a1a10'); if(ms>P.steps[2]&&ms<P.grow) seedling(gx,by-12,1,false);
     // Tom's seedling, upside down, then fixed
     if(ms>P.tomplant&&ms<P.grow) seedling(gx-26,by-12+(ms<P.fix+300?16:0),1,ms<P.fix+300);
     // the vines grow and the tomatoes fling
-    if(ms>P.grow) { const q=ez(seg(ms,P.grow,P.fling)),H=170*q; for(const vx of [gx-26,gx]) { if(PROPART.ready('tombo/tomato_vine')) { gfx.save(); gfx.beginPath(); gfx.rect(vx-30,by-12-H,60,H+2); gfx.clip(); for(let y=0;y<H;y+=64) PROPART.draw('tombo/tomato_vine',vx,by-12-y-34,{h:72}); gfx.restore(); continue; } gfx.strokeStyle=OUT; gfx.lineWidth=6; gfx.beginPath(); gfx.moveTo(vx,by-12); for(let y=0;y<=H;y+=10) gfx.lineTo(vx+Math.sin(y/22+vx)*8,by-12-y); gfx.stroke(); gfx.strokeStyle='#4a8a3a'; gfx.lineWidth=3; gfx.stroke(); for(let y=20;y<H;y+=36) EO(vx+Math.sin(y/22+vx)*8+10,by-12-y,8,4,'#6fae5a'); }
+    if(ms>P.grow) { const q=ez(seg(ms,P.grow,P.fling)),H=170*q; for(const vx of [gx-26,gx]) { if(PROPART.ready('tombo/tomato_vine')) { gfx.save(); gfx.beginPath(); gfx.rect(vx-30,by-12-H,60,H+2); gfx.clip(); for(let y=0;y<H;y+=64) PROPART.draw('tombo/tomato_vine',vx,by-12-y-34,{h:72}); gfx.restore(); } }
       if(ms<P.fling) for(let k=0;k<5;k++) { const y=30+k*30; if(y<H) tomato(gx-26+(k%2)*26+Math.sin(y/22)*8,by-12-y,6+q*8); }
       if(ms>=P.fling) tgts.forEach((f,k)=>{ const Q2=ST.foe(f),t0=P.fling+k*120,q2=seg(ms,t0,t0+420); if(q2>0&&q2<1) tomato(lerp(gx-14,Q2.x,q2),lerp(by-80,Q2.mid,q2)-Math.sin(q2*Math.PI)*70,16); }); 
       if(ms>P.pepper) { const vx=gx+Math.sin(70/22+gx)*8; if(ms<P.pepper+300) { if(!PROPART.draw('boppy/cayenne_pepper',vx+12,by-80,{h:20,rot:.3})) EO(vx+12,by-80,4,9,'#e03a2e'); } } }

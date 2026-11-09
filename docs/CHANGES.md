@@ -1,3 +1,10 @@
+## 2026-11-08 (tombo12): Props Part B, drawn fallbacks purged for the eight Garden and Measure props
+- The eight painted props (`palm_tree`, `gold_transfer_card`, `second_gold_transfer_card`, `garden_stake`, `tomato_seedling`, `raised_garden_bed`, `tomato_vine`, `giant_tomato`) already had cut images in `art/props/tombo/` from approved Library entries (tombo-boppy3-objects, tombo-tnb2-objects, tombo-tnb3-objects). Tom's answer (New painted art) was therefore already met; this change removes the drawn code they left behind.
+- Removed the drawn fallbacks in `engine/battle2-kind.js`: the palm tree outline, the garden bed boards, the stake line, the seedling and giant tomato drawings, and the tomato vine stroke and leaves. Each call now draws only the painted image. Images are preloaded at boot (engine/prop-art.js), so nothing draws before they load.
+- Not touched: `new_york_skyline` in the TNB scene still has a drawn fallback (not on this list).
+- The watering can Library entry (tools/art-library/tombo-split/boppy.js, approved sheet history) is left as it is; the file was cut in tombo11.
+- Tags: tombo11 to tombo12 (engine/battle2-kind.js, engine/main.js, index.html). Tests: tombo_test boppy3, tnb2, tnb3 with `--speed2` (FAILS: [] each, palm_tree hit 169 in tnb3); smoke.py FAILS: []; tag_check ok; in_game check ok.
+
 ## 2026-11-08 (tombo11): Props Part A, unreferenced `watering_can` cut
 - Cut `tombo/watering_can`: no engine code drew it (only the prop preload list and the sheet records named it). Removed the file `art/props/tombo/watering_can.webp`, its preload entry in `engine/prop-art.js`, its entries in `tools/tombo_props_map.json`, `tools/sprite-bake/tombo_frames_state.json` (boppy3 object list) and `tools/sprite-bake/src/props/props.json` (id 76).
 - Kept, still drawn in code and waiting on Tom's new painted art (Part B): `palm_tree`, `gold_transfer_card`, `second_gold_transfer_card`, `garden_stake`, `tomato_seedling`, `raised_garden_bed`, `tomato_vine`, `giant_tomato`.
