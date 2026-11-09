@@ -1,3 +1,10 @@
+## 2026-11-09 (blvdwalk1): Jefferson Park Boulevard walk map from Area Builder export (tag blvdwalk1), new doors not yet wired
+- Tom's export of the blvd area (chapter 20 view, system_hash a3573016): 8 tiles changed in the `plateMask` (`data/maps-la.js`). Installed with `tools/apply_walkmap.py`; only the blvd mask rows changed.
+- Not applied: (12,23) is walkable in the export but an object footprint blocks it. Six new doors have no notes and are not portals yet: (5,8), (6,8), (11,8), (12,8), (24,8), (9,19). They need destinations before wiring. Doors (17,8), (3,20), (10,20), (26,20) and exits (13-16,24) were already portals.
+- `tools/reach_test.py blvd`: 0 fails. Mask overlay looked at (`tools/shots/mask-blvd.png`). `tools/smoke.py` FAILS [].
+- Tags: `data/maps-la.js` and the build stamp in `engine/main.js` moved to blvdwalk1.
+- Tom: tap Clear all edits for the blvd map in the Area Builder once the doors are wired, since the live map then matches.
+
 ## 2026-11-09 (upload1): Art Library: UPLOAD MY OWN on every picture (art.html only, no game tag)
 - Tom: wants each character's walk, battle stance 1 and battle stance 2 to be either generated or his own uploaded image, and is open to doing it for every picture. Choice made: every entry (all 698, all tabs) gets an UPLOAD MY OWN button beside GENERATE, one change instead of per-character wiring.
 - How it works: the picture is stored on the phone as the next result (v number, chip "my upload"), then goes through the same tap-to-view, APPROVE and REJECT as a generated one. APPROVE commits it to `art/raw/<tab>/<id>-vK.png` exactly like a generated picture, so the existing bakers and installs see no difference.
