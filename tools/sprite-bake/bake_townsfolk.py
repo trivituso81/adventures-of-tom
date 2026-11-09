@@ -22,7 +22,7 @@ ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 KW = 3
 # standing height in rows (Tom is 43); matches the old sprites so nobody changes size in the town
-CAST = {'pip': 38, 'moss': 48, 'dot': 41, 'gus': 43, 'bean': 46, 'reel': 40, 'pruitt': 43,
+CAST = {'pip': 38, 'moss': 48, 'dot': 41, 'gus': 40, 'bean': 46, 'reel': 40, 'pruitt': 43,
         'page': 43, 'bun': 41, 'halverson': 43, 'ike': 42, 'delgado': 44, 'kowalski': 41,
         'sal': 44, 'kit': 45, 'luna': 38, 'penny': 38, 'oolong': 37, 'fern': 41,
         'washington': 44, 'bev': 38, 'boomie': 42, 'wes': 42, 'chet': 44, 'skye': 38,
@@ -42,6 +42,7 @@ def purge_bg(img):
     a[bgl | rim, 3] = 0
     return Image.fromarray(a, 'RGBA')
 
+SIDE_SWAP = {'gus'}   # the generator draws both side steps with the same leg forward: build step2 from step1 with the legs swapped
 LIBRARY_WALK = {'gus': 'art/raw/npcs/npc-walk-gus-v3.png'}   # id -> approved Art Library walk sheet (the newest version of the entry)
 ap = argparse.ArgumentParser()
 ap.add_argument('--only', default=None)
@@ -184,6 +185,40 @@ def fmt_rows(rows, indent='    '):
     return '[\n' + ',\n'.join(indent + "'" + r + "'" for r in rows) + '\n  ]'
 
 
+def swap_legs(img):
+    """Side view facing RIGHT: return the same figure with its two legs swapped (the other leg forward). Below the hip the picture is mirrored left to right
+    about the hip centre, then each shoe is put back unmirrored (toe still to the right) at the mirrored spot."""
+    from scipy import ndimage as ndi
+    img = img.convert('RGBA'); pad = Image.new('RGBA', (img.width + 200, img.height), (0, 0, 0, 0)); pad.paste(img, (100, 0)); img = pad
+    a = np.array(img); H, W = a.shape[:2]
+    al = a[:, :, 3] > 0
+    ys = np.where(al.any(1))[0]; top, bot = ys.min(), ys.max(); h = bot - top
+    hip = int(top + h * 0.66)
+    xs = np.where(al[hip])[0]; xc = (xs.min() + xs.max()) / 2.0
+    r, g, b = [a[:, :, i].astype(int) for i in range(3)]
+    shoe = al & (r < 200) & (r - b > 55) & (g < 125) & (np.arange(H)[:, None] > top + h * 0.86)
+    lab, n = ndi.label(ndi.binary_dilation(shoe, iterations=1) & al)
+    low = a[hip:].copy(); out = a.copy()
+    mir = low[:, ::-1].copy()
+    # mirror about xc (not about the image centre): shift so that column xc maps onto itself
+    sh = int(round(2 * xc - (W - 1)))
+    mir = np.roll(mir, sh, axis=1)
+    mir_sh = np.roll(shoe[hip:, ::-1], sh, axis=1)
+    # clear mirrored shoes and anything that left the figure
+    mir[mir_sh] = 0
+    out[hip:] = mir
+    for k in range(1, n + 1):
+        m = (lab == k) & shoe
+        if not m.any():
+            continue
+        cols = np.where(m.any(0))[0]; x0, x1 = cols.min(), cols.max()
+        dx = int(round((2 * xc - x1) - x0))
+        yy, xx = np.where(m)
+        nx = xx + dx
+        ok = (nx >= 0) & (nx < W)
+        out[yy[ok], nx[ok]] = a[yy[ok], xx[ok]]
+    return Image.fromarray(out, 'RGBA')
+
 walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
 out = {}
 for cid, ow_h in CAST.items():
@@ -194,6 +229,8 @@ for cid, ow_h in CAST.items():
         rn3 = [[f'{d}_{n}' for n in ('stand', 'step1', 'step2')] for d in ('down', 'up', 'left')]
         poses = slice_sheet(os.path.join(ROOT, LIBRARY_WALK[cid]), rn3, robust=True)
         poses = {n: purge_bg(v) for n, v in poses.items()}
+        if cid in SIDE_SWAP:
+            poses['left_step2'] = swap_legs(poses['left_step1'])
         for n in ('left_stand', 'left_step1', 'left_step2'):
             poses[n] = poses[n].transpose(Image.FLIP_LEFT_RIGHT)
     else:
