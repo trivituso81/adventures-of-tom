@@ -8337,8 +8337,16 @@
    "prompt": "PHOTO TO CHARACTER: FINAL FANTASY IX STYLE\nAttach: one photo of one person.\n\nPaint the person in the attached photo  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nKeep this person's hair, face shape, age, build, skin tone, and the same garments and colors.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nHAND DRAWN FINAL FANTASY IX CHARACTER: RAY, a 45 year old man, the security guard at the Sunset Gold Studios gate. Real height 5'11\".\nHand drawn Final Fantasy IX appearance: skin rich brown (#8a5a3c). Black (#2a2220) hair. Outfit: a top in navy (#2f3a4a), trousers in charcoal (#2c2c33), sturdy simple shoes; a hat or cap in navy (#2f3a4a). No glasses.\nHand drawn Final Fantasy IX personality and expression: a clipboard held against his chest, a firm but friendly stance, feet planted.\n\nPORTRAIT USE: this full body picture is also cropped to make Ray's dialog portrait. Keep the head large and near the top of the picture, and keep the whole face, both eyes and the mouth fully visible, with no hand, prop or hat brim covering any part of the face.\n\nSTYLE REMINDER: this is a hand drawn Final Fantasy IX character. Draw Ray as hand drawn Final Fantasy IX concept art, not a photo, not a 3D render, not pixel art. Hand drawn Final Fantasy IX linework with dark contour lines. Hand drawn Final Fantasy IX chunky brushed shading. Hand drawn Final Fantasy IX proportions: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm. Every part of Ray, the face, the hair, the clothes and the shoes, is hand drawn in the Final Fantasy IX style. Final Fantasy IX, hand drawn, full body, standing ready."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/npcs/npc-photo-toni-v1.png",
+     "date": "2026-11-09",
+     "from": "v1",
+     "at": 1794236485684
+    }
+   ],
    "rejects": [],
    "id": "npc-photo-toni",
    "tab": "NPCs",
