@@ -1,3 +1,8 @@
+## 2026-11-08 (ch9pose): Chapter 9 at the Rivituso house, Aunt Ellie and the girls stand still
+- Tom (23:28): during chapter 9 (and on the return to the house after the Moon Club) Aunt Ellie stands behind the sofa facing the TV (my reading of "rotary", say if you meant something else), Grace on her left and Rose on her right, and none of the three walk around. The girls used to be placed on wall tiles (5,4) and (7,4); now (7,7), (8,7), (9,7), `ch9Pose` in data/scenes.js.
+- New NPC field `still` (a facing): `updateNPCs` (engine/battle-draw.js) never moves such an NPC and turns it back to its pose after a chat. Undone by `ch9GirlsBack`, so Ellie wanders at (9,9) again in chapter 10.
+- Tests: headless, girls sent away with setGirlsAway: all three at the three tiles facing up, Ellie unmoved after 8 s. smoke.py not rerun in full.
+
 ## 2026-11-08 (npcff9): NPC prompts rewritten to the Final Fantasy IX photo-to-character template
 - Tom (23:11): every NPC prompt is now his fixed template, verbatim, plus a details block (age, height, skin, hair, outfit, personality). 56 entries `npc-photo-<id>`, tall 2:3, no reference images (the template says to attach one photo of the person).
 - Purged: the 42 draft group scene and cut entries and the 55 draft walk entries. Kept: the approved Pip, Moss and Dot scene, cut and walk entries (their art is installed). `validate.js` exempts `npc-photo-*` from the style-name ban.

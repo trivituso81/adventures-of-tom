@@ -3362,12 +3362,25 @@ function ch9GirlsMove() {
   const from=worlds.amyhouse,to=worlds.grands; if(!from||!to) return;
   for(const n of from.npcs.filter(n=>n.girlAtHome)) {
     from.npcs.splice(from.npcs.indexOf(n),1);
-    if(!to.npcs.some(m=>m.girlAtHome&&m.name===n.name)) { n.x=n.name==='Grace'?5:7; n.y=4; n.move=null; n.path=[]; n.lines=CH9_GIRL_LINES[n.name]||n.lines; n.visitedOnce=false; to.npcs.push(n); }
+    if(!to.npcs.some(m=>m.girlAtHome&&m.name===n.name)) { n.move=null; n.path=[]; n.lines=CH9_GIRL_LINES[n.name]||n.lines; n.visitedOnce=false; to.npcs.push(n); }
+  }
+  ch9Pose(true);
+}
+// Chapter 9 pose (Tom 2026-11-08): Aunt Ellie stands behind the sofa facing the TV with Grace on one side of her and Rose on the other,
+// and none of the three moves (`still`, honoured by updateNPCs). Undone when the girls go home.
+const CH9_POSE={Grace:[7,7],'Aunt Ellie':[8,7],Rose:[9,7]};
+function ch9Pose(on) {
+  const M=worlds.grands; if(!M) return;
+  for(const n of M.npcs) {
+    const q=CH9_POSE[n.name]; if(!q||(n.name!=='Aunt Ellie'&&!n.girlAtHome)) continue;
+    if(on) { n.x=q[0]; n.y=q[1]; n.move=null; n.path=[]; n.facing='up'; n.still='up'; }
+    else if(n.name==='Aunt Ellie') { n.x=9; n.y=9; n.still=null; }
   }
 }
 function ch9GirlsBack() {
   const to=worlds.grands; if(!to) return;
   for(let i=to.npcs.length-1;i>=0;i--) if(to.npcs[i].girlAtHome) to.npcs.splice(i,1);
+  ch9Pose(false);
 }
 // Map changes. They check flags (not events), so they also hold after loading a save.
 // The Dome doors (top of the club hall) open once the moonbeam reaches their lock.
