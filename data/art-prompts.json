@@ -14562,7 +14562,7 @@
    "group": "Title and icon"
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 1,
@@ -14609,6 +14609,12 @@
      "note": "wrong people",
      "from": "v6",
      "at": 1793760347972
+    },
+    {
+     "date": "2026-11-09",
+     "note": "should be final fantasy 9 art",
+     "from": "v10",
+     "at": 1794248172515
     }
    ],
    "id": "title-app-icon",
