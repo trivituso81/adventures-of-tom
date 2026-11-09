@@ -1,0 +1,23 @@
+[
+{"name":"ch01","ch":1,"map":"hollow","scenes":["ch1Pond","ch1AfterBoss"],"party":["tom","grace","rose","deedee"],"boss":"The Big One","start":[9,11,"right"],"walk":["right","right"]},
+{"name":"ch02","ch":2,"map":"griffith","scenes":["ch2Boss","ch2AfterBoss"],"party":["tom","tnb","nara"],"boss":"The Big Shake"},
+{"name":"ch03","ch":3,"map":"sundial","scenes":["ch3Pool","ch3AfterBoss"],"party":["tom","grace","rose","boppy"],"boss":"Old Iron-Gill"},
+{"name":"ch04","ch":4,"map":"stageset","scenes":["ch4Boss","ch4AfterBoss"],"party":["tom","tnb","nara"],"boss":"The Director’s Cut"},
+{"name":"ch05","ch":5,"map":"cafetorium","scenes":["ch5Boss","ch5AfterBoss"],"party":["tom","grace","rose","amy"],"boss":"The Red Pen"},
+{"name":"ch06","ch":6,"map":"crown","scenes":["ch6Boss","ch6AfterBoss"],"party":["tom","tnb","nara"],"boss":"Chairman Cheeks"},
+{"name":"ch07","ch":7,"map":"readroom","scenes":["ch7Boss","ch7AfterBoss"],"party":["tom","grace","rose"],"boss":"The Unread"},
+{"name":"ch08","ch":8,"map":"boiler","scenes":["ch8Boss","ch8AfterBoss"],"party":["tom","tnb","nara"],"boss":"Old Ironbelly"},
+{"name":"ch09","ch":9,"map":"dome","scenes":["ch9Boss","ch9AfterBoss"],"party":["tom","deedee","boppy"],"boss":"The Mirrorball"},
+{"name":"ch10","ch":10,"map":"gatezero","scenes":["ch10Boss","ch10AfterBoss"],"party":["tom","grace","rose","amy"],"boss":"The Last Call"},
+{"name":"ch11","ch":11,"map":"concourse","scenes":["ch11Vance","ch11After"],"party":["tom","grace","rose","amy"],"boss":"finalcall"},
+{"name":"ch12","ch":12,"map":"jpark","scenes":["ch12Prime","ch12After"],"party":["tom","grace","rose","amy"],"boss":"gridlockprime"},
+{"name":"ch13","ch":13,"map":"subchamber","scenes":["ch13Worm","ch13After"],"party":["tom","amy","tnb","nara"],"boss":"drillworm"},
+{"name":"ch14","ch":14,"map":"row","scenes":["ch14Gate","ch14After"],"party":["tom","amy","grace","rose"],"boss":"Boppy"},
+{"name":"ch15","ch":15,"map":"grands","scenes":["ch15Open","ch15Fight","ch15After"],"party":["tom","grace","rose","amy"],"boss":"HUSH-9"},
+{"name":"ch16","ch":16,"map":"town","scenes":["ch16Open","ch16Fight","ch16After"],"party":["tom","grace","rose","amy"],"boss":"Marlowe"},
+{"name":"ch17","ch":17,"map":"towervault","scenes":["ch17Vault","ch17Fight","ch17After"],"party":["tom","grace","rose","amy"],"boss":"twinlens"},
+{"name":"ch18","ch":18,"map":"towerpinnacle","scenes":["ch18Pinnacle","ch18Fight","ch18After"],"party":["tom","grace","rose","amy"],"boss":"vance"},
+{"name":"ch19","ch":19,"map":"deadletter","scenes":["ch19Claim","ch19Fight","ch19After"],"party":["tom","grace","rose","amy"],"boss":"censor"},
+{"name":"ch20","ch":20,"map":"foreverheart","scenes":["ch20Heart","ch20Fight1","ch20Shatter","ch20Fight2","ch20Calm"],"party":["tom","grace","rose","amy"],"boss":"leviathan"},
+{"name":"ns","ch":21,"prefix":"ns","map":"hollow","scenes":["nsPond","nsPond2","nsAfterBoss"],"party":["tom","grace","rose"],"boss":"Brain Freeze","start":[9,11,"right"],"walk":["right","right"]}
+]
