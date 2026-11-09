@@ -1069,16 +1069,13 @@ B2_TOMBO_ANIM.grace2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 // The train is drawn twice: whole in the back layer, and again in the front layer clipped left of the gap between the
 // monsters and the party, so it passes in front of the monsters and behind the party without a visible seam.
 const SILVER='#c9ced8',SILVER2='#9aa1ae',METRO_RED='#d8323a';
-const transferCard=(x,y,a,s=1)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a); gfx.scale(s,s);
-  RO(-13,-8,26,16,GOLD); R(-11,-6,22,3,'#fff4c0'); R(-13,2,26,3,'#c9a23a'); label('TAP',0,-3,'#7a4a10',1); gfx.restore(); };
 const longboard=(x,y,a)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(a);
   RO(-34,-4,68,6,'#c9783a'); R(-30,-4,60,2,'#e8a060'); for(const wx of [-22,22]) { EO(wx,5,3.5,3.5,'#f4e04a'); } gfx.restore(); };
 B2_TOMBO_ANIM.tnb2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
-  const T=ST.unit(tom),N=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty();
-  const tsp=BATTLE_SPRITES.tom,nsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,TW=tsp.idle[0].length*tsp.scale;
+  const N=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty();
   const px0=Math.min(...party.map(p=>{ const q=ST.unit(p); return q.x-q.w*.32; }));
   const gapX=cl((GR.x1+px0)/2,GR.x1+6,px0-6);                  // the seam between the two layers
-  const yR=306,carH=136,roof=yR-carH,L=470;                    // rails, car height, roof line, train length
+  const yR=306,roof=yR-136,L=470,bot=yR-4;                     // rails, roof line, train length, bottom of the car
   const xS=gapX-8,boardX=xS+212;                               // where the nose stops; TNB's spot on the roof
   const P={arrive0:350,arrive:1350,board:1450,aboard:1900,card:2050,tline:2650,honk:2950,go:3250,out:4250,dark:4300,back:4500,glow:5000,end:5900};
   const goDur=P.out-P.go,travel=xS+L+60;
@@ -1086,24 +1083,23 @@ B2_TOMBO_ANIM.tnb2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   // When the nose reaches each monster (right edge first).
   const order=list.map(f=>({f,q:ST.foe(f)})).sort((a,b)=>b.q.x-a.q.x);
   for(const o of order) { const need=cl((xS-(o.q.x+o.q.w*.3))/travel,0,1); o.t=Math.round(P.go+Math.sqrt(need)*goDur); }
-  const sT={hide:false};
-  const lb=(x,y,a)=>{ if(!PROPART.draw('tnb/longboard',x,y-4,{h:52,rot:a+.77})) longboard(x,y,a); };
-  // Tom: walks to the cab door and climbs in (hidden: the cab draws him), back home with a hop at the end.
+  const lb=(x,y,a)=>{ PROPART.draw('tombo/longboard',x,y-4,{h:52,rot:a+.77}); };
+  const TB=(who,n,sp)=>tbf('tnb2',who,n,sp)||sp.idle;          // painted frames (art/tombo/tnb2-*.webp): 'tom' Tom, 'p' TNB
+  // Tom: walks to the cab and stands at the front of the car (sunglasses on, then the thumbs up), rides with the nose, hops home at the end.
   pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp,dx=xS+70;
-    if(ms<P.board) return {cx:c.origX,base:c.origBase,frame:ms>P.arrive0&&ms<P.arrive?sp.expr:sp.idle};
-    if(ms<P.aboard) { const k=ez(seg(ms,P.board,P.aboard)); return {cx:lerp(c.origX,dx,k),base:lerp(c.origBase,yR-20,k)-Math.sin(k*Math.PI)*30,frame:k<1?runFr(sp,c.t,-1):sp.idle}; }
-    if(ms<P.back) { sT.hide=true; return {cx:dx,base:yR,frame:sp.idle,hide:true}; }
-    sT.hide=false; const k=seg(ms,P.back,P.back+300); return {cx:c.origX,base:c.origBase-Math.sin(k*Math.PI)*22,frame:k<1?sp.celeb:sp.idle}; });
-  // TNB: hops onto the roof, faces the party to toss the transfers, then surfs (facing left) as the train leaves.
-  const sN={x:N.x,b:N.base,f:nsp.idle};
-  const throwR=nsp.throw?mirrorRowsCached(nsp,'throw'):nsp.flip;
-  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=boardX,y=roof-8,f=sp.flip,rot=0;
-    if(ms<P.board) { x=c.origX; y=c.origBase; f=sp.idle; }
-    else if(ms<P.aboard) { const k=ez(seg(ms,P.board,P.aboard)); x=lerp(c.origX,boardX,k); y=lerp(c.origBase,roof-8,k)-Math.sin(k*Math.PI)*70; f=sp.celeb; }
-    else if(ms<P.honk) { const k=(ms-P.card)/180; f=ms>P.card&&ms<P.card+party.length*180?(Math.floor(k)%2?throwR:sp.flip):sp.flip; }
-    else if(ms<P.back) { const n=noseAt(ms); x=boardX+(n-xS); f=sp.act||sp.idle; rot=ms>P.go?.08+Math.sin(ms/70)*.04:0; y=roof-8-(ms>P.go?Math.abs(Math.sin(ms/90))*3:0); }
-    else { const k=seg(ms,P.back,P.back+300); x=c.origX; y=c.origBase-Math.sin(k*Math.PI)*22; f=k<1?sp.celeb:sp.idle; }
-    sN.x=x; sN.b=y; sN.f=f; return {cx:x,base:y,frame:f,rot,noShadow:ms>P.board&&ms<P.back}; });
+    if(ms<P.board) return {cx:c.origX,base:c.origBase,frame:TB('tom',1,sp)};
+    if(ms<P.aboard) { const k=ez(seg(ms,P.board,P.aboard)); return {cx:lerp(c.origX,dx,k),base:lerp(c.origBase,yR-22,k)-Math.sin(k*Math.PI)*30,frame:k<1?runFr(sp,c.t,-1):TB('tom',1,sp)}; }
+    if(ms<P.back) return {cx:noseAt(ms)+70,base:yR-22,frame:TB('tom',ms<P.tline?1:ms<P.go?2:3,sp)};
+    const k=seg(ms,P.back,P.back+300); return {cx:c.origX,base:c.origBase-Math.sin(k*Math.PI)*22,frame:k<1?TB('tom',5,sp):TB('tom',1,sp)}; });
+  // TNB: hops onto the roof, tosses the transfers (frames 4 and 5 alternate), then surfs the roof on his longboard as the train leaves.
+  const sN={x:N.x,b:N.base};
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=boardX,y=roof-8,f=TB('p',2,sp),rot=0;
+    if(ms<P.board) { x=c.origX; y=c.origBase; f=TB('p',1,sp); }
+    else if(ms<P.aboard) { const k=ez(seg(ms,P.board,P.aboard)); x=lerp(c.origX,boardX,k); y=lerp(c.origBase,roof-8,k)-Math.sin(k*Math.PI)*70; f=TB('p',3,sp); }
+    else if(ms<P.honk) { if(ms>P.card&&ms<P.card+party.length*180) f=Math.floor((ms-P.card)/180)%2?TB('p',5,sp):TB('p',4,sp); }
+    else if(ms<P.back) { const n=noseAt(ms); x=boardX+(n-xS); f=TB('p',4,sp); rot=ms>P.go?.08+Math.sin(ms/70)*.04:0; y=roof-8-(ms>P.go?Math.abs(Math.sin(ms/90))*3:0); }
+    else { const k=seg(ms,P.back,P.back+300); x=c.origX; y=c.origBase-Math.sin(k*Math.PI)*22; f=k<1?TB('p',6,sp):TB('p',1,sp); }
+    sN.x=x; sN.b=y; return {cx:x,base:y,frame:f,rot,noShadow:ms>P.board&&ms<P.back}; });
   const tunK=ms=>ez(seg(ms,0,450))*(1-ez(seg(ms,P.dark,P.dark+450)));
   // The tunnel: dark overlay, a band of white subway tiles, the METRO sign, the rails, light streaks when moving.
   scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const k=tunK(ms); if(k<=0) return;
@@ -1119,57 +1115,28 @@ B2_TOMBO_ANIM.tnb2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     if(ms>P.go&&ms<P.out+100) { const q=seg(ms,P.go,P.out); for(let j=0;j<7;j++) { const y=ty0+12+j*((ty1-ty0-20)/6),x=(j*137+ms*(.4+q*1.6))%700-60;
       gfx.globalAlpha=k*.7; Ln(x,y,x+60+q*90,y,3,'#fff6dc'); } gfx.globalAlpha=k; }
     gfx.globalAlpha=1; }});
-  // The train itself, nose at xn (facing left). Tom rides in the cab window.
-  const train=(xn,ms)=>{ const top=roof,bot=yR-4;
+  // The painted silver subway car, nose at xn (facing left), repeated behind it. Braking sparks at the nose.
+  const train=(xn,ms)=>{ const cw=250,ch=167,cy=bot-72;
     // headlight beams ahead of the nose
     if(ms<P.out) { gfx.globalAlpha=.16; gfx.beginPath(); gfx.moveTo(xn+4,bot-30); gfx.lineTo(xn-220,bot-70); gfx.lineTo(xn-220,bot+14); gfx.lineTo(xn+4,bot-16); gfx.closePath(); gfx.fillStyle='#fff6c0'; gfx.fill(); gfx.globalAlpha=1; }
-    const pT=PROPART.ready('tombo/red_line_subway_train');
-    if(pT) { const cw=250,ch=136,cy=bot-58; PROPART.draw('tombo/red_line_subway_train',xn+cw/2,cy,{w:cw,h:ch});
-      for(let sx2=xn+cw;sx2<xn+L;sx2+=cw*.7) { gfx.save(); gfx.beginPath(); gfx.rect(sx2,0,Math.min(cw*.7,xn+L-sx2),324); gfx.clip(); PROPART.draw('tombo/red_line_subway_train',sx2-cw*.3+cw/2,cy,{w:cw,h:ch}); gfx.restore(); }
-      if(sT.hide) { gfx.save(); gfx.beginPath(); gfx.rect(xn+20,top+32,56,44); gfx.clip(); const fr=ms>P.honk-60&&ms<P.honk+500?tsp.celeb:tsp.idle; drawSprite(fr,tsp.pal,xn+48-TW/2,top+38,tsp.scale); gfx.restore(); } }
-    if(!pT) {
-    // body
-    gfx.beginPath(); gfx.moveTo(xn+30,top); gfx.lineTo(xn+L,top); gfx.lineTo(xn+L,bot); gfx.lineTo(xn,bot); gfx.lineTo(xn,top+46); gfx.quadraticCurveTo(xn+2,top+4,xn+30,top); gfx.closePath();
-    gfx.lineWidth=5; gfx.strokeStyle=OUT; gfx.lineJoin='round'; gfx.stroke(); gfx.fillStyle=SILVER; gfx.fill();
-    gfx.save(); gfx.clip();
-    R(xn,top,L,10,'#e4e8ee'); R(xn,bot-34,L,26,SILVER2); R(xn,bot-46,L,10,METRO_RED); R(xn,bot-36,L,2,'#f06a70');
-    for(let x=xn+150;x<xn+L;x+=120) R(x,top,2,bot-top,'#7a808c');
-    gfx.restore();
-    // cab window with Tom (sunglasses), the horn cord
-    const wx=xn+16,wy=top+14,ww=78,wh=60;
-    RO(wx,wy,ww,wh,'#7ab4d8'); gfx.save(); gfx.beginPath(); gfx.rect(wx,wy,ww,wh); gfx.clip();
-    if(sT.hide) { const fr=ms>P.honk-60&&ms<P.honk+500?tsp.celeb:tsp.idle,tx=wx+ww/2-TW/2+6,ty=wy+8; drawSprite(fr,tsp.pal,tx,ty,tsp.scale);
-      const sc=tsp.scale,ey=ty+12*sc; R(tx+7*sc,ey-1.2*sc,11*sc,2.6*sc,'#14141a'); R(tx+8*sc,ey-1*sc,3*sc,.8*sc,'#6a7a9a'); R(tx+14*sc,ey-1*sc,3*sc,.8*sc,'#6a7a9a'); }
-    const pull=ms>P.honk&&ms<P.honk+400?Math.abs(Math.sin(seg(ms,P.honk,P.honk+400)*Math.PI*2))*10:0;
-    Ln(wx+ww-14,wy,wx+ww-14,wy+20+pull,2,'#e8e4d8'); EO(wx+ww-14,wy+22+pull,2.5,2.5,'#e8e4d8');
-    gfx.globalAlpha=.35; R(wx,wy,ww,8,'#ffffff'); gfx.globalAlpha=1; gfx.restore();
-    // side windows and doors
-    for(let x=xn+130,j=0;x<xn+L-40;x+=120,j++) { RO(x-44,top+18,40,38,'#5a7a9a'); R(x-42,top+20,36,6,'#8ab0d0');
-      RO(x+6,top+16,34,bot-top-52,'#b8bec8'); Ln(x+23,top+16,x+23,bot-36,2,OUT); R(x+6,top+16,34,3,'#f4e04a'); }
-    label('RED LINE',xn+L-80,bot-44,'#ffffff',1);
-    EO(xn+10,bot-22,5,5,'#fff6c0'); EO(xn+26,bot-22,5,5,'#fff6c0'); RO(xn+46,bot-14,26,6,'#3a3e46');
-    // bogies
-    for(const bx of [xn+70,xn+L-80]) { RO(bx-34,bot-4,68,10,'#2a2c32'); for(const wx2 of [bx-20,bx+20]) { EO(wx2,bot+6,8,8,'#3a3c44'); E(wx2,bot+6,3,3,'#8a8e98'); } }
-    // roof vents and a pantograph-free subway roof
-    for(let x=xn+120;x<xn+L-30;x+=120) RO(x,top-6,40,6,'#8a909c');
-    }
+    PROPART.draw('tombo/silver_subway_car',xn+cw/2,cy,{w:cw,h:ch});
+    for(let sx2=xn+cw;sx2<xn+L;sx2+=cw*.7) { gfx.save(); gfx.beginPath(); gfx.rect(sx2,0,Math.min(cw*.7,xn+L-sx2),324); gfx.clip(); PROPART.draw('tombo/silver_subway_car',sx2-cw*.3+cw/2,cy,{w:cw,h:ch}); gfx.restore(); }
     // braking sparks
     if(ms>P.arrive-500&&ms<P.arrive) for(let j=0;j<6;j++) { const q=(ms/90+j/6)%1; gfx.globalAlpha=1-q; E(xn+70+(j%2?20:-20)+q*30,bot+12-q*10,2,2,j%2?'#ffe08a':'#ffffff'); }
     gfx.globalAlpha=1; };
   scene('tb_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const n=noseAt(ms); if(n>600||n<-L-20) return; train(n,ms); }});
-  // Front layer: the train again, left of the gap only; the longboard; the cards; speed lines.
+  // Front layer: the train again, left of the gap only; the longboard; the speed lines; the monsters flung after the hit.
   scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const n=noseAt(ms);
     if(n<=600&&n>=-L-20&&n<gapX) { gfx.save(); gfx.beginPath(); gfx.rect(-10,0,gapX+10,324); gfx.clip(); train(n,ms); gfx.restore(); }
     if(ms>P.aboard-80&&ms<P.back) lb(sN.x,sN.b+5,ms>P.go?.08+Math.sin(ms/70)*.04:0);
     if(ms>P.go&&ms<P.out) { gfx.globalAlpha=.8; for(let j=0;j<5;j++) { const y=roof-10+j*28,x=n+L+20+((ms*.9+j*53)%120); Ln(x,y,x+70,y,3,'#ffffff'); } gfx.globalAlpha=1; }
-    // monsters flung after the hit
     for(const o of order) { const f=o.f,k=seg(ms,o.t,o.t+800);
       if(k>0&&k<1) { f.oy=-Math.sin(k*Math.PI)*70; f.ox=-k*24*(1-k); f.spin=k*Math.PI*2; f.spinAt=performance.now(); }
       else if(k>=1&&o.t&&!o.done) { o.done=true; f.oy=0; f.ox=0; f.spin=0; } }
   }});
-  // The transfer cards: one per party member, out of TNB's hand.
+  // The transfer cards: one per party member, out of TNB's hand (gold, then the second design, alternating).
   const cards=()=>party.forEach((p,i)=>{ const q=p===tom?{x:xS+60,mid:roof+40}:ST.unit(p),h={x:sN.x+18,y:sN.b-100};
-    ST.fly((x,y,uu)=>{ if(!PROPART.draw('tombo/gold_transfer_card',x,y,{w:30,rot:uu*Math.PI*4})) transferCard(x,y,uu*Math.PI*4,1.6); },h.x,h.y,q.x,q.mid,.45,50,i*.18);
+    ST.fly((x,y,uu)=>{ PROPART.draw(i%2?'tombo/second_gold_transfer_card':'tombo/gold_transfer_card',x,y,{w:30,rot:uu*Math.PI*4}); },h.x,h.y,q.x,q.mid,.45,50,i*.18);
   });
   const steps=[
     [0,()=>{ setMessage('TOMBO! TNB and Tom take the subway. Red Line, express.'); B2.aim=null; S('rumble'); }],
@@ -1211,39 +1178,41 @@ const rope=(ax,ay,bx,by,sag,t)=>{ const mx=(ax+bx)/2,my=(ay+by)/2+sag;
   for(const [x,y] of [[ax,ay],[bx,by]]) { EO(x,y,7,7,'#d8323a'); E(x-2,y-2,3,2,'#f4f0e6'); } };
 B2_TOMBO_ANIM.nara2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),N=ST.unit(pt),list=b2LiveFoes(),tgt=(E2.targets||[]).find(t=>t.side==='foe')||list[0],F=ST.foe(tgt);
-  const tsp=BATTLE_SPRITES.tom,nsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,NH=nsp.idle.length*nsp.scale;
+  const tsp=BATTLE_SPRITES.tom,nsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,NH=nsp.idle.length*nsp.scale,NW=nsp.idle[0].length*nsp.scale;
   const fr=F.x+F.w/2,nb=cl(F.base+8,220,312),nx=cl(fr+110,140,450),tx=Math.min(nx+115,552);
   const land={x:fr-12,b:F.base-F.h*.18};   // Tom's cx at the hit is land.x+30: smacked into its right side
   const P={walk:650,grab:750,tug:900,tline:1500,yank:2350,fly:2550,hit:3000,slide:3150,stand:3600,steal:3300,apply:3700,win:3750,home:4450,end:5200};
   const tug=ms=>ms>P.tug&&ms<P.yank?Math.sin((ms-P.tug)/170)*6:0;          // the back-and-forth
   const sT={x:T.x,b:T.base,f:tsp.idle,rot:0},sN={x:N.x,b:N.base,f:nsp.idle,rot:0};
-  const nR=k=>nsp[k]?mirrorRowsCached(nsp,k):nsp.flip;
-  // Tom: to his end of the rope (facing left), leans back politely, gets yanked over Nara into the monster, slides down.
-  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=nb,f=sp.idle,rot=0;
+  // Tom (painted sheet tombo-nara2-tom, faces front): walks to his end of the rope, leans back politely (frame 2), leans into the yank (frame 3),
+  // flies over Nara (frame 4), lands sprawled (frame 5), sits dizzy (frame 6), then stands up for the win (frame 1).
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=nb,f=tbf('nara2','tom',1,sp)||sp.idle,rot=0;
     if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,nb,k); f=runFr(sp,c.t,-1); }
-    else if(ms<P.yank) { x=tx+4+tug(ms); rot=.1; f=sp.act; }
-    else if(ms<P.fly) { const k=seg(ms,P.yank,P.fly); x=tx-k*14; rot=lerp(.1,-.25,k); f=sp.expr; }
-    else if(ms<P.hit) { const k=seg(ms,P.fly,P.hit); x=lerp(tx-14,land.x+30,k); y=lerp(nb,land.b,k)-Math.sin(k*Math.PI)*95; rot=-k*Math.PI*2-.4*k; f=sp.celeb; }
-    else if(ms<P.stand) { const k=seg(ms,P.slide,P.stand); x=land.x+30+k*8; y=lerp(land.b,nb,ez(k)); rot=lerp(-.4,0,k); f=sp.kneel||sp.idle; }
-    else if(ms<P.home) { x=land.x+38; y=nb; f=ms>P.win+200?sp.flip:sp.idle; }
+    else if(ms<P.yank) { x=tx+4+tug(ms); rot=.1; f=tbf('nara2','tom',ms<P.tline?2:3,sp)||sp.act; }
+    else if(ms<P.fly) { const k=seg(ms,P.yank,P.fly); x=tx-k*14; rot=lerp(.1,-.25,k); f=tbf('nara2','tom',3,sp)||sp.expr; }
+    else if(ms<P.hit) { const k=seg(ms,P.fly,P.hit); x=lerp(tx-14,land.x+30,k); y=lerp(nb,land.b,k)-Math.sin(k*Math.PI)*95; rot=-k*Math.PI*2-.4*k; f=tbf('nara2','tom',4,sp)||sp.celeb; }
+    else if(ms<P.stand) { const k=seg(ms,P.slide,P.stand); x=land.x+30+k*8; y=lerp(land.b,nb,ez(k)); rot=lerp(-.4,0,k); f=tbf('nara2','tom',ms<P.slide?4:5,sp)||sp.kneel||sp.idle; }
+    else if(ms<P.home) { x=land.x+38; y=nb; f=tbf('nara2','tom',ms>P.win+200?1:6,sp)||sp.idle; }
     else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(land.x+38,c.origX,k); y=lerp(nb,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
     sT.x=x; sT.b=y; sT.f=f; sT.rot=rot; return {cx:x,base:y,frame:f,rot,noShadow:ms>P.fly&&ms<P.stand}; });
-  // Nara: trots to her spot, turns to face Tom, chomps the rope, shakes and growls, the big yank, then the victory prance.
-  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=nx,y=nb,f=sp.flip,rot=0;
+  // Nara (painted sheet tombo-nara2-nara, mirrored to face Tom): trots to her spot, bows to take the rope (frame 2), runs the tug (frame 3),
+  // looks up to wind up (frame 4), stands tall after the hit (frame 1), jumps for joy (frame 6), then runs home.
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=nx,y=nb,f=tbfm('nara2','p',1)||sp.flip,rot=0;
     if(ms<P.walk+100) { const k=ez(ms/(P.walk+100)); x=lerp(c.origX,nx,k); y=lerp(c.origBase,nb,k)-Math.abs(Math.sin(c.t*16))*4; f=runFr(sp,c.t,-1); }
-    else if(ms<P.yank) { x=nx-2+tug(ms)*.5; rot=ms>P.tug?Math.sin(ms/45)*.09:0; f=nR('aim'); }
-    else if(ms<P.hit) { const k=seg(ms,P.yank,P.yank+200); const back=1-ez(seg(ms,P.fly+100,P.hit)); x=nx-ez(k)*16*back; y=nb+ez(k)*3*back; rot=-.14*ez(k)*back; f=nR('wind'); }
-    else if(ms<P.win) { f=sp.flip; }
-    else if(ms<P.home) { const k=seg(ms,P.win,P.home); x=nx; y=nb-Math.abs(Math.sin(k*Math.PI*3))*14; f=sp.celebFlip||sp.flip; }
+    else if(ms<P.yank) { x=nx-2+tug(ms)*.5; rot=ms>P.tug?Math.sin(ms/45)*.09:0; f=tbfm('nara2','p',ms<P.tug?2:3)||sp.flip; }
+    else if(ms<P.hit) { const k=seg(ms,P.yank,P.yank+200); const back=1-ez(seg(ms,P.fly+100,P.hit)); x=nx-ez(k)*16*back; y=nb+ez(k)*3*back; rot=-.14*ez(k)*back; f=tbfm('nara2','p',ms<P.fly?4:3)||sp.flip; }
+    else if(ms<P.win) { f=tbfm('nara2','p',1)||sp.flip; }
+    else if(ms<P.home) { const k=seg(ms,P.win,P.home); x=nx; y=nb-Math.abs(Math.sin(k*Math.PI*3))*14; f=tbfm('nara2','p',6)||sp.flip; }
     else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(nx,c.origX,k); y=lerp(nb,c.origBase,k)-(k<1?Math.abs(Math.sin(c.t*16))*4:0); f=k<1?runFr(sp,c.t,1):sp.idle; }
     sN.x=x; sN.b=y; sN.f=f; sN.rot=rot; return {cx:x,base:y,frame:f,rot}; });
-  const mouth=()=>{ const h=handPt(nsp,sN.f,sN.x,sN.b,1); return {x:h.x+4,y:h.y-4}; };
+  // Mouth and hand points: fixed spots on the painted figures (Nara's mouth is on her right side, Tom's hand is at his left hip height).
+  const mouth=()=>({x:sN.x+NW*.3,y:sN.b-NH*.8});
   const tomHand=()=>{ const H=TH,r=sT.rot,dx=-TH*.22,dy=-H*.52; return {x:sT.x+dx*Math.cos(r)-dy*Math.sin(r),y:sT.b+dx*Math.sin(r)+dy*Math.cos(r)}; };
   scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{
     // the rope: taut while they tug, trailing behind Tom in flight, dropped at Nara's feet after
     if(ms>P.grab&&ms<P.win) { const m=mouth(),h=tomHand(),taut=ms>P.tug&&ms<P.hit;
       rope(m.x,m.y,h.x,h.y,taut?6+Math.sin(ms/60)*2:28,ms/1000); }
-    else if(ms>=P.win&&ms<P.home) { const m=mouth(); rope(m.x,m.y,m.x+30,nb-4,10,0); }
+    else if(ms>=P.win&&ms<P.home) { PROPART.draw('tombo/tug_rope',nx+60,nb,{h:26}); }
     if(ms>P.grab&&ms<P.grab+300) { const m=mouth(),k=seg(ms,P.grab,P.grab+300); gfx.globalAlpha=1-k; ring(m.x,m.y,10+k*20,8+k*14,3,CREAM); gfx.globalAlpha=1; }
     // strain lines while tugging
     if(ms>P.tug&&ms<P.yank) { gfx.globalAlpha=.85; for(let j=0;j<3;j++) { const ox=sN.x-NH*.42-4-j*7,oy=sN.b-NH*.55+j*9+Math.sin(ms/50+j)*2; Ln(ox,oy,ox-10,oy,3,CREAM); } gfx.globalAlpha=1; }
@@ -2196,10 +2165,6 @@ B2_TOMBO_ANIM.boppy3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 // between the cups, through the wall. They walk toward each other, the miles count down to zero as the map folds,
 // the wall shatters, the cups CLINK and they kiss. A Cone Six heat wave rolls over every monster. Effects: Cozy hit
 // on every enemy; the party heals 60%, everyone gets a fresh costume, continuity 2.
-const mug=(x,y,glow,steam,ms)=>{ if(glow>0) { gfx.globalAlpha=glow*(.35+.15*Math.sin(ms/90)); E(x,y,16,16,'#ff8a2a'); gfx.globalAlpha=1; }
-  RO(x-6,y-7,12,13,'#c8b49a'); R(x-6,y-7,12,3,'#7aa8b8'); for(const [a,b2] of [[-3,0],[2,2],[-1,4],[3,-2]]) R(x+a,y+b2,1.5,1.5,'#6a5a48');
-  ring(x+8,y-1,3.5,4,3,OUT); ring(x+8,y-1,3.5,4,1.5,'#c8b49a');
-  if(steam) for(let j=0;j<2;j++) { const q2=((ms/700)+j/2)%1; gfx.globalAlpha=(1-q2)*.8; E(x-2+j*4+Math.sin(q2*6)*2,y-10-q2*14,2+q2*2,2+q2*2,'#f4f0e6'); } gfx.globalAlpha=1; };
 B2_TOMBO_ANIM.tnb3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),list=b2LiveFoes(),GR=ST.group(list),party=b2LiveParty();
   const tsp=BATTLE_SPRITES.tom,nsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,NH=nsp.idle.length*nsp.scale;
@@ -2209,18 +2174,19 @@ B2_TOMBO_ANIM.tnb3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const last=order.length?order[order.length-1].t:FL+300;
   const P={walk:700,mugs:1100,nline:1300,thread:2000,tline:2600,step0:3300,step1:3950,fold0:3300,fold1:3950,clink:3950,kiss:4250,flare:FL,
     apply:last+250,home:last+1200,end:last+1900};
+  const TB=(who,n,sp)=>tbf('tnb3',who,n,sp)||sp.idle, TBN=(n,sp)=>tbfm('tnb3','p',n)||sp.flip;   // painted frames (art/tombo/tnb3-*.webp): Tom's sheet faces front; TNB's sheet faces left, so TBN turns it to face Tom
   const sT={x:T.x,b:by,f:tsp.idle},sN={x:lx,b:by,f:nsp.flip};
-  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=rx,y=by,f=sp.idle;
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=rx,y=by,f=TB('tom',6,sp);
     if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,rx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
-    else if(ms<P.step0) { f=ms>P.tline-200&&ms<P.step0?sp.act:sp.idle; }
-    else if(ms<P.home) { const k=ez(seg(ms,P.step0,P.step1)); x=lerp(rx,mr,k); f=k<1?runFr(sp,c.t*.7,-1):(ms>P.flare&&ms<P.flare+700?sp.celeb:sp.idle); }
-    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(mr,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    else if(ms<P.step0) { f=ms>P.tline-200?TB('tom',1,sp):TB('tom',6,sp); }
+    else if(ms<P.home) { const k=ez(seg(ms,P.step0,P.step1)); x=lerp(rx,mr,k); f=k<1?runFr(sp,c.t*.7,-1):ms<P.flare?TB('tom',6,sp):ms<P.flare+700?TB('tom',4,sp):TB('tom',3,sp); }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(mr,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):TB('tom',6,sp); }
     sT.x=x; sT.b=y; sT.f=f; return {cx:x,base:y,frame:f}; });
-  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp,actR=mirrorRowsCached(sp,'act'); let x=lx,y=by,f=sp.flip;
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=lx,y=by,f=TBN(6,sp);
     if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,lx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t,-1); }
-    else if(ms<P.step0) { f=ms>P.nline-100&&ms<P.step0?actR:sp.flip; }
-    else if(ms<P.home) { const k=ez(seg(ms,P.step0,P.step1)); x=lerp(lx,ml,k); f=k<1?runFr(sp,c.t*.7,1):(ms>P.flare&&ms<P.flare+700?(sp.celebFlip||sp.flip):sp.flip); }
-    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(ml,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
+    else if(ms<P.step0) { f=ms>P.nline-100?TBN(1,sp):TBN(6,sp); }
+    else if(ms<P.home) { const k=ez(seg(ms,P.step0,P.step1)); x=lerp(lx,ml,k); f=k<1?runFr(sp,c.t*.7,1):ms<P.flare?TBN(1,sp):ms<P.flare+700?TBN(4,sp):TBN(5,sp); }
+    else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(ml,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):TBN(6,sp); }
     sN.x=x; sN.b=y; sN.f=f; return {cx:x,base:y,frame:f}; });
   const show=ms=>ez(seg(ms,0,500))*(1-ez(seg(ms,P.home,P.end-100)));
   const fold=ms=>ez(seg(ms,P.fold0,P.fold1));
@@ -2238,7 +2204,7 @@ B2_TOMBO_ANIM.tnb3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     if(!PROPART.draw('tombo/new_york_skyline',sX+4,gy+70-44,{h:88})) for(const [dx,w,h] of [[-8,10,46],[4,12,62],[18,9,38]]) { RO(sX+dx,gy+70-h,w,h,'#3a4a6a'); for(let yy=gy+74-h;yy<gy+66;yy+=8) R(sX+dx+3,yy,3,3,'#ffe08a'); }
     gfx.globalAlpha=1;
     if(fk>0&&fk<1) { gfx.globalAlpha=Math.sin(fk*Math.PI)*.5*k; R(mx-6-fk*20,0,12+fk*40,324,'#000000'); gfx.globalAlpha=1; } }});
-  const mugT=()=>{ const h=handPt(tsp,sT.f,sT.x,sT.b,-1); return {x:h.x-4,y:h.y-6}; },mugN=()=>{ const h=handPt(nsp,sN.f,sN.x,sN.b,1); return {x:h.x+2,y:h.y-6}; };
+  const mugT=()=>({x:sT.x-TH*.14,y:sT.b-TH*.5}),mugN=()=>({x:sN.x+NH*.14,y:sN.b-NH*.5});   // hands at the chest, on the wall side (painted frames have no hand lookup)
   scene('tb_draw',P.end/1000,{draw:(s2,u,ms)=>{ const k=show(ms);
     // labels: LA and NY at the top, the miles count over the wall
     if(k>0&&ms>1600&&ms<P.clink+300) { const fk=fold(ms),a=k*ez(seg(ms,1600,2000))*(1-seg(ms,P.clink,P.clink+300)); gfx.globalAlpha=a;
@@ -2253,7 +2219,7 @@ B2_TOMBO_ANIM.tnb3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
         gfx.fillStyle=j%3?GOLD:'#bfeaff'; gfx.beginPath(); gfx.moveTo(0,-5); gfx.lineTo(4,4); gfx.lineTo(-4,3); gfx.closePath(); gfx.fill(); gfx.restore(); } gfx.globalAlpha=1; }
     // the cups
     if(ms>P.mugs&&ms<P.home+200) { const a=ez(seg(ms,P.mugs,P.mugs+250))*(1-seg(ms,P.home-100,P.home+200)); gfx.globalAlpha=a;
-      const mT=mugT(),mN=mugN(); PROPART.draw('tnb/stoneware_mugs',lx-38,by-8,{w:36}); mug(mN.x,mN.y,ms<P.flare+600?1:0,false,ms); mug(mT.x,mT.y,0,true,ms); gfx.globalAlpha=1;
+      const mT=mugT(),mN=mugN(); PROPART.draw('tnb/stoneware_mugs',lx-38,by-8,{w:36}); if(ms<P.flare+600) { gfx.globalAlpha=a*(.35+.15*Math.sin(ms/90)); E(mN.x,mN.y,16,16,'#ff8a2a'); gfx.globalAlpha=a; } PROPART.draw('tombo/handmade_stoneware_mug',mN.x,mN.y,{w:34}); PROPART.draw('tombo/second_matching_stoneware_mug',mT.x,mT.y,{w:34}); gfx.globalAlpha=1;
       // the gold thread between them, straight through the wall
       if(ms>P.thread&&ms<P.clink) { const ta=ez(seg(ms,P.thread,P.thread+400)),n=24;
         for(const [w,c,al] of [[6,'#ffe9a0',.35],[2.5,GOLD,1]]) { gfx.globalAlpha=ta*al; gfx.strokeStyle=c; gfx.lineWidth=w; gfx.beginPath();
@@ -2300,20 +2266,21 @@ B2_TOMBO_ANIM.nara3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const last=order.length?order[order.length-1].t:SH+300;
   const P={walk:800,ghost0:900,ghost1:1500,sniff:1700,run:2000,arrive:3000,climb:3000,seat:3350,nline:3250,warm0:3350,warm1:3900,tline:3600,crack0:4300,shatter:SH,
     apply:last+250,hop:SH+100,home:last+1300,end:last+2000};
+  const TB=(who,n,sp)=>tbf('nara3',who,n,sp)||sp.idle;   // painted frames (art/tombo/nara3-*.webp): 'tom' Tom kneeling, 'p' Nara
   const sT={x:T.x,b:by},sN={x:N0.x,b:N0.base,f:nsp.idle};
   const hideT=ms=>ms>P.ghost0&&ms<P.shatter,hideN=ms=>ms>P.seat-20&&ms<P.shatter;
-  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=by,f=sp.kneel;
+  pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp; let x=tx,y=by,f=TB('tom',1,sp);
     if(ms<P.walk) { const k=ez(ms/P.walk); x=lerp(c.origX,tx,k); y=lerp(c.origBase,by,k); f=runFr(sp,c.t*.6,-1); }
-    else if(ms<P.home) { f=ms<P.shatter+200?sp.kneel:(ms<P.shatter+900?sp.celeb:sp.idle); }
+    else if(ms<P.home) { f=ms<P.shatter+200?TB('tom',1,sp):(ms<P.shatter+900?TB('tom',5,sp):TB('tom',6,sp)); }
     else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(tx,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
     sT.x=x; sT.b=y; return {cx:x,base:y,frame:f,hide:hideT(ms)}; });
   const beside=tx-56;
-  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=c.origX,y=c.origBase,f=sp.idle;
-    if(ms<P.run) { f=ms>P.sniff?(Math.floor(ms/180)%2?sp.idle:sp.idle2||sp.idle):sp.idle; if(ms>P.sniff) y+=2; }
+  pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp; let x=c.origX,y=c.origBase,f=TB('p',1,sp);
+    if(ms<P.run) { f=ms>P.sniff?TB('p',2,sp):TB('p',1,sp); if(ms>P.sniff) y+=2; }
     else if(ms<P.climb) { const k=seg(ms,P.run,P.arrive); x=lerp(c.origX,lapX+6,k); y=lerp(c.origBase,by,k)+2; f=runFr(sp,c.t*.9,-1); }
-    else if(ms<P.seat) { const k=seg(ms,P.climb,P.seat); x=lerp(lapX+6,lapX,k); y=by-Math.sin(k*Math.PI)*22; f=sp.celeb; }
-    else if(ms<P.shatter) { x=lapX; y=by; f=sp.sit; }
-    else if(ms<P.home) { const k=ez(seg(ms,P.hop,P.hop+450)); x=lerp(lapX,beside,k); y=by-Math.sin(k*Math.PI)*30; f=ms<P.hop+900?sp.celeb:sp.idle; }
+    else if(ms<P.seat) { const k=seg(ms,P.climb,P.seat); x=lerp(lapX+6,lapX,k); y=by-Math.sin(k*Math.PI)*22; f=TB('p',6,sp); }
+    else if(ms<P.shatter) { x=lapX; y=by; f=TB('p',1,sp); }
+    else if(ms<P.home) { const k=ez(seg(ms,P.hop,P.hop+450)); x=lerp(lapX,beside,k); y=by-Math.sin(k*Math.PI)*30; f=ms<P.hop+900?TB('p',6,sp):TB('p',4,sp); }
     else { const k=ez(seg(ms,P.home,P.home+650)); x=lerp(beside,c.origX,k); y=lerp(by,c.origBase,k); f=k<1?runFr(sp,c.t,1):sp.idle; }
     sN.x=x; sN.b=y; sN.f=f; return {cx:x,base:y,frame:f,hide:hideN(ms)}; });
   const darkK=ms=>ez(seg(ms,0,500));
@@ -2342,13 +2309,12 @@ B2_TOMBO_ANIM.nara3=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     const wk=warm(ms)*(1-ez(seg(ms,P.shatter+200,P.home)));
     if(wk>0) { gfx.globalAlpha=wk*.35; E(L.x,L.y,60+wk*30,50+wk*24,'#ffcf7a'); gfx.globalAlpha=wk*.25; E(L.x,L.y,30+wk*20,26+wk*16,'#fff2c0'); gfx.globalAlpha=1; }
     // Tom, drawn over the dark: grey and flickering, then his color coming back
-    if(hideT(ms)) { const fr=tsp.kneel,gk=ez(seg(ms,P.ghost0,P.ghost1)),ck=ez(seg(ms,P.warm0,P.warm1)),fl=.5+.2*Math.sin(ms/55)+.12*Math.sin(ms/23);
+    if(hideT(ms)) { const fr=TB('tom',1,tsp),gk=ez(seg(ms,P.ghost0,P.ghost1)),ck=ez(seg(ms,P.warm0,P.warm1)),fl=.5+.2*Math.sin(ms/55)+.12*Math.sin(ms/23);
       drawAt(tsp,fr,sT.x,sT.b,tsp.pal,ck+(1-gk)*(1-ck));
-      drawAt(tsp,fr,sT.x,sT.b,tintOf(tsp,'#4a4270',.55),gk*(1-ck)*fl); }
+      gfx.globalAlpha=gk*(1-ck)*fl*.5; E(sT.x,sT.b-TH*.5,TH*.22,TH*.5,'#4a4270'); gfx.globalAlpha=1; }
     // Nara in his lap, smaller and in front, with his arms around her
-    if(hideN(ms)) { const fr=nsp.sit,nh=fr.length*nsp.scale*LS,nw=fr[0].length*nsp.scale*LS,nb=sT.b+2;
+    if(hideN(ms)) { const fr=TB('p',5,nsp),nh=fr.length*nsp.scale*LS,nw=fr[0].length*nsp.scale*LS,nb=sT.b+2;
       gfx.globalAlpha=.55; E(lapX,nb-nh*.5,nw*.62,nh*.6,'#ffe2a0'); gfx.globalAlpha=1;
-      const rim=tintOf(nsp,'#fff2c8',1); for(const [ox,oy] of [[-2,0],[2,0],[0,-2],[0,2]]) drawAt(nsp,fr,lapX+ox,nb+oy,rim,.9,nsp.scale*LS);
       drawAt(nsp,fr,lapX,nb,nsp.pal,1,nsp.scale*LS);
       // hearts and a little huff of breath
       if(ms>P.seat+300) for(let j=0;j<3;j++) { const q2=((ms-P.seat)/1000+j/3)%1; gfx.globalAlpha=(1-q2)*Math.min(1,wk+.3); heart(lapX-10+j*12,nb-nh-14-q2*30,4+j%2*2,PINK); } gfx.globalAlpha=1; }
@@ -6225,25 +6191,25 @@ const seedling=(x,y,sc,upside)=>{ if(PROPART.draw('tombo/tomato_seedling',x,y-(u
 const tomato=(x,y,r)=>{ if(PROPART.draw('tombo/giant_tomato',x,y,{w:r*2.3})) return; EO(x,y,r,r*.9,'#e03a2e'); E(x-r*.3,y-r*.35,r*.3,r*.2,'#ff8a80'); R(x-1,y-r*.9-4,2,5,'#4a8a3a'); E(x,y-r*.9,4,2,'#6fae5a'); };
 B2_TOMBO_ANIM.boppy3=E2=>{ bopPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   const T=ST.unit(tom),B=ST.unit(pt),list=b2LiveFoes(),GR=ST.group(list),tgts=list.slice(0,4),n=Math.max(1,tgts.length),share=shares(n);
+  const TB=(who,n,sp)=>tbf('boppy3',who,n,sp)||sp.idle;   // painted frames (art/tombo/boppy3-*.webp): 'tom' Tom, 'p' Boppy
   const tsp=BATTLE_SPRITES.tom,bsp=BATTLE_SPRITES[pt.id],TH=tsp.idle.length*tsp.scale,BH=bsp.idle.length*bsp.scale;
   const by=Math.min(312,Math.max(T.base,B.base)),gx=cl(GR.x1+120,200,324),bx=gx+54,tx=gx-54;   // the bed at gx, Boppy on the right, Tom on the left
   const P={run:600,lesson:900,steps:[1200,1700,2200,2700],tomplant:3400,fix:4000,grow:4800,fling:5800,pepper:6900,apply:7400,end:9200};
   const sT={x:T.x,b:T.base,f:tsp.idle},sB={x:B.x,b:B.base,f:bsp.idle};
   pathOf(fxT,P.end,(ms,c)=>{ const sp=c.sp;
     if(ms<P.run) { const k=ez(ms/P.run); return stand(sT,lerp(c.origX,tx,k),lerp(c.origBase,by,k),runFr(sp,c.t,1)); }
-    if(ms<P.end-700) { if(ms>P.tomplant&&ms<P.fix) return stand(sT,tx,by,sp.kneel||sp.flip); if(ms>P.fix&&ms<P.grow) return stand(sT,tx,by,sp.expr||sp.flip); if(ms>P.grow&&ms<P.fling) return stand(sT,tx,by,mir(sp,'act')); return stand(sT,tx,by,ms>P.apply?sp.celeb:sp.flip); }
+    if(ms<P.end-700) { if(ms<P.tomplant) return stand(sT,tx,by,TB('tom',1,sp)); if(ms<P.fix) return stand(sT,tx,by,TB('tom',3,sp)); if(ms<P.grow) return stand(sT,tx,by,TB('tom',4,sp)); if(ms<P.fling) return stand(sT,tx,by,TB('tom',5,sp)); return stand(sT,tx,by,TB('tom',6,sp)); }
     const k=ez(seg(ms,P.end-700,P.end)); return stand(sT,lerp(tx,c.origX,k),lerp(by,c.origBase,k),k<1?runFr(sp,c.t,1):sp.idle); });
   pathOf(fxP,P.end,(ms,c)=>{ const sp=c.sp;
     if(ms<P.run) { const k=ez(ms/P.run); return stand(sB,lerp(c.origX,bx,k),lerp(c.origBase,by,k),runFr(sp,c.t,-1)); }
-    if(ms<P.end-700) { const st=P.steps.findIndex(t=>ms>=t&&ms<t+350); if(st>=0) return stand(sB,bx,by,st<2?F(sp,'point'):F(sp,'plant')); if(ms>P.fix&&ms<P.fix+600) return stand(sB,bx-20,by,F(sp,'plant')); if(ms>P.pepper&&ms<P.pepper+500) return stand(sB,bx,by,F(sp,'eat')); if(ms>P.pepper+500&&ms<P.apply+600) return stand(sB,bx,by-Math.abs(Math.sin(c.t*16))*3,F(sp,'spread')); return stand(sB,bx,by,ms<P.lesson?sp.idle:(ms>P.apply?F(sp,'flex'):F(sp,'hip'))); }
+    if(ms<P.end-700) { if(ms<P.steps[2]) return stand(sB,bx,by,TB('p',1,sp)); if(ms<P.steps[3]) return stand(sB,bx,by,TB('p',3,sp)); if(ms<P.tomplant) return stand(sB,bx,by,TB('p',2,sp)); if(ms<P.pepper) return stand(sB,bx,by,ms<P.fix+600?TB('p',4,sp):TB('p',3,sp)); if(ms<P.pepper+500) return stand(sB,bx,by,TB('p',6,sp)); return stand(sB,bx,by,ms<P.apply+600?TB('p',5,sp):TB('p',3,sp)); }
     const k=ez(seg(ms,P.end-700,P.end)); return stand(sB,lerp(bx,c.origX,k),lerp(by,c.origBase,k),k<1?runFr(sp,c.t,1):sp.idle); });
   scene('tu_draw',P.end/1000,{back:true,draw:(s2,u,ms)=>{ const g=ez(seg(ms,P.run,P.run+300)); if(g<=0) return;
     if(PROPART.draw('tombo/raised_garden_bed',gx,by-20*g,{w:112,h:48*g})) return;
     RO(gx-50,by-16*g,100,16*g,WOOD2); R(gx-46,by-14*g,92,10*g,'#5a3a24'); R(gx-46,by-14*g,92,3,'#7a5a3a'); }});
   scene('tu_draw',P.end/1000,{draw:(s2,u,ms)=>{ if(ms<P.lesson) return; const t=s2.t;
-    // the lesson: stake, hole, seedling, watering can
+    // the lesson: stake, hole, seedling (Boppy's can is painted in his frame)
     if(ms>P.steps[0]&&!PROPART.draw('tombo/garden_stake',gx+30,by-38,{h:56})) LnO(gx+30,by-10,gx+30,by-60,3,WOOD3); if(ms>P.steps[1]) E(gx,by-12,8,3,'#2a1a10'); if(ms>P.steps[2]&&ms<P.grow) seedling(gx,by-12,1,false);
-    if(ms>P.steps[3]&&ms<P.steps[3]+500) { const h={x:sB.x-24,y:sB.b-BH*.5}; if(!PROPART.draw('tombo/watering_can',h.x-6,h.y-4,{w:38,rot:-.35})) { RO(h.x-8,h.y-6,16,14,'#5f8ad8'); LnO(h.x-8,h.y-2,h.x-22,h.y-10,3,'#5f8ad8'); } for(let k=0;k<4;k++) { const q=(t*3+k/4)%1; E(h.x-22-q*8,h.y-10+q*20,2,3,'#9fd8ff'); } }
     // Tom's seedling, upside down, then fixed
     if(ms>P.tomplant&&ms<P.grow) seedling(gx-26,by-12+(ms<P.fix+300?16:0),1,ms<P.fix+300);
     // the vines grow and the tomatoes fling

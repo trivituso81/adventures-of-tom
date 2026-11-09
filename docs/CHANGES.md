@@ -1,3 +1,11 @@
+## 2026-11-08 (tombo10): Tombo batch 5 installed (boppy3, tnb2, tnb3, nara2, nara3)
+- Tom's painted frames replace the drawn scenes: Boppy's garden lesson (boppy3), the subway ride with a silver subway car (tnb2), the cups across the wall (tnb3), Nara's tug of war (nara2) and the Cuddle in the dark (nara3). Dialogue lines and step timing are unchanged.
+- Cut painted props: silver_subway_car, longboard, second_gold_transfer_card, red_cayenne_pepper, handmade_stoneware_mug, second_matching_stoneware_mug, tug_rope and the re-baked palm_tree, gold_transfer_card, garden_stake, giant_tomato, raised_garden_bed, tomato_seedling, tomato_vine, watering_can.
+- Purged: `tombo/red_line_subway_train` (sprite, map entry, props.json entry, preload), the `transferCard` helper, the drawn `mug` helper in battle2-kind.js, the drawn train and rope code in tnb2 and nara2, and the drawn lesson watering can in boppy3.
+- Choice made: `thick_braided_pull_rope` was baked for tnb2 but no beat uses it, so it is not in the map and its file is not shipped. Name the beat to add it back.
+- Cuddle: Nara lies across Tom's lap (painted lying frame) because her sitting frame read as standing. Tom's ghost is the painted kneeling frame at reduced opacity, not grey: painted frames cannot be tinted.
+- Tags: tombo9 to tombo10 (engine/battle2-kind.js, engine/prop-art.js, index.html, main.js stamp). Tests: tombo_test boppy3, tnb2, nara2, tnb3, nara3 with `--speed2` (FAILS: [] each); smoke.py FAILS: []; tag_check ok; unused_voice 0 on all checks.
+
 ## 2026-11-08 (446): Art Library flags art that is in the game but not approved (`ingame1`)
 - Tom: "Throughout the art library, is it possible to flag which art items have not been approved but [are] in the game?"
 - New `tools/art-library/in_game.py` writes `data/art-ingame.json`: every Library entry that is not approved while the game already shows a picture for it (the file exists and the game code names it). Rules: rooms (the installed room painting the entry lists), menu portraits (portraits/<id>.png), NPC walk sheets (art/chars/<name>-ow.webp), battle stance sheets (art/chars/<who>-battle.webp). Kinds the game draws in code or does not show yet (Tombo and Director's Cut sheets, dungeon finds, story gates, area stencils, fx) are not flagged.

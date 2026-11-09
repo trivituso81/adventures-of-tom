@@ -317,7 +317,8 @@
    "tomato_seedling",
    "watering_can",
    "tomato_vine",
-   "giant_tomato"
+   "giant_tomato",
+   "red_cayenne_pepper"
   ],
   "reuse": [
    {
@@ -367,16 +368,13 @@
  },
  "tnb2": {
   "new": [
-   "red_line_subway_train",
    "metro_sign",
-   "gold_transfer_card"
+   "gold_transfer_card",
+   "second_gold_transfer_card",
+   "silver_subway_car",
+   "longboard"
   ],
-  "reuse": [
-   {
-    "slug": "longboard",
-    "char": "tnb"
-   }
-  ]
+  "reuse": []
  },
  "tnb2_dc": {
   "new": [
@@ -393,7 +391,9 @@
  "tnb3": {
   "new": [
    "palm_tree",
-   "new_york_skyline"
+   "new_york_skyline",
+   "handmade_stoneware_mug",
+   "second_matching_stoneware_mug"
   ],
   "reuse": [
    {

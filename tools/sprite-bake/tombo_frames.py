@@ -46,11 +46,11 @@ for c in ['tom', 'tnb', 'nara', 'rose', 'grace', 'amy', 'deedee', 'boppy']:
     READY[c] = (int(m.group(1)), int(m.group(3)))
 # id -> partner, kind ('split' = tom + partner sheets, 'pair' = one sheet), file versions
 SETS = {}
-for i, p in [('amy2', 'amy'), ('amy3', 'amy'), ('boppy1', 'boppy'), ('boppy2', 'boppy'), ('deedee2', 'deedee'), ('deedee3', 'deedee'), ('nara1', 'nara'), ('rose3', 'rose'), ('tnb1', 'tnb')]:
+for i, p in [('amy2', 'amy'), ('amy3', 'amy'), ('boppy1', 'boppy'), ('boppy2', 'boppy'), ('deedee2', 'deedee'), ('deedee3', 'deedee'), ('nara1', 'nara'), ('rose3', 'rose'), ('tnb1', 'tnb'), ('boppy3', 'boppy'), ('tnb2', 'tnb'), ('tnb3', 'tnb'), ('nara2', 'nara'), ('nara3', 'nara')]:
     SETS[i] = dict(partner=p, kind='split')
 for i, p in [('grace1', 'grace'), ('grace2', 'grace'), ('grace3', 'grace'), ('rose1', 'rose'), ('rose2', 'rose'), ('amy1', 'amy'), ('deedee1', 'deedee')]:
     SETS[i] = dict(partner=p, kind='pair')
-INSTALLED = ['tnb1', 'nara1', 'boppy1', 'amy2', 'amy3', 'boppy2', 'deedee2', 'deedee3', 'rose3', 'grace1', 'grace2', 'grace3', 'rose1', 'rose2', 'amy1', 'deedee1']   # Tombos whose animation plays these frames; only these go into data/tombo-frames.js
+INSTALLED = ['tnb1', 'nara1', 'boppy1', 'amy2', 'amy3', 'boppy2', 'deedee2', 'deedee3', 'rose3', 'grace1', 'grace2', 'grace3', 'rose1', 'rose2', 'amy1', 'deedee1', 'boppy3', 'tnb2', 'tnb3', 'nara2', 'nara3']   # Tombos whose animation plays these frames; only these go into data/tombo-frames.js
 OBJ_VER = {'grace1': 'v2'}
 # rose1 is one row of four approved poses (hoist, level, banked, boop). The figures' arms nearly touch, so the cut uses the gaps between them.
 PAIR_CUTS = {'rose1': [0, 295, 645, 945, 1248]}
