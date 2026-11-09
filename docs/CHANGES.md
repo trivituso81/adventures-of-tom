@@ -3,6 +3,7 @@
 - `A.kettlebell_swing` (engine/amy-moves.js): dust puff at her feet on the hike back, the swoosh trailing the bell on the swing, the painted burst at impact in place of the drawn star burst (the drawn stars show only until the picture has loaded). The drawn ring and the WHUMP! word stay. Preloaded in engine/prop-art.js.
 - data/art-ingame.json regenerated: also drops the 52 `npc-walk-*` entries whose Library entries the npcff9 change purged.
 - Tags: amy-moves, prop-art, main and index.html to amyfx1. Tests: kit_test amy kettlebell_swing (FAILS: [], all three painted props hit), frames looked at; smoke.py FAILS: [], tag_check ok, unused_voice 0, validate.js OK, in_game --check ok.
+## 2026-11-08 (ff9ok): the Art Library's banned-word check now allows "Final Fantasy IX" and "Final Fantasy 9" in any prompt (Tom: that title is the exception). Every other style name, and other Final Fantasy titles, stay banned. Replaces the npc-photo-only exemption.
 
 ## 2026-11-08 (ch9pose): Chapter 9 at the Rivituso house, Aunt Ellie and the girls stand still
 - Tom (23:28): during chapter 9 (and on the return to the house after the Moon Club) Aunt Ellie stands behind the sofa facing the TV (my reading of "rotary", say if you meant something else), Grace on her left and Rose on her right, and none of the three walk around. The girls used to be placed on wall tiles (5,4) and (7,4); now (7,7), (8,7), (9,7), `ch9Pose` in data/scenes.js.
@@ -1057,7 +1058,6 @@ Tom approved Deedee's abilities and objects. Fact: all 14 fx sheets (`art/raw/ch
 - Bounce: the two-step hop is replaced by the battle idle's slow breath (a 1.2% vertical stretch from the feet, own phase per person).
 - Purged: the old extra poses the ability frames replace (32 `c_` frames) and their sources tom-xposes-1, 2, 4, 6, 7, 8. Kept and baked as before: `proud`, `bowlsit`, `spook`, `scream`, `cower` (tom-xposes-3 and 5), still played by the horror-movie Tombo in engine/battle2-kind.js. Also removed: the dead earlier definitions of Noise-Canceling, Flashcard Flurry and Disconnected Controller, and the `proud`, `hold`, `tw_*` ride mappings in rose-ride.js.
 - Tested: shots at 393x852, 1180x820 and 1090x890; tag_check ok.
-=======
 ## 2026-11-06 (313): TNB fights with his two painted battle sheets (`battlesheet5`)
 - Tom (11-05 23:40): TNB's battle sheets (art/raw/characters/tnb-battle-sheet-1/2-v1.png). The 14 figures are used as painted (no head sizing, no body widening BODY_KX). NEW slots: idle2 breath; hip, spread, point now his painted frames instead of the old extra-sheet poses (data/tnb-hires-battle.js); KO = dizzy sit. Idle keeps its old visible height (100 rows).
 - Extra sheets (tnb-poses, tnb-board) pinned to the old idle (OLD_IDLE_H 469, _Hb 469, _idle_body 260) and came back pixel for pixel. Battle and KO atlases at 1.5 through hires.py.

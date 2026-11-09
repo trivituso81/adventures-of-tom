@@ -33,8 +33,8 @@ function check(entries, known, needGroup) {
       }
     }
     if (e.bake) w('has a bake field (not allowed in the bulk load)');
-    // npc-photo-* prompts carry Tom's fixed Final Fantasy IX style template verbatim (Tom 2026-11-08): the style-name ban does not apply to them.
-    const t = (e.prompt || '').replace(NEG, ' ').replace(e.id.startsWith('npc-photo-') ? /FINAL FANTASY IX|Final Fantasy IX/g : /$^/, ' ');
+    // "Final Fantasy IX" or "Final Fantasy 9" is the one allowed use of the style-name ban, in any prompt (Tom 2026-11-08). Other Final Fantasy titles stay banned.
+    const t = (e.prompt || '').replace(NEG, ' ').replace(/Final Fantasy (IX|9)\b/gi, ' ');
     const b = t.match(BANNED); if (b) w('banned word: ' + [...new Set(b.map(x => x.toLowerCase()))].join(', '));
     const s = t.match(SOFT); if (s) w('soft word: ' + [...new Set(s.map(x => x.toLowerCase()))].join(', '));
     if (/[—–]/.test((e.prompt || '') + (e.title || ''))) w('em or en dash');
