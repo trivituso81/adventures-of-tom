@@ -8767,6 +8767,13 @@
      "date": "2026-11-10",
      "from": "v3",
      "at": 1794294122005
+    },
+    {
+     "n": 4,
+     "file": "art/raw/npcs/npc-photo-delgado-v5.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794336184646
     }
    ],
    "rejects": [],
