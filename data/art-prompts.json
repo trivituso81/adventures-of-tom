@@ -17256,9 +17256,16 @@
    "group": "Long Island people"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-10",
+     "note": "no longer needed",
+     "from": "v3",
+     "at": 1794336909232
+    }
+   ],
    "id": "npc-walk-reel",
    "tab": "NPCs",
    "title": "Reel: walk sheet (hero attached)",
