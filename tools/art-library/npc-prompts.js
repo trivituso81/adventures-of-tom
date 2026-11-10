@@ -145,11 +145,17 @@ const PERS = {
 // Work clothes where the job has a look; everyone else gets plain clothes in their game colors.
 const CS = { kenji: 'a white chef jacket and chef hat', bun: 'a baker apron and a puffy baker hat', ray: 'a navy security guard uniform and cap', claudia: 'nurse scrubs',
   toni: 'an apron over a white shirt', carmen: 'an apron over her clothes', marguerite: 'a measuring tape around the neck', kiki: 'a headset and radios on the belt', halverson: 'a teacher lanyard' };
+// Hats (Tom 2026-11-10): a hat appears only when it is a work hat (chef, baker and security cap in CS, plus the job hats below) or when it shows
+// personality (5 percent of the 56 people = 3: Luna, Ike, Pip). The palette's `hat` colour supplies the colour; everyone not listed has no hat.
+const HAT = {
+  kit: 'postal cap', sal: 'driver flat cap', sol: 'driver flat cap', reel: 'weathered fishing hat', fern: 'wide straw sun hat', larry: 'work cap', odette: 'cook cap', toni: 'kitchen cap',   // job hats
+  luna: 'floppy wide-brim hat with a small brass star pin', ike: 'tweed flat cap', pip: 'bucket hat worn a little crooked with a feather tucked in the band',   // personality hats
+};
 function details(c, k) {
   const p = { ...PAL[c.look], ...(c.over || {}) };
   const who = c.kind === 'child' ? (c.sex === 'f' ? 'girl' : 'boy') : (c.sex === 'f' ? 'woman' : 'man');
   const pants = p.pants === p.shirt ? 'matching trousers' : `${cw(p.pants, CLOTH)} trousers`;
-  const cloth = [`${cw(p.shirt, CLOTH)} top`, pants, p.hat && !/hat|cap/.test(CS[k] || '') ? `a ${cw(p.hat, CLOTH)} hat` : null, CS[k] || null, c.glasses ? 'round glasses' : null].filter(Boolean).join(', ');
+  const cloth = [`${cw(p.shirt, CLOTH)} top`, pants, HAT[k] && p.hat ? `${/^[aeiou]/.test(cw(p.hat, CLOTH)) ? 'an' : 'a'} ${cw(p.hat, CLOTH)} ${HAT[k]}` : null, CS[k] || null, c.glasses ? 'round glasses' : null].filter(Boolean).join(', ');
   return `character details: ${c.name}, ${c.age}, ${who}, ${c.ft} tall, ${cw(p.skin, SKIN)} skin, ${p.hair ? cw(p.hair, HAIR) : 'no visible'} hair, hair style ${HS[k]}, clothing ${cloth}, personality ${PERS[k]}, ${c.role}.`;
 }
 for (const k of Object.keys(N)) {
