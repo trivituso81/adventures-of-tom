@@ -1,3 +1,8 @@
+## 2026-11-10 (npcemo1): emotion tag on every NPC dialogue line, chapters 1 to 5 (docs and a check tool only; game unchanged; no tag)
+- Tom (09:32): tag each NPC dialogue line in chapters 1 to 5 with one of the 8 emotion-sheet moods, behind the scenes, so an emotion pose frame can be attached later.
+- Call made: a sidecar list keyed by speaker plus exact text (same pattern as docs/emotion-index-lines.tsv), not inline fields, so no game file changes and the tags survive code moves. 503 lines in `docs/npc-emotion-lines.tsv`; readable copy `docs/NPC_EMOTION_INDEX.md`; check `python3 tools/npc-emotion-check.py` (OK, all 503 texts found).
+- Covered: map NPC talk (324, incl. revisit and ch1-5 variants), townsfolk lines in ch1-5 story scenes (41), recruit and follower chatter (64), Penny and Nickel shop lines (59), cab drivers (4), ch4 and ch5 puzzle replies (11). Left out: cast story-scene lines (already tagged), monsters, sign and object narration, battle barks. Grands Aunt Ellie skipped (she only visits in ch9 and ch10). Justin's recruit talk: the second (live) `justin` entry in RECRUIT_TALK; the first is a dead duplicate key.
+
 ## 2026-11-10 (npcfix3): two prompt text fixes in NPC heroes (Art Library prompts only; no tag)
 - `npc-photo-ike` carried an old hand-edited reference line ("the 7 main characters"); set to the same line as every other NPC (module and json now match for all 58 NPC heroes). `npc-photo-sol` ended "Co.." (double period); role now says "Angel City Cab Company".
 
