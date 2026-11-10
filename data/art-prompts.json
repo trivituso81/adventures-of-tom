@@ -17227,7 +17227,7 @@
    "group": "Long Island people"
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -17237,7 +17237,14 @@
      "at": 1794254213948
     }
    ],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-10",
+     "note": "no longer needed",
+     "from": "v2",
+     "at": 1794336898792
+    }
+   ],
    "id": "npc-walk-bean",
    "tab": "NPCs",
    "title": "Bean: walk sheet (hero attached)",
