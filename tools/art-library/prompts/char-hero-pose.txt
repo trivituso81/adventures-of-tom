@@ -1,0 +1,25 @@
+Draw the real person in the attached photos as one hero painting: a single full-body character picture. This picture becomes the reference for every other picture of this person in the game, so the likeness and the details matter more than anything else.
+
+ART STYLE
+- A whimsical storybook illustration of a real person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like the illustrated school-yard painting it lives next to. Gently simplified shapes. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.
+- Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the photos.
+- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.
+- Clean, crisp edges with fine detail. No thick or black outlines.
+- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.
+
+PHOTO FIDELITY
+- The attached photos show the real person: full body photos and face close-ups. Use every one of them.
+- The FACE must be a faithful likeness of the face close-ups: the exact face shape, jawline, cheeks, forehead, nose shape and size, lip shape, smile and teeth, eyebrows (shape, thickness, spacing), eye shape, eye color and eye spacing, freckles, moles, dimples, skin tone, and any glasses or facial hair. Exaggerate only the head size and the expression, never the individual features. Do not beautify, slim, age up or age down the face, and do not turn it into a generic face.
+- The HAIR must match the photos exactly: color (including any highlights, roots or gray), length, parting, volume, texture and how it falls.
+- The BODY must match the full body photos: height impression, build, shoulder width, arm and leg proportions, posture. Caricature only by enlarging the head and shrinking the hands and feet slightly.
+- The OUTFIT, shoes, jewelry and accessories must match the photos exactly: every color, print, pattern, trim, seam, button and logo. Do not simplify or invent clothing details.
+- If a full body photo and a close-up disagree (lighting, color cast, angle), the close-up decides the face and the full body photo decides the body and outfit.
+- If something is not visible in any photo (the back of the outfit, the shoes), extend it plausibly and consistently with what is visible. Never invent a new accessory, hairstyle or color.
+- Do not copy the photo background, shadows or lighting color cast. Only the person.
+
+THE PICTURE (strict)
+- One single image with one character and no grid. Portrait orientation, the biggest size you can make.
+- Full body from the top of the head to the feet, all inside the frame with a little space around. Standing neutral and relaxed, the body turned a little (three-quarter) toward the viewer, a warm natural smile, the face clear and readable, hands empty and relaxed at the sides, both feet flat and fully visible.
+- This is the highest-detail picture of the set: hair strands, skin, fabric prints and shoes all painted with care.
+- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character. No magenta glow, tint or fringe on edges or hair. No ground shadow, no props, no other people, no text, no border.
+- Family friendly for ages 6 and up.

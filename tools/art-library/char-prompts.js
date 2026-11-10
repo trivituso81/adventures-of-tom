@@ -1898,6 +1898,7 @@ for (const [id, who] of Object.entries(EMOTION_CAST)) {
 }
 entries.push(...require('./jojo-prompts.js').entries);   // Jojo hero, walk, Frisbee Golf frames (Tom 2026-11-06 11:19)
 entries.push(...require('./amy-prompts.js').entries);   // Amy ability and object sheets, 14 moves (Tom 2026-11-06 12:19)
+entries.push(...require('./hero-prompts.js').entries);   // hero painting entries (Tom 2026-11-10)
 entries.push(...require('./boppy-young-prompts.js').entries);   // Young Boppy hero, walk, battle sheets (Tom 2026-11-06 11:51)
 entries.push(...require('./battle-stance-prompts.js').entries);   // battle stance sheets 1 and 2 for every character, replaceable (Tom 2026-11-06 15:47). Mirrors data/art-prompts.json, where they sit at the top of each character's group
 // Tom ability rebake (2026-11-06 QC, claude/next-addendum-tom-rebake.md): three sheets regenerated with fixes (full body, shirt print and stripes,

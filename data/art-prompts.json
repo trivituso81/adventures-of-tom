@@ -24,6 +24,42 @@
    "group": "Test card"
   },
   {
+   "id": "tom-hero",
+   "tab": "Characters",
+   "title": "Tom hero painting: one full-body pose (the reference for every other picture of Tom)",
+   "ar": "2:3",
+   "refs": [],
+   "prompt": "Draw the real person in the attached photos as one hero painting: a single full-body character picture. This picture becomes the reference for every other picture of this person in the game, so the likeness and the details matter more than anything else.\n\nART STYLE\n- A whimsical storybook illustration of a real person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like the illustrated school-yard painting it lives next to. Gently simplified shapes. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.\n- Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the photos.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.\n- Clean, crisp edges with fine detail. No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n\nPHOTO FIDELITY\n- The attached photos show the real person: full body photos and face close-ups. Use every one of them.\n- The FACE must be a faithful likeness of the face close-ups: the exact face shape, jawline, cheeks, forehead, nose shape and size, lip shape, smile and teeth, eyebrows (shape, thickness, spacing), eye shape, eye color and eye spacing, freckles, moles, dimples, skin tone, and any glasses or facial hair. Exaggerate only the head size and the expression, never the individual features. Do not beautify, slim, age up or age down the face, and do not turn it into a generic face.\n- The HAIR must match the photos exactly: color (including any highlights, roots or gray), length, parting, volume, texture and how it falls.\n- The BODY must match the full body photos: height impression, build, shoulder width, arm and leg proportions, posture. Caricature only by enlarging the head and shrinking the hands and feet slightly.\n- The OUTFIT, shoes, jewelry and accessories must match the photos exactly: every color, print, pattern, trim, seam, button and logo. Do not simplify or invent clothing details.\n- If a full body photo and a close-up disagree (lighting, color cast, angle), the close-up decides the face and the full body photo decides the body and outfit.\n- If something is not visible in any photo (the back of the outfit, the shoes), extend it plausibly and consistently with what is visible. Never invent a new accessory, hairstyle or color.\n- Do not copy the photo background, shadows or lighting color cast. Only the person.\n\nTHE PICTURE (strict)\n- One single image with one character and no grid. Portrait orientation, the biggest size you can make.\n- Full body from the top of the head to the feet, all inside the frame with a little space around. Standing neutral and relaxed, the body turned a little (three-quarter) toward the viewer, a warm natural smile, the face clear and readable, hands empty and relaxed at the sides, both feet flat and fully visible.\n- This is the highest-detail picture of the set: hair strands, skin, fabric prints and shoes all painted with care.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character. No magenta glow, tint or fringe on edges or hair. No ground shadow, no props, no other people, no text, no border.\n- Family friendly for ages 6 and up.",
+   "own": [
+    {
+     "slot": "tom-hero-photo1",
+     "label": "Full body photo 1",
+     "at": 0
+    },
+    {
+     "slot": "tom-hero-photo2",
+     "label": "Full body photo 2",
+     "at": 1
+    },
+    {
+     "slot": "tom-hero-photo3",
+     "label": "Face close-up",
+     "at": 2
+    }
+   ],
+   "group": "Tom",
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tom-hero-ref-v1.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794326510584
+    }
+   ]
+  },
+  {
    "status": "approved",
    "versions": [
     {
@@ -416,6 +452,42 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Cartridge Tilt.\n\nRow 1:\n1. Looking straight out at the viewer, a flat unimpressed face, head tilted, mid head shake.\n2. Reaching straight up high with both arms, fingers spread, up on his toes.\n3. A large grey game cartridge held in both hands in front of his face, blowing into its bottom edge, cheeks puffed.\n\nRow 2:\n4. Pushing the cartridge down with both hands, leaning into it hard, teeth gritted.\n5. The whole body leaning hard to one side, both arms pushing, tilting something huge.\n6. Landing on both feet from a small hop, brushing one palm against the other, a dry satisfied look."
   },
   {
+   "id": "grace-hero",
+   "tab": "Characters",
+   "title": "Grace hero painting: one full-body pose (the reference for every other picture of Grace)",
+   "ar": "2:3",
+   "refs": [],
+   "prompt": "Draw the real person in the attached photos as one hero painting: a single full-body character picture. This picture becomes the reference for every other picture of this person in the game, so the likeness and the details matter more than anything else.\n\nART STYLE\n- A whimsical storybook illustration of a real person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like the illustrated school-yard painting it lives next to. Gently simplified shapes. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.\n- Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the photos.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.\n- Clean, crisp edges with fine detail. No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n\nPHOTO FIDELITY\n- The attached photos show the real person: full body photos and face close-ups. Use every one of them.\n- The FACE must be a faithful likeness of the face close-ups: the exact face shape, jawline, cheeks, forehead, nose shape and size, lip shape, smile and teeth, eyebrows (shape, thickness, spacing), eye shape, eye color and eye spacing, freckles, moles, dimples, skin tone, and any glasses or facial hair. Exaggerate only the head size and the expression, never the individual features. Do not beautify, slim, age up or age down the face, and do not turn it into a generic face.\n- The HAIR must match the photos exactly: color (including any highlights, roots or gray), length, parting, volume, texture and how it falls.\n- The BODY must match the full body photos: height impression, build, shoulder width, arm and leg proportions, posture. Caricature only by enlarging the head and shrinking the hands and feet slightly.\n- The OUTFIT, shoes, jewelry and accessories must match the photos exactly: every color, print, pattern, trim, seam, button and logo. Do not simplify or invent clothing details.\n- If a full body photo and a close-up disagree (lighting, color cast, angle), the close-up decides the face and the full body photo decides the body and outfit.\n- If something is not visible in any photo (the back of the outfit, the shoes), extend it plausibly and consistently with what is visible. Never invent a new accessory, hairstyle or color.\n- Do not copy the photo background, shadows or lighting color cast. Only the person.\n\nTHE PICTURE (strict)\n- One single image with one character and no grid. Portrait orientation, the biggest size you can make.\n- Full body from the top of the head to the feet, all inside the frame with a little space around. Standing neutral and relaxed, the body turned a little (three-quarter) toward the viewer, a warm natural smile, the face clear and readable, hands empty and relaxed at the sides, both feet flat and fully visible.\n- This is the highest-detail picture of the set: hair strands, skin, fabric prints and shoes all painted with care.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character. No magenta glow, tint or fringe on edges or hair. No ground shadow, no props, no other people, no text, no border.\n- Family friendly for ages 6 and up.",
+   "own": [
+    {
+     "slot": "grace-hero-photo1",
+     "label": "Full body photo 1",
+     "at": 0
+    },
+    {
+     "slot": "grace-hero-photo2",
+     "label": "Full body photo 2",
+     "at": 1
+    },
+    {
+     "slot": "grace-hero-photo3",
+     "label": "Face close-up",
+     "at": 2
+    }
+   ],
+   "group": "Grace",
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/grace-hero-ref-v1.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794326510584
+    }
+   ]
+  },
+  {
    "status": "approved",
    "versions": [
     {
@@ -794,6 +866,42 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Diamond Leotard Finale.\n\nRow 1:\n1. A gymnast salute, one arm straight up, chin high, serious and ready.\n2. Sprinting forward, arms pumping, hair streaming back, determined.\n3. A round-off, both hands on the ground, legs swinging over together.\n\nRow 2:\n4. High in a twist, arms tucked tight to her chest, legs straight together, eyes shut.\n5. Landing with both knees bent and arms out, sticking it, fierce face.\n6. Arms up high in a final salute, chest out, a huge proud grin."
   },
   {
+   "id": "rose-hero",
+   "tab": "Characters",
+   "title": "Rose hero painting: one full-body pose (the reference for every other picture of Rose)",
+   "ar": "2:3",
+   "refs": [],
+   "prompt": "Draw the real person in the attached photos as one hero painting: a single full-body character picture. This picture becomes the reference for every other picture of this person in the game, so the likeness and the details matter more than anything else.\n\nART STYLE\n- A whimsical storybook illustration of a real person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like the illustrated school-yard painting it lives next to. Gently simplified shapes. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.\n- Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the photos.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.\n- Clean, crisp edges with fine detail. No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n\nPHOTO FIDELITY\n- The attached photos show the real person: full body photos and face close-ups. Use every one of them.\n- The FACE must be a faithful likeness of the face close-ups: the exact face shape, jawline, cheeks, forehead, nose shape and size, lip shape, smile and teeth, eyebrows (shape, thickness, spacing), eye shape, eye color and eye spacing, freckles, moles, dimples, skin tone, and any glasses or facial hair. Exaggerate only the head size and the expression, never the individual features. Do not beautify, slim, age up or age down the face, and do not turn it into a generic face.\n- The HAIR must match the photos exactly: color (including any highlights, roots or gray), length, parting, volume, texture and how it falls.\n- The BODY must match the full body photos: height impression, build, shoulder width, arm and leg proportions, posture. Caricature only by enlarging the head and shrinking the hands and feet slightly.\n- The OUTFIT, shoes, jewelry and accessories must match the photos exactly: every color, print, pattern, trim, seam, button and logo. Do not simplify or invent clothing details.\n- If a full body photo and a close-up disagree (lighting, color cast, angle), the close-up decides the face and the full body photo decides the body and outfit.\n- If something is not visible in any photo (the back of the outfit, the shoes), extend it plausibly and consistently with what is visible. Never invent a new accessory, hairstyle or color.\n- Do not copy the photo background, shadows or lighting color cast. Only the person.\n\nTHE PICTURE (strict)\n- One single image with one character and no grid. Portrait orientation, the biggest size you can make.\n- Full body from the top of the head to the feet, all inside the frame with a little space around. Standing neutral and relaxed, the body turned a little (three-quarter) toward the viewer, a warm natural smile, the face clear and readable, hands empty and relaxed at the sides, both feet flat and fully visible.\n- This is the highest-detail picture of the set: hair strands, skin, fabric prints and shoes all painted with care.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character. No magenta glow, tint or fringe on edges or hair. No ground shadow, no props, no other people, no text, no border.\n- Family friendly for ages 6 and up.",
+   "own": [
+    {
+     "slot": "rose-hero-photo1",
+     "label": "Full body photo 1",
+     "at": 0
+    },
+    {
+     "slot": "rose-hero-photo2",
+     "label": "Full body photo 2",
+     "at": 1
+    },
+    {
+     "slot": "rose-hero-photo3",
+     "label": "Face close-up",
+     "at": 2
+    }
+   ],
+   "group": "Rose",
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/rose-hero-ref-v1.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794326510584
+    }
+   ]
+  },
+  {
    "status": "approved",
    "versions": [
     {
@@ -1142,6 +1250,42 @@
     "art/raw/characters/rose-battle-sheet-2-v1.png"
    ],
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: Operation Shoulder Mecha.\n\nRow 1:\n1. Standing, a taped-up cardboard box held up in both hands, crayon scribbles on it, a huge excited grin.\n2. Pulling the cardboard box down over her head like a helmet, a square eyehole cut in the front, her eyes peeking out.\n3. Wearing the box helmet, both arms out stiff like a robot, one foot stomping, serious face in the eyehole.\n\nRow 2:\n4. Wearing the box helmet, pulling back on two paper towel tubes held one in each hand like levers, leaning back.\n5. Wearing the box helmet, one arm punched straight forward with a small cardboard box on the fist, mouth open yelling.\n6. The box helmet pushed up on top of her head, both arms raised high, jumping, a triumphant grin."
+  },
+  {
+   "id": "deedee-hero",
+   "tab": "Characters",
+   "title": "Deedee hero painting: one full-body pose (the reference for every other picture of Deedee)",
+   "ar": "2:3",
+   "refs": [],
+   "prompt": "Draw the real person in the attached photos as one hero painting: a single full-body character picture. This picture becomes the reference for every other picture of this person in the game, so the likeness and the details matter more than anything else.\n\nART STYLE\n- A whimsical storybook illustration of a real person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like the illustrated school-yard painting it lives next to. Gently simplified shapes. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.\n- Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the photos.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.\n- Clean, crisp edges with fine detail. No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n\nPHOTO FIDELITY\n- The attached photos show the real person: full body photos and face close-ups. Use every one of them.\n- The FACE must be a faithful likeness of the face close-ups: the exact face shape, jawline, cheeks, forehead, nose shape and size, lip shape, smile and teeth, eyebrows (shape, thickness, spacing), eye shape, eye color and eye spacing, freckles, moles, dimples, skin tone, and any glasses or facial hair. Exaggerate only the head size and the expression, never the individual features. Do not beautify, slim, age up or age down the face, and do not turn it into a generic face.\n- The HAIR must match the photos exactly: color (including any highlights, roots or gray), length, parting, volume, texture and how it falls.\n- The BODY must match the full body photos: height impression, build, shoulder width, arm and leg proportions, posture. Caricature only by enlarging the head and shrinking the hands and feet slightly.\n- The OUTFIT, shoes, jewelry and accessories must match the photos exactly: every color, print, pattern, trim, seam, button and logo. Do not simplify or invent clothing details.\n- If a full body photo and a close-up disagree (lighting, color cast, angle), the close-up decides the face and the full body photo decides the body and outfit.\n- If something is not visible in any photo (the back of the outfit, the shoes), extend it plausibly and consistently with what is visible. Never invent a new accessory, hairstyle or color.\n- Do not copy the photo background, shadows or lighting color cast. Only the person.\n\nTHE PICTURE (strict)\n- One single image with one character and no grid. Portrait orientation, the biggest size you can make.\n- Full body from the top of the head to the feet, all inside the frame with a little space around. Standing neutral and relaxed, the body turned a little (three-quarter) toward the viewer, a warm natural smile, the face clear and readable, hands empty and relaxed at the sides, both feet flat and fully visible.\n- This is the highest-detail picture of the set: hair strands, skin, fabric prints and shoes all painted with care.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character. No magenta glow, tint or fringe on edges or hair. No ground shadow, no props, no other people, no text, no border.\n- Family friendly for ages 6 and up.",
+   "own": [
+    {
+     "slot": "deedee-hero-photo1",
+     "label": "Full body photo 1",
+     "at": 0
+    },
+    {
+     "slot": "deedee-hero-photo2",
+     "label": "Full body photo 2",
+     "at": 1
+    },
+    {
+     "slot": "deedee-hero-photo3",
+     "label": "Face close-up",
+     "at": 2
+    }
+   ],
+   "group": "Deedee",
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/deedee-hero-ref-v1.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794326510584
+    }
+   ]
   },
   {
    "status": "approved",
@@ -1513,6 +1657,42 @@
     "art/raw/characters/deedee-battle-sheet-2-v1.png"
    ],
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe move: To the Moon and Back.\n\nRow 1:\n1. Looking up and pointing high with one hand, the other hand on her heart, eyes full of wonder.\n2. Arms spread wide, gathering everyone in for a group hug, a warm smile.\n3. Both hands cupped together held up high above her head, offering something up, eyes shining.\n\nRow 2:\n4. Watching upward, both hands pressed over her heart, mouth open in awe.\n5. Arms wrapped around herself, eyes closed, smiling softly.\n6. Blowing a kiss forward from her open palm, puckered lips, eyes twinkling."
+  },
+  {
+   "id": "tnb-hero",
+   "tab": "Characters",
+   "title": "TNB hero painting: one full-body pose (the reference for every other picture of TNB)",
+   "ar": "2:3",
+   "refs": [],
+   "prompt": "Draw the real person in the attached photos as one hero painting: a single full-body character picture. This picture becomes the reference for every other picture of this person in the game, so the likeness and the details matter more than anything else.\n\nART STYLE\n- A whimsical storybook illustration of a real person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like the illustrated school-yard painting it lives next to. Gently simplified shapes. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.\n- Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the photos.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.\n- Clean, crisp edges with fine detail. No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n\nPHOTO FIDELITY\n- The attached photos show the real person: full body photos and face close-ups. Use every one of them.\n- The FACE must be a faithful likeness of the face close-ups: the exact face shape, jawline, cheeks, forehead, nose shape and size, lip shape, smile and teeth, eyebrows (shape, thickness, spacing), eye shape, eye color and eye spacing, freckles, moles, dimples, skin tone, and any glasses or facial hair. Exaggerate only the head size and the expression, never the individual features. Do not beautify, slim, age up or age down the face, and do not turn it into a generic face.\n- The HAIR must match the photos exactly: color (including any highlights, roots or gray), length, parting, volume, texture and how it falls.\n- The BODY must match the full body photos: height impression, build, shoulder width, arm and leg proportions, posture. Caricature only by enlarging the head and shrinking the hands and feet slightly.\n- The OUTFIT, shoes, jewelry and accessories must match the photos exactly: every color, print, pattern, trim, seam, button and logo. Do not simplify or invent clothing details.\n- If a full body photo and a close-up disagree (lighting, color cast, angle), the close-up decides the face and the full body photo decides the body and outfit.\n- If something is not visible in any photo (the back of the outfit, the shoes), extend it plausibly and consistently with what is visible. Never invent a new accessory, hairstyle or color.\n- Do not copy the photo background, shadows or lighting color cast. Only the person.\n\nTHE PICTURE (strict)\n- One single image with one character and no grid. Portrait orientation, the biggest size you can make.\n- Full body from the top of the head to the feet, all inside the frame with a little space around. Standing neutral and relaxed, the body turned a little (three-quarter) toward the viewer, a warm natural smile, the face clear and readable, hands empty and relaxed at the sides, both feet flat and fully visible.\n- This is the highest-detail picture of the set: hair strands, skin, fabric prints and shoes all painted with care.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character. No magenta glow, tint or fringe on edges or hair. No ground shadow, no props, no other people, no text, no border.\n- Family friendly for ages 6 and up.",
+   "own": [
+    {
+     "slot": "tnb-hero-photo1",
+     "label": "Full body photo 1",
+     "at": 0
+    },
+    {
+     "slot": "tnb-hero-photo2",
+     "label": "Full body photo 2",
+     "at": 1
+    },
+    {
+     "slot": "tnb-hero-photo3",
+     "label": "Face close-up",
+     "at": 2
+    }
+   ],
+   "group": "TNB",
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/tnb-hero-ref-v1.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794326510584
+    }
+   ]
   },
   {
    "status": "approved",
@@ -1893,6 +2073,42 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Baxter Street Bomb.\n\nRow 1:\n1. Standing at the top of a steep street, one foot on a longboard, a hand over his eyes, very relaxed.\n2. Crouched low on a longboard, arms tucked, leaning forward, a fierce grin.\n3. Riding in a deep crouch, one hand trailing out for balance, hair blown back, joyful.\n\nRow 2:\n4. Reaching one hand into a tote bag at his hip while riding, a mischievous smile.\n5. Leaning hard into a turn, one hand out, the board carving, wide eyes, thrilled.\n6. Standing on the board coasting, both arms stretched wide, an enormous grin."
   },
   {
+   "id": "nara-hero",
+   "tab": "Characters",
+   "title": "Nara hero painting: one full-body pose (the reference for every other picture of her)",
+   "ar": "2:3",
+   "refs": [],
+   "prompt": "Draw the real person in the attached photos as one hero painting: a single full-body character picture. This picture becomes the reference for every other picture of this person in the game, so the likeness and the details matter more than anything else.\n\nART STYLE\n- A whimsical storybook illustration of a real person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like the illustrated school-yard painting it lives next to. Gently simplified shapes. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.\n- Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the photos.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.\n- Clean, crisp edges with fine detail. No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n\nPHOTO FIDELITY\n- The attached photos show the real person: full body photos and face close-ups. Use every one of them.\n- The FACE must be a faithful likeness of the face close-ups: the exact face shape, jawline, cheeks, forehead, nose shape and size, lip shape, smile and teeth, eyebrows (shape, thickness, spacing), eye shape, eye color and eye spacing, freckles, moles, dimples, skin tone, and any glasses or facial hair. Exaggerate only the head size and the expression, never the individual features. Do not beautify, slim, age up or age down the face, and do not turn it into a generic face.\n- The HAIR must match the photos exactly: color (including any highlights, roots or gray), length, parting, volume, texture and how it falls.\n- The BODY must match the full body photos: height impression, build, shoulder width, arm and leg proportions, posture. Caricature only by enlarging the head and shrinking the hands and feet slightly.\n- The OUTFIT, shoes, jewelry and accessories must match the photos exactly: every color, print, pattern, trim, seam, button and logo. Do not simplify or invent clothing details.\n- If a full body photo and a close-up disagree (lighting, color cast, angle), the close-up decides the face and the full body photo decides the body and outfit.\n- If something is not visible in any photo (the back of the outfit, the shoes), extend it plausibly and consistently with what is visible. Never invent a new accessory, hairstyle or color.\n- Do not copy the photo background, shadows or lighting color cast. Only the person.\n\nTHE PICTURE (strict)\n- One single image with one character and no grid. Portrait orientation, the biggest size you can make.\n- Full body from the top of the head to the feet, all inside the frame with a little space around. Standing neutral and relaxed, the body turned a little (three-quarter) toward the viewer, a warm natural smile, the face clear and readable, hands empty and relaxed at the sides, both feet flat and fully visible.\n- This is the highest-detail picture of the set: hair strands, skin, fabric prints and shoes all painted with care.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character. No magenta glow, tint or fringe on edges or hair. No ground shadow, no props, no other people, no text, no border.\n- Family friendly for ages 6 and up.",
+   "own": [
+    {
+     "slot": "nara-hero-photo1",
+     "label": "Full body photo 1",
+     "at": 0
+    },
+    {
+     "slot": "nara-hero-photo2",
+     "label": "Full body photo 2",
+     "at": 1
+    },
+    {
+     "slot": "nara-hero-photo3",
+     "label": "Face close-up",
+     "at": 2
+    }
+   ],
+   "group": "Nara",
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/nara-hero-ref-v1.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794326510584
+    }
+   ]
+  },
+  {
    "status": "approved",
    "versions": [
     {
@@ -2271,6 +2487,78 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer.\n\nThe character is a dog. She has paws, not hands, and wears nothing unless the pictures show it. Nothing is held except in her mouth.\n\nThe move: The Unsent Scent.\n\nRow 1:\n1. Standing alone, head low, ears drooping, a lost and quiet look.\n2. Head lifted, eyes wide in surprise, nose high, sniffing the air.\n3. Sniffing the ground with her nose low, ears perked, tail starting to wag.\n\nRow 2:\n4. Lifting her head with sudden joy, eyes bright, tail up high.\n5. Running flat out, ears streaming back, mouth open in a joyful grin.\n6. Leaping with all four paws off the ground, ears flying, mouth open, pure joy."
   },
   {
+   "id": "boppy-young-hero",
+   "tab": "Characters",
+   "title": "Young Boppy hero painting: one full-body pose (the reference for every other picture of Young Boppy)",
+   "ar": "2:3",
+   "refs": [],
+   "prompt": "Draw the real person in the attached photos as one hero painting: a single full-body character picture. This picture becomes the reference for every other picture of this person in the game, so the likeness and the details matter more than anything else.\n\nART STYLE\n- A whimsical storybook illustration of a real person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like the illustrated school-yard painting it lives next to. Gently simplified shapes. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.\n- Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the photos.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.\n- Clean, crisp edges with fine detail. No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n\nPHOTO FIDELITY\n- The attached photos show the real person: full body photos and face close-ups. Use every one of them.\n- The FACE must be a faithful likeness of the face close-ups: the exact face shape, jawline, cheeks, forehead, nose shape and size, lip shape, smile and teeth, eyebrows (shape, thickness, spacing), eye shape, eye color and eye spacing, freckles, moles, dimples, skin tone, and any glasses or facial hair. Exaggerate only the head size and the expression, never the individual features. Do not beautify, slim, age up or age down the face, and do not turn it into a generic face.\n- The HAIR must match the photos exactly: color (including any highlights, roots or gray), length, parting, volume, texture and how it falls.\n- The BODY must match the full body photos: height impression, build, shoulder width, arm and leg proportions, posture. Caricature only by enlarging the head and shrinking the hands and feet slightly.\n- The OUTFIT, shoes, jewelry and accessories must match the photos exactly: every color, print, pattern, trim, seam, button and logo. Do not simplify or invent clothing details.\n- If a full body photo and a close-up disagree (lighting, color cast, angle), the close-up decides the face and the full body photo decides the body and outfit.\n- If something is not visible in any photo (the back of the outfit, the shoes), extend it plausibly and consistently with what is visible. Never invent a new accessory, hairstyle or color.\n- Do not copy the photo background, shadows or lighting color cast. Only the person.\n\nTHE PICTURE (strict)\n- One single image with one character and no grid. Portrait orientation, the biggest size you can make.\n- Full body from the top of the head to the feet, all inside the frame with a little space around. Standing neutral and relaxed, the body turned a little (three-quarter) toward the viewer, a warm natural smile, the face clear and readable, hands empty and relaxed at the sides, both feet flat and fully visible.\n- This is the highest-detail picture of the set: hair strands, skin, fabric prints and shoes all painted with care.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character. No magenta glow, tint or fringe on edges or hair. No ground shadow, no props, no other people, no text, no border.\n- Family friendly for ages 6 and up.",
+   "own": [
+    {
+     "slot": "boppy-young-hero-photo1",
+     "label": "Full body photo 1",
+     "at": 0
+    },
+    {
+     "slot": "boppy-young-hero-photo2",
+     "label": "Full body photo 2",
+     "at": 1
+    },
+    {
+     "slot": "boppy-young-hero-photo3",
+     "label": "Face close-up",
+     "at": 2
+    }
+   ],
+   "group": "Boppy",
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/boppy-young-hero-ref-v1.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794326510584
+    }
+   ]
+  },
+  {
+   "id": "boppy-hero",
+   "tab": "Characters",
+   "title": "Boppy hero painting: one full-body pose (the reference for every other picture of Boppy)",
+   "ar": "2:3",
+   "refs": [],
+   "prompt": "Draw the real person in the attached photos as one hero painting: a single full-body character picture. This picture becomes the reference for every other picture of this person in the game, so the likeness and the details matter more than anything else.\n\nART STYLE\n- A whimsical storybook illustration of a real person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like the illustrated school-yard painting it lives next to. Gently simplified shapes. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.\n- Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the photos.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.\n- Clean, crisp edges with fine detail. No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n\nPHOTO FIDELITY\n- The attached photos show the real person: full body photos and face close-ups. Use every one of them.\n- The FACE must be a faithful likeness of the face close-ups: the exact face shape, jawline, cheeks, forehead, nose shape and size, lip shape, smile and teeth, eyebrows (shape, thickness, spacing), eye shape, eye color and eye spacing, freckles, moles, dimples, skin tone, and any glasses or facial hair. Exaggerate only the head size and the expression, never the individual features. Do not beautify, slim, age up or age down the face, and do not turn it into a generic face.\n- The HAIR must match the photos exactly: color (including any highlights, roots or gray), length, parting, volume, texture and how it falls.\n- The BODY must match the full body photos: height impression, build, shoulder width, arm and leg proportions, posture. Caricature only by enlarging the head and shrinking the hands and feet slightly.\n- The OUTFIT, shoes, jewelry and accessories must match the photos exactly: every color, print, pattern, trim, seam, button and logo. Do not simplify or invent clothing details.\n- If a full body photo and a close-up disagree (lighting, color cast, angle), the close-up decides the face and the full body photo decides the body and outfit.\n- If something is not visible in any photo (the back of the outfit, the shoes), extend it plausibly and consistently with what is visible. Never invent a new accessory, hairstyle or color.\n- Do not copy the photo background, shadows or lighting color cast. Only the person.\n\nTHE PICTURE (strict)\n- One single image with one character and no grid. Portrait orientation, the biggest size you can make.\n- Full body from the top of the head to the feet, all inside the frame with a little space around. Standing neutral and relaxed, the body turned a little (three-quarter) toward the viewer, a warm natural smile, the face clear and readable, hands empty and relaxed at the sides, both feet flat and fully visible.\n- This is the highest-detail picture of the set: hair strands, skin, fabric prints and shoes all painted with care.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character. No magenta glow, tint or fringe on edges or hair. No ground shadow, no props, no other people, no text, no border.\n- Family friendly for ages 6 and up.",
+   "own": [
+    {
+     "slot": "boppy-hero-photo1",
+     "label": "Full body photo 1",
+     "at": 0
+    },
+    {
+     "slot": "boppy-hero-photo2",
+     "label": "Full body photo 2",
+     "at": 1
+    },
+    {
+     "slot": "boppy-hero-photo3",
+     "label": "Face close-up",
+     "at": 2
+    }
+   ],
+   "group": "Boppy",
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/boppy-hero-ref-v1.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794326510584
+    }
+   ]
+  },
+  {
    "status": "approved",
    "versions": [
     {
@@ -2635,6 +2923,42 @@
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character. Picture 2 is their walk sheet. Pictures 3 and 4 are their battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4. Only the pose and the object in the hands change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, each figure well inside its cell. Held objects are painted in the same style as the character.\n\nIn every frame the character faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says he looks at the viewer.\n\nThe move: Van Cortlandt Park '70.\n\nRow 1:\n1. Standing at a starting line in a young runner pose, a running number pinned to his tank top, eyes ahead, focused.\n2. Crouched low at the line, one hand forward, a hungry look.\n3. Sprinting flat out, arms pumping, hair streaming back.\n\nRow 2:\n4. Running hard with his chest forward, mouth open, determined.\n5. Leaping a low hurdle in stride, both arms swinging, a fierce grin.\n6. Breaking through a finish tape with his chest, arms flung wide, head thrown back, joyful."
   },
   {
+   "id": "olivia-hero",
+   "tab": "Characters",
+   "title": "Olivia hero painting: one full-body pose (the reference for every other picture of Olivia)",
+   "ar": "2:3",
+   "refs": [],
+   "prompt": "Draw the real person in the attached photos as one hero painting: a single full-body character picture. This picture becomes the reference for every other picture of this person in the game, so the likeness and the details matter more than anything else.\n\nART STYLE\n- A whimsical storybook illustration of a real person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like the illustrated school-yard painting it lives next to. Gently simplified shapes. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.\n- Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the photos.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.\n- Clean, crisp edges with fine detail. No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n\nPHOTO FIDELITY\n- The attached photos show the real person: full body photos and face close-ups. Use every one of them.\n- The FACE must be a faithful likeness of the face close-ups: the exact face shape, jawline, cheeks, forehead, nose shape and size, lip shape, smile and teeth, eyebrows (shape, thickness, spacing), eye shape, eye color and eye spacing, freckles, moles, dimples, skin tone, and any glasses or facial hair. Exaggerate only the head size and the expression, never the individual features. Do not beautify, slim, age up or age down the face, and do not turn it into a generic face.\n- The HAIR must match the photos exactly: color (including any highlights, roots or gray), length, parting, volume, texture and how it falls.\n- The BODY must match the full body photos: height impression, build, shoulder width, arm and leg proportions, posture. Caricature only by enlarging the head and shrinking the hands and feet slightly.\n- The OUTFIT, shoes, jewelry and accessories must match the photos exactly: every color, print, pattern, trim, seam, button and logo. Do not simplify or invent clothing details.\n- If a full body photo and a close-up disagree (lighting, color cast, angle), the close-up decides the face and the full body photo decides the body and outfit.\n- If something is not visible in any photo (the back of the outfit, the shoes), extend it plausibly and consistently with what is visible. Never invent a new accessory, hairstyle or color.\n- Do not copy the photo background, shadows or lighting color cast. Only the person.\n\nTHE PICTURE (strict)\n- One single image with one character and no grid. Portrait orientation, the biggest size you can make.\n- Full body from the top of the head to the feet, all inside the frame with a little space around. Standing neutral and relaxed, the body turned a little (three-quarter) toward the viewer, a warm natural smile, the face clear and readable, hands empty and relaxed at the sides, both feet flat and fully visible.\n- This is the highest-detail picture of the set: hair strands, skin, fabric prints and shoes all painted with care.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character. No magenta glow, tint or fringe on edges or hair. No ground shadow, no props, no other people, no text, no border.\n- Family friendly for ages 6 and up.",
+   "own": [
+    {
+     "slot": "olivia-hero-photo1",
+     "label": "Full body photo 1",
+     "at": 0
+    },
+    {
+     "slot": "olivia-hero-photo2",
+     "label": "Full body photo 2",
+     "at": 1
+    },
+    {
+     "slot": "olivia-hero-photo3",
+     "label": "Face close-up",
+     "at": 2
+    }
+   ],
+   "group": "Olivia",
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/olivia-hero-ref-v1.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794326510584
+    }
+   ]
+  },
+  {
    "status": "approved",
    "versions": [
     {
@@ -2943,6 +3267,42 @@
     "art/raw/characters/lachlan-ref-v1.png"
    ],
    "prompt": "Draw the character in the attached pictures as one battle move sheet.\n\nPicture 1 is the character, Olivia. Picture 2 is her walk sheet. Pictures 3 and 4 are her battle sheets. Copy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as pictures 3 and 4.\n\nPicture 5 is Lachlan, Olivia's four-year-old son: a cropped piece of a painting. Ignore the man's arm, hand, watch and shirt at the picture's edge and the plain cream background; they are not part of Lachlan. Copy Lachlan as exactly as possible in every frame he appears: the same face, messy sandy-blond hair, big brown eyes, open happy smile, blue Teenage Mutant Ninja Turtles t-shirt, navy shorts, white socks and white sneakers, the same painting style, linework and level of detail as picture 5. He is small: his head reaches about the height of Olivia's waist when he stands. His head is large for his body like a small child.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One group per cell (Olivia alone, or Olivia with Lachlan, as each frame says), the same scale in every cell, Olivia's feet on the same ground line, each group well inside its cell, nothing touching a cell edge. Lachlan is never drawn alone. Held objects are painted in the same style as the characters. Pink clothing stays clearly pink, never magenta.\n\nIn every frame Olivia faces the same way as in pictures 3 and 4, in the same three-quarter view, unless a frame says she looks at the viewer. Lachlan faces the same way as Olivia unless a frame says he looks at the viewer.\n\nThe move: LACHLAN, NO!.\n\nRow 1:\n1. Olivia alone, standing with her head turned, eyes wide, spotting something ahead, one hand reaching out.\n2. Olivia alone, crouching low in a sprinter's start, a fierce mom look.\n3. Olivia alone, sprinting flat out, arms pumping, hair streaming back, mouth open in a shout.\n\nRow 2:\n4. Olivia leaping forward with both arms stretched out to grab, determined. Lachlan stands just ahead of her at her hand's reach, a short wooden stick raised in one fist, mouth open in a surprised grin, about to be caught.\n5. Olivia skidding to a stop and scooping Lachlan up with both arms wrapped around him, relieved, her cheek against his hair. Lachlan holds the short wooden stick and giggles, his feet dangling.\n6. Olivia standing calmly with Lachlan sitting on her hip, one arm holding him, her free hand brushing her dress, a casual innocent smile. Lachlan waves the short wooden stick proudly and looks at the viewer with a big grin."
+  },
+  {
+   "id": "justin-hero",
+   "tab": "Characters",
+   "title": "Justin hero painting: one full-body pose (the reference for every other picture of Justin)",
+   "ar": "2:3",
+   "refs": [],
+   "prompt": "Draw the real person in the attached photos as one hero painting: a single full-body character picture. This picture becomes the reference for every other picture of this person in the game, so the likeness and the details matter more than anything else.\n\nART STYLE\n- A whimsical storybook illustration of a real person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like the illustrated school-yard painting it lives next to. Gently simplified shapes. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.\n- Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the photos.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.\n- Clean, crisp edges with fine detail. No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n\nPHOTO FIDELITY\n- The attached photos show the real person: full body photos and face close-ups. Use every one of them.\n- The FACE must be a faithful likeness of the face close-ups: the exact face shape, jawline, cheeks, forehead, nose shape and size, lip shape, smile and teeth, eyebrows (shape, thickness, spacing), eye shape, eye color and eye spacing, freckles, moles, dimples, skin tone, and any glasses or facial hair. Exaggerate only the head size and the expression, never the individual features. Do not beautify, slim, age up or age down the face, and do not turn it into a generic face.\n- The HAIR must match the photos exactly: color (including any highlights, roots or gray), length, parting, volume, texture and how it falls.\n- The BODY must match the full body photos: height impression, build, shoulder width, arm and leg proportions, posture. Caricature only by enlarging the head and shrinking the hands and feet slightly.\n- The OUTFIT, shoes, jewelry and accessories must match the photos exactly: every color, print, pattern, trim, seam, button and logo. Do not simplify or invent clothing details.\n- If a full body photo and a close-up disagree (lighting, color cast, angle), the close-up decides the face and the full body photo decides the body and outfit.\n- If something is not visible in any photo (the back of the outfit, the shoes), extend it plausibly and consistently with what is visible. Never invent a new accessory, hairstyle or color.\n- Do not copy the photo background, shadows or lighting color cast. Only the person.\n\nTHE PICTURE (strict)\n- One single image with one character and no grid. Portrait orientation, the biggest size you can make.\n- Full body from the top of the head to the feet, all inside the frame with a little space around. Standing neutral and relaxed, the body turned a little (three-quarter) toward the viewer, a warm natural smile, the face clear and readable, hands empty and relaxed at the sides, both feet flat and fully visible.\n- This is the highest-detail picture of the set: hair strands, skin, fabric prints and shoes all painted with care.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character. No magenta glow, tint or fringe on edges or hair. No ground shadow, no props, no other people, no text, no border.\n- Family friendly for ages 6 and up.",
+   "own": [
+    {
+     "slot": "justin-hero-photo1",
+     "label": "Full body photo 1",
+     "at": 0
+    },
+    {
+     "slot": "justin-hero-photo2",
+     "label": "Full body photo 2",
+     "at": 1
+    },
+    {
+     "slot": "justin-hero-photo3",
+     "label": "Face close-up",
+     "at": 2
+    }
+   ],
+   "group": "Justin",
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/justin-hero-ref-v1.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794326510584
+    }
+   ]
   },
   {
    "status": "approved",
@@ -5951,6 +6311,42 @@
    "prompt": "Draw the character in the attached picture as an emotion sheet: the same person showing eight different feelings.\n\nTHE REFERENCE WINS\nThe attached picture is the character. It is the only source for how they look and how they are painted. Every figure must look like it was cut from that same painting: the same face, age, body, hair, clothes, shoes and colors, the same head size compared to the body, and the same painting technique. Only the pose and the facial expression change.\n\nHEAD AND BODY PROPORTION (the thing most often drawn wrong: check it first)\n- Measure the attached picture: count how many head heights (top of the hair or hat to the bottom of the chin) fit into the full figure, from the top of the head to the soles of the shoes. Most characters in this game are about 3.5 heads tall, between 3 and 4. Every figure on this sheet must have exactly the same count as the picture.\n- Do not enlarge the head to make the face easier to read, and do not shorten the body or legs. This is not a chibi or big-head sticker style. A laughing, shocked or frowning face stays inside the same head size.\n- Keep the same shoulder width, arm length, leg length, hand size and shoe size as the picture.\n- When a pose leans or bends, the head stays the same size. Only the body moves.\n\nPAINTING TECHNIQUE (match the picture's surface)\n- Fine warm brown ink line work around every shape, with visible pen hatching: short parallel and crossed strokes in the shadows of the face, hair, clothes and shoes, as dense as in the picture.\n- A light, transparent watercolor wash over the line work, with the soft grain of the paper showing through.\n- Warm daylight from the upper left, gentle shading.\n- No airbrushed or glossy skin, no smooth digital gradients, no plastic shine, no 3D render look, no flat cartoon fill, no thick black outlines. Not pixel art, not 16-bit, not anime.\n\nCOLORS\n- Copy every color from the picture exactly: skin, hair, eyes, each piece of clothing, prints, logos and shoes. Same hue, same brightness, same muted, earthy saturation.\n- Do not warm, brighten, saturate or orange-tint anything. The skin stays the exact tone of the picture.\n- The cream paper behind the character in the picture is not part of the character. Here the background is magenta, but the magenta is only a backdrop for cutting out: it must not tint, glow on or reflect onto the character. Paint each figure as if it were still on the cream paper, then set it on the magenta.\n\nTHE SHEET\nOne image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One full-body figure per cell, from the top of the hair to the soles of the shoes, standing, facing the viewer in the same slight three-quarter view as the picture. The same figure height in every cell, feet on the same ground line, each figure well inside its cell with clear magenta on all four sides. Empty hands. No shadow on the ground. No grid lines, numbers, text, symbols, tears, sweat drops, hearts or effects. Each feeling must read from the whole body and from the face, clear enough to read at a small size.\n\nRow 1:\n1. Happy. Up on the toes, knees loose, a little bounce. Both hands clasped at chest height. Eyes crinkled, cheeks raised, a big open-mouth smile.\n2. Loving. Feet together, head tilted to one side. Both hands pressed flat over the heart. Soft half-closed eyes, a warm closed-mouth smile.\n3. Sad. Slumped, shoulders dropped, head lowered, feet together with the toes turned in. Hands holding each other in front of the waist. Eyebrows pulled up in the middle, the corners of the mouth turned down.\n4. Angry. Feet planted wide, leaning forward, arms crossed tight over the chest. Chin down, eyebrows pulled down hard, eyes narrowed, a tight frown.\n\nRow 2:\n5. Scared. Knees bent, leaning back, shoulders hunched up. Both fists held up under the chin. Eyes wide open, eyebrows raised and pulled together, mouth open and stretched wide.\n6. Surprised. One foot stepped back, upper body pulled back. Both hands open beside the face, palms forward. Eyebrows raised high, eyes wide and round, mouth open in a tall O.\n7. Proud. Feet apart, chest out, shoulders back, chin raised. Both fists on the hips. A confident closed-mouth one-sided smile.\n8. Unimpressed. Weight on one leg, the other knee relaxed. One hand on the hip, the other arm hanging loose. Head tilted, eyelids half lowered, one eyebrow raised, mouth a flat line pulled to one side.\n\nBefore finishing, compare every figure with the picture: the head count, the colors, the line work and the hatching. Redraw any figure whose head is larger, whose colors are brighter or warmer, or whose surface is smoother than the picture."
   },
   {
+   "id": "amy-hero",
+   "tab": "Characters",
+   "title": "Amy hero painting: one full-body pose (the reference for every other picture of Amy)",
+   "ar": "2:3",
+   "refs": [],
+   "prompt": "Draw the real person in the attached photos as one hero painting: a single full-body character picture. This picture becomes the reference for every other picture of this person in the game, so the likeness and the details matter more than anything else.\n\nART STYLE\n- A whimsical storybook illustration of a real person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like the illustrated school-yard painting it lives next to. Gently simplified shapes. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.\n- Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the photos.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.\n- Clean, crisp edges with fine detail. No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n\nPHOTO FIDELITY\n- The attached photos show the real person: full body photos and face close-ups. Use every one of them.\n- The FACE must be a faithful likeness of the face close-ups: the exact face shape, jawline, cheeks, forehead, nose shape and size, lip shape, smile and teeth, eyebrows (shape, thickness, spacing), eye shape, eye color and eye spacing, freckles, moles, dimples, skin tone, and any glasses or facial hair. Exaggerate only the head size and the expression, never the individual features. Do not beautify, slim, age up or age down the face, and do not turn it into a generic face.\n- The HAIR must match the photos exactly: color (including any highlights, roots or gray), length, parting, volume, texture and how it falls.\n- The BODY must match the full body photos: height impression, build, shoulder width, arm and leg proportions, posture. Caricature only by enlarging the head and shrinking the hands and feet slightly.\n- The OUTFIT, shoes, jewelry and accessories must match the photos exactly: every color, print, pattern, trim, seam, button and logo. Do not simplify or invent clothing details.\n- If a full body photo and a close-up disagree (lighting, color cast, angle), the close-up decides the face and the full body photo decides the body and outfit.\n- If something is not visible in any photo (the back of the outfit, the shoes), extend it plausibly and consistently with what is visible. Never invent a new accessory, hairstyle or color.\n- Do not copy the photo background, shadows or lighting color cast. Only the person.\n\nTHE PICTURE (strict)\n- One single image with one character and no grid. Portrait orientation, the biggest size you can make.\n- Full body from the top of the head to the feet, all inside the frame with a little space around. Standing neutral and relaxed, the body turned a little (three-quarter) toward the viewer, a warm natural smile, the face clear and readable, hands empty and relaxed at the sides, both feet flat and fully visible.\n- This is the highest-detail picture of the set: hair strands, skin, fabric prints and shoes all painted with care.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character. No magenta glow, tint or fringe on edges or hair. No ground shadow, no props, no other people, no text, no border.\n- Family friendly for ages 6 and up.",
+   "own": [
+    {
+     "slot": "amy-hero-photo1",
+     "label": "Full body photo 1",
+     "at": 0
+    },
+    {
+     "slot": "amy-hero-photo2",
+     "label": "Full body photo 2",
+     "at": 1
+    },
+    {
+     "slot": "amy-hero-photo3",
+     "label": "Face close-up",
+     "at": 2
+    }
+   ],
+   "group": "Amy",
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/amy-hero-ref-v1.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794326510584
+    }
+   ]
+  },
+  {
    "status": "approved",
    "versions": [
     {
@@ -6081,6 +6477,42 @@
    "prompt": "Draw the character in the attached picture as an emotion sheet: the same person showing eight different feelings.\n\nTHE REFERENCE WINS\nThe attached picture is the character. It is the only source for how they look and how they are painted. Every figure must look like it was cut from that same painting: the same face, age, body, hair, clothes, shoes and colors, the same head size compared to the body, and the same painting technique. Only the pose and the facial expression change.\n\nHEAD AND BODY PROPORTION (the thing most often drawn wrong: check it first)\n- Measure the attached picture: count how many head heights (top of the hair or hat to the bottom of the chin) fit into the full figure, from the top of the head to the soles of the shoes. Most characters in this game are about 3.5 heads tall, between 3 and 4. Every figure on this sheet must have exactly the same count as the picture.\n- Do not enlarge the head to make the face easier to read, and do not shorten the body or legs. This is not a chibi or big-head sticker style. A laughing, shocked or frowning face stays inside the same head size.\n- Keep the same shoulder width, arm length, leg length, hand size and shoe size as the picture.\n- When a pose leans or bends, the head stays the same size. Only the body moves.\n\nPAINTING TECHNIQUE (match the picture's surface)\n- Fine warm brown ink line work around every shape, with visible pen hatching: short parallel and crossed strokes in the shadows of the face, hair, clothes and shoes, as dense as in the picture.\n- A light, transparent watercolor wash over the line work, with the soft grain of the paper showing through.\n- Warm daylight from the upper left, gentle shading.\n- No airbrushed or glossy skin, no smooth digital gradients, no plastic shine, no 3D render look, no flat cartoon fill, no thick black outlines. Not pixel art, not 16-bit, not anime.\n\nCOLORS\n- Copy every color from the picture exactly: skin, hair, eyes, each piece of clothing, prints, logos and shoes. Same hue, same brightness, same muted, earthy saturation.\n- Do not warm, brighten, saturate or orange-tint anything. The skin stays the exact tone of the picture.\n- The cream paper behind the character in the picture is not part of the character. Here the background is magenta, but the magenta is only a backdrop for cutting out: it must not tint, glow on or reflect onto the character. Paint each figure as if it were still on the cream paper, then set it on the magenta.\n\nTHE SHEET\nOne image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One full-body figure per cell, from the top of the hair to the soles of the shoes, standing, facing the viewer in the same slight three-quarter view as the picture. The same figure height in every cell, feet on the same ground line, each figure well inside its cell with clear magenta on all four sides. Empty hands. No shadow on the ground. No grid lines, numbers, text, symbols, tears, sweat drops, hearts or effects. Each feeling must read from the whole body and from the face, clear enough to read at a small size.\n\nRow 1:\n1. Happy. Up on the toes, knees loose, a little bounce. Both hands clasped at chest height. Eyes crinkled, cheeks raised, a big open-mouth smile.\n2. Loving. Feet together, head tilted to one side. Both hands pressed flat over the heart. Soft half-closed eyes, a warm closed-mouth smile.\n3. Sad. Slumped, shoulders dropped, head lowered, feet together with the toes turned in. Hands holding each other in front of the waist. Eyebrows pulled up in the middle, the corners of the mouth turned down.\n4. Angry. Feet planted wide, leaning forward, arms crossed tight over the chest. Chin down, eyebrows pulled down hard, eyes narrowed, a tight frown.\n\nRow 2:\n5. Scared. Knees bent, leaning back, shoulders hunched up. Both fists held up under the chin. Eyes wide open, eyebrows raised and pulled together, mouth open and stretched wide.\n6. Surprised. One foot stepped back, upper body pulled back. Both hands open beside the face, palms forward. Eyebrows raised high, eyes wide and round, mouth open in a tall O.\n7. Proud. Feet apart, chest out, shoulders back, chin raised. Both fists on the hips. A confident closed-mouth one-sided smile.\n8. Unimpressed. Weight on one leg, the other knee relaxed. One hand on the hip, the other arm hanging loose. Head tilted, eyelids half lowered, one eyebrow raised, mouth a flat line pulled to one side.\n\nBefore finishing, compare every figure with the picture: the head count, the colors, the line work and the hatching. Redraw any figure whose head is larger, whose colors are brighter or warmer, or whose surface is smoother than the picture."
   },
   {
+   "id": "ellie-hero",
+   "tab": "Characters",
+   "title": "Aunt Ellie hero painting: one full-body pose (the reference for every other picture of Aunt Ellie)",
+   "ar": "2:3",
+   "refs": [],
+   "prompt": "Draw the real person in the attached photos as one hero painting: a single full-body character picture. This picture becomes the reference for every other picture of this person in the game, so the likeness and the details matter more than anything else.\n\nART STYLE\n- A whimsical storybook illustration of a real person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like the illustrated school-yard painting it lives next to. Gently simplified shapes. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.\n- Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the photos.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.\n- Clean, crisp edges with fine detail. No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n\nPHOTO FIDELITY\n- The attached photos show the real person: full body photos and face close-ups. Use every one of them.\n- The FACE must be a faithful likeness of the face close-ups: the exact face shape, jawline, cheeks, forehead, nose shape and size, lip shape, smile and teeth, eyebrows (shape, thickness, spacing), eye shape, eye color and eye spacing, freckles, moles, dimples, skin tone, and any glasses or facial hair. Exaggerate only the head size and the expression, never the individual features. Do not beautify, slim, age up or age down the face, and do not turn it into a generic face.\n- The HAIR must match the photos exactly: color (including any highlights, roots or gray), length, parting, volume, texture and how it falls.\n- The BODY must match the full body photos: height impression, build, shoulder width, arm and leg proportions, posture. Caricature only by enlarging the head and shrinking the hands and feet slightly.\n- The OUTFIT, shoes, jewelry and accessories must match the photos exactly: every color, print, pattern, trim, seam, button and logo. Do not simplify or invent clothing details.\n- If a full body photo and a close-up disagree (lighting, color cast, angle), the close-up decides the face and the full body photo decides the body and outfit.\n- If something is not visible in any photo (the back of the outfit, the shoes), extend it plausibly and consistently with what is visible. Never invent a new accessory, hairstyle or color.\n- Do not copy the photo background, shadows or lighting color cast. Only the person.\n\nTHE PICTURE (strict)\n- One single image with one character and no grid. Portrait orientation, the biggest size you can make.\n- Full body from the top of the head to the feet, all inside the frame with a little space around. Standing neutral and relaxed, the body turned a little (three-quarter) toward the viewer, a warm natural smile, the face clear and readable, hands empty and relaxed at the sides, both feet flat and fully visible.\n- This is the highest-detail picture of the set: hair strands, skin, fabric prints and shoes all painted with care.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character. No magenta glow, tint or fringe on edges or hair. No ground shadow, no props, no other people, no text, no border.\n- Family friendly for ages 6 and up.",
+   "own": [
+    {
+     "slot": "ellie-hero-photo1",
+     "label": "Full body photo 1",
+     "at": 0
+    },
+    {
+     "slot": "ellie-hero-photo2",
+     "label": "Full body photo 2",
+     "at": 1
+    },
+    {
+     "slot": "ellie-hero-photo3",
+     "label": "Face close-up",
+     "at": 2
+    }
+   ],
+   "group": "Aunt Ellie",
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/ellie-hero-ref-v1.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794326510584
+    }
+   ]
+  },
+  {
    "id": "ellie-walking-sheet",
    "tab": "Characters",
    "title": "Aunt Ellie walking sheet 3 x 3 (walk prompt; copies the hero painting)",
@@ -6180,6 +6612,42 @@
     "art/raw/characters/nara-hero-ref-v1.png"
    ],
    "prompt": "Draw the dog in the attached picture as an emotion sheet: the same dog showing eight different feelings.\n\nThe attached picture is the dog. Copy it as exactly as possible in every frame: the same dog, breed, size, head size compared to the body, curly coat, colors, collar, painting style and level of detail. Only the pose and the face change.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One whole dog per cell, from the ears to the paws and the tail, in a three-quarter view with the face toward the viewer. The dog is the same scale in every cell, paws on the same ground line, each dog well inside its cell. No people, toys, bowls, grid lines, numbers, text, symbols, tears, hearts or effects. Each feeling must read from the ears, eyes, mouth, body and tail, clear enough to read at a small size.\n\nRow 1:\n1. Happy. Standing, bouncing up on the front paws. Ears perked up, eyes bright, mouth wide open with the tongue out. Tail held high, mid wag.\n2. Loving. Sitting, head tilted to one side, one front paw lifted. Eyes soft and half closed, ears relaxed back, a soft closed mouth. Tail curled around the paws.\n3. Sad. Lying down, chin resting flat on the front paws. Eyes looking up, eyebrows raised in the middle, ears drooping. Tail flat on the ground.\n4. Angry. Standing stiff on all four legs, planted wide, head low. Ears forward, eyes narrowed, nose wrinkled in a small growl with the front teeth just showing. Fur raised along the back, tail stiff.\n\nRow 2:\n5. Scared. Crouched low, body pulled back over the back legs. Ears pressed flat back, eyes wide. Tail tucked between the back legs.\n6. Surprised. Sitting up tall, head pulled back. Ears straight up, eyes wide and round, mouth open in a small O.\n7. Proud. Standing tall and square, chest out, head high. Ears up, mouth closed, eyes confident. Tail held high and still.\n8. Unimpressed. Lying down, head up but turned slightly away. Eyelids half lowered, one ear flopped, mouth a flat closed line. Tail still."
+  },
+  {
+   "id": "jojo-hero",
+   "tab": "Characters",
+   "title": "Jojo hero painting: one full-body pose (the reference for every other picture of Jojo)",
+   "ar": "2:3",
+   "refs": [],
+   "prompt": "Draw the real person in the attached photos as one hero painting: a single full-body character picture. This picture becomes the reference for every other picture of this person in the game, so the likeness and the details matter more than anything else.\n\nART STYLE\n- A whimsical storybook illustration of a real person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like the illustrated school-yard painting it lives next to. Gently simplified shapes. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.\n- Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the photos.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.\n- Clean, crisp edges with fine detail. No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n\nPHOTO FIDELITY\n- The attached photos show the real person: full body photos and face close-ups. Use every one of them.\n- The FACE must be a faithful likeness of the face close-ups: the exact face shape, jawline, cheeks, forehead, nose shape and size, lip shape, smile and teeth, eyebrows (shape, thickness, spacing), eye shape, eye color and eye spacing, freckles, moles, dimples, skin tone, and any glasses or facial hair. Exaggerate only the head size and the expression, never the individual features. Do not beautify, slim, age up or age down the face, and do not turn it into a generic face.\n- The HAIR must match the photos exactly: color (including any highlights, roots or gray), length, parting, volume, texture and how it falls.\n- The BODY must match the full body photos: height impression, build, shoulder width, arm and leg proportions, posture. Caricature only by enlarging the head and shrinking the hands and feet slightly.\n- The OUTFIT, shoes, jewelry and accessories must match the photos exactly: every color, print, pattern, trim, seam, button and logo. Do not simplify or invent clothing details.\n- If a full body photo and a close-up disagree (lighting, color cast, angle), the close-up decides the face and the full body photo decides the body and outfit.\n- If something is not visible in any photo (the back of the outfit, the shoes), extend it plausibly and consistently with what is visible. Never invent a new accessory, hairstyle or color.\n- Do not copy the photo background, shadows or lighting color cast. Only the person.\n\nTHE PICTURE (strict)\n- One single image with one character and no grid. Portrait orientation, the biggest size you can make.\n- Full body from the top of the head to the feet, all inside the frame with a little space around. Standing neutral and relaxed, the body turned a little (three-quarter) toward the viewer, a warm natural smile, the face clear and readable, hands empty and relaxed at the sides, both feet flat and fully visible.\n- This is the highest-detail picture of the set: hair strands, skin, fabric prints and shoes all painted with care.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character. No magenta glow, tint or fringe on edges or hair. No ground shadow, no props, no other people, no text, no border.\n- Family friendly for ages 6 and up.",
+   "own": [
+    {
+     "slot": "jojo-hero-photo1",
+     "label": "Full body photo 1",
+     "at": 0
+    },
+    {
+     "slot": "jojo-hero-photo2",
+     "label": "Full body photo 2",
+     "at": 1
+    },
+    {
+     "slot": "jojo-hero-photo3",
+     "label": "Face close-up",
+     "at": 2
+    }
+   ],
+   "group": "Jojo",
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/jojo-hero-ref-v1.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794326510584
+    }
+   ]
   },
   {
    "status": "approved",
@@ -7574,6 +8042,42 @@
    ],
    "prompt": "Draw a second battle sheet of the character in the attached pictures, for a family role-playing game.\n\nPicture 1 is the character, Olivia. Picture 2 is her first battle sheet: this sheet must look like it was painted at the same time, with the same viewing angle, the same figure size, the same feet ground line and the same head size compared to the body. Copy the person exactly: the same face, age, body, hair, clothes, shoes, colors, painting style and level of detail.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells (6 frames, numbered left to right, top to bottom), on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on one ground line (except when she is in the air), each figure well inside its cell with clear magenta margin. Every figure is complete, never cropped. In every frame she faces the same way as in picture 2. No grid lines, numbers, text, effects, shadows or props. Hands empty. Clothing never uses magenta.\n\n1. Startled flinch: body leaning back, head pulled back, eyes squeezed shut, one foot lifted off the ground.\n2. Tired: down on one knee, one hand resting on the knee, head lowered, out of breath, a weary but determined face.\n3. Napping: sitting slumped on the ground with legs stretched out in front, leaning back on one hand, head tilted, eyes closed, dizzy and sleepy.\n4. Cheering: one fist pumped high, the other hand on the hip, a big grin.\n5. Cheering: both fists overhead, laughing, up on the toes.\n6. Signature pose: one arm pointing straight at the opponent, the other hand on the hip, feet planted wide, a confident determined smile.\n\nDo not add frames, merge frames, repeat a pose or invent props. Family friendly.",
    "group": "Olivia"
+  },
+  {
+   "id": "michael-hero",
+   "tab": "Characters",
+   "title": "Michael hero painting: one full-body pose (the reference for every other picture of Michael)",
+   "ar": "2:3",
+   "refs": [],
+   "prompt": "Draw the real person in the attached photos as one hero painting: a single full-body character picture. This picture becomes the reference for every other picture of this person in the game, so the likeness and the details matter more than anything else.\n\nART STYLE\n- A whimsical storybook illustration of a real person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork, like the illustrated school-yard painting it lives next to. Gently simplified shapes. Slightly stylized features that keep a clear likeness. Clothing prints and patterns are drawn in clear detail so every motif is readable.\n- Caricature proportions: an oversized head about one third of the full body height, a slim body, small hands and small feet, large expressive eyes and a warm, slightly exaggerated expression. The face keeps a clear likeness of the real person in the photos.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.\n- Clean, crisp edges with fine detail. No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n\nPHOTO FIDELITY\n- The attached photos show the real person: full body photos and face close-ups. Use every one of them.\n- The FACE must be a faithful likeness of the face close-ups: the exact face shape, jawline, cheeks, forehead, nose shape and size, lip shape, smile and teeth, eyebrows (shape, thickness, spacing), eye shape, eye color and eye spacing, freckles, moles, dimples, skin tone, and any glasses or facial hair. Exaggerate only the head size and the expression, never the individual features. Do not beautify, slim, age up or age down the face, and do not turn it into a generic face.\n- The HAIR must match the photos exactly: color (including any highlights, roots or gray), length, parting, volume, texture and how it falls.\n- The BODY must match the full body photos: height impression, build, shoulder width, arm and leg proportions, posture. Caricature only by enlarging the head and shrinking the hands and feet slightly.\n- The OUTFIT, shoes, jewelry and accessories must match the photos exactly: every color, print, pattern, trim, seam, button and logo. Do not simplify or invent clothing details.\n- If a full body photo and a close-up disagree (lighting, color cast, angle), the close-up decides the face and the full body photo decides the body and outfit.\n- If something is not visible in any photo (the back of the outfit, the shoes), extend it plausibly and consistently with what is visible. Never invent a new accessory, hairstyle or color.\n- Do not copy the photo background, shadows or lighting color cast. Only the person.\n\nTHE PICTURE (strict)\n- One single image with one character and no grid. Portrait orientation, the biggest size you can make.\n- Full body from the top of the head to the feet, all inside the frame with a little space around. Standing neutral and relaxed, the body turned a little (three-quarter) toward the viewer, a warm natural smile, the face clear and readable, hands empty and relaxed at the sides, both feet flat and fully visible.\n- This is the highest-detail picture of the set: hair strands, skin, fabric prints and shoes all painted with care.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. No magenta anywhere on the character. No magenta glow, tint or fringe on edges or hair. No ground shadow, no props, no other people, no text, no border.\n- Family friendly for ages 6 and up.",
+   "own": [
+    {
+     "slot": "michael-hero-photo1",
+     "label": "Full body photo 1",
+     "at": 0
+    },
+    {
+     "slot": "michael-hero-photo2",
+     "label": "Full body photo 2",
+     "at": 1
+    },
+    {
+     "slot": "michael-hero-photo3",
+     "label": "Face close-up",
+     "at": 2
+    }
+   ],
+   "group": "Michael",
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/michael-hero-ref-v1.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794326510584
+    }
+   ]
   },
   {
    "id": "michael-walking-sheet",
