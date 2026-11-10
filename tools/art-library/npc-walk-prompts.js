@@ -33,7 +33,7 @@ Bottom row: the person is seen from the side. The nose and the toes point to the
 function build(art) {
   const out = [];
   for (const h of art.entries.filter(e => e.id.startsWith('npc-photo-'))) {
-    const k = h.id.slice(10); if (SKIP.has(k)) continue;
+    const k = h.id.slice(10); if (SKIP.has(k) || !h.versions.length) continue;   // no walk entry until the hero has a picture to attach
     out.push({ status: 'draft', versions: [], rejects: [], id: 'npc-walk-' + k, tab: 'NPCs', title: h.title.split(':')[0] + ': walk sheet (hero attached)', ar: '1:1',
       refs: [h.versions[h.versions.length - 1].file], prompt: k === 'gus' ? GUS_PROMPT : PROMPT, group: h.group });
   }

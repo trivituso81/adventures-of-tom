@@ -76,6 +76,8 @@ const N = {
   sam: { name: 'Sam', look: 'sam', sex: 'f', kind: 'adult', age: 34, ft: `5'7"`, role: 'a house renovator who lives with Jordan and posts everything online', acc: 'a phone held up in one hand, a quick, delighted smile' },
   dakota: { name: 'Dakota', look: 'dakota', sex: 'f', kind: 'adult', age: 36, ft: `5'8"`, role: 'a homeowner restoring a 1912 house with Ryan', acc: 'a paintbrush held in one hand, a fond, determined smile' },
   ryan: { name: 'Ryan', look: 'ryan', sex: 'm', kind: 'adult', age: 38, ft: `5'11"`, role: 'a new father and homeowner, Dakota\'s partner', acc: 'one open hand held out low at waist height in a gentle keep-it-down gesture, well below the chin and away from the face, a baby monitor in the other hand, exhausted but happy' },
+  vance: { name: 'Julian Vance', look: 'longcoat', sex: 'm', kind: 'adult', age: 58, ft: `6'1"`, role: 'the quiet, polite man in the long coat who paused the world at its happiest afternoon, never without his hat', acc: 'hands clasped loosely in front of him, a calm, courteous, faintly sad smile' },
+  marlowe: { name: 'Monochrome Marlowe', look: 'marlowe', sex: 'm', kind: 'adult', age: 45, ft: `5'10"`, role: "Vance's fixer, who takes the color out of places, always carrying a clipboard that reads NOTES: LESS", acc: 'a clipboard held to his chest with NOTES: LESS written on it, a flat, tired, apologetic look', over: { shirt: '#9ea3ab', pants: '#2c2c33' } },
 };
 
 const BATCHES = [
@@ -90,13 +92,14 @@ const BATCHES = [
   { title: 'Casa Alvarez grown-ups', keys: ['alvarez', 'beto', 'tony', 'yesenia', 'claudia'], note: 'ages and heights assumed' },
   { title: 'Casa Alvarez kids', keys: ['kevin', 'daisy', 'mateo', 'sofi'], note: 'children; ages and heights assumed' },
   { title: 'Jordan and Sam, Dakota and Ryan', keys: ['jordan', 'sam', 'dakota', 'ryan'], note: 'ages and heights assumed' },
+  { title: 'Vance and Marlowe', keys: ['vance', 'marlowe'], note: 'Tom 2026-11-10: every NPC needs a hero; ages and heights assumed, colors from the game palettes longcoat and marlowe' },
 ];
 
 
 // Groups of 2 to 3 people from each batch (a batch of 6 is 3+3, 5 is 3+2, 4 is 2+2), so every person gets a big cell and one shared scale.
 const GROUPS = [];
 BATCHES.forEach((b, bi) => {
-  const n = b.keys.length, sizes = n === 6 ? [3, 3] : n === 5 ? [3, 2] : [2, 2];
+  const n = b.keys.length, sizes = n === 6 ? [3, 3] : n === 5 ? [3, 2] : n === 2 ? [2] : [2, 2];
   let at = 0;
   for (const sz of sizes) { const keys = b.keys.slice(at, at + sz); at += sz; GROUPS.push({ keys, batch: b.title, la: bi + 1 >= 5, id: keys.join('-') }); }
 });
@@ -128,6 +131,7 @@ const HS = {
   toni: 'long and curly', kiki: 'chin-length choppy bob', dana: 'short bob', alvarez: 'short curly bob', beto: 'short and thin', tony: 'short and messy',
   yesenia: 'shoulder-length messy waves', claudia: 'shoulder-length curls', kevin: 'short and spiky', daisy: 'chin-length messy bob', mateo: 'short and spiky',
   sofi: 'wild and messy to the shoulders', jordan: 'short and neat', sam: 'shoulder-length waves', dakota: 'shoulder-length waves', ryan: 'short and tousled',
+  vance: 'short, dark and neatly combed back', marlowe: 'short, grey and flat',
 };
 const PERS = {
   pip: 'proud and playful', moss: 'curious and quiet', dot: 'thoughtful and precise', gus: 'easygoing and unhurried', bean: 'cheerful and never quite lost', reel: 'weathered and friendly',
@@ -141,14 +145,17 @@ const PERS = {
   beto: 'mellow and amused', tony: 'wry, tired but hopeful', yesenia: 'alert and frazzled', claudia: 'sleepy and kind', kevin: 'comically resigned',
   daisy: 'mischievous and serious about her film', mateo: 'loud and delighted', sofi: 'fierce and giggly', jordan: 'proud and handy', sam: 'quick and delighted',
   dakota: 'fond and determined', ryan: 'exhausted but happy',
+  vance: 'calm, courteous and quietly certain', marlowe: 'flat, tired and apologetic',
 };
 // Work clothes where the job has a look; everyone else gets plain clothes in their game colors.
 const CS = { kenji: 'a white chef jacket and chef hat', bun: 'a baker apron and a puffy baker hat', ray: 'a navy security guard uniform and cap', claudia: 'nurse scrubs',
-  toni: 'an apron over a white shirt', carmen: 'an apron over her clothes', marguerite: 'a measuring tape around the neck', kiki: 'a headset and radios on the belt', halverson: 'a teacher lanyard' };
+  toni: 'an apron over a white shirt', carmen: 'an apron over her clothes', marguerite: 'a measuring tape around the neck', kiki: 'a headset and radios on the belt', halverson: 'a teacher lanyard',
+  vance: 'a long dark coat', marlowe: 'a plain grey suit jacket, so the whole outfit is grey' };
 // Hats (Tom 2026-11-10): a hat appears only when it is a work hat (chef, baker and security cap in CS, plus the job hats below) or when it shows
 // personality (5 percent of the 56 people = 3: Luna, Ike, Pip). The palette's `hat` colour supplies the colour; everyone not listed has no hat.
 const HAT = {
   kit: 'postal cap', sal: 'driver flat cap', sol: 'driver flat cap', reel: 'weathered fishing hat', fern: 'wide straw sun hat', larry: 'work cap', odette: 'cook cap', toni: 'kitchen cap',   // job hats
+  vance: 'brimmed hat he never takes off',   // story hat (canon: the man in the long coat never took his hat off), not a personality hat
   luna: 'floppy wide-brim hat with a small brass star pin', ike: 'tweed flat cap', pip: 'bucket hat worn a little crooked with a feather tucked in the band',   // personality hats
 };
 function details(c, k) {
