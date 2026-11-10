@@ -1,3 +1,10 @@
+## 2026-11-10 (npcemo2): NPC emotion tags extended to chapters 6 to 10, and the chapters 1 to 5 list completed (docs and tools only; game unchanged; no tag)
+- Correction: the npcemo1 entry above says 503 lines, but the tsv that was pushed held 288 (map NPC talk only). Scene townsfolk, recruit chatter, shop lines and cab drivers were missing from it. This change adds them, so the real total is now 595.
+- Added 307 rows to `docs/npc-emotion-lines.tsv`: 85 map NPC lines (chapter 6 to 10 variants for Olivia, Michael, Mr. Washington, Marisol, Larry, Bernadette, Page, Luna, Aunt Ellie, plus base lines the first pass missed for Jojo, Priya, Miss Odette, Dona Carmen, Jordan, Sam, Dakota, Ryan and chapter 2 variants), 74 townsfolk lines in story scenes ch2 to ch10 (Mr. Washington, Oolong, Kiki, Ray, Dana, Toni, Pruitt, Halverson, Michael, Bernadette, Page, Luna, Sal), 46 recruit and follower lines, 66 Penny and Nickel shop lines, 36 Sal and Sol cab lines.
+- `chapters` column widened: base rows `1-5` and `2-5` now `1-10` and `2-10`, and `from:N` variants now run to 10.
+- New `tools/npc-emotion-index.py` rebuilds `docs/NPC_EMOTION_INDEX.md` from the tsv. Check: `python3 tools/npc-emotion-check.py` OK (595 rows). Totals: happy 166, loving 70, sad 24, angry 19, scared 30, surprised 42, proud 138, unimpressed 106.
+- Not covered: the "puzzle replies" the first pass mentioned (not found in the data), Penny gear captions, cast lines in airport trips.
+
 ## 2026-11-10 (npcemo1): emotion tag on every NPC dialogue line, chapters 1 to 5 (docs and a check tool only; game unchanged; no tag)
 - Tom (09:32): tag each NPC dialogue line in chapters 1 to 5 with one of the 8 emotion-sheet moods, behind the scenes, so an emotion pose frame can be attached later.
 - Call made: a sidecar list keyed by speaker plus exact text (same pattern as docs/emotion-index-lines.tsv), not inline fields, so no game file changes and the tags survive code moves. 503 lines in `docs/npc-emotion-lines.tsv`; readable copy `docs/NPC_EMOTION_INDEX.md`; check `python3 tools/npc-emotion-check.py` (OK, all 503 texts found).
