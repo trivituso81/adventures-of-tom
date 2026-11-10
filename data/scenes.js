@@ -367,7 +367,7 @@ SCENES.ch2Smog=[
   {talk:'Tom',lines:['Excuse me, smog. That was UNCALLED for.'],voice:[['tom','hurt',0,'That was UNCALLED for!']]},
   {spawn:{name:'Smoglet',monster:'smoglet',at:[14,18],dir:'left'}},
   {spawn:{name:'Smoglet B',monster:'smoglet',at:[14,20],dir:'left'}},
-  {all:[{walk:'Smoglet',to:[[13,18],[12,18],[11,18]],speed:.4},{walk:'Smoglet B',to:[[13,20],[12,20],[11,20],[10,20],[10,19]],speed:.36}]},
+  {all:[{walk:'Smoglet',to:[[13,18],[12,18],[11,18]],speed:.4},{walk:'Smoglet B',to:[[13,20],[12,20],[12,19]],speed:.36}]},
   {talk:'Smoglet',lines:['Cough. Nice street. We\'re going to sit on it for a while. Forever, actually.']},
   {talk:'TNB',lines:['Babe. Remember movie night? You threw the whole popcorn bowl.']},
   {talk:'Tom',lines:['I was startled. Briefly. With dignity.']},

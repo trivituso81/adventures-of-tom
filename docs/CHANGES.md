@@ -1,3 +1,11 @@
+## 2026-11-09 (talkstage1): Conversations: nobody overlaps, the group stands in open floor, everyone faces the others (tag talkstage1)
+- Tom: scan the game for groups in discussion and make sure they never overlap, stand in the center of open space and face each other naturally.
+- New scene step `{huddle}` (`engine/story.js`). `playScene` now inserts it before every line of dialogue in every named scene that has no `{gather}`; boss scenes keep their `{gather}` and get a huddle after it. People already placed by the scene (NPCs, monsters, posed people) stay put; the party walks to spots that are in different columns (the existing overlap rule), have open floor around them, are not on the map edge or the bottom two rows (under the dialogue box) and are not hidden behind painted scenery, then everyone turns toward the others. If the group already stands well, nothing moves. New scenes need no table entry.
+- `tools/scene_stage_audit.py`: plays all 158 triggered scenes (battles auto-won), snapshots every dialogue page and reports overlap, off-center, hidden and facing. `python3 tools/scene_stage_audit.py run OUT [ch2- | trigger id]`, then `report OUT`. Resumable; run one job at a time (two CPUs).
+- Result: 106 scenes with dialogue audited. Overlaps are gone except the deliberate pile-up gags and the free-roam chat that opens right after a scene ends (party stacked on Tom for that moment). Scenes that still flag are mostly "centroid clearance 1 of 2/3" on narrow paths where the fixed NPC fixes the spot.
+- Hand fixes: chapter 1 ending (Boppy/Tom spacing), Smoglet B stops one tile further right so it no longer covers Mr. Washington (`ch2Smog`).
+- No spoken line was changed, so no re-bake.
+
 ## 2026-11-09 (blvdwalk1): Jefferson Park Boulevard walk map from Area Builder export (tag blvdwalk1), new doors not yet wired
 - Tom's export of the blvd area (chapter 20 view, system_hash a3573016): 8 tiles changed in the `plateMask` (`data/maps-la.js`). Installed with `tools/apply_walkmap.py`; only the blvd mask rows changed.
 - Not applied: (12,23) is walkable in the export but an object footprint blocks it. Six new doors have no notes and are not portals yet: (5,8), (6,8), (11,8), (12,8), (24,8), (9,19). They need destinations before wiring. Doors (17,8), (3,20), (10,20), (26,20) and exits (13-16,24) were already portals.

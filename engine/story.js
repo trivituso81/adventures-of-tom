@@ -375,7 +375,7 @@ function stageFocus(f) {
     const found=f.map(n=>typeof n==='string'?(sceneActor(n)||currentMap.npcs.find(m=>m.monster===n)):n).filter(Boolean);
     const a=found.find(n=>!n.hidden)||found[0]; return a?stageFocus(a):null;
   }
-  if(f&&typeof f==='object'&&'x' in f) { const p=position(f); return {x:Math.round(p.x),y:Math.round(p.y),seen:!f.hidden}; }
+  if(f&&typeof f==='object'&&'x' in f) { const p=position(f); return {x:Math.round(p.x),y:Math.round(p.y),seen:!f.hidden,actor:f}; }
   if(typeof f!=='string') return null;
   const a=sceneActor(f)||currentMap.npcs.find(n=>n.monster===f)||null;
   return a?stageFocus(a):null;
@@ -441,6 +441,149 @@ function gatherStep(o) {
       return done; }};
 }
 SCENE_OPS.gather=gatherStep;
+// ---------- Conversation staging (Tom, 2026-11-09) ----------
+// "Wherever a group is talking: nobody overlaps, they stand in the middle of open space, and they face each other naturally."
+// {huddle:true,with:'Boppy'} (playScene adds one before every line of dialogue in every scene that has no {gather} or {huddle} of its
+// own, except boss scenes, which keep {gather}). The group is Tom, the party, every NPC the scene holds near Tom, and the NPC named in
+// `with` (it is held so it stops wandering). Party members more than 7 tiles from Tom are not in the conversation. NPCs never move, and neither
+// does anyone mid-pose or mid-hop. If the group already passes, nothing moves and a hand-placed scene keeps its choreography. Otherwise everyone
+// else (Tom too, though he is the least willing) walks to open floor around the group, one column each (never the same column within two
+// rows), and every person who is not posed turns toward the others. If only a facing is wrong, people just turn.
+const HUD_DIRV={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]};
+function huddleClear(map) {   // distance (in tiles, Chebyshev) from every tile to the nearest blocked tile or map edge; 0 on blocked tiles
+  const w=map.w,h=map.h,d=new Int32Array(w*h).fill(1e6),q=[];
+  for(let y=0;y<h;y++) for(let x=0;x<w;x++) { const i=y*w+x;
+    if(!walkable(map,x,y)) { d[i]=0; q.push(i); } else if(x===0||y===0||x===w-1||y===h-1) { d[i]=1; q.push(i); } }
+  for(let k=0;k<q.length;k++) { const i=q[k],x=i%w,y=(i/w)|0;
+    for(let dy=-1;dy<=1;dy++) for(let dx=-1;dx<=1;dx++) { const nx=x+dx,ny=y+dy; if(nx<0||ny<0||nx>=w||ny>=h) continue;
+      const j=ny*w+nx; if(d[j]>d[i]+1) { d[j]=d[i]+1; q.push(j); } } }
+  return {at:(x,y)=>x>=0&&y>=0&&x<w&&y<h?d[y*w+x]:0};
+}
+// Painted foreground pieces (engine/plate.js PLATE_BEHIND: gate boards, trees, counters) are drawn over anyone standing behind them. A tile is
+// "hidden" when a standing person's body there would sit under such a piece (same rule plateWalkBehind uses, tested on 15 points of the body).
+function huddleHidden(map,x,y,memo) {
+  const k=x+','+y; if(memo.has(k)) return memo.get(k);
+  let hid=false; const zones=typeof PLATE_BEHIND!=='undefined'&&PLATE_BEHIND[map.id];
+  if(zones&&zones.length) {
+    const plate=typeof PLATES!=='undefined'?PLATES[map.id]:null;
+    const fx=(x+.5)*64,fy=(y+1)*64,bh=plate&&plate.roomScale&&typeof roomPxPerFoot==='function'?roomPxPerFoot(plate.roomScale,fy)*6.6:130;
+    const pip=(px,py,pts)=>{ let c=false; for(let i=0,j=pts.length-1;i<pts.length;j=i++) { const a=pts[i],b=pts[j];
+      if((a[1]>py)!==(b[1]>py)&&px<(b[0]-a[0])*(py-a[1])/(b[1]-a[1])+a[0]) c=!c; } return c; };
+    let n=0;
+    for(const z of zones) { if(fy>z.base||z.front) continue;
+      const inside=(px,py)=>z.pts?pip(px,py,z.pts):z.cx!==undefined?(((px-z.cx)/z.rx)**2+((py-z.cy)/z.ry)**2<=1):(px>=z.x&&px<=z.x+z.w&&py>=z.y&&py<=z.y+z.h);
+      for(const dx of [-20,0,20]) for(let q=0;q<=4;q++) if(inside(fx+dx,fy-4-q*(bh-4)/4)) n++;
+      if(n>=3) break; }
+    hid=n>=3;
+  }
+  memo.set(k,hid); return hid;
+}
+// A tile the party should not stand on for a conversation: the map edge, the bottom two rows (the dialogue box covers them), off the floor, or hidden.
+const huddleBadTile=(map,x,y,memo)=>x<=0||y<=0||x>=map.w-1||y>=map.h-2||!walkable(map,x,y)||huddleHidden(map,x,y,memo);
+function huddleGroup(withName,focus) {
+  const tp=stagePos(player);
+  const roster=[player,...followers.filter(f=>!f.hidden&&party.includes(f.member)&&!f.seat&&Math.hypot(stagePos(f).x-tp.x,stagePos(f).y-tp.y)<=7)];
+  const others=[];
+  const add=n=>{ if(n&&!n.hidden&&!roster.includes(n)&&!others.includes(n)&&!followers.includes(n)) others.push(n); };
+  for(const n of currentMap.npcs) if(n.held||n.scripted) { const p=stagePos(n); if(Math.hypot(p.x-tp.x,p.y-tp.y)<=7) add(n); }
+  if(focus) { const fa=stageFocus(focus); if(fa&&fa.actor&&fa.seen&&currentMap.npcs.includes(fa.actor)) add(fa.actor); }   // a boss scene's boss, held or not
+  const named=typeof withName==='string'?sceneActor(withName):null;
+  if(named&&named!==player&&!followers.includes(named)&&currentMap.npcs.includes(named)) { const p=stagePos(named);
+    if(Math.hypot(p.x-tp.x,p.y-tp.y)<=9) { storyHold(named); add(named); } }
+  return {roster,others};
+}
+const huddleFixed=(g,a)=>g.others.includes(a)||a.scenePose||a.scr;
+const huddleTurns=(g,a)=>!a.scenePose&&!a.scr&&!a.still&&!a.monster&&!a.move;
+// What is wrong with the group right now: a Set of 'overlap', 'place' (against a wall, the map edge or off the floor) and 'face'.
+function huddleFails(g,clr,memo) {
+  const out=new Set(),all=[...g.roster,...g.others],map=currentMap; if(all.length<2) return out;
+  const P=all.map(stagePos);
+  for(let i=0;i<all.length;i++) for(let j=i+1;j<all.length;j++) if(!stageApart(P[i],P[j])) out.add('overlap');
+  const cx=P.reduce((s,p)=>s+p.x,0)/P.length,cy=P.reduce((s,p)=>s+p.y,0)/P.length;
+  const here=clr.at(Math.round(cx),Math.round(cy));
+  let best=0; for(let y=Math.round(cy)-5;y<=Math.round(cy)+5;y++) for(let x=Math.round(cx)-5;x<=Math.round(cx)+5;x++) best=Math.max(best,clr.at(x,y));
+  if(P.some((p,i)=>g.roster.includes(all[i])&&huddleBadTile(map,p.x,p.y,memo))) out.add('place');
+  else if(best>=2&&here<=.5*best&&here<=1) out.add('place');
+  all.forEach((a,i)=>{ if(!huddleTurns(g,a)) return; const v=HUD_DIRV[a.facing]; if(!v) return;
+    const o=P.filter((_,j)=>j!==i),mx=o.reduce((s,p)=>s+p.x,0)/o.length-P[i].x,my=o.reduce((s,p)=>s+p.y,0)/o.length-P[i].y;
+    if((mx||my)&&v[0]*mx+v[1]*my<=0) out.add('face'); });
+  return out;
+}
+function huddleTurn(g) {   // everyone who can turn faces the middle of the others (their dominant direction, so it is always toward them)
+  const all=[...g.roster,...g.others],P=all.map(stagePos);
+  all.forEach((a,i)=>{ if(!huddleTurns(g,a)) return; const o=P.filter((_,j)=>j!==i); if(!o.length) return;
+    const mx=o.reduce((s,p)=>s+p.x,0)/o.length-P[i].x,my=o.reduce((s,p)=>s+p.y,0)/o.length-P[i].y;
+    if(mx||my) a.facing=directionTo(mx,my); });
+}
+// Open-floor slots for the movers: try centres around the anchor, fill slots greedily on a ring (one column each), keep the cheapest layout.
+// Tom stays where he is when his tile is fine (the layout is built around him); only when no good layout exists with Tom in place does Tom walk too.
+// With an NPC in the group the party takes the NPC's near side (Tom's side), so nobody ends up behind the person they are talking to.
+function huddleLayout(g,clr,tomMoves,memo) {
+  const map=currentMap,all=[...g.roster,...g.others];
+  const tpos0=stagePos(player);
+  const tomOk=!tomMoves&&!huddleFixed(g,player)&&!huddleBadTile(map,tpos0.x,tpos0.y,memo)&&all.every(a=>a===player||!huddleFixed(g,a)||stageApart(tpos0,stagePos(a)));
+  const fixed=all.filter(a=>huddleFixed(g,a)||(tomOk&&a===player)),movers=all.filter(a=>!fixed.includes(a));
+  if(!movers.length) return {movers,slots:[],cost:0};
+  const fp=fixed.map(stagePos),mp=movers.map(stagePos),N=movers.length;
+  const npcs=g.others.map(stagePos),tp=stagePos(player);
+  const anchor=npcs.length?{x:npcs.reduce((s,p)=>s+p.x,0)/npcs.length,y:npcs.reduce((s,p)=>s+p.y,0)/npcs.length}
+    :(fp.length?{x:fp.reduce((s,p)=>s+p.x,0)/fp.length,y:fp.reduce((s,p)=>s+p.y,0)/fp.length}:{x:mp[0].x,y:mp[0].y});
+  const busy=new Set(); for(const n of map.npcs) if(!n.hidden&&!followers.includes(n)) { const p=stagePos(n); busy.add(key(p.x,p.y)); }
+  const R=Math.min(2.6,1.3+.25*(N+fp.length)),span=Math.ceil(R+2.5),Rc=npcs.length?2:5;
+  const side={x:tp.x-anchor.x,y:tp.y-anchor.y},sl=Math.hypot(side.x,side.y);
+  let bestL=null;
+  const ax=Math.round(anchor.x),ay=Math.round(anchor.y);
+  for(let cy=ay-Rc;cy<=ay+Rc;cy++) for(let cx=ax-Rc;cx<=ax+Rc;cx++) {
+    if(!walkable(map,cx,cy)) continue;
+    const taken=fp.slice(),slots=[]; let cost=.35*Math.hypot(cx-anchor.x,cy-anchor.y)+(clr.at(cx,cy)<2?.8:0),okAll=true;
+    if(tomOk) cost+=Math.abs(Math.hypot(tp.x-cx,tp.y-cy)-R);   // Tom's own tile should sit on the ring
+    for(let k=0;k<N&&okAll;k++) { let pick=null,pc=1e9;
+      for(let y=cy-span;y<=cy+span;y++) for(let x=cx-span;x<=cx+span;x++) {
+        if(huddleBadTile(map,x,y,memo)||map.portals.has(key(x,y))||busy.has(key(x,y))) continue;
+        if(!taken.every(t=>stageApart(t,{x,y}))) continue;
+        const d=Math.hypot(x-cx,y-cy),minD=Math.min(...taken.map(t=>Math.hypot(t.x-x,t.y-y)),9);
+        let c=Math.abs(d-R)+1.2*Math.max(0,1.7-minD)+(clr.at(x,y)<1?2.5:clr.at(x,y)<2?.4:0);
+        if(npcs.length&&sl>0&&((x-anchor.x)*side.x+(y-anchor.y)*side.y)<0) c+=3;   // behind the NPC, away from Tom
+        if(c<pc) { pc=c; pick={x,y}; } }
+      if(!pick) okAll=false; else { slots.push(pick); taken.push(pick); cost+=pc; } }
+    if(!okAll) continue;
+    { const fx=taken.reduce((a,t)=>a+t.x,0)/taken.length,fy=taken.reduce((a,t)=>a+t.y,0)/taken.length,hx=Math.round(fx),hy=Math.round(fy),here=clr.at(hx,hy);
+      let bst=0; for(let y=hy-5;y<=hy+5;y++) for(let x=hx-5;x<=hx+5;x++) bst=Math.max(bst,clr.at(x,y));
+      if(bst>=2&&here<=.5*bst&&here<=1) cost+=6; }   // the group's middle would be against a wall: keep looking
+    // cheapest assignment of slots to movers by walking distance (Tom is the least willing to move)
+    let bestA=null,ba=1e9;
+    const perm=(used,cur)=>{ if(cur.length===N) { let t=0; cur.forEach((si,mi)=>{ t+=(movers[mi]===player?.3:.1)*Math.hypot(slots[si].x-mp[mi].x,slots[si].y-mp[mi].y); }); if(t<ba) { ba=t; bestA=cur.slice(); } return; }
+      for(let i=0;i<N;i++) if(!used[i]) { used[i]=true; cur.push(i); perm(used,cur); cur.pop(); used[i]=false; } };
+    perm([],[]);
+    cost+=ba;
+    if(!bestL||cost<bestL.cost) bestL={cost,slots:bestA.map(si=>slots[si])};
+  }
+  return {movers,slots:bestL?bestL.slots:null,cost:bestL?bestL.cost:1e9};
+}
+function huddleStep(o) {
+  return {start(){
+      this.moves=[]; this.g=huddleGroup(o.with,o.focus);
+      const g=this.g,all=[...g.roster,...g.others]; if(all.length<2) return;
+      const clr=huddleClear(currentMap),memo=new Map(),fails=huddleFails(g,clr,memo);
+      if(!fails.size) return;
+      if(fails.has('overlap')||fails.has('place')) {
+        let L=huddleLayout(g,clr,false,memo);
+        if(!L.slots||L.cost>=6) { const L2=huddleLayout(g,clr,true,memo); if(L2.slots&&L2.cost<(L.slots?L.cost:1e9)) L=L2; }   // Tom stays unless that leaves the group cramped
+        if(L.slots) L.movers.forEach((a,k)=>{ const t=L.slots[k],p=stagePos(a); a.x=p.x; a.y=p.y; a.move=null; a.lag=0; if(a.stageFaced!==undefined) a.stageFaced=false;
+          let path=(t.x===p.x&&t.y===p.y)?[]:findPath(currentMap,a,t);
+          if(!path.length&&(t.x!==p.x||t.y!==p.y)) path=[{x:t.x,y:t.y}];   // no walkable route: slide straight there
+          this.moves.push({a,path,i:0}); });
+      }
+    },
+    update(dt){ let done=true;
+      for(const m of this.moves) { const a=m.a;
+        if(a.move&&!advanceMove(a,dt)) { done=false; continue; }
+        if(m.i<m.path.length) { const t=m.path[m.i++]; a.facing=directionTo(t.x-a.x,t.y-a.y);
+          a.move={fx:a.x,fy:a.y,tx:t.x,ty:t.y,elapsed:0,duration:.15}; done=false; } }
+      if(done) huddleTurn(this.g);
+      return done; }};
+}
+SCENE_OPS.huddle=huddleStep;
 // Every boss lead-in, fight (and retry) and after scene, with whom the party faces. playScene inserts {gather} just before the
 // scene's first line of dialogue (after any walk-in, spawn or placement steps), unless the scene has its own {gather}.
 const BOSS_STAGE={
@@ -461,16 +604,16 @@ const BOSS_STAGE={
 // A boss scene's steps with staging added: one {gather} just before the first line of dialogue (after any walk-in, spawn or
 // placement steps) unless the scene has its own, and a {gather,check} before every later line (also inside if/seq branches,
 // not inside {all}), so the party re-spreads if a walk or a jump crowds it and turns back toward the boss.
-function stageScript(list,focus) {
+function stageScript(list,focus,mk) {   // mk(first,talkStep) builds the step to insert (huddle); default is {gather:focus}
   const has=x=>{ if(!x||typeof x!=='object') return false; if(Array.isArray(x)) return x.some(has); if(typeof x.start==='function') return false;
     if('talk' in x) return true; return ['then','else','seq'].some(k=>x[k]&&has(x[k])); };
-  const own=JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v).includes('"gather"');
+  const own=JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v).includes('"gather"')||JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v).includes('"huddle"');
   let first=!own;
   const walk=steps=>{ const out=[];
     for(const st of steps) {
       if(st&&typeof st==='object'&&typeof st.start!=='function'&&!Array.isArray(st)) {
-        if('talk' in st) { out.push(first?{gather:focus}:{gather:focus,check:true}); first=false; out.push(st); continue; }
-        if(has(st)) { if(first) { out.push({gather:focus}); first=false; }
+        if('talk' in st) { out.push(...[].concat(mk?mk(first,st):(first?{gather:focus}:{gather:focus,check:true}))); first=false; out.push(st); continue; }
+        if(has(st)) { if(first) { out.push(...[].concat(mk?mk(true,null):{gather:focus})); first=false; }
           const c=Object.assign({},st); for(const k of ['then','else','seq']) if(Array.isArray(c[k])) c[k]=walk(c[k]); out.push(c); continue; }
       }
       out.push(st);
@@ -492,7 +635,8 @@ function playScene(script,opts={}) {
   if(typeof script==='string') script=SCENES[script];
   let list=typeof script==='function'?script(opts.ctx||{}):script;
   for(const f of [...followers,player]) { f.stagePlaced=false; f.stageFaced=false; }
-  if(sid&&BOSS_STAGE[sid]&&Array.isArray(list)) list=stageScript(list,BOSS_STAGE[sid]);
+  if(sid&&BOSS_STAGE[sid]&&Array.isArray(list)) { const fc=BOSS_STAGE[sid]; list=stageScript(list,fc,(first,st)=>[first?{gather:fc}:{gather:fc,check:true},{huddle:true,focus:fc,with:st&&typeof st.talk==='string'?st.talk:null}]); }
+  else if(sid&&Array.isArray(list)&&!JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v).includes('"gather"')) list=stageScript(list,null,(first,st)=>({huddle:true,with:st&&typeof st.talk==='string'?st.talk:null}));
   intro.active=true; intro.phase='scene'; intro.cur=null; intro.fadeLock=false;
   intro.fade=opts.fade||0;
   intro.steps=compileScene(list);
