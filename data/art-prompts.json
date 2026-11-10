@@ -9277,6 +9277,13 @@
      "date": "2026-11-10",
      "from": "v3",
      "at": 1794294283214
+    },
+    {
+     "n": 2,
+     "file": "art/raw/npcs/npc-photo-nickel-v3.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794336716917
     }
    ],
    "rejects": [],
