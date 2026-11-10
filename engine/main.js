@@ -42,7 +42,7 @@ function pollGamepad() {
 let bootDone=false; const bootT0=performance.now(), bootArt=[];
 (function(){
   const land=document.documentElement.classList.contains('landscape')||innerWidth>innerHeight;
-  for(const u of [land?'art/welcome-land.webp?v=title3':'art/welcome.webp','art/title-logo.webp?v=title3']) {
+  for(const u of [land?'art/welcome-land.webp?v=title5':'art/welcome.webp','art/title-logo.webp?v=title3']) {
     const st={ok:false},im=new Image(); im.src=u;
     const done=()=>{ st.ok=true; };
     (im.decode?im.decode():Promise.reject()).then(done,()=>{ im.onload=im.onerror=done; if(im.complete) done(); });
@@ -102,7 +102,7 @@ startSplash();
 (function(){
   const sp=document.getElementById('splash'); if(!sp) return;
   const d=document.createElement('div');
-  d.textContent='build title3';
+  d.textContent='build title5';
   d.style.cssText='position:absolute;left:8px;bottom:4px;font:10px monospace;color:#fff;opacity:.45;pointer-events:none;z-index:50';
   sp.appendChild(d);
 })();

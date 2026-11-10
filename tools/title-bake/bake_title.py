@@ -24,21 +24,21 @@ def approved(eid):
     return best['file']
 
 def welcome():
-    Image.open(approved('title-welcome-portrait')).convert('RGB').save('art/welcome.webp', quality=88, method=6)
+    from PIL import ImageFilter
+    def crisp(im, big):   # title3/title5: the generator makes these pictures at 1280 px on the long side; upscale 2x (Lanczos) then sharpen in two passes. Classic sharpening, not new detail.
+        if big < 1800: im = im.resize((im.width * 2, im.height * 2), Image.LANCZOS)
+        return im.filter(ImageFilter.UnsharpMask(radius=1.2, percent=140, threshold=2)).filter(ImageFilter.UnsharpMask(radius=3, percent=50, threshold=2))
+    port = Image.open(approved('title-welcome-portrait')).convert('RGB')
+    crisp(port, port.height).save('art/welcome.webp', quality=88, method=6)
     # title2: the approved landscape picture is a painted band with flat cream bars above and below and a soft fade at each band edge.
     # Cut to the painted rows (rows whose pixel spread is above 14), minus 18 px each side for the fade, so the game's cover fit shows no bars.
     land = Image.open(approved('title-welcome-landscape')).convert('RGB')
     spread = np.asarray(land).astype(np.float32).std(axis=1).mean(-1)
     rows = np.where(spread > 14)[0]
-    barred = rows[0] > 20 or rows[-1] < land.height - 21   # flat bars present (the 1k picture); a full-bleed picture is not cropped
+    painted = np.where(spread > 4)[0]   # flat cream bars have a spread under 2; a soft painted fade stays above 9
+    barred = painted[0] > 20 or painted[-1] < land.height - 21   # flat bars present (the first picture); a full-bleed picture is not cropped
     y0, y1 = (int(rows[0]) + 18, int(rows[-1]) - 18 + 1) if barred else (0, land.height)
-    # title3: the generator makes this picture only 1280 px wide, so a 1080p or wider screen stretched it about 2.3x and it looked soft.
-    # Upscale 2x (Lanczos), then sharpen in two passes (fine detail, then broader edges). No model download is possible here, so this is classic sharpening, not new detail.
-    from PIL import ImageFilter
-    land = land.crop((0, y0, land.width, y1))
-    if land.width < 1800:   # a 2K picture (2048 wide or more) is already big enough: no upscale
-        land = land.resize((land.width * 2, land.height * 2), Image.LANCZOS)
-    land = land.filter(ImageFilter.UnsharpMask(radius=1.2, percent=140, threshold=2)).filter(ImageFilter.UnsharpMask(radius=3, percent=50, threshold=2))
+    land = crisp(land.crop((0, y0, land.width, y1)), land.width)
     land.save('art/welcome-land.webp', quality=88, method=6)
     print('landscape rows', y0, y1)
 

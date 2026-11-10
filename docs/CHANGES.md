@@ -1,3 +1,8 @@
+## 2026-11-09 (title5): New approved welcome paintings installed, sharpened (tag title5)
+- Tom approved new landscape (v3) and portrait (v3) welcome paintings. Both are full-bleed (no cream bars), so the landscape is no longer cropped.
+- Fact: the landscape came back 1280 x 720 although its entry has `res: "2k"` (title4), so the 2K request did not take effect (cause not known: a cached Library page in Tom's browser, or the generator ignoring `resolution` on the edits endpoint). `bake_title.py` upscales each picture 2x (Lanczos) and sharpens in two passes: `art/welcome-land.webp` 2560 x 1440, `art/welcome.webp` 1440 x 2560. Crop is now only for flat-bar pictures (spread under 4 at an edge), not for a soft painted fade.
+- Tags `?v=title5` (index.html, engine/main.js). Looked at 1920 x 1080 and 390 x 844; smoke FAILS []; tag_check ok.
+
 ## 2026-11-09 (walksheets1): Art Library: walking sheet entries for 10 people (json and Art Library module only, no tag)
 - Tom (16:54): "i dont think i see the 3 walking sheet for Tom or others". He was right. Fact: only Jojo had a walking sheet entry. The other characters' painted walk sheets were sent to Claude as files and never had Library entries, so there was no Generate or Upload button for them (battle stances 1 and 2 did exist).
 - Added `<id>-walking-sheet` entries (3 x 3, 1:1) for Tom, TNB, Grace, Rose, Amy, Justin, Deedee, Boppy, Olivia, Michael, each placed in that person's group just above their battle stance entries. References: the hero painting plus the current walk sheet. Each has GENERATE and UPLOAD MY OWN. Michael's prompt keeps him carrying Lachlan and Isla.
