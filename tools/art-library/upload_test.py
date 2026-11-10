@@ -24,7 +24,7 @@ async def main():
             pg = await c.new_page(); errs = []; pg.on('pageerror', lambda e: errs.append(str(e)))
             await pg.goto(URL); await pg.wait_for_selector('#tabs .tab')
             info = await pg.evaluate("""(()=>{computeStates();const E=DATA.entries;
-              const blocked=E.find(e=>ST[e.id]==='blocked'); const stance=E.find(e=>e.id==='tom-battle-stance-1');
+              const blocked=E.find(e=>ST[e.id]==='blocked'); const stance=E.find(e=>e.id==='tom-walking-sheet');
               const total=E.length, withBtn=E.filter(e=>renderCard(e).includes('data-upl=')).length;
               return {blocked:blocked&&blocked.id, stance:stance&&stance.id, total, withBtn}})()""")
             ok(info['total'] == info['withBtn'], 'every one of %d entries has the upload button (%d)' % (info['total'], info['withBtn']))
