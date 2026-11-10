@@ -1,3 +1,10 @@
+## 2026-11-09 (npcref2): NPC hero references: 5 full-size heroes instead of the lineup, hand-drawn finish named (json, Art Library module; no tag)
+- Tom (17:43): the new NPC pictures are "not hand drawn enough like the reference images". Fact seen: they came back clean and digital (flat fills, tidy lines, flat background); the heroes have sketchy pencil and ink lines, hatching, mottled colored-pencil shading and paper grain.
+- Cause (my reading): the npcref1 lineup was 4867 px wide, so the generator saw each hero at about 300 px, too small to carry the texture, and the cutout put them on a flat cream with no grain.
+- Change: adults attach Tom, TNB, Amy, Deedee, Boppy; children attach Grace, Rose, Tom, Amy, Deedee (5 is the generator limit), each full size. The reference line now names the finish (sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, not clean digital art). Tom's template unchanged.
+- Purged: `art/raw/characters/main-heroes-lineup-v1.png` and `tools/art-library/make_main_lineup.py`.
+- Reopened to draft the 8 NPCs approved from the lineup prompt (Pip, Moss, Gus, Bean, Reel, Pruitt, Delgado, Kowalski); their pictures stay in each entry's history.
+
 ## 2026-11-09 (slots10): ten save slots instead of three (tag slots10)
 - Tom (17:27): "allow up to 10 save slots". `SAVE_SLOTS` in engine/followers.js is now autosave plus slots 1 to 10. BACK UP, RESTORE, the cloud gist, the title Load page and the in-game Load tab all read that list, so they carry the new slots with no other change. Old saves in slots 1 to 3 are untouched.
 - The HUD save popup list now scrolls (it would not fit 10 rows); in landscape the extra explanation line is hidden to give the list room. Messages that said "Slots 1 to 3 are kept" (new game, chapter jump, Part 2) now say "Your numbered slots are kept".

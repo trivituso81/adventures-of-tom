@@ -103,16 +103,20 @@ BATCHES.forEach((b, bi) => {
 
 const entries = [];
 // NPC hero prompts (Tom 2026-11-09 17:16): Tom's template below, word for word (the one that made the main heroes he is happy with),
-// one short line naming the attached reference, then one "character details" line. Every entry attaches the 7 human main heroes
-// (one lineup picture) as the style reference. Hair styles were read off the earlier approved NPC pictures so each person keeps their look. Fewer words = truer pictures.
-// The generator takes at most 5 reference pictures, so the 7 heroes are one lineup picture (tools/art-library/make_main_lineup.py), at real relative heights.
-const MAIN_REFS = ['art/raw/characters/main-heroes-lineup-v1.png'];
+// one short line naming the attached reference, then one "character details" line. Every entry attaches the human main heroes
+// (5 of them, full size) as the style references. Hair styles were read off the earlier approved NPC pictures so each person keeps their look. Fewer words = truer pictures.
+// The generator takes at most 5 reference pictures, each sent full size so the pencil lines and paper grain survive (a 7-hero lineup was
+// shrunk to about 300 px a figure and came back clean and digital, Tom 11-09 17:43). Adults get the 5 adult heroes; children get Grace,
+// Rose and 3 adults.
+const HERO = id => `art/raw/characters/${id}-hero-ref-v1.png`;
+const ADULT_REFS = ['tom', 'tnb', 'amy', 'deedee', 'boppy'].map(HERO);
+const CHILD_REFS = ['grace', 'rose', 'tom', 'amy', 'deedee'].map(HERO);
 const TEMPLATE = `Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.
 Finish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.
 Proportions: about 4 heads tall, simplified expressive face.
 Pose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.
 Plain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.`;
-const REFS_LINE = `The attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.`;
+const REFS_LINE = `The attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.`;
 const HS = {
   pip: 'short messy curls', moss: 'short and straight', dot: 'chin-length bob', gus: 'short fluffy wisps', bean: 'shoulder-length waves', reel: 'short and wispy',
   pruitt: 'short, neatly side-swept', delgado: 'short, thick and messy', kowalski: 'shoulder-length waves', ike: 'short and thin', halverson: 'short and tousled with a side part',
@@ -151,6 +155,6 @@ function details(c, k) {
 for (const k of Object.keys(N)) {
   const c = N[k], la = GROUPS.find(g => g.keys.includes(k)).la;
   if (!HS[k] || !PERS[k]) throw new Error('missing hair style or personality: ' + k);
-  entries.push({ id: 'npc-photo-' + k, tab: 'NPCs', group: la ? 'Los Angeles people' : 'Long Island people', title: `${c.name}: hero picture, Final Fantasy IX style, ${c.ft} (reference: the 7 main heroes lineup)`, ar: '2:3', refs: MAIN_REFS.slice(), prompt: TEMPLATE + '\n\n' + REFS_LINE + '\n\n' + details(c, k) });
+  entries.push({ id: 'npc-photo-' + k, tab: 'NPCs', group: la ? 'Los Angeles people' : 'Long Island people', title: `${c.name}: hero picture, Final Fantasy IX style, ${c.ft} (references: 5 main heroes)`, ar: '2:3', refs: (c.kind === 'child' ? CHILD_REFS : ADULT_REFS).slice(), prompt: TEMPLATE + '\n\n' + REFS_LINE + '\n\n' + details(c, k) });
 }
 module.exports = { entries, N, BATCHES, GROUPS, PAL, SKIN, HAIR, CLOTH, cw };

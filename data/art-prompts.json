@@ -7881,7 +7881,7 @@
    "group": "Test card"
   },
   {
-   "status": "approved",
+   "status": "draft",
    "versions": [
     {
      "n": 0,
@@ -7902,15 +7902,19 @@
    "id": "npc-photo-pip",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Pip: hero picture, Final Fantasy IX style, 4'1\" (reference: the 7 main heroes lineup)",
+   "title": "Pip: hero picture, Final Fantasy IX style, 4'1\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Pip, 9, boy, 4'1\" tall, light peach skin, chestnut brown hair, hair style short messy curls, clothing coral pink top, steel grey-blue trousers, a pale yellow hat, personality proud and playful, one of Grace's friends from the Square, about her age."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Pip, 9, boy, 4'1\" tall, light peach skin, chestnut brown hair, hair style short messy curls, clothing coral pink top, steel grey-blue trousers, a pale yellow hat, personality proud and playful, one of Grace's friends from the Square, about her age."
   },
   {
-   "status": "approved",
+   "status": "draft",
    "versions": [
     {
      "n": 0,
@@ -7931,12 +7935,16 @@
    "id": "npc-photo-moss",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Moss: hero picture, Final Fantasy IX style, 4'3\" (reference: the 7 main heroes lineup)",
+   "title": "Moss: hero picture, Final Fantasy IX style, 4'3\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Moss, 9, boy, 4'3\" tall, olive tan skin, very dark brown hair, hair style short and straight, clothing sage green top, brown trousers, a khaki hat, personality curious and quiet, one of Grace's friends from the Square, about her age."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Moss, 9, boy, 4'3\" tall, olive tan skin, very dark brown hair, hair style short and straight, clothing sage green top, brown trousers, a khaki hat, personality curious and quiet, one of Grace's friends from the Square, about her age."
   },
   {
    "status": "draft",
@@ -7953,15 +7961,19 @@
    "id": "npc-photo-dot",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Dot: hero picture, Final Fantasy IX style, 4'0\" (reference: the 7 main heroes lineup)",
+   "title": "Dot: hero picture, Final Fantasy IX style, 4'0\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Dot, 9, girl, 4'0\" tall, very fair skin, slate violet hair, hair style chin-length bob, clothing lavender top, steel grey-blue trousers, personality thoughtful and precise, one of Grace's friends from the Square, about her age."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Dot, 9, girl, 4'0\" tall, very fair skin, slate violet hair, hair style chin-length bob, clothing lavender top, steel grey-blue trousers, personality thoughtful and precise, one of Grace's friends from the Square, about her age."
   },
   {
-   "status": "approved",
+   "status": "draft",
    "versions": [
     {
      "n": 0,
@@ -7982,15 +7994,19 @@
    "id": "npc-photo-gus",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Gus: hero picture, Final Fantasy IX style, 5'6\" (reference: the 7 main heroes lineup)",
+   "title": "Gus: hero picture, Final Fantasy IX style, 5'6\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Gus, 72, man, 5'6\" tall, golden tan skin, light blond hair, hair style short fluffy wisps, clothing coral pink top, steel grey-blue trousers, a cornflower blue hat, personality easygoing and unhurried, a retired Rivituso Row neighbour who loves sitting."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Gus, 72, man, 5'6\" tall, golden tan skin, light blond hair, hair style short fluffy wisps, clothing coral pink top, steel grey-blue trousers, a cornflower blue hat, personality easygoing and unhurried, a retired Rivituso Row neighbour who loves sitting."
   },
   {
-   "status": "approved",
+   "status": "draft",
    "versions": [
     {
      "n": 0,
@@ -8025,15 +8041,19 @@
    "id": "npc-photo-bean",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Bean: hero picture, Final Fantasy IX style, 5'5\" (reference: the 7 main heroes lineup)",
+   "title": "Bean: hero picture, Final Fantasy IX style, 5'5\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Bean, 34, woman, 5'5\" tall, warm brown skin, very dark brown hair, hair style shoulder-length waves, clothing mint green top, dusty blue trousers, personality cheerful and never quite lost, a cheerful Rivituso Row wanderer who is never quite lost."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Bean, 34, woman, 5'5\" tall, warm brown skin, very dark brown hair, hair style shoulder-length waves, clothing mint green top, dusty blue trousers, personality cheerful and never quite lost, a cheerful Rivituso Row wanderer who is never quite lost."
   },
   {
-   "status": "approved",
+   "status": "draft",
    "versions": [
     {
      "n": 0,
@@ -8054,15 +8074,19 @@
    "id": "npc-photo-reel",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Reel: hero picture, Final Fantasy IX style, 5'9\" (reference: the 7 main heroes lineup)",
+   "title": "Reel: hero picture, Final Fantasy IX style, 5'9\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Reel, 64, man, 5'9\" tall, warm tan skin, silver grey hair, hair style short and wispy, clothing olive brown top, slate grey trousers, a mustard yellow hat, personality weathered and friendly, the bait shack owner at Cattail Pier."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Reel, 64, man, 5'9\" tall, warm tan skin, silver grey hair, hair style short and wispy, clothing olive brown top, slate grey trousers, a mustard yellow hat, personality weathered and friendly, the bait shack owner at Cattail Pier."
   },
   {
-   "status": "approved",
+   "status": "draft",
    "versions": [
     {
      "n": 0,
@@ -8090,15 +8114,19 @@
    "id": "npc-photo-pruitt",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Principal Pruitt: hero picture, Final Fantasy IX style, 5'9\" (reference: the 7 main heroes lineup)",
+   "title": "Principal Pruitt: hero picture, Final Fantasy IX style, 5'9\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Principal Pruitt, 62, man, 5'9\" tall, light peach skin, light blond hair, hair style short, neatly side-swept, clothing slate blue top, slate grey trousers, personality calm and seen-it-all, the principal of Long Island Elementary, 31 years on the job."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Principal Pruitt, 62, man, 5'9\" tall, light peach skin, light blond hair, hair style short, neatly side-swept, clothing slate blue top, slate grey trousers, personality calm and seen-it-all, the principal of Long Island Elementary, 31 years on the job."
   },
   {
-   "status": "approved",
+   "status": "draft",
    "versions": [
     {
      "n": 0,
@@ -8119,15 +8147,19 @@
    "id": "npc-photo-delgado",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Mr. Delgado: hero picture, Final Fantasy IX style, 5'8\" (reference: the 7 main heroes lineup)",
+   "title": "Mr. Delgado: hero picture, Final Fantasy IX style, 5'8\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Mr. Delgado, 40, man, 5'8\" tall, olive tan skin, black hair, hair style short, thick and messy, clothing denim blue top, slate grey trousers, personality friendly and warm, a parent at the school, Marco's dad."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Mr. Delgado, 40, man, 5'8\" tall, olive tan skin, black hair, hair style short, thick and messy, clothing denim blue top, slate grey trousers, personality friendly and warm, a parent at the school, Marco's dad."
   },
   {
-   "status": "approved",
+   "status": "draft",
    "versions": [
     {
      "n": 0,
@@ -8148,12 +8180,16 @@
    "id": "npc-photo-kowalski",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Mrs. Kowalski: hero picture, Final Fantasy IX style, 5'4\" (reference: the 7 main heroes lineup)",
+   "title": "Mrs. Kowalski: hero picture, Final Fantasy IX style, 5'4\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Mrs. Kowalski, 48, woman, 5'4\" tall, very fair skin, strawberry blond hair, hair style shoulder-length waves, clothing hot pink top, dark grey trousers, personality bright and organized, the PTA president."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Mrs. Kowalski, 48, woman, 5'4\" tall, very fair skin, strawberry blond hair, hair style shoulder-length waves, clothing hot pink top, dark grey trousers, personality bright and organized, the PTA president."
   },
   {
    "status": "draft",
@@ -8170,12 +8206,16 @@
    "id": "npc-photo-ike",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Grandpa Ike: hero picture, Final Fantasy IX style, 5'5\" (reference: the 7 main heroes lineup)",
+   "title": "Grandpa Ike: hero picture, Final Fantasy IX style, 5'5\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Grandpa Ike, 78, man, 5'5\" tall, olive tan skin, white hair, hair style short and thin, clothing brown top, slate grey trousers, a forest green hat, personality proud and nostalgic, a grandfather visiting the school for his grandson."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Grandpa Ike, 78, man, 5'5\" tall, olive tan skin, white hair, hair style short and thin, clothing brown top, slate grey trousers, a forest green hat, personality proud and nostalgic, a grandfather visiting the school for his grandson."
   },
   {
    "status": "draft",
@@ -8192,12 +8232,16 @@
    "id": "npc-photo-halverson",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Mr. Halverson: hero picture, Final Fantasy IX style, 5'10\" (reference: the 7 main heroes lineup)",
+   "title": "Mr. Halverson: hero picture, Final Fantasy IX style, 5'10\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Mr. Halverson, 41, man, 5'10\" tall, warm tan skin, dark brown hair, hair style short and tousled with a side part, clothing cream top, steel grey-blue trousers, a teacher lanyard, personality tired but wry, a fourth grade teacher."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Mr. Halverson, 41, man, 5'10\" tall, warm tan skin, dark brown hair, hair style short and tousled with a side part, clothing cream top, steel grey-blue trousers, a teacher lanyard, personality tired but wry, a fourth grade teacher."
   },
   {
    "status": "draft",
@@ -8221,12 +8265,16 @@
    "id": "npc-photo-bun",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Bun: hero picture, Final Fantasy IX style, 5'4\" (reference: the 7 main heroes lineup)",
+   "title": "Bun: hero picture, Final Fantasy IX style, 5'4\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Bun, 36, woman, 5'4\" tall, fair skin, chestnut brown hair, hair style short curly bob, clothing coral pink top, brown trousers, a baker apron and a puffy baker hat, personality warm and welcoming, the baker at Crumb Bakery."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Bun, 36, woman, 5'4\" tall, fair skin, chestnut brown hair, hair style short curly bob, clothing coral pink top, brown trousers, a baker apron and a puffy baker hat, personality warm and welcoming, the baker at Crumb Bakery."
   },
   {
    "status": "draft",
@@ -8243,12 +8291,16 @@
    "id": "npc-photo-page",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Page: hero picture, Final Fantasy IX style, 5'6\" (reference: the 7 main heroes lineup)",
+   "title": "Page: hero picture, Final Fantasy IX style, 5'6\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Page, 38, woman, 5'6\" tall, olive tan skin, very dark brown hair, hair style long and wavy, clothing lavender top, plum trousers, round glasses, personality gentle and bookish, the librarian at The Hush Library."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Page, 38, woman, 5'6\" tall, olive tan skin, very dark brown hair, hair style long and wavy, clothing lavender top, plum trousers, round glasses, personality gentle and bookish, the librarian at The Hush Library."
   },
   {
    "status": "draft",
@@ -8265,12 +8317,16 @@
    "id": "npc-photo-fern",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Fern: hero picture, Final Fantasy IX style, 5'5\" (reference: the 7 main heroes lineup)",
+   "title": "Fern: hero picture, Final Fantasy IX style, 5'5\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Fern, 45, woman, 5'5\" tall, fair skin, light brown hair, hair style chin-length wavy bob, clothing sage green top, olive brown trousers, a beige hat, personality patient and earthy, the gardener at Sprout House."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Fern, 45, woman, 5'5\" tall, fair skin, light brown hair, hair style chin-length wavy bob, clothing sage green top, olive brown trousers, a beige hat, personality patient and earthy, the gardener at Sprout House."
   },
   {
    "status": "draft",
@@ -8301,12 +8357,16 @@
    "id": "npc-photo-kit",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Kit: hero picture, Final Fantasy IX style, 5'7\" (reference: the 7 main heroes lineup)",
+   "title": "Kit: hero picture, Final Fantasy IX style, 5'7\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Kit, 29, woman, 5'7\" tall, medium brown skin, very dark brown hair, hair style shoulder-length big curls, clothing mint green top, steel grey-blue trousers, a cornflower blue hat, personality unhurried and cheerful, the mail carrier at Snail Mail."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Kit, 29, woman, 5'7\" tall, medium brown skin, very dark brown hair, hair style shoulder-length big curls, clothing mint green top, steel grey-blue trousers, a cornflower blue hat, personality unhurried and cheerful, the mail carrier at Snail Mail."
   },
   {
    "status": "draft",
@@ -8323,12 +8383,16 @@
    "id": "npc-photo-oolong",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Oolong: hero picture, Final Fantasy IX style, 5'2\" (reference: the 7 main heroes lineup)",
+   "title": "Oolong: hero picture, Final Fantasy IX style, 5'2\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Oolong, 68, woman, 5'2\" tall, fair skin, light blond hair, hair style short curly bob, clothing khaki top, dusty blue trousers, personality gossipy and twinkly, the owner of Kettle Cottage tea shop."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Oolong, 68, woman, 5'2\" tall, fair skin, light blond hair, hair style short curly bob, clothing khaki top, dusty blue trousers, personality gossipy and twinkly, the owner of Kettle Cottage tea shop."
   },
   {
    "status": "draft",
@@ -8359,12 +8423,16 @@
    "id": "npc-photo-luna",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Luna: hero picture, Final Fantasy IX style, 5'5\" (reference: the 7 main heroes lineup)",
+   "title": "Luna: hero picture, Final Fantasy IX style, 5'5\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Luna, 41, woman, 5'5\" tall, golden tan skin, plum hair, hair style long and wavy, clothing cornflower blue top, plum trousers, a lavender hat, personality full of wonder, the astronomer at the Moon Club observatory."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Luna, 41, woman, 5'5\" tall, golden tan skin, plum hair, hair style long and wavy, clothing cornflower blue top, plum trousers, a lavender hat, personality full of wonder, the astronomer at the Moon Club observatory."
   },
   {
    "status": "draft",
@@ -8381,12 +8449,16 @@
    "id": "npc-photo-penny",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Penny: hero picture, Final Fantasy IX style, 5'4\" (reference: the 7 main heroes lineup)",
+   "title": "Penny: hero picture, Final Fantasy IX style, 5'4\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Penny, 52, woman, 5'4\" tall, light peach skin, auburn red hair, hair style short curly bob, clothing mustard yellow top, plum trousers, personality shrewd and friendly, the shopkeeper of Penny's Pockets."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Penny, 52, woman, 5'4\" tall, light peach skin, auburn red hair, hair style short curly bob, clothing mustard yellow top, plum trousers, personality shrewd and friendly, the shopkeeper of Penny's Pockets."
   },
   {
    "status": "draft",
@@ -8403,12 +8475,16 @@
    "id": "npc-photo-nickel",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Nickel: hero picture, Final Fantasy IX style, 5'6\" (reference: the 7 main heroes lineup)",
+   "title": "Nickel: hero picture, Final Fantasy IX style, 5'6\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Nickel, 50, woman, 5'6\" tall, light peach skin, teal hair, hair style short choppy bob, clothing teal top, plum trousers, personality confident and businesslike, the shopkeeper of Nickel's, Penny's partner."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Nickel, 50, woman, 5'6\" tall, light peach skin, teal hair, hair style short choppy bob, clothing teal top, plum trousers, personality confident and businesslike, the shopkeeper of Nickel's, Penny's partner."
   },
   {
    "status": "draft",
@@ -8425,12 +8501,16 @@
    "id": "npc-photo-sal",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Sal: hero picture, Final Fantasy IX style, 5'8\" (reference: the 7 main heroes lineup)",
+   "title": "Sal: hero picture, Final Fantasy IX style, 5'8\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Sal, 50, man, 5'8\" tall, golden tan skin, very dark brown hair, hair style short and wavy, clothing mustard yellow top, slate grey trousers, a charcoal hat, personality relaxed and chatty, the driver of the Long Island Taxi, cab seven."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Sal, 50, man, 5'8\" tall, golden tan skin, very dark brown hair, hair style short and wavy, clothing mustard yellow top, slate grey trousers, a charcoal hat, personality relaxed and chatty, the driver of the Long Island Taxi, cab seven."
   },
   {
    "status": "draft",
@@ -8447,12 +8527,16 @@
    "id": "npc-photo-sol",
    "tab": "NPCs",
    "group": "Long Island people",
-   "title": "Sol: hero picture, Final Fantasy IX style, 5'7\" (reference: the 7 main heroes lineup)",
+   "title": "Sol: hero picture, Final Fantasy IX style, 5'7\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Sol, 52, man, 5'7\" tall, medium brown skin, black hair, hair style short and neat, clothing mustard yellow top, slate grey trousers, a cream hat, personality dry and knowing, Sal's cousin, the one driver of Angel City Cab Co.."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Sol, 52, man, 5'7\" tall, medium brown skin, black hair, hair style short and neat, clothing mustard yellow top, slate grey trousers, a cream hat, personality dry and knowing, Sal's cousin, the one driver of Angel City Cab Co.."
   },
   {
    "status": "draft",
@@ -8469,12 +8553,16 @@
    "id": "npc-photo-skye",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Skye: hero picture, Final Fantasy IX style, 5'6\" (reference: the 7 main heroes lineup)",
+   "title": "Skye: hero picture, Final Fantasy IX style, 5'6\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Skye, 24, woman, 5'6\" tall, light peach skin, golden blond hair, hair style long and wavy, clothing rose pink top, mint green trousers, personality bright and camera-ready, a Downtown LA loft resident who films videos."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Skye, 24, woman, 5'6\" tall, light peach skin, golden blond hair, hair style long and wavy, clothing rose pink top, mint green trousers, personality bright and camera-ready, a Downtown LA loft resident who films videos."
   },
   {
    "status": "draft",
@@ -8505,12 +8593,16 @@
    "id": "npc-photo-chet",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Chet: hero picture, Final Fantasy IX style, 5'11\" (reference: the 7 main heroes lineup)",
+   "title": "Chet: hero picture, Final Fantasy IX style, 5'11\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Chet, 30, man, 5'11\" tall, warm tan skin, very dark brown hair, hair style short, swept up and a little messy, clothing navy top, dark grey trousers, personality hopeful and a little dramatic, an actor who works as a car valet at a tower."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Chet, 30, man, 5'11\" tall, warm tan skin, very dark brown hair, hair style short, swept up and a little messy, clothing navy top, dark grey trousers, personality hopeful and a little dramatic, an actor who works as a car valet at a tower."
   },
   {
    "status": "draft",
@@ -8541,12 +8633,16 @@
    "id": "npc-photo-wes",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Wes: hero picture, Final Fantasy IX style, 5'10\" (reference: the 7 main heroes lineup)",
+   "title": "Wes: hero picture, Final Fantasy IX style, 5'10\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Wes, 33, man, 5'10\" tall, fair skin, chestnut brown hair, hair style short and shaggy, clothing grey top, slate grey trousers, a slate grey hat, personality distracted and thoughtful, a screenwriter who lives in the lofts."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Wes, 33, man, 5'10\" tall, fair skin, chestnut brown hair, hair style short and shaggy, clothing grey top, slate grey trousers, a slate grey hat, personality distracted and thoughtful, a screenwriter who lives in the lofts."
   },
   {
    "status": "draft",
@@ -8563,12 +8659,16 @@
    "id": "npc-photo-boomie",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Boomie: hero picture, Final Fantasy IX style, 5'6\" (reference: the 7 main heroes lineup)",
+   "title": "Boomie: hero picture, Final Fantasy IX style, 5'6\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Boomie, 44, woman, 5'6\" tall, deep brown skin, black hair, hair style big voluminous curls to the shoulders, clothing orange top, denim blue trousers, personality joyful and big-hearted, Tom's friend from Downtown LA, a gospel and soul singer about to go on tour (a human woman)."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Boomie, 44, woman, 5'6\" tall, deep brown skin, black hair, hair style big voluminous curls to the shoulders, clothing orange top, denim blue trousers, personality joyful and big-hearted, Tom's friend from Downtown LA, a gospel and soul singer about to go on tour (a human woman)."
   },
   {
    "status": "draft",
@@ -8585,12 +8685,16 @@
    "id": "npc-photo-bev",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Bev: hero picture, Final Fantasy IX style, 5'3\" (reference: the 7 main heroes lineup)",
+   "title": "Bev: hero picture, Final Fantasy IX style, 5'3\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Bev, 66, woman, 5'3\" tall, very fair skin, silver grey hair, hair style short and curly, clothing orange top, steel grey-blue trousers, a pale yellow hat, personality excited and curious, a tourist visiting from Ohio."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Bev, 66, woman, 5'3\" tall, very fair skin, silver grey hair, hair style short and curly, clothing orange top, steel grey-blue trousers, a pale yellow hat, personality excited and curious, a tourist visiting from Ohio."
   },
   {
    "status": "draft",
@@ -8607,12 +8711,16 @@
    "id": "npc-photo-priya",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Priya: hero picture, Final Fantasy IX style, 5'4\" (reference: the 7 main heroes lineup)",
+   "title": "Priya: hero picture, Final Fantasy IX style, 5'4\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Priya, 35, woman, 5'4\" tall, medium brown skin, black hair, hair style shoulder-length and straight, clothing denim blue top, charcoal trousers, personality polite and a little wistful, an office worker on the 34th floor of the Grand Tower."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Priya, 35, woman, 5'4\" tall, medium brown skin, black hair, hair style shoulder-length and straight, clothing denim blue top, charcoal trousers, personality polite and a little wistful, an office worker on the 34th floor of the Grand Tower."
   },
   {
    "status": "draft",
@@ -8643,12 +8751,16 @@
    "id": "npc-photo-juniper",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Juniper: hero picture, Final Fantasy IX style, 5'6\" (reference: the 7 main heroes lineup)",
+   "title": "Juniper: hero picture, Final Fantasy IX style, 5'6\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Juniper, 28, woman, 5'6\" tall, fair skin, auburn red hair, hair style shoulder-length waves, clothing beige top, slate grey trousers, personality sunny and dreamy, the barista at Golden Hour Coffee."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Juniper, 28, woman, 5'6\" tall, fair skin, auburn red hair, hair style shoulder-length waves, clothing beige top, slate grey trousers, personality sunny and dreamy, the barista at Golden Hour Coffee."
   },
   {
    "status": "draft",
@@ -8665,12 +8777,16 @@
    "id": "npc-photo-kenji",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Kenji: hero picture, Final Fantasy IX style, 5'7\" (reference: the 7 main heroes lineup)",
+   "title": "Kenji: hero picture, Final Fantasy IX style, 5'7\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Kenji, 45, man, 5'7\" tall, light peach skin, black hair, hair style short and neat, clothing cream top, charcoal trousers, a white chef jacket and chef hat, personality proud and focused, the chef at Ramen Ramen."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Kenji, 45, man, 5'7\" tall, light peach skin, black hair, hair style short and neat, clothing cream top, charcoal trousers, a white chef jacket and chef hat, personality proud and focused, the chef at Ramen Ramen."
   },
   {
    "status": "draft",
@@ -8687,12 +8803,16 @@
    "id": "npc-photo-sage",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Sage: hero picture, Final Fantasy IX style, 5'8\" (reference: the 7 main heroes lineup)",
+   "title": "Sage: hero picture, Final Fantasy IX style, 5'8\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Sage, 32, woman, 5'8\" tall, fair skin, golden blond hair, hair style wavy bob to the jaw, clothing grass green top, cream trousers, personality serene and calm, the owner of Very Green Juice."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Sage, 32, woman, 5'8\" tall, fair skin, golden blond hair, hair style wavy bob to the jaw, clothing grass green top, cream trousers, personality serene and calm, the owner of Very Green Juice."
   },
   {
    "status": "draft",
@@ -8709,12 +8829,16 @@
    "id": "npc-photo-marguerite",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Marguerite: hero picture, Final Fantasy IX style, 5'5\" (reference: the 7 main heroes lineup)",
+   "title": "Marguerite: hero picture, Final Fantasy IX style, 5'5\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Marguerite, 66, woman, 5'5\" tall, warm brown skin, light blond hair, hair style short curls pinned up, clothing plum top, charcoal trousers, a measuring tape around the neck, round glasses, personality sharp but kind, the keeper of Backlot Wardrobe."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Marguerite, 66, woman, 5'5\" tall, warm brown skin, light blond hair, hair style short curls pinned up, clothing plum top, charcoal trousers, a measuring tape around the neck, round glasses, personality sharp but kind, the keeper of Backlot Wardrobe."
   },
   {
    "status": "draft",
@@ -8731,12 +8855,16 @@
    "id": "npc-photo-dolores",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Dolores: hero picture, Final Fantasy IX style, 5'4\" (reference: the 7 main heroes lineup)",
+   "title": "Dolores: hero picture, Final Fantasy IX style, 5'4\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Dolores, 60, woman, 5'4\" tall, light peach skin, plum hair, hair style curly updo, clothing red top, charcoal trousers, personality elegant and proud, the owner of the Starlite cinema."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Dolores, 60, woman, 5'4\" tall, light peach skin, plum hair, hair style curly updo, clothing red top, charcoal trousers, personality elegant and proud, the owner of the Starlite cinema."
   },
   {
    "status": "draft",
@@ -8767,12 +8895,16 @@
    "id": "npc-photo-dash",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Dash: hero picture, Final Fantasy IX style, 5'10\" (reference: the 7 main heroes lineup)",
+   "title": "Dash: hero picture, Final Fantasy IX style, 5'10\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Dash, 27, man, 5'10\" tall, golden tan skin, black hair, hair style short and messy, clothing orange top, dark grey trousers, a denim blue hat, personality laid-back, the clerk of the Board Room skate shop."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Dash, 27, man, 5'10\" tall, golden tan skin, black hair, hair style short and messy, clothing orange top, dark grey trousers, a denim blue hat, personality laid-back, the clerk of the Board Room skate shop."
   },
   {
    "status": "draft",
@@ -8789,12 +8921,16 @@
    "id": "npc-photo-washington",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Mr. Washington: hero picture, Final Fantasy IX style, 5'9\" (reference: the 7 main heroes lineup)",
+   "title": "Mr. Washington: hero picture, Final Fantasy IX style, 5'9\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Mr. Washington, 77, man, 5'9\" tall, deep brown skin, light blond hair, hair style close-cropped, clothing olive brown top, slate grey trousers, a slate grey hat, personality gentle and content, a Jefferson Park neighbour who has lived on the same porch since 1979."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Mr. Washington, 77, man, 5'9\" tall, deep brown skin, light blond hair, hair style close-cropped, clothing olive brown top, slate grey trousers, a slate grey hat, personality gentle and content, a Jefferson Park neighbour who has lived on the same porch since 1979."
   },
   {
    "status": "draft",
@@ -8811,12 +8947,16 @@
    "id": "npc-photo-marisol",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Marisol: hero picture, Final Fantasy IX style, 5'6\" (reference: the 7 main heroes lineup)",
+   "title": "Marisol: hero picture, Final Fantasy IX style, 5'6\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Marisol, 40, woman, 5'6\" tall, medium brown skin, black hair, hair style long and wavy, clothing coral pink top, dark grey trousers, personality amused and a little distracted, a Jefferson Park neighbour walking her dog."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Marisol, 40, woman, 5'6\" tall, medium brown skin, black hair, hair style long and wavy, clothing coral pink top, dark grey trousers, personality amused and a little distracted, a Jefferson Park neighbour walking her dog."
   },
   {
    "status": "draft",
@@ -8833,12 +8973,16 @@
    "id": "npc-photo-larry",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Larry: hero picture, Final Fantasy IX style, 5'9\" (reference: the 7 main heroes lineup)",
+   "title": "Larry: hero picture, Final Fantasy IX style, 5'9\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Larry, 55, man, 5'9\" tall, golden tan skin, slate violet hair, hair style short and wavy, clothing sage green top, brown trousers, a mustard yellow hat, personality cheerful and contented, a Jefferson Park neighbour who blows leaves."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Larry, 55, man, 5'9\" tall, golden tan skin, slate violet hair, hair style short and wavy, clothing sage green top, brown trousers, a mustard yellow hat, personality cheerful and contented, a Jefferson Park neighbour who blows leaves."
   },
   {
    "status": "draft",
@@ -8868,12 +9012,16 @@
    "id": "npc-photo-bernadette",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Bernadette: hero picture, Final Fantasy IX style, 5'4\" (reference: the 7 main heroes lineup)",
+   "title": "Bernadette: hero picture, Final Fantasy IX style, 5'4\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Bernadette, 66, woman, 5'4\" tall, rich brown skin, light blond hair, hair style big curly bob, clothing orange top, slate grey trousers, personality stern but fond, the Neighborhood Watch Captain of Old Oak Park for 19 years."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Bernadette, 66, woman, 5'4\" tall, rich brown skin, light blond hair, hair style big curly bob, clothing orange top, slate grey trousers, personality stern but fond, the Neighborhood Watch Captain of Old Oak Park for 19 years."
   },
   {
    "status": "draft",
@@ -8890,12 +9038,16 @@
    "id": "npc-photo-odette",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Miss Odette: hero picture, Final Fantasy IX style, 5'4\" (reference: the 7 main heroes lineup)",
+   "title": "Miss Odette: hero picture, Final Fantasy IX style, 5'4\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Miss Odette, 70, woman, 5'4\" tall, rich brown skin, light blond hair, hair style short curls, clothing purple top, charcoal trousers, a mustard yellow hat, personality warm and motherly, the cook of Odette's Creole Kitchen."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Miss Odette, 70, woman, 5'4\" tall, rich brown skin, light blond hair, hair style short curls, clothing purple top, charcoal trousers, a mustard yellow hat, personality warm and motherly, the cook of Odette's Creole Kitchen."
   },
   {
    "status": "draft",
@@ -8912,12 +9064,16 @@
    "id": "npc-photo-carmen",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Doña Carmen: hero picture, Final Fantasy IX style, 5'3\" (reference: the 7 main heroes lineup)",
+   "title": "Doña Carmen: hero picture, Final Fantasy IX style, 5'3\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Doña Carmen, 58, woman, 5'3\" tall, olive tan skin, black hair, hair style shoulder-length curls, clothing royal blue top, navy trousers, an apron over her clothes, personality big-hearted and welcoming, the owner of Pupuseria La Ceiba."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Doña Carmen, 58, woman, 5'3\" tall, olive tan skin, black hair, hair style shoulder-length curls, clothing royal blue top, navy trousers, an apron over her clothes, personality big-hearted and welcoming, the owner of Pupuseria La Ceiba."
   },
   {
    "status": "draft",
@@ -8948,12 +9104,16 @@
    "id": "npc-photo-ray",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Ray: hero picture, Final Fantasy IX style, 5'11\" (reference: the 7 main heroes lineup)",
+   "title": "Ray: hero picture, Final Fantasy IX style, 5'11\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Ray, 45, man, 5'11\" tall, rich brown skin, black hair, hair style short, with a thin moustache and goatee, clothing navy top, charcoal trousers, a navy security guard uniform and cap, personality firm but friendly, the security guard at the Sunset Gold Studios gate."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Ray, 45, man, 5'11\" tall, rich brown skin, black hair, hair style short, with a thin moustache and goatee, clothing navy top, charcoal trousers, a navy security guard uniform and cap, personality firm but friendly, the security guard at the Sunset Gold Studios gate."
   },
   {
    "status": "draft",
@@ -8984,12 +9144,16 @@
    "id": "npc-photo-toni",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Toni: hero picture, Final Fantasy IX style, 5'6\" (reference: the 7 main heroes lineup)",
+   "title": "Toni: hero picture, Final Fantasy IX style, 5'6\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Toni, 38, woman, 5'6\" tall, light peach skin, bright red hair, hair style long and curly, clothing off-white top, navy trousers, a orange hat, an apron over a white shirt, personality generous and grinning, the craft services cook at the film studio."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Toni, 38, woman, 5'6\" tall, light peach skin, bright red hair, hair style long and curly, clothing off-white top, navy trousers, a orange hat, an apron over a white shirt, personality generous and grinning, the craft services cook at the film studio."
   },
   {
    "status": "draft",
@@ -9006,12 +9170,16 @@
    "id": "npc-photo-kiki",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Kiki: hero picture, Final Fantasy IX style, 5'4\" (reference: the 7 main heroes lineup)",
+   "title": "Kiki: hero picture, Final Fantasy IX style, 5'4\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Kiki, 25, woman, 5'4\" tall, golden tan skin, black hair, hair style chin-length choppy bob, clothing black top, dark grey trousers, a headset and radios on the belt, personality wide-eyed and frazzled, a production assistant on a film set."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Kiki, 25, woman, 5'4\" tall, golden tan skin, black hair, hair style chin-length choppy bob, clothing black top, dark grey trousers, a headset and radios on the belt, personality wide-eyed and frazzled, a production assistant on a film set."
   },
   {
    "status": "draft",
@@ -9028,12 +9196,16 @@
    "id": "npc-photo-dana",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Dana: hero picture, Final Fantasy IX style, 5'6\" (reference: the 7 main heroes lineup)",
+   "title": "Dana: hero picture, Final Fantasy IX style, 5'6\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Dana, 35, woman, 5'6\" tall, fair skin, dark brown hair, hair style short bob, clothing plum top, charcoal trousers, a navy hat, personality nervous but hopeful, a first-time film director."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Dana, 35, woman, 5'6\" tall, fair skin, dark brown hair, hair style short bob, clothing plum top, charcoal trousers, a navy hat, personality nervous but hopeful, a first-time film director."
   },
   {
    "status": "draft",
@@ -9057,12 +9229,16 @@
    "id": "npc-photo-alvarez",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Mrs. Alvarez: hero picture, Final Fantasy IX style, 5'2\" (reference: the 7 main heroes lineup)",
+   "title": "Mrs. Alvarez: hero picture, Final Fantasy IX style, 5'2\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Mrs. Alvarez, 66, woman, 5'2\" tall, olive tan skin, light blond hair, hair style short curly bob, clothing rust top, slate grey trousers, personality no-nonsense but loving, the matriarch of the Casa Alvarez household of ten."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Mrs. Alvarez, 66, woman, 5'2\" tall, olive tan skin, light blond hair, hair style short curly bob, clothing rust top, slate grey trousers, personality no-nonsense but loving, the matriarch of the Casa Alvarez household of ten."
   },
   {
    "status": "draft",
@@ -9086,12 +9262,16 @@
    "id": "npc-photo-beto",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Don Beto: hero picture, Final Fantasy IX style, 5'4\" (reference: the 7 main heroes lineup)",
+   "title": "Don Beto: hero picture, Final Fantasy IX style, 5'4\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Don Beto, 80, man, 5'4\" tall, medium brown skin, light blond hair, hair style short and thin, clothing steel grey-blue top, slate grey trousers, a slate blue hat, personality mellow and amused, the Alvarez family's grandfather, who loves his chair."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Don Beto, 80, man, 5'4\" tall, medium brown skin, light blond hair, hair style short and thin, clothing steel grey-blue top, slate grey trousers, a slate blue hat, personality mellow and amused, the Alvarez family's grandfather, who loves his chair."
   },
   {
    "status": "draft",
@@ -9122,12 +9302,16 @@
    "id": "npc-photo-tony",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Tony: hero picture, Final Fantasy IX style, 5'8\" (reference: the 7 main heroes lineup)",
+   "title": "Tony: hero picture, Final Fantasy IX style, 5'8\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Tony, 42, man, 5'8\" tall, olive tan skin, black hair, hair style short and messy, clothing forest green top, dark grey trousers, personality wry, tired but hopeful, a member of the Alvarez household, saving for a home with Yesenia."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Tony, 42, man, 5'8\" tall, olive tan skin, black hair, hair style short and messy, clothing forest green top, dark grey trousers, personality wry, tired but hopeful, a member of the Alvarez household, saving for a home with Yesenia."
   },
   {
    "status": "draft",
@@ -9158,12 +9342,16 @@
    "id": "npc-photo-yesenia",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Yesenia: hero picture, Final Fantasy IX style, 5'5\" (reference: the 7 main heroes lineup)",
+   "title": "Yesenia: hero picture, Final Fantasy IX style, 5'5\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Yesenia, 38, woman, 5'5\" tall, golden tan skin, black hair, hair style shoulder-length messy waves, clothing hot pink top, charcoal trousers, personality alert and frazzled, a member of the Alvarez household, Tony's partner and a busy mother."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Yesenia, 38, woman, 5'5\" tall, golden tan skin, black hair, hair style shoulder-length messy waves, clothing hot pink top, charcoal trousers, personality alert and frazzled, a member of the Alvarez household, Tony's partner and a busy mother."
   },
   {
    "status": "draft",
@@ -9194,12 +9382,16 @@
    "id": "npc-photo-claudia",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Claudia: hero picture, Final Fantasy IX style, 5'4\" (reference: the 7 main heroes lineup)",
+   "title": "Claudia: hero picture, Final Fantasy IX style, 5'4\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Claudia, 27, woman, 5'4\" tall, medium brown skin, black hair, hair style shoulder-length curls, clothing mint green top, matching trousers, nurse scrubs, personality sleepy and kind, a night shift nurse in the Alvarez household."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Claudia, 27, woman, 5'4\" tall, medium brown skin, black hair, hair style shoulder-length curls, clothing mint green top, matching trousers, nurse scrubs, personality sleepy and kind, a night shift nurse in the Alvarez household."
   },
   {
    "status": "draft",
@@ -9216,12 +9408,16 @@
    "id": "npc-photo-kevin",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Kevin: hero picture, Final Fantasy IX style, 4'8\" (reference: the 7 main heroes lineup)",
+   "title": "Kevin: hero picture, Final Fantasy IX style, 4'8\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Kevin, 11, boy, 4'8\" tall, olive tan skin, black hair, hair style short and spiky, clothing red top, dark grey trousers, personality comically resigned, a boy in the Alvarez household."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Kevin, 11, boy, 4'8\" tall, olive tan skin, black hair, hair style short and spiky, clothing red top, dark grey trousers, personality comically resigned, a boy in the Alvarez household."
   },
   {
    "status": "draft",
@@ -9238,12 +9434,16 @@
    "id": "npc-photo-daisy",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Daisy: hero picture, Final Fantasy IX style, 5'0\" (reference: the 7 main heroes lineup)",
+   "title": "Daisy: hero picture, Final Fantasy IX style, 5'0\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Daisy, 13, girl, 5'0\" tall, golden tan skin, black hair, hair style chin-length messy bob, clothing violet top, dark grey trousers, personality mischievous and serious about her film, a girl in the Alvarez household who is making a documentary."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Daisy, 13, girl, 5'0\" tall, golden tan skin, black hair, hair style chin-length messy bob, clothing violet top, dark grey trousers, personality mischievous and serious about her film, a girl in the Alvarez household who is making a documentary."
   },
   {
    "status": "draft",
@@ -9260,12 +9460,16 @@
    "id": "npc-photo-mateo",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Mateo: hero picture, Final Fantasy IX style, 3'6\" (reference: the 7 main heroes lineup)",
+   "title": "Mateo: hero picture, Final Fantasy IX style, 3'6\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Mateo, 5, boy, 3'6\" tall, olive tan skin, black hair, hair style short and spiky, clothing mustard yellow top, royal blue trousers, personality loud and delighted, a little boy in the Alvarez household who loves trucks."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Mateo, 5, boy, 3'6\" tall, olive tan skin, black hair, hair style short and spiky, clothing mustard yellow top, royal blue trousers, personality loud and delighted, a little boy in the Alvarez household who loves trucks."
   },
   {
    "status": "draft",
@@ -9282,12 +9486,16 @@
    "id": "npc-photo-sofi",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Sofi: hero picture, Final Fantasy IX style, 3'3\" (reference: the 7 main heroes lineup)",
+   "title": "Sofi: hero picture, Final Fantasy IX style, 3'3\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Sofi, 4, girl, 3'3\" tall, golden tan skin, black hair, hair style wild and messy to the shoulders, clothing grass green top, hot pink trousers, personality fierce and giggly, the littlest girl in the Alvarez household, who pretends to be a dinosaur."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Sofi, 4, girl, 3'3\" tall, golden tan skin, black hair, hair style wild and messy to the shoulders, clothing grass green top, hot pink trousers, personality fierce and giggly, the littlest girl in the Alvarez household, who pretends to be a dinosaur."
   },
   {
    "status": "draft",
@@ -9304,12 +9512,16 @@
    "id": "npc-photo-jordan",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Jordan: hero picture, Final Fantasy IX style, 5'10\" (reference: the 7 main heroes lineup)",
+   "title": "Jordan: hero picture, Final Fantasy IX style, 5'10\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Jordan, 36, man, 5'10\" tall, fair skin, black hair, hair style short and neat, clothing charcoal top, tan trousers, a tan hat, personality proud and handy, a house renovator who lives with Sam."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Jordan, 36, man, 5'10\" tall, fair skin, black hair, hair style short and neat, clothing charcoal top, tan trousers, a tan hat, personality proud and handy, a house renovator who lives with Sam."
   },
   {
    "status": "draft",
@@ -9340,12 +9552,16 @@
    "id": "npc-photo-sam",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Sam: hero picture, Final Fantasy IX style, 5'7\" (reference: the 7 main heroes lineup)",
+   "title": "Sam: hero picture, Final Fantasy IX style, 5'7\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Sam, 34, woman, 5'7\" tall, fair skin, dark blond hair, hair style shoulder-length waves, clothing off-white top, dark grey trousers, personality quick and delighted, a house renovator who lives with Jordan and posts everything online."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Sam, 34, woman, 5'7\" tall, fair skin, dark blond hair, hair style shoulder-length waves, clothing off-white top, dark grey trousers, personality quick and delighted, a house renovator who lives with Jordan and posts everything online."
   },
   {
    "status": "draft",
@@ -9369,12 +9585,16 @@
    "id": "npc-photo-dakota",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Dakota: hero picture, Final Fantasy IX style, 5'8\" (reference: the 7 main heroes lineup)",
+   "title": "Dakota: hero picture, Final Fantasy IX style, 5'8\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Dakota, 36, woman, 5'8\" tall, fair skin, strawberry blond hair, hair style shoulder-length waves, clothing sky blue top, dark grey trousers, personality fond and determined, a homeowner restoring a 1912 house with Ryan."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Dakota, 36, woman, 5'8\" tall, fair skin, strawberry blond hair, hair style shoulder-length waves, clothing sky blue top, dark grey trousers, personality fond and determined, a homeowner restoring a 1912 house with Ryan."
   },
   {
    "status": "draft",
@@ -9398,12 +9618,16 @@
    "id": "npc-photo-ryan",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Ryan: hero picture, Final Fantasy IX style, 5'11\" (reference: the 7 main heroes lineup)",
+   "title": "Ryan: hero picture, Final Fantasy IX style, 5'11\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
-    "art/raw/characters/main-heroes-lineup-v1.png"
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Ryan, 38, man, 5'11\" tall, fair skin, light brown hair, hair style short and tousled, clothing grey top, slate grey trousers, personality exhausted but happy, a new father and homeowner, Dakota's partner."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Ryan, 38, man, 5'11\" tall, fair skin, light brown hair, hair style short and tousled, clothing grey top, slate grey trousers, personality exhausted but happy, a new father and homeowner, Dakota's partner."
   },
   {
    "status": "approved",
