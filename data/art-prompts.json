@@ -14865,6 +14865,13 @@
      "date": "2026-11-09",
      "from": "v2",
      "at": 1794266181678
+    },
+    {
+     "n": 2,
+     "file": "art/raw/title/title-welcome-portrait-v3.png",
+     "date": "2026-11-10",
+     "from": "v7",
+     "at": 1794272261481
     }
    ],
    "rejects": [
