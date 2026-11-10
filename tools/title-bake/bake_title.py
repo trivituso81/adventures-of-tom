@@ -31,7 +31,13 @@ def welcome():
     spread = np.asarray(land).astype(np.float32).std(axis=1).mean(-1)
     rows = np.where(spread > 14)[0]
     y0, y1 = int(rows[0]) + 18, int(rows[-1]) - 18 + 1
-    land.crop((0, y0, land.width, y1)).save('art/welcome-land.webp', quality=88, method=6)
+    # title3: the generator makes this picture only 1280 px wide, so a 1080p or wider screen stretched it about 2.3x and it looked soft.
+    # Upscale 2x (Lanczos), then sharpen in two passes (fine detail, then broader edges). No model download is possible here, so this is classic sharpening, not new detail.
+    from PIL import ImageFilter
+    land = land.crop((0, y0, land.width, y1))
+    land = land.resize((land.width * 2, land.height * 2), Image.LANCZOS)
+    land = land.filter(ImageFilter.UnsharpMask(radius=1.2, percent=140, threshold=2)).filter(ImageFilter.UnsharpMask(radius=3, percent=50, threshold=2))
+    land.save('art/welcome-land.webp', quality=88, method=6)
     print('landscape rows', y0, y1)
 
 def logo():

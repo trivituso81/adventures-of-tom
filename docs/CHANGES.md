@@ -1,3 +1,9 @@
+## 2026-11-09 (title3): Landscape welcome painting sharper on large screens (tag title3)
+- Tom: the background on large wide viewports was not crisp. Fact: the generator makes the landscape picture only 1280 px wide, and after the title2 crop (1280 x 468) a 1080p window stretched it about 1.9x (a full-screen 1080p about 2.3x).
+- `tools/title-bake/bake_title.py` now upscales the cropped landscape picture 2x (Lanczos) and sharpens it in two passes: `art/welcome-land.webp` is 2560 x 936 (665 KB). This is classic sharpening, not new detail (no upscaling model can be downloaded here). Rebake reproduced the portrait, logo and icon byte for byte.
+- Tags: `?v=title3` (index.html, engine/main.js). Looked at 1920 x 1080 (stage 1090 x 890, the picture now maps about 1:1); smoke FAILS []; tag_check ok.
+- Not fixed: a true fix for very large screens is a higher-resolution source picture; the Art Library generator caps at 1280 px wide.
+
 ## 2026-11-09 (talkstage1): Conversations: nobody overlaps, the group stands in open floor, everyone faces the others (tag talkstage1)
 - Tom: scan the game for groups in discussion and make sure they never overlap, stand in the center of open space and face each other naturally.
 - New scene step `{huddle}` (`engine/story.js`). `playScene` now inserts it before every line of dialogue in every named scene that has no `{gather}`; boss scenes keep their `{gather}` and get a huddle after it. People already placed by the scene (NPCs, monsters, posed people) stay put; the party walks to spots that are in different columns (the existing overlap rule), have open floor around them, are not on the map edge or the bottom two rows (under the dialogue box) and are not hidden behind painted scenery, then everyone turns toward the others. If the group already stands well, nothing moves. New scenes need no table entry.
