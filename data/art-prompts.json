@@ -8388,7 +8388,7 @@
    "group": "Test card"
   },
   {
-   "status": "draft",
+   "status": "approved",
    "versions": [
     {
      "n": 0,
@@ -8417,6 +8417,13 @@
      "date": "2026-11-10",
      "from": "v5",
      "at": 1794293840880
+    },
+    {
+     "n": 4,
+     "file": "art/raw/npcs/npc-photo-pip-v5.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794330506934
     }
    ],
    "rejects": [],
