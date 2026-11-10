@@ -51,7 +51,7 @@ function titleMenu() {
 }
 function confirmNew() {
   if(!readSave('auto')) { beginOpening(); return; }
-  titleAsk('Start New','A new game replaces the autosave once it begins. Slots 1 to 3 are kept.',[
+  titleAsk('Start New','A new game replaces the autosave once it begins. Your numbered slots are kept.',[
     {label:'START NEW',fn:beginOpening},
     {label:'BACK',fn:titleMenu}
   ]);

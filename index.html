@@ -993,6 +993,8 @@ html.landscape .brand{max-width:min(340px,50%)}html.landscape .qt-text,html.land
 @media(prefers-reduced-motion:reduce){.brand.obj-new .brand-mark,.brand.qt-pop .qt-pips{animation:none}}
 
 #menu-save .msave-box .item-list{grid-template-columns:1fr!important}
+.msave-box{max-height:100%;grid-template-rows:auto minmax(0,1fr) auto auto auto}html.landscape .msave-box .mquit-text:not(.macct){display:none}
+.msave-box .item-list{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;min-height:0;padding:2px}
 html.landscape .msave-box{gap:6px;padding:10px 14px}
 html.landscape .msave-box .save-row{padding:5px 9px}
 html.landscape .msave-box .mquit-title{font-size:15px}
@@ -1322,8 +1324,8 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/maps-la.js?v=blvdwalk1"></script>
 <script src="data/maps-ch12.js"></script>
 <script src="engine/la.js"></script>
-<script src="engine/menu.js?v=sync1"></script>
-<script src="engine/followers.js?v=sync1"></script>
+<script src="engine/menu.js?v=slots10"></script>
+<script src="engine/followers.js?v=slots10"></script>
 <script src="engine/shop.js?v=justin2"></script>
 <script src="engine/audio.js?v=tab1"></script>
 <script src="data/lines.js?v=nobake1"></script>
@@ -1553,12 +1555,12 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="engine/infinity-render.js"></script>
 <script src="engine/plate.js?v=crumbs2"></script>
 <script src="engine/draw.js?v=mirrors1"></script>
-<script src="engine/intro.js?v=sync1"></script>
+<script src="engine/intro.js?v=slots10"></script>
 <script src="data/flight-art.js?v=flight14"></script>
 <script src="engine/flight-art.js?v=flight11"></script>
 <script src="engine/travel.js?v=taxizoom1"></script>
 <script src="engine/nara.js?v=narainst1"></script>
-<script src="engine/story.js?v=talkstage1"></script>
+<script src="engine/story.js?v=slots10"></script>
 <script src="engine/bench.js"></script>
 <script src="engine/tom-gone.js"></script>
 <script src="engine/benchcall.js"></script>
@@ -1593,7 +1595,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="engine/save-backup.js?v=sync1"></script>
 <script src="engine/save-sync.js?v=sync1"></script>
 <script src="engine/skip.js"></script>
-<script src="engine/chapter-select.js?v=jpark2"></script>
+<script src="engine/chapter-select.js?v=slots10"></script>
 <script src="data/bonus-nine-scoops.js?v=stage1"></script>
 <script src="data/foes/use.js"></script>   <!-- second pass: installs the painted Nine Scoops enemies, which data/bonus-nine-scoops.js defines after the first pass ran -->
 <script src="data/dialog-cast.js?v=gracevoice1"></script>
@@ -1604,7 +1606,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/emotion-moods.js?v=emo14"></script>
 <script src="engine/emotions.js?v=emopause2"></script><!-- mood faces and poses in story dialogue (batch 0: chapter 1) -->
 <script src="engine/tapwalk.js?v=space1"></script><!-- tap to walk -->
-<script src="engine/main.js?v=music2"></script>
+<script src="engine/main.js?v=slots10"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js?v=music2"></script>

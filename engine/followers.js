@@ -125,8 +125,8 @@ function recruitJoin(m,npc,silent=false,map=currentMap,replace=null) {
   openDialog(m.name,[RECRUIT_TALK[m.id].yes]);
 }
 
-// ---------- Saving: three named slots plus an autosave, in this browser's storage ----------
-const SAVE_SLOTS=['auto','1','2','3'];
+// ---------- Saving: ten named slots plus an autosave, in this browser's storage ----------
+const SAVE_SLOTS=['auto','1','2','3','4','5','6','7','8','9','10'];
 // Full game saves. The demo (demo/) keeps the original le-save-* keys, so the two never mix.
 const SAVE_PREFIX='aot-save-';
 function saveSnapshot() {

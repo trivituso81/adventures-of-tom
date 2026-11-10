@@ -232,7 +232,7 @@ function b6Prep(L) {
 }
 function confirmChapter(n) {
   if(!readSave('auto')) { chapterJump(n); return; }
-  titleAsk('Chapter '+n,'Test jump to chapter '+n+'. It replaces the autosave once it begins. Slots 1 to 3 are kept.',[
+  titleAsk('Chapter '+n,'Test jump to chapter '+n+'. It replaces the autosave once it begins. Your numbered slots are kept.',[
     {label:'START CHAPTER '+n,fn:()=>chapterJump(n)},
     {label:'BACK',fn:titleMenu}
   ]);

@@ -473,7 +473,7 @@ function renderSaveTab(body) {
   body.appendChild(list); body.appendChild(hint); body.appendChild(bk);
 }
 
-// SAVE POPUP: opened from the HUD save button. Three slots; overwriting asks once. Closes after saving.
+// SAVE POPUP: opened from the HUD save button. Ten slots (the list scrolls); overwriting asks once. Closes after saving.
 function openSave(viaKeys) {
   if(typeof intro!=='undefined'&&intro.active) return;
   if(menuOpen||(typeof shopOpen!=='undefined'&&shopOpen)) return;
