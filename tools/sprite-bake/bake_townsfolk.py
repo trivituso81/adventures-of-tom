@@ -5,7 +5,7 @@ Input : tools/sprite-bake/src/<id>-walk-v1.png (3 rows of 4: down, up, left; eac
 Output: art/chars/<id>-ow.webp (painted frames, 3x the size of the rows), data/townsfolk-hires.js (rows, palette, atlas rects; do not hand-edit)
 Same recipe as bake_ellie.py but the heads are already caricature size, so no head enlargement.
 New Library sheets (11-09): an NPC listed in LIBRARY_WALK is cut from its approved Art Library sheet `art/raw/npcs/npc-walk-<id>-v<N>.png` (3 x 3: front, back, side;
-stand, step, step; the side row faces RIGHT, so it is mirrored here to face left like the old sheets). The background may be magenta or a crimson-pink: it is keyed from
+stand, step, step; the side row usually faces LEFT like the old sheets and is used as drawn; ids in SIDE_FACES_RIGHT are mirrored). The background may be magenta or a crimson-pink: it is keyed from
 the border colour (slice_sheet robust). Everyone else still comes from tools/sprite-bake/src/<id>-walk-v1.png. Always run WITHOUT --only: the data file holds every NPC.
 Usage : python3 tools/sprite-bake/bake_townsfolk.py [--only pip,moss] [--contact PATH]
 """
@@ -42,7 +42,7 @@ def purge_bg(img):
     a[bgl | rim, 3] = 0
     return Image.fromarray(a, 'RGBA')
 
-SIDE_SWAP = {'gus'}   # the generator draws both side steps with the same leg forward: build step2 from step1 with the legs swapped
+SIDE_FACES_RIGHT = set()   # ids whose generated sheet draws the side row facing RIGHT. Check each new sheet by eye: the generator is not consistent (Gus v3 faced right, v5 and the other 20 face left). A wrong entry makes the NPC walk backwards.
 LIBRARY_WALK = {'pip': 'art/raw/npcs/npc-walk-pip-v2.png', 'moss': 'art/raw/npcs/npc-walk-moss-v1.png', 'dot': 'art/raw/npcs/npc-walk-dot-v1.png', 'gus': 'art/raw/npcs/npc-walk-gus-v5.png', 'bean': 'art/raw/npcs/npc-walk-bean-v2.png', 'reel': 'art/raw/npcs/npc-walk-reel-v1.png', 'pruitt': 'art/raw/npcs/npc-walk-pruitt-v2.png', 'delgado': 'art/raw/npcs/npc-walk-delgado-v2.png', 'kowalski': 'art/raw/npcs/npc-walk-kowalski-v2.png', 'ike': 'art/raw/npcs/npc-walk-ike-v2.png', 'halverson': 'art/raw/npcs/npc-walk-halverson-v1.png', 'bun': 'art/raw/npcs/npc-walk-bun-v1.png', 'page': 'art/raw/npcs/npc-walk-page-v1.png', 'fern': 'art/raw/npcs/npc-walk-fern-v1.png', 'kit': 'art/raw/npcs/npc-walk-kit-v1.png', 'oolong': 'art/raw/npcs/npc-walk-oolong-v1.png', 'luna': 'art/raw/npcs/npc-walk-luna-v1.png', 'penny': 'art/raw/npcs/npc-walk-penny-v1.png', 'nickel': 'art/raw/npcs/npc-walk-nickel-v1.png', 'sal': 'art/raw/npcs/npc-walk-sal-v1.png', 'sol': 'art/raw/npcs/npc-walk-sol-v1.png'}   # id -> approved Art Library walk sheet (the newest version of the entry)
 ap = argparse.ArgumentParser()
 ap.add_argument('--only', default=None)
@@ -185,40 +185,6 @@ def fmt_rows(rows, indent='    '):
     return '[\n' + ',\n'.join(indent + "'" + r + "'" for r in rows) + '\n  ]'
 
 
-def swap_legs(img):
-    """Side view facing RIGHT: return the same figure with its two legs swapped (the other leg forward). Below the hip the picture is mirrored left to right
-    about the hip centre, then each shoe is put back unmirrored (toe still to the right) at the mirrored spot."""
-    from scipy import ndimage as ndi
-    img = img.convert('RGBA'); pad = Image.new('RGBA', (img.width + 200, img.height), (0, 0, 0, 0)); pad.paste(img, (100, 0)); img = pad
-    a = np.array(img); H, W = a.shape[:2]
-    al = a[:, :, 3] > 0
-    ys = np.where(al.any(1))[0]; top, bot = ys.min(), ys.max(); h = bot - top
-    hip = int(top + h * 0.66)
-    xs = np.where(al[hip])[0]; xc = (xs.min() + xs.max()) / 2.0
-    r, g, b = [a[:, :, i].astype(int) for i in range(3)]
-    shoe = al & (r < 200) & (r - b > 55) & (g < 125) & (np.arange(H)[:, None] > top + h * 0.86)
-    lab, n = ndi.label(ndi.binary_dilation(shoe, iterations=1) & al)
-    low = a[hip:].copy(); out = a.copy()
-    mir = low[:, ::-1].copy()
-    # mirror about xc (not about the image centre): shift so that column xc maps onto itself
-    sh = int(round(2 * xc - (W - 1)))
-    mir = np.roll(mir, sh, axis=1)
-    mir_sh = np.roll(shoe[hip:, ::-1], sh, axis=1)
-    # clear mirrored shoes and anything that left the figure
-    mir[mir_sh] = 0
-    out[hip:] = mir
-    for k in range(1, n + 1):
-        m = (lab == k) & shoe
-        if not m.any():
-            continue
-        cols = np.where(m.any(0))[0]; x0, x1 = cols.min(), cols.max()
-        dx = int(round((2 * xc - x1) - x0))
-        yy, xx = np.where(m)
-        nx = xx + dx
-        ok = (nx >= 0) & (nx < W)
-        out[yy[ok], nx[ok]] = a[yy[ok], xx[ok]]
-    return Image.fromarray(out, 'RGBA')
-
 # Head and body sizing for the Library walk sheets: the SAME mechanism as the main cast (tools/sprite-bake/walk_sheet_frames.py WALK_MATCH and GROW).
 # Adults: the head (top of hair, hat or cap to chin) is made as tall as Tom's on screen (TOM_HEAD_ROWS, kidhead.grow_head about the chin) and the body is
 # scaled so the whole figure keeps its real height next to Tom (42 rows = 5'11, so rows = 42 x inches / 71). Kids (Pip, Moss, Dot): head as tall as Grace's
@@ -246,10 +212,9 @@ for cid, ow_h in CAST.items():
         rn3 = [[f'{d}_{n}' for n in ('stand', 'step1', 'step2')] for d in ('down', 'up', 'left')]
         poses = slice_sheet(os.path.join(ROOT, LIBRARY_WALK[cid]), rn3, robust=True)
         poses = {n: purge_bg(v) for n, v in poses.items()}
-        if cid in SIDE_SWAP:
-            poses['left_step2'] = swap_legs(poses['left_step1'])
-        for n in ('left_stand', 'left_step1', 'left_step2'):
-            poses[n] = poses[n].transpose(Image.FLIP_LEFT_RIGHT)
+        if cid in SIDE_FACES_RIGHT:   # the sheet's side row faces RIGHT: mirror it so the baked 'left' frames face left
+            for n in ('left_stand', 'left_step1', 'left_step2'):
+                poses[n] = poses[n].transpose(Image.FLIP_LEFT_RIGHT)
         from kidhead import grow_head
         H0 = poses['down_stand'].height; chin = CHIN[cid] * H0; R = target_rows(cid)
         T = KID_HEAD_ROWS if cid in KIDS else TOM_HEAD_ROWS
