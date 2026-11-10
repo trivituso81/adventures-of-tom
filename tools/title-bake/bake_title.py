@@ -30,12 +30,14 @@ def welcome():
     land = Image.open(approved('title-welcome-landscape')).convert('RGB')
     spread = np.asarray(land).astype(np.float32).std(axis=1).mean(-1)
     rows = np.where(spread > 14)[0]
-    y0, y1 = int(rows[0]) + 18, int(rows[-1]) - 18 + 1
+    barred = rows[0] > 20 or rows[-1] < land.height - 21   # flat bars present (the 1k picture); a full-bleed picture is not cropped
+    y0, y1 = (int(rows[0]) + 18, int(rows[-1]) - 18 + 1) if barred else (0, land.height)
     # title3: the generator makes this picture only 1280 px wide, so a 1080p or wider screen stretched it about 2.3x and it looked soft.
     # Upscale 2x (Lanczos), then sharpen in two passes (fine detail, then broader edges). No model download is possible here, so this is classic sharpening, not new detail.
     from PIL import ImageFilter
     land = land.crop((0, y0, land.width, y1))
-    land = land.resize((land.width * 2, land.height * 2), Image.LANCZOS)
+    if land.width < 1800:   # a 2K picture (2048 wide or more) is already big enough: no upscale
+        land = land.resize((land.width * 2, land.height * 2), Image.LANCZOS)
     land = land.filter(ImageFilter.UnsharpMask(radius=1.2, percent=140, threshold=2)).filter(ImageFilter.UnsharpMask(radius=3, percent=50, threshold=2))
     land.save('art/welcome-land.webp', quality=88, method=6)
     print('landscape rows', y0, y1)

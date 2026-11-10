@@ -1,3 +1,9 @@
+## 2026-11-09 (title4): Art Library can generate at 2K; landscape welcome entry reopened (json, art.html and baker only, no game tag)
+- Tom: still grainy, "should we just generate a new image?" Fact: `art.html` always asked the generator for `resolution:'1k'` (gen.js documents `1k|2k`), which is why the landscape picture was only 1280 px wide. Yes: regenerate at 2K.
+- `art.html` now sends the entry's `res` field (default `1k`). `title-welcome-landscape` has `res: "2k"`, is back to DRAFT, and its prompt now demands a full-bleed canvas (the v2 picture came back with flat cream bars above and below). The installed v2 picture stays live until the new one is approved.
+- `bake_title.py`: crops only when flat bars are present, and upscales only when the picture is under 1800 px wide, so a 2K full-bleed picture installs as is.
+- The welcome portrait (720 x 1280, approved) has no `res` yet; set `res: "2k"` and reopen it if Tom wants it sharper on iPads in portrait. Spend per image at 2K is not known (`SPEND_PER` in art.html is a 1K guess).
+
 ## 2026-11-09 (title3): Landscape welcome painting sharper on large screens (tag title3)
 - Tom: the background on large wide viewports was not crisp. Fact: the generator makes the landscape picture only 1280 px wide, and after the title2 crop (1280 x 468) a 1080p window stretched it about 1.9x (a full-screen 1080p about 2.3x).
 - `tools/title-bake/bake_title.py` now upscales the cropped landscape picture 2x (Lanczos) and sharpens it in two passes: `art/welcome-land.webp` is 2560 x 936 (665 KB). This is classic sharpening, not new detail (no upscaling model can be downloaded here). Rebake reproduced the portrait, logo and icon byte for byte.
