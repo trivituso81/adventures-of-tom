@@ -18606,8 +18606,16 @@
    "group": "Long Island people"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/npcs/npc-emotions-sal-v1.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794338681944
+    }
+   ],
    "rejects": [],
    "id": "npc-emotions-sal",
    "tab": "NPCs",
