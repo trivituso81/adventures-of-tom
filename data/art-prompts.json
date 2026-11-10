@@ -18126,8 +18126,16 @@
    "group": "Los Angeles people"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/npcs/npc-walk-pip-v2.png",
+     "date": "2026-11-10",
+     "from": "v2",
+     "at": 1794337466837
+    }
+   ],
    "rejects": [],
    "id": "npc-walk-pip",
    "tab": "NPCs",
