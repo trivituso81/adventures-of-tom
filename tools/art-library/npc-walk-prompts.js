@@ -7,12 +7,35 @@
 const fs = require('fs');
 const SKIP = new Set(['pip', 'moss', 'dot', 'boomie']);
 const { PROMPT } = require('./walk-prompt.js');   // Tom's one walk prompt (11-09 23:15)
+// Gus only (Tom 11-10 06:52: his walk sheet v5 was still wrong and the prompt confuses the generator). What the v4 picture got wrong with Tom's prompt:
+// the back row was drawn turned sideways (three-quarter view), the side row faced right, and the background came out crimson. This version uses short plain sentences, one idea each,
+// says what the camera sees in each row, and says "the nose points to the left edge" for the side row. No left or right feet or arms (the generator mixes them up).
+const GUS_PROMPT = `Draw the person in the attached picture as a walk sheet.
+
+The same person in all nine cells: same face, same hat, same clothes, same shoes, same painting style, same size. Whole body in every cell, from the hat to the shoes. Hands empty.
+
+One image. A grid of 3 columns and 3 rows of equal square cells. Flat solid magenta #FF00FF background. No text, no lines, no shadows. Nothing touches the edge of a cell.
+
+Top row: the person faces the camera.
+1. Standing still, feet together, arms down at the sides.
+2. Walking toward the camera, one foot forward, the opposite arm forward.
+3. Walking toward the camera, the other foot forward, the opposite arm forward.
+
+Middle row: the person has their back to the camera and walks straight away from it. The body is square to the camera, not turned. We see only the back of the hat, the back of the head, the back of the shirt, the back of the pants and the heels. No face. No side view.
+4. Standing still, feet together, arms down at the sides.
+5. Walking away, one foot forward, the opposite arm forward.
+6. Walking away, the other foot forward, the opposite arm forward.
+
+Bottom row: the person is seen from the side. The nose and the toes point to the left edge of the cell in all three cells.
+7. Standing still, feet together, arms down at the sides.
+8. Walking, the front foot reaches forward with the heel down, the back foot is behind with the heel up, the arms swing opposite to the legs.
+9. Walking, one foot is flat under the body, the other foot is lifted with the knee bent, the arms swing the other way.`;
 function build(art) {
   const out = [];
   for (const h of art.entries.filter(e => e.id.startsWith('npc-photo-'))) {
     const k = h.id.slice(10); if (SKIP.has(k)) continue;
     out.push({ status: 'draft', versions: [], rejects: [], id: 'npc-walk-' + k, tab: 'NPCs', title: h.title.split(':')[0] + ': walk sheet (hero attached)', ar: '1:1',
-      refs: [h.versions[h.versions.length - 1].file], prompt: PROMPT, group: h.group });
+      refs: [h.versions[h.versions.length - 1].file], prompt: k === 'gus' ? GUS_PROMPT : PROMPT, group: h.group });
   }
   return out;
 }
