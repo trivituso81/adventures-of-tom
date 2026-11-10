@@ -7112,7 +7112,17 @@
     "art/raw/characters/rose-walk-sheet-v1.png"
    ],
    "prompt": "Paint a walking sheet of Rose for a family role-playing game.\n\nPicture 1 is the finished painting of the character, Rose. Picture 2 is her current walking sheet. Copy both as exactly as possible in every frame: the same person, face, age, body, hair, clothes, shoes, colors, painting style, level of detail, head size compared to the body and figure size. Use picture 2 for the layout, the figure size and the way the walking steps are drawn.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at her sides, a calm easy look.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing the full hair and the back of the outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nShe walks easily, never in a hurry: small relaxed steps, arms swinging a little. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly.",
-   "group": "Rose"
+   "group": "Rose",
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/rose-walking-sheet-v1.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794272697644
+    }
+   ]
   },
   {
    "status": "approved",
