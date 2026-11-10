@@ -6,26 +6,7 @@
 // Skipped: pip, moss, dot (approved walks already installed) and boomie (own sheet, BOOMIE_OW).
 const fs = require('fs');
 const SKIP = new Set(['pip', 'moss', 'dot', 'boomie']);
-const PROMPT = `Draw the person in the attached picture as a walk sheet.
-
-Keep the person exactly as in the picture: the same face, the same head size compared to the body, the same hair, clothes and shoes, and the same painting style. Do not change proportions from frame to frame. Hands empty: leave out anything the person holds, keep anything worn.
-
-One image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, nothing touching a cell edge. No grid lines, numbers, text, shadows or other people.
-
-Row 1, facing the viewer:
-1. Standing still, feet together, arms at the sides.
-2. Walking toward the viewer, one foot forward, the opposite arm swung forward.
-3. Walking toward the viewer, the other foot forward, the opposite arm swung forward.
-
-Row 2, seen from behind, the back of the head and the back of the clothes, no face visible:
-4. Standing still, feet together, arms at the sides.
-5. Walking away from the viewer, one foot forward, the opposite arm swung forward.
-6. Walking away from the viewer, the other foot forward, the opposite arm swung forward.
-
-Row 3, side view, the whole body turned sideways to the viewer, facing the same way in all three cells:
-7. Standing still, feet together, arms at the sides.
-8. Mid-stride, front leg out with the heel down, back leg behind with the heel up, the arms swung opposite to the legs.
-9. Legs passing each other, the back foot lifted with the knee bent, the arms swung the other way.`;
+const { PROMPT } = require('./walk-prompt.js');   // Tom's one walk prompt (11-09 23:15)
 function build(art) {
   const out = [];
   for (const h of art.entries.filter(e => e.id.startsWith('npc-photo-'))) {
