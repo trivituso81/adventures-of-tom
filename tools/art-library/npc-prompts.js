@@ -102,41 +102,55 @@ BATCHES.forEach((b, bi) => {
 });
 
 const entries = [];
-// Photo to character (Tom 2026-11-08 23:11): every NPC has one prompt, the fixed Final Fantasy IX style template below (verbatim, Tom's words)
-// plus a DETAILS block with that person's look and personality. Never edit the template text; change only the details.
-const FF9_TEMPLATE = `PHOTO TO CHARACTER: FINAL FANTASY IX STYLE
-Attach: one photo of one person.
-
-Paint the person in the attached photo  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.
+// NPC hero prompts (Tom 2026-11-09 17:16): Tom's template below, word for word (the one that made the main heroes he is happy with),
+// one short line naming the attached reference, then one "character details" line. Every entry attaches the 7 human main heroes
+// (one lineup picture) as the style reference. Hair styles were read off the earlier approved NPC pictures so each person keeps their look. Fewer words = truer pictures.
+// The generator takes at most 5 reference pictures, so the 7 heroes are one lineup picture (tools/art-library/make_main_lineup.py), at real relative heights.
+const MAIN_REFS = ['art/raw/characters/main-heroes-lineup-v1.png'];
+const TEMPLATE = `Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.
 Finish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.
-Keep this person's hair, face shape, age, build, skin tone, and the same garments and colors.
 Proportions: about 4 heads tall, simplified expressive face.
 Pose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.
 Plain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.`;
-// Tom 2026-11-08 23:55: repeat "Final Fantasy IX" and "hand drawn" as many times as possible. The template above stays verbatim; this block only reinforces it.
-const FF9_REMINDER = c => `STYLE REMINDER: this is a hand drawn Final Fantasy IX character. Draw ${c.name} as hand drawn Final Fantasy IX concept art, not a photo, not a 3D render, not pixel art. Hand drawn Final Fantasy IX linework with dark contour lines. Hand drawn Final Fantasy IX chunky brushed shading. Hand drawn Final Fantasy IX proportions: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm. Every part of ${c.name}, the face, the hair, the clothes and the shoes, is hand drawn in the Final Fantasy IX style. Final Fantasy IX, hand drawn, full body, standing ready.`;
-function details(c) {
+const REFS_LINE = `The attached picture shows the 7 main characters of this game. Paint this new character in exactly their style, finish, proportions and head size, as if drawn by the same artist. Do not copy their faces, hair or clothes. Paint only the new character, alone.`;
+const HS = {
+  pip: 'short messy curls', moss: 'short and straight', dot: 'chin-length bob', gus: 'short fluffy wisps', bean: 'shoulder-length waves', reel: 'short and wispy',
+  pruitt: 'short, neatly side-swept', delgado: 'short, thick and messy', kowalski: 'shoulder-length waves', ike: 'short and thin', halverson: 'short and tousled with a side part',
+  bun: 'short curly bob', page: 'long and wavy', fern: 'chin-length wavy bob', kit: 'shoulder-length big curls', oolong: 'short curly bob', luna: 'long and wavy',
+  penny: 'short curly bob', nickel: 'short choppy bob', sal: 'short and wavy', sol: 'short and neat', skye: 'long and wavy', chet: 'short, swept up and a little messy',
+  wes: 'short and shaggy', boomie: 'big voluminous curls to the shoulders', bev: 'short and curly', priya: 'shoulder-length and straight', juniper: 'shoulder-length waves',
+  kenji: 'short and neat', sage: 'wavy bob to the jaw', marguerite: 'short curls pinned up', dolores: 'curly updo', dash: 'short and messy', washington: 'close-cropped',
+  marisol: 'long and wavy', larry: 'short and wavy', bernadette: 'big curly bob', odette: 'short curls', carmen: 'shoulder-length curls', ray: 'short, with a thin moustache and goatee',
+  toni: 'long and curly', kiki: 'chin-length choppy bob', dana: 'short bob', alvarez: 'short curly bob', beto: 'short and thin', tony: 'short and messy',
+  yesenia: 'shoulder-length messy waves', claudia: 'shoulder-length curls', kevin: 'short and spiky', daisy: 'chin-length messy bob', mateo: 'short and spiky',
+  sofi: 'wild and messy to the shoulders', jordan: 'short and neat', sam: 'shoulder-length waves', dakota: 'shoulder-length waves', ryan: 'short and tousled',
+};
+const PERS = {
+  pip: 'proud and playful', moss: 'curious and quiet', dot: 'thoughtful and precise', gus: 'easygoing and unhurried', bean: 'cheerful and never quite lost', reel: 'weathered and friendly',
+  pruitt: 'calm and seen-it-all', delgado: 'friendly and warm', kowalski: 'bright and organized', ike: 'proud and nostalgic', halverson: 'tired but wry',
+  bun: 'warm and welcoming', page: 'gentle and bookish', fern: 'patient and earthy', kit: 'unhurried and cheerful', oolong: 'gossipy and twinkly', luna: 'full of wonder',
+  penny: 'shrewd and friendly', nickel: 'confident and businesslike', sal: 'relaxed and chatty', sol: 'dry and knowing', skye: 'bright and camera-ready', chet: 'hopeful and a little dramatic',
+  wes: 'distracted and thoughtful', boomie: 'joyful and big-hearted', bev: 'excited and curious', priya: 'polite and a little wistful', juniper: 'sunny and dreamy',
+  kenji: 'proud and focused', sage: 'serene and calm', marguerite: 'sharp but kind', dolores: 'elegant and proud', dash: 'laid-back', washington: 'gentle and content',
+  marisol: 'amused and a little distracted', larry: 'cheerful and contented', bernadette: 'stern but fond', odette: 'warm and motherly', carmen: 'big-hearted and welcoming',
+  ray: 'firm but friendly', toni: 'generous and grinning', kiki: 'wide-eyed and frazzled', dana: 'nervous but hopeful', alvarez: 'no-nonsense but loving',
+  beto: 'mellow and amused', tony: 'wry, tired but hopeful', yesenia: 'alert and frazzled', claudia: 'sleepy and kind', kevin: 'comically resigned',
+  daisy: 'mischievous and serious about her film', mateo: 'loud and delighted', sofi: 'fierce and giggly', jordan: 'proud and handy', sam: 'quick and delighted',
+  dakota: 'fond and determined', ryan: 'exhausted but happy',
+};
+// Work clothes where the job has a look; everyone else gets plain clothes in their game colors.
+const CS = { kenji: 'a white chef jacket and chef hat', bun: 'a baker apron and a puffy baker hat', ray: 'a navy security guard uniform and cap', claudia: 'nurse scrubs',
+  toni: 'an apron over a white shirt', carmen: 'an apron over her clothes', marguerite: 'a measuring tape around the neck', kiki: 'a headset and radios on the belt', halverson: 'a teacher lanyard' };
+function details(c, k) {
   const p = { ...PAL[c.look], ...(c.over || {}) };
   const who = c.kind === 'child' ? (c.sex === 'f' ? 'girl' : 'boy') : (c.sex === 'f' ? 'woman' : 'man');
-  const hair = p.hair ? `${cw(p.hair, HAIR)} hair` : 'no hair visible';
-  const hat = p.hat ? `a hat or cap in ${cw(p.hat, CLOTH)}` : 'no hat';
-  const pants = p.pants === p.shirt ? 'matching trousers in the same color' : `trousers in ${cw(p.pants, CLOTH)}`;
-  const old = c.age >= 60 ? ' Older: a softer, more lined face and a slightly gentler posture.' : '';
-  // 2026-11-09: a long GROWN-UP paragraph here made adults too realistic (6 to 7 heads tall). Tom: fewer words give truer pictures. Keep this to a few words.
-  const grown = c.kind === 'adult' && c.age < 60 ? ' An adult, not a child.' : '';
-  const teen = c.kind === 'child' && c.age >= 12 ? ' A young teenager.' : '';
-  const glasses = c.glasses ? 'Round glasses.' : 'No glasses.';
-  return `HAND DRAWN FINAL FANTASY IX CHARACTER: ${c.name.toUpperCase()}, a ${c.age} year old ${who}, ${c.role}. Real height ${c.ft}.
-Hand drawn Final Fantasy IX appearance: skin ${cw(p.skin, SKIN)}. ${hair[0].toUpperCase() + hair.slice(1)}. Outfit: a top in ${cw(p.shirt, CLOTH)}, ${pants}, sturdy simple shoes; ${hat}. ${glasses}${old}${grown}${teen}
-Hand drawn Final Fantasy IX personality and expression: ${c.acc}.
-
-PORTRAIT USE: this full body picture is also cropped to make ${c.name}'s dialog portrait. Keep the head large and near the top of the picture, and keep the whole face, both eyes and the mouth fully visible, with no hand, finger, prop or hat brim covering or touching any part of the face.
-No words on the background.
-
-${FF9_REMINDER(c)}`;
+  const pants = p.pants === p.shirt ? 'matching trousers' : `${cw(p.pants, CLOTH)} trousers`;
+  const cloth = [`${cw(p.shirt, CLOTH)} top`, pants, p.hat && !/hat|cap/.test(CS[k] || '') ? `a ${cw(p.hat, CLOTH)} hat` : null, CS[k] || null, c.glasses ? 'round glasses' : null].filter(Boolean).join(', ');
+  return `character details: ${c.name}, ${c.age}, ${who}, ${c.ft} tall, ${cw(p.skin, SKIN)} skin, ${p.hair ? cw(p.hair, HAIR) : 'no visible'} hair, hair style ${HS[k]}, clothing ${cloth}, personality ${PERS[k]}, ${c.role}.`;
 }
 for (const k of Object.keys(N)) {
   const c = N[k], la = GROUPS.find(g => g.keys.includes(k)).la;
-  entries.push({ id: 'npc-photo-' + k, tab: 'NPCs', group: la ? 'Los Angeles people' : 'Long Island people', title: `${c.name}: hero picture, Final Fantasy IX style, ${c.ft} (also the source of the dialog portrait)`, ar: '2:3', refs: [], prompt: FF9_TEMPLATE + '\n\n' + details(c) });
+  if (!HS[k] || !PERS[k]) throw new Error('missing hair style or personality: ' + k);
+  entries.push({ id: 'npc-photo-' + k, tab: 'NPCs', group: la ? 'Los Angeles people' : 'Long Island people', title: `${c.name}: hero picture, Final Fantasy IX style, ${c.ft} (reference: the 7 main heroes lineup)`, ar: '2:3', refs: MAIN_REFS.slice(), prompt: TEMPLATE + '\n\n' + REFS_LINE + '\n\n' + details(c, k) });
 }
 module.exports = { entries, N, BATCHES, GROUPS, PAL, SKIN, HAIR, CLOTH, cw };
