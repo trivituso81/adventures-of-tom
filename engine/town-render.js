@@ -16,6 +16,14 @@ function walkPhase(a) {
   if(a.move!==a._stepMove) { a._stepMove=a.move; a.stepN=(a.stepN||0)+1; }
   return clamp(a.move.elapsed/a.move.duration,0,1);
 }
+// Which step of the 4-pose cycle to draw. The player and followers take about .16 s per tile, so one pose per tile looks right. NPCs take .8 to .9 s per tile,
+// which held one leg pose for nearly a second while they slid (Tom 11-10 15:29: the NPC walk looks weird next to the main characters). Slow walkers now change
+// pose about every .2 s inside the tile (npcgait1); fast ones (player, followers, Nara's .34) keep one pose per tile, exactly as before.
+const OW_POSE_SECONDS=.2;
+function walkStepIdx(a,ph) {
+  const d=a.move.duration,n=(d>.4&&!a.dog)?Math.max(2,Math.round(d/OW_POSE_SECONDS)):1;
+  return a.stepN*n+Math.min(n-1,Math.floor(ph*n));
+}
 // Playable characters (Tom or whoever Tom is playing, and the party followers) and Michael are drawn 15% bigger than the NPCs (Tom, 2026-11-01).
 // 2026-11-01 (Tom): inside the painted houses the main characters are 25% smaller than they were; on the streets 10% bigger.
 const OW_PLAYABLE_BOOST=1.15*1.10;           // outdoor maps
@@ -57,7 +65,7 @@ function drawSheetActor(a,set) {
   const p=position(a),k=actorK(p.y+1)*(set.k||1)*owBoost(a,set);   // set.k: a painted set drawn a little bigger (Deedee, to Tom's height)   // k: bigger inside painted rooms (engine/plate.js)
   const cx=Math.round((p.x+.5)*T)+Math.round(kissLean(a)*k),base=Math.round((p.y+1)*T-2)-Math.round((a.lift||0)*k);
   const frames=a.facing==='left'?set.left:(a.facing==='right'?set.side:set[a.facing]);
-  const ph=walkPhase(a),fi=ph>=0?(set===OW.tom?OW_WALK_CYCLE_TOM:OW_WALK_CYCLE)[a.stepN%4]:0;   // stride A, stand, stride B, stand: each pose lasts one tile (half the old speed), all frames kept; walking speed unchanged
+  const ph=walkPhase(a),fi=ph>=0?(set===OW.tom?OW_WALK_CYCLE_TOM:OW_WALK_CYCLE)[walkStepIdx(a,ph)%4]:0;   // stride A, stand, stride B, stand: each pose lasts one tile (half the old speed), all frames kept; walking speed unchanged
   const bp=a.scenePose&&typeof scenePoseDraw==='function'?scenePoseDraw(a,set,k):null;   // a battle pose borrowed for a cutscene (engine/story.js)
   const fr=bp?bp.rows:frames[fi],kd=bp?bp.k:k;
   const w=fr[0].length,h=fr.length,hk=h*kd,wk=w*kd;
@@ -510,7 +518,7 @@ function drawObject(o,time) {
 function drawNpc(a) {
   const p=position(a),c=a.palette;
   const cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2);
-  const ph=walkPhase(a),frame=ph>=0?OW_WALK_CYCLE_PIXEL[a.stepN%4]:0;   // same slow cycle for the pixel NPCs
+  const ph=walkPhase(a),frame=ph>=0?OW_WALK_CYCLE_PIXEL[walkStepIdx(a,ph)%4]:0;   // same slow cycle for the pixel NPCs
   const bob=a.move&&(frame===1||frame===3)?1:0;
   const head=base-30-bob;
   const skinS=shadeHex(c.skin,-18),shirtS=shadeHex(c.shirt,-24),pantsS=shadeHex(c.pants,-22),hairH=shadeHex(c.hair,22);
