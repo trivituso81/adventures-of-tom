@@ -8908,6 +8908,13 @@
      "date": "2026-11-10",
      "from": "v3",
      "at": 1794294146348
+    },
+    {
+     "n": 3,
+     "file": "art/raw/npcs/npc-photo-halverson-v4.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794336281796
     }
    ],
    "rejects": [],
