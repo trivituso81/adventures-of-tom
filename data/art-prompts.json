@@ -8619,6 +8619,13 @@
      "date": "2026-11-10",
      "from": "v5",
      "at": 1794293978502
+    },
+    {
+     "n": 6,
+     "file": "art/raw/npcs/npc-photo-bean-v7.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794336109170
     }
    ],
    "rejects": [],
