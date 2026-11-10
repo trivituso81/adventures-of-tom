@@ -7903,6 +7903,13 @@
      "date": "2026-11-10",
      "from": "v4",
      "at": 1794293791171
+    },
+    {
+     "n": 3,
+     "file": "art/raw/npcs/npc-photo-pip-v4.png",
+     "date": "2026-11-10",
+     "from": "v5",
+     "at": 1794293840880
     }
    ],
    "rejects": [],
