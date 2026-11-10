@@ -14,7 +14,7 @@ const PORTRAITS={tom:'portraits/tom.png?v=crop2',ellie:'portraits/ellie.png?v=he
 // Speaking monsters: zoomed face crops from each enemy's painted stance frame (tools/sprite-bake/bake_foe_portraits.py). Keys are foe_<id>.
 for(const id of ["mudling", "skeeter", "grump", "bigone", "coyote", "smoglet", "tickets", "bigshake", "soggysock", "tangle", "snag", "irongill", "ironbelly", "wetblanket", "thedraft", "pickyeater", "boommoth", "clapper", "cuecrab", "directorscut", "chairman", "cheekstuffer", "peanutgallery", "twigspy", "dodgeball", "glitterglue", "tardybell", "redpen", "cliffhanger", "knowitall", "popup", "unread", "coathanger", "soreloser", "wallflower", "mirrorball", "longline", "unclaimed", "armresthog", "lastcall", "gridlockprime", "finalcall", "standbysprite", "hush9final", "drillworm", "censor", "leviathan", "brainfreeze", "slushslug", "gremlin", "conehead"]) PORTRAITS['foe_'+id]='portraits/foes/'+id+'.webp?v=foeport1';
 // Townspeople: dialogue portraits cropped from each approved NPC hero (tools/sprite-bake/bake_npc_portraits.py). Keys are npc_<id>.
-for(const id of ["pip", "moss", "dot", "gus", "bean", "reel", "pruitt", "delgado", "kowalski", "ike", "halverson", "bun", "page", "fern", "kit", "oolong", "luna", "penny", "nickel", "sal", "sol"]) PORTRAITS['npc_'+id]='portraits/npc/'+id+'.webp?v=npcport2';
+for(const id of ["pip", "moss", "dot", "gus", "bean", "reel", "pruitt", "delgado", "kowalski", "ike", "halverson", "bun", "page", "fern", "kit", "oolong", "luna", "penny", "nickel", "sal", "sol"]) PORTRAITS['npc_'+id]='portraits/npc/'+id+'.webp?v=npcport3';
 let playTime=0;
 // Gear (F6): the six battle stats. Tools add POW and WARMTH, Outfits HP, GRIT and COOL, Keepsake Charms have perks.
 const GEAR_KEYS=STAT_NAMES;

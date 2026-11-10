@@ -3,9 +3,8 @@
 
 Tom 2026-11-09: each NPC's hero picture is also the source of that NPC's dialogue portrait.
 Tom 2026-11-10: "Zoom and crop and center every npc portrait so they match Tom's current zoom and crop" (the cast portraits, bake_portraits.py,
-data/portrait-crops.json). So NPCs use the same face-based method as the cast: every face is measured on its hero (both pupils, eye line, chin, by eye on a
-grid), face size = mean of eye-to-chin over 150 px and pupil spacing over 112 px, the square is SIDE x that, centred on the pupils, with the eye line EYE_AT down
-the square. SIDE and EYE_AT are the averages of Tom's seven saved cast crops. Hair and hat volume do not change the zoom (big hats are cropped).
+data/portrait-crops.json). So NPCs use the same face-based method as the cast: every face is measured on its hero (both pupils and the eye line), the square is sized so pupil spacing is PUPIL_SHARE of it (Tom's saved cast crops all sit at .245 to .286), centred on the pupils, with the eye line EYE_AT down
+the square. Both numbers were measured on the baked cast portraits with the same iris search used for FACE. Hair and hat volume do not change the zoom (big hats are cropped).
 Hero = 1024 x 1536 painted on cream paper. Output: portraits/npc/<id>.webp, 256 x 256, on the same cream as the cast portraits.
 Wired by PORTRAITS keys npc_<id> in engine/menu.js and the speaker names in DIALOG_PORTRAIT_IDS (engine/overworld.js).
     python3 -I tools/sprite-bake/bake_npc_portraits.py [ids]      CHECK=/tmp/p.png for a contact sheet
@@ -16,31 +15,31 @@ from PIL import Image
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 OUT = os.path.join(ROOT, 'portraits', 'npc')
 SIZE = 256
-SIDE = 448       # square side in hero pixels for an average face (mean over Tom's saved cast crops)
-EYE_AT = 0.56    # eye line, share of the square from the top (same mean)
-# id: (left pupil x, right pupil x, eye line y, chin y) in hero pixels (chin = bottom of beard).
+PUPIL_SHARE = 0.30   # pupil spacing as a share of the square, measured on the baked cast portraits (Tom .304, Grace .288, Amy .299, Deedee .302, Boppy .295, TNB .266)
+EYE_AT = 0.54    # eye line, share of the square from the top (same measurement: .51 to .56)
+# id: (left pupil x, right pupil x, eye line y) in hero pixels. Found by eye on a grid, then snapped to the iris with a dark-blob search (same search as on the cast).
 FACE = {
-    'pip': (454, 556, 283, 387),
-    'moss': (437, 568, 276, 386),
-    'dot': (464, 564, 277, 381),
-    'gus': (444, 564, 270, 393),
-    'bean': (462, 570, 214, 366),
-    'reel': (440, 542, 269, 415),
-    'pruitt': (454, 563, 243, 365),
-    'delgado': (452, 562, 233, 353),
-    'kowalski': (437, 554, 270, 373),
-    'ike': (480, 592, 231, 362),
-    'halverson': (440, 566, 227, 387),
-    'bun': (458, 553, 295, 407),
-    'page': (470, 572, 241, 360),
-    'fern': (495, 574, 306, 421),
-    'kit': (456, 557, 286, 374),
-    'oolong': (463, 600, 281, 425),
-    'luna': (450, 541, 285, 389),
-    'penny': (491, 608, 244, 381),
-    'nickel': (467, 571, 226, 344),
-    'sal': (455, 555, 240, 392),
-    'sol': (481, 589, 278, 380),
+    'pip': (450, 559, 271),
+    'moss': (449, 565, 260),
+    'dot': (446, 560, 264),
+    'gus': (438, 556, 261),
+    'bean': (456, 567, 203),
+    'reel': (443, 549, 259),
+    'pruitt': (456, 570, 235),
+    'delgado': (460, 566, 219),
+    'kowalski': (448, 556, 258),
+    'ike': (481, 594, 226),
+    'halverson': (448, 577, 237),
+    'bun': (460, 552, 307),
+    'page': (478, 582, 231),
+    'fern': (486, 576, 291),
+    'kit': (473, 566, 269),
+    'oolong': (462, 598, 270),
+    'luna': (443, 546, 275),
+    'penny': (494, 602, 236),
+    'nickel': (458, 567, 225),
+    'sal': (455, 566, 233),
+    'sol': (480, 593, 261),
 }
 
 def hero_file(i):
@@ -52,9 +51,8 @@ def hero_file(i):
 def portrait(i):
     im = Image.open(hero_file(i)).convert('RGB'); a = np.array(im).astype(int)
     paper = np.median(np.concatenate([a[:30, :].reshape(-1, 3), a[:300, :25].reshape(-1, 3), a[:300, -25:].reshape(-1, 3)]), axis=0)
-    lx, rx, ey, chin = FACE[i]
-    m = ((chin - ey) / 150 + (rx - lx) / 112) / 2
-    side = SIDE * m
+    lx, rx, ey = FACE[i]
+    side = (rx - lx) / PUPIL_SHARE
     cx = (lx + rx) / 2
     box = (round(cx - side / 2), round(ey - side * EYE_AT), round(cx + side / 2), round(ey - side * EYE_AT + side))
     bg = tuple(int(v) for v in paper)
