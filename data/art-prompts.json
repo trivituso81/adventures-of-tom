@@ -17227,7 +17227,7 @@
    "group": "Long Island people"
   },
   {
-   "status": "rejected",
+   "status": "approved",
    "versions": [
     {
      "n": 0,
@@ -17235,6 +17235,13 @@
      "date": "2026-11-09",
      "from": "v1",
      "at": 1794254213948
+    },
+    {
+     "n": 1,
+     "file": "art/raw/npcs/npc-walk-bean-v2.png",
+     "date": "2026-11-10",
+     "from": "v3",
+     "at": 1794337143616
     }
    ],
    "rejects": [
