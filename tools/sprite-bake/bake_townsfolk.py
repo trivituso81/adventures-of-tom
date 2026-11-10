@@ -22,13 +22,13 @@ ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 KW = 3
 # standing height in rows (Tom is 43); matches the old sprites so nobody changes size in the town
-CAST = {'pip': 38, 'moss': 48, 'dot': 41, 'gus': 40, 'bean': 46, 'reel': 40, 'pruitt': 43,
-        'page': 43, 'bun': 41, 'halverson': 43, 'ike': 42, 'delgado': 44, 'kowalski': 41,
-        'sal': 44, 'kit': 45, 'luna': 38, 'penny': 38, 'oolong': 37, 'fern': 41,
+CAST = {'pip': 38, 'moss': 48, 'dot': 41, 'gus': 40, 'bean': 39, 'reel': 42, 'pruitt': 42,
+        'page': 40, 'bun': 39, 'halverson': 42, 'ike': 39, 'delgado': 41, 'kowalski': 39,
+        'sal': 41, 'kit': 41, 'luna': 39, 'penny': 39, 'oolong': 38, 'fern': 39,
         'washington': 44, 'bev': 38, 'boomie': 42, 'wes': 42, 'chet': 44, 'skye': 38,
         'toni': 39, 'ray': 44, 'larry': 44, 'marisol': 38,
         'sage': 38, 'kenji': 44, 'juniper': 38, 'bernadette': 42, 'dana': 41, 'kiki': 40,
-        'beto': 42, 'sol': 40, 'dash': 40, 'dolores': 38, 'marguerite': 38, 'nickel': 38,
+        'beto': 42, 'sol': 41, 'dash': 40, 'dolores': 38, 'marguerite': 38, 'nickel': 40,
         'mateo': 36, 'daisy': 38, 'kevin': 40, 'claudia': 38, 'yesenia': 38, 'tony': 38,
         'ryan': 42, 'dakota': 37, 'sam': 38, 'jordan': 43, 'carmen': 38, 'odette': 36, 'priya': 39, 'sofi': 36,
         'marlowe': 43, 'hush9': 40, 'pistachio': 40, 'vance': 42}
@@ -43,7 +43,7 @@ def purge_bg(img):
     return Image.fromarray(a, 'RGBA')
 
 SIDE_SWAP = {'gus'}   # the generator draws both side steps with the same leg forward: build step2 from step1 with the legs swapped
-LIBRARY_WALK = {'gus': 'art/raw/npcs/npc-walk-gus-v3.png'}   # id -> approved Art Library walk sheet (the newest version of the entry)
+LIBRARY_WALK = {'gus': 'art/raw/npcs/npc-walk-gus-v5.png', 'bean': 'art/raw/npcs/npc-walk-bean-v2.png', 'reel': 'art/raw/npcs/npc-walk-reel-v1.png', 'pruitt': 'art/raw/npcs/npc-walk-pruitt-v2.png', 'delgado': 'art/raw/npcs/npc-walk-delgado-v2.png', 'kowalski': 'art/raw/npcs/npc-walk-kowalski-v2.png', 'ike': 'art/raw/npcs/npc-walk-ike-v2.png', 'halverson': 'art/raw/npcs/npc-walk-halverson-v1.png', 'bun': 'art/raw/npcs/npc-walk-bun-v1.png', 'page': 'art/raw/npcs/npc-walk-page-v1.png', 'fern': 'art/raw/npcs/npc-walk-fern-v1.png', 'kit': 'art/raw/npcs/npc-walk-kit-v1.png', 'oolong': 'art/raw/npcs/npc-walk-oolong-v1.png', 'luna': 'art/raw/npcs/npc-walk-luna-v1.png', 'penny': 'art/raw/npcs/npc-walk-penny-v1.png', 'nickel': 'art/raw/npcs/npc-walk-nickel-v1.png', 'sal': 'art/raw/npcs/npc-walk-sal-v1.png', 'sol': 'art/raw/npcs/npc-walk-sol-v1.png'}   # id -> approved Art Library walk sheet (the newest version of the entry)
 ap = argparse.ArgumentParser()
 ap.add_argument('--only', default=None)
 ap.add_argument('--colors', type=int, default=46)
