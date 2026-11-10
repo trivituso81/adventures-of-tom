@@ -34,9 +34,10 @@ const OW_HOUSE_PARTY=1.6;
 const OW_STREET_PARTY=1.296;
 // 2026-11-05 (Tom: "using Tom as a baseline given each character's height, increase the other characters"): the named cast gets the same street and
 // house size as Tom, so each is drawn at real height next to him (each set's k in data/recruit-sprites.js and the *-hires-use.js files holds the height).
+// 2026-11-10 (Tom: the NPCs "still look small"): the painted townsfolk (set.town, data/townsfolk-hires-use.js) get the same size; their sheets are baked at real height like the cast's.
 const OW_CAST_SIZED=['tom','grace','rose','tomRide','tnb','amy','deedee','boppy','justin','jojo','olivia','michael','ellie','nara'];
 function owCastSet(set) { return OW_CAST_SIZED.some(id=>OW[id]===set); }
-function owHouseParty(set) { return set&&owCastSet(set)?(currentMap&&!currentMap.outside&&owInHouse()?OW_HOUSE_PARTY:OW_STREET_PARTY):1; }
+function owHouseParty(set) { return set&&(owCastSet(set)||set.town)?(currentMap&&!currentMap.outside&&owInHouse()?OW_HOUSE_PARTY:OW_STREET_PARTY):1; }
 function owBoost(a,set) {
   const b=owBoostBase(a); return set?b*owHouseParty(set):b;
 }

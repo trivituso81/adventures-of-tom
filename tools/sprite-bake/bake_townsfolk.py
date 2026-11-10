@@ -191,7 +191,7 @@ def fmt_rows(rows, indent='    '):
 # (KID_HEAD_ROWS = her grown head, 11.47 rows) and the whole figure scaled from Grace (4'2 = 40.6 rows, Rose 3'4 = 36.6, so 0.4 rows per inch).
 # CHIN = chin line of the painted front stand frame as a share of that frame's height (read by eye with a ruler on each approved sheet, 11-10).
 TOM_HEAD_ROWS = 104 * 42 / 391.0
-KID_HEAD_ROWS = 11.47
+KID_HEAD_ROWS = 9.2
 CHIN = {'pip': .23, 'moss': .25, 'dot': .22, 'gus': .26, 'bean': .225, 'reel': .28, 'pruitt': .25, 'delgado': .27, 'kowalski': .21, 'ike': .255,
         'halverson': .26, 'bun': .27, 'page': .25, 'fern': .235, 'kit': .245, 'oolong': .25, 'luna': .275, 'penny': .21, 'nickel': .22, 'sal': .265, 'sol': .25}
 KIDS = {'pip', 'moss', 'dot'}
@@ -200,7 +200,7 @@ def real_inches(cid):
     return int(m.group(1)) * 12 + int(m.group(2))
 def target_rows(cid):
     inch = real_inches(cid)
-    return 40.6 + 0.4 * (inch - 50) if cid in KIDS else 42.0 * inch / 71.0
+    return 32.6 * inch / 50.0 if cid in KIDS else 42.0 * inch / 71.0
 
 walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
 out = {}

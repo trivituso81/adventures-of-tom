@@ -15,6 +15,7 @@ var TOWN_PAINTED={};
       const rows=D[d+'_'+n]; return paintRows(flip?rows.map(r=>r.split('').reverse().join('')):rows.slice(),at,d+'_'+n,flip); });
     const set={pal:D.pal,down:mk('down'),up:mk('up'),side:mk('left',true)};
     set.left=set.side.map(mirrorRows);
+    set.town=true;   // drawn at the cast's street and house size (owHouseParty, engine/town-render.js)
     return set;
   };
   OW.reel=make('reel');
