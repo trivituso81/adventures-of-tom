@@ -1,3 +1,6 @@
+## 2026-11-10 (npcfix3): two prompt text fixes in NPC heroes (Art Library prompts only; no tag)
+- `npc-photo-ike` carried an old hand-edited reference line ("the 7 main characters"); set to the same line as every other NPC (module and json now match for all 58 NPC heroes). `npc-photo-sol` ended "Co.." (double period); role now says "Angel City Cab Company".
+
 ## 2026-11-10 (npchero2): hero entries for Julian Vance and Monochrome Marlowe (Art Library only; no tag)
 - Tom (09:10): "all NPC need hero". Fact: all 56 townspeople already had `npc-photo-<id>` hero entries (Pip, Moss and Dot included). Checked every palette key the game loads against the Library: the only people who appear in scenes and had none are Vance (look `longcoat`) and Marlowe. HUSH-9 is a monster (enemy sheet), Rudy, Pearl and Lupe have palettes but are never placed in the game, so none of those four got one.
 - Added `npc-photo-vance` (58, 6'1", long dark coat, brimmed hat he never takes off, canon) and `npc-photo-marlowe` (45, 5'10", all grey, clipboard NOTES: LESS) as drafts in group Los Angeles people, same template and 5 hero references as the other NPCs. Ages and heights are assumed (flagged in the batch note), colors from the game palettes. Vance's hat is a story hat, not one of the 3 personality hats. 727 to 729 entries, validate.js OK, json diff has additions only.
