@@ -17437,8 +17437,16 @@
    "group": "Long Island people"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/npcs/npc-walk-page-v1.png",
+     "date": "2026-11-10",
+     "from": "v2",
+     "at": 1794337017334
+    }
+   ],
    "rejects": [],
    "id": "npc-walk-page",
    "tab": "NPCs",
