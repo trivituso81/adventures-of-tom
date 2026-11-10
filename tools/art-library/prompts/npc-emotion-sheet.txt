@@ -1,0 +1,36 @@
+Draw the character in the attached picture as an emotion sheet: the same person showing eight different feelings.
+
+THE REFERENCE WINS
+The attached picture is the character. It is the only source for how they look and how they are painted. Every figure must look like it was cut from that same painting: the same face, age, body, hair, hat, glasses, clothes, shoes and colors, the same head size compared to the body, and the same painting technique. Only the pose and the facial expression change.
+
+HEAD AND BODY PROPORTION (check it first)
+- Measure the attached picture: count how many head heights (top of the hair or hat to the bottom of the chin) fit into the full figure, from the top of the head to the soles of the shoes. Every figure on this sheet must have exactly the same count as the picture.
+- Do not enlarge the head to make the face easier to read, and do not shorten the body or legs. A laughing, shocked or frowning face stays inside the same head size.
+- Keep the same shoulder width, arm length, leg length, hand size and shoe size as the picture.
+- When a pose leans or bends, the head stays the same size. Only the body moves.
+
+PAINTING TECHNIQUE (match the picture's surface)
+- Copy how the picture is painted: the same kind of line work around the shapes, the same shading and hatching, the same texture and paper grain, the same level of detail.
+- Do not make it smoother, glossier, cleaner or more digital than the picture. Not a 3D render, not flat cartoon fill, not pixel art, not anime.
+- Warm daylight from the upper left, as in the picture.
+
+COLORS
+- Copy every color from the picture exactly: skin, hair, eyes, each piece of clothing, prints, logos and shoes. Same hue, same brightness, same saturation. Do not warm, brighten or saturate anything.
+- The background of the picture is not part of the character. Here the background is magenta, but the magenta is only a backdrop for cutting out: it must not tint, glow on or reflect onto the character.
+
+THE SHEET
+One image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One full-body figure per cell, from the top of the hair or hat to the soles of the shoes, standing, facing the viewer in the same slight three-quarter view as the picture. The same figure height in every cell, feet on the same ground line, each figure well inside its cell with clear magenta on all four sides. Empty hands: if the picture holds an object, leave the object out and keep the hands free. Keep hats, glasses and clothes exactly as in the picture. No shadow on the ground. No grid lines, numbers, text, symbols, tears, sweat drops, hearts or effects. Each feeling must read from the whole body and from the face, clear enough to read at a small size.
+
+Row 1:
+1. Happy. Up on the toes, knees loose, a little bounce. Both hands clasped at chest height. Eyes crinkled, cheeks raised, a big open-mouth smile.
+2. Loving. Feet together, head tilted to one side. Both hands pressed flat over the heart. Soft half-closed eyes, a warm closed-mouth smile.
+3. Sad. Slumped, shoulders dropped, head lowered, feet together with the toes turned in. Hands holding each other in front of the waist. Eyebrows pulled up in the middle, the corners of the mouth turned down.
+4. Angry. Feet planted wide, leaning forward, arms crossed tight over the chest. Chin down, eyebrows pulled down hard, eyes narrowed, a tight frown.
+
+Row 2:
+5. Scared. Knees bent, leaning back, shoulders hunched up. Both fists held up under the chin. Eyes wide open, eyebrows raised and pulled together, mouth open and stretched wide.
+6. Surprised. One foot stepped back, upper body pulled back. Both hands open beside the face, palms forward. Eyebrows raised high, eyes wide and round, mouth open in a tall O.
+7. Proud. Feet apart, chest out, shoulders back, chin raised. Both fists on the hips. A confident closed-mouth one-sided smile.
+8. Unimpressed. Weight on one leg, the other knee relaxed. One hand on the hip, the other arm hanging loose. Head tilted, eyelids half lowered, one eyebrow raised, mouth a flat line pulled to one side.
+
+Before finishing, compare every figure with the picture: the head count, the colors, the line work and the surface texture. Redraw any figure whose head is larger, whose colors are brighter or warmer, or whose surface is smoother than the picture.
