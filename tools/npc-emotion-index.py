@@ -9,8 +9,8 @@ rows = list(csv.DictReader(open(os.path.join(ROOT, 'docs/npc-emotion-lines.tsv')
 by = collections.OrderedDict()
 for r in rows: by.setdefault(r['character'], []).append(r)
 tot = collections.Counter(r['mood'] for r in rows)
-o = ["# NPC emotion index: chapters 1 to 15 (npcemo1 chapters 1 to 5, npcemo2 chapters 6 to 10, npcemo3 chapters 11 to 15)", "",
- "Fact: every line a person (not a monster) says in chapters 1 to 15 outside the cast story scenes, tagged with one of the 8 emotion-sheet moods. Behind the scenes only: the game does not load it. It is the list a later change uses to show an emotion pose frame per line.", "",
+o = ["# NPC emotion index: chapters 1 to 20 (npcemo1 to npcemo4)", "",
+ "Fact: every line a person (not a monster) says in chapters 1 to 20 outside the cast story scenes, tagged with one of the 8 emotion-sheet moods. Behind the scenes only: the game does not load it. It is the list a later change uses to show an emotion pose frame per line.", "",
  "- Source of truth: `docs/npc-emotion-lines.tsv` (columns: chapters, file, line, character, where, mood, text). Correct a tag by changing the one mood word there. This page is rebuilt from it with `python3 tools/npc-emotion-index.py`.",
  "- Check: `python3 tools/npc-emotion-check.py` (mood valid, exact text still in its file, one mood per speaker and text). `--fix` refreshes line numbers after code moves.",
  "- Covered: map NPC talk (townsfolk and family: first visit, revisit, hug and chapter variants), townsfolk lines inside story scenes, recruit and follower chatter, Penny and Nickel shop lines (greetings, buy and sell lines, shelf lines; not the gear captions), the cab drivers Sal and Sol.",

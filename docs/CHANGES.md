@@ -1,3 +1,8 @@
+## 2026-11-10 (npcemo4): NPC emotion tags for chapters 16 to 20 (docs only; game unchanged; no tag)
+- Tom: "next 16-20". Added 62 rows to `docs/npc-emotion-lines.tsv` (total 739): Marlowe (ch16), Vance (ch16 to 20, speaker name "Vance"), Sal and Sol (ch16 to 20), Michael and Mrs. Alvarez (ch19 feast). Olivia's ch19 line was already in the cast list.
+- Left out on purpose: The Archivist (ch17 boss), the Oblivion Censor, Forever Engine, Stillness Core, Floor 59 and 60 and the Dead-Letter Office voices (monsters and talking objects, no emotion sheets). Chapters 17 to 20 maps have no map NPCs.
+- Tags now run chapters 1 to 20 for people outside the cast. Check OK; index page rebuilt.
+
 ## 2026-11-10 (npcemo3): NPC emotion tags for chapters 11 to 15 (docs only; game unchanged; no tag)
 - Tom: "continue with chapters 11-15". Added 82 rows to `docs/npc-emotion-lines.tsv` (total 677): Julian Vance and the long coat (ch11), Marlowe, Dona Carmen, Mrs. Alvarez, Daisy, Don Beto, Tony, Larry and Mr. Washington (ch12), Sol, Sal, Nickel and Penny (ch13). Chapters 14 and 15 have no person outside the cast in their scenes (only cast and the boss HUSH-9), and Part 2 maps have no map NPCs, so they add nothing. Cast lines for all chapters are already in `docs/emotion-index-lines.tsv`.
 - Left out on purpose: monsters and objects that speak (Gridlock Prime, HUSH-9, Drill Worm, FINAL CALL, Lost and Found, Standby Sprite) and the terminal announcer "Speaker". Check `python3 tools/npc-emotion-check.py` OK; index page rebuilt with `python3 tools/npc-emotion-index.py`.

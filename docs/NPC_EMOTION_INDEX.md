@@ -1,6 +1,6 @@
-# NPC emotion index: chapters 1 to 15 (npcemo1 chapters 1 to 5, npcemo2 chapters 6 to 10, npcemo3 chapters 11 to 15)
+# NPC emotion index: chapters 1 to 20 (npcemo1 to npcemo4)
 
-Fact: every line a person (not a monster) says in chapters 1 to 15 outside the cast story scenes, tagged with one of the 8 emotion-sheet moods. Behind the scenes only: the game does not load it. It is the list a later change uses to show an emotion pose frame per line.
+Fact: every line a person (not a monster) says in chapters 1 to 20 outside the cast story scenes, tagged with one of the 8 emotion-sheet moods. Behind the scenes only: the game does not load it. It is the list a later change uses to show an emotion pose frame per line.
 
 - Source of truth: `docs/npc-emotion-lines.tsv` (columns: chapters, file, line, character, where, mood, text). Correct a tag by changing the one mood word there. This page is rebuilt from it with `python3 tools/npc-emotion-index.py`.
 - Check: `python3 tools/npc-emotion-check.py` (mood valid, exact text still in its file, one mood per speaker and text). `--fix` refreshes line numbers after code moves.
@@ -13,15 +13,15 @@ Fact: every line a person (not a monster) says in chapters 1 to 15 outside the c
 
 | Mood | Lines |
 |---|---|
-| Happy | 177 |
-| Loving | 78 |
-| Sad | 40 |
-| Angry | 24 |
-| Scared | 35 |
-| Surprised | 49 |
-| Proud | 157 |
-| Unimpressed | 117 |
-| **All** | 677 |
+| Happy | 183 |
+| Loving | 83 |
+| Sad | 59 |
+| Angry | 26 |
+| Scared | 38 |
+| Surprised | 51 |
+| Proud | 171 |
+| Unimpressed | 128 |
+| **All** | 739 |
 
 ## Lines by character
 
@@ -226,7 +226,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 15 outside the c
 | 9 | scene ch9Luna | Sad | And my telescope can't find the moon. It's not behind a cloud. It's not anywhere. It's just GONE. |
 | 9 | scene ch9Luna | Surprised | ...It wasn't a closet. |
 
-### Sal (40)
+### Sal (44)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -270,6 +270,10 @@ Fact: every line a person (not a monster) says in chapters 1 to 15 outside the c
 | 13 | scene ch13After | Proud | Tommy. Sol and I started this tunnel in 2011 with a shovel and a very good deal on a drill. I never thought anyone would walk through it. |
 | 13 | scene ch13After | Proud | I’m a cab driver. That’s the whole job. |
 | 13 | scene ch13After | Proud | Okay. The Sub-Rail runs the rest of the way, up under Grump Hollow. It comes out at the breach. Sol’s putting the girls on the five fifteen handcar. |
+| 16 | scene ch16After | Scared | TOMMY! The glass is coming down! I have the girls in the cab! GET IN! |
+| 19 | scene ch19Feast | Happy | Cab seven! Everybody in. Bring the lasagna on your lap, it holds the heat. Fifty-nine floors, no stops, I am not even charging. I am scared of that tower and I am going anyway. |
+| 20 | scene ch20Epi1 | Happy | Cab seven! Everybody in! I am not charging. I am not even driving. Look UP. |
+| 20 | scene ch20Epi1 | Proud | You are the first passenger. Get in the train. |
 
 ### Justin (16)
 
@@ -485,7 +489,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 15 outside the c
 | 1-10 | recruit chatter | Surprised | Michael? Michael, can you hear me from here? No? Okay. |
 | 1-10 | recruit chatter | Unimpressed | It is sixty-two degrees. I am wearing a dress. Nobody warned me. |
 
-### Michael (16)
+### Michael (17)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -505,6 +509,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 15 outside the c
 | 6 | scene ch6Nara | Surprised | I found my car keys in the gutter. With three peanuts. Arranged in a triangle. |
 | 6 | scene ch6End | Loving | Lachlan wants Nara to have this. He painted a tennis ball gold. It took him four days and most of a bottle of paint. |
 | 8 | scene ch8End | Happy | Lachlan has eaten three rolls and fallen asleep in the bread basket. I'm leaving him there. He's happy. |
+| 19 | scene ch19Feast | Happy | I brought a rock. Lachlan picked it out. Isla ate a different rock. We are keeping a close eye on it. |
 
 ### Mr. Washington (28)
 
@@ -696,7 +701,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 15 outside the c
 | 2-10 | map boards, base | Proud | TNB? Longboard guy? He bombed Fargo Street once. No brakes. Legend. |
 | 2-10 | map boards, base | Happy | If you see him, tell him the wheels he ordered came in. The green ones. |
 
-### Sol (23)
+### Sol (26)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -723,8 +728,11 @@ Fact: every line a person (not a monster) says in chapters 1 to 15 outside the c
 | 13 | scene ch13Open | Proud | I need dispatchers. Two of them. Radio only. Somebody has to read me the tunnel. |
 | 13 | scene ch13Open | Proud | Thirty years. Never lost a passenger. Found two in the trunk. Both were fine. |
 | 13 | scene ch13Open | Unimpressed | Out the door, the Metro stairs on the boulevard. Past the turnstile, there’s a door that says EMPLOYEES ONLY. That’s you. You’re employees now. |
+| 17 | scene ch17Open | Scared | Downtown. The tallest thing on the boulevard that wasn’t there on Monday. Sixty floors of glass, and every clock in it says 4:59. |
+| 17 | scene ch17Open | Proud | I’ll keep the meter off and the engine on. Go get your folks, Tommy. |
+| 20 | scene ch20Epi1 | Surprised | A SKYWAY TRAIN?! I do not know what to do with my hands! I am a cab driver! |
 
-### Mrs. Alvarez (6)
+### Mrs. Alvarez (7)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -734,6 +742,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 15 outside the c
 | 12 | scene ch12Alvarez | Surprised | ...NO. I said no. Why is everyone in my kitchen? Is that a mother running laps with two little girls? |
 | 12 | scene ch12Alvarez | Proud | ...Okay. That one can stay. |
 | 12 | scene ch12Alvarez | Loving | Take lemons. Take ALL the lemons. Every yard in this city has too many and somebody always leaves them on my step. |
+| 19 | scene ch19Feast | Loving | I heard there was a situation. I brought lemon bars. And peppers. My nephew grows them. They are very hot. A man called Boppy would know what to do. |
 
 ### Don Beto (3)
 
@@ -1022,7 +1031,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 15 outside the c
 | 11 | scene ch11Vance | Angry | He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once. |
 | 11 | scene ch11Vance | Angry | FINAL CALL. |
 
-### Marlowe (15)
+### Marlowe (26)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -1041,3 +1050,61 @@ Fact: every line a person (not a monster) says in chapters 1 to 15 outside the c
 | 12 | scene ch12After | Happy | I’ll be Downtown, at the Movie Palace. Come by. I’ll have notes for the rest of the family. |
 | 12 | scene ch12After | Proud | Long Island is under glass, you know. A very safe house. Your mother is in the kitchen. She’s making a crisp. She’s been making it for hours. |
 | 12 | scene ch12After | Unimpressed | Notes are due at five. |
+| 16 | scene ch16Open | Happy | Wonderful. Everybody came. I love a turnout. |
+| 16 | scene ch16Open | Proud | Marlowe. Monochrome Marlowe. We met in Jefferson Park. I took the pink out of your neighbor’s window. I’d say sorry, but honestly I think it looks better. |
+| 16 | scene ch16Open | Unimpressed | Mr. Vance is in a meeting. He sends his regards, and a camera. |
+| 16 | scene ch16Open | Proud | That’s what cameras do. Little ones in front, please. Tall ones in back. Everybody tight. Mr. Vance likes everybody tight. |
+| 16 | scene ch16Open | Proud | Mr. Vance keeps the happy ones. A good family at the right moment, just so. Nothing ever changes again. Nobody leaves. It’s a gift. |
+| 16 | scene ch16Open | Unimpressed | Everybody stays in a photograph. That’s what a photograph is. |
+| 16 | scene ch16Open | Scared | Mr. Vance. They are... they are children. I only moved the colors around. That’s all I ever did. I never wrote anything like that. |
+| 16 | scene ch16Open | Sad | Less. Less. Less. That is all I ever wanted. Less. |
+| 16 | scene ch16Fight | Angry | Less. Round two. |
+| 16 | scene ch16After | Sad | I wanted it quieter. I only ever wanted it quieter. |
+| 16 | scene ch16After | Sad | I didn’t want it like this. |
+
+### Vance (42)
+
+| Ch | Where | Emotion | Line |
+|---|---|---|---|
+| 16 | scene ch16Open | Proud | Hello, Tom. Thank you for flying nowhere. I have waited a very long time for a picture where nobody leaves. |
+| 16 | scene ch16Open | Unimpressed | Hello, Robert. You broke our contract. That’s all right. I am a forgiving man. Everybody, please look here. |
+| 16 | scene ch16Open | Unimpressed | Not Tom. Not the grown ones. The little ones. The ones with all their years still in them. Those are the ones I want to keep. |
+| 16 | scene ch16Open | Proud | There. That is a family photograph. Thank you, Tom. You may keep the frame. |
+| 16 | scene ch16Open | Unimpressed | Marlowe. Collect the children. |
+| 16 | scene ch16Open | Unimpressed | Then I shall help with your notes. |
+| 16 | scene ch16After | Proud | Thank you for the photograph. It is perfect. I would like to keep it. |
+| 16 | scene ch16After | Unimpressed | Nobody leaves, Tom. That is what a photograph is for. If you want them, you know the building. Downtown. Sixty floors. Do come up. I will leave the light on. |
+| 17 | scene ch17After | Proud | Thank you for the tour, Tom. Thank you for the Archive. It was very nearly complete. |
+| 17 | scene ch17After | Loving | Floor sixty is for family. Come up when you are ready. I have kept your parents very warm. |
+| 18 | scene ch18Pinnacle | Happy | Tom. Thank you for coming. Everyone, please, come in. Mind the threads. They are all somebody’s afternoon. |
+| 18 | scene ch18Pinnacle | Proud | Warm. Downstairs, on a plinth, under glass. Exactly as you left them. I want you to understand I have taken very good care of them. |
+| 18 | scene ch18Pinnacle | Sad | They are safe. There is a difference. I had to have it explained to me, too. |
+| 18 | scene ch18Pinnacle | Sad | I am the man who kept them. Gold remembers being warm. I only wanted it to keep remembering. |
+| 18 | scene ch18Pinnacle | Unimpressed | Nothing is the same twice, Mr. TNB. You mend a cup, and it is a mended cup. I would like every cup to stay unbroken. |
+| 18 | scene ch18Pinnacle | Proud | Tom. You know why I wanted you. Two places that kept moving, and one man flying between them. You are not a traveler. You are the thread. If you stop, they stop. If you stay, they stay. |
+| 18 | scene ch18Pinnacle | Unimpressed | I will not hurt you. I will not hurt anyone. I will only finish the afternoon. |
+| 18 | scene ch18Pinnacle | Sad | I know. That is why this is so hard. |
+| 18 | scene ch18Pinnacle | Proud | The Ray unwrites whatever it touches. It is very gentle. They will not remember being sad. Mrs. Gregori. Mr. TNB. Grace. Rose. Hold hands, please. |
+| 18 | scene ch18Pinnacle | Unimpressed | That will not be necessary. That is not even on the table. |
+| 18 | scene ch18After | Surprised | That was not in the model. |
+| 18 | scene ch18After | Sad | The Ray was written for five. He took all of it. I did not think anyone would step into it. I have never once seen anyone step into it. |
+| 18 | scene ch18After | Sad | I cannot. The Loom does not hand back. I only know how it keeps. |
+| 18 | scene ch18After | Sad | He is not destroyed. The Ray unwrites the story of a thing. Somewhere he is still a man with a thermos. The Loom simply does not have a place to put him. |
+| 18 | scene ch18After | Loving | It will take you home. It goes where he is from. Hold on to something. |
+| 18 | scene ch18After | Unimpressed | You are not leaving. You are being sent. That is a different thing. |
+| 20 | scene ch20Heart | Sad | Tom. You came back. You always come back. That is the thing I could never forgive you for. |
+| 20 | scene ch20Heart | Sad | Everything leaves. Time takes a little every day, and then one day all of it. So I built a place where it cannot. The Leviathan keeps every afternoon exactly as it was. Please do not hurt it. It is all I have. |
+| 20 | scene ch20Heart | Sad | I kept them safe. |
+| 20 | scene ch20Heart | Proud | There are four things that will keep you out. Distance. Age. Exhaustion. Fear. Four things I could never get past. You will not, either. |
+| 20 | scene ch20Shatter | Sad | My daughter was nine. I was on a flight. I told her, one more flight next month. It was her birthday. I told my mother the same thing, about the hospital. I told my partner the same thing about everything. |
+| 20 | scene ch20Shatter | Sad | There was always one more flight next month. And then there was not. So I stopped the months. I did not know how to say goodbye. So I made sure that nobody could leave. |
+| 20 | scene ch20Shatter | Angry | Eternal Silence. |
+| 20 | scene ch20Calm | Sad | Clara would be thirty-one. She would say I deserved all of this. |
+| 20 | scene ch20Calm | Sad | I could not make the minute stop hurting. So I stopped the minute. It did not stop hurting. It only stopped. |
+| 20 | scene ch20Calm | Sad | I do not know how to start the clocks. |
+| 20 | scene ch20Calm | Loving | The towns in the Archive are open. The coins are going home. The snow globe is a town again. I am sorry. I do not know how to say how sorry. |
+| 20 | scene ch20Calm | Sad | I do not have anything to bring. |
+| 20 | scene ch20Epi1 | Proud | I made it from the Engine. It runs both coasts. It does not stop the clocks. It only makes the distance a little shorter. I thought, if I had built that first... |
+| 20 | scene ch20Epi1 | Sad | I would have been home. |
+| 20 | scene ch20Epi1 | Happy | It has four. I asked. |
+| 20 | scene ch20Epi1 | Loving | I am going to call my daughter. I do not know whether she will pick up. I am going to call anyway. |

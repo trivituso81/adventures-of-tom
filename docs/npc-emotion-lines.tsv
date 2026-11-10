@@ -676,3 +676,65 @@ chapters	file	line	character	where	mood	text
 13	data/scenes-ch13.js	223	Penny	scene ch13After	sad	It was a very good drawer.
 13	data/scenes-ch13.js	225	Penny	scene ch13After	loving	That’s a very nice way to say it.
 13	data/scenes-ch13.js	235	Sal	scene ch13After	proud	Okay. The Sub-Rail runs the rest of the way, up under Grump Hollow. It comes out at the breach. Sol’s putting the girls on the five fifteen handcar.
+16	data/scenes-ch16.js	109	Marlowe	scene ch16Open	happy	Wonderful. Everybody came. I love a turnout.
+16	data/scenes-ch16.js	110	Marlowe	scene ch16Open	proud	Marlowe. Monochrome Marlowe. We met in Jefferson Park. I took the pink out of your neighbor’s window. I’d say sorry, but honestly I think it looks better.
+16	data/scenes-ch16.js	112	Marlowe	scene ch16Open	unimpressed	Mr. Vance is in a meeting. He sends his regards, and a camera.
+16	data/scenes-ch16.js	115	Marlowe	scene ch16Open	proud	That’s what cameras do. Little ones in front, please. Tall ones in back. Everybody tight. Mr. Vance likes everybody tight.
+16	data/scenes-ch16.js	120	Marlowe	scene ch16Open	proud	Mr. Vance keeps the happy ones. A good family at the right moment, just so. Nothing ever changes again. Nobody leaves. It’s a gift.
+16	data/scenes-ch16.js	123	Marlowe	scene ch16Open	unimpressed	Everybody stays in a photograph. That’s what a photograph is.
+16	data/scenes-ch16.js	125	Vance	scene ch16Open	proud	Hello, Tom. Thank you for flying nowhere. I have waited a very long time for a picture where nobody leaves.
+16	data/scenes-ch16.js	127	Vance	scene ch16Open	unimpressed	Hello, Robert. You broke our contract. That’s all right. I am a forgiving man. Everybody, please look here.
+16	data/scenes-ch16.js	133	Vance	scene ch16Open	unimpressed	Not Tom. Not the grown ones. The little ones. The ones with all their years still in them. Those are the ones I want to keep.
+16	data/scenes-ch16.js	156	Vance	scene ch16Open	proud	There. That is a family photograph. Thank you, Tom. You may keep the frame.
+16	data/scenes-ch16.js	158	Vance	scene ch16Open	unimpressed	Marlowe. Collect the children.
+16	data/scenes-ch16.js	159	Marlowe	scene ch16Open	scared	Mr. Vance. They are... they are children. I only moved the colors around. That’s all I ever did. I never wrote anything like that.
+16	data/scenes-ch16.js	160	Vance	scene ch16Open	unimpressed	Then I shall help with your notes.
+16	data/scenes-ch16.js	162	Marlowe	scene ch16Open	sad	Less. Less. Less. That is all I ever wanted. Less.
+16	data/scenes-ch16.js	196	Marlowe	scene ch16Fight	angry	Less. Round two.
+16	data/scenes-ch16.js	213	Marlowe	scene ch16After	sad	I wanted it quieter. I only ever wanted it quieter.
+16	data/scenes-ch16.js	215	Marlowe	scene ch16After	sad	I didn’t want it like this.
+16	data/scenes-ch16.js	226	Vance	scene ch16After	proud	Thank you for the photograph. It is perfect. I would like to keep it.
+16	data/scenes-ch16.js	228	Vance	scene ch16After	unimpressed	Nobody leaves, Tom. That is what a photograph is for. If you want them, you know the building. Downtown. Sixty floors. Do come up. I will leave the light on.
+16	data/scenes-ch16.js	230	Sal	scene ch16After	scared	TOMMY! The glass is coming down! I have the girls in the cab! GET IN!
+17	data/scenes-ch17.js	93	Sol	scene ch17Open	scared	Downtown. The tallest thing on the boulevard that wasn’t there on Monday. Sixty floors of glass, and every clock in it says 4:59.
+17	data/scenes-ch17.js	103	Sol	scene ch17Open	proud	I’ll keep the meter off and the engine on. Go get your folks, Tommy.
+17	data/scenes-ch17.js	273	Vance	scene ch17After	proud	Thank you for the tour, Tom. Thank you for the Archive. It was very nearly complete.
+17	data/scenes-ch17.js	274	Vance	scene ch17After	loving	Floor sixty is for family. Come up when you are ready. I have kept your parents very warm.
+18	data/scenes-ch18.js	42	Vance	scene ch18Pinnacle	happy	Tom. Thank you for coming. Everyone, please, come in. Mind the threads. They are all somebody’s afternoon.
+18	data/scenes-ch18.js	44	Vance	scene ch18Pinnacle	proud	Warm. Downstairs, on a plinth, under glass. Exactly as you left them. I want you to understand I have taken very good care of them.
+18	data/scenes-ch18.js	46	Vance	scene ch18Pinnacle	sad	They are safe. There is a difference. I had to have it explained to me, too.
+18	data/scenes-ch18.js	48	Vance	scene ch18Pinnacle	sad	I am the man who kept them. Gold remembers being warm. I only wanted it to keep remembering.
+18	data/scenes-ch18.js	50	Vance	scene ch18Pinnacle	unimpressed	Nothing is the same twice, Mr. TNB. You mend a cup, and it is a mended cup. I would like every cup to stay unbroken.
+18	data/scenes-ch18.js	52	Vance	scene ch18Pinnacle	proud	Tom. You know why I wanted you. Two places that kept moving, and one man flying between them. You are not a traveler. You are the thread. If you stop, they stop. If you stay, they stay.
+18	data/scenes-ch18.js	53	Vance	scene ch18Pinnacle	unimpressed	I will not hurt you. I will not hurt anyone. I will only finish the afternoon.
+18	data/scenes-ch18.js	55	Vance	scene ch18Pinnacle	sad	I know. That is why this is so hard.
+18	data/scenes-ch18.js	58	Vance	scene ch18Pinnacle	proud	The Ray unwrites whatever it touches. It is very gentle. They will not remember being sad. Mrs. Gregori. Mr. TNB. Grace. Rose. Hold hands, please.
+18	data/scenes-ch18.js	60	Vance	scene ch18Pinnacle	unimpressed	That will not be necessary. That is not even on the table.
+18	data/scenes-ch18.js	94	Vance	scene ch18After	surprised	That was not in the model.
+18	data/scenes-ch18.js	95	Vance	scene ch18After	sad	The Ray was written for five. He took all of it. I did not think anyone would step into it. I have never once seen anyone step into it.
+18	data/scenes-ch18.js	97	Vance	scene ch18After	sad	I cannot. The Loom does not hand back. I only know how it keeps.
+18	data/scenes-ch18.js	98	Vance	scene ch18After	sad	He is not destroyed. The Ray unwrites the story of a thing. Somewhere he is still a man with a thermos. The Loom simply does not have a place to put him.
+18	data/scenes-ch18.js	101	Vance	scene ch18After	loving	It will take you home. It goes where he is from. Hold on to something.
+18	data/scenes-ch18.js	103	Vance	scene ch18After	unimpressed	You are not leaving. You are being sent. That is a different thing.
+19	data/scenes-ch19.js	202	Michael	scene ch19Feast	happy	I brought a rock. Lachlan picked it out. Isla ate a different rock. We are keeping a close eye on it.
+19	data/scenes-ch19.js	204	Mrs. Alvarez	scene ch19Feast	loving	I heard there was a situation. I brought lemon bars. And peppers. My nephew grows them. They are very hot. A man called Boppy would know what to do.
+19	data/scenes-ch19.js	219	Sal	scene ch19Feast	happy	Cab seven! Everybody in. Bring the lasagna on your lap, it holds the heat. Fifty-nine floors, no stops, I am not even charging. I am scared of that tower and I am going anyway.
+20	data/scenes-ch20.js	158	Vance	scene ch20Heart	sad	Tom. You came back. You always come back. That is the thing I could never forgive you for.
+20	data/scenes-ch20.js	160	Vance	scene ch20Heart	sad	Everything leaves. Time takes a little every day, and then one day all of it. So I built a place where it cannot. The Leviathan keeps every afternoon exactly as it was. Please do not hurt it. It is all I have.
+20	data/scenes-ch20.js	162	Vance	scene ch20Heart	sad	I kept them safe.
+20	data/scenes-ch20.js	165	Vance	scene ch20Heart	proud	There are four things that will keep you out. Distance. Age. Exhaustion. Fear. Four things I could never get past. You will not, either.
+20	data/scenes-ch20.js	191	Vance	scene ch20Shatter	sad	My daughter was nine. I was on a flight. I told her, one more flight next month. It was her birthday. I told my mother the same thing, about the hospital. I told my partner the same thing about everything.
+20	data/scenes-ch20.js	192	Vance	scene ch20Shatter	sad	There was always one more flight next month. And then there was not. So I stopped the months. I did not know how to say goodbye. So I made sure that nobody could leave.
+20	data/scenes-ch20.js	194	Vance	scene ch20Shatter	angry	Eternal Silence.
+20	data/scenes-ch20.js	219	Vance	scene ch20Calm	sad	Clara would be thirty-one. She would say I deserved all of this.
+20	data/scenes-ch20.js	221	Vance	scene ch20Calm	sad	I could not make the minute stop hurting. So I stopped the minute. It did not stop hurting. It only stopped.
+20	data/scenes-ch20.js	224	Vance	scene ch20Calm	sad	I do not know how to start the clocks.
+20	data/scenes-ch20.js	230	Vance	scene ch20Calm	loving	The towns in the Archive are open. The coins are going home. The snow globe is a town again. I am sorry. I do not know how to say how sorry.
+20	data/scenes-ch20.js	232	Vance	scene ch20Calm	sad	I do not have anything to bring.
+20	data/scenes-ch20.js	257	Sal	scene ch20Epi1	happy	Cab seven! Everybody in! I am not charging. I am not even driving. Look UP.
+20	data/scenes-ch20.js	260	Vance	scene ch20Epi1	proud	I made it from the Engine. It runs both coasts. It does not stop the clocks. It only makes the distance a little shorter. I thought, if I had built that first...
+20	data/scenes-ch20.js	262	Vance	scene ch20Epi1	sad	I would have been home.
+20	data/scenes-ch20.js	263	Sol	scene ch20Epi1	surprised	A SKYWAY TRAIN?! I do not know what to do with my hands! I am a cab driver!
+20	data/scenes-ch20.js	264	Sal	scene ch20Epi1	proud	You are the first passenger. Get in the train.
+20	data/scenes-ch20.js	267	Vance	scene ch20Epi1	happy	It has four. I asked.
+20	data/scenes-ch20.js	269	Vance	scene ch20Epi1	loving	I am going to call my daughter. I do not know whether she will pick up. I am going to call anyway.
