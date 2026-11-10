@@ -5973,7 +5973,7 @@
    "prompt": "Draw the person in the attached picture as an emotion sheet.\n\nKeep them exactly as they are in the picture: the same face, skin, the same head size compared to the body, the same hair, clothes and shoes, and the same painting style. Only the pose and the face change. Do not change the proportions from cell to cell.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One full-body figure per cell, facing the viewer, the same size in every cell, feet on the same ground line, nothing touching a cell edge. No grid lines, numbers, text or shadows.\n\nRow 1:\n1. Happy: up on the toes, hands clasped at the chest, eyes crinkled, a big open smile.\n2. Loving: head tilted, both hands flat over the heart, a soft closed smile.\n3. Sad: shoulders dropped, head lowered, hands held together at the waist, mouth turned down.\n4. Angry: feet planted wide, arms crossed tight, eyebrows pulled down, a tight frown.\n\nRow 2:\n5. Scared: knees bent, fists up under the chin, eyes wide, mouth stretched open.\n6. Surprised: one foot stepped back, open hands beside the face, eyebrows high, mouth a tall O.\n7. Proud: chest out, chin up, fists on the hips, a one-sided smile.\n8. Unimpressed: weight on one leg, one hand on the hip, eyelids half lowered, mouth a flat line."
   },
   {
-   "status": "draft",
+   "status": "approved",
    "versions": [
     {
      "n": 1,
@@ -5981,6 +5981,13 @@
      "date": "2026-11-06",
      "from": "v1",
      "at": 1793952419617
+    },
+    {
+     "n": 1,
+     "file": "art/raw/characters/justin-emotions-v2.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794272910366
     }
    ],
    "rejects": [],
