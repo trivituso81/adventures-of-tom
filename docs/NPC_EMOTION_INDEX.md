@@ -1,27 +1,27 @@
-# NPC emotion index: chapters 1 to 10 (npcemo1 chapters 1 to 5, npcemo2 chapters 6 to 10)
+# NPC emotion index: chapters 1 to 15 (npcemo1 chapters 1 to 5, npcemo2 chapters 6 to 10, npcemo3 chapters 11 to 15)
 
-Fact: every line a person (not a monster) says in chapters 1 to 10 outside the cast story scenes, tagged with one of the 8 emotion-sheet moods. Behind the scenes only: the game does not load it. It is the list a later change uses to show an emotion pose frame per line.
+Fact: every line a person (not a monster) says in chapters 1 to 15 outside the cast story scenes, tagged with one of the 8 emotion-sheet moods. Behind the scenes only: the game does not load it. It is the list a later change uses to show an emotion pose frame per line.
 
 - Source of truth: `docs/npc-emotion-lines.tsv` (columns: chapters, file, line, character, where, mood, text). Correct a tag by changing the one mood word there. This page is rebuilt from it with `python3 tools/npc-emotion-index.py`.
 - Check: `python3 tools/npc-emotion-check.py` (mood valid, exact text still in its file, one mood per speaker and text). `--fix` refreshes line numbers after code moves.
 - Covered: map NPC talk (townsfolk and family: first visit, revisit, hug and chapter variants), townsfolk lines inside story scenes, recruit and follower chatter, Penny and Nickel shop lines (greetings, buy and sell lines, shelf lines; not the gear captions), the cab drivers Sal and Sol.
-- Not covered: cast lines in story scenes (already tagged in `docs/emotion-index-lines.tsv`, live in the game), monsters and bosses (no emotion sheets), narration from signs and objects, battle barks, puzzle replies (not located in the data in npcemo2), cast lines in the airport trips (Tom, Grace, Rose, TNB, Amy and the rest at the cab).
-- `chapters`: where the line can show. `1-10` Long Island anytime; `2-10` Los Angeles (first reached in chapter 2); single numbers and `a-b` are chapter variants. A line keyed by speaker and exact text carries its mood wherever it shows.
+- Not covered: cast lines in story scenes (already tagged in `docs/emotion-index-lines.tsv`, live in the game), monsters and bosses (no emotion sheets), narration from signs and objects, battle barks, puzzle replies (not located in the data), cast lines in the airport trips (Tom, Grace, Rose, TNB, Amy and the rest at the cab).
+- `chapters`: where the line can show. `1-10` Long Island anytime in Part 1; `2-10` Los Angeles (first reached in chapter 2); single numbers and `a-b` are chapter variants. A line keyed by speaker and exact text carries its mood wherever it shows.
 - Who has emotion sheets today: Tom, TNB, Grace, Rose, Amy, Justin, Deedee, Boppy, Olivia, Aunt Ellie (Nara has her own). Every townsperson here needs an emotion sheet before their tags can show a pose.
 
 ## Totals
 
 | Mood | Lines |
 |---|---|
-| Happy | 166 |
-| Loving | 70 |
-| Sad | 24 |
-| Angry | 19 |
-| Scared | 30 |
-| Surprised | 42 |
-| Proud | 138 |
-| Unimpressed | 106 |
-| **All** | 595 |
+| Happy | 177 |
+| Loving | 78 |
+| Sad | 40 |
+| Angry | 24 |
+| Scared | 35 |
+| Surprised | 49 |
+| Proud | 157 |
+| Unimpressed | 117 |
+| **All** | 677 |
 
 ## Lines by character
 
@@ -226,7 +226,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 10 outside the c
 | 9 | scene ch9Luna | Sad | And my telescope can't find the moon. It's not behind a cloud. It's not anywhere. It's just GONE. |
 | 9 | scene ch9Luna | Surprised | ...It wasn't a closet. |
 
-### Sal (31)
+### Sal (40)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -261,6 +261,15 @@ Fact: every line a person (not a monster) says in chapters 1 to 10 outside the c
 | 1-10 | cab west alone | Happy | LAX. Sit back. The radio is on something calm. |
 | 1-10 | cab west alone | Unimpressed | Off we go. Don't touch the visor. Everybody touches the visor. |
 | 1-10 | cab west alone | Proud | Airport run. I'll have you there before your coffee gets cold. |
+| 13 | scene ch13Open | Happy | Sol. Sol, come in. It’s Sal. Cab seven says hi. She’s fine. She’s the only thing in town that’s moving. |
+| 13 | scene ch13Open | Scared | Tommy! It’s quiet in here. Even the clocks are quiet. Your mother’s in the kitchen. Don’t panic. She’s fine. She just won’t stop baking. |
+| 13 | scene ch13Open | Scared | I’m under the dome with a shovel and a very worried shopkeeper. I can’t get out. But I can dig toward you. |
+| 13 | scene ch13Open | Scared | The drill stopped answering when the dome came down. Something put a chip in it. Be careful of the worm. |
+| 13 | scene ch13After | Happy | (through the glass) TOMMY! Over here! Hi! Don’t hug the amber, it’s sticky! |
+| 13 | scene ch13After | Happy | It worked! Gold remembers being warm! I told you! Nobody ever believes the cab driver! |
+| 13 | scene ch13After | Proud | Tommy. Sol and I started this tunnel in 2011 with a shovel and a very good deal on a drill. I never thought anyone would walk through it. |
+| 13 | scene ch13After | Proud | I’m a cab driver. That’s the whole job. |
+| 13 | scene ch13After | Proud | Okay. The Sub-Rail runs the rest of the way, up under Grump Hollow. It comes out at the breach. Sol’s putting the girls on the five fifteen handcar. |
 
 ### Justin (16)
 
@@ -497,7 +506,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 10 outside the c
 | 6 | scene ch6End | Loving | Lachlan wants Nara to have this. He painted a tennis ball gold. It took him four days and most of a bottle of paint. |
 | 8 | scene ch8End | Happy | Lachlan has eaten three rolls and fallen asleep in the bread basket. I'm leaving him there. He's happy. |
 
-### Mr. Washington (27)
+### Mr. Washington (28)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -528,6 +537,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 10 outside the c
 | 8 | scene ch8End | Loving | Tom. Come here. This was my daddy’s. He drove the 7 line out of that barn for thirty years. Night run. He swore by the biscuits. |
 | 8 | scene ch8End | Loving | He'd want it on somebody who went back in there and lit that stove. Here. |
 | 8 | scene ch8End | Proud | I know you will. Now stand up straight. He'd say that too. |
+| 12 | scene ch12After | Surprised | ...and that is why you never trust a Tuesday. Hm? Why is everybody looking at me? Did I fall asleep? Again? |
 
 ### Marisol (10)
 
@@ -544,7 +554,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 10 outside the c
 | 6 | map jpark, when {chapter:6,notFlag:ch6-done} | Sad | Every tennis ball on the block. Gone. My dog has nothing to ignore now. |
 | 6 | map jpark, when {chapter:6,notFlag:ch6-done} | Surprised | There he is. No. That's a squirrel. It's looking at me. |
 
-### Larry (8)
+### Larry (9)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -556,6 +566,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 10 outside the c
 | 8 | map jpark, when {chapter:8,notFlag:ch8-done} | Surprised | I'm blowing leaves. They're frosty. In LA. I have questions. |
 | 6 | map jpark, when {chapter:6,notFlag:ch6-done} | Angry | I'm blowing leaves. The squirrels keep blowing them back. |
 | 6 | map jpark, when {chapter:6,notFlag:ch6-done} | Unimpressed | It's a whole system. Their system is better. |
+| 12 | scene ch12After | Happy | I’m blowing leaves. The leaf landed. It LANDED. Thirty years I’ve waited. Thank you. |
 
 ### Ray (8)
 
@@ -685,7 +696,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 10 outside the c
 | 2-10 | map boards, base | Proud | TNB? Longboard guy? He bombed Fargo Street once. No brakes. Legend. |
 | 2-10 | map boards, base | Happy | If you see him, tell him the wheels he ordered came in. The green ones. |
 
-### Sol (12)
+### Sol (23)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -701,28 +712,44 @@ Fact: every line a person (not a monster) says in chapters 1 to 10 outside the c
 | 1-10 | cab east | Proud | Airport run. Cab traffic, cab snacks, cab opinions. All included. |
 | 1-10 | cab east | Unimpressed | East we go. Don't mind the ketchup stain. It's from last Tuesday. |
 | 1-10 | cab east | Happy | Heading home? Say hi to the Atlantic for me. The right ocean. |
+| 13 | scene ch13Open | Unimpressed | Tom. Sit. Not that chair. That chair is Sal’s. I keep it warm for him out of spite. |
+| 13 | scene ch13Open | Unimpressed | Okay. Sal and I are cousins. You know that. What you don’t know is what we do between airport runs. |
+| 13 | scene ch13Open | Sad | Letters. Eleven years of letters, Snail Mail to Los Angeles, in the trunks of cabs. Nobody ever opened a bag. Nobody ever asked why two cab companies need a hundred sacks of stamps. |
+| 13 | scene ch13Open | Proud | A dispatch network. We call it the Network. We never came up with a better name. |
+| 13 | scene ch13Open | Happy | Sal. I have Tom, his sister, two nieces, a boyfriend and a dog in my lobby. Say hi. |
+| 13 | scene ch13Open | Proud | The Sub-Rail. Sal and I bored a tunnel under the Layover, from both coasts, for a hobby. It was supposed to open in 2031. It meets in the middle, right under the dome. |
+| 13 | scene ch13Open | Proud | We got a very good deal on a drill. |
+| 13 | scene ch13Open | Happy | The drill. We call her the Dual-Coast Drill. The kids at the depot call her the Worm. She doesn’t love it. |
+| 13 | scene ch13Open | Proud | I need dispatchers. Two of them. Radio only. Somebody has to read me the tunnel. |
+| 13 | scene ch13Open | Proud | Thirty years. Never lost a passenger. Found two in the trunk. Both were fine. |
+| 13 | scene ch13Open | Unimpressed | Out the door, the Metro stairs on the boulevard. Past the turnstile, there’s a door that says EMPLOYEES ONLY. That’s you. You’re employees now. |
 
-### Mrs. Alvarez (3)
+### Mrs. Alvarez (6)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
 | 2-10 | map casa, base | Angry | TEN. Ten people in a two-bedroom house from 1912. One bathroom. ONE. |
 | 2-10 | map casa, base | Angry | Tony, feet off my table! Kevin, the baby isn't a football! Mateo, give Abuela the remote! ...Tom, mijo, sit. If you can find a chair. |
 | 2-10 | map casa, base | Unimpressed | Everybody says, 'Mama, the house is so full of love.' It's full of SOMETHING. Take tamales. Please. I need the room in my fridge. |
+| 12 | scene ch12Alvarez | Surprised | ...NO. I said no. Why is everyone in my kitchen? Is that a mother running laps with two little girls? |
+| 12 | scene ch12Alvarez | Proud | ...Okay. That one can stay. |
+| 12 | scene ch12Alvarez | Loving | Take lemons. Take ALL the lemons. Every yard in this city has too many and somebody always leaves them on my step. |
 
-### Don Beto (2)
+### Don Beto (3)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
 | 2-10 | map casa, base | Happy | I've been in this chair since the game started. Which game? Yes. |
 | 2-10 | map casa, base | Happy | Ten people. I counted once. Then I lost count. Then I took a nap. |
+| 12 | scene ch12Alvarez | Angry | ...and that is a FOUL! That is a foul! Who has the remote? |
 
-### Tony (2)
+### Tony (3)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
 | 2-10 | map casa, base | Unimpressed | Me and Yesenia are saving for our own place. In this market? We'll be here until Mateo goes to college. |
 | 2-10 | map casa, base | Sad | The two houses next door sold for more than this whole block cost in 1990. My mom isn't okay about it. |
+| 12 | scene ch12Alvarez | Surprised | Why is there a woman running around my table? Why is it a good idea? It’s a very good idea. |
 
 ### Yesenia (2)
 
@@ -745,12 +772,14 @@ Fact: every line a person (not a monster) says in chapters 1 to 10 outside the c
 | 2-10 | map casa, base | Unimpressed | I share the bunk bed with Uncle Tony's exercise bike. |
 | 2-10 | map casa, base | Unimpressed | It's not a metaphor. The bike is on the top bunk. |
 
-### Daisy (2)
+### Daisy (4)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
 | 2-10 | map casa, base | Proud | I'm making a documentary about this house. It's a horror movie. |
 | 2-10 | map casa, base | Scared | Scene one: the bathroom line. Scene two: who ate Abuela's last concha. |
+| 12 | scene ch12Alvarez | Surprised | Tom! Tom! Everybody stopped! Abuela stopped in the middle of saying NO! |
+| 12 | scene ch12Alvarez | Happy | Is it okay if I say that was the best thing that has ever happened in our kitchen? |
 
 ### Mateo (2)
 
@@ -825,7 +854,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 10 outside the c
 | 2 | map creole, when {chapter:2,flag:ch2-clear} | Proud | That smog had me stirring one pot for an hour. Best roux I ever made, though. |
 | 2 | map creole, when {chapter:2,flag:ch2-clear} | Loving | Sit. Eat. You and that boyfriend earned a bowl today. |
 
-### Doña Carmen (7)
+### Doña Carmen (13)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -836,6 +865,12 @@ Fact: every line a person (not a monster) says in chapters 1 to 10 outside the c
 | 2 | map pupuseria, when {chapter:2,flag:ch2-smog,notFlag:ch2-clear} | Sad | It's always this afternoon. Why'd I ever flip them? |
 | 2 | map pupuseria, when {chapter:2,flag:ch2-clear} | Proud | I left them on the comal the whole time. They came out perfectly crispy, actually. |
 | 2 | map pupuseria, when {chapter:2,flag:ch2-clear} | Happy | Don't tell the juice bar. They'll want the recipe. |
+| 12 | scene ch12Carmen | Surprised | A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes. |
+| 12 | scene ch12Carmen | Surprised | ...and THEN I told the man, the loroco is not optional. Tom! When did you get here? Why is everything so quiet? |
+| 12 | scene ch12Carmen | Sad | Where did my pupusas go? |
+| 12 | scene ch12Carmen | Sad | I was what? I had a whole sentence. I lost the sentence. It was a good sentence. |
+| 12 | scene ch12Carmen | Angry | That man stood on my step and said my sign was “too busy.” I said the sign is busy because the food is good. |
+| 12 | scene ch12Carmen | Loving | Go next door. The Alvarez house. They didn’t get any pupusas today. Take these. Feed the children first. The grown-ups will pretend they’re not hungry. |
 
 ### Jordan (3)
 
@@ -869,7 +904,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 10 outside the c
 | 2-10 | map dakota, lines | Unimpressed | We moved from the Westside for the space. And the character. Mostly the price. Which was still a lot. |
 | 2-10 | map dakota, lines | Angry | I work from home. Home is very loud on the Alvarez side. I bought noise-canceling headphones. They lost. |
 
-### Penny (33)
+### Penny (41)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -906,8 +941,16 @@ Fact: every line a person (not a monster) says in chapters 1 to 10 outside the c
 | 1-10 | shop shelf battle | Happy | The Confetti Cannon is new. Please aim it away from my shelves. |
 | 1-10 | shop shelf battle | Proud | Fireworks. Legally a gray area. Emotionally, a gift. |
 | 1-10 | shop shelf battle | Proud | The Finale Rocket. Hold it like it owes you money. |
+| 13 | scene ch13After | Sad | (through the glass) Tom! I’m so sorry! Nickel, hold up the drawer! I’ve got mine! |
+| 13 | scene ch13After | Scared | (through the glass) One. Two. Don’t think about the interest. Three. |
+| 13 | scene ch13After | Loving | Nickel. |
+| 13 | scene ch13After | Sad | I was saving for a boat. |
+| 13 | scene ch13After | Proud | That’s why it was a savings. |
+| 13 | scene ch13After | Sad | Tom. I’m sorry. I sold him the coins. I took the money and I didn’t ask. |
+| 13 | scene ch13After | Sad | It was a very good drawer. |
+| 13 | scene ch13After | Loving | That’s a very nice way to say it. |
 
-### Nickel (33)
+### Nickel (46)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -944,3 +987,57 @@ Fact: every line a person (not a monster) says in chapters 1 to 10 outside the c
 | 1-10 | shop shelf battle | Happy | The Confetti Cannon is new. Please aim it away from the palm trees. |
 | 1-10 | shop shelf battle | Proud | Fireworks. Legally a gray area. Emotionally a gift. |
 | 1-10 | shop shelf battle | Proud | The Finale Rocket. Hold it like a parking ticket. |
+| 13 | scene ch13Depot | Scared | Tom! Good. Okay. Before you go in, I have to tell you something, and I have to say it fast, because Penny made me promise. |
+| 13 | scene ch13Depot | Sad | A man in a long coat bought gold coins from our shops. For years. Paid double. Never took his hat off. |
+| 13 | scene ch13Depot | Sad | We didn’t know. We thought he was a collector. We took the money. And we kept the best coins in the back, in case he ever paid triple. |
+| 13 | scene ch13Depot | Sad | Penny called on the Network from under the dome. She said, “Tell Tom we’re sorry.” And then she said, “The drawer is under the counter.” |
+| 13 | scene ch13Depot | Sad | Eleven coins. Hers and mine. The last of the old gold. They were supposed to be a retirement. |
+| 13 | scene ch13Depot | Proud | Sal says gold remembers being warm. If amber is warmth that got stuck, then gold can give it somewhere to go. He says. I don’t know. He’s a cab driver. |
+| 13 | scene ch13Depot | Loving | I’m giving up a drawer. It’s the best drawer I ever had. Go. I’ll bring them down behind you. Sol’s driving me to the second mile marker and making me run. |
+| 13 | scene ch13Depot | Proud | Yes, I do. Somebody gave me a shop. I’d like to be somebody who gave something back. |
+| 13 | scene ch13After | Happy | Tom! Sol drove me to the second mile marker and made me run. I have never been so tired and so right. |
+| 13 | scene ch13After | Proud | Eleven coins. Mine are in this bag. Penny’s are on the other side of that wall. |
+| 13 | scene ch13After | Proud | Eleven coins. Hers and mine. On three. |
+| 13 | scene ch13After | Loving | Penny. |
+| 13 | scene ch13After | Unimpressed | You don’t know how to drive a boat. |
+
+### Long coat (1)
+
+| Ch | Where | Emotion | Line |
+|---|---|---|---|
+| 11 | scene ch11Vance | Unimpressed | Hello, Tom. |
+
+### Julian Vance (10)
+
+| Ch | Where | Emotion | Line |
+|---|---|---|---|
+| 11 | scene ch11Vance | Sad | Julian Vance. Gate agent, in a way. I have stood at every gate that ever closed. |
+| 11 | scene ch11Vance | Proud | You opened every door I couldn’t. Thank you for flying nowhere, Tom. |
+| 11 | scene ch11Vance | Sad | I stopped every town on Earth. At its happiest afternoon. A birthday that never ends. The last day of summer. Nobody is sad. Nobody is late. |
+| 11 | scene ch11Vance | Sad | Long Island and Los Angeles kept moving because you kept flying. Every flight moved them a little. I wasn’t quick enough to stop you. |
+| 11 | scene ch11Vance | Loving | Maybe. But it stays safe. That is all I have ever wanted for anyone. |
+| 11 | scene ch11Vance | Loving | Everyone, safe, in the good part, forever. Come in. Stay. Nobody here has ever been lost. |
+| 11 | scene ch11Vance | Sad | ...Then I’ll make the last announcement. |
+| 11 | scene ch11Vance | Sad | Someone has to. |
+| 11 | scene ch11Vance | Angry | He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once. |
+| 11 | scene ch11Vance | Angry | FINAL CALL. |
+
+### Marlowe (15)
+
+| Ch | Where | Emotion | Line |
+|---|---|---|---|
+| 12 | scene ch12Marlowe | Happy | Love it. Love the block. Love the lemons. So many lemons. What is that, a jacaranda? Needs less. |
+| 12 | scene ch12Marlowe | Proud | Marlowe. Monochrome Marlowe. I fix places. This place has a lot going on. Too much color, too many porches, a dog doing something on a lawn. |
+| 12 | scene ch12Marlowe | Unimpressed | That’s the problem with a neighborhood. Notes. |
+| 12 | scene ch12Marlowe | Unimpressed | He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers. |
+| 12 | scene ch12Marlowe | Proud | I can take the pink, the yellow, and the music out of that window. Mr. Vance likes it quiet. Quiet is safe. Quiet sells. |
+| 12 | scene ch12Marlowe | Unimpressed | I don’t put things back. I take notes. Anyway, Mr. Prime will handle the intersection. Do take a look at the traffic. It’s very stationary. |
+| 12 | scene ch12Marlowe | Happy | He walks off into the grey, humming a jingle that never resolves. |
+| 12 | scene ch12Prime | Angry | Look at that. You put the neighbors back. Very warm. Very busy. Very much not what I asked for. |
+| 12 | scene ch12Prime | Proud | Notes. This intersection has no flow. Let me introduce our new Head of Traffic. |
+| 12 | scene ch12Prime | Unimpressed | Mr. Prime! Please give them a moment to rethink the neighborhood. |
+| 12 | scene ch12Prime | Unimpressed | It’s not angry. It’s stuck. Stuck is very quiet, and Mr. Vance likes quiet. Do be quick. The notes are due at five. |
+| 12 | scene ch12After | Surprised | Love it. Hate it. Love it. Notes withdrawn. |
+| 12 | scene ch12After | Happy | I’ll be Downtown, at the Movie Palace. Come by. I’ll have notes for the rest of the family. |
+| 12 | scene ch12After | Proud | Long Island is under glass, you know. A very safe house. Your mother is in the kitchen. She’s making a crisp. She’s been making it for hours. |
+| 12 | scene ch12After | Unimpressed | Notes are due at five. |

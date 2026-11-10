@@ -594,3 +594,85 @@ chapters	file	line	character	where	mood	text
 1-10	engine/travel.js	173	Sol	cab east	proud	Airport run. Cab traffic, cab snacks, cab opinions. All included.
 1-10	engine/travel.js	174	Sol	cab east	unimpressed	East we go. Don't mind the ketchup stain. It's from last Tuesday.
 1-10	engine/travel.js	175	Sol	cab east	happy	Heading home? Say hi to the Atlantic for me. The right ocean.
+11	data/scenes-p2.js	222	Long coat	scene ch11Vance	unimpressed	Hello, Tom.
+11	data/scenes-p2.js	226	Julian Vance	scene ch11Vance	sad	Julian Vance. Gate agent, in a way. I have stood at every gate that ever closed.
+11	data/scenes-p2.js	226	Julian Vance	scene ch11Vance	proud	You opened every door I couldn’t. Thank you for flying nowhere, Tom.
+11	data/scenes-p2.js	228	Julian Vance	scene ch11Vance	sad	I stopped every town on Earth. At its happiest afternoon. A birthday that never ends. The last day of summer. Nobody is sad. Nobody is late.
+11	data/scenes-p2.js	228	Julian Vance	scene ch11Vance	sad	Long Island and Los Angeles kept moving because you kept flying. Every flight moved them a little. I wasn’t quick enough to stop you.
+11	data/scenes-p2.js	232	Julian Vance	scene ch11Vance	loving	Maybe. But it stays safe. That is all I have ever wanted for anyone.
+11	data/scenes-p2.js	232	Julian Vance	scene ch11Vance	loving	Everyone, safe, in the good part, forever. Come in. Stay. Nobody here has ever been lost.
+11	data/scenes-p2.js	234	Julian Vance	scene ch11Vance	sad	...Then I’ll make the last announcement.
+11	data/scenes-p2.js	234	Julian Vance	scene ch11Vance	sad	Someone has to.
+11	data/scenes-p2.js	236	Julian Vance	scene ch11Vance	angry	He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once.
+11	data/scenes-p2.js	236	Julian Vance	scene ch11Vance	angry	FINAL CALL.
+12	data/scenes-ch12.js	126	Marlowe	scene ch12Marlowe	happy	Love it. Love the block. Love the lemons. So many lemons. What is that, a jacaranda? Needs less.
+12	data/scenes-ch12.js	128	Marlowe	scene ch12Marlowe	proud	Marlowe. Monochrome Marlowe. I fix places. This place has a lot going on. Too much color, too many porches, a dog doing something on a lawn.
+12	data/scenes-ch12.js	131	Marlowe	scene ch12Marlowe	unimpressed	That’s the problem with a neighborhood. Notes.
+12	data/scenes-ch12.js	133	Marlowe	scene ch12Marlowe	unimpressed	He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers.
+12	data/scenes-ch12.js	137	Marlowe	scene ch12Marlowe	proud	I can take the pink, the yellow, and the music out of that window. Mr. Vance likes it quiet. Quiet is safe. Quiet sells.
+12	data/scenes-ch12.js	139	Marlowe	scene ch12Marlowe	unimpressed	I don’t put things back. I take notes. Anyway, Mr. Prime will handle the intersection. Do take a look at the traffic. It’s very stationary.
+12	data/scenes-ch12.js	140	Marlowe	scene ch12Marlowe	happy	He walks off into the grey, humming a jingle that never resolves.
+12	data/scenes-ch12.js	162	Doña Carmen	scene ch12Carmen	surprised	A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes.
+12	data/scenes-ch12.js	164	Doña Carmen	scene ch12Carmen	surprised	...and THEN I told the man, the loroco is not optional. Tom! When did you get here? Why is everything so quiet?
+12	data/scenes-ch12.js	164	Doña Carmen	scene ch12Carmen	sad	Where did my pupusas go?
+12	data/scenes-ch12.js	166	Doña Carmen	scene ch12Carmen	sad	I was what? I had a whole sentence. I lost the sentence. It was a good sentence.
+12	data/scenes-ch12.js	168	Doña Carmen	scene ch12Carmen	angry	That man stood on my step and said my sign was “too busy.” I said the sign is busy because the food is good.
+12	data/scenes-ch12.js	168	Doña Carmen	scene ch12Carmen	loving	Go next door. The Alvarez house. They didn’t get any pupusas today. Take these. Feed the children first. The grown-ups will pretend they’re not hungry.
+12	data/scenes-ch12.js	178	Daisy	scene ch12Alvarez	surprised	Tom! Tom! Everybody stopped! Abuela stopped in the middle of saying NO!
+12	data/scenes-ch12.js	187	Don Beto	scene ch12Alvarez	angry	...and that is a FOUL! That is a foul! Who has the remote?
+12	data/scenes-ch12.js	190	Tony	scene ch12Alvarez	surprised	Why is there a woman running around my table? Why is it a good idea? It’s a very good idea.
+12	data/scenes-ch12.js	193	Mrs. Alvarez	scene ch12Alvarez	surprised	...NO. I said no. Why is everyone in my kitchen? Is that a mother running laps with two little girls?
+12	data/scenes-ch12.js	193	Mrs. Alvarez	scene ch12Alvarez	proud	...Okay. That one can stay.
+12	data/scenes-ch12.js	197	Mrs. Alvarez	scene ch12Alvarez	loving	Take lemons. Take ALL the lemons. Every yard in this city has too many and somebody always leaves them on my step.
+12	data/scenes-ch12.js	199	Daisy	scene ch12Alvarez	happy	Is it okay if I say that was the best thing that has ever happened in our kitchen?
+12	data/scenes-ch12.js	211	Marlowe	scene ch12Prime	angry	Look at that. You put the neighbors back. Very warm. Very busy. Very much not what I asked for.
+12	data/scenes-ch12.js	213	Marlowe	scene ch12Prime	proud	Notes. This intersection has no flow. Let me introduce our new Head of Traffic.
+12	data/scenes-ch12.js	213	Marlowe	scene ch12Prime	unimpressed	Mr. Prime! Please give them a moment to rethink the neighborhood.
+12	data/scenes-ch12.js	219	Marlowe	scene ch12Prime	unimpressed	It’s not angry. It’s stuck. Stuck is very quiet, and Mr. Vance likes quiet. Do be quick. The notes are due at five.
+12	data/scenes-ch12.js	246	Mr. Washington	scene ch12After	surprised	...and that is why you never trust a Tuesday. Hm? Why is everybody looking at me? Did I fall asleep? Again?
+12	data/scenes-ch12.js	247	Larry	scene ch12After	happy	I’m blowing leaves. The leaf landed. It LANDED. Thirty years I’ve waited. Thank you.
+12	data/scenes-ch12.js	250	Marlowe	scene ch12After	surprised	Love it. Hate it. Love it. Notes withdrawn.
+12	data/scenes-ch12.js	250	Marlowe	scene ch12After	happy	I’ll be Downtown, at the Movie Palace. Come by. I’ll have notes for the rest of the family.
+12	data/scenes-ch12.js	252	Marlowe	scene ch12After	proud	Long Island is under glass, you know. A very safe house. Your mother is in the kitchen. She’s making a crisp. She’s been making it for hours.
+12	data/scenes-ch12.js	254	Marlowe	scene ch12After	unimpressed	Notes are due at five.
+13	data/scenes-ch13.js	48	Sol	scene ch13Open	unimpressed	Tom. Sit. Not that chair. That chair is Sal’s. I keep it warm for him out of spite.
+13	data/scenes-ch13.js	49	Sol	scene ch13Open	unimpressed	Okay. Sal and I are cousins. You know that. What you don’t know is what we do between airport runs.
+13	data/scenes-ch13.js	51	Sol	scene ch13Open	sad	Letters. Eleven years of letters, Snail Mail to Los Angeles, in the trunks of cabs. Nobody ever opened a bag. Nobody ever asked why two cab companies need a hundred sacks of stamps.
+13	data/scenes-ch13.js	53	Sol	scene ch13Open	proud	A dispatch network. We call it the Network. We never came up with a better name.
+13	data/scenes-ch13.js	55	Sal	scene ch13Open	happy	Sol. Sol, come in. It’s Sal. Cab seven says hi. She’s fine. She’s the only thing in town that’s moving.
+13	data/scenes-ch13.js	56	Sol	scene ch13Open	happy	Sal. I have Tom, his sister, two nieces, a boyfriend and a dog in my lobby. Say hi.
+13	data/scenes-ch13.js	57	Sal	scene ch13Open	scared	Tommy! It’s quiet in here. Even the clocks are quiet. Your mother’s in the kitchen. Don’t panic. She’s fine. She just won’t stop baking.
+13	data/scenes-ch13.js	59	Sal	scene ch13Open	scared	I’m under the dome with a shovel and a very worried shopkeeper. I can’t get out. But I can dig toward you.
+13	data/scenes-ch13.js	60	Sol	scene ch13Open	proud	The Sub-Rail. Sal and I bored a tunnel under the Layover, from both coasts, for a hobby. It was supposed to open in 2031. It meets in the middle, right under the dome.
+13	data/scenes-ch13.js	62	Sol	scene ch13Open	proud	We got a very good deal on a drill.
+13	data/scenes-ch13.js	63	Sal	scene ch13Open	scared	The drill stopped answering when the dome came down. Something put a chip in it. Be careful of the worm.
+13	data/scenes-ch13.js	65	Sol	scene ch13Open	happy	The drill. We call her the Dual-Coast Drill. The kids at the depot call her the Worm. She doesn’t love it.
+13	data/scenes-ch13.js	66	Sol	scene ch13Open	proud	I need dispatchers. Two of them. Radio only. Somebody has to read me the tunnel.
+13	data/scenes-ch13.js	73	Sol	scene ch13Open	proud	Thirty years. Never lost a passenger. Found two in the trunk. Both were fine.
+13	data/scenes-ch13.js	80	Sol	scene ch13Open	unimpressed	Out the door, the Metro stairs on the boulevard. Past the turnstile, there’s a door that says EMPLOYEES ONLY. That’s you. You’re employees now.
+13	data/scenes-ch13.js	104	Nickel	scene ch13Depot	scared	Tom! Good. Okay. Before you go in, I have to tell you something, and I have to say it fast, because Penny made me promise.
+13	data/scenes-ch13.js	106	Nickel	scene ch13Depot	sad	A man in a long coat bought gold coins from our shops. For years. Paid double. Never took his hat off.
+13	data/scenes-ch13.js	108	Nickel	scene ch13Depot	sad	We didn’t know. We thought he was a collector. We took the money. And we kept the best coins in the back, in case he ever paid triple.
+13	data/scenes-ch13.js	109	Nickel	scene ch13Depot	sad	Penny called on the Network from under the dome. She said, “Tell Tom we’re sorry.” And then she said, “The drawer is under the counter.”
+13	data/scenes-ch13.js	110	Nickel	scene ch13Depot	sad	Eleven coins. Hers and mine. The last of the old gold. They were supposed to be a retirement.
+13	data/scenes-ch13.js	112	Nickel	scene ch13Depot	proud	Sal says gold remembers being warm. If amber is warmth that got stuck, then gold can give it somewhere to go. He says. I don’t know. He’s a cab driver.
+13	data/scenes-ch13.js	114	Nickel	scene ch13Depot	loving	I’m giving up a drawer. It’s the best drawer I ever had. Go. I’ll bring them down behind you. Sol’s driving me to the second mile marker and making me run.
+13	data/scenes-ch13.js	116	Nickel	scene ch13Depot	proud	Yes, I do. Somebody gave me a shop. I’d like to be somebody who gave something back.
+13	data/scenes-ch13.js	198	Nickel	scene ch13After	happy	Tom! Sol drove me to the second mile marker and made me run. I have never been so tired and so right.
+13	data/scenes-ch13.js	199	Nickel	scene ch13After	proud	Eleven coins. Mine are in this bag. Penny’s are on the other side of that wall.
+13	data/scenes-ch13.js	203	Sal	scene ch13After	happy	(through the glass) TOMMY! Over here! Hi! Don’t hug the amber, it’s sticky!
+13	data/scenes-ch13.js	204	Penny	scene ch13After	sad	(through the glass) Tom! I’m so sorry! Nickel, hold up the drawer! I’ve got mine!
+13	data/scenes-ch13.js	205	Nickel	scene ch13After	proud	Eleven coins. Hers and mine. On three.
+13	data/scenes-ch13.js	206	Penny	scene ch13After	scared	(through the glass) One. Two. Don’t think about the interest. Three.
+13	data/scenes-ch13.js	210	Sal	scene ch13After	happy	It worked! Gold remembers being warm! I told you! Nobody ever believes the cab driver!
+13	data/scenes-ch13.js	105	Penny	scene ch13After	loving	Nickel.
+13	data/scenes-ch13.js	214	Nickel	scene ch13After	loving	Penny.
+13	data/scenes-ch13.js	215	Penny	scene ch13After	sad	I was saving for a boat.
+13	data/scenes-ch13.js	216	Nickel	scene ch13After	unimpressed	You don’t know how to drive a boat.
+13	data/scenes-ch13.js	217	Penny	scene ch13After	proud	That’s why it was a savings.
+13	data/scenes-ch13.js	218	Sal	scene ch13After	proud	Tommy. Sol and I started this tunnel in 2011 with a shovel and a very good deal on a drill. I never thought anyone would walk through it.
+13	data/scenes-ch13.js	220	Sal	scene ch13After	proud	I’m a cab driver. That’s the whole job.
+13	data/scenes-ch13.js	221	Penny	scene ch13After	sad	Tom. I’m sorry. I sold him the coins. I took the money and I didn’t ask.
+13	data/scenes-ch13.js	223	Penny	scene ch13After	sad	It was a very good drawer.
+13	data/scenes-ch13.js	225	Penny	scene ch13After	loving	That’s a very nice way to say it.
+13	data/scenes-ch13.js	235	Sal	scene ch13After	proud	Okay. The Sub-Rail runs the rest of the way, up under Grump Hollow. It comes out at the breach. Sol’s putting the girls on the five fifteen handcar.
