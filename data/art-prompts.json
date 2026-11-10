@@ -18500,8 +18500,16 @@
    "group": "Long Island people"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/npcs/npc-emotions-kit-v1.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794338641395
+    }
+   ],
    "rejects": [],
    "id": "npc-emotions-kit",
    "tab": "NPCs",
