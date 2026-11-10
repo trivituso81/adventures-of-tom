@@ -1,3 +1,7 @@
+## 2026-11-10 (kidwalk1): Pip, Moss and Dot get walk sheet entries in the Art Library (Art Library only; no tag)
+- Tom (09:10): "pip, moss, and dot are missing walk sheets". Fact: `npc-walk-prompts.js` skipped them because older walks were already installed, so the Library had no entry for them.
+- Added `npc-walk-pip`, `npc-walk-moss`, `npc-walk-dot` (draft, Tom's one walk prompt, newest hero attached: pip v5, moss v3, dot v2) via `node tools/art-library/npc-walk-prompts.js --append` (724 to 727 entries, validate.js OK). Only Boomie stays skipped (own sheet). The installed walks are untouched until a new one is approved. Moss's hero is a draft and was reopened for the hat change (hats1): generate his new hero first so the walk copies it.
+
 ## 2026-11-10 (hats1): NPC hero prompts: hats only for work or personality (Art Library prompts only; no tag)
 - Tom (08:19, 08:58): outside job hats, only 5 percent of characters wear a hat for personality; calculate it and recommend. 5 percent of 56 NPCs = 2.8, so 3. Tom said do it.
 - Personality hats (3): Luna floppy wide-brim with a small brass star pin, Ike tweed flat cap, Pip bucket hat worn crooked with a feather. Job hats (11): Kenji chef hat, Bun baker hat, Ray security cap (already named in `CS`), plus new `HAT` table entries for Kit, Sal, Sol, Reel, Fern, Larry, Odette, Toni. Hat removed (9): Moss, Gus, Wes, Bev, Dash, Washington, Dana, Beto, Jordan. Colour still comes from the palette's `hat`. Pre-change: 23 hats.

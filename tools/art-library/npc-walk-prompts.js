@@ -3,9 +3,9 @@
 // in the cells, and a prompt that names a picture 2 gets wrong poses without it). One generic prompt, no per-person words:
 // the look comes from the attached hero, the poses from the words (same wording as claude/tom-walk-simple-prompt.txt, Tom's walk). Not in make-prompts.js: entries are appended to data/art-prompts.json as text
 // (node tools/art-library/npc-walk-prompts.js --append), the same way as the Tombo split entries.
-// Skipped: pip, moss, dot (approved walks already installed) and boomie (own sheet, BOOMIE_OW).
+// Skipped: boomie (own sheet, BOOMIE_OW). Pip, Moss and Dot have entries since 2026-11-10 (Tom: their walk sheets were missing from the Library; the installed walks stay until a new one is approved).
 const fs = require('fs');
-const SKIP = new Set(['pip', 'moss', 'dot', 'boomie']);
+const SKIP = new Set(['boomie']);
 const { PROMPT } = require('./walk-prompt.js');   // Tom's one walk prompt (11-09 23:15)
 // Gus only (Tom 11-10 06:52: his walk sheet v5 was still wrong and the prompt confuses the generator). What the v4 picture got wrong with Tom's prompt:
 // the back row was drawn turned sideways (three-quarter view), the side row faced right, and the background came out crimson. This version uses short plain sentences, one idea each,
