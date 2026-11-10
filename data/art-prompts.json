@@ -8720,6 +8720,13 @@
      "date": "2026-11-10",
      "from": "v3",
      "at": 1794294004422
+    },
+    {
+     "n": 4,
+     "file": "art/raw/npcs/npc-photo-pruitt-v5.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794336129414
     }
    ],
    "rejects": [],
