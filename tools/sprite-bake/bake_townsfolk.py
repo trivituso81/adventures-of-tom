@@ -9,7 +9,7 @@ stand, step, step; the side row faces RIGHT, so it is mirrored here to face left
 the border colour (slice_sheet robust). Everyone else still comes from tools/sprite-bake/src/<id>-walk-v1.png. Always run WITHOUT --only: the data file holds every NPC.
 Usage : python3 tools/sprite-bake/bake_townsfolk.py [--only pip,moss] [--contact PATH]
 """
-import argparse, json, os, sys
+import argparse, json, os, re, sys
 import numpy as np
 from PIL import Image
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -21,8 +21,8 @@ OUT = os.path.join(ROOT, 'data/townsfolk-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 KW = 3
-# standing height in rows (Tom is 43); matches the old sprites so nobody changes size in the town
-CAST = {'pip': 38, 'moss': 48, 'dot': 41, 'gus': 40, 'bean': 39, 'reel': 42, 'pruitt': 42,
+# standing height in rows (Tom is 43); matches the old sprites so nobody changes size in the town. Ids in LIBRARY_WALK ignore their value here: they are sized by target_rows() and CHIN below (the main cast's head and body rule), so only the key matters.
+CAST = {'pip': 40, 'moss': 41, 'dot': 40, 'gus': 40, 'bean': 39, 'reel': 42, 'pruitt': 42,
         'page': 40, 'bun': 39, 'halverson': 42, 'ike': 39, 'delgado': 41, 'kowalski': 39,
         'sal': 41, 'kit': 41, 'luna': 39, 'penny': 39, 'oolong': 38, 'fern': 39,
         'washington': 44, 'bev': 38, 'boomie': 42, 'wes': 42, 'chet': 44, 'skye': 38,
@@ -43,7 +43,7 @@ def purge_bg(img):
     return Image.fromarray(a, 'RGBA')
 
 SIDE_SWAP = {'gus'}   # the generator draws both side steps with the same leg forward: build step2 from step1 with the legs swapped
-LIBRARY_WALK = {'gus': 'art/raw/npcs/npc-walk-gus-v5.png', 'bean': 'art/raw/npcs/npc-walk-bean-v2.png', 'reel': 'art/raw/npcs/npc-walk-reel-v1.png', 'pruitt': 'art/raw/npcs/npc-walk-pruitt-v2.png', 'delgado': 'art/raw/npcs/npc-walk-delgado-v2.png', 'kowalski': 'art/raw/npcs/npc-walk-kowalski-v2.png', 'ike': 'art/raw/npcs/npc-walk-ike-v2.png', 'halverson': 'art/raw/npcs/npc-walk-halverson-v1.png', 'bun': 'art/raw/npcs/npc-walk-bun-v1.png', 'page': 'art/raw/npcs/npc-walk-page-v1.png', 'fern': 'art/raw/npcs/npc-walk-fern-v1.png', 'kit': 'art/raw/npcs/npc-walk-kit-v1.png', 'oolong': 'art/raw/npcs/npc-walk-oolong-v1.png', 'luna': 'art/raw/npcs/npc-walk-luna-v1.png', 'penny': 'art/raw/npcs/npc-walk-penny-v1.png', 'nickel': 'art/raw/npcs/npc-walk-nickel-v1.png', 'sal': 'art/raw/npcs/npc-walk-sal-v1.png', 'sol': 'art/raw/npcs/npc-walk-sol-v1.png'}   # id -> approved Art Library walk sheet (the newest version of the entry)
+LIBRARY_WALK = {'pip': 'art/raw/npcs/npc-walk-pip-v2.png', 'moss': 'art/raw/npcs/npc-walk-moss-v1.png', 'dot': 'art/raw/npcs/npc-walk-dot-v1.png', 'gus': 'art/raw/npcs/npc-walk-gus-v5.png', 'bean': 'art/raw/npcs/npc-walk-bean-v2.png', 'reel': 'art/raw/npcs/npc-walk-reel-v1.png', 'pruitt': 'art/raw/npcs/npc-walk-pruitt-v2.png', 'delgado': 'art/raw/npcs/npc-walk-delgado-v2.png', 'kowalski': 'art/raw/npcs/npc-walk-kowalski-v2.png', 'ike': 'art/raw/npcs/npc-walk-ike-v2.png', 'halverson': 'art/raw/npcs/npc-walk-halverson-v1.png', 'bun': 'art/raw/npcs/npc-walk-bun-v1.png', 'page': 'art/raw/npcs/npc-walk-page-v1.png', 'fern': 'art/raw/npcs/npc-walk-fern-v1.png', 'kit': 'art/raw/npcs/npc-walk-kit-v1.png', 'oolong': 'art/raw/npcs/npc-walk-oolong-v1.png', 'luna': 'art/raw/npcs/npc-walk-luna-v1.png', 'penny': 'art/raw/npcs/npc-walk-penny-v1.png', 'nickel': 'art/raw/npcs/npc-walk-nickel-v1.png', 'sal': 'art/raw/npcs/npc-walk-sal-v1.png', 'sol': 'art/raw/npcs/npc-walk-sol-v1.png'}   # id -> approved Art Library walk sheet (the newest version of the entry)
 ap = argparse.ArgumentParser()
 ap.add_argument('--only', default=None)
 ap.add_argument('--colors', type=int, default=46)
@@ -219,6 +219,23 @@ def swap_legs(img):
         out[yy[ok], nx[ok]] = a[yy[ok], xx[ok]]
     return Image.fromarray(out, 'RGBA')
 
+# Head and body sizing for the Library walk sheets: the SAME mechanism as the main cast (tools/sprite-bake/walk_sheet_frames.py WALK_MATCH and GROW).
+# Adults: the head (top of hair, hat or cap to chin) is made as tall as Tom's on screen (TOM_HEAD_ROWS, kidhead.grow_head about the chin) and the body is
+# scaled so the whole figure keeps its real height next to Tom (42 rows = 5'11, so rows = 42 x inches / 71). Kids (Pip, Moss, Dot): head as tall as Grace's
+# (KID_HEAD_ROWS = her grown head, 11.47 rows) and the whole figure scaled from Grace (4'2 = 40.6 rows, Rose 3'4 = 36.6, so 0.4 rows per inch).
+# CHIN = chin line of the painted front stand frame as a share of that frame's height (read by eye with a ruler on each approved sheet, 11-10).
+TOM_HEAD_ROWS = 104 * 42 / 391.0
+KID_HEAD_ROWS = 11.47
+CHIN = {'pip': .23, 'moss': .25, 'dot': .22, 'gus': .26, 'bean': .225, 'reel': .28, 'pruitt': .25, 'delgado': .27, 'kowalski': .21, 'ike': .255,
+        'halverson': .26, 'bun': .27, 'page': .25, 'fern': .235, 'kit': .245, 'oolong': .25, 'luna': .275, 'penny': .21, 'nickel': .22, 'sal': .265, 'sol': .25}
+KIDS = {'pip', 'moss', 'dot'}
+def real_inches(cid):
+    m = re.search(r"\n\s+%s: \{[^\n]*?ft: `(\d+)'(\d+)\"`" % cid, open(os.path.join(ROOT, 'tools/art-library/npc-prompts.js')).read())
+    return int(m.group(1)) * 12 + int(m.group(2))
+def target_rows(cid):
+    inch = real_inches(cid)
+    return 40.6 + 0.4 * (inch - 50) if cid in KIDS else 42.0 * inch / 71.0
+
 walk_names = [f'{d}_{n}' for d in ('down', 'up', 'left') for n in ('stand', 'step1', 'stand2', 'step2')]
 out = {}
 for cid, ow_h in CAST.items():
@@ -233,6 +250,12 @@ for cid, ow_h in CAST.items():
             poses['left_step2'] = swap_legs(poses['left_step1'])
         for n in ('left_stand', 'left_step1', 'left_step2'):
             poses[n] = poses[n].transpose(Image.FLIP_LEFT_RIGHT)
+        from kidhead import grow_head
+        H0 = poses['down_stand'].height; chin = CHIN[cid] * H0; R = target_rows(cid)
+        T = KID_HEAD_ROWS if cid in KIDS else TOM_HEAD_ROWS
+        sb = (R - T) / (H0 - chin)                      # on-screen rows per source px for the body
+        poses = {n: grow_head(v, T / (chin * sb), chin) for n, v in poses.items()}
+        ow_h = None; fo_lib = sb * KW
     else:
       try:
         poses = slice_sheet(os.path.join(SRC, f'{cid}-walk-v1.png'), rn)
@@ -244,7 +267,7 @@ for cid, ow_h in CAST.items():
           tmp = os.path.join('/tmp', f'{cid}-top.png'); tmp2 = os.path.join('/tmp', f'{cid}-bot.png')
           im.crop((0, 0, im.width, y0)).save(tmp); im.crop((0, y0, im.width, im.height)).save(tmp2)
           poses = slice_sheet(tmp, rn[:2]); poses.update(slice_sheet(tmp2, rn[2:]))
-    fo = ow_h * KW / poses['down_stand'].height
+    fo = fo_lib if cid in LIBRARY_WALK else ow_h * KW / poses['down_stand'].height
     ow_big = {n: scaled_to(v, fo) for n, v in poses.items() if not n.endswith('stand2')}
     ow_big = tighten(place(ow_big, KW, 'center'), KW)
     pal, rows = rows_of(ow_big, KW, args.colors)
