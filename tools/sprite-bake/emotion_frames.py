@@ -35,6 +35,12 @@ def cut(cid):
         pl, pn = ndi.label(pink)                                             # only a solid blob (hair highlights are small scattered bits)
         for j in range(1, pn + 1):
             if (pl == j).sum() >= 150: cell[t:t + 30][pl == j, 3] = 0
+        # painted ground shadow under the feet (walkinst1: the Art Library sheets put a dark magenta-brown smear there, Grace's most). In the bottom 9 percent
+        # of the figure, clear red-purple pixels whose green is far below red (shadow 112,57,74 or 144,59,106); lilac shoes (about 200,170,200) and brown shoes are kept.
+        ys = np.where(cell[:, :, 3].max(1) > 20)[0]; y9 = ys[-1] - int((ys[-1] - ys[0]) * .09); bot = cell[y9:].astype(int)
+        r_, g_, b_ = bot[:, :, 0], bot[:, :, 1], bot[:, :, 2]
+        sh = (r_ - g_ > 20) & (b_ - g_ > 10) & (g_ < .62 * r_) & (b_ < r_ + 25)
+        cell[y9:][sh, 3] = 0
         A = cell[:, :, 3] > 20; lab, n = ndi.label(ndi.binary_dilation(A, iterations=2)); big = 1 + int(np.argmax(ndi.sum(A, lab, range(1, n + 1)))); cell[lab != big, 3] = 0
         im = Image.fromarray(cell, 'RGBA'); figs.append(im.crop(im.getbbox()))
     return figs

@@ -16,13 +16,7 @@ function emoPreload(id) {
   if(emoPreloaded.has(id)) return; emoPreloaded.add(id);
   for(const m of EMOTIONS_LIST) new Image().src='portraits/emo/'+id+'-'+m+'.webp?v='+EMO_V;
 }
-const EMOTIONS_LIST=["happy","loving","sad","angry","scared","surprised","proud","unimpressed"],EMO_V='crop2';
-// Mood poses on the map are paused for these characters (Tom 2026-11-09 12:22: "the emotional frames are still larger than the standard pose / hero
-// pose / walking pose"). Their painted emotion sheets have a different build from the walk (head about a third of the height, broad torso, short legs),
-// so no resize can match both height and bulk (emo15 matched height; they still read bigger). They keep the standing frame during a mood line; the
-// dialogue face still changes. Remove an id when its redone emotion sheet (Art Library entry <id>-emotions, emoredo1) is approved and installed.
-// TNB, Grace and Rose are back on (Tom 12:37, emopause2): their poses are sized so the head matches the standing head (EMO_HEAD in bake_story_poses.py).
-const EMO_POSE_PAUSED=new Set(['tom','amy','deedee','olivia','justin']);
+const EMOTIONS_LIST=["happy","loving","sad","angry","scared","surprised","proud","unimpressed"],EMO_V='walkinst1';
 function emoActorFor(id,name) {
   const pm=typeof playerMember==='function'?playerMember():null;
   if(pm&&pm.id===id) return typeof roseRider==='function'&&roseRider()?null:player;   // Tom carrying Rose keeps the ride picture
@@ -46,7 +40,7 @@ function emoApply() {
   if(img) { img.src='portraits/emo/'+id+'-'+mood+'.webp?v='+EMO_V; img.alt=''; box.hidden=false; $('dialog').classList.add('has-portrait'); fitDialogPortrait(); }
   EMO.mood=mood; EMO.id=id;
   const a=emoActorFor(id,dialog.name);
-  if(a&&!a.scenePose&&!EMO_POSE_PAUSED.has(id)&&typeof STORY_POSES!=='undefined'&&STORY_POSES[id]&&STORY_POSES[id]['em_'+mood]) {
+  if(a&&!a.scenePose&&typeof STORY_POSES!=='undefined'&&STORY_POSES[id]&&STORY_POSES[id]['em_'+mood]) {
     if(typeof storyPosesLoad==='function') storyPosesLoad(id);
     a.scenePose={f:'em_'+mood,mid:id,emo:true}; EMO.actor=a;
   }

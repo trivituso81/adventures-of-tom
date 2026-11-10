@@ -4,7 +4,7 @@ Why: the walk bakes also rewrite the battle atlases and the battle part of data/
 `ow` pieces (meta, atlas entry, `ow` block) of the new data file into the committed one. Run from the repo root on a clean tree."""
 import os, re, shutil, subprocess, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); os.chdir(ROOT)
-SCRIPT = {'grace': 'bake_grace_walk_v4.py'}
+SCRIPT = {'grace': 'bake_grace_walk_v4.py', 'tom': 'bake_tom_walk_v4.py'}
 PAT = r'"ow": \{"src": "[^"]+", "k": [0-9.]+, "rects": \{[^}]*\}\}'
 def blocks(t):
     L = t.split('\n'); return L, [i for i, l in enumerate(L) if re.match(r'  [a-z]+:', l)]

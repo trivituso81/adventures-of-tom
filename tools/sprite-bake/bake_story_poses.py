@@ -58,23 +58,14 @@ for _id, _h in EMO_H.items():
     SETS[_id + 'emo'] = {'member': _id, 'strip': os.path.join('art/emotions', _id + '.webp'), 'k': 0, 'h': _h, 'ref': 'em_sad' if _id != 'nara' else 'em_happy',
                          'names': ['em_' + m for m in EMO_MOODS]}
 
-# Emotion frames match the standing frame in size (Tom 2026-11-06: "the emotion frames must be sized just like the standard states, both bodies and
-# heads, so the characters do not appear to enlarge in an emotional state"). The strips are painted with bigger heads and wider poses than the overworld stand
-# frame. Per frame, measured against the character's overworld down_stand frame in game rows (after the one scale factor f):
-#   1. head: width of the hair and forehead band (3 to 11 percent of the height, median row) over the standing one; above 1.06 the head rows (top to chin) shrink
-#      by that ratio about the chin (kidhead.grow_head, the body keeps its size). Chin = the standing chin row (STAND_CHIN) times the ratio.
-#   2. figure: sqrt of the silhouette area over the standing one; above 1.03 the whole frame shrinks by that ratio (floor .9). Area ignores a wide stance's gaps,
-#      so it catches the broad angry, proud and surprised poses. Nara (a dog, sits and lies) is left as painted.
-STAND_CHIN = {'tom': 10.3, 'tnb': 11.5, 'grace': 10.8, 'rose': 10.2, 'justin': 9.8, 'boppy': 10.8, 'deedee': 10.3, 'ellie': 10.5, 'olivia': 10.3, 'amy': 10.5}
-HEAD_OVER, FIG_OVER = 1.06, 1.03
-
-# Head-matched emotion size (Tom 2026-11-09 12:37: "TNB, Grace and Rose's proportions look good. the emotional states just need to be sized up according
-# to head shape compared to their standing pose baseline"). For these ids the 8 emotion frames get ONE size factor, set so the painted head (top of hair to
-# chin) is as tall in game rows as the head of the overworld down_stand frame; no head shrink and no figure shrink (match_standing is skipped). The body follows
-# the head, so the mood figure can be taller or shorter than the stand. Matched by FACE, not hair (hair volume differs between the sheets): the standing
-# frame was laid over the happy, proud and unimpressed faces at several sizes, aligned at the eyes, and the size where face width and eye-to-chin agree kept.
-#   id: emotion strip px per standing-frame px at the matched face size (emopause2). TNB 1.11 (emopause3, Tom 15:23 "why is TNB so much shorter"): his sheet paints a bigger head on a shorter body, so a pure face match (1.20) made him 13% shorter; 1.11 splits it (face about 8% bigger, figure about 7% shorter).
-EMO_HEAD = {'tnb': 1.11, 'grace': 1.10, 'rose': 1.30}
+# Emotion size: ONE size factor per character for all 8 moods (Tom 2026-11-09 12:37: "sized up according to head shape compared to their standing pose
+# baseline"), no per-frame shrink. EMO_HEAD[id] = emotion strip px per standing-frame atlas px. Nara (a dog) is not listed: her strip is scaled to 'h' by 'ref'.
+# walkinst1 (2026-11-09): all ten people have new Art Library emotion sheets and new walking sheets, so every factor was set again. The walk bake
+# enlarges adult heads to Tom's head height (walk_sheet_frames.WALK_MATCH) while the emotion sheets are as painted, so a pure face match makes most mood
+# bodies shorter than the stand. Each factor is the mean of (a) the upright moods' height over the stand height and (b) the head width over the standing
+# head width, so face and height each miss by about 3 to 5 percent; checked by eye next to the standing frame. Justin 1.35 and Boppy 2.25 lean toward height
+# (their walk heads are enlarged most): moods about 9 and 6 percent shorter, faces about 7 and 8 percent bigger.
+EMO_HEAD = {'tom': 1.4, 'tnb': 1.35, 'grace': 1.36, 'rose': 1.63, 'amy': 1.34, 'justin': 1.35, 'deedee': 1.29, 'boppy': 2.25, 'olivia': 1.59, 'ellie': 1.4}
 
 
 def stand_frame(cid):
@@ -86,30 +77,6 @@ def stand_frame(cid):
     im = Image.open(os.path.join(ROOT, src)).convert('RGBA').crop((x, y, x + w, y + h))
     return im.crop(im.getbbox()), k
 
-
-def head_band(im, k):
-    a = np.array(im)[:, :, 3] > 40; H = a.shape[0]
-    return float(np.median(a[int(H * .03):int(H * .11)].sum(1))) / k
-
-
-def area_rows(im, k):
-    return float((np.array(im)[:, :, 3] > 40).sum()) / k / k
-
-
-def match_standing(cid, S, figs, f):
-    if cid[:-3] not in STAND_CHIN: return figs
-    from kidhead import grow_head
-    mid = cid[:-3]; so, sk = stand_frame(mid); sb, sa = head_band(so, sk), area_rows(so, sk); k = S['k']; out = {}
-    for n, im in figs.items():
-        r = head_band(im, k / f) / sb                     # the frame is f x bigger in the atlas, k atlas px per row
-        if r > HEAD_OVER:
-            r = min(r, 1.4); im = grow_head(im, 1.0 / r, STAND_CHIN[mid] * r * k / f, taper=int(k / f * 3))
-        a = (area_rows(im, k / f) / sa) ** .5
-        if a > FIG_OVER:
-            g = max(.9, 1.0 / a); im = im.resize((round(im.width * g), round(im.height * g)), Image.LANCZOS)
-        out[n] = im
-        print('  match', mid, n, 'head x%.2f' % r, 'figure x%.2f' % a)
-    return out
 
 # Tom's stretch poses (Tom 2026-11-06 16:02: "his stretching states are also not the same size as his regular body"). Compared in the real game against his
 # standing frame (not by bounding box: raised arms and bends change the box): the two side bends read about 15 percent bigger in head and torso, Stiff and Rise
@@ -239,8 +206,6 @@ for cid, S in SETS.items():
     f = S['h'] * S['k'] / figs[S['ref']].height
     if 'strip' in S and S['member'] in EMO_HEAD:
         f = S['k'] / (EMO_HEAD[S['member']] * stand_frame(S['member'])[1])   # strip px -> standing px -> game rows -> atlas px
-    elif 'strip' in S:
-        figs = match_standing(cid, S, figs, f)
     if cid in STRETCH_FIT:
         figs = {n: (im.resize((round(im.width * STRETCH_FIT[cid].get(n, 1.0)), round(im.height * STRETCH_FIT[cid].get(n, 1.0))), Image.LANCZOS) if STRETCH_FIT[cid].get(n, 1.0) != 1.0 else im) for n, im in figs.items()}
     big = place({n: scaled_to(im, f) for n, im in figs.items()}, S['k'], {n: v * f for n, v in S.get('feet', {}).items() if v})

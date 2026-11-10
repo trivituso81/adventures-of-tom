@@ -2,8 +2,9 @@
 for Tom, Grace and Rose). Sheet rows: front, back, side (facing screen-left); columns: stand, step A, step B.
 Used exactly as painted: no head or body resizing, no flipping, no substitution. All nine figures keep the sheet's own scale.
 The pass frame is the stand (the engine shows stand, step1, pass, step2). Right-facing frames are the engine's mirror of left.
-Sources: art/raw/characters/<id>-walk-sheet-v1.png. Returns {'w_down_stand': RGBA, ...}."""
-import os, sys
+Sources: the newest approved art/raw/characters/<id>-walking-sheet-vN.png (Art Library, walksheets1; installed walkinst1 2026-11-09), else the
+painted original <id>-walk-sheet-v1.png (Michael, Nara, Jojo). Returns {'w_down_stand': RGBA, ...}."""
+import os, sys, re, glob
 import numpy as np
 from PIL import Image
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -83,25 +84,33 @@ def grid(path, ncols, nrows):
 # BODY_ROWS_PER_PX[cid] is the bake scale for the body (the bakes use it for fo, never args.ow_h). Olivia's and Ellie's heights were assumed.
 # KIDS (GROW): Tom 02:45, Grace and Rose heads 15 percent bigger, body unchanged (bakes scale from UNWARPED_H).
 TOM_HEAD_ROWS = 104 * 42 / 391.0
-WALK_MATCH = {'tnb': (118, 45, .92), 'justin': (123, 53, .849), 'boppy': (154, 41.7, .922), 'deedee': (114, 41.7, .922),
-              'amy': (95, 41.7, .925), 'olivia': (100, 42, .914), 'ellie': (125, 43, .853)}
-GROW = {'grace': (100, 1.15), 'rose': (102, 1.15)}
+# The chin is stored as a share of the painted stand frame's height (measured on the first painted walk sheets: chin px over stand px, TNB 118/390,
+# Justin 123/387, Boppy 154/392, Deedee 114/390, Amy 95/393, Olivia 100/395, Ellie 125/392, Grace 100/392, Rose 102/387). The Art Library walking
+# sheets (walkinst1) were generated from those sheets and keep the same proportions at a larger pixel size, so the share carries over.
+WALK_MATCH = {'tnb': (118 / 390, 45, .92), 'justin': (123 / 387, 53, .849), 'boppy': (154 / 392, 41.7, .922), 'deedee': (114 / 390, 41.7, .922),
+              'amy': (95 / 393, 41.7, .925), 'olivia': (100 / 395, 42, .914), 'ellie': (125 / 392, 43, .853)}
+GROW = {'grace': (100 / 392, 1.15), 'rose': (102 / 387, 1.15)}
 UNWARPED_H = {}
 BODY_ROWS_PER_PX = {}
 
+def src(cid):
+    """Newest approved Art Library walking sheet, else the painted original."""
+    vs = sorted(glob.glob(os.path.join(RAW, f'{cid}-walking-sheet-v*.png')), key=lambda p: int(re.search(r'-v(\d+)\.png$', p).group(1)))
+    return vs[-1] if vs else os.path.join(RAW, f'{cid}-walk-sheet-v1.png')
+
 def build(cid, fix=False):
-    figs = grid(os.path.join(RAW, f'{cid}-walk-sheet-v1.png'), 3, 3)
+    figs = grid(src(cid), 3, 3)
     UNWARPED_H[cid] = figs[0].height
     if fix and cid in WALK_MATCH:
         from kidhead import grow_head
-        chin, rows, k = WALK_MATCH[cid]; H = UNWARPED_H[cid]
+        chin, rows, k = WALK_MATCH[cid]; H = UNWARPED_H[cid]; chin *= H
         R = rows * k                                            # on-screen height of the whole figure, unchanged
         sb = (R - TOM_HEAD_ROWS) / (H - chin)                    # on-screen rows per source px for the body
         BODY_ROWS_PER_PX[cid] = sb / k                           # bake rows per source px (the engine multiplies by k)
         figs = [grow_head(f, TOM_HEAD_ROWS / (chin * sb), chin) for f in figs]
     elif fix and cid in GROW:
         from kidhead import grow_head
-        chin, kh = GROW[cid]
+        chin, kh = GROW[cid]; chin *= UNWARPED_H[cid]
         figs = [grow_head(f, kh, chin) for f in figs]
     out = {}
     for r in range(3):
