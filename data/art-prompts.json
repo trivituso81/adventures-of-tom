@@ -9136,6 +9136,13 @@
      "date": "2026-11-10",
      "from": "v4",
      "at": 1794294451272
+    },
+    {
+     "n": 3,
+     "file": "art/raw/npcs/npc-photo-oolong-v4.png",
+     "date": "2026-11-10",
+     "from": "v1",
+     "at": 1794336328692
     }
    ],
    "rejects": [],
