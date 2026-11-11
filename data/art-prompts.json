@@ -18187,8 +18187,16 @@
    "group": "Los Angeles people"
   },
   {
-   "status": "rejected",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/npcs/npc-walk-marisol-v1.png",
+     "date": "2026-11-11",
+     "from": "v3",
+     "at": 1794361212363
+    }
+   ],
    "rejects": [
     {
      "date": "2026-11-11",
