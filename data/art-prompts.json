@@ -19469,8 +19469,16 @@
    "group": "Los Angeles people"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/npcs/npc-emotions-larry-v1.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794360732288
+    }
+   ],
    "rejects": [],
    "id": "npc-emotions-larry",
    "tab": "NPCs",
