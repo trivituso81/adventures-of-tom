@@ -12911,6 +12911,13 @@
      "date": "2026-11-06",
      "from": "v5",
      "at": 1793997646896
+    },
+    {
+     "n": 2,
+     "file": "art/raw/enemies/enemy-warden-v3.png",
+     "date": "2026-11-11",
+     "from": "v6",
+     "at": 1794432327302
     }
    ],
    "rejects": [],
