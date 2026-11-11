@@ -15432,8 +15432,16 @@
    "group": "Airport"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/rooms/room-terminal-cut3-v1.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794440323080
+    }
+   ],
    "rejects": [],
    "id": "room-terminal-cut3",
    "tab": "Rooms",
