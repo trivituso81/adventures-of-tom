@@ -90,6 +90,12 @@ TOM_HEAD_ROWS = 104 * 42 / 391.0
 WALK_MATCH = {'tnb': (118 / 390, 45, .92), 'justin': (123 / 387, 53, .849), 'boppy': (154 / 392, 41.7, .922), 'deedee': (114 / 390, 41.7, .922),
               'amy': (95 / 393, 41.7, .925), 'olivia': (100 / 395, 42, .914), 'ellie': (125 / 392, 43, .853)}
 GROW = {'grace': (100 / 392, 1.15), 'rose': (102 / 387, 1.15)}
+# HEAD_TWEAK (head size adjuster, Tom 2026-11-10): per-character extra head factor on top of the rules above, kept in head_tweak.json next to this
+# file (written by head_adjust.py). 1.0 or absent = no change (the bake is byte for byte what it was). Adults: the head is TOM_HEAD_ROWS x factor and
+# the whole figure keeps its real on-screen height. Kids: the 1.15 head growth is multiplied by the factor, body unchanged.
+import json
+try: HEAD_TWEAK = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'head_tweak.json')))
+except OSError: HEAD_TWEAK = {}
 UNWARPED_H = {}
 BODY_ROWS_PER_PX = {}
 
@@ -105,12 +111,14 @@ def build(cid, fix=False):
         from kidhead import grow_head
         chin, rows, k = WALK_MATCH[cid]; H = UNWARPED_H[cid]; chin *= H
         R = rows * k                                            # on-screen height of the whole figure, unchanged
-        sb = (R - TOM_HEAD_ROWS) / (H - chin)                    # on-screen rows per source px for the body
+        hr = TOM_HEAD_ROWS * HEAD_TWEAK.get(cid, 1.0)            # on-screen head height (Tom's, times the adjuster factor)
+        sb = (R - hr) / (H - chin)                               # on-screen rows per source px for the body
         BODY_ROWS_PER_PX[cid] = sb / k                           # bake rows per source px (the engine multiplies by k)
-        figs = [grow_head(f, TOM_HEAD_ROWS / (chin * sb), chin) for f in figs]
+        figs = [grow_head(f, hr / (chin * sb), chin) for f in figs]
     elif fix and cid in GROW:
         from kidhead import grow_head
         chin, kh = GROW[cid]; chin *= UNWARPED_H[cid]
+        kh *= HEAD_TWEAK.get(cid, 1.0)
         figs = [grow_head(f, kh, chin) for f in figs]
     out = {}
     for r in range(3):
