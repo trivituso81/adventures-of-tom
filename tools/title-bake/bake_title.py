@@ -25,9 +25,10 @@ def approved(eid):
 
 def welcome():
     from PIL import ImageFilter
-    def crisp(im, big):   # title3/title5: the generator makes these pictures at 1280 px on the long side; upscale 2x (Lanczos) then sharpen in two passes. Classic sharpening, not new detail.
+    def crisp(im, big):   # title7: Tom found the title art grainy. The two sharpening passes of title3/title5 boosted the paint texture into grain, so there is no sharpening now: 2x Lanczos upscale for the small portrait picture, then a light colour denoise.
         if big < 1800: im = im.resize((im.width * 2, im.height * 2), Image.LANCZOS)
-        return im.filter(ImageFilter.UnsharpMask(radius=1.2, percent=140, threshold=2)).filter(ImageFilter.UnsharpMask(radius=3, percent=50, threshold=2))
+        a = cv2.fastNlMeansDenoisingColored(np.asarray(im)[..., ::-1].copy(), None, 3, 3, 5, 15)
+        return Image.fromarray(a[..., ::-1])
     port = Image.open(approved('title-welcome-portrait')).convert('RGB')
     crisp(port, port.height).save('art/welcome.webp', quality=88, method=6)
     # title2: the approved landscape picture is a painted band with flat cream bars above and below and a soft fade at each band edge.
@@ -43,7 +44,8 @@ def welcome():
     print('landscape rows', y0, y1)
 
 def logo():
-    a = np.asarray(Image.open(approved('title-logo')).convert('RGB')).astype(np.float32)
+    a = np.asarray(Image.open(approved('title-logo')).convert('RGB'))
+    a = cv2.fastNlMeansDenoisingColored(a[..., ::-1].copy(), None, 4, 4, 5, 15)[..., ::-1].astype(np.float32)   # title7: light denoise of the generator's grain before keying
     h, w, _ = a.shape
     ring = np.concatenate([a[0], a[-1], a[:, 0], a[:, -1]])
     bg = np.median(ring, axis=0)
@@ -67,6 +69,7 @@ def logo():
     pad = 6
     y0, y1, x0, x1 = max(0, ys.min() - pad), min(h, ys.max() + pad + 1), max(0, xs.min() - pad), min(w, xs.max() + pad + 1)
     im = Image.fromarray(out[y0:y1, x0:x1], 'RGBA')
+    im = im.resize((im.width * 2, im.height * 2), Image.LANCZOS)   # title7: 2x so the phone does not stretch a 925 px logo
     im.save('art/title-logo.webp', quality=92, method=6)
     print('logo', im.size, 'bg', bg.round())
 

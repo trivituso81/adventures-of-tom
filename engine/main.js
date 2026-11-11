@@ -42,7 +42,7 @@ function pollGamepad() {
 let bootDone=false; const bootT0=performance.now(), bootArt=[];
 (function(){
   const land=document.documentElement.classList.contains('landscape')||innerWidth>innerHeight;
-  for(const u of [land?'art/welcome-land.webp?v=title6':'art/welcome.webp','art/title-logo.webp?v=title6']) {
+  for(const u of [land?'art/welcome-land.webp?v=title7':'art/welcome.webp','art/title-logo.webp?v=title7']) {
     const st={ok:false},im=new Image(); im.src=u;
     const done=()=>{ st.ok=true; };
     (im.decode?im.decode():Promise.reject()).then(done,()=>{ im.onload=im.onerror=done; if(im.complete) done(); });
@@ -103,7 +103,7 @@ startSplash();
   const sp=document.getElementById('splash'); if(!sp) return;
   const d=document.createElement('div');
   // On an iPhone Duo the stamp also shows the page size and pose the game measured, so Tom can read them back (docs/DUO.md).
-  d.textContent='build bubble2';
+  d.textContent='build title7';
   const build=d.textContent,stamp=()=>{ d.textContent=build+(typeof duoMode!=='undefined'&&duoMode.device?' '+window.innerWidth+'x'+window.innerHeight+(duoMode.open?' duo open':' duo folded'):''); };
   stamp(); window.addEventListener('resize',()=>setTimeout(stamp,60));
   d.style.cssText='position:absolute;left:8px;bottom:4px;font:10px monospace;color:#fff;opacity:.45;pointer-events:none;z-index:50';
