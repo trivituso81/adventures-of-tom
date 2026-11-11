@@ -4,7 +4,7 @@
 const fs = require('fs');
 
 const PEOPLE = { tom: 'Tom', tnb: 'TNB', grace: 'Grace', rose: 'Rose', amy: 'Amy', justin: 'Justin', deedee: 'Deedee', boppy: 'Boppy', olivia: 'Olivia', michael: 'Michael', jojo: 'Jojo', ellie: 'Aunt Ellie', nara: 'Nara' };
-const PROP_GROUPS = { find: 'Dungeon finds', trail: 'Trail clues', gate: 'Story gates' };
+const PROP_GROUPS = { find: 'Dungeon finds', trail: 'Trail clues', bubble: 'Speech bubbles', gate: 'Story gates' };
 const FOE_AREAS = {
   hollow: 'Grump Hollow', griffith: 'Griffith Park', marsh: 'Whispering Marsh', backlot: 'Studio Backlot', school: 'School', oak: 'Old Oak', library: 'Hush Library',
   barn: 'Car Barn', club: 'Moon Club', terminal: 'Terminal Zero', infinity: 'Terminal Infinity', blvd: 'Downtown boulevard', subrail: 'Sub-Rail', row: 'Rivituso Row',
