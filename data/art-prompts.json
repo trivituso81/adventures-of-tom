@@ -6469,6 +6469,13 @@
      "date": "2026-11-10",
      "from": "v1",
      "at": 1794272724609
+    },
+    {
+     "n": 2,
+     "file": "art/raw/characters/deedee-emotions-v3.png",
+     "date": "2026-11-11",
+     "from": "v2",
+     "at": 1794361606704
     }
    ],
    "rejects": [],
