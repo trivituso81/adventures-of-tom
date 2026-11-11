@@ -1,3 +1,9 @@
+## 2026-11-11 (cast2): Olivia, Michael, Lachlan and Isla join the welcome screen on the LA side (tag cast2)
+- Tom 09:35: put Olivia, Michael and the kids on the LA side to even the balance. Michael's walk art carries Lachlan and Isla, so two figures were added.
+- `engine/splash.js`: heights Olivia 5'5" (282, the height her art already uses) and Michael 6'4" (330); widths from their walk frames (.357, .566). Landscape: Olivia and Michael stand in the back row behind TNB and Nara (x 858 and 965, feet 1150), mirroring Justin and Amy on the Long Island side. Portrait: back row is now Boppy, Deedee, Justin, Amy (Long Island side) and Olivia, Michael (LA side), with the gap between the two groups right behind Tom (`backPivot`); back-row overlap tightened (`backGap` .5 to .8) and `fracW` .98 so the group stays large (Tom 199 px tall at 390 x 844, was 230 with nine people).
+- `engine/main.js` `bootReady()`: the loading card also waits for Olivia's and Michael's walk sheets.
+- Tom stays at the exact screen centre in every view (castflip1 rule). Looked at 390 x 844, 375 x 667, 844 x 390 and the Duo at 951 x 648. Tests: smoke FAILS [], tag_check ok.
+
 ## 2026-11-11 (duo2): iPhone Duo battle layout, sideways
 - Tom: in landscape, make the left side (the scene) as big as possible while the right side stays usable; stack the characters on the right vertically.
 - `index.html` `html.duo` block: battle strip `--b2pw` 188 px (was 280), party cards one per row with 30 px faces, command cross text 11 px. Scene grows from 671 x 377 to 763 x 429 at 951 x 648 (about 30% more area). Phones, iPads and the upright Duo are unchanged.

@@ -562,24 +562,27 @@ function splashScene(W,H,panelH,time) {
 // proportion to the others and the group fills the screen the same way on an iPad in landscape and an iPhone in portrait.
 const SPLASH_BREATH={amp:.011,speed:1.0};   // slow rise and fall: amp = lift as a share of the figure's height, speed = radians per second (period about 6 s). Whole pixels only, no scaling: stretching every frame shimmered and read as rapid pulsing (Tom 2026-11-06 02:13)
 // Heights in design units, all from real heights at 4.34 units per inch (Tom 5'11" = 308, TNB 5'10", Boppy 5'7" 291, Amy and Deedee 5'5" 282, Justin 6'4" 330,
-// Grace 4'2" 222, Rose 3'4" 178, Nara a 40 lb labradoodle about 28 in at the head = 130). Heights are of the visible figure (hair, hats and all), so TNB (5'10") stands a little shorter than Tom (5'11").
-const SPLASH_H={tom:308,tnb:304,justin:330,boppy:291,amy:282,deedee:282,grace:230,rose:185,nara:130};
+// Grace 4'2" 222, Rose 3'4" 178, Nara a 40 lb labradoodle about 28 in at the head = 130, Olivia 5'5" 282, Michael 6'4" 330 with Lachlan and Isla on his arms). Heights are of the visible figure (hair, hats and all), so TNB (5'10") stands a little shorter than Tom (5'11").
+const SPLASH_H={tom:308,tnb:304,justin:330,boppy:291,amy:282,deedee:282,grace:230,rose:185,nara:130,olivia:282,michael:330};
 // Landscape and any wide window (Tom 2026-11-06 11:43): Tom stands dead centre under the logo (x 520 = the screen centre). To his left: TNB, then Nara.
 // To his right, front row: Rose, Grace, Deedee, Boppy. Amy and Justin stand behind Rose and Grace. Design units (x = centre, feet = baseline); later in the list draws on top.
 const SPLASH_LAND={feet0:1222,sx:1,sy:.7,span:890,tall:331,fracW:.74,fracH:.42,feetY:.79};
 // Order mirrored (Tom 2026-11-11 09:00): the Long Island family stands on the Long Island side of the welcome painting (left), the Los Angeles
 // family on the LA side (right). x' = 1208 - x, the group's own middle, so the group stays where it was.
+// Olivia and Michael (with Lachlan and Isla) join the LA side behind TNB and Nara to balance the picture (Tom 2026-11-11 09:35).
 const SPLASH_SPOTS=[
-  {id:'justin',x:503,feet:1150},{id:'amy',x:603,feet:1150},
+  {id:'justin',x:503,feet:1150},{id:'amy',x:603,feet:1150},{id:'olivia',x:858,feet:1150},{id:'michael',x:965,feet:1150},
   {id:'boppy',x:304,feet:1222},{id:'deedee',x:417,feet:1222},{id:'grace',x:513,feet:1222},{id:'rose',x:596,feet:1222},
   {id:'tom',x:688,feet:1222},{id:'tnb',x:803,feet:1222},{id:'nara',x:904,feet:1250}
 ];
 // Portrait (iPhone tuning, Tom 2026-11-06; order mirrored 2026-11-11 so Long Island people stand on the Long Island side): two rows. Front, left to right: Grace, Rose, Tom, TNB, Nara.
 // SPLASH_W = painted figure width over height (arms included). Front figures are spaced at `gap` of their widths, the back row is `depth` design units further
 // back, and the group scales so the tallest figure plus the depth fills fracH of the screen height (about 40% bigger than the old single line).
-const SPLASH_W={tom:.334,tnb:.381,justin:.426,boppy:.410,amy:.333,deedee:.349,grace:.375,rose:.388,nara:.599};
-const SPLASH_PORT={front:['grace','rose','tom','tnb','nara'],back:['justin','amy','boppy','deedee'],gap:1.0,backGap:[.78,1.25,.78],   // Justin+Amy and Boppy+Deedee stand as pairs, the gap between the pairs is wider (Tom 07:49)
-  depth:125,fracW:.94,fracH:.43,feetY:.74};
+const SPLASH_W={tom:.334,tnb:.381,justin:.426,boppy:.410,amy:.333,deedee:.349,grace:.375,rose:.388,nara:.599,olivia:.357,michael:.566};
+// Back row (Tom 2026-11-11 09:35): the Long Island grown-ups (Boppy, Deedee, Justin, Amy) behind the Long Island side, Olivia and Michael (with the kids)
+// behind the LA side. backPivot: the gap between those two groups sits right behind Tom.
+const SPLASH_PORT={front:['grace','rose','tom','tnb','nara'],back:['boppy','deedee','justin','amy','olivia','michael'],gap:1.0,backGap:[.5,.7,.5,.8,.55],backPivot:['amy','olivia'],
+  depth:125,fracW:.98,fracH:.43,feetY:.74};
 function splashPortLayout(w,h) {
   const P=SPLASH_PORT,wid=id=>SPLASH_H[id]*SPLASH_W[id];
   let x=0,pw=0;
@@ -588,7 +591,8 @@ function splashPortLayout(w,h) {
   const back=P.back.map((id,i)=>{ const ww=wid(id); if(i) bx+=(bw/2+ww/2)*P.backGap[i-1]; bw=ww; return {id,x:bx,ww}; });
   const blo=Math.min(...back.map(f=>f.x-f.ww/2)),bhi=Math.max(...back.map(f=>f.x+f.ww/2));
   const flo=Math.min(...front.map(f=>f.x-f.ww/2)),fhi=Math.max(...front.map(f=>f.x+f.ww/2)),shift=(flo+fhi)/2-(blo+bhi)/2;
-  for(const b of back) b.x+=shift;
+  const tomX=front.find(f=>f.id==='tom').x,pv=P.backPivot&&P.backPivot.map(id=>back.find(f=>f.id===id));
+  for(const b of back) b.x+=pv?tomX-(pv[0].x+pv[1].x)/2:shift;
   const all=front.concat(back),lo=Math.min(...all.map(f=>f.x-f.ww/2)),hi=Math.max(...all.map(f=>f.x+f.ww/2));
   const tall=Math.max(...P.front.concat(P.back).map(i=>SPLASH_H[i]));
   // Tom is always at the centre of the screen (Tom 2026-11-11 09:03): the group is placed around Tom, sized by its wider half.

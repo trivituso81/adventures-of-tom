@@ -36,7 +36,7 @@ function pollGamepad() {
   if(A) pressAction();
 }
 
-// Loading screen gate (Tom 2026-11-06): the #boot card stays up until the welcome painting, the title logo and the nine welcome family
+// Loading screen gate (Tom 2026-11-06): the #boot card stays up until the welcome painting, the title logo and the eleven welcome family
 // sheets are downloaded and decoded, so the welcome screen appears whole instead of filling in after the card fades. After 25 s it lets go
 // anyway (a failed file counts as done), so a slow or missing file can never trap the player behind the card.
 let bootDone=false; const bootT0=performance.now(), bootArt=[];
@@ -52,7 +52,7 @@ let bootDone=false; const bootT0=performance.now(), bootArt=[];
 function bootReady() {
   if(performance.now()-bootT0>25000) return true;
   if(!bootArt.every(a=>a.ok)) return false;
-  return ['tom','grace','rose','tnb','amy','deedee','boppy','nara','justin'].every(id=>{ const a=PAINTED[id+'Ow']; return !a||a.ready||a.failed; });
+  return ['tom','grace','rose','tnb','amy','deedee','boppy','nara','justin','olivia','michael'].every(id=>{ const a=PAINTED[id+'Ow']; return !a||a.ready||a.failed; });
 }
 
 function frame(now) {
@@ -103,7 +103,7 @@ startSplash();
   const sp=document.getElementById('splash'); if(!sp) return;
   const d=document.createElement('div');
   // On an iPhone Duo the stamp also shows the page size and pose the game measured, so Tom can read them back (docs/DUO.md).
-  d.textContent='build duo2';
+  d.textContent='build cast2';
   const build=d.textContent,stamp=()=>{ d.textContent=build+(typeof duoMode!=='undefined'&&duoMode.device?' '+window.innerWidth+'x'+window.innerHeight+(duoMode.open?' duo open':' duo folded'):''); };
   stamp(); window.addEventListener('resize',()=>setTimeout(stamp,60));
   d.style.cssText='position:absolute;left:8px;bottom:4px;font:10px monospace;color:#fff;opacity:.45;pointer-events:none;z-index:50';
