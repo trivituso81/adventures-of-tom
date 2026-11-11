@@ -20665,8 +20665,16 @@
    "prompt": "Paint a new sheet of the Chronos-Leviathan, the creature in attachment 2, as a handbrushed painting. Attachment 2 is the current painting of it in the game: paint the same creature, with the same shape, colors, materials and details, at the same size in each cell, in the same view, facing right. Do not repeat the poses of attachment 2. Paint 6 NEW poses in a 3 by 2 layout, one pose alone in each cell with clear magenta all around it and nothing crossing into another cell. These poses show the moment after the fight, when the anger has gone out: the mood is gentle, warm and a little funny, never fierce. It never roars in these poses: the jaws are closed. Top row: 1 the same upright pose as the first pose of attachment 2, at exactly the same size, but calm: coiled as before with the head lowered, the eyes soft and sad, the hands of the clock on its chest still. 2 loosening: the two big shoulder gears lifted a little way off the body and hanging free beside it, the coils slack, the eyes closing. 3 coming apart: the long body separated into its segments with clear gaps between them, each still in place, the head whole, a few small gears drifting just outside. Bottom row: 4 nearly apart: only the head and the round clock face still joined, the rest a loose ring of separate gears and gold segments around them. 5 the round clock face alone, with a few small gears close around it. 6 six separate gold gears of different sizes, spaced well apart from each other, each one whole, and nothing else in the cell. Paint only what each pose names: no glows, speed lines, sparkles or splashes unless a pose asks for them, and no letters, numbers or words anywhere. Paint and finish it like attachment 1: matte, thick visible brush strokes on the figure, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/ending-julian-v1.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794437156652
+    }
+   ],
    "rejects": [],
    "id": "ending-julian",
    "tab": "Enemies",
