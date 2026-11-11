@@ -112,11 +112,12 @@ def apply(ids, tweak):
     r = subprocess.run(['python3', 'tools/sprite-bake/walk_splice.py'] + ids)
     if r.returncode: sys.exit(r.returncode)
     manifest()
+    return 0
 
 if __name__ == '__main__':
     cmd = sys.argv[1] if len(sys.argv) > 1 else 'show'
     if cmd == 'show': show(parse(sys.argv[2:]))
-    elif cmd == 'apply': t = parse(sys.argv[2:]); apply(list(t), t)
+    elif cmd == 'apply': t = parse(sys.argv[2:]); sys.exit(apply(list(t), t))
     elif cmd == 'manifest': manifest()
     elif cmd == 'requests': print(json.dumps(requests(), indent=1) if requests() else 'no requests')
     elif cmd == 'apply-requests':
@@ -124,7 +125,7 @@ if __name__ == '__main__':
         cur = json.load(open(TWEAK)) if os.path.exists(TWEAK) else {}
         todo = {k: v for k, v in r.items() if abs(cur.get(k, 1.0) - v) > 1e-9}
         if not todo: sys.exit('nothing to apply')
-        open(REQ, 'w').write('{}\n'); apply(list(todo), todo)
+        apply(list(todo), todo); open(REQ, 'w').write('{}\n')
     elif cmd == 'reset':
-        ids = sys.argv[2:]; apply(ids, {i: 1.0 for i in ids})
+        ids = sys.argv[2:]; sys.exit(apply(ids, {i: 1.0 for i in ids}))
     else: sys.exit(__doc__)
