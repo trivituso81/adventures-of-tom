@@ -20197,8 +20197,16 @@
    "group": "Michael"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/jojo-emotions-v1.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794362506705
+    }
+   ],
    "rejects": [],
    "id": "jojo-emotions",
    "tab": "Characters",
