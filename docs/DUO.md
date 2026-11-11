@@ -48,4 +48,4 @@ Chromium only, with an iPhone user agent, touch, and `screen` faked to 466 x 678
 | Menu text too big or small | the 800 (sideways) or 520 (upright) in `menuZoom` |
 | The stamp shows a size not in the table | add it to the table and the test poses; the layout follows the page size, so it should still fit |
 | The game did not switch when unfolded | read the stamp: if it does not say `duo`, the screen fingerprint is wrong; lower `DUO_OPEN_MIN` or fix `detectDuo` |
-| Black bar or a strip beside the game | the status bar style (`apple-mobile-web-app-status-bar-style` in `index.html`); iOS reads it when the app is added to the Home Screen, so it needs a remove and re-add |
+| Black bar or a strip beside the game | (duoedge1: now `black-translucent`) the status bar style (`apple-mobile-web-app-status-bar-style` in `index.html`); iOS reads it when the app is added to the Home Screen, so it needs a remove and re-add |

@@ -1,3 +1,8 @@
+## 2026-11-11 (duoedge1): Duo full bleed and top-left buttons moved left (index.html only, no tag)
+- Tom 15:15 (Duo unfolded, landscape, home-screen app): a dark bar down the right edge, and the top-left buttons sit where the iOS swipe-down starts.
+- Cause (fact): `apple-mobile-web-app-status-bar-style` was `black`, so iOS keeps the status bar strip (on the Duo, the right edge in landscape) out of the page. Now `black-translucent`: the game paints under it, and the existing safe-area padding keeps the D-pad and HUD clear of the clock. iOS reads this only when the app is added to the Home Screen: Tom must remove and re-add the icon.
+- `html.duo.landscape #hud` left is 4px plus the left safe area (was 14px x --ts, about 17.5px).
+- Tests: smoke FAILS [], tag_check ok; looked at grands at 951 x 648 `?duo=1`. Not testable here: the real status bar inset on a Duo.
 ## 2026-11-11 (bossend2): finales for Twin Lenses (ch17), Oblivion Censor (ch19), Chronos-Leviathan and Julian (ch20) (tag bossend2)
 - `{finale}` steps added to ch17After (before the lenses hide), ch19After (before the Censor hides), ch20Shatter (Leviathan, before it comes apart) and ch20Calm (Julian, as he lets go). All four use the `settle` kind in `BOSS_FINALE` (gold light and motes, boss stays in frame; Julian stays seated). Their STORY_WORLD hide rules now wait while the boss is mid-finale (`!x.fin&&!x.bossAwait`).
 - Tests: cases ch17, ch19, ch20, ch20j added to `tools/boss_stage_cases.json` and `tools/boss_finale_test.py`; all four play with no errors, boss in frame (portrait only). Not looked at: landscape, real battle win on a phone, full lead-in plus after scene run for these chapters.

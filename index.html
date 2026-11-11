@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#27473d">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="The Adventures of Tom">
 <link rel="apple-touch-icon" sizes="180x180" href="icon-v10.png">
@@ -1192,6 +1192,7 @@ html.landscape #hud #objective{width:min(340px,60%);margin-top:6px;padding:8px 1
    nothing you press sits there. */
 html.duo.landscape #splash-art{background-size:auto 31%,auto,cover;background-position:center calc(6px + env(safe-area-inset-top)),0 0,50% 40%}
 /* Duo battle, sideways (Tom 2026-11-11, build duo2): the scene is as big as the width allows; the right strip is narrow and the party is stacked one per row. */
+html.duo.landscape #hud{left:calc(4px + env(safe-area-inset-left))}
 html.duo.landscape #battle.v2{--b2pw:188px}
 html.duo.landscape #battle.v2 .b2-party{grid-template-columns:minmax(0,1fr);gap:calc(3px*var(--ts)) 0}
 html.duo.landscape #battle.v2 .b2-pc{grid-template-columns:30px minmax(0,1fr);gap:6px;padding:2px 3px}
