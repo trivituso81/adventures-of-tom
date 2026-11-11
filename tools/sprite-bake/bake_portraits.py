@@ -27,8 +27,8 @@ SIDE = 410       # square side in source pixels for an average face
 EYE_AT = 0.52    # eye line, share of the square from the top
 # id: (left pupil x, right pupil x, eye line y, chin y) in source pixels (chin = bottom of beard).
 FACE = {
-    # walkv2 (11-10): measured on the new hero paintings (art/raw/characters/<id>-hero-vN.png); Boppy's hero is still hero-ref-v1.
-    'tom': (448, 574, 238, 398),
+    # walkv2 (11-10): measured on the new hero paintings (art/raw/characters/<id>-hero-vN.png); 11-11: Tom hero-v2 and Boppy hero-v1 (new Paso Robles cap) re-measured.
+    'tom': (440, 572, 275, 445),
     'tnb': (428, 546, 248, 405),
     'grace': (438, 558, 276, 412),
     'rose': (478, 601, 311, 440),
@@ -36,7 +36,7 @@ FACE = {
     'justin': (409, 505, 225, 395),
     'olivia': (426, 529, 228, 348),
     'deedee': (470, 594, 265, 395),
-    'boppy': (422, 572, 345, 515),
+    'boppy': (445, 600, 335, 555),
     'ellie': (470, 596, 250, 375),
 }
 NARA = (500, 450, 900)   # centre x, centre y, side (whole head with ears; walkv2: new hero, 11-10)
