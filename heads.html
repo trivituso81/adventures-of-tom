@@ -25,6 +25,7 @@ button:disabled{opacity:.4}
 #chips button.applied::after{content:" \2713";color:#7dffa5}
 #chips button.dirty::after{content:" *";color:#ffd968}
 #chips button.applied.dirty::after{content:" \2713 *"}
+#grps button.dirty::after{content:" *";color:#ffd968}
 #work{display:flex;flex-wrap:wrap;gap:12px;padding:6px 12px 14px;align-items:flex-start}
 #left{flex:1 1 360px;display:flex;flex-direction:column;gap:8px}
 #right{flex:1 1 300px;display:flex;flex-direction:column;gap:10px}
@@ -48,6 +49,7 @@ button:disabled{opacity:.4}
 </head>
 <body>
 <header><h1>Head Sizes</h1><button id="exitbtn">Exit</button></header>
+<div id="grps" style="display:flex;gap:6px;padding:8px 12px 0"></div>
 <div id="chips"></div>
 <div id="work">
   <div id="left">
@@ -82,7 +84,8 @@ const ghUrl=p=>GH_BASE()+'/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+p;
 const b64ToText=b=>decodeURIComponent(escape(atob(b.replace(/\s/g,''))));
 const textToB64=t=>btoa(unescape(encodeURIComponent(t)));
 $('exitbtn').onclick=()=>{location.href='index.html?admin=1';};
-let M=null,IMG={},draft={},saved={},cur='tom';
+let M=null,IMG={},draft={},saved={},cur='tom',grp='family';
+const vis=()=>M.order.filter(id=>M.chars[id].group===grp);   // the people shown in the chip row, head row and standing row (Family and party, or Town)
 const eq=(a,b)=>Math.abs(a-b)<.0005;
 const applied=id=>M.chars[id].applied;
 const dirty=id=>!eq(draft[id],applied(id));
@@ -131,7 +134,7 @@ function drawStage(){
 }
 const COLS_ROW=4,CELL_ROW=170,HROW=150,COLS_ALL=6,CELL_ALL=120,HALL=370;
 function drawRows(){
-  const ids=M.order,cv=$('cRow'),c=cv.getContext('2d'),rows=Math.ceil(ids.length/COLS_ROW),Z=8;
+  const ids=vis(),cv=$('cRow'),c=cv.getContext('2d'),rows=Math.ceil(ids.length/COLS_ROW),Z=8;
   cv.width=COLS_ROW*CELL_ROW;cv.height=rows*(HROW+30);bg(c,cv.width,cv.height);
   ids.forEach((id,i)=>{
     const col=i%COLS_ROW,row=Math.floor(i/COLS_ROW),f=draft[id],m=M.chars[id],{sb}=params(m,f);
@@ -144,7 +147,7 @@ function drawRows(){
   for(let r=0;r<rows;r++) lines(c,cv.width,r*(HROW+30)+HROW,'rgba(255,60,60,.95)');
 }
 function drawAll(){
-  const ids=M.order,cv=$('cAll'),c=cv.getContext('2d'),rows=Math.ceil(ids.length/COLS_ALL),Z=6.2;
+  const ids=vis(),cv=$('cAll'),c=cv.getContext('2d'),rows=Math.ceil(ids.length/COLS_ALL),Z=6.2;
   cv.width=COLS_ALL*CELL_ALL;cv.height=rows*HALL;bg(c,cv.width,cv.height);
   ids.forEach((id,i)=>{
     const col=i%COLS_ALL,row=Math.floor(i/COLS_ALL),x=col*CELL_ALL+CELL_ALL/2,base=row*HALL+HALL-30;
@@ -152,7 +155,7 @@ function drawAll(){
     c.fillStyle=id===cur?'#ffd34d':'#d9d4ff';c.font='bold 18px sans-serif';c.textAlign='center';c.fillText(M.chars[id].name,x,base+22);
   });
 }
-function avgShare(){const a=M.order.filter(i=>M.chars[i].mode==='fixed'&&i!=='nara').map(i=>geom(i,applied(i)).share*100);return (a.reduce((x,y)=>x+y,0)/a.length).toFixed(0);}
+function avgShare(){const a=M.order.filter(i=>M.chars[i].group==='family'&&M.chars[i].mode==='fixed'&&i!=='nara').map(i=>geom(i,applied(i)).share*100);return (a.reduce((x,y)=>x+y,0)/a.length).toFixed(0);}
 function redraw(){
   const m=M.chars[cur],f=draft[cur],a=applied(cur),g=geom(cur,f),g0=geom(cur,a);
   $('who').textContent=m.name;
@@ -160,8 +163,15 @@ function redraw(){
   $('sl').value=Math.round(f*100);
   drawStage();drawRows();drawAll();
   $('num').innerHTML=['Head on screen: '+g.head.toFixed(1)+' rows (game now '+g0.head.toFixed(1)+')','Figure height: '+g.whole.toFixed(1)+' rows (game now '+g0.whole.toFixed(1)+')','Head share of height: '+(g.share*100).toFixed(1)+'% (adults in the game now: '+avgShare()+'%)','Body scale: '+(g.sb/ (M.chars[cur].mode==='fixed'? g0.sb:g.sb)*100).toFixed(0)+'% of now'].join('<br>');
+  document.querySelectorAll('#grps button').forEach(b=>{b.classList.toggle('on',b.dataset.g===grp);b.classList.toggle('dirty',M.order.some(i=>M.chars[i].group===b.dataset.g&&dirty(i)));});
   document.querySelectorAll('#chips button').forEach(b=>{b.classList.toggle('on',b.dataset.id===cur);b.classList.toggle('dirty',dirty(b.dataset.id));b.classList.toggle('applied',!eq(applied(b.dataset.id),1));});
   const n=M.order.filter(dirty).length;$('save').textContent=n?('SAVE '+n+' CHANGE'+(n>1?'S':'')):'SAVE';$('save').disabled=!n;
+}
+function setGrp(g){
+  grp=g;$('chips').innerHTML=vis().map(id=>'<button data-id="'+id+'">'+M.chars[id].name+'</button>').join('');
+  document.querySelectorAll('#chips button').forEach(b=>b.onclick=()=>{cur=b.dataset.id;redraw();});
+  if(M.chars[cur].group!==g) cur=vis()[0];
+  redraw();
 }
 function setF(id,f){draft[id]=Math.max(.6,Math.min(1.5,Math.round(f*100)/100));redraw();}
 $('sl').oninput=e=>setF(cur,e.target.value/100);
@@ -213,10 +223,11 @@ async function loadSaved(){
     await Promise.all(M.order.map(async id=>{IMG[id]=await loadImg(M.chars[id].img);}));
     saved=await loadSaved();
     for(const id of M.order){const a=applied(id);draft[id]=(saved[id]!=null?saved[id]:a);}
-    $('chips').innerHTML=M.order.map(id=>'<button data-id="'+id+'">'+M.chars[id].name+'</button>').join('');
-    document.querySelectorAll('#chips button').forEach(b=>b.onclick=()=>{cur=b.dataset.id;redraw();});
-    redraw();
-    window.__HS={ready:true,M,draft,geom,setF,get cur(){return cur;},set cur(v){cur=v;redraw();}};
+    const GN={family:'Family and party',town:'Town'};
+    $('grps').innerHTML=Object.keys(GN).filter(g=>M.order.some(i=>M.chars[i].group===g)).map(g=>'<button data-g="'+g+'">'+GN[g]+'</button>').join('');
+    document.querySelectorAll('#grps button').forEach(b=>b.onclick=()=>setGrp(b.dataset.g));
+    setGrp('family');
+    window.__HS={ready:true,M,draft,geom,setF,setGrp,vis,get cur(){return cur;},set cur(v){cur=v;redraw();}};
   }catch(e){msg('Could not load: '+e.message,'err');}
 })();
 </script>
