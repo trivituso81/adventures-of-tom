@@ -38,6 +38,7 @@ FACE = {
     'deedee': (470, 594, 265, 395),
     'boppy': (445, 600, 335, 555),
     'ellie': (470, 596, 250, 375),
+    'jojo': (430, 550, 235, 360),   # 11-11: measured on jojo-hero-v2 (her new approved hero)
     'michael': (410, 505, 225, 370),   # 11-11: measured on michael-hero-ref-v1 (the dad in the family group; his own crop, not the kids)
 }
 NARA = (500, 450, 900)   # centre x, centre y, side (whole head with ears; walkv2: new hero, 11-10)
