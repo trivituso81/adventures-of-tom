@@ -1,3 +1,8 @@
+## 2026-11-10 (icon-refs1): App icon entry in the Art Library now references the latest character art (admin data only, no tag)
+- Fact: Title > App icon (`title-app-icon`) attached `tom-hero-ref-v1.png`, `grace-hero-ref-v1.png` and `rose-hero-ref-v1.png` (the first versions). It now attaches the latest approved hero paintings `tom-hero-v1.png`, `grace-hero-v1.png`, `rose-hero-v1.png`. First reference stays `icon-v9.png`; prompt text unchanged.
+- Files: `tools/art-library/title-prompts.js`, `data/art-prompts.json` (edited by hand, `make-prompts.js` not run). The installed icon (`icon-v9.png`, `launch/apple-touch-icon.png`) is unchanged until Tom presses Generate and approves a new one.
+- Tests: `node tools/art-library/validate.js` OK (789 entries).
+
 ## 2026-11-10 (npcsharp1): townsfolk drawn sharp (tag npcsharp1)
 - Cause (fact): painted townsfolk atlases were stored at 3 px per grid pixel (Sal 126 px tall), then enlarged about 1.6x in rooms plus the screen zoom, so they went soft next to the cast, whose atlases are much larger.
 - Fix: `bake_townsfolk.py` `HI = 2` bakes every atlas frame at 6 px per grid pixel (Sal 252 px tall); `k` in `data/townsfolk-hires.js` is now 6. Figure height and on-screen size are unchanged (grid height identical, a few rows are 1 to 2 columns narrower from canvas rounding). Baseline rebake before the change reproduced the repo byte for byte.

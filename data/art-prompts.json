@@ -17042,9 +17042,9 @@
    "ar": "1:1",
    "refs": [
     "icon-v9.png",
-    "art/raw/characters/tom-hero-ref-v1.png",
-    "art/raw/characters/grace-hero-ref-v1.png",
-    "art/raw/characters/rose-hero-ref-v1.png"
+    "art/raw/characters/tom-hero-v1.png",
+    "art/raw/characters/grace-hero-v1.png",
+    "art/raw/characters/rose-hero-v1.png"
    ],
    "prompt": "IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image, nothing else.\n\nThe first attached picture is the current app icon: keep its idea and its arrangement of three people. The second, third and fourth attached pictures are the approved paintings of Tom (tall man), Grace (9 year old girl, purple sweater) and Rose (6 year old girl). Keep each face, hair and set of clothes faithful to those paintings.\n\nPaint a square app icon for the family adventure game \"The Adventures of Tom\", 1024 x 1024 px, full bleed to all four edges (the phone rounds the corners). Exactly three people: Tom in the center with a calm dry smile, Rose on his shoulders waving and wearing a pink gingham dress, and Grace standing beside Tom. Large heads and small slender bodies, as in Final Fantasy IX character art. A warm golden sunset sky behind them with a few stars. Big simple shapes that still read at 60 px. No text, no letters, no border, no watermark.\n\nSTYLE\nPainted in the style of the hand-painted background art of Final Fantasy IX: a whimsical fairy-tale storybook world, chunky charming architecture, soft painterly brushwork, rich warm saturated color, warm golden light from the upper left, gentle atmospheric depth. Final Fantasy IX background art, hand painted, not a photo, not a 3D render, not pixel art. Every part of the picture is hand painted Final Fantasy IX scenery. The people are hand drawn Final Fantasy IX characters with clean contour lines and chunky brushed shading.",
    "group": "Title and icon"
