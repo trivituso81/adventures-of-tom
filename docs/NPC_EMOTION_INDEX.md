@@ -332,7 +332,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 1-10 | map grands, base | Loving | Grace, Rose, Deedee loves you to the moon and back. Say it back. Louder. |
 | 1-10 | map grands, revisit | Proud | The tomatoes are coming in. You're going home with forty. |
 | 1-10 | map grands, revisit | Proud | I baked at five this morning. The neighbors have stopped asking why. |
-| 1-10 | map grands, revisit | Scared | Tommy, is that a bruise? Sit. Eat. Explain. |
+| 1-10 | map grands, revisit | Scared | Tom, is that a bruise? Sit. Eat. Explain. |
 | 1-10 | map grands, revisit | Loving | To the moon and back, girls. The MOON. And BACK. |
 | 1-10 | map grands, revisit | Unimpressed | Boppy says he's not feeling good. Boppy also won't stop fishing. |
 | 1-10 | map grands, revisit | Happy | Grace, Rose, who wants to help Deedee frost something? |
@@ -346,15 +346,15 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 1-10 | map grands, revisit | Happy | Found my glasses. They were in the fridge. Don't ask. Who wants a cookie? |
 | 1-10 | map grands, hug:0 | Loving | Hugs for everyone. There. All better. |
 | 1-10 | map grands, hug:1 | Loving | Hugs for everyone, just because. To the moon and back. |
-| 1-10 | recruit ask | Loving | Now hold on, Tommy. You're not taking my angels anywhere without me and a bag of cookies. Can Deedee come along? |
-| 1-10 | recruit yes | Loving | Wonderful! Everybody hold hands. Tommy, you too. To the moon and back, here we come. |
+| 1-10 | recruit ask | Loving | Now hold on, Tom. You're not taking my angels anywhere without me and a bag of cookies. Can Deedee come along? |
+| 1-10 | recruit yes | Loving | Wonderful! Everybody hold hands. Tom, you too. To the moon and back, here we come. |
 | 1-10 | recruit no | Happy | All right, all right. The pies need me anyway. Come back for a cookie. |
 | 1-10 | recruit swap | Loving | Oh, honey. Somebody has to stay and mind the house. Who's it going to be? |
 | 1-10 | recruit chatter | Loving | Are you warm enough? Nobody is warm enough. |
 | 1-10 | recruit chatter | Loving | Grace, Rose, to the moon and back. Say it. LOUDER. |
 | 1-10 | recruit chatter | Happy | I packed cookies. They're in my purse. The purse is at home. We go back. |
 | 1-10 | recruit chatter | Proud | Pick up those feet. A brisk walk never hurt anybody. |
-| 1-10 | recruit chatter | Proud | Tommy, you look pale. When did you last drink water? Nurse is asking. |
+| 1-10 | recruit chatter | Proud | Tom, you look pale. When did you last drink water? Nurse is asking. |
 | 1-10 | recruit chatter | Loving | When we get home I'm making a big dinner. Nobody argue. |
 
 ### Boppy (21)

@@ -105,7 +105,7 @@ chapters	file	line	character	where	mood	text
 1-10	data/maps-le.js	1482	Deedee	map grands, base	loving	Grace, Rose, Deedee loves you to the moon and back. Say it back. Louder.
 1-10	data/maps-le.js	1484	Deedee	map grands, revisit	proud	The tomatoes are coming in. You're going home with forty.
 1-10	data/maps-le.js	1485	Deedee	map grands, revisit	proud	I baked at five this morning. The neighbors have stopped asking why.
-1-10	data/maps-le.js	1486	Deedee	map grands, revisit	scared	Tommy, is that a bruise? Sit. Eat. Explain.
+1-10	data/maps-le.js	1486	Deedee	map grands, revisit	scared	Tom, is that a bruise? Sit. Eat. Explain.
 1-10	data/maps-le.js	1487	Deedee	map grands, revisit	loving	To the moon and back, girls. The MOON. And BACK.
 1-10	data/maps-le.js	1488	Deedee	map grands, revisit	unimpressed	Boppy says he's not feeling good. Boppy also won't stop fishing.
 1-10	data/maps-le.js	1489	Deedee	map grands, revisit	happy	Grace, Rose, who wants to help Deedee frost something?
@@ -466,15 +466,15 @@ chapters	file	line	character	where	mood	text
 1-10	engine/followers.js	70	Olivia	recruit chatter	unimpressed	Is that a source? Who told you that? I need two sources.
 1-10	engine/followers.js	70	Olivia	recruit chatter	surprised	Michael? Michael, can you hear me from here? No? Okay.
 1-10	engine/followers.js	70	Olivia	recruit chatter	unimpressed	It is sixty-two degrees. I am wearing a dress. Nobody warned me.
-1-10	engine/followers.js	71	Deedee	recruit ask	loving	Now hold on, Tommy. You're not taking my angels anywhere without me and a bag of cookies. Can Deedee come along?
-1-10	engine/followers.js	72	Deedee	recruit yes	loving	Wonderful! Everybody hold hands. Tommy, you too. To the moon and back, here we come.
+1-10	engine/followers.js	71	Deedee	recruit ask	loving	Now hold on, Tom. You're not taking my angels anywhere without me and a bag of cookies. Can Deedee come along?
+1-10	engine/followers.js	72	Deedee	recruit yes	loving	Wonderful! Everybody hold hands. Tom, you too. To the moon and back, here we come.
 1-10	engine/followers.js	72	Deedee	recruit no	happy	All right, all right. The pies need me anyway. Come back for a cookie.
 1-10	engine/followers.js	73	Deedee	recruit swap	loving	Oh, honey. Somebody has to stay and mind the house. Who's it going to be?
 1-10	engine/followers.js	75	Deedee	recruit chatter	loving	Are you warm enough? Nobody is warm enough.
 1-10	engine/followers.js	75	Deedee	recruit chatter	loving	Grace, Rose, to the moon and back. Say it. LOUDER.
 1-10	engine/followers.js	75	Deedee	recruit chatter	happy	I packed cookies. They're in my purse. The purse is at home. We go back.
 1-10	engine/followers.js	75	Deedee	recruit chatter	proud	Pick up those feet. A brisk walk never hurt anybody.
-1-10	engine/followers.js	75	Deedee	recruit chatter	proud	Tommy, you look pale. When did you last drink water? Nurse is asking.
+1-10	engine/followers.js	75	Deedee	recruit chatter	proud	Tom, you look pale. When did you last drink water? Nurse is asking.
 1-10	engine/followers.js	75	Deedee	recruit chatter	loving	When we get home I'm making a big dinner. Nobody argue.
 1-10	engine/followers.js	76	Boppy	recruit ask	sad	My stomach isn't right and the fish aren't biting. Want an old man along? Just don't walk too fast.
 1-10	engine/followers.js	77	Boppy	recruit yes	proud	Good. Somebody grab my cap. And slow down. I was a champion, you know.

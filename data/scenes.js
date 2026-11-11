@@ -105,7 +105,7 @@ SCENES.ch1Theft=[
   {talk:'Deedee',lines:['Your bread and my rhubarb crisp. Now THAT is a meal.']},
   {talk:'Deedee',lines:['A sliver for me. Just a sliver. Sourdough gives me gas.']},
   {talk:'Tom',lines:['Mom, EVERYTHING gives you gas.']},
-  {talk:'Deedee',lines:['And I eat it anyway. That\'s love, Tommy.']},
+  {talk:'Deedee',lines:['And I eat it anyway. That\'s love, Tom.']},
   {flag:'tombo:deedee1'},
   {talk:'Boppy',lines:["Tom! Good. I'm not feeling good. It's the stomach."],voice:[['boppy','greet',0,"Tom! Good. I'm not feeling good. It's the stomach."]]},
   {sfx:'doorIn'}, {call:()=>storyPosesLoad('deedee')},
@@ -248,7 +248,7 @@ SCENES.ch1Pond=[
   {battle:'bigone',tut:'bigone'},
   {if:()=>flag('battle:bigone')!=='win',then:[
     {heal:true},
-    {talk:'Deedee',lines:['Up, up. Everybody up. Deedee kisses it better.','Tommy, you stand in front of whoever it stares at. Rosie, make it laugh. Then we try again.']},
+    {talk:'Deedee',lines:['Up, up. Everybody up. Deedee kisses it better.','Tom, you stand in front of whoever it stares at. Rosie, make it laugh. Then we try again.']},
     {toast:'Face The Big One and press A to try again. Deedee healed everyone.',time:5}],else:[]}
 ];
 // 5. After The Big One (won in the scene, or on a retry with A): the tin comes back.
@@ -3126,13 +3126,13 @@ SCENES.ch9Arrive=[
 SCENES.ch9Letter=[
   {flag:'ch9-letter',value:'pending'},
   {walk:'Deedee',to:routeBeside('Deedee'),speed:.2},
-  {talk:'Deedee',lines:['Tommy! There you are. Sit. No, stand. Read it. Read it out loud. I have read it eleven times.']},
+  {talk:'Deedee',lines:['Tom! There you are. Sit. No, stand. Read it. Read it out loud. I have read it eleven times.']},
   {call:()=>sfx.pickup()},
   {talk:'Tom',lines:['\"THE MOON CLUB requests the pleasure of TOM. Tonight, at moonrise. Admit three. Adults only. Dress: your very best.\"','Gold wax seal. A little clock on it.']},
   {talk:'Grace',lines:['ADULTS ONLY? I\'m basically an adult. I have a YouTube channel. I have a SKINCARE ROUTINE.']},
   {talk:'Rose',lines:['I\'m six. Is six adults?']},
   {talk:'Aunt Ellie',lines:['Girls. You\'re staying with me. I brought cards. I cheat. You\'ll learn a great deal.']},
-  {talk:'Deedee',lines:['Forty years I\'ve lived in this town. Every full moon, the lights used to go on in that dome above Luna’s. Nobody I know has ever been invited. Not once.','Admit three, Tommy. You. Me. And Boppy.']},
+  {talk:'Deedee',lines:['Forty years I\'ve lived in this town. Every full moon, the lights used to go on in that dome above Luna’s. Nobody I know has ever been invited. Not once.','Admit three, Tom. You. Me. And Boppy.']},
   {talk:'Boppy',lines:['I\'m not wearing a tie.']},
   {talk:'Deedee',lines:['You\'re wearing the tie.']},
   {talk:'Boppy',lines:['...I\'m wearing the tie.']},
@@ -3167,7 +3167,7 @@ SCENES.ch9Luna=[
 // 4. The Moon Club: dust since 1971, one thread of moonlight, three empty mirror stands.
 SCENES.ch9Club=[
   {flag:'ch9-club',value:'pending'},
-  {talk:'Deedee',lines:['Oh. Oh, Tommy. It\'s beautiful.','It\'s FILTHY. Fifty years of dust. Somebody hand me a mop.']},
+  {talk:'Deedee',lines:['Oh. Oh, Tom. It\'s beautiful.','It\'s FILTHY. Fifty years of dust. Somebody hand me a mop.']},
   {talk:'Boppy',lines:['Nobody is here. A party and nobody is here.']},
   {talk:'Tom',lines:['Look at the east window. Moonlight. Just a thread of it.','The moon isn\'t gone. Something up in the Dome is pulling all of its light inside. Only a little gets out.']},
   {talk:'Deedee',lines:['Somebody read me that plaque. My glasses are in my other purse.']},
@@ -3185,7 +3185,7 @@ SCENES.ch9Coat=[
   {flag:'ch9-coat',value:'pending'},
   {walk:'The Hanger-On',to:routeBeside('The Hanger-On'),speed:.25},
   {talk:'The Hanger-On',lines:['Ticket? Do you have a ticket? I\'m holding this coat for ticket seven. She said she\'d be right back.','That was 1971. I haven\'t let go once. I\'m VERY good at hanging on.']},
-  {talk:'Deedee',lines:['Purple velvet. Tommy. That\'s Aunt Ellie’s coat.']},
+  {talk:'Deedee',lines:['Purple velvet. Tom. That\'s Aunt Ellie’s coat.']},
   {talk:'Tom',lines:['And our mirror is hanging off your other shoulder.']},
   {talk:'The Hanger-On',lines:['Nobody gets anything without a ticket.']},
   {battle:'coathanger',tut:'ch9coat'},
@@ -3257,7 +3257,7 @@ SCENES.ch9Door=[
   {call:()=>{ sfx.levelChime(); }}, {wait:.8},
   {talk:'Dome doors',lines:['The thread of moonlight bounces off three mirrors and lands right in the middle of the moon-shaped lock. It glows. Click. CLUNK.']},
   {call:()=>{ ch9OpenDoors(); storyWorld(); sfx.doorIn&&sfx.doorIn(); }},
-  {talk:'Deedee',lines:['Admitted by moonlight. Oh, I have goosebumps. Tommy, feel my arm.']},
+  {talk:'Deedee',lines:['Admitted by moonlight. Oh, I have goosebumps. Tom, feel my arm.']},
   {talk:'Boppy',lines:['Somebody up there is playing music. Very loud music. In 1971 they called that a nuisance.']},
   {toast:'Goal: the Dome.',time:4}
 ];
@@ -3267,7 +3267,7 @@ SCENES.ch9Boss=[
   {hide:'The Mirrorball'},
   {walk:'tom',to:routeTo('tom',9,7),speed:.25}, {face:'tom',dir:'up'},
   {place:'deedee',at:[8,7],dir:'up'}, {place:'boppy',at:[10,7],dir:'up'},
-  {talk:'Deedee',lines:['Tommy. Over the bandstand. It\'s so BRIGHT. I can\'t look at it. I\'m looking at it.']},
+  {talk:'Deedee',lines:['Tom. Over the bandstand. It\'s so BRIGHT. I can\'t look at it. I\'m looking at it.']},
   {call:()=>{ sfx.whoosh(); sfx.ding&&sfx.ding(); }},
   {show:'The Mirrorball'}, {face:'The Mirrorball',dir:'down'},
   {talk:'The Mirrorball',lines:['Guests! GUESTS! Oh, at last. Welcome to the Moon Club. Nobody has come up those stairs since 1971.',
@@ -3281,7 +3281,7 @@ SCENES.ch9Boss=[
   {battle:'mirrorball',tut:'mirrorball'},
   {if:()=>flag('battle:mirrorball')!=='win',then:[
     {heal:true},
-    {talk:'Deedee',lines:['Up, everybody. Deedee is a nurse.','Tommy, whatever her shiny side shows bounces right back. Use something else. And honey, nobody has asked her to dance since 1971. Three times.']},
+    {talk:'Deedee',lines:['Up, everybody. Deedee is a nurse.','Tom, whatever her shiny side shows bounces right back. Use something else. And honey, nobody has asked her to dance since 1971. Three times.']},
     {toast:'Face the Mirrorball and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
 // 9. After the boss (won in the scene, or on a retry with A): the moon goes home. A compact, a coin, a boarding pass.
@@ -3295,7 +3295,7 @@ SCENES.ch9AfterBoss=()=>[
   {call:()=>{ storyWorld(); sfx.whoosh(); }},
   {talk:'The Dome',lines:['The Mirrorball turns once, slowly, and lets go. A great round light rises out of her, up through the glass, and settles in the sky. The moon. Right where it belongs.']},
   {talk:'The Mirrorball',lines:['One dance. Before you go. Somebody. Please.']},
-  {talk:'Deedee',lines:['Tommy. Dance with your mother.']},
+  {talk:'Deedee',lines:['Tom. Dance with your mother.']},
   {talk:'Tom',lines:['I mostly sway.']},
   {talk:'Deedee',lines:['Then sway with your mother.']},
   {talk:'The Dome',lines:['Tom and Deedee sway under the Mirrorball, and a thousand little moons go round and round the Dome. Boppy keeps time on the bass drum. Badly. Proudly.']},
@@ -3306,7 +3306,7 @@ SCENES.ch9AfterBoss=()=>[
   {talk:'Boppy',lines:['Something fell out of her top. On the bandstand. Something gold.']},
   {call:()=>sfx.pickup()},
   {talk:'Tom',lines:['A gold coin. Same little clock face.','The sundial. The steamer. The sign-up sheet. My jar. The book from 1952. The oven from 1963. Now a mirrorball from 1971.']},
-  {talk:'Deedee',lines:['Somebody invited you up here, Tommy. Not her. She can\'t hold a pen. She\'s a ball.','Somebody who knew you\'d come. And that you\'d bring your mother.']},
+  {talk:'Deedee',lines:['Somebody invited you up here, Tom. Not her. She can\'t hold a pen. She\'s a ball.','Somebody who knew you\'d come. And that you\'d bring your mother.']},
   {talk:'Tom',lines:['Somebody with a little clock. I\'m adding it to the list.']},
   {toast:'Goal: back to the Rivituso house. Aunt Ellie and the girls are waiting up.',time:4.5}
 ];
@@ -3323,7 +3323,7 @@ SCENES.ch9End=[
   {give:'velvetcoat'},
   {toast:'New outfit: the Moon Club Velvet Coat. Purple velvet, 1971. Anyone can wear it.',time:4.5},
   {talk:'Boppy',lines:['I wore the tie. Everybody saw. Nobody can say I didn\'t wear the tie.']},
-  {talk:'Deedee',lines:['Tommy, there was something else in the envelope. Stuck to the bottom. I didn\'t see it. I read it eleven times and I didn\'t see it.']},
+  {talk:'Deedee',lines:['Tom, there was something else in the envelope. Stuck to the bottom. I didn\'t see it. I read it eleven times and I didn\'t see it.']},
   {talk:'Boppy',lines:['Eleven times. Without her glasses. Eleven.']},
   {talk:'Deedee',lines:['I couldn\'t FIND them, honey.']},
   {call:()=>sfx.pickup()},
@@ -3436,7 +3436,7 @@ function ch9DomeLock(o) {
   if(STORY.mode!=='full'||STORY.chapter!==9||flag('ch9-door')||!flag('ch9-club')) return false;
   const n=CLUB_MIRRORS.filter(k=>flag(k.fight)===true).length;
   openDialog(o.name,['A lock shaped like a full moon. It\'s cold and dark. The plaque says MEMBERS ARE ADMITTED BY MOONLIGHT.',
-    'Deedee: \"'+(n>=3?'All three mirrors are back, honey. Bounce that little moonbeam up here.':'We need the mirrors, Tommy. '+n+' of 3 so far.')+'\"']);
+    'Deedee: \"'+(n>=3?'All three mirrors are back, honey. Bounce that little moonbeam up here.':'We need the mirrors, Tom. '+n+' of 3 so far.')+'\"']);
   return true;
 }
 // The jukebox: which record for Deedee and Boppy? (Heart-Trace)
@@ -3763,7 +3763,7 @@ SCENES.ch10AfterBoss=()=>[
 // 8. The Rivituso house: Sunday dinner at midnight. Part 1 complete.
 SCENES.ch10End=[
   {flag:'ch10-done',value:'pending'},
-  {talk:'Deedee',lines:['THERE they are. Tommy! The oven clock started blinking twelve oh one and I cried a little. Into the gravy. It\'s fine. It\'s seasoning.']},
+  {talk:'Deedee',lines:['THERE they are. Tom! The oven clock started blinking twelve oh one and I cried a little. Into the gravy. It\'s fine. It\'s seasoning.']},
   {talk:'Boppy',lines:['Every clock in this house started at once. Eleven clocks. I didn\'t know we\'d eleven clocks.','My stomach is still on midnight. My stomach is always on midnight.']},
   {talk:'Aunt Ellie',lines:['Sit. Tell me about the airport. Leave nothing out. I\'ll know.']},
   {spawn:{name:'Justin',look:'bean',at:spotNear(2),dir:'up'}},

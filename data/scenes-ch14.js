@@ -11,7 +11,7 @@ const CH14={mode:'full',chapter:14};
 Object.assign(items,{
   wardenhelm:{name:'Warden’s Bucket',icon:'🪣',slot:null,keepsake:true,desc:'The gold helm, after the gold ran off it. It is a bucket. Rose has named it Sir Bucket. Boppy asked that it not be mentioned again.'}});
 const CH14_DEEDEE_LINES=['Rhubarb crisp, nine minutes. Rhubarb crisp, nine minutes. Rhubarb crisp...','The amber is up to her waist. She is smiling. She is holding a tray, and she is not looking at it.'];
-const CH14_DEEDEE_FREE_LINES=['I can’t walk yet, the glass has my feet. Go on, Tommy. Don’t hit him. Make him laugh. I’ll know when.','He laughs when he’s scared. He always has. Go on.'];
+const CH14_DEEDEE_FREE_LINES=['I can’t walk yet, the glass has my feet. Go on, Tom. Don’t hit him. Make him laugh. I’ll know when.','He laughs when he’s scared. He always has. Go on.'];
 const CH14_BOPPY_LINES=['The armor hums. Boppy does not move. “Halt.”','“Go home, Tom. The glass stays up. That’s the deal.”','His eyes keep sliding to the porch. Every time they do, the hum gets louder.'];
 const CH14_BOPPY_WAIT_LINES=['“Halt.” His voice shakes on it. “Your mother is fine. She’s baking. Don’t look at her.”','The armor hums. He is not looking at the porch. He is working very hard at not looking at the porch.'];
 function ch14Place(x,y,dir) {
@@ -103,13 +103,13 @@ SCENES.ch14Deedee=[
   {talk:'Deedee',lines:['Oh. I was making that for a long time, wasn’t I.']},
   {call:()=>sfx.ding&&sfx.ding()},
   {talk:'Amy',lines:['Mom?']},
-  {talk:'Deedee',lines:['Amy. Tommy. My girls. How long was I gone?']},
+  {talk:'Deedee',lines:['Amy. Tom. My girls. How long was I gone?']},
   {talk:'Tom',lines:['A while.']},
   {talk:'Deedee',lines:['Your father put on that armor. He said the glass would keep us all safe. He’s been standing out there for hours and he hasn’t sat down. Not once. Not for his back.']},
   {talk:'Deedee',lines:['He thinks the armor takes the ache away. It doesn’t. It just stops him from feeling it. There’s a difference. I was a nurse for forty years. There is a very big difference.']},
   {talk:'Grace',lines:['Can you walk?']},
   {talk:'Deedee',lines:['The glass has my feet. It’s up to my knees. I can’t go anywhere. But I can see him.']},
-  {talk:'Deedee',lines:['Don’t hit him, Tommy. He can’t be hit. He hates being hit and it makes the gold stronger. Make him laugh. He laughs when he’s scared. He did at our wedding.']},
+  {talk:'Deedee',lines:['Don’t hit him, Tom. He can’t be hit. He hates being hit and it makes the gold stronger. Make him laugh. He laughs when he’s scared. He did at our wedding.']},
   {talk:'Rose',lines:['I have a whole bit.']},
   {talk:'Grace',lines:['I have a whole VIDEO.']},
   {talk:'Amy',lines:['Dad used to run cross country. If I can get him to walk a lap, I can get him to talk.']},

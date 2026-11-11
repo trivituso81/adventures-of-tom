@@ -52,7 +52,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Deedee | Happy | Your bread and my rhubarb crisp. Now THAT is a meal. |
 | Deedee | Happy | A sliver for me. Just a sliver. Sourdough gives me gas. |
 | Tom | Unimpressed | Mom, EVERYTHING gives you gas. |
-| Deedee | Loving | And I eat it anyway. That's love, Tommy. |
+| Deedee | Loving | And I eat it anyway. That's love, Tom. |
 | Boppy | Angry | Tom! Good. I'm not feeling good. It's the stomach. |
 | Rose | Scared | Deedee! A mud blob is taking your PIE! |
 | Tom | Angry | That was UNCALLED for! |
@@ -653,13 +653,13 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Grace | Surprised | Also the moon is gone. Look. It's supposed to be a full moon. Luna said so. Luna is very upset. |
 | Tom | Surprised | ...There's no moon. |
 | Tom | Unimpressed | There's no moon, and I have a gold letter. Okay. |
-| Deedee | Happy | Tommy! There you are. Sit. No, stand. Read it. Read it out loud. I have read it eleven times. |
+| Deedee | Happy | Tom! There you are. Sit. No, stand. Read it. Read it out loud. I have read it eleven times. |
 | Tom | Surprised | Gold wax seal. A little clock on it. |
 | Grace | Angry | ADULTS ONLY? I'm basically an adult. I have a YouTube channel. I have a SKINCARE ROUTINE. |
 | Rose | Surprised | I'm six. Is six adults? |
 | Aunt Ellie | Proud | Girls. You're staying with me. I brought cards. I cheat. You'll learn a great deal. |
 | Deedee | Surprised | Forty years I've lived in this town. Every full moon, the lights used to go on in that dome above Luna’s. Nobody I know has ever been invited. Not once. |
-| Deedee | Proud | Admit three, Tommy. You. Me. And Boppy. |
+| Deedee | Proud | Admit three, Tom. You. Me. And Boppy. |
 | Boppy | Angry | I'm not wearing a tie. |
 | Deedee | Proud | You're wearing the tie. |
 | Boppy | Unimpressed | ...I'm wearing the tie. |
@@ -671,7 +671,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Tom | Proud | A missing moon, a locked club, and a little gold clock. Everybody get your shoes. |
 | Deedee | Happy | Honey, show her the seal. |
 | Boppy | Angry | Stairs. Of course it's stairs. Nobody take them fast. |
-| Deedee | Surprised | Oh. Oh, Tommy. It's beautiful. |
+| Deedee | Surprised | Oh. Oh, Tom. It's beautiful. |
 | Deedee | Angry | It's FILTHY. Fifty years of dust. Somebody hand me a mop. |
 | Boppy | Unimpressed | Nobody is here. A party and nobody is here. |
 | Tom | Surprised | Look at the east window. Moonlight. Just a thread of it. |
@@ -681,7 +681,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Deedee | Surprised | The plaque says MEMBERS ARE ADMITTED BY MOONLIGHT. And look, three little brass stands. Somebody took the mirrors. |
 | Boppy | Proud | A coat check, a card room, a ballroom. Three rooms. Three stands. I count three suspects. |
 | Boppy | Proud | Assistant Deputy Warden. Rikers. I know what a lineup looks like. |
-| Deedee | Surprised | Purple velvet. Tommy. That's Aunt Ellie’s coat. |
+| Deedee | Surprised | Purple velvet. Tom. That's Aunt Ellie’s coat. |
 | Tom | Unimpressed | And our mirror is hanging off your other shoulder. |
 | Deedee | Loving | We'll tell her, honey. She'll be so pleased. She'll pretend not to be. That's how you know. |
 | Boppy | Unimpressed | Gin rummy with Deedee, fifty years. I've never won a hand. Not one. I know a sore loser when I see one. |
@@ -695,22 +695,22 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Boppy | Loving | A slow one. My stomach gets one song. One. Deedee. May I. |
 | Deedee | Loving | Fifty-two years, and he still asks. Every time. |
 | Tom | Loving | (Tom doesn't take a picture. Tom takes four pictures.) |
-| Deedee | Surprised | Admitted by moonlight. Oh, I have goosebumps. Tommy, feel my arm. |
+| Deedee | Surprised | Admitted by moonlight. Oh, I have goosebumps. Tom, feel my arm. |
 | Boppy | Angry | Somebody up there is playing music. Very loud music. In 1971 they called that a nuisance. |
-| Deedee | Surprised | Tommy. Over the bandstand. It's so BRIGHT. I can't look at it. I'm looking at it. |
+| Deedee | Surprised | Tom. Over the bandstand. It's so BRIGHT. I can't look at it. I'm looking at it. |
 | Tom | Unimpressed | So you took the moon. |
 | Deedee | Angry | Honey, there's a whole town walking into hedges down there. |
 | Boppy | Unimpressed | Forever is a lot of dancing. And everybody dances too fast. |
 | Tom | Proud | Deedee, Boppy, behind me. No touching, please. |
 | Deedee | Loving | Up, everybody. Deedee is a nurse. |
 | Deedee | Loving | Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring crisp. |
-| Deedee | Loving | Tommy. Dance with your mother. |
+| Deedee | Loving | Tom. Dance with your mother. |
 | Tom | Unimpressed | I mostly sway. |
 | Deedee | Loving | Then sway with your mother. |
 | Boppy | Surprised | Something fell out of her top. On the bandstand. Something gold. |
 | Tom | Surprised | A gold coin. Same little clock face. |
 | Tom | Surprised | The sundial. The steamer. The sign-up sheet. My jar. The book from 1952. The oven from 1963. Now a mirrorball from 1971. |
-| Deedee | Surprised | Somebody invited you up here, Tommy. Not her. She can't hold a pen. She's a ball. |
+| Deedee | Surprised | Somebody invited you up here, Tom. Not her. She can't hold a pen. She's a ball. |
 | Deedee | Loving | Somebody who knew you'd come. And that you'd bring your mother. |
 | Tom | Proud | Somebody with a little clock. I'm adding it to the list. |
 | Grace | Happy | TATA! The MOON came back! We saw it from the window! Aunt Ellie said it was probably you. |
@@ -721,7 +721,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Aunt Ellie | Unimpressed | I left it at the last dance. I was in a hurry. I had a date with a man who turned out to be a disappointment. The coat wasn't. |
 | Aunt Ellie | Loving | It hasn't fit me since 1972. Keep it, Tom. Somebody in this family should wear velvet properly. |
 | Boppy | Proud | I wore the tie. Everybody saw. Nobody can say I didn't wear the tie. |
-| Deedee | Surprised | Tommy, there was something else in the envelope. Stuck to the bottom. I didn't see it. I read it eleven times and I didn't see it. |
+| Deedee | Surprised | Tom, there was something else in the envelope. Stuck to the bottom. I didn't see it. I read it eleven times and I didn't see it. |
 | Boppy | Unimpressed | Eleven times. Without her glasses. Eleven. |
 | Deedee | Angry | I couldn't FIND them, honey. |
 | Tom | Surprised | A boarding pass. "BOARDING GROUP 0. FROM: LONG ISLAND. TO: NOWHERE. GATE: TO BE ANNOUNCED." And a little gold clock. |
@@ -786,7 +786,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Rose | Surprised | What's a layover? |
 | Tom | Proud | It means this trip isn't over. |
 | Amy | Proud | Okay. It's twelve oh four. Mom has been holding Sunday dinner since midnight. Everybody to the cab. |
-| Deedee | Happy | THERE they are. Tommy! The oven clock started blinking twelve oh one and I cried a little. Into the gravy. It's fine. It's seasoning. |
+| Deedee | Happy | THERE they are. Tom! The oven clock started blinking twelve oh one and I cried a little. Into the gravy. It's fine. It's seasoning. |
 | Boppy | Surprised | Every clock in this house started at once. Eleven clocks. I didn't know we'd eleven clocks. |
 | Boppy | Unimpressed | My stomach is still on midnight. My stomach is always on midnight. |
 | Aunt Ellie | Proud | Sit. Tell me about the airport. Leave nothing out. I'll know. |
@@ -815,14 +815,14 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 
 | Character | Emotion | Dialogue |
 |---|---|---|
-| Deedee | Loving | Tommy! Sit. Eat. I made a crisp. It is nine in the morning and it is a crisp. Do not argue. |
+| Deedee | Loving | Tom! Sit. Eat. I made a crisp. It is nine in the morning and it is a crisp. Do not argue. |
 | Tom | Unimpressed | I wasn’t going to argue. |
 | Boppy | Unimpressed | This came for the recliner. A gold card. “Priority Member.” Junk mail. They send it to the recliner now. |
 | Boppy | Surprised | Don’t throw it out. It’s warm. I think it’s warm. My knee says it’s warm. |
 | Tom | Surprised | My boarding pass is buzzing in my pocket. It says: YOUR LAYOVER IS NOW BOARDING. |
 | Deedee | Loving | A layover! Where? Never mind. Take a sweater. Take two. Take the crisp. |
 | Boppy | Unimpressed | Bring me back a pretzel. A real one. Not the airport kind. |
-| Deedee | Loving | To the moon and back, Tommy. Both ways. |
+| Deedee | Loving | To the moon and back, Tom. Both ways. |
 | Tom | Surprised | A pod seat. A real one. Somebody upgraded me and nobody told me why. |
 | Tom | Surprised | And something in seat 5B is giggling. |
 | Tom | Unimpressed | Whoever is under the blanket: it’s breathing very loudly. |
@@ -1190,13 +1190,13 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Deedee | Loving | Oh. Somebody ate it. Oh, Rosie. |
 | Deedee | Sad | Oh. I was making that for a long time, wasn’t I. |
 | Amy | Surprised | Mom? |
-| Deedee | Loving | Amy. Tommy. My girls. How long was I gone? |
+| Deedee | Loving | Amy. Tom. My girls. How long was I gone? |
 | Tom | Sad | A while. |
 | Deedee | Scared | Your father put on that armor. He said the glass would keep us all safe. He’s been standing out there for hours and he hasn’t sat down. Not once. Not for his back. |
 | Deedee | Scared | He thinks the armor takes the ache away. It doesn’t. It just stops him from feeling it. There’s a difference. I was a nurse for forty years. There is a very big difference. |
 | Grace | Scared | Can you walk? |
 | Deedee | Sad | The glass has my feet. It’s up to my knees. I can’t go anywhere. But I can see him. |
-| Deedee | Loving | Don’t hit him, Tommy. He can’t be hit. He hates being hit and it makes the gold stronger. Make him laugh. He laughs when he’s scared. He did at our wedding. |
+| Deedee | Loving | Don’t hit him, Tom. He can’t be hit. He hates being hit and it makes the gold stronger. Make him laugh. He laughs when he’s scared. He did at our wedding. |
 | Rose | Proud | I have a whole bit. |
 | Grace | Proud | I have a whole VIDEO. |
 | Amy | Proud | Dad used to run cross country. If I can get him to walk a lap, I can get him to talk. |
@@ -1257,12 +1257,12 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Grace | Happy | This is the first time all of us have been at one table. I’m going to film it. For the memories. |
 | Amy | Proud | Phone down. Eat first. Film after. |
 | Grace | Proud | Eating is also content. |
-| Deedee | Loving | TNB, sweetheart. Look at you. You’re too thin. Is Tommy feeding you? Tommy, are you feeding him? |
+| Deedee | Loving | TNB, sweetheart. Look at you. You’re too thin. Is Tom feeding you? Tom, are you feeding him? |
 | Tom | Unimpressed | He makes the bowls I eat out of. We’re even. |
 | TNB | Happy | It’s a very good bowl, Deedee. I’m biased. |
-| Deedee | Loving | Polite, and he makes bowls. Tommy. Keep this one. |
+| Deedee | Loving | Polite, and he makes bowls. Tom. Keep this one. |
 | Tom | Loving | That’s the plan. |
-| Deedee | Loving | Nara, honey. Come here. Crust, from the very edge of the pie. That’s the best part. Don’t tell Tommy. |
+| Deedee | Loving | Nara, honey. Come here. Crust, from the very edge of the pie. That’s the best part. Don’t tell Tom. |
 | Nara | Loving | Nara takes the crust in one gulp. Then she looks up at Deedee as if Deedee personally hung the moon. She will now sit at this chair until the end of time. |
 | Rose | Surprised | Nara doesn’t eat from strangers. She ate from you. |
 | Deedee | Happy | I’m not a stranger. I’m a woman with crust. |
@@ -1287,7 +1287,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Boppy | Angry | It was doing something BEFORE. |
 | TNB | Happy | I’m calling it a draw. Neither of us reached. I’m going to breathe through my nose for a minute. I can’t feel my face. Nobody say anything. |
 | Boppy | Proud | ...You’ll do. |
-| Deedee | Happy | That’s the nod. Tommy. Your father gave him the nod. |
+| Deedee | Happy | That’s the nod. Tom. Your father gave him the nod. |
 | Tom | Unimpressed | I know what the nod is. I got it after the third visit. |
 | Amy | Happy | Okay. Toast. Everybody up. Glasses. Nara, paw. |
 | Tom | Loving | To the table. |
@@ -1754,7 +1754,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Deedee | Loving | Dairy free. Good. Now. Rose. Come here, sweetheart. Deedee's got you. |
 | Rose | Angry | I was in the MIDDLE of a boo. |
 | Deedee | Loving | To the moon and back, Rosie. The MOON. And BACK. |
-| Deedee | Proud | Cold doesn't beat cold, Tommy. Warm beats cold. Always has. Ask any nurse. |
+| Deedee | Proud | Cold doesn't beat cold, Tom. Warm beats cold. Always has. Ask any nurse. |
 | Boppy | Proud | My peppers. Out back, in the garden. The hose flinched. |
 | Boppy | Angry | Don't take the ghost one. The ghost one is MINE. |
 | Grace | Surprised | Which one is the ghost one? |

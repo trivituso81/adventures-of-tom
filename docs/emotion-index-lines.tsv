@@ -23,7 +23,7 @@ chapter	file	line	character	mood	text
 1	data/scenes.js	88	Deedee	happy	Your bread and my rhubarb crisp. Now THAT is a meal.
 1	data/scenes.js	89	Deedee	happy	A sliver for me. Just a sliver. Sourdough gives me gas.
 1	data/scenes.js	90	Tom	unimpressed	Mom, EVERYTHING gives you gas.
-1	data/scenes.js	91	Deedee	loving	And I eat it anyway. That's love, Tommy.
+1	data/scenes.js	91	Deedee	loving	And I eat it anyway. That's love, Tom.
 1	data/scenes.js	93	Boppy	angry	Tom! Good. I'm not feeling good. It's the stomach.
 1	data/scenes.js	126	Rose	scared	Deedee! A mud blob is taking your PIE!
 1	data/scenes.js	144	Tom	angry	That was UNCALLED for!
@@ -48,7 +48,7 @@ chapter	file	line	character	mood	text
 1	data/scenes.js	224	Rose	happy	Tata, he looks like a turtle wearing a hat.
 1	data/scenes.js	225	Tom	proud	Nobody touches Deedee’s crisp. Everybody ready?
 1	data/scenes.js	229	Deedee	loving	Up, up. Everybody up. Deedee kisses it better.
-1	data/scenes.js	229	Deedee	none	Tommy, you stand in front of whoever it stares at. Rosie, make it laugh. Then we try again.
+1	data/scenes.js	229	Deedee	none	Tom, you stand in front of whoever it stares at. Rosie, make it laugh. Then we try again.
 1	data/scenes.js	239	Deedee	happy	My tin! And look. Half the crisp is still in it.
 1	data/scenes.js	240	Grace	none	The Big One ate the other half. I saw crumbs on its chin.
 1	data/scenes.js	241	Deedee	happy	Then we split this half. Everybody home. Boppy has to hear about this.
@@ -640,14 +640,14 @@ chapter	file	line	character	mood	text
 9	data/scenes.js	3088	Grace	surprised	Also the moon is gone. Look. It's supposed to be a full moon. Luna said so. Luna is very upset.
 9	data/scenes.js	3089	Tom	surprised	...There's no moon.
 9	data/scenes.js	3089	Tom	unimpressed	There's no moon, and I have a gold letter. Okay.
-9	data/scenes.js	3097	Deedee	happy	Tommy! There you are. Sit. No, stand. Read it. Read it out loud. I have read it eleven times.
+9	data/scenes.js	3097	Deedee	happy	Tom! There you are. Sit. No, stand. Read it. Read it out loud. I have read it eleven times.
 9	data/scenes.js	3099	Tom	none	"THE MOON CLUB requests the pleasure of TOM. Tonight, at moonrise. Admit three. Adults only. Dress: your very best."
 9	data/scenes.js	3099	Tom	surprised	Gold wax seal. A little clock on it.
 9	data/scenes.js	3100	Grace	angry	ADULTS ONLY? I'm basically an adult. I have a YouTube channel. I have a SKINCARE ROUTINE.
 9	data/scenes.js	3101	Rose	surprised	I'm six. Is six adults?
 9	data/scenes.js	3102	Aunt Ellie	proud	Girls. You're staying with me. I brought cards. I cheat. You'll learn a great deal.
 9	data/scenes.js	3103	Deedee	surprised	Forty years I've lived in this town. Every full moon, the lights used to go on in that dome above Luna’s. Nobody I know has ever been invited. Not once.
-9	data/scenes.js	3103	Deedee	proud	Admit three, Tommy. You. Me. And Boppy.
+9	data/scenes.js	3103	Deedee	proud	Admit three, Tom. You. Me. And Boppy.
 9	data/scenes.js	3104	Boppy	angry	I'm not wearing a tie.
 9	data/scenes.js	3105	Deedee	proud	You're wearing the tie.
 9	data/scenes.js	3106	Boppy	unimpressed	...I'm wearing the tie.
@@ -660,7 +660,7 @@ chapter	file	line	character	mood	text
 9	data/scenes.js	3125	Tom	none	The Moon Club. Tonight. Admit three.
 9	data/scenes.js	3127	Deedee	happy	Honey, show her the seal.
 9	data/scenes.js	3131	Boppy	angry	Stairs. Of course it's stairs. Nobody take them fast.
-9	data/scenes.js	3138	Deedee	surprised	Oh. Oh, Tommy. It's beautiful.
+9	data/scenes.js	3138	Deedee	surprised	Oh. Oh, Tom. It's beautiful.
 9	data/scenes.js	3138	Deedee	angry	It's FILTHY. Fifty years of dust. Somebody hand me a mop.
 9	data/scenes.js	3139	Boppy	unimpressed	Nobody is here. A party and nobody is here.
 9	data/scenes.js	3140	Tom	surprised	Look at the east window. Moonlight. Just a thread of it.
@@ -671,7 +671,7 @@ chapter	file	line	character	mood	text
 9	data/scenes.js	3144	Deedee	surprised	The plaque says MEMBERS ARE ADMITTED BY MOONLIGHT. And look, three little brass stands. Somebody took the mirrors.
 9	data/scenes.js	3145	Boppy	proud	A coat check, a card room, a ballroom. Three rooms. Three stands. I count three suspects.
 9	data/scenes.js	3145	Boppy	proud	Assistant Deputy Warden. Rikers. I know what a lineup looks like.
-9	data/scenes.js	3156	Deedee	surprised	Purple velvet. Tommy. That's Aunt Ellie’s coat.
+9	data/scenes.js	3156	Deedee	surprised	Purple velvet. Tom. That's Aunt Ellie’s coat.
 9	data/scenes.js	3157	Tom	unimpressed	And our mirror is hanging off your other shoulder.
 9	data/scenes.js	3163	Deedee	loving	We'll tell her, honey. She'll be so pleased. She'll pretend not to be. That's how you know.
 9	data/scenes.js	3170	Boppy	unimpressed	Gin rummy with Deedee, fifty years. I've never won a hand. Not one. I know a sore loser when I see one.
@@ -685,23 +685,23 @@ chapter	file	line	character	mood	text
 9	data/scenes.js	3201	Boppy	loving	A slow one. My stomach gets one song. One. Deedee. May I.
 9	data/scenes.js	3202	Deedee	loving	Fifty-two years, and he still asks. Every time.
 9	data/scenes.js	3205	Tom	loving	(Tom doesn't take a picture. Tom takes four pictures.)
-9	data/scenes.js	3215	Deedee	surprised	Admitted by moonlight. Oh, I have goosebumps. Tommy, feel my arm.
+9	data/scenes.js	3215	Deedee	surprised	Admitted by moonlight. Oh, I have goosebumps. Tom, feel my arm.
 9	data/scenes.js	3216	Boppy	angry	Somebody up there is playing music. Very loud music. In 1971 they called that a nuisance.
-9	data/scenes.js	3225	Deedee	surprised	Tommy. Over the bandstand. It's so BRIGHT. I can't look at it. I'm looking at it.
+9	data/scenes.js	3225	Deedee	surprised	Tom. Over the bandstand. It's so BRIGHT. I can't look at it. I'm looking at it.
 9	data/scenes.js	3230	Tom	unimpressed	So you took the moon.
 9	data/scenes.js	3232	Deedee	angry	Honey, there's a whole town walking into hedges down there.
 9	data/scenes.js	3234	Boppy	unimpressed	Forever is a lot of dancing. And everybody dances too fast.
 9	data/scenes.js	3235	Tom	proud	Deedee, Boppy, behind me. No touching, please.
 9	data/scenes.js	3239	Deedee	loving	Up, everybody. Deedee is a nurse.
-9	data/scenes.js	3239	Deedee	none	Tommy, whatever her shiny side shows bounces right back. Use something else. And honey, nobody has asked her to dance since 1971. Three times.
+9	data/scenes.js	3239	Deedee	none	Tom, whatever her shiny side shows bounces right back. Use something else. And honey, nobody has asked her to dance since 1971. Three times.
 9	data/scenes.js	3249	Deedee	loving	Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring crisp.
-9	data/scenes.js	3253	Deedee	loving	Tommy. Dance with your mother.
+9	data/scenes.js	3253	Deedee	loving	Tom. Dance with your mother.
 9	data/scenes.js	3254	Tom	unimpressed	I mostly sway.
 9	data/scenes.js	3255	Deedee	loving	Then sway with your mother.
 9	data/scenes.js	3261	Boppy	surprised	Something fell out of her top. On the bandstand. Something gold.
 9	data/scenes.js	3263	Tom	surprised	A gold coin. Same little clock face.
 9	data/scenes.js	3263	Tom	surprised	The sundial. The steamer. The sign-up sheet. My jar. The book from 1952. The oven from 1963. Now a mirrorball from 1971.
-9	data/scenes.js	3264	Deedee	surprised	Somebody invited you up here, Tommy. Not her. She can't hold a pen. She's a ball.
+9	data/scenes.js	3264	Deedee	surprised	Somebody invited you up here, Tom. Not her. She can't hold a pen. She's a ball.
 9	data/scenes.js	3264	Deedee	loving	Somebody who knew you'd come. And that you'd bring your mother.
 9	data/scenes.js	3265	Tom	proud	Somebody with a little clock. I'm adding it to the list.
 9	data/scenes.js	3272	Grace	happy	TATA! The MOON came back! We saw it from the window! Aunt Ellie said it was probably you.
@@ -712,7 +712,7 @@ chapter	file	line	character	mood	text
 9	data/scenes.js	3276	Aunt Ellie	unimpressed	I left it at the last dance. I was in a hurry. I had a date with a man who turned out to be a disappointment. The coat wasn't.
 9	data/scenes.js	3277	Aunt Ellie	loving	It hasn't fit me since 1972. Keep it, Tom. Somebody in this family should wear velvet properly.
 9	data/scenes.js	3280	Boppy	proud	I wore the tie. Everybody saw. Nobody can say I didn't wear the tie.
-9	data/scenes.js	3281	Deedee	surprised	Tommy, there was something else in the envelope. Stuck to the bottom. I didn't see it. I read it eleven times and I didn't see it.
+9	data/scenes.js	3281	Deedee	surprised	Tom, there was something else in the envelope. Stuck to the bottom. I didn't see it. I read it eleven times and I didn't see it.
 9	data/scenes.js	3282	Boppy	unimpressed	Eleven times. Without her glasses. Eleven.
 9	data/scenes.js	3283	Deedee	angry	I couldn't FIND them, honey.
 9	data/scenes.js	3285	Tom	surprised	A boarding pass. "BOARDING GROUP 0. FROM: LONG ISLAND. TO: NOWHERE. GATE: TO BE ANNOUNCED." And a little gold clock.
@@ -777,7 +777,7 @@ chapter	file	line	character	mood	text
 10	data/scenes.js	3670	Rose	surprised	What's a layover?
 10	data/scenes.js	3671	Tom	proud	It means this trip isn't over.
 10	data/scenes.js	3673	Amy	proud	Okay. It's twelve oh four. Mom has been holding Sunday dinner since midnight. Everybody to the cab.
-10	data/scenes.js	3682	Deedee	happy	THERE they are. Tommy! The oven clock started blinking twelve oh one and I cried a little. Into the gravy. It's fine. It's seasoning.
+10	data/scenes.js	3682	Deedee	happy	THERE they are. Tom! The oven clock started blinking twelve oh one and I cried a little. Into the gravy. It's fine. It's seasoning.
 10	data/scenes.js	3683	Boppy	surprised	Every clock in this house started at once. Eleven clocks. I didn't know we'd eleven clocks.
 10	data/scenes.js	3683	Boppy	unimpressed	My stomach is still on midnight. My stomach is always on midnight.
 10	data/scenes.js	3684	Aunt Ellie	proud	Sit. Tell me about the airport. Leave nothing out. I'll know.
@@ -801,14 +801,14 @@ chapter	file	line	character	mood	text
 10	data/scenes.js	3705	Tom	loving	Everybody comes next time.
 10	data/scenes.js	3705	Tom	loving	To the moon and back, everybody. Eat. Deedee made everything.
 10	data/scenes.js	3706	Deedee	loving	To the moon and BACK.
-11	data/scenes-p2.js	15	Deedee	loving	Tommy! Sit. Eat. I made a crisp. It is nine in the morning and it is a crisp. Do not argue.
+11	data/scenes-p2.js	15	Deedee	loving	Tom! Sit. Eat. I made a crisp. It is nine in the morning and it is a crisp. Do not argue.
 11	data/scenes-p2.js	16	Tom	unimpressed	I wasn’t going to argue.
 11	data/scenes-p2.js	17	Boppy	unimpressed	This came for the recliner. A gold card. “Priority Member.” Junk mail. They send it to the recliner now.
 11	data/scenes-p2.js	17	Boppy	surprised	Don’t throw it out. It’s warm. I think it’s warm. My knee says it’s warm.
 11	data/scenes-p2.js	19	Tom	surprised	My boarding pass is buzzing in my pocket. It says: YOUR LAYOVER IS NOW BOARDING.
 11	data/scenes-p2.js	20	Deedee	loving	A layover! Where? Never mind. Take a sweater. Take two. Take the crisp.
 11	data/scenes-p2.js	21	Boppy	unimpressed	Bring me back a pretzel. A real one. Not the airport kind.
-11	data/scenes-p2.js	22	Deedee	loving	To the moon and back, Tommy. Both ways.
+11	data/scenes-p2.js	22	Deedee	loving	To the moon and back, Tom. Both ways.
 11	data/scenes-p2.js	36	Tom	surprised	A pod seat. A real one. Somebody upgraded me and nobody told me why.
 11	data/scenes-p2.js	36	Tom	surprised	And something in seat 5B is giggling.
 11	data/scenes-p2.js	38	Tom	unimpressed	Whoever is under the blanket: it’s breathing very loudly.
@@ -1175,13 +1175,13 @@ chapter	file	line	character	mood	text
 14	data/scenes-ch14.js	102	Deedee	loving	Oh. Somebody ate it. Oh, Rosie.
 14	data/scenes-ch14.js	103	Deedee	sad	Oh. I was making that for a long time, wasn’t I.
 14	data/scenes-ch14.js	105	Amy	surprised	Mom?
-14	data/scenes-ch14.js	106	Deedee	loving	Amy. Tommy. My girls. How long was I gone?
+14	data/scenes-ch14.js	106	Deedee	loving	Amy. Tom. My girls. How long was I gone?
 14	data/scenes-ch14.js	107	Tom	sad	A while.
 14	data/scenes-ch14.js	108	Deedee	scared	Your father put on that armor. He said the glass would keep us all safe. He’s been standing out there for hours and he hasn’t sat down. Not once. Not for his back.
 14	data/scenes-ch14.js	109	Deedee	scared	He thinks the armor takes the ache away. It doesn’t. It just stops him from feeling it. There’s a difference. I was a nurse for forty years. There is a very big difference.
 14	data/scenes-ch14.js	110	Grace	scared	Can you walk?
 14	data/scenes-ch14.js	111	Deedee	sad	The glass has my feet. It’s up to my knees. I can’t go anywhere. But I can see him.
-14	data/scenes-ch14.js	112	Deedee	loving	Don’t hit him, Tommy. He can’t be hit. He hates being hit and it makes the gold stronger. Make him laugh. He laughs when he’s scared. He did at our wedding.
+14	data/scenes-ch14.js	112	Deedee	loving	Don’t hit him, Tom. He can’t be hit. He hates being hit and it makes the gold stronger. Make him laugh. He laughs when he’s scared. He did at our wedding.
 14	data/scenes-ch14.js	113	Rose	proud	I have a whole bit.
 14	data/scenes-ch14.js	114	Grace	proud	I have a whole VIDEO.
 14	data/scenes-ch14.js	115	Amy	proud	Dad used to run cross country. If I can get him to walk a lap, I can get him to talk.
@@ -1238,12 +1238,12 @@ chapter	file	line	character	mood	text
 15	data/scenes-ch15.js	60	Grace	happy	This is the first time all of us have been at one table. I’m going to film it. For the memories.
 15	data/scenes-ch15.js	61	Amy	proud	Phone down. Eat first. Film after.
 15	data/scenes-ch15.js	62	Grace	proud	Eating is also content.
-15	data/scenes-ch15.js	63	Deedee	loving	TNB, sweetheart. Look at you. You’re too thin. Is Tommy feeding you? Tommy, are you feeding him?
+15	data/scenes-ch15.js	63	Deedee	loving	TNB, sweetheart. Look at you. You’re too thin. Is Tom feeding you? Tom, are you feeding him?
 15	data/scenes-ch15.js	64	Tom	unimpressed	He makes the bowls I eat out of. We’re even.
 15	data/scenes-ch15.js	65	TNB	happy	It’s a very good bowl, Deedee. I’m biased.
-15	data/scenes-ch15.js	66	Deedee	loving	Polite, and he makes bowls. Tommy. Keep this one.
+15	data/scenes-ch15.js	66	Deedee	loving	Polite, and he makes bowls. Tom. Keep this one.
 15	data/scenes-ch15.js	67	Tom	loving	That’s the plan.
-15	data/scenes-ch15.js	69	Deedee	loving	Nara, honey. Come here. Crust, from the very edge of the pie. That’s the best part. Don’t tell Tommy.
+15	data/scenes-ch15.js	69	Deedee	loving	Nara, honey. Come here. Crust, from the very edge of the pie. That’s the best part. Don’t tell Tom.
 15	data/scenes-ch15.js	72	Nara	loving	Nara takes the crust in one gulp. Then she looks up at Deedee as if Deedee personally hung the moon. She will now sit at this chair until the end of time.
 15	data/scenes-ch15.js	73	Rose	surprised	Nara doesn’t eat from strangers. She ate from you.
 15	data/scenes-ch15.js	74	Deedee	happy	I’m not a stranger. I’m a woman with crust.
@@ -1268,7 +1268,7 @@ chapter	file	line	character	mood	text
 15	data/scenes-ch15.js	95	Boppy	angry	It was doing something BEFORE.
 15	data/scenes-ch15.js	97	TNB	happy	I’m calling it a draw. Neither of us reached. I’m going to breathe through my nose for a minute. I can’t feel my face. Nobody say anything.
 15	data/scenes-ch15.js	99	Boppy	proud	...You’ll do.
-15	data/scenes-ch15.js	101	Deedee	happy	That’s the nod. Tommy. Your father gave him the nod.
+15	data/scenes-ch15.js	101	Deedee	happy	That’s the nod. Tom. Your father gave him the nod.
 15	data/scenes-ch15.js	102	Tom	unimpressed	I know what the nod is. I got it after the third visit.
 15	data/scenes-ch15.js	104	Amy	happy	Okay. Toast. Everybody up. Glasses. Nara, paw.
 15	data/scenes-ch15.js	105	Tom	loving	To the table.
@@ -1728,7 +1728,7 @@ Nine Scoops	data/bonus-nine-scoops.js	783	Boppy	unimpressed	I didn't. I said it 
 Nine Scoops	data/bonus-nine-scoops.js	784	Deedee	loving	Dairy free. Good. Now. Rose. Come here, sweetheart. Deedee's got you.
 Nine Scoops	data/bonus-nine-scoops.js	788	Rose	angry	I was in the MIDDLE of a boo.
 Nine Scoops	data/bonus-nine-scoops.js	789	Deedee	loving	To the moon and back, Rosie. The MOON. And BACK.
-Nine Scoops	data/bonus-nine-scoops.js	789	Deedee	proud	Cold doesn't beat cold, Tommy. Warm beats cold. Always has. Ask any nurse.
+Nine Scoops	data/bonus-nine-scoops.js	789	Deedee	proud	Cold doesn't beat cold, Tom. Warm beats cold. Always has. Ask any nurse.
 Nine Scoops	data/bonus-nine-scoops.js	791	Tom	none	Warm beats cold. Okay. What do we have that's warm.
 Nine Scoops	data/bonus-nine-scoops.js	792	Boppy	proud	My peppers. Out back, in the garden. The hose flinched.
 Nine Scoops	data/bonus-nine-scoops.js	792	Boppy	angry	Don't take the ghost one. The ghost one is MINE.

@@ -789,7 +789,7 @@ SCENES.nsThaw=[
   {wait:.9},
   {call:()=>{ sfx.lineClear(); sfx.levelChime(); setFlag('ns-rosefrozen',false); sfx.quack(.5); NSFX.flash=.4; }},
   {talk:'Rose',lines:['I was in the MIDDLE of a boo.'],voice:[['rose','thaw']]},
-  {talk:'Deedee',lines:['To the moon and back, Rosie. The MOON. And BACK.','Cold doesn\'t beat cold, Tommy. Warm beats cold. Always has. Ask any nurse.']},
+  {talk:'Deedee',lines:['To the moon and back, Rosie. The MOON. And BACK.','Cold doesn\'t beat cold, Tom. Warm beats cold. Always has. Ask any nurse.']},
   {heal:true},
   {talk:'Tom',lines:['Warm beats cold. Okay. What do we have that\'s warm.']},
   {talk:'Boppy',lines:['My peppers. Out back, in the garden. The hose flinched.','Don\'t take the ghost one. The ghost one is MINE.']},

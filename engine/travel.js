@@ -74,7 +74,7 @@ function setGirlsAway(away) {
 const TRAVEL_TALK={
   amy:{stay:['Los Angeles? On a school night? I have thirty second-graders at eight.','Go. I\'ll race you when you get back. And I\'ll win.'],toast:'Amy jogs home. She has papers to grade.'},
   justin:{stay:['Los Angeles? I have a hallway, a basement and a playoff game.','Go. Text me if you see a bad outlet. I will know.'],toast:'Justin heads home. The game is on.'},
-  deedee:{stay:['Oh, Tommy. Somebody has to stay with my angels. And the pies.','Here. Cookies for the flight. To the moon and back, honey.'],toast:'Deedee heads home to the Rivituso house. The pies need her.'},
+  deedee:{stay:['Oh, Tom. Somebody has to stay with my angels. And the pies.','Here. Cookies for the flight. To the moon and back, honey.'],toast:'Deedee heads home to the Rivituso house. The pies need her.'},
   boppy:{stay:['Six hours in a seat? My stomach says no. I say no. We agree for once.','Go on. The recliner and I\'ll hold down the fort.'],toast:'Boppy shuffles home to the recliner.'},
   nara:{stay:['Nara stops at the curb. She looks at the cab. She looks at Tom.','Tom kneels down. "I\'ll be back. I promise. You keep 2nd Ave safe."','Nara licks his whole face. Then she trots back to 2nd Ave to wait at the corner.'],toast:'Nara heads back to 2nd Ave. She\'ll be waiting.',narrate:true}
 };
@@ -193,7 +193,7 @@ const TRAVEL_POOLS={
             {stay:["I'd love to, but the late meeting turned into a later meeting.","Go. I'll catch the highlights. Of whatever game is on."],toast:"Justin heads back to work. Again."},
             {stay:["I'll stay. Somebody has to be home when the girls get bored.","Bring me a shirt. A nice one. Not from the airport."],toast:"Justin heads home. A shirt order is in."},
             {stay:["Los Angeles has great weather and terrible parking. I'll pass.","Go. Wave at a palm tree for me."],toast:"Justin waves and walks home."}],
-    deedee:[{stay:["Oh, Tommy, the garden won't water itself. The tomatoes are at a delicate age.","Take this. Banana bread. To the moon and back, honey."],toast:"Deedee heads home. The tomatoes need her."},
+    deedee:[{stay:["Oh, Tom, the garden won't water itself. The tomatoes are at a delicate age.","Take this. Banana bread. To the moon and back, honey."],toast:"Deedee heads home. The tomatoes need her."},
             {stay:["I just put a pie in the oven. A pie doesn't wait for anybody.","Eat something green out there. Not a sprinkle. A real green."],toast:"Deedee hurries home. The pie is timing her."},
             {stay:["Los Angeles is too bright for me. Everything shines and nobody has a sweater.","Take a sweater, honey. I packed one. It's in the bag."],toast:"Deedee heads home. She packed him a sweater."},
             {stay:["Somebody has to stay and keep Boppy honest about his peppers.","Go. Call me from the plane. Don't really call me from the plane."],toast:"Deedee heads home to keep Boppy honest."}],

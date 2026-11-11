@@ -5,10 +5,10 @@
   {
    "voice": "deedee",
    "speaker": "Deedee",
-   "text": "Tommy! Sit. Eat. I made a crisp. It is nine in the morning and it is a crisp. Do not argue.",
+   "text": "Tom! Sit. Eat. I made a crisp. It is nine in the morning and it is a crisp. Do not argue.",
    "ctx": "Chapter 11: part2Open",
    "after": null,
-   "script": "Tommy! Sit. Eat. I made a crisp. It is nine in the morning and it is a crisp. Do not argue."
+   "script": "Tom! Sit. Eat. I made a crisp. It is nine in the morning and it is a crisp. Do not argue."
   },
   {
    "voice": "tom",
@@ -61,10 +61,10 @@
   {
    "voice": "deedee",
    "speaker": "Deedee",
-   "text": "To the moon and back, Tommy. Both ways.",
+   "text": "To the moon and back, Tom. Both ways.",
    "ctx": "Chapter 11: part2Open",
    "after": null,
-   "script": "To the moon and back, Tommy. Both ways."
+   "script": "To the moon and back, Tom. Both ways."
   },
   {
    "voice": null,

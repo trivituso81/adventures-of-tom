@@ -1483,7 +1483,7 @@ const LE_ROOMS=[
         revisit:[
           'The tomatoes are coming in. You\'re going home with forty.',
           'I baked at five this morning. The neighbors have stopped asking why.',
-          'Tommy, is that a bruise? Sit. Eat. Explain.',
+          'Tom, is that a bruise? Sit. Eat. Explain.',
           'To the moon and back, girls. The MOON. And BACK.',
           'Boppy says he\'s not feeling good. Boppy also won\'t stop fishing.',
           'Grace, Rose, who wants to help Deedee frost something?',
