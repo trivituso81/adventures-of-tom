@@ -15630,8 +15630,16 @@
    "group": "Airport"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/rooms/room-gate00-v1.png",
+     "date": "2026-11-11",
+     "from": "v2",
+     "at": 1794440898531
+    }
+   ],
    "rejects": [],
    "id": "room-gate00",
    "tab": "Rooms",
