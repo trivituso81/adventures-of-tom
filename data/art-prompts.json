@@ -20321,8 +20321,16 @@
    "prompt": "Paint a new sheet of The Big One, the creature in attachment 2, as a handbrushed painting. Attachment 2 is the current painting of it in the game: paint the same creature, with the same shape, colors, materials and details, at the same size in each cell, in the same view, facing right. Do not repeat the poses of attachment 2. Paint 6 NEW poses in a 3 by 2 layout, one pose alone in each cell with clear magenta all around it and nothing crossing into another cell. These poses show the moment after the fight, when the anger has gone out: the mood is gentle, warm and a little funny, never fierce. Top row: 1 the same upright pose as the first pose of attachment 2, at exactly the same size, but calm: sitting on its flat tail, the big eyes soft and half closed, the mouth shut in a small shy smile, the rusty pie tin still on its head. 2 a huge belly laugh: head thrown back, eyes squeezed shut, mouth wide open, both flippers on its round belly, a few water drops flying off. 3 offering: leaning forward with both flippers held out together in front, palms up and empty, as if handing something over, a sheepish sideways smile. Bottom row: 4 waving goodbye: half turned away, one flipper raised high in a wave, looking back over its shoulder with a warm smile. 5 the belly flop: the whole body in mid air and stretched out flat, belly down, flippers spread wide, tail up, eyes wide with joy, the pie tin still on. 6 only the top of its head above water: the rusty pie tin, the wet green weeds and the two big contented eyes, with one small ring of water around it and nothing below. Paint only what each pose names: no glows, speed lines, sparkles or splashes unless a pose asks for them, and no letters, numbers or words anywhere. Paint and finish it like attachment 1: matte, thick visible brush strokes on the figure, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/ending-bigshake-v1.png",
+     "date": "2026-11-11",
+     "from": "v3",
+     "at": 1794438219589
+    }
+   ],
    "rejects": [],
    "id": "ending-bigshake",
    "tab": "Enemies",
