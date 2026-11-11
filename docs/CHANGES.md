@@ -1,3 +1,8 @@
+## 2026-11-11 (title3b): Title logo prompt: TOM's O is a plain round O, a modern controller sits beside the word (admin data only, no tag)
+- Tom: the controller as the O made TOM hard to read; keep a controller in the logo, any controller, not the NES one.
+- `title-logo` prompt: every letter a clean readable shape, the O of TOM a simple round O; a painted modern controller (rounded grips, two thumbsticks, cross pad, four round buttons) sits tilted just after TOM. The Tom hero stays attached for drawing style only (the shirt controller is no longer mentioned).
+- Files: `tools/art-library/title-prompts.js`, `data/art-prompts.json` (that one entry). validate OK.
+
 ## 2026-11-11 (duo1): iPhone Duo mode for the unfolded screen
 - Tom: research the new iPhone Duo's unfolded view and design a viewport for it that suits the overworld, interiors, menus, welcome screen and every admin page (not the demo); his Duo arrives today.
 - Fact (measured by developers on real phones, Apple publishes none): a home-screen app gets about 951 x 648 CSS px with the Duo open and sideways (867 x 669 in another reading), 669 x 869 open and upright, 466 x 657 folded. `screen` reports 466 x 678 in every pose and Safari cannot report the fold. Full table and sources: `docs/DUO.md`.
