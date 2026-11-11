@@ -1,3 +1,8 @@
+## 2026-11-11 (clubwalk1): Moon Club and Dome walk edits installed (tag clubwalk1)
+- Tom's exports (chapter 20 view): moonclub (system_hash 1505ff84) 108 tiles changed in the `plateMask`, dome (system_hash 422e960b) 32 tiles. No door or exit edits. Installed with `tools/apply_walkmap.py`; only those two `plateMask` blocks changed, plus the two object edits below.
+- Two object edits were needed because Tom opened tiles they blocked (calls made): the Potted palm moved from (8,11) to (11,11), a tile Tom blocked; the Old telescope in the dome shrank from 3x3 to 3x2 so (16..18,7) walk and it can be used from below.
+- Checked: reach_test moonclub and dome 0 fails, moonclub_test 0, dome_test 0. Not looked at: portrait and landscape screenshots of the palm's new spot.
+
 ## 2026-11-11 (deedeetom1): Deedee calls him Tom, not Tommy (tag deedeetom1)
 - Tom 12:56: "change all of deedee's dialogue to be Tom instead of Tommy". Fact: 40 Deedee occurrences in 28 dialogue lines, 1 toast and 2 battle lines changed: `data/scenes.js` (14), `scenes-ch14.js` (3), `scenes-ch15.js` (5), `scenes-p2.js` (2), `bonus-nine-scoops.js` (1), `maps-le.js` (1, home visit chatter), `lines.js` (hug and moon_back, same line), `engine/travel.js` (2, stay-home lines), `engine/followers.js` (3, recruit and walking lines).
 - Not changed on purpose (not Deedee's words): Boppy ("Stand down, Tommy", "Take the key, Tommy", "My back doesn't hurt, Tommy"), Sal and Sol in chapters 13 and 17, and the depot driver quoting Deedee in `engine/story.js` ("tell Tommy the letter has a SEAL"). Tell Tom if he wants those changed too.
