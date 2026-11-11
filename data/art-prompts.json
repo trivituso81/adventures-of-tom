@@ -18228,8 +18228,16 @@
    "group": "Los Angeles people"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/npcs/npc-walk-odette-v1.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794360090502
+    }
+   ],
    "rejects": [],
    "id": "npc-walk-odette",
    "tab": "NPCs",
