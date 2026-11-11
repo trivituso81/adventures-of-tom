@@ -1185,6 +1185,19 @@ html.landscape #hud-btns .brand{width:34px;height:34px;margin-top:3px;padding:0}
 html.landscape #hud-btns .brand-mark{font-size:20px}
 #hud #objective{position:absolute;top:100%;right:0;left:auto;box-sizing:border-box;width:min(320px,100%);max-width:none;margin:8px 0 0;padding:10px 12px;border:2px solid var(--edge);border-radius:8px;background:var(--win);box-shadow:var(--bevel),0 3px 0 #0006;color:var(--ink);text-align:left;pointer-events:auto}
 html.landscape #hud #objective{width:min(340px,60%);margin-top:6px;padding:8px 10px}
+/* ---- iPhone Duo, unfolded (html.duo, set with html.tablet in engine/audio.js applyLayout; Tom 2026-11-11, build duo1, docs/DUO.md) ----
+   Sideways (about 951 x 648): the iPad landscape rules above apply with the Duo's own --ts. Upright (about 669 x 869): the phone portrait
+   layout on a nearly square screen. Only what differs from those is here. The crease runs down the middle of the sideways screen, so
+   nothing you press sits there. */
+html.duo.landscape #splash-art{background-size:auto 31%,auto,cover;background-position:center calc(6px + env(safe-area-inset-top)),0 0,50% 40%}
+html.duofold:not(.landscape) #splash-art,html.duo:not(.landscape) #splash-art{background-size:auto 29%,auto,cover;background-position:center calc(12px + env(safe-area-inset-top)),0 0,center top}
+html.duo.landscape #splash #splash-panel{padding:calc(22px*var(--ts)) calc(10px*var(--ts)) calc(6px*var(--ts))}
+html.duo.landscape #splash .sp-tab{font-size:calc(13px*var(--ts));padding:calc(4px*var(--ts)) calc(14px*var(--ts));top:calc(-15px*var(--ts))}
+html.duo.landscape #splash .sp-choice{padding:calc(6px*var(--ts)) calc(10px*var(--ts))}
+html.duo.landscape #splash .sp-choice .sp-name{font-size:calc(14px*var(--ts))}
+html.duo.landscape #splash .sp-choice .sp-sub{font-size:calc(11px*var(--ts))}
+html.duo.landscape #splash .sp-text{font-size:calc(12px*var(--ts))}
+html.duo.landscape #splash .dialog-footer{font-size:calc(10px*var(--ts))}
 </style>
 <script>(function(){var d=document.documentElement;d.classList.add('js-on');
 function fail(){if(!d.classList.contains('js-running'))d.classList.add('js-failed');}
@@ -1325,10 +1338,10 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/maps-ch12.js"></script>
 <script src="engine/la.js"></script>
 <script src="data/talk-faces.js?v=talk1"></script>
-<script src="engine/menu.js?v=talk1"></script>
+<script src="engine/menu.js?v=duo1"></script>
 <script src="engine/followers.js?v=slots10"></script>
 <script src="engine/shop.js?v=justin2"></script>
-<script src="engine/audio.js?v=tab1"></script>
+<script src="engine/audio.js?v=duo1"></script>
 <script src="data/lines.js?v=nobake1"></script>
 <script src="data/voice-clips.js?v=deedee1"></script>
 <script src="data/voice/tom.js?v=gclips13"></script>
@@ -1609,7 +1622,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/npc-emotion-moods.js?v=npcemo7"></script>
 <script src="engine/emotions.js?v=npcemo7"></script><!-- mood faces and poses in story dialogue (batch 0: chapter 1) -->
 <script src="engine/tapwalk.js?v=space1"></script><!-- tap to walk -->
-<script src="engine/main.js?v=talk1"></script>
+<script src="engine/main.js?v=duo1"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js?v=music2"></script>

@@ -42,19 +42,19 @@ button.good{background:#2f9e63}button.bad{background:#b4414f}button.armed{outlin
 .bar{position:fixed;left:0;right:0;bottom:0;background:#1d1a3d;border-top:1px solid #3a3566;padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center;z-index:10;flex-wrap:wrap}
 .bar[hidden]{display:none}.bar .grow{flex:1;min-width:90px}
 #toast{position:fixed;left:50%;bottom:calc(86px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#ffd34d;color:#241b00;padding:10px 16px;border-radius:12px;font-weight:600;display:none;z-index:30;max-width:90%}
-/* Computer layout (CHANGES 112): at 1000 px and wider the controls sit in a left column that stays in view, the list fills the rest. Phone layout is unchanged. */
-@media (min-width:1000px){
-main{max-width:1680px;display:grid;grid-template-columns:400px minmax(0,1fr);grid-template-rows:1fr auto;column-gap:28px;padding:18px 28px 140px}
+/* Computer layout (CHANGES 112): at 860 px and wider (a computer, an iPad, an unfolded iPhone Duo held sideways: docs/DUO.md) the controls sit in a left column that stays in view, the list fills the rest. Phone layout is unchanged. */
+@media (min-width:860px){
+main{max-width:1680px;display:grid;grid-template-columns:min(400px,34vw) minmax(0,1fr);grid-template-rows:1fr auto;column-gap:28px;padding:18px 28px 140px}
 .side{grid-column:1;grid-row:1;align-self:start;position:sticky;top:76px;max-height:calc(100vh - 160px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
 #list{grid-column:2;grid-row:1/3;min-width:0}
 .foot{grid-column:1;grid-row:2;align-self:end}
 header{padding:10px 28px}
 }
-@media (min-width:1000px){
+@media (min-width:860px){
 .frow{flex-wrap:wrap;overflow:visible}
 .frow .lab{width:100%;margin-top:4px}
 #list .card{margin:0}
-#list{display:grid;grid-template-columns:repeat(auto-fill,minmax(520px,1fr));gap:14px;align-content:start}
+#list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(520px,100%),1fr));gap:14px;align-content:start}
 }
 </style>
 </head>

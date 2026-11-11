@@ -36,12 +36,36 @@ function detectTablet() {
   return (ipad||coarse)&&Math.min(window.innerWidth,window.innerHeight)>=700;
 }
 const tabletMode={on:false,ts:1};
+// iPhone Duo mode (Tom, 2026-11-11, build duo1; docs/DUO.md). The Duo is a folding iPhone. Folded it is a normal phone and gets the phone
+// layouts. Unfolded, the inner screen gives a home-screen app about 951 x 648 CSS px held sideways (867 x 669 on some iOS builds) and
+// about 669 x 869 held upright: as wide as a phone in landscape but half again as tall. Safari cannot tell a page that the phone is
+// folded or where the crease is, so the pose is read from the page size alone and checked again on every resize (unfolding fires one).
+// An unfolded Duo sets html.duo and reuses iPad mode (html.tablet: full screen, follows how it is held, no rotate button) with its own
+// --ts. ?duo=1 or ?duo=0 in the address, or le-duo 'on' or 'off' in localStorage, forces it (for testing on a computer).
+const DUO_OPEN_MIN=560;   // short side of the page in CSS px: no flat iPhone reaches 560 (the largest is 440), an unfolded Duo is 589 to 669
+const duoMode={device:false,open:false};
+function detectDuo() {
+  try {
+    const q=new URLSearchParams(location.search).get('duo');
+    if(q==='1'||q==='0') return q==='1';
+    const s=localStorage.getItem('le-duo');
+    if(s==='on'||s==='off') return s==='on';
+  } catch(e) {}
+  if(!/iPhone/.test(navigator.userAgent||'')) return false;
+  const a=Math.min(screen.width,screen.height),b=Math.max(screen.width,screen.height);
+  return (a===466&&b===678)||Math.min(window.innerWidth,window.innerHeight)>=DUO_OPEN_MIN;   // the Duo reports its folded screen (466 x 678) in every pose
+}
 function applyLayout() {
   const deviceLandscape=window.innerWidth>window.innerHeight;
   const root=document.documentElement;
-  tabletMode.on=detectTablet();
-  tabletMode.ts=Math.max(1.25,Math.min(1.6,window.innerHeight/620));   // 834 px tall (iPad Pro 11) gives 1.34, 1032 (iPad Pro 13) gives 1.6
+  duoMode.device=detectDuo();
+  duoMode.open=duoMode.device&&Math.min(window.innerWidth,window.innerHeight)>=DUO_OPEN_MIN;
+  tabletMode.on=duoMode.open||detectTablet();
+  tabletMode.ts=duoMode.open?Math.max(1.1,Math.min(1.3,window.innerHeight/520))   // Duo sideways: 648 px tall gives 1.25, 669 gives 1.29, 589 (inside Safari) gives 1.13
+    :Math.max(1.25,Math.min(1.6,window.innerHeight/620));   // 834 px tall (iPad Pro 11) gives 1.34, 1032 (iPad Pro 13) gives 1.6
   root.classList.toggle('tablet',tabletMode.on);
+  root.classList.toggle('duo',duoMode.open);
+  root.classList.toggle('duofold',duoMode.device&&!duoMode.open);   // folded Duo: a phone, but short and wide (466 x 657), so the title logo is sized by height
   root.style.setProperty('--ts',tabletMode.on?tabletMode.ts.toFixed(3):'1');
   const mode=tabletMode.on?'auto':layout.mode;   // a tablet always follows how it is held
   layout.landscape=mode==='auto'?deviceLandscape:mode==='landscape';

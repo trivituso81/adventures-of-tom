@@ -194,7 +194,9 @@ let menuZ=1;
 function menuZoom() {
   const g=$('game'), rot=typeof layout!=='undefined'&&layout.rotated;
   const w=rot&&g?g.offsetWidth:innerWidth, h=rot&&g?g.offsetHeight:innerHeight;
-  menuZ=(w>=1000&&h>=560)?Math.max(1,Math.min(2.4,w/880,h/500)):1;
+  // Unfolded iPhone Duo (docs/DUO.md): sideways the menu lays out at about 800 x 500 and zooms to fit (1.19 at 951 x 648); upright at about 520 wide.
+  const duo=typeof duoMode!=='undefined'&&duoMode.open;
+  menuZ=duo?Math.max(1,w>h?Math.min(w/800,h/500):Math.min(w/520,h/680)):(w>=1000&&h>=560)?Math.max(1,Math.min(2.4,w/880,h/500)):1;
   for(const id of ['menu','shop']) { const e=$(id); if(e) e.style.zoom=menuZ>1?menuZ.toFixed(3):''; }
   return menuZ;
 }
