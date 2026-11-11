@@ -238,17 +238,17 @@
   "jojo": {
    "name": "Jojo",
    "img": "art/heads/jojo.webp",
-   "w": 115,
-   "h": 230,
+   "w": 179,
+   "h": 473,
    "top": 0,
-   "chin": 58,
-   "ax": 55.72,
-   "taper": 6,
+   "chin": 113.52,
+   "ax": 91.43,
+   "taper": 12,
    "mode": "fixed",
    "group": "family",
    "applied": 1.0,
-   "R": 42,
-   "hr0": 15.33
+   "R": 39.06,
+   "hr0": 11.1714
   },
   "pip": {
    "name": "Pip",

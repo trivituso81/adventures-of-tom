@@ -22,7 +22,6 @@ import numpy as np
 from PIL import Image, ImageDraw
 import walk_sheet_frames as W
 import townsfolk_common as TF
-import jojo_head as JH
 TWEAK = os.path.join(HERE, 'head_tweak.json')
 ORDER = ['justin', 'tnb', 'tom', 'boppy', 'amy', 'deedee', 'olivia', 'ellie', 'grace', 'rose', 'nara', 'jojo']
 TOWN = list(TF.LIBRARY_WALK)   # the 21 townsfolk cut from approved Art Library sheets (bake_townsfolk.py)
@@ -42,9 +41,6 @@ def parse(args):
 
 def figure(cid, tweak):
     """(stand figure image, on-screen rows per source px, head height in source px of that image) with `tweak` applied in memory."""
-    if cid == 'jojo':   # bake_jojo.py: head share of figure height x factor (solved per frame), then the whole figure is drawn 42 rows tall
-        poses = JH.load_poses(); ratio = JH.SHARE_FRONT * tweak.get(cid, 1.0); k = JH._solve_k(poses, 'down_stand', ratio, 0.4 if tweak.get(cid, 1.0) < 1.0 else 1.0)
-        g = JH.bigger_head(poses['down_stand'], 'down_stand', k); return g, JH.OW_H / g.height, ratio * g.height
     if cid in TOWN:   # same maths as bake_townsfolk.py: head = T x factor on screen, body scale follows, whole figure keeps its height
         from kidhead import grow_head
         fig = TF.stand(cid); H0 = fig.height; chin = TF.CHIN[cid] * H0; R = TF.target_rows(cid)
@@ -99,18 +95,15 @@ def manifest():
     os.makedirs(os.path.join(ROOT, 'art', 'heads'), exist_ok=True); out = {'zoom': 1, 'order': ORDER, 'chars': {}}
     for cid in ORDER:
         W.HEAD_TWEAK.clear(); W.UNWARPED_H.clear(); W.BODY_ROWS_PER_PX.clear(); W.BODY_SCALE.clear()
-        fig = JH.load_poses()['down_stand'] if cid == 'jojo' else TF.stand(cid) if cid in TOWN else W.grid(W.src(cid), 3, 3)[0]; H = fig.height; top = fig.getbbox()[1]; bb = fig.getbbox()
+        fig = TF.stand(cid) if cid in TOWN else W.grid(W.src(cid), 3, 3)[0]; H = fig.height; top = fig.getbbox()[1]; bb = fig.getbbox()
         a = np.array(fig)[:, :, 3] > 40
-        if cid == 'jojo':
-            t0 = JH._auto_head(fig)[0]; fig = fig.crop((0, t0, fig.width, fig.height)); H = fig.height; a = np.array(fig)[:, :, 3] > 40   # page measures from the hair top
-            chin = JH.CHIN_FIX['down_stand'] - t0; mode = 'fixed'; R = JH.OW_H; hr0 = JH.SHARE_FRONT * JH.OW_H
-        elif cid in TOWN: chin = TF.CHIN[cid] * H; mode = 'fixed'; R = TF.target_rows(cid); hr0 = TF.KID_HEAD_ROWS if cid in TF.KIDS else TF.TOM_HEAD_ROWS
+        if cid in TOWN: chin = TF.CHIN[cid] * H; mode = 'fixed'; R = TF.target_rows(cid); hr0 = TF.KID_HEAD_ROWS if cid in TF.KIDS else TF.TOM_HEAD_ROWS
         elif cid in W.WALK_MATCH: chin = W.WALK_MATCH[cid][0] * H; mode = 'fixed'; R = W.WALK_MATCH[cid][1] * W.WALK_MATCH[cid][2]; hr0 = W.TOM_HEAD_ROWS
         elif cid in W.PLAIN: chin = W.PLAIN[cid] * H; mode = 'fixed'; R = PLAIN_ROWS[cid]; hr0 = R * chin / H
         else: chin = W.GROW[cid][0] * H; mode = 'body'; R = KID_ROWS[cid]; hr0 = 0
         sx = np.where(a[max(0, int(chin) - 10):int(chin), :].any(0))[0]; ax = float(sx.mean()) if len(sx) else fig.width / 2.0
         crop = fig.crop((0, 0, fig.width, H)); crop.save(os.path.join(ROOT, 'art', 'heads', cid + '.webp'), 'WEBP', lossless=True, quality=100, method=6)
-        e = {'name': NAMES[cid], 'img': 'art/heads/%s.webp' % cid, 'w': fig.width, 'h': H, 'top': int(np.where(a.any(1))[0].min()), 'chin': round(chin, 2), 'ax': round(ax, 2), 'taper': 6 if cid == 'jojo' else 12, 'mode': mode, 'group': GROUP[cid], 'applied': cur.get(cid, 1.0)}
+        e = {'name': NAMES[cid], 'img': 'art/heads/%s.webp' % cid, 'w': fig.width, 'h': H, 'top': int(np.where(a.any(1))[0].min()), 'chin': round(chin, 2), 'ax': round(ax, 2), 'taper': 12, 'mode': mode, 'group': GROUP[cid], 'applied': cur.get(cid, 1.0)}
         if mode == 'fixed': e.update(R=round(R, 3), hr0=round(hr0, 4))
         else: e.update(s0=round(R / H, 6), k0=W.GROW[cid][1])
         out['chars'][cid] = e
