@@ -10737,8 +10737,16 @@
     "art/raw/characters/boppy-hero-ref-v1.png"
    ],
    "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Julian Vance, 58, man, 6'1\" tall, light peach skin, black hair, hair style short, dark and neatly combed back, clothing charcoal top, charcoal trousers, a charcoal brimmed hat he never takes off, a long dark coat, personality calm, courteous and quietly certain, the quiet, polite man in the long coat who paused the world at its happiest afternoon, never without his hat.",
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/npcs/npc-photo-vance-v1.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794359518379
+    }
+   ],
    "rejects": []
   },
   {
