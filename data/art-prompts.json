@@ -20479,8 +20479,16 @@
    "prompt": "Paint a new sheet of FINAL CALL, the creature in attachment 2, as a handbrushed painting. Attachment 2 is the current painting of it in the game: paint the same creature, with the same shape, colors, materials and details, at the same size in each cell, in the same view, facing right. Do not repeat the poses of attachment 2. Paint 6 NEW poses in a 3 by 2 layout, one pose alone in each cell with clear magenta all around it and nothing crossing into another cell. These poses show the moment after the fight, when the anger has gone out: the mood is gentle, warm and a little funny, never fierce. The screen shows only plain gold bars, never letters. Top row: 1 the same upright pose as the first pose of attachment 2, at exactly the same size, but calm: standing on its two booted legs, the eyes soft, the gold bars on the screen glowing steady, the bulb on its antenna a warm gold. 2 disbelief: leaning forward, the eyes huge, the antenna standing straight up. 3 the ticket: a small cream paper ticket tucked into the top corner of its frame like a card in a hat band, the eyes rolled up to look at it, delighted. Bottom row: 4 walking: in mid stride to the right, the ticket still tucked in its frame, the eyes forward and bright, the bulb shining. 5 walking away, seen from behind: the plain back of the casing with a small vent, in mid stride, the antenna bobbing. 6 the look back: seen from behind and twisted at the waist to look over its shoulder, one eye showing, the antenna tipped like a wave. Paint only what each pose names: no glows, speed lines, sparkles or splashes unless a pose asks for them, and no letters, numbers or words anywhere. Paint and finish it like attachment 1: matte, thick visible brush strokes on the figure, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/ending-gridlockprime-v1.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794437058854
+    }
+   ],
    "rejects": [],
    "id": "ending-gridlockprime",
    "tab": "Enemies",
