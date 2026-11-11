@@ -1190,6 +1190,13 @@ html.landscape #hud #objective{width:min(340px,60%);margin-top:6px;padding:8px 1
    layout on a nearly square screen. Only what differs from those is here. The crease runs down the middle of the sideways screen, so
    nothing you press sits there. */
 html.duo.landscape #splash-art{background-size:auto 31%,auto,cover;background-position:center calc(6px + env(safe-area-inset-top)),0 0,50% 40%}
+/* Duo battle, sideways (Tom 2026-11-11, build duo2): the scene is as big as the width allows; the right strip is narrow and the party is stacked one per row. */
+html.duo.landscape #battle.v2{--b2pw:188px}
+html.duo.landscape #battle.v2 .b2-party{grid-template-columns:minmax(0,1fr);gap:calc(3px*var(--ts)) 0}
+html.duo.landscape #battle.v2 .b2-pc{grid-template-columns:30px minmax(0,1fr);gap:6px;padding:2px 3px}
+html.duo.landscape #battle.v2 .b2-pc img,html.duo.landscape #battle.v2 .b2-ph{width:30px;height:30px}
+html.duo.landscape #battle.v2 .b2-x{font-size:11px;letter-spacing:0}
+html.duo.landscape #battle.v2 .b2-x small{font-size:9.5px}
 html.duofold:not(.landscape) #splash-art,html.duo:not(.landscape) #splash-art{background-size:auto 29%,auto,cover;background-position:center calc(12px + env(safe-area-inset-top)),0 0,center top}
 html.duo.landscape #splash #splash-panel{padding:calc(22px*var(--ts)) calc(10px*var(--ts)) calc(6px*var(--ts))}
 html.duo.landscape #splash .sp-tab{font-size:calc(13px*var(--ts));padding:calc(4px*var(--ts)) calc(14px*var(--ts));top:calc(-15px*var(--ts))}
@@ -1622,7 +1629,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/npc-emotion-moods.js?v=npcemo7"></script>
 <script src="engine/emotions.js?v=npcemo7"></script><!-- mood faces and poses in story dialogue (batch 0: chapter 1) -->
 <script src="engine/tapwalk.js?v=space1"></script><!-- tap to walk -->
-<script src="engine/main.js?v=castflip1"></script>
+<script src="engine/main.js?v=duo2"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js?v=music2"></script>

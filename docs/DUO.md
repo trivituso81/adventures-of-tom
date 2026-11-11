@@ -32,7 +32,9 @@ Apple has not published the page sizes. The numbers below were measured by devel
 | Build stamp | `engine/main.js` | On a Duo the title stamp also shows the measured page size and pose, for example `build duo1 951x648 duo open`. |
 | Admin pages | `voices.html`, `music.html` | The two-column layout now starts at 860 px wide (was 1000), with the left column at 34% of the width up to 400 px, so the Duo sideways gets it. Art Library, Area Builder, Portrait Crops, Head Sizes and Recast Deedee already fit both poses and were not changed. |
 
-Not changed: battles (they get the iPad sideways layout: scene on the left with dark bands above and below, command strip on the right), the frozen demo, any art.
+Battles (duo2, Tom 11-11: make the left side as big as possible, stack the characters on the right): sideways, the right strip is 188 px wide (`--b2pw` in the `html.duo` block), the party is one card per row, and the scene is 763 x 429 at 951 x 648 (it was 671 x 377 with the iPad strip). The scene is 16:9 and limited by width, so the strip width is the only knob for scene size; dark bands remain above and below. Upright uses the phone portrait battle layout unchanged.
+
+Not changed: the frozen demo, any art.
 
 ## Tested
 

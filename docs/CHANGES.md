@@ -1,3 +1,8 @@
+## 2026-11-11 (duo2): iPhone Duo battle layout, sideways
+- Tom: in landscape, make the left side (the scene) as big as possible while the right side stays usable; stack the characters on the right vertically.
+- `index.html` `html.duo` block: battle strip `--b2pw` 188 px (was 280), party cards one per row with 30 px faces, command cross text 11 px. Scene grows from 671 x 377 to 763 x 429 at 951 x 648 (about 30% more area). Phones, iPads and the upright Duo are unchanged.
+- Tests: smoke FAILS [], tag_check ok. Looked at the command cross, the attack list, target pick and heal list at 951 x 648, and the cross at 867 x 669 and 951 x 589 (Chromium emulation, no real Duo).
+
 ## 2026-11-11 (castflip1): Welcome screen family order reversed, Tom always at the screen centre
 - Tom 09:00: reverse the order of the people so each stands on the side of the welcome painting they come from (Long Island on the left with the lighthouse, Los Angeles on the right with the palms). Tom 09:03: Tom is always at the centre of the screen in every viewport.
 - `engine/splash.js`: landscape spots mirrored (x' = 1208 - x, each keeps its row): Boppy, Deedee, Grace, Rose, TOM, TNB, Nara in front, Justin and Amy behind. Portrait rows reversed: front Grace, Rose, TOM, TNB, Nara; back Justin, Amy, Boppy, Deedee.
