@@ -10,13 +10,14 @@ from scipy import ndimage as ndi
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from walk_sheet_frames import _key
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-RAW = os.path.join(ROOT, 'art/raw/characters'); OUT = os.path.join(ROOT, 'art/emotions')
+RAW = os.path.join(ROOT, 'art/raw/characters'); OUT = os.path.join(ROOT, 'art/emotions'); NPC_RAW = os.path.join(ROOT, 'art/raw/npcs')   # townsfolk sheets: npc-emotions-<id>-vN.png (Tom 2026-11-10)
 MOODS = ['happy', 'loving', 'sad', 'angry', 'scared', 'surprised', 'proud', 'unimpressed']
 TAG = 'tomemo2'
 
 def src_path(cid):
     # newest approved sheet for this character (boppy-emotions-v2.png replaces v1 as the source, Tom 2026-11-06)
-    vs = sorted(glob.glob(os.path.join(RAW, f'{cid}-emotions-v*.png')), key=lambda p: int(re.search(r'-v(\d+)\.png$', p).group(1)))
+    vs = sorted(glob.glob(os.path.join(RAW, f'{cid}-emotions-v*.png')) + glob.glob(os.path.join(NPC_RAW, f'npc-emotions-{cid}-v*.png')),
+                key=lambda p: int(re.search(r'-v(\d+)\.png$', p).group(1)))
     return vs[-1]
 
 def cut(cid):
@@ -57,7 +58,8 @@ def bake(cid):
     return {'src': f'art/emotions/{cid}.webp?v={TAG}', 'fw': fw, 'fh': fh, 'frames': rects}, figs
 
 if __name__ == '__main__':
-    ids = sys.argv[1:] or sorted(re.sub(r'-emotions-v\d+\.png$', '', os.path.basename(p)) for p in glob.glob(os.path.join(RAW, '*-emotions-v*.png')))
+    ids = sys.argv[1:] or sorted(set(re.sub(r'-emotions-v\d+\.png$', '', os.path.basename(p)) for p in glob.glob(os.path.join(RAW, '*-emotions-v*.png')))
+                                 | set(re.sub(r'^npc-emotions-|-v\d+\.png$', '', os.path.basename(p)) for p in glob.glob(os.path.join(NPC_RAW, 'npc-emotions-*-v*.png'))))
     idx_path = os.path.join(ROOT, 'data/emotions.js'); index = {}
     if os.path.exists(idx_path):
         m = re.search(r'EMOTION_ART=(\{.*?\});', open(idx_path).read(), re.S)
