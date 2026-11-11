@@ -32,7 +32,7 @@ CAST = {'pip': 40, 'moss': 41, 'dot': 40, 'gus': 40, 'bean': 39, 'reel': 42, 'pr
         'beto': 42, 'sol': 41, 'dash': 40, 'dolores': 38, 'marguerite': 38, 'nickel': 40,
         'mateo': 36, 'daisy': 38, 'kevin': 40, 'claudia': 38, 'yesenia': 38, 'tony': 38,
         'ryan': 42, 'dakota': 37, 'sam': 38, 'jordan': 43, 'carmen': 38, 'odette': 36, 'priya': 39, 'sofi': 36,
-        'marlowe': 43, 'hush9': 40, 'pistachio': 40, 'vance': 42}
+        'alvarez': 37, 'marlowe': 43, 'hush9': 40, 'pistachio': 40, 'vance': 42}
 ap = argparse.ArgumentParser()
 ap.add_argument('--only', default=None)
 ap.add_argument('--colors', type=int, default=46)
