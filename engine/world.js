@@ -193,8 +193,11 @@ function findMonster(id) { for(const m of Object.values(worlds)) { const g=m.npc
 function allMonsters() { const out=[]; for(const m of Object.values(worlds)) for(const n of m.npcs.concat(m.fallen||[])) if(n.monster) out.push(n); return out; }
 // A defeated monster is gone for as long as the player stays in the area (Tom, 2026-10-31). It waits in map.fallen and comes
 // back, at its home spot, the next time the player walks into that map (switchMap, engine/battle-draw.js). Story actors stay put.
-function monsterFall(n) {
+// A boss never falls the moment it is beaten: it stays on the map through its after scene and leaves in a finale (engine/boss-finale.js),
+// which calls monsterFall(n,true). The ordinary rule below is for every other monster.
+function monsterFall(n,force) {
   if(!n||n.scripted) return;
+  if(!force&&typeof bossStays==='function'&&bossStays(n)) return;
   n.defeatedUntil=0; n.chasing=false; n.alert=0; n.move=null;
   for(const m of Object.values(worlds)) { const i=m.npcs.indexOf(n); if(i>=0) { m.npcs.splice(i,1); (m.fallen=m.fallen||[]).push(n); return; } }
 }

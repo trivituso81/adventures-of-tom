@@ -260,6 +260,7 @@ SCENES.ch11After=()=>[
     {talk:'Amy',lines:['Then you’re on one. Seat 18C. Don’t recline.']}]:[
     {talk:'FINAL CALL',lines:['...ON TIME. ON TIME. ON TIME.','It’s fine. They’re all on time. I am not.']},
     {talk:'Amy',lines:['Nobody is cancelling you. You just never got a boarding pass. Here. Take mine.']}]),
+  {finale:'finalcall'},
   {talk:'Tom',lines:['Something is dropping out of the gate clock. A gold coin, with a little clock face. Number nine.']},
   {call:()=>sfx.pickup&&sfx.pickup()},
   {talk:'Tom',lines:['It’s warm. Whatever Vance was holding, it wasn’t his.']},
@@ -299,7 +300,7 @@ STORY_WORLD.push(()=>{
   const b=findMonster('finalcall'); if(!b) return;
   b.mscale=1.15;
   const under=STORY.chapter<11||(STORY.chapter===11&&!flag('ch11-vance'))||flag('battle:finalcall')==='win'||STORY.chapter>11;
-  if(under&&!b.sunk) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
+  if(under&&!b.sunk&&!b.fin) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
   else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.sunk=null; b.hidden=false; }
 });
 TUTORIALS.finalcall={tips:[

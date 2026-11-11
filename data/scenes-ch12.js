@@ -237,6 +237,7 @@ SCENES.ch12After=()=>[
     {talk:'Amy',lines:['Go. Signal first. We’ve got the crosswalk.']}]:[
     {talk:'Gridlock Prime',lines:['...SigAlert cleared. Merging left. I’m sorry. Everybody was in my lane.']},
     {talk:'Amy',lines:['It’s fine. Nobody was in your lane. You were in everybody’s. Take the exit.']}]),
+  {finale:'gridlockprime'},
   {call:()=>sfx.pickup&&sfx.pickup()},
   {talk:'Tom',lines:['The green lamp just popped off the traffic light. It’s still warm, and it’s humming.']},
   {give:'greenlight'},
@@ -287,7 +288,7 @@ STORY_WORLD.push(()=>{
   set('casa',['Mrs. Alvarez','Don Beto','Tony','Yesenia','Claudia','Kevin'],()=>!flag('ch12-alvarez'));
   const b=findMonster('gridlockprime'); if(!b) return;
   const under=STORY.chapter!==12||!flag('ch12-prime')||flag('battle:gridlockprime')==='win';
-  if(under&&!b.sunk) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
+  if(under&&!b.sunk&&!b.fin) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
   else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.sunk=null; b.hidden=false; }
   b.mscale=1.5;
 });

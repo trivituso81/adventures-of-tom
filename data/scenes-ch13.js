@@ -183,6 +183,7 @@ SCENES.ch13After=()=>[
     {talk:'Amy',lines:['Union rules. Hydrate. And when you’re ready, we’ll tell you where you were going.']}]:[
     {talk:'Drill Worm',lines:['...Bit’s down. Engine’s off. I wasn’t going anywhere. I was just digging in.','I’m sorry about the roof.']},
     {talk:'Amy',lines:['It’s fine. Nobody’s mad at a drill. They’re mad at whoever put a chip in it.']}]),
+  {finale:'drillworm'},
   {call:()=>sfx.pickup&&sfx.pickup()},
   {talk:'Tom',lines:['A little grey cube just popped out of its side. The hush chip. It’s very quiet.']},
   {talk:'TNB',lines:['Not anymore.']},
@@ -296,7 +297,7 @@ STORY_WORLD.push(()=>{
   const b=findMonster('drillworm');
   if(b) {
     const under=STORY.chapter!==13||!flag('ch13-worm')||flag('battle:drillworm')==='win';
-    if(under&&!b.sunk) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
+    if(under&&!b.sunk&&!b.fin) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
     else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.sunk=null; b.hidden=false; }
     b.mscale=1.5;
   }

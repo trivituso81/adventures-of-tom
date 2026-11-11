@@ -37,7 +37,8 @@ SETUP=r"""(C)=>{ const L=window.__LE; splash.active=false; document.getElementBy
   window.storyTriggers=()=>false;
   // battles win at once
   SCENE_OPS.battle=o=>S.call(()=>{ let m=typeof o.battle==='function'?o.battle():typeof o.battle==='object'?o.battle:findMonster(o.battle);
-    const id=(m&&m.monster)||o.battle; setFlag('battle:'+id,'win'); if(typeof C.kind==='string') setFlag('kind:'+id,true); });
+    const id=(m&&m.monster)||o.battle; if(m) monsterFall(m); setFlag('battle:'+id,'win');   // monsterFall: what a real win does (b2RewardsData); a boss must stay (bossend1)
+    if(typeof C.kind==='string') setFlag('kind:'+id,true); });
   const m=worlds[C.map]; currentMap=m; const s=C.start||[m.spawn.x,m.spawn.y,'down'];
   player.x=s[0]; player.y=s[1]; player.facing=s[2]||'down'; player.move=null; player.hidden=false;
   placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; storyWorld();
@@ -64,7 +65,7 @@ with sync_playwright() as pw:
         for d in C.get('walk',[]):
             pg.evaluate("(d)=>{ movePlayer(d); }",d); pg.wait_for_timeout(260)
         pg.wait_for_timeout(300)
-        snaps=[]; shots=[]
+        snaps=[]; shots=[]; fins=[]
         for sc in C['scenes']:
             pg.evaluate("(sc)=>{ if(sc.startsWith('!')) eval(sc.slice(1)); else playScene(sc); }",sc)
             last=None; t=0; dw=0
@@ -82,6 +83,9 @@ with sync_playwright() as pw:
                         if dw>=2: dw=0; pg.evaluate("()=>{ if(dialog.choices&&dialog.choices.length) pickChoice(0); else advanceDialog(); }")
                 elif not st['a'] and not st['battle']:
                     break
+                elif st['a'] and not st['d'] and not st['battle'] and os.environ.get('FIN'):
+                    # no dialogue on screen: a finale or a walk is playing; keep a frame of it
+                    fn=os.path.join(OUT,f"{C['name']}-fin-{len(fins):02d}.png"); pg.screenshot(path=fn); fins.append(fn); pg.wait_for_timeout(250)
         res[C['name']]={'info':info,'snaps':snaps,'errs':errs[:5]}
         if shots:
             ims=[Image.open(f) for f in shots]; cols=6; w,h=ims[0].size; sc_=300/w; tw,th=int(w*sc_),int(h*sc_); rows=(len(ims)+cols-1)//cols

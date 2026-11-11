@@ -258,6 +258,7 @@ SCENES.ch1AfterBoss=[
   {if:()=>!!flag('kind:bigone'),
     then:[{talk:'The Big One',lines:['Glub. Nobody ever made me laugh before. You can have your tin back.']}],
     else:[{talk:'The Big One',lines:['Glub. Fine. Take your tin. I\'m going back in the pond to think about things.']}]},
+  {finale:'bigone'},
   {talk:'Deedee',lines:['My tin! And look. Half the crisp is still in it.']},
   {talk:'Grace',lines:['The Big One ate the other half. I saw crumbs on its chin.']},
   {talk:'Deedee',lines:['Then we split this half. Everybody home. Boppy has to hear about this.']},
@@ -462,6 +463,7 @@ SCENES.ch2AfterBoss=[
   {if:()=>!!flag('kind:bigshake'),
     then:[{talk:'The Big Shake',lines:['Rumble. You asked how I was doing. Nobody has asked in a million years.','...I\'ll let things move. A little. Two inches a year. That\'s my best offer.']}],
     else:[{talk:'The Big Shake',lines:['Rumble. Fine. The pipes are clear. I\'m going back under the hill to think about my choices.']}]},
+  {finale:'bigshake'},
   {talk:'TNB',lines:['Look. The sky is blue again. LA blue. Slightly brown, but blue.']},
   {talk:'Tom',lines:['Somebody plugged those pipes on purpose. Smog doesn\'t do that by itself.']},
   {talk:'TNB',lines:['Spooky. I love it. Let\'s go check on Mr. Washington.']},
@@ -519,7 +521,7 @@ const STORY_WORLD=[
   ()=>{
     const b=findMonster('bigone'); if(!b) return;
     const under=STORY.chapter===1&&!flag('ch1-pond');
-    if(under&&!b.sunk) { b.sunk={x:b.x,y:b.y}; b.home={x:b.x,y:b.y}; b.x=15; b.y=7; b.move=null; b.hidden=true; }   // home stays the shore spot: a defeated Big One returns to `home`, and (15,7) is open water
+    if(under&&!b.sunk&&!b.fin) { b.sunk={x:b.x,y:b.y}; b.home={x:b.x,y:b.y}; b.x=15; b.y=7; b.move=null; b.hidden=true; }   // home stays the shore spot: a defeated Big One returns to `home`, and (15,7) is open water
     else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.home={x:b.sunk.x,y:b.sunk.y}; b.sunk=null; b.hidden=false; }
     // Once beaten he stays on the shore with the frown frame (the painted stance frame is the shocked one; scenes clear and reset scenePose).
     if(!under&&flag('battle:bigone')==='win'&&!(b.scenePose&&b.scenePose.f)) b.scenePose={foe:'attack3',dir:'left'};
@@ -528,7 +530,7 @@ const STORY_WORLD=[
   ()=>{
     const b=findMonster('bigshake'); if(!b) return;
     const under=STORY.chapter===2&&!flag('ch2-boss');
-    if(under&&!b.sunk) { b.sunk={x:b.x,y:b.y}; b.home={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
+    if(under&&!b.sunk&&!b.fin) { b.sunk={x:b.x,y:b.y}; b.home={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
     else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.home={x:b.sunk.x,y:b.sunk.y}; b.sunk=null; b.hidden=false; }
   },
   // Chapter 2: Nara waits on Tom's porch (only once TNB is with Tom); the smog puts neighbors in a trance.
@@ -928,6 +930,7 @@ SCENES.ch3AfterBoss=()=>[
   {talk:'Grace',lines:['Technically he caught your jar, and then we caught him. I\'m writing it down anyway. For proof.']},
   {talk:'Boppy',lines:['Put the date. Put the time. Use the sundial. It works now.']},
   {talk:'Boppy',lines:['Go on, you old bucket. Catch and release. I\'ll come by. No hooks.']},
+  {finale:'irongill'},
   {call:()=>{ setFlag('ch3-release'); storyWorld(); sfx.splat(); }},
   {talk:'Deep Pool',lines:['Iron-Gill sinks back into the Deep Pool, burping softly. The bubbles look almost friendly.']},
   {trace:'boppy-irongill'}, {hearts:'boppy'},
@@ -1012,7 +1015,7 @@ STORY_WORLD.push(()=>{
   // Old Iron-Gill stays at the bottom of the Deep Pool until the party walks out to it, and goes back down after.
   const b=findMonster('irongill'); if(!b) return;
   const under=!flag('ch3-pool')||!!flag('ch3-release');
-  if(under&&!b.sunk) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
+  if(under&&!b.sunk&&!b.fin) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
   else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.sunk=null; b.hidden=false; }
 });
 
@@ -1297,6 +1300,7 @@ SCENES.ch4AfterBoss=()=>[
   ...(flag('kind:directorscut')?[
     {talk:'The Director’s Cut',lines:['...Great take. Nobody has ever said that to me. Forty years. Not once.','I think I\'d like to hear it again. Somewhere quiet. On a shelf.']}]:[
     {talk:'The Director’s Cut',lines:['Fine. FINE. That’s a wrap. On me. I\'m going back in the prop closet.']}]),
+  {finale:'directorscut'},
   {call:()=>{ setFlag('ch4-wrap'); storyWorld(); sfx.whoosh(); }},
   {talk:'Stage set',lines:['The megaphone hops off the rack and rolls away under the set, muttering about lighting.']},
   {talk:'TNB',lines:['Forty. I counted. I\'m going to count again. Forty.']},
@@ -1375,7 +1379,7 @@ STORY_WORLD.push(()=>{
   // The Director's Cut stays out of sight until the party walks onto the set, and leaves after.
   const b=findMonster('directorscut'); if(!b) return;
   const under=STORY.chapter<4||(STORY.chapter===4&&!flag('ch4-boss'))||!!flag('ch4-wrap');
-  if(under&&!b.sunk) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
+  if(under&&!b.sunk&&!b.fin) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
   else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.sunk=null; b.hidden=false; }
 });
 
@@ -1637,6 +1641,7 @@ SCENES.ch5AfterBoss=()=>[
   ...(flag('kind:redpen')?[
     {talk:'The Red Pen',lines:['...Nice handwriting. Nobody has ever said that. A hundred thousand papers. Not once.','I fixed the spelling. And I gave everyone a gold star. In red. It\'s the only color I have.']}]:[
     {talk:'The Red Pen',lines:['Click. Fine. FINE. Pencils down. I\'m going back in my cup.']}]),
+  {finale:'redpen'},
   {call:()=>{ setFlag('ch5-wrap'); storyWorld(); sfx.whoosh(); }},
   {talk:'Podium',lines:['The Red Pen clicks itself shut, rolls off the podium, and hops away down the hall toward the second grade room.']},
   {talk:'Amy',lines:['...It\'s going to my desk. Of course it\'s going to my desk.']},
@@ -1726,7 +1731,7 @@ STORY_WORLD.push(()=>{
   const b=findMonster('redpen'); if(!b) return;
   b.mscale=1.5;   // drawn bigger on the stage (it is the boss)
   const under=STORY.chapter<5||(STORY.chapter===5&&!flag('ch5-boss'))||!!flag('ch5-wrap');
-  if(under&&!b.sunk) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
+  if(under&&!b.sunk&&!b.fin) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
   else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.sunk=null; b.hidden=false; }
 });
 
@@ -2096,6 +2101,7 @@ SCENES.ch6AfterBoss=()=>[
     {talk:'Tom',lines:['Saturdays. On my back fence. One slice. The heel.']},
     {talk:'Chairman Cheeks',lines:['The heel is the best part.']}]:[
     {talk:'Chairman Cheeks',lines:['Fine. FINE. This meeting is adjourned. I\'m going to go stare at a bird feeder.']}]),
+  {finale:'chairman'},
   {call:()=>{ setFlag('ch6-wrap'); storyWorld(); sfx.whoosh(); }},
   {talk:'The hoard',lines:['Chairman Cheeks hops off the hoard, straightens its tie, and scampers down the far side of the Oak.']},
   // Tom walks up to the chest and lifts Bready Mercury off the hoard himself.
@@ -2198,7 +2204,7 @@ STORY_WORLD.push(()=>{
   const b=findMonster('chairman'); if(!b) return;
   b.mscale=1.5;
   const under=STORY.chapter<6||(STORY.chapter===6&&!flag('ch6-boss'))||!!flag('ch6-wrap');
-  if(under&&!b.sunk) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
+  if(under&&!b.sunk&&!b.fin) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
   else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.sunk=null; b.hidden=false; }
 });
 
@@ -2519,6 +2525,7 @@ SCENES.ch7AfterBoss=()=>[
     {talk:'Rose',lines:['I did the dragon.']},
     {talk:'The Unread',lines:['You were a wonderful dragon.']}]:[
     {talk:'The Unread',lines:['...Fine. The end. I\'ll be quiet. I\'m very good at quiet. I\'ve had a lot of practice.']}]),
+  {finale:'unread'},
   {call:()=>{ setFlag('ch7-wrap'); storyWorld(); sfx.whoosh(); }},
   {talk:'The Reading Room',lines:['The Unread closes, very slowly, and settles onto the lectern. The green lamps stop flickering.']},
   {talk:'Grace',lines:['Tata, something fell out of it. Something gold. It was being used as a bookmark.']},
@@ -2591,7 +2598,7 @@ STORY_WORLD.push(()=>{
   const b=findMonster('unread'); if(!b) return;
   b.mscale=1.5;
   const under=STORY.chapter<7||(STORY.chapter===7&&!flag('ch7-boss'))||!!flag('ch7-wrap');
-  if(under&&!b.sunk) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
+  if(under&&!b.sunk&&!b.fin) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
   else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.sunk=null; b.hidden=false; }
 });
 
@@ -2885,6 +2892,7 @@ SCENES.ch8AfterBoss=()=>[
     {talk:'Old Ironbelly',lines:['...Fine. FINE. Take your little flames back. I\'ll be cold again. I\'m used to it.']},
     {talk:'Tom',lines:['Or. Forty loaves. Tonight. You\'re the only oven on 2nd Ave hot enough.']},
     {talk:'Old Ironbelly',lines:['...Forty? Nobody has asked me for forty anything since 1963. Bring the dough.']}]),
+  {finale:'ironbelly'},
   {call:()=>{ setFlag('ch8-wrap'); storyWorld(); sfx.whoosh(); }},
   {talk:'The Boiler Room',lines:['The little blue flames lift off her grate, one by one, and drift up the flue toward 2nd Avenue. Her own fire settles in, low and gold.']},
   {fade:'out',time:.8},
@@ -2966,7 +2974,7 @@ STORY_WORLD.push(()=>{
   const b=findMonster('ironbelly'); if(!b) return;
   b.mscale=1.5;
   const under=STORY.chapter<8||(STORY.chapter===8&&!flag('ch8-boss'))||!!flag('ch8-wrap');
-  if(under&&!b.sunk) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
+  if(under&&!b.sunk&&!b.fin) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
   else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.sunk=null; b.hidden=false; }
 });
 
@@ -3292,6 +3300,7 @@ SCENES.ch9AfterBoss=()=>[
     {talk:'The Mirrorball',lines:['...You asked me. Three times. Nobody has asked me to dance since 1971.','I don\'t need the moon. I just needed somebody to ASK.']}]:[
     {talk:'The Mirrorball',lines:['...Fine. The party is over. It was over in 1971. I just didn\'t want to be the one to turn off the lights.']},
     {talk:'Deedee',lines:['Oh, honey. Nobody has to turn off the lights. We\'ll come back. Every full moon. I\'ll bring crisp.']}]),
+  {finale:'mirrorball'},
   {call:()=>{ storyWorld(); sfx.whoosh(); }},
   {talk:'The Dome',lines:['The Mirrorball turns once, slowly, and lets go. A great round light rises out of her, up through the glass, and settles in the sky. The moon. Right where it belongs.']},
   {talk:'The Mirrorball',lines:['One dance. Before you go. Somebody. Please.']},
@@ -3406,7 +3415,7 @@ STORY_WORLD.push(()=>{
   const b=findMonster('mirrorball'); if(!b) return;
   b.mscale=1.5;
   const under=STORY.chapter<9||(STORY.chapter===9&&!flag('ch9-boss'))||!!flag('ch9-clear');
-  if(under&&!b.sunk) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
+  if(under&&!b.sunk&&!b.fin) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
   else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.sunk=null; b.hidden=false; }
 });
 
@@ -3729,6 +3738,7 @@ SCENES.ch10AfterBoss=()=>[
   {call:()=>sfx.pickup()},
   {talk:'Tom',lines:['A gold coin. Same little clock face. Number eight.','The sundial. The steamer. The sign-up sheet. My jar. The book from 1952. The oven from 1963. The Mirrorball from 1971. And a gate from 1989.']},
   {talk:'Gate Zero',lines:['Tom walks back out to the gate clock and pushes the eighth coin into the middle slot. Click.','The second hand jumps. Then the minute hand. Then, slowly, the hour hand. TICK. TICK. TICK.']},
+  {finale:'lastcall'},
   {call:()=>{ storyWorld(); sfx.ding&&sfx.ding(); }},
   {talk:'Amy',lines:['My watch. Tom. My WATCH. It says twelve oh one. Twelve oh one!']},
   {talk:'Grace',lines:['Every clock in the whole town is going again. I can FEEL it.']},
@@ -3822,7 +3832,7 @@ STORY_WORLD.push(()=>{
   const b=findMonster('lastcall'); if(!b) return;
   b.mscale=1.4;
   const under=STORY.chapter<10||(STORY.chapter===10&&!flag('ch10-boss'))||!!flag('ch10-clear');
-  if(under&&!b.sunk) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
+  if(under&&!b.sunk&&!b.fin) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
   else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.sunk=null; b.hidden=false; }
 });
 

@@ -591,7 +591,16 @@ function drawActor(a) {
     const ft=feetOf(rows);
     ellipse(cx+Math.round(ft.dx*s),base-1,Math.round(Math.max(ft.w*s*.62,w*.3)*(fly?.8:1)),5*s,fly?'#2f493630':'#2f493648');
     if(breath) { gfx.save(); gfx.translate(cx,base); gfx.scale(1,1+breath); gfx.translate(-cx,-base); }
-    drawSprite(rows,d.pal,cx-Math.round(w/2),base-h-hover,s);
+    const F=a.fin;   // a boss's exit in a scene (engine/boss-finale.js): lift, sink below the ground line, spin, fade, glow
+    if(F) {
+      gfx.save();
+      if(F.glow>0) { const gr=Math.round(Math.max(w,h)*.62); ellipse(cx,base-Math.round(h*.5),gr,Math.round(gr*.9),'#ffe08a'+Math.round(Math.min(1,F.glow)*70).toString(16).padStart(2,'0')); }
+      if(F.alpha!=null) gfx.globalAlpha*=Math.max(0,F.alpha);
+      if(F.sink) { gfx.beginPath(); gfx.rect(cx-w,base-h*2-400,w*2,h*2+400+3); gfx.clip(); }
+      if(F.rot) { gfx.translate(cx,base-Math.round(h*.5)); gfx.rotate(F.rot); gfx.translate(-cx,-(base-Math.round(h*.5))); }
+      drawSprite(rows,d.pal,cx-Math.round(w/2),base-h-hover-Math.round(F.lift||0)+Math.round(F.sink||0),s);
+      gfx.restore();
+    } else drawSprite(rows,d.pal,cx-Math.round(w/2),base-h-hover,s);
     if(breath) gfx.restore();
     if(typeof drawActorExtra==='function') drawActorExtra(a,cx,base-h-hover,w,h);   // engine/story.js: a carried pie tin, a pie-tin crown
     return;
