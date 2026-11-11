@@ -1,3 +1,4 @@
+// oldart1 (Tom 2026-11-11): the live entries in data/art-prompts.json reference only art the game uses now (newest heroes and walks, Tom's stance sheets, installed enemy sheets and plates, the house painting art/grands.webp for style). This builder may still name retired files (style key, underpaintings, hero-ref-v1, walk-sheet-v1, tom-battle-sheet); node tools/art-library/validate.js rejects them, so swap them per docs/CHANGES.md (oldart1) before splicing a new entry.
 // Hero painting entries (Tom 2026-11-10: "in the character sheets, an entry item for the hero image"). One per character, first in
 // that character's group. The approved picture is the hero Tom already supplied (art/raw/characters/<id>-hero-ref-v1.png), so the
 // entries are approved from the start in data/art-prompts.json; GENERATE or UPLOAD MY OWN makes a replacement. The real-person photos

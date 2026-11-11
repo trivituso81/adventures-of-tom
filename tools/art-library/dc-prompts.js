@@ -1,3 +1,4 @@
+// oldart1 (Tom 2026-11-11): the live entries in data/art-prompts.json reference only art the game uses now (newest heroes and walks, Tom's stance sheets, installed enemy sheets and plates, the house painting art/grands.webp for style). This builder may still name retired files (style key, underpaintings, hero-ref-v1, walk-sheet-v1, tom-battle-sheet); node tools/art-library/validate.js rejects them, so swap them per docs/CHANGES.md (oldart1) before splicing a new entry.
 // Director's Cut sheets (Tom 2026-11-07 queue; 31 entries: 21 Tom + partner pairs, 10 solo Family Finish member sheets).
 // Beats come from the LIVE animations in engine/battle2-kind.js (the LAST B2_TOMBO_ANIM.<id>_dc definition and its comment block) and the names in B2_TOMBOS
 // (data/battle2-data.js, rows with dc:'<id>'). Director's Cuts are no-damage scenes at level 30.

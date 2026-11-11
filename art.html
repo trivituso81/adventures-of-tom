@@ -207,7 +207,7 @@ let INGAME={};
 const inGame=e=>e.status!=='approved'&&INGAME[e.id]?INGAME[e.id]:'';
 const CHAIN=/^art\/raw\/([a-z]+)\/([a-z0-9-]+)-v\d+\.png$/;
 // A reference to another entry's approved picture always means that entry's NEWEST approved version, even if the stored path says -v1 (a stencil made before the painting was re-approved).
-function rp(p){ const m=CHAIN.exec(p); if(!m) return p; const dep=ENTRY[m[2]]; const vs=dep&&dep.versions; if(!vs||!vs.length) return p; let b=vs[0]; for(const v of vs) if((v.n||0)>(b.n||0)) b=v; return b.file||p; }
+function rp(p){ const m=CHAIN.exec(p); if(!m) return p; const dep=ENTRY[m[2]]; const vs=dep&&dep.versions; if(!vs||!vs.length) return p; let b=vs[0]; for(const v of vs) if((v.n||0)>=(b.n||0)) b=v; return b.file||p; } // >=: on equal numbers the later approval wins (heroes approved twice with n 0)
 const WORKFLOW=/\s*\((?:needs step \d+ approved|same chat[^)]*|fresh generator chat[^)]*)\)/gi;
 const baseTitle=t=>String(t).replace(WORKFLOW,'').trim();
 const shortTitle=t=>baseTitle(t).replace(/\s*\([^)]*\)\s*$/,'');

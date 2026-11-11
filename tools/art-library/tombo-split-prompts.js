@@ -6,7 +6,7 @@
 const fs = require('fs');
 const P = f => fs.readFileSync(__dirname + '/prompts/' + f, 'utf8').trim();
 const SOLO = P('char-tombo-solo-sheet.txt'), OBJ = P('tombo-objects-sheet.txt');
-const R = 'art/raw/characters/', STYLE = 'docs/reference/style_key_v1.png';
+const R = 'art/raw/characters/', STYLE = 'art/raw/characters/tom-hero-v1.png'   // oldart1: newest Tom hero, style only;
 const WHO = { tom: 'Tom', tnb: 'TNB', grace: 'Grace', rose: 'Rose', amy: 'Amy', deedee: 'Deedee', boppy: 'Boppy', nara: 'Nara' };
 const list = a => a.map((f, i) => (i + 1) + '. ' + f).join('\n');
 

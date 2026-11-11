@@ -1,9 +1,9 @@
 // Trail clue sheets for the Art Library (tab Props, group "Trail clues"). Required by make-prompts.js.
 // Tom 2026-11-06: where the player only has to find an enemy, a boss or a trigger and no object leads there, a trail of 3 clue objects does.
 // Clue 1 sits far from the target, the next clue appears once the previous one is investigated, clue 3 points at the target.
-// Transparent map overlays like the dungeon finds. One sheet packs up to 4 chapters (3 clues each, in trail order). Only the style key is attached.
+// Transparent map overlays like the dungeon finds. One sheet packs up to 4 chapters (3 clues each, in trail order). Only the house painting (art/grands.webp) is attached, for style.
 const { sheet } = require('./dungeonfind-prompts');
-const REF_KEY = 'docs/reference/style_key_v1.png';
+const REF_KEY = 'art/grands.webp';
 const T = (name, d) => [name, d];
 const SHEETS = [
   { id: 'a', label: 'trails for chapters 2 and 3', title: 'chapters 2 and 3', items: [

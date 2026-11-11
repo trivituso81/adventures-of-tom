@@ -2,14 +2,14 @@
 //   Group A: the 29 square house and shop interiors (LE_ROOMS / LA_ROOMS in game.json), ref = installed plate (layout + furniture) + style key.
 //   Group B: the 32 walkable interior areas that are not square (school ... boiler), ref = installed plate (layout) + style key.
 // Prompt text is BUILT FROM DATA: one shared style block, one function per group. Run: node tools/art-library/make-prompts.js
-const KEY = 'docs/reference/style_key_v1.png';
+const KEY = 'art/grands.webp';
 
-const ART = `ART STYLE (the same look as attachment 2, the style key)
-- Illustrated whimsical realism: a hand-painted interior with dense, jewel-toned painted texture, fine visible brushwork, deep saturated colors and rich contrast. Gently simplified shapes, crisp clean edges, fine surface detail on wood grain, fabric, plaster and stone. No thick or black outlines.
+const ART = `ART STYLE (the same look as attachment 2, the painting of Deedee and Boppy's house)
+- A hand-painted, hand-brushed interior in exactly the style of attachment 2: visible brushwork everywhere, matte surfaces like oil paint or gouache on canvas, rich warm color built in layers, a fine canvas grain, edges painted with a small brush. Gently simplified shapes, fine painted detail on wood grain, fabric, plaster and stone. No thick or black outlines. NOT glossy, NOT airbrushed.
 - Warm golden light from the upper left, a soft warm glow, a gentle rim light on furniture edges, soft baked contact shadows under every piece of furniture. Lamps and windows add small pools of warm light.
 - Fixed elevated three-quarter camera looking diagonally into the scene, about 35 degrees downward, the same camera across the whole picture. No top-down floor-plan look, no fisheye, no perspective change from one side to the other.
 - NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.
-- The attached style key is a STYLE REFERENCE ONLY. Match its rendering, brushwork, lighting, color saturation and level of detail exactly. Do not copy its people, school yard or layout.`;
+- Attachment 2 is a STYLE REFERENCE ONLY. Match its brushwork, lighting, color and level of detail exactly. Take only how it is painted.`;
 
 const EXCL = `STRICT EXCLUSIONS
 No people, no animals, no creatures, no monsters, no characters of any kind (the game draws them on top). No collectibles painted in: no chests, coins, keys, gems or glowing pickups. No frame, border, vignette bars, title card, contact sheet, mockup, palette chart or any other secondary material. Exactly one picture.`;
@@ -31,7 +31,7 @@ A square interior painting of ${r.what}, for "The Adventures of Tom", a family r
 
 ATTACHED IMAGES (in this order)
 1. The installed painting of this same room: a LAYOUT AND FURNITURE reference. Keep the same furniture, the same placement and the same room layout, the same entrance position and the same wall and window positions. Restyle everything to attachment 2. Do not add rooms, do not remove furniture, do not move pieces to new walls.
-2. The STYLE KEY, a finished painting of the family in a school yard. It shows exactly how this game paints: dense jewel-toned painted texture, fine brushwork, warm golden light. Match it. Take nothing else from it.
+2. The finished painting of Deedee and Boppy's house, the grandparents' home in this game. It is the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted.
 
 ${ART}
 
@@ -149,7 +149,7 @@ A painting of ${a.what}, for "The Adventures of Tom", a family role-playing game
 
 ATTACHED IMAGES (in this order)
 1. The installed painting of this same place: a LAYOUT reference. Keep the same room layout, the same positions of walls, doors, big furniture and landmarks, and the same open floor. Restyle everything to attachment 2. Fix anything that is unclear, and do not add rooms.
-2. The STYLE KEY, a finished painting of the family in a school yard. It shows exactly how this game paints: dense jewel-toned painted texture, fine brushwork, warm golden light. Match it. Take nothing else from it.
+2. The finished painting of Deedee and Boppy's house, the grandparents' home in this game. It is the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted.
 
 ${ART}
 

@@ -1,3 +1,4 @@
+// oldart1 (Tom 2026-11-11): the live entries in data/art-prompts.json reference only art the game uses now (newest heroes and walks, Tom's stance sheets, installed enemy sheets and plates, the house painting art/grands.webp for style). This builder may still name retired files (style key, underpaintings, hero-ref-v1, walk-sheet-v1, tom-battle-sheet); node tools/art-library/validate.js rejects them, so swap them per docs/CHANGES.md (oldart1) before splicing a new entry.
 // NPC prompts for the Art Library (tab NPCs). Required by make-prompts.js.
 // One hero prompt per person, `npc-photo-<id>` (Final Fantasy IX style template plus details). Looks come from the live game palettes
 // (scratchpad dump of LE_PALETTES / LA_PALETTES); roles, ages and heights are written below. Assumptions are flagged where they matter.

@@ -3,9 +3,9 @@
 // t6_bubble in tnb-moves.js, and a few more) while everything around it is painted. This sheet is the painted replacement, in the same
 // hand-painted look as the NPC and character art (warm golden light from the upper left, soft shading, no thick outlines).
 // The game draws the words itself (pixel font), so every bubble must be BLANK inside. The body, the loose tail and the dots are separate
-// pieces so the game can stretch a body to any size and point a tail at any target. Only the style key is attached.
+// pieces so the game can stretch a body to any size and point a tail at any target. Only the house painting (art/grands.webp) is attached, for style.
 const { sheet } = require('./dungeonfind-prompts');
-const REF_KEY = 'docs/reference/style_key_v1.png';
+const REF_KEY = 'art/grands.webp';
 const T = (name, d) => [name, d];
 const PAPER = 'Painted in warm cream paper white, a little brighter at the upper left and a touch warmer and darker at the lower right, with a soft thin darker warm tan edge about two pixels wide (never black, never thick)';
 const BLANK = 'The inside is completely blank: one smooth even pale cream, no text, no letters, no marks, no pattern, no shine spots, so dark words can be drawn over it later.';

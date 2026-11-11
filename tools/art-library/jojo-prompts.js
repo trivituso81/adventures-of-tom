@@ -1,3 +1,4 @@
+// oldart1 (Tom 2026-11-11): the live entries in data/art-prompts.json reference only art the game uses now (newest heroes and walks, Tom's stance sheets, installed enemy sheets and plates, the house painting art/grands.webp for style). This builder may still name retired files (style key, underpaintings, hero-ref-v1, walk-sheet-v1, tom-battle-sheet); node tools/art-library/validate.js rejects them, so swap them per docs/CHANGES.md (oldart1) before splicing a new entry.
 // Jojo (TNB's sister, 5'6", adult). Tom 2026-11-06 11:19, 12:36: her own Characters entries. Tom supplied her hero painting himself
 // (art/raw/characters/jojo-hero-ref-v1.png, made in another generator, the reference for everything), so no hero entry exists.
 const R = 'art/raw/characters/';

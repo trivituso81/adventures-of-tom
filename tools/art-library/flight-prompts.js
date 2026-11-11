@@ -1,7 +1,7 @@
 // Flight tab: the 12 painted flight scene files (art/flight/*.webp, see data/flight-art.js). Strips are tiled mirrored, so left and right ends must match.
-const ST = 'Hand-painted storybook style grown up into rich painted detail: dense jewel-toned painted texture, fine brushwork, deep saturated colors, warm golden light from the upper left, soft warm rim light, no thick outlines. NOT pixel art, NOT retro game art.';
+const ST = 'Hand-painted, hand-brushed: visible brushwork, matte painted surfaces, rich warm color, warm golden light from the upper left, soft warm rim light, no thick outlines. NOT pixel art, NOT retro game art.';
 const head = 'IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image, nothing else.\n\n';
-const REFS = ['docs/reference/style_key_v1.png'];
+const REFS = ['art/raw/flight/flight-ground-le-v4.png']   // oldart1: installed LE ground for style (flight-ground-le itself attaches the LA ground in the json);
 const tail = '\n\nSTYLE\n' + ST + ' No people, no text, no letters, no logo, no watermark, no border.';
 const STRIP = 'It is a horizontal strip that the game repeats side by side with every second copy mirrored, so the left edge and the right edge must show the same content at the same height. ';
 
@@ -67,6 +67,6 @@ const F = [
 ];
 const entries = F.map(([id, file, title, ar, size, body]) => ({
   id: 'flight-' + id, tab: 'Flight', ar, title: title + ' (replaces art/flight/' + file + '.webp)', refs: CUSTOM[id] ? CUSTOM[id].refs : REFS,
-  prompt: CUSTOM[id] ? CUSTOM[id].prompt : head + 'The attached picture is the style key: paint in exactly its painting style.\n\nPaint one picture for the flight scene of the family adventure game "The Adventures of Tom". Shape: ' + size + '. Every coordinate scales with the size.\n\n' + body + tail
+  prompt: CUSTOM[id] ? CUSTOM[id].prompt : head + 'The attached picture shows only the painting style and the warm light of this game: paint in exactly that style and take nothing from its content.\n\nPaint one picture for the flight scene of the family adventure game "The Adventures of Tom". Shape: ' + size + '. Every coordinate scales with the size.\n\n' + body + tail
 }));
 module.exports = { entries };

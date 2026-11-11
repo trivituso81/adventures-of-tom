@@ -1,3 +1,4 @@
+// oldart1 (Tom 2026-11-11): the live entries in data/art-prompts.json reference only art the game uses now (newest heroes and walks, Tom's stance sheets, installed enemy sheets and plates, the house painting art/grands.webp for style). This builder may still name retired files (style key, underpaintings, hero-ref-v1, walk-sheet-v1, tom-battle-sheet); node tools/art-library/validate.js rejects them, so swap them per docs/CHANGES.md (oldart1) before splicing a new entry.
 // Amy (Tom's sister, 5'5", adult) ability and object sheets. Tom 2026-11-06 12:19: "make all of Amy's ability sheets".
 // Her hero, walk sheet and two battle sheets (Tom supplied the battle sheets 2026-11-06 12:31) are the refs of every ability sheet.
 // 14 moves = the p-key of each slot in data/abilities.js amy: block. No left/right words, no hurt wording, no weapons.

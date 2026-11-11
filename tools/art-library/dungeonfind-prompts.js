@@ -4,7 +4,7 @@
 // draws on top of the painted dungeon at the tile where the object stands, so they can appear, change state and disappear.
 // The object list comes from reading the map and scene code (docs/DUNGEON_FINDS.md has the table with flags and tiles).
 // Only the style key is attached.
-const REF_KEY = 'docs/reference/style_key_v1.png';
+const REF_KEY = 'art/grands.webp'   // oldart1 (11-11): the installed painting of Deedee and Boppy's house replaced the old style key;
 
 const SHEETS = [
   { id: 'ch03', label: 'Chapter 3, Sundial Hollow', title: 'Chapter 3 Sundial Hollow', items: [
@@ -128,7 +128,7 @@ const SHEETS = [
 ];
 
 const ART = `ART STYLE
-- Every object is painted by hand in the style of the attached style key: dense painted texture, fine visible brushwork, deep saturated jewel colors, crisp clean edges, clear readable shapes. Gently simplified, storybook-like shapes.
+- Every object is painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, clear readable shapes. Gently simplified, storybook-like shapes.
 - Warm golden key light from the upper left. Shadow on the lower right of each form, and at most a tiny soft contact shadow under each object, no cast shadow on a floor, no ground plane.
 - No thick or black outlines.
 - NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette, no glossy plastic look.`;
@@ -146,7 +146,7 @@ WHAT THIS IS
 A sheet of find-it objects for "The Adventures of Tom", a family role-playing game. This is the sheet for ${label}: it holds ${n} standalone objects that the player has to find, touch or collect inside a dungeon. They will be cut out and drawn on top of a painted dungeon map, so each one must stand out clearly from a painted background.
 
 ATTACHED IMAGES (in this order)
-1. The STYLE KEY, a finished painting of the family in a school yard. Match how it paints: dense painted texture, fine visible brushwork, deep saturated colors, warm light. Do not copy any person, building or scene from it. Paint only the objects listed below.
+1. The finished painting of Deedee and Boppy's house, the grandparents' home in this game. Match how it paints: hand-brushed, visible brush strokes, matte painted surfaces, rich warm color, warm golden light. Take only how it is painted. Paint only the objects listed below.
 
 ${ART}
 - Make each object read at a glance: slightly more saturated and a little higher contrast than a normal background object, and give the part the player touches (a switch, a lock, a slot, a handle) the brightest accent color on the object.

@@ -1,3 +1,4 @@
+// oldart1 (Tom 2026-11-11): the live entries in data/art-prompts.json reference only art the game uses now (newest heroes and walks, Tom's stance sheets, installed enemy sheets and plates, the house painting art/grands.webp for style). This builder may still name retired files (style key, underpaintings, hero-ref-v1, walk-sheet-v1, tom-battle-sheet); node tools/art-library/validate.js rejects them, so swap them per docs/CHANGES.md (oldart1) before splicing a new entry.
 // Young Boppy (Tom 2026-11-06 11:51): the Van Cortlandt Park '70 flashback needs its own character, not old Boppy.
 // Canon: October 1970, about 20, college freshman, clean-shaven, full dark black hair, Italian American looking, skimpy vintage track
 // uniform (tank top, short running shorts, socks, shoes), no cap, 5'7". No photo exists: aged down from the adult Boppy hero.

@@ -1,3 +1,4 @@
+// oldart1 (Tom 2026-11-11): the live entries in data/art-prompts.json reference only art the game uses now (newest heroes and walks, Tom's stance sheets, installed enemy sheets and plates, the house painting art/grands.webp for style). This builder may still name retired files (style key, underpaintings, hero-ref-v1, walk-sheet-v1, tom-battle-sheet); node tools/art-library/validate.js rejects them, so swap them per docs/CHANGES.md (oldart1) before splicing a new entry.
 // Enemies tab: one sheet per enemy (86), painted look. Data: prompts/enemy-table.txt (id|area|height in inches|look) and prompts/enemy-moves.json (from the live game).
 // Regular enemy = 4 frames (stance, flinch, attack A, attack B), boss = 6 frames. One row, facing RIGHT, flat magenta background.
 // Likeness ref = the old drawing tools/sprite-bake/src/foe-<id>-v1.png when it exists (shape, colors and face only, never its rendering).

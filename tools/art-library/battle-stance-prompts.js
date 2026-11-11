@@ -1,3 +1,4 @@
+// oldart1 (Tom 2026-11-11): the live entries in data/art-prompts.json reference only art the game uses now (newest heroes and walks, Tom's stance sheets, installed enemy sheets and plates, the house painting art/grands.webp for style). This builder may still name retired files (style key, underpaintings, hero-ref-v1, walk-sheet-v1, tom-battle-sheet); node tools/art-library/validate.js rejects them, so swap them per docs/CHANGES.md (oldart1) before splicing a new entry.
 // Battle stance sheets for every playable character (Tom 2026-11-06 15:47): two Library entries each, so any current sheet can be replaced by pressing Generate.
 // Sheet 1 = 8 frames, 4 x 2 (ready stances, gestures, wind-up, lunge, announce, brace). Sheet 2 = 6 frames, 3 x 2 (flinch, tired, nap, two cheers, signature pose).
 // These are the same two sheets the game bakes from (art/raw/characters/<id>-battle-sheet-1-v1.png and -2-v1.png) and the same method that made the Young Boppy sheets.
