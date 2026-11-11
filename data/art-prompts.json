@@ -20550,8 +20550,16 @@
    "prompt": "Paint a new sheet of Warden Boppy, the man in attachment 2, as a handbrushed painting. Attachment 2 is the current painting of him in the game: paint the same man, with the same shape, colors, materials and details, at the same size in each cell, in the same view, facing right. Do not repeat the poses of attachment 2. Paint 6 NEW poses in a 3 by 2 layout, one pose alone in each cell with clear magenta all around it and nothing crossing into another cell. These poses show the moment after the fight, when the anger has gone out: the mood is gentle, warm and a little funny, never fierce. He is Boppy, a grandfather: paint his real face exactly as in attachment 3, a close-up of his face, and his everyday clothes, where they show, exactly as in attachment 4, his full figure. The helmet is open faced, so his whole face shows clearly in every pose that has him in it. Top row: 1 the same upright pose as the first pose of attachment 2, at exactly the same size, but calm: standing in the full gold armor with the halberd lowered at his side, blinking, a puzzled gentle face. 2 the gold starts to run: the crest of the helmet and the shoulder plates softening and dripping like warm candle wax, while he stares at his own dripping glove. 3 half melted: the armor sagging and running down in long gold drips, the chest plate sliding low, his everyday clothes showing at the shoulders and arms, the halberd drooping like a soft candle. Bottom row: 4 only the helmet left: his everyday clothes from the neck down, a shining pool of gold around his shoes, the gold helmet still on his head, one hand pressed to the small of his back with a wince. 5 the pool of melted gold alone on the ground, round and shining, with nobody in the cell. 6 the gold helmet alone, lying on its side, with nobody in the cell. Paint only what each pose names: no glows, speed lines, sparkles or splashes unless a pose asks for them, and no letters, numbers or words anywhere. Paint and finish it like attachment 1: matte, thick visible brush strokes on the figure, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/ending-hush9final-v1.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794437080419
+    }
+   ],
    "rejects": [],
    "id": "ending-hush9final",
    "tab": "Enemies",
