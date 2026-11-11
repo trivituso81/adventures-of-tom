@@ -3,6 +3,11 @@
 - `engine/splash.js` landscape: TNB x 803 to 778, Olivia 858 to 885, Michael 965 to 990. Portrait: new `frontGap` per pair (Tom to TNB .82, TNB to Nara 1.1); back row `backGap` [.5,.7,.5,.4,1.05] so Olivia stands behind the gap between Tom and TNB (her face sits above their heads) and Michael with the kids stays behind Nara.
 - Tom still at the exact centre. Looked at 390 x 844, 375 x 667, 844 x 390. smoke FAILS [], tag_check ok.
 
+## 2026-11-11 (tomboppy1): new heroes, walking sheets and emotion sheets installed for Tom, Boppy and Justin (tag tomboppy1)
+- Tom 09:33 and 09:50: the new approved Library items for Tom, Boppy and Justin go in. Sources (newest approved): Tom hero v2, walking v3, emotions v7; Boppy hero v1 (new Paso Robles cap), walking v3, emotions v5; Justin hero v2, walking v3, emotions v4.
+- Walks rebaked with `walk_splice.py tom boppy justin` (painted as supplied; Justin's chin share .24 re-measured on v3, unchanged). Mood faces (`emotion_frames.py`, `bake_emotion_faces.py`), mood poses (`bake_story_poses.py`, baseline rebake reproduced the repo byte for byte first), dialogue faces (`bake_talk_faces.py`) rebaked from the new sheets.
+- Status screen and battle menu portraits (`bake_portraits.py`): FACE re-measured on Tom v2, Boppy v1 and Justin v2. Tom's and Boppy's saved hand crops in `data/portrait-crops.json` were for the old paintings, so they were removed and the measured crops apply. Boppy's menu portrait now wears the Paso Robles cap like his walk and dialogue face (the Big Fish cap is gone from the game).
+- Tags: `bump_tags.py tomboppy1`, `EMO_V` and `TALK_V` by hand. Tests: smoke FAILS [], tag_check ok, unused_voice 0; looked at the new walks, mood faces, mood poses, portraits and a chapter 1 overworld frame in portrait.
 ## 2026-11-11 (duo3): iPhone Duo sideways battle, turn order tiles doubled
 - Tom: double the size of the turn order tiles. `index.html` `html.duo` block: tiles 44 px times `--ts` (55 px at 951 x 648, was 27.5), the current one 52 (65 px), label and gaps scaled. Scene size unchanged (763 x 429). Other devices unchanged.
 - Tests: smoke FAILS [], tag_check ok; looked at 951 x 648, 867 x 669 and 951 x 589 (Chromium emulation).
