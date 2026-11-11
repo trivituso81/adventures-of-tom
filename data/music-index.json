@@ -1,5 +1,5 @@
 {
- "made": "2026-11-10",
+ "made": "2026-11-11",
  "suffix": {
   "loop": "Instrumental only, no vocals. Composed to loop: steady energy from start to finish, no fade-out and no big final ending. Rich, detailed, modern production. Family-friendly adventure game score.",
   "jingle": "Instrumental only, no vocals. A short musical sting that starts immediately and ends cleanly on its final note. Rich, detailed, modern production. Family-friendly adventure game score."
@@ -11,9 +11,9 @@
    "name": "Title Theme",
    "kind": "loop",
    "use": "Title",
-   "len": 30,
+   "len": 60,
    "where": "The title screen and every menu on it",
-   "prompt": "Warm, hopeful main title theme at 96 beats per minute. A gentle music box and acoustic guitar open it, then a bright string section and a heroic horn carry a big singable melody about a family setting out on an adventure. Playful and affectionate with a sense of wonder, a little silly, never scary.",
+   "prompt": "Warm, hopeful main title theme at 96 beats per minute in the spirit of a classic fairy tale fantasy role playing game score: medieval folk colors, a wooden flute, a fiddle, a lute, a harp, a gentle music box and a small string orchestra. The music travels between two hometowns. It opens on Long Island with a cozy seaside village melody on music box, flute and accordion and a hint of salt air. Then the strings swell and lift like a plane taking off, and the same melody lands in sunny Los Angeles with warm nylon guitar, a soft laid back groove and a mellow flugelhorn. In the last part both worlds join: full strings and a heroic horn carry the big singable melody about a family setting out on an adventure. Playful and affectionate with a sense of wonder, a little silly, never scary.",
    "auto": true,
    "sec": 30.07,
    "bytes": 361161
