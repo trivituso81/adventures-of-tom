@@ -3,7 +3,9 @@
 // While a story talk line shows, its mood (data/emotion-moods.js, from docs/emotion-index-lines.tsv by tools/emotion-apply.py) swaps the
 // dialogue portrait to that character's face in that mood (portraits/emo/<id>-<mood>.webp, tools/sprite-bake/bake_emotion_faces.py) and
 // draws the speaker on the map in the full-body mood pose (STORY_POSES frame em_<mood>, tools/sprite-bake/bake_story_poses.py).
-// Only story scenes (S.talk) and only chapters in EMO_CHAPTERS. Both clear when the line advances, on a line with no mood, and when the scene ends or is skipped.
+// Cast story scenes (S.talk) show it only in chapters in EMO_CHAPTERS. Every other dialogue box (map NPC talk, recruit and shop intro lines, cab lines, townsfolk lines in scenes)
+// looks its line up in NPC_EMOTION_MOODS (data/npc-emotion-moods.js, from docs/npc-emotion-lines.tsv by tools/npc-emotion-apply.py; npcemo7). The NPC is drawn in its pose
+// (data/npc-poses.js). Both clear when the line advances, on a line with no mood, and when the scene ends or is skipped.
 const EMO={starting:false,actor:null,id:null,mood:null};
 const EMO_PORTRAIT_DEFAULT=()=>{ const box=$('dialog-portrait'); return box&&box.querySelector('img'); };
 const emoPreloaded=new Set();
@@ -12,17 +14,21 @@ function emoMoodOf(name,text) {
   if(!emoOn()||typeof EMOTION_MOODS==='undefined') return null;
   return EMOTION_MOODS[name+'|'+text+'|'+STORY.chapter]||EMOTION_MOODS[name+'|'+text]||null;
 }
+function emoNpcMoodOf(name,text) {
+  if(typeof NPC_EMOTION_MOODS==='undefined') return null;
+  return NPC_EMOTION_MOODS[String(name||'').trim().toLowerCase()+'|'+text]||null;
+}
 function emoPreload(id) {
   if(emoPreloaded.has(id)) return; emoPreloaded.add(id);
   for(const m of EMOTIONS_LIST) new Image().src='portraits/emo/'+id+'-'+m+'.webp?v='+EMO_V;
 }
-const EMOTIONS_LIST=["happy","loving","sad","angry","scared","surprised","proud","unimpressed"],EMO_V='walkv2';
-function emoActorFor(id,name) {
+const EMOTIONS_LIST=["happy","loving","sad","angry","scared","surprised","proud","unimpressed"],EMO_V='npcemo7';
+function emoActorFor(id,name,npc) {
   const pm=typeof playerMember==='function'?playerMember():null;
   if(pm&&pm.id===id) return typeof roseRider==='function'&&roseRider()?null:player;   // Tom carrying Rose keeps the ride picture
   const f=followers.find(x=>x.member&&x.member.id===id); if(f) return f.seat||f.hidden?null:f;
   const low=String(name).toLowerCase();
-  const n=currentMap&&currentMap.npcs.find(x=>x.name&&x.name.toLowerCase()===low&&!x.monster);
+  const n=npc&&npc.name&&npc.name.toLowerCase()===low&&!npc.monster?npc:(currentMap&&currentMap.npcs.find(x=>x.name&&x.name.toLowerCase()===low&&!x.monster));
   return n&&!n.hidden?n:null;
 }
 function emoClear() {
@@ -30,16 +36,17 @@ function emoClear() {
   EMO.actor=null; EMO.mood=null; EMO.id=null;
 }
 function emoApply() {
-  if(!dialog.active||!dialog.emo) { if(EMO.mood||EMO.actor) { emoClear(); if(dialog.active) setDialogPortrait(dialog.name); } return; }
-  const mood=emoMoodOf(dialog.name,dialog.lines[dialog.index]);
-  const id=DIALOG_PORTRAIT_IDS[String(dialog.name||'').trim().toLowerCase()];
+  if(!dialog.active) { if(EMO.mood||EMO.actor) emoClear(); return; }
+  const text=dialog.lines[dialog.index];
+  const mood=(dialog.emo&&emoMoodOf(dialog.name,text))||emoNpcMoodOf(dialog.name,text);
+  const id=String(DIALOG_PORTRAIT_IDS[String(dialog.name||'').trim().toLowerCase()]||'').replace(/^npc_/,'');   // townspeople's keys are npc_<id>; their faces and poses are filed under <id>
   const had=EMO.mood; emoClear();
   if(!mood||!id||typeof EMOTION_FACES==='undefined'||!EMOTION_FACES.includes(id)) { if(had) setDialogPortrait(dialog.name); return; }
   emoPreload(id);
   const box=$('dialog-portrait'),img=box&&box.querySelector('img');
   if(img) { img.src='portraits/emo/'+id+'-'+mood+'.webp?v='+EMO_V; img.alt=''; box.hidden=false; $('dialog').classList.add('has-portrait'); fitDialogPortrait(); }
   EMO.mood=mood; EMO.id=id;
-  const a=emoActorFor(id,dialog.name);
+  const a=emoActorFor(id,dialog.name,dialog.npc);
   if(a&&!a.scenePose&&typeof STORY_POSES!=='undefined'&&STORY_POSES[id]&&STORY_POSES[id]['em_'+mood]) {
     if(typeof storyPosesLoad==='function') storyPosesLoad(id);
     a.scenePose={f:'em_'+mood,mid:id,emo:true}; EMO.actor=a;

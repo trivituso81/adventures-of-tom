@@ -4,6 +4,14 @@
 - Cost: `art/chars/*-ow.webp` townsfolk files grew from 15 MB to 27 MB in total (lossless).
 - Tests: Sal's taxi office looked at in portrait (crisp), smoke FAILS [], tag_check ok.
 
+## 2026-11-10 (npcemo7): NPC emotions installed: tagged townsfolk lines show the mood face and the full-body mood pose (tag npcemo7)
+- Every NPC line in `docs/npc-emotion-lines.tsv` (739) now plays its mood. `tools/npc-emotion-apply.py` checks the tags and writes `data/npc-emotion-moods.js` (`NPC_EMOTION_MOODS`, key = lowercased speaker|exact text). `engine/emotions.js` (`emoNpcMoodOf`, `emoActorFor` prefers `dialog.npc`) swaps the dialogue portrait to `portraits/emo/<id>-<mood>.webp` and draws the map NPC through its `<id>emo` pose set. Cast story lines keep the chapter-gated moods. Works in map talk and in story scenes with townsfolk speakers (checked in portrait and landscape, ch12 Marlowe scene).
+- Art: 40 new `portraits/npc/<id>.webp` (the 21 old ones unchanged), 480 mood faces in `portraits/emo/` and `data/emotion-faces.js` (EMOTION_FACES now covers cast + 60 NPCs), 60 `art/chars/<id>emo-story.webp` atlases with `data/npc-poses.js` (lazy: released after 20 idle seconds, so the title load does not grow). Jojo and Michael use their hero files (`CAST_HERO` in `bake_npc_portraits.py`).
+- Boomie's plain portrait moved to the NPC pipeline (`portraits/npc/boomie.webp`, speaker `boomie` -> `npc_boomie`). Old `portraits/boomie.png` kept only because the draft Art Library entry `portrait-boomie` points at it.
+- `bake_emotion_faces.py`, `bake_npc_portraits.py` (38 snapped landmarks + Boomie), `bake_story_poses.py` (NPC sets, `npc_emo_head` sizing) extended. `engine/painted.js` lazy rule for `emoStory`; `DIALOG_PORTRAIT_IDS` gained the new speaker names.
+- Tests: smoke FAILS [], tag_check ok, installed_check and validate ok, unused_voice 0.
+- Known gaps: Penny and Nickel shop UI lines (hello, bought, sold) are not tagged, only their intro lines; Boomie's walk still wears the old gown while her emotion art wears the orange outfit; Marlowe's walk is a placeholder; "Long coat" tag skipped on purpose.
+
 ## 2026-11-10 (npcemo6): emotion strips cut for the 58 townsfolk plus Jojo and Michael (no tag: art and data not loaded by the game yet)
 - `emotion_frames.py` also reads `art/raw/npcs/npc-emotions-<id>-vN.png`. 60 new strips in `art/emotions/` and `data/emotions.js` (`EMOTION_ART`), cut with the same rules as the cast (painted as is). The 11 cast strips reproduced byte for byte. Looked at all 60: 8 clean figures each.
 - Still to do: mood faces for them (`bake_emotion_faces.py` needs a hero zoom per NPC; only 21 NPC heroes have face landmarks in `bake_npc_portraits.FACE`), mood poses, and engine wiring: `engine/emotions.js` only handles story `S.talk` lines, while the NPC tags (`docs/npc-emotion-lines.tsv`, 739 lines) are map NPC talk.
