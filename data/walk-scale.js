@@ -5,16 +5,16 @@
 // next to Tom at any head size. Loads after the last *-hires-use.js file and sets OW.<id>.k for everyone listed.
 const WALK_SCALE={
   tom:{inches:71,rows:42.0,k:1},
-  tnb:{inches:70,rows:45.0,k:0.9202},
-  justin:{inches:76,rows:53.125,k:0.8463},
+  tnb:{inches:70,rows:45.222,k:0.9157},
+  justin:{inches:76,rows:53.375,k:0.8423},
   michael:{inches:76,rows:53.0,k:0.8483},
   boppy:{inches:67,rows:41.714,k:0.9501},
-  jojo:{inches:66,rows:42.167,k:0.9259},
-  amy:{inches:65,rows:41.778,k:0.9204},
-  deedee:{inches:65,rows:41.7,k:0.9221},
-  olivia:{inches:68,rows:42.111,k:0.9552},
-  ellie:{inches:62,rows:43.0,k:0.8529},
-  grace:{inches:50,rows:39.0,k:0.7584},
-  rose:{inches:40,rows:35.0,k:0.6761},
+  jojo:{inches:66,rows:42.333,k:0.9223},
+  amy:{inches:65,rows:42.0,k:0.9155},
+  deedee:{inches:65,rows:41.8,k:0.9199},
+  olivia:{inches:68,rows:42.444,k:0.9477},
+  ellie:{inches:62,rows:43.111,k:0.8507},
+  grace:{inches:50,rows:39.3,k:0.7526},
+  rose:{inches:40,rows:35.222,k:0.6718},
 };
 for(const id in WALK_SCALE) if(OW[id]) OW[id].k=WALK_SCALE[id].k;

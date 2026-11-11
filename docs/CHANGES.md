@@ -1,3 +1,7 @@
+## 2026-11-11 (heads3): head sizes from HEAD SIZES applied to all 63 saved characters (tag heads3)
+- Tom saved head factors in ADMIN > HEAD SIZES (adults 0.96 to 1.25, kids 1.3, Nara 0.97, townsfolk 0.94 to 1.36). `head_adjust.py apply-requests` rebaked the family walks, Jojo and all townsfolk; heights.py write refreshed the draw scales; every talk face rebaked. Heights are unchanged (heights_test passes).
+- Olivia at 120 percent reads 1.05 percent over her nominal rows (hair volume), so the "walk art is baked at its rows" guard in tools/heights_test.py is 1.5 percent; her drawn height (the real check) holds at 1 percent.
+- Tom's phone checks: welcome screen and a walk through town, dialogue faces. Not done: Jojo's apply path was untested before; mood poses and battle art are not touched by head factors.
 ## 2026-11-11 (duoedge1): Duo full bleed and top-left buttons moved left (index.html only, no tag)
 - Tom 15:15 (Duo unfolded, landscape, home-screen app): a dark bar down the right edge, and the top-left buttons sit where the iOS swipe-down starts.
 - Cause (fact): `apple-mobile-web-app-status-bar-style` was `black`, so iOS keeps the status bar strip (on the Duo, the right edge in landscape) out of the page. Now `black-translucent`: the game paints under it, and the existing safe-area padding keeps the D-pad and HUD clear of the clock. iOS reads this only when the app is added to the Home Screen: Tom must remove and re-add the icon.
