@@ -20336,8 +20336,16 @@
    "prompt": "Paint a new sheet of The Big Shake, the creature in attachment 2, as a handbrushed painting. Attachment 2 is the current painting of it in the game: paint the same creature, with the same shape, colors, materials and details, at the same size in each cell, in the same view, facing right. Do not repeat the poses of attachment 2. Paint 6 NEW poses in a 3 by 2 layout, one pose alone in each cell with clear magenta all around it and nothing crossing into another cell. These poses show the moment after the fight, when the anger has gone out: the mood is gentle, warm and a little funny, never fierce. In every pose the cracks in the rock are dark and cool, with no orange glow and no flying sparks. Top row: 1 the same upright pose as the first pose of attachment 2, at exactly the same size, but calm: the heavy brow relaxed, the eyes soft, the mouth a flat gentle line, the loose rocks resting on its shoulders instead of flying. 2 touched: the eyes wide and round, the mouth a small surprised o, two or three pebbles hovering still beside its head. 3 an enormous yawn: eyes shut tight, mouth open as wide as a cave, the loose rocks drooping. Bottom row: 4 half sunk: the lower half of the body sunk into a low mound of loose dirt, the eyes sleepy and half shut, a small smile. 5 nearly under: only the top of the head and the brow above the dirt, one eye closed and one eye peeking. 6 a low rounded heap of the same rocks lying flush with the ground, no face at all, with one small white wildflower growing on top. Paint only what each pose names: no glows, speed lines, sparkles or splashes unless a pose asks for them, and no letters, numbers or words anywhere. Paint and finish it like attachment 1: matte, thick visible brush strokes on the figure, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/ending-irongill-v1.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794438123852
+    }
+   ],
    "rejects": [],
    "id": "ending-irongill",
    "tab": "Enemies",
