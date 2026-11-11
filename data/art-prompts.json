@@ -20525,8 +20525,16 @@
    "prompt": "Paint a new sheet of the Dual-Coast Drill Worm, the creature in attachment 2, as a handbrushed painting. Attachment 2 is the current painting of it in the game: paint the same creature, with the same shape, colors, materials and details, at the same size in each cell, in the same view, facing right. Do not repeat the poses of attachment 2. Paint 6 NEW poses in a 3 by 2 layout, one pose alone in each cell with clear magenta all around it and nothing crossing into another cell. These poses show the moment after the fight, when the anger has gone out: the mood is gentle, warm and a little funny, never fierce. The drill nose is still in every pose, with no spin lines and no flying dirt. Top row: 1 the same upright pose as the first pose of attachment 2, at exactly the same size, but calm: upright in its mound of dirt, the eyes soft, a small smile, the hard hat straight. 2 relief: the eyes closed in a long breath out, the whole body sagging, the hard hat tipped back. 3 winding down: drooping forward with heavy eyelids, the tip of the drill resting on the dirt. Bottom row: 4 looking up, sorry: the eyes turned up toward the ceiling, a sheepish wince. 5 curling up: the long body bending round on the mound like a cat settling down, the eyes nearly shut. 6 asleep: fully coiled in a ring, the hard hat pulled down over its eyes, the head lamp off, the drill tucked under its own tail. Paint only what each pose names: no glows, speed lines, sparkles or splashes unless a pose asks for them, and no letters, numbers or words anywhere. Paint and finish it like attachment 1: matte, thick visible brush strokes on the figure, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/ending-warden-v1.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794437074758
+    }
+   ],
    "rejects": [],
    "id": "ending-warden",
    "tab": "Enemies",
