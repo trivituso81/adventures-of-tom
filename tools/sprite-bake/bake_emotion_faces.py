@@ -2,13 +2,13 @@
 """Emotion faces: one dialogue portrait per character per mood (emo7, Tom 2026-11-06).
 
 Each emotion frame (art/emotions/<id>.webp, full body) is cropped to the head at the SAME zoom as the hero portrait (bake_portraits.py), so
-a character's face looks the same size in every mood and matches the plain portrait. How: from the hero painting, measure
+a character's face looks the same size in every mood. How: from the hero painting, measure
   q  = portrait square side / figure height,  dy = (square top - figure top) / figure height,  dx = (square centre x - head-top centre x) / figure height.
 For each emotion frame, figure height H is the median over that character's 8 frames, top is the frame's own top row, the head-top centre x is the
 centre of its top rows; the crop is then q*H square at (top + dy*H, centre + dx*H). Nothing is flipped or resized apart from the crop to 256.
 
 Output: portraits/emo/<id>-<mood>.webp (256 x 256, transparent kept behind: filled with the hero paper colour), and data/emotion-faces.js (id list).
-    python3 tools/sprite-bake/bake_emotion_faces.py [ids]     CHECK=/tmp/faces.png  also writes a contact sheet (hero next to the 8 moods, per character)
+    python3 tools/sprite-bake/bake_emotion_faces.py [ids]     CHECK=/tmp/faces.png  also writes a contact sheet (talk face next to the 8 moods, per character)
 """
 import os, sys, json
 import numpy as np
@@ -97,7 +97,8 @@ def main():
     rows = []
     for pid in ids:
         outs = bake(pid)
-        hero = Image.open(os.path.join(NP.OUT, pid + '.webp') if pid in NP.FACE else os.path.join(BP.OUT, pid + '.png')).convert('RGB')
+        tf = os.path.join(ROOT, 'portraits', 'talk', pid + '.webp')     # the plain dialogue face (bake_talk_faces.py), for comparison
+        hero = Image.open(tf if os.path.exists(tf) else os.path.join(BP.OUT, pid + '.png')).convert('RGB')
         rows.append([hero] + outs)
         print('baked', pid)
     chk = os.environ.get('CHECK')

@@ -1000,7 +1000,7 @@ html.landscape .msave-box .save-row{padding:5px 9px}
 html.landscape .msave-box .mquit-title{font-size:15px}
 html.landscape .msave-box .mquit-btns .save-btn{padding:8px}
 html.landscape .mcmds{gap:0}html.landscape #menu .mcmd{padding-top:4px;padding-bottom:4px}
-/* Dialogue portraits: party members show their face beside the text (engine/overworld.js setDialogPortrait).
+/* Dialogue portraits: speakers show a face from their walk or emotion sheet beside the text (engine/overworld.js setDialogPortrait).
    64px art drawn at 4/3 so each art pixel is exactly 4 screen pixels on a 3x iPhone (3 in landscape). */
 #dialog-portrait{position:absolute;left:22px;top:26px;width:calc(64px * 4 / 3 + 4px);height:calc(64px * 4 / 3 + 4px);border:2px solid var(--edge);border-radius:4px;background:var(--w-deep);box-shadow:0 0 0 2px var(--edge-ink);overflow:hidden;pointer-events:none}
 #dialog-portrait img{display:block;width:100%;height:100%}
@@ -1324,7 +1324,8 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/maps-la.js?v=blvdwalk1"></script>
 <script src="data/maps-ch12.js"></script>
 <script src="engine/la.js"></script>
-<script src="engine/menu.js?v=npcemo7"></script>
+<script src="data/talk-faces.js?v=talk1"></script>
+<script src="engine/menu.js?v=talk1"></script>
 <script src="engine/followers.js?v=slots10"></script>
 <script src="engine/shop.js?v=justin2"></script>
 <script src="engine/audio.js?v=tab1"></script>
@@ -1379,7 +1380,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/battle-icons.js?v=warmth1"></script>
 <script src="data/battle-emoji.js?v=warmth1"></script>
 <script src="engine/battle-pictures.js?v=tombopair2"></script>
-<script src="engine/overworld.js?v=npcemo7"></script>
+<script src="engine/overworld.js?v=talk1"></script>
 <script src="data/font.js"></script>
 <script src="data/overworld-sprites.js"></script>
 <script src="engine/tiles.js?v=tom4"></script>
@@ -1608,7 +1609,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/npc-emotion-moods.js?v=npcemo7"></script>
 <script src="engine/emotions.js?v=npcemo7"></script><!-- mood faces and poses in story dialogue (batch 0: chapter 1) -->
 <script src="engine/tapwalk.js?v=space1"></script><!-- tap to walk -->
-<script src="engine/main.js?v=npcemo7"></script>
+<script src="engine/main.js?v=talk1"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js?v=music2"></script>
