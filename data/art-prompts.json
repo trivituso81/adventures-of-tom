@@ -9575,7 +9575,7 @@
    "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Bev, 66, woman, 5'3\" tall, very fair skin, silver grey hair, hair style short and curly, clothing orange top, steel grey-blue trousers, personality excited and curious, a tourist visiting from Ohio."
   },
   {
-   "status": "draft",
+   "status": "approved",
    "versions": [
     {
      "n": 0,
@@ -9583,6 +9583,13 @@
      "date": "2026-11-09",
      "from": "v1",
      "at": 1794236260588
+    },
+    {
+     "n": 1,
+     "file": "art/raw/npcs/npc-photo-priya-v2.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794358911487
     }
    ],
    "rejects": [],
