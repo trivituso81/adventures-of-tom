@@ -1,3 +1,9 @@
+## 2026-11-10 (npcsharp1): townsfolk drawn sharp (tag npcsharp1)
+- Cause (fact): painted townsfolk atlases were stored at 3 px per grid pixel (Sal 126 px tall), then enlarged about 1.6x in rooms plus the screen zoom, so they went soft next to the cast, whose atlases are much larger.
+- Fix: `bake_townsfolk.py` `HI = 2` bakes every atlas frame at 6 px per grid pixel (Sal 252 px tall); `k` in `data/townsfolk-hires.js` is now 6. Figure height and on-screen size are unchanged (grid height identical, a few rows are 1 to 2 columns narrower from canvas rounding). Baseline rebake before the change reproduced the repo byte for byte.
+- Cost: `art/chars/*-ow.webp` townsfolk files grew from 15 MB to 27 MB in total (lossless).
+- Tests: Sal's taxi office looked at in portrait (crisp), smoke FAILS [], tag_check ok.
+
 ## 2026-11-10 (npcemo6): emotion strips cut for the 58 townsfolk plus Jojo and Michael (no tag: art and data not loaded by the game yet)
 - `emotion_frames.py` also reads `art/raw/npcs/npc-emotions-<id>-vN.png`. 60 new strips in `art/emotions/` and `data/emotions.js` (`EMOTION_ART`), cut with the same rules as the cast (painted as is). The 11 cast strips reproduced byte for byte. Looked at all 60: 8 clean figures each.
 - Still to do: mood faces for them (`bake_emotion_faces.py` needs a hero zoom per NPC; only 21 NPC heroes have face landmarks in `bake_npc_portraits.FACE`), mood poses, and engine wiring: `engine/emotions.js` only handles story `S.talk` lines, while the NPC tags (`docs/npc-emotion-lines.tsv`, 739 lines) are map NPC talk.
