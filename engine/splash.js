@@ -571,9 +571,9 @@ const SPLASH_LAND={feet0:1222,sx:1,sy:.7,span:890,tall:331,fracW:.74,fracH:.42,f
 // family on the LA side (right). x' = 1208 - x, the group's own middle, so the group stays where it was.
 // Olivia and Michael (with Lachlan and Isla) join the LA side behind TNB and Nara to balance the picture (Tom 2026-11-11 09:35).
 const SPLASH_SPOTS=[
-  {id:'justin',x:503,feet:1150},{id:'amy',x:603,feet:1150},{id:'olivia',x:858,feet:1150},{id:'michael',x:965,feet:1150},
+  {id:'justin',x:503,feet:1150},{id:'amy',x:603,feet:1150},{id:'olivia',x:885,feet:1150},{id:'michael',x:990,feet:1150},
   {id:'boppy',x:304,feet:1222},{id:'deedee',x:417,feet:1222},{id:'grace',x:513,feet:1222},{id:'rose',x:596,feet:1222},
-  {id:'tom',x:688,feet:1222},{id:'tnb',x:803,feet:1222},{id:'nara',x:904,feet:1250}
+  {id:'tom',x:688,feet:1222},{id:'tnb',x:778,feet:1222},{id:'nara',x:904,feet:1250}
 ];
 // Portrait (iPhone tuning, Tom 2026-11-06; order mirrored 2026-11-11 so Long Island people stand on the Long Island side): two rows. Front, left to right: Grace, Rose, Tom, TNB, Nara.
 // SPLASH_W = painted figure width over height (arms included). Front figures are spaced at `gap` of their widths, the back row is `depth` design units further
@@ -581,12 +581,12 @@ const SPLASH_SPOTS=[
 const SPLASH_W={tom:.334,tnb:.381,justin:.426,boppy:.410,amy:.333,deedee:.349,grace:.375,rose:.388,nara:.599,olivia:.357,michael:.566};
 // Back row (Tom 2026-11-11 09:35): the Long Island grown-ups (Boppy, Deedee, Justin, Amy) behind the Long Island side, Olivia and Michael (with the kids)
 // behind the LA side. backPivot: the gap between those two groups sits right behind Tom.
-const SPLASH_PORT={front:['grace','rose','tom','tnb','nara'],back:['boppy','deedee','justin','amy','olivia','michael'],gap:1.0,backGap:[.5,.7,.5,.8,.55],backPivot:['amy','olivia'],
+const SPLASH_PORT={front:['grace','rose','tom','tnb','nara'],back:['boppy','deedee','justin','amy','olivia','michael'],gap:1.0,frontGap:[1,1,.82,1.1],backGap:[.5,.7,.5,.4,1.05],backPivot:['amy','olivia'],
   depth:125,fracW:.98,fracH:.43,feetY:.74};
 function splashPortLayout(w,h) {
   const P=SPLASH_PORT,wid=id=>SPLASH_H[id]*SPLASH_W[id];
   let x=0,pw=0;
-  const front=P.front.map((id,i)=>{ const ww=wid(id); if(i) x+=(pw/2+ww/2)*P.gap; pw=ww; return {id,x,ww}; });
+  const front=P.front.map((id,i)=>{ const ww=wid(id); if(i) x+=(pw/2+ww/2)*(P.frontGap?P.frontGap[i-1]:P.gap); pw=ww; return {id,x,ww}; });   // frontGap: TNB stands a little closer to Tom (Tom 2026-11-11 09:51)
   let bx=0,bw=0;   // back row: side by side with a slight overlap, centred on the front row (Tom 2026-11-06 07:13: it sat too far right)
   const back=P.back.map((id,i)=>{ const ww=wid(id); if(i) bx+=(bw/2+ww/2)*P.backGap[i-1]; bw=ww; return {id,x:bx,ww}; });
   const blo=Math.min(...back.map(f=>f.x-f.ww/2)),bhi=Math.max(...back.map(f=>f.x+f.ww/2));

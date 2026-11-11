@@ -1,3 +1,8 @@
+## 2026-11-11 (cast3): Welcome screen: TNB closer to Tom, Olivia no longer hidden behind TNB (tag cast3)
+- Tom 09:51: make TNB a little closer to Tom and not overlapping Olivia as much.
+- `engine/splash.js` landscape: TNB x 803 to 778, Olivia 858 to 885, Michael 965 to 990. Portrait: new `frontGap` per pair (Tom to TNB .82, TNB to Nara 1.1); back row `backGap` [.5,.7,.5,.4,1.05] so Olivia stands behind the gap between Tom and TNB (her face sits above their heads) and Michael with the kids stays behind Nara.
+- Tom still at the exact centre. Looked at 390 x 844, 375 x 667, 844 x 390. smoke FAILS [], tag_check ok.
+
 ## 2026-11-11 (duo3): iPhone Duo sideways battle, turn order tiles doubled
 - Tom: double the size of the turn order tiles. `index.html` `html.duo` block: tiles 44 px times `--ts` (55 px at 951 x 648, was 27.5), the current one 52 (65 px), label and gaps scaled. Scene size unchanged (763 x 429). Other devices unchanged.
 - Tests: smoke FAILS [], tag_check ok; looked at 951 x 648, 867 x 669 and 951 x 589 (Chromium emulation).
