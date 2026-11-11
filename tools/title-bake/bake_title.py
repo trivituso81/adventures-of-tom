@@ -5,7 +5,7 @@ Reads the approved files listed in data/art-prompts.json and writes:
   art/welcome.webp       portrait welcome painting (background only; the game draws the family)
   art/welcome-land.webp  landscape welcome painting (cut to the painted band: the approved picture has flat cream bars above and below it)
   art/title-logo.webp    title logo with the flat background keyed out (transparent)
-  icon-v9.png            180 x 180 app icon (the white corners outside the painted rounded square are filled from the paint)
+  icon-v10.png            180 x 180 app icon (the white corners outside the painted rounded square are filled from the paint)
 Run from the repo root: python3 tools/title-bake/bake_title.py
 """
 import json
@@ -54,7 +54,9 @@ def logo():
     n, lab = cv2.connectedComponents(hard, connectivity=4)
     border = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))) - {0}
     outside = np.isin(lab, list(border))
-    al = np.where(outside, al, 1.0)
+    # title6: the A and O counters (holes) are enclosed background-coloured pixels. Clear enclosed pixels that are very close to the key colour; the red heart is farther away and stays.
+    near = dist < 48
+    al = np.where(outside, al, np.where(near, np.clip((dist - 22) / 26, 0, 1), 1.0))
     # Pull the background tint out of soft edges.
     rgb = a.copy()
     soft = (al > 0) & (al < 1)
@@ -79,9 +81,9 @@ def icon():
             mask[lab == lab[cy, cx]] = 255
     mask = cv2.dilate(mask, np.ones((7, 7), np.uint8))
     filled = cv2.inpaint(a[..., ::-1].copy(), mask, 12, cv2.INPAINT_TELEA)[..., ::-1]
-    Image.fromarray(filled).resize((180, 180), Image.LANCZOS).save('icon-v9.png', optimize=True)
+    Image.fromarray(filled).resize((180, 180), Image.LANCZOS).save('icon-v10.png', optimize=True)
     print('icon corners filled', int((mask > 0).sum()), 'px')
 
 if __name__ == '__main__':
     welcome(); logo(); icon()
-    import shutil; shutil.copy('icon-v9.png', 'launch/apple-touch-icon.png')  # the launch page carries the same icon
+    import shutil; shutil.copy('icon-v10.png', 'launch/apple-touch-icon.png')  # the launch page carries the same icon

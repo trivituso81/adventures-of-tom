@@ -1,3 +1,10 @@
+## 2026-11-11 (title6): Approved Title art installed: welcome paintings, logo, app icon
+- Tom approved the four Title entries (v4 of each). `python3 tools/title-bake/bake_title.py` installed them: `art/welcome.webp` (portrait), `art/welcome-land.webp` (landscape, full bleed so no crop), `art/title-logo.webp`, app icon now `icon-v10.png` (and `launch/apple-touch-icon.png`).
+- Purged `icon-v9.png`; `index.html` icon links, the baker and the Title entry text point at `icon-v10.png` (grep 0).
+- Logo fix in the baker: the counters (holes) of the A and O were enclosed background-coloured pixels and showed magenta; enclosed pixels close to the key colour are now cleared. The red heart stays.
+- Tags: logo and landscape welcome `?v=title6`, stamp `build title6`. Portrait welcome has no tag (server 304 path).
+- Tests: smoke FAILS [], tag_check ok, validate OK. Looked at the title screen in portrait and landscape.
+
 ## 2026-11-11 (title3b): Title logo prompt: TOM's O is a plain round O, a modern controller sits beside the word (admin data only, no tag)
 - Tom: the controller as the O made TOM hard to read; keep a controller in the logo, any controller, not the NES one.
 - `title-logo` prompt: every letter a clean readable shape, the O of TOM a simple round O; a painted modern controller (rounded grips, two thumbsticks, cross pad, four round buttons) sits tilted just after TOM. The Tom hero stays attached for drawing style only (the shirt controller is no longer mentioned).
