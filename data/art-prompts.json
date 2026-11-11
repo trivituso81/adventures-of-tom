@@ -18099,9 +18099,16 @@
    "group": "Los Angeles people"
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-11",
+     "note": "wrong",
+     "from": "v2",
+     "at": 1794359707958
+    }
+   ],
    "id": "npc-walk-marisol",
    "tab": "NPCs",
    "title": "Marisol: walk sheet (hero attached)",
