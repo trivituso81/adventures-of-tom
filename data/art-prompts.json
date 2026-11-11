@@ -20464,8 +20464,16 @@
    "prompt": "Paint a new sheet of The Last Call, the creature in attachment 2, as a handbrushed painting. Attachment 2 is the current painting of it in the game: paint the same creature, with the same shape, colors, materials and details, at the same size in each cell, in the same view, facing right. Do not repeat the poses of attachment 2. Paint 6 NEW poses in a 3 by 2 layout, one pose alone in each cell with clear magenta all around it and nothing crossing into another cell. These poses show the moment after the fight, when the anger has gone out: the mood is gentle, warm and a little funny, never fierce. The dark face panel never shows teeth in these poses. Top row: 1 the same upright pose as the first pose of attachment 2, at exactly the same size, but calm: standing level on its jointed legs, the two glowing eyes soft and rounded, the mouth a small flat gentle line, every flap still. 2 answered: the eyes wide and round, the mouth a small open o, the two horns on top perked up. 3 the ripple: the square flaps of the face caught in the middle of flipping over in a wave from top to bottom, the eyes half hidden by turning flaps, the body braced. Bottom row: 4 the blank board: the face panel completely dark, flat and empty except for two small soft eyes near its top edge, the body standing proud. 5 giving: one front arm stretched forward with the claw open and empty, palm up, the eyes kind. 6 settled: the legs folded underneath so it sits low on the ground, the eyes closed in two happy arcs, the panel glowing warm. Paint only what each pose names: no glows, speed lines, sparkles or splashes unless a pose asks for them, and no letters, numbers or words anywhere. Paint and finish it like attachment 1: matte, thick visible brush strokes on the figure, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/ending-finalcall-v1.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794437191499
+    }
+   ],
    "rejects": [],
    "id": "ending-finalcall",
    "tab": "Enemies",
