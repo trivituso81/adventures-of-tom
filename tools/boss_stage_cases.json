@@ -19,5 +19,9 @@
 {"name":"ch18","ch":18,"map":"towerpinnacle","scenes":["ch18Pinnacle","ch18Fight","ch18After"],"party":["tom","grace","rose","amy"],"boss":"vance"},
 {"name":"ch19","ch":19,"map":"deadletter","scenes":["ch19Claim","ch19Fight","ch19After"],"party":["tom","grace","rose","amy"],"boss":"censor"},
 {"name":"ch20","ch":20,"map":"foreverheart","scenes":["ch20Heart","ch20Fight1","ch20Shatter","ch20Fight2","ch20Calm"],"party":["tom","grace","rose","amy"],"boss":"leviathan"},
-{"name":"ns","ch":21,"prefix":"ns","map":"hollow","scenes":["nsPond","nsPond2","nsAfterBoss"],"party":["tom","grace","rose"],"boss":"Brain Freeze","start":[9,11,"right"],"walk":["right","right"]}
+{"name":"ns","ch":21,"prefix":"ns","map":"hollow","scenes":["nsPond","nsPond2","nsAfterBoss"],"party":["tom","grace","rose"],"boss":"Brain Freeze","start":[9,11,"right"],"walk":["right","right"]},
+{"name":"ch17","ch":17,"map":"towervault","scenes":["ch17Fight","ch17After"],"party":["tom","grace","rose","amy"],"boss":"twinlens"},
+{"name":"ch19","ch":19,"map":"deadletter","scenes":["ch19Fight","ch19After"],"party":["tom","grace","rose","amy","tnb"],"boss":"censor"},
+{"name":"ch20","ch":20,"map":"foreverheart","scenes":["ch20Fight1","ch20Shatter"],"party":["tom","grace","rose","amy"],"boss":"leviathan"},
+{"name":"ch20j","ch":20,"map":"foreverheart","scenes":["ch20Fight2","ch20Calm"],"party":["tom","grace","rose","amy"],"boss":"julian"}
 ]

@@ -265,6 +265,7 @@ SCENES.ch17After=()=>[
   {talk:'Archivist',lines:['What does one do... with a day that is allowed to end?']},
   {talk:'Rose',lines:['You eat dinner. Then you go to sleep. Then it’s morning.']},
   {talk:'Archivist',lines:['That sounds... sufficient.']},
+  {finale:'twinlens'},
   {call:()=>{ const m=ch17Lens(); if(m) { m.hidden=true; m.sunk={x:m.x,y:m.y}; } sfx.chime&&sfx.chime(); }},
   {wait:.8},
   {talk:'Grace',lines:['Tata. The globe.']},
@@ -302,7 +303,7 @@ STORY_WORLD.push(()=>{
   const m=ch17Lens();
   if(m) {
     const show=STORY.chapter===17&&flag('ch17-vault')&&flag('battle:twinlens')!=='win';
-    if(!show&&!m.hidden) { m.hidden=true; }
+    if(!show&&!m.hidden&&!m.fin&&!m.bossAwait) { m.hidden=true; }
     else if(show&&m.hidden&&!m.sunk) { m.hidden=false; }
     m.mscale=1.5;
   }

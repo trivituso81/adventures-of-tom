@@ -177,6 +177,7 @@ SCENES.ch19After=()=>[
   {call:()=>{ sfx.levelChime&&sfx.levelChime(); }},
   {talk:'Oblivion Censor',lines:['The Censor takes the pretzel in both hands, carefully, as if it were made of glass. Then he lifts his stamp, looks at it, and brings it down on the napkin. It does not say RETURN TO SENDER. It says DELIVERED.']},
   {talk:'Oblivion Censor',lines:['It is a nicer word to hold than I expected.']},
+  {finale:'censor'},
   {call:()=>{ const m=ch19Censor(); if(m) m.hidden=true; sfx.chime&&sfx.chime(); }},
   {talk:'Dead-Letter Office',lines:['In the big ledger, the clean white rectangle fills itself in, one slow letter at a time. T. O. M. The ink is the exact blue of a thermos cap.']},
   {talk:'Amy',lines:['Okay. Home. Food. Then Mom and Dad. In that order.']},
@@ -278,7 +279,7 @@ STORY_WORLD.push(()=>{
   const m=ch19Censor();
   if(m) {
     const show=STORY.chapter===19&&!!flag('ch19-claim')&&flag('battle:censor')!=='win';
-    if(!show&&!m.hidden) m.hidden=true; else if(show&&m.hidden) m.hidden=false;
+    if(!show&&!m.hidden&&!m.fin&&!m.bossAwait) m.hidden=true; else if(show&&m.hidden) m.hidden=false;
     m.mscale=1.3;
   }
 });

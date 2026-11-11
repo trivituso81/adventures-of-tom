@@ -17,7 +17,11 @@ const BOSS_FINALE={
   lastcall:{kind:'settle',mote:'#ffe08a'},
   finalcall:{kind:'walk',dx:5,dust:'#ffe08a'},
   gridlockprime:{kind:'drive',dx:7,dust:'#9fe3a0'},
-  drillworm:{kind:'settle',mote:'#c9d2d8',sag:true}
+  drillworm:{kind:'settle',mote:'#c9d2d8',sag:true},
+  twinlens:{kind:'settle',mote:'#ffc860'},
+  censor:{kind:'settle',mote:'#e8e2d0'},
+  leviathan:{kind:'settle',mote:'#ffd070',big:true},
+  julian:{kind:'settle',mote:'#ffe08a'}
 };
 const BOSS_FX=[];   // sparkles and rings, drawn over the map after the actors
 function bossStays(n) { if(!n||!n.monster||typeof b7IsBoss!=='function'||!b7IsBoss(n)) return false; n.bossAwait=true; n.bossT=performance.now()+6000; return true; }

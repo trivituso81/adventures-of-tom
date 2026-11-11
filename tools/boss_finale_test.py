@@ -6,7 +6,7 @@ from playwright.sync_api import sync_playwright
 from PIL import Image
 ROOT=os.environ.get('ROOT',os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 cases=json.load(open(sys.argv[1])); OUT=sys.argv[2]; os.makedirs(OUT,exist_ok=True); only=sys.argv[3:]
-IDS={'ch01':'bigone','ch02':'bigshake','ch03':'irongill','ch04':'directorscut','ch05':'redpen','ch06':'chairman','ch07':'unread','ch08':'ironbelly','ch09':'mirrorball','ch10':'lastcall','ch11':'finalcall','ch12':'gridlockprime','ch13':'drillworm'}
+IDS={'ch01':'bigone','ch02':'bigshake','ch03':'irongill','ch04':'directorscut','ch05':'redpen','ch06':'chairman','ch07':'unread','ch08':'ironbelly','ch09':'mirrorball','ch10':'lastcall','ch11':'finalcall','ch12':'gridlockprime','ch13':'drillworm','ch17':'twinlens','ch19':'censor','ch20':'leviathan','ch20j':'julian'}
 cases=[c for c in cases if c['name'] in IDS and (not only or c['name'] in only)]
 src=open(os.path.join(ROOT,'tools','boss_stage_test.py')).read()
 SETUP=re.search(r'SETUP=r"""(.*?)"""',src,re.S).group(1)

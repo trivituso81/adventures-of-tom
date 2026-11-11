@@ -184,6 +184,7 @@ SCENES.ch20Fight1=()=>[
 // ---------- The Leviathan comes apart, and Julian is in the room ----------
 SCENES.ch20Shatter=()=>[
   {flag:'ch20-shatter',value:'pending'},
+  {finale:'leviathan'},
   {call:()=>{ const l=ch20Levi(); if(l) l.hidden=true; }},
   {talk:'Forever Engine',lines:['The Leviathan comes apart. It does not die. It comes apart like a watch being taken out of its case, one gear at a time, every one of them still ticking.']},
   {call:()=>{ setFlag('ch20-julian'); const j=ch20Julian(); if(j) { j.hidden=false; j.mscale=1.4; } sfx.levelChime&&sfx.levelChime(); }},
@@ -223,6 +224,7 @@ SCENES.ch20Calm=()=>[
   {talk:'Boppy',lines:['And the crisp is excellent.']},
   {talk:'Vance',lines:['I do not know how to start the clocks.']},
   {talk:'Tom',lines:['You do not start them. You stop holding them.']},
+  {finale:'julian'},
   {call:()=>{ sfx.levelChime&&sfx.levelChime(); }},
   {talk:'Forever Engine',lines:['Julian lets go. A long breath goes out of him, the one that has been in him for twenty years. The Forever Engine lets go with him. One by one, every gear in the Moon begins to turn the right way, and far below, in two cities, every clock in the sky ticks forward, all together, to five o’clock.']},
   {talk:'Rose',lines:['IT MOVED! The clock MOVED!']},
@@ -312,9 +314,9 @@ STORY_WORLD.push(()=>{
   if(STORY.mode!=='full') return;
   // The Leviathan coils round the Engine until it is beaten; Julian sits where it was from the moment it comes apart until he is calm.
   const l=ch20Levi();
-  if(l) { const show=STORY.chapter===20&&!!flag('ch20-heart')&&flag('battle:leviathan')!=='win'; if(!show&&!l.hidden) l.hidden=true; else if(show&&l.hidden) l.hidden=false; l.mscale=1.6; }
+  if(l) { const show=STORY.chapter===20&&!!flag('ch20-heart')&&flag('battle:leviathan')!=='win'; if(!show&&!l.hidden&&!l.fin&&!l.bossAwait) l.hidden=true; else if(show&&l.hidden) l.hidden=false; l.mscale=1.6; }
   const j=ch20Julian();
-  if(j) { const show=STORY.chapter===20&&!!flag('ch20-julian')&&flag('battle:julian')!=='win'&&!flag('ch20-calm'); if(!show&&!j.hidden) j.hidden=true; else if(show&&j.hidden) j.hidden=false; j.mscale=1.4; }
+  if(j) { const show=STORY.chapter===20&&!!flag('ch20-julian')&&flag('battle:julian')!=='win'&&!flag('ch20-calm'); if(!show&&!j.hidden&&!j.fin&&!j.bossAwait) j.hidden=true; else if(show&&j.hidden) j.hidden=false; j.mscale=1.4; }
 });
 HOLD_RULES.push(n=>n.monster==='leviathan'||n.monster==='julian');
 
