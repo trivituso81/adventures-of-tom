@@ -1,3 +1,8 @@
+## 2026-11-11 (cast5): Welcome screen sideways: two rows back, still equal gaps and no overlap (tag cast5)
+- Tom 11:43: cast4 lost the rows, which he did not ask for. Rows restored while keeping his 10:15 order (everyone equally close, nobody overlapping sideways).
+- `engine/splash.js` `SPLASH_LAND.order` marks the back row with `*`: front Boppy, Deedee, Grace, Rose, TOM, TNB, Nara; back Justin, Amy, Olivia, Michael. Back-row people stand in the gaps between front-row people, 50 design units further back (higher on screen), drawn first. Every neighbour pair has the same 12-unit gap between visible painted figures. fracH .46 with tall 380 (tallest figure plus depth).
+- Measured on the drawn canvas: 844 x 390 gaps 5 to 8 px, 951 x 648 gaps 7 to 9 px, no overlap; Tom at the exact centre. Portrait unchanged. smoke FAILS [].
+
 ## 2026-11-11 (amy1): new Amy hero, walking sheet and emotion sheet installed (tag amy1)
 - Tom 10:41: the new approved Amy art goes in. Sources (newest approved): hero v2, walking v3, emotions v4. Same recipe as tomboppy1: `walk_splice.py amy` (her chin share .26 re-checked on v3, unchanged), `emotion_frames.py`, `bake_emotion_faces.py`, `bake_story_poses.py`, `bake_talk_faces.py`, `bake_portraits.py`.
 - Menu portrait: her saved hand crop in `data/portrait-crops.json` (10:16) was for the old painting (hero v2 was approved 10:38), so it was removed and `FACE` in `bake_portraits.py` was re-measured on hero v2. Tom can re-crop her in portraits.html.

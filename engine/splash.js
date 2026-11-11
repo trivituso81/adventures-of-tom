@@ -564,11 +564,12 @@ const SPLASH_BREATH={amp:.011,speed:1.0};   // slow rise and fall: amp = lift as
 // Heights in design units, all from real heights at 4.34 units per inch (Tom 5'11" = 308, TNB 5'10", Boppy 5'7" 291, Amy and Deedee 5'5" 282, Justin 6'4" 330,
 // Grace 4'2" 222, Rose 3'4" 178, Nara a 40 lb labradoodle about 28 in at the head = 130, Olivia 5'5" 282, Michael 6'4" 330 with Lachlan and Isla on his arms). Heights are of the visible figure (hair, hats and all), so TNB (5'10") stands a little shorter than Tom (5'11").
 const SPLASH_H={tom:308,tnb:304,justin:330,boppy:291,amy:282,deedee:282,grace:230,rose:185,nara:130,olivia:282,michael:330};
-// Landscape and any wide window (Tom 2026-11-11 10:15): everyone stands in one line, equally spaced, with no one overlapping anyone (measured on
-// the visible painted figure, arms included). Long Island family on the Long Island side (left), Los Angeles family on the LA side (right),
-// Tom at the exact centre of the screen (Tom 2026-11-11 09:03). gap = space between two figures in design units; the line scales to fit
-// fracW of the width (sized by its wider half) and fracH of the height.
-const SPLASH_LAND={order:['boppy','deedee','justin','amy','grace','rose','tom','tnb','olivia','michael','nara'],gap:12,tall:331,fracW:.95,fracH:.42,feetY:.79};
+// Landscape and any wide window (Tom 2026-11-11 10:15 and 11:43): two rows, and still no one overlaps anyone sideways. The back row stands in
+// the gaps between front-row people, `depth` design units further back (higher on screen), and every pair of neighbours (front or back) has
+// the same `gap` between their visible painted figures (arms included). Long Island family on the Long Island side (left), Los Angeles
+// family on the LA side (right), Tom at the exact centre of the screen (Tom 2026-11-11 09:03). Sized by the wider half to fracW of the width
+// and by the tallest figure plus the depth to fracH of the height.
+const SPLASH_LAND={order:['boppy','deedee','justin*','grace','amy*','rose','tom','tnb','olivia*','nara','michael*'],gap:12,depth:50,tall:380,fracW:.95,fracH:.46,feetY:.79};   // * = back row
 // Portrait (iPhone tuning, Tom 2026-11-06; order mirrored 2026-11-11 so Long Island people stand on the Long Island side): two rows. Front, left to right: Grace, Rose, Tom, TNB, Nara.
 // SPLASH_W = painted figure width over height (arms included). Front figures are spaced at `gap` of their widths, the back row is `depth` design units further
 // back, and the group scales so the tallest figure plus the depth fills fracH of the screen height (about 40% bigger than the old single line).
@@ -597,16 +598,17 @@ function splashPortLayout(w,h) {
 }
 function splashLandLayout(w,h) {
   const L=SPLASH_LAND,figs=[];
-  for(const id of L.order) {   // visible box of each standing frame, in design units: width and the offset of its middle from the frame middle
-    const set=OW[id]; if(!set||!set.down) continue;
+  for(const key of L.order) {   // visible box of each standing frame, in design units: width and the offset of its middle from the frame middle
+    const back=key.endsWith('*'),id=back?key.slice(0,-1):key,set=OW[id]; if(!set||!set.down) continue;
     const fr=set.down[0],R=splashRows(id,fr),C=splashCols(id,fr),u=SPLASH_H[id]/(R.y1-R.y0+1);
-    figs.push({id,vw:(C.x1-C.x0)*u,off:((C.x0+C.x1)/2-fr[0].length/2)*u});
+    figs.push({id,back,vw:(C.x1-C.x0)*u,off:((C.x0+C.x1)/2-fr[0].length/2)*u});
   }
   let x=0; figs.forEach((f,i)=>{ if(i) x+=figs[i-1].vw/2+L.gap+f.vw/2; f.x=x; });
   const t=figs.find(f=>f.id==='tom'); if(!t) return [];
   const half=Math.max(...figs.map(f=>Math.abs(f.x-t.x)+f.vw/2));
   const sc=Math.min(w*L.fracW/(2*half),h*L.fracH/L.tall),feet=h*L.feetY;
-  return figs.map(f=>({id:f.id,cx:w/2+(f.x-t.x-f.off)*sc,feet,hh:SPLASH_H[f.id]*sc}));
+  const drawn=figs.filter(f=>f.back).concat(figs.filter(f=>!f.back));   // back row drawn first
+  return drawn.map(f=>({id:f.id,cx:w/2+(f.x-t.x-f.off)*sc,feet:feet-(f.back?L.depth*sc:0),hh:SPLASH_H[f.id]*sc}));
 }
 // Visible rows of a frame (first and last row with any paint): the painted frames carry different empty margins, so sizing by the whole frame made some people 2% to 6% off.
 // First and last painted column of a standing frame, in grid columns. Measured on the painted picture itself (drawn once off screen and read
