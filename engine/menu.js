@@ -450,8 +450,10 @@ function targetPicker(id) {
 // LOAD: loading asks once before acting. (Saving lives in the HUD save popup below.)
 function renderSaveTab(body) {
   $('menu-foot').textContent=saveNoteLine()+' Autosave happens at every door, after each battle and when you leave the app.';
-  const list=el('div','item-list single');
-  for(const slot of SAVE_SLOTS) {
+  const list=el('div','item-list single loadlist');
+  const used=SAVE_SLOTS.filter(k=>readSave(k));   // every used slot (autosave plus up to 10), same as the title Load page; empty slots are not listed
+  if(!used.length) list.appendChild(el('div','menu-empty','No saved games yet. Use the SAVE button on the map.'));
+  for(const slot of used) {
     const sv=readSave(slot);
     const row=el('div','save-row');
     row.innerHTML='<div class="item-icon">'+(slot==='auto'?'⏱':'\u{1F4BE}')+'</div><div class="save-copy"><span class="save-name"></span><span class="save-meta"></span></div>';
