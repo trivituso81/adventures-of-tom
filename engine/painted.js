@@ -11,7 +11,7 @@
 // Atlas: one image of equally sized frames at K times the rows' resolution. Battle sheets are K = 3 (Boppy 4) since sharp1
 // (2026-11-05, Tom: the party looked blurry in battle; K = 2 was stretched up to 1.45x on a phone). See tools/sprite-bake/hires.py.
 // ART_V: cache tag for every painted atlas image (2026-11-01, heads1: all adult battle heads re-baked).
-const ART_V='npcinst3';
+const ART_V='walkv2';
 const PAINTED={};
 // Cast ids that own painted sheets (paintedOwners, below). Longer prefixes first: tomride before tom.
 const PAINTED_CAST=['tomride','tom','grace','rose','tnb','amy','deedee','boppy','nara','justin','olivia','jojo','michael','ellie'];
