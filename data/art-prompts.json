@@ -15514,8 +15514,16 @@
    "group": "Airport"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/rooms/room-gatezero-cut1-v1.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794441122031
+    }
+   ],
    "rejects": [],
    "id": "room-gatezero-cut1",
    "tab": "Rooms",
