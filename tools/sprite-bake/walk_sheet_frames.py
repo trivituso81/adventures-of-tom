@@ -75,35 +75,38 @@ def grid(path, ncols, nrows):
             im = Image.fromarray(cut, 'RGBA'); out.append(im.crop(im.getbbox()))
     return out
 
-# Overworld head sizes (Tom 2026-11-06 07:16: "Tom is the one we want a model everyone else after in terms of the size of their heads ... do it by
-# head height and then scale accordingly").
-# ADULTS (WALK_MATCH): every adult's head HEIGHT (top of hair, cap or skull to chin) is made equal to Tom's on screen, 104 px of his sheet drawn at
-# 42 rows over 391 px = TOM_HEAD_ROWS. The head is scaled uniformly (width follows height, so width to height proportions stay as painted;
-# kidhead.grow_head, about the chin), the body is scaled so the WHOLE figure keeps the on-screen height it had (R = bake rows x the engine's draw
-# scale OW.<id>.k, which is the real height next to Tom: 42 rows = 5'11). cid: (chin px from the top of the painted stand frame, bake rows, draw k).
-# BODY_ROWS_PER_PX[cid] is the bake scale for the body (the bakes use it for fo, never args.ow_h). Olivia's and Ellie's heights were assumed.
-# KIDS (GROW): Tom 02:45, Grace and Rose heads 15 percent bigger, body unchanged (bakes scale from UNWARPED_H).
-TOM_HEAD_ROWS = 104 * 42 / 391.0
-# The chin is stored as a share of the painted stand frame's height (measured on the first painted walk sheets: chin px over stand px, TNB 118/390,
-# Justin 123/387, Boppy 154/392, Deedee 114/390, Amy 95/393, Olivia 100/395, Ellie 125/392, Grace 100/392, Rose 102/387). The Art Library walking
-# sheets (walkinst1) were generated from those sheets and keep the same proportions at a larger pixel size, so the share carries over.
-# 11-10 (walkv2): the v2 walking sheets (tnb, justin, boppy, deedee, amy, olivia) have their own proportions, so their chin shares were measured again on
-# the front stand frame (ruler crops, +-1 percent): tnb .28, justin .24, boppy .295, deedee .295, amy .26, olivia .24. Ellie's sheet is still v1 (old share).
-# The v2 kids already have caricature heads (head about .27 of the figure), so the old 15 percent growth is 1.0 for the sheets that are v2 (as painted).
-WALK_MATCH = {'tnb': (.28, 45, .92), 'justin': (.24, 53, .849), 'boppy': (.295, 41.7, .922), 'deedee': (.295, 41.7, .922),
-              'amy': (.26, 41.7, .925), 'olivia': (.24, 42, .914), 'ellie': (125 / 392, 43, .853),
-              'jojo': (.24, 42, .930)}   # Jojo 5'6: 42 rows x .930 (walkv2: her v2 sheet, chin .24)
-GROW = {'grace': (.27, 1.0), 'rose': (.27, 1.0)}
-# HEAD_TWEAK (head size adjuster, Tom 2026-11-10): per-character extra head factor on top of the rules above, kept in head_tweak.json next to this
-# file (written by head_adjust.py). 1.0 or absent = no change (the bake is byte for byte what it was). Adults: the head is TOM_HEAD_ROWS x factor and
-# the whole figure keeps its real on-screen height. Kids: the 1.15 head growth is multiplied by the factor, body unchanged.
+# Overworld heights and head sizes (heights1, Tom 2026-11-11: "main character height should always be a factor of the head size set in the head
+# sizes function, and their hardcoded heights using a character like Tom as a baseline").
+# HEIGHT: data/heights.json is the one place a real height (inches) is typed. Tom's standing figure is TOM_ROWS on screen (he is drawn at k 1), and
+# everyone's whole figure (top of hair or cap to feet) is figure_rows(cid) = TOM_ROWS x inches / Tom's inches. A head factor never changes that.
+# HEAD: Tom is the model (Tom 11-06: "do it by head height and then scale accordingly"). tom_head_rows() is Tom's head on screen as currently baked
+# (his chin share x TOM_ROWS x his own HEAD SIZES factor), so changing Tom's head moves the baseline for every adult.
+# ADULTS (WALK_MATCH): cid: (chin line as a share of the painted stand frame's height, bake rows). The head is tom_head_rows() x the character's factor,
+# scaled uniformly about the chin (kidhead.grow_head); the body is scaled so the whole figure is figure_rows(cid). Bake rows is only the resolution the
+# figure is stored at; the game draws it at draw_k(cid) = figure_rows / bake rows (data/walk-scale.js, measured from the baked art by heights.py).
+# BODY_ROWS_PER_PX[cid] is the bake scale for the body (the bakes use it for fo, never args.ow_h).
+# Chin shares were measured on the front stand frame of each approved sheet (ruler crops, +-1 percent); Ellie's sheet is still v1.
+# PLAIN (Tom, Nara, Grace, Rose): the walk is used as painted, so the head is the painted head x the character's factor. With a factor other than 1 the
+# head grows about the chin and the body shrinks so the whole figure keeps its height (BODY_SCALE[cid] = body scale relative to the painted figure,
+# for the bake's `fo`). cid: chin line as a share of the stand frame's height. Grace and Rose joined this rule in heights1 (their height used to move
+# with the head factor).
 import json
-try: HEAD_TWEAK = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'head_tweak.json')))
+HERE = os.path.dirname(os.path.abspath(__file__))
+HEIGHTS = json.load(open(os.path.join(ROOT, 'data', 'heights.json')))
+INCHES, BASE = HEIGHTS['inches'], HEIGHTS['baseline']
+TOM_ROWS = 42.0
+try: HEAD_TWEAK = json.load(open(os.path.join(HERE, 'head_tweak.json')))
 except OSError: HEAD_TWEAK = {}
-# PLAIN (head adjuster only): characters whose walk is used as painted with no standing head rule (Tom is the model, Nara is the dog). cid: chin line as a
-# share of the stand frame's height. Only a head factor other than 1 changes them; then the head grows about the chin and the body shrinks so the whole
-# figure keeps its on-screen height (the same rule as WALK_MATCH). BODY_SCALE[cid] = body scale relative to the painted figure, for the bake's `fo`.
-PLAIN = {'tom': 104 / 391.0, 'nara': .44}
+WALK_MATCH = {'tnb': (.28, 45), 'justin': (.24, 53), 'boppy': (.295, 41.7), 'deedee': (.295, 41.7), 'amy': (.26, 41.7), 'olivia': (.24, 42),
+              'ellie': (125 / 392, 43), 'jojo': (.24, 42)}
+PLAIN = {'tom': 104 / 391.0, 'nara': .44, 'grace': .27, 'rose': .27}
+def figure_rows(cid):
+    """On-screen height of the whole standing figure, in rows: the real height next to Tom."""
+    return TOM_ROWS * INCHES[cid] / INCHES[BASE]
+def draw_k(cid):
+    return figure_rows(cid) / WALK_MATCH[cid][1]
+def tom_head_rows():
+    return PLAIN[BASE] * TOM_ROWS * HEAD_TWEAK.get(BASE, 1.0)
 BODY_SCALE = {}
 UNWARPED_H = {}
 BODY_ROWS_PER_PX = {}
@@ -119,9 +122,9 @@ def build(cid, fix=False):
     UNWARPED_H[cid] = figs[0].height
     if fix and cid in WALK_MATCH:
         from kidhead import grow_head
-        chin, rows, k = WALK_MATCH[cid]; H = UNWARPED_H[cid]; chin *= H
-        R = rows * k                                            # on-screen height of the whole figure, unchanged
-        hr = TOM_HEAD_ROWS * HEAD_TWEAK.get(cid, 1.0)            # on-screen head height (Tom's, times the adjuster factor)
+        chin, rows = WALK_MATCH[cid]; k = draw_k(cid); H = UNWARPED_H[cid]; chin *= H
+        R = rows * k                                            # on-screen height of the whole figure: figure_rows(cid)
+        hr = tom_head_rows() * HEAD_TWEAK.get(cid, 1.0)          # on-screen head height (Tom's, times the adjuster factor)
         sb = (R - hr) / (H - chin)                               # on-screen rows per source px for the body
         BODY_ROWS_PER_PX[cid] = sb / k                           # bake rows per source px (the engine multiplies by k)
         figs = [grow_head(f, hr / (chin * sb), chin) for f in figs]
@@ -130,11 +133,6 @@ def build(cid, fix=False):
         f = HEAD_TWEAK[cid]; H = UNWARPED_H[cid]; chin = PLAIN[cid] * H
         BODY_SCALE[cid] = (H - chin * f) / (H - chin)           # body scale; the head is f times its painted on-screen size
         figs = [grow_head(x, f / BODY_SCALE[cid], chin) for x in figs]
-    elif fix and cid in GROW:
-        from kidhead import grow_head
-        chin, kh = GROW[cid]; chin *= UNWARPED_H[cid]
-        kh *= HEAD_TWEAK.get(cid, 1.0)
-        figs = [grow_head(f, kh, chin) for f in figs]
     out = {}
     for r in range(3):
         for c in range(3):

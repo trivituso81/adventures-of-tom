@@ -9,7 +9,6 @@
   const O=JOJO_HIRES.ow,mk=d=>['stand','step1','step2'].map(n=>paintRows(O[d+'_'+n].slice(),'jojoOw',d+'_'+n,false));
   const set={pal:O.pal,down:mk('down'),up:mk('up'),side:mk('right')};
   set.left=set.side.map(mirrorRows);
-  set.k=.930;   // real height 5'6 next to Tom 5'11 (42.0 visible rows); the sheet's stand is 42.0 rows (11-05)
   OW.jojo=set;
   // Battle frames (art/chars/jojo-bt.webp, K=2, the approved stance sheets, tools/sprite-bake/bake_jojo_stance.py): feet on the bottom row, centred.
   // The lavender battle look is as painted. FACES says which way a frame looks as drawn (lunge, offer, wind and guard point screen-right).

@@ -1,0 +1,18 @@
+{
+ "_about": "THE ONE PLACE a main character's real height is typed (inches). Tom is the baseline: his standing walk figure is 42 rows on screen, and everyone is drawn at 42 x inches / 71 next to him. The walk bakes (tools/sprite-bake/walk_sheet_frames.py) and the game's draw scales (data/walk-scale.js, written by tools/sprite-bake/heights.py write) both come from this file. After changing a number: rebake that walk (walk_splice.py), run heights.py write, then python3 tools/heights_test.py. Townsfolk heights live in tools/art-library/npc-prompts.js (ft).",
+ "baseline": "tom",
+ "inches": {
+  "tom": 71,
+  "tnb": 70,
+  "justin": 76,
+  "michael": 76,
+  "boppy": 67,
+  "jojo": 66,
+  "amy": 65,
+  "deedee": 65,
+  "olivia": 68,
+  "ellie": 62,
+  "grace": 50,
+  "rose": 40
+ }
+}

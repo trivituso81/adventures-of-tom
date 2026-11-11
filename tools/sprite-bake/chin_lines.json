@@ -1,0 +1,270 @@
+{
+ "justin": {
+  "sheet": "justin-walking-sheet-v3.png",
+  "share": 0.26
+ },
+ "tnb": {
+  "sheet": "tnb-walking-sheet-v2.png",
+  "share": 0.282
+ },
+ "tom": {
+  "sheet": "tom-walking-sheet-v3.png",
+  "share": 0.304
+ },
+ "boppy": {
+  "sheet": "boppy-walking-sheet-v3.png",
+  "share": 0.348
+ },
+ "amy": {
+  "sheet": "amy-walking-sheet-v3.png",
+  "share": 0.23
+ },
+ "deedee": {
+  "sheet": "deedee-walking-sheet-v2.png",
+  "share": 0.293
+ },
+ "olivia": {
+  "sheet": "olivia-walking-sheet-v2.png",
+  "share": 0.232
+ },
+ "ellie": {
+  "sheet": "ellie-walking-sheet-v1.png",
+  "share": 0.275
+ },
+ "grace": {
+  "sheet": "grace-walking-sheet-v2.png",
+  "share": 0.266
+ },
+ "rose": {
+  "sheet": "rose-walking-sheet-v2.png",
+  "share": 0.283
+ },
+ "nara": {
+  "sheet": "nara-walking-sheet-v2.png",
+  "share": 0.43
+ },
+ "jojo": {
+  "sheet": "jojo-walk-sheet-v2.png",
+  "share": 0.233
+ },
+ "pip": {
+  "sheet": "npc-walk-pip-v2.png",
+  "share": 0.29
+ },
+ "moss": {
+  "sheet": "npc-walk-moss-v1.png",
+  "share": 0.281
+ },
+ "dot": {
+  "sheet": "npc-walk-dot-v1.png",
+  "share": 0.258
+ },
+ "gus": {
+  "sheet": "npc-walk-gus-v5.png",
+  "share": 0.288
+ },
+ "bean": {
+  "sheet": "npc-walk-bean-v2.png",
+  "share": 0.25
+ },
+ "reel": {
+  "sheet": "npc-walk-reel-v1.png",
+  "share": 0.305
+ },
+ "pruitt": {
+  "sheet": "npc-walk-pruitt-v2.png",
+  "share": 0.26
+ },
+ "delgado": {
+  "sheet": "npc-walk-delgado-v2.png",
+  "share": 0.28
+ },
+ "kowalski": {
+  "sheet": "npc-walk-kowalski-v2.png",
+  "share": 0.265
+ },
+ "ike": {
+  "sheet": "npc-walk-ike-v2.png",
+  "share": 0.282
+ },
+ "halverson": {
+  "sheet": "npc-walk-halverson-v1.png",
+  "share": 0.266
+ },
+ "bun": {
+  "sheet": "npc-walk-bun-v1.png",
+  "share": 0.29
+ },
+ "page": {
+  "sheet": "npc-walk-page-v1.png",
+  "share": 0.241
+ },
+ "fern": {
+  "sheet": "npc-walk-fern-v1.png",
+  "share": 0.271
+ },
+ "kit": {
+  "sheet": "npc-walk-kit-v1.png",
+  "share": 0.254
+ },
+ "oolong": {
+  "sheet": "npc-walk-oolong-v1.png",
+  "share": 0.285
+ },
+ "luna": {
+  "sheet": "npc-walk-luna-v1.png",
+  "share": 0.285
+ },
+ "penny": {
+  "sheet": "npc-walk-penny-v1.png",
+  "share": 0.261
+ },
+ "nickel": {
+  "sheet": "npc-walk-nickel-v1.png",
+  "share": 0.257
+ },
+ "sal": {
+  "sheet": "npc-walk-sal-v1.png",
+  "share": 0.273
+ },
+ "sol": {
+  "sheet": "npc-walk-sol-v1.png",
+  "share": 0.27
+ },
+ "alvarez": {
+  "sheet": "npc-walk-alvarez-v1.png",
+  "share": 0.255
+ },
+ "bernadette": {
+  "sheet": "npc-walk-bernadette-v1.png",
+  "share": 0.264
+ },
+ "beto": {
+  "sheet": "npc-walk-beto-v1.png",
+  "share": 0.3
+ },
+ "bev": {
+  "sheet": "npc-walk-bev-v1.png",
+  "share": 0.236
+ },
+ "carmen": {
+  "sheet": "npc-walk-carmen-v1.png",
+  "share": 0.277
+ },
+ "chet": {
+  "sheet": "npc-walk-chet-v1.png",
+  "share": 0.246
+ },
+ "claudia": {
+  "sheet": "npc-walk-claudia-v1.png",
+  "share": 0.274
+ },
+ "daisy": {
+  "sheet": "npc-walk-daisy-v1.png",
+  "share": 0.26
+ },
+ "dakota": {
+  "sheet": "npc-walk-dakota-v1.png",
+  "share": 0.209
+ },
+ "dana": {
+  "sheet": "npc-walk-dana-v1.png",
+  "share": 0.228
+ },
+ "dash": {
+  "sheet": "npc-walk-dash-v1.png",
+  "share": 0.276
+ },
+ "dolores": {
+  "sheet": "npc-walk-dolores-v1.png",
+  "share": 0.24
+ },
+ "jordan": {
+  "sheet": "npc-walk-jordan-v1.png",
+  "share": 0.256
+ },
+ "juniper": {
+  "sheet": "npc-walk-juniper-v1.png",
+  "share": 0.234
+ },
+ "kenji": {
+  "sheet": "npc-walk-kenji-v1.png",
+  "share": 0.332
+ },
+ "kevin": {
+  "sheet": "npc-walk-kevin-v1.png",
+  "share": 0.287
+ },
+ "kiki": {
+  "sheet": "npc-walk-kiki-v2.png",
+  "share": 0.228
+ },
+ "larry": {
+  "sheet": "npc-walk-larry-v1.png",
+  "share": 0.289
+ },
+ "marguerite": {
+  "sheet": "npc-walk-marguerite-v1.png",
+  "share": 0.258
+ },
+ "marisol": {
+  "sheet": "npc-walk-marisol-v1.png",
+  "share": 0.23
+ },
+ "mateo": {
+  "sheet": "npc-walk-mateo-v1.png",
+  "share": 0.335
+ },
+ "odette": {
+  "sheet": "npc-walk-odette-v1.png",
+  "share": 0.316
+ },
+ "priya": {
+  "sheet": "npc-walk-priya-v1.png",
+  "share": 0.253
+ },
+ "ray": {
+  "sheet": "npc-walk-ray-v1.png",
+  "share": 0.289
+ },
+ "ryan": {
+  "sheet": "npc-walk-ryan-v1.png",
+  "share": 0.25
+ },
+ "sage": {
+  "sheet": "npc-walk-sage-v1.png",
+  "share": 0.232
+ },
+ "sam": {
+  "sheet": "npc-walk-sam-v1.png",
+  "share": 0.228
+ },
+ "skye": {
+  "sheet": "npc-walk-skye-v2.png",
+  "share": 0.214
+ },
+ "sofi": {
+  "sheet": "npc-walk-sofi-v1.png",
+  "share": 0.323
+ },
+ "toni": {
+  "sheet": "npc-walk-toni-v1.png",
+  "share": 0.265
+ },
+ "tony": {
+  "sheet": "npc-walk-tony-v1.png",
+  "share": 0.274
+ },
+ "washington": {
+  "sheet": "npc-walk-washington-v1.png",
+  "share": 0.292
+ },
+ "wes": {
+  "sheet": "npc-walk-wes-v1.png",
+  "share": 0.255
+ },
+ "yesenia": {
+  "sheet": "npc-walk-yesenia-v1.png",
+  "share": 0.271
+ }
+}

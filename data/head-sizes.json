@@ -77,13 +77,15 @@
    "h": 475,
    "top": 0,
    "chin": 114.0,
+   "line": 123.5,
    "ax": 76.65,
    "taper": 12,
-   "mode": "fixed",
    "group": "family",
    "applied": 1.0,
-   "R": 44.997,
-   "hr0": 11.1714
+   "R": 44.958,
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 76
   },
   "tnb": {
    "name": "TNB",
@@ -92,13 +94,15 @@
    "h": 461,
    "top": 0,
    "chin": 129.08,
+   "line": 130.0,
    "ax": 92.79,
    "taper": 12,
-   "mode": "fixed",
    "group": "family",
    "applied": 1.0,
-   "R": 41.4,
-   "hr0": 11.1714
+   "R": 41.408,
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 70
   },
   "tom": {
    "name": "Tom",
@@ -107,13 +111,15 @@
    "h": 476,
    "top": 0,
    "chin": 126.61,
+   "line": 144.7,
    "ax": 73.5,
    "taper": 12,
-   "mode": "fixed",
    "group": "family",
    "applied": 1.0,
    "R": 42.0,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": null,
+   "inches": 71
   },
   "boppy": {
    "name": "Boppy",
@@ -122,13 +128,15 @@
    "h": 479,
    "top": 0,
    "chin": 141.3,
+   "line": 166.69,
    "ax": 93.5,
    "taper": 12,
-   "mode": "fixed",
    "group": "family",
    "applied": 1.0,
-   "R": 38.447,
-   "hr0": 11.1714
+   "R": 39.634,
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 67
   },
   "amy": {
    "name": "Amy",
@@ -137,13 +145,15 @@
    "h": 477,
    "top": 0,
    "chin": 124.02,
+   "line": 109.71,
    "ax": 83.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "family",
    "applied": 1.0,
-   "R": 38.573,
-   "hr0": 11.1714
+   "R": 38.451,
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 65
   },
   "deedee": {
    "name": "Deedee",
@@ -152,13 +162,15 @@
    "h": 478,
    "top": 0,
    "chin": 141.01,
+   "line": 140.05,
    "ax": 78.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "family",
    "applied": 1.0,
-   "R": 38.447,
-   "hr0": 11.1714
+   "R": 38.451,
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 65
   },
   "olivia": {
    "name": "Olivia",
@@ -167,13 +179,15 @@
    "h": 411,
    "top": 0,
    "chin": 98.64,
+   "line": 95.35,
    "ax": 73.35,
    "taper": 12,
-   "mode": "fixed",
    "group": "family",
    "applied": 1.0,
-   "R": 38.388,
-   "hr0": 11.1714
+   "R": 40.225,
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 68
   },
   "ellie": {
    "name": "Ellie",
@@ -182,13 +196,15 @@
    "h": 479,
    "top": 0,
    "chin": 152.74,
+   "line": 131.73,
    "ax": 85.5,
    "taper": 12,
-   "mode": "fixed",
    "group": "family",
    "applied": 1.0,
-   "R": 36.679,
-   "hr0": 11.1714
+   "R": 36.676,
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 62
   },
   "grace": {
    "name": "Grace",
@@ -197,13 +213,15 @@
    "h": 465,
    "top": 0,
    "chin": 125.55,
+   "line": 123.69,
    "ax": 98.0,
    "taper": 12,
-   "mode": "body",
    "group": "family",
    "applied": 1.0,
-   "s0": 0.083871,
-   "k0": 1.0
+   "R": 29.577,
+   "hr0": 7.9859,
+   "follows": null,
+   "inches": 50
   },
   "rose": {
    "name": "Rose",
@@ -212,13 +230,15 @@
    "h": 467,
    "top": 0,
    "chin": 126.09,
+   "line": 132.16,
    "ax": 99.5,
    "taper": 12,
-   "mode": "body",
    "group": "family",
    "applied": 1.0,
-   "s0": 0.079229,
-   "k0": 1.0
+   "R": 23.662,
+   "hr0": 6.3887,
+   "follows": null,
+   "inches": 40
   },
   "nara": {
    "name": "Nara",
@@ -227,13 +247,15 @@
    "h": 375,
    "top": 0,
    "chin": 165.0,
+   "line": 161.25,
    "ax": 109.95,
    "taper": 12,
-   "mode": "fixed",
    "group": "family",
    "applied": 1.0,
    "R": 32.0,
-   "hr0": 14.08
+   "hr0": 14.08,
+   "follows": null,
+   "inches": null
   },
   "jojo": {
    "name": "Jojo",
@@ -242,13 +264,15 @@
    "h": 473,
    "top": 0,
    "chin": 113.52,
+   "line": 110.21,
    "ax": 91.43,
    "taper": 12,
-   "mode": "fixed",
    "group": "family",
    "applied": 1.0,
-   "R": 39.06,
-   "hr0": 11.1714
+   "R": 39.042,
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 66
   },
   "pip": {
    "name": "Pip",
@@ -257,13 +281,15 @@
    "h": 470,
    "top": 0,
    "chin": 108.1,
+   "line": 136.3,
    "ax": 86.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 31.948,
-   "hr0": 9.2
+   "hr0": 9.2,
+   "follows": null,
+   "inches": 49
   },
   "moss": {
    "name": "Moss",
@@ -272,13 +298,15 @@
    "h": 414,
    "top": 0,
    "chin": 103.5,
+   "line": 116.33,
    "ax": 73.99,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 33.252,
-   "hr0": 9.2
+   "hr0": 9.2,
+   "follows": null,
+   "inches": 51
   },
   "dot": {
    "name": "Dot",
@@ -287,13 +315,15 @@
    "h": 472,
    "top": 0,
    "chin": 103.84,
+   "line": 121.78,
    "ax": 101.5,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 31.296,
-   "hr0": 9.2
+   "hr0": 9.2,
+   "follows": null,
+   "inches": 48
   },
   "gus": {
    "name": "Gus",
@@ -302,13 +332,15 @@
    "h": 475,
    "top": 0,
    "chin": 123.5,
+   "line": 136.8,
    "ax": 94.93,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 39.042,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 66
   },
   "bean": {
    "name": "Bean",
@@ -317,13 +349,15 @@
    "h": 483,
    "top": 0,
    "chin": 108.67,
+   "line": 120.75,
    "ax": 95.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 38.451,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 65
   },
   "reel": {
    "name": "Reel",
@@ -332,13 +366,15 @@
    "h": 481,
    "top": 0,
    "chin": 134.68,
+   "line": 146.7,
    "ax": 105.15,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 40.817,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 69
   },
   "pruitt": {
    "name": "Pruitt",
@@ -347,13 +383,15 @@
    "h": 446,
    "top": 0,
    "chin": 111.5,
+   "line": 115.96,
    "ax": 84.5,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 40.817,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 69
   },
   "delgado": {
    "name": "Delgado",
@@ -362,13 +400,15 @@
    "h": 474,
    "top": 0,
    "chin": 127.98,
+   "line": 132.72,
    "ax": 87.41,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 40.225,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 68
   },
   "kowalski": {
    "name": "Kowalski",
@@ -377,13 +417,15 @@
    "h": 485,
    "top": 0,
    "chin": 101.85,
+   "line": 128.53,
    "ax": 97.5,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 37.859,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 64
   },
   "ike": {
    "name": "Ike",
@@ -392,13 +434,15 @@
    "h": 476,
    "top": 0,
    "chin": 121.38,
+   "line": 134.23,
    "ax": 99.55,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 38.451,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 65
   },
   "halverson": {
    "name": "Halverson",
@@ -407,13 +451,15 @@
    "h": 485,
    "top": 0,
    "chin": 126.1,
+   "line": 129.01,
    "ax": 90.5,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 41.408,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 70
   },
   "bun": {
    "name": "Bun",
@@ -422,13 +468,15 @@
    "h": 495,
    "top": 1,
    "chin": 133.65,
+   "line": 143.55,
    "ax": 86.5,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 37.859,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 64
   },
   "page": {
    "name": "Page",
@@ -437,13 +485,15 @@
    "h": 476,
    "top": 0,
    "chin": 119.0,
+   "line": 114.72,
    "ax": 109.22,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 39.042,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 66
   },
   "fern": {
    "name": "Fern",
@@ -452,13 +502,15 @@
    "h": 478,
    "top": 0,
    "chin": 112.33,
+   "line": 129.54,
    "ax": 114.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 38.451,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 65
   },
   "kit": {
    "name": "Kit",
@@ -467,13 +519,15 @@
    "h": 475,
    "top": 0,
    "chin": 116.38,
+   "line": 120.65,
    "ax": 103.5,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 39.634,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 67
   },
   "oolong": {
    "name": "Oolong",
@@ -482,13 +536,15 @@
    "h": 419,
    "top": 0,
    "chin": 104.75,
+   "line": 119.41,
    "ax": 94.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 36.676,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 62
   },
   "luna": {
    "name": "Luna",
@@ -497,13 +553,15 @@
    "h": 401,
    "top": 0,
    "chin": 110.28,
+   "line": 114.28,
    "ax": 123.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 38.451,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 65
   },
   "penny": {
    "name": "Penny",
@@ -512,13 +570,15 @@
    "h": 471,
    "top": 0,
    "chin": 98.91,
+   "line": 122.93,
    "ax": 91.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 37.859,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 64
   },
   "nickel": {
    "name": "Nickel",
@@ -527,13 +587,15 @@
    "h": 396,
    "top": 0,
    "chin": 87.12,
+   "line": 101.77,
    "ax": 85.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 39.042,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 66
   },
   "sal": {
    "name": "Sal",
@@ -542,13 +604,15 @@
    "h": 481,
    "top": 0,
    "chin": 127.47,
+   "line": 131.31,
    "ax": 93.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 40.225,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 68
   },
   "sol": {
    "name": "Sol",
@@ -557,13 +621,15 @@
    "h": 469,
    "top": 0,
    "chin": 117.25,
+   "line": 126.63,
    "ax": 91.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 39.634,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 67
   },
   "alvarez": {
    "name": "Alvarez",
@@ -572,13 +638,15 @@
    "h": 479,
    "top": 0,
    "chin": 122.14,
+   "line": 122.14,
    "ax": 81.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 36.676,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 62
   },
   "bernadette": {
    "name": "Bernadette",
@@ -587,13 +655,15 @@
    "h": 480,
    "top": 0,
    "chin": 127.2,
+   "line": 126.72,
    "ax": 96.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 37.859,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 64
   },
   "beto": {
    "name": "Beto",
@@ -602,13 +672,15 @@
    "h": 486,
    "top": 0,
    "chin": 140.94,
+   "line": 145.8,
    "ax": 114.5,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 37.859,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 64
   },
   "bev": {
    "name": "Bev",
@@ -617,13 +689,15 @@
    "h": 479,
    "top": 0,
    "chin": 124.54,
+   "line": 113.04,
    "ax": 79.7,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 37.268,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 63
   },
   "carmen": {
    "name": "Carmen",
@@ -632,13 +706,15 @@
    "h": 497,
    "top": 0,
    "chin": 134.19,
+   "line": 137.67,
    "ax": 107.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 37.268,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 63
   },
   "chet": {
    "name": "Chet",
@@ -647,13 +723,15 @@
    "h": 475,
    "top": 0,
    "chin": 128.25,
+   "line": 116.85,
    "ax": 87.5,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 42.0,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 71
   },
   "claudia": {
    "name": "Claudia",
@@ -662,13 +740,15 @@
    "h": 413,
    "top": 0,
    "chin": 111.51,
+   "line": 113.16,
    "ax": 95.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 37.859,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 64
   },
   "daisy": {
    "name": "Daisy",
@@ -677,13 +757,15 @@
    "h": 489,
    "top": 0,
    "chin": 134.48,
+   "line": 127.14,
    "ax": 98.59,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 35.493,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 60
   },
   "dakota": {
    "name": "Dakota",
@@ -692,13 +774,15 @@
    "h": 470,
    "top": 0,
    "chin": 122.2,
+   "line": 98.23,
    "ax": 81.24,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 40.225,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 68
   },
   "dana": {
    "name": "Dana",
@@ -707,13 +791,15 @@
    "h": 456,
    "top": 0,
    "chin": 118.56,
+   "line": 103.97,
    "ax": 85.04,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 39.042,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 66
   },
   "dash": {
    "name": "Dash",
@@ -722,13 +808,15 @@
    "h": 482,
    "top": 0,
    "chin": 125.32,
+   "line": 133.03,
    "ax": 86.81,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 41.408,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 70
   },
   "dolores": {
    "name": "Dolores",
@@ -737,13 +825,15 @@
    "h": 477,
    "top": 0,
    "chin": 124.02,
+   "line": 114.48,
    "ax": 91.5,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 37.859,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 64
   },
   "jordan": {
    "name": "Jordan",
@@ -752,13 +842,15 @@
    "h": 468,
    "top": 0,
    "chin": 124.02,
+   "line": 119.81,
    "ax": 79.5,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 41.408,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 70
   },
   "juniper": {
    "name": "Juniper",
@@ -767,13 +859,15 @@
    "h": 492,
    "top": 0,
    "chin": 132.84,
+   "line": 115.13,
    "ax": 84.2,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 39.042,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 66
   },
   "kenji": {
    "name": "Kenji",
@@ -782,13 +876,15 @@
    "h": 425,
    "top": 0,
    "chin": 121.12,
+   "line": 141.1,
    "ax": 87.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 39.634,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 67
   },
   "kevin": {
    "name": "Kevin",
@@ -797,13 +893,15 @@
    "h": 474,
    "top": 0,
    "chin": 130.35,
+   "line": 136.04,
    "ax": 107.5,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 33.127,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 56
   },
   "kiki": {
    "name": "Kiki",
@@ -812,13 +910,15 @@
    "h": 484,
    "top": 0,
    "chin": 130.68,
+   "line": 110.35,
    "ax": 83.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 37.859,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 64
   },
   "larry": {
    "name": "Larry",
@@ -827,13 +927,15 @@
    "h": 487,
    "top": 0,
    "chin": 143.66,
+   "line": 140.74,
    "ax": 133.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 40.817,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 69
   },
   "marguerite": {
    "name": "Marguerite",
@@ -842,13 +944,15 @@
    "h": 468,
    "top": 0,
    "chin": 126.36,
+   "line": 120.74,
    "ax": 85.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 38.451,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 65
   },
   "marisol": {
    "name": "Marisol",
@@ -857,13 +961,15 @@
    "h": 474,
    "top": 0,
    "chin": 127.98,
+   "line": 109.02,
    "ax": 110.6,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 39.042,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 66
   },
   "mateo": {
    "name": "Mateo",
@@ -872,13 +978,15 @@
    "h": 491,
    "top": 2,
    "chin": 154.66,
+   "line": 164.49,
    "ax": 101.5,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 24.845,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 42
   },
   "odette": {
    "name": "Odette",
@@ -887,13 +995,15 @@
    "h": 493,
    "top": 1,
    "chin": 145.44,
+   "line": 155.79,
    "ax": 99.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 37.859,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 64
   },
   "priya": {
    "name": "Priya",
@@ -902,13 +1012,15 @@
    "h": 404,
    "top": 0,
    "chin": 109.08,
+   "line": 102.21,
    "ax": 72.96,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 37.859,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 64
   },
   "ray": {
    "name": "Ray",
@@ -917,13 +1029,15 @@
    "h": 417,
    "top": 1,
    "chin": 118.84,
+   "line": 120.51,
    "ax": 80.5,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 42.0,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 71
   },
   "ryan": {
    "name": "Ryan",
@@ -932,13 +1046,15 @@
    "h": 483,
    "top": 0,
    "chin": 137.66,
+   "line": 120.75,
    "ax": 90.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 42.0,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 71
   },
   "sage": {
    "name": "Sage",
@@ -947,13 +1063,15 @@
    "h": 482,
    "top": 1,
    "chin": 130.14,
+   "line": 111.82,
    "ax": 86.26,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 40.225,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 68
   },
   "sam": {
    "name": "Sam",
@@ -962,13 +1080,15 @@
    "h": 472,
    "top": 1,
    "chin": 125.08,
+   "line": 107.62,
    "ax": 82.44,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 39.634,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 67
   },
   "skye": {
    "name": "Skye",
@@ -977,13 +1097,15 @@
    "h": 476,
    "top": 0,
    "chin": 128.52,
+   "line": 101.86,
    "ax": 106.61,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 39.042,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 66
   },
   "sofi": {
    "name": "Sofi",
@@ -992,13 +1114,15 @@
    "h": 480,
    "top": 1,
    "chin": 139.2,
+   "line": 155.04,
    "ax": 114.0,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 23.07,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 39
   },
   "toni": {
    "name": "Toni",
@@ -1007,13 +1131,15 @@
    "h": 468,
    "top": 0,
    "chin": 126.36,
+   "line": 124.02,
    "ax": 115.37,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 39.042,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 66
   },
   "tony": {
    "name": "Tony",
@@ -1022,13 +1148,15 @@
    "h": 474,
    "top": 1,
    "chin": 127.98,
+   "line": 129.88,
    "ax": 90.5,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 40.225,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 68
   },
   "washington": {
    "name": "Washington",
@@ -1037,13 +1165,15 @@
    "h": 492,
    "top": 1,
    "chin": 140.22,
+   "line": 143.66,
    "ax": 87.5,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 40.817,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 69
   },
   "wes": {
    "name": "Wes",
@@ -1052,13 +1182,15 @@
    "h": 477,
    "top": 0,
    "chin": 128.79,
+   "line": 121.64,
    "ax": 84.83,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 41.408,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 70
   },
   "yesenia": {
    "name": "Yesenia",
@@ -1067,13 +1199,15 @@
    "h": 464,
    "top": 0,
    "chin": 125.28,
+   "line": 125.74,
    "ax": 101.5,
    "taper": 12,
-   "mode": "fixed",
    "group": "town",
    "applied": 1.0,
    "R": 38.451,
-   "hr0": 11.1714
+   "hr0": 11.1714,
+   "follows": "tom",
+   "inches": 65
   }
  }
 }

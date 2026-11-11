@@ -10,6 +10,5 @@
     const rows=O[d+'_'+n]; return paintRows(flip?rows.map(r=>r.split('').reverse().join('')):rows.slice(),'michaelOw',d+'_'+n,flip); });
   const set={pal:O.pal,down:mk('down'),up:mk('up'),side:mk('left',true)};
   set.left=set.side.map(mirrorRows);
-  set.k=.8483;   // real height 6'4 next to Tom 5'11 (42.0 visible rows): 53 bake rows (cap top to feet of the painted stand) x .8483 = 44.96 rows (walk sheet v3, 11-06)
   OW.michael=set;
 })();

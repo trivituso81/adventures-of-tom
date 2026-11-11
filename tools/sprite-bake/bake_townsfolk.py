@@ -14,7 +14,8 @@ import numpy as np
 from PIL import Image
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from sheet import slice_sheet
-from townsfolk_common import purge_bg, SIDE_FACES_RIGHT, LIBRARY_WALK, TOM_HEAD_ROWS, KID_HEAD_ROWS, CHIN, KIDS, real_inches, target_rows, HEAD_TWEAK
+from walk_sheet_frames import tom_head_rows as _wsf_tom_head
+from townsfolk_common import purge_bg, SIDE_FACES_RIGHT, LIBRARY_WALK, KID_HEAD_ROWS, CHIN, KIDS, real_inches, target_rows, HEAD_TWEAK
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
@@ -190,7 +191,7 @@ for cid, ow_h in CAST.items():
                 poses[n] = poses[n].transpose(Image.FLIP_LEFT_RIGHT)
         from kidhead import grow_head
         H0 = poses['down_stand'].height; chin = CHIN[cid] * H0; R = target_rows(cid)
-        T = (KID_HEAD_ROWS if cid in KIDS else TOM_HEAD_ROWS) * HEAD_TWEAK.get(cid, 1.0)   # head adjuster factor (1.0 = unchanged)
+        T = (KID_HEAD_ROWS if cid in KIDS else _wsf_tom_head()) * HEAD_TWEAK.get(cid, 1.0)   # head adjuster factor (1.0 = unchanged)
         sb = (R - T) / (H0 - chin)                      # on-screen rows per source px for the body
         poses = {n: grow_head(v, T / (chin * sb), chin) for n, v in poses.items()}
         ow_h = None; fo_lib = sb * KW

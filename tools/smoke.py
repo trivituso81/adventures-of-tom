@@ -64,5 +64,8 @@ with sync_playwright() as pw:
 import subprocess, sys
 tc=subprocess.run([sys.executable,os.path.join(HERE,'tag_check.py')],capture_output=True,text=True); print(tc.stdout.strip())
 if tc.returncode: fails.append('tags not bumped: '+'; '.join(l.strip() for l in tc.stdout.split('\n')[1:] if l.strip()))
+# Real heights (heights1): every main character is drawn at their real height next to Tom, from data/heights.json.
+ht=subprocess.run([sys.executable,os.path.join(HERE,'heights_test.py'),'--fast'],capture_output=True,text=True)
+if ht.returncode: fails.append('heights: '+'; '.join(l for l in ht.stdout.split('\n') if l.startswith('FAIL')))
 print('FAILS:',fails)
 raise SystemExit(1 if fails else 0)

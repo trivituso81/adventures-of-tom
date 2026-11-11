@@ -68,12 +68,15 @@ for _id, _h in EMO_H.items():
 # walkv2 (2026-11-10): new v2 walking sheets (chin shares re-measured), new hero paintings and newer emotion sheets for all ten, so every factor was set again with the same rule
 # (mean of the height match and the face match, face = chin share x upright mood height over Tom's head height on screen; Ellie's walk is still the v1 sheet, so her face uses
 # the emotion sheet's own chin share .28). Result: moods within about 5 percent of the stand in height for most, TNB, Justin, Deedee, Boppy 5 to 6 percent shorter, Olivia 5 percent taller.
-EMO_HEAD = {'tom': 1.39, 'tnb': 1.35, 'grace': 1.37, 'rose': 1.67, 'amy': 1.36, 'justin': 1.32, 'deedee': 1.30, 'boppy': 1.89, 'olivia': 1.32, 'ellie': 1.43}
+# heights1 (2026-11-11): Boppy 5'5 to 5'7 and Olivia 5'5 to 5'8 (data/heights.json). Mood poses are drawn at the walk's draw scale, so they grew with the
+# figure (3 and 4.6 percent) while the standing head stayed Tom's size; each factor took half of that back (1.89 to 1.92, 1.32 to 1.35), the same
+# height and face split as above.
+EMO_HEAD = {'tom': 1.39, 'tnb': 1.35, 'grace': 1.37, 'rose': 1.67, 'amy': 1.36, 'justin': 1.32, 'deedee': 1.30, 'boppy': 1.92, 'olivia': 1.35, 'ellie': 1.43}
 
 # npcemo7 (2026-11-10, Tom: "implement them"): the 58 townsfolk plus Jojo and Michael get mood poses too (art/emotions/<id>.webp). Their sets are written to data/npc-poses.js, not
 # data/story-poses.js, so the cast file stays small. Size rule, same as the cast (mean of height match and face match), computed here per person, no hand tuning:
 #   height match = upright mood height over the standing frame's height (both full figures);
-#   face match   = (chin share x upright mood height) over the standing head height (TOM_HEAD_ROWS x k for adults, KID_HEAD_ROWS x k for Pip, Moss, Dot), because the walk bake
+#   face match   = (chin share x upright mood height) over the standing head height (Tom's head rows x k for adults, KID_HEAD_ROWS x k for Pip, Moss, Dot), because the walk bake
 #                  made every adult head as tall as Tom's. Jojo and Michael have no chin table: height match only.
 # 'Upright' = the median height of happy, loving, surprised, proud, unimpressed (sad, angry and scared bow or crouch).
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -117,7 +120,7 @@ def npc_emo_head(pid):
     hm = float(np.median(hs))
     f_h = hm / st.height
     if pid in TC.CHIN:
-        head_rows = TC.KID_HEAD_ROWS if pid in TC.KIDS else TC.TOM_HEAD_ROWS
+        head_rows = TC.KID_HEAD_ROWS if pid in TC.KIDS else TC._W.tom_head_rows()
         f_f = TC.CHIN[pid] * hm / (head_rows * k)
         return (f_h + f_f) / 2, f_h, f_f
     return f_h, f_h, f_h

@@ -51,8 +51,11 @@ with sync_playwright() as pw:
             p.click('#grps button[data-g=%s]' % p.evaluate('__HS.M.chars["%s"].group' % cid)); p.click('#chips button[data-id=%s]' % cid)
             g1 = p.evaluate('__HS.geom("%s",1)' % cid); g2 = p.evaluate('__HS.geom("%s",1.2)' % cid)
             ck(name + ': ' + cid + ' head grows with the factor', g2['head'] > g1['head'] * 1.15, (g1, g2))
-            fixed = p.evaluate('__HS.M.chars["%s"].mode' % cid) == 'fixed'
-            ck(name + ': ' + cid + (' whole height kept' if fixed else ' body kept'), abs(g2['whole'] - g1['whole']) < .3 if fixed else abs(g2['sb'] - g1['sb']) < 1e-9, (g1, g2))
+            ck(name + ': ' + cid + ' whole height kept', abs(g2['whole'] - g1['whole']) < .3, (g1, g2))
+            R = p.evaluate('__HS.M.chars["%s"].R' % cid); ck(name + ': ' + cid + ' drawn at its real height', abs(g1['whole'] - R) < .3, (g1['whole'], R))
+        a1 = p.evaluate('__HS.geom("amy",1)'); p.evaluate('__HS.setF("tom",1.2)'); a2 = p.evaluate('__HS.geom("amy",1)'); g2 = p.evaluate('__HS.geom("grace",1)'); p.evaluate('__HS.setF("tom",1)')
+        ck(name + ': adults follow Tom\'s head', a2['head'] > a1['head'] * 1.1 and abs(a2['whole'] - a1['whole']) < .3, (a1, a2))
+        ck(name + ': kids do not follow Tom\'s head', abs(g2['head'] - p.evaluate('__HS.geom("grace",1)')['head']) < 1e-6)
         p.click('#grps button[data-g=family]'); p.click('#chips button[data-id=amy]'); h0 = p.evaluate('__HS.geom("amy",1)')['head']
         p.fill('#sl', '110'); p.dispatch_event('#sl', 'input')
         ck(name + ': slider sets the factor', abs(p.evaluate('__HS.draft.amy') - 1.10) < 1e-9)

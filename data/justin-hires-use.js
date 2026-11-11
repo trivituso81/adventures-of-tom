@@ -11,6 +11,5 @@
     const rows=O[d+'_'+n]; return paintRows(flip?rows.map(r=>r.split('').reverse().join('')):rows.slice(),'justinOw',d+'_'+n,flip); });
   const set={pal:O.pal,down:mk('down'),up:mk('up'),side:mk('left',true)};
   set.left=set.side.map(mirrorRows);
-  set.k=.849;   // real height 6'4 = 1.07 x Tom (42.0 rows); the sheet's stand is 53.0 visible rows (re-measured 11-05)
   OW.justin=set;
 })();

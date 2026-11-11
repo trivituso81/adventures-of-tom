@@ -11,9 +11,12 @@
 heads.html (ADMIN > HEAD SIZES) is Tom's screen: sliders, a before and after on the body, and the head row. Its SAVE writes data/head-requests.json;
 Claude then runs apply-requests. Run `manifest` again whenever a walk sheet or a head rule changes (the page draws from its numbers).
 
-A factor multiplies the head on top of the standing rules (1.10 = 10 percent bigger head). Adults: head height is Tom's times the factor and the
-whole figure keeps its real on-screen height (body scale follows). Kids (Grace, Rose): the head growth is multiplied, body unchanged.
-Tom and Nara are adjustable too (painted as is until a factor is set; the whole figure keeps its height). Townsfolk (21, group Town): same rule as adults (head = Pip/Moss/Dot Grace-sized 9.2 rows or Tom's, times the factor; whole figure keeps its height); apply rebakes all 21 with bake_townsfolk.py. Jojo: head share .365 x factor, whole figure stays 42 rows (bake_jojo.py rebakes her walk and her battle stance too, which reproduce byte for byte). Michael is NOT adjustable (tried 11-10: grow_head about his chin also enlarges Lachlan's and Isla's heads, which sit beside his chin in every frame, and clips Isla's bow).
+A factor multiplies the head (1.10 = 10 percent bigger head). EVERYONE keeps their real on-screen height at any factor (heights1, 2026-11-11):
+the head changes about the chin and the body scale follows. Heights come from data/heights.json (family) and npc-prompts.js (townsfolk).
+Adults' heads are Tom's head times their own factor, so a factor on Tom moves every adult: applying Tom rebakes all adults and the townsfolk.
+Tom, Nara, Grace and Rose are painted as is until a factor is set. Jojo goes through walk_sheet_frames like the family (bake_jojo.py rebakes her).
+The Head Row's red line is the true bottom of the chin, measured on the current sheet (chin_lines.json; `manifest` warns when a sheet is newer than
+its measurement and falls back to the bake's chin anchor).
 Rules kept: height first, a head row is shown before and after, nothing is re-baked unless asked for that character (apply takes ids explicitly).
 Preview images go to /tmp/headrow/ (CHECK=path to choose)."""
 import os, sys, json, subprocess
@@ -29,8 +32,12 @@ ORDER = ORDER + TOWN
 NAMES = {'justin': 'Justin', 'tnb': 'TNB', 'tom': 'Tom', 'boppy': 'Boppy', 'amy': 'Amy', 'deedee': 'Deedee', 'olivia': 'Olivia', 'ellie': 'Ellie', 'grace': 'Grace', 'rose': 'Rose', 'nara': 'Nara', 'jojo': 'Jojo'}
 NAMES.update({c: c.capitalize() for c in TOWN})
 GROUP = {c: ('town' if c in TOWN else 'family') for c in ORDER}
-KID_ROWS = {'grace': 39, 'rose': 37}
-PLAIN_ROWS = {'tom': 42.0, 'nara': 32.0}   # on-screen rows of the whole standing figure (Tom 5'11 = 42; Nara from data/nara-hires.js)
+NARA_ROWS = 32.0   # Nara's standing figure on screen (data/nara-hires.js); a dog has no height in data/heights.json
+def rows_of(cid):
+    """On-screen rows of the whole standing figure: the real height next to Tom."""
+    return NARA_ROWS if cid == 'nara' else TF.target_rows(cid) if cid in TOWN else W.figure_rows(cid)
+def inches_of(cid):
+    return None if cid == 'nara' else TF.real_inches(cid) if cid in TOWN else W.INCHES[cid]
 ZOOM = 4
 
 def parse(args):
@@ -41,19 +48,18 @@ def parse(args):
 
 def figure(cid, tweak):
     """(stand figure image, on-screen rows per source px, head height in source px of that image) with `tweak` applied in memory."""
+    W.HEAD_TWEAK.clear(); W.HEAD_TWEAK.update(tweak)
     if cid in TOWN:   # same maths as bake_townsfolk.py: head = T x factor on screen, body scale follows, whole figure keeps its height
         from kidhead import grow_head
         fig = TF.stand(cid); H0 = fig.height; chin = TF.CHIN[cid] * H0; R = TF.target_rows(cid)
-        T = (TF.KID_HEAD_ROWS if cid in TF.KIDS else TF.TOM_HEAD_ROWS) * tweak.get(cid, 1.0); sb = (R - T) / (H0 - chin)
+        T = (TF.KID_HEAD_ROWS if cid in TF.KIDS else W.tom_head_rows()) * tweak.get(cid, 1.0); sb = (R - T) / (H0 - chin)
         return grow_head(fig, T / (chin * sb), chin), sb, T / sb
-    W.HEAD_TWEAK.clear(); W.HEAD_TWEAK.update(tweak); W.UNWARPED_H.clear(); W.BODY_ROWS_PER_PX.clear()
+    W.UNWARPED_H.clear(); W.BODY_ROWS_PER_PX.clear(); W.BODY_SCALE.clear()
     fr = W.build(cid, fix=True)['w_down_stand']
     if cid in W.PLAIN:
-        H = W.UNWARPED_H[cid]; s = PLAIN_ROWS[cid] / H * W.BODY_SCALE.get(cid, 1.0); head = W.PLAIN[cid] * H * tweak.get(cid, 1.0) / W.BODY_SCALE.get(cid, 1.0)
-    elif cid in W.WALK_MATCH:
-        rows, k = W.WALK_MATCH[cid][1:]; s = W.BODY_ROWS_PER_PX[cid] * k; head = W.TOM_HEAD_ROWS * tweak.get(cid, 1.0) / s
+        H = W.UNWARPED_H[cid]; s = rows_of(cid) / H * W.BODY_SCALE.get(cid, 1.0); head = W.PLAIN[cid] * H * tweak.get(cid, 1.0) / W.BODY_SCALE.get(cid, 1.0)
     else:
-        s = KID_ROWS[cid] / W.UNWARPED_H[cid]; chin, kh = W.GROW[cid]; head = chin * W.UNWARPED_H[cid] * kh * tweak.get(cid, 1.0)
+        s = W.BODY_ROWS_PER_PX[cid] * W.draw_k(cid); head = W.tom_head_rows() * tweak.get(cid, 1.0) / s
     return fr, s, head
 
 def panel(tweak, label):
@@ -87,26 +93,35 @@ def show(tweak):
 
 REQ = os.path.join(ROOT, 'data', 'head-requests.json')
 MAN = os.path.join(ROOT, 'data', 'head-sizes.json')
+CHINS = os.path.join(HERE, 'chin_lines.json')
+def sheet_of(cid):
+    return os.path.basename(TF.LIBRARY_WALK[cid] if cid in TOWN else W.src(cid))
+def follows_tom(cid):
+    """Adults whose head is Tom's head times their own factor (a factor on Tom moves them)."""
+    return cid in W.WALK_MATCH or (cid in TOWN and cid not in TF.KIDS)
 def manifest():
-    """data/head-sizes.json + art/heads/<id>.webp: for each adjustable character the painted standing figure (tight crop) and the numbers heads.html needs
-    to redraw the head at any factor exactly as walk_sheet_frames builds it: mode 'fixed' (adults, Tom, Nara: head = hr0 x factor on screen, body scale
-    follows so the whole figure keeps height R rows) or 'body' (kids: head growth k0 x factor, body scale sb unchanged)."""
+    """data/head-sizes.json + art/heads/<id>.webp: for each adjustable character the painted standing figure and the numbers heads.html needs to redraw
+    the head at any factor exactly as the bakes build it: head = hr0 x factor on screen (x Tom's factor when `follows` is set), body scale follows so the
+    whole figure keeps height R rows (the real height `inches` next to Tom). `chin` is the bake's head anchor; `line` is the true bottom of the chin on
+    this sheet (chin_lines.json, measured by eye with tools/sprite-bake/chin_ruler.py), which the Head Row puts on the red line."""
     cur = json.load(open(TWEAK)) if os.path.exists(TWEAK) else {}
+    lines = json.load(open(CHINS)) if os.path.exists(CHINS) else {}
     os.makedirs(os.path.join(ROOT, 'art', 'heads'), exist_ok=True); out = {'zoom': 1, 'order': ORDER, 'chars': {}}
+    W.HEAD_TWEAK.clear()
     for cid in ORDER:
-        W.HEAD_TWEAK.clear(); W.UNWARPED_H.clear(); W.BODY_ROWS_PER_PX.clear(); W.BODY_SCALE.clear()
-        fig = TF.stand(cid) if cid in TOWN else W.grid(W.src(cid), 3, 3)[0]; H = fig.height; top = fig.getbbox()[1]; bb = fig.getbbox()
-        a = np.array(fig)[:, :, 3] > 40
-        if cid in TOWN: chin = TF.CHIN[cid] * H; mode = 'fixed'; R = TF.target_rows(cid); hr0 = TF.KID_HEAD_ROWS if cid in TF.KIDS else TF.TOM_HEAD_ROWS
-        elif cid in W.WALK_MATCH: chin = W.WALK_MATCH[cid][0] * H; mode = 'fixed'; R = W.WALK_MATCH[cid][1] * W.WALK_MATCH[cid][2]; hr0 = W.TOM_HEAD_ROWS
-        elif cid in W.PLAIN: chin = W.PLAIN[cid] * H; mode = 'fixed'; R = PLAIN_ROWS[cid]; hr0 = R * chin / H
-        else: chin = W.GROW[cid][0] * H; mode = 'body'; R = KID_ROWS[cid]; hr0 = 0
+        fig = TF.stand(cid) if cid in TOWN else W.grid(W.src(cid), 3, 3)[0]; H = fig.height
+        a = np.array(fig)[:, :, 3] > 40; R = rows_of(cid)
+        if cid in TOWN: chin = TF.CHIN[cid] * H; hr0 = TF.KID_HEAD_ROWS if cid in TF.KIDS else W.tom_head_rows()
+        elif cid in W.WALK_MATCH: chin = W.WALK_MATCH[cid][0] * H; hr0 = W.tom_head_rows()
+        else: chin = W.PLAIN[cid] * H; hr0 = R * chin / H
+        ln = lines.get(cid)
+        if ln and ln['sheet'] == sheet_of(cid): line = ln['share'] * H
+        else: line = chin; print('WARNING %s: no chin line measured on %s (run chin_ruler.py, read the chin, add it to chin_lines.json); using the bake anchor' % (cid, sheet_of(cid)))
         sx = np.where(a[max(0, int(chin) - 10):int(chin), :].any(0))[0]; ax = float(sx.mean()) if len(sx) else fig.width / 2.0
-        crop = fig.crop((0, 0, fig.width, H)); crop.save(os.path.join(ROOT, 'art', 'heads', cid + '.webp'), 'WEBP', lossless=True, quality=100, method=6)
-        e = {'name': NAMES[cid], 'img': 'art/heads/%s.webp' % cid, 'w': fig.width, 'h': H, 'top': int(np.where(a.any(1))[0].min()), 'chin': round(chin, 2), 'ax': round(ax, 2), 'taper': 12, 'mode': mode, 'group': GROUP[cid], 'applied': cur.get(cid, 1.0)}
-        if mode == 'fixed': e.update(R=round(R, 3), hr0=round(hr0, 4))
-        else: e.update(s0=round(R / H, 6), k0=W.GROW[cid][1])
-        out['chars'][cid] = e
+        fig.save(os.path.join(ROOT, 'art', 'heads', cid + '.webp'), 'WEBP', lossless=True, quality=100, method=6)
+        out['chars'][cid] = {'name': NAMES[cid], 'img': 'art/heads/%s.webp' % cid, 'w': fig.width, 'h': H, 'top': int(np.where(a.any(1))[0].min()), 'chin': round(chin, 2), 'line': round(line, 2),
+                             'ax': round(ax, 2), 'taper': 12, 'group': GROUP[cid], 'applied': cur.get(cid, 1.0), 'R': round(R, 3), 'hr0': round(hr0, 4),
+                             'follows': 'tom' if follows_tom(cid) else None, 'inches': inches_of(cid)}
     json.dump(out, open(MAN, 'w'), indent=1); print('manifest ->', MAN, len(out['chars']), 'characters')
 
 def requests():
@@ -120,6 +135,8 @@ def apply(ids, tweak):
         else: cur[k] = v
     json.dump(cur, open(TWEAK, 'w'), indent=1, sort_keys=True)
     if not cur: os.remove(TWEAK)
+    if 'tom' in tweak:   # Tom's head is the adults' baseline: every adult follows, so every adult walk is rebaked
+        ids = list(dict.fromkeys(list(ids) + [c for c in ORDER if follows_tom(c)]))
     if 'jojo' in ids:
         r = subprocess.run(['python3', 'tools/sprite-bake/bake_jojo.py'])
         if r.returncode: sys.exit(r.returncode)
@@ -131,6 +148,9 @@ def apply(ids, tweak):
         r = subprocess.run(['python3', 'tools/sprite-bake/bake_townsfolk.py'])
         if r.returncode: sys.exit(r.returncode)
     manifest()
+    for cmd in (['python3', 'tools/sprite-bake/heights.py', 'write'], ['python3', 'tools/heights_test.py']):   # draw scales follow the new art; then prove every height still holds
+        r = subprocess.run(cmd)
+        if r.returncode: sys.exit(r.returncode)
     return 0
 
 if __name__ == '__main__':

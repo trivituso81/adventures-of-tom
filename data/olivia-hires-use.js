@@ -11,6 +11,5 @@
     const rows=O[d+'_'+n]; return paintRows(flip?rows.map(r=>r.split('').reverse().join('')):rows.slice(),'oliviaOw',d+'_'+n,flip); });
   const set={pal:O.pal,down:mk('down'),up:mk('up'),side:mk('left',true)};
   set.left=set.side.map(mirrorRows);
-  set.k=.914;   // 5'5 (assumed, not given yet) next to Tom 5'11 (42.0 visible rows); her walk-sheet stand is 42.0 rows (walksheet3, was 44.3 at .867)
   OW.olivia=set;
 })();
