@@ -20642,8 +20642,16 @@
    "prompt": "Paint a new sheet of the Oblivion Censor, the man in attachment 2, as a handbrushed painting. Attachment 2 is the current painting of him in the game: paint the same man, with the same shape, colors, materials and details, at the same size in each cell, in the same view, facing right. Do not repeat the poses of attachment 2. Paint 6 NEW poses in a 3 by 2 layout, one pose alone in each cell with clear magenta all around it and nothing crossing into another cell. These poses show the moment after the fight, when the anger has gone out: the mood is gentle, warm and a little funny, never fierce. In attachment 2 a black covering hides his whole face. Under it he is a small, pale, tired clerk with kind sad eyes, gray stubble and ink stains on his cuffs. Top row: 1 the same upright pose as the first pose of attachment 2, at exactly the same size, but calm: the black covering still over his face, the arm with the ink brush lowered, the letters held loosely, the head tilted, the white eyes soft. 2 lowering the stamp: the covering still on, a wooden rubber stamp hanging in his lowered hand, the shoulders dropped. 3 half shown: the black covering slid halfway to one side, showing half of the pale tired face and one human eye. Bottom row: 4 shown: the whole tired face visible with a small weary smile, the cap crooked, the black covering hanging loose at his collar like an untied scarf. 5 the pretzel: the face visible, holding one big soft pretzel carefully in both hands as if it were made of glass, the letters tucked under one arm. 6 the stamp: the face visible, pressing the wooden rubber stamp down onto a paper napkin held flat on his other palm, the tip of his tongue showing in concentration. The napkin is blank. Paint only what each pose names: no glows, speed lines, sparkles or splashes unless a pose asks for them, and no letters, numbers or words anywhere. Paint and finish it like attachment 1: matte, thick visible brush strokes on the figure, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/ending-leviathan-v1.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794437138369
+    }
+   ],
    "rejects": [],
    "id": "ending-leviathan",
    "tab": "Enemies",
