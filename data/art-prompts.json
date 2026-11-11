@@ -20298,8 +20298,16 @@
    "group": "Jojo"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/ending-bigone-v1.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794437247839
+    }
+   ],
    "rejects": [],
    "id": "ending-bigone",
    "tab": "Enemies",
