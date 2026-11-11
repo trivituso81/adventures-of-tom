@@ -1,3 +1,8 @@
+## 2026-11-11 (portraits12): Justin, Olivia, Michael, Ellie added to the portrait crop tool
+- Tom 10:13: add Justin, Olivia, Michael, Ellie to portrait crops. `portraits.html` now has 12 chips (the eight plus these four). Justin, Olivia, Ellie already had measured FACE crops; Michael got one (`FACE['michael']`, measured on `michael-hero-ref-v1.png`, the dad in the family group). `bake_portraits.py` rebaked: Michael's `portraits/michael.png` is new, every other portrait is byte for byte unchanged; `data/portrait-crops-base.json` gained Michael.
+- Looked at: the contact sheet and the page at 393 x 852 (all chips, Michael loads, no errors). Not wired into the game: Michael has no status or battle menu use yet. His default crop shows a sliver of his daughter's bow and son's hair at the edges; Tom can tighten it in the page and Save.
+- Page is untagged, so no tag bump.
+
 ## 2026-11-11 (cast3): Welcome screen: TNB closer to Tom, Olivia no longer hidden behind TNB (tag cast3)
 - Tom 09:51: make TNB a little closer to Tom and not overlapping Olivia as much.
 - `engine/splash.js` landscape: TNB x 803 to 778, Olivia 858 to 885, Michael 965 to 990. Portrait: new `frontGap` per pair (Tom to TNB .82, TNB to Nara 1.1); back row `backGap` [.5,.7,.5,.4,1.05] so Olivia stands behind the gap between Tom and TNB (her face sits above their heads) and Michael with the kids stays behind Nara.

@@ -71,7 +71,7 @@ button:disabled{opacity:.4}
         <figure><canvas id="pbig" width="128" height="128"></canvas>Big 128</figure>
       </div>
     </div>
-    <div class="card" id="rowcard" style="display:none"><h2>Head row (all eight at one size)</h2><div id="row"></div></div>
+    <div class="card" id="rowcard" style="display:none"><h2>Head row (all at one size)</h2><div id="row"></div></div>
     <div class="card"><h2>This crop</h2><div id="numbers"></div>
       <div class="act" style="margin-top:8px"><button id="save">SAVE</button><button id="export-btn">EXPORT all</button></div>
       <div id="msg"></div><textarea id="export" readonly></textarea>
@@ -80,8 +80,8 @@ button:disabled{opacity:.4}
 </div>
 <script>
 'use strict';
-const IDS=['tom','tnb','grace','rose','amy','deedee','boppy','nara'];
-const NAMES={tom:'Tom',tnb:'TNB',grace:'Grace',rose:'Rose',amy:'Amy',deedee:'Deedee',boppy:'Boppy',nara:'Nara'};
+const IDS=['tom','tnb','grace','rose','amy','deedee','boppy','nara','justin','olivia','michael','ellie'];
+const NAMES={tom:'Tom',tnb:'TNB',grace:'Grace',rose:'Rose',amy:'Amy',deedee:'Deedee',boppy:'Boppy',nara:'Nara',justin:'Justin',olivia:'Olivia',michael:'Michael',ellie:'Ellie'};
 const Q=new URLSearchParams(location.search);
 const LS={get(k){try{return localStorage.getItem(k)||'';}catch(e){return '';}},set(k,v){try{localStorage.setItem(k,v);}catch(e){}},del(k){try{localStorage.removeItem(k);}catch(e){}}};
 const $=id=>document.getElementById(id);
@@ -196,7 +196,7 @@ $('export-btn').onclick=async()=>{
   msg(ok?'Copied. Paste it to Claude.':'Select the text below and copy it, or use the downloaded file.','ok');
 };
 
-// --- start: crops json (live from GitHub when the token is set, else the site copy), the game's current crops, then the eight hero paintings
+// --- start: crops json (live from GitHub when the token is set, else the site copy), the game's current crops, then the hero paintings
 async function loadJson(path,live){
   if(live&&LS.get('aot-gh-token')){try{const g=await (async()=>{const r=await fetch(ghUrl(path)+'?ref='+GH_BRANCH+'&t='+Date.now(),{cache:'no-store',headers:{Authorization:'Bearer '+LS.get('aot-gh-token'),Accept:'application/vnd.github+json'}});return r.ok?r.json():null;})();if(g&&g.content) return JSON.parse(b64ToText(g.content)||'{}');}catch(e){}}
   try{const r=await fetch(path+'?t='+Date.now(),{cache:'no-store'});if(r.ok) return await r.json();}catch(e){}
