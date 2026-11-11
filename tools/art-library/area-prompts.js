@@ -1,5 +1,5 @@
 // Areas tab: 7 Long Island area paintings (verbatim from the Project prompt packs) with their chained cutout stencils,
-// plus 6 Los Angeles area paintings built from the same structure. Painting prompts live in prompts/areas/*.txt.
+// plus 6 Los Angeles area paintings built from the same structure, each with its own stencils (LA_STENCILS). Painting prompts live in prompts/areas/*.txt.
 const fs = require('fs');
 const P = n => fs.readFileSync(__dirname + '/prompts/areas/' + n + '.txt', 'utf8').trim();
 const entries = [];
@@ -72,6 +72,42 @@ const STYLE = "A hand-painted, hand-brushed painting, in exactly the style of at
 const SCALE = 'This is a whole game map seen from high above and far away, at the same distance as the town maps of this game. The whole area fits in the picture with generous open ground. Do not zoom in on a corner and do not make props large. A grown-up person standing on a path would be only about one fifteenth of the picture height, paths are about two people wide, and each exit board is about one seventh of the picture width.';
 const LAY2 = 'Paving, ground and grass continue unbroken under and behind every tree, lamp, bench, sign post and roof eave. Every tall object has a clear visible base with ground showing behind it. Clearly separated, small-brush painted silhouettes on tree canopies, lamps, boards and roof edges. Nothing floats. The game cuts trees, lamps, boards and roofs out as separate layers.';
 const COLORS = 'Warm golden key light #FFE1A0 from the upper left with long soft shadows falling to the lower right, faint lilac accent in shade #C8A5DC, warm shadows #716351. Clear darker contact shadow under buildings and props, an open sunlit walkable center.';
+const LA_STENCILS = {
+  blvd: [
+    { name: 'trees and tall plants', only: 'its palm trees, each from its fronds down to the base of its trunk, the leafy trees and tall flowering bushes along the left edge and the bottom edge, and the tall cypresses on the hillside beside the stone steps, each down to where it meets the ground.' },
+    { name: 'lamps, exit boards and string lights', only: 'its street lamps from lantern to base, its three green exit boards with both posts down to the ground, and the strings of lights that hang between the buildings.' },
+    { name: 'roofs, tower tops and awnings', only: 'the roof of each of the eight buildings, from the very top (with its chimneys, steam and every roof decoration such as the coffee cup, the gold star, the checkered roof sign and the coin) down to just below the eaves, the upper floors of the tall blue tower and of the movie palace above their entrance canopies, and every awning or canopy over a door or window.' },
+    { name: 'tall props', only: 'its benches, flower pots and planters, newspaper boxes, mailboxes, trash bins, the fire hydrant, and the stone balustrade along the bottom edge, each whole down to where it touches the ground.' }
+  ],
+  jpark: [
+    { name: 'trees and tall plants', only: 'its jacaranda trees, palm trees, lemon trees and every other tree, and its tall bushes, hedges and flowering shrubs, each with its full canopy or flowers and its trunk or stem down to where it meets the ground.' },
+    { name: 'lamps, exit boards and mailboxes', only: 'its street lamps from lantern to base, its three green exit boards with both posts down to the ground, and the two mailboxes on their posts.' },
+    { name: 'roofs, porch roofs and awnings', only: 'the roof of each of the four shops and each of the four houses with its chimney, gable and roof sign, the eaves, the porch roofs with their posts, and every awning, cut straight across just below the eaves, porch roofs and awnings.' },
+    { name: 'tall props', only: 'its park bench, the two bikes, the porch chairs, the laundry line with its clothes and poles, the potted plants by the shop doors, and the wooden fences, each whole down to where it touches the ground.' }
+  ],
+  griffith: [
+    { name: 'trees and tall plants', only: 'its oak and sycamore trees with their full canopies and trunks, its sage and chaparral bushes, and its agave and tall flowering yucca plants, each down to where it meets the ground.' },
+    { name: 'exit board, signs and fence posts', only: 'its green exit board with both log posts down to the ground, the wooden trailhead sign and the small warning sign on their posts, and every trail fence post with its rope.' },
+    { name: 'boulders, lookout rock, log and observatory', only: 'its boulders, the lookout rock formation with its railing, the rocks around the tar, the fallen log, and the white observatory building on the hilltop, each whole down to where it touches the ground.' }
+  ],
+  studio: [
+    { name: 'trees and tall plants', only: 'its palm trees, cypress trees, hedges, tall bushes and flowering plants, each down to where it meets the ground or its planter.' },
+    { name: 'lamps, barrier and posts', only: 'its street lamp with its banner from top to base, the wall lanterns, the striped barrier arm with its post, and the yellow bollards.' },
+    { name: 'arches, booth roof and tent', only: 'the big studio arch with its star, gold sign and green board, and the west gate arch with its green board, each with both pillars down to the ground, the red tile roof of the guard booth down to just below its eaves, and the red and white tent canopy with its banner and poles down to the ground.' },
+    { name: 'tall props', only: 'its three silver trailers with their steps, the golf cart, the two light stands, the director\'s chair, the cable reel, the clapperboard stand, the snack tables and equipment cases, the folding chairs, and the potted plants, each whole down to where it touches the ground.' }
+  ],
+  backlot: [
+    { name: 'trees and tall plants', only: 'its leafy trees, the big jungle tree with its roots, the palm and banana plants, the cactus, its tall bushes and flowering plants, and the vine arch, each down to where it meets the ground.' },
+    { name: 'lamps, exit board and fence', only: 'its street lamps from lantern to base, its green exit board with both stone pillars down to the ground, the iron fence with its stone posts, the blank notice board on its legs, and the hitching posts.' },
+    { name: 'roofs, set tops and awnings', only: 'the roof of each Western building with its false front, the windmill and the water tower, the wooden scaffolding, the upper floors and fire escapes of the brick buildings above their awnings, every awning and porch roof with its posts, and the top of the soundstage above its big door with the red light, cut straight across just below the eaves, porch roofs and awnings.' },
+    { name: 'tall props', only: 'its covered wagon, the two striped food carts, the barrels, the benches, the cafe table and chairs, the clapperboard, and the rocks and waterfall of the jungle set, each whole down to where it touches the ground.' }
+  ],
+  oakpark: [
+    { name: 'the old oak, trees and tall plants', only: 'the huge old oak with its whole canopy, trunk and roots, every other tree with its canopy and trunk, the palms along the bottom edge, its tall hedges and bushes, and the tall sunflowers, each down to where it meets the ground.' },
+    { name: 'lamps, exit board, signs and fences', only: 'its lamp posts from lantern to base, its green exit board with both posts and stone bases, the garden sign, the dog park sign, the two notice boards on their posts, the wooden fences, and the wire dog park fence with its gate.' },
+    { name: 'play equipment, garden and tall props', only: 'its slide tower, swing set, climbing dome and spring rider, the garden shed and bean trellis, the picnic tables with their benches, the grill, the drinking fountain, the park benches, the trash bins, the dog ramp, hoop and tunnel, the fire hydrant, and the boulders, each whole down to where it touches the ground.' }
+  ]
+};
 function la(a) {
   const W = a.tw * 64, H = a.th * 64;
   const refs = ['art/' + a.id + '.webp', 'art/grands.webp'];
@@ -91,6 +127,13 @@ function la(a) {
     'Deliver the single environment painting itself. Do not replace the painting with a description of it.'
   ].join('\n\n');
   entries.push({ id: 'area-' + a.id, tab: 'Areas', title: a.name + ': painting, painted redo (' + W + ' x ' + H + '; attach the listed pictures)', ar: a.ar, refs, prompt: text });
+  // stencils (added 2026-11-11): the reference is the installed plate, as in the json for the Long Island stencils
+  (LA_STENCILS[a.id] || []).forEach((s, i, all) => entries.push({
+    id: 'area-' + a.id + '-cut' + (i + 1), tab: 'Areas',
+    title: a.name + ': stencil ' + (i + 1) + ' of ' + all.length + ', ' + s.name + ' (same chat, send after the painting is approved)',
+    ar: a.ar, refs: ['art/' + a.id + '.webp'],
+    prompt: stencil(a.name, s)
+  }));
 }
 
 la({ id: 'blvd', num: 'Area 08', name: 'Downtown LA', tw: 30, th: 26, ar: '1:1',

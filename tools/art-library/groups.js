@@ -23,7 +23,6 @@ const ROOM_GROUPS = {
   'Studio and Car Barn': ['stage7', 'stageset', 'carbarn', 'boiler']
 };
 const ROOM_OF = {}; for (const [g, ids] of Object.entries(ROOM_GROUPS)) for (const id of ids) ROOM_OF['room-' + id] = g;
-const LA_PLATES = new Set(['area-blvd', 'area-jpark', 'area-griffith', 'area-studio', 'area-backlot', 'area-oakpark']);
 const FOE_TABLE = {};
 try { for (const l of fs.readFileSync(__dirname + '/prompts/enemy-table.txt', 'utf8').trim().split('\n')) { const [id, area] = l.split('|'); if (id && area) FOE_TABLE['enemy-' + id] = area; } } catch (e) {}
 
@@ -37,7 +36,6 @@ function groupOf(e) {
     }
     case 'NPCs': { const n = +e.id.replace('npc-batch-', ''); return n >= 1 && n <= 4 ? 'Long Island' : n >= 5 ? 'Los Angeles' : fail('batch number'); }
     case 'Areas': {
-      if (LA_PLATES.has(e.id)) return 'Los Angeles paintings';
       const g = String(e.title).split(':')[0].trim(); return g.length >= 3 && g.length <= 40 ? g : fail('title');
     }
     case 'Rooms': return ROOM_OF[e.id] || fail('room not in ROOM_GROUPS');
