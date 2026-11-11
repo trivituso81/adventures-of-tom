@@ -15678,8 +15678,16 @@
    "group": "Airport"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/rooms/room-concourse-cut1-v1.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794440721198
+    }
+   ],
    "rejects": [],
    "id": "room-concourse-cut1",
    "tab": "Rooms",
