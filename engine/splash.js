@@ -566,17 +566,19 @@ const SPLASH_BREATH={amp:.011,speed:1.0};   // slow rise and fall: amp = lift as
 const SPLASH_H={tom:308,tnb:304,justin:330,boppy:291,amy:282,deedee:282,grace:230,rose:185,nara:130};
 // Landscape and any wide window (Tom 2026-11-06 11:43): Tom stands dead centre under the logo (x 520 = the screen centre). To his left: TNB, then Nara.
 // To his right, front row: Rose, Grace, Deedee, Boppy. Amy and Justin stand behind Rose and Grace. Design units (x = centre, feet = baseline); later in the list draws on top.
-const SPLASH_LAND={cx:520,feet0:1222,sx:1,sy:.7,span:890,tall:331,fracW:.74,fracH:.42,feetY:.79};
+const SPLASH_LAND={feet0:1222,sx:1,sy:.7,span:890,tall:331,fracW:.74,fracH:.42,feetY:.79};
+// Order mirrored (Tom 2026-11-11 09:00): the Long Island family stands on the Long Island side of the welcome painting (left), the Los Angeles
+// family on the LA side (right). x' = 1208 - x, the group's own middle, so the group stays where it was.
 const SPLASH_SPOTS=[
-  {id:'justin',x:705,feet:1150},{id:'amy',x:605,feet:1150},
-  {id:'nara',x:304,feet:1250},{id:'tnb',x:405,feet:1222},{id:'tom',x:520,feet:1222},
-  {id:'rose',x:612,feet:1222},{id:'grace',x:695,feet:1222},{id:'deedee',x:791,feet:1222},{id:'boppy',x:904,feet:1222}
+  {id:'justin',x:503,feet:1150},{id:'amy',x:603,feet:1150},
+  {id:'boppy',x:304,feet:1222},{id:'deedee',x:417,feet:1222},{id:'grace',x:513,feet:1222},{id:'rose',x:596,feet:1222},
+  {id:'tom',x:688,feet:1222},{id:'tnb',x:803,feet:1222},{id:'nara',x:904,feet:1250}
 ];
-// Portrait (iPhone tuning, Tom 2026-11-06): two rows. Front, left to right: Nara, TNB, Tom, Rose, Grace.
+// Portrait (iPhone tuning, Tom 2026-11-06; order mirrored 2026-11-11 so Long Island people stand on the Long Island side): two rows. Front, left to right: Grace, Rose, Tom, TNB, Nara.
 // SPLASH_W = painted figure width over height (arms included). Front figures are spaced at `gap` of their widths, the back row is `depth` design units further
 // back, and the group scales so the tallest figure plus the depth fills fracH of the screen height (about 40% bigger than the old single line).
 const SPLASH_W={tom:.334,tnb:.381,justin:.426,boppy:.410,amy:.333,deedee:.349,grace:.375,rose:.388,nara:.599};
-const SPLASH_PORT={front:['nara','tnb','tom','rose','grace'],back:['deedee','boppy','amy','justin'],gap:1.0,backGap:[.78,1.25,.78],   // Deedee+Boppy and Amy+Justin stand as pairs, the gap between the pairs is wider (Tom 07:49)
+const SPLASH_PORT={front:['grace','rose','tom','tnb','nara'],back:['justin','amy','boppy','deedee'],gap:1.0,backGap:[.78,1.25,.78],   // Justin+Amy and Boppy+Deedee stand as pairs, the gap between the pairs is wider (Tom 07:49)
   depth:125,fracW:.94,fracH:.43,feetY:.74};
 function splashPortLayout(w,h) {
   const P=SPLASH_PORT,wid=id=>SPLASH_H[id]*SPLASH_W[id];
@@ -589,13 +591,19 @@ function splashPortLayout(w,h) {
   for(const b of back) b.x+=shift;
   const all=front.concat(back),lo=Math.min(...all.map(f=>f.x-f.ww/2)),hi=Math.max(...all.map(f=>f.x+f.ww/2));
   const tall=Math.max(...P.front.concat(P.back).map(i=>SPLASH_H[i]));
-  const sc=Math.min(w*P.fracW/(hi-lo),h*P.fracH/(tall+P.depth)),mc=(lo+hi)/2,feet=h*P.feetY;
+  // Tom is always at the centre of the screen (Tom 2026-11-11 09:03): the group is placed around Tom, sized by its wider half.
+  const mc=front.find(f=>f.id==='tom').x,half=Math.max(mc-lo,hi-mc);
+  const sc=Math.min(w*P.fracW/(2*half),h*P.fracH/(tall+P.depth)),feet=h*P.feetY;
   const put=(f,fy)=>({id:f.id,cx:w/2+(f.x-mc)*sc,feet:fy,hh:SPLASH_H[f.id]*sc});
   return back.map(f=>put(f,feet-P.depth*sc)).concat(front.map(f=>put(f,feet)));
 }
 function splashLandLayout(w,h) {
-  const L=SPLASH_LAND,sc=Math.min(w*L.fracW/L.span,h*L.fracH/L.tall),baseY=h*L.feetY;
-  return SPLASH_SPOTS.map(m=>({id:m.id,cx:w/2+(m.x-L.cx)*L.sx*sc,feet:baseY+(m.feet-L.feet0)*L.sy*sc,hh:SPLASH_H[m.id]*sc}));
+  // Tom is always at the centre of the screen (Tom 2026-11-11 09:03): spots are placed around Tom's spot; the span grows to the wider half
+  // plus the same edge margin the old centred span had (L.span minus the spread of the spots).
+  const L=SPLASH_LAND,xs=SPLASH_SPOTS.map(m=>m.x),tx=SPLASH_SPOTS.find(m=>m.id==='tom').x,lo=Math.min(...xs),hi=Math.max(...xs);
+  const span=2*Math.max(tx-lo,hi-tx)+(L.span-(hi-lo));
+  const sc=Math.min(w*L.fracW/span,h*L.fracH/L.tall),baseY=h*L.feetY;
+  return SPLASH_SPOTS.map(m=>({id:m.id,cx:w/2+(m.x-tx)*L.sx*sc,feet:baseY+(m.feet-L.feet0)*L.sy*sc,hh:SPLASH_H[m.id]*sc}));
 }
 // Visible rows of a frame (first and last row with any paint): the painted frames carry different empty margins, so sizing by the whole frame made some people 2% to 6% off.
 const splashRowsCache={};

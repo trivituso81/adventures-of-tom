@@ -1,3 +1,9 @@
+## 2026-11-11 (castflip1): Welcome screen family order reversed, Tom always at the screen centre
+- Tom 09:00: reverse the order of the people so each stands on the side of the welcome painting they come from (Long Island on the left with the lighthouse, Los Angeles on the right with the palms). Tom 09:03: Tom is always at the centre of the screen in every viewport.
+- `engine/splash.js`: landscape spots mirrored (x' = 1208 - x, each keeps its row): Boppy, Deedee, Grace, Rose, TOM, TNB, Nara in front, Justin and Amy behind. Portrait rows reversed: front Grace, Rose, TOM, TNB, Nara; back Justin, Amy, Boppy, Deedee.
+- Both layouts now place the group around Tom instead of around the group's middle, and size it by its wider half, so Tom is at half the screen width in any size (the group is a little smaller in landscape because the Long Island side is wider).
+- Checked (Tom's x = half the width): phone portrait 390 x 844 and 375 x 667, phone landscape 844 x 390, iPad both ways, Duo open 951 x 648, Duo upright 669 x 869, Duo folded 466 x 657, desktop. Screenshots looked at. Tag castflip1, smoke FAILS [].
+
 ## 2026-11-11 (title7): Title art no longer grainy
 - Tom: the title logo and background look grainy. Cause (fact): the baker ran two sharpening passes on the welcome paintings, which boosted the paint texture into grain, and the logo (925 px wide) was stretched on screen.
 - `tools/title-bake/bake_title.py`: no sharpening; portrait welcome 2x Lanczos upscale; light colour denoise (strength 3) on both welcome paintings; logo denoised (strength 4) before keying and saved at 2x (1850 x 966).
