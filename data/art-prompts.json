@@ -20443,8 +20443,16 @@
    "prompt": "Paint a new sheet of Chairman Cheeks, the creature in attachment 2, as a handbrushed painting. Attachment 2 is the current painting of it in the game: paint the same creature, with the same shape, colors, materials and details, at the same size in each cell, in the same view, facing right. Do not repeat the poses of attachment 2. Paint 6 NEW poses in a 3 by 2 layout, one pose alone in each cell with clear magenta all around it and nothing crossing into another cell. These poses show the moment after the fight, when the anger has gone out: the mood is gentle, warm and a little funny, never fierce. Top row: 1 the same upright pose as the first pose of attachment 2, at exactly the same size, but calm: seated on the gilded red throne, the paws folded on his belly, the eyes soft behind the monocle, a small smile. 2 the gavel: standing up on the throne seat, banging a single acorn down on the armrest like a gavel, the chin lifted. 3 the tie: standing on the ground with no throne in the cell, straightening his red tie with both paws, the top hat tipped forward, the robe slipping off his shoulders. Bottom row: 4 the farewell: standing on the ground with no throne, lifting the top hat high in one paw, the bushy tail up, a gracious smile. 5 the leap: in mid air with arms and legs spread wide like a flying squirrel, the red robe streaming behind like a cape, one paw holding the hat on. 6 the empty throne alone, with nobody in it, the red robe with its white fur trim draped over one arm of the chair. Paint only what each pose names: no glows, speed lines, sparkles or splashes unless a pose asks for them, and no letters, numbers or words anywhere. Paint and finish it like attachment 1: matte, thick visible brush strokes on the figure, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/ending-unread-v1.png",
+     "date": "2026-11-11",
+     "from": "v3",
+     "at": 1794438258337
+    }
+   ],
    "rejects": [],
    "id": "ending-unread",
    "tab": "Enemies",
