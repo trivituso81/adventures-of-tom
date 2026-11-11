@@ -211,7 +211,7 @@ function drawIntroWorld(time) {
     // Shouted from off to the left: pin it to the left edge of the screen until the girls are in view.
     const gx=g.hidden?-1e9:(position(g).x+.5)*T;
     const x=Math.round(Math.max(camera.x+w/2+8,gx)),y=Math.round((player.y+.3)*T-40+Math.sin(time*20)*1.5);
-    rect(x-w/2-2,y-2,w+4,18,OUT); rect(x-w/2,y,w,14,'#fff1cb');
+    BUBBLE.draw('burst',x,y+7,w+48,44);
     label(txt,x,y+2,'#b4553f',sc);
   }
   for(const hh of intro.hearts) {

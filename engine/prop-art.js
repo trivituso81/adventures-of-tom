@@ -20,6 +20,20 @@ const PROPART=(()=>{
   const preload=ids=>{ for(const id of ids) get(id); };
   return {draw,ready,preload,get,hits};
 })();
+// Painted speech bubbles (art/props/ui, cut by tools/sprite-bake/bake_bubbles.py from the approved Library sheet prop-bubble-a).
+// BUBBLE.draw(kind,cx,cy,w,h,tx,ty): kind 'oval' | 'rect' | 'burst' | 'cloud'; (cx,cy) is the centre of the body, w by h its size, and (tx,ty) the
+// point a tail should reach (omit for no tail). Oval and rect get the loose painted tail, a cloud gets three trailing dots. The tail is drawn first so
+// the body covers its root. Words and contents are drawn by the caller over the blank body.
+const BUBBLE=(()=>{
+  const tail=(cx,cy,w,h,tx,ty)=>{ const bx=Math.max(cx-w/2+h*.35,Math.min(cx+w/2-h*.35,cx+(tx-cx)*.35)),by=cy+h/2-h*.12,vx=tx-bx,vy=ty-by,L=Math.hypot(vx,vy); if(L<8) return;
+    PROPART.draw('ui/bubble_tail',(bx+tx)/2,(by+ty)/2,{w:Math.max(16,Math.min(30,L*.5)),h:L,rot:Math.atan2(-vx,vy),flip:vx<0}); };
+  const dots=(cx,cy,w,h,tx,ty)=>{ const bx=Math.max(cx-w/2+h*.3,Math.min(cx+w/2-h*.3,cx+(tx-cx)*.4)),by=cy+h/2-h*.05,L=Math.hypot(tx-bx,ty-by); if(L<10) return; const k=Math.min(1,L/60);
+    [[.22,15],[.52,10],[.82,6.5]].forEach(([t,d])=>PROPART.draw('ui/bubble_dot',bx+(tx-bx)*t,by+(ty-by)*t,{w:d*k+2,h:(d*k+2)*.9})); };
+  const draw=(kind,cx,cy,w,h,tx,ty)=>{ if(tx!=null) { if(kind==='cloud') dots(cx,cy,w,h,tx,ty); else if(kind!=='burst') tail(cx,cy,w,h,tx,ty); }
+    PROPART.draw('ui/bubble_'+(kind==='cloud'?'cloud':kind==='burst'?'burst':kind==='rect'?'rect':'oval'),cx,cy,{w,h}); };
+  return {draw};
+})();
+setTimeout(()=>PROPART.preload(['ui/bubble_oval','ui/bubble_rect','ui/bubble_tail','ui/bubble_cloud','ui/bubble_dot','ui/bubble_burst']),0);   // painted speech bubbles
 // Props that moves already use; fetched shortly after start so the first fight shows them, not the drawn fallback.
 setTimeout(()=>PROPART.preload(['tom/headphones','tom/sourdough_boule','grace/gold_dumpling_squishy','grace/gold_dumpling_hero','rose/lamby','rose/backup_lamby','rose/lamby_fly','amy/kettlebell','deedee/crisp_pan','boppy/cayenne_pepper','tnb/test_mug']),2500);
 setTimeout(()=>PROPART.preload(['tombo/gift_box','tombo/dice_squishy','tombo/arcade_like_button','tombo/blue_gym_mat','tombo/judge_s_desk','tombo/reading_lamp','tombo/biplane_wings','tombo/fluffy_cloud','tombo/lamby_hair_tuft','tombo/gold_tiara','tombo/bodyguard_sunglasses_and_earpiece','tombo/gold_scepter_stick','tombo/giant_8_bit_music_note','grace/like_thumbs_up','grace/scorecards']),2600);   // kA: grace/rose tombos

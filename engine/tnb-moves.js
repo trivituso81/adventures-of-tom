@@ -1353,7 +1353,7 @@ SC.t6_plate=(s,u)=>{ gfx.globalAlpha=fin(u,.06)*fade(u,.92); if(s.t<1.2) label('
   gfx.globalAlpha=1; };
 const napkin=(x,y,sc,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(sc,sc); PO([[-12,-6],[12,-6],[14,8],[-14,8]],WHITE,2); Ln(-8,-6,-2,8,1.5,'#d9d9d2'); gfx.restore(); };
 SC.t6_bubble=(s,u)=>{ const ms=s.t*1000; const grow=cl((ms-s.t0)/(s.t1-s.t0)),w=lerp(70,300,ez(grow)),h=lerp(22,110,ez(grow)),x=Math.max(w/2+6,Math.min(570-w/2,s.x)),y=Math.max(h+14,Math.min(s.y,290));
-  gfx.globalAlpha=fade(u,.9); RO(x-w/2,y-h,w,h,WHITE); PO([[x+w*.2,y],[x+w*.2+14,y+12],[x+w*.2+24,y]],WHITE,2); R(x+w*.2+1,y-2,22,3,WHITE);
+  gfx.globalAlpha=fade(u,.9); BUBBLE.draw('rect',x,y-h/2,w,h,x+w*.2+12,y+12);
   const words=s.words.filter(wd=>ms>=wd.t); const SL=[[.28,.2],[.72,.2],[.3,.5],[.72,.5],[.5,.82]];
   words.forEach((wd,k)=>{ const sc=Math.min(3,1.4+k*.4),q=cl((ms-wd.t)/180),pop=lerp(1.6,1,ez(q)),wx=x-w/2+w*SL[k][0],wy=y-h+h*SL[k][1];
     gfx.save(); gfx.translate(wx,wy); gfx.scale(pop,pop); label(wd.w,0,-sc*2.5,INK,sc); gfx.restore(); }); gfx.globalAlpha=1; };

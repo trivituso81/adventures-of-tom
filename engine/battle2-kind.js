@@ -479,13 +479,10 @@ B2_TOMBO_ANIM.rose1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 // A body's near hand, from the pose its path just returned (Tom has no hand map, so his is estimated).
 const handPt=(sp,fr,x,base,dir)=>{ const sc=sp.scale,w=fr[0].length*sc,H=fr.length*sc,h=sp.handAt&&sp.handAt.get(fr);
   return h?{x:x-w/2+h.n[0]*sc,y:base-H+h.n[1]*sc}:{x:x+(dir>0?1:-1)*w*.28,y:base-H*.5}; };
-// A speech bubble that pops in with k (0..1), its tail pointing at (tx,ty); body(w,h) draws the inside.
-const bubble=(x,y,w,h,tx,ty,k,body)=>{ if(k<=0) return; const s=k<1?ez(k)*(1+.1*Math.sin(k*Math.PI)):1;
+// A speech bubble that pops in with k (0..1), its tail pointing at (tx,ty); body(w,h) draws the inside. kind: 'oval' (speech, default) or 'cloud' (thought).
+const bubble=(x,y,w,h,tx,ty,k,body,kind='oval')=>{ if(k<=0) return; const s=k<1?ez(k)*(1+.1*Math.sin(k*Math.PI)):1;
   gfx.save(); gfx.translate(x,y); gfx.scale(s,s);
-  const bx=cl((tx-x)*.35,-w/2+24,w/2-24),ex=(tx-x)/s,ey=(ty-y)/s;
-  const tail=()=>{ gfx.beginPath(); gfx.moveTo(bx-12,h/2-10); gfx.lineTo(ex,ey); gfx.lineTo(bx+12,h/2-10); gfx.closePath(); };
-  tail(); gfx.lineWidth=6; gfx.strokeStyle=OUT; gfx.lineJoin='round'; gfx.stroke();
-  E(0,0,w/2+3,h/2+3,OUT); tail(); gfx.fillStyle=CREAM; gfx.fill(); E(0,0,w/2,h/2,CREAM); E(-w*.18,-h*.22,w*.22,h*.12,'#ffffff');
+  BUBBLE.draw(kind,0,0,w,h,(tx-x)/s,(ty-y)/s);
   if(body) body(w,h); gfx.restore(); };
 // Frizzy bad hair: orange zigzags sticking out of the top of a head at (x,y), size s.
 const badHair=(x,y,s,t)=>{ for(const [c,lw] of [[OUT,5],['#f08a3a',2.6]]) for(let j=-4;j<=4;j++) {
@@ -3012,9 +3009,9 @@ B2_TOMBO_ANIM.rose1_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     // the two thought bubbles
     const s0=seatPt(),rHead={x:s0.x-2,y:s0.y-20-RIDE.ay*RS};
     if(ms>P.tb0&&ms<P.tb1) { const k=ms<P.tb1-200?seg(ms,P.tb0,P.tb0+250):1-seg(ms,P.tb1-200,P.tb1);
-      bubble(cl(tx-120,84,470),cl(sb-TH-58,92,250)+Math.sin(ms/230)*2,126,82,sT.x-16,sb-TH+14,k,()=>{ if(!PROPART.draw('tom/sourdough_boule',0,4,{w:82})) boule(0,4,3.1,false); }); }
+      bubble(cl(tx-120,84,470),cl(sb-TH-58,92,250)+Math.sin(ms/230)*2,126,82,sT.x-16,sb-TH+14,k,()=>{ if(!PROPART.draw('tom/sourdough_boule',0,4,{w:82})) boule(0,4,3.1,false); },'cloud'); }
     if(ms>P.rb0&&ms<P.rb1) { const k=ms<P.rb1-200?seg(ms,P.rb0,P.rb0+250):1-seg(ms,P.rb1-200,P.rb1);
-      bubble(cl(rHead.x+30,90,500),cl(rHead.y-72,62,200),130,92,rHead.x+4,rHead.y+6,k,()=>{ if(!lambyP(4,8,1.75,0)) { RFX.plush(4,8,1.75,{pose:'held',drawn:1}); lambyHair(4,8,1.75); } }); }
+      bubble(cl(rHead.x+30,90,500),cl(rHead.y-72,62,200),130,92,rHead.x+4,rHead.y+6,k,()=>{ if(!lambyP(4,8,1.75,0)) { RFX.plush(4,8,1.75,{pose:'held',drawn:1}); lambyHair(4,8,1.75); } },'cloud'); }
   }});
   const steps=[
     [0,()=>{ setMessage('DIRECTOR’S CUT! Rose climbs up on Tom’s shoulders. Cloud safari.'); B2.aim=null; S('boing'); }],
@@ -5791,7 +5788,7 @@ B2_TOMBO_ANIM.amy3=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 // ================= Tom + Deedee =================
 const shrinkFoe=(f,s)=>{ const q=ST.foe(f); f.spin=0; f.ox=0; f.fsc=s; f.oy=q.h/2*(1-s)/Math.max(s,.01); f.spinAt=performance.now(); };
 const unshrink=f=>{ f.fsc=0; f.oy=0; };
-const bubble=(x,y,txt,sc=1,c=CREAM)=>{ const w=(txt.length*4-1)*sc+14; RO(x-w/2,y-8*sc-6,w,10*sc+10,c); label(txt,x,y-7*sc,'#2b2a26',sc); PO([[x-6,y+sc*3+4],[x+6,y+sc*3+4],[x,y+sc*3+12]],c,0); };
+const bubble=(x,y,txt,sc=1)=>{ const w=(txt.length*4-1)*sc+14; BUBBLE.draw('oval',x,y-3*sc-1,w+26,10*sc+24,x,y+3*sc+16); label(txt,x,y-7*sc,'#2b2a26',sc); };
 // ---------- Wine and Gossip (Tom + Deedee, tier 1) ----------
 // A bistro table pops up. They sit, clink, lean in and whisper. Both glance at the monster. Gasp. DID YOU SEE WHAT IT
 // WAS WEARING? Every monster shrinks with embarrassment. Deedee brings out the crisp. Effects unchanged.

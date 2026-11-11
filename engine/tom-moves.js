@@ -1117,7 +1117,7 @@ Tm.skincare_10=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),self=t===m,
 // hits. They go red with embarrassment and forget what they were winding up. WRONG.
 const CLAIMS=['BREAD IS EASY','PLANES ARE SLOW','I AM SCARY','1+1=3','KANJI IS EASY'];
 SC.t3_claim=(s,u)=>{ const ms=s.t*1000,a=fin(u,.06)*(ms>s.gone?1-ez((ms-s.gone)/200):1); if(a<=0) return; const w=(s.txt.length*4-1)*2+20,x=cl(s.x,w/2+6,570-w/2),y=Math.max(30,s.y);
-  gfx.globalAlpha=a; rrO(x-w/2,y-16,w,24,8,'#ffffff'); poly([[x-6,y+8],[x+6,y+8],[x,y+18]],'#ffffff'); label(s.txt,x,y-9,INK,2); };
+  gfx.globalAlpha=a; BUBBLE.draw('rect',x,y-4,w+8,32,x,y+20); label(s.txt,x,y-9,INK,2); };
 SC.t3_stamp=(s,u)=>{ const q=u<.12?ez(u/.12):1,sc=lerp(1.8,.82,q),a=fade(u,.75); gfx.globalAlpha=a; gfx.save(); gfx.translate(s.x,s.y); gfx.rotate(-.18); gfx.scale(sc,sc);
   if(PROPART.draw('tom/know_false_mark',0,-6,{w:124})) { label('FACT CHECK',-6,-52,RED,2); gfx.restore(); return; }   // painted stamp, pad and FALSE imprint; the drawn plate is the fallback
   gfx.globalAlpha=a*.55; R(-60,-28,120,56,'#ffffff'); gfx.globalAlpha=a; gfx.strokeStyle=OUT; gfx.lineWidth=9; gfx.strokeRect(-60,-28,120,56); gfx.strokeStyle=RED; gfx.lineWidth=5; gfx.strokeRect(-60,-28,120,56); label('FACT CHECK',0,-21,RED,2); R(-50,-7,100,3,RED); label('FALSE',0,0,RED,4); gfx.restore(); };
