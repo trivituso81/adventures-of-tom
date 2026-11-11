@@ -20359,8 +20359,16 @@
    "prompt": "Paint a new sheet of Old Iron-Gill, the creature in attachment 2, as a handbrushed painting. Attachment 2 is the current painting of it in the game: paint the same creature, with the same shape, colors, materials and details, at the same size in each cell, in the same view, facing right. Do not repeat the poses of attachment 2. Paint 6 NEW poses in a 3 by 2 layout, one pose alone in each cell with clear magenta all around it and nothing crossing into another cell. These poses show the moment after the fight, when the anger has gone out: the mood is gentle, warm and a little funny, never fierce. Top row: 1 the same upright pose as the first pose of attachment 2, at exactly the same size, but calm: floating low in its patch of muddy water, the orange eyes soft, the wide mouth closed in a slight smile, the rope whiskers hanging loose. 2 giving something back: the head tilted up and the huge mouth open wide and empty, pushed forward, as if letting something slide out, the eyes kind. 3 the leap, rising: the WHOLE fish out of the water for the first time, body and tail, arcing up and to the right, water streaming off the armored plates. Bottom row: 4 the top of the leap: the whole fish level in mid air in clean side view, tail flicked up, whiskers streaming back, the eyes bright and joyful, a rim of gold light along its back. 5 the dive: nose down and half under, the tail high in the air, a crown of splashing water around it. 6 only the tail fin above a ring of ripples, tilted as if waving goodbye. Paint only what each pose names: no glows, speed lines, sparkles or splashes unless a pose asks for them, and no letters, numbers or words anywhere. Paint and finish it like attachment 1: matte, thick visible brush strokes on the figure, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/enemies/ending-directorscut-v2.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794438130251
+    }
+   ],
    "rejects": [],
    "id": "ending-directorscut",
    "tab": "Enemies",
