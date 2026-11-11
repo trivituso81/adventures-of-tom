@@ -17615,8 +17615,16 @@
    "group": "Flight art"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/raw/characters/tombo-ff1-dc-objects-v2.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794418473172
+    }
+   ],
    "rejects": [],
    "id": "tombo-ff1-dc-objects",
    "tab": "Characters",
