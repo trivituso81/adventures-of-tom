@@ -24,12 +24,13 @@ ROOT = EF.ROOT
 OUT = os.path.join(ROOT, 'portraits', 'talk')
 PAPER = EF.PAPER
 CAST = ['tom', 'tnb', 'grace', 'rose', 'amy', 'justin', 'olivia', 'deedee', 'boppy', 'ellie', 'nara']
+WALK_FRAMED = ['amy']   # cast whose new walk head is smaller than the hero's (hero ratios cut her chin off): framed on the walk frame like the townsfolk
 IDS = CAST + EF.NPC_IDS
 HEAD_PAD = 1.18   # square side over hair-top-to-neck height
 TOP_GAP = 0.04    # paper above the hair, as a share of the side
 NECK_OK = (0.22, 0.42)   # believable neck heights (share of the figure); outside this the reading is hair or a held thing
 NECK_DEFAULT = 0.33
-NECK_SET = {'mateo': 0.47, 'sofi': 0.48, 'vance': 0.44}   # big-headed walks whose real neck sits past NECK_OK (checked by eye on the contact sheet)
+NECK_SET = {'mateo': 0.47, 'sofi': 0.48, 'vance': 0.44, 'amy': 0.27}   # big-headed walks whose real neck sits past NECK_OK (checked by eye on the contact sheet)
 NARA_SQ = (0.30, 0.20, 0.62)     # Nara: square centre x and y and side, as shares of her standing frame's width, height and width
 
 
@@ -53,7 +54,7 @@ def bake(pid):
     if pid == 'nara':
         cxs, cys, ss = NARA_SQ
         s = ss * f.width; x0 = cxs * f.width - s / 2; y0 = cys * H - s / 2
-    elif pid in CAST:
+    elif pid in CAST and pid not in WALK_FRAMED:
         # The cast's hero paintings share their walk sheets' proportions, so the mood faces' hero-measured zoom frames them well.
         q, dy, dx = EF.hero_metrics(pid)
         band = al[:max(4, int(H * .05))]
