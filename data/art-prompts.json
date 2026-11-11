@@ -18238,8 +18238,16 @@
    "group": "Los Angeles people"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/npcs/npc-walk-bernadette-v1.png",
+     "date": "2026-11-11",
+     "from": "v2",
+     "at": 1794361348531
+    }
+   ],
    "rejects": [],
    "id": "npc-walk-bernadette",
    "tab": "NPCs",
