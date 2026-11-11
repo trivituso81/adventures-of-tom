@@ -20502,8 +20502,16 @@
    "prompt": "Paint a new sheet of Gridlock Prime, the creature in attachment 2, as a handbrushed painting. Attachment 2 is the current painting of it in the game: paint the same creature, with the same shape, colors, materials and details, at the same size in each cell, in the same view, facing right. Do not repeat the poses of attachment 2. Paint 6 NEW poses in a 3 by 2 layout, one pose alone in each cell with clear magenta all around it and nothing crossing into another cell. These poses show the moment after the fight, when the anger has gone out: the mood is gentle, warm and a little funny, never fierce. In every pose all three lamps of the traffic light on its roof glow green, and the daisy is still there. Top row: 1 the same upright pose as the first pose of attachment 2, at exactly the same size, but calm: parked and still, the windshield eyes soft, a small smile on the grille, no dust. 2 amazed: the eyes rolled up to stare at its own green lights, the grille open in wonder. 3 signalling: one orange turn light glowing at its front corner, the eyes forward and eager, the wheels just starting to roll, a little dust. Bottom row: 4 driving: clean side view at speed to the right, leaning forward, the eyes joyful, a trail of dust behind. 5 driving away, seen from behind: the back of the bus with two red tail lights, the daisy bobbing on the roof. 6 the goodbye: pulled up and looking back, one headlight closed in a wink, a wide grin on the grille. Paint only what each pose names: no glows, speed lines, sparkles or splashes unless a pose asks for them, and no letters, numbers or words anywhere. Paint and finish it like attachment 1: matte, thick visible brush strokes on the figure, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/ending-drillworm-v1.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794437066235
+    }
+   ],
    "rejects": [],
    "id": "ending-drillworm",
    "tab": "Enemies",
