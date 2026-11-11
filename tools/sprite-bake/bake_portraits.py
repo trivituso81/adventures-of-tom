@@ -3,7 +3,7 @@
 Tom 2026-11-05: "use the characters hero images for their portraits".
 Tom 2026-11-06: "all portraits should be tightly cropped to the head, zoomed equally".
 
-Source: art/raw/characters/<id>-hero-ref-v1.png (1024 x 1536, painted on cream paper).
+Source: newest art/raw/characters/<id>-hero-vN.png, else <id>-hero-ref-v1.png (1024 x 1536, painted on cream paper).
 Output: portraits/<id>.png, 256 x 256, painted paper kept behind.
 Used by PORTRAITS in engine/menu.js (pause menu roster, dialogue box, battle panels, chapter select).
 
@@ -27,12 +27,19 @@ SIDE = 410       # square side in source pixels for an average face
 EYE_AT = 0.52    # eye line, share of the square from the top
 # id: (left pupil x, right pupil x, eye line y, chin y) in source pixels (chin = bottom of beard).
 FACE = {
-    'tom': (455, 589, 286, 467), 'tnb': (402, 527, 295, 465), 'grace': (442, 560, 290, 405),
-    'rose': (472, 584, 278, 403), 'amy': (432, 545, 232, 370), 'justin': (417, 537, 270, 475),
-    'olivia': (437, 542, 265, 385), 'deedee': (442, 557, 280, 410), 'boppy': (422, 572, 345, 515),
-    'ellie': (452, 562, 263, 415),
+    # walkv2 (11-10): measured on the new hero paintings (art/raw/characters/<id>-hero-vN.png); Boppy's hero is still hero-ref-v1.
+    'tom': (448, 574, 238, 398),
+    'tnb': (428, 546, 248, 405),
+    'grace': (438, 558, 276, 412),
+    'rose': (478, 601, 311, 440),
+    'amy': (430, 540, 206, 341),
+    'justin': (409, 505, 225, 395),
+    'olivia': (426, 529, 228, 348),
+    'deedee': (470, 594, 265, 395),
+    'boppy': (422, 572, 345, 515),
+    'ellie': (470, 596, 250, 375),
 }
-NARA = (500, 440, 880)   # centre x, centre y, side (whole head with ears; 11-06 Tom: was cropped too close)
+NARA = (500, 450, 900)   # centre x, centre y, side (whole head with ears; walkv2: new hero, 11-10)
 
 
 # Tom's own crops (portraits.html, saved to data/portrait-crops.json): {id: {x, y, w, h}} in hero-image pixels, w == h. A character
@@ -65,10 +72,21 @@ def default_box(pid):
     return (lx + rx) / 2 - s / 2, max(0, eye - s * EYE_AT), s
 
 
+def hero_src(pid):
+    """Newest approved hero painting: <id>-hero-vN.png (Art Library), else the original <id>-hero-ref-v1.png."""
+    import glob, re
+    vs = sorted(glob.glob(os.path.join(SRC, pid + '-hero-v*.png')), key=lambda p: int(re.search(r'-v(\d+)\.png$', p).group(1)))
+    return vs[-1] if vs else os.path.join(SRC, pid + '-hero-ref-v1.png')
+
+
 def portrait(pid):
-    im = Image.open(os.path.join(SRC, pid + '-hero-ref-v1.png')).convert('RGB')
+    im = Image.open(hero_src(pid)).convert('RGB')
     x0, y0, s = box(pid)
-    crop = im.crop((round(x0), round(y0), round(x0 + s), round(y0 + s))).resize((SIZE, SIZE), Image.LANCZOS)
+    import numpy as np
+    a = np.array(im); bg = tuple(int(v) for v in np.median(np.concatenate([a[:, :30].reshape(-1, 3), a[:, -30:].reshape(-1, 3)]), axis=0))
+    pad = int(s)                                                  # a square that runs past the painting is filled with the paper colour (never black)
+    big = Image.new('RGB', (im.width + 2 * pad, im.height + 2 * pad), bg); big.paste(im, (pad, pad))
+    crop = big.crop((round(x0) + pad, round(y0) + pad, round(x0 + s) + pad, round(y0 + s) + pad)).resize((SIZE, SIZE), Image.LANCZOS)
     crop.save(os.path.join(OUT, pid + '.png'), optimize=True)
     return crop, round(s), round(y0)
 

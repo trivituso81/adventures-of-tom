@@ -87,9 +87,13 @@ TOM_HEAD_ROWS = 104 * 42 / 391.0
 # The chin is stored as a share of the painted stand frame's height (measured on the first painted walk sheets: chin px over stand px, TNB 118/390,
 # Justin 123/387, Boppy 154/392, Deedee 114/390, Amy 95/393, Olivia 100/395, Ellie 125/392, Grace 100/392, Rose 102/387). The Art Library walking
 # sheets (walkinst1) were generated from those sheets and keep the same proportions at a larger pixel size, so the share carries over.
-WALK_MATCH = {'tnb': (118 / 390, 45, .92), 'justin': (123 / 387, 53, .849), 'boppy': (154 / 392, 41.7, .922), 'deedee': (114 / 390, 41.7, .922),
-              'amy': (95 / 393, 41.7, .925), 'olivia': (100 / 395, 42, .914), 'ellie': (125 / 392, 43, .853)}
-GROW = {'grace': (100 / 392, 1.15), 'rose': (102 / 387, 1.15)}
+# 11-10 (walkv2): the v2 walking sheets (tnb, justin, boppy, deedee, amy, olivia) have their own proportions, so their chin shares were measured again on
+# the front stand frame (ruler crops, +-1 percent): tnb .28, justin .24, boppy .295, deedee .295, amy .26, olivia .24. Ellie's sheet is still v1 (old share).
+# The v2 kids already have caricature heads (head about .27 of the figure), so the old 15 percent growth is 1.0 for the sheets that are v2 (as painted).
+WALK_MATCH = {'tnb': (.28, 45, .92), 'justin': (.24, 53, .849), 'boppy': (.295, 41.7, .922), 'deedee': (.295, 41.7, .922),
+              'amy': (.26, 41.7, .925), 'olivia': (.24, 42, .914), 'ellie': (125 / 392, 43, .853),
+              'jojo': (.24, 42, .930)}   # Jojo 5'6: 42 rows x .930 (walkv2: her v2 sheet, chin .24)
+GROW = {'grace': (.27, 1.0), 'rose': (.27, 1.0)}
 # HEAD_TWEAK (head size adjuster, Tom 2026-11-10): per-character extra head factor on top of the rules above, kept in head_tweak.json next to this
 # file (written by head_adjust.py). 1.0 or absent = no change (the bake is byte for byte what it was). Adults: the head is TOM_HEAD_ROWS x factor and
 # the whole figure keeps its real on-screen height. Kids: the 1.15 head growth is multiplied by the factor, body unchanged.
@@ -105,9 +109,10 @@ UNWARPED_H = {}
 BODY_ROWS_PER_PX = {}
 
 def src(cid):
-    """Newest approved Art Library walking sheet, else the painted original."""
-    vs = sorted(glob.glob(os.path.join(RAW, f'{cid}-walking-sheet-v*.png')), key=lambda p: int(re.search(r'-v(\d+)\.png$', p).group(1)))
-    return vs[-1] if vs else os.path.join(RAW, f'{cid}-walk-sheet-v1.png')
+    """Newest approved Art Library sheet: <id>-walking-sheet-vN, else <id>-walk-sheet-vN (Nara, Michael and Jojo got theirs approved under that name)."""
+    num = lambda p: int(re.search(r'-v(\d+)\.png$', p).group(1))
+    vs = sorted(glob.glob(os.path.join(RAW, f'{cid}-walking-sheet-v*.png')), key=num) or sorted(glob.glob(os.path.join(RAW, f'{cid}-walk-sheet-v*.png')), key=num)
+    return vs[-1]
 
 def build(cid, fix=False):
     figs = grid(src(cid), 3, 3)

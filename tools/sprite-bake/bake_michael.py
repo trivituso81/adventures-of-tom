@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bake Michael's painted walk sheet (carrying Lachlan and Isla) into the game: overworld set only (he is never in battle).
 
-Input : art/raw/characters/michael-walk-sheet-v3.png (Art Library entry michael-walk-sheet, approved by Tom 2026-11-06; 3 x 3: down, up, left;
+Input : art/raw/characters/michael-walking-sheet-v1.png (Art Library entry michael-walking-sheet, approved; replaced michael-walk-sheet-v3 on 11-10; 3 x 3: down, up, left;
         each stand, stepA, stepB; flat magenta; Michael holds Isla on one arm and Lachlan on the other in every frame)
 Output: art/chars/michael-ow.webp (painted frames, K x the rows), data/michael-hires.js (rows, palette, rects; do not hand-edit)
 
@@ -15,10 +15,10 @@ import argparse, json, os, sys
 import numpy as np
 from PIL import Image
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from walk_sheet_frames import grid, NAMES
+from walk_sheet_frames import grid, NAMES, src as _sheet_src
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-SRC = os.path.join(ROOT, 'art/raw/characters/michael-walk-sheet-v3.png')
+SRC = _sheet_src('michael')    # newest approved sheet: michael-walking-sheet-v1.png (walkv2, 11-10)
 OUT = os.path.join(ROOT, 'data/michael-hires.js')
 ART = os.path.join(ROOT, 'art/chars')
 KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'

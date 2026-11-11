@@ -202,7 +202,10 @@ async function loadJson(path,live){
   try{const r=await fetch(path+'?t='+Date.now(),{cache:'no-store'});if(r.ok) return await r.json();}catch(e){}
   return {};
 }
-function loadImg(id){return new Promise(res=>{const im=new Image();im.onload=()=>{imgs[id]=im;res();};im.onerror=()=>res();im.src='art/raw/characters/'+id+'-hero-ref-v1.png';});}
+// newest approved hero painting (<id>-hero-vN.png from the Art Library), else the original <id>-hero-ref-v1.png (walkv2); must match hero_src() in tools/sprite-bake/bake_portraits.py
+function loadImg(id){const names=[3,2,1].map(n=>id+'-hero-v'+n+'.png').concat([id+'-hero-ref-v1.png']);
+  const tryAt=i=>new Promise(res=>{if(i>=names.length)return res();const im=new Image();im.onload=()=>{imgs[id]=im;res();};im.onerror=()=>tryAt(i+1).then(res);im.src='art/raw/characters/'+names[i];});
+  return tryAt(0);}
 (async()=>{
   const chips=$('chips');
   for(const id of IDS){const b=document.createElement('button');b.dataset.id=id;b.textContent=NAMES[id];b.onclick=()=>pick(id);chips.appendChild(b);}

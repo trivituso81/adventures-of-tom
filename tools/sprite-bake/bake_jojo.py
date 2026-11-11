@@ -1,24 +1,21 @@
 #!/usr/bin/env python3
 """Bake Jojo's painted overworld walk set (down, up, right; left is the mirror) into the game: art/chars/jojo-ow.webp and the overworld part of data/jojo-hires.js.
 
-Input : tools/sprite-bake/src/jojo-sheet-v2.png (4 rows of 3 walk frames: down, up, left, right; each stand, step, step; flat magenta).
-        Its two battle rows are NOT used. The battle poses are the approved stance sheets, baked by tools/sprite-bake/bake_jojo_stance.py
+Input : art/raw/characters/jojo-walk-sheet-v2.png (Art Library, approved; 3 x 3: front, back, side facing LEFT; each stand, step, step; flat magenta), cut by
+        walk_sheet_frames. The game's right-facing side row is the left row mirrored. The battle poses are the approved stance sheets, baked by tools/sprite-bake/bake_jojo_stance.py
         into art/chars/jojo-bt.webp; this script writes that atlas's rects and meta into data/jojo-hires.js so a rerun keeps them.
 Output: art/chars/jojo-ow.webp (painted frames)
         data/jojo-hires.js (overworld rows and palette, atlas rects; do not hand-edit)
-Head: enlarged to the adult canon (2026-11-01, Tom): walk top-of-hair to chin over figure height .365 front and back, .34 side (Justin .35, Amy .383, Deedee .372, Boppy .362, TNB .356).
-      Height 5'6" (66 in), overworld 42 rows.
+Head and body: the main cast's rule (walk_sheet_frames.WALK_MATCH['jojo']: head height equals Tom's on screen, whole figure keeps her real height). Height 5'6" (66 in), 42 rows at k .930.
 
-Usage : python3 tools/sprite-bake/bake_jojo.py [--ow-h 42] [--colors 46] [--contact PATH]
+Usage : python3 tools/sprite-bake/bake_jojo.py [--colors 46] [--contact PATH]
 """
 import argparse, json, os, sys
 import numpy as np
 from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from sheet import slice_sheet
-import bake_jojo_stance as stance
-from jojo_head import despill_pink, _auto_head, CHIN_FIX, _warp_head, _big_parts, bigger_head, _solve_k as _solve_k_p, HEAD_TWEAK   # the battle atlas (art/chars/jojo-bt.webp) is baked there; this script writes its rects
+import bake_jojo_stance as stance   # the battle atlas (art/chars/jojo-bt.webp) is baked there; this script writes its rects
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SRC = os.path.join(ROOT, 'tools/sprite-bake/src')
@@ -28,47 +25,31 @@ KEYS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 KW = int(os.environ.get('OW_K', '6'))                          # painted resolution multiple on the overworld
 
 ap = argparse.ArgumentParser()
-ap.add_argument('--ow-h', type=int, default=42)       # standing height of the overworld sprite in rows (Amy 5'5" 41.7, Tom 5'11" 43; Jojo is 5'6")
 ap.add_argument('--colors', type=int, default=46)
-ap.add_argument('--ratio', type=float, default=0.365)   # walk: top-of-hair to chin over figure height, front and back (adult average .363)
-ap.add_argument('--ratio-side', type=float, default=0.34)
-ap.add_argument('--k-front', type=float, default=None)  # override the solved enlargement factors (testing)
-ap.add_argument('--k-side', type=float, default=None)
 ap.add_argument('--contact', default=None)
 args = ap.parse_args()
-args.ratio *= HEAD_TWEAK.get('jojo', 1.0); args.ratio_side *= HEAD_TWEAK.get('jojo', 1.0)   # head size adjuster (1.0 = unchanged)
 os.makedirs(ART, exist_ok=True)
 
 WALK = [f'{d}_{n}' for d in ('down', 'up', 'left', 'right') for n in ('stand', 'step1', 'step2')]
+# Walk (walkv2, Tom 11-10): the approved Art Library sheet art/raw/characters/jojo-walk-sheet-v2.png, 3 x 3 (front, back, side facing LEFT), cut and head-matched by
+# walk_sheet_frames like the main cast (WALK_MATCH['jojo']). The game's 'side' set faces RIGHT, so the right row is the left row mirrored.
+import walk_sheet_frames as _wsf
 poses = {}
-# The sheet's last two rows are the old battle poses (not used: the battle atlas is baked by bake_jojo_stance.py). They are read so the
-# figure count matches the sheet (20), then dropped.
-SKIP = [f'skip{i}' for i in range(8)]
-for nm, im in slice_sheet(os.path.join(SRC, 'jojo-sheet-v2.png'), [WALK[0:3], WALK[3:6], WALK[6:9], WALK[9:12], SKIP[0:4], SKIP[4:8]], by_position=True, min_area=1500).items():
-    if nm in WALK: poses[nm] = im
+_fr = _wsf.build('jojo', fix=True)
+for _d in ('down', 'up', 'left'):
+    for _n in ('stand', 'step1', 'step2'):
+        poses[f'{_d}_{_n}'] = _fr[f'w_{_d}_{_n}']
+        if _d == 'left': poses[f'right_{_n}'] = _fr[f'w_left_{_n}'].transpose(Image.FLIP_LEFT_RIGHT)
 
-for _n in list(poses):
-    poses[_n] = despill_pink(poses[_n])
-
-def _solve_k(name, ratio):
-    return _solve_k_p(poses, name, ratio, 0.4 if HEAD_TWEAK.get('jojo', 1.0) < 1.0 else 1.0)
-def view_of(name):
-    return name.split('_')[0]
-def ratio_of(view):
-    return args.ratio if view in ('down', 'up') else args.ratio_side
-def _kfor(view, ratio):
-    names = {'down': ['down_stand'], 'up': ['up_stand'], 'side': ['left_stand', 'right_stand']}[view]
-    return sum(_solve_k(n, ratio) for n in names) / len(names)
-KV = {'down': args.k_front or _kfor('down', args.ratio), 'up': args.k_front or _kfor('up', args.ratio),
-      'left': args.k_side or _kfor('side', args.ratio_side), 'right': args.k_side or _kfor('side', args.ratio_side)}
-print('head factors', {k: round(v, 3) for k, v in KV.items()})
-if os.environ.get('NOHEAD'):
-    KV = {k: 1.0 for k in KV}
 def _despeckle(img, min_area=40):
-    a = np.array(img); a[:, :, 3] = np.where(_big_parts(a[:, :, 3] > 20, min_area), a[:, :, 3], 0)
+    from scipy import ndimage as ndi
+    a = np.array(img); lab, n = ndi.label(a[:, :, 3] > 20)
+    if n:
+        areas = ndi.sum(a[:, :, 3] > 20, lab, range(1, n + 1)); keep = np.isin(lab, [i + 1 for i, s in enumerate(areas) if s >= min_area])
+        a[:, :, 3] = np.where(keep, a[:, :, 3], 0)
     return Image.fromarray(a, 'RGBA')
 for _n in list(poses):
-    poses[_n] = _despeckle(bigger_head(poses[_n], _n, KV[view_of(_n)]))
+    poses[_n] = _despeckle(poses[_n])
 
 # ---------------------------------------------------------------- helpers
 def up(n, k):
@@ -209,7 +190,7 @@ def fmt_rows(rows, indent='    '):
     return '[\n' + ',\n'.join(indent + "'" + r + "'" for r in rows) + '\n  ]'
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
-fo = args.ow_h * KW / poses['down_stand'].height
+fo = _wsf.BODY_ROWS_PER_PX['jojo'] * KW      # body scale from walk_sheet_frames.WALK_MATCH (Tom's head height is the model, whole figure keeps her real height)
 print('ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)' % (poses['down_stand'].height, fo))
 OW_NAMES = [n for n in WALK if not n.startswith('left_')]      # the sheet's right-facing row is the game's 'side'; 'left' is its mirror
 ow_big = {n: scaled_to(poses[n], fo) for n in OW_NAMES}

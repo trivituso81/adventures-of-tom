@@ -65,7 +65,10 @@ for _id, _h in EMO_H.items():
 # bodies shorter than the stand. Each factor is the mean of (a) the upright moods' height over the stand height and (b) the head width over the standing
 # head width, so face and height each miss by about 3 to 5 percent; checked by eye next to the standing frame. Justin 1.35 and Boppy 2.25 lean toward height
 # (their walk heads are enlarged most): moods about 9 and 6 percent shorter, faces about 7 and 8 percent bigger.
-EMO_HEAD = {'tom': 1.4, 'tnb': 1.35, 'grace': 1.36, 'rose': 1.63, 'amy': 1.34, 'justin': 1.35, 'deedee': 1.29, 'boppy': 2.25, 'olivia': 1.59, 'ellie': 1.4}
+# walkv2 (2026-11-10): new v2 walking sheets (chin shares re-measured), new hero paintings and newer emotion sheets for all ten, so every factor was set again with the same rule
+# (mean of the height match and the face match, face = chin share x upright mood height over Tom's head height on screen; Ellie's walk is still the v1 sheet, so her face uses
+# the emotion sheet's own chin share .28). Result: moods within about 5 percent of the stand in height for most, TNB, Justin, Deedee, Boppy 5 to 6 percent shorter, Olivia 5 percent taller.
+EMO_HEAD = {'tom': 1.39, 'tnb': 1.35, 'grace': 1.37, 'rose': 1.67, 'amy': 1.36, 'justin': 1.32, 'deedee': 1.30, 'boppy': 1.89, 'olivia': 1.32, 'ellie': 1.43}
 
 
 def stand_frame(cid):

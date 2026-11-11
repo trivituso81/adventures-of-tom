@@ -25,18 +25,18 @@ PAPER = (252, 237, 212)
 # Bowed heads sit lower in the frame than the head top suggests: extra downward shift of the crop, in squares (share of the crop side). OVERRIDE[id][mood] replaces it.
 MOOD_DY = {'happy': 0.0, 'loving': 0.07, 'sad': 0.16, 'angry': 0.27, 'scared': 0.08, 'surprised': 0.03, 'proud': 0.0, 'unimpressed': 0.03}
 OVERRIDE = {}
-# Nara is a dog (her poses crouch, sit and lie): head squares (centre x, centre y, side) set by eye in each 413 x 414 frame, whole head with ears.
-NARA_BOX = {'happy': (180, 105, 230), 'loving': (172, 115, 230), 'sad': (140, 295, 250), 'angry': (140, 225, 240),
-            'scared': (175, 235, 240), 'surprised': (177, 105, 235), 'proud': (160, 120, 215), 'unimpressed': (156, 200, 240)}
+# Nara is a dog (her poses crouch, sit and lie): head squares (centre x, centre y, side) set by eye in each 379 x 476 frame of the walkv2 sheet (emotions v2), whole head with ears.
+NARA_BOX = {'happy': (170, 150, 300), 'loving': (183, 155, 275), 'sad': (125, 330, 270), 'angry': (95, 228, 235),
+            'scared': (140, 250, 255), 'surprised': (118, 140, 255), 'proud': (127, 125, 250), 'unimpressed': (140, 140, 240)}
 IDS = ['tom', 'tnb', 'grace', 'rose', 'amy', 'justin', 'olivia', 'deedee', 'boppy', 'ellie', 'nara']
 
 
 def hero_metrics(pid):
-    im = Image.open(os.path.join(BP.SRC, pid + '-hero-ref-v1.png')).convert('RGB')
+    im = Image.open(BP.hero_src(pid)).convert('RGB')
     a = np.array(im).astype(int)
-    fg = np.abs(a - np.array(PAPER)).max(2) > 48
-    ys, xs = np.where(fg)
-    top, bot = ys.min(), ys.max()
+    bg = np.median(np.concatenate([a[:, :30].reshape(-1, 3), a[:, -30:].reshape(-1, 3)]), axis=0)     # paper colour (the newer heroes have a textured, warmer paper)
+    fg = np.abs(a - bg).max(2) > 60
+    rows = np.where(fg.sum(1) > 15)[0]; top, bot = rows.min(), rows.max()
     H = bot - top
     x0, y0, s = BP.box(pid)
     band = fg[top:top + max(4, int(H * .05))]
