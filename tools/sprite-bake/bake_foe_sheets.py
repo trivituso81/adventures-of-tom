@@ -209,11 +209,8 @@ def split_cells(A, ncol, nrow):
     return cells, notes
 
 
-def bake(ID, src_path, colors=24):
-    global_ID = ID
-    boss = ID in BOSS
-    frames = ['stance', 'hurt', 'attack1', 'attack2'] + (['attack3', 'attack4'] if boss else [])
-    ncol, nrow = (3, 2) if boss else (2, 2)
+def cut_crops(ID, src_path, frames, ncol, nrow):
+    """Key the sheet, give each piece of ink to its grid cell, clean halos and shadows, crop each frame to its alpha. Returns ({frame: RGBA crop}, notes)."""
     im = Image.open(os.path.join(ROOT, src_path)).convert('RGB')
     arr = np.array(im)
     edge = np.concatenate([arr[:4].reshape(-1, 3), arr[-4:].reshape(-1, 3), arr[:, :4].reshape(-1, 3), arr[:, -4:].reshape(-1, 3)])
@@ -249,6 +246,15 @@ def bake(ID, src_path, colors=24):
             raise SystemExit(f'{ID}: cell {nm} is empty or tiny ({len(xs)} px)')
         box = (xs.min(), ys.min(), xs.max() + 1, ys.max() + 1)
         crops[nm] = Image.fromarray(sub.astype(np.uint8), 'RGBA').crop(box)
+    return crops, notes
+
+
+def bake(ID, src_path, colors=24):
+    global_ID = ID
+    boss = ID in BOSS
+    frames = ['stance', 'hurt', 'attack1', 'attack2'] + (['attack3', 'attack4'] if boss else [])
+    ncol, nrow = (3, 2) if boss else (2, 2)
+    crops, notes = cut_crops(ID, src_path, frames, ncol, nrow)
 
     # one density for all frames: native resolution (never upscaled), stance width in atlas px
     AW = crops['stance'].size[0]

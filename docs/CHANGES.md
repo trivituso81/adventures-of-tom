@@ -7,6 +7,11 @@
 - `{finale}` steps added to ch17After (before the lenses hide), ch19After (before the Censor hides), ch20Shatter (Leviathan, before it comes apart) and ch20Calm (Julian, as he lets go). All four use the `settle` kind in `BOSS_FINALE` (gold light and motes, boss stays in frame; Julian stays seated). Their STORY_WORLD hide rules now wait while the boss is mid-finale (`!x.fin&&!x.bossAwait`).
 - Tests: cases ch17, ch19, ch20, ch20j added to `tools/boss_stage_cases.json` and `tools/boss_finale_test.py`; all four play with no errors, boss in frame (portrait only). Not looked at: landscape, real battle win on a phone, full lead-in plus after scene run for these chapters.
 - Tom's phone checks: chapters 17, 19, 20 after the fight: boss glows and sheds motes in frame, then the existing exit. No new art (Step 2 still waits for his go).
+## bossend3 (2026-11-11): painted boss endings (Step 2)
+- 21 approved Art Library ending sheets baked by `tools/sprite-bake/bake_foe_ends.py` (`art/foes/<id>-end.webp`, `data/foes/<id>-end-hires.js`, `FOE_END`); `bake_foe_sheets.py` got a shared `cut_crops`.
+- `engine/boss-finale.js` is now a phase runner (`BOSS_FINALE` per boss, `endRows`, `bossFrame`): painted frames, lift, sink, glow, motes, effects. The 17 map bosses (ch1 to 13, 17, 19, 20, Julian) are done; the after scene starts on the boss's calm or reaction frame.
+- Not yet: scripted-actor bosses (warden ch14, hush9final ch15, marlowe16 ch16, brainfreeze), Mirrorball sway (sheet still a draft), calm dialogue portraits.
+
 ## 2026-11-11 (arealay1): Art Library Areas tab: stencil entries for the six Los Angeles areas (admin data only, no tag)
 - Tom: "check for any missing Areas in the art library and add them."
 - Check (fact): all 74 maps in the game were matched to the Library. Every one of the 13 outdoor areas has its painting entry in Areas, and the other 61 maps have a Rooms entry. No area painting was missing. What was missing: the six Los Angeles areas had a painting entry only, while the seven Long Island areas each have 3 or 4 stencil (cutout layer) entries. This is the queued AL-LA item (2026-11-04).

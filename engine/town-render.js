@@ -598,9 +598,9 @@ function drawActor(a) {
       if(F.alpha!=null) gfx.globalAlpha*=Math.max(0,F.alpha);
       if(F.sink) { gfx.beginPath(); gfx.rect(cx-w,base-h*2-400,w*2,h*2+400+3); gfx.clip(); }
       if(F.rot) { gfx.translate(cx,base-Math.round(h*.5)); gfx.rotate(F.rot); gfx.translate(-cx,-(base-Math.round(h*.5))); }
-      drawSprite(rows,d.pal,cx-Math.round(w/2),base-h-hover-Math.round(F.lift||0)+Math.round(F.sink||0),s);
+      drawSprite(rows,rows._pal||d.pal,cx-Math.round(w/2),base-h-hover-Math.round(F.lift||0)+Math.round(F.sink||0),s);
       gfx.restore();
-    } else drawSprite(rows,d.pal,cx-Math.round(w/2),base-h-hover,s);
+    } else drawSprite(rows,rows._pal||d.pal,cx-Math.round(w/2),base-h-hover,s);
     if(breath) gfx.restore();
     if(typeof drawActorExtra==='function') drawActorExtra(a,cx,base-h-hover,w,h);   // engine/story.js: a carried pie tin, a pie-tin crown
     return;

@@ -798,7 +798,9 @@ b7MonsterTick=function(n,dt) {
 // face RIGHT (data/foes/use.js), so dir 'left' mirrors the frame. Used by drawActor (engine/town-render.js); null when the frame is not there.
 const FOE_POSE_ROWS={};
 function foePoseRows(a,d) {
-  const P=a.scenePose,nm=P&&P.foe; if(!nm||!d.frames) return null;
+  const P=a.scenePose,nm=P&&P.foe; if(!nm) return null;
+  if(P.end&&typeof endRows==='function') return endRows(P.end,nm,P.dir);
+  if(!d.frames) return null;
   const r=nm==='stance'?d.sprite:nm==='hurt'?d.frames.hurt:d.frames.attack[(+nm.replace('attack',''))-1]; if(!r) return null;
   if(P.dir!=='left') return r;
   const key=a.monster+':'+nm; return FOE_POSE_ROWS[key]||(FOE_POSE_ROWS[key]=mirrorRows(r));
