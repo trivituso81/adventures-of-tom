@@ -38,7 +38,7 @@ function groupOf(e) {
     case 'Areas': {
       const g = String(e.title).split(':')[0].trim(); return g.length >= 3 && g.length <= 40 ? g : fail('title');
     }
-    case 'Rooms': return ROOM_OF[e.id] || fail('room not in ROOM_GROUPS');
+    case 'Rooms': return ROOM_OF[e.id.replace(/-cut\d+$/, '')] || fail('room not in ROOM_GROUPS');   // a room's stencils sit in the room's own group
     case 'Props': { const g = PROP_GROUPS[e.id.split('-')[1]]; return g || fail('unknown prop group'); }
     case 'Enemies': { if (e.id === 'test-mudling' || e.id.startsWith('test-grid-') || e.id.startsWith('test-one-')) return 'Test card'; const a = FOE_TABLE[e.id]; return FOE_AREAS[a] || fail('area ' + a); }
     case 'Battle': return /\(NEW\b/.test(e.title) ? 'New backgrounds' : 'Repaints of live backgrounds';

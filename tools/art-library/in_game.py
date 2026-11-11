@@ -11,7 +11,7 @@ and the game code names that file):
     portrait-<id>           portraits/<id>.png (menu portrait)
     <who>-battle-stance-<n> art/chars/<who>-battle.webp (battle sheet)
 Kinds the game draws in code, or does not show yet (Tombo and Director's Cut sheets, dungeon finds, story gates,
-area stencils, fx), are not flagged: there is no stand-in picture for them.
+area and room stencils, fx), are not flagged: there is no stand-in picture for them.
 """
 import json, os, re, sys
 
@@ -34,6 +34,7 @@ def code_text():
 
 def candidates(e):
     i = e['id']
+    if re.search(r'-cut\d+$', i): return []   # a stencil (cutout layer) has no stand-in picture in the game, for rooms as for areas
     if i.startswith('room-'):
         return [r for r in e.get('refs', []) if r.startswith('art/') and not r.startswith('art/raw/')]
     m = re.match(r'^portrait-([a-z0-9]+)$', i)

@@ -15391,6 +15391,62 @@
    "status": "draft",
    "versions": [],
    "rejects": [],
+   "id": "room-terminal-cut1",
+   "tab": "Rooms",
+   "title": "Terminal Zero: stencil 1 of 4, plants (cut from the painting the game uses now)",
+   "ar": "4:3",
+   "refs": [
+    "art/terminal.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Terminal Zero painting.\n\nCopy out only its potted plants and its planter boxes of leafy plants, each whole from the top leaves down to the base of its pot or planter. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "group": "Airport"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "room-terminal-cut2",
+   "tab": "Rooms",
+   "title": "Terminal Zero: stencil 2 of 4, boards, posts and machines (cut from the painting the game uses now)",
+   "ar": "4:3",
+   "refs": [
+    "art/terminal.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Terminal Zero painting.\n\nCopy out only the big departures board on its stand, the two hanging direction signs with their brackets, the rope barrier posts with their ropes, the metal detector arch, the X-ray machine with its belt and stacked trays, the luggage carts, the round trash bins, the photo booth with its stool, and the stone pillars with their wall lamps, each whole down to where it touches the floor. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "group": "Airport"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "room-terminal-cut3",
+   "tab": "Rooms",
+   "title": "Terminal Zero: stencil 3 of 4, seats and lounge furniture (cut from the painting the game uses now)",
+   "ar": "4:3",
+   "refs": [
+    "art/terminal.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Terminal Zero painting.\n\nCopy out only the rows of blue seats, the benches by the entrance, the red leather armchairs and sofas, the round tables and side tables with their lamps, and the bar stools, each whole down to where it touches the floor. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "group": "Airport"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "room-terminal-cut4",
+   "tab": "Rooms",
+   "title": "Terminal Zero: stencil 4 of 4, counters, carousel and doors (cut from the painting the game uses now)",
+   "ar": "4:3",
+   "refs": [
+    "art/terminal.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Terminal Zero painting.\n\nCopy out only the cafe counter with its machines and shelves, the long check-in counter with its screens, the information desk at the top right, the baggage carousel with its suitcases and its central pillar, and the glass entrance doors with their frame, each whole down to where it touches the floor. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "group": "Airport"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
    "id": "room-gatezero",
    "tab": "Rooms",
    "title": "Gate Zero, 20 x 14 tiles, installed plate attached as layout reference",
@@ -15400,6 +15456,48 @@
     "art/grands.webp"
    ],
    "prompt": "IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image, nothing else.\n\nWHAT THIS IS\nA painting of Gate Zero, an empty 1980s airport gate with a podium and a jet bridge door, for \"The Adventures of Tom\", a family role-playing game. It is one walkable interior map, painted as ONE complete picture. The game draws its characters and monsters on top, so the floor must be empty.\n\nATTACHED IMAGES (in this order)\n1. The installed painting of this same place: a LAYOUT reference. Keep the same room layout, the same positions of walls, doors, big furniture and landmarks, and the same open floor. Restyle everything to attachment 2. Fix anything that is unclear, and do not add rooms.\n2. The finished painting of Deedee and Boppy's house, the grandparents' home in this game. It is the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted.\n\nART STYLE (the same look as attachment 2, the painting of Deedee and Boppy's house)\n- A hand-painted, hand-brushed interior in exactly the style of attachment 2: visible brushwork everywhere, matte surfaces like oil paint or gouache on canvas, rich warm color built in layers, a fine canvas grain, edges painted with a small brush. Gently simplified shapes, fine painted detail on wood grain, fabric, plaster and stone. No thick or black outlines. NOT glossy, NOT airbrushed.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light on furniture edges, soft baked contact shadows under every piece of furniture. Lamps and windows add small pools of warm light.\n- Fixed elevated three-quarter camera looking diagonally into the scene, about 35 degrees downward, the same camera across the whole picture. No top-down floor-plan look, no fisheye, no perspective change from one side to the other.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n- Attachment 2 is a STYLE REFERENCE ONLY. Match its brushwork, lighting, color and level of detail exactly. Take only how it is painted.\n\nTHE PLACE\n- An empty airport gate lounge at dusk: rows of blue seats, a podium under a split-flap board, big windows onto the apron and a jet bridge door at the top right.\n- Size and shape: the map is 20 x 14 tiles, so the final plate is 1280 x 896 pixels, a 1.43 to 1 shape. Paint the whole picture at 3:2 (the nearest standard size) and compose it edge to edge: full bleed, no frame, no black or white margins. The target shape is narrower than this picture, so the game will trim the sides: keep every walkable lane, doorway and important object inside the middle 95 percent of the width. \n- Camera: the elevated three-quarter view, about 35 degrees down. We see the back wall and a hint of the side walls, and the floor fills most of the picture. The scene is one uninterrupted space, painted at one consistent scale: a standing adult is about two tiles tall, which is roughly 1 part in 7 of the picture height.\n- Walkable floor: continuous floor under everything, with clear open lanes at least two tiles wide (about one tenth of the picture width) between furniture, so characters can walk everywhere the map needs. Keep a central lane from the bottom doorway up to the podium and the jet bridge door.\n- Doors and exits (they must be visible and clearly open, painted as plain doorways or openings, not as signs): doorway at the bottom center back to the terminal (the front (bottom) edge, middle). Keep exits inside the picture, not hidden under props.\n- Landmarks, painted large with a visible base and crisp silhouette so they can be layered over a character:\n  * a gate podium at the top left under a split-flap board (blank flaps)\n  * a jet bridge door at the top right with a rubber seal\n  * four groups of blue gate seats, two at the upper sides and two lower\n  * plants in planters at the lower left and lower right\n  * big windows along the back wall onto a dusk apron\n- Palette and light: violet dusk #7E6AA8 and peach #F2B792, blue seats #3A6EA5, warm lamp #FFE1A0, shadows #4A4560.\n\nSTRICT EXCLUSIONS\nNo people, no animals, no creatures, no monsters, no characters of any kind (the game draws them on top). No collectibles painted in: no chests, coins, keys, gems or glowing pickups. No frame, border, vignette bars, title card, contact sheet, mockup, palette chart or any other secondary material. Exactly one picture.\nNo text, letters, numbers or logos anywhere in the picture: signs, labels, book spines, boards, clock faces and screens are blank or show plain shapes only, because the game overlays its own text.\nFamily friendly for ages 6 and up. If anything is unclear, keep the furniture and layout of attachment 1 and repaint it in the style of attachment 2.",
+   "group": "Airport"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "room-gatezero-cut1",
+   "tab": "Rooms",
+   "title": "Gate Zero: stencil 1 of 3, plants (cut from the painting the game uses now)",
+   "ar": "3:2",
+   "refs": [
+    "art/gatezero.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Gate Zero painting.\n\nCopy out only its potted plants in their stone planters and the dark leafy plants in the two bottom corners, each whole from the top leaves down to its base. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "group": "Airport"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "room-gatezero-cut2",
+   "tab": "Rooms",
+   "title": "Gate Zero: stencil 2 of 3, seats (cut from the painting the game uses now)",
+   "ar": "3:2",
+   "refs": [
+    "art/gatezero.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Gate Zero painting.\n\nCopy out only its four rows of red seats in the middle and the red seats along the left and right edges, each row whole with its metal frame, armrests and legs down to the floor. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "group": "Airport"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "room-gatezero-cut3",
+   "tab": "Rooms",
+   "title": "Gate Zero: stencil 3 of 3, pillars, podium and posts (cut from the painting the game uses now)",
+   "ar": "3:2",
+   "refs": [
+    "art/gatezero.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Gate Zero painting.\n\nCopy out only its tall stone pillars with their wall lamps, the podium desk with its microphone, the filing cabinet, the rope barrier posts with their ropes, the round metal trash bins, the wheelchair, and the stair railings with their lamps at the bottom center, each whole down to where it touches the floor. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
    "group": "Airport"
   },
   {
@@ -15421,6 +15519,48 @@
    "status": "draft",
    "versions": [],
    "rejects": [],
+   "id": "room-flightzero-cut1",
+   "tab": "Rooms",
+   "title": "Flight Zero: stencil 1 of 3, upper row of sleeper seats (cut from the painting the game uses now)",
+   "ar": "16:9",
+   "refs": [
+    "art/flightzero.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Flight Zero painting.\n\nCopy out only the five sleeper seat pods along the top wall, each whole with its shell, bed, pillow, blanket, screen and small lamp, together with the bags and trunks beside them, down to the floor. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "group": "Airport"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "room-flightzero-cut2",
+   "tab": "Rooms",
+   "title": "Flight Zero: stencil 2 of 3, lower row of sleeper seats (cut from the painting the game uses now)",
+   "ar": "16:9",
+   "refs": [
+    "art/flightzero.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Flight Zero painting.\n\nCopy out only the five sleeper seat pods along the bottom edge, each whole with its shell and blanket, together with the small cabinets between them, down to the floor. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "group": "Airport"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "room-flightzero-cut3",
+   "tab": "Rooms",
+   "title": "Flight Zero: stencil 3 of 3, cart, curtains and galleys (cut from the painting the game uses now)",
+   "ar": "16:9",
+   "refs": [
+    "art/flightzero.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Flight Zero painting.\n\nCopy out only the drinks cart with everything on it, the blue curtains at both ends of the cabin, and the galley counters and cabinets at the left end and the right end with their flowers and wall lamps, each whole down to the floor. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "group": "Airport"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
    "id": "room-gate00",
    "tab": "Rooms",
    "title": "Gate 00, 20 x 14 tiles, installed plate attached as layout reference",
@@ -15436,6 +15576,48 @@
    "status": "draft",
    "versions": [],
    "rejects": [],
+   "id": "room-gate00-cut1",
+   "tab": "Rooms",
+   "title": "Gate 00: stencil 1 of 3, plants and lamps (cut from the painting the game uses now)",
+   "ar": "3:2",
+   "refs": [
+    "art/gate00.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Gate 00 painting.\n\nCopy out only its potted plants in their vases and pots, the globe lamps on their small side tables, and the two brass lamp posts beside the podium, each whole down to the floor. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "group": "Airport"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "room-gate00-cut2",
+   "tab": "Rooms",
+   "title": "Gate 00: stencil 2 of 3, seats and luggage (cut from the painting the game uses now)",
+   "ar": "3:2",
+   "refs": [
+    "art/gate00.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Gate 00 painting.\n\nCopy out only its four rows of red seats with their brass frames, the luggage trolley with its suitcases, the blue roll bag with the green bottle, and the cap on the seat, each whole down to the floor. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "group": "Airport"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "room-gate00-cut3",
+   "tab": "Rooms",
+   "title": "Gate 00: stencil 3 of 3, podium, board, columns and railing (cut from the painting the game uses now)",
+   "ar": "3:2",
+   "refs": [
+    "art/gate00.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Gate 00 painting.\n\nCopy out only the gate podium desk with its screen and bell, the gate sign above the doors, the rope posts, the departures board on the left wall, the wall lanterns, the tall brass window columns, and the brass-topped railing wall along the bottom edge, each whole down to where it touches the floor. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "group": "Airport"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
    "id": "room-concourse",
    "tab": "Rooms",
    "title": "The Endless Concourse, 40 x 14 tiles, installed plate attached as layout reference",
@@ -15445,6 +15627,48 @@
     "art/grands.webp"
    ],
    "prompt": "IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image, nothing else.\n\nWHAT THIS IS\nA painting of the Endless Concourse of Terminal Infinity, an airport concourse frozen at dusk with every gate paused, for \"The Adventures of Tom\", a family role-playing game. It is one walkable interior map, painted as ONE complete picture. The game draws its characters and monsters on top, so the floor must be empty.\n\nATTACHED IMAGES (in this order)\n1. The installed painting of this same place: a LAYOUT reference. Keep the same room layout, the same positions of walls, doors, big furniture and landmarks, and the same open floor. Restyle everything to attachment 2. Fix anything that is unclear, and do not add rooms.\n2. The finished painting of Deedee and Boppy's house, the grandparents' home in this game. It is the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted.\n\nART STYLE (the same look as attachment 2, the painting of Deedee and Boppy's house)\n- A hand-painted, hand-brushed interior in exactly the style of attachment 2: visible brushwork everywhere, matte surfaces like oil paint or gouache on canvas, rich warm color built in layers, a fine canvas grain, edges painted with a small brush. Gently simplified shapes, fine painted detail on wood grain, fabric, plaster and stone. No thick or black outlines. NOT glossy, NOT airbrushed.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light on furniture edges, soft baked contact shadows under every piece of furniture. Lamps and windows add small pools of warm light.\n- Fixed elevated three-quarter camera looking diagonally into the scene, about 35 degrees downward, the same camera across the whole picture. No top-down floor-plan look, no fisheye, no perspective change from one side to the other.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n- Attachment 2 is a STYLE REFERENCE ONLY. Match its brushwork, lighting, color and level of detail exactly. Take only how it is painted.\n\nTHE PLACE\n- A very long airport concourse running left to right, with a row of gates along the back wall, a moving walkway along the floor, boarding benches, and big windows on a violet dusk sky. Everything is still and orderly.\n- Size and shape: the map is 40 x 14 tiles, so the final plate is 2560 x 896 pixels, a 2.86 to 1 shape. Paint the whole picture at 16:9 (1920 x 1080) and compose it edge to edge: full bleed, no frame, no black or white margins. The target shape is wider than this picture, so the game will trim the top and bottom: keep every walkable lane, doorway and important object inside the middle 62 percent of the height, and let the top and bottom be wall and ceiling shadow or plain floor. \n- Camera: the elevated three-quarter view, about 35 degrees down. We see the back wall and a hint of the side walls, and the floor fills most of the picture. The scene is one uninterrupted space, painted at one consistent scale: a standing adult is about two tiles tall, which is roughly 1 part in 7 of the picture height.\n- Walkable floor: continuous floor under everything, with clear open lanes at least two tiles wide (about one tenth of the picture width) between furniture, so characters can walk everywhere the map needs. A broad open floor runs the full length of the hall, with a moving walkway in the lower middle and benches that do not block the main lane.\n- Doors and exits (they must be visible and clearly open, painted as plain doorways or openings, not as signs): doorway at the far left edge back to Gate 00 (the left wall); a huge door at the far right end, the biggest thing in the hall (the right). Keep exits inside the picture, not hidden under props.\n- Landmarks, painted large with a visible base and crisp silhouette so they can be layered over a character:\n  * five gate podiums with signs along the back wall at even spacing, each with a closed jet bridge window\n  * a standby desk in the middle\n  * a lost and found door in the lower middle\n  * boarding benches in three places along the lower wall\n  * a checkpoint rope on brass posts across the right middle\n  * a jet bridge window and the big door at the far right\n  * a plant at the left end\n  * a moving walkway strip along the floor\n- Sign lettering: the only text allowed is \"GATE 1\", \"GATE 3\", \"GATE 5\", \"GATE 7\" and \"GATE 9\" on five gate signs along the back wall, and \"GATE INFINITY\" over the big door at the far right, painted in clean readable capitals, spelled exactly as given, each on its own board or sign in the material of the place where it hangs. Nothing else in the picture carries any letters or numbers.\n- Palette and light: violet dusk #7E6AA8 and peach #F2B792, warm gate lights #FFC878, polished floor #D0C6D2, shadows #4A4560.\n\nSTRICT EXCLUSIONS\nNo people, no animals, no creatures, no monsters, no characters of any kind (the game draws them on top). No collectibles painted in: no chests, coins, keys, gems or glowing pickups. No frame, border, vignette bars, title card, contact sheet, mockup, palette chart or any other secondary material. Exactly one picture.\nApart from the sign lettering above, there is no text anywhere.\nFamily friendly for ages 6 and up. If anything is unclear, keep the furniture and layout of attachment 1 and repaint it in the style of attachment 2.",
+   "group": "Airport"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "room-concourse-cut1",
+   "tab": "Rooms",
+   "title": "The Endless Concourse: stencil 1 of 3, plants (cut from the painting the game uses now)",
+   "ar": "16:9",
+   "refs": [
+    "art/concourse.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached The Endless Concourse painting.\n\nCopy out only its potted plants on the floor and the hanging plants along the top ledge, each whole from the top leaves down to the base of its pot. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "group": "Airport"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "room-concourse-cut2",
+   "tab": "Rooms",
+   "title": "The Endless Concourse: stencil 2 of 3, benches, kiosks and bins (cut from the painting the game uses now)",
+   "ar": "16:9",
+   "refs": [
+    "art/concourse.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached The Endless Concourse painting.\n\nCopy out only its gold benches, the small screens on their posts, the trash bins, the luggage trolley, the tall gold cabinet, the desk with its lamp, and the rope posts with their rope, each whole down to the floor. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
+   "group": "Airport"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "room-concourse-cut3",
+   "tab": "Rooms",
+   "title": "The Endless Concourse: stencil 3 of 3, walkways, lamp posts and dividing wall (cut from the painting the game uses now)",
+   "ar": "16:9",
+   "refs": [
+    "art/concourse.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached The Endless Concourse painting.\n\nCopy out only the two moving walkways with their glass sides and end posts, the brass lamp posts along them, and the purple and gold dividing wall that runs from the top center down to the bottom edge with its gate opening, each whole down to where it touches the floor. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
    "group": "Airport"
   },
   {

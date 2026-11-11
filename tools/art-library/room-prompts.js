@@ -378,4 +378,44 @@ for (const a of B) {
   entries.push({ id: 'room-' + a.id, tab: 'Rooms', title: `${a.name}, ${a.w} x ${a.h} tiles, installed plate attached as layout reference`, ar: near[0],
     refs: [refFile[a.id] || `art/${a.id}.webp`, KEY], prompt: roomB({ ...a, exits: a.exits }) });
 }
+
+// ---- Airport stencils (cutout layers for walking behind things; added 2026-11-11 'aircut1'). Same template as the area stencils in area-prompts.js:
+// name only what to keep, never what to remove. The reference is the installed plate, the picture the game draws.
+const ROOM_STENCILS = {
+  terminal: { name: 'Terminal Zero', cuts: [
+    { name: 'plants', only: 'its potted plants and its planter boxes of leafy plants, each whole from the top leaves down to the base of its pot or planter.' },
+    { name: 'boards, posts and machines', only: 'the big departures board on its stand, the two hanging direction signs with their brackets, the rope barrier posts with their ropes, the metal detector arch, the X-ray machine with its belt and stacked trays, the luggage carts, the round trash bins, the photo booth with its stool, and the stone pillars with their wall lamps, each whole down to where it touches the floor.' },
+    { name: 'seats and lounge furniture', only: 'the rows of blue seats, the benches by the entrance, the red leather armchairs and sofas, the round tables and side tables with their lamps, and the bar stools, each whole down to where it touches the floor.' },
+    { name: 'counters, carousel and doors', only: 'the cafe counter with its machines and shelves, the long check-in counter with its screens, the information desk at the top right, the baggage carousel with its suitcases and its central pillar, and the glass entrance doors with their frame, each whole down to where it touches the floor.' }
+  ] },
+  gatezero: { name: 'Gate Zero', cuts: [
+    { name: 'plants', only: 'its potted plants in their stone planters and the dark leafy plants in the two bottom corners, each whole from the top leaves down to its base.' },
+    { name: 'seats', only: 'its four rows of red seats in the middle and the red seats along the left and right edges, each row whole with its metal frame, armrests and legs down to the floor.' },
+    { name: 'pillars, podium and posts', only: 'its tall stone pillars with their wall lamps, the podium desk with its microphone, the filing cabinet, the rope barrier posts with their ropes, the round metal trash bins, the wheelchair, and the stair railings with their lamps at the bottom center, each whole down to where it touches the floor.' }
+  ] },
+  flightzero: { name: 'Flight Zero', cuts: [
+    { name: 'upper row of sleeper seats', only: 'the five sleeper seat pods along the top wall, each whole with its shell, bed, pillow, blanket, screen and small lamp, together with the bags and trunks beside them, down to the floor.' },
+    { name: 'lower row of sleeper seats', only: 'the five sleeper seat pods along the bottom edge, each whole with its shell and blanket, together with the small cabinets between them, down to the floor.' },
+    { name: 'cart, curtains and galleys', only: 'the drinks cart with everything on it, the blue curtains at both ends of the cabin, and the galley counters and cabinets at the left end and the right end with their flowers and wall lamps, each whole down to the floor.' }
+  ] },
+  gate00: { name: 'Gate 00', cuts: [
+    { name: 'plants and lamps', only: 'its potted plants in their vases and pots, the globe lamps on their small side tables, and the two brass lamp posts beside the podium, each whole down to the floor.' },
+    { name: 'seats and luggage', only: 'its four rows of red seats with their brass frames, the luggage trolley with its suitcases, the blue roll bag with the green bottle, and the cap on the seat, each whole down to the floor.' },
+    { name: 'podium, board, columns and railing', only: 'the gate podium desk with its screen and bell, the gate sign above the doors, the rope posts, the departures board on the left wall, the wall lanterns, the tall brass window columns, and the brass-topped railing wall along the bottom edge, each whole down to where it touches the floor.' }
+  ] },
+  concourse: { name: 'The Endless Concourse', cuts: [
+    { name: 'plants', only: 'its potted plants on the floor and the hanging plants along the top ledge, each whole from the top leaves down to the base of its pot.' },
+    { name: 'benches, kiosks and bins', only: 'its gold benches, the small screens on their posts, the trash bins, the luggage trolley, the tall gold cabinet, the desk with its lamp, and the rope posts with their rope, each whole down to the floor.' },
+    { name: 'walkways, lamp posts and dividing wall', only: 'the two moving walkways with their glass sides and end posts, the brass lamp posts along them, and the purple and gold dividing wall that runs from the top center down to the bottom edge with its gate opening, each whole down to where it touches the floor.' }
+  ] }
+};
+for (const [id, a] of Object.entries(ROOM_STENCILS)) {
+  const room = entries.find(e => e.id === 'room-' + id);
+  a.cuts.forEach((s, i) => entries.push({
+    id: 'room-' + id + '-cut' + (i + 1), tab: 'Rooms',
+    title: a.name + ': stencil ' + (i + 1) + ' of ' + a.cuts.length + ', ' + s.name + ' (cut from the painting the game uses now)',
+    ar: room.ar, refs: ['art/' + id + '.webp'],
+    prompt: 'IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached ' + a.name + ' painting.\n\nCopy out only ' + s.only + ' Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.'
+  }));
+}
 module.exports = { entries };
