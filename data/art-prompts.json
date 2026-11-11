@@ -20443,8 +20443,16 @@
    "prompt": "Paint a new sheet of The Unread, the creature in attachment 2, as a handbrushed painting. Attachment 2 is the current painting of it in the game: paint the same creature, with the same shape, colors, materials and details, at the same size in each cell, in the same view, facing right. Do not repeat the poses of attachment 2. Paint 6 NEW poses in a 3 by 2 layout, one pose alone in each cell with clear magenta all around it and nothing crossing into another cell. These poses show the moment after the fight, when the anger has gone out: the mood is gentle, warm and a little funny, never fierce. No pages fly loose in any pose. Top row: 1 the same upright pose as the first pose of attachment 2, at exactly the same size, but calm: the old leather book half closed, the eyes soft, the jagged page teeth closed into one gentle line, the pages lying flat. 2 delighted: wide open, the eyes huge and sparkling, the pages lifted on both sides like two raised arms. 3 fanning: the pages spread in one full arc like a peacock tail, the eyes closed in happiness. Bottom row: 4 closing: the covers three quarters shut, the eyes drowsy, a red ribbon bookmark hanging out of the bottom. 5 closed and content: lying flat with the brass clasps fastened, the eyes closed and a small smile on the cover, the red ribbon bookmark hanging out. 6 just a book: the same closed book lying flat with the clasps fastened and no face at all, a handsome old volume with the red ribbon bookmark. Paint only what each pose names: no glows, speed lines, sparkles or splashes unless a pose asks for them, and no letters, numbers or words anywhere. Paint and finish it like attachment 1: matte, thick visible brush strokes on the figure, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/ending-ironbelly-v1.png",
+     "date": "2026-11-11",
+     "from": "v2",
+     "at": 1794438209428
+    }
+   ],
    "rejects": [],
    "id": "ending-ironbelly",
    "tab": "Enemies",
