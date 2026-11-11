@@ -28,9 +28,9 @@ Tom is redoing every building interior so the painting fills the whole iPhone sc
 
 ## Character scale (per room, CHANGES 431)
 
-Every room has its own character scale, measured from its painting (Tom 2026-11-07). The paintings are drawn in perspective, so the back of a room is painted smaller than the front; characters shrink as they walk toward the back wall.
+Every room has its own character scale, measured from its painting (Tom 2026-11-07). People do NOT change size by row (Tom 2026-11-10, flatscale1): each room has one size, the middle of its front and back numbers.
 - `ROOM_SCALE` in `engine/plate.js`: per room `front:[floor y, art px per foot]` and `back:[floor y, art px per foot]`, in art px of the 1254 px painting. Front comes from the low front half wall (taken as 3 ft); back from a back-wall door (6 ft 8 in), a counter (3 ft), a table or bar stools (2.5 ft). Floor-plan rooms (Amy's house, Tom's house, Tom's suite) use about the same value front and back.
-- `actorK(feetY)` draws Tom at 5 ft 11 at the floor where his feet are; everyone else follows from their real height (each set's `k`). `OW_TOM_ROOM_WORLD_H` (58.1) is Tom's drawn height at actorK 1: re-measure it if `OW_PLAYABLE_BOOST_INDOOR` or `OW_HOUSE_PARTY` in `engine/town-render.js` change.
+- `actorK(feetY)` draws Tom at 5 ft 11 at one size per room (`roomPxPerFoot` ignores the row); everyone else follows from their real height (each set's `k`). `OW_TOM_ROOM_WORLD_H` (58.1) is Tom's drawn height at actorK 1: re-measure it if `OW_PLAYABLE_BOOST_INDOOR` or `OW_HOUSE_PARTY` in `engine/town-render.js` change.
 - New room: measure the two points on the painting (open it with a 50 px grid), add the row to `ROOM_SCALE`, then run `python3 tools/room_scale_test.py <id>` and look at `tools/shots/rscale-<id>-*.png`.
 - Tom says a room is too big or too small: change that room's numbers only (bigger number = bigger characters; front for the door end, back for the far wall).
 

@@ -149,11 +149,11 @@ for(const id in ROOM_SCALE) PLATES[id].roomScale=ROOM_SCALE[id];
 // Tom's height in world px at actorK 1 inside a painted room (head to feet, measured 2026-11-07 with tools/room_scale_test.py; it follows
 // OW_PLAYABLE_BOOST_INDOOR and OW_HOUSE_PARTY in engine/town-render.js, so change it with them). Tom is 5 ft 11.
 const OW_TOM_ROOM_WORLD_H=58.1, TOM_FEET=71/12;
-// Art px per foot at a floor y (art px): straight line through the two points, held inside a sensible band past them.
+// Art px per foot in a room: ONE value per room, the same at every floor row, so people never change size when they walk up or down (Tom 2026-11-10:
+// "background images are flat, not from a perspective"). It is the middle of the room's two measured points (front and back in ROOM_SCALE). yArt is kept
+// so callers need not change, but it is ignored.
 function roomPxPerFoot(sc,yArt) {
-  const [y0,a]=sc.back,[y1,b]=sc.front, t=(yArt-y0)/(y1-y0);
-  const v=a+(b-a)*t, lo=Math.min(a,b), hi=Math.max(a,b);
-  return Math.max(lo*.8,Math.min(hi*1.08,v));
+  return (sc.back[1]+sc.front[1])/2;
 }
 // Outdoor maps (the streets, parks and yards): Tom asked for 20% bigger.
 const OUTDOOR_ACTOR_SCALE=1.2;
