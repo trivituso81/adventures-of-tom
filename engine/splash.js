@@ -564,17 +564,11 @@ const SPLASH_BREATH={amp:.011,speed:1.0};   // slow rise and fall: amp = lift as
 // Heights in design units, all from real heights at 4.34 units per inch (Tom 5'11" = 308, TNB 5'10", Boppy 5'7" 291, Amy and Deedee 5'5" 282, Justin 6'4" 330,
 // Grace 4'2" 222, Rose 3'4" 178, Nara a 40 lb labradoodle about 28 in at the head = 130, Olivia 5'5" 282, Michael 6'4" 330 with Lachlan and Isla on his arms). Heights are of the visible figure (hair, hats and all), so TNB (5'10") stands a little shorter than Tom (5'11").
 const SPLASH_H={tom:308,tnb:304,justin:330,boppy:291,amy:282,deedee:282,grace:230,rose:185,nara:130,olivia:282,michael:330};
-// Landscape and any wide window (Tom 2026-11-06 11:43): Tom stands dead centre under the logo (x 520 = the screen centre). To his left: TNB, then Nara.
-// To his right, front row: Rose, Grace, Deedee, Boppy. Amy and Justin stand behind Rose and Grace. Design units (x = centre, feet = baseline); later in the list draws on top.
-const SPLASH_LAND={feet0:1222,sx:1,sy:.7,span:890,tall:331,fracW:.74,fracH:.42,feetY:.79};
-// Order mirrored (Tom 2026-11-11 09:00): the Long Island family stands on the Long Island side of the welcome painting (left), the Los Angeles
-// family on the LA side (right). x' = 1208 - x, the group's own middle, so the group stays where it was.
-// Olivia and Michael (with Lachlan and Isla) join the LA side behind TNB and Nara to balance the picture (Tom 2026-11-11 09:35).
-const SPLASH_SPOTS=[
-  {id:'justin',x:503,feet:1150},{id:'amy',x:603,feet:1150},{id:'olivia',x:885,feet:1150},{id:'michael',x:990,feet:1150},
-  {id:'boppy',x:304,feet:1222},{id:'deedee',x:417,feet:1222},{id:'grace',x:513,feet:1222},{id:'rose',x:596,feet:1222},
-  {id:'tom',x:688,feet:1222},{id:'tnb',x:778,feet:1222},{id:'nara',x:904,feet:1250}
-];
+// Landscape and any wide window (Tom 2026-11-11 10:15): everyone stands in one line, equally spaced, with no one overlapping anyone (measured on
+// the visible painted figure, arms included). Long Island family on the Long Island side (left), Los Angeles family on the LA side (right),
+// Tom at the exact centre of the screen (Tom 2026-11-11 09:03). gap = space between two figures in design units; the line scales to fit
+// fracW of the width (sized by its wider half) and fracH of the height.
+const SPLASH_LAND={order:['boppy','deedee','justin','amy','grace','rose','tom','tnb','olivia','michael','nara'],gap:12,tall:331,fracW:.95,fracH:.42,feetY:.79};
 // Portrait (iPhone tuning, Tom 2026-11-06; order mirrored 2026-11-11 so Long Island people stand on the Long Island side): two rows. Front, left to right: Grace, Rose, Tom, TNB, Nara.
 // SPLASH_W = painted figure width over height (arms included). Front figures are spaced at `gap` of their widths, the back row is `depth` design units further
 // back, and the group scales so the tallest figure plus the depth fills fracH of the screen height (about 40% bigger than the old single line).
@@ -602,14 +596,38 @@ function splashPortLayout(w,h) {
   return back.map(f=>put(f,feet-P.depth*sc)).concat(front.map(f=>put(f,feet)));
 }
 function splashLandLayout(w,h) {
-  // Tom is always at the centre of the screen (Tom 2026-11-11 09:03): spots are placed around Tom's spot; the span grows to the wider half
-  // plus the same edge margin the old centred span had (L.span minus the spread of the spots).
-  const L=SPLASH_LAND,xs=SPLASH_SPOTS.map(m=>m.x),tx=SPLASH_SPOTS.find(m=>m.id==='tom').x,lo=Math.min(...xs),hi=Math.max(...xs);
-  const span=2*Math.max(tx-lo,hi-tx)+(L.span-(hi-lo));
-  const sc=Math.min(w*L.fracW/span,h*L.fracH/L.tall),baseY=h*L.feetY;
-  return SPLASH_SPOTS.map(m=>({id:m.id,cx:w/2+(m.x-tx)*L.sx*sc,feet:baseY+(m.feet-L.feet0)*L.sy*sc,hh:SPLASH_H[m.id]*sc}));
+  const L=SPLASH_LAND,figs=[];
+  for(const id of L.order) {   // visible box of each standing frame, in design units: width and the offset of its middle from the frame middle
+    const set=OW[id]; if(!set||!set.down) continue;
+    const fr=set.down[0],R=splashRows(id,fr),C=splashCols(id,fr),u=SPLASH_H[id]/(R.y1-R.y0+1);
+    figs.push({id,vw:(C.x1-C.x0)*u,off:((C.x0+C.x1)/2-fr[0].length/2)*u});
+  }
+  let x=0; figs.forEach((f,i)=>{ if(i) x+=figs[i-1].vw/2+L.gap+f.vw/2; f.x=x; });
+  const t=figs.find(f=>f.id==='tom'); if(!t) return [];
+  const half=Math.max(...figs.map(f=>Math.abs(f.x-t.x)+f.vw/2));
+  const sc=Math.min(w*L.fracW/(2*half),h*L.fracH/L.tall),feet=h*L.feetY;
+  return figs.map(f=>({id:f.id,cx:w/2+(f.x-t.x-f.off)*sc,feet,hh:SPLASH_H[f.id]*sc}));
 }
 // Visible rows of a frame (first and last row with any paint): the painted frames carry different empty margins, so sizing by the whole frame made some people 2% to 6% off.
+// First and last painted column of a standing frame, in grid columns. Measured on the painted picture itself (drawn once off screen and read
+// back), because the grid mask is coarser than the paint and made the gaps look uneven (Tom 2026-11-11 10:15). Grid mask until the art is ready.
+const splashColsCache={};
+function splashCols(id,fr) {
+  if(splashColsCache[id]) return splashColsCache[id];
+  let x0=1e9,x1=-1; for(const r of fr) { for(let i=0;i<r.length;i++) if(r[i]!=='.') { if(i<x0) x0=i; if(i>x1) x1=i; } }
+  const grid=x1<0?{x0:0,x1:fr[0].length-1}:{x0,x1:x1+1};   // x1 is the right edge (exclusive)
+  const art=PAINTED[id+'Ow']; if(!art||!art.ready) return grid;
+  try {
+    const k=6,cw=Math.ceil(fr[0].length*k),ch=Math.ceil(fr.length*k),cv=document.createElement('canvas'); cv.width=cw; cv.height=ch;
+    const cg=cv.getContext('2d'),prev=gfx; gfx=cg;
+    try { drawSprite(fr,OW[id].pal,0,0,k); } finally { gfx=prev; }
+    const d=cg.getImageData(0,0,cw,ch).data,col=new Uint8Array(cw);
+    const R=splashRows(id,fr),yEnd=Math.floor((R.y1+1-.06*(R.y1-R.y0+1))*k);   // skip the bottom 6% (the soft ground shadow is wider than the figure)
+    for(let y=0;y<Math.min(ch,yEnd);y++) for(let x=0;x<cw;x++) if(d[(y*cw+x)*4+3]>160) col[x]=1;
+    let a=0,b=cw-1; while(a<b&&!col[a]) a++; while(b>a&&!col[b]) b--;
+    return (splashColsCache[id]=b>a?{x0:a/k,x1:(b+1)/k}:grid);
+  } catch(e) { return grid; }
+}
 const splashRowsCache={};
 function splashRows(id,fr) {
   if(splashRowsCache[id]) return splashRowsCache[id];

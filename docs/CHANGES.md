@@ -1,3 +1,10 @@
+## 2026-11-11 (cast4): Welcome screen sideways: everyone in one line, equally spaced, no overlap (tag cast4)
+- Tom 10:15 (screenshot, sideways): Olivia overlapped Michael too much; space everyone out so they are all equally close but not overlapping.
+- `engine/splash.js`: landscape and any wide window now use `SPLASH_LAND.order` (Boppy, Deedee, Justin, Amy, Grace, Rose, TOM, TNB, Olivia, Michael, Nara) in one line on one ground line, with the same gap (12 design units) between every pair of visible figures. Each figure's width is measured on its painted standing frame (`splashCols`: drawn once off screen, alpha read back, bottom 6% skipped so the ground shadow does not count). Tom stays at the exact centre; the line is sized by its wider half. `SPLASH_SPOTS` (hand-placed spots) removed.
+- Measured on the drawn canvas at 951 x 648: gaps 6 to 9 px between all 11 figures, no overlap. Looked at 844 x 390 and 951 x 648.
+- Portrait unchanged (two rows): eleven people side by side upright would make Tom about 125 px tall instead of 195.
+- Tests: smoke FAILS [], tag_check ok.
+
 ## 2026-11-11 (portraits12): Justin, Olivia, Michael, Ellie added to the portrait crop tool
 - Tom 10:13: add Justin, Olivia, Michael, Ellie to portrait crops. `portraits.html` now has 12 chips (the eight plus these four). Justin, Olivia, Ellie already had measured FACE crops; Michael got one (`FACE['michael']`, measured on `michael-hero-ref-v1.png`, the dad in the family group). `bake_portraits.py` rebaked: Michael's `portraits/michael.png` is new, every other portrait is byte for byte unchanged; `data/portrait-crops-base.json` gained Michael.
 - Looked at: the contact sheet and the page at 393 x 852 (all chips, Michael loads, no errors). Not wired into the game: Michael has no status or battle menu use yet. His default crop shows a sliver of his daughter's bow and son's hair at the edges; Tom can tighten it in the page and Save.
