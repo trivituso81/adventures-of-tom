@@ -19529,8 +19529,16 @@
    "group": "Los Angeles people"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/npcs/npc-emotions-carmen-v1.png",
+     "date": "2026-11-11",
+     "from": "v1",
+     "at": 1794360751950
+    }
+   ],
    "rejects": [],
    "id": "npc-emotions-carmen",
    "tab": "NPCs",
