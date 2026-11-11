@@ -53,7 +53,7 @@ for _i, _names in KEEP.items():
 # Walk: Tom's overworld frames are the nine figures of his 3 x 3 walk sheet (art/raw/characters/tom-walk-sheet-v1.png, Tom 2026-11-05 22:56), as painted.
 from defringe import defringe
 from walk_sheet_frames import build as _build_walk
-poses.update(_build_walk('tom'))
+poses.update(_build_walk('tom', fix=True))
 
 # ---------------------------------------------------------------- head size (2026-11-01, Tom's call)
 # Every adult's face (hairline to chin) is Justin's 49 battle px, and Tom stands 5'11" = 143 px next to Justin's 6'4" = 153 px (BATTLE_SIZE.tom 1.43).
@@ -165,7 +165,9 @@ def hard(img, thr=0.5):
     a[:, :, 3] = np.where(a[:, :, 3] >= 255 * thr, 255, 0)
     return Image.fromarray(a, 'RGBA')
 
-OW_STAND_H = poses['w_down_stand'].crop(poses['w_down_stand'].getbbox()).height   # the standing frame's height: one size factor below keeps every frame at the scale it was painted at (Tom 5'11")
+import walk_sheet_frames as _wsf
+_f0 = _wsf.grid(_wsf.src('tom'), 3, 3)[0]   # the painted stand frame: the scale is set from it, so a head factor (head adjuster) changes only the head
+OW_STAND_H = _f0.crop(_f0.getbbox()).height   # the standing frame's height: one size factor below keeps every frame at the scale it was painted at (Tom 5'11")
 
 def head_cx(img):
     """x of the head: centroid of the top 30 percent of the figure."""
@@ -331,7 +333,7 @@ ko_rows = ko_rows['ko']
 ko_rects = pack(ko_big, os.path.join(ART, 'tom-ko.webp'))
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
-fo = args.ow_h * KW / OW_STAND_H
+fo = args.ow_h * KW / OW_STAND_H * _wsf.BODY_SCALE.get('tom', 1.0)
 print("ow: source stand height %d px, drawn at %.2fx (1.0 = no enlargement)" % (poses["w_down_stand"].height, fo))
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
 ow_big = tighten(place(ow_big, KW, 'center'), KW)

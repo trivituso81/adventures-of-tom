@@ -148,6 +148,7 @@ const SPLASH_MODES={
     {name:'MUSIC LIBRARY',sub:'Hear and re-make any track in the game.',act:openMusic},
     {name:'AREA BUILDER',sub:'See and fix where you can walk in any area.',act:openAreas},
     {name:'PORTRAIT CROPS',sub:'Choose how each face is cropped.',act:openPortraits},
+    {name:'HEAD SIZES',sub:'Make any head bigger or smaller and see it on the body.',act:openHeads},
     {name:'BATTLE LAB',sub:'Boss fights from chapters 1 to 20.',act:()=>splashDifficulty(()=>{ splash.labPage=0; splashOpen('lab'); })},
     {name:'BACK',sub:'',cls:'back',act:splashBack}]},
   // Boss fights, six to a page (pick a difficulty first). PREV and NEXT PAGE wrap around. engine/battle2.js b2Lab runs the fight.
@@ -302,6 +303,12 @@ function openPortraits() {
   sfx.select(); splash.active=false;
   $('splash').classList.add('out');
   setTimeout(()=>{ location.href=new URL('portraits.html',location.href).href; },250);
+}
+// The Head Size tool (heads.html): slide each character's head bigger or smaller with a before and after, save it for Claude to bake.
+function openHeads() {
+  sfx.select(); splash.active=false;
+  $('splash').classList.add('out');
+  setTimeout(()=>{ location.href=new URL('heads.html',location.href).href; },250);
 }
 // After a Battle Lab fight: back to the title screen on the lab list.
 function splashToLab() {

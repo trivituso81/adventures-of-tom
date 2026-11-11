@@ -96,6 +96,11 @@ GROW = {'grace': (100 / 392, 1.15), 'rose': (102 / 387, 1.15)}
 import json
 try: HEAD_TWEAK = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'head_tweak.json')))
 except OSError: HEAD_TWEAK = {}
+# PLAIN (head adjuster only): characters whose walk is used as painted with no standing head rule (Tom is the model, Nara is the dog). cid: chin line as a
+# share of the stand frame's height. Only a head factor other than 1 changes them; then the head grows about the chin and the body shrinks so the whole
+# figure keeps its on-screen height (the same rule as WALK_MATCH). BODY_SCALE[cid] = body scale relative to the painted figure, for the bake's `fo`.
+PLAIN = {'tom': 104 / 391.0, 'nara': .44}
+BODY_SCALE = {}
 UNWARPED_H = {}
 BODY_ROWS_PER_PX = {}
 
@@ -115,6 +120,11 @@ def build(cid, fix=False):
         sb = (R - hr) / (H - chin)                               # on-screen rows per source px for the body
         BODY_ROWS_PER_PX[cid] = sb / k                           # bake rows per source px (the engine multiplies by k)
         figs = [grow_head(f, hr / (chin * sb), chin) for f in figs]
+    elif fix and cid in PLAIN and HEAD_TWEAK.get(cid, 1.0) != 1.0:
+        from kidhead import grow_head
+        f = HEAD_TWEAK[cid]; H = UNWARPED_H[cid]; chin = PLAIN[cid] * H
+        BODY_SCALE[cid] = (H - chin * f) / (H - chin)           # body scale; the head is f times its painted on-screen size
+        figs = [grow_head(x, f / BODY_SCALE[cid], chin) for x in figs]
     elif fix and cid in GROW:
         from kidhead import grow_head
         chin, kh = GROW[cid]; chin *= UNWARPED_H[cid]

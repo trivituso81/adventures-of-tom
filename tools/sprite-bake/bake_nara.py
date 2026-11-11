@@ -38,7 +38,7 @@ for slot, src in SLOTS.items():
 poses['b_ko'] = _bf['b_dizzy'].transpose(Image.FLIP_LEFT_RIGHT)   # her sheet paints head right; the KO table is stored facing LEFT
 # Walk: the nine figures of Tom's 3 x 3 walk sheet for Nara (Tom 2026-11-05 23:27), used as painted (no mirroring).
 from walk_sheet_frames import build as _build_walk
-poses.update({k: v for k, v in _build_walk('nara').items() if not k.endswith('_pass')})
+poses.update({k: v for k, v in _build_walk('nara', fix=True).items() if not k.endswith('_pass')})
 
 # Hand-set points in the cut-out pose (x, y from its top-left): the nose/mouth (what she carries) and the near eye.
 MARK = {
@@ -206,7 +206,8 @@ ko_rows = ko_rows['ko']
 ko_rects = pack(ko_big, os.path.join(ART, 'nara-ko.webp'))
 
 # ---------------------------------------------------------------- overworld set (painted at KW x)
-fo = args.ow_h * KW / poses['w_down_stand'].height
+import walk_sheet_frames as _wsf
+fo = args.ow_h * KW / _wsf.UNWARPED_H['nara'] * _wsf.BODY_SCALE.get('nara', 1.0)   # painted stand height, so a head factor changes only the head
 ow_big = {n[2:]: scaled_to(v, fo) for n, v in poses.items() if n.startswith('w_') and not n.endswith('stand2')}
 ow_big, ow_off = place(ow_big, KW)
 ow_big, ow_off = tighten(ow_big, KW, ow_off)
