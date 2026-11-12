@@ -1,3 +1,10 @@
+## 2026-11-11 (boppy2): Boppy's newest approved hero, walking sheet and emotion sheet installed (tag boppy2)
+- Tom 18:49: "another hero, walk, and emotion sheet generated and approved for boppy." Sources (newest in the Library): hero v2, walking v4, emotions v6 (tomboppy1 used v1, v3, v5).
+- Rebaked with the tomboppy1 recipe: `walk_splice.py boppy`, `emotion_frames.py boppy`, `bake_emotion_faces.py boppy`, `bake_story_poses.py`, `bake_talk_faces.py boppy`, `bake_portraits.py boppy`. The story-pose bake also rewrote 30 NPC pose atlases and `data/npc-poses.js` with different bytes (not Boppy); those were reverted, only Boppy's pose rows and atlas are kept.
+- Menu portrait keeps Tom's saved Boppy crop (x 194, y 31, 586 px); it frames the v2 hero correctly.
+- HEAD SIZES: `chin_lines.json` Boppy moved to walking v4, chin read at .345 (was .348 on v3); `head_adjust.py manifest` rerun (twice: the first run warned there was no v4 reading). Applied factor unchanged.
+- NOT changed: Boppy's battle sheets and battle atlas (still the older art, Big Fish cap in battle), his ability sheets.
+- Tags: `bump_tags.py boppy2`, `EMO_V` and `TALK_V` set to boppy2. smoke FAILS [], tag_check ok, unused_voice 0. Looked at walk atlas, mood faces plus dialogue face, menu portrait.
 ## 2026-11-11 (facing1): people in cutscenes face the conversation (tag facing1)
 - Tom 15:08: back at the Rivituso house after chapter 9, Grace, Aunt Ellie and Rose faced the TV (away from Tom) on every line that was not a mood pose. Asked to check every scene for the same thing.
 - Cause (fact): the chapter 9 pose (`ch9Pose`, `n.still='up'`) pins them facing the TV, and the conversation staging (`huddleTurns` in engine/story.js) skipped anyone with `still`, so they never turned.
