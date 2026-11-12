@@ -21073,8 +21073,16 @@
    "prompt": "Paint a new character for a family role-playing game as one hero painting: a single full-body character picture. This picture becomes the reference for every other picture of this person in the game, so the details matter more than anything else.\n\nTHE PERSON\nMs. Cathy, a little girl's babysitter. A woman of about 60, 5 feet 4 inches tall, with a kind, cheerful, grandmotherly warmth and the look of someone who always comes prepared with snacks. Shoulder-length blonde hair, softly styled. Glasses. A teal dress. Simple comfortable flat shoes. Fair skin with the natural lines of her age around the eyes and mouth. No other accessories.\n\nSTYLE REFERENCES\nThe attached pictures are main characters of this game. Paint the new character by the same hand: the same painting style, texture, brushwork, light, level of detail, head size compared to the body and figure scale. Her head is the same size as the other adults' heads. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\nART STYLE\n- A whimsical storybook illustration of a person, shown full body, painted by hand in a rich, dense, jewel-toned style with visible painted texture and fine, detailed brushwork. Gently simplified shapes. Slightly stylized features.\n- Caricature proportions: an oversized head, a slim body, small hands and small feet, large expressive eyes behind the glasses and a warm, slightly exaggerated expression.\n- Warm golden light from the upper left, a soft warm glow, a gentle rim light, deep saturated colors with rich contrast and fine surface texture.\n- Clean, crisp edges with fine detail. No thick or black outlines.\n- NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no limited color palette.\n\nTHE PICTURE (strict)\n- One single image with one character and no grid. Portrait orientation, the biggest size you can make.\n- Full body from the top of the head to the feet, all inside the frame with a little space around. Standing neutral and relaxed, the body turned a little (three-quarter) toward the viewer, a warm natural smile, the face clear and readable, hands empty and relaxed at the sides, both feet flat and fully visible.\n- This is the highest-detail picture of the set: hair strands, glasses, skin, the fabric of the dress and the shoes all painted with care.\n- Background: one flat solid pure magenta #FF00FF filling the whole image. The dress is teal, never magenta or pink. No magenta glow, tint or fringe on edges or hair. No ground shadow, no props, no other people, no text, no border.\n- Family friendly for ages 6 and up."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/cathy-walk-sheet-v1.png",
+     "date": "2026-11-12",
+     "from": "v1",
+     "at": 1794504720864
+    }
+   ],
    "rejects": [],
    "id": "cathy-walk-sheet",
    "tab": "Characters",
