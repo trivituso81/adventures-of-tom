@@ -25,11 +25,12 @@ import numpy as np
 from PIL import Image, ImageDraw
 import walk_sheet_frames as W
 import townsfolk_common as TF
+import michael_head as MH
 TWEAK = os.path.join(HERE, 'head_tweak.json')
-ORDER = ['justin', 'tnb', 'tom', 'boppy', 'amy', 'deedee', 'olivia', 'ellie', 'grace', 'rose', 'nara', 'jojo']
+ORDER = ['justin', 'tnb', 'tom', 'boppy', 'amy', 'deedee', 'olivia', 'ellie', 'grace', 'rose', 'nara', 'jojo', 'michael']
 TOWN = list(TF.LIBRARY_WALK)   # the 21 townsfolk cut from approved Art Library sheets (bake_townsfolk.py)
 ORDER = ORDER + TOWN
-NAMES = {'justin': 'Justin', 'tnb': 'TNB', 'tom': 'Tom', 'boppy': 'Boppy', 'amy': 'Amy', 'deedee': 'Deedee', 'olivia': 'Olivia', 'ellie': 'Ellie', 'grace': 'Grace', 'rose': 'Rose', 'nara': 'Nara', 'jojo': 'Jojo'}
+NAMES = {'justin': 'Justin', 'tnb': 'TNB', 'tom': 'Tom', 'boppy': 'Boppy', 'amy': 'Amy', 'deedee': 'Deedee', 'olivia': 'Olivia', 'ellie': 'Ellie', 'grace': 'Grace', 'rose': 'Rose', 'nara': 'Nara', 'jojo': 'Jojo', 'michael': 'Michael'}
 NAMES.update({c: c.capitalize() for c in TOWN})
 GROUP = {c: ('town' if c in TOWN else 'family') for c in ORDER}
 NARA_ROWS = 32.0   # Nara's standing figure on screen (data/nara-hires.js); a dog has no height in data/heights.json
@@ -54,6 +55,10 @@ def figure(cid, tweak):
         fig = TF.stand(cid); H0 = fig.height; chin = TF.CHIN[cid] * H0; R = TF.target_rows(cid)
         T = (TF.KID_HEAD_ROWS if cid in TF.KIDS else W.tom_head_rows()) * tweak.get(cid, 1.0); sb = (R - T) / (H0 - chin)
         return grow_head(fig, T / (chin * sb), chin), sb, T / sb
+    if cid == 'michael':   # painted as is; only his head layer is scaled (michael_head.py), the figure keeps 6'4" (bake_michael.py rescales it)
+        f = tweak.get(cid, 1.0); names = [n for row in W.NAMES for n in row]; fr0 = dict(zip(names, W.grid(W.src(cid), 3, 3)))
+        fig = MH.head_layers({'down_stand': fr0['down_stand']}, f)['down_stand']; fig = fig.crop(fig.getbbox()); s = rows_of(cid) / fig.height
+        top, chin = MH.geometry(fr0['down_stand'], f); return fig, s, chin - top   # head = top of cap to the bottom of the chin, in source px of this figure
     W.UNWARPED_H.clear(); W.BODY_ROWS_PER_PX.clear(); W.BODY_SCALE.clear()
     fr = W.build(cid, fix=True)['w_down_stand']
     if cid in W.PLAIN:
@@ -110,6 +115,13 @@ def manifest():
     W.HEAD_TWEAK.clear()
     for cid in ORDER:
         fig = TF.stand(cid) if cid in TOWN else W.grid(W.src(cid), 3, 3)[0]; H = fig.height
+        if cid == 'michael':   # layered: the standing figure without his head + his head on its own, redrawn by heads.html exactly as michael_head.py builds it
+            body, head, _ = MH.cut(fig, 'down', 0, 0); R = rows_of(cid); ax, ay = MH.ANCHOR['down']; ln = lines.get(cid)
+            line = ln['share'] * H if ln and ln['sheet'] == sheet_of(cid) else MH.CHIN_LINE
+            body.save(os.path.join(ROOT, 'art', 'heads', 'michael.webp'), 'WEBP', lossless=True, quality=100, method=6); head.save(os.path.join(ROOT, 'art', 'heads', 'michael-head.webp'), 'WEBP', lossless=True, quality=100, method=6)
+            out['chars'][cid] = {'name': NAMES[cid], 'img': 'art/heads/michael.webp', 'headImg': 'art/heads/michael-head.webp', 'layer': True, 'w': fig.width, 'h': H, 'top': 0, 'chin': round(line, 2), 'line': round(line, 2),
+                                 'ax': ax, 'ay': ay, 'bodyTop': MH.body_top(fig), 'taper': 0, 'group': GROUP[cid], 'applied': cur.get(cid, 1.0), 'R': round(R, 3), 'hr0': round(line * R / H, 4), 'follows': None, 'inches': inches_of(cid)}
+            continue
         a = np.array(fig)[:, :, 3] > 40; R = rows_of(cid)
         if cid in TOWN: chin = TF.CHIN[cid] * H; hr0 = TF.KID_HEAD_ROWS if cid in TF.KIDS else W.tom_head_rows()
         elif cid in W.WALK_MATCH: chin = W.WALK_MATCH[cid][0] * H; hr0 = W.tom_head_rows()

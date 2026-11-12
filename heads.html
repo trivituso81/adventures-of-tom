@@ -84,7 +84,7 @@ const ghUrl=p=>GH_BASE()+'/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+p;
 const b64ToText=b=>decodeURIComponent(escape(atob(b.replace(/\s/g,''))));
 const textToB64=t=>btoa(unescape(encodeURIComponent(t)));
 $('exitbtn').onclick=()=>{location.href='index.html?admin=1';};
-let M=null,IMG={},draft={},saved={},cur='tom',grp='family';
+let M=null,IMG={},IMGH={},draft={},saved={},cur='tom',grp='family';
 const vis=()=>M.order.filter(id=>M.chars[id].group===grp);   // the people shown in the chip row, head row and standing row (Family and party, or Town)
 const eq=(a,b)=>Math.abs(a-b)<.0005;
 const applied=id=>M.chars[id].applied;
@@ -95,13 +95,24 @@ const dirty=id=>!eq(draft[id],applied(id));
 // so adults (m.follows) also move with Tom's own factor tf.
 let TOMF=null;   // Tom's factor used for the adults: null = the draft on screen; drawStage and the "game now" numbers set it to the applied one
 const tomF=()=>TOMF!=null?TOMF:draft.tom;
+// Michael (m.layer) is the one painted group: his head is its own picture scaled about the neck point (m.ax, m.ay), the body and the children are not touched,
+// and the whole figure is rescaled to keep his height: top = the head's top or the children's hair, whichever is higher (same maths as michael_head.py + bake_michael.py).
+const layTop=(m,f)=>Math.min(m.ay*(1-f),m.bodyTop);
 function params(m,f){
+  if(m.layer) return {sb:m.R/(m.h-layTop(m,f)),k:f};
   const hr=m.hr0*f*(m.follows?tomF():1),sb=(m.R-hr)/(m.h-m.chin),k=hr/(m.chin*sb);return {sb,k};
 }
 const withTom=(tf,fn)=>{const o=TOMF;TOMF=tf;try{return fn();}finally{TOMF=o;}};
 // draws the figure with its feet at baseY, neck column at cx; Z = canvas px per on-screen game row. Returns {topY,chinY}
 function drawFig(ctx,id,f,cx,baseY,Z,alpha){
   const m=M.chars[id],img=IMG[id],{sb,k}=params(m,f),P=sb*Z,tp=m.taper;
+  if(m.layer){
+    ctx.save(); ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high'; if(alpha!=null) ctx.globalAlpha=alpha;
+    ctx.drawImage(img,cx-m.ax*P,baseY-m.h*P,m.w*P,m.h*P);
+    ctx.drawImage(IMGH[id],cx-f*m.ax*P,baseY-(m.h-m.ay*(1-f))*P,m.w*f*P,m.h*f*P);
+    ctx.restore();
+    return {topY:baseY-(m.h-layTop(m,f))*P,chinY:baseY-(m.h-(m.ay-f*(m.ay-m.line)))*P,baseY};
+  }
   const chinRow=Math.round(m.top+m.chin),AY=chinRow+tp;
   ctx.save(); ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high'; if(alpha!=null) ctx.globalAlpha=alpha;
   const yAY=baseY-(m.h-AY)*P;
@@ -116,7 +127,9 @@ function drawFig(ctx,id,f,cx,baseY,Z,alpha){
   return {topY:yAY-cum,chinY,baseY};
 }
 function geom(id,f){ // on-screen rows (game rows) without drawing: head = top of hair to the true bottom of the chin, whole = top of hair to feet
-  const m=M.chars[id],{sb,k}=params(m,f),tp=m.taper,chinRow=Math.round(m.top+m.chin),AY=chinRow+tp;let all=0;
+  const m=M.chars[id],{sb,k}=params(m,f),tp=m.taper;
+  if(m.layer){const head=(m.ay-f*(m.ay-m.line)-layTop(m,f))*sb,whole=(m.h-layTop(m,f))*sb;return {head,whole,share:head/whole,k,sb};}
+  const chinRow=Math.round(m.top+m.chin),AY=chinRow+tp;let all=0;
   for(let y=AY-1;y>=m.top;y--){const dist=AY-y,s=dist>=tp?k:1+(k-1)*dist/tp;all+=s*sb;}
   const whole=all+(m.h-AY)*sb,head=whole-chinDrop(id,f);return {head,whole,share:head/whole,k,sb};
 }
@@ -124,7 +137,9 @@ function geom(id,f){ // on-screen rows (game rows) without drawing: head = top o
 // on-screen rows from the feet up to the bottom of the chin, exactly as drawFig lays the rows out (the neck rows under the chin are tapered, so this is not a plain multiply)
 // m.line is the true bottom of the chin on this painting (measured per sheet); m.chin is only the anchor the head is scaled about.
 function chinDrop(id,f){
-  const m=M.chars[id],{sb,k}=params(m,f),tp=m.taper,chinRow=Math.round(m.top+m.chin),AY=chinRow+tp,lineRow=Math.round(m.line);let d=0;
+  const m=M.chars[id],{sb,k}=params(m,f),tp=m.taper;
+  if(m.layer) return (m.h-(m.ay-f*(m.ay-m.line)))*sb;
+  const chinRow=Math.round(m.top+m.chin),AY=chinRow+tp,lineRow=Math.round(m.line);let d=0;
   for(let y=m.h-1;y>lineRow;y--){const dist=AY-y;d+=(dist<=0?1:dist>=tp?k:1+(k-1)*dist/tp)*sb;}
   return d;
 }
@@ -236,7 +251,7 @@ async function loadSaved(){
 (async()=>{
   try{
     M=await (await fetch('data/head-sizes.json?t='+Date.now(),{cache:'no-store'})).json();
-    await Promise.all(M.order.map(async id=>{IMG[id]=await loadImg(M.chars[id].img);}));
+    await Promise.all(M.order.map(async id=>{IMG[id]=await loadImg(M.chars[id].img);if(M.chars[id].headImg) IMGH[id]=await loadImg(M.chars[id].headImg);}));
     saved=await loadSaved();
     for(const id of M.order){const a=applied(id);draft[id]=(saved[id]!=null?saved[id]:a);}
     const GN={family:'Family and party',town:'Town'};

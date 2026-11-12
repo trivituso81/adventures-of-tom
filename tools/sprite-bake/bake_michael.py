@@ -9,13 +9,16 @@ Used exactly as painted (CLAUDE.md, "Tom's painted frames are used as painted"):
 no flipping. One scale for all nine so the figure keeps the sheet's own proportions; it is set so the standing front figure (cap top to feet) is
 --ow-h rows, and data/michael-hires-use.js draws it at k = 44.96 / ow-h (6'4" next to Tom 5'11" = 42.0 rows, same as Justin).
 
+Head   : data/head_tweak.json style factor `michael` (ADMIN > HEAD SIZES) scales his head about the neck (michael_head.py); the figure is rescaled so his height stays 6'4".
+
 Usage : OW_K=7 python3 tools/sprite-bake/bake_michael.py [--ow-h 53] [--contact PATH]
 """
 import argparse, json, os, sys
 import numpy as np
 from PIL import Image
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from walk_sheet_frames import grid, NAMES, src as _sheet_src
+from walk_sheet_frames import grid, NAMES, src as _sheet_src, HEAD_TWEAK
+import michael_head as MH
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SRC = _sheet_src('michael')    # newest approved sheet: michael-walking-sheet-v1.png (walkv2, 11-10)
@@ -34,6 +37,10 @@ os.makedirs(ART, exist_ok=True)
 names = [n for row in NAMES for n in row]
 figs = grid(SRC, 3, 3)
 poses = dict(zip(names, figs))
+HF = HEAD_TWEAK.get('michael', 1.0)   # HEAD SIZES factor (head_tweak.json): his head only, the children and body untouched (michael_head.py); 1.0 = as painted, nothing changes
+if HF != 1.0:
+    poses = MH.head_layers(poses, HF)
+    poses = {n: im.crop(im.getbbox()) for n, im in poses.items()}   # new bounding box; the standing figure is then rescaled to --ow-h below, so his real height holds at any head size
 
 def scaled_to(img, f):
     w, h = max(1, round(img.width * f)), max(1, round(img.height * f))

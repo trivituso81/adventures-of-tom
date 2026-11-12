@@ -266,5 +266,9 @@
  "yesenia": {
   "sheet": "npc-walk-yesenia-v1.png",
   "share": 0.271
+ },
+ "michael": {
+  "sheet": "michael-walking-sheet-v1.png",
+  "share": 0.2538
  }
 }
