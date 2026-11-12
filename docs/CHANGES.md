@@ -1,3 +1,5 @@
+## 2026-11-12 (duohud1): Duo landscape quest button moved right (tag duohud1)
+- Tom: in Duo landscape the ! quest button was too far left. Fix: `html.duo.landscape #hud` left offset 4 px to 46 px (index.html), so quest sits where the menu button was (x 46) and menu and save follow (x 88, 130). Measured at 951 x 648 in Chromium; smoke FAILS [].
 ## 2026-11-12 (gatedoor1): Gate Zero doors stay shut until the seven coins are in (tag gatedoor1)
 - Tom: he could not work out how to open the Gate Zero clock. Fact: the two doorway tiles under the gate doors (14,3) and (15,3) were also open exits to Gate Zero, so walking up went straight through and skipped the coin menu.
 - Fix: `gates` on Terminal Zero (data/maps-le.js) covers those two tiles in chapter 10 until `ch10-door`, with `look:'doors'` (engine/story.js draws nothing across them; the gatedoors object is the picture). Walking up shows "The doors are locked tight", and A on the doors opens the clock's coin menu.
