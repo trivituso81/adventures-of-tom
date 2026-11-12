@@ -1,15 +1,12 @@
-<<<<<<< HEAD
+## 2026-11-11 (nara42): Nara's map height is up to Tom's waist (tag nara42)
+- Tom 16:09: "Nara's height should be up to Tom's waist." Fact: Tom's waist is about 3'6" (0.6 of 5'11), so `data/heights.json` now has `nara: 42` (top of head to paws, front stand). On the map she is 24.85 rows next to Tom's 42 (was 27.9 at the old `NARA_OW_SIZE` 0.9, about 10 percent smaller now; Rose is 23.66).
+- `NARA_OW_SIZE` purged (0 references). `data/walk-scale.js` script tag moved after `data/nara-hires-use.js` so its generated scale reaches Nara. Battle, knocked out and welcome screen sizes (`NARA_SIZE` 1.15) untouched.
+- Tests: heights_test ok (nara bakes within 2 percent), smoke FAILS [], tag_check ok, unused_voice 0. Not looked at in a map screenshot.
 ## 2026-11-11 (bossend4): painted endings for the four scripted-actor bosses (tag bossend4)
 - Warden (Boppy, ch14), HUSH-9 (ch15), Marlowe (ch16) and Brain Freeze (Nine Scoops) are NPCs, not map monsters, so they get no `{finale}` step. Their ending frames now play inside their after scenes at the lines the spec names (docs/BOSS_ENDINGS.md section 5). No spoken line was reworded.
 - Engine (`engine/boss-finale.js`, `engine/story.js`): `{pose:'<name>',foe:'<frame>',end:'<boss id>'}` shows an ending frame on a person (`endPoseDraw`, sized to the person's walk art by the `calm` frame; Brain Freeze goes through the monster path); `{pose:'<name>'}` clears it. New steps `{endfx:'<effect>',on:'<name>'}`, `{endprop:{...}}` (Warden's gold pool and helm, helm hops down the steps; `{endprop:'clear'}`), `{camboss:'<name>'}` (frames the person with the party; without it Boppy stood half off screen at the map edge). New effects: softrings, amberdrain, mist.
 - Scenes: ch14After calm, run, half, helmet, gold flash, his everyday art, pool and helm; ch15After crack, soft rings, calm, laugh, then seated and dinner (kind win) or puzzled (plain win); ch16After calm with amber draining, hand, down, kneel (no fanfare); nsAfterBoss calm, lid with mist, hopeful, party for the walk off.
 - Tests: looked at close-up frame strips for all four (stage scenes played through the real dialogue); smoke and tag_check below. Not looked at: landscape; kindness branches of ch15 (seated, dinner) were not played; Warden `half` frame looks translucent as painted.
-=======
-## 2026-11-11 (nara42): Nara's map height is up to Tom's waist (tag nara42)
-- Tom 16:09: "Nara's height should be up to Tom's waist." Fact: Tom's waist is about 3'6" (0.6 of 5'11), so `data/heights.json` now has `nara: 42` (top of head to paws, front stand). On the map she is 24.85 rows next to Tom's 42 (was 27.9 at the old `NARA_OW_SIZE` 0.9, about 10 percent smaller now; Rose is 23.66).
-- `NARA_OW_SIZE` purged (0 references). `data/walk-scale.js` script tag moved after `data/nara-hires-use.js` so its generated scale reaches Nara. Battle, knocked out and welcome screen sizes (`NARA_SIZE` 1.15) untouched.
-- Tests: heights_test ok (nara bakes within 2 percent), smoke FAILS [], tag_check ok, unused_voice 0. Not looked at in a map screenshot.
->>>>>>> 00d36d0 (Nara map height up to Tom's waist (heights.json nara 42), purge NARA_OW_SIZE)
 ## 2026-11-11 (lineup1): welcome screen cast reordered to Tom's lineup, one layout for portrait and landscape (tag lineup1)
 - Tom 15:57: main row left to right Boppy, Deedee, Rose, Grace, TOM (centre), TNB, Olivia, Michael; Amy and Justin behind Grace and Rose; Nara in front of Tom and TNB, centred.
 - `engine/splash.js`: `SPLASH_LINEUP` and `splashLineupLayout` replace `SPLASH_LAND`, `SPLASH_PORT`, `SPLASH_W`, `splashLandLayout`, `splashPortLayout` (purged, 0 references). Gaps per neighbour pair in design units between measured painted figures (`gaps`), tuned by eye: Boppy and Deedee close without touching, Rose, Grace, Tom, TNB close to touching, Olivia and Michael touching, normal space Deedee to Rose and TNB to Olivia.
