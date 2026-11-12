@@ -56,16 +56,27 @@ function confirmNew() {
     {label:'BACK',fn:titleMenu}
   ]);
 }
-function loadMenu() {
-  const slots=SAVE_SLOTS.filter(s=>readSave(s));
-  if(!slots.length) {
-    titleAsk('Load','No saved games yet.',[{label:'START NEW',fn:beginOpening},cloudOption(),restoreOption(),{label:'BACK',fn:titleMenu}]);
+// Load page: this device's saves, then saves from the player's other devices (engine/save-sync.js syncOthers). Opening it reads the
+// cloud; when that finishes the page redraws itself (redraw=true), so saves made elsewhere appear without leaving the page.
+function loadMenu(redraw) {
+  const checking=!redraw&&typeof syncPull==='function'&&syncPull();
+  const slots=SAVE_SLOTS.filter(s=>readSave(s)), others=typeof syncOthers==='function'?syncOthers():[];
+  const note=checking||(typeof syncChecking==='function'&&syncChecking())?'Checking the cloud for saves from your other devices.':'';
+  const sel=redraw&&splash.mode==='ask'?splash.sel:0;
+  if(!slots.length&&!others.length) {
+    titleAsk('Load',note||'No saved games yet.',[{label:'START NEW',fn:beginOpening},cloudOption(),restoreOption(),{label:'BACK',fn:titleMenu}]);
     return;
   }
   const nm=s=>s==='auto'?'Autosave':'Slot '+s;
   // Each save's details sit inside its own button; no text block above the buttons and no footer hint.
-  titleAsk('Load','',
-    slots.map(s=>({label:nm(s).toUpperCase(),sub:saveSummary(readSave(s)),fn:()=>{ endIntro(); loadGame(s); }})).concat([cloudOption(),restoreOption(),{label:'BACK',fn:titleMenu}]),'');
+  titleAsk('Load',note,
+    slots.map(s=>({label:nm(s).toUpperCase(),sub:saveSummary(readSave(s)),fn:()=>{ endIntro(); loadGame(s); }}))
+      .concat(others.map(o=>({label:syncOtherName(o).toUpperCase(),sub:saveSummary(o.sv),fn:()=>{
+        const slot=syncTake(o); if(!slot) { showToast('Couldn\'t copy that save to this device.',3); return; }
+        endIntro(); loadGame(slot); showToast('Copied to Slot '+slot+' on this device.',3);
+      }})))
+      .concat([cloudOption(),restoreOption(),{label:'BACK',fn:titleMenu}]),'');
+  if(sel&&splash.list&&splash.list.length) { splash.sel=Math.min(sel,splash.list.length-1); if(typeof splashMark==='function') splashMark(); }
 }
 // CLOUD SAVES on the Load page: paste a GitHub token once, then pull and upload (engine/save-sync.js). Holds the title page open meanwhile.
 function cloudOption() {

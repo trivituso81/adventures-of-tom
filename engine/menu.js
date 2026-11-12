@@ -452,7 +452,7 @@ function renderSaveTab(body) {
   $('menu-foot').textContent=saveNoteLine()+' Autosave happens at every door, after each battle and when you leave the app.';
   const list=el('div','item-list single loadlist');
   const used=SAVE_SLOTS.filter(k=>readSave(k));   // every used slot (autosave plus up to 10), same as the title Load page; empty slots are not listed
-  if(!used.length) list.appendChild(el('div','menu-empty','No saved games yet. Use the SAVE button on the map.'));
+  if(!used.length&&!(typeof syncOthers==='function'&&syncOthers().length)) list.appendChild(el('div','menu-empty','No saved games yet. Use the SAVE button on the map.'));
   for(const slot of used) {
     const sv=readSave(slot);
     const row=el('div','save-row');
@@ -468,6 +468,24 @@ function renderSaveTab(body) {
     row.appendChild(l);
     list.appendChild(row);
   }
+  // Saves from the player's other devices (engine/save-sync.js). Loading one copies it into a slot here first. Opening the tab reads the cloud.
+  if(typeof syncPull==='function') syncPull();
+  const others=typeof syncOthers==='function'?syncOthers():[];
+  if(others.length) list.appendChild(el('div','menu-empty small','From your other devices'));
+  others.forEach((o,i)=>{
+    const row=el('div','save-row');
+    row.innerHTML='<div class="item-icon">\u2601</div><div class="save-copy"><span class="save-name"></span><span class="save-meta"></span></div>';
+    row.querySelector('.save-name').textContent=syncOtherName(o);
+    row.querySelector('.save-meta').textContent=saveSummary(o.sv);
+    const k='loadc-'+o.dev+'-'+o.slot,sure=menuConfirm===k;
+    row.appendChild(btn('save-btn'+(sure?' sure':''),k,sure?'LOAD IT?':'LOAD',()=>{
+      if(!sure) { askConfirm(k); return; }
+      menuConfirm=null; const slot=syncTake(o);
+      if(!slot) { showToast('Couldn\'t copy that save to this device.',3); renderMenu(); return; }
+      closeMenu(); loadGame(slot); showToast('Copied to Slot '+slot+' on this device.',3);
+    }));
+    list.appendChild(row);
+  });
   const hint=el('div','menu-empty small','Loading replaces where you are now. Anything since your last save is lost.');
   const bk=el('div','mquit-btns');
   bk.appendChild(btn('save-btn','backup','BACK UP',()=>{ doBackup().then(()=>renderMenu()); }));
