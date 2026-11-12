@@ -1210,6 +1210,8 @@ html.duo.landscape #splash .sp-choice .sp-name{font-size:calc(14px*var(--ts))}
 html.duo.landscape #splash .sp-choice .sp-sub{font-size:calc(11px*var(--ts))}
 html.duo.landscape #splash .sp-text{font-size:calc(12px*var(--ts))}
 html.duo.landscape #splash .dialog-footer{font-size:calc(10px*var(--ts))}
+/* Duo sideways dialogue box one third shorter (Tom 2026-11-12, build duobox1): 112 x --ts becomes 75 x --ts; the portrait is as tall as the box (fitDialogPortrait), so it shrinks with it. */
+html.duo.landscape #dialog{min-height:calc(calc(75px*var(--ts)) + env(safe-area-inset-bottom))}
 </style>
 <script>(function(){var d=document.documentElement;d.classList.add('js-on');
 function fail(){if(!d.classList.contains('js-running'))d.classList.add('js-failed');}
