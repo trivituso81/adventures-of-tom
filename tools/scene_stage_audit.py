@@ -71,6 +71,21 @@ START=r"""(a)=>{ const m=worlds[a.map]; if(!m) return null; const ok=(x,y)=>walk
     const d=Math.hypot(x-cx,y-cy); if(d<bd){bd=d;best=[x,y];} }
   return best; }"""
 
+# Scenes with no TRIGGER: (scene, chapter, where Tom stands). obj = an object flag key, npc = an NPC name or flag key, map = a map id (spawn point).
+EXTRA=[('ch4Rig',4,{'obj':'jbox'}),('ch4Snack',4,{'npc':'crafty'}),('ch5Clocks',5,{'obj':'clock'}),('ch5Snack',5,{'obj':'fridge'}),
+ ('ch6Door',6,{'obj':'knock'}),('ch6Fetch',6,{'obj':'dogpark'}),('ch6Board',6,{'obj':'warboard'}),('ch6Ladder',6,{'obj':'bucket'}),
+ ('ch7Door',7,{'obj':'catalog'}),('ch7Story',7,{'obj':'storytime'}),('ch8Motor',8,{'obj':'ttmotor'}),('ch8Turn',8,{'map':'carbarn'}),
+ ('ch8Plate',8,{'obj':'plate'}),('ch8Pail',8,{'obj':'pail'}),('ch9Door',9,{'map':'moonclub'}),('ch9Dance',9,{'map':'moonclub'}),
+ ('ch10Door',10,{'map':'terminal'}),('ch10Photo',10,{'obj':'photobooth'}),('ch11Vance',11,{'obj':'gateinfinity'}),('ch11Lost',11,{'obj':'gateinfinity'}),
+ ('ch12Open',12,{'obj':'gateinfinity'}),('ch13Open',12,{'npc':'Sol'}),('ch14Deedee',14,{'map':'row'}),('ch14Gate',14,{'map':'row'}),
+ ('ch17Open',16,{'npc':'Sol'}),('ch17Enter',17,{'obj':'towerfront'}),('ch17Race',17,{'map':'towerstairs'}),('ch18Open',18,{'map':'towervault'}),
+ ('ch19Down',19,{'obj':'dlmail'}),('ch19Claim',19,{'obj':'dlaltar'}),('ch20Open',20,{'map':'towervault'}),('ch20Heart',20,{'map':'towervault'})]
+LOCATE=r"""(loc)=>{ if(loc.map) return worlds[loc.map]?{map:loc.map}:null;
+  for(const [id,m] of Object.entries(worlds)) {
+    if(loc.obj) { const o=(m.objects||[]).find(o=>o[loc.obj]||o.kind===loc.obj); if(o) return {map:id,at:[o.x-2,o.y-1,o.x+2,o.y+3]}; }
+    if(loc.npc) { const n=(m.npcs||[]).find(n=>n.name===loc.npc||n[loc.npc]); if(n) return {map:id,at:[n.x-2,n.y-1,n.x+2,n.y+3]}; } }
+  return null; }"""
+
 DIRV={'up':(0,-1),'down':(0,1),'left':(-1,0),'right':(1,0)}
 
 def clearance(grid):
@@ -143,7 +158,15 @@ def run(out,filters):
         br=pw.chromium.launch(**kw)
         pg0=br.new_page(); pg0.goto(f'http://127.0.0.1:{port}/index.html'); pg0.wait_for_function('()=>window.__LE&&window.__LE.playScene',timeout=180000)
         trig=pg0.evaluate("()=>TRIGGERS.filter(t=>typeof t.scene==='string').map(t=>({id:t.id,map:t.map,at:t.at||null,when:t.when||{},scene:t.scene}))"); pg0.close()
-        if filters: trig=[t for t in trig if any(t['id']==f or (f.endswith('-') and t['id'].startswith(f)) for f in filters)]
+        if filters and filters[0]=='extra':   # scenes started by an object, an NPC or a menu, not by a TRIGGER (facing1)
+            want=filters[1:]; trig=[]
+            for sc,ch,loc in EXTRA:
+                if want and sc not in want: continue
+                pg0=br.new_page(); pg0.goto(f'http://127.0.0.1:{port}/index.html'); pg0.wait_for_function('()=>window.__LE&&window.__LE.playScene',timeout=180000)
+                r=pg0.evaluate(LOCATE,loc); pg0.close()
+                if not r: print('extra',sc,'no place for',loc,flush=True); continue
+                trig.append({'id':'x-'+sc,'map':r['map'],'at':r.get('at'),'when':{'chapter':ch},'scene':sc})
+        elif filters: trig=[t for t in trig if any(t['id']==f or (f.endswith('-') and t['id'].startswith(f)) for f in filters)]
         for T in trig:
           if os.path.exists(os.path.join(out,T['id']+'.json')) and not os.environ.get('REDO'): continue   # resume: skip scenes already audited
           for attempt in (1,2):

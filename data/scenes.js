@@ -3776,7 +3776,7 @@ SCENES.ch10End=[
   {talk:'Deedee',lines:['THERE they are. Tom! The oven clock started blinking twelve oh one and I cried a little. Into the gravy. It\'s fine. It\'s seasoning.']},
   {talk:'Boppy',lines:['Every clock in this house started at once. Eleven clocks. I didn\'t know we\'d eleven clocks.','My stomach is still on midnight. My stomach is always on midnight.']},
   {talk:'Aunt Ellie',lines:['Sit. Tell me about the airport. Leave nothing out. I\'ll know.']},
-  {spawn:{name:'Justin',look:'bean',at:spotNear(2),dir:'up'}},
+  {spawn:{name:'Justin',look:'bean',at:spotNear(2),dir:'down'}},
   {call:()=>{ const j=currentMap.npcs.find(n=>n.scripted&&n.name==='Justin'); if(j) j.sheet='justin'; sfx.doorIn&&sfx.doorIn(); }},
   {talk:'Grace',lines:['DAD!']},
   {talk:'Justin',lines:['Hey, everybody. The lights all came back on at twelve oh one. So I came back too. I brought bread.']},

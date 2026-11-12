@@ -220,7 +220,7 @@ function chselPart2() {
   else { currentMap=town; player.x=h.door.x; player.y=h.door.y+1; }
   player.facing='down'; player.move=null; player.hidden=false;
   placeFollowers(); refreshAreaUI(); resize(); camera.snap=true;
-  playScene(()=>[{partCard:2,time:3},{card:PARTS[2].from,time:3.2},...(SCENES.part2Open?SCENES.part2Open():[]),{save:true}],{fade:.7});
+  playScene(()=>[{partCard:2,time:3},{card:PARTS[2].from,time:3.2},...(SCENES.part2Open?SCENES.part2Open():[]),{save:true}],{fade:.7,stage:true});
 }
 // Everyone to level L with Auto-Stamp and full HP.
 function b6Prep(L) {

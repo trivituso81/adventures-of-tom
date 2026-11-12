@@ -486,7 +486,9 @@ function huddleGroup(withName,focus) {
   const roster=[player,...followers.filter(f=>!f.hidden&&party.includes(f.member)&&!f.seat&&Math.hypot(stagePos(f).x-tp.x,stagePos(f).y-tp.y)<=7)];
   const others=[];
   const add=n=>{ if(n&&!n.hidden&&!roster.includes(n)&&!others.includes(n)&&!followers.includes(n)) others.push(n); };
-  for(const n of currentMap.npcs) if(n.held||n.scripted) { const p=stagePos(n); if(Math.hypot(p.x-tp.x,p.y-tp.y)<=7) add(n); }
+  // A posed NPC (`still`, data/scenes.js ch9Pose) near Tom is in the conversation too: held, so it turns toward the group for the scene and
+  // updateNPCs (engine/battle-draw.js) turns it back to its pose when the scene lets go (facing1, Tom 2026-11-11).
+  for(const n of currentMap.npcs) if(n.held||n.scripted||(n.still&&!n.hidden)) { const p=stagePos(n); if(Math.hypot(p.x-tp.x,p.y-tp.y)<=7) { if(n.still&&!n.held) storyHold(n); add(n); } }
   if(focus) { const fa=stageFocus(focus); if(fa&&fa.actor&&fa.seen&&currentMap.npcs.includes(fa.actor)) add(fa.actor); }   // a boss scene's boss, held or not
   const named=typeof withName==='string'?sceneActor(withName):null;
   if(named&&named!==player&&!followers.includes(named)&&currentMap.npcs.includes(named)) { const p=stagePos(named);
@@ -494,7 +496,7 @@ function huddleGroup(withName,focus) {
   return {roster,others};
 }
 const huddleFixed=(g,a)=>g.others.includes(a)||a.scenePose||a.scr;
-const huddleTurns=(g,a)=>!a.scenePose&&!a.scr&&!a.still&&!a.monster&&!a.move;
+const huddleTurns=(g,a)=>!a.scenePose&&!a.scr&&(!a.still||a.held)&&!a.monster&&!a.move;
 // What is wrong with the group right now: a Set of 'overlap', 'place' (against a wall, the map edge or off the floor) and 'face'.
 function huddleFails(g,clr,memo) {
   const out=new Set(),all=[...g.roster,...g.others],map=currentMap; if(all.length<2) return out;
@@ -637,7 +639,8 @@ function playScene(script,opts={}) {
   let list=typeof script==='function'?script(opts.ctx||{}):script;
   for(const f of [...followers,player]) { f.stagePlaced=false; f.stageFaced=false; }
   if(sid&&BOSS_STAGE[sid]&&Array.isArray(list)) { const fc=BOSS_STAGE[sid]; list=stageScript(list,fc,(first,st)=>[first?{gather:fc}:{gather:fc,check:true},{huddle:true,focus:fc,with:st&&typeof st.talk==='string'?st.talk:null}]); }
-  else if(sid&&Array.isArray(list)&&!JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v).includes('"gather"')) list=stageScript(list,null,(first,st)=>({huddle:true,with:st&&typeof st.talk==='string'?st.talk:null}));
+  // opts.stage: a wrapper script (playScene(()=>[...])) that should be staged like a SCENES id (facing1: the Part 2 opening).
+  else if((sid||opts.stage)&&Array.isArray(list)&&!JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v).includes('"gather"')) list=stageScript(list,null,(first,st)=>({huddle:true,with:st&&typeof st.talk==='string'?st.talk:null}));
   intro.active=true; intro.phase='scene'; intro.cur=null; intro.fadeLock=false;
   intro.fade=opts.fade||0;
   intro.steps=compileScene(list);
@@ -1022,7 +1025,7 @@ function beginPart2(slot) {
   const st=chapterInfo(PARTS[2].from).start;
   if(st&&worlds[st.map]) { currentMap=worlds[st.map]; player.x=st.x; player.y=st.y; player.move=null; placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; }
   playScene(()=>[{partCard:2,time:3},{card:PARTS[2].from,time:3.2},...(SCENES.part2Open?SCENES.part2Open():[]),
-    {toast:'Everything from Part 1 carried over: levels, Stamp Points, gear, items and coins.',time:3.5},{save:true}],{fade:.7});
+    {toast:'Everything from Part 1 carried over: levels, Stamp Points, gear, items and coins.',time:3.5},{save:true}],{fade:.7,stage:true});
 }
 // Save lists say which Part and chapter a full-game save is in.
 const LE_saveSummary_story=saveSummary;
