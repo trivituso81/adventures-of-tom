@@ -1,3 +1,5 @@
+## 2026-11-12 (clockprompt1): prompts only, the area clock entries now match the close-up clock
+- `prop-find-ch10` cell 1 (gate clock) and `prop-find-ch10-clock` cell 1 (blank face) say: heavy polished brass rim in two stepped rings, warm cream gold face, fine ring of tick marks, no numbers; the gate clock keeps seven ring slots (twelve o'clock first, clockwise) plus a bigger center slot. Coin slot part says thick polished gold rim. No art regenerated, no code changed.
 ## 2026-11-12 (duobox1): Duo sideways dialogue box one third shorter (tag duobox1)
 - Tom 14:36: the dialogue box on Duo landscape should be one third less tall, portrait shrunk to match. `html.duo.landscape #dialog` min-height is 75 x `--ts` (was 112 x `--ts` from the tablet rule), so at 951 x 648 the box is 93 px instead of 140. The portrait is as tall as the box (`fitDialogPortrait`), so it went 138 px to 91 px with no extra code, and the text column follows. Phone landscape, tablet and portrait untouched. Looked at in a real browser (Duo 951 x 648, Grace line); not seen on the Duo yet.
 ## 2026-11-12 (closeup2): chapter 10 coin close-up screen is LIVE with Tom's approved art (tag closeup2)

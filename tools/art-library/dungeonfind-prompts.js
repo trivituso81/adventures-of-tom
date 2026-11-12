@@ -71,7 +71,7 @@ const SHEETS = [
     ['JUKEBOX', 'A chunky rounded jukebox with a warm amber lit arch, chrome trim, a row of colored song buttons and a record visible behind curved glass.'],
   ] },
   { id: 'ch10', strict: true, label: 'Chapter 10, Terminal Zero', title: 'Chapter 10 Terminal Zero', items: [
-    ['GATE CLOCK, NO HANDS', 'A large round airport wall clock with a white face and bold black numbers 1 to 12, all clear and correct, and a small gold peg in the middle, with no hands at all. Seven small round coin slots, each a dark hole with a bright gold rim, are spaced evenly around the outer edge of the face like hour marks, and one bigger round coin slot sits in the center below the peg. The eight slots are the brightest part and must be clearly visible. Seen from the front.'],
+    ['GATE CLOCK, NO HANDS', 'A large round airport wall clock seen straight from the front, matching the coin close-up clock: a heavy polished brass rim in two stepped rings, and a warm cream gold face with a fine ring of small black tick marks near the edge and NO numbers. The center is a plain hub with no hands at all. Seven round coin slots, each a dark round hole with a bright gold rim, are spaced exactly evenly in a ring round the face, the first at twelve o\'clock and the rest following clockwise, about halfway between the center and the rim. One bigger slot of the same style sits in the exact center. Eight slots in all, every slot empty. The slots are the brightest part and must be clearly visible. Painted brushwork, warm golden light from the upper left.'],
     ['CLOCK HAND, HOUR', 'ONE short thick black clock hand with a spade shaped tip, lying flat as a separate piece with a small round hole at the base. Only the hand, alone, with no clock face behind it.'],
     ['CLOCK HAND, MINUTE', 'ONE long slim black clock hand with a pointed tip, lying flat as a separate piece with a small round hole at the base. Same thickness style as cell 2. Only the hand, alone, with no clock face behind it.'],
     ['CLOCK HAND, SECOND', 'ONE very long thin red clock hand with a small round counterweight on its tail, lying flat as a separate piece with a small round hole near the tail. Only the hand, alone, with no clock face behind it.'],
@@ -231,9 +231,9 @@ const PARTS = [
     ['STAGE LAMP, DARK', 'The same stage lamp as cell 11, identical in size and housing, but turned completely off: dull dark grey glass cover with no glow, no color and no bright center. Only the lamp, alone.'],
   ] },
   { id: 'ch10-clock', strict: true, label: 'Chapter 10, Terminal Zero (gate clock parts)', title: 'Chapter 10 Terminal Zero, gate clock parts', items: [
-    ['CLOCK FACE, BLANK', 'A large round airport wall clock seen straight from the front, with a white face, a plain brushed steel rim, and bold black numbers 1 to 12, all clear and correct. The center of the face is completely plain and empty. There are NO hands, NO peg, NO studs, NO dots, NO slots and NO holes anywhere on the face. Only the rim, the white face and the twelve numbers.'],
+    ['CLOCK FACE, BLANK', 'A large round airport wall clock seen straight from the front, matching the coin close-up clock: a heavy polished brass rim in two stepped rings and a warm cream gold face with a fine ring of small black tick marks near the edge. NO numbers, NO hands, NO peg, NO studs, NO dots, NO slots and NO holes anywhere on the face. Only the brass rim, the cream face and the tick marks.'],
     ['CENTER PEG', 'ONE small round gold clock peg with a domed top, drawn alone as a separate piece. Only the peg, alone, with no clock behind it.'],
-    ['COIN SLOT', 'ONE round coin slot, a dark hole with a bright gold rim, drawn alone as a separate piece, seen from the front. Only the slot, alone, with no clock or door behind it.'],
+    ['COIN SLOT', 'ONE round coin slot, a dark round hole with a thick bright polished gold rim, drawn alone as a separate piece, seen from the front. Only the slot, alone, with no clock or door behind it.'],
   ] },
 ];
 for (const s of PARTS) {
