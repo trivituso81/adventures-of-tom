@@ -1,3 +1,5 @@
+## 2026-11-11 (bounce1): welcome screen characters bounce less (tag bounce1)
+- Tom 23:09: "On the welcome screen make the characters bounce less." The wave hop each character does on the title screen was 12 design units high (`hopY` in engine/splash.js); it is now `SPLASH_HOP_H=5` (same timing, same order). Tom's hop still carries Rose's, so the pair moves a little more than the rest. Idle breathing unchanged.
 ## 2026-11-11 (boppy2): Boppy's newest approved hero, walking sheet and emotion sheet installed (tag boppy2)
 - Tom 18:49: "another hero, walk, and emotion sheet generated and approved for boppy." Sources (newest in the Library): hero v2, walking v4, emotions v6 (tomboppy1 used v1, v3, v5).
 - Rebaked with the tomboppy1 recipe: `walk_splice.py boppy`, `emotion_frames.py boppy`, `bake_emotion_faces.py boppy`, `bake_story_poses.py`, `bake_talk_faces.py boppy`, `bake_portraits.py boppy`. The story-pose bake also rewrote 30 NPC pose atlases and `data/npc-poses.js` with different bytes (not Boppy); those were reverted, only Boppy's pose rows and atlas are kept.

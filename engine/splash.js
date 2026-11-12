@@ -19,7 +19,7 @@ const SPLASH_CAST=[
   {id:'tnb',name:'TNB',row:0,fx:.69},
   {id:'nara',name:'NARA',row:1,fx:.87}
 ];
-const SPLASH_HOP=.42,SPLASH_STEP=.3;
+const SPLASH_HOP=.42,SPLASH_STEP=.3,SPLASH_HOP_H=5;
 // Welcome screen: Tom, Grace, Rose and Deedee are drawn 33% bigger (Rose rides on Tom, so she grows with him). Tom's call, 2026-10-29.
 const SPLASH_BIG={tom:1.33,grace:1.33,rose:1.33,deedee:1.33,nara:typeof NARA_SIZE!=='undefined'&&OW.nara.k?NARA_SIZE:1};   // Nara 1.15 (data/nara-hires-use.js)
 // Welcome screen shows the painted art (art/welcome.webp, set in index.html). Set false to bring back the drawn cast scene.
@@ -498,7 +498,7 @@ function splashScene(W,H,panelH,time) {
   gfx.globalAlpha=1;
   // Cast. Back row first, then the front row; Rose rides behind Tom's head.
   const L=splash.L={S,frontFy,backFy,pos:{}};
-  const hopY=m=>m.hopT>=0?Math.round(Math.sin(Math.PI*m.hopT/SPLASH_HOP)*S*12):0;
+  const hopY=m=>m.hopT>=0?Math.round(Math.sin(Math.PI*m.hopT/SPLASH_HOP)*S*SPLASH_HOP_H):0;   // wave hop height in S units (Tom 2026-11-11: less bounce, was 12)
   const by=id=>SPLASH_CAST.find(m=>m.id===id);
   const kOf=set=>{ const id=Object.keys(SPLASH_BIG).find(i=>OW[i]===set||(i==='tom'&&OW.tomRide===set)); return id?SPLASH_BIG[id]:1; };
   const drawOne=(set,frame,cx,feet,lift,flip)=>{
