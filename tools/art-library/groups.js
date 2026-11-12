@@ -3,7 +3,7 @@
 // An entry that already carries its own `group` keeps it. The order of groups on screen is the order entries appear in data/art-prompts.json.
 const fs = require('fs');
 
-const PEOPLE = { tom: 'Tom', tnb: 'TNB', grace: 'Grace', rose: 'Rose', amy: 'Amy', justin: 'Justin', deedee: 'Deedee', boppy: 'Boppy', olivia: 'Olivia', michael: 'Michael', jojo: 'Jojo', ellie: 'Aunt Ellie', nara: 'Nara' };
+const PEOPLE = { tom: 'Tom', tnb: 'TNB', grace: 'Grace', rose: 'Rose', amy: 'Amy', justin: 'Justin', deedee: 'Deedee', boppy: 'Boppy', olivia: 'Olivia', michael: 'Michael', jojo: 'Jojo', ellie: 'Aunt Ellie', nara: 'Nara', cathy: 'Ms. Cathy' };
 const PROP_GROUPS = { find: 'Dungeon finds', trail: 'Trail clues', bubble: 'Speech bubbles', gate: 'Story gates' };
 const FOE_AREAS = {
   hollow: 'Grump Hollow', griffith: 'Griffith Park', marsh: 'Whispering Marsh', backlot: 'Studio Backlot', school: 'School', oak: 'Old Oak', library: 'Hush Library',
