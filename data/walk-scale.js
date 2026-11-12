@@ -6,7 +6,7 @@
 const WALK_SCALE={
   tom:{inches:71,rows:42.0,k:1},
   tnb:{inches:70,rows:45.222,k:0.9157},
-  justin:{inches:76,rows:53.375,k:0.8423},
+  justin:{inches:76,rows:53.25,k:0.8443},
   michael:{inches:76,rows:53.0,k:0.8483},
   boppy:{inches:67,rows:41.714,k:0.9501},
   jojo:{inches:66,rows:42.333,k:0.9223},
