@@ -21047,8 +21047,16 @@
    "group": "Jojo"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/cathy-hero-v1.png",
+     "date": "2026-11-12",
+     "from": "v1",
+     "at": 1794504702261
+    }
+   ],
    "rejects": [],
    "id": "cathy-hero",
    "tab": "Characters",
