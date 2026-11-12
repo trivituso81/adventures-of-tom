@@ -144,6 +144,7 @@ function saveSnapshot() {
   const monsters={}; for(const n of allMonsters()) monsters[n.monster]={tier:n.tier,maxHp:n.maxHp};
   return {v:2,when:Date.now(),map:currentMap.id,x:player.x,y:player.y,facing:player.facing,visited:[...visited],allVisited,bag:bag.slice(),coins,time:Math.floor(playTime),
     grump:grump?{tier:grump.tier,maxHp:grump.maxHp}:null,monsters,flags,
+    fallen:monstersFallenSave(currentMap),   // monsters already beaten in this area stay beaten after a reload (engine/world.js)
     // party: who is in it (with levels for the save list); members: all eight, in the party or not (F6).
     party:party.map(m=>({id:m.id,level:m.level,xp:m.xp,hp:m.hp,maxHp:m.maxHp})),
     members:ALL_MEMBERS().map(b6SaveMember),
@@ -201,6 +202,7 @@ function loadGame(slot) {
   const grump=findGrump(); if(grump&&sv.grump) { grump.tier=sv.grump.tier; grump.maxHp=sv.grump.maxHp; }
   if(sv.monsters) for(const n of allMonsters()) { const r=sv.monsters[n.monster]; if(r) { n.tier=r.tier; n.maxHp=r.maxHp; } }
   currentMap=worlds[sv.map]||town;
+  monstersFallenLoad(currentMap,sv.map===currentMap.id?sv.fallen:null);
   player.x=sv.x; player.y=sv.y; player.facing=sv.facing||'down'; player.move=null;
   // Older saves (before the town split) can point at a spot that is now a tree or a wall.
   if((sv.v||1)<2||!walkable(currentMap,player.x,player.y)) { player.x=currentMap.spawn.x; player.y=currentMap.spawn.y; }

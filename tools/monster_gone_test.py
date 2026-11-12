@@ -1,4 +1,5 @@
 # A beaten map monster stays gone while the player stays in the area, and comes back after leaving and re-entering (2026-10-31).
+# Saving and reloading in the same area keeps it gone (2026-11-12, fallen list in the save).
 # Usage: python3 tools/monster_gone_test.py   (CHROMIUM env var optional)
 import threading, http.server, socketserver, functools, os
 from playwright.sync_api import sync_playwright
@@ -63,6 +64,29 @@ with sync_playwright() as pw:
     check(popTxt=='+'+str(max(1,round(full*0.5)))+' XP','tap-kill pays half the XP of a real win (full '+str(full)+')')
     pg.wait_for_timeout(2500)
     check(not pg.evaluate("()=>currentMap.npcs.includes(window.__m)"),'instant-win monster also removed')
+    # 5) save, quit, reload, load in the same area: the beaten monster stays gone (Tom 2026-11-12); leaving and coming back returns it
+    key=pg.evaluate("()=>window.__m.spot")
+    others=pg.evaluate("()=>currentMap.npcs.filter(x=>x.monster).map(x=>x.spot)")
+    pg.evaluate("()=>saveGame('1',true)")
+    sv=pg.evaluate("()=>JSON.parse(saveRaw('1'))")
+    check(key in (sv.get('fallen') or []),'save records the beaten monster in this area ('+str(sv.get('fallen'))+')')
+    pg.reload(); pg.wait_for_function('()=>window.__LE&&window.__LE.b2Start'); pg.wait_for_timeout(1500)
+    pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; loadGame('1'); }"); pg.wait_for_timeout(2500)
+    st=pg.evaluate("(k)=>({map:currentMap.id,here:currentMap.npcs.some(x=>x.spot===k),fallen:(currentMap.fallen||[]).some(x=>x.spot===k),left:currentMap.npcs.filter(x=>x.monster).map(x=>x.spot)})",key)
+    print('after reload',st)
+    check(st['map']==mid,'loaded into the same area'); check(not st['here'] and st['fallen'],'beaten monster still gone after save and reload')
+    check(sorted(st['left'])==sorted(others),'every other monster in the area is still there')
+    pg.screenshot(path=os.path.join(SHOTS,'monster-gone-reload.png'))
+    if back:
+        pg.evaluate("(to)=>{ const o=worlds[to]; switchMap({kind:'edge',to,spawn:o.spawn,facing:'down'}); }",back['to']); pg.wait_for_timeout(300)
+        pg.evaluate("(id)=>{ const m=worlds[id]; switchMap({kind:'edge',to:id,spawn:m.spawn,facing:'down'}); }",mid); pg.wait_for_timeout(500)
+        check(pg.evaluate("(k)=>currentMap.npcs.some(x=>x.spot===k)",key),'after leaving and re-entering, the monster is back')
+        # a save made right after entering an area records nothing beaten
+        pg.evaluate("()=>saveGame('2',true)")
+        check(pg.evaluate("()=>JSON.parse(saveRaw('2')).fallen.length")==0,'save after re-entering records no beaten monsters')
+    # 6) an older save with no fallen list loads with every monster present
+    pg.evaluate("()=>{ const s=JSON.parse(saveRaw('1')); delete s.fallen; SAVE_CACHE['3']=JSON.stringify(s); loadGame('3'); }"); pg.wait_for_timeout(500)
+    check(pg.evaluate("(k)=>currentMap.npcs.some(x=>x.spot===k)",key),'old save without the list: monsters all present')
     real=[e for e in errs if 'AudioContext' not in e]
     check(not real,'no page errors '+str(real[:3]))
     br.close()

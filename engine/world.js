@@ -146,6 +146,7 @@ function placeMonsters(map,spots) {
     const mon=actor(d.name,x,y,'moss',[]);
     if(d.owScale) mon.mscale=d.owScale;   // a monster drawn smaller on the map (Acorn Agent)
     mon.monster=id; mon.roam=0; mon.tier=0; mon.maxHp=d.hp; mon.defeatedUntil=0;
+    mon.spot=id+'@'+x+','+y;   // stable name for this placed monster, used by saves (monstersFallenSave)
     map.npcs.push(mon);
   }
 }
@@ -205,6 +206,17 @@ function monstersReturn(map) {
   if(!map||!map.fallen||!map.fallen.length) return;
   for(const n of map.fallen) { if(n.home) { n.x=n.home.x; n.y=n.home.y; } n.move=null; n.chasing=false; n.chaseOff=0; n.defeatedUntil=0; map.npcs.push(n); }
   map.fallen=[];
+}
+
+// Saves keep the monsters already beaten in the area Tom is standing in (Tom 2026-11-12: saving and reloading in the same area must
+// not bring them back; only leaving and re-entering does). Beaten monsters in other areas need nothing: they return on entry anyway.
+const monsterSaveKey=n=>n.spot||n.monster;
+function monstersFallenSave(map) { return (map&&map.fallen||[]).filter(n=>n.monster).map(monsterSaveKey); }
+// On load: every area starts fresh (as on a new launch), then the saved beaten monsters of the loaded area fall again.
+function monstersFallenLoad(map,keys) {
+  for(const m of Object.values(worlds)) monstersReturn(m);
+  if(!map||!Array.isArray(keys)) return;
+  for(const k of keys) { const n=map.npcs.find(x=>x.monster&&monsterSaveKey(x)===k); if(n) monsterFall(n,true); }
 }
 
 function makeRoom(spec) {
