@@ -104,3 +104,5 @@ Status: TAGGED; chapter 1 scene lines WIRED as a pilot (react2, `tools/reaction-
 ## Plan for programming (not built)
 
 A dialogue line gets an optional `mood:'<key>'` (one of the 8 keys). The speaker on the map switches to that full-body pose and the dialogue box shows the face cropped from it; no mood means no bust change. A scene step could set a resting mood per character. Write this against the first approved sheet.
+
+Aimed moods (pieface2, 2026-11-12): the painted mood poses face the camera only. Surprised, scared and angry (`EMO_AIMED` in engine/emotions.js) draw the pose only when the person already faces the camera (`down`); otherwise they keep the normal sprite facing what they react to. To show such a mood toward something to the side, a side-facing pose would be needed (Art Library).
