@@ -24,7 +24,7 @@ SCENES.part2Open=()=>[
   {toast:'Goal: follow the boarding pass.',time:4},
   {flag:'ch11-start'},
   {fade:'out',time:.8},
-  {call:()=>{ sfx.travel&&sfx.travel(); beginTransition({kind:'edge',to:'flightzero',spawn:{x:3,y:3},facing:'down'}); }},
+  {call:()=>{ sfx.travel&&sfx.travel(); beginTransition({kind:'edge',to:'flightzero',spawn:{x:3,y:5},facing:'down'}); }},
   {wait:.5},
   {fade:'in',time:.6}
 ];
@@ -34,12 +34,12 @@ SCENES.ch11Cabin=[
   {call:()=>sfx.ding&&sfx.ding()},
   {talk:'Speaker',lines:['DING. Welcome aboard Flight Zero, nonstop to Wherever. Please stow your bags, your seatbacks, and your questions.']},
   {talk:'Tom',lines:['A pod seat. A real one. Somebody upgraded me and nobody told me why.','And something in seat 5B is giggling.']},
-  {walk:'tom',to:routeTo('tom',6,4),speed:.25}, {face:'tom',dir:'down'},
+  {walk:'tom',to:routeTo('tom',6,6),speed:.25}, {face:'tom',dir:'down'},
   {talk:'Tom',lines:['Whoever is under the blanket: it’s breathing very loudly.']},
   {flag:'ch11-boo'}, {sfx:'ding'},
   {party:null},
   {call:()=>{ if(typeof setGirlsAway==='function') setGirlsAway(false); }},
-  {place:'rose',at:[6,5],dir:'up'}, {place:'grace',at:[7,5],dir:'up'},
+  {place:'rose',at:[6,7],dir:'up'}, {place:'grace',at:[7,7],dir:'up'},
   {talk:'Rose',lines:['BOO! We’re stowaways! Tata, what’s a stowaway?']},
   {talk:'Tom',lines:['It’s a person who hides on a plane they weren’t invited to.','Which is illegal. And also, apparently, a family tradition.']},
   {talk:'Grace',lines:['We weren’t hiding. We were pre-boarding. Rose got the good blanket.']},
@@ -127,7 +127,7 @@ SCENES.ch11Meet=[
   {call:()=>sfx.ding&&sfx.ding()}, {wait:.6},
   {talk:'Speaker',lines:['DING. Flight Zero from Los Angeles has arrived at the Jet Bridge. Welcome to the layover. Please do not feed the dog the pretzels.']},
   {sfx:'doorIn'},
-  {place:'tnb',at:[35,5],dir:'down'}, {show:'tnb'}, {place:'nara',at:[36,5],dir:'down'}, {show:'nara'},
+  {place:'tnb',at:[30,10],dir:'down'}, {show:'tnb'}, {place:'nara',at:[31,10],dir:'down'}, {show:'nara'},
   {talk:'Nara',lines:['Nara sees Tom. Nara sees EVERYTHING that is not Tom disappear.']},
   {walk:'nara',to:routeBeside('nara'),speed:.1,onStep:i=>{ if(i%2===0) sfx.run&&sfx.run(); }},
   {hearts:'nara'},
@@ -163,9 +163,9 @@ TRIGGERS.push(
   {id:'ch11-cabin',map:'flightzero',when:{...CH11,flag:'ch11-start',notFlag:'ch11-cabin'},scene:'ch11Cabin'},
   {id:'ch11-gate00',map:'gate00',when:{...CH11,flag:'ch11-tear',notFlag:'ch11-gate00'},scene:'ch11Gate00'},
   {id:'ch11-conc',map:'concourse',when:{...CH11,flag:'ch11-gate00',notFlag:'ch11-conc'},scene:'ch11Conc'},
-  {id:'ch11-sprite',map:'concourse',at:[18,4,22,9],when:{...CH11,flag:'ch11-conc',notFlag:'ch11-sprite'},scene:'ch11Stby'},
+  {id:'ch11-sprite',map:'concourse',at:[19,10,23,14],when:{...CH11,flag:'ch11-conc',notFlag:'ch11-sprite'},scene:'ch11Stby'},
   {id:'ch11-stby-after',map:'concourse',when:{...CH11,flag:{'battle:standbysprite':'win'},notFlag:'ch11-stby'},scene:'ch11StbyAfter'},
-  {id:'ch11-meet',map:'concourse',at:[28,3,38,9],when:{...CH11,flag:'ch11-stby',notFlag:'ch11-met'},scene:'ch11Meet'}
+  {id:'ch11-meet',map:'concourse',at:[27,9,39,11],when:{...CH11,flag:'ch11-stby',notFlag:'ch11-met'},scene:'ch11Meet'}
 );
 HOLD_RULES.push(n=>STORY.chapter===11&&currentMap.id==='concourse'&&(flag('ch11-conc')!==true||(n.monster==='standbysprite'&&flag('ch11-stby')!==true)));
 STORY_WORLD.push(()=>{
@@ -217,8 +217,8 @@ SCENES.ch11Lost=[
 SCENES.ch11Vance=[
   {flag:'ch11-vance',value:'pending'},
   {call:()=>sfx.ding&&sfx.ding()},
-  {spawn:{name:'Long coat',look:'longcoat',at:[37,4],dir:'down'}},
-  {walk:'Long coat',to:[[37,5],[36,5]],speed:.3}, {face:'Long coat',dir:'right'},
+  {spawn:{name:'Long coat',look:'longcoat',at:[36,8],dir:'down'}},
+  {walk:'Long coat',to:[[36,9],[35,9]],speed:.3}, {face:'Long coat',dir:'right'},
   {talk:'Long coat',lines:['Hello, Tom.']},
   {face:'Long coat',dir:'down'},
   {talk:'Tom',lines:['You’re the man in the long coat. At the school. At the airport. At Gate Zero.']},

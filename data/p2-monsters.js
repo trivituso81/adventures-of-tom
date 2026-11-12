@@ -151,4 +151,4 @@ Object.assign(MONSTERS,{
 });
 // Map spots. Endless Concourse: a Standby Sprite holds the way east until it is beaten (data/scenes-p2.js); Lost Luggage
 // and Red-Eyes drift round the rest.
-const P2_CONCOURSE_SPOTS=[['finalcall',34,9],['standbysprite',23,6],['lostluggage',9,5],['lostluggage',12,10],['redeye',16,9],['lostluggage',27,9],['redeye',30,9]];
+const P2_CONCOURSE_SPOTS=[['finalcall',33,10],['standbysprite',24,12],['lostluggage',9,10],['lostluggage',12,15],['redeye',16,15],['lostluggage',27,10],['redeye',31,15]];

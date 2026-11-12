@@ -18,7 +18,7 @@ These stay at the zoom cap on the largest phones, so some soft backdrop shows ar
 
 | Map | Painting now (tiles) | Zoom portrait | Zoom landscape |
 |---|---|---|---|
-| flightzero | 19 x 7 | 2.25 | 1.96 |
+| flightzero | 19 x 11 | 2.25 | 1.57 |
 | memamy | 16 x 11 | 2.25 | 1.87 |
 | memgrace | 16 x 11 | 2.25 | 1.87 |
 | memrose | 16 x 11 | 2.25 | 1.87 |
@@ -26,7 +26,7 @@ These stay at the zoom cap on the largest phones, so some soft backdrop shows ar
 | subdepot | 24 x 12 | 2.25 | 1.24 |
 | subtunnel | 36 x 12 | 2.25 | 1.15 |
 
-Minimum that removes the backdrop at the 2.25x cap: 14 tiles on each side (flightzero 19 x 14, memory rooms 16 x 14, subdepot 24 x 14, subtunnel 36 x 14).
+Minimum that removes the backdrop at the 2.25x cap: 14 tiles on each side (flightzero 19 x 14, it is 19 x 11 since airport1, memory rooms 16 x 14, subdepot 24 x 14, subtunnel 36 x 14).
 The size that needs no zoom at all, and so keeps the world at its drawn scale on every phone: **30 x 30 tiles (1920 x 1920 art px)**, a square large enough for both orientations.
 
 ## Painting rules for any new or repainted outdoor map
@@ -41,7 +41,7 @@ The size that needs no zoom at all, and so keeps the world at its drawn scale on
 |---|---|---|---|
 | boiler | 20 x 14 | 2.13 | 1.49 |
 | cafetorium | 20 x 14 | 2.13 | 1.49 |
-| concourse | 40 x 14 | 2.13 | 1.00 |
+| concourse | 40 x 22 | 1.36 | 1.00 |
 | dome | 20 x 14 | 2.13 | 1.49 |
 | gate00 | 20 x 14 | 2.13 | 1.49 |
 | gatezero | 20 x 14 | 2.13 | 1.49 |

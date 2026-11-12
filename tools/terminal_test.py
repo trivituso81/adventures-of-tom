@@ -43,19 +43,19 @@ with sync_playwright() as pw:
     pg.evaluate("()=>{ STORY.mode='full'; STORY.chapter=10; setFlag('ch10-start',true); setFlag('ch10-term',true); __LE.go('terminal'); }"); pg.wait_for_timeout(1500)
     def shot(name,x,y):
         pg.evaluate("([x,y])=>{ player.x=x; player.y=y; player.move=null; placeFollowers(); camera.snap=true; }",[x,y]); pg.wait_for_timeout(700); pg.screenshot(path=os.path.join(SHOTS,'terminal-'+name+'.png'))
-    spots={'gate':(15,3),'security':(7,5),'baggage':(27,5),'concourse':(15,10),'lounge':(7,15),'checkin':(20,16),'curb':(15,19)}
+    spots={'gate':(15,4),'security':(3,6),'baggage':(28,6),'concourse':(15,10),'lounge':(7,15),'checkin':(20,17),'curb':(15,19)}
     for n,(x,y) in spots.items(): shot('p-'+n,x,y)
     pg.evaluate("()=>{ for(const f of ['ch10-sec','ch10-bag','ch10-lounge','ch10-door','ch10-clear']) setFlag(f,true); }")
-    shot('p-gate-clear',15,3)
+    shot('p-gate-clear',15,4)
     pg.evaluate("()=>{ if(layout!=='landscape') toggleLayout(); }"); pg.set_viewport_size({'width':860,'height':430}); pg.wait_for_timeout(500)
-    for n,(x,y) in {'concourse':(15,9),'lounge':(7,15)}.items(): shot('l-'+n,x,y)
+    for n,(x,y) in {'concourse':(15,8),'lounge':(7,15)}.items(): shot('l-'+n,x,y)
     # walking: step from the spawn through the curb doors' corridor to the concourse and up to the gate doors
     pg.evaluate("()=>{ if(layout==='landscape') toggleLayout(); }"); pg.set_viewport_size({'width':430,'height':860}); pg.wait_for_timeout(300)
     pg.evaluate("()=>{ player.x=worlds.terminal.spawn.x; player.y=worlds.terminal.spawn.y; player.move=null; player.facing='up'; camera.snap=true; }")
     ok=pg.evaluate("""()=>{ const m=worlds.terminal; const path=[]; let x=m.spawn.x,y=m.spawn.y;
       const wk=(x,y)=>x>=0&&y>=0&&x<m.w&&y<m.h&&m.solid[y*m.w+x]===0;
       const bfs=(a,b)=>{ const prev=new Map([[a.join(),null]]), q=[a]; while(q.length){ const c=q.shift(); if(c[0]===b[0]&&c[1]===b[1]) return true; for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){ const n=[c[0]+dx,c[1]+dy]; if(!prev.has(n.join())&&wk(n[0],n[1])){ prev.set(n.join(),c); q.push(n); } } } return false; };
-      return {toGate:bfs([m.spawn.x,m.spawn.y],[14,2]),toBag:bfs([m.spawn.x,m.spawn.y],[28,6]),toLounge:bfs([m.spawn.x,m.spawn.y],[2,14]),toSec:bfs([m.spawn.x,m.spawn.y],[2,5]),toCheck:bfs([m.spawn.x,m.spawn.y],[27,17])}; }""")
+      return {toGate:bfs([m.spawn.x,m.spawn.y],[14,4]),toBag:bfs([m.spawn.x,m.spawn.y],[28,6]),toLounge:bfs([m.spawn.x,m.spawn.y],[7,15]),toSec:bfs([m.spawn.x,m.spawn.y],[3,5]),toCheck:bfs([m.spawn.x,m.spawn.y],[25,16])}; }""")
     print(json.dumps(ok)); check('spawn reaches gate, baggage, lounge, security and check-in floor',all(ok.values()))
     print('page errors',errs); check('no page errors',not errs)
     br.close()

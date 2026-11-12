@@ -3748,11 +3748,11 @@ SCENES.ch10AfterBoss=()=>[
   {talk:'Rose',lines:['I\'m a PILOT. I\'m wearing them upside down. On purpose. It\'s a pilot thing.']},
   {hearts:'rose'}, {trace:'lastcall-wings'},
   {talk:'Grace',lines:['Tata. Tata. The jet bridge. There\'s a man.']},
-  {spawn:{name:'Long coat',look:'longcoat',at:[14,2],dir:'down'}},
+  {spawn:{name:'Long coat',look:'longcoat',at:[16,4],dir:'down'}},
   {face:'tom',dir:'right'},
   {talk:'Grace',lines:['In a long coat. Like at the school. He\'s tipping his hat at you.']},
   {wait:1},
-  {walk:'Long coat',to:[[15,2]],speed:.35},
+  {walk:'Long coat',to:[[16,3]],speed:.35},
   {call:()=>sfx.doorIn&&sfx.doorIn()}, {despawn:'Long coat'},
   {call:()=>{ CH10_PLANE.t0=performance.now(); sfx.whoosh(); }},
   {talk:'Gate Zero',lines:['The jet bridge door clicks shut. Outside the big window, Flight Zero turns on its lights, pushes back, and rolls away into the dark. Very quietly. Like it\'s done this before.']},
@@ -3805,8 +3805,8 @@ SCENES.ch10End=[
 ];
 TRIGGERS.push(
   {id:'ch10-term',map:'terminal',when:{...CH10,flag:'ch10-start',notFlag:'ch10-term'},scene:'ch10Term'},
-  {id:'ch10-sec',map:'terminal',at:[1,1,11,6],when:{...CH10,flag:'ch10-term',notFlag:'ch10-sec'},scene:'ch10Sec'},
-  {id:'ch10-bag',map:'terminal',at:[18,1,28,6],when:{...CH10,flag:'ch10-term',notFlag:'ch10-bag'},scene:'ch10Bag'},
+  {id:'ch10-sec',map:'terminal',at:[1,1,9,6],when:{...CH10,flag:'ch10-term',notFlag:'ch10-sec'},scene:'ch10Sec'},
+  {id:'ch10-bag',map:'terminal',at:[19,1,28,6],when:{...CH10,flag:'ch10-term',notFlag:'ch10-bag'},scene:'ch10Bag'},
   {id:'ch10-lounge',map:'terminal',at:[1,14,13,17],when:{...CH10,flag:'ch10-term',notFlag:'ch10-lounge'},scene:'ch10Lounge'},
   {id:'ch10-boss',map:'gatezero',when:{...CH10,flag:'ch10-door',notFlag:'ch10-boss'},scene:'ch10Boss'},
   {id:'ch10-after',map:'gatezero',when:{...CH10,flag:{'battle:lastcall':'win'},notFlag:'ch10-clear'},scene:'ch10AfterBoss'},
@@ -3821,8 +3821,7 @@ HOLD_RULES.push(n=>STORY.chapter===10&&currentMap.id==='terminal'&&(flag('ch10-t
 function ch10OpenDoors() {
   const M=worlds.terminal; if(!M||M.doorsOpen) return;
   const o=M.objects.find(o=>o.kind==='gatedoors');
-  if(o) { M.objects.splice(M.objects.indexOf(o),1); for(const x of [13,14]) M.objectAt.delete(key(x,1)); }
-  for(const x of [13,14]) tile(M,x,1,'terrazzo');
+  if(o) { M.objects.splice(M.objects.indexOf(o),1); for(let x=o.x;x<o.x+o.w;x++) { M.objectAt.delete(key(x,o.y)); tile(M,x,o.y,'terrazzo'); } }
   M.doorsOpen=true; M.mini=null;
 }
 STORY_WORLD.push(()=>{
