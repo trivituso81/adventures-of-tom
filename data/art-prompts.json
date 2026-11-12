@@ -18508,8 +18508,16 @@
    "group": "Dungeon finds"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/closeup-ch10-clock-v1.png",
+     "date": "2026-11-12",
+     "from": "v1",
+     "at": 1794522337391
+    }
+   ],
    "rejects": [],
    "id": "closeup-ch10-clock",
    "tab": "Props",
