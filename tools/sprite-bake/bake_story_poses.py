@@ -72,6 +72,14 @@ for _id, _h in EMO_H.items():
 # figure (3 and 4.6 percent) while the standing head stayed Tom's size; each factor took half of that back (1.89 to 1.92, 1.32 to 1.35), the same
 # height and face split as above.
 EMO_HEAD = {'tom': 1.39, 'tnb': 1.35, 'grace': 1.37, 'rose': 1.67, 'amy': 1.36, 'justin': 1.32, 'deedee': 1.30, 'boppy': 1.92, 'olivia': 1.35, 'ellie': 1.43}
+# headmood1 (2026-11-12, Tom: the HEAD SIZES factor applies to every state): emotion_frames.py grows each mood figure's head by that character's factor (head_tweak.json)
+# and records the figure's height growth as 'hg' in data/emotions.js. Moods keep their height (the walk keeps height too), so the strip scale takes the growth back.
+def _emo_hg():
+    import re as _re
+    try: m = _re.search(r'EMOTION_ART=(\{.*?\});', open(os.path.join(ROOT, 'data', 'emotions.js')).read(), _re.S); return {k: v.get('hg', 1.0) for k, v in json.loads(m.group(1)).items()}
+    except OSError: return {}
+EMO_HG = _emo_hg()
+for _k in list(EMO_HEAD): EMO_HEAD[_k] *= EMO_HG.get(_k, 1.0)
 
 # npcemo7 (2026-11-10, Tom: "implement them"): the 58 townsfolk plus Jojo and Michael get mood poses too (art/emotions/<id>.webp). Their sets are written to data/npc-poses.js, not
 # data/story-poses.js, so the cast file stays small. Size rule, same as the cast (mean of height match and face match), computed here per person, no hand tuning:

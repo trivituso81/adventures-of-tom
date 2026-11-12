@@ -12,7 +12,7 @@ from walk_sheet_frames import _key
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 RAW = os.path.join(ROOT, 'art/raw/characters'); OUT = os.path.join(ROOT, 'art/emotions'); NPC_RAW = os.path.join(ROOT, 'art/raw/npcs')   # townsfolk sheets: npc-emotions-<id>-vN.png (Tom 2026-11-10)
 MOODS = ['happy', 'loving', 'sad', 'angry', 'scared', 'surprised', 'proud', 'unimpressed']
-TAG = 'tomemo2'
+TAG = 'headmood1'
 
 def src_path(cid):
     # newest approved sheet for this character (boppy-emotions-v2.png replaces v1 as the source, Tom 2026-11-06)
@@ -46,8 +46,30 @@ def cut(cid):
         im = Image.fromarray(cell, 'RGBA'); figs.append(im.crop(im.getbbox()))
     return figs
 
+NECK_OK = (0.22, 0.42); NECK_DEFAULT = 0.33; NECK_SET = {'mateo': 0.47, 'sofi': 0.48, 'vance': 0.44, 'amy': 0.27}   # same neck rules as bake_talk_faces.py
+
+def neck_share(figs, cid):
+    """Where the head ends on a mood figure (share of its height): the narrowest row between 18 and 50 percent, median over the 8 frames."""
+    if cid in NECK_SET: return NECK_SET[cid]
+    v = []
+    for f in figs:
+        al = np.array(f)[:, :, 3] > 40; H = al.shape[0]; lo, hi = int(H * .18), int(H * .50)
+        wid = al[lo:hi].sum(1); v.append((lo + int(np.argmin(wid))) / H)
+    m = float(np.median(v)); return m if NECK_OK[0] <= m <= NECK_OK[1] else NECK_DEFAULT
+
+def head_factor(cid):
+    """The HEAD SIZES factor of tools/sprite-bake/head_tweak.json, applied to the mood figures too (Tom 2026-11-12: one multiplier across all states)."""
+    try: return float(json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'head_tweak.json'))).get(cid, 1.0))
+    except OSError: return 1.0
+
+UPRIGHT = (0, 1, 5, 6, 7)   # happy, loving, surprised, proud, unimpressed
+
 def bake(cid):
-    figs = cut(cid)
+    figs = cut(cid); hg = 1.0; fct = head_factor(cid)
+    if fct != 1.0 and cid != 'nara':
+        from kidhead import grow_head
+        ns = neck_share(figs, cid); big = [grow_head(f, fct, ns * f.height) for f in figs]
+        hg = float(np.median([big[i].height / figs[i].height for i in UPRIGHT])); figs = big
     fw = max(f.width for f in figs) + 4; fh = max(f.height for f in figs) + 2
     atlas = Image.new('RGBA', (fw * 8, fh), (0, 0, 0, 0)); rects = {}
     for i, (m, f) in enumerate(zip(MOODS, figs)):
@@ -55,7 +77,7 @@ def bake(cid):
         rects[m] = [i * fw, 0, fw, fh]
     os.makedirs(OUT, exist_ok=True)
     atlas.save(os.path.join(OUT, f'{cid}.webp'), 'WEBP', quality=92, method=6)
-    return {'src': f'art/emotions/{cid}.webp?v={TAG}', 'fw': fw, 'fh': fh, 'frames': rects}, figs
+    return {'src': f'art/emotions/{cid}.webp?v={TAG}', 'fw': fw, 'fh': fh, 'frames': rects, **({'hg': round(hg, 4)} if hg != 1.0 else {})}, figs
 
 if __name__ == '__main__':
     ids = sys.argv[1:] or sorted(set(re.sub(r'-emotions-v\d+\.png$', '', os.path.basename(p)) for p in glob.glob(os.path.join(RAW, '*-emotions-v*.png')))

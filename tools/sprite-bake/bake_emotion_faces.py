@@ -62,6 +62,15 @@ def frames(pid):
     return [sh.crop((i * fw, 0, (i + 1) * fw, sh.height)) for i in range(n)]
 
 
+def head_scale(pid):
+    import re
+    from emotion_frames import head_factor
+    f = head_factor(pid)
+    if f == 1.0 or pid == 'nara': return 1.0
+    m = re.search(r'EMOTION_ART=(\{.*?\});', open(os.path.join(ROOT, 'data', 'emotions.js')).read(), re.S)
+    return f / json.loads(m.group(1))[pid].get('hg', 1.0)
+
+
 def bake(pid):
     q, dy, dx = (0, 0, 0) if pid == 'nara' else hero_metrics(pid)
     fr = frames(pid)
@@ -71,6 +80,7 @@ def bake(pid):
         ys, xs = np.where(al)
         boxes.append((ys.min(), ys.max() - ys.min(), al))
     H = float(np.median([b[1] for b in boxes]))
+    H *= head_scale(pid)   # headmood1: the head grew by the HEAD SIZES factor but the figure by less (emotion_frames.py); frame the bigger head as the old head was framed
     os.makedirs(OUT, exist_ok=True)
     outs = []
     for m, f, (top, _, al) in zip(MOODS, fr, boxes):
