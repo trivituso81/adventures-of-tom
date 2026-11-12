@@ -21110,8 +21110,16 @@
    "prompt": "Paint a walking sheet of one woman for a role-playing game.\n\nPicture 1 is the finished painting of the character. Copy it as exactly as possible in every frame: the same person, face, glasses, hair, clothes, colors, painting style, level of detail, head size compared to the body and figure size. Picture 2 is the walking sheet of another character: copy only its layout, its figure size and its way of drawing walking steps, never the person.\n\nOne image, a grid of 3 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line (except a lifted foot mid-step), each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Hands empty. No grid lines, numbers, text, effects or shadows. Clothing never uses magenta.\n\nRow 1, facing the viewer:\n1. Standing, feet together, arms at her sides, a warm smile.\n2. A walking step, one foot forward, the opposite arm swinging forward.\n3. The opposite step, the opposite arm swinging forward.\n\nRow 2, seen from behind, walking away from the viewer, showing her full hair and the back of her outfit:\n4. Standing, feet together.\n5. A walking step, one foot forward, the opposite arm swinging forward.\n6. The opposite step.\n\nRow 3, in profile, facing the same way as the profile row of picture 2:\n7. Standing, feet together.\n8. A walking step, front heel down, back heel lifted, near arm back, far arm forward.\n9. The passing step, back foot lifted with a bent knee, body a little higher.\n\nShe walks briskly and cheerfully, a woman on her way with snacks: steady medium steps, arms swinging easily. The two step frames of a row mirror each other. Do not add frames, merge frames, repeat a pose or invent props. Family friendly."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/cathy-ab-snack-attack-v1.png",
+     "date": "2026-11-12",
+     "from": "v1",
+     "at": 1794505232899
+    }
+   ],
    "rejects": [],
    "id": "cathy-ab-snack-attack",
    "tab": "Characters",
