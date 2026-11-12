@@ -149,6 +149,7 @@ const SPLASH_MODES={
     {name:'AREA BUILDER',sub:'See and fix where you can walk in any area.',act:openAreas},
     {name:'PORTRAIT CROPS',sub:'Choose how each face is cropped.',act:openPortraits},
     {name:'HEAD SIZES',sub:'Make any head bigger or smaller and see it on the body.',act:openHeads},
+    {name:'WELCOME LAYOUT',sub:'Size and place each character on this screen.',act:splashEditOpen},
     {name:'BATTLE LAB',sub:'Boss fights from chapters 1 to 20.',act:()=>splashDifficulty(()=>{ splash.labPage=0; splashOpen('lab'); })},
     {name:'BACK',sub:'',cls:'back',act:splashBack}]},
   // Boss fights, six to a page (pick a difficulty first). PREV and NEXT PAGE wrap around. engine/battle2.js b2Lab runs the fight.
@@ -335,7 +336,7 @@ function splashReturn() {
 }
 // Gamepad: called from pollGamepad while the splash is up.
 function splashPad(dir,dirEdge,A,B) {
-  if(!splash.active) return;
+  if(!splash.active||splash.edit) return;
   if(dirEdge&&dir) splashMove(dir==='up'||dir==='left'?-1:1,dir);
   if(A) splashPick(splash.sel);
   else if(B) splashBack();
@@ -347,6 +348,7 @@ window.addEventListener('keydown',e=>{
   if(e.code==='KeyL') return; // rotate still works
   e.stopImmediatePropagation();
   unlockAudio();
+  if(splash.edit) { e.preventDefault(); splashEditKey(e.code); return; }
   if(e.repeat) return;
   const c=e.code;
   if(c==='ArrowUp'||c==='KeyW') { e.preventDefault(); splashMove(-1,'up'); }
@@ -577,8 +579,15 @@ function splashFig(id) {   // visible box of a standing frame in design units: w
   const fr=set.down[0],R=splashRows(id,fr),C=splashCols(id,fr),u=SPLASH_H[id]/(R.y1-R.y0+1);
   return {id,vw:(C.x1-C.x0)*u,off:((C.x0+C.x1)/2-fr[0].length/2)*u};
 }
+// Welcome layout editor (Tom 2026-11-11 23:26, engine/splash-edit.js, ADMIN > WELCOME LAYOUT): each layout type keeps its own size and position
+// per character on top of the lineup above. SPLASH_ADJ[type][id] = {dx,dy,k}: dx right and dy down in design units, k a size multiplier
+// (about the feet). Types: port and land (phone and iPad, upright and sideways), duoport and duoland (iPhone Duo unfolded).
+// Saved in data/welcome-layout.json; an empty type draws the plain lineup.
+const SPLASH_LAYOUTS={port:'Phone upright',land:'Phone sideways',duoland:'Duo open sideways',duoport:'Duo open upright'};
+let SPLASH_ADJ={t:0};
+function splashLayoutKey(w,h) { return (typeof duoMode!=='undefined'&&duoMode.open?'duo':'')+(w>h?'land':'port'); }
 function splashLineupLayout(w,h) {
-  const L=SPLASH_LINEUP,o=w>h?'land':'port';
+  const L=SPLASH_LINEUP,o=w>h?'land':'port',A=SPLASH_ADJ[splashLayoutKey(w,h)]||{};
   const main=L.main.map(splashFig).filter(Boolean);
   let x=0; main.forEach((f,i)=>{ if(i) x+=main[i-1].vw/2+(L.gaps[i-1]||0)+f.vw/2; f.x=x; f.z=0; });
   const at=id=>main.find(f=>f.id===id),t=at('tom'); if(!t) return [];
@@ -594,7 +603,12 @@ function splashLineupLayout(w,h) {
   const half=Math.max(...all.map(f=>Math.abs(f.x-t.x)+f.vw/2));
   const tall=Math.max(...all.map(f=>SPLASH_H[f.id]-f.z));
   const sc=Math.min(w*L.fracW[o]/(2*half),h*L.fracH[o]/(tall+L.naraFwd)),feet=h*L.feetY[o];
-  return all.map(f=>({id:f.id,cx:w/2+(f.x-t.x-f.off)*sc,feet:feet+f.z*sc,hh:SPLASH_H[f.id]*sc}));   // back row first, Nara last
+  // mx = middle of the visible figure, bx and bz = its place in the plain lineup (design units from Tom), i = its turn in the breathing
+  const items=all.map((f,i)=>{ const a=A[f.id]||{},k=a.k||1,mx=w/2+(f.x-t.x+(a.dx||0))*sc;
+    return {id:f.id,i,k,mx,cx:mx-f.off*sc*k,feet:feet+(f.z+(a.dy||0))*sc,hh:SPLASH_H[f.id]*sc*k,vw:f.vw*sc*k,bx:f.x-t.x,bz:f.z}; });
+  items.sort((p,q)=>p.feet-q.feet||p.i-q.i);   // whoever stands lower on the screen is in front (plain lineup: back row, main row, Nara)
+  items.sc=sc;
+  return items;
 }
 // Visible rows of a frame (first and last row with any paint): the painted frames carry different empty margins, so sizing by the whole frame made some people 2% to 6% off.
 // First and last painted column of a standing frame, in grid columns. Measured on the painted picture itself (drawn once off screen and read
@@ -630,12 +644,13 @@ function splashCastDraw(time) {
   const items=splashLineupLayout(w,h);
   const prev=gfx; gfx=g; g.imageSmoothingEnabled=false;
   try {
-    items.forEach((m,i)=>{
+    items.forEach(m=>{
       const set=OW[m.id]; if(!set||!set.down) return;
       const fr=set.down[0],fw=fr[0].length,R=splashRows(m.id,fr),k=m.hh/(R.y1-R.y0+1),cx=m.cx,feet=m.feet;
-      const lift=Math.round((.5+.5*Math.sin(time*SPLASH_BREATH.speed+i*1.7))*SPLASH_BREATH.amp*m.hh);   // slow rise and fall, a few whole pixels
+      const lift=Math.round((.5+.5*Math.sin(time*SPLASH_BREATH.speed+m.i*1.7))*SPLASH_BREATH.amp*m.hh);   // slow rise and fall, a few whole pixels
       drawSprite(fr,set.pal,Math.round(cx-fw*k/2),Math.round(feet-(R.y1+1)*k)-lift,k);
     });
+    if(splash.edit) splashEditDraw(g,items,w,h);
   } finally { gfx=prev; }
 }
 
