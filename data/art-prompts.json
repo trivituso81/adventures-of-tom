@@ -21705,8 +21705,16 @@
    "prompt": "Paint a new sheet of Brain Freeze, the creature in attachment 2, as a handbrushed painting. Attachment 2 is the current painting of it in the game: paint the same creature, with the same shape, colors, materials and details, at the same size in each cell, in the same view, facing right. Do not repeat the poses of attachment 2. Paint 4 NEW poses in a 2 by 2 layout, one pose alone in each cell with clear magenta all around it and nothing crossing into another cell. These poses show the moment after the fight, when the anger has gone out: the mood is gentle, warm and a little funny, never fierce. Top row: 1 the same upright pose as the first pose of attachment 2, at exactly the same size, but calm: the ice fists lowered, the eyes soft, the mouth closed and small with no teeth showing. 2 the lid: the frosted lid on top lifted open with warm gold light and a little cold mist coming out, a neat row of colorful ice cream scoops just visible inside, the eyes looking up shyly. Bottom row: 3 hopeful: both ice fists together under its chin, the eyes big and round, a tiny open smile. 4 off to the party: in mid stride to the right with a clear block of ice tucked under one arm, a happy grin. Paint only what each pose names: no glows, speed lines, sparkles or splashes unless a pose asks for them, and no letters, numbers or words anywhere. Paint and finish it like attachment 1: matte, thick visible brush strokes on the figure, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/ending-sway-tom-deedee-v1.png",
+     "date": "2026-11-12",
+     "from": "v1",
+     "at": 1794527153607
+    }
+   ],
    "rejects": [],
    "id": "ending-sway-tom-deedee",
    "tab": "Characters",
