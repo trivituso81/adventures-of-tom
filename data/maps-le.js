@@ -957,6 +957,9 @@ LE_AREAS.push(
     spawn:{x:15,y:20},
     wild:true,
     exits:[[14,21,'town',25,22,'down','curb'],[15,21,'town',25,22,'down','curb'],[14,3,'gatezero',9,12,'up','terrazzo'],[15,3,'gatezero',10,12,'up','terrazzo']],
+    // Gate Zero's doors stay shut until the seven coins are in (ch10Gate in data/scenes.js opens the coin menu on A).
+    gates:[{at:[[14,3],[15,3]],look:'doors',cond:{chapter:10,notFlag:'ch10-door'},name:'Gate Zero doors',
+      lines:['The doors are locked tight. Above them, the big clock is waiting for its coins.']}],
     // Painted plate (art/terminal.webp, engine/plate.js; the painting Tom approved 2026-11-11, tools/make_airport_plates.py). '#' blocks,
     // '.' walks. A tile walks when the floor at its bottom edge (where feet are drawn) is clear. The gate clock stays drawn on top of the
     // painting (liveKinds), hanging in the Gate Zero doorway, because its hands and coin slots change with the story. Row 9 is the bench

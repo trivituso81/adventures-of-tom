@@ -1,3 +1,7 @@
+## 2026-11-12 (gatedoor1): Gate Zero doors stay shut until the seven coins are in (tag gatedoor1)
+- Tom: he could not work out how to open the Gate Zero clock. Fact: the two doorway tiles under the gate doors (14,3) and (15,3) were also open exits to Gate Zero, so walking up went straight through and skipped the coin menu.
+- Fix: `gates` on Terminal Zero (data/maps-le.js) covers those two tiles in chapter 10 until `ch10-door`, with `look:'doors'` (engine/story.js draws nothing across them; the gatedoors object is the picture). Walking up shows "The doors are locked tight", and A on the doors opens the clock's coin menu.
+- Tested: browser check from chapter 10 jump, terminal, (14,4) facing up: walk up shows the gate line and stays in Terminal Zero; A shows "PUT THE COINS IN"; smoke FAILS [], tag_check ok.
 ## 2026-11-12 (fallen1): beaten monsters stay gone after save and reload in the same area (tag fallen1)
 - Tom 08:59: leaving an area and coming back correctly brings the monsters back, but saving and reloading in the same area brought them back too. They should only return after entering another area and coming back.
 - Cause (fact): beaten monsters wait in the area's `fallen` list (engine/world.js `monsterFall`); the save never recorded that list, so a reload started every area full.

@@ -862,6 +862,7 @@ b7DrawMapFx=function(time) {
       rect(gx-9,y0+(y1-y0)/2-6,18,12,'#2b2a26'); rect(gx-8,y0+(y1-y0)/2-5,16,10,'#f4f0e6'); rect(gx-6,y0+(y1-y0)/2-2,12,2,'#d94a3a');
       continue;
     }
+    if(g.look==='doors') continue;   // the gate's doors are drawn as their own object (gatedoors), so nothing goes across them
     if(g.look==='barrier') {   // a sawhorse road barrier with orange and white stripes (LA)
       rect(x0+2,y-2,3,10,'#2b2a26'); rect(x1-5,y-2,3,10,'#2b2a26');
       rect(x0,y-7,x1-x0,8,'#2b2a26');
