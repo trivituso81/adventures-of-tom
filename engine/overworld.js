@@ -283,6 +283,7 @@ function pressAction() {
 function update(dt) {
   if(typeof twGuard==='function') twGuard();
   if(menuOpen||shopOpen||battle.active) return;
+  if(typeof closeup!=='undefined'&&closeup.active) return;   // a close-up screen (engine/closeup.js) pauses the world
   if(intro.active) { updateIntro(dt); return; }
   if(transition) {
     updateTransition(dt);

@@ -3884,7 +3884,7 @@ function ch10Gate(o) {
     return true;
   }
   openChoice(o.name,['The clock has all three hands now. They don\'t move. Seven coin slots round the face, one in the middle.','Tom takes out the sock. Seven gold coins.'],[
-    {label:'PUT THE COINS IN',fn:()=>ch10Slot(0)},
+    {label:'PUT THE COINS IN',fn:()=>{ if(!ch10Closeup()) ch10Slot(0); }},   // the painted close-up (data/closeup-ch10.js) once its art is installed; the text menus until then
     {label:'NOT YET',fn:()=>{}}]);
   return true;
 }

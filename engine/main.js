@@ -23,6 +23,7 @@ function pollGamepad() {
   }
   // Cutscenes: B toggles FAST, Start or Select skips (engine/skip.js).
   if(cutsceneOn()&&(B||START||SEL)) { input.padDir=null; if(B) cutFF(); else cutSkip(); return; }
+  if(typeof closeup!=='undefined'&&closeup.active) { input.padDir=null; closeupPad(dir,dirEdge,A,B); return; }
   if(shopOpen) { input.padDir=null; if(B||START||Y) closeShop(); else if(dirEdge&&(dir==='left'||dir==='right')) shopCycle(dir==='right'?1:-1); return; }
   if(menuOpen) { input.padDir=null; menuPad({dir,dirEdge,A,B,START,Y,prev:L2,next:R1||R2}); return; }
   if(dialog.active) {
