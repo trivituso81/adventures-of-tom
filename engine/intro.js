@@ -223,7 +223,7 @@ function drawIntroWorld(time) {
     const gx=g.hidden?-1e9:(position(g).x+.5)*T;
     const x=Math.round(Math.max(camera.x+w/2+8,gx)),y=Math.round((player.y+.3)*T-40+Math.sin(time*20)*1.5);
     BUBBLE.draw('burst',x,y+7,w+48,44);
-    label(txt,x,y+2,'#b4553f',sc);
+    BUBBLE.text(txt,x,y+2,'#b4553f',sc);
   }
   for(const hh of intro.hearts) {
     gfx.globalAlpha=Math.max(0,1-hh.t/1.2);

@@ -706,9 +706,9 @@ function drawTarget(target) {
   } else return;
   x=Math.round(x); y=Math.round(y+Math.sin(elapsedTime*3)*1.2);
   BUBBLE.draw('rect',x,y+8,36,26,x,y+27);   // painted bubble (bubble3); the mark is drawn over it below
-  if(target.kind==='npc'&&target.value.monster) label('!',x,y+4,'#b4553f',2);
-  else if(target.kind==='npc') { for(let i=-7;i<=7;i+=7) rect(x+i-1,y+8,2,2,'#59724f'); }
-  else label('A',x,y+4,'#59724f',2);
+  if(target.kind==='npc'&&target.value.monster) BUBBLE.text('!',x,y+4,'#b4553f',2);
+  else if(target.kind==='npc') { gfx.fillStyle='#59724f'; for(let i=-8;i<=8;i+=8) { gfx.beginPath(); gfx.arc(x+i,y+9,2.2,0,Math.PI*2); gfx.fill(); } }
+  else BUBBLE.text('A',x,y+4,'#59724f',2);
 }
 
 // A pixel gold coin with a $ stamped in it. sc is the glyph scale.

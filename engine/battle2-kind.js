@@ -5788,7 +5788,7 @@ B2_TOMBO_ANIM.amy3=E2=>{ amyPoses(); const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 // ================= Tom + Deedee =================
 const shrinkFoe=(f,s)=>{ const q=ST.foe(f); f.spin=0; f.ox=0; f.fsc=s; f.oy=q.h/2*(1-s)/Math.max(s,.01); f.spinAt=performance.now(); };
 const unshrink=f=>{ f.fsc=0; f.oy=0; };
-const bubble=(x,y,txt,sc=1)=>{ const w=(txt.length*4-1)*sc+14; BUBBLE.draw('oval',x,y-3*sc-1,w+26,10*sc+24,x,y+3*sc+16); label(txt,x,y-7*sc,'#2b2a26',sc); };
+const bubble=(x,y,txt,sc=1)=>{ const w=(txt.length*4-1)*sc+14; BUBBLE.draw('oval',x,y-3*sc-1,w+26,10*sc+24,x,y+3*sc+16); BUBBLE.text(txt,x,y-7*sc,'#2b2a26',sc); };
 // ---------- Wine and Gossip (Tom + Deedee, tier 1) ----------
 // A bistro table pops up. They sit, clink, lean in and whisper. Both glance at the monster. Gasp. DID YOU SEE WHAT IT
 // WAS WEARING? Every monster shrinks with embarrassment. Deedee brings out the crisp. Effects unchanged.

@@ -1356,7 +1356,7 @@ SC.t6_bubble=(s,u)=>{ const ms=s.t*1000; const grow=cl((ms-s.t0)/(s.t1-s.t0)),w=
   gfx.globalAlpha=fade(u,.9); BUBBLE.draw('rect',x,y-h/2,w,h,x+w*.2+12,y+12);
   const words=s.words.filter(wd=>ms>=wd.t); const SL=[[.28,.2],[.72,.2],[.3,.5],[.72,.5],[.5,.82]];
   words.forEach((wd,k)=>{ const sc=Math.min(3,1.4+k*.4),q=cl((ms-wd.t)/180),pop=lerp(1.6,1,ez(q)),wx=x-w/2+w*SL[k][0],wy=y-h+h*SL[k][1];
-    gfx.save(); gfx.translate(wx,wy); gfx.scale(pop,pop); label(wd.w,0,-sc*2.5,INK,sc); gfx.restore(); }); gfx.globalAlpha=1; };
+    gfx.save(); gfx.translate(wx,wy); gfx.scale(pop,pop); BUBBLE.text(wd.w,0,-sc*2.5,INK,sc); gfx.restore(); }); gfx.globalAlpha=1; };
 SC.t6_zzz=(s,u)=>{ gfx.globalAlpha=fade(u,.7); for(let k=0;k<3;k++) { const q=cl(u*1.5-k*.2); if(q<=0) continue; const zx=s.x+10+k*14+Math.sin(q*6)*4,zy=s.y-q*60-k*8,sc=3-k*.5; label('Z',zx+1,zy+1,OUT,sc); label('Z',zx,zy,CHROME2,sc); } gfx.globalAlpha=1; };
 T.foraged_at_dawn=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(m,t),foe=t.side==='foe',self=t===m;
   const px=self?H.x-54:Math.max(40,Math.min(540,H.x-(foe?-60:52))),py=Math.min(312,H.base+2),hit=3400;

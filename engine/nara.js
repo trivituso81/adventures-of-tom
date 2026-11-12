@@ -678,7 +678,7 @@ const paw=(x,y,r,c)=>{ E(x,y+r*.3,r*.75,r*.6,c); for(let k=0;k<4;k++) E(x-r*.9+k
 // A speech bubble with a tail pointing down at the speaker.
 SC.np_say=(s,u)=>{ const sc=s.sc||2,w=(s.txt.length*4-1)*sc+22,h=sc*5+16,pop=u<.1?ez(u/.1)*1.15:lerp(1.15,1,cl((u-.1)/.1)); let x=Math.max(w/2+6,Math.min(570-w/2,s.x)),y=Math.max(h/2+6,s.y);
   gfx.globalAlpha=fade(u,.88); gfx.save(); gfx.translate(x,y); gfx.scale(pop,pop);
-  BUBBLE.draw('rect',0,0,w+8,h+8,s.tx-x+2,h/2+14); label(s.txt,0,-sc*2.5,OUT,sc); gfx.restore(); };
+  BUBBLE.draw('rect',0,0,w+8,h+8,s.tx-x+2,h/2+14); BUBBLE.text(s.txt,0,-sc*2.5,OUT,sc); gfx.restore(); };
 SC.np_streaks=(s,u)=>{ const p=ST.cur; if(!p||p.x==null) return; gfx.globalAlpha=fade(u,.8)*.9; const dir=s.dir||1;
   for(let k=0;k<9;k++) { const y=p.y-6-k*9-((k*13)%7),len=70+((k*47)%110),x0=p.x+dir*(30+((k*23)%20)); LnO(x0,y,x0+dir*len,y,k%3?2:3,k%2?CREAM:'#ffffff'); }
   for(let k=0;k<4;k++) { const q=(s.t*3+k/4)%1; gfx.globalAlpha=(1-q)*.7; E(p.x+dir*(24+q*50),p.y-2-q*10,5+q*8,4+q*5,'#e8dcc4'); } };
@@ -887,7 +887,7 @@ SC.nu_spin=(s,u)=>{ const ms=s.t*1000+s.t0; for(const b of s.list) { if(ms<b.t) 
   lift(b.f,-Math.sin(q*Math.PI)*(s.h||22),q*Math.PI*2*(b.k%2?-1:1),-Math.sin(q*Math.PI)*(s.ox||6)); } };
 // A Nara speech-free bubble for Tom (he talks; she does not).
 SC.nu_say=inBox((s,u)=>{ const a=fin(u,.08)*fade(u,.85),w=(s.txt.length*4-1)*2+24,x=Math.max(w/2+8,Math.min(568-w/2,s.x)),y=Math.max(BAR+22,s.y); gfx.globalAlpha=a;
-  BUBBLE.draw('rect',x,y-1,w+8,34,s.x+2,y+26); label(s.txt,x,y-5,'#2b2a26',2); });
+  BUBBLE.draw('rect',x,y-1,w+8,34,s.x+2,y+26); BUBBLE.text(s.txt,x,y-5,'#2b2a26',2); });
 const ball=(x,y,r=8)=>{ if(PROPART.draw('nara/tennis_ball',x,y,{h:(r+2)*2.2})) return; E(x,y,r+2,r+2,OUT); E(x,y,r,r,BALL); E(x-r*.3,y-r*.3,r*.35,r*.35,'#f2ffa0'); gfx.strokeStyle=CREAM; gfx.lineWidth=2; gfx.beginPath(); gfx.arc(x-r,y,r,-.9,.9); gfx.stroke(); };
 const pawPrint=(x,y,r,c)=>{ E(x,y,r,r*.85,c); for(let k=0;k<3;k++) E(x-r+k*r,y-r*1.3,r*.38,r*.38,c); };
 

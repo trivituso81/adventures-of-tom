@@ -31,7 +31,9 @@ const BUBBLE=(()=>{
     [[.22,15],[.52,10],[.82,6.5]].forEach(([t,d])=>PROPART.draw('ui/bubble_dot',bx+(tx-bx)*t,by+(ty-by)*t,{w:d*k+2,h:(d*k+2)*.9})); };
   const draw=(kind,cx,cy,w,h,tx,ty)=>{ if(tx!=null) { if(kind==='cloud') dots(cx,cy,w,h,tx,ty); else if(kind!=='burst') tail(cx,cy,w,h,tx,ty); }
     PROPART.draw('ui/bubble_'+(kind==='cloud'?'cloud':kind==='burst'?'burst':kind==='rect'?'rect':'oval'),cx,cy,{w,h}); };
-  return {draw};
+  // Smooth (not pixel) bubble words. Same call as label(txt,x,y,color,sc): x is the centre, y the top, sc the label scale; the type is squeezed to the label's width.
+  const text=(txt,x,y,color,sc=1)=>{ const t=String(txt).toUpperCase(),maxW=(t.length*4+3)*sc; gfx.save(); gfx.font='bold '+(7*sc)+'px "Trebuchet MS",system-ui,sans-serif'; gfx.textAlign='center'; gfx.textBaseline='middle'; gfx.fillStyle=color; gfx.fillText(t,x,y+2.6*sc,maxW); gfx.restore(); };
+  return {draw,text};
 })();
 setTimeout(()=>PROPART.preload(['ui/bubble_oval','ui/bubble_rect','ui/bubble_tail','ui/bubble_cloud','ui/bubble_dot','ui/bubble_burst']),0);   // painted speech bubbles
 // Props that moves already use; fetched shortly after start so the first fight shows them, not the drawn fallback.
