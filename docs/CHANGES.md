@@ -1,3 +1,8 @@
+## 2026-11-12 (walkmap20): Tom's walk edits for Terminal Zero, Gate Zero, Flight Zero, Gate 00 and Concourse (tag walkmap20)
+- Tom sent Area Builder exports for the five chapter 20 maps. Installed into plateMask with `tools/apply_walkmap.py` (now also reads data/maps-p2.js): terminal 80 tiles, gatezero 15, flightzero 5, gate00 25, concourse 23.
+- Not applied (an object footprint blocks the tile; the object must move): terminal 19, gatezero 22, flightzero 17 (pods, cart, cabin door), gate00 13.
+- Row 11 of Terminal Zero is now a one-tile corridor, so `noGo` for (0..13, 11) keeps wandering NPCs from plugging it (reach_test showed 11 plug failures before).
+- Tested: reach_test on all five, 0 fails.
 ## 2026-11-12 (cathy3): Ms. Cathy plays in Rose's Snack Attack in her painted frames; Ms. Cathy and Young Boppy are in HEAD SIZES (tag cathy3)
 - Tom 09:41: Ms. Cathy and Young Boppy images updated and all approved; "include them in the head sizes tool".
 - Ms. Cathy (fact): `tools/sprite-bake/bake_cathy.py` bakes `art/chars/cathy-ab.webp` + `data/cathy-ab.js` from cathy-ab-snack-attack-v1 (6 frames) and the profile steps of cathy-walk-sheet-v2. Real height 5'4" (Deedee, 5'5", is the size yardstick). Frames 2 and 3 are mirrored because the sheet paints her throwing toward the viewer's right and Rose's team throws left. `SC.rf_cathy` (engine/rose-moves.js) draws them: arrive and leave on the walk steps, idle 1, wind-up 2, throw 3, tray overhead 4, empty tray 6, goodbye wave 5. Purged: the recolored-Deedee stand-in (`cathy()`, `CATHY_`, old `drawCathy`), the drawn fallback tray and the `rose/snack_tray` prop (webp, preload entry, props.json entry, INSTALL mapping).

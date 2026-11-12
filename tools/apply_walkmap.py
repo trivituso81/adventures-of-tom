@@ -4,7 +4,7 @@ and BUILDING INTERIORS (house and shop rooms, `kind` "interior"). An export with
 
 Usage: python3 tools/apply_walkmap.py <export.json | -> [--dry-run]
   - checks map id, kind, w, h and system_hash (a fresh classification from the running engine) against the export
-  - rewrites that map's plateMask rows in data/maps-le.js or data/maps-la.js: W -> '.', B -> '#'; tiles not in the export are unchanged
+  - rewrites that map's plateMask rows in data/maps-le.js, data/maps-la.js or data/maps-p2.js: W -> '.', B -> '#'; tiles not in the export are unchanged
   - asserts the rewrite touches nothing but that one map's plateMask rows (every other map and every other line is byte for byte the same)
   - a W edit on a tile an object footprint blocks is NOT applied (the mask cannot open it); it is listed, the object must move instead
   - prints every D and E tile with its note; portal wiring (exits, border.open, doors, arrival tiles) stays manual
@@ -44,10 +44,10 @@ if ex.get('system_hash') and ex['system_hash'] != facts['hash']:
     print('WARNING: the map changed since the export (system_hash differs). Re-check the result.')
 
 path = None
-for f in ('data/maps-le.js', 'data/maps-la.js'):
+for f in ('data/maps-le.js', 'data/maps-la.js', 'data/maps-p2.js'):
     src = open(os.path.join(ROOT, f)).read(); m = re.search(r"\{id:'%s',(?:name|w):" % mid, src)
     if m: path, text, start = os.path.join(ROOT, f), src, m.start(); break
-if not path: sys.exit('map spec not found in maps-le.js or maps-la.js: ' + mid)
+if not path: sys.exit('map spec not found in maps-le.js, maps-la.js or maps-p2.js: ' + mid)
 pm = re.compile(r"plateMask:\[(.*?)\]", re.S).search(text, start)
 nxt = re.compile(r"\n  \{id:'").search(text, start + 5)
 if not pm or (nxt and pm.start() > nxt.start()):
