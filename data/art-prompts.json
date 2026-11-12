@@ -18530,8 +18530,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or several states.\n\nATTACHED IMAGE\n1) A prop sheet from \"The Adventures of Tom\", a family role-playing game. Cell 1 is the airport gate clock, cells 2 to 4 are its hands, and cell 6 is a gold lock disc with seven coin slots round one slot in the middle. Match how these are painted: hand-brushed, matte painted surfaces, rich warm color. Take only the painting style and the look of the clock and slots. Paint only what is described below.\n\nPAINT THIS ONE PICTURE\nA close-up, straight-on view of the big round airport clock over Gate Zero, so close that its heavy polished brass rim runs right to the edges of the square picture and fills it, with only a little dark wall showing in the four corners. It is the picture of a clock that is waiting for coins.\n- The clock face is warm cream with a fine ring of small black tick marks near the edge. No numbers on the face.\n- Seven identical round coin slots, spaced exactly evenly in a ring round the face. Each slot is a dark round hole with a bright gold rim, about one eighth of the clock's width across, big and clear. The first slot is at the very top, at twelve o'clock, and the other six follow clockwise at equal spacing. The ring of slots sits about halfway between the center and the rim.\n- ONE more slot in the exact center of the face, the same style and slightly larger. It is empty and dark. This center slot stays empty in the story.\n- Three clock hands, stopped and still: a black hour hand, a black minute hand and a thin red second hand, all meeting at the center slot and pointing between the outer slots, never covering one.\n- Every slot is completely EMPTY: no coin, no key, no object inside any slot.\n- Count check before you finish: exactly seven slots in the ring plus one in the center, eight in all.\n\nART STYLE\n- Painted by hand: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Warm golden light from the upper left, so the brass rim glints on the upper left and falls into soft shadow on the lower right.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading.\n- No people, no hands, no characters, no words or letters anywhere, no frame or border.\n- Family friendly for children aged 6 and up."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/closeup-ch10-coins-v1.png",
+     "date": "2026-11-12",
+     "from": "v1",
+     "at": 1794522381921
+    }
+   ],
    "rejects": [],
    "id": "closeup-ch10-coins",
    "tab": "Props",
