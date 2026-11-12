@@ -705,8 +705,7 @@ function drawTarget(target) {
     y=target.value.y*T-(target.value.kind==='tree'?70:28);
   } else return;
   x=Math.round(x); y=Math.round(y+Math.sin(elapsedTime*3)*1.2);
-  rect(x-15,y-1,30,20,OUT); rect(x-14,y,28,18,'#fff1cb'); rect(x-14,y,28,1,'#fffaea');
-  rect(x-3,y+18,6,3,OUT); rect(x-2,y+18,4,2,'#fff1cb');
+  BUBBLE.draw('rect',x,y+8,36,26,x,y+27);   // painted bubble (bubble3); the mark is drawn over it below
   if(target.kind==='npc'&&target.value.monster) label('!',x,y+4,'#b4553f',2);
   else if(target.kind==='npc') { for(let i=-7;i<=7;i+=7) rect(x+i-1,y+8,2,2,'#59724f'); }
   else label('A',x,y+4,'#59724f',2);

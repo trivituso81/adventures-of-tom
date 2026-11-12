@@ -1,3 +1,6 @@
+## 2026-11-12 (bubble3): the overworld "A" / "!" / dots talk prompt uses the painted bubble (tag bubble3)
+- Tom: he approved the new speech bubbles but did not see them in the game. Fact: bubble2 painted only the battle bubbles; the prompt over a person or sign when Tom stands next to it (`drawTarget` in `engine/town-render.js`) was still the old drawn cream box. It now draws `BUBBLE.draw('rect',...)`; the old box rectangles are deleted (grep 0). The mark inside (A, !, three dots) is still drawn over it.
+- Tests: screenshot at a sign in the Square (portrait); smoke FAILS [], tag_check ok.
 ## 2026-11-12 (slotless1): no save is ever replaced to make room; no 10-slot limit (tag slotless1)
 - Tom 08:32: make sure syncing never overwrites an existing save; maybe no limit of 10.
 - Before (fact): picking another device's save with all 10 slots used replaced the oldest slot (sync2); RESTORE from a backup file replaced an older save in the same slot even if it was a different game; a 4th Part 1 clear replaced the oldest clear data.
