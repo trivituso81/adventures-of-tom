@@ -35,9 +35,11 @@ function dialogPortraitSrc(id) {
   return typeof TALK_FACES!=='undefined'&&TALK_FACES.includes(t)?'portraits/talk/'+t+'.webp?v='+TALK_V:'';
 }
 for(const id of new Set(Object.values(DIALOG_PORTRAIT_IDS))) { const src=dialogPortraitSrc(id); if(src&&!id.startsWith('foe_')) new Image().src=src; }   // preload so the face never pops in late
-function setDialogPortrait(name) {
+function setDialogPortrait(name,npc) {
   const box=$('dialog-portrait'); if(!box) return;
-  const id=DIALOG_PORTRAIT_IDS[String(name||'').trim().toLowerCase()], src=dialogPortraitSrc(id);
+  let id=DIALOG_PORTRAIT_IDS[String(name||'').trim().toLowerCase()];
+  if(!id&&npc&&npc.monster&&PORTRAITS['foe_'+npc.monster]) id='foe_'+npc.monster;   // a map monster talking before its fight: face by monster id, whatever its display name
+  const src=dialogPortraitSrc(id);
   const img=box.querySelector('img');
   if(src) { if(img.getAttribute('src')!==src) img.src=src; img.alt=''; }
   box.hidden=!src;
@@ -71,7 +73,7 @@ function openDialog(name,lines,npc=null) {
   }
 
   $('speaker').textContent=name;
-  setDialogPortrait(name);
+  setDialogPortrait(name,npc);
   $('dialog').hidden=false;
   $('hint').hidden=true;
   dialog.seed=hash(name.length,name.charCodeAt(0));

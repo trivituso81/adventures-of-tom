@@ -33,6 +33,11 @@ SPEAKERS = [
     'gridlockprime', 'finalcall', 'standbysprite', 'hush9final', 'drillworm', 'censor', 'leviathan',
     # Nine Scoops
     'brainfreeze', 'slushslug', 'gremlin', 'conehead',
+    # Map monsters that talk before their fight (foeport2); every monster with a painted sheet except Warden Boppy (a person)
+    'toad', 'log', 'gridlock', 'tarblob', 'bobber', 'extra', 'fogwisp', 'popquiz', 'acornagent', 'stickysap', 'acorncache',
+    'shusher', 'dogear', 'lukewarm', 'leftover', 'velvetrope', 'stuffedshirt', 'carryon', 'jetlag', 'lostluggage',
+    'redeye', 'hushling', 'signalfault', 'turnstile', 'greynote', 'twinlens', 'pausesprite', 'paperweight', 'curator',
+    'deadletter', 'rubberstamp',
 ]
 
 

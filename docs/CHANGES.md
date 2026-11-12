@@ -1,3 +1,9 @@
+## 2026-11-12 (foeport2): every monster that talks has a portrait next to its dialogue (tag foeport2)
+- Tom 08:09: all monsters need a portrait next to their dialogue.
+- Fact: 36 of 86 monsters had none. The 51 portraits from foeport1 were keyed by the speaker name used in scenes, but a map monster talking before its fight opens the box with its own display name (Bog Toad, Jet Lag, Dog-Ear...), which was not in the table.
+- Fix: `setDialogPortrait(name,npc)` in engine/overworld.js now falls back to the monster id (`foe_<id>`) when the speaker is a map monster, so any monster with a portrait shows it whatever its display name. 31 new face crops baked (tools/sprite-bake/bake_foe_portraits.py `SPEAKERS`, portraits/foes/), added to the key list in engine/menu.js. Tag foeport2.
+- Not done on purpose: Warden Boppy (a person in costume, needs his own face), The Archivist (person; only his Twin Lenses are a monster, which now has a portrait). Dog-Ear, Bog Toad, Log Lump, Sticky Sap, Shusher crops are tight on one side; fine at dialogue size, redo only if Tom says so.
+- Tested: Bog Toad, Jet Lag, Dog-Ear opened in a dialogue box at 390 x 844 show their faces; contact sheet looked at; no page errors.
 ## 2026-11-12 (facing2): people already face Tom when he walks into a scene; ch9 end staging; Rivituso gate posts are cutouts (tag facing2)
 - Tom 07:58: on entering the house at the end of chapter 9, Grace, Aunt Ellie and Rose still faced the TV until the first line. They should face front as soon as he enters, in every similar case.
 - Fix (engine/story.js `storyArriveFace`, run after every `switchMap`): when the map change lands Tom where a scene trigger will fire, everyone who talks in that scene turns toward him before the room fades in. Posed (`still`) people keep that facing through `n.arriveFace` (read by updateNPCs in engine/battle-draw.js) until the scene ends (`endIntro` clears it); wanderers stop and wait.

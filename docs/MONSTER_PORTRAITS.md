@@ -63,3 +63,7 @@ Source of the list: every `talk:` speaker in data/scenes*.js and data/bonus-nine
 - People: Marlowe, Vance, Julian Vance, the Archivist (the Twin Lenses boss is only its eyes). They have boss entries but speak as people, so a boss crop would be the wrong face. They need a painted face of their own.
 - Objects and places that talk (Corkboard, The Dome, Turntable, Gate Zero, Whispers, Stillness Core, Dead-Letter Office...) and NPC townsfolk.
 - Monsters whose only words are battle lines (Curator, Hushling, Paperweight, Lukewarm, Leftover, Shusher): battle text has no portrait box.
+
+## foeport2 (2026-11-12)
+
+Tom: all monsters need a portrait. A map monster that talks before its fight now gets `foe_<monster id>` automatically (`setDialogPortrait(name,npc)`), so the speaker name does not need an entry in DIALOG_PORTRAIT_IDS. 31 more monsters baked: every monster with a painted sheet except Warden Boppy. New monster rule: add its id to `SPEAKERS` and the key list in engine/menu.js.
