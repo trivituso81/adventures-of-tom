@@ -29,6 +29,19 @@ SCENES.part2Open=()=>[
   {fade:'in',time:.6}
 ];
 
+// Chapter 10 to chapter 11 without the title screen: fires on the Rivituso house map once ch10-done is set (right after the Sunday
+// dinner, and for a save that finished chapter 10 before this existed). Same opening as PART 2 on the title screen (beginPart2).
+SCENES.ch11Bridge=()=>[
+  {fade:'out',time:.6},
+  {call:()=>{ if(typeof setGirlsAway==='function'&&!girlsAway()) setGirlsAway(true); }},
+  {flag:'part2-start'}, {chapter:11},
+  {call:()=>{ const st=chapterInfo(11).start; if(st&&worlds[st.map]) { currentMap=worlds[st.map]; player.x=st.x; player.y=st.y; player.facing='down'; player.move=null; placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; } }},
+  {partCard:2,time:3}, {card:11,time:3.2}, {fade:'in',time:.7},
+  ...SCENES.part2Open(),
+  {save:true}
+];
+TRIGGERS.push({id:'ch11-bridge',map:'grands',when:{mode:'full',chapter:10,flag:'ch10-done',notFlag:'part2-start'},scene:'ch11Bridge'});
+
 SCENES.ch11Cabin=[
   {flag:'ch11-cabin',value:'pending'},
   {call:()=>sfx.ding&&sfx.ding()},

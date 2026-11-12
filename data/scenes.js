@@ -3804,8 +3804,8 @@ SCENES.ch10End=[
   {talk:'Deedee',lines:['To the moon and BACK.']},
   {trace:'ch10-wrap'}, {hearts:'deedee'}, {hearts:'tom'}, {call:()=>sfx.levelChime()},
   {party:null},
-  {fade:'out',time:.8}, {card:10,done:true,time:3.4}, {partCard:1,done:true,time:3.6}, {flag:'ch10-done'}, {partClear:true}, {fade:'in',time:.8},
-  {toast:'PART 1 COMPLETE! Part 2 is open on the title screen. Its chapters are still being built. Long Island is yours to explore.',time:7}
+  {fade:'out',time:.8}, {card:10,done:true,time:3.4}, {partCard:1,done:true,time:3.6}, {flag:'ch10-done'}, {partClear:true}
+  // Chapter 11 follows straight on: TRIGGER ch11-bridge (data/scenes-p2.js) fires on this map once ch10-done is set.
 ];
 TRIGGERS.push(
   {id:'ch10-term',map:'terminal',when:{...CH10,flag:'ch10-start',notFlag:'ch10-term'},scene:'ch10Term'},
@@ -3959,5 +3959,3 @@ TUTORIALS.lastcall={tips:[
   {id:'final',who:['tom','grace','rose','amy'],tombo:true,when:u=>B2.foes.some(f=>f.boss&&f.shield)&&b2TomboRows(u).some(r=>!r.why),text:'FINAL BOARDING is coming. Any TOMBO smashes her guard in one go.'},
   {id:'final2',who:'*',when:()=>B2.foes.some(f=>f.boss&&f.shield),text:'FINAL BOARDING on everyone next turn! Break her guard: 2 Kinetic or Sparkle hits, or any Tombo.'}]};
 
-// Part 2 is not built yet. Starting it from the title screen lands in chapter 11 with free play.
-SCENES.part2Open=()=>[{toast:'Chapter 11 is still being built. For now, Long Island and Los Angeles are yours to explore.',time:5}];

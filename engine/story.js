@@ -1119,7 +1119,7 @@ function currentObjective() {
     else if(c.n===7) text='Chapter complete. Talk to Sal at Long Island Taxi Co. (the Square) to fly to Los Angeles for chapter 8.';
     else if(c.n===8) text='Chapter complete. Talk to Sol at Angel City Cab Co. (downtown) to fly home for chapter 9.';
     else if(c.n===9) text='Chapter complete. Talk to Sal at Long Island Taxi Co. (the Square) for chapter 10.';
-    else if(c.n===10) text='Part 1 complete! PART 2 is open on the title screen. Its chapters are still being built. Explore as much as you like.';
+    else if(c.n===10) text='Part 1 complete! Go to Deedee and Boppy\u2019s house (RIVITUSO) the next morning to start chapter 11.';
     const done=log.slice(); if(goal&&flag('goalCh')===c.n&&done[done.length-1]!==goal) done.push(goal);
     return {head,eyebrow,text,subs:null,done,complete:true};
   }
