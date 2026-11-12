@@ -9,7 +9,7 @@
 // them with `ART=real python3 tools/closeup_test.py` (tools/shots/closeup-ring.png draws the ring over the plate) and change only these numbers.
 const CH10_RING={CX:.5,CY:.4834,RR:.2832,SR:.064};   // matches RR 290 and the center (512,495) of tools/art-library/bake_closeup.py
 CLOSEUP_DEFS.ch10={
-  id:'ch10', ready:true, v:'closeup1', bg:'art/closeup/ch10-clock.webp',
+  id:'ch10', ready:true, v:'closeup2', bg:'art/closeup/ch10-clock.webp',
   slots:Array.from({length:7},(_,k)=>{ const a=-Math.PI/2+k*2*Math.PI/7; return {x:CH10_RING.CX+CH10_RING.RR*Math.cos(a),y:CH10_RING.CY+CH10_RING.RR*Math.sin(a),r:CH10_RING.SR}; }),
   items:CH10_COINS.map((label,i)=>({id:'c'+(i+1),label,img:'art/closeup/ch10-coin-'+(i+1)+'.webp'})),
   order:CH10_COINS.map((_,i)=>'c'+(i+1)),
