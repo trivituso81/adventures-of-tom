@@ -173,7 +173,7 @@ function syncOthers() {
   const devs=syncCacheGet(), me=syncDeviceId(), here=new Set(SAVE_SLOTS.map(s=>saveRaw(s)).filter(Boolean)), out=[];
   for(const [dev,d] of Object.entries(devs)) {
     if(dev===me||!d||!d.slots) continue;
-    for(const slot of SAVE_SLOTS) {
+    for(const slot of Object.keys(d.slots).filter(s=>s==='auto'||/^\d+$/.test(s)).sort((a,b)=>a==='auto'?-1:b==='auto'?1:a-b)) {
       const raw=d.slots[slot]; if(typeof raw!=='string'||here.has(raw)) continue;
       let sv=null; try { sv=JSON.parse(raw); } catch(e) {}
       if(!sv||!Array.isArray(sv.party)||typeof sv.map!=='string'||typeof sv.when!=='number') continue;
@@ -184,11 +184,11 @@ function syncOthers() {
 }
 const syncOtherName=o=>o.label+' · '+(o.slot==='auto'?'Autosave':'Slot '+o.slot);
 // Copy another device's save into a slot here and return that slot: the same number if it is free, else the first free numbered
-// slot, else the oldest numbered slot. The copy is uploaded with this device's saves.
+// slot, else a new slot (no limit). It never replaces a save that is here. The copy is uploaded with this device's saves.
 function syncTake(o) {
-  const nums=SAVE_SLOTS.filter(s=>s!=='auto');
-  let slot=(o.slot!=='auto'&&!saveRaw(o.slot))?o.slot:nums.find(s=>!saveRaw(s));
-  if(!slot) slot=nums.slice().sort((a,b)=>saveWhen(saveRaw(a))-saveWhen(saveRaw(b)))[0];
+  let slot=(/^\d+$/.test(o.slot)&&!saveRaw(o.slot))?o.slot:saveSlotFree();
+  if(saveRaw(slot)) return null;
+  saveSlotAdd(slot);
   SAVE_CACHE[slot]=o.raw;
   try { localStorage.setItem(SAVE_PREFIX+slot,o.raw); } catch(e) { return null; }
   syncQueue();

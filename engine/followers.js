@@ -126,7 +126,15 @@ function recruitJoin(m,npc,silent=false,map=currentMap,replace=null) {
 }
 
 // ---------- Saving: ten named slots plus an autosave, in this browser's storage ----------
+// Slots 1 to 10 always exist; there is no upper limit (slotless1, Tom 2026-11-12): saveSlotNew() adds the next number, and any
+// higher slot found in this browser's storage at start is added back. Nothing ever has to replace a save to make room.
 const SAVE_SLOTS=['auto','1','2','3','4','5','6','7','8','9','10'];
+function saveSlotAdd(s) {
+  s=String(s); if(!/^[1-9]\d{0,3}$/.test(s)||SAVE_SLOTS.includes(s)) return;
+  SAVE_SLOTS.push(s); SAVE_SLOTS.sort((a,b)=>a==='auto'?-1:b==='auto'?1:a-b);
+}
+const saveSlotNew=()=>{ const n=String(Math.max(0,...SAVE_SLOTS.filter(s=>s!=='auto').map(Number))+1); saveSlotAdd(n); return n; };
+const saveSlotFree=()=>SAVE_SLOTS.find(s=>s!=='auto'&&!saveRaw(s))||saveSlotNew();
 // Full game saves. The demo (demo/) keeps the original le-save-* keys, so the two never mix.
 const SAVE_PREFIX='aot-save-';
 function saveSnapshot() {
@@ -143,6 +151,7 @@ function saveSnapshot() {
 }
 // SAVE_CACHE holds the latest copy of every slot. Browser storage alone is not enough on iOS, so engine/save-backup.js adds BACK UP and RESTORE files and engine/save-sync.js keeps a cloud copy in a private gist.
 const SAVE_CACHE={};
+try { for(let i=0;i<localStorage.length;i++) { const k=localStorage.key(i)||''; if(k.indexOf(SAVE_PREFIX)===0) saveSlotAdd(k.slice(SAVE_PREFIX.length)); } } catch(e) {}
 function saveRaw(slot) {
   if(typeof SAVE_CACHE[slot]==='string') return SAVE_CACHE[slot];
   try { return localStorage.getItem(SAVE_PREFIX+slot); } catch(e) { return null; }

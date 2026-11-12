@@ -1017,13 +1017,16 @@ addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window._
 // moves to chapter 11, places Tom at CHAPTERS[11].start {map,x,y} if set, and plays SCENES.part2Open if it exists.
 const PARTS=[null,{n:1,from:1,to:10,sub:'Chapters 1 to 10'},{n:2,from:11,to:20,sub:'Chapters 11 to 20'}];
 const partOf=ch=>ch>=PARTS[2].from?2:1;
+// Part 1 clear data: clear-1 to clear-3, plus clear-4 and up as needed (no limit, never replaced, slotless1).
 const CLEAR_SLOTS=['clear-1','clear-2','clear-3'];
+const clearSlotAdd=s=>{ if(/^clear-[1-9]\d{0,3}$/.test(s)&&!CLEAR_SLOTS.includes(s)) { CLEAR_SLOTS.push(s); CLEAR_SLOTS.sort((a,b)=>a.slice(6)-b.slice(6)); } };
+const clearSlotFree=()=>{ const f=CLEAR_SLOTS.find(s=>!saveRaw(s)); if(f) return f; const s='clear-'+(Math.max(...CLEAR_SLOTS.map(c=>+c.slice(6)))+1); clearSlotAdd(s); return s; };
+try { for(let i=0;i<localStorage.length;i++) { const k=localStorage.key(i)||''; if(k.indexOf(SAVE_PREFIX+'clear-')===0) clearSlotAdd(k.slice(SAVE_PREFIX.length)); } } catch(e) {}
 const isPartClear=sv=>!!(sv&&sv.story&&sv.story.flags&&sv.story.flags['part1-clear']);
 function partClearSlots() { return CLEAR_SLOTS.filter(s=>isPartClear(readSave(s))); }
 function savePartClear() {
   setFlag('part1-clear');
-  const used=CLEAR_SLOTS.filter(s=>readSave(s));
-  const slot=CLEAR_SLOTS.find(s=>!readSave(s))||used.sort((a,b)=>(readSave(a).when||0)-(readSave(b).when||0))[0];
+  const slot=clearSlotFree();
   saveGame(slot,true); saveGame('auto',true);
   showToast('Part 1 clear data saved. Part 2 is open on the title screen.',4);
   return slot;

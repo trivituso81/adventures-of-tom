@@ -451,7 +451,7 @@ function targetPicker(id) {
 function renderSaveTab(body) {
   $('menu-foot').textContent=saveNoteLine()+' Autosave happens at every door, after each battle and when you leave the app.';
   const list=el('div','item-list single loadlist');
-  const used=SAVE_SLOTS.filter(k=>readSave(k));   // every used slot (autosave plus up to 10), same as the title Load page; empty slots are not listed
+  const used=SAVE_SLOTS.filter(k=>readSave(k));   // every used slot (autosave plus every numbered slot), same as the title Load page; empty slots are not listed
   if(!used.length&&!(typeof syncOthers==='function'&&syncOthers().length)) list.appendChild(el('div','menu-empty','No saved games yet. Use the SAVE button on the map.'));
   for(const slot of used) {
     const sv=readSave(slot);
@@ -520,8 +520,10 @@ function renderSavePop() {
   const box=el('div','mwin mquit-box msave-box');
   const h=el('div','mquit-title'); h.id='msave-title'; h.textContent='Save your game'; box.appendChild(h);
   const list=el('div','item-list single');
-  for(const slot of SAVE_SLOTS) {
-    if(slot==='auto') continue;
+  // Every slot, and always one empty one at the end: when all are used a new numbered slot is offered (no limit, slotless1).
+  const shown=SAVE_SLOTS.filter(s=>s!=='auto');
+  if(shown.every(s=>readSave(s))) shown.push(String(Math.max(...shown.map(Number))+1));
+  for(const slot of shown) {
     const sv=readSave(slot);
     const row=el('div','save-row');
     row.innerHTML='<div class="item-icon">\u{1F4BE}</div><div class="save-copy"><span class="save-name"></span><span class="save-meta"></span></div>';
@@ -530,7 +532,7 @@ function renderSavePop() {
     const k='psave-'+slot,sure=menuConfirm===k;
     row.appendChild(btn('save-btn'+(sure?' sure':''),k,sure?'OVERWRITE?':'SAVE',()=>{
       if(sv&&!sure) { askConfirm(k); return; }
-      menuConfirm=null; saveGame(slot); sfx.select(); closeMenu(); showToast('Saved to slot '+slot+'.',1.6);
+      menuConfirm=null; saveSlotAdd(slot); saveGame(slot); sfx.select(); closeMenu(); showToast('Saved to slot '+slot+'.',1.6);
     }));
     list.appendChild(row);
   }

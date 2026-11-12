@@ -43,19 +43,30 @@ async function doBackup() {
   return true;
 }
 
-// Returns {restored,kept,bad}: restored slots were written, kept slots already had a newer copy, bad entries were unreadable.
+// Never replaces a save (slotless1, Tom 2026-11-12). Per save in the file: already here word for word = kept; its slot is empty here =
+// written there; its slot holds a different save = written to a free numbered slot (a new one if needed). Part 1 clear data keeps
+// its own clear slots the same way. Returns {restored,kept,moved,bad}.
 function restoreFromText(text) {
   let obj; try { obj=JSON.parse(text); } catch(e) { return null; }
   if(!obj||obj.app!==BACKUP_APP||!obj.slots||typeof obj.slots!=='object') return null;
-  const res={restored:0,kept:0,bad:0};
-  for(const s of BACKUP_SLOT_IDS()) {
-    const raw=obj.slots[s]; if(raw==null) continue;
+  const res={restored:0,kept:0,moved:0,bad:0};
+  const here=new Set(BACKUP_SLOT_IDS().map(s=>saveRaw(s)).filter(Boolean));
+  for(const s of Object.keys(obj.slots)) {
+    const raw=obj.slots[s];
     let sv=null; try { sv=JSON.parse(raw); } catch(e) {}
     if(typeof raw!=='string'||!sv||!Array.isArray(sv.party)||typeof sv.map!=='string'||typeof sv.when!=='number') { res.bad++; continue; }
-    if(saveWhen(saveRaw(s))>=sv.when) { res.kept++; continue; }
-    SAVE_CACHE[s]=raw;
-    try { localStorage.setItem(SAVE_PREFIX+s,raw); } catch(e) { res.bad++; continue; }
-    res.restored++;
+    if(here.has(raw)) { res.kept++; continue; }
+    const clear=/^clear-\d+$/.test(s);
+    if(clear&&typeof clearSlotAdd==='function') clearSlotAdd(s);
+    if(!clear&&s!=='auto'&&!/^\d+$/.test(s)) { res.bad++; continue; }
+    let to=s;
+    if(clear) { if(saveRaw(s)) to=clearSlotFree(); }
+    else if(saveRaw(s)) to=saveSlotFree();
+    if(saveRaw(to)) { res.bad++; continue; }
+    if(!clear) saveSlotAdd(to);
+    SAVE_CACHE[to]=raw;
+    try { localStorage.setItem(SAVE_PREFIX+to,raw); } catch(e) { delete SAVE_CACHE[to]; res.bad++; continue; }
+    here.add(raw); res.restored++; if(to!==s) res.moved++;
   }
   return res;
 }
@@ -63,7 +74,8 @@ function restoreSummary(r) {
   if(!r) return 'That file isn\'t a saves backup from this game.';
   if(!r.restored&&!r.kept&&!r.bad) return 'That backup has no saves in it.';
   return (r.restored?'Restored '+r.restored+(r.restored===1?' save':' saves')+'.':'Nothing restored.')
-    +(r.kept?' '+r.kept+(r.kept===1?' save here was':' saves here were')+' newer, so '+(r.kept===1?'it was':'they were')+' kept.':'')
+    +(r.moved?' '+r.moved+(r.moved===1?' went to a new slot':' went to new slots')+' so nothing here was replaced.':'')
+    +(r.kept?' '+r.kept+(r.kept===1?' was already here.':' were already here.'):'')
     +(r.bad?' '+r.bad+' could not be read.':'');
 }
 // Opens the phone's file picker, then calls done(summaryText, result). Must be called straight from a tap.

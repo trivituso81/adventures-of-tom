@@ -100,6 +100,27 @@ with sync_playwright() as pw:
     ok(all(x[1] != 'betaauto' for x in p1.evaluate("syncOthers().map(o=>[o.slot,o.sv.map])")), 'a save already copied here is not listed twice')
     p1.wait_for_timeout(6500)
     ok('3' in devs()[d1]['slots'] and d2 in devs(), 'the copy is uploaded in phone 1 section; phone 2 section untouched')
+    # 5b. never overwrite: with slots 1 to 10 all used here, a cloud save goes to a NEW slot 11; nothing here changes
+    before = {str(i): local(p1, str(i)) for i in range(1, 11)}
+    for i in range(1, 11):
+        if before[str(i)] is None: put(p1, str(i), 3000 + i, 'fill%d' % i)
+    before = {str(i): json.dumps(local(p1, str(i))) for i in range(1, 11)}
+    slot = p1.evaluate("(()=>{ const o=syncOthers().find(x=>x.slot==='1'); return o?syncTake(o):null; })()")
+    ok(slot == '11' and local(p1, '11')['map'] == 'beta', 'all ten slots used: the cloud save goes to a new Slot 11 (%s)' % slot)
+    ok(all(json.dumps(local(p1, str(i))) == before[str(i)] for i in range(1, 11)), 'slots 1 to 10 untouched')
+    p1.evaluate("openSave&&openSave()"); p1.wait_for_timeout(300)
+    pop = p1.evaluate("document.getElementById('menu-save')?document.getElementById('menu-save').innerText:''")
+    ok('Slot 11' in pop and 'Slot 12' in pop and 'Empty' in pop, 'save popup lists Slot 11 and offers an empty Slot 12')
+    p1.screenshot(path=os.path.join(SHOTS, 'sync-save-pop.png'))
+    p1.evaluate("closeMenu&&closeMenu()")
+    # backup file restore never replaces either: a different save for slot 1 lands in a new slot; an identical one is skipped
+    p1.evaluate("([s,r])=>{ SAVE_CACHE[s]=r; localStorage.setItem(SAVE_PREFIX+s,r); }", ['clear-1', raw(50, 'clearA')])
+    r = p1.evaluate("([a,b,c])=>restoreFromText(JSON.stringify({app:'adventures-of-tom',v:1,when:1,slots:{'1':a,'2':b,'clear-1':c}}))", [raw(99999, 'frombackup'), p1.evaluate("saveRaw('2')"), raw(60, 'clearB')])
+    ok(p1.evaluate("JSON.parse(saveRaw('clear-1')).map")=='clearA' and p1.evaluate("saveRaw('clear-2')") and json.loads(p1.evaluate("saveRaw('clear-2')"))['map']=='clearB', 'clear data from the backup goes to clear-2; clear-1 untouched')
+    ok(r['restored'] == 2 and r['moved'] == 2 and r['kept'] == 1 and json.dumps(local(p1, '1')) == before['1'], 'backup restore: different saves go to new slots, identical one kept, slot 1 untouched (%s)' % r)
+    ok(local(p1, '12')['map'] == 'frombackup', 'backup save landed in Slot 12')
+    p1.reload(); p1.wait_for_function('()=>typeof syncNow==="function"')
+    ok(p1.evaluate("SAVE_SLOTS.includes('12')") and local(p1, '12') is not None, 'slots above 10 come back after a restart')
     # 6. a deleted save on one device leaves the cloud with the next sync of that device only
     p2.evaluate("delete SAVE_CACHE['1'];localStorage.removeItem(SAVE_PREFIX+'1')"); p2.evaluate("window.__r=null;syncNow(true,true).then(r=>window.__r=r)"); p2.wait_for_function('window.__r')
     ok('1' not in devs()[d2]['slots'] and '1' in devs()[d1]['slots'], 'phone 2 removing its slot 1 does not touch phone 1 slot 1')
