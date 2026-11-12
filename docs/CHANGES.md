@@ -1,3 +1,8 @@
+## 2026-11-11 (lineup1): welcome screen cast reordered to Tom's lineup, one layout for portrait and landscape (tag lineup1)
+- Tom 15:57: main row left to right Boppy, Deedee, Rose, Grace, TOM (centre), TNB, Olivia, Michael; Amy and Justin behind Grace and Rose; Nara in front of Tom and TNB, centred.
+- `engine/splash.js`: `SPLASH_LINEUP` and `splashLineupLayout` replace `SPLASH_LAND`, `SPLASH_PORT`, `SPLASH_W`, `splashLandLayout`, `splashPortLayout` (purged, 0 references). Gaps per neighbour pair in design units between measured painted figures (`gaps`), tuned by eye: Boppy and Deedee close without touching, Rose, Grace, Tom, TNB close to touching, Olivia and Michael touching, normal space Deedee to Rose and TNB to Olivia.
+- Portrait now uses the same single line, so the family is drawn smaller in portrait than the old two-row layout (the line is about 9 people wide).
+- Tests: smoke FAILS [], tag_check ok; looked at 390 x 844, 844 x 390 and 1180 x 820.
 ## 2026-11-11 (heads3): head sizes from HEAD SIZES applied to all 63 saved characters (tag heads3)
 - Tom saved head factors in ADMIN > HEAD SIZES (adults 0.96 to 1.25, kids 1.3, Nara 0.97, townsfolk 0.94 to 1.36). `head_adjust.py apply-requests` rebaked the family walks, Jojo and all townsfolk; heights.py write refreshed the draw scales; every talk face rebaked. Heights are unchanged (heights_test passes).
 - Olivia at 120 percent reads 1.05 percent over her nominal rows (hair volume), so the "walk art is baked at its rows" guard in tools/heights_test.py is 1.5 percent; her drawn height (the real check) holds at 1 percent.

@@ -564,51 +564,37 @@ const SPLASH_BREATH={amp:.011,speed:1.0};   // slow rise and fall: amp = lift as
 // Heights in design units, all from real heights at 4.34 units per inch (Tom 5'11" = 308, TNB 5'10", Boppy 5'7" 291, Amy and Deedee 5'5" 282, Justin 6'4" 330,
 // Grace 4'2" 222, Rose 3'4" 178, Nara a 40 lb labradoodle about 28 in at the head = 130, Olivia 5'5" 282, Michael 6'4" 330 with Lachlan and Isla on his arms). Heights are of the visible figure (hair, hats and all), so TNB (5'10") stands a little shorter than Tom (5'11").
 const SPLASH_H={tom:308,tnb:304,justin:330,boppy:291,amy:282,deedee:282,grace:230,rose:185,nara:130,olivia:282,michael:330};
-// Landscape and any wide window (Tom 2026-11-11 10:15 and 11:43): two rows, and still no one overlaps anyone sideways. The back row stands in
-// the gaps between front-row people, `depth` design units further back (higher on screen), and every pair of neighbours (front or back) has
-// the same `gap` between their visible painted figures (arms included). Long Island family on the Long Island side (left), Los Angeles
-// family on the LA side (right), Tom at the exact centre of the screen (Tom 2026-11-11 09:03). Sized by the wider half to fracW of the width
-// and by the tallest figure plus the depth to fracH of the height.
-const SPLASH_LAND={order:['boppy','deedee','justin*','grace','amy*','rose','tom','tnb','olivia*','nara','michael*'],gap:12,depth:50,tall:380,fracW:.95,fracH:.46,feetY:.79};   // * = back row
-// Portrait (iPhone tuning, Tom 2026-11-06; order mirrored 2026-11-11 so Long Island people stand on the Long Island side): two rows. Front, left to right: Grace, Rose, Tom, TNB, Nara.
-// SPLASH_W = painted figure width over height (arms included). Front figures are spaced at `gap` of their widths, the back row is `depth` design units further
-// back, and the group scales so the tallest figure plus the depth fills fracH of the screen height (about 40% bigger than the old single line).
-const SPLASH_W={tom:.334,tnb:.381,justin:.426,boppy:.410,amy:.333,deedee:.349,grace:.375,rose:.388,nara:.599,olivia:.357,michael:.566};
-// Back row (Tom 2026-11-11 09:35): the Long Island grown-ups (Boppy, Deedee, Justin, Amy) behind the Long Island side, Olivia and Michael (with the kids)
-// behind the LA side. backPivot: the gap between those two groups sits right behind Tom.
-const SPLASH_PORT={front:['grace','rose','tom','tnb','nara'],back:['boppy','deedee','justin','amy','olivia','michael'],gap:1.0,frontGap:[1,1,.82,1.1],backGap:[.5,.7,.5,.4,1.05],backPivot:['amy','olivia'],
-  depth:125,fracW:.98,fracH:.43,feetY:.74};
-function splashPortLayout(w,h) {
-  const P=SPLASH_PORT,wid=id=>SPLASH_H[id]*SPLASH_W[id];
-  let x=0,pw=0;
-  const front=P.front.map((id,i)=>{ const ww=wid(id); if(i) x+=(pw/2+ww/2)*(P.frontGap?P.frontGap[i-1]:P.gap); pw=ww; return {id,x,ww}; });   // frontGap: TNB stands a little closer to Tom (Tom 2026-11-11 09:51)
-  let bx=0,bw=0;   // back row: side by side with a slight overlap, centred on the front row (Tom 2026-11-06 07:13: it sat too far right)
-  const back=P.back.map((id,i)=>{ const ww=wid(id); if(i) bx+=(bw/2+ww/2)*P.backGap[i-1]; bw=ww; return {id,x:bx,ww}; });
-  const blo=Math.min(...back.map(f=>f.x-f.ww/2)),bhi=Math.max(...back.map(f=>f.x+f.ww/2));
-  const flo=Math.min(...front.map(f=>f.x-f.ww/2)),fhi=Math.max(...front.map(f=>f.x+f.ww/2)),shift=(flo+fhi)/2-(blo+bhi)/2;
-  const tomX=front.find(f=>f.id==='tom').x,pv=P.backPivot&&P.backPivot.map(id=>back.find(f=>f.id===id));
-  for(const b of back) b.x+=pv?tomX-(pv[0].x+pv[1].x)/2:shift;
-  const all=front.concat(back),lo=Math.min(...all.map(f=>f.x-f.ww/2)),hi=Math.max(...all.map(f=>f.x+f.ww/2));
-  const tall=Math.max(...P.front.concat(P.back).map(i=>SPLASH_H[i]));
-  // Tom is always at the centre of the screen (Tom 2026-11-11 09:03): the group is placed around Tom, sized by its wider half.
-  const mc=front.find(f=>f.id==='tom').x,half=Math.max(mc-lo,hi-mc);
-  const sc=Math.min(w*P.fracW/(2*half),h*P.fracH/(tall+P.depth)),feet=h*P.feetY;
-  const put=(f,fy)=>({id:f.id,cx:w/2+(f.x-mc)*sc,feet:fy,hh:SPLASH_H[f.id]*sc});
-  return back.map(f=>put(f,feet-P.depth*sc)).concat(front.map(f=>put(f,feet)));
+// Welcome lineup (Tom 2026-11-11 15:57), one layout for portrait and landscape. Main row, left to right: Boppy, Deedee, Rose, Grace, TOM, TNB,
+// Olivia, Michael, with `gaps` (design units between visible painted figures, arms included) per neighbour pair: Boppy and Deedee as close as
+// possible without touching, Deedee to Rose the normal space, Rose, Grace, Tom and TNB close to touching, TNB to Olivia the normal space,
+// Olivia and Michael touching. Amy and Justin stand `backDepth` behind Grace and Rose, centred on them, `backGap` apart (the girls overlap
+// them slightly from the front). Nara stands `naraFwd` in front of Tom and TNB, centred between them, drawn last. Tom is at the exact centre.
+const SPLASH_LINEUP={main:['boppy','deedee','rose','grace','tom','tnb','olivia','michael'],gaps:[2,12,0,-10,-13,12,-22],
+  back:['justin','amy'],backOver:['rose','grace'],backGap:4,backDepth:50,nara:['tom','tnb'],naraFwd:28,
+  fracW:{port:.98,land:.95},fracH:{port:.40,land:.46},feetY:{port:.72,land:.77}};
+function splashFig(id) {   // visible box of a standing frame in design units: width, and the offset of its middle from the frame middle
+  const set=OW[id]; if(!set||!set.down) return null;
+  const fr=set.down[0],R=splashRows(id,fr),C=splashCols(id,fr),u=SPLASH_H[id]/(R.y1-R.y0+1);
+  return {id,vw:(C.x1-C.x0)*u,off:((C.x0+C.x1)/2-fr[0].length/2)*u};
 }
-function splashLandLayout(w,h) {
-  const L=SPLASH_LAND,figs=[];
-  for(const key of L.order) {   // visible box of each standing frame, in design units: width and the offset of its middle from the frame middle
-    const back=key.endsWith('*'),id=back?key.slice(0,-1):key,set=OW[id]; if(!set||!set.down) continue;
-    const fr=set.down[0],R=splashRows(id,fr),C=splashCols(id,fr),u=SPLASH_H[id]/(R.y1-R.y0+1);
-    figs.push({id,back,vw:(C.x1-C.x0)*u,off:((C.x0+C.x1)/2-fr[0].length/2)*u});
+function splashLineupLayout(w,h) {
+  const L=SPLASH_LINEUP,o=w>h?'land':'port';
+  const main=L.main.map(splashFig).filter(Boolean);
+  let x=0; main.forEach((f,i)=>{ if(i) x+=main[i-1].vw/2+(L.gaps[i-1]||0)+f.vw/2; f.x=x; f.z=0; });
+  const at=id=>main.find(f=>f.id===id),t=at('tom'); if(!t) return [];
+  const back=L.back.map(splashFig).filter(Boolean),ov=L.backOver.map(at).filter(Boolean);
+  if(back.length&&ov.length) {
+    let bx=0; back.forEach((f,i)=>{ if(i) bx+=back[i-1].vw/2+L.backGap+f.vw/2; f.x=bx; f.z=-L.backDepth; });
+    const mid=ov.reduce((s,f)=>s+f.x,0)/ov.length,bm=(back[0].x+back[back.length-1].x)/2;
+    for(const f of back) f.x+=mid-bm;
   }
-  let x=0; figs.forEach((f,i)=>{ if(i) x+=figs[i-1].vw/2+L.gap+f.vw/2; f.x=x; });
-  const t=figs.find(f=>f.id==='tom'); if(!t) return [];
-  const half=Math.max(...figs.map(f=>Math.abs(f.x-t.x)+f.vw/2));
-  const sc=Math.min(w*L.fracW/(2*half),h*L.fracH/L.tall),feet=h*L.feetY;
-  const drawn=figs.filter(f=>f.back).concat(figs.filter(f=>!f.back));   // back row drawn first
-  return drawn.map(f=>({id:f.id,cx:w/2+(f.x-t.x-f.off)*sc,feet:feet-(f.back?L.depth*sc:0),hh:SPLASH_H[f.id]*sc}));
+  const nara=splashFig('nara'),np=L.nara.map(at).filter(Boolean);
+  if(nara&&np.length) { nara.x=np.reduce((s,f)=>s+f.x,0)/np.length; nara.z=L.naraFwd; }
+  const all=back.concat(main,nara&&np.length?[nara]:[]);
+  const half=Math.max(...all.map(f=>Math.abs(f.x-t.x)+f.vw/2));
+  const tall=Math.max(...all.map(f=>SPLASH_H[f.id]-f.z));
+  const sc=Math.min(w*L.fracW[o]/(2*half),h*L.fracH[o]/(tall+L.naraFwd)),feet=h*L.feetY[o];
+  return all.map(f=>({id:f.id,cx:w/2+(f.x-t.x-f.off)*sc,feet:feet+f.z*sc,hh:SPLASH_H[f.id]*sc}));   // back row first, Nara last
 }
 // Visible rows of a frame (first and last row with any paint): the painted frames carry different empty margins, so sizing by the whole frame made some people 2% to 6% off.
 // First and last painted column of a standing frame, in grid columns. Measured on the painted picture itself (drawn once off screen and read
@@ -641,7 +627,7 @@ function splashCastDraw(time) {
   const w=Math.max(1,box.clientWidth),h=Math.max(1,box.clientHeight);
   if(c.width!==w||c.height!==h) { c.width=w; c.height=h; }
   const g=splash.g; g.clearRect(0,0,w,h);
-  const items=w>h?splashLandLayout(w,h):splashPortLayout(w,h);
+  const items=splashLineupLayout(w,h);
   const prev=gfx; gfx=g; g.imageSmoothingEnabled=false;
   try {
     items.forEach((m,i)=>{
