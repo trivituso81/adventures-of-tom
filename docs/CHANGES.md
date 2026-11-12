@@ -3,6 +3,11 @@
 - Not applied (an object footprint blocks the tile; the object must move): terminal 19, gatezero 22, flightzero 17 (pods, cart, cabin door), gate00 13.
 - Row 11 of Terminal Zero is now a one-tile corridor, so `noGo` for (0..13, 11) keeps wandering NPCs from plugging it (reach_test showed 11 plug failures before).
 - Tested: reach_test on all five, 0 fails.
+## 2026-11-12 (gatedoor3): walking into Gate Zero's doors now opens the same clock as pressing A (tag gatedoor3)
+- Tom (chapter 10): the doors showed only "the clock is waiting for its coins" and no way to put coins in. Cause: walking into the doors ran the plain gate line and never reached `ch10Gate`; only pressing A did. Now the bump calls `ch10Gate` (engine/story.js), so it shows the missing hands, or the coin menu once all three hands are back.
+- Chapters 1 to 9 get their own line ("Not yet.") with no mention of coins (data/maps-le.js, two gate entries).
+- Tested in a real browser: chapter 9 bump, chapter 10 with 0, 1 and 3 hands; gatezero_test, smoke pass. terminal_test "every monster on reachable floor" fails with and without this change.
+
 ## 2026-11-12 (cathy3): Ms. Cathy plays in Rose's Snack Attack in her painted frames; Ms. Cathy and Young Boppy are in HEAD SIZES (tag cathy3)
 - Tom 09:41: Ms. Cathy and Young Boppy images updated and all approved; "include them in the head sizes tool".
 - Ms. Cathy (fact): `tools/sprite-bake/bake_cathy.py` bakes `art/chars/cathy-ab.webp` + `data/cathy-ab.js` from cathy-ab-snack-attack-v1 (6 frames) and the profile steps of cathy-walk-sheet-v2. Real height 5'4" (Deedee, 5'5", is the size yardstick). Frames 2 and 3 are mirrored because the sheet paints her throwing toward the viewer's right and Rose's team throws left. `SC.rf_cathy` (engine/rose-moves.js) draws them: arrive and leave on the walk steps, idle 1, wind-up 2, throw 3, tray overhead 4, empty tray 6, goodbye wave 5. Purged: the recolored-Deedee stand-in (`cathy()`, `CATHY_`, old `drawCathy`), the drawn fallback tray and the `rose/snack_tray` prop (webp, preload entry, props.json entry, INSTALL mapping).

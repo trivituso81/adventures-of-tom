@@ -781,7 +781,7 @@ beginTransition=function(portal) {
     const g=storyGate(currentMap,player.x,player.y);
     if(g) {
       const d=DIR[player.facing]; player.x-=d.x; player.y-=d.y; player.move=null; placeFollowers();
-      sfx.bump(); openDialog(g.name,npcLines(g)); return;
+      sfx.bump(); if(g.gatelock&&typeof ch10Gate==='function'&&ch10Gate(g)) return; openDialog(g.name,npcLines(g)); return;
     }
   }
   return LE_beginTransition_story(portal);

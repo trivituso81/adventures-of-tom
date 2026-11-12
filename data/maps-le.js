@@ -958,7 +958,9 @@ LE_AREAS.push(
     wild:true,
     exits:[[14,21,'town',25,22,'down','curb'],[15,21,'town',25,22,'down','curb'],[14,3,'gatezero',9,12,'up','terrazzo'],[15,3,'gatezero',10,12,'up','terrazzo']],
     // Gate Zero's doors stay shut in chapters 1 to 10 until the seven coins are in (ch10Gate in data/scenes.js opens the coin menu on A, chapter 10 only).
-    gates:[{at:[[14,3],[15,3]],look:'doors',cond:{until:10,notFlag:'ch10-door'},name:'Gate Zero doors',
+    gates:[{at:[[14,3],[15,3]],look:'doors',cond:{until:9},name:'Gate Zero doors',
+      lines:['The doors are locked tight. Not yet.']},
+      {at:[[14,3],[15,3]],look:'doors',gatelock:true,cond:{chapter:10,notFlag:'ch10-door'},name:'Gate Zero doors',
       lines:['The doors are locked tight. Above them, the big clock is waiting for its coins.']}],
     // Painted plate (art/terminal.webp, engine/plate.js; the painting Tom approved 2026-11-11, tools/make_airport_plates.py). '#' blocks,
     // '.' walks. A tile walks when the floor at its bottom edge (where feet are drawn) is clear. The gate clock stays drawn on top of the
