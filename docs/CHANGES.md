@@ -1,4 +1,5 @@
 ## 2026-11-12 (voicefoot1): Voice Library on a computer: Export block no longer drawn over the filters (voices.html only, no tag)
+- heads5 (2026-11-12): Tom's saved head size applied: Justin 1.25 to 1.18 (body keeps 6'4"). Walk art, hires data and talk face rebaked, TALK_V heads5. Welcome layout json unchanged (no new save). smoke FAILS [].
 - Tom: on desktop landscape the left filters and the export functions overlap. Cause (fact): at 860 px and wider `.side` (key box and filters) is sticky and `.foot` (how-to, Export phone clips, Remove all phone clips) sat in the same grid column at the bottom, so at the end of the list the two drew over each other.
 - Fix: `.foot` moves to the list column under the list (`.side` spans both rows). Phone layout unchanged. Looked at 390 x 844, 951 x 648 (Duo) and 1440 x 900 scrolled to the end: no overlap, no page errors.
 - Plan for the whole admin area (hub, shared shell, one Settings for keys, one filter component): Project doc claude/admin-ux-plan.md. Not built.
