@@ -341,20 +341,17 @@ function drawHomeJar(time) {
   if(typeof storyMatch==='function'&&storyMatch({chapter:6,notFlag:'ch6-clear'})) return;
   drawBreadyJar(918*T/78.4,322*T/78.4,1.1*T/78.4,time);
 }
-// Grump Hollow crumb trail (Art Library prop-trail-hollow, cut by tools/sprite-bake/bake_hollow_crumbs.py). Each entry: piece, the flag that
-// shows it, and its centre in plate art px (64 per tile). Groups are set by ch1Mudling (a, b) and ch1Grump (c); all hide when the tin is back.
-const HOLLOW_CRUMB_SCALE=.5;   // of the cut picture's size
-const HOLLOW_CRUMBS=[[1,'ch1-crumbs-a',445,1140],[2,'ch1-crumbs-a',575,1075],
-  [3,'ch1-crumbs-b',440,880],[4,'ch1-crumbs-b',440,700],[5,'ch1-crumbs-b',420,500],
-  [6,'ch1-crumbs-c',640,750],[7,'ch1-crumbs-c',760,720],[8,'ch1-crumbs-c',880,690],[9,'ch1-crumbs-c',1040,650]];
+// Grump Hollow crumb trail, chapter 1 (crumbs3). Three overlays built by tools/sprite-bake/bake_hollow_crumbs.py from single painted bits of the
+// approved sheet prop-trail-hollow. Each entry: picture, the flag that shows it, its centre in plate art px (64 per tile) and its width.
+// a: pile and scatter on the entrance steps (ch1Mudling, Deedee's first line). b: north through the arch into the clearing (after the Mudling).
+// c: east along the pond to Boppy's bench (ch1Grump). All hide when the tin is back. Rebake prints this table.
+const HOLLOW_TRAIL=[['hollow/trail_a','ch1-crumbs-a',502,1124.5,92],['hollow/trail_b','ch1-crumbs-b',488.5,829,55],['hollow/trail_c','ch1-crumbs-c',905,717.5,730]];
 function drawHollowCrumbs(time) {
-  if(typeof flag==='function'&&flag('ch1-tin')) return;
+  if(typeof flag!=='function'||flag('ch1-tin')) return;
   const s=T/64;
-  for(const [n,f,x,y] of HOLLOW_CRUMBS) {
-    if(!(typeof flag==='function'&&flag(f))) continue;
-    const id='hollow/crumb_'+n;
-    if(!PROPART.ready(id)) continue;
-    PROPART.draw(id,x*s,y*s,{w:PROPART.get(id).naturalWidth*HOLLOW_CRUMB_SCALE*s});
+  for(const [id,f,x,y,w] of HOLLOW_TRAIL) {
+    if(!flag(f)||!PROPART.ready(id)) continue;
+    PROPART.draw(id,x*s,y*s,{w:w*s});
   }
 }
 function plateLive(map,time) {
