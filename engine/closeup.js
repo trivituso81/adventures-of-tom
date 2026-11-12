@@ -12,7 +12,7 @@
 // pad inside the screen (the normal controls are hidden while it is open). The game under it is paused (update() returns early).
 // Layout is computed in JS from the overlay's own size, so it is right in portrait, landscape (the stage is rotated by CSS) and Duo.
 const CLOSEUP_DEFS={};
-const closeup={active:false,def:null,hooks:null,el:null,plate:null,tray:null,sel:0,placed:[],busy:false,coins:[],slotEls:[],order:[],ro:null,wide:false,pad:null,cap:null,glint:null,made:false};
+const closeup={reveal:false,active:false,def:null,hooks:null,el:null,plate:null,tray:null,sel:0,placed:[],busy:false,coins:[],slotEls:[],order:[],ro:null,wide:false,pad:null,cap:null,glint:null,made:false};
 
 function closeupCSS() {
   if(document.getElementById('closeup-css')) return;
@@ -42,6 +42,15 @@ main:has(#closeup:not([hidden])) #controls{visibility:hidden}
 #closeup .cu-b{min-width:52px;height:46px;padding:0 14px;border-radius:12px;border:2px solid #d8b66a;background:#2b1d10e0;color:#fff2c8;font-weight:800;font-size:16px;letter-spacing:.04em}
 #closeup .cu-b.a{background:#b8862e;color:#1a1008;border-color:#fff2b0}
 #closeup .cu-b:active{transform:translateY(2px)}
+#closeup.reveal{background:radial-gradient(ellipse at 50% 45%,#2a1d1280,#0b080599 85%);-webkit-backdrop-filter:blur(5px) brightness(.55);backdrop-filter:blur(5px) brightness(.55)}
+#closeup .cu-rev{position:absolute;perspective:700px;pointer-events:none}
+#closeup .cu-rev .cu-spin{width:100%;height:100%;transform-style:preserve-3d;animation:cuRise 1.5s cubic-bezier(.2,.8,.2,1) both;filter:drop-shadow(0 12px 22px #000b)}
+#closeup .cu-rev img{width:100%;height:100%;display:block}
+#closeup .cu-rev.settled .cu-spin{animation:cuBob 2.6s ease-in-out infinite}
+#closeup .cu-sun{position:absolute;border-radius:50%;pointer-events:none;background:radial-gradient(circle,#ffe9a066 0,#ffd24a00 68%);animation:cuSun 2.6s ease-in-out infinite}
+@keyframes cuRise{0%{transform:translateY(60%) rotateY(0) scale(.35);opacity:0}30%{opacity:1}100%{transform:translateY(0) rotateY(360deg) scale(1);opacity:1}}
+@keyframes cuBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5%)}}
+@keyframes cuSun{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
 @keyframes cuPop{0%{transform:scale(1.5);opacity:.3}100%{transform:scale(1);opacity:1}}
 @keyframes cuGlint{0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}35%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.5)}}
 @keyframes cuRattle{0%,100%{margin:0}15%{margin:-3px 4px}30%{margin:4px -3px}45%{margin:-4px -2px}60%{margin:3px 4px}75%{margin:-3px 3px}90%{margin:2px -2px}}
@@ -190,6 +199,7 @@ window.addEventListener('keydown',e=>{
   if(!closeup.active||(typeof dialog!=='undefined'&&dialog.active)||e.code==='KeyL') return;
   e.preventDefault(); e.stopImmediatePropagation(); if(e.repeat) return;
   const c=e.code;
+  if(closeup.reveal) { if(c==='Enter'||c==='Space'||c==='Escape'||c==='KeyB'||c==='Backspace'||c==='KeyA') closeupRevealEnd(); return; }
   if(c==='ArrowLeft'||c==='KeyA') closeupMove(-1); else if(c==='ArrowRight'||c==='KeyD') closeupMove(1);
   else if(c==='ArrowUp'||c==='KeyW') closeupMove(-1,true); else if(c==='ArrowDown'||c==='KeyS') closeupMove(1,true);
   else if(c==='Enter'||c==='Space') closeupPick(closeup.sel);
@@ -199,6 +209,45 @@ window.addEventListener('keyup',e=>{ if(closeup.active&&e.code!=='KeyL') { e.sto
 // Gamepad (called from pollGamepad in engine/main.js).
 function closeupPad(dir,dirEdge,A,B) {
   if(dialog.active) return;
+  if(closeup.reveal) { if(A||B) closeupRevealEnd(); return; }
   if(dirEdge&&dir) { if(dir==='left') closeupMove(-1); else if(dir==='right') closeupMove(1); else closeupMove(dir==='up'?-1:1,true); }
   if(A) closeupPick(closeup.sel); else if(B) closeupLeave();
+}
+
+// ---------- REVEAL mode (Tom 2026-11-12, claude/closeup-coinfinds-spec.md): one object shown large over the dimmed game, no picking ----------
+// closeupReveal(img, label, onDone): the coin rises in, turns once, glints, settles and bobs; the caption names it; A (or a tap, Enter, Space,
+// Escape, B, gamepad A or B) continues. The scene op {coinFind:N} (data/closeup-coinfinds.js) uses it for the seven coin finds.
+function closeupReveal(img,label,onDone,v) {
+  if(closeup.active) { if(onDone) onDone(); return false; }
+  closeupCSS();
+  const host=document.getElementById('game'); if(!host) { if(onDone) onDone(); return false; }
+  const el=closeup.el=cuEl('div','reveal',host); el.id='closeup'; el.hidden=false; closeup.reveal=true; closeup.def=null; closeup.hooks={};
+  closeup.busy=true; closeup.active=true; closeup.done=onDone||null;
+  const sun=cuEl('div','cu-sun',el), box=cuEl('div','cu-rev',el), spin=cuEl('div','cu-spin',box);
+  const im=cuImg(img+(v?'?v='+v:'')); spin.appendChild(im);
+  const cap=closeup.cap=cuEl('div','cu-cap',el); cap.textContent=label;
+  const pad=closeup.pad=cuEl('div','cu-pad',el);
+  const b=cuEl('button','cu-b a',pad); b.type='button'; b.textContent='A  CONTINUE'; b.setAttribute('aria-label','Continue'); b.addEventListener('click',closeupRevealEnd);
+  el.addEventListener('click',closeupRevealEnd);
+  const lay=()=>{
+    const W=el.clientWidth,H=el.clientHeight; if(!W||!H) return;
+    const d=Math.round(Math.min(W*.8,H*.52,520)),x=(W-d)/2,y=H/2-d/2-24;
+    Object.assign(box.style,{left:x+'px',top:y+'px',width:d+'px',height:d+'px'});
+    Object.assign(sun.style,{left:(x-d*.25)+'px',top:(y-d*.25)+'px',width:(d*1.5)+'px',height:(d*1.5)+'px'});
+    Object.assign(cap.style,{left:'0',width:W+'px',top:(y+d+16)+'px',fontSize:Math.max(16,Math.min(24,W/18))+'px'});
+    Object.assign(pad.style,{left:'0',width:W+'px',top:(y+d+16+Math.max(16,Math.min(24,W/18))*1.6+10)+'px'});
+  };
+  closeup.ro=window.ResizeObserver?new ResizeObserver(lay):null; if(closeup.ro) closeup.ro.observe(el);
+  lay(); if(typeof clearInput==='function') clearInput();
+  const go=()=>{ if(!closeup.active||!closeup.reveal) return; el.classList.add('on'); if(typeof sfx!=='undefined'&&sfx.whoosh) sfx.whoosh();
+    setTimeout(()=>{ if(!closeup.reveal) return; closeupTick(); const g=cuEl('div','cu-glint go',el); const bx=box.getBoundingClientRect(),er=el.getBoundingClientRect(),sc=er.width?er.width/el.clientWidth:1,d=bx.width/sc;
+      Object.assign(g.style,{left:(bx.left-er.left)/sc+d*.72+'px',top:(bx.top-er.top)/sc+d*.28+'px',width:d*.4+'px',height:d*.4+'px'}); setTimeout(()=>g.remove(),700); },1200);
+    setTimeout(()=>{ if(!closeup.reveal) return; box.classList.add('settled'); closeup.busy=false; },1500); };
+  (im.decode?im.decode().catch(()=>0):Promise.resolve()).then(()=>setTimeout(go,30));
+  return true;
+}
+function closeupRevealEnd() {
+  if(!closeup.active||!closeup.reveal||closeup.busy||(typeof dialog!=='undefined'&&dialog.active)) return;
+  const after=closeup.done; closeup.done=null; if(typeof sfx!=='undefined'&&sfx.select) sfx.select();
+  closeupClose(()=>{ closeup.reveal=false; if(after) after(); });
 }
