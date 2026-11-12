@@ -158,3 +158,47 @@ endIntro=function() {
     if(typeof storyWorld==='function') storyWorld();
   }
 };
+
+// Scripted-actor endings (bossend4): Warden (Boppy), HUSH-9, Marlowe and Brain Freeze change painted frames at set lines of their after scenes.
+// {pose:'<name>',foe:'<frame>',end:'<boss id>'} shows an ending frame (people: endPoseDraw below; Brain Freeze is a map monster, so drawActor does it);
+// {pose:'<name>'} clears it. {endfx:'<effect>',on:'<name>'} plays a BOSS_EFFECT at the actor's feet. {endprop:{id,f,on,dx,dy,to:[dx,dy],dur,arc,fade}} puts a painted
+// loose piece (Warden's pool and helm) on the ground; {endprop:'clear'} removes them.
+const ENDPOSE_RATIO={},ENDPOSE_LAST={};   // ratio: ending-frame scale per boss and walk set; last: the scale and visible height the actor was drawn at
+const endVis=r=>{ let t=0,b=r.length-1; while(t<b&&!/[^.]/.test(r[t])) t++; while(b>t&&!/[^.]/.test(r[b])) b--; return b-t+1; };
+function endPoseDraw(a,set,k,P) {
+  const H=typeof FOE_END!=='undefined'&&FOE_END[P.end]; if(!H) return null;
+  const rows=endRows(P.end,P.foe,P.dir==='left'?'left':'right'); if(!rows) return null;
+  const key=P.end+':'+(a.sheet||a.paletteName||a.name),anc=endRows(P.end,H.anchor,'right');
+  const ratio=ENDPOSE_RATIO[key]||(ENDPOSE_RATIO[key]=endVis(set.down[0])/endVis(anc));
+  const kd=k*ratio; ENDPOSE_LAST[P.end]={k:kd,h:endVis(anc)*kd};
+  return {rows,k:kd,pal:rows._pal,story:true};
+}
+const BOSS_PROPS=[];
+function bossActorByName(n) { return sceneActor(n)||bossActor(n); }
+function bossGround(a,id) { const p=position(a),L=ENDPOSE_LAST[id]; return {x:Math.round((p.x+.5)*T),y:Math.round((p.y+1)*T-2),h:L?L.h:T*2.4}; }
+SCENE_OPS.camboss=o=>S.call(()=>{ const a=bossActorByName(o.camboss); if(!a) return; const bp=position(a),pp=position(player); if(Math.hypot(bp.x-pp.x,bp.y-pp.y)<=14) sceneCam=[(bp.x+pp.x)/2+.5,(bp.y+pp.y)/2+.5]; });   // frame a person-boss with the party (the map-monster bosses get this from the playScene wrapper)
+SCENE_OPS.endfx=o=>S.call(()=>{ const a=bossActorByName(o.on); if(!a||!BOSS_EFFECT[o.endfx]) return; BOSS_EFFECT[o.endfx](bossGround(a,(a.scenePose&&a.scenePose.end)||o.id||a.monster)); });
+SCENE_OPS.endprop=o=>S.call(()=>{
+  if(o.endprop==='clear') { BOSS_PROPS.length=0; return; }
+  const q=o.endprop,a=bossActorByName(q.on); if(!a) return; const p=position(a);
+  BOSS_PROPS.push({id:q.id,f:q.f,x0:p.x+q.dx,y0:p.y+q.dy,x1:p.x+(q.to?q.to[0]:q.dx),y1:p.y+(q.to?q.to[1]:q.dy),t0:performance.now(),dur:q.dur||0,arc:q.arc||0,fade:q.fade||0,dir:q.dir||'right'});
+  if(q.sfx&&typeof sfx!=='undefined'&&sfx[q.sfx]) setTimeout(()=>sfx[q.sfx](),(q.dur||0)*1000*.9);
+});
+const LE_b7DrawMapFx_props=b7DrawMapFx;
+b7DrawMapFx=function(time) {
+  LE_b7DrawMapFx_props(time);
+  if(!BOSS_PROPS.length) return;
+  const now=performance.now();
+  for(let i=BOSS_PROPS.length-1;i>=0;i--) { const q=BOSS_PROPS[i],t=(now-q.t0)/1000,u=q.dur?Math.min(1,t/q.dur):1,e=u*u*(3-2*u);
+    if(q.fade&&t>q.dur+q.fade) { BOSS_PROPS.splice(i,1); continue; }
+    const rows=endRows(q.id,q.f,q.dir),L=ENDPOSE_LAST[q.id]; if(!rows||!L) continue;
+    const x=(q.x0+(q.x1-q.x0)*e+.5)*T,y=(q.y0+(q.y1-q.y0)*e+1)*T-2-Math.sin(Math.PI*u)*q.arc*T,w=rows[0].length*L.k,h=rows.length*L.k;
+    gfx.globalAlpha=q.fade&&t>q.dur?Math.max(0,1-(t-q.dur)/q.fade):1;
+    drawSprite(rows,rows._pal,Math.round(x-w/2),Math.round(y-h),L.k); gfx.globalAlpha=1; }
+};
+Object.assign(BOSS_EFFECT,{
+  softrings:(g)=>{ ['#ffb3c7','#bfe6a8','#a9d4ff'].forEach((c,i)=>setTimeout(()=>bossRing(g.x,g.y-g.h*.55,g.h*(.9+i*.5),c),i*280)); },
+  amberdrain:(g)=>bossFx(g.x,g.y-g.h*.35,'#e8a23a',16,{up:true,w:g.h*.3,speed:14,s:3,dur:1.8}),
+  mist:(g)=>bossFx(g.x,g.y-g.h*.5,'#d6efff',22,{up:true,w:g.h*.7,speed:24,s:3,dur:1.6})
+});
+const endIntro_props=endIntro; endIntro=function() { BOSS_PROPS.length=0; return endIntro_props.apply(this,arguments); };
