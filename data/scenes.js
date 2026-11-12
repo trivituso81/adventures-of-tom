@@ -3884,20 +3884,9 @@ function ch10Gate(o) {
     return true;
   }
   openChoice(o.name,['The clock has all three hands now. They don\'t move. Seven coin slots round the face, one in the middle.','Tom takes out the sock. Seven gold coins.'],[
-    {label:'PUT THE COINS IN',fn:()=>{ if(!ch10Closeup()) ch10Slot(0); }},   // the painted close-up (data/closeup-ch10.js) once its art is installed; the text menus until then
+    {label:'PUT THE COINS IN',fn:()=>ch10Closeup()},   // the painted close-up screen (data/closeup-ch10.js)
     {label:'NOT YET',fn:()=>{}}]);
   return true;
-}
-function ch10Slot(i) {
-  const right=CH10_COINS[i],opts=[right,...CH10_COINS.slice(i+1).sort(()=>Math.random()-.5).slice(0,2)];
-  if(opts.length<3) opts.push(...CH10_COINS.slice(0,i).sort(()=>Math.random()-.5).slice(0,3-opts.length));
-  opts.sort(()=>Math.random()-.5);
-  openChoice('Gate clock',[(i?'Click. '+i+' in. ':'')+'Slot '+(i+1)+' of 7, going round. Which coin goes in?'],
-    opts.map(label=>({label,fn:()=>{
-      if(label===right) { sfx.select&&sfx.select(); if(i===6) playScene('ch10Door'); else ch10Slot(i+1); return; }
-      const f=(flag('ch10-fails')||0)+1; setFlag('ch10-fails',f); sfx.nope&&sfx.nope();
-      openDialog('Gate clock',['CLUNK. The coins rattle back out into Tom’s hand.',CH10_HINTS[Math.min(f,2)-1]]);
-    }})));
 }
 // The photo booth: which pose? (Heart-Trace)
 const CH10_POSES=[

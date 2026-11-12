@@ -1,33 +1,12 @@
 # Close-up screen test (engine/closeup.js, data/closeup-ch10.js). Runs the chapter 10 coin close-up in a real browser.
-# By default it serves STAND-IN art made on the fly in a temp folder (plain shapes, never written into the repo) so the screen can be
-# tested before the painted art is installed; ART=real uses art/closeup/*.webp from the repo instead (needs `ready` true or ART=real sets it).
+# Uses the installed painted art in art/closeup/ (made by tools/art-library/bake_closeup.py).
 # Checks: opens from the gate clock, all seven right (door scene runs), a wrong pick (coins return, fail count, hint dialog), leaving early,
 # keyboard only, portrait 390 x 844, landscape 844 x 390 and Duo 951 x 648. Shots: tools/shots/closeup-*.png.
 # Usage: python3 tools/closeup_test.py
-import threading, http.server, socketserver, functools, os, sys, tempfile, math
+import threading, http.server, socketserver, functools, os, sys
 from playwright.sync_api import sync_playwright
-from PIL import Image, ImageDraw
 HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.dirname(HERE)
 SHOTS=os.path.join(HERE,'shots'); os.makedirs(SHOTS,exist_ok=True)
-REAL=os.environ.get('ART')=='real'
-TMP=tempfile.mkdtemp(prefix='cu-ph-')
-def make_standins():
-    S=1024; im=Image.new('RGB',(S,S),(30,22,14)); d=ImageDraw.Draw(im)
-    d.ellipse([20,20,S-20,S-20],fill=(150,110,50)); d.ellipse([70,70,S-70,S-70],fill=(240,230,205))
-    def slot(x,y,r):
-        d.ellipse([x-r-8,y-r-8,x+r+8,y+r+8],fill=(212,160,60)); d.ellipse([x-r,y-r,x+r,y+r],fill=(20,14,10))
-    for k in range(7):
-        a=-math.pi/2+k*2*math.pi/7; slot(S*(.5+.3*math.cos(a)),S*(.5+.3*math.sin(a)),S*.066)
-    slot(S*.5,S*.5,S*.08)
-    for ang,ln,w in ((77,.2,14),(283,.28,10),(180,.33,5)):
-        a=math.radians(ang-90); d.line([S/2,S/2,S/2+S*ln*math.cos(a),S/2+S*ln*math.sin(a)],fill=(40,36,44) if w>5 else (220,80,70),width=w)
-    im.save(os.path.join(TMP,'ch10-clock.webp'),quality=90)
-    for i in range(1,8):
-        c=Image.new('RGBA',(256,256),(0,0,0,0)); d=ImageDraw.Draw(c)
-        d.ellipse([8,8,248,248],fill=(120,85,20,255)); d.ellipse([16,16,240,240],fill=(240,190,60,255)); d.ellipse([40,40,216,216],outline=(160,110,20,255),width=6)
-        d.text((112,104),str(i),fill=(90,60,10,255)); d.rectangle([108,100,150,126],outline=(90,60,10,255))
-        c.save(os.path.join(TMP,f'ch10-coin-{i}.webp'),quality=90)
-if not REAL: make_standins()
 class Q(http.server.SimpleHTTPRequestHandler):
     def log_message(self,*a): pass
 socketserver.TCPServer.allow_reuse_address=True
@@ -43,11 +22,6 @@ def skip_intro(pg,n=500):
         if not pg.evaluate("()=>intro.active||dialog.active||!!transition"): return True
         pg.keyboard.press('Enter'); pg.wait_for_timeout(80)
     return False
-def route(rt):
-    f=rt.request.url.split('/art/closeup/')[1].split('?')[0]
-    p=os.path.join(TMP,f)
-    if os.path.exists(p): rt.fulfill(path=p,content_type='image/webp')
-    else: rt.abort()
 def ix_of(pg,label): return pg.evaluate("l=>closeup.def.items.findIndex(i=>i.label===l)",label)
 def pick(pg,label,wait=900): pg.evaluate("i=>closeupPick(i)",ix_of(pg,label)); pg.wait_for_timeout(wait)
 def open_clock(pg):
@@ -60,18 +34,14 @@ def open_clock(pg):
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
-    br=pw.chromium.launch(**kw); pg=br.new_context(viewport={'width':390,'height':844},service_workers='block').new_page()
+    br=pw.chromium.launch(**kw); pg=br.new_page(viewport={'width':390,'height':844})
     pg.on('pageerror',lambda e: errs.append(str(e)))
     pg.on('console',lambda m: errs.append(m.text) if m.type=='error' and 'Failed to load resource' not in m.text else None)
     pg.on('response',lambda r: errs.append('404 '+r.url) if r.status==404 else None)
-    if not REAL: pg.route('**/art/closeup/*',route)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b2Start'); pg.wait_for_timeout(1500)
     pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; window.__LE.chapterJump(10); }"); pg.wait_for_timeout(2500)
     skip_intro(pg); pg.evaluate("()=>window.__LE.go('gatezero')"); pg.wait_for_timeout(1800); skip_intro(pg)
-    pg.evaluate("()=>{ CLOSEUP_DEFS.ch10.ready=true; setFlag('ch10-term',true); TERM_HANDS.forEach(k=>setFlag(k.fight,true)); }")
-    # 0. not ready: the old text menus still work (nothing ships on stand-in art)
-    pg.evaluate("()=>{ CLOSEUP_DEFS.ch10.ready=false; }"); check('not ready: closeupOpen refuses',pg.evaluate("()=>closeupOpen('ch10',{})===false&&!closeup.active"))
-    pg.evaluate("()=>{ CLOSEUP_DEFS.ch10.ready=true; }")
+    pg.evaluate("()=>{ setFlag('ch10-term',true); TERM_HANDS.forEach(k=>setFlag(k.fight,true)); }")
     # 1. opens from the gate clock; screen shows
     open_clock(pg); check('opens from the gate clock',pg.evaluate("()=>closeup.active&&!!document.getElementById('closeup')"))
     check('seven coins in the tray',pg.evaluate("()=>document.querySelectorAll('#closeup .cu-coin').length===7"))

@@ -3,8 +3,8 @@
 // Two entries, parts method from the start (the 11-09 gate clock failed twice as a multi-state sheet, docs/DUNGEON_FINDS.md "Parts sheets"):
 //   closeup-ch10-clock  ONE square painting of the clock face with its seven empty slots (no coins, nothing that changes state).
 //   closeup-ch10-coins  seven coins, each alone and big in its own cell, in story order. The game composes plate and coins in code.
-// Install: tools/art-library/bake_closeup.py (plate to art/closeup/ch10-clock.webp, sheet to art/closeup/ch10-coin-1..7.webp), then set `ready`
-// true in data/closeup-ch10.js and purge ch10Slot. Canon: every coin is "a gold coin, same little clock face" (data/scenes.js ch3 to ch9 finds),
+// Installed by tools/art-library/bake_closeup.py ch10 (see its header: the approved plate had six slots, so the plate is rebuilt in code from
+// its own painted parts). Canon: every coin is "a gold coin, same little clock face" (data/scenes.js ch3 to ch9 finds),
 // so each coin carries the same small clock face plus the emblem of where it was found.
 const { sheet } = require('./dungeonfind-prompts.js');
 const REF_KEY = 'art/grands.webp';
