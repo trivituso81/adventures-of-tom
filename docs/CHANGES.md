@@ -1,3 +1,8 @@
+## 2026-11-12 (pieface1): Deedee and Boppy now watch the mud blob take the pie (chapter 1) (tag pieface1)
+- Tom (14:35): "When the mud blob takes DD's pie, DD and Bobby, when they're acting surprised, are facing the wrong way." Cause (fact): their painted surprised poses (`em_surprised`) only exist facing the camera, and the blob is on their left at the counter. They are NPCs with no battle frames, so no left-looking surprised picture exists.
+- Fix (`SCENES.ch1Theft`, data/scenes.js): Deedee and Boppy are startled facing the floor right after the shove (looking down at the three who were bowled over, which is correct), then both turn left and watch the blob reach, grab and hug the pie. Rose's "mud blob is taking your PIE" line no longer poses them as surprised (rows removed from docs/emotion-reactions.tsv, data/emotion-reactions.js regenerated with `tools/reaction-apply.py 1`).
+- A surprised look that faces the blob needs a new left-looking surprised pose for each of them (an Art Library entry); not built.
+- Tested: scene played in a real browser (portrait and landscape), frames viewed; smoke FAILS [] after the tag bump. Not seen on a phone.
 ## 2026-11-12 (clockprompt1): prompts only, the area clock entries now match the close-up clock
 - `prop-find-ch10` cell 1 (gate clock) and `prop-find-ch10-clock` cell 1 (blank face) say: heavy polished brass rim in two stepped rings, warm cream gold face, fine ring of tick marks, no numbers; the gate clock keeps seven ring slots (twelve o'clock first, clockwise) plus a bigger center slot. Coin slot part says thick polished gold rim. No art regenerated, no code changed.
 ## 2026-11-12 (duobox1): Duo sideways dialogue box one third shorter (tag duobox1)

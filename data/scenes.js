@@ -136,14 +136,16 @@ SCENES.ch1Theft=[
     {seq:[{wait:.5},{face:'Deedee',dir:'down'},{hop:'Deedee',from:()=>[7,9],to:[8,7],time:.35,arc:14}]}
   ]},
   {place:'Deedee',at:[8,7],dir:'down'},
-  {pose:'Deedee',f:'em_surprised',mid:'deedee',dir:'down'},
+  {pose:'Deedee',f:'em_surprised',mid:'deedee',dir:'down'}, {pose:'Boppy',f:'em_surprised',mid:'boppy',dir:'down'},
   {wait:.3},
+  // The painted surprised poses only face the camera, so after the first startled beat (looking down at the three on the floor) Deedee and Boppy
+  // turn left to watch the blob (it is on their left, at the counter) take the pie. (Tom, 2026-11-12: they were facing the wrong way.)
+  {pose:'Deedee'}, {pose:'Boppy'}, {face:'Deedee',dir:'left'}, {face:'Boppy',dir:'left'},
   {pose:'Big Mudling',f:'mh_reach',dir:'left'}, {wait:.45},
   {pose:'Big Mudling',f:'mh_grab',dir:'left'}, {sfx:'pickup'}, {wait:.5},
   {pose:'Big Mudling',f:'mh_hug',dir:'left'},
   {talk:'Rose',lines:['Deedee! A mud blob is taking your PIE!']},
   {pose:'Big Mudling',f:'mh_glance',dir:'left'}, {wait:.5},
-  {pose:'Deedee'},
   // The blob scurries back down the middle (mirrored, it travels right), giggles once it is past the corridor mouth, and sneaks out the door;
   // then the three scramble up (kneel, then stand) and Deedee hops back to her counter.
   {all:[

@@ -42,9 +42,7 @@ scene	1	data/scenes.js	ch1Theft	Deedee	And I eat it anyway. That's love, Tom.	gr
 scene	1	data/scenes.js	ch1Theft	Boppy	Tom! Good. I'm not feeling good. It's the stomach.	tom	unimpressed
 scene	1	data/scenes.js	ch1Theft	Boppy	Tom! Good. I'm not feeling good. It's the stomach.	deedee	unimpressed
 scene	1	data/scenes.js	ch1Theft	Rose	Deedee! A mud blob is taking your PIE!	tom	surprised
-scene	1	data/scenes.js	ch1Theft	Rose	Deedee! A mud blob is taking your PIE!	deedee	surprised
 scene	1	data/scenes.js	ch1Theft	Rose	Deedee! A mud blob is taking your PIE!	grace	surprised
-scene	1	data/scenes.js	ch1Theft	Rose	Deedee! A mud blob is taking your PIE!	boppy	surprised
 scene	1	data/scenes.js	ch1Theft	Tom	That was UNCALLED for!	deedee	angry
 scene	1	data/scenes.js	ch1Theft	Tom	That was UNCALLED for!	grace	angry
 scene	1	data/scenes.js	ch1Theft	Tom	That was UNCALLED for!	rose	scared

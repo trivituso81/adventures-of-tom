@@ -47,7 +47,7 @@ const EMOTION_REACTIONS={
 "Pond Grump|That's IT. Soggy Slap. For the giggler.|1": [["deedee", "angry"], ["rose", "scared"], ["tom", "angry"]],
 "Rose|A hundred MILLION years!|1": [["grace", "happy"], ["tom", "happy"]],
 "Rose|Come on, Tata! Let's go!|1": [["grace", "happy"], ["tom", "happy"]],
-"Rose|Deedee! A mud blob is taking your PIE!|1": [["boppy", "surprised"], ["deedee", "surprised"], ["grace", "surprised"], ["tom", "surprised"]],
+"Rose|Deedee! A mud blob is taking your PIE!|1": [["grace", "surprised"], ["tom", "surprised"]],
 "Rose|I already licked the spoon. Don't tell.|1": [["grace", "unimpressed"], ["tom", "unimpressed"]],
 "Rose|I'm not laughing. I'm giggling. It's different.|1": [["deedee", "happy"], ["grace", "unimpressed"], ["tom", "happy"]],
 "Rose|I'm the tallest! Giddyup, Tata!|1": [["grace", "happy"], ["tom", "happy"]],
