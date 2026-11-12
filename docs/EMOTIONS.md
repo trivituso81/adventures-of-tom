@@ -60,7 +60,7 @@ Why these 8: a word count over every scene and map file (data/scenes*.js, bonus-
 
 Tom: "currently, emotion states are just flagged on a character based on their dialogue lines. i also want every other character in the conversation, whether it's Tom when talking to NPCs, or group conversations in cut scenes. inventory every possible scenario and tag other characters who should have a reaction for a given dialogue."
 
-Status: TAGGED, NOT WIRED. `docs/emotion-reactions.tsv` holds 9,852 reactions on 3,094 dialogue lines (one row per line and listener). Readable copy `docs/REACTION_INDEX.md`; check and rebuild `python3 tools/reaction-index.py`. The game does not load it.
+Status: TAGGED; chapter 1 scene lines WIRED as a pilot (react2, `tools/reaction-apply.py 1`); other chapters and kinds not wired. `docs/emotion-reactions.tsv` holds 9,852 reactions on 3,094 dialogue lines (one row per line and listener). Readable copy `docs/REACTION_INDEX.md`; check and rebuild `python3 tools/reaction-index.py`. The game does not load it.
 
 ### Every place a dialogue box appears
 

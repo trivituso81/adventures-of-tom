@@ -1,3 +1,11 @@
+## 2026-11-12 (react2): chapter 1 listener reaction pilot wired
+- Tom: go-ahead for the chapter 1 pilot. While a chapter 1 story line shows, every other visible cast member in `docs/emotion-reactions.tsv` takes their full-body mood pose (168 reactions on 67 lines, scene rows only). The dialogue box still shows only the speaker's face.
+- New `tools/reaction-apply.py 1` builds `data/emotion-reactions.js` (`EMOTION_REACTIONS['<Speaker>|<text>|<chapter>']`, `REACTION_CHAPTERS`). Never hand-edit it; change the tsv, rerun the tool. Later batches: `reaction-apply.py 1 2 3`.
+- `engine/emotions.js`: `emoReact`, `emoActorById`, `EMO.listeners` (list), `emoClear` clears all. Skips the speaker, anyone holding a story pose, Rose riding, hidden people. Warms the next line's sheets. Tags: `emotions.js?v=react2`, new `data/emotion-reactions.js?v=react2`.
+- New `tools/reaction_test.py` (boss_stage_test harness; also logs every emo-posed NPC; dialog box dimmed in frames). Case file example: ch1Pond, party tom/grace/rose/deedee, start [16,13,'up'].
+- Tested: ch1Pond portrait and landscape, 7 pages, 0 page errors, poses change per line, figures at the right size, no overlap. smoke FAILS: []. Not looked at: ch1 opening, theft, Grump, Skeeter scenes in the game (same code path).
+- Tom's phone check: play chapter 1 and watch whether three or four people changing pose on every line looks busy. If so, say so and the tsv gets thinned (plain happy first).
+
 ## 2026-11-12 (sync2): Load lists the saves from every device (tag sync2)
 - Tom 08:17: on the welcome screen Load page he does not see all the saves from other devices.
 - Cause (fact, two parts): (1) the cloud file shared slot numbers between devices and the newer copy of each slot won, so another device's save in the same slot (always the autosave, often slot 1) was silently replaced and never listed. (2) The Load page was drawn from this device's storage only and never redrew when the launch cloud read (1.5 s after start) finished. Also: iOS keeps the home-screen app and Safari in separate storage, so they act as two devices.

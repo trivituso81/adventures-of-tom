@@ -6,7 +6,7 @@
 // Cast story scenes (S.talk) show it only in chapters in EMO_CHAPTERS. Every other dialogue box (map NPC talk, recruit and shop intro lines, cab lines, townsfolk lines in scenes)
 // looks its line up in NPC_EMOTION_MOODS (data/npc-emotion-moods.js, from docs/npc-emotion-lines.tsv by tools/npc-emotion-apply.py; npcemo7). The NPC is drawn in its pose
 // (data/npc-poses.js). Both clear when the line advances, on a line with no mood, and when the scene ends or is skipped.
-const EMO={starting:false,actor:null,id:null,mood:null};
+const EMO={starting:false,actor:null,id:null,mood:null,listeners:[]};
 const EMO_PORTRAIT_DEFAULT=()=>{ const box=$('dialog-portrait'); return box&&box.querySelector('img'); };
 const emoPreloaded=new Set();
 function emoOn() { return typeof EMO_CHAPTERS!=='undefined'&&typeof STORY!=='undefined'&&EMO_CHAPTERS.has(STORY.chapter); }
@@ -31,16 +31,42 @@ function emoActorFor(id,name,npc) {
   const n=npc&&npc.name&&npc.name.toLowerCase()===low&&!npc.monster?npc:(currentMap&&currentMap.npcs.find(x=>x.name&&x.name.toLowerCase()===low&&!x.monster));
   return n&&!n.hidden?n:null;
 }
+// Listener reactions (react2, docs/emotion-reactions.tsv -> data/emotion-reactions.js): while a scene line shows, every other visible cast member
+// in the table for that line takes their full-body mood pose. Skipped: the speaker, anyone holding a story pose, Rose riding, hidden people.
+function emoReactionsOf(name,text) {
+  if(typeof EMOTION_REACTIONS==='undefined'||typeof STORY==='undefined'||!REACTION_CHAPTERS.has(STORY.chapter)) return null;
+  return EMOTION_REACTIONS[name+'|'+text+'|'+STORY.chapter]||null;
+}
+function emoActorById(id) {
+  const pm=typeof playerMember==='function'?playerMember():null;
+  if(pm&&pm.id===id) return typeof roseRider==='function'&&roseRider()?null:player;
+  const f=followers.find(x=>x.member&&x.member.id===id); if(f) return f.seat||f.hidden?null:f;
+  const n=currentMap&&currentMap.npcs.find(x=>!x.monster&&!x.hidden&&x.name&&String(DIALOG_PORTRAIT_IDS[x.name.toLowerCase()]||'').replace(/^npc_/,'')===id);
+  return n||null;
+}
 function emoClear() {
   if(EMO.actor&&EMO.actor.scenePose&&EMO.actor.scenePose.emo) EMO.actor.scenePose=null;
-  EMO.actor=null; EMO.mood=null; EMO.id=null;
+  for(const a of EMO.listeners) if(a.scenePose&&a.scenePose.emo) a.scenePose=null;
+  EMO.listeners=[]; EMO.actor=null; EMO.mood=null; EMO.id=null;
+}
+function emoReact(speakerId,text) {
+  const rs=emoReactionsOf(dialog.name,text); if(!rs) return;
+  const nx=dialog.lines[dialog.index+1],ns=nx&&emoReactionsOf(dialog.name,nx);   // warm the next line's sheets
+  for(const [lid] of (ns||[])) if(typeof storyPosesLoad==='function') storyPosesLoad(lid);
+  for(const [lid,mood] of rs) {
+    if(lid===speakerId||typeof EMOTION_FACES==='undefined'||!EMOTION_FACES.includes(lid)) continue;
+    if(typeof storyPosesLoad==='function') storyPosesLoad(lid);
+    const a=emoActorById(lid);
+    if(a&&!a.scenePose&&typeof STORY_POSES!=='undefined'&&STORY_POSES[lid]&&STORY_POSES[lid]['em_'+mood]) { a.scenePose={f:'em_'+mood,mid:lid,emo:true}; EMO.listeners.push(a); }
+  }
 }
 function emoApply() {
-  if(!dialog.active) { if(EMO.mood||EMO.actor) emoClear(); return; }
+  if(!dialog.active) { if(EMO.mood||EMO.actor||EMO.listeners.length) emoClear(); return; }
   const text=dialog.lines[dialog.index];
   const mood=(dialog.emo&&emoMoodOf(dialog.name,text))||emoNpcMoodOf(dialog.name,text);
   const id=String(DIALOG_PORTRAIT_IDS[String(dialog.name||'').trim().toLowerCase()]||'').replace(/^npc_/,'');   // townspeople's keys are npc_<id>; their faces and poses are filed under <id>
   const had=EMO.mood; emoClear();
+  if(dialog.emo) emoReact(id,text);
   if(!mood||!id||typeof EMOTION_FACES==='undefined'||!EMOTION_FACES.includes(id)) { if(had) setDialogPortrait(dialog.name); return; }
   emoPreload(id);
   const box=$('dialog-portrait'),img=box&&box.querySelector('img');
@@ -64,8 +90,8 @@ openDialog=function(name,lines,npc) { dialog.emo=EMO.starting; return LE_openDia
 const LE_loadDialogLine_emo=loadDialogLine;
 loadDialogLine=function() { LE_loadDialogLine_emo(); emoApply(); };
 const LE_advanceDialog_emo=advanceDialog;
-advanceDialog=function() { LE_advanceDialog_emo(); if(!dialog.active&&(EMO.mood||EMO.actor)) emoClear(); };
-setInterval(()=>{ if(!dialog.active&&(EMO.mood||EMO.actor)) emoClear(); },100);   // a skipped or interrupted scene must leave no pose behind
+advanceDialog=function() { LE_advanceDialog_emo(); if(!dialog.active&&(EMO.mood||EMO.actor||EMO.listeners.length)) emoClear(); };
+setInterval(()=>{ if(!dialog.active&&(EMO.mood||EMO.actor||EMO.listeners.length)) emoClear(); },100);   // a skipped or interrupted scene must leave no pose behind
 const LE_endIntro_emo=endIntro;
 endIntro=function() { emoClear(); return LE_endIntro_emo(); };
 addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{EMO,emoMoodOf}); });
