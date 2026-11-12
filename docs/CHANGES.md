@@ -1,3 +1,7 @@
+## 2026-11-12 (gatedoor2): Gate Zero doors are locked in every chapter up to 10, not only chapter 10 (tag gatedoor2)
+- Tom: tried gatedoor1 and it did not work. Fact: the lock condition was `chapter:10`, so a save in chapter 9 (or earlier) walked straight into Gate Zero. Reproduced from a chapter 9 jump, then fixed.
+- Fix: `gates` on Terminal Zero (data/maps-le.js) now uses `until:10` with `notFlag:'ch10-door'`. Walking up into the doors shows the locked line and keeps Tom in Terminal Zero; they open after the seven coins (chapter 10 coin menu unchanged).
+- Tested: browser probe, terminal (14,4) and (15,4) facing up with real key presses: chapters 8, 9, 10 stay in Terminal Zero with the line shown; chapter 10 with `ch10-door` set walks into Gate Zero. smoke run after the tag bump.
 ## 2026-11-12 (duohud1): Duo landscape quest button moved right (tag duohud1)
 - Tom: in Duo landscape the ! quest button was too far left. Fix: `html.duo.landscape #hud` left offset 4 px to 46 px (index.html), so quest sits where the menu button was (x 46) and menu and save follow (x 88, 130). Measured at 951 x 648 in Chromium; smoke FAILS [].
 ## 2026-11-12 (gatedoor1): Gate Zero doors stay shut until the seven coins are in (tag gatedoor1)
