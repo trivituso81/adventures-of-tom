@@ -615,7 +615,7 @@ function choosePath(n) {
 function updateNPCs(dt) {
   for(const n of currentMap.npcs.slice()) {   // a copy: a beaten monster removes itself from the list mid-loop (monsterFall)
     if(n.held) continue;   // moved by a cutscene (engine/story.js); the scene steps it
-    if(n.still) { if(!(dialog.active&&dialog.npc===n)) n.facing=n.still; continue; }   // posed NPC (data/scenes.js ch9Pose): never walks, turns back to its pose after a chat
+    if(n.still) { if(!(dialog.active&&dialog.npc===n)) n.facing=n.arriveFace||n.still; continue; }   // posed NPC (data/scenes.js ch9Pose): never walks, turns back to its pose after a chat
     if(n.move&&!advanceMove(n,dt)) continue;
     if(n.monster) { b7MonsterTick(n,dt); continue; }   // wandering monsters (engine/feel.js)
 

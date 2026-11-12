@@ -3323,6 +3323,8 @@ SCENES.ch9AfterBoss=()=>[
 SCENES.ch9End=[
   {flag:'ch9-done',value:'pending'},
   {call:()=>ch9GirlsMove()},
+  // Tom and Boppy step into the room, off the gate lane and clear of the newel post (facing2, Tom 2026-11-12).
+  {all:[{walk:'tom',to:routeTo('tom',8,11),speed:.28},{walk:'boppy',to:routeTo('boppy',6,10),speed:.28}]},
   {talk:'Grace',lines:['TATA! The MOON came back! We saw it from the window! Aunt Ellie said it was probably you.']},
   {talk:'Rose',lines:['I won at cards. I cheated. Aunt Ellie said I\'m a natural.']},
   {talk:'Aunt Ellie',lines:['She is. It\'s frightening. Well? Was there a ball?']},

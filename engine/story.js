@@ -744,6 +744,27 @@ function storyTriggers() {
   }
   return false;
 }
+// Arrival facing (facing2, Tom 2026-11-12): when a map change lands Tom where a scene is about to start, the people who talk in that scene
+// already face him as the room fades in (before, posed people faced their pose and wanderers looked anywhere until the first line).
+// A posed NPC keeps `arriveFace` (read by updateNPCs in engine/battle-draw.js) until the scene ends; a wanderer just waits.
+function storyArriveFace() {
+  if(STORY.mode!=='full'||typeof TRIGGERS==='undefined'||typeof SCENES==='undefined') return;
+  storyWorld();
+  const t=TRIGGERS.find(t=>(!t.map||t.map===currentMap.id)&&!(t.at&&(player.x<t.at[0]||player.y<t.at[1]||player.x>t.at[2]||player.y>t.at[3]))&&storyMatch(t.when||{}));
+  if(!t||typeof t.scene!=='string') return;
+  let list=SCENES[t.scene]; if(typeof list==='function') { try { list=list(); } catch(e) { return; } }
+  if(!Array.isArray(list)) return;
+  const names=new Set(); for(const st of list) if(st&&typeof st.talk==='string') names.add(st.talk);
+  for(const n of currentMap.npcs) {
+    if(!names.has(n.name)||n.hidden||n.monster) continue;
+    const dx=player.x-n.x, dy=player.y-n.y; if(!dx&&!dy) continue;
+    const dir=Math.abs(dy)>=Math.abs(dx)?(dy>0?'down':'up'):(dx>0?'right':'left');
+    n.facing=dir; n.path=[]; n.move=null;
+    if(n.still) n.arriveFace=dir; else n.idle=Math.max(n.idle||0,4);
+  }
+}
+const LE_switchMap_story=switchMap;
+switchMap=function(portal) { LE_switchMap_story(portal); storyArriveFace(); };
 // Map rules for the story (data/scenes.js STORY_WORLD): run every frame outside cutscenes and right after a map change.
 function storyWorld() { if(STORY.mode==='full'&&typeof STORY_WORLD!=='undefined') for(const f of STORY_WORLD) f(); }
 
@@ -786,6 +807,7 @@ endIntro=function() {
   // Map monsters a scene walked out go back to their spots (so they never block a path afterwards).
   for(const n of intro.held||[]) { n.held=false; n.path=[]; n.move=null; n.idle=1+Math.random(); if(n.monster&&!n.scripted&&n.heldFrom&&!n.sunk) { n.x=n.heldFrom.x; n.y=n.heldFrom.y; } }
   intro.held=[];
+  for(const n of currentMap.npcs) if(n.arriveFace) n.arriveFace=null;
   LE_endIntro_story();
   placeFollowers();
 };
