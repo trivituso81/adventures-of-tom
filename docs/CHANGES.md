@@ -1,3 +1,6 @@
+## 2026-11-12 (heads6): Tom's head sizes baked: Justin 1.20, TNB 1.21, Amy 1.27, Deedee 1.13, Ms. Cathy 1.18, Young Boppy 1.03 (tag heads6)
+- Tom's 10:37 to 10:39 requests applied with `head_adjust.py apply-requests`; walk, mood poses, mood faces and talk faces rebaked (one multiplier across all states). Ms. Cathy's Snack Attack frames carry her factor; Young Boppy's waits in head_tweak.json for the Van Cortlandt install.
+- Tested: heights_test FAILS [] (in the apply run), smoke below.
 ## 2026-11-12 (walkmap20): Tom's walk edits for Terminal Zero, Gate Zero, Flight Zero, Gate 00 and Concourse (tag walkmap20)
 - Tom sent Area Builder exports for the five chapter 20 maps. Installed into plateMask with `tools/apply_walkmap.py` (now also reads data/maps-p2.js): terminal 80 tiles, gatezero 15, flightzero 5, gate00 25, concourse 23.
 - Not applied (an object footprint blocks the tile; the object must move): terminal 19, gatezero 22, flightzero 17 (pods, cart, cabin door), gate00 13.
