@@ -27,11 +27,12 @@ import walk_sheet_frames as W
 import townsfolk_common as TF
 import michael_head as MH
 TWEAK = os.path.join(HERE, 'head_tweak.json')
-ORDER = ['justin', 'tnb', 'tom', 'boppy', 'amy', 'deedee', 'olivia', 'ellie', 'grace', 'rose', 'nara', 'jojo', 'michael']
+PAINTED = ['cathy', 'boppy-young']   # painted battle frames only, no overworld walk (data/heights.json battleOnly): head = painted head x factor, applied by their own bakers
+ORDER = ['justin', 'tnb', 'tom', 'boppy', 'amy', 'deedee', 'olivia', 'ellie', 'grace', 'rose', 'nara', 'jojo', 'michael'] + PAINTED
 TOWN = list(TF.LIBRARY_WALK)   # the 21 townsfolk cut from approved Art Library sheets (bake_townsfolk.py)
 ORDER = ORDER + TOWN
 NAMES = {'justin': 'Justin', 'tnb': 'TNB', 'tom': 'Tom', 'boppy': 'Boppy', 'amy': 'Amy', 'deedee': 'Deedee', 'olivia': 'Olivia', 'ellie': 'Ellie', 'grace': 'Grace', 'rose': 'Rose', 'nara': 'Nara', 'jojo': 'Jojo', 'michael': 'Michael'}
-NAMES.update({c: c.capitalize() for c in TOWN})
+NAMES.update({c: c.capitalize() for c in TOWN}); NAMES.update({'cathy': 'Ms. Cathy', 'boppy-young': 'Young Boppy'})
 GROUP = {c: ('town' if c in TOWN else 'family') for c in ORDER}
 NARA_ROWS = 32.0   # Nara's standing figure on screen (data/nara-hires.js); a dog has no height in data/heights.json
 def rows_of(cid):
@@ -152,7 +153,10 @@ def apply(ids, tweak):
     if 'jojo' in ids:
         r = subprocess.run(['python3', 'tools/sprite-bake/bake_jojo.py'])
         if r.returncode: sys.exit(r.returncode)
-    fam = [i for i in ids if i not in TOWN and i != 'jojo']
+    if 'cathy' in ids:   # her Snack Attack frames carry the factor (bake_cathy.py reads head_tweak.json); young Boppy has no bake yet, his factor waits in head_tweak.json
+        r = subprocess.run(['python3', 'tools/sprite-bake/bake_cathy.py'])
+        if r.returncode: sys.exit(r.returncode)
+    fam = [i for i in ids if i not in TOWN and i != 'jojo' and i not in PAINTED]
     if fam:
         r = subprocess.run(['python3', 'tools/sprite-bake/walk_splice.py'] + fam)
         if r.returncode: sys.exit(r.returncode)

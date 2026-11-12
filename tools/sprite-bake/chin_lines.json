@@ -270,5 +270,13 @@
  "michael": {
   "sheet": "michael-walking-sheet-v1.png",
   "share": 0.2538
+ },
+ "cathy": {
+  "sheet": "cathy-walk-sheet-v2.png",
+  "share": 0.26
+ },
+ "boppy-young": {
+  "sheet": "boppy-young-walk-sheet-ref-v1.png",
+  "share": 0.295
  }
 }

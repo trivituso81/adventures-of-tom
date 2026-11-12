@@ -40,5 +40,5 @@ module.exports = { entries: [
   { id: 'boppy-young-battle-sheet-1', tab: 'Characters', group: 'Boppy', title: 'Young Boppy battle sheet 1, 8 frames 4 x 2 (copies Tom\'s painted hero and walk sheet)', ar: '2:1',
     refs: [R + 'boppy-young-hero-ref-v1.png', R + 'boppy-young-walk-sheet-ref-v1.png', R + 'boppy-battle-sheet-1-v1.png'], prompt: battle1Prompt },
   { id: 'boppy-young-battle-sheet-2', tab: 'Characters', group: 'Boppy', title: 'Young Boppy battle sheet 2, 6 frames 3 x 2 (needs battle sheet 1 approved)', ar: '3:2',
-    refs: [R + 'boppy-young-hero-ref-v1.png', R + 'boppy-young-battle-sheet-1-v1.png'], prompt: battle2Prompt },
+    refs: [R + 'boppy-young-hero-ref-v1.png', R + 'boppy-young-battle-sheet-1-v2.png'], prompt: battle2Prompt },
 ] };

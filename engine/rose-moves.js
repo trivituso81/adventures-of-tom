@@ -1233,25 +1233,12 @@ SC.rf_splat=(s,u)=>{ gfx.globalAlpha=fade(u,.4); for(let k=0;k<10;k++) { const a
 // walks in with a tray of treats and throws cookies, cupcakes, donuts and candy at the row. Sugar rush: COOL down.
 // Her battle sprite is Deedee's pose set, recolored (blonde hair, teal cardigan) with glasses drawn on.
 // Built on first use: Deedee's battle sprite loads after this file.
-let CATHY_=null; const cathy=()=>{ if(CATHY_) return CATHY_; const d=BATTLE_SPRITES.deedee; if(!d) return null;
-  // Recolor by colour, not letter (each pose uses its own letters), and by body band: hair browns go blonde only in the
-  // head rows (above the shoulders), the red dress goes teal only in the body rows. Recoloured rows are cached per pose.
-  const hsl=hex=>{ const n=parseInt(hex.slice(1),16),r=(n>>16&255)/255,g=(n>>8&255)/255,b=(n&255)/255,mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2,dd=mx-mn;
-    if(!dd) return [0,0,l]; const sat=dd/(1-Math.abs(2*l-1)); let h=mx===r?((g-b)/dd)%6:(mx===g?(b-r)/dd+2:(r-g)/dd+4); h*=60; if(h<0) h+=360; return [h,sat,l]; };
-  const pal=Object.assign({},d.pal),hair={},dress={};
-  for(const k in d.pal) { const c=d.pal[k]; if(typeof c!=='string'||c[0]!=='#'||k.length!==1) continue; const [h,sa,l]=hsl(c);
-    if(h>=15&&h<=45&&sa<.52&&l>.26&&l<.63) { const nk=String.fromCharCode(0x100+k.charCodeAt(0)); pal[nk]='hsl(46,'+Math.round(55+sa*30)+'%,'+Math.round(42+l*55)+'%)'; hair[k]=nk; }
-    if((h>=338||h<=12)&&sa>.2&&l>.18&&l<.6) { const nk=String.fromCharCode(0x200+k.charCodeAt(0)); pal[nk]='hsl(194,'+Math.round(sa*100)+'%,'+Math.round(l*100)+'%)'; dress[k]=nk; } }
-  const cache=new Map(),HEAD=34,BODY=57;
-  const rows=fr=>{ if(cache.has(fr)) return cache.get(fr); const out=fr.map((row,r)=>row.split('').map(ch=>r<=HEAD?(hair[ch]||ch):(r<=BODY?(dress[ch]||ch):ch)).join('')); cache.set(fr,out); return out; };
-  return CATHY_={sp:d,pal,rows}; };
-const drawCathy=(k,cx,base,flip,alpha=1)=>{ const CATHY=cathy(); if(!CATHY) return; const sp=CATHY.sp,rows0=CATHY.rows(sp[k]||sp.idle),rows=flip?rows0.map(r=>r.split('').reverse().join('')):rows0,s=sp.scale,W=rows[0].length*s,H=rows.length*s,x=cx-W/2,y=base-H;
-  drawSprite(rows,CATHY.pal,x,y,s,{alpha});
-  const e=(sp.eyeAt&&sp.eyeAt.get&&sp.eyeAt.get(sp[k]||sp.idle))||sp.eye||{col:21,row:27},dc=e.col-21,dr=e.row-27;
-  const col=c=>flip?rows[0].length-1-c:c,gx=c=>x+col(c+dc)*s,gy=r=>y+(r+dr)*s;
-  gfx.globalAlpha=alpha; gfx.strokeStyle='#3a2a20'; gfx.lineWidth=1.6;
-  for(const c0 of [19,28]) { const a=Math.min(gx(c0),gx(c0+3)),b=Math.max(gx(c0),gx(c0+3)); gfx.strokeRect(a+.5,gy(25.5),b-a+s-1,s*3); }
-  const l1=Math.max(gx(22),gx(19)),r1=Math.min(gx(28),gx(31)); gfx.beginPath(); gfx.moveTo(Math.min(l1,r1)+s,gy(26.5)); gfx.lineTo(Math.max(l1,r1),gy(26.5)); gfx.stroke(); gfx.globalAlpha=1; };
+// Ms. Cathy: her painted frames (art/chars/cathy-ab.webp, data/cathy-ab.js, baked by tools/sprite-bake/bake_cathy.py) drawn at Deedee's battle scale.
+let CATHY_IMG=null; const cathyLoad=()=>{ if(CATHY_IMG||typeof CATHY_AB==='undefined') return CATHY_IMG; const im=new Image(); im.src=CATHY_AB.src+'?v='+ART_V; return CATHY_IMG=im; };
+const drawCathy=(k,cx,base,flip,alpha=1)=>{ const im=cathyLoad(),r=im&&im.complete&&im.naturalWidth&&CATHY_AB.rects[k],d=BATTLE_SPRITES.deedee; if(!r||!d) return false;
+  const s=d.scale/CATHY_AB.k,W=r[2]*s,H=r[3]*s,sm=gfx.imageSmoothingEnabled,q=gfx.imageSmoothingQuality,pa=gfx.globalAlpha;
+  gfx.save(); gfx.globalAlpha=pa*alpha; gfx.imageSmoothingEnabled=true; gfx.imageSmoothingQuality='high'; gfx.translate(Math.round(cx),Math.round(base-H)); if(flip) gfx.scale(-1,1);
+  gfx.drawImage(im,r[0],r[1],r[2],r[3],Math.round(-W/2),0,Math.round(W),Math.round(H)); gfx.restore(); gfx.imageSmoothingEnabled=sm; gfx.imageSmoothingQuality=q; return true; };
 const TREATS=['cookie','cupcake','candy','donut','cookie','cupcake'];
 const TREATSRC={cookie:[4,27,76,58,19],cupcake:[77,0,70,80,15],candy:[0,68,84,64,28],donut:[82,86,74,58,21]};   // each treat cut out of the painted treat_set
 const treat=(kind,x,y,s,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot); gfx.scale(s,s);
@@ -1262,16 +1249,14 @@ const treat=(kind,x,y,s,rot)=>{ gfx.save(); gfx.translate(x,y); gfx.rotate(rot);
   else if(kind==='candy') { for(const sd of [-1,1]) { gfx.beginPath(); gfx.moveTo(sd*6,0); gfx.lineTo(sd*13,-5); gfx.lineTo(sd*13,5); gfx.closePath(); gfx.lineWidth=3; gfx.strokeStyle=OUT; gfx.stroke(); gfx.fillStyle='#ff7fb3'; gfx.fill(); } EO(0,0,7,5.5,'#ff7fb3'); Ln(-4,-3,2,4,2,'#ffffff'); }
   else { EO(0,0,10,10,'#e8a860'); E(0,-1,8,7,'#c86aa8'); E(0,0,3.4,3.4,OUT); E(0,0,2.2,2.2,'#3a5a4a'); for(let k=0;k<6;k++) { const a=k; R(Math.cos(a)*5.5,Math.sin(a)*4.5-1,2,1,['#fff','#ffe08a','#9be39a'][k%3]); } }
   gfx.restore(); };
-SC.rf_cathy=(s,u)=>{ const ms=s.t*1000,P=s.plan,CATHY=cathy(); if(!CATHY) return; let x,k,flip=false;
-  if(ms<P.arrive) { const q=ez(ms/P.arrive); x=lerp(620,P.cx,q); k=Math.floor(ms/150)%2?'run1':'run2'; }
-  else if(ms<P.throwEnd) { const i=Math.floor((ms-P.throw0)/P.gap); k=ms<P.throw0?'idle':((ms-P.throw0)%P.gap<P.gap*.45?'wind':'throw'); x=P.cx; if(ms>P.throwEnd-200) k='celeb'; }
-  else if(ms<P.leave) { x=P.cx; k=ms<P.wave?'celeb':'hip'; }
-  else { const q=ez((ms-P.leave)/(P.gone-P.leave)); x=lerp(P.cx,640,q); k=Math.floor(ms/150)%2?'run1':'run2'; flip=true; }
-  if(!CATHY.sp[k]) k='idle';
+SC.rf_cathy=(s,u)=>{ const ms=s.t*1000,P=s.plan; let x,k,flip=false;
+  if(ms<P.arrive) { const q=ez(ms/P.arrive); x=lerp(620,P.cx,q); k=Math.floor(ms/150)%2?'walk_left_step1':'walk_left_step2'; }
+  else if(ms<P.throwEnd) { k=ms<P.throw0?'ab_cathy_1':((ms-P.throw0)%P.gap<P.gap*.45?'ab_cathy_2':'ab_cathy_3'); x=P.cx; if(ms>P.throwEnd-200) k='ab_cathy_4'; }
+  else if(ms<P.leave) { x=P.cx; k=ms<P.throwEnd+250?'ab_cathy_4':(ms<P.wave?'ab_cathy_6':'ab_cathy_5'); }
+  else { const q=ez((ms-P.leave)/(P.gone-P.leave)); x=lerp(P.cx,640,q); k=Math.floor(ms/150)%2?'walk_left_step1':'walk_left_step2'; flip=true; }
   E(x,P.y+3,22,5,'rgba(0,0,0,.18)'); drawCathy(k,x,P.y,flip);
-  if(ms>P.arrive-200&&ms<P.throwEnd&&k!=='throw') { const hx=x-16,hy=P.y-52; if(!PROPART.draw('rose/snack_tray',hx,hy-7,{w:38})) { RO(hx-16,hy,32,5,'#c9c9d4'); treat('cupcake',hx-8,hy-6,.7,0); treat('cookie',hx+7,hy-4,.7,.3); } }
   if(ms>P.arrive&&ms<P.arrive+900) { gfx.globalAlpha=fade((ms-P.arrive)/900,.7); label('MS. CATHY',x,P.y-138,CREAM,2); gfx.globalAlpha=1; } };
-Rm.lamby_boomerang=E2=>{ const {m,fx}=E2,list=foes(E2),G=ST.group(list),p=rowSpot(G,64),order=list.slice().sort((a,b)=>ST.foe(b).x-ST.foe(a).x);
+Rm.lamby_boomerang=E2=>{ cathyLoad(); const {m,fx}=E2,list=foes(E2),G=ST.group(list),p=rowSpot(G,64),order=list.slice().sort((a,b)=>ST.foe(b).x-ST.foe(a).x);
   const cx=Math.min(548,p.x+78),plan={arrive:1400,throw0:1600,gap:240,cx,y:Math.min(316,p.y+4)}; const n=6; plan.throwEnd=plan.throw0+n*plan.gap+200; plan.wave=plan.throwEnd+500; plan.leave=plan.throwEnd+900; plan.gone=plan.leave+800;
   const END=plan.gone+200;
   // Her six painted Snack Attack frames: cupped-hands yell, big wave, bouncing, throwing a cookie, a big bite, the sugar-rush jump.

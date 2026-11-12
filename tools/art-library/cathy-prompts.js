@@ -77,7 +77,7 @@ module.exports = { entries: [
   { id: 'cathy-hero', tab: 'Characters', group: 'Ms. Cathy', title: 'Ms. Cathy hero painting: one full-body pose, painted from her description, 5 ft 4 (the reference for every other picture of Ms. Cathy)', ar: '2:3',
     refs: [R + 'deedee-hero-v1.png', R + 'ellie-hero-v1.png', R + 'amy-hero-v2.png', R + 'tom-hero-v2.png', R + 'rose-hero-v1.png'], prompt: heroPrompt },
   { id: 'cathy-walk-sheet', tab: 'Characters', group: 'Ms. Cathy', title: 'Ms. Cathy walking sheet 3 x 3 (copies her hero painting; needs the hero approved)', ar: '1:1',
-    refs: [R + 'cathy-hero-v1.png', R + 'deedee-walking-sheet-v2.png'], prompt: walkPrompt },
+    refs: [R + 'cathy-hero-v2.png', R + 'deedee-walking-sheet-v2.png'], prompt: walkPrompt },
   { id: 'cathy-ab-snack-attack', tab: 'Characters', group: 'Ms. Cathy', title: 'Ms. Cathy ability: Ms. Cathy\'s Snack Attack, her frames (6 frames; needs the hero and walk approved)', ar: '3:2',
-    refs: [R + 'cathy-hero-v1.png', R + 'cathy-walk-sheet-v1.png', R + 'rose-ab-lamby-boomerang-v1.png'], prompt: abilityPrompt },
+    refs: [R + 'cathy-hero-v2.png', R + 'cathy-walk-sheet-v2.png', R + 'rose-ab-lamby-boomerang-v1.png'], prompt: abilityPrompt },
 ] };

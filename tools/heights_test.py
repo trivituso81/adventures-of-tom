@@ -14,7 +14,7 @@ def ck(name, ok, info=''):
 TOL = .01
 ck('data/walk-scale.js is what heights.py write produces', os.path.exists(HT.OUT) and open(HT.OUT).read() == HT.text(), 'run python3 tools/sprite-bake/heights.py write')
 filed = {m.group(1): float(m.group(2)) for m in re.finditer(r'\n  (\w+):\{inches:\d+,rows:[0-9.]+,k:([0-9.]+)\}', open(HT.OUT).read())} if os.path.exists(HT.OUT) else {}
-inch, base = W.INCHES, W.BASE; tom = HT.rows(base)
+inch, base = W.HEIGHTS['inches'], W.BASE; tom = HT.rows(base)   # battleOnly characters have no walk to measure
 ck("Tom's standing art is the %.0f rows the bakes assume" % W.TOM_ROWS, abs(tom - W.TOM_ROWS) / W.TOM_ROWS < .005, tom)
 for cid in inch:
     want = tom * inch[cid] / inch[base]; got = HT.rows(cid) * filed.get(cid, 0)

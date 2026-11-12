@@ -24,7 +24,7 @@ SHEETS = {   # sheet per move; slugs name the items in the order the cutter find
 # Painted items that replace an older prop of the same shape (same file name, so the scenes draw them unchanged).
 INSTALL = {'safety_scissors': ('tiara', 'scissors'), 'crayon': ('tiara', 'crayon'), 'unicorn_cut_out': ('tiara', 'cutout'),
            'white_teapot': ('tea', 'teapot'), 'lacy_kids_table': ('tea', 'table'), 'tiny_pink_chair': ('tea', 'chair'),
-           'stack_of_cushions': ('pounce', 'tower'), 'snack_tray': ('boom', 'tray'), 'couch_cushion': ('fort', 'cushion'),
+           'stack_of_cushions': ('pounce', 'tower'), 'couch_cushion': ('fort', 'cushion'),
            'patchwork_quilt': ('fort', 'blanket'), 'cardboard_chest_armor': ('mecha', 'chest'), 'cardboard_rocket_fist': ('mecha', 'fist'),
            'lava_pool': ('lava', 'pool')}
 def cut(path):

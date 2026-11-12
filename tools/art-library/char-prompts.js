@@ -891,7 +891,7 @@ for (const e of entries) {
 // young battle sheets), not adult Boppy's. Mirrors the hand edit in data/art-prompts.json.
 {
   const e = entries.find(x => x.id === 'boppy-ab-xc-ult');
-  e.refs = [R + 'boppy-young-hero-ref-v1.png', R + 'boppy-young-walk-sheet-ref-v1.png', R + 'boppy-young-battle-sheet-1-v1.png', R + 'boppy-young-battle-sheet-2-v1.png'];
+  e.refs = [R + 'boppy-young-hero-ref-v1.png', R + 'boppy-young-walk-sheet-ref-v1.png', R + 'boppy-young-battle-sheet-1-v2.png', R + 'boppy-young-battle-sheet-2-v2.png'];
 }
 // Objects and effects sheets (Tom 2026-11-06 00:17; Grace, Rose, Deedee 00:34): one 4 x 3 sheet per ability with every object and effect the move needs,
 // painted to match. Ref: that ability's newest approved sheet (art/raw/characters/<id>-ab-<move>-vN.png), so held objects

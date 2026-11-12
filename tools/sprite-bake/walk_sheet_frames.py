@@ -93,13 +93,13 @@ def grid(path, ncols, nrows):
 import json
 HERE = os.path.dirname(os.path.abspath(__file__))
 HEIGHTS = json.load(open(os.path.join(ROOT, 'data', 'heights.json')))
-INCHES, BASE = HEIGHTS['inches'], HEIGHTS['baseline']
+INCHES, BASE = dict(HEIGHTS['inches'], **HEIGHTS.get('battleOnly', {})), HEIGHTS['baseline']
 TOM_ROWS = 42.0
 try: HEAD_TWEAK = json.load(open(os.path.join(HERE, 'head_tweak.json')))
 except OSError: HEAD_TWEAK = {}
 WALK_MATCH = {'tnb': (.28, 45), 'justin': (.24, 53), 'boppy': (.295, 41.7), 'deedee': (.295, 41.7), 'amy': (.26, 41.7), 'olivia': (.24, 42),
               'ellie': (125 / 392, 43), 'jojo': (.24, 42)}
-PLAIN = {'tom': 104 / 391.0, 'nara': .44, 'grace': .27, 'rose': .27}
+PLAIN = {'tom': 104 / 391.0, 'nara': .44, 'grace': .27, 'rose': .27, 'cathy': .26, 'boppy-young': .295}   # cathy and boppy-young: painted battle frames only (data/heights.json battleOnly), painted head x factor
 def figure_rows(cid):
     """On-screen height of the whole standing figure, in rows: the real height next to Tom."""
     return TOM_ROWS * INCHES[cid] / INCHES[BASE]
@@ -111,8 +111,10 @@ BODY_SCALE = {}
 UNWARPED_H = {}
 BODY_ROWS_PER_PX = {}
 
+SRC_FILE = {'boppy-young': 'boppy-young-walk-sheet-ref-v1.png'}   # Tom painted this sheet himself (the Library has no entry for it)
 def src(cid):
     """Newest approved Art Library sheet: <id>-walking-sheet-vN, else <id>-walk-sheet-vN (Nara, Michael and Jojo got theirs approved under that name)."""
+    if cid in SRC_FILE: return os.path.join(RAW, SRC_FILE[cid])
     num = lambda p: int(re.search(r'-v(\d+)\.png$', p).group(1))
     vs = sorted(glob.glob(os.path.join(RAW, f'{cid}-walking-sheet-v*.png')), key=num) or sorted(glob.glob(os.path.join(RAW, f'{cid}-walk-sheet-v*.png')), key=num)
     return vs[-1]

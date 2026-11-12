@@ -15,5 +15,10 @@
   "grace": 50,
   "rose": 40,
   "nara": 42
- }
+ },
+ "battleOnly": {
+  "cathy": 64,
+  "boppy-young": 67
+ },
+ "_battleOnly": "Painted-frame characters with no overworld walk (Ms. Cathy, young Boppy): real heights typed here, used by HEAD SIZES and their baked battle frames; heights.py and its test read only 'inches'."
 }
