@@ -1,3 +1,8 @@
+## 2026-11-12 (voicefoot1): Voice Library on a computer: Export block no longer drawn over the filters (voices.html only, no tag)
+- Tom: on desktop landscape the left filters and the export functions overlap. Cause (fact): at 860 px and wider `.side` (key box and filters) is sticky and `.foot` (how-to, Export phone clips, Remove all phone clips) sat in the same grid column at the bottom, so at the end of the list the two drew over each other.
+- Fix: `.foot` moves to the list column under the list (`.side` spans both rows). Phone layout unchanged. Looked at 390 x 844, 951 x 648 (Duo) and 1440 x 900 scrolled to the end: no overlap, no page errors.
+- Plan for the whole admin area (hub, shared shell, one Settings for keys, one filter component): Project doc claude/admin-ux-plan.md. Not built.
+
 ## 2026-11-12 (wlayout2): WELCOME LAYOUT editor gets HIDE CONTROLS and BACK / FRONT layers (tag wlayout2)
 - heads4 (2026-11-12): Tom's saved head sizes applied: Boppy .96 to 1.10, Michael first factor 1.35 (heights unchanged, bodies keep real height). Walk art and hires data rebaked with walk_splice, talk faces for both rebaked (TALK_V heads4), head-sizes manifest rewritten. Welcome layout json (his 07:14 save: land Tom and Boppy, duoland six people) was already on main, untouched. smoke FAILS [].
 - Tom 07:10: the bottom controls hide the bottom of the characters; wants a button at the top to hide them. New HIDE CONTROLS / SHOW CONTROLS button at the top left while editing (`#spe-hide`, `splashEditBar` in engine/splash-edit.js). With the bar hidden, tapping and dragging characters still works and the "menu covers below this line" guide is visible.
