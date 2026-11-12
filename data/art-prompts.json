@@ -15622,6 +15622,34 @@
    "group": "Airport"
   },
   {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "room-gatezero-noplane",
+   "tab": "Rooms",
+   "group": "Airport",
+   "title": "Gate Zero after Flight Zero leaves: the same painting with the airplane removed (chapter 10 ending)",
+   "ar": "3:2",
+   "refs": [
+    "art/gatezero.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Gate Zero painting.\n\nReturn the same painting, unchanged in every way, except: remove the white airplane outside the big windows (its body, wings, tail, engines and windows). Where the airplane was, paint what is behind it: the same wet airfield at dusk, the same distant runway lights, hills and evening sky, continuing naturally. Keep the gray jet bridge tunnel attached to the building where it is, simply ending in the open air.\n\nEverything else stays exactly where it is, at exactly the same size: the window frames, pillars, lamps, the departures board, the podium, the jet bridge door, every seat, the carpet, the plants, the posts and the railings. Same canvas size and framing, same colors and light, same painted brushwork. Do not add anything. No people, no words. Deliver the image itself."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "room-gatezero-plane",
+   "tab": "Rooms",
+   "group": "Airport",
+   "title": "Gate Zero: the airplane alone on magenta, same place and size (it rolls away at the end of chapter 10)",
+   "ar": "3:2",
+   "refs": [
+    "art/gatezero.webp"
+   ],
+   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Gate Zero painting.\n\nCopy out only the white airplane seen through the big windows, whole: its body, nose, windows, wings, engines and tail, including the parts behind the window frames, painted complete as if the window frames were not in front of it. It stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Do not copy the jet bridge, the windows, the window frames or anything inside the room. Put it on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself."
+  },
+  {
    "status": "approved",
    "versions": [
     {

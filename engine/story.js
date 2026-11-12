@@ -302,6 +302,9 @@ const SCENE_OPS={
         a.scenePose=null; a.lift=0; a.scr=null; a.move=null; a.x=to[0]; a.y=to[1]; a.facing=o.dir||'down'; return true; }}; }),
   show:o=>S.call(()=>{ const a=sceneActor(o.show); if(a) a.hidden=false; }),
   hide:o=>S.call(()=>{ const a=sceneActor(o.hide); if(a) a.hidden=true; }),
+  // {fadeActor:'Long coat',to:1,time:.6}: a person fades in (to 1) or out (to 0) where they stand; 1 clears the fade
+  fadeActor:o=>({t:0,start(){ this.t=0; this.a=sceneActor(o.fadeActor); this.f=this.a?(this.a.fade!=null?this.a.fade:(o.to?0:1)):0; },
+    update(dt){ const a=this.a; if(!a) return true; this.t+=dt; const u=Math.min(1,this.t/(o.time||.6)); a.fade=this.f+((o.to||0)-this.f)*u; if(u>=1&&a.fade>=1) a.fade=null; return u>=1; }}),
   fade:o=>({t:0,start(){ this.t=0; intro.fadeLock=true; this.a=o.fade==='out'?intro.fade:Math.max(intro.fade,1); },
     update(dt){ this.t+=dt; const u=Math.min(1,this.t/(o.time||.6)); intro.fade=o.fade==='out'?this.a+(1-this.a)*u:this.a*(1-u);
       if(u>=1&&o.fade==='in') intro.fadeLock=false; return u>=1; }}),
@@ -797,6 +800,7 @@ function storySpawn(o) {
   const [x,y]=scenePos(o.at);
   const a=actor(o.name,x,y,o.look||'moss',[]);
   Object.assign(a,{monster:o.monster||null,mscale:o.mscale||1,carry:o.carry||null,scripted:true,tier:0,maxHp:1,defeatedUntil:0,roam:0,facing:o.dir||'down'});
+  if(o.fade!=null) a.fade=o.fade;   // spawn invisible ({fade:0}) and bring them in with {fadeActor}
   currentMap.npcs.push(a); storyHold(a);
   return a;
 }

@@ -31,5 +31,5 @@ var TOWN_PAINTED={};
   // scene-spawned characters (engine/story.js storySpawn): matched by name AND the look they are spawned with
   for(const [name,look,id] of [['Marlowe','marlowe','marlowe'],['HUSH-9','hush9','hush9'],['Mr. Pistachio','bun','pistachio']]) {
     OW['tf_'+id]=make(id); TOWN_PAINTED[name]={look:look,set:'tf_'+id}; }
-  OW.vance=make('vance');   // Julian Vance: no walking appearance yet (battle monster only); ready for a later chapter
+  OW.vance=make('vance');   // Julian Vance: scenes spawn him as 'Long coat' with look 'vance' (chapters 5, 10, 11)
 })();

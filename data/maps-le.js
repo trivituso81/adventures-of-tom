@@ -50,8 +50,7 @@ const LE_PALETTES={
   kowalski:{skin:'#f0c8a8',hair:'#c9853a',shirt:'#d65a8a',pants:'#4a4f68',hat:null},
   ike:{skin:'#b88a6a',hair:'#e8e4dc',shirt:'#8a6a48',pants:'#5a5048',hat:'#4a5a3a'},
   halverson:{skin:'#d9a27e',hair:'#5a4030',shirt:'#e8e0c8',pants:'#5a6a7a',hat:null},
-  delgado:{skin:'#b98a62',hair:'#2b2422',shirt:'#3a7a6a',pants:'#3a3f4c',hat:null},
-  longcoat:{skin:'#d8b490',hair:'#2b2422',shirt:'#3a3428',pants:'#2b2a26',hat:'#2b2a26'}
+  delgado:{skin:'#b98a62',hair:'#2b2422',shirt:'#3a7a6a',pants:'#3a3f4c',hat:null}
 };
 
 // Buildings. `area` is the outdoor map the door is on; x,y,w,h its footprint. The door is the bottom middle tile.

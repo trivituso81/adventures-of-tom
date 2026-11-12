@@ -578,6 +578,8 @@ function shadeHex(hex,d) {
 
 function drawActor(a) {
   if(a.hidden) return;
+  // a.fade (0 to 1): a person fading in or out in a cutscene (the {fadeActor} step, engine/story.js), shadow included
+  if(a.fade!=null&&!a._fadeDraw) { if(a.fade<=0) return; a._fadeDraw=true; gfx.save(); gfx.globalAlpha*=Math.min(1,a.fade); try { drawActor(a); } finally { gfx.restore(); a._fadeDraw=false; } return; }
   if(a.monster) {
     const p=position(a);
     const cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2);

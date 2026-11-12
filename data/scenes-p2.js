@@ -230,7 +230,7 @@ SCENES.ch11Lost=[
 SCENES.ch11Vance=[
   {flag:'ch11-vance',value:'pending'},
   {call:()=>sfx.ding&&sfx.ding()},
-  {spawn:{name:'Long coat',look:'longcoat',at:[36,8],dir:'down'}},
+  {spawn:{name:'Long coat',look:'vance',at:[36,8],dir:'down'}},
   {walk:'Long coat',to:[[36,9],[35,9]],speed:.3}, {face:'Long coat',dir:'right'},
   {talk:'Long coat',lines:['Hello, Tom.']},
   {face:'Long coat',dir:'down'},

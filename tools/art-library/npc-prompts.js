@@ -77,7 +77,7 @@ const N = {
   sam: { name: 'Sam', look: 'sam', sex: 'f', kind: 'adult', age: 34, ft: `5'7"`, role: 'a house renovator who lives with Jordan and posts everything online', acc: 'a phone held up in one hand, a quick, delighted smile' },
   dakota: { name: 'Dakota', look: 'dakota', sex: 'f', kind: 'adult', age: 36, ft: `5'8"`, role: 'a homeowner restoring a 1912 house with Ryan', acc: 'a paintbrush held in one hand, a fond, determined smile' },
   ryan: { name: 'Ryan', look: 'ryan', sex: 'm', kind: 'adult', age: 38, ft: `5'11"`, role: 'a new father and homeowner, Dakota\'s partner', acc: 'one open hand held out low at waist height in a gentle keep-it-down gesture, well below the chin and away from the face, a baby monitor in the other hand, exhausted but happy' },
-  vance: { name: 'Julian Vance', look: 'longcoat', sex: 'm', kind: 'adult', age: 58, ft: `6'1"`, role: 'the quiet, polite man in the long coat who paused the world at its happiest afternoon, never without his hat', acc: 'hands clasped loosely in front of him, a calm, courteous, faintly sad smile' },
+  vance: { name: 'Julian Vance', look: 'vance', sex: 'm', kind: 'adult', age: 58, ft: `6'1"`, role: 'the quiet, polite man in the long coat who paused the world at its happiest afternoon, never without his hat', acc: 'hands clasped loosely in front of him, a calm, courteous, faintly sad smile' },
   marlowe: { name: 'Monochrome Marlowe', look: 'marlowe', sex: 'm', kind: 'adult', age: 45, ft: `5'10"`, role: "Vance's fixer, who takes the color out of places, always carrying a clipboard that reads NOTES: LESS", acc: 'a clipboard held to his chest with NOTES: LESS written on it, a flat, tired, apologetic look', over: { shirt: '#9ea3ab', pants: '#2c2c33' } },
 };
 

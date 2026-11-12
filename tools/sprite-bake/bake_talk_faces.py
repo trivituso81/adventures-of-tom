@@ -30,7 +30,7 @@ HEAD_PAD = 1.18   # square side over hair-top-to-neck height
 TOP_GAP = 0.04    # paper above the hair, as a share of the side
 NECK_OK = (0.22, 0.42)   # believable neck heights (share of the figure); outside this the reading is hair or a held thing
 NECK_DEFAULT = 0.33
-NECK_SET = {'mateo': 0.47, 'sofi': 0.48, 'vance': 0.44, 'amy': 0.27}   # big-headed walks whose real neck sits past NECK_OK (checked by eye on the contact sheet)
+NECK_SET = {'mateo': 0.47, 'sofi': 0.48, 'marlowe': 0.44, 'amy': 0.27}   # big-headed walks whose real neck sits past NECK_OK (checked by eye on the contact sheet)
 NARA_SQ = (0.30, 0.20, 0.62)     # Nara: square centre x and y and side, as shares of her standing frame's width, height and width
 
 

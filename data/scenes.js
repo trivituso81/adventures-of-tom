@@ -1685,7 +1685,7 @@ SCENES.ch5End=[
   {talk:'Amy',lines:['Girls. Did we save a cookie for Dad?']},
   {talk:'Rose',lines:['...Define save.']},
   {talk:'Rose',lines:['Tata. Tata. There\'s a man.']},
-  {spawn:{name:'Long coat',look:'longcoat',at:[7,16],dir:'up'}},
+  {spawn:{name:'Long coat',look:'vance',at:[7,16],dir:'up'}},
   {face:'tom',dir:'right'},
   {talk:'Rose',lines:['By the last car. In a long coat. He\'s looking at us.']},
   {wait:.8},
@@ -3758,17 +3758,31 @@ SCENES.ch10AfterBoss=()=>[
   {toast:'Rose gets her Signature Tool: Junior Pilot Wings (POW +5, WARMTH +7). Equip it in the menu.',time:4.5},
   {talk:'Rose',lines:['I\'m a PILOT. I\'m wearing them upside down. On purpose. It\'s a pilot thing.']},
   {hearts:'rose'}, {trace:'lastcall-wings'},
+  // Julian comes out of the jet bridge, walks over to the podium, leaves the card (a gold glint), bows, and goes back in (ch10vance1, Tom 2026-11-12).
+  {spawn:{name:'Long coat',look:'vance',at:[16,4],dir:'down',fade:0}},
+  {call:()=>sfx.doorIn&&sfx.doorIn()},
+  {cam:[13.5,5.5]},
+  {all:[{fadeActor:'Long coat',to:1,time:.7},{face:'tom',dir:'right'},{face:'grace',dir:'right'},{face:'rose',dir:'right'},{face:'amy',dir:'right'}]},
   {talk:'Grace',lines:['Tata. Tata. The jet bridge. There\'s a man.']},
-  {spawn:{name:'Long coat',look:'longcoat',at:[16,4],dir:'down'}},
-  {face:'tom',dir:'right'},
+  {walk:'Long coat',to:CH10_COAT_PATH,speed:.34,onStep:ch10WatchCoat},
+  {face:'Long coat',dir:'left'}, {wait:.35},
+  {call:()=>{ CH10_CARD.t0=performance.now(); CH10_CARD.read=false; sfx.ding&&sfx.ding(); }},
+  {wait:.8},
+  {face:'Long coat',dir:'down'}, {call:ch10WatchCoat}, {wait:.25},
+  {seq:ch10Bow()},
   {talk:'Grace',lines:['In a long coat. Like at the school. He\'s tipping his hat at you.']},
-  {wait:1},
-  {walk:'Long coat',to:[[16,3]],speed:.35},
-  {call:()=>sfx.doorIn&&sfx.doorIn()}, {despawn:'Long coat'},
+  {wait:.4},
+  {walk:'Long coat',to:CH10_COAT_PATH_BACK,speed:.34,onStep:ch10WatchCoat},
+  {face:'Long coat',dir:'up'},
+  {fadeActor:'Long coat',to:0,time:.6},
+  {call:()=>sfx.doorIn&&sfx.doorIn()}, {despawn:'Long coat'}, {cam:null},
   {call:()=>{ CH10_PLANE.t0=performance.now(); sfx.whoosh(); }},
   {talk:'Gate Zero',lines:['The jet bridge door clicks shut. Outside the big window, Flight Zero turns on its lights, pushes back, and rolls away into the dark. Very quietly. Like it\'s done this before.']},
   {wait:1.5}, {flag:'ch10-gone'},
   {talk:'Amy',lines:['Tom. Who IS that?']},
+  {walk:'tom',to:routeTo('tom',7,4),speed:.25}, {face:'tom',dir:'left'},
+  {face:'grace',dir:'up'}, {face:'rose',dir:'up'}, {face:'amy',dir:'up'},
+  {call:()=>{ CH10_CARD.read=true; }},
   {talk:'Tom',lines:['Somebody who knows I always make my connection.','He left a card on the podium. Gold ink. \"THANK YOU FOR FLYING NOWHERE. YOUR LAYOVER WILL BE ANNOUNCED.\" And a little clock.']},
   {call:()=>sfx.pickup()},
   {talk:'Tom',lines:['My boarding pass changed. \"BOARDING GROUP 0. FROM: LONG ISLAND. TO: NOWHERE. STATUS: LAYOVER.\"']},
@@ -3922,6 +3936,22 @@ pressAction=function() {
 // Terminal Zero is dim until the clocks start (lamp light round Tom); Gate Zero shows Flight 0 through the window
 // until it pushes back and rolls away.
 const CH10_PLANE={t0:0};
+// Julian's walk at the end of chapter 10: out of the jet bridge (16,4), along the carpet in front of the seats (row 5), up to the podium's right side (7,4) and back.
+const CH10_COAT_PATH=[[16,5],[15,5],[14,5],[13,5],[12,5],[11,5],[10,5],[9,5],[8,5],[7,5],[7,4]];
+const CH10_COAT_PATH_BACK=[[7,5],[8,5],[9,5],[10,5],[11,5],[12,5],[13,5],[14,5],[15,5],[16,5],[16,4]];
+// The card he leaves on the podium: twinkles from when he sets it down until Tom reads it; stays on the counter after.
+const CH10_CARD={t0:0,read:true};
+// The family turns to follow him as he walks.
+function ch10WatchCoat() {
+  const c=sceneActor('Long coat'); if(!c) return; const cx=position(c).x;
+  sceneCam=[Math.min(13,Math.max(7,cx))+.5,5.5];   // the camera goes with him (portrait shows about 7 tiles across), halfway between him and the family
+  for(const id of ['tom','grace','rose','amy']) { const a=sceneActor(id); if(!a) continue; const dx=cx-position(a).x; a.facing=Math.abs(dx)<.6?'up':(dx<0?'left':'right'); a.stageFaced=true; }
+}
+// A small polite bow: two quick dips.
+function ch10Bow() {
+  const dip=v=>({call:()=>{ const c=sceneActor('Long coat'); if(c) c.lift=v; }});
+  return [dip(-2.5),{wait:.16},dip(0),{wait:.12},dip(-2.5),{wait:.16},dip(0)];
+}
 STORY_MAPFX.push(time=>{
   const M=currentMap,id=M.id,c=gfx;
   if(id==='terminal'&&!termClockGo()) {
@@ -3940,6 +3970,19 @@ STORY_MAPFX.push(time=>{
       for(let k=0;k<20;k++) rect(x0+44+k*16,y0+11,5,4,'#f2c75a');
       if(Math.floor(time*2)%2) ellipse(x0+4,y0+2,2,2,'#e85a4a');
       c.restore();
+    }
+    if(STORY.mode==='full'&&STORY.chapter>=10&&(CH10_CARD.t0||flag('ch10-gone'))) {   // the card on the podium counter
+      const x=5.5*T,y=3.86*T,w=Math.round(T*.34),h=Math.round(T*.2);
+      c.save(); c.translate(x,y); c.rotate(-.12);
+      c.fillStyle='#d4a640'; c.fillRect(-w/2-1,-h/2-1,w+2,h+2); c.fillStyle='#f6ecd2'; c.fillRect(-w/2,-h/2,w,h);
+      c.fillStyle='#c9952e'; c.fillRect(-w/2+2,-1,w-4,1);
+      c.restore();
+      if(CH10_CARD.t0&&!CH10_CARD.read) {   // a gold twinkle
+        const g=((performance.now()-CH10_CARD.t0)/1000)%1.1,a=g<.5?Math.sin(g/.5*Math.PI):0,r=T*(.18+.22*a);
+        if(a>0) { c.save(); c.globalAlpha=a; c.fillStyle='#fff3c0';
+          c.beginPath(); c.moveTo(x,y-r); c.lineTo(x+r*.18,y-r*.18); c.lineTo(x+r,y); c.lineTo(x+r*.18,y+r*.18); c.lineTo(x,y+r); c.lineTo(x-r*.18,y+r*.18); c.lineTo(x-r,y); c.lineTo(x-r*.18,y-r*.18); c.closePath(); c.fill();
+          c.restore(); }
+      }
     }
     if(STORY.chapter===10&&flag('ch10-boss')&&!flag('ch10-clear')) { const gl=c.createRadialGradient(9.5*T,3*T,2,9.5*T,3*T,T*4); gl.addColorStop(0,'rgba(242,199,90,.25)'); gl.addColorStop(1,'rgba(242,199,90,0)'); c.fillStyle=gl; c.fillRect(5*T,0,9*T,7*T); }
   }

@@ -46,7 +46,7 @@ def cut(cid):
         im = Image.fromarray(cell, 'RGBA'); figs.append(im.crop(im.getbbox()))
     return figs
 
-NECK_OK = (0.22, 0.42); NECK_DEFAULT = 0.33; NECK_SET = {'mateo': 0.47, 'sofi': 0.48, 'vance': 0.44, 'amy': 0.27}   # same neck rules as bake_talk_faces.py
+NECK_OK = (0.22, 0.42); NECK_DEFAULT = 0.33; NECK_SET = {'mateo': 0.47, 'sofi': 0.48, 'marlowe': 0.44, 'amy': 0.27}   # same neck rules as bake_talk_faces.py
 
 def neck_share(figs, cid):
     """Where the head ends on a mood figure (share of its height): the narrowest row between 18 and 50 percent, median over the 8 frames."""
