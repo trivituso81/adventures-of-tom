@@ -29,6 +29,17 @@ def run(name,w,h,q='',turn=False):
         pg.click('#sp-edit button[data-n="1,0"]')
         sel=pg.evaluate("splashEdit.sel"); pg.wait_for_timeout(300)
         pg.screenshot(path=f'{out}/{name}-2edited.png')
+        order=lambda: pg.evaluate("splashEditItems().map(m=>m.id).join(' ')")   # layers: Deedee (picked) to the front, then Justin... back again
+        o0=order(); pg.click('#spe-front'); o1=order(); pg.wait_for_timeout(200); pg.screenshot(path=f'{out}/{name}-2front.png')
+        pg.click('#spe-back'); pg.click('#spe-back'); o2=order(); pg.screenshot(path=f'{out}/{name}-2back.png'); pg.click('#spe-front')
+        print('  layers ok',o1.split()[-1]=='deedee',o2.split()[0]=='deedee',order()==o0,pg.inner_text('#spe-who'))
+        pg.click('#spe-hide'); pg.wait_for_timeout(200)   # bar away: drag Tom down while it is hidden, then bring it back
+        t=pg.evaluate("(()=>{const m=splashEditItems().find(q=>q.id==='tom');return {x:m.mx,y:m.feet-m.hh/2};})()")
+        a0=S(t['x'],t['y']); a1=S(t['x'],t['y']+30)
+        pg.mouse.move(*a0); pg.mouse.down(); pg.mouse.move(*a1); pg.mouse.up(); pg.wait_for_timeout(200)
+        hid=pg.evaluate("[splashEdit.el.hidden,splashEdit.sel,document.getElementById('spe-hide').textContent,Math.round((SPLASH_ADJ[splashEditKeyNow()].tom||{}).dy||0)]")
+        pg.screenshot(path=f'{out}/{name}-2hidden.png'); print('  hidden',hid)
+        pg.click('#spe-hide'); pg.wait_for_timeout(200)
         pg.click('#spe-all'); 
         for i in range(5): pg.click('#sp-edit button[data-k="-1"]')
         pg.wait_for_timeout(300); pg.screenshot(path=f'{out}/{name}-3all.png')

@@ -580,8 +580,8 @@ function splashFig(id) {   // visible box of a standing frame in design units: w
   return {id,vw:(C.x1-C.x0)*u,off:((C.x0+C.x1)/2-fr[0].length/2)*u};
 }
 // Welcome layout editor (Tom 2026-11-11 23:26, engine/splash-edit.js, ADMIN > WELCOME LAYOUT): each layout type keeps its own size and position
-// per character on top of the lineup above. SPLASH_ADJ[type][id] = {dx,dy,k}: dx right and dy down in design units, k a size multiplier
-// (about the feet). Types: port and land (phone and iPad, upright and sideways), duoport and duoland (iPhone Duo unfolded).
+// per character on top of the lineup above. SPLASH_ADJ[type][id] = {dx,dy,k,z}: dx right and dy down in design units, k a size multiplier
+// (about the feet), z a layer (0 standard, lower is behind). Types: port and land (phone and iPad, upright and sideways), duoport and duoland (iPhone Duo unfolded).
 // Saved in data/welcome-layout.json; an empty type draws the plain lineup.
 const SPLASH_LAYOUTS={port:'Phone upright',land:'Phone sideways',duoland:'Duo open sideways',duoport:'Duo open upright'};
 let SPLASH_ADJ={t:0};
@@ -605,8 +605,8 @@ function splashLineupLayout(w,h) {
   const sc=Math.min(w*L.fracW[o]/(2*half),h*L.fracH[o]/(tall+L.naraFwd)),feet=h*L.feetY[o];
   // mx = middle of the visible figure, bx and bz = its place in the plain lineup (design units from Tom), i = its turn in the breathing
   const items=all.map((f,i)=>{ const a=A[f.id]||{},k=a.k||1,mx=w/2+(f.x-t.x+(a.dx||0))*sc;
-    return {id:f.id,i,k,mx,cx:mx-f.off*sc*k,feet:feet+(f.z+(a.dy||0))*sc,hh:SPLASH_H[f.id]*sc*k,vw:f.vw*sc*k,bx:f.x-t.x,bz:f.z}; });
-  items.sort((p,q)=>p.feet-q.feet||p.i-q.i);   // whoever stands lower on the screen is in front (plain lineup: back row, main row, Nara)
+    return {id:f.id,i,k,z:a.z||0,mx,cx:mx-f.off*sc*k,feet:feet+(f.z+(a.dy||0))*sc,hh:SPLASH_H[f.id]*sc*k,vw:f.vw*sc*k,bx:f.x-t.x,bz:f.z}; });
+  items.sort((p,q)=>p.z-q.z||p.feet-q.feet||p.i-q.i);   // layer first (BACK and FRONT in the editor), then whoever stands lower on the screen is in front (plain lineup: back row, main row, Nara)
   items.sc=sc;
   return items;
 }
