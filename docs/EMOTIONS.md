@@ -56,6 +56,51 @@ Why these 8: a word count over every scene and map file (data/scenes*.js, bonus-
 - Adding a character later: save the sheet as art/raw/characters/<id>-emotions-v1.png, run the cutter with that id (it merges into the index), approve the Library entry.
 - Size in the game: frames are drawn scaled so the figure matches that character's real height next to Tom (docs/MAP_SIZES.md, NEXT TASK CAST SIZE), never at sheet size.
 
+## Listener reactions (react1, Tom 2026-11-12)
+
+Tom: "currently, emotion states are just flagged on a character based on their dialogue lines. i also want every other character in the conversation, whether it's Tom when talking to NPCs, or group conversations in cut scenes. inventory every possible scenario and tag other characters who should have a reaction for a given dialogue."
+
+Status: TAGGED, NOT WIRED. `docs/emotion-reactions.tsv` holds 9,852 reactions on 3,094 dialogue lines (one row per line and listener). Readable copy `docs/REACTION_INDEX.md`; check and rebuild `python3 tools/reaction-index.py`. The game does not load it.
+
+### Every place a dialogue box appears
+
+| # | Scenario | Lines | Tagged | Who can react |
+|---|---|---|---|---|
+| 1 | Story scenes, chapters 1 to 20 and Nine Scoops: cast lines, townsfolk lines, monster and boss lines, narration boxes (Nara, rooms, objects) | 2,338 | 2,319 | everyone in the scene who has a mood pose |
+| 2 | Talking to a person on a map (first visit, revisit, hug, chapter variants) | 373 | 373 | Tom and whoever is walking with him |
+| 3 | Recruit ask, yes, no, swap, and follower chatter | 46 | 46 | Tom and the party |
+| 4 | Penny and Nickel shop lines | 66 | 66 | Tom and the party |
+| 5 | Cab drivers Sal and Sol | 36 | 36 | Tom, the girls (Sal), TNB and Nara (Sol) |
+| 6 | Airport trips: goodbyes at the cab, who stays behind, arrivals, welcome home | 220 | 166 | Tom, Grace, Rose, TNB, Nara. The 54 untagged are Tom alone on the plane or at the kerb |
+| 7 | Chapter 19 memories and keepsakes, chapter 20 doors | 59 | 59 | the family present |
+| 8 | Aunt Ellie's bets | 29 | 29 | Tom, Grace, Rose |
+
+### Not tagged, and why
+
+| Scenario | About | Why |
+|---|---|---|
+| Lines whose words are built while the game runs (chapter 6 dig finds, 7 catalog card, 8 pilot light, 9 mirror, 10 clock hand, 17 smash, chapter 19 "you set down" line, chapter 20 door questions and wrong answers, two Tom narration lines at the end of chapter 16) | 30 | no fixed text to key a tag on; tag them by scene step when wiring |
+| Monsters talking on a map before a fight (chapters 1 to 20; the four Nine Scoops ones are tagged) | 161 | next pass; the party's reaction is nearly always the same two or three moods |
+| Signs, objects and room descriptions outside story scenes | not counted | nobody is speaking |
+| Battle lines | all | battles use battle poses, not emotion poses |
+| Mr. Pistachio, Lachlan, Isla, monsters and bosses as listeners | 7 tags dropped | no emotion sheet |
+
+### Tagging rules used (first pass; Tom corrects)
+
+- The speaker never reacts to their own line (their mood is in the two speaker files).
+- A listener is tagged when the line would change their face: spoken to by name, a joke, a scare, a reveal, praise, affection, bad news. Kids react bigger and more often than adults.
+- Tom is dry: unimpressed at nonsense and bragging, loving for family warmth. With TNB he reads warm (happy or loving); unimpressed only for a pun he then forgives.
+- A tag is safe to leave on someone who is not there: the game will only pose people who are visible in that scene.
+- Scenarios 1 to 5 were tagged line by line. Scenarios 6 to 8 were tagged by rule (who speaks to whom) with single-line corrections.
+- 20 lines appear in two places with different reactions (for example a line reused in a later chapter): the wiring must key those by scene.
+
+### Wiring plan (not built; recommended next)
+
+1. `tools/reaction-apply.py` builds `data/emotion-reactions.js` from the tsv: `EMOTION_REACTIONS['<speaker>|<text>'] = [['grace','happy'], ...]`, with a `|<scene>` key for the 20 clashes, and a chapter switch like `EMO_CHAPTERS`.
+2. `engine/emotions.js` `emoApply`: after the speaker's mood, look the line up and give each visible listener the full-body pose `em_<mood>` (same `scenePose` mechanism, marked so `emoClear` removes all of them). A listener who already holds a story pose, rides Tom's shoulders or is hidden is skipped. The dialogue box keeps showing only the speaker's face.
+3. Pilot on chapter 1 only, show Tom, then switch on the rest in the same batches as the speaker moods.
+4. Risk to judge in the pilot: with three or four people changing pose on almost every line the screen may look busy. If so, thin the tsv (for example drop the plain "happy" reactions) rather than change the engine.
+
 ## Plan for programming (not built)
 
 A dialogue line gets an optional `mood:'<key>'` (one of the 8 keys). The speaker on the map switches to that full-body pose and the dialogue box shows the face cropped from it; no mood means no bust change. A scene step could set a resting mood per character. Write this against the first approved sheet.
