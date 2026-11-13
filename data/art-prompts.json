@@ -18830,8 +18830,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or several states.\n\nATTACHED IMAGE\n1) The finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE PICTURE\nThe turntable lever housing inside an old railway car barn, seen close and straight on. It is a close-up, straight-on picture that fills the whole square. It is the still background of a close-up screen: the game will lay moving pieces on top of it, so it shows ONLY the fixed part and nothing that can change.\n- A heavy black iron floor quadrant: a thick plate in the shape of a quarter circle, bolted down with big round rivets, set on a dark worn plank floor that fills the lower part of the picture and a plain old brick wall behind it.\n- A long curved slot is cut through the iron plate along its arc, running from left to right in a smooth arch, wide enough for a thick lever to slide along it.\n- Two brass end plates cap the two ends of the slot, one at the left end and one at the right end, each stamped with a plain round bolt and nothing else.\n- The slot is EMPTY: there is NO lever, NO handle and NO arm in it or anywhere in the picture. A small round pivot hub with a brass cap sits at the bottom center where the lever arm will be fitted.\n- Count check before you finish: exactly two brass end plates and one pivot hub.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- No people, no hands, no faces, no characters, no creatures, no frame or border around the picture.\n- Family friendly for children aged 6 and up.\n- Warm lantern light from the upper left, so the iron and brass catch highlights and the barn fades to dim shadow on the lower right.\n- No words, letters or numbers anywhere unless the description above says to paint them."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/closeup-ch8-lever-arm-v1.png",
+     "date": "2026-11-13",
+     "from": "v1",
+     "at": 1794536082234
+    }
+   ],
    "rejects": [],
    "id": "closeup-ch8-lever-arm",
    "tab": "Props",
