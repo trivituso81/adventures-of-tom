@@ -9,8 +9,9 @@ from headwarp import _warp_head
 T_BATTLE, T_WALK = 0.43, 0.373
 def factor(target, share): return target * (1 - share) / ((1 - target) * share)
 
-def grow_head(img, k, head_px, taper=12, pad=120):
-    """Rows from the top of the figure down to top+head_px (the chin) are enlarged by k about the chin; the body is untouched."""
+def grow_head(img, k, head_px, taper=12, pad=120, crop=True):
+    """Rows from the top of the figure down to top+head_px (the chin) are enlarged by k about the chin; the body is untouched.
+    crop=False returns (the padded canvas, pad) so a caller can lay other parts over it at their painted place (emotion_frames.py)."""
     if k == 1 or head_px <= 4: return img
     a = np.array(img)
     al = a[:, :, 3] > 40
@@ -29,7 +30,7 @@ def grow_head(img, k, head_px, taper=12, pad=120):
     out, dx, dy = _warp_head(arr, X0, X1, Y0, AY, ax + pad, k, taper)
     arr[Y0:AY, X0:X1, 3] = 0
     big = Image.fromarray(arr, 'RGBA'); big.alpha_composite(Image.fromarray(out, 'RGBA'), (dx, dy))
-    return big.crop(big.getbbox())
+    return big.crop(big.getbbox()) if crop else (big, pad)
 
 def body_frac(f, k, s):
     """A height fraction measured below the chin, remapped to the taller figure (head share s grown by k)."""

@@ -52,7 +52,7 @@ Tom (11-05): "Let's undo the no head resizing rule." `docs/CHARACTER_PIPELINE.md
 
 ## One head multiplier across all states (standing rule, Tom 2026-11-12)
 
-Tom (11-12 08:37): "i just want the head sizes to be amplified with the same multiplier across all states." The HEAD SIZES factor (`tools/sprite-bake/head_tweak.json`) applies to the walk, the talk face, the 8 mood poses and the mood faces. After any `head_adjust.py apply` or `apply-requests`, also run `emotion_frames.py <ids>`, `bake_emotion_faces.py <ids>`, `bake_story_poses.py` (about 11 minutes, run in the background), `bake_talk_faces.py <ids>`, bump `EMO_V` and `TALK_V`. Mechanism and the `hg` field: docs/CHANGES.md "headmood1".
+Tom (11-12 08:37): "i just want the head sizes to be amplified with the same multiplier across all states." The HEAD SIZES factor (`tools/sprite-bake/head_tweak.json`) applies to the walk, the talk face, the 8 mood poses and the mood faces. After any `head_adjust.py apply` or `apply-requests`, also run `emotion_frames.py <ids>`, `bake_emotion_faces.py <ids>`, `bake_story_poses.py` (about 11 minutes, run in the background), `bake_talk_faces.py <ids>`, bump `EMO_V` and `TALK_V`. Mechanism and the `hg` field: docs/CHANGES.md "headmood1". In the mood frames the head grows about each frame's own measured chin row (`tools/sprite-bake/emotion_chin.py`, `emotion_chin.json`, docs/CHANGES.md "headchin1"); after a rebake look at `CHECK=/tmp/chin.png python3 tools/sprite-bake/emotion_chin.py <ids>` and correct a wrong line with `FIX`.
 
 ## Real heights (standing rule, Tom 2026-11-11)
 

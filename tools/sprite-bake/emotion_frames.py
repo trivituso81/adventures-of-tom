@@ -12,7 +12,7 @@ from walk_sheet_frames import _key
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 RAW = os.path.join(ROOT, 'art/raw/characters'); OUT = os.path.join(ROOT, 'art/emotions'); NPC_RAW = os.path.join(ROOT, 'art/raw/npcs')   # townsfolk sheets: npc-emotions-<id>-vN.png (Tom 2026-11-10)
 MOODS = ['happy', 'loving', 'sad', 'angry', 'scared', 'surprised', 'proud', 'unimpressed']
-TAG = 'headmood1'
+TAG = 'headchin1'
 NO_MOOD = {'vance'}   # vance1 (Tom 2026-11-12): Julian's only sheet is the old sketch style; he has no painted mood art, so no mood poses or faces until the Art Library has one (his talk face and walk are painted)
 
 def src_path(cid):
@@ -47,16 +47,8 @@ def cut(cid):
         im = Image.fromarray(cell, 'RGBA'); figs.append(im.crop(im.getbbox()))
     return figs
 
-NECK_OK = (0.22, 0.42); NECK_DEFAULT = 0.33; NECK_SET = {'mateo': 0.47, 'sofi': 0.48, 'marlowe': 0.44, 'amy': 0.27}   # same neck rules as bake_talk_faces.py
-
-def neck_share(figs, cid):
-    """Where the head ends on a mood figure (share of its height): the narrowest row between 18 and 50 percent, median over the 8 frames."""
-    if cid in NECK_SET: return NECK_SET[cid]
-    v = []
-    for f in figs:
-        al = np.array(f)[:, :, 3] > 40; H = al.shape[0]; lo, hi = int(H * .18), int(H * .50)
-        wid = al[lo:hi].sum(1); v.append((lo + int(np.argmin(wid))) / H)
-    m = float(np.median(v)); return m if NECK_OK[0] <= m <= NECK_OK[1] else NECK_DEFAULT
+def has_sheet(cid):
+    return bool(glob.glob(os.path.join(RAW, f'{cid}-emotions-v*.png')) + glob.glob(os.path.join(NPC_RAW, f'npc-emotions-{cid}-v*.png')))
 
 def head_factor(cid):
     """The HEAD SIZES factor of tools/sprite-bake/head_tweak.json, applied to the mood figures too (Tom 2026-11-12: one multiplier across all states)."""
@@ -65,11 +57,30 @@ def head_factor(cid):
 
 UPRIGHT = (0, 1, 5, 6, 7)   # happy, loving, surprised, proud, unimpressed
 
+def grow_frame_head(f, fct, chin):
+    """One mood figure with its head (everything above row `chin`, measured from the figure's top) enlarged by fct about the chin."""
+    from kidhead import grow_head
+    a = np.array(f); al = a[:, :, 3] > 40; chin = int(min(max(chin, 8), f.height - 8))
+    lab, n = ndi.label(al[:chin])
+    if n > 1:
+        sizes = ndi.sum(al[:chin], lab, range(1, n + 1)); head = 1 + int(np.argmax(sizes))
+        loose = [j for j in range(1, n + 1) if j != head and (lab[chin - 1] == j).any() and sizes[j - 1] > .01 * sizes[head - 1]]   # arms and hands coming up past the chin row
+    else: loose = []
+    if not loose: return grow_head(f, fct, chin)
+    m = np.zeros(al.shape, bool); m[:chin] = np.isin(lab, loose); m = ndi.binary_dilation(m, iterations=2) & (np.arange(al.shape[0])[:, None] < chin)
+    rest = a.copy(); rest[~m, 3] = 0; body = a.copy(); body[m, 3] = 0
+    hrows = np.where((body[:, :, 3] > 40).any(1))[0]; top = int(hrows.min())
+    big, pad = grow_head(Image.fromarray(body, 'RGBA'), fct, chin - top, crop=False)
+    big.alpha_composite(Image.fromarray(rest, 'RGBA'), (pad, pad))
+    return big.crop(big.getbbox())
+
 def bake(cid):
     figs = cut(cid); hg = 1.0; fct = head_factor(cid)
     if fct != 1.0 and cid != 'nara':
-        from kidhead import grow_head
-        ns = neck_share(figs, cid); big = [grow_head(f, fct, ns * f.height) for f in figs]
+        # headchin1 (Tom 2026-11-13): the head grows about that frame's own measured chin row (emotion_chin.py), so every one of the 8 frames gets the
+        # whole factor on the head and nothing on the torso. A raised hand or arm that is cut by the chin row and is not joined to the head stays as painted.
+        from emotion_chin import chin_rows
+        big = [grow_frame_head(f, fct, c) for f, c in zip(figs, chin_rows(cid, figs, src_path(cid)))]
         hg = float(np.median([big[i].height / figs[i].height for i in UPRIGHT])); figs = big
     fw = max(f.width for f in figs) + 4; fh = max(f.height for f in figs) + 2
     atlas = Image.new('RGBA', (fw * 8, fh), (0, 0, 0, 0)); rects = {}
