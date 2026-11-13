@@ -59,6 +59,16 @@ SCENES.ch12Arrive=[
 
 SCENES.ch12House=[
   {flag:'ch12-house',value:'pending'},
+  // The door trigger fires on the garden path, so the party is still outside. Bring everyone in onto the open floor by the photo wall (row 8, x2 to x7).
+  {fade:'out',time:.4},
+  {place:'tom',at:[5,8],dir:'right'},
+  {if:()=>party.includes('grace'),then:[{place:'grace',at:[6,8],dir:'left'}]},
+  {if:()=>party.includes('rose'),then:[{place:'rose',at:[4,8],dir:'right'}]},
+  {if:()=>party.includes('amy'),then:[{place:'amy',at:[3,8],dir:'right'}]},
+  {if:()=>party.includes('tnb'),then:[{place:'tnb',at:[2,8],dir:'right'}]},
+  {if:()=>party.includes('nara'),then:[{place:'nara',at:[7,8],dir:'left'}]},
+  {wait:.2},
+  {fade:'in',time:.4},
   {talk:'Rose',lines:['Tata. TATA. There’s a jar. It’s bubbling. It’s ALIVE.']},
   {talk:'Tom',lines:['That’s Bready Mercury. He’s nine years old, he’s flown Delta One, and he’s the only one in this house who gets fed on time.']},
   {talk:'Grace',lines:['You named your bread Mercury? Like the planet?']},
