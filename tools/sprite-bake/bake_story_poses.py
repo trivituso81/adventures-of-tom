@@ -27,7 +27,7 @@ COLORS = 40
 
 # id: sheet, K (= that character's overworld K), standing height in rows (= its overworld stand frame), reference frame, frame names in reading order.
 SETS = {
-    'tom': {'sheet': 'tom-stretch-intro-sheet-v1.png', 'k': 9, 'h': 42, 'ref': 'st_fresh',
+    'tom': {'sheet': 'tom-stretch-intro-v1.png', 'k': 9, 'h': 42, 'ref': 'st_fresh',
             'names': ['st_stiff', 'st_rise', 'st_reach', 'st_bendl', 'st_bendr', 'st_push', 'st_exhale', 'st_fresh']},
     'grace': {'sheet': 'grace-squishy-intro-sheet-v1.png', 'k': 10, 'h': 39, 'ref': 'sq_squeeze',
               'names': ['sq_hide', 'sq_reveal', 'sq_raise', 'sq_show', 'sq_hug', 'sq_squeeze', 'sq_careful', 'sq_wave']},
@@ -112,11 +112,6 @@ def stand_frame(cid):
     im = Image.open(os.path.join(ROOT, src)).convert('RGBA').crop((x, y, x + w, y + h))
     return im.crop(im.getbbox()), k
 
-
-# Tom's stretch poses (Tom 2026-11-06 16:02: "his stretching states are also not the same size as his regular body"). Compared in the real game against his
-# standing frame (not by bounding box: raised arms and bends change the box): the two side bends read about 15 percent bigger in head and torso, Stiff and Rise
-# heads about 5 percent. Factors are one uniform scale per frame about the feet; Reach (arms overhead, head reads smaller) is left as painted.
-STRETCH_FIT = {'tom': {'st_stiff': .96, 'st_rise': .96, 'st_bendl': .88, 'st_bendr': .88}}
 
 def npc_emo_head(pid):
     """Strip px per standing-frame atlas px for a townsperson (see the npcemo7 note above)."""
@@ -265,8 +260,6 @@ for cid, S in SETS.items():
     f = S['h'] * S['k'] / figs[S['ref']].height
     if 'strip' in S and S['member'] in EMO_HEAD:
         f = S['k'] / (EMO_HEAD[S['member']] * stand_frame(S['member'])[1])   # strip px -> standing px -> game rows -> atlas px
-    if cid in STRETCH_FIT:
-        figs = {n: (im.resize((round(im.width * STRETCH_FIT[cid].get(n, 1.0)), round(im.height * STRETCH_FIT[cid].get(n, 1.0))), Image.LANCZOS) if STRETCH_FIT[cid].get(n, 1.0) != 1.0 else im) for n, im in figs.items()}
     big = place({n: scaled_to(im, f) for n, im in figs.items()}, S['k'], {n: v * f for n, v in S.get('feet', {}).items() if v})
     small = {n: hard(scaled_to(v, 1.0 / S['k'])) for n, v in big.items()}
     pal, rows = quantize(small, COLORS)
