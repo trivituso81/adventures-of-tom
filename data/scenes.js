@@ -2997,11 +2997,15 @@ function ch8Motor(o) {
 function ch8Lever(o) {
   if(STORY.mode!=='full'||STORY.chapter<8) return false;
   if(!ch8MotorOn()) { openDialog(o.name,['A big iron lever: TURNTABLE. Tom pulls. It won\'t budge.','TNB: "No steam, babe. That motor at the bottom of the corridor runs it."']); return true; }
-  const east=!worlds.carbarn.ttEast;
-  setFlag('ch8-tt',east?'east':'north'); ch8SetBridge(east); placeFollowers();
-  sfx.thud(); sfx.whoosh&&sfx.whoosh();
-  if(east&&STORY.chapter===8&&!flag('ch8-turn')) { playScene('ch8Turn'); return true; }
-  openDialog('Turntable',[east?'CLANK. The bridge swings round to Track 4: the Boiler Room.':'CLANK. The bridge swings back round: Track 3 at the top, Track 1 at the bottom.']);
+  const east=!worlds.carbarn.ttEast, first=east&&STORY.chapter===8&&!flag('ch8-turn');
+  // Close-up of the lever (closeup9): full length the first time (it waits for A), a half-second swing after that. Then the bridge turns as before.
+  const turn=()=>{
+    setFlag('ch8-tt',east?'east':'north'); ch8SetBridge(east); placeFollowers();
+    sfx.thud(); sfx.whoosh&&sfx.whoosh();
+    if(first) { playScene('ch8Turn'); return; }
+    openDialog('Turntable',[east?'CLANK. The bridge swings round to Track 4: the Boiler Room.':'CLANK. The bridge swings back round: Track 3 at the top, Track 1 at the bottom.']);
+  };
+  if(!closeupLever('ch8',{to:east?'east':'north',quick:!first,onDone:turn})) turn();
   return true;
 }
 // Nara has not eaten all day: what does Tom give her? (Heart-Trace)

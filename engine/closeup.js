@@ -13,7 +13,7 @@
 // pad inside the screen (the normal controls are hidden while it is open). The game under it is paused (update() returns early).
 // Layout is computed in JS from the overlay's own size, so it is right in portrait, landscape (the stage is rotated by CSS) and Duo.
 const CLOSEUP_DEFS={};
-const closeup={reveal:false,watch:false,dial:false,active:false,def:null,hooks:null,el:null,plate:null,tray:null,sel:0,placed:[],busy:false,coins:[],slotEls:[],order:[],ro:null,wide:false,pad:null,cap:null,glint:null,made:false};
+const closeup={reveal:false,watch:false,dial:false,lever:false,active:false,def:null,hooks:null,el:null,plate:null,tray:null,sel:0,placed:[],busy:false,coins:[],slotEls:[],order:[],ro:null,wide:false,pad:null,cap:null,glint:null,made:false};
 
 function closeupCSS() {
   if(document.getElementById('closeup-css')) return;
@@ -208,6 +208,7 @@ window.addEventListener('keydown',e=>{
   if(!closeup.active||(typeof dialog!=='undefined'&&dialog.active)||e.code==='KeyL') return;
   e.preventDefault(); e.stopImmediatePropagation(); if(e.repeat) return;
   const c=e.code;
+  if(closeup.lever) { if(c==='Enter'||c==='Space'||c==='KeyA') leverPull(); else if(c==='Escape'||c==='KeyB'||c==='Backspace') leverLeave(); return; }
   if(closeup.dial) { if(c==='ArrowLeft'||c==='KeyA') dialMove(-1); else if(c==='ArrowRight'||c==='KeyD') dialMove(1); else if(c==='Enter'||c==='Space') dialPick(); else if(c==='Escape'||c==='KeyB'||c==='Backspace') dialLeave(); return; }
   if(closeup.reveal) { if(c==='Enter'||c==='Space'||c==='Escape'||c==='KeyB'||c==='Backspace'||c==='KeyA') closeupRevealEnd(); return; }
   if(closeup.watch) { if(c==='Enter'||c==='Space'||c==='Escape'||c==='KeyB'||c==='Backspace'||c==='KeyA') closeupWatchAct(); return; }
@@ -220,6 +221,7 @@ window.addEventListener('keyup',e=>{ if(closeup.active&&e.code!=='KeyL') { e.sto
 // Gamepad (called from pollGamepad in engine/main.js).
 function closeupPad(dir,dirEdge,A,B) {
   if(dialog.active) return;
+  if(closeup.lever) { if(A) leverPull(); else if(B) leverLeave(); return; }
   if(closeup.dial) { if(dirEdge&&dir==='left') dialMove(-1); else if(dirEdge&&dir==='right') dialMove(1); if(A) dialPick(); else if(B) dialLeave(); return; }
   if(closeup.reveal) { if(A||B) closeupRevealEnd(); return; }
   if(closeup.watch) { if(A||B) closeupWatchAct(); return; }
@@ -431,4 +433,74 @@ function closeupPlaceDef(o) {
       if(st.seam) st.seam.querySelector('path').style.strokeDashoffset=(1-ease(seg(t,1.7,2.6))).toFixed(3);
     }
   };
+}
+
+// ---------- LEVER mode (claude/closeup-plan.md Row 7): one arm swings about a hub between two stops; A pulls it across ----------
+// closeupLever(id, {to, quick, onDone, onLeave}): def = CLOSEUP_DEFS[id] = { ready, v, bg, pivot:{x,y} (the hub, shares of the plate),
+//   arm:{img, w, h (picture px), hub:[x,y] (shares of the picture), tip (share of the picture height), lean (degrees the arm is drawn clockwise of straight up), len (hub to tip, share of the plate)},
+//   pos:{<name>:degrees clockwise from up where the TIP rests}, lamp:{x,y,r} (optional light that flares at the clunk), caption, pullLabel, doneCaption }.
+// `to` names the stop it ends on; it starts on the other stop (def.pos has two names). Full version: waits for A (or tap, Enter, Space, gamepad A), swings
+// over 0.9 s with a small wind-up, CLUNK, the plate shivers and the lamp flares, then closes by itself. B or Escape before the pull leaves (onLeave).
+// quick:true skips the wait and swings in 0.45 s. onDone runs after the screen has closed.
+function closeupLever(id,o) {
+  o=o||{}; const def=CLOSEUP_DEFS[id];
+  if(!def||!def.ready||closeup.active) { if(o.onDone) o.onDone(); return false; }
+  closeupCSS();
+  const host=document.getElementById('game'); if(!host) { if(o.onDone) o.onDone(); return false; }
+  const names=Object.keys(def.pos), to=o.to||names[1], from=names.find(n=>n!==to)||names[0];
+  const el=closeup.el=cuEl('div','',host); el.id='closeup'; el.hidden=false;
+  closeup.lever=true; closeup.dial=false; closeup.watch=false; closeup.reveal=false; closeup.def=def; closeup.hooks=o; closeup.done=null;
+  closeup.busy=true; closeup.active=true; closeup.lphase='load'; closeup.lfrom=from; closeup.lto=to; closeup.lrot=def.pos[from]-def.arm.lean;
+  const plate=closeup.plate=cuEl('div','cu-plate',el);
+  const bg=cuImg(cuSrc(def,def.bg)); bg.className='cu-bg'; plate.appendChild(bg);
+  if(def.lamp) { const l=closeup.llamp=cuEl('div','cu-w',plate); l.style.borderRadius='50%'; l.style.mixBlendMode='screen'; l.style.opacity='0'; l.style.background='radial-gradient(circle,#ffd98acc 0,#ffb04a66 40%,#ffb04a00 70%)'; }
+  const arm=closeup.larm=cuEl('div','cu-w',plate); arm.style.transformOrigin='0 0'; arm.appendChild(cuImg(cuSrc(def,def.arm.img)));
+  closeup.cap=cuEl('div','cu-cap',el); closeup.cap.textContent=o.quick?'':(def.caption||'');
+  const pad=closeup.pad=cuEl('div','cu-pad',el);
+  const mk=(txt,cls,fn,label)=>{ const b=cuEl('button','cu-b '+cls,pad); b.type='button'; b.textContent=txt; b.setAttribute('aria-label',label); b.addEventListener('click',fn); return b; };
+  if(!o.quick) { mk(def.pullLabel||'A  PULL','a',()=>leverPull(),'Pull the lever'); mk('NOT YET','',()=>leverLeave(),'Leave the lever'); }
+  closeup.ro=window.ResizeObserver?new ResizeObserver(()=>leverLayout()):null; if(closeup.ro) closeup.ro.observe(el);
+  leverLayout(); if(typeof clearInput==='function') clearInput();
+  const imgs=[...el.querySelectorAll('img')];
+  Promise.all(imgs.map(i=>i.decode?i.decode().catch(()=>0):0)).then(()=>setTimeout(()=>{
+    if(!closeup.active||!closeup.lever) return; el.classList.add('on'); closeup.lphase='ready';
+    if(o.quick) setTimeout(leverPull,260); else closeup.busy=false; },30));
+  return true;
+}
+function leverLayout() {
+  if(!closeup.active||!closeup.lever) return;
+  const el=closeup.el,W=el.clientWidth,H=el.clientHeight,def=closeup.def; if(!W||!H) return;
+  const M=10,fs=Math.max(15,Math.min(22,W/20)),below=fs*1.7+56+14;
+  const S=Math.floor(Math.max(120,Math.min(W-2*M,H-2*M-below,720))),px=(W-S)/2,py=Math.max(M,(H-S-below)/2);
+  Object.assign(closeup.plate.style,{left:px+'px',top:py+'px',width:S+'px',height:S+'px'}); closeup.S=S;
+  Object.assign(closeup.cap.style,{left:'0',width:W+'px',top:(py+S+12)+'px',fontSize:fs+'px'});
+  Object.assign(closeup.pad.style,{left:'0',width:W+'px',top:(py+S+12+fs*1.7)+'px'});
+  const a=def.arm, H2=a.len*S/(a.hub[1]-a.tip), W2=H2*a.w/a.h, d=closeup.larm;
+  Object.assign(d.style,{width:W2+'px',height:H2+'px',left:(def.pivot.x*S-a.hub[0]*W2)+'px',top:(def.pivot.y*S-a.hub[1]*H2)+'px',transformOrigin:(a.hub[0]*100)+'% '+(a.hub[1]*100)+'%'});
+  d.querySelector('img').style.cssText='width:100%;height:100%;display:block';
+  if(def.lamp) { const l=closeup.llamp,r=def.lamp.r*S*2; Object.assign(l.style,{width:r+'px',height:r+'px',left:(def.lamp.x*S-r/2)+'px',top:(def.lamp.y*S-r/2)+'px'}); }
+  leverPaint(closeup.lrot);
+}
+function leverPaint(rot) { closeup.lrot=rot; if(closeup.larm) closeup.larm.style.transform='rotate('+rot.toFixed(2)+'deg)'; }
+function leverPull() {
+  if(!closeup.active||!closeup.lever||closeup.lphase!=='ready'||(typeof dialog!=='undefined'&&dialog.active)) return;
+  const def=closeup.def,o=closeup.hooks,quick=!!o.quick; closeup.lphase='swing'; closeup.busy=true; closeup.cap.textContent=''; closeup.pad.style.visibility='hidden';
+  const r0=def.pos[closeup.lfrom]-def.arm.lean, r1=def.pos[closeup.lto]-def.arm.lean, dir=Math.sign(r1-r0), dur=quick?450:900, wind=quick?0:5, t0=performance.now();
+  if(typeof sfx!=='undefined'&&sfx.whoosh) sfx.whoosh();
+  const ease=x=>x<0?0:x>1?1:x*x*(3-2*x);
+  const step=now=>{
+    if(!closeup.active||!closeup.lever) return;
+    const t=Math.min(1,(now-t0)/dur), w=wind?Math.sin(Math.PI*Math.min(1,t/.2))*(t<.2?1:0)*wind:0;   // a small pull back first, against the swing
+    leverPaint(r0+(r1-r0)*ease(t)-dir*w);
+    if(t<1) return requestAnimationFrame(step);
+    closeup.lphase='clunk'; closeupClunk(); closeup.plate.classList.add('shiver');
+    if(closeup.llamp) { const l=closeup.llamp; l.style.transition='opacity .12s'; l.style.opacity='1'; setTimeout(()=>{ l.style.transition='opacity .5s'; l.style.opacity='0'; },160); }
+    if(!quick) closeup.cap.textContent=def.doneCaption||'';
+    setTimeout(()=>{ closeupClose(()=>{ closeup.lever=false; if(o.onDone) o.onDone(); }); },quick?200:750);
+  };
+  requestAnimationFrame(step);
+}
+function leverLeave() {
+  if(!closeup.active||!closeup.lever||closeup.lphase!=='ready'||closeup.busy||(typeof dialog!=='undefined'&&dialog.active)) return;
+  const o=closeup.hooks; closeupClose(()=>{ closeup.lever=false; if(o&&o.onLeave) o.onLeave(); });
 }
