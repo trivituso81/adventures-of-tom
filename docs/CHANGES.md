@@ -1,3 +1,9 @@
+## 2026-11-12 (washvoice1): Mr. Washington sounds like an older African American man, a male match for Miss Odette (no tag, data/voice-index.json is always fetched)
+- Tom 23:26: recast Mr. Washington or reuse a voice with an accent modifier, so he sounds like a male Miss Odette, an older African American man.
+- No new ElevenLabs voice (account full at 30; Tom 18:30 "i can't do any new voices"). He keeps his own voice (ARRjeRIXQjOrcraWRDoq, the deepest elderly male voice cast) and now has `accent` "older African American man, warm Louisiana drawl" written into every bracket of all 32 of his scripts (tools/voice-library/make-index.js ACCENT, same mechanism as Boppy, Justin and Amy).
+- The Narrator copies Washington's voice id before the accent is set, so narration is unchanged (checked in data/voice-index.json).
+- All 32 baked Washington clips are marked Old voice (`node tools/voice-library/old-voice.js washington HEAD 2026-11-12T23:30:00-08:00`), so ADMIN > VOICE LIBRARY, Show > Old voice lists exactly the lines to re-record. Baked clips keep playing until his new takes are merged.
+- Not done: no take generated or heard (it spends Tom's credits). If the accent tag alone does not change him enough, the next step is a Voice Design that replaces his voice in the same slot (the Narrator would then need its own source voice).
 ## 2026-11-12 (narr1): narration boxes that were labelled with a character are now the Narrator (tag narr1)
 - Tom 23:21: "There are still many examples of when a character is narrating and is making the character's voice narrate instead of the narrator. I need you to scan the entire game dialog for those instances."
 - Scan (fact): all 4,226 dialogue lines from tools/voice-library/harvest.json (scenes, NPCs, monsters, cab, travel, shops). Filters: no first or second person words, then third-person action sentences, then every line over 45 characters read by hand (about 800 lines read).

@@ -135,8 +135,11 @@ for(const id of ['boppy','justin']) for(const k of ['battle|'+id,'dialog|'+id]){
 // Accent in EVERY bracket (Boppy and Justin since 2026-11-01; Amy added 2026-11-12, `amyaccent1`: Tom heard her Long Island accent
 // come and go, because her voice direction only reached the first bracket of each script and 230 of her 289 scripts have two or three).
 // `accent` on the voice entry makes voices.html show and send it in every bracket whatever the script's source (index, history, Tom's edit).
-const ACCENT={boppy:'thick New York accent',justin:'thick New York accent',amy:'heavy Long Island accent'};
-const ACCENT_HAS={boppy:/new york/i,justin:/new york/i,amy:/long island/i};
+// Mr. Washington (Tom 2026-11-12 23:26, `washvoice1`): "a male version of Miss Odette, an older African-American man voice". No new voice
+// (the account is full at 30, Tom 18:30): he keeps his own ElevenLabs voice and carries this accent in every bracket. The Narrator
+// copies his voice id above, before this, so narration does not get the accent.
+const ACCENT={boppy:'thick New York accent',justin:'thick New York accent',amy:'heavy Long Island accent',washington:'older African American man, warm Louisiana drawl'};
+const ACCENT_HAS={boppy:/new york/i,justin:/new york/i,amy:/long island/i,washington:/african american/i};
 for(const id in ACCENT) for(const k of ['battle|'+id,'dialog|'+id]) if(voices[k]) voices[k].accent=ACCENT[id];
 const vname=id=>id[0]==='?'?id.slice(1):(NAMES[id]||(CAST.voices[id]&&CAST.voices[id].name)||id);
 // Merge effects: battle clips only deepen Boppy (tools/battle-baker/merge.js); dialogue adds speaker or voice fx, Boppy, Grace shrink (tools/clip-audit/merge.py).
