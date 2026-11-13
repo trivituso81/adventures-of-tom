@@ -18786,8 +18786,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or several states.\n\nATTACHED IMAGE\n1) The finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE PICTURE\nA round school hallway wall clock, seen close and straight on. It is a close-up, straight-on picture that fills the whole square. It is the still background of a close-up screen: the game will lay moving pieces on top of it, so it shows ONLY the fixed part and nothing that can change.\n- A plain round white clock face with a ring of plain, bold black numbers from 1 to 12 in their normal places, and a ring of small black tick marks outside the numbers. A sturdy steel rim all round. The clock fills most of the picture and is centered.\n- Behind it, an institutional school hallway wall: pale painted cinder block in a soft cream-green, a little scuffed.\n- In the exact center of the face is a small empty round pivot hole where the hands would attach.\n- The clock has NO HANDS at all: no hour hand, no minute hand, no second hand, nothing across the face.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- No people, no hands, no faces, no characters, no creatures, no frame or border around the picture.\n- Family friendly for children aged 6 and up.\n- Soft, even daylight from the upper left, with a small glint on the steel rim.\n- No words, letters or numbers anywhere unless the description above says to paint them."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/closeup-ch5-hands-v1.png",
+     "date": "2026-11-13",
+     "from": "v1",
+     "at": 1794536067193
+    }
+   ],
    "rejects": [],
    "id": "closeup-ch5-hands",
    "tab": "Props",
