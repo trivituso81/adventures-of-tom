@@ -205,8 +205,8 @@ SCENES.ch13After=()=>[
   {talk:'Penny',lines:['(through the glass) Tom! I’m so sorry! Nickel, hold up the drawer! I’ve got mine!']},
   {talk:'Nickel',lines:['Eleven coins. Hers and mine. On three.']},
   {talk:'Penny',lines:['(through the glass) One. Two. Don’t think about the interest. Three.']},
-  {call:()=>{ sfx.charge&&sfx.charge(); setFlag('ch13-melt'); }}, {wait:3.4},
-  {call:()=>{ const m=worlds.subchamber; if(m) for(const x of [21,22]) tile(m,x,5,'subgold',false); setFlag('ch13-melted'); sfx.ding&&sfx.ding(); }},
+  {closeupWatch:'ch13'},   // the close-up of the eleven coins melting the amber (data/closeup-ch13.js) replaces the old 3.4 second wait
+  {call:()=>{ const m=worlds.subchamber; if(m) for(const x of [21,22]) tile(m,x,5,'subgold',false); setFlag('ch13-melt'); setFlag('ch13-melted'); }},
   {talk:'Tom',lines:['The coins glow, and then they run. Gold down the glass like honey. The amber sighs and opens. Right at the height of a door.']},
   {talk:'Sal',lines:['It worked! Gold remembers being warm! I told you! Nobody ever believes the cab driver!']},
   {walk:'Sal',to:[[22,5],[22,6],[22,7],[21,7],[20,7],[19,7],[18,7]],speed:.28},

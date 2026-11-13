@@ -4,10 +4,9 @@
 //   concrete platform with a yellow tactile edge), 'subtrack' (rails and ties on gravel), 'subdirt' (cave floor), 'subamber' (a pane of Long
 //   Island's dome seen from below), 'subgold' (molten gold where the coins melted a doorway), 'subvoid'.
 //   Props: subconsole, submap, subsign, subvend, subcrate, subbench, subhandcar, sublamp, subtrain, subcable, subrubble.
-//   Map effects (wraps b7DrawMapFx): the amber plate tints the pocket behind it until the coins melt it (flag ch13-melt: gold runs down the
-//   glass for about three seconds); HUSH-9 (an NPC with `hush`) gives off pale rings and a SHH; Warden Boppy (an NPC with `armor`) wears gold plate
+//   Map effects (wraps b7DrawMapFx): the amber plate tints the pocket behind it until the coins melt it (the melt is the close-up, data/closeup-ch13.js); HUSH-9 (an NPC with `hush`) gives off pale rings and a SHH; Warden Boppy (an NPC with `armor`) wears gold plate
 //   and a slow aura. Also the minimap, the battle backdrops, and the baked-music mapping for the three new maps.
-// Story state read here: flags ch13-melt (the plate is melting), ch13-melted (the doorway is open), ch13-worm (the Worm is up).
+// Story state read here: flags ch13-melt (the close-up has played), ch13-melted (the doorway is open), ch13-worm (the Worm is up).
 // Wraps drawOutdoorTile, drawObject, buildMiniBase, b7DrawMapFx and mcAreaTrack. Loaded after engine/ch12-render.js.
 const LE_drawOutdoorTile_ch13=drawOutdoorTile,LE_drawObject_ch13=drawObject,LE_buildMiniBase_ch13=buildMiniBase,
   LE_b7DrawMapFx_ch13=b7DrawMapFx;
@@ -158,7 +157,6 @@ buildMiniBase=function(map) {
 // The tunnel: a tiled wall, a work light, the platform and two rails running away. The chamber: raw rock, a wall of amber glowing on the right.
 // ---------- Map effects ----------
 // The amber plate and its pocket (chamber), HUSH-9's rings (an NPC with `hush`), Boppy's gold plate (an NPC with `armor`).
-let ch13MeltT=-1,ch13MeltSeen=false,ch13Last=0;
 // Painted chamber (art/subchamber.webp): the amber wall is already in the painting. Until the coins melt it, a veil of the same painting is
 // laid back over the glass at 62% so Sal and Penny read as standing behind it; the veil fades as the gold runs. Gold then runs down the
 // glass and the doorway (tiles 21,5 and 22,5) glows, and stays faintly lit once it is open.
@@ -224,14 +222,10 @@ function ch13Armor(n,time) {
 }
 b7DrawMapFx=function(time) {
   LE_b7DrawMapFx_ch13(time);
-  const dt=Math.min(.1,Math.max(0,time-ch13Last)); ch13Last=time;
   if(typeof STORY==='undefined'||STORY.mode!=='full') return;
   if(currentMap.id==='subchamber') {
     const melted=!!flag('ch13-melted');
-    if(flag('ch13-melt')&&!ch13MeltSeen) { ch13MeltSeen=true; ch13MeltT=0; }
-    if(!flag('ch13-melt')) { ch13MeltSeen=false; ch13MeltT=-1; }
-    if(ch13MeltT>=0) ch13MeltT=Math.min(3,ch13MeltT+dt);
-    const melt=melted?1:ch13MeltT>=0?ch13MeltT/3:0;
+    const melt=melted?1:0;   // the melting itself is the close-up (data/closeup-ch13.js); the map shows the closed or the open wall
     if(melt<1||(typeof plateFor==='function'&&plateFor(currentMap))) ch13Plate(time,melt);
   }
   for(const n of currentMap.npcs) { if(n.hidden) continue; if(n.hush) ch13Hush(n,time); if(n.armor) ch13Armor(n,time); }

@@ -12,7 +12,7 @@
 // pad inside the screen (the normal controls are hidden while it is open). The game under it is paused (update() returns early).
 // Layout is computed in JS from the overlay's own size, so it is right in portrait, landscape (the stage is rotated by CSS) and Duo.
 const CLOSEUP_DEFS={};
-const closeup={reveal:false,active:false,def:null,hooks:null,el:null,plate:null,tray:null,sel:0,placed:[],busy:false,coins:[],slotEls:[],order:[],ro:null,wide:false,pad:null,cap:null,glint:null,made:false};
+const closeup={reveal:false,watch:false,active:false,def:null,hooks:null,el:null,plate:null,tray:null,sel:0,placed:[],busy:false,coins:[],slotEls:[],order:[],ro:null,wide:false,pad:null,cap:null,glint:null,made:false};
 
 function closeupCSS() {
   if(document.getElementById('closeup-css')) return;
@@ -48,6 +48,10 @@ main:has(#closeup:not([hidden])) #controls{visibility:hidden}
 #closeup .cu-rev img{width:100%;height:100%;display:block}
 #closeup .cu-rev.settled .cu-spin{animation:cuBob 2.6s ease-in-out infinite}
 #closeup .cu-sun{position:absolute;border-radius:50%;pointer-events:none;background:radial-gradient(circle,#ffe9a066 0,#ffd24a00 68%);animation:cuSun 2.6s ease-in-out infinite}
+#closeup.watch{background:radial-gradient(ellipse at 50% 40%,#2a1d12,#0b0805 80%)}
+#closeup .cu-w{position:absolute;pointer-events:none;will-change:transform,opacity}
+#closeup .cu-w img{width:100%;height:100%;display:block}
+#closeup .cu-wash{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 40%,#fff6c0 0,#ffd24a99 40%,#ff9a2000 80%);opacity:0}
 @keyframes cuRise{0%{transform:translateY(60%) rotateY(0) scale(.35);opacity:0}30%{opacity:1}100%{transform:translateY(0) rotateY(360deg) scale(1);opacity:1}}
 @keyframes cuBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5%)}}
 @keyframes cuSun{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
@@ -201,6 +205,7 @@ window.addEventListener('keydown',e=>{
   e.preventDefault(); e.stopImmediatePropagation(); if(e.repeat) return;
   const c=e.code;
   if(closeup.reveal) { if(c==='Enter'||c==='Space'||c==='Escape'||c==='KeyB'||c==='Backspace'||c==='KeyA') closeupRevealEnd(); return; }
+  if(closeup.watch) { if(c==='Enter'||c==='Space'||c==='Escape'||c==='KeyB'||c==='Backspace'||c==='KeyA') closeupWatchAct(); return; }
   if(c==='ArrowLeft'||c==='KeyA') closeupMove(-1); else if(c==='ArrowRight'||c==='KeyD') closeupMove(1);
   else if(c==='ArrowUp'||c==='KeyW') closeupMove(-1,true); else if(c==='ArrowDown'||c==='KeyS') closeupMove(1,true);
   else if(c==='Enter'||c==='Space') closeupPick(closeup.sel);
@@ -211,6 +216,7 @@ window.addEventListener('keyup',e=>{ if(closeup.active&&e.code!=='KeyL') { e.sto
 function closeupPad(dir,dirEdge,A,B) {
   if(dialog.active) return;
   if(closeup.reveal) { if(A||B) closeupRevealEnd(); return; }
+  if(closeup.watch) { if(A||B) closeupWatchAct(); return; }
   if(dirEdge&&dir) { if(dir==='left') closeupMove(-1); else if(dir==='right') closeupMove(1); else closeupMove(dir==='up'?-1:1,true); }
   if(A) closeupPick(closeup.sel); else if(B) closeupLeave();
 }
@@ -251,4 +257,61 @@ function closeupRevealEnd() {
   if(!closeup.active||!closeup.reveal||closeup.busy||(typeof dialog!=='undefined'&&dialog.active)) return;
   const after=closeup.done; closeup.done=null; if(typeof sfx!=='undefined'&&sfx.select) sfx.select();
   closeupClose(()=>{ closeup.reveal=false; if(after) after(); });
+}
+
+// ---------- WATCH mode (Tom 2026-11-12, claude/closeup-plan.md Row 1): a painted plate with a scripted animation that plays once ----------
+// closeupWatch(id, onDone): def = CLOSEUP_DEFS[id] = { ready, v, bg, dur, startLabel, startCaption, endCaption, build(box,S)->state, frame(t,S,state) }.
+// A at the start plays it; A while it plays skips to the end state; A at the end continues (onDone). B, Escape, tap and gamepad do the same as A.
+// The def draws everything inside `box` (the square plate, overflow hidden) from the time t in seconds, so the layout can change under it.
+function closeupWatch(id,onDone) {
+  const def=CLOSEUP_DEFS[id];
+  if(!def||!def.ready||closeup.active) { if(onDone) onDone(); return false; }
+  closeupCSS();
+  const host=document.getElementById('game'); if(!host) { if(onDone) onDone(); return false; }
+  const el=closeup.el=cuEl('div','watch',host); el.id='closeup'; el.hidden=false; closeup.watch=true; closeup.def=def; closeup.hooks={}; closeup.done=onDone||null;
+  closeup.busy=true; closeup.active=true; closeup.wphase='load'; closeup.wt=0;
+  const plate=closeup.plate=cuEl('div','cu-plate',el); const bg=cuImg(cuSrc(def,def.bg)); bg.className='cu-bg'; plate.appendChild(bg);
+  closeup.wstate=def.build(plate);
+  const cap=closeup.cap=cuEl('div','cu-cap',el); cap.textContent=def.startCaption||'';
+  const pad=closeup.pad=cuEl('div','cu-pad',el);
+  const b=closeup.wbtn=cuEl('button','cu-b a',pad); b.type='button'; b.textContent=def.startLabel||'A'; b.setAttribute('aria-label','Continue'); b.addEventListener('click',closeupWatchAct);
+  el.addEventListener('click',closeupWatchAct);
+  const lay=()=>{
+    const W=el.clientWidth,H=el.clientHeight; if(!W||!H) return; const M=10,fs=Math.max(15,Math.min(22,W/20)),below=fs*1.7+56+14;
+    const S=Math.floor(Math.max(120,Math.min(W-2*M,H-2*M-below,720))),px=(W-S)/2,py=Math.max(M,(H-S-below)/2);
+    Object.assign(plate.style,{left:px+'px',top:py+'px',width:S+'px',height:S+'px'}); closeup.S=S;
+    Object.assign(cap.style,{left:'0',width:W+'px',top:(py+S+12)+'px',fontSize:fs+'px'});
+    Object.assign(pad.style,{left:'0',width:W+'px',top:(py+S+12+fs*1.7)+'px'});
+    def.frame(closeup.wt,S,closeup.wstate);
+  };
+  closeup.ro=window.ResizeObserver?new ResizeObserver(lay):null; if(closeup.ro) closeup.ro.observe(el);
+  lay(); if(typeof clearInput==='function') clearInput();
+  const imgs=[...el.querySelectorAll('img')];
+  Promise.all(imgs.map(i=>i.decode?i.decode().catch(()=>0):0)).then(()=>setTimeout(()=>{
+    if(!closeup.active||!closeup.watch) return; el.classList.add('on'); closeup.busy=false; closeup.wphase='ready'; },30));
+  return true;
+}
+function closeupWatchAct() {
+  if(!closeup.active||!closeup.watch||(typeof dialog!=='undefined'&&dialog.active)) return;
+  const def=closeup.def;
+  if(closeup.wphase==='ready') {
+    closeup.wphase='play'; closeup.wbtn.textContent=def.skipLabel||'A  SKIP'; closeup.cap.textContent=''; const t0=performance.now(); let last=-1;
+    if(def.onStart) def.onStart();
+    const step=now=>{
+      if(!closeup.active||!closeup.watch||closeup.wphase!=='play') return;
+      const t=Math.min(def.dur,(now-t0)/1000); closeup.wt=t; def.frame(t,closeup.S,closeup.wstate);
+      if(def.cues) for(const c of def.cues) if(c.at>last&&c.at<=t) c.fn();
+      last=t; if(t>=def.dur) return closeupWatchEnd(); requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  } else if(closeup.wphase==='play') {
+    closeup.wphase='skip'; closeup.wt=def.dur; def.frame(def.dur,closeup.S,closeup.wstate); closeupWatchEnd();
+  } else if(closeup.wphase==='end') {
+    closeup.wphase='out'; const after=closeup.done; closeup.done=null; if(typeof sfx!=='undefined'&&sfx.select) sfx.select();
+    closeupClose(()=>{ closeup.watch=false; if(after) after(); });
+  }
+}
+function closeupWatchEnd() {
+  closeup.wphase='end'; const def=closeup.def; closeup.cap.textContent=def.endCaption||''; closeup.wbtn.textContent='A  CONTINUE';
+  if(def.onEnd) def.onEnd();
 }
