@@ -49,10 +49,11 @@ function emoActorById(id) {
   const n=currentMap&&currentMap.npcs.find(x=>!x.monster&&!x.hidden&&x.name&&String(DIALOG_PORTRAIT_IDS[x.name.toLowerCase()]||'').replace(/^npc_/,'')===id);
   return n||null;
 }
-// The painted mood poses only face the camera. Surprised, scared and angry are aimed at something, so the pose is used only when the person already
-// faces the camera ('down'); otherwise they keep their normal sprite, turned toward what they react to (pieface2, Tom 2026-11-12). Other moods are not aimed.
-const EMO_AIMED=new Set(['surprised','scared','angry']);
-const emoFrontOk=(a,mood)=>!EMO_AIMED.has(mood)||!a.facing||a.facing==='down';
+// The painted mood poses only face the camera, so a pose is used only when the person already faces the camera ('down'); otherwise they keep
+// their normal sprite, turned toward the people they talk with or the thing they react to. First for surprised, scared and angry (pieface2), then
+// for every mood (close1, Tom 2026-11-12: after the opening all three stood facing the camera instead of each other). The mood face in the
+// dialogue box still shows every mood.
+const emoFrontOk=a=>!a.facing||a.facing==='down';
 function emoClear() {
   if(EMO.actor&&EMO.actor.scenePose&&EMO.actor.scenePose.emo) EMO.actor.scenePose=null;
   for(const a of EMO.listeners) if(a.scenePose&&a.scenePose.emo) a.scenePose=null;
@@ -66,7 +67,7 @@ function emoReact(speakerId,text) {
     if(lid===speakerId||typeof EMOTION_FACES==='undefined'||!EMOTION_FACES.includes(lid)) continue;
     if(typeof storyPosesLoad==='function') storyPosesLoad(lid);
     const a=emoActorById(lid);
-    if(a&&!a.scenePose&&emoFrontOk(a,mood)&&typeof STORY_POSES!=='undefined'&&STORY_POSES[lid]&&STORY_POSES[lid]['em_'+mood]) { a.scenePose={f:'em_'+mood,mid:lid,emo:true}; EMO.listeners.push(a); }
+    if(a&&!a.scenePose&&emoFrontOk(a)&&typeof STORY_POSES!=='undefined'&&STORY_POSES[lid]&&STORY_POSES[lid]['em_'+mood]) { a.scenePose={f:'em_'+mood,mid:lid,emo:true}; EMO.listeners.push(a); }
   }
 }
 function emoApply() {
@@ -82,7 +83,7 @@ function emoApply() {
   if(img) { img.src='portraits/emo/'+id+'-'+mood+'.webp?v='+EMO_V; img.alt=''; box.hidden=false; $('dialog').classList.add('has-portrait'); fitDialogPortrait(); }
   EMO.mood=mood; EMO.id=id;
   const a=emoActorFor(id,dialog.name,dialog.npc);
-  if(a&&!a.scenePose&&emoFrontOk(a,mood)&&typeof STORY_POSES!=='undefined'&&STORY_POSES[id]&&STORY_POSES[id]['em_'+mood]) {
+  if(a&&!a.scenePose&&emoFrontOk(a)&&typeof STORY_POSES!=='undefined'&&STORY_POSES[id]&&STORY_POSES[id]['em_'+mood]) {
     if(typeof storyPosesLoad==='function') storyPosesLoad(id);
     a.scenePose={f:'em_'+mood,mid:id,emo:true}; EMO.actor=a;
   }

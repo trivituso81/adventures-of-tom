@@ -121,7 +121,8 @@ function bossFinaleStep(id) {
       if(!n) return;
       const last=spec.seq[spec.seq.length-1];
       if(spec.end==='leave') { n.scenePose=null; n.scr=null; n.fin=null; monsterFall(n,true); }
-      else { n.scr=null; n.fin={glow:Math.max(0,last.glow!==undefined?(Array.isArray(last.glow)?last.glow[1]:last.glow):0)*.6}; n.bossSettle=true; }
+      else { if(!spec.path) n.scr=null;   // a boss that travelled (The Big One dives into the pond) stays where it landed, not back on its start tile (bossbox1)
+        n.fin={glow:Math.max(0,last.glow!==undefined?(Array.isArray(last.glow)?last.glow[1]:last.glow):0)*.6}; n.bossSettle=true; }
       if(spec.julian) { const j=bossActor('julian'); if(j&&FOE_END&&FOE_END.julian) bossFrame('julian',spec.julian); }
     }
   };

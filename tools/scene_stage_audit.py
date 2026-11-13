@@ -3,6 +3,7 @@
 #   overlap   two people share a column within two rows (the same rule the boss staging uses: stageApart in engine/story.js)
 #   offcenter the group stands tight against walls or the map edge instead of in open floor (clearance test, see score())
 #   hidden    a party member stands where painted scenery (gate boards, trees) covers them
+#   apart     a party member the scene did not pose or place stands away from the group (close1, hudTight in engine/story.js)
 #   facing    someone faces away from the rest of the group (dot product of facing and the direction to the others <= 0)
 # Usage (repo root):  python3 tools/scene_stage_audit.py run OUT [filter ...]   filter = trigger id prefixes (ch1-, ns-) or ids
 #                     python3 tools/scene_stage_audit.py report OUT [--all]      prints the table (failing scenes unless --all)
@@ -52,11 +53,13 @@ SETUP=r"""(C)=>{ const L=window.__LE; splash.active=false; document.getElementBy
 # People in the scene: the party (Tom and followers) plus every map NPC a scene is holding (held or scripted); the NPC a line names is held by {huddle} first.
 SNAP=r"""()=>{ const P=a=>{ const p=position(a); return [Math.round(p.x*100)/100,Math.round(p.y*100)/100]; };
   const memo=new Map(),H=a=>{ const q=position(a); return typeof huddleHidden==='function'?huddleHidden(currentMap,Math.round(q.x),Math.round(q.y),memo):false; };
-  const people=[{id:'tom',kind:'party',pos:P(player),facing:player.facing,posed:!!player.scenePose,hid:H(player)}];
-  for(const f of followers) if(!f.hidden&&party.includes(f.member)&&!f.seat) people.push({id:f.member.id,kind:'party',pos:P(f),facing:f.facing,posed:!!(f.scenePose||f.scr),hid:H(f)});
+  const posed=a=>!!((a.scenePose&&!a.scenePose.emo)||a.scr);   // a mood pose is not choreography: the person must still face the group (close1)
+  const people=[{id:'tom',kind:'party',pos:P(player),facing:player.facing,posed:posed(player),placed:!!player.stagePlaced,hid:H(player)}];
+  for(const f of followers) if(!f.hidden&&party.includes(f.member)&&!f.seat) people.push({id:f.member.id,kind:'party',pos:P(f),facing:f.facing,posed:posed(f),placed:!!f.stagePlaced,hid:H(f)});
   const pp=P(player);
   for(const n of currentMap.npcs){ if(n.hidden||followers.includes(n)) continue; const q=P(n);
-    if(n.held||n.scripted||n.name===dialog.name) people.push({id:n.name,kind:n.monster?'monster':'npc',pos:q,facing:n.facing,held:!!n.held||!!n.scripted,posed:!!n.scenePose}); }
+    if(n.monster&&!(n.held||n.scripted||n.name===dialog.name)) { if(Math.hypot(q[0]-pp[0],q[1]-pp[1])<=10) people.push({id:n.name||n.monster,kind:'monster',pos:q,facing:n.facing,held:false,posed:true}); continue; }
+    if(n.held||n.scripted||n.name===dialog.name) people.push({id:n.name,kind:n.monster?'monster':'npc',pos:q,facing:n.facing,held:!!n.held||!!n.scripted,posed:!!(n.scenePose&&!n.scenePose.emo)}); }
   const w=currentMap.w||(currentMap.plateMask&&currentMap.plateMask[0].length)||0,h=currentMap.h||(currentMap.plateMask&&currentMap.plateMask.length)||0;
   return {who:dialog.name,idx:dialog.index,map:currentMap.id,w,h,people};
 }"""
@@ -132,13 +135,24 @@ def score(snap,grid,clr):
     hid=[p['id'] for p in grp if p['kind']=='party' and p.get('hid') and not p.get('posed')]
     if hid: fails.append(('hidden','behind painted scenery: '+','.join(hid)))
     elif best>=2 and here<=0.5*best and here<=1: fails.append(('offcenter',f'centroid clearance {here} of {best}'))
+    # apart (close1): every party member the scene did not pose or place itself stands with the group: linked to Tom through neighbours
+    # one column over (up to two rows off) or three rows off in the same column. Same rule as hudTight in engine/story.js.
+    near=lambda a,b: math.hypot(a[0]-b[0],(a[1]-b[1])/2)<=1.5
+    seen={grp.index(tom)}; q=[grp.index(tom)]
+    while q:
+        i=q.pop()
+        for j in range(len(grp)):
+            if j not in seen and near(P[i],P[j]): seen.add(j); q.append(j)
+    far=[p['id'] for j,p in enumerate(grp) if p['kind']=='party' and j not in seen and not p.get('posed') and not p.get('placed')]
+    if far and not tom.get('posed') and not tom.get('placed'): fails.append(('apart','stands apart from the group: '+','.join(far)))
     # facing: each person should face somewhere toward the others (not away from them)
     for p,(x,y) in zip(grp,P):
-        if p.get('posed') or p['facing'] not in DIRV: continue
+        if p.get('posed') or p['kind']=='monster' or p['facing'] not in DIRV: continue   # monsters keep their painted direction
         ox=[(a,b) for q,(a,b) in zip(grp,P) if q is not p]
         mx=sum(a for a,b in ox)/len(ox)-x; my=sum(b for a,b in ox)/len(ox)-y
-        if abs(mx)<.01 and abs(my)<.01: continue
+        if abs(mx)<.25 and abs(my)<.25: continue   # in the middle of the others: faces the camera
         fx,fy=DIRV[p['facing']]
+        if any(fx*(m['pos'][0]-x)+fy*(m['pos'][1]-y)>0 for m in snap['people'] if m['kind']=='monster'): continue   # looking at a monster or the boss (bossbox1)
         if fx*mx+fy*my<=0: fails.append(('facing',f"{p['id']} faces {p['facing']}"))
     return fails,grp
 
@@ -236,10 +250,10 @@ def report(out,show_all=False):
         rows.append((T['id'],T['scene'],T['map'],len(d['snaps']),kinds,pages))
     bad=[r for r in rows if r[4]]
     print(f"{len(rows)} scenes audited, {len(bad)} with at least one failing page")
-    print('| trigger | scene | map | pages | overlap | offcenter | hidden | facing | first failing page |'); print('|---|---|---|---|---|---|---|---|---|')
+    print('| trigger | scene | map | pages | overlap | offcenter | hidden | apart | facing | first failing page |'); print('|---|---|---|---|---|---|---|---|---|---|')
     for r in (rows if show_all else bad):
         k=r[4]; first=f"p{r[5][0][0]}: "+'; '.join(f"{a} {b}" for a,b in r[5][0][1])[:90] if r[5] else ''
-        print(f"| {r[0]} | {r[1]} | {r[2]} | {r[3]} | {k.get('overlap',0)} | {k.get('offcenter',0)} | {k.get('hidden',0)} | {k.get('facing',0)} | {first} |")
+        print(f"| {r[0]} | {r[1]} | {r[2]} | {r[3]} | {k.get('overlap',0)} | {k.get('offcenter',0)} | {k.get('hidden',0)} | {k.get('apart',0)} | {k.get('facing',0)} | {first} |")
 
 if __name__=='__main__':
     if len(sys.argv)<3: print(__doc__); sys.exit(1)
