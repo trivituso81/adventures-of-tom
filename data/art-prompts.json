@@ -18609,8 +18609,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or several states.\n\nATTACHED IMAGE\n1) The finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE PICTURE\nA wall of thick, clear, honey-colored amber glass seen close and straight on. It is a close-up, straight-on picture that fills the whole square. It is the still background of a close-up screen: the game will lay moving pieces on top of it, so it shows ONLY the fixed part and nothing that can change.\n- The amber fills the whole picture: thick, glossy, sticky and honey-like on its surface, with soft drifting swirls and a few tiny trapped air bubbles deep inside. Warm light glows through it from behind, brightest in the middle and deeper orange toward the edges.\n- Only in the very four corners and along the left and right edges, a little dark rough tunnel stone shows, framing the amber.\n- The amber is completely CLOSED and WHOLE: no opening, no crack, no hole, no door shape, no coin, no drip, nothing in it or on it.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- No people, no hands, no faces, no characters, no creatures, no frame or border around the picture.\n- Family friendly for children aged 6 and up.\n- Warm amber glow from behind the glass, with a faint golden highlight along the upper left of the glossy surface.\n- No words, letters or numbers anywhere unless the description above says to paint them."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/closeup-ch13-parts-v1.png",
+     "date": "2026-11-13",
+     "from": "v1",
+     "at": 1794535976594
+    }
+   ],
    "rejects": [],
    "id": "closeup-ch13-parts",
    "tab": "Props",
