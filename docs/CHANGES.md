@@ -1,3 +1,9 @@
+## 2026-11-12 (tnbface1): chapter 11, everyone faces TNB while he talks with the group (tag tnbface1)
+- Tom 18:06: in chapter 11 when the group meets Nara and TNB, Grace faces Rose but she should face TNB.
+- Fact (cause): the conversation staging (`huddleTurn`, engine/story.js) turns every person toward the middle of the others, and TNB (not in the party yet) was not counted, so Grace looked at Rose or Tom.
+- Fix: new optional `lookAt:'Name'` on a talk step; the staging turns everyone who can turn, except that person, to face them. Used on every line of `SCENES.ch11Meet` from TNB's first line to the sleepover rules. No line reworded, no voice touched.
+- Tested in a real browser (tools/reaction_test.py, chapter 11, ch11Meet, portrait): Grace faces TNB on every page, 0 page errors.
+
 ## 2026-11-12 (nextchap1): no chapter ever says the next chapter is still being built (tag nextchap1)
 - Tom 18:12: at the end of chapter 11 the game said chapter 12 was being built, but all chapters are built; never say it at the end of any chapter.
 - Fact: the end-of-chapter toasts after chapters 1, 7, 8, 11, 12, 14, 15, 17, 18, 19 said "Chapter N+1 is still being built"; the quest log's generic completed-chapter line (`currentObjective`, engine/story.js) said it for every chapter without its own line. Removed all of them. Goal toasts that began "Chapter N is coming." (14, 15, 17, 18, 19) now keep only their story sentence.

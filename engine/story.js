@@ -520,6 +520,9 @@ function huddleTurn(g) {   // everyone who can turn faces the middle of the othe
   all.forEach((a,i)=>{ if(!huddleTurns(g,a)) return; const o=P.filter((_,j)=>j!==i); if(!o.length) return;
     const mx=o.reduce((s,p)=>s+p.x,0)/o.length-P[i].x,my=o.reduce((s,p)=>s+p.y,0)/o.length-P[i].y;
     if(mx||my) a.facing=directionTo(mx,my); });
+  // lookAt (a talk step's `lookAt:'TNB'`): everyone who can turn, except that person, faces them instead of the middle of the group (Tom 2026-11-12: Grace faced Rose, not TNB)
+  const la=g.lookAt; if(la) { const lp=stagePos(la);
+    all.forEach((a,i)=>{ if(a===la||!huddleTurns(g,a)) return; const dx=lp.x-P[i].x,dy=lp.y-P[i].y; if(dx||dy) a.facing=directionTo(dx,dy); }); }
 }
 // Open-floor slots for the movers: try centres around the anchor, fill slots greedily on a ring (one column each), keep the cheapest layout.
 // Tom stays where he is when his tile is fine (the layout is built around him); only when no good layout exists with Tom in place does Tom walk too.
@@ -568,7 +571,7 @@ function huddleLayout(g,clr,tomMoves,memo) {
 }
 function huddleStep(o) {
   return {start(){
-      this.moves=[]; this.g=huddleGroup(o.with,o.focus);
+      this.moves=[]; this.g=huddleGroup(o.with,o.focus); this.g.lookAt=o.lookAt?sceneActor(o.lookAt):null;
       const g=this.g,all=[...g.roster,...g.others]; if(all.length<2) return;
       const clr=huddleClear(currentMap),memo=new Map(),fails=huddleFails(g,clr,memo);
       if(!fails.size) return;
@@ -643,7 +646,7 @@ function playScene(script,opts={}) {
   for(const f of [...followers,player]) { f.stagePlaced=false; f.stageFaced=false; }
   if(sid&&BOSS_STAGE[sid]&&Array.isArray(list)) { const fc=BOSS_STAGE[sid]; list=stageScript(list,fc,(first,st)=>[first?{gather:fc}:{gather:fc,check:true},{huddle:true,focus:fc,with:st&&typeof st.talk==='string'?st.talk:null}]); }
   // opts.stage: a wrapper script (playScene(()=>[...])) that should be staged like a SCENES id (facing1: the Part 2 opening).
-  else if((sid||opts.stage)&&Array.isArray(list)&&!JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v).includes('"gather"')) list=stageScript(list,null,(first,st)=>({huddle:true,with:st&&typeof st.talk==='string'?st.talk:null}));
+  else if((sid||opts.stage)&&Array.isArray(list)&&!JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v).includes('"gather"')) list=stageScript(list,null,(first,st)=>({huddle:true,with:st&&typeof st.talk==='string'?st.talk:null,lookAt:st&&typeof st.lookAt==='string'?st.lookAt:null}));
   intro.active=true; intro.phase='scene'; intro.cur=null; intro.fadeLock=false;
   intro.fade=opts.fade||0;
   intro.steps=compileScene(list);
