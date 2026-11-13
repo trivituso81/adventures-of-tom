@@ -401,6 +401,12 @@ document.addEventListener('visibilitychange',()=>{
 });
 
 window.addEventListener('resize',applyLayout);
+window.addEventListener('orientationchange',fitViewportSoon);
+window.addEventListener('pageshow',fitViewportSoon);
+window.addEventListener('focus',fitViewportSoon);
+window.addEventListener('scroll',()=>{ if(window.scrollX||window.scrollY) window.scrollTo(0,0); },{passive:true});
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden) fitViewportSoon(); });
+if(window.visualViewport) { window.visualViewport.addEventListener('resize',fitViewport); window.visualViewport.addEventListener('scroll',fitViewport); }
 $('save-hud').addEventListener('click',()=>{ if(!dialog.active&&!transition) openSave(); });
 $('rotate-menu').addEventListener('click',toggleLayout);
 applyLayout();

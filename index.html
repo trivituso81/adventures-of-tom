@@ -19,7 +19,7 @@
 :root{color-scheme:light;font-family:"Trebuchet MS",system-ui,sans-serif;color:#253e34;background:#203b32;-webkit-tap-highlight-color:transparent}
 *{box-sizing:border-box}
 html,body{width:100%;height:100%;margin:0;overflow:hidden;overscroll-behavior:none}
-body{display:grid;place-items:center;height:100vh;height:100dvh;user-select:none;-webkit-user-select:none;touch-action:none}
+body{display:grid;place-items:center;height:100vh;height:100dvh;height:var(--app-h,100dvh);user-select:none;-webkit-user-select:none;touch-action:none}
 button{font:inherit;cursor:pointer;-webkit-appearance:none;appearance:none;touch-action:none}
 button:focus-visible{outline:3px solid #fff5c9;outline-offset:4px}
 [hidden]{display:none!important}
@@ -244,8 +244,8 @@ html.landscape .shop-modes{padding:6px 10px 0}html.landscape .shop-tabs{padding:
 .battle-msg{grid-column:1 / -1;min-height:50px;padding:10px 13px;font-size:15px;line-height:1.4}
 .battle-msg.blink::after{content:'\25BE';margin-left:6px;animation:blink 1s steps(2,end) infinite}
 @media(max-width:600px){.battle-row{grid-template-columns:1fr}.battle-cmd{padding:12px 6px;font-size:14px}.battle-msg{font-size:14px}.battle-stage{max-height:40vh}#battle-canvas{max-height:40vh}}
-#stage{position:fixed;inset:0;display:grid;place-items:center;overflow:hidden}
-html.rotated #stage{top:0;left:100vw;width:100vh;height:100vw;transform:rotate(90deg);transform-origin:0 0}
+#stage{position:fixed;top:0;left:0;width:var(--app-w,100%);height:var(--app-h,100%);display:grid;place-items:center;overflow:hidden}
+html.rotated #stage{top:0;left:var(--app-w,100vw);width:var(--app-h,100vh);height:var(--app-w,100vw);transform:rotate(90deg);transform-origin:0 0}
 .rotate-btn{display:grid;place-items:center;flex:none;width:36px;height:36px;border:2px solid #64725a;border-radius:10px;background:#fff5dc;color:#345142;font-size:19px;font-weight:800;line-height:1;pointer-events:auto}
 #save-hud{width:38px;height:38px;border-color:#dbe6c078;background:#294c3ee8;color:#fff3cf;box-shadow:0 3px 0 #203e3933}
 /* ---- Landscape layout (html.landscape) ---- */
@@ -1365,7 +1365,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="engine/menu.js?v=slotless1"></script>
 <script src="engine/followers.js?v=fallen1"></script>
 <script src="engine/shop.js?v=justin2"></script>
-<script src="engine/audio.js?v=duo1"></script>
+<script src="engine/audio.js?v=vpfit1"></script>
 <script src="data/lines.js?v=deedeetom1"></script>
 <script src="data/voice-clips.js?v=deedeetom1"></script>
 <script src="data/voice/tom.js?v=gclips13"></script>
@@ -1617,7 +1617,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="engine/infinity-render.js"></script>
 <script src="engine/plate.js?v=item1c"></script>
 <script src="data/airport-behind.js?v=airport1"></script>
-<script src="engine/draw.js?v=mirrors1"></script>
+<script src="engine/draw.js?v=vpfit1"></script>
 <script src="engine/intro.js?v=introride1"></script>
 <script src="data/flight-art.js?v=flight14"></script>
 <script src="engine/flight-art.js?v=flight11"></script>
@@ -1684,7 +1684,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/emotion-reactions.js?v=dialogclear1"></script>
 <script src="engine/emotions.js?v=emofull1"></script><!-- mood faces and poses in story dialogue (batch 0: chapter 1) -->
 <script src="engine/tapwalk.js?v=space1"></script><!-- tap to walk -->
-<script src="engine/main.js?v=item1c"></script>
+<script src="engine/main.js?v=vpfit1"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js?v=music3"></script>

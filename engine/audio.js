@@ -55,7 +55,18 @@ function detectDuo() {
   const a=Math.min(screen.width,screen.height),b=Math.max(screen.width,screen.height);
   return (a===466&&b===678)||Math.min(window.innerWidth,window.innerHeight)>=DUO_OPEN_MIN;   // the Duo reports its folded screen (466 x 678) in every pose
 }
+// iPhone home-screen app: after a rotate, a resume or the keyboard, iOS can report a stale window size or leave the page scrolled a few
+// pixels, which shows as a dark bar along the top until the app is force closed. Size the stage from the real visible area (the larger of
+// the window and the visual viewport), put the page back at 0,0, and look again shortly after, because iOS reports the new size late.
+function fitViewport() {
+  const vv=window.visualViewport,root=document.documentElement;
+  const w=Math.round(Math.max(window.innerWidth||0,vv?vv.width+vv.offsetLeft:0)),h=Math.round(Math.max(window.innerHeight||0,vv?vv.height+vv.offsetTop:0));
+  if(w>0&&h>0) { root.style.setProperty('--app-w',w+'px'); root.style.setProperty('--app-h',h+'px'); }
+  if(window.scrollX||window.scrollY) window.scrollTo(0,0);
+}
+function fitViewportSoon() { fitViewport(); for(const ms of [60,250,700]) setTimeout(()=>{ fitViewport(); if(typeof applyLayout==='function') applyLayout(); },ms); }
 function applyLayout() {
+  fitViewport();
   const deviceLandscape=window.innerWidth>window.innerHeight;
   const root=document.documentElement;
   duoMode.device=detectDuo();
