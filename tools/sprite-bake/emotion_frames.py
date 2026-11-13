@@ -13,6 +13,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 RAW = os.path.join(ROOT, 'art/raw/characters'); OUT = os.path.join(ROOT, 'art/emotions'); NPC_RAW = os.path.join(ROOT, 'art/raw/npcs')   # townsfolk sheets: npc-emotions-<id>-vN.png (Tom 2026-11-10)
 MOODS = ['happy', 'loving', 'sad', 'angry', 'scared', 'surprised', 'proud', 'unimpressed']
 TAG = 'headmood1'
+NO_MOOD = {'vance'}   # vance1 (Tom 2026-11-12): Julian's only sheet is the old sketch style; he has no painted mood art, so no mood poses or faces until the Art Library has one (his talk face and walk are painted)
 
 def src_path(cid):
     # newest approved sheet for this character (boppy-emotions-v2.png replaces v1 as the source, Tom 2026-11-06)
@@ -82,10 +83,12 @@ def bake(cid):
 if __name__ == '__main__':
     ids = sys.argv[1:] or sorted(set(re.sub(r'-emotions-v\d+\.png$', '', os.path.basename(p)) for p in glob.glob(os.path.join(RAW, '*-emotions-v*.png')))
                                  | set(re.sub(r'^npc-emotions-|-v\d+\.png$', '', os.path.basename(p)) for p in glob.glob(os.path.join(NPC_RAW, 'npc-emotions-*-v*.png'))))
+    ids = [i for i in ids if i not in NO_MOOD]
     idx_path = os.path.join(ROOT, 'data/emotions.js'); index = {}
     if os.path.exists(idx_path):
         m = re.search(r'EMOTION_ART=(\{.*?\});', open(idx_path).read(), re.S)
         if m: index = json.loads(m.group(1))
+    for _n in NO_MOOD: index.pop(_n, None)
     allfigs = {}
     for cid in ids:
         index[cid], allfigs[cid] = bake(cid); print(cid, index[cid]['fw'], index[cid]['fh'])

@@ -90,7 +90,7 @@ for _k in list(EMO_HEAD): EMO_HEAD[_k] *= EMO_HG.get(_k, 1.0)
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import townsfolk_common as TC
 import bake_npc_portraits as _NP
-NPC_EMO = sorted(_NP.FACE)
+NPC_EMO = sorted(set(_NP.FACE) - {'vance'})   # vance1: no painted mood art for Julian (see emotion_frames.py)
 UPRIGHT = ['happy', 'loving', 'surprised', 'proud', 'unimpressed']
 for _id in NPC_EMO:
     SETS[_id + 'emo'] = {'member': _id, 'strip': os.path.join('art/emotions', _id + '.webp'), 'k': 0, 'h': 40, 'ref': 'em_sad', 'names': ['em_' + m for m in EMO_MOODS], 'npc': True}

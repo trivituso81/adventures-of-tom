@@ -32,7 +32,8 @@ IDS = ['tom', 'tnb', 'grace', 'rose', 'amy', 'justin', 'olivia', 'deedee', 'bopp
 
 
 import bake_npc_portraits as NP
-NPC_IDS = sorted(NP.FACE)     # townsfolk, Jojo and Michael: hero = their NPC hero, plain-portrait square = bake_npc_portraits.FACE (same face-based zoom)
+NO_MOOD = {'vance'}     # vance1: no painted mood art for Julian (see emotion_frames.py)
+NPC_IDS = sorted(set(NP.FACE) - NO_MOOD)     # townsfolk, Jojo and Michael: hero = their NPC hero, plain-portrait square = bake_npc_portraits.FACE (same face-based zoom)
 
 
 def npc_box(pid):
