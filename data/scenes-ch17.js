@@ -335,7 +335,7 @@ pressAction=function() {
       const final=!up&&flag('ch17-locks');
       openChoice('Service hatch',[up?'Crawl through to the Archive? Amy, TNB and Nara take over out front. Grace and Rose hold the landing.'
         :final?'Back to the stairwell? Everyone regroups on landing 30.':'Back to the stairwell? Grace and Rose take over. Amy, TNB and Nara wait on the bench.'],[
-        {label:'CRAWL THROUGH',fn:()=>playScene(ch17CrossOps(up?'shelves':'stairs'),{keep:false})},{label:'NOT YET',fn:()=>{}}]);
+        {label:'CRAWL THROUGH',fn:()=>playScene(ch17CrossOps(up?'shelves':'stairs'),{keep:false,stage:true})},{label:'NOT YET',fn:()=>{}}]);
       return;
     }
     if(v&&v.kind==='towershelf'&&currentMap.id==='towershelves') {
