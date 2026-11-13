@@ -37,7 +37,7 @@ SETUP=r"""(C)=>{ const L=window.__LE; splash.active=false; document.getElementBy
   window.storyTriggers=()=>false;
   // battles win at once
   SCENE_OPS.battle=o=>S.call(()=>{ let m=typeof o.battle==='function'?o.battle():typeof o.battle==='object'?o.battle:findMonster(o.battle);
-    const id=(m&&m.monster)||o.battle; if(m) monsterFall(m); setFlag('battle:'+id,'win');   // monsterFall: what a real win does (b2RewardsData); a boss must stay (bossend1)
+    const id=(m&&m.monster)||o.battle; if(m) monsterFall(m); setFlag('battle:'+id,'win'); storyWorld();   // storyWorld: the real game reruns the world rules before the after scene (bossend5); monsterFall: what a real win does (b2RewardsData); a boss must stay (bossend1)
     if(typeof C.kind==='string') setFlag('kind:'+id,true); });
   const m=worlds[C.map]; currentMap=m; const s=C.start||[m.spawn.x,m.spawn.y,'down'];
   player.x=s[0]; player.y=s[1]; player.facing=s[2]||'down'; player.move=null; player.hidden=false;

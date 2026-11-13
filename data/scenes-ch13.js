@@ -296,7 +296,7 @@ STORY_WORLD.push(()=>{
   if(STORY.mode!=='full') return;
   const b=findMonster('drillworm');
   if(b) {
-    const under=STORY.chapter!==13||!flag('ch13-worm')||flag('battle:drillworm')==='win';
+    const under=STORY.chapter!==13||!flag('ch13-worm')||!!flag('ch13-clear');   // stays through its ending (bossend5)
     if(under&&!b.sunk&&!b.fin) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
     else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.sunk=null; b.hidden=false; }
     b.mscale=1.5;

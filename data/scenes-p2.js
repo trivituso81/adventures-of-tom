@@ -322,7 +322,7 @@ STORY_WORLD.push(()=>{
   if(STORY.mode!=='full') return;
   const b=findMonster('finalcall'); if(!b) return;
   b.mscale=1.15;
-  const under=STORY.chapter<11||(STORY.chapter===11&&!flag('ch11-vance'))||flag('battle:finalcall')==='win'||STORY.chapter>11;
+  const under=STORY.chapter<11||(STORY.chapter===11&&!flag('ch11-vance'))||!!flag('ch11-closed')||STORY.chapter>11;   // stays through its ending (bossend5)
   if(under&&!b.sunk&&!b.fin) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
   else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.sunk=null; b.hidden=false; }
 });

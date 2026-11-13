@@ -1,3 +1,10 @@
+## bossend5 (2026-11-12): bosses of chapters 11, 12 and 13 stay for their endings
+- Tom: after beating Gridlock Prime there was no ending animation. Cause (fact): the world rules for FINAL CALL, Gridlock Prime and Drill Worm hid the boss as soon as `battle:<id>` was 'win'. `storyTriggers` reruns the world rules before it starts the after scene, so the boss was hidden and `{finale}` skipped itself. Chapters 1 to 10 hide on their wrap or clear flag and were not affected.
+- Fix: the three rules now hide on `ch11-closed`, `ch12-clear`, `ch13-clear` (data/scenes-p2.js, data/scenes-ch12.js, data/scenes-ch13.js).
+- Why the tests missed it: the fake win in tools/boss_stage_test.py and tools/reaction_test.py did not rerun the world rules. It now calls `storyWorld()` after setting the win flag.
+- Tested: ch11, ch12, ch13 cases, portrait, before (boss on 0 after-scene pages) and after (boss on screen until it leaves or settles). Looked at the chapter 12 frames (bus signals, drives right, fades). Not looked at: chapter 11 and 13 ending frames, landscape, chapters 14 to 20.
+
+
 ## 2026-11-12 (introride1): the chapter 1 opening plays Tom's approved ride pictures, plus a kneel while the girls run in (tag introride1)
 - Tom 22:12: approved `tomride-intro` in the Library and sent a picture of Tom kneeling with his arms open for the hug.
 - Fact: set `tomride` in `tools/sprite-bake/bake_story_poses.py` now cuts the approved `art/raw/characters/tomride-intro-v1.png` (3 x 2, h 53.9) instead of `tomride-poses-v2.png`; frames `tr_kneel` to `tr_sit` are the new ones. The old sheet stays only for the battle ride frames (`bake_tomride.py`).
@@ -9,6 +16,7 @@
 - Tom sent the pending export `local-clips-pending_3.json` (19 clips, the amberclear1 lines for Marlowe, Carmen, Alvarez and the ending).
 - Fact: `merge-local.js` added all 19 to data/voice/dialog-ch28.js (no battle clips, no voice-clips.js change). Voice index: dialogue lines with no clip 0. `unused_voice.py` 0 on all five checks, smoke FAILS [], tag_check ok.
 - Not done: not played on a phone or in a browser; a clip that does not match its page is not detectable here.
+
 ## 2026-11-12 (introlib1): the chapter 1 intro pictures get Art Library entries; nothing in the game changed
 - Tom 21:42: the intro still shows the old shoulder pictures, and the crouch and hug pictures are nowhere in the Art Library.
 - Fact (cause, shoulders): the six opening frames (`tr_kneel`, `tr_lift`, `tr_cheer`, `tr_laugh`, `tr_hopoff`, `tr_sit`, set `tomride` in `bake_story_poses.py`) are cut from `art/raw/characters/tomride-poses-v2.png` (Nov 6, `ride1`), which shows the older Tom. The newer ride pictures (`tomride-title`, `-walk`, `-press-start`, `-toss`) never covered these six frames and no entry existed for them.

@@ -321,7 +321,7 @@ STORY_WORLD.push(()=>{
   set('pupuseria',['Doña Carmen'],()=>!flag('ch12-carmen'));
   set('casa',['Mrs. Alvarez','Don Beto','Tony','Yesenia','Claudia','Kevin'],()=>!flag('ch12-alvarez'));
   const b=findMonster('gridlockprime'); if(!b) return;
-  const under=STORY.chapter!==12||!flag('ch12-prime')||flag('battle:gridlockprime')==='win';
+  const under=STORY.chapter!==12||!flag('ch12-prime')||!!flag('ch12-clear');   // stays through its ending (ch12After finale); hiding on the win flag removed it before the ending played (bossend5)
   if(under&&!b.sunk&&!b.fin) { b.sunk={x:b.x,y:b.y}; b.x=0; b.y=0; b.move=null; b.hidden=true; }
   else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.sunk=null; b.hidden=false; }
   b.mscale=1.5;
