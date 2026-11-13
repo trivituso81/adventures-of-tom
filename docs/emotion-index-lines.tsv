@@ -25,22 +25,22 @@ chapter	file	line	character	mood	text
 1	data/scenes.js	90	Tom	unimpressed	Mom, EVERYTHING gives you gas.
 1	data/scenes.js	91	Deedee	loving	And I eat it anyway. That's love, Tom.
 1	data/scenes.js	93	Boppy	angry	Tom! Good. I'm not feeling good. It's the stomach.
-1	data/scenes.js	126	Rose	scared	Deedee! A mud blob is taking your PIE!
+1	data/scenes.js	126	Rose	scared	Deedee! A mud blob just climbed in the window, and it's running off with your crisp!
 1	data/scenes.js	144	Tom	angry	That was UNCALLED for!
-1	data/scenes.js	145	Deedee	angry	That's my GOOD tin! Grab your shoes. I'm coming with you.
-1	data/scenes.js	146	Boppy	angry	I TOLD you something lives in that pond. Twenty years I've been saying it. Nobody listens to Boppy.
-1	data/scenes.js	146	Boppy	unimpressed	I'd come, but the stomach. Bring me back that fish.
+1	data/scenes.js	145	Deedee	angry	It took the crisp AND my good tin! Grab your shoes, everybody. We're going after it, and I'm coming with you.
+1	data/scenes.js	146	Boppy	angry	It's headed for Grump Hollow. I've been saying for twenty years that something lives in that pond, and nobody listens to Boppy.
+1	data/scenes.js	146	Boppy	unimpressed	I'd come with you, but my stomach is acting up. If you see the Big One in that pond, bring him back for me.
 1	data/scenes.js	155	Deedee	loving	Up, up. Everybody up. Deedee kisses it better.
 1	data/scenes.js	155	Deedee	loving	There. Good as new. Try not to do that again.
-1	data/scenes.js	162	Deedee	surprised	Crumbs! Rhubarb crumbs. That little thief went right through here.
+1	data/scenes.js	162	Deedee	surprised	Look, rhubarb crumbs on the path. The little thief dropped them as it ran, so we can follow the trail.
 1	data/scenes.js	164	Rose	scared	Tata. The mud is MOVING.
 1	data/scenes.js	168	Grace	proud	Okay, everybody. Tata is in front. I'm in charge of choreography. FIGHT!
-1	data/scenes.js	171	Deedee	loving	Good job, girls. The crumbs keep going north.
+1	data/scenes.js	171	Deedee	loving	Good job, girls. The crumb trail keeps going north, so that's the way we go.
 1	data/scenes.js	179	Grace	angry	Ew. Ew ew ew. Nobody touch my hair.
 1	data/scenes.js	182	Deedee	loving	Everybody okay? Itchy isn't hurt. Keep walking.
 1	data/scenes.js	189	Rose	happy	I'm not laughing. I'm giggling. It's different.
 1	data/scenes.js	195	Deedee	loving	Hugs for everyone. There. All better.
-1	data/scenes.js	195	Deedee	none	The crumbs go around the pond. Toward Boppy’s fishing spot.
+1	data/scenes.js	195	Deedee	none	The crumbs lead around the pond, toward Boppy's fishing spot.
 1	data/scenes.js	196	Grace	none	Boppy says the Big One lives over there.
 1	data/scenes.js	197	Tom	unimpressed	Boppy also says the stomach thing is serious. Stay close.
 1	data/scenes.js	210	Grace	surprised	THERE! The thief! He still has the tin!
@@ -53,7 +53,7 @@ chapter	file	line	character	mood	text
 1	data/scenes.js	240	Grace	none	The Big One ate the other half. I saw crumbs on its chin.
 1	data/scenes.js	241	Deedee	happy	Then we split this half. Everybody home. Wait until Boppy hears about this.
 1	data/scenes.js	250	Boppy	proud	You found the Big One? I TOLD everybody. Twenty years.
-1	data/scenes.js	252	Tom	none	It had this stuck in its lip.
+1	data/scenes.js	252	Tom	none	We did. And when it laughed, this fell out of its lip.
 1	data/scenes.js	253	Boppy	surprised	My LURE! I lost that in 2006. Still shiny. Unlike me.
 1	data/scenes.js	253	Boppy	loving	Keep it, Tom. For luck. The fish clearly didn't want it.
 1	data/scenes.js	254	Deedee	loving	Sit. Everybody sit. Half a crisp is still a crisp.
@@ -69,7 +69,8 @@ chapter	file	line	character	mood	text
 2	data/scenes.js	290	TNB	happy	Main event. I'll take it.
 2	data/scenes.js	292	TNB	loving	My call time got pushed to Thursday. The lead actor lost a shoe. I already found it. So I'm all yours.
 2	data/scenes.js	292	TNB	surprised	Also, something is up. The sky over Griffith Park went purple this morning. Not sunset purple. Weird purple.
-2	data/scenes.js	294	Tom	loving	All yours. I like that. We'll look, together. One quick stop first. My starter has been alone for a week.
+2	data/scenes.js	294	Tom	loving	All yours. I like that. We'll go look at the purple sky together, but first I need one quick stop at my house.
+2	data/scenes.js	294	Tom	loving	My sourdough starter has been alone for a week.
 2	data/scenes.js	304	TNB	none	Olivia dropped her off this morning. Family trip to the desert. No dogs at the hotel.
 2	data/scenes.js	304	TNB	none	She's been sitting on your porch since eight. I tried to take her to the loft. She refused.
 2	data/scenes.js	305	TNB	happy	Also, your starter was bubbling out of the jar, so I baked a boule with it.
@@ -92,19 +93,19 @@ chapter	file	line	character	mood	text
 2	data/scenes.js	351	Tom	unimpressed	I was startled. Briefly. With dignity.
 2	data/scenes.js	352	TNB	happy	It was a battle plan. You just didn't know it yet.
 2	data/scenes.js	357	TNB	loving	Okay. Okay. Everybody breathe. Through the nose. Not the smog.
-2	data/scenes.js	359	TNB	scared	They're gone, but he's still out of it. Look at him.
-2	data/scenes.js	361	Tom	scared	That's not a Mr. Washington sentence. Let's check on the boulevard. Miss Odette and Doña Carmen.
+2	data/scenes.js	359	TNB	scared	The smog monsters are gone, but Mr. Washington is still in a daze. Look at him.
+2	data/scenes.js	361	Tom	scared	Mr. Washington would never say that. The smog is doing something to him. Let's go check on Miss Odette and Doña Carmen on the boulevard.
 2	data/scenes.js	368	TNB	scared	She's made that gumbo every day for fifty years. It's never once been "never done."
-2	data/scenes.js	369	Tom	unimpressed	The smog wants everything to stay exactly the same. Forever. That's not a nice afternoon. That's a hostage situation.
+2	data/scenes.js	369	Tom	unimpressed	The smog makes people want everything to stay exactly the same forever. That's not a nice afternoon. That's a hostage situation.
 2	data/scenes.js	376	Nara	surprised	Nara sniffs the comal. She sneezes. The smoke smells like the hills.
-2	data/scenes.js	377	TNB	surprised	Nara is right. That's not kitchen smoke. That's the same purple stuff.
+2	data/scenes.js	377	TNB	surprised	Nara is right. That's not kitchen smoke. It's the same purple smog, and it's blowing down from the hills.
 2	data/scenes.js	383	TNB	surprised	Babe. Look north. It's all coming down off the hills.
-2	data/scenes.js	383	TNB	none	The Observatory. The pipes on the side are pumping it out like a smoke machine on a bad set.
+2	data/scenes.js	383	TNB	none	It's coming from the Observatory. The pipes on its side are pumping out smog like a smoke machine on a bad set.
 2	data/scenes.js	384	Tom	proud	Then that's where we're going. Nara, stay close.
 2	data/scenes.js	385	Nara	loving	Nara presses against Tom’s leg. She's not letting him go anywhere without her.
 2	data/scenes.js	390	TNB	loving	Up, everybody. Wardrobe says nobody is cut from this scene.
 2	data/scenes.js	398	TNB	proud	I take the Metro. You have nothing on me.
-2	data/scenes.js	400	Tom	unimpressed	Contested. Appeal granted. Keep going.
+2	data/scenes.js	400	Tom	unimpressed	I contest that ticket, and I'm granting my own appeal. Let's keep going.
 2	data/scenes.js	407	Nara	proud	Nara’s hackles go up. She stands right in front of Tom.
 2	data/scenes.js	413	TNB	loving	Quick wardrobe adjustment, quick heal, and a quick kiss for the road. Ready, babe?
 2	data/scenes.js	415	Tom	happy	Ready. Kiss accepted. The Observatory is up at the top left. Follow the purple.
@@ -116,12 +117,12 @@ chapter	file	line	character	mood	text
 2	data/scenes.js	433	TNB	proud	Cut. Reset. Back to one, everybody.
 2	data/scenes.js	433	TNB	none	Babe, heal right after the Aftershock. When it clogs up, hit it with water or sparkle. Or one of our Tombos.
 2	data/scenes.js	443	TNB	happy	Look. The sky is blue again. Los Angeles blue. Slightly brown, but blue.
-2	data/scenes.js	444	Tom	surprised	Somebody plugged those pipes on purpose. Smog doesn't do that by itself.
+2	data/scenes.js	444	Tom	surprised	So a man in a long coat plugged those vents on purpose. He wanted this whole city stuck in one afternoon. I'd like to know why.
 2	data/scenes.js	445	TNB	happy	Spooky. I love it. Let's go check on Mr. Washington.
 2	data/scenes.js	456	Tom	loving	Keep the old windows, though.
 2	data/scenes.js	459	TNB	happy	Doña Carmen says the pupusas came out perfectly crispy. Miss Odette is sending over gumbo. The whole block is cooking.
 2	data/scenes.js	460	Nara	happy	Nara leans on both of them at once. Tiny excited puddle. Nobody minds.
-2	data/scenes.js	462	Tom	loving	Home. Both of them. Okay. Good.
+2	data/scenes.js	462	Tom	loving	Long Island is home, and so is this. I have two homes. Okay. Good.
 3	data/scenes.js	688	Grace	happy	Tata! Boppy has been waiting by his window since BREAKFAST. He has his fishing hat on.
 3	data/scenes.js	689	Rose	happy	He said if you were late he'd catch the fish without you. He catches one every time. It's always THIS big.
 3	data/scenes.js	690	Tom	unimpressed	Then we'd better hurry, before it gets any bigger.
@@ -168,7 +169,7 @@ chapter	file	line	character	mood	text
 3	data/scenes.js	777	Boppy	angry	MY JAR!
 3	data/scenes.js	781	Tom	angry	That was UNCALLED for!
 3	data/scenes.js	782	Boppy	angry	Pickled in 1989. Nobody takes Boppy’s peppers. NOBODY.
-3	data/scenes.js	782	Boppy	proud	He went west. Into the Whispering Marsh. Come on. And nobody walk fast.
+3	data/scenes.js	782	Boppy	proud	Iron-Gill swam west with my jar, into the Whispering Marsh. Come on, we're going after him. And nobody walk fast.
 3	data/scenes.js	788	Boppy	loving	Up. Everybody up. Headcount. One, two, three, four. Good. Nobody is missing. Again.
 3	data/scenes.js	797	Rose	surprised	Tata, that sock has a FACE.
 3	data/scenes.js	798	Boppy	unimpressed	Marsh junk. Everything people drop out here ends up grumpy about it. Like me, at the DMV.
@@ -185,16 +186,17 @@ chapter	file	line	character	mood	text
 3	data/scenes.js	837	Rose	surprised	Tata, it's a LOG with a BOOT.
 3	data/scenes.js	843	Grace	surprised	A secret boardwalk. Of course there's a secret boardwalk.
 3	data/scenes.js	844	Boppy	sad	Not secret. Just old. Like me. Nobody comes back here anymore.
-3	data/scenes.js	852	Boppy	sad	Sundial Hollow. I haven't been back here since I was nine. It hasn't changed. It still says seven.
+3	data/scenes.js	852	Boppy	sad	This is Sundial Hollow. I haven't been back here since I was nine, and it hasn't changed.
+3	data/scenes.js	852	Boppy	sad	The sundial still says seven o'clock, no matter what time it is.
 3	data/scenes.js	853	Grace	surprised	It's the AFTERNOON. The sun is right there. Sundials can't be wrong. That's not how sundials work.
 3	data/scenes.js	854	Boppy	unimpressed	That's what I said.
 3	data/scenes.js	855	Rose	surprised	Tata! Something shiny is stuck in it!
-3	data/scenes.js	857	Tom	surprised	A coin. Wedged right under the pointer. Somebody pushed this in on purpose.
+3	data/scenes.js	857	Tom	surprised	It's a gold coin, wedged right under the pointer. That's what was holding the shadow at seven. Somebody pushed this in on purpose.
 3	data/scenes.js	864	Grace	surprised	It MOVED. Shadows don't move like that. I'm writing this down. In pen.
-3	data/scenes.js	866	Tom	none	Oolong’s kettle said a man in a long coat is buying gold coins at Penny’s. Paying double.
+3	data/scenes.js	866	Tom	none	Oolong's kettle said a man in a long coat is buying gold coins at Penny's and paying double. And now a gold coin turns up jammed in a sundial.
 3	data/scenes.js	867	Boppy	unimpressed	Nobody pays double on Long Island. Keep that in your pocket, Tom. Deep in your pocket.
 3	data/scenes.js	868	Boppy	none	Old gold. Keep that in your pocket, Tom. Penny will want to hear about it. Penny wants to hear about everything.
-3	data/scenes.js	869	Boppy	none	Now. The Deep Pool. That's where Iron-Gill goes to sulk.
+3	data/scenes.js	869	Boppy	none	Now the water has drained, and the way to the Deep Pool is open. That's where Iron-Gill goes to sulk.
 3	data/scenes.js	878	Boppy	none	The Deep Pool. Nobody has ever seen the bottom. My father said it goes all the way to Ohio.
 3	data/scenes.js	882	Boppy	angry	You took my jar.
 3	data/scenes.js	884	Rose	happy	Boppy, he's sad! And spicy!
@@ -226,7 +228,7 @@ chapter	file	line	character	mood	text
 3	data/scenes.js	933	Tom	happy	Best fishing trip ever. Nobody fell in. Mostly.
 3	data/scenes.js	934	Deedee	loving	I love you all to the moon and back. Now eat.
 4	data/scenes.js	1083	TNB	loving	Cut. Reset. Back to one. Everybody gets a touch-up.
-4	data/scenes.js	1088	TNB	none	All three sets are clear. And Stage 7 just opened. That's where the fog came from.
+4	data/scenes.js	1088	TNB	none	All three sets are clear, and Stage 7 just unlocked itself. That's where the fog came from, so that's where my rack is.
 4	data/scenes.js	1097	TNB	happy	Well, well, well...
 4	data/scenes.js	1101	TNB	happy	Look who flew in for my big day. I'm on a forty-minute lunch. I spent thirty of it on the Metro.
 4	data/scenes.js	1102	Tom	loving	You took the train to meet the plane.
@@ -241,7 +243,7 @@ chapter	file	line	character	mood	text
 4	data/scenes.js	1122	TNB	happy	She's coming to set. I already asked. Nobody said yes, but nobody said no fast enough.
 4	data/scenes.js	1129	TNB	unimpressed	Ray, it's me. Wardrobe. I left eighty minutes ago. You waved.
 4	data/scenes.js	1133	TNB	unimpressed	Gone? It's a rack. It has wheels. It doesn't have ambitions.
-4	data/scenes.js	1138	Tom	surprised	Friction Sprites. On a closed set.
+4	data/scenes.js	1138	Tom	surprised	Those sound like Friction Sprites. Grumpy little monsters, loose on a closed set.
 4	data/scenes.js	1139	TNB	sad	Babe. Forty costumes. I steamed every single one. By hand. While humming.
 4	data/scenes.js	1140	Tom	proud	Then we go get them back. Nara, stay close. This is a professional environment.
 4	data/scenes.js	1141	Nara	happy	Nara is already sniffing the craft services table.
@@ -256,10 +258,10 @@ chapter	file	line	character	mood	text
 4	data/scenes.js	1173	Tom	loving	She doesn't know that. Let her have this.
 4	data/scenes.js	1176	Nara	proud	She drops something at Tom’s feet. Very proud. Very slobbery.
 4	data/scenes.js	1178	TNB	surprised	That's a costume tag. That's MY tag. WARDROBE, RACK 2, HAND WASH ONLY. I underlined it twice.
-4	data/scenes.js	1178	TNB	surprised	And it smells like fog juice. The grape kind. Only Stage 7 has a fog machine.
+4	data/scenes.js	1178	TNB	surprised	And it smells like grape fog juice. Only Stage 7 has a fog machine, so my rack must be in Stage 7.
 4	data/scenes.js	1180	Tom	loving	Good girl. Professional environment, very good girl.
 4	data/scenes.js	1183	TNB	none	Stage 7 is locked from the inside, though. And every set out here has a Sprite on it wrecking the shoot. The crew can't work like this.
-4	data/scenes.js	1184	Tom	proud	Then we clear the sets. One at a time. Main Street, the Western street, New York.
+4	data/scenes.js	1184	Tom	proud	Then we clear the Sprites off the sets, one at a time: Main Street, the Western street and New York. After that we deal with Stage 7.
 4	data/scenes.js	1192	TNB	surprised	Those are the neatest cue cards I've ever seen. Is that calligraphy?
 4	data/scenes.js	1197	TNB	happy	Main Street is clear. The bank is safe. The pie is still foam.
 4	data/scenes.js	1204	Tom	unimpressed	It's very fast. And very loud.
@@ -284,7 +286,8 @@ chapter	file	line	character	mood	text
 4	data/scenes.js	1264	TNB	none	Babe, when it says CUT, put WARDROBE on whoever is next. When it braces, Popcorn Jump. Or just tell it GREAT TAKE. Three times.
 4	data/scenes.js	1276	TNB	happy	Forty. I counted. I'm going to count again. Forty.
 4	data/scenes.js	1277	TNB	surprised	And look. Somebody stuck a note on the steamer. "Paid in full." With a gold coin taped to it.
-4	data/scenes.js	1278	Tom	surprised	A gold coin. Again. Somebody keeps leaving these around. Somebody in a long coat, if Oolong’s kettle is right.
+4	data/scenes.js	1278	Tom	surprised	Another gold coin, same as the one in the sundial. First he stops a sundial for a fish, and now he pays a megaphone to stop a movie.
+4	data/scenes.js	1278	Tom	surprised	Somebody in a long coat really wants things to stand still.
 4	data/scenes.js	1279	TNB	happy	Spooky. I love it. I hate it. Help me push. This thing has four wheels and four opinions.
 4	data/scenes.js	1292	TNB	happy	I'm going to cry. I'm not going to cry. I'm a professional. I'm crying a little.
 4	data/scenes.js	1293	Tom	loving	You're a professional. A crying professional. I'm so proud of you.
@@ -318,9 +321,10 @@ chapter	file	line	character	mood	text
 5	data/scenes.js	1497	Rose	happy	Little paper feet. With glitter. They go EVERYWHERE.
 5	data/scenes.js	1498	Grace	proud	I can read the doors. Room One is ART. Room Two is MUSIC. Room Three is the GYM.
 5	data/scenes.js	1498	Grace	unimpressed	The gym isn't a room. It's a gym. It has a number anyway.
-5	data/scenes.js	1500	Grace	proud	The footprints go into all three. Then out again. Then east, to the Cafetorium.
+5	data/scenes.js	1500	Grace	proud	The footprints go into all three rooms and out again, and then east to the Cafetorium. The sign-up sheet went that way.
 5	data/scenes.js	1501	Amy	loving	Girls. That's excellent detective work. Gold stars. Both of you.
-5	data/scenes.js	1503	Tom	none	Then we clear Art, Music and the Gym. After each one, we fix its clock. Seven o’clock.
+5	data/scenes.js	1503	Tom	none	Then we clear the monsters out of Art, Music and the Gym. After each room, we set its hallway clock to seven o'clock.
+5	data/scenes.js	1503	Tom	none	When all three are right, the Cafetorium opens.
 5	data/scenes.js	1511	Grace	happy	FOR EVERYONE, LOVE DEEDEE. That's Deedee’s handwriting! Everyone means us!
 5	data/scenes.js	1513	Rose	surprised	Rhubarb crisp! Deedee brings the teachers CRISP?
 5	data/scenes.js	1515	Amy	loving	She never told me that. Of course she never told me that.
@@ -342,16 +346,18 @@ chapter	file	line	character	mood	text
 5	data/scenes.js	1587	Grace	surprised	There! The sign-up sheet! On the podium!
 5	data/scenes.js	1588	Rose	scared	It's covered in RED.
 5	data/scenes.js	1593	Amy	none	That's the conference sign-up sheet. Thirty parents are waiting for it.
-5	data/scenes.js	1596	Tom	unimpressed	You took the sign-up sheet to grade it.
+5	data/scenes.js	1596	Tom	unimpressed	So you took the sign-up sheet to mark it up, and you scrambled the bells and the clocks too.
 5	data/scenes.js	1598	Rose	surprised	Tata, it's a PEN. With GLASSES.
 5	data/scenes.js	1599	Amy	proud	I'm going to count to three, and you're going to put the sheet down. One.
 5	data/scenes.js	1600	Tom	unimpressed	That's her teacher voice. I'd listen.
 5	data/scenes.js	1604	Amy	proud	Up. Everybody. Walk it off.
-5	data/scenes.js	1604	Amy	none	Tom, when it says SEE ME, step in front of them. Grace, Squishy anyone it circles. And somebody tell it its handwriting is nice. Three times.
+5	data/scenes.js	1604	Amy	none	Tom, when it says SEE ME, step in front of them. Grace, use Squishy on anyone it circles. And somebody tell it that its handwriting is nice.
+5	data/scenes.js	1604	Amy	none	If we say it three times, I think it'll calm down.
 5	data/scenes.js	1616	Amy	unimpressed	...It's going to my desk. Of course it's going to my desk.
 5	data/scenes.js	1617	Grace	surprised	The sign-up sheet! It's a bit crumpled. And look, Tata. Something is taped to the bottom.
-5	data/scenes.js	1618	Tom	surprised	A gold coin. Again. Same little clock face.
-5	data/scenes.js	1618	Tom	surprised	The sundial. The steamer. Now the sign-up sheet. Somebody keeps leaving these where we'll find them.
+5	data/scenes.js	1618	Tom	surprised	It's another gold coin, with the same little clock face on it.
+5	data/scenes.js	1618	Tom	surprised	That's three. A stopped sundial, a stopped movie, and now a school where the clocks can't agree.
+5	data/scenes.js	1618	Tom	surprised	Every time, it's a gold coin, and something lonely holding on to it.
 5	data/scenes.js	1619	Amy	unimpressed	Whoever it is has very neat tape. Look at those corners.
 5	data/scenes.js	1620	Rose	happy	Can we keep it? I'll keep it inside Lamby.
 5	data/scenes.js	1621	Tom	unimpressed	We keep it. In my pocket. Not inside Lamby.
@@ -364,11 +370,12 @@ chapter	file	line	character	mood	text
 5	data/scenes.js	1649	Amy	none	Girls. Did we save some casserole for Daddy?
 5	data/scenes.js	1650	Rose	happy	...Define save.
 5	data/scenes.js	1651	Rose	scared	Tata. Tata. There's a man.
-5	data/scenes.js	1654	Rose	scared	By the last car. In a long coat. He's looking at us.
-5	data/scenes.js	1658	Tom	surprised	...Nobody there.
+5	data/scenes.js	1654	Rose	scared	He's by the last car in the parking lot. He's wearing a long coat, and he's looking right at us.
+5	data/scenes.js	1658	Tom	surprised	...I looked, and there's nobody there now.
 5	data/scenes.js	1659	Amy	none	Probably a parent. A late one. There's always a late one.
 5	data/scenes.js	1660	Tom	unimpressed	Probably.
-5	data/scenes.js	1660	Tom	proud	A long coat. Gold coins. That's what Oolong’s kettle said, too. I'm keeping a list.
+5	data/scenes.js	1660	Tom	proud	A man in a long coat. The fish said so, the megaphone said so, and the pen said so. He's real, he's here, and he's checking on his work.
+5	data/scenes.js	1660	Tom	proud	I'm keeping a list.
 5	data/scenes.js	1661	Grace	proud	I'm keeping a list too. Mine has a chart.
 5	data/scenes.js	1662	Amy	loving	Everybody in the van. Tom, you too. You were a good uncle tonight. By a lot.
 5	data/scenes.js	1663	Tom	unimpressed	By default.
@@ -398,7 +405,8 @@ chapter	file	line	character	mood	text
 6	data/scenes.js	1871	Olivia	happy	Tom! Oh, thank goodness. Can you take her? Please? She hasn't slept since Sunday.
 6	data/scenes.js	1873	Nara	happy	Nara does three laps around Tom, slams into his shins, and leans on him with all forty pounds.
 6	data/scenes.js	1873	Nara	angry	Then she spins around and growls at the jacaranda.
-6	data/scenes.js	1875	Olivia	angry	That. All night. And it's not just us. Lachlan’s toy truck is gone. Mr. Washington’s reading glasses. Marisol says every tennis ball on the block.
+6	data/scenes.js	1875	Olivia	angry	She's been doing that all night. And it's not just us. Things are going missing all over the block: Lachlan's toy truck, Mr.
+6	data/scenes.js	1875	Olivia	angry	Washington's reading glasses, and Marisol says every tennis ball.
 6	data/scenes.js	1877	TNB	surprised	A triangle. Babe. A triangle is a SYMBOL.
 6	data/scenes.js	1878	Tom	unimpressed	TNB has seen a lot of movies.
 6	data/scenes.js	1878	Tom	loving	...He's usually right about this stuff.
@@ -409,7 +417,7 @@ chapter	file	line	character	mood	text
 6	data/scenes.js	1893	Tom	none	Tom. 3468. I've lived on 2nd Ave for six years.
 6	data/scenes.js	1896	TNB	proud	I KNEW it.
 6	data/scenes.js	1900	Nara	proud	Nara puts her nose to the grass and pulls. Hard. Left. Right. Back. Three fresh holes, three different directions.
-6	data/scenes.js	1901	Tom	surprised	They buried something. Three somethings.
+6	data/scenes.js	1901	Tom	surprised	The squirrels buried something in three different spots.
 6	data/scenes.js	1903	TNB	happy	Babe, she has a corkboard with red string. I've never felt so seen.
 6	data/scenes.js	1913	TNB	surprised	Is it heckling us? From inside a peanut?
 6	data/scenes.js	1915	Tom	unimpressed	My shoes don't have laces.
@@ -436,7 +444,7 @@ chapter	file	line	character	mood	text
 6	data/scenes.js	2000	Tom	loving	Then we stay together.
 6	data/scenes.js	2001	TNB	scared	That's what they always say in the second act.
 6	data/scenes.js	2003	Nara	surprised	Nara sniffs the air, and her tail goes straight up. Bread. Far above. Very faint.
-6	data/scenes.js	2004	Tom	unimpressed	He's up there. And there's no ladder.
+6	data/scenes.js	2004	Tom	unimpressed	Bready Mercury is up there at the top of the tree, and there's no ladder to reach him.
 6	data/scenes.js	2010	TNB	happy	Babe. Babe. They have a corkboard. With RED STRING. I've waited my whole life for this.
 6	data/scenes.js	2012	Tom	surprised	That's my house. That's my JAR. Why is my jar in the middle of everything?
 6	data/scenes.js	2013	TNB	proud	Everything connects to the jar, babe. That's how corkboards work.
@@ -458,7 +466,8 @@ chapter	file	line	character	mood	text
 6	data/scenes.js	2053	TNB	happy	It's a squirrel in a tiny tie, babe. I'm so scared and so delighted.
 6	data/scenes.js	2054	Tom	proud	Put the starter down. No touching, please.
 6	data/scenes.js	2058	TNB	loving	Okay. Shake it off. Everybody gets a snack.
-6	data/scenes.js	2058	TNB	none	Babe, when it buries an acorn, break it before it eats it. Nara digs them up for double. And maybe... share something with it. Three times.
+6	data/scenes.js	2058	TNB	none	Babe, when it buries an acorn, break the acorn before it can eat it. Nara digs them up for double. And maybe try sharing something with it.
+6	data/scenes.js	2058	TNB	none	Three times should do it.
 6	data/scenes.js	2068	Tom	loving	Saturdays. On my back fence. One slice. The heel.
 6	data/scenes.js	2080	Tom	loving	Hello, Bready Mercury. Did you miss me? You were on an adventure.
 6	data/scenes.js	2080	Tom	unimpressed	You're going to be extremely sour about this.
@@ -466,8 +475,9 @@ chapter	file	line	character	mood	text
 6	data/scenes.js	2082	Tom	unimpressed	He's a starter. Sour is a compliment.
 6	data/scenes.js	2083	TNB	surprised	And look. Something taped to the lid. A gold coin. With a little clock face.
 6	data/scenes.js	2084	Tom	surprised	Squirrels hoard shiny things. Squirrels don't tape things. Look at those corners.
-6	data/scenes.js	2084	Tom	surprised	The sundial. The steamer. The sign-up sheet. Now my jar. Somebody keeps leaving these where we'll find them.
-6	data/scenes.js	2085	TNB	happy	Somebody in a long coat, if your niece and your kettle are right. Spooky. I love it. I hate it.
+6	data/scenes.js	2084	Tom	surprised	That makes four. The sundial, your steamer, the sign-up sheet, and now my jar.
+6	data/scenes.js	2084	Tom	surprised	He finds something lonely, hands it a gold coin, and it tries to make one thing last forever.
+6	data/scenes.js	2085	TNB	happy	And then we show up and make friends with it, and the coin falls right off. Babe. We are ruining this man's whole year. Spooky. I love it. I hate it.
 6	data/scenes.js	2095	Olivia	happy	Tom! You found everything! Marisol’s balls, Mr. Washington’s glasses, Lachlan’s truck. He hasn't put it down. He's eating cereal with one hand.
 6	data/scenes.js	2097	TNB	happy	Noted. On a corkboard. With red string.
 6	data/scenes.js	2101	Nara	loving	Nara takes it very gently. She'll never let go of it again. She's going to sleep for twelve hours, holding it.
@@ -480,7 +490,7 @@ chapter	file	line	character	mood	text
 6	data/scenes.js	2115	Tom	unimpressed	Not on Long Island. On Long Island, the library shushes YOU.
 7	data/scenes.js	2315	Grace	proud	Okay. Everybody up. I'm in charge of getting up. Up, up, UP.
 7	data/scenes.js	2326	Grace	proud	That's all three cards, Tata. Card one, card two, card three. Three gold letters.
-7	data/scenes.js	2327	Tom	none	A password for the Reading Room. In card order.
+7	data/scenes.js	2327	Tom	none	The three gold letters spell the password for the Reading Room doors. We enter them in card order: one, two, three.
 7	data/scenes.js	2333	Grace	happy	Tata. TATA. Did you get my text? I sent it from Mom’s phone. She said I could. She said it after.
 7	data/scenes.js	2334	Tom	unimpressed	I got it. The library is whispering.
 7	data/scenes.js	2335	Grace	scared	Not a little bit. ALL the books. At the same time. And they're saying THINGS.
@@ -499,7 +509,7 @@ chapter	file	line	character	mood	text
 7	data/scenes.js	2371	Grace	proud	I can read every sign. Rose can't read yet.
 7	data/scenes.js	2372	Rose	proud	I can read PICTURES. Pictures are harder.
 7	data/scenes.js	2373	Grace	surprised	...That's actually true.
-7	data/scenes.js	2375	Tom	proud	Somebody down here knows the password. We ask nicely. Then we ask less nicely.
+7	data/scenes.js	2375	Tom	proud	Something in each of these sections must know a piece of the password. We'll ask nicely first. Then we'll ask less nicely.
 7	data/scenes.js	2383	Tom	loving	Lamby’s Big Day. Page one. Lamby woke up and decided it was going to be a big day.
 7	data/scenes.js	2384	Rose	happy	Do the voice. Do Lamby’s voice.
 7	data/scenes.js	2385	Tom	happy	(a very small voice) Today I'm going to jump on everybody.
@@ -535,11 +545,11 @@ chapter	file	line	character	mood	text
 7	data/scenes.js	2489	Rose	proud	I did the dragon.
 7	data/scenes.js	2494	Grace	surprised	Tata, something fell out of it. Something gold. It was being used as a bookmark.
 7	data/scenes.js	2496	Tom	surprised	A gold coin. Same little clock face.
-7	data/scenes.js	2496	Tom	surprised	The sundial. The steamer. The sign-up sheet. My jar. Now a book nobody has opened since 1952.
+7	data/scenes.js	2496	Tom	surprised	That's five coins. The sundial, the steamer, the sign-up sheet, my jar, and now a book that nobody has opened since 1952.
 7	data/scenes.js	2497	Grace	proud	Somebody DID open it, then. To put the coin in.
-7	data/scenes.js	2497	Grace	surprised	And look. The checkout card, in the pocket. One stamp. DUE BACK 1952. No name. Just a little clock.
+7	data/scenes.js	2497	Grace	surprised	And look at the checkout card in the pocket. It has one stamp, DUE BACK 1952, and no name. There's just a little clock where the name should be.
 7	data/scenes.js	2498	Rose	sad	Somebody took it out and didn't READ it? That's so sad.
-7	data/scenes.js	2499	Tom	surprised	And brought it back with a coin in it. Look at those corners. Very neat.
+7	data/scenes.js	2499	Tom	surprised	And then he brought it back last week with a coin in it. Either he's very old, or he's very, very late.
 7	data/scenes.js	2499	Tom	proud	I'm adding it to the list.
 7	data/scenes.js	2500	Grace	proud	I'm adding it to MY list. Mine has a chart AND a key now.
 7	data/scenes.js	2508	Grace	sad	It just wanted somebody to read it. That's all. All of it was because nobody read it.
@@ -551,7 +561,8 @@ chapter	file	line	character	mood	text
 7	data/scenes.js	2522	Tom	unimpressed	...Bready Mercury is going to need a bigger jar.
 8	data/scenes.js	2676	TNB	loving	Okay. Up. Everybody up. Hot cocoa later. Lots of it.
 8	data/scenes.js	2683	Nara	happy	Nara sniffs it. It's warm. Her tail goes like a propeller.
-8	data/scenes.js	2688	TNB	proud	That's three, babe. And that little steam motor by the turntable has three empty burners. Three. I can fix that.
+8	data/scenes.js	2688	TNB	proud	That's all three pilot lights, babe. The little steam motor by the turntable has three empty burners.
+8	data/scenes.js	2688	TNB	proud	If I put a flame in each one, I can get the turntable moving.
 8	data/scenes.js	2689	Tom	loving	You can fix anything.
 8	data/scenes.js	2690	TNB	proud	I can fix most things. I fixed your dishwasher with a butter knife.
 8	data/scenes.js	2697	Tom	none	A text from TNB.
@@ -566,25 +577,26 @@ chapter	file	line	character	mood	text
 8	data/scenes.js	2715	Tom	none	Did you call the gas company?
 8	data/scenes.js	2718	Olivia	scared	Tom! Can you take Nara? She won't eat. Her dinner is cold, so she won't eat it. Michael warmed it in his hands. She still won't eat it.
 8	data/scenes.js	2720	Nara	proud	Nara slams into Tom’s shins and leans on him with all forty pounds. Then she turns, points her nose east, and sniffs. Hard.
-8	data/scenes.js	2722	TNB	surprised	East. Toward the end of the boulevard. Babe. The old Car Barn. Division Nine. The streetcars ran out of there until 1963.
+8	data/scenes.js	2722	TNB	surprised	She's pointing east, toward the end of the boulevard. Babe, that's the old Car Barn, Division Nine. The streetcars ran out of there until 1963.
 8	data/scenes.js	2722	TNB	happy	I've wanted to go in there since I MOVED here.
 8	data/scenes.js	2725	Olivia	scared	Bring her back fed! Please! Michael, Isla is eating the lasagna. It's a brick. She's eating a brick.
 8	data/scenes.js	2733	TNB	surprised	Oh. Oh, babe. Look at it. The tracks are still in the floor. The time clock. The crew bench. I'm going to cry a little.
 8	data/scenes.js	2734	Tom	loving	It's beautiful. You can cry a little. I'll wait.
 8	data/scenes.js	2734	Tom	unimpressed	...It's also freezing in here, and it's seventy-four degrees outside.
 8	data/scenes.js	2735	Nara	surprised	Nara watches a little blue flame drift past her nose, along the floor, toward the back. Then another one. Then another.
-8	data/scenes.js	2736	Tom	surprised	Those are pilot lights. The whole block’s pilot lights. Something down here is collecting them.
-8	data/scenes.js	2737	TNB	none	And some of them got stuck. Look. The Paint Shop, the Machine Shop, the Lunchroom. Something in each one is hogging one.
+8	data/scenes.js	2736	Tom	surprised	Those little flames are pilot lights. They're the pilot lights from every stove on the block, and something down here is collecting them.
+8	data/scenes.js	2737	TNB	none	And three of them got stuck on the way. Look: the Paint Shop, the Machine Shop and the Lunchroom.
+8	data/scenes.js	2737	TNB	none	Something in each room is hogging a flame.
 8	data/scenes.js	2747	TNB	surprised	Wow. Okay. Big mood, buddy.
-8	data/scenes.js	2748	Tom	proud	That flame is a gumbo. Forty years of gumbo. Hand it over.
+8	data/scenes.js	2748	Tom	proud	That little flame cooks somebody's gumbo, and it has for forty years. Hand it over.
 8	data/scenes.js	2752	TNB	happy	It dried out a little. Look. It's almost fluffy. It's a blanket again.
 8	data/scenes.js	2759	Tom	surprised	Who's Ironbelly.
 8	data/scenes.js	2761	TNB	scared	Babe, close a door on it. Any door.
-8	data/scenes.js	2765	Tom	surprised	Ironbelly. Somebody named Ironbelly wanted every flame on 2nd Ave.
+8	data/scenes.js	2765	Tom	surprised	So somebody named Ironbelly wanted every flame on 2nd Ave, and sent a draft to fetch them.
 8	data/scenes.js	2766	TNB	happy	That's either a boat or a stove. In a car barn, babe, it's a stove.
 8	data/scenes.js	2773	Nara	unimpressed	Nara looks at the lunchbox. The lunchbox looks at Nara. Two very picky eaters. Nobody blinks.
 8	data/scenes.js	2774	TNB	surprised	Babe. It's her. It's Nara as a lunchbox.
-8	data/scenes.js	2775	Tom	proud	That flame is my oven. My forty loaves. Put it down. No touching, please.
+8	data/scenes.js	2775	Tom	proud	That flame is the pilot light from my oven, and I have forty loaves to bake. Put it down. No touching, please.
 8	data/scenes.js	2780	Nara	proud	Nara nods. She understands completely.
 8	data/scenes.js	2786	Tom	none	Tom takes out the sandwich he packed for himself. Turkey, mustard, his own sourdough. He puts it on his own plate. He sits down.
 8	data/scenes.js	2787	Nara	happy	Nara is at his elbow in half a second. She looks at the sandwich. She looks at Tom. She takes the whole thing, very gently, off his plate.
@@ -606,15 +618,17 @@ chapter	file	line	character	mood	text
 8	data/scenes.js	2839	Nara	angry	Nara growls. A small growl. She's very hungry, and very serious.
 8	data/scenes.js	2840	Tom	proud	Give the flames back. No touching, please.
 8	data/scenes.js	2844	TNB	happy	Okay. Up. Everybody up. That was hot. That was SO hot.
-8	data/scenes.js	2844	TNB	none	Babe, Splash cools her down. Cozy stokes her up, so not too much of that. And she wants somebody to bake something in her. Three times.
+8	data/scenes.js	2844	TNB	none	Babe, Splash moves cool her down, and Cozy moves stoke her up, so go easy on those.
+8	data/scenes.js	2844	TNB	none	What she really wants is for somebody to bake something in her. Do that three times.
 8	data/scenes.js	2853	Tom	loving	Forty loaves. Tonight. You're the only oven on 2nd Ave hot enough for Bready Mercury.
 8	data/scenes.js	2856	Tom	loving	Or. Forty loaves. Tonight. You're the only oven on 2nd Ave hot enough.
 8	data/scenes.js	2863	TNB	happy	Forty loaves, babe. FORTY. They're crackling. Listen to them. They're singing.
 8	data/scenes.js	2868	Nara	proud	Nara is digging in the ash pan. Nara has found something. Nara is very proud of it.
 8	data/scenes.js	2870	Tom	surprised	A gold coin. Same little clock face.
-8	data/scenes.js	2870	Tom	surprised	The sundial. The steamer. The sign-up sheet. My jar. The book from 1952. And now an oven nobody has opened since 1963.
-8	data/scenes.js	2871	TNB	scared	Somebody keeps getting into places nobody gets into. Very neat. Very quiet. Very spooky. I love it. I hate it.
-8	data/scenes.js	2872	Tom	surprised	Look at the corners. Not a speck of ash on it. Somebody put it there after the fire went out. I'm adding it to the list.
+8	data/scenes.js	2870	Tom	surprised	That's six coins. The sundial, the steamer, the sign-up sheet, my jar, the book from 1952, and now an oven that nobody has opened since 1963.
+8	data/scenes.js	2871	TNB	scared	Same deal as all the others, babe. He finds something that's been alone for years, gives it a coin, and tells it nobody ever has to leave. Very neat.
+8	data/scenes.js	2871	TNB	scared	Very quiet. Very spooky. I love it. I hate it.
+8	data/scenes.js	2872	Tom	surprised	There's not a speck of ash on this coin, so somebody put it in the oven after the fire went out. I'm adding it to the list.
 8	data/scenes.js	2883	TNB	happy	Noted, Bernadette.
 8	data/scenes.js	2884	Olivia	happy	Tom. TOM. Nara is eating. Look at her. She's EATING.
 8	data/scenes.js	2885	Nara	happy	Nara is eating bread off Tom’s plate. Tom put it there for her. She knows exactly what she's doing.
@@ -627,9 +641,11 @@ chapter	file	line	character	mood	text
 8	data/scenes.js	2899	Tom	surprised	A text from Deedee. "Honey. A letter came for you at our house. Fancy envelope. Gold wax seal with a little clock on it."
 8	data/scenes.js	2899	Tom	loving	"It says THE MOON CLUB. Nobody gets invited to the Moon Club. I've lived here forty years. I love you to the moon and back. Call me."
 8	data/scenes.js	2900	TNB	happy	The Moon Club. Babe. That's a secret society. I've seen this movie. Several times. It never goes well for the tall one.
-8	data/scenes.js	2901	Tom	surprised	A little clock. On the seal.
+8	data/scenes.js	2901	Tom	surprised	A little clock on the seal. That's his clock, the one on every coin. He's done sending coins to lonely things. Now he's sending mail to me.
 9	data/scenes.js	3065	Deedee	loving	Okay, everybody up. Deedee is a nurse. Up, up. Little sip of water. Good.
-9	data/scenes.js	3076	Boppy	proud	Three mirrors. Three stands. One little moonbeam. I didn't drive a car for forty years without learning about mirrors.
+9	data/scenes.js	3076	Boppy	proud	We've got three mirrors, three stands and one little moonbeam.
+9	data/scenes.js	3076	Boppy	proud	If we aim the mirrors right, the moonbeam bounces to the lock on the Dome doors.
+9	data/scenes.js	3076	Boppy	proud	I didn't drive a car for forty years without learning about mirrors.
 9	data/scenes.js	3077	Deedee	unimpressed	You drove into the mailbox twice, honey.
 9	data/scenes.js	3078	Boppy	unimpressed	The mailbox moved.
 9	data/scenes.js	3084	Grace	happy	Tata. TATA. Deedee has a LETTER for you. It's GOLD. She won't let us open it.
@@ -656,7 +672,8 @@ chapter	file	line	character	mood	text
 9	data/scenes.js	3109	Aunt Ellie	sad	Darling, I went to everything. The last dance. A big silver ball turned all night. Then they locked the doors and nobody ever said why.
 9	data/scenes.js	3109	Aunt Ellie	sad	I left a coat there. Purple velvet. I was in a hurry.
 9	data/scenes.js	3110	Deedee	angry	And now the moon is missing. Three nights. I power walk at nine. I walked straight into the Hendersons’ hedge.
-9	data/scenes.js	3111	Tom	proud	A missing moon, a locked club, and a little gold clock. Everybody get your shoes.
+9	data/scenes.js	3111	Tom	proud	The moon is missing, a club that's been locked for fifty years just invited me, and the invitation has the same little gold clock as my coins.
+9	data/scenes.js	3111	Tom	proud	Everybody get your shoes.
 9	data/scenes.js	3125	Tom	none	The Moon Club. Tonight. Admit three.
 9	data/scenes.js	3127	Deedee	happy	Honey, show her the seal.
 9	data/scenes.js	3131	Boppy	angry	Stairs. Of course it's stairs. Nobody take them fast.
@@ -668,8 +685,9 @@ chapter	file	line	character	mood	text
 9	data/scenes.js	3141	Deedee	none	Somebody read me that plaque. My glasses are in my other purse.
 9	data/scenes.js	3142	Boppy	unimpressed	You're wearing them, Dee.
 9	data/scenes.js	3143	Deedee	happy	Oh. So I am. Well then.
-9	data/scenes.js	3144	Deedee	surprised	The plaque says MEMBERS ARE ADMITTED BY MOONLIGHT. And look, three little brass stands. Somebody took the mirrors.
-9	data/scenes.js	3145	Boppy	proud	A coat check, a card room, a ballroom. Three rooms. Three stands. I count three suspects.
+9	data/scenes.js	3144	Deedee	surprised	The plaque says MEMBERS ARE ADMITTED BY MOONLIGHT. And look, there are three little brass stands that used to hold mirrors.
+9	data/scenes.js	3144	Deedee	surprised	Somebody took the mirrors.
+9	data/scenes.js	3145	Boppy	proud	There's a coat check, a card room and a ballroom. Three rooms and three missing mirrors. I'd say there's one mirror hiding in each room.
 9	data/scenes.js	3145	Boppy	proud	Assistant Deputy Warden. Rikers. I know what a lineup looks like.
 9	data/scenes.js	3156	Deedee	surprised	Purple velvet. Tom. That's Aunt Ellie’s coat.
 9	data/scenes.js	3157	Tom	unimpressed	And our mirror is hanging off your other shoulder.
@@ -693,17 +711,19 @@ chapter	file	line	character	mood	text
 9	data/scenes.js	3234	Boppy	unimpressed	Forever is a lot of dancing. And everybody dances too fast.
 9	data/scenes.js	3235	Tom	proud	Deedee, Boppy, behind me. No touching, please.
 9	data/scenes.js	3239	Deedee	loving	Up, everybody. Deedee is a nurse.
-9	data/scenes.js	3239	Deedee	none	Tom, whatever her shiny side shows bounces right back. Use something else. And honey, nobody has asked her to dance since 1971. Three times.
+9	data/scenes.js	3239	Deedee	none	Tom, whatever kind of move her shiny side is showing bounces right back at us, so use a different kind.
+9	data/scenes.js	3239	Deedee	none	And honey, nobody has asked her to dance since 1971. Ask her three times.
 9	data/scenes.js	3249	Deedee	loving	Oh, honey. Nobody has to turn off the lights. We'll come back. Every full moon. I'll bring crisp.
 9	data/scenes.js	3253	Deedee	loving	Tom. Dance with your mother.
 9	data/scenes.js	3254	Tom	unimpressed	I mostly sway.
 9	data/scenes.js	3255	Deedee	loving	Then sway with your mother.
 9	data/scenes.js	3261	Boppy	surprised	Something fell out of her top. On the bandstand. Something gold.
 9	data/scenes.js	3263	Tom	surprised	A gold coin. Same little clock face.
-9	data/scenes.js	3263	Tom	surprised	The sundial. The steamer. The sign-up sheet. My jar. The book from 1952. The oven from 1963. Now a mirrorball from 1971.
-9	data/scenes.js	3264	Deedee	surprised	Somebody invited you up here, Tom. Not her. She can't hold a pen. She's a ball.
-9	data/scenes.js	3264	Deedee	loving	Somebody who knew you'd come. And that you'd bring your mother.
-9	data/scenes.js	3265	Tom	proud	Somebody with a little clock. I'm adding it to the list.
+9	data/scenes.js	3263	Tom	surprised	That's seven coins. The sundial, the steamer, the sign-up sheet, my jar, the book from 1952, the oven from 1963, and now a mirrorball from 1971.
+9	data/scenes.js	3264	Deedee	surprised	So he wrote that invitation, Tom. It wasn't her. She can't hold a pen. She's a ball.
+9	data/scenes.js	3264	Deedee	surprised	He wanted you up here, dancing under her forever, with me and your father.
+9	data/scenes.js	3264	Deedee	loving	He knew you'd come, and he knew you'd bring your mother. That's a man who has been watching this family.
+9	data/scenes.js	3265	Tom	proud	Seven coins. Seven times he's tried to make something of ours stand still, and this time he was aiming at us. I'm adding it to the list.
 9	data/scenes.js	3272	Grace	happy	TATA! The MOON came back! We saw it from the window! Aunt Ellie said it was probably you.
 9	data/scenes.js	3273	Rose	proud	I won at cards. I cheated. Aunt Ellie said I'm a natural.
 9	data/scenes.js	3274	Aunt Ellie	unimpressed	She is. It's frightening. Well? Was there a ball?
@@ -717,17 +737,17 @@ chapter	file	line	character	mood	text
 9	data/scenes.js	3283	Deedee	angry	I couldn't FIND them, honey.
 9	data/scenes.js	3285	Tom	surprised	A boarding pass. "BOARDING GROUP 0. FROM: LONG ISLAND. TO: NOWHERE. GATE: TO BE ANNOUNCED." And a little gold clock.
 9	data/scenes.js	3285	Tom	unimpressed	There's no boarding group zero. I have flown Delta One forty times. I'd know.
-9	data/scenes.js	3286	Grace	happy	Tata. Somebody wants you to go on a TRIP.
+9	data/scenes.js	3286	Grace	happy	Tata. It has the little clock on it. The coin man wants you to go on a TRIP.
 9	data/scenes.js	3287	Rose	happy	Can I come? I'll be good. I'll be medium good.
 10	data/scenes.js	3482	Amy	proud	Up! Everybody up! Walk it off. Hydrate. We have a flight to catch. Probably.
-10	data/scenes.js	3494	Amy	surprised	Three hands. The clock still isn't moving. Tom. The slots round the face. There are seven of them.
-10	data/scenes.js	3495	Tom	surprised	Seven slots. And I have seven gold coins. In a sock. In my bag.
+10	data/scenes.js	3494	Amy	surprised	The clock has all three hands now, and it still isn't moving. Tom, look at the slots around the face. There are seven of them.
+10	data/scenes.js	3495	Tom	surprised	Seven slots, and I have seven gold coins. They're in a sock in my bag.
 10	data/scenes.js	3495	Tom	proud	I've been keeping a list. I have also been keeping the coins.
-10	data/scenes.js	3496	Grace	proud	They go in the order we found them! Like a clock. Going round. I KNEW the list was important.
+10	data/scenes.js	3496	Grace	proud	They go in the order we found them, going around the face like a clock! I KNEW the list was important.
 10	data/scenes.js	3507	Amy	angry	TOM. Don't get in that cab.
 10	data/scenes.js	3509	Amy	angry	You're not taking my girls to a closed airport at midnight without me.
 10	data/scenes.js	3509	Amy	angry	Every clock in our house stopped at twelve. The microwave. The oven. My running watch. My RUNNING WATCH, Tom.
-10	data/scenes.js	3510	Tom	none	Every clock in town. Sal says zero o’clock.
+10	data/scenes.js	3510	Tom	none	It's every clock in town. They all stopped at midnight. Sal calls it zero o'clock.
 10	data/scenes.js	3511	Grace	happy	Mom, it's SO good. We have boarding passes. Well. Tata has one. And Sal has one. Group ZERO.
 10	data/scenes.js	3512	Rose	proud	I'm in group zero too. I decided.
 10	data/scenes.js	3513	Amy	proud	Fine. I have run through every airport in America. I've never missed a connection.
@@ -753,29 +773,32 @@ chapter	file	line	character	mood	text
 10	data/scenes.js	3597	Amy	happy	"Best one yet. Is that an airport? At midnight?? Proud of you guys." With the heart. He used the heart.
 10	data/scenes.js	3598	Grace	happy	TWO hearts this year! That's a record!
 10	data/scenes.js	3609	Grace	proud	The sundial, the steamer, the sign-up sheet, the jar, the book, the oven, the Mirrorball. I knew it. I KNEW the list was important.
-10	data/scenes.js	3610	Amy	surprised	Seven coins. Seven chapters of your life, Tom. Somebody has been planning this.
-10	data/scenes.js	3611	Tom	surprised	Somebody with a little clock. And one more coin.
+10	data/scenes.js	3610	Amy	surprised	Seven coins. Seven times this man tried to make something stand still, and seven times you took the coin away. And now they all fit his clock.
+10	data/scenes.js	3611	Tom	surprised	It's his clock. And the middle slot is still empty, so there's one more coin out there, and one more lonely thing holding it.
 10	data/scenes.js	3620	Rose	surprised	A PLANE. A real one. Out the window. Its lights are on. Tata, its lights are ON.
 10	data/scenes.js	3625	Tom	unimpressed	So you stopped every clock on Long Island at midnight.
 10	data/scenes.js	3627	Amy	angry	My running watch hasn't moved in a day. I can't log a run. Do you understand what you've done.
 10	data/scenes.js	3628	Grace	proud	Rose, she's a sign that talks. Like the one at the dentist. But MAD.
 10	data/scenes.js	3629	Tom	proud	Girls, Amy, behind me. Watch the board. When she calls your name, you move. No touching, please.
 10	data/scenes.js	3633	Amy	proud	Up, everybody. Walk it off.
-10	data/scenes.js	3633	Amy	none	Tom, when she calls one of us, that person has to move before she goes again. Or you stand in front of them. And nobody has answered her since 1989. Three times.
+10	data/scenes.js	3633	Amy	none	Tom, when she calls one of us, that person has to move before her next turn. Or you stand in front of them.
+10	data/scenes.js	3633	Amy	none	And nobody has answered her call since 1989. Answer her three times.
 10	data/scenes.js	3643	Amy	loving	Hey. Nobody cancelled you. You just needed a crowd. Look. You have a crowd.
 10	data/scenes.js	3646	Tom	surprised	A gold coin. Same little clock face. Number eight.
-10	data/scenes.js	3646	Tom	surprised	The sundial. The steamer. The sign-up sheet. My jar. The book from 1952. The oven from 1963. The Mirrorball from 1971. And a gate from 1989.
+10	data/scenes.js	3646	Tom	surprised	That's all eight. A sundial, a movie, a school, my jar, a book, an oven, the moon, and now midnight.
+10	data/scenes.js	3646	Tom	surprised	Eight times he tried to stop something, and eight times it let go.
 10	data/scenes.js	3649	Amy	happy	My watch. Tom. My WATCH. It says twelve oh one. Twelve oh one!
 10	data/scenes.js	3650	Grace	happy	Every clock in the whole town is going again. I can FEEL it.
 10	data/scenes.js	3654	Rose	happy	I'm a PILOT. I'm wearing them upside down. On purpose. It's a pilot thing.
 10	data/scenes.js	3656	Grace	surprised	Tata. Tata. The jet bridge. There's a man.
-10	data/scenes.js	3659	Grace	surprised	In a long coat. Like at the school. He's tipping his hat at you.
+10	data/scenes.js	3659	Grace	surprised	He's wearing a long coat, like the man Rose saw at the school. He's tipping his hat at you.
 10	data/scenes.js	3666	Amy	surprised	Tom. Who IS that?
-10	data/scenes.js	3667	Tom	proud	Somebody who knows I always make my connection.
+10	data/scenes.js	3667	Tom	proud	He's the man who handed out the coins. Eight tries to stop our towns, and none of them held.
+10	data/scenes.js	3667	Tom	proud	I don't know his name, but he knows I always make my connection.
 10	data/scenes.js	3667	Tom	none	He left a card on the podium. Gold ink. "THANK YOU FOR FLYING NOWHERE. YOUR LAYOVER WILL BE ANNOUNCED." And a little clock.
 10	data/scenes.js	3669	Tom	surprised	My boarding pass changed. "BOARDING GROUP 0. FROM: LONG ISLAND. TO: NOWHERE. STATUS: LAYOVER."
 10	data/scenes.js	3670	Rose	surprised	What's a layover?
-10	data/scenes.js	3671	Tom	proud	It means this trip isn't over.
+10	data/scenes.js	3671	Tom	proud	A layover is a stop in the middle of a trip. It means this trip isn't over. And neither is he.
 10	data/scenes.js	3673	Amy	proud	Okay. It's twelve oh four. Mom has been holding Sunday dinner since midnight. Everybody to the cab.
 10	data/scenes.js	3682	Deedee	happy	THERE they are. Tom! The oven clock started blinking twelve oh one and I cried a little. Into the gravy. It's fine. It's seasoning.
 10	data/scenes.js	3683	Boppy	surprised	Every clock in this house started at once. Eleven clocks. I didn't know we'd eleven clocks.
@@ -803,13 +826,13 @@ chapter	file	line	character	mood	text
 10	data/scenes.js	3706	Deedee	loving	To the moon and BACK.
 11	data/scenes-p2.js	15	Deedee	loving	Tom! Sit. Eat. I made a crisp. Yes, I know it's nine in the morning. Do not argue.
 11	data/scenes-p2.js	16	Tom	unimpressed	Trust me, I was not going to argue.
-11	data/scenes-p2.js	17	Boppy	unimpressed	This came for the recliner. A gold card. “Priority Member.” Junk mail. They send it to the recliner now.
-11	data/scenes-p2.js	17	Boppy	surprised	Don’t throw it out. It’s warm. I think it’s warm. My knee says it’s warm.
-11	data/scenes-p2.js	19	Tom	surprised	My boarding pass is buzzing in my pocket. It says: YOUR LAYOVER IS NOW BOARDING.
+11	data/scenes-p2.js	17	Boppy	unimpressed	A gold card came in the mail, addressed to my recliner. It says Priority Member. It’s junk mail. They send junk mail to furniture now.
+11	data/scenes-p2.js	17	Boppy	surprised	Don’t throw it out, though. It feels warm. Even my knee can feel it.
+11	data/scenes-p2.js	19	Tom	surprised	The boarding pass from Gate Zero is buzzing in my pocket. Now it says: YOUR LAYOVER IS NOW BOARDING.
 11	data/scenes-p2.js	20	Deedee	loving	A layover! Where? Never mind. Take a sweater. Actually, take two. And take the crisp.
 11	data/scenes-p2.js	21	Boppy	unimpressed	Bring me back a pretzel. A real one. Not the airport kind.
 11	data/scenes-p2.js	22	Deedee	loving	To the moon and back, Tom. Both ways.
-11	data/scenes-p2.js	36	Tom	surprised	A pod seat. A real one. Somebody upgraded me and nobody told me why.
+11	data/scenes-p2.js	36	Tom	surprised	Flight Zero was waiting at the gate with one seat made up. A real pod seat. Somebody upgraded me, and nobody told me why.
 11	data/scenes-p2.js	36	Tom	surprised	And something in seat 5B is giggling.
 11	data/scenes-p2.js	38	Tom	unimpressed	Whoever is under the blanket, you’re breathing very loudly.
 11	data/scenes-p2.js	43	Rose	happy	BOO! We’re stowaways! Tata, what’s a stowaway?
@@ -819,26 +842,28 @@ chapter	file	line	character	mood	text
 11	data/scenes-p2.js	46	Rose	happy	It’s the one with the tiny planes on it.
 11	data/scenes-p2.js	47	Grace	proud	Tata, if you tell Mom, I’m going to make a video about it. Please like and subscribe.
 11	data/scenes-p2.js	48	Tom	unimpressed	Nobody is subscribing to a stowaway.
-11	data/scenes-p2.js	53	Amy	scared	STOP THE PLANE. I have a ticket. I don’t have a ticket. I have my running shoes.
-11	data/scenes-p2.js	55	Amy	proud	My daughters ran out of the house in their socks, Tom. I’m their ride home. And I’m faster than you.
+11	data/scenes-p2.js	53	Amy	scared	STOP THE PLANE! I don’t have a ticket. I have my running shoes, and I just chased my daughters across a whole airport.
+11	data/scenes-p2.js	55	Amy	proud	They ran out of the house in their socks, Tom. Wherever this plane is going, I’m going too. I’m their ride home. And I’m faster than you.
 11	data/scenes-p2.js	56	Tom	unimpressed	Nobody here is racing.
 11	data/scenes-p2.js	57	Amy	proud	That’s what the person who loses says.
 11	data/scenes-p2.js	63	Rose	surprised	The sky has a hole in it. The hole is pink. Tata, can I touch it?
 11	data/scenes-p2.js	64	Tom	unimpressed	No touching, please.
-11	data/scenes-p2.js	64	Tom	loving	Everybody hold on to something. Preferably each other.
-11	data/scenes-p2.js	75	Grace	surprised	Tata. The window. There are two tiny towns in it.
-11	data/scenes-p2.js	76	Tom	none	Left one is green. That’s Long Island. Right one is orange. That’s Los Angeles.
-11	data/scenes-p2.js	76	Tom	surprised	Both of them inside glass. Like snow globes.
-11	data/scenes-p2.js	77	Amy	none	Then we’re in the layover. Between the two. Everything is on time and nothing is going anywhere.
+11	data/scenes-p2.js	64	Tom	loving	The plane is flying straight into it. Everybody hold on to something. Preferably each other.
+11	data/scenes-p2.js	75	Grace	surprised	Tata, look out the big window. There are two tiny towns floating out there.
+11	data/scenes-p2.js	76	Tom	none	The green one on the left is Long Island, and the orange one on the right is Los Angeles.
+11	data/scenes-p2.js	76	Tom	surprised	They’re both inside glass, like snow globes.
+11	data/scenes-p2.js	77	Amy	none	Then this is the layover on your boarding pass.
+11	data/scenes-p2.js	77	Amy	none	It’s a place in between our two homes, where everything is on time and nothing is going anywhere.
 11	data/scenes-p2.js	78	Rose	happy	Can we live here? There’s a plant with a hat.
 11	data/scenes-p2.js	79	Tom	unimpressed	We are not living in an airport, Rose.
-11	data/scenes-p2.js	79	Tom	proud	We’re finding the way through it. East, down the Endless Concourse.
-11	data/scenes-p2.js	87	Amy	surprised	Nine gates. Boston, Denver, Seattle, Chicago, Miami. Every one of them says PAUSED.
-11	data/scenes-p2.js	88	Grace	surprised	It’s a whole day of everybody’s trip, stopped in the middle. The seagull still has the fry.
-11	data/scenes-p2.js	89	Tom	unimpressed	Careful. A town paused is still a town. Don’t lick the glass.
+11	data/scenes-p2.js	79	Tom	proud	We’re going to find whoever sent me that boarding pass. The only way on is east, down the Endless Concourse.
+11	data/scenes-p2.js	87	Amy	surprised	There are nine gates here: Boston, Denver, Seattle, Chicago, Miami and more. Every one of them says PAUSED.
+11	data/scenes-p2.js	88	Grace	surprised	Each window is a whole town, stopped in the middle of one day. Look, that seagull still has the same fry.
+11	data/scenes-p2.js	89	Tom	unimpressed	Careful. Those are real towns with real people in them, even if they’re paused. Don’t lick the glass.
 11	data/scenes-p2.js	90	Rose	happy	I wasn’t going to.
 11	data/scenes-p2.js	91	Rose	happy	I was going to look at it with my face.
-11	data/scenes-p2.js	92	Tom	none	Gate Infinity is the big door at the far end. There’s a checkpoint in the middle, and somebody is standing in it.
+11	data/scenes-p2.js	92	Tom	none	Gate Infinity is the big door at the far end. I think the man in the long coat is behind it.
+11	data/scenes-p2.js	92	Tom	none	But there’s a checkpoint in the middle, and somebody is standing in it.
 11	data/scenes-p2.js	102	Tom	surprised	Who is number seventeen?
 11	data/scenes-p2.js	104	Amy	proud	I’ve never been on standby in my life. I’ve been on time, or I’ve been first.
 11	data/scenes-p2.js	105	Grace	unimpressed	Rose, he has a paddle that says STANDBY and he thinks it’s a weapon.
@@ -846,9 +871,10 @@ chapter	file	line	character	mood	text
 11	data/scenes-p2.js	110	Amy	proud	Everybody okay? Good. He’s a clipboard with legs.
 11	data/scenes-p2.js	131	Nara	loving	Nara sees Tom. Nara sees EVERYTHING that is not Tom disappear.
 11	data/scenes-p2.js	134	Tom	loving	Hi. Hi, bean. Yes. I know. You were so brave on the plane.
-11	data/scenes-p2.js	136	TNB	happy	Hey, babe. The airline lost my bag, found my dog, and upgraded us both. This place is nice.
-11	data/scenes-p2.js	138	Tom	surprised	You came through the sky.
-11	data/scenes-p2.js	139	TNB	happy	I came through the sky with a dog on a pillow. It was fine. There was a pot on the cart that was kind of incredible.
+11	data/scenes-p2.js	136	TNB	happy	Hey, babe. A gold boarding pass turned up on the loft door this morning, with my name and Nara’s on it. So we got on the plane.
+11	data/scenes-p2.js	136	TNB	happy	The airline lost my bag, found my dog, and upgraded us both.
+11	data/scenes-p2.js	138	Tom	surprised	You flew through the hole in the sky too.
+11	data/scenes-p2.js	139	TNB	happy	I flew through a pink hole in the sky with a dog on a pillow. It was fine. There was a ceramic pot on the drinks cart that was kind of incredible.
 11	data/scenes-p2.js	140	Grace	happy	Hi! I’m Grace. I’m nine.
 11	data/scenes-p2.js	141	TNB	happy	I know exactly who you are. Tom shows me all your videos. You’re very good at telling people to subscribe.
 11	data/scenes-p2.js	142	Grace	proud	Thank you. Subscribe.
@@ -856,12 +882,13 @@ chapter	file	line	character	mood	text
 11	data/scenes-p2.js	144	TNB	unimpressed	That’s my longboard.
 11	data/scenes-p2.js	145	Rose	happy	It’s ours now.
 11	data/scenes-p2.js	146	Nara	happy	Nara licks Grace’s glitter nails, one at a time. She seems to feel it’s a type of review.
-11	data/scenes-p2.js	147	Amy	unimpressed	You’re the boyfriend.
+11	data/scenes-p2.js	147	Amy	unimpressed	So you’re TNB. The boyfriend. We finally meet in person.
 11	data/scenes-p2.js	148	TNB	happy	And you’re the sister. The runner. I’ve heard a lot.
 11	data/scenes-p2.js	149	Amy	unimpressed	I’ve heard nothing, which means he’s been saving you for a special occasion.
 11	data/scenes-p2.js	150	TNB	proud	I can fix a handle or fire a vase. What are you good at?
 11	data/scenes-p2.js	151	Amy	proud	Everything, and quickly. I think we’re going to get along.
-11	data/scenes-p2.js	153	TNB	happy	Okay. Everybody. Sleepover rules. We have a blanket, a dog, and nine hours of dusk.
+11	data/scenes-p2.js	153	TNB	happy	Okay, everybody. It’s always dusk here and nobody has slept, so I’m calling a sleepover before we go any farther.
+11	data/scenes-p2.js	153	TNB	happy	We have a blanket, a dog, and nine hours of dusk.
 11	data/scenes-p2.js	153	TNB	happy	Tom, build the fort. I’ll make the snacks.
 11	data/scenes-p2.js	192	Rose	happy	Can I ring the bell?
 11	data/scenes-p2.js	193	Tom	unimpressed	Gently.
@@ -869,21 +896,21 @@ chapter	file	line	character	mood	text
 11	data/scenes-p2.js	196	Grace	surprised	Tata. Every single thing here has a tag. A blue mitten. A trombone. A birthday hat. A retainer.
 11	data/scenes-p2.js	197	Amy	happy	Nobody has claimed the retainer in my family since 2011. That’s not related. Moving on.
 11	data/scenes-p2.js	198	TNB	loving	These are all things people left behind when they got to the good part of a trip. A mitten from the best snow day. A hat from the best party.
-11	data/scenes-p2.js	198	TNB	sad	They didn’t want to leave. So they didn’t go back for it.
-11	data/scenes-p2.js	199	Tom	surprised	Somebody collected them. Every gold clock is the same little clock as the coins.
-11	data/scenes-p2.js	200	Rose	surprised	Tata. Tata. The ? suitcases. They’re all in here. They’re all being very polite.
+11	data/scenes-p2.js	198	TNB	sad	They didn’t want the good part to end, so they left a piece of it behind and never came back for it.
+11	data/scenes-p2.js	199	Tom	surprised	And somebody collected all of it. Every tag has the same little gold clock that’s on my coins.
+11	data/scenes-p2.js	200	Rose	surprised	Tata, the Lost Luggage monsters from the Concourse are all in here. And they’re all being very polite.
 11	data/scenes-p2.js	202	Grace	sad	That is the saddest thing I have ever read. And I read my sister’s diary.
 11	data/scenes-p2.js	203	Rose	happy	I don’t have a diary. I have a drawing of a dog.
-11	data/scenes-p2.js	206	Tom	surprised	...He’s been holding a spot for me. Not for my bag. For me.
+11	data/scenes-p2.js	206	Tom	surprised	...He’s been holding a spot here for me. Not for my bag. For me. He wants me to stay.
 11	data/scenes-p2.js	207	Amy	unimpressed	That’s either the nicest thing I’ve ever heard or a threat.
 11	data/scenes-p2.js	208	TNB	happy	Both, probably. That’s how the good ones are.
-11	data/scenes-p2.js	224	Tom	surprised	You’re the man in the long coat. At the school. At the airport. At Gate Zero.
+11	data/scenes-p2.js	224	Tom	surprised	You’re the man in the long coat. You were in the school parking lot, and on the jet bridge at Gate Zero. You handed out the coins.
 11	data/scenes-p2.js	227	Amy	angry	You stopped our clocks. You stopped MY clock.
 11	data/scenes-p2.js	229	Grace	proud	Paused isn’t happy. Paused is stuck.
 11	data/scenes-p2.js	230	Rose	sad	The seagull has had that fry for a hundred years. He’s not happy. He’s hungry.
 11	data/scenes-p2.js	231	TNB	sad	I have a vase in the kiln in Los Angeles. It’s been in there a long time. It’s going to crack.
 11	data/scenes-p2.js	231	TNB	sad	That’s what happens when you leave something at its best. It doesn’t stay good. It just stays.
-11	data/scenes-p2.js	233	Tom	surprised	That’s the nicest offer anyone’s ever made me. And it was in my pocket the whole time. I had a pass.
+11	data/scenes-p2.js	233	Tom	surprised	That’s the nicest offer anyone has ever made me. And I’ve had the boarding pass for it in my pocket this whole time.
 11	data/scenes-p2.js	233	Tom	proud	No, thank you. We have a connection to make.
 11	data/scenes-p2.js	241	Amy	proud	Here’s the plan. Tom up front, girls with me. If that board calls your name, don’t sit there. Move.
 11	data/scenes-p2.js	242	Grace	proud	Rose, when it calls you, move. Don’t stop to look at anything.
@@ -894,8 +921,8 @@ chapter	file	line	character	mood	text
 11	data/scenes-p2.js	260	Amy	loving	Then you’re on one. Seat 18C. Don’t recline.
 11	data/scenes-p2.js	262	Amy	loving	Nobody is cancelling you. You just never got a boarding pass. Here. Take mine.
 11	data/scenes-p2.js	263	Tom	surprised	Something is dropping out of the gate clock. A gold coin, with a little clock face. Number nine.
-11	data/scenes-p2.js	265	Tom	surprised	It’s warm. Whatever Vance was holding, it wasn’t his.
-11	data/scenes-p2.js	275	Grace	scared	Tata. The little green town. It’s turning orange. No. Amber. Like a caution light.
+11	data/scenes-p2.js	265	Tom	surprised	It’s warm. This is one of the old gold coins he bought up on Long Island. He was using it to hold that gate shut.
+11	data/scenes-p2.js	275	Grace	scared	Tata, look at the window. The little green town is changing color. It’s turning amber, like a caution light.
 11	data/scenes-p2.js	276	Rose	scared	Is Deedee okay?
 11	data/scenes-p2.js	277	Amy	scared	I’m calling her. I’m calling her right now.
 11	data/scenes-p2.js	279	Amy	scared	It’s ringing. It’s just ringing. Mom always picks up. Mom picks up on the FIRST ring. She picks up before it rings.
@@ -904,10 +931,10 @@ chapter	file	line	character	mood	text
 11	data/scenes-p2.js	281	TNB	loving	Hey. We’ll go get them. Whatever he did, we’ll fix it. Things come apart. I fix things.
 11	data/scenes-p2.js	282	Tom	proud	We’ll go get them. We always make our connection.
 11	data/scenes-p2.js	283	Rose	none	Which one is Los Angeles?
-11	data/scenes-p2.js	284	Tom	none	The orange one. It’s the only one still open.
+11	data/scenes-p2.js	284	Tom	none	Los Angeles is the orange one. It’s the only gate still open, so that’s the way we have to go. We’ll find a road back to Long Island from there.
 11	data/scenes-p2.js	284	Tom	loving	And it’s where Nara and TNB live. It’s home. Our other home.
 12	data/scenes-ch12.js	24	Tom	surprised	The gold clock on the big door finally has hands. They’re pointing at 3, 4, 6, 8.
-12	data/scenes-ch12.js	24	Tom	surprised	That’s my address. The door knows where I live.
+12	data/scenes-ch12.js	24	Tom	surprised	That’s my house number in Los Angeles. The door is going to open onto my street.
 12	data/scenes-ch12.js	25	Rose	happy	The door knows where you live? That’s so creepy. I love it.
 12	data/scenes-ch12.js	26	TNB	happy	Home. Okay. Good. I have a very good couch and a very bad idea of what’s in the fridge.
 12	data/scenes-ch12.js	27	Nara	happy	Nara hears the word home. Nara is already pressed against the door, vibrating.
@@ -982,11 +1009,11 @@ chapter	file	line	character	mood	text
 12	data/scenes-ch12.js	135	Rose	angry	He took the pink off the jacaranda!
 12	data/scenes-ch12.js	136	Grace	angry	You can’t just take the pink!
 12	data/scenes-ch12.js	138	Amy	proud	I have twelve kids in my room who’ve had harder mornings than you. You don’t scare me. Colors back, please.
-12	data/scenes-ch12.js	143	Tom	surprised	He’s turning the whole block into a backlot. And he stopped something. Look at Mr. Washington.
-12	data/scenes-ch12.js	144	TNB	none	That’s amber. It’s warmth that got stuck. Doña Carmen’s is right there, and the Alvarez house is down 2nd.
+12	data/scenes-ch12.js	143	Tom	surprised	He’s draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He’s frozen solid.
+12	data/scenes-ch12.js	144	TNB	none	He’s trapped in amber. Amber is warmth that got stuck. Doña Carmen’s is right there, and the Alvarez house is down 2nd. They might be frozen too.
 12	data/scenes-ch12.js	145	Tom	proud	We check on the neighbors first.
 12	data/scenes-ch12.js	152	Rose	surprised	Tata. Doña Carmen turned into candy.
-12	data/scenes-ch12.js	153	Tom	none	She’s amber. Mid-sentence.
+12	data/scenes-ch12.js	153	Tom	none	She’s frozen in amber, right in the middle of a sentence.
 12	data/scenes-ch12.js	154	Grace	surprised	She’s still pointing at the volcano.
 12	data/scenes-ch12.js	155	TNB	loving	Amber is just warmth that got stuck. You don’t break it. You give it somewhere to go.
 12	data/scenes-ch12.js	156	Amy	proud	Warmth. We’re good at warmth. Everybody find the warmest thing in the room.
@@ -996,7 +1023,7 @@ chapter	file	line	character	mood	text
 12	data/scenes-ch12.js	160	Nara	happy	Nara sits at Carmen’s feet, tail wagging in a perfect circle, and sneezes on the amber.
 12	data/scenes-ch12.js	165	Tom	loving	You were amber for a little while.
 12	data/scenes-ch12.js	167	Grace	none	A man in a grey suit did it. His name is Marlowe.
-12	data/scenes-ch12.js	179	Tom	none	Okay. They’re amber. The grey got in through the front door.
+12	data/scenes-ch12.js	179	Tom	none	Okay. The whole family is frozen in amber. Marlowe’s grey got in through the front door.
 12	data/scenes-ch12.js	180	Amy	proud	Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck when they’re moving.
 12	data/scenes-ch12.js	181	Grace	surprised	You mean...
 12	data/scenes-ch12.js	182	Amy	proud	Everybody up. Girls, with me. We’re running laps around the kitchen table.
@@ -1019,13 +1046,14 @@ chapter	file	line	character	mood	text
 12	data/scenes-ch12.js	241	Tom	surprised	The green lamp just popped off the traffic light. It’s still warm, and it’s humming.
 12	data/scenes-ch12.js	244	Rose	happy	The pink is back! The jacaranda has its pink back!
 12	data/scenes-ch12.js	245	Grace	happy	And the music is back in the window.
-12	data/scenes-ch12.js	251	Tom	angry	Where is my mother?
-12	data/scenes-ch12.js	253	Tom	angry	Tell me where.
+12	data/scenes-ch12.js	251	Tom	angry	You work for Vance, and Vance closed Long Island. My mother isn’t answering her phone. Where is she?
+12	data/scenes-ch12.js	253	Tom	angry	Tell me how to get in.
 12	data/scenes-ch12.js	256	Amy	surprised	He just told us something he shouldn’t have.
-12	data/scenes-ch12.js	257	TNB	proud	Long Island is under glass. So we go under the glass. Or around it.
-12	data/scenes-ch12.js	258	Tom	proud	Sal and Sol know every road between here and there. We start with the cab stand.
+12	data/scenes-ch12.js	257	TNB	proud	He said Long Island is under glass. So Vance sealed it inside a dome, with your mom and dad in it. We’ll have to go under the glass, or around it.
+12	data/scenes-ch12.js	258	Tom	proud	Sal and Sol know every road between here and there. We’ll start at Sol’s cab stand.
 12	data/scenes-ch12.js	259	Tom	proud	We’ll get them back. We always make our connection.
-13	data/scenes-ch13.js	47	Tom	scared	Sol. Sal says there’s a way under the dome. Tell me you know where.
+13	data/scenes-ch13.js	47	Tom	scared	Sol. Vance put a glass dome over Long Island, and my parents are inside it. Sal always says you two know every road there is.
+13	data/scenes-ch13.js	47	Tom	scared	Is there a way under?
 13	data/scenes-ch13.js	50	Grace	happy	Is it crimes?
 13	data/scenes-ch13.js	52	Amy	surprised	You’ve been running a secret mail route.
 13	data/scenes-ch13.js	58	Tom	none	Sal. Can you get me in?
@@ -1052,7 +1080,7 @@ chapter	file	line	character	mood	text
 13	data/scenes-ch13.js	99	Rose	happy	Snack check! Check your pockets! I put a pretzel in your left one!
 13	data/scenes-ch13.js	100	Tom	surprised	...There’s a pretzel in my left pocket.
 13	data/scenes-ch13.js	105	Tom	loving	Nickel. You’re shaking.
-13	data/scenes-ch13.js	107	Amy	surprised	Julian Vance.
+13	data/scenes-ch13.js	107	Amy	surprised	Julian Vance. Those are the coins he handed to every lonely thing we met.
 13	data/scenes-ch13.js	111	TNB	surprised	Why bring them?
 13	data/scenes-ch13.js	113	Tom	surprised	You’re giving up your retirement.
 13	data/scenes-ch13.js	115	Amy	loving	You don’t have to do this.
@@ -1070,20 +1098,21 @@ chapter	file	line	character	mood	text
 13	data/scenes-ch13.js	145	TNB	unimpressed	We’re being pretty quiet right now.
 13	data/scenes-ch13.js	147	Amy	proud	I teach kids for a living. I know what a person sounds like right before they say “be quiet.” You’re in the wrong tunnel.
 13	data/scenes-ch13.js	151	TNB	unimpressed	He left the quiet on. Is anybody else’s ears ringing?
-13	data/scenes-ch13.js	152	Tom	proud	The chip makes it listen for noise. So we make a lot of it. Loudly. Together.
+13	data/scenes-ch13.js	152	Tom	proud	The chip makes the Drill dig toward noise. So we make a lot of noise, all together, and it’ll come to us.
 13	data/scenes-ch13.js	153	Amy	happy	I’ve been trying to get Rose to use her indoor voice for six years. I’m glad somebody finally wants her outdoor one.
-13	data/scenes-ch13.js	161	Tom	surprised	A cavern. A wall of amber the size of a house. And a hole in the dirt exactly the width of a drill.
+13	data/scenes-ch13.js	161	Tom	surprised	This cavern is the middle of the tunnel. That wall of amber is the bottom of the dome over Long Island.
+13	data/scenes-ch13.js	161	Tom	surprised	And there’s a hole in the dirt exactly the width of a drill.
 13	data/scenes-ch13.js	163	Amy	surprised	That is the biggest drill I have ever seen.
 13	data/scenes-ch13.js	164	TNB	unimpressed	That’s a Dual-Coast Drill. They went with the budget model. I can tell by the bolts.
 13	data/scenes-ch13.js	165	Tom	surprised	It’s not charging. It’s digging in place. Round and round.
 13	data/scenes-ch13.js	166	Amy	sad	Its lamps are pointed at the amber. Like it wants to dig through and can’t.
 13	data/scenes-ch13.js	167	TNB	sad	It’s been drilling at that wall for years. Nobody told it to stop.
 13	data/scenes-ch13.js	168	Nara	sad	Nara sits very still. She has never seen anything so large that wanted so little.
-13	data/scenes-ch13.js	169	Tom	proud	Hit it if it hits back. Be kind first. Amy, heal. TNB, I’m on the chip. Everybody make some noise.
+13	data/scenes-ch13.js	169	Tom	proud	Be kind to it first, and only hit it if it hits back. Amy, you heal. TNB, I’ll go for the hush chip. Everybody else, make some noise.
 13	data/scenes-ch13.js	174	Amy	proud	Everybody okay? Good. It brings the roof down every third turn, so we heal before, not after.
 13	data/scenes-ch13.js	183	Amy	loving	Union rules. Hydrate. And when you’re ready, we’ll tell you where you were going.
 13	data/scenes-ch13.js	185	Amy	loving	It’s fine. Nobody’s mad at a drill. They’re mad at whoever put a chip in it.
-13	data/scenes-ch13.js	187	Tom	surprised	A little grey cube just popped out of its side. The hush chip. It’s very quiet.
+13	data/scenes-ch13.js	187	Tom	surprised	A little grey cube just popped out of its side. That’s the chip HUSH-9 put in it. It’s very quiet.
 13	data/scenes-ch13.js	188	TNB	happy	Not anymore.
 13	data/scenes-ch13.js	190	Rose	happy	TATA! We can hear you! Sol says the radio is back! I ate a snack for you!
 13	data/scenes-ch13.js	191	Grace	proud	Dispatch to Tom. You’re loud and clear. What happened? Say over. At the END.
@@ -1115,12 +1144,12 @@ chapter	file	line	character	mood	text
 13	data/scenes-ch13.js	258	Tom	surprised	Dad.
 13	data/scenes-ch13.js	259	Boppy	proud	Halt.
 13	data/scenes-ch13.js	260	Amy	surprised	Dad? What are you wearing?
-13	data/scenes-ch13.js	261	Boppy	happy	Warden’s plate. Gold. It hums. I like the hum.
-13	data/scenes-ch13.js	262	Boppy	happy	My back doesn’t hurt, Tommy. It’s been eleven years. I made a deal.
+13	data/scenes-ch13.js	261	Boppy	happy	It’s a Warden’s plate. It’s gold armor, and it hums. I like the hum.
+13	data/scenes-ch13.js	262	Boppy	happy	My back doesn’t hurt, Tommy, for the first time in eleven years. I made a deal.
 13	data/scenes-ch13.js	263	Tom	scared	What deal?
 13	data/scenes-ch13.js	264	Boppy	loving	Nobody gets hurt. Nobody gets old. Nobody gets left. Your mother’s inside. She’s fine. She’s making a crisp.
-13	data/scenes-ch13.js	265	Boppy	proud	I stand here and the glass stays up. That’s the deal.
-13	data/scenes-ch13.js	266	Tom	scared	Dad. That isn’t safe. That’s a freezer.
+13	data/scenes-ch13.js	265	Boppy	proud	As long as I stand guard here, the glass dome stays up over Long Island. That’s the deal.
+13	data/scenes-ch13.js	266	Tom	scared	Dad, that’s the same deal he gave a mirrorball, an oven and a squirrel. It isn’t safe. It’s a freezer.
 13	data/scenes-ch13.js	267	Boppy	angry	Go home, Tom. Take your friends. Go back to the good coast.
 13	data/scenes-ch13.js	269	Amy	angry	Dad. Take that off. You’ll rust.
 13	data/scenes-ch13.js	270	Boppy	sad	...Amy. You’re not supposed to be here. You’re supposed to be safe.
@@ -1132,9 +1161,10 @@ chapter	file	line	character	mood	text
 14	data/scenes-ch14.js	30	Tom	sad	Dad. It’s Tom. I’m right in front of you.
 14	data/scenes-ch14.js	31	Boppy	proud	Halt.
 14	data/scenes-ch14.js	32	Amy	proud	He said that before. He’s going to say it again. He’s going to say it until we do something about it.
-14	data/scenes-ch14.js	34	TNB	scared	Tom. Behind us, down the stairs, something is coming up the tunnel. A lot of clipboards. I counted fourteen.
+14	data/scenes-ch14.js	34	TNB	scared	Tom. Behind us, down the stairs, something is coming up the tunnel. A lot of grey men with clipboards. Vance’s Auditors. I counted fourteen.
 14	data/scenes-ch14.js	35	Nara	angry	Nara growls, low. She has opinions about clipboards.
-14	data/scenes-ch14.js	36	TNB	proud	Sol’s handcar is right behind them with the girls. I’ll send them up. Nara and I will hold the breach. Somebody has to be at the bottom of the stairs to say no.
+14	data/scenes-ch14.js	36	TNB	proud	Sol’s handcar is coming up the tunnel with the girls, and I’ll send them up to you. Nara and I will stay and hold the breach.
+14	data/scenes-ch14.js	36	TNB	proud	Somebody has to stand at the bottom of the stairs and tell the Auditors no.
 14	data/scenes-ch14.js	37	Tom	scared	You’re staying in a tunnel full of Auditors.
 14	data/scenes-ch14.js	38	TNB	proud	I used to carry coffee through a film set at five in the morning. I can handle an Auditor.
 14	data/scenes-ch14.js	39	Amy	happy	Take the thermos. They hate a thermos.
@@ -1158,7 +1188,8 @@ chapter	file	line	character	mood	text
 14	data/scenes-ch14.js	72	Rose	surprised	Boppy. There’s a Deedee on the porch.
 14	data/scenes-ch14.js	73	Boppy	unimpressed	That’s a decoration.
 14	data/scenes-ch14.js	74	Rose	happy	She waved.
-14	data/scenes-ch14.js	75	Tom	proud	Okay. First the porch. Then Dad. Nobody touches the armor. Not even a little. Rose, that includes you.
+14	data/scenes-ch14.js	75	Tom	proud	Okay. First we go around him to the porch and help Deedee. Then we deal with Dad. Nobody touches the armor. Not even a little.
+14	data/scenes-ch14.js	75	Tom	proud	Rose, that includes you.
 14	data/scenes-ch14.js	76	Rose	happy	I wasn’t going to touch it. I was going to boop it.
 14	data/scenes-ch14.js	77	Amy	unimpressed	Rose.
 14	data/scenes-ch14.js	78	Rose	happy	A very small boop.
@@ -1166,8 +1197,8 @@ chapter	file	line	character	mood	text
 14	data/scenes-ch14.js	88	Amy	scared	Mom. It’s Amy. Mom, look at me.
 14	data/scenes-ch14.js	89	Deedee	loving	Hello, Amy. Rhubarb crisp, nine minutes. Do you want a bite? Rhubarb crisp. Nine minutes.
 14	data/scenes-ch14.js	90	Tom	sad	She’s looping. Look at the tray. It’s the same crisp. Every time. It’s fresh, it’s perfect, and nobody ever eats it.
-14	data/scenes-ch14.js	91	Tom	sad	Amber is warmth that got stuck. She’s been giving it to nobody for hours. It needs somewhere to go.
-14	data/scenes-ch14.js	92	Rose	surprised	Maybe nobody ate it.
+14	data/scenes-ch14.js	91	Tom	sad	Amber is warmth that got stuck. She’s been baking for nobody for hours, so all that warmth has nowhere to go.
+14	data/scenes-ch14.js	92	Rose	surprised	Maybe somebody just has to eat it.
 14	data/scenes-ch14.js	93	Grace	surprised	Rose. That is the smartest thing you have said all week.
 14	data/scenes-ch14.js	94	Rose	happy	I say smart things every day. They just come out as noise.
 14	data/scenes-ch14.js	96	Rose	loving	Deedee. I’m going to eat the crisp now. Okay? Okay.
@@ -1209,7 +1240,8 @@ chapter	file	line	character	mood	text
 14	data/scenes-ch14.js	163	Grace	surprised	The ache came back!
 14	data/scenes-ch14.js	164	Boppy	unimpressed	It never left. I just had a bucket on it.
 14	data/scenes-ch14.js	165	Tom	loving	Dad.
-14	data/scenes-ch14.js	167	Boppy	sad	A man in a long coat came to the door. Very polite. He never took his hat off. He said he could stop the aches. Stop the slowing down.
+14	data/scenes-ch14.js	167	Boppy	sad	It was the fella I met at the pond, the one in the long coat. He came to the door, very polite. He never took his hat off.
+14	data/scenes-ch14.js	167	Boppy	sad	He said he could stop the aches, and stop the slowing down.
 14	data/scenes-ch14.js	168	Boppy	sad	He said the girls would be safe. In the good part, forever. All I had to do was stand here.
 14	data/scenes-ch14.js	169	Tom	sad	And you said yes.
 14	data/scenes-ch14.js	170	Boppy	sad	I signed a thing. It said WARDEN on the top. I didn’t read the bottom.
@@ -1228,9 +1260,10 @@ chapter	file	line	character	mood	text
 14	data/scenes-ch14.js	190	Amy	loving	Dad. Come on. I’ll walk you in. Short laps. You can complain the whole time.
 14	data/scenes-ch14.js	191	Boppy	angry	My stomach is doing something.
 14	data/scenes-ch14.js	192	Amy	happy	There he is.
-14	data/scenes-ch14.js	193	Tom	scared	Vance said the girls would be safe in the good part, forever. We told him no once. He won’t take it well.
+14	data/scenes-ch14.js	193	Tom	scared	Vance promised you the girls would be safe in the good part, forever. That means he wants to freeze them too.
+14	data/scenes-ch14.js	193	Tom	scared	We already told him no once, and he won’t take a second no well.
 14	data/scenes-ch14.js	194	Tom	proud	We always make our connection.
-14	data/scenes-ch14.js	196	Boppy	proud	Take the key, Tommy. It opens the gate. It also opens the door. It doesn’t matter which. Nobody gets past us.
+14	data/scenes-ch14.js	196	Boppy	proud	Take the Warden’s key, Tommy. It opens the gate, and it opens our front door too. Either way, nobody gets past us.
 14	data/scenes-ch14.js	197	Tom	proud	Nobody gets past us.
 15	data/scenes-ch15.js	57	Tom	unimpressed	Eight chairs. Deedee, there are seven of us and a dog.
 15	data/scenes-ch15.js	58	Deedee	loving	Nara counts. Nara is people. Sit, sit, sit. Everybody sit.
@@ -1327,15 +1360,16 @@ chapter	file	line	character	mood	text
 16	data/scenes-ch16.js	134	Tom	scared	No.
 16	data/scenes-ch16.js	136	Deedee	loving	Robert.
 16	data/scenes-ch16.js	137	Boppy	loving	I know.
-16	data/scenes-ch16.js	142	Deedee	loving	Girls. Close your eyes. Moon and back.
+16	data/scenes-ch16.js	142	Deedee	loving	Girls, close your eyes. Boppy and I are stepping in front of you. To the moon and back.
 16	data/scenes-ch16.js	143	Boppy	proud	Nobody gets past us.
-16	data/scenes-ch16.js	144	Tom	scared	Mom! Dad!
+16	data/scenes-ch16.js	144	Tom	scared	Mom! Dad! Get away from the camera!
 16	data/scenes-ch16.js	147	Deedee	loving	Fifty-one years.
 16	data/scenes-ch16.js	148	Boppy	loving	...And counting.
 16	data/scenes-ch16.js	151	Rose	scared	Deedee?
 16	data/scenes-ch16.js	152	Grace	scared	Boppy. You can move now.
 16	data/scenes-ch16.js	154	Amy	sad	Mom.
-16	data/scenes-ch16.js	155	Tom	sad	Nobody moves. Nobody says anything. In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands.
+16	data/scenes-ch16.js	155	Tom	sad	Nobody moves. Nobody says anything. Deedee and Boppy stepped in front of the camera, and the flash meant for the girls hit them instead.
+16	data/scenes-ch16.js	155	Tom	sad	In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands.
 16	data/scenes-ch16.js	157	Tom	angry	Where are you?
 16	data/scenes-ch16.js	163	Tom	scared	Grace. Rose. Go. Cab seven. Find Sal. Now.
 16	data/scenes-ch16.js	164	Grace	sad	But Deedee...
@@ -1343,7 +1377,7 @@ chapter	file	line	character	mood	text
 16	data/scenes-ch16.js	166	Grace	proud	Rose. Hand. Run. Now.
 16	data/scenes-ch16.js	167	Rose	sad	But Boppy...
 16	data/scenes-ch16.js	168	Grace	scared	I KNOW. RUN.
-16	data/scenes-ch16.js	174	Amy	proud	Tom. Whatever this is, it is between them and the road.
+16	data/scenes-ch16.js	174	Amy	proud	Tom. Whatever Marlowe just turned into, it’s standing between the girls and the road.
 16	data/scenes-ch16.js	175	Tom	proud	Then it doesn’t get past us. Dad said so.
 16	data/scenes-ch16.js	176	TNB	loving	I’m here, babe.
 16	data/scenes-ch16.js	177	Nara	angry	Nara plants her feet in the grass and growls at a grey man with a sun behind his head.
@@ -1360,21 +1394,24 @@ chapter	file	line	character	mood	text
 16	data/scenes-ch16.js	227	Tom	angry	Give them back.
 16	data/scenes-ch16.js	231	Tom	scared	Amy. TNB. Nara. Run.
 16	data/scenes-ch16.js	232	Tom	loving	Dad. Keep her warm. I’m coming back.
-16	data/scenes-ch16.js	239	Tom	sad	Sal took the Sub-Rail the long way, with the meter off. Nobody has said anything since the tunnel.
+16	data/scenes-ch16.js	239	Tom	sad	Vance sealed Long Island inside a snow globe and reeled it up into the sky, with Mom and Dad still standing in the Square.
+16	data/scenes-ch16.js	239	Tom	sad	Sal drove us out through the Sub-Rail with the meter off. Nobody has said anything since the tunnel.
 16	data/scenes-ch16.js	240	Rose	scared	Tata. Are they cold?
 16	data/scenes-ch16.js	241	Tom	loving	No, Rose. They’re warm. I checked.
 16	data/scenes-ch16.js	242	Rose	sad	Okay.
 16	data/scenes-ch16.js	243	Grace	loving	Then it’s not forever. It’s just a long time.
 16	data/scenes-ch16.js	244	Tom	sad	It’s just a long time.
-16	data/scenes-ch16.js	245	Amy	proud	Vance said downtown. Sixty floors. We rest tonight. Tomorrow we go up.
+16	data/scenes-ch16.js	245	Amy	proud	Vance said we know the building: sixty floors, in downtown Los Angeles. That’s where he took them.
+16	data/scenes-ch16.js	245	Amy	proud	We rest tonight, and tomorrow we go up.
 16	data/scenes-ch16.js	260	Tom	none	We got out. Sal went through the closing glass with the meter running, and it shaved the roof off cab seven.
 16	data/scenes-ch16.js	261	Tom	sad	Behind us the glass closes. Long Island is the size of a snow globe now, and a cable is taking it up into the sky.
 17	data/scenes-ch17.js	94	Amy	proud	That’s the building. That’s where he is.
 17	data/scenes-ch17.js	95	Grace	proud	We’re coming. All of us. I already told Rose. She’s packing.
 17	data/scenes-ch17.js	96	Rose	loving	I packed a pretzel. And a second pretzel, for Deedee.
-17	data/scenes-ch17.js	97	Amy	scared	Girls. It is sixty floors. It is going to be hard and strange and not fair.
+17	data/scenes-ch17.js	97	Amy	scared	Girls. It’s sixty floors. It’s going to be hard and strange and not fair.
 17	data/scenes-ch17.js	98	Grace	proud	We know. That’s why we’re coming.
-17	data/scenes-ch17.js	99	Tom	proud	Okay. Here’s how we do it. Two teams of three. Grace, Rose and me take the stairs. Amy, TNB and Nara work the Archive on thirty.
+17	data/scenes-ch17.js	99	Tom	proud	Okay. Here’s how we do it. We split into two teams of three. Grace, Rose and I take the stairs.
+17	data/scenes-ch17.js	99	Tom	proud	Amy, TNB and Nara go in through the service ducts to the Archive on floor thirty.
 17	data/scenes-ch17.js	100	TNB	happy	Divide and conquer. I like it. I also like not being on the stairs.
 17	data/scenes-ch17.js	101	Nara	proud	Nara does not like stairs. Nara is, however, extremely good at breaking glass.
 17	data/scenes-ch17.js	102	Amy	angry	And I get to hit something. Good.
@@ -1393,21 +1430,21 @@ chapter	file	line	character	mood	text
 17	data/scenes-ch17.js	138	Amy	none	That’s TNB’s handwriting. Go through. Girls hold the landing.
 17	data/scenes-ch17.js	139	Rose	happy	Holding the landing! Holding it! Holding!
 17	data/scenes-ch17.js	155	Tom	surprised	The Archive. A long hall of glass shelves, and on every shelf a whole tiny town under a dome, each one paused on its happiest afternoon.
-17	data/scenes-ch17.js	156	Amy	surprised	Tom. Look at the plaque. Look at the little man with the pierogi.
+17	data/scenes-ch17.js	156	Amy	surprised	Tom, look at the plaque. Dunmore, Pennsylvania, pierogi festival. That little man with the pierogi is frozen in the middle of one bite.
 17	data/scenes-ch17.js	157	TNB	unimpressed	That’s a very good diorama. I hate it. It’s very well made.
 17	data/scenes-ch17.js	158	Nara	scared	Nara sniffs a shelf. It does not smell like anything. It does not smell like anything at all.
-17	data/scenes-ch17.js	159	Amy	surprised	Six towns. Six shelves. The lock counter on the stairs says six. I do not think that is a coincidence.
-17	data/scenes-ch17.js	160	Tom	proud	Smash them. Gently, I mean. Free the towns.
-17	data/scenes-ch17.js	161	Amy	proud	Gently is not a word I use.
+17	data/scenes-ch17.js	159	Amy	surprised	There are six towns on six shelves, and the lock counter on the stairs says six. I think each town under glass is holding one lock shut.
+17	data/scenes-ch17.js	160	Tom	proud	Then break the domes. Gently, I mean. Each town we free should open a lock.
+17	data/scenes-ch17.js	161	Amy	proud	Gently isn’t a word I use.
 17	data/scenes-ch17.js	194	Amy	surprised	Withdrawn. The lift has been WITHDRAWN. Tom. Did he just challenge me to a stair race?
 17	data/scenes-ch17.js	195	Tom	unimpressed	I don’t think he knows what he just did.
 17	data/scenes-ch17.js	204	Tom	none	The seal door swings open on its own. The stairwell goes on. Twenty-nine more floors, straight up, in a glass tube.
 17	data/scenes-ch17.js	205	Amy	proud	You and me. Landing to landing. Loser buys dinner.
 17	data/scenes-ch17.js	206	Tom	unimpressed	Amy, we have a deadline. We have a tower. We have two grandparents made of stone.
-17	data/scenes-ch17.js	207	Amy	proud	Which is why I am going to win this.
-17	data/scenes-ch17.js	208	Grace	proud	I am calling it. On my mark. Mark!
+17	data/scenes-ch17.js	207	Amy	proud	Which is why I’m going to win this.
+17	data/scenes-ch17.js	208	Grace	proud	I’m calling it. On my mark. Mark!
 17	data/scenes-ch17.js	209	Rose	happy	I’m the finish line!
-17	data/scenes-ch17.js	210	TNB	happy	I am not running. I am carrying the thermos. Somebody has to.
+17	data/scenes-ch17.js	210	TNB	happy	I’m not running. I’m carrying the thermos. Somebody has to.
 17	data/scenes-ch17.js	217	Tom	surprised	Floor fifty-nine. We hit the vault door at exactly the same time. Amy’s forehead and mine, a quarter inch apart.
 17	data/scenes-ch17.js	218	Amy	proud	That was MINE.
 17	data/scenes-ch17.js	219	Tom	unimpressed	It was a tie.
@@ -1419,20 +1456,20 @@ chapter	file	line	character	mood	text
 17	data/scenes-ch17.js	235	Tom	scared	Stay behind me. All of you.
 17	data/scenes-ch17.js	238	Tom	surprised	You’re the Archivist.
 17	data/scenes-ch17.js	240	Amy	angry	You froze the pierogi man for thirty years.
-17	data/scenes-ch17.js	242	TNB	sad	That is the single saddest thing I have ever heard a lens say.
+17	data/scenes-ch17.js	242	TNB	sad	That’s the single saddest thing I have ever heard a lens say.
 17	data/scenes-ch17.js	255	Amy	proud	Up. Everyone up. We have a lens to break. Breathe. Then we go again.
 17	data/scenes-ch17.js	262	Tom	surprised	The amber lens cracks across the middle. The cold one goes dark. For one second, the whole building holds its breath.
 17	data/scenes-ch17.js	264	Tom	loving	I know. They were never yours to keep.
 17	data/scenes-ch17.js	266	Rose	loving	You eat dinner. Then you go to sleep. Then it’s morning.
 17	data/scenes-ch17.js	270	Grace	surprised	Tata. The globe.
 17	data/scenes-ch17.js	272	Tom	surprised	The snow globe on the plinth lifts an inch off the glass. The gold cable above it goes tight. It is going up.
-17	data/scenes-ch17.js	275	Amy	loving	Mom. Dad. We are coming. We’re coming.
+17	data/scenes-ch17.js	275	Amy	loving	Mom. Dad. We’re coming. We’re coming.
 17	data/scenes-ch17.js	276	Tom	proud	Everybody breathe. We rest. Then we go to the top.
 17	data/scenes-ch17.js	280	Tom	none	A gold lift door stands open at the north wall. No call button. A brass plate: FLOOR 60. BY INVITATION.
 18	data/scenes-ch18.js	23	Tom	surprised	The pinnacle lift opens without a sound. There is no button inside, no floor number. The walls are mirrors, and every one of us is in them.
 18	data/scenes-ch18.js	24	Amy	proud	Everybody in. Nobody lags behind. Nobody gets left on this floor.
 18	data/scenes-ch18.js	25	Grace	scared	Tata. I’m scared. I’m also coming. Both of those are true at the same time.
-18	data/scenes-ch18.js	26	Tom	loving	That is exactly the right amount of both.
+18	data/scenes-ch18.js	26	Tom	loving	That’s exactly the right amount of both.
 18	data/scenes-ch18.js	27	Rose	happy	I brought a pretzel for Deedee. It’s a little bit squished.
 18	data/scenes-ch18.js	28	TNB	loving	Squished is fine. I fix squished things for a living.
 18	data/scenes-ch18.js	29	Tom	proud	Stay behind me. All of you.
@@ -1440,8 +1477,8 @@ chapter	file	line	character	mood	text
 18	data/scenes-ch18.js	43	Amy	angry	Where are my parents.
 18	data/scenes-ch18.js	45	Grace	surprised	They’re STONE.
 18	data/scenes-ch18.js	47	Rose	surprised	Are you the man who took all the coins?
-18	data/scenes-ch18.js	49	TNB	unimpressed	Okay. I fix things for a living. Whatever this is, it is structurally unsound.
-18	data/scenes-ch18.js	51	Tom	unimpressed	That is not how cups work.
+18	data/scenes-ch18.js	49	TNB	unimpressed	Okay. I fix things for a living. Whatever this is, it’s structurally unsound.
+18	data/scenes-ch18.js	51	Tom	unimpressed	That’s not how cups work.
 18	data/scenes-ch18.js	54	Tom	proud	No, thank you. We have a connection to make.
 18	data/scenes-ch18.js	57	Tom	surprised	The threads of the Loom lean. All of them, all at once, like a field in the wind. They gather into the brass lens at the end of his arm.
 18	data/scenes-ch18.js	59	Amy	angry	Over my dead body.
@@ -1454,19 +1491,20 @@ chapter	file	line	character	mood	text
 18	data/scenes-ch18.js	88	Grace	scared	Tata. TATA.
 18	data/scenes-ch18.js	89	Rose	sad	He was right there. He was RIGHT there.
 18	data/scenes-ch18.js	90	Nara	sad	Nara walks to the exact spot where Tom was standing, lies down on it, and does not move.
-18	data/scenes-ch18.js	91	Amy	scared	Tom. Tom, answer me. I am not doing this. I am not doing this.
+18	data/scenes-ch18.js	91	Amy	scared	Tom. Tom, answer me. I’m not doing this. I’m not doing this.
 18	data/scenes-ch18.js	92	TNB	sad	Tom.
 18	data/scenes-ch18.js	96	Amy	angry	Give him back.
-18	data/scenes-ch18.js	102	Amy	angry	We are not leaving without him!
-18	data/scenes-ch18.js	110	TNB	surprised	Okay. We are on Second Avenue. It is morning. It is somehow morning.
+18	data/scenes-ch18.js	102	Amy	angry	We’re not leaving without him!
+18	data/scenes-ch18.js	110	TNB	surprised	Okay. The wave put us down on Second Avenue, in front of Tom’s house. And it’s somehow morning.
 18	data/scenes-ch18.js	111	Rose	scared	Is Tata coming?
 18	data/scenes-ch18.js	112	Grace	proud	He said we always make our connection. So he will.
-18	data/scenes-ch18.js	113	Amy	loving	I know my brother. He is going to turn up late, a little annoyed, with a full explanation, and ask if anybody ate.
+18	data/scenes-ch18.js	113	Amy	loving	I know my brother. He’s going to turn up late, a little annoyed, with a full explanation, and ask if anybody ate.
 18	data/scenes-ch18.js	114	TNB	sad	His thermos is on the porch rail. He left it out for the cat.
 18	data/scenes-ch18.js	115	Rose	scared	Is the cat going to be okay?
-18	data/scenes-ch18.js	116	TNB	unimpressed	The cat is fine. The cat is always fine. The cat is not even his.
+18	data/scenes-ch18.js	116	TNB	unimpressed	The cat is fine. The cat is always fine. The cat isn’t even his.
 18	data/scenes-ch18.js	117	Nara	sad	Nara sits down on Tom’s porch step, facing the street, and waits.
-18	data/scenes-ch18.js	118	Amy	proud	Okay. Okay. Plan. Mom and Dad are stone. Tom is somewhere. And there is exactly one thing in this city that does not forget where things go.
+18	data/scenes-ch18.js	118	Amy	proud	Okay. Okay. Plan. Mom and Dad are stone. Tom is somewhere the Loom couldn’t put him.
+18	data/scenes-ch18.js	118	Amy	proud	And there’s exactly one thing in this city that never forgets where things go.
 18	data/scenes-ch18.js	119	Grace	surprised	The post office.
 18	data/scenes-ch18.js	120	TNB	loving	I’ll make coffee first. Tom would want me to make coffee first.
 19	data/scenes-ch19.js	18	Grace	loving	This is my first meet. I was seven. I looked at the bleachers and there was one empty folding chair at the very front, on the aisle, and then there was Tata in it.
@@ -1498,12 +1536,13 @@ chapter	file	line	character	mood	text
 19	data/scenes-ch19.js	45	Rose	loving	Come back with the same wrist, Tata. I tied it already. You just have to come.
 19	data/scenes-ch19.js	46	Amy	loving	Time starts when you get here, Tom. I will be the one standing at the line, yelling.
 19	data/scenes-ch19.js	47	TNB	loving	Hey. You left your coffee. It is still warm, I think. Come get it.
-19	data/scenes-ch19.js	86	TNB	sad	It has been eleven hours. I have made coffee four times. I have not drunk any of it. That is not like me.
-19	data/scenes-ch19.js	87	Amy	proud	Plan. Mom and Dad are stone. Tom is somewhere the Loom does not have a place for. And there is one place in this city that keeps everything nobody could put anywhere.
+19	data/scenes-ch19.js	86	TNB	sad	It’s been eleven hours. I’ve made coffee four times. I haven’t drunk any of it. That’s not like me.
+19	data/scenes-ch19.js	87	Amy	proud	Plan. Mom and Dad are stone. Tom is somewhere the Loom doesn’t have a place for.
+19	data/scenes-ch19.js	87	Amy	proud	And there’s one place in this city that keeps everything nobody could put anywhere.
 19	data/scenes-ch19.js	88	Grace	unimpressed	The post office. We already said that.
 19	data/scenes-ch19.js	89	Rose	proud	Nara found it first.
 19	data/scenes-ch19.js	90	Nara	surprised	Nara is sitting very straight in front of Tom’s mailbox, and she is staring into the slot. She has not blinked. A thin gold light is coming out of the slot, like a sleeping lamp.
-19	data/scenes-ch19.js	91	TNB	surprised	That is not a regular mailbox. That is a mailbox that is thinking about something.
+19	data/scenes-ch19.js	91	TNB	surprised	That’s not a regular mailbox. That’s a mailbox that’s thinking about something.
 19	data/scenes-ch19.js	92	Amy	surprised	It’s his. It’s the mailbox at the bottom of his steps, where his bills and my birthday cards go. It’s warm.
 19	data/scenes-ch19.js	93	Grace	surprised	If you drop a letter in a mailbox and it goes nowhere... where does it go?
 19	data/scenes-ch19.js	94	TNB	none	Down. I think it goes down.
@@ -1512,13 +1551,14 @@ chapter	file	line	character	mood	text
 19	data/scenes-ch19.js	109	Grace	happy	That’s MY pretzel. I mean Rose’s. Rose’s pretzel. For Deedee.
 19	data/scenes-ch19.js	110	Amy	surprised	Look at the big ledger. There’s a page for Second Avenue. There’s a blank rectangle where a name should be.
 19	data/scenes-ch19.js	111	TNB	sad	It’s still wet. Somebody erased him and left the space, like they were going to write somebody else in.
-19	data/scenes-ch19.js	112	Grace	none	Four doors. One for each of us.
-19	data/scenes-ch19.js	113	TNB	loving	People who would not forget him. That’s the whole job description.
+19	data/scenes-ch19.js	112	Grace	none	There are four doors, one for each of us.
+19	data/scenes-ch19.js	113	TNB	loving	Four people who would never forget him. Behind each door there must be a memory of Tom that only one of us has.
+19	data/scenes-ch19.js	113	TNB	loving	If we bring them back to this desk, maybe his name comes back too.
 19	data/scenes-ch19.js	114	Amy	surprised	The desk in the middle has four little brass niches in the front. Four of us, four niches. And a chair that someone just stood up out of.
 19	data/scenes-ch19.js	115	Rose	surprised	There’s a thermos on it.
-19	data/scenes-ch19.js	116	TNB	loving	That’s his. I would know that thermos in the dark.
+19	data/scenes-ch19.js	116	TNB	loving	That’s his. I’d know that thermos in the dark.
 19	data/scenes-ch19.js	129	TNB	proud	We’re here for a name. A man named Tom, on Second Avenue.
-19	data/scenes-ch19.js	131	Amy	proud	He is my brother.
+19	data/scenes-ch19.js	131	Amy	proud	He’s my brother.
 19	data/scenes-ch19.js	133	Grace	angry	You can’t erase somebody because he doesn’t fit your form.
 19	data/scenes-ch19.js	135	Rose	sad	That’s the saddest job in the world.
 19	data/scenes-ch19.js	148	TNB	proud	Up. Everybody up. Breathe. We can do this again. It’s a pottery rule: the first one always cracks.
@@ -1536,27 +1576,27 @@ chapter	file	line	character	mood	text
 19	data/scenes-ch19.js	170	Tom	sad	You have never delivered anything.
 19	data/scenes-ch19.js	172	Tom	none	Rose.
 19	data/scenes-ch19.js	173	Rose	loving	Here. It’s a little bit squished. It’s for Deedee. It was held for pickup, but nobody picked it up, because she’s stone.
-19	data/scenes-ch19.js	174	Tom	loving	It is a first-timer’s route. One pretzel. One tower. Fifty-nine floors up, and then a grandmother.
+19	data/scenes-ch19.js	174	Tom	loving	Then here’s your first delivery route. Take this one pretzel up fifty-nine floors of one tower, and put it in a grandmother’s hands.
 19	data/scenes-ch19.js	176	Tom	loving	The route is not far. The job is only to put a thing in someone’s hands. You are already very good at the part where you carry it.
 19	data/scenes-ch19.js	182	Amy	proud	Okay. Home. Food. Then Mom and Dad. In that order.
 19	data/scenes-ch19.js	183	Tom	none	In that order.
-19	data/scenes-ch19.js	197	Tom	unimpressed	Stone does not respond to talking. I have checked. Stone responds to being warm for a long time with people nearby.
+19	data/scenes-ch19.js	197	Tom	unimpressed	Talking to the stone does nothing. I’ve checked. What wakes stone up is being warm for a long time, with people close by.
 19	data/scenes-ch19.js	198	Amy	loving	Mom’s rule: a house is warm when somebody is cooking in it.
 19	data/scenes-ch19.js	199	Grace	proud	So we cook.
 19	data/scenes-ch19.js	200	Rose	happy	A lot. We cook a LOT.
 19	data/scenes-ch19.js	201	Olivia	happy	Tom! You’re BACK. I saw the light on at four a.m. and I thought, he’s home, and then I thought, no, that’s a different kind of light. I made a lasagna.
-19	data/scenes-ch19.js	203	Tom	loving	Thank you. All of you. I will put the rock on the mantel.
+19	data/scenes-ch19.js	203	Tom	loving	Thank you. All of you. I’ll put the rock on the mantel.
 19	data/scenes-ch19.js	205	Grace	happy	Boppy would eat one raw and say it was “fine” in a voice.
 19	data/scenes-ch19.js	209	Tom	loving	The kitchen is a mess. Every pot is in use. The window is fogged. It smells like a Sunday.
 19	data/scenes-ch19.js	210	TNB	happy	The oven door handle came off. I fixed it. You could say I handled it.
 19	data/scenes-ch19.js	211	Tom	unimpressed	Please stop.
 19	data/scenes-ch19.js	212	Amy	proud	Lasagna, eleven minutes. Lemon bars, six. I have a timer on everything. Nobody is allowed to be late for this.
 19	data/scenes-ch19.js	213	Grace	proud	I choreographed the pasta. It goes from the pot to the plate in a very specific arc.
-19	data/scenes-ch19.js	214	Rose	happy	I am the taster. I have tasted nine times. It’s for quality.
+19	data/scenes-ch19.js	214	Rose	happy	I’m the taster. I’ve tasted nine times. It’s for quality.
 19	data/scenes-ch19.js	215	Tom	unimpressed	The pasta does not go in an arc.
 19	data/scenes-ch19.js	216	Grace	proud	It goes in an arc if you believe in it, Tata.
 19	data/scenes-ch19.js	217	Tom	loving	He looks at the table. Everyone he loves is crowded around it, and somebody has put a rock in the middle like a centerpiece. He doesn’t say anything for a second.
-19	data/scenes-ch19.js	218	Tom	proud	Pack it up. Sal is waiting outside with cab seven. We are going to the Glass Tower, and we are bringing dinner.
+19	data/scenes-ch19.js	218	Tom	proud	Pack it all up. Sal is outside with cab seven. Mom and Dad are still stone in that snow globe on floor fifty-nine, so we’re bringing dinner to them.
 19	data/scenes-ch19.js	229	Tom	none	The snow globe is still on its plinth. Inside it, very small, two stone figures hold each other up. The amber light is crawling on their hands. It is slower than before.
 19	data/scenes-ch19.js	230	Amy	loving	Mom. Dad. We brought dinner.
 19	data/scenes-ch19.js	231	Rose	proud	I brought a pretzel. It has been DELIVERED. It has a stamp.
@@ -1564,7 +1604,7 @@ chapter	file	line	character	mood	text
 19	data/scenes-ch19.js	235	Tom	surprised	Steam from the lasagna drifts across the glass. The amber light turns the color of toast. A crack of warm yellow runs along the stone, then two, then nine.
 19	data/scenes-ch19.js	236	Grace	happy	It’s working. It’s working!
 19	data/scenes-ch19.js	238	Boppy	angry	Oh. Oh, my back. My back is going to be talking about this for a week.
-19	data/scenes-ch19.js	239	Deedee	surprised	Is that lasagna? Who made lasagna? Who has been in my kitchen?
+19	data/scenes-ch19.js	239	Deedee	surprised	Is that lasagna? Who made lasagna? Who’s been in my kitchen?
 19	data/scenes-ch19.js	240	Rose	happy	DEEDEE! BOPPY!
 19	data/scenes-ch19.js	241	Deedee	loving	Oh, my babies. Come here. All of you. Come here, to the moon and back and back and back.
 19	data/scenes-ch19.js	242	Boppy	unimpressed	Which one of you is eating the peppers raw?
@@ -1572,7 +1612,7 @@ chapter	file	line	character	mood	text
 19	data/scenes-ch19.js	244	Boppy	unimpressed	Hand me one. For my knees.
 19	data/scenes-ch19.js	245	Tom	loving	Everyone is crowded onto one floor of a glass tower with plates in their laps, and for a minute, it is just a family having dinner, eight people and a dog.
 19	data/scenes-ch19.js	246	Deedee	surprised	Tom. Who is the man in the gold coat? The one who kept us on a shelf?
-19	data/scenes-ch19.js	247	Tom	none	Vance. He is still up there, at the top. He is going to want more than a shelf.
+19	data/scenes-ch19.js	247	Tom	none	Vance. He’s still up there, at the top. He’s going to want more than a shelf.
 19	data/scenes-ch19.js	248	Boppy	unimpressed	Then we finish eating first.
 19	data/scenes-ch19.js	251	Tom	unimpressed	He sets down his plate. Then he picks it back up.
 19	data/scenes-ch19.js	252	Tom	proud	Seconds first. Then the sky.
@@ -1597,65 +1637,67 @@ chapter	file	line	character	mood	text
 20	data/scenes-ch20.js	97	Nara	proud	Nara knows this one. It is the smell of the person she would go anywhere to find. She puts her nose down and does not stop.
 20	data/scenes-ch20.js	99	Tom	proud	She tracked me through a Dead-Letter Office. She can track a door.
 20	data/scenes-ch20.js	119	Tom	unimpressed	He built a lock that opens for family. All eight of us, and a thermos. I resent how much I admire that.
-20	data/scenes-ch20.js	120	Amy	loving	The Extra Place. Mom set a place for everybody at every dinner for fifty years. That is the whole trick. He should have asked her.
+20	data/scenes-ch20.js	120	Amy	loving	That’s the Extra Place. Mom has set a place for everybody at every dinner for fifty years, plus one more.
+20	data/scenes-ch20.js	120	Amy	loving	A lock that only opens when the whole family shows up? She could have told him how that works.
 20	data/scenes-ch20.js	121	Deedee	loving	Is it ready? Because I made a lot.
 20	data/scenes-ch20.js	129	Tom	surprised	In the ceiling of the Vault, a round brass door has opened. It has a clock for a keyhole. It is ticking very slowly, like a heart that has been told to be quiet.
-20	data/scenes-ch20.js	130	Boppy	surprised	That is the biggest clock I have ever seen. And I have a lot of clocks. They all run fast, for my stomach.
+20	data/scenes-ch20.js	130	Boppy	surprised	That’s the biggest clock I’ve ever seen. And I have a lot of clocks. They all run fast, for my stomach.
 20	data/scenes-ch20.js	131	Deedee	loving	Is that the man’s house? Somebody should tell him to leave a light on.
 20	data/scenes-ch20.js	132	Amy	proud	Everybody stays together. All eight. Nobody goes through a door alone.
 20	data/scenes-ch20.js	133	Grace	proud	We always make our connection.
-20	data/scenes-ch20.js	134	Rose	proud	Nara goes first. She is the best at doors.
-20	data/scenes-ch20.js	135	Tom	proud	Eight of us, a dog and a thermos. Seconds first, then the sky. Let us go.
+20	data/scenes-ch20.js	134	Rose	proud	Nara goes first. She’s the best at doors.
+20	data/scenes-ch20.js	135	Tom	proud	Eight of us, a dog and a thermos. Seconds first, then the sky. Let’s go.
 20	data/scenes-ch20.js	142	Rose	surprised	I get a door too?
 20	data/scenes-ch20.js	143	Tom	loving	You get a door too.
-20	data/scenes-ch20.js	144	TNB	surprised	It is a very good lock. Whoever made it really cared about the mechanism.
-20	data/scenes-ch20.js	145	Tom	proud	One skill each. Whatever you are best at, that is your door.
-20	data/scenes-ch20.js	159	Tom	unimpressed	I was written out of the schedule. I am a very stubborn calendar entry.
+20	data/scenes-ch20.js	144	TNB	surprised	It’s a very good lock. Whoever made it really cared about the mechanism.
+20	data/scenes-ch20.js	145	Tom	proud	Each door opens for one person’s best skill. Find the door shaped like you, and do the thing you’re best at.
+20	data/scenes-ch20.js	159	Tom	unimpressed	I was written out of the schedule. I’m a very stubborn calendar entry.
 20	data/scenes-ch20.js	161	Grace	angry	You turned my grandparents into STATUES.
-20	data/scenes-ch20.js	163	Boppy	angry	I was a statue for a week and my back did not get a single day off. I would like to file a complaint.
+20	data/scenes-ch20.js	163	Boppy	angry	I was a statue for a week and my back didn’t get a single day off. I’d like to file a complaint.
 20	data/scenes-ch20.js	164	Deedee	loving	Julian, honey. Have you eaten?
-20	data/scenes-ch20.js	166	Amy	proud	Distance, age, exhaustion, fear. That is just a regular Tuesday.
+20	data/scenes-ch20.js	166	Amy	proud	Distance, age, exhaustion, fear. That’s just a regular Tuesday.
 20	data/scenes-ch20.js	167	Tom	proud	Okay. Four barriers. We have a plan for every one of them. Everybody ready?
 20	data/scenes-ch20.js	168	Rose	scared	Is the snake going to be mean?
-20	data/scenes-ch20.js	169	Tom	loving	It is going to be very, very tired. Be kind about it, and be fast.
-20	data/scenes-ch20.js	180	Tom	proud	Up. Everybody up. Breathe. It is a long fight, and we are a long family. We can do this again.
+20	data/scenes-ch20.js	169	Tom	loving	It’s going to be very, very tired. Be kind about it, and be fast.
+20	data/scenes-ch20.js	180	Tom	proud	Up. Everybody up. Breathe. It’s a long fight, and we’re a long family. We can do this again.
 20	data/scenes-ch20.js	193	Tom	loving	Julian.
-20	data/scenes-ch20.js	197	Amy	surprised	He is not attacking us. Look at his hands.
-20	data/scenes-ch20.js	198	Grace	surprised	They are shaking.
+20	data/scenes-ch20.js	197	Amy	surprised	He’s not attacking us. Look at his hands.
+20	data/scenes-ch20.js	198	Grace	surprised	They’re shaking.
 20	data/scenes-ch20.js	199	Rose	loving	Is he cold?
-20	data/scenes-ch20.js	200	Tom	loving	No hitting. He has done enough to everybody else. Do the thing you are each best at, for him. Everybody. In turn. I will be last.
-20	data/scenes-ch20.js	201	Boppy	unimpressed	The last one is always the hardest. That is why I put the pepper first.
-20	data/scenes-ch20.js	210	Tom	unimpressed	Everybody up. He is not going anywhere. That is rather the point of him.
+20	data/scenes-ch20.js	200	Tom	loving	No hitting. He has done enough to everybody else. Do the thing you’re each best at, for him. Everybody. In turn. I’ll be last.
+20	data/scenes-ch20.js	201	Boppy	unimpressed	The last one is always the hardest. That’s why I put the pepper first.
+20	data/scenes-ch20.js	210	Tom	unimpressed	Everybody up. He’s not going anywhere. That’s rather the point of him.
 20	data/scenes-ch20.js	220	Tom	loving	Probably. And then she would sit down next to you anyway.
-20	data/scenes-ch20.js	222	Deedee	loving	Honey. That is all of it. That is what living is. It hurts a little, every time, and you do it anyway.
+20	data/scenes-ch20.js	222	Deedee	loving	Honey. That’s all of it. That’s what living is. It hurts a little, every time, and you do it anyway.
 20	data/scenes-ch20.js	223	Boppy	happy	And the crisp is excellent.
-20	data/scenes-ch20.js	225	Tom	loving	You do not start them. You stop holding them.
+20	data/scenes-ch20.js	225	Tom	loving	You don’t start them. You stop holding them.
 20	data/scenes-ch20.js	228	Rose	surprised	IT MOVED! The clock MOVED!
-20	data/scenes-ch20.js	229	Grace	happy	It is five o’clock. It is just five o’clock. It is the best five o’clock I have ever seen.
-20	data/scenes-ch20.js	231	Tom	loving	You are doing it right now. Come to dinner.
+20	data/scenes-ch20.js	229	Grace	happy	It’s five o’clock. It’s just five o’clock. It’s the best five o’clock I have ever seen.
+20	data/scenes-ch20.js	231	Tom	loving	You’re doing it right now. Come to dinner.
 20	data/scenes-ch20.js	233	Deedee	loving	Bring yourself and an appetite.
-20	data/scenes-ch20.js	234	Boppy	unimpressed	And bring a chair. We are short a chair.
-20	data/scenes-ch20.js	235	Amy	loving	Mom already set the place. She set it at every dinner for fifty years. There is always one more seat.
-20	data/scenes-ch20.js	247	Tom	happy	Long Island is a town again. The fountain is running. The library door is open. Someone has already started a pie, which is how you know it is real.
-20	data/scenes-ch20.js	248	Rose	happy	Look! Look who is delivering!
+20	data/scenes-ch20.js	234	Boppy	unimpressed	And bring a chair. We’re short a chair.
+20	data/scenes-ch20.js	235	Amy	loving	Mom already set the place. She set it at every dinner for fifty years. There’s always one more seat.
+20	data/scenes-ch20.js	247	Tom	happy	Long Island is a town again. The fountain is running. The library door is open. Someone has already started a pie, which is how you know it’s real.
+20	data/scenes-ch20.js	248	Rose	happy	Look! Look who’s delivering!
 20	data/scenes-ch20.js	250	Grace	happy	My squishy! The Sparkling Diamond Gold Soup Dumpling squishy!
-20	data/scenes-ch20.js	251	Rose	happy	My pink ribbon! It is still tied in a bow!
-20	data/scenes-ch20.js	252	Amy	surprised	My stopwatch. It is still running. It is at nine hundred and eleven hours, and some seconds.
-20	data/scenes-ch20.js	253	TNB	surprised	My first cup. It is full. It is still warm. I do not know how that is possible and I am not going to ask.
+20	data/scenes-ch20.js	251	Rose	happy	My pink ribbon! It’s still tied in a bow!
+20	data/scenes-ch20.js	252	Amy	surprised	My stopwatch. It’s still running. It’s at nine hundred and eleven hours, and some seconds.
+20	data/scenes-ch20.js	253	TNB	surprised	My first cup. It’s full. It’s still warm. I don’t know how that’s possible and I’m not going to ask.
 20	data/scenes-ch20.js	255	Tom	surprised	He hands me a fifth parcel. It is small and brown. It is addressed, in my own handwriting, to Tom, Second Avenue. It is a letter I never mailed.
 20	data/scenes-ch20.js	259	Tom	surprised	High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. A train glides in, quiet as a held breath. The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other.
 20	data/scenes-ch20.js	261	Tom	sad	You would have been home for the birthday.
 20	data/scenes-ch20.js	265	Amy	happy	Three thousand miles. One ride. Mom, Dad, you can come to Tom’s any Tuesday you like.
 20	data/scenes-ch20.js	266	Boppy	unimpressed	Does it have a recliner?
-20	data/scenes-ch20.js	268	Boppy	happy	I have changed my mind about the man.
-20	data/scenes-ch20.js	270	Tom	loving	That is a good seat to start in.
+20	data/scenes-ch20.js	268	Boppy	happy	I’ve changed my mind about the man.
+20	data/scenes-ch20.js	270	Tom	loving	That’s a good seat to start in.
 20	data/scenes-ch20.js	282	Tom	happy	A week later. Jefferson Park, six in the evening. The street light has come on, and for once it is not worth mentioning.
 20	data/scenes-ch20.js	283	Rose	happy	Tata, the train came again. It has a snack cart. It has a snack CART.
 20	data/scenes-ch20.js	284	Grace	proud	I rode both coasts in one day. I did a floor routine in the dining car. Nobody stopped me.
-20	data/scenes-ch20.js	285	Deedee	happy	Boppy fell asleep in the recliner somewhere over Nebraska. He says it is the best nap of his life. He says his back has never felt worse.
+20	data/scenes-ch20.js	285	Deedee	happy	Boppy fell asleep in the recliner somewhere over Nebraska. He says it’s the best nap of his life. He says his back has never felt worse.
 20	data/scenes-ch20.js	286	Boppy	unimpressed	Both of those are true.
-20	data/scenes-ch20.js	287	Amy	happy	Justin is coming out on the next one. He booked his own ticket. He says he cleared the whole weekend. I have been looking at the calendar for an hour to make sure it is real.
-20	data/scenes-ch20.js	288	TNB	loving	I made a mug. It has the same handle as the first one. It is exactly too big.
+20	data/scenes-ch20.js	287	Amy	happy	Justin is coming out on the next one. He booked his own ticket. He says he cleared the whole weekend.
+20	data/scenes-ch20.js	287	Amy	happy	I’ve been looking at the calendar for an hour to make sure it’s real.
+20	data/scenes-ch20.js	288	TNB	loving	I made a mug. It has the same handle as the first one. It’s exactly too big.
 20	data/scenes-ch20.js	289	Nara	proud	Nara has found the sourdough boule. She is guarding it with her whole body.
 20	data/scenes-ch20.js	290	Tom	loving	He sits down on his own porch step. The cup is warm. Everyone he loves is on this street, on both coasts, and every one of them is exactly where they are, with a train in between.
 20	data/scenes-ch20.js	291	TNB	loving	Hey.

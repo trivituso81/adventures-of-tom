@@ -13,15 +13,15 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 
 | Mood | Lines |
 |---|---|
-| Happy | 183 |
+| Happy | 184 |
 | Loving | 83 |
-| Sad | 59 |
-| Angry | 26 |
-| Scared | 38 |
-| Surprised | 51 |
-| Proud | 171 |
+| Sad | 63 |
+| Angry | 28 |
+| Scared | 39 |
+| Surprised | 52 |
+| Proud | 182 |
 | Unimpressed | 128 |
-| **All** | 739 |
+| **All** | 759 |
 
 ## Lines by character
 
@@ -86,7 +86,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 3 | map pier, when {chapter:3,flag:ch3-jar} | Surprised | You saw it? Old Iron-Gill? Forty years I have run this shack. I thought it was a story. |
 | 3 | map pier, when {chapter:3,flag:ch3-jar} | Unimpressed | It went west, into the marsh. The Whispering Marsh. The reeds talk out there. Mostly nonsense. |
 
-### Principal Pruitt (16)
+### Principal Pruitt (17)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -98,11 +98,12 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 5 | scene ch5Pruitt | Happy | Mrs. Gregori! Thank goodness. And you brought the whole family. |
 | 5 | scene ch5Pruitt | Proud | Not haunted. Grumpy. Thirty-one years in this building. I know the difference. |
 | 5 | scene ch5Pruitt | Scared | The bells ring at random. The clocks in the hall all say different times. And the sign-up sheet got up off the table and walked into the school. |
-| 5 | scene ch5Pruitt | Scared | The Cafetorium doors run on the bell system. The bells run on the hallway clocks. Thirty parents are on their way, and those doors won't open. |
-| 5 | scene ch5Pruitt | Proud | Set every clock in the hall to seven. Seven o’clock. Not seven-thirty. Not six-fifty-nine. Seven. |
+| 5 | scene ch5Pruitt | Scared | The Cafetorium doors run on the bell system, and the bells run on the hallway clocks. |
+| 5 | scene ch5Pruitt | Scared | Until the clocks are right, those doors won't open, and thirty parents are on their way. |
+| 5 | scene ch5Pruitt | Proud | So please set every clock in the hall to exactly seven o'clock. Not seven-thirty, and not six-fifty-nine. Seven. |
 | 5 | scene ch5Clocks | Unimpressed | (on the intercom) ...ksssh... Attention, please. The Cafetorium doors are OPEN. Parents, please wait in the hall. There's something in the Cafetorium. |
 | 5 | scene ch5Clocks | Happy | Mrs. Gregori’s brother, please go into the Cafetorium. Thank you. ...ksssh. |
-| 5 | scene ch5AfterBoss | Happy | The sheet! The bells! The clocks! Parents, come on in! Conference night is ON! |
+| 5 | scene ch5AfterBoss | Happy | You got the sheet back, and the bells and the clocks are working! Parents, come on in! Conference night is ON! |
 | 5 | scene ch5AfterBoss | Proud | Mrs. Gregori. Best conference night in thirty-one years. Not one parent cried. Well. Mr. Delgado. Happy tears. |
 | 5 | scene ch5AfterBoss | Proud | This is for you. My Golden Stopwatch. Thirty-one Field Days. It's never once stopped early. |
 | 5 | scene ch5AfterBoss | Happy | And Field Day shirts. Staff shirts. You're all staff now. Even the small loud ones. |
@@ -153,7 +154,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 1-10 | map bakery, base | Unimpressed | The baguettes? A little crusty. |
 | 1-10 | map bakery, base | Proud | Today's special is yesterday's tomorrow toast. |
 
-### Page (21)
+### Page (23)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -167,11 +168,13 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 7 | map library, when {chapter:7,notFlag:ch7-done} | Scared | It's fine. Everything is fine. Please whisper. |
 | 7 | map library, when {chapter:7,notFlag:ch7-done} | Scared | ...Did you hear that? That wasn't me. I'd know my own shush. |
 | 7 | scene ch7Page | Scared | Oh! Tom. Girls. Welcome to the Hush Library. Everything is fine. |
-| 7 | scene ch7Page | Scared | ...It's not fine. It started a week ago. It comes up from the Stacks, downstairs. The old part. |
-| 7 | scene ch7Page | Surprised | Every book down there's whispering. Everything they ever heard. Seventy years of people reading quietly and thinking nobody was listening. |
+| 7 | scene ch7Page | Scared | ...It's not fine. It started a week ago, and it's coming up from the Stacks, the old part of the library downstairs. |
+| 7 | scene ch7Page | Surprised | Every book down there is whispering everything it ever overheard. |
+| 7 | scene ch7Page | Surprised | That's seventy years of people reading quietly and thinking nobody was listening. |
 | 7 | scene ch7Page | Unimpressed | Books overhear EVERYTHING. That's why we whisper in here. It was never for the people. It's for the books. |
-| 7 | scene ch7Page | Proud | There are three sections. Fiction, Nonfiction and Picture Books. And the Reading Room, at the very back. |
-| 7 | scene ch7Page | Sad | The Reading Room doors use the old card catalog lock. I lost the password in 1998. |
+| 7 | scene ch7Page | Proud | The Stacks have three sections: Fiction, Nonfiction and Picture Books. |
+| 7 | scene ch7Page | Proud | The Reading Room is at the very back, and I think the whispering starts in there. |
+| 7 | scene ch7Page | Sad | But the Reading Room doors use the old card catalog lock, and I lost the password in 1998. |
 | 7 | scene ch7Page | Loving | Then you're in charge of the signs. Here. The staff door is open. |
 | 7 | scene ch7Page | Scared | Please be careful. And please, don't answer the books. It only encourages them. |
 | 7 | scene ch7End | Happy | Listen. It's quiet. Properly quiet. The good kind. The dictionaries are snoring. |
@@ -205,7 +208,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 3 | map tea, when {chapter:3,flag:ch3-tea} | Surprised | The kettle is still going on about that man in the long coat. Gold coins. Paying double. |
 | 3 | map tea, when {chapter:3,flag:ch3-tea} | Unimpressed | I told it to mind its own business. It's a kettle. It has no business. |
 | 3 | scene ch3Tea | Happy | Boppy! The usual? Ginger, peppermint, and a little honey for the stomach. |
-| 3 | scene ch3Tea | Surprised | The kettle says a man in a long coat has been buying up gold coins at Penny’s. Paying double. Never takes his hat off. |
+| 3 | scene ch3Tea | Surprised | The kettle says a man in a long coat has been buying up gold coins at Penny's shop. He pays double, and he never takes his hat off. |
 | 3 | scene ch3Tea | Unimpressed | The kettle also says it'll rain on Tuesday. The kettle is wrong a lot. Enjoy the pier. |
 
 ### Luna (13)
@@ -226,14 +229,14 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 9 | scene ch9Luna | Sad | And my telescope can't find the moon. It's not behind a cloud. It's not anywhere. It's just GONE. |
 | 9 | scene ch9Luna | Surprised | ...It wasn't a closet. |
 
-### Sal (44)
+### Sal (46)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
 | 1-10 | map taxi, base | Proud | Long Island Taxi. We go anywhere in town. Town is small, so mostly here. |
 | 1-10 | map taxi, base | Happy | I have one cab. It's cab seven. Cabs one through six are a dream I'm working on. |
 | 1-10 | map taxi, base | Surprised | You just rode with me. You tipped in sourdough starter. Odd. Generous. |
-| 10 | scene ch10Start | Happy | Cab seven! Everybody in. Long Island Regional. The door nobody uses. |
+| 10 | scene ch10Start | Happy | Cab seven! Everybody in. We're going to Long Island Regional Airport, to the door nobody uses. |
 | 4 | cab flight to ch4 | Happy | Los Angeles again? Cab seven loves this run. She hums the whole way. |
 | 4 | cab flight to ch4 | Unimpressed | The girls stay home. Amy's rule. I don't argue with Amy. |
 | 6 | cab flight to ch6 | Proud | Back to Los Angeles. Your sister gave me a gold star for using my blinker. |
@@ -261,19 +264,21 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 1-10 | cab west alone | Happy | LAX. Sit back. The radio is on something calm. |
 | 1-10 | cab west alone | Unimpressed | Off we go. Don't touch the visor. Everybody touches the visor. |
 | 1-10 | cab west alone | Proud | Airport run. I'll have you there before your coffee gets cold. |
-| 13 | scene ch13Open | Happy | Sol. Sol, come in. It’s Sal. Cab seven says hi. She’s fine. She’s the only thing in town that’s moving. |
+| 13 | scene ch13Open | Happy | Sol, come in. It’s Sal, calling from inside the dome. Cab seven says hi. She’s fine. She’s the only thing in town that’s still moving. |
 | 13 | scene ch13Open | Scared | Tommy! It’s quiet in here. Even the clocks are quiet. Your mother’s in the kitchen. Don’t panic. She’s fine. She just won’t stop baking. |
 | 13 | scene ch13Open | Scared | I’m under the dome with a shovel and a very worried shopkeeper. I can’t get out. But I can dig toward you. |
-| 13 | scene ch13Open | Scared | The drill stopped answering when the dome came down. Something put a chip in it. Be careful of the worm. |
+| 13 | scene ch13Open | Scared | But our drill stopped answering when the dome came down. Something put a chip in it, and now it’s loose in the tunnel. Be careful of the Worm. |
 | 13 | scene ch13After | Happy | (through the glass) TOMMY! Over here! Hi! Don’t hug the amber, it’s sticky! |
 | 13 | scene ch13After | Happy | It worked! Gold remembers being warm! I told you! Nobody ever believes the cab driver! |
 | 13 | scene ch13After | Proud | Tommy. Sol and I started this tunnel in 2011 with a shovel and a very good deal on a drill. I never thought anyone would walk through it. |
 | 13 | scene ch13After | Proud | I’m a cab driver. That’s the whole job. |
-| 13 | scene ch13After | Proud | Okay. The Sub-Rail runs the rest of the way, up under Grump Hollow. It comes out at the breach. Sol’s putting the girls on the five fifteen handcar. |
-| 16 | scene ch16After | Scared | TOMMY! The glass is coming down! I have the girls in the cab! GET IN! |
-| 19 | scene ch19Feast | Happy | Cab seven! Everybody in. Bring the lasagna on your lap, it holds the heat. Fifty-nine floors, no stops, I am not even charging. I am scared of that tower and I am going anyway. |
-| 20 | scene ch20Epi1 | Happy | Cab seven! Everybody in! I am not charging. I am not even driving. Look UP. |
-| 20 | scene ch20Epi1 | Proud | You are the first passenger. Get in the train. |
+| 13 | scene ch13After | Proud | Okay. From here the Sub-Rail runs the rest of the way, and it comes up through a breach under Grump Hollow, inside the dome. |
+| 13 | scene ch13After | Proud | Sol’s putting the girls on the five fifteen handcar. |
+| 16 | scene ch16After | Scared | TOMMY! He’s closing glass over the whole town! I have the girls in the cab! GET IN! |
+| 19 | scene ch19Feast | Happy | Cab seven! Everybody in. Bring the lasagna on your lap, it holds the heat. Fifty-nine floors, no stops, I’m not even charging. |
+| 19 | scene ch19Feast | Happy | I’m scared of that tower and I’m going anyway. |
+| 20 | scene ch20Epi1 | Happy | Cab seven! Everybody in! I’m not charging. I’m not even driving. Look UP. |
+| 20 | scene ch20Epi1 | Proud | You’re the first passenger. Get in the train. |
 
 ### Justin (16)
 
@@ -509,7 +514,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 6 | scene ch6Nara | Surprised | I found my car keys in the gutter. With three peanuts. Arranged in a triangle. |
 | 6 | scene ch6End | Loving | Lachlan wants Nara to have this. He painted a tennis ball gold. It took him four days and most of a bottle of paint. |
 | 8 | scene ch8End | Happy | Lachlan has eaten three rolls and fallen asleep in the bread basket. I'm leaving him there. He's happy. |
-| 19 | scene ch19Feast | Happy | I brought a rock. Lachlan picked it out. Isla ate a different rock. We are keeping a close eye on it. |
+| 19 | scene ch19Feast | Happy | I brought a rock. Lachlan picked it out. Isla ate a different rock. We’re keeping a close eye on it. |
 
 ### Mr. Washington (28)
 
@@ -619,13 +624,13 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 4-10 | map studio, when {from:4,flag:ch4-done} | Loving | Tell TNB the costumes looked incredible. Tell him I said incredible. Tell him twice. |
 | 4 | map studio, when {chapter:4,notFlag:ch4-done,flag:ch4-gate} | Scared | Without wardrobe there's no shoot. Without a shoot there's no movie. |
 | 4 | map studio, when {chapter:4,notFlag:ch4-done,flag:ch4-gate} | Sad | Without a movie I go back to directing car commercials. I love cars. I don't love talking cars. |
-| 4 | scene ch4Gate | Sad | Dana Park. Director. First feature. Without wardrobe there's no shoot. Without a shoot there's no movie. |
+| 4 | scene ch4Gate | Sad | I'm Dana Park, the director, and this is my first feature. Without the costumes we can't shoot, and without a shoot there's no movie. |
 | 4 | scene ch4Gate | Unimpressed | And the Backlot is full of little grumpy things. One of them ate a cue card. One of them is clapping at the horse. |
 | 4 | scene ch4End | Happy | The rack! The costumes! We can shoot! We're shooting! That's a WRAP on today, everybody! |
 | 4 | scene ch4End | Proud | TNB, the studio wants you to have this. Gold-plated. It's the steamer from the lot’s very first wardrobe department. |
 | 4 | scene ch4End | Happy | And crew jackets. Wrap Party Jackets. Only the crew gets one. You're crew now. Even the dog. |
 
-### Bernadette (23)
+### Bernadette (26)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -640,16 +645,19 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 6 | scene ch6Park | Proud | I know who you are. You water your drought garden. Everybody knows. |
 | 6 | scene ch6Park | Proud | Bernadette. Neighborhood Watch Captain, nineteen years. And I'll say it, because nobody else will. |
 | 6 | scene ch6Park | Scared | The squirrels are organized. |
-| 6 | scene ch6Park | Angry | Lookouts in the playground. A spy in the community garden. Somebody at the picnic tables stuffing their cheeks with anything that's not nailed down. |
-| 6 | scene ch6Park | Surprised | And it all goes up THAT tree. The Old Oak. There's a little door in the trunk. I've heard a secret knock. Only bits of it. |
-| 6 | scene ch6Park | Proud | Clear out those lookouts and your dog can dig. I'll be here. With my clipboard. |
+| 6 | scene ch6Park | Angry | They have lookouts in the playground, a spy in the community garden, |
+| 6 | scene ch6Park | Angry | and somebody at the picnic tables stuffing their cheeks with anything that's not nailed down. |
+| 6 | scene ch6Park | Surprised | Everything they steal goes up THAT tree, the Old Oak. There's a little door in the trunk that opens with a secret knock. I've only ever heard bits of it. |
+| 6 | scene ch6Park | Proud | Clear the squirrels out of those three spots, and your dog can dig up what they buried. I'd bet a piece of that secret knock is in each hole. |
+| 6 | scene ch6Park | Proud | I'll be here with my clipboard. |
 | 6 | scene ch6End | Proud | Neighborhood Watch Captain’s report: case closed. |
 | 6 | scene ch6End | Proud | I'd like it noted that I was right. |
 | 6 | scene ch6End | Proud | And these. Neighborhood Watch Vests. I give out one every nineteen years. Today I'm giving out three. Even the dog. |
 | 8 | scene ch8Block | Proud | Tom. Good. Neighborhood Watch Captain, potluck committee chair. Forty RSVPs. Thirty-nine dishes. One bread guy. |
 | 8 | scene ch8Block | Angry | Every pilot light on 2nd Avenue went out at noon. Every one. Including mine. I had a casserole IN there. |
 | 8 | scene ch8Block | Angry | They said it's the weekend. I said it's the POTLUCK. They hung up. I've filed a report. With myself. |
-| 8 | scene ch8Block | Proud | The barn? It's been chained up for sixty years. Here. Committee key. I'm the committee. We're closing the boulevard for the tables. Bread by six. |
+| 8 | scene ch8Block | Proud | The barn has been chained up for sixty years. Here, take the committee key. I'm the committee. |
+| 8 | scene ch8Block | Proud | We're closing the boulevard for the potluck tables, and I need the bread by six. |
 | 8 | scene ch8End | Proud | Forty loaves. Six o’clock. On the dot. Potluck committee report: we're a success. |
 | 8 | scene ch8End | Proud | The gumbo is hot. The casserole is hot. Everything is hot. I'd like it noted. |
 
@@ -701,7 +709,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 2-10 | map boards, base | Proud | TNB? Longboard guy? He bombed Fargo Street once. No brakes. Legend. |
 | 2-10 | map boards, base | Happy | If you see him, tell him the wheels he ordered came in. The green ones. |
 
-### Sol (26)
+### Sol (28)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -719,18 +727,20 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 1-10 | cab east | Happy | Heading home? Say hi to the Atlantic for me. The right ocean. |
 | 13 | scene ch13Open | Unimpressed | Tom. Sit. Not that chair. That chair is Sal’s. I keep it warm for him out of spite. |
 | 13 | scene ch13Open | Unimpressed | Okay. Sal and I are cousins. You know that. What you don’t know is what we do between airport runs. |
-| 13 | scene ch13Open | Sad | Letters. Eleven years of letters, Snail Mail to Los Angeles, in the trunks of cabs. Nobody ever opened a bag. Nobody ever asked why two cab companies need a hundred sacks of stamps. |
+| 13 | scene ch13Open | Sad | We carry letters. For eleven years we’ve run mail between Long Island and Los Angeles in the trunks of our cabs. |
+| 13 | scene ch13Open | Sad | Nobody ever opened a bag, and nobody ever asked why two cab companies need a hundred sacks of stamps. |
 | 13 | scene ch13Open | Proud | A dispatch network. We call it the Network. We never came up with a better name. |
 | 13 | scene ch13Open | Happy | Sal. I have Tom, his sister, two nieces, a boyfriend and a dog in my lobby. Say hi. |
-| 13 | scene ch13Open | Proud | The Sub-Rail. Sal and I bored a tunnel under the Layover, from both coasts, for a hobby. It was supposed to open in 2031. It meets in the middle, right under the dome. |
+| 13 | scene ch13Open | Proud | There’s a way in, and it’s called the Sub-Rail. Sal and I have been boring a tunnel under the Layover from both coasts, as a hobby. |
+| 13 | scene ch13Open | Proud | It was supposed to open in 2031. The two halves meet in the middle, right under the dome. |
 | 13 | scene ch13Open | Proud | We got a very good deal on a drill. |
 | 13 | scene ch13Open | Happy | The drill. We call her the Dual-Coast Drill. The kids at the depot call her the Worm. She doesn’t love it. |
-| 13 | scene ch13Open | Proud | I need dispatchers. Two of them. Radio only. Somebody has to read me the tunnel. |
+| 13 | scene ch13Open | Proud | I need two dispatchers to stay here on the radio and read the tunnel map to the team. |
 | 13 | scene ch13Open | Proud | Thirty years. Never lost a passenger. Found two in the trunk. Both were fine. |
 | 13 | scene ch13Open | Unimpressed | Out the door, the Metro stairs on the boulevard. Past the turnstile, there’s a door that says EMPLOYEES ONLY. That’s you. You’re employees now. |
 | 17 | scene ch17Open | Scared | Downtown. The tallest thing on the boulevard that wasn’t there on Monday. Sixty floors of glass, and every clock in it says 4:59. |
 | 17 | scene ch17Open | Proud | I’ll keep the meter off and the engine on. Go get your folks, Tommy. |
-| 20 | scene ch20Epi1 | Surprised | A SKYWAY TRAIN?! I do not know what to do with my hands! I am a cab driver! |
+| 20 | scene ch20Epi1 | Surprised | A SKYWAY TRAIN?! I don’t know what to do with my hands! I’m a cab driver! |
 
 ### Mrs. Alvarez (7)
 
@@ -742,7 +752,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 12 | scene ch12Alvarez | Surprised | ...NO. I said no. Why is everyone in my kitchen? Is that a mother running laps with two little girls? |
 | 12 | scene ch12Alvarez | Proud | ...Okay. That one can stay. |
 | 12 | scene ch12Alvarez | Loving | Take lemons. Take ALL the lemons. Every yard in this city has too many and somebody always leaves them on my step. |
-| 19 | scene ch19Feast | Loving | I heard there was a situation. I brought lemon bars. And peppers. My nephew grows them. They are very hot. A man called Boppy would know what to do. |
+| 19 | scene ch19Feast | Loving | I heard there was a situation. I brought lemon bars. And peppers. My nephew grows them. They’re very hot. A man called Boppy would know what to do. |
 
 ### Don Beto (3)
 
@@ -959,7 +969,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 13 | scene ch13After | Sad | It was a very good drawer. |
 | 13 | scene ch13After | Loving | That’s a very nice way to say it. |
 
-### Nickel (46)
+### Nickel (47)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -997,11 +1007,12 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 1-10 | shop shelf battle | Proud | Fireworks. Legally a gray area. Emotionally a gift. |
 | 1-10 | shop shelf battle | Proud | The Finale Rocket. Hold it like a parking ticket. |
 | 13 | scene ch13Depot | Scared | Tom! Good. Okay. Before you go in, I have to tell you something, and I have to say it fast, because Penny made me promise. |
-| 13 | scene ch13Depot | Sad | A man in a long coat bought gold coins from our shops. For years. Paid double. Never took his hat off. |
+| 13 | scene ch13Depot | Sad | For years, a man in a long coat bought gold coins from Penny’s shop and from mine. He paid double, and he never took his hat off. |
 | 13 | scene ch13Depot | Sad | We didn’t know. We thought he was a collector. We took the money. And we kept the best coins in the back, in case he ever paid triple. |
 | 13 | scene ch13Depot | Sad | Penny called on the Network from under the dome. She said, “Tell Tom we’re sorry.” And then she said, “The drawer is under the counter.” |
-| 13 | scene ch13Depot | Sad | Eleven coins. Hers and mine. The last of the old gold. They were supposed to be a retirement. |
-| 13 | scene ch13Depot | Proud | Sal says gold remembers being warm. If amber is warmth that got stuck, then gold can give it somewhere to go. He says. I don’t know. He’s a cab driver. |
+| 13 | scene ch13Depot | Sad | There are eleven coins left between us, the last of the old gold. They were supposed to be our retirement. |
+| 13 | scene ch13Depot | Proud | Sal says gold remembers being warm. Amber is warmth that got stuck, so maybe warm gold can melt a door in it. That’s what Sal says. I don’t know. |
+| 13 | scene ch13Depot | Proud | He’s a cab driver. |
 | 13 | scene ch13Depot | Loving | I’m giving up a drawer. It’s the best drawer I ever had. Go. I’ll bring them down behind you. Sol’s driving me to the second mile marker and making me run. |
 | 13 | scene ch13Depot | Proud | Yes, I do. Somebody gave me a shop. I’d like to be somebody who gave something back. |
 | 13 | scene ch13After | Happy | Tom! Sol drove me to the second mile marker and made me run. I have never been so tired and so right. |
@@ -1016,27 +1027,32 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 |---|---|---|---|
 | 11 | scene ch11Vance | Unimpressed | Hello, Tom. |
 
-### Julian Vance (10)
+### Julian Vance (14)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
-| 11 | scene ch11Vance | Sad | Julian Vance. Gate agent, in a way. I have stood at every gate that ever closed. |
-| 11 | scene ch11Vance | Proud | You opened every door I couldn’t. Thank you for flying nowhere, Tom. |
-| 11 | scene ch11Vance | Sad | I stopped every town on Earth. At its happiest afternoon. A birthday that never ends. The last day of summer. Nobody is sad. Nobody is late. |
-| 11 | scene ch11Vance | Sad | Long Island and Los Angeles kept moving because you kept flying. Every flight moved them a little. I wasn’t quick enough to stop you. |
+| 11 | scene ch11Vance | Sad | My name is Julian Vance. I’m a gate agent, in a way. I have stood at every gate that ever closed. |
+| 11 | scene ch11Vance | Proud | Eight times I gave something lonely a coin and a promise, and eight times your family talked it out of both. Thank you for flying nowhere, Tom. |
+| 11 | scene ch11Vance | Proud | You are very hard to stop. |
+| 11 | scene ch11Vance | Sad | I stopped every town on Earth at its happiest afternoon. A birthday that never ends, or the last day of summer. |
+| 11 | scene ch11Vance | Sad | In those towns nobody is ever sad, and nobody is ever late. |
+| 11 | scene ch11Vance | Sad | Only Long Island and Los Angeles kept moving, because you kept flying between them. |
+| 11 | scene ch11Vance | Sad | Every flight you took moved them along a little, and I was never quick enough to stop you. |
 | 11 | scene ch11Vance | Loving | Maybe. But it stays safe. That is all I have ever wanted for anyone. |
-| 11 | scene ch11Vance | Loving | Everyone, safe, in the good part, forever. Come in. Stay. Nobody here has ever been lost. |
-| 11 | scene ch11Vance | Sad | ...Then I’ll make the last announcement. |
+| 11 | scene ch11Vance | Loving | I want everyone safe, in the good part, forever. So come in, all of you, and stay. Nobody here has ever been lost. |
+| 11 | scene ch11Vance | Sad | ...Then I can’t let you leave. I’ll have to make the last announcement. |
 | 11 | scene ch11Vance | Sad | Someone has to. |
 | 11 | scene ch11Vance | Angry | He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once. |
+| 11 | scene ch11Vance | Angry | The departures board beside the door unfolds, stands up on two legs, and steps out. |
 | 11 | scene ch11Vance | Angry | FINAL CALL. |
 
-### Marlowe (26)
+### Marlowe (29)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
 | 12 | scene ch12Marlowe | Happy | Love it. Love the block. Love the lemons. So many lemons. What is that, a jacaranda? Needs less. |
-| 12 | scene ch12Marlowe | Proud | Marlowe. Monochrome Marlowe. I fix places. This place has a lot going on. Too much color, too many porches, a dog doing something on a lawn. |
+| 12 | scene ch12Marlowe | Proud | I’m Marlowe. Monochrome Marlowe. I work for Mr. Vance, and I fix places. |
+| 12 | scene ch12Marlowe | Proud | This place has too much going on: too much color, too many porches, and a dog doing something on a lawn. |
 | 12 | scene ch12Marlowe | Unimpressed | That’s the problem with a neighborhood. Notes. |
 | 12 | scene ch12Marlowe | Unimpressed | He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers. |
 | 12 | scene ch12Marlowe | Proud | I can take the pink, the yellow, and the music out of that window. Mr. Vance likes it quiet. Quiet is safe. Quiet sells. |
@@ -1048,13 +1064,15 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 12 | scene ch12Prime | Unimpressed | It’s not angry. It’s stuck. Stuck is very quiet, and Mr. Vance likes quiet. Do be quick. The notes are due at five. |
 | 12 | scene ch12After | Surprised | Love it. Hate it. Love it. Notes withdrawn. |
 | 12 | scene ch12After | Happy | I’ll be Downtown, at the Movie Palace. Come by. I’ll have notes for the rest of the family. |
-| 12 | scene ch12After | Proud | Long Island is under glass, you know. A very safe house. Your mother is in the kitchen. She’s making a crisp. She’s been making it for hours. |
+| 12 | scene ch12After | Proud | Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making a crisp. |
+| 12 | scene ch12After | Proud | She’s been making the same one for hours. |
 | 12 | scene ch12After | Unimpressed | Notes are due at five. |
 | 16 | scene ch16Open | Happy | Wonderful. Everybody came. I love a turnout. |
 | 16 | scene ch16Open | Proud | Marlowe. Monochrome Marlowe. We met in Jefferson Park. I took the pink out of your neighbor’s window. I’d say sorry, but honestly I think it looks better. |
 | 16 | scene ch16Open | Unimpressed | Mr. Vance is in a meeting. He sends his regards, and a camera. |
 | 16 | scene ch16Open | Proud | That’s what cameras do. Little ones in front, please. Tall ones in back. Everybody tight. Mr. Vance likes everybody tight. |
-| 16 | scene ch16Open | Proud | Mr. Vance keeps the happy ones. A good family at the right moment, just so. Nothing ever changes again. Nobody leaves. It’s a gift. |
+| 16 | scene ch16Open | Proud | Mr. Vance keeps happy families. The camera catches a good family at the right moment and holds them there, just so. |
+| 16 | scene ch16Open | Proud | Nothing ever changes again, and nobody leaves. It’s a gift. |
 | 16 | scene ch16Open | Unimpressed | Everybody stays in a photograph. That’s what a photograph is. |
 | 16 | scene ch16Open | Scared | Mr. Vance. They are... they are children. I only moved the colors around. That’s all I ever did. I never wrote anything like that. |
 | 16 | scene ch16Open | Sad | Less. Less. Less. That is all I ever wanted. Less. |
@@ -1062,16 +1080,17 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 16 | scene ch16After | Sad | I wanted it quieter. I only ever wanted it quieter. |
 | 16 | scene ch16After | Sad | I didn’t want it like this. |
 
-### Vance (42)
+### Vance (44)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
-| 16 | scene ch16Open | Proud | Hello, Tom. Thank you for flying nowhere. I have waited a very long time for a picture where nobody leaves. |
+| 16 | scene ch16Open | Proud | (a voice from inside the camera) Hello, Tom. Thank you for flying nowhere. |
+| 16 | scene ch16Open | Proud | I have waited a very long time for a picture where nobody leaves. |
 | 16 | scene ch16Open | Unimpressed | Hello, Robert. You broke our contract. That’s all right. I am a forgiving man. Everybody, please look here. |
-| 16 | scene ch16Open | Unimpressed | Not Tom. Not the grown ones. The little ones. The ones with all their years still in them. Those are the ones I want to keep. |
+| 16 | scene ch16Open | Unimpressed | I don’t want Tom, and I don’t want the grown ones. I want the little ones, who still have all their years in them. Those are the ones I want to keep. |
 | 16 | scene ch16Open | Proud | There. That is a family photograph. Thank you, Tom. You may keep the frame. |
 | 16 | scene ch16Open | Unimpressed | Marlowe. Collect the children. |
-| 16 | scene ch16Open | Unimpressed | Then I shall help with your notes. |
+| 16 | scene ch16Open | Unimpressed | Then I shall help with your notes, Marlowe. |
 | 16 | scene ch16After | Proud | Thank you for the photograph. It is perfect. I would like to keep it. |
 | 16 | scene ch16After | Unimpressed | Nobody leaves, Tom. That is what a photograph is for. If you want them, you know the building. Downtown. Sixty floors. Do come up. I will leave the light on. |
 | 17 | scene ch17After | Proud | Thank you for the tour, Tom. Thank you for the Archive. It was very nearly complete. |
@@ -1079,7 +1098,8 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 18 | scene ch18Pinnacle | Happy | Tom. Thank you for coming. Everyone, please, come in. Mind the threads. They are all somebody’s afternoon. |
 | 18 | scene ch18Pinnacle | Proud | Warm. Downstairs, on a plinth, under glass. Exactly as you left them. I want you to understand I have taken very good care of them. |
 | 18 | scene ch18Pinnacle | Sad | They are safe. There is a difference. I had to have it explained to me, too. |
-| 18 | scene ch18Pinnacle | Sad | I am the man who kept them. Gold remembers being warm. I only wanted it to keep remembering. |
+| 18 | scene ch18Pinnacle | Sad | I am the man who gave them out. Gold remembers being warm. |
+| 18 | scene ch18Pinnacle | Sad | A coin can hold one warm moment still, for as long as something lonely is willing to hold the coin. |
 | 18 | scene ch18Pinnacle | Unimpressed | Nothing is the same twice, Mr. TNB. You mend a cup, and it is a mended cup. I would like every cup to stay unbroken. |
 | 18 | scene ch18Pinnacle | Proud | Tom. You know why I wanted you. Two places that kept moving, and one man flying between them. You are not a traveler. You are the thread. If you stop, they stop. If you stay, they stay. |
 | 18 | scene ch18Pinnacle | Unimpressed | I will not hurt you. I will not hurt anyone. I will only finish the afternoon. |
@@ -1090,7 +1110,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 18 | scene ch18After | Sad | The Ray was written for five. He took all of it. I did not think anyone would step into it. I have never once seen anyone step into it. |
 | 18 | scene ch18After | Sad | I cannot. The Loom does not hand back. I only know how it keeps. |
 | 18 | scene ch18After | Sad | He is not destroyed. The Ray unwrites the story of a thing. Somewhere he is still a man with a thermos. The Loom simply does not have a place to put him. |
-| 18 | scene ch18After | Loving | It will take you home. It goes where he is from. Hold on to something. |
+| 18 | scene ch18After | Loving | That wave will carry you home. It goes to the place he is from. Hold on to something. |
 | 18 | scene ch18After | Unimpressed | You are not leaving. You are being sent. That is a different thing. |
 | 20 | scene ch20Heart | Sad | Tom. You came back. You always come back. That is the thing I could never forgive you for. |
 | 20 | scene ch20Heart | Sad | Everything leaves. Time takes a little every day, and then one day all of it. So I built a place where it cannot. The Leviathan keeps every afternoon exactly as it was. Please do not hurt it. It is all I have. |

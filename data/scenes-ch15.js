@@ -119,7 +119,7 @@ SCENES.ch15Open=()=>[
   {talk:'Tom',lines:['It’s a dining room.']},
   {talk:'HUSH-9',lines:['It is the loudest dining room I have ever measured. Forty-one decibels of laughing. Mr. Vance does not want laughing. Laughing is how people leak.']},
   {talk:'Amy',lines:['It’s a family dinner. Everybody gets to be loud at a family dinner.']},
-  {talk:'HUSH-9',lines:['That is the problem. You are happiest here. I have been upgraded. I am quiet in all directions. FINAL FORM.']},
+  {talk:'HUSH-9',lines:['That is the problem. You are happiest here, so here is where the noise must stop. Mr. Vance has upgraded me. I am now quiet in all directions.','FINAL FORM.']},
   {talk:'Boppy',lines:['Nobody gets past us. Nobody comes to this table and shushes my wife’s cooking.']},
   {talk:'Deedee',lines:['Robert. Your back.']},
   {talk:'Boppy',lines:['I’ll do it with my back.']},

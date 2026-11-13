@@ -122,3 +122,14 @@ Other canon: Michael is about 10% taller than the other adults; Justin (6'5" in 
 - Fight 2, Julian Vance: his Eternal Silence turns ATTACK to stone. Seven acts of care (Grace DANCE, Rose RASPBERRY, Amy PEP TALK, Deedee MOON & BACK, Boppy GRUMBLE, TNB WARDROBE, Nara PUPPY DOG EYES), BENCH CALL almost free, then Tom DEFENDs Julian himself: "Come on. Nobody gets left behind on my flight."
 - Julian: a daughter, Clara, nine when he missed her birthday for "one more flight". He stopped the minute because he did not know how to say goodbye. Deedee: that is what living is, it hurts a little and you do it anyway.
 - Epilogue: the Censor delivers four keepsakes (Grace's squishy, Rose's ribbon, Amy's stopwatch, TNB's first cup) and Tom's unsent letter. Julian turns the Engine into the Skyway Train between Long Island and Los Angeles. Last scene on the Jefferson Park porch. Flags ch20-done and game-complete.
+
+## Dialogue rewrite canon (2026-11-12, `dialogclear1`; replaces the "coins are a trail, he needed Tom to open Gate Zero" reading in claude/part2-map.md)
+1. (2026-11-12) A gold clock coin can hold one warm moment still for as long as something lonely is willing to hold it.
+2. (2026-11-12) Every Part 1 boss from chapter 2 to 10 is one of Julian Vance's tries to stop a piece of Long Island or Los Angeles. He gave each a coin and a promise that nobody ever has to leave, and each boss says so. The chapter 2 smog was his first try: he plugged the Big Shake's vents, no coin.
+3. (2026-11-12) Kindness breaks it: the coin only works on something lonely, so it lets go when the family befriends the holder. That is why Tom finds a coin after each boss.
+4. (2026-11-12) Chapter 1 seed: Boppy met a man in a long coat at the pond who asked how long the Big One had been alone. The same man later sells Boppy the Warden deal.
+5. (2026-11-12) The Moon Club invitation (chapter 9) was written by Vance to keep Tom, Deedee and Boppy dancing forever.
+6. (2026-11-12) After eight failed tries he sends for Tom himself (boarding pass, layover).
+7. (2026-11-12) The coins came out of the Gate Zero clock; putting them back gives the time back.
+8. (2026-11-12) Chapter 11: TNB got his own gold boarding pass; Vance slips away during the FINAL CALL fight.
+9. (2026-11-12) The Unread was checked out in 1952 by a man in a long coat who never read it. His age is left unexplained on purpose.

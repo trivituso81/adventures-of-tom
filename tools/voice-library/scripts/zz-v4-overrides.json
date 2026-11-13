@@ -476,6 +476,2722 @@
 "text": "Heading home? Say hi to the Atlantic for me. The right ocean.",
 "ctx": "v4 override",
 "script": "[quick, friendly] Heading home? Say hi to the Atlantic for me. [flat, smug] ...The RIGHT ocean."
+},
+{
+"voice": "rose",
+"speaker": "",
+"text": "Deedee! A mud blob just climbed in the window, and it's running off with your crisp!",
+"ctx": "v4 override",
+"script": "[alarmed, breathless] Deedee! [shrill, urgent] A mud blob just climbed in the window, and it's running off with your crisp!"
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "It took the crisp AND my good tin! Grab your shoes, everybody. We're going after it, and I'm coming with you.",
+"ctx": "v4 override",
+"script": "[outraged, fierce] It took the crisp AND my good tin! [commanding, brisk] Grab your shoes, everybody. We're going after it, and I'm coming with you."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "It's headed for Grump Hollow. I've been saying for twenty years that something lives in that pond, and nobody listens to Boppy.",
+"ctx": "v4 override",
+"script": "[aggrieved, vindicated] It's headed for Grump Hollow. [sulky] I've been saying for twenty years that something lives in that pond, and nobody listens to Boppy."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "I'd come with you, but my stomach is acting up. If you see the Big One in that pond, bring him back for me.",
+"ctx": "v4 override",
+"script": "[pained] I'd come with you, but my stomach is acting up. [brighter] If you see the Big One in that pond, bring him back for me."
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "Look, rhubarb crumbs on the path. The little thief dropped them as it ran, so we can follow the trail.",
+"ctx": "v4 override",
+"script": "[brisk, keen] Look, rhubarb crumbs on the path. [indignant, fussing] The little thief dropped them as it ran, so we can follow the trail."
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "Good job, girls. The crumb trail keeps going north, so that's the way we go.",
+"ctx": "v4 override",
+"script": "[proud, brisk] Good job, girls. [focused, cheerful] The crumb trail keeps going north, so that's the way we go."
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "The crumbs lead around the pond, toward Boppy's fishing spot.",
+"ctx": "v4 override",
+"script": "[brisk, cheerful] The crumbs lead around the pond, toward Boppy's fishing spot."
+},
+{
+"voice": "mudling",
+"speaker": "",
+"text": "Blub. I stole it for you, boss.",
+"ctx": "v4 override",
+"script": "[small, eager] Blub. I stole it for you, boss."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "The tin fits on my head like a crown. I'm the king of the pond now. GLUB.",
+"ctx": "v4 override",
+"script": "[pompous, smug] The tin fits on my head like a crown. [gleeful, bubbling] I'm the king of the pond now. GLUB."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "We did. And when it laughed, this fell out of its lip.",
+"ctx": "v4 override",
+"script": "[dry, casual] We did. And when it laughed, this fell out of its lip."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Speaking of strange. A fella was down at the pond yesterday. Long coat, in this heat. He asked how long the Big One has been alone down there.",
+"ctx": "v4 override",
+"script": "[wry, grumbling] Speaking of strange. A fella was down at the pond yesterday. Long coat, in this heat. He asked how long the Big One has been alone down there."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "I said twenty years. He wrote it down.",
+"ctx": "v4 override",
+"script": "[low, suspicious] I said twenty years. [flat, uneasy] He wrote it down."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "All yours. I like that. We'll go look at the purple sky together, but first I need one quick stop at my house.",
+"ctx": "v4 override",
+"script": "[soft, pleased] All yours. I like that. We'll go look at the purple sky together, but first I need one quick stop at my house."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "My sourdough starter has been alone for a week.",
+"ctx": "v4 override",
+"script": "[calm, steady] My sourdough starter has been alone for a week."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "The smog monsters are gone, but Mr. Washington is still in a daze. Look at him.",
+"ctx": "v4 override",
+"script": "[low, worried] The smog monsters are gone, but Mr. [quiet, uneasy] Washington is still in a daze. Look at him."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Mr. Washington would never say that. The smog is doing something to him. Let's go check on Miss Odette and Doña Carmen on the boulevard.",
+"ctx": "v4 override",
+"script": "[dry, unsettled] Mr. [brisk, resolved] Washington would never say that. [calm, steady] The smog is doing something to him. Let's go check on Miss Odette and Doña Carmen on the boulevard."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "The smog makes people want everything to stay exactly the same forever. That's not a nice afternoon. That's a hostage situation.",
+"ctx": "v4 override",
+"script": "[dry, grim] The smog makes people want everything to stay exactly the same forever. [flat, deadpan] That's not a nice afternoon. [cold, dry] That's a hostage situation."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "Nara is right. That's not kitchen smoke. It's the same purple smog, and it's blowing down from the hills.",
+"ctx": "v4 override",
+"script": "[low, alert] Nara is right. [tense, wry] That's not kitchen smoke. It's the same purple smog, and it's blowing down from the hills."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "It's coming from the Observatory. The pipes on its side are pumping out smog like a smoke machine on a bad set.",
+"ctx": "v4 override",
+"script": "[dry, grim] It's coming from the Observatory. [dry, flat] The pipes on its side are pumping out smog like a smoke machine on a bad set."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "I contest that ticket, and I'm granting my own appeal. Let's keep going.",
+"ctx": "v4 override",
+"script": "[dry, official] I contest that ticket, and I'm granting my own appeal. [brisk, calm] Let's keep going."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "RUMBLE. A man in a long coat plugged my vents.",
+"ctx": "v4 override",
+"script": "[deep, sulky] RUMBLE. A man in a long coat plugged my vents."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "Now all my grumbling comes out of those pipes as purple smog, and everything it touches gets stuck. And I LIKE stuck.",
+"ctx": "v4 override",
+"script": "[grumbling, stubborn] Now all my grumbling comes out of those pipes as purple smog, and everything it touches gets stuck. And I LIKE stuck."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "When everything is stuck, nothing moves and nothing changes, and nobody ever has to say goodbye.",
+"ctx": "v4 override",
+"script": "[heavy, slow] When everything is stuck, nothing moves and nothing changes, and nobody ever has to say goodbye."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "That's what the man promised me. Nobody leaves. Not ever.",
+"ctx": "v4 override",
+"script": "[heavy, slow] That's what the man promised me. [aching, small] Nobody leaves. Not ever."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "So a man in a long coat plugged those vents on purpose. He wanted this whole city stuck in one afternoon. I'd like to know why.",
+"ctx": "v4 override",
+"script": "[dry, uneasy] So a man in a long coat plugged those vents on purpose. [low, suspicious] He wanted this whole city stuck in one afternoon. I'd like to know why."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Long Island is home, and so is this. I have two homes. Okay. Good.",
+"ctx": "v4 override",
+"script": "[soft, relieved] Long Island is home, and so is this. I have two homes. [quiet, warm] Okay. Good."
+},
+{
+"voice": "oolong",
+"speaker": "",
+"text": "The kettle says a man in a long coat has been buying up gold coins at Penny's shop. He pays double, and he never takes his hat off.",
+"ctx": "v4 override",
+"script": "[conspiratorial, whispering] The kettle says a man in a long coat has been buying up gold coins at Penny's shop. [ominous, delighted] He pays double, and he never takes his hat off."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "Iron-Gill swam west with my jar, into the Whispering Marsh. Come on, we're going after him. And nobody walk fast.",
+"ctx": "v4 override",
+"script": "[determined] Iron-Gill swam west with my jar, into the Whispering Marsh. [mock-stern, bossy] Come on, we're going after him. And nobody walk fast."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "This is Sundial Hollow. I haven't been back here since I was nine, and it hasn't changed.",
+"ctx": "v4 override",
+"script": "[quiet, nostalgic] This is Sundial Hollow. I haven't been back here since I was nine, and it hasn't changed."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "The sundial still says seven o'clock, no matter what time it is.",
+"ctx": "v4 override",
+"script": "[wry, tender] The sundial still says seven o'clock, no matter what time it is."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "It's a gold coin, wedged right under the pointer. That's what was holding the shadow at seven. Somebody pushed this in on purpose.",
+"ctx": "v4 override",
+"script": "[dry, curious] It's a gold coin, wedged right under the pointer. [low, suspicious] That's what was holding the shadow at seven. Somebody pushed this in on purpose."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "Now the water has drained, and the way to the Deep Pool is open. That's where Iron-Gill goes to sulk.",
+"ctx": "v4 override",
+"script": "[determined] Now the water has drained, and the way to the Deep Pool is open. [knowing] That's where Iron-Gill goes to sulk."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "A man in a long coat stopped the sundial for me. He said if the day never ended, you'd never pack up and go home.",
+"ctx": "v4 override",
+"script": "[sulky, slow] A man in a long coat stopped the sundial for me. [wounded, small] He said if the day never ended, you'd never pack up and go home."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "It works because I took the coin out. A man in a long coat stops a sundial so a lonely fish can keep his company. That's a strange favor to do for a fish.",
+"ctx": "v4 override",
+"script": "[calm, wry] It works because I took the coin out. [low, puzzled] A man in a long coat stops a sundial so a lonely fish can keep his company. [dry, flat] That's a strange favor to do for a fish."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "All three sets are clear, and Stage 7 just unlocked itself. That's where the fog came from, so that's where my rack is.",
+"ctx": "v4 override",
+"script": "[tense, quiet] All three sets are clear, and Stage 7 just unlocked itself. [grim, steady] That's where the fog came from, so that's where my rack is."
+},
+{
+"voice": "la_woman",
+"speaker": "",
+"text": "I'm Dana Park, the director, and this is my first feature. Without the costumes we can't shoot, and without a shoot there's no movie.",
+"ctx": "v4 override",
+"script": "[clipped, stressed] I'm Dana Park, the director, and this is my first feature. [grim, flat] Without the costumes we can't shoot, and without a shoot there's no movie."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Those sound like Friction Sprites. Grumpy little monsters, loose on a closed set.",
+"ctx": "v4 override",
+"script": "[flat, dry] Those sound like Friction Sprites. [deadpan, weary] Grumpy little monsters, loose on a closed set."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "And it smells like grape fog juice. Only Stage 7 has a fog machine, so my rack must be in Stage 7.",
+"ctx": "v4 override",
+"script": "[thrilled, curious] And it smells like grape fog juice. [sharp, certain] Only Stage 7 has a fog machine, so my rack must be in Stage 7."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Then we clear the Sprites off the sets, one at a time: Main Street, the Western street and New York. After that we deal with Stage 7.",
+"ctx": "v4 override",
+"script": "[calm, decisive] Then we clear the Sprites off the sets, one at a time: Main Street, the Western street and New York. [methodical, steady] After that we deal with Stage 7."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "I've been on this lot for forty years, and every bad take was yelled through ME. Nobody ever gets it right.",
+"ctx": "v4 override",
+"script": "[bitter, grandiose] I've been on this lot for forty years, and every bad take was yelled through ME. [wounded, sulky] Nobody ever gets it right."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "So I took the costumes. With no costumes there's no take, and with no take there's no BAD take. It's perfect. It's my best work.",
+"ctx": "v4 override",
+"script": "[smug, scheming] So I took the costumes. [gleeful, triumphant] With no costumes there's no take, and with no take there's no BAD take. [dreamy, self-satisfied] It's perfect. It's my best work."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "A man in a long coat paid me to do it. One gold coin. He said a day with no takes is a day that never has to end.",
+"ctx": "v4 override",
+"script": "[brash, tired] A man in a long coat paid me to do it. [low, sly] One gold coin. He said a day with no takes is a day that never has to end."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Another gold coin, same as the one in the sundial. First he stops a sundial for a fish, and now he pays a megaphone to stop a movie.",
+"ctx": "v4 override",
+"script": "[musing, dry] Another gold coin, same as the one in the sundial. First he stops a sundial for a fish, and now he pays a megaphone to stop a movie."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Somebody in a long coat really wants things to stand still.",
+"ctx": "v4 override",
+"script": "[suspicious, thoughtful] Somebody in a long coat really wants things to stand still."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "The Cafetorium doors run on the bell system, and the bells run on the hallway clocks.",
+"ctx": "v4 override",
+"script": "[urgent, precise] The Cafetorium doors run on the bell system, and the bells run on the hallway clocks."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "Until the clocks are right, those doors won't open, and thirty parents are on their way.",
+"ctx": "v4 override",
+"script": "[anxious, tight] Until the clocks are right, those doors won't open, and thirty parents are on their way."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "So please set every clock in the hall to exactly seven o'clock. Not seven-thirty, and not six-fifty-nine. Seven.",
+"ctx": "v4 override",
+"script": "[precise, firm] So please set every clock in the hall to exactly seven o'clock. [insistent, clipped] Not seven-thirty, and not six-fifty-nine. [deadpan, final] Seven."
+},
+{
+"voice": "grace",
+"speaker": "",
+"text": "The footprints go into all three rooms and out again, and then east to the Cafetorium. The sign-up sheet went that way.",
+"ctx": "v4 override",
+"script": "[serious, crisp] The footprints go into all three rooms and out again, and then east to the Cafetorium. [dramatic, low] The sign-up sheet went that way."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Then we clear the monsters out of Art, Music and the Gym. After each room, we set its hallway clock to seven o'clock.",
+"ctx": "v4 override",
+"script": "[calm, even] Then we clear the monsters out of Art, Music and the Gym. After each room, we set its hallway clock to seven o'clock."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "When all three are right, the Cafetorium opens.",
+"ctx": "v4 override",
+"script": "[practical, steady] When all three are right, the Cafetorium opens."
+},
+{
+"voice": "grump",
+"speaker": "",
+"text": "I have marked a hundred thousand wrong answers in this school. Every quiz, every spelling test and every crooked line.",
+"ctx": "v4 override",
+"script": "[weary, aggrieved] I have marked a hundred thousand wrong answers in this school. [seething, clipped] Every quiz, every spelling test and every crooked line."
+},
+{
+"voice": "grump",
+"speaker": "",
+"text": "But nobody ever grades ME, and nobody ever writes NEAT next to MY work. So tonight I'm grading the grown-ups.",
+"ctx": "v4 override",
+"script": "[wounded, bitter] But nobody ever grades ME, and nobody ever writes NEAT next to MY work. [cold, prim] So tonight I'm grading the grown-ups."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "So you took the sign-up sheet to mark it up, and you scrambled the bells and the clocks too.",
+"ctx": "v4 override",
+"script": "[calm, gentle] So you took the sign-up sheet to mark it up, and you scrambled the bells and the clocks too."
+},
+{
+"voice": "grump",
+"speaker": "",
+"text": "I did. I made the bells and the clocks wrong so that everybody would be late. Late is late. Points off.",
+"ctx": "v4 override",
+"script": "[snippy, officious] I did. I made the bells and the clocks wrong so that everybody would be late. [curt, final] Late is late. Points off."
+},
+{
+"voice": "grump",
+"speaker": "",
+"text": "A man in a long coat gave me a gold coin for it.",
+"ctx": "v4 override",
+"script": "[stern, clipped] A man in a long coat gave me a gold coin for it."
+},
+{
+"voice": "grump",
+"speaker": "",
+"text": "He said if the clocks never agree, conference night never has to start, and then nobody ever goes home.",
+"ctx": "v4 override",
+"script": "[low, sly] He said if the clocks never agree, conference night never has to start, and then nobody ever goes home."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "Tom, when it says SEE ME, step in front of them. Grace, use Squishy on anyone it circles. And somebody tell it that its handwriting is nice.",
+"ctx": "v4 override",
+"script": "[brisk, tactical] Tom, when it says SEE ME, step in front of them. Grace, use Squishy on anyone it circles. And somebody tell it that its handwriting is nice."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "If we say it three times, I think it'll calm down.",
+"ctx": "v4 override",
+"script": "[sly, coaxing] If we say it three times, I think it'll calm down."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "It's another gold coin, with the same little clock face on it.",
+"ctx": "v4 override",
+"script": "[quiet, wary] It's another gold coin, with the same little clock face on it."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "That's three. A stopped sundial, a stopped movie, and now a school where the clocks can't agree.",
+"ctx": "v4 override",
+"script": "[musing, low] That's three. A stopped sundial, a stopped movie, and now a school where the clocks can't agree."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Every time, it's a gold coin, and something lonely holding on to it.",
+"ctx": "v4 override",
+"script": "[uneasy, dry] Every time, it's a gold coin, and something lonely holding on to it."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "You got the sheet back, and the bells and the clocks are working! Parents, come on in! Conference night is ON!",
+"ctx": "v4 override",
+"script": "[jubilant, booming] You got the sheet back, and the bells and the clocks are working! [thrilled, hearty] Parents, come on in! Conference night is ON!"
+},
+{
+"voice": "rose",
+"speaker": "",
+"text": "He's by the last car in the parking lot. He's wearing a long coat, and he's looking right at us.",
+"ctx": "v4 override",
+"script": "[whispering, spooked] He's by the last car in the parking lot. [faint, uneasy] He's wearing a long coat, and he's looking right at us."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "...I looked, and there's nobody there now.",
+"ctx": "v4 override",
+"script": "[quiet, uneasy] ...I looked, and there's nobody there now."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "A man in a long coat. The fish said so, the megaphone said so, and the pen said so. He's real, he's here, and he's checking on his work.",
+"ctx": "v4 override",
+"script": "[low, thoughtful] A man in a long coat. The fish said so, the megaphone said so, and the pen said so. He's real, he's here, and he's checking on his work."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "I'm keeping a list.",
+"ctx": "v4 override",
+"script": "[dry, wry] I'm keeping a list."
+},
+{
+"voice": "olivia",
+"speaker": "",
+"text": "She's been doing that all night. And it's not just us. Things are going missing all over the block: Lachlan's toy truck, Mr.",
+"ctx": "v4 override",
+"script": "[hushed, urgent] She's been doing that all night. And it's not just us. Things are going missing all over the block: Lachlan's toy truck, Mr."
+},
+{
+"voice": "olivia",
+"speaker": "",
+"text": "Washington's reading glasses, and Marisol says every tennis ball.",
+"ctx": "v4 override",
+"script": "[quick, spooked] Washington's reading glasses, and Marisol says every tennis ball."
+},
+{
+"voice": "penny",
+"speaker": "",
+"text": "They have lookouts in the playground, a spy in the community garden,",
+"ctx": "v4 override",
+"script": "[conspiratorial, intense] They have lookouts in the playground, a spy in the community garden,"
+},
+{
+"voice": "penny",
+"speaker": "",
+"text": "and somebody at the picnic tables stuffing their cheeks with anything that's not nailed down.",
+"ctx": "v4 override",
+"script": "[appalled, clipped] and somebody at the picnic tables stuffing their cheeks with anything that's not nailed down."
+},
+{
+"voice": "penny",
+"speaker": "",
+"text": "Everything they steal goes up THAT tree, the Old Oak. There's a little door in the trunk that opens with a secret knock. I've only ever heard bits of it.",
+"ctx": "v4 override",
+"script": "[hushed, intense] Everything they steal goes up THAT tree, the Old Oak. [annoyed, muttering] There's a little door in the trunk that opens with a secret knock. I've only ever heard bits of it."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "The squirrels buried something in three different spots.",
+"ctx": "v4 override",
+"script": "[quiet, grim] The squirrels buried something in three different spots."
+},
+{
+"voice": "penny",
+"speaker": "",
+"text": "Clear the squirrels out of those three spots, and your dog can dig up what they buried. I'd bet a piece of that secret knock is in each hole.",
+"ctx": "v4 override",
+"script": "[commanding, crisp] Clear the squirrels out of those three spots, and your dog can dig up what they buried. I'd bet a piece of that secret knock is in each hole."
+},
+{
+"voice": "penny",
+"speaker": "",
+"text": "I'll be here with my clipboard.",
+"ctx": "v4 override",
+"script": "[smug, officious] I'll be here with my clipboard."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Bready Mercury is up there at the top of the tree, and there's no ladder to reach him.",
+"ctx": "v4 override",
+"script": "[low, thoughtful] Bready Mercury is up there at the top of the tree, and there's no ladder to reach him."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "I'm Chairman Cheeks.",
+"ctx": "v4 override",
+"script": "[proud, self-important] I'm Chairman Cheeks."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "Every acorn, every peanut and every shiny thing on 2nd Avenue gets carried up this tree, because winter is coming and we need a hoard.",
+"ctx": "v4 override",
+"script": "[grandiose, paranoid] Every acorn, every peanut and every shiny thing on 2nd Avenue gets carried up this tree, because winter is coming and we need a hoard."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "And this jar is the best thing we ever took. You feed it and it grows, so it never runs out. It smells like bread FOREVER. It's the perfect hoard.",
+"ctx": "v4 override",
+"script": "[greedy, dreamy] And this jar is the best thing we ever took. [rapturous, breathless] You feed it and it grows, so it never runs out. [gloating, low] It smells like bread FOREVER. It's the perfect hoard."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "A man in a long coat told me where you keep it. He gave me a gold coin and said a hoard that never runs out means winter never has to come.",
+"ctx": "v4 override",
+"script": "[brisk, chattery] A man in a long coat told me where you keep it. [low, sly] He gave me a gold coin and said a hoard that never runs out means winter never has to come."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "Share? ...Nobody shares with a squirrel. For twenty years I've been chased off every bird feeder on this block.",
+"ctx": "v4 override",
+"script": "[bewildered, bitter] Share? [hurt, small] ...Nobody shares with a squirrel. [aching, resentful] For twenty years I've been chased off every bird feeder on this block."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "Babe, when it buries an acorn, break the acorn before it can eat it. Nara digs them up for double. And maybe try sharing something with it.",
+"ctx": "v4 override",
+"script": "[quick, helpful] Babe, when it buries an acorn, break the acorn before it can eat it. Nara digs them up for double. And maybe try sharing something with it."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "Three times should do it.",
+"ctx": "v4 override",
+"script": "[gentle, thoughtful] Three times should do it."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "That makes four. The sundial, your steamer, the sign-up sheet, and now my jar.",
+"ctx": "v4 override",
+"script": "[low, measured] That makes four. The sundial, your steamer, the sign-up sheet, and now my jar."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "He finds something lonely, hands it a gold coin, and it tries to make one thing last forever.",
+"ctx": "v4 override",
+"script": "[quiet, wary] He finds something lonely, hands it a gold coin, and it tries to make one thing last forever."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "And then we show up and make friends with it, and the coin falls right off. Babe. We are ruining this man's whole year. Spooky. I love it. I hate it.",
+"ctx": "v4 override",
+"script": "[hushed, gleeful] And then we show up and make friends with it, and the coin falls right off. Babe. [delighted, spooked] We are ruining this man's whole year. Spooky. [mock pained] I love it. I hate it."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "He knows where I keep my starter, though. That's the part I don't love.",
+"ctx": "v4 override",
+"script": "[dry, uneasy] He knows where I keep my starter, though. [low, flat] That's the part I don't love."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "The three gold letters spell the password for the Reading Room doors. We enter them in card order: one, two, three.",
+"ctx": "v4 override",
+"script": "[dry, satisfied] The three gold letters spell the password for the Reading Room doors. [flat, certain] We enter them in card order: one, two, three."
+},
+{
+"voice": "page",
+"speaker": "",
+"text": "...It's not fine. It started a week ago, and it's coming up from the Stacks, the old part of the library downstairs.",
+"ctx": "v4 override",
+"script": "[deadpan, hushed] ...It's not fine. [hushed, grave] It started a week ago, and it's coming up from the Stacks, the old part of the library downstairs."
+},
+{
+"voice": "pagew",
+"speaker": "",
+"text": "...It's not fine. It started a week ago, and it's coming up from the Stacks, the old part of the library downstairs.",
+"ctx": "v4 override",
+"script": "[whispering, trailing off] ...It's not fine. [hushed, uneasy] It started a week ago, and it's coming up from the Stacks, the old part of the library downstairs."
+},
+{
+"voice": "page",
+"speaker": "",
+"text": "Every book down there is whispering everything it ever overheard.",
+"ctx": "v4 override",
+"script": "[hushed, grave] Every book down there is whispering everything it ever overheard."
+},
+{
+"voice": "page",
+"speaker": "",
+"text": "That's seventy years of people reading quietly and thinking nobody was listening.",
+"ctx": "v4 override",
+"script": "[soft, sad] That's seventy years of people reading quietly and thinking nobody was listening."
+},
+{
+"voice": "pagew",
+"speaker": "",
+"text": "Every book down there is whispering everything it ever overheard.",
+"ctx": "v4 override",
+"script": "[hushed, awed] Every book down there is whispering everything it ever overheard."
+},
+{
+"voice": "pagew",
+"speaker": "",
+"text": "That's seventy years of people reading quietly and thinking nobody was listening.",
+"ctx": "v4 override",
+"script": "[dry] That's seventy years of people reading quietly and thinking nobody was listening."
+},
+{
+"voice": "page",
+"speaker": "",
+"text": "The Stacks have three sections: Fiction, Nonfiction and Picture Books.",
+"ctx": "v4 override",
+"script": "[dry, precise] The Stacks have three sections: Fiction, Nonfiction and Picture Books."
+},
+{
+"voice": "page",
+"speaker": "",
+"text": "The Reading Room is at the very back, and I think the whispering starts in there.",
+"ctx": "v4 override",
+"script": "[grave, hushed] The Reading Room is at the very back, and I think the whispering starts in there."
+},
+{
+"voice": "pagew",
+"speaker": "",
+"text": "The Stacks have three sections: Fiction, Nonfiction and Picture Books.",
+"ctx": "v4 override",
+"script": "[whispering, precise] The Stacks have three sections: Fiction, Nonfiction and Picture Books."
+},
+{
+"voice": "pagew",
+"speaker": "",
+"text": "The Reading Room is at the very back, and I think the whispering starts in there.",
+"ctx": "v4 override",
+"script": "[dry] The Reading Room is at the very back, and I think the whispering starts in there."
+},
+{
+"voice": "page",
+"speaker": "",
+"text": "But the Reading Room doors use the old card catalog lock, and I lost the password in 1998.",
+"ctx": "v4 override",
+"script": "[precise, hushed] But the Reading Room doors use the old card catalog lock, and I lost the password in 1998."
+},
+{
+"voice": "pagew",
+"speaker": "",
+"text": "But the Reading Room doors use the old card catalog lock, and I lost the password in 1998.",
+"ctx": "v4 override",
+"script": "[whispering, dry] But the Reading Room doors use the old card catalog lock, and I lost the password in 1998."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Something in each of these sections must know a piece of the password. We'll ask nicely first. Then we'll ask less nicely.",
+"ctx": "v4 override",
+"script": "[low, resolute] Something in each of these sections must know a piece of the password. [flat, ominous] We'll ask nicely first. Then we'll ask less nicely."
+},
+{
+"voice": "log",
+"speaker": "",
+"text": "I'm the oldest book in the Stacks. I've sat on this shelf for seventy years, and in all that time nobody has checked me out or opened me. Not once.",
+"ctx": "v4 override",
+"script": "[slow, formal] I'm the oldest book in the Stacks. [hurt, quiet] I've sat on this shelf for seventy years, and in all that time nobody has checked me out or opened me. [cracking, low] Not once."
+},
+{
+"voice": "log",
+"speaker": "",
+"text": "So I listened instead. Everybody who ever sat in this room thought nobody could hear them, and I heard ALL of it.",
+"ctx": "v4 override",
+"script": "[low, bitter] So I listened instead. [dark, booming] Everybody who ever sat in this room thought nobody could hear them, and I heard ALL of it."
+},
+{
+"voice": "log",
+"speaker": "",
+"text": "A man in a long coat checked me out in 1952 and never read a page.",
+"ctx": "v4 override",
+"script": "[old, papery] A man in a long coat checked me out in 1952 and never read a page."
+},
+{
+"voice": "log",
+"speaker": "",
+"text": "Last week he came back, slipped a gold coin in me, and said: keep them listening, and they'll never leave the room.",
+"ctx": "v4 override",
+"script": "[low, confiding] Last week he came back, slipped a gold coin in me, and said: keep them listening, and they'll never leave the room."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "That's five coins. The sundial, the steamer, the sign-up sheet, my jar, and now a book that nobody has opened since 1952.",
+"ctx": "v4 override",
+"script": "[low, uneasy] That's five coins. [quiet, incredulous] The sundial, the steamer, the sign-up sheet, my jar, and now a book that nobody has opened since 1952."
+},
+{
+"voice": "grace",
+"speaker": "",
+"text": "And look at the checkout card in the pocket. It has one stamp, DUE BACK 1952, and no name. There's just a little clock where the name should be.",
+"ctx": "v4 override",
+"script": "[hushed, quick] And look at the checkout card in the pocket. [slow, careful] It has one stamp, DUE BACK 1952, and no name. [whispering, spooked] There's just a little clock where the name should be."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "And then he brought it back last week with a coin in it. Either he's very old, or he's very, very late.",
+"ctx": "v4 override",
+"script": "[dry, impressed] And then he brought it back last week with a coin in it. [deadpan] Either he's very old, or he's very, very late."
+},
+{
+"voice": "grace",
+"speaker": "",
+"text": "And my chart says the same thing every time, Tata. Something old that everybody forgot, then a gold coin, then something that won't stop.",
+"ctx": "v4 override",
+"script": "[sure, precise] And my chart says the same thing every time, Tata. Something old that everybody forgot, then a gold coin, then something that won't stop."
+},
+{
+"voice": "grace",
+"speaker": "",
+"text": "The sundial, the movie, the clocks, the whispering.",
+"ctx": "v4 override",
+"script": "[earnest, quick] The sundial, the movie, the clocks, the whispering."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "That's all three pilot lights, babe. The little steam motor by the turntable has three empty burners.",
+"ctx": "v4 override",
+"script": "[eager, bright] That's all three pilot lights, babe. The little steam motor by the turntable has three empty burners."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "If I put a flame in each one, I can get the turntable moving.",
+"ctx": "v4 override",
+"script": "[excited, quick] If I put a flame in each one, I can get the turntable moving."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "She's pointing east, toward the end of the boulevard. Babe, that's the old Car Barn, Division Nine. The streetcars ran out of there until 1963.",
+"ctx": "v4 override",
+"script": "[focused, hushed] She's pointing east, toward the end of the boulevard. [excited, low] Babe, that's the old Car Barn, Division Nine. [reverent, warm] The streetcars ran out of there until 1963."
+},
+{
+"voice": "penny",
+"speaker": "",
+"text": "The barn has been chained up for sixty years. Here, take the committee key. I'm the committee.",
+"ctx": "v4 override",
+"script": "[skeptical, brisk] The barn has been chained up for sixty years. Here, take the committee key. I'm the committee."
+},
+{
+"voice": "penny",
+"speaker": "",
+"text": "We're closing the boulevard for the potluck tables, and I need the bread by six.",
+"ctx": "v4 override",
+"script": "[flat, officious] We're closing the boulevard for the potluck tables, and I need the bread by six."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Those little flames are pilot lights. They're the pilot lights from every stove on the block, and something down here is collecting them.",
+"ctx": "v4 override",
+"script": "[low, dawning] Those little flames are pilot lights. [wary, hushed] They're the pilot lights from every stove on the block, and something down here is collecting them."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "And three of them got stuck on the way. Look: the Paint Shop, the Machine Shop and the Lunchroom.",
+"ctx": "v4 override",
+"script": "[quick, alert] And three of them got stuck on the way. Look: the Paint Shop, the Machine Shop and the Lunchroom."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "Something in each room is hogging a flame.",
+"ctx": "v4 override",
+"script": "[brisk, focused] Something in each room is hogging a flame."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "That little flame cooks somebody's gumbo, and it has for forty years. Hand it over.",
+"ctx": "v4 override",
+"script": "[firm, reverent] That little flame cooks somebody's gumbo, and it has for forty years. [flat, commanding] Hand it over."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "So somebody named Ironbelly wanted every flame on 2nd Ave, and sent a draft to fetch them.",
+"ctx": "v4 override",
+"script": "[low, dry] So somebody named Ironbelly wanted every flame on 2nd Ave, and sent a draft to fetch them."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "That flame is the pilot light from my oven, and I have forty loaves to bake. Put it down. No touching, please.",
+"ctx": "v4 override",
+"script": "[low, firm] That flame is the pilot light from my oven, and I have forty loaves to bake. [calm, commanding] Put it down. No touching, please."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "I'm Old Ironbelly, built in 1912, cast iron all the way through.",
+"ctx": "v4 override",
+"script": "[proud, booming] I'm Old Ironbelly, built in 1912, cast iron all the way through."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "I baked biscuits for the night crew every night for fifty-one years, and cornbread on Fridays.",
+"ctx": "v4 override",
+"script": "[warm, nostalgic] I baked biscuits for the night crew every night for fifty-one years, and cornbread on Fridays."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "Everybody up there has a little fire of their own, and I've been cold for sixty years. I only borrowed a few.",
+"ctx": "v4 override",
+"script": "[defensive, plaintive] Everybody up there has a little fire of their own, and I've been cold for sixty years. [small, rueful] I only borrowed a few."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "A man in a long coat left a gold coin in my ash pan. He said keep the fires, and the night shift never has to end.",
+"ctx": "v4 override",
+"script": "[rough, tired] A man in a long coat left a gold coin in my ash pan. [warm, wistful] He said keep the fires, and the night shift never has to end."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "A potluck, where everybody brings a dish. But nobody ever brings anything to the oven. Nobody has put a single thing in me to bake since 1963.",
+"ctx": "v4 override",
+"script": "[wistful, slow] A potluck, where everybody brings a dish. [sad, hushed] But nobody ever brings anything to the oven. [heavy, lonely] Nobody has put a single thing in me to bake since 1963."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "Babe, Splash moves cool her down, and Cozy moves stoke her up, so go easy on those.",
+"ctx": "v4 override",
+"script": "[quick, urgent] Babe, Splash moves cool her down, and Cozy moves stoke her up, so go easy on those."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "What she really wants is for somebody to bake something in her. Do that three times.",
+"ctx": "v4 override",
+"script": "[gentle, knowing] What she really wants is for somebody to bake something in her. [firm, emphatic] Do that three times."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "That's six coins. The sundial, the steamer, the sign-up sheet, my jar, the book from 1952, and now an oven that nobody has opened since 1963.",
+"ctx": "v4 override",
+"script": "[low, uneasy] That's six coins. [flat, incredulous] The sundial, the steamer, the sign-up sheet, my jar, the book from 1952, and now an oven that nobody has opened since 1963."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "Same deal as all the others, babe. He finds something that's been alone for years, gives it a coin, and tells it nobody ever has to leave. Very neat.",
+"ctx": "v4 override",
+"script": "[hushed, relishing] Same deal as all the others, babe. He finds something that's been alone for years, gives it a coin, and tells it nobody ever has to leave. Very neat."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "Very quiet. Very spooky. I love it. I hate it.",
+"ctx": "v4 override",
+"script": "[giddy, easy] Very quiet. Very spooky. [mock-pained, dry] I love it. I hate it."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "There's not a speck of ash on this coin, so somebody put it in the oven after the fire went out. I'm adding it to the list.",
+"ctx": "v4 override",
+"script": "[dry, sure] There's not a speck of ash on this coin, so somebody put it in the oven after the fire went out. [flat, resolved] I'm adding it to the list."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Six times he's tried to stop something of ours. Six times it let go the minute somebody was nice to it. I don't think he planned for nice.",
+"ctx": "v4 override",
+"script": "[quiet, level] Six times he's tried to stop something of ours. [soft, wondering] Six times it let go the minute somebody was nice to it. I don't think he planned for nice."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "A little clock on the seal. That's his clock, the one on every coin. He's done sending coins to lonely things. Now he's sending mail to me.",
+"ctx": "v4 override",
+"script": "[quiet, dry] A little clock on the seal. That's his clock, the one on every coin. [low, uneasy] He's done sending coins to lonely things. Now he's sending mail to me."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "We've got three mirrors, three stands and one little moonbeam.",
+"ctx": "v4 override",
+"script": "[lecturing] We've got three mirrors, three stands and one little moonbeam."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "If we aim the mirrors right, the moonbeam bounces to the lock on the Dome doors.",
+"ctx": "v4 override",
+"script": "[lecturing] If we aim the mirrors right, the moonbeam bounces to the lock on the Dome doors."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "I didn't drive a car for forty years without learning about mirrors.",
+"ctx": "v4 override",
+"script": "[smug, proud] I didn't drive a car for forty years without learning about mirrors."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "The moon is missing, a club that's been locked for fifty years just invited me, and the invitation has the same little gold clock as my coins.",
+"ctx": "v4 override",
+"script": "[dry, resolute] The moon is missing, a club that's been locked for fifty years just invited me, and the invitation has the same little gold clock as my coins."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Everybody get your shoes.",
+"ctx": "v4 override",
+"script": "[firm, brisk] Everybody get your shoes."
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "The plaque says MEMBERS ARE ADMITTED BY MOONLIGHT. And look, there are three little brass stands that used to hold mirrors.",
+"ctx": "v4 override",
+"script": "[proud, grand] The plaque says MEMBERS ARE ADMITTED BY MOONLIGHT. And look, there are three little brass stands that used to hold mirrors."
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "Somebody took the mirrors.",
+"ctx": "v4 override",
+"script": "[suspicious, sharp] Somebody took the mirrors."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "There's a coat check, a card room and a ballroom. Three rooms and three missing mirrors. I'd say there's one mirror hiding in each room.",
+"ctx": "v4 override",
+"script": "[methodical] There's a coat check, a card room and a ballroom. [measured, steady] Three rooms and three missing mirrors. [flat, certain] I'd say there's one mirror hiding in each room."
+},
+{
+"voice": "mudling",
+"speaker": "",
+"text": "...You were very nice about it, for a fight. Here's the mirror. It used to hang over the bandstand, before she came and took its place.",
+"ctx": "v4 override",
+"script": "[shy, surprised] ...You were very nice about it, for a fight. [hesitant, soft] Here's the mirror. [wistful, confiding] It used to hang over the bandstand, before she came and took its place."
+},
+{
+"voice": "mirrorball",
+"speaker": "",
+"text": "Every full moon, they danced under me. Then came the last dance, in 1971. The band said see you next moon, and nobody ever came back.",
+"ctx": "v4 override",
+"script": "[dreamy, grand] Every full moon, they danced under me. [dramatic wail, theatrical] Then came the last dance, in 1971. [quivering, melodramatic sob] The band said see you next moon, and nobody ever came back."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "Every full moon, they danced under me. Then came the last dance, in 1971. The band said see you next moon, and nobody ever came back.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] Every full moon, they danced under me. Then came the last dance, in 1971. The band said see you next moon, and nobody ever came back."
+},
+{
+"voice": "mirrorball",
+"speaker": "",
+"text": "The gentleman in the long coat said you would. He gave me a gold coin and wrote the invitation himself. He said you'd bring your mother.",
+"ctx": "v4 override",
+"script": "[breathy, delighted] The gentleman in the long coat said you would. [low, secretive] He gave me a gold coin and wrote the invitation himself. He said you'd bring your mother."
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "Tom, whatever kind of move her shiny side is showing bounces right back at us, so use a different kind.",
+"ctx": "v4 override",
+"script": "[urgent, hushed] Tom, whatever kind of move her shiny side is showing bounces right back at us, so use a different kind."
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "And honey, nobody has asked her to dance since 1971. Ask her three times.",
+"ctx": "v4 override",
+"script": "[soft, tender] And honey, nobody has asked her to dance since 1971. [meaningful, gentle] Ask her three times."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "That's seven coins. The sundial, the steamer, the sign-up sheet, my jar, the book from 1952, the oven from 1963, and now a mirrorball from 1971.",
+"ctx": "v4 override",
+"script": "[dry, steady] That's seven coins. [quiet, dawning] The sundial, the steamer, the sign-up sheet, my jar, the book from 1952, the oven from 1963, and now a mirrorball from 1971."
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "So he wrote that invitation, Tom. It wasn't her. She can't hold a pen. She's a ball.",
+"ctx": "v4 override",
+"script": "[thoughtful, sharp] So he wrote that invitation, Tom. It wasn't her. She can't hold a pen. She's a ball."
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "He wanted you up here, dancing under her forever, with me and your father.",
+"ctx": "v4 override",
+"script": "[gentle, amused] He wanted you up here, dancing under her forever, with me and your father."
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "He knew you'd come, and he knew you'd bring your mother. That's a man who has been watching this family.",
+"ctx": "v4 override",
+"script": "[warm, knowing] He knew you'd come, and he knew you'd bring your mother. [tender, proud] That's a man who has been watching this family."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Seven coins. Seven times he's tried to make something of ours stand still, and this time he was aiming at us. I'm adding it to the list.",
+"ctx": "v4 override",
+"script": "[dry, intrigued] Seven coins. [deadpan, resolute] Seven times he's tried to make something of ours stand still, and this time he was aiming at us. I'm adding it to the list."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Fifty years that ball waited for somebody to come back. Same as Old Iron-Gill at my pier. This fella knows where all the lonely things are.",
+"ctx": "v4 override",
+"script": "[wry, grumbling] Fifty years that ball waited for somebody to come back. Same as Old Iron-Gill at my pier. This fella knows where all the lonely things are."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "I don't like a fella who knows that.",
+"ctx": "v4 override",
+"script": "[low, suspicious] I don't like a fella who knows that."
+},
+{
+"voice": "grace",
+"speaker": "",
+"text": "Tata. It has the little clock on it. The coin man wants you to go on a TRIP.",
+"ctx": "v4 override",
+"script": "[bright, bossy] Tata. [thrilled, certain] It has the little clock on it. The coin man wants you to go on a TRIP."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "The clock has all three hands now, and it still isn't moving. Tom, look at the slots around the face. There are seven of them.",
+"ctx": "v4 override",
+"script": "[brisk, analytical] The clock has all three hands now, and it still isn't moving. [sharp, quick] Tom, look at the slots around the face. [flat, curious] There are seven of them."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Seven slots, and I have seven gold coins. They're in a sock in my bag.",
+"ctx": "v4 override",
+"script": "[dry, quiet] Seven slots, and I have seven gold coins. [deadpan, sheepish] They're in a sock in my bag."
+},
+{
+"voice": "grace",
+"speaker": "",
+"text": "They go in the order we found them, going around the face like a clock! I KNEW the list was important.",
+"ctx": "v4 override",
+"script": "[triumphant, bossy] They go in the order we found them, going around the face like a clock! [smug, vindicated] I KNEW the list was important."
+},
+{
+"voice": "grace",
+"speaker": "",
+"text": "Each coin was holding a piece of time still. I think this clock is where they came from. Put them back, and the time goes back too.",
+"ctx": "v4 override",
+"script": "[calm, thoughtful] Each coin was holding a piece of time still. [low, certain] I think this clock is where they came from. Put them back, and the time goes back too."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "It's every clock in town. They all stopped at midnight. Sal calls it zero o'clock.",
+"ctx": "v4 override",
+"script": "[dry, calm] It's every clock in town. [deadpan, even] They all stopped at midnight. Sal calls it zero o'clock."
+},
+{
+"voice": "sal",
+"speaker": "",
+"text": "Cab seven! Everybody in. We're going to Long Island Regional Airport, to the door nobody uses.",
+"ctx": "v4 override",
+"script": "[booming, cheerful] Cab seven! [lower, conspiratorial] Everybody in. We're going to Long Island Regional Airport, to the door nobody uses."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "Seven coins. Seven times this man tried to make something stand still, and seven times you took the coin away. And now they all fit his clock.",
+"ctx": "v4 override",
+"script": "[slow, thoughtful] Seven coins. [wary, low] Seven times this man tried to make something stand still, and seven times you took the coin away. And now they all fit his clock."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "It's his clock. And the middle slot is still empty, so there's one more coin out there, and one more lonely thing holding it.",
+"ctx": "v4 override",
+"script": "[dry, calm] It's his clock. [quiet, resolved] And the middle slot is still empty, so there's one more coin out there, and one more lonely thing holding it."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "Flight Zero was due out at midnight in 1989. I called it and called it, but nobody came to the gate and nobody answered.",
+"ctx": "v4 override",
+"script": "[hollow, mournful] Flight Zero was due out at midnight in 1989. [faint, quiet] I called it and called it, but nobody came to the gate and nobody answered."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "The gentleman in the long coat gave me the last coin. He said: hold midnight, and Group Zero will come.",
+"ctx": "v4 override",
+"script": "[hollow, formal] The gentleman in the long coat gave me the last coin. He said: hold midnight, and Group Zero will come."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "He said you always make your connection.",
+"ctx": "v4 override",
+"script": "[low, resigned] He said you always make your connection."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "Tom, when she calls one of us, that person has to move before her next turn. Or you stand in front of them.",
+"ctx": "v4 override",
+"script": "[fast, brisk] Tom, when she calls one of us, that person has to move before her next turn. Or you stand in front of them."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "And nobody has answered her call since 1989. Answer her three times.",
+"ctx": "v4 override",
+"script": "[grim, pointed] And nobody has answered her call since 1989. [low, meaningful] Answer her three times."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "That's all eight. A sundial, a movie, a school, my jar, a book, an oven, the moon, and now midnight.",
+"ctx": "v4 override",
+"script": "[dry, steady] That's all eight. A sundial, a movie, a school, my jar, a book, an oven, the moon, and now midnight."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Eight times he tried to stop something, and eight times it let go.",
+"ctx": "v4 override",
+"script": "[measured, building] Eight times he tried to stop something, and eight times it let go."
+},
+{
+"voice": "grace",
+"speaker": "",
+"text": "He's wearing a long coat, like the man Rose saw at the school. He's tipping his hat at you.",
+"ctx": "v4 override",
+"script": "[hushed, awed] He's wearing a long coat, like the man Rose saw at the school. [soft, amazed] He's tipping his hat at you."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "He's the man who handed out the coins. Eight tries to stop our towns, and none of them held.",
+"ctx": "v4 override",
+"script": "[calm, certain] He's the man who handed out the coins. Eight tries to stop our towns, and none of them held."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "I don't know his name, but he knows I always make my connection.",
+"ctx": "v4 override",
+"script": "[calm, certain] I don't know his name, but he knows I always make my connection."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "A layover is a stop in the middle of a trip. It means this trip isn't over. And neither is he.",
+"ctx": "v4 override",
+"script": "[calm, warm] A layover is a stop in the middle of a trip. It means this trip isn't over. And neither is he."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "A gold card came in the mail, addressed to my recliner. It says Priority Member. It's junk mail. They send junk mail to furniture now.",
+"ctx": "v4 override",
+"script": "[skeptical] A gold card came in the mail, addressed to my recliner. [dry, flat] It says Priority Member. [grumbling] It's junk mail. They send junk mail to furniture now."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "Don't throw it out, though. It feels warm. Even my knee can feel it.",
+"ctx": "v4 override",
+"script": "[wary] Don't throw it out, though. [dry, deadpan] It feels warm. Even my knee can feel it."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "Dad. That card has a little clock on it.",
+"ctx": "v4 override",
+"script": "[flat, wary] Dad. That card has a little clock on it."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "Everything has a clock on it. It's junk mail.",
+"ctx": "v4 override",
+"script": "[offhand, grumbling] Everything has a clock on it. It's junk mail."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "...Don't sign anything.",
+"ctx": "v4 override",
+"script": "[low, wary] ...Don't sign anything."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "I never sign anything. I didn't sign the mortgage. Your mother did.",
+"ctx": "v4 override",
+"script": "[wry, grumbling] I never sign anything. [flat, deadpan] I didn't sign the mortgage. Your mother did."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "The boarding pass from Gate Zero is buzzing in my pocket. Now it says: YOUR LAYOVER IS NOW BOARDING.",
+"ctx": "v4 override",
+"script": "[dry, curious] The boarding pass from Gate Zero is buzzing in my pocket. [crisp, clear] Now it says: YOUR LAYOVER IS NOW BOARDING."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "The man in the long coat said my layover would be announced. I think this is it. I have to go back to Gate Zero.",
+"ctx": "v4 override",
+"script": "[calm, resolved] The man in the long coat said my layover would be announced. [low, certain] I think this is it. I have to go back to Gate Zero."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Flight Zero was waiting at the gate with one seat made up. A real pod seat. Somebody upgraded me, and nobody told me why.",
+"ctx": "v4 override",
+"script": "[dry, suspicious] Flight Zero was waiting at the gate with one seat made up. [deadpan, wary] A real pod seat. Somebody upgraded me, and nobody told me why."
+},
+{
+"voice": "grace",
+"speaker": "",
+"text": "You said everybody comes next time, Tata. This is next time.",
+"ctx": "v4 override",
+"script": "[bright, earnest] You said everybody comes next time, Tata. This is next time."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "STOP THE PLANE! I don't have a ticket. I have my running shoes, and I just chased my daughters across a whole airport.",
+"ctx": "v4 override",
+"script": "[frantic, shouting] STOP THE PLANE! [flustered, breathless] I don't have a ticket. [determined, brisk] I have my running shoes, and I just chased my daughters across a whole airport."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "They ran out of the house in their socks, Tom. Wherever this plane is going, I'm going too. I'm their ride home. And I'm faster than you.",
+"ctx": "v4 override",
+"script": "[indignant, intense] They ran out of the house in their socks, Tom. [firm, brisk] Wherever this plane is going, I'm going too. [smug, challenging] I'm their ride home. And I'm faster than you."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "The plane is flying straight into it. Everybody hold on to something. Preferably each other.",
+"ctx": "v4 override",
+"script": "[calm, steady] The plane is flying straight into it. [warm, dry] Everybody hold on to something. Preferably each other."
+},
+{
+"voice": "la_woman",
+"speaker": "",
+"text": "DING. Welcome to Terminal Infinity, where it is always dusk and every flight is on time.",
+"ctx": "v4 override",
+"script": "[serene, airy] DING. [soft, hypnotic] Welcome to Terminal Infinity, where it is always dusk and every flight is on time."
+},
+{
+"voice": "la_woman",
+"speaker": "",
+"text": "We flew through the hole in the sky and landed at an airport that isn't on any map.",
+"ctx": "v4 override",
+"script": "[quiet, wondering] We flew through the hole in the sky and landed at an airport that isn't on any map."
+},
+{
+"voice": "grace",
+"speaker": "",
+"text": "Tata, look out the big window. There are two tiny towns floating out there.",
+"ctx": "v4 override",
+"script": "[hushed, urgent] Tata, look out the big window. [soft, wondering] There are two tiny towns floating out there."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "The green one on the left is Long Island, and the orange one on the right is Los Angeles.",
+"ctx": "v4 override",
+"script": "[quiet, dry] The green one on the left is Long Island, and the orange one on the right is Los Angeles."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "They're both inside glass, like snow globes.",
+"ctx": "v4 override",
+"script": "[quiet, thoughtful] They're both inside glass, like snow globes."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "Then this is the layover on your boarding pass.",
+"ctx": "v4 override",
+"script": "[slow, thinking] Then this is the layover on your boarding pass."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "It's a place in between our two homes, where everything is on time and nothing is going anywhere.",
+"ctx": "v4 override",
+"script": "[dry, uneasy] It's a place in between our two homes, where everything is on time and nothing is going anywhere."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "We're going to find whoever sent me that boarding pass. The only way on is east, down the Endless Concourse.",
+"ctx": "v4 override",
+"script": "[steady, resolved] We're going to find whoever sent me that boarding pass. [calm, decisive] The only way on is east, down the Endless Concourse."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "There are nine gates here: Boston, Denver, Seattle, Chicago, Miami and more. Every one of them says PAUSED.",
+"ctx": "v4 override",
+"script": "[brisk, clipped] There are nine gates here: Boston, Denver, Seattle, Chicago, Miami and more. [flat, uneasy] Every one of them says PAUSED."
+},
+{
+"voice": "grace",
+"speaker": "",
+"text": "Each window is a whole town, stopped in the middle of one day. Look, that seagull still has the same fry.",
+"ctx": "v4 override",
+"script": "[hushed, amazed] Each window is a whole town, stopped in the middle of one day. [bright, delighted] Look, that seagull still has the same fry."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Careful. Those are real towns with real people in them, even if they're paused. Don't lick the glass.",
+"ctx": "v4 override",
+"script": "[calm, dry] Careful. [deadpan] Those are real towns with real people in them, even if they're paused. Don't lick the glass."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Gate Infinity is the big door at the far end. I think the man in the long coat is behind it.",
+"ctx": "v4 override",
+"script": "[calm, wary] Gate Infinity is the big door at the far end. I think the man in the long coat is behind it."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "But there's a checkpoint in the middle, and somebody is standing in it.",
+"ctx": "v4 override",
+"script": "[low, alert] But there's a checkpoint in the middle, and somebody is standing in it."
+},
+{
+"voice": "skeeter",
+"speaker": "",
+"text": "You're not on the list. Nobody is ever on the list. That makes you standby passengers. Congratulations, you're number eighteen.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] You're not on the list. Nobody is ever on the list. That makes you standby passengers. Congratulations, you're number eighteen."
+},
+{
+"voice": "skeeter",
+"speaker": "",
+"text": "Me. I've been number seventeen since 1998, waiting for a seat. Nobody gets through this checkpoint ahead of me.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] Me. I've been number seventeen since 1998, waiting for a seat. Nobody gets through this checkpoint ahead of me."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "Hey, babe. A gold boarding pass turned up on the loft door this morning, with my name and Nara's on it. So we got on the plane.",
+"ctx": "v4 override",
+"script": "[easy, warm] Hey, babe. A gold boarding pass turned up on the loft door this morning, with my name and Nara's on it. So we got on the plane."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "The airline lost my bag, found my dog, and upgraded us both.",
+"ctx": "v4 override",
+"script": "[wry, unbothered] The airline lost my bag, found my dog, and upgraded us both."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "You flew through the hole in the sky too.",
+"ctx": "v4 override",
+"script": "[quiet, wondering] You flew through the hole in the sky too."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "I flew through a pink hole in the sky with a dog on a pillow. It was fine. There was a ceramic pot on the drinks cart that was kind of incredible.",
+"ctx": "v4 override",
+"script": "[easy, amused] I flew through a pink hole in the sky with a dog on a pillow. [warming, excited] It was fine. There was a ceramic pot on the drinks cart that was kind of incredible."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "So you're TNB. The boyfriend. We finally meet in person.",
+"ctx": "v4 override",
+"script": "[brisk, guarded] So you're TNB. The boyfriend. We finally meet in person."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "Okay, everybody. It's always dusk here and nobody has slept, so I'm calling a sleepover before we go any farther.",
+"ctx": "v4 override",
+"script": "[warm, rallying] Okay, everybody. It's always dusk here and nobody has slept, so I'm calling a sleepover before we go any farther."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "We have a blanket, a dog, and nine hours of dusk.",
+"ctx": "v4 override",
+"script": "[easy, amused] We have a blanket, a dog, and nine hours of dusk."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "They didn't want the good part to end, so they left a piece of it behind and never came back for it.",
+"ctx": "v4 override",
+"script": "[quiet, aching] They didn't want the good part to end, so they left a piece of it behind and never came back for it."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "And somebody collected all of it. Every tag has the same little gold clock that's on my coins.",
+"ctx": "v4 override",
+"script": "[low, dry] And somebody collected all of it. [quiet, grim] Every tag has the same little gold clock that's on my coins."
+},
+{
+"voice": "rose",
+"speaker": "",
+"text": "Tata, the Lost Luggage monsters from the Concourse are all in here. And they're all being very polite.",
+"ctx": "v4 override",
+"script": "[whispering, urgent] Tata, the Lost Luggage monsters from the Concourse are all in here. [earnest, solemn] And they're all being very polite."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "...He's been holding a spot here for me. Not for my bag. For me. He wants me to stay.",
+"ctx": "v4 override",
+"script": "[stunned, thin] ...He's been holding a spot here for me. Not for my bag. [soft, moved] For me. He wants me to stay."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "You're the man in the long coat. You were in the school parking lot, and on the jet bridge at Gate Zero. You handed out the coins.",
+"ctx": "v4 override",
+"script": "[wary, steady] You're the man in the long coat. [low, tightening] You were in the school parking lot, and on the jet bridge at Gate Zero. You handed out the coins."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "My name is Julian Vance. I'm a gate agent, in a way. I have stood at every gate that ever closed.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] My name is Julian Vance. I'm a gate agent, in a way. I have stood at every gate that ever closed."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "Eight times I gave something lonely a coin and a promise, and eight times your family talked it out of both. Thank you for flying nowhere, Tom.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] Eight times I gave something lonely a coin and a promise, and eight times your family talked it out of both. Thank you for flying nowhere, Tom."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "You are very hard to stop.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] You are very hard to stop."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "I stopped every town on Earth at its happiest afternoon. A birthday that never ends, or the last day of summer.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] I stopped every town on Earth at its happiest afternoon. A birthday that never ends, or the last day of summer."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "In those towns nobody is ever sad, and nobody is ever late.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] In those towns nobody is ever sad, and nobody is ever late."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "It should always be this afternoon. Babe, that's what Mr. Washington kept saying when the purple smog came down.",
+"ctx": "v4 override",
+"script": "[dry, uneasy] It should always be this afternoon. [low, knowing] Babe, that's what Mr. Washington kept saying when the purple smog came down."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "That was my first try at your street. It would not hold still.",
+"ctx": "v4 override",
+"script": "[formal, soft] That was my first try at your street. It would not hold still."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "Only Long Island and Los Angeles kept moving, because you kept flying between them.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] Only Long Island and Los Angeles kept moving, because you kept flying between them."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "Every flight you took moved them along a little, and I was never quick enough to stop you.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] Every flight you took moved them along a little, and I was never quick enough to stop you."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "That is why I sent for you. If you stay here, your two towns will stop as well, and then everyone, everywhere, is safe.",
+"ctx": "v4 override",
+"script": "[formal, calm] That is why I sent for you. [soft, persuasive] If you stay here, your two towns will stop as well, and then everyone, everywhere, is safe."
+},
+{
+"voice": "rose",
+"speaker": "",
+"text": "You told the Mirrorball it could have one dance forever. You told the Last Call it could have midnight forever. They weren't bad. They were lonely.",
+"ctx": "v4 override",
+"script": "[gentle, steady] You told the Mirrorball it could have one dance forever. You told the Last Call it could have midnight forever. They weren't bad. They were lonely."
+},
+{
+"voice": "rose",
+"speaker": "",
+"text": "I think you are too.",
+"ctx": "v4 override",
+"script": "[low, sincere] I think you are too."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "I want everyone safe, in the good part, forever. So come in, all of you, and stay. Nobody here has ever been lost.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] I want everyone safe, in the good part, forever. So come in, all of you, and stay. Nobody here has ever been lost."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "That's the nicest offer anyone has ever made me. And I've had the boarding pass for it in my pocket this whole time.",
+"ctx": "v4 override",
+"script": "[quiet, touched] That's the nicest offer anyone has ever made me. [light, certain] And I've had the boarding pass for it in my pocket this whole time."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "...Then I can't let you leave. I'll have to make the last announcement.",
+"ctx": "v4 override",
+"script": "[trailing off] ...Then I can't let you leave. I'll have to make the last announcement."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "He lifts his hat. Behind his head, the big door's gold clock spins, and every flap in the terminal clicks at once.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] He lifts his hat. Behind his head, the big door's gold clock spins, and every flap in the terminal clicks at once."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "The departures board beside the door unfolds, stands up on two legs, and steps out.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] The departures board beside the door unfolds, stands up on two legs, and steps out."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "It's warm. This is one of the old gold coins he bought up on Long Island. He was using it to hold that gate shut.",
+"ctx": "v4 override",
+"script": "[quiet, tender] It's warm. [low, thoughtful] This is one of the old gold coins he bought up on Long Island. He was using it to hold that gate shut."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "And Vance is gone. He slipped away while we were busy with his board.",
+"ctx": "v4 override",
+"script": "[flat, tired] And Vance is gone. He slipped away while we were busy with his board."
+},
+{
+"voice": "grace",
+"speaker": "",
+"text": "Tata, look at the window. The little green town is changing color. It's turning amber, like a caution light.",
+"ctx": "v4 override",
+"script": "[hushed, uneasy] Tata, look at the window. [worried, quick] The little green town is changing color. [small, uneasy] It's turning amber, like a caution light."
+},
+{
+"voice": "grace",
+"speaker": "",
+"text": "He closed Long Island. He couldn't make us stay, so he stopped our home instead.",
+"ctx": "v4 override",
+"script": "[grim, quiet] He closed Long Island. He couldn't make us stay, so he stopped our home instead."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Los Angeles is the orange one. It's the only gate still open, so that's the way we have to go. We'll find a road back to Long Island from there.",
+"ctx": "v4 override",
+"script": "[calm, gentle] Los Angeles is the orange one. [quiet, heavy] It's the only gate still open, so that's the way we have to go. We'll find a road back to Long Island from there."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "That's my house number in Los Angeles. The door is going to open onto my street.",
+"ctx": "v4 override",
+"script": "[quiet, stunned] That's my house number in Los Angeles. [soft, marveling] The door is going to open onto my street."
+},
+{
+"voice": "kit",
+"speaker": "",
+"text": "I'm Marlowe. Monochrome Marlowe. I work for Mr. Vance, and I fix places.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] I'm Marlowe. Monochrome Marlowe. I work for Mr. Vance, and I fix places."
+},
+{
+"voice": "kit",
+"speaker": "",
+"text": "This place has too much going on: too much color, too many porches, and a dog doing something on a lawn.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] This place has too much going on: too much color, too many porches, and a dog doing something on a lawn."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "He's draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He's frozen solid.",
+"ctx": "v4 override",
+"script": "[grim, controlled] He's draining the color out of the whole block. And he did something worse. [sharper, urgent] Look at Mr. Washington. He's frozen solid."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "He's trapped in amber. Amber is warmth that got stuck. Doña Carmen's is right there, and the Alvarez house is down 2nd. They might be frozen too.",
+"ctx": "v4 override",
+"script": "[calm, gentle] He's trapped in amber. Amber is warmth that got stuck. [steady, practical] Doña Carmen's is right there, and the Alvarez house is down 2nd. They might be frozen too."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "She's frozen in amber, right in the middle of a sentence.",
+"ctx": "v4 override",
+"script": "[quiet, solemn] She's frozen in amber, right in the middle of a sentence."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Okay. The whole family is frozen in amber. Marlowe's grey got in through the front door.",
+"ctx": "v4 override",
+"script": "[calm, grim] Okay. [low, tense] The whole family is frozen in amber. Marlowe's grey got in through the front door."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "You work for Vance, and Vance closed Long Island. My mother isn't answering her phone. Where is she?",
+"ctx": "v4 override",
+"script": "[low, tight] You work for Vance, and Vance closed Long Island. My mother isn't answering her phone. Where is she?"
+},
+{
+"voice": "kit",
+"speaker": "",
+"text": "Long Island is under glass now, you know. Mr. Vance put a dome over it. It's very safe. Your mother is in her kitchen, making a crisp.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] Long Island is under glass now, you know. Mr. Vance put a dome over it. It's very safe. Your mother is in her kitchen, making a crisp."
+},
+{
+"voice": "kit",
+"speaker": "",
+"text": "She's been making the same one for hours.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] She's been making the same one for hours."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Tell me how to get in.",
+"ctx": "v4 override",
+"script": "[cold, quiet] Tell me how to get in."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "He said Long Island is under glass. So Vance sealed it inside a dome, with your mom and dad in it. We'll have to go under the glass, or around it.",
+"ctx": "v4 override",
+"script": "[calm, practical] He said Long Island is under glass. [easy, bright] So Vance sealed it inside a dome, with your mom and dad in it. We'll have to go under the glass, or around it."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Sal and Sol know every road between here and there. We'll start at Sol's cab stand.",
+"ctx": "v4 override",
+"script": "[focused, steady] Sal and Sol know every road between here and there. [calm, decisive] We'll start at Sol's cab stand."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Sol. Vance put a glass dome over Long Island, and my parents are inside it. Sal always says you two know every road there is.",
+"ctx": "v4 override",
+"script": "[urgent, direct] Sol. Vance put a glass dome over Long Island, and my parents are inside it. Sal always says you two know every road there is."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Is there a way under?",
+"ctx": "v4 override",
+"script": "[low, pleading] Is there a way under?"
+},
+{
+"voice": "sal",
+"speaker": "",
+"text": "We carry letters. For eleven years we've run mail between Long Island and Los Angeles in the trunks of our cabs.",
+"ctx": "v4 override",
+"script": "[proud, hushed] We carry letters. For eleven years we've run mail between Long Island and Los Angeles in the trunks of our cabs."
+},
+{
+"voice": "sal",
+"speaker": "",
+"text": "Nobody ever opened a bag, and nobody ever asked why two cab companies need a hundred sacks of stamps.",
+"ctx": "v4 override",
+"script": "[offhand, smug] Nobody ever opened a bag, and nobody ever asked why two cab companies need a hundred sacks of stamps."
+},
+{
+"voice": "sal",
+"speaker": "",
+"text": "Sol, come in. It's Sal, calling from inside the dome. Cab seven says hi. She's fine. She's the only thing in town that's still moving.",
+"ctx": "v4 override",
+"script": "[crackly, brisk] Sol, come in. It's Sal, calling from inside the dome. [deadpan, dry] Cab seven says hi. She's fine. She's the only thing in town that's still moving."
+},
+{
+"voice": "sal",
+"speaker": "",
+"text": "There's a way in, and it's called the Sub-Rail. Sal and I have been boring a tunnel under the Layover from both coasts, as a hobby.",
+"ctx": "v4 override",
+"script": "[hushed, proud] There's a way in, and it's called the Sub-Rail. Sal and I have been boring a tunnel under the Layover from both coasts, as a hobby."
+},
+{
+"voice": "sal",
+"speaker": "",
+"text": "It was supposed to open in 2031. The two halves meet in the middle, right under the dome.",
+"ctx": "v4 override",
+"script": "[offhand, flat] It was supposed to open in 2031. The two halves meet in the middle, right under the dome."
+},
+{
+"voice": "sal",
+"speaker": "",
+"text": "But our drill stopped answering when the dome came down. Something put a chip in it, and now it's loose in the tunnel. Be careful of the Worm.",
+"ctx": "v4 override",
+"script": "[low, serious] But our drill stopped answering when the dome came down. [grave, urgent] Something put a chip in it, and now it's loose in the tunnel. Be careful of the Worm."
+},
+{
+"voice": "sal",
+"speaker": "",
+"text": "I need two dispatchers to stay here on the radio and read the tunnel map to the team.",
+"ctx": "v4 override",
+"script": "[brisk, urgent] I need two dispatchers to stay here on the radio and read the tunnel map to the team."
+},
+{
+"voice": "penny",
+"speaker": "",
+"text": "For years, a man in a long coat bought gold coins from Penny's shop and from mine. He paid double, and he never took his hat off.",
+"ctx": "v4 override",
+"script": "[quick, uneasy] For years, a man in a long coat bought gold coins from Penny's shop and from mine. [slower, guilty] He paid double, and he never took his hat off."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "Julian Vance. Those are the coins he handed to every lonely thing we met.",
+"ctx": "v4 override",
+"script": "[low, grim] Julian Vance. Those are the coins he handed to every lonely thing we met."
+},
+{
+"voice": "penny",
+"speaker": "",
+"text": "There are eleven coins left between us, the last of the old gold. They were supposed to be our retirement.",
+"ctx": "v4 override",
+"script": "[quiet, heavy] There are eleven coins left between us, the last of the old gold. [flat, wistful] They were supposed to be our retirement."
+},
+{
+"voice": "penny",
+"speaker": "",
+"text": "Sal says gold remembers being warm. Amber is warmth that got stuck, so maybe warm gold can melt a door in it. That's what Sal says. I don't know.",
+"ctx": "v4 override",
+"script": "[earnest, unsure] Sal says gold remembers being warm. Amber is warmth that got stuck, so maybe warm gold can melt a door in it. That's what Sal says. I don't know."
+},
+{
+"voice": "penny",
+"speaker": "",
+"text": "He's a cab driver.",
+"ctx": "v4 override",
+"script": "[quick, sheepish] He's a cab driver."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "The chip makes the Drill dig toward noise. So we make a lot of noise, all together, and it'll come to us.",
+"ctx": "v4 override",
+"script": "[dry, plotting] The chip makes the Drill dig toward noise. [warm] So we make a lot of noise, all together, and it'll come to us."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "This cavern is the middle of the tunnel. That wall of amber is the bottom of the dome over Long Island.",
+"ctx": "v4 override",
+"script": "[hushed, awed] This cavern is the middle of the tunnel. That wall of amber is the bottom of the dome over Long Island."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "And there's a hole in the dirt exactly the width of a drill.",
+"ctx": "v4 override",
+"script": "[dry, wary] And there's a hole in the dirt exactly the width of a drill."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Be kind to it first, and only hit it if it hits back. Amy, you heal. TNB, I'll go for the hush chip. Everybody else, make some noise.",
+"ctx": "v4 override",
+"script": "[calm, commanding] Be kind to it first, and only hit it if it hits back. [brisk, steady] Amy, you heal. [rallying, louder] TNB, I'll go for the hush chip. Everybody else, make some noise."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "A little grey cube just popped out of its side. That's the chip HUSH-9 put in it. It's very quiet.",
+"ctx": "v4 override",
+"script": "[quiet, dry] A little grey cube just popped out of its side. [wry] That's the chip HUSH-9 put in it. [deadpan] It's very quiet."
+},
+{
+"voice": "sal",
+"speaker": "",
+"text": "Okay. From here the Sub-Rail runs the rest of the way, and it comes up through a breach under Grump Hollow, inside the dome.",
+"ctx": "v4 override",
+"script": "[brisk, practical] Okay. From here the Sub-Rail runs the rest of the way, and it comes up through a breach under Grump Hollow, inside the dome."
+},
+{
+"voice": "sal",
+"speaker": "",
+"text": "Sol's putting the girls on the five fifteen handcar.",
+"ctx": "v4 override",
+"script": "[quick] Sol's putting the girls on the five fifteen handcar."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "It's a Warden's plate. It's gold armor, and it hums. I like the hum.",
+"ctx": "v4 override",
+"script": "[weary, formal] It's a Warden's plate. [dreamy] It's gold armor, and it hums. I like the hum."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "My back doesn't hurt, Tommy, for the first time in eleven years. I made a deal.",
+"ctx": "v4 override",
+"script": "[steady, distant] My back doesn't hurt, Tommy, for the first time in eleven years. [guarded] I made a deal."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "As long as I stand guard here, the glass dome stays up over Long Island. That's the deal.",
+"ctx": "v4 override",
+"script": "[weary, solemn] As long as I stand guard here, the glass dome stays up over Long Island. [weary, final] That's the deal."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Dad, that's the same deal he gave a mirrorball, an oven and a squirrel. It isn't safe. It's a freezer.",
+"ctx": "v4 override",
+"script": "[urgent, gentle] Dad, that's the same deal he gave a mirrorball, an oven and a squirrel. [pained, deadpan] It isn't safe. It's a freezer."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "Tom. Behind us, down the stairs, something is coming up the tunnel. A lot of grey men with clipboards. Vance's Auditors. I counted fourteen.",
+"ctx": "v4 override",
+"script": "[low, alert] Tom. [dry, tense] Behind us, down the stairs, something is coming up the tunnel. A lot of grey men with clipboards. [grim, flat] Vance's Auditors. I counted fourteen."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "Sol's handcar is coming up the tunnel with the girls, and I'll send them up to you. Nara and I will stay and hold the breach.",
+"ctx": "v4 override",
+"script": "[calm, decisive] Sol's handcar is coming up the tunnel with the girls, and I'll send them up to you. Nara and I will stay and hold the breach."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "Somebody has to stand at the bottom of the stairs and tell the Auditors no.",
+"ctx": "v4 override",
+"script": "[steady, easy] Somebody has to stand at the bottom of the stairs and tell the Auditors no."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Okay. First we go around him to the porch and help Deedee. Then we deal with Dad. Nobody touches the armor. Not even a little.",
+"ctx": "v4 override",
+"script": "[calm, firm] Okay. First we go around him to the porch and help Deedee. Then we deal with Dad. Nobody touches the armor. Not even a little."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Rose, that includes you.",
+"ctx": "v4 override",
+"script": "[flat, stern] Rose, that includes you."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Amber is warmth that got stuck. She's been baking for nobody for hours, so all that warmth has nowhere to go.",
+"ctx": "v4 override",
+"script": "[soft, thoughtful] Amber is warmth that got stuck. [quiet, resolved] She's been baking for nobody for hours, so all that warmth has nowhere to go."
+},
+{
+"voice": "rose",
+"speaker": "",
+"text": "Maybe somebody just has to eat it.",
+"ctx": "v4 override",
+"script": "[small, tentative] Maybe somebody just has to eat it."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "It was the fella I met at the pond, the one in the long coat. He came to the door, very polite. He never took his hat off.",
+"ctx": "v4 override",
+"script": "[quiet, haunted] It was the fella I met at the pond, the one in the long coat. He came to the door, very polite. He never took his hat off."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "He said he could stop the aches, and stop the slowing down.",
+"ctx": "v4 override",
+"script": "[ashamed] He said he could stop the aches, and stop the slowing down."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Vance promised you the girls would be safe in the good part, forever. That means he wants to freeze them too.",
+"ctx": "v4 override",
+"script": "[serious, dry] Vance promised you the girls would be safe in the good part, forever. That means he wants to freeze them too."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "We already told him no once, and he won't take a second no well.",
+"ctx": "v4 override",
+"script": "[grim, wary] We already told him no once, and he won't take a second no well."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "Take the Warden's key, Tommy. It opens the gate, and it opens our front door too. Either way, nobody gets past us.",
+"ctx": "v4 override",
+"script": "[solemn] Take the Warden's key, Tommy. [firm, steady] It opens the gate, and it opens our front door too. [proud, steady] Either way, nobody gets past us."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "That is the problem. You are happiest here, so here is where the noise must stop. Mr. Vance has upgraded me. I am now quiet in all directions.",
+"ctx": "v4 override",
+"script": "[emphasizing] That is the problem. You are happiest here, so here is where the noise must stop. Mr. Vance has upgraded me. I am now quiet in all directions."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "FINAL FORM.",
+"ctx": "v4 override",
+"script": "[emphasizing] FINAL FORM."
+},
+{
+"voice": "kit",
+"speaker": "",
+"text": "Mr. Vance keeps happy families. The camera catches a good family at the right moment and holds them there, just so.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] Mr. Vance keeps happy families. The camera catches a good family at the right moment and holds them there, just so."
+},
+{
+"voice": "kit",
+"speaker": "",
+"text": "Nothing ever changes again, and nobody leaves. It's a gift.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] Nothing ever changes again, and nobody leaves. It's a gift."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "(a voice from inside the camera) Hello, Tom. Thank you for flying nowhere.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] (a voice from inside the camera) Hello, Tom. Thank you for flying nowhere."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "I have waited a very long time for a picture where nobody leaves.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] I have waited a very long time for a picture where nobody leaves."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "I don't want Tom, and I don't want the grown ones. I want the little ones, who still have all their years in them. Those are the ones I want to keep.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] I don't want Tom, and I don't want the grown ones. I want the little ones, who still have all their years in them. Those are the ones I want to keep."
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "Girls, close your eyes. Boppy and I are stepping in front of you. To the moon and back.",
+"ctx": "v4 override",
+"script": "[soft, steady] Girls, close your eyes. [warm, tearful] Boppy and I are stepping in front of you. To the moon and back."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Mom! Dad! Get away from the camera!",
+"ctx": "v4 override",
+"script": "[stricken, desperate] Mom! Dad! Get away from the camera!"
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Nobody moves. Nobody says anything. Deedee and Boppy stepped in front of the camera, and the flash meant for the girls hit them instead.",
+"ctx": "v4 override",
+"script": "[hushed, stunned] Nobody moves. Nobody says anything. Deedee and Boppy stepped in front of the camera, and the flash meant for the girls hit them instead."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands.",
+"ctx": "v4 override",
+"script": "[slow, aching] In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "Then I shall help with your notes, Marlowe.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] Then I shall help with your notes, Marlowe."
+},
+{
+"voice": "kit",
+"speaker": "",
+"text": "Amber pours out of the camera and over Marlowe. He rises off the ground as a black disc with a burning amber ring around it, like an eclipse.",
+"ctx": "v4 override",
+"script": "[flat, hushed] Amber pours out of the camera and over Marlowe. [low, tense] He rises off the ground as a black disc with a burning amber ring around it, like an eclipse."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "Tom. Whatever Marlowe just turned into, it's standing between the girls and the road.",
+"ctx": "v4 override",
+"script": "[tight, low] Tom. [flat, resolute] Whatever Marlowe just turned into, it's standing between the girls and the road."
+},
+{
+"voice": "sal",
+"speaker": "",
+"text": "TOMMY! He's closing glass over the whole town! I have the girls in the cab! GET IN!",
+"ctx": "v4 override",
+"script": "[panicked, hollering] TOMMY! He's closing glass over the whole town! [frantic, yelling] I have the girls in the cab! GET IN!"
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Vance sealed Long Island inside a snow globe and reeled it up into the sky, with Mom and Dad still standing in the Square.",
+"ctx": "v4 override",
+"script": "[quiet, subdued] Vance sealed Long Island inside a snow globe and reeled it up into the sky, with Mom and Dad still standing in the Square."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Sal drove us out through the Sub-Rail with the meter off. Nobody has said anything since the tunnel.",
+"ctx": "v4 override",
+"script": "[heavy, soft] Sal drove us out through the Sub-Rail with the meter off. Nobody has said anything since the tunnel."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "Vance said we know the building: sixty floors, in downtown Los Angeles. That's where he took them.",
+"ctx": "v4 override",
+"script": "[calm, drained] Vance said we know the building: sixty floors, in downtown Los Angeles. That's where he took them."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "We rest tonight, and tomorrow we go up.",
+"ctx": "v4 override",
+"script": "[steady, firm] We rest tonight, and tomorrow we go up."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "Girls. It's sixty floors. It's going to be hard and strange and not fair.",
+"ctx": "v4 override",
+"script": "[gentle, level] Girls. [serious, firm] It's sixty floors. It's going to be hard and strange and not fair."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Okay. Here's how we do it. We split into two teams of three. Grace, Rose and I take the stairs.",
+"ctx": "v4 override",
+"script": "[calm, methodical] Okay. Here's how we do it. We split into two teams of three. Grace, Rose and I take the stairs."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Amy, TNB and Nara go in through the service ducts to the Archive on floor thirty.",
+"ctx": "v4 override",
+"script": "[clear, dry] Amy, TNB and Nara go in through the service ducts to the Archive on floor thirty."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "Which is why I'm going to win this.",
+"ctx": "v4 override",
+"script": "[smug, determined] Which is why I'm going to win this."
+},
+{
+"voice": "grace",
+"speaker": "",
+"text": "I'm calling it. On my mark. Mark!",
+"ctx": "v4 override",
+"script": "[officious, thrilled] I'm calling it. [yelling, bright] On my mark. Mark!"
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "I'm not running. I'm carrying the thermos. Somebody has to.",
+"ctx": "v4 override",
+"script": "[easy, dry] I'm not running. [amused, unbothered] I'm carrying the thermos. Somebody has to."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "That's the single saddest thing I have ever heard a lens say.",
+"ctx": "v4 override",
+"script": "[dry, aghast] That's the single saddest thing I have ever heard a lens say."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "Mom. Dad. We're coming. We're coming.",
+"ctx": "v4 override",
+"script": "[fierce, tearful] Mom. Dad. [steady, vowing] We're coming. We're coming."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "That's exactly the right amount of both.",
+"ctx": "v4 override",
+"script": "[quiet, warm] That's exactly the right amount of both."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "I am the man who gave them out. Gold remembers being warm.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] I am the man who gave them out. Gold remembers being warm."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "A coin can hold one warm moment still, for as long as something lonely is willing to hold the coin.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] A coin can hold one warm moment still, for as long as something lonely is willing to hold the coin."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "Okay. I fix things for a living. Whatever this is, it's structurally unsound.",
+"ctx": "v4 override",
+"script": "[wary, dry] Okay. [flat, unimpressed] I fix things for a living. Whatever this is, it's structurally unsound."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "That's not how cups work.",
+"ctx": "v4 override",
+"script": "[flat, deadpan] That's not how cups work."
+},
+{
+"voice": "narrator",
+"speaker": "",
+"text": "Tom steps into the Ray and takes all of it. Where he was standing, there is a small warm light, hanging in the air at about the height of his glasses.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] Tom steps into the Ray and takes all of it. Where he was standing, there is a small warm light, hanging in the air at about the height of his glasses."
+},
+{
+"voice": "narrator",
+"speaker": "",
+"text": "Then there is not.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] Then there is not."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "Tom. Tom, answer me. I'm not doing this. I'm not doing this.",
+"ctx": "v4 override",
+"script": "[pleading, unraveling] Tom. Tom, answer me. [shaking, refusing] I'm not doing this. I'm not doing this."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "That wave will carry you home. It goes to the place he is from. Hold on to something.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] That wave will carry you home. It goes to the place he is from. Hold on to something."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "We're not leaving without him!",
+"ctx": "v4 override",
+"script": "[shouting, desperate] We're not leaving without him!"
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "Okay. The wave put us down on Second Avenue, in front of Tom's house. And it's somehow morning.",
+"ctx": "v4 override",
+"script": "[dazed, shaky] Okay. [quiet, disoriented] The wave put us down on Second Avenue, in front of Tom's house. And it's somehow morning."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "I know my brother. He's going to turn up late, a little annoyed, with a full explanation, and ask if anybody ate.",
+"ctx": "v4 override",
+"script": "[tearful, sure] I know my brother. [cracking, tender] He's going to turn up late, a little annoyed, with a full explanation, and ask if anybody ate."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "The cat is fine. The cat is always fine. The cat isn't even his.",
+"ctx": "v4 override",
+"script": "[gentle, fond] The cat is fine. [dry, tender] The cat is always fine. The cat isn't even his."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "Okay. Okay. Plan. Mom and Dad are stone. Tom is somewhere the Loom couldn't put him.",
+"ctx": "v4 override",
+"script": "[shaky, rallying] Okay. Okay. Plan. Mom and Dad are stone. Tom is somewhere the Loom couldn't put him."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "And there's exactly one thing in this city that never forgets where things go.",
+"ctx": "v4 override",
+"script": "[flat, brisk] And there's exactly one thing in this city that never forgets where things go."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "It's been eleven hours. I've made coffee four times. I haven't drunk any of it. That's not like me.",
+"ctx": "v4 override",
+"script": "[hollow, exhausted] It's been eleven hours. [quiet, numb] I've made coffee four times. [small, rueful] I haven't drunk any of it. That's not like me."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "Plan. Mom and Dad are stone. Tom is somewhere the Loom doesn't have a place for.",
+"ctx": "v4 override",
+"script": "[tired, sharp] Plan. Mom and Dad are stone. Tom is somewhere the Loom doesn't have a place for."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "And there's one place in this city that keeps everything nobody could put anywhere.",
+"ctx": "v4 override",
+"script": "[steady, determined] And there's one place in this city that keeps everything nobody could put anywhere."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "That's not a regular mailbox. That's a mailbox that's thinking about something.",
+"ctx": "v4 override",
+"script": "[wary, dry] That's not a regular mailbox. [low, deadpan] That's a mailbox that's thinking about something."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "Vance said the Loom has no place to put him. So maybe he ended up where undelivered things go. We follow the mailbox down.",
+"ctx": "v4 override",
+"script": "[brisk, thoughtful] Vance said the Loom has no place to put him. [low, certain] So maybe he ended up where undelivered things go. We follow the mailbox down."
+},
+{
+"voice": "grace",
+"speaker": "",
+"text": "There are four doors, one for each of us.",
+"ctx": "v4 override",
+"script": "[quiet, grim] There are four doors, one for each of us."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "Four people who would never forget him. Behind each door there must be a memory of Tom that only one of us has.",
+"ctx": "v4 override",
+"script": "[soft, steady] Four people who would never forget him. Behind each door there must be a memory of Tom that only one of us has."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "If we bring them back to this desk, maybe his name comes back too.",
+"ctx": "v4 override",
+"script": "[gentle, certain] If we bring them back to this desk, maybe his name comes back too."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "That's his. I'd know that thermos in the dark.",
+"ctx": "v4 override",
+"script": "[soft, warm] That's his. [tender, wry] I'd know that thermos in the dark."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "I erased him. His name was too loud for its line on the page, so I tidied it away. It is not personal. I tidy everything that does not fit.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] I erased him. His name was too loud for its line on the page, so I tidied it away. It is not personal. I tidy everything that does not fit."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "He's my brother.",
+"ctx": "v4 override",
+"script": "[low, fierce] He's my brother."
+},
+{
+"voice": "bigone",
+"speaker": "",
+"text": "Please step back from the desk. I am going to finish erasing the name.",
+"ctx": "v4 override",
+"script": "[matter-of-fact] Please step back from the desk. I am going to finish erasing the name."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Then here's your first delivery route. Take this one pretzel up fifty-nine floors of one tower, and put it in a grandmother's hands.",
+"ctx": "v4 override",
+"script": "[gentle, encouraging] Then here's your first delivery route. [warm, wry] Take this one pretzel up fifty-nine floors of one tower, and put it in a grandmother's hands."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Talking to the stone does nothing. I've checked. What wakes stone up is being warm for a long time, with people close by.",
+"ctx": "v4 override",
+"script": "[calm, dry] Talking to the stone does nothing. [deadpan, mild] I've checked. [quiet, hopeful] What wakes stone up is being warm for a long time, with people close by."
+},
+{
+"voice": "michael",
+"speaker": "",
+"text": "I brought a rock. Lachlan picked it out. Isla ate a different rock. We're keeping a close eye on it.",
+"ctx": "v4 override",
+"script": "[calm, deadpan] I brought a rock. [flat, dry] Lachlan picked it out. [tired, wry] Isla ate a different rock. We're keeping a close eye on it."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Thank you. All of you. I'll put the rock on the mantel.",
+"ctx": "v4 override",
+"script": "[warm, touched] Thank you. [deadpan, sincere] All of you. I'll put the rock on the mantel."
+},
+{
+"voice": "carmen",
+"speaker": "",
+"text": "I heard there was a situation. I brought lemon bars. And peppers. My nephew grows them. They're very hot. A man called Boppy would know what to do.",
+"ctx": "v4 override",
+"script": "[warm, bustling] I heard there was a situation. I brought lemon bars. [proud, deadpan] And peppers. My nephew grows them. [knowing, matter-of-fact] They're very hot. A man called Boppy would know what to do."
+},
+{
+"voice": "rose",
+"speaker": "",
+"text": "I'm the taster. I've tasted nine times. It's for quality.",
+"ctx": "v4 override",
+"script": "[solemn, earnest] I'm the taster. [dignified, prim] I've tasted nine times. It's for quality."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Pack it all up. Sal is outside with cab seven. Mom and Dad are still stone in that snow globe on floor fifty-nine, so we're bringing dinner to them.",
+"ctx": "v4 override",
+"script": "[warm, resolute] Pack it all up. [firm, dry] Sal is outside with cab seven. [quiet, determined] Mom and Dad are still stone in that snow globe on floor fifty-nine, so we're bringing dinner to them."
+},
+{
+"voice": "sal",
+"speaker": "",
+"text": "Cab seven! Everybody in. Bring the lasagna on your lap, it holds the heat. Fifty-nine floors, no stops, I'm not even charging.",
+"ctx": "v4 override",
+"script": "[booming, warm] Cab seven! Everybody in. Bring the lasagna on your lap, it holds the heat. Fifty-nine floors, no stops, I'm not even charging."
+},
+{
+"voice": "sal",
+"speaker": "",
+"text": "I'm scared of that tower and I'm going anyway.",
+"ctx": "v4 override",
+"script": "[proud, generous] I'm scared of that tower and I'm going anyway."
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "Is that lasagna? Who made lasagna? Who's been in my kitchen?",
+"ctx": "v4 override",
+"script": "[groggy, bewildered] Is that lasagna? [indignant, fussing] Who made lasagna? Who's been in my kitchen?"
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Vance. He's still up there, at the top. He's going to want more than a shelf.",
+"ctx": "v4 override",
+"script": "[quiet, grim] Vance. [low, level] He's still up there, at the top. He's going to want more than a shelf."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "That's the Extra Place. Mom has set a place for everybody at every dinner for fifty years, plus one more.",
+"ctx": "v4 override",
+"script": "[matter-of-fact, crisp] That's the Extra Place. Mom has set a place for everybody at every dinner for fifty years, plus one more."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "A lock that only opens when the whole family shows up? She could have told him how that works.",
+"ctx": "v4 override",
+"script": "[warm, certain] A lock that only opens when the whole family shows up? [dry, smug] She could have told him how that works."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "That's the biggest clock I've ever seen. And I have a lot of clocks. They all run fast, for my stomach.",
+"ctx": "v4 override",
+"script": "[impressed] That's the biggest clock I've ever seen. [dry, grumbling] And I have a lot of clocks. [deadpan] They all run fast, for my stomach."
+},
+{
+"voice": "rose",
+"speaker": "",
+"text": "Nara goes first. She's the best at doors.",
+"ctx": "v4 override",
+"script": "[serious, proud] Nara goes first. [earnest, plain] She's the best at doors."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Eight of us, a dog and a thermos. Seconds first, then the sky. Let's go.",
+"ctx": "v4 override",
+"script": "[calm, dry] Eight of us, a dog and a thermos. [steady, resolved] Seconds first, then the sky. Let's go."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "It's a very good lock. Whoever made it really cared about the mechanism.",
+"ctx": "v4 override",
+"script": "[easy, admiring] It's a very good lock. [amused, appreciative] Whoever made it really cared about the mechanism."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Each door opens for one person's best skill. Find the door shaped like you, and do the thing you're best at.",
+"ctx": "v4 override",
+"script": "[calm, thoughtful] Each door opens for one person's best skill. [warm, encouraging] Find the door shaped like you, and do the thing you're best at."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "I was written out of the schedule. I'm a very stubborn calendar entry.",
+"ctx": "v4 override",
+"script": "[dry, unbowed] I was written out of the schedule. [deadpan] I'm a very stubborn calendar entry."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "I was a statue for a week and my back didn't get a single day off. I'd like to file a complaint.",
+"ctx": "v4 override",
+"script": "[aggrieved] I was a statue for a week and my back didn't get a single day off. [dry, formal] I'd like to file a complaint."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "Distance, age, exhaustion, fear. That's just a regular Tuesday.",
+"ctx": "v4 override",
+"script": "[wry, unimpressed] Distance, age, exhaustion, fear. [dry, brisk] That's just a regular Tuesday."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "It's going to be very, very tired. Be kind about it, and be fast.",
+"ctx": "v4 override",
+"script": "[gentle, quiet] It's going to be very, very tired. [firm, calm] Be kind about it, and be fast."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Up. Everybody up. Breathe. It's a long fight, and we're a long family. We can do this again.",
+"ctx": "v4 override",
+"script": "[winded, steadying] Up. [warm, resolved] Everybody up. Breathe. [dry, determined] It's a long fight, and we're a long family. We can do this again."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "He's not attacking us. Look at his hands.",
+"ctx": "v4 override",
+"script": "[low, alert] He's not attacking us. [quiet, urgent] Look at his hands."
+},
+{
+"voice": "grace",
+"speaker": "",
+"text": "They're shaking.",
+"ctx": "v4 override",
+"script": "[hushed, softening] They're shaking."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "No hitting. He has done enough to everybody else. Do the thing you're each best at, for him. Everybody. In turn. I'll be last.",
+"ctx": "v4 override",
+"script": "[quiet, firm] No hitting. He has done enough to everybody else. [gentle, directing] Do the thing you're each best at, for him. Everybody. [dry, steady] In turn. I'll be last."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "The last one is always the hardest. That's why I put the pepper first.",
+"ctx": "v4 override",
+"script": "[weary] The last one is always the hardest. [deadpan, wry] That's why I put the pepper first."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Everybody up. He's not going anywhere. That's rather the point of him.",
+"ctx": "v4 override",
+"script": "[tired, warm] Everybody up. [quiet, dry] He's not going anywhere. That's rather the point of him."
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "Honey. That's all of it. That's what living is. It hurts a little, every time, and you do it anyway.",
+"ctx": "v4 override",
+"script": "[tender, calm] Honey. [soft, loving] That's all of it. [gentle, certain] That's what living is. It hurts a little, every time, and you do it anyway."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "You don't start them. You stop holding them.",
+"ctx": "v4 override",
+"script": "[gentle, sure] You don't start them. [soft, kind] You stop holding them."
+},
+{
+"voice": "grace",
+"speaker": "",
+"text": "It's five o'clock. It's just five o'clock. It's the best five o'clock I have ever seen.",
+"ctx": "v4 override",
+"script": "[breathless, awed] It's five o'clock. [soft, marveling] It's just five o'clock. [glowing, heartfelt] It's the best five o'clock I have ever seen."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "You're doing it right now. Come to dinner.",
+"ctx": "v4 override",
+"script": "[warm, forgiving] You're doing it right now. [simple, inviting] Come to dinner."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "And bring a chair. We're short a chair.",
+"ctx": "v4 override",
+"script": "[kind] And bring a chair. [dry, grumbling] We're short a chair."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "Mom already set the place. She set it at every dinner for fifty years. There's always one more seat.",
+"ctx": "v4 override",
+"script": "[tender, proud] Mom already set the place. [softly firm] She set it at every dinner for fifty years. [warm, certain] There's always one more seat."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "Long Island is a town again. The fountain is running. The library door is open. Someone has already started a pie, which is how you know it's real.",
+"ctx": "v4 override",
+"script": "[quiet, relieved] Long Island is a town again. The fountain is running. [dry, fond] The library door is open. Someone has already started a pie, which is how you know it's real."
+},
+{
+"voice": "rose",
+"speaker": "",
+"text": "Look! Look who's delivering!",
+"ctx": "v4 override",
+"script": "[excited, bright] Look! Look who's delivering!"
+},
+{
+"voice": "rose",
+"speaker": "",
+"text": "My pink ribbon! It's still tied in a bow!",
+"ctx": "v4 override",
+"script": "[thrilled, tender] My pink ribbon! [hushed, amazed] It's still tied in a bow!"
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "My stopwatch. It's still running. It's at nine hundred and eleven hours, and some seconds.",
+"ctx": "v4 override",
+"script": "[stunned, quiet] My stopwatch. [proud, amused] It's still running. It's at nine hundred and eleven hours, and some seconds."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "My first cup. It's full. It's still warm. I don't know how that's possible and I'm not going to ask.",
+"ctx": "v4 override",
+"script": "[soft, marveling] My first cup. It's full. [easy, amused] It's still warm. I don't know how that's possible and I'm not going to ask."
+},
+{
+"voice": "sal",
+"speaker": "",
+"text": "Cab seven! Everybody in! I'm not charging. I'm not even driving. Look UP.",
+"ctx": "v4 override",
+"script": "[booming, joyful] Cab seven! Everybody in! [amazed, hushed] I'm not charging. I'm not even driving. Look UP."
+},
+{
+"voice": "sal",
+"speaker": "",
+"text": "A SKYWAY TRAIN?! I don't know what to do with my hands! I'm a cab driver!",
+"ctx": "v4 override",
+"script": "[flabbergasted, overjoyed] A SKYWAY TRAIN?! [panicked, delighted] I don't know what to do with my hands! [flat, bewildered] I'm a cab driver!"
+},
+{
+"voice": "sal",
+"speaker": "",
+"text": "You're the first passenger. Get in the train.",
+"ctx": "v4 override",
+"script": "[warm, honored] You're the first passenger. [bright, insistent] Get in the train."
+},
+{
+"voice": "boppy",
+"speaker": "",
+"text": "I've changed my mind about the man.",
+"ctx": "v4 override",
+"script": "[grudging, warm] I've changed my mind about the man."
+},
+{
+"voice": "tom",
+"speaker": "",
+"text": "That's a good seat to start in.",
+"ctx": "v4 override",
+"script": "[warm, quiet] That's a good seat to start in."
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "Boppy fell asleep in the recliner somewhere over Nebraska. He says it's the best nap of his life. He says his back has never felt worse.",
+"ctx": "v4 override",
+"script": "[amused, chatty] Boppy fell asleep in the recliner somewhere over Nebraska. [wry, fond] He says it's the best nap of his life. [dry, giggly] He says his back has never felt worse."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "Justin is coming out on the next one. He booked his own ticket. He says he cleared the whole weekend.",
+"ctx": "v4 override",
+"script": "[giddy, disbelieving] Justin is coming out on the next one. He booked his own ticket. He says he cleared the whole weekend."
+},
+{
+"voice": "amy",
+"speaker": "",
+"text": "I've been looking at the calendar for an hour to make sure it's real.",
+"ctx": "v4 override",
+"script": "[stunned, soft] I've been looking at the calendar for an hour to make sure it's real."
+},
+{
+"voice": "tnb",
+"speaker": "",
+"text": "I made a mug. It has the same handle as the first one. It's exactly too big.",
+"ctx": "v4 override",
+"script": "[easy, fond] I made a mug. [dry, deadpan] It has the same handle as the first one. It's exactly too big."
 }
 ]
 }
