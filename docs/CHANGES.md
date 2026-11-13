@@ -1,3 +1,7 @@
+## 2026-11-12 (duobtn1): Duo sideways quest, menu and save buttons moved beside the A button (tag duobtn1)
+- Tom 20:55: on the iPhone Duo sideways the three buttons in the top left (quest !, menu, save) could not be reached. Fact: in `html.duo.landscape` (index.html, Duo block) `#hud-btns` is now placed at the bottom, starting just right of A (left 127 x `--ts`, bottom 20 x `--ts`, the same line as A), each button A's size (46 x `--ts`), 8 x `--ts` apart. `#hud` was widened to the full stage (left 0, padding keeps the DOORS counter where it was), and the quest text panel opens upward from the buttons. Phone landscape, iPad, portrait and Duo upright are untouched.
+- Tested in a browser at 951 x 648 (`?duo=1`): A 91 to 148 px, quest 158 to 216, menu 226 to 283, save 293 to 350, all on y 566 to 623; quest panel opens above them; no page errors. Not seen on the Duo yet.
+
 ## 2026-11-12 (dialogclear2): Tom's recordings for the rewritten dialogue merged (tag dialogclear2)
 - Fact: 380 clips from Tom's `local-clips-pending.json` merged with `merge-local.js` into data/voice/dialog-ch28.js (the old chapter files no longer held those keys). Two of them (Penny's squirrel line, TNB's lost-bag line) were already reworded by pets1 (Nara instead of "dog"), so they were purged as stale; unused_voice.py shows 0.
 - Still unrecorded (8, all from pets1, not the clarity rewrite): Penny x2 (squirrels, lookouts), TNB x3 (lost bag, front door three times, Who's Chester), Tom x1 (house tour, Nara), Amy x2 (nine, Chester). Voice Library > Show: No clip yet.

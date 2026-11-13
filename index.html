@@ -1196,7 +1196,13 @@ html.landscape #hud #objective{width:min(340px,60%);margin-top:6px;padding:8px 1
    nothing you press sits there. */
 html.duo.landscape #splash-art{background-size:auto 31%,auto,cover;background-position:center calc(6px + env(safe-area-inset-top)),0 0,50% 40%}
 /* Duo battle, sideways (Tom 2026-11-11, build duo2): the scene is as big as the width allows; the right strip is narrow and the party is stacked one per row. */
-html.duo.landscape #hud{left:calc(46px + env(safe-area-inset-left))}
+html.duo.landscape #hud{left:0;bottom:0;padding-left:calc(46px + env(safe-area-inset-left))}
+/* Duo sideways thumb reach (Tom 2026-11-12, build duobtn1): the quest, menu and save buttons were top left, out of reach. They now sit in a row right of the A button, on A's baseline and A's size; the quest text opens upward. */
+html.duo.landscape #hud-btns{position:absolute;left:calc(calc(127px*var(--ts)) + env(safe-area-inset-left));bottom:calc(calc(20px*var(--ts)) + env(safe-area-inset-bottom));align-items:center;gap:calc(8px*var(--ts));z-index:5}
+html.duo.landscape #hud-btns .brand,html.duo.landscape #hud #menu-button,html.duo.landscape #hud #save-hud{width:calc(46px*var(--ts));height:calc(46px*var(--ts));margin-top:0;border-radius:calc(12px*var(--ts))}
+html.duo.landscape #hud-btns .brand-mark{font-size:calc(24px*var(--ts))}
+html.duo.landscape #hud #menu-button,html.duo.landscape #hud #save-hud{font-size:calc(20px*var(--ts))}
+html.duo.landscape #hud #objective{top:auto;bottom:100%;right:auto;left:0;width:min(calc(320px*var(--ts)),45vw);margin:0 0 calc(8px*var(--ts))}
 html.duo.landscape #battle.v2{--b2pw:188px}
 html.duo.landscape #battle.v2 .b2-party{grid-template-columns:minmax(0,1fr);gap:calc(3px*var(--ts)) 0}
 html.duo.landscape #battle.v2 .b2-pc{grid-template-columns:30px minmax(0,1fr);gap:6px;padding:2px 3px}
