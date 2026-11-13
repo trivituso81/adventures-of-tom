@@ -1498,7 +1498,7 @@ const LE_ROOMS=[
           'Rhubarb crisp is cooling on the counter. Don\'t touch it. Okay, one corner.',
           'I already did my walk. Boppy did one lap around the recliner.',
           'Retired registered nurse. Tom calls me a registered nut. Tom is due for a checkup.',
-          'Sunday dinner is at five. Five means four thirty.',
+          'Sunday dinner is at six thirty. Don\'t make me call twice.',
           'I just cleaned the floors. Shoes OFF.',
           "A little glass of wine with dinner. Just one. Nurse's orders.",
           'Have you seen my reading glasses? I had them a minute ago. I\'ve looked everywhere. Twice.',
@@ -1568,7 +1568,7 @@ const LE_ROOMS=[
       {name:'Aunt Ellie',x:7,y:8,look:'oolong',sheet:'ellie',kin:true,trace:'ellie-hello',duration:0.9,quest:()=>ellieQuest(),away:ELLIE_VISIT,lines:[
         'Tom. Stand up straight. There. Now you look like someone I\'m related to.',
         'Yes, Deedee has an aunt. Yes, I\'m older. No, you may not ask by how much.',
-        'I\'ve been to Paris eleven times. Long Island is charming. Like a hat you wear once.'],
+        'I\'ve been to Paris eleven times, darling. Long Island is charming. But one must explore the world.'],
         when:[{...CH9_DONE,lines:['My coat. Ticket seven. I left it at the last dance and never went back for it.','I had a date with a man who turned out to be a disappointment. The coat wasn\'t. Keep it warm for me.']}],
         revisit:[
           'Deedee keeps offering me rhubarb crisp. I keep saying yes. That\'s called manners.',

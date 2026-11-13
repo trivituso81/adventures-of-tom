@@ -263,7 +263,7 @@ SCENES.ch1AfterBoss=[
   {finale:'bigone'},
   {talk:'Deedee',lines:['My tin! And look. Half the crisp is still in it.']},
   {talk:'Grace',lines:['The Big One ate the other half. I saw crumbs on its chin.']},
-  {talk:'Deedee',lines:['Then we split this half. Everybody home. Boppy has to hear about this.']},
+  {talk:'Deedee',lines:['Then we split this half. Everybody home. Wait until Boppy hears about this.']},
   {toast:'Goal: '+CH1_TIN_LINE,time:4.5}
 ];
 // 6. Home: half a crisp, Boppy's lure, chapter complete.
@@ -466,7 +466,7 @@ SCENES.ch2AfterBoss=[
     then:[{talk:'The Big Shake',lines:['Rumble. You asked how I was doing. Nobody has asked in a million years.','...I\'ll let things move. A little. Two inches a year. That\'s my best offer.']}],
     else:[{talk:'The Big Shake',lines:['Rumble. Fine. The pipes are clear. I\'m going back under the hill to think about my choices.']}]},
   {finale:'bigshake'},
-  {talk:'TNB',lines:['Look. The sky is blue again. LA blue. Slightly brown, but blue.']},
+  {talk:'TNB',lines:['Look. The sky is blue again. Los Angeles blue. Slightly brown, but blue.']},
   {talk:'Tom',lines:['Somebody plugged those pipes on purpose. Smog doesn\'t do that by itself.']},
   {talk:'TNB',lines:['Spooky. I love it. Let\'s go check on Mr. Washington.']},
   {toast:'Goal: back to 2nd Ave in Jefferson Park.',time:4.5}
@@ -1606,7 +1606,7 @@ SCENES.ch5Clocks=[
   {call:()=>{ ch5OpenCafe(); storyWorld(); sfx.thud(); sfx.levelChime(); }},
   {talk:'Principal Pruitt',lines:['(on the intercom) ...ksssh... Attention, please. The Cafetorium doors are OPEN. Parents, please wait in the hall. There\'s something in the Cafetorium.',
     'Mrs. Gregori’s brother, please go into the Cafetorium. Thank you. ...ksssh.']},
-  {talk:'Amy',lines:['The footprints go in there. The sign-up sheet is in there.']},
+  {talk:'Amy',lines:['The footprints go in there. The sign-up sheet must be in there.']},
   {talk:'Grace',lines:['And the something.']},
   {flag:'tombo:grace2'},   // Uncle Spotter Toss unlocks here (chapter 5: the school is clear)
   {toast:'New Tombo: Uncle Spotter Toss (Tom + Grace). 50% HEART.',time:3.2},
@@ -1680,9 +1680,9 @@ SCENES.ch5End=[
   {place:'amy',at:[5,12],dir:'right'}, {place:'grace',at:[7,12],dir:'left'}, {place:'rose',at:[6,13],dir:'up'},
   {talk:'Amy',lines:['Thirty conferences. Zero tears. One very well-behaved pen.']},
   {call:()=>sfx.ding()},
-  {talk:'Amy',lines:['Oh. A text. From Justin.','"Heard it went great. Proud of you. Stuck at work till nine. Save me a cookie." With a little heart.']},
+  {talk:'Amy',lines:['Oh. A text. From Justin.','"Heard it went great. Proud of you. Stuck at work till nine. Save me some casserole." With a little heart.']},
   {talk:'Grace',lines:['Dad used the heart! He only uses the heart on special days!']},
-  {talk:'Amy',lines:['Girls. Did we save a cookie for Dad?']},
+  {talk:'Amy',lines:['Girls. Did we save some casserole for Daddy?']},
   {talk:'Rose',lines:['...Define save.']},
   {talk:'Rose',lines:['Tata. Tata. There\'s a man.']},
   {spawn:{name:'Long coat',look:'vance',at:[7,16],dir:'up'}},
@@ -1695,7 +1695,7 @@ SCENES.ch5End=[
   {talk:'Amy',lines:['Probably a parent. A late one. There\'s always a late one.']},
   {talk:'Tom',lines:['Probably.','A long coat. Gold coins. That\'s what Oolong’s kettle said, too. I\'m keeping a list.']},
   {talk:'Grace',lines:['I\'m keeping a list too. Mine has a chart.']},
-  {talk:'Amy',lines:['Everybody in the van. Tom, you too. You were the good uncle tonight. By a lot.']},
+  {talk:'Amy',lines:['Everybody in the van. Tom, you too. You were a good uncle tonight. By a lot.']},
   {talk:'Tom',lines:['By default.']},
   {talk:'Amy',lines:['By a LOT. Take the compliment, Tom.']},
   {trace:'ch5-wrap'}, {hearts:'amy'}, {call:()=>sfx.levelChime()},

@@ -51,7 +51,7 @@ chapter	file	line	character	mood	text
 1	data/scenes.js	229	Deedee	none	Tom, you stand in front of whoever it stares at. Rosie, make it laugh. Then we try again.
 1	data/scenes.js	239	Deedee	happy	My tin! And look. Half the crisp is still in it.
 1	data/scenes.js	240	Grace	none	The Big One ate the other half. I saw crumbs on its chin.
-1	data/scenes.js	241	Deedee	happy	Then we split this half. Everybody home. Boppy has to hear about this.
+1	data/scenes.js	241	Deedee	happy	Then we split this half. Everybody home. Wait until Boppy hears about this.
 1	data/scenes.js	250	Boppy	proud	You found the Big One? I TOLD everybody. Twenty years.
 1	data/scenes.js	252	Tom	none	It had this stuck in its lip.
 1	data/scenes.js	253	Boppy	surprised	My LURE! I lost that in 2006. Still shiny. Unlike me.
@@ -115,7 +115,7 @@ chapter	file	line	character	mood	text
 2	data/scenes.js	429	TNB	happy	Well, well, well... looks like we're in a bit of a shaky situation.
 2	data/scenes.js	433	TNB	proud	Cut. Reset. Back to one, everybody.
 2	data/scenes.js	433	TNB	none	Babe, heal right after the Aftershock. When it clogs up, hit it with water or sparkle. Or one of our Tombos.
-2	data/scenes.js	443	TNB	happy	Look. The sky is blue again. LA blue. Slightly brown, but blue.
+2	data/scenes.js	443	TNB	happy	Look. The sky is blue again. Los Angeles blue. Slightly brown, but blue.
 2	data/scenes.js	444	Tom	surprised	Somebody plugged those pipes on purpose. Smog doesn't do that by itself.
 2	data/scenes.js	445	TNB	happy	Spooky. I love it. Let's go check on Mr. Washington.
 2	data/scenes.js	456	Tom	loving	Keep the old windows, though.
@@ -337,7 +337,7 @@ chapter	file	line	character	mood	text
 5	data/scenes.js	1561	Tom	unimpressed	I know. You threw one at me at Thanksgiving. I was holding a pie.
 5	data/scenes.js	1562	Amy	happy	You caught the pie, though.
 5	data/scenes.js	1563	Tom	proud	I caught the pie.
-5	data/scenes.js	1575	Amy	none	The footprints go in there. The sign-up sheet is in there.
+5	data/scenes.js	1575	Amy	none	The footprints go in there. The sign-up sheet must be in there.
 5	data/scenes.js	1576	Grace	scared	And the something.
 5	data/scenes.js	1587	Grace	surprised	There! The sign-up sheet! On the podium!
 5	data/scenes.js	1588	Rose	scared	It's covered in RED.
@@ -359,9 +359,9 @@ chapter	file	line	character	mood	text
 5	data/scenes.js	1633	Amy	loving	...I'm taking it. Thank you.
 5	data/scenes.js	1645	Amy	proud	Thirty conferences. Zero tears. One very well-behaved pen.
 5	data/scenes.js	1647	Amy	surprised	Oh. A text. From Justin.
-5	data/scenes.js	1647	Amy	loving	"Heard it went great. Proud of you. Stuck at work till nine. Save me a cookie." With a little heart.
+5	data/scenes.js	1647	Amy	loving	"Heard it went great. Proud of you. Stuck at work till nine. Save me some casserole." With a little heart.
 5	data/scenes.js	1648	Grace	happy	Dad used the heart! He only uses the heart on special days!
-5	data/scenes.js	1649	Amy	none	Girls. Did we save a cookie for Dad?
+5	data/scenes.js	1649	Amy	none	Girls. Did we save some casserole for Daddy?
 5	data/scenes.js	1650	Rose	happy	...Define save.
 5	data/scenes.js	1651	Rose	scared	Tata. Tata. There's a man.
 5	data/scenes.js	1654	Rose	scared	By the last car. In a long coat. He's looking at us.
@@ -370,7 +370,7 @@ chapter	file	line	character	mood	text
 5	data/scenes.js	1660	Tom	unimpressed	Probably.
 5	data/scenes.js	1660	Tom	proud	A long coat. Gold coins. That's what Oolong’s kettle said, too. I'm keeping a list.
 5	data/scenes.js	1661	Grace	proud	I'm keeping a list too. Mine has a chart.
-5	data/scenes.js	1662	Amy	loving	Everybody in the van. Tom, you too. You were the good uncle tonight. By a lot.
+5	data/scenes.js	1662	Amy	loving	Everybody in the van. Tom, you too. You were a good uncle tonight. By a lot.
 5	data/scenes.js	1663	Tom	unimpressed	By default.
 5	data/scenes.js	1664	Amy	loving	By a LOT. Take the compliment, Tom.
 6	data/scenes.js	1821	TNB	loving	Okay. Shake it off. Everybody gets a snack and a hug. In that order.
@@ -801,17 +801,17 @@ chapter	file	line	character	mood	text
 10	data/scenes.js	3705	Tom	loving	Everybody comes next time.
 10	data/scenes.js	3705	Tom	loving	To the moon and back, everybody. Eat. Deedee made everything.
 10	data/scenes.js	3706	Deedee	loving	To the moon and BACK.
-11	data/scenes-p2.js	15	Deedee	loving	Tom! Sit. Eat. I made a crisp. It is nine in the morning and it is a crisp. Do not argue.
-11	data/scenes-p2.js	16	Tom	unimpressed	I wasn’t going to argue.
+11	data/scenes-p2.js	15	Deedee	loving	Tom! Sit. Eat. I made a crisp. Yes, I know it's nine in the morning. Do not argue.
+11	data/scenes-p2.js	16	Tom	unimpressed	Trust me, I was not going to argue.
 11	data/scenes-p2.js	17	Boppy	unimpressed	This came for the recliner. A gold card. “Priority Member.” Junk mail. They send it to the recliner now.
 11	data/scenes-p2.js	17	Boppy	surprised	Don’t throw it out. It’s warm. I think it’s warm. My knee says it’s warm.
 11	data/scenes-p2.js	19	Tom	surprised	My boarding pass is buzzing in my pocket. It says: YOUR LAYOVER IS NOW BOARDING.
-11	data/scenes-p2.js	20	Deedee	loving	A layover! Where? Never mind. Take a sweater. Take two. Take the crisp.
+11	data/scenes-p2.js	20	Deedee	loving	A layover! Where? Never mind. Take a sweater. Actually, take two. And take the crisp.
 11	data/scenes-p2.js	21	Boppy	unimpressed	Bring me back a pretzel. A real one. Not the airport kind.
 11	data/scenes-p2.js	22	Deedee	loving	To the moon and back, Tom. Both ways.
 11	data/scenes-p2.js	36	Tom	surprised	A pod seat. A real one. Somebody upgraded me and nobody told me why.
 11	data/scenes-p2.js	36	Tom	surprised	And something in seat 5B is giggling.
-11	data/scenes-p2.js	38	Tom	unimpressed	Whoever is under the blanket: it’s breathing very loudly.
+11	data/scenes-p2.js	38	Tom	unimpressed	Whoever is under the blanket, you’re breathing very loudly.
 11	data/scenes-p2.js	43	Rose	happy	BOO! We’re stowaways! Tata, what’s a stowaway?
 11	data/scenes-p2.js	44	Tom	none	It’s a person who hides on a plane they weren’t invited to.
 11	data/scenes-p2.js	44	Tom	unimpressed	Which is illegal. And also, apparently, a family tradition.
@@ -823,7 +823,7 @@ chapter	file	line	character	mood	text
 11	data/scenes-p2.js	55	Amy	proud	My daughters ran out of the house in their socks, Tom. I’m their ride home. And I’m faster than you.
 11	data/scenes-p2.js	56	Tom	unimpressed	Nobody here is racing.
 11	data/scenes-p2.js	57	Amy	proud	That’s what the person who loses says.
-11	data/scenes-p2.js	63	Rose	surprised	The sky has a hole in it. The hole is pink. Tata, can I touch the hole?
+11	data/scenes-p2.js	63	Rose	surprised	The sky has a hole in it. The hole is pink. Tata, can I touch it?
 11	data/scenes-p2.js	64	Tom	unimpressed	No touching, please.
 11	data/scenes-p2.js	64	Tom	loving	Everybody hold on to something. Preferably each other.
 11	data/scenes-p2.js	75	Grace	surprised	Tata. The window. There are two tiny towns in it.

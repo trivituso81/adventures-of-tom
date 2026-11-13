@@ -76,7 +76,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Tom | Proud | Nobody touches Deedee’s crisp. Everybody ready? |
 | Deedee | Loving | Up, up. Everybody up. Deedee kisses it better. |
 | Deedee | Happy | My tin! And look. Half the crisp is still in it. |
-| Deedee | Happy | Then we split this half. Everybody home. Boppy has to hear about this. |
+| Deedee | Happy | Then we split this half. Everybody home. Wait until Boppy hears about this. |
 | Boppy | Proud | You found the Big One? I TOLD everybody. Twenty years. |
 | Boppy | Surprised | My LURE! I lost that in 2006. Still shiny. Unlike me. |
 | Boppy | Loving | Keep it, Tom. For luck. The fish clearly didn't want it. |
@@ -139,7 +139,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Nara | Proud | Nara barks at the hill. Once. Very loudly. Then she checks that Tom saw. |
 | TNB | Happy | Well, well, well... looks like we're in a bit of a shaky situation. |
 | TNB | Proud | Cut. Reset. Back to one, everybody. |
-| TNB | Happy | Look. The sky is blue again. LA blue. Slightly brown, but blue. |
+| TNB | Happy | Look. The sky is blue again. Los Angeles blue. Slightly brown, but blue. |
 | Tom | Surprised | Somebody plugged those pipes on purpose. Smog doesn't do that by itself. |
 | TNB | Happy | Spooky. I love it. Let's go check on Mr. Washington. |
 | Tom | Loving | Keep the old windows, though. |
@@ -376,7 +376,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Amy | Loving | ...I'm taking it. Thank you. |
 | Amy | Proud | Thirty conferences. Zero tears. One very well-behaved pen. |
 | Amy | Surprised | Oh. A text. From Justin. |
-| Amy | Loving | "Heard it went great. Proud of you. Stuck at work till nine. Save me a cookie." With a little heart. |
+| Amy | Loving | "Heard it went great. Proud of you. Stuck at work till nine. Save me some casserole." With a little heart. |
 | Grace | Happy | Dad used the heart! He only uses the heart on special days! |
 | Rose | Happy | ...Define save. |
 | Rose | Scared | Tata. Tata. There's a man. |
@@ -385,7 +385,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Tom | Unimpressed | Probably. |
 | Tom | Proud | A long coat. Gold coins. That's what Oolong’s kettle said, too. I'm keeping a list. |
 | Grace | Proud | I'm keeping a list too. Mine has a chart. |
-| Amy | Loving | Everybody in the van. Tom, you too. You were the good uncle tonight. By a lot. |
+| Amy | Loving | Everybody in the van. Tom, you too. You were a good uncle tonight. By a lot. |
 | Tom | Unimpressed | By default. |
 | Amy | Loving | By a LOT. Take the compliment, Tom. |
 
@@ -815,17 +815,17 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 
 | Character | Emotion | Dialogue |
 |---|---|---|
-| Deedee | Loving | Tom! Sit. Eat. I made a crisp. It is nine in the morning and it is a crisp. Do not argue. |
-| Tom | Unimpressed | I wasn’t going to argue. |
+| Deedee | Loving | Tom! Sit. Eat. I made a crisp. Yes, I know it's nine in the morning. Do not argue. |
+| Tom | Unimpressed | Trust me, I was not going to argue. |
 | Boppy | Unimpressed | This came for the recliner. A gold card. “Priority Member.” Junk mail. They send it to the recliner now. |
 | Boppy | Surprised | Don’t throw it out. It’s warm. I think it’s warm. My knee says it’s warm. |
 | Tom | Surprised | My boarding pass is buzzing in my pocket. It says: YOUR LAYOVER IS NOW BOARDING. |
-| Deedee | Loving | A layover! Where? Never mind. Take a sweater. Take two. Take the crisp. |
+| Deedee | Loving | A layover! Where? Never mind. Take a sweater. Actually, take two. And take the crisp. |
 | Boppy | Unimpressed | Bring me back a pretzel. A real one. Not the airport kind. |
 | Deedee | Loving | To the moon and back, Tom. Both ways. |
 | Tom | Surprised | A pod seat. A real one. Somebody upgraded me and nobody told me why. |
 | Tom | Surprised | And something in seat 5B is giggling. |
-| Tom | Unimpressed | Whoever is under the blanket: it’s breathing very loudly. |
+| Tom | Unimpressed | Whoever is under the blanket, you’re breathing very loudly. |
 | Rose | Happy | BOO! We’re stowaways! Tata, what’s a stowaway? |
 | Tom | Unimpressed | Which is illegal. And also, apparently, a family tradition. |
 | Grace | Proud | We weren’t hiding. We were pre-boarding. Rose got the good blanket. |
@@ -836,7 +836,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Amy | Proud | My daughters ran out of the house in their socks, Tom. I’m their ride home. And I’m faster than you. |
 | Tom | Unimpressed | Nobody here is racing. |
 | Amy | Proud | That’s what the person who loses says. |
-| Rose | Surprised | The sky has a hole in it. The hole is pink. Tata, can I touch the hole? |
+| Rose | Surprised | The sky has a hole in it. The hole is pink. Tata, can I touch it? |
 | Tom | Unimpressed | No touching, please. |
 | Tom | Loving | Everybody hold on to something. Preferably each other. |
 | Grace | Surprised | Tata. The window. There are two tiny towns in it. |

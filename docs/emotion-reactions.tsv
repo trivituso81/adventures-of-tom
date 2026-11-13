@@ -141,9 +141,9 @@ scene	1	data/scenes.js	ch1AfterBoss	Deedee	My tin! And look. Half the crisp is s
 scene	1	data/scenes.js	ch1AfterBoss	Grace	The Big One ate the other half. I saw crumbs on its chin.	deedee	unimpressed
 scene	1	data/scenes.js	ch1AfterBoss	Grace	The Big One ate the other half. I saw crumbs on its chin.	rose	happy
 scene	1	data/scenes.js	ch1AfterBoss	Grace	The Big One ate the other half. I saw crumbs on its chin.	tom	happy
-scene	1	data/scenes.js	ch1AfterBoss	Deedee	Then we split this half. Everybody home. Boppy has to hear about this.	tom	happy
-scene	1	data/scenes.js	ch1AfterBoss	Deedee	Then we split this half. Everybody home. Boppy has to hear about this.	grace	happy
-scene	1	data/scenes.js	ch1AfterBoss	Deedee	Then we split this half. Everybody home. Boppy has to hear about this.	rose	happy
+scene	1	data/scenes.js	ch1AfterBoss	Deedee	Then we split this half. Everybody home. Wait until Boppy hears about this.	tom	happy
+scene	1	data/scenes.js	ch1AfterBoss	Deedee	Then we split this half. Everybody home. Wait until Boppy hears about this.	grace	happy
+scene	1	data/scenes.js	ch1AfterBoss	Deedee	Then we split this half. Everybody home. Wait until Boppy hears about this.	rose	happy
 scene	1	data/scenes.js	ch1End	Boppy	You found the Big One? I TOLD everybody. Twenty years.	tom	unimpressed
 scene	1	data/scenes.js	ch1End	Boppy	You found the Big One? I TOLD everybody. Twenty years.	grace	happy
 scene	1	data/scenes.js	ch1End	Boppy	You found the Big One? I TOLD everybody. Twenty years.	deedee	unimpressed
@@ -277,8 +277,8 @@ scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	...I'll let things move. A lit
 scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	Rumble. Fine. The pipes are clear. I'm going back under the hill to think about my choices.	tom	unimpressed
 scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	Rumble. Fine. The pipes are clear. I'm going back under the hill to think about my choices.	tnb	happy
 scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	Rumble. Fine. The pipes are clear. I'm going back under the hill to think about my choices.	nara	happy
-scene	2	data/scenes.js	ch2AfterBoss	TNB	Look. The sky is blue again. LA blue. Slightly brown, but blue.	tom	happy
-scene	2	data/scenes.js	ch2AfterBoss	TNB	Look. The sky is blue again. LA blue. Slightly brown, but blue.	nara	happy
+scene	2	data/scenes.js	ch2AfterBoss	TNB	Look. The sky is blue again. Los Angeles blue. Slightly brown, but blue.	tom	happy
+scene	2	data/scenes.js	ch2AfterBoss	TNB	Look. The sky is blue again. Los Angeles blue. Slightly brown, but blue.	nara	happy
 scene	2	data/scenes.js	ch2AfterBoss	Tom	Somebody plugged those pipes on purpose. Smog doesn't do that by itself.	tnb	surprised
 scene	2	data/scenes.js	ch2AfterBoss	TNB	Spooky. I love it. Let's go check on Mr. Washington.	tom	happy
 scene	2	data/scenes.js	ch2AfterBoss	TNB	Spooky. I love it. Let's go check on Mr. Washington.	nara	happy
@@ -1047,9 +1047,9 @@ scene	5	data/scenes.js	ch5Clocks	Principal Pruitt	Mrs. Gregori’s brother, plea
 scene	5	data/scenes.js	ch5Clocks	Principal Pruitt	Mrs. Gregori’s brother, please go into the Cafetorium. Thank you. ...ksssh.	grace	happy
 scene	5	data/scenes.js	ch5Clocks	Principal Pruitt	Mrs. Gregori’s brother, please go into the Cafetorium. Thank you. ...ksssh.	rose	happy
 scene	5	data/scenes.js	ch5Clocks	Principal Pruitt	Mrs. Gregori’s brother, please go into the Cafetorium. Thank you. ...ksssh.	tom	unimpressed
-scene	5	data/scenes.js	ch5Clocks	Amy	The footprints go in there. The sign-up sheet is in there.	tom	proud
-scene	5	data/scenes.js	ch5Clocks	Amy	The footprints go in there. The sign-up sheet is in there.	grace	scared
-scene	5	data/scenes.js	ch5Clocks	Amy	The footprints go in there. The sign-up sheet is in there.	rose	scared
+scene	5	data/scenes.js	ch5Clocks	Amy	The footprints go in there. The sign-up sheet must be in there.	tom	proud
+scene	5	data/scenes.js	ch5Clocks	Amy	The footprints go in there. The sign-up sheet must be in there.	grace	scared
+scene	5	data/scenes.js	ch5Clocks	Amy	The footprints go in there. The sign-up sheet must be in there.	rose	scared
 scene	5	data/scenes.js	ch5Clocks	Grace	And the something.	tom	unimpressed
 scene	5	data/scenes.js	ch5Clocks	Grace	And the something.	amy	scared
 scene	5	data/scenes.js	ch5Clocks	Grace	And the something.	rose	scared
@@ -1162,15 +1162,15 @@ scene	5	data/scenes.js	ch5End	Amy	Thirty conferences. Zero tears. One very well-
 scene	5	data/scenes.js	ch5End	Amy	Oh. A text. From Justin.	tom	happy
 scene	5	data/scenes.js	ch5End	Amy	Oh. A text. From Justin.	grace	surprised
 scene	5	data/scenes.js	ch5End	Amy	Oh. A text. From Justin.	rose	surprised
-scene	5	data/scenes.js	ch5End	Amy	"Heard it went great. Proud of you. Stuck at work till nine. Save me a cookie." With a little heart.	tom	loving
-scene	5	data/scenes.js	ch5End	Amy	"Heard it went great. Proud of you. Stuck at work till nine. Save me a cookie." With a little heart.	grace	happy
-scene	5	data/scenes.js	ch5End	Amy	"Heard it went great. Proud of you. Stuck at work till nine. Save me a cookie." With a little heart.	rose	happy
+scene	5	data/scenes.js	ch5End	Amy	"Heard it went great. Proud of you. Stuck at work till nine. Save me some casserole." With a little heart.	tom	loving
+scene	5	data/scenes.js	ch5End	Amy	"Heard it went great. Proud of you. Stuck at work till nine. Save me some casserole." With a little heart.	grace	happy
+scene	5	data/scenes.js	ch5End	Amy	"Heard it went great. Proud of you. Stuck at work till nine. Save me some casserole." With a little heart.	rose	happy
 scene	5	data/scenes.js	ch5End	Grace	Dad used the heart! He only uses the heart on special days!	amy	loving
 scene	5	data/scenes.js	ch5End	Grace	Dad used the heart! He only uses the heart on special days!	tom	happy
 scene	5	data/scenes.js	ch5End	Grace	Dad used the heart! He only uses the heart on special days!	rose	happy
-scene	5	data/scenes.js	ch5End	Amy	Girls. Did we save a cookie for Dad?	grace	scared
-scene	5	data/scenes.js	ch5End	Amy	Girls. Did we save a cookie for Dad?	rose	scared
-scene	5	data/scenes.js	ch5End	Amy	Girls. Did we save a cookie for Dad?	tom	happy
+scene	5	data/scenes.js	ch5End	Amy	Girls. Did we save some casserole for Daddy?	grace	scared
+scene	5	data/scenes.js	ch5End	Amy	Girls. Did we save some casserole for Daddy?	rose	scared
+scene	5	data/scenes.js	ch5End	Amy	Girls. Did we save some casserole for Daddy?	tom	happy
 scene	5	data/scenes.js	ch5End	Rose	...Define save.	amy	unimpressed
 scene	5	data/scenes.js	ch5End	Rose	...Define save.	tom	happy
 scene	5	data/scenes.js	ch5End	Rose	...Define save.	grace	unimpressed
@@ -1193,9 +1193,9 @@ scene	5	data/scenes.js	ch5End	Tom	A long coat. Gold coins. That's what Oolong’
 scene	5	data/scenes.js	ch5End	Tom	A long coat. Gold coins. That's what Oolong’s kettle said, too. I'm keeping a list.	rose	scared
 scene	5	data/scenes.js	ch5End	Grace	I'm keeping a list too. Mine has a chart.	tom	happy
 scene	5	data/scenes.js	ch5End	Grace	I'm keeping a list too. Mine has a chart.	amy	happy
-scene	5	data/scenes.js	ch5End	Amy	Everybody in the van. Tom, you too. You were the good uncle tonight. By a lot.	tom	surprised
-scene	5	data/scenes.js	ch5End	Amy	Everybody in the van. Tom, you too. You were the good uncle tonight. By a lot.	grace	happy
-scene	5	data/scenes.js	ch5End	Amy	Everybody in the van. Tom, you too. You were the good uncle tonight. By a lot.	rose	happy
+scene	5	data/scenes.js	ch5End	Amy	Everybody in the van. Tom, you too. You were a good uncle tonight. By a lot.	tom	surprised
+scene	5	data/scenes.js	ch5End	Amy	Everybody in the van. Tom, you too. You were a good uncle tonight. By a lot.	grace	happy
+scene	5	data/scenes.js	ch5End	Amy	Everybody in the van. Tom, you too. You were a good uncle tonight. By a lot.	rose	happy
 scene	5	data/scenes.js	ch5End	Tom	By default.	amy	unimpressed
 scene	5	data/scenes.js	ch5End	Tom	By default.	grace	happy
 scene	5	data/scenes.js	ch5End	Amy	By a LOT. Take the compliment, Tom.	tom	loving
@@ -2728,18 +2728,18 @@ scene	10	data/scenes.js	ch10End	Deedee	To the moon and BACK.	amy	loving
 scene	10	data/scenes.js	ch10End	Deedee	To the moon and BACK.	boppy	loving
 scene	10	data/scenes.js	ch10End	Deedee	To the moon and BACK.	justin	loving
 scene	10	data/scenes.js	ch10End	Deedee	To the moon and BACK.	ellie	loving
-scene	11	data/scenes-p2.js	part2Open	Deedee	Tom! Sit. Eat. I made a crisp. It is nine in the morning and it is a crisp. Do not argue.	tom	unimpressed
-scene	11	data/scenes-p2.js	part2Open	Deedee	Tom! Sit. Eat. I made a crisp. It is nine in the morning and it is a crisp. Do not argue.	boppy	unimpressed
-scene	11	data/scenes-p2.js	part2Open	Tom	I wasn’t going to argue.	deedee	happy
-scene	11	data/scenes-p2.js	part2Open	Tom	I wasn’t going to argue.	boppy	unimpressed
+scene	11	data/scenes-p2.js	part2Open	Deedee	Tom! Sit. Eat. I made a crisp. Yes, I know it's nine in the morning. Do not argue.	tom	unimpressed
+scene	11	data/scenes-p2.js	part2Open	Deedee	Tom! Sit. Eat. I made a crisp. Yes, I know it's nine in the morning. Do not argue.	boppy	unimpressed
+scene	11	data/scenes-p2.js	part2Open	Tom	Trust me, I was not going to argue.	deedee	happy
+scene	11	data/scenes-p2.js	part2Open	Tom	Trust me, I was not going to argue.	boppy	unimpressed
 scene	11	data/scenes-p2.js	part2Open	Boppy	This came for the recliner. A gold card. “Priority Member.” Junk mail. They send it to the recliner now.	tom	unimpressed
 scene	11	data/scenes-p2.js	part2Open	Boppy	This came for the recliner. A gold card. “Priority Member.” Junk mail. They send it to the recliner now.	deedee	unimpressed
 scene	11	data/scenes-p2.js	part2Open	Boppy	Don’t throw it out. It’s warm. I think it’s warm. My knee says it’s warm.	tom	surprised
 scene	11	data/scenes-p2.js	part2Open	Boppy	Don’t throw it out. It’s warm. I think it’s warm. My knee says it’s warm.	deedee	unimpressed
 scene	11	data/scenes-p2.js	part2Open	Tom	My boarding pass is buzzing in my pocket. It says: YOUR LAYOVER IS NOW BOARDING.	deedee	surprised
 scene	11	data/scenes-p2.js	part2Open	Tom	My boarding pass is buzzing in my pocket. It says: YOUR LAYOVER IS NOW BOARDING.	boppy	unimpressed
-scene	11	data/scenes-p2.js	part2Open	Deedee	A layover! Where? Never mind. Take a sweater. Take two. Take the crisp.	tom	loving
-scene	11	data/scenes-p2.js	part2Open	Deedee	A layover! Where? Never mind. Take a sweater. Take two. Take the crisp.	boppy	unimpressed
+scene	11	data/scenes-p2.js	part2Open	Deedee	A layover! Where? Never mind. Take a sweater. Actually, take two. And take the crisp.	tom	loving
+scene	11	data/scenes-p2.js	part2Open	Deedee	A layover! Where? Never mind. Take a sweater. Actually, take two. And take the crisp.	boppy	unimpressed
 scene	11	data/scenes-p2.js	part2Open	Boppy	Bring me back a pretzel. A real one. Not the airport kind.	tom	happy
 scene	11	data/scenes-p2.js	part2Open	Boppy	Bring me back a pretzel. A real one. Not the airport kind.	deedee	unimpressed
 scene	11	data/scenes-p2.js	part2Open	Deedee	To the moon and back, Tom. Both ways.	tom	loving
@@ -2775,9 +2775,9 @@ scene	11	data/scenes-p2.js	ch11Cabin	Speaker	Ladies and gentlemen, we are experi
 scene	11	data/scenes-p2.js	ch11Cabin	Speaker	Ladies and gentlemen, we are experiencing a little weather. It is not the kind with rain. Please look out the window.	amy	surprised
 scene	11	data/scenes-p2.js	ch11Cabin	Speaker	Ladies and gentlemen, we are experiencing a little weather. It is not the kind with rain. Please look out the window.	grace	surprised
 scene	11	data/scenes-p2.js	ch11Cabin	Speaker	Ladies and gentlemen, we are experiencing a little weather. It is not the kind with rain. Please look out the window.	rose	surprised
-scene	11	data/scenes-p2.js	ch11Cabin	Rose	The sky has a hole in it. The hole is pink. Tata, can I touch the hole?	tom	scared
-scene	11	data/scenes-p2.js	ch11Cabin	Rose	The sky has a hole in it. The hole is pink. Tata, can I touch the hole?	amy	scared
-scene	11	data/scenes-p2.js	ch11Cabin	Rose	The sky has a hole in it. The hole is pink. Tata, can I touch the hole?	grace	surprised
+scene	11	data/scenes-p2.js	ch11Cabin	Rose	The sky has a hole in it. The hole is pink. Tata, can I touch it?	tom	scared
+scene	11	data/scenes-p2.js	ch11Cabin	Rose	The sky has a hole in it. The hole is pink. Tata, can I touch it?	amy	scared
+scene	11	data/scenes-p2.js	ch11Cabin	Rose	The sky has a hole in it. The hole is pink. Tata, can I touch it?	grace	surprised
 scene	11	data/scenes-p2.js	ch11Cabin	Tom	No touching, please.	rose	unimpressed
 scene	11	data/scenes-p2.js	ch11Cabin	Tom	No touching, please.	amy	happy
 scene	11	data/scenes-p2.js	ch11Cabin	Tom	No touching, please.	grace	happy
@@ -7924,9 +7924,9 @@ map	1-10	data/maps-le.js	map grands, revisit	Deedee	I already did my walk. Boppy
 map	1-10	data/maps-le.js	map grands, revisit	Deedee	Retired registered nurse. Tom calls me a registered nut. Tom is due for a checkup.	tom	unimpressed
 map	1-10	data/maps-le.js	map grands, revisit	Deedee	Retired registered nurse. Tom calls me a registered nut. Tom is due for a checkup.	grace	happy
 map	1-10	data/maps-le.js	map grands, revisit	Deedee	Retired registered nurse. Tom calls me a registered nut. Tom is due for a checkup.	rose	happy
-map	1-10	data/maps-le.js	map grands, revisit	Deedee	Sunday dinner is at five. Five means four thirty.	tom	unimpressed
-map	1-10	data/maps-le.js	map grands, revisit	Deedee	Sunday dinner is at five. Five means four thirty.	grace	unimpressed
-map	1-10	data/maps-le.js	map grands, revisit	Deedee	Sunday dinner is at five. Five means four thirty.	rose	happy
+map	1-10	data/maps-le.js	map grands, revisit	Deedee	Sunday dinner is at six thirty. Don't make me call twice.	tom	unimpressed
+map	1-10	data/maps-le.js	map grands, revisit	Deedee	Sunday dinner is at six thirty. Don't make me call twice.	grace	unimpressed
+map	1-10	data/maps-le.js	map grands, revisit	Deedee	Sunday dinner is at six thirty. Don't make me call twice.	rose	happy
 map	1-10	data/maps-le.js	map grands, revisit	Deedee	I just cleaned the floors. Shoes OFF.	tom	scared
 map	1-10	data/maps-le.js	map grands, revisit	Deedee	I just cleaned the floors. Shoes OFF.	grace	scared
 map	1-10	data/maps-le.js	map grands, revisit	Deedee	I just cleaned the floors. Shoes OFF.	rose	scared
@@ -7990,9 +7990,9 @@ map	1-10	data/maps-le.js	map elliehouse, base	Aunt Ellie	Tom. Stand up straight.
 map	1-10	data/maps-le.js	map elliehouse, base	Aunt Ellie	Yes, Deedee has an aunt. Yes, I'm older. No, you may not ask by how much.	tom	happy
 map	1-10	data/maps-le.js	map elliehouse, base	Aunt Ellie	Yes, Deedee has an aunt. Yes, I'm older. No, you may not ask by how much.	grace	surprised
 map	1-10	data/maps-le.js	map elliehouse, base	Aunt Ellie	Yes, Deedee has an aunt. Yes, I'm older. No, you may not ask by how much.	rose	surprised
-map	1-10	data/maps-le.js	map elliehouse, base	Aunt Ellie	I've been to Paris eleven times. Long Island is charming. Like a hat you wear once.	tom	unimpressed
-map	1-10	data/maps-le.js	map elliehouse, base	Aunt Ellie	I've been to Paris eleven times. Long Island is charming. Like a hat you wear once.	grace	surprised
-map	1-10	data/maps-le.js	map elliehouse, base	Aunt Ellie	I've been to Paris eleven times. Long Island is charming. Like a hat you wear once.	rose	surprised
+map	1-10	data/maps-le.js	map elliehouse, base	Aunt Ellie	I've been to Paris eleven times, darling. Long Island is charming. But one must explore the world.	tom	unimpressed
+map	1-10	data/maps-le.js	map elliehouse, base	Aunt Ellie	I've been to Paris eleven times, darling. Long Island is charming. But one must explore the world.	grace	surprised
+map	1-10	data/maps-le.js	map elliehouse, base	Aunt Ellie	I've been to Paris eleven times, darling. Long Island is charming. But one must explore the world.	rose	surprised
 map	1-10	data/maps-le.js	map elliehouse, revisit	Aunt Ellie	Deedee keeps offering me rhubarb crisp. I keep saying yes. That's called manners.	tom	happy
 map	1-10	data/maps-le.js	map elliehouse, revisit	Aunt Ellie	Deedee keeps offering me rhubarb crisp. I keep saying yes. That's called manners.	grace	happy
 map	1-10	data/maps-le.js	map elliehouse, revisit	Aunt Ellie	Deedee keeps offering me rhubarb crisp. I keep saying yes. That's called manners.	rose	happy

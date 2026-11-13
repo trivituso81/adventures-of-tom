@@ -339,7 +339,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 1-10 | map grands, revisit | Loving | Rhubarb crisp is cooling on the counter. Don't touch it. Okay, one corner. |
 | 1-10 | map grands, revisit | Unimpressed | I already did my walk. Boppy did one lap around the recliner. |
 | 1-10 | map grands, revisit | Proud | Retired registered nurse. Tom calls me a registered nut. Tom is due for a checkup. |
-| 1-10 | map grands, revisit | Unimpressed | Sunday dinner is at five. Five means four thirty. |
+| 1-10 | map grands, revisit | Unimpressed | Sunday dinner is at six thirty. Don't make me call twice. |
 | 1-10 | map grands, revisit | Angry | I just cleaned the floors. Shoes OFF. |
 | 1-10 | map grands, revisit | Happy | A little glass of wine with dinner. Just one. Nurse's orders. |
 | 1-10 | map grands, revisit | Surprised | Have you seen my reading glasses? I had them a minute ago. I've looked everywhere. Twice. |
@@ -389,7 +389,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 |---|---|---|---|
 | 1-10 | map elliehouse, base | Unimpressed | Tom. Stand up straight. There. Now you look like someone I'm related to. |
 | 1-10 | map elliehouse, base | Proud | Yes, Deedee has an aunt. Yes, I'm older. No, you may not ask by how much. |
-| 1-10 | map elliehouse, base | Unimpressed | I've been to Paris eleven times. Long Island is charming. Like a hat you wear once. |
+| 1-10 | map elliehouse, base | Unimpressed | I've been to Paris eleven times, darling. Long Island is charming. But one must explore the world. |
 | 1-10 | map elliehouse, revisit | Happy | Deedee keeps offering me rhubarb crisp. I keep saying yes. That's called manners. |
 | 1-10 | map elliehouse, revisit | Unimpressed | Boppy says his stomach hurts. I told him to stop eating peppers. He looked at me like I insulted his mother. |
 | 1-10 | map elliehouse, revisit | Happy | Grace, darling, that outfit is wonderful. Rose, darling, that outfit is a choice. A brave one. |

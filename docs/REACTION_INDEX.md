@@ -166,7 +166,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | The Big One | Glub. Fine. Take your tin. I'm going back in the pond to think about things. | Deedee happy, Grace happy, Rose happy, Tom unimpressed |
 | Deedee | My tin! And look. Half the crisp is still in it. | Grace happy, Rose happy, Tom happy |
 | Grace | The Big One ate the other half. I saw crumbs on its chin. | Deedee unimpressed, Rose happy, Tom happy |
-| Deedee | Then we split this half. Everybody home. Boppy has to hear about this. | Tom happy, Grace happy, Rose happy |
+| Deedee | Then we split this half. Everybody home. Wait until Boppy hears about this. | Tom happy, Grace happy, Rose happy |
 
 ## scene: ch1End (chapter 1)
 
@@ -306,7 +306,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | The Big Shake | Rumble. You asked how I was doing. Nobody has asked in a million years. | Tom loving, TNB loving, Nara loving |
 | The Big Shake | ...I'll let things move. A little. Two inches a year. That's my best offer. | Tom happy, TNB happy |
 | The Big Shake | Rumble. Fine. The pipes are clear. I'm going back under the hill to think about my choices. | Tom unimpressed, TNB happy, Nara happy |
-| TNB | Look. The sky is blue again. LA blue. Slightly brown, but blue. | Tom happy, Nara happy |
+| TNB | Look. The sky is blue again. Los Angeles blue. Slightly brown, but blue. | Tom happy, Nara happy |
 | Tom | Somebody plugged those pipes on purpose. Smog doesn't do that by itself. | TNB surprised |
 | TNB | Spooky. I love it. Let's go check on Mr. Washington. | Tom happy, Nara happy |
 
@@ -782,7 +782,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | School bell | BRRRRRING. One bell. Right on time. Then silence. The good kind. | Tom proud, Amy happy, Grace happy, Rose happy |
 | Principal Pruitt | (on the intercom) ...ksssh... Attention, please. The Cafetorium doors are OPEN. Parents, please wait in the hall. There's something in the Cafetorium. | Amy surprised, Tom unimpressed, Grace scared, Rose scared |
 | Principal Pruitt | Mrs. Gregori’s brother, please go into the Cafetorium. Thank you. ...ksssh. | Amy happy, Grace happy, Rose happy, Tom unimpressed |
-| Amy | The footprints go in there. The sign-up sheet is in there. | Tom proud, Grace scared, Rose scared |
+| Amy | The footprints go in there. The sign-up sheet must be in there. | Tom proud, Grace scared, Rose scared |
 | Grace | And the something. | Tom unimpressed, Amy scared, Rose scared |
 
 ## scene: ch5Boss (chapter 5)
@@ -833,9 +833,9 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Amy | Thirty conferences. Zero tears. One very well-behaved pen. | Tom happy, Grace happy, Rose happy |
 | Amy | Oh. A text. From Justin. | Tom happy, Grace surprised, Rose surprised |
-| Amy | "Heard it went great. Proud of you. Stuck at work till nine. Save me a cookie." With a little heart. | Tom loving, Grace happy, Rose happy |
+| Amy | "Heard it went great. Proud of you. Stuck at work till nine. Save me some casserole." With a little heart. | Tom loving, Grace happy, Rose happy |
 | Grace | Dad used the heart! He only uses the heart on special days! | Amy loving, Tom happy, Rose happy |
-| Amy | Girls. Did we save a cookie for Dad? | Grace scared, Rose scared, Tom happy |
+| Amy | Girls. Did we save some casserole for Daddy? | Grace scared, Rose scared, Tom happy |
 | Rose | ...Define save. | Amy unimpressed, Tom happy, Grace unimpressed |
 | Rose | Tata. Tata. There's a man. | Tom surprised, Amy surprised, Grace surprised |
 | Rose | By the last car. In a long coat. He's looking at us. | Tom scared, Amy surprised, Grace scared |
@@ -844,7 +844,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Tom | Probably. | Amy happy, Rose unimpressed |
 | Tom | A long coat. Gold coins. That's what Oolong’s kettle said, too. I'm keeping a list. | Amy surprised, Grace surprised, Rose scared |
 | Grace | I'm keeping a list too. Mine has a chart. | Tom happy, Amy happy |
-| Amy | Everybody in the van. Tom, you too. You were the good uncle tonight. By a lot. | Tom surprised, Grace happy, Rose happy |
+| Amy | Everybody in the van. Tom, you too. You were a good uncle tonight. By a lot. | Tom surprised, Grace happy, Rose happy |
 | Tom | By default. | Amy unimpressed, Grace happy |
 | Amy | By a LOT. Take the compliment, Tom. | Tom loving, Grace happy, Rose happy |
 
@@ -1793,12 +1793,12 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Deedee | Tom! Sit. Eat. I made a crisp. It is nine in the morning and it is a crisp. Do not argue. | Tom unimpressed, Boppy unimpressed |
-| Tom | I wasn’t going to argue. | Deedee happy, Boppy unimpressed |
+| Deedee | Tom! Sit. Eat. I made a crisp. Yes, I know it's nine in the morning. Do not argue. | Tom unimpressed, Boppy unimpressed |
+| Tom | Trust me, I was not going to argue. | Deedee happy, Boppy unimpressed |
 | Boppy | This came for the recliner. A gold card. “Priority Member.” Junk mail. They send it to the recliner now. | Tom unimpressed, Deedee unimpressed |
 | Boppy | Don’t throw it out. It’s warm. I think it’s warm. My knee says it’s warm. | Tom surprised, Deedee unimpressed |
 | Tom | My boarding pass is buzzing in my pocket. It says: YOUR LAYOVER IS NOW BOARDING. | Deedee surprised, Boppy unimpressed |
-| Deedee | A layover! Where? Never mind. Take a sweater. Take two. Take the crisp. | Tom loving, Boppy unimpressed |
+| Deedee | A layover! Where? Never mind. Take a sweater. Actually, take two. And take the crisp. | Tom loving, Boppy unimpressed |
 | Boppy | Bring me back a pretzel. A real one. Not the airport kind. | Tom happy, Deedee unimpressed |
 | Deedee | To the moon and back, Tom. Both ways. | Tom loving, Boppy loving |
 
@@ -1819,7 +1819,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Tom | Nobody here is racing. | Amy unimpressed, Grace happy, Rose happy |
 | Amy | That’s what the person who loses says. | Tom unimpressed, Grace happy, Rose happy |
 | Speaker | Ladies and gentlemen, we are experiencing a little weather. It is not the kind with rain. Please look out the window. | Tom unimpressed, Amy surprised, Grace surprised, Rose surprised |
-| Rose | The sky has a hole in it. The hole is pink. Tata, can I touch the hole? | Tom scared, Amy scared, Grace surprised |
+| Rose | The sky has a hole in it. The hole is pink. Tata, can I touch it? | Tom scared, Amy scared, Grace surprised |
 | Tom | No touching, please. | Rose unimpressed, Amy happy, Grace happy |
 | Tom | Everybody hold on to something. Preferably each other. | Amy scared, Grace scared, Rose happy |
 
@@ -3765,7 +3765,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Deedee | Rhubarb crisp is cooling on the counter. Don't touch it. Okay, one corner. | Tom happy, Grace happy, Rose happy |
 | Deedee | I already did my walk. Boppy did one lap around the recliner. | Tom happy, Grace happy, Rose happy |
 | Deedee | Retired registered nurse. Tom calls me a registered nut. Tom is due for a checkup. | Tom unimpressed, Grace happy, Rose happy |
-| Deedee | Sunday dinner is at five. Five means four thirty. | Tom unimpressed, Grace unimpressed, Rose happy |
+| Deedee | Sunday dinner is at six thirty. Don't make me call twice. | Tom unimpressed, Grace unimpressed, Rose happy |
 | Deedee | I just cleaned the floors. Shoes OFF. | Tom scared, Grace scared, Rose scared |
 | Deedee | A little glass of wine with dinner. Just one. Nurse's orders. | Tom happy, Grace unimpressed, Rose happy |
 | Deedee | Have you seen my reading glasses? I had them a minute ago. I've looked everywhere. Twice. | Tom happy, Grace happy, Rose happy |
@@ -3812,7 +3812,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Aunt Ellie | Tom. Stand up straight. There. Now you look like someone I'm related to. | Tom unimpressed, Grace happy, Rose happy |
 | Aunt Ellie | Yes, Deedee has an aunt. Yes, I'm older. No, you may not ask by how much. | Tom happy, Grace surprised, Rose surprised |
-| Aunt Ellie | I've been to Paris eleven times. Long Island is charming. Like a hat you wear once. | Tom unimpressed, Grace surprised, Rose surprised |
+| Aunt Ellie | I've been to Paris eleven times, darling. Long Island is charming. But one must explore the world. | Tom unimpressed, Grace surprised, Rose surprised |
 
 ## map: map elliehouse, revisit (chapter 1-10)
 

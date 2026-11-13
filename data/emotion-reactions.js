@@ -24,7 +24,7 @@ const EMOTION_REACTIONS={
 "Deedee|That's my GOOD tin! Grab your shoes. I'm coming with you.|1": [["grace", "proud"], ["rose", "happy"], ["tom", "proud"]],
 "Deedee|That's my GOOD tin, you overgrown handbag!|1": [["grace", "happy"], ["rose", "happy"], ["tom", "happy"]],
 "Deedee|The crumbs go around the pond. Toward Boppy’s fishing spot.|1": [["grace", "proud"], ["tom", "proud"]],
-"Deedee|Then we split this half. Everybody home. Boppy has to hear about this.|1": [["grace", "happy"], ["rose", "happy"], ["tom", "happy"]],
+"Deedee|Then we split this half. Everybody home. Wait until Boppy hears about this.|1": [["grace", "happy"], ["rose", "happy"], ["tom", "happy"]],
 "Deedee|There. Good as new. Try not to do that again.|1": [["grace", "happy"], ["rose", "happy"], ["tom", "happy"]],
 "Deedee|Tom, you must be starving! Sit. The crisp needs ten minutes on the counter.|1": [["tom", "happy"]],
 "Deedee|Tom, you stand in front of whoever it stares at. Rosie, make it laugh. Then we try again.|1": [["grace", "proud"], ["rose", "proud"], ["tom", "proud"]],

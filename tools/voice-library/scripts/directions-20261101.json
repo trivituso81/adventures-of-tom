@@ -424,9 +424,9 @@
 {
 "voice": "deedee",
 "speaker": "Deedee",
-"text": "Then we split this half. Everybody home. Boppy has to hear about this.",
+"text": "Then we split this half. Everybody home. Wait until Boppy hears about this.",
 "ctx": "",
-"script": "[brisk, generous] Then we split this half. Everybody home. [eager, bustling] Boppy has to hear about this."
+"script": "[brisk, generous] Then we split this half. Everybody home. [eager, bustling] Wait until Boppy hears about this."
 },
 {
 "voice": "boppy",
@@ -949,9 +949,9 @@
 {
 "voice": "tnb",
 "speaker": "TNB",
-"text": "Look. The sky is blue again. LA blue. Slightly brown, but blue.",
+"text": "Look. The sky is blue again. Los Angeles blue. Slightly brown, but blue.",
 "ctx": "",
-"script": "[relieved, easy] Look. The sky is blue again. LA blue. [deadpan, fond] Slightly brown, but blue."
+"script": "[relieved, easy] Look. The sky is blue again. Los Angeles blue. [deadpan, fond] Slightly brown, but blue."
 },
 {
 "voice": "tom",
@@ -2853,9 +2853,9 @@
 {
 "voice": "amy",
 "speaker": "Amy",
-"text": "The footprints go in there. The sign-up sheet is in there.",
+"text": "The footprints go in there. The sign-up sheet must be in there.",
 "ctx": "",
-"script": "[tense, low] The footprints go in there. [determined, firm] The sign-up sheet is in there."
+"script": "[tense, low] The footprints go in there. [determined, firm] The sign-up sheet must be in there."
 },
 {
 "voice": "grace",
@@ -3105,9 +3105,9 @@
 {
 "voice": "amy",
 "speaker": "Amy",
-"text": "\"Heard it went great. Proud of you. Stuck at work till nine. Save me a cookie.\" With a little heart.",
+"text": "\"Heard it went great. Proud of you. Stuck at work till nine. Save me some casserole.\" With a little heart.",
 "ctx": "",
-"script": "[warm, even] \"Heard it went great. Proud of you. [rueful, fond] Stuck at work till nine. Save me a cookie.\" [softening, tender] With a little heart."
+"script": "[warm, even] \"Heard it went great. Proud of you. [rueful, fond] Stuck at work till nine. Save me some casserole.\" [softening, tender] With a little heart."
 },
 {
 "voice": "grace",
@@ -3119,9 +3119,9 @@
 {
 "voice": "amy",
 "speaker": "Amy",
-"text": "Girls. Did we save a cookie for Dad?",
+"text": "Girls. Did we save some casserole for Daddy?",
 "ctx": "",
-"script": "[pointed, mock stern] Girls. [teasing, knowing] Did we save a cookie for Dad?"
+"script": "[pointed, mock stern] Girls. [teasing, knowing] Did we save some casserole for Daddy?"
 },
 {
 "voice": "rose",
@@ -3182,9 +3182,9 @@
 {
 "voice": "amy",
 "speaker": "Amy",
-"text": "Everybody in the van. Tom, you too. You were the good uncle tonight. By a lot.",
+"text": "Everybody in the van. Tom, you too. You were a good uncle tonight. By a lot.",
 "ctx": "",
-"script": "[brisk, warm] Everybody in the van. Tom, you too. [sincere, affectionate] You were the good uncle tonight. [emphatic, fond] By a lot."
+"script": "[brisk, warm] Everybody in the van. Tom, you too. [sincere, affectionate] You were a good uncle tonight. [emphatic, fond] By a lot."
 },
 {
 "voice": "tom",
@@ -7354,16 +7354,16 @@
 {
 "voice": "deedee",
 "speaker": "Deedee",
-"text": "Tom! Sit. Eat. I made a crisp. It is nine in the morning and it is a crisp. Do not argue.",
+"text": "Tom! Sit. Eat. I made a crisp. Yes, I know it's nine in the morning. Do not argue.",
 "ctx": "Chapter 11: part2Open",
-"script": "[warm, bustling] Tom! Sit. Eat. [proud, firm] I made a crisp. It is nine in the morning and it is a crisp. [sweet, warning] Do not argue."
+"script": "[warm, bustling] Tom! Sit. Eat. [proud, firm] I made a crisp. Yes, I know it's nine in the morning. [sweet, warning] Do not argue."
 },
 {
 "voice": "tom",
 "speaker": "Tom",
-"text": "I wasn’t going to argue.",
+"text": "Trust me, I was not going to argue.",
 "ctx": "Chapter 11: part2Open",
-"script": "[dry, mild] I wasn’t going to argue."
+"script": "[dry, mild] Trust me, I was not going to argue."
 },
 {
 "voice": "boppy",
@@ -7389,9 +7389,9 @@
 {
 "voice": "deedee",
 "speaker": "Deedee",
-"text": "A layover! Where? Never mind. Take a sweater. Take two. Take the crisp.",
+"text": "A layover! Where? Never mind. Take a sweater. Actually, take two. And take the crisp.",
 "ctx": "Chapter 11: part2Open",
-"script": "[bright, thrilled] A layover! Where? Never mind. [brisk, fussing] Take a sweater. Take two. Take the crisp."
+"script": "[bright, thrilled] A layover! Where? Never mind. [brisk, fussing] Take a sweater. Actually, take two. And take the crisp."
 },
 {
 "voice": "boppy",
@@ -7431,9 +7431,9 @@
 {
 "voice": "tom",
 "speaker": "Tom",
-"text": "Whoever is under the blanket: it’s breathing very loudly.",
+"text": "Whoever is under the blanket, you’re breathing very loudly.",
 "ctx": "Chapter 11: ch11Cabin",
-"script": "[dry, calm] Whoever is under the blanket: [flat, amused] it’s breathing very loudly."
+"script": "[dry, calm] Whoever is under the blanket, [flat, amused] you’re breathing very loudly."
 },
 {
 "voice": "rose",
@@ -7522,9 +7522,9 @@
 {
 "voice": "rose",
 "speaker": "Rose",
-"text": "The sky has a hole in it. The hole is pink. Tata, can I touch the hole?",
+"text": "The sky has a hole in it. The hole is pink. Tata, can I touch it?",
 "ctx": "Chapter 11: ch11Cabin",
-"script": "[hushed, awed] The sky has a hole in it. [wondering, soft] The hole is pink. [eager, hopeful] Tah Tah, can I touch the hole?"
+"script": "[hushed, awed] The sky has a hole in it. [wondering, soft] The hole is pink. [eager, hopeful] Tah Tah, can I touch it?"
 },
 {
 "voice": "tom",
@@ -17490,9 +17490,9 @@
 {
 "voice": "deedee",
 "speaker": "deedee",
-"text": "Sunday dinner is at five. Five means four thirty.",
+"text": "Sunday dinner is at six thirty. Don't make me call twice.",
 "ctx": "",
-"script": "[bossy, brisk] Sunday dinner is at five. [knowing, firm] Five means four thirty."
+"script": "[bossy, brisk] Sunday dinner is at six thirty. [knowing, firm] Don't make me call twice."
 },
 {
 "voice": "deedee",
@@ -17651,9 +17651,9 @@
 {
 "voice": "ellie",
 "speaker": "ellie",
-"text": "I've been to Paris eleven times. Long Island is charming. Like a hat you wear once.",
+"text": "I've been to Paris eleven times, darling. Long Island is charming. But one must explore the world.",
 "ctx": "",
-"script": "[airy, grand] I've been to Paris ELEVEN times. Long Island is charming. [arch, dry] ...Like a hat you wear once."
+"script": "[airy, grand] I've been to Paris ELEVEN times, darling. Long Island is charming. [arch, dry] ...But one must explore the world."
 },
 {
 "voice": "ellie",
