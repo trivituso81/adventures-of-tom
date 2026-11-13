@@ -22298,8 +22298,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. The attached picture is a painted game character.\n\nPaint this same person, unchanged: the same face, hair, skin, clothes, colors, proportions and anything they carry. Full length, facing the viewer, feet visible. The person is frozen mid-moment, standing completely still inside one tall, solid block of warm, glowing amber, like honey-colored glass. The person stays clearly visible and recognizable through the amber, with the face fully readable.\n\nThe moment they are frozen in: He is carrying dinner, caught mid-step with one foot lifted, a plate in each hand. A single tortilla hangs in the air above his head, inside the amber. His look is cheerful, busy and a little distracted.\n\nThe amber block is a simple upright slab, a little wider and taller than the person, with a flat base, softly rounded top edges, a glossy bright edge along the upper left, and a few tiny gold flakes and bubbles caught inside. The amber is slightly deeper in color at the bottom. Warm golden light from the upper left, smooth soft shading.\n\nStyle: hand-painted, realistic caricature with an oversized head and a slim body, exactly the painting style of the attached picture, no thick outlines. Not pixel art, not 16-bit. No text, no frame, no floor, no cast shadow on the background.\n\nBackground: one flat solid #FF00FF magenta, with nothing else in the picture. Keep a small margin of magenta around the block on every side."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/npcs/amber-yesenia-v1.png",
+     "date": "2026-11-13",
+     "from": "v1",
+     "at": 1794547968432
+    }
+   ],
    "rejects": [],
    "id": "amber-yesenia",
    "tab": "NPCs",
