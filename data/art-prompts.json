@@ -7807,24 +7807,23 @@
    "prompt": "Draw the man in the attached picture as a stretching animation sheet.\n\nCopy the attached picture as exactly as possible in every frame: the same person, face, body, head size compared to the body, hair, clothes, colors, linework, painting style and level of detail. Only the pose changes. Do not add, remove or redesign anything.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on the same ground line, nothing touching a cell edge. Hands empty. No grid lines, numbers, text, effects or shadows.\n\nIn every frame the body and face point straight at the viewer. The frames play in order as one smooth stretch.\n\nRow 1:\n1. Stiff. Standing, feet together. Shoulders slumped forward, arms hanging straight down. Head tilted slightly to one side, eyelids half closed, mouth closed.\n2. Arms rising. Feet apart at hip width. Both arms raised out to the sides to shoulder height, palms up, elbows straight. Chest lifting, eyes closing.\n3. Big reach and yawn. Both arms straight up above the head, fingers interlaced, palms facing the sky. Back slightly arched, chin up, up on the toes. Eyes shut, mouth wide open in a yawn.\n4. Side bend left. Feet apart. The arm on the viewer's right curved up and over the head, the upper body bent sideways toward the viewer's left. The other hand resting on the hip. Eyes closed, a relieved smile.\n\nRow 2:\n5. Side bend right. The mirror of frame 4: the arm on the viewer's left curved up and over the head, the upper body bent sideways toward the viewer's right, the other hand on the hip. Eyes closed, a relieved smile.\n6. Push forward. Standing straight, feet apart. Both arms stretched straight out in front at chest height, fingers interlaced, palms turned outward toward the viewer. Eyes squeezed shut, a small satisfied wince.\n7. Exhale. Arms dropped loosely at the sides, shoulders lowered. Cheeks puffed out, lips pushed forward blowing out a big breath. Eyes closed.\n8. Refreshed. Standing tall, feet apart at hip width, shoulders back, chest open. Arms relaxed at the sides. Eyes open and bright, a small easy smile."
   },
   {
-   "status": "approved",
-   "versions": [
+   "status": "rejected",
+   "versions": [],
+   "rejects": [
     {
-     "n": 0,
-     "file": "art/raw/characters/tom-greeting-crouch-v1.png",
      "date": "2026-11-13",
+     "note": "Old Tom look (plain dark shirt with no heart, grey jeans, black-swoosh Nikes, no belt). Frame hg_crouch. Redo in the new Tom of the kneel picture (heart under the controller, woven belt, brown jeans, Puma-style shoes), same side view, arms open.",
      "from": "v1",
-     "at": 1794537938579
+     "at": 1794602728072
     }
    ],
-   "rejects": [],
    "id": "tom-greeting-crouch",
    "tab": "Characters",
    "group": "Tom",
-   "title": "Tom greeting crouch: Tom alone in profile, crouched with his arms open (your approved picture, already in the game)",
+   "title": "REPLACE, old Tom look: Tom greeting crouch: Tom alone in profile, crouched with his arms open",
    "ar": "1:1",
    "refs": [
-    "art/raw/characters/tom-hero-v2.png"
+    "art/raw/characters/tom-greeting-kneel-v1.png"
    ],
    "prompt": "Draw the man in the attached picture crouching to greet children who run toward him.\n\nCopy the attached pictures as exactly as possible in every frame: the same people, faces, hair, beard, clothes, shoes, colors, linework, painting style, level of detail and head size compared to the body. Only the poses change. Do not redesign anything.\n\nONE large picture of him alone, not a grid. A side view: his body in profile and his face turned in a three-quarter view toward the viewer, looking at the children who are just outside the picture on the side he faces. He crouches low on bent knees with his feet flat, leaning forward, both arms stretched wide open in front of him with open palms, a huge delighted smile. Full body from his hair to the soles of his shoes, centered, filling about 80 percent of the picture height.\n\nBackground: one flat solid magenta #FF00FF filling the whole image. No magenta anywhere on the characters: pink shoes stay clearly pink. No grid lines, borders, numbers, labels, text, shadows, dust, motion lines, sparkles or glow effects. Nothing touches a cell edge. Family friendly."
   },
@@ -7851,24 +7850,23 @@
    "prompt": "Draw the man in the attached picture kneeling to welcome children who run toward him.\n\nCopy the attached pictures as exactly as possible in every frame: the same people, faces, hair, beard, clothes, shoes, colors, linework, painting style, level of detail and head size compared to the body. Only the poses change. Do not redesign anything.\n\nONE large picture of him alone, not a grid. A side view: his body turned to one side and his face turned in a three-quarter view toward the viewer, looking at the children who are just outside the picture on the side he faces. He kneels on one knee with the other foot flat on the ground, leaning forward, both arms stretched wide open with open palms, a huge delighted smile. Full body from his hair to the soles of his shoes, centered, filling about 80 percent of the picture height.\n\nBackground: one flat solid magenta #FF00FF filling the whole image. No magenta anywhere on the characters: pink shoes stay clearly pink. No grid lines, borders, numbers, labels, text, shadows, dust, motion lines, sparkles or glow effects. Nothing touches a cell edge. Family friendly."
   },
   {
-   "status": "approved",
-   "versions": [
+   "status": "rejected",
+   "versions": [],
+   "rejects": [
     {
-     "n": 0,
-     "file": "art/raw/characters/tom-grace-rose-greeting-hug-v1.png",
      "date": "2026-11-13",
+     "note": "Old Tom look in every cell (plain dark shirt, grey jeans, black-swoosh Nikes). Game frames hg_hear (cell 1), hg_delight (2), hg_run (4), hg_crash (5), hg_group (6) all need the new Tom; cell 3 is replaced by the separate crouch entry; cells 7 and 8 are not used. Keep Grace and Rose exactly as they are. Tom must match the kneel picture: heart under the controller, woven belt, brown jeans, Puma-style shoes.",
      "from": "v1",
-     "at": 1794537938579
+     "at": 1794602728072
     }
    ],
-   "rejects": [],
    "id": "tom-grace-rose-greeting-hug",
    "tab": "Characters",
    "group": "Tom",
-   "title": "Greeting hug sheet: Tom hears the girls, crouches, Grace and Rose run in and hug him (8 frames, 4 x 2; your approved sheet, already in the game)",
+   "title": "REPLACE 6 of 8 cells, old Tom look: Greeting hug sheet: Tom hears the girls, crouches, Grace and Rose run in and hug him (8 frames, 4 x 2)",
    "ar": "2:1",
    "refs": [
-    "art/raw/characters/tom-hero-v2.png",
+    "art/raw/characters/tom-greeting-kneel-v1.png",
     "art/raw/characters/grace-hero-v1.png",
     "art/raw/characters/rose-hero-v1.png"
    ],

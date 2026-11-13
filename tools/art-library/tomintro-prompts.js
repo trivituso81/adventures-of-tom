@@ -7,6 +7,7 @@
 //   tomride-poses-v2.png (set `tomride`), which shows the older Tom. This entry is drawn from the newer approved ride picture tomride-title-v1.png.
 const R = 'art/raw/characters/';
 const TOM = R + 'tom-hero-v2.png', GRACE = R + 'grace-hero-v1.png', ROSE = R + 'rose-hero-v1.png';
+const KNEEL = R + 'tom-greeting-kneel-v1.png';   // the newest Tom (heart under the controller, belt, brown jeans, Puma-style shoes): the look reference for the greeting redo
 const RIDE_NEW = R + 'tomride-title-v1.png';
 
 const STYLE = `Copy the attached pictures as exactly as possible in every frame: the same people, faces, hair, beard, clothes, shoes, colors, linework, painting style, level of detail and head size compared to the body. Only the poses change. Do not redesign anything.`;
@@ -15,8 +16,8 @@ const BG = `Background: one flat solid magenta #FF00FF filling the whole image. 
 const entries = [
   {
     id: 'tom-greeting-crouch', tab: 'Characters', group: 'Tom',
-    title: 'Tom greeting crouch: Tom alone in profile, crouched with his arms open (your approved picture, already in the game)',
-    ar: '1:1', refs: [TOM],
+    title: 'REPLACE, old Tom look: Tom greeting crouch: Tom alone in profile, crouched with his arms open',
+    ar: '1:1', refs: [KNEEL],
     prompt: `Draw the man in the attached picture crouching to greet children who run toward him.
 
 ${STYLE}
@@ -39,8 +40,8 @@ ${BG}`,
   },
   {
     id: 'tom-grace-rose-greeting-hug', tab: 'Characters', group: 'Tom',
-    title: 'Greeting hug sheet: Tom hears the girls, crouches, Grace and Rose run in and hug him (8 frames, 4 x 2; your approved sheet, already in the game)',
-    ar: '2:1', refs: [TOM, GRACE, ROSE],
+    title: 'REPLACE 6 of 8 cells, old Tom look: Greeting hug sheet: Tom hears the girls, crouches, Grace and Rose run in and hug him (8 frames, 4 x 2)',
+    ar: '2:1', refs: [KNEEL, GRACE, ROSE],
     prompt: `Draw Tom (first attached picture), Grace (second) and Rose (third) as a greeting pose sheet. Grace is the older girl and Rose the little one; keep the size difference between all three exactly as in the pictures.
 
 ${STYLE}
