@@ -11,7 +11,7 @@ let ch12Grey=0,ch12GreyLast=0;
 // Painted amber figures (Art Library, tab NPCs, group Chapter 12 amber; baked by tools/sprite-bake/bake_amber.py into art/amber/<id>.webp).
 // A neighbor with a baked picture is drawn as that picture, sized from the figure it replaces; with none, the plain figure sits in the glass block below.
 const AMBER_IDS={'Mr. Washington':'washington',Marisol:'marisol',Larry:'larry','Doña Carmen':'carmen','Mrs. Alvarez':'alvarez','Don Beto':'beto',Tony:'tony',Yesenia:'yesenia',Claudia:'claudia',Kevin:'kevin'};
-const AMBER_V='20261112',AMBER_ART={};
+const AMBER_V='amber3',AMBER_ART={},AMBER_K=1.28;   // AMBER_K: the slab is drawn this many times the figure's height, so the person inside is about as tall as the plain figure (the person fills about 78 percent of a slab)
 const AMBER_STAGES=['','-crack','-break'];   // n.amberStage 1 and 2 (Doña Carmen's thaw); a missing stage picture falls back to the frozen one
 function amberLoad(id) {
   let a=AMBER_ART[id];
@@ -23,14 +23,19 @@ function amberArt(n) {
   const base=amberLoad(id),st=n.amberStage|0;
   return (st&&AMBER_STAGES[st]&&amberLoad(id+AMBER_STAGES[st]))||base;
 }
+function ch12AmberPic(a,img) {
+  const p=position(a),cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2);
+  const h=Math.round(a._figH*AMBER_K),w=Math.round(h*img.naturalWidth/img.naturalHeight);
+  ellipse(cx,base+1,Math.round(w*.42),5,'#2b2a2640');
+  gfx.drawImage(img,cx-Math.round(w/2),base+2-h,w,h);
+}
+// While Jefferson Park is grey the picture is drawn after the grey (in b7DrawMapFx below), so the amber stays the only warm thing on the block.
+const ch12GreyNow=()=>ch12Grey>.02&&currentMap.id==='jpark';
 const LE_drawActor_ch12=drawActor;
 drawActor=function(a) {
   const img=a.amber&&!a.hidden&&a._figH?amberArt(a):null;
   if(!img) return LE_drawActor_ch12(a);
-  const p=position(a),cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2);
-  const h=Math.round(a._figH*1.12),w=Math.round(h*img.naturalWidth/img.naturalHeight);
-  ellipse(cx,base+1,Math.round(w*.42),5,'#2b2a2640');
-  gfx.drawImage(img,cx-Math.round(w/2),base+2-h,w,h);
+  if(!ch12GreyNow()) ch12AmberPic(a,img);
 };
 function ch12Amber(n) {
   if(amberArt(n)) return;   // the painted figure already carries its own amber
@@ -54,5 +59,5 @@ b7DrawMapFx=function(time) {
     gfx.restore();
     gfx.save(); gfx.globalAlpha=ch12Grey*.14; rect(Math.round(camera.x)-8,Math.round(camera.y)-8,W+16,H+16,'#4a5060'); gfx.restore();
   }
-  for(const n of currentMap.npcs) if(n.amber&&!n.hidden) ch12Amber(n);
+  for(const n of currentMap.npcs) if(n.amber&&!n.hidden) { const img=n._figH?amberArt(n):null; if(img) { if(ch12GreyNow()) ch12AmberPic(n,img); } else ch12Amber(n); }
 };
