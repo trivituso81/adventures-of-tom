@@ -1,3 +1,8 @@
+## 2026-11-12 (faceframe1): dialogue faces zoomed out so the whole head shows (tag faceframe1)
+- Tom 2026-11-12: the NPC portraits in the dialogue box are cropped too tight and cut off the face (Doña Carmen shown). Fact (cause): NPC mood faces were cut at pupil spacing .30 of the square, eye line .54, which clipped chin and hair.
+- Fix (pushed): `PUPIL_SHARE` .22 and `EYE_AT` .47 in tools/sprite-bake/bake_npc_portraits.py; all 59 NPC mood faces (portraits/emo/) rebaked. Pip and Luna talk faces reframed (`NECK_SET` in bake_talk_faces.py). Cast faces (Tom, Grace, Amy...) unchanged. `EMO_V` and `TALK_V` set to faceframe1.
+- Checked: contact sheets of 10 NPCs and all 59 talk faces, Carmen's box in portrait and landscape, smoke FAILS [], tag_check ok.
+
 ## 2026-11-12 (clips8): Tom's last 8 pets1 recordings merged (tag clips8)
 - Fact: `local-clips-pending.json` (8 clips: Penny x2, TNB x3, Tom x1, Amy x2) merged with `merge-local.js` into data/voice/dialog-ch28.js; data/merged-takes.json pushed so Pending clears on his phone. unused_voice.py 0 on all checks, smoke FAILS [].
 - Every live dialogue line now has a clip (index: dialogue lines with no clip 0).
