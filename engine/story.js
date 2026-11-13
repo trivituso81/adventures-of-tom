@@ -742,6 +742,7 @@ function huddleLayout(g,clr,tomMoves,memo,keep) {
 }
 function huddleStep(o) {
   return {start(){
+      if(intro.objStage) { this.moves=[]; this.sub=null; this.g={roster:[],others:[]}; aroundFace(intro.objStage); return; }   // gathered around an object ({around}): they stay and keep looking at it (item1)
       this.moves=[]; this.sub=null; this.g=huddleGroup(o.with,o.focus); this.g.lookAt=o.lookAt?sceneActor(o.lookAt):null;
       const g=this.g,all=[...g.roster,...g.others]; if(all.length<2) return;
       // A monster in the conversation (not a boss scene): the party does not stand around it or on its picture. It lines up together facing it,
@@ -899,13 +900,86 @@ function approachStep(o) {
       return done; }};
 }
 SCENE_OPS.approach=approachStep;
+// {around:[px,py],tom:[x,y],size:[w,h]} (item1, Tom 2026-11-12: at the sourdough starter "they're just totally in the middle of the house, not
+// around the starter ... check that for every single possible instance of when you interact with an item"). A scene about an OBJECT: Tom and
+// everyone who walks with him stand around it. [px,py] is the bottom middle of the object's picture in tiles (art px / tile px); size is its
+// picture in tiles (default .6 wide, .7 tall). {around:{x,y,w,h}} is an object's tile rectangle instead. Tom takes `tom` when given (and anyone named in at:{id:[x,y]} takes that tile), else the
+// nearest good tile; the others take the nearest good tiles after him, on his side. A good tile: on the floor, reachable, not the map edge or
+// under the dialogue box, not behind painted scenery (huddleHidden), not on anyone's picture or on the object's picture, never the same column
+// as another walker within two rows (stageApart). Everyone ends facing the object. While it is active the {huddle} before each line leaves
+// the group alone (they keep looking at the object); {around:null} or the end of the scene lets go.
+// AUTOMATIC: playScene adds one before the first line of any scene that starts while Tom stands at an object he just pressed A on (objPress),
+// unless the scene stages itself (walk, place, cam, zoom) or is a boss scene. Tom stays on his tile, facing the object.
+const aroundRect=o=>Array.isArray(o.around)?(()=>{ const z=o.size||[.6,.7]; return {x0:o.around[0]-z[0]/2,x1:o.around[0]+z[0]/2,y0:o.around[1]-z[1],y1:o.around[1]}; })()
+  :{x0:o.around.x,x1:o.around.x+(o.around.w||1),y0:o.around.y,y1:o.around.y+(o.around.h||1)};
+const aroundGap=(R,x,y)=>Math.hypot(Math.max(R.x0-x,0,x-R.x1),Math.max(R.y0-y,0,y-R.y1)*.8);   // from a point to the object's picture (rows count a little less: figures are tall)
+function aroundSpots(R,walkers,tomAt,at) {
+  const map=currentMap,memo=new Map(); memo.boxes=stageBoxes(null);
+  const busy=map.npcs.filter(m=>!m.hidden&&!followers.includes(m)&&!stageExtra(m)).map(stagePos);   // passers-by are sent off by {clearout} and never count (clearout1)
+  const covers=(x,y)=>x+.1<R.x1&&x+.9>R.x0&&y-.7<R.y1&&y+1>R.y0;   // a person standing on (x,y) is drawn over the object
+  const taken=[],out=[]; let reach=null;   // reach: steps on foot from Tom's spot, so nobody ends up across a wall, a fence or the object itself from him
+  const flood=t=>{ reach=new Map([[key(t.x,t.y),0]]); let q=[[t.x,t.y]];
+    for(let d=1;d<=7&&q.length;d++) { const nq=[]; for(const [x,y] of q) for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]) { const k=key(x+dx,y+dy);
+      if(!reach.has(k)&&walkable(map,x+dx,y+dy)) { reach.set(k,d); nq.push([x+dx,y+dy]); } } q=nq; } };
+  walkers.forEach((a,k)=>{ const p=stagePos(a); let best=null,bc=1e9;
+    if(k===1) flood(taken[0]);
+    const tryTile=(x,y,forced)=>{
+      if(reach&&!reach.has(key(x,y))) return;
+      if(!walkable(map,x,y)||!taken.every(t=>stageApart(t,{x,y}))) return;
+      if(!forced&&(map.portals.has(key(x,y))||!busy.every(b=>stageApart(b,{x,y}))||huddleBadTile(map,x,y,memo)||covers(x,y))) return;
+      const path=(x===p.x&&y===p.y)?[]:findPath(map,a,{x,y}); if(!path.length&&(x!==p.x||y!==p.y)) return;
+      const c=forced?-1:aroundGap(R,x+.5,y+.75)+.02*path.length+(reach?.15*reach.get(key(x,y)):0);
+      if(c<bc) { bc=c; best={x,y,path}; } };
+    if(k===0&&tomAt) tryTile(tomAt[0],tomAt[1],true);
+    const mine=k>0&&at&&a.member&&at[a.member.id]; if(mine) tryTile(mine[0],mine[1],true);   // at:{tnb:[x,y]}: a mark the scene chose for one walker
+    if(!best) for(let y=Math.floor(R.y0)-4;y<=Math.ceil(R.y1)+4;y++) for(let x=Math.floor(R.x0)-4;x<=Math.ceil(R.x1)+4;x++) tryTile(x,y,false);
+    if(!best) best={x:p.x,y:p.y,path:[]};
+    taken.push(best); out.push(best); });
+  return out;
+}
+function aroundStep(o) {
+  return {start(){
+      this.moves=[]; this.on=false;
+      if(!o.around) { intro.objStage=null; return; }
+      if(o.auto&&objPressLive()!==o.auto) return;   // the scene has already moved Tom or changed the map: nothing to stand around
+      const R=aroundRect(o); this.on=true;
+      const walkers=[player,...followers.filter(f=>stageWalks(f)&&!f.scenePose&&!f.scr)];
+      const spots=aroundSpots(R,walkers,o.tom,o.at);
+      walkers.forEach((a,k)=>{ const p=stagePos(a); a.x=p.x; a.y=p.y; a.move=null; a.lag=0; storyHold(a); a.stagePlaced=true; a.stageFaced=true;
+        this.moves.push({a,path:spots[k].path,i:0,wait:k*.22,dur:o.speed||.17}); });   // they set off one after another, so nobody walks inside anybody
+      intro.objStage={R,walkers,keep:o.keepTom?player.facing:null};
+    },
+    update(dt){ let done=true;
+      for(const m of this.moves) { const a=m.a;
+        if(m.wait>0) { m.wait-=dt; if(m.path.length) done=false; continue; }
+        if(a.move&&!advanceMove(a,dt)) { done=false; continue; }
+        if(m.i<m.path.length) { const t=m.path[m.i++]; a.facing=directionTo(t.x-a.x,t.y-a.y);
+          a.move={fx:a.x,fy:a.y,tx:t.x,ty:t.y,elapsed:0,duration:m.dur}; done=false; } }
+      if(done&&this.on) aroundFace(intro.objStage);
+      return done; }};
+}
+function aroundFace(st) { if(!st) return;
+  for(const a of st.walkers) { if(a.scenePose||a.scr||a.move) continue;
+    if(a===player&&st.keep) { a.facing=st.keep; continue; }   // Tom pressed A on it: he is already looking at it
+    const p=stagePos(a),px=p.x+.5,py=p.y+.2,R=st.R,dx=Math.max(R.x0-px,0)-Math.max(px-R.x1,0),dy=Math.max(R.y0-py,0)-Math.max(py-R.y1,0);
+    if(dx||dy) a.facing=directionTo(dx,dy); } }
+SCENE_OPS.around=aroundStep;
+// The object Tom pressed A on (kept while he stays on that tile): a scene that starts from it gathers the party around it.
+let objPress=null;
+function objPressNote() {
+  if(typeof dialog!=='undefined'&&dialog.active) return; if(intro.active||(typeof transition!=='undefined'&&transition)||player.move) return;
+  const t=typeof facingTarget==='function'?facingTarget():null;
+  objPress=t&&t.kind==='object'&&t.value?{o:t.value,map:currentMap,x:player.x,y:player.y}:null;
+}
+const objPressLive=()=>objPress&&objPress.map===currentMap&&player.x===objPress.x&&player.y===objPress.y&&!player.move?objPress.o:null;
+window.addEventListener('load',()=>{ const prev=pressAction; pressAction=function() { objPressNote(); return prev.apply(this,arguments); }; });   // outermost: runs before every chapter's own A-button rule
 // Who speaks in a scene, in order (also inside if / seq branches): the names {approach} tries.
 function sceneSpeakers(list) {
   const out=[]; const walk=x=>{ if(!x||typeof x!=='object'||typeof x.start==='function') return; if(Array.isArray(x)) return x.forEach(walk);
     if(typeof x.talk==='string'&&!out.includes(x.talk)) out.push(x.talk); for(const k of ['then','else','seq','all']) if(x[k]) walk(x[k]); };
   walk(list); return out;
 }
-const sceneSelfStaged=list=>/"(walk|place|cam|zoom|approach)":/.test(JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v));
+const sceneSelfStaged=list=>/"(walk|place|cam|zoom|approach|around)":/.test(JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v));
 // Every boss lead-in, fight (and retry) and after scene, with whom the party faces. playScene inserts {gather} just before the
 // scene's first line of dialogue (after any walk-in, spawn or placement steps), unless the scene has its own {gather}.
 const BOSS_STAGE={
@@ -957,11 +1031,12 @@ function playScene(script,opts={}) {
   if(typeof script==='string') script=SCENES[script];
   let list=typeof script==='function'?script(opts.ctx||{}):script;
   for(const f of [...followers,player]) { f.stagePlaced=false; f.stageFaced=false; }
-  intro.monGather=null; intro.nearBox=null; intro.nearBoxes=null;
+  intro.monGather=null; intro.nearBox=null; intro.nearBoxes=null; intro.objStage=null;
   if(sid&&BOSS_STAGE[sid]&&Array.isArray(list)) { const fc=BOSS_STAGE[sid]; list=stageScript(list,fc,(first,st)=>[first?{gather:fc}:{gather:fc,check:true},{huddle:true,focus:fc,with:st&&typeof st.talk==='string'?st.talk:null}]); }
   // opts.stage: a wrapper script (playScene(()=>[...])) that should be staged like a SCENES id (facing1: the Part 2 opening).
-  else if((sid||opts.stage)&&Array.isArray(list)&&!JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v).includes('"gather"')) { const near=sceneSelfStaged(list)?null:sceneSpeakers(list);
-    list=stageScript(list,null,(first,st)=>{ const h={huddle:true,with:st&&typeof st.talk==='string'?st.talk:null,lookAt:st&&typeof st.lookAt==='string'?st.lookAt:null}; return first&&near&&near.length?[{approach:near},h]:h; }); }
+  else if((sid||opts.stage)&&Array.isArray(list)&&!JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v).includes('"gather"')) { const self=sceneSelfStaged(list),near=self?null:sceneSpeakers(list),ob=self?null:objPressLive();   // ob: the scene started at an object Tom pressed A on (item1)
+    list=stageScript(list,null,(first,st)=>{ const h={huddle:true,with:st&&typeof st.talk==='string'?st.talk:null,lookAt:st&&typeof st.lookAt==='string'?st.lookAt:null};
+      return first&&ob?[{around:{x:ob.x,y:ob.y,w:ob.w,h:ob.h},tom:[player.x,player.y],keepTom:true,auto:ob},h]:first&&near&&near.length?[{approach:near},h]:h; }); }
   stageZone=null; intro.sceneCast=null;
   if((sid||opts.stage)&&Array.isArray(list)) { intro.sceneCast=stageCast(list); list=[{clearout:true},...list]; }   // extras leave before anyone is placed (clearout1)
   intro.active=true; intro.phase='scene'; intro.cur=null; intro.fadeLock=false;

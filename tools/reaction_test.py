@@ -50,9 +50,25 @@ SNAP=r"""(boss)=>{ const P=a=>{ const p=position(a); return [Math.round(p.x*100)
   const ids=[{id:(typeof playerMember==='function'?playerMember():hero).id,a:player},...followers.filter(f=>!f.hidden&&(party.includes(f.member)||(typeof onBench==='function'&&onBench(f.member)))).map(f=>({id:f.member.id,a:f}))];
   const b=boss?(sceneActor(boss)||currentMap.npcs.find(n=>n.monster===boss)||null):null;
   return {who:dialog.name, idx:dialog.index, line:(dialog.pages&&dialog.pages[dialog.index])||'', map:currentMap.id, outside:!!currentMap.outside,
-    party:ids.map(o=>({id:o.id,pos:P(o.a),facing:o.a.facing,pose:o.a.scenePose?String(o.a.scenePose.f):null,hidden:!!o.a.hidden})),
+    party:ids.map(o=>({id:o.id,pos:P(o.a),facing:o.a.facing,pose:o.a.scenePose?String(o.a.scenePose.f):null,hidden:!!o.a.hidden,hid:!!(typeof huddleHidden==='function'&&huddleHidden(currentMap,Math.round(P(o.a)[0]),Math.round(P(o.a)[1]),new Map()))})),
     cam:(typeof camera!=='undefined'?[camera.x,camera.y,camera.zoom||camera.scale||null]:null),ppos:P(player),dock:(document.getElementById('dialog').getBoundingClientRect().top),npcs:currentMap.npcs.filter(n=>n.scenePose&&n.scenePose.emo).map(n=>[n.name,n.scenePose.f]),
     boss:b&&!b.hidden?{pos:P(b),name:b.name}:null};
+}"""
+OBJ=r"""(sel)=>{ const m=currentMap,o=m.objects.find(o=>o[sel]||o.name===sel||o.kind===sel); if(!o) return null;
+  const c=[]; for(let x=o.x;x<o.x+o.w;x++) { c.push([x,o.y+o.h,'up']); c.push([x,o.y-1,'down']); } for(let y=o.y;y<o.y+o.h;y++) { c.push([o.x-1,y,'right']); c.push([o.x+o.w,y,'left']); }
+  const busy=new Set(m.npcs.filter(n=>!n.hidden).map(n=>key(Math.round(n.x),Math.round(n.y))));
+  const open=(x,y)=>walkable(m,x,y)&&!m.portals.has(key(x,y))&&!busy.has(key(x,y));
+  let best=null;
+  for(const [x,y,f] of c) { if(!open(x,y)) continue;
+    // the longest walk-in of up to 7 steps that ends on this tile (breadth first, backwards)
+    const prev=new Map([[key(x,y),null]]); let q=[[x,y]],far=[x,y];
+    for(let d=0;d<7&&q.length;d++) { const nq=[]; for(const [a,b] of q) for(const [dx,dy] of [[0,1],[-1,0],[1,0],[0,-1]]) { const k=key(a+dx,b+dy); if(prev.has(k)||!open(a+dx,b+dy)) continue; prev.set(k,[a,b]); nq.push([a+dx,b+dy]); } if(nq.length) far=nq[0]; q=nq; }
+    const pts=[]; for(let p=far;p;p=prev.get(key(p[0],p[1]))) pts.push(p);
+    const cost=-pts.length+(f==='up'?0:2); if(!best||cost<best.cost) best={f,pts,cost}; }
+  if(!best) return {fail:'no open tile beside it',rect:[o.x,o.y,o.w,o.h]};
+  const st=best.pts[0]; player.x=st[0]; player.y=st[1]; player.move=null; placeFollowers(); camera.snap=true;
+  const dirs=[]; for(let i=1;i<best.pts.length;i++) dirs.push(directionTo(best.pts[i][0]-best.pts[i-1][0],best.pts[i][1]-best.pts[i-1][1]));
+  return {dirs,face:best.f,rect:[o.x,o.y,o.w,o.h],name:o.name,end:best.pts[best.pts.length-1]};
 }"""
 res={}
 with sync_playwright() as pw:
@@ -66,6 +82,16 @@ with sync_playwright() as pw:
         info=pg.evaluate(SETUP,C)
         for d in C.get('walk',[]):
             pg.evaluate("(d)=>{ movePlayer(d); }",d); pg.wait_for_timeout(260)
+        if C.get('obj'):   # item1: walk Tom up to an object (found by a property, its name or its kind) the way a player would, and press A on it
+            pg.evaluate("()=>{ for(const n of currentMap.npcs) if(n.monster&&!n.scripted) { n.hidden=true; n.x=-9; n.y=-9; } }")   # roaming monsters would start a fight on the way; the test is about the standing places
+            plan=pg.evaluate(OBJ,C['obj'])
+            if not plan or plan.get('fail'): print(C['name'],'NO OBJECT',plan,flush=True); pg.close(); res[C['name']]={'info':info,'snaps':[],'errs':['no object '+C['obj']]}; continue
+            if False: print(C['name'],'NO OBJECT',C['obj'],flush=True); pg.close(); res[C['name']]={'info':info,'snaps':[],'errs':['no object '+C['obj']]}; continue
+            for d in plan['dirs']:
+                for _ in range(40):
+                    if pg.evaluate("(d)=>!player.move&&movePlayer(d)",d): break
+                    pg.wait_for_timeout(60)
+            pg.wait_for_function("()=>!player.move",timeout=8000); pg.wait_for_timeout(500); pg.evaluate("(f)=>{ player.facing=f; objPressNote(); }",plan['face']); info['tgt']=pg.evaluate("()=>{ const t=facingTarget(); return t?[t.kind,t.value&&t.value.name]:null; }"); info['obj']=plan['rect']; info['press']=pg.evaluate("()=>!!objPressLive()"); info['at']=pg.evaluate("()=>[player.x,player.y,player.facing]"); info['want']=plan['end']
         pg.wait_for_timeout(300)
         snaps=[]; shots=[]; fins=[]
         for sc in C['scenes']:

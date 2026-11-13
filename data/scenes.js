@@ -342,7 +342,7 @@ SCENES.ch2Porch=[
 // 4. Tom's kitchen: feeding Bready Mercury. Through the window, the sky is purple.
 SCENES.ch2Starter=[
   {flag:'ch2-starter'},
-  {walk:'tom',to:routeTo('tom',8,5),speed:.22}, {face:'tom',dir:'right'},   // beside the kitchen island, where the jar lives
+  {around:[918/78.4,322/78.4],tom:[12,4]},   // everyone stands around the jar on the kitchen island (same point as drawHomeJar, engine/plate.js); Tom beside it at the island's right end
   {talk:'Tom',lines:['Hello, Bready Mercury. Did you miss me? You missed me.']},
   {call:()=>{ sfx.splat&&sfx.splat(); }},
   {talk:'Tom',lines:['Fifty grams of flour, fifty grams of water. Stir. Look at those bubbles.']},
@@ -1884,13 +1884,13 @@ SCENES.ch6Kitchen=[
   {flag:'ch6-tnb'},
   {join:'tnb',quiet:true},
   // TNB is already in the kitchen (he has a key), back to the door, studying the island, before Tom walks in.
-  {place:'tnb',at:[7,5],dir:'up'}, {show:'tnb'},
-  {walk:'tom',to:routeTo('tom',8,5),speed:.2}, {face:'tom',dir:'left'},
+  {place:'tnb',at:[10,5],dir:'up'}, {show:'tnb'},   // in front of the spot on the island where the jar stood (item1: they stand at the thing they talk about)
+  {walk:'tom',to:routeTo('tom',11,5),speed:.2}, {face:'tom',dir:'left'},
   {wait:.5}, {face:'tnb',dir:'right'}, {wait:.3},
   {talk:'TNB',lines:['Well, well, well...'],voice:[['tnb','greet',0,'Well, well, well...']]},
   ch4Kiss(),
   {talk:'TNB',lines:['Okay. Hi. Missed you. Don\'t panic. Look at the island.']},
-  {face:'tom',dir:'right'},
+  {around:[918/78.4,322/78.4],tom:[11,5],at:{tnb:[12,4]}},   // both turn to the spot on the island where the jar stood, and keep looking at it
   {talk:'Tom',lines:['...Where\'s Bready Mercury.']},
   {talk:'TNB',lines:['That\'s the thing. I came over to feed him, like you asked. The jar was gone. The window was open.','And there were tiny footprints in the flour. Four toes in front, five in back. I looked it up.']},
   {talk:'Tom',lines:['Bready Mercury is nine years old. He has flown Delta One. Twice.']},

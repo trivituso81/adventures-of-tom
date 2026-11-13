@@ -1,0 +1,330 @@
+[
+{
+"name": "ch4Rig",
+"ch": 4,
+"map": "stage7",
+"obj": "jbox",
+"scenes": [
+"ch4Rig"
+],
+"party": [
+"tom",
+"tnb",
+"nara"
+]
+},
+{
+"name": "ch4Snack",
+"ch": 4,
+"map": "studio",
+"obj": "crafty",
+"scenes": [
+"ch4Snack"
+],
+"party": [
+"tom",
+"tnb",
+"nara"
+]
+},
+{
+"name": "ch5Clocks",
+"ch": 5,
+"map": "school",
+"obj": "clock",
+"scenes": [
+"ch5Clocks"
+],
+"party": [
+"tom",
+"grace",
+"rose",
+"amy"
+]
+},
+{
+"name": "ch5Snack",
+"ch": 5,
+"map": "school",
+"obj": "fridge",
+"scenes": [
+"ch5Snack"
+],
+"party": [
+"tom",
+"grace",
+"rose",
+"amy"
+]
+},
+{
+"name": "ch6Dig_play",
+"ch": 6,
+"map": "oakpark",
+"obj": "dig",
+"scenes": [
+"ch6Dig_play"
+],
+"party": [
+"tom",
+"tnb",
+"nara"
+]
+},
+{
+"name": "ch6Door",
+"ch": 6,
+"map": "oakpark",
+"obj": "knock",
+"scenes": [
+"ch6Door"
+],
+"party": [
+"tom",
+"tnb",
+"nara"
+]
+},
+{
+"name": "ch6Fetch",
+"ch": 6,
+"map": "oakpark",
+"obj": "dogpark",
+"scenes": [
+"ch6Fetch"
+],
+"party": [
+"tom",
+"tnb",
+"nara"
+]
+},
+{
+"name": "ch6Board",
+"ch": 6,
+"map": "oak",
+"obj": "warboard",
+"scenes": [
+"ch6Board"
+],
+"party": [
+"tom",
+"tnb",
+"nara"
+]
+},
+{
+"name": "ch6Ladder",
+"ch": 6,
+"map": "oak",
+"obj": "bucket",
+"scenes": [
+"ch6Ladder"
+],
+"party": [
+"tom",
+"tnb",
+"nara"
+]
+},
+{
+"name": "ch7Door",
+"ch": 7,
+"map": "stacks",
+"obj": "catalog",
+"scenes": [
+"ch7Door"
+],
+"party": [
+"tom",
+"grace",
+"rose"
+]
+},
+{
+"name": "ch7Story",
+"ch": 7,
+"map": "stacks",
+"obj": "storytime",
+"scenes": [
+"ch7Story"
+],
+"party": [
+"tom",
+"grace",
+"rose"
+]
+},
+{
+"name": "ch8Motor",
+"ch": 8,
+"map": "carbarn",
+"obj": "ttmotor",
+"scenes": [
+"ch8Motor"
+],
+"party": [
+"tom",
+"tnb",
+"nara"
+]
+},
+{
+"name": "ch8Turn",
+"ch": 8,
+"map": "carbarn",
+"obj": "ttlever",
+"scenes": [
+"ch8Turn"
+],
+"party": [
+"tom",
+"tnb",
+"nara"
+]
+},
+{
+"name": "ch8Plate",
+"ch": 8,
+"map": "carbarn",
+"obj": "plate",
+"scenes": [
+"ch8Plate"
+],
+"party": [
+"tom",
+"tnb",
+"nara"
+]
+},
+{
+"name": "ch8Pail",
+"ch": 8,
+"map": "carbarn",
+"obj": "pail",
+"scenes": [
+"ch8Pail"
+],
+"party": [
+"tom",
+"tnb",
+"nara"
+]
+},
+{
+"name": "ch9Door",
+"ch": 9,
+"map": "moonclub",
+"obj": "mirror",
+"scenes": [
+"ch9Door"
+],
+"party": [
+"tom",
+"deedee",
+"boppy"
+]
+},
+{
+"name": "ch10Door",
+"ch": 10,
+"map": "terminal",
+"obj": "gatelock",
+"scenes": [
+"ch10Door"
+],
+"party": [
+"tom",
+"grace",
+"rose",
+"amy"
+]
+},
+{
+"name": "ch10Photo",
+"ch": 10,
+"map": "terminal",
+"obj": "photobooth",
+"scenes": [
+"ch10Photo"
+],
+"party": [
+"tom",
+"grace",
+"rose",
+"amy"
+]
+},
+{
+"name": "ch11Lost",
+"ch": 11,
+"map": "concourse",
+"obj": "lostfound",
+"scenes": [
+"ch11Lost"
+],
+"party": [
+"tom",
+"grace",
+"rose",
+"amy"
+]
+},
+{
+"name": "ch19Mem",
+"ch": 19,
+"map": "memgrace",
+"obj": "dlmem",
+"scenes": [
+"!playScene('ch19Mem',{ctx:{id:objPress.o.mem}})"
+],
+"party": [
+"tom",
+"grace",
+"rose",
+"amy"
+],
+"bench": [
+"tnb",
+"nara"
+]
+},
+{
+"name": "ch19Keep",
+"ch": 19,
+"map": "memgrace",
+"obj": "dlkeep",
+"scenes": [
+"!playScene('ch19Keep',{ctx:{who:objPress.o.keep}})"
+],
+"party": [
+"tom",
+"grace",
+"rose",
+"amy"
+],
+"bench": [
+"tnb",
+"nara"
+]
+},
+{
+"name": "ch20Door",
+"ch": 20,
+"map": "stillcore",
+"obj": "cedoor",
+"scenes": [
+"!playScene('ch20Door',{ctx:{who:objPress.o.who}})"
+],
+"party": [
+"tom",
+"grace",
+"rose",
+"amy"
+],
+"bench": [
+"tnb",
+"nara"
+]
+}
+]
