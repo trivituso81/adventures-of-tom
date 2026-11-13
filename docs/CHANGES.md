@@ -1,3 +1,8 @@
+## 2026-11-12 (hintup1): the interaction prompt sits above the A, menu and save buttons on the iPhone Duo and tablets, sideways (no tag, index.html is always fetched)
+- Tom 23:19, screenshot: the prompt ("A \u00b7 Talk to Marisol") overlapped the A, menu and save buttons at the bottom left; he asked for it just above them.
+- Fact: after duobtn1 the buttons sit in a row on A's baseline (bottom 20 x `--ts`, 46 x `--ts` tall, label under A), and the prompt rule `html.tablet.landscape #hint` still used bottom 24 x `--ts`, left 76 x `--ts`.
+- Changed that one rule in index.html: bottom 82 x `--ts`, left 73 x `--ts` (A's left edge). Measured at Duo 951 x 648: prompt bottom 546 px, buttons top 566 px, 20 px clear. Phone layouts and portrait unchanged.
+- Not done: not played on a phone; a prompt wider than the screen is still capped by the existing max-width.
 ## 2026-11-12 (near1): the party walks up to the person a scene is about, and the two walkers on the bench are staged too (tag near1)
 - Tom 22:22, screenshot of Dona Carmen's thaw (chapter 12): "why does the party stay so far away? ... I just want them to be close in a normal way, and I want that to apply to everywhere else in the game where there are situations exactly similar to this."
 - Fact (cause 1): `ch12Carmen` starts the moment Tom steps in the pupuseria door, seven tiles from Carmen, and nothing in the scene walks him over. `{huddle}` only gathers the party where Tom already stands.
