@@ -384,6 +384,9 @@ function stageFocus(f) {
   const a=sceneActor(f)||currentMap.npcs.find(n=>n.monster===f)||null;
   return a?stageFocus(a):null;
 }
+// Everyone who walks with Tom is staged: the fighting four and the people on the bench, who follow him too (engine/bench.js). Before near1 the
+// benched walkers were left out, so in Part 2 they stayed in the walking line while the other four formed up (Tom 2026-11-12).
+const stageWalks=f=>!f.hidden&&!f.seat&&(party.includes(f.member)||(typeof onBench==='function'&&onBench(f.member)));
 const stageApart=(a,b,rows=3)=>Math.abs(a.x-b.x)>=1||Math.abs(a.y-b.y)>=rows;   // never the same column within two rows
 const stagePos=a=>{ const p=position(a); return {x:Math.round(p.x),y:Math.round(p.y)}; };
 // A monster's drawn footprint on the map, in tiles (bossbox1, Tom 2026-11-12: "never overlapping the boss"). A big boss is drawn several
@@ -457,7 +460,7 @@ const faceWant=(a,focus)=>{ const p=position(a),ddx=focus.x-p.x,ddy=focus.y-p.y;
 function gatherStep(o) {
   return {start(){
       this.focus=stageFocus(o.gather); this.movers=[]; this.tom=null;
-      const all=followers.filter(f=>!f.hidden&&party.includes(f.member)&&!f.seat);
+      const all=followers.filter(stageWalks);
       const isFixed=f=>f.stagePlaced||f.scenePose||f.scr;
       const movers=all.filter(f=>!isFixed(f));
       // bossbox1: the boss's picture is off limits, and the party stands on its left. Tom walks there when he stands on the boss, or (first
@@ -532,7 +535,7 @@ function huddleHidden(map,x,y,memo) {
 const huddleBadTile=(map,x,y,memo)=>x<=0||y<=0||x>=map.w-1||y>=map.h-2||!walkable(map,x,y)||huddleHidden(map,x,y,memo)||(memo.boxes&&stageInBox(memo.boxes,x,y));   // memo.boxes: monsters' drawn footprints (bossbox1)
 function huddleGroup(withName,focus) {
   const tp=stagePos(player);
-  const roster=[player,...followers.filter(f=>!f.hidden&&party.includes(f.member)&&!f.seat&&Math.hypot(stagePos(f).x-tp.x,stagePos(f).y-tp.y)<=7)];
+  const roster=[player,...followers.filter(f=>stageWalks(f)&&Math.hypot(stagePos(f).x-tp.x,stagePos(f).y-tp.y)<=7)];
   const others=[];
   const add=n=>{ if(n&&!n.hidden&&!roster.includes(n)&&!others.includes(n)&&!followers.includes(n)) others.push(n); };
   // A posed NPC (`still`, data/scenes.js ch9Pose) near Tom is in the conversation too: held, so it turns toward the group for the scene and
@@ -623,6 +626,7 @@ function huddleLayout(g,clr,tomMoves,memo,keep) {
     { const fx=taken.reduce((a,t)=>a+t.x,0)/taken.length,fy=taken.reduce((a,t)=>a+t.y,0)/taken.length,hx=Math.round(fx),hy=Math.round(fy),here=clr.at(hx,hy);
       let bst=0; for(let y=hy-5;y<=hy+5;y++) for(let x=hx-5;x<=hx+5;x++) bst=Math.max(bst,clr.at(x,y));
       if(bst>=2&&here<=.5*bst&&here<=1) cost+=2;   // the group's middle would be against a wall: keep looking
+      if(intro.nearBox&&g.others.includes(intro.nearBox.a)) cost+=.8*Math.abs(fx-intro.nearBox.x);   // walked up to someone: stand in front of them, not off to one side (near1)
       if(!hudTight([...taken,...npcs.filter(n=>!fp.some(t=>t.x===n.x&&t.y===n.y))],j=>j<taken.length&&rosterAt(j))) cost+=8; }   // standing together matters most (close1)
     // cheapest assignment of slots to movers by walking distance (Tom is the least willing to move)
     let bestA=null,ba=1e9;
@@ -645,6 +649,9 @@ function huddleStep(o) {
       if(!o.focus) { const named=typeof o.with==='string'?sceneActor(o.with):null,mon=(named&&named.monster&&g.others.includes(named))?named:g.others.find(a=>a.monster);
         if(mon) { const seen=intro.monGather||(intro.monGather=new Set()); this.sub=gatherStep({gather:mon,check:seen.has(mon),left:false}); seen.add(mon); this.sub.start(); return; } }
       const clr=huddleClear(currentMap),memo=new Map(); memo.boxes=stageBoxes(null);
+      if(intro.nearBox) for(const b of intro.nearBoxes) if(currentMap.npcs.includes(b.a)&&!b.a.hidden&&stagePos(b.a).x===b.x&&stagePos(b.a).y===b.y) memo.boxes.push(b);   // the person {approach} walked up to keeps their room (near1)
+      if(!g.lookAt&&memo.boxes.includes(intro.nearBox)&&g.others.includes(intro.nearBox.a)) g.lookAt=intro.nearBox.a;   // they came over to this person: they look at them
+      if(g.lookAt&&g.lookAt===(intro.nearBox&&intro.nearBox.a)) { huddleTurn(g); }
       const fails=huddleFails(g,clr,memo);
       if(!fails.size) return;
       if(o.focus) { const fa=stageFocus(o.focus); if(fa&&fa.actor&&fa.seen&&!g.lookAt) g.lookAt=fa.actor; }   // boss scenes: {gather} owns the places (left of the boss, off its picture); here people only turn, toward the boss (bossbox1)
@@ -668,6 +675,72 @@ function huddleStep(o) {
       return done; }};
 }
 SCENE_OPS.huddle=huddleStep;
+// {approach:names} (near1, Tom 2026-11-12: "why does the party stay so far away? ... I just want them to be close in a normal way", the
+// Dona Carmen thaw, which starts at the pupuseria door seven tiles from her). playScene puts one before the first line of every scene that
+// has no staging of its own (no walk, place, cam or zoom step) and is not a boss scene. When the first person on this map who speaks in the
+// scene stands more than three tiles from Tom, Tom walks to the nearest open tile next to them (never overlapping: stageApart) and the
+// party forms up around him there; the {huddle} before each line then keeps them together. Monsters, hidden people and seated people are
+// never approached, and nothing happens when there is no route. Nobody in the party stands on the picture of anyone in the room (the three
+// columns around each person stay clear down to two rows in front of them), and the party faces the person they walked up to. A scene can also name its subject itself: {approach:'Dona Carmen'}.
+const APPROACH_FAR=3,APPROACH_MAX=14;
+function approachSubject(names) {
+  const tp=stagePos(player);
+  for(const nm of [].concat(names||[])) { const n=sceneActor(nm);
+    if(!n||n===player||followers.includes(n)||!currentMap.npcs.includes(n)||n.hidden||n.monster||n.seat||n.scenePose||n.scr) continue;
+    const p=stagePos(n),d=Math.max(Math.abs(p.x-tp.x),Math.abs(p.y-tp.y));
+    return d>APPROACH_FAR&&d<=APPROACH_MAX?n:null; }   // the first speaker who is here decides: close already (or out of reach) means stay
+  return null;
+}
+function approachSpot(n,clr,memo) {
+  const map=currentMap,tp=stagePos(player),np=stagePos(n);
+  const busy=currentMap.npcs.filter(m=>!m.hidden&&!followers.includes(m)).map(stagePos);
+  let best=null,bc=1e9;
+  for(let y=np.y-3;y<=np.y+3;y++) for(let x=np.x-2;x<=np.x+2;x++) {
+    if(huddleBadTile(map,x,y,memo)||map.portals.has(key(x,y))||hudNear(x-np.x,y-np.y)>1.6) continue;
+    if(!busy.every(b=>stageApart(b,{x,y}))) continue;
+    const path=(x===tp.x&&y===tp.y)?[]:findPath(map,player,{x,y}); if(!path.length&&(x!==tp.x||y!==tp.y)) continue;
+    let c=path.length+(clr.at(x,y)<2?1.5:0);
+    if((x-np.x)*(tp.x-np.x)+(y-np.y)*(tp.y-np.y)<0) c+=6;   // Tom stops on the side he came from, not behind the person
+    if(c<bc) { bc=c; best={x,y,path}; } }
+  return best;
+}
+function approachStep(o) {
+  return {start(){
+      this.moves=[]; this.g=null;
+      if(player.stagePlaced||player.scenePose||player.scr||followers.some(f=>f.stagePlaced)) return;
+      const n=approachSubject(o.approach); if(!n) return;
+      const clr=huddleClear(currentMap),memo=new Map(); memo.boxes=stageBoxes(null);
+      const mk=a=>({x:stagePos(a).x,y:stagePos(a).y,hw:.5,ht:2.3,a}),box=mk(n);
+      const boxes=[box,...currentMap.npcs.filter(m=>m!==n&&!m.hidden&&!m.monster&&!followers.includes(m)).map(mk)]; memo.boxes.push(...boxes);   // nobody stands on the person's picture: the three columns around them stay clear down to two rows in front
+      const spot=approachSpot(n,clr,memo); if(!spot) return;
+      intro.nearBox=box; intro.nearBoxes=boxes;
+      const was={x:player.x,y:player.y,move:player.move};
+      player.move=null; player.x=spot.x; player.y=spot.y;   // lay the party out as if Tom already stood there
+      const g=huddleGroup(n.name,null),L=huddleLayout(g,clr,false,memo,false);
+      player.x=was.x; player.y=was.y; player.move=was.move;
+      if(!L.slots||!L.tight) { intro.nearBox=null; intro.nearBoxes=null; return; }   // no room for everyone beside this person: stay, the {huddle} forms the group where Tom is
+      this.g=g; this.moves.push({a:player,path:spot.path,i:0});
+      L.movers.forEach((a,k)=>{ if(a===player) return; const t=L.slots[k],p=stagePos(a); a.x=p.x; a.y=p.y; a.move=null; a.lag=0; if(a.stageFaced!==undefined) a.stageFaced=false;
+        let path=(t.x===p.x&&t.y===p.y)?[]:findPath(currentMap,a,t);
+        if(!path.length&&(t.x!==p.x||t.y!==p.y)) path=[{x:t.x,y:t.y}];
+        this.moves.push({a,path,i:0}); });
+    },
+    update(dt){ let done=true;
+      for(const m of this.moves) { const a=m.a;
+        if(a.move&&!advanceMove(a,dt)) { done=false; continue; }
+        if(m.i<m.path.length) { const t=m.path[m.i++]; a.facing=directionTo(t.x-a.x,t.y-a.y);
+          a.move={fx:a.x,fy:a.y,tx:t.x,ty:t.y,elapsed:0,duration:.15}; done=false; } }
+      if(done&&this.g) { this.g.lookAt=intro.nearBox&&intro.nearBox.a; huddleTurn(this.g); }
+      return done; }};
+}
+SCENE_OPS.approach=approachStep;
+// Who speaks in a scene, in order (also inside if / seq branches): the names {approach} tries.
+function sceneSpeakers(list) {
+  const out=[]; const walk=x=>{ if(!x||typeof x!=='object'||typeof x.start==='function') return; if(Array.isArray(x)) return x.forEach(walk);
+    if(typeof x.talk==='string'&&!out.includes(x.talk)) out.push(x.talk); for(const k of ['then','else','seq','all']) if(x[k]) walk(x[k]); };
+  walk(list); return out;
+}
+const sceneSelfStaged=list=>/"(walk|place|cam|zoom|approach)":/.test(JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v));
 // Every boss lead-in, fight (and retry) and after scene, with whom the party faces. playScene inserts {gather} just before the
 // scene's first line of dialogue (after any walk-in, spawn or placement steps), unless the scene has its own {gather}.
 const BOSS_STAGE={
@@ -719,10 +792,11 @@ function playScene(script,opts={}) {
   if(typeof script==='string') script=SCENES[script];
   let list=typeof script==='function'?script(opts.ctx||{}):script;
   for(const f of [...followers,player]) { f.stagePlaced=false; f.stageFaced=false; }
-  intro.monGather=null;
+  intro.monGather=null; intro.nearBox=null; intro.nearBoxes=null;
   if(sid&&BOSS_STAGE[sid]&&Array.isArray(list)) { const fc=BOSS_STAGE[sid]; list=stageScript(list,fc,(first,st)=>[first?{gather:fc}:{gather:fc,check:true},{huddle:true,focus:fc,with:st&&typeof st.talk==='string'?st.talk:null}]); }
   // opts.stage: a wrapper script (playScene(()=>[...])) that should be staged like a SCENES id (facing1: the Part 2 opening).
-  else if((sid||opts.stage)&&Array.isArray(list)&&!JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v).includes('"gather"')) list=stageScript(list,null,(first,st)=>({huddle:true,with:st&&typeof st.talk==='string'?st.talk:null,lookAt:st&&typeof st.lookAt==='string'?st.lookAt:null}));
+  else if((sid||opts.stage)&&Array.isArray(list)&&!JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v).includes('"gather"')) { const near=sceneSelfStaged(list)?null:sceneSpeakers(list);
+    list=stageScript(list,null,(first,st)=>{ const h={huddle:true,with:st&&typeof st.talk==='string'?st.talk:null,lookAt:st&&typeof st.lookAt==='string'?st.lookAt:null}; return first&&near&&near.length?[{approach:near},h]:h; }); }
   intro.active=true; intro.phase='scene'; intro.cur=null; intro.fadeLock=false;
   intro.fade=opts.fade||0;
   intro.steps=compileScene(list);

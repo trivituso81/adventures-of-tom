@@ -34,6 +34,7 @@ SETUP=r"""(C)=>{ const L=window.__LE; splash.active=false; document.getElementBy
   for(const m of extras()) recruitLeave(m,true);
   const wantGirls=C.party.includes('grace'); if(girlsAway()===wantGirls) setGirlsAway(!wantGirls);
   for(const id of C.party) { if(['tom','grace','rose'].includes(id)) continue; const m=MEMBERS()[id]; if(m) forceJoin(m,true); }
+  for(const id of C.bench||[]) { const m=MEMBERS()[id]; if(m&&typeof benchAdd==='function') benchAdd(m); }   // people who walk along but sit out fights (near1)
   window.storyTriggers=()=>false;
   // battles win at once
   SCENE_OPS.battle=o=>S.call(()=>{ let m=typeof o.battle==='function'?o.battle():typeof o.battle==='object'?o.battle:findMonster(o.battle);
@@ -46,7 +47,7 @@ SETUP=r"""(C)=>{ const L=window.__LE; splash.active=false; document.getElementBy
   return {party:party.map(p=>p.id),map:currentMap.id};
 }"""
 SNAP=r"""(boss)=>{ const P=a=>{ const p=position(a); return [Math.round(p.x*100)/100,Math.round(p.y*100)/100]; };
-  const ids=[{id:(typeof playerMember==='function'?playerMember():hero).id,a:player},...followers.filter(f=>!f.hidden&&party.includes(f.member)).map(f=>({id:f.member.id,a:f}))];
+  const ids=[{id:(typeof playerMember==='function'?playerMember():hero).id,a:player},...followers.filter(f=>!f.hidden&&(party.includes(f.member)||(typeof onBench==='function'&&onBench(f.member)))).map(f=>({id:f.member.id,a:f}))];
   const b=boss?(sceneActor(boss)||currentMap.npcs.find(n=>n.monster===boss)||null):null;
   return {who:dialog.name, idx:dialog.index, line:(dialog.pages&&dialog.pages[dialog.index])||'', map:currentMap.id, outside:!!currentMap.outside,
     party:ids.map(o=>({id:o.id,pos:P(o.a),facing:o.a.facing,pose:o.a.scenePose?String(o.a.scenePose.f):null,hidden:!!o.a.hidden})),

@@ -40,6 +40,7 @@ SETUP=r"""(C)=>{ const L=window.__LE; splash.active=false; document.getElementBy
   for(const m of extras()) recruitLeave(m,true);
   const wantGirls=C.party.includes('grace'); if(girlsAway()===wantGirls) setGirlsAway(!wantGirls);
   for(const id of C.party) { if(['tom','grace','rose'].includes(id)) continue; const m=MEMBERS()[id]; if(m) forceJoin(m,true); }
+  for(const id of C.bench||[]) { const m=MEMBERS()[id]; if(m&&typeof benchAdd==='function') benchAdd(m); }   // people who walk along but sit out fights (near1)
   window.storyTriggers=()=>false;
   SCENE_OPS.battle=o=>S.call(()=>{ let m=typeof o.battle==='function'?o.battle():typeof o.battle==='object'?o.battle:findMonster(o.battle);
     const id=(m&&m.monster)||o.battle; setFlag('battle:'+id,'win'); });
@@ -55,7 +56,7 @@ SNAP=r"""()=>{ const P=a=>{ const p=position(a); return [Math.round(p.x*100)/100
   const memo=new Map(),H=a=>{ const q=position(a); return typeof huddleHidden==='function'?huddleHidden(currentMap,Math.round(q.x),Math.round(q.y),memo):false; };
   const posed=a=>!!((a.scenePose&&!a.scenePose.emo)||a.scr);   // a mood pose is not choreography: the person must still face the group (close1)
   const people=[{id:'tom',kind:'party',pos:P(player),facing:player.facing,posed:posed(player),placed:!!player.stagePlaced,hid:H(player)}];
-  for(const f of followers) if(!f.hidden&&party.includes(f.member)&&!f.seat) people.push({id:f.member.id,kind:'party',pos:P(f),facing:f.facing,posed:posed(f),placed:!!f.stagePlaced,hid:H(f)});
+  for(const f of followers) if(!f.hidden&&(party.includes(f.member)||(typeof onBench==='function'&&onBench(f.member)))&&!f.seat) people.push({id:f.member.id,kind:'party',pos:P(f),facing:f.facing,posed:posed(f),placed:!!f.stagePlaced,hid:H(f)});
   const pp=P(player);
   for(const n of currentMap.npcs){ if(n.hidden||followers.includes(n)) continue; const q=P(n);
     if(n.monster&&!(n.held||n.scripted||n.name===dialog.name)) { if(Math.hypot(q[0]-pp[0],q[1]-pp[1])<=10) people.push({id:n.name||n.monster,kind:'monster',pos:q,facing:n.facing,held:false,posed:true}); continue; }
