@@ -18653,8 +18653,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or several states.\n\nATTACHED IMAGE\n1) The finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE PICTURE\nThe top of a small round brass pedestal, seen from slightly above and close. It is a close-up, straight-on picture that fills the whole square. It is the still background of a close-up screen: the game will lay moving pieces on top of it, so it shows ONLY the fixed part and nothing that can change.\n- The polished brass top fills most of the picture, slightly worn and dusty, with a thin raised rim all round.\n- In the exact middle is ONE soft round dent, shallow and smooth, about one third of the width of the picture, with a slightly darker bronze inside so it clearly reads as a hollow waiting for something small to be set in it.\n- Around the pedestal, dim dusty light and soft shadow of an old post office sorting room: only a blurred dark wood floor and faint motes of dust in the air at the edges.\n- The dent is completely EMPTY: nothing in it, nothing on the pedestal.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- No people, no hands, no faces, no characters, no creatures, no frame or border around the picture.\n- Family friendly for children aged 6 and up.\n- Dim, soft, dusty light from the upper left, just enough to catch the brass rim; the rest of the picture is shadowy.\n- No words, letters or numbers anywhere unless the description above says to paint them."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/closeup-ch19-keepsakes-v1.png",
+     "date": "2026-11-13",
+     "from": "v1",
+     "at": 1794536025465
+    }
+   ],
    "rejects": [],
    "id": "closeup-ch19-keepsakes",
    "tab": "Props",
