@@ -11,8 +11,8 @@ import os, sys, json
 import numpy as np
 from PIL import Image
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-PUPIL_SHARE = 0.30   # pupil spacing as a share of the square, measured on the baked cast portraits (Tom .304, Grace .288, Amy .299, Deedee .302, Boppy .295, TNB .266)
-EYE_AT = 0.54    # eye line, share of the square from the top (same measurement: .51 to .56)
+PUPIL_SHARE = 0.22   # pupil spacing as a share of the square, measured on the baked cast portraits (Tom .304, Grace .288, Amy .299, Deedee .302, Boppy .295, TNB .266)
+EYE_AT = 0.47    # eye line, share of the square from the top (same measurement: .51 to .56)
 # id: (left pupil x, right pupil x, eye line y) in hero pixels. Found by eye on a grid, then snapped to the iris with a dark-blob search (same search as on the cast).
 FACE = {
     'pip': (450, 559, 271),
