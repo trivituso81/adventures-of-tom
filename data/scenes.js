@@ -2615,8 +2615,7 @@ function ch7StacksDoor(o) {
   beginTransition({kind:'edge',to:'stacks',spawn:{x:1,y:10},facing:'right'});
   return true;
 }
-// The Reading Room doors: the catalog lock wants a three-letter password (the gold letters, in card order).
-const CH7_WORDS=['HHS','SHH','HSH','BOO'];
+// The Reading Room doors: the catalog lock wants a three-letter password (the gold letters, in card order). The close-up is data/closeup-ch7.js.
 function ch7Catalog(o) {
   if(STORY.mode!=='full'||STORY.chapter!==7||!flag('ch7-stacks')||flag('ch7-door')) return false;
   if(!flag('ch7-cards')) {
@@ -2625,14 +2624,7 @@ function ch7Catalog(o) {
       'Grace: \"We need the password, Tata. '+(n?'We have '+n+' of 3 catalog cards.':'Page said somebody down here knows it. Fiction, Nonfiction, Picture Books.')+'\"']);
     return true;
   }
-  openChoice(o.name,['Three letter wheels on the catalog lock. Click, click, click.','What does Tom spell?'],
-    CH7_WORDS.map(w=>({label:w==='BOO'?'BOO (Rose’s idea)':w,fn:()=>{
-      if(w==='SHH') { playScene('ch7Door'); return; }
-      sfx.nope&&sfx.nope();
-      if(w==='BOO') { openDialog('Rose',['BOO!','...It didn\'t work. It SHOULD have worked. Boo always works.']); return; }
-      openDialog('Grace',[pick(['Card one first, Tata. Then card two. Then card three.','The cards are numbered. One, two, three. That\'s the order.','Wrong order. Card ONE is the first letter.'])]);
-    }})));
-  return true;
+  return ch7Closeup();
 }
 // Story time: pick the book Rose wants (Heart-Trace).
 const CH7_BOOKS=[

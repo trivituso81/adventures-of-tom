@@ -4,7 +4,8 @@
 //
 // A close-up is a DEF in CLOSEUP_DEFS plus a hooks object, so a new chapter supplies only art and a short script:
 //   def  = { id, ready, bg:'art/closeup/x.webp', v:'tag', slots:[{x,y,r}] (0..1 of the plate, r = radius as a share of plate width),
-//            items:[{id,label,img}], order:[item id for slot 0, 1, ...], caption:(k,n)=>string }
+//            items:[{id,label,img,group?}], order:[item id (or group) for slot 0, 1, ...], caption:(k,n)=>string }
+//   group: optional. Items that are interchangeable (two identical catalog cards) share a group name; order lists the group name, so either one is right.
 //   hooks= { onRight(k,item), onWrong(k,item) (the game shows its hint here), onDone(), onLeave() }
 // `ready` stays false until the painted art is installed, so nothing ships with placeholder art (closeupOpen returns false and the caller
 // keeps whatever it did before). Mode today: ORDERED PLACEMENT (the player must put the items in the right order, one per slot).
@@ -160,7 +161,7 @@ function cuSlotRect(k) { const s=closeup.def.slots[k],d=s.r*2*closeup.S; return 
 function closeupPick(ix) {
   if(!closeup.active||closeup.busy||(typeof dialog!=='undefined'&&dialog.active)) return;
   if(closeup.placed.some(p=>p.ix===ix)) return;
-  const def=closeup.def,k=closeup.placed.length,item=def.items[ix],right=def.order[k]===item.id,n=def.slots.length;
+  const def=closeup.def,k=closeup.placed.length,item=def.items[ix],right=def.order[k]===(item.group||item.id),n=def.slots.length;
   closeup.busy=true; closeupSel(ix,true); closeup.coins[ix].classList.add('used'); closeup.coins[ix].classList.remove('sel');
   if(typeof sfx!=='undefined') sfx.select();
   cuFly(ix,closeup.home[ix],cuSlotRect(k),f=>{
