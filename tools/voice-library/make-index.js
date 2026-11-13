@@ -109,6 +109,12 @@ for(const ch in LINES) if(!voices['battle|'+ch]&&DC.voices[ch]) vset('battle',ch
 // No voice direction at all (89 put a 20-word one here and takes doubled and tripled the phrase, see CHANGES 90): each line's own short tags carry the acting.
 for(const k of ['battle|deedee','dialog|deedee']){ const v=voices[k]; if(!v) continue;
   v.voice_id='nh4f8rul91SCFqbXpyM0'; v.direction=''; }
+// Recast townsfolk (Tom, 2026-11-12 18:30: "i can't do any new voices"). Bean, Pip, Moss, Dot, Page and Kit were given their own designed voices
+// that do not exist. Each now uses the ElevenLabs id of an existing voice named by `from` in data/dialog-cast.js; the pitch effect `fx` is applied
+// when clips are merged (merge-local.js), and the written scripts carry the acting (scripts/dialogue-scripts-recast1.json). No direction on the voice (long ones doubled phrases).
+for(const id in CAST.voices){ const cv=CAST.voices[id]; if(!cv.from) continue;
+  const src=voices['dialog|'+cv.from]; if(!src||!src.voice_id){ console.log('WARNING recast voice',id,'has no source voice',cv.from); continue; }
+  voices['dialog|'+id]=Object.assign({},src,{direction:'',fallback_ids:undefined}); }
 // Narrator (Tom, 2026-11-03): narration boxes use Mr. Washington's ElevenLabs voice (no free voice slot), until a baked file carries its own.
 if(!voices['dialog|narrator']&&voices['dialog|washington']) voices['dialog|narrator']=Object.assign({},voices['dialog|washington']);
 // Narrator delivery (Tom, 2026-11-03): theatrical storyteller, lively pace, not slow. Same voice id; only the direction changes.

@@ -1,0 +1,418 @@
+{
+ "tag": "20261112",
+ "lines": [
+  {
+   "voice": "pipkid",
+   "speaker": "Pip",
+   "text": "I'm taking my pet rock for a walk.",
+   "ctx": "",
+   "script": "[earnest, proud] I'm taking my pet rock for a walk."
+  },
+  {
+   "voice": "pipkid",
+   "speaker": "Pip",
+   "text": "He's shy. Please don't make eye contact.",
+   "ctx": "",
+   "script": "[whispering, protective] He's shy. Please don't make eye contact."
+  },
+  {
+   "voice": "pipkid",
+   "speaker": "Pip",
+   "text": "Excellent. He's already learned 'stay'.",
+   "ctx": "",
+   "script": "[delighted] Excellent. [deadpan, proud] He's already learned 'stay'."
+  },
+  {
+   "voice": "pipkid",
+   "speaker": "Pip",
+   "text": "My rock says happy birthday. He's on the counter. Please don't frost him.",
+   "ctx": "",
+   "script": "[warm, sincere] My rock says happy birthday. [gently] He's on the counter. Please don't frost him."
+  },
+  {
+   "voice": "pipkid",
+   "speaker": "Pip",
+   "text": "Can my rock come? He's never been to a party.",
+   "ctx": "",
+   "script": "[hopeful] Can my rock come? [quietly] He's never been to a party."
+  },
+  {
+   "voice": "pipkid",
+   "speaker": "Pip",
+   "text": "He gets nervous around cake. He'll be fine. He's a rock.",
+   "ctx": "",
+   "script": "[confiding] He gets nervous around cake. [deadpan] He'll be fine. He's a rock."
+  },
+  {
+   "voice": "pipkid",
+   "speaker": "Pip",
+   "text": "Then we'll be there. Both of us. He'll bring a gift. It's a smaller rock.",
+   "ctx": "",
+   "script": "[happy, earnest] Then we'll be there. Both of us. [deadpan, proud] He'll bring a gift. It's a smaller rock."
+  },
+  {
+   "voice": "mosskid",
+   "speaker": "Moss",
+   "text": "I asked a tree for directions.",
+   "ctx": "",
+   "script": "[dreamy, slow] I asked a tree for directions."
+  },
+  {
+   "voice": "mosskid",
+   "speaker": "Moss",
+   "text": "It said nothing. Very mysterious.",
+   "ctx": "",
+   "script": "[slow, thoughtful] It said nothing. [dreamy] Very mysterious."
+  },
+  {
+   "voice": "mosskid",
+   "speaker": "Moss",
+   "text": "I think I'm barking up the wrong tree.",
+   "ctx": "",
+   "script": "[dreamy, slow, quietly pleased with himself] I think I'm barking up the wrong tree."
+  },
+  {
+   "voice": "mosskid",
+   "speaker": "Moss",
+   "text": "I brought a tree. A small one. It said it wanted to come.",
+   "ctx": "",
+   "script": "[sleepy, matter-of-fact] I brought a tree. A small one. [dreamy] It said it wanted to come."
+  },
+  {
+   "voice": "mosskid",
+   "speaker": "Moss",
+   "text": "I asked the tree if I should go.",
+   "ctx": "",
+   "script": "[dreamy] I asked the tree if I should go."
+  },
+  {
+   "voice": "mosskid",
+   "speaker": "Moss",
+   "text": "It said nothing. That means yes. Trees are very supportive.",
+   "ctx": "",
+   "script": "[slow, serene] It said nothing. That means yes. [pleased] Trees are very supportive."
+  },
+  {
+   "voice": "mosskid",
+   "speaker": "Moss",
+   "text": "Also, the tree says a freezer went north this morning. Humming. It wasn't happy.",
+   "ctx": "",
+   "script": "[dreamy, concerned] Also, the tree says a freezer went north this morning. Humming. [quiet, sad] It wasn't happy."
+  },
+  {
+   "voice": "mosskid",
+   "speaker": "Moss",
+   "text": "I already did. It said nothing. Very gracious.",
+   "ctx": "",
+   "script": "[sleepy, content] I already did. It said nothing. [pleased] Very gracious."
+  },
+  {
+   "voice": "dotkid",
+   "speaker": "Dot",
+   "text": "Twelve people, one duck, one cow. I counted twice. The freezer counts as a person.",
+   "ctx": "",
+   "script": "[crisp, businesslike] Twelve people, one duck, one cow. I counted twice. [deadpan] The freezer counts as a person."
+  },
+  {
+   "voice": "dotkid",
+   "speaker": "Dot",
+   "text": "Nine candles, one breath. I counted. Perfect score.",
+   "ctx": "",
+   "script": "[proud, crisp] Nine candles, one breath. I counted. [satisfied] Perfect score."
+  },
+  {
+   "voice": "dotkid",
+   "speaker": "Dot",
+   "text": "Nine years. Nine scoops. Nine candles. That's twenty-seven nines. I'll be there.",
+   "ctx": "",
+   "script": "[brisk, pleased] Nine years. Nine scoops. Nine candles. That's twenty-seven nines. [crisp] I'll be there."
+  },
+  {
+   "voice": "dotkid",
+   "speaker": "Dot",
+   "text": "I'll count the guests. Somebody has to.",
+   "ctx": "",
+   "script": "[crisp, matter-of-fact] I'll count the guests. Somebody has to."
+  },
+  {
+   "voice": "dotkid",
+   "speaker": "Dot",
+   "text": "One duck. Counted.",
+   "ctx": "",
+   "script": "[crisp, satisfied] One duck. Counted."
+  },
+  {
+   "voice": "dotkid",
+   "speaker": "Dot",
+   "text": "Ten doors and THREE gaps in the trees now. Somebody opened one by the school.",
+   "ctx": "",
+   "script": "[alarmed, crisp] Ten doors and THREE gaps in the trees now. [indignant] Somebody opened one by the school."
+  },
+  {
+   "voice": "dotkid",
+   "speaker": "Dot",
+   "text": "I had to start all over. I'm at four hundred and six.",
+   "ctx": "",
+   "script": "[flat, deflated] I had to start all over. I'm at four hundred and six."
+  },
+  {
+   "voice": "dotkid",
+   "speaker": "Dot",
+   "text": "You got the tin back? Ten doors, two gaps, one pie tin. All accounted for.",
+   "ctx": "",
+   "script": "[crisp, relieved] You got the tin back? [satisfied] Ten doors, two gaps, one pie tin. All accounted for."
+  },
+  {
+   "voice": "dotkid",
+   "speaker": "Dot",
+   "text": "A mud blob ran through the Square with a pie tin. One blob. One tin. I counted.",
+   "ctx": "",
+   "script": "[precise, amazed] A mud blob ran through the Square with a pie tin. [crisp] One blob. One tin. I counted."
+  },
+  {
+   "voice": "dotkid",
+   "speaker": "Dot",
+   "text": "It went north. Into the gap in the trees. Gap number one.",
+   "ctx": "",
+   "script": "[precise, pointing] It went north. Into the gap in the trees. Gap number one."
+  },
+  {
+   "voice": "dotkid",
+   "speaker": "Dot",
+   "text": "This town has ten doors and two gaps in the trees.",
+   "ctx": "",
+   "script": "[crisp, proud] This town has ten doors and two gaps in the trees."
+  },
+  {
+   "voice": "dotkid",
+   "speaker": "Dot",
+   "text": "I've counted them seventeen times.",
+   "ctx": "",
+   "script": "[proud, crisp] I've counted them seventeen times."
+  },
+  {
+   "voice": "dotkid",
+   "speaker": "Dot",
+   "text": "Tomorrow I'm moving on to windows.",
+   "ctx": "",
+   "script": "[brisk, excited] Tomorrow I'm moving on to windows."
+  },
+  {
+   "voice": "beanw",
+   "speaker": "Bean",
+   "text": "A mud blob just ran past me carrying a pie.",
+   "ctx": "",
+   "script": "[cheerful, amazed] A mud blob just ran past me carrying a pie."
+  },
+  {
+   "voice": "beanw",
+   "speaker": "Bean",
+   "text": "I didn't stop it. I collect wrong turns, not pies.",
+   "ctx": "",
+   "script": "[breezy, unbothered] I didn't stop it. I collect wrong turns, not pies."
+  },
+  {
+   "voice": "beanw",
+   "speaker": "Bean",
+   "text": "Boppy went by with a fishing rod and a jar of peppers.",
+   "ctx": "",
+   "script": "[chatty] Boppy went by with a fishing rod and a jar of peppers."
+  },
+  {
+   "voice": "beanw",
+   "speaker": "Bean",
+   "text": "He was walking slower than me. Nobody walks slower than me. I collect slow walks too, now.",
+   "ctx": "",
+   "script": "[chatty, wondering] He was walking slower than me. [amazed] Nobody walks slower than me. [cheerful] I collect slow walks too, now."
+  },
+  {
+   "voice": "beanw",
+   "speaker": "Bean",
+   "text": "I'm not lost. I'm collecting wrong turns.",
+   "ctx": "",
+   "script": "[cheerful, unbothered] I'm not lost. I'm collecting wrong turns."
+  },
+  {
+   "voice": "beanw",
+   "speaker": "Bean",
+   "text": "That pond up north owes me an apology.",
+   "ctx": "",
+   "script": "[huffy, cheerful] That pond up north owes me an apology."
+  },
+  {
+   "voice": "beanw",
+   "speaker": "Bean",
+   "text": "Long story. Short socks.",
+   "ctx": "",
+   "script": "[wry] Long story. [deadpan] Short socks."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Oh! Tom. Girls. Welcome to the Hush Library. Everything is fine.",
+   "ctx": "",
+   "script": "[whispering, bright, too casual] Oh! Tom. Girls. Welcome to the Hush Library. [whispering, brittle] Everything is fine."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "...It's not fine. It started a week ago. It comes up from the Stacks, downstairs. The old part.",
+   "ctx": "",
+   "script": "[whispering, trailing off] ...It's not fine. It started a week ago. [hushed, uneasy] It comes up from the Stacks, downstairs. The old part."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Every book down there's whispering. Everything they ever heard. Seventy years of people reading quietly and thinking nobody was listening.",
+   "ctx": "",
+   "script": "[hushed, awed] Every book down there's whispering. Everything they ever heard. [dry] Seventy years of people reading quietly and thinking nobody was listening."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Books overhear EVERYTHING. That's why we whisper in here. It was never for the people. It's for the books.",
+   "ctx": "",
+   "script": "[whispering, emphatic] Books overhear EVERYTHING. [dry] That's why we whisper in here. [softly, tender] It was never for the people. It's for the books."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "There are three sections. Fiction, Nonfiction and Picture Books. And the Reading Room, at the very back.",
+   "ctx": "",
+   "script": "[whispering, precise] There are three sections. Fiction, Nonfiction and Picture Books. [dry] And the Reading Room, at the very back."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "The Reading Room doors use the old card catalog lock. I lost the password in 1998.",
+   "ctx": "",
+   "script": "[whispering, dry] The Reading Room doors use the old card catalog lock. [deadpan] I lost the password in 1998."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Then you're in charge of the signs. Here. The staff door is open.",
+   "ctx": "",
+   "script": "[whispering, brisk, relieved] Then you're in charge of the signs. Here. The staff door is open."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Please be careful. And please, don't answer the books. It only encourages them.",
+   "ctx": "",
+   "script": "[whispering, anxious] Please be careful. [dry, sincere] And please, don't answer the books. It only encourages them."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Listen. It's quiet. Properly quiet. The good kind. The dictionaries are snoring.",
+   "ctx": "",
+   "script": "[whispering, soft, relieved] Listen. It's quiet. Properly quiet. The good kind. [dry, fond] The dictionaries are snoring."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Then we'll read it. Story time, Saturdays, out loud. And I think I know who should do the voices.",
+   "ctx": "",
+   "script": "[whispering, warm] Then we'll read it. Story time, Saturdays, out loud. [fond] And I think I know who should do the voices."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Grace. This is for you. A Gold Library Card. No limit. No late fees. Ever.",
+   "ctx": "",
+   "script": "[whispering, warm, ceremonial] Grace. This is for you. A Gold Library Card. [dry] No limit. No late fees. Ever."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "And sweaters. I knit one every winter. I have run out of people. Please take some.",
+   "ctx": "",
+   "script": "[whispering, shy] And sweaters. I knit one every winter. [deadpan] I have run out of people. [hopeful] Please take some."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "It's quiet. Properly quiet. The good kind. Thank you, Tom.",
+   "ctx": "",
+   "script": "[whispering, soft, grateful] It's quiet. Properly quiet. The good kind. Thank you, Tom."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Story time is Saturdays now. The Unread asked for Grace. By name.",
+   "ctx": "",
+   "script": "[whispering, warm] Story time is Saturdays now. [dry, amused] The Unread asked for Grace. By name."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "The Stacks are through the staff door. Please be careful. And please don't answer the books.",
+   "ctx": "",
+   "script": "[whispering, brisk] The Stacks are through the staff door. [anxious] Please be careful. [dry] And please don't answer the books."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "I'm fine. Everything is fine. The dictionaries haven't slept in a week.",
+   "ctx": "",
+   "script": "[whispering, brittle, tired] I'm fine. Everything is fine. [dry] The dictionaries haven't slept in a week."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "It's fine. Everything is fine. Please whisper.",
+   "ctx": "",
+   "script": "[whispering, brittle] It's fine. Everything is fine. [firm, gentle] Please whisper."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "...Did you hear that? That wasn't me. I'd know my own shush.",
+   "ctx": "",
+   "script": "[whispering, trailing off] ...Did you hear that? [hushed, offended] That wasn't me. I'd know my own shush."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Please whisper. The dictionaries are sleeping.",
+   "ctx": "",
+   "script": "[whispering, precise] Please whisper. The dictionaries are sleeping."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Someone shelved a sandwich under 'S'.",
+   "ctx": "",
+   "script": "[whispering, scandalized] Someone shelved a sandwich under 'S'."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Technically correct. Deeply concerning.",
+   "ctx": "",
+   "script": "[whispering, dry] Technically correct. [deadpan, grave] Deeply concerning."
+  },
+  {
+   "voice": "kitw",
+   "speaker": "Kit",
+   "text": "Your parcel is arriving any Tuesday now.",
+   "ctx": "",
+   "script": "[chipper, breezy] Your parcel is arriving any Tuesday now."
+  },
+  {
+   "voice": "kitw",
+   "speaker": "Kit",
+   "text": "The snails asked for smaller uniforms.",
+   "ctx": "",
+   "script": "[chipper, deadpan] The snails asked for smaller uniforms."
+  },
+  {
+   "voice": "kitw",
+   "speaker": "Kit",
+   "text": "I deliver good news. Bad news has to walk.",
+   "ctx": "",
+   "script": "[chipper] I deliver good news. [wry] Bad news has to walk."
+  }
+ ]
+}
