@@ -22144,8 +22144,16 @@
    "prompt": "Draw a pose sheet for a family role-playing game: Tom carrying his niece Rose on his shoulders, in the same hand-painted caricature style as the attached pictures.\n\nPicture 1 is the approved ride sheet of Tom carrying Rose on his shoulders. Picture 2 is Tom. Picture 3 is Rose.\nCopy them as exactly as possible in every frame: the same two people, faces, hair, beard, clothes, shoes, colors, painting style, level of detail, head size compared to the body, and the same size difference between Tom and Rose. Rose is a small child and is much smaller than Tom. Only the poses (and the objects a frame names) change. Do not redesign anything about either of them.\n\nONE large portrait picture, not a grid. The pair is centered, drawn large and clear, from the soles of Tom's shoes to the top of Rose's head filling about 85 percent of the picture height, with clear magenta margin on every side. The head sizes keep the same proportions to the bodies as in picture 1.\nBackground: one flat solid magenta #FF00FF filling the whole image. No magenta anywhere on the characters or objects: pink shoes stay clearly pink. No grid lines, borders, numbers, labels, text, word balloons, shadows, dust, motion lines, sparkles or glow effects. Every figure is full body, from the top of the head to the soles of the shoes, well inside its cell with clear magenta margin; nothing touches a cell edge. Tom's soles rest on one ground line in every cell and the figures are the same size in every cell (never rescale a figure to fit a pose, and never change a head size).\nBoth faces are visible. Tom and Rose face the same way as the figures in the second and third rows of picture 1.\nWhenever Rose is on Tom's shoulders: she sits on the back of his shoulders behind his head, one leg down each side of his neck, her lower legs resting on the front of his chest, never in front of his face. Tom's hands hold her ankles and her hands rest on top of his head, unless the frame says otherwise. Both faces are fully visible unless the frame says seen from behind. Both heads turn the same way. Objects are painted in the same style, generic, with no brand names, no logos and no readable letters, and appear only in the frames that name them.\n\nThe pose: NIGHT-LIGHT. Tom with one arm stretched straight up holding a small plush toy lamb (cream curly wool, pink inner ears, big button eyes, a tiny pink bow tie) high overhead like a lantern, his other hand holding Rose's ankle, looking up at it proudly. Rose seated on his shoulders with both arms wrapped around Tom's head, looking up at the lamb, a sleepy trusting smile. Tom keeps the NES controller tee, brown jeans and cream sneakers from picture 1.\n\nDo not add figures or other props. Family friendly."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/npcs/amber-washington-v1.png",
+     "date": "2026-11-13",
+     "from": "v2",
+     "at": 1794547754235
+    }
+   ],
    "rejects": [],
    "id": "amber-washington",
    "tab": "NPCs",
