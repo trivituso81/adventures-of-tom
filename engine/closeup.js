@@ -46,6 +46,9 @@ main:has(#closeup:not([hidden])) #controls{visibility:hidden}
 #closeup .cu-rev{position:absolute;perspective:700px;pointer-events:none}
 #closeup .cu-rev .cu-spin{width:100%;height:100%;transform-style:preserve-3d;animation:cuRise 1.5s cubic-bezier(.2,.8,.2,1) both;filter:drop-shadow(0 12px 22px #000b)}
 #closeup .cu-rev img{width:100%;height:100%;display:block}
+#closeup .cu-snow{position:absolute;overflow:hidden;border-radius:50%;pointer-events:none}
+#closeup .cu-snow i{position:absolute;top:-6%;border-radius:50%;background:#fff;opacity:0;animation:cuSnow linear infinite}
+@keyframes cuSnow{0%{transform:translate(0,0);opacity:0}12%{opacity:.9}85%{opacity:.8}100%{transform:translate(var(--dx),112%);opacity:0}}
 #closeup .cu-rev.settled .cu-spin{animation:cuBob 2.6s ease-in-out infinite}
 #closeup .cu-sun{position:absolute;border-radius:50%;pointer-events:none;background:radial-gradient(circle,#ffe9a066 0,#ffd24a00 68%);animation:cuSun 2.6s ease-in-out infinite}
 #closeup.watch{background:radial-gradient(ellipse at 50% 40%,#2a1d12,#0b0805 80%)}
@@ -224,7 +227,7 @@ function closeupPad(dir,dirEdge,A,B) {
 // ---------- REVEAL mode (Tom 2026-11-12, claude/closeup-coinfinds-spec.md): one object shown large over the dimmed game, no picking ----------
 // closeupReveal(img, label, onDone): the coin rises in, turns once, glints, settles and bobs; the caption names it; A (or a tap, Enter, Space,
 // Escape, B, gamepad A or B) continues. The scene op {coinFind:N} (data/closeup-coinfinds.js) uses it for the seven coin finds.
-function closeupReveal(img,label,onDone,v) {
+function closeupReveal(img,label,onDone,v,opts) {
   if(closeup.active) { if(onDone) onDone(); return false; }
   closeupCSS();
   const host=document.getElementById('game'); if(!host) { if(onDone) onDone(); return false; }
@@ -232,6 +235,8 @@ function closeupReveal(img,label,onDone,v) {
   closeup.busy=true; closeup.active=true; closeup.done=onDone||null;
   const sun=cuEl('div','cu-sun',el), box=cuEl('div','cu-rev',el), spin=cuEl('div','cu-spin',box);
   const im=cuImg(img+(v?'?v='+v:'')); spin.appendChild(im);
+  if(opts&&opts.snow) { const sn=cuEl('div','cu-snow',spin), q=opts.snow; Object.assign(sn.style,{left:((q.x-q.r)*100)+'%',top:((q.y-q.r)*100)+'%',width:(q.r*200)+'%',height:(q.r*200)+'%'});
+    for(let i=0;i<(q.n||26);i++) { const f=cuEl('i','',sn), z=1.5+((i*7)%4)*.8; Object.assign(f.style,{left:((i*37)%97+1)+'%',width:z+'px',height:z+'px',animationDuration:(7+((i*5)%6))+'s',animationDelay:'-'+((i*1.7)%9).toFixed(1)+'s'}); f.style.setProperty('--dx',(((i*13)%9)-4)*3+'px'); } }
   const cap=closeup.cap=cuEl('div','cu-cap',el); cap.textContent=label;
   const pad=closeup.pad=cuEl('div','cu-pad',el);
   const b=cuEl('button','cu-b a',pad); b.type='button'; b.textContent='A  CONTINUE'; b.setAttribute('aria-label','Continue'); b.addEventListener('click',closeupRevealEnd);

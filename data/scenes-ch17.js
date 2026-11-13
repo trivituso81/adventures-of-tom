@@ -229,6 +229,7 @@ SCENES.ch17Race=()=>[
 const ch17Lens=()=>findMonster('twinlens');
 SCENES.ch17Vault=()=>[
   {flag:'ch17-vault',value:'pending'},
+  {globeFind:true},
   {talk:'Tom',lines:['The Vault. One plinth, one snow globe, and a view of Los Angeles at 4:59 PM, golden and perfect and completely still.']},
   {talk:'Rose',lines:['Tata. It’s the Square. It’s in there. That’s Deedee. That’s BOPPY.']},
   {talk:'Grace',lines:['They’re so small. They’re okay. They’re holding hands.']},
