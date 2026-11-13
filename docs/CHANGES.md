@@ -1,3 +1,7 @@
+## 2026-11-12 (clips8): Tom's last 8 pets1 recordings merged (tag clips8)
+- Fact: `local-clips-pending.json` (8 clips: Penny x2, TNB x3, Tom x1, Amy x2) merged with `merge-local.js` into data/voice/dialog-ch28.js; data/merged-takes.json pushed so Pending clears on his phone. unused_voice.py 0 on all checks, smoke FAILS [].
+- Every live dialogue line now has a clip (index: dialogue lines with no clip 0).
+
 ## 2026-11-12 (amber1): chapter 12 frozen neighbors stand still, the narrator speaks for them, and each gets a painted amber picture (tag amber1)
 - Tom 2026-11-12: "the residents are overlaid with a block of yellow transparent and then they're walking around ... when you interact with them it's their voice but in the third person." He asked for (1) a custom picture for each frozen resident in the Art Library, (2) no walking, (3) the narrator speaking about them.
 - Fact (cause): the hold-still rule (`HOLD_RULES`) only reached map monsters, so amber neighbors kept wandering; and their frozen lines are narration but the dialogue box labelled them with the neighbor's name and face.
