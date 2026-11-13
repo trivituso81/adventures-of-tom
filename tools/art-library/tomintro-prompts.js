@@ -1,7 +1,7 @@
 // Chapter 1 opening and every arrival: the pictures the intro plays that had no Art Library entry (Tom 2026-11-12 21:42:
 // "where is the art gallery stuff for Tom crouching and hugging the girls" and "the whole intro should use the newest art").
-// Required by make-prompts.js. Group "Tom" in the Characters tab, three entries.
-// 1 and 2 are Tom's approved pictures, already baked into the game (bake_story_poses.py set `hug`): stored approved with the existing file as the version,
+// Required by make-prompts.js. Group "Tom" in the Characters tab, four entries.
+// 1, 2 and the kneel are Tom's approved pictures, already baked into the game (bake_story_poses.py set `hug`): stored approved with the existing file as the version,
 //   no `bake` field, so Generate or approve cannot replace live art by itself.
 // 3 is NEW and a draft: the six shoulder-ride frames of the opening (kneel, lift, cheer, laugh, hop off, sit). They are still baked from the old sheet
 //   tomride-poses-v2.png (set `tomride`), which shows the older Tom. This entry is drawn from the newer approved ride picture tomride-title-v1.png.
@@ -22,6 +22,18 @@ const entries = [
 ${STYLE}
 
 ONE large picture of him alone, not a grid. A side view: his body in profile and his face turned in a three-quarter view toward the viewer, looking at the children who are just outside the picture on the side he faces. He crouches low on bent knees with his feet flat, leaning forward, both arms stretched wide open in front of him with open palms, a huge delighted smile. Full body from his hair to the soles of his shoes, centered, filling about 80 percent of the picture height.
+
+${BG}`,
+  },
+  {
+    id: 'tom-greeting-kneel', tab: 'Characters', group: 'Tom',
+    title: 'Tom greeting kneel: Tom alone on one knee with his arms open wide (your picture, already in the game)',
+    ar: '1:1', refs: [TOM],
+    prompt: `Draw the man in the attached picture kneeling to welcome children who run toward him.
+
+${STYLE}
+
+ONE large picture of him alone, not a grid. A side view: his body turned to one side and his face turned in a three-quarter view toward the viewer, looking at the children who are just outside the picture on the side he faces. He kneels on one knee with the other foot flat on the ground, leaning forward, both arms stretched wide open with open palms, a huge delighted smile. Full body from his hair to the soles of his shoes, centered, filling about 80 percent of the picture height.
 
 ${BG}`,
   },

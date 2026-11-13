@@ -7833,6 +7833,28 @@
    "versions": [
     {
      "n": 0,
+     "file": "art/raw/characters/tom-greeting-kneel-v1.png",
+     "date": "2026-11-13",
+     "from": "v1",
+     "at": 1794550452994
+    }
+   ],
+   "rejects": [],
+   "id": "tom-greeting-kneel",
+   "tab": "Characters",
+   "group": "Tom",
+   "title": "Tom greeting kneel: Tom alone on one knee with his arms open wide (your picture, already in the game)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/characters/tom-hero-v2.png"
+   ],
+   "prompt": "Draw the man in the attached picture kneeling to welcome children who run toward him.\n\nCopy the attached pictures as exactly as possible in every frame: the same people, faces, hair, beard, clothes, shoes, colors, linework, painting style, level of detail and head size compared to the body. Only the poses change. Do not redesign anything.\n\nONE large picture of him alone, not a grid. A side view: his body turned to one side and his face turned in a three-quarter view toward the viewer, looking at the children who are just outside the picture on the side he faces. He kneels on one knee with the other foot flat on the ground, leaning forward, both arms stretched wide open with open palms, a huge delighted smile. Full body from his hair to the soles of his shoes, centered, filling about 80 percent of the picture height.\n\nBackground: one flat solid magenta #FF00FF filling the whole image. No magenta anywhere on the characters: pink shoes stay clearly pink. No grid lines, borders, numbers, labels, text, shadows, dust, motion lines, sparkles or glow effects. Nothing touches a cell edge. Family friendly."
+  },
+  {
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
      "file": "art/raw/characters/tom-grace-rose-greeting-hug-v1.png",
      "date": "2026-11-13",
      "from": "v1",

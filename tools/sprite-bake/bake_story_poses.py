@@ -31,10 +31,10 @@ SETS = {
             'names': ['st_stiff', 'st_rise', 'st_reach', 'st_bendl', 'st_bendr', 'st_push', 'st_exhale', 'st_fresh']},
     'grace': {'sheet': 'grace-squishy-intro-sheet-v1.png', 'k': 10, 'h': 39, 'ref': 'sq_squeeze',
               'names': ['sq_hide', 'sq_reveal', 'sq_raise', 'sq_show', 'sq_hug', 'sq_squeeze', 'sq_careful', 'sq_wave']},
-    # Tom carrying Rose (2026-11-06, ride1): 4 x 3 cells; the first 6 are used here (cells 7 to 12 are battle frames, bake_tomride.py). Stored under
-    # member 'tom'. Cut with _cut (a piece detached from its figure, Rose jumping in cell 5, stays with its cell). Tom's body is 42 rows
-    # (his overworld stand), so the whole figure with Rose is 53.5 rows (466 px of the sit cell, of which Tom's body is 366).
-    'tomride': {'member': 'tom', 'sheet': 'tomride-poses-v2.png', 'cut': (4, 3), 'k': 9, 'h': 53.5, 'ref': 'tr_sit',
+    # Tom carrying Rose in the opening (introride1, 2026-11-13: Tom's approved Library picture `tomride-intro`, 3 x 2 cells, replaces the Nov 6 sheet tomride-poses-v2.png,
+    # which stays only for the battle ride frames, bake_tomride.py). Stored under member 'tom'. Cut with _cut (a piece detached from its figure, Rose jumping in cell 5,
+    # stays with its cell). Tom's body is 42 rows (his overworld stand), so the whole figure with Rose is 53.9 rows (727 px of the sit cell, of which Tom's body is 566).
+    'tomride': {'member': 'tom', 'sheet': 'tomride-intro-v1.png', 'cut': (3, 2), 'k': 9, 'h': 53.9, 'ref': 'tr_sit',
                 'names': ['tr_kneel', 'tr_lift', 'tr_cheer', 'tr_laugh', 'tr_hopoff', 'tr_sit']},
     # Greeting hug (2026-11-06, Tom: chapter 1 opening and every return to Long Island): 4 x 2 cells, Tom alone in the first three (hear, delight, crouch),
     # Tom with Grace and Rose in cells 4 to 6 (run in, crash, group hug). Cells 7 and 8 are not used: each shows only ONE girl (Grace lifted in 7, Rose alone in 8),
@@ -42,11 +42,14 @@ SETS = {
     # crimson ground, not magenta, so it is keyed against its own ground colour (key_ground). One size factor: Tom's standing figure (cell 1) is his 42 overworld rows.
     # 'feet' = x of Tom's own feet in each group frame's cut picture, in source pixels (measured by eye; checked with tools/shots/hug-feet.png), so he stays on one spot from frame 4 to 8.
     'hug': {'member': 'tom', 'sheet': 'tom-grace-rose-greeting-hug-v1.png', 'ground': (211, 24, 95), 'cut': (4, 2), 'k': 9, 'h': 42, 'ref': 'hg_hear',
-            'names': ['hg_hear', 'hg_delight', 'hg_crouch', 'hg_run', 'hg_crash', 'hg_group'],
+            'names': ['hg_hear', 'hg_delight', 'hg_crouch', 'hg_run', 'hg_crash', 'hg_group', 'hg_kneel'],   # hg_kneel last: it takes cell 7 (not used) and is then replaced by its own picture
             'feet': {'hg_run': 192, 'hg_crash': 143, 'hg_group': 146},
             # Side crouch (2026-11-07, Tom: the crouch before the hug faces the girls, arms open): the approved painting `tom-greeting-crouch-v1.png` replaces cell 3.
             # Its own sheet, so its size factor is set by head height: hair top to chin is about 334 px there and about 95 px in this sheet's standing Tom, so .284.
-            'crouch': {'sheet': 'tom-greeting-crouch-v1.png', 'ground': (219, 25, 95), 'scale': .284, 'name': 'hg_crouch'}},
+            'crouch': {'sheet': 'tom-greeting-crouch-v1.png', 'ground': (219, 25, 95), 'scale': .284, 'name': 'hg_crouch'},
+            # Kneel (2026-11-13, Tom sent it in chat: "Tom kneeling in supplication of the hug"): held while the girls run in. Painted facing right, the girls come from the left, so it is
+            # mirrored (the only flip; named to Tom). Hair top to chin is about 387 px there and about 95 px in the standing Tom, so .245.
+            'kneel': {'sheet': 'tom-greeting-kneel-v1.png', 'ground': (255, 0, 255), 'scale': .245, 'name': 'hg_kneel', 'flip': True}},
 }
 
 # Emotion poses (emo7, 2026-11-06): the 8 full-body emotion frames of each character (art/emotions/<id>.webp strips, cut by emotion_frames.py), drawn on the
@@ -253,8 +256,10 @@ for cid, S in SETS.items():
             S['k'] = max(5, min(10, int(hd * stand_frame(S['member'])[1]) if hd else int(figs[S['ref']].height / S['h'])))   # never upscale the painted frames
     elif 'ground' in S: figs = dict(zip(S['names'], cut_cells(key_ground(os.path.join(RAW, S['sheet']), S['ground']), S['cut'][0], S['cut'][1], S['cut'][0] * S['cut'][1])))
     elif 'cut' in S: figs = dict(zip(S['names'], _cut(os.path.join(RAW, S['sheet']), S['cut'][0], S['cut'][1], [n[3:] for n in S['names']] + ['x%d' % i for i in range(S['cut'][0] * S['cut'][1] - len(S['names']))]).values()))
-    if S.get('crouch'):
-        C = S['crouch']; one = cut_cells(key_ground(os.path.join(RAW, C['sheet']), C['ground']), 1, 1, 1)[0]
+    for _extra in ('crouch', 'kneel'):
+        if not S.get(_extra): continue
+        C = S[_extra]; one = cut_cells(key_ground(os.path.join(RAW, C['sheet']), C['ground']), 1, 1, 1)[0]
+        if C.get('flip'): one = one.transpose(Image.FLIP_LEFT_RIGHT)
         figs[C['name']] = one.resize((round(one.width * C['scale']), round(one.height * C['scale'])), Image.LANCZOS)
     if 'strip' not in S and 'cut' not in S and 'ground' not in S: figs = dict(zip(S['names'], grid(os.path.join(RAW, S['sheet']), 4, 2)))
     f = S['h'] * S['k'] / figs[S['ref']].height

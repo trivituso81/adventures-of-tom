@@ -1,3 +1,10 @@
+## 2026-11-12 (introride1): the chapter 1 opening plays Tom's approved ride pictures, plus a kneel while the girls run in (tag introride1)
+- Tom 22:12: approved `tomride-intro` in the Library and sent a picture of Tom kneeling with his arms open for the hug.
+- Fact: set `tomride` in `tools/sprite-bake/bake_story_poses.py` now cuts the approved `art/raw/characters/tomride-intro-v1.png` (3 x 2, h 53.9) instead of `tomride-poses-v2.png`; frames `tr_kneel` to `tr_sit` are the new ones. The old sheet stays only for the battle ride frames (`bake_tomride.py`).
+- Fact: the kneel `art/raw/characters/tom-greeting-kneel-v1.png` is frame `hg_kneel` of set `hug` (new Library entry `tom-greeting-kneel`, approved). `hugHearStep` (engine/intro.js) now plays hear, delight, crouch, then kneel, held while the girls run in (step is 1.2 s instead of .9 s). One flip: the picture faces right and the girls arrive from the left, so it is mirrored (shirt print and watch side swap).
+- Rebake: only `tomride-story.webp`, `hug-story.webp` and `data/story-poses.js` changed; every other atlas reproduced byte for byte. Tags `introride1`.
+- Tested: smoke FAILS [], tag_check ok; `reaction_test.py` opening in portrait and landscape (29 frames each, no errors), frames viewed in portrait: crouch, kneel facing the girls, lift, cheer and sit with the new Tom. Not played on a phone. The kneel's figure is a little larger than the squat before it (looked at, accepted). The same kneel plays in every arrival (`arriveHome`) and Nine Scoops, not tested there.
+
 ## 2026-11-12 (clips9): Tom's 19 chapter 12 amber recordings are merged (tag clips9)
 - Tom sent the pending export `local-clips-pending_3.json` (19 clips, the amberclear1 lines for Marlowe, Carmen, Alvarez and the ending).
 - Fact: `merge-local.js` added all 19 to data/voice/dialog-ch28.js (no battle clips, no voice-clips.js change). Voice index: dialogue lines with no clip 0. `unused_voice.py` 0 on all five checks, smoke FAILS [], tag_check ok.
