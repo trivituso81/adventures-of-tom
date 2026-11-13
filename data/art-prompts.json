@@ -18704,8 +18704,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or several states.\n\nATTACHED IMAGE\n1) The finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE PICTURE\nThe tall dark wooden double doors of a quiet old library reading room, seen close and straight on. It is a close-up, straight-on picture that fills the whole square. It is the still background of a close-up screen: the game will lay moving pieces on top of it, so it shows ONLY the fixed part and nothing that can change.\n- Two tall doors meeting at a thin center seam, dark polished library wood with raised panels, fine brass trim and hinges. The doors fill the picture; only a little stone wall shows at the very edges.\n- Across the middle, in one straight row spanning both doors, are THREE identical empty brass card holders: small upright brass frames with a lip at the bottom, each the size of a library catalog card, evenly spaced, with the middle holder exactly on the center seam. Each is big and clear and is the brightest thing in the picture.\n- All three holders are completely EMPTY: no card, no letter, no paper in or near any of them.\n- Count check before you finish: exactly three holders in a row.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- No people, no hands, no faces, no characters, no creatures, no frame or border around the picture.\n- Family friendly for children aged 6 and up.\n- Soft warm lamplight from the upper left, so the brass glints and the wood falls into dim shadow on the lower right.\n- No words, letters or numbers anywhere unless the description above says to paint them."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/closeup-ch7-cards-v1.png",
+     "date": "2026-11-13",
+     "from": "v1",
+     "at": 1794536005519
+    }
+   ],
    "rejects": [],
    "id": "closeup-ch7-cards",
    "tab": "Props",
