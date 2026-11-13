@@ -1,3 +1,9 @@
+## 2026-11-12 (emofull1): mood poses show in full on the map whichever way the person faces (tag emofull1)
+- Tom 23:38: bodies on maps and in rooms stopped showing emotional states (only the dialogue face did); revert to showing the mood in full, whatever direction the person faces. Direction matters only when no mood is shown (front, back, left, right stances).
+- Cause (fact): `emoFrontOk` in engine/emotions.js (pieface2, widened to every mood in close1) skipped the painted `em_*` pose unless the person faced the camera. Since cutstage1 and near1 turn everyone toward the person they talk to, almost nobody faced the camera, so no mood bodies were drawn.
+- Fix: `emoFrontOk` and both of its checks removed (speaker and listeners). When the line ends the person goes back to their normal stance in the direction they were facing.
+- Tested: `reaction_test.py` on the opening (ch1) and ch12Carmen, portrait: mood poses now drawn while facing up, left and right (Tom em_happy facing left, Rose em_surprised facing up, and others); frames looked at. Smoke.
+- Not done: landscape not looked at (the change is not layout related); full scene audit not run.
 ## 2026-11-12 (cutstage1): cutscene staging and camera, whole game (tag cutstage1)
 - Tom 20:34 (screenshot of Marlowe's first scene on Jefferson, chapter 12): "the characters are spread out in a weird way, and also covering the NPC that's a key part of the situation, and I also think that we need to be zooming in on the characters and the NPC during cut scenes. Doesn't have to be during regular conversations with NPCs and we need to do this exhaustively for the entire application."
 - Cause (fact): `{huddle}` put the party on a ring around the middle of the group, so with an NPC in the scene people ended up beside and behind him; townsfolk kept wandering during scenes and stopped next to him; the camera never zoomed except in five arrival scenes.
