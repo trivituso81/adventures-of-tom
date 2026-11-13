@@ -723,6 +723,14 @@ function drawTarget(target) {
     const p=position(target.value);
     x=(p.x+.5)*T;
     y=(p.y+1)*T-(target.value.monster?monsterDef(target.value).sprite.length+20:(target.value.isPlayer||target.value.kid||target.value.sheet?70+Math.round(44*(actorK(p.y+1)*owBoost(target.value)/owBoostOld(target.value)-1)):52));
+    // Painted people: the bubble sits directly above the drawn head, centred on the figure (its size and the talking-gap nudge included),
+    // not at a fixed height (Tom 2026-11-13). _figH is the drawn height written by drawSheetActor.
+    const v=target.value;
+    if(!v.monster&&v._figH>0) {
+      const g=v._tg;
+      x=(p.x+.5)*T+(g?g.x:0);
+      y=(p.y+1)*T-2-v._figH+(g?g.y:0)-30;   // 30: bubble body centre sits 8 below y, tail tip 27 below y, so the tail ends 3 px over the head
+    }
   } else if(target.kind==='object') {
     x=(target.value.x+target.value.w/2)*T;
     y=target.value.y*T-(target.value.kind==='tree'?70:28);
