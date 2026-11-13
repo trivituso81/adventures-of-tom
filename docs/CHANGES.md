@@ -1,3 +1,8 @@
+## 2026-11-12 (dialogue1): dialogue box lifted off the screen bottom so the portrait is not cut off (tag dialogue1)
+- Tom 18:41: the very bottom of the portrait in the dialogue box was cut off (Bev's face). Fact (cause): the box sat flush at the screen bottom, so the portrait's bottom edge ran into the stage's rounded corner.
+- Fix: `#dialog` is 10 px up in portrait (8 px in landscape) with a closed bottom border and rounded corners all round; the portrait's own corners follow. CSS only, in index.html (after `#dialog-portrait img`). Portrait still fills the box height; text column unchanged.
+- Checked in a real browser at 390 x 844 and 844 x 390: portrait bottom sits 2 px inside the box edge, full face and chin visible.
+
 ## 2026-11-12 (music3): 32 new music takes merged, with a fade-out trim (tag music3)
 - Tom 18:19 sent `local-music-export.json` (32 takes, music_v1): boss, defeat, levelup, 14 Long Island loops (all but title and battle), 12 Los Angeles loops, ns_party, ns_hunt. Not in the export, unchanged: title, battle, victory, ns_frozen, ns_boss, ns_win.
 - Fact: merged with `python3 -I tools/music-library/merge-local.py <export> music`, then `node tools/music-library/make-index.js` (MC_TRACKS rewritten for 23 tracks whose length changed). `defeat` came back 8.1 s (asked 10 s) and is kept.

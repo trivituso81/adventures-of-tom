@@ -1037,6 +1037,10 @@ html:not(.landscape) #dialog-choices{margin-top:6px}
 #dialog.has-portrait #dialog-text,#dialog.has-portrait #dialog-choices,#dialog.has-portrait .dialog-footer{margin-left:0!important}
 #dialog.has-portrait #dialog-portrait{left:env(safe-area-inset-left,0px)!important;top:0!important;bottom:0!important;width:var(--dp-w,56px)!important;height:auto!important;border:none;border-right:2px solid var(--edge);border-radius:6px 0 0 0;box-shadow:none}
 #dialog-portrait img{object-fit:cover}
+/* dialogue1: lift the box off the screen bottom so the portrait's bottom edge clears the stage's rounded corner (Tom 2026-11-12). */
+#dialog{bottom:10px;border-bottom:2px solid var(--edge);border-radius:8px}
+html.landscape #dialog{bottom:8px;border-radius:8px}
+#dialog.has-portrait #dialog-portrait{border-radius:6px 0 0 6px!important}
 #dialog.has-portrait #speaker{top:-22px;left:calc(var(--dp-w,56px) + 14px + env(safe-area-inset-left,0px));z-index:1}
 html.landscape #dialog .dialog-footer{margin-top:2px;padding-top:0}
 /* AUTO and the page count sit in the tab row above the box, to the right of the name box, so the text gets the whole box (2026-11-06). */
@@ -1667,7 +1671,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/emotion-reactions.js?v=pieface1"></script>
 <script src="engine/emotions.js?v=vance1"></script><!-- mood faces and poses in story dialogue (batch 0: chapter 1) -->
 <script src="engine/tapwalk.js?v=space1"></script><!-- tap to walk -->
-<script src="engine/main.js?v=recast1"></script>
+<script src="engine/main.js?v=dialogue1"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js?v=music3"></script>
