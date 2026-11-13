@@ -1,3 +1,8 @@
+## 2026-11-13 (emowrong1): Moss and Pip mood faces and poses show the right kids (tag emowrong1)
+- Tom 12:34: talking to Moss and Pip, the emotion frames were another character. Fact: the approved v1 sheets `npc-emotions-moss` (teal hair, maroon pants) and `npc-emotions-pip` (blond, purple sweater) did not match their heroes or walk sheets (Moss: brown hair, green shirt, brown pants; Pip: yellow cap, red shirt, grey pants). The Library refs were correct; the generator ignored them. Dot's sheet matched and is unchanged.
+- Tom regenerated both in the Art Library and approved v2 (art/raw/npcs/npc-emotions-moss-v2.png, npc-emotions-pip-v2.png). Rebaked: `emotion_frames.py moss pip`, `bake_emotion_faces.py moss pip`, `bake_story_poses.py` (only the Moss and Pip files changed), `EMO_V` = emowrong1. The v1 sheets stay in art/raw (approved sources the Library reads).
+- Pip's head factor in head_tweak.json is 1.36 (kids 1.3) and was used as is. A new Pip head size Tom mentioned at 12:42 was not saved to data/head-requests.json on main when this ran: not applied.
+- NOT done: Boomie, Skye, Dana, Sam, Reel, Luna not looked at (see claude/next-addendum-emowrong1.md); not seen on a phone.
 ## 2026-11-13 (bubble1): the talk bubble over an NPC sits directly above the head (tag bubble1)
 - Tom 12:44: the three-dot bubble was beside the head, not directly above. Fact: `drawTarget` (engine/town-render.js) used a fixed height and the tile centre. Change: it now uses the drawn figure height `_figH` (set by `drawSheetActor`) and the talking-gap nudge `_tg`, so the tail ends 3 px over the top of the head, centred on the figure. Monsters and objects unchanged. Looked at in portrait and landscape (Dot, Pip). Not checked: Duo, a phone.
 
