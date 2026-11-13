@@ -948,6 +948,7 @@ function aroundStep(o) {
       walkers.forEach((a,k)=>{ const p=stagePos(a); a.x=p.x; a.y=p.y; a.move=null; a.lag=0; storyHold(a); a.stagePlaced=true; a.stageFaced=true;
         this.moves.push({a,path:spots[k].path,i:0,wait:k*.22,dur:o.speed||.17}); });   // they set off one after another, so nobody walks inside anybody
       intro.objStage={R,walkers,keep:o.keepTom?player.facing:null};
+      if(typeof stageFrame==='function') stageFrame({roster:walkers,others:[]},this.moves);   // the cutscene camera frames and zooms on the group at the object (cutstage1)
     },
     update(dt){ let done=true;
       for(const m of this.moves) { const a=m.a;
