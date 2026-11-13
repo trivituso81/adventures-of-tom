@@ -1,3 +1,8 @@
+## 2026-11-12 (vclips1): phone clip export 6 merged, ledger now records every merged clip (tag vclips1)
+- Tom 18:51 sent `local-clips-export_6_.json` (2,144 clips, all voices, made 2026-11-13 02:47 UTC), no voice named, no "override everything", so stale clips were filtered. 37 export clips matched no live line (35 dialogue, 2 battle: old Deedee "Group hug! Tommy, you too!") and were dropped before the merge; `unused_voice.py` is 0 on all checks.
+- Fact: 2,107 clips merged with `merge-local.js`. Almost all were byte for byte what the game already had. New: 59 dialogue clips in dialog-ch28.js for the kid and walk-on voices (Dot kid, Moss kid, Pip kid, Page, Bean, Kit walk-ons) that had no clip, and 2 Deedee battle clips (hug, moon_back). No existing clip changed. Voice index 4,331 lines.
+- `data/merged-takes.json` now holds the fingerprint of every clip in this export, so the Voice Library "Not in game yet" filter is exact for these voices.
+
 ## 2026-11-13 (tomstretch2): Tom's new approved stretch sheet is in the game (tag tomstretch2)
 - Tom 18:45: "approved new images there, implement in the game now" (Art Library `tom-stretch-intro`, new picture `art/raw/characters/tom-stretch-intro-v1.png`, 8 frames, 4 x 2).
 - Fact: `tools/sprite-bake/bake_story_poses.py` set `tom` now cuts the new sheet (same frame names `st_stiff` to `st_fresh`, same order and 42-row standing size, so `engine/intro.js` `STRETCH_SEQ` is unchanged). Rebuilt `art/chars/tom-story.webp` and `data/story-poses.js`; every other set came out byte for byte unchanged. Tags `tomstretch2` (story-poses.js, painted.js ART_V, main.js stamp).
