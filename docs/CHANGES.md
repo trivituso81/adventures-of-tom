@@ -1,3 +1,7 @@
+## 2026-11-12 (closeup7): chapter 9 moonbeam lock is a close-up (tag closeup7; plan claude/closeup-plan.md Row 5)
+- Tom 2026-11-12: the close-up plan, Row 5. When the moonbeam finally lands on the Dome lock, `SCENES.ch9Door` now opens a WATCH close-up first ({closeupWatch:'ch9'}): the silver moon lock, the beam (drawn in code) bounces in off three mirrors and onto the keyhole, the lock fills with light, the moon disc turns, a flash. Then the existing Click. CLUNK line, doors and Deedee and Boppy lines as before. The mirror turning on the map is unchanged.
+- Files: data/closeup-ch9.js (new, `CLOSEUP_DEFS.ch9`), art/closeup/ch9-lock.webp (tools/art-library/bake_closeup_ch9.py from the approved closeup-ch9-lock v1), data/scenes.js, index.html, engine/main.js (stamp).
+- Tests: `python3 tools/closeup_ch9_test.py` (19 checks in portrait, landscape, Duo; frames viewed). No new voice line.
 ## 2026-11-12 (closeup6): chapter 7 Reading Room doors: spelling SHH is a close-up (tag closeup6; plan claude/closeup-plan.md Row 4)
 - Tom 2026-11-12: the close-up plan, Row 4. The "What does Tom spell?" text menu (HHS, SHH, HSH, BOO) is replaced by a close-up of the doors with three empty brass card holders. The three catalog cards go in left to right: S first, then the two H cards in either order. Wrong card: all cards drop back and Grace's existing hints play. Right: the doors open through the existing `ch7Door` scene.
 - BOO is dropped from the menu. Rose's BOO line now plays as the first wrong try (`ch7-fails` counts the wrong tries), then Grace's hints as before.

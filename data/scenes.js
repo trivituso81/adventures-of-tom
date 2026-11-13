@@ -3262,6 +3262,7 @@ SCENES.ch9Dance=[
 // 7. The moonbeam reaches the lock: the Dome doors open.
 SCENES.ch9Door=[
   {flag:'ch9-door'},
+  {closeupWatch:'ch9'},
   {call:()=>{ sfx.levelChime(); }}, {wait:.8},
   {talk:'Dome doors',lines:['The thread of moonlight bounces off three mirrors and lands right in the middle of the moon-shaped lock. It glows. Click. CLUNK.']},
   {call:()=>{ ch9OpenDoors(); storyWorld(); sfx.doorIn&&sfx.doorIn(); }},
