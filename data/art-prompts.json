@@ -22401,8 +22401,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else.\n\nThe first attached picture is the painted game character; the second attached picture is her frozen in amber. Keep the second picture EXACTLY as it is: the same figure, face, pose, size, position and canvas, the same block of amber at the same place. Change only what is described below.\n\nChange: a web of fine cracks has spread up through the amber from the base, like cracked sugar glass, with bright warm light shining out through the cracks. The amber is still whole and still holds her. Her pose and face are unchanged except that her eyes have a first flicker of surprise.\n\nSame hand-painted style, warm golden light from the upper left, smooth soft shading, no thick outlines, not pixel art, not 16-bit. No text, no frame, no floor, no cast shadow on the background. Background: one flat solid #FF00FF magenta, with nothing else in the picture, with the same margin of magenta around the block."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/npcs/amber-carmen-break-v1.png",
+     "date": "2026-11-13",
+     "from": "v1",
+     "at": 1794548160418
+    }
+   ],
    "rejects": [],
    "id": "amber-carmen-break",
    "tab": "NPCs",
