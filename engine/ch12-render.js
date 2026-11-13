@@ -12,11 +12,16 @@ let ch12Grey=0,ch12GreyLast=0;
 // A neighbor with a baked picture is drawn as that picture, sized from the figure it replaces; with none, the plain figure sits in the glass block below.
 const AMBER_IDS={'Mr. Washington':'washington',Marisol:'marisol',Larry:'larry','Doña Carmen':'carmen','Mrs. Alvarez':'alvarez','Don Beto':'beto',Tony:'tony',Yesenia:'yesenia',Claudia:'claudia',Kevin:'kevin'};
 const AMBER_V='20261112',AMBER_ART={};
-function amberArt(n) {
-  const id=AMBER_IDS[n.name]; if(!id) return null;
+const AMBER_STAGES=['','-crack','-break'];   // n.amberStage 1 and 2 (Doña Carmen's thaw); a missing stage picture falls back to the frozen one
+function amberLoad(id) {
   let a=AMBER_ART[id];
   if(!a) { a=AMBER_ART[id]={img:new Image(),ok:false}; a.img.onload=()=>{ a.ok=true; }; a.img.src='art/amber/'+id+'.webp?v='+AMBER_V; }
   return a.ok?a.img:null;
+}
+function amberArt(n) {
+  const id=AMBER_IDS[n.name]; if(!id) return null;
+  const base=amberLoad(id),st=n.amberStage|0;
+  return (st&&AMBER_STAGES[st]&&amberLoad(id+AMBER_STAGES[st]))||base;
 }
 const LE_drawActor_ch12=drawActor;
 drawActor=function(a) {

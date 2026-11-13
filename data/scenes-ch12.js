@@ -157,6 +157,8 @@ SCENES.ch12Marlowe=[
   {toast:'Goal: check Doña Carmen’s pupuseria and Casa Alvarez. The neighbors are frozen in amber.',time:6}
 ];
 
+// amberStage: 0 frozen, 1 cracking, 2 breaking away (engine/ch12-render.js picks the painted picture; no picture yet: the plain figure in the glass)
+function ch12AmberStage(map,name,k) { const n=worlds[map]&&worlds[map].npcs.find(x=>x.name===name); if(n) n.amberStage=k; }
 SCENES.ch12Carmen=[
   {flag:'ch12-carmen',value:'pending'},
   {talk:'Rose',lines:['Tata. Doña Carmen turned into candy.']},
@@ -168,9 +170,10 @@ SCENES.ch12Carmen=[
   {talk:'Tom',lines:['Tom lifts a pupusa off the comal. It’s still hot. Steam is coming off it, in a room where nothing else is moving.']},
   {talk:'Tom',lines:['Doña Carmen. It’s Tom. Nobody on this block has ever left your door hungry. We’re here to eat. Please wake up.']},
   {talk:'Nara',lines:['Nara sits at Carmen’s feet, tail wagging in a perfect circle, and sneezes on the amber.']},
-  {call:()=>sfx.ding&&sfx.ding()},
+  {call:()=>{ sfx.ding&&sfx.ding(); ch12AmberStage('pupuseria','Doña Carmen',1); }}, {wait:1},   // the amber cracks (art amber-carmen-crack)
+  {call:()=>{ sfx.whoosh&&sfx.whoosh(); ch12AmberStage('pupuseria','Doña Carmen',2); }}, {wait:.5},   // and breaks away (art amber-carmen-break)
   {talk:'Doña Carmen',lines:['A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes.']},
-  {call:()=>{ const c=worlds.pupuseria&&worlds.pupuseria.npcs.find(n=>n.name==='Doña Carmen'); if(c) c.amber=false; }},
+  {call:()=>{ const c=worlds.pupuseria&&worlds.pupuseria.npcs.find(n=>n.name==='Doña Carmen'); if(c) { c.amber=false; c.amberStage=0; } }},
   {talk:'Doña Carmen',lines:['...and THEN I told the man, the loroco is not optional. Tom! When did you get here? Why is everything so quiet?','Where did my pupusas go?']},
   {talk:'Tom',lines:['You were amber for a little while.']},
   {talk:'Doña Carmen',lines:['I was what? I had a whole sentence. I lost the sentence. It was a good sentence.']},
@@ -292,7 +295,7 @@ TRIGGERS.push(
 STORY_WORLD.push(()=>{
   if(STORY.mode!=='full') return;
   const on=STORY.chapter===12&&!!flag('ch12-marlowe')&&flag('battle:gridlockprime')!=='win';
-  const set=(map,names,test)=>{ const m=worlds[map]; if(!m) return; for(const n of m.npcs) if(names.includes(n.name)) { n.amber=!!(on&&test()); n.amberNarrator=true; } };   // amberNarrator: while amber, the narrator speaks their lines (engine/overworld.js openDialog)
+  const set=(map,names,test)=>{ const m=worlds[map]; if(!m) return; for(const n of m.npcs) if(names.includes(n.name)) { n.amber=!!(on&&test()); n.amberNarrator=true; if(!n.amber) n.amberStage=0; } };   // amberNarrator: while amber, the narrator speaks their lines (engine/overworld.js openDialog)
   set('jpark',['Mr. Washington','Marisol','Larry'],()=>true);
   set('pupuseria',['Doña Carmen'],()=>!flag('ch12-carmen'));
   set('casa',['Mrs. Alvarez','Don Beto','Tony','Yesenia','Claudia','Kevin'],()=>!flag('ch12-alvarez'));

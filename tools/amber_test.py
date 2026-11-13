@@ -26,6 +26,7 @@ if FAKE:
     from PIL import Image, ImageDraw
     os.makedirs(os.path.dirname(FAKEP),exist_ok=True); im=Image.new('RGBA',(300,520),(0,0,0,0)); d=ImageDraw.Draw(im)
     d.rounded_rectangle((10,10,290,510),30,fill=(240,160,40,200),outline=(255,225,140,255),width=6); d.ellipse((100,60,200,160),fill=(90,60,40,255)); im.save(FAKEP,'WEBP')
+    im.save(FAKEP.replace('washington','washington-crack'),'WEBP')
 def check(c,msg):
     print(('ok   ' if c else 'FAIL ')+msg)
     if not c: fails.append(msg)
@@ -41,11 +42,16 @@ with sync_playwright() as pw:
         a=pg.evaluate(POS); pg.wait_for_timeout(9000); b=pg.evaluate(POS)
         check(a==b,f'{lay}: no amber neighbour moved or turned in 9 seconds')
         pg.screenshot(path=f'{OUT}/{lay}-glass.png')
-        if FAKE: pg.wait_for_timeout(500); check(pg.evaluate("()=>!!amberArt(currentMap.npcs.find(n=>n.name==='Mr. Washington'))"),f'{lay}: the painted amber figure loads and is used'); pg.screenshot(path=f'{OUT}/{lay}-art.png')
+        if FAKE:
+            pg.wait_for_timeout(500); check(pg.evaluate("()=>!!amberArt(currentMap.npcs.find(n=>n.name==='Mr. Washington'))"),f'{lay}: the painted amber figure loads and is used')
+            pg.evaluate("()=>{ const w=currentMap.npcs.find(n=>n.name==='Mr. Washington'); w.amberStage=1; amberArt(w); }"); pg.wait_for_timeout(600)
+            check(pg.evaluate("()=>{ const w=currentMap.npcs.find(n=>n.name==='Mr. Washington'); w.amberStage=0; const a=amberArt(w); w.amberStage=1; const b=amberArt(w); w.amberStage=2; const c=amberArt(w); w.amberStage=0; return !!b&&b!==a&&c===a; }"),f'{lay}: stage 1 uses its own picture, stage 2 with no picture falls back to the frozen one')
         pg.evaluate("()=>{ pressAction(); }"); pg.wait_for_timeout(400)
         who=pg.evaluate("()=>[dialog.active,dialog.name,document.getElementById('speaker').textContent,!document.querySelector('#dialog-portrait,.dialog-portrait')||document.querySelector('#dialog-portrait,.dialog-portrait').hidden,dialog.npc&&dialog.npc.facing]")
         check(who[0] and who[1]=='Narrator' and who[2]=='Narrator',f'{lay}: talking to a frozen neighbour is the Narrator ({who})')
         pg.screenshot(path=f'{OUT}/{lay}-narrator.png')
+        st=pg.evaluate("()=>{ ch12AmberStage('pupuseria','Doña Carmen',2); const m=worlds.pupuseria.npcs.find(n=>n.name==='Doña Carmen'); const a=[m.amber,m.amberStage]; STORY.flags['ch12-carmen']=true; storyWorld(); const r=[a[0],a[1],m.amber,m.amberStage]; delete STORY.flags['ch12-carmen']; storyWorld(); return r; }")
+        check(st==[True,2,False,0],f'{lay}: Doña Carmen is amber at stage 2, then thawed she is free at stage 0 ({st})')
         pg.evaluate("()=>{ dialog.active=false; document.getElementById('dialog').hidden=true; }")
         # thawed: the neighbour speaks for themselves again
         pg.evaluate("()=>{ const w=currentMap.npcs.find(n=>n.name==='Mr. Washington'); w.amber=false; pressAction(); }"); pg.wait_for_timeout(300)
@@ -54,5 +60,8 @@ with sync_playwright() as pw:
         check(not errs,f'{lay}: no page errors {errs[:2]}')
         pg.close()
     br.close()
-if FAKE and os.path.exists(FAKEP): os.remove(FAKEP); os.rmdir(os.path.dirname(FAKEP))
+if FAKE:
+    for f in (FAKEP,FAKEP.replace('washington','washington-crack')):
+        if os.path.exists(f): os.remove(f)
+    if not os.listdir(os.path.dirname(FAKEP)): os.rmdir(os.path.dirname(FAKEP))
 print('FAILS:',fails); sys.exit(1 if fails else 0)
