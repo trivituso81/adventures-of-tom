@@ -18682,8 +18682,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only the object described below.\n\nPAINT THIS ONE OBJECT\nTHE SNOW GLOBE: A big clear glass snow globe the size of a beach ball, sitting on a short round glass plinth, seen straight from the front at eye level. Inside the glass is the town Square, very small and exact, like a tiny model: a white stone fountain with a little water in the middle of a round paved plaza, a small old brick library with a clock above its door beside it, and a tiny camera on a three-legged tripod standing on the paving. Small green trees at the edge of the plaza. A soft warm amber light glows inside from the base of the model. A few tiny white snowflakes drift in the glass, not many. On top of the globe sits a round gold cable fitting, a gold cap with a short thick gold cable stub standing up from it, all inside the picture margin. The glass is clear and shows a soft bright highlight on its upper left. The plinth is clear glass with a faint green edge.\n- Exactly ONE object, alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no floor, no table, no shadow on a surface, no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- No people, no hands, no faces, no characters, no creatures, no frame or border around the picture.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, with the amber glow inside the globe.\n- No words, letters or numbers anywhere unless the description above says to paint them."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/closeup-ch7-doors-v1.png",
+     "date": "2026-11-13",
+     "from": "v1",
+     "at": 1794535995679
+    }
+   ],
    "rejects": [],
    "id": "closeup-ch7-doors",
    "tab": "Props",
