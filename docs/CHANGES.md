@@ -1,3 +1,10 @@
+## 2026-11-13 (pipspeed1): Pip's voice is 12 percent faster, pitch kept (tag pipspeed1)
+- Tom 13:56: "speed up Pip's voice a little bit more."
+- Fact before: Pip (voice `pipkid`, Rose's ElevenLabs voice lowered to pitch 0.88) had no speed setting anywhere. The 7 baked Pip clips (data/voice/dialog-ch28.js) spoke at 11 to 14 characters per second.
+- Now: tempo 1.12 (pitch unchanged). New takes get it from the `pipkid` entry in tools/clip-audit/voice-merge-dialog.js (`rubberband=pitch=0.88:tempo=1.12`, applied by merge-local.js). The 7 baked clips were stretched once with the new `tools/voice-library/speedup-voice.py pipkid 1.12` (mono, 32 kHz, 48 kbps like the merge). Clips are 10 to 11 percent shorter (2.3 s became 2.05 s, 5.4 s became 4.86 s) and now run 12 to 17 characters per second.
+- Checked: 1,858 clips in dialog-ch28.js, only the 7 `pipkid|` keys changed; all decode; the merge effect chain on an old Pip clip gives the same length as the stretched clips. Not done: nobody listened to it (no audio in this session); no new recordings; the speaker `pip` (Bev and Sam share that voice id) is untouched.
+- Faster again: raise tempo in the FX entry and run `speedup-voice.py pipkid <new tempo / 1.12>` once on the baked clips (for example 1.1 more gives 1.232 in the entry and `1.1` on the tool). Slower or undo: tempo 0.893 on the tool.
+
 ## 2026-11-13 (headchin1): the HEAD SIZES factor now lands on the head in every mood frame (tag headchin1)
 - Tom 13:00: "ensure that in each emotion frame, an NPC's head size is modified as per the head size feature in each emotion frame."
 - Fact before: all 63 strips were baked with the current factors (a rebake reproduced every file), but the head was grown about ONE line per person (the narrowest row, median of 8 frames, as a share of each frame's height). On bowed poses (sad, angry, scared) that line sat inside the face, so only part of the head grew; for people whose hair or hat hides the neck it sat at the chest or waist (Dakota .42, Bun .40), so the torso grew too.

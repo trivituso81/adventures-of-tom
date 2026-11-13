@@ -55,7 +55,8 @@ const FX={
   hog:'rubberband=pitch=0.92',
   carryon:'rubberband=pitch=1.15',
   jetlag:'vibrato=f=2:d=0.1,aformat=sample_fmts=s16,rubberband=pitch=0.88',
+  // pipkid tempo 1.12 (Tom 2026-11-13: speed Pip up a little): the 7 clips baked before this were stretched once with tools/voice-library/speedup-voice.py pipkid 1.12; keep the two numbers equal.
   // Recast townsfolk (2026-11-12): Rose's voice lowered into boys and a nine year old girl, Bun, Luna and Olivia shifted into Bean, Page and Kit.
-  pipkid:'rubberband=pitch=0.88', mosskid:'rubberband=pitch=0.78:formant=preserved,lowpass=f=6500', dotkid:'rubberband=pitch=0.96',
+  pipkid:'rubberband=pitch=0.88:tempo=1.12', mosskid:'rubberband=pitch=0.78:formant=preserved,lowpass=f=6500', dotkid:'rubberband=pitch=0.96',
   beanw:'rubberband=pitch=1.03', pagew:'rubberband=pitch=0.96', kitw:'rubberband=pitch=1.06'
 };
