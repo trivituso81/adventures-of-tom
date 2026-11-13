@@ -23,16 +23,11 @@ LIBRARY_WALK = {'pip': 'art/raw/npcs/npc-walk-pip-v2.png', 'moss': 'art/raw/npcs
 # Adults: the head (top of hair, hat or cap to chin) is made as tall as Tom's on screen (walk_sheet_frames.tom_head_rows(), kidhead.grow_head about the chin) and the body is
 # scaled so the whole figure keeps its real height next to Tom (42 rows = 5'11, so rows = 42 x inches / 71). Kids (Pip, Moss, Dot): head as tall as Grace's
 # (KID_HEAD_ROWS = her grown head, 11.47 rows) and the whole figure scaled from Grace (4'2 = 40.6 rows, Rose 3'4 = 36.6, so 0.4 rows per inch).
-# CHIN = chin line of the painted front stand frame as a share of that frame's height (read by eye with a ruler on each approved sheet, 11-10).
+# CHIN = chin line of the painted front stand frame as a share of that frame's height (the true bottom of the chin, read by eye with a ruler on the zoomed head of each approved sheet, redone 11-13 after the first values sat at mouth or eye level and distorted the heads).
 import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import walk_sheet_frames as _W   # Tom's head and Tom's 42 rows: one definition for the family and the townsfolk (heights1)
 KID_HEAD_ROWS = 9.2
-CHIN = {'pip': 0.23, 'moss': 0.25, 'dot': 0.22, 'gus': 0.26, 'bean': 0.225, 'reel': 0.28, 'pruitt': 0.25, 'delgado': 0.27, 'kowalski': 0.21, 'ike':
-        0.255, 'halverson': 0.26, 'bun': 0.27, 'page': 0.25, 'fern': 0.235, 'kit': 0.245, 'oolong': 0.25, 'luna': 0.275, 'penny': 0.21, 'nickel': 0.22, 'sal':
-        0.265, 'sol': 0.25, 'alvarez': 0.255, 'bernadette': 0.265, 'beto': 0.29, 'bev': 0.26, 'carmen': 0.27, 'chet': 0.27, 'claudia': 0.27, 'daisy': 0.275,
-        'dakota': 0.26, 'dana': 0.26, 'dash': 0.26, 'dolores': 0.26, 'jordan': 0.265, 'juniper': 0.27, 'kenji': 0.285, 'kevin': 0.275, 'kiki': 0.27, 'larry':
-        0.295, 'marguerite': 0.27, 'marisol': 0.27, 'mateo': 0.315, 'odette': 0.295, 'priya': 0.27, 'ray': 0.285, 'ryan': 0.285, 'sage': 0.27, 'sam': 0.265,
-        'skye': 0.27, 'sofi': 0.29, 'toni': 0.27, 'tony': 0.27, 'washington': 0.285, 'wes': 0.27, 'yesenia': 0.27}
+CHIN = {'pip': 0.285, 'moss': 0.285, 'dot': 0.275, 'gus': 0.28, 'bean': 0.26, 'reel': 0.295, 'pruitt': 0.267, 'delgado': 0.285, 'kowalski': 0.26, 'ike': 0.275, 'halverson': 0.278, 'bun': 0.283, 'page': 0.25, 'fern': 0.277, 'kit': 0.267, 'oolong': 0.297, 'luna': 0.263, 'penny': 0.267, 'nickel': 0.263, 'sal': 0.275, 'sol': 0.27, 'alvarez': 0.26, 'bernadette': 0.263, 'beto': 0.285, 'bev': 0.24, 'carmen': 0.273, 'chet': 0.247, 'claudia': 0.267, 'daisy': 0.263, 'dakota': 0.257, 'dana': 0.25, 'dash': 0.28, 'dolores': 0.26, 'jordan': 0.26, 'juniper': 0.253, 'kenji': 0.315, 'kevin': 0.283, 'kiki': 0.247, 'larry': 0.285, 'marguerite': 0.263, 'marisol': 0.245, 'mateo': 0.33, 'odette': 0.31, 'priya': 0.247, 'ray': 0.29, 'ryan': 0.26, 'sage': 0.243, 'sam': 0.243, 'skye': 0.22, 'sofi': 0.333, 'toni': 0.267, 'tony': 0.27, 'washington': 0.303, 'wes': 0.253, 'yesenia': 0.27}
 KIDS = {'pip', 'moss', 'dot'}
 def real_inches(cid):
     m = re.search(r"\n\s+%s: \{[^\n]*?ft: `(\d+)'(\d+)\"`" % cid, open(os.path.join(ROOT, 'tools/art-library/npc-prompts.js')).read())
