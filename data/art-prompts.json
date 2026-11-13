@@ -7786,6 +7786,13 @@
      "date": "2026-11-12",
      "from": "v1",
      "at": 1794535440000
+    },
+    {
+     "n": 0,
+     "file": "art/raw/characters/tom-stretch-intro-v1.png",
+     "date": "2026-11-13",
+     "from": "v1",
+     "at": 1794537938579
     }
    ],
    "rejects": [],
