@@ -1748,21 +1748,22 @@ function ch5ClockState(c) {
   if(STORY.chapter===5&&flag('ch5-'+c)===true) return 'ready';
   return 'spin';
 }
-const CH5_TIMES=['6:30','7:00','7:45','12:00'];
 function ch5Clock(o) {
   if(STORY.mode!=='full'||STORY.chapter!==5||!flag('ch5-hall')) return false;
   const R=CH5_ROOMS.find(r=>r.c===o.clock); if(!R) return false;
   const st=ch5ClockState(o.clock);
   if(st==='set') { openDialog(o.name,['Seven o’clock. Right on time. Amy taps the glass, approvingly.']); return true; }
   if(st==='spin') { openDialog(o.name,['The hands spin around and around. Something in the '+R.name+' is making it go haywire.','Grace: "We have to clear the '+R.name+' first, Tata."']); return true; }
-  openChoice(o.name,['The hands have stopped. The clock is waiting.','Set it to what time?'],CH5_TIMES.map(t=>({label:t,fn:()=>{
-    if(t!=='7:00') { sfx.nope&&sfx.nope(); openDialog('Amy',[pick(['Conferences are at SEVEN, Tom. Seven.','Tom. Seven. I have said it eleven times today.','Principal Pruitt said seven. Seven sharp. Not '+t+'.'])]); return; }
-    setFlag('ch5-clock-'+o.clock); sfx.select(); sfx.ding&&sfx.ding();
-    const n=CH5_ROOMS.filter(r=>flag('ch5-clock-'+r.c)).length;
-    if(n>=3) { playScene('ch5Clocks'); return; }
-    openDialog(o.name,['Click. Seven o’clock. The clock ticks normally for the first time in days.',n===1?'One clock down. Two to go.':'Two clocks down. One to go.']);
-  }})));
-  return true;
+  // The hands have stopped: the close-up dial (data/closeup-ch5.js, engine/closeup.js DIAL mode). Only seven is right; a wrong time gets Amy's line.
+  return closeupDial('ch5',{
+    onWrong:(i,t)=>{ openDialog('Amy',[pick(['Conferences are at SEVEN, Tom. Seven.','Tom. Seven. I have said it eleven times today.','Principal Pruitt said seven. Seven sharp. Not '+t.label+'.'])]); },
+    onRight:()=>{
+      setFlag('ch5-clock-'+o.clock); sfx.ding&&sfx.ding();
+      const n=CH5_ROOMS.filter(r=>flag('ch5-clock-'+r.c)).length;
+      if(n>=3) { playScene('ch5Clocks'); return; }
+      openDialog(o.name,['Click. Seven o’clock. The clock ticks normally for the first time in days.',n===1?'One clock down. Two to go.':'Two clocks down. One to go.']);
+    }
+  });
 }
 // The staff fridge: pick the one thing in it that is not somebody's lunch (Heart-Trace).
 const CH5_FRIDGE=[

@@ -13,7 +13,7 @@
 // pad inside the screen (the normal controls are hidden while it is open). The game under it is paused (update() returns early).
 // Layout is computed in JS from the overlay's own size, so it is right in portrait, landscape (the stage is rotated by CSS) and Duo.
 const CLOSEUP_DEFS={};
-const closeup={reveal:false,watch:false,active:false,def:null,hooks:null,el:null,plate:null,tray:null,sel:0,placed:[],busy:false,coins:[],slotEls:[],order:[],ro:null,wide:false,pad:null,cap:null,glint:null,made:false};
+const closeup={reveal:false,watch:false,dial:false,active:false,def:null,hooks:null,el:null,plate:null,tray:null,sel:0,placed:[],busy:false,coins:[],slotEls:[],order:[],ro:null,wide:false,pad:null,cap:null,glint:null,made:false};
 
 function closeupCSS() {
   if(document.getElementById('closeup-css')) return;
@@ -208,6 +208,7 @@ window.addEventListener('keydown',e=>{
   if(!closeup.active||(typeof dialog!=='undefined'&&dialog.active)||e.code==='KeyL') return;
   e.preventDefault(); e.stopImmediatePropagation(); if(e.repeat) return;
   const c=e.code;
+  if(closeup.dial) { if(c==='ArrowLeft'||c==='KeyA') dialMove(-1); else if(c==='ArrowRight'||c==='KeyD') dialMove(1); else if(c==='Enter'||c==='Space') dialPick(); else if(c==='Escape'||c==='KeyB'||c==='Backspace') dialLeave(); return; }
   if(closeup.reveal) { if(c==='Enter'||c==='Space'||c==='Escape'||c==='KeyB'||c==='Backspace'||c==='KeyA') closeupRevealEnd(); return; }
   if(closeup.watch) { if(c==='Enter'||c==='Space'||c==='Escape'||c==='KeyB'||c==='Backspace'||c==='KeyA') closeupWatchAct(); return; }
   if(c==='ArrowLeft'||c==='KeyA') closeupMove(-1); else if(c==='ArrowRight'||c==='KeyD') closeupMove(1);
@@ -219,6 +220,7 @@ window.addEventListener('keyup',e=>{ if(closeup.active&&e.code!=='KeyL') { e.sto
 // Gamepad (called from pollGamepad in engine/main.js).
 function closeupPad(dir,dirEdge,A,B) {
   if(dialog.active) return;
+  if(closeup.dial) { if(dirEdge&&dir==='left') dialMove(-1); else if(dirEdge&&dir==='right') dialMove(1); if(A) dialPick(); else if(B) dialLeave(); return; }
   if(closeup.reveal) { if(A||B) closeupRevealEnd(); return; }
   if(closeup.watch) { if(A||B) closeupWatchAct(); return; }
   if(dirEdge&&dir) { if(dir==='left') closeupMove(-1); else if(dir==='right') closeupMove(1); else closeupMove(dir==='up'?-1:1,true); }
@@ -320,6 +322,86 @@ function closeupWatchAct() {
 function closeupWatchEnd() {
   closeup.wphase='end'; const def=closeup.def; closeup.cap.textContent=def.endCaption||''; closeup.wbtn.textContent='A  CONTINUE';
   if(def.onEnd) def.onEnd();
+}
+
+// ---------- DIAL mode (claude/closeup-plan.md Row 6): parts turn about a centre in steps; A confirms; one turn position is the right answer ----------
+// closeupDial(id, hooks): def = CLOSEUP_DEFS[id] = { ready, v, bg, pivot:{x,y} (the centre, shares of the plate), start (index),
+//   hands:[{img, w, h (picture size in px), hub:[x,y] (the pivot inside the picture, shares), tip (share of the picture height where the tip is), len (tip to pivot, share of the plate)}],
+//   times:[{label, deg:[angle per hand, degrees clockwise from 12]}], answer (index of the right time), caption:(label)=>string }
+// Left and right turn the hands to the next time in the list (right turns clockwise, left anticlockwise); A confirms. The answer closes the screen and
+// calls hooks.onRight(time). Any other time: CLUNK, the hands rattle and stay where they are, and hooks.onWrong(index, time) runs (the game's own line).
+// Input: arrows or A/D move, Enter or Space confirms, Escape or B leaves (hooks.onLeave), tap and the on-screen pad, gamepad (D-pad, A, B).
+function closeupDial(id,hooks) {
+  const def=CLOSEUP_DEFS[id];
+  if(!def||!def.ready||closeup.active) return false;
+  closeupCSS();
+  const host=document.getElementById('game'); if(!host) return false;
+  const el=closeup.el=cuEl('div','',host); el.id='closeup'; el.hidden=false;
+  closeup.dial=true; closeup.watch=false; closeup.reveal=false; closeup.def=def; closeup.hooks=hooks||{}; closeup.done=null;
+  closeup.busy=true; closeup.active=true; closeup.di=def.start||0;
+  const plate=closeup.plate=cuEl('div','cu-plate',el);
+  const bg=cuImg(cuSrc(def,def.bg)); bg.className='cu-bg'; plate.appendChild(bg);
+  closeup.hands=def.hands.map(h=>{ const d=cuEl('div','cu-w',plate); d.style.transformOrigin='0 0'; d.appendChild(cuImg(cuSrc(def,h.img))); return d; });
+  closeup.dAngles=def.times[closeup.di].deg.slice();
+  closeup.cap=cuEl('div','cu-cap',el);
+  const pad=closeup.pad=cuEl('div','cu-pad',el);
+  const mk=(txt,cls,fn,label)=>{ const b=cuEl('button','cu-b '+cls,pad); b.type='button'; b.textContent=txt; b.setAttribute('aria-label',label); b.addEventListener('click',fn); return b; };
+  mk('◀','',()=>dialMove(-1),'Turn the hands back'); mk('▶','',()=>dialMove(1),'Turn the hands on');
+  mk('A','a',()=>dialPick(),'Set the clock'); mk('NOT YET','',()=>dialLeave(),'Leave without setting the clock');
+  closeup.ro=window.ResizeObserver?new ResizeObserver(()=>dialLayout()):null; if(closeup.ro) closeup.ro.observe(el);
+  dialLayout(); dialPaint(false); dialCaption();
+  if(typeof clearInput==='function') clearInput();
+  const imgs=[...el.querySelectorAll('img')];
+  Promise.all(imgs.map(i=>i.decode?i.decode().catch(()=>0):0)).then(()=>setTimeout(()=>{ if(!closeup.active||!closeup.dial) return; el.classList.add('on'); closeup.busy=false; },30));
+  return true;
+}
+function dialLayout() {
+  if(!closeup.active||!closeup.dial) return;
+  const el=closeup.el,W=el.clientWidth,H=el.clientHeight,def=closeup.def; if(!W||!H) return;
+  const M=10,fs=Math.max(15,Math.min(22,W/20)),below=fs*1.7+56+14;
+  const S=Math.floor(Math.max(120,Math.min(W-2*M,H-2*M-below,720))),px=(W-S)/2,py=Math.max(M,(H-S-below)/2);
+  Object.assign(closeup.plate.style,{left:px+'px',top:py+'px',width:S+'px',height:S+'px'}); closeup.S=S; closeup.px=px; closeup.py=py;
+  Object.assign(closeup.cap.style,{left:'0',width:W+'px',top:(py+S+12)+'px',fontSize:fs+'px'});
+  Object.assign(closeup.pad.style,{left:'0',width:W+'px',top:(py+S+12+fs*1.7)+'px'});
+  def.hands.forEach((h,k)=>{
+    const H2=h.len*S/(h.hub[1]-h.tip), W2=H2*h.w/h.h, d=closeup.hands[k];
+    Object.assign(d.style,{width:W2+'px',height:H2+'px',left:(def.pivot.x*S-h.hub[0]*W2)+'px',top:(def.pivot.y*S-h.hub[1]*H2)+'px',transformOrigin:(h.hub[0]*100)+'% '+(h.hub[1]*100)+'%'});
+    d.querySelector('img').style.cssText='width:100%;height:100%;display:block';
+  });
+  dialPaint(false);
+}
+function dialPaint(anim) {
+  closeup.hands.forEach((d,k)=>{ d.style.transition=anim?'transform .45s cubic-bezier(.3,.1,.2,1)':'none'; d.style.transform='rotate('+closeup.dAngles[k].toFixed(2)+'deg)'; });
+}
+function dialCaption() {
+  if(!closeup.active||!closeup.dial) return;
+  const def=closeup.def; closeup.cap.textContent=def.caption?def.caption(def.times[closeup.di].label):'';
+}
+function dialMove(d) {
+  if(!closeup.active||!closeup.dial||closeup.busy||(typeof dialog!=='undefined'&&dialog.active)) return;
+  const n=closeup.def.times.length; closeup.di=(closeup.di+d+n)%n;
+  const tgt=closeup.def.times[closeup.di].deg;
+  // the hands keep turning the same way: right is clockwise, left anticlockwise
+  closeup.dAngles=closeup.dAngles.map((cur,k)=>{ let delta=(((tgt[k]-cur)%360)+360)%360; if(d<0&&delta>0) delta-=360; return cur+delta; });
+  dialPaint(true); if(typeof sfx!=='undefined'&&sfx.move) sfx.move(); closeupTick(); dialCaption();
+}
+function dialPick() {
+  if(!closeup.active||!closeup.dial||closeup.busy||(typeof dialog!=='undefined'&&dialog.active)) return;
+  const def=closeup.def,i=closeup.di,t=def.times[i],h=closeup.hooks;
+  closeup.busy=true;
+  if(i===def.answer) {
+    if(typeof sfx!=='undefined'&&sfx.select) sfx.select(); closeup.plate.classList.add('shiver');
+    setTimeout(()=>{ closeupClose(()=>{ closeup.dial=false; if(h&&h.onRight) h.onRight(t); }); },900);
+    return;
+  }
+  // wrong time: CLUNK, the hands rattle and stay; the game's own line plays
+  closeupClunk(); if(typeof sfx!=='undefined'&&sfx.nope) sfx.nope();
+  closeup.hands.forEach(e=>{ e.classList.remove('rattle'); void e.offsetWidth; e.classList.add('rattle'); });
+  setTimeout(()=>{ closeup.busy=false; if(h&&h.onWrong) h.onWrong(i,t); },560);
+}
+function dialLeave() {
+  if(!closeup.active||!closeup.dial||closeup.busy||(typeof dialog!=='undefined'&&dialog.active)) return;
+  const h=closeup.hooks; closeupClose(()=>{ closeup.dial=false; if(h&&h.onLeave) h.onLeave(); });
 }
 
 // ---------- PLACE helper (claude/closeup-plan.md Row 2): one object lowers onto a plate at a marked spot and the spot lights up ----------
