@@ -13,7 +13,7 @@
 // pad inside the screen (the normal controls are hidden while it is open). The game under it is paused (update() returns early).
 // Layout is computed in JS from the overlay's own size, so it is right in portrait, landscape (the stage is rotated by CSS) and Duo.
 const CLOSEUP_DEFS={};
-const closeup={reveal:false,watch:false,dial:false,lever:false,active:false,def:null,hooks:null,el:null,plate:null,tray:null,sel:0,placed:[],busy:false,coins:[],slotEls:[],order:[],ro:null,wide:false,pad:null,cap:null,glint:null,made:false};
+const closeup={reveal:false,watch:false,dial:false,lever:false,lswitch:false,active:false,def:null,hooks:null,el:null,plate:null,tray:null,sel:0,placed:[],busy:false,coins:[],slotEls:[],order:[],ro:null,wide:false,pad:null,cap:null,glint:null,made:false};
 
 function closeupCSS() {
   if(document.getElementById('closeup-css')) return;
@@ -469,6 +469,7 @@ function closeupLever(id,o) {
 }
 function leverLayout() {
   if(!closeup.active||!closeup.lever) return;
+  if(closeup.lswitch) return switchLayout();
   const el=closeup.el,W=el.clientWidth,H=el.clientHeight,def=closeup.def; if(!W||!H) return;
   const M=10,fs=Math.max(15,Math.min(22,W/20)),below=fs*1.7+56+14;
   const S=Math.floor(Math.max(120,Math.min(W-2*M,H-2*M-below,720))),px=(W-S)/2,py=Math.max(M,(H-S-below)/2);
@@ -484,6 +485,7 @@ function leverLayout() {
 function leverPaint(rot) { closeup.lrot=rot; if(closeup.larm) closeup.larm.style.transform='rotate('+rot.toFixed(2)+'deg)'; }
 function leverPull() {
   if(!closeup.active||!closeup.lever||closeup.lphase!=='ready'||(typeof dialog!=='undefined'&&dialog.active)) return;
+  if(closeup.lswitch) return switchThrow();
   const def=closeup.def,o=closeup.hooks,quick=!!o.quick; closeup.lphase='swing'; closeup.busy=true; closeup.cap.textContent=''; closeup.pad.style.visibility='hidden';
   const r0=def.pos[closeup.lfrom]-def.arm.lean, r1=def.pos[closeup.lto]-def.arm.lean, dir=Math.sign(r1-r0), dur=quick?450:900, wind=quick?0:5, t0=performance.now();
   if(typeof sfx!=='undefined'&&sfx.whoosh) sfx.whoosh();
@@ -502,5 +504,90 @@ function leverPull() {
 }
 function leverLeave() {
   if(!closeup.active||!closeup.lever||closeup.lphase!=='ready'||closeup.busy||(typeof dialog!=='undefined'&&dialog.active)) return;
-  const o=closeup.hooks; closeupClose(()=>{ closeup.lever=false; if(o&&o.onLeave) o.onLeave(); });
+  const o=closeup.hooks; closeupClose(()=>{ closeup.lever=false; closeup.lswitch=false; if(o&&o.onLeave) o.onLeave(); });
+}
+
+// ---------- LEVER mode, "switch" variant (Row 8): a toggle switch on a junction box, a lamp beside it ----------
+// closeupSwitch(id, {color, right, quick, onDone, onLeave}): def.kind==='switch' (data/closeup-ch4.js). The box of `color` is shown with its switch down and its lamp dark.
+// Full version waits for A (A THROW; NOT YET or Escape leaves, onLeave); quick:true throws by itself after a beat. The switch flips up. `right`: click, the lamp lights in the box's
+// colour and stays lit for a beat, then the screen closes (onDone). Wrong: the switch flips up, sparks and a POP shiver the box, the switch drops back, the lamp stays dark, the screen closes (onDone).
+function closeupSwitch(id,o) {
+  o=o||{}; const def=CLOSEUP_DEFS[id];
+  if(!def||!def.ready||def.kind!=='switch'||closeup.active) { if(o.onDone) o.onDone(); return false; }
+  closeupCSS();
+  const host=document.getElementById('game'); if(!host) { if(o.onDone) o.onDone(); return false; }
+  const col=o.color||'blue', el=closeup.el=cuEl('div','',host); el.id='closeup'; el.hidden=false;
+  closeup.lever=true; closeup.lswitch=true; closeup.dial=false; closeup.watch=false; closeup.reveal=false; closeup.def=def; closeup.hooks=o; closeup.done=null;
+  closeup.busy=true; closeup.active=true; closeup.lphase='load'; closeup.lcol=col;
+  const plate=closeup.plate=cuEl('div','cu-plate',el);
+  plate.style.background='radial-gradient(ellipse at 50% 38%,#4a4038 0,#2a231e 55%,#14100d 100%)';
+  const part=(src,cls)=>{ const d=cuEl('div','cu-w',plate); d.appendChild(cuImg(cuSrc(def,src))); if(cls) d.className+=' '+cls; return d; };
+  const L=closeup.sparts={ box:part(def.box.img[col]), glow:cuEl('div','cu-w',plate), lampOff:part(def.lamp.off), lampOn:part(def.lamp.on[col]), swDown:part(def.sw.down.img), swUp:part(def.sw.up.img), sparks:cuEl('div','cu-w',plate), flash:cuEl('div','cu-w',plate) };
+  L.lampOn.style.opacity='0'; L.swUp.style.opacity='0'; L.glow.style.opacity='0'; L.glow.style.borderRadius='50%'; L.glow.style.mixBlendMode='screen';
+  L.glow.style.background='radial-gradient(circle,'+def.lamp.glow[col]+'cc 0,'+def.lamp.glow[col]+'55 40%,'+def.lamp.glow[col]+'00 70%)';
+  L.flash.style.borderRadius='50%'; L.flash.style.opacity='0'; L.flash.style.background='radial-gradient(circle,#fff 0,#fff2b0 30%,#ffd24a00 70%)'; L.flash.style.mixBlendMode='screen';
+  closeup.cap=cuEl('div','cu-cap',el); closeup.cap.textContent=o.quick?'':(def.caption||'');
+  const pad=closeup.pad=cuEl('div','cu-pad',el);
+  const mk=(txt,cls,fn,label)=>{ const b=cuEl('button','cu-b '+cls,pad); b.type='button'; b.textContent=txt; b.setAttribute('aria-label',label); b.addEventListener('click',fn); return b; };
+  if(!o.quick) { mk(def.pullLabel||'A  THROW','a',()=>leverPull(),'Throw the switch'); mk('NOT YET','',()=>leverLeave(),'Leave the box'); }
+  closeup.ro=window.ResizeObserver?new ResizeObserver(()=>leverLayout()):null; if(closeup.ro) closeup.ro.observe(el);
+  leverLayout(); if(typeof clearInput==='function') clearInput();
+  const imgs=[...el.querySelectorAll('img')];
+  Promise.all(imgs.map(i=>i.decode?i.decode().catch(()=>0):0)).then(()=>setTimeout(()=>{
+    if(!closeup.active||!closeup.lswitch) return; el.classList.add('on'); closeup.lphase='ready';
+    if(o.quick) setTimeout(leverPull,320); else closeup.busy=false; },30));
+  return true;
+}
+function switchLayout() {
+  const el=closeup.el,W=el.clientWidth,H=el.clientHeight,def=closeup.def; if(!W||!H) return;
+  const M=10,fs=Math.max(15,Math.min(22,W/20)),below=fs*1.7+56+14;
+  const S=Math.floor(Math.max(120,Math.min(W-2*M,H-2*M-below,720))),px=(W-S)/2,py=Math.max(M,(H-S-below)/2);
+  Object.assign(closeup.plate.style,{left:px+'px',top:py+'px',width:S+'px',height:S+'px'}); closeup.S=S;
+  Object.assign(closeup.cap.style,{left:'0',width:W+'px',top:(py+S+12)+'px',fontSize:fs+'px'});
+  Object.assign(closeup.pad.style,{left:'0',width:W+'px',top:(py+S+12+fs*1.7)+'px'});
+  const L=closeup.sparts, k=def.box.boxW*S/def.box.w, bw=def.box.w*k, bh=def.box.h*k, bx=(S-bw)/2, by=S*def.box.cy-bh/2;
+  const put=(d,w,h,cx,cy,ax,ay)=>{ Object.assign(d.style,{width:w+'px',height:h+'px',left:(cx-ax*w)+'px',top:(cy-ay*h)+'px'}); const i=d.querySelector('img'); if(i) i.style.cssText='width:100%;height:100%;display:block'; };
+  put(L.box,bw,bh,bx,by,0,0);
+  const lx=bx+def.holeLamp[0]*bw, ly=by+def.holeLamp[1]*bh, sx=bx+def.holeSw[0]*bw, sy=by+def.holeSw[1]*bh, ls=def.lamp.scale*k, ss=def.sw.scale*k;
+  put(L.lampOff,def.lamp.w*ls,def.lamp.h*ls,lx,ly,def.lamp.anchor[0],def.lamp.anchor[1]); put(L.lampOn,def.lamp.w*ls,def.lamp.h*ls,lx,ly,def.lamp.anchor[0],def.lamp.anchor[1]);
+  put(L.swDown,def.sw.down.w*ss,def.sw.down.h*ss,sx,sy,def.sw.down.anchor[0],def.sw.down.anchor[1]); put(L.swUp,def.sw.up.w*ss,def.sw.up.h*ss,sx,sy,def.sw.up.anchor[0],def.sw.up.anchor[1]);
+  const g=def.lamp.w*ls*2.6; put(L.glow,g,g,lx,ly,.5,.5); const f=def.sw.up.w*ss*2.4; put(L.flash,f,f,sx,sy-def.sw.up.h*ss*.3,.5,.5);
+  Object.assign(L.sparks.style,{left:sx+'px',top:(sy-def.sw.up.h*ss*.3)+'px',width:'0',height:'0'});
+  closeup.sx=sx; closeup.sy=sy; closeup.sk=ss;
+}
+function switchFlip(up,ms) {   // swap the down and up switch pictures with a short squash so it reads as a flip
+  const L=closeup.sparts; if(!L) return;
+  const a=up?L.swDown:L.swUp, b=up?L.swUp:L.swDown;
+  b.style.transition='opacity '+ms+'ms'; a.style.transition='opacity '+ms+'ms'; b.style.opacity='1'; a.style.opacity='0';
+  b.animate([{transform:'scale(1.06,.94)'},{transform:'scale(.97,1.04)'},{transform:'scale(1)'}],{duration:ms*1.6,easing:'ease-out'});
+}
+function switchSparks() {
+  const L=closeup.sparts; if(!L) return; const S=closeup.S;
+  for(let i=0;i<14;i++) {
+    const s=cuEl('i','',L.sparks), a=Math.random()*Math.PI*2, d=S*(.08+Math.random()*.16), sz=Math.max(2,S*.012);
+    s.style.cssText='position:absolute;left:0;top:0;width:'+sz+'px;height:'+sz*3+'px;border-radius:2px;background:'+(i%3?'#ffe27a':'#fff')+';opacity:0;transform-origin:50% 50%';
+    const dx=Math.cos(a)*d, dy=Math.sin(a)*d-S*.03;
+    s.animate([{opacity:1,transform:'translate(0,0) rotate('+(a+Math.PI/2)+'rad)'},{opacity:1,offset:.5,transform:'translate('+dx*.7+'px,'+dy*.7+'px) rotate('+(a+Math.PI/2)+'rad)'},{opacity:0,transform:'translate('+dx+'px,'+(dy+S*.05)+'px) rotate('+(a+Math.PI/2)+'rad)'}],{duration:450+Math.random()*250,easing:'ease-out',fill:'forwards'});
+  }
+  L.flash.animate([{opacity:0},{opacity:1,offset:.15},{opacity:0}],{duration:360,fill:'forwards'});
+  setTimeout(()=>{ if(L.sparks) L.sparks.innerHTML=''; },900);
+}
+function switchThrow() {
+  const def=closeup.def,o=closeup.hooks,L=closeup.sparts,quick=!!o.quick; closeup.lphase='swing'; closeup.busy=true; closeup.cap.textContent=''; closeup.pad.style.visibility='hidden';
+  if(typeof sfx!=='undefined'&&sfx.whoosh) sfx.whoosh();
+  const fin=()=>closeupClose(()=>{ closeup.lever=false; closeup.lswitch=false; if(o.onDone) o.onDone(); });
+  setTimeout(()=>{
+    if(!closeup.active||!closeup.lswitch) return; switchFlip(true,140); closeupTick();
+    if(o.right) {
+      setTimeout(()=>{ if(!closeup.active||!closeup.lswitch) return;
+        L.lampOn.style.transition='opacity .25s'; L.lampOn.style.opacity='1'; L.glow.style.transition='opacity .35s'; L.glow.style.opacity='1'; closeup.plate.classList.add('shiver');
+        if(typeof sfx!=='undefined'&&sfx.ding) sfx.ding();
+        if(!quick) closeup.cap.textContent='CLICK.';
+        setTimeout(fin,quick?650:1100); },260);
+    } else {
+      setTimeout(()=>{ if(!closeup.active||!closeup.lswitch) return;
+        switchSparks(); closeupClunk(); closeup.plate.classList.add('shiver'); if(!quick) closeup.cap.textContent='POP.';
+        setTimeout(()=>{ if(!closeup.active||!closeup.lswitch) return; switchFlip(false,140); closeupTick(); setTimeout(fin,quick?450:750); },quick?520:700); },240);
+    }
+  },quick?60:240);
 }

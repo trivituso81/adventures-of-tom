@@ -1397,17 +1397,25 @@ function ch4BoxOn(c) { return typeof flag==='function'&&(!!flag('ch4-rig')||ch4S
 function ch4Box(o) {
   if(STORY.mode!=='full'||STORY.chapter!==4||!flag('ch4-stage')||flag('ch4-rig')) return false;
   const seq=ch4Seq();
-  if(seq.includes(o.jbox)) { openDialog(o.name,['It\'s already on. The little light is green.']); return true; }
-  if(CH4_RIG_ORDER[seq.length]!==o.jbox) {
-    setFlag('ch4-rigseq',false); sfx.bump(); sfx.thud&&sfx.thud();
-    openDialog('TNB',[seq.length?'POP. The dimmer tripped. Everything is off again.':'CLUNK. The switch flips, sparks, and flips right back.',
-      pick(['Order matters, babe. Look at the gels on the rig. Left to right.','The rig tells us the order. The colors across the front.','Wrong one. The rig is the cheat sheet. Go look at it.'])]);
-    return true;
-  }
-  seq.push(o.jbox); setFlag('ch4-rigseq',seq.join(','));
-  sfx.select(); sfx.ding&&sfx.ding();
-  if(seq.length<CH4_RIG_ORDER.length) { openDialog(o.name,['CLICK. The switch holds. A little light turns green. '+(seq.length===1?'One down.':'Two down.')]); return true; }
-  playScene('ch4Rig'); return true;
+  if(seq.includes(o.jbox)) { openDialog(o.name,['It\'s already on. The little light is lit.']); return true; }
+  const right=CH4_RIG_ORDER[seq.length]===o.jbox;
+  // Close-up of the box (closeup10): the switch is thrown on screen first (full with an A THROW button the first time, quick and automatic after), then the old outcome runs.
+  const outcome=()=>{
+    setFlag('ch4-boxcu',true);
+    if(!right) {
+      setFlag('ch4-rigseq',false); sfx.bump(); sfx.thud&&sfx.thud();
+      openDialog('TNB',[seq.length?'POP. The dimmer tripped. Everything is off again.':'CLUNK. The switch flips, sparks, and flips right back.',
+        pick(['Order matters, babe. Look at the gels on the rig. Left to right.','The rig tells us the order. The colors across the front.','Wrong one. The rig is the cheat sheet. Go look at it.'])]);
+      return;
+    }
+    seq.push(o.jbox); setFlag('ch4-rigseq',seq.join(','));
+    sfx.select(); sfx.ding&&sfx.ding();
+    if(seq.length<CH4_RIG_ORDER.length) { openDialog(o.name,['CLICK. The switch holds. The little light comes on. '+(seq.length===1?'One down.':'Two down.')]); return; }
+    playScene('ch4Rig');
+  };
+  const first=!flag('ch4-boxcu');
+  if(!closeupSwitch('ch4',{color:o.jbox,right,quick:!first,onDone:outcome})) outcome();
+  return true;
 }
 // Craft services: pick the one snack picky Nara will eat (Heart-Trace). Toni or the table.
 const CH4_SNACKS=[
