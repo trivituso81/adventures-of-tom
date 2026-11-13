@@ -116,6 +116,18 @@ The pose: Tom standing tall, full body, body turned slightly toward the opponent
 
 Do not add figures or props. Family friendly.`
   },
+  {
+    id: 'tomride-night', tab: 'Characters', group: 'Tom and Rose ride',
+    title: 'Tom carries Rose: night-light pose, Tom holds up the toy lamb (one large picture)', ar: '2:3', refs: [RIDE, TOM, ROSE],
+    prompt: head(
+      'Picture 1 is the approved ride sheet of Tom carrying Rose on his shoulders. Picture 2 is Tom. Picture 3 is Rose.',
+      'ONE large portrait picture, not a grid. The pair is centered, drawn large and clear, from the soles of Tom\'s shoes to the top of Rose\'s head filling about 85 percent of the picture height, with clear magenta margin on every side. The head sizes keep the same proportions to the bodies as in picture 1.',
+      'Both faces are visible. Tom and Rose face the same way as the figures in the second and third rows of picture 1.') + `
+
+The pose: NIGHT-LIGHT. Tom with one arm stretched straight up holding a small plush toy lamb (cream curly wool, pink inner ears, big button eyes, a tiny pink bow tie) high overhead like a lantern, his other hand holding Rose's ankle, looking up at it proudly. Rose seated on his shoulders with both arms wrapped around Tom's head, looking up at the lamb, a sleepy trusting smile. Tom keeps the NES controller tee, brown jeans and cream sneakers from picture 1.
+
+Do not add figures or other props. Family friendly.`
+  },
 ];
 
 module.exports = { entries };
