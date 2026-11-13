@@ -46,6 +46,8 @@ with sync_playwright() as pw:
             pg.wait_for_timeout(500); check(pg.evaluate("()=>!!amberArt(currentMap.npcs.find(n=>n.name==='Mr. Washington'))"),f'{lay}: the painted amber figure loads and is used')
             pg.evaluate("()=>{ const w=currentMap.npcs.find(n=>n.name==='Mr. Washington'); w.amberStage=1; amberArt(w); }"); pg.wait_for_timeout(600)
             check(pg.evaluate("()=>{ const w=currentMap.npcs.find(n=>n.name==='Mr. Washington'); w.amberStage=0; const a=amberArt(w); w.amberStage=1; const b=amberArt(w); w.amberStage=2; const c=amberArt(w); w.amberStage=0; return !!b&&b!==a&&c===a; }"),f'{lay}: stage 1 uses its own picture, stage 2 with no picture falls back to the frozen one')
+        # other residents wander next to Washington during the 9 s wait; park them far away so A can only reach him
+        pg.evaluate("()=>{ const w=currentMap.npcs.find(n=>n.name==='Mr. Washington'); for(const n of currentMap.npcs) if(n!==w&&!n.amber){ n.x=-500; n.y=-500; n.path=[]; n.move=null; } player.x=w.x; player.y=w.y+2; player.facing='up'; player.move=null; }")
         pg.evaluate("()=>{ pressAction(); }"); pg.wait_for_timeout(400)
         who=pg.evaluate("()=>[dialog.active,dialog.name,document.getElementById('speaker').textContent,!document.querySelector('#dialog-portrait,.dialog-portrait')||document.querySelector('#dialog-portrait,.dialog-portrait').hidden,dialog.npc&&dialog.npc.facing]")
         check(who[0] and who[1]=='Narrator' and who[2]=='Narrator',f'{lay}: talking to a frozen neighbour is the Narrator ({who})')
