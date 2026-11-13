@@ -1,3 +1,9 @@
+## 2026-11-12 (tomstretch1): Tom's stretch sheet is in the Art Library, Characters > Tom (Art Library entry only)
+- Tom 18:24: "add them in the Tom section". Earlier answer (Nov 7) was that no Library entry existed for Tom's stretch frames.
+- Fact: new approved entry `tom-stretch-intro` (group Tom, 8 frames, 4 x 2) with his painted sheet `art/raw/characters/tom-stretch-intro-sheet-v1.png` as its version and `tom-hero-v2.png` as the reference. Builder `tools/art-library/tomstretch-prompts.js` (added to the module list in make-prompts.js); prompt is the Project doc `claude/storybook-tom-stretch-sheet-prompt.txt`.
+- Nothing in the game changed: the sheet was already baked by `bake_story_poses.py` (set `tom`, frames `st_stiff` to `st_fresh`) and plays in every arrival. The entry has no `bake` field on purpose, so approving or regenerating it would not replace live art.
+- Checked: `node tools/art-library/validate.js` OK (876 entries); art.html search "tom-stretch" shows it under Tom (34 of 34 approved), 0 page errors.
+
 ## 2026-11-12 (vance1): Julian Vance shows only the painted art (tag vance1)
 - Tom 18:07: Julian's pictures flip between the old anime art and the hand drawn painted art; it should be painted only.
 - Fact (cause): his walk sheet and plain talk face are painted, but his eight mood faces (`portraits/emo/vance-*`) and mood poses (`vanceemo`) were cut from the old sketch-style sheet `npc-emotions-vance-v1.png`. Every mood line (about ten in chapter 11, more later) swapped him from painted to sketch and back.
