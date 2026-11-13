@@ -129,6 +129,15 @@ SCENES.ch12Loft=[
   {flag:'ch12-studio'}
 ];
 
+// Stages the family in front of Mr. Washington (amber1 staging, amberclear1): camera on him, Tom just below facing up, TNB right beside
+// him for the touch line, everyone else spread along the walk. Positions come from his NPC so a moved map cannot strand the scene.
+function ch12AtWashington() {
+  const w=worlds.jpark&&worlds.jpark.npcs.find(n=>n.name==='Mr. Washington'); if(!w) return;
+  sceneCam=[w.x,w.y+1];
+  const put=(id,dx,dy,dir)=>{ if(id!=='tom'&&!party.some(m=>m===id||(m&&m.id===id))) return; const a=sceneActor(id); if(!a) return; storyHold(a); a.stagePlaced=true; a.x=w.x+dx; a.y=w.y+dy; a.move=null; a.scr=null; a.facing=dir; };
+  put('tom',0,2,'up'); put('tnb',-1,1,'right'); put('grace',1,2,'up'); put('rose',-1,2,'up'); put('amy',2,2,'up'); put('nara',-2,2,'up');
+}
+
 SCENES.ch12Marlowe=[
   {flag:'ch12-marlowe',value:'pending'},
   {spawn:{name:'Marlowe',look:'marlowe',at:[14,4],dir:'down'}},
@@ -150,9 +159,17 @@ SCENES.ch12Marlowe=[
   {talk:'Marlowe',lines:['He walks off into the grey, humming a jingle that never resolves.']},
   {despawn:'Marlowe'},
   {flag:'ch12-marlowe'}, {call:()=>storyWorld()},
-  {talk:'Tom',lines:['He’s draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He’s frozen solid.']},
-  {talk:'TNB',lines:['He’s trapped in amber. Amber is warmth that got stuck. Doña Carmen’s is right there, and the Alvarez house is down 2nd. They might be frozen too.']},
-  {talk:'Tom',lines:['We check on the neighbors first.']},
+  {talk:'Tom',lines:['He’s draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He’s not moving.']},
+  {call:()=>ch12AtWashington()}, {zoom:1.7,time:.8},
+  {talk:'Rose',lines:['He’s inside something. It’s see-through and yellow, like the honey bear.']},
+  {talk:'Grace',lines:['It’s the same color the Long Island gate turned, Tata. That’s amber. It’s what the bugs are stuck in, in my rock book.']},
+  {talk:'TNB',lines:['It’s hard like glass, but it’s warm. Babe, it’s as warm as a mug right out of the kiln.']},
+  {talk:'Tom',lines:['He’s all right in there. He’s just stopped, right in the middle of one second.']},
+  {talk:'Amy',lines:['This is what Vance told us he does. He stops people at a nice moment so that nothing ever changes. This is what it looks like up close.']},
+  {talk:'TNB',lines:['When that man took the color and the music, the warm part of the day had nowhere to go. So it set hard, right around him. That’s what amber is: warmth that got stuck.']},
+  {talk:'Tom',lines:['Doña Carmen’s is right there, and the Alvarez house is down 2nd. If it happened to him, it happened to them. We check on the neighbors first.']},
+  {talk:'Tom',lines:['And if amber is warmth that got stuck, maybe we can get it moving again.']},
+  {zoom:1,time:.6}, {cam:null},
   {trace:'marlowe-grey'}, {hearts:'amy'},
   {toast:'Goal: check Doña Carmen’s pupuseria and Casa Alvarez. The neighbors are frozen in amber.',time:6}
 ];
@@ -162,10 +179,10 @@ function ch12AmberStage(map,name,k) { const n=worlds[map]&&worlds[map].npcs.find
 SCENES.ch12Carmen=[
   {flag:'ch12-carmen',value:'pending'},
   {talk:'Rose',lines:['Tata. Doña Carmen turned into candy.']},
-  {talk:'Tom',lines:['She’s frozen in amber, right in the middle of a sentence.']},
+  {talk:'Tom',lines:['She’s in amber too, frozen right in the middle of a sentence.']},
   {talk:'Grace',lines:['She’s still pointing at the volcano.']},
-  {talk:'TNB',lines:['Amber is just warmth that got stuck. You don’t break it. You give it somewhere to go.']},
-  {talk:'Amy',lines:['Warmth. We’re good at warmth. Everybody find the warmest thing in the room.']},
+  {talk:'TNB',lines:['It’s warm, same as Mr. Washington’s. I don’t think we can break it, and I don’t think we should. If amber is warmth that got stuck, we have to give the warmth somewhere to go.']},
+  {talk:'Amy',lines:['Warmth. We’re good at warmth. Something warm from outside the amber might get it flowing again. Everybody find the warmest thing in the room.']},
   {talk:'Rose',lines:['The comal! The pupusas!']},
   {talk:'Tom',lines:['Tom lifts a pupusa off the comal. It’s still hot. Steam is coming off it, in a room where nothing else is moving.']},
   {talk:'Tom',lines:['Doña Carmen. It’s Tom. Nobody on this block has ever left your door hungry. We’re here to eat. Please wake up.']},
@@ -175,8 +192,9 @@ SCENES.ch12Carmen=[
   {talk:'Doña Carmen',lines:['A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes.']},
   {call:()=>{ const c=worlds.pupuseria&&worlds.pupuseria.npcs.find(n=>n.name==='Doña Carmen'); if(c) { c.amber=false; c.amberStage=0; } }},
   {talk:'Doña Carmen',lines:['...and THEN I told the man, the loroco is not optional. Tom! When did you get here? Why is everything so quiet?','Where did my pupusas go?']},
-  {talk:'Tom',lines:['You were amber for a little while.']},
+  {talk:'Tom',lines:['You were frozen in amber for a little while. A man in a grey suit took the color off the block, and all the warmth set hard around you. Your own pupusa got it moving again.']},
   {talk:'Doña Carmen',lines:['I was what? I had a whole sentence. I lost the sentence. It was a good sentence.']},
+  {talk:'TNB',lines:['So that’s the rule. You can’t crack amber. You warm it up with something the person loves.']},
   {talk:'Grace',lines:['A man in a grey suit did it. His name is Marlowe.']},
   {talk:'Doña Carmen',lines:['That man stood on my step and said my sign was “too busy.” I said the sign is busy because the food is good.','Go next door. The Alvarez house. They didn’t get any pupusas today. Take these. Feed the children first. The grown-ups will pretend they’re not hungry.']},
   {give:'pupusa'},
@@ -189,8 +207,8 @@ SCENES.ch12Carmen=[
 SCENES.ch12Alvarez=[
   {flag:'ch12-alvarez',value:'pending'},
   {talk:'Daisy',lines:['Tom! Tom! Everybody stopped! Abuela stopped in the middle of saying NO!']},
-  {talk:'Tom',lines:['Okay. The whole family is frozen in amber. Marlowe’s grey got in through the front door.']},
-  {talk:'Amy',lines:['Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck when they’re moving.']},
+  {talk:'Tom',lines:['Okay. The whole family is frozen in amber, same as Doña Carmen. Marlowe’s grey got in through the front door.']},
+  {talk:'Amy',lines:['Save the pupusas for when they wake up. Warmth isn’t only food. Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck next to somebody who’s moving.']},
   {talk:'Grace',lines:['You mean...']},
   {talk:'Amy',lines:['Everybody up. Girls, with me. We’re running laps around the kitchen table.']},
   {talk:'Rose',lines:['Run with us, Mommy!']},
@@ -204,6 +222,7 @@ SCENES.ch12Alvarez=[
   {talk:'Amy',lines:['Lap three! Everybody on the last one!']},
   {call:()=>{ sfx.ding&&sfx.ding(); const m=worlds.casa&&worlds.casa.npcs.find(n=>n.name==='Mrs. Alvarez'); if(m) m.amber=false; }},
   {talk:'Mrs. Alvarez',lines:['...NO. I said no. Why is everyone in my kitchen? Is that a mother running laps with two little girls?','...Okay. That one can stay.']},
+  {talk:'TNB',lines:['Pupusas next door, laps in here. Anything warm enough gets the amber moving. Good to know. I have a feeling we’re going to need it.']},
   {talk:'Tom',lines:['That wasn’t a lap. That was a Tombo. Run With Us, Mommy. Amy, Grace and Rose, together.']},
   {flag:'tombo:ff2'},
   {call:()=>showToast&&showToast('New Tombo: Run With Us, Mommy! (Amy, Grace and Rose in front). 75% HEART.',5)},
@@ -269,6 +288,8 @@ SCENES.ch12After=()=>[
   {call:()=>sfx.whoosh&&sfx.whoosh()}, {despawn:'Marlowe'},
   {talk:'Amy',lines:['He just told us something he shouldn’t have.']},
   {talk:'TNB',lines:['He said Long Island is under glass. So Vance sealed it inside a dome, with your mom and dad in it. We’ll have to go under the glass, or around it.']},
+  {talk:'Grace',lines:['The Long Island gate turned amber, Tata. Is Deedee stuck like Doña Carmen was?']},
+  {talk:'Tom',lines:['Maybe. And if she is, we know how to fix it now. We bring her something warm.']},
   {talk:'Tom',lines:['Sal and Sol know every road between here and there. We’ll start at Sol’s cab stand.']},
   {talk:'Tom',lines:['We’ll get them back. We always make our connection.']},
   {trace:'ch12-wrap'}, {hearts:'tom'}, {hearts:'amy'}, {hearts:'tnb'},

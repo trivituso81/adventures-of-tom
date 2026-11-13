@@ -1009,22 +1009,30 @@ chapter	file	line	character	mood	text
 12	data/scenes-ch12.js	135	Rose	angry	He took the pink off the jacaranda!
 12	data/scenes-ch12.js	136	Grace	angry	You can’t just take the pink!
 12	data/scenes-ch12.js	138	Amy	proud	I have twelve kids in my room who’ve had harder mornings than you. You don’t scare me. Colors back, please.
-12	data/scenes-ch12.js	143	Tom	surprised	He’s draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He’s frozen solid.
-12	data/scenes-ch12.js	144	TNB	none	He’s trapped in amber. Amber is warmth that got stuck. Doña Carmen’s is right there, and the Alvarez house is down 2nd. They might be frozen too.
-12	data/scenes-ch12.js	145	Tom	proud	We check on the neighbors first.
+12	data/scenes-ch12.js	143	Tom	surprised	He’s draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He’s not moving.
+12	data/scenes-ch12.js	0	Rose	surprised	He’s inside something. It’s see-through and yellow, like the honey bear.
+12	data/scenes-ch12.js	0	Grace	surprised	It’s the same color the Long Island gate turned, Tata. That’s amber. It’s what the bugs are stuck in, in my rock book.
+12	data/scenes-ch12.js	0	TNB	loving	It’s hard like glass, but it’s warm. Babe, it’s as warm as a mug right out of the kiln.
+12	data/scenes-ch12.js	0	Tom	none	He’s all right in there. He’s just stopped, right in the middle of one second.
+12	data/scenes-ch12.js	0	Amy	none	This is what Vance told us he does. He stops people at a nice moment so that nothing ever changes. This is what it looks like up close.
+12	data/scenes-ch12.js	144	TNB	none	When that man took the color and the music, the warm part of the day had nowhere to go. So it set hard, right around him. That’s what amber is: warmth that got stuck.
+12	data/scenes-ch12.js	0	Tom	proud	Doña Carmen’s is right there, and the Alvarez house is down 2nd. If it happened to him, it happened to them. We check on the neighbors first.
+12	data/scenes-ch12.js	0	Tom	none	And if amber is warmth that got stuck, maybe we can get it moving again.
 12	data/scenes-ch12.js	152	Rose	surprised	Tata. Doña Carmen turned into candy.
-12	data/scenes-ch12.js	153	Tom	none	She’s frozen in amber, right in the middle of a sentence.
+12	data/scenes-ch12.js	153	Tom	none	She’s in amber too, frozen right in the middle of a sentence.
 12	data/scenes-ch12.js	154	Grace	surprised	She’s still pointing at the volcano.
-12	data/scenes-ch12.js	155	TNB	loving	Amber is just warmth that got stuck. You don’t break it. You give it somewhere to go.
-12	data/scenes-ch12.js	156	Amy	proud	Warmth. We’re good at warmth. Everybody find the warmest thing in the room.
+12	data/scenes-ch12.js	155	TNB	loving	It’s warm, same as Mr. Washington’s. I don’t think we can break it, and I don’t think we should. If amber is warmth that got stuck, we have to give the warmth somewhere to go.
+12	data/scenes-ch12.js	156	Amy	proud	Warmth. We’re good at warmth. Something warm from outside the amber might get it flowing again. Everybody find the warmest thing in the room.
 12	data/scenes-ch12.js	157	Rose	happy	The comal! The pupusas!
 12	data/scenes-ch12.js	158	Tom	surprised	Tom lifts a pupusa off the comal. It’s still hot. Steam is coming off it, in a room where nothing else is moving.
 12	data/scenes-ch12.js	159	Tom	loving	Doña Carmen. It’s Tom. Nobody on this block has ever left your door hungry. We’re here to eat. Please wake up.
 12	data/scenes-ch12.js	160	Nara	happy	Nara sits at Carmen’s feet, tail wagging in a perfect circle, and sneezes on the amber.
-12	data/scenes-ch12.js	165	Tom	loving	You were amber for a little while.
+12	data/scenes-ch12.js	165	Tom	loving	You were frozen in amber for a little while. A man in a grey suit took the color off the block, and all the warmth set hard around you. Your own pupusa got it moving again.
+12	data/scenes-ch12.js	0	TNB	proud	So that’s the rule. You can’t crack amber. You warm it up with something the person loves.
 12	data/scenes-ch12.js	167	Grace	none	A man in a grey suit did it. His name is Marlowe.
-12	data/scenes-ch12.js	179	Tom	none	Okay. The whole family is frozen in amber. Marlowe’s grey got in through the front door.
-12	data/scenes-ch12.js	180	Amy	proud	Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck when they’re moving.
+12	data/scenes-ch12.js	179	Tom	none	Okay. The whole family is frozen in amber, same as Doña Carmen. Marlowe’s grey got in through the front door.
+12	data/scenes-ch12.js	180	Amy	proud	Save the pupusas for when they wake up. Warmth isn’t only food. Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck next to somebody who’s moving.
+12	data/scenes-ch12.js	0	TNB	proud	Pupusas next door, laps in here. Anything warm enough gets the amber moving. Good to know. I have a feeling we’re going to need it.
 12	data/scenes-ch12.js	181	Grace	surprised	You mean...
 12	data/scenes-ch12.js	182	Amy	proud	Everybody up. Girls, with me. We’re running laps around the kitchen table.
 12	data/scenes-ch12.js	183	Rose	happy	Run with us, Mommy!
@@ -1050,6 +1058,8 @@ chapter	file	line	character	mood	text
 12	data/scenes-ch12.js	253	Tom	angry	Tell me how to get in.
 12	data/scenes-ch12.js	256	Amy	surprised	He just told us something he shouldn’t have.
 12	data/scenes-ch12.js	257	TNB	proud	He said Long Island is under glass. So Vance sealed it inside a dome, with your mom and dad in it. We’ll have to go under the glass, or around it.
+12	data/scenes-ch12.js	0	Grace	scared	The Long Island gate turned amber, Tata. Is Deedee stuck like Doña Carmen was?
+12	data/scenes-ch12.js	0	Tom	loving	Maybe. And if she is, we know how to fix it now. We bring her something warm.
 12	data/scenes-ch12.js	258	Tom	proud	Sal and Sol know every road between here and there. We’ll start at Sol’s cab stand.
 12	data/scenes-ch12.js	259	Tom	proud	We’ll get them back. We always make our connection.
 13	data/scenes-ch13.js	47	Tom	scared	Sol. Vance put a glass dome over Long Island, and my parents are inside it. Sal always says you two know every road there is.

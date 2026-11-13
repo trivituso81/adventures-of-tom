@@ -3687,14 +3687,14 @@ scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	He walks off into the grey, hum
 scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	He walks off into the grey, humming a jingle that never resolves.	tnb	unimpressed
 scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	He walks off into the grey, humming a jingle that never resolves.	grace	angry
 scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	He walks off into the grey, humming a jingle that never resolves.	rose	unimpressed
-scene	12	data/scenes-ch12.js	ch12Marlowe	Tom	He’s draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He’s frozen solid.	amy	surprised
-scene	12	data/scenes-ch12.js	ch12Marlowe	Tom	He’s draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He’s frozen solid.	tnb	sad
-scene	12	data/scenes-ch12.js	ch12Marlowe	Tom	He’s draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He’s frozen solid.	grace	scared
-scene	12	data/scenes-ch12.js	ch12Marlowe	Tom	He’s draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He’s frozen solid.	rose	scared
-scene	12	data/scenes-ch12.js	ch12Marlowe	TNB	He’s trapped in amber. Amber is warmth that got stuck. Doña Carmen’s is right there, and the Alvarez house is down 2nd. They might be frozen too.	tom	sad
-scene	12	data/scenes-ch12.js	ch12Marlowe	TNB	He’s trapped in amber. Amber is warmth that got stuck. Doña Carmen’s is right there, and the Alvarez house is down 2nd. They might be frozen too.	amy	surprised
-scene	12	data/scenes-ch12.js	ch12Marlowe	TNB	He’s trapped in amber. Amber is warmth that got stuck. Doña Carmen’s is right there, and the Alvarez house is down 2nd. They might be frozen too.	grace	surprised
-scene	12	data/scenes-ch12.js	ch12Marlowe	TNB	He’s trapped in amber. Amber is warmth that got stuck. Doña Carmen’s is right there, and the Alvarez house is down 2nd. They might be frozen too.	rose	surprised
+scene	12	data/scenes-ch12.js	ch12Marlowe	Tom	He’s draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He’s not moving.	amy	surprised
+scene	12	data/scenes-ch12.js	ch12Marlowe	Tom	He’s draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He’s not moving.	tnb	sad
+scene	12	data/scenes-ch12.js	ch12Marlowe	Tom	He’s draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He’s not moving.	grace	scared
+scene	12	data/scenes-ch12.js	ch12Marlowe	Tom	He’s draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He’s not moving.	rose	scared
+scene	12	data/scenes-ch12.js	ch12Marlowe	TNB	When that man took the color and the music, the warm part of the day had nowhere to go. So it set hard, right around him. That’s what amber is: warmth that got stuck.	tom	sad
+scene	12	data/scenes-ch12.js	ch12Marlowe	TNB	When that man took the color and the music, the warm part of the day had nowhere to go. So it set hard, right around him. That’s what amber is: warmth that got stuck.	amy	surprised
+scene	12	data/scenes-ch12.js	ch12Marlowe	TNB	When that man took the color and the music, the warm part of the day had nowhere to go. So it set hard, right around him. That’s what amber is: warmth that got stuck.	grace	surprised
+scene	12	data/scenes-ch12.js	ch12Marlowe	TNB	When that man took the color and the music, the warm part of the day had nowhere to go. So it set hard, right around him. That’s what amber is: warmth that got stuck.	rose	surprised
 scene	12	data/scenes-ch12.js	ch12Marlowe	Tom	We check on the neighbors first.	amy	proud
 scene	12	data/scenes-ch12.js	ch12Marlowe	Tom	We check on the neighbors first.	tnb	proud
 scene	12	data/scenes-ch12.js	ch12Marlowe	Tom	We check on the neighbors first.	grace	proud
@@ -3703,22 +3703,22 @@ scene	12	data/scenes-ch12.js	ch12Carmen	Rose	Tata. Doña Carmen turned into cand
 scene	12	data/scenes-ch12.js	ch12Carmen	Rose	Tata. Doña Carmen turned into candy.	amy	surprised
 scene	12	data/scenes-ch12.js	ch12Carmen	Rose	Tata. Doña Carmen turned into candy.	tnb	sad
 scene	12	data/scenes-ch12.js	ch12Carmen	Rose	Tata. Doña Carmen turned into candy.	grace	unimpressed
-scene	12	data/scenes-ch12.js	ch12Carmen	Tom	She’s frozen in amber, right in the middle of a sentence.	amy	sad
-scene	12	data/scenes-ch12.js	ch12Carmen	Tom	She’s frozen in amber, right in the middle of a sentence.	tnb	sad
-scene	12	data/scenes-ch12.js	ch12Carmen	Tom	She’s frozen in amber, right in the middle of a sentence.	grace	surprised
-scene	12	data/scenes-ch12.js	ch12Carmen	Tom	She’s frozen in amber, right in the middle of a sentence.	rose	surprised
+scene	12	data/scenes-ch12.js	ch12Carmen	Tom	She’s in amber too, frozen right in the middle of a sentence.	amy	sad
+scene	12	data/scenes-ch12.js	ch12Carmen	Tom	She’s in amber too, frozen right in the middle of a sentence.	tnb	sad
+scene	12	data/scenes-ch12.js	ch12Carmen	Tom	She’s in amber too, frozen right in the middle of a sentence.	grace	surprised
+scene	12	data/scenes-ch12.js	ch12Carmen	Tom	She’s in amber too, frozen right in the middle of a sentence.	rose	surprised
 scene	12	data/scenes-ch12.js	ch12Carmen	Grace	She’s still pointing at the volcano.	tom	sad
 scene	12	data/scenes-ch12.js	ch12Carmen	Grace	She’s still pointing at the volcano.	amy	sad
 scene	12	data/scenes-ch12.js	ch12Carmen	Grace	She’s still pointing at the volcano.	tnb	sad
 scene	12	data/scenes-ch12.js	ch12Carmen	Grace	She’s still pointing at the volcano.	rose	surprised
-scene	12	data/scenes-ch12.js	ch12Carmen	TNB	Amber is just warmth that got stuck. You don’t break it. You give it somewhere to go.	tom	loving
-scene	12	data/scenes-ch12.js	ch12Carmen	TNB	Amber is just warmth that got stuck. You don’t break it. You give it somewhere to go.	amy	surprised
-scene	12	data/scenes-ch12.js	ch12Carmen	TNB	Amber is just warmth that got stuck. You don’t break it. You give it somewhere to go.	grace	surprised
-scene	12	data/scenes-ch12.js	ch12Carmen	TNB	Amber is just warmth that got stuck. You don’t break it. You give it somewhere to go.	rose	surprised
-scene	12	data/scenes-ch12.js	ch12Carmen	Amy	Warmth. We’re good at warmth. Everybody find the warmest thing in the room.	tom	proud
-scene	12	data/scenes-ch12.js	ch12Carmen	Amy	Warmth. We’re good at warmth. Everybody find the warmest thing in the room.	tnb	happy
-scene	12	data/scenes-ch12.js	ch12Carmen	Amy	Warmth. We’re good at warmth. Everybody find the warmest thing in the room.	grace	proud
-scene	12	data/scenes-ch12.js	ch12Carmen	Amy	Warmth. We’re good at warmth. Everybody find the warmest thing in the room.	rose	proud
+scene	12	data/scenes-ch12.js	ch12Carmen	TNB	It’s warm, same as Mr. Washington’s. I don’t think we can break it, and I don’t think we should. If amber is warmth that got stuck, we have to give the warmth somewhere to go.	tom	loving
+scene	12	data/scenes-ch12.js	ch12Carmen	TNB	It’s warm, same as Mr. Washington’s. I don’t think we can break it, and I don’t think we should. If amber is warmth that got stuck, we have to give the warmth somewhere to go.	amy	surprised
+scene	12	data/scenes-ch12.js	ch12Carmen	TNB	It’s warm, same as Mr. Washington’s. I don’t think we can break it, and I don’t think we should. If amber is warmth that got stuck, we have to give the warmth somewhere to go.	grace	surprised
+scene	12	data/scenes-ch12.js	ch12Carmen	TNB	It’s warm, same as Mr. Washington’s. I don’t think we can break it, and I don’t think we should. If amber is warmth that got stuck, we have to give the warmth somewhere to go.	rose	surprised
+scene	12	data/scenes-ch12.js	ch12Carmen	Amy	Warmth. We’re good at warmth. Something warm from outside the amber might get it flowing again. Everybody find the warmest thing in the room.	tom	proud
+scene	12	data/scenes-ch12.js	ch12Carmen	Amy	Warmth. We’re good at warmth. Something warm from outside the amber might get it flowing again. Everybody find the warmest thing in the room.	tnb	happy
+scene	12	data/scenes-ch12.js	ch12Carmen	Amy	Warmth. We’re good at warmth. Something warm from outside the amber might get it flowing again. Everybody find the warmest thing in the room.	grace	proud
+scene	12	data/scenes-ch12.js	ch12Carmen	Amy	Warmth. We’re good at warmth. Something warm from outside the amber might get it flowing again. Everybody find the warmest thing in the room.	rose	proud
 scene	12	data/scenes-ch12.js	ch12Carmen	Rose	The comal! The pupusas!	tom	happy
 scene	12	data/scenes-ch12.js	ch12Carmen	Rose	The comal! The pupusas!	amy	proud
 scene	12	data/scenes-ch12.js	ch12Carmen	Rose	The comal! The pupusas!	tnb	happy
@@ -3753,9 +3753,9 @@ scene	12	data/scenes-ch12.js	ch12Carmen	Doña Carmen	Where did my pupusas go?	to
 scene	12	data/scenes-ch12.js	ch12Carmen	Doña Carmen	Where did my pupusas go?	rose	scared
 scene	12	data/scenes-ch12.js	ch12Carmen	Doña Carmen	Where did my pupusas go?	grace	happy
 scene	12	data/scenes-ch12.js	ch12Carmen	Doña Carmen	Where did my pupusas go?	tnb	happy
-scene	12	data/scenes-ch12.js	ch12Carmen	Tom	You were amber for a little while.	carmen	surprised
-scene	12	data/scenes-ch12.js	ch12Carmen	Tom	You were amber for a little while.	amy	loving
-scene	12	data/scenes-ch12.js	ch12Carmen	Tom	You were amber for a little while.	tnb	loving
+scene	12	data/scenes-ch12.js	ch12Carmen	Tom	You were frozen in amber for a little while. A man in a grey suit took the color off the block, and all the warmth set hard around you. Your own pupusa got it moving again.	carmen	surprised
+scene	12	data/scenes-ch12.js	ch12Carmen	Tom	You were frozen in amber for a little while. A man in a grey suit took the color off the block, and all the warmth set hard around you. Your own pupusa got it moving again.	amy	loving
+scene	12	data/scenes-ch12.js	ch12Carmen	Tom	You were frozen in amber for a little while. A man in a grey suit took the color off the block, and all the warmth set hard around you. Your own pupusa got it moving again.	tnb	loving
 scene	12	data/scenes-ch12.js	ch12Carmen	Doña Carmen	I was what? I had a whole sentence. I lost the sentence. It was a good sentence.	tom	happy
 scene	12	data/scenes-ch12.js	ch12Carmen	Doña Carmen	I was what? I had a whole sentence. I lost the sentence. It was a good sentence.	amy	happy
 scene	12	data/scenes-ch12.js	ch12Carmen	Doña Carmen	I was what? I had a whole sentence. I lost the sentence. It was a good sentence.	tnb	happy
@@ -3778,16 +3778,16 @@ scene	12	data/scenes-ch12.js	ch12Alvarez	Daisy	Tom! Tom! Everybody stopped! Abue
 scene	12	data/scenes-ch12.js	ch12Alvarez	Daisy	Tom! Tom! Everybody stopped! Abuela stopped in the middle of saying NO!	tnb	surprised
 scene	12	data/scenes-ch12.js	ch12Alvarez	Daisy	Tom! Tom! Everybody stopped! Abuela stopped in the middle of saying NO!	grace	surprised
 scene	12	data/scenes-ch12.js	ch12Alvarez	Daisy	Tom! Tom! Everybody stopped! Abuela stopped in the middle of saying NO!	rose	surprised
-scene	12	data/scenes-ch12.js	ch12Alvarez	Tom	Okay. The whole family is frozen in amber. Marlowe’s grey got in through the front door.	amy	surprised
-scene	12	data/scenes-ch12.js	ch12Alvarez	Tom	Okay. The whole family is frozen in amber. Marlowe’s grey got in through the front door.	tnb	sad
-scene	12	data/scenes-ch12.js	ch12Alvarez	Tom	Okay. The whole family is frozen in amber. Marlowe’s grey got in through the front door.	grace	scared
-scene	12	data/scenes-ch12.js	ch12Alvarez	Tom	Okay. The whole family is frozen in amber. Marlowe’s grey got in through the front door.	rose	scared
-scene	12	data/scenes-ch12.js	ch12Alvarez	Tom	Okay. The whole family is frozen in amber. Marlowe’s grey got in through the front door.	daisy	scared
-scene	12	data/scenes-ch12.js	ch12Alvarez	Amy	Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck when they’re moving.	tom	surprised
-scene	12	data/scenes-ch12.js	ch12Alvarez	Amy	Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck when they’re moving.	tnb	surprised
-scene	12	data/scenes-ch12.js	ch12Alvarez	Amy	Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck when they’re moving.	grace	surprised
-scene	12	data/scenes-ch12.js	ch12Alvarez	Amy	Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck when they’re moving.	rose	happy
-scene	12	data/scenes-ch12.js	ch12Alvarez	Amy	Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck when they’re moving.	daisy	surprised
+scene	12	data/scenes-ch12.js	ch12Alvarez	Tom	Okay. The whole family is frozen in amber, same as Doña Carmen. Marlowe’s grey got in through the front door.	amy	surprised
+scene	12	data/scenes-ch12.js	ch12Alvarez	Tom	Okay. The whole family is frozen in amber, same as Doña Carmen. Marlowe’s grey got in through the front door.	tnb	sad
+scene	12	data/scenes-ch12.js	ch12Alvarez	Tom	Okay. The whole family is frozen in amber, same as Doña Carmen. Marlowe’s grey got in through the front door.	grace	scared
+scene	12	data/scenes-ch12.js	ch12Alvarez	Tom	Okay. The whole family is frozen in amber, same as Doña Carmen. Marlowe’s grey got in through the front door.	rose	scared
+scene	12	data/scenes-ch12.js	ch12Alvarez	Tom	Okay. The whole family is frozen in amber, same as Doña Carmen. Marlowe’s grey got in through the front door.	daisy	scared
+scene	12	data/scenes-ch12.js	ch12Alvarez	Amy	Save the pupusas for when they wake up. Warmth isn’t only food. Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck next to somebody who’s moving.	tom	surprised
+scene	12	data/scenes-ch12.js	ch12Alvarez	Amy	Save the pupusas for when they wake up. Warmth isn’t only food. Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck next to somebody who’s moving.	tnb	surprised
+scene	12	data/scenes-ch12.js	ch12Alvarez	Amy	Save the pupusas for when they wake up. Warmth isn’t only food. Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck next to somebody who’s moving.	grace	surprised
+scene	12	data/scenes-ch12.js	ch12Alvarez	Amy	Save the pupusas for when they wake up. Warmth isn’t only food. Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck next to somebody who’s moving.	rose	happy
+scene	12	data/scenes-ch12.js	ch12Alvarez	Amy	Save the pupusas for when they wake up. Warmth isn’t only food. Heat is just movement. When the girls can’t sleep, we run. Nobody stays stuck next to somebody who’s moving.	daisy	surprised
 scene	12	data/scenes-ch12.js	ch12Alvarez	Grace	You mean...	amy	proud
 scene	12	data/scenes-ch12.js	ch12Alvarez	Grace	You mean...	rose	happy
 scene	12	data/scenes-ch12.js	ch12Alvarez	Grace	You mean...	tom	unimpressed

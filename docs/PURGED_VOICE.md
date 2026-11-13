@@ -2,6 +2,10 @@
 
 Tom asked (again) for voice lines and clips that the full game never plays to be removed, because every unused line shows up in the Voice Library and the bake lists and costs ElevenLabs credits. This is the record. The audio itself is not lost: it is in git history at commit `6624b03` (the parent of the purge commit), so `git show 6624b03:data/voice/<id>.js` brings any of it back.
 
+## 2026-11-12 `amberclear1`: 8 chapter 12 amber clips with superseded wording
+
+Tom asked for much more explanation of amber in chapter 12. Eight lines were reworded again after Phase 1 and their baked clips (dialog-ch28.js) were removed: tnb "Amber is just warmth that got stuck...", amy "Warmth. We're good at warmth...", tom "You were amber for a little while.", amy "Heat is just movement...", tnb "He's trapped in amber...", tom "He's draining the color... He's frozen solid.", tom "Okay. The whole family is frozen in amber. Marlowe's grey...", tom "She's frozen in amber, right in the middle of a sentence." Git history keeps the audio.
+
 ## 2026-11-11 `deedeetom1`: 30 Deedee clips with the old wording "Tommy"
 
 Tom asked for Deedee to call him Tom. The game text was changed and the 30 baked clips that said "Tommy" were removed (deedee.js hug and moon_back "Group hug! Tommy, you too!"; 28 dialogue clips in dialog-ch1, ch2, ch9, ch25, ch26, ch28). They need a re-bake with the new text. Audio is in git history (commit before deedeetom1).
