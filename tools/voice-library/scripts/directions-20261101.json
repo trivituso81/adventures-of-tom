@@ -2445,13 +2445,6 @@
 "script": "[sincere, warm] Worth it. Every mile. [mock stern, emphatic] But for the record? That was a CLOSED set!"
 },
 {
-"voice": "tom",
-"speaker": "Tom",
-"text": "A text from Amy. \"Parent-teacher conference night is Thursday. Thirty parents. I need backup. Bring snacks. And bring the good uncle.\"",
-"ctx": "",
-"script": "[dry, flat] A text from Amy. [brisk, frazzled] \"Parent-teacher conference night is Thursday. Thirty parents. I need backup. [pleading, sweet] Bring snacks. And bring the good uncle.\""
-},
-{
 "voice": "tnb",
 "speaker": "TNB",
 "text": "You're the only uncle.",
@@ -3203,27 +3196,6 @@
 {
 "voice": "tom",
 "speaker": "Tom",
-"text": "A text from TNB.",
-"ctx": "",
-"script": "[dry, calm] A text from TNB."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "\"Babe. Come home. Your house. NOW. It's about Bready Mercury.\"",
-"ctx": "",
-"script": "[flat, urgent] \"Babe. Come home. Your house. NOW. [alarmed, quiet] It's about Bready Mercury.\""
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "\"Also there are acorns in the flour.\"",
-"ctx": "",
-"script": "[deadpan, bewildered] \"Also there are acorns in the flour.\""
-},
-{
-"voice": "tom",
-"speaker": "Tom",
 "text": "He has a key. I gave him a key for exactly this kind of emergency.",
 "ctx": "",
 "script": "[tense, dry] He has a key. [sinking, worried] I gave him a key for exactly this kind of emergency."
@@ -3647,13 +3619,6 @@
 "text": "And there's a scrap of paper in here. A drawing of three acorns. And one word: CHITTER.",
 "ctx": "",
 "script": "[easy, curious] And there's a scrap of paper in here. A drawing of three acorns. [hushed, ominous] And one word: CHITTER."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "Tom always keeps a heel of sourdough in his jacket. For emergencies. This is an emergency.",
-"ctx": "",
-"script": "[dry, mock heroic] Tom always keeps a heel of sourdough in his jacket. [deadpan] For emergencies. [flat, grave] This is an emergency."
 },
 {
 "voice": "tnb",
@@ -4118,13 +4083,6 @@
 "script": "[dry, fond] Fine. It was nuts."
 },
 {
-"voice": "tom",
-"speaker": "Tom",
-"text": "A text from Grace. \"TATA. The library is WHISPERING. Like actually. Page says it's fine. It's NOT fine. Come home.\"",
-"ctx": "",
-"script": "[dry, level] A text from Grace. [quick, mock dramatic] \"TAH TAH. The library is WHISPERING. Like actually. Page says it's fine. It's NOT fine. [flat, pleading] Come home.\""
-},
-{
 "voice": "tnb",
 "speaker": "TNB",
 "text": "The library is whispering. Is that not just... its job?",
@@ -4391,20 +4349,6 @@
 "script": "[grudging, impressed] Okay. That's actually a good book. [stern, whispering] Don't tell anyone I said that."
 },
 {
-"voice": "?Whispers",
-"speaker": "Whispers",
-"text": "All around the rug, the picture books go quiet. One of them says, very softly: ...again?",
-"ctx": "Scene ch7Story",
-"script": "[hushed, tender] All around the rug, the picture books go quiet. [soft, gentle] One of them says, very softly: [tiny, shy] ...again?"
-},
-{
-"voice": "",
-"speaker": "Whispers",
-"text": "All around the rug, the picture books go quiet. One of them says, very softly: ...again?",
-"ctx": "Scene ch7Story",
-"script": "[hushed, tender] All around the rug, the picture books go quiet. [soft, gentle] One of them says, very softly: [tiny, shy] ...again?"
-},
-{
 "voice": "bigone",
 "speaker": "The Cliffhanger",
 "text": "And then... the uncle walked into Fiction... and he saw... he saw...",
@@ -4650,34 +4594,6 @@
 "script": "[mechanical, ominous] Click. Click. CLUNK. [hushed, slow] The brass drawer slides shut by itself."
 },
 {
-"voice": "?Whispers",
-"speaker": "Whispers",
-"text": "All through the Stacks, every book stops whispering at once.",
-"ctx": "Scene ch7Door",
-"script": "[hushed, eerie] All through the Stacks, every book stops whispering at once."
-},
-{
-"voice": "",
-"speaker": "Whispers",
-"text": "All through the Stacks, every book stops whispering at once.",
-"ctx": "Scene ch7Door",
-"script": "[hushed, eerie] All through the Stacks, every book stops whispering at once."
-},
-{
-"voice": "?Whispers",
-"speaker": "Whispers",
-"text": "Then, from behind the doors, one voice. Old. Dry. Very slow. \"...Who's there?\"",
-"ctx": "Scene ch7Door",
-"script": "[hushed, ominous] Then, from behind the doors, one voice. Old. Dry. Very slow. [creaky, faint] \"...Who's there?\""
-},
-{
-"voice": "",
-"speaker": "Whispers",
-"text": "Then, from behind the doors, one voice. Old. Dry. Very slow. \"...Who's there?\"",
-"ctx": "Scene ch7Door",
-"script": "[hushed, ominous] Then, from behind the doors, one voice. Old. Dry. Very slow. [creaky, faint] \"...Who's there?\""
-},
-{
 "voice": "rose",
 "speaker": "Rose",
 "text": "Tata. The door talked.",
@@ -4916,20 +4832,6 @@
 "script": "[honest, delighted] It's itchy. [bright, earnest] I love it."
 },
 {
-"voice": "tom",
-"speaker": "Tom",
-"text": "A text from TNB. \"Babe. Bernadette signed you up for the 2nd Ave potluck. You're on bread. For forty people.\"",
-"ctx": "",
-"script": "[dry, level] A text from TNB. [easy, amused] \"Babe. Bernadette signed you up for the 2nd Ave potluck. [teasing, breezy] You're on bread. For forty people.\""
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "\"I said yes for you. You're welcome. Bring the starter.\"",
-"ctx": "",
-"script": "[easy, smug] \"I said yes for you. [cheeky, breezy] You're welcome. Bring the starter.\""
-},
-{
 "voice": "grace",
 "speaker": "Grace",
 "text": "Forty people? Tata. That's a FEAST.",
@@ -4942,20 +4844,6 @@
 "text": "...Bready Mercury is going to need a bigger jar.",
 "ctx": "",
 "script": "[dry, resigned] ...Bready Mercury is going to need a bigger jar."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "\"Babe. Potluck is TONIGHT. Forty people. You're on bread.\"",
-"ctx": "",
-"script": "[easy, amused] \"Babe. Potluck is TONIGHT. [teasing, breezy] Forty people. You're on bread.\""
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "\"Also every oven on 2nd Ave just went cold. At the same time. At noon. Come home.\"",
-"ctx": "",
-"script": "[level, serious] \"Also every oven on 2nd Ave just went cold. [alarmed, clipped] At the same time. At noon. [urgent, quiet] Come home.\""
 },
 {
 "voice": "tom",
@@ -5247,16 +5135,9 @@
 {
 "voice": "tom",
 "speaker": "tom",
-"text": "A pilot light. A tiny blue flame, floating right there. That is Tom’s own stove. That's the forty loaves.",
+"text": "A pilot light. A tiny blue flame, floating right there. That is my own stove. That's the forty loaves.",
 "ctx": "",
-"script": "[hushed, awed] A pilot light. A tiny blue flame, floating right there. [dry, warm] That is Tom’s own stove. That's the forty loaves."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "Tom takes out the sandwich he packed for himself. Turkey, mustard, his own sourdough. He puts it on his own plate. He sits down.",
-"ctx": "",
-"script": "[dry, measured] Tom takes out the sandwich he packed for himself. [flat, matter-of-fact] Turkey, mustard, his own sourdough. [deadpan, calm] He puts it on his own plate. He sits down."
+"script": "[hushed, awed] A pilot light. A tiny blue flame, floating right there. [dry, warm] That is my own stove. That's the forty loaves."
 },
 {
 "voice": "tnb",
@@ -5607,20 +5488,6 @@
 "text": "...I love that level.",
 "ctx": "",
 "script": "[soft, fond] ...I love that level."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "A text from Deedee. \"Honey. A letter came for you at our house. Fancy envelope. Gold wax seal with a little clock on it.\"",
-"ctx": "",
-"script": "[dry, curious] A text from Deedee. [brisk, fussing] \"Honey. A letter came for you at our house. [intrigued, lilting] Fancy envelope. Gold wax seal with a little clock on it.\""
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "\"It says THE MOON CLUB. Nobody gets invited to the Moon Club. I've lived here forty years. I love you to the moon and back. Call me.\"",
-"ctx": "",
-"script": "[hushed, awed] \"It says THE MOON CLUB. [emphatic, breathless] Nobody gets invited to the Moon Club. I've lived here forty years. [warm, loving] I love you to the moon and back. Call me.\""
 },
 {
 "voice": "tnb",
@@ -6174,13 +6041,6 @@
 "text": "They dance across the dusty floor, slow and small and very close. Boppy doesn't mention his stomach once.",
 "ctx": "Scene ch9Dance",
 "script": "[soft, tender] They dance across the dusty floor, slow and small and very close. [gentle, amused] Boppy doesn't mention his stomach once."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "(Tom doesn't take a picture. Tom takes four pictures.)",
-"ctx": "",
-"script": "[dry, quiet] (Tom doesn't take a picture. [deadpan, warm] Tom takes four pictures.)"
 },
 {
 "voice": "?Dome doors",
@@ -7268,20 +7128,6 @@
 "script": "[teary, relenting] Fine. [fond, mock-stern] One slice. For the girl who said it."
 },
 {
-"voice": "tom",
-"speaker": "Tom",
-"text": "A text from TNB. \"babe. every clock in LA stopped at midnight. they just started again. was that you?\"",
-"ctx": "",
-"script": "[dry, warm] A text from TNB. [easy, mellow] \"babe. every clock in LA stopped at midnight. they just started again. [amused, light] was that you?\""
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "Tom writes back: \"Mostly Amy.\" TNB sends a heart. Tom sends one back. Then another one.",
-"ctx": "",
-"script": "[dry, tender] Tom writes back: [deadpan] \"Mostly Amy.\" [soft, fond] TNB sends a heart. Tom sends one back. Then another one."
-},
-{
 "voice": "amy",
 "speaker": "Amy",
 "text": "Mostly Amy. Put that on a shirt.",
@@ -8236,20 +8082,6 @@
 {
 "voice": "?Julian Vance",
 "speaker": "Julian Vance",
-"text": "He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once.",
-"ctx": "Scene ch11Vance",
-"script": "[tense, hushed] He lifts his hat. Behind his head, the big door’s gold clock spins, [sharp, ominous] and every flap in the terminal clicks at once."
-},
-{
-"voice": "",
-"speaker": "Julian Vance",
-"text": "He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once.",
-"ctx": "Scene ch11Vance",
-"script": "[tense, hushed] He lifts his hat. Behind his head, the big door’s gold clock spins, [sharp, ominous] and every flap in the terminal clicks at once."
-},
-{
-"voice": "?Julian Vance",
-"speaker": "Julian Vance",
 "text": "FINAL CALL.",
 "ctx": "Scene ch11Vance",
 "script": "[booming, merciless] FINAL CALL."
@@ -8976,20 +8808,6 @@
 "script": "[breezy, dismissive] That’s the problem with a neighborhood. [cold, crisp] Notes."
 },
 {
-"voice": "?Marlowe",
-"speaker": "Marlowe",
-"text": "He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers.",
-"ctx": "Scene ch12Marlowe",
-"script": "[ominous, deliberate] He lifts a clipboard. The top page says NOTES: LESS. [sharp, crisp] He snaps his fingers."
-},
-{
-"voice": "",
-"speaker": "Marlowe",
-"text": "He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers.",
-"ctx": "Scene ch12Marlowe",
-"script": "[ominous, deliberate] He lifts a clipboard. The top page says NOTES: LESS. [sharp, crisp] He snaps his fingers."
-},
-{
 "voice": "rose",
 "speaker": "Rose",
 "text": "He took the pink off the jacaranda!",
@@ -9037,20 +8855,6 @@
 "text": "I don’t put things back. I take notes. Anyway, Mr. Prime will handle the intersection. Do take a look at the traffic. It’s very stationary.",
 "ctx": "Scene ch12Marlowe",
 "script": "[airy, unbothered] I don’t put things back. I take notes. [sly, smug] Anyway, Mr. Prime will handle the intersection. [dry, pleased] Do take a look at the traffic. It’s very stationary."
-},
-{
-"voice": "?Marlowe",
-"speaker": "Marlowe",
-"text": "He walks off into the grey, humming a jingle that never resolves.",
-"ctx": "Scene ch12Marlowe",
-"script": "[dry, fading] He walks off into the grey, [eerie, flat] humming a jingle that never resolves."
-},
-{
-"voice": "",
-"speaker": "Marlowe",
-"text": "He walks off into the grey, humming a jingle that never resolves.",
-"ctx": "Scene ch12Marlowe",
-"script": "[dry, fading] He walks off into the grey, [eerie, flat] humming a jingle that never resolves."
 },
 {
 "voice": "tom",
@@ -9118,23 +8922,9 @@
 {
 "voice": "tom",
 "speaker": "Tom",
-"text": "Tom lifts a pupusa off the comal. It’s still hot. Steam is coming off it, in a room where nothing else is moving.",
-"ctx": "Scene ch12Carmen",
-"script": "[soft, marveling] Tom lifts a pupusa off the comal. It’s still hot. [hushed, uneasy] Steam is coming off it, in a room where nothing else is moving."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
 "text": "Doña Carmen. It’s Tom. Nobody on this block has ever left your door hungry. We’re here to eat. Please wake up.",
 "ctx": "Scene ch12Carmen",
 "script": "[gentle, coaxing] Doña Carmen. It’s Tom. [tender, teasing] Nobody on this block has ever left your door hungry. We’re here to eat. [soft, pleading] Please wake up."
-},
-{
-"voice": "carmen",
-"speaker": "Doña Carmen",
-"text": "A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes.",
-"ctx": "Scene ch12Carmen",
-"script": "[hushed, delicate] A crack runs up the amber like sugar glass. Then another. [warm, relieved] Then it falls away in warm gold flakes."
 },
 {
 "voice": "carmen",
@@ -10313,13 +10103,6 @@
 "script": "[muffled, tense] (through the glass) One. Two. [quick, pained] Don’t think about the interest. ...Three."
 },
 {
-"voice": "tom",
-"speaker": "Tom",
-"text": "The coins glow, and then they run. Gold down the glass like honey. The amber sighs and opens. Right at the height of a door.",
-"ctx": "Scene ch13After",
-"script": "[hushed, wondering] The coins glow, and then they run. Gold down the glass like honey. [soft, reverent] The amber sighs and opens. [quiet, dry] Right at the height of a door."
-},
-{
 "voice": "sal",
 "speaker": "Sal",
 "text": "It worked! Gold remembers being warm! I told you! Nobody ever believes the cab driver!",
@@ -11174,13 +10957,6 @@
 "script": "[winded, wry] Everybody okay? [rueful, dry] He hits like a dad who loves you and is very upset about it."
 },
 {
-"voice": "tom",
-"speaker": "Tom",
-"text": "The gold goes soft. Then it runs, slow, down the front of him, like warm wax, and soaks into the porch. The helmet is the last to go.",
-"ctx": "Scene ch14After",
-"script": "[hushed, awed] The gold goes soft. [slow, wondering] Then it runs, slow, down the front of him, like warm wax, and soaks into the porch. [quiet, gentle] The helmet is the last to go."
-},
-{
 "voice": "rose",
 "speaker": "Rose",
 "text": "The bucket rolled down the steps. Can I have it? Is it mine?",
@@ -11673,13 +11449,6 @@
 {
 "voice": "tom",
 "speaker": "Tom",
-"text": "The laughing stops. Nobody stops it. The sound just goes. Rose’s mouth is open and nothing is coming out.",
-"ctx": "Scene ch15Open",
-"script": "[hushed, unsettled] The laughing stops. Nobody stops it. [low, uneasy] The sound just goes. [soft, alarmed] Rose’s mouth is open and nothing is coming out."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
 "text": "It’s a dining room.",
 "ctx": "Scene ch15Open",
 "script": "[flat, defiant] It’s a dining room."
@@ -11774,13 +11543,6 @@
 "text": "Up, up. Eat something. Sit a minute. Then we try again.",
 "ctx": "Scene ch15Open",
 "script": "[warm, bossy] Up, up. Eat something. [soft, firm] Sit a minute. Then we try again."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "The chip cracks right down the middle. HUSH-9 lowers its glove. For a moment the room is exactly as quiet as it wanted.",
-"ctx": "Scene ch15After",
-"script": "[hushed, tense] The chip cracks right down the middle. [low, wary] HUSH-9 lowers its glove. [quiet, still] For a moment the room is exactly as quiet as it wanted."
 },
 {
 "voice": "rose",
@@ -12378,13 +12140,6 @@
 "script": "[breathless, fierce] Up. Up. We are not done. [firm, driving] Breathe. Then we go again."
 },
 {
-"voice": "tom",
-"speaker": "Tom",
-"text": "The amber goes out of him all at once. Nobody cheers. There is no song. There is only the wind going through the Square.",
-"ctx": "Scene ch16After",
-"script": "[hushed, hollow] The amber goes out of him all at once. Nobody cheers. [bleak, quiet] There is no song. [low, soft] There is only the wind going through the Square."
-},
-{
 "voice": "?Marlowe",
 "speaker": "Marlowe",
 "text": "I wanted it quieter. I only ever wanted it quieter.",
@@ -12637,25 +12392,11 @@
 "script": "[gruff, warm] I’ll keep the meter off and the engine on. [kind, firm] Go get your folks, Tommy."
 },
 {
-"voice": "tom",
-"speaker": "Tom",
-"text": "The tower goes up past the top of the screen. The doors at the bottom are glass, and they are glowing like a lit window at dinnertime.",
-"ctx": "Scene ch17Open",
-"script": "[hushed, awed] The tower goes up past the top of the screen. [quiet, uneasy] The doors at the bottom are glass, [soft, wondering] and they are glowing like a lit window at dinnertime."
-},
-{
 "voice": "rose",
 "speaker": "Rose",
 "text": "It’s so tall. Tata, it’s TALLER than the Starlite.",
 "ctx": "Scene ch17Open",
 "script": "[awed, whispering] It’s so tall. [amazed, breathless] Tah Tah, it’s TALLER than the Starlite."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "The lobby is all glass and no people. Every clock says 4:59. The second hands are shaking in place, like they are trying very hard.",
-"ctx": "Scene ch17Lobby",
-"script": "[hushed, uneasy] The lobby is all glass and no people. [flat, low] Every clock says 4:59. [quiet, tender] The second hands are shaking in place, like they are trying very hard."
 },
 {
 "voice": "grace",
@@ -12791,13 +12532,6 @@
 "script": "[dry, amused] I don’t think he knows what he just did."
 },
 {
-"voice": "tom",
-"speaker": "Tom",
-"text": "The seal door swings open on its own. The stairwell goes on. Twenty-nine more floors, straight up, in a glass tube.",
-"ctx": "Scene ch17Race",
-"script": "[wary, dry] The seal door swings open on its own. [daunted, flat] The stairwell goes on. [slow, deadpan] Twenty-nine more floors, straight up, in a glass tube."
-},
-{
 "voice": "amy",
 "speaker": "Amy",
 "text": "You and me. Landing to landing. Loser buys dinner.",
@@ -12873,13 +12607,6 @@
 "text": "After.",
 "ctx": "Scene ch17Race",
 "script": "[tired, dry] After."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "The Vault. One plinth, one snow globe, and a view of Los Angeles at 4:59 PM, golden and perfect and completely still.",
-"ctx": "Scene ch17Vault",
-"script": "[hushed, awestruck] The Vault. One plinth, one snow globe, [quiet, even] and a view of Los Angeles at 4:59 PM, [slow, eerie] golden and perfect and completely still."
 },
 {
 "voice": "rose",
@@ -12987,13 +12714,6 @@
 "script": "[breathless, fierce] Up. Everyone up. We have a lens to break. [firm, driving] Breathe. Then we go again."
 },
 {
-"voice": "tom",
-"speaker": "Tom",
-"text": "The amber lens cracks across the middle. The cold one goes dark. For one second, the whole building holds its breath.",
-"ctx": "Scene ch17After",
-"script": "[hushed, breathless] The amber lens cracks across the middle. [low, tense] The cold one goes dark. [slow, awed] For one second, the whole building holds its breath."
-},
-{
 "voice": "?Archivist",
 "speaker": "Archivist",
 "text": "I was only... keeping them safe.",
@@ -13057,13 +12777,6 @@
 "script": "[hushed, urgent] Tah Tah. The globe."
 },
 {
-"voice": "tom",
-"speaker": "Tom",
-"text": "The snow globe on the plinth lifts an inch off the glass. The gold cable above it goes tight. It is going up.",
-"ctx": "Scene ch17After",
-"script": "[tense, hushed] The snow globe on the plinth lifts an inch off the glass. [low, wary] The gold cable above it goes tight. [grim, flat] It is going up."
-},
-{
 "voice": "?Vance",
 "speaker": "Vance",
 "text": "Thank you for the tour, Tom. Thank you for the Archive. It was very nearly complete.",
@@ -13104,13 +12817,6 @@
 "text": "Everybody breathe. We rest. Then we go to the top.",
 "ctx": "Scene ch17After",
 "script": "[calm, tired] Everybody breathe. We rest. [low, resolute] Then we go to the top."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "A gold lift door stands open at the north wall. No call button. A brass plate: FLOOR 60. BY INVITATION.",
-"ctx": "Scene ch17After",
-"script": "[hushed, solemn] A gold lift door stands open at the north wall. [flat, dry] No call button. [formal, clipped] A brass plate: FLOOR 60. BY INVITATION."
 },
 {
 "voice": "tom",
@@ -13309,13 +13015,6 @@
 "script": "[quiet, weary] I know. [heavy, sorrowful] That is why this is so hard."
 },
 {
-"voice": "tom",
-"speaker": "Tom",
-"text": "The threads of the Loom lean. All of them, all at once, like a field in the wind. They gather into the brass lens at the end of his arm.",
-"ctx": "Scene ch18Pinnacle",
-"script": "[hushed, awed] The threads of the Loom lean. [slow, dreading] All of them, all at once, like a field in the wind. [tense, low] They gather into the brass lens at the end of his arm."
-},
-{
 "voice": "?Vance",
 "speaker": "Vance",
 "text": "The Ray unwrites whatever it touches. It is very gentle. They will not remember being sad. Mrs. Gregori. Mr. TNB. Grace. Rose. Hold hands, please.",
@@ -13363,13 +13062,6 @@
 "text": "Girls. Amy. TNB. Nara. Behind me.",
 "ctx": "Scene ch18Pinnacle",
 "script": "[low, calm] Girls. Amy. TNB. Nara. [steady, protective] Behind me."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "He adjusts his glasses. He has done it before every hard thing, his whole life. Then he raises one hand, palm out, and takes one step forward.",
-"ctx": "Scene ch18Pinnacle",
-"script": "[hushed, tender] He adjusts his glasses. [quiet, grave] He has done it before every hard thing, his whole life. [slow, resolute] Then he raises one hand, palm out, and takes one step forward."
 },
 {
 "voice": "?Floor 60",
@@ -13864,20 +13556,6 @@
 {
 "voice": "?Oblivion Censor",
 "speaker": "Oblivion Censor",
-"text": "The Censor lowers his stamp. The black bar over his face slides to the side, a little at a time, and under it is only a small tired man with ink on his cuffs.",
-"ctx": "Scene ch19After",
-"script": "[soft, wondering] The Censor lowers his stamp. [slow, gentle] The black bar over his face slides to the side, a little at a time, [tender, hushed] and under it is only a small tired man with ink on his cuffs."
-},
-{
-"voice": "",
-"speaker": "Oblivion Censor",
-"text": "The Censor lowers his stamp. The black bar over his face slides to the side, a little at a time, and under it is only a small tired man with ink on his cuffs.",
-"ctx": "Scene ch19After",
-"script": "[soft, wondering] The Censor lowers his stamp. [slow, gentle] The black bar over his face slides to the side, a little at a time, [tender, hushed] and under it is only a small tired man with ink on his cuffs."
-},
-{
-"voice": "?Oblivion Censor",
-"speaker": "Oblivion Censor",
 "text": "I have never been argued with by so many people at once. It was... full.",
 "ctx": "Scene ch19After",
 "script": "[quiet, dazed] I have never been argued with by so many people at once. [soft, wondering] It was... full."
@@ -13955,13 +13633,6 @@
 {
 "voice": "tom",
 "speaker": "Tom",
-"text": "He turns to the Censor, who is looking at the floor.",
-"ctx": "Scene ch19After",
-"script": "[gentle, quiet] He turns to the Censor, [soft, hushed] who is looking at the floor."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
 "text": "You have never delivered anything.",
 "ctx": "Scene ch19After",
 "script": "[gentle, certain] You have never delivered anything."
@@ -14000,20 +13671,6 @@
 "text": "The route is not far. The job is only to put a thing in someone’s hands. You are already very good at the part where you carry it.",
 "ctx": "Scene ch19After",
 "script": "[patient, kind] The route is not far. [steady, gentle] The job is only to put a thing in someone’s hands. [warm, encouraging] You are already very good at the part where you carry it."
-},
-{
-"voice": "?Oblivion Censor",
-"speaker": "Oblivion Censor",
-"text": "The Censor takes the pretzel in both hands, carefully, as if it were made of glass. Then he lifts his stamp, looks at it, and brings it down on the napkin. It does not say RETURN TO SENDER. It says DELIVERED.",
-"ctx": "Scene ch19After",
-"script": "[hushed, tender] The Censor takes the pretzel in both hands, carefully, as if it were made of glass. [soft, slow] Then he lifts his stamp, looks at it, and brings it down on the napkin. [gentle, moved] It does not say RETURN TO SENDER. It says DELIVERED."
-},
-{
-"voice": "",
-"speaker": "Oblivion Censor",
-"text": "The Censor takes the pretzel in both hands, carefully, as if it were made of glass. Then he lifts his stamp, looks at it, and brings it down on the napkin. It does not say RETURN TO SENDER. It says DELIVERED.",
-"ctx": "Scene ch19After",
-"script": "[hushed, tender] The Censor takes the pretzel in both hands, carefully, as if it were made of glass. [soft, slow] Then he lifts his stamp, looks at it, and brings it down on the napkin. [gentle, moved] It does not say RETURN TO SENDER. It says DELIVERED."
 },
 {
 "voice": "?Oblivion Censor",
@@ -14121,13 +13778,6 @@
 "script": "[wry, knowing] Boppy would eat one raw and say it was “fine” [pinched, strained] in a voice."
 },
 {
-"voice": "tom",
-"speaker": "Tom",
-"text": "The kitchen is a mess. Every pot is in use. The window is fogged. It smells like a Sunday.",
-"ctx": "Scene ch19After",
-"script": "[warm, fond] The kitchen is a mess. Every pot is in use. The window is fogged. [soft, content] It smells like a Sunday."
-},
-{
 "voice": "tnb",
 "speaker": "TNB",
 "text": "The oven door handle came off. I fixed it. You could say I handled it.",
@@ -14163,25 +13813,11 @@
 "script": "[solemn, earnest] I am the taster. I have tasted nine times. [dignified, prim] It’s for quality."
 },
 {
-"voice": "tom",
-"speaker": "Tom",
-"text": "The pasta does not go in an arc.",
-"ctx": "Scene ch19After",
-"script": "[dry, deadpan] The pasta does not go in an arc."
-},
-{
 "voice": "grace",
 "speaker": "Grace",
 "text": "It goes in an arc if you believe in it, Tata.",
 "ctx": "Scene ch19After",
 "script": "[sweet, smug] It goes in an arc if you believe in it, [sing-song, unshakable] Tah Tah."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "He looks at the table. Everyone he loves is crowded around it, and somebody has put a rock in the middle like a centerpiece. He doesn’t say anything for a second.",
-"ctx": "Scene ch19After",
-"script": "[soft, moved] He looks at the table. Everyone he loves is crowded around it, [warm, amused] and somebody has put a rock in the middle like a centerpiece. [quiet, full] He doesn’t say anything for a second."
 },
 {
 "voice": "tom",
@@ -14196,13 +13832,6 @@
 "text": "Cab seven! Everybody in. Bring the lasagna on your lap, it holds the heat. Fifty-nine floors, no stops, I am not even charging. I am scared of that tower and I am going anyway.",
 "ctx": "Scene ch19After",
 "script": "[booming, warm] Cab seven! Everybody in. Bring the lasagna on your lap, it holds the heat. [proud, generous] Fifty-nine floors, no stops, I am not even CHARGING. [shaky, resolved] I am scared of that tower... and I am going anyway."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "The snow globe is still on its plinth. Inside it, very small, two stone figures hold each other up. The amber light is crawling on their hands. It is slower than before.",
-"ctx": "Scene ch19After",
-"script": "[hushed, tender] The snow globe is still on its plinth. Inside it, very small, two stone figures hold each other up. [soft, worried] The amber light is crawling on their hands. [quiet, uneasy] It is slower than before."
 },
 {
 "voice": "amy",
@@ -14224,13 +13853,6 @@
 "text": "Everybody sit. Around the plinth. Nobody leave. Plates on laps.",
 "ctx": "Scene ch19After",
 "script": "[warm, easy] Everybody sit. Around the plinth. [soft, firm] Nobody leave. Plates on laps."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "Steam from the lasagna drifts across the glass. The amber light turns the color of toast. A crack of warm yellow runs along the stone, then two, then nine.",
-"ctx": "Scene ch19After",
-"script": "[hushed, wondering] Steam from the lasagna drifts across the glass. The amber light turns the color of toast. [awed, soft] A crack of warm yellow runs along the stone, [rising, breathless] then two, then nine."
 },
 {
 "voice": "grace",
@@ -14289,13 +13911,6 @@
 "script": "[hopeful] Hand me one. [dry, deadpan] For my knees."
 },
 {
-"voice": "tom",
-"speaker": "Tom",
-"text": "Everyone is crowded onto one floor of a glass tower with plates in their laps, and for a minute, it is just a family having dinner, eight people and a dog.",
-"ctx": "Scene ch19After",
-"script": "[warm, soft] Everyone is crowded onto one floor of a glass tower with plates in their laps, [gentle, full] and for a minute, it is just a family having dinner, [quiet, content] eight people and a dog."
-},
-{
 "voice": "deedee",
 "speaker": "Deedee",
 "text": "Tom. Who is the man in the gold coat? The one who kept us on a shelf?",
@@ -14329,13 +13944,6 @@
 "text": "Overhead, through the glass ceiling, every clock in the sky stops. They are all pointing at the same minute: the one just after the last. A door nobody has noticed before, high up in the tower, has begun to open.",
 "ctx": "Scene ch19After",
 "script": "[hushed, eerie] Overhead, through the glass ceiling, every clock in the sky stops. [slow, uncanny] They are all pointing at the same minute: the one just after the last. [tense, awed] A door nobody has noticed before, high up in the tower, has begun to open."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "He sets down his plate. Then he picks it back up.",
-"ctx": "Scene ch19After",
-"script": "[quiet, wry] He sets down his plate. [dry, steady] Then he picks it back up."
 },
 {
 "voice": "tom",
@@ -14392,13 +14000,6 @@
 "text": "THE EXTRA PLACE (the all-eight Family Finish) is ready. It costs 75% HEART.",
 "ctx": "Scene ch20CoreOpen",
 "script": "[bright, announcing] THE EXTRA PLACE (the all-eight Family Finish) is ready. [flat, ominous] It costs 75% HEART."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "In the ceiling of the Vault, a round brass door has opened. It has a clock for a keyhole. It is ticking very slowly, like a heart that has been told to be quiet.",
-"ctx": "Scene ch20Open",
-"script": "[hushed, wondering] In the ceiling of the Vault, a round brass door has opened. It has a clock for a keyhole. [slow, tender] It is ticking very slowly, like a heart that has been told to be quiet."
 },
 {
 "voice": "boppy",
@@ -15024,13 +14625,6 @@
 "script": "[booming, joyful] Cab seven! Everybody in! [giddy, deadpan] I am not charging. I am not even DRIVING. [amazed, hushed] ...Look UP."
 },
 {
-"voice": "tom",
-"speaker": "Tom",
-"text": "High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. A train glides in, quiet as a held breath. The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other.",
-"ctx": "Scene ch20Calm",
-"script": "[hushed, awed] High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. [soft, wondering] A train glides in, quiet as a held breath. [warm, quiet] The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other."
-},
-{
 "voice": "?Vance",
 "speaker": "Vance",
 "text": "I made it from the Engine. It runs both coasts. It does not stop the clocks. It only makes the distance a little shorter. I thought, if I had built that first...",
@@ -15136,13 +14730,6 @@
 "script": "[warm, quiet] That is a good seat to start in."
 },
 {
-"voice": "tom",
-"speaker": "Tom",
-"text": "A week later. Jefferson Park, six in the evening. The street light has come on, and for once it is not worth mentioning.",
-"ctx": "Scene ch20Calm",
-"script": "[calm, contented] A week later. Jefferson Park, six in the evening. [dry, fond] The street light has come on, and for once it is not worth mentioning."
-},
-{
 "voice": "rose",
 "speaker": "Rose",
 "text": "Tata, the train came again. It has a snack cart. It has a snack CART.",
@@ -15183,13 +14770,6 @@
 "text": "I made a mug. It has the same handle as the first one. It is exactly too big.",
 "ctx": "Scene ch20Calm",
 "script": "[easy, fond] I made a mug. It has the same handle as the first one. [dry, deadpan] It is exactly too big."
-},
-{
-"voice": "tom",
-"speaker": "Tom",
-"text": "He sits down on his own porch step. The cup is warm. Everyone he loves is on this street, on both coasts, and every one of them is exactly where they are, with a train in between.",
-"ctx": "Scene ch20Calm",
-"script": "[quiet, contented] He sits down on his own porch step. The cup is warm. [slow, warm] Everyone he loves is on this street, on both coasts, and every one of them is exactly where they are, with a train in between."
 },
 {
 "voice": "grace",

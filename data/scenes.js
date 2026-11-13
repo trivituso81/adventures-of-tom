@@ -1339,7 +1339,7 @@ SCENES.ch4End=[
   {call:()=>{ if(typeof naraPuddle==='function') { const n=sceneActor('nara'); if(n) naraPuddle(currentMap,n.x,n.y); } }},
   {trace:'ch4-wrap'}, {hearts:'tom'},
   {call:()=>{ sfx.ding&&sfx.ding(); }},
-  {talk:'Tom',lines:['A text from Amy. "Parent-teacher conference night is Thursday. Thirty parents. I need backup. Bring snacks. And bring the good uncle."']},
+  {talk:'Narrator',lines:['A text from Amy. "Parent-teacher conference night is Thursday. Thirty parents. I need backup. Bring snacks. And bring the good uncle."']},
   {talk:'TNB',lines:['You\'re the only uncle.']},
   {talk:'Tom',lines:['Which makes me the good one. By default. I\'ll take it.']},
   {party:null},
@@ -1875,7 +1875,7 @@ const CH6_AFTER=(lost,lines)=>[
 SCENES.ch6Arrive=[
   {flag:'ch6-goal'},
   {call:()=>sfx.ding&&sfx.ding()},
-  {talk:'Tom',lines:['A text from TNB.','"Babe. Come home. Your house. NOW. It\'s about Bready Mercury."','"Also there are acorns in the flour."']},
+  {talk:'Narrator',lines:['A text from TNB.','"Babe. Come home. Your house. NOW. It\'s about Bready Mercury."','"Also there are acorns in the flour."']},
   {talk:'Tom',lines:['He has a key. I gave him a key for exactly this kind of emergency.','I didn\'t picture acorns.']},
   {toast:'Goal: Tom’s house (3468) in Jefferson Park, south of Downtown.',time:4.5}
 ];
@@ -2019,7 +2019,7 @@ for(const C of CH6_CACHES) SCENES['ch6Dig_'+C.c]=ch6DigScene(C);
 // 7. Optional: the dog park. What will Nara fetch? (data in ch6Throw below).
 SCENES.ch6Fetch=[
   {flag:'ch6-fetch'},
-  {talk:'Tom',lines:['Tom always keeps a heel of sourdough in his jacket. For emergencies. This is an emergency.']},
+  {talk:'Narrator',lines:['Tom always keeps a heel of sourdough in his jacket. For emergencies. This is an emergency.']},
   {call:()=>sfx.whoosh()},
   {talk:'Nara',lines:['Nara catches it in midair. She runs one lap. Two laps. Six laps. She lies down on Tom’s feet and eats it very, very slowly.']},
   {call:()=>{ sfx.bark&&sfx.bark(); }},
@@ -2162,7 +2162,7 @@ SCENES.ch6End=[
   {talk:'Tom',lines:['Fine. It was nuts.']},
   {trace:'ch6-wrap'}, {hearts:'tom'},
   {call:()=>{ sfx.ding&&sfx.ding(); }},
-  {talk:'Tom',lines:['A text from Grace. "TATA. The library is WHISPERING. Like actually. Page says it\'s fine. It\'s NOT fine. Come home."']},
+  {talk:'Narrator',lines:['A text from Grace. "TATA. The library is WHISPERING. Like actually. Page says it\'s fine. It\'s NOT fine. Come home."']},
   {talk:'TNB',lines:['The library is whispering. Is that not just... its job?']},
   {talk:'Tom',lines:['Not on Long Island. On Long Island, the library shushes YOU.']},
   {party:null},
@@ -2439,7 +2439,7 @@ SCENES.ch7Story=[
   {talk:'Tom',lines:['(a very small voice) Today I\'m going to jump on everybody.']},
   {talk:'Rose',lines:['THAT IS WHAT I DO.']},
   {talk:'Grace',lines:['Okay. That\'s actually a good book. Don\'t tell anyone I said that.']},
-  {talk:'Whispers',lines:['All around the rug, the picture books go quiet. One of them says, very softly: ...again?']},
+  {talk:'Narrator',lines:['All around the rug, the picture books go quiet. One of them says, very softly: ...again?']},
   {hearts:'rose'}, {trace:'storytime'}, {call:()=>sfx.levelChime()},
   {heal:true},
   {give:'bandage'},
@@ -2504,7 +2504,7 @@ SCENES.ch7Door=[
   {call:()=>{ sfx.thud(); }}, {wait:.6},
   {talk:'Reading Room doors',lines:['Click. Click. CLUNK. The brass drawer slides shut by itself.']},
   {call:()=>{ ch7OpenDoors(); storyWorld(); sfx.doorIn&&sfx.doorIn(); sfx.levelChime(); }},
-  {talk:'Whispers',lines:['All through the Stacks, every book stops whispering at once.','Then, from behind the doors, one voice. Old. Dry. Very slow. \"...Who\'s there?\"']},
+  {talk:'Narrator',lines:['All through the Stacks, every book stops whispering at once.','Then, from behind the doors, one voice. Old. Dry. Very slow. \"...Who\'s there?\"']},
   {talk:'Rose',lines:['Tata. The door talked.']},
   {talk:'Tom',lines:['The thing behind the door talked. Stay close.']},
   {toast:'Goal: the Reading Room.',time:4}
@@ -2572,7 +2572,7 @@ SCENES.ch7End=[
   {toast:'New outfit: the Hush Library Sweater. SHHH on the front. Anyone can wear it.',time:4},
   {talk:'Rose',lines:['It\'s itchy. I love it.']},
   {call:()=>{ sfx.ding&&sfx.ding(); }},
-  {talk:'Tom',lines:['A text from TNB. \"Babe. Bernadette signed you up for the 2nd Ave potluck. You\'re on bread. For forty people.\"',
+  {talk:'Narrator',lines:['A text from TNB. \"Babe. Bernadette signed you up for the 2nd Ave potluck. You\'re on bread. For forty people.\"',
     '\"I said yes for you. You\'re welcome. Bring the starter.\"']},
   {talk:'Grace',lines:['Forty people? Tata. That\'s a FEAST.']},
   {talk:'Tom',lines:['...Bready Mercury is going to need a bigger jar.']},
@@ -2719,7 +2719,7 @@ const CH8={mode:'full',chapter:8};
 const CH8_SHOPS=[
   {c:'paint',fight:'ch8-paint',place:'the Paint Shop',whose:'Mr. Washington’s',dish:'gumbo'},
   {c:'shop',fight:'ch8-shop',place:'the Machine Shop',whose:'Olivia’s',dish:'lasagna'},
-  {c:'lunch',fight:'ch8-lunch',place:'the Lunchroom',whose:'Tom’s own',dish:'forty loaves'}];
+  {c:'lunch',fight:'ch8-lunch',place:'the Lunchroom',whose:'my own',dish:'forty loaves'}];
 const CH8_AFTER=(lost,lines)=>[
   {if:()=>lost(),then:[{heal:true},{talk:'TNB',lines:['Okay. Up. Everybody up. Hot cocoa later. Lots of it.']}],else:[]},
   ...lines
@@ -2742,7 +2742,7 @@ const ch8PilotSteps=c=>{ const C=CH8_SHOPS.find(k=>k.c===c); return [
 SCENES.ch8Arrive=[
   {flag:'ch8-goal'},
   {call:()=>sfx.ding&&sfx.ding()},
-  {talk:'Tom',lines:['A text from TNB.','"Babe. Potluck is TONIGHT. Forty people. You\'re on bread."','"Also every oven on 2nd Ave just went cold. At the same time. At noon. Come home."']},
+  {talk:'Narrator',lines:['A text from TNB.','"Babe. Potluck is TONIGHT. Forty people. You\'re on bread."','"Also every oven on 2nd Ave just went cold. At the same time. At noon. Come home."']},
   {talk:'Tom',lines:['Bready Mercury’s dough has been rising since Thursday. Forty loaves. It needs a five hundred degree oven.','I didn\'t fly here to serve forty people raw dough.']},
   {toast:'Goal: 2nd Ave in Jefferson Park, south of Downtown.',time:4.5}
 ];
@@ -2831,7 +2831,7 @@ SCENES.ch8Lunch=[
 // 5. Optional: Nara has not eaten all day (data in ch8Plate below).
 SCENES.ch8Plate=[
   {flag:'ch8-plate'},
-  {talk:'Tom',lines:['Tom takes out the sandwich he packed for himself. Turkey, mustard, his own sourdough. He puts it on his own plate. He sits down.']},
+  {talk:'Narrator',lines:['Tom takes out the sandwich he packed for himself. Turkey, mustard, his own sourdough. He puts it on his own plate. He sits down.']},
   {talk:'Nara',lines:['Nara is at his elbow in half a second. She looks at the sandwich. She looks at Tom. She takes the whole thing, very gently, off his plate.','She eats it in three bites. She licks the plate. She lies down on his feet.']},
   {call:()=>{ sfx.bark&&sfx.bark(); }},
   {hearts:'nara'}, {trace:'nara-plate'}, {call:()=>sfx.levelChime()},
@@ -2946,7 +2946,7 @@ SCENES.ch8End=[
   ch4Kiss(),
   {trace:'ch8-wrap'}, {hearts:'tom'},
   {call:()=>{ sfx.ding&&sfx.ding(); }},
-  {talk:'Tom',lines:['A text from Deedee. "Honey. A letter came for you at our house. Fancy envelope. Gold wax seal with a little clock on it."','"It says THE MOON CLUB. Nobody gets invited to the Moon Club. I\'ve lived here forty years. I love you to the moon and back. Call me."']},
+  {talk:'Narrator',lines:['A text from Deedee. "Honey. A letter came for you at our house. Fancy envelope. Gold wax seal with a little clock on it."','"It says THE MOON CLUB. Nobody gets invited to the Moon Club. I\'ve lived here forty years. I love you to the moon and back. Call me."']},
   {talk:'TNB',lines:['The Moon Club. Babe. That\'s a secret society. I\'ve seen this movie. Several times. It never goes well for the tall one.']},
   {talk:'Tom',lines:['A little clock on the seal. That\'s his clock, the one on every coin. He\'s done sending coins to lonely things. Now he\'s sending mail to me.']},
   {party:null},
@@ -3271,7 +3271,7 @@ SCENES.ch9Dance=[
   {talk:'Deedee',lines:['Fifty-two years, and he still asks. Every time.']},
   {talk:'Ballroom',lines:['They dance across the dusty floor, slow and small and very close. Boppy doesn\'t mention his stomach once.']},
   {hearts:'deedee'}, {hearts:'boppy'}, {trace:'grands-dance'},
-  {talk:'Tom',lines:['(Tom doesn\'t take a picture. Tom takes four pictures.)']},
+  {talk:'Narrator',lines:['(Tom doesn\'t take a picture. Tom takes four pictures.)']},
   {heal:true},
   {toast:'Everyone is healed. Deedee and Boppy had one song.',time:3.5}
 ];
@@ -3828,7 +3828,7 @@ SCENES.ch10End=[
   {talk:'Sunday dinner',lines:['Everybody laughs. Boppy laughs so hard he has to hold his stomach. Deedee laughs last, and longest.']},
   {talk:'Deedee',lines:['Fine. One slice. For the girl who said it.']},
   {call:()=>sfx.ding&&sfx.ding()},
-  {talk:'Tom',lines:['A text from TNB. \"babe. every clock in LA stopped at midnight. they just started again. was that you?\"','Tom writes back: \"Mostly Amy.\" TNB sends a heart. Tom sends one back. Then another one.']},
+  {talk:'Narrator',lines:['A text from TNB. \"babe. every clock in LA stopped at midnight. they just started again. was that you?\"','Tom writes back: \"Mostly Amy.\" TNB sends a heart. Tom sends one back. Then another one.']},
   {talk:'Amy',lines:['Mostly Amy. Put that on a shirt.']},
   {talk:'Deedee',lines:['Everybody sit. Everybody. Justin, you too. Ellie, that\'s Boppy’s chair. Boppy, that\'s my chair. Boppy.']},
   {talk:'Deedee',lines:['And has anybody seen my glasses? I can\'t read the oven.']},

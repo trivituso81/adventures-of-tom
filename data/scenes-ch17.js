@@ -105,7 +105,7 @@ SCENES.ch17Open=()=>[
   {card:17,time:3.2},
   {call:()=>{ setChapter(17,{apply:false}); setFlag('ch17-open','pending'); sfx.travel&&sfx.travel(); ch17Team('stairs'); ch17Place('blvd',24,12,'up'); }},
   {fade:'in',time:.8},
-  {talk:'Tom',lines:['The tower goes up past the top of the screen. The doors at the bottom are glass, and they are glowing like a lit window at dinnertime.']},
+  {talk:'Narrator',lines:['The tower goes up past the top of the screen. The doors at the bottom are glass, and they are glowing like a lit window at dinnertime.']},
   {talk:'Rose',lines:['It’s so tall. Tata, it’s TALLER than the Starlite.']},
   {toast:'Chapter 17: walk up to the glass doors of THE TOWER (north, between Ramen Ramen and The Starlite) and press A.',time:9},
   {flag:'ch17-open'},
@@ -119,7 +119,7 @@ SCENES.ch17Enter=()=>[
 
 SCENES.ch17Lobby=()=>[
   {flag:'ch17-lobby',value:'pending'},
-  {talk:'Tom',lines:['The lobby is all glass and no people. Every clock says 4:59. The second hands are shaking in place, like they are trying very hard.']},
+  {talk:'Narrator',lines:['The lobby is all glass and no people. Every clock says 4:59. The second hands are shaking in place, like they are trying very hard.']},
   {talk:'Grace',lines:['It’s so clean. Nobody lives here. Nobody even touched the floor.']},
   {talk:'Rose',lines:['There’s a plant. It looks scared.']},
   {talk:'Tom',lines:['Floor directory says the stairs are on the east side. Twenty-eight flights.']},
@@ -201,7 +201,7 @@ SCENES.ch17Locks=()=>[
 // ---------- The race: Amy and Tom, floors 31 to 59 ----------
 SCENES.ch17Race=()=>[
   {flag:'ch17-race',value:'pending'},
-  {talk:'Tom',lines:['The seal door swings open on its own. The stairwell goes on. Twenty-nine more floors, straight up, in a glass tube.']},
+  {talk:'Narrator',lines:['The seal door swings open on its own. The stairwell goes on. Twenty-nine more floors, straight up, in a glass tube.']},
   {talk:'Amy',lines:['You and me. Landing to landing. Loser buys dinner.']},
   {talk:'Tom',lines:['Amy, we have a deadline. We have a tower. We have two grandparents made of stone.']},
   {talk:'Amy',lines:['Which is why I’m going to win this.']},
@@ -230,7 +230,7 @@ const ch17Lens=()=>findMonster('twinlens');
 SCENES.ch17Vault=()=>[
   {flag:'ch17-vault',value:'pending'},
   {globeFind:true},
-  {talk:'Tom',lines:['The Vault. One plinth, one snow globe, and a view of Los Angeles at 4:59 PM, golden and perfect and completely still.']},
+  {talk:'Narrator',lines:['The Vault. One plinth, one snow globe, and a view of Los Angeles at 4:59 PM, golden and perfect and completely still.']},
   {talk:'Rose',lines:['Tata. It’s the Square. It’s in there. That’s Deedee. That’s BOPPY.']},
   {talk:'Grace',lines:['They’re so small. They’re okay. They’re holding hands.']},
   {talk:'Tom',lines:['Stay behind me. All of you.']},
@@ -260,7 +260,7 @@ SCENES.ch17Fight=()=>[
 SCENES.ch17After=()=>[
   {flag:'ch17-after',value:'pending'},
   {wait:.6},
-  {talk:'Tom',lines:['The amber lens cracks across the middle. The cold one goes dark. For one second, the whole building holds its breath.']},
+  {talk:'Narrator',lines:['The amber lens cracks across the middle. The cold one goes dark. For one second, the whole building holds its breath.']},
   {talk:'Archivist',lines:['I was only... keeping them safe.']},
   {talk:'Tom',lines:['I know. They were never yours to keep.']},
   {talk:'Archivist',lines:['What does one do... with a day that is allowed to end?']},
@@ -271,7 +271,7 @@ SCENES.ch17After=()=>[
   {wait:.8},
   {talk:'Grace',lines:['Tata. The globe.']},
   {call:()=>{ sfx.charge&&sfx.charge(); }},
-  {talk:'Tom',lines:['The snow globe on the plinth lifts an inch off the glass. The gold cable above it goes tight. It is going up.']},
+  {talk:'Narrator',lines:['The snow globe on the plinth lifts an inch off the glass. The gold cable above it goes tight. It is going up.']},
   {talk:'Vance',lines:['Thank you for the tour, Tom. Thank you for the Archive. It was very nearly complete.']},
   {talk:'Vance',lines:['Floor sixty is for family. Come up when you are ready. I have kept your parents very warm.']},
   {talk:'Amy',lines:['Mom. Dad. We’re coming. We’re coming.']},
@@ -279,7 +279,7 @@ SCENES.ch17After=()=>[
   {flag:'ch17-after'},
   {fade:'out',time:.8},{card:17,done:true,time:3.4},{flag:'ch17-done'},
   {fade:'in',time:.8},
-  {talk:'Tom',lines:['A gold lift door stands open at the north wall. No call button. A brass plate: FLOOR 60. BY INVITATION.']},
+  {talk:'Narrator',lines:['A gold lift door stands open at the north wall. No call button. A brass plate: FLOOR 60. BY INVITATION.']},
   {toast:'Goal: The pinnacle lift to Floor 60 is waiting.',time:8},
   {call:()=>showToast&&showToast('CHAPTER 17 COMPLETE!',7)},
   {save:true}

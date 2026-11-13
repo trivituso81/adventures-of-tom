@@ -95,6 +95,7 @@ const DIALOG_CAST={
     // Narration boxes (Tom, 2026-11-03): a scene box labeled with a place, an object or a moment ('Little silver door',
     // 'Sunday dinner') is the story narrating, not a character. All of them are read by the Narrator voice. A new narration
     // label goes here; a talking object that is a real character (a monster, 'Whispers', 'Long coat') gets a character voice.
+    'Narrator':'narrator',   // Tom 2026-11-12: a box that describes what happens ("Tom lifts a pupusa...", "The Censor lowers his stamp.") is labelled Narrator, never with a character's name
     'Nara':'narrator',   // Tom 2026-11-06: Nara never speaks; her boxes ('Nara is eating bread off Tom’s plate.') are narration, read by the Narrator (brisk, speed 1.15)
     'The kettle':'narrator',
     'Old reeds':'narrator',

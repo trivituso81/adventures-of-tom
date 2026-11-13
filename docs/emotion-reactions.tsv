@@ -876,7 +876,7 @@ scene	4	data/scenes.js	ch4End	Tom	Worth it. Every mile. But for the record? That
 scene	4	data/scenes.js	ch4End	Tom	Worth it. Every mile. But for the record? That was a CLOSED set!	nara	happy
 scene	4	data/scenes.js	ch4End	Nara	Nara leans on both of them. A tiny excited puddle. Nobody minds. Craft services minds a little.	tom	loving
 scene	4	data/scenes.js	ch4End	Nara	Nara leans on both of them. A tiny excited puddle. Nobody minds. Craft services minds a little.	tnb	loving
-scene	4	data/scenes.js	ch4End	Tom	A text from Amy. "Parent-teacher conference night is Thursday. Thirty parents. I need backup. Bring snacks. And bring the good uncle."	tnb	surprised
+scene	4	data/scenes.js	ch4End	Narrator	A text from Amy. "Parent-teacher conference night is Thursday. Thirty parents. I need backup. Bring snacks. And bring the good uncle."	tnb	surprised
 scene	4	data/scenes.js	ch4End	TNB	You're the only uncle.	tom	unimpressed
 scene	4	data/scenes.js	ch4End	TNB	You're the only uncle.	nara	happy
 scene	4	data/scenes.js	ch4End	Tom	Which makes me the good one. By default. I'll take it.	tnb	loving
@@ -1357,8 +1357,8 @@ scene	6	data/scenes.js	ch6DigScene	TNB	That's all three scraps. One acorn, two a
 scene	6	data/scenes.js	ch6DigScene	TNB	That's all three scraps. One acorn, two acorns, three acorns. It's a sequence, babe. It's ALWAYS a sequence.	nara	happy
 scene	6	data/scenes.js	ch6DigScene	Tom	One acorn: TAP TAP. Two acorns: SCRATCH. Three acorns: CHITTER.	tnb	proud
 scene	6	data/scenes.js	ch6DigScene	Tom	One acorn: TAP TAP. Two acorns: SCRATCH. Three acorns: CHITTER.	nara	happy
-scene	6	data/scenes.js	ch6Fetch	Tom	Tom always keeps a heel of sourdough in his jacket. For emergencies. This is an emergency.	nara	happy
-scene	6	data/scenes.js	ch6Fetch	Tom	Tom always keeps a heel of sourdough in his jacket. For emergencies. This is an emergency.	tnb	happy
+scene	6	data/scenes.js	ch6Fetch	Narrator	Tom always keeps a heel of sourdough in his jacket. For emergencies. This is an emergency.	nara	happy
+scene	6	data/scenes.js	ch6Fetch	Narrator	Tom always keeps a heel of sourdough in his jacket. For emergencies. This is an emergency.	tnb	happy
 scene	6	data/scenes.js	ch6Fetch	Nara	Nara catches it in midair. She runs one lap. Two laps. Six laps. She lies down on Tom’s feet and eats it very, very slowly.	tom	loving
 scene	6	data/scenes.js	ch6Fetch	Nara	Nara catches it in midair. She runs one lap. Two laps. Six laps. She lies down on Tom’s feet and eats it very, very slowly.	tnb	happy
 scene	6	data/scenes.js	ch6Fetch	TNB	She hasn't eaten in three days, and she just ate your emergency bread.	tom	unimpressed
@@ -1519,8 +1519,8 @@ scene	6	data/scenes.js	ch6End	Tom	...That's not a pun. That's just a word.	tnb	h
 scene	6	data/scenes.js	ch6End	TNB	It's a word with a pun in its heart.	tom	unimpressed
 scene	6	data/scenes.js	ch6End	Tom	Fine. It was nuts.	tnb	proud
 scene	6	data/scenes.js	ch6End	Tom	Fine. It was nuts.	nara	happy
-scene	6	data/scenes.js	ch6End	Tom	A text from Grace. "TATA. The library is WHISPERING. Like actually. Page says it's fine. It's NOT fine. Come home."	tnb	surprised
-scene	6	data/scenes.js	ch6End	Tom	A text from Grace. "TATA. The library is WHISPERING. Like actually. Page says it's fine. It's NOT fine. Come home."	nara	surprised
+scene	6	data/scenes.js	ch6End	Narrator	A text from Grace. "TATA. The library is WHISPERING. Like actually. Page says it's fine. It's NOT fine. Come home."	tnb	surprised
+scene	6	data/scenes.js	ch6End	Narrator	A text from Grace. "TATA. The library is WHISPERING. Like actually. Page says it's fine. It's NOT fine. Come home."	nara	surprised
 scene	6	data/scenes.js	ch6End	TNB	The library is whispering. Is that not just... its job?	tom	unimpressed
 scene	6	data/scenes.js	ch6End	Tom	Not on Long Island. On Long Island, the library shushes YOU.	tnb	surprised
 scene	7	data/scenes.js	CH7_AFTER	Grace	Okay. Everybody up. I'm in charge of getting up. Up, up, UP.	tom	unimpressed
@@ -1617,9 +1617,9 @@ scene	7	data/scenes.js	ch7Story	Rose	THAT IS WHAT I DO.	tom	happy
 scene	7	data/scenes.js	ch7Story	Rose	THAT IS WHAT I DO.	grace	happy
 scene	7	data/scenes.js	ch7Story	Grace	Okay. That's actually a good book. Don't tell anyone I said that.	tom	loving
 scene	7	data/scenes.js	ch7Story	Grace	Okay. That's actually a good book. Don't tell anyone I said that.	rose	happy
-scene	7	data/scenes.js	ch7Story	Whispers	All around the rug, the picture books go quiet. One of them says, very softly: ...again?	tom	loving
-scene	7	data/scenes.js	ch7Story	Whispers	All around the rug, the picture books go quiet. One of them says, very softly: ...again?	grace	surprised
-scene	7	data/scenes.js	ch7Story	Whispers	All around the rug, the picture books go quiet. One of them says, very softly: ...again?	rose	happy
+scene	7	data/scenes.js	ch7Story	Narrator	All around the rug, the picture books go quiet. One of them says, very softly: ...again?	tom	loving
+scene	7	data/scenes.js	ch7Story	Narrator	All around the rug, the picture books go quiet. One of them says, very softly: ...again?	grace	surprised
+scene	7	data/scenes.js	ch7Story	Narrator	All around the rug, the picture books go quiet. One of them says, very softly: ...again?	rose	happy
 scene	7	data/scenes.js	ch7Fic	The Cliffhanger	And then... the uncle walked into Fiction... and he saw... he saw...	tom	unimpressed
 scene	7	data/scenes.js	ch7Fic	The Cliffhanger	And then... the uncle walked into Fiction... and he saw... he saw...	grace	unimpressed
 scene	7	data/scenes.js	ch7Fic	The Cliffhanger	And then... the uncle walked into Fiction... and he saw... he saw...	rose	surprised
@@ -1680,12 +1680,12 @@ scene	7	data/scenes.js	ch7Pic	Tom	It was terrified. Best scaring I've ever seen.
 scene	7	data/scenes.js	ch7Door	Reading Room doors	Click. Click. CLUNK. The brass drawer slides shut by itself.	tom	surprised
 scene	7	data/scenes.js	ch7Door	Reading Room doors	Click. Click. CLUNK. The brass drawer slides shut by itself.	grace	surprised
 scene	7	data/scenes.js	ch7Door	Reading Room doors	Click. Click. CLUNK. The brass drawer slides shut by itself.	rose	surprised
-scene	7	data/scenes.js	ch7Door	Whispers	All through the Stacks, every book stops whispering at once.	tom	surprised
-scene	7	data/scenes.js	ch7Door	Whispers	All through the Stacks, every book stops whispering at once.	grace	surprised
-scene	7	data/scenes.js	ch7Door	Whispers	All through the Stacks, every book stops whispering at once.	rose	scared
-scene	7	data/scenes.js	ch7Door	Whispers	Then, from behind the doors, one voice. Old. Dry. Very slow. "...Who's there?"	tom	surprised
-scene	7	data/scenes.js	ch7Door	Whispers	Then, from behind the doors, one voice. Old. Dry. Very slow. "...Who's there?"	grace	scared
-scene	7	data/scenes.js	ch7Door	Whispers	Then, from behind the doors, one voice. Old. Dry. Very slow. "...Who's there?"	rose	scared
+scene	7	data/scenes.js	ch7Door	Narrator	All through the Stacks, every book stops whispering at once.	tom	surprised
+scene	7	data/scenes.js	ch7Door	Narrator	All through the Stacks, every book stops whispering at once.	grace	surprised
+scene	7	data/scenes.js	ch7Door	Narrator	All through the Stacks, every book stops whispering at once.	rose	scared
+scene	7	data/scenes.js	ch7Door	Narrator	Then, from behind the doors, one voice. Old. Dry. Very slow. "...Who's there?"	tom	surprised
+scene	7	data/scenes.js	ch7Door	Narrator	Then, from behind the doors, one voice. Old. Dry. Very slow. "...Who's there?"	grace	scared
+scene	7	data/scenes.js	ch7Door	Narrator	Then, from behind the doors, one voice. Old. Dry. Very slow. "...Who's there?"	rose	scared
 scene	7	data/scenes.js	ch7Door	Rose	Tata. The door talked.	tom	unimpressed
 scene	7	data/scenes.js	ch7Door	Rose	Tata. The door talked.	grace	scared
 scene	7	data/scenes.js	ch7Door	Tom	The thing behind the door talked. Stay close.	grace	scared
@@ -1778,10 +1778,10 @@ scene	7	data/scenes.js	ch7End	Page	And sweaters. I knit one every winter. I have
 scene	7	data/scenes.js	ch7End	Rose	It's itchy. I love it.	tom	happy
 scene	7	data/scenes.js	ch7End	Rose	It's itchy. I love it.	grace	unimpressed
 scene	7	data/scenes.js	ch7End	Rose	It's itchy. I love it.	page	happy
-scene	7	data/scenes.js	ch7End	Tom	A text from TNB. "Babe. Bernadette signed you up for the 2nd Ave potluck. You're on bread. For forty people."	grace	surprised
-scene	7	data/scenes.js	ch7End	Tom	A text from TNB. "Babe. Bernadette signed you up for the 2nd Ave potluck. You're on bread. For forty people."	rose	surprised
-scene	7	data/scenes.js	ch7End	Tom	"I said yes for you. You're welcome. Bring the starter."	grace	happy
-scene	7	data/scenes.js	ch7End	Tom	"I said yes for you. You're welcome. Bring the starter."	rose	happy
+scene	7	data/scenes.js	ch7End	Narrator	A text from TNB. "Babe. Bernadette signed you up for the 2nd Ave potluck. You're on bread. For forty people."	grace	surprised
+scene	7	data/scenes.js	ch7End	Narrator	A text from TNB. "Babe. Bernadette signed you up for the 2nd Ave potluck. You're on bread. For forty people."	rose	surprised
+scene	7	data/scenes.js	ch7End	Narrator	"I said yes for you. You're welcome. Bring the starter."	grace	happy
+scene	7	data/scenes.js	ch7End	Narrator	"I said yes for you. You're welcome. Bring the starter."	rose	happy
 scene	7	data/scenes.js	ch7End	Grace	Forty people? Tata. That's a FEAST.	tom	unimpressed
 scene	7	data/scenes.js	ch7End	Grace	Forty people? Tata. That's a FEAST.	rose	happy
 scene	7	data/scenes.js	ch7End	Tom	...Bready Mercury is going to need a bigger jar.	grace	happy
@@ -1880,8 +1880,8 @@ scene	8	data/scenes.js	ch8Lunch	The Picky Eater	...Fine. FINE. Take it. I'll try
 scene	8	data/scenes.js	ch8Lunch	The Picky Eater	...Fine. FINE. Take it. I'll try a bite of something. Later. Maybe. If it's warm. And not touching.	nara	happy
 scene	8	data/scenes.js	ch8Lunch	Nara	Nara nods. She understands completely.	tom	happy
 scene	8	data/scenes.js	ch8Lunch	Nara	Nara nods. She understands completely.	tnb	happy
-scene	8	data/scenes.js	ch8Plate	Tom	Tom takes out the sandwich he packed for himself. Turkey, mustard, his own sourdough. He puts it on his own plate. He sits down.	tnb	happy
-scene	8	data/scenes.js	ch8Plate	Tom	Tom takes out the sandwich he packed for himself. Turkey, mustard, his own sourdough. He puts it on his own plate. He sits down.	nara	surprised
+scene	8	data/scenes.js	ch8Plate	Narrator	Tom takes out the sandwich he packed for himself. Turkey, mustard, his own sourdough. He puts it on his own plate. He sits down.	tnb	happy
+scene	8	data/scenes.js	ch8Plate	Narrator	Tom takes out the sandwich he packed for himself. Turkey, mustard, his own sourdough. He puts it on his own plate. He sits down.	nara	surprised
 scene	8	data/scenes.js	ch8Plate	Nara	Nara is at his elbow in half a second. She looks at the sandwich. She looks at Tom. She takes the whole thing, very gently, off his plate.	tom	unimpressed
 scene	8	data/scenes.js	ch8Plate	Nara	Nara is at his elbow in half a second. She looks at the sandwich. She looks at Tom. She takes the whole thing, very gently, off his plate.	tnb	surprised
 scene	8	data/scenes.js	ch8Plate	Nara	She eats it in three bites. She licks the plate. She lies down on his feet.	tom	loving
@@ -2025,10 +2025,10 @@ scene	8	data/scenes.js	ch8End	TNB	Because the bread. And we're TOASTING. It work
 scene	8	data/scenes.js	ch8End	Tom	It works on one level. Barely.	tnb	happy
 scene	8	data/scenes.js	ch8End	Tom	...I love that level.	tnb	loving
 scene	8	data/scenes.js	ch8End	Tom	...I love that level.	nara	happy
-scene	8	data/scenes.js	ch8End	Tom	A text from Deedee. "Honey. A letter came for you at our house. Fancy envelope. Gold wax seal with a little clock on it."	tnb	surprised
-scene	8	data/scenes.js	ch8End	Tom	A text from Deedee. "Honey. A letter came for you at our house. Fancy envelope. Gold wax seal with a little clock on it."	nara	surprised
-scene	8	data/scenes.js	ch8End	Tom	"It says THE MOON CLUB. Nobody gets invited to the Moon Club. I've lived here forty years. I love you to the moon and back. Call me."	tnb	surprised
-scene	8	data/scenes.js	ch8End	Tom	"It says THE MOON CLUB. Nobody gets invited to the Moon Club. I've lived here forty years. I love you to the moon and back. Call me."	nara	happy
+scene	8	data/scenes.js	ch8End	Narrator	A text from Deedee. "Honey. A letter came for you at our house. Fancy envelope. Gold wax seal with a little clock on it."	tnb	surprised
+scene	8	data/scenes.js	ch8End	Narrator	A text from Deedee. "Honey. A letter came for you at our house. Fancy envelope. Gold wax seal with a little clock on it."	nara	surprised
+scene	8	data/scenes.js	ch8End	Narrator	"It says THE MOON CLUB. Nobody gets invited to the Moon Club. I've lived here forty years. I love you to the moon and back. Call me."	tnb	surprised
+scene	8	data/scenes.js	ch8End	Narrator	"It says THE MOON CLUB. Nobody gets invited to the Moon Club. I've lived here forty years. I love you to the moon and back. Call me."	nara	happy
 scene	8	data/scenes.js	ch8End	TNB	The Moon Club. Babe. That's a secret society. I've seen this movie. Several times. It never goes well for the tall one.	tom	unimpressed
 scene	8	data/scenes.js	ch8End	TNB	The Moon Club. Babe. That's a secret society. I've seen this movie. Several times. It never goes well for the tall one.	nara	scared
 scene	8	data/scenes.js	ch8End	Tom	A little clock on the seal. That's his clock, the one on every coin. He's done sending coins to lonely things. Now he's sending mail to me.	tnb	scared
@@ -2241,8 +2241,8 @@ scene	9	data/scenes.js	ch9Dance	Deedee	Fifty-two years, and he still asks. Every
 scene	9	data/scenes.js	ch9Dance	Ballroom	They dance across the dusty floor, slow and small and very close. Boppy doesn't mention his stomach once.	tom	loving
 scene	9	data/scenes.js	ch9Dance	Ballroom	They dance across the dusty floor, slow and small and very close. Boppy doesn't mention his stomach once.	deedee	loving
 scene	9	data/scenes.js	ch9Dance	Ballroom	They dance across the dusty floor, slow and small and very close. Boppy doesn't mention his stomach once.	boppy	loving
-scene	9	data/scenes.js	ch9Dance	Tom	(Tom doesn't take a picture. Tom takes four pictures.)	deedee	loving
-scene	9	data/scenes.js	ch9Dance	Tom	(Tom doesn't take a picture. Tom takes four pictures.)	boppy	loving
+scene	9	data/scenes.js	ch9Dance	Narrator	(Tom doesn't take a picture. Tom takes four pictures.)	deedee	loving
+scene	9	data/scenes.js	ch9Dance	Narrator	(Tom doesn't take a picture. Tom takes four pictures.)	boppy	loving
 scene	9	data/scenes.js	ch9Door	Dome doors	The thread of moonlight bounces off three mirrors and lands right in the middle of the moon-shaped lock. It glows. Click. CLUNK.	tom	surprised
 scene	9	data/scenes.js	ch9Door	Dome doors	The thread of moonlight bounces off three mirrors and lands right in the middle of the moon-shaped lock. It glows. Click. CLUNK.	deedee	surprised
 scene	9	data/scenes.js	ch9Door	Dome doors	The thread of moonlight bounces off three mirrors and lands right in the middle of the moon-shaped lock. It glows. Click. CLUNK.	boppy	surprised
@@ -2754,15 +2754,15 @@ scene	10	data/scenes.js	ch10End	Deedee	Fine. One slice. For the girl who said it
 scene	10	data/scenes.js	ch10End	Deedee	Fine. One slice. For the girl who said it.	tom	happy
 scene	10	data/scenes.js	ch10End	Deedee	Fine. One slice. For the girl who said it.	amy	happy
 scene	10	data/scenes.js	ch10End	Deedee	Fine. One slice. For the girl who said it.	grace	happy
-scene	10	data/scenes.js	ch10End	Tom	A text from TNB. "babe. every clock in LA stopped at midnight. they just started again. was that you?"	amy	happy
-scene	10	data/scenes.js	ch10End	Tom	A text from TNB. "babe. every clock in LA stopped at midnight. they just started again. was that you?"	grace	happy
-scene	10	data/scenes.js	ch10End	Tom	A text from TNB. "babe. every clock in LA stopped at midnight. they just started again. was that you?"	rose	happy
-scene	10	data/scenes.js	ch10End	Tom	A text from TNB. "babe. every clock in LA stopped at midnight. they just started again. was that you?"	deedee	loving
-scene	10	data/scenes.js	ch10End	Tom	Tom writes back: "Mostly Amy." TNB sends a heart. Tom sends one back. Then another one.	amy	unimpressed
-scene	10	data/scenes.js	ch10End	Tom	Tom writes back: "Mostly Amy." TNB sends a heart. Tom sends one back. Then another one.	grace	happy
-scene	10	data/scenes.js	ch10End	Tom	Tom writes back: "Mostly Amy." TNB sends a heart. Tom sends one back. Then another one.	rose	happy
-scene	10	data/scenes.js	ch10End	Tom	Tom writes back: "Mostly Amy." TNB sends a heart. Tom sends one back. Then another one.	deedee	loving
-scene	10	data/scenes.js	ch10End	Tom	Tom writes back: "Mostly Amy." TNB sends a heart. Tom sends one back. Then another one.	ellie	happy
+scene	10	data/scenes.js	ch10End	Narrator	A text from TNB. "babe. every clock in LA stopped at midnight. they just started again. was that you?"	amy	happy
+scene	10	data/scenes.js	ch10End	Narrator	A text from TNB. "babe. every clock in LA stopped at midnight. they just started again. was that you?"	grace	happy
+scene	10	data/scenes.js	ch10End	Narrator	A text from TNB. "babe. every clock in LA stopped at midnight. they just started again. was that you?"	rose	happy
+scene	10	data/scenes.js	ch10End	Narrator	A text from TNB. "babe. every clock in LA stopped at midnight. they just started again. was that you?"	deedee	loving
+scene	10	data/scenes.js	ch10End	Narrator	Tom writes back: "Mostly Amy." TNB sends a heart. Tom sends one back. Then another one.	amy	unimpressed
+scene	10	data/scenes.js	ch10End	Narrator	Tom writes back: "Mostly Amy." TNB sends a heart. Tom sends one back. Then another one.	grace	happy
+scene	10	data/scenes.js	ch10End	Narrator	Tom writes back: "Mostly Amy." TNB sends a heart. Tom sends one back. Then another one.	rose	happy
+scene	10	data/scenes.js	ch10End	Narrator	Tom writes back: "Mostly Amy." TNB sends a heart. Tom sends one back. Then another one.	deedee	loving
+scene	10	data/scenes.js	ch10End	Narrator	Tom writes back: "Mostly Amy." TNB sends a heart. Tom sends one back. Then another one.	ellie	happy
 scene	10	data/scenes.js	ch10End	Amy	Mostly Amy. Put that on a shirt.	tom	happy
 scene	10	data/scenes.js	ch10End	Amy	Mostly Amy. Put that on a shirt.	justin	proud
 scene	10	data/scenes.js	ch10End	Amy	Mostly Amy. Put that on a shirt.	grace	happy
@@ -3233,18 +3233,18 @@ scene	11	data/scenes-p2.js	ch11Vance	Julian Vance	Someone has to.	amy	angry
 scene	11	data/scenes-p2.js	ch11Vance	Julian Vance	Someone has to.	tnb	sad
 scene	11	data/scenes-p2.js	ch11Vance	Julian Vance	Someone has to.	grace	scared
 scene	11	data/scenes-p2.js	ch11Vance	Julian Vance	Someone has to.	rose	scared
-scene	11	data/scenes-p2.js	ch11Vance	Julian Vance	He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once.	tom	unimpressed
-scene	11	data/scenes-p2.js	ch11Vance	Julian Vance	The departures board beside the door unfolds, stands up on two legs, and steps out.	tom	unimpressed
-scene	11	data/scenes-p2.js	ch11Vance	Julian Vance	He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once.	amy	angry
-scene	11	data/scenes-p2.js	ch11Vance	Julian Vance	The departures board beside the door unfolds, stands up on two legs, and steps out.	amy	angry
-scene	11	data/scenes-p2.js	ch11Vance	Julian Vance	He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once.	tnb	scared
-scene	11	data/scenes-p2.js	ch11Vance	Julian Vance	The departures board beside the door unfolds, stands up on two legs, and steps out.	tnb	scared
-scene	11	data/scenes-p2.js	ch11Vance	Julian Vance	He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once.	grace	scared
-scene	11	data/scenes-p2.js	ch11Vance	Julian Vance	The departures board beside the door unfolds, stands up on two legs, and steps out.	grace	scared
-scene	11	data/scenes-p2.js	ch11Vance	Julian Vance	He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once.	rose	scared
-scene	11	data/scenes-p2.js	ch11Vance	Julian Vance	The departures board beside the door unfolds, stands up on two legs, and steps out.	rose	scared
-scene	11	data/scenes-p2.js	ch11Vance	Julian Vance	He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once.	nara	angry
-scene	11	data/scenes-p2.js	ch11Vance	Julian Vance	The departures board beside the door unfolds, stands up on two legs, and steps out.	nara	angry
+scene	11	data/scenes-p2.js	ch11Vance	Narrator	He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once.	tom	unimpressed
+scene	11	data/scenes-p2.js	ch11Vance	Narrator	The departures board beside the door unfolds, stands up on two legs, and steps out.	tom	unimpressed
+scene	11	data/scenes-p2.js	ch11Vance	Narrator	He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once.	amy	angry
+scene	11	data/scenes-p2.js	ch11Vance	Narrator	The departures board beside the door unfolds, stands up on two legs, and steps out.	amy	angry
+scene	11	data/scenes-p2.js	ch11Vance	Narrator	He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once.	tnb	scared
+scene	11	data/scenes-p2.js	ch11Vance	Narrator	The departures board beside the door unfolds, stands up on two legs, and steps out.	tnb	scared
+scene	11	data/scenes-p2.js	ch11Vance	Narrator	He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once.	grace	scared
+scene	11	data/scenes-p2.js	ch11Vance	Narrator	The departures board beside the door unfolds, stands up on two legs, and steps out.	grace	scared
+scene	11	data/scenes-p2.js	ch11Vance	Narrator	He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once.	rose	scared
+scene	11	data/scenes-p2.js	ch11Vance	Narrator	The departures board beside the door unfolds, stands up on two legs, and steps out.	rose	scared
+scene	11	data/scenes-p2.js	ch11Vance	Narrator	He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once.	nara	angry
+scene	11	data/scenes-p2.js	ch11Vance	Narrator	The departures board beside the door unfolds, stands up on two legs, and steps out.	nara	angry
 scene	11	data/scenes-p2.js	ch11Vance	Julian Vance	FINAL CALL.	tom	proud
 scene	11	data/scenes-p2.js	ch11Vance	Julian Vance	FINAL CALL.	amy	angry
 scene	11	data/scenes-p2.js	ch11Vance	Julian Vance	FINAL CALL.	tnb	scared
@@ -3652,12 +3652,12 @@ scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	That’s the problem with a nei
 scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	That’s the problem with a neighborhood. Notes.	amy	angry
 scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	That’s the problem with a neighborhood. Notes.	tnb	unimpressed
 scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	That’s the problem with a neighborhood. Notes.	grace	angry
-scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers.	tom	surprised
-scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers.	amy	surprised
-scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers.	tnb	surprised
-scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers.	grace	surprised
-scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers.	rose	surprised
-scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers.	nara	scared
+scene	12	data/scenes-ch12.js	ch12Marlowe	Narrator	He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers.	tom	surprised
+scene	12	data/scenes-ch12.js	ch12Marlowe	Narrator	He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers.	amy	surprised
+scene	12	data/scenes-ch12.js	ch12Marlowe	Narrator	He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers.	tnb	surprised
+scene	12	data/scenes-ch12.js	ch12Marlowe	Narrator	He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers.	grace	surprised
+scene	12	data/scenes-ch12.js	ch12Marlowe	Narrator	He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers.	rose	surprised
+scene	12	data/scenes-ch12.js	ch12Marlowe	Narrator	He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers.	nara	scared
 scene	12	data/scenes-ch12.js	ch12Marlowe	Rose	He took the pink off the jacaranda!	tom	angry
 scene	12	data/scenes-ch12.js	ch12Marlowe	Rose	He took the pink off the jacaranda!	amy	angry
 scene	12	data/scenes-ch12.js	ch12Marlowe	Rose	He took the pink off the jacaranda!	tnb	sad
@@ -3682,11 +3682,11 @@ scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	I don’t put things back. I ta
 scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	I don’t put things back. I take notes. Anyway, Mr. Prime will handle the intersection. Do take a look at the traffic. It’s very stationary.	tnb	unimpressed
 scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	I don’t put things back. I take notes. Anyway, Mr. Prime will handle the intersection. Do take a look at the traffic. It’s very stationary.	grace	angry
 scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	I don’t put things back. I take notes. Anyway, Mr. Prime will handle the intersection. Do take a look at the traffic. It’s very stationary.	rose	surprised
-scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	He walks off into the grey, humming a jingle that never resolves.	tom	unimpressed
-scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	He walks off into the grey, humming a jingle that never resolves.	amy	angry
-scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	He walks off into the grey, humming a jingle that never resolves.	tnb	unimpressed
-scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	He walks off into the grey, humming a jingle that never resolves.	grace	angry
-scene	12	data/scenes-ch12.js	ch12Marlowe	Marlowe	He walks off into the grey, humming a jingle that never resolves.	rose	unimpressed
+scene	12	data/scenes-ch12.js	ch12Marlowe	Narrator	He walks off into the grey, humming a jingle that never resolves.	tom	unimpressed
+scene	12	data/scenes-ch12.js	ch12Marlowe	Narrator	He walks off into the grey, humming a jingle that never resolves.	amy	angry
+scene	12	data/scenes-ch12.js	ch12Marlowe	Narrator	He walks off into the grey, humming a jingle that never resolves.	tnb	unimpressed
+scene	12	data/scenes-ch12.js	ch12Marlowe	Narrator	He walks off into the grey, humming a jingle that never resolves.	grace	angry
+scene	12	data/scenes-ch12.js	ch12Marlowe	Narrator	He walks off into the grey, humming a jingle that never resolves.	rose	unimpressed
 scene	12	data/scenes-ch12.js	ch12Marlowe	Tom	He’s draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He’s not moving.	amy	surprised
 scene	12	data/scenes-ch12.js	ch12Marlowe	Tom	He’s draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He’s not moving.	tnb	sad
 scene	12	data/scenes-ch12.js	ch12Marlowe	Tom	He’s draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He’s not moving.	grace	scared
@@ -3723,11 +3723,11 @@ scene	12	data/scenes-ch12.js	ch12Carmen	Rose	The comal! The pupusas!	tom	happy
 scene	12	data/scenes-ch12.js	ch12Carmen	Rose	The comal! The pupusas!	amy	proud
 scene	12	data/scenes-ch12.js	ch12Carmen	Rose	The comal! The pupusas!	tnb	happy
 scene	12	data/scenes-ch12.js	ch12Carmen	Rose	The comal! The pupusas!	grace	happy
-scene	12	data/scenes-ch12.js	ch12Carmen	Tom	Tom lifts a pupusa off the comal. It’s still hot. Steam is coming off it, in a room where nothing else is moving.	amy	surprised
-scene	12	data/scenes-ch12.js	ch12Carmen	Tom	Tom lifts a pupusa off the comal. It’s still hot. Steam is coming off it, in a room where nothing else is moving.	tnb	happy
-scene	12	data/scenes-ch12.js	ch12Carmen	Tom	Tom lifts a pupusa off the comal. It’s still hot. Steam is coming off it, in a room where nothing else is moving.	grace	surprised
-scene	12	data/scenes-ch12.js	ch12Carmen	Tom	Tom lifts a pupusa off the comal. It’s still hot. Steam is coming off it, in a room where nothing else is moving.	rose	surprised
-scene	12	data/scenes-ch12.js	ch12Carmen	Tom	Tom lifts a pupusa off the comal. It’s still hot. Steam is coming off it, in a room where nothing else is moving.	nara	happy
+scene	12	data/scenes-ch12.js	ch12Carmen	Narrator	Tom lifts a pupusa off the comal. It’s still hot. Steam is coming off it, in a room where nothing else is moving.	amy	surprised
+scene	12	data/scenes-ch12.js	ch12Carmen	Narrator	Tom lifts a pupusa off the comal. It’s still hot. Steam is coming off it, in a room where nothing else is moving.	tnb	happy
+scene	12	data/scenes-ch12.js	ch12Carmen	Narrator	Tom lifts a pupusa off the comal. It’s still hot. Steam is coming off it, in a room where nothing else is moving.	grace	surprised
+scene	12	data/scenes-ch12.js	ch12Carmen	Narrator	Tom lifts a pupusa off the comal. It’s still hot. Steam is coming off it, in a room where nothing else is moving.	rose	surprised
+scene	12	data/scenes-ch12.js	ch12Carmen	Narrator	Tom lifts a pupusa off the comal. It’s still hot. Steam is coming off it, in a room where nothing else is moving.	nara	happy
 scene	12	data/scenes-ch12.js	ch12Carmen	Tom	Doña Carmen. It’s Tom. Nobody on this block has ever left your door hungry. We’re here to eat. Please wake up.	amy	loving
 scene	12	data/scenes-ch12.js	ch12Carmen	Tom	Doña Carmen. It’s Tom. Nobody on this block has ever left your door hungry. We’re here to eat. Please wake up.	tnb	loving
 scene	12	data/scenes-ch12.js	ch12Carmen	Tom	Doña Carmen. It’s Tom. Nobody on this block has ever left your door hungry. We’re here to eat. Please wake up.	grace	loving
@@ -3737,12 +3737,12 @@ scene	12	data/scenes-ch12.js	ch12Carmen	Nara	Nara sits at Carmen’s feet, tail 
 scene	12	data/scenes-ch12.js	ch12Carmen	Nara	Nara sits at Carmen’s feet, tail wagging in a perfect circle, and sneezes on the amber.	tnb	happy
 scene	12	data/scenes-ch12.js	ch12Carmen	Nara	Nara sits at Carmen’s feet, tail wagging in a perfect circle, and sneezes on the amber.	grace	happy
 scene	12	data/scenes-ch12.js	ch12Carmen	Nara	Nara sits at Carmen’s feet, tail wagging in a perfect circle, and sneezes on the amber.	rose	happy
-scene	12	data/scenes-ch12.js	ch12Carmen	Doña Carmen	A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes.	tom	surprised
-scene	12	data/scenes-ch12.js	ch12Carmen	Doña Carmen	A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes.	amy	surprised
-scene	12	data/scenes-ch12.js	ch12Carmen	Doña Carmen	A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes.	tnb	surprised
-scene	12	data/scenes-ch12.js	ch12Carmen	Doña Carmen	A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes.	grace	surprised
-scene	12	data/scenes-ch12.js	ch12Carmen	Doña Carmen	A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes.	rose	surprised
-scene	12	data/scenes-ch12.js	ch12Carmen	Doña Carmen	A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes.	nara	surprised
+scene	12	data/scenes-ch12.js	ch12Carmen	Narrator	A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes.	tom	surprised
+scene	12	data/scenes-ch12.js	ch12Carmen	Narrator	A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes.	amy	surprised
+scene	12	data/scenes-ch12.js	ch12Carmen	Narrator	A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes.	tnb	surprised
+scene	12	data/scenes-ch12.js	ch12Carmen	Narrator	A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes.	grace	surprised
+scene	12	data/scenes-ch12.js	ch12Carmen	Narrator	A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes.	rose	surprised
+scene	12	data/scenes-ch12.js	ch12Carmen	Narrator	A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes.	nara	surprised
 scene	12	data/scenes-ch12.js	ch12Carmen	Doña Carmen	...and THEN I told the man, the loroco is not optional. Tom! When did you get here? Why is everything so quiet?	tom	happy
 scene	12	data/scenes-ch12.js	ch12Carmen	Doña Carmen	...and THEN I told the man, the loroco is not optional. Tom! When did you get here? Why is everything so quiet?	amy	happy
 scene	12	data/scenes-ch12.js	ch12Carmen	Doña Carmen	...and THEN I told the man, the loroco is not optional. Tom! When did you get here? Why is everything so quiet?	tnb	happy
@@ -4389,10 +4389,10 @@ scene	13	data/scenes-ch13.js	ch13After	Penny	(through the glass) One. Two. Don�
 scene	13	data/scenes-ch13.js	ch13After	Penny	(through the glass) One. Two. Don’t think about the interest. Three.	amy	happy
 scene	13	data/scenes-ch13.js	ch13After	Penny	(through the glass) One. Two. Don’t think about the interest. Three.	tnb	happy
 scene	13	data/scenes-ch13.js	ch13After	Penny	(through the glass) One. Two. Don’t think about the interest. Three.	nickel	happy
-scene	13	data/scenes-ch13.js	ch13After	Tom	The coins glow, and then they run. Gold down the glass like honey. The amber sighs and opens. Right at the height of a door.	amy	surprised
-scene	13	data/scenes-ch13.js	ch13After	Tom	The coins glow, and then they run. Gold down the glass like honey. The amber sighs and opens. Right at the height of a door.	tnb	surprised
-scene	13	data/scenes-ch13.js	ch13After	Tom	The coins glow, and then they run. Gold down the glass like honey. The amber sighs and opens. Right at the height of a door.	nara	surprised
-scene	13	data/scenes-ch13.js	ch13After	Tom	The coins glow, and then they run. Gold down the glass like honey. The amber sighs and opens. Right at the height of a door.	nickel	surprised
+scene	13	data/scenes-ch13.js	ch13After	Narrator	The coins glow, and then they run. Gold down the glass like honey. The amber sighs and opens. Right at the height of a door.	amy	surprised
+scene	13	data/scenes-ch13.js	ch13After	Narrator	The coins glow, and then they run. Gold down the glass like honey. The amber sighs and opens. Right at the height of a door.	tnb	surprised
+scene	13	data/scenes-ch13.js	ch13After	Narrator	The coins glow, and then they run. Gold down the glass like honey. The amber sighs and opens. Right at the height of a door.	nara	surprised
+scene	13	data/scenes-ch13.js	ch13After	Narrator	The coins glow, and then they run. Gold down the glass like honey. The amber sighs and opens. Right at the height of a door.	nickel	surprised
 scene	13	data/scenes-ch13.js	ch13After	Sal	It worked! Gold remembers being warm! I told you! Nobody ever believes the cab driver!	tom	happy
 scene	13	data/scenes-ch13.js	ch13After	Sal	It worked! Gold remembers being warm! I told you! Nobody ever believes the cab driver!	amy	happy
 scene	13	data/scenes-ch13.js	ch13After	Sal	It worked! Gold remembers being warm! I told you! Nobody ever believes the cab driver!	tnb	happy
@@ -4785,11 +4785,11 @@ scene	14	data/scenes-ch14.js	ch14Gate	Tom	Noted.	rose	happy
 scene	14	data/scenes-ch14.js	ch14Gate	Amy	Everybody okay? He hits like a dad who loves you and is very upset about it.	tom	proud
 scene	14	data/scenes-ch14.js	ch14Gate	Amy	Everybody okay? He hits like a dad who loves you and is very upset about it.	grace	proud
 scene	14	data/scenes-ch14.js	ch14Gate	Amy	Everybody okay? He hits like a dad who loves you and is very upset about it.	rose	proud
-scene	14	data/scenes-ch14.js	ch14After	Tom	The gold goes soft. Then it runs, slow, down the front of him, like warm wax, and soaks into the porch. The helmet is the last to go.	amy	surprised
-scene	14	data/scenes-ch14.js	ch14After	Tom	The gold goes soft. Then it runs, slow, down the front of him, like warm wax, and soaks into the porch. The helmet is the last to go.	grace	surprised
-scene	14	data/scenes-ch14.js	ch14After	Tom	The gold goes soft. Then it runs, slow, down the front of him, like warm wax, and soaks into the porch. The helmet is the last to go.	rose	surprised
-scene	14	data/scenes-ch14.js	ch14After	Tom	The gold goes soft. Then it runs, slow, down the front of him, like warm wax, and soaks into the porch. The helmet is the last to go.	boppy	surprised
-scene	14	data/scenes-ch14.js	ch14After	Tom	The gold goes soft. Then it runs, slow, down the front of him, like warm wax, and soaks into the porch. The helmet is the last to go.	deedee	loving
+scene	14	data/scenes-ch14.js	ch14After	Narrator	The gold goes soft. Then it runs, slow, down the front of him, like warm wax, and soaks into the porch. The helmet is the last to go.	amy	surprised
+scene	14	data/scenes-ch14.js	ch14After	Narrator	The gold goes soft. Then it runs, slow, down the front of him, like warm wax, and soaks into the porch. The helmet is the last to go.	grace	surprised
+scene	14	data/scenes-ch14.js	ch14After	Narrator	The gold goes soft. Then it runs, slow, down the front of him, like warm wax, and soaks into the porch. The helmet is the last to go.	rose	surprised
+scene	14	data/scenes-ch14.js	ch14After	Narrator	The gold goes soft. Then it runs, slow, down the front of him, like warm wax, and soaks into the porch. The helmet is the last to go.	boppy	surprised
+scene	14	data/scenes-ch14.js	ch14After	Narrator	The gold goes soft. Then it runs, slow, down the front of him, like warm wax, and soaks into the porch. The helmet is the last to go.	deedee	loving
 scene	14	data/scenes-ch14.js	ch14After	Rose	The bucket rolled down the steps. Can I have it? Is it mine?	tom	happy
 scene	14	data/scenes-ch14.js	ch14After	Rose	The bucket rolled down the steps. Can I have it? Is it mine?	amy	unimpressed
 scene	14	data/scenes-ch14.js	ch14After	Rose	The bucket rolled down the steps. Can I have it? Is it mine?	grace	unimpressed
@@ -5151,13 +5151,13 @@ scene	15	data/scenes-ch15.js	ch15Open	Deedee	To the moon and back.	grace	loving
 scene	15	data/scenes-ch15.js	ch15Open	Deedee	To the moon and back.	rose	loving
 scene	15	data/scenes-ch15.js	ch15Open	Deedee	To the moon and back.	boppy	loving
 scene	15	data/scenes-ch15.js	ch15Open	Deedee	To the moon and back.	nara	loving
-scene	15	data/scenes-ch15.js	ch15Open	Tom	The laughing stops. Nobody stops it. The sound just goes. Rose’s mouth is open and nothing is coming out.	amy	surprised
-scene	15	data/scenes-ch15.js	ch15Open	Tom	The laughing stops. Nobody stops it. The sound just goes. Rose’s mouth is open and nothing is coming out.	tnb	surprised
-scene	15	data/scenes-ch15.js	ch15Open	Tom	The laughing stops. Nobody stops it. The sound just goes. Rose’s mouth is open and nothing is coming out.	grace	scared
-scene	15	data/scenes-ch15.js	ch15Open	Tom	The laughing stops. Nobody stops it. The sound just goes. Rose’s mouth is open and nothing is coming out.	rose	scared
-scene	15	data/scenes-ch15.js	ch15Open	Tom	The laughing stops. Nobody stops it. The sound just goes. Rose’s mouth is open and nothing is coming out.	deedee	surprised
-scene	15	data/scenes-ch15.js	ch15Open	Tom	The laughing stops. Nobody stops it. The sound just goes. Rose’s mouth is open and nothing is coming out.	boppy	surprised
-scene	15	data/scenes-ch15.js	ch15Open	Tom	The laughing stops. Nobody stops it. The sound just goes. Rose’s mouth is open and nothing is coming out.	nara	scared
+scene	15	data/scenes-ch15.js	ch15Open	Narrator	The laughing stops. Nobody stops it. The sound just goes. Rose’s mouth is open and nothing is coming out.	amy	surprised
+scene	15	data/scenes-ch15.js	ch15Open	Narrator	The laughing stops. Nobody stops it. The sound just goes. Rose’s mouth is open and nothing is coming out.	tnb	surprised
+scene	15	data/scenes-ch15.js	ch15Open	Narrator	The laughing stops. Nobody stops it. The sound just goes. Rose’s mouth is open and nothing is coming out.	grace	scared
+scene	15	data/scenes-ch15.js	ch15Open	Narrator	The laughing stops. Nobody stops it. The sound just goes. Rose’s mouth is open and nothing is coming out.	rose	scared
+scene	15	data/scenes-ch15.js	ch15Open	Narrator	The laughing stops. Nobody stops it. The sound just goes. Rose’s mouth is open and nothing is coming out.	deedee	surprised
+scene	15	data/scenes-ch15.js	ch15Open	Narrator	The laughing stops. Nobody stops it. The sound just goes. Rose’s mouth is open and nothing is coming out.	boppy	surprised
+scene	15	data/scenes-ch15.js	ch15Open	Narrator	The laughing stops. Nobody stops it. The sound just goes. Rose’s mouth is open and nothing is coming out.	nara	scared
 scene	15	data/scenes-ch15.js	ch15Open	HUSH-9	THIS IS A QUIET CAR.	tom	angry
 scene	15	data/scenes-ch15.js	ch15Open	HUSH-9	THIS IS A QUIET CAR.	amy	angry
 scene	15	data/scenes-ch15.js	ch15Open	HUSH-9	THIS IS A QUIET CAR.	tnb	scared
@@ -5242,13 +5242,13 @@ scene	15	data/scenes-ch15.js	ch15Fight	Deedee	Up, up. Eat something. Sit a minut
 scene	15	data/scenes-ch15.js	ch15Fight	Deedee	Up, up. Eat something. Sit a minute. Then we try again.	rose	happy
 scene	15	data/scenes-ch15.js	ch15Fight	Deedee	Up, up. Eat something. Sit a minute. Then we try again.	tnb	happy
 scene	15	data/scenes-ch15.js	ch15Fight	Deedee	Up, up. Eat something. Sit a minute. Then we try again.	boppy	unimpressed
-scene	15	data/scenes-ch15.js	ch15After	Tom	The chip cracks right down the middle. HUSH-9 lowers its glove. For a moment the room is exactly as quiet as it wanted.	amy	surprised
-scene	15	data/scenes-ch15.js	ch15After	Tom	The chip cracks right down the middle. HUSH-9 lowers its glove. For a moment the room is exactly as quiet as it wanted.	tnb	surprised
-scene	15	data/scenes-ch15.js	ch15After	Tom	The chip cracks right down the middle. HUSH-9 lowers its glove. For a moment the room is exactly as quiet as it wanted.	grace	surprised
-scene	15	data/scenes-ch15.js	ch15After	Tom	The chip cracks right down the middle. HUSH-9 lowers its glove. For a moment the room is exactly as quiet as it wanted.	rose	surprised
-scene	15	data/scenes-ch15.js	ch15After	Tom	The chip cracks right down the middle. HUSH-9 lowers its glove. For a moment the room is exactly as quiet as it wanted.	deedee	surprised
-scene	15	data/scenes-ch15.js	ch15After	Tom	The chip cracks right down the middle. HUSH-9 lowers its glove. For a moment the room is exactly as quiet as it wanted.	boppy	surprised
-scene	15	data/scenes-ch15.js	ch15After	Tom	The chip cracks right down the middle. HUSH-9 lowers its glove. For a moment the room is exactly as quiet as it wanted.	nara	surprised
+scene	15	data/scenes-ch15.js	ch15After	Narrator	The chip cracks right down the middle. HUSH-9 lowers its glove. For a moment the room is exactly as quiet as it wanted.	amy	surprised
+scene	15	data/scenes-ch15.js	ch15After	Narrator	The chip cracks right down the middle. HUSH-9 lowers its glove. For a moment the room is exactly as quiet as it wanted.	tnb	surprised
+scene	15	data/scenes-ch15.js	ch15After	Narrator	The chip cracks right down the middle. HUSH-9 lowers its glove. For a moment the room is exactly as quiet as it wanted.	grace	surprised
+scene	15	data/scenes-ch15.js	ch15After	Narrator	The chip cracks right down the middle. HUSH-9 lowers its glove. For a moment the room is exactly as quiet as it wanted.	rose	surprised
+scene	15	data/scenes-ch15.js	ch15After	Narrator	The chip cracks right down the middle. HUSH-9 lowers its glove. For a moment the room is exactly as quiet as it wanted.	deedee	surprised
+scene	15	data/scenes-ch15.js	ch15After	Narrator	The chip cracks right down the middle. HUSH-9 lowers its glove. For a moment the room is exactly as quiet as it wanted.	boppy	surprised
+scene	15	data/scenes-ch15.js	ch15After	Narrator	The chip cracks right down the middle. HUSH-9 lowers its glove. For a moment the room is exactly as quiet as it wanted.	nara	surprised
 scene	15	data/scenes-ch15.js	ch15After	Rose	Somebody’s laughing.	tom	surprised
 scene	15	data/scenes-ch15.js	ch15After	Rose	Somebody’s laughing.	amy	surprised
 scene	15	data/scenes-ch15.js	ch15After	Rose	Somebody’s laughing.	grace	surprised
@@ -5583,18 +5583,18 @@ scene	16	data/scenes-ch16.js	ch16Open	Amy	Mom.	tom	sad
 scene	16	data/scenes-ch16.js	ch16Open	Amy	Mom.	tnb	sad
 scene	16	data/scenes-ch16.js	ch16Open	Amy	Mom.	grace	sad
 scene	16	data/scenes-ch16.js	ch16Open	Amy	Mom.	rose	sad
-scene	16	data/scenes-ch16.js	ch16Open	Tom	Nobody moves. Nobody says anything. Deedee and Boppy stepped in front of the camera, and the flash meant for the girls hit them instead.	amy	sad
-scene	16	data/scenes-ch16.js	ch16Open	Tom	In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands.	amy	sad
-scene	16	data/scenes-ch16.js	ch16Open	Tom	Nobody moves. Nobody says anything. Deedee and Boppy stepped in front of the camera, and the flash meant for the girls hit them instead.	tnb	sad
-scene	16	data/scenes-ch16.js	ch16Open	Tom	In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands.	tnb	sad
-scene	16	data/scenes-ch16.js	ch16Open	Tom	Nobody moves. Nobody says anything. Deedee and Boppy stepped in front of the camera, and the flash meant for the girls hit them instead.	grace	sad
-scene	16	data/scenes-ch16.js	ch16Open	Tom	In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands.	grace	sad
-scene	16	data/scenes-ch16.js	ch16Open	Tom	Nobody moves. Nobody says anything. Deedee and Boppy stepped in front of the camera, and the flash meant for the girls hit them instead.	rose	sad
-scene	16	data/scenes-ch16.js	ch16Open	Tom	In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands.	rose	sad
-scene	16	data/scenes-ch16.js	ch16Open	Tom	Nobody moves. Nobody says anything. Deedee and Boppy stepped in front of the camera, and the flash meant for the girls hit them instead.	nara	sad
-scene	16	data/scenes-ch16.js	ch16Open	Tom	In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands.	nara	sad
-scene	16	data/scenes-ch16.js	ch16Open	Tom	Nobody moves. Nobody says anything. Deedee and Boppy stepped in front of the camera, and the flash meant for the girls hit them instead.	marlowe	scared
-scene	16	data/scenes-ch16.js	ch16Open	Tom	In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands.	marlowe	scared
+scene	16	data/scenes-ch16.js	ch16Open	Narrator	Nobody moves. Nobody says anything. Deedee and Boppy stepped in front of the camera, and the flash meant for the girls hit them instead.	amy	sad
+scene	16	data/scenes-ch16.js	ch16Open	Narrator	In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands.	amy	sad
+scene	16	data/scenes-ch16.js	ch16Open	Narrator	Nobody moves. Nobody says anything. Deedee and Boppy stepped in front of the camera, and the flash meant for the girls hit them instead.	tnb	sad
+scene	16	data/scenes-ch16.js	ch16Open	Narrator	In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands.	tnb	sad
+scene	16	data/scenes-ch16.js	ch16Open	Narrator	Nobody moves. Nobody says anything. Deedee and Boppy stepped in front of the camera, and the flash meant for the girls hit them instead.	grace	sad
+scene	16	data/scenes-ch16.js	ch16Open	Narrator	In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands.	grace	sad
+scene	16	data/scenes-ch16.js	ch16Open	Narrator	Nobody moves. Nobody says anything. Deedee and Boppy stepped in front of the camera, and the flash meant for the girls hit them instead.	rose	sad
+scene	16	data/scenes-ch16.js	ch16Open	Narrator	In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands.	rose	sad
+scene	16	data/scenes-ch16.js	ch16Open	Narrator	Nobody moves. Nobody says anything. Deedee and Boppy stepped in front of the camera, and the flash meant for the girls hit them instead.	nara	sad
+scene	16	data/scenes-ch16.js	ch16Open	Narrator	In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands.	nara	sad
+scene	16	data/scenes-ch16.js	ch16Open	Narrator	Nobody moves. Nobody says anything. Deedee and Boppy stepped in front of the camera, and the flash meant for the girls hit them instead.	marlowe	scared
+scene	16	data/scenes-ch16.js	ch16Open	Narrator	In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands.	marlowe	scared
 scene	16	data/scenes-ch16.js	ch16Open	Vance	There. That is a family photograph. Thank you, Tom. You may keep the frame.	tom	angry
 scene	16	data/scenes-ch16.js	ch16Open	Vance	There. That is a family photograph. Thank you, Tom. You may keep the frame.	amy	angry
 scene	16	data/scenes-ch16.js	ch16Open	Vance	There. That is a family photograph. Thank you, Tom. You may keep the frame.	tnb	angry
@@ -5671,10 +5671,10 @@ scene	16	data/scenes-ch16.js	ch16Fight	Amy	Slow down. Break the eclipse and heal
 scene	16	data/scenes-ch16.js	ch16Fight	Amy	Up. Up. We are not done. Breathe. Then we go again.	tom	proud
 scene	16	data/scenes-ch16.js	ch16Fight	Amy	Up. Up. We are not done. Breathe. Then we go again.	tnb	proud
 scene	16	data/scenes-ch16.js	ch16Fight	Amy	Up. Up. We are not done. Breathe. Then we go again.	nara	proud
-scene	16	data/scenes-ch16.js	ch16After	Tom	The amber goes out of him all at once. Nobody cheers. There is no song. There is only the wind going through the Square.	amy	sad
-scene	16	data/scenes-ch16.js	ch16After	Tom	The amber goes out of him all at once. Nobody cheers. There is no song. There is only the wind going through the Square.	tnb	sad
-scene	16	data/scenes-ch16.js	ch16After	Tom	The amber goes out of him all at once. Nobody cheers. There is no song. There is only the wind going through the Square.	nara	sad
-scene	16	data/scenes-ch16.js	ch16After	Tom	The amber goes out of him all at once. Nobody cheers. There is no song. There is only the wind going through the Square.	marlowe	sad
+scene	16	data/scenes-ch16.js	ch16After	Narrator	The amber goes out of him all at once. Nobody cheers. There is no song. There is only the wind going through the Square.	amy	sad
+scene	16	data/scenes-ch16.js	ch16After	Narrator	The amber goes out of him all at once. Nobody cheers. There is no song. There is only the wind going through the Square.	tnb	sad
+scene	16	data/scenes-ch16.js	ch16After	Narrator	The amber goes out of him all at once. Nobody cheers. There is no song. There is only the wind going through the Square.	nara	sad
+scene	16	data/scenes-ch16.js	ch16After	Narrator	The amber goes out of him all at once. Nobody cheers. There is no song. There is only the wind going through the Square.	marlowe	sad
 scene	16	data/scenes-ch16.js	ch16After	Marlowe	I wanted it quieter. I only ever wanted it quieter.	tom	sad
 scene	16	data/scenes-ch16.js	ch16After	Marlowe	I wanted it quieter. I only ever wanted it quieter.	amy	angry
 scene	16	data/scenes-ch16.js	ch16After	Marlowe	I wanted it quieter. I only ever wanted it quieter.	tnb	sad
@@ -5803,15 +5803,15 @@ scene	17	data/scenes-ch17.js	ch17Open	Amy	And I get to hit something. Good.	grac
 scene	17	data/scenes-ch17.js	ch17Open	Sol	I’ll keep the meter off and the engine on. Go get your folks, Tommy.	tom	loving
 scene	17	data/scenes-ch17.js	ch17Open	Sol	I’ll keep the meter off and the engine on. Go get your folks, Tommy.	amy	loving
 scene	17	data/scenes-ch17.js	ch17Open	Sol	I’ll keep the meter off and the engine on. Go get your folks, Tommy.	tnb	happy
-scene	17	data/scenes-ch17.js	ch17Open	Tom	The tower goes up past the top of the screen. The doors at the bottom are glass, and they are glowing like a lit window at dinnertime.	amy	surprised
-scene	17	data/scenes-ch17.js	ch17Open	Tom	The tower goes up past the top of the screen. The doors at the bottom are glass, and they are glowing like a lit window at dinnertime.	tnb	surprised
-scene	17	data/scenes-ch17.js	ch17Open	Tom	The tower goes up past the top of the screen. The doors at the bottom are glass, and they are glowing like a lit window at dinnertime.	grace	surprised
-scene	17	data/scenes-ch17.js	ch17Open	Tom	The tower goes up past the top of the screen. The doors at the bottom are glass, and they are glowing like a lit window at dinnertime.	rose	surprised
+scene	17	data/scenes-ch17.js	ch17Open	Narrator	The tower goes up past the top of the screen. The doors at the bottom are glass, and they are glowing like a lit window at dinnertime.	amy	surprised
+scene	17	data/scenes-ch17.js	ch17Open	Narrator	The tower goes up past the top of the screen. The doors at the bottom are glass, and they are glowing like a lit window at dinnertime.	tnb	surprised
+scene	17	data/scenes-ch17.js	ch17Open	Narrator	The tower goes up past the top of the screen. The doors at the bottom are glass, and they are glowing like a lit window at dinnertime.	grace	surprised
+scene	17	data/scenes-ch17.js	ch17Open	Narrator	The tower goes up past the top of the screen. The doors at the bottom are glass, and they are glowing like a lit window at dinnertime.	rose	surprised
 scene	17	data/scenes-ch17.js	ch17Open	Rose	It’s so tall. Tata, it’s TALLER than the Starlite.	tom	happy
 scene	17	data/scenes-ch17.js	ch17Open	Rose	It’s so tall. Tata, it’s TALLER than the Starlite.	amy	happy
 scene	17	data/scenes-ch17.js	ch17Open	Rose	It’s so tall. Tata, it’s TALLER than the Starlite.	grace	unimpressed
-scene	17	data/scenes-ch17.js	ch17Lobby	Tom	The lobby is all glass and no people. Every clock says 4:59. The second hands are shaking in place, like they are trying very hard.	grace	surprised
-scene	17	data/scenes-ch17.js	ch17Lobby	Tom	The lobby is all glass and no people. Every clock says 4:59. The second hands are shaking in place, like they are trying very hard.	rose	surprised
+scene	17	data/scenes-ch17.js	ch17Lobby	Narrator	The lobby is all glass and no people. Every clock says 4:59. The second hands are shaking in place, like they are trying very hard.	grace	surprised
+scene	17	data/scenes-ch17.js	ch17Lobby	Narrator	The lobby is all glass and no people. Every clock says 4:59. The second hands are shaking in place, like they are trying very hard.	rose	surprised
 scene	17	data/scenes-ch17.js	ch17Lobby	Grace	It’s so clean. Nobody lives here. Nobody even touched the floor.	tom	unimpressed
 scene	17	data/scenes-ch17.js	ch17Lobby	Grace	It’s so clean. Nobody lives here. Nobody even touched the floor.	rose	surprised
 scene	17	data/scenes-ch17.js	ch17Lobby	Rose	There’s a plant. It looks scared.	tom	happy
@@ -5867,10 +5867,10 @@ scene	17	data/scenes-ch17.js	ch17Locks	Amy	Withdrawn. The lift has been WITHDRAW
 scene	17	data/scenes-ch17.js	ch17Locks	Amy	Withdrawn. The lift has been WITHDRAWN. Tom. Did he just challenge me to a stair race?	tnb	happy
 scene	17	data/scenes-ch17.js	ch17Locks	Tom	I don’t think he knows what he just did.	amy	proud
 scene	17	data/scenes-ch17.js	ch17Locks	Tom	I don’t think he knows what he just did.	tnb	happy
-scene	17	data/scenes-ch17.js	ch17Race	Tom	The seal door swings open on its own. The stairwell goes on. Twenty-nine more floors, straight up, in a glass tube.	amy	proud
-scene	17	data/scenes-ch17.js	ch17Race	Tom	The seal door swings open on its own. The stairwell goes on. Twenty-nine more floors, straight up, in a glass tube.	tnb	unimpressed
-scene	17	data/scenes-ch17.js	ch17Race	Tom	The seal door swings open on its own. The stairwell goes on. Twenty-nine more floors, straight up, in a glass tube.	grace	surprised
-scene	17	data/scenes-ch17.js	ch17Race	Tom	The seal door swings open on its own. The stairwell goes on. Twenty-nine more floors, straight up, in a glass tube.	rose	surprised
+scene	17	data/scenes-ch17.js	ch17Race	Narrator	The seal door swings open on its own. The stairwell goes on. Twenty-nine more floors, straight up, in a glass tube.	amy	proud
+scene	17	data/scenes-ch17.js	ch17Race	Narrator	The seal door swings open on its own. The stairwell goes on. Twenty-nine more floors, straight up, in a glass tube.	tnb	unimpressed
+scene	17	data/scenes-ch17.js	ch17Race	Narrator	The seal door swings open on its own. The stairwell goes on. Twenty-nine more floors, straight up, in a glass tube.	grace	surprised
+scene	17	data/scenes-ch17.js	ch17Race	Narrator	The seal door swings open on its own. The stairwell goes on. Twenty-nine more floors, straight up, in a glass tube.	rose	surprised
 scene	17	data/scenes-ch17.js	ch17Race	Amy	You and me. Landing to landing. Loser buys dinner.	tom	unimpressed
 scene	17	data/scenes-ch17.js	ch17Race	Amy	You and me. Landing to landing. Loser buys dinner.	grace	happy
 scene	17	data/scenes-ch17.js	ch17Race	Amy	You and me. Landing to landing. Loser buys dinner.	rose	happy
@@ -5909,10 +5909,10 @@ scene	17	data/scenes-ch17.js	ch17Race	Amy	Tie means nobody won. Tie means I lost
 scene	17	data/scenes-ch17.js	ch17Race	Amy	Tie means nobody won. Tie means I lost. Rematch. Later. After.	rose	happy
 scene	17	data/scenes-ch17.js	ch17Race	Tom	After.	amy	proud
 scene	17	data/scenes-ch17.js	ch17Race	Tom	After.	tnb	loving
-scene	17	data/scenes-ch17.js	ch17Vault	Tom	The Vault. One plinth, one snow globe, and a view of Los Angeles at 4:59 PM, golden and perfect and completely still.	amy	surprised
-scene	17	data/scenes-ch17.js	ch17Vault	Tom	The Vault. One plinth, one snow globe, and a view of Los Angeles at 4:59 PM, golden and perfect and completely still.	tnb	surprised
-scene	17	data/scenes-ch17.js	ch17Vault	Tom	The Vault. One plinth, one snow globe, and a view of Los Angeles at 4:59 PM, golden and perfect and completely still.	grace	surprised
-scene	17	data/scenes-ch17.js	ch17Vault	Tom	The Vault. One plinth, one snow globe, and a view of Los Angeles at 4:59 PM, golden and perfect and completely still.	rose	surprised
+scene	17	data/scenes-ch17.js	ch17Vault	Narrator	The Vault. One plinth, one snow globe, and a view of Los Angeles at 4:59 PM, golden and perfect and completely still.	amy	surprised
+scene	17	data/scenes-ch17.js	ch17Vault	Narrator	The Vault. One plinth, one snow globe, and a view of Los Angeles at 4:59 PM, golden and perfect and completely still.	tnb	surprised
+scene	17	data/scenes-ch17.js	ch17Vault	Narrator	The Vault. One plinth, one snow globe, and a view of Los Angeles at 4:59 PM, golden and perfect and completely still.	grace	surprised
+scene	17	data/scenes-ch17.js	ch17Vault	Narrator	The Vault. One plinth, one snow globe, and a view of Los Angeles at 4:59 PM, golden and perfect and completely still.	rose	surprised
 scene	17	data/scenes-ch17.js	ch17Vault	Rose	Tata. It’s the Square. It’s in there. That’s Deedee. That’s BOPPY.	tom	sad
 scene	17	data/scenes-ch17.js	ch17Vault	Rose	Tata. It’s the Square. It’s in there. That’s Deedee. That’s BOPPY.	amy	sad
 scene	17	data/scenes-ch17.js	ch17Vault	Rose	Tata. It’s the Square. It’s in there. That’s Deedee. That’s BOPPY.	tnb	sad
@@ -5961,11 +5961,11 @@ scene	17	data/scenes-ch17.js	ch17Fight	Amy	Up. Everyone up. We have a lens to br
 scene	17	data/scenes-ch17.js	ch17Fight	Amy	Up. Everyone up. We have a lens to break. Breathe. Then we go again.	tnb	proud
 scene	17	data/scenes-ch17.js	ch17Fight	Amy	Up. Everyone up. We have a lens to break. Breathe. Then we go again.	grace	proud
 scene	17	data/scenes-ch17.js	ch17Fight	Amy	Up. Everyone up. We have a lens to break. Breathe. Then we go again.	rose	proud
-scene	17	data/scenes-ch17.js	ch17After	Tom	The amber lens cracks across the middle. The cold one goes dark. For one second, the whole building holds its breath.	amy	surprised
-scene	17	data/scenes-ch17.js	ch17After	Tom	The amber lens cracks across the middle. The cold one goes dark. For one second, the whole building holds its breath.	tnb	surprised
-scene	17	data/scenes-ch17.js	ch17After	Tom	The amber lens cracks across the middle. The cold one goes dark. For one second, the whole building holds its breath.	grace	surprised
-scene	17	data/scenes-ch17.js	ch17After	Tom	The amber lens cracks across the middle. The cold one goes dark. For one second, the whole building holds its breath.	rose	surprised
-scene	17	data/scenes-ch17.js	ch17After	Tom	The amber lens cracks across the middle. The cold one goes dark. For one second, the whole building holds its breath.	nara	surprised
+scene	17	data/scenes-ch17.js	ch17After	Narrator	The amber lens cracks across the middle. The cold one goes dark. For one second, the whole building holds its breath.	amy	surprised
+scene	17	data/scenes-ch17.js	ch17After	Narrator	The amber lens cracks across the middle. The cold one goes dark. For one second, the whole building holds its breath.	tnb	surprised
+scene	17	data/scenes-ch17.js	ch17After	Narrator	The amber lens cracks across the middle. The cold one goes dark. For one second, the whole building holds its breath.	grace	surprised
+scene	17	data/scenes-ch17.js	ch17After	Narrator	The amber lens cracks across the middle. The cold one goes dark. For one second, the whole building holds its breath.	rose	surprised
+scene	17	data/scenes-ch17.js	ch17After	Narrator	The amber lens cracks across the middle. The cold one goes dark. For one second, the whole building holds its breath.	nara	surprised
 scene	17	data/scenes-ch17.js	ch17After	Archivist	I was only... keeping them safe.	tom	loving
 scene	17	data/scenes-ch17.js	ch17After	Archivist	I was only... keeping them safe.	amy	sad
 scene	17	data/scenes-ch17.js	ch17After	Archivist	I was only... keeping them safe.	tnb	sad
@@ -5992,10 +5992,10 @@ scene	17	data/scenes-ch17.js	ch17After	Grace	Tata. The globe.	tom	surprised
 scene	17	data/scenes-ch17.js	ch17After	Grace	Tata. The globe.	amy	surprised
 scene	17	data/scenes-ch17.js	ch17After	Grace	Tata. The globe.	tnb	surprised
 scene	17	data/scenes-ch17.js	ch17After	Grace	Tata. The globe.	rose	surprised
-scene	17	data/scenes-ch17.js	ch17After	Tom	The snow globe on the plinth lifts an inch off the glass. The gold cable above it goes tight. It is going up.	amy	scared
-scene	17	data/scenes-ch17.js	ch17After	Tom	The snow globe on the plinth lifts an inch off the glass. The gold cable above it goes tight. It is going up.	tnb	scared
-scene	17	data/scenes-ch17.js	ch17After	Tom	The snow globe on the plinth lifts an inch off the glass. The gold cable above it goes tight. It is going up.	grace	scared
-scene	17	data/scenes-ch17.js	ch17After	Tom	The snow globe on the plinth lifts an inch off the glass. The gold cable above it goes tight. It is going up.	rose	scared
+scene	17	data/scenes-ch17.js	ch17After	Narrator	The snow globe on the plinth lifts an inch off the glass. The gold cable above it goes tight. It is going up.	amy	scared
+scene	17	data/scenes-ch17.js	ch17After	Narrator	The snow globe on the plinth lifts an inch off the glass. The gold cable above it goes tight. It is going up.	tnb	scared
+scene	17	data/scenes-ch17.js	ch17After	Narrator	The snow globe on the plinth lifts an inch off the glass. The gold cable above it goes tight. It is going up.	grace	scared
+scene	17	data/scenes-ch17.js	ch17After	Narrator	The snow globe on the plinth lifts an inch off the glass. The gold cable above it goes tight. It is going up.	rose	scared
 scene	17	data/scenes-ch17.js	ch17After	Vance	Thank you for the tour, Tom. Thank you for the Archive. It was very nearly complete.	tom	angry
 scene	17	data/scenes-ch17.js	ch17After	Vance	Thank you for the tour, Tom. Thank you for the Archive. It was very nearly complete.	amy	angry
 scene	17	data/scenes-ch17.js	ch17After	Vance	Thank you for the tour, Tom. Thank you for the Archive. It was very nearly complete.	tnb	angry
@@ -6015,10 +6015,10 @@ scene	17	data/scenes-ch17.js	ch17After	Tom	Everybody breathe. We rest. Then we g
 scene	17	data/scenes-ch17.js	ch17After	Tom	Everybody breathe. We rest. Then we go to the top.	tnb	proud
 scene	17	data/scenes-ch17.js	ch17After	Tom	Everybody breathe. We rest. Then we go to the top.	grace	proud
 scene	17	data/scenes-ch17.js	ch17After	Tom	Everybody breathe. We rest. Then we go to the top.	rose	proud
-scene	17	data/scenes-ch17.js	ch17After	Tom	A gold lift door stands open at the north wall. No call button. A brass plate: FLOOR 60. BY INVITATION.	amy	surprised
-scene	17	data/scenes-ch17.js	ch17After	Tom	A gold lift door stands open at the north wall. No call button. A brass plate: FLOOR 60. BY INVITATION.	tnb	surprised
-scene	17	data/scenes-ch17.js	ch17After	Tom	A gold lift door stands open at the north wall. No call button. A brass plate: FLOOR 60. BY INVITATION.	grace	surprised
-scene	17	data/scenes-ch17.js	ch17After	Tom	A gold lift door stands open at the north wall. No call button. A brass plate: FLOOR 60. BY INVITATION.	rose	surprised
+scene	17	data/scenes-ch17.js	ch17After	Narrator	A gold lift door stands open at the north wall. No call button. A brass plate: FLOOR 60. BY INVITATION.	amy	surprised
+scene	17	data/scenes-ch17.js	ch17After	Narrator	A gold lift door stands open at the north wall. No call button. A brass plate: FLOOR 60. BY INVITATION.	tnb	surprised
+scene	17	data/scenes-ch17.js	ch17After	Narrator	A gold lift door stands open at the north wall. No call button. A brass plate: FLOOR 60. BY INVITATION.	grace	surprised
+scene	17	data/scenes-ch17.js	ch17After	Narrator	A gold lift door stands open at the north wall. No call button. A brass plate: FLOOR 60. BY INVITATION.	rose	surprised
 scene	18	data/scenes-ch18.js	ch18Open	Tom	The pinnacle lift opens without a sound. There is no button inside, no floor number. The walls are mirrors, and every one of us is in them.	amy	surprised
 scene	18	data/scenes-ch18.js	ch18Open	Tom	The pinnacle lift opens without a sound. There is no button inside, no floor number. The walls are mirrors, and every one of us is in them.	tnb	surprised
 scene	18	data/scenes-ch18.js	ch18Open	Tom	The pinnacle lift opens without a sound. There is no button inside, no floor number. The walls are mirrors, and every one of us is in them.	grace	scared
@@ -6110,11 +6110,11 @@ scene	18	data/scenes-ch18.js	ch18Pinnacle	Vance	I know. That is why this is so h
 scene	18	data/scenes-ch18.js	ch18Pinnacle	Vance	I know. That is why this is so hard.	tnb	scared
 scene	18	data/scenes-ch18.js	ch18Pinnacle	Vance	I know. That is why this is so hard.	grace	scared
 scene	18	data/scenes-ch18.js	ch18Pinnacle	Vance	I know. That is why this is so hard.	rose	scared
-scene	18	data/scenes-ch18.js	ch18Pinnacle	Tom	The threads of the Loom lean. All of them, all at once, like a field in the wind. They gather into the brass lens at the end of his arm.	amy	scared
-scene	18	data/scenes-ch18.js	ch18Pinnacle	Tom	The threads of the Loom lean. All of them, all at once, like a field in the wind. They gather into the brass lens at the end of his arm.	tnb	scared
-scene	18	data/scenes-ch18.js	ch18Pinnacle	Tom	The threads of the Loom lean. All of them, all at once, like a field in the wind. They gather into the brass lens at the end of his arm.	grace	scared
-scene	18	data/scenes-ch18.js	ch18Pinnacle	Tom	The threads of the Loom lean. All of them, all at once, like a field in the wind. They gather into the brass lens at the end of his arm.	rose	scared
-scene	18	data/scenes-ch18.js	ch18Pinnacle	Tom	The threads of the Loom lean. All of them, all at once, like a field in the wind. They gather into the brass lens at the end of his arm.	nara	scared
+scene	18	data/scenes-ch18.js	ch18Pinnacle	Narrator	The threads of the Loom lean. All of them, all at once, like a field in the wind. They gather into the brass lens at the end of his arm.	amy	scared
+scene	18	data/scenes-ch18.js	ch18Pinnacle	Narrator	The threads of the Loom lean. All of them, all at once, like a field in the wind. They gather into the brass lens at the end of his arm.	tnb	scared
+scene	18	data/scenes-ch18.js	ch18Pinnacle	Narrator	The threads of the Loom lean. All of them, all at once, like a field in the wind. They gather into the brass lens at the end of his arm.	grace	scared
+scene	18	data/scenes-ch18.js	ch18Pinnacle	Narrator	The threads of the Loom lean. All of them, all at once, like a field in the wind. They gather into the brass lens at the end of his arm.	rose	scared
+scene	18	data/scenes-ch18.js	ch18Pinnacle	Narrator	The threads of the Loom lean. All of them, all at once, like a field in the wind. They gather into the brass lens at the end of his arm.	nara	scared
 scene	18	data/scenes-ch18.js	ch18Pinnacle	Vance	The Ray unwrites whatever it touches. It is very gentle. They will not remember being sad. Mrs. Gregori. Mr. TNB. Grace. Rose. Hold hands, please.	tom	angry
 scene	18	data/scenes-ch18.js	ch18Pinnacle	Vance	The Ray unwrites whatever it touches. It is very gentle. They will not remember being sad. Mrs. Gregori. Mr. TNB. Grace. Rose. Hold hands, please.	amy	angry
 scene	18	data/scenes-ch18.js	ch18Pinnacle	Vance	The Ray unwrites whatever it touches. It is very gentle. They will not remember being sad. Mrs. Gregori. Mr. TNB. Grace. Rose. Hold hands, please.	tnb	scared
@@ -6142,11 +6142,11 @@ scene	18	data/scenes-ch18.js	ch18Pinnacle	Nara	Nara presses herself against the 
 scene	18	data/scenes-ch18.js	ch18Pinnacle	Nara	Nara presses herself against the back of Tom’s legs and does not make a sound. She is very good at this.	tnb	scared
 scene	18	data/scenes-ch18.js	ch18Pinnacle	Nara	Nara presses herself against the back of Tom’s legs and does not make a sound. She is very good at this.	grace	scared
 scene	18	data/scenes-ch18.js	ch18Pinnacle	Nara	Nara presses herself against the back of Tom’s legs and does not make a sound. She is very good at this.	rose	scared
-scene	18	data/scenes-ch18.js	ch18Pinnacle	Tom	He adjusts his glasses. He has done it before every hard thing, his whole life. Then he raises one hand, palm out, and takes one step forward.	amy	scared
-scene	18	data/scenes-ch18.js	ch18Pinnacle	Tom	He adjusts his glasses. He has done it before every hard thing, his whole life. Then he raises one hand, palm out, and takes one step forward.	tnb	scared
-scene	18	data/scenes-ch18.js	ch18Pinnacle	Tom	He adjusts his glasses. He has done it before every hard thing, his whole life. Then he raises one hand, palm out, and takes one step forward.	grace	scared
-scene	18	data/scenes-ch18.js	ch18Pinnacle	Tom	He adjusts his glasses. He has done it before every hard thing, his whole life. Then he raises one hand, palm out, and takes one step forward.	rose	scared
-scene	18	data/scenes-ch18.js	ch18Pinnacle	Tom	He adjusts his glasses. He has done it before every hard thing, his whole life. Then he raises one hand, palm out, and takes one step forward.	vance	surprised
+scene	18	data/scenes-ch18.js	ch18Pinnacle	Narrator	He adjusts his glasses. He has done it before every hard thing, his whole life. Then he raises one hand, palm out, and takes one step forward.	amy	scared
+scene	18	data/scenes-ch18.js	ch18Pinnacle	Narrator	He adjusts his glasses. He has done it before every hard thing, his whole life. Then he raises one hand, palm out, and takes one step forward.	tnb	scared
+scene	18	data/scenes-ch18.js	ch18Pinnacle	Narrator	He adjusts his glasses. He has done it before every hard thing, his whole life. Then he raises one hand, palm out, and takes one step forward.	grace	scared
+scene	18	data/scenes-ch18.js	ch18Pinnacle	Narrator	He adjusts his glasses. He has done it before every hard thing, his whole life. Then he raises one hand, palm out, and takes one step forward.	rose	scared
+scene	18	data/scenes-ch18.js	ch18Pinnacle	Narrator	He adjusts his glasses. He has done it before every hard thing, his whole life. Then he raises one hand, palm out, and takes one step forward.	vance	surprised
 scene	18	data/scenes-ch18.js	ch18Pinnacle	Tom	No touching, please.	amy	scared
 scene	18	data/scenes-ch18.js	ch18Pinnacle	Tom	No touching, please.	tnb	scared
 scene	18	data/scenes-ch18.js	ch18Pinnacle	Tom	No touching, please.	grace	scared
@@ -6372,10 +6372,10 @@ scene	19	data/scenes-ch19.js	ch19Fight	TNB	Up. Everybody up. Breathe. We can do 
 scene	19	data/scenes-ch19.js	ch19Fight	TNB	Up. Everybody up. Breathe. We can do this again. It’s a pottery rule: the first one always cracks.	grace	proud
 scene	19	data/scenes-ch19.js	ch19Fight	TNB	Up. Everybody up. Breathe. We can do this again. It’s a pottery rule: the first one always cracks.	rose	proud
 scene	19	data/scenes-ch19.js	ch19Fight	TNB	Up. Everybody up. Breathe. We can do this again. It’s a pottery rule: the first one always cracks.	nara	proud
-scene	19	data/scenes-ch19.js	ch19After	Oblivion Censor	The Censor lowers his stamp. The black bar over his face slides to the side, a little at a time, and under it is only a small tired man with ink on his cuffs.	amy	surprised
-scene	19	data/scenes-ch19.js	ch19After	Oblivion Censor	The Censor lowers his stamp. The black bar over his face slides to the side, a little at a time, and under it is only a small tired man with ink on his cuffs.	tnb	surprised
-scene	19	data/scenes-ch19.js	ch19After	Oblivion Censor	The Censor lowers his stamp. The black bar over his face slides to the side, a little at a time, and under it is only a small tired man with ink on his cuffs.	grace	surprised
-scene	19	data/scenes-ch19.js	ch19After	Oblivion Censor	The Censor lowers his stamp. The black bar over his face slides to the side, a little at a time, and under it is only a small tired man with ink on his cuffs.	rose	surprised
+scene	19	data/scenes-ch19.js	ch19After	Narrator	The Censor lowers his stamp. The black bar over his face slides to the side, a little at a time, and under it is only a small tired man with ink on his cuffs.	amy	surprised
+scene	19	data/scenes-ch19.js	ch19After	Narrator	The Censor lowers his stamp. The black bar over his face slides to the side, a little at a time, and under it is only a small tired man with ink on his cuffs.	tnb	surprised
+scene	19	data/scenes-ch19.js	ch19After	Narrator	The Censor lowers his stamp. The black bar over his face slides to the side, a little at a time, and under it is only a small tired man with ink on his cuffs.	grace	surprised
+scene	19	data/scenes-ch19.js	ch19After	Narrator	The Censor lowers his stamp. The black bar over his face slides to the side, a little at a time, and under it is only a small tired man with ink on his cuffs.	rose	surprised
 scene	19	data/scenes-ch19.js	ch19After	Oblivion Censor	I have never been argued with by so many people at once. It was... full.	amy	loving
 scene	19	data/scenes-ch19.js	ch19After	Oblivion Censor	I have never been argued with by so many people at once. It was... full.	tnb	loving
 scene	19	data/scenes-ch19.js	ch19After	Oblivion Censor	I have never been argued with by so many people at once. It was... full.	grace	loving
@@ -6422,10 +6422,10 @@ scene	19	data/scenes-ch19.js	ch19After	Tom	I know. I know. I missed you too. I w
 scene	19	data/scenes-ch19.js	ch19After	Tom	I know. I know. I missed you too. I was a small gold light and I missed you the whole time.	tnb	loving
 scene	19	data/scenes-ch19.js	ch19After	Tom	I know. I know. I missed you too. I was a small gold light and I missed you the whole time.	grace	loving
 scene	19	data/scenes-ch19.js	ch19After	Tom	I know. I know. I missed you too. I was a small gold light and I missed you the whole time.	rose	loving
-scene	19	data/scenes-ch19.js	ch19After	Tom	He turns to the Censor, who is looking at the floor.	amy	surprised
-scene	19	data/scenes-ch19.js	ch19After	Tom	He turns to the Censor, who is looking at the floor.	tnb	surprised
-scene	19	data/scenes-ch19.js	ch19After	Tom	He turns to the Censor, who is looking at the floor.	grace	surprised
-scene	19	data/scenes-ch19.js	ch19After	Tom	He turns to the Censor, who is looking at the floor.	rose	surprised
+scene	19	data/scenes-ch19.js	ch19After	Narrator	He turns to the Censor, who is looking at the floor.	amy	surprised
+scene	19	data/scenes-ch19.js	ch19After	Narrator	He turns to the Censor, who is looking at the floor.	tnb	surprised
+scene	19	data/scenes-ch19.js	ch19After	Narrator	He turns to the Censor, who is looking at the floor.	grace	surprised
+scene	19	data/scenes-ch19.js	ch19After	Narrator	He turns to the Censor, who is looking at the floor.	rose	surprised
 scene	19	data/scenes-ch19.js	ch19After	Tom	You have never delivered anything.	amy	surprised
 scene	19	data/scenes-ch19.js	ch19After	Tom	You have never delivered anything.	tnb	surprised
 scene	19	data/scenes-ch19.js	ch19After	Tom	You have never delivered anything.	grace	surprised
@@ -6453,11 +6453,11 @@ scene	19	data/scenes-ch19.js	ch19After	Tom	The route is not far. The job is only
 scene	19	data/scenes-ch19.js	ch19After	Tom	The route is not far. The job is only to put a thing in someone’s hands. You are already very good at the part where you carry it.	tnb	loving
 scene	19	data/scenes-ch19.js	ch19After	Tom	The route is not far. The job is only to put a thing in someone’s hands. You are already very good at the part where you carry it.	grace	loving
 scene	19	data/scenes-ch19.js	ch19After	Tom	The route is not far. The job is only to put a thing in someone’s hands. You are already very good at the part where you carry it.	rose	proud
-scene	19	data/scenes-ch19.js	ch19After	Oblivion Censor	The Censor takes the pretzel in both hands, carefully, as if it were made of glass. Then he lifts his stamp, looks at it, and brings it down on the napkin. It does not say RETURN TO SENDER. It says DELIVERED.	tom	loving
-scene	19	data/scenes-ch19.js	ch19After	Oblivion Censor	The Censor takes the pretzel in both hands, carefully, as if it were made of glass. Then he lifts his stamp, looks at it, and brings it down on the napkin. It does not say RETURN TO SENDER. It says DELIVERED.	amy	loving
-scene	19	data/scenes-ch19.js	ch19After	Oblivion Censor	The Censor takes the pretzel in both hands, carefully, as if it were made of glass. Then he lifts his stamp, looks at it, and brings it down on the napkin. It does not say RETURN TO SENDER. It says DELIVERED.	tnb	loving
-scene	19	data/scenes-ch19.js	ch19After	Oblivion Censor	The Censor takes the pretzel in both hands, carefully, as if it were made of glass. Then he lifts his stamp, looks at it, and brings it down on the napkin. It does not say RETURN TO SENDER. It says DELIVERED.	grace	surprised
-scene	19	data/scenes-ch19.js	ch19After	Oblivion Censor	The Censor takes the pretzel in both hands, carefully, as if it were made of glass. Then he lifts his stamp, looks at it, and brings it down on the napkin. It does not say RETURN TO SENDER. It says DELIVERED.	rose	surprised
+scene	19	data/scenes-ch19.js	ch19After	Narrator	The Censor takes the pretzel in both hands, carefully, as if it were made of glass. Then he lifts his stamp, looks at it, and brings it down on the napkin. It does not say RETURN TO SENDER. It says DELIVERED.	tom	loving
+scene	19	data/scenes-ch19.js	ch19After	Narrator	The Censor takes the pretzel in both hands, carefully, as if it were made of glass. Then he lifts his stamp, looks at it, and brings it down on the napkin. It does not say RETURN TO SENDER. It says DELIVERED.	amy	loving
+scene	19	data/scenes-ch19.js	ch19After	Narrator	The Censor takes the pretzel in both hands, carefully, as if it were made of glass. Then he lifts his stamp, looks at it, and brings it down on the napkin. It does not say RETURN TO SENDER. It says DELIVERED.	tnb	loving
+scene	19	data/scenes-ch19.js	ch19After	Narrator	The Censor takes the pretzel in both hands, carefully, as if it were made of glass. Then he lifts his stamp, looks at it, and brings it down on the napkin. It does not say RETURN TO SENDER. It says DELIVERED.	grace	surprised
+scene	19	data/scenes-ch19.js	ch19After	Narrator	The Censor takes the pretzel in both hands, carefully, as if it were made of glass. Then he lifts his stamp, looks at it, and brings it down on the napkin. It does not say RETURN TO SENDER. It says DELIVERED.	rose	surprised
 scene	19	data/scenes-ch19.js	ch19After	Oblivion Censor	It is a nicer word to hold than I expected.	tom	loving
 scene	19	data/scenes-ch19.js	ch19After	Oblivion Censor	It is a nicer word to hold than I expected.	amy	loving
 scene	19	data/scenes-ch19.js	ch19After	Oblivion Censor	It is a nicer word to hold than I expected.	tnb	loving
@@ -6516,10 +6516,10 @@ scene	19	data/scenes-ch19.js	ch19Feast	Grace	Boppy would eat one raw and say it 
 scene	19	data/scenes-ch19.js	ch19Feast	Grace	Boppy would eat one raw and say it was “fine” in a voice.	amy	happy
 scene	19	data/scenes-ch19.js	ch19Feast	Grace	Boppy would eat one raw and say it was “fine” in a voice.	tnb	happy
 scene	19	data/scenes-ch19.js	ch19Feast	Grace	Boppy would eat one raw and say it was “fine” in a voice.	rose	happy
-scene	19	data/scenes-ch19.js	ch19Feast	Tom	The kitchen is a mess. Every pot is in use. The window is fogged. It smells like a Sunday.	amy	happy
-scene	19	data/scenes-ch19.js	ch19Feast	Tom	The kitchen is a mess. Every pot is in use. The window is fogged. It smells like a Sunday.	tnb	happy
-scene	19	data/scenes-ch19.js	ch19Feast	Tom	The kitchen is a mess. Every pot is in use. The window is fogged. It smells like a Sunday.	grace	happy
-scene	19	data/scenes-ch19.js	ch19Feast	Tom	The kitchen is a mess. Every pot is in use. The window is fogged. It smells like a Sunday.	rose	happy
+scene	19	data/scenes-ch19.js	ch19Feast	Narrator	The kitchen is a mess. Every pot is in use. The window is fogged. It smells like a Sunday.	amy	happy
+scene	19	data/scenes-ch19.js	ch19Feast	Narrator	The kitchen is a mess. Every pot is in use. The window is fogged. It smells like a Sunday.	tnb	happy
+scene	19	data/scenes-ch19.js	ch19Feast	Narrator	The kitchen is a mess. Every pot is in use. The window is fogged. It smells like a Sunday.	grace	happy
+scene	19	data/scenes-ch19.js	ch19Feast	Narrator	The kitchen is a mess. Every pot is in use. The window is fogged. It smells like a Sunday.	rose	happy
 scene	19	data/scenes-ch19.js	ch19Feast	TNB	The oven door handle came off. I fixed it. You could say I handled it.	tom	unimpressed
 scene	19	data/scenes-ch19.js	ch19Feast	TNB	The oven door handle came off. I fixed it. You could say I handled it.	amy	unimpressed
 scene	19	data/scenes-ch19.js	ch19Feast	TNB	The oven door handle came off. I fixed it. You could say I handled it.	grace	happy
@@ -6538,17 +6538,17 @@ scene	19	data/scenes-ch19.js	ch19Feast	Rose	I’m the taster. I’ve tasted nine
 scene	19	data/scenes-ch19.js	ch19Feast	Rose	I’m the taster. I’ve tasted nine times. It’s for quality.	amy	unimpressed
 scene	19	data/scenes-ch19.js	ch19Feast	Rose	I’m the taster. I’ve tasted nine times. It’s for quality.	tnb	happy
 scene	19	data/scenes-ch19.js	ch19Feast	Rose	I’m the taster. I’ve tasted nine times. It’s for quality.	grace	unimpressed
-scene	19	data/scenes-ch19.js	ch19Feast	Tom	The pasta does not go in an arc.	grace	proud
-scene	19	data/scenes-ch19.js	ch19Feast	Tom	The pasta does not go in an arc.	rose	happy
-scene	19	data/scenes-ch19.js	ch19Feast	Tom	The pasta does not go in an arc.	tnb	happy
+scene	19	data/scenes-ch19.js	ch19Feast	Narrator	The pasta does not go in an arc.	grace	proud
+scene	19	data/scenes-ch19.js	ch19Feast	Narrator	The pasta does not go in an arc.	rose	happy
+scene	19	data/scenes-ch19.js	ch19Feast	Narrator	The pasta does not go in an arc.	tnb	happy
 scene	19	data/scenes-ch19.js	ch19Feast	Grace	It goes in an arc if you believe in it, Tata.	tom	loving
 scene	19	data/scenes-ch19.js	ch19Feast	Grace	It goes in an arc if you believe in it, Tata.	amy	happy
 scene	19	data/scenes-ch19.js	ch19Feast	Grace	It goes in an arc if you believe in it, Tata.	tnb	happy
 scene	19	data/scenes-ch19.js	ch19Feast	Grace	It goes in an arc if you believe in it, Tata.	rose	happy
-scene	19	data/scenes-ch19.js	ch19Feast	Tom	He looks at the table. Everyone he loves is crowded around it, and somebody has put a rock in the middle like a centerpiece. He doesn’t say anything for a second.	amy	loving
-scene	19	data/scenes-ch19.js	ch19Feast	Tom	He looks at the table. Everyone he loves is crowded around it, and somebody has put a rock in the middle like a centerpiece. He doesn’t say anything for a second.	tnb	loving
-scene	19	data/scenes-ch19.js	ch19Feast	Tom	He looks at the table. Everyone he loves is crowded around it, and somebody has put a rock in the middle like a centerpiece. He doesn’t say anything for a second.	grace	loving
-scene	19	data/scenes-ch19.js	ch19Feast	Tom	He looks at the table. Everyone he loves is crowded around it, and somebody has put a rock in the middle like a centerpiece. He doesn’t say anything for a second.	rose	loving
+scene	19	data/scenes-ch19.js	ch19Feast	Narrator	He looks at the table. Everyone he loves is crowded around it, and somebody has put a rock in the middle like a centerpiece. He doesn’t say anything for a second.	amy	loving
+scene	19	data/scenes-ch19.js	ch19Feast	Narrator	He looks at the table. Everyone he loves is crowded around it, and somebody has put a rock in the middle like a centerpiece. He doesn’t say anything for a second.	tnb	loving
+scene	19	data/scenes-ch19.js	ch19Feast	Narrator	He looks at the table. Everyone he loves is crowded around it, and somebody has put a rock in the middle like a centerpiece. He doesn’t say anything for a second.	grace	loving
+scene	19	data/scenes-ch19.js	ch19Feast	Narrator	He looks at the table. Everyone he loves is crowded around it, and somebody has put a rock in the middle like a centerpiece. He doesn’t say anything for a second.	rose	loving
 scene	19	data/scenes-ch19.js	ch19Feast	Tom	Pack it all up. Sal is outside with cab seven. Mom and Dad are still stone in that snow globe on floor fifty-nine, so we’re bringing dinner to them.	amy	proud
 scene	19	data/scenes-ch19.js	ch19Feast	Tom	Pack it all up. Sal is outside with cab seven. Mom and Dad are still stone in that snow globe on floor fifty-nine, so we’re bringing dinner to them.	tnb	proud
 scene	19	data/scenes-ch19.js	ch19Feast	Tom	Pack it all up. Sal is outside with cab seven. Mom and Dad are still stone in that snow globe on floor fifty-nine, so we’re bringing dinner to them.	grace	proud
@@ -6563,10 +6563,10 @@ scene	19	data/scenes-ch19.js	ch19Feast	Sal	Cab seven! Everybody in. Bring the la
 scene	19	data/scenes-ch19.js	ch19Feast	Sal	I’m scared of that tower and I’m going anyway.	grace	happy
 scene	19	data/scenes-ch19.js	ch19Feast	Sal	Cab seven! Everybody in. Bring the lasagna on your lap, it holds the heat. Fifty-nine floors, no stops, I’m not even charging.	rose	happy
 scene	19	data/scenes-ch19.js	ch19Feast	Sal	I’m scared of that tower and I’m going anyway.	rose	happy
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	The snow globe is still on its plinth. Inside it, very small, two stone figures hold each other up. The amber light is crawling on their hands. It is slower than before.	amy	sad
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	The snow globe is still on its plinth. Inside it, very small, two stone figures hold each other up. The amber light is crawling on their hands. It is slower than before.	tnb	sad
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	The snow globe is still on its plinth. Inside it, very small, two stone figures hold each other up. The amber light is crawling on their hands. It is slower than before.	grace	sad
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	The snow globe is still on its plinth. Inside it, very small, two stone figures hold each other up. The amber light is crawling on their hands. It is slower than before.	rose	sad
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	The snow globe is still on its plinth. Inside it, very small, two stone figures hold each other up. The amber light is crawling on their hands. It is slower than before.	amy	sad
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	The snow globe is still on its plinth. Inside it, very small, two stone figures hold each other up. The amber light is crawling on their hands. It is slower than before.	tnb	sad
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	The snow globe is still on its plinth. Inside it, very small, two stone figures hold each other up. The amber light is crawling on their hands. It is slower than before.	grace	sad
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	The snow globe is still on its plinth. Inside it, very small, two stone figures hold each other up. The amber light is crawling on their hands. It is slower than before.	rose	sad
 scene	19	data/scenes-ch19.js	ch19Thaw	Amy	Mom. Dad. We brought dinner.	tom	loving
 scene	19	data/scenes-ch19.js	ch19Thaw	Amy	Mom. Dad. We brought dinner.	tnb	loving
 scene	19	data/scenes-ch19.js	ch19Thaw	Amy	Mom. Dad. We brought dinner.	grace	loving
@@ -6579,11 +6579,11 @@ scene	19	data/scenes-ch19.js	ch19Thaw	TNB	Everybody sit. Around the plinth. Nobo
 scene	19	data/scenes-ch19.js	ch19Thaw	TNB	Everybody sit. Around the plinth. Nobody leave. Plates on laps.	amy	proud
 scene	19	data/scenes-ch19.js	ch19Thaw	TNB	Everybody sit. Around the plinth. Nobody leave. Plates on laps.	grace	proud
 scene	19	data/scenes-ch19.js	ch19Thaw	TNB	Everybody sit. Around the plinth. Nobody leave. Plates on laps.	rose	proud
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	Steam from the lasagna drifts across the glass. The amber light turns the color of toast. A crack of warm yellow runs along the stone, then two, then nine.	amy	surprised
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	Steam from the lasagna drifts across the glass. The amber light turns the color of toast. A crack of warm yellow runs along the stone, then two, then nine.	tnb	surprised
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	Steam from the lasagna drifts across the glass. The amber light turns the color of toast. A crack of warm yellow runs along the stone, then two, then nine.	grace	surprised
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	Steam from the lasagna drifts across the glass. The amber light turns the color of toast. A crack of warm yellow runs along the stone, then two, then nine.	rose	surprised
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	Steam from the lasagna drifts across the glass. The amber light turns the color of toast. A crack of warm yellow runs along the stone, then two, then nine.	nara	surprised
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	Steam from the lasagna drifts across the glass. The amber light turns the color of toast. A crack of warm yellow runs along the stone, then two, then nine.	amy	surprised
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	Steam from the lasagna drifts across the glass. The amber light turns the color of toast. A crack of warm yellow runs along the stone, then two, then nine.	tnb	surprised
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	Steam from the lasagna drifts across the glass. The amber light turns the color of toast. A crack of warm yellow runs along the stone, then two, then nine.	grace	surprised
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	Steam from the lasagna drifts across the glass. The amber light turns the color of toast. A crack of warm yellow runs along the stone, then two, then nine.	rose	surprised
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	Steam from the lasagna drifts across the glass. The amber light turns the color of toast. A crack of warm yellow runs along the stone, then two, then nine.	nara	surprised
 scene	19	data/scenes-ch19.js	ch19Thaw	Grace	It’s working. It’s working!	tom	happy
 scene	19	data/scenes-ch19.js	ch19Thaw	Grace	It’s working. It’s working!	amy	happy
 scene	19	data/scenes-ch19.js	ch19Thaw	Grace	It’s working. It’s working!	tnb	happy
@@ -6626,13 +6626,13 @@ scene	19	data/scenes-ch19.js	ch19Thaw	Boppy	Hand me one. For my knees.	amy	happy
 scene	19	data/scenes-ch19.js	ch19Thaw	Boppy	Hand me one. For my knees.	tnb	happy
 scene	19	data/scenes-ch19.js	ch19Thaw	Boppy	Hand me one. For my knees.	grace	happy
 scene	19	data/scenes-ch19.js	ch19Thaw	Boppy	Hand me one. For my knees.	rose	happy
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	Everyone is crowded onto one floor of a glass tower with plates in their laps, and for a minute, it is just a family having dinner, eight people and a dog.	amy	loving
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	Everyone is crowded onto one floor of a glass tower with plates in their laps, and for a minute, it is just a family having dinner, eight people and a dog.	tnb	loving
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	Everyone is crowded onto one floor of a glass tower with plates in their laps, and for a minute, it is just a family having dinner, eight people and a dog.	grace	loving
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	Everyone is crowded onto one floor of a glass tower with plates in their laps, and for a minute, it is just a family having dinner, eight people and a dog.	rose	loving
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	Everyone is crowded onto one floor of a glass tower with plates in their laps, and for a minute, it is just a family having dinner, eight people and a dog.	deedee	loving
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	Everyone is crowded onto one floor of a glass tower with plates in their laps, and for a minute, it is just a family having dinner, eight people and a dog.	boppy	loving
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	Everyone is crowded onto one floor of a glass tower with plates in their laps, and for a minute, it is just a family having dinner, eight people and a dog.	nara	happy
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	Everyone is crowded onto one floor of a glass tower with plates in their laps, and for a minute, it is just a family having dinner, eight people and a dog.	amy	loving
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	Everyone is crowded onto one floor of a glass tower with plates in their laps, and for a minute, it is just a family having dinner, eight people and a dog.	tnb	loving
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	Everyone is crowded onto one floor of a glass tower with plates in their laps, and for a minute, it is just a family having dinner, eight people and a dog.	grace	loving
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	Everyone is crowded onto one floor of a glass tower with plates in their laps, and for a minute, it is just a family having dinner, eight people and a dog.	rose	loving
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	Everyone is crowded onto one floor of a glass tower with plates in their laps, and for a minute, it is just a family having dinner, eight people and a dog.	deedee	loving
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	Everyone is crowded onto one floor of a glass tower with plates in their laps, and for a minute, it is just a family having dinner, eight people and a dog.	boppy	loving
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	Everyone is crowded onto one floor of a glass tower with plates in their laps, and for a minute, it is just a family having dinner, eight people and a dog.	nara	happy
 scene	19	data/scenes-ch19.js	ch19Thaw	Deedee	Tom. Who is the man in the gold coat? The one who kept us on a shelf?	tom	sad
 scene	19	data/scenes-ch19.js	ch19Thaw	Deedee	Tom. Who is the man in the gold coat? The one who kept us on a shelf?	amy	angry
 scene	19	data/scenes-ch19.js	ch19Thaw	Deedee	Tom. Who is the man in the gold coat? The one who kept us on a shelf?	tnb	sad
@@ -6657,12 +6657,12 @@ scene	19	data/scenes-ch19.js	ch19Thaw	Floor 59	Overhead, through the glass ceili
 scene	19	data/scenes-ch19.js	ch19Thaw	Floor 59	Overhead, through the glass ceiling, every clock in the sky stops. They are all pointing at the same minute: the one just after the last. A door nobody has noticed before, high up in the tower, has begun to open.	deedee	surprised
 scene	19	data/scenes-ch19.js	ch19Thaw	Floor 59	Overhead, through the glass ceiling, every clock in the sky stops. They are all pointing at the same minute: the one just after the last. A door nobody has noticed before, high up in the tower, has begun to open.	boppy	surprised
 scene	19	data/scenes-ch19.js	ch19Thaw	Floor 59	Overhead, through the glass ceiling, every clock in the sky stops. They are all pointing at the same minute: the one just after the last. A door nobody has noticed before, high up in the tower, has begun to open.	nara	scared
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	He sets down his plate. Then he picks it back up.	amy	happy
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	He sets down his plate. Then he picks it back up.	tnb	loving
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	He sets down his plate. Then he picks it back up.	deedee	loving
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	He sets down his plate. Then he picks it back up.	boppy	proud
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	He sets down his plate. Then he picks it back up.	grace	happy
-scene	19	data/scenes-ch19.js	ch19Thaw	Tom	He sets down his plate. Then he picks it back up.	rose	happy
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	He sets down his plate. Then he picks it back up.	amy	happy
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	He sets down his plate. Then he picks it back up.	tnb	loving
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	He sets down his plate. Then he picks it back up.	deedee	loving
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	He sets down his plate. Then he picks it back up.	boppy	proud
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	He sets down his plate. Then he picks it back up.	grace	happy
+scene	19	data/scenes-ch19.js	ch19Thaw	Narrator	He sets down his plate. Then he picks it back up.	rose	happy
 scene	19	data/scenes-ch19.js	ch19Thaw	Tom	Seconds first. Then the sky.	amy	proud
 scene	19	data/scenes-ch19.js	ch19Thaw	Tom	Seconds first. Then the sky.	tnb	proud
 scene	19	data/scenes-ch19.js	ch19Thaw	Tom	Seconds first. Then the sky.	deedee	loving
@@ -6701,12 +6701,12 @@ scene	20	data/scenes-ch20.js	ch20CoreOpen	Stillness Core	THE EXTRA PLACE (the al
 scene	20	data/scenes-ch20.js	ch20CoreOpen	Stillness Core	THE EXTRA PLACE (the all-eight Family Finish) is ready. It costs 75% HEART.	rose	proud
 scene	20	data/scenes-ch20.js	ch20CoreOpen	Stillness Core	THE EXTRA PLACE (the all-eight Family Finish) is ready. It costs 75% HEART.	deedee	proud
 scene	20	data/scenes-ch20.js	ch20CoreOpen	Stillness Core	THE EXTRA PLACE (the all-eight Family Finish) is ready. It costs 75% HEART.	boppy	proud
-scene	20	data/scenes-ch20.js	ch20Open	Tom	In the ceiling of the Vault, a round brass door has opened. It has a clock for a keyhole. It is ticking very slowly, like a heart that has been told to be quiet.	amy	surprised
-scene	20	data/scenes-ch20.js	ch20Open	Tom	In the ceiling of the Vault, a round brass door has opened. It has a clock for a keyhole. It is ticking very slowly, like a heart that has been told to be quiet.	tnb	surprised
-scene	20	data/scenes-ch20.js	ch20Open	Tom	In the ceiling of the Vault, a round brass door has opened. It has a clock for a keyhole. It is ticking very slowly, like a heart that has been told to be quiet.	grace	scared
-scene	20	data/scenes-ch20.js	ch20Open	Tom	In the ceiling of the Vault, a round brass door has opened. It has a clock for a keyhole. It is ticking very slowly, like a heart that has been told to be quiet.	rose	surprised
-scene	20	data/scenes-ch20.js	ch20Open	Tom	In the ceiling of the Vault, a round brass door has opened. It has a clock for a keyhole. It is ticking very slowly, like a heart that has been told to be quiet.	deedee	surprised
-scene	20	data/scenes-ch20.js	ch20Open	Tom	In the ceiling of the Vault, a round brass door has opened. It has a clock for a keyhole. It is ticking very slowly, like a heart that has been told to be quiet.	boppy	surprised
+scene	20	data/scenes-ch20.js	ch20Open	Narrator	In the ceiling of the Vault, a round brass door has opened. It has a clock for a keyhole. It is ticking very slowly, like a heart that has been told to be quiet.	amy	surprised
+scene	20	data/scenes-ch20.js	ch20Open	Narrator	In the ceiling of the Vault, a round brass door has opened. It has a clock for a keyhole. It is ticking very slowly, like a heart that has been told to be quiet.	tnb	surprised
+scene	20	data/scenes-ch20.js	ch20Open	Narrator	In the ceiling of the Vault, a round brass door has opened. It has a clock for a keyhole. It is ticking very slowly, like a heart that has been told to be quiet.	grace	scared
+scene	20	data/scenes-ch20.js	ch20Open	Narrator	In the ceiling of the Vault, a round brass door has opened. It has a clock for a keyhole. It is ticking very slowly, like a heart that has been told to be quiet.	rose	surprised
+scene	20	data/scenes-ch20.js	ch20Open	Narrator	In the ceiling of the Vault, a round brass door has opened. It has a clock for a keyhole. It is ticking very slowly, like a heart that has been told to be quiet.	deedee	surprised
+scene	20	data/scenes-ch20.js	ch20Open	Narrator	In the ceiling of the Vault, a round brass door has opened. It has a clock for a keyhole. It is ticking very slowly, like a heart that has been told to be quiet.	boppy	surprised
 scene	20	data/scenes-ch20.js	ch20Open	Boppy	That’s the biggest clock I’ve ever seen. And I have a lot of clocks. They all run fast, for my stomach.	tom	unimpressed
 scene	20	data/scenes-ch20.js	ch20Open	Boppy	That’s the biggest clock I’ve ever seen. And I have a lot of clocks. They all run fast, for my stomach.	deedee	unimpressed
 scene	20	data/scenes-ch20.js	ch20Open	Boppy	That’s the biggest clock I’ve ever seen. And I have a lot of clocks. They all run fast, for my stomach.	amy	unimpressed
@@ -7064,13 +7064,13 @@ scene	20	data/scenes-ch20.js	ch20Epi1	Sal	Cab seven! Everybody in! I’m not cha
 scene	20	data/scenes-ch20.js	ch20Epi1	Sal	Cab seven! Everybody in! I’m not charging. I’m not even driving. Look UP.	rose	surprised
 scene	20	data/scenes-ch20.js	ch20Epi1	Sal	Cab seven! Everybody in! I’m not charging. I’m not even driving. Look UP.	deedee	surprised
 scene	20	data/scenes-ch20.js	ch20Epi1	Sal	Cab seven! Everybody in! I’m not charging. I’m not even driving. Look UP.	boppy	surprised
-scene	20	data/scenes-ch20.js	ch20Epi1	Tom	High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. A train glides in, quiet as a held breath. The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other.	amy	surprised
-scene	20	data/scenes-ch20.js	ch20Epi1	Tom	High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. A train glides in, quiet as a held breath. The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other.	tnb	surprised
-scene	20	data/scenes-ch20.js	ch20Epi1	Tom	High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. A train glides in, quiet as a held breath. The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other.	grace	surprised
-scene	20	data/scenes-ch20.js	ch20Epi1	Tom	High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. A train glides in, quiet as a held breath. The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other.	rose	surprised
-scene	20	data/scenes-ch20.js	ch20Epi1	Tom	High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. A train glides in, quiet as a held breath. The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other.	deedee	surprised
-scene	20	data/scenes-ch20.js	ch20Epi1	Tom	High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. A train glides in, quiet as a held breath. The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other.	boppy	surprised
-scene	20	data/scenes-ch20.js	ch20Epi1	Tom	High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. A train glides in, quiet as a held breath. The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other.	vance	proud
+scene	20	data/scenes-ch20.js	ch20Epi1	Narrator	High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. A train glides in, quiet as a held breath. The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other.	amy	surprised
+scene	20	data/scenes-ch20.js	ch20Epi1	Narrator	High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. A train glides in, quiet as a held breath. The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other.	tnb	surprised
+scene	20	data/scenes-ch20.js	ch20Epi1	Narrator	High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. A train glides in, quiet as a held breath. The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other.	grace	surprised
+scene	20	data/scenes-ch20.js	ch20Epi1	Narrator	High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. A train glides in, quiet as a held breath. The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other.	rose	surprised
+scene	20	data/scenes-ch20.js	ch20Epi1	Narrator	High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. A train glides in, quiet as a held breath. The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other.	deedee	surprised
+scene	20	data/scenes-ch20.js	ch20Epi1	Narrator	High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. A train glides in, quiet as a held breath. The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other.	boppy	surprised
+scene	20	data/scenes-ch20.js	ch20Epi1	Narrator	High over the Square, a line of gold runs from the sky down to the fountain. There is a rail on it with a seam of bright gold, exactly where somebody mended it. A train glides in, quiet as a held breath. The sign on its front says LONG ISLAND on one side and LOS ANGELES on the other.	vance	proud
 scene	20	data/scenes-ch20.js	ch20Epi1	Vance	I made it from the Engine. It runs both coasts. It does not stop the clocks. It only makes the distance a little shorter. I thought, if I had built that first...	tom	loving
 scene	20	data/scenes-ch20.js	ch20Epi1	Vance	I made it from the Engine. It runs both coasts. It does not stop the clocks. It only makes the distance a little shorter. I thought, if I had built that first...	amy	sad
 scene	20	data/scenes-ch20.js	ch20Epi1	Vance	I made it from the Engine. It runs both coasts. It does not stop the clocks. It only makes the distance a little shorter. I thought, if I had built that first...	tnb	loving
@@ -7125,9 +7125,9 @@ scene	20	data/scenes-ch20.js	ch20Epi1	Vance	I am going to call my daughter. I do
 scene	20	data/scenes-ch20.js	ch20Epi1	Tom	That’s a good seat to start in.	vance	loving
 scene	20	data/scenes-ch20.js	ch20Epi1	Tom	That’s a good seat to start in.	amy	loving
 scene	20	data/scenes-ch20.js	ch20Epi1	Tom	That’s a good seat to start in.	deedee	loving
-scene	20	data/scenes-ch20.js	ch20Epi2	Tom	A week later. Jefferson Park, six in the evening. The street light has come on, and for once it is not worth mentioning.	tnb	loving
-scene	20	data/scenes-ch20.js	ch20Epi2	Tom	A week later. Jefferson Park, six in the evening. The street light has come on, and for once it is not worth mentioning.	grace	happy
-scene	20	data/scenes-ch20.js	ch20Epi2	Tom	A week later. Jefferson Park, six in the evening. The street light has come on, and for once it is not worth mentioning.	rose	happy
+scene	20	data/scenes-ch20.js	ch20Epi2	Narrator	A week later. Jefferson Park, six in the evening. The street light has come on, and for once it is not worth mentioning.	tnb	loving
+scene	20	data/scenes-ch20.js	ch20Epi2	Narrator	A week later. Jefferson Park, six in the evening. The street light has come on, and for once it is not worth mentioning.	grace	happy
+scene	20	data/scenes-ch20.js	ch20Epi2	Narrator	A week later. Jefferson Park, six in the evening. The street light has come on, and for once it is not worth mentioning.	rose	happy
 scene	20	data/scenes-ch20.js	ch20Epi2	Rose	Tata, the train came again. It has a snack cart. It has a snack CART.	tom	happy
 scene	20	data/scenes-ch20.js	ch20Epi2	Rose	Tata, the train came again. It has a snack cart. It has a snack CART.	grace	happy
 scene	20	data/scenes-ch20.js	ch20Epi2	Rose	Tata, the train came again. It has a snack cart. It has a snack CART.	amy	happy
@@ -7160,12 +7160,12 @@ scene	20	data/scenes-ch20.js	ch20Epi2	Nara	Nara has found the sourdough boule. S
 scene	20	data/scenes-ch20.js	ch20Epi2	Nara	Nara has found the sourdough boule. She is guarding it with her whole body.	tnb	happy
 scene	20	data/scenes-ch20.js	ch20Epi2	Nara	Nara has found the sourdough boule. She is guarding it with her whole body.	grace	happy
 scene	20	data/scenes-ch20.js	ch20Epi2	Nara	Nara has found the sourdough boule. She is guarding it with her whole body.	rose	happy
-scene	20	data/scenes-ch20.js	ch20Epi2	Tom	He sits down on his own porch step. The cup is warm. Everyone he loves is on this street, on both coasts, and every one of them is exactly where they are, with a train in between.	tnb	loving
-scene	20	data/scenes-ch20.js	ch20Epi2	Tom	He sits down on his own porch step. The cup is warm. Everyone he loves is on this street, on both coasts, and every one of them is exactly where they are, with a train in between.	amy	loving
-scene	20	data/scenes-ch20.js	ch20Epi2	Tom	He sits down on his own porch step. The cup is warm. Everyone he loves is on this street, on both coasts, and every one of them is exactly where they are, with a train in between.	grace	loving
-scene	20	data/scenes-ch20.js	ch20Epi2	Tom	He sits down on his own porch step. The cup is warm. Everyone he loves is on this street, on both coasts, and every one of them is exactly where they are, with a train in between.	rose	loving
-scene	20	data/scenes-ch20.js	ch20Epi2	Tom	He sits down on his own porch step. The cup is warm. Everyone he loves is on this street, on both coasts, and every one of them is exactly where they are, with a train in between.	deedee	loving
-scene	20	data/scenes-ch20.js	ch20Epi2	Tom	He sits down on his own porch step. The cup is warm. Everyone he loves is on this street, on both coasts, and every one of them is exactly where they are, with a train in between.	boppy	loving
+scene	20	data/scenes-ch20.js	ch20Epi2	Narrator	He sits down on his own porch step. The cup is warm. Everyone he loves is on this street, on both coasts, and every one of them is exactly where they are, with a train in between.	tnb	loving
+scene	20	data/scenes-ch20.js	ch20Epi2	Narrator	He sits down on his own porch step. The cup is warm. Everyone he loves is on this street, on both coasts, and every one of them is exactly where they are, with a train in between.	amy	loving
+scene	20	data/scenes-ch20.js	ch20Epi2	Narrator	He sits down on his own porch step. The cup is warm. Everyone he loves is on this street, on both coasts, and every one of them is exactly where they are, with a train in between.	grace	loving
+scene	20	data/scenes-ch20.js	ch20Epi2	Narrator	He sits down on his own porch step. The cup is warm. Everyone he loves is on this street, on both coasts, and every one of them is exactly where they are, with a train in between.	rose	loving
+scene	20	data/scenes-ch20.js	ch20Epi2	Narrator	He sits down on his own porch step. The cup is warm. Everyone he loves is on this street, on both coasts, and every one of them is exactly where they are, with a train in between.	deedee	loving
+scene	20	data/scenes-ch20.js	ch20Epi2	Narrator	He sits down on his own porch step. The cup is warm. Everyone he loves is on this street, on both coasts, and every one of them is exactly where they are, with a train in between.	boppy	loving
 scene	20	data/scenes-ch20.js	ch20Epi2	TNB	Hey.	tom	loving
 scene	20	data/scenes-ch20.js	ch20Epi2	Tom	Hey.	tnb	loving
 scene	20	data/scenes-ch20.js	ch20Epi2	Grace	Tata. Are we going to be okay?	tom	loving

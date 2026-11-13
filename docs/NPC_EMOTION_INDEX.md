@@ -13,15 +13,15 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 
 | Mood | Lines |
 |---|---|
-| Happy | 184 |
+| Happy | 183 |
 | Loving | 83 |
 | Sad | 63 |
-| Angry | 28 |
+| Angry | 26 |
 | Scared | 39 |
-| Surprised | 52 |
+| Surprised | 51 |
 | Proud | 182 |
-| Unimpressed | 128 |
-| **All** | 759 |
+| Unimpressed | 127 |
+| **All** | 754 |
 
 ## Lines by character
 
@@ -873,7 +873,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 2 | map creole, when {chapter:2,flag:ch2-clear} | Proud | That smog had me stirring one pot for an hour. Best roux I ever made, though. |
 | 2 | map creole, when {chapter:2,flag:ch2-clear} | Loving | Sit. Eat. You and that boyfriend earned a bowl today. |
 
-### Doña Carmen (13)
+### Doña Carmen (12)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -884,7 +884,6 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 2 | map pupuseria, when {chapter:2,flag:ch2-smog,notFlag:ch2-clear} | Sad | It's always this afternoon. Why'd I ever flip them? |
 | 2 | map pupuseria, when {chapter:2,flag:ch2-clear} | Proud | I left them on the comal the whole time. They came out perfectly crispy, actually. |
 | 2 | map pupuseria, when {chapter:2,flag:ch2-clear} | Happy | Don't tell the juice bar. They'll want the recipe. |
-| 12 | scene ch12Carmen | Surprised | A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes. |
 | 12 | scene ch12Carmen | Surprised | ...and THEN I told the man, the loroco is not optional. Tom! When did you get here? Why is everything so quiet? |
 | 12 | scene ch12Carmen | Sad | Where did my pupusas go? |
 | 12 | scene ch12Carmen | Sad | I was what? I had a whole sentence. I lost the sentence. It was a good sentence. |
@@ -1027,7 +1026,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 |---|---|---|---|
 | 11 | scene ch11Vance | Unimpressed | Hello, Tom. |
 
-### Julian Vance (14)
+### Julian Vance (12)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -1042,11 +1041,9 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 11 | scene ch11Vance | Loving | I want everyone safe, in the good part, forever. So come in, all of you, and stay. Nobody here has ever been lost. |
 | 11 | scene ch11Vance | Sad | ...Then I can’t let you leave. I’ll have to make the last announcement. |
 | 11 | scene ch11Vance | Sad | Someone has to. |
-| 11 | scene ch11Vance | Angry | He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once. |
-| 11 | scene ch11Vance | Angry | The departures board beside the door unfolds, stands up on two legs, and steps out. |
 | 11 | scene ch11Vance | Angry | FINAL CALL. |
 
-### Marlowe (29)
+### Marlowe (27)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
@@ -1054,10 +1051,8 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 12 | scene ch12Marlowe | Proud | I’m Marlowe. Monochrome Marlowe. I work for Mr. Vance, and I fix places. |
 | 12 | scene ch12Marlowe | Proud | This place has too much going on: too much color, too many porches, and a dog doing something on a lawn. |
 | 12 | scene ch12Marlowe | Unimpressed | That’s the problem with a neighborhood. Notes. |
-| 12 | scene ch12Marlowe | Unimpressed | He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers. |
 | 12 | scene ch12Marlowe | Proud | I can take the pink, the yellow, and the music out of that window. Mr. Vance likes it quiet. Quiet is safe. Quiet sells. |
 | 12 | scene ch12Marlowe | Unimpressed | I don’t put things back. I take notes. Anyway, Mr. Prime will handle the intersection. Do take a look at the traffic. It’s very stationary. |
-| 12 | scene ch12Marlowe | Happy | He walks off into the grey, humming a jingle that never resolves. |
 | 12 | scene ch12Prime | Angry | Look at that. You put the neighbors back. Very warm. Very busy. Very much not what I asked for. |
 | 12 | scene ch12Prime | Proud | Notes. This intersection has no flow. Let me introduce our new Head of Traffic. |
 | 12 | scene ch12Prime | Unimpressed | Mr. Prime! Please give them a moment to rethink the neighborhood. |

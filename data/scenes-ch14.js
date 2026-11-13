@@ -154,7 +154,7 @@ SCENES.ch14After=()=>[
   {flag:'ch14-after',value:'pending'},
   {call:()=>{ sfx.levelChime&&sfx.levelChime(); sfx.charge&&sfx.charge(); }},
   {camboss:'Boppy'},{pose:'Boppy',foe:'calm',end:'warden'},
-  {talk:'Tom',lines:['The gold goes soft. Then it runs, slow, down the front of him, like warm wax, and soaks into the porch. The helmet is the last to go.']},
+  {talk:'Narrator',lines:['The gold goes soft. Then it runs, slow, down the front of him, like warm wax, and soaks into the porch. The helmet is the last to go.']},
   {pose:'Boppy',foe:'run',end:'warden'},{wait:.7},
   {pose:'Boppy',foe:'half',end:'warden'},{wait:.7},
   {pose:'Boppy',foe:'helmet',end:'warden'},{endfx:'gold',on:'Boppy',id:'warden'},{wait:.8},

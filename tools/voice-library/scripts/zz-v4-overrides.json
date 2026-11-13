@@ -2088,13 +2088,6 @@
 "script": "[matter-of-fact] He lifts his hat. Behind his head, the big door's gold clock spins, and every flap in the terminal clicks at once."
 },
 {
-"voice": "michael",
-"speaker": "",
-"text": "The departures board beside the door unfolds, stands up on two legs, and steps out.",
-"ctx": "v4 override",
-"script": "[matter-of-fact] The departures board beside the door unfolds, stands up on two legs, and steps out."
-},
-{
 "voice": "tom",
 "speaker": "",
 "text": "It's warm. This is one of the old gold coins he bought up on Long Island. He was using it to hold that gate shut.",
@@ -2543,32 +2536,11 @@
 "script": "[stricken, desperate] Mom! Dad! Get away from the camera!"
 },
 {
-"voice": "tom",
-"speaker": "",
-"text": "Nobody moves. Nobody says anything. Deedee and Boppy stepped in front of the camera, and the flash meant for the girls hit them instead.",
-"ctx": "v4 override",
-"script": "[hushed, stunned] Nobody moves. Nobody says anything. Deedee and Boppy stepped in front of the camera, and the flash meant for the girls hit them instead."
-},
-{
-"voice": "tom",
-"speaker": "",
-"text": "In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands.",
-"ctx": "v4 override",
-"script": "[slow, aching] In the middle of the Square two stone figures hold each other up, and a small amber light crawls along their joined hands."
-},
-{
 "voice": "michael",
 "speaker": "",
 "text": "Then I shall help with your notes, Marlowe.",
 "ctx": "v4 override",
 "script": "[matter-of-fact] Then I shall help with your notes, Marlowe."
-},
-{
-"voice": "kit",
-"speaker": "",
-"text": "Amber pours out of the camera and over Marlowe. He rises off the ground as a black disc with a burning amber ring around it, like an eclipse.",
-"ctx": "v4 override",
-"script": "[flat, hushed] Amber pours out of the camera and over Marlowe. [low, tense] He rises off the ground as a black disc with a burning amber ring around it, like an eclipse."
 },
 {
 "voice": "amy",
