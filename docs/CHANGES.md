@@ -1,3 +1,10 @@
+## 2026-11-12 (vance1): Julian Vance shows only the painted art (tag vance1)
+- Tom 18:07: Julian's pictures flip between the old anime art and the hand drawn painted art; it should be painted only.
+- Fact (cause): his walk sheet and plain talk face are painted, but his eight mood faces (`portraits/emo/vance-*`) and mood poses (`vanceemo`) were cut from the old sketch-style sheet `npc-emotions-vance-v1.png`. Every mood line (about ten in chapter 11, more later) swapped him from painted to sketch and back.
+- Fix: Julian has no mood faces or poses now, so mood lines keep his painted talk face and painted walk sprite. `NO_MOOD` in emotion_frames.py, bake_emotion_faces.py and bake_story_poses.py keeps him out of the rebuilds. Purged: art/emotions/vance.webp, portraits/emo/vance-*.webp, art/chars/vanceemo-story.webp, the vance entries in data/emotions.js, emotion-faces.js, npc-poses.js (grep 0; no other bytes changed in the rebuild). The approved raw sheet stays in art/raw for the Library. The mood tags for his lines stay in docs/npc-emotion-lines.tsv and are ignored until painted mood art exists.
+- Not touched: the chapter 18 and 20 boss Vance (a separate painted battle sheet).
+- Open: painted mood faces for Julian need an Art Library entry (same method as the other painted townsfolk), then install.
+
 ## 2026-11-12 (tnbface1): chapter 11, everyone faces TNB while he talks with the group (tag tnbface1)
 - Tom 18:06: in chapter 11 when the group meets Nara and TNB, Grace faces Rose but she should face TNB.
 - Fact (cause): the conversation staging (`huddleTurn`, engine/story.js) turns every person toward the middle of the others, and TNB (not in the party yet) was not counted, so Grace looked at Rose or Tom.
