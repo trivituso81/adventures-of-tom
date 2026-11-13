@@ -34,6 +34,17 @@ with sync_playwright() as p:
     check('suite door leads back to the main floor',pg.evaluate("()=>currentMap.id==='tomhouse'"))
     stand(pg,8,14,'down'); walk(pg,'ArrowDown',3); skip(pg); pg.wait_for_timeout(1000)
     check('garden path leads out to 2nd Ave',pg.evaluate("()=>currentMap.id==='jpark'"))
+    # ch2-starter trigger: it must start wherever Tom stops in the house, not only inside the front hall (Tom 2026-11-12: at the island, A gave the counter caption)
+    pg.evaluate("()=>{ STORY.mode='full'; STORY.chapter=2; window.__LE.setFlag('ch2-nara',true); window.__LE.setFlag('ch2-starter',false); window.__LE.go('tomhouse'); }"); pg.wait_for_timeout(1500); skip(pg)
+    stand(pg,12,4,'left')
+    for i in range(80):
+        pg.wait_for_timeout(150)
+        if pg.evaluate("()=>window.__LE.flag?window.__LE.flag('ch2-starter'):flag('ch2-starter')"): break
+    check('ch2Starter starts when Tom stops at the island',bool(pg.evaluate("()=>flag('ch2-starter')")))
+    for i in range(120):
+        if pg.evaluate("()=>dialog.active"): pg.keyboard.press('Enter')
+        pg.wait_for_timeout(100)
+    skip(pg)
     for sc,setup in [('ch2Starter',''),('ch6Kitchen',"STORY.chapter=6;")]:
         pg.evaluate("()=>window.__LE.go('tomhouse')"); pg.wait_for_timeout(1500); skip(pg)
         pg.evaluate("()=>{ window.__LE.playScene(SCENES.%s); }"%sc)

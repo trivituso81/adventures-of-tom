@@ -506,7 +506,7 @@ const TRIGGERS=[
   {id:'ch2-arrive',map:'blvd',when:{...CH2,notFlag:'ch2-goal'},scene:'ch2Arrive'},
   {id:'ch2-loft',map:'lofts',when:{...CH2,notFlag:'ch2-tnb'},scene:'ch2Loft'},
   {id:'ch2-porch',map:'jpark',when:{...CH2,flag:'met-nara',notFlag:'ch2-nara'},scene:'ch2Porch'},
-  {id:'ch2-starter',map:'tomhouse',at:[7,9,8,12],when:{...CH2,flag:'ch2-nara',notFlag:'ch2-starter'},scene:'ch2Starter'},
+  {id:'ch2-starter',map:'tomhouse',when:{...CH2,flag:'ch2-nara',notFlag:'ch2-starter'},scene:'ch2Starter'},
   {id:'ch2-smog',map:'jpark',when:{...CH2,flag:'ch2-starter',notFlag:'ch2-smog'},scene:'ch2Smog'},
   {id:'ch2-odette',map:'creole',when:{...CH2,flag:'ch2-lawn',notFlag:'ch2-odette'},scene:'ch2Odette'},
   {id:'ch2-carmen',map:'pupuseria',when:{...CH2,flag:'ch2-lawn',notFlag:'ch2-carmen'},scene:'ch2Carmen'},

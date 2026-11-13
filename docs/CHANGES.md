@@ -1,3 +1,8 @@
+## 2026-11-12 (starter1): chapter 2 "Feed the starter" scene now starts wherever Tom stops in his house (tag starter1)
+- Tom 18:49: at the kitchen island, A on the starter gave only the island caption. Fact (cause): trigger `ch2-starter` (data/scenes.js) only fired while Tom stood still inside a box in the front hall (x7 to 8, y9 to 12); walking past it without stopping meant the scene never started, and A fell through to the island object.
+- Fix: the box (`at`) is removed from that trigger; it starts when Tom stops anywhere in the house with `ch2-nara` set and `ch2-starter` not set. The scene already walks him to the island itself. No line, flag or voice changed.
+- Test: `tools/tomhouse_test.py` has a new check (stop at the island, scene must start); it fails without the fix and passes with it.
+
 ## 2026-11-12 (closeup4): chapter 19 close-up, each keepsake is set on the pedestal (tag closeup4)
 - Plan claude/closeup-plan.md Row 2. Fact: `closeupPlaceDef` (PLACE helper, engine/closeup.js) builds a WATCH def: the keepsake hovers over the dent, A lowers it in, small squash, a ring of light in the keepsake's color spreads over the plate. Defs `ch19-grace|rose|amy|tnb` in data/closeup-ch19.js (gold, pink, cool white, warm amber; the first cup also draws the gold seam in code, since the approved cup has no crack).
 - `SCENES.ch19Keep` plays `{closeupWatch:'ch19-'+who}` after "You set down <item>" and before the put line; every line, flag (`ks-<who>`), tombo flag and toast is unchanged. No engine input code changed.
