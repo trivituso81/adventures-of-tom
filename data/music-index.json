@@ -1,5 +1,5 @@
 {
- "made": "2026-11-11",
+ "made": "2026-11-13",
  "suffix": {
   "loop": "Instrumental only, no vocals. Composed to loop: steady energy from start to finish, no fade-out and no big final ending. Rich, detailed, modern production. Family-friendly adventure game score.",
   "jingle": "Instrumental only, no vocals. A short musical sting that starts immediately and ends cleanly on its final note. Rich, detailed, modern production. Family-friendly adventure game score."
@@ -41,8 +41,8 @@
    "where": "Boss fights",
    "prompt": "Epic boss battle theme at 164 beats per minute. Pounding war drums, aggressive staccato strings, a pipe organ and a wordless choir pad, snarling low brass, fast electric guitar runs. Urgent and dramatic with a sense of towering stakes, but with a streak of adventure-comedy mischief so it stays family-friendly. Builds in waves with a huge main theme.",
    "auto": false,
-   "sec": 90.07,
-   "bytes": 1081200
+   "sec": 88.35,
+   "bytes": 1060511
   },
   {
    "id": "victory",
@@ -67,8 +67,8 @@
    "where": "Everyone is knocked out",
    "prompt": "Gentle game over music, ten seconds. A slow descending phrase on solo cello over soft piano chords and a low sustained string pad, minor key, sighing and a little weary, ending on a quiet unresolved held note. Sad but tender, not frightening, like the end of a bad day before a nap.",
    "auto": false,
-   "sec": 9.61,
-   "bytes": 115715
+   "sec": 8.1,
+   "bytes": 97534
   },
   {
    "id": "levelup",
@@ -80,8 +80,8 @@
    "where": "The level-up card after a fight",
    "prompt": "A bright level-up sting, four seconds. A quick rising glockenspiel and harp arpeggio with a sparkling bell on top, a small trumpet flourish and a warm final chord that rings and decays. Cheerful, proud, a little cheeky.",
    "auto": true,
-   "sec": 4.05,
-   "bytes": 48946
+   "sec": 5.8,
+   "bytes": 69948
   },
   {
    "id": "town",
@@ -93,8 +93,8 @@
    "where": "The Square and the shops",
    "prompt": "Sunny small-town Long Island square on a warm afternoon at 104 beats per minute. Fingerpicked acoustic guitar, a breezy flute melody, light upright bass, brushed drums with a gentle shuffle, glockenspiel sparkles and a soft accordion. Cozy, nostalgic, friendly, a hint of salt air. A memorable tune you could hum, that develops across sections instead of repeating.",
    "auto": false,
-   "sec": 57.78,
-   "bytes": 693752
+   "sec": 58.33,
+   "bytes": 700335
   },
   {
    "id": "row",
@@ -106,8 +106,8 @@
    "where": "Rivituso Row and the family houses",
    "prompt": "Warm family home music at 88 beats per minute. Soft upright piano, a mellow clarinet, nylon guitar, brushed snare and a warm cello. Gentle swing, the feeling of a kitchen full of baked cookies and relatives talking over each other. Comforting, affectionate, unhurried.",
    "auto": false,
-   "sec": 56.79,
-   "bytes": 681840
+   "sec": 54,
+   "bytes": 648299
   },
   {
    "id": "hollow",
@@ -132,8 +132,8 @@
    "where": "Cattail Pier",
    "prompt": "Lazy seaside fishing pier at 80 beats per minute. Warm slide guitar, a lilting harmonica, soft ukulele, upright bass and a slow rimshot groove. Patient and sleepy with the creak of wood and slow water, and one mysterious low note now and then for the legendary fish nobody has caught.",
    "auto": false,
-   "sec": 58.28,
-   "bytes": 699708
+   "sec": 57.55,
+   "bytes": 690931
   },
   {
    "id": "reeds",
@@ -145,8 +145,8 @@
    "where": "Whispering Marsh",
    "prompt": "Misty marsh boardwalk at 70 beats per minute. Breathy wooden flute, kalimba, soft bowed vibraphone and airy string pads. Reeds rustling in rhythm like soft percussion, wordless whispering textures, gentle mystery, curious rather than frightening.",
    "auto": false,
-   "sec": 60.11,
-   "bytes": 721651
+   "sec": 57.05,
+   "bytes": 684975
   },
   {
    "id": "sundial",
@@ -158,8 +158,8 @@
    "where": "Sundial Hollow and the Deep Pool",
    "prompt": "Dreamy clockwork mystery in a shifting seven-eight time at 96 beats per minute. Celesta, harp, glass harmonica, a ticking wood block, dripping water plinks and a soft low cello. A sundial that tells the wrong time: gentle off-kilter charm, deep calm water underneath.",
    "auto": false,
-   "sec": 58.02,
-   "bytes": 696574
+   "sec": 56.03,
+   "bytes": 672750
   },
   {
    "id": "schoolyard",
@@ -184,8 +184,8 @@
    "where": "Long Island Elementary, the hallway",
    "prompt": "Quirky empty school hallway at 108 beats per minute. Bouncy pizzicato strings, marimba, a ticking clock sound, bell tree and school-bell chimes landing slightly off the beat, a muted trombone. Every clock is wrong: playful, a little uncanny, sneaking around after hours.",
    "auto": false,
-   "sec": 60.11,
-   "bytes": 721651
+   "sec": 58.04,
+   "bytes": 696887
   },
   {
    "id": "cafetorium",
@@ -210,8 +210,8 @@
    "where": "The Stacks under the Hush Library",
    "prompt": "Hushed underground library at 76 beats per minute. Pizzicato strings, harp, celesta, soft bowed double bass and quiet page-turn percussion. Cavernous reverb, whispering wordless voices, endless shelves, mysterious and curious, always at a whisper.",
    "auto": false,
-   "sec": 53.55,
-   "bytes": 642970
+   "sec": 53.34,
+   "bytes": 640463
   },
   {
    "id": "readroom",
@@ -223,8 +223,8 @@
    "where": "The Reading Room (boss room)",
    "prompt": "Gothic reading room boss music at 92 beats per minute. A slow pipe organ, brooding cello, harpsichord runs and a low string tremolo, a dramatic build that never quite breaks. One very old book turning its own pages: solemn, grand, a little wry.",
    "auto": false,
-   "sec": 57.78,
-   "bytes": 693752
+   "sec": 57.44,
+   "bytes": 689677
   },
   {
    "id": "moonclub",
@@ -236,8 +236,8 @@
    "where": "The Moon Club",
    "prompt": "Dusty velvet lounge frozen in 1971 at 84 beats per minute. Vibraphone, warm electric piano, a muted trumpet, upright bass and brushed drums. Space-age cocktail lounge jazz with a touch of melancholy and mystery, like a party that ended decades ago and the band never left.",
    "auto": false,
-   "sec": 58.28,
-   "bytes": 699708
+   "sec": 57.84,
+   "bytes": 694379
   },
   {
    "id": "dome",
@@ -249,8 +249,8 @@
    "where": "The Dome (boss room)",
    "prompt": "Glittering glass dome boss music at 112 beats per minute. Shimmering synth arpeggios, bright bells, a swelling orchestra, a punchy dance beat and sparkling high strings, like a mirror ball made of sound. Dazzling, almost too bright, powerful and playful.",
    "auto": false,
-   "sec": 56.53,
-   "bytes": 678706
+   "sec": 58.33,
+   "bytes": 700335
   },
   {
    "id": "terminal",
@@ -262,8 +262,8 @@
    "where": "Terminal Zero",
    "prompt": "Abandoned airport that closed in 1989, lights flickering back on, at 72 beats per minute. Detuned electric piano, a slow low drone, warped elevator-music chords, soft airport chime tones and distant synth pads. Lonely, eerie, retro and slightly bittersweet, a place full of old goodbyes.",
    "auto": false,
-   "sec": 60.11,
-   "bytes": 721651
+   "sec": 57.34,
+   "bytes": 688423
   },
   {
    "id": "gatezero",
@@ -275,8 +275,8 @@
    "where": "Gate Zero (final area)",
    "prompt": "The last gate, a plane that has waited since 1989, at 100 beats per minute. Swelling strings, emotional solo piano, pulsing bass, a rising tension of anticipation and a soaring theme that sounds like departure. Epic and bittersweet, big and hopeful, the end of a long journey.",
    "auto": false,
-   "sec": 70.79,
-   "bytes": 849860
+   "sec": 71.31,
+   "bytes": 856129
   },
   {
    "id": "blvd",
@@ -288,8 +288,8 @@
    "where": "Downtown LA",
    "prompt": "Sun-soaked downtown Los Angeles at 108 beats per minute. Funky electric piano, a wah guitar, tight horn section, slap bass and a crisp drum groove. Glamorous movie-palace swagger, taxis and tacos, bustling and bright with a smooth city confidence.",
    "auto": false,
-   "sec": 60.11,
-   "bytes": 721651
+   "sec": 52.95,
+   "bytes": 635760
   },
   {
    "id": "jpark",
@@ -301,8 +301,8 @@
    "where": "Jefferson Park (Tom's neighborhood)",
    "prompt": "Easygoing neighborhood morning at 94 beats per minute. Warm nylon guitar, a soft bossa nova groove, upright bass, light percussion, muted Rhodes chords and a gentle flugelhorn melody. Jacaranda blossoms, craftsman porches, laid back and homey, a place you are glad to come back to.",
    "auto": false,
-   "sec": 59.95,
-   "bytes": 719770
+   "sec": 60.11,
+   "bytes": 721651
   },
   {
    "id": "griffith",
@@ -314,8 +314,8 @@
    "where": "Griffith Park (monsters, tar pits)",
    "prompt": "Dusty hillside trails and bubbling tar pits at 100 beats per minute. Twangy slide guitar, hand claps, stomping kick drum, a lonely whistle and a low fiddle. Adventurous with an edge of danger, coyotes in the brush, hot sun and long shadows.",
    "auto": false,
-   "sec": 57.03,
-   "bytes": 684662
+   "sec": 60.11,
+   "bytes": 721651
   },
   {
    "id": "studio",
@@ -327,8 +327,8 @@
    "where": "Studio Gate",
    "prompt": "Golden-age Hollywood studio lot at 122 beats per minute. A swinging big band with bright brass, walking bass, a lively snare and a clarinet lead, a clapperboard hit now and then. Glamorous, busy and a touch silly, with a very important snack table.",
    "auto": false,
-   "sec": 58.28,
-   "bytes": 699708
+   "sec": 55.98,
+   "bytes": 672123
   },
   {
    "id": "backlot",
@@ -353,8 +353,8 @@
    "where": "Soundstage 7",
    "prompt": "Foggy dark soundstage catwalks at 86 beats per minute. Low bowed strings, a wavering theremin, creaking percussion, soft pulsing synth bass and a muffled music box. Suspenseful and haunted-set spooky with a wink, like a horror movie that is secretly a comedy.",
    "auto": false,
-   "sec": 56.27,
-   "bytes": 675571
+   "sec": 60.11,
+   "bytes": 721651
   },
   {
    "id": "stageset",
@@ -366,8 +366,8 @@
    "where": "The Stage Set (boss room)",
    "prompt": "A living room that is not a living room, under forty hot lights, at 126 beats per minute. A sitcom theme turned into a thriller: stabbing strings, harpsichord, tight snare, jazzy bass and dramatic brass hits. Tense, theatrical, very sure of itself.",
    "auto": false,
-   "sec": 60.11,
-   "bytes": 721651
+   "sec": 58.44,
+   "bytes": 701589
   },
   {
    "id": "oakpark",
@@ -379,8 +379,8 @@
    "where": "Old Oak Park",
    "prompt": "Bright community park at 110 beats per minute. Strummed ukulele, glockenspiel, a skipping marimba, handclaps, upright bass and whistled melody. Playground laughter, garden blooms and happy dogs. Joyful, light and sunny, with a tiny hint of something old and watching in the oak.",
    "auto": false,
-   "sec": 60.11,
-   "bytes": 721651
+   "sec": 57.55,
+   "bytes": 690931
   },
   {
    "id": "oak",
@@ -392,8 +392,8 @@
    "where": "Inside the Old Oak",
    "prompt": "A tiny squirrel war room inside a hollow tree at 116 beats per minute. Brisk marching snare, pizzicato strings, bassoon, piccolo and a bouncy tuba. Urgent, very serious about acorns, a comic military march with warm wooden resonance.",
    "auto": false,
-   "sec": 60.11,
-   "bytes": 721651
+   "sec": 57.63,
+   "bytes": 691871
   },
   {
    "id": "crown",
@@ -405,8 +405,8 @@
    "where": "The Crown of the Oak (boss room)",
    "prompt": "The very top of the old oak, a hoard and a chairman, at 102 beats per minute. Sweeping strings, majestic French horns, windswept timpani, a regal brass fanfare with a wry smile and a rushing wind texture. Grand, triumphant and comical, a villain who loves his pile.",
    "auto": false,
-   "sec": 60,
-   "bytes": 720397
+   "sec": 60.11,
+   "bytes": 721651
   },
   {
    "id": "carbarn",
@@ -444,8 +444,8 @@
    "where": "Home and the Square before the hunt (Nine Scoops)",
    "prompt": "A birthday party at home at 112 beats per minute. Bouncy ukulele, handclaps, a cheerful glockenspiel melody, party horn blasts, upright bass and a skipping drum groove. Grace's ninth birthday: excited, sweet and a little chaotic, with a tune that sounds like candles about to be blown out.",
    "auto": true,
-   "sec": 58.54,
-   "bytes": 702843
+   "sec": 60.11,
+   "bytes": 721651
   },
   {
    "id": "ns_hunt",
