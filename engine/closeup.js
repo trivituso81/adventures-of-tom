@@ -315,3 +315,32 @@ function closeupWatchEnd() {
   closeup.wphase='end'; const def=closeup.def; closeup.cap.textContent=def.endCaption||''; closeup.wbtn.textContent='A  CONTINUE';
   if(def.onEnd) def.onEnd();
 }
+
+// ---------- PLACE helper (claude/closeup-plan.md Row 2): one object lowers onto a plate at a marked spot and the spot lights up ----------
+// closeupPlaceDef({id,v,bg,item,dent:{x,y},size,color,seam,startCaption,endCaption,cues}) returns a WATCH def (see closeupWatch): the object hovers above the
+// spot, A lowers it in (0 to 1.0 s), it settles with a small squash, then a ring of light in `color` spreads over the plate and stays (to dur).
+// Frames are a pure function of t. `seam` (optional) draws a gold crack line on the object that fills in at the end (the first cup).
+function closeupPlaceDef(o) {
+  const dur=o.dur||2.8, ease=x=>x<0?0:x>1?1:x*x*(3-2*x), seg=(t,a,b)=>(t-a)/(b-a);
+  return {
+    id:o.id, ready:true, v:o.v, bg:o.bg, dur, startLabel:'A  SET IT DOWN', startCaption:o.startCaption, endCaption:o.endCaption, skipLabel:'A  SKIP',
+    cues:o.cues||[{at:.95,fn:()=>{ if(typeof tone==='function') tone({type:'triangle',f0:220,f1:110,dur:.16,vol:.2}); }},{at:1.15,fn:()=>{ if(typeof sfx!=='undefined'&&sfx.chime) sfx.chime(); }}],
+    build(plate) {
+      const glow=cuEl('div','cu-w',plate); glow.style.borderRadius='50%'; glow.style.background='radial-gradient(circle,'+o.color+'dd 0,'+o.color+'66 38%,'+o.color+'00 70%)'; glow.style.mixBlendMode='screen';
+      const shadow=cuEl('div','cu-w',plate); shadow.style.borderRadius='50%'; shadow.style.background='radial-gradient(ellipse,#000a 0,#0000 70%)';
+      const item=cuEl('div','cu-w',plate); item.appendChild(cuImg(cuSrc(o,o.item)));
+      let seam=null;
+      if(o.seam) { seam=cuEl('div','cu-w',item); seam.innerHTML='<svg viewBox="0 0 100 100" style="width:100%;height:100%;overflow:visible"><path d="M 37 84 L 34 70 L 39 58 L 35 45 L 40 31" fill="none" stroke="#ffd45a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" style="filter:drop-shadow(0 0 3px #ffb21a)"/></svg>'; seam.style.inset='0'; seam.style.width=seam.style.height='100%'; }
+      return {glow,shadow,item,seam};
+    },
+    frame(t,S,st) {
+      const cx=o.dent.x*S, cy=o.dent.y*S, D=(o.size||.27)*S;
+      const fall=ease(seg(t,0,1.0)), hover=(1-fall*fall)*.2*S, sc=1+.16*(1-fall);
+      const sq=t>1.0&&t<1.3?1-.06*Math.sin(Math.PI*seg(t,1.0,1.3)):1;
+      Object.assign(st.item.style,{width:D+'px',height:D+'px',left:(cx-D/2)+'px',top:(cy-D*.56-hover)+'px',transform:'scale('+(sc*(2-sq)).toFixed(3)+','+(sc*sq).toFixed(3)+')',transformOrigin:'50% 90%'});
+      const sw=D*(1.05-.15*(1-fall)), sh=D*.32; Object.assign(st.shadow.style,{width:sw+'px',height:sh+'px',left:(cx-sw/2)+'px',top:(cy+D*.2)+'px',opacity:(.25+.6*fall).toFixed(3)});
+      const g=ease(seg(t,1.1,2.2)), gd=S*(.35+.75*g); Object.assign(st.glow.style,{width:gd+'px',height:gd+'px',left:(cx-gd/2)+'px',top:(cy-gd/2)+'px',opacity:(.85*g).toFixed(3)});
+      if(st.seam) st.seam.querySelector('path').style.strokeDashoffset=(1-ease(seg(t,1.7,2.6))).toFixed(3);
+    }
+  };
+}

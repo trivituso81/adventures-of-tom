@@ -65,6 +65,7 @@ SCENES.ch19Keep=(c={})=>{
   const k=CH19_KEEP[who];
   return [
     {talk:'Dead-Letter Office',lines:['The pedestal is waiting. You set down '+k.item+'.']},
+    {closeupWatch:'ch19-'+who},
     {talk:k.put[0],lines:[k.put[1]]},
     {flag:'ks-'+who},
     {call:()=>{ sfx.levelChime&&sfx.levelChime(); if(who==='grace') setFlag('tombo:grace3'); if(who==='rose') setFlag('tombo:rose3'); if(who==='tnb') setFlag('tombo:tnb3'); }},
