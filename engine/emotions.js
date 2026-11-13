@@ -33,7 +33,12 @@ function emoActorFor(id,name,npc) {
 }
 // Listener reactions (react2, docs/emotion-reactions.tsv -> data/emotion-reactions.js): while a scene line shows, every other visible cast member
 // in the table for that line takes their full-body mood pose. Skipped: the speaker, anyone holding a story pose, Rose riding, hidden people.
+// Hand-set beats that run in every chapter regardless of REACTION_CHAPTERS (Tom 2026-11-12: at the end of chapter 10 "Everybody laughs" must put everyone in the house in the laughing pose, `happy`).
+const EMO_FORCED={
+  'Sunday dinner|Everybody laughs. Boppy laughs so hard he has to hold his stomach. Deedee laughs last, and longest.|10':['tom','grace','rose','amy','justin','deedee','boppy','ellie'].map(i=>[i,'happy'])
+};
 function emoReactionsOf(name,text) {
+  if(typeof STORY!=='undefined'&&EMO_FORCED[name+'|'+text+'|'+STORY.chapter]) return EMO_FORCED[name+'|'+text+'|'+STORY.chapter];
   if(typeof EMOTION_REACTIONS==='undefined'||typeof STORY==='undefined'||!REACTION_CHAPTERS.has(STORY.chapter)) return null;
   return EMOTION_REACTIONS[name+'|'+text+'|'+STORY.chapter]||null;
 }

@@ -1,3 +1,9 @@
+## 2026-11-12 (laugh1): chapter 10 ending, "Everybody laughs" puts everyone at the table in the laughing pose (tag laugh1)
+- Tom (16:15): at the end of chapter 10 when the narrator says "everyone laughs", everyone in the house should change to the laughing emotion state.
+- Fact: `EMO_FORCED` in engine/emotions.js (hand-set listener reactions that work in any chapter, checked first in `emoReactionsOf`). Key `Sunday dinner|Everybody laughs...|10` sets Tom, Grace, Rose, Amy, Justin, Deedee, Boppy and Aunt Ellie to `happy` (the 8 core moods have no separate laugh; `happy` covers laughing and is the painted laughing pose). Rose was `proud` in the tsv row; now `happy` like everyone else. Only people present on the map and not holding a story pose or riding react.
+- Not changed: REACTION_CHAPTERS (still chapter 1 only), docs/emotion-reactions.tsv, scene text, voice.
+- Test (fact): `tools/reaction_test.py` on ch10End, portrait and landscape: page 11 shows all eight in `em_happy`; frames viewed.
+
 ## 2026-11-12 (clockwalk1): coin names on hover, and the party walks into Gate Zero after the clock opens (tag clockwalk1)
 - Tom (16:07 and 16:08, from a screenshot of the coin screen): hovering a coin on the right should show its name; after the clock is done the party should walk into the next room by itself.
 - Fact: each tray coin has a `title` (browser tooltip) and, on mouse hover, the caption under the clock shows the coin's name (`closeup.hover` in engine/closeup.js); leaving the coin returns the caption to the selected coin. Touch and keyboard already showed the selected coin's name.
