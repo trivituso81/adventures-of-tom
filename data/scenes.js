@@ -3713,7 +3713,11 @@ SCENES.ch10Door=[
   {talk:'Grace',lines:['The sundial, the steamer, the sign-up sheet, the jar, the book, the oven, the Mirrorball. I knew it. I KNEW the list was important.']},
   {talk:'Amy',lines:['Seven coins. Seven chapters of your life, Tom. Somebody has been planning this.']},
   {talk:'Tom',lines:['Somebody with a little clock. And one more coin.']},
-  {toast:'Goal: Gate Zero.',time:4}
+  {toast:'Goal: Gate Zero.',time:4},
+  // Tom (2026-11-12): once the clock is done the party walks into the next room by itself (fade through the doors; the ch10-boss trigger plays on arrival).
+  {fade:'out',time:.6},
+  {call:()=>{ sfx.doorIn&&sfx.doorIn(); const g=worlds.gatezero; if(g) { currentMap=g; player.x=9; player.y=12; player.facing='up'; player.move=null; placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; } }},
+  {fade:'in',time:.7}
 ];
 // 6. Gate Zero: the Last Call, still calling Flight 0. Boss fight.
 SCENES.ch10Boss=[

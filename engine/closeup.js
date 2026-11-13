@@ -76,7 +76,8 @@ function closeupOpen(id,hooks) {
   closeup.tray=cuEl('div','cu-tray',el);
   closeup.order.forEach(ix=>{
     const b=cuEl('button','cu-coin',el); b.type='button'; b.dataset.ix=ix; b.setAttribute('aria-label',def.items[ix].label);
-    b.appendChild(cuImg(cuSrc(def,def.items[ix].img))); b.addEventListener('click',()=>closeupPick(ix));
+    b.title=def.items[ix].label; b.appendChild(cuImg(cuSrc(def,def.items[ix].img))); b.addEventListener('click',()=>closeupPick(ix));
+    b.addEventListener('mouseenter',()=>{ closeup.hover=ix; closeupCaption(); }); b.addEventListener('mouseleave',()=>{ if(closeup.hover===ix) closeup.hover=null; closeupCaption(); });
     closeup.coins[ix]=b;
   });
   closeup.cap=cuEl('div','cu-cap',el);
@@ -85,7 +86,7 @@ function closeupOpen(id,hooks) {
   mk('◀','',()=>closeupMove(-1),'Previous coin'); mk('▶','',()=>closeupMove(1),'Next coin');
   mk('A','a',()=>closeupPick(closeup.sel),'Put the selected coin in'); mk('NOT YET','',()=>closeupLeave(),'Leave without placing coins');
   closeup.ro=window.ResizeObserver?new ResizeObserver(()=>closeupLayout()):null; if(closeup.ro) closeup.ro.observe(el);
-  closeup.active=true;
+  closeup.active=true; closeup.hover=null;
   if(typeof clearInput==='function') clearInput();
   closeupLayout(); closeupSel(0,true);
   // wait for the pictures, then fade in (a failed picture does not trap the player: the screen still opens and B leaves)
@@ -124,7 +125,7 @@ function closeupLayout() {
 }
 function closeupCaption() {
   if(!closeup.active) return;
-  const def=closeup.def,k=closeup.placed.length,n=def.slots.length,it=def.items[closeup.sel];
+  const def=closeup.def,k=closeup.placed.length,n=def.slots.length,it=def.items[closeup.hover!=null?closeup.hover:closeup.sel];
   closeup.cap.textContent=(def.caption?def.caption(k,n):('Slot '+(k+1)+' of '+n))+(it&&!closeup.busy?'  ·  '+it.label:'');
 }
 // Selection moves over the coins still in the tray, in tray order.

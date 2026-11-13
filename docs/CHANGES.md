@@ -1,3 +1,8 @@
+## 2026-11-12 (clockwalk1): coin names on hover, and the party walks into Gate Zero after the clock opens (tag clockwalk1)
+- Tom (16:07 and 16:08, from a screenshot of the coin screen): hovering a coin on the right should show its name; after the clock is done the party should walk into the next room by itself.
+- Fact: each tray coin has a `title` (browser tooltip) and, on mouse hover, the caption under the clock shows the coin's name (`closeup.hover` in engine/closeup.js); leaving the coin returns the caption to the selected coin. Touch and keyboard already showed the selected coin's name.
+- Fact: `SCENES.ch10Door` now ends with fade out, move the party to Gate Zero (9,12 facing up, the same spot the door exit used), fade in. The `ch10-boss` trigger then plays the Last Call scene on arrival. Tested in a real browser: coin 7 in, door scene, map `gatezero`, `ch10-boss` set, 0 page errors.
+
 ## 2026-11-12 (closeup3): Art Library entries for the remaining close-ups (art session, step A of claude/closeup-plan.md) (no game code, no tag)
 - Tom (15:35): "I'll build all the art first, then you continue." Twelve new entries, tab Props, group Close-ups, in `tools/art-library/closeup2-prompts.js` (added to the module list in make-prompts.js, spliced into data/art-prompts.json after `closeup-ch10-coins`, validate.js OK, seen in art.html as Ready).
 - Entries: closeup-ch13-amber, closeup-ch13-parts (4), closeup-ch19-pedestal, closeup-ch19-keepsakes (4; refs prop-find-ch19-v2 cells 4 to 7), closeup-ch17-globe, closeup-ch7-doors, closeup-ch7-cards (2), closeup-ch9-lock, closeup-ch5-clock, closeup-ch5-hands (2), closeup-ch8-lever, closeup-ch8-lever-arm. Row 8 (chapter 4 boxes) uses the approved prop-find-ch04-parts, no entry.
