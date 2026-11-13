@@ -262,7 +262,7 @@ SCENES.ch12After=()=>[
   {party:null},
   {fade:'out',time:.8}, {card:12,done:true,time:3.4}, {flag:'ch12-done'}, {fade:'in',time:.8},
   {toast:'Goal: ask Sol at the cab stand in Downtown LA how to get under the dome.',time:7},
-  {call:()=>showToast&&showToast('CHAPTER 12 COMPLETE! Chapter 13 is still being built.',7)},
+  {call:()=>showToast&&showToast('CHAPTER 12 COMPLETE!',7)},
   {save:true}
 ];
 

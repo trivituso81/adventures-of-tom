@@ -1115,7 +1115,8 @@ function currentObjective() {
   const log=(Array.isArray(flag('goalLog'))?flag('goalLog'):[]).filter(e=>e&&e.c===c.n).map(e=>e.t);
   const goal=flag('goal');
   if(flag('ch'+c.n+'-done')===true) {
-    let text='Chapter complete. The next chapter is still being built. Explore as much as you like.';
+    let text=(goal&&flag('goalCh')===c.n)?'Chapter complete. '+questPhrase(goal):'Chapter complete. Explore as much as you like, then follow the story into chapter '+(c.n+1)+'.';
+    if(c.n>=20) text='Chapter complete. Explore as much as you like.';
     if(c.n===1&&!flag('ch2-sal')) text='Chapter complete. Talk to Sal at the taxi stand to keep going.';
     else if(c.n===2) text='Chapter complete. Talk to Sol at Angel City Cab Co. (downtown) to fly home and keep going.';
     else if(c.n===3) text='Chapter complete. Talk to Sal at Long Island Taxi Co. (the Square) to fly to Los Angeles for chapter 4.';

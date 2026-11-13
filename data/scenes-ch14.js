@@ -210,8 +210,8 @@ SCENES.ch14After=()=>[
   {despawn:'Boppy'},{despawn:'Deedee'},
   {flag:'ch14-after'},
   {fade:'out',time:.8},{card:14,done:true,time:3.4},{flag:'ch14-done'},{fade:'in',time:.8},
-  {toast:'Goal: Chapter 15 is coming. The dinner table is set for eight.',time:7},
-  {call:()=>showToast&&showToast('CHAPTER 14 COMPLETE! Chapter 15 is still being built.',7)},
+  {toast:'Goal: The dinner table is set for eight.',time:7},
+  {call:()=>showToast&&showToast('CHAPTER 14 COMPLETE!',7)},
   {save:true}
 ];
 

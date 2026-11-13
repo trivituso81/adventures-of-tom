@@ -300,7 +300,7 @@ SCENES.ch11After=()=>[
   {trace:'ch11-wrap'}, {hearts:'tom'}, {hearts:'amy'}, {hearts:'tnb'},
   {party:null},
   {fade:'out',time:.8}, {card:11,done:true,time:3.4}, {flag:'ch11-done'}, {fade:'in',time:.8},
-  {toast:'CHAPTER 11 COMPLETE! Chapter 12 is still being built. Los Angeles is open, but its door is not.',time:7},
+  {toast:'CHAPTER 11 COMPLETE! Los Angeles is open, but its door is not.',time:7},
   {save:true}
 ];
 

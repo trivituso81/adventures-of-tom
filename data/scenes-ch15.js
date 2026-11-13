@@ -190,8 +190,8 @@ SCENES.ch15After=()=>[
   {call:()=>{ ch15RemoveTable(); for(const id of ['deedee','boppy']) { const m=MEMBERS()[id]; if(m&&typeof onBench==='function'&&onBench(m)) benchRemove(m); } }},
   {flag:'ch15-after'},
   {fade:'out',time:.8},{card:15,done:true,time:3.4},{flag:'ch15-done'},{fade:'in',time:.8},
-  {toast:'Goal: Chapter 16 is coming. Tomorrow, the Square.',time:7},
-  {call:()=>showToast&&showToast('CHAPTER 15 COMPLETE! Chapter 16 is still being built.',7)},
+  {toast:'Goal: Tomorrow, the Square.',time:7},
+  {call:()=>showToast&&showToast('CHAPTER 15 COMPLETE!',7)},
   {save:true}
 ];
 

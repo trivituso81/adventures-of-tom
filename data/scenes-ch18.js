@@ -122,8 +122,8 @@ SCENES.ch18After=()=>[
   {flag:'ch18-after'},
   {fade:'out',time:.8},{card:18,done:true,time:3.4},{flag:'ch18-done'},
   {fade:'in',time:.8},
-  {toast:'Goal: Chapter 19 is coming. Tom is gone, and Nara will not stop sniffing at the post box.',time:8},
-  {call:()=>showToast&&showToast('CHAPTER 18 COMPLETE! Chapter 19 is still being built.',7)},
+  {toast:'Goal: Tom is gone, and Nara will not stop sniffing at the post box.',time:8},
+  {call:()=>showToast&&showToast('CHAPTER 18 COMPLETE!',7)},
   {save:true}
 ];
 

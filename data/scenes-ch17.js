@@ -279,8 +279,8 @@ SCENES.ch17After=()=>[
   {fade:'out',time:.8},{card:17,done:true,time:3.4},{flag:'ch17-done'},
   {fade:'in',time:.8},
   {talk:'Tom',lines:['A gold lift door stands open at the north wall. No call button. A brass plate: FLOOR 60. BY INVITATION.']},
-  {toast:'Goal: Chapter 18 is coming. The pinnacle lift to Floor 60 is waiting.',time:8},
-  {call:()=>showToast&&showToast('CHAPTER 17 COMPLETE! Chapter 18 is still being built.',7)},
+  {toast:'Goal: The pinnacle lift to Floor 60 is waiting.',time:8},
+  {call:()=>showToast&&showToast('CHAPTER 17 COMPLETE!',7)},
   {save:true}
 ];
 

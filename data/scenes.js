@@ -284,7 +284,7 @@ SCENES.ch1End=()=>[
   {talk:'Boppy',lines:['Slow down. Everybody eats too fast. My stomach.']},
   {fade:'out',time:.8}, {card:1,done:true,time:3.4}, {flag:'ch1-done'}, {fade:'in',time:.8},
   {save:true},
-  {toast:'Chapter 1 complete! Chapter 2 is still being built. Long Island is yours to explore.',time:6}
+  {toast:'Chapter 1 complete! Long Island is yours to explore.',time:6}
 ];
 
 // ======================================================================================================
@@ -2570,7 +2570,7 @@ SCENES.ch7End=[
   {fade:'out',time:.8}, {card:7,done:true,time:3.4}, {flag:'ch7-done'}, {fade:'in',time:.8},
   {save:true},
   {toast:'New Tombo: Pick the Rhubarb (Tom + Deedee). 50% HEART.',time:3.2},
-  {toast:'Chapter 7 complete! Chapter 8 is still being built. Long Island is yours to explore.',time:6}
+  {toast:'Chapter 7 complete! Long Island is yours to explore.',time:6}
 ];
 TRIGGERS.push(
   {id:'ch7-goal',map:'town',when:{...CH7,notFlag:'ch7-goal'},scene:'ch7Arrive'},
@@ -2949,7 +2949,7 @@ SCENES.ch8End=[
   {fade:'out',time:.8}, {card:8,done:true,time:3.4}, {flag:'ch8-done'}, {fade:'in',time:.8},
   {despawn:'Bernadette'},
   {save:true},
-  {toast:'Chapter 8 complete! Chapter 9 is still being built. Los Angeles is yours to explore.',time:6}
+  {toast:'Chapter 8 complete! Los Angeles is yours to explore.',time:6}
 ];
 TRIGGERS.push(
   {id:'ch8-arrive',map:'blvd',when:{...CH8,notFlag:'ch8-goal'},scene:'ch8Arrive'},

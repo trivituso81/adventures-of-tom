@@ -253,8 +253,8 @@ SCENES.ch19Thaw=()=>[
   {talk:'Tom',lines:['Seconds first. Then the sky.']},
   {fade:'out',time:.8},{card:19,done:true,time:3.4},{flag:'ch19-thaw'},{flag:'ch19-done'},
   {fade:'in',time:.8},
-  {toast:'Goal: Chapter 20 is coming. The sky has a clock in it now.',time:8},
-  {call:()=>showToast&&showToast('CHAPTER 19 COMPLETE! Chapter 20 is still being built.',7)},
+  {toast:'Goal: The sky has a clock in it now.',time:8},
+  {call:()=>showToast&&showToast('CHAPTER 19 COMPLETE!',7)},
   {save:true}
 ];
 
