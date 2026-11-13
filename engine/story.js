@@ -393,7 +393,7 @@ const stagePos=a=>{ const p=position(a); return {x:Math.round(p.x),y:Math.round(
 // tiles wide and tall around one tile, so anyone standing near that tile stands on its picture. stageBoxes: every monster in view on this
 // map (plus the scene's boss even while it is still hidden: it is about to rise there; not a boss that has finished its ending and settled). stageInBox: a person on tile (x,y) would overlap one.
 function stageBox(a) { const d=typeof monsterDef==='function'?monsterDef(a):null; if(!d||!d.sprite) return null;
-  const s=a.mscale||1,p=stagePos(a); return {x:p.x,y:p.y,hw:d.sprite[0].length*s/2/T,ht:d.sprite.length*s/T,a}; }
+  const s=monScale(a),p=stagePos(a); return {x:p.x,y:p.y,hw:d.sprite[0].length*s/2/T,ht:d.sprite.length*s/T,a}; }
 const stageBoxes=also=>currentMap.npcs.filter(n=>n.monster&&!n.bossSettle&&(!n.hidden||n===also)).map(stageBox).filter(Boolean);
 const stageInBox=(B,x,y)=>B.some(b=>Math.abs(x-b.x)<b.hw+.6&&y>b.y-b.ht&&y<b.y+2.3);
 // Where Tom stands for a boss: on its LEFT ("characters need to stand to the left"), a tile clear of the boss and of any monster beside it,
@@ -412,11 +412,11 @@ function stageLeftSpot(boss,B) {
     bd=d; best={x,y}; }
   return best;
 }
-function stageClearSpot(B) {   // the nearest tile Tom can walk to that is off every monster's picture (when there is no room on the left)
-  const map=currentMap,tp=stagePos(player),memo=new Map(); let best=null,bd=1e9;
+function stageClearSpot(B,boss) {   // the nearest tile Tom can walk to that is off every monster's picture (when there is no room on the left); with a boss, the one nearest the boss's left edge, so the others fit to his right (a boss drawn at 2x Tom leaves a thin strip)
+  const map=currentMap,tp=stagePos(player),memo=new Map(),bb=boss?stageBox(boss):null,lx=bb?bb.x-bb.hw:0; let best=null,bd=1e9;
   for(let y=tp.y-6;y<=tp.y+6;y++) for(let x=tp.x-6;x<=tp.x+6;x++) {
     if(huddleBadTile(map,x,y,memo)||map.portals.has(key(x,y))||stageInBox(B,x,y)||currentMap.npcs.some(n=>!n.hidden&&stagePos(n).x===x&&stagePos(n).y===y)) continue;
-    const d=Math.hypot(x-tp.x,y-tp.y)+(x<tp.x?0:.3); if(d>=bd) continue;
+    const d=Math.hypot(x-tp.x,y-tp.y)+(x<tp.x?0:.3)+(bb?1.2*Math.abs(x-lx):0); if(d>=bd) continue;
     if(!(x===tp.x&&y===tp.y)&&!findPath(map,{x:tp.x,y:tp.y},{x,y}).length) continue;
     bd=d; best={x,y}; }
   return best;
@@ -469,7 +469,7 @@ function gatherStep(o) {
       const onBoss=a=>{ const p=stagePos(a); return stageInBox(B,p.x,p.y); };
       let tpos=null;
       if(boss&&!player.scenePose&&!player.scr) { const bb=stageBox(boss),tomOn=onBoss(player);
-        if(bb&&(tomOn||(!o.check&&o.left!==false&&!player.stagePlaced&&tp.x>bb.x-bb.hw-.6))) { const t=(o.left!==false&&stageLeftSpot(boss,B))||stageClearSpot(B);
+        if(bb&&(tomOn||(!o.check&&o.left!==false&&!player.stagePlaced&&tp.x>bb.x-bb.hw-.6))) { const t=(o.left!==false&&stageLeftSpot(boss,B))||stageClearSpot(B,boss);
           if(t&&(t.x!==tp.x||t.y!==tp.y)) { tpos=t; player.x=tp.x; player.y=tp.y; player.move=null; this.tom={a:player,path:findPath(currentMap,{x:tp.x,y:tp.y},t),i:0}; } } }
       if(o.check&&!tpos) {
         const vis=[player,...all].filter(a=>!a.hidden),P=vis.map(stagePos);

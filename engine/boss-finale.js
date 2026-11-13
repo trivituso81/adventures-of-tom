@@ -97,7 +97,7 @@ function bossFinaleStep(id) {
       t=0; n=spec?bossActor(id):null;
       if(!n||n.hidden||n.fin||!endRows(id,spec.seq[0].f,'right')) { n=null; return; }
       storyHold(n); n.bossAwait=false; kind=bossKind(id);
-      const p=position(n),d=monsterDef(n),pp=position(player); h=((n.scenePose&&n.scenePose.end?endRows(id,n.scenePose.foe,'right'):null)||d.sprite).length*(n.mscale||1);
+      const p=position(n),d=monsterDef(n),pp=position(player); h=((n.scenePose&&n.scenePose.end?endRows(id,n.scenePose.foe,'right'):null)||d.sprite).length*monScale(n);
       ox=p.x; oy=p.y;
       if(spec.path&&spec.path.to) { vx=spec.path.to[0]-ox; vy=spec.path.to[1]-oy; } else if(spec.path&&spec.path.away) { sx=p.x>=pp.x?1:-1; vx=sx*spec.path.away; vy=0; }
       face=(spec.face==='travel'&&vx)?(vx<0?'left':'right'):((spec.path&&spec.path.away)?(vx<0?'left':'right'):(p.x>pp.x?'left':'right'));

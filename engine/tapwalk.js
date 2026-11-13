@@ -45,7 +45,7 @@ function twActorAt(wx,wy) {
     if(a.hidden||a===player) continue;
     const p=position(a),feet=(p.y+1)*T;
     let h=48,half=T/2+2;
-    if(a.monster) { const d=monsterDef(a),s=a.mscale||1; h=d.sprite.length*s; half=Math.max(half,d.sprite[0].length*s/2+2); }
+    if(a.monster) { const d=monsterDef(a),s=monScale(a); h=d.sprite.length*s; half=Math.max(half,d.sprite[0].length*s/2+2); }
     const cx=(p.x+.5)*T;
     if(wx>=cx-half&&wx<=cx+half&&wy>=feet-h&&wy<=feet&&feet>bestY) { best=a; bestY=feet; }
   }

@@ -56,6 +56,26 @@ function owBoostBase(a) {
   if(currentMap.outside) return OW_PLAYABLE_BOOST;
   return owInHouse()?OW_PLAYABLE_BOOST_INDOOR:OW_PLAYABLE_BOOST_OLD;   // rooms without a house painting (school rooms, dome, moon club) stay as they were
 }
+// Bosses on the map (Tom 2026-11-13, chapter 13 Drill Worm): a boss is drawn at least BOSS_TOM_RATIO times Tom's drawn height at the boss's own
+// feet row (people-shaped bosses BOSS_TOM_RATIO_PERSON), and always faces the party. The painted enemy sheets face RIGHT, so a boss whose
+// target (Tom) is on its left is mirrored. monScale replaces `a.mscale||1` everywhere a monster's drawn size matters (draw, stage boxes,
+// tap walking, finales); a scene's own mscale is only a floor now. Other monsters are unchanged.
+const BOSS_TOM_RATIO=2.0, BOSS_TOM_RATIO_PERSON=1.6, BOSS_PERSON=new Set(['vance','julian']);
+function isMapBoss(a) { return !!(a&&a.monster&&typeof B2_FOES!=='undefined'&&B2_FOES[a.monster]&&B2_FOES[a.monster].boss); }
+function monScale(a) {
+  const base=a.mscale||1; if(!isMapBoss(a)||!OW.tom) return base;
+  const d=monsterDef(a); if(!d||!d.sprite||!d.sprite.length) return base;
+  const p=position(a),tomH=OW.tom.down[0].length*actorK(p.y+1)*(OW.tom.k||1)*owBoost(a,OW.tom);
+  return Math.max(base,tomH*(BOSS_PERSON.has(a.monster)?BOSS_TOM_RATIO_PERSON:BOSS_TOM_RATIO)/d.sprite.length);
+}
+const BOSS_FLIP=new WeakMap();
+function bossFacing(a,rows) {
+  if(!isMapBoss(a)||(a.scenePose&&a.scenePose.foe)||typeof player==='undefined'||!player) return rows;
+  const dx=position(player).x-position(a).x;
+  if(Math.abs(dx)>.5) a._bossFaceLeft=dx<0;   // dead zone: no flicker when the party is straight above or below
+  if(!a._bossFaceLeft) return rows;
+  let m=BOSS_FLIP.get(rows); if(!m) { m=mirrorRows(rows); BOSS_FLIP.set(rows,m); } return m;
+}
 function drawSheetActor(a,set) {
   if(a.seat) return;   // sitting on Tom's shoulders: drawn with him (engine/rose-ride.js)
   const rider=a.isPlayer?roseRider():null;
@@ -585,7 +605,7 @@ function drawActor(a) {
     const p=position(a);
     const cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2);
     if(a.scenePose&&typeof mudlingHeistDraw==='function'&&mudlingHeistDraw(a,cx,base)) return;   // painted heist frames (engine/story.js)
-    const d=monsterDef(a),s=a.mscale||1,rows=(a.scenePose&&a.scenePose.foe&&typeof foePoseRows==='function'&&foePoseRows(a,d))||d.sprite,w=rows[0].length*s,h=rows.length*s;   // mscale: drawn bigger (a story monster); rows: a painted frame picked by a scene (foePoseRows)
+    const d=monsterDef(a),s=monScale(a),rows=bossFacing(a,(a.scenePose&&a.scenePose.foe&&typeof foePoseRows==='function'&&foePoseRows(a,d))||d.sprite),w=rows[0].length*s,h=rows.length*s;   // mscale: drawn bigger (a story monster); rows: a painted frame picked by a scene (foePoseRows)
     // Same rule as battle (Tom, 2026-11-05): grounded monsters never leave the ground (a tiny stretch anchored at the feet, shadow under the
     // feet); flyers (B2_FLYERS, engine/battle2-ui.js) hover off the ground and bob at the original pace, their shadow stays down.
     const fly=typeof B2_FLYERS!=='undefined'&&B2_FLYERS.has(a.monster);
