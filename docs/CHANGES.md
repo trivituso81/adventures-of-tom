@@ -1,3 +1,7 @@
+## 2026-11-12 (clips9): Tom's 19 chapter 12 amber recordings are merged (tag clips9)
+- Tom sent the pending export `local-clips-pending_3.json` (19 clips, the amberclear1 lines for Marlowe, Carmen, Alvarez and the ending).
+- Fact: `merge-local.js` added all 19 to data/voice/dialog-ch28.js (no battle clips, no voice-clips.js change). Voice index: dialogue lines with no clip 0. `unused_voice.py` 0 on all five checks, smoke FAILS [], tag_check ok.
+- Not done: not played on a phone or in a browser; a clip that does not match its page is not detectable here.
 ## 2026-11-12 (introlib1): the chapter 1 intro pictures get Art Library entries; nothing in the game changed
 - Tom 21:42: the intro still shows the old shoulder pictures, and the crouch and hug pictures are nowhere in the Art Library.
 - Fact (cause, shoulders): the six opening frames (`tr_kneel`, `tr_lift`, `tr_cheer`, `tr_laugh`, `tr_hopoff`, `tr_sit`, set `tomride` in `bake_story_poses.py`) are cut from `art/raw/characters/tomride-poses-v2.png` (Nov 6, `ride1`), which shows the older Tom. The newer ride pictures (`tomride-title`, `-walk`, `-press-start`, `-toss`) never covered these six frames and no entry existed for them.
