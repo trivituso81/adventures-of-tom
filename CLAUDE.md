@@ -18,6 +18,15 @@ Tom is a product director. He designs and directs; he does **not** code and does
 - Define any technical term you must use. Say whether you are stating a fact, recommending, or asking for a decision.
 - No em dashes in anything you write for him or put in the game.
 
+## How every reply to Tom is shaped (standing rule, Tom 2026-11-12 19:19)
+
+Tom: "I would love for your first statement to me to be what you actually did... Explicitness is essential." Every reply that follows work has two parts, in this order:
+
+1. **First line: what I did.** One plain statement of the action taken, in the past tense: "I installed...", "I implemented...", "I created a plan for...", "I tested... and it passed/failed". Say what was pushed (commit and tag) or that nothing was pushed. Say what was NOT done or not looked at.
+2. **Right below it: what Tom must do next, as exact steps.** Name the place and the action: "Open Admin > Art Library, find the entry `tomride-night`, press Generate, then Approve", or "Paste this into the next conversation: <exact line>". If he has nothing to do, say "Nothing needed from you" and give the exact prompt that starts the next session. Never "let me know", never a list of options, never vague ("check it on your phone"): say which screen, which button, what he should see.
+
+Then only what he needs to judge the work (decisions I made, one line each). The two-line handoff and next prompt at the end of a session stay as before.
+
 ## Hard rules
 
 1. **Everything is a classic script in one shared global scope.** No ES modules, no import/export, no bundler. Files load in the order of the `<script>` tags in `index.html`. A new file must be added to `index.html` at the right point. See `docs/ARCHITECTURE.md` for the load order and what each group depends on.
