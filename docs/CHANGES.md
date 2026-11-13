@@ -1,3 +1,8 @@
+## chinfix1 (2026-11-13): townsfolk chin lines moved to the true chin, Pip 1.25
+- Tom: Pip's head (and some other NPCs) grew only above the chin line, leaving a narrow chin. Cause: `CHIN` in `tools/sprite-bake/townsfolk_common.py` (the bake's head anchor, the dotted line in ADMIN > HEAD SIZES) sat at mouth or eye level for most of the 55 townsfolk. All 55 re-read by eye on zoomed heads (ruler every .01) and set to the true bottom of the chin.
+- Rebaked: all townsfolk walks (bake_townsfolk.py via head_adjust apply-requests, which also applied Pip 1.25), `manifest`, all story poses (they use CHIN), Pip's mood frames, mood faces and talk face. EMO_V, TALK_V, ART_V and build stamp = chinfix1.
+- Note: factors Tom set earlier were judged against the old (wrong) anchor, so some heads now read a little different at the same factor; re-judge in HEAD SIZES.
+
 ## 2026-11-13 (pipspeed1): Pip's voice is 12 percent faster, pitch kept (tag pipspeed1)
 - Tom 13:56: "speed up Pip's voice a little bit more."
 - Fact before: Pip (voice `pipkid`, Rose's ElevenLabs voice lowered to pitch 0.88) had no speed setting anywhere. The 7 baked Pip clips (data/voice/dialog-ch28.js) spoke at 11 to 14 characters per second.
