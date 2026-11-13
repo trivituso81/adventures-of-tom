@@ -402,7 +402,7 @@ function stageLeftSpot(boss,B) {
   const map=currentMap,bb=stageBox(boss); if(!bb) return null;
   let edge=bb.x-bb.hw; for(const c of B) if(c.a!==boss&&Math.abs(c.y-bb.y)<=2&&c.x<bb.x&&c.x+c.hw>edge-3) edge=Math.min(edge,c.x-c.hw);
   const ix=Math.floor(edge-1.1),iy=bb.y,tp=stagePos(player),busy=new Set();
-  for(const n of map.npcs) if(!n.hidden&&!n.monster) { const p=stagePos(n); busy.add(key(p.x,p.y)); }
+  for(const n of map.npcs) if(!n.hidden&&!n.monster&&!stageExtra(n)) { const p=stagePos(n); busy.add(key(p.x,p.y)); }
   let best=null,bd=1e9; const memo=new Map();
   for(let y=iy-3;y<=iy+3;y++) for(let x=ix-6;x<=ix;x++) {
     if(huddleBadTile(map,x,y,memo)||map.portals.has(key(x,y))||busy.has(key(x,y))||stageInBox(B,x,y)) continue;
@@ -429,7 +429,7 @@ function stageSpots(focus,movers,fixed,tpos,B=[]) {
   const ideal=side?[[b,1],[2*b,0],[b,-2],[2*b,3],[3*b,1],[3*b,-2]]:[[-1,0],[1,0],[-2,v],[2,v],[-3,0],[3,0]];
   const taken=[{x:tx,y:ty},...fixed];
   const busy=new Set(),memo=new Map();
-  for(const n of map.npcs) if(!n.hidden) { const p=stagePos(n); busy.add(key(p.x,p.y)); }
+  for(const n of map.npcs) if(!n.hidden&&!stageExtra(n)) { const p=stagePos(n); busy.add(key(p.x,p.y)); }
   // Level 0 is the rule; when a tight room has no such tile, level 1 allows a spot in front of Tom, level 2 a two-row column gap, level 3 any free tile.
   const ok=(x,y,lv)=>{
     if(!walkable(map,x,y)||map.portals.has(key(x,y))||busy.has(key(x,y))) return false;
@@ -626,7 +626,7 @@ function huddleForm(g,memo,A,room,clr) {
   const fixed=g.roster.filter(a=>a!==player&&stays(a)),fp=[...np,...fixed.map(stagePos)];
   const mates=g.roster.filter(a=>a!==player&&!stays(a)),mp=mates.map(stagePos),N=mates.length;
   const tomFixed=stays(player);
-  const busy=new Set(); for(const n of map.npcs) if(!n.hidden&&!followers.includes(n)) { const p=stagePos(n); busy.add(key(p.x,p.y)); }
+  const busy=new Set(); for(const n of map.npcs) if(!n.hidden&&!followers.includes(n)&&!stageExtra(n)) { const p=stagePos(n); busy.add(key(p.x,p.y)); }
   const along=p=>(p.x-A.kp.x)*A.ax+(p.y-A.kp.y)*A.ay,perp=p=>(p.x-A.kp.x)*Math.abs(A.ay)+(p.y-A.kp.y)*Math.abs(A.ax);
   const free=(x,y)=>!huddleBadTile(map,x,y,memo)&&!map.portals.has(key(x,y))&&!busy.has(key(x,y));
   const leadOk=p=>free(p.x,p.y)&&np.every(n=>stageClearOf(p,n,ROWS,COLS))&&fp.every(t=>stageApart(t,p))&&along(p)>=A.gap;
@@ -701,7 +701,7 @@ function huddleLayout(g,clr,tomMoves,memo,keep) {
   const npcs=g.others.map(stagePos),tp=stagePos(player);
   const anchor=npcs.length?{x:npcs.reduce((s,p)=>s+p.x,0)/npcs.length,y:npcs.reduce((s,p)=>s+p.y,0)/npcs.length}
     :(fp.length?{x:fp.reduce((s,p)=>s+p.x,0)/fp.length,y:fp.reduce((s,p)=>s+p.y,0)/fp.length}:{x:mp[0].x,y:mp[0].y});
-  const busy=new Set(); for(const n of map.npcs) if(!n.hidden&&!followers.includes(n)) { const p=stagePos(n); busy.add(key(p.x,p.y)); }
+  const busy=new Set(); for(const n of map.npcs) if(!n.hidden&&!followers.includes(n)&&!stageExtra(n)) { const p=stagePos(n); busy.add(key(p.x,p.y)); }
   const span=4,Rc=npcs.length?2:5;
   const side={x:tp.x-anchor.x,y:tp.y-anchor.y},sl=Math.hypot(side.x,side.y);
   let bestL=null;
@@ -784,24 +784,60 @@ function huddleStep(o) {
 // "We need to be zooming in on the characters and the NPC during cut scenes" and nobody may cover the person the scene is about.
 // After every {huddle} the camera frames the conversation (engine/overworld.js sceneAuto: it follows the group and zooms to fit it
 // between the top bar and the dialogue box), and townsfolk who wandered into the picture walk out of it and stay out until the scene
-// ends (stageZone, read by updateNPCs in engine/battle-draw.js). Posed, seated and scene-held people are left alone.
+// ends (stageZone, read by updateNPCs in engine/battle-draw.js). Posed, seated and scene-held people are left alone. Since clearout1 the
+// clearing starts when the scene starts ({clearout}), before the party is placed, and extras never count as obstacles for the party.
 let stageZone=null;
 const stageInZone=p=>!!stageZone&&p.x>=stageZone.x0&&p.x<=stageZone.x1&&p.y>=stageZone.y0&&p.y<=stageZone.y1;
+// A townsperson who has nothing to do with the scene being played (Tom 2026-11-12 23:44: "those NPCs that have nothing to do with it should
+// just be totally cleared out of that area in a different part of the map, giving preference to the player characters"): someone who wanders
+// (roam above 0), is not held, posed, seated or spawned by the scene, and whose name appears nowhere in the scene's script (intro.sceneCast).
+// Extras never count when the party picks its spots (every `busy` list skips them), and stageClearOut walks them away.
+const stageExtra=n=>!!(intro.active&&intro.sceneCast&&n&&!n.hidden&&!n.held&&!n.still&&!n.scripted&&!n.monster&&!n.seat&&n.roam>0&&!n.kid&&n!==player&&!followers.includes(n)&&n!==intro.sceneCast.npc&&!intro.sceneCast.text.includes(n.name));
+function stageCast(list) { let text=''; try { text=JSON.stringify(list,(k,v)=>typeof v==='function'?String(v):v)||''; } catch(e) {}
+  return {text,speakers:sceneSpeakers(list),npc:typeof dialog!=='undefined'&&dialog.npc?dialog.npc:null}; }
+// Every extra standing in the picture (stageZone) walks, quickly, to the nearest free tile outside it. Returns the ones sent off.
+function stageShooOut() {
+  const map=currentMap,out=[]; if(!stageZone) return out;
+  for(const n of map.npcs) { if(!stageExtra(n)) continue;
+    const p=stagePos(n); if(!stageInZone(p)) continue;
+    if(n.stageShoo&&n.path.length&&!stageInZone(n.path[n.path.length-1])) { out.push(n); continue; }   // already on the way out
+    // Breadth-first to the nearest free tile outside the picture. When the picture covers everything they can reach (a one-screen street, a
+    // room), they go to the reachable tile farthest from the people in the scene instead and wait there. First by a path they can really
+    // walk; if the party is standing across their only way out, they are simply put on the far side (pass 2 ignores people in the way).
+    const far=t=>Math.min(...(stageZone.pts||[stagePos(player)]).map(c=>Math.max(Math.abs(c.x-t.x),Math.abs(c.y-t.y))));
+    const search=real=>{ const prev=new Map([[key(p.x,p.y),null]]),q=[p]; let goal=null,best=null,bd=far(p)+.5;
+      for(let i=0;i<q.length&&i<3000&&!goal;i++) { const c=q[i];
+        for(const [dx,dy] of [[0,-1],[-1,0],[1,0],[0,1]]) { const x=c.x+dx,y=c.y+dy,k=key(x,y);
+          if(prev.has(k)||!walkable(map,x,y)||map.npcNoGo.has(k)||(real&&!canOccupy(map,x,y,n))) continue; prev.set(k,c);
+          if(!map.portals.has(k)&&canOccupy(map,x,y,n)) { if(!stageInZone({x,y})) { goal={x,y}; break; } const d=far({x,y}); if(d>bd) { bd=d; best={x,y}; } }
+          q.push({x,y}); } }
+      goal=goal||best; if(!goal) return null;
+      const route=[]; for(let c=goal;c&&!(c.x===p.x&&c.y===p.y);c=prev.get(key(c.x,c.y))) route.unshift(c);
+      return {goal,route,out:!stageInZone(goal),d:far(goal)}; };
+    const A=search(true),B=A&&(A.out||A.d>=6)?null:search(false);
+    if(B&&(!A||B.out||B.d>A.d+2)) { n.x=B.goal.x; n.y=B.goal.y; n.move=null; n.path=[]; n.idle=2; out.push(n); continue; }
+    if(A&&A.route.length) { n.path=A.route; n.stageShoo=true; n.idle=2; out.push(n); } }
+  return out;
+}
+// {clearout:true} (playScene puts it first in every staged scene): the area around Tom, and around anyone who speaks in the scene and stands
+// within 14 tiles of him, is cleared of extras (8 tiles all round) before anybody is placed. The scene waits up to 1.6 s while an extra is still
+// within 4 tiles of Tom.
+function stageClearOut() {
+  const tp=stagePos(player),pts=[tp];
+  for(const n of currentMap.npcs) if(!n.hidden&&!n.monster&&!followers.includes(n)&&intro.sceneCast&&intro.sceneCast.speakers.includes(n.name)) { const p=stagePos(n); if(Math.hypot(p.x-tp.x,p.y-tp.y)<=14) pts.push(p); }
+  const xs=pts.map(p=>p.x),ys=pts.map(p=>p.y),r=8;
+  stageZone={x0:Math.min(...xs)-r,x1:Math.max(...xs)+r,y0:Math.min(...ys)-r,y1:Math.max(...ys)+r,pts};
+  stageShooOut();
+}
+SCENE_OPS.clearout=o=>({t:0,start(){ this.t=0; stageClearOut(); },
+  update(dt){ this.t+=dt; const tp=stagePos(player);
+    return this.t>=1.6||!currentMap.npcs.some(n=>n.stageShoo&&(n.path.length||n.move)&&Math.hypot(stagePos(n).x-tp.x,stagePos(n).y-tp.y)<=4); }});
 function stageFrame(g,moves) {
   const all=[...g.roster,...g.others].filter(a=>!a.hidden); if(!all.length) return;
   sceneAuto={actors:all,first:g.others.slice(),map:currentMap,fig:STAGE.fig,cols:STAGE.wide};
   const P=all.map(a=>{ const m=(moves||[]).find(m=>m.a===a&&m.path.length); return m?m.path[m.path.length-1]:stagePos(a); }),xs=P.map(p=>p.x),ys=P.map(p=>p.y);   // where they will stand
-  stageZone={x0:Math.min(...xs)-STAGE.cols-1,x1:Math.max(...xs)+STAGE.cols+1,y0:Math.min(...ys)-STAGE.rows+1,y1:Math.max(...ys)+STAGE.rows};
-  const map=currentMap;
-  for(const n of map.npcs) { if(n.hidden||n.held||n.still||n.scripted||n.monster||n.seat||!(n.roam>0)||followers.includes(n)||all.includes(n)) continue;
-    const p=stagePos(n); if(!stageInZone(p)) continue;
-    // breadth-first to the nearest free tile outside the picture, then walk there
-    const seen=new Set([key(p.x,p.y)]),q=[p]; let goal=null;
-    for(let i=0;i<q.length&&i<600&&!goal;i++) { const c=q[i];
-      for(const [dx,dy] of [[0,-1],[-1,0],[1,0],[0,1]]) { const x=c.x+dx,y=c.y+dy,k=key(x,y); if(seen.has(k)||!walkable(map,x,y)||map.portals.has(k)) continue; seen.add(k);
-        if(!stageInZone({x,y})&&canOccupy(map,x,y,n)) { goal={x,y}; break; } q.push({x,y}); } }
-    if(!goal) continue;
-    const route=findPath(map,n,goal); if(route.length) { n.path=route; n.stageShoo=true; n.idle=2; } }
+  stageZone={x0:Math.min(...xs)-8,x1:Math.max(...xs)+8,y0:Math.min(...ys)-8,y1:Math.max(...ys)+8,pts:P};   // the cleared area follows the conversation when a scene moves on
+  stageShooOut();
 }
 SCENE_OPS.huddle=huddleStep;
 // {approach:names} (near1, Tom 2026-11-12: "why does the party stay so far away? ... I just want them to be close in a normal way", the
@@ -822,7 +858,7 @@ function approachSubject(names) {
 }
 function approachSpot(n,clr,memo) {
   const map=currentMap,tp=stagePos(player),np=stagePos(n);
-  const busy=currentMap.npcs.filter(m=>!m.hidden&&!followers.includes(m)).map(stagePos);
+  const busy=currentMap.npcs.filter(m=>!m.hidden&&!followers.includes(m)&&!stageExtra(m)).map(stagePos);
   let best=null,bc=1e9;
   for(let y=np.y-3;y<=np.y+3;y++) for(let x=np.x-2;x<=np.x+2;x++) {
     if(huddleBadTile(map,x,y,memo)||map.portals.has(key(x,y))||hudNear(x-np.x,y-np.y)>1.6) continue;
@@ -926,6 +962,8 @@ function playScene(script,opts={}) {
   // opts.stage: a wrapper script (playScene(()=>[...])) that should be staged like a SCENES id (facing1: the Part 2 opening).
   else if((sid||opts.stage)&&Array.isArray(list)&&!JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v).includes('"gather"')) { const near=sceneSelfStaged(list)?null:sceneSpeakers(list);
     list=stageScript(list,null,(first,st)=>{ const h={huddle:true,with:st&&typeof st.talk==='string'?st.talk:null,lookAt:st&&typeof st.lookAt==='string'?st.lookAt:null}; return first&&near&&near.length?[{approach:near},h]:h; }); }
+  stageZone=null; intro.sceneCast=null;
+  if((sid||opts.stage)&&Array.isArray(list)) { intro.sceneCast=stageCast(list); list=[{clearout:true},...list]; }   // extras leave before anyone is placed (clearout1)
   intro.active=true; intro.phase='scene'; intro.cur=null; intro.fadeLock=false;
   intro.fade=opts.fade||0;
   intro.steps=compileScene(list);
@@ -1089,7 +1127,7 @@ function storySpawn(o) {
 function storyDespawn(name) { for(const m of Object.values(worlds)) m.npcs=m.npcs.filter(n=>!(n.scripted&&n.name===name)); }
 const LE_endIntro_story=endIntro;
 endIntro=function() {
-  sceneCam=null; sceneAuto=null; sceneZoomManual=false; stageZone=null;   // the camera eases back out to Tom (engine/overworld.js sceneAutoTick)
+  sceneCam=null; sceneAuto=null; sceneZoomManual=false; stageZone=null; intro.sceneCast=null;   // the camera eases back out to Tom (engine/overworld.js sceneAutoTick)
   // Map monsters a scene walked out go back to their spots (so they never block a path afterwards).
   for(const n of intro.held||[]) { n.held=false; n.path=[]; n.move=null; n.idle=1+Math.random(); if(n.monster&&!n.scripted&&n.heldFrom&&!n.sunk) { n.x=n.heldFrom.x; n.y=n.heldFrom.y; } }
   intro.held=[];

@@ -624,7 +624,7 @@ function updateNPCs(dt) {
       // A cutscene keeps townsfolk out of the picture (engine/story.js stageZone); one walking out of it (stageShoo) may pass through.
       if(typeof stageZone!=='undefined'&&stageZone&&intro.active&&!n.stageShoo&&stageInZone(n.path[0])&&!stageInZone(n)) { n.path=[]; n.idle=1+Math.random()*2; continue; }
       const next=n.path.shift();
-      if(startMove(n,directionTo(next.x-n.x,next.y-n.y))) { if(n.stageShoo&&n.move) n.move.duration*=.55; }
+      if(startMove(n,directionTo(next.x-n.x,next.y-n.y))) { if(n.stageShoo&&n.move) n.move.duration*=.4; }
       else {
         n.path=[];
         n.idle=.3+Math.random()*.8;
@@ -635,6 +635,7 @@ function updateNPCs(dt) {
     n.idle-=dt;
     if(n.idle<=0) {
       n.stageShoo=false;
+      if(typeof stageExtra==='function'&&stageZone&&stageExtra(n)&&stageInZone(n)) { stageShooOut(); n.idle=1; continue; }   // still in a scene's picture (its way out was blocked): try again
       choosePath(n);
       n.idle=1.2+Math.random()*2.5;
     }
