@@ -1939,7 +1939,7 @@ SCENES.ch6Park=[
   {call:()=>sfx.bark&&sfx.bark()},
   {talk:'Nara',lines:['Nara puts her nose to the grass and pulls. Hard. Left. Right. Back. Three fresh holes, three different directions.']},
   {talk:'Tom',lines:['The squirrels buried something in three different spots.']},
-  {talk:'Bernadette',lines:['Clear the squirrels out of those three spots, and your dog can dig up what they buried. I\'d bet a piece of that secret knock is in each hole.','I\'ll be here with my clipboard.']},
+  {talk:'Bernadette',lines:['Clear the squirrels out of those three spots, and Nara can dig up what they buried. I\'d bet a piece of that secret knock is in each hole.','I\'ll be here with my clipboard.']},
   {talk:'TNB',lines:['Babe, she has a corkboard with red string. I\'ve never felt so seen.']},
   {flag:'ch6-park'},
   {toast:'Goal: clear the playground (top left), the garden (top right) and the picnic tables (bottom left). Then let Nara dig.',time:5.5},

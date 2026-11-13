@@ -30,6 +30,7 @@ Other canon: Michael is about 10% taller than the other adults; Justin (6'5" in 
 ## Decided (Tom, Oct 2026)
 
 - Title: **The Adventures of Tom**. Hometown: Long Island (formerly "Little Elsewhere").
+- Pets (Tom, 2026-11-12): Tom and TNB have never had a dog and do not have one now. Growing up, Tom and Amy had a cat named Chester. The only pet in the game is Nara, Olivia and Michael's dog; when she travels with Tom she is being looked after, never called his or TNB's dog.
 - Three-area town structure: residential, commercial, monster area, reached through openings at screen edges.
 - Aunt Ellie (Deedee's aunt) lives in her own house on Rivituso Row (top left, purple roof, label ELLIE), not in the Rivituso house (decided 2026-10-28). She visits the Rivituso house for the chapter 9 card game with the girls and the chapter 10 homecoming dinner.
 - Story vision: about 40 hours, classic SNES JRPG structure with a sudden modern twist, shocking twists, extreme tragedy later undone, betrayal, growing love and bonds. Characters come and go from the party like Final Fantasy IV.
@@ -58,7 +59,7 @@ Other canon: Michael is about 10% taller than the other adults; Justin (6'5" in 
 - Monochrome Marlowe (grey suit, clipboard "NOTES: LESS") is Vance's fixer. He takes colour and sound out of places. Debuts in ch12, tells Tom Long Island is under glass and Deedee has been baking a crisp for hours.
 - Amber is warmth that got stuck. You do not break it, you give it somewhere to go: a warm pupusa for Doña Carmen, running laps for the Alvarez house.
 - Gridlock Prime is not angry, it is stuck. Nobody ever let it go first. Kind route: give it a green light.
-- Amy and TNB bond over Tom: he checks the door three times and stands in doorways with a thermos "for the cat". Tom's house wall has the girls' photos; he says good morning to them every day.
+- Amy and TNB bond over Tom: he checks the door three times before bed (at nine he told Mom it was so Chester, the family cat, couldn't get out) and stands in doorways with a thermos. Tom's house wall has the girls' photos; he says good morning to them every day.
 - Tombo ff2 "Run With Us, Mommy!" (Amy, Grace, Rose) unlocks in the Alvarez kitchen. Green Light keepsake from the boss.
 
 ## Chapter 13: The Subway Beneath the Sea of Clouds

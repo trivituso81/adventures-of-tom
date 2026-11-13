@@ -856,7 +856,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Amy | Proud | Everybody okay? Good. He’s a clipboard with legs. |
 | Nara | Loving | Nara sees Tom. Nara sees EVERYTHING that is not Tom disappear. |
 | Tom | Loving | Hi. Hi, bean. Yes. I know. You were so brave on the plane. |
-| TNB | Happy | Hey, babe. The airline lost my bag, found my dog, and upgraded us both. This place is nice. |
+| TNB | Happy | Hey, babe. The airline lost my bag, found Nara, and upgraded us both. This place is nice. |
 | Tom | Surprised | You came through the sky. |
 | TNB | Happy | I came through the sky with a dog on a pillow. It was fine. There was a pot on the cart that was kind of incredible. |
 | Grace | Happy | Hi! I’m Grace. I’m nine. |
@@ -940,7 +940,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Tom | Loving | TNB is the reason nothing is out of place. |
 | TNB | Happy | I’m the reason there are coasters. |
 | Nara | Angry | Nara checks the front gate. A squirrel is on the fence. Nara loses her entire mind. |
-| Tom | Loving | Come in. I’ll show you where I live. Mind the dog. And the sourdough. |
+| Tom | Loving | Come in. I’ll show you where I live. Wipe your paws, Nara. And mind the sourdough. |
 | Rose | Surprised | Tata. TATA. There’s a jar. It’s bubbling. It’s ALIVE. |
 | Tom | Unimpressed | That’s Bready Mercury. He’s nine years old, he’s flown Delta One, and he’s the only one in this house who gets fed on time. |
 | Grace | Surprised | You named your bread Mercury? Like the planet? |
@@ -975,10 +975,10 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Amy | Surprised | He taught my six-year-old to center clay in four minutes. I’ve been trying to get her to center her cereal for two years. |
 | Rose | Happy | Clay doesn’t move. Cereal moves. |
 | Amy | Happy | So. Tom. Tell me one thing he does when he thinks nobody is watching. |
-| TNB | Loving | He checks the front door three times before bed. Tells me it’s for the dog. |
-| Amy | Happy | He did that at nine. He told Mom it was for the cat. |
-| TNB | Surprised | You had a cat? |
-| Amy | Unimpressed | We never had a cat. |
+| TNB | Loving | He checks the front door three times before bed. Tells me it’s for the raccoons. |
+| Amy | Happy | He did that at nine. He told Mom it was so Chester couldn’t get out. |
+| TNB | Surprised | Who’s Chester? |
+| Amy | Unimpressed | Our cat. Chester never once tried to get out. |
 | TNB | Loving | The first night I fired the big kiln alone, it was three in the morning. I looked up and he was standing in the doorway. With a thermos and a blanket. Just in case. |
 | Amy | Loving | That is exactly him. He’s been standing in doorways with a thermos since he was nine. |
 | TNB | Loving | He thinks I didn’t see him. I fired a second kiln so he’d have a reason to stay. |

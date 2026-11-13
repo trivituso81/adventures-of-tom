@@ -7760,9 +7760,9 @@
 {
 "voice": "tnb",
 "speaker": "TNB",
-"text": "Hey, babe. The airline lost my bag, found my dog, and upgraded us both. This place is nice.",
+"text": "Hey, babe. The airline lost my bag, found Nara, and upgraded us both. This place is nice.",
 "ctx": "Chapter 11: ch11Meet",
-"script": "[easy, warm] Hey, babe. [wry, unbothered] The airline lost my bag, found my dog, and upgraded us both. [pleased, mellow] This place is nice."
+"script": "[easy, warm] Hey, babe. [wry, unbothered] The airline lost my bag, found Nara, and upgraded us both. [pleased, mellow] This place is nice."
 },
 {
 "voice": "tom",
@@ -8593,9 +8593,9 @@
 {
 "voice": "tom",
 "speaker": "Tom",
-"text": "Come in. I’ll show you where I live. Mind the dog. And the sourdough.",
+"text": "Come in. I’ll show you where I live. Wipe your paws, Nara. And mind the sourdough.",
 "ctx": "Scene ch12Arrive",
-"script": "[warm, dry] Come in. I’ll show you where I live. [mock serious] Mind the dog. And the sourdough."
+"script": "[warm, dry] Come in. I’ll show you where I live. [mock serious] Wipe your paws, Nara. And mind the sourdough."
 },
 {
 "voice": "rose",
@@ -8831,30 +8831,30 @@
 {
 "voice": "tnb",
 "speaker": "TNB",
-"text": "He checks the front door three times before bed. Tells me it’s for the dog.",
+"text": "He checks the front door three times before bed. Tells me it’s for the raccoons.",
 "ctx": "Scene ch12Loft",
-"script": "[amused, fond] He checks the front door three times before bed. [dry, easy] Tells me it’s for the dog."
+"script": "[amused, fond] He checks the front door three times before bed. [dry, easy] Tells me it’s for the raccoons."
 },
 {
 "voice": "amy",
 "speaker": "Amy",
-"text": "He did that at nine. He told Mom it was for the cat.",
+"text": "He did that at nine. He told Mom it was so Chester couldn’t get out.",
 "ctx": "Scene ch12Loft",
-"script": "[warm, nostalgic] He did that at nine. [sly, deadpan] He told Mom it was for the cat."
+"script": "[warm, nostalgic] He did that at nine. [sly, deadpan] He told Mom it was so Chester couldn’t get out."
 },
 {
 "voice": "tnb",
 "speaker": "TNB",
-"text": "You had a cat?",
+"text": "Who’s Chester?",
 "ctx": "Scene ch12Loft",
-"script": "[puzzled, light] You had a cat?"
+"script": "[puzzled, light] Who’s Chester?"
 },
 {
 "voice": "amy",
 "speaker": "Amy",
-"text": "We never had a cat.",
+"text": "Our cat. Chester never once tried to get out.",
 "ctx": "Scene ch12Loft",
-"script": "[dry, flat] We never had a cat."
+"script": "[dry, flat] Our cat. Chester never once tried to get out."
 },
 {
 "voice": "tnb",
@@ -18589,9 +18589,9 @@
 {
 "voice": "penny",
 "speaker": "penny",
-"text": "The lookouts first. Playground, garden, picnic tables. Then that dog of yours digs.",
+"text": "The lookouts first. Playground, garden, picnic tables. Then Nara digs.",
 "ctx": "",
-"script": "[brisk, authoritative] The lookouts first. Playground, garden, picnic tables. [knowing, pointed] Then that dog of yours digs."
+"script": "[brisk, authoritative] The lookouts first. Playground, garden, picnic tables. [knowing, pointed] Then Nara digs."
 },
 {
 "voice": "penny",

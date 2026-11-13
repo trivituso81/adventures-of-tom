@@ -151,7 +151,7 @@ SCENES.ch11Meet=[
   {hearts:'nara'},
   {talk:'Tom',lines:['Hi. Hi, bean. Yes. I know. You were so brave on the plane.']},
   {walk:'tnb',to:routeBeside('tnb'),speed:.2},
-  {talk:'TNB',lookAt:'TNB',lines:['Hey, babe. A gold boarding pass turned up on the loft door this morning, with my name and Nara’s on it. So we got on the plane.','The airline lost my bag, found my dog, and upgraded us both.']},
+  {talk:'TNB',lookAt:'TNB',lines:['Hey, babe. A gold boarding pass turned up on the loft door this morning, with my name and Nara’s on it. So we got on the plane.','The airline lost my bag, found Nara, and upgraded us both.']},
   {hearts:'tom'}, {hearts:'tnb'}, {call:()=>sfx.levelChime&&sfx.levelChime()},
   {talk:'Tom',lookAt:'TNB',lines:['You flew through the hole in the sky too.']},
   {talk:'TNB',lookAt:'TNB',lines:['I flew through a pink hole in the sky with a dog on a pillow. It was fine. There was a ceramic pot on the drinks cart that was kind of incredible.']},

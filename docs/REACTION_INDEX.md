@@ -1876,7 +1876,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | DING. Flight Zero from Los Angeles has arrived at the Jet Bridge. Welcome to the layover. Please do not feed the dog the pretzels. | Tom surprised, Amy surprised, Grace surprised, Rose surprised |
 | Nara | Nara sees Tom. Nara sees EVERYTHING that is not Tom disappear. | Tom loving, Amy happy, Grace happy, Rose happy, TNB loving |
 | Tom | Hi. Hi, bean. Yes. I know. You were so brave on the plane. | Nara loving, TNB loving, Amy happy, Grace happy, Rose happy |
-| TNB | Hey, babe. The airline lost my bag, found my dog, and upgraded us both. This place is nice. | Tom loving, Amy surprised, Grace surprised, Rose surprised, Nara happy |
+| TNB | Hey, babe. The airline lost my bag, found Nara, and upgraded us both. This place is nice. | Tom loving, Amy surprised, Grace surprised, Rose surprised, Nara happy |
 | Tom | You came through the sky. | TNB loving, Amy happy |
 | TNB | I came through the sky with a dog on a pillow. It was fine. There was a pot on the cart that was kind of incredible. | Tom loving, Amy unimpressed, Grace surprised, Rose surprised |
 | Grace | Hi! I’m Grace. I’m nine. | TNB happy, Tom happy, Amy happy, Nara happy |
@@ -2007,7 +2007,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Tom | TNB is the reason nothing is out of place. | TNB proud, Amy surprised, Grace happy |
 | TNB | I’m the reason there are coasters. | Tom loving, Amy happy, Grace happy |
 | Nara | Nara checks the front gate. A squirrel is on the fence. Nara loses her entire mind. | Tom unimpressed, TNB happy, Amy happy, Grace happy, Rose happy |
-| Tom | Come in. I’ll show you where I live. Mind the dog. And the sourdough. | Amy happy, TNB happy, Grace happy, Rose happy |
+| Tom | Come in. I’ll show you where I live. Wipe your paws, Nara. And mind the sourdough. | Amy happy, TNB happy, Grace happy, Rose happy |
 
 ## scene: ch12House (chapter 12)
 
@@ -2052,10 +2052,10 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Amy | He taught my six-year-old to center clay in four minutes. I’ve been trying to get her to center her cereal for two years. | TNB proud, Tom happy, Rose unimpressed |
 | Rose | Clay doesn’t move. Cereal moves. | Amy unimpressed, Tom happy, TNB happy, Grace unimpressed |
 | Amy | So. Tom. Tell me one thing he does when he thinks nobody is watching. | Tom scared, TNB happy |
-| TNB | He checks the front door three times before bed. Tells me it’s for the dog. | Tom scared, Amy happy, Grace happy, Rose happy |
-| Amy | He did that at nine. He told Mom it was for the cat. | Tom scared, TNB surprised, Grace happy, Rose happy |
-| TNB | You had a cat? | Amy happy, Tom scared |
-| Amy | We never had a cat. | TNB surprised, Tom scared, Grace happy, Rose happy |
+| TNB | He checks the front door three times before bed. Tells me it’s for the raccoons. | Tom scared, Amy happy, Grace happy, Rose happy |
+| Amy | He did that at nine. He told Mom it was so Chester couldn’t get out. | Tom scared, TNB surprised, Grace happy, Rose happy |
+| TNB | Who’s Chester? | Amy happy, Tom scared |
+| Amy | Our cat. Chester never once tried to get out. | TNB surprised, Tom scared, Grace happy, Rose happy |
 | TNB | The first night I fired the big kiln alone, it was three in the morning. I looked up and he was standing in the doorway. With a thermos and a blanket. Just in case. | Amy loving, Tom scared, Grace surprised |
 | Amy | That is exactly him. He’s been standing in doorways with a thermos since he was nine. | TNB loving, Tom scared, Grace happy |
 | TNB | He thinks I didn’t see him. I fired a second kiln so he’d have a reason to stay. | Amy loving, Tom surprised |
@@ -4337,7 +4337,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Bernadette | The lookouts first. Playground, garden, picnic tables. Then that dog of yours digs. | Tom proud, TNB proud, Nara proud |
+| Bernadette | The lookouts first. Playground, garden, picnic tables. Then Nara digs. | Tom proud, TNB proud, Nara proud |
 | Bernadette | Then the tree. There's a knock. I have only ever heard parts of it. | Tom surprised, TNB surprised, Nara surprised |
 
 ## map: map lofts, lines (chapter 2-10)

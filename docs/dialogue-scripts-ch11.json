@@ -453,10 +453,10 @@
   {
    "voice": "tnb",
    "speaker": "TNB",
-   "text": "Hey, babe. The airline lost my bag, found my dog, and upgraded us both. This place is nice.",
+   "text": "Hey, babe. The airline lost my bag, found Nara, and upgraded us both. This place is nice.",
    "ctx": "Chapter 11: ch11Meet",
    "after": null,
-   "script": "Hey, babe. The airline lost my bag, found my dog, and upgraded us both. This place is nice."
+   "script": "Hey, babe. The airline lost my bag, found Nara, and upgraded us both. This place is nice."
   },
   {
    "voice": "tom",

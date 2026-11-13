@@ -872,7 +872,7 @@ chapter	file	line	character	mood	text
 11	data/scenes-p2.js	131	Nara	loving	Nara sees Tom. Nara sees EVERYTHING that is not Tom disappear.
 11	data/scenes-p2.js	134	Tom	loving	Hi. Hi, bean. Yes. I know. You were so brave on the plane.
 11	data/scenes-p2.js	136	TNB	happy	Hey, babe. A gold boarding pass turned up on the loft door this morning, with my name and Nara’s on it. So we got on the plane.
-11	data/scenes-p2.js	136	TNB	happy	The airline lost my bag, found my dog, and upgraded us both.
+11	data/scenes-p2.js	136	TNB	happy	The airline lost my bag, found Nara, and upgraded us both.
 11	data/scenes-p2.js	138	Tom	surprised	You flew through the hole in the sky too.
 11	data/scenes-p2.js	139	TNB	happy	I flew through a pink hole in the sky with a dog on a pillow. It was fine. There was a ceramic pot on the drinks cart that was kind of incredible.
 11	data/scenes-p2.js	140	Grace	happy	Hi! I’m Grace. I’m nine.
@@ -955,7 +955,7 @@ chapter	file	line	character	mood	text
 12	data/scenes-ch12.js	50	Tom	loving	TNB is the reason nothing is out of place.
 12	data/scenes-ch12.js	51	TNB	happy	I’m the reason there are coasters.
 12	data/scenes-ch12.js	52	Nara	angry	Nara checks the front gate. A squirrel is on the fence. Nara loses her entire mind.
-12	data/scenes-ch12.js	53	Tom	loving	Come in. I’ll show you where I live. Mind the dog. And the sourdough.
+12	data/scenes-ch12.js	53	Tom	loving	Come in. I’ll show you where I live. Wipe your paws, Nara. And mind the sourdough.
 12	data/scenes-ch12.js	62	Rose	surprised	Tata. TATA. There’s a jar. It’s bubbling. It’s ALIVE.
 12	data/scenes-ch12.js	63	Tom	unimpressed	That’s Bready Mercury. He’s nine years old, he’s flown Delta One, and he’s the only one in this house who gets fed on time.
 12	data/scenes-ch12.js	64	Grace	surprised	You named your bread Mercury? Like the planet?
@@ -990,10 +990,10 @@ chapter	file	line	character	mood	text
 12	data/scenes-ch12.js	100	Amy	surprised	He taught my six-year-old to center clay in four minutes. I’ve been trying to get her to center her cereal for two years.
 12	data/scenes-ch12.js	101	Rose	happy	Clay doesn’t move. Cereal moves.
 12	data/scenes-ch12.js	102	Amy	happy	So. Tom. Tell me one thing he does when he thinks nobody is watching.
-12	data/scenes-ch12.js	103	TNB	loving	He checks the front door three times before bed. Tells me it’s for the dog.
-12	data/scenes-ch12.js	104	Amy	happy	He did that at nine. He told Mom it was for the cat.
-12	data/scenes-ch12.js	105	TNB	surprised	You had a cat?
-12	data/scenes-ch12.js	106	Amy	unimpressed	We never had a cat.
+12	data/scenes-ch12.js	103	TNB	loving	He checks the front door three times before bed. Tells me it’s for the raccoons.
+12	data/scenes-ch12.js	104	Amy	happy	He did that at nine. He told Mom it was so Chester couldn’t get out.
+12	data/scenes-ch12.js	105	TNB	surprised	Who’s Chester?
+12	data/scenes-ch12.js	106	Amy	unimpressed	Our cat. Chester never once tried to get out.
 12	data/scenes-ch12.js	107	TNB	loving	The first night I fired the big kiln alone, it was three in the morning. I looked up and he was standing in the doorway. With a thermos and a blanket. Just in case.
 12	data/scenes-ch12.js	108	Amy	loving	That is exactly him. He’s been standing in doorways with a thermos since he was nine.
 12	data/scenes-ch12.js	109	TNB	loving	He thinks I didn’t see him. I fired a second kiln so he’d have a reason to stay.

@@ -1310,11 +1310,11 @@ scene	6	data/scenes.js	ch6Park	Nara	Nara puts her nose to the grass and pulls. H
 scene	6	data/scenes.js	ch6Park	Nara	Nara puts her nose to the grass and pulls. Hard. Left. Right. Back. Three fresh holes, three different directions.	bernadette	surprised
 scene	6	data/scenes.js	ch6Park	Tom	The squirrels buried something in three different spots.	tnb	surprised
 scene	6	data/scenes.js	ch6Park	Tom	The squirrels buried something in three different spots.	bernadette	proud
-scene	6	data/scenes.js	ch6Park	Bernadette	Clear the squirrels out of those three spots, and your dog can dig up what they buried. I'd bet a piece of that secret knock is in each hole.	tom	proud
+scene	6	data/scenes.js	ch6Park	Bernadette	Clear the squirrels out of those three spots, and Nara can dig up what they buried. I'd bet a piece of that secret knock is in each hole.	tom	proud
 scene	6	data/scenes.js	ch6Park	Bernadette	I'll be here with my clipboard.	tom	proud
-scene	6	data/scenes.js	ch6Park	Bernadette	Clear the squirrels out of those three spots, and your dog can dig up what they buried. I'd bet a piece of that secret knock is in each hole.	tnb	happy
+scene	6	data/scenes.js	ch6Park	Bernadette	Clear the squirrels out of those three spots, and Nara can dig up what they buried. I'd bet a piece of that secret knock is in each hole.	tnb	happy
 scene	6	data/scenes.js	ch6Park	Bernadette	I'll be here with my clipboard.	tnb	happy
-scene	6	data/scenes.js	ch6Park	Bernadette	Clear the squirrels out of those three spots, and your dog can dig up what they buried. I'd bet a piece of that secret knock is in each hole.	nara	happy
+scene	6	data/scenes.js	ch6Park	Bernadette	Clear the squirrels out of those three spots, and Nara can dig up what they buried. I'd bet a piece of that secret knock is in each hole.	nara	happy
 scene	6	data/scenes.js	ch6Park	Bernadette	I'll be here with my clipboard.	nara	happy
 scene	6	data/scenes.js	ch6Park	TNB	Babe, she has a corkboard with red string. I've never felt so seen.	tom	happy
 scene	6	data/scenes.js	ch6Park	TNB	Babe, she has a corkboard with red string. I've never felt so seen.	bernadette	proud
@@ -2974,15 +2974,15 @@ scene	11	data/scenes-p2.js	ch11Meet	Tom	Hi. Hi, bean. Yes. I know. You were so b
 scene	11	data/scenes-p2.js	ch11Meet	Tom	Hi. Hi, bean. Yes. I know. You were so brave on the plane.	grace	happy
 scene	11	data/scenes-p2.js	ch11Meet	Tom	Hi. Hi, bean. Yes. I know. You were so brave on the plane.	rose	happy
 scene	11	data/scenes-p2.js	ch11Meet	TNB	Hey, babe. A gold boarding pass turned up on the loft door this morning, with my name and Nara’s on it. So we got on the plane.	tom	loving
-scene	11	data/scenes-p2.js	ch11Meet	TNB	The airline lost my bag, found my dog, and upgraded us both.	tom	loving
+scene	11	data/scenes-p2.js	ch11Meet	TNB	The airline lost my bag, found Nara, and upgraded us both.	tom	loving
 scene	11	data/scenes-p2.js	ch11Meet	TNB	Hey, babe. A gold boarding pass turned up on the loft door this morning, with my name and Nara’s on it. So we got on the plane.	amy	surprised
-scene	11	data/scenes-p2.js	ch11Meet	TNB	The airline lost my bag, found my dog, and upgraded us both.	amy	surprised
+scene	11	data/scenes-p2.js	ch11Meet	TNB	The airline lost my bag, found Nara, and upgraded us both.	amy	surprised
 scene	11	data/scenes-p2.js	ch11Meet	TNB	Hey, babe. A gold boarding pass turned up on the loft door this morning, with my name and Nara’s on it. So we got on the plane.	grace	surprised
-scene	11	data/scenes-p2.js	ch11Meet	TNB	The airline lost my bag, found my dog, and upgraded us both.	grace	surprised
+scene	11	data/scenes-p2.js	ch11Meet	TNB	The airline lost my bag, found Nara, and upgraded us both.	grace	surprised
 scene	11	data/scenes-p2.js	ch11Meet	TNB	Hey, babe. A gold boarding pass turned up on the loft door this morning, with my name and Nara’s on it. So we got on the plane.	rose	surprised
-scene	11	data/scenes-p2.js	ch11Meet	TNB	The airline lost my bag, found my dog, and upgraded us both.	rose	surprised
+scene	11	data/scenes-p2.js	ch11Meet	TNB	The airline lost my bag, found Nara, and upgraded us both.	rose	surprised
 scene	11	data/scenes-p2.js	ch11Meet	TNB	Hey, babe. A gold boarding pass turned up on the loft door this morning, with my name and Nara’s on it. So we got on the plane.	nara	happy
-scene	11	data/scenes-p2.js	ch11Meet	TNB	The airline lost my bag, found my dog, and upgraded us both.	nara	happy
+scene	11	data/scenes-p2.js	ch11Meet	TNB	The airline lost my bag, found Nara, and upgraded us both.	nara	happy
 scene	11	data/scenes-p2.js	ch11Meet	Tom	You flew through the hole in the sky too.	tnb	loving
 scene	11	data/scenes-p2.js	ch11Meet	Tom	You flew through the hole in the sky too.	amy	happy
 scene	11	data/scenes-p2.js	ch11Meet	TNB	I flew through a pink hole in the sky with a dog on a pillow. It was fine. There was a ceramic pot on the drinks cart that was kind of incredible.	tom	loving
@@ -3453,10 +3453,10 @@ scene	12	data/scenes-ch12.js	ch12Arrive	Nara	Nara checks the front gate. A squir
 scene	12	data/scenes-ch12.js	ch12Arrive	Nara	Nara checks the front gate. A squirrel is on the fence. Nara loses her entire mind.	amy	happy
 scene	12	data/scenes-ch12.js	ch12Arrive	Nara	Nara checks the front gate. A squirrel is on the fence. Nara loses her entire mind.	grace	happy
 scene	12	data/scenes-ch12.js	ch12Arrive	Nara	Nara checks the front gate. A squirrel is on the fence. Nara loses her entire mind.	rose	happy
-scene	12	data/scenes-ch12.js	ch12Arrive	Tom	Come in. I’ll show you where I live. Mind the dog. And the sourdough.	amy	happy
-scene	12	data/scenes-ch12.js	ch12Arrive	Tom	Come in. I’ll show you where I live. Mind the dog. And the sourdough.	tnb	happy
-scene	12	data/scenes-ch12.js	ch12Arrive	Tom	Come in. I’ll show you where I live. Mind the dog. And the sourdough.	grace	happy
-scene	12	data/scenes-ch12.js	ch12Arrive	Tom	Come in. I’ll show you where I live. Mind the dog. And the sourdough.	rose	happy
+scene	12	data/scenes-ch12.js	ch12Arrive	Tom	Come in. I’ll show you where I live. Wipe your paws, Nara. And mind the sourdough.	amy	happy
+scene	12	data/scenes-ch12.js	ch12Arrive	Tom	Come in. I’ll show you where I live. Wipe your paws, Nara. And mind the sourdough.	tnb	happy
+scene	12	data/scenes-ch12.js	ch12Arrive	Tom	Come in. I’ll show you where I live. Wipe your paws, Nara. And mind the sourdough.	grace	happy
+scene	12	data/scenes-ch12.js	ch12Arrive	Tom	Come in. I’ll show you where I live. Wipe your paws, Nara. And mind the sourdough.	rose	happy
 scene	12	data/scenes-ch12.js	ch12House	Rose	Tata. TATA. There’s a jar. It’s bubbling. It’s ALIVE.	tom	happy
 scene	12	data/scenes-ch12.js	ch12House	Rose	Tata. TATA. There’s a jar. It’s bubbling. It’s ALIVE.	amy	surprised
 scene	12	data/scenes-ch12.js	ch12House	Rose	Tata. TATA. There’s a jar. It’s bubbling. It’s ALIVE.	tnb	happy
@@ -3581,20 +3581,20 @@ scene	12	data/scenes-ch12.js	ch12Loft	Rose	Clay doesn’t move. Cereal moves.	tn
 scene	12	data/scenes-ch12.js	ch12Loft	Rose	Clay doesn’t move. Cereal moves.	grace	unimpressed
 scene	12	data/scenes-ch12.js	ch12Loft	Amy	So. Tom. Tell me one thing he does when he thinks nobody is watching.	tom	scared
 scene	12	data/scenes-ch12.js	ch12Loft	Amy	So. Tom. Tell me one thing he does when he thinks nobody is watching.	tnb	happy
-scene	12	data/scenes-ch12.js	ch12Loft	TNB	He checks the front door three times before bed. Tells me it’s for the dog.	tom	scared
-scene	12	data/scenes-ch12.js	ch12Loft	TNB	He checks the front door three times before bed. Tells me it’s for the dog.	amy	happy
-scene	12	data/scenes-ch12.js	ch12Loft	TNB	He checks the front door three times before bed. Tells me it’s for the dog.	grace	happy
-scene	12	data/scenes-ch12.js	ch12Loft	TNB	He checks the front door three times before bed. Tells me it’s for the dog.	rose	happy
-scene	12	data/scenes-ch12.js	ch12Loft	Amy	He did that at nine. He told Mom it was for the cat.	tom	scared
-scene	12	data/scenes-ch12.js	ch12Loft	Amy	He did that at nine. He told Mom it was for the cat.	tnb	surprised
-scene	12	data/scenes-ch12.js	ch12Loft	Amy	He did that at nine. He told Mom it was for the cat.	grace	happy
-scene	12	data/scenes-ch12.js	ch12Loft	Amy	He did that at nine. He told Mom it was for the cat.	rose	happy
-scene	12	data/scenes-ch12.js	ch12Loft	TNB	You had a cat?	amy	happy
-scene	12	data/scenes-ch12.js	ch12Loft	TNB	You had a cat?	tom	scared
-scene	12	data/scenes-ch12.js	ch12Loft	Amy	We never had a cat.	tnb	surprised
-scene	12	data/scenes-ch12.js	ch12Loft	Amy	We never had a cat.	tom	scared
-scene	12	data/scenes-ch12.js	ch12Loft	Amy	We never had a cat.	grace	happy
-scene	12	data/scenes-ch12.js	ch12Loft	Amy	We never had a cat.	rose	happy
+scene	12	data/scenes-ch12.js	ch12Loft	TNB	He checks the front door three times before bed. Tells me it’s for the raccoons.	tom	scared
+scene	12	data/scenes-ch12.js	ch12Loft	TNB	He checks the front door three times before bed. Tells me it’s for the raccoons.	amy	happy
+scene	12	data/scenes-ch12.js	ch12Loft	TNB	He checks the front door three times before bed. Tells me it’s for the raccoons.	grace	happy
+scene	12	data/scenes-ch12.js	ch12Loft	TNB	He checks the front door three times before bed. Tells me it’s for the raccoons.	rose	happy
+scene	12	data/scenes-ch12.js	ch12Loft	Amy	He did that at nine. He told Mom it was so Chester couldn’t get out.	tom	scared
+scene	12	data/scenes-ch12.js	ch12Loft	Amy	He did that at nine. He told Mom it was so Chester couldn’t get out.	tnb	surprised
+scene	12	data/scenes-ch12.js	ch12Loft	Amy	He did that at nine. He told Mom it was so Chester couldn’t get out.	grace	happy
+scene	12	data/scenes-ch12.js	ch12Loft	Amy	He did that at nine. He told Mom it was so Chester couldn’t get out.	rose	happy
+scene	12	data/scenes-ch12.js	ch12Loft	TNB	Who’s Chester?	amy	happy
+scene	12	data/scenes-ch12.js	ch12Loft	TNB	Who’s Chester?	tom	scared
+scene	12	data/scenes-ch12.js	ch12Loft	Amy	Our cat. Chester never once tried to get out.	tnb	surprised
+scene	12	data/scenes-ch12.js	ch12Loft	Amy	Our cat. Chester never once tried to get out.	tom	scared
+scene	12	data/scenes-ch12.js	ch12Loft	Amy	Our cat. Chester never once tried to get out.	grace	happy
+scene	12	data/scenes-ch12.js	ch12Loft	Amy	Our cat. Chester never once tried to get out.	rose	happy
 scene	12	data/scenes-ch12.js	ch12Loft	TNB	The first night I fired the big kiln alone, it was three in the morning. I looked up and he was standing in the doorway. With a thermos and a blanket. Just in case.	amy	loving
 scene	12	data/scenes-ch12.js	ch12Loft	TNB	The first night I fired the big kiln alone, it was three in the morning. I looked up and he was standing in the doorway. With a thermos and a blanket. Just in case.	tom	scared
 scene	12	data/scenes-ch12.js	ch12Loft	TNB	The first night I fired the big kiln alone, it was three in the morning. I looked up and he was standing in the doorway. With a thermos and a blanket. Just in case.	grace	surprised
@@ -8827,9 +8827,9 @@ map	6-10	data/maps-la.js	map oakpark, when {from:6,flag:ch6-done}	Bernadette	I s
 map	6-10	data/maps-la.js	map oakpark, when {from:6,flag:ch6-done}	Bernadette	You're a good neighbor, Tom. So is the dog. Mostly the dog.	tom	loving
 map	6-10	data/maps-la.js	map oakpark, when {from:6,flag:ch6-done}	Bernadette	You're a good neighbor, Tom. So is the dog. Mostly the dog.	tnb	happy
 map	6-10	data/maps-la.js	map oakpark, when {from:6,flag:ch6-done}	Bernadette	You're a good neighbor, Tom. So is the dog. Mostly the dog.	nara	proud
-map	6	data/maps-la.js	map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park}	Bernadette	The lookouts first. Playground, garden, picnic tables. Then that dog of yours digs.	tom	proud
-map	6	data/maps-la.js	map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park}	Bernadette	The lookouts first. Playground, garden, picnic tables. Then that dog of yours digs.	tnb	proud
-map	6	data/maps-la.js	map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park}	Bernadette	The lookouts first. Playground, garden, picnic tables. Then that dog of yours digs.	nara	proud
+map	6	data/maps-la.js	map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park}	Bernadette	The lookouts first. Playground, garden, picnic tables. Then Nara digs.	tom	proud
+map	6	data/maps-la.js	map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park}	Bernadette	The lookouts first. Playground, garden, picnic tables. Then Nara digs.	tnb	proud
+map	6	data/maps-la.js	map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park}	Bernadette	The lookouts first. Playground, garden, picnic tables. Then Nara digs.	nara	proud
 map	6	data/maps-la.js	map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park}	Bernadette	Then the tree. There's a knock. I have only ever heard parts of it.	tom	surprised
 map	6	data/maps-la.js	map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park}	Bernadette	Then the tree. There's a knock. I have only ever heard parts of it.	tnb	surprised
 map	6	data/maps-la.js	map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park}	Bernadette	Then the tree. There's a knock. I have only ever heard parts of it.	nara	surprised

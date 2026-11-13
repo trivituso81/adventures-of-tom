@@ -639,7 +639,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 6-10 | map oakpark, when {from:6,flag:ch6-done} | Proud | Case closed. I've filed my report. With myself. I approved it. |
 | 6-10 | map oakpark, when {from:6,flag:ch6-done} | Proud | I said they were organized. Nobody believed me. Write that down. |
 | 6-10 | map oakpark, when {from:6,flag:ch6-done} | Loving | You're a good neighbor, Tom. So is the dog. Mostly the dog. |
-| 6 | map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park} | Proud | The lookouts first. Playground, garden, picnic tables. Then that dog of yours digs. |
+| 6 | map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park} | Proud | The lookouts first. Playground, garden, picnic tables. Then Nara digs. |
 | 6 | map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park} | Surprised | Then the tree. There's a knock. I have only ever heard parts of it. |
 | 6 | scene ch6Park | Angry | Halt. Neighborhood Watch. State your business. |
 | 6 | scene ch6Park | Proud | I know who you are. You water your drought garden. Everybody knows. |
@@ -648,7 +648,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 6 | scene ch6Park | Angry | They have lookouts in the playground, a spy in the community garden, |
 | 6 | scene ch6Park | Angry | and somebody at the picnic tables stuffing their cheeks with anything that's not nailed down. |
 | 6 | scene ch6Park | Surprised | Everything they steal goes up THAT tree, the Old Oak. There's a little door in the trunk that opens with a secret knock. I've only ever heard bits of it. |
-| 6 | scene ch6Park | Proud | Clear the squirrels out of those three spots, and your dog can dig up what they buried. I'd bet a piece of that secret knock is in each hole. |
+| 6 | scene ch6Park | Proud | Clear the squirrels out of those three spots, and Nara can dig up what they buried. I'd bet a piece of that secret knock is in each hole. |
 | 6 | scene ch6Park | Proud | I'll be here with my clipboard. |
 | 6 | scene ch6End | Proud | Neighborhood Watch Captain’s report: case closed. |
 | 6 | scene ch6End | Proud | I'd like it noted that I was right. |

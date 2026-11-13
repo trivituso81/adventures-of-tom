@@ -334,7 +334,7 @@ chapters	file	line	character	where	mood	text
 6-10	data/maps-la.js	620	Bernadette	map oakpark, when {from:6,flag:ch6-done}	proud	Case closed. I've filed my report. With myself. I approved it.
 6-10	data/maps-la.js	620	Bernadette	map oakpark, when {from:6,flag:ch6-done}	proud	I said they were organized. Nobody believed me. Write that down.
 6-10	data/maps-la.js	620	Bernadette	map oakpark, when {from:6,flag:ch6-done}	loving	You're a good neighbor, Tom. So is the dog. Mostly the dog.
-6	data/maps-la.js	621	Bernadette	map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park}	proud	The lookouts first. Playground, garden, picnic tables. Then that dog of yours digs.
+6	data/maps-la.js	621	Bernadette	map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park}	proud	The lookouts first. Playground, garden, picnic tables. Then Nara digs.
 6	data/maps-la.js	621	Bernadette	map oakpark, when {chapter:6,notFlag:ch6-done,flag:ch6-park}	surprised	Then the tree. There's a knock. I have only ever heard parts of it.
 2-10	data/maps-la.js	1352	Jojo	map lofts, lines	loving	He talks about you a lot. Mostly "Tom said" and then a very long pause. Pottery pause. I know it well.
 2-10	data/maps-la.js	1353	Jojo	map lofts, lines	happy	I stopped by to borrow a mug. That was a while ago. I'm still on the couch. It's a good couch.
@@ -416,7 +416,7 @@ chapters	file	line	character	where	mood	text
 6	data/scenes.js	1937	Bernadette	scene ch6Park	angry	They have lookouts in the playground, a spy in the community garden,
 6	data/scenes.js	1937	Bernadette	scene ch6Park	angry	and somebody at the picnic tables stuffing their cheeks with anything that's not nailed down.
 6	data/scenes.js	1938	Bernadette	scene ch6Park	surprised	Everything they steal goes up THAT tree, the Old Oak. There's a little door in the trunk that opens with a secret knock. I've only ever heard bits of it.
-6	data/scenes.js	1942	Bernadette	scene ch6Park	proud	Clear the squirrels out of those three spots, and your dog can dig up what they buried. I'd bet a piece of that secret knock is in each hole.
+6	data/scenes.js	1942	Bernadette	scene ch6Park	proud	Clear the squirrels out of those three spots, and Nara can dig up what they buried. I'd bet a piece of that secret knock is in each hole.
 6	data/scenes.js	1942	Bernadette	scene ch6Park	proud	I'll be here with my clipboard.
 6	data/scenes.js	2139	Bernadette	scene ch6End	proud	Neighborhood Watch Captain’s report: case closed.
 6	data/scenes.js	2139	Bernadette	scene ch6End	proud	I'd like it noted that I was right.
@@ -436,22 +436,22 @@ chapters	file	line	character	where	mood	text
 7	data/scenes.js	2556	Page	scene ch7End	happy	Then we'll read it. Story time, Saturdays, out loud. And I think I know who should do the voices.
 7	data/scenes.js	2557	Page	scene ch7End	loving	Grace. This is for you. A Gold Library Card. No limit. No late fees. Ever.
 7	data/scenes.js	2561	Page	scene ch7End	loving	And sweaters. I knit one every winter. I have run out of people. Please take some.
-8	data/scenes.js	2761	Bernadette	scene ch8Block	proud	Tom. Good. Neighborhood Watch Captain, potluck committee chair. Forty RSVPs. Thirty-nine dishes. One bread guy.
-8	data/scenes.js	2761	Bernadette	scene ch8Block	angry	Every pilot light on 2nd Avenue went out at noon. Every one. Including mine. I had a casserole IN there.
-8	data/scenes.js	2763	Bernadette	scene ch8Block	angry	They said it's the weekend. I said it's the POTLUCK. They hung up. I've filed a report. With myself.
-8	data/scenes.js	2770	Bernadette	scene ch8Block	proud	The barn has been chained up for sixty years. Here, take the committee key. I'm the committee.
-8	data/scenes.js	2770	Bernadette	scene ch8Block	proud	We're closing the boulevard for the potluck tables, and I need the bread by six.
-8	data/scenes.js	2931	Bernadette	scene ch8End	proud	Forty loaves. Six o’clock. On the dot. Potluck committee report: we're a success.
-8	data/scenes.js	2931	Bernadette	scene ch8End	proud	The gumbo is hot. The casserole is hot. Everything is hot. I'd like it noted.
-8	data/scenes.js	2935	Mr. Washington	scene ch8End	loving	Tom. Come here. This was my daddy’s. He drove the 7 line out of that barn for thirty years. Night run. He swore by the biscuits.
-8	data/scenes.js	2935	Mr. Washington	scene ch8End	loving	He'd want it on somebody who went back in there and lit that stove. Here.
-8	data/scenes.js	2939	Mr. Washington	scene ch8End	proud	I know you will. Now stand up straight. He'd say that too.
-8	data/scenes.js	2940	Michael	scene ch8End	happy	Lachlan has eaten three rolls and fallen asleep in the bread basket. I'm leaving him there. He's happy.
-9	data/scenes.js	3175	Luna	scene ch9Luna	happy	Oh! Visitors. At night. Is that... is that an INVITATION?
-9	data/scenes.js	3177	Luna	scene ch9Luna	sad	Twelve years I have swept this floor. That little silver door in the back has never once opened. I thought it was a closet.
-9	data/scenes.js	3177	Luna	scene ch9Luna	sad	And my telescope can't find the moon. It's not behind a cloud. It's not anywhere. It's just GONE.
-9	data/scenes.js	3181	Luna	scene ch9Luna	surprised	...It wasn't a closet.
-10	data/scenes.js	3626	Sal	scene ch10Start	happy	Cab seven! Everybody in. We're going to Long Island Regional Airport, to the door nobody uses.
+8	data/scenes.js	2753	Bernadette	scene ch8Block	proud	Tom. Good. Neighborhood Watch Captain, potluck committee chair. Forty RSVPs. Thirty-nine dishes. One bread guy.
+8	data/scenes.js	2753	Bernadette	scene ch8Block	angry	Every pilot light on 2nd Avenue went out at noon. Every one. Including mine. I had a casserole IN there.
+8	data/scenes.js	2755	Bernadette	scene ch8Block	angry	They said it's the weekend. I said it's the POTLUCK. They hung up. I've filed a report. With myself.
+8	data/scenes.js	2762	Bernadette	scene ch8Block	proud	The barn has been chained up for sixty years. Here, take the committee key. I'm the committee.
+8	data/scenes.js	2762	Bernadette	scene ch8Block	proud	We're closing the boulevard for the potluck tables, and I need the bread by six.
+8	data/scenes.js	2923	Bernadette	scene ch8End	proud	Forty loaves. Six o’clock. On the dot. Potluck committee report: we're a success.
+8	data/scenes.js	2923	Bernadette	scene ch8End	proud	The gumbo is hot. The casserole is hot. Everything is hot. I'd like it noted.
+8	data/scenes.js	2927	Mr. Washington	scene ch8End	loving	Tom. Come here. This was my daddy’s. He drove the 7 line out of that barn for thirty years. Night run. He swore by the biscuits.
+8	data/scenes.js	2927	Mr. Washington	scene ch8End	loving	He'd want it on somebody who went back in there and lit that stove. Here.
+8	data/scenes.js	2931	Mr. Washington	scene ch8End	proud	I know you will. Now stand up straight. He'd say that too.
+8	data/scenes.js	2932	Michael	scene ch8End	happy	Lachlan has eaten three rolls and fallen asleep in the bread basket. I'm leaving him there. He's happy.
+9	data/scenes.js	3167	Luna	scene ch9Luna	happy	Oh! Visitors. At night. Is that... is that an INVITATION?
+9	data/scenes.js	3169	Luna	scene ch9Luna	sad	Twelve years I have swept this floor. That little silver door in the back has never once opened. I thought it was a closet.
+9	data/scenes.js	3169	Luna	scene ch9Luna	sad	And my telescope can't find the moon. It's not behind a cloud. It's not anywhere. It's just GONE.
+9	data/scenes.js	3173	Luna	scene ch9Luna	surprised	...It wasn't a closet.
+10	data/scenes.js	3619	Sal	scene ch10Start	happy	Cab seven! Everybody in. We're going to Long Island Regional Airport, to the door nobody uses.
 1-10	engine/followers.js	56	Amy	recruit ask	happy	Also. I've been standing still for four minutes and it's killing me. Want a running partner out there?
 1-10	engine/followers.js	57	Amy	recruit yes	happy	Finally. Try to keep up. I mean that with love.
 1-10	engine/followers.js	57	Amy	recruit no	unimpressed	Fine. I'll do burpees until you change your mind.
@@ -615,38 +615,38 @@ chapters	file	line	character	where	mood	text
 11	data/scenes-p2.js	258	Julian Vance	scene ch11Vance	angry	He lifts his hat. Behind his head, the big door’s gold clock spins, and every flap in the terminal clicks at once.
 11	data/scenes-p2.js	258	Julian Vance	scene ch11Vance	angry	The departures board beside the door unfolds, stands up on two legs, and steps out.
 11	data/scenes-p2.js	258	Julian Vance	scene ch11Vance	angry	FINAL CALL.
-12	data/scenes-ch12.js	126	Marlowe	scene ch12Marlowe	happy	Love it. Love the block. Love the lemons. So many lemons. What is that, a jacaranda? Needs less.
-12	data/scenes-ch12.js	128	Marlowe	scene ch12Marlowe	proud	I’m Marlowe. Monochrome Marlowe. I work for Mr. Vance, and I fix places.
-12	data/scenes-ch12.js	128	Marlowe	scene ch12Marlowe	proud	This place has too much going on: too much color, too many porches, and a dog doing something on a lawn.
-12	data/scenes-ch12.js	131	Marlowe	scene ch12Marlowe	unimpressed	That’s the problem with a neighborhood. Notes.
-12	data/scenes-ch12.js	133	Marlowe	scene ch12Marlowe	unimpressed	He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers.
-12	data/scenes-ch12.js	137	Marlowe	scene ch12Marlowe	proud	I can take the pink, the yellow, and the music out of that window. Mr. Vance likes it quiet. Quiet is safe. Quiet sells.
-12	data/scenes-ch12.js	139	Marlowe	scene ch12Marlowe	unimpressed	I don’t put things back. I take notes. Anyway, Mr. Prime will handle the intersection. Do take a look at the traffic. It’s very stationary.
-12	data/scenes-ch12.js	140	Marlowe	scene ch12Marlowe	happy	He walks off into the grey, humming a jingle that never resolves.
-12	data/scenes-ch12.js	162	Doña Carmen	scene ch12Carmen	surprised	A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes.
-12	data/scenes-ch12.js	164	Doña Carmen	scene ch12Carmen	surprised	...and THEN I told the man, the loroco is not optional. Tom! When did you get here? Why is everything so quiet?
-12	data/scenes-ch12.js	164	Doña Carmen	scene ch12Carmen	sad	Where did my pupusas go?
-12	data/scenes-ch12.js	166	Doña Carmen	scene ch12Carmen	sad	I was what? I had a whole sentence. I lost the sentence. It was a good sentence.
-12	data/scenes-ch12.js	168	Doña Carmen	scene ch12Carmen	angry	That man stood on my step and said my sign was “too busy.” I said the sign is busy because the food is good.
-12	data/scenes-ch12.js	168	Doña Carmen	scene ch12Carmen	loving	Go next door. The Alvarez house. They didn’t get any pupusas today. Take these. Feed the children first. The grown-ups will pretend they’re not hungry.
-12	data/scenes-ch12.js	178	Daisy	scene ch12Alvarez	surprised	Tom! Tom! Everybody stopped! Abuela stopped in the middle of saying NO!
-12	data/scenes-ch12.js	187	Don Beto	scene ch12Alvarez	angry	...and that is a FOUL! That is a foul! Who has the remote?
-12	data/scenes-ch12.js	190	Tony	scene ch12Alvarez	surprised	Why is there a woman running around my table? Why is it a good idea? It’s a very good idea.
-12	data/scenes-ch12.js	193	Mrs. Alvarez	scene ch12Alvarez	surprised	...NO. I said no. Why is everyone in my kitchen? Is that a mother running laps with two little girls?
-12	data/scenes-ch12.js	193	Mrs. Alvarez	scene ch12Alvarez	proud	...Okay. That one can stay.
-12	data/scenes-ch12.js	197	Mrs. Alvarez	scene ch12Alvarez	loving	Take lemons. Take ALL the lemons. Every yard in this city has too many and somebody always leaves them on my step.
-12	data/scenes-ch12.js	199	Daisy	scene ch12Alvarez	happy	Is it okay if I say that was the best thing that has ever happened in our kitchen?
-12	data/scenes-ch12.js	211	Marlowe	scene ch12Prime	angry	Look at that. You put the neighbors back. Very warm. Very busy. Very much not what I asked for.
-12	data/scenes-ch12.js	213	Marlowe	scene ch12Prime	proud	Notes. This intersection has no flow. Let me introduce our new Head of Traffic.
-12	data/scenes-ch12.js	213	Marlowe	scene ch12Prime	unimpressed	Mr. Prime! Please give them a moment to rethink the neighborhood.
-12	data/scenes-ch12.js	219	Marlowe	scene ch12Prime	unimpressed	It’s not angry. It’s stuck. Stuck is very quiet, and Mr. Vance likes quiet. Do be quick. The notes are due at five.
-12	data/scenes-ch12.js	247	Mr. Washington	scene ch12After	surprised	...and that is why you never trust a Tuesday. Hm? Why is everybody looking at me? Did I fall asleep? Again?
-12	data/scenes-ch12.js	248	Larry	scene ch12After	happy	I’m blowing leaves. The leaf landed. It LANDED. Thirty years I’ve waited. Thank you.
-12	data/scenes-ch12.js	251	Marlowe	scene ch12After	surprised	Love it. Hate it. Love it. Notes withdrawn.
-12	data/scenes-ch12.js	251	Marlowe	scene ch12After	happy	I’ll be Downtown, at the Movie Palace. Come by. I’ll have notes for the rest of the family.
-12	data/scenes-ch12.js	253	Marlowe	scene ch12After	proud	Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making a crisp.
-12	data/scenes-ch12.js	253	Marlowe	scene ch12After	proud	She’s been making the same one for hours.
-12	data/scenes-ch12.js	255	Marlowe	scene ch12After	unimpressed	Notes are due at five.
+12	data/scenes-ch12.js	136	Marlowe	scene ch12Marlowe	happy	Love it. Love the block. Love the lemons. So many lemons. What is that, a jacaranda? Needs less.
+12	data/scenes-ch12.js	138	Marlowe	scene ch12Marlowe	proud	I’m Marlowe. Monochrome Marlowe. I work for Mr. Vance, and I fix places.
+12	data/scenes-ch12.js	138	Marlowe	scene ch12Marlowe	proud	This place has too much going on: too much color, too many porches, and a dog doing something on a lawn.
+12	data/scenes-ch12.js	141	Marlowe	scene ch12Marlowe	unimpressed	That’s the problem with a neighborhood. Notes.
+12	data/scenes-ch12.js	143	Marlowe	scene ch12Marlowe	unimpressed	He lifts a clipboard. The top page says NOTES: LESS. He snaps his fingers.
+12	data/scenes-ch12.js	147	Marlowe	scene ch12Marlowe	proud	I can take the pink, the yellow, and the music out of that window. Mr. Vance likes it quiet. Quiet is safe. Quiet sells.
+12	data/scenes-ch12.js	149	Marlowe	scene ch12Marlowe	unimpressed	I don’t put things back. I take notes. Anyway, Mr. Prime will handle the intersection. Do take a look at the traffic. It’s very stationary.
+12	data/scenes-ch12.js	150	Marlowe	scene ch12Marlowe	happy	He walks off into the grey, humming a jingle that never resolves.
+12	data/scenes-ch12.js	172	Doña Carmen	scene ch12Carmen	surprised	A crack runs up the amber like sugar glass. Then another. Then it falls away in warm gold flakes.
+12	data/scenes-ch12.js	174	Doña Carmen	scene ch12Carmen	surprised	...and THEN I told the man, the loroco is not optional. Tom! When did you get here? Why is everything so quiet?
+12	data/scenes-ch12.js	174	Doña Carmen	scene ch12Carmen	sad	Where did my pupusas go?
+12	data/scenes-ch12.js	176	Doña Carmen	scene ch12Carmen	sad	I was what? I had a whole sentence. I lost the sentence. It was a good sentence.
+12	data/scenes-ch12.js	178	Doña Carmen	scene ch12Carmen	angry	That man stood on my step and said my sign was “too busy.” I said the sign is busy because the food is good.
+12	data/scenes-ch12.js	178	Doña Carmen	scene ch12Carmen	loving	Go next door. The Alvarez house. They didn’t get any pupusas today. Take these. Feed the children first. The grown-ups will pretend they’re not hungry.
+12	data/scenes-ch12.js	188	Daisy	scene ch12Alvarez	surprised	Tom! Tom! Everybody stopped! Abuela stopped in the middle of saying NO!
+12	data/scenes-ch12.js	197	Don Beto	scene ch12Alvarez	angry	...and that is a FOUL! That is a foul! Who has the remote?
+12	data/scenes-ch12.js	200	Tony	scene ch12Alvarez	surprised	Why is there a woman running around my table? Why is it a good idea? It’s a very good idea.
+12	data/scenes-ch12.js	203	Mrs. Alvarez	scene ch12Alvarez	surprised	...NO. I said no. Why is everyone in my kitchen? Is that a mother running laps with two little girls?
+12	data/scenes-ch12.js	203	Mrs. Alvarez	scene ch12Alvarez	proud	...Okay. That one can stay.
+12	data/scenes-ch12.js	207	Mrs. Alvarez	scene ch12Alvarez	loving	Take lemons. Take ALL the lemons. Every yard in this city has too many and somebody always leaves them on my step.
+12	data/scenes-ch12.js	209	Daisy	scene ch12Alvarez	happy	Is it okay if I say that was the best thing that has ever happened in our kitchen?
+12	data/scenes-ch12.js	221	Marlowe	scene ch12Prime	angry	Look at that. You put the neighbors back. Very warm. Very busy. Very much not what I asked for.
+12	data/scenes-ch12.js	223	Marlowe	scene ch12Prime	proud	Notes. This intersection has no flow. Let me introduce our new Head of Traffic.
+12	data/scenes-ch12.js	223	Marlowe	scene ch12Prime	unimpressed	Mr. Prime! Please give them a moment to rethink the neighborhood.
+12	data/scenes-ch12.js	229	Marlowe	scene ch12Prime	unimpressed	It’s not angry. It’s stuck. Stuck is very quiet, and Mr. Vance likes quiet. Do be quick. The notes are due at five.
+12	data/scenes-ch12.js	257	Mr. Washington	scene ch12After	surprised	...and that is why you never trust a Tuesday. Hm? Why is everybody looking at me? Did I fall asleep? Again?
+12	data/scenes-ch12.js	258	Larry	scene ch12After	happy	I’m blowing leaves. The leaf landed. It LANDED. Thirty years I’ve waited. Thank you.
+12	data/scenes-ch12.js	261	Marlowe	scene ch12After	surprised	Love it. Hate it. Love it. Notes withdrawn.
+12	data/scenes-ch12.js	261	Marlowe	scene ch12After	happy	I’ll be Downtown, at the Movie Palace. Come by. I’ll have notes for the rest of the family.
+12	data/scenes-ch12.js	263	Marlowe	scene ch12After	proud	Long Island is under glass now, you know. Mr. Vance put a dome over it. It’s very safe. Your mother is in her kitchen, making a crisp.
+12	data/scenes-ch12.js	263	Marlowe	scene ch12After	proud	She’s been making the same one for hours.
+12	data/scenes-ch12.js	265	Marlowe	scene ch12After	unimpressed	Notes are due at five.
 13	data/scenes-ch13.js	48	Sol	scene ch13Open	unimpressed	Tom. Sit. Not that chair. That chair is Sal’s. I keep it warm for him out of spite.
 13	data/scenes-ch13.js	49	Sol	scene ch13Open	unimpressed	Okay. Sal and I are cousins. You know that. What you don’t know is what we do between airport runs.
 13	data/scenes-ch13.js	51	Sol	scene ch13Open	sad	We carry letters. For eleven years we’ve run mail between Long Island and Los Angeles in the trunks of our cabs.

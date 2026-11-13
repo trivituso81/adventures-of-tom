@@ -618,7 +618,7 @@ LA_AREAS.push(
     npcs:[
       {name:'Bernadette',x:13,y:14,look:'bernadette',roam:0,lines:['Bernadette. Neighborhood Watch Captain, nineteen years. Nothing gets past me.','Except squirrels. I\'m working on it.'],
         when:[{...CH6_DONE,lines:['Case closed. I\'ve filed my report. With myself. I approved it.','I said they were organized. Nobody believed me. Write that down.','You\'re a good neighbor, Tom. So is the dog. Mostly the dog.']},
-              {...CH6_ON,flag:'ch6-park',lines:['The lookouts first. Playground, garden, picnic tables. Then that dog of yours digs.','Then the tree. There\'s a knock. I have only ever heard parts of it.']}]}],
+              {...CH6_ON,flag:'ch6-park',lines:['The lookouts first. Playground, garden, picnic tables. Then Nara digs.','Then the tree. There\'s a knock. I have only ever heard parts of it.']}]}],
     monsters:OAKPARK_MONSTER_SPOTS},
   // Inside the Old Oak, painted plate (art/oak.webp, engine/plate.js), 24 x 20 tiles (the 2026-10-31 repaint). One loop: the entry steps (bottom) to the big hub
   // deck with the tea table, the stove and the bed nook. A staircase on the left wall climbs to the war room (top left, the corkboard on its wall) and a

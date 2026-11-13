@@ -984,9 +984,9 @@
 {
 "voice": "penny",
 "speaker": "",
-"text": "Clear the squirrels out of those three spots, and your dog can dig up what they buried. I'd bet a piece of that secret knock is in each hole.",
+"text": "Clear the squirrels out of those three spots, and Nara can dig up what they buried. I'd bet a piece of that secret knock is in each hole.",
 "ctx": "v4 override",
-"script": "[commanding, crisp] Clear the squirrels out of those three spots, and your dog can dig up what they buried. I'd bet a piece of that secret knock is in each hole."
+"script": "[commanding, crisp] Clear the squirrels out of those three spots, and Nara can dig up what they buried. I'd bet a piece of that secret knock is in each hole."
 },
 {
 "voice": "penny",
@@ -1901,9 +1901,9 @@
 {
 "voice": "tnb",
 "speaker": "",
-"text": "The airline lost my bag, found my dog, and upgraded us both.",
+"text": "The airline lost my bag, found Nara, and upgraded us both.",
 "ctx": "v4 override",
-"script": "[wry, unbothered] The airline lost my bag, found my dog, and upgraded us both."
+"script": "[wry, unbothered] The airline lost my bag, found Nara, and upgraded us both."
 },
 {
 "voice": "tom",
