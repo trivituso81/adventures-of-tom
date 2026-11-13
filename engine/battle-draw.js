@@ -617,6 +617,7 @@ function updateNPCs(dt) {
     if(n.held) continue;   // moved by a cutscene (engine/story.js); the scene steps it
     if(n.still) { if(!(dialog.active&&dialog.npc===n)) n.facing=n.arriveFace||n.still; continue; }   // posed NPC (data/scenes.js ch9Pose): never walks, turns back to its pose after a chat
     if(n.move&&!advanceMove(n,dt)) continue;
+    if(n.amber) { n.path=[]; n.idle=1; continue; }   // set in amber (chapters 12 and 14): never wanders (Tom 2026-11-12)
     if(n.monster) { b7MonsterTick(n,dt); continue; }   // wandering monsters (engine/feel.js)
 
     if(n.path.length) {

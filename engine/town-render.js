@@ -69,6 +69,7 @@ function drawSheetActor(a,set) {
   const bp=a.scenePose&&typeof scenePoseDraw==='function'?scenePoseDraw(a,set,k):null;   // a battle pose borrowed for a cutscene (engine/story.js)
   const fr=bp?bp.rows:frames[fi],kd=bp?bp.k:k;
   const w=fr[0].length,h=fr.length,hk=h*kd,wk=w*kd;
+  a._figH=hk; a._figW=wk;   // the drawn size, read by the amber figure (engine/ch12-render.js)
   if(!a.noShadow) ellipse(cx,base+1+Math.round((a.lift||0)*k),Math.round(wk*.45),Math.round(4*k),'#2f493640');
   const m=a.isPlayer?(typeof playerMember==='function'?playerMember():hero):a.member;
   const noTint=painted||!!(bp&&bp.story);   // story poses are drawn as painted

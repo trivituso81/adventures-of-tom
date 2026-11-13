@@ -8,7 +8,27 @@
 // Wraps b7DrawMapFx (the last world-space pass in draw()). Loaded after engine/story.js.
 const LE_b7DrawMapFx_ch12=b7DrawMapFx;
 let ch12Grey=0,ch12GreyLast=0;
+// Painted amber figures (Art Library, tab NPCs, group Chapter 12 amber; baked by tools/sprite-bake/bake_amber.py into art/amber/<id>.webp).
+// A neighbor with a baked picture is drawn as that picture, sized from the figure it replaces; with none, the plain figure sits in the glass block below.
+const AMBER_IDS={'Mr. Washington':'washington',Marisol:'marisol',Larry:'larry','Doña Carmen':'carmen','Mrs. Alvarez':'alvarez','Don Beto':'beto',Tony:'tony',Yesenia:'yesenia',Claudia:'claudia',Kevin:'kevin'};
+const AMBER_V='20261112',AMBER_ART={};
+function amberArt(n) {
+  const id=AMBER_IDS[n.name]; if(!id) return null;
+  let a=AMBER_ART[id];
+  if(!a) { a=AMBER_ART[id]={img:new Image(),ok:false}; a.img.onload=()=>{ a.ok=true; }; a.img.src='art/amber/'+id+'.webp?v='+AMBER_V; }
+  return a.ok?a.img:null;
+}
+const LE_drawActor_ch12=drawActor;
+drawActor=function(a) {
+  const img=a.amber&&!a.hidden&&a._figH?amberArt(a):null;
+  if(!img) return LE_drawActor_ch12(a);
+  const p=position(a),cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2);
+  const h=Math.round(a._figH*1.12),w=Math.round(h*img.naturalWidth/img.naturalHeight);
+  ellipse(cx,base+1,Math.round(w*.42),5,'#2b2a2640');
+  gfx.drawImage(img,cx-Math.round(w/2),base+2-h,w,h);
+};
 function ch12Amber(n) {
+  if(amberArt(n)) return;   // the painted figure already carries its own amber
   const p=position(n),cx=Math.round((p.x+.5)*T),base=Math.round((p.y+1)*T-2);
   ellipse(cx,base+1,17,5,'#2b2a2640');
   gfx.save();

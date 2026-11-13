@@ -292,7 +292,7 @@ TRIGGERS.push(
 STORY_WORLD.push(()=>{
   if(STORY.mode!=='full') return;
   const on=STORY.chapter===12&&!!flag('ch12-marlowe')&&flag('battle:gridlockprime')!=='win';
-  const set=(map,names,test)=>{ const m=worlds[map]; if(!m) return; for(const n of m.npcs) if(names.includes(n.name)) n.amber=!!(on&&test()); };
+  const set=(map,names,test)=>{ const m=worlds[map]; if(!m) return; for(const n of m.npcs) if(names.includes(n.name)) { n.amber=!!(on&&test()); n.amberNarrator=true; } };   // amberNarrator: while amber, the narrator speaks their lines (engine/overworld.js openDialog)
   set('jpark',['Mr. Washington','Marisol','Larry'],()=>true);
   set('pupuseria',['Doña Carmen'],()=>!flag('ch12-carmen'));
   set('casa',['Mrs. Alvarez','Don Beto','Tony','Yesenia','Claudia','Kevin'],()=>!flag('ch12-alvarez'));

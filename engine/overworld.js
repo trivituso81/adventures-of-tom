@@ -59,6 +59,9 @@ function fitDialogPortrait() {
 if(window.ResizeObserver) new ResizeObserver(()=>fitDialogPortrait()).observe($('dialog'));
 
 function openDialog(name,lines,npc=null) {
+  // A neighbor set in amber does not speak: the narrator describes them (Tom 2026-11-12). No portrait, and they do not turn to face Tom.
+  const frozen=!!(npc&&npc.amber&&npc.amberNarrator);
+  if(frozen) name='Narrator';
   dialog.active=true;
   dialog.name=name;
   dialog.lines=lines.slice();
@@ -66,7 +69,7 @@ function openDialog(name,lines,npc=null) {
   dialog.npc=npc;
   queuedAction=false;
 
-  if(npc) {
+  if(npc&&!frozen) {
     npc.facing=directionTo(player.x-npc.x,player.y-npc.y);
     npc.path=[];
     npc.idle=1.3;
