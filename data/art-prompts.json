@@ -20258,6 +20258,13 @@
      "date": "2026-11-10",
      "from": "v1",
      "at": 1794338381187
+    },
+    {
+     "n": 1,
+     "file": "art/raw/npcs/npc-emotions-pip-v2.png",
+     "date": "2026-11-13",
+     "from": "v2",
+     "at": 1794602441591
     }
    ],
    "rejects": [],
