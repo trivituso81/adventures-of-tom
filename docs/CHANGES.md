@@ -1,3 +1,7 @@
+## 2026-11-12 (gclips9): phone clip export merged, 2044 clips (tag gclips9)
+- Tom 16:43: "update these voice clips" (`local-clips-export_5_.json`, 2085 clips, 37 voices, made 00:43 UTC 11-13).
+- Fact: `merge-local.js` run on the export minus 41 stale clips (35 old "Tommy" dialogue lines for Deedee, Tom, TNB, Michael and 2 Deedee battle hug clips that no live line plays; `unused_voice.py` must be 0). Result: 1994 replaced existing takes, 50 added (dialog-ch28.js, live lines that had no clip). Voice index rebuilt.
+
 ## 2026-11-12 (tomride2): Art Library entries for the missing Tom-carries-Rose frames (Art Library entries only, no game change)
 - Tom 17:07: asked for the missing shoulder-ride frames as a new character entry. Fact: five entries in the Characters tab, new group `Tom and Rose ride` (builder `tools/art-library/tomride-prompts.js`, added to make-prompts.js, spliced into data/art-prompts.json, 874 entries, validate OK, smoke FAILS []).
 - Entries (29 frames, 1 Generate press each): `tomride-press-start` (4: hold, annoyed, throw wind-up, follow-through), `tomride-toss` (5: grab, lift, launch, Rose in the air, Rose lands; last two Rose alone), `tomride-combo` (7: hoist, airplane level, airplane banked, boop, cloud look, headphones, night-light), `tomride-walk` (12: down, up, side, 4 each), `tomride-title` (1 large pose).
