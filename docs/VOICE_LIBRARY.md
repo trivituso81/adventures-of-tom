@@ -12,7 +12,7 @@ Title screen > ADMIN > VOICE LIBRARY opens `voices.html` inside the app.
 | Re-record | Every row IS a text box holding what ElevenLabs reads (words and [directions]); edits save as you type (Undo edits restores). Takes and record opens New take (ElevenLabs, same voice and settings as the game, best of three if a take loops) or Record my voice (speech to speech). Nara uses Sound Effects with a description and length. |
 | Choose | The newest take plays in the game on this phone at once. Use on any older take, or on Built into the game, switches. Takes are never lost unless he deletes one. |
 | Many at once | Every row has a checkbox; Select all N shown (under the filters) ticks everything the filters show. The bottom bar then reads N selected, Clear, Regenerate N (a new take for each, two at a time; Stop works). |
-| Keep for good | Export phone clips shares `local-clips-export.json` (`{clips:[{kind,voice,lineKind,text,mp3,script}]}`). Merge it as the section "Getting phone clips into the repo" below says. |
+| Keep for good | **Export pending clips** shares `local-clips-pending.json`: only clips recorded since the last upload (not in `data/merged-takes.json`, not already sent from this device, line still in the game). After the share they move to Show > **Sent, not merged yet**; once Claude merges them they leave every list. Re-recording a line makes it Pending again. **Export all phone clips** shares `local-clips-export.json` (`{clips:[{kind,voice,lineKind,text,mp3,script}]}`) with everything. Merge either as the section "Getting phone clips into the repo" below says (a pending export needs no stale-clip filtering). Pending = fingerprint in neither the merge list nor the device's `aot-vl-sent` (localStorage). |
 
 ## How it works
 

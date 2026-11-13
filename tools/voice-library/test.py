@@ -172,7 +172,7 @@ async def main():
         ok(await p2.evaluate("AUD.src.startsWith('data:audio/mpeg;base64,')&&AUD.src.length>50000"), 'play reads the saved audio and hands it to the audio element')
         # Export streams the clips out and keeps every audio string.
         async with p2.expect_download(timeout=60000) as dl:
-            await p2.click('#exp')
+            await p2.click('#expall')
         dfile = await dl.value; pth = os.path.join(SHOTS, 'vl-export-test.json'); await dfile.save_as(pth)
         exp = json.load(open(pth)); os.remove(pth)
         ok(len(exp['clips']) >= N2 and all(len(c.get('mp3', '')) > 50000 for c in exp['clips'][:20]), f"export has {len(exp['clips'])} clips with audio")
