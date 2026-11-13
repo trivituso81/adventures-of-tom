@@ -284,7 +284,7 @@ const SCENE_OPS={
   // Battle poses in a cutscene (Tom, Grace, Rose). {pose:'rose',f:'kneel',dir:'left'} holds a battle frame (hurtPose, kneel, ko, ...) until {pose:'rose',f:null}.
   cam:o=>S.call(()=>{ sceneCam=o.cam||null; }),
   // {zoom:1.6,time:.8}: eases the outdoor camera in (above 1) or back out ({zoom:1}) while the scene plays; the camera stays on Tom or the {cam} tile.
-  zoom:o=>({t:0,start(){ this.t=0; this.a=sceneZoom; },
+  zoom:o=>({t:0,start(){ this.t=0; this.a=sceneZoom; sceneZoomManual=true; },
     update(dt){ this.t+=dt; const u=Math.min(1,this.t/(o.time||.8)); setSceneZoom(this.a+(o.zoom-this.a)*ease(u)); return u>=1; }}),
   pose:o=>S.call(()=>{ const a=sceneActor(o.pose); if(!a) return; if(o.f||o.foe) { a.scenePose={f:o.f,foe:o.foe,end:o.end,dir:o.dir||(o.end?(position(a).x>position(player).x?'left':'right'):'left'),fps:o.fps,mid:o.mid}; if(o.mid&&typeof storyPosesLoad==='function') storyPosesLoad(o.mid); } else { a.scenePose=null; a.lift=0; } }),   // mid: the story sheet owner for an NPC with no member (a painted em_ pose on Deedee)
   // {knock:'tom',to:[x,y],delay,fly,arc,dir}: thrown to a spot (hurt frame in the air), lands with a bounce, then lies there (KO frame) until a getup.
@@ -545,7 +545,8 @@ function huddleGroup(withName,focus) {
   const named=typeof withName==='string'?sceneActor(withName):null;
   if(named&&named!==player&&!followers.includes(named)&&currentMap.npcs.includes(named)) { const p=stagePos(named);
     if(Math.hypot(p.x-tp.x,p.y-tp.y)<=9) { storyHold(named); add(named); } }
-  return {roster,others};
+  const fk=focus?stageFocus(focus):null;
+  return {roster,others,key:named&&others.includes(named)?named:fk&&fk.actor&&others.includes(fk.actor)?fk.actor:null};
 }
 const huddleFixed=(g,a)=>g.others.includes(a)||a.scenePose||a.scr;
 const huddleTurns=(g,a)=>!a.scenePose&&!a.scr&&(!a.still||a.held)&&!a.monster&&!a.move;
@@ -574,7 +575,100 @@ function huddleFails(g,clr,memo) {
   all.forEach((a,i)=>{ if(!huddleTurns(g,a)) return; const v=HUD_DIRV[a.facing]; if(!v) return;
     const o=P.filter((_,j)=>j!==i),mx=o.reduce((s,p)=>s+p.x,0)/o.length-P[i].x,my=o.reduce((s,p)=>s+p.y,0)/o.length-P[i].y;
     if((mx||my)&&v[0]*mx+v[1]*my<=0) out.add('face'); });
+  // Cutscene staging (Tom 2026-11-12): nobody in the party stands on, in front of or right behind the person the scene is about, and
+  // the party stays together on Tom's side of them. People a scene posed, placed or walked itself keep their marks.
+  const A=huddleAxis(g);
+  { const np=g.others.map(stagePos),tp=stagePos(player);
+    for(const a of g.roster) { if(huddleFixed(g,a)||a.stagePlaced) continue; const p=stagePos(a);
+      if(np.some(n=>stageCovers(p,n))) out.add('cover');
+      if(a!==player&&(Math.max(Math.abs(p.x-tp.x),Math.abs(p.y-tp.y))>4||(A&&(p.x-A.kp.x)*A.ax+(p.y-A.kp.y)*A.ay<1))) out.add('spread'); } }
   return out;
+}
+// The person a conversation is about (the NPC the line names, else the nearest one in the group) and the side of them the party takes:
+// Tom's side, snapped to up, down, left or right. gap: clear tiles kept between them and the party's front row (figures are 2.4 tiles
+// tall, so 3 rows when the party is above or below, 2 columns when it is beside them). On a short screen (`flat`: phone landscape shows
+// about 6 rows above the dialogue box) huddleFormation also tries the party beside them and keeps whichever fits the picture better.
+function huddleAxis(g) {
+  if(!g.others.length) return null;
+  const tp=stagePos(player),d=a=>{ const p=stagePos(a); return Math.hypot(p.x-tp.x,p.y-tp.y); };
+  const k=g.key&&g.others.includes(g.key)?g.key:g.others.slice().sort((a,b)=>d(a)-d(b))[0],kp=stagePos(k);
+  const dx=tp.x-kp.x,dy=tp.y-kp.y,flat=sceneRoomTiles().ah<7.5;
+  const ax=Math.abs(dx)>Math.abs(dy)?Math.sign(dx):0;
+  return {key:k,kp,ax,ay:ax?0:(dy<0?-1:1),gap:ax?STAGE.cols+1:STAGE.rows,flat};
+}
+// How tall a standing adult is drawn, in tiles: 2.4 on the streets, about 4 to 5 inside most painted rooms, 1.5 in Tom's house (engine/plate.js actorK).
+function stageFig() { const p=typeof PLATES!=='undefined'&&PLATES[currentMap.id];
+  if(p&&p.roomScale&&!currentMap.outside&&typeof roomPxPerFoot==='function') return Math.max(1.4,TOM_FEET*roomPxPerFoot(p.roomScale,0)/(ROOM_SCALE_REF/(currentMap.w*T))/T);
+  return 2.4; }
+// STAGE.rows and STAGE.cols: the room a figure is given when people line up (3 rows, 1 column everywhere, the same closeness as close1 and near1;
+// rooms draw people bigger, but Tom asked for the party to stand close there, 2026-11-12 22:22). STAGE.fig and STAGE.wide are for the camera only.
+const STAGE={get fig(){ return stageFig(); },rows:3,cols:1,get wide(){ return stageFig()>3.4?2:1; }};
+// A party member at m hides (or is hidden by) the person at n: on their tile, in front of them within a figure's height and a column, or right behind them.
+const stageCovers=(m,n,rows=STAGE.rows,cols=STAGE.cols)=>{ const dx=Math.abs(m.x-n.x),dy=m.y-n.y; return dy>=1&&dy<rows?dx<=cols:dy<=0&&dy>-rows&&dx<cols; };
+const stageClearOf=(p,n,rows=STAGE.rows,cols=STAGE.cols)=>Math.abs(p.x-n.x)>=cols+1||Math.abs(p.y-n.y)>=rows;   // open floor all round the person the scene is about
+// The party's formation for a conversation with someone: Tom faces them across the gap and the others line up beside and behind him (a row
+// abreast when they are above or below; a short zig-zag trailing away when they are to the side), one column each. Tom keeps his tile when it
+// already works. Tight spots relax the rules a level at a time (level 1: may stand ahead of Tom; 2: two-row column gap; 3: any free tile that
+// does not cover them).
+function huddleFormation(g,memo,clr) {
+  const A=huddleAxis(g),tp=stagePos(player),room=sceneRoomTiles();
+  if(!A) return huddleForm(g,memo,{kp:tp,ax:0,ay:1,gap:0,flat:room.ah<7.5},room,clr);   // the party on its own: a row around Tom
+  let best=huddleForm(g,memo,A,room,clr);
+  if(A.flat) for(const [ax,ay] of [[1,0],[-1,0],[0,1],[0,-1]]) { if(ax===A.ax&&ay===A.ay) continue;
+    const L=huddleForm(g,memo,Object.assign({},A,{ax,ay,gap:ax?STAGE.cols+1:STAGE.rows}),room,clr); L.cost+=2; if(L.slots&&L.cost<best.cost) best=L; }
+  return best;
+}
+function huddleForm(g,memo,A,room,clr) {
+  const map=currentMap,tp=stagePos(player),solo=!g.others.length,ROWS=STAGE.rows,COLS=STAGE.cols,FIG=STAGE.fig;
+  const wall=(x,y)=>clr.at(x,y)<1?2.5:clr.at(x,y)<2?.4:0;   // open floor is better than a spot against a wall
+  const np=g.others.map(stagePos);
+  const stays=a=>!!(huddleFixed(g,a)||(g.keep&&a.stagePlaced));   // keep: people the scene placed itself stay on their marks
+  const fixed=g.roster.filter(a=>a!==player&&stays(a)),fp=[...np,...fixed.map(stagePos)];
+  const mates=g.roster.filter(a=>a!==player&&!stays(a)),mp=mates.map(stagePos),N=mates.length;
+  const tomFixed=stays(player);
+  const busy=new Set(); for(const n of map.npcs) if(!n.hidden&&!followers.includes(n)) { const p=stagePos(n); busy.add(key(p.x,p.y)); }
+  const along=p=>(p.x-A.kp.x)*A.ax+(p.y-A.kp.y)*A.ay,perp=p=>(p.x-A.kp.x)*Math.abs(A.ay)+(p.y-A.kp.y)*Math.abs(A.ax);
+  const free=(x,y)=>!huddleBadTile(map,x,y,memo)&&!map.portals.has(key(x,y))&&!busy.has(key(x,y));
+  const leadOk=p=>free(p.x,p.y)&&np.every(n=>stageClearOf(p,n,ROWS,COLS))&&fp.every(t=>stageApart(t,p))&&along(p)>=A.gap;
+  // [across, away] from Tom. Beside someone: a zig-zag trailing away (one row either side on a short screen). Above or below: a row abreast.
+  const ideal=(A.ax?(A.flat?[[1,1],[-1,2],[1,3],[-1,4],[0,5],[1,6]]:[[1,1],[-1,2],[1,3],[2,2],[-1,4],[-2,3]]):[[-1,0],[1,0],[-2,0],[2,0],[-3,1],[3,1]])
+    .map(o=>A.ax?[o[0],o[1]*COLS]:[o[0]*COLS,o[1]]);   // inside a room figures are about two tiles wide
+  const at=(L,o)=>({x:L.x+o[0]*Math.abs(A.ay)+o[1]*A.ax,y:L.y+o[0]*Math.abs(A.ax)+o[1]*A.ay});
+  const leads=[];
+  if(tomFixed) leads.push({p:tp,c:0});
+  else { const stay=free(tp.x,tp.y)&&np.every(n=>!stageCovers(tp,n,ROWS,COLS))&&fp.every(t=>stageApart(t,tp))&&(solo||(along(tp)>=1&&along(tp)<=A.gap+3&&Math.abs(perp(tp))<=(A.flat?1:3)));
+    if(stay) leads.push({p:tp,c:0});
+    const I={x:A.kp.x+A.ax*A.gap,y:A.kp.y+A.ay*A.gap};
+    for(let y=I.y-4;y<=I.y+4;y++) for(let x=I.x-4;x<=I.x+4;x++) { const p={x,y}; if((x===tp.x&&y===tp.y)||!leadOk(p)) continue;
+      leads.push({p,c:1.5+.8*Math.hypot(x-I.x,y-I.y)+.5*Math.hypot(x-tp.x,y-tp.y)+(along(p)>A.gap+2?2:0)+(A.flat&&perp(p)?3*Math.abs(perp(p)):0)+wall(x,y)}); } }
+  let best=null;
+  for(const Ld of leads) { const L=Ld.p,taken=[...fp,L],slots=[],left=ideal.map(o=>at(L,o)); let cost=Ld.c,ok=true;
+    for(let k=0;k<N&&ok;k++) { let pick=null,pc=1e9,pi=-1;
+      for(let lv=0;lv<4&&!pick;lv++) for(let y=L.y-5;y<=L.y+5;y++) for(let x=L.x-5;x<=L.x+5;x++) { const p={x,y};
+        if(!free(x,y)||taken.some(t=>t.x===x&&t.y===y)) continue;
+        if(lv<3?!np.every(n=>stageClearOf(p,n,ROWS,COLS)):np.some(n=>stageCovers(p,n,ROWS,COLS))) continue;
+        if(lv<3&&!taken.every(t=>stageApart(t,p,lv>=2?2:3))) continue;
+        if(!solo&&lv<1&&along(p)<along(L)) continue;
+        if(!solo&&lv<3&&along(p)<1) continue;
+        if(A.flat&&lv<2&&Math.abs(p.y-L.y)>1) continue;   // short screen: stay within a row of Tom so everyone is in the picture
+        let wi=-1,wd=1e9; left.forEach((w,i)=>{ if(!w) return; const d=Math.hypot(x-w.x,y-w.y)+.3*i; if(d<wd) { wd=d; wi=i; } });   // the nearest formation mark still open (earlier marks first)
+        const c=wd+.7*Math.hypot(x-L.x,y-L.y)+lv*4+wall(x,y);
+        if(c<pc) { pc=c; pick=p; pi=wi; } }
+      if(!pick) ok=false; else { slots.push(pick); taken.push(pick); cost+=pc; if(pi>=0) left[pi]=null; } }
+    if(!ok) continue;
+    let bestA=[],ba=N?1e9:0;   // cheapest assignment of slots to people by walking distance
+    const perm=(used,cur)=>{ if(cur.length===N) { let t=0; cur.forEach((si,mi)=>{ t+=.1*Math.hypot(slots[si].x-mp[mi].x,slots[si].y-mp[mi].y); }); if(t<ba) { ba=t; bestA=cur.slice(); } return; }
+      for(let i=0;i<N;i++) if(!used[i]) { used[i]=true; cur.push(i); perm(used,cur); cur.pop(); used[i]=false; } };
+    if(N) perm([],[]);
+    cost+=ba;
+    { const B=[...np,L,...slots],xs=B.map(p=>p.x),ys=B.map(p=>p.y);   // everyone should fit the picture (the camera drops whoever does not)
+      cost+=8*Math.max(0,Math.max(...xs)-Math.min(...xs)+2*COLS-room.aw)+8*Math.max(0,Math.max(...ys)-Math.min(...ys)+FIG+.8-room.ah); }
+    if(!best||cost<best.cost) best={cost,L,slots:bestA.map(si=>slots[si])};
+  }
+  if(!best) return {movers:[],slots:null,cost:1e9};
+  const movers=mates.slice(),slots=best.slots.slice();
+  if(!tomFixed&&(best.L.x!==tp.x||best.L.y!==tp.y)) { movers.unshift(player); slots.unshift(best.L); }
+  return {movers,slots,cost:best.cost};
 }
 function huddleTurn(g) {   // everyone who can turn faces the middle of the others (their dominant direction, so it is always toward them)
   const all=[...g.roster,...g.others],P=all.map(stagePos);
@@ -582,6 +676,12 @@ function huddleTurn(g) {   // everyone who can turn faces the middle of the othe
     const mx=o.reduce((s,p)=>s+p.x,0)/o.length-P[i].x,my=o.reduce((s,p)=>s+p.y,0)/o.length-P[i].y;
     if(Math.abs(mx)<.25&&Math.abs(my)<.25) a.facing='down';   // standing in the middle of the others: face the camera, not one neighbour's back (close1)
     else a.facing=directionTo(mx,my); });
+  // In a conversation with someone the party looks at them (each member at the nearest of them) and they look at the party.
+  if(g.others.length) { const R=g.roster.map(stagePos),O=g.others.map(stagePos);
+    g.roster.forEach((a,i)=>{ if(!huddleTurns(g,a)) return; const k=g.key&&g.others.includes(g.key)?stagePos(g.key):O.slice().sort((p,q)=>Math.hypot(p.x-R[i].x,p.y-R[i].y)-Math.hypot(q.x-R[i].x,q.y-R[i].y))[0];
+      const dx=k.x-R[i].x,dy=k.y-R[i].y; if(dx||dy) a.facing=directionTo(dx,dy); });
+    const cx=R.reduce((s,p)=>s+p.x,0)/R.length,cy=R.reduce((s,p)=>s+p.y,0)/R.length;
+    g.others.forEach((a,i)=>{ if(!huddleTurns(g,a)) return; const dx=cx-O[i].x,dy=cy-O[i].y; if(dx||dy) a.facing=directionTo(dx,dy); }); }
   // lookAt (a talk step's `lookAt:'TNB'`): everyone who can turn, except that person, faces them instead of the middle of the group (Tom 2026-11-12: Grace faced Rose, not TNB)
   const la=g.lookAt; if(la) { const lp=stagePos(la);
     all.forEach((a,i)=>{ if(a===la||!huddleTurns(g,a)) return; const dx=lp.x-P[i].x,dy=lp.y-P[i].y; if(dx||dy) a.facing=directionTo(dx,dy); }); }
@@ -655,24 +755,53 @@ function huddleStep(o) {
       const fails=huddleFails(g,clr,memo);
       if(!fails.size) return;
       if(o.focus) { const fa=stageFocus(o.focus); if(fa&&fa.actor&&fa.seen&&!g.lookAt) g.lookAt=fa.actor; }   // boss scenes: {gather} owns the places (left of the boss, off its picture); here people only turn, toward the boss (bossbox1)
-      else if(fails.has('overlap')||fails.has('place')||fails.has('spread')) {
-        const keep=!fails.has('overlap')&&!fails.has('place');   // only standing apart: people the scene placed itself stay on their marks
-        let L=huddleLayout(g,clr,false,memo,keep);
-        if(!L.slots||!L.tight||L.cost>=6) { const L2=huddleLayout(g,clr,true,memo,keep); if(L2.slots&&(!L.slots||(L2.tight&&!L.tight)||(L2.tight===L.tight&&L2.cost<L.cost))) L=L2; }   // Tom stays unless that leaves the group cramped or apart
+      else if(fails.has('overlap')||fails.has('place')||fails.has('spread')||fails.has('cover')) {
+        const keep=!fails.has('overlap')&&!fails.has('place');   // only standing apart or covering: people the scene placed itself stay on their marks
+        g.keep=keep;
+        let L=huddleFormation(g,memo,clr);   // cutstage1: the formation facing the person; only when a cramped spot has no room for it (none found, or people would stack), the ring
+        if(L.slots) { const fx=[...g.roster,...g.others].filter(a=>!L.movers.includes(a)).map(stagePos),P=[...fx,...L.slots];
+          if(P.some((p,i)=>P.some((q,j)=>j>i&&!stageApart(p,q)))) L={slots:null}; }
+        if(!L.slots) { L=huddleLayout(g,clr,false,memo,keep);
+          if(!L.slots||!L.tight||L.cost>=6) { const L2=huddleLayout(g,clr,true,memo,keep); if(L2.slots&&(!L.slots||(L2.tight&&!L.tight)||(L2.tight===L.tight&&L2.cost<L.cost))) L=L2; } }   // Tom stays unless that leaves the group cramped or apart
         if(L.slots) L.movers.forEach((a,k)=>{ const t=L.slots[k],p=stagePos(a); a.x=p.x; a.y=p.y; a.move=null; a.lag=0; if(a.stageFaced!==undefined) a.stageFaced=false;
           let path=(t.x===p.x&&t.y===p.y)?[]:findPath(currentMap,a,t);
           if(!path.length&&(t.x!==p.x||t.y!==p.y)) path=[{x:t.x,y:t.y}];   // no walkable route: slide straight there
           this.moves.push({a,path,i:0}); });
       }
     },
-    update(dt){ if(this.sub) return this.sub.update(dt);
-      let done=true;
+    update(dt){ if(this.sub) { const d=this.sub.update(dt); if(d&&!this.framed) { this.framed=true; stageFrame(this.g,[]); } return d; }
+      let done=true; this.t=(this.t||0)+dt;
+      if(!this.framed) { this.framed=true; stageFrame(this.g,this.moves); }
+      if(this.t<2.2&&currentMap.npcs.some(n=>n.stageShoo&&(n.path.length||n.move)&&stageInZone(stagePos(n)))) done=false;   // give townsfolk a moment to walk out of the picture
       for(const m of this.moves) { const a=m.a;
         if(a.move&&!advanceMove(a,dt)) { done=false; continue; }
         if(m.i<m.path.length) { const t=m.path[m.i++]; a.facing=directionTo(t.x-a.x,t.y-a.y);
           a.move={fx:a.x,fy:a.y,tx:t.x,ty:t.y,elapsed:0,duration:.15}; done=false; } }
       if(done) huddleTurn(this.g);
       return done; }};
+}
+// ---------- Cutscene camera and bystanders (Tom, 2026-11-12) ----------
+// "We need to be zooming in on the characters and the NPC during cut scenes" and nobody may cover the person the scene is about.
+// After every {huddle} the camera frames the conversation (engine/overworld.js sceneAuto: it follows the group and zooms to fit it
+// between the top bar and the dialogue box), and townsfolk who wandered into the picture walk out of it and stay out until the scene
+// ends (stageZone, read by updateNPCs in engine/battle-draw.js). Posed, seated and scene-held people are left alone.
+let stageZone=null;
+const stageInZone=p=>!!stageZone&&p.x>=stageZone.x0&&p.x<=stageZone.x1&&p.y>=stageZone.y0&&p.y<=stageZone.y1;
+function stageFrame(g,moves) {
+  const all=[...g.roster,...g.others].filter(a=>!a.hidden); if(!all.length) return;
+  sceneAuto={actors:all,first:g.others.slice(),map:currentMap,fig:STAGE.fig,cols:STAGE.wide};
+  const P=all.map(a=>{ const m=(moves||[]).find(m=>m.a===a&&m.path.length); return m?m.path[m.path.length-1]:stagePos(a); }),xs=P.map(p=>p.x),ys=P.map(p=>p.y);   // where they will stand
+  stageZone={x0:Math.min(...xs)-STAGE.cols-1,x1:Math.max(...xs)+STAGE.cols+1,y0:Math.min(...ys)-STAGE.rows+1,y1:Math.max(...ys)+STAGE.rows};
+  const map=currentMap;
+  for(const n of map.npcs) { if(n.hidden||n.held||n.still||n.scripted||n.monster||n.seat||!(n.roam>0)||followers.includes(n)||all.includes(n)) continue;
+    const p=stagePos(n); if(!stageInZone(p)) continue;
+    // breadth-first to the nearest free tile outside the picture, then walk there
+    const seen=new Set([key(p.x,p.y)]),q=[p]; let goal=null;
+    for(let i=0;i<q.length&&i<600&&!goal;i++) { const c=q[i];
+      for(const [dx,dy] of [[0,-1],[-1,0],[1,0],[0,1]]) { const x=c.x+dx,y=c.y+dy,k=key(x,y); if(seen.has(k)||!walkable(map,x,y)||map.portals.has(k)) continue; seen.add(k);
+        if(!stageInZone({x,y})&&canOccupy(map,x,y,n)) { goal={x,y}; break; } q.push({x,y}); } }
+    if(!goal) continue;
+    const route=findPath(map,n,goal); if(route.length) { n.path=route; n.stageShoo=true; n.idle=2; } }
 }
 SCENE_OPS.huddle=huddleStep;
 // {approach:names} (near1, Tom 2026-11-12: "why does the party stay so far away? ... I just want them to be close in a normal way", the
@@ -960,7 +1089,7 @@ function storySpawn(o) {
 function storyDespawn(name) { for(const m of Object.values(worlds)) m.npcs=m.npcs.filter(n=>!(n.scripted&&n.name===name)); }
 const LE_endIntro_story=endIntro;
 endIntro=function() {
-  sceneCam=null; setSceneZoom(1);
+  sceneCam=null; sceneAuto=null; sceneZoomManual=false; stageZone=null;   // the camera eases back out to Tom (engine/overworld.js sceneAutoTick)
   // Map monsters a scene walked out go back to their spots (so they never block a path afterwards).
   for(const n of intro.held||[]) { n.held=false; n.path=[]; n.move=null; n.idle=1+Math.random(); if(n.monster&&!n.scripted&&n.heldFrom&&!n.sunk) { n.x=n.heldFrom.x; n.y=n.heldFrom.y; } }
   intro.held=[];

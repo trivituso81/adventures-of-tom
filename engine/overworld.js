@@ -340,7 +340,46 @@ function outdoorCover(map,width,height) {
 }
 // A cutscene can push the camera in on outdoor maps ({zoom:1.6,time:.8} in engine/story.js); 1 is the normal fit. endIntro resets it.
 let sceneZoom=1;
-function setSceneZoom(z) { z=Math.max(1,z); if(Math.abs(z-sceneZoom)<1e-4) return; sceneZoom=z; resize(); }
+function setSceneZoom(z) { z=Math.max(1,z); if(Math.abs(z-sceneZoom)<1e-4) return;
+  const oW=W,oH=H; sceneZoom=z; resize();
+  if(currentMap.outside) {   // keep the middle of the view where it was (no jump); the camera then eases to its target as usual
+    const mw=currentMap.w*T,mh=currentMap.h*T; camera.x+=(oW-W)/2; camera.y+=(oH-H)/2;
+    if(mw>W) camera.x=clamp(camera.x,0,mw-W); if(mh>H) camera.y=clamp(camera.y,0,mh-H); camera.snap=false; }
+}
+// Cutscene framing (Tom 2026-11-12: "we need to be zooming in on the characters and the NPC during cut scenes"). engine/story.js sets
+// sceneAuto={actors,map} after staging a conversation; while it is set the camera sits on the middle of those people and zooms in until they
+// fill the space between the top bar and the dialogue box (never past SCENE_ZOOM_MAX, never below the normal fit). People who walk too far
+// from Tom to fit drop out of the frame, so Tom is always in it. A scene's own {cam} gets the normal fit and its own {zoom} wins outright.
+// When the scene ends (sceneAuto=null) the zoom and the camera ease back to Tom.
+const SCENE_ZOOM_MAX=1.7,SCENE_ZOOM_MAX_ROOM=1.3,SCENE_SCALE_MAX=3.4;   // a room painting already fills the phone, so rooms zoom less
+let sceneAuto=null,sceneAutoCur=null,sceneAutoBox=null,sceneZoomManual=false;
+function sceneDialogH() { const el=document.getElementById('dialog'),h=el&&!el.hidden?el.offsetHeight:0; return Math.max(h,layout.landscape?156:292); }
+// Room for a conversation at the normal fit, in tiles, between the top bar and the dialogue box (phone landscape has under 6 rows).
+function sceneRoomTiles() { const base=scale/sceneZoom,top=layout.landscape?57:82;
+  return {aw:game.clientWidth/base/T,ah:Math.max(2,(game.clientHeight-top-sceneDialogH())/base/T),base}; }
+function sceneAutoTick(dt) {
+  if(sceneAuto&&sceneAuto.map!==currentMap) { sceneAuto=null; sceneAutoCur=null; }
+  const pp=position(player),k=Math.min(1,dt*4);
+  let tz=1,tgt=null;
+  if(sceneAuto) {
+    const {aw,ah,base}=sceneRoomTiles(),fig=sceneAuto.fig||2.4,cols=sceneAuto.cols||1;
+    const near=(a,b)=>Math.hypot(a.x-pp.x,a.y-pp.y)-Math.hypot(b.x-pp.x,b.y-pp.y),here=a=>!a.hidden&&(a===player||followers.includes(a)||currentMap.npcs.includes(a));
+    const A=[...sceneAuto.first.filter(here).map(a=>position(a)).sort(near),...sceneAuto.actors.filter(a=>here(a)&&!sceneAuto.first.includes(a)).map(a=>position(a)).sort(near)];   // the people Tom is talking to first, then the party
+    let x0=pp.x,x1=pp.x,y0=pp.y,y1=pp.y,lost=false; const nf=sceneAuto.first.filter(here).length;
+    for(const [i,p] of A.entries()) { const nx0=Math.min(x0,p.x),nx1=Math.max(x1,p.x),ny0=Math.min(y0,p.y),ny1=Math.max(y1,p.y);
+      if(nx1-nx0+2*cols>aw||ny1-ny0+fig+.8>ah) { if(i<nf) lost=true; continue; }   // would not fit even at the normal fit: leave them out
+      x0=nx0; x1=nx1; y0=ny0; y1=ny1; }
+    tgt={x:(x0+x1)/2,y:(y0+y1)/2-(fig-.9)/2};   // figures stand fig tiles (2.4 outdoors) above their feet, so the middle of the picture sits above the middle row
+    tz=clamp(Math.min(aw/(x1-x0+2*cols),ah/(y1-y0+fig+.8)),1,Math.max(1,currentMap.outside?Math.min(SCENE_ZOOM_MAX,SCENE_SCALE_MAX/base):Math.min(2.4,SCENE_ZOOM_MAX_ROOM*Math.max(1,4.4/fig))));   // rooms that draw people small (Tom's house) zoom further
+    sceneAutoBox={y0,y1,fig};
+    if(typeof sceneCam!=='undefined'&&sceneCam) tz=1;
+    if(lost) { tz=1; tgt=null; }   // someone Tom is talking to is too far away to frame (a boss across the room): the normal view on Tom, as before
+  }
+  if(!sceneZoomManual&&Math.abs(tz-sceneZoom)>1e-3) setSceneZoom(Math.abs(tz-sceneZoom)<.012?tz:sceneZoom+(tz-sceneZoom)*k);
+  if(tgt) { if(!sceneAutoCur) sceneAutoCur={x:pp.x,y:pp.y}; sceneAutoCur.x+=(tgt.x-sceneAutoCur.x)*k; sceneAutoCur.y+=(tgt.y-sceneAutoCur.y)*k; }
+  else if(sceneAutoCur) { sceneAutoCur.x+=(pp.x-sceneAutoCur.x)*k; sceneAutoCur.y+=(pp.y-sceneAutoCur.y)*k;
+    if(Math.hypot(pp.x-sceneAutoCur.x,pp.y-sceneAutoCur.y)<.05&&sceneZoom<1.02) sceneAutoCur=null; }
+}
 function resize() {
   const width=game.clientWidth,height=game.clientHeight;
   scale=currentMap.outside?outdoorCover(currentMap,width,height)*sceneZoom:!currentMap.outside&&width>=900&&height>=700?2:1;
@@ -364,6 +403,7 @@ function resize() {
     W=currentMap.w*T;
     H=Math.max(1,Math.ceil(height/scale));
   }
+  if(sceneZoom>1&&!currentMap.outside) { scale*=sceneZoom; W=Math.max(1,Math.ceil(width/scale-1e-6)); H=Math.max(1,Math.ceil(height/scale-1e-6)); }   // cutscene framing inside a room
   canvas.width=W;
   canvas.height=H;
   if(typeof plateSetK==='function') plateSetK.k=1;
@@ -376,8 +416,11 @@ function resize() {
 }
 
 function updateCamera(dt) {
-  const p=(typeof sceneCam!=='undefined'&&sceneCam)?{x:sceneCam[0],y:sceneCam[1]}:position(player);   // sceneCam: a cutscene holds the camera still (engine/story.js, {cam:[x,y]})
+  sceneAutoTick(dt);
+  const framed=!(typeof sceneCam!=='undefined'&&sceneCam)&&sceneAutoCur;
+  const p=(typeof sceneCam!=='undefined'&&sceneCam)?{x:sceneCam[0],y:sceneCam[1]}:sceneAutoCur||position(player);   // sceneCam: a cutscene holds the camera still (engine/story.js, {cam:[x,y]})
   const mw=currentMap.w*T,mh=currentMap.h*T;
+  const safeBottom0=safeBottom; if(framed&&sceneAuto) safeBottom=sceneDialogH()/scale;   // a framed conversation is centred above the dialogue box
   const available=Math.max(T*2,H-safeTop-safeBottom);
 
   const tx=mw<=W
@@ -389,20 +432,27 @@ function updateCamera(dt) {
   // Map shorter than the canvas: keep it centred in the safe band (blank space is unavoidable).
   let ty;
   const sqFit=!currentMap.outside&&typeof PLATES!=='undefined'&&PLATES[currentMap.id]&&PLATES[currentMap.id].square;
-  if(sqFit&&mh<H) ty=0;   // whole painting height fits (portrait): top flush, no vertical scroll
+  if(sqFit&&mh<H) { ty=0;   // whole painting height fits (portrait): top flush, no vertical scroll
+    if(framed&&sceneAuto&&sceneAutoBox) ty=Math.max(0,(sceneAutoBox.y1+1)*T+4-(H-safeBottom)); }   // unless the dialogue box would cover the people talking: slide the room up just enough
   else if(mh>=H) {
-    ty=clamp((p.y+.5)*T-safeTop-available/2,0,mh-H);
+    // A framed conversation on the last rows of an outdoor map: while the dialogue box is on screen the view may slide past the map's bottom
+    // edge by up to the part the box covers, so the people talking are never behind it (the strip past the edge is hidden by the box).
+    const dlg=document.getElementById('dialog'),under=framed&&sceneAuto&&sceneAutoBox&&currentMap.outside&&dlg&&!dlg.hidden?Math.max(0,dlg.offsetHeight/scale-6):0;
+    ty=clamp((p.y+.5)*T-safeTop-available/2,0,mh-H+under);
+    if(under) ty=Math.min(mh-H+under,Math.max(ty,(sceneAutoBox.y1+1)*T+4-(H-safeBottom)));
     // Square painted rooms only (rooms of the older fit keep their own): near the top or bottom edge the painting would be flush with the
     // screen and put Tom's tile under the title bar or the controls, so scroll past the edge just far enough to keep his tile in the safe
     // band; that strip shows the soft backdrop (engine/draw.js plateBackdrop). Outdoor maps do NOT do this (Tom, 2026-10-30): the camera
     // stops flush at the edge and Tom keeps walking, so he can end up behind the controls on the last rows of the map.
-    const lo=(p.y+1)*T-(H-safeBottom),hi=p.y*T-safeTop;
+    // A framed conversation keeps the whole group (lowest feet to highest head) between the top bar and the dialogue box, feet first.
+    const fb=framed&&sceneAuto&&sceneAutoBox,lo=((fb?fb.y1:p.y)+1)*T+(fb?4:0)-(H-safeBottom),hi=fb?Math.max(lo,(fb.y0+1-fb.fig)*T-safeTop):p.y*T-safeTop;
     const sqRoom=!currentMap.outside&&typeof PLATES!=='undefined'&&PLATES[currentMap.id]&&PLATES[currentMap.id].square;
     if(sqRoom&&lo<=hi) ty=clamp(ty,lo,hi);
   } else ty=mh<=available
       ? -(safeTop+(available-mh)/2)
       : clamp((p.y+.5)*T-available/2,0,mh-available)-safeTop;
 
+  safeBottom=safeBottom0;
   const amount=camera.snap?1:Math.min(1,dt*12);
   camera.x+=(tx-camera.x)*amount;
   camera.y+=(ty-camera.y)*amount;

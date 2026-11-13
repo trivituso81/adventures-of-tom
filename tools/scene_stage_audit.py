@@ -5,6 +5,9 @@
 #   hidden    a party member stands where painted scenery (gate boards, trees) covers them
 #   apart     a party member the scene did not pose or place stands away from the group (close1, hudTight in engine/story.js)
 #   facing    someone faces away from the rest of the group (dot product of facing and the direction to the others <= 0)
+#   cover     a party member or a bystander stands on, in front of or right behind an NPC the scene is about (cutstage1)
+#   spread    a party member stands more than 4 tiles from Tom
+#   offscreen Tom or the speaker is cut off by the screen edge or the dialogue box (portrait)
 # Usage (repo root):  python3 tools/scene_stage_audit.py run OUT [filter ...]   filter = trigger id prefixes (ch1-, ns-) or ids
 #                     python3 tools/scene_stage_audit.py report OUT [--all]      prints the table (failing scenes unless --all)
 # Output: OUT/<trigger id>.json (snapshots), OUT/<trigger id>-NN.png (one screenshot per dialogue page), OUT/summary.json.
@@ -55,14 +58,18 @@ SETUP=r"""(C)=>{ const L=window.__LE; splash.active=false; document.getElementBy
 SNAP=r"""()=>{ const P=a=>{ const p=position(a); return [Math.round(p.x*100)/100,Math.round(p.y*100)/100]; };
   const memo=new Map(),H=a=>{ const q=position(a); return typeof huddleHidden==='function'?huddleHidden(currentMap,Math.round(q.x),Math.round(q.y),memo):false; };
   const posed=a=>!!((a.scenePose&&!a.scenePose.emo)||a.scr);   // a mood pose is not choreography: the person must still face the group (close1)
-  const people=[{id:'tom',kind:'party',pos:P(player),facing:player.facing,posed:posed(player),placed:!!player.stagePlaced,hid:H(player)}];
-  for(const f of followers) if(!f.hidden&&(party.includes(f.member)||(typeof onBench==='function'&&onBench(f.member)))&&!f.seat) people.push({id:f.member.id,kind:'party',pos:P(f),facing:f.facing,posed:posed(f),placed:!!f.stagePlaced,hid:H(f)});
+  const dk=document.getElementById('dialog').getBoundingClientRect().top,cw=game.clientWidth;
+  // scr: where the figure is on the screen (portrait): [centre x, top of head y, feet y] in CSS px
+  const SC=a=>{ const q=position(a); return [Math.round(((q.x+.5)*T-camera.x)*scale),Math.round(((q.y+1-2.2)*T-camera.y)*scale),Math.round(((q.y+1)*T-camera.y)*scale)]; };
+  const people=[{id:'tom',kind:'party',pos:P(player),facing:player.facing,posed:posed(player),placed:!!player.stagePlaced,hid:H(player),scr:SC(player)}];
+  for(const f of followers) if(!f.hidden&&(party.includes(f.member)||(typeof onBench==='function'&&onBench(f.member)))&&!f.seat) people.push({id:f.member.id,kind:'party',pos:P(f),facing:f.facing,posed:posed(f),placed:!!f.stagePlaced,hid:H(f),scr:SC(f)});
   const pp=P(player);
   for(const n of currentMap.npcs){ if(n.hidden||followers.includes(n)) continue; const q=P(n);
     if(n.monster&&!(n.held||n.scripted||n.name===dialog.name)) { if(Math.hypot(q[0]-pp[0],q[1]-pp[1])<=10) people.push({id:n.name||n.monster,kind:'monster',pos:q,facing:n.facing,held:false,posed:true}); continue; }
-    if(n.held||n.scripted||n.name===dialog.name) people.push({id:n.name,kind:n.monster?'monster':'npc',pos:q,facing:n.facing,held:!!n.held||!!n.scripted,posed:!!(n.scenePose&&!n.scenePose.emo)}); }
+    if(n.held||n.scripted||n.name===dialog.name) people.push({id:n.name,kind:n.monster?'monster':'npc',pos:q,facing:n.facing,held:!!n.held||!!n.scripted,posed:!!(n.scenePose&&!n.scenePose.emo),scr:SC(n)});
+    else if(!n.monster&&Math.hypot(q[0]-pp[0],q[1]-pp[1])<=8) people.push({id:n.name,kind:'by',pos:q,facing:n.facing}); }   // by: a bystander (townsfolk not in the scene)
   const w=currentMap.w||(currentMap.plateMask&&currentMap.plateMask[0].length)||0,h=currentMap.h||(currentMap.plateMask&&currentMap.plateMask.length)||0;
-  return {who:dialog.name,idx:dialog.index,map:currentMap.id,w,h,people};
+  return {who:dialog.name,idx:dialog.index,map:currentMap.id,w,h,people,zoom:sceneZoom,dock:dk,cw,cam:!!sceneCam};
 }"""
 GRID=r"""()=>{ const w=currentMap.w||(currentMap.plateMask&&currentMap.plateMask[0].length)||0,h=currentMap.h||(currentMap.plateMask&&currentMap.plateMask.length)||0; const g=[];
   for(let y=0;y<h;y++){ let r=''; for(let x=0;x<w;x++) r+=walkable(currentMap,x,y)?'.':'#'; g.push(r); } return g; }"""
@@ -111,7 +118,8 @@ def clearance(grid):
 
 def score(snap,grid,clr):
     """Return the list of failures for one dialogue page."""
-    ppl=[p for p in snap['people'] if p['kind']!='monster' or p.get('held')]
+    by=[p for p in snap['people'] if p['kind']=='by']
+    ppl=[p for p in snap['people'] if p['kind']!='by' and (p['kind']!='monster' or p.get('held'))]
     # the group: everyone within 6 tiles of Tom
     tom=next(p for p in ppl if p['id']=='tom'); tx,ty=tom['pos']
     grp=[p for p in ppl if math.hypot(p['pos'][0]-tx,p['pos'][1]-ty)<=6]
@@ -124,7 +132,8 @@ def score(snap,grid,clr):
             if abs(P[i][0]-P[j][0])<1 and abs(P[i][1]-P[j][1])<3: fails.append(('overlap',f"{grp[i]['id']}+{grp[j]['id']}"))
     # centering: the group's centroid should have room around it. clearance at the centroid compared with the best clearance nearby.
     w,h=snap['w'],snap['h']
-    cx=sum(p[0] for p in P)/len(P); cy=sum(p[1] for p in P)/len(P)
+    PP=[q for p,q in zip(grp,P) if p['kind']=='party'] or P   # cutstage1: the party chooses where it stands (NPCs stay at their counters and walls), so measure the party
+    cx=sum(p[0] for p in PP)/len(PP); cy=sum(p[1] for p in PP)/len(PP)
     def cl(x,y):
         x=int(round(x)); y=int(round(y))
         return clr[y][x] if 0<=x<w and 0<=y<h else 0
@@ -155,6 +164,25 @@ def score(snap,grid,clr):
         fx,fy=DIRV[p['facing']]
         if any(fx*(m['pos'][0]-x)+fy*(m['pos'][1]-y)>0 for m in snap['people'] if m['kind']=='monster'): continue   # looking at a monster or the boss (bossbox1)
         if fx*mx+fy*my<=0: fails.append(('facing',f"{p['id']} faces {p['facing']}"))
+    # cutstage1 (Tom 2026-11-12): nobody covers the person the scene is about, the party stays together, and the camera shows them.
+    def covers(m,n):
+        dx=abs(m[0]-n[0]); dy=m[1]-n[1]
+        return dx<=1 if 1<=dy<=2 else (dx<1 and -2<=dy<=0)
+    npcs=[(p,q) for p,q in zip(grp,P) if p['kind']=='npc']
+    for p,q in zip(grp,P):
+        if p['kind']!='party' or p.get('posed') or p.get('placed'): continue
+        for n,nq in npcs:
+            if covers(q,nq): fails.append(('cover',f"{p['id']} covers {n['id']}"))
+        if p['id']!='tom' and max(abs(q[0]-round(tx)),abs(q[1]-round(ty)))>4: fails.append(('spread',f"{p['id']} is {max(abs(q[0]-round(tx)),abs(q[1]-round(ty)))} tiles from Tom"))
+    for b in by:
+        bq=(round(b['pos'][0]),round(b['pos'][1]))
+        for n,nq in npcs:
+            if covers(bq,nq): fails.append(('cover',f"bystander {b['id']} covers {n['id']}"))
+    if 'dock' in snap and not snap.get('cam'):
+        for p in grp:
+            if p['id']!='tom' and p['id']!=snap.get('who'): continue
+            sc=p.get('scr')
+            if sc and (sc[0]<8 or sc[0]>snap['cw']-8 or sc[1]<40 or sc[2]>snap['dock']+6): fails.append(('offscreen',f"{p['id']} at screen {sc}, dialogue box at {round(snap['dock'])}"))
     return fails,grp
 
 def run(out,filters):
@@ -251,10 +279,12 @@ def report(out,show_all=False):
         rows.append((T['id'],T['scene'],T['map'],len(d['snaps']),kinds,pages))
     bad=[r for r in rows if r[4]]
     print(f"{len(rows)} scenes audited, {len(bad)} with at least one failing page")
-    print('| trigger | scene | map | pages | overlap | offcenter | hidden | apart | facing | first failing page |'); print('|---|---|---|---|---|---|---|---|---|---|')
+    zs=[s.get('zoom',1) for fn in sorted(os.listdir(out)) if fn.endswith('.json') and fn!='summary.json' for s in json.load(open(os.path.join(out,fn)))['snaps']]
+    if zs: print(f"camera zoom over {len(zs)} dialogue pages: {sum(1 for z in zs if z>1.05)} zoomed in, mean {sum(zs)/len(zs):.2f}")
+    print('| trigger | scene | map | pages | overlap | offcenter | hidden | apart | facing | cover | spread | offscreen | first failing page |'); print('|---|---|---|---|---|---|---|---|---|---|---|---|---|')
     for r in (rows if show_all else bad):
         k=r[4]; first=f"p{r[5][0][0]}: "+'; '.join(f"{a} {b}" for a,b in r[5][0][1])[:90] if r[5] else ''
-        print(f"| {r[0]} | {r[1]} | {r[2]} | {r[3]} | {k.get('overlap',0)} | {k.get('offcenter',0)} | {k.get('hidden',0)} | {k.get('apart',0)} | {k.get('facing',0)} | {first} |")
+        print(f"| {r[0]} | {r[1]} | {r[2]} | {r[3]} | {k.get('overlap',0)} | {k.get('offcenter',0)} | {k.get('hidden',0)} | {k.get('apart',0)} | {k.get('facing',0)} | {k.get('cover',0)} | {k.get('spread',0)} | {k.get('offscreen',0)} | {first} |")
 
 if __name__=='__main__':
     if len(sys.argv)<3: print(__doc__); sys.exit(1)

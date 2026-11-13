@@ -621,8 +621,11 @@ function updateNPCs(dt) {
     if(n.monster) { b7MonsterTick(n,dt); continue; }   // wandering monsters (engine/feel.js)
 
     if(n.path.length) {
+      // A cutscene keeps townsfolk out of the picture (engine/story.js stageZone); one walking out of it (stageShoo) may pass through.
+      if(typeof stageZone!=='undefined'&&stageZone&&intro.active&&!n.stageShoo&&stageInZone(n.path[0])&&!stageInZone(n)) { n.path=[]; n.idle=1+Math.random()*2; continue; }
       const next=n.path.shift();
-      if(!startMove(n,directionTo(next.x-n.x,next.y-n.y))) {
+      if(startMove(n,directionTo(next.x-n.x,next.y-n.y))) { if(n.stageShoo&&n.move) n.move.duration*=.55; }
+      else {
         n.path=[];
         n.idle=.3+Math.random()*.8;
       }
@@ -631,6 +634,7 @@ function updateNPCs(dt) {
 
     n.idle-=dt;
     if(n.idle<=0) {
+      n.stageShoo=false;
       choosePath(n);
       n.idle=1.2+Math.random()*2.5;
     }
