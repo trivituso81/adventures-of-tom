@@ -157,7 +157,12 @@ const isDog=it=>it.v==='nara'&&it.t==='b';
 // Direction order: Tom's own edit here, then the direction the baked clip was actually made with (read from his ElevenLabs
 // history, see loadHistory), then the written one in the index.
 let HIST={}; try{ HIST=JSON.parse(localStorage.getItem('aot-vl-hist')||'{}')||{}; }catch(e){}
-const scriptOf=it=>SCRIPTS[lk(it)]!=null?SCRIPTS[lk(it)]:(HIST[lk(it)]!=null&&!it.rw&&!(voiceOf(it)||{}).ignore_history?HIST[lk(it)]:(isDog(it)?it.p:it.s));   // ignore_history (index): a recast voice uses its new written scripts; rw (index): a line whose direction was rewritten after its bake does too
+// Accent voices (index `accent`: Boppy, Justin, Amy): the accent is shown and sent at the start of EVERY [bracket], whatever the
+// script's source (Tom's edit, ElevenLabs history, index). The first bracket alone does not hold the accent through a line.
+function accentAll(a,s){ if(!a||!s) return s; const re=/new york/i.test(a)?/new york/i:/long island/i.test(a)?/long island/i:new RegExp(a.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i');
+  s=s.replace(/\[([^\]]*)\]/g,(m,t)=>re.test(t)?m:'['+a+(t.trim()?', '+t.trim():'')+']'); return /^\s*\[/.test(s)?s:'['+a+'] '+s; }
+const scriptOf=it=>isDog(it)?rawScriptOf(it):accentAll((voiceOf(it)||{}).accent,rawScriptOf(it));
+const rawScriptOf=it=>SCRIPTS[lk(it)]!=null?SCRIPTS[lk(it)]:(HIST[lk(it)]!=null&&!it.rw&&!(voiceOf(it)||{}).ignore_history?HIST[lk(it)]:(isDog(it)?it.p:it.s));   // ignore_history (index): a recast voice uses its new written scripts; rw (index): a line whose direction was rewritten after its bake does too
 const hasWritten=it=>HIST[lk(it)]!=null||!it.auto;
 const voiceOf=it=>IDX.voices[(it.t==='b'?'battle|':'dialog|')+it.v];
 const whoName=it=>it.v==='narrator'&&it.sp?'Narrator ('+it.sp+')':it.sp||(WHO[it.v]&&WHO[it.v].name)||it.v;   // narration boxes: the Narrator voice reads them (data/dialog-cast.js)
@@ -570,8 +575,7 @@ async function loadHistory(){
     const want=canonWords(it.x).join(' '); let h=V.m.get(want);
     if(!h){ const ww=want.split(' '); let best=null,bs=0; for(const c of V.list){ const cw=canonWords(c.text); if(Math.abs(cw.length-ww.length)>3) continue; const p=lcsPairs(cw,ww).length/Math.max(cw.length,ww.length); if(p>bs){ bs=p; best=c; } } if(bs>=.85) h=best; }
     if(!h) continue; const sc=retag(h.text,it.x); if(!sc) continue;
-    let out=sc; if(it.v==='boppy'&&!/new york/i.test(out)){ out=/^\[/.test(out)?out.replace(/^\[/,'[thick New York accent, '):'[thick New York accent] '+out; }
-    next[lk(it)]=out; got++; }
+    next[lk(it)]=sc; got++; }
   HIST=next; try{ localStorage.setItem('aot-vl-hist',JSON.stringify(HIST)); }catch(e){}
   btn.disabled=false; msg.textContent=histNote(); renderList();
   toast('Found the baked directions for '+got.toLocaleString()+' of '+IDX.items.length.toLocaleString()+' lines ('+total.toLocaleString()+' scripts in your history). Lines you edited here keep your edits.');

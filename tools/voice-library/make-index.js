@@ -126,6 +126,12 @@ if(voices['dialog|narrator']) voices['dialog|narrator'].speed=1.15; // ElevenLab
   } }
 for(const id of ['boppy','justin']) for(const k of ['battle|'+id,'dialog|'+id]){ const v=voices[k]; if(!v) continue;
   v.direction=id==='boppy'?'thick New York accent, deep voice':'thick New York accent'; }
+// Accent in EVERY bracket (Boppy and Justin since 2026-11-01; Amy added 2026-11-12, `amyaccent1`: Tom heard her Long Island accent
+// come and go, because her voice direction only reached the first bracket of each script and 230 of her 289 scripts have two or three).
+// `accent` on the voice entry makes voices.html show and send it in every bracket whatever the script's source (index, history, Tom's edit).
+const ACCENT={boppy:'thick New York accent',justin:'thick New York accent',amy:'heavy Long Island accent'};
+const ACCENT_HAS={boppy:/new york/i,justin:/new york/i,amy:/long island/i};
+for(const id in ACCENT) for(const k of ['battle|'+id,'dialog|'+id]) if(voices[k]) voices[k].accent=ACCENT[id];
 const vname=id=>id[0]==='?'?id.slice(1):(NAMES[id]||(CAST.voices[id]&&CAST.voices[id].name)||id);
 // Merge effects: battle clips only deepen Boppy (tools/battle-baker/merge.js); dialogue adds speaker or voice fx, Boppy, Grace shrink (tools/clip-audit/merge.py).
 const fxOf=(voice,speaker,battle)=>battle?voice==='boppy':!!((speaker&&CAST.speakerFx&&CAST.speakerFx[speaker])||voice==='boppy'||voice==='grace'||(CAST.voices[voice]&&CAST.voices[voice].fx));
@@ -273,11 +279,11 @@ items.forEach((it,i)=>it.i=i);
   console.log('rewritten after bake (history ignored):',n,'of',RW.size); }
 console.log('dialogue lines with no clip:',nNo,'('+nNoVoice+' have no voice cast yet)');
 const who={}; for(const it of items){ const k=it.v; who[k]=who[k]||{id:k,name:vname(k),n:0,family:!!NAMES[k]}; who[k].n++; }
-// Show the accent: write it at the start of EVERY [bracket] of every Boppy and Justin script, the way the baked takes had it
-// (finalText skips parts a script already has).
-for(const it of items) if(it.s&&(it.v==='boppy'||it.v==='justin')){
-  it.s=it.s.replace(/\[([^\]]*)\]/g,(m,t)=>/new york/i.test(t)?m:'[thick New York accent'+(t.trim()?', '+t.trim():'')+']');
-  if(!/^\s*\[/.test(it.s)) it.s='[thick New York accent] '+it.s; }
+// Show the accent: write it at the start of EVERY [bracket] of every Boppy, Justin and Amy script, the way the baked takes that
+// kept the accent had it (finalText skips parts a script already has).
+for(const it of items) if(it.s&&ACCENT[it.v]){ const A=ACCENT[it.v], H=ACCENT_HAS[it.v];
+  it.s=it.s.replace(/\[([^\]]*)\]/g,(m,t)=>H.test(t)?m:'['+A+(t.trim()?', '+t.trim():'')+']');
+  if(!/^\s*\[/.test(it.s)) it.s='['+A+'] '+it.s; }
 const out={made:new Date().toISOString().slice(0,10),files,voices,recast,who:Object.values(who).sort((a,b)=>(b.family-a.family)||(ORDER.indexOf(a.id)-ORDER.indexOf(b.id))||a.name.localeCompare(b.name)),
   chapters:Object.keys(titles).map(Number).sort((a,b)=>a-b).map(n=>({n,title:titles[n]})),items};
 fs.writeFileSync('data/voice-index.json',JSON.stringify(out));
