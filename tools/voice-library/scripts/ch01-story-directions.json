@@ -1,0 +1,306 @@
+{
+ "tag": "20261113ch1",
+ "lines": [
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Tata, look at the door. Deedee measured me two times since you left.",
+   "ctx": "chapter 1 (new)",
+   "script": "[proud, showing off] Tata, look at the door. [matter-of-fact] Deedee measured me two times since you left."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "I got one too. Mine's the low one.",
+   "ctx": "chapter 1 (new)",
+   "script": "[proud, bouncy] I got one too. [proud] Mine's the low one."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "Twenty years ago I'd have caught that thing before it got to the fence.",
+   "ctx": "chapter 1 (new)",
+   "script": "[boastful, wistful] Twenty years ago I'd have caught that thing before it got to the fence."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "Tom. You stay in front of those girls.",
+   "ctx": "chapter 1 (new)",
+   "script": "[serious, fatherly] Tom. [serious] You stay in front of those girls."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "A WHAT climbed in my window?",
+   "ctx": "chapter 1 (new)",
+   "script": "[shocked, incredulous] A WHAT climbed in my window?"
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "It has EYES! The mud has EYES!",
+   "ctx": "chapter 1 (new)",
+   "script": "[horrified, shrill] It has EYES! [shrill, urgent] The mud has EYES!"
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Forty years in this kitchen. I've had ants. I've had a raccoon. I have never had THAT.",
+   "ctx": "chapter 1 (new)",
+   "script": "[outraged, deadpan] Forty years in this kitchen. [outraged] I've had ants. I've had a raccoon. [shocked] I have never had THAT."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "It's so brown. It's the brownest thing I've ever seen.",
+   "ctx": "chapter 1 (new)",
+   "script": "[disgusted, dramatic] It's so brown. [dramatic] It's the brownest thing I've ever seen."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "It's running for the pond!",
+   "ctx": "chapter 1 (new)",
+   "script": "[urgent, alarmed] It's running for the pond!"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It talks.",
+   "ctx": "chapter 1 (new)",
+   "script": "[flat, unsettled] It talks."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "It talks AND it steals.",
+   "ctx": "chapter 1 (new)",
+   "script": "[exasperated, dry] It talks AND it steals."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "I've been bitten ten thousand times in my life. Not one of them ever said a word first.",
+   "ctx": "chapter 1 (new)",
+   "script": "[offended, dry] I've been bitten ten thousand times in my life. [deadpan] Not one of them ever said a word first."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Then nobody goes near the water. Stay close.",
+   "ctx": "chapter 1 (changed)",
+   "script": "[firm, quiet] Then nobody goes near the water. [firm, caring] Stay close."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "A MARBLE! There's a marble with a bug in it!",
+   "ctx": "chapter 1 (new)",
+   "script": "[delighted, squealing] A MARBLE! [delighted] There's a marble with a bug in it!"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "That's a dragonfly. It's inside an orange rock. Its wings are open and it's not moving.",
+   "ctx": "chapter 1 (new)",
+   "script": "[careful, serious] That's a dragonfly. [careful] It's inside an orange rock. [quiet, curious] Its wings are open and it's not moving."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Look at the grass. It's grey. Just this bit, the size of my hand.",
+   "ctx": "chapter 1 (new)",
+   "script": "[puzzled, sharp] Look at the grass. [sharp] It's grey. Just this bit, the size of my hand."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It isn't dried out. It's just grey. Like somebody took the green out.",
+   "ctx": "chapter 1 (new)",
+   "script": "[uneasy, quiet] It isn't dried out. [uneasy] It's just grey. [thoughtful] Like somebody took the green out."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "I'm keeping it. It's stuck.",
+   "ctx": "chapter 1 (new)",
+   "script": "[determined, pouting] I'm keeping it. [frustrated] It's stuck."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Let me.",
+   "ctx": "chapter 1 (new)",
+   "script": "[calm, patient] Let me."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "You're not trying.",
+   "ctx": "chapter 1 (new)",
+   "script": "[accusing, pouty] You're not trying."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I'm trying, Rose. It's a marble and it's winning.",
+   "ctx": "chapter 1 (new)",
+   "script": "[dry, patient] I'm trying, Rose. [dry, amused] It's a marble and it's winning."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "There's a little round hole in the side. Like somebody took a bite.",
+   "ctx": "chapter 1 (new)",
+   "script": "[curious, careful] There's a little round hole in the side. [amused] Like somebody took a bite."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "And somebody left a burnt light bulb. Now they're littering at my pond too.",
+   "ctx": "chapter 1 (new)",
+   "script": "[annoyed, sharp] And somebody left a burnt light bulb. [indignant] Now they're littering at my pond too."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "The tin. Go, go, go.",
+   "ctx": "chapter 1 (new)",
+   "script": "[urgent, commanding] The tin. Go, go, go."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Bye, marble. I'm coming back for you.",
+   "ctx": "chapter 1 (new)",
+   "script": "[sweet, determined] Bye, marble. [determined] I'm coming back for you."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "That's a fish. That fish is bigger than the cab.",
+   "ctx": "chapter 1 (new)",
+   "script": "[stunned] That's a fish. [awed] That fish is bigger than the cab."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Boppy was RIGHT?",
+   "ctx": "chapter 1 (new)",
+   "script": "[stunned, bossy] Boppy was RIGHT?"
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Nobody tell him.",
+   "ctx": "chapter 1 (new)",
+   "script": "[whispering, conspiratorial] Nobody tell him."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "The Big One",
+   "text": "This morning I was a fish. Then there was a big flash. Now I am a BIG fish. With a hat.",
+   "ctx": "chapter 1 (new)",
+   "script": "[bubbly, amazed] This morning I was a fish. [awed] Then there was a big flash. [proud] Now I am a BIG fish. [delighted] With a hat."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Tom, you stand in front of whoever it stares at. Cozy Rosie, make it laugh. Then we try again.",
+   "ctx": "chapter 1 (changed)",
+   "script": "[firm, commanding] Tom, you stand in front of whoever it stares at. [firm, encouraging] Cozy Rosie, make it laugh. [determined] Then we try again."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "The Big One",
+   "text": "And this is for the small one. It's my shiniest thing.",
+   "ctx": "chapter 1 (new)",
+   "script": "[shy, warm] And this is for the small one. [proud, warm] It's my shiniest thing."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "It has a bug on it! I'm keeping it.",
+   "ctx": "chapter 1 (new)",
+   "script": "[delighted, squealing] It has a bug on it! [determined] I'm keeping it."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "This one you can keep.",
+   "ctx": "chapter 1 (new)",
+   "script": "[warm, generous] This one you can keep."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "The Big One",
+   "text": "The old man with the cap. Is he coming tomorrow?",
+   "ctx": "chapter 1 (new)",
+   "script": "[hopeful, shy] The old man with the cap. [hopeful] Is he coming tomorrow?"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Boppy? He comes every day.",
+   "ctx": "chapter 1 (new)",
+   "script": "[matter-of-fact] Boppy? He comes every day."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "The Big One",
+   "text": "Good. Don't tell him I asked.",
+   "ctx": "chapter 1 (new)",
+   "script": "[sheepish, whispering] Good. [sheepish] Don't tell him I asked."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Boppy, the mud TALKED. And the mosquitoes. And a puddle.",
+   "ctx": "chapter 1 (new)",
+   "script": "[breathless, excited] Boppy, the mud TALKED. [excited] And the mosquitoes. And a puddle."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "The mud talked? Forty years in this town, the mud never said one word to me.",
+   "ctx": "chapter 1 (new)",
+   "script": "[incredulous, playful] The mud talked? [complaining, playful] Forty years in this town, the mud never said one word to me."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "He gave me a present. Look.",
+   "ctx": "chapter 1 (new)",
+   "script": "[proud, excited] He gave me a present. [excited] Look."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "That's real gold, Cozy Rosie. Gold like my teeth. Look.",
+   "ctx": "chapter 1 (new)",
+   "script": "[proud, playful] That's real gold, Cozy Rosie. [proud, joking] Gold like my teeth. [playful] Look."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Boppy has treasure in his mouth!",
+   "ctx": "chapter 1 (new)",
+   "script": "[delighted, gasping] Boppy has treasure in his mouth!"
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "You put that somewhere safe. Gold is for keeping.",
+   "ctx": "chapter 1 (new)",
+   "script": "[serious, fatherly] You put that somewhere safe. [wry] Gold is for keeping."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "Next time something comes in that window, I'm coming. Stomach or no stomach.",
+   "ctx": "chapter 1 (new)",
+   "script": "[determined, playful] Next time something comes in that window, I'm coming. [complaining, wry] Stomach or no stomach."
+  }
+ ]
+}
