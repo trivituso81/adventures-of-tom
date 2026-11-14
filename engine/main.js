@@ -106,7 +106,7 @@ startSplash();
   const d=document.createElement('button');
   d.type='button'; d.id='build-stamp'; d.setAttribute('aria-label','Build history');
   // On an iPhone Duo the stamp also shows the page size and pose the game measured, so Tom can read them back (docs/DUO.md).
-  d.textContent='build buildlog1';
+  d.textContent='build facing1';
   const build=d.textContent,stamp=()=>{ const w=typeof buildWhenLabel==='function'?buildWhenLabel(build.slice(6)).slice(2):'', duo=typeof duoMode!=='undefined'&&duoMode.device?window.innerWidth+'x'+window.innerHeight+(duoMode.open?' duo open':' duo folded'):'';
     d.textContent=build; for(const t of [w,duo]) if(t){ const s=document.createElement('small'); s.textContent=t; d.appendChild(s); } };
   window.BUILD_TAG=build.slice(6);
