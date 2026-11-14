@@ -24336,7 +24336,7 @@
    "prompt": "Create the actual environment painting for Old Oak Park from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram or example sheet.\n\nATTACHED IMAGES (in this order)\n1) the current painting of this place: use it for LAYOUT AND DETAILS. Keep the Old Oak, the playground, the community garden, the dog park, the paths, the lamps, the signs and every exit. Keep the same camera, the same canvas size and aspect, and every path, building, prop, exit and open space in the same place and the same size.\n2) the finished painting of Deedee and Boppy's house, the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nTHE ONE CHANGE\nOn the picnic lawn at the lower left of the park, one circle about the size of a house, holding all three picnic tables and the grass and benches round them, has lost its color. The color is gone from this one patch: every surface inside it is painted in only grey and pale silver-grey, with no green, no brown and no color at all, but still in the same brushwork and the same light and shadow. The grey patch has one clean, sharp, circular edge all the way round, as if it was cut with scissors. Outside the circle everything keeps its normal rich color, and the color even looks a little stronger next to the grey. The red-checked blanket, the plates and the picnic basket on the lawn are inside the circle and are grey too. Between the corners of the tables, strings of birthday streamers and paper bunting hang slack, and a plain birthday cake with candles stands on the middle table: all of it, inside the circle, painted grey. The far end of the last table (the one lowest and closest to the viewer) is bare and clear, with nothing on it, because a large object will be placed there by the game. Outside the circle the park keeps its normal rich color, and the greens look a little stronger next to the grey. Nothing in the sky above it.\nEverything else stays exactly as in attachment 1, painted with the same care. No people, no animals, no text added anywhere.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right."
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -24346,7 +24346,14 @@
      "at": 1794683729796
     }
    ],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-14",
+     "note": "The basket inside the block is too big. Redraw it as a small lunch-for-two basket, about a third of the block width (prompt updated).",
+     "from": "v1",
+     "at": 1794690000000
+    }
+   ],
    "id": "ch6-orange-block",
    "tab": "Props",
    "title": "Chapter 6: the orange block, bathtub-sized, an open picnic basket and a squirrel halfway into it, a small round dent low on the side (one object)",
