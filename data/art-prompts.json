@@ -22257,7 +22257,7 @@
     "art/raw/characters/rose-hero-v1.png"
    ],
    "prompt": "Draw a pose sheet of Tom and his little niece Rose for the scene where she climbs onto his shoulders.\n\nPicture 1 is the approved picture of Tom carrying Rose on his shoulders. Picture 2 is Tom. Picture 3 is Rose.\nCopy the attached pictures as exactly as possible in every frame: the same people, faces, hair, beard, clothes, shoes, colors, linework, painting style, level of detail and head size compared to the body. Only the poses change. Do not redesign anything. Rose is a small child, much smaller than Tom, and keeps the same size difference in every frame.\n\nOne image, a grid of 3 columns by 2 rows of equal tall cells (6 frames, numbered left to right, top to bottom), the same scale in every cell, Tom's soles on one ground line in every cell. In every frame the bodies and both faces point toward the viewer; a slight turn is fine. Rose's two shoes always show.\n\nRow 1:\n1. KNEEL. Tom kneels on one knee and leans forward slightly with a warm smile, hands gripping Rose's ankles. Rose is already seated on his shoulders, hands on top of his head, a happy little smile.\n2. LIFT. Tom half way up from a deep squat, back straight, feet wide, hands gripping Rose's ankles, face straining slightly but smiling. Rose seated on his shoulders, mouth open in an excited gasp, hands on his head.\n3. CHEER. Tom standing tall, feet apart, hands holding Rose's ankles, a proud grin. Rose seated on his shoulders with both arms thrown straight up, eyes squeezed shut, mouth wide open, cheering.\n\nRow 2:\n4. LAUGH. Tom standing and holding Rose at his side by her waist, her legs dangling, both of them laughing, Tom's head tipped toward her, Rose's head thrown back.\n5. HOP OFF. Tom in a half crouch, both hands out open at his sides to catch her, grinning up. Rose already in the air above him, springing off his shoulders, both arms flung wide, a delighted open-mouth smile, one shoe lifted.\n6. SIT. Tom standing straight, hands holding Rose's ankles, a dry half smile with one eyebrow slightly raised. Rose seated on his shoulders, hands resting on top of his head, a pleased small smile.\n\nRose sits on the back of Tom's shoulders behind his head, one leg down each side of his neck, her lower legs on the front of his chest, never in front of his face.\nBackground: one flat solid magenta #FF00FF filling the whole image. No magenta anywhere on the characters: pink shoes stay clearly pink. No grid lines, borders, numbers, labels, text, shadows, dust, motion lines, sparkles or glow effects. Nothing touches a cell edge. Family friendly. No other figures or objects.",
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -22272,6 +22272,14 @@
      "date": "2026-11-14",
      "from": "v1",
      "at": 1794615465593
+    }
+   ],
+   "rejects": [
+    {
+     "date": "2026-11-14",
+     "note": "not needed",
+     "from": "v1",
+     "at": 1794615578456
     }
    ]
   },
