@@ -25591,8 +25591,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\nPicture 1 is Tom's walking sheet (a tall grown man). Picture 2 is Rose's walking sheet (a six year old girl). Picture 3 is Grace's walking sheet (a nine year old girl). Picture 4 is the finished painting of Tom.\n\nPAINT THIS ONE POSE\nThe three of them standing shoulder to shoulder in a tight row, facing the viewer, all with their eyes squeezed shut and their mouths pressed in tight lines: Tom on the left, bent down at the knees and the waist, with both hands cupped over Rose's ears; Rose in the middle, on tiptoe, with both arms stretched out to the right with her hands flat over Grace's ears; Grace on the right, reaching up and across both hands over Tom's ears, so that all three are covering each other's ears in a circle.\nOn a plain flat magenta #FF00FF background, nothing else in the picture, no text, no shadow on the ground.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Copy each of the three from the attached pictures as exactly as possible: the same face, age, body, head size compared to the body, hair, clothes, colors, painting style and level of detail.\n- Keep the three heights correct: Tom is much taller than Grace, and Grace is taller than Rose. Keep each figure's head size as in their walking sheets. The three figures are close together, alone in the picture."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/ch7-page-sheet-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794697167002
+    }
+   ],
    "rejects": [],
    "id": "ch7-page-sheet",
    "tab": "Characters",
