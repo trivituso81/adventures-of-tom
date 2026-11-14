@@ -23387,8 +23387,16 @@
    "prompt": "Just the object, no people, no other items, just boppys cap Facing backwards with the coin tucked in the with a fish on it magenta bacground no words on it"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/ch3-tom-net-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794667814823
+    }
+   ],
    "rejects": [],
    "id": "ch3-tom-net",
    "tab": "Characters",
