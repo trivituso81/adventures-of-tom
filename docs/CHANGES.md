@@ -1,3 +1,10 @@
+## talk4 (2026-11-14): all ten talking sheets installed from their newest versions (Amy, Justin, Aunt Ellie, Olivia are new)
+- Tom 15:09: "There are updates to each characters talking sheets make sure you're using all the latest."
+- Fact: the newest sheets (tom v2, tnb v2, grace v2, rose v2, deedee v4, boppy v3, amy v1, justin v1, ellie v1, olivia v1) are 2 x 2 grids (tell, point / ask, answer), not one row of four. `cut()` in tools/sprite-bake/talk_frames.py assumed a row and sliced figures in half; it now detects the layout by aspect ratio (2 x 2 when width is under 1.5 x height).
+- All ten recut (heads x1.00 Tom, x1.21 TNB, x1.30 Grace and Rose, x1.27 Amy, x1.20 Justin, Ellie, Olivia, x1.13 Deedee, x1.10 Boppy), `bake_story_poses.py` rebaked: art/chars/<id>talk-story.webp for ten people, sets `<id>talk` in data/story-poses.js. `pipemo-story.webp` and `data/npc-poses.js` reverted as the procedure says.
+- docs/pose-facing.tsv: all 40 `tk_` rows re-judged by looking at the new heads (the old 24 rows were for earlier art; Boppy's point was marked left, now right). `pose-facing-apply.py` run, `--check` ok (600 frames).
+- NOT done: no talking pose looked at live on the map for the four new people, no landscape, no phone. Sizes follow the same rule as talk3 (Telling figure = overworld stand height).
+
 ## adminmusic2 (2026-11-14): Tom's ElevenLabs take replaces the first admin track
 - Tom sent his Music Library export (one take, `admin`, 90.1 s, prompt unchanged). Merged with `merge-local.py` (-20 LUFS, -1.5 dBTP, 96 kbps, fade-out cut at 87.4 s, so the track is now 87 s): music/admin.mp3, music/manifest.json, data/music-index.json, MC_TRACKS row (`admin` 87 s).
 - Purged the stand-in: tools/music-library/make-admin-ambient.py (the synthesized first version) deleted, docs/MUSIC_LIBRARY.md section 7 rewritten. Grep for make-admin-ambient: 0 references outside the adminmusic1 history entry.

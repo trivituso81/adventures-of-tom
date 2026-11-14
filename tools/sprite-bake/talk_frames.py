@@ -31,6 +31,8 @@ def src_path(cid):
 def cut(cid):
     rgba = _key(np.array(Image.open(src_path(cid)).convert('RGB')))
     H, W = rgba.shape[:2]
+    if W < 1.5 * H:   # 2 x 2 sheet (newer talk sheets): tell, point / ask, answer, row by row
+        return [EF.clean_cell(rgba[r * H // 2:(r + 1) * H // 2, c * W // 2:(c + 1) * W // 2].copy()) for r in range(2) for c in range(2)]
     return [EF.clean_cell(rgba[:, c * W // 4:(c + 1) * W // 4].copy()) for c in range(4)]
 
 
