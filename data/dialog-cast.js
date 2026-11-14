@@ -61,6 +61,7 @@ const DIALOG_CAST={
     'The Know-It-All':'grump',
     'Pop-Up Panic':'toad',
     'The Unread':'log',
+    'A dry old voice':'log','A picture book':'mudling',   // chapter 7: the Unread's first words through the doors, and a picture book asking for it again (a tiny voice shares the Mudling voice, account at 30 voices)
     'Lukewarm':'mudling',
     'Leftover':'mudling',
     'Wet Blanket':'log',

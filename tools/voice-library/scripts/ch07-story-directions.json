@@ -1,0 +1,1630 @@
+{
+ "tag": "20261114ch7",
+ "chapter": 7,
+ "lines": [
+  {
+   "voice": "sal",
+   "speaker": "Sol",
+   "text": "The 110 is open again. I heard a dog fixed it. I don't ask questions.",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[dry, matter-of-fact] The 110 is open again. I heard a dog fixed it. [deadpan] I don't ask questions."
+  },
+  {
+   "voice": "sal",
+   "speaker": "Sol",
+   "text": "LAX. The short way is open. A squirrel ran across the 110 this morning and didn't charge me a toll. First time all week.",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[easygoing] LAX. The short way is open. [amused, dry] A squirrel ran across the 110 this morning and didn't charge me a toll. [wry] First time all week."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Bready Mercury is in his crock, the crown fits, and the heel goes on your back fence on Saturday. A deal is a deal.",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[warm, firm] Bready Mercury is in his crock, the crown fits, and the heel goes on your back fence on Saturday. [fond, matter-of-fact] A deal is a DEAL."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "He was a Chairman, babe. You don't stiff a Chairman.",
+   "ctx": "chapter 7 (new)",
+   "script": "[easy, affectionate] [punchline] He was a CHAIRMAN, babe. [warm] You don't stiff a Chairman."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "And call me if it gets spooky. A library that whispers is how at least four horror movies start.",
+   "ctx": "chapter 7 (new)",
+   "script": "[lightly teasing] And call me if it gets spooky. [mock-ominous] A library that whispers is how at least FOUR horror movies start."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Four good ones.",
+   "ctx": "chapter 7 (new)",
+   "script": "[deadpan, fond] Four GOOD ones."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Go. See this one with your own eyes. I'll feed him fifty and fifty, and I'll sing.",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[tender, encouraging] Go. See this one with your own EYES. [easy, fond] I'll feed him fifty and fifty, and I'll sing."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "She'll be on your porch when you get home. She always is.",
+   "ctx": "chapter 7 (new)",
+   "script": "[confident, fond] She'll be on your porch when you get home. [warm] She always is."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "You're keeping my deal with a squirrel!",
+   "ctx": "chapter 7 (new)",
+   "script": "[outraged, delighted] You're keeping my deal with a SQUIRREL!"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Only four?",
+   "ctx": "chapter 7 (new)",
+   "script": "[curious, eager] Only FOUR?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "One throw. Then I have a plane to catch.",
+   "ctx": "chapter 7 (new)",
+   "script": "[fond, hurried] One throw. [firm, cheerful] Then I have a plane to catch."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "He made a crown for a jar of flour and water. I'm keeping him.",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[fond, amused] He made a crown for a jar of flour and water. [affectionate] I'm keeping him."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Six hours. Then I find out what a library says when it thinks nobody is listening.",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[eager, curious] Six hours. [dry, anticipating] Then I find out what a library says when it thinks nobody is LISTENING."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Thank you. Lovely flying.",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[grateful, sincere, soft] Thank you. [warm, proud] Lovely FLYING."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Tata! You came home! The library is still whispering. ALL the books at once, and they're telling everybody's SECRETS.",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[breathless, excited] Tata! You came HOME! [urgent] The library is still whispering. [outraged] ALL the books at once, and they're telling everybody's SECRETS."
+  },
+  {
+   "voice": "page",
+   "speaker": "Whispers",
+   "text": "...psst... the uncle is back... psst... he says thank you to the airplane when he gets off...",
+   "ctx": "chapter 7 (new)",
+   "script": "[sly, hushed whisper] ...psst... the uncle is BACK... psst... [giggly, hushed whisper] he says thank you to the AIRPLANE when he gets off..."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I heard that from all the way over HERE! And it's true! I do thank the airplane!",
+   "ctx": "chapter 7 (new)",
+   "script": "[shouting, proud] I heard that from all the way over HERE! [delighted, proud] And it's true! I DO thank the airplane!"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Tata, that's not how airplanes work. They can't hear you.",
+   "ctx": "chapter 7 (new)",
+   "script": "[patient, matter-of-fact] Tata, that's not how AIRPLANES work. [firm] They can't hear you."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It carried me all the way home, Grace. I'm not going to just walk off.",
+   "ctx": "chapter 7 (new)",
+   "script": "[earnest, warm] It carried me all the way HOME, Grace. [sincere] I'm not going to just WALK OFF."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "I say thank you to the bathtub.",
+   "ctx": "chapter 7 (new)",
+   "script": "[proud, loud, matter-of-fact] I say thank you to the BATHTUB."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "See? Rose gets it.",
+   "ctx": "chapter 7 (new)",
+   "script": "[thrilled] See? Rose GETS it."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Then we're going in together. I watched the last three on a phone. I'm seeing this one in person.",
+   "ctx": "chapter 7 (new)",
+   "script": "[determined, warm] Then we're going in TOGETHER. [wistful, resolved] I watched the last three on a phone. [firm] I'm seeing this one in PERSON."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Good, because I made the bigger chart. It has six rows, and I left room for seven. A library doesn't whisper for no reason, Tata.",
+   "ctx": "chapter 7 (new)",
+   "script": "[brisk, proud] Good, because I made the BIGGER chart. [bossy, precise] It has six rows, and I left room for SEVEN. [serious] A library doesn't whisper for no REASON, Tata."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Help! I'm stuck in Los ANGELES!",
+   "ctx": "chapter 7 (new)",
+   "script": "[muffled, panicked, yelling] Help! [punchline, shouting] I'm stuck in Los ANGELES!"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Don't wrinkle row SIX!",
+   "ctx": "chapter 7 (new)",
+   "script": "[alarmed, bossy] Don't wrinkle row SIX!"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "First stop is Deedee's. I've got three burnt bulbs for her drawer, and she's waiting for them.",
+   "ctx": "chapter 7 (new)",
+   "script": "[brisk, cheerful] First stop is Deedee's. [warm] I've got three burnt bulbs for her drawer, and she's waiting for THEM."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "My favorite son! The drawer is open. Hand them over.",
+   "ctx": "chapter 7 (new)",
+   "script": "[warm, commanding] My favorite SON! [brisk] The drawer is open. Hand them OVER."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "The movie studio, the kickball field and the picnic table. The last one came in a sandwich bag, Mom. It was evidence.",
+   "ctx": "chapter 7 (new)",
+   "script": "[earnest, proud] The movie studio, the kickball field and the picnic table. [defensive, pleading] The last one came in a sandwich bag, Mom. It was EVIDENCE."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Six, and every one the same. Sit down. Did you eat?",
+   "ctx": "chapter 7 (new)",
+   "script": "[brisk, sharp] Six, and every one the same. [commanding] Sit down. [stern, caring] Did you EAT?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "On the plane. Twice.",
+   "ctx": "chapter 7 (new)",
+   "script": "[sheepish, proud] On the plane. [hopeful] TWICE."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "That's not eating. That's a tray.",
+   "ctx": "chapter 7 (new)",
+   "script": "[flat, withering] [punchline] That's not EATING. That's a TRAY."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "Gracie, my crisp is under there.",
+   "ctx": "chapter 7 (new)",
+   "script": "[mild, plaintive] Gracie, my crisp is under THERE."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Your crisp is under California, Boppy. Don't move. I'm presenting.",
+   "ctx": "chapter 7 (new)",
+   "script": "[crisp, presenting, unbothered] Your crisp is under CALIFORNIA, Boppy. [firm] Don't move. [grand] I'm PRESENTING."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Row one, the dragonfly. A flash. A grey patch. An orange block. A round hole. A burnt bulb. And something that woke up, holding a gold coin.",
+   "ctx": "chapter 7 (new)",
+   "script": "[presenting, ticking off] Row one, the dragonfly. A flash. A grey patch. An orange block. A round hole. A burnt bulb. [building] And something that woke up, holding a gold COIN."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Row two, the lemon. Row three, the fish. Row four, the hat. Row five, the kickball. Row six, the picnic basket. Every row has the same six boxes, and every box is checked.",
+   "ctx": "chapter 7 (new)",
+   "script": "[presenting, quick] Row two, the lemon. Row three, the fish. Row four, the hat. Row five, the kickball. Row six, the picnic basket. [triumphant] Every row has the same six boxes, and every box is CHECKED."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "It's not six strange things. It's ONE strange thing, six times.",
+   "ctx": "chapter 7 (new)",
+   "script": "[hushed, dramatic] It's not six strange things. [slow, awed] It's ONE strange thing, six times."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "And the coin is the money for the gumball machine.",
+   "ctx": "chapter 7 (new)",
+   "script": "[cheerful, loud] And the coin is the money for the GUMBALL MACHINE."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "And every block is bigger than the one before. A plum, a grapefruit, a watermelon, a beach ball, a washing machine, a bathtub.",
+   "ctx": "chapter 7 (new)",
+   "script": "[brisk, ticking off] And every block is BIGGER than the one before. [listing] A plum, a grapefruit, a watermelon, a beach ball, a washing machine, a bathtub."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "My fish was no watermelon. Put down rowboat.",
+   "ctx": "chapter 7 (new)",
+   "script": "[indignant, proud] My fish was no watermelon. [grand, dry] Put down ROWBOAT."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "The BLOCK was a watermelon, Boppy. That's not how charts work. You can't make it bigger because you want to.",
+   "ctx": "chapter 7 (new)",
+   "script": "[firm, exasperated] The BLOCK was a watermelon, Boppy. [stern, patient] That's not how charts work. You can't make it bigger because you WANT to."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "Then put a star next to it.",
+   "ctx": "chapter 7 (new)",
+   "script": "[sly, cheerful] Then put a STAR next to it."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "I did. The star means \"Boppy says it was bigger.\" It's in the key.",
+   "ctx": "chapter 7 (new)",
+   "script": "[crisp, satisfied] I did. [matter-of-fact] The star means \"Boppy says it was bigger.\" [proud] It's in the KEY."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "There are a LOT of stars.",
+   "ctx": "chapter 7 (new)",
+   "script": "[wide-eyed, delighted] There are a LOT of stars."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Now look at the last column. It says WHERE. Long Island. Los Angeles. Long Island. Los Angeles. Long Island. Los Angeles.",
+   "ctx": "chapter 7 (new)",
+   "script": "[brisk] Now look at the last column. It says WHERE. [slow, ticking off] Long Island. Los Angeles. Long Island. Los Angeles. Long Island. Los Angeles."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It goes back and forth.",
+   "ctx": "chapter 7 (new)",
+   "script": "[dawning, quiet] It goes back and FORTH."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "It goes back and forth. Like YOU, Tata.",
+   "ctx": "chapter 7 (new)",
+   "script": "[pointed, matter-of-fact] It goes back and forth. [deadpan] Like YOU, Tata."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Is it Tata?",
+   "ctx": "chapter 7 (new)",
+   "script": "[innocent, curious] Is it TATA?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It's not me! I have boarding passes! I kept every single one!",
+   "ctx": "chapter 7 (new)",
+   "script": "[panicked, indignant] It's not me! [proud, pleading] I have BOARDING PASSES! I kept every single ONE!"
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Nobody thinks it's you, Tom. Whoever it is leaves their bulbs on the ground. You've never left anything on the ground in your life.",
+   "ctx": "chapter 7 (new)",
+   "script": "[firm, kind] Nobody thinks it's you, Tom. [dry, sharp] Whoever it is leaves their bulbs on the ground. You've never left anything on the ground in your LIFE."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "He cleaned up at his own birthday party. During the party.",
+   "ctx": "chapter 7 (new)",
+   "script": "[amused, proud] He cleaned up at his own BIRTHDAY PARTY. [flat] During the PARTY."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It was a nice party! I wanted it to stay nice!",
+   "ctx": "chapter 7 (new)",
+   "script": "[defensive, earnest] It was a NICE party! I wanted it to STAY nice!"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "So row seven is on Long Island. And the library started whispering on Monday night. So I filled row seven in already.",
+   "ctx": "chapter 7 (new)",
+   "script": "[matter-of-fact, brisk] So row seven is on Long Island. And the library started whispering on Monday night. [satisfied] So I filled row seven in ALREADY."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "A flash. A grey patch. An orange block that's bigger than a bathtub. A round hole. A burnt bulb. And something that woke up, with a gold coin that has a book on it.",
+   "ctx": "chapter 7 (new)",
+   "script": "[reciting, calm] A flash. A grey patch. An orange block that's bigger than a bathtub. A round hole. A burnt bulb. [building] And something that woke up, with a gold coin that has a BOOK on it."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "You filled it in before we've even been there?",
+   "ctx": "chapter 7 (new)",
+   "script": "[amazed] You filled it in before we've even BEEN there?"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "In pencil. I'll go over it in pen when I'm right.",
+   "ctx": "chapter 7 (new)",
+   "script": "[serene] In PENCIL. [smug] I'll go over it in PEN when I'm right."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "What's this one down here? \"MY MEET. TATA COMES.\"",
+   "ctx": "chapter 7 (new)",
+   "script": "[curious, reading] What's this one down here? [reading aloud, careful] \"MY MEET. TATA COMES.\""
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "That's not a clue. That's a reminder.",
+   "ctx": "chapter 7 (new)",
+   "script": "[quick, matter-of-fact] That's not a CLUE. [soft, firm] That's a REMINDER."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I'll be there.",
+   "ctx": "chapter 7 (new)",
+   "script": "[quiet, sincere] I'll be there."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "I know. It's in pen.",
+   "ctx": "chapter 7 (new)",
+   "script": "[quiet, certain] I know. [calm] It's in PEN."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Seven times, on two sides of the country. I want to know who is doing it. And I want to know who raised them, because they can't pick up after themselves.",
+   "ctx": "chapter 7 (new)",
+   "script": "[firm, angry] Seven times, on two sides of the country. I want to know who is doing it. [dry, sharp] And I want to know who RAISED them, because they can't pick up after themselves."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "A flash and no thunder. I saw one of those once. The night the meteor came down. Big as a Buick.",
+   "ctx": "chapter 7 (new)",
+   "script": "[reminiscing, grand] A flash and no thunder. I saw one of those once. [booming] The night the meteor came down. [proud] Big as a BUICK."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "It was a pebble. It went through the roof of Penny's shop.",
+   "ctx": "chapter 7 (new)",
+   "script": "[flat, patient] It was a PEBBLE. It went through the roof of Penny's shop."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "A Buick-sized pebble.",
+   "ctx": "chapter 7 (new)",
+   "script": "[dignified] A Buick-sized PEBBLE."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Should I put the meteor on the chart?",
+   "ctx": "chapter 7 (new)",
+   "script": "[brisk, businesslike] Should I put the meteor on the CHART?"
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Put it in the key. Under the star.",
+   "ctx": "chapter 7 (new)",
+   "script": "[dry, decisive] Put it in the KEY. [flat] Under the STAR."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Dad, are you coming to the library?",
+   "ctx": "chapter 7 (new)",
+   "script": "[curious, hopeful] Dad, are you coming to the LIBRARY?"
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "I'm not setting one foot in that library. It knows things.",
+   "ctx": "chapter 7 (new)",
+   "script": "[firm, wary] I'm not setting one foot in that library. [dark, hushed] It KNOWS things."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "The cookies in the car? I've been vacuuming that car since before Tom was born, hubby. I didn't need a book to tell me.",
+   "ctx": "chapter 7 (new)",
+   "script": "[dry, sharp] The cookies in the car? I've been vacuuming that car since before Tom was BORN, hubby. [flat] I didn't need a BOOK to tell me."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "...What else does it know?",
+   "ctx": "chapter 7 (new)",
+   "script": "[small, worried] ...What ELSE does it know?"
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Go and find out.",
+   "ctx": "chapter 7 (new)",
+   "script": "[brisk, flat] Go and find OUT."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "I'll stay here and guard the crisp, Deary.",
+   "ctx": "chapter 7 (new)",
+   "script": "[dignified, relieved] I'll stay here and guard the crisp, DEARY."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "You three stay together. Nobody goes anywhere alone. And Tom, this time you see it with your own eyes.",
+   "ctx": "chapter 7 (new)",
+   "script": "[firm, loving] You three stay together. Nobody goes anywhere ALONE. [warm, firm] And Tom, this time you see it with your own EYES."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "That's why I came home, Mom.",
+   "ctx": "chapter 7 (new)",
+   "script": "[warm, simple] That's why I came HOME, Mom."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "One more thing. If a book down there says one word about my pie crust, you didn't hear it.",
+   "ctx": "chapter 7 (new)",
+   "script": "[low, urgent] One more thing. [warning] If a book down there says one word about my pie crust, you didn't HEAR it."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "What about your pie crust?",
+   "ctx": "chapter 7 (new)",
+   "script": "[curious, loud] What about your pie CRUST?"
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "NOTHING about my pie crust. Go.",
+   "ctx": "chapter 7 (new)",
+   "script": "[sharp, immediate] NOTHING about my pie crust. [brisk] GO."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "...It's not fine. It started on Monday night, and it's coming up from the Stacks, the old part of the library downstairs.",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[hushed, resigned] ...It's not fine. [low, confiding] It started on Monday night, and it's coming up from the Stacks, the old part of the library downstairs."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Books can HEAR? Oh no. I argue with my cookbooks!",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[appalled, whispering] Books can HEAR? Oh no. [stricken, earnest] I ARGUE with my cookbooks!"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Page, on Monday night, was there a big flash?",
+   "ctx": "chapter 7 (new)",
+   "script": "[crisp, suspicious] Page, on Monday night, was there a big FLASH?"
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "...How do you know about the flash?",
+   "ctx": "chapter 7 (new)",
+   "script": "[startled, hushed] ...How do you know about the FLASH?"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "It's on my chart. Is there a spot down there where all the color is gone?",
+   "ctx": "chapter 7 (new)",
+   "script": "[matter-of-fact, brisk] It's on my chart. Is there a spot down there where all the color is GONE?"
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Who TOLD you?",
+   "ctx": "chapter 7 (new)",
+   "script": "[alarmed, hushed] Who TOLD you?"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Nobody told me. It's row seven. And is there a big orange block? Bigger than a bathtub?",
+   "ctx": "chapter 7 (new)",
+   "script": "[patient, brisk] Nobody told me. It's row SEVEN. [pointed] And is there a big orange block? Bigger than a BATHTUB?"
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "My returns cart is inside it. I put a sheet over it. And a sign.",
+   "ctx": "chapter 7 (new)",
+   "script": "[defeated, hushed] My returns cart is INSIDE it. [embarrassed] I put a sheet over it. And a SIGN."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "What does the sign say?",
+   "ctx": "chapter 7 (new)",
+   "script": "[curious] What does the sign SAY?"
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "\"WET FLOOR.\" It was the only sign I had.",
+   "ctx": "chapter 7 (new)",
+   "script": "[flat, mortified] \"WET FLOOR.\" [small, defensive] It was the only sign I HAD."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "And did you find a little burnt bulb on the floor?",
+   "ctx": "chapter 7 (new)",
+   "script": "[quick, probing] And did you find a little burnt BULB on the floor?"
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "I catalogued it. It's in the card catalog under B. \"Bulb, burnt, origin unknown.\"",
+   "ctx": "chapter 7 (new)",
+   "script": "[stiff, dignified] I CATALOGUED it. [formal] It's in the card catalog under B. \"Bulb, burnt, origin unknown.\""
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Technically correct.",
+   "ctx": "chapter 7 (new)",
+   "script": "[satisfied, crisp] [punchline] Technically CORRECT."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Deeply concerning.",
+   "ctx": "chapter 7 (new)",
+   "script": "[gravely, hushed] DEEPLY concerning."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Page, why did you tell everybody it was fine?",
+   "ctx": "chapter 7 (new)",
+   "script": "[puzzled, gentle] Page, why did you tell everybody it was FINE?"
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Because a library that isn't quiet gets closed. And then nobody reads ANY of them.",
+   "ctx": "chapter 7 (new)",
+   "script": "[quiet, heartfelt] Because a library that isn't quiet gets CLOSED. [sad] And then nobody reads ANY of them."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I do talk to my bread! He's a very good listener.",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[proud, fond] I DO talk to my bread! He's a very good LISTENER."
+  },
+  {
+   "voice": "page",
+   "speaker": "Whispers",
+   "text": "...psst... he sings to it too...",
+   "ctx": "chapter 7 (new)",
+   "script": "[sly, hushed whisper] ...psst... he SINGS to it too..."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "That's TNB! If you're going to gossip, get it right!",
+   "ctx": "chapter 7 (new)",
+   "script": "[outraged, delighted] That's TNB! If you're going to gossip, get it RIGHT!"
+  },
+  {
+   "voice": "page",
+   "speaker": "Whispers",
+   "text": "...psst... the small one... psst... she has a secret...",
+   "ctx": "chapter 7 (new)",
+   "script": "[sly, hushed whisper] ...psst... the SMALL one... psst... she has a SECRET..."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "I ATE the cookie dough! And I jumped on Boppy's chair! And I moved Grace's bookmark!",
+   "ctx": "chapter 7 (new)",
+   "script": "[shouting, gleeful] I ATE the cookie dough! And I jumped on Boppy's CHAIR! And I moved Grace's BOOKMARK!"
+  },
+  {
+   "voice": "page",
+   "speaker": "Whispers",
+   "text": "...psst... never mind... she tells everybody everything...",
+   "ctx": "chapter 7 (new)",
+   "script": "[defeated, hushed whisper] ...psst... never MIND... she tells everybody EVERYTHING..."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "I don't HAVE secrets. I'm too loud.",
+   "ctx": "chapter 7 (new)",
+   "script": "[proud, loud] I don't HAVE secrets. [cheerful] I'm too LOUD."
+  },
+  {
+   "voice": "page",
+   "speaker": "Whispers",
+   "text": "...psst... Deedee's pie crust... psst... it comes from...",
+   "ctx": "chapter 7 (new)",
+   "script": "[sly, hushed whisper] ...psst... Deedee's pie CRUST... psst... it comes FROM..."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "LA la la la LA! I can't hear you! I promised my mother!",
+   "ctx": "chapter 7 (new)",
+   "script": "[panicked, singing over it] LA la la la LA! I can't HEAR you! [shouting] I promised my MOTHER!"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Is it over?",
+   "ctx": "chapter 7 (new)",
+   "script": "[muffled, uncertain] Is it OVER?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "WHAT?",
+   "ctx": "chapter 7 (new)",
+   "script": "[muffled, shouting] WHAT?"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "The floor is grey. That's box two.",
+   "ctx": "chapter 7 (new)",
+   "script": "[quick, checking] The floor is grey. That's box TWO."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It's an orange block as big as a golf cart! And there's a whole book cart inside it!",
+   "ctx": "chapter 7 (new)",
+   "script": "[astonished] It's an orange block as big as a golf cart! And there's a whole book cart INSIDE it!"
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "The books are FALLING OFF! And they're stuck in the air!",
+   "ctx": "chapter 7 (new)",
+   "script": "[shouting, thrilled] The books are FALLING OFF! And they're STUCK in the air!"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Bigger than a bathtub. Check.",
+   "ctx": "chapter 7 (new)",
+   "script": "[crisp, satisfied] Bigger than a bathtub. CHECK."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "And there's the round hole. Check. It's exactly as big as a coin.",
+   "ctx": "chapter 7 (new)",
+   "script": "[pointing, brisk] And there's the round hole. CHECK. [precise] It's exactly as big as a coin."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "You got every box right, and you did it at Deedee's kitchen table.",
+   "ctx": "chapter 7 (new)",
+   "script": "[awed, warm] You got every box right, and you did it at Deedee's kitchen TABLE."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "I'm going over it in pen.",
+   "ctx": "chapter 7 (new)",
+   "script": "[calm, proud] I'm going over it in PEN."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "These books aren't whispering.",
+   "ctx": "chapter 7 (new)",
+   "script": "[whispering, puzzled] These books aren't WHISPERING."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "The grey ones are quiet. It's the only quiet spot down here.",
+   "ctx": "chapter 7 (new)",
+   "script": "[hushed, working it out] The grey ones are quiet. It's the only quiet spot down HERE."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It's the only part of the library that still works like a library.",
+   "ctx": "chapter 7 (new)",
+   "script": "[hushed, wry] It's the only part of the library that still works like a LIBRARY."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "I want to ride that cart.",
+   "ctx": "chapter 7 (new)",
+   "script": "[eager, loud] I want to RIDE that cart."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Rose. It's in a block.",
+   "ctx": "chapter 7 (new)",
+   "script": "[firm, patient] Rose. It's in a BLOCK."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "After.",
+   "ctx": "chapter 7 (new)",
+   "script": "[unbothered, cheerful] AFTER."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "When we put the coin in, will the books stop talking?",
+   "ctx": "chapter 7 (new)",
+   "script": "[curious, loud] When we put the coin in, will the books stop TALKING?"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Everything that woke up goes back to the way it was, Rose. The big squirrel couldn't talk at all afterwards.",
+   "ctx": "chapter 7 (new)",
+   "script": "[brisk, patient] Everything that woke up goes back to the way it was, Rose. [soft, plain] The big squirrel couldn't talk at all AFTERWARDS."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "If you can guess all of it before we get here, then it's no accident. Somebody stood right here on Monday night, in my nieces' library.",
+   "ctx": "chapter 7 (new)",
+   "script": "[low, grave] If you can guess all of it before we get here, then it's no accident. [serious] Somebody stood right here on Monday night, in my nieces' LIBRARY."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "And they didn't even take out a book.",
+   "ctx": "chapter 7 (new)",
+   "script": "[quiet, dry] And they didn't even take out a BOOK."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "The last box on row seven is something that woke up, with a coin. I bet it's behind those doors.",
+   "ctx": "chapter 7 (new)",
+   "script": "[brisk, confident] The last box on row seven is something that woke up, with a coin. I bet it's behind those DOORS."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Something in each of these sections must know a piece of the password. We'll ask nicely first. Then we'll ask nicely again, but louder.",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[warm, mock-serious] Something in each of these sections must know a piece of the password. We'll ask nicely first. [dry, determined] Then we'll ask nicely again, but LOUDER."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Louder? In a LIBRARY?",
+   "ctx": "chapter 7 (new)",
+   "script": "[scandalized, whispering] LOUDER? In a LIBRARY?"
+  },
+  {
+   "voice": "mudling",
+   "speaker": "A picture book",
+   "text": "...again?",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[tiny, hopeful] ...AGAIN?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "What did I see? Tell me! I love a twist!",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[delighted, eager] What did I see? TELL me! I love a TWIST!"
+  },
+  {
+   "voice": "bigone",
+   "speaker": "The Cliffhanger",
+   "text": "And his mother's favorite child... has always, ALWAYS been...",
+   "ctx": "chapter 7 (new)",
+   "script": "[theatrical, ominous] And his mother's favorite child... [hushed, drawn out] has always, ALWAYS been..."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Been WHO? Me or Amy? Say it!",
+   "ctx": "chapter 7 (new)",
+   "script": "[desperate, thrilled] Been WHO? Me or Amy? SAY it!"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I don't know, Cozy Rosie! And I don't know who Deedee's favorite is! This is worse than a season finale!",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[anguished, comic] I don't know, Cozy Rosie! And I don't know who Deedee's favorite is! [wailing] This is worse than a season FINALE!"
+  },
+  {
+   "voice": "grump",
+   "speaker": "The Know-It-All",
+   "text": "Actually, Los Angeles is two thousand four hundred and seventy-five miles away. Everybody says three thousand. Actually.",
+   "ctx": "chapter 7 (new)",
+   "script": "[smug, superior] Actually, Los Angeles is two thousand four hundred and seventy-five MILES away. Everybody says three THOUSAND. ACTUALLY."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "THANK you! Finally, somebody else is counting!",
+   "ctx": "chapter 7 (new)",
+   "script": "[overjoyed, relieved] THANK you! Finally, somebody else is COUNTING!"
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Now it sounds like Tata.",
+   "ctx": "chapter 7 (new)",
+   "script": "[flat, matter-of-fact] Now it sounds like TATA."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "...It does. Grace, it sounds like BOTH of us.",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[stunned, quiet] ...It does. [amazed] Grace, it sounds like BOTH of us."
+  },
+  {
+   "voice": "grump",
+   "speaker": "The Know-It-All",
+   "text": "Actually, the password is none of your business. Actually.",
+   "ctx": "chapter 7 (new)",
+   "script": "[prissy, nasal] Actually, the password is none of your BUSINESS. ACTUALLY."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "You know a lot, and you tell people. So do I. You got it from me, and I got it from Deedee.",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[warm, sincere] You know a lot, and you tell people. [fond] So do I. You got it from me, and I got it from DEEDEE."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "But that book never asked us one single question. We ask. That's why you're in charge of the signs down here.",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[warm, steady] But that book never asked us one single QUESTION. [encouraging] We ASK. That's why you're in charge of the signs down HERE."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "...Okay. I can work on the asking part. A little. Starting tomorrow.",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[thoughtful, honest] ...Okay. I can work on the ASKING part. [determined] A little. Starting TOMORROW."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "S. H. H. ...Shh! The password is SHH!",
+   "ctx": "chapter 7 (new)",
+   "script": "[delighted, loud] S. H. H. ...SHH! [triumphant, shouting] The password is SHH!"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "I was about to say that.",
+   "ctx": "chapter 7 (new)",
+   "script": "[crisp, huffy] I was about to SAY that."
+  },
+  {
+   "voice": "log",
+   "speaker": "A dry old voice",
+   "text": "...Who's there?",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[ancient, dry, slow] ...Who's THERE?"
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "It's as big as a SUITCASE! And it has an EYE!",
+   "ctx": "chapter 7 (new)",
+   "script": "[awed, loud] It's as big as a SUITCASE! And it has an EYE!"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Excuse me, sir. Are you the one who told the whole Square that I thank the airplane?",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[polite, wary, earnest] Excuse me, SIR. Are you the one who told the whole Square that I thank the AIRPLANE?"
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "You do. Every single time. I think it's lovely. That's why I told everybody.",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, dry, fond] You do. Every single TIME. [warm, aching] I think it's LOVELY. That's why I told EVERYBODY."
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "On Monday night there was a flash out in the hall. For seventy years I had nothing to say it with. Now I do.",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, slow, wistful] On Monday night there was a flash out in the hall. [aching] For seventy years I had nothing to say it with. [quiet, wondering] Now I DO."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "And what's your name? Your cover doesn't say anything. It only says \"VOLUME ONE.\"",
+   "ctx": "chapter 7 (new)",
+   "script": "[crisp, bossy] And what's your NAME? Your cover doesn't say anything. [pointed] It only says \"VOLUME ONE.\""
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "Volume one of what? I don't know either. Nobody ever opened me to find out.",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, bewildered, small] Volume one of WHAT? I don't know either. [bleak, small] Nobody ever opened me to find OUT."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "You don't have a picture on the front. That's why.",
+   "ctx": "chapter 7 (new)",
+   "script": "[matter-of-fact, loud] You don't have a PICTURE on the front. [certain] That's WHY."
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "...Is THAT why?",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, stunned, slow] ...Is THAT why?"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Tata. Gold, between the pages. That's my last box.",
+   "ctx": "chapter 7 (new)",
+   "script": "[whispering, urgent] Tata. Gold, between the PAGES. [fierce, quiet] That's my last BOX."
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "I talked for four days, and nobody came to listen. Maybe the quiet ones get read.",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, bleak, small] I talked for four days, and nobody came to LISTEN. [quiet, wondering] Maybe the quiet ones get READ."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "There was a dragon in you the whole time, and nobody knew!",
+   "ctx": "chapter 7 (new)",
+   "script": "[wondering, delighted] There was a dragon in you the whole TIME, and nobody KNEW!"
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "Neither did I. I only know chapter one. That's as far as anybody has ever read.",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, quiet, wondering] Neither did I. [soft, small] I only know chapter one. That's as far as anybody has ever READ."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "There's the coin! He's using it for a bookmark.",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[quick, thrilled] There's the coin! He's using it for a BOOKMARK."
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "The little books brought it to me on Monday night. It's the first bookmark I ever had. You don't need one until somebody opens you.",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, gentle] The little books brought it to me on Monday night. It's the first bookmark I ever HAD. [wry, soft] You don't need one until somebody opens YOU."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "It's a book CART. I wrote down \"a book.\" I'm giving myself half a point.",
+   "ctx": "chapter 7 (new)",
+   "script": "[crisp, rueful] It's a book CART. I wrote down \"a book.\" [dry, fair] I'm giving myself HALF a point."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Grace, wait. He should know what it does first.",
+   "ctx": "chapter 7 (new)",
+   "script": "[gentle, firm] Grace, WAIT. [serious, kind] He should know what it does FIRST."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Sir, that coin opens the orange block in the hall. When it does, everything that woke up on Monday night goes back to the way it was. The last one was a squirrel. He couldn't talk afterwards.",
+   "ctx": "chapter 7 (new)",
+   "script": "[gentle, serious, honest] Sir, that coin opens the orange block in the hall. When it does, everything that woke up on Monday night goes back to the way it was. [quiet, careful] The last one was a squirrel. He couldn't talk AFTERWARDS."
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "I know. I heard the one in charge explain it out in the hall. Books overhear everything.",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, calm] I KNOW. I heard the one in charge explain it out in the hall. [dry, wry] Books overhear EVERYTHING."
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "I talked for four days, and everybody covered their ears. You read to me for five minutes, and it was the best day I ever had.",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, thoughtful, slow] I talked for four days, and everybody covered their EARS. [warm, aching] You read to me for five minutes, and it was the best day I ever HAD."
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "A book isn't supposed to talk. A book is supposed to be READ. So take the coin. But I have conditions.",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, gentle, resolved] A book isn't supposed to TALK. A book is supposed to be READ. [dry, warm] So take the coin. But I have CONDITIONS."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "I LOVE conditions.",
+   "ctx": "chapter 7 (new)",
+   "script": "[thrilled, bossy] I LOVE conditions."
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "One. Somebody reads the rest of me. All of it. Out loud.",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, formal] ONE. Somebody reads the rest of me. All of it. Out LOUD."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Me. Saturdays. I'll do every voice.",
+   "ctx": "chapter 7 (new)",
+   "script": "[eager, certain] ME. Saturdays. I'll do every VOICE."
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "Two. The small loud one is always the dragon.",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, formal] TWO. The small loud one is always the DRAGON."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "I was ALREADY always the dragon.",
+   "ctx": "chapter 7 (new)",
+   "script": "[indignant, loud] I was ALREADY always the dragon."
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "Three. I've only just got a place, and I'd hate to lose it. I'm going to need a new bookmark.",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, formal, wistful] THREE. I've only just got a place, and I'd hate to LOSE it. I'm going to need a new BOOKMARK."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "You can have mine. I bedazzled it myself.",
+   "ctx": "chapter 7 (new)",
+   "script": "[shy, proud] You can have MINE. I bedazzled it MYSELF."
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "It says, \"THIS IS GRACE'S PAGE. DO NOT MOVE IT. THIS MEANS YOU, ROSE.\"",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, reading, slow] It says, \"THIS IS GRACE'S PAGE. DO NOT MOVE IT. THIS MEANS YOU, ROSE.\""
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "I only moved it ONE time!",
+   "ctx": "chapter 7 (new)",
+   "script": "[defensive, loud] I only moved it ONE time!"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "You moved it twice. It's in my notebook.",
+   "ctx": "chapter 7 (new)",
+   "script": "[flat, certain] You moved it TWICE. It's in my NOTEBOOK."
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "It's the most beautiful thing anybody has ever put in me.",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, moved, slow] It's the most beautiful thing anybody has ever put in ME."
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "And four. Carry me out to the hall. I've never seen how anything ends.",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, formal, wistful] And FOUR. Carry me out to the hall. [quiet, wondering] I've never seen how anything ENDS."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It would be an honor, sir. I'm going to lift you by the spine. Is that all right?",
+   "ctx": "chapter 7 (new)",
+   "script": "[solemn, honored] It would be an honor, SIR. [careful, polite] I'm going to lift you by the spine. Is that all RIGHT?"
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "Mind the corners. They're seventy.",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, dry, prim] Mind the CORNERS. They're SEVENTY."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "You're heavier than you look.",
+   "ctx": "chapter 7 (new)",
+   "script": "[strained, comic] You're HEAVIER than you look."
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "It's the dust.",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, dry, deadpan] It's the DUST."
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "Higher. I can't see over the globe.",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, dry, impatient] HIGHER. I can't see over the GLOBE."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "First I held a net. Then I held a binder. Now I'm a lectern! I keep getting promoted!",
+   "ctx": "chapter 7 (new)",
+   "script": "[strained, joyful, proud] First I held a net. Then I held a binder. Now I'm a LECTERN! [punchline, delighted] I keep getting PROMOTED!"
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Is that the Reading Room book? It hasn't left that room since 1952!",
+   "ctx": "chapter 7 (new)",
+   "script": "[stunned, hushed] Is that the Reading Room book? It hasn't left that room since 1952!"
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "Hello, Page. You hum in the elevator.",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, dry, friendly] Hello, Page. [deadpan] You hum in the ELEVATOR."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "...Everything is fine.",
+   "ctx": "chapter 7 (new)",
+   "script": "[stiff, mortified, hushed] ...Everything is FINE."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Thirteen.",
+   "ctx": "chapter 7 (new)",
+   "script": "[flat, counting] THIRTEEN."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Tata. If I put it in, he stops.",
+   "ctx": "chapter 7 (new)",
+   "script": "[small, serious] Tata. If I put it in, he STOPS."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I know. He knows too. I'm right here.",
+   "ctx": "chapter 7 (new)",
+   "script": "[gentle, steady] I know. He knows TOO. [warm] I'm right HERE."
+  },
+  {
+   "voice": "log",
+   "speaker": "The Unread",
+   "text": "You're the one in charge, aren't you? Go on, then. Turn the page.",
+   "ctx": "chapter 7 (new)",
+   "script": "[ancient, kind, dry] You're the one in charge, aren't you? Go on, then. [warm, slow] Turn the PAGE."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Tata. He stopped.",
+   "ctx": "chapter 7 (new)",
+   "script": "[whispering, small] Tata. He STOPPED."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "He didn't stop, Rose. He's on page twelve. He's waiting for Saturday.",
+   "ctx": "chapter 7 (new)",
+   "script": "[soft, steady] He didn't stop, Rose. He's on page TWELVE. [warm] He's waiting for SATURDAY."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Thank you, sir.",
+   "ctx": "chapter 7 (new)",
+   "script": "[soft, sincere] Thank you, SIR."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Tata, he can't hear you anymore.",
+   "ctx": "chapter 7 (new)",
+   "script": "[gentle, matter-of-fact] Tata, he can't hear you ANYMORE."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Neither can the airplane.",
+   "ctx": "chapter 7 (new)",
+   "script": "[soft, wry, tender] [punchline] Neither can the AIRPLANE."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "...Thank you, sir.",
+   "ctx": "chapter 7 (new)",
+   "script": "[quiet, soft] ...Thank you, SIR."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "THANK YOU, BOOK!",
+   "ctx": "chapter 7 (new)",
+   "script": "[shouting, cheerful] THANK YOU, BOOK!"
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Shhh.",
+   "ctx": "chapter 7 (new)",
+   "script": "[hushed, firm] SHHH."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Thank you, book.",
+   "ctx": "chapter 7 (new)",
+   "script": "[whispering, cheerful] Thank you, BOOK."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I saw it. All of it, from right here. Not on a phone.",
+   "ctx": "chapter 7 (new)",
+   "script": "[quiet, amazed] I SAW it. All of it, from right here. [warm, proud] Not on a PHONE."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "You were standing in the way of the cart.",
+   "ctx": "chapter 7 (new)",
+   "script": "[crisp, dry] You were standing in the way of the CART."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I had the best seat in the house!",
+   "ctx": "chapter 7 (new)",
+   "script": "[delighted, proud] I had the best seat in the HOUSE!"
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "It's AFTER. Push me!",
+   "ctx": "chapter 7 (new)",
+   "script": "[shouting, gleeful] It's AFTER. [bossy] PUSH me!"
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "That cart is for returns only.",
+   "ctx": "chapter 7 (new)",
+   "script": "[stiff, prim, hushed] That cart is for returns ONLY."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "I'm RETURNING. I'm returning upstairs.",
+   "ctx": "chapter 7 (new)",
+   "script": "[indignant, loud] I'm RETURNING. [triumphant] I'm returning UPSTAIRS."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "That's not how returns work.",
+   "ctx": "chapter 7 (new)",
+   "script": "[crisp, flat] That's not how RETURNS work."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It's a little bit how returns work.",
+   "ctx": "chapter 7 (new)",
+   "script": "[wry, fair] It's a little bit how returns WORK."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "\"To be continued in volume two.\" Page! Where's volume two?",
+   "ctx": "chapter 7 (new)",
+   "script": "[reading, dismayed] \"To be continued in volume two.\" [alarmed] Page! Where's volume TWO?"
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Checked out. In 1998. It was a bad week.",
+   "ctx": "chapter 7 (new)",
+   "script": "[flat, grave, hushed] Checked out. In 1998. [dry, rueful] It was a bad WEEK."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "NO!",
+   "ctx": "chapter 7 (new)",
+   "script": "[anguished, comic] NO!"
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "AAAAH! ...Again!",
+   "ctx": "chapter 7 (new)",
+   "script": "[screaming, delighted] AAAAH! [thrilled] ...AGAIN!"
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Everything is fine.",
+   "ctx": "chapter 7 (new)",
+   "script": "[gentle, warm, hushed] Everything is FINE."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Fourteen. And that's the first one I believe.",
+   "ctx": "chapter 7 (new)",
+   "script": "[crisp, satisfied] FOURTEEN. [warm, honest] And that's the first one I BELIEVE."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "Is it safe? Has it stopped talking?",
+   "ctx": "chapter 7 (new)",
+   "script": "[wary, hushed] Is it safe? Has it stopped TALKING?"
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "It's all quiet, Boppy. It can't tell on you anymore.",
+   "ctx": "chapter 7 (new)",
+   "script": "[earnest, loud] It's all quiet, Boppy. [gleeful] It can't tell on you ANYMORE."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "I saw that.",
+   "ctx": "chapter 7 (new)",
+   "script": "[flat, sharp] I SAW that."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "The books didn't.",
+   "ctx": "chapter 7 (new)",
+   "script": "[mild, serene] [punchline] The BOOKS didn't."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Mom, here's number seven. Page had it filed in the card catalog.",
+   "ctx": "chapter 7 (new)",
+   "script": "[warm, brisk] Mom, here's number SEVEN. Page had it filed in the card CATALOG."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "It's checked out on Grace's card. It's due back in three weeks.",
+   "ctx": "chapter 7 (new)",
+   "script": "[prim, hushed] It's checked out on Grace's card. It's due back in three WEEKS."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "It's going in my drawer, and it's staying in my drawer.",
+   "ctx": "chapter 7 (new)",
+   "script": "[firm, flat] It's going in my drawer, and it's staying in my DRAWER."
+  },
+  {
+   "voice": "pagew",
+   "speaker": "Page",
+   "text": "Then there will be a late fee.",
+   "ctx": "chapter 7 (new)",
+   "script": "[dry, apologetic] Then there will be a late FEE."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "NO late fees. EVER.",
+   "ctx": "chapter 7 (new)",
+   "script": "[loud, triumphant] NO late fees. EVER."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Tom. Did that library say anything about my pie crust?",
+   "ctx": "chapter 7 (new)",
+   "script": "[sharp, casual, probing] Tom. Did that library say anything about my pie CRUST?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I didn't hear one word, Mom.",
+   "ctx": "chapter 7 (new)",
+   "script": "[innocent, quick] I didn't hear one word, MOM."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "He sang LA LA LA.",
+   "ctx": "chapter 7 (new)",
+   "script": "[loud, helpful] He sang LA LA LA."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "That's my favorite son.",
+   "ctx": "chapter 7 (new)",
+   "script": "[warm, satisfied] That's my favorite SON."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Mom, one of the books knew who your favorite really is.",
+   "ctx": "chapter 7 (new)",
+   "script": "[mischievous, careful] Mom, one of the books knew who your favorite REALLY is."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "And?",
+   "ctx": "chapter 7 (new)",
+   "script": "[sharp, level] And?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It turned back into a regular book before it told me.",
+   "ctx": "chapter 7 (new)",
+   "script": "[sheepish, amused] It turned back into a regular book before it told ME."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Smart book.",
+   "ctx": "chapter 7 (new)",
+   "script": "[dry, approving] SMART book."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Seven bulbs. Somebody was in this library on Monday night, down there with the children's books. I don't like it one bit.",
+   "ctx": "chapter 7 (new)",
+   "script": "[grave, low] Seven bulbs. Somebody was in this library on Monday night, down there with the children's books. [firm, quiet] I don't like it one BIT."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "And the next one is in Los Angeles, Deedee. It goes back and forth.",
+   "ctx": "chapter 7 (new)",
+   "script": "[crisp, certain] And the next one is in Los Angeles, DEEDEE. It goes back and FORTH."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It's TNB. \"Babe. Bernadette signed you up for the 2nd Ave potluck. You're on bread. For forty people.\"",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[reading, amused] It's TNB. \"Babe. Bernadette signed you up for the 2nd Ave potluck. You're on BREAD. For forty PEOPLE.\""
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "\"I said yes for you. You're welcome. Bready and I have already started.\"",
+   "ctx": "chapter 7 (reworded)",
+   "script": "[reading, fond] \"I said yes for you. You're WELCOME. Bready and I have already STARTED.\""
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Forty people! It's a good thing he lives in a crock now.",
+   "ctx": "chapter 7 (new)",
+   "script": "[delighted, thrilled] Forty people! [fond, proud] It's a good thing he lives in a CROCK now."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Tata, row eight is going to be in Los Angeles. I left room.",
+   "ctx": "chapter 7 (new)",
+   "script": "[firm, quiet, certain] Tata, row eight is going to be in Los Angeles. [matter-of-fact] I left ROOM."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I'll look for every box. And I'll call you before I touch anything.",
+   "ctx": "chapter 7 (new)",
+   "script": "[warm, determined] I'll look for every box. And I'll call you before I touch ANYTHING."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Good. I'm in charge of row eight.",
+   "ctx": "chapter 7 (new)",
+   "script": "[crisp, proud] Good. I'm in charge of row EIGHT."
+  }
+ ]
+}
