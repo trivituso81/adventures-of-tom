@@ -18,8 +18,10 @@ with sync_playwright() as pw:
     for lay,vp in (('portrait',{'width':430,'height':860}),('landscape',{'width':860,'height':430})):
         pg=br.new_page(viewport=vp); errs=[]; pg.on('pageerror',lambda e: errs.append(str(e)))
         pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.bbLabStart',timeout=180000); pg.wait_for_timeout(800)
-        pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; layout.mode='%s'; applyLayout(); }"%lay)
-        before=pg.evaluate("()=>{ bbLabStart(); return worlds.oakpark.npcs.filter(n=>n.monster).length; }")
+        pg.evaluate("()=>{ layout.mode='%s'; applyLayout(); }"%lay)
+        before=pg.evaluate("()=>{ splashGo(bbLabStart); return worlds.oakpark.npcs.filter(n=>n.monster).length; }")   # the real Admin path: the welcome screen must close by itself
+        pg.wait_for_timeout(2500); sp=pg.evaluate("()=>({active:splash.active,hidden:document.getElementById('splash').hidden})")
+        if sp['active'] or not sp['hidden']: fails.append(lay+' splash still open')
         shots=[]; t=0
         while t<24:
             pg.wait_for_timeout(800); t+=.8

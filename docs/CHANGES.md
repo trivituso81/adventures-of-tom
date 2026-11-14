@@ -1,3 +1,7 @@
+## ch6s2b (2026-11-14): fix Block Break Lab on the phone: the welcome screen now closes, so the whole break plays
+
+Tom: "clicking block break lab just shows a coin with a picnic basket". Cause: the Admin button started the lab without closing the welcome screen, so the screen stayed over the park and only the coin close-up (drawn on top of it) was visible. The button now goes through `splashGo` like START NEW does. tools/blockbreak_test.py now starts the lab through that same path and fails if the welcome screen is still open.
+
 ## ch6s2a (2026-11-14): chapter 6 stage 2: breaking an orange block (coin, cracks, falling apart, colour ring, shrink-back, encounters off), shown on the picnic table; voice file split
 
 What is new (nothing in the live story calls it yet; stage 3 does):
