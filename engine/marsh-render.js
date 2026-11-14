@@ -67,7 +67,7 @@ drawObject=function(o,time) {
     return;
   }
   if(o.kind==='sundial') {
-    // A mossy stone pillar with a round dial on top. Its shadow points at the wrong hour until the coin is out (ch3-coin).
+    // A mossy stone pillar with a round dial on top. (ch3build1: no coin under the pointer any more; the shadow swings at the end of the hollow scene, ch3-coin.)
     const fixed=typeof flag==='function'&&flag('ch3-coin');
     ellipse(cx,b-3,26,6,'#34533b38');
     rect(cx-10,y+4,20,h-6,OUT); rect(cx-9,y+5,18,h-8,'#a9aa98'); rect(cx-9,y+5,4,h-8,'#c2c3b0'); rect(cx-3,y+12,6,2,'#6f8f4c');
@@ -80,7 +80,6 @@ drawObject=function(o,time) {
     rect(cx-1,y-10,2,10,OUT); rect(cx,y-9,1,8,'#9a9a86');
     const ang=fixed?2.2:-0.5;
     for(let k=2;k<16;k++) rect(Math.round(cx+Math.cos(ang)*k),Math.round(y+1+Math.sin(ang)*k*.35),1,1,'#5a5a4a');
-    if(!fixed) { const tw=(Math.floor(time*3)%5)===0; rect(cx-3,y-6,5,5,OUT); rect(cx-2,y-5,3,3,'#f2c94c'); rect(cx-2,y-5,1,1,'#fff6c0'); if(tw) { rect(cx+3,y-9,1,3,'#fff6c0'); rect(cx+2,y-8,3,1,'#fff6c0'); } }
     return;
   }
   return LE_drawObject_marsh(o,time);

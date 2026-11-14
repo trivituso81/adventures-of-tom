@@ -415,7 +415,7 @@ const LE_AREAS=[
   // drains once the coin is out of the sundial, and the Deep Pool above it, where Old Iron-Gill lives. The spillway opens
   // in data/scenes.js (ch3DrainSpillway, using drainOpen below).
   {id:'sundial',name:'Sundial Hollow',w:22,h:20,
-    tag:'A sundial that tells the wrong time, and a pool nobody has seen the bottom of.',
+    tag:'An old stone sundial, and a pool nobody has seen the bottom of.',
     eyebrow:'LONG ISLAND / SUNDIAL HOLLOW',
     hint:'The sundial is in the middle. The Deep Pool is past the spillway, at the top.',
     spawn:{x:10,y:18},
@@ -447,9 +447,9 @@ const LE_AREAS=[
     exits:[[10,19,'reeds',3,1,'down','mud'],[11,19,'reeds',4,1,'down','mud']],
     monsters:SUNDIAL_MONSTER_SPOTS,
     objects:[
-      ['sundial',11,12,2,2,'The sundial','A stone sundial, green with moss. The shadow points at the 7. It\'s clearly not seven.',
-        {when:[{flag:'ch3-coin',text:'The shadow points the right way now. Grace checked. Twice. She wrote it down.'}]}],
-      ['sign',8,15,1,1,'Mossy sign','SUNDIAL HOLLOW. Tells the time. Not this time. A different time.'],
+      ['sundial',11,12,2,2,'The sundial','An old stone sundial. It\'s grey all over, moss and all, like the reeds around it.',
+        {when:[{flag:'ch6-clear',text:'An old stone sundial, green with moss again. Boppy says it looks just like it did when he was nine.'}]}],
+      ['sign',8,15,1,1,'Mossy sign','SUNDIAL HOLLOW. Mind the moss.'],
       ['sign',14,6,1,1,'Pool marker','THE DEEP POOL. Depth: yes. No fishing. (Someone has crossed out NO.)'],
       ['bench',3,13,4,2,'Stone bench','Carved into the stone: WAITED HERE 1970. Under it, newer: STILL WAITING.']]},
 ];
@@ -1273,7 +1273,7 @@ const LE_ROOMS=[
         'The kettle has been gossiping again.',
         'It spilled the tea. Literally.',
         'Please mind the dramatic biscuits.'],
-        when:[{chapter:3,flag:'ch3-tea',lines:['The kettle is still going on about that man in the long coat. Gold coins. Paying double.','I told it to mind its own business. It\'s a kettle. It has no business.']}]}],
+        when:[{chapter:3,flag:'ch3-tea',lines:['The kettle is still going on about that flash over the marsh. No thunder, no rain. It can\'t let it go.','I told it to mind its own business. It\'s a kettle. It has no business.']}]}],
     objects:[
       ['table',2,4,4,3,'Tea for two','Two cups are having a heated discussion.'],
       ['table',12,4,4,5,'Biscuit table','A biscuit whispers: "Dunk me. I dare you."'],

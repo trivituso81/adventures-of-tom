@@ -873,8 +873,10 @@ const TUTORIALS={
 // Flags, in story order: ch3-sol (Sol's line), ch3-goal, ch3-boppy (Boppy joins; the pier path opens), ch3-tea (optional,
 // Kettle Cottage), ch3-story (the 1970 story, Heart-Trace boppy-1970), ch3-pier, tombo:boppy1, ch3-jar (Iron-Gill takes the
 // pepper jar), ch3-r1 (Soggy Socks), ch3-tuts (the Tangle; the marsh wakes up), ch3-wait (the old reeds).
-// C3b: ch3-snag (the Snag moves; the old reeds open), ch3-hollow (Sundial Hollow), ch3-coin (the coin is out; the spillway
-// drains), ch3-pool (Iron-Gill surfaces), battle:irongill ('win'), ch3-clear, ch3-release (Iron-Gill goes back down), ch3-done.
+// C3b: ch3-snag (the Snag moves; the old reeds open), ch3-hollow (Sundial Hollow), ch3-netup (Tom holds the net over his head),
+// ch3-bulb (Rose takes the bulb off the sundial), ch3-coin (old name kept: the hollow scene is over and the stepping stones to the Deep Pool
+// open; there is no coin in the sundial any more, story-ch03.md), ch3-pool (Iron-Gill surfaces), battle:irongill ('win'), ch3-clear,
+// ch3-release (Iron-Gill goes back down), ch3-done. ch3build1 (2026-11-13) rewrote every scene to the locked claude/story-ch03.md.
 // ======================================================================================================
 const CH3={mode:'full',chapter:3};
 // A walkable tile about d tiles from Tom (for monsters that pop out of the reeds), and a route to a tile beside him.
@@ -902,18 +904,38 @@ SCENES.ch3Arrive=[
   {zoom:1,time:.8},
   {toast:"Goal: Deedee and Boppy's house. Rivituso Row, south of the Square.",time:4.5}
 ];
-// 2. Deedee and Boppy's house: the Whisker Perch, the pepper jar. Boppy joins; Deedee stays to bake.
+// 2. Deedee and Boppy's house (story-ch03.md scene 2): the lemon coin, Boppy wants a coin of his own, the Whisker Perch,
+// the second flashbulb next to the first, the pepper jar. Boppy joins; Deedee stays to bake.
 SCENES.ch3Fishing=[
   {flag:'ch3-boppy'},
   {place:'Deedee',at:[7,9],dir:'right'}, {place:'Boppy',at:[10,8],dir:'down'},
   {walk:'tom',to:routeTo('tom',8,10),speed:.25}, {face:'tom',dir:'up'},
   {place:'grace',at:[9,10],dir:'up'}, {place:'rose',at:[7,10],dir:'up'},
   {hearts:'Deedee'},
-  {talk:'Deedee',lines:["My favorite son!",'Back already! Look at you. Did they feed you out there? Never mind. I\'ll feed you.'],voice:[['deedee','greet',0,"My favorite son!"]]},
-  {talk:'Boppy',lines:['Tom. Good. Sit down. No. Don\'t sit down. We\'re going fishing.','The Whisker Perch. Whiskers like a cat. I saw it at Cattail Pier in 1994. Nobody believes me.']},
-  {talk:'Deedee',lines:['Nobody believes him.']},
-  {talk:'Rose',lines:['Boppy, is the Whisker Perch real?']},
-  {talk:'Boppy',lines:['Real as my heartburn, kiddo.']},
+  {talk:'Deedee',lines:["My favorite son!",'Did they feed you on that plane?'],voice:[['deedee','greet',0,"My favorite son!"]]},
+  {talk:'Tom',lines:['It was Delta One, Mom. They fed me twice.']},
+  {talk:'Deedee',lines:['Twice! You must be starving!']},
+  {talk:'Boppy',lines:['Tom. Good. Sit down. No. Don\'t sit down. We\'re going fishing.']},
+  {talk:'Tom',lines:['Wait, I have to show you something first. A hill in Los Angeles stood up, talked to us, and sneezed this at me.']},
+  {call:()=>sfx.coin&&sfx.coin()}, {ch2Reveal:'coin'},
+  {talk:'Deedee',lines:['A hill stood up? Out there too? First my kitchen, now California!']},
+  {talk:'Boppy',lines:['That\'s gold like my teeth! Cozy Rosie has one, and now you have one. Where\'s mine?']},
+  {talk:'Rose',lines:['You have to get it from a monster, Boppy.']},
+  {talk:'Boppy',lines:['Then I know just the fish. The Whisker Perch. Whiskers like a cat. I saw him at Cattail Pier in 1994, and he was THIS big.']},
+  {talk:'Rose',lines:['Last time he was only THIS big.']},
+  {talk:'Boppy',lines:['He grew. It\'s been thirty years.']},
+  {talk:'Grace',lines:['We believe you now, Boppy. You were right about the Big One.']},
+  {talk:'Boppy',lines:['Say that again, slower. Deary, are you hearing this?']},
+  {talk:'Deedee',lines:['I heard it. Don\'t let it go to your head. Your hat won\'t fit.']},
+  {talk:'Tom',lines:['I believe every fish story you ever told me. I\'m bringing the big net.']},
+  {talk:'Tom',lines:['Mom, there\'s one more thing. There was a lemon frozen inside an orange block, just like the dragonfly. And this was lying under it.']},
+  {call:()=>sfx.pickup()}, {wait:.4}, {call:()=>sfx.thud()},   // Tom sets the bulb down; Deedee's junk drawer opens and the pond bulb goes next to it
+  {ch3Reveal:'bulbs2'},
+  {talk:'Deedee',lines:['Same bulb. One at my pond and one three thousand miles away.']},
+  {talk:'Tom',lines:['Two thousand four hundred and seventy-five.']},
+  {talk:'Deedee',lines:['Tom. Not now.']},
+  {talk:'Deedee',lines:['I don\'t know what this is and I don\'t like it. They\'re both going in the drawer, and all four of you are coming home in one piece. That\'s not a request.']},
+  {call:()=>sfx.thud()},
   {talk:'Grace',lines:['I\'m bringing a notebook. For science. And for proof.']},
   {talk:'Boppy',lines:['And I\'m bringing THIS. My pepper jar. Homegrown, pickled in 1989. Older than your mother.']},
   {talk:'Deedee',lines:['Not one pepper for me either. Peppers give me gas.']},
@@ -923,20 +945,26 @@ SCENES.ch3Fishing=[
   {talk:'Deedee',lines:['Tata is on thin ice.']},
   {talk:'Deedee',lines:['I have three pies in, so I\'m staying put. Do NOT let him eat peppers on an empty stomach.']},
   {talk:'Boppy',lines:['I never eat peppers on an empty stomach. I eat them on a full stomach. Then it\'s empty.']},
+  {talk:'Tom',lines:['You said next time you were coming.']},
+  {talk:'Boppy',lines:['Stomach or no stomach. Let\'s go fishing!']},
   {join:'boppy'},
   {wait:2.8},
   {toast:'Goal: Cattail Pier, through the gap at the bottom of Rivituso Row.',time:4.5},
   {toast:'Tip: Kettle Cottage in the Square makes a stomach tea Boppy swears by. If you want to stop on the way.',time:4.5}
 ];
-// 3. Optional: Kettle Cottage. Stomach tea, and the kettle's gossip about a man in a long coat.
+// 3. Optional: Kettle Cottage. Stomach tea, and the kettle's gossip: a flash over the marsh this morning.
 SCENES.ch3Tea=[
   {flag:'ch3-tea'},
   {talk:'Oolong',lines:['Boppy! The usual? Ginger, peppermint, and a little honey for the stomach.']},
   {talk:'Boppy',lines:['The stomach thanks you. The stomach is still complaining. But it thanks you.']},
   {heal:true}, {hearts:'boppy'}, {trace:'boppy-tea'}, {call:()=>sfx.levelChime()},
-  {talk:'The kettle',lines:['The kettle whistles, low and long. Oolong leans in to listen.']},
-  {talk:'Oolong',lines:['The kettle says a man in a long coat has been buying up gold coins at Penny\'s shop. He pays double, and he never takes his hat off.']},
-  {talk:'Tom',lines:['On Long Island? Nobody here pays double for anything.']},
+  // The kettle whistles, low and long, and Oolong leans in to listen (an action, not a narration box).
+  {call:()=>{ tone({type:'sine',f0:1180,f1:1320,dur:1.5,vol:.07}); tone({type:'sine',f0:1760,f1:1980,dur:1.3,vol:.03,delay:.1}); }},
+  {hop:'Oolong',from:()=>{ const a=sceneActor('Oolong'); return a?[a.x,a.y]:[player.x,player.y]; },to:()=>{ const a=sceneActor('Oolong'); return a?[a.x,a.y]:[player.x,player.y]; },time:.3,arc:3},
+  {wait:1.2},
+  {talk:'Oolong',lines:['The kettle says there was a big flash over the marsh this morning. Like lightning, but with no thunder and no rain.']},
+  {talk:'Tom',lines:['A flash! The fish at the pond said that. So did the hill!']},
+  {talk:'Boppy',lines:['Lightning over my marsh? If anybody\'s frying that perch, it\'s me.']},
   {talk:'Oolong',lines:['The kettle also says it\'ll rain on Tuesday. The kettle is wrong a lot. Enjoy the pier.']},
   {toast:'Everyone is healed. Goal: Cattail Pier, south of Rivituso Row.',time:4}
 ];
@@ -956,7 +984,7 @@ SCENES.ch3Story=[
   {talk:'Tom',lines:['Boppy speed, everybody. We walk at Boppy speed.']},
   {toast:'Goal: Cattail Pier. Through the gap at the bottom of the Row.',time:4}
 ];
-// 5. The end of the pier: the system, the Tombo, and Old Iron-Gill takes the pepper jar.
+// 5. The end of the pier: the system, the net, the Tombo, and the Whisker Perch (Old Iron-Gill) takes the pepper jar.
 SCENES.ch3Pier=[
   {flag:'ch3-pier'},
   {walk:'tom',to:routeTo('tom',11,12),speed:.25}, {face:'tom',dir:'down'},
@@ -966,6 +994,7 @@ SCENES.ch3Pier=[
   {talk:'Grace',lines:['Rose. Inside voice. Outside.']},
   {talk:'Tom',lines:['Shhh. Quiet on the pier, everybody. Boppy has a whole system.']},
   {talk:'Boppy',lines:['Tom holds the tackle box. I cast. The fish comes. Nobody talks. That\'s the system.']},
+  {talk:'Tom',lines:['I\'ve got the tackle box in one hand and the big net in the other. I\'m ready.']},
   {flag:'tombo:boppy1'},
   {toast:'New Tombo: You Hold the Net (Tom + Boppy). In battle, it is inside ▲ ATTACK.',time:3.6},
   {call:()=>sfx.whoosh()}, {wait:1.4},
@@ -983,14 +1012,19 @@ SCENES.ch3Pier=[
   {face:'rose',dir:'right'}, {face:'boppy',dir:'right'}, {face:'tom',dir:'right'},
   {talk:'Old Iron-Gill',lines:['BLORP.']},
   {talk:'Rose',lines:['TATA! A FISH! A HUGE ONE! WITH A MUSTACHE!']},
-  {talk:'Boppy',lines:['That\'s no perch. That\'s OLD IRON-GILL. I saw him in 1994! I TOLD everybody!']},
+  {talk:'Boppy',lines:['Those are WHISKERS! That\'s him! That\'s the Whisker Perch! Old Iron-Gill himself!']},
+  {talk:'Grace',lines:['Boppy, he\'s way bigger than THIS big. He\'s bigger than the pier!']},
+  {talk:'Boppy',lines:['I TOLD everybody he grew!']},
   {talk:'Old Iron-Gill',lines:['Blorp. Something smells like peppers.']},
+  {talk:'Boppy',lines:['He TALKS? Thirty years I\'ve been talking to that fish, and NOW he answers?']},
   {call:()=>{ const b=sceneActor('boppy'),g=sceneActor('Old Iron-Gill'); if(b) b.carry=null; if(g) g.carry='jar'; sfx.pickup(); sfx.splat(); }},
   {talk:'Boppy',lines:['MY JAR!']},
   {talk:'Old Iron-Gill',lines:['GULP. Spicy. I love it. Bye.']},
   {walk:'Old Iron-Gill',to:[[14,14],[13,14],[12,14],[11,14],[10,14],[9,14],[8,14],[7,14],[6,14],[5,14],[4,14],[3,14],[2,14],[1,14]],speed:.12,onStep:i=>{ if(i%3===0) sfx.splat(); }},
   {despawn:'Old Iron-Gill'},
   {talk:'Tom',lines:['That was UNCALLED for!'],voice:[['tom','hurt',0,'That was UNCALLED for!']]},
+  {talk:'Rose',lines:['Boppy, that\'s what the Big One was like! Now you saw one too!']},
+  {talk:'Boppy',lines:['I saw one! And Deedee is going to believe me. That\'s worse. She\'ll want details.']},
   {talk:'Boppy',lines:['Pickled in 1989. Nobody takes Boppy’s peppers. NOBODY.','Iron-Gill swam west with my jar, into the Whispering Marsh. Come on, we\'re going after him. And nobody walk fast.']},
   {flag:'ch3-jar'},
   {toast:'Goal: follow Old Iron-Gill west, into the Whispering Marsh.',time:4.5}
@@ -1007,7 +1041,8 @@ SCENES.ch3Sock=[
   {walk:'Soggy Sock',to:routeBeside('Soggy Sock'),speed:.35,onStep:()=>sfx.splat()},
   {talk:'Soggy Sock',lines:['Squelch. Have you seen my other sock? It looks just like me. It\'s ALSO angry.']},
   {talk:'Rose',lines:['Tata, that sock has a FACE.']},
-  {talk:'Boppy',lines:['Marsh junk. Everything people drop out here ends up grumpy about it. Like me, at the DMV.']},
+  {talk:'Boppy',lines:['A talking sock! All my life I\'ve been losing socks, and THIS is where they go?']},
+  {talk:'Tom',lines:['Excuse me, Mr. Sock. We haven\'t seen your other sock. We\'re very sorry.']},
   {battle:'soggysock',tut:'ch3sock'},
   ...CH3_AFTER(()=>flag('battle:soggysock')!=='win',[
     {talk:'Boppy',lines:['Socks. Out here. Nobody keeps track of their socks anymore.']}])
@@ -1019,6 +1054,8 @@ SCENES.ch3Tangle=[
   {walk:'Tangle',to:routeBeside('Tangle'),speed:.35},
   {talk:'Tangle',lines:['Snarl. Somebody cast me badly in 1997. I\'ve been in a knot ever since. Nobody gets past ME.']},
   {talk:'Boppy',lines:['Excuse me? Nobody gets past ME. That\'s MY line. I was saying that at Rikers before you were a knot.']},
+  {talk:'Grace',lines:['Boppy, were YOU the one who cast it badly in 1997?']},
+  {talk:'Boppy',lines:['It was windy. Write that down. It was very windy.']},
   {battle:'tangle',tut:'ch3tangle'},
   ...CH3_AFTER(()=>flag('battle:tangle')!=='win',[]),
   {flag:'ch3-tuts'},
@@ -1028,16 +1065,14 @@ SCENES.ch3Tangle=[
   {talk:'Tom',lines:['We take it slow. Iron-Gill’s wake goes northwest, toward those big reeds.']},
   {toast:'Goal: follow Iron-Gill’s wake to the far corner of the marsh (top left). The marsh’s monsters are awake now.',time:5}
 ];
-// 7. The old reeds: Iron-Gill's wake goes in, and something big is sitting in front of the old boardwalk.
+// 7. The old reeds: the ripples go straight in, and something big and soggy is sitting on the old boardwalk (the Snag, next scene).
 SCENES.ch3Wait=[
   {flag:'ch3-wait'},
-  {talk:'Boppy',lines:['The old reeds. When I was a kid we said there was a sundial back in there that told the wrong time.']},
-  {talk:'Grace',lines:['Sundials can\'t tell the wrong time. That\'s not how sundials work.']},
-  {talk:'Boppy',lines:['That\'s what I said.']},
-  {talk:'Old reeds',lines:['Iron-Gill’s wake goes straight into the reeds. There used to be a boardwalk through here. Something big and soggy is sitting in front of it.']},
+  {talk:'Boppy',lines:['The old reeds. I played back in there when I was nine. There\'s a sundial in a clearing. We called it Sundial Hollow.']},
+  {face:'tom',dir:'up'}, {call:()=>{ sfx.splat(); }}, {wait:.5}, {call:()=>{ sfx.splat(); sfx.thud(); }}, {wait:.6},
   {talk:'Tom',lines:['Then we ask it nicely to move. Iron-Gill isn\'t keeping that jar.']}
 ];
-// 8. The Snag sits on the old boardwalk. Once it drifts off, the reeds open onto Sundial Hollow.
+// 8. The Snag sits on the old boardwalk (Boppy's boot is stuck on it). Once it drifts off, the reeds open onto Sundial Hollow.
 SCENES.ch3Snag=[
   {flag:'ch3-snag',value:'pending'},
   {place:'Snag',at:spotNear(2)},
@@ -1045,57 +1080,76 @@ SCENES.ch3Snag=[
   {walk:'Snag',to:routeBeside('Snag'),speed:.45,onStep:()=>sfx.splat()},
   {talk:'Snag',lines:['Creak. This was a boardwalk once. Now it\'s MY spot. Everything catches on me here. I like it.']},
   {talk:'Boppy',lines:['You\'re sitting on the way to Sundial Hollow. Shove over.']},
+  {talk:'Tom',lines:['He means please. Could you please shove over?']},
   {talk:'Snag',lines:['Make me. Slowly. I\'m very heavy when wet. I\'m always wet.']},
   {talk:'Rose',lines:['Tata, it\'s a LOG with a BOOT.']},
+  {talk:'Boppy',lines:['That\'s my boot! I lost that boot in 1988!']},
   {battle:'snag',tut:'ch3snag'},
   ...CH3_AFTER(()=>flag('battle:snag')!=='win',[]),
   {flag:'ch3-snag'},
+  // The Snag rolls over, creaks and drifts off; the old reeds lean apart around a narrow mossy boardwalk (an action, not a narration box).
   {call:()=>{ ch3OpenReeds(); storyWorld(); sfx.whoosh(); sfx.splat(); }},
-  {talk:'Old reeds',lines:['The Snag rolls over, creaks, and drifts off into the shallows. Behind it, the old reeds lean apart around a narrow, mossy boardwalk.']},
+  {wait:1}, {call:()=>sfx.splat()}, {wait:.4},
   {talk:'Grace',lines:['A secret boardwalk. Of course there\'s a secret boardwalk.']},
   {talk:'Boppy',lines:['Not secret. Just old. Like me. Nobody comes back here anymore.']},
   {toast:'Goal: through the old reeds (top left) into Sundial Hollow.',time:4.5}
 ];
-// 9. Sundial Hollow: the sundial says seven. It is not seven. A coin is wedged under the pointer.
-SCENES.ch3Hollow=()=>[
+// 9. Sundial Hollow (story-ch03.md scene 8): the clearing has no colour, and a fish frozen mid-jump in an orange block hangs in the air
+// over the grey water. Boppy pokes it with his rod, Tom holds the net under it, Grace finds the hole, Rose finds the bulb on the sundial.
+// The block is drawn at SUNDIAL_SPOT (engine/plate.js); the grey circle is drawSundialGrey (a stand-in until ch3-hollow-grey is approved).
+SCENES.ch3Hollow=[
   {flag:'ch3-hollow'},
-  {walk:'tom',to:routeTo('tom',10,16),speed:.25}, {face:'tom',dir:'up'},
-  {place:'boppy',at:[12,16],dir:'up'}, {place:'grace',at:[9,16],dir:'up'}, {place:'rose',at:[11,17],dir:'up'},
-  {talk:'Boppy',lines:['This is Sundial Hollow. I haven\'t been back here since I was nine, and it hasn\'t changed.','The sundial still says seven o\'clock, no matter what time it is.']},
-  {talk:'Grace',lines:['It\'s the AFTERNOON. The sun is right there. Sundials can\'t be wrong. That\'s not how sundials work.']},
-  {talk:'Boppy',lines:['That\'s what I said.']},
-  {talk:'Rose',lines:['Tata! Something shiny is stuck in it!']},
-  {walk:'tom',to:[[11,14]],speed:.25}, {face:'tom',dir:'up'},
-  {talk:'Tom',lines:['It\'s a gold coin, wedged right under the pointer. That\'s what was holding the shadow at seven. Somebody pushed this in on purpose.']},
-  {call:()=>sfx.pickup()}, {flag:'ch3-coin'}, {give:'oldcoin'},
-  {coinFind:1},
-  {wait:.6},
-  {call:()=>{ sfx.whoosh(); sfx.levelChime(); }},
-  {talk:'The sundial',lines:['Click. The shadow swings all the way around the dial and settles on the right hour.']},
-  {call:()=>{ ch3DrainSpillway(); sfx.splat(); sfx.thud(); }},
-  {talk:'The spillway',lines:['Up north, the spillway gurgles, then glugs, then drains away to mud. The way to the Deep Pool is open.']},
-  {talk:'Grace',lines:['It MOVED. Shadows don\'t move like that. I\'m writing this down. In pen.']},
-  ...(flag('ch3-tea')?[
-    {talk:'Tom',lines:['Oolong\'s kettle said a man in a long coat is buying gold coins at Penny\'s and paying double. And now a gold coin turns up jammed in a sundial.']},
-    {talk:'Boppy',lines:['Nobody pays double on Long Island. Keep that in your pocket, Tom. Deep in your pocket.']}]:[
-    {talk:'Boppy',lines:['Old gold. Keep that in your pocket, Tom. Penny will want to hear about it. Penny wants to hear about everything.']}]),
-  {talk:'Boppy',lines:['Now the water has drained, and the way to the Deep Pool is open. That\'s where Iron-Gill goes to sulk.']},
-  {toast:'Goal: the Deep Pool, across the drained spillway at the top of Sundial Hollow.',time:4.5}
+  {around:[10.5,9.3],size:[1.4,.7],tom:[10,10]},   // the block hangs over the water at tile 10.5, row 8.4; the party stands on the bank under it
+  {cam:[10.5,8.9]}, {zoom:1.45,time:.7},   // frame the party AND the block above them (the automatic camera frames the party only, which cut the block off in landscape)
+  {talk:'Boppy',lines:['This is Sundial Hollow. I haven\'t been back here since I was nine.']},
+  {talk:'Boppy',lines:['It was green. All of this was green. Who took the green out of my hollow?']},
+  {talk:'Rose',lines:['Tata! There\'s a fish in the SKY!']},
+  {talk:'Grace',lines:['It\'s inside an orange block, like the dragonfly. It\'s just hanging there. Nothing is holding it up!']},
+  {talk:'Boppy',lines:['That fish jumped, and he never came down. Seventy-some years I\'ve been fishing, and I never saw a fish stay up.']},
+  ch1Tug('boppy'), {sfx:'bonk'}, ch1Tug('boppy'), {wait:.3},   // Boppy pokes the block with his rod; it doesn't move
+  {talk:'Boppy',lines:['Tom. Get under it with the net.']},
+  {talk:'Tom',lines:['It can\'t be moved. I tried one at the pond and one in California.']},
+  {talk:'Boppy',lines:['Then it won\'t hurt to hold the net.']},
+  {face:'tom',dir:'up'}, {call:()=>{ setFlag('ch3-netup'); sfx.whoosh(); }}, {wait:.6},   // Tom holds the big net up over his head (STORY_PROPS.netup)
+  {talk:'Tom',lines:['I\'m holding the net.']},
+  {talk:'Boppy',lines:['Good. Hold it better.']},
+  ch1Tug('tom'), {wait:.3},
+  {talk:'Grace',lines:['There\'s a little round hole in the side, like the dragonfly one had. I\'m drawing it.']},
+  {walk:'rose',to:()=>{ const p=findPath(currentMap,sceneActor('rose'),{x:13,y:11}); return p.length?p.map(q=>[q.x,q.y]):[]; },speed:.2},
+  {face:'rose',dir:'left'}, {call:()=>{ setFlag('ch3-bulb'); sfx.pickup(); }},
+  ch1Tug('rose'),
+  {talk:'Rose',lines:['And there\'s Deedee\'s litter! On the clock rock!']},
+  {talk:'Grace',lines:['Dragonfly: grey grass, orange block, round hole, burnt bulb. Fish: grey reeds, orange block, round hole, burnt bulb.']},
+  {talk:'Tom',lines:['Lemon: grey tree, orange block, round hole, burnt bulb.']},
+  {talk:'Grace',lines:['I\'m writing that down too. In pen.']},
+  {talk:'Boppy',lines:['Somebody want to tell me what it means?']},
+  {talk:'Grace',lines:['I don\'t know yet, Boppy. I\'m only on page two.']},
+  {talk:'Boppy',lines:['Well, it\'s a small one anyway. Mine was double.']},
+  {call:()=>{ sfx.splat(); sfx.thud(); }}, {wait:.4}, {call:()=>sfx.splat()},   // a huge splash from the north
+  {face:'boppy',dir:'up'},
+  {talk:'Boppy',lines:['That\'s the Deep Pool. That\'s where Iron-Gill goes to sulk. Tom, you can put the net down.']},
+  {call:()=>{ setFlag('ch3-netup',false); setFlag('ch3-coin'); ch3DrainSpillway(); }},
+  {zoom:1,time:.8}, {cam:null},   // ch3-coin is the old flag name for "the hollow scene is done": the way north to the Deep Pool is open
+  {toast:'Goal: the Deep Pool, over the stepping stones at the top of Sundial Hollow.',time:4.5}
 ];
-// 10. The Deep Pool: Old Iron-Gill surfaces. Boss fight.
+// 10. The Deep Pool: Old Iron-Gill surfaces with the gold coin caught in its mustache. Boss fight.
 SCENES.ch3Pool=[
-  {flag:'ch3-pool'}, {call:()=>storyWorld()},
+  {flag:'ch3-pool'}, {call:()=>{ setFlag('ch3-netup',false); storyWorld(); }},
   {hide:'Old Iron-Gill'},
   {walk:'tom',to:routeTo('tom',10,4),speed:.25}, {face:'tom',dir:'up'},
   {place:'boppy',at:[11,4],dir:'up'}, {place:'rose',at:[9,5],dir:'up'}, {place:'grace',at:[12,5],dir:'up'},
   {talk:'Boppy',lines:['The Deep Pool. Nobody has ever seen the bottom. My father said it goes all the way to Ohio.']},
   {call:()=>{ sfx.splat(); sfx.thud(); }}, {wait:.5},
+  {call:()=>{ const b=findMonster('irongill'); if(b) b.carry='mcoin'; }},
   {show:'Old Iron-Gill'}, {face:'Old Iron-Gill',dir:'down'},
   {talk:'Old Iron-Gill',lines:['Blorp. The old man. And his small, loud friends.']},
   {talk:'Boppy',lines:['You took my jar.']},
-  {talk:'Old Iron-Gill',lines:['I took your jar. Forty years you sit on that pier and you never once come to visit. You only ever bring HOOKS.','A man in a long coat stopped the sundial for me. He said if the day never ended, you\'d never pack up and go home.']},
+  {talk:'Old Iron-Gill',lines:['I took your jar. Forty years you sit on that pier and you never once come to visit. You only ever bring HOOKS.','This morning there was a flash over the hollow. Now I\'m big enough to come up and say it to your face.']},
   {talk:'Rose',lines:['Boppy, he\'s sad! And spicy!']},
-  {talk:'Boppy',lines:['He\'s a FISH, kiddo.','Tom. Tackle box. We do this the old way.']},
+  {talk:'Rose',lines:['And he has gold in his mustache!']},
+  {talk:'Boppy',lines:['First the Big One asks about me, and now this one. I\'m very big with the fish, Tom.']},
+  {talk:'Tom',lines:['You\'re a celebrity. I\'ll hold the net.']},
+  {talk:'Boppy',lines:['Tom. Tackle box. We do this the old way.']},
   {talk:'Tom',lines:['Quiet on the pier, everybody.']},
   {battle:'irongill',tut:'irongill'},
   {if:()=>flag('battle:irongill')!=='win',then:[
@@ -1103,29 +1157,45 @@ SCENES.ch3Pool=[
     {talk:'Boppy',lines:['Headcount. One, two, three, four. Good.','He belches every third turn, Tom. Heal right after. When he dives, hit the water hard, or do our Tombo.']},
     {toast:'Face Old Iron-Gill and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
-// 11. After Iron-Gill (won in the scene, or on a retry with A): the jar comes back. Catch and release.
+// 11. After Iron-Gill (won in the scene, or on a retry with A): the jar comes back, the coin shakes loose for Boppy, catch and
+// release, and the walk back through the hollow, still grey, the fish still in the air.
 SCENES.ch3AfterBoss=()=>[
   {flag:'ch3-clear'},
+  {call:()=>setFlag('ch3-netup',false)},
+  {place:'boppy',at:[11,4],dir:'up'}, {place:'rose',at:[9,5],dir:'up'}, {place:'grace',at:[12,5],dir:'up'},   // the fight may have left Boppy lagging behind
   {call:()=>{ sfx.splat(); sfx.levelChime&&sfx.levelChime(); }},
   ...(flag('kind:irongill')?[
     {talk:'Old Iron-Gill',lines:['Blorp. You told me about 1970. Nobody tells me anything. They only fish.','Come by the pier sometimes, old man. No hooks. Just talking.']}]:[
     {talk:'Old Iron-Gill',lines:['Blorp. Fine. FINE. Take your jar. It was too spicy anyway.']}]),
+  {call:()=>{ sfx.raspberry&&sfx.raspberry(); sfx.thud(); }},   // the burp; the jar lands on the bank
   ...(bag.includes('pepperjar')?[]:[{give:'pepperjar'}]),
-  {talk:'Boppy',lines:['My jar. Still sealed. Still hot.','And look at that. Forty years, and I finally caught Old Iron-Gill.']},
+  {talk:'Boppy',lines:['My jar. Still sealed. Still hot.']},
+  {talk:'Old Iron-Gill',lines:['And take this. It\'s been itching my mustache all day.']},
+  {call:()=>{ const b=findMonster('irongill'); if(b) b.carry=null; sfx.coin&&sfx.coin(); }}, {wait:.5},
+  {ch3Reveal:'coin'},
+  {ch1Reveal:'grin'},
+  {talk:'Boppy',lines:['Gold like my teeth, with a fish on it! I got one! Cozy Rosie, I got one!']},
+  {give:'fishcoin'}, {ch3Reveal:'hat'},
+  {talk:'Rose',lines:['Boppy got treasure! Now your mouth matches your hat!']},
+  {talk:'Boppy',lines:['And look at that. Forty years, and I finally caught Old Iron-Gill.']},
   {talk:'Grace',lines:['Technically he caught your jar, and then we caught him. I\'m writing it down anyway. For proof.']},
-  {talk:'Boppy',lines:['Put the date. Put the time. Use the sundial. It works now.']},
-  {talk:'Tom',lines:['It works because I took the coin out. A man in a long coat stops a sundial so a lonely fish can keep his company. That\'s a strange favor to do for a fish.']},
+  {talk:'Boppy',lines:['Put the date. Put the time. And put that he was THIS big.']},
+  {talk:'Grace',lines:['Boppy, he was bigger than that.']},
+  {talk:'Boppy',lines:['First time in my life I ever undersold a fish.']},
   {talk:'Boppy',lines:['Go on, you old bucket. Catch and release. I\'ll come by. No hooks.']},
   {finale:'irongill'},
   {call:()=>{ setFlag('ch3-release'); storyWorld(); sfx.splat(); }},
-  {talk:'Deep Pool',lines:['Iron-Gill sinks back into the Deep Pool, burping softly. The bubbles look almost friendly.']},
+  {wait:.6}, {call:()=>sfx.splat()}, {wait:.4},   // Iron-Gill sinks back into the Deep Pool, burping softly; friendly bubbles
   {trace:'boppy-irongill'}, {hearts:'boppy'},
   {talk:'Rose',lines:['Boppy, can we go home now? I want to tell Deedee EVERYTHING.']},
   {talk:'Boppy',lines:['Everything except the pepper part.']},
   {talk:'Rose',lines:['ESPECIALLY the pepper part.']},
+  {walk:'tom',to:routeTo('tom',10,10),speed:.22}, {face:'tom',dir:'up'},   // back through the hollow: still grey, the fish still in the air
+  {wait:.5},
+  {talk:'Boppy',lines:['Still up there. Somebody ought to let that fish finish his jump.']},
   {toast:'Goal: home to Deedee and Boppy’s house on Rivituso Row.',time:4.5}
 ];
-// 12. Deedee and Boppy's house: Rose tells on Boppy. Crisp. Chapter complete.
+// 12. Deedee and Boppy's house: Boppy's catch, Rose tells on him, the gold coin, the third flashbulb, Deedee's rule. Crisp.
 SCENES.ch3End=[
   {flag:'ch3-done',value:'pending'},
   {place:'Deedee',at:[7,9],dir:'right'},
@@ -1133,15 +1203,26 @@ SCENES.ch3End=[
   {place:'boppy',at:[9,9],dir:'left'}, {place:'grace',at:[9,10],dir:'up'}, {place:'rose',at:[7,10],dir:'up'},
   {hearts:'Deedee'},
   {talk:'Deedee',lines:['There they are! Well? Did anybody catch anything?']},
-  {talk:'Boppy',lines:['Old Iron-Gill. Forty years, Dee. I TOLD everybody.']},
+  {talk:'Boppy',lines:['Old Iron-Gill. Forty years, Deary. I TOLD everybody.']},
   {talk:'Deedee',lines:['Nobody believed you.']},
-  {talk:'Grace',lines:['I have proof. It\'s in my notebook. With the time. From a sundial.']},
+  {talk:'Grace',lines:['I have proof. It\'s in my notebook. I drew his mustache.']},
   {talk:'Rose',lines:['Deedee! Boppy almost ate a PEPPER! On the pier! Before LUNCH!']},
   {talk:'Deedee',lines:['Did he.']},
   {talk:'Deedee',lines:['Hand me my glasses. I want to look at him properly. Where ARE my glasses.']},
   {talk:'Rose',lines:['Apron pocket, Deedee!']},
-  {talk:'Deedee',lines:['Thank you, Rosie. Now. Let me look at him.']},
+  {talk:'Deedee',lines:['Thank you, Cozy Rosie. Now. Let me look at him.']},
   {talk:'Boppy',lines:['...Almost isn\'t eating. Almost is fine.']},
+  {talk:'Boppy',lines:['Look. I got gold. From the fish.']},
+  {talk:'Deedee',lines:['Fifty-one years I\'ve been married to you, hubby, and you never once brought ME gold from a fish.']},
+  {talk:'Boppy',lines:['It\'s gold like my teeth!']},
+  {talk:'Deedee',lines:['I paid for those teeth.']},
+  {talk:'Grace',lines:['Deedee, there\'s another orange block. There\'s a fish in it, and it\'s stuck up in the air over the water.']},
+  {talk:'Rose',lines:['And more litter.']},
+  {call:()=>sfx.pickup()}, {wait:.4}, {call:()=>sfx.thud()},   // Rose sets the bulb down; Deedee takes the other two out of the drawer and lines up all three
+  {ch3Reveal:'bulbs3'},
+  {talk:'Deedee',lines:['Three. My pond, California, and the marsh.']},
+  {talk:'Deedee',lines:['New rule. Nobody in this family goes anywhere alone. Not to the pond, not to the pier, not to the mailbox. Tom, that goes for Los Angeles too.']},
+  {talk:'Tom',lines:['Yes, Mom.']},
   {talk:'Deedee',lines:['Sit down, you. I made rhubarb crisp. Everybody sit. And eat SLOWLY.']},
   {talk:'Boppy',lines:['Slowly. Finally. Somebody in this family gets it.']},
   {trace:'ch3-crisp'}, {hearts:'tom'}, {call:()=>sfx.levelChime()},
@@ -1168,7 +1249,7 @@ TRIGGERS.push(
 );
 // The marsh holds still until its two story fights. Before Iron-Gill shows up, the pier has nothing to fight anyway.
 HOLD_RULES.push(n=>STORY.chapter===3&&flag('ch3-tuts')!==true&&currentMap.id==='reeds');
-// Sundial Hollow holds still until the coin is out of the sundial.
+// Sundial Hollow holds still until the hollow scene is over (ch3-coin).
 HOLD_RULES.push(n=>STORY.chapter===3&&!flag('ch3-coin')&&currentMap.id==='sundial');
 
 // C3b map changes. They check flags (not events), so they also hold after loading a save.
@@ -1181,7 +1262,7 @@ function ch3OpenReeds() {
   }
   M.reedsOpen=true; M.mini=null;
 }
-// Sundial Hollow's spillway drains once the coin is out of the sundial. On the painted plate (spec.drainOpen) only the
+// Sundial Hollow's spillway drains at the end of the hollow scene (ch3-coin). On the painted plate (spec.drainOpen) only the
 // painted stepping-stone crossing opens; without it the old rows 9 and 10 turn to mud.
 function ch3DrainSpillway() {
   const M=worlds.sundial; if(!M||M.drained) return;
@@ -1205,6 +1286,11 @@ STORY_WORLD.push(()=>{
   else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.sunk=null; b.hidden=false; }
 });
 
+// The fish coin caught in Old Iron-Gill's mustache (ch3Pool until the coin shakes loose in ch3AfterBoss). A stand-in drawn in code until
+// the Library picture ch3-irongill-coin is approved: the painted fish coin (art/props/sundial/ch3_coin.webp) hanging in its whiskers.
+STORY_PROPS.mcoin=(cx,y,a)=>{ const f=a.facing,dx=Math.round((f==='right'?1.1:f==='left'?-1.1:-.95)*T),x=cx+dx,yy=Math.round(y+T*.05),w=Math.round(T*.42);
+  if(!PROPART.draw('sundial/ch3_coin',x,yy,{w,rot:-.25})) { ellipse(x,yy,w/2,w/2,'#e2b23c'); }
+  if((Math.floor(elapsedTime*3)%5)===0) { rect(x+w/2-2,yy-w/2-3,2,5,'#fff6c0'); rect(x+w/2-4,yy-w/2-1,6,2,'#fff6c0'); } };
 // Boppy's pepper jar, carried by Boppy, then by Old Iron-Gill (it has it in its mouth).
 STORY_PROPS.jar=(cx,y)=>{ const yy=Math.round(y-8);
   rect(cx-5,yy-1,10,12,OUT); rect(cx-4,yy,8,10,'#e8f0e0'); rect(cx-4,yy+3,8,6,'#d94a3a'); rect(cx-2,yy+4,2,4,'#f48a5a'); rect(cx+1,yy+5,2,3,'#7aa05a');
@@ -1250,6 +1336,14 @@ STORY_WORLD.push(()=>{
   followerToSpot(f,followers.indexOf(f),W.catchTime);
 });
 STORY_MAPFX.push(time=>{
+  // Tom holds the big net up over his head under the frozen fish (ch3Hollow, flag ch3-netup). A stand-in drawn in code until the Library
+  // picture ch3-tom-net is approved: a wooden pole from his hands up past his head, a round hoop with a mesh bag.
+  if(flag('ch3-netup')&&currentMap.id==='sundial'&&!player.hidden) { const p=position(player),cx=Math.round((p.x+.5)*T),hand=Math.round((p.y+1)*T-T*1.5),top=hand-Math.round(T*1.3);
+    rect(cx+3,top+6,3,hand-top,OUT); rect(cx+4,top+6,1,hand-top-1,'#a8794a');
+    const hx=cx+4,hy=top,rw=Math.round(T*.42),rh=Math.round(T*.16);
+    for(let k=0;k<5;k++) { const yy=hy+2+k*3,ww=Math.round(rw*(1-k*.16)); gfx.globalAlpha=.55; rect(hx-ww,yy,ww*2,1,'#e8e4d8'); gfx.globalAlpha=1; }
+    for(let k=-2;k<=2;k++) { gfx.globalAlpha=.45; rect(hx+Math.round(k*rw*.38),hy+1,1,12-Math.abs(k)*2,'#e8e4d8'); gfx.globalAlpha=1; }
+    gfx.beginPath(); gfx.ellipse(hx,hy,rw,rh,0,0,Math.PI*2); gfx.lineWidth=Math.max(2,T*.07); gfx.strokeStyle=OUT; gfx.stroke(); gfx.lineWidth=Math.max(1,T*.035); gfx.strokeStyle='#9aa0a6'; gfx.stroke(); }
   // Props a follower carries in a scene (only monsters draw their own).
   for(const f of followers) if(f.carry&&STORY_PROPS[f.carry]&&!f.hidden) { const p=position(f); STORY_PROPS[f.carry](Math.round((p.x+.5)*T)+9,Math.round((p.y+1)*T-12),f); }
   const W=BOPPY_WIND,now=performance.now(); if(W.lag<1&&!W.halt&&now>W.puff) return;

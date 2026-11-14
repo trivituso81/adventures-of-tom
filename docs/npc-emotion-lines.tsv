@@ -66,7 +66,7 @@ chapters	file	line	character	where	mood	text
 1-10	data/maps-le.js	1273	Oolong	map tea, base	surprised	The kettle has been gossiping again.
 1-10	data/maps-le.js	1274	Oolong	map tea, base	happy	It spilled the tea. Literally.
 1-10	data/maps-le.js	1275	Oolong	map tea, base	unimpressed	Please mind the dramatic biscuits.
-3	data/maps-le.js	1276	Oolong	map tea, when {chapter:3,flag:ch3-tea}	surprised	The kettle is still going on about that man in the long coat. Gold coins. Paying double.
+3	data/maps-le.js	1276	Oolong	map tea, when {chapter:3,flag:ch3-tea}	surprised	The kettle is still going on about that flash over the marsh. No thunder, no rain. It can't let it go.
 3	data/maps-le.js	1276	Oolong	map tea, when {chapter:3,flag:ch3-tea}	unimpressed	I told it to mind its own business. It's a kettle. It has no business.
 1-10	data/maps-le.js	1308	Luna	map observatory, base	proud	I've discovered a new constellation.
 1-10	data/maps-le.js	1309	Luna	map observatory, base	surprised	It's shaped exactly like my laundry.
@@ -379,79 +379,79 @@ chapters	file	line	character	where	mood	text
 2	data/scenes.js	646	Mr. Washington	scene ch2End	surprised	Where was I? Oh. I was done. That was the whole story.
 2	data/scenes.js	648	Mr. Washington	scene ch2End	proud	Funny. For a while there I didn't want anything to change. Then I remembered the best parts all came from things changing.
 2	data/scenes.js	650	Mr. Washington	scene ch2End	happy	Keep the old windows. Smart man.
-3	data/scenes.js	934	Oolong	scene ch3Tea	happy	Boppy! The usual? Ginger, peppermint, and a little honey for the stomach.
-3	data/scenes.js	938	Oolong	scene ch3Tea	surprised	The kettle says a man in a long coat has been buying up gold coins at Penny's shop. He pays double, and he never takes his hat off.
-3	data/scenes.js	940	Oolong	scene ch3Tea	unimpressed	The kettle also says it'll rain on Tuesday. The kettle is wrong a lot. Enjoy the pier.
-3	data/scenes.js	1302	Kiki	scene ch3End	scared	(on the radio) ...kkkt... Stage 7! The big door just unlocked itself! From the INSIDE! Is that bad? That feels bad.
-4	data/scenes.js	1345	Ray	scene ch4Gate	happy	I wave at everybody. That's the job. Go on in.
-4	data/scenes.js	1347	Kiki	scene ch4Gate	scared	TNB! TNB! The rack! Rack two! It's GONE.
-4	data/scenes.js	1349	Kiki	scene ch4Gate	scared	It was right there in Stage 7. Then the fog machine turned itself on, and the lights went out, and things started CLAPPING.
-4	data/scenes.js	1351	Dana	scene ch4Gate	sad	I'm Dana Park, the director, and this is my first feature. Without the costumes we can't shoot, and without a shoot there's no movie.
-4	data/scenes.js	1352	Dana	scene ch4Gate	unimpressed	And the Backlot is full of little grumpy things. One of them ate a cue card. One of them is clapping at the horse.
-4	data/scenes.js	1363	Toni	scene ch4Snack	proud	Plain roast chicken. No salt, no skin, no sauce. I keep it for the grips. They're also picky.
-4	data/scenes.js	1368	Toni	scene ch4Snack	loving	Here. For the road. Don't tell the grips.
-4	data/scenes.js	1503	Dana	scene ch4End	happy	The rack! The costumes! We can shoot! We're shooting! That's a WRAP on today, everybody!
-4	data/scenes.js	1505	Kiki	scene ch4End	happy	WRAP PARTY AT CRAFTY! Toni made a cake! It's shaped like a clapper! It's not clapping!
-4	data/scenes.js	1506	Dana	scene ch4End	proud	TNB, the studio wants you to have this. Gold-plated. It's the steamer from the lot’s very first wardrobe department.
-4	data/scenes.js	1511	Dana	scene ch4End	happy	And crew jackets. Wrap Party Jackets. Only the crew gets one. You're crew now. Even the dog.
-5	data/scenes.js	1702	Principal Pruitt	scene ch5Pruitt	happy	Mrs. Gregori! Thank goodness. And you brought the whole family.
-5	data/scenes.js	1705	Principal Pruitt	scene ch5Pruitt	proud	Not haunted. Grumpy. Thirty-one years in this building. I know the difference.
-5	data/scenes.js	1706	Principal Pruitt	scene ch5Pruitt	scared	The bells ring at random. The clocks in the hall all say different times. And the sign-up sheet got up off the table and walked into the school.
-5	data/scenes.js	1707	Principal Pruitt	scene ch5Pruitt	scared	The Cafetorium doors run on the bell system, and the bells run on the hallway clocks.
-5	data/scenes.js	1707	Principal Pruitt	scene ch5Pruitt	scared	Until the clocks are right, those doors won't open, and thirty parents are on their way.
-5	data/scenes.js	1709	Principal Pruitt	scene ch5Pruitt	proud	So please set every clock in the hall to exactly seven o'clock. Not seven-thirty, and not six-fifty-nine. Seven.
-5	data/scenes.js	1739	Mr. Halverson	scene ch5Snack	proud	Every conference night. Twelve years. It's the only reason Gary shows up.
-5	data/scenes.js	1744	Mr. Halverson	scene ch5Snack	happy	Take some for the road. Don't tell Gary.
-5	data/scenes.js	1798	Principal Pruitt	scene ch5Clocks	unimpressed	(on the intercom) ...ksssh... Attention, please. The Cafetorium doors are OPEN. Parents, please wait in the hall. There's something in the Cafetorium.
-5	data/scenes.js	1799	Principal Pruitt	scene ch5Clocks	happy	Mrs. Gregori’s brother, please go into the Cafetorium. Thank you. ...ksssh.
-5	data/scenes.js	1852	Principal Pruitt	scene ch5AfterBoss	happy	You got the sheet back, and the bells and the clocks are working! Parents, come on in! Conference night is ON!
-5	data/scenes.js	1856	Principal Pruitt	scene ch5AfterBoss	proud	Mrs. Gregori. Best conference night in thirty-one years. Not one parent cried. Well. Mr. Delgado. Happy tears.
-5	data/scenes.js	1857	Principal Pruitt	scene ch5AfterBoss	proud	This is for you. My Golden Stopwatch. Thirty-one Field Days. It's never once stopped early.
-5	data/scenes.js	1861	Principal Pruitt	scene ch5AfterBoss	happy	And Field Day shirts. Staff shirts. You're all staff now. Even the small loud ones.
-6	data/scenes.js	2106	Michael	scene ch6Nara	surprised	I found my car keys in the gutter. With three peanuts. Arranged in a triangle.
-6	data/scenes.js	2122	Bernadette	scene ch6Park	angry	Halt. Neighborhood Watch. State your business.
-6	data/scenes.js	2124	Bernadette	scene ch6Park	proud	I know who you are. You water your drought garden. Everybody knows.
-6	data/scenes.js	2125	Bernadette	scene ch6Park	proud	Bernadette. Neighborhood Watch Captain, nineteen years. And I'll say it, because nobody else will.
-6	data/scenes.js	2125	Bernadette	scene ch6Park	scared	The squirrels are organized.
-6	data/scenes.js	2127	Bernadette	scene ch6Park	angry	They have lookouts in the playground, a spy in the community garden,
-6	data/scenes.js	2127	Bernadette	scene ch6Park	angry	and somebody at the picnic tables stuffing their cheeks with anything that's not nailed down.
-6	data/scenes.js	2128	Bernadette	scene ch6Park	surprised	Everything they steal goes up THAT tree, the Old Oak. There's a little door in the trunk that opens with a secret knock. I've only ever heard bits of it.
-6	data/scenes.js	2132	Bernadette	scene ch6Park	proud	Clear the squirrels out of those three spots, and Nara can dig up what they buried. I'd bet a piece of that secret knock is in each hole.
-6	data/scenes.js	2132	Bernadette	scene ch6Park	proud	I'll be here with my clipboard.
-6	data/scenes.js	2329	Bernadette	scene ch6End	proud	Neighborhood Watch Captain’s report: case closed.
-6	data/scenes.js	2329	Bernadette	scene ch6End	proud	I'd like it noted that I was right.
-6	data/scenes.js	2331	Michael	scene ch6End	loving	Lachlan wants Nara to have this. He painted a tennis ball gold. It took him four days and most of a bottle of paint.
-6	data/scenes.js	2335	Bernadette	scene ch6End	proud	And these. Neighborhood Watch Vests. I give out one every nineteen years. Today I'm giving out three. Even the dog.
-7	data/scenes.js	2582	Page	scene ch7Page	scared	Oh! Tom. Girls. Welcome to the Hush Library. Everything is fine.
-7	data/scenes.js	2585	Page	scene ch7Page	scared	...It's not fine. It started a week ago, and it's coming up from the Stacks, the old part of the library downstairs.
-7	data/scenes.js	2586	Page	scene ch7Page	surprised	Every book down there is whispering everything it ever overheard.
-7	data/scenes.js	2586	Page	scene ch7Page	surprised	That's seventy years of people reading quietly and thinking nobody was listening.
-7	data/scenes.js	2588	Page	scene ch7Page	unimpressed	Books overhear EVERYTHING. That's why we whisper in here. It was never for the people. It's for the books.
-7	data/scenes.js	2590	Page	scene ch7Page	proud	The Stacks have three sections: Fiction, Nonfiction and Picture Books.
-7	data/scenes.js	2590	Page	scene ch7Page	proud	The Reading Room is at the very back, and I think the whispering starts in there.
-7	data/scenes.js	2591	Page	scene ch7Page	sad	But the Reading Room doors use the old card catalog lock, and I lost the password in 1998.
-7	data/scenes.js	2593	Page	scene ch7Page	loving	Then you're in charge of the signs. Here. The staff door is open.
-7	data/scenes.js	2595	Page	scene ch7Page	scared	Please be careful. And please, don't answer the books. It only encourages them.
-7	data/scenes.js	2744	Page	scene ch7End	happy	Listen. It's quiet. Properly quiet. The good kind. The dictionaries are snoring.
-7	data/scenes.js	2746	Page	scene ch7End	happy	Then we'll read it. Story time, Saturdays, out loud. And I think I know who should do the voices.
-7	data/scenes.js	2747	Page	scene ch7End	loving	Grace. This is for you. A Gold Library Card. No limit. No late fees. Ever.
-7	data/scenes.js	2751	Page	scene ch7End	loving	And sweaters. I knit one every winter. I have run out of people. Please take some.
-8	data/scenes.js	2943	Bernadette	scene ch8Block	proud	Tom. Good. Neighborhood Watch Captain, potluck committee chair. Forty RSVPs. Thirty-nine dishes. One bread guy.
-8	data/scenes.js	2943	Bernadette	scene ch8Block	angry	Every pilot light on 2nd Avenue went out at noon. Every one. Including mine. I had a casserole IN there.
-8	data/scenes.js	2945	Bernadette	scene ch8Block	angry	They said it's the weekend. I said it's the POTLUCK. They hung up. I've filed a report. With myself.
-8	data/scenes.js	2952	Bernadette	scene ch8Block	proud	The barn has been chained up for sixty years. Here, take the committee key. I'm the committee.
-8	data/scenes.js	2952	Bernadette	scene ch8Block	proud	We're closing the boulevard for the potluck tables, and I need the bread by six.
-8	data/scenes.js	3113	Bernadette	scene ch8End	proud	Forty loaves. Six o’clock. On the dot. Potluck committee report: we're a success.
-8	data/scenes.js	3113	Bernadette	scene ch8End	proud	The gumbo is hot. The casserole is hot. Everything is hot. I'd like it noted.
-8	data/scenes.js	3117	Mr. Washington	scene ch8End	loving	Tom. Come here. This was my daddy’s. He drove the 7 line out of that barn for thirty years. Night run. He swore by the biscuits.
-8	data/scenes.js	3117	Mr. Washington	scene ch8End	loving	He'd want it on somebody who went back in there and lit that stove. Here.
-8	data/scenes.js	3121	Mr. Washington	scene ch8End	proud	I know you will. Now stand up straight. He'd say that too.
-8	data/scenes.js	3122	Michael	scene ch8End	happy	Lachlan has eaten three rolls and fallen asleep in the bread basket. I'm leaving him there. He's happy.
-9	data/scenes.js	3361	Luna	scene ch9Luna	happy	Oh! Visitors. At night. Is that... is that an INVITATION?
-9	data/scenes.js	3363	Luna	scene ch9Luna	sad	Twelve years I have swept this floor. That little silver door in the back has never once opened. I thought it was a closet.
-9	data/scenes.js	3363	Luna	scene ch9Luna	sad	And my telescope can't find the moon. It's not behind a cloud. It's not anywhere. It's just GONE.
-9	data/scenes.js	3367	Luna	scene ch9Luna	surprised	...It wasn't a closet.
-10	data/scenes.js	3813	Sal	scene ch10Start	happy	Cab seven! Everybody in. We're going to Long Island Regional Airport, to the door nobody uses.
+3	data/scenes.js	958	Oolong	scene ch3Tea	happy	Boppy! The usual? Ginger, peppermint, and a little honey for the stomach.
+3	data/scenes.js	965	Oolong	scene ch3Tea	surprised	The kettle says there was a big flash over the marsh this morning. Like lightning, but with no thunder and no rain.
+3	data/scenes.js	968	Oolong	scene ch3Tea	unimpressed	The kettle also says it'll rain on Tuesday. The kettle is wrong a lot. Enjoy the pier.
+3	data/scenes.js	1396	Kiki	scene ch3End	scared	(on the radio) ...kkkt... Stage 7! The big door just unlocked itself! From the INSIDE! Is that bad? That feels bad.
+4	data/scenes.js	1439	Ray	scene ch4Gate	happy	I wave at everybody. That's the job. Go on in.
+4	data/scenes.js	1441	Kiki	scene ch4Gate	scared	TNB! TNB! The rack! Rack two! It's GONE.
+4	data/scenes.js	1443	Kiki	scene ch4Gate	scared	It was right there in Stage 7. Then the fog machine turned itself on, and the lights went out, and things started CLAPPING.
+4	data/scenes.js	1445	Dana	scene ch4Gate	sad	I'm Dana Park, the director, and this is my first feature. Without the costumes we can't shoot, and without a shoot there's no movie.
+4	data/scenes.js	1446	Dana	scene ch4Gate	unimpressed	And the Backlot is full of little grumpy things. One of them ate a cue card. One of them is clapping at the horse.
+4	data/scenes.js	1457	Toni	scene ch4Snack	proud	Plain roast chicken. No salt, no skin, no sauce. I keep it for the grips. They're also picky.
+4	data/scenes.js	1462	Toni	scene ch4Snack	loving	Here. For the road. Don't tell the grips.
+4	data/scenes.js	1597	Dana	scene ch4End	happy	The rack! The costumes! We can shoot! We're shooting! That's a WRAP on today, everybody!
+4	data/scenes.js	1599	Kiki	scene ch4End	happy	WRAP PARTY AT CRAFTY! Toni made a cake! It's shaped like a clapper! It's not clapping!
+4	data/scenes.js	1600	Dana	scene ch4End	proud	TNB, the studio wants you to have this. Gold-plated. It's the steamer from the lot’s very first wardrobe department.
+4	data/scenes.js	1605	Dana	scene ch4End	happy	And crew jackets. Wrap Party Jackets. Only the crew gets one. You're crew now. Even the dog.
+5	data/scenes.js	1796	Principal Pruitt	scene ch5Pruitt	happy	Mrs. Gregori! Thank goodness. And you brought the whole family.
+5	data/scenes.js	1799	Principal Pruitt	scene ch5Pruitt	proud	Not haunted. Grumpy. Thirty-one years in this building. I know the difference.
+5	data/scenes.js	1800	Principal Pruitt	scene ch5Pruitt	scared	The bells ring at random. The clocks in the hall all say different times. And the sign-up sheet got up off the table and walked into the school.
+5	data/scenes.js	1801	Principal Pruitt	scene ch5Pruitt	scared	The Cafetorium doors run on the bell system, and the bells run on the hallway clocks.
+5	data/scenes.js	1801	Principal Pruitt	scene ch5Pruitt	scared	Until the clocks are right, those doors won't open, and thirty parents are on their way.
+5	data/scenes.js	1803	Principal Pruitt	scene ch5Pruitt	proud	So please set every clock in the hall to exactly seven o'clock. Not seven-thirty, and not six-fifty-nine. Seven.
+5	data/scenes.js	1833	Mr. Halverson	scene ch5Snack	proud	Every conference night. Twelve years. It's the only reason Gary shows up.
+5	data/scenes.js	1838	Mr. Halverson	scene ch5Snack	happy	Take some for the road. Don't tell Gary.
+5	data/scenes.js	1892	Principal Pruitt	scene ch5Clocks	unimpressed	(on the intercom) ...ksssh... Attention, please. The Cafetorium doors are OPEN. Parents, please wait in the hall. There's something in the Cafetorium.
+5	data/scenes.js	1893	Principal Pruitt	scene ch5Clocks	happy	Mrs. Gregori’s brother, please go into the Cafetorium. Thank you. ...ksssh.
+5	data/scenes.js	1946	Principal Pruitt	scene ch5AfterBoss	happy	You got the sheet back, and the bells and the clocks are working! Parents, come on in! Conference night is ON!
+5	data/scenes.js	1950	Principal Pruitt	scene ch5AfterBoss	proud	Mrs. Gregori. Best conference night in thirty-one years. Not one parent cried. Well. Mr. Delgado. Happy tears.
+5	data/scenes.js	1951	Principal Pruitt	scene ch5AfterBoss	proud	This is for you. My Golden Stopwatch. Thirty-one Field Days. It's never once stopped early.
+5	data/scenes.js	1955	Principal Pruitt	scene ch5AfterBoss	happy	And Field Day shirts. Staff shirts. You're all staff now. Even the small loud ones.
+6	data/scenes.js	2200	Michael	scene ch6Nara	surprised	I found my car keys in the gutter. With three peanuts. Arranged in a triangle.
+6	data/scenes.js	2216	Bernadette	scene ch6Park	angry	Halt. Neighborhood Watch. State your business.
+6	data/scenes.js	2218	Bernadette	scene ch6Park	proud	I know who you are. You water your drought garden. Everybody knows.
+6	data/scenes.js	2219	Bernadette	scene ch6Park	proud	Bernadette. Neighborhood Watch Captain, nineteen years. And I'll say it, because nobody else will.
+6	data/scenes.js	2219	Bernadette	scene ch6Park	scared	The squirrels are organized.
+6	data/scenes.js	2221	Bernadette	scene ch6Park	angry	They have lookouts in the playground, a spy in the community garden,
+6	data/scenes.js	2221	Bernadette	scene ch6Park	angry	and somebody at the picnic tables stuffing their cheeks with anything that's not nailed down.
+6	data/scenes.js	2222	Bernadette	scene ch6Park	surprised	Everything they steal goes up THAT tree, the Old Oak. There's a little door in the trunk that opens with a secret knock. I've only ever heard bits of it.
+6	data/scenes.js	2226	Bernadette	scene ch6Park	proud	Clear the squirrels out of those three spots, and Nara can dig up what they buried. I'd bet a piece of that secret knock is in each hole.
+6	data/scenes.js	2226	Bernadette	scene ch6Park	proud	I'll be here with my clipboard.
+6	data/scenes.js	2423	Bernadette	scene ch6End	proud	Neighborhood Watch Captain’s report: case closed.
+6	data/scenes.js	2423	Bernadette	scene ch6End	proud	I'd like it noted that I was right.
+6	data/scenes.js	2425	Michael	scene ch6End	loving	Lachlan wants Nara to have this. He painted a tennis ball gold. It took him four days and most of a bottle of paint.
+6	data/scenes.js	2429	Bernadette	scene ch6End	proud	And these. Neighborhood Watch Vests. I give out one every nineteen years. Today I'm giving out three. Even the dog.
+7	data/scenes.js	2676	Page	scene ch7Page	scared	Oh! Tom. Girls. Welcome to the Hush Library. Everything is fine.
+7	data/scenes.js	2679	Page	scene ch7Page	scared	...It's not fine. It started a week ago, and it's coming up from the Stacks, the old part of the library downstairs.
+7	data/scenes.js	2680	Page	scene ch7Page	surprised	Every book down there is whispering everything it ever overheard.
+7	data/scenes.js	2680	Page	scene ch7Page	surprised	That's seventy years of people reading quietly and thinking nobody was listening.
+7	data/scenes.js	2682	Page	scene ch7Page	unimpressed	Books overhear EVERYTHING. That's why we whisper in here. It was never for the people. It's for the books.
+7	data/scenes.js	2684	Page	scene ch7Page	proud	The Stacks have three sections: Fiction, Nonfiction and Picture Books.
+7	data/scenes.js	2684	Page	scene ch7Page	proud	The Reading Room is at the very back, and I think the whispering starts in there.
+7	data/scenes.js	2685	Page	scene ch7Page	sad	But the Reading Room doors use the old card catalog lock, and I lost the password in 1998.
+7	data/scenes.js	2687	Page	scene ch7Page	loving	Then you're in charge of the signs. Here. The staff door is open.
+7	data/scenes.js	2689	Page	scene ch7Page	scared	Please be careful. And please, don't answer the books. It only encourages them.
+7	data/scenes.js	2838	Page	scene ch7End	happy	Listen. It's quiet. Properly quiet. The good kind. The dictionaries are snoring.
+7	data/scenes.js	2840	Page	scene ch7End	happy	Then we'll read it. Story time, Saturdays, out loud. And I think I know who should do the voices.
+7	data/scenes.js	2841	Page	scene ch7End	loving	Grace. This is for you. A Gold Library Card. No limit. No late fees. Ever.
+7	data/scenes.js	2845	Page	scene ch7End	loving	And sweaters. I knit one every winter. I have run out of people. Please take some.
+8	data/scenes.js	3037	Bernadette	scene ch8Block	proud	Tom. Good. Neighborhood Watch Captain, potluck committee chair. Forty RSVPs. Thirty-nine dishes. One bread guy.
+8	data/scenes.js	3037	Bernadette	scene ch8Block	angry	Every pilot light on 2nd Avenue went out at noon. Every one. Including mine. I had a casserole IN there.
+8	data/scenes.js	3039	Bernadette	scene ch8Block	angry	They said it's the weekend. I said it's the POTLUCK. They hung up. I've filed a report. With myself.
+8	data/scenes.js	3046	Bernadette	scene ch8Block	proud	The barn has been chained up for sixty years. Here, take the committee key. I'm the committee.
+8	data/scenes.js	3046	Bernadette	scene ch8Block	proud	We're closing the boulevard for the potluck tables, and I need the bread by six.
+8	data/scenes.js	3207	Bernadette	scene ch8End	proud	Forty loaves. Six o’clock. On the dot. Potluck committee report: we're a success.
+8	data/scenes.js	3207	Bernadette	scene ch8End	proud	The gumbo is hot. The casserole is hot. Everything is hot. I'd like it noted.
+8	data/scenes.js	3211	Mr. Washington	scene ch8End	loving	Tom. Come here. This was my daddy’s. He drove the 7 line out of that barn for thirty years. Night run. He swore by the biscuits.
+8	data/scenes.js	3211	Mr. Washington	scene ch8End	loving	He'd want it on somebody who went back in there and lit that stove. Here.
+8	data/scenes.js	3215	Mr. Washington	scene ch8End	proud	I know you will. Now stand up straight. He'd say that too.
+8	data/scenes.js	3216	Michael	scene ch8End	happy	Lachlan has eaten three rolls and fallen asleep in the bread basket. I'm leaving him there. He's happy.
+9	data/scenes.js	3455	Luna	scene ch9Luna	happy	Oh! Visitors. At night. Is that... is that an INVITATION?
+9	data/scenes.js	3457	Luna	scene ch9Luna	sad	Twelve years I have swept this floor. That little silver door in the back has never once opened. I thought it was a closet.
+9	data/scenes.js	3457	Luna	scene ch9Luna	sad	And my telescope can't find the moon. It's not behind a cloud. It's not anywhere. It's just GONE.
+9	data/scenes.js	3461	Luna	scene ch9Luna	surprised	...It wasn't a closet.
+10	data/scenes.js	3907	Sal	scene ch10Start	happy	Cab seven! Everybody in. We're going to Long Island Regional Airport, to the door nobody uses.
 1-10	engine/followers.js	56	Amy	recruit ask	happy	Also. I've been standing still for four minutes and it's killing me. Want a running partner out there?
 1-10	engine/followers.js	57	Amy	recruit yes	happy	Finally. Try to keep up. I mean that with love.
 1-10	engine/followers.js	57	Amy	recruit no	unimpressed	Fine. I'll do burpees until you change your mind.

@@ -242,12 +242,7 @@ chapter	file	line	character	mood	text
 3	data/scenes.js	689	Rose	happy	He said if you were late he'd catch the fish without you. He catches one every time. It's always THIS big.
 3	data/scenes.js	690	Tom	unimpressed	Then we'd better hurry, before it gets any bigger.
 3	data/scenes.js	700	Deedee	loving	My favorite son!
-3	data/scenes.js	700	Deedee	loving	Back already! Look at you. Did they feed you out there? Never mind. I'll feed you.
 3	data/scenes.js	701	Boppy	happy	Tom. Good. Sit down. No. Don't sit down. We're going fishing.
-3	data/scenes.js	701	Boppy	angry	The Whisker Perch. Whiskers like a cat. I saw it at Cattail Pier in 1994. Nobody believes me.
-3	data/scenes.js	702	Deedee	unimpressed	Nobody believes him.
-3	data/scenes.js	703	Rose	surprised	Boppy, is the Whisker Perch real?
-3	data/scenes.js	704	Boppy	unimpressed	Real as my heartburn, kiddo.
 3	data/scenes.js	705	Grace	proud	I'm bringing a notebook. For science. And for proof.
 3	data/scenes.js	706	Boppy	proud	And I'm bringing THIS. My pepper jar. Homegrown, pickled in 1989. Older than your mother.
 3	data/scenes.js	707	Deedee	unimpressed	Not one pepper for me either. Peppers give me gas.
@@ -258,7 +253,6 @@ chapter	file	line	character	mood	text
 3	data/scenes.js	712	Deedee	loving	I have three pies in, so I'm staying put. Do NOT let him eat peppers on an empty stomach.
 3	data/scenes.js	713	Boppy	happy	I never eat peppers on an empty stomach. I eat them on a full stomach. Then it's empty.
 3	data/scenes.js	723	Boppy	unimpressed	The stomach thanks you. The stomach is still complaining. But it thanks you.
-3	data/scenes.js	727	Tom	unimpressed	On Long Island? Nobody here pays double for anything.
 3	data/scenes.js	734	Boppy	happy	Did I ever tell you about 1970? Sit down. This takes a while.
 3	data/scenes.js	735	Grace	unimpressed	You did. Forty times.
 3	data/scenes.js	736	Boppy	proud	Then forty-one. First year of college. Cross country. Five miles through the woods, up the big hill, and I never breathed hard.
@@ -280,42 +274,25 @@ chapter	file	line	character	mood	text
 3	data/scenes.js	764	Rose	proud	Deedee said NO peppers.
 3	data/scenes.js	765	Boppy	proud	Deedee isn't here.
 3	data/scenes.js	773	Rose	surprised	TATA! A FISH! A HUGE ONE! WITH A MUSTACHE!
-3	data/scenes.js	774	Boppy	surprised	That's no perch. That's OLD IRON-GILL. I saw him in 1994! I TOLD everybody!
 3	data/scenes.js	777	Boppy	angry	MY JAR!
 3	data/scenes.js	781	Tom	angry	That was UNCALLED for!
 3	data/scenes.js	782	Boppy	angry	Pickled in 1989. Nobody takes Boppy’s peppers. NOBODY.
 3	data/scenes.js	782	Boppy	proud	Iron-Gill swam west with my jar, into the Whispering Marsh. Come on, we're going after him. And nobody walk fast.
 3	data/scenes.js	788	Boppy	loving	Up. Everybody up. Headcount. One, two, three, four. Good. Nobody is missing. Again.
 3	data/scenes.js	797	Rose	surprised	Tata, that sock has a FACE.
-3	data/scenes.js	798	Boppy	unimpressed	Marsh junk. Everything people drop out here ends up grumpy about it. Like me, at the DMV.
 3	data/scenes.js	801	Boppy	angry	Socks. Out here. Nobody keeps track of their socks anymore.
 3	data/scenes.js	809	Boppy	angry	Excuse me? Nobody gets past ME. That's MY line. I was saying that at Rikers before you were a knot.
 3	data/scenes.js	814	Grace	scared	Boppy, you're breathing kind of hard.
 3	data/scenes.js	815	Boppy	angry	I'm breathing EXACTLY as hard as I want to.
 3	data/scenes.js	816	Tom	loving	We take it slow. Iron-Gill’s wake goes northwest, toward those big reeds.
-3	data/scenes.js	822	Boppy	none	The old reeds. When I was a kid we said there was a sundial back in there that told the wrong time.
-3	data/scenes.js	823	Grace	unimpressed	Sundials can't tell the wrong time. That's not how sundials work.
-3	data/scenes.js	824	Boppy	unimpressed	That's what I said.
 3	data/scenes.js	826	Tom	proud	Then we ask it nicely to move. Iron-Gill isn't keeping that jar.
 3	data/scenes.js	835	Boppy	angry	You're sitting on the way to Sundial Hollow. Shove over.
 3	data/scenes.js	837	Rose	surprised	Tata, it's a LOG with a BOOT.
 3	data/scenes.js	843	Grace	surprised	A secret boardwalk. Of course there's a secret boardwalk.
 3	data/scenes.js	844	Boppy	sad	Not secret. Just old. Like me. Nobody comes back here anymore.
-3	data/scenes.js	852	Boppy	sad	This is Sundial Hollow. I haven't been back here since I was nine, and it hasn't changed.
-3	data/scenes.js	852	Boppy	sad	The sundial still says seven o'clock, no matter what time it is.
-3	data/scenes.js	853	Grace	surprised	It's the AFTERNOON. The sun is right there. Sundials can't be wrong. That's not how sundials work.
-3	data/scenes.js	854	Boppy	unimpressed	That's what I said.
-3	data/scenes.js	855	Rose	surprised	Tata! Something shiny is stuck in it!
-3	data/scenes.js	857	Tom	surprised	It's a gold coin, wedged right under the pointer. That's what was holding the shadow at seven. Somebody pushed this in on purpose.
-3	data/scenes.js	864	Grace	surprised	It MOVED. Shadows don't move like that. I'm writing this down. In pen.
-3	data/scenes.js	866	Tom	none	Oolong's kettle said a man in a long coat is buying gold coins at Penny's and paying double. And now a gold coin turns up jammed in a sundial.
-3	data/scenes.js	867	Boppy	unimpressed	Nobody pays double on Long Island. Keep that in your pocket, Tom. Deep in your pocket.
-3	data/scenes.js	868	Boppy	none	Old gold. Keep that in your pocket, Tom. Penny will want to hear about it. Penny wants to hear about everything.
-3	data/scenes.js	869	Boppy	none	Now the water has drained, and the way to the Deep Pool is open. That's where Iron-Gill goes to sulk.
 3	data/scenes.js	878	Boppy	none	The Deep Pool. Nobody has ever seen the bottom. My father said it goes all the way to Ohio.
 3	data/scenes.js	882	Boppy	angry	You took my jar.
 3	data/scenes.js	884	Rose	happy	Boppy, he's sad! And spicy!
-3	data/scenes.js	885	Boppy	unimpressed	He's a FISH, kiddo.
 3	data/scenes.js	885	Boppy	proud	Tom. Tackle box. We do this the old way.
 3	data/scenes.js	886	Tom	proud	Quiet on the pier, everybody.
 3	data/scenes.js	890	Boppy	loving	Headcount. One, two, three, four. Good.
@@ -323,25 +300,98 @@ chapter	file	line	character	mood	text
 3	data/scenes.js	901	Boppy	happy	My jar. Still sealed. Still hot.
 3	data/scenes.js	901	Boppy	proud	And look at that. Forty years, and I finally caught Old Iron-Gill.
 3	data/scenes.js	902	Grace	proud	Technically he caught your jar, and then we caught him. I'm writing it down anyway. For proof.
-3	data/scenes.js	903	Boppy	proud	Put the date. Put the time. Use the sundial. It works now.
 3	data/scenes.js	904	Boppy	loving	Go on, you old bucket. Catch and release. I'll come by. No hooks.
 3	data/scenes.js	908	Rose	happy	Boppy, can we go home now? I want to tell Deedee EVERYTHING.
 3	data/scenes.js	909	Boppy	happy	Everything except the pepper part.
 3	data/scenes.js	910	Rose	happy	ESPECIALLY the pepper part.
 3	data/scenes.js	920	Deedee	happy	There they are! Well? Did anybody catch anything?
-3	data/scenes.js	921	Boppy	proud	Old Iron-Gill. Forty years, Dee. I TOLD everybody.
 3	data/scenes.js	922	Deedee	unimpressed	Nobody believed you.
-3	data/scenes.js	923	Grace	proud	I have proof. It's in my notebook. With the time. From a sundial.
 3	data/scenes.js	924	Rose	happy	Deedee! Boppy almost ate a PEPPER! On the pier! Before LUNCH!
 3	data/scenes.js	925	Deedee	unimpressed	Did he.
 3	data/scenes.js	926	Deedee	angry	Hand me my glasses. I want to look at him properly. Where ARE my glasses.
 3	data/scenes.js	927	Rose	happy	Apron pocket, Deedee!
-3	data/scenes.js	928	Deedee	loving	Thank you, Rosie. Now. Let me look at him.
 3	data/scenes.js	929	Boppy	happy	...Almost isn't eating. Almost is fine.
 3	data/scenes.js	930	Deedee	loving	Sit down, you. I made rhubarb crisp. Everybody sit. And eat SLOWLY.
 3	data/scenes.js	931	Boppy	happy	Slowly. Finally. Somebody in this family gets it.
 3	data/scenes.js	933	Tom	happy	Best fishing trip ever. Nobody fell in. Mostly.
 3	data/scenes.js	934	Deedee	loving	I love you all to the moon and back. Now eat.
+3	data/scenes.js	0	Deedee	unimpressed	Did they feed you on that plane?
+3	data/scenes.js	0	Tom	proud	It was Delta One, Mom. They fed me twice.
+3	data/scenes.js	0	Deedee	surprised	Twice! You must be starving!
+3	data/scenes.js	0	Tom	happy	Wait, I have to show you something first. A hill in Los Angeles stood up, talked to us, and sneezed this at me.
+3	data/scenes.js	0	Deedee	surprised	A hill stood up? Out there too? First my kitchen, now California!
+3	data/scenes.js	0	Boppy	happy	That's gold like my teeth! Cozy Rosie has one, and now you have one. Where's mine?
+3	data/scenes.js	0	Rose	proud	You have to get it from a monster, Boppy.
+3	data/scenes.js	0	Boppy	proud	Then I know just the fish. The Whisker Perch. Whiskers like a cat. I saw him at Cattail Pier in 1994, and he was THIS big.
+3	data/scenes.js	0	Rose	unimpressed	Last time he was only THIS big.
+3	data/scenes.js	0	Boppy	unimpressed	He grew. It's been thirty years.
+3	data/scenes.js	0	Grace	loving	We believe you now, Boppy. You were right about the Big One.
+3	data/scenes.js	0	Boppy	proud	Say that again, slower. Deary, are you hearing this?
+3	data/scenes.js	0	Deedee	unimpressed	I heard it. Don't let it go to your head. Your hat won't fit.
+3	data/scenes.js	0	Tom	loving	I believe every fish story you ever told me. I'm bringing the big net.
+3	data/scenes.js	0	Tom	scared	Mom, there's one more thing. There was a lemon frozen inside an orange block, just like the dragonfly. And this was lying under it.
+3	data/scenes.js	0	Deedee	scared	Same bulb. One at my pond and one three thousand miles away.
+3	data/scenes.js	0	Tom	proud	Two thousand four hundred and seventy-five.
+3	data/scenes.js	0	Deedee	unimpressed	Tom. Not now.
+3	data/scenes.js	0	Deedee	angry	I don't know what this is and I don't like it. They're both going in the drawer, and all four of you are coming home in one piece. That's not a request.
+3	data/scenes.js	0	Tom	happy	You said next time you were coming.
+3	data/scenes.js	0	Boppy	happy	Stomach or no stomach. Let's go fishing!
+3	data/scenes.js	0	Tom	surprised	A flash! The fish at the pond said that. So did the hill!
+3	data/scenes.js	0	Boppy	proud	Lightning over my marsh? If anybody's frying that perch, it's me.
+3	data/scenes.js	0	Tom	proud	I've got the tackle box in one hand and the big net in the other. I'm ready.
+3	data/scenes.js	0	Boppy	happy	Those are WHISKERS! That's him! That's the Whisker Perch! Old Iron-Gill himself!
+3	data/scenes.js	0	Grace	surprised	Boppy, he's way bigger than THIS big. He's bigger than the pier!
+3	data/scenes.js	0	Boppy	proud	I TOLD everybody he grew!
+3	data/scenes.js	0	Boppy	surprised	He TALKS? Thirty years I've been talking to that fish, and NOW he answers?
+3	data/scenes.js	0	Rose	happy	Boppy, that's what the Big One was like! Now you saw one too!
+3	data/scenes.js	0	Boppy	scared	I saw one! And Deedee is going to believe me. That's worse. She'll want details.
+3	data/scenes.js	0	Boppy	surprised	A talking sock! All my life I've been losing socks, and THIS is where they go?
+3	data/scenes.js	0	Tom	loving	Excuse me, Mr. Sock. We haven't seen your other sock. We're very sorry.
+3	data/scenes.js	0	Grace	happy	Boppy, were YOU the one who cast it badly in 1997?
+3	data/scenes.js	0	Boppy	unimpressed	It was windy. Write that down. It was very windy.
+3	data/scenes.js	0	Boppy	happy	The old reeds. I played back in there when I was nine. There's a sundial in a clearing. We called it Sundial Hollow.
+3	data/scenes.js	0	Tom	loving	He means please. Could you please shove over?
+3	data/scenes.js	0	Boppy	surprised	That's my boot! I lost that boot in 1988!
+3	data/scenes.js	0	Boppy	sad	This is Sundial Hollow. I haven't been back here since I was nine.
+3	data/scenes.js	0	Boppy	sad	It was green. All of this was green. Who took the green out of my hollow?
+3	data/scenes.js	0	Rose	surprised	Tata! There's a fish in the SKY!
+3	data/scenes.js	0	Grace	surprised	It's inside an orange block, like the dragonfly. It's just hanging there. Nothing is holding it up!
+3	data/scenes.js	0	Boppy	surprised	That fish jumped, and he never came down. Seventy-some years I've been fishing, and I never saw a fish stay up.
+3	data/scenes.js	0	Boppy	proud	Tom. Get under it with the net.
+3	data/scenes.js	0	Tom	unimpressed	It can't be moved. I tried one at the pond and one in California.
+3	data/scenes.js	0	Boppy	proud	Then it won't hurt to hold the net.
+3	data/scenes.js	0	Tom	unimpressed	I'm holding the net.
+3	data/scenes.js	0	Boppy	unimpressed	Good. Hold it better.
+3	data/scenes.js	0	Grace	proud	There's a little round hole in the side, like the dragonfly one had. I'm drawing it.
+3	data/scenes.js	0	Rose	proud	And there's Deedee's litter! On the clock rock!
+3	data/scenes.js	0	Grace	proud	Dragonfly: grey grass, orange block, round hole, burnt bulb. Fish: grey reeds, orange block, round hole, burnt bulb.
+3	data/scenes.js	0	Tom	scared	Lemon: grey tree, orange block, round hole, burnt bulb.
+3	data/scenes.js	0	Grace	proud	I'm writing that down too. In pen.
+3	data/scenes.js	0	Boppy	surprised	Somebody want to tell me what it means?
+3	data/scenes.js	0	Grace	unimpressed	I don't know yet, Boppy. I'm only on page two.
+3	data/scenes.js	0	Boppy	proud	Well, it's a small one anyway. Mine was double.
+3	data/scenes.js	0	Boppy	scared	That's the Deep Pool. That's where Iron-Gill goes to sulk. Tom, you can put the net down.
+3	data/scenes.js	0	Rose	surprised	And he has gold in his mustache!
+3	data/scenes.js	0	Boppy	proud	First the Big One asks about me, and now this one. I'm very big with the fish, Tom.
+3	data/scenes.js	0	Tom	unimpressed	You're a celebrity. I'll hold the net.
+3	data/scenes.js	0	Boppy	happy	Gold like my teeth, with a fish on it! I got one! Cozy Rosie, I got one!
+3	data/scenes.js	0	Rose	happy	Boppy got treasure! Now your mouth matches your hat!
+3	data/scenes.js	0	Boppy	proud	Put the date. Put the time. And put that he was THIS big.
+3	data/scenes.js	0	Grace	unimpressed	Boppy, he was bigger than that.
+3	data/scenes.js	0	Boppy	surprised	First time in my life I ever undersold a fish.
+3	data/scenes.js	0	Boppy	sad	Still up there. Somebody ought to let that fish finish his jump.
+3	data/scenes.js	0	Boppy	proud	Old Iron-Gill. Forty years, Deary. I TOLD everybody.
+3	data/scenes.js	0	Grace	proud	I have proof. It's in my notebook. I drew his mustache.
+3	data/scenes.js	0	Deedee	loving	Thank you, Cozy Rosie. Now. Let me look at him.
+3	data/scenes.js	0	Boppy	proud	Look. I got gold. From the fish.
+3	data/scenes.js	0	Deedee	unimpressed	Fifty-one years I've been married to you, hubby, and you never once brought ME gold from a fish.
+3	data/scenes.js	0	Boppy	proud	It's gold like my teeth!
+3	data/scenes.js	0	Deedee	unimpressed	I paid for those teeth.
+3	data/scenes.js	0	Grace	scared	Deedee, there's another orange block. There's a fish in it, and it's stuck up in the air over the water.
+3	data/scenes.js	0	Rose	proud	And more litter.
+3	data/scenes.js	0	Deedee	scared	Three. My pond, California, and the marsh.
+3	data/scenes.js	0	Deedee	angry	New rule. Nobody in this family goes anywhere alone. Not to the pond, not to the pier, not to the mailbox. Tom, that goes for Los Angeles too.
+3	data/scenes.js	0	Tom	loving	Yes, Mom.
 4	data/scenes.js	1083	TNB	loving	Cut. Reset. Back to one. Everybody gets a touch-up.
 4	data/scenes.js	1088	TNB	none	All three sets are clear, and Stage 7 just unlocked itself. That's where the fog came from, so that's where my rack is.
 4	data/scenes.js	1097	TNB	happy	Well, well, well...

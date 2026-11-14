@@ -375,10 +375,42 @@ function drawGriffithSpot() {
   const s=T/64;
   for(const [id,x,y,w] of GRIFFITH_SPOT) { if(!PROPART.ready(id)) continue; PROPART.draw(id,x*s,y*s,{w:w*s}); }
 }
+// Sundial Hollow, chapter 3 scene 8 (ch3Hollow): the clearing has no colour, in a circle with a clean edge (reeds, sundial and water), and a
+// fish frozen mid-jump hangs in a watermelon-sized orange block in the air over the grey water, higher than Tom's head. A burnt flashbulb
+// sits on top of the sundial until Rose takes it (flag ch3-bulb). All of it stays until the family comes back after chapter 6 (ch6-clear).
+// The grey circle is a STAND-IN made in code (the plate itself, turned grey inside the circle) until the Library picture ch3-hollow-grey
+// is approved. Centres in plate art px (64 per tile), width in art px. Block from art/props/sundial/ch3_block.webp (bake_closeup_ch3.py);
+// the bulb reuses chapter 1's hollow/ch1_bulb.
+const SUNDIAL_GREY={cx:720,cy:620,r:330};
+const SUNDIAL_SPOT=[['hollow/ch1_bulb',736,750,20,'ch3-bulb'],['sundial/ch3_block',672,462,84,null]];
+let sundialGreyImg=null;
+function sundialGreyCanvas(img) {
+  if(sundialGreyImg&&sundialGreyImg.src===img) return sundialGreyImg.c;
+  const w=img.naturalWidth,h=img.naturalHeight; if(!w) return null;
+  const c=document.createElement('canvas'); c.width=w; c.height=h; const g=c.getContext('2d'); g.drawImage(img,0,0);
+  try { const d=g.getImageData(0,0,w,h),p=d.data;
+    for(let i=0;i<p.length;i+=4) { const l=.3*p[i]+.59*p[i+1]+.11*p[i+2],v=Math.min(255,l*.9+14); p[i]=v; p[i+1]=v; p[i+2]=v+2; }
+    g.putImageData(d,0,0); } catch(e) { return null; }
+  sundialGreyImg={src:img,c}; return c;
+}
+function drawSundialSpot(map) {
+  if(typeof flag!=='function'||typeof STORY==='undefined'||STORY.chapter<3||flag('ch6-clear')) return;
+  const s=T/64,pl=typeof plateFor==='function'?plateFor(map):null;
+  const gc=pl&&pl.img&&pl.img.naturalWidth?sundialGreyCanvas(pl.img):null;
+  if(gc) { const k=map.w*T/gc.width,G=SUNDIAL_GREY;
+    ctx.save(); ctx.beginPath(); ctx.arc(G.cx*s,G.cy*s,G.r*s,0,Math.PI*2); ctx.clip();
+    ctx.imageSmoothingEnabled=true; ctx.drawImage(gc,0,0,gc.width*k,gc.height*k); ctx.imageSmoothingEnabled=false; ctx.restore(); }
+  for(const [id,x,y,w,gone] of SUNDIAL_SPOT) {
+    if((gone&&flag(gone))||!PROPART.ready(id)) continue;
+    if(id==='sundial/ch3_block') ellipse(x*s,(y+78)*s,24*s,5*s,'#20202a38');   // a faint shadow on the water below: nothing is holding it up
+    PROPART.draw(id,x*s,y*s,{w:w*s});
+  }
+}
 function plateLive(map,time) {
   if(map&&PLATE_SIGNS[map.id]) drawPlateSigns(PLATE_SIGNS[map.id]);
   if(map&&map.id==='hollow') { drawHollowCrumbs(time); drawHollowSpot(); }
   if(map&&map.id==='griffith') drawGriffithSpot();
+  if(map&&map.id==='sundial') drawSundialSpot(map);
   // Tom's kitchen island: Bready Mercury, except while the squirrels have him (chapter 6, until the Oak boss is beaten).
   if(map&&map.id==='tomhouse') { plateTime=time; drawHomeJar(time); }
   // The Crown of the Oak: Bready Mercury on the chest at the heart of the hoard (art px: centre x 672, base y 258; the jar stands about 62 px tall).

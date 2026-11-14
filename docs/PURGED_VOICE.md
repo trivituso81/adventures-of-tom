@@ -154,3 +154,8 @@ Chapter 1 was rebuilt to the locked story. Dropped, can never play: tom "Boppy a
 ## 2026-11-13 (`ch2build1`): chapter 2 story build, three clips
 
 Dropped, can never play: tom "...He said he'd be home." (removed so TNB does not sound unreliable), bigone "RUMBLE. A man in a long coat plugged my vents." and bigone "That's what the man promised me. Nobody leaves. Not ever." (the Big Shake lines were reworded to the flash story; the long-coat man is gone from chapter 2). Audio is in git history (the parent of the `ch2build1` commit).
+
+
+## 2026-11-13 (`ch3build1`): chapter 3 story build, 34 clips
+
+Chapter 3 was rebuilt to the locked story (claude/story-ch03.md). Dropped, can never play: the old sundial, long-coat and "nobody believes Boppy" lines, the narration boxes now shown as actions, and the reworded lines. The full list is in tools/clip-audit/purge-ch3build1.json (34 `speaker|text` keys). Audio is in git history (the parent of the `ch3build1` commit).
