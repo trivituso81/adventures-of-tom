@@ -4,20 +4,20 @@ Tom 23:17: "we need some new frames for every main character ... four talking po
 
 ## The four talk types (frame order on the sheet)
 
-Picked from the game's cast dialogue (1,947 lines in docs/emotion-index-lines.tsv). Of the lines that are plain talk, these four patterns cover all of them:
+Picked from the game's cast dialogue (1,997 lines in docs/emotion-index-lines.tsv). Of the lines that are plain talk, these four patterns cover all of them:
 
 | # | Key | Pose | What lines | Lines (first pass) |
 |---|---|---|---|---|
-| 1 | `tell` | standing easy, one hand up at chest height, palm open | explaining, describing what they see, reporting a clue, laying out a plan | 560 |
-| 2 | `point` | one arm out, pointing, head turned toward it | "look", "over there", directions, orders and rules ("Stay close", "No touching, please", "Up, everybody") | 147 |
-| 3 | `ask` | head tilted, both palms up at the waist | every question | 83 |
-| 4 | `answer` | weight on one leg, small one-shoulder shrug, loose hand | short replies and one-liners, five words or fewer ("Probably.", "By default.", "Twelve.") | 125 |
+| 1 | `tell` | standing easy, one hand up at chest height, palm open | explaining, describing what they see, reporting a clue, laying out a plan | 573 |
+| 2 | `point` | one arm out, pointing, head turned toward it | "look", "over there", directions, orders and rules ("Stay close", "No touching, please", "Up, everybody") | 145 |
+| 3 | `ask` | head tilted, both palms up at the waist | every question | 85 |
+| 4 | `answer` | weight on one leg, small one-shoulder shrug, loose hand | short replies and one-liners, five words or fewer ("Probably.", "By default.", "Twelve.") | 127 |
 
 ## Which lines use them
 
-- Every cast line tagged `none` (114).
-- Borderline moods (801): lines tagged happy, loving, proud, surprised or unimpressed whose words carry no sign of that feeling: no "!", no shouted word in capitals, none of that mood's cue words (tools/talk-index.py `CUES`). Example: Amy "Here's the plan. Tom up front, girls with me." was proud, now `point`; Tom "That's five coins. The sundial, the steamer..." was surprised, now `tell`.
-- Kept as moods: every sad, angry and scared line; lines with the feeling in the words; unimpressed (Tom's deadpan voice, the comic beat) except orders and plans (24 moved).
+- Every cast line tagged `none` (110).
+- Borderline moods (820): lines tagged happy, loving, proud, surprised or unimpressed whose words carry no sign of that feeling: no "!", no shouted word in capitals, none of that mood's cue words (tools/talk-index.py `CUES`). Example: Amy "Here's the plan. Tom up front, girls with me." was proud, now `point`; Tom "That's five coins. The sundial, the steamer..." was surprised, now `tell`.
+- Kept as moods: every sad, angry and scared line; lines with the feeling in the words; unimpressed (Tom's deadpan voice, the comic beat) except orders and plans (22 moved).
 - Nara is a dog: no talking poses. Michael and Jojo (townsfolk mood sets) are not included yet.
 - Source of truth: docs/talk-lines.tsv (column `talk`: tell, point, ask, answer, or empty = keeps its mood). Corrections are one-word edits there, then `python3 tools/talk-apply.py` (writes data/talk-types.js). New emotion-index rows: `python3 tools/talk-index.py --add` (keeps existing rows). A line with no row and no mood uses the same rule live (`talkRule` in engine/emotions.js; keep it in step with tools/talk-index.py `talk_type`).
 
