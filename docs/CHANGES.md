@@ -1,3 +1,6 @@
+## voice3 (2026-11-13): three Voice Library exports merged
+- 43 chapter 1 lines (bigone and the new ch1 lines), 32 Mr. Washington re-takes (older African American man accent; 32 replaced clips, Old voice marks cleared by the merge), 57 narr1 Narrator lines. All into data/voice/dialog-ch*.js, data/merged-takes.json, index rebuilt (4910 lines). unused_voice.py 0 on all five checks; smoke FAILS []. Not played on a phone.
+
 ## ch1build1 (2026-11-13): chapter 1 rebuilt to the locked story (claude/story-ch01.md), WITHOUT the new voice takes
 - Done: all 41 NEW and 2 CHANGED chapter 1 lines wired in data/scenes.js (ch1Theft, ch1Mudling, ch1Skeeter, ch1Grump, ch1Pond, ch1AfterBoss, ch1End); text matches tools/voice-library/scripts/ch01-story-directions.json. New scene `ch1Spot` (Boppy's fishing spot: grey patch, orange block with the dragonfly, Rose and Tom pull and fail, Deedee pockets the flashbulb, splash), trigger `ch1-spot` on the Hollow's east area before `ch1-pond`.
 - Art installed: door frame, gold coin and Boppy's gold-teeth picture as close-up screens (`{ch1Reveal:'doorframe'|'coin'|'grin'}`, data/closeup-ch1.js, `still` option added to `closeupReveal` in engine/closeup.js); patch, block and bulb drawn on the Hollow plate (`HOLLOW_SPOT`, engine/plate.js); The Big One with lure and coin (`CHAPTER_SHEETS` in tools/sprite-bake/bake_foe_sheets.py, rebaked art/foes/bigone.webp, data/foes/bigone-hires.js, portraits/foes/bigone.webp). All baked by tools/art-library/bake_closeup_ch1.py. The normal-size Big One is not wired (return after chapter 6).
@@ -6,9 +9,6 @@
 - Voice: NOT merged. The three phone exports (ch1 43 clips, Washington 32, narr1 57) were not in this session's sandbox. The 43 chapter 1 lines play in computer voice until Tom re-sends `4e0e4b1b-local-clips-pending_6.json`.
 - Not done: coin in Rose's key items; holding back the "monsters are ordinary" NPC lines (Amy, Penny, Rose road line) until after the theft; no listener-reaction rows or speaker moods for the new lines.
 - Tested: smoke FAILS [], tag_check ok, unused_voice 0 on all five, tools/closeup_ch1_test.py (portrait, landscape, Duo), reaction_test frames of ch1Spot (portrait and landscape) and ch1Pond. Not tested: ch1Theft and ch1End in motion, Duo for the spot scene, a phone.
-
-## voice3 (2026-11-13): three Voice Library exports merged
-- 43 chapter 1 lines (bigone and the new ch1 lines), 32 Mr. Washington re-takes (older African American man accent; 32 replaced clips, Old voice marks cleared by the merge), 57 narr1 Narrator lines. All into data/voice/dialog-ch*.js, data/merged-takes.json, index rebuilt (4910 lines). unused_voice.py 0 on all five checks; smoke FAILS []. Not played on a phone.
 
 ## hugface1 (2026-11-13): Tom faces the girls before the hug
 - Tom 16:47: "Tom is facing right instead of left before he hugs the girls." Cause (fact): the girls run in from the left (`SCENES.opening`, gStart west of the taxi door), but in hug sheet v2 Tom's first three frames (`hg_hear`, `hg_delight`, `hg_crouch`) are painted turned toward screen-right.
