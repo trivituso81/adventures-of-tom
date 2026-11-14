@@ -23095,8 +23095,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The painting of TNB, a grown man. 2) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE OBJECT\nA modern smartphone, seen straight on, upright, filling about 80 percent of the picture. The whole screen is one painted photo: TNB from the chest up, smiling warmly at the viewer, holding up one hand in a small wave. Copy his face, hair and colors from attachment 1 as exactly as possible. The phone is plain black with a thin frame. No hands outside the photo.\nBackground: one flat solid pure magenta #FF00FF, edge to edge, with no gradient. The game cuts the phone out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No words, letters or numbers anywhere."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/ch2-nara-coin-mouth-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794667763120
+    }
+   ],
    "rejects": [],
    "id": "ch2-nara-coin-mouth",
    "tab": "Characters",
