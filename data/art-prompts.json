@@ -22762,8 +22762,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of Boppy from \"The Adventures of Tom\", a family role-playing game. Keep his face, build, clothes and cap exactly as in attachment 1. Paint this new pose from him.\n2) The approved emotion sheet of Boppy, for the happy expression only.\n\nPAINT THIS ONE POSE\nBoppy, a grandfather in his sixties, standing full body, facing the viewer. He is grinning wide with his mouth open, and his back teeth show gold fillings that shine the same gold as a coin. One hand is raised near his cheek with one finger touching a back tooth, proud of it. Warm, delighted, a little mischievous. Standing on a plain flat magenta background, nothing else in the picture, no text.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- The gold fillings must be clearly visible in the grin."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/ch2-lemon-tree-grey-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794623708602
+    }
+   ],
    "rejects": [],
    "id": "ch2-lemon-tree-grey",
    "tab": "Props",
