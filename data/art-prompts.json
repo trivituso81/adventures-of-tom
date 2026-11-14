@@ -23638,8 +23638,16 @@
    "prompt": "Draw Tom in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of Tom. Picture 2 is the walking sheet. Pictures 3 and 4 are the battle sheets.\n\nCopy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as the battle sheets. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\n\nRow 1:\n1. On his knees on the floor, bent down low, looking under a table with a worried, curious face (no table drawn).\n2. Standing up, holding one burnt-out flashbulb up between two fingers, a knowing face.\n3. Standing, holding a laminated lanyard badge out proudly in both hands on the cord around his neck, beaming, mouth open in delight.\nRow 2:\n4. Standing with two lanyard cords around his neck, one badge in each hand held up, thrilled.\n5. Standing with his arms crossed over his chest and a firm, calm face, planted.\n6. Standing with his phone held in both hands, typing with his thumbs and reading, a small smile.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/ch4-tnb-poses-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794667834416
+    }
+   ],
    "rejects": [],
    "id": "ch4-tnb-poses",
    "tab": "Characters",
