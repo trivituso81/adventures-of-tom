@@ -7,6 +7,9 @@
 - Not done: coin in Rose's key items; holding back the "monsters are ordinary" NPC lines (Amy, Penny, Rose road line) until after the theft; no listener-reaction rows or speaker moods for the new lines.
 - Tested: smoke FAILS [], tag_check ok, unused_voice 0 on all five, tools/closeup_ch1_test.py (portrait, landscape, Duo), reaction_test frames of ch1Spot (portrait and landscape) and ch1Pond. Not tested: ch1Theft and ch1End in motion, Duo for the spot scene, a phone.
 
+## voice3 (2026-11-13): three Voice Library exports merged
+- 43 chapter 1 lines (bigone and the new ch1 lines), 32 Mr. Washington re-takes (older African American man accent; 32 replaced clips, Old voice marks cleared by the merge), 57 narr1 Narrator lines. All into data/voice/dialog-ch*.js, data/merged-takes.json, index rebuilt (4910 lines). unused_voice.py 0 on all five checks; smoke FAILS []. Not played on a phone.
+
 ## hugface1 (2026-11-13): Tom faces the girls before the hug
 - Tom 16:47: "Tom is facing right instead of left before he hugs the girls." Cause (fact): the girls run in from the left (`SCENES.opening`, gStart west of the taxi door), but in hug sheet v2 Tom's first three frames (`hg_hear`, `hg_delight`, `hg_crouch`) are painted turned toward screen-right.
 - Done: those three frames are mirrored in the bake (`'flip'` in set `hug`, tools/sprite-bake/bake_story_poses.py). This is the one flip in the set; named to Tom here. The run-in, crash and group frames are as painted. Only the `hug` block of data/story-poses.js and art/chars/hug-story.webp changed (Pip's mood files that the rebake wants to change were left out again).
