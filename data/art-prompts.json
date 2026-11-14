@@ -24785,8 +24785,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\nPicture 1 is the finished painting of TNB. Picture 2 is the walking sheet. Pictures 3 and 4 are the battle sheets.\n\nPAINT THIS ONE POSE\nTNB, standing and facing the viewer, covered in dirt: brown soil on his hair, his shoulders, his chest and his legs, a little clump of earth sitting on top of his head, a smear on one cheek, his arms out slightly from his sides. He is unbothered and amused, with a calm, wry, half smile, as if this happens all the time.\nStanding on a plain flat magenta #FF00FF background, nothing else in the picture, no text, no shadow on the ground.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Copy TNB from the attached pictures as exactly as possible: the same face, age, body, head size compared to the body, hair, clothes, colors, painting style and level of detail.\n- Keep his figure size and head size as in the walking sheet. The dirt is brown soil in clumps and smears over his clothes, painted in the same style as the rest."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/ch6-rose-coin-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794684329407
+    }
+   ],
    "rejects": [],
    "id": "ch6-rose-coin",
    "tab": "Characters",
