@@ -7,7 +7,7 @@
    "speaker": "Deedee",
    "text": "Did they feed you on that plane?",
    "ctx": "chapter 3 (reworded)",
-   "script": "[interrogating, bossy] Did they FEED you on that plane?"
+   "script": "[warm Long Island accent, interrogating, bossy] Did they FEED you on that plane?"
   },
   {
    "voice": "tom",
@@ -21,7 +21,7 @@
    "speaker": "Deedee",
    "text": "Twice! You must be starving!",
    "ctx": "chapter 3 (new)",
-   "script": "[alarmed] TWICE! [punchline, fussing] You must be starving!"
+   "script": "[warm Long Island accent, alarmed] TWICE! [warm Long Island accent, punchline, fussing] You must be starving!"
   },
   {
    "voice": "tom",
@@ -35,14 +35,14 @@
    "speaker": "Deedee",
    "text": "A hill stood up? Out there too? First my kitchen, now California!",
    "ctx": "chapter 3 (new)",
-   "script": "[alarmed] A hill stood up? [indignant] Out there TOO? [taking it personally] First my kitchen, now California!"
+   "script": "[warm Long Island accent, alarmed] A hill stood up? [warm Long Island accent, indignant] Out there TOO? [warm Long Island accent, taking it personally] First my kitchen, now California!"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "That's gold like my teeth! Cozy Rosie has one, and now you have one. Where's mine?",
    "ctx": "chapter 3 (new)",
-   "script": "[thrilled] That's gold like my teeth! [tallying] Cozy Rosie has one, and now you have one. [punchline, complaining] Where's MINE?"
+   "script": "[deep voice, thick New York accent, thrilled] That's gold like my teeth! [thick New York accent, tallying] Cozy Rosie has one, and now you have one. [thick New York accent, punchline, complaining] Where's MINE?"
   },
   {
    "voice": "rose",
@@ -56,7 +56,7 @@
    "speaker": "Boppy",
    "text": "Then I know just the fish. The Whisker Perch. Whiskers like a cat. I saw him at Cattail Pier in 1994, and he was THIS big.",
    "ctx": "chapter 3 (reworded)",
-   "script": "[bragging] Then I know just the fish. [storytelling] The Whisker Perch. Whiskers like a cat. [exaggerating, slowly] I saw him at Cattail Pier in 1994, and he was... THIS big."
+   "script": "[deep voice, thick New York accent, bragging] Then I know just the fish. [thick New York accent, storytelling] The Whisker Perch. Whiskers like a cat. [thick New York accent, exaggerating, slowly] I saw him at Cattail Pier in 1994, and he was... THIS big."
   },
   {
    "voice": "rose",
@@ -70,7 +70,7 @@
    "speaker": "Boppy",
    "text": "He grew. It's been thirty years.",
    "ctx": "chapter 3 (new)",
-   "script": "[defensive] He GREW. [justifying] It's been thirty years."
+   "script": "[deep voice, thick New York accent, defensive] He GREW. [thick New York accent, justifying] It's been thirty years."
   },
   {
    "voice": "grace",
@@ -84,14 +84,14 @@
    "speaker": "Boppy",
    "text": "Say that again, slower. Deary, are you hearing this?",
    "ctx": "chapter 3 (new)",
-   "script": "[savoring it] Say that again... SLOWER. [gloating, calling out] Deary, are you hearing this?"
+   "script": "[deep voice, thick New York accent, savoring it] Say that again... SLOWER. [thick New York accent, gloating, calling out] Deary, are you hearing this?"
   },
   {
    "voice": "deedee",
    "speaker": "Deedee",
    "text": "I heard it. Don't let it go to your head. Your hat won't fit.",
    "ctx": "chapter 3 (new)",
-   "script": "[unimpressed] I heard it. [warning] Don't let it go to your head. [punchline, deadpan] Your hat won't fit."
+   "script": "[warm Long Island accent, unimpressed] I heard it. [warm Long Island accent, warning] Don't let it go to your head. [warm Long Island accent, punchline, deadpan] Your hat won't fit."
   },
   {
    "voice": "tom",
@@ -112,7 +112,7 @@
    "speaker": "Deedee",
    "text": "Same bulb. One at my pond and one three thousand miles away.",
    "ctx": "chapter 3 (new)",
-   "script": "[recognizing, uneasy] Same bulb. [working it out] One at my pond... and one three THOUSAND miles away."
+   "script": "[warm Long Island accent, recognizing, uneasy] Same bulb. [warm Long Island accent, working it out] One at my pond... and one three THOUSAND miles away."
   },
   {
    "voice": "tom",
@@ -126,14 +126,14 @@
    "speaker": "Deedee",
    "text": "Tom. Not now.",
    "ctx": "chapter 3 (new)",
-   "script": "[shutting him down] Tom. Not now."
+   "script": "[warm Long Island accent, shutting him down] Tom. Not now."
   },
   {
    "voice": "deedee",
    "speaker": "Deedee",
    "text": "I don't know what this is and I don't like it. They're both going in the drawer, and all four of you are coming home in one piece. That's not a request.",
    "ctx": "chapter 3 (new)",
-   "script": "[admitting, uneasy] I don't know what this is and I don't LIKE it. [giving orders] They're both going in the drawer, and all four of you are coming home in one piece. [final, firm] That's not a request."
+   "script": "[warm Long Island accent, admitting, uneasy] I don't know what this is and I don't LIKE it. [warm Long Island accent, giving orders] They're both going in the drawer, and all four of you are coming home in one piece. [warm Long Island accent, final, firm] That's not a request."
   },
   {
    "voice": "tom",
@@ -147,7 +147,7 @@
    "speaker": "Boppy",
    "text": "Stomach or no stomach. Let's go fishing!",
    "ctx": "chapter 3 (new)",
-   "script": "[vowing] Stomach or no stomach. [rallying, thrilled] Let's go FISHING!"
+   "script": "[deep voice, thick New York accent, vowing] Stomach or no stomach. [thick New York accent, rallying, thrilled] Let's go FISHING!"
   },
   {
    "voice": "oolong",
@@ -168,7 +168,7 @@
    "speaker": "Boppy",
    "text": "Lightning over my marsh? If anybody's frying that perch, it's me.",
    "ctx": "chapter 3 (new)",
-   "script": "[territorial] Lightning over MY marsh? [punchline, joking] If anybody's frying that perch, it's me."
+   "script": "[deep voice, thick New York accent, territorial] Lightning over MY marsh? [thick New York accent, punchline, joking] If anybody's frying that perch, it's me."
   },
   {
    "voice": "tom",
@@ -182,7 +182,7 @@
    "speaker": "Boppy",
    "text": "Those are WHISKERS! That's him! That's the Whisker Perch! Old Iron-Gill himself!",
    "ctx": "chapter 3 (reworded)",
-   "script": "[shouting, thrilled] Those are WHISKERS! That's him! [announcing] That's the Whisker Perch! [reverent] Old Iron-Gill himself!"
+   "script": "[deep voice, thick New York accent, shouting, thrilled] Those are WHISKERS! That's him! [thick New York accent, announcing] That's the Whisker Perch! [thick New York accent, reverent] Old Iron-Gill himself!"
   },
   {
    "voice": "grace",
@@ -196,14 +196,14 @@
    "speaker": "Boppy",
    "text": "I TOLD everybody he grew!",
    "ctx": "chapter 3 (new)",
-   "script": "[gloating, shouting] I TOLD everybody he grew!"
+   "script": "[deep voice, thick New York accent, gloating, shouting] I TOLD everybody he grew!"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "He TALKS? Thirty years I've been talking to that fish, and NOW he answers?",
    "ctx": "chapter 3 (new)",
-   "script": "[disbelief] He TALKS? [punchline, offended] Thirty years I've been talking to that fish, and NOW he answers?"
+   "script": "[deep voice, thick New York accent, disbelief] He TALKS? [thick New York accent, punchline, offended] Thirty years I've been talking to that fish, and NOW he answers?"
   },
   {
    "voice": "rose",
@@ -217,14 +217,14 @@
    "speaker": "Boppy",
    "text": "I saw one! And Deedee is going to believe me. That's worse. She'll want details.",
    "ctx": "chapter 3 (new)",
-   "script": "[triumphant] I SAW one! And Deedee is going to believe me... [realizing, dreading] That's worse. [punchline, worried] She'll want details."
+   "script": "[deep voice, thick New York accent, triumphant] I SAW one! And Deedee is going to believe me... [thick New York accent, realizing, dreading] That's worse. [thick New York accent, punchline, worried] She'll want details."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "A talking sock! All my life I've been losing socks, and THIS is where they go?",
    "ctx": "chapter 3 (reworded)",
-   "script": "[amazed] A talking SOCK! [punchline, indignant] All my life I've been losing socks, and THIS is where they go?"
+   "script": "[deep voice, thick New York accent, amazed] A talking SOCK! [thick New York accent, punchline, indignant] All my life I've been losing socks, and THIS is where they go?"
   },
   {
    "voice": "tom",
@@ -245,14 +245,14 @@
    "speaker": "Boppy",
    "text": "It was windy. Write that down. It was very windy.",
    "ctx": "chapter 3 (new)",
-   "script": "[defensive] It was windy. [ordering] Write that down. [insisting, slowly] It was... VERY windy."
+   "script": "[deep voice, thick New York accent, defensive] It was windy. [thick New York accent, ordering] Write that down. [thick New York accent, insisting, slowly] It was... VERY windy."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "The old reeds. I played back in there when I was nine. There's a sundial in a clearing. We called it Sundial Hollow.",
    "ctx": "chapter 3 (reworded)",
-   "script": "[remembering, fond] The old reeds. I played back in there when I was nine. [storytelling] There's a sundial in a clearing. [wistful] We called it Sundial Hollow."
+   "script": "[deep voice, thick New York accent, remembering, fond] The old reeds. I played back in there when I was nine. [thick New York accent, storytelling] There's a sundial in a clearing. [thick New York accent, wistful] We called it Sundial Hollow."
   },
   {
    "voice": "tom",
@@ -266,21 +266,21 @@
    "speaker": "Boppy",
    "text": "That's my boot! I lost that boot in 1988!",
    "ctx": "chapter 3 (new)",
-   "script": "[recognizing, thrilled] That's my BOOT! [amazed] I lost that boot in 1988!"
+   "script": "[deep voice, thick New York accent, recognizing, thrilled] That's my BOOT! [thick New York accent, amazed] I lost that boot in 1988!"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "This is Sundial Hollow. I haven't been back here since I was nine.",
    "ctx": "chapter 3 (reworded)",
-   "script": "[quiet, remembering] This is Sundial Hollow. [wistful] I haven't been back here since I was nine."
+   "script": "[deep voice, thick New York accent, quiet, remembering] This is Sundial Hollow. [thick New York accent, wistful] I haven't been back here since I was nine."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "It was green. All of this was green. Who took the green out of my hollow?",
    "ctx": "chapter 3 (new)",
-   "script": "[hurt, quiet] It was green. [insisting] ALL of this was green. [bewildered, slowly] Who took the green out of my hollow?"
+   "script": "[deep voice, thick New York accent, hurt, quiet] It was green. [thick New York accent, insisting] ALL of this was green. [thick New York accent, bewildered, slowly] Who took the green out of my hollow?"
   },
   {
    "voice": "rose",
@@ -301,14 +301,14 @@
    "speaker": "Boppy",
    "text": "That fish jumped, and he never came down. Seventy-some years I've been fishing, and I never saw a fish stay up.",
    "ctx": "chapter 3 (new)",
-   "script": "[hushed, awed] That fish jumped, and he never came down. [reverent, slowly] Seventy-some years I've been fishing, and I never saw a fish... stay UP."
+   "script": "[deep voice, thick New York accent, hushed, awed] That fish jumped, and he never came down. [thick New York accent, reverent, slowly] Seventy-some years I've been fishing, and I never saw a fish... stay UP."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "Tom. Get under it with the net.",
    "ctx": "chapter 3 (new)",
-   "script": "[giving an order] Tom. Get under it with the net."
+   "script": "[deep voice, thick New York accent, giving an order] Tom. Get under it with the net."
   },
   {
    "voice": "tom",
@@ -322,7 +322,7 @@
    "speaker": "Boppy",
    "text": "Then it won't hurt to hold the net.",
    "ctx": "chapter 3 (new)",
-   "script": "[punchline, bossy] Then it won't HURT to hold the net."
+   "script": "[deep voice, thick New York accent, punchline, bossy] Then it won't HURT to hold the net."
   },
   {
    "voice": "tom",
@@ -336,7 +336,7 @@
    "speaker": "Boppy",
    "text": "Good. Hold it better.",
    "ctx": "chapter 3 (new)",
-   "script": "[approving] Good... [punchline, bossy] Hold it BETTER."
+   "script": "[deep voice, thick New York accent, approving] Good... [thick New York accent, punchline, bossy] Hold it BETTER."
   },
   {
    "voice": "grace",
@@ -378,7 +378,7 @@
    "speaker": "Boppy",
    "text": "Somebody want to tell me what it means?",
    "ctx": "chapter 3 (new)",
-   "script": "[lost, asking] Somebody want to tell me what it MEANS?"
+   "script": "[deep voice, thick New York accent, lost, asking] Somebody want to tell me what it MEANS?"
   },
   {
    "voice": "grace",
@@ -392,14 +392,14 @@
    "speaker": "Boppy",
    "text": "Well, it's a small one anyway. Mine was double.",
    "ctx": "chapter 3 (new)",
-   "script": "[dismissing, bragging] Well, it's a SMALL one anyway. [exaggerating] Mine was double."
+   "script": "[deep voice, thick New York accent, dismissing, bragging] Well, it's a SMALL one anyway. [thick New York accent, exaggerating] Mine was double."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "That's the Deep Pool. That's where Iron-Gill goes to sulk. Tom, you can put the net down.",
    "ctx": "chapter 3 (reworded)",
-   "script": "[alert, serious] That's the Deep Pool. [explaining] That's where Iron-Gill goes to sulk. [punchline, kindly] Tom, you can put the net down."
+   "script": "[deep voice, thick New York accent, alert, serious] That's the Deep Pool. [thick New York accent, explaining] That's where Iron-Gill goes to sulk. [thick New York accent, punchline, kindly] Tom, you can put the net down."
   },
   {
    "voice": "bigone",
@@ -420,7 +420,7 @@
    "speaker": "Boppy",
    "text": "First the Big One asks about me, and now this one. I'm very big with the fish, Tom.",
    "ctx": "chapter 3 (new)",
-   "script": "[flattered] First the Big One asks about me, and now this one. [punchline, bragging] I'm VERY big with the fish, Tom."
+   "script": "[deep voice, thick New York accent, flattered] First the Big One asks about me, and now this one. [thick New York accent, punchline, bragging] I'm VERY big with the fish, Tom."
   },
   {
    "voice": "tom",
@@ -448,7 +448,7 @@
    "speaker": "Boppy",
    "text": "Gold like my teeth, with a fish on it! I got one! Cozy Rosie, I got one!",
    "ctx": "chapter 3 (new)",
-   "script": "[overjoyed, shouting] Gold like my teeth, with a FISH on it! [gloating] I got one! Cozy Rosie, I got one!"
+   "script": "[deep voice, thick New York accent, overjoyed, shouting] Gold like my teeth, with a FISH on it! [thick New York accent, gloating] I got one! Cozy Rosie, I got one!"
   },
   {
    "voice": "rose",
@@ -462,7 +462,7 @@
    "speaker": "Boppy",
    "text": "Put the date. Put the time. And put that he was THIS big.",
    "ctx": "chapter 3 (reworded)",
-   "script": "[dictating] Put the date. Put the time. [exaggerating] And put that he was... THIS big."
+   "script": "[deep voice, thick New York accent, dictating] Put the date. Put the time. [thick New York accent, exaggerating] And put that he was... THIS big."
   },
   {
    "voice": "grace",
@@ -476,21 +476,21 @@
    "speaker": "Boppy",
    "text": "First time in my life I ever undersold a fish.",
    "ctx": "chapter 3 (new)",
-   "script": "[amazed at himself] First time in my life I ever... [punchline] UNDERSOLD a fish."
+   "script": "[deep voice, thick New York accent, amazed at himself] First time in my life I ever... [thick New York accent, punchline] UNDERSOLD a fish."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "Still up there. Somebody ought to let that fish finish his jump.",
    "ctx": "chapter 3 (new)",
-   "script": "[quiet, noticing] Still up there. [tender] Somebody ought to let that fish finish his jump."
+   "script": "[deep voice, thick New York accent, quiet, noticing] Still up there. [thick New York accent, tender] Somebody ought to let that fish finish his jump."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "Old Iron-Gill. Forty years, Deary. I TOLD everybody.",
    "ctx": "chapter 3 (reworded)",
-   "script": "[announcing, proud] Old Iron-Gill. [gloating] Forty years, Deary. I TOLD everybody."
+   "script": "[deep voice, thick New York accent, announcing, proud] Old Iron-Gill. [thick New York accent, gloating] Forty years, Deary. I TOLD everybody."
   },
   {
    "voice": "grace",
@@ -504,35 +504,35 @@
    "speaker": "Deedee",
    "text": "Thank you, Cozy Rosie. Now. Let me look at him.",
    "ctx": "chapter 3 (reworded)",
-   "script": "[thanking, warm] Thank you, Cozy Rosie. [taking over, sharp] Now. Let me look at him."
+   "script": "[warm Long Island accent, thanking, warm] Thank you, Cozy Rosie. [warm Long Island accent, taking over, sharp] Now. Let me look at him."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "Look. I got gold. From the fish.",
    "ctx": "chapter 3 (new)",
-   "script": "[showing off, hopeful] Look. I got gold. From the FISH."
+   "script": "[deep voice, thick New York accent, showing off, hopeful] Look. I got gold. From the FISH."
   },
   {
    "voice": "deedee",
    "speaker": "Deedee",
    "text": "Fifty-one years I've been married to you, hubby, and you never once brought ME gold from a fish.",
    "ctx": "chapter 3 (new)",
-   "script": "[teasing, dry] Fifty-one years I've been married to you, hubby, and you never once brought... ME gold from a fish."
+   "script": "[warm Long Island accent, teasing, dry] Fifty-one years I've been married to you, hubby, and you never once brought... ME gold from a fish."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "It's gold like my teeth!",
    "ctx": "chapter 3 (new)",
-   "script": "[bragging] It's gold like my TEETH!"
+   "script": "[deep voice, thick New York accent, bragging] It's gold like my TEETH!"
   },
   {
    "voice": "deedee",
    "speaker": "Deedee",
    "text": "I paid for those teeth.",
    "ctx": "chapter 3 (new)",
-   "script": "[punchline, deadpan] I PAID for those teeth."
+   "script": "[warm Long Island accent, punchline, deadpan] I PAID for those teeth."
   },
   {
    "voice": "grace",
@@ -553,14 +553,14 @@
    "speaker": "Deedee",
    "text": "Three. My pond, California, and the marsh.",
    "ctx": "chapter 3 (new)",
-   "script": "[counting, grim] Three. [listing, slowly] My pond, California, and the marsh."
+   "script": "[warm Long Island accent, counting, grim] Three. [warm Long Island accent, listing, slowly] My pond, California, and the marsh."
   },
   {
    "voice": "deedee",
    "speaker": "Deedee",
    "text": "New rule. Nobody in this family goes anywhere alone. Not to the pond, not to the pier, not to the mailbox. Tom, that goes for Los Angeles too.",
    "ctx": "chapter 3 (new)",
-   "script": "[laying down the law] New rule. Nobody in this family goes anywhere ALONE. [listing, firm] Not to the pond, not to the pier, not to the mailbox. [pointed, loving] Tom, that goes for Los Angeles too."
+   "script": "[warm Long Island accent, laying down the law] New rule. Nobody in this family goes anywhere ALONE. [warm Long Island accent, listing, firm] Not to the pond, not to the pier, not to the mailbox. [warm Long Island accent, pointed, loving] Tom, that goes for Los Angeles too."
   },
   {
    "voice": "tom",
