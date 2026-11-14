@@ -38,4 +38,10 @@ sq_s = key(newest('enemies','ch6-squirrel-ordinary')); pn = key(newest('enemies'
 small(cell(sq_s,2,0), 300).save('art/props/oakpark/ord_squirrel.webp', quality=92, method=6)
 small(cell(sq_s,1,1), 300).save('art/props/oakpark/ord_cheeks.webp', quality=92, method=6)
 small(cell(pn,0,0), 300).save('art/props/oakpark/ord_peanut.webp', quality=92, method=6)
+small(cell(sq_s,0,0), 300).save('art/props/oakpark/agent_dive.webp', quality=92, method=6)       # Agent Crumb finishing his dive (cell 1)
+small(cell(sq_s,1,0), 300).save('art/props/oakpark/agent_sandwich.webp', quality=92, method=6)   # and popping out with a sandwich (cell 2)
+try:   # the basket alone, once Library entry ch6-basket is approved; until then the game draws a stand-in
+    small(trim(key(newest('props','ch6-basket'))), 256).save('art/props/oakpark/ch6_basket.webp', quality=92, method=6)
+except ValueError:
+    if os.path.exists('art/props/oakpark/ch6_basket.webp'): os.remove('art/props/oakpark/ch6_basket.webp')
 print('ok')

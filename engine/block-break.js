@@ -20,6 +20,9 @@
 //          plate itself, turned grey inside the circle (the same way as SUNDIAL_GREY in engine/plate.js)
 //   block  the block picture and where it hangs: id (art/props/<id>.webp), centre x,y and width, all in plate art px; hole = where the round dent is
 //          as shares of the picture; roll = [x,y] where the coin starts on the table and [x,y] of the table top under the hole
+//   keep   what the block held and leaves behind: the basket stays on the table; the squirrel finishes its dive into it, pops out with a sandwich and
+//          sits beside it (art/props/oakpark/agent_*.webp from the approved ch6-squirrel-ordinary sheet; the basket is a code-drawn STAND-IN until
+//          Library entry ch6-basket is approved and baked to ch6_basket.webp)
 //   ordinary  monster id -> picture and width of what it turns back into
 // The monsters (map.monsters) are taken off the map when the ring passes them and kept in BB.stash; a new game puts them back (bbSync).
 const BB_SPOTS={
@@ -27,6 +30,7 @@ const BB_SPOTS={
     grey:{cx:330,cy:1010,r:330},
     block:{id:'oakpark/ch6_block',x:292,y:932,w:190,hole:[.51,.9],roll:[[120,1074],[292,1058]]},
     coin:{r:11},
+    keep:{basket:{x:292,y:1052,w:84},dive:[302,920],diveW:58,sitW:46,sit:[356,1054]},   // what is left on the table: the basket, and the squirrel that was frozen in it (art px)
     ordinary:{acornagent:['oakpark/ord_squirrel',52],cheekstuffer:['oakpark/ord_cheeks',56],peanutgallery:['oakpark/ord_peanut',74],twigspy:['oakpark/ord_twig',74],chairman:['oakpark/ord_squirrel',60]}}
 };
 const BB_T={roll:2.4,close0:2.55,close1:4.45,still1:5.45,crack1:7.1,fall1:8.7,ringStart:8.7,shrink:.9,settle:.7,ringSpeed:330};
@@ -94,13 +98,40 @@ function bbOrdinaryDraw(map,s) {
     ctx.save(); ctx.globalAlpha=d.fade?a:1; PROPART.draw(d.id,d.x*s,(d.base-h/2)*s,{w:d.w*s}); ctx.restore();
     if(d.fade&&BB.t-d.t0<.45) { const u=(BB.t-d.t0)/.45; ctx.save(); ctx.globalAlpha=(1-u)*.7; ellipse(d.x*s,(d.base-h*.45)*s,(h*.55+u*h*.5)*s,(h*.45+u*h*.4)*s,'#fff8e0'); ctx.restore(); } }
 }
+// What the block held, left behind on the table.
+function bbBasket(k,s) {
+  const b=k.basket,id='oakpark/ch6_basket';
+  if(PROPART.ready(id)) { const im=PROPART.get(id),h=b.w*im.naturalHeight/im.naturalWidth; PROPART.draw(id,b.x*s,(b.y-h/2)*s,{w:b.w*s}); return; }
+  ctx.save(); ctx.translate(b.x*s,b.y*s); ctx.scale(s,s); const w=b.w;   // stand-in: a wicker basket with its lid propped open
+  ellipse(0,2,w*.55,6,'#20202a40');
+  ctx.fillStyle='#8a5a2c'; ctx.strokeStyle='#4a2e12'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(-w*.42,-w*.44); ctx.lineTo(-w*.34,-w*.86); ctx.lineTo(w*.34,-w*.86); ctx.lineTo(w*.42,-w*.44); ctx.closePath(); ctx.fill(); ctx.stroke();   // the open lid behind
+  ctx.fillStyle='#f4f0e6'; ctx.fillRect(-w*.3,-w*.6,w*.24,w*.14); ctx.fillStyle='#e8c060'; ctx.fillRect(w*.02,-w*.62,w*.26,w*.16);   // sandwiches over the rim
+  ctx.fillStyle='#b27a3c'; ctx.beginPath(); ctx.moveTo(-w*.5,-w*.5); ctx.lineTo(w*.5,-w*.5); ctx.lineTo(w*.42,-2); ctx.lineTo(-w*.42,-2); ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.strokeStyle='#7a4e22'; ctx.lineWidth=1; for(let i=1;i<6;i++) { const y=-w*.5+i*(w*.5-2)/6; ctx.beginPath(); ctx.moveTo(-w*.48+i*1.2,y); ctx.lineTo(w*.48-i*1.2,y); ctx.stroke(); }
+  for(let i=-3;i<=3;i++) { ctx.beginPath(); ctx.moveTo(i*w*.13,-w*.5); ctx.lineTo(i*w*.11,-2); ctx.stroke(); }
+  ctx.fillStyle='#d8b050'; ctx.fillRect(-w*.5,-w*.54,w,5); ctx.restore();
+}
+function bbKeepDraw(sp,t,s) {   // t < 0: the break is over and stays over
+  const k=sp.keep; if(!k) return; const b=k.basket,F=BB_T.crack1,P=F+1.0,Q=P+.8;
+  bbBasket(k,s);
+  const frame=(id,w,x,y,rot)=>{ if(!PROPART.ready(id)) return; const im=PROPART.get(id),h=w*im.naturalHeight/im.naturalWidth; ctx.save(); ctx.translate(x*s,(y-h/2)*s); if(rot) ctx.rotate(rot); PROPART.draw(id,0,0,{w:w*s}); ctx.restore(); return h; };
+  const top=b.y-b.w*.5;
+  if(t>=0&&t<F) return;
+  if(t>=0&&t<P) { const u=(t-F)/(P-F),x=k.dive[0]+(b.x-k.dive[0])*u*u,y=k.dive[1]+(top-18-k.dive[1])*u-Math.sin(u*Math.PI)*12*(1-u); frame('oakpark/agent_dive',k.diveW,x,y,(u-.4)*.5); return; }
+  let u=t<0?1:bbClamp((t-P)/(Q-P),0,1);   // pops out of the basket with a sandwich and sits beside it
+  const x=b.x+(k.sit[0]-b.x)*bbEase(u),by=top+8+(k.sit[1]-top-8)*bbEase(u)-Math.sin(u*Math.PI)*26;
+  const im=PROPART.get('oakpark/agent_sandwich'); if(!PROPART.ready('oakpark/agent_sandwich')) return;
+  const h=k.sitW*im.naturalHeight/im.naturalWidth; if(u>=1) ellipse(x*s,(k.sit[1]+1)*s,k.sitW*.38*s,4*s,'#20202a38');
+  frame('oakpark/agent_sandwich',k.sitW,x,by+(u<1?0:0),0);
+}
 function bbDraw(map) {
   const s=T/64;
   bbOrdinaryDraw(map,s);
   for(const id in BB_SPOTS) {
     const sp=BB_SPOTS[id]; if(sp.map!==map.id) continue;
     const run=BB.run&&BB.run.id===id?BB.run:null;
-    if(!run&&!(bbFlag(sp.on)&&!bbFlag(sp.done))) continue;
+    if(!run&&bbFlag(sp.done)) { bbKeepDraw(sp,-1,s); continue; }
+    if(!run&&!bbFlag(sp.on)) continue;
     const t=run?BB.t:-1,B=sp.block,G=sp.grey,sh=bbShardsFor(id,sp);
     const ringR=run&&t>=BB_T.ringStart?(t-BB_T.ringStart)*BB_T.ringSpeed:-1;
     // the grey circle (a stand-in: the plate turned grey), and the colour coming back from the block outward
@@ -135,6 +166,7 @@ function bbDraw(map) {
         ctx.restore();
         ctx.save(); ctx.globalAlpha=bbClamp(1-u*1.4,0,1)*.6; ellipse(B.x*s,(B.y+bh/2)*s,B.w*.5*s*(1+u),10*s,'#fff2c0'); ctx.restore(); }
     }
+    if(run&&t>=BB_T.crack1) bbKeepDraw(sp,t,s);   // the basket and the squirrel that was in it, from the moment the block falls apart
     // the coin rolling along the groove and hopping into the hole
     if(run&&t<BB_T.roll) {
       const [x0,y0]=B.roll[0],[x1,y1]=B.roll[1],hx=B.x+(B.hole[0]-.5)*B.w,hy=B.y+(B.hole[1]-.5)*bh,tr=BB_T.roll-.32,r=sp.coin.r;
@@ -163,7 +195,7 @@ function bbPlay(id,opts={}) {
   const sh=bbShardsFor(id,sp),map=typeof currentMap!=='undefined'?currentMap:null;
   if(!map||map.id!==sp.map) { if(opts.onDone) opts.onDone(); return false; }
   const far=Math.hypot(map.w*64,map.h*64)+sp.block.w;
-  PROPART.preload([sp.block.id,...Object.values(sp.ordinary).map(v=>v[0])]);
+  PROPART.preload(['oakpark/agent_dive','oakpark/agent_sandwich','oakpark/ch6_basket',sp.block.id,...Object.values(sp.ordinary).map(v=>v[0])]);
   BB.t=0; BB.run={id,spot:sp,opts,seen:{},end:BB_T.ringStart+far/BB_T.ringSpeed+BB_T.settle,far,tick:0};
   return true;
 }
