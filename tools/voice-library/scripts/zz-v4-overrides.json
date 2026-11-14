@@ -3156,7 +3156,7 @@
 "speaker": "Boppy",
 "text": "Tom. Tackle box. We do this the old way.",
 "ctx": "v4 override",
-"script": "[serious] Tom. Tackle box. We do this [determined] the OLD way."
+"script": "[serious, taking charge] Tom. Tackle box. [determined] We do this the OLD way."
 }
 ]
 }

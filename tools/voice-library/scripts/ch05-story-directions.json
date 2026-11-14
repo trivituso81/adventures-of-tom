@@ -7,413 +7,413 @@
    "speaker": "Tom",
    "text": "Nara, I can't leave if you're sitting on my feet. Oh. That's the plan.",
    "ctx": "chapter 5 (new)",
-   "script": "[fond, amused] Nara, I can't leave if you're sitting on my feet. [short pause] [softly, touched] Oh. THAT'S the plan."
+   "script": "[reasoning with the dog] Nara, I can't leave if you're sitting on my feet. [realizing, touched] Oh. THAT'S the plan."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "A week. Maybe two. You guard the porch.",
    "ctx": "chapter 5 (reworded)",
-   "script": "[gentle, fond] A week. Maybe two. [warm, firm] You guard the porch."
+   "script": "[promising, gentle] A week. Maybe two. [giving her a job] You guard the porch."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Best costumes. That megaphone got it right.",
    "ctx": "chapter 5 (new)",
-   "script": "[softly, proud] Best costumes. That megaphone got it RIGHT."
+   "script": "[proud of him, quiet] Best costumes. [approving] That megaphone got it RIGHT."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Tabs! Nobody told me there would be tabs! I'm going to keep tabs on everything!",
    "ctx": "chapter 5 (new)",
-   "script": "[thrilled] Tabs! Nobody told me there would be TABS! I'm going to keep... [playful, delighted] tabs on everything!"
+   "script": "[gasping] Tabs! [amazed] Nobody told me there would be TABS! [punchline, delighted] I'm going to keep tabs on everything!"
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "It says, \"Share these with everybody. Yes, babe, even with Amy.\"",
    "ctx": "chapter 5 (new)",
-   "script": "[precise] It says, \"Share these with everybody. Yes, babe, [amused] even with AMY.\""
+   "script": "[reading aloud] It says, \"Share these with everybody. [punchline, amused] Yes, babe, even with AMY.\""
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "He knows me so well.",
    "ctx": "chapter 5 (new)",
-   "script": "[fond, happy] He knows me SO well."
+   "script": "[admitting, fond] He knows me SO well."
   },
   {
    "voice": "rose",
    "speaker": "Rose",
    "text": "Tata! LOOK!",
    "ctx": "chapter 5 (new)",
-   "script": "[excited, shouts] Tata! LOOK!"
+   "script": "[shouting, showing off] Tata! LOOK!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Your tooth is gone! And a whole worm fits through! When did it come out?",
    "ctx": "chapter 5 (new)",
-   "script": "[amazed] Your tooth is GONE! And a whole worm fits through! [curious, warm] When did it come out?"
+   "script": "[astonished] Your tooth is GONE! [impressed] And a whole worm fits through! [curious] When did it come out?"
   },
   {
    "voice": "rose",
    "speaker": "Rose",
    "text": "On Tuesday. An apple got it.",
    "ctx": "chapter 5 (new)",
-   "script": "[proud, matter-of-fact] On Tuesday. An APPLE got it."
+   "script": "[reporting, proud] On Tuesday. [blaming it] An APPLE got it."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Tuesday. I was in Los Angeles on Tuesday.",
    "ctx": "chapter 5 (new)",
-   "script": "[quiet] Tuesday. I was in Los Angeles [softly, wistful] on Tuesday."
+   "script": "[quiet, absorbing it] Tuesday. [admitting, wistful] I was in Los Angeles on Tuesday."
   },
   {
    "voice": "rose",
    "speaker": "Rose",
    "text": "The tooth fairy gave me two dollars. Boppy says HIS teeth cost way more.",
    "ctx": "chapter 5 (new)",
-   "script": "[pleased, bright] The tooth fairy gave me two dollars. Boppy says HIS teeth cost way more."
+   "script": "[bragging] The tooth fairy gave me two dollars. [tattling] Boppy says HIS teeth cost way more."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Deedee paid for Boppy's. You're the only one in this family who ever MADE money on a tooth.",
    "ctx": "chapter 5 (new)",
-   "script": "[warm, playful] Deedee paid for Boppy's. You're the only one in this family who ever MADE money on a tooth."
+   "script": "[correcting, amused] Deedee paid for Boppy's. [punchline, impressed] You're the only one in this family who ever MADE money on a tooth."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "Two iced coffees. Both mine. Here, have one. That's how much I need you tonight.",
    "ctx": "chapter 5 (reworded)",
-   "script": "[brisk, frazzled] Two iced coffees. Both mine. [warm] Here, have one. THAT'S how much [dry] I need you tonight."
+   "script": "[frazzled, brisk] Two iced coffees. [claiming them] Both mine. [giving in] Here, have one. [punchline, admitting] THAT'S how much I need you tonight."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "You're sharing your iced coffee? Amy, you never even shared your Halloween candy!",
    "ctx": "chapter 5 (reworded)",
-   "script": "[delighted] You're SHARING your iced coffee? Amy, you never even shared [teasing] your Halloween candy!"
+   "script": "[shocked, teasing] You're SHARING your iced coffee? [punchline, bringing up old business] Amy, you never even shared your Halloween candy!"
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "You get one coffee and one binder. Don't get used to it.",
    "ctx": "chapter 5 (new)",
-   "script": "[brisk, fond] You get one coffee and one binder. [dry] Don't get used to it."
+   "script": "[laying down the terms] You get one coffee and one binder. [warning] Don't get used to it."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "It has TABS! Color-coded tabs! Amy, this is the nicest thing you've ever done for me.",
    "ctx": "chapter 5 (new)",
-   "script": "[thrilled] It has TABS! Color-coded tabs! Amy, [sincere, touched] this is the nicest thing you've ever done for me."
+   "script": "[gasping] It has TABS! [nit picky, thrilled] Color-coded tabs! [sincere, moved] Amy, this is the nicest thing you've ever done for me."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "Tab one is the schedule. Tab two is the thirty parents. Tab three is what to do if one of them cries.",
    "ctx": "chapter 5 (new)",
-   "script": "[brisk, proud] Tab one is the schedule. Tab two is the thirty parents. Tab three is what to do [dry] if one of them CRIES."
+   "script": "[briefing him, brisk] Tab one is the schedule. Tab two is the thirty parents. [punchline, dry] Tab three is what to do if one of them CRIES."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "What's tab four?",
    "ctx": "chapter 5 (new)",
-   "script": "[curious, eager] What's tab four?"
+   "script": "[eager] What's tab four?"
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "Tab four was empty until recess. Then there was a huge flash on the playground. Now the bells ring whenever they feel like it and every clock says a different time.",
    "ctx": "chapter 5 (reworded)",
-   "script": "[anxious, quick] Tab four was empty until recess. Then there was a HUGE flash on the playground. Now the bells ring whenever they feel like it [exasperated] and every clock says a different time."
+   "script": "[explaining, anxious] Tab four was empty until recess. [reporting] Then there was a HUGE flash on the playground. [fed up] Now the bells ring whenever they feel like it and every clock says a different time."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "A flash! Amy, that's how it starts every single time!",
    "ctx": "chapter 5 (new)",
-   "script": "[alarmed] A flash! Amy, that's how it starts [urgent] every single TIME!"
+   "script": "[alarmed, recognizing] A flash! [warning] Amy, that's how it starts every single TIME!"
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "I was THERE, Tata! Moss kicked the kickball, there was a big flash, and the ball never came down!",
    "ctx": "chapter 5 (new)",
-   "script": "[excited, rushed] I was THERE, Tata! Moss kicked the kickball, there was a big flash, and the ball... [amazed, slower] never came down!"
+   "script": "[bursting to tell] I was THERE, Tata! [storytelling, fast] Moss kicked the kickball, there was a big flash, [amazed] and the ball never came down!"
   },
   {
    "voice": "rose",
    "speaker": "Rose",
    "text": "Then we had indoor recess. Indoor recess is the worst recess.",
    "ctx": "chapter 5 (new)",
-   "script": "[grumbling, quiet] Then we had indoor recess. Indoor recess is the... [flat] WORST recess."
+   "script": "[complaining] Then we had indoor recess. [punchline, grumbling] Indoor recess is the WORST recess."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "And the sign-up sheet got up off the table and ran away.",
    "ctx": "chapter 5 (new)",
-   "script": "[flat, disbelief] And the sign-up sheet got up off the table [slowly] and ran away."
+   "script": "[reporting, disbelief] And the sign-up sheet got up off the table and ran away."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "On little paper legs! I watched it go! I teach second grade. I've seen everything, and I've never seen THAT.",
    "ctx": "chapter 5 (reworded)",
-   "script": "[stunned, louder] On little paper LEGS! I watched it go! [brisk] I teach second grade. I've seen everything, and I've never seen... [appalled] THAT."
+   "script": "[insisting] On little paper LEGS! [testifying] I watched it go! [stating her credentials] I teach second grade. [punchline, appalled] I've seen everything, and I've never seen THAT."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Does tab four say what to do about a sheet of paper with legs?",
    "ctx": "chapter 5 (new)",
-   "script": "[earnest, hopeful] Does tab four say what to do about a sheet of paper with legs?"
+   "script": "[hopeful, earnest] Does tab four say what to do about a sheet of paper with legs?"
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "Tab four says \"Ask Tom.\" I wrote it in pen.",
    "ctx": "chapter 5 (new)",
-   "script": "[brisk] Tab four says... [sheepish] \"Ask Tom.\" [dry] I wrote it in PEN."
+   "script": "[admitting, brisk] Tab four says \"Ask Tom.\" [punchline, committed] I wrote it in PEN."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "I told Principal Pruitt this morning that something would go wrong tonight. I called it.",
    "ctx": "chapter 5 (new)",
-   "script": "[proud, brisk] I told Principal Pruitt this morning that something would go wrong tonight. [triumphant] I CALLED it."
+   "script": "[bragging] I told Principal Pruitt this morning that something would go wrong tonight. [gloating] I CALLED it."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "I told TNB on Tuesday. I called it first.",
    "ctx": "chapter 5 (new)",
-   "script": "[teasing] I told TNB on Tuesday. I called it... [proud] FIRST."
+   "script": "[one-upping] I told TNB on Tuesday. [gloating] I called it FIRST."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "You can't call it from California!",
    "ctx": "chapter 5 (new)",
-   "script": "[indignant, amused] You can't call it from CALIFORNIA!"
+   "script": "[objecting, laughing it off] You can't call it from CALIFORNIA!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "And I have a binder! I'm bound to be useful.",
    "ctx": "chapter 5 (new)",
-   "script": "[proud] And I have a binder! I'm... [playful] BOUND to be useful."
+   "script": "[bragging] And I have a binder! [punchline] I'm BOUND to be useful."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "Was that a pun? Did TNB teach you that?",
    "ctx": "chapter 5 (new)",
-   "script": "[suspicious, slowly] Was that a pun? [amused, accusing] Did TNB teach you that?"
+   "script": "[suspicious] Was that a pun? [accusing, amused] Did TNB teach you that?"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "I'm filling in for him while he's in Los Angeles.",
    "ctx": "chapter 5 (new)",
-   "script": "[proud, cheerful] I'm filling in for him while he's in Los Angeles."
+   "script": "[proud, nonchalant] I'm filling in for him while he's in Los Angeles."
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "That's Clara. She's in my class. Hi, Clara.",
    "ctx": "chapter 5 (new)",
-   "script": "[friendly, bright] That's Clara. She's in my class. Hi, Clara."
+   "script": "[introducing] That's Clara. She's in my class. [friendly] Hi, Clara."
   },
   {
    "voice": "pipkid",
    "speaker": "Clara",
    "text": "Hi, Grace. I'm waiting for my dad.",
    "ctx": "chapter 5 (new)",
-   "script": "[quiet, polite] Hi, Grace. I'm waiting for my dad."
+   "script": "[polite, quiet] Hi, Grace. [explaining] I'm waiting for my dad."
   },
   {
    "voice": "oolong",
    "speaker": "Mrs. Kowalski",
    "text": "Pickup was at five thirty. He called and said ten minutes. That was forty minutes ago.",
    "ctx": "chapter 5 (new)",
-   "script": "[quiet, concerned] Pickup was at five thirty. He called and said ten minutes. That was... [flat] FORTY minutes ago."
+   "script": "[informing, quiet] Pickup was at five thirty. He called and said ten minutes. [pointed, concerned] That was FORTY minutes ago."
   },
   {
    "voice": "pipkid",
    "speaker": "Clara",
    "text": "He's coming. He just works far away a lot.",
    "ctx": "chapter 5 (new)",
-   "script": "[quiet, steady] He's coming. He just works far away a lot."
+   "script": "[defending him, steady] He's coming. [explaining it away] He just works far away a lot."
   },
   {
    "voice": "rose",
    "speaker": "Rose",
    "text": "You can have a gummy worm while you wait. Tata's boyfriend sent them.",
    "ctx": "chapter 5 (new)",
-   "script": "[kind, bright] You can have a gummy worm while you wait. Tata's boyfriend sent them."
+   "script": "[offering, kind] You can have a gummy worm while you wait. [explaining] Tata's boyfriend sent them."
   },
   {
    "voice": "pipkid",
    "speaker": "Clara",
    "text": "...Thank you.",
    "ctx": "chapter 5 (new)",
-   "script": "[quiet, surprised] ...Thank you."
+   "script": "[surprised, small] ...Thank you."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "Principal Pruitt, this is my brother Tom. He's seen things like this four times already. He's our expert.",
    "ctx": "chapter 5 (reworded)",
-   "script": "[brisk, proud] Principal Pruitt, this is my brother Tom. He's seen things like this four times already. He's our EXPERT."
+   "script": "[introducing, brisk] Principal Pruitt, this is my brother Tom. [vouching] He's seen things like this four times already. [bragging about him] He's our EXPERT."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Do visitors get a lanyard here? I have two already.",
    "ctx": "chapter 5 (new)",
-   "script": "[hopeful, eager] Do visitors get a lanyard here? I have two [proud] already."
+   "script": "[hopeful] Do visitors get a lanyard here? [bragging] I have two already."
   },
   {
    "voice": "michael",
    "speaker": "Principal Pruitt",
    "text": "Visitors get a sticker.",
    "ctx": "chapter 5 (new)",
-   "script": "[flat, kind] Visitors get a sticker."
+   "script": "[informing, flat] Visitors get a sticker."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "A sticker! Amy, where's your sticker?",
    "ctx": "chapter 5 (new)",
-   "script": "[delighted] A STICKER! Amy, [teasing] where's YOUR sticker?"
+   "script": "[thrilled] A STICKER! [teasing] Amy, where's YOUR sticker?"
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "I work here, Tom.",
    "ctx": "chapter 5 (new)",
-   "script": "[flat, amused] I WORK here, Tom."
+   "script": "[stating the obvious, flat] I WORK here, Tom."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "So you don't get one. I'm so sorry. That must be hard.",
    "ctx": "chapter 5 (new)",
-   "script": "[mock sympathy] So you don't get one. I'm SO sorry. [teasing, softly] That must be hard."
+   "script": "[mock sympathy] So you don't get one. [gloating, fake sad] I'm SO sorry. That must be hard."
   },
   {
    "voice": "michael",
    "speaker": "Principal Pruitt",
    "text": "Ever since that flash at recess, the bells ring at random and the clocks in the hall all say different times. And the sign-up sheet got up off the table and walked into the school.",
    "ctx": "chapter 5 (reworded)",
-   "script": "[worried, tired] Ever since that flash at recess, the bells ring at random and the clocks in the hall all say different times. And the sign-up sheet got up off the table and... [disbelief, slowly] WALKED into the school."
+   "script": "[reporting, weary] Ever since that flash at recess, the bells ring at random and the clocks in the hall all say different times. [disbelief, slowly] And the sign-up sheet got up off the table and WALKED into the school."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Exactly seven. Amy, I like this man.",
    "ctx": "chapter 5 (new)",
-   "script": "[delighted] Exactly seven. Amy, [approving] I LIKE this man."
+   "script": "[nit picky, approving] Exactly seven. [punchline, delighted] Amy, I LIKE this man."
   },
   {
    "voice": "pipkid",
    "speaker": "Clara",
    "text": "You said five thirty.",
    "ctx": "chapter 5 (new)",
-   "script": "[quiet, steady] You said five thirty."
+   "script": "[quiet, reminding] You said five thirty."
   },
   {
    "voice": "michael",
    "speaker": "Man in the long coat",
    "text": "I know, sweetheart. I'm sorry. I'm here now.",
    "ctx": "chapter 5 (new)",
-   "script": "[softly, tired] I know, sweetheart. I'm sorry. [gentle] I'm here now."
+   "script": "[apologizing, tired] I know, sweetheart. I'm sorry. [gentle] I'm here now."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "That's Clara's dad. He's the last one here every single day. But he always comes.",
    "ctx": "chapter 5 (new)",
-   "script": "[softly, sympathetic] That's Clara's dad. He's the last one here every single day. [gentle] But he ALWAYS comes."
+   "script": "[explaining, quiet] That's Clara's dad. He's the last one here every single day. [defending him, gentle] But he ALWAYS comes."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "There it is. I put six cones around it. I didn't know what else to do. Cones are what we have.",
    "ctx": "chapter 5 (new)",
-   "script": "[shaken] There it is. I put six cones around it. I didn't know what else to do. Cones... [flat, practical] are what we have."
+   "script": "[shaken, showing him] There it is. [explaining] I put six cones around it. [admitting] I didn't know what else to do. [punchline, flat] Cones are what we have."
   },
   {
    "voice": "rose",
    "speaker": "Rose",
    "text": "The ball is in the SKY! And a SHOE!",
    "ctx": "chapter 5 (new)",
-   "script": "[amazed, shouts] The ball is in the SKY! [baffled] And a SHOE!"
+   "script": "[shouting, amazed] The ball is in the SKY! [baffled] And a SHOE!"
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "That's Moss's sneaker. Moss kicked so hard that it flew off, and then the flash got the ball and the shoe together. Moss had to hop to the bus.",
    "ctx": "chapter 5 (new)",
-   "script": "[matter-of-fact, quick] That's Moss's sneaker. Moss kicked so hard that it flew off, and then the flash got the ball and the shoe together. Moss had to... [dry] HOP to the bus."
+   "script": "[explaining, know-it-all] That's Moss's sneaker. Moss kicked so hard that it flew off, and then the flash got the ball and the shoe together. [punchline, dry] Moss had to HOP to the bus."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Moss really put a best foot forward. And it never came back.",
    "ctx": "chapter 5 (new)",
-   "script": "[amused] Moss really put a best... [playful] FOOT forward. [short pause] [quietly, wry] And it never came back."
+   "script": "[punchline, pleased with himself] Moss really put a best FOOT forward. [adding, wry] And it never came back."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "That's two. I'm counting.",
    "ctx": "chapter 5 (new)",
-   "script": "[flat, dry] That's two. I'm counting."
+   "script": "[counting, unimpressed] That's two. [warning] I'm counting."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "It's as big as a washing machine! The hat in Los Angeles was only as big as a beach ball. They keep getting bigger!",
    "ctx": "chapter 5 (new)",
-   "script": "[amazed, alarmed] It's as big as a WASHING machine! The hat in Los Angeles was only as big as a beach ball. They keep [uneasy, slowly] getting bigger!"
+   "script": "[alarmed] It's as big as a WASHING machine! [comparing] The hat in Los Angeles was only as big as a beach ball. [working it out, uneasy] They keep getting bigger!"
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "The grass under it is grey. Second base is grey. Tom, I do recess duty every day, and I have never had to write THAT up.",
    "ctx": "chapter 5 (new)",
-   "script": "[shaken] The grass under it is grey. Second base is grey. Tom, I do recess duty every day, and I have never had to [frazzled, louder] write THAT up."
+   "script": "[shaken, noticing] The grass under it is grey. Second base is grey. [punchline, frazzled] Tom, I do recess duty every day, and I have never had to write THAT up."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "It hangs there by itself, like the fish and the hat. TNB pulled a whole table out from under the hat and it didn't drop an inch.",
    "ctx": "chapter 5 (new)",
-   "script": "[uneasy, thoughtful] It hangs there by itself, like the fish and the hat. TNB pulled a whole table out from under the hat and it didn't drop [slowly] an INCH."
+   "script": "[investigating] It hangs there by itself, like the fish and the hat. [vouching] TNB pulled a whole table out from under the hat and it didn't drop an INCH."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "Nobody touch it. There's a form for this and I don't know which one.",
    "ctx": "chapter 5 (new)",
-   "script": "[commanding] Nobody touch it. There's a form for this [frazzled] and I don't know WHICH one."
+   "script": "[giving an order] Nobody touch it. [punchline, frazzled] There's a form for this and I don't know WHICH one."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "It's not in the binder. I checked all four tabs.",
    "ctx": "chapter 5 (new)",
-   "script": "[apologetic] It's not in the binder. I checked [flat, earnest] all four tabs."
+   "script": "[reporting, apologizing] It's not in the binder. [nit picky] I checked all four tabs."
   },
   {
    "voice": "amy",
@@ -427,35 +427,35 @@
    "speaker": "Tom",
    "text": "It's in case it falls. This is a three-inch binder, Amy.",
    "ctx": "chapter 5 (new)",
-   "script": "[earnest, serious] It's in case it falls. This is a... [proud] THREE-inch binder, Amy."
+   "script": "[explaining, dead serious] It's in case it falls. [punchline, proud] This is a THREE-inch binder, Amy."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "There's going to be a little round hole in the side. Grace, I'll spot you.",
    "ctx": "chapter 5 (new)",
-   "script": "[calm, certain] There's going to be a little round hole in the side. [warm] Grace, I'll spot you."
+   "script": "[predicting, calm] There's going to be a little round hole in the side. [offering] Grace, I'll spot you."
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "Round hole! It's right under the sneaker. I'm not touching it, Mom. I'm LOOKING.",
    "ctx": "chapter 5 (new)",
-   "script": "[excited] Round hole! It's right under the sneaker. [defensive, quick] I'm not touching it, Mom. I'm LOOKING."
+   "script": "[confirming, excited] Round hole! It's right under the sneaker. [defensive, to her mom] I'm not touching it, Mom. [nit picky] I'm LOOKING."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "And there's going to be a burnt flashbulb close by.",
    "ctx": "chapter 5 (new)",
-   "script": "[calm, certain] And there's going to be a burnt flashbulb close by."
+   "script": "[predicting, calm] And there's going to be a burnt flashbulb close by."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Second base.",
    "ctx": "chapter 5 (new)",
-   "script": "[quiet, certain] Second base."
+   "script": "[confirming, quiet] Second base."
   },
   {
    "voice": "amy",
@@ -469,490 +469,490 @@
    "speaker": "Tom",
    "text": "I've had four practices. I still have the one from the movie studio in my pocket.",
    "ctx": "chapter 5 (new)",
-   "script": "[matter-of-fact] I've had four practices. I still have the one from the movie studio [casual] in my pocket."
+   "script": "[stating the facts] I've had four practices. [nonchalant] I still have the one from the movie studio in my pocket."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "You're walking around with burnt light bulbs in your pocket? Mom has a drawer for those!",
    "ctx": "chapter 5 (new)",
-   "script": "[disbelief] You're walking around with burnt light bulbs in your POCKET? [scolding] Mom has a DRAWER for those!"
+   "script": "[scolding, disbelief] You're walking around with burnt light bulbs in your POCKET? [punchline, citing Mom] Mom has a DRAWER for those!"
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "Kickball: grey grass, orange block, round hole, burnt bulb. Page four.",
    "ctx": "chapter 5 (new)",
-   "script": "[precise, steady] Kickball: grey grass, orange block, round hole, burnt bulb. [brisk] Page four."
+   "script": "[reading her notes, precise] Kickball: grey grass, orange block, round hole, burnt bulb. [filing it] Page four."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "That's five. Three here, and two out where you live. Tom, who is doing this?",
    "ctx": "chapter 5 (new)",
-   "script": "[uneasy, quiet] That's five. Three here, and two out where you live. Tom, [serious, slowly] WHO is doing this?"
+   "script": "[counting, uneasy] That's five. Three here, and two out where you live. [serious, asking] Tom, WHO is doing this?"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "I don't know. Nobody knows. But every time, there's a flash, and then things wake up.",
    "ctx": "chapter 5 (new)",
-   "script": "[serious, quiet] I don't know. Nobody knows. But every time, there's a flash... [slowly] and then things wake up."
+   "script": "[admitting] I don't know. Nobody knows. [working it out, slowly] But every time, there's a flash... and then things wake up."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "Then let's go see what woke up in my school.",
    "ctx": "chapter 5 (new)",
-   "script": "[determined, brisk] Then let's go see what woke up in MY school."
+   "script": "[taking charge] Then let's go see what woke up in MY school."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Don't worry, Amy. We'll fix every one of them. It's about time.",
    "ctx": "chapter 5 (new)",
-   "script": "[reassuring] Don't worry, Amy. We'll fix every one of them. It's about... [playful] TIME."
+   "script": "[reassuring] Don't worry, Amy. We'll fix every one of them. [punchline] It's about TIME."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "Three.",
    "ctx": "chapter 5 (new)",
-   "script": "[flat, dry] Three."
+   "script": "[counting, flat] Three."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "That bell is HOPPING! Tom! It has a FACE!",
    "ctx": "chapter 5 (new)",
-   "script": "[startled, shrill] That bell is HOPPING! Tom! [appalled] It has a FACE!"
+   "script": "[shrieking] That bell is HOPPING! Tom! [appalled] It has a FACE!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "That's what they do! I've been telling you on the phone for weeks!",
    "ctx": "chapter 5 (new)",
-   "script": "[excited, vindicated] That's what they DO! I've been telling you on the phone for weeks!"
+   "script": "[vindicated] That's what they DO! [complaining] I've been telling you on the phone for weeks!"
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "You also told me a hill sneezed on you!",
    "ctx": "chapter 5 (new)",
-   "script": "[disbelief, loud] You also told me a hill SNEEZED on you!"
+   "script": "[arguing back] You also told me a hill SNEEZED on you!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "It DID!",
    "ctx": "chapter 5 (new)",
-   "script": "[indignant] It DID!"
+   "script": "[insisting] It DID!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Excuse me, Mr. Bell. I set two alarms for everything. Does that ring a bell?",
    "ctx": "chapter 5 (new)",
-   "script": "[polite, earnest] Excuse me, Mr. Bell. I set two alarms for everything. Does that... [playful] ring a BELL?"
+   "script": "[overly polite] Excuse me, Mr. Bell. [informing, earnest] I set two alarms for everything. [punchline] Does that ring a BELL?"
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "Four.",
    "ctx": "chapter 5 (new)",
-   "script": "[flat, dry] Four."
+   "script": "[counting, flat] Four."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Stay close, everybody. We have to stick together.",
    "ctx": "chapter 5 (new)",
-   "script": "[earnest] Stay close, everybody. We have to... [playful] STICK together."
+   "script": "[giving an order, earnest] Stay close, everybody. [punchline] We have to STICK together."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "Five. And glitter never comes out, Tom. Never.",
    "ctx": "chapter 5 (new)",
-   "script": "[flat, dry] Five. And glitter never comes out, Tom. [grim, slowly] NEVER."
+   "script": "[counting, flat] Five. [warning, grim] And glitter never comes out, Tom. NEVER."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "LAAAAA! The piano works!",
    "ctx": "chapter 5 (new)",
-   "script": "[sings, joyful] LAAAAA! [delighted, breathless] The piano works!"
+   "script": "[singing, belting] LAAAAA! [delighted] The piano works!"
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "Mom. Inside voice.",
    "ctx": "chapter 5 (new)",
-   "script": "[dry, embarrassed] Mom. [quietly] Inside voice."
+   "script": "[mortified] Mom. [scolding, quiet] Inside voice."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "That WAS my inside voice.",
    "ctx": "chapter 5 (new)",
-   "script": "[defensive, amused] That WAS my inside voice."
+   "script": "[punchline, defensive] That WAS my inside voice."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "That's the big note from the end of act one! Keep going, I know the next part!",
    "ctx": "chapter 5 (new)",
-   "script": "[thrilled] That's the big note from the end of act one! [eager, rushed] Keep going, I know the next part!"
+   "script": "[recognizing, thrilled] That's the big note from the end of act one! [urging] Keep going, I know the next part!"
   },
   {
    "voice": "rose",
    "speaker": "Rose",
    "text": "Now there are TWO of them.",
    "ctx": "chapter 5 (new)",
-   "script": "[flat, amazed] Now there are TWO of them."
+   "script": "[punchline, dismayed] Now there are TWO of them."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "The Rivituso Rule. No throwing at the teacher. It's still painted on the wall.",
    "ctx": "chapter 5 (reworded)",
-   "script": "[proud, brisk] The Rivituso Rule. No throwing at the teacher. It's STILL painted on the wall."
+   "script": "[citing the rule, proud] The Rivituso Rule. No throwing at the teacher. [bragging] It's STILL painted on the wall."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "Seven o'clock exactly. On my watch too.",
    "ctx": "chapter 5 (new)",
-   "script": "[satisfied] Seven o'clock exactly. [relieved, smug] On MY watch too."
+   "script": "[checking, satisfied] Seven o'clock exactly. [gloating] On MY watch too."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "That's MY red pen! I dropped my clipboard at recess when the flash went off, and when I picked it up the pen was gone!",
    "ctx": "chapter 5 (new)",
-   "script": "[startled, indignant] That's MY red pen! [quick] I dropped my clipboard at recess when the flash went off, and when I picked it up the pen was GONE!"
+   "script": "[recognizing, indignant] That's MY red pen! [explaining, fast] I dropped my clipboard at recess when the flash went off, and when I picked it up the pen was gone!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Amy, your pen is as tall as a door! And it's wearing glasses!",
    "ctx": "chapter 5 (new)",
-   "script": "[amazed, loud] Amy, your pen is as tall as a DOOR! [baffled] And it's wearing glasses!"
+   "script": "[shouting, amazed] Amy, your pen is as tall as a DOOR! [noticing, baffled] And it's wearing glasses!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Amy, he's the mean judge! Like on our shows!",
    "ctx": "chapter 5 (new)",
-   "script": "[whispers, excited] Amy, he's the mean judge! Like on our SHOWS!"
+   "script": "[whispering, gossiping] Amy, he's the mean judge! [delighted] Like on our SHOWS!"
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "There's always a mean judge. And he always cries in the finale.",
    "ctx": "chapter 5 (new)",
-   "script": "[knowing, amused] There's always a mean judge. And he ALWAYS cries [slowly] in the finale."
+   "script": "[knowing] There's always a mean judge. [predicting, smug] And he ALWAYS cries in the finale."
   },
   {
    "voice": "grump",
    "speaker": "The Red Pen",
    "text": "At recess there was a big flash, and now I'm big enough to grade everybody. I made the bells and the clocks wrong so that everybody would be late. Late is late. Points off.",
    "ctx": "chapter 5 (reworded)",
-   "script": "[prim, stern] At recess there was a big flash, and now I'm big enough to grade everybody. I made the bells and the clocks wrong so that everybody would be late. [precise, clipped] Late is late. Points off."
+   "script": "[prim, explaining] At recess there was a big flash, and now I'm big enough to grade everybody. [confessing, proud] I made the bells and the clocks wrong so that everybody would be late. [ruling, clipped] Late is late. Points off."
   },
   {
    "voice": "grump",
    "speaker": "The Red Pen",
    "text": "And YOU. With the binder. Tab three is crooked.",
    "ctx": "chapter 5 (new)",
-   "script": "[prim, accusing] And YOU. With the binder. Tab three... [precise, slowly] is crooked."
+   "script": "[prim, accusing] And YOU. With the binder. [nit picky, slowly] Tab three is crooked."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "It is NOT crooked!",
    "ctx": "chapter 5 (new)",
-   "script": "[indignant] It is NOT crooked!"
+   "script": "[offended] It is NOT crooked!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "...It's a little crooked.",
    "ctx": "chapter 5 (new)",
-   "script": "[quiet, giving in] ...It's a little crooked."
+   "script": "[punchline, admitting with guilt] ...It's a little crooked."
   },
   {
    "voice": "rose",
    "speaker": "Rose",
    "text": "And it has a gold star on its clip!",
    "ctx": "chapter 5 (new)",
-   "script": "[excited, shrill] And it has a gold STAR on its clip!"
+   "script": "[pointing it out, shrill] And it has a gold STAR on its clip!"
   },
   {
    "voice": "grump",
    "speaker": "The Red Pen",
    "text": "That's the only gold star in this school that isn't a sticker. I found it in the grass. I'm saving it for one perfect paper. There has never been one.",
    "ctx": "chapter 5 (new)",
-   "script": "[prim, wistful] That's the only gold star in this school that isn't a sticker. I found it in the grass. I'm saving it for one PERFECT paper. [quiet, lonely] There has never been one."
+   "script": "[prim, guarding it] That's the only gold star in this school that isn't a sticker. I found it in the grass. [explaining] I'm saving it for one PERFECT paper. [admitting, lonely] There has never been one."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "The mean judge cried in the finale. I called it.",
    "ctx": "chapter 5 (new)",
-   "script": "[triumphant] The mean judge cried in the finale. [smug, slowly] I CALLED it."
+   "script": "[announcing] The mean judge cried in the finale. [gloating] I CALLED it."
   },
   {
    "voice": "grump",
    "speaker": "The Red Pen",
    "text": "Mrs. Gregori. When an answer is wrong, you write \"good try\" next to my X. I always thought that was silly. It isn't.",
    "ctx": "chapter 5 (new)",
-   "script": "[prim, softened] Mrs. Gregori. When an answer is wrong, you write \"good try\" next to my X. I always thought that was silly. [short pause] [sincere, quietly] It isn't."
+   "script": "[prim, addressing her] Mrs. Gregori. [admitting] When an answer is wrong, you write \"good try\" next to my X. I always thought that was silly. [conceding, sincere] It isn't."
   },
   {
    "voice": "grump",
    "speaker": "The Red Pen",
    "text": "One perfect paper. This is for you.",
    "ctx": "chapter 5 (new)",
-   "script": "[prim, softly] One perfect paper. [moved] This is for YOU."
+   "script": "[presenting, moved] One perfect paper. [tender] This is for YOU."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "I got a gold star! Wait until Mom sees this. I'm her favorite this year, so my picture goes on the front of the Christmas tree.",
    "ctx": "chapter 5 (new)",
-   "script": "[delighted, bragging] I got a gold STAR! Wait until Mom sees this. I'm her favorite this year, [smug, playful] so MY picture goes on the front of the Christmas tree."
+   "script": "[bragging] I got a gold STAR! [gloating] Wait until Mom sees this. [punchline, smug] I'm her favorite this year, so MY picture goes on the front of the Christmas tree."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "It dropped its gold star on my clipboard. I'm keeping it. Wait until Mom sees this. I'm her favorite this year, so my picture goes on the front of the Christmas tree.",
    "ctx": "chapter 5 (new)",
-   "script": "[delighted] It dropped its gold star on my clipboard. I'm KEEPING it. Wait until Mom sees this. I'm her favorite this year, [smug, playful] so MY picture goes on the front of the Christmas tree."
+   "script": "[reporting, delighted] It dropped its gold star on my clipboard. [claiming it] I'm KEEPING it. [gloating] Wait until Mom sees this. [punchline, smug] I'm her favorite this year, so MY picture goes on the front of the Christmas tree."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Mom calls me her favorite son every single time I walk in the door!",
    "ctx": "chapter 5 (new)",
-   "script": "[indignant, amused] Mom calls me her favorite son every single TIME I walk in the door!"
+   "script": "[objecting, indignant] Mom calls me her favorite son every single TIME I walk in the door!"
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "You're her ONLY son, Tom.",
    "ctx": "chapter 5 (new)",
-   "script": "[dry] You're her... [amused] ONLY son, Tom."
+   "script": "[punchline, correcting] You're her ONLY son, Tom."
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "It's a gold coin, Mom. It has a kickball on it.",
    "ctx": "chapter 5 (new)",
-   "script": "[matter-of-fact, quick] It's a gold COIN, Mom. It has a kickball on it."
+   "script": "[correcting] It's a gold COIN, Mom. [informing] It has a kickball on it."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Rose has a dragonfly. I have a lemon. Boppy has a fish and TNB has a cowboy hat. And now you have a kickball.",
    "ctx": "chapter 5 (new)",
-   "script": "[steady, amazed] Rose has a dragonfly. I have a lemon. Boppy has a fish and TNB has a cowboy hat. And now [slowly] YOU have a kickball."
+   "script": "[tallying] Rose has a dragonfly. I have a lemon. Boppy has a fish and TNB has a cowboy hat. [amazed, slowly] And now YOU have a kickball."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "Five coins and five orange blocks. Grace, put it on the list.",
    "ctx": "chapter 5 (new)",
-   "script": "[uneasy, brisk] Five coins and five orange blocks. Grace, put it on the list."
+   "script": "[counting, uneasy] Five coins and five orange blocks. [giving an order] Grace, put it on the list."
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "It's already on the list.",
    "ctx": "chapter 5 (new)",
-   "script": "[dry, proud] It's ALREADY on the list."
+   "script": "[punchline, smug] It's ALREADY on the list."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Thank you! That's been bothering me for ten whole minutes.",
    "ctx": "chapter 5 (new)",
-   "script": "[relieved, grateful] THANK you! That's been bothering me for ten whole minutes."
+   "script": "[relieved] THANK you! [nit picky, admitting] That's been bothering me for ten whole minutes."
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "The sign-up sheet! It's a bit crumpled. But every name is spelled right.",
    "ctx": "chapter 5 (reworded)",
-   "script": "[pleased] The sign-up sheet! It's a bit crumpled. But every name [precise, approving] is spelled RIGHT."
+   "script": "[announcing] The sign-up sheet! [inspecting] It's a bit crumpled. [approving, precise] But every name is spelled RIGHT."
   },
   {
    "voice": "rose",
    "speaker": "Rose",
    "text": "Mom, can I keep it? I'll keep it inside Lamby.",
    "ctx": "chapter 5 (reworded)",
-   "script": "[hopeful, quiet] Mom, can I keep it? I'll keep it inside Lamby."
+   "script": "[begging, small] Mom, can I keep it? [bargaining] I'll keep it inside Lamby."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "It stays on my clipboard. Not inside Lamby.",
    "ctx": "chapter 5 (new)",
-   "script": "[firm, kind] It stays on my clipboard. NOT inside Lamby."
+   "script": "[ruling, kind] It stays on my clipboard. [firm] NOT inside Lamby."
   },
   {
    "voice": "bean",
    "speaker": "Mr. Delgado",
    "text": "She said my son is KIND!",
    "ctx": "chapter 5 (new)",
-   "script": "[crying, overjoyed] She said my son is KIND!"
+   "script": "[sobbing, overjoyed] She said my son is KIND!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "A parent is crying! Tab three! I know this one!",
    "ctx": "chapter 5 (new)",
-   "script": "[thrilled, urgent] A parent is crying! Tab three! [proud] I KNOW this one!"
+   "script": "[alarmed, thrilled] A parent is crying! [remembering] Tab three! [bragging] I KNOW this one!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "\"Tissue first. Then a cookie.\"",
    "ctx": "chapter 5 (new)",
-   "script": "[solemn, precise] \"Tissue first. [slowly] Then a cookie.\""
+   "script": "[reading aloud, solemn] \"Tissue first. [punchline, solemn] Then a cookie.\""
   },
   {
    "voice": "bean",
    "speaker": "Mr. Delgado",
    "text": "Thank you. That's a very good binder.",
    "ctx": "chapter 5 (new)",
-   "script": "[tearful, grateful] Thank you. That's a VERY good binder."
+   "script": "[sniffling, grateful] Thank you. [sincere] That's a VERY good binder."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "I KNOW!",
    "ctx": "chapter 5 (new)",
-   "script": "[thrilled, shouts] I KNOW!"
+   "script": "[punchline, shouting] I KNOW!"
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "Thirty parents, and the only one who cried was happy. Tom, that was better than a season finale.",
    "ctx": "chapter 5 (new)",
-   "script": "[tired, happy] Thirty parents, and the only one who cried was HAPPY. Tom, that was better than [proud] a season finale."
+   "script": "[tired, reporting] Thirty parents, and the only one who cried was HAPPY. [admitting, proud] Tom, that was better than a season finale."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "And nobody flipped a table!",
    "ctx": "chapter 5 (new)",
-   "script": "[delighted] And nobody flipped a TABLE!"
+   "script": "[adding, delighted] And nobody flipped a TABLE!"
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "I had a tab ready for that.",
    "ctx": "chapter 5 (new)",
-   "script": "[dry, amused] I had a tab ready for that."
+   "script": "[punchline, dry] I had a tab ready for that."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "Thirty conferences. One gold star. One very well-behaved pen.",
    "ctx": "chapter 5 (reworded)",
-   "script": "[tired, proud] Thirty conferences. One gold star. One... [dry] VERY well-behaved pen."
+   "script": "[tallying, tired] Thirty conferences. One gold star. [punchline, dry] One VERY well-behaved pen."
   },
   {
    "voice": "rose",
    "speaker": "Rose",
    "text": "The ball is STILL up there.",
    "ctx": "chapter 5 (new)",
-   "script": "[quiet, awed] The ball is STILL up there."
+   "script": "[noticing, awed] The ball is STILL up there."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "It's really hanging in there.",
    "ctx": "chapter 5 (new)",
-   "script": "[quiet] It's really... [playful] HANGING in there."
+   "script": "[punchline, quiet] It's really HANGING in there."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "Six. I'm telling TNB.",
    "ctx": "chapter 5 (new)",
-   "script": "[flat, amused] Six. [dry] I'm telling TNB."
+   "script": "[counting, flat] Six. [threatening] I'm telling TNB."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "He'll be so proud.",
    "ctx": "chapter 5 (new)",
-   "script": "[fond, happy] He'll be SO proud."
+   "script": "[punchline, fond] He'll be SO proud."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "On Monday morning I have to explain that to the whole school.",
    "ctx": "chapter 5 (new)",
-   "script": "[weary, dry] On Monday morning I have to explain THAT to the whole school."
+   "script": "[dreading it, dry] On Monday morning I have to explain THAT to the whole school."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "I have two burnt flashbulbs in my pocket, and nobody can explain those to me.",
    "ctx": "chapter 5 (new)",
-   "script": "[wry] I have two burnt flashbulbs in my pocket, and nobody can explain those [uneasy] to ME."
+   "script": "[admitting, wry] I have two burnt flashbulbs in my pocket, [uneasy] and nobody can explain those to ME."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "Those go to Mom. She called me four times about her rule. Nobody goes anywhere alone.",
    "ctx": "chapter 5 (new)",
-   "script": "[brisk, fond] Those go to Mom. She called me FOUR times about her rule. [mimicking, firm] Nobody goes anywhere alone."
+   "script": "[ruling, brisk] Those go to Mom. [complaining, fond] She called me FOUR times about her rule. [quoting her] Nobody goes anywhere alone."
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "I put all five on one page. Mine has a chart.",
    "ctx": "chapter 5 (reworded)",
-   "script": "[proud, brisk] I put all five on one page. Mine has a CHART."
+   "script": "[reporting, proud] I put all five on one page. [bragging] Mine has a CHART."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Can I have a copy for tab four?",
    "ctx": "chapter 5 (new)",
-   "script": "[hopeful, eager] Can I have a copy for tab four?"
+   "script": "[hopeful, asking nicely] Can I have a copy for tab four?"
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "You can have a copy. The chart stays with me.",
    "ctx": "chapter 5 (new)",
-   "script": "[firm, proud] You can have a copy. The CHART stays with me."
+   "script": "[granting it] You can have a copy. [laying down the terms] The CHART stays with me."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "...Can I keep the binder?",
    "ctx": "chapter 5 (new)",
-   "script": "[quiet, hopeful] ...Can I keep the binder?"
+   "script": "[small, hopeful] ...Can I keep the binder?"
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "It's yours. I made it for you. Your name is on the spine.",
    "ctx": "chapter 5 (new)",
-   "script": "[warm, fond] It's yours. I made it for you. Your name [softly] is on the spine."
+   "script": "[giving it, fond] It's yours. [admitting] I made it for you. [tender] Your name is on the spine."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "My name is on the SPINE!",
    "ctx": "chapter 5 (new)",
-   "script": "[thrilled, shouts] My name is on the SPINE!"
+   "script": "[punchline, shouting] My name is on the SPINE!"
   }
  ]
 }
