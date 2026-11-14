@@ -1,3 +1,13 @@
+## ch6s2a (2026-11-14): chapter 6 stage 2: breaking an orange block (coin, cracks, falling apart, colour ring, shrink-back, encounters off), shown on the picnic table; voice file split
+
+What is new (nothing in the live story calls it yet; stage 3 does):
+- engine/block-break.js: the reusable block-breaking work. Scene step `{blockbreak:'oakpark'}` (or `bbPlay`). The coin rolls along the table (tick, tick), hops into the round hole, CLICK, coin close-up in the hole, one second still, gold cracks spread from the hole across the block, the block falls apart into pieces that fade before they land, then a ring of colour runs out across the whole map. Monsters shrink as the ring passes them and an ordinary thing stands where they were. The area's flag (`bb-oakpark`) is set at the end and the monsters are off the map, so nothing there starts a fight. A new game puts them back. Per-area config is `BB_SPOTS` (one flag per area).
+- The grey circle is a STAND-IN made in code (the plate turned grey inside a circle), because Library entry `ch6-picnic-grey` is not approved. The cracks and pieces are cut from the block picture itself (a Voronoi split); the Library crack sheet was not needed.
+- Art baked from the approved Library pictures: tools/art-library/bake_blockbreak_ch6.py writes art/props/oakpark/ch6_block, ord_squirrel, ord_cheeks, ord_peanut, ord_twig and art/closeup/ch6-coin. The Chairman's shrink art is not used yet (he is on the crown, stage 3).
+- ADMIN > BLOCK BREAK LAB (engine/splash.js `bbLabStart`): Old Oak Park on the day of the discovery with Tom, TNB and Nara; the break plays by itself; then Tom can walk the freed park. Tom can play it again from the same button.
+- tools/blockbreak_test.py: plays the lab in portrait and landscape, saves frames, checks the flag, the monsters gone, the ordinary things drawn and that a new game restores the monsters.
+- data/voice/dialog-ch28.js reached 97.6 MB (GitHub refuses 100 MB). New file data/voice/dialog-ch29.js is loaded after it (data/dialog-cast.js) and tools/voice-library/merge-local.js now writes new dialogue clips there. Empty for now.
+
 ## backlog2 (2026-11-14): fix the backlog from Tom's chapter 2 playthrough: monsters and street staged in view, Big Shake sinks away, caps names read right, Carmen and loft story edits
 
 Reports fixed (Tom's words quoted, id in brackets):

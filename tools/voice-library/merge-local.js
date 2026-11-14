@@ -1,7 +1,7 @@
 // node tools/voice-library/merge-local.js <local-clips-export.json> <data dir> <outdir>
 // Merges a Voice Library export ({clips:[{kind,voice,lineKind,text,mp3,t}]}) into the game. Writes only changed files under <outdir>/data.
 // Battle: a new clip replaces every clip with the same text (any kind), then is added under its lineKind, into data/voice/<id>.js (Nara's stay in voice-clips.js).
-// Dialogue: key 'voice|text' goes to the dialog-chN.js that already holds it, else dialog-ch28.js. Audio: silence trim, speaker/voice fx, Grace shrink, mono 32 kHz 48 kbps.
+// Dialogue: key 'voice|text' goes to the dialog-chN.js that already holds it, else dialog-ch29.js (ch28 is near GitHub's 100 MB limit). Audio: silence trim, speaker/voice fx, Grace shrink, mono 32 kHz 48 kbps.
 // Boppy battle clips are deepened (rubberband pitch 0.9, 128k 44100). If one text appears twice under the same line kind in the export, the newest (t) wins; the same text under two kinds keeps both. Needs ffmpeg with rubberband.
 const fs=require('fs'),cp=require('child_process'),vm=require('vm');
 const [IN,DATA,OUT]=process.argv.slice(2);
@@ -50,7 +50,7 @@ const load=f=>{const L=fs.readFileSync(DATA+'/voice/'+f,'utf8').split('\n');cons
 for(const f of chap){D[f]=load(f);for(const k in D[f].clips)home[k]=f;}
 const dst={},dt=new Set();
 for(const c of clips.filter(c=>c.kind==='dialog')){
-  const k=c.voice+'|'+c.text,f=home[k]||'dialog-ch28.js';const sp=(CAST.voices||{}).hasOwnProperty(c.voice)?c.voice:c.voice;
+  const k=c.voice+'|'+c.text,f=home[k]||'dialog-ch29.js';const sp=(CAST.voices||{}).hasOwnProperty(c.voice)?c.voice:c.voice;
   const chain=[TRIM];const fx=fxFor(c.voice,c.speaker);if(fx)chain.push(fx);if(c.voice==='grace')chain.push(GRACE);
   let out;try{out=ff(c.mp3,chain.join(','),'32000','48k');}catch(e){console.log('WARNING fx failed',k);out=ff(c.mp3,TRIM,'32000','48k');}
   const had=k in D[f].clips;D[f].clips[k]=out;dt.add(f);const s=f+(had?' replaced':' added');dst[s]=(dst[s]||0)+1;
