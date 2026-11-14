@@ -5,7 +5,7 @@
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "Two thousand four hundred and seventy-five. Delta counts every one, and so do I.",
+   "text": "Um, actually, it's two thousand four hundred and seventy-five. Delta counts every one, and so do I.",
    "ctx": "chapter 2 (reworded)",
    "script": "[correcting] Um actually it's Two thousand four hundred and seventy-five. [reminding doting] Delta counts every one... [slowly, admitting with guilt] and so do I."
   },
@@ -61,14 +61,7 @@
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "All yours. I like that.",
-   "ctx": "chapter 2 (reworded)",
-   "script": "..."
-  },
-  {
-   "voice": "tom",
-   "speaker": "Tom",
-   "text": "Why is the sky PURPLE? It's two in the afternoon!",
+   "text": "Wait, why is the sky PURPLE? It's two in the afternoon!",
    "ctx": "chapter 2 (new)",
    "script": "[alarmed] Wait, why is the sky [disbelief] PURPLE? [trailing, puzzled] It's two in the afternoon!"
   },
@@ -89,7 +82,7 @@
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "Don't make me laugh, I'm scared of it! ...Okay. It's a little grape.",
+   "text": "Don't make me laugh, it's freaky! ...Okay. It IS a little grape.",
    "ctx": "chapter 2 (new)",
    "script": "[anxious, amused] Don't make me laugh, it's freaky! [admitting] ...Okay. [agreeing] It IS a little grape."
   },
