@@ -1,0 +1,942 @@
+{
+ "v": 1,
+ "id": "r-20261114-101709-8n6x",
+ "at": "2026-11-14T10:17:36-08:00",
+ "kind": "bug",
+ "note": "The big one is appearing on the land, but his graphic has water in it, so it looks strange and unnatural I think we just need to change his position",
+ "pins": [],
+ "shot": "reports/r-20261114-101709-8n6x.jpg",
+ "where": {
+  "mode": "cutscene",
+  "build": "ch5build1",
+  "url": "/adventures-of-tom/",
+  "screen": {
+   "layout": "landscape",
+   "rotated": false,
+   "duo": "open",
+   "tablet": true,
+   "w": 867,
+   "h": 669,
+   "dpr": 3
+  },
+  "ua": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1",
+  "story": {
+   "mode": "full",
+   "chapter": 1,
+   "goal": "Go to the splash came from across the pond."
+  },
+  "map": {
+   "id": "hollow",
+   "name": "Grump Hollow",
+   "x": 13,
+   "y": 11,
+   "facing": "right",
+   "cam": [
+    0,
+    111
+   ],
+   "zoom": 1
+  },
+  "party": [
+   "tom",
+   "grace",
+   "rose",
+   "deedee"
+  ],
+  "bench": [],
+  "walkers": [
+   {
+    "id": "grace",
+    "x": 12,
+    "y": 12,
+    "facing": "right"
+   },
+   {
+    "id": "rose",
+    "x": 11,
+    "y": 11,
+    "facing": "right"
+   },
+   {
+    "id": "deedee",
+    "x": 12,
+    "y": 9,
+    "facing": "right"
+   }
+  ],
+  "near": [
+   {
+    "name": "The Big One",
+    "monster": "bigone",
+    "x": 19,
+    "y": 11,
+    "facing": "down"
+   },
+   {
+    "name": "Big Mudling",
+    "monster": "mudling",
+    "x": 16,
+    "y": 12,
+    "facing": "left"
+   }
+  ],
+  "scene": {
+   "id": "ch1Pond",
+   "phase": "scene",
+   "left": 37
+  },
+  "dialog": {
+   "who": "The Big One",
+   "page": 1,
+   "pages": 1,
+   "text": "GLUB. Is that a pie? For me?",
+   "shown": "GLUB. Is that a pie? For me?",
+   "choice": false
+  },
+  "battle": null,
+  "menu": null,
+  "flags": {
+   "tombo:rose1": true,
+   "saw-squishy": true,
+   "tombo:grace1": true,
+   "opening-done": true,
+   "ch1-goal": true,
+   "goal": "the splash came from across the pond. Follow it.",
+   "goalCh": 1,
+   "ch1-theft": true,
+   "tombo:deedee1": true,
+   "goalLog": [
+    {
+     "c": 1,
+     "t": "Deedee and Boppy's house. Rivituso Row, south of the Square."
+    },
+    {
+     "c": 1,
+     "t": "follow the thief into Grump Hollow, north of the Square."
+    },
+    {
+     "c": 1,
+     "t": "follow the crumbs east, around the pond. The Hollow’s monsters are awake now."
+    }
+   ],
+   "ch1-t1": true,
+   "ch1-crumbs-a": true,
+   "heart": 100,
+   "battle:mudling": "win",
+   "ch1-crumbs-b": true,
+   "ch1-t2": true,
+   "kind:skeeter": 1,
+   "battle:skeeter": "win",
+   "ch1-tuts": true,
+   "battle:grump": "win",
+   "ch1-crumbs-c": true,
+   "kind:log": 1,
+   "ch1-spot": true,
+   "ch1-bulb": true,
+   "ch1-pond": true
+  },
+  "faults": [],
+  "errors": [
+   {
+    "at": 1794679952162,
+    "msg": "ResizeObserver loop completed with undelivered notifications.",
+    "src": "adventures-of-tom/:0"
+   },
+   {
+    "at": 1794679961029,
+    "msg": "ResizeObserver loop completed with undelivered notifications.",
+    "src": "adventures-of-tom/:0"
+   },
+   {
+    "at": 1794680051886,
+    "msg": "ResizeObserver loop completed with undelivered notifications.",
+    "src": "adventures-of-tom/:0"
+   },
+   {
+    "at": 1794680089805,
+    "msg": "ResizeObserver loop completed with undelivered notifications.",
+    "src": "adventures-of-tom/:0"
+   },
+   {
+    "at": 1794680099931,
+    "msg": "ResizeObserver loop completed with undelivered notifications.",
+    "src": "adventures-of-tom/:0"
+   },
+   {
+    "at": 1794680126440,
+    "msg": "ResizeObserver loop completed with undelivered notifications.",
+    "src": "adventures-of-tom/:0"
+   },
+   {
+    "at": 1794680132913,
+    "msg": "ResizeObserver loop completed with undelivered notifications.",
+    "src": "adventures-of-tom/:0"
+   },
+   {
+    "at": 1794680137339,
+    "msg": "ResizeObserver loop completed with undelivered notifications.",
+    "src": "adventures-of-tom/:0"
+   },
+   {
+    "at": 1794680202415,
+    "msg": "ResizeObserver loop completed with undelivered notifications.",
+    "src": "adventures-of-tom/:0"
+   },
+   {
+    "at": 1794680227832,
+    "msg": "ResizeObserver loop completed with undelivered notifications.",
+    "src": "adventures-of-tom/:0"
+   }
+  ],
+  "save": {
+   "v": 4,
+   "when": 1794680229854,
+   "map": "hollow",
+   "x": 13,
+   "y": 11,
+   "facing": "right",
+   "visited": [
+    "grands"
+   ],
+   "allVisited": false,
+   "bag": [
+    "notebook",
+    "button",
+    "honey",
+    "rclip",
+    "k_keyboard"
+   ],
+   "coins": 99,
+   "time": 141,
+   "grump": {
+    "tier": 1,
+    "maxHp": 27
+   },
+   "monsters": {
+    "bigone": {
+     "tier": 0,
+     "maxHp": 78
+    },
+    "mudling": {
+     "tier": 1,
+     "maxHp": 15
+    },
+    "skeeter": {
+     "tier": 1,
+     "maxHp": 20
+    },
+    "grump": {
+     "tier": 1,
+     "maxHp": 27
+    },
+    "toad": {
+     "tier": 1,
+     "maxHp": 40
+    },
+    "log": {
+     "tier": 1,
+     "maxHp": 58
+    },
+    "soggysock": {
+     "tier": 0,
+     "maxHp": 20
+    },
+    "bobber": {
+     "tier": 0,
+     "maxHp": 18
+    },
+    "tangle": {
+     "tier": 0,
+     "maxHp": 26
+    },
+    "snag": {
+     "tier": 0,
+     "maxHp": 52
+    },
+    "irongill": {
+     "tier": 0,
+     "maxHp": 90
+    },
+    "popquiz": {
+     "tier": 0,
+     "maxHp": 16
+    },
+    "tardybell": {
+     "tier": 0,
+     "maxHp": 24
+    },
+    "glitterglue": {
+     "tier": 0,
+     "maxHp": 26
+    },
+    "dodgeball": {
+     "tier": 0,
+     "maxHp": 30
+    },
+    "redpen": {
+     "tier": 0,
+     "maxHp": 110
+    },
+    "shusher": {
+     "tier": 0,
+     "maxHp": 18
+    },
+    "dogear": {
+     "tier": 0,
+     "maxHp": 22
+    },
+    "cliffhanger": {
+     "tier": 0,
+     "maxHp": 30
+    },
+    "knowitall": {
+     "tier": 0,
+     "maxHp": 32
+    },
+    "popup": {
+     "tier": 0,
+     "maxHp": 34
+    },
+    "unread": {
+     "tier": 0,
+     "maxHp": 120
+    },
+    "velvetrope": {
+     "tier": 0,
+     "maxHp": 22
+    },
+    "stuffedshirt": {
+     "tier": 0,
+     "maxHp": 25
+    },
+    "coathanger": {
+     "tier": 0,
+     "maxHp": 32
+    },
+    "soreloser": {
+     "tier": 0,
+     "maxHp": 34
+    },
+    "wallflower": {
+     "tier": 0,
+     "maxHp": 36
+    },
+    "mirrorball": {
+     "tier": 0,
+     "maxHp": 128
+    },
+    "carryon": {
+     "tier": 0,
+     "maxHp": 24
+    },
+    "jetlag": {
+     "tier": 0,
+     "maxHp": 23
+    },
+    "longline": {
+     "tier": 0,
+     "maxHp": 33
+    },
+    "unclaimed": {
+     "tier": 0,
+     "maxHp": 35
+    },
+    "armresthog": {
+     "tier": 0,
+     "maxHp": 37
+    },
+    "lastcall": {
+     "tier": 0,
+     "maxHp": 132
+    },
+    "finalcall": {
+     "tier": 0,
+     "maxHp": 150
+    },
+    "standbysprite": {
+     "tier": 0,
+     "maxHp": 38
+    },
+    "lostluggage": {
+     "tier": 0,
+     "maxHp": 36
+    },
+    "redeye": {
+     "tier": 0,
+     "maxHp": 35
+    },
+    "hushling": {
+     "tier": 0,
+     "maxHp": 36
+    },
+    "signalfault": {
+     "tier": 0,
+     "maxHp": 38
+    },
+    "turnstile": {
+     "tier": 0,
+     "maxHp": 42
+    },
+    "drillworm": {
+     "tier": 0,
+     "maxHp": 170
+    },
+    "pausesprite": {
+     "tier": 0,
+     "maxHp": 44
+    },
+    "paperweight": {
+     "tier": 0,
+     "maxHp": 52
+    },
+    "curator": {
+     "tier": 0,
+     "maxHp": 56
+    },
+    "twinlens": {
+     "tier": 0,
+     "maxHp": 330
+    },
+    "vance": {
+     "tier": 0,
+     "maxHp": 99999
+    },
+    "deadletter": {
+     "tier": 0,
+     "maxHp": 58
+    },
+    "rubberstamp": {
+     "tier": 0,
+     "maxHp": 66
+    },
+    "censor": {
+     "tier": 0,
+     "maxHp": 330
+    },
+    "leviathan": {
+     "tier": 0,
+     "maxHp": 620
+    },
+    "julian": {
+     "tier": 0,
+     "maxHp": 620
+    },
+    "gridlockprime": {
+     "tier": 0,
+     "maxHp": 160
+    },
+    "smoglet": {
+     "tier": 0,
+     "maxHp": 14
+    },
+    "tickets": {
+     "tier": 0,
+     "maxHp": 17
+    },
+    "coyote": {
+     "tier": 0,
+     "maxHp": 24
+    },
+    "gridlock": {
+     "tier": 0,
+     "maxHp": 36
+    },
+    "tarblob": {
+     "tier": 0,
+     "maxHp": 52
+    },
+    "bigshake": {
+     "tier": 0,
+     "maxHp": 84
+    },
+    "cuecrab": {
+     "tier": 0,
+     "maxHp": 40
+    },
+    "clapper": {
+     "tier": 0,
+     "maxHp": 22
+    },
+    "boommoth": {
+     "tier": 0,
+     "maxHp": 22
+    },
+    "extra": {
+     "tier": 0,
+     "maxHp": 14
+    },
+    "fogwisp": {
+     "tier": 0,
+     "maxHp": 24
+    },
+    "directorscut": {
+     "tier": 0,
+     "maxHp": 100
+    },
+    "acornagent": {
+     "tier": 0,
+     "maxHp": 18
+    },
+    "peanutgallery": {
+     "tier": 0,
+     "maxHp": 26
+    },
+    "twigspy": {
+     "tier": 0,
+     "maxHp": 26
+    },
+    "cheekstuffer": {
+     "tier": 0,
+     "maxHp": 32
+    },
+    "stickysap": {
+     "tier": 0,
+     "maxHp": 22
+    },
+    "chairman": {
+     "tier": 0,
+     "maxHp": 120
+    },
+    "lukewarm": {
+     "tier": 0,
+     "maxHp": 20
+    },
+    "leftover": {
+     "tier": 0,
+     "maxHp": 24
+    },
+    "wetblanket": {
+     "tier": 0,
+     "maxHp": 32
+    },
+    "thedraft": {
+     "tier": 0,
+     "maxHp": 30
+    },
+    "pickyeater": {
+     "tier": 0,
+     "maxHp": 36
+    },
+    "ironbelly": {
+     "tier": 0,
+     "maxHp": 124
+    }
+   },
+   "flags": {
+    "town": {},
+    "row": {},
+    "hollow": {},
+    "pier": {},
+    "reeds": {},
+    "sundial": {},
+    "schoolyard": {},
+    "school": {},
+    "cafetorium": {},
+    "stacks": {},
+    "readroom": {},
+    "moonclub": {},
+    "dome": {},
+    "terminal": {},
+    "gatezero": {},
+    "flightzero": {},
+    "gate00": {},
+    "concourse": {},
+    "subdepot": {},
+    "subtunnel": {},
+    "subchamber": {},
+    "towerlobby": {},
+    "towerstairs": {},
+    "towershelves": {},
+    "towervault": {},
+    "towerpinnacle": {},
+    "deadletter": {},
+    "memgrace": {},
+    "memrose": {},
+    "memamy": {},
+    "memtnb": {},
+    "stillcore": {},
+    "foreverheart": {},
+    "bakery": {},
+    "library": {},
+    "greenhouse": {},
+    "post": {},
+    "tea": {},
+    "observatory": {},
+    "shop": {},
+    "taxi": {},
+    "amyhouse": {},
+    "grands": {},
+    "elliehouse": {},
+    "blvd": {},
+    "jpark": {},
+    "griffith": {},
+    "studio": {},
+    "backlot": {},
+    "stage7": {},
+    "stageset": {},
+    "oakpark": {},
+    "oak": {},
+    "crown": {},
+    "carbarn": {},
+    "boiler": {},
+    "coffee": {},
+    "ramen": {},
+    "juicebar": {},
+    "nickels": {},
+    "wardrobe": {},
+    "cinema": {},
+    "boards": {},
+    "lacab": {},
+    "tomhouse": {},
+    "tomsuite": {},
+    "casa": {},
+    "loftlobby": {},
+    "lofts": {},
+    "tower": {},
+    "creole": {},
+    "pupuseria": {},
+    "jordansam": {},
+    "dakota": {}
+   },
+   "fallen": [
+    "mudling@7,16",
+    "skeeter@13,12",
+    "grump@10,11",
+    "toad@9,8",
+    "log@7,10"
+   ],
+   "party": [
+    {
+     "id": "tom",
+     "level": 2,
+     "xp": 38,
+     "hp": 145,
+     "maxHp": 145
+    },
+    {
+     "id": "grace",
+     "level": 2,
+     "xp": 38,
+     "hp": 120,
+     "maxHp": 120
+    },
+    {
+     "id": "rose",
+     "level": 2,
+     "xp": 38,
+     "hp": 105,
+     "maxHp": 105
+    },
+    {
+     "id": "deedee",
+     "level": 2,
+     "xp": 38,
+     "hp": 120,
+     "maxHp": 120
+    }
+   ],
+   "members": [
+    {
+     "id": "tom",
+     "level": 2,
+     "xp": 38,
+     "wins": 5,
+     "hp": 145,
+     "maxHp": 145,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "barkslab",
+      "Outfit": "hoodie",
+      "Charm": "beanie"
+     },
+     "stamps": [
+      "A1",
+      "B1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {},
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "grace",
+     "level": 2,
+     "xp": 38,
+     "wins": 5,
+     "hp": 120,
+     "maxHp": 120,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "g_dumpling",
+      "Outfit": "sweater",
+      "Charm": "sunhat"
+     },
+     "stamps": [
+      "A1",
+      "B1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {},
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "rose",
+     "level": 2,
+     "xp": 38,
+     "wins": 5,
+     "hp": 105,
+     "maxHp": 105,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "r_lambytoy",
+      "Outfit": "rdress",
+      "Charm": "pepper"
+     },
+     "stamps": [
+      "B1",
+      "A1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {},
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "amy",
+     "level": 2,
+     "xp": 38,
+     "wins": 0,
+     "hp": 128,
+     "maxHp": 128,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "a_whistle",
+      "Outfit": "shirt",
+      "Charm": "pebble"
+     },
+     "stamps": [
+      "A1",
+      "B1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {},
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "deedee",
+     "level": 2,
+     "xp": 38,
+     "wins": 5,
+     "hp": 120,
+     "maxHp": 120,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "d_pin",
+      "Outfit": "gtee",
+      "Charm": "lilyhat"
+     },
+     "stamps": [
+      "A1",
+      "B1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {},
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "boppy",
+     "level": 2,
+     "xp": 38,
+     "wins": 0,
+     "hp": 138,
+     "maxHp": 138,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "b_rod",
+      "Outfit": null,
+      "Charm": null
+     },
+     "stamps": [
+      "A1",
+      "B1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {},
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "tnb",
+     "level": 2,
+     "xp": 38,
+     "wins": 0,
+     "hp": 116,
+     "maxHp": 116,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "n_rib",
+      "Outfit": null,
+      "Charm": null
+     },
+     "stamps": [
+      "B1",
+      "A1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {},
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "nara",
+     "level": 2,
+     "xp": 38,
+     "wins": 0,
+     "hp": 106,
+     "maxHp": 106,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "y_stick",
+      "Outfit": null,
+      "Charm": null
+     },
+     "stamps": [
+      "B1",
+      "A1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {},
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "justin",
+     "level": 2,
+     "xp": 38,
+     "wins": 0,
+     "hp": 129,
+     "maxHp": 129,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "j_tester",
+      "Outfit": null,
+      "Charm": null
+     },
+     "stamps": [
+      "A1",
+      "B1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {},
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "olivia",
+     "level": 2,
+     "xp": 38,
+     "wins": 0,
+     "hp": 116,
+     "maxHp": 116,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "o_phone",
+      "Outfit": null,
+      "Charm": null
+     },
+     "stamps": [
+      "A1",
+      "B1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {},
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    }
+   ],
+   "opts": {
+    "diff": "rose",
+    "speed": 2,
+    "hf": true,
+    "autoSpend": true,
+    "volMusic": 5,
+    "volFx": 10,
+    "volVoice": 10
+   },
+   "story": {
+    "mode": "full",
+    "chapter": 1,
+    "flags": {
+     "tombo:rose1": true,
+     "saw-squishy": true,
+     "tombo:grace1": true,
+     "opening-done": true,
+     "ch1-goal": true,
+     "goal": "the splash came from across the pond. Follow it.",
+     "goalCh": 1,
+     "ch1-theft": true,
+     "tombo:deedee1": true,
+     "goalLog": [
+      {
+       "c": 1,
+       "t": "Deedee and Boppy's house. Rivituso Row, south of the Square."
+      },
+      {
+       "c": 1,
+       "t": "follow the thief into Grump Hollow, north of the Square."
+      },
+      {
+       "c": 1,
+       "t": "follow the crumbs east, around the pond. The Hollow’s monsters are awake now."
+      }
+     ],
+     "ch1-t1": true,
+     "ch1-crumbs-a": true,
+     "heart": 100,
+     "battle:mudling": "win",
+     "ch1-crumbs-b": true,
+     "ch1-t2": true,
+     "kind:skeeter": 1,
+     "battle:skeeter": "win",
+     "ch1-tuts": true,
+     "battle:grump": "win",
+     "ch1-crumbs-c": true,
+     "kind:log": 1,
+     "ch1-spot": true,
+     "ch1-bulb": true,
+     "ch1-pond": true
+    },
+    "traces": 2,
+    "traceLog": {
+     "1:rose-shoulders": 1,
+     "1:deedee-hug": 1
+    },
+    "override": null,
+    "bench": []
+   }
+  }
+ }
+}
