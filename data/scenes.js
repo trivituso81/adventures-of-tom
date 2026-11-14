@@ -873,7 +873,7 @@ const TUTORIALS={
 // Flags, in story order: ch3-sol (Sol's line), ch3-goal, ch3-boppy (Boppy joins; the pier path opens), ch3-tea (optional,
 // Kettle Cottage), ch3-story (the 1970 story, Heart-Trace boppy-1970), ch3-pier, tombo:boppy1, ch3-jar (Iron-Gill takes the
 // pepper jar), ch3-r1 (Soggy Socks), ch3-tuts (the Tangle; the marsh wakes up), ch3-wait (the old reeds).
-// C3b: ch3-snag (the Snag moves; the old reeds open), ch3-hollow (Sundial Hollow), ch3-netup (Tom holds the net over his head),
+// C3b: ch3-snag (the Snag moves; the old reeds open), ch3-hollow (Sundial Hollow), c3t_net (Tom holds the net over his head, a painted pose),
 // ch3-bulb (Rose takes the bulb off the sundial), ch3-coin (old name kept: the hollow scene is over and the stepping stones to the Deep Pool
 // open; there is no coin in the sundial any more, story-ch03.md), ch3-pool (Iron-Gill surfaces), battle:irongill ('win'), ch3-clear,
 // ch3-release (Iron-Gill goes back down), ch3-done. ch3build1 (2026-11-13) rewrote every scene to the locked claude/story-ch03.md.
@@ -1110,7 +1110,7 @@ SCENES.ch3Hollow=[
   {talk:'Boppy',lines:['Tom. Get under it with the net.']},
   {talk:'Tom',lines:['It can\'t be moved. I tried one at the pond and one in California.']},
   {talk:'Boppy',lines:['Then it won\'t hurt to hold the net.']},
-  {face:'tom',dir:'up'}, {call:()=>{ setFlag('ch3-netup'); sfx.whoosh(); }}, {wait:.6},   // Tom holds the big net up over his head (STORY_PROPS.netup)
+  {face:'tom',dir:'up'}, {call:()=>sfx.whoosh()}, {pose:'tom',f:'c3t_net',mid:'tom'}, {wait:.6},   // Tom holds the big net up over his head (painted pose c3t_net, the approved Library picture ch3-tom-net)
   {talk:'Tom',lines:['I\'m holding the net.']},
   {talk:'Boppy',lines:['Good. Hold it better.']},
   ch1Tug('tom'), {wait:.3},
@@ -1128,13 +1128,13 @@ SCENES.ch3Hollow=[
   {call:()=>{ sfx.splat(); sfx.thud(); }}, {wait:.4}, {call:()=>sfx.splat()},   // a huge splash from the north
   {face:'boppy',dir:'up'},
   {talk:'Boppy',lines:['That\'s the Deep Pool. That\'s where Iron-Gill goes to sulk. Tom, you can put the net down.']},
-  {call:()=>{ setFlag('ch3-netup',false); setFlag('ch3-coin'); ch3DrainSpillway(); }},
+  {pose:'tom'}, {call:()=>{ setFlag('ch3-coin'); ch3DrainSpillway(); }},
   {zoom:1,time:.8}, {cam:null},   // ch3-coin is the old flag name for "the hollow scene is done": the way north to the Deep Pool is open
   {toast:'Goal: the Deep Pool, over the stepping stones at the top of Sundial Hollow.',time:4.5}
 ];
 // 10. The Deep Pool: Old Iron-Gill surfaces with the gold coin caught in its mustache. Boss fight.
 SCENES.ch3Pool=[
-  {flag:'ch3-pool'}, {call:()=>{ setFlag('ch3-netup',false); storyWorld(); }},
+  {flag:'ch3-pool'}, {pose:'tom'}, {call:()=>{ storyWorld(); }},
   {hide:'Old Iron-Gill'},
   {walk:'tom',to:routeTo('tom',10,4),speed:.25}, {face:'tom',dir:'up'},
   {place:'boppy',at:[11,4],dir:'up'}, {place:'rose',at:[9,5],dir:'up'}, {place:'grace',at:[12,5],dir:'up'},
@@ -1161,7 +1161,7 @@ SCENES.ch3Pool=[
 // release, and the walk back through the hollow, still grey, the fish still in the air.
 SCENES.ch3AfterBoss=()=>[
   {flag:'ch3-clear'},
-  {call:()=>setFlag('ch3-netup',false)},
+  {pose:'tom'},
   {place:'boppy',at:[11,4],dir:'up'}, {place:'rose',at:[9,5],dir:'up'}, {place:'grace',at:[12,5],dir:'up'},   // the fight may have left Boppy lagging behind
   {call:()=>{ sfx.splat(); sfx.levelChime&&sfx.levelChime(); }},
   ...(flag('kind:irongill')?[
@@ -1336,14 +1336,6 @@ STORY_WORLD.push(()=>{
   followerToSpot(f,followers.indexOf(f),W.catchTime);
 });
 STORY_MAPFX.push(time=>{
-  // Tom holds the big net up over his head under the frozen fish (ch3Hollow, flag ch3-netup). A stand-in drawn in code until the Library
-  // picture ch3-tom-net is approved: a wooden pole from his hands up past his head, a round hoop with a mesh bag.
-  if(flag('ch3-netup')&&currentMap.id==='sundial'&&!player.hidden) { const p=position(player),cx=Math.round((p.x+.5)*T),hand=Math.round((p.y+1)*T-T*1.5),top=hand-Math.round(T*1.3);
-    rect(cx+3,top+6,3,hand-top,OUT); rect(cx+4,top+6,1,hand-top-1,'#a8794a');
-    const hx=cx+4,hy=top,rw=Math.round(T*.42),rh=Math.round(T*.16);
-    for(let k=0;k<5;k++) { const yy=hy+2+k*3,ww=Math.round(rw*(1-k*.16)); gfx.globalAlpha=.55; rect(hx-ww,yy,ww*2,1,'#e8e4d8'); gfx.globalAlpha=1; }
-    for(let k=-2;k<=2;k++) { gfx.globalAlpha=.45; rect(hx+Math.round(k*rw*.38),hy+1,1,12-Math.abs(k)*2,'#e8e4d8'); gfx.globalAlpha=1; }
-    gfx.beginPath(); gfx.ellipse(hx,hy,rw,rh,0,0,Math.PI*2); gfx.lineWidth=Math.max(2,T*.07); gfx.strokeStyle=OUT; gfx.stroke(); gfx.lineWidth=Math.max(1,T*.035); gfx.strokeStyle='#9aa0a6'; gfx.stroke(); }
   // Props a follower carries in a scene (only monsters draw their own).
   for(const f of followers) if(f.carry&&STORY_PROPS[f.carry]&&!f.hidden) { const p=position(f); STORY_PROPS[f.carry](Math.round((p.x+.5)*T)+9,Math.round((p.y+1)*T-12),f); }
   const W=BOPPY_WIND,now=performance.now(); if(W.lag<1&&!W.halt&&now>W.puff) return;
@@ -1418,9 +1410,9 @@ SCENES.ch4Arrive=[
   {talk:'TNB',lines:['Nobody in the family. Does that count me?']},
   {talk:'Tom',lines:['You were the first one I thought of.']},
   {talk:'TNB',lines:['Then it\'s a good thing I got you this.']},
-  {call:()=>sfx.pickup()}, {ch4Reveal:'visitor'},
+  {call:()=>sfx.pickup()}, {ch4Reveal:'visitor'}, {pose:'tom',f:'c4t_visitor',mid:'tom'},
   {talk:'Tom',lines:['A lanyard! With my name on it! It\'s LAMINATED!']},
-  {talk:'TNB',lines:['Of course it\'s laminated. I wanted this to last.']},
+  {talk:'TNB',lines:['Of course it\'s laminated. I wanted this to last.']}, {pose:'tom'},
   {talk:'Tom',lines:['Do I have to give it back?']},
   {talk:'TNB',lines:['Never. Where I go, you go. That\'s Deedee\'s rule. So stick close, babe, and don\'t leave me hanging like that fish.']},
   {talk:'TNB',lines:['Big shoot today. BACKLOT BEDLAM. Car chases, a saloon, a fake New York. I have forty costumes on one rack, and every single one is steamed.',
@@ -1433,7 +1425,7 @@ SCENES.ch4Arrive=[
 // 2. Jefferson Park: Nara sees Tom from the porch two blocks away, howls, runs, three laps, leans. TNB clips the only spare badge on her collar.
 SCENES.ch4Nara=[
   {flag:'ch4-nara'},
-  {call:()=>{ sfx.bark&&sfx.bark(); sfx.bark&&sfx.bark(.2); }},
+  {pose:'nara',f:'c4n_howl',mid:'nara'}, {call:()=>{ sfx.bark&&sfx.bark(); sfx.bark&&sfx.bark(.2); }}, {wait:.9}, {pose:'nara'},
   {walk:'Nara',to:routeBeside('Nara'),speed:.1,onStep:i=>{ if(i%4===0) sfx.bark&&sfx.bark(); }},
   {hearts:'tom'}, {call:()=>sfx.thud&&sfx.thud()},
   {talk:'Tom',lines:['Hi. Hi. Yes. I know. I was gone FOREVER. It was six days.']},
@@ -1480,10 +1472,10 @@ SCENES.ch4Snack=[
   {flag:'ch4-snack'},
   {talk:'Toni',lines:['Plain roast chicken. No salt, no skin, no sauce. I keep it for the grips. They\'re also picky.']},
   {call:()=>{ sfx.pickup(); }}, {wait:.5},   // Nara takes it very gently, then swallows it whole, then sits again in case there is more
-  {call:()=>{ sfx.splat&&sfx.splat(); }}, {face:'nara',dir:'down'}, {wait:.4},
+  {call:()=>{ sfx.splat&&sfx.splat(); }}, {pose:'nara',f:'c4n_sit',mid:'nara'}, {wait:.4},
   {hearts:'nara'}, {trace:'nara-snack'}, {call:()=>sfx.levelChime()},
   {talk:'TNB',lines:['She\'s never eaten anything that fast. Not even my shoe.']},
-  {talk:'Toni',lines:['Here. For the road. Don\'t tell the grips.']},
+  {talk:'Toni',lines:['Here. For the road. Don\'t tell the grips.']}, {pose:'nara'},
   {give:'jerky'}, {give:'jerky'},
   {toast:'Toni slips you two Chicken Jerky. Nara watches the bag the whole time.',time:3.5}
 ];
@@ -1492,7 +1484,7 @@ SCENES.ch4Fetch=[
   {flag:'ch4-fetch',value:'pending'},
   {face:'tom',dir:'up'},
   {talk:'TNB',lines:['The Backlot. Main Street up on the left, the Western street on the right, New York down on the left. All fake. All very expensive.']},
-  {call:()=>{ sfx.bark&&sfx.bark(); }}, {face:'nara',dir:'up'}, {wait:.4},   // her ears go straight up: something shiny is skittering across New York
+  {call:()=>{ sfx.bark&&sfx.bark(); }}, {pose:'nara',f:'c4n_alert',mid:'nara'}, {wait:.6}, {pose:'nara'},   // her ears go straight up: something shiny is skittering across New York
   {talk:'Tom',lines:['Nara. NARA. Don\'t...']},
   {walk:'nara',to:routeTo('nara',14,6),speed:.1,onStep:i=>{ if(i%3===0) sfx.bark&&sfx.bark(); }},
   {talk:'TNB',lines:['That\'s a closed set! She\'s not on the call sheet!']},
@@ -1506,7 +1498,7 @@ SCENES.ch4Fetch=[
   {talk:'Tom',lines:['She doesn\'t know that. Let her have this.']},
   {walk:'nara',to:routeBeside('nara'),speed:.12},
   {face:'tom',dir:'left'},
-  {call:()=>{ const n=sceneActor('nara'); if(n) n.carry=null; sfx.pickup(); sfx.splat&&sfx.splat(); }}, {hearts:'nara'}, {wait:.4},   // she drops it at Tom's feet, very proud, very slobbery
+  {call:()=>{ const n=sceneActor('nara'); if(n) n.carry=null; sfx.pickup(); sfx.splat&&sfx.splat(); }}, {pose:'nara',f:'c4n_tag',mid:'nara'}, {hearts:'nara'}, {wait:.7}, {pose:'nara'},   // she drops it at Tom's feet, very proud, very slobbery
   {talk:'TNB',lines:['That\'s a costume tag. That\'s MY tag. WARDROBE, RACK 2, HAND WASH ONLY. I underlined it twice.',
     'And it smells like grape fog juice. Only Stage 7 has a fog machine, so my rack must be in Stage 7.']},
   {talk:'Tom',lines:['You can tell it\'s grape from one sniff?']},
@@ -1602,16 +1594,17 @@ SCENES.ch4Hat=[
   {face:'tom',dir:'up'}, {wait:.4},
   {talk:'Tom',lines:['There it is.']},
   {talk:'Tom',lines:['And there\'s going to be a burnt flashbulb on the floor, somewhere close.']},
-  {face:'tom',dir:'down'}, {call:()=>sfx.select&&sfx.select()}, {wait:.5}, {call:()=>sfx.select&&sfx.select()}, {wait:.4},   // he gets down on his knees (they click) and looks under the table
-  {call:()=>sfx.pickup()}, {wait:.4},
+  {pose:'tom',f:'c4t_kneel',mid:'tom'}, {call:()=>sfx.select&&sfx.select()}, {wait:.5}, {call:()=>sfx.select&&sfx.select()}, {wait:.4},   // he gets down on his knees (they click) and looks under the table
+  {pose:'tom',f:'c4t_bulb',mid:'tom'}, {call:()=>sfx.pickup()}, {wait:.7}, {pose:'tom'},
   {talk:'TNB',lines:['You knew exactly where to look. Babe, how are you this good at it?']},
+  {pose:'tom',f:'c4t_cross',mid:'tom'},
   {talk:'Tom',lines:['I\'ve had three practices. And I\'ve lost a pulling contest to a plum, a grapefruit and a watermelon. I\'m not pulling on a beach ball.']},
   {talk:'TNB',lines:['Then I\'ll just move the table.']},
-  {call:()=>ch4Table(1)}, {wait:1.1},
+  {pose:'tom'}, {pose:'tnb',f:'c4b_pull',mid:'tnb'}, {call:()=>ch4Table(1)}, {wait:1.1}, {pose:'tnb'},
   {talk:'TNB',lines:['I moved the table. The hat didn\'t come with it.']},
   {talk:'Tom',lines:['That\'s what the fish does!']},
   {talk:'TNB',lines:['I don\'t like it. Put the table back. I want the table back under it right now.']},
-  {call:()=>ch4Table(0)}, {wait:1.1},
+  {pose:'tnb',f:'c4b_pull',mid:'tnb'}, {call:()=>ch4Table(0)}, {wait:1.1}, {pose:'tnb'},
   {talk:'TNB',lines:['Thank you. That\'s better. That\'s a hat on a table. That\'s normal.']},
   {talk:'Tom',lines:['Hat: grey floor, orange block, round hole, burnt bulb. I\'m sending it to Amy for Grace. She keeps the list in her notebook.']},
   {talk:'TNB',lines:['Who brings a flashbulb onto a movie set? We have four hundred lights in here and not one of them is that.']},
@@ -1627,7 +1620,8 @@ SCENES.ch4Boss=[
   {hide:'The Director’s Cut'},
   {walk:'tom',to:routeTo('tom',10,9),speed:.25}, {face:'tom',dir:'up'},
   {place:'tnb',at:[9,9],dir:'up'}, {place:'nara',at:[11,9],dir:'up'},
-  {talk:'TNB',lines:['My rack. MY RACK. All forty. Still steamed. Oh, I could cry.']},
+  {pose:'tnb',f:'c4b_shock',mid:'tnb'},
+  {talk:'TNB',lines:['My rack. MY RACK. All forty. Still steamed. Oh, I could cry.']}, {pose:'tnb'},
   {call:()=>{ sfx.thud(); sfx.whoosh(); }},
   {show:'The Director’s Cut'}, {face:'The Director’s Cut',dir:'down'},
   {talk:'Tom',lines:['That megaphone is as big as a refrigerator! And it\'s sitting on your costumes!']},
@@ -1659,10 +1653,10 @@ SCENES.ch4AfterBoss=[
     {talk:'The Director’s Cut',lines:['Fine. FINE. That’s a wrap. On me. I\'m going back in the prop closet.']},
     {call:()=>{ sfx.pickup(); sfx.thud&&sfx.thud(); }}, {wait:.4},
     {talk:'TNB',lines:['Finders keepers. I\'m calling it best costumes.']}]},
-  {give:'hatcoin'},
+  {give:'hatcoin'}, {pose:'tnb',f:'c4b_toss',mid:'tnb'}, {wait:.6}, {pose:'tnb',f:'c4b_thanks',mid:'tnb'},
   {talk:'TNB',lines:['I\'ve never won anything! I\'d like to thank my steamer. I\'d like to thank my tape.',
     'And I\'d like to thank my babe, who flew two thousand four hundred and seventy-five miles to watch me work.']},
-  {talk:'Tom',lines:['He said the right number!']},
+  {talk:'Tom',lines:['He said the right number!']}, {pose:'tnb'},
   {ch4Reveal:'coin'},
   {talk:'Tom',lines:['It has a cowboy hat on it. Rose has a dragonfly, I have a lemon, and my father has a fish.']},
   {talk:'TNB',lines:['And now I have a hat. Babe, I love my award. I don\'t love that there are four of them.']},
@@ -1679,9 +1673,9 @@ SCENES.ch4AfterBoss=[
 SCENES.ch4Backup=[
   {flag:'ch4-backup'},
   {talk:'TNB',lines:['The hero hat is still stuck in there. Good thing wardrobe always has a double.']},
-  {call:()=>sfx.pickup()}, {wait:.4},
+  {pose:'tnb',f:'c4b_hat',mid:'tnb'}, {call:()=>sfx.pickup()}, {wait:.4},
   {talk:'Tom',lines:['A backup hat! You\'re the most prepared man I know. And I set two alarms for everything.']},
-  {talk:'TNB',lines:['I always keep one under my hat.']},
+  {talk:'TNB',lines:['I always keep one under my hat.']}, {pose:'tnb'},
   {toast:'Goal: wheel the rack back to the Studio Gate. Dana is waiting.',time:4.5}
 ];
 // 11. Studio Gate: the wrap party. Chapter complete. A second lanyard, TNB's pun, Amy's text and the photo for the plane.
@@ -1692,16 +1686,17 @@ SCENES.ch4End=[
   {call:()=>{ sfx.levelChime(); }},
   {talk:'Kiki',lines:['WRAP PARTY AT CRAFTY! Toni made a cake! It\'s shaped like a clapper! It\'s not clapping!']},
   {talk:'Dana',lines:['TNB, the studio wants you to have this. Gold-plated. It\'s the steamer from the lot’s very first wardrobe department.']},
-  {give:'n_steamer'},
+  {give:'n_steamer'}, {pose:'tnb',f:'c4b_steamer',mid:'tnb'},
   {toast:'TNB gets a new Signature Tool: the Golden Garment Steamer (POW +4, WARMTH +7). Equip it in the menu.',time:4.5},
-  {talk:'TNB',lines:['I\'m going to cry. I\'m not going to cry. I\'m a professional. I\'m crying a little.']},
+  {talk:'TNB',lines:['I\'m going to cry. I\'m not going to cry. I\'m a professional. I\'m crying a little.']}, {pose:'tnb'},
   {talk:'Tom',lines:['You\'re a professional. A crying professional. I\'m so proud of you.']},
   {talk:'TNB',lines:['Two awards in one day, babe. I\'m on a hot steam streak.']},
   {talk:'Dana',lines:['And crew jackets. Wrap Party Jackets. Only the crew gets one. You\'re crew now. Even the stunt double.']},
   {give:'wrapjacket'},
   {toast:'New outfit: the Wrap Party Jacket. Purple satin. Anyone can wear it.',time:4},
-  {call:()=>sfx.pickup()}, {ch4Reveal:'crew'},
+  {call:()=>sfx.pickup()}, {ch4Reveal:'crew'}, {pose:'tom',f:'c4t_crew',mid:'tom'},
   {talk:'Tom',lines:['A second lanyard! I have TWO lanyards!']},
+  {pose:'tom'},
   {talk:'TNB',lines:['You know what this whole day was? A real steam-ulating experience.']},
   {talk:'Tom',lines:['Steam-ulating! I flew two thousand four hundred and seventy-five miles for that pun.']},
   {talk:'TNB',lines:['Worth it?']},
@@ -1710,10 +1705,10 @@ SCENES.ch4End=[
   {call:()=>{ if(typeof naraPuddle==='function') { const n=sceneActor('nara'); if(n) naraPuddle(currentMap,n.x,n.y); } }}, {hearts:'nara'},   // Nara leans on both of them and leaves a tiny excited puddle
   {talk:'Toni',lines:['Not next to the cake! ...Fine. She\'s crew.']},
   {trace:'ch4-wrap'}, {hearts:'tom'},
-  {call:()=>{ sfx.ding&&sfx.ding(); }},
+  {call:()=>{ sfx.ding&&sfx.ding(); }}, {pose:'tom',f:'c4t_phone',mid:'tom'},
   {talk:'Tom',lines:['It\'s Amy. "Grace put the hat on page three. Also, parent-teacher conference night is Thursday. Thirty parents. I need backup. Bring snacks. And bring the good uncle."']},
   {talk:'TNB',lines:['You\'re the only uncle.']},
-  {talk:'Tom',lines:['Which makes me the good one. By default. I\'ll take it.']},
+  {talk:'Tom',lines:['Which makes me the good one. By default. I\'ll take it.']}, {pose:'tom'},
   {talk:'TNB',lines:['Go. But nobody goes anywhere alone, so take my picture for the plane.']},
   {call:()=>sfx.pickup&&sfx.pickup()}, {ch4Reveal:'phone'},
   {talk:'Tom',lines:['That\'s the one I\'m looking at for six hours.']},

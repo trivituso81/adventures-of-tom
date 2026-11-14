@@ -93,6 +93,19 @@ for _id, _h in EMO_H.items():
         SETS[_id + 'talk'] = {'member': _id, 'strip': os.path.join('art/talk', _id + '.webp'), 'k': 0, 'h': _h, 'ref': 'tk_tell', 'talk': True,
                               'names': ['tk_' + t for t in TALK_TYPES]}
 
+# Chapter 3 and 4 story poses (coinart2, 2026-11-14): strips cut by story_ch4_frames.py from the approved Art Library sheets ch4-tom-poses, ch4-tnb-poses, ch4-nara-story-1/2
+# and ch3-tom-net. Each is one set under its member. 'h' makes the reference standing frame as tall as the overworld stand; tomnet's one figure includes the raised net, and
+# Tom's body is .673 of its height (measured), so its 'h' is 42 / .673.
+STORY_STRIPS = {
+    'tomch4': {'member': 'tom', 'h': 42, 'ref': 'c4t_cross', 'names': ['c4t_kneel', 'c4t_bulb', 'c4t_visitor', 'c4t_crew', 'c4t_cross', 'c4t_phone']},
+    'tnbch4': {'member': 'tnb', 'h': 45, 'ref': 'c4b_hat', 'names': ['c4b_pull', 'c4b_toss', 'c4b_steamer', 'c4b_shock', 'c4b_hat', 'c4b_thanks']},
+    'narach4a': {'member': 'nara', 'h': 31, 'ref': 'c4n_beg', 'names': ['c4n_howl', 'c4n_run', 'c4n_front', 'c4n_sit', 'c4n_beg', 'c4n_alert']},
+    'narach4b': {'member': 'nara', 'h': 31, 'ref': 'c4n_tag', 'names': ['c4n_leap', 'c4n_hydrant', 'c4n_tag', 'c4n_sulk', 'c4n_bubble', 'c4n_post']},
+    'tomnet': {'member': 'tom', 'h': 62.4, 'ref': 'c3t_net', 'names': ['c3t_net']},
+}
+for _id, _S in STORY_STRIPS.items():
+    if os.path.exists(os.path.join(ROOT, 'art/story', _id + '.webp')): SETS[_id] = dict(_S, strip=os.path.join('art/story', _id + '.webp'), k=0, talk=True)
+
 # npcemo7 (2026-11-10, Tom: "implement them"): the 58 townsfolk plus Jojo and Michael get mood poses too (art/emotions/<id>.webp). Their sets are written to data/npc-poses.js, not
 # data/story-poses.js, so the cast file stays small. Size rule, same as the cast (mean of height match and face match), computed here per person, no hand tuning:
 #   height match = upright mood height over the standing frame's height (both full figures);
