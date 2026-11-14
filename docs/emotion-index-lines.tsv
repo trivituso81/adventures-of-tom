@@ -522,17 +522,10 @@ chapter	file	line	character	mood	text
 4	data/scenes.js	1713	Tom	happy	It's Amy. "Grace put the hat on page three. Also, parent-teacher conference night is Thursday. Thirty parents. I need backup. Bring snacks. And bring the good uncle."
 4	data/scenes.js	1716	TNB	loving	Go. But nobody goes anywhere alone, so take my picture for the plane.
 4	data/scenes.js	1718	Tom	loving	That's the one I'm looking at for six hours.
-5	data/scenes.js	1445	Amy	proud	Up! Everybody up! Walk it off. Hydrate. We go again.
 5	data/scenes.js	1454	Amy	happy	TOM. Oh, thank goodness.
-5	data/scenes.js	1456	Amy	loving	Two coffees. Both mine. Here, have one. That's how much I need you tonight.
-5	data/scenes.js	1458	Tom	unimpressed	You brought me coffee. At night. That's a cry for help.
-5	data/scenes.js	1459	Amy	angry	It's conference night. Thirty parents at seven o’clock. And the school has lost its mind.
-5	data/scenes.js	1459	Amy	angry	The bells ring whenever they feel like it. Every clock says a different time. And the sign-up sheet ran off.
 5	data/scenes.js	1461	Grace	surprised	Ran off? Like, RAN? On legs?
-5	data/scenes.js	1462	Amy	unimpressed	On little paper legs. Mrs. Kowalski saw it. She's still upset about it.
 5	data/scenes.js	1463	Rose	happy	Mom. Mom. Are we going to SCHOOL? At NIGHT? That's the best thing that ever happened.
 5	data/scenes.js	1464	Amy	proud	Everybody is coming. I have a clipboard, and I'm not afraid to use it.
-5	data/scenes.js	1478	Amy	happy	Principal Pruitt, my brother Tom. He's very good in a crisis. He's also very calm about it, which is annoying.
 5	data/scenes.js	1479	Tom	unimpressed	Hello. I hear your bells are haunted.
 5	data/scenes.js	1483	Grace	unimpressed	Doors don't just not open. That's not how doors work.
 5	data/scenes.js	1485	Rose	happy	Tata. A school. At NIGHT. With MONSTERS, probably.
@@ -558,7 +551,6 @@ chapter	file	line	character	mood	text
 5	data/scenes.js	1546	Rose	happy	The glitter footprints stop here! And over there. And on Tata.
 5	data/scenes.js	1554	Amy	surprised	Oh, I remember you. Fourth grade. You and me. Every Friday.
 5	data/scenes.js	1555	Tom	unimpressed	Amy was the scariest kid in dodgeball. They had to make a rule about her.
-5	data/scenes.js	1556	Amy	proud	The Gregori Rule. No throwing at teachers. It's still on the wall.
 5	data/scenes.js	1560	Amy	scared	You know I was terrified of that thing? Every Friday. That's why I threw so hard.
 5	data/scenes.js	1561	Tom	unimpressed	I know. You threw one at me at Thanksgiving. I was holding a pie.
 5	data/scenes.js	1562	Amy	happy	You caught the pie, though.
@@ -568,7 +560,6 @@ chapter	file	line	character	mood	text
 5	data/scenes.js	1587	Grace	surprised	There! The sign-up sheet! On the podium!
 5	data/scenes.js	1588	Rose	scared	It's covered in RED.
 5	data/scenes.js	1593	Amy	none	That's the conference sign-up sheet. Thirty parents are waiting for it.
-5	data/scenes.js	1596	Tom	unimpressed	So you took the sign-up sheet to mark it up, and you scrambled the bells and the clocks too.
 5	data/scenes.js	1598	Rose	surprised	Tata, it's a PEN. With GLASSES.
 5	data/scenes.js	1599	Amy	proud	I'm going to count to three, and you're going to put the sheet down. One.
 5	data/scenes.js	1600	Tom	unimpressed	That's her teacher voice. I'd listen.
@@ -576,32 +567,137 @@ chapter	file	line	character	mood	text
 5	data/scenes.js	1604	Amy	none	Tom, when it says SEE ME, step in front of them. Grace, use Squishy on anyone it circles. And somebody tell it that its handwriting is nice.
 5	data/scenes.js	1604	Amy	none	If we say it three times, I think it'll calm down.
 5	data/scenes.js	1616	Amy	unimpressed	...It's going to my desk. Of course it's going to my desk.
-5	data/scenes.js	1617	Grace	surprised	The sign-up sheet! It's a bit crumpled. And look, Tata. Something is taped to the bottom.
-5	data/scenes.js	1618	Tom	surprised	It's another gold coin, with the same little clock face on it.
-5	data/scenes.js	1618	Tom	surprised	That's three. A stopped sundial, a stopped movie, and now a school where the clocks can't agree.
-5	data/scenes.js	1618	Tom	surprised	Every time, it's a gold coin, and something lonely holding on to it.
-5	data/scenes.js	1619	Amy	unimpressed	Whoever it is has very neat tape. Look at those corners.
-5	data/scenes.js	1620	Rose	happy	Can we keep it? I'll keep it inside Lamby.
-5	data/scenes.js	1621	Tom	unimpressed	We keep it. In my pocket. Not inside Lamby.
 5	data/scenes.js	1633	Amy	surprised	Principal Pruitt, I can't take this.
 5	data/scenes.js	1633	Amy	loving	...I'm taking it. Thank you.
-5	data/scenes.js	1645	Amy	proud	Thirty conferences. Zero tears. One very well-behaved pen.
 5	data/scenes.js	1647	Amy	surprised	Oh. A text. From Justin.
 5	data/scenes.js	1647	Amy	loving	"Heard it went great. Proud of you. Stuck at work till nine. Save me some casserole." With a little heart.
 5	data/scenes.js	1648	Grace	happy	Dad used the heart! He only uses the heart on special days!
 5	data/scenes.js	1649	Amy	none	Girls. Did we save some casserole for Daddy?
 5	data/scenes.js	1650	Rose	happy	...Define save.
-5	data/scenes.js	1651	Rose	scared	Tata. Tata. There's a man.
-5	data/scenes.js	1654	Rose	scared	He's by the last car in the parking lot. He's wearing a long coat, and he's looking right at us.
-5	data/scenes.js	1658	Tom	surprised	...I looked, and there's nobody there now.
-5	data/scenes.js	1659	Amy	none	Probably a parent. A late one. There's always a late one.
-5	data/scenes.js	1660	Tom	unimpressed	Probably.
-5	data/scenes.js	1660	Tom	proud	A man in a long coat. The fish said so, the megaphone said so, and the pen said so. He's real, he's here, and he's checking on his work.
-5	data/scenes.js	1660	Tom	proud	I'm keeping a list.
-5	data/scenes.js	1661	Grace	proud	I'm keeping a list too. Mine has a chart.
 5	data/scenes.js	1662	Amy	loving	Everybody in the van. Tom, you too. You were a good uncle tonight. By a lot.
 5	data/scenes.js	1663	Tom	unimpressed	By default.
 5	data/scenes.js	1664	Amy	loving	By a LOT. Take the compliment, Tom.
+5	engine/travel.js	95	Tom	unimpressed	Nara, I can't leave if you're sitting on my feet. Oh. That's the plan.
+5	engine/travel.js	95	Tom	unimpressed	A week. Maybe two. You guard the porch.
+5	engine/travel.js	96	Tom	loving	Best costumes. That megaphone got it right.
+5	engine/travel.js	275	Tom	surprised	Tabs! Nobody told me there would be tabs! I'm going to keep tabs on everything!
+5	engine/travel.js	279	Grace	unimpressed	It says, "Share these with everybody. Yes, babe, even with Amy."
+5	engine/travel.js	280	Tom	loving	He knows me so well.
+5	engine/travel.js	281	Rose	proud	Tata! LOOK!
+5	engine/travel.js	282	Tom	surprised	Your tooth is gone! And a whole worm fits through! When did it come out?
+5	engine/travel.js	283	Rose	proud	On Tuesday. An apple got it.
+5	engine/travel.js	284	Tom	sad	Tuesday. I was in Los Angeles on Tuesday.
+5	engine/travel.js	285	Rose	proud	The tooth fairy gave me two dollars. Boppy says HIS teeth cost way more.
+5	engine/travel.js	286	Tom	happy	Deedee paid for Boppy's. You're the only one in this family who ever MADE money on a tooth.
+5	data/scenes.js	1872	Amy	unimpressed	Two iced coffees. Both mine. Here, have one. That's how much I need you tonight.
+5	data/scenes.js	1874	Tom	surprised	You're sharing your iced coffee? Amy, you never even shared your Halloween candy!
+5	data/scenes.js	1875	Amy	unimpressed	You get one coffee and one binder. Don't get used to it.
+5	data/scenes.js	1877	Tom	surprised	It has TABS! Color-coded tabs! Amy, this is the nicest thing you've ever done for me.
+5	data/scenes.js	1879	Amy	unimpressed	Tab one is the schedule. Tab two is the thirty parents. Tab three is what to do if one of them cries.
+5	data/scenes.js	1880	Tom	happy	What's tab four?
+5	data/scenes.js	1881	Amy	scared	Tab four was empty until recess. Then there was a huge flash on the playground. Now the bells ring whenever they feel like it and every clock says a different time.
+5	data/scenes.js	1882	Tom	surprised	A flash! Amy, that's how it starts every single time!
+5	data/scenes.js	1883	Grace	proud	I was THERE, Tata! Moss kicked the kickball, there was a big flash, and the ball never came down!
+5	data/scenes.js	1884	Rose	unimpressed	Then we had indoor recess. Indoor recess is the worst recess.
+5	data/scenes.js	1885	Amy	surprised	And the sign-up sheet got up off the table and ran away.
+5	data/scenes.js	1887	Amy	angry	On little paper legs! I watched it go! I teach second grade. I've seen everything, and I've never seen THAT.
+5	data/scenes.js	1888	Tom	happy	Does tab four say what to do about a sheet of paper with legs?
+5	data/scenes.js	1889	Amy	unimpressed	Tab four says "Ask Tom." I wrote it in pen.
+5	data/scenes.js	1890	Amy	proud	I told Principal Pruitt this morning that something would go wrong tonight. I called it.
+5	data/scenes.js	1891	Tom	unimpressed	I told TNB on Tuesday. I called it first.
+5	data/scenes.js	1892	Amy	angry	You can't call it from California!
+5	data/scenes.js	1899	Tom	proud	And I have a binder! I'm bound to be useful.
+5	data/scenes.js	1900	Amy	unimpressed	Was that a pun? Did TNB teach you that?
+5	data/scenes.js	1901	Tom	proud	I'm filling in for him while he's in Los Angeles.
+5	data/scenes.js	1911	Grace	unimpressed	That's Clara. She's in my class. Hi, Clara.
+5	data/scenes.js	1915	Rose	loving	You can have a gummy worm while you wait. Tata's boyfriend sent them.
+5	data/scenes.js	1919	Amy	unimpressed	Principal Pruitt, this is my brother Tom. He's seen things like this four times already. He's our expert.
+5	data/scenes.js	1921	Tom	happy	Do visitors get a lanyard here? I have two already.
+5	data/scenes.js	1924	Tom	happy	A sticker! Amy, where's your sticker?
+5	data/scenes.js	1925	Amy	unimpressed	I work here, Tom.
+5	data/scenes.js	1926	Tom	unimpressed	So you don't get one. I'm so sorry. That must be hard.
+5	data/scenes.js	1932	Tom	happy	Exactly seven. Amy, I like this man.
+5	data/scenes.js	1944	Amy	unimpressed	That's Clara's dad. He's the last one here every single day. But he always comes.
+5	data/scenes.js	1952	Amy	scared	There it is. I put six cones around it. I didn't know what else to do. Cones are what we have.
+5	data/scenes.js	1953	Rose	surprised	The ball is in the SKY! And a SHOE!
+5	data/scenes.js	1954	Grace	unimpressed	That's Moss's sneaker. Moss kicked so hard that it flew off, and then the flash got the ball and the shoe together. Moss had to hop to the bus.
+5	data/scenes.js	1955	Tom	happy	Moss really put a best foot forward. And it never came back.
+5	data/scenes.js	1956	Amy	unimpressed	That's two. I'm counting.
+5	data/scenes.js	1957	Tom	surprised	It's as big as a washing machine! The hat in Los Angeles was only as big as a beach ball. They keep getting bigger!
+5	data/scenes.js	1958	Amy	scared	The grass under it is grey. Second base is grey. Tom, I do recess duty every day, and I have never had to write THAT up.
+5	data/scenes.js	1959	Tom	unimpressed	It hangs there by itself, like the fish and the hat. TNB pulled a whole table out from under the hat and it didn't drop an inch.
+5	data/scenes.js	1960	Amy	unimpressed	Nobody touch it. There's a form for this and I don't know which one.
+5	data/scenes.js	1962	Tom	unimpressed	It's not in the binder. I checked all four tabs.
+5	data/scenes.js	1964	Amy	surprised	What are you doing?
+5	data/scenes.js	1965	Tom	unimpressed	It's in case it falls. This is a three-inch binder, Amy.
+5	data/scenes.js	1967	Tom	unimpressed	There's going to be a little round hole in the side. Grace, I'll spot you.
+5	data/scenes.js	1969	Grace	happy	Round hole! It's right under the sneaker. I'm not touching it, Mom. I'm LOOKING.
+5	data/scenes.js	1973	Tom	unimpressed	And there's going to be a burnt flashbulb close by.
+5	data/scenes.js	1975	Tom	unimpressed	Second base.
+5	data/scenes.js	1976	Amy	surprised	How did you know that?
+5	data/scenes.js	1977	Tom	unimpressed	I've had four practices. I still have the one from the movie studio in my pocket.
+5	data/scenes.js	1978	Amy	surprised	You're walking around with burnt light bulbs in your pocket? Mom has a drawer for those!
+5	data/scenes.js	1979	Grace	unimpressed	Kickball: grey grass, orange block, round hole, burnt bulb. Page four.
+5	data/scenes.js	1980	Amy	scared	That's five. Three here, and two out where you live. Tom, who is doing this?
+5	data/scenes.js	1981	Tom	unimpressed	I don't know. Nobody knows. But every time, there's a flash, and then things wake up.
+5	data/scenes.js	1983	Amy	unimpressed	Then let's go see what woke up in my school.
+5	data/scenes.js	1992	Tom	happy	Don't worry, Amy. We'll fix every one of them. It's about time.
+5	data/scenes.js	1993	Amy	unimpressed	Three.
+5	data/scenes.js	2027	Amy	surprised	That bell is HOPPING! Tom! It has a FACE!
+5	data/scenes.js	2028	Tom	proud	That's what they do! I've been telling you on the phone for weeks!
+5	data/scenes.js	2029	Amy	angry	You also told me a hill sneezed on you!
+5	data/scenes.js	2030	Tom	angry	It DID!
+5	data/scenes.js	2034	Tom	unimpressed	Excuse me, Mr. Bell. I set two alarms for everything. Does that ring a bell?
+5	data/scenes.js	2035	Amy	unimpressed	Four.
+5	data/scenes.js	2048	Tom	unimpressed	Stay close, everybody. We have to stick together.
+5	data/scenes.js	2049	Amy	unimpressed	Five. And glitter never comes out, Tom. Never.
+5	data/scenes.js	2055	Amy	happy	LAAAAA! The piano works!
+5	data/scenes.js	2056	Grace	unimpressed	Mom. Inside voice.
+5	data/scenes.js	2057	Amy	unimpressed	That WAS my inside voice.
+5	data/scenes.js	2058	Tom	happy	That's the big note from the end of act one! Keep going, I know the next part!
+5	data/scenes.js	2060	Rose	surprised	Now there are TWO of them.
+5	data/scenes.js	2070	Amy	proud	The Rivituso Rule. No throwing at the teacher. It's still painted on the wall.
+5	data/scenes.js	2085	Amy	unimpressed	Seven o'clock exactly. On my watch too.
+5	data/scenes.js	2103	Amy	angry	That's MY red pen! I dropped my clipboard at recess when the flash went off, and when I picked it up the pen was gone!
+5	data/scenes.js	2104	Tom	surprised	Amy, your pen is as tall as a door! And it's wearing glasses!
+5	data/scenes.js	2110	Tom	happy	Amy, he's the mean judge! Like on our shows!
+5	data/scenes.js	2111	Amy	unimpressed	There's always a mean judge. And he always cries in the finale.
+5	data/scenes.js	2114	Tom	angry	It is NOT crooked!
+5	data/scenes.js	2116	Tom	unimpressed	...It's a little crooked.
+5	data/scenes.js	2118	Rose	surprised	And it has a gold star on its clip!
+5	data/scenes.js	2134	Amy	proud	The mean judge cried in the finale. I called it.
+5	data/scenes.js	2138	Amy	proud	I got a gold star! Wait until Mom sees this. I'm her favorite this year, so my picture goes on the front of the Christmas tree.
+5	data/scenes.js	2141	Amy	happy	It dropped its gold star on my clipboard. I'm keeping it. Wait until Mom sees this. I'm her favorite this year, so my picture goes on the front of the Christmas tree.
+5	data/scenes.js	2143	Tom	angry	Mom calls me her favorite son every single time I walk in the door!
+5	data/scenes.js	2144	Amy	unimpressed	You're her ONLY son, Tom.
+5	data/scenes.js	2146	Grace	unimpressed	It's a gold coin, Mom. It has a kickball on it.
+5	data/scenes.js	2147	Tom	unimpressed	Rose has a dragonfly. I have a lemon. Boppy has a fish and TNB has a cowboy hat. And now you have a kickball.
+5	data/scenes.js	2148	Amy	scared	Five coins and five orange blocks. Grace, put it on the list.
+5	data/scenes.js	2149	Grace	proud	It's already on the list.
+5	data/scenes.js	2151	Tom	happy	Thank you! That's been bothering me for ten whole minutes.
+5	data/scenes.js	2154	Grace	proud	The sign-up sheet! It's a bit crumpled. But every name is spelled right.
+5	data/scenes.js	2155	Rose	unimpressed	Mom, can I keep it? I'll keep it inside Lamby.
+5	data/scenes.js	2156	Amy	loving	It stays on my clipboard. Not inside Lamby.
+5	data/scenes.js	2164	Tom	surprised	A parent is crying! Tab three! I know this one!
+5	data/scenes.js	2166	Tom	unimpressed	"Tissue first. Then a cookie."
+5	data/scenes.js	2169	Tom	proud	I KNOW!
+5	data/scenes.js	2175	Amy	unimpressed	Thirty parents, and the only one who cried was happy. Tom, that was better than a season finale.
+5	data/scenes.js	2176	Tom	happy	And nobody flipped a table!
+5	data/scenes.js	2177	Amy	unimpressed	I had a tab ready for that.
+5	data/scenes.js	2189	Amy	unimpressed	Thirty conferences. One gold star. One very well-behaved pen.
+5	data/scenes.js	2197	Rose	surprised	The ball is STILL up there.
+5	data/scenes.js	2198	Tom	unimpressed	It's really hanging in there.
+5	data/scenes.js	2199	Amy	unimpressed	Six. I'm telling TNB.
+5	data/scenes.js	2200	Tom	loving	He'll be so proud.
+5	data/scenes.js	2201	Amy	scared	On Monday morning I have to explain that to the whole school.
+5	data/scenes.js	2202	Tom	unimpressed	I have two burnt flashbulbs in my pocket, and nobody can explain those to me.
+5	data/scenes.js	2203	Amy	unimpressed	Those go to Mom. She called me four times about her rule. Nobody goes anywhere alone.
+5	data/scenes.js	2204	Grace	proud	I put all five on one page. Mine has a chart.
+5	data/scenes.js	2205	Tom	happy	Can I have a copy for tab four?
+5	data/scenes.js	2206	Grace	loving	You can have a copy. The chart stays with me.
+5	data/scenes.js	2212	Tom	happy	...Can I keep the binder?
+5	data/scenes.js	2213	Amy	loving	It's yours. I made it for you. Your name is on the spine.
+5	data/scenes.js	2214	Tom	happy	My name is on the SPINE!
 6	data/scenes.js	1821	TNB	loving	Okay. Shake it off. Everybody gets a snack and a hug. In that order.
 6	data/scenes.js	1830	Tom	unimpressed	He has a key. I gave him a key for exactly this kind of emergency.
 6	data/scenes.js	1830	Tom	unimpressed	I didn't picture acorns.

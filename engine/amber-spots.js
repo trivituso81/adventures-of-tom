@@ -26,7 +26,13 @@ const AMBER_SPOTS=[
   {id:'ch4',map:'stage7',name:'Orange block',show:()=>STORY.chapter>=4&&flag('ch4-rig')&&!flag('ch6-clear'),found:'ch4-hat',solid:[[8,9],[9,9],[10,9],[8,10],[9,10],[10,10]],
     lines:[['tnb','Babe. That\'s the hero hat. The cowboy wears it in every scene of the movie. And it\'s inside a big orange block!'],
       ['tom','It\'s just like the dragonfly, the lemon and the fish. And every one is bigger than the last.'],
-      ['tnb','Well, hats off to whoever did this. No, really. I can\'t get the hat off.']]}
+      ['tnb','Well, hats off to whoever did this. No, really. I can\'t get the hat off.']]},
+  // Chapter 5, the schoolyard kickball field (SCHOOL_BLOCK in engine/plate.js, SCENES.ch5Field): the block hangs over second base; the two tiles under it are solid.
+  {id:'ch5',map:'schoolyard',name:'Orange block',show:()=>STORY.chapter>=5&&(STORY.chapter>5||flag('ch5-pruitt'))&&!flag('ch6-clear'),found:'ch5-field',solid:[[18,8],[19,8]],
+    lines:[['amy','There it is. I put six cones around it. I didn\'t know what else to do. Cones are what we have.'],
+      ['rose','The ball is in the SKY! And a SHOE!'],
+      ['grace','That\'s Moss\'s sneaker. Moss kicked so hard that it flew off, and then the flash got the ball and the shoe together. Moss had to hop to the bus.'],
+      ['tom','It\'s as big as a washing machine! The hat in Los Angeles was only as big as a beach ball. They keep getting bigger!']]}
 ];
 const AMBER_SPOT_SPEAKER={tom:'Tom',tnb:'TNB',grace:'Grace',rose:'Rose',deedee:'Deedee',boppy:'Boppy',amy:'Amy'};
 // What each tile held before a spot took it over, per map, so a spot that goes away (chapter 6 clear) gives the tile back exactly.

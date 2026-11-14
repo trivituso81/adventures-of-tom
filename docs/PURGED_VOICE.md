@@ -162,3 +162,8 @@ Dropped, can never play: tom "...He said he'd be home." (removed so TNB does not
 ## 2026-11-13 (`ch3build1`): chapter 3 story build, 34 clips
 
 Chapter 3 was rebuilt to the locked story (claude/story-ch03.md). Dropped, can never play: the old sundial, long-coat and "nobody believes Boppy" lines, the narration boxes now shown as actions, and the reworded lines. The full list is in tools/clip-audit/purge-ch3build1.json (34 `speaker|text` keys). Audio is in git history (the parent of the `ch3build1` commit).
+
+## 2026-11-14 (`ch5build1`): chapter 5 story build, 10 clips
+
+Dropped, can never play: the narration boxes now shown as actions (the bell, the pen leaving, conference night, Nara sitting on Tom's feet and her sigh, "Tom wiggles free"), and three Red Pen lines about the man in the long coat and the reworded "I did. I made the bells..." line. Spec: tools/clip-audit/purge-ch5build1.json.
+
