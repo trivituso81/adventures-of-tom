@@ -80,6 +80,7 @@ header{padding:10px 28px}
 </main>
 <div class="bar" id="bar" hidden></div>
 <div id="toast"></div>
+<script src="engine/admin-music.js?v=admin1"></script>
 <script>
 // Music Library. Every track the game plays is one card: hear it, edit its prompt, make a new take with ElevenLabs Music, pick which take
 // the game plays on this device. Takes live in this browser's IndexedDB 'aot-music-library' (engine/local-music.js reads the same store at
@@ -157,9 +158,9 @@ function paintFilters(){
   const cnt=(skip,fn)=>IDX.tracks.filter(t=>matches(t,skip)&&fn(t)).length;
   const vis=skip=>cnt(skip,()=>true);
   const mk=(g,lab,vals,key,names)=>'<span class="lab">'+lab+'</span>'+chip(g,'*','All',!F[g].size,vis(g))+vals.map(v=>chip(g,v,names?names[v]:v,F[g].has(v),cnt(g,t=>t[key]===v))).join('');
-  $('fGroup').innerHTML=mk('group','Group',['Core','Long Island','Los Angeles','Nine Scoops'],'group');
+  $('fGroup').innerHTML=mk('group','Group',['Core','Long Island','Los Angeles','Nine Scoops','Admin'],'group');
   $('fKind').innerHTML=mk('kind','Kind',['loop','jingle'],'kind',{loop:'Loop',jingle:'Jingle'});
-  $('fUse').innerHTML=mk('use','Use',['Area','Boss room','Battle','Title','Jingle'],'use');
+  $('fUse').innerHTML=mk('use','Use',['Area','Boss room','Battle','Title','Jingle','Admin'],'use');
   const nNone=cnt('show',t=>!takesOf(t.id).length),nPh=cnt('show',t=>takesOf(t.id).length),nBi=cnt('show',t=>!USE[t.id]);
   $('fShow').innerHTML='<span class="lab">Show</span>'+chip('show','all','All tracks',F.show==='all',vis('show'))+chip('show','none','No take on this device',F.show==='none',nNone)+chip('show','phone','Re-made on this device',F.show==='phone',nPh)+chip('show','builtin','Built-in track plays',F.show==='builtin',nBi);
   const v=shown().length;
@@ -263,7 +264,7 @@ async function bytesFor(id,key){
 }
 const decode=(c,ab)=>new Promise((res,rej)=>{const p=c.decodeAudioData(ab,res,rej);if(p&&p.catch)p.catch(rej);});
 function stopAll(){if(PL){for(const n of PL.nodes){try{n.stop();}catch(e){}}clearTimeout(PL.h);PL=null;paintPlay();}}
-function paintPlay(){document.querySelectorAll('[data-pid]').forEach(b=>{const on=PL&&PL.pid===b.dataset.pid;b.innerHTML=on?'&#9632; Stop':b.dataset.lab;});}
+function paintPlay(){if(window.adminMusic)adminMusic.hold('lib',!!PL);document.querySelectorAll('[data-pid]').forEach(b=>{const on=PL&&PL.pid===b.dataset.pid;b.innerHTML=on?'&#9632; Stop':b.dataset.lab;});}
 async function play(id,mode,key){
   const pid=mode==='now'?id+'|now':mode==='loop'?id+'|loop':mode==='b'?id+'|b':key;
   if(PL&&PL.pid===pid)return stopAll();

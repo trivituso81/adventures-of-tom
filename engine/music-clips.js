@@ -6,7 +6,7 @@
 // clips are in charge (including silence). A track that fails to load is skipped and the synth covers for it.
 // MC_TRACKS: id -> [kind (l loop, j jingle), seconds]. node tools/music-library/make-index.js keeps it in step with music/manifest.json.
 // A take picked in the Music Library on this phone replaces the built-in mp3 for its track (engine/local-music.js, see mcFetch).
-const MC_TRACKS={"title":["l",30.1],"battle":["l",75.1],"boss":["l",88.4],"victory":["j",5.1],"defeat":["j",8.1],"levelup":["j",5.8],"town":["l",58.3],"row":["l",54],"hollow":["l",60.1],"pier":["l",57.6],"reeds":["l",57.1],"sundial":["l",56],"schoolyard":["l",60.1],"school":["l",58],"cafetorium":["l",60.1],"stacks":["l",53.3],"readroom":["l",57.4],"moonclub":["l",57.8],"dome":["l",58.3],"terminal":["l",57.3],"gatezero":["l",71.3],"blvd":["l",53],"jpark":["l",60.1],"griffith":["l",60.1],"studio":["l",56],"backlot":["l",60.1],"stage7":["l",60.1],"stageset":["l",58.4],"oakpark":["l",57.6],"oak":["l",57.6],"crown":["l",60.1],"carbarn":["l",60.1],"boiler":["l",60.1],"ns_party":["l",60.1],"ns_hunt":["l",60.1],"ns_frozen":["l",60.1],"ns_boss":["l",90.1],"ns_win":["j",9.8]};
+const MC_TRACKS={"title":["l",30.1],"battle":["l",75.1],"boss":["l",88.4],"victory":["j",5.1],"defeat":["j",8.1],"levelup":["j",5.8],"town":["l",58.3],"row":["l",54],"hollow":["l",60.1],"pier":["l",57.6],"reeds":["l",57.1],"sundial":["l",56],"schoolyard":["l",60.1],"school":["l",58],"cafetorium":["l",60.1],"stacks":["l",53.3],"readroom":["l",57.4],"moonclub":["l",57.8],"dome":["l",58.3],"terminal":["l",57.3],"gatezero":["l",71.3],"blvd":["l",53],"jpark":["l",60.1],"griffith":["l",60.1],"studio":["l",56],"backlot":["l",60.1],"stage7":["l",60.1],"stageset":["l",58.4],"oakpark":["l",57.6],"oak":["l",57.6],"crown":["l",60.1],"carbarn":["l",60.1],"boiler":["l",60.1],"ns_party":["l",60.1],"ns_hunt":["l",60.1],"ns_frozen":["l",60.1],"ns_boss":["l",90.1],"ns_win":["j",9.8],"admin":["l",96]};
 const MC={bufs:new Map(),loading:new Map(),failed:new Set(),cur:null,old:[],jingle:null,jingleDone:false,inBattle:false,
   duck:null,out:null,ducked:false,XF:2.5,MAXLOOPS:3,lastWant:undefined,log:[]};
 const MC_IN=Float32Array.from({length:64},(_,i)=>Math.sin(i/63*Math.PI/2)),MC_OUT=Float32Array.from({length:64},(_,i)=>Math.cos(i/63*Math.PI/2));
@@ -112,6 +112,19 @@ function mcNsArea(m) {
 function mcNsBoss() { try { return B2.active&&B2.foes.some(f=>f.boss==='brainfreeze'); } catch(e) { return false; } }
 function mcBossFight() { try { return B2.active&&B2.foes.some(f=>f.boss); } catch(e) { return false; } }
 
+// Admin screens (Tom 2026-11-14): the ADMIN list, the Battle Lab list and its difficulty and solo pages under it, and the Welcome
+// layout editor play the calm 'admin' track instead of the title theme. The separate admin pages (Voice, Art and Music Libraries,
+// Area Builder, Portrait Crops, Head Sizes) play the same track through engine/admin-music.js. A Battle Lab fight is a battle and keeps battle music.
+function mcAdminScreen() {
+  try {
+    if(typeof splash==='undefined'||!splash.active) return false;
+    if(splash.edit) return true;
+    let m=splash.mode;
+    for(let i=0;i<6&&m;i++) { if(m==='admin') return true; m=typeof SPLASH_PARENT!=='undefined'?SPLASH_PARENT[m]:null; }
+  } catch(e) {}
+  return false;
+}
+
 function clipWanted() {
   if(!sound.enabled||!music.on||document.hidden) return null;
   if(typeof intro!=='undefined'&&intro.active&&intro.flight) return null;
@@ -125,6 +138,7 @@ function clipWanted() {
   // Title theme: the whole title screen (every menu) and the prompts it opens over the town (new game warning, load list,
   // chapter jump), until a game actually begins (intro.phase leaves 'title').
   const onTitle=(typeof splash!=='undefined'&&splash.active)||(typeof intro!=='undefined'&&intro.active&&intro.phase==='title');
+  if(mcAdminScreen()&&mcOk('admin')) return 'admin';
   if(onTitle&&mcOk('title')) return 'title';
   const a=mcAreaTrack(currentMap);
   return a&&mcOk(a)?a:undefined;

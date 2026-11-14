@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Headless test for music.html (Music Library) against the fake ElevenLabs stub. No real keys.
 Run from the repo root:  python3 tools/music-library/test.py   (starts its own servers; screens go to tools/shots/music-*.png)
-Checks: the index loads and every chip row adds up to 38, search and filters, the key card never shows the key, a wrong key and a missing key explain
+Checks: the index loads and every chip row adds up to 39, search and filters, the key card never shows the key, a wrong key and a missing key explain
 themselves, a make needs two taps (credit estimate shown), the request the stub saw (prompt plus the loop wording, length, instrumental), the take is
 kept and Used, a second take and Use / Built into the game / Delete switching, many at once (two at a time), Export music takes, and that the real game
 (index.html) picks the Used take through mcFetch while every other track still comes from music/. Both orientations are looked at."""
@@ -31,10 +31,10 @@ async def main():
             pg = await ctx.new_page(); errs = []
             pg.on('pageerror', lambda e: errs.append(str(e)))
             await pg.goto(URL); await pg.wait_for_selector('.card[data-id]')
-            ok(await pg.locator('.card[data-id]').count() == 38, '38 tracks listed')
+            ok(await pg.locator('.card[data-id]').count() == 39, '39 tracks listed')
             for g in ('fGroup', 'fKind', 'fUse'):
                 counts = await pg.eval_on_selector_all('#%s .chip:not(:first-of-type)' % g, 'els=>els.map(e=>+e.querySelector(".n").textContent)')
-                ok(sum(counts) == 38, '%s chip counts add up to 38 (%s)' % (g, counts))
+                ok(sum(counts) == 39, '%s chip counts add up to 39 (%s)' % (g, counts))
             ok('no key' in await pg.inner_text('#keys'), 'starts with no key')
             # filters and search
             await pg.click('#fGroup .chip[data-v="Core"]')
@@ -46,7 +46,7 @@ async def main():
             await pg.fill('#q', ''); await pg.click('#fUse .chip[data-v="Boss room"]')
             ok(await pg.locator('.card[data-id]').count() == 6, 'Boss room shows 6 tracks')
             await pg.click('#fUse .chip[data-v="*"]')
-            ok(await pg.locator('.card[data-id]').count() == 38, 'clearing the chips brings all 38 back')
+            ok(await pg.locator('.card[data-id]').count() == 39, 'clearing the chips brings all 39 back')
             # key handling
             await pg.click('[data-make="town"]'); await pg.click('[data-make="town"]')
             await pg.wait_for_selector('#m-town.err:has-text("Paste the ElevenLabs key")')
@@ -103,7 +103,7 @@ async def main():
             ok(len(log()) == 4, 'many at once made two more takes (4 calls in all)')
             # show filters
             await pg.click('#fShow .chip[data-v="phone"]'); ok(await pg.locator('.card[data-id]').count() == 3, 'Re-made on this phone lists the 3 tracks with takes')
-            await pg.click('#fShow .chip[data-v="none"]'); ok(await pg.locator('.card[data-id]').count() == 35, 'No take on this phone lists the other 35')
+            await pg.click('#fShow .chip[data-v="none"]'); ok(await pg.locator('.card[data-id]').count() == 36, 'No take on this phone lists the other 36')
             await pg.click('#fShow .chip[data-v="all"]')
             await pg.screenshot(path=os.path.join(SHOTS, 'music-portrait.png'))
             await pg.locator('.card[data-id="town"]').scroll_into_view_if_needed(); await pg.locator('.card[data-id="town"]').screenshot(path=os.path.join(SHOTS, 'music-card-portrait.png'))
@@ -136,7 +136,7 @@ async def main():
             c2 = await b.new_context(viewport={'width': 852, 'height': 393}); p2 = await c2.new_page(); e2 = []
             p2.on('pageerror', lambda e: e2.append(str(e)))
             await p2.goto(URL); await p2.wait_for_selector('.card[data-id]')
-            ok(await p2.locator('.card[data-id]').count() == 38, 'landscape lists 38 tracks')
+            ok(await p2.locator('.card[data-id]').count() == 39, 'landscape lists 39 tracks')
             await p2.screenshot(path=os.path.join(SHOTS, 'music-landscape.png'))
             await p2.locator('.card[data-id]').first.scroll_into_view_if_needed(); await p2.screenshot(path=os.path.join(SHOTS, 'music-landscape-card.png'))
             ok(not e2, 'no page errors in landscape: %s' % e2)

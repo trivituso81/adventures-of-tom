@@ -1,5 +1,5 @@
 {
- "made": "2026-11-13",
+ "made": "2026-11-14",
  "suffix": {
   "loop": "Instrumental only, no vocals. Composed to loop: steady energy from start to finish, no fade-out and no big final ending. Rich, detailed, modern production. Family-friendly adventure game score.",
   "jingle": "Instrumental only, no vocals. A short musical sting that starts immediately and ends cleanly on its final note. Rich, detailed, modern production. Family-friendly adventure game score."
@@ -498,6 +498,19 @@
    "auto": true,
    "sec": 9.77,
    "bytes": 117596
+  },
+  {
+   "id": "admin",
+   "group": "Admin",
+   "name": "Admin Calm",
+   "kind": "loop",
+   "use": "Admin",
+   "len": 90,
+   "where": "Every admin screen: the ADMIN menu, the Voice, Art and Music Libraries, Area Builder, Portrait Crops, Head Sizes",
+   "prompt": "Soft, slow, weightless ambient music for a quiet workspace, about 60 beats per minute with no drums and no beat you can tap. Long sustained pads and warm strings that swell and fade like slow breathing, a deep gentle drone underneath, a few soft glassy bells and a distant harp note far apart from each other, wide open space and a large airy hall reverb. Major and lydian harmony that never resolves hard and never gets tense. Calm, spacious, expansive, like looking at a wide sky. Nothing sudden, nothing loud, no melody to follow.",
+   "auto": true,
+   "sec": 96.03,
+   "bytes": 1152671
   }
  ]
 }

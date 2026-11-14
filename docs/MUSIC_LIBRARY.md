@@ -74,3 +74,7 @@ Calls made in the build:
 - A phone take plays raw (no loudness match, no trimming) until merged; the card on the page says so.
 
 Not verified (say so plainly): the phone; the live ElevenLabs Music call (the request shape follows the desktop baker's `makeMusic` and ElevenLabs' music endpoint; a wrong field would answer 400 or 422 and the page shows the message); whether Safari on iPhone stores the take blobs the way Chromium does (the Voice Library stores base64, this page stores Blobs); the share sheet on export (falls back to a download).
+
+## 7. The admin track (`adminmusic1`, 2026-11-14)
+
+Track `admin` ("Admin Calm", group Admin, use Admin, loop 96 s, 39th track) plays on every admin screen. In the game, `mcAdminScreen()` in engine/music-clips.js picks it for the ADMIN list, the Battle Lab list and its sub pages, and the Welcome layout editor. On the separate pages (voices, art, music, areas, portraits, heads) engine/admin-music.js plays it. First version is synthesized (`tools/music-library/make-admin-ambient.py`, rerun to regenerate); a take Tom makes in the Music Library and marks In the game replaces it everywhere, pages included. Test: `python3 tools/admin_music_test.py`.

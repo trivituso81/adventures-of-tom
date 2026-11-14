@@ -20,8 +20,8 @@ const ids=new Set();
 for(const t of T.tracks) {
   if(ids.has(t.id)) errs.push('duplicate id '+t.id); ids.add(t.id);
   if(!['loop','jingle'].includes(t.kind)) errs.push(t.id+': kind must be loop or jingle');
-  if(!['Area','Boss room','Battle','Title','Jingle'].includes(t.use)) errs.push(t.id+': bad use '+t.use);
-  if(!['Core','Long Island','Los Angeles','Nine Scoops'].includes(t.group)) errs.push(t.id+': bad group '+t.group);
+  if(!['Area','Boss room','Battle','Title','Jingle','Admin'].includes(t.use)) errs.push(t.id+': bad use '+t.use);
+  if(!['Core','Long Island','Los Angeles','Nine Scoops','Admin'].includes(t.group)) errs.push(t.id+': bad group '+t.group);
   if(!t.prompt||/—|–/.test(t.prompt)) errs.push(t.id+': prompt empty or has a dash');
   if(!MAN[t.id]) errs.push(t.id+': no mp3 in music/manifest.json');
 }
