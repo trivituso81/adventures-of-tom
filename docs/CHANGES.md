@@ -1,3 +1,7 @@
+## clips13 (2026-11-14): 232 chapter 7 phone takes merged into the game
+- Tom 15:34: sent `local-clips-pending_11.json` (made 2026-11-14 23:33 UTC, 232 clips, all dialogue, all live lines, none had a clip before): Tom 62, Grace 57, Rose 28, log 22, Deedee 19, pagew 16, Boppy 11, TNB 6, page 5, grump 2, sal 2, bigone 1, mudling 1.
+- Fact: merged with `merge-local.js` into data/voice/dialog-ch29.js (232 added, no existing clip replaced). `data/merged-takes.json` now holds their fingerprints, so Voice Library Pending upload clears on his phone. Voice index rebuilt (5,090 lines). `unused_voice.py` checks 1, 2, 3 and 5 are 0; check 4 is 52 before and after (same as clips12, not from these clips).
+
 ## bern1b (2026-11-14): Bernadette is now bossy, snippy and resentful: new lines, her own voice, and word-by-word voice directions
 - Tom: "Read claude/bernadette-rewrite.md and build it. Make sure to add nuance, not only to the sentences that you write for her in the voice library, but also like specific words or parts of the sentences to make her sound extra annoyed, bitchy, and resentful."
 - Who she is now: Captain Bernadette, 66, nineteen years of being right and never thanked. She gives orders, never says thank you, and does not use names: Tom is "3468", TNB is "the Other Tom", Nara is "the dog". Tom answers with strained politeness, TNB with dry asides, and the two trade a look.
