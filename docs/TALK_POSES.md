@@ -43,6 +43,8 @@ Tom 06:57: "what about tagging all of the dialog with the correct talking pose?"
 
 ## Install (after Tom approves sheets)
 
+- Facing (facing1): after baking, add one row per new frame to docs/pose-facing.tsv (l, r or f: the screen side the painted face or gesture is turned to), judged by looking at the frames, then `python3 tools/pose-facing-apply.py`. Smoke fails until every frame has a row.
+
 1. `python3 tools/sprite-bake/talk_frames.py <ids>` (no ids = every approved sheet): cuts the 4 figures (emotion_frames.clean_cell), grows the head by the HEAD SIZES factor about the person's measured chin share, writes art/talk/<id>.webp. `CHECK=/tmp/talk.png` writes a contact sheet: look at it.
 2. `nohup python3 tools/sprite-bake/bake_story_poses.py > /tmp/sp.log 2>&1 &` (about 11 minutes): every strip found becomes the set `<id>talk` (frames tk_tell, tk_point, tk_ask, tk_answer) in data/story-poses.js, sized so the Telling figure is the overworld stand height.
 3. Look at each person's talking frames next to their standing frame and a mood frame on the map (reaction_test.py on a scene with plain lines, e.g. `ch2Starter`); if a size is off, give that set its own factor in bake_story_poses.py.

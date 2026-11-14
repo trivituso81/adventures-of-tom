@@ -6,7 +6,7 @@
 // Cast story scenes (S.talk) show it only in chapters in EMO_CHAPTERS. Every other dialogue box (map NPC talk, recruit and shop intro lines, cab lines, townsfolk lines in scenes)
 // looks its line up in NPC_EMOTION_MOODS (data/npc-emotion-moods.js, from docs/npc-emotion-lines.tsv by tools/npc-emotion-apply.py; npcemo7). The NPC is drawn in its pose
 // (data/npc-poses.js). Both clear when the line advances, on a line with no mood, and when the scene ends or is skipped.
-const EMO={starting:false,actor:null,id:null,mood:null,talk:null,listeners:[],pending:[],cueW:null,cueLine:-1};
+const EMO={starting:false,spk:null,actor:null,id:null,mood:null,talk:null,listeners:[],pending:[],cueW:null,cueLine:-1};
 const EMO_PORTRAIT_DEFAULT=()=>{ const box=$('dialog-portrait'); return box&&box.querySelector('img'); };
 const emoPreloaded=new Set();
 function emoOn() { return typeof EMO_CHAPTERS!=='undefined'&&typeof STORY!=='undefined'&&EMO_CHAPTERS.has(STORY.chapter); }
@@ -54,7 +54,7 @@ function emoActorById(id) {
 function emoClear() {
   if(EMO.actor&&EMO.actor.scenePose&&EMO.actor.scenePose.emo) EMO.actor.scenePose=null;
   for(const a of EMO.listeners) if(a.scenePose&&a.scenePose.emo) a.scenePose=null;
-  EMO.listeners=[]; EMO.actor=null; EMO.mood=null; EMO.talk=null; EMO.id=null; EMO.pending=[]; EMO.cueW=null; EMO.cueLine=-1;
+  EMO.listeners=[]; EMO.spk=null; EMO.actor=null; EMO.mood=null; EMO.talk=null; EMO.id=null; EMO.pending=[]; EMO.cueW=null; EMO.cueLine=-1;
 }
 // Reaction timing (reacttime1, Tom 2026-11-13: a listener reacts when the line reaches the words that cause it, not when the line starts).
 // A reaction may carry a third value: the character position in the line where its cue words end (the `at` column of docs/emotion-reactions.tsv,
@@ -137,6 +137,7 @@ function emoApply() {
   const mood=(dialog.emo&&emoMoodOf(dialog.name,text))||emoNpcMoodOf(dialog.name,text);
   const id=String(DIALOG_PORTRAIT_IDS[String(dialog.name||'').trim().toLowerCase()]||'').replace(/^npc_/,'');   // townspeople's keys are npc_<id>; their faces and poses are filed under <id>
   const had=EMO.mood; emoClear();
+  EMO.spk=id?emoActorFor(id,dialog.name,dialog.npc):null;   // the person speaking this line: listeners in a mood pose turn toward them (facing1, poseFacingWant in engine/story.js)
   if(dialog.emo) emoReact(id,text);
   const tk=id&&typeof EMOTION_FACES!=='undefined'&&EMOTION_FACES.includes(id)?talkFrameOf(id,talkTypeOf(String(dialog.name||'').trim(),text,mood)):null;
   if(tk) {   // a plain line (or a borderline mood line) of a person whose talking sheet is baked: talk pose, plain face

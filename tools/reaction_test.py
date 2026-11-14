@@ -108,6 +108,8 @@ with sync_playwright() as pw:
                         fn=os.path.join(OUT,f"{C['name']}-{len(shots):02d}.png"); pg.evaluate("()=>{document.getElementById('dialog').style.opacity='.25'}"); pg.screenshot(path=fn); pg.evaluate("()=>{document.getElementById('dialog').style.opacity=''}"); shots.append(fn); last=k
                     if st['typed']:
                         dw+=1
+                        if dw==1 and os.environ.get('LATE'):   # LATE=1: also a frame once the page is fully typed (listener reactions and their facing have fired; facing1)
+                            pg.wait_for_timeout(400); pg.evaluate("()=>{document.getElementById('dialog').style.opacity='.25'}"); pg.screenshot(path=os.path.join(OUT,f"{C['name']}-{len(shots)-1:02d}-late.png")); pg.evaluate("()=>{document.getElementById('dialog').style.opacity=''}")
                         if dw>=2: dw=0; pg.evaluate("()=>{ if(dialog.choices&&dialog.choices.length) pickChoice(0); else advanceDialog(); }")
                 elif not st['a'] and not st['battle']:
                     break

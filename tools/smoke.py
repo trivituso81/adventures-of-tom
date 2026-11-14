@@ -70,5 +70,8 @@ if bh.returncode: fails.append(bh.stdout.strip())
 # Real heights (heights1): every main character is drawn at their real height next to Tom, from data/heights.json.
 ht=subprocess.run([sys.executable,os.path.join(HERE,'heights_test.py'),'--fast'],capture_output=True,text=True)
 if ht.returncode: fails.append('heights: '+'; '.join(l for l in ht.stdout.split('\n') if l.startswith('FAIL')))
+# Pose facing (facing1): every baked mood or talking frame says which way its painting leans (docs/pose-facing.tsv).
+pf=subprocess.run([sys.executable,os.path.join(HERE,'pose-facing-apply.py'),'--check'],capture_output=True,text=True); print(pf.stdout.strip())
+if pf.returncode: fails.append(pf.stdout.strip())
 print('FAILS:',fails)
 raise SystemExit(1 if fails else 0)

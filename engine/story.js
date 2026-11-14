@@ -346,13 +346,36 @@ const SCENE_OPS={
 // Called by drawSheetActor (engine/town-render.js) with the overworld set and its scale k. Returns {rows,k,pal}, or null to draw the normal overworld frame.
 // Battle frames are about twice the overworld figure's height in rows, so they are drawn at k * (overworld rows / battle idle rows) to match Tom's size.
 // Battle frames face left; the KO frame faces right. A frame facing the wrong way is mirrored (cached on the rows).
+// facing1 (Tom 2026-11-14 08:39, chapter 1 grey grass: "only Grace should be facing right ... everyone else should be mirror image").
+// Which screen side a person in a mood or talking pose should be turned to: 'l', 'r', or null (no clear side: draw as painted).
+// 1. Gathered around an object ({around}, item1): toward the object, unless they stand over its middle.
+// 2. Turned left or right on the map: that way (conversations stand people facing each other, cutstage1).
+// 3. Turned up or down: toward the speaker (a listener), or toward the middle of everyone else in the scene (the speaker).
+// POSE_FACING (data/pose-facing.js, from docs/pose-facing.tsv) says which way each painting leans; front paintings are never mirrored.
+function poseFacingWant(a) {
+  const p=position(a),ax=p.x+.5,side=dx=>dx<0?'l':'r';
+  const st=typeof intro!=='undefined'&&intro.objStage;
+  if(st&&st.walkers&&st.walkers.includes(a)) { const dx=(st.R.x0+st.R.x1)/2-ax; if(Math.abs(dx)>.3) return side(dx); }
+  if(a.facing==='left') return 'l'; if(a.facing==='right') return 'r';
+  const spk=typeof EMO!=='undefined'&&EMO.spk;
+  if(spk&&spk!==a&&!spk.hidden) { const dx=position(spk).x-p.x; if(Math.abs(dx)>=.5) return side(dx); }
+  const others=[player,...followers].filter(o=>o&&o!==a&&!o.hidden&&!o.seat);
+  if(spk&&spk!==a&&!others.includes(spk)) others.push(spk);
+  if(!others.length) return null;
+  const dx=others.reduce((t,o)=>t+position(o).x,0)/others.length-p.x;
+  return Math.abs(dx)>=.5?side(dx):null;
+}
 const SCENE_POSE_RATIO={};
 function scenePoseDraw(a,set,k) {
   const m=a.isPlayer?(typeof playerMember==='function'?playerMember():hero):a.member,P=a.scenePose; if(!P) return null;
   if(P.end&&P.foe&&typeof endPoseDraw==='function') return endPoseDraw(a,set,k,P);   // a painted boss-ending frame on a person (engine/boss-finale.js)
   // A painted story pose (data/story-poses-use.js): already at the overworld row scale, facing the camera as painted, no outfit tint.
   // P.mid names the member whose set it is when the actor has none (a mood pose on an NPC, engine/emotions.js).
-  const mid=P.mid||(m&&m.id),st=mid&&typeof STORY_POSES!=='undefined'&&STORY_POSES[mid]; if(st&&st[P.f]) return {rows:st[P.f],k,pal:st.pals[P.f],story:true};
+  const mid=P.mid||(m&&m.id),st=mid&&typeof STORY_POSES!=='undefined'&&STORY_POSES[mid];
+  if(st&&st[P.f]) { let rows=st[P.f];
+    const lean=P.emo&&typeof POSE_FACING!=='undefined'&&POSE_FACING[mid+'|'+P.f],want=lean&&poseFacingWant(a);   // facing1: a mood or talking painting leaning away from who they look at is mirrored
+    if(want&&want!==lean) rows=rows._mir||(rows._mir=mirrorRows(rows));
+    return {rows,k,pal:st.pals[P.f],story:true}; }
   if(!m) return null;
   const sp=BATTLE_SPRITES[m.id]; if(!sp) return null;
   let rows,native='left',pal=sp.pal,rel=1;
