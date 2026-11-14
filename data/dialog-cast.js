@@ -10,7 +10,7 @@ const DIALOG_CAST={
   files:['data/voice/dialog-ch22.js','data/voice/dialog-ch23.js','data/voice/dialog-ch24.js','data/voice/dialog-ch1.js','data/voice/dialog-ch2.js','data/voice/dialog-ch3.js','data/voice/dialog-ch4.js','data/voice/dialog-ch5.js','data/voice/dialog-ch6.js','data/voice/dialog-ch7.js','data/voice/dialog-ch8.js','data/voice/dialog-ch9.js','data/voice/dialog-ch10.js','data/voice/dialog-ch21.js','data/voice/dialog-ch25.js','data/voice/dialog-ch26.js','data/voice/dialog-ch27.js','data/voice/dialog-ch28.js?v=ch1build1'],
   speakers:{
     Tom:'tom',Grace:'grace',Rose:'rose',Amy:'amy',Justin:'justin',Deedee:'deedee',Boppy:'boppy',TNB:'tnb',
-    Pip:'pipkid',Moss:'mosskid',Dot:'dotkid',Gus:'gus',Bean:'beanw',Bun:'bun',Page:'pagew',Fern:'fern',Kit:'kitw',Oolong:'oolong',
+    Pip:'pipkid',Clara:'pipkid',Moss:'mosskid',Dot:'dotkid',Gus:'gus',Bean:'beanw',Bun:'bun',Page:'pagew',Fern:'fern',Kit:'kitw',Oolong:'oolong',
     Luna:'luna',Penny:'penny',Sal:'sal',Justin:'justin','Aunt Ellie':'ellie',
     Mudling:'mudling','Big Mudling':'mudling','Skeeter Swarm':'skeeter','Pond Grump':'grump','Bog Toad':'toad',
     'Log Lump':'log','The Big One':'bigone',
@@ -82,7 +82,7 @@ const DIALOG_CAST={
     'Jet Lag':'skeeter',
     // Part 2 story people and monsters (Tom, 2026-11-03: cast every speaker that had no voice). No new ElevenLabs voices (the account
     // is full at 30), so each one reuses a voice of the same type, told apart by speakerFx where it matters.
-    'Vance':'michael','Julian Vance':'michael','Long coat':'michael',          // calm, low, dry and tired: a polite man who is very sure
+    'Vance':'michael','Julian Vance':'michael','Long coat':'michael','Man in the long coat':'michael',          // calm, low, dry and tired: a polite man who is very sure
     'Marlowe':'kit',                                                           // chipper, brisk, every line a note
     'Archivist':'page','Whispers':'page','The Archivist’s Twin Lenses':'page', // precise, hushed, dry
     'Curator':'dot','Forever Engine':'narrator',                               // Curator: crisp and exact. Engine boxes narrate
@@ -136,7 +136,7 @@ const DIALOG_CAST={
   },
   // Effects per speaker, applied when clips are merged (claude/voice-merge-dialog.js FX). They win over the voice's own fx, so a
   // shared voice sounds like a different person or creature.
-  speakerFx:{'Vance':'older','Julian Vance':'older','Long coat':'older','FINAL CALL':'pa2','HUSH-9':'pa','Ray':'lower',
+  speakerFx:{'Vance':'older','Julian Vance':'older','Long coat':'older','Man in the long coat':'older','FINAL CALL':'pa2','HUSH-9':'pa','Ray':'lower',
     'Kiki':'higher',
     'Toni':'older',
     'Cue Card Crab':'crab',

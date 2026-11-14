@@ -7523,3 +7523,9 @@ Sheet C (tools/sprite-bake/src/grace-poses-c.png) baked into the wheel atlas: sq
 - Tags: `crop1` on the eight PORTRAITS entries in engine/menu.js, `EMO_V` in engine/emotions.js and its script tag; bump_tags.py does not know EMO_V, so move it by hand next time.
 - Tests: `tools/portraits_test.py` FAILS: []; smoke FAILS: []; tag_check ok; contact sheet of all moods looked at.
 - Not done: removing the FACE/NARA numbers (Justin, Olivia, Ellie still use them).
+
+## ch25assets1 (2026-11-13): Art and Voice libraries for the rewritten chapters 2 to 5
+Tom: "build in the admin capability to be including the new frames and art and voices that we need for the newly rewritten chapters 2 through 5."
+- Art Library: 55 new draft entries in groups "Chapter 2" to "Chapter 5" (`tools/art-library/ch02-05-prompts.js`, added to `make-prompts.js`). Props, orange blocks, coins, Nara and Tom/TNB story frames, boss coin sheets, grey-circle area versions, NPC poses. "Normal" variants (hill, Whisker Perch, megaphone, pen) are for the return after chapter 6. Clara's art is NOT written: needs her real height first.
+- Voice Library: `tools/voice-library/scripts/ch02..ch05-story-directions.json` (424 lines to record, direction brackets kept), 425 lines appended to `harvest.json`, `data/voice-index.json` rebuilt, Clara and Man in the long coat cast in `data/dialog-cast.js` (tag `ch25assets1`).
+- Nothing in the game or chapters was changed.
