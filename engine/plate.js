@@ -383,15 +383,15 @@ function drawGriffithSpot() {
 // the bulb reuses chapter 1's hollow/ch1_bulb.
 const SUNDIAL_GREY={cx:720,cy:620,r:330};
 const SUNDIAL_SPOT=[['hollow/ch1_bulb',736,750,20,'ch3-bulb'],['sundial/ch3_block',672,462,84,null]];
-let sundialGreyImg=null;
+const greyPlates=new WeakMap();   // plate picture -> its grey copy (Sundial Hollow, chapter 3; Soundstage 7, chapter 4)
 function sundialGreyCanvas(img) {
-  if(sundialGreyImg&&sundialGreyImg.src===img) return sundialGreyImg.c;
+  const have=greyPlates.get(img); if(have) return have;
   const w=img.naturalWidth,h=img.naturalHeight; if(!w) return null;
   const c=document.createElement('canvas'); c.width=w; c.height=h; const g=c.getContext('2d'); g.drawImage(img,0,0);
   try { const d=g.getImageData(0,0,w,h),p=d.data;
     for(let i=0;i<p.length;i+=4) { const l=.3*p[i]+.59*p[i+1]+.11*p[i+2],v=Math.min(255,l*.9+14); p[i]=v; p[i+1]=v; p[i+2]=v+2; }
     g.putImageData(d,0,0); } catch(e) { return null; }
-  sundialGreyImg={src:img,c}; return c;
+  greyPlates.set(img,c); return c;
 }
 function drawSundialSpot(map) {
   if(typeof flag!=='function'||typeof STORY==='undefined'||STORY.chapter<3||flag('ch6-clear')) return;
@@ -406,11 +406,41 @@ function drawSundialSpot(map) {
     PROPART.draw(id,x*s,y*s,{w:w*s});
   }
 }
+// Soundstage 7, chapter 4 scene 8 (ch4Hat): once the lights are on, a circle of the floor has no colour, TNB's wardrobe table stands in it, and the
+// hero cowboy hat hangs in a beach-ball-sized orange block above the table. When the table is pulled away the block stays where it was in the air
+// (a faint shadow shows on the floor). All of it stays until the family comes back after chapter 6 (ch6-clear). The grey circle is a STAND-IN made in
+// code until the Library picture ch4-stage7-grey is approved; the table is drawn in code too. Centres in plate art px (64 per tile).
+// Block from art/props/stage7/ch4_block.webp (tools/art-library/bake_story_ch4.py).
+const STAGE7_GREY={cx:590,cy:625,r:178}, STAGE7_BLOCK={x:590,y:528,w:118}, STAGE7_TABLE={x:590,y:624,w:156,slide:-150};
+let ch4TableTo=0, ch4TableAt=0, ch4TableT=0;
+function ch4Table(to) { ch4TableTo=to; }   // scene calls: ch4Table(1) slides the table out from under the block, ch4Table(0) slides it back
+function drawStage7Spot(map) {
+  if(typeof flag!=='function'||typeof STORY==='undefined'||STORY.chapter<4||!flag('ch4-rig')||flag('ch6-clear')) return;
+  const s=T/64,pl=typeof plateFor==='function'?plateFor(map):null;
+  const gc=pl&&pl.img&&pl.img.naturalWidth?sundialGreyCanvas(pl.img):null;
+  if(gc) { const k=map.w*T/gc.width,G=STAGE7_GREY;
+    ctx.save(); ctx.beginPath(); ctx.arc(G.cx*s,G.cy*s,G.r*s,0,Math.PI*2); ctx.clip();
+    ctx.imageSmoothingEnabled=true; ctx.drawImage(gc,0,0,gc.width*k,gc.height*k); ctx.imageSmoothingEnabled=false; ctx.restore(); }
+  const now=performance.now(), dt=Math.min(.1,(now-(ch4TableT||now))/1000); ch4TableT=now;
+  ch4TableAt+=(ch4TableTo-ch4TableAt)*Math.min(1,dt*4.5);
+  if(Math.abs(ch4TableTo-ch4TableAt)<.004) ch4TableAt=ch4TableTo;
+  const B=STAGE7_BLOCK,Tb=STAGE7_TABLE,tx=Tb.x+Tb.slide*ch4TableAt;
+  // The table: a plain grey wardrobe table, top, front edge and four legs.
+  const top=Tb.y-34,hw=Tb.w/2;
+  ellipse(tx*s,(Tb.y+44)*s,hw*.95*s,9*s,'#20202a30');
+  ctx.fillStyle='#474953'; for(const lx of [-hw+8,hw-14,-hw+22,hw-28]) ctx.fillRect((tx+lx)*s,(top+14)*s,6*s,(Tb.y+40-top-14)*s);
+  ctx.fillStyle='#c4c6d0'; ctx.fillRect((tx-hw)*s,top*s,Tb.w*s,10*s);
+  ctx.fillStyle='#8a8c98'; ctx.fillRect((tx-hw)*s,(top+10)*s,Tb.w*s,9*s);
+  ctx.strokeStyle='#33353e'; ctx.lineWidth=2*s; ctx.strokeRect((tx-hw)*s,top*s,Tb.w*s,19*s);
+  if(ch4TableAt>.05) ellipse(B.x*s,(Tb.y+34)*s,40*s,7*s,'#20202a38');   // nothing is holding the block up
+  PROPART.draw('stage7/ch4_block',B.x*s,B.y*s,{w:B.w*s});
+}
 function plateLive(map,time) {
   if(map&&PLATE_SIGNS[map.id]) drawPlateSigns(PLATE_SIGNS[map.id]);
   if(map&&map.id==='hollow') { drawHollowCrumbs(time); drawHollowSpot(); }
   if(map&&map.id==='griffith') drawGriffithSpot();
   if(map&&map.id==='sundial') drawSundialSpot(map);
+  if(map&&map.id==='stage7') drawStage7Spot(map);
   // Tom's kitchen island: Bready Mercury, except while the squirrels have him (chapter 6, until the Oak boss is beaten).
   if(map&&map.id==='tomhouse') { plateTime=time; drawHomeJar(time); }
   // The Crown of the Oak: Bready Mercury on the chest at the heart of the hoard (art px: centre x 672, base y 258; the jar stands about 62 px tall).

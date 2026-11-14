@@ -475,7 +475,7 @@ LA_AREAS.push(
     border:{kind:'studiowall',open:[[9,16],[10,16],[15,3],[16,3]]},
     exits:[[9,16,'backlot',12,3,'down'],[10,16,'backlot',13,3,'down'],[15,3,'stageset',10,12,'up'],[16,3,'stageset',11,12,'up']],
     // The catwalk is up (and the work lights are off) until the rig is fixed: the stairs to the set are shut.
-    gates:[{at:[[15,3],[16,3]],look:'barrier',dy:.9,cond:{chapter:4,notFlag:'ch4-rig'},name:'The catwalk',
+    gates:[{at:[[15,3],[16,3]],look:'barrier',dy:.9,cond:{chapter:4,notFlag:'ch4-hat'},name:'The catwalk',
       lines:['The catwalk up to the set is raised. The stairs end in a gap and a very dark drop.','TNB says the light rig runs the catwalk motor. Fix the rig first.']}],
     objects:[
       // Only what you can reach and touch is listed; the rest of the painted set dressing is scenery.
@@ -487,11 +487,11 @@ LA_AREAS.push(
       ['fogmachine',21,6,1,2,'Fog machine','A fog machine. It\'s on. Nobody turned it on. It just keeps going: PFFFFT.'],
       ['fogmachine',16,7,2,1,'Fog machine','Another fog machine. Also on. Also nobody turned it on.'],
       ['tapemark',8,9,2,1,'Spike tape','Glow tape on the floor: RACK 2. There\'s nothing on it. TNB stares at it like it owes him money.'],
-      ['lightrig',11,8,2,1,'Light rig','The main light rig, dead. Three colored gels across the front, left to right: BLUE, AMBER, RED. Three cables run off to junction boxes.',
-        {when:[{flag:'ch4-rig',text:'The light rig, humming. Blue, amber, red. TNB taped the cable down with gaffer tape. Twice.'}]}],
+      ['lightrig',11,8,2,1,'Light rig','The main light rig, dead. Three colored gels across the front, left to right: BLUE, ORANGE, RED. Three cables run off to junction boxes.',
+        {when:[{flag:'ch4-rig',text:'The light rig, humming. Blue, orange, red. TNB taped the cable down with gaffer tape. Twice.'}]}],
       ['jbox',6,11,1,1,'Red junction box','A junction box with a RED stripe. One big switch.',{jbox:'red'}],
       ['jbox',21,15,1,1,'Blue junction box','A junction box with a BLUE stripe. One big switch.',{jbox:'blue'}],
-      ['jbox',13,12,1,1,'Amber junction box','A junction box with an AMBER stripe. One big switch.',{jbox:'amber'}],
+      ['jbox',13,12,1,1,'Orange junction box','A junction box with an ORANGE stripe. One big switch.',{jbox:'amber'}],
       ['sign',12,12,1,1,'Stage sign','SOUNDSTAGE 7. Red light means rolling. Somebody has added: OR HAUNTED.']],
     monsters:STAGE7_MONSTER_SPOTS},
   {id:'stageset',name:'The Stage Set',w:20,h:14,region:'la',ground:'stage',

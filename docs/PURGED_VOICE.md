@@ -2,6 +2,9 @@
 
 Tom asked (again) for voice lines and clips that the full game never plays to be removed, because every unused line shows up in the Voice Library and the bake lists and costs ElevenLabs credits. This is the record. The audio itself is not lost: it is in git history at commit `6624b03` (the parent of the purge commit), so `git show 6624b03:data/voice/<id>.js` brings any of it back.
 
+## 2026-11-14 `ch4build1`: 4 chapter 4 clips whose lines left the story
+- `narrator|The rig hums. The work lights bang on, one row at a time. Up the middle, the catwalk groans down into place.` and `narrator|The megaphone hops off the rack and rolls away under the set, muttering about lighting.` (narration boxes, now actions); `bigone|A man in a long coat paid me to do it. One gold coin. He said a day with no takes is a day that never has to end.` (the Director's Cut, long-coat man removed); `narrator|A text from Amy. "Parent-teacher conference night is Thursday. ..."` (Tom now reads the text aloud). Removed with `purge_unused.js` from data/voice/dialog-ch28.js, about 205 KB.
+
 ## 2026-11-12 `amberclear1`: 8 chapter 12 amber clips with superseded wording
 
 Tom asked for much more explanation of amber in chapter 12. Eight lines were reworded again after Phase 1 and their baked clips (dialog-ch28.js) were removed: tnb "Amber is just warmth that got stuck...", amy "Warmth. We're good at warmth...", tom "You were amber for a little while.", amy "Heat is just movement...", tnb "He's trapped in amber...", tom "He's draining the color... He's frozen solid.", tom "Okay. The whole family is frozen in amber. Marlowe's grey...", tom "She's frozen in amber, right in the middle of a sentence." Git history keeps the audio.

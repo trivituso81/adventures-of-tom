@@ -88,7 +88,7 @@ const DEPARTURES={
      rose:['My tooth is loose. Look. LOOK. Tata, you\'re not looking.'],
      tom:['I\'ll be at the meet. Front row. I\'ll make a sign.','Rose, that\'s a very good tooth. Guard it with your life.'],
      stay:{boppy:{stay:['Los Angeles again? My back just got home from the marsh.','Go. If you see a pepper out there, bring it back. I\'ll judge it.'],toast:'Boppy heads home. The recliner missed him.'}},
-     flight:['Lie flat, warm nuts, and absolutely no fish.','...Boppy would hate it up here.']},
+     flight:['Lie flat, warm nuts, and absolutely no fish.','Rose, please don\'t lose that tooth until I\'m back. I want to see the hole.','...Boppy would hate it up here.']},
   5:{sol:'Airport. Your young man fixed my visor. He made me promise to drive careful. So I\'m going the speed limit. Everybody hates it.',
      tnb:['That\'s a wrap, babe. I have a five a.m. call and forty capes to steam.','Go survive conference night. Bring snacks. I packed you snacks. Check your bag.'],
      tnbToast:'TNB heads back to the lot. Forty capes won\'t steam themselves.',

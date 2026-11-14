@@ -53,6 +53,7 @@ const items={
   dragonflycoin:{name:'Dragonfly Coin',icon:'\u{1FA99}',slot:null,keepsake:true,desc:'Gold, stamped with a dragonfly. The Big One gave it to Rose, and Rose is keeping it in her pocket.'},
   fishcoin:{name:'Fish Coin',icon:'\u{1FA99}',slot:null,keepsake:true,desc:'Gold, stamped with a jumping fish. Old Iron-Gill shook it out of his mustache for Boppy. Boppy keeps it in his hatband.'},
   lemoncoin:{name:'Lemon Coin',icon:'\u{1FA99}',slot:null,keepsake:true,desc:'Gold, stamped with a lemon. The Big Shake sneezed it out of a pipe, and Nara fetched it. Tom is keeping it in his pocket.'},
+  hatcoin:{name:'Hat Coin',icon:'\u{1FA99}',slot:null,keepsake:true,desc:'Gold, stamped with a cowboy hat. The Director\u2019s Cut gave it to TNB for best costumes. It is the only thing he has ever won.'},
   oldcoin:{name:'Old Gold Coin',icon:'\u{1FA99}',slot:null,keepsake:true,desc:'Found wedged in the sundial. Heavy, worn smooth, and stamped with a little clock face. Somebody wants these.'},
   // Chapter 4 drops (the studio lot, data/backlot-monsters.js) and rewards.
   callsheet:{sell:2,name:'Call Sheet',icon:'\u{1F4C4}',slot:null,desc:'Call time 4 AM. Lunch at 1 PM. Wrap: TBD. It\'s always TBD.'},

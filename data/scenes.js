@@ -1398,7 +1398,8 @@ const CH4_AFTER=(lost,lines)=>[
     {toast:'Goal: Soundstage 7, the big door at the top of the Backlot.',time:4.5}],else:[]}
 ];
 
-// 1. Downtown, right off the plane: TNB is waiting at the cab stand on his lunch break. The heart-kiss. TNB joins.
+// 1. Downtown, right off the plane: TNB is waiting at the cab stand on his lunch break. The kiss. Tom tells him about the fish in the air and
+// Deedee's rule, and TNB hangs a laminated VISITOR lanyard on him (story-ch04.md scene 1). TNB joins.
 SCENES.ch4Arrive=[
   {flag:'ch4-goal'},
   {join:'tnb',quiet:true}, {hide:'tnb'},
@@ -1408,46 +1409,69 @@ SCENES.ch4Arrive=[
   {face:'tom',dir:'left'},
   ch4Kiss(),
   {talk:'TNB',lines:['Look who flew in for my big day. I\'m on a forty-minute lunch. I spent thirty of it on the Metro.']},
-  {talk:'Tom',lines:['You took the train to meet the plane.']},
-  {talk:'TNB',lines:['I took the train to meet the man. The plane was a bonus.']},
+  {talk:'Tom',lines:['Then we have ten minutes! I\'ll take all ten. I have so much to tell you.']},
   {trace:'tnb-hello4'}, {hearts:'tom'},
+  {talk:'Tom',lines:['A fish on Long Island jumped out of the water and froze in the air, inside one of those orange blocks. It\'s still hanging up there!']},
+  {talk:'TNB',lines:['It\'s just hanging in the air? Babe! That\'s a flying fish!','And he\'s got more air time than you do.']},
+  {talk:'Tom',lines:['Nobody has more air time than me. He\'s seven feet up. I was at thirty-six thousand.']},
+  {talk:'Tom',lines:['And my mother made a rule. Nobody in the family goes anywhere alone, and that goes for Los Angeles too.']},
+  {talk:'TNB',lines:['Nobody in the family. Does that count me?']},
+  {talk:'Tom',lines:['You were the first one I thought of.']},
+  {talk:'TNB',lines:['Then it\'s a good thing I got you this.']},
+  {call:()=>sfx.pickup()}, {ch4Reveal:'visitor'},
+  {talk:'Tom',lines:['A lanyard! With my name on it! It\'s LAMINATED!']},
+  {talk:'TNB',lines:['Of course it\'s laminated. I wanted this to last.']},
+  {talk:'Tom',lines:['Do I have to give it back?']},
+  {talk:'TNB',lines:['Never. Where I go, you go. That\'s Deedee\'s rule. So stick close, babe, and don\'t leave me hanging like that fish.']},
   {talk:'TNB',lines:['Big shoot today. BACKLOT BEDLAM. Car chases, a saloon, a fake New York. I have forty costumes on one rack, and every single one is steamed.',
     'Also, Olivia dropped Nara at your place again. Family trip to the desert. She\'s been howling at your front door since nine.']},
   {talk:'Tom',lines:['Then we get Nara. Then I watch you be very important. I\'m not joking.']},
-  {talk:'TNB',lines:['Very, very important. I have a lanyard.']},
+  {talk:'TNB',lines:['Very, very important. I have a lanyard. And now so do you.']},
   {party:{lock:['tom','tnb']}},
   {toast:'Goal: pick up Nara at Tom’s house (3468) in Jefferson Park, south of Downtown.',time:4.5}
 ];
-// 2. Jefferson Park: Nara on the porch. She comes running and joins.
+// 2. Jefferson Park: Nara sees Tom from the porch two blocks away, howls, runs, three laps, leans. TNB clips the only spare badge on her collar.
 SCENES.ch4Nara=[
   {flag:'ch4-nara'},
   {call:()=>{ sfx.bark&&sfx.bark(); sfx.bark&&sfx.bark(.2); }},
-  {talk:'Nara',lines:['A howl from 2nd Ave. Nara has spotted Tom from the porch, two whole blocks away.']},
-  {walk:'Nara',to:routeBeside('Nara'),speed:.1},
-  {hearts:'tom'},
-  {talk:'Nara',lines:['She does three laps around Tom, slams into his shins, and leans on him with all forty pounds.']},
+  {walk:'Nara',to:routeBeside('Nara'),speed:.1,onStep:i=>{ if(i%4===0) sfx.bark&&sfx.bark(); }},
+  {hearts:'tom'}, {call:()=>sfx.thud&&sfx.thud()},
   {talk:'Tom',lines:['Hi. Hi. Yes. I know. I was gone FOREVER. It was six days.']},
   {join:'nara'},
   {talk:'TNB',lines:['She\'s coming to set. I already asked. Nobody said yes, but nobody said no fast enough.']},
+  {talk:'Tom',lines:['She has to come. Nobody goes anywhere alone. Does she get a lanyard?']},
+  {talk:'TNB',lines:['I only had one spare badge.']},
+  {call:()=>sfx.pickup()},
+  {talk:'Tom',lines:['It says STUNT DOUBLE. Whose stunt double is she?']},
+  {talk:'TNB',lines:['The horse\'s.']},
+  {hearts:'nara'},
+  {talk:'Tom',lines:['Nara! You\'re in the movies!']},
   {toast:'Goal: Sunset Gold Studios, the gate at the east end of Downtown.',time:4.5}
 ];
-// 3. Studio Gate: the rack is gone and the shoot is about to collapse.
+// 3. Studio Gate: the rack is gone after a huge flash, and the shoot is about to collapse. Tom hears "flash" and his stomach drops.
 SCENES.ch4Gate=[
   {flag:'ch4-gate'},
   {talk:'Ray',lines:['Sunset Gold Studios. Closed set. Name?']},
   {talk:'TNB',lines:['Ray, it\'s me. Wardrobe. I left eighty minutes ago. You waved.']},
+  {talk:'Tom',lines:['Hello, Ray. I\'m Tom. I\'m a visitor. It says so right here.']},
   {talk:'Ray',lines:['I wave at everybody. That\'s the job. Go on in.']},
+  {talk:'Tom',lines:['He didn\'t even look at it.']},
+  {talk:'TNB',lines:['He never looks. But you held it up beautifully.']},
   {walk:'Kiki',to:routeBeside('Kiki'),speed:.14},
   {talk:'Kiki',lines:['TNB! TNB! The rack! Rack two! It\'s GONE.']},
   {talk:'TNB',lines:['Gone? It\'s a rack. It has wheels. It doesn\'t have ambitions.']},
-  {talk:'Kiki',lines:['It was right there in Stage 7. Then the fog machine turned itself on, and the lights went out, and things started CLAPPING.']},
+  {talk:'Kiki',lines:['It was right there in Stage 7. Then there was a HUGE flash, and the fog machine turned itself on, and the lights went out, and things started CLAPPING.']},
+  {talk:'Tom',lines:['A flash! What kind of flash?']},
+  {talk:'Kiki',lines:['I thought it was lightning for the storm scene. We don\'t HAVE a storm scene!']},
   {walk:'Dana',to:routeBeside('Dana'),speed:.2},
   {talk:'Dana',lines:['I\'m Dana Park, the director, and this is my first feature. Without the costumes we can\'t shoot, and without a shoot there\'s no movie.',
     'And the Backlot is full of little grumpy things. One of them ate a cue card. One of them is clapping at the horse.']},
-  {talk:'Tom',lines:['Those sound like Friction Sprites. Grumpy little monsters, loose on a closed set.']},
+  {talk:'Tom',lines:['I\'ve seen grumpy things like that! On my street, and at my parents\' pond. They always show up right after a flash.']},
+  {talk:'Dana',lines:['You\'ve seen them before? Wonderful. You\'re hired.']},
+  {talk:'Tom',lines:['I\'m hired! I\'ve been a visitor for one hour!']},
   {talk:'TNB',lines:['Babe. Forty costumes. I steamed every single one. By hand. While humming.']},
   {talk:'Tom',lines:['Then we go get them back. Nara, stay close. This is a professional environment.']},
-  {talk:'Nara',lines:['Nara is already sniffing the craft services table.']},
+  {walk:'nara',to:()=>{ const p=findPath(currentMap,sceneActor('nara'),{x:15,y:12}); return p.length?p.map(q=>[q.x,q.y]):[]; },speed:.12},   // Nara is already at the snack table with her nose on the edge of it
   {toast:'Goal: the Backlot, north past the trailers. Find TNB’s rack.',time:4.5},
   {toast:'Tip: Toni at craft services (right) might have something picky Nara will actually eat.',time:4.5}
 ];
@@ -1455,51 +1479,57 @@ SCENES.ch4Gate=[
 SCENES.ch4Snack=[
   {flag:'ch4-snack'},
   {talk:'Toni',lines:['Plain roast chicken. No salt, no skin, no sauce. I keep it for the grips. They\'re also picky.']},
-  {call:()=>{ sfx.pickup(); }},
-  {talk:'Nara',lines:['Nara takes it very gently. Then she inhales it. Then she sits again, in case there\'s more.']},
+  {call:()=>{ sfx.pickup(); }}, {wait:.5},   // Nara takes it very gently, then swallows it whole, then sits again in case there is more
+  {call:()=>{ sfx.splat&&sfx.splat(); }}, {face:'nara',dir:'down'}, {wait:.4},
   {hearts:'nara'}, {trace:'nara-snack'}, {call:()=>sfx.levelChime()},
   {talk:'TNB',lines:['She\'s never eaten anything that fast. Not even my shoe.']},
   {talk:'Toni',lines:['Here. For the road. Don\'t tell the grips.']},
   {give:'jerky'}, {give:'jerky'},
   {toast:'Toni slips you two Chicken Jerky. Nara watches the bag the whole time.',time:3.5}
 ];
-// 5. The Backlot: Nara gets loose. Fetch leads her to the first clue, and she meets the hydrant.
+// 5. The Backlot: Nara bolts after something shiny, meets the fire hydrant, and brings back a costume tag from rack two.
 SCENES.ch4Fetch=[
   {flag:'ch4-fetch',value:'pending'},
   {face:'tom',dir:'up'},
   {talk:'TNB',lines:['The Backlot. Main Street up on the left, the Western street on the right, New York down on the left. All fake. All very expensive.']},
-  {call:()=>{ sfx.bark&&sfx.bark(); }},
-  {talk:'Nara',lines:['Nara’s ears go straight up. Something shiny is skittering across New York.']},
+  {call:()=>{ sfx.bark&&sfx.bark(); }}, {face:'nara',dir:'up'}, {wait:.4},   // her ears go straight up: something shiny is skittering across New York
   {talk:'Tom',lines:['Nara. NARA. Don\'t...']},
   {walk:'nara',to:routeTo('nara',14,6),speed:.1,onStep:i=>{ if(i%3===0) sfx.bark&&sfx.bark(); }},
   {talk:'TNB',lines:['That\'s a closed set! She\'s not on the call sheet!']},
+  {talk:'Tom',lines:['She\'s the stunt double! She has a badge!']},
   {face:'nara',dir:'down'},
   {wait:.5},
   {call:()=>{ const n=sceneActor('nara'); if(n) n.carry='tag'; sfx.pickup(); }},
-  {talk:'Nara',lines:['Nara sniffs the fire hydrant. She gets VERY excited about the fire hydrant.']},
+  {hearts:'nara'}, {wait:.4},   // she gets VERY excited about the fire hydrant
   {call:()=>{ const n=sceneActor('nara'); if(n&&typeof naraPuddle==='function') naraPuddle(currentMap,n.x,n.y); sfx.splat&&sfx.splat(); }},
   {talk:'TNB',lines:['She peed on the hydrant. That hydrant is fiberglass. That hydrant is a PROP.']},
   {talk:'Tom',lines:['She doesn\'t know that. Let her have this.']},
   {walk:'nara',to:routeBeside('nara'),speed:.12},
   {face:'tom',dir:'left'},
-  {talk:'Nara',lines:['She drops something at Tom’s feet. Very proud. Very slobbery.']},
-  {call:()=>{ const n=sceneActor('nara'); if(n) n.carry=null; sfx.pickup(); }},
+  {call:()=>{ const n=sceneActor('nara'); if(n) n.carry=null; sfx.pickup(); sfx.splat&&sfx.splat(); }}, {hearts:'nara'}, {wait:.4},   // she drops it at Tom's feet, very proud, very slobbery
   {talk:'TNB',lines:['That\'s a costume tag. That\'s MY tag. WARDROBE, RACK 2, HAND WASH ONLY. I underlined it twice.',
     'And it smells like grape fog juice. Only Stage 7 has a fog machine, so my rack must be in Stage 7.']},
+  {talk:'Tom',lines:['You can tell it\'s grape from one sniff?']},
+  {talk:'TNB',lines:['Babe. I\'d know grape anywhere. It\'s my favorite color and my favorite flavor.']},
   {talk:'Tom',lines:['Good girl. Professional environment, very good girl.']},
   {trace:'nara-fetch'},
   {flag:'ch4-fetch'},
-  {talk:'TNB',lines:['Stage 7 is locked from the inside, though. And every set out here has a Sprite on it wrecking the shoot. The crew can\'t work like this.']},
-  {talk:'Tom',lines:['Then we clear the Sprites off the sets, one at a time: Main Street, the Western street and New York. After that we deal with Stage 7.']},
+  {talk:'TNB',lines:['Stage 7 is locked from the inside, though. And every set out here has one of those grumpy things on it, wrecking the shoot. The crew can\'t work like this.']},
+  {talk:'Tom',lines:['Then we get them off the sets, one at a time: Main Street, the Western street and New York. After that we deal with Stage 7.']},
   {toast:'Goal: clear the three sets: the Western street (top left), New York (top right), and Main Street (the jungle set, right).',time:5}
 ];
-// 6. The three sets. A troublemaker on each one.
+// 6. The three sets. Each troublemaker was ordinary movie gear this morning and is now alive and far too bright; each is seen before anyone reacts.
 SCENES.ch4Crab=[
   {flag:'ch4-main',value:'pending'},
   {walk:'Cue Card Crab',to:routeBeside('Cue Card Crab'),speed:.3},
+  {toast:'The crab holds up a cue card. It says: GO AWAY.',time:2.8},
+  {talk:'Tom',lines:['That crab is made of cue cards! And it\'s holding one up for us to read!']},
   {talk:'Cue Card Crab',lines:['Pinch. This is MY set. I hold up the lines. Every line. I hold up this one: GO AWAY.']},
   {talk:'TNB',lines:['Those are the neatest cue cards I\'ve ever seen. Is that calligraphy?']},
   {talk:'Cue Card Crab',lines:['...Don\'t try to be nice to me. Nobody is nice to me. I\'ll PINCH.']},
+  {talk:'Tom',lines:['Excuse me, Mr. Crab. Do you have a card that says PLEASE COME IN?']},
+  {toast:'The crab holds up a new card. It says: NO.',time:2.8},
+  {talk:'TNB',lines:['Babe, I think we\'re on the wrong side of the cards.']},
   {battle:'cuecrab',tut:'ch4crab'},
   ...CH4_AFTER(()=>flag('battle:cuecrab')!=='win',[
     {flag:'ch4-main'},
@@ -1510,12 +1540,14 @@ SCENES.ch4Clapper=[
   {call:()=>{ sfx.bonk&&sfx.bonk(); }},
   {walk:'Clapper Snapper',to:routeBeside('Clapper Snapper'),speed:.18},
   {talk:'Clapper Snapper',lines:['SNAP! Scene one, take one! SNAP! I go first! Nothing happens until I clap! SNAP!']},
-  {talk:'Tom',lines:['It\'s very fast. And very loud.']},
-  {talk:'TNB',lines:['That\'s every clapper I\'ve ever met.']},
+  {talk:'Tom',lines:['He goes first? All right. Rules are rules. Where\'s my mark? I\'d like to stand on my mark.']},
+  {talk:'TNB',lines:['Babe, you\'re not in the movie.']},
+  {talk:'Tom',lines:['I have a lanyard!']},
   {battle:'clapper',tut:'ch4clapper'},
   ...CH4_AFTER(()=>flag('battle:clapper')!=='win',[
     {flag:'ch4-west'},
-    {talk:'Tom',lines:['The Western street is clear. The horse can come out of its trailer now.']}])
+    {talk:'Tom',lines:['The Western street is clear. The horse can come out of its trailer now.']},
+    {talk:'TNB',lines:['Stand down, Nara. The horse is doing his own stunts today.']}])
 ];
 SCENES.ch4Moth=[
   {flag:'ch4-ny',value:'pending'},
@@ -1523,7 +1555,8 @@ SCENES.ch4Moth=[
   {walk:'Boom Mic Moth',to:routeBeside('Boom Mic Moth'),speed:.25},
   {talk:'Boom Mic Moth',lines:['Bzzz. I hear everything on this set. Everything. Your knees click, Tom.']},
   {talk:'Tom',lines:['That was UNCALLED for!'],voice:[['tom','hurt',0,'That was UNCALLED for!']]},
-  {talk:'TNB',lines:['Watch the screech, babe. It shuts you right up. No skills.']},
+  {talk:'TNB',lines:['I like the click. That\'s how I know you\'re home.']},
+  {talk:'TNB',lines:['Cover your ears, babe. When a boom mic screeches, nobody can get a word out.']},
   {battle:'boommoth',tut:'ch4moth'},
   ...CH4_AFTER(()=>flag('battle:boommoth')!=='win',[
     {flag:'ch4-ny'},
@@ -1534,24 +1567,61 @@ SCENES.ch4Stage=[
   {flag:'ch4-stage'},
   {talk:'TNB',lines:['Somebody killed the work lights. And look, the catwalk is up. You only raise a catwalk when you\'re hiding something up there.']},
   {talk:'Tom',lines:['The stage set is at the top. The rack is up there. I can smell the steamer.']},
+  {talk:'Tom',lines:['It\'s very dark in here. Could you hold my lanyard?']},
+  {talk:'TNB',lines:['I\'ve got your lanyard, babe.']},
   {talk:'TNB',lines:['The main light rig runs the catwalk motor. If I get power back to it, the catwalk comes down.',
     'Three junction boxes. They have to come up in the right order or the dimmer pops. The rig will tell us the order.']},
   {toast:'Goal: get the light rig working. Look at the rig (middle of the floor), then flip the three junction boxes in the right order.',time:5.5}
 ];
-// 8. The rig works. TNB tapes the cable. The catwalk comes down.
+// 8. The rig works. TNB tapes the cable. The work lights bang on and the catwalk comes down. The hat scene (ch4Hat) follows on the floor.
 SCENES.ch4Rig=[
   {flag:'ch4-rig'},
   {call:()=>{ sfx.levelChime(); }},
-  {talk:'TNB',lines:['Blue, amber, red. And one strip of gaffer tape. Okay, two. Okay, four.']},
+  {talk:'TNB',lines:['Blue, orange, red. And one strip of gaffer tape. Okay, two. Okay, four.']},
   {call:()=>{ sfx.thud(); sfx.whoosh(); }},
-  {call:()=>{ ch4LowerCatwalk(); storyWorld(); }},
-  {talk:'Soundstage 7',lines:['The rig hums. The work lights bang on, one row at a time. Up the middle, the catwalk groans down into place.']},
-  {talk:'Tom',lines:['You fixed a whole soundstage with tape.']},
+  {call:()=>{ ch4LowerCatwalk(); storyWorld(); }}, {wait:1.2},
+  {talk:'Tom',lines:['You fixed a whole soundstage with tape! Can you fix my knees?']},
   {talk:'TNB',lines:['I fix everything with tape. You know this. Your kitchen drawer knows this.']},
-  {trace:'tnb-rig'}, {hearts:'tnb'},
+  {trace:'tnb-rig'}, {hearts:'tnb'}
+];
+// 8b. The floor of Soundstage 7 with the lights on (story-ch04.md scene 8): a circle with no colour, TNB's table in it, and the hero cowboy hat
+// frozen on its stand in a beach-ball-sized orange block. Tom knows the signs now. TNB moves the table; the block stays in the air.
+// Drawn by drawStage7Spot (engine/plate.js): the grey circle is a stand-in made in code until ch4-stage7-grey is approved.
+SCENES.ch4Hat=[
+  {flag:'ch4-hat'},
+  {call:()=>{ const m=currentMap.npcs.find(n=>n.monster==='extra'); if(m) { m.x=15; m.y=11; m.move=null; m.path=[]; } }},   // the trench-coat extra wanders off to the right so the floor is clear
+  {place:'tom',at:[9,11],dir:'up'}, {place:'tnb',at:[8,11],dir:'up'}, {place:'nara',at:[10,11],dir:'up'},   // in a row below the table, all facing the block
+  {cam:[9.2,9.6]}, {zoom:1.4,time:.7},
+  {talk:'TNB',lines:['Hold on. One of the lights must still be out. That whole patch of floor is grey.']},
+  {talk:'Tom',lines:['It\'s not the lights. Look up. Every one of them is on.']},
+  {talk:'TNB',lines:['Then why is my table grey? And the floor? And my tape marks?']},
+  {talk:'TNB',lines:['Babe. That\'s the hero hat. The cowboy wears it in every scene of the movie. And it\'s inside a big orange block!']},
+  {talk:'Tom',lines:['It\'s just like the dragonfly, the lemon and the fish. And every one is bigger than the last.']},
+  {talk:'TNB',lines:['Well, hats off to whoever did this. No, really. I can\'t get the hat off.']},
+  {talk:'Tom',lines:['There\'s going to be a little round hole in the side.']},
+  {face:'tom',dir:'up'}, {wait:.4},
+  {talk:'Tom',lines:['There it is.']},
+  {talk:'Tom',lines:['And there\'s going to be a burnt flashbulb on the floor, somewhere close.']},
+  {face:'tom',dir:'down'}, {call:()=>sfx.select&&sfx.select()}, {wait:.5}, {call:()=>sfx.select&&sfx.select()}, {wait:.4},   // he gets down on his knees (they click) and looks under the table
+  {call:()=>sfx.pickup()}, {wait:.4},
+  {talk:'TNB',lines:['You knew exactly where to look. Babe, how are you this good at it?']},
+  {talk:'Tom',lines:['I\'ve had three practices. And I\'ve lost a pulling contest to a plum, a grapefruit and a watermelon. I\'m not pulling on a beach ball.']},
+  {talk:'TNB',lines:['Then I\'ll just move the table.']},
+  {call:()=>ch4Table(1)}, {wait:1.1},
+  {talk:'TNB',lines:['I moved the table. The hat didn\'t come with it.']},
+  {talk:'Tom',lines:['That\'s what the fish does!']},
+  {talk:'TNB',lines:['I don\'t like it. Put the table back. I want the table back under it right now.']},
+  {call:()=>ch4Table(0)}, {wait:1.1},
+  {talk:'TNB',lines:['Thank you. That\'s better. That\'s a hat on a table. That\'s normal.']},
+  {talk:'Tom',lines:['Hat: grey floor, orange block, round hole, burnt bulb. I\'m sending it to Amy for Grace. She keeps the list in her notebook.']},
+  {talk:'TNB',lines:['Who brings a flashbulb onto a movie set? We have four hundred lights in here and not one of them is that.']},
+  {call:()=>{ sfx.thud(); sfx.whoosh(); }}, {wait:.5},   // from the top of the stairs, a huge voice: "CUT!"
+  {face:'tnb',dir:'up'},
+  {talk:'TNB',lines:['That came from the stage set. And that\'s where the wheel tracks go.']},
+  {zoom:1,time:.8}, {cam:null}, {flag:'ch4-hatdone'},
   {toast:'Goal: up the stairs to the stage set (top).',time:4.5}
 ];
-// 9. The stage set: The Director's Cut, sitting on TNB's rack. Boss fight.
+// 9. The stage set: The Director's Cut, sitting on TNB's rack, wearing the gold coin on its beret. Boss fight.
 SCENES.ch4Boss=[
   {flag:'ch4-boss'}, {call:()=>storyWorld()},
   {hide:'The Director’s Cut'},
@@ -1560,37 +1630,61 @@ SCENES.ch4Boss=[
   {talk:'TNB',lines:['My rack. MY RACK. All forty. Still steamed. Oh, I could cry.']},
   {call:()=>{ sfx.thud(); sfx.whoosh(); }},
   {show:'The Director’s Cut'}, {face:'The Director’s Cut',dir:'down'},
+  {talk:'Tom',lines:['That megaphone is as big as a refrigerator! And it\'s sitting on your costumes!']},
   {talk:'The Director’s Cut',lines:['CUT! CUT! CUT! Who said you could walk onto my set? The blocking is WRONG.',
-    'I\'ve been on this lot for forty years, and every bad take was yelled through ME. Nobody ever gets it right.']},
-  {talk:'Tom',lines:['You took the rack.']},
-  {talk:'The Director’s Cut',lines:['So I took the costumes. With no costumes there\'s no take, and with no take there\'s no BAD take. It\'s perfect. It\'s my best work.','A man in a long coat paid me to do it. One gold coin. He said a day with no takes is a day that never has to end.']},
+    'I\'ve been on this lot for forty years, and every bad take was yelled through ME. Nobody ever gets it right.',
+    'This morning there was a big flash down on the floor. Now I\'m big enough to do my own yelling.',
+    'So I took the costumes. With no costumes there\'s no take, and with no take there\'s no BAD take. It\'s perfect. It\'s my best work.']},
+  {talk:'Tom',lines:['Excuse me, sir. Those are his costumes. He steamed all forty by hand. While humming.']},
   {talk:'TNB',lines:['Babe. It\'s a megaphone in a beret. It has notes.']},
-  {talk:'Nara',lines:['Nara growls at the megaphone. Very small growl. Very serious.']},
+  {talk:'TNB',lines:['And look at the beret. That\'s a gold coin.']},
+  {talk:'The Director’s Cut',lines:['That\'s my AWARD. I found it on the floor. Forty years on this lot, and it\'s my first one.']},
+  {call:()=>{ sfx.bark&&sfx.bark(); }}, {face:'nara',dir:'up'}, {wait:.3},   // Nara growls at the megaphone: a very small growl, very serious
   {talk:'Tom',lines:['This is a closed set. And you\'re not on the call sheet.']},
+  {talk:'Tom',lines:['We are. We have lanyards.']},
   {battle:'directorscut',tut:'directorscut'},
   {if:()=>flag('battle:directorscut')!=='win',then:[
     {heal:true},
     {talk:'TNB',lines:['Back to one, everybody. Touch-ups.','Babe, when it says CUT, put WARDROBE on whoever is next. When it braces, Popcorn Jump. Or just tell it GREAT TAKE. Three times.']},
     {toast:'Face The Director’s Cut and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
-// 10. After the boss (won in the scene, or on a retry with A): the rack comes back. Rewards.
-SCENES.ch4AfterBoss=()=>[
+// 10. After the boss (won in the scene, or on a retry with A): the megaphone is told "great take", gives its award to TNB for best costumes.
+SCENES.ch4AfterBoss=[
   {flag:'ch4-clear'},
   {call:()=>{ sfx.levelChime&&sfx.levelChime(); }},
-  ...(flag('kind:directorscut')?[
-    {talk:'The Director’s Cut',lines:['...Great take. Nobody has ever said that to me. Forty years. Not once.','I think I\'d like to hear it again. Somewhere quiet. On a shelf.']}]:[
-    {talk:'The Director’s Cut',lines:['Fine. FINE. That’s a wrap. On me. I\'m going back in the prop closet.']}]),
+  {if:()=>!!flag('kind:directorscut'),then:[
+    {talk:'The Director’s Cut',lines:['...Great take. Nobody has ever said that to me. Forty years. Not once.','I think I\'d like to hear it again. Somewhere quiet. On a shelf.']},
+    {talk:'The Director’s Cut',lines:['If I can get a "great take", somebody else should get the award. Best costumes. It goes to the skinny one with the tape.']},
+    {call:()=>{ sfx.whoosh(); sfx.pickup(); }}, {wait:.4}],else:[
+    {talk:'The Director’s Cut',lines:['Fine. FINE. That’s a wrap. On me. I\'m going back in the prop closet.']},
+    {call:()=>{ sfx.pickup(); sfx.thud&&sfx.thud(); }}, {wait:.4},
+    {talk:'TNB',lines:['Finders keepers. I\'m calling it best costumes.']}]},
+  {give:'hatcoin'},
+  {talk:'TNB',lines:['I\'ve never won anything! I\'d like to thank my steamer. I\'d like to thank my tape.',
+    'And I\'d like to thank my babe, who flew two thousand four hundred and seventy-five miles to watch me work.']},
+  {talk:'Tom',lines:['He said the right number!']},
+  {ch4Reveal:'coin'},
+  {talk:'Tom',lines:['It has a cowboy hat on it. Rose has a dragonfly, I have a lemon, and my father has a fish.']},
+  {talk:'TNB',lines:['And now I have a hat. Babe, I love my award. I don\'t love that there are four of them.']},
+  {face:'nara',dir:'up'},   // Nara sits in front of TNB and stares at the coin, tail sweeping
+  {talk:'TNB',lines:['It\'s not a frisbee, Nara. It\'s an award.']},
+  {talk:'The Director’s Cut',lines:['The lighting was too flat. Nobody asked me. But it was.']},
   {finale:'directorscut'},
   {call:()=>{ setFlag('ch4-wrap'); storyWorld(); sfx.whoosh(); }},
-  {talk:'Stage set',lines:['The megaphone hops off the rack and rolls away under the set, muttering about lighting.']},
   {talk:'TNB',lines:['Forty. I counted. I\'m going to count again. Forty.']},
-  {talk:'TNB',lines:['And look. Somebody stuck a note on the steamer. "Paid in full." With a gold coin taped to it.']},
-  {coinFind:2},
-  {talk:'Tom',lines:['Another gold coin, same as the one in the sundial. First he stops a sundial for a fish, and now he pays a megaphone to stop a movie.','Somebody in a long coat really wants things to stand still.']},
-  {talk:'TNB',lines:['Spooky. I love it. I hate it. Help me push. This thing has four wheels and four opinions.']},
+  {talk:'TNB',lines:['Help me push. This thing has four wheels and four opinions.']},
+  {toast:'Goal: wheel the rack back to the Studio Gate. Dana is waiting. (Down the stairs, past the grey circle.)',time:5}
+];
+// 10b. The hat in its block is still on the floor as they push the rack past it: TNB takes the identical backup hat off the rack.
+SCENES.ch4Backup=[
+  {flag:'ch4-backup'},
+  {talk:'TNB',lines:['The hero hat is still stuck in there. Good thing wardrobe always has a double.']},
+  {call:()=>sfx.pickup()}, {wait:.4},
+  {talk:'Tom',lines:['A backup hat! You\'re the most prepared man I know. And I set two alarms for everything.']},
+  {talk:'TNB',lines:['I always keep one under my hat.']},
   {toast:'Goal: wheel the rack back to the Studio Gate. Dana is waiting.',time:4.5}
 ];
-// 11. Studio Gate: the wrap party. Chapter complete.
+// 11. Studio Gate: the wrap party. Chapter complete. A second lanyard, TNB's pun, Amy's text and the photo for the plane.
 SCENES.ch4End=[
   {flag:'ch4-done',value:'pending'},
   {walk:'Dana',to:routeBeside('Dana'),speed:.2},
@@ -1602,21 +1696,27 @@ SCENES.ch4End=[
   {toast:'TNB gets a new Signature Tool: the Golden Garment Steamer (POW +4, WARMTH +7). Equip it in the menu.',time:4.5},
   {talk:'TNB',lines:['I\'m going to cry. I\'m not going to cry. I\'m a professional. I\'m crying a little.']},
   {talk:'Tom',lines:['You\'re a professional. A crying professional. I\'m so proud of you.']},
-  {talk:'Dana',lines:['And crew jackets. Wrap Party Jackets. Only the crew gets one. You\'re crew now. Even the dog.']},
+  {talk:'TNB',lines:['Two awards in one day, babe. I\'m on a hot steam streak.']},
+  {talk:'Dana',lines:['And crew jackets. Wrap Party Jackets. Only the crew gets one. You\'re crew now. Even the stunt double.']},
   {give:'wrapjacket'},
   {toast:'New outfit: the Wrap Party Jacket. Purple satin. Anyone can wear it.',time:4},
+  {call:()=>sfx.pickup()}, {ch4Reveal:'crew'},
+  {talk:'Tom',lines:['A second lanyard! I have TWO lanyards!']},
   {talk:'TNB',lines:['You know what this whole day was? A real steam-ulating experience.']},
-  {talk:'Tom',lines:['...','I flew three thousand miles for that pun.']},
+  {talk:'Tom',lines:['Steam-ulating! I flew two thousand four hundred and seventy-five miles for that pun.']},
   {talk:'TNB',lines:['Worth it?']},
   ch4Kiss(),
-  {talk:'Tom',lines:['Worth it. Every mile. But for the record? That was a CLOSED set!']},
-  {talk:'Nara',lines:['Nara leans on both of them. A tiny excited puddle. Nobody minds. Craft services minds a little.']},
-  {call:()=>{ if(typeof naraPuddle==='function') { const n=sceneActor('nara'); if(n) naraPuddle(currentMap,n.x,n.y); } }},
+  {talk:'Tom',lines:['Worth it. Every mile. I\'d have flown them for zero puns.']},
+  {call:()=>{ if(typeof naraPuddle==='function') { const n=sceneActor('nara'); if(n) naraPuddle(currentMap,n.x,n.y); } }}, {hearts:'nara'},   // Nara leans on both of them and leaves a tiny excited puddle
+  {talk:'Toni',lines:['Not next to the cake! ...Fine. She\'s crew.']},
   {trace:'ch4-wrap'}, {hearts:'tom'},
   {call:()=>{ sfx.ding&&sfx.ding(); }},
-  {talk:'Narrator',lines:['A text from Amy. "Parent-teacher conference night is Thursday. Thirty parents. I need backup. Bring snacks. And bring the good uncle."']},
+  {talk:'Tom',lines:['It\'s Amy. "Grace put the hat on page three. Also, parent-teacher conference night is Thursday. Thirty parents. I need backup. Bring snacks. And bring the good uncle."']},
   {talk:'TNB',lines:['You\'re the only uncle.']},
   {talk:'Tom',lines:['Which makes me the good one. By default. I\'ll take it.']},
+  {talk:'TNB',lines:['Go. But nobody goes anywhere alone, so take my picture for the plane.']},
+  {call:()=>sfx.pickup&&sfx.pickup()}, {ch4Reveal:'phone'},
+  {talk:'Tom',lines:['That\'s the one I\'m looking at for six hours.']},
   {party:null},
   {fade:'out',time:.8}, {card:4,done:true,time:3.4}, {flag:'ch4-done'}, {fade:'in',time:.8},
   {save:true},
@@ -1631,15 +1731,17 @@ TRIGGERS.push(
   {id:'ch4-west',map:'backlot',at:[0,5,9,7],when:{...CH4,flag:'ch4-fetch',notFlag:'ch4-west'},scene:'ch4Clapper'},
   {id:'ch4-ny',map:'backlot',at:[12,3,15,6],when:{...CH4,flag:'ch4-fetch',notFlag:'ch4-ny'},scene:'ch4Moth'},
   {id:'ch4-stage',map:'stage7',when:{...CH4,flag:'ch4-sets',notFlag:'ch4-stage'},scene:'ch4Stage'},
-  {id:'ch4-boss',map:'stageset',when:{...CH4,flag:'ch4-rig',notFlag:'ch4-boss'},scene:'ch4Boss'},
+  {id:'ch4-hat',map:'stage7',when:{...CH4,flag:'ch4-rig',notFlag:'ch4-hat'},scene:'ch4Hat'},
+  {id:'ch4-boss',map:'stageset',when:{...CH4,flag:'ch4-hat',notFlag:'ch4-boss'},scene:'ch4Boss'},
   {id:'ch4-after',map:'stageset',when:{...CH4,flag:{'battle:directorscut':'win'},notFlag:'ch4-clear'},scene:'ch4AfterBoss'},
+  {id:'ch4-backup',map:'stage7',when:{...CH4,flag:'ch4-clear',notFlag:'ch4-backup'},scene:'ch4Backup'},
   {id:'ch4-end',map:'studio',when:{...CH4,flag:'ch4-clear',notFlag:'ch4-done'},scene:'ch4End'}
 );
 // The Backlot holds still until Nara's fetch; each set's troublemaker holds still until its story fight.
 const CH4_SET_FLAG={cuecrab:'ch4-main',clapper:'ch4-west',boommoth:'ch4-ny'};
 HOLD_RULES.push(n=>STORY.chapter===4&&currentMap.id==='backlot'&&(flag('ch4-fetch')!==true||(CH4_SET_FLAG[n.monster]&&flag(CH4_SET_FLAG[n.monster])!==true)));
-// Soundstage 7's monsters hold still in the dark until the light rig is fixed (nobody can see anybody).
-HOLD_RULES.push(n=>STORY.chapter===4&&currentMap.id==='stage7'&&!flag('ch4-rig'));
+// Soundstage 7's monsters hold still in the dark until the light rig is fixed (nobody can see anybody), and through the hat scene after it.
+HOLD_RULES.push(n=>STORY.chapter===4&&currentMap.id==='stage7'&&(!flag('ch4-rig')||!flag('ch4-hatdone')));
 
 // Map changes. They check flags (not events), so they also hold after loading a save.
 // The catwalk up to the stage set in Soundstage 7 comes down once the rig is fixed: the gate on the stairs (data/maps-la.js stage7 gates)
