@@ -29,6 +29,8 @@ square(trim(key(RAW+'/props/ch1-coin-v1.png')),512).save('art/closeup/ch1-coin.w
 g=key(RAW+'/characters/ch1-boppy-grin-v1.png'); ga=np.array(g); pk=(ga[...,0].astype(int)-ga[...,1]>110)&(ga[...,2].astype(int)-ga[...,1]>90); ga[pk,3]=0; g=trim(Image.fromarray(ga));   # also key magenta trapped inside the rod loop
 g=g.crop((0,0,g.width,int(g.height*.58)))   # head, cap, hand on the teeth, vest top
 square(g,640).save('art/closeup/ch1-grin.webp',quality=92,method=6)
-for n,src in (('ch1_block','ch1-orange-block-v1'),('ch1_patch','ch1-grey-patch-v1'),('ch1_bulb','ch1-flashbulb-v1')):
+import glob,re
+def newest(stem): return max(glob.glob(RAW+'/props/'+stem+'-v*.png'),key=lambda f:int(re.search(r'-v(\d+)\.png$',f).group(1))).rsplit('/',1)[1][:-4]   # the newest version (amberspot1: grey patch v2)
+for n,src in (('ch1_block',newest('ch1-orange-block')),('ch1_patch',newest('ch1-grey-patch')),('ch1_bulb',newest('ch1-flashbulb'))):
     p=trim(key(RAW+'/props/'+src+'.png')); sc=256/max(p.size); p.resize((max(1,round(p.width*sc)),max(1,round(p.height*sc))),Image.LANCZOS).save('art/props/hollow/%s.webp'%n,quality=92,method=6)
 print('ok')

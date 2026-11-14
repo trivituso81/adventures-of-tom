@@ -68,8 +68,25 @@ const entries = [
   { id: 'ch1-orange-block', tab: 'Props', title: 'Chapter 1: the orange block, plum-sized, a dragonfly inside, a small round dent in one side (one object)', ar: '1:1', refs: ['art/grands.webp'], group: 'Chapter 1',
     prompt: single(`A hard, clear orange block, the size of a plum, glossy-clear but painted, like a stone of orange glass. Inside it, a dragonfly is frozen with its wings wide open and not moving, every vein of the wings visible. On one side, facing the viewer, is one small round dent, as if a bite had been taken out of the block.`) },
 
-  { id: 'ch1-grey-patch', tab: 'Props', title: 'Chapter 1: the grey grass patch, the size of a hand, a clean edge (one object)', ar: '1:1', refs: ['art/grands.webp'], group: 'Chapter 1',
-    prompt: single(`A flat patch of grass, about the size of a grown person's hand, seen from above at a slight angle. The grass blades are painted in only grey and pale silver-grey, with no green and no brown, and the patch has one clean, sharp edge all the way round, as if it was cut with scissors. The grass is flat and low, a ground patch, not a tall plant.`) },
+  // v2 (amberspot1, Tom 2026-11-14): v1 was a dense, cool grey mound with a hard rim and read as pasted on. v2 copies the loose grass tufts of
+  // the Grump Hollow plate itself (attached), low and sparse with earth between, only the colour taken out, with a soft contact shadow.
+  { id: 'ch1-grey-patch', tab: 'Props', title: 'Chapter 1: the grey grass patch v2, low loose tufts like the Hollow plate, colour drained (one object)', ar: '1:1', refs: ['art/hollow.webp'], group: 'Chapter 1',
+    prompt: `IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.
+
+ATTACHED IMAGE
+1) The attached picture is the finished painting of Grump Hollow, a pond in the woods, from \"The Adventures of Tom\", a family role-playing game. Look closely at the small loose tufts of grass growing out of the brown dirt path beside the pond. Paint a patch of exactly that grass, with exactly that brushwork and that light. Do not paint the pond, the path, trees or anything else from the picture.
+
+PAINT THIS ONE OBJECT
+A small, low, uneven patch of wild grass growing out of a little bit of bare earth, seen from the same high, angled view as the attached painting, so it lies flat on the ground and is about twice as wide as it is tall. The grass is loose and sparse: a few separate soft tufts of short blades of different heights leaning in different directions, with earth showing between them, painted with the same quick, loose strokes as the grass tufts in the attached painting. It is NOT a dense mound, NOT a carpet, NOT a rug, NOT a cushion.
+- Every bit of it, blades and earth, has had all its colour drained out: soft warm greys, like a black and white photo of the same grass. No green and no brown, but keep all the painted light and shade: light warm grey on the tops of the blades lit from the upper left, deeper grey in the gaps and on the lower right.
+- The outline is irregular and natural, a few blades poking out past the edge, and the earth at the edge fades softly to nothing, so it sits naturally on a dirt path. One soft, faint grey shadow under it to the lower right. No hard rim, no cut border, no raised edge.
+- Exactly ONE patch, alone, centered, large: it fills about 80 percent of the width of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.
+- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the patch. The game cuts the patch out of this color.
+
+${ART}
+- ${LIGHT}
+- No people, no hands, no faces.
+- No words, letters or numbers anywhere.` },
 
   { id: 'ch1-coin', tab: 'Props', title: 'Chapter 1 close-up: the gold coin with a dragonfly stamp (one object, large)', ar: '1:1', refs: ['art/grands.webp'], group: 'Chapter 1',
     prompt: single(`A small gold coin, seen face on and filling most of the picture. It has a raised dragonfly stamped in the middle, wings spread, and a rim around the edge. The gold is warm and shiny, painted with soft highlights and a deeper gold in the shadows. It lies flat, no stand, no shadow on a surface.`) },
