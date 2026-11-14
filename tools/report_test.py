@@ -50,7 +50,7 @@ def run(pw,layout):
     pg.add_init_script("try{localStorage.setItem('aot-gh-token','test-token');}catch(e){}")
     pg.goto(f'http://127.0.0.1:{port}/index.html?gh=http://127.0.0.1:{gport}'); pg.wait_for_function('()=>window.__LE&&window.__LE.b2Start'); pg.wait_for_timeout(2500)
     L=layout[0]
-    if layout=='landscape': pg.evaluate("()=>{ layout.mode='landscape'; applyLayout(); }"); pg.wait_for_timeout(600)
+    if layout=='landscape': pg.evaluate("()=>{ layout.mode='landscape'; applyLayout(); }"); pg.wait_for_timeout(3000)   # the landscape welcome painting loads after the switch
     check(pg.evaluate("()=>!!brp.btn&&!brp.btn.hidden"),f'{L} tab shows on a device with the token')
     def shoot(name):
         pg.evaluate("()=>{ brp.btn.style.visibility='hidden'; }"); pg.wait_for_timeout(150)
