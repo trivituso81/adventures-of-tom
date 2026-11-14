@@ -24100,8 +24100,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The finished painting of Rose, a six year old girl. 2) Her walking sheet.\n\nPAINT THIS ONE PICTURE\nA close-up of Rose from the shoulders up, filling the square, facing the viewer, grinning as wide as she can with her mouth open. In the top row of her teeth, in the front, there is one clear gap where a tooth has just fallen out. Her eyes are bright and proud and a little smug. Copy her face, hair and colors from attachment 1 as exactly as possible.\nBackground: one flat solid pure magenta #FF00FF, edge to edge, nothing else in the picture, no text.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/ch5-nara-story-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794668031565
+    }
+   ],
    "rejects": [],
    "id": "ch5-nara-story",
    "tab": "Characters",
