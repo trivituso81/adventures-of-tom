@@ -1,3 +1,6 @@
+## ch1fix1 (2026-11-13): chapter 1 leftovers
+- Dragonfly Coin keepsake (data/party.js) given after Rose's "I'm keeping it" in ch1AfterBoss. Amy's "be nice to the slime" revisit line and Penny's "snacks for fights" intro line are held back in chapter 1 until `ch1-theft` (when entry in data/maps-le.js; filter in engine/shop.js). Smoke FAILS []; closeup_ch1_test passes. Not played on a phone.
+
 ## voice3 (2026-11-13): three Voice Library exports merged
 - 43 chapter 1 lines (bigone and the new ch1 lines), 32 Mr. Washington re-takes (older African American man accent; 32 replaced clips, Old voice marks cleared by the merge), 57 narr1 Narrator lines. All into data/voice/dialog-ch*.js, data/merged-takes.json, index rebuilt (4910 lines). unused_voice.py 0 on all five checks; smoke FAILS []. Not played on a phone.
 
