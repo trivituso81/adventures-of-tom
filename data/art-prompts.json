@@ -24269,8 +24269,16 @@
    "prompt": "Draw one effect sheet for a family role-playing game: the stages of a hard orange block cracking and falling apart.\n\nATTACHED IMAGES\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n2) The finished painting of an orange block from the same game. Paint the same hard, clear, glowing orange material, the same painted finish and the same small round dent. Only the size and what is inside change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. In every cell the same plain block as attachment 2, with NOTHING inside it (an empty clear orange block), the same size, the same position in the cell and the same bottom line, well inside the cell with clear magenta margin. No grid lines, numbers, text or shadows.\nRow 1:\n1. The block whole, with a single thin bright gold crack starting at the small round dent and running a short way across the face.\n2. Gold cracks spreading from the dent across the whole front of the block like a spider web, glowing, the block still in one piece.\n3. The block still in one piece but covered in a web of glowing gold cracks, a thin line of gold light leaking out along every crack.\nRow 2:\n4. The block splitting into about eight big pieces, with thin gold gaps between them, the pieces just starting to move apart.\n5. The pieces drifting apart in the air, about twelve pieces, smaller, turning, the edges glowing gold, some already a little see-through.\n6. A scatter of small chips and dust specks of orange and gold where the block was, nearly gone, fading, the last specks glittering.\nPaint it like attachment 2: the same orange material, matte painted, crisp painted edges, not a smooth digital render. Family friendly."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/ch6-coin-clean-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794683744848
+    }
+   ],
    "rejects": [],
    "id": "ch6-coin-clean",
    "tab": "Props",
