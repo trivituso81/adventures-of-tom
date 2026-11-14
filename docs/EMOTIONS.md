@@ -4,6 +4,8 @@ Tom: "we need emotions character sheets for each character so they can later be 
 
 Status (2026-11-06 00:03): 9 sheets painted by Tom and indexed (below). Amy done 00:09, Nara 00:19: all 11 characters with a hero painting are indexed; Michael and Jojo need a hero picture first. NOT built: the game does not show emotion art yet; no story moment is chosen yet (Tom: "dont yet determine those moments yet, just index them").
 
+Talking poses (talk1, 2026-11-13): plain lines and borderline mood lines use four talking poses instead (tell, point, ask, answer): docs/TALK_POSES.md.
+
 ## The 8 core emotions (frame order = sheet order)
 
 | # | Key | Covers (every feeling in the game maps to one of these) | Where the game needs it |

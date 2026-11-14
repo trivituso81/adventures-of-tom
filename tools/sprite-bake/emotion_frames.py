@@ -27,25 +27,29 @@ def cut(cid):
     for i in range(8):
         r, c = divmod(i, 4)
         y0, y1, x0, x1 = r * H // 2, (r + 1) * H // 2, c * W // 4, (c + 1) * W // 4
-        cell = rgba[y0:y1, x0:x1].copy(); A = cell[:, :, 3] > 20
-        lab, n = ndi.label(ndi.binary_dilation(A, iterations=6))
-        big = 1 + int(np.argmax(ndi.sum(A, lab, range(1, n + 1))))          # the figure; stray specks and smudges dropped
-        cell[lab != big, 3] = 0
-        # generator smudge: a pale pink blob sitting on top of the hair (Olivia happy). Clear pale pink-lilac pixels in the top 30 rows of the figure.
-        ys = np.where(cell[:, :, 3].max(1) > 20)[0]; t = ys[0]; top = cell[t:t + 30].astype(int)
-        pink = (top[:, :, 0] > 190) & (top[:, :, 2] > 150) & (top[:, :, 1] < top[:, :, 0] - 25) & (top[:, :, 1] > 110)
-        pl, pn = ndi.label(pink)                                             # only a solid blob (hair highlights are small scattered bits)
-        for j in range(1, pn + 1):
-            if (pl == j).sum() >= 150: cell[t:t + 30][pl == j, 3] = 0
-        # painted ground shadow under the feet (walkinst1: the Art Library sheets put a dark magenta-brown smear there, Grace's most). In the bottom 9 percent
-        # of the figure, clear red-purple pixels whose green is far below red (shadow 112,57,74 or 144,59,106); lilac shoes (about 200,170,200) and brown shoes are kept.
-        ys = np.where(cell[:, :, 3].max(1) > 20)[0]; y9 = ys[-1] - int((ys[-1] - ys[0]) * .09); bot = cell[y9:].astype(int)
-        r_, g_, b_ = bot[:, :, 0], bot[:, :, 1], bot[:, :, 2]
-        sh = (r_ - g_ > 20) & (b_ - g_ > 10) & (g_ < .62 * r_) & (b_ < r_ + 25)
-        cell[y9:][sh, 3] = 0
-        A = cell[:, :, 3] > 20; lab, n = ndi.label(ndi.binary_dilation(A, iterations=2)); big = 1 + int(np.argmax(ndi.sum(A, lab, range(1, n + 1)))); cell[lab != big, 3] = 0
-        im = Image.fromarray(cell, 'RGBA'); figs.append(im.crop(im.getbbox()))
+        figs.append(clean_cell(rgba[y0:y1, x0:x1].copy()))
     return figs
+
+def clean_cell(cell):
+    """One keyed sheet cell -> the figure alone, cropped (also used for the talking sheets, talk_frames.py)."""
+    A = cell[:, :, 3] > 20
+    lab, n = ndi.label(ndi.binary_dilation(A, iterations=6))
+    big = 1 + int(np.argmax(ndi.sum(A, lab, range(1, n + 1))))          # the figure; stray specks and smudges dropped
+    cell[lab != big, 3] = 0
+    # generator smudge: a pale pink blob sitting on top of the hair (Olivia happy). Clear pale pink-lilac pixels in the top 30 rows of the figure.
+    ys = np.where(cell[:, :, 3].max(1) > 20)[0]; t = ys[0]; top = cell[t:t + 30].astype(int)
+    pink = (top[:, :, 0] > 190) & (top[:, :, 2] > 150) & (top[:, :, 1] < top[:, :, 0] - 25) & (top[:, :, 1] > 110)
+    pl, pn = ndi.label(pink)                                             # only a solid blob (hair highlights are small scattered bits)
+    for j in range(1, pn + 1):
+        if (pl == j).sum() >= 150: cell[t:t + 30][pl == j, 3] = 0
+    # painted ground shadow under the feet (walkinst1: the Art Library sheets put a dark magenta-brown smear there, Grace's most). In the bottom 9 percent
+    # of the figure, clear red-purple pixels whose green is far below red (shadow 112,57,74 or 144,59,106); lilac shoes (about 200,170,200) and brown shoes are kept.
+    ys = np.where(cell[:, :, 3].max(1) > 20)[0]; y9 = ys[-1] - int((ys[-1] - ys[0]) * .09); bot = cell[y9:].astype(int)
+    r_, g_, b_ = bot[:, :, 0], bot[:, :, 1], bot[:, :, 2]
+    sh = (r_ - g_ > 20) & (b_ - g_ > 10) & (g_ < .62 * r_) & (b_ < r_ + 25)
+    cell[y9:][sh, 3] = 0
+    A = cell[:, :, 3] > 20; lab, n = ndi.label(ndi.binary_dilation(A, iterations=2)); big = 1 + int(np.argmax(ndi.sum(A, lab, range(1, n + 1)))); cell[lab != big, 3] = 0
+    im = Image.fromarray(cell, 'RGBA'); return im.crop(im.getbbox())
 
 def has_sheet(cid):
     return bool(glob.glob(os.path.join(RAW, f'{cid}-emotions-v*.png')) + glob.glob(os.path.join(NPC_RAW, f'npc-emotions-{cid}-v*.png')))

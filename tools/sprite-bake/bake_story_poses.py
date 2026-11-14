@@ -82,6 +82,17 @@ def _emo_hg():
 EMO_HG = _emo_hg()
 for _k in list(EMO_HEAD): EMO_HEAD[_k] *= EMO_HG.get(_k, 1.0)
 
+# Talking poses (talk1, Tom 2026-11-13, docs/TALK_POSES.md): the 4 full-body talking frames of each person (art/talk/<id>.webp strips, cut by talk_frames.py
+# from the approved Art Library entry <id>-talk), drawn on the map while a plain line shows (frames tk_tell, tk_point, tk_ask, tk_answer, stored under the member).
+# A set exists only once its strip exists, so with no talking sheets this bake writes exactly what it wrote before. Size: one factor per person that makes the
+# Telling figure (standing straight) as tall as the overworld stand ('h' as for the moods); talk_frames.py already grew the head by the HEAD SIZES factor,
+# so the head is the walk's size and the figure keeps its real height (the walk keeps height too). Look at it next to the stand when the first sheet is baked.
+TALK_TYPES = ['tell', 'point', 'ask', 'answer']
+for _id, _h in EMO_H.items():
+    if _id != 'nara' and os.path.exists(os.path.join(ROOT, 'art/talk', _id + '.webp')):
+        SETS[_id + 'talk'] = {'member': _id, 'strip': os.path.join('art/talk', _id + '.webp'), 'k': 0, 'h': _h, 'ref': 'tk_tell', 'talk': True,
+                              'names': ['tk_' + t for t in TALK_TYPES]}
+
 # npcemo7 (2026-11-10, Tom: "implement them"): the 58 townsfolk plus Jojo and Michael get mood poses too (art/emotions/<id>.webp). Their sets are written to data/npc-poses.js, not
 # data/story-poses.js, so the cast file stays small. Size rule, same as the cast (mean of height match and face match), computed here per person, no hand tuning:
 #   height match = upright mood height over the standing frame's height (both full figures);
@@ -245,10 +256,11 @@ js = ["'use strict';",
       "const STORY_POSES_SRC={"]
 for cid, S in SETS.items():
     if 'strip' in S:
-        sh = Image.open(os.path.join(ROOT, S['strip'])).convert('RGBA'); fw = sh.width // 8
+        sh = Image.open(os.path.join(ROOT, S['strip'])).convert('RGBA'); fw = sh.width // len(S['names'])   # 8 moods, 4 talking frames
         figs = {}
         for i, n in enumerate(S['names']):
             c = sh.crop((i * fw, 0, (i + 1) * fw, sh.height)); figs[n] = c.crop(c.getbbox())
+        if not S['k'] and S.get('talk'): S['k'] = max(5, min(10, int(figs[S['ref']].height / S['h'])))   # never upscale the painted frames
         if not S['k']:
             hd = EMO_HEAD.get(S['member'])
             S['k'] = max(5, min(10, int(hd * stand_frame(S['member'])[1]) if hd else int(figs[S['ref']].height / S['h'])))   # never upscale the painted frames
@@ -257,7 +269,7 @@ for cid, S in SETS.items():
     for _n in S.get('flip', []): figs[_n] = figs[_n].transpose(Image.FLIP_LEFT_RIGHT)
     if 'strip' not in S and 'cut' not in S and 'ground' not in S: figs = dict(zip(S['names'], grid(os.path.join(RAW, S['sheet']), 4, 2)))
     f = S['h'] * S['k'] / figs[S['ref']].height
-    if 'strip' in S and S['member'] in EMO_HEAD:
+    if 'strip' in S and S['member'] in EMO_HEAD and not S.get('talk'):
         f = S['k'] / (EMO_HEAD[S['member']] * stand_frame(S['member'])[1])   # strip px -> standing px -> game rows -> atlas px
     big = place({n: scaled_to(im, f) for n, im in figs.items()}, S['k'], {n: v * f for n, v in S.get('feet', {}).items() if v})
     small = {n: hard(scaled_to(v, 1.0 / S['k'])) for n, v in big.items()}

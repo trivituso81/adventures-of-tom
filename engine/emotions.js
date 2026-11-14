@@ -6,7 +6,7 @@
 // Cast story scenes (S.talk) show it only in chapters in EMO_CHAPTERS. Every other dialogue box (map NPC talk, recruit and shop intro lines, cab lines, townsfolk lines in scenes)
 // looks its line up in NPC_EMOTION_MOODS (data/npc-emotion-moods.js, from docs/npc-emotion-lines.tsv by tools/npc-emotion-apply.py; npcemo7). The NPC is drawn in its pose
 // (data/npc-poses.js). Both clear when the line advances, on a line with no mood, and when the scene ends or is skipped.
-const EMO={starting:false,actor:null,id:null,mood:null,listeners:[],pending:[],cueW:null,cueLine:-1};
+const EMO={starting:false,actor:null,id:null,mood:null,talk:null,listeners:[],pending:[],cueW:null,cueLine:-1};
 const EMO_PORTRAIT_DEFAULT=()=>{ const box=$('dialog-portrait'); return box&&box.querySelector('img'); };
 const emoPreloaded=new Set();
 function emoOn() { return typeof EMO_CHAPTERS!=='undefined'&&typeof STORY!=='undefined'&&EMO_CHAPTERS.has(STORY.chapter); }
@@ -54,7 +54,7 @@ function emoActorById(id) {
 function emoClear() {
   if(EMO.actor&&EMO.actor.scenePose&&EMO.actor.scenePose.emo) EMO.actor.scenePose=null;
   for(const a of EMO.listeners) if(a.scenePose&&a.scenePose.emo) a.scenePose=null;
-  EMO.listeners=[]; EMO.actor=null; EMO.mood=null; EMO.id=null; EMO.pending=[]; EMO.cueW=null; EMO.cueLine=-1;
+  EMO.listeners=[]; EMO.actor=null; EMO.mood=null; EMO.talk=null; EMO.id=null; EMO.pending=[]; EMO.cueW=null; EMO.cueLine=-1;
 }
 // Reaction timing (reacttime1, Tom 2026-11-13: a listener reacts when the line reaches the words that cause it, not when the line starts).
 // A reaction may carry a third value: the character position in the line where its cue words end (the `at` column of docs/emotion-reactions.tsv,
@@ -111,6 +111,26 @@ function emoReact(speakerId,text) {
     if(at>0) EMO.pending.push([lid,mood,at]); else emoPose(lid,mood);
   }
 }
+// Talking poses (talk1, Tom 2026-11-13, docs/TALK_POSES.md): four full-body poses per person (Art Library <id>-talk, tools/sprite-bake/talk_frames.py, frames tk_<type>
+// in STORY_POSES) for lines with no strong feeling: tell (explaining), point (pointing out or directing people), ask (questions), answer (short replies).
+// Which lines: TALK_TYPES (data/talk-types.js, from docs/talk-lines.tsv by tools/talk-apply.py) lists every plain cast line and the borderline mood lines that
+// read better as plain talk; it wins over the mood. A line with no entry and no mood gets talkRule (the same rule as tools/talk-index.py).
+// A person with no baked talking sheet keeps exactly the old behaviour (mood pose, or the plain stance), so nothing changes until a sheet is installed.
+// The dialogue face stays the plain talk face (portraits/talk) on a talk line.
+const TALK_LIST=['tell','point','ask','answer'];
+const TALK_ORDER=/^(look|over there|up there|down there|this way|that way|come on|let's|follow|stay|go |go,|grab|hurry|up,|up!|up\.|everybody|everyone|nobody|over here|back to one|hold |get |in there|out there|put |give |take |be |don't |do not |no touching|hands |phone down|quiet|keep |watch |use |bring |move|walk |sit|stand|cut\.|copy|halt|eat|wait here|then nobody|then we|here's the plan|rose\. |grace\. |girls\. )|\b(look[,:.!]|look at|over there|up there|down there|in there|this way|that way|over here|right there|on the left|on the right|follow me|stay close|stay behind|let's go|come on|no touching|behind me|with me\.|everybody to|hands to yourselves|nobody touches|nobody goes)\b/;
+function talkRule(text) {
+  const s=String(text||'').trim().replace(/\u2019/g,"'"),low=s.toLowerCase(),words=(s.match(/[A-Za-z']+/g)||[]).length;
+  if(s.includes('?')) return 'ask';
+  if(TALK_ORDER.test(low)) return 'point';
+  if(words<=5||(words<=9&&/^(okay|ok|yeah|yep|nope|no|yes|fine|sure|right|got it|mm|hm|uh|well)\b/.test(low))) return 'answer';
+  return 'tell';
+}
+function talkTypeOf(name,text,mood) {
+  if(typeof TALK_TYPES!=='undefined') { const k=name+'|'+text,ch=typeof STORY!=='undefined'?STORY.chapter:0,t=TALK_TYPES[k+'|'+ch]||TALK_TYPES[k]; if(t) return t; }
+  return mood?null:talkRule(text);
+}
+function talkFrameOf(id,type) { return type&&typeof STORY_POSES!=='undefined'&&STORY_POSES[id]&&STORY_POSES[id]['tk_'+type]?'tk_'+type:null; }
 function emoApply() {
   if(!dialog.active) { if(EMO.mood||EMO.actor||EMO.listeners.length) emoClear(); return; }
   const text=dialog.lines[dialog.index];
@@ -118,6 +138,14 @@ function emoApply() {
   const id=String(DIALOG_PORTRAIT_IDS[String(dialog.name||'').trim().toLowerCase()]||'').replace(/^npc_/,'');   // townspeople's keys are npc_<id>; their faces and poses are filed under <id>
   const had=EMO.mood; emoClear();
   if(dialog.emo) emoReact(id,text);
+  const tk=id&&typeof EMOTION_FACES!=='undefined'&&EMOTION_FACES.includes(id)?talkFrameOf(id,talkTypeOf(String(dialog.name||'').trim(),text,mood)):null;
+  if(tk) {   // a plain line (or a borderline mood line) of a person whose talking sheet is baked: talk pose, plain face
+    if(had) setDialogPortrait(dialog.name);
+    EMO.talk=tk; EMO.id=id;
+    const a=emoActorFor(id,dialog.name,dialog.npc);
+    if(a&&!a.scenePose) { if(typeof storyPosesLoad==='function') storyPosesLoad(id); a.scenePose={f:tk,mid:id,emo:true}; EMO.actor=a; }
+    return;
+  }
   if(!mood||!id||typeof EMOTION_FACES==='undefined'||!EMOTION_FACES.includes(id)) { if(had) setDialogPortrait(dialog.name); return; }
   emoPreload(id);
   const box=$('dialog-portrait'),img=box&&box.querySelector('img');

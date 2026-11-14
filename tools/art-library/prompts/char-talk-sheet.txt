@@ -1,0 +1,10 @@
+Draw the person in the attached picture as a talking sheet: four full-body poses of them talking in a calm, everyday way.
+
+The attached picture shows this person in eight poses. Keep them exactly as they are there: the same face, skin, head size compared to the body, hair, clothes, shoes, colors and painting style. Only the pose, the hands and the mouth change.
+
+One image, a row of 4 equal tall cells, on a flat solid magenta #FF00FF background. One full-body figure per cell, from the top of the hair to the soles of the shoes, standing, facing the viewer in the same slight three-quarter view as the attached picture. The same figure size in every cell, feet on the same ground line, clear magenta all around each figure. Empty hands. A calm, pleasant face in every cell, the mouth open mid-word.
+
+1. Telling: standing easy, one hand raised to chest height with the palm up and open, explaining something.
+2. Pointing: one arm stretched out to the side, the index finger pointing at something, the head turned toward it, the other arm relaxed.
+3. Asking: the head tilted a little, both hands open in front of the waist with the palms up, the eyebrows lifted a little.
+4. Answering: the weight on one leg, a small shrug of one shoulder, one hand lifted loosely at the waist, the other arm hanging relaxed.
