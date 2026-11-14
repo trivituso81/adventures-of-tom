@@ -353,6 +353,7 @@ function setSceneZoom(z) { z=Math.max(1,z); if(Math.abs(z-sceneZoom)<1e-4) retur
 // When the scene ends (sceneAuto=null) the zoom and the camera ease back to Tom.
 const SCENE_ZOOM_MAX=1.7,SCENE_ZOOM_MAX_ROOM=1.3,SCENE_SCALE_MAX=3.4;   // a room painting already fills the phone, so rooms zoom less
 let sceneAuto=null,sceneAutoCur=null,sceneAutoBox=null,sceneZoomManual=false;
+let introKeepZoom=false;   // the chapter 1 opening and ch1Goal share one steady zoom: endIntro leaves the zoom where the scene put it while this is set (data/scenes.js ch1Goal ends it)
 function sceneDialogH() { const el=document.getElementById('dialog'),h=el&&!el.hidden?el.offsetHeight:0; return Math.max(h,layout.landscape?156:292); }
 // Room for a conversation at the normal fit, in tiles, between the top bar and the dialogue box (phone landscape has under 6 rows).
 function sceneRoomTiles() { const base=scale/sceneZoom,top=layout.landscape?57:82;

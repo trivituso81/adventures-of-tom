@@ -183,6 +183,7 @@ function beginOpening() {
 }
 function finishOpening() {
   const {g,r}=IA(),dx=player.x,row=player.y;
+  introKeepZoom=true; setTimeout(()=>{ if(introKeepZoom&&!intro.active&&!dialog.active) { introKeepZoom=false; sceneZoomManual=false; } },4000);   // ch1Goal follows at once; if it never starts, release the zoom
   endIntro();
   g.x=dx-1; g.y=row; g.facing='right'; g.move=null;
   r.x=dx-1; r.y=row+1; r.facing='up'; r.move=null;

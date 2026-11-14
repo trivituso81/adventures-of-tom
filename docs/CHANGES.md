@@ -128,6 +128,12 @@
 - Tested: ch11, ch12, ch13 cases, portrait, before (boss on 0 after-scene pages) and after (boss on screen until it leaves or settles). Looked at the chapter 12 frames (bus signals, drives right, fades). Not looked at: chapter 11 and 13 ending frames, landscape, chapters 14 to 20.
 
 
+## 2026-11-13 (introzoom1): the chapter 1 intro keeps one zoom the whole way (tag introzoom1)
+- Tom: in the chapter 1 intro the camera zoomed out after the first talk, then zoomed back in at a different zoom.
+- Cause (fact): the opening ended with `{zoom:1}` (out to normal), then `ch1Goal` started and the automatic cutscene zoom framed the three of them at 1.7x.
+- Fix: the opening no longer zooms out; `introKeepZoom` (engine/overworld.js) makes `endIntro` leave the zoom alone between the opening and `ch1Goal`; `ch1Goal` ends with the one zoom out, after its last line. The zoom stays at 2.0x from Tom stepping out to the last `ch1Goal` page.
+- Tested: `reaction_test.py` opening plus `ch1Goal`, portrait (13 pages, zoom 2.0 on every page, 32 zoom changes all in the first push-in) and landscape opening (10 pages, zoom 2.0). Looked at the portrait contact sheet. Not played on a phone, not looked at in landscape frames or Duo.
+
 ## 2026-11-12 (introride1): the chapter 1 opening plays Tom's approved ride pictures, plus a kneel while the girls run in (tag introride1)
 - Tom 22:12: approved `tomride-intro` in the Library and sent a picture of Tom kneeling with his arms open for the hug.
 - Fact: set `tomride` in `tools/sprite-bake/bake_story_poses.py` now cuts the approved `art/raw/characters/tomride-intro-v1.png` (3 x 2, h 53.9) instead of `tomride-poses-v2.png`; frames `tr_kneel` to `tr_sit` are the new ones. The old sheet stays only for the battle ride frames (`bake_tomride.py`).

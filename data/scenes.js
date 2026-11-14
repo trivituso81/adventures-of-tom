@@ -64,7 +64,6 @@ SCENES.opening=()=>{
     {pose:'tom'},
     {call:()=>{ const r=sceneActor('rose'); r.noShadow=false; r.seat=false; }},
     {hop:'rose',from:[dx-1,row],to:[dx-1,row+1],time:.2,arc:5,lift:[10,0]},
-    {zoom:1,time:.8},
     {flag:'opening-done'},
     {call:finishOpening}
   ];
@@ -85,7 +84,8 @@ SCENES.ch1Goal=[
   {talk:'Rose',lines:['I already licked the spoon. Don\'t tell.']},
   {talk:'Tom',lines:['Then we had better hurry. Before somebody licks the rest.']},
   {toast:'New Tombos: Squishy Delivery (Grace) and Double-Decker Airplane (Rose). In battle, find them inside ▶︎ HEAL (Squishy Delivery) and ▲ ATTACK (Double-Decker Airplane).',time:4},
-  {toast:"Goal: Deedee and Boppy's house. Rivituso Row, south of the Square.",time:4.5}
+  {toast:"Goal: Deedee and Boppy's house. Rivituso Row, south of the Square.",time:4.5},
+  {call:()=>{ introKeepZoom=false; }}, {zoom:1,time:.8}   // the one zoom out of the intro, after the last word
 ];
 
 // 2. Deedee and Boppy's house: the greeting, Tom's loaf, and the theft. Deedee joins.
