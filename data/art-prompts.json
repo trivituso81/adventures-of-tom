@@ -23066,8 +23066,16 @@
    "prompt": "Create the actual environment painting for Area 06, Sundial Hollow from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram or example sheet.\n\nATTACHED IMAGES (in this order)\n1) the current painting of this place: use it for LAYOUT AND DETAILS. Keep the sundial, the pool, the boardwalk and the exits. Keep the same camera, the same canvas size and aspect, and every path, building, prop, exit and open space in the same place and the same size.\n2) the finished painting of Deedee and Boppy's house, the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nTHE ONE CHANGE\nThe whole clearing of the hollow, the reeds around the water, the stone sundial, the standing stones and the water of the pool, is now inside one large circle that has lost all its color. The color is gone from this one patch: every surface inside it is painted in only grey and pale silver-grey, with no green, no brown and no color at all, but still in the same brushwork and the same light and shadow. The grey patch has one clean, sharp, circular edge all the way round, as if it was cut with scissors. Outside the circle everything keeps its normal rich color, and the color even looks a little stronger next to the grey. The water inside the circle is grey and still, flat as slate. Outside the circle, the marsh is painted far too green and rich. The mossy boardwalk coming in stays in its normal color up to the circle's edge. Nothing is floating above the water in this painting (the frozen fish is a separate picture).\nEverything else stays exactly as in attachment 1, painted with the same care. No people, no animals, no text added anywhere.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/ch3-orange-block-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794623792405
+    }
+   ],
    "rejects": [],
    "id": "ch3-orange-block",
    "tab": "Props",
