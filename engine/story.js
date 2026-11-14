@@ -608,7 +608,7 @@ function huddleFails(g,clr,memo) {
   { const np=g.others.map(stagePos),tp=stagePos(player);
     for(const a of g.roster) { if(huddleFixed(g,a)||a.stagePlaced) continue; const p=stagePos(a);
       if(np.some(n=>stageCovers(p,n))) out.add('cover');
-      if(a!==player&&(Math.max(Math.abs(p.x-tp.x),Math.abs(p.y-tp.y))>4||(A&&(p.x-A.kp.x)*A.ax+(p.y-A.kp.y)*A.ay<1))) out.add('spread'); } }
+      if(a!==player&&(Math.max(Math.abs(p.x-tp.x),Math.abs(p.y-tp.y))>2||(A&&(p.x-A.kp.x)*A.ax+(p.y-A.kp.y)*A.ay<1))) out.add('spread'); } }
   return out;
 }
 // The person a conversation is about (the NPC the line names, else the nearest one in the group) and the side of them the party takes:

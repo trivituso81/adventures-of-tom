@@ -1,3 +1,20 @@
+## backlog2 (2026-11-14): fix the backlog from Tom's chapter 2 playthrough: monsters and street staged in view, Big Shake sinks away, caps names read right, Carmen and loft story edits
+
+Reports fixed (Tom's words quoted, id in brackets):
+- [2lln] "you can't see the monster" in Griffith Park, [l1cq] "Another strange positioning issue", [vht4] "Bad positioning, maybe they do it in the middle of the street": Ticket Flurry and Canyon Coyote now place five tiles left of Tom and walk in to two tiles; ch2End stages between the two arch poles (Washington 12, Tom 14, Odette and Carmen walk in from the left).
+- [n7ws] "Is that a pipe overlaying the enemy?": removed the code-drawn grey pipes from STORY_MAPFX.
+- [281i] "a final state of the hill where it just ... disappears": Big Shake finale now sinks into the hill and is gone (`bigshake` end:'leave').
+- [2guu] "The starter jar is too big": `drawBreadyJar` scale 1.1 to 0.8.
+- [e931] "pronouncing Tom like tomb": make-index no longer sends all-caps names (TOM, TNB) to the voice generator in caps; kid voices speed 1.12.
+- [44zb] "Pulling off a hole makes absolutely no sense": line rewritten to "a bite out of it".
+- [gyx4] "no animation where he goes behind the counter": Tom now reaches over the counter and Carmen asks "Who touched my griddle?". Old clips purged.
+- [ivwx] "there should be some" line after Carmen or Odette: Tom says "One down. Let's check on <the other one> next door."
+- [rd99] "this dialog shouldn't happen until after they exit the loft": the purple-sky beat moved to new scene `ch2Sky` on the boulevard (haze already on Downtown on arrival). TNB's "fishy" and Tom's "feed Bready" lines reworded without the sky; old clips purged.
+- [kyzo] Sal spacing: Sal steps away (`DRIVER_STEP`). Not checked by eye in a frame.
+- huddleFails spread limit 4 to 2 tiles (Nara beside Tom). Report [4dlv] left open until Tom replays it.
+
+Still open: es1t and fmss (facing, could not reproduce), ux5f and kviv (voice tags), 9h7v and kuq6 (voice recast), art and pose requests.
+
 ## clips12 (2026-11-14): Tom's 228 chapter 4 and 5 Voice Library takes merged, nothing heard on a phone
 
 - Merged `local-clips-pending_10.json` (made 2026-11-14T19:22Z) with merge-local.js: 228 dialogue takes (Tom 96, Amy 44, TNB 41, Grace 13, Rose 10, The Big One 6, Pip kid 4, Grump 3, Michael 3, Bean 2, Dot 2, LA woman 2, Bun 1, Oolong 1). No battle clips.

@@ -120,6 +120,8 @@ if(!voices['dialog|narrator']&&voices['dialog|washington']) voices['dialog|narra
 // Narrator delivery (Tom, 2026-11-03): theatrical storyteller, lively pace, not slow. Same voice id; only the direction changes.
 if(voices['dialog|narrator']) voices['dialog|narrator'].direction='theatrical storyteller, lively pace';
 if(voices['dialog|narrator']) voices['dialog|narrator'].speed=1.15; // ElevenLabs speaking rate (0.7 to 1.2); Tom: the narrator spoke too slowly in the preview
+// Child voices (report r-20261114-102303-9h7v, Tom: "doesn't sound like a child and it sounds very slow"): quicker speaking rate for the kids.
+for(const k of ['dialog|mosskid','dialog|dotkid','dialog|pipkid']) if(voices[k]) voices[k].speed=1.12;
 // The Mirrorball (Tom 11-08): Dolores' voice no longer exists on ElevenLabs (404), so she reuses an existing lady voice (no new
 // slot). fallback_ids: voices.html tries the next id when ElevenLabs answers 404 (voice deleted), so one missing voice never blocks a bake.
 // Tom 11-09: exaggerated, over the top, almost cartoonish fancy lady: stability 0 (most expressive) and a campy direction on every line.
@@ -301,6 +303,9 @@ const who={}; for(const it of items){ const k=it.v; who[k]=who[k]||{id:k,name:vn
 for(const it of items) if(it.s&&ACCENT[it.v]){ const A=ACCENT[it.v], H=ACCENT_HAS[it.v];
   it.s=it.s.replace(/\[([^\]]*)\]/g,(m,t)=>H.test(t)||/^\s*(short|long) pause\s*$/i.test(t)?m:'['+A+(t.trim()?', '+t.trim():'')+']');
   if(!/^\s*\[/.test(it.s)) it.s='['+A+'] '+it.s; }
+// Names are never sent in ALL CAPS (report r-20261114-103202-e931, Tom: the voice said "tomb" for "TOM!"): capitals change how a name is pronounced.
+// Emphasis goes in the bracket tags instead. TNB stays: it is read as letters.
+for(const it of items) if(it.s) it.s=it.s.replace(/\b(TOM|GRACE|ROSE|NARA|AMY|DEEDEE|BOPPY|JUSTIN|TATA|ELLIE|OLIVIA|MICHAEL|LACHLAN|ISLA|JOJO|WASHINGTON|ODETTE|CARMEN)\b/g,m=>m[0]+m.slice(1).toLowerCase());
 const out={made:new Date().toISOString().slice(0,10),files,voices,recast,who:Object.values(who).sort((a,b)=>(b.family-a.family)||(ORDER.indexOf(a.id)-ORDER.indexOf(b.id))||a.name.localeCompare(b.name)),
   chapters:Object.keys(titles).map(Number).sort((a,b)=>a-b).map(n=>({n,title:titles[n]})),items};
 fs.writeFileSync('data/voice-index.json',JSON.stringify(out));

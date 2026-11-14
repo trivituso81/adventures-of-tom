@@ -754,5 +754,5 @@ chapters	file	line	character	where	mood	text
 20	data/scenes-ch20.js	269	Vance	scene ch20Epi1	happy	It has four. I asked.
 20	data/scenes-ch20.js	271	Vance	scene ch20Epi1	loving	I am going to call my daughter. I do not know whether she will pick up. I am going to call anyway.
 2	tools/voice-library/scripts/ch02-story-directions.json	736	Miss Odette	scene ch2End	proud	I brought gumbo for the whole block. TNB! Sit DOWN. You're too skinny!
-2	tools/voice-library/scripts/ch02-story-directions.json	750	Doña Carmen	scene ch2End	angry	And YOU. Who went behind my counter?
+2	tools/voice-library/scripts/ch02-story-directions.json	750	Doña Carmen	scene ch2End	angry	And YOU. Who touched my griddle?
 2	tools/voice-library/scripts/ch02-story-directions.json	764	Doña Carmen	scene ch2End	proud	They came out perfectly crispy. Don't ever do it again.

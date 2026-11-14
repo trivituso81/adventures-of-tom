@@ -13,7 +13,7 @@
 const P=(f,d,o)=>Object.assign({f,d},o||{});
 const BOSS_FINALE={
   bigone:{end:'stay',path:{to:[15,7]},face:'travel',react:{kind:'laugh'},seq:[P('offer',.9,{sfx:'pickup',fx:'sparkle'}),P('wave',.8),P('dive',1.1,{x:[0,1],arc:.55,lift:[.05,.05]}),P('eyes',1.8,{x:1,fx:['splash','rings'],sfx:'splat'})]},
-  bigshake:{end:'stay',react:{kind:'touched'},seq:[P('yawn',1,{shake:.8}),P('half',.9,{fx:'dust'}),P('nearly',.9,{fx:'dust'}),P('mound',1.4,{fx:['dust','gold'],glow:[.6,0]})]},
+  bigshake:{end:'leave',react:{kind:'touched'},seq:[P('yawn',1,{shake:.8}),P('half',.9,{fx:'dust'}),P('nearly',.9,{fx:'dust'}),P('mound',1.4,{fx:['dust','gold'],glow:[.6,0]}),P('mound',1.3,{sink:[0,1.05],alpha:[1,0],fx:'dust'})]},   // report r-20261114-110700-281i: the mound sinks into the hill and is gone (it used to stay on top of the Observatory)
   irongill:{end:'leave',path:{away:1.6},react:{},seq:[P('give',.8),P('rise',.8,{x:[0,.5],lift:[0,.35]}),P('peak',.8,{x:[.5,.8],lift:[.35,.5],fx:'gold'}),P('dive',.7,{x:[.8,1],lift:[.5,.05]}),P('tail',1.3,{x:1,sink:[0,1.05],fx:['splash','rings','k:hearts'],sfx:'splat'})]},
   directorscut:{end:'leave',path:{away:3.5},react:{kind:'moved'},seq:[P('bow',1),P('wrap',.9,{sfx:'thud'}),P('hop',.6,{x:[0,.15],hop:1}),P('roll',1.5,{x:[.15,1],alpha:[1,.0],fx:'dust'})]},
   redpen:{end:'leave',path:{away:3},react:{kind:'touched'},seq:[P('flourish',1.5,{fx:['k:star','p:check']}),P('shut',.7,{sfx:'thud'}),P('hop',.9,{x:[0,.5],hop:2,fx:'reddots'}),P('look',.7,{x:.5}),P('hop',1,{x:[.5,1],hop:2,alpha:[1,0],fx:'reddots'})]},

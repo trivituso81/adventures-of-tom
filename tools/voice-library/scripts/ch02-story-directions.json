@@ -124,9 +124,9 @@
   {
    "voice": "tnb",
    "speaker": "TNB",
-   "text": "Mud in the kitchen, a talking fish, and now a purple sky. Babe, something fishy is going on.",
+   "text": "Mud in the kitchen and a talking fish. Babe, something fishy is going on.",
    "ctx": "chapter 2 (new)",
-   "script": "[tallying, nonchalant] Mud in the kitchen, a talking fish, and now a purple sky. [punchline] Babe, something FISHY is going on."
+   "script": "[tallying, nonchalant] Mud in the kitchen and a talking fish. [punchline] Babe, something FISHY is going on."
   },
   {
    "voice": "tom",
@@ -138,9 +138,9 @@
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "I want to go look at that sky with you. But first I have to feed Bready Mercury. He's been alone for a week.",
+   "text": "I want to take you home to Jefferson Park. But first I have to feed Bready Mercury. He's been alone for a week.",
    "ctx": "chapter 2 (reworded)",
-   "script": "[sweet] I want to go look at that sky with you. [guilty, fussing] But first I have to feed Bready Mercury. [doting] He's been alone for a WEEK."
+   "script": "[sweet] I want to take you home to Jefferson Park. [guilty, fussing] But first I have to feed Bready Mercury. [doting] He's been alone for a WEEK."
   },
   {
    "voice": "tnb",
@@ -425,9 +425,9 @@
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "Doña Carmen, I'm so sorry. I'm coming behind your counter. I know nobody's allowed back here.",
+   "text": "Doña Carmen, I'm so sorry. I'm reaching over your counter. I know nobody touches the griddle.",
    "ctx": "chapter 2 (new)",
-   "script": "[apologizing, nervous] Doña Carmen, I'm SO sorry. [announcing, guilty] I'm coming behind your counter. [rushed, apologizing] I know nobody's allowed back here."
+   "script": "[apologizing, nervous] Doña Carmen, I'm SO sorry. [announcing, guilty] I'm reaching over your counter. [rushed, apologizing] I know nobody touches the griddle."
   },
   {
    "voice": "tom",
@@ -544,9 +544,9 @@
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "The one at the pond has the same hole. And you can't pull it off. Rose tried, and then I tried.",
+   "text": "The one at the pond has a bite out of it too. It's stuck solid. Rose tried, and then I tried.",
    "ctx": "chapter 2 (new)",
-   "script": "[informing] The one at the pond has the same hole. [warning] And you can't pull it off. [admitting, sheepish] Rose tried, and then I tried."
+   "script": "[informing] The one at the pond has a bite out of it too. [warning] It's stuck solid. [admitting, sheepish] Rose tried, and then I tried."
   },
   {
    "voice": "tnb",
@@ -747,9 +747,9 @@
   {
    "voice": "carmen",
    "speaker": "Doña Carmen",
-   "text": "And YOU. Who went behind my counter?",
+   "text": "And YOU. Who touched my griddle?",
    "ctx": "chapter 2 (new)",
-   "script": "[light Salvadoran accent, stern] And YOU. [light Salvadoran accent, interrogating] Who went behind my counter?"
+   "script": "[light Salvadoran accent, stern] And YOU. [light Salvadoran accent, interrogating] Who touched my griddle?"
   },
   {
    "voice": "tom",

@@ -1,6 +1,9 @@
 'use strict';
 // engine/town-render.js — Rendering the town, interiors, actors and HUD extras.
+const DRIVER_STEP=20;   // art px (before the figure's scale) Sal's picture slides away while he talks
 function kissLean(a) {
+  // Sal (report r-20261114-103041-kyzo, Tom: "Tom is standing too close to Sal"): while Sal talks, his picture steps a little way away from the person he talks to.
+  if(a.driver&&typeof dialog!=='undefined'&&dialog.active&&dialog.npc===a&&typeof player!=='undefined') return Math.sign(a.x-player.x||1)*DRIVER_STEP;
   if(!kiss||(a!==player&&a!==kiss.npc)) return 0;
   const t=elapsedTime-kiss.start;
   if(t>2.2) return 0;

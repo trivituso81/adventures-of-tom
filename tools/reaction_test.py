@@ -52,7 +52,7 @@ SNAP=r"""(boss)=>{ const P=a=>{ const p=position(a); return [Math.round(p.x*100)
   return {who:dialog.name, idx:dialog.index, line:(dialog.pages&&dialog.pages[dialog.index])||'', map:currentMap.id, outside:!!currentMap.outside,
     party:ids.map(o=>({id:o.id,pos:P(o.a),facing:o.a.facing,pose:o.a.scenePose?String(o.a.scenePose.f):null,hidden:!!o.a.hidden,hid:!!(typeof huddleHidden==='function'&&huddleHidden(currentMap,Math.round(P(o.a)[0]),Math.round(P(o.a)[1]),new Map()))})),
     cam:(typeof camera!=='undefined'?[camera.x,camera.y,camera.zoom||camera.scale||null]:null),ppos:P(player),dock:(document.getElementById('dialog').getBoundingClientRect().top),npcs:currentMap.npcs.filter(n=>n.scenePose&&n.scenePose.emo).map(n=>[n.name,n.scenePose.f]),
-    boss:b&&!b.hidden?{pos:P(b),name:b.name}:null};
+    boss:b&&!b.hidden?{pos:P(b),name:b.name,mfl:b._bossFaceLeft,fac:b.facing}:null};
 }"""
 OBJ=r"""(sel)=>{ const m=currentMap,o=m.objects.find(o=>o[sel]||o.name===sel||o.kind===sel); if(!o) return null;
   const c=[]; for(let x=o.x;x<o.x+o.w;x++) { c.push([x,o.y+o.h,'up']); c.push([x,o.y-1,'down']); } for(let y=o.y;y<o.y+o.h;y++) { c.push([o.x-1,y,'right']); c.push([o.x+o.w,y,'left']); }

@@ -757,6 +757,6 @@ const NPC_EMOTION_MOODS={
 "vance|It has four. I asked.": "happy",
 "vance|I am going to call my daughter. I do not know whether she will pick up. I am going to call anyway.": "loving",
 "miss odette|I brought gumbo for the whole block. TNB! Sit DOWN. You're too skinny!": "proud",
-"doña carmen|And YOU. Who went behind my counter?": "angry",
+"doña carmen|And YOU. Who touched my griddle?": "angry",
 "doña carmen|They came out perfectly crispy. Don't ever do it again.": "proud"
 };

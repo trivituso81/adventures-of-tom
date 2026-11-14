@@ -149,9 +149,9 @@ chapter	file	line	character	mood	text
 2	tools/voice-library/scripts/ch02-story-directions.json	15	Tom	surprised	We chased it to the pond. And there was a talking fish as big as a car, wearing her baking tin like a crown.
 2	tools/voice-library/scripts/ch02-story-directions.json	16	TNB	happy	A talking fish! What did he say?
 2	tools/voice-library/scripts/ch02-story-directions.json	17	Tom	unimpressed	He said "Glub." Then he gave Rose a gold coin.
-2	tools/voice-library/scripts/ch02-story-directions.json	18	TNB	happy	Mud in the kitchen, a talking fish, and now a purple sky. Babe, something fishy is going on.
+2	tools/voice-library/scripts/ch02-story-directions.json	18	TNB	happy	Mud in the kitchen and a talking fish. Babe, something fishy is going on.
 2	tools/voice-library/scripts/ch02-story-directions.json	19	Tom	loving	The fish was the nicest part!
-2	tools/voice-library/scripts/ch02-story-directions.json	20	Tom	loving	I want to go look at that sky with you. But first I have to feed Bready Mercury. He's been alone for a week.
+2	tools/voice-library/scripts/ch02-story-directions.json	20	Tom	loving	I want to take you home to Jefferson Park. But first I have to feed Bready Mercury. He's been alone for a week.
 2	tools/voice-library/scripts/ch02-story-directions.json	21	TNB	happy	He hasn't been alone. Come on, I'll show you.
 2	tools/voice-library/scripts/ch02-story-directions.json	22	TNB	happy	So I stayed here with her. I was coming over anyway. I've been feeding Bready Mercury every day.
 2	tools/voice-library/scripts/ch02-story-directions.json	23	Tom	loving	Every day? Fifty grams of flour and fifty grams of water?
@@ -192,7 +192,7 @@ chapter	file	line	character	mood	text
 2	tools/voice-library/scripts/ch02-story-directions.json	58	Tom	happy	Miss Odette? I'm sorry to bother you. TNB is standing up, and he's very skinny today.
 2	tools/voice-library/scripts/ch02-story-directions.json	59	Tom	sad	Nothing. She's just like Mr. Washington.
 2	tools/voice-library/scripts/ch02-story-directions.json	60	TNB	scared	Babe, the pupusas are burning!
-2	tools/voice-library/scripts/ch02-story-directions.json	61	Tom	scared	Doña Carmen, I'm so sorry. I'm coming behind your counter. I know nobody's allowed back here.
+2	tools/voice-library/scripts/ch02-story-directions.json	61	Tom	scared	Doña Carmen, I'm so sorry. I'm reaching over your counter. I know nobody touches the griddle.
 2	tools/voice-library/scripts/ch02-story-directions.json	62	Tom	scared	I flipped them. I'm ready for the towel. Go ahead.
 2	tools/voice-library/scripts/ch02-story-directions.json	63	TNB	scared	She smacks you with that towel if you even look at the griddle.
 2	tools/voice-library/scripts/ch02-story-directions.json	64	Tom	sad	I know! I've never wanted to be hit with a towel so badly!
@@ -208,7 +208,7 @@ chapter	file	line	character	mood	text
 2	tools/voice-library/scripts/ch02-story-directions.json	75	Tom	unimpressed	Two thousand four hundred and seventy-five.
 2	tools/voice-library/scripts/ch02-story-directions.json	76	TNB	surprised	It's not glass, and it's not glaze. I work with this kind of stuff all day and I have no idea what it is.
 2	tools/voice-library/scripts/ch02-story-directions.json	77	TNB	scared	There's a little round hole in the side, like somebody took a bite out of it.
-2	tools/voice-library/scripts/ch02-story-directions.json	78	Tom	unimpressed	The one at the pond has the same hole. And you can't pull it off. Rose tried, and then I tried.
+2	tools/voice-library/scripts/ch02-story-directions.json	78	Tom	unimpressed	The one at the pond has a bite out of it too. It's stuck solid. Rose tried, and then I tried.
 2	tools/voice-library/scripts/ch02-story-directions.json	79	TNB	happy	Can I try anyway?
 2	tools/voice-library/scripts/ch02-story-directions.json	80	TNB	surprised	Okay. Wow. Your turn.
 2	tools/voice-library/scripts/ch02-story-directions.json	81	Tom	unimpressed	I already lost to the small one. ...Maybe it's easier in California.

@@ -367,7 +367,7 @@ function plateWalkBehind(map,plate,time=0) {
 // Bready Mercury on Tom's kitchen island, except while the squirrels have him (chapter 6, until the Oak boss is beaten).
 function drawHomeJar(time) {
   if(typeof storyMatch==='function'&&storyMatch({chapter:6,notFlag:'ch6-clear'})) return;
-  drawBreadyJar(918*T/78.4,322*T/78.4,1.1*T/78.4,time);
+  drawBreadyJar(918*T/78.4,322*T/78.4,0.8*T/78.4,time);
 }
 // Grump Hollow crumb trail, chapter 1 (crumbs3). Three overlays built by tools/sprite-bake/bake_hollow_crumbs.py from single painted bits of the
 // approved sheet prop-trail-hollow. Each entry: picture, the flag that shows it, its centre in plate art px (64 per tile) and its width.

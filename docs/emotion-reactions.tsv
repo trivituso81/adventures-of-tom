@@ -446,9 +446,9 @@ scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	The m
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	We chased it to the pond. And there was a talking fish as big as a car, wearing her baking tin like a crown.	tnb	surprised	talking fish
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	A talking fish! What did he say?	tom	happy	What did he say
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	He said "Glub." Then he gave Rose a gold coin.	tnb	happy	Glub.
-scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	Mud in the kitchen, a talking fish, and now a purple sky. Babe, something fishy is going on.	tom	happy	something fishy
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	Mud in the kitchen and a talking fish. Babe, something fishy is going on.	tom	happy	something fishy
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	The fish was the nicest part!	tnb	happy	nicest part
-scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	I want to go look at that sky with you. But first I have to feed Bready Mercury. He's been alone for a week.	tnb	happy	alone for a week
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	I want to take you home to Jefferson Park. But first I have to feed Bready Mercury. He's been alone for a week.	tnb	happy	alone for a week
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	He hasn't been alone. Come on, I'll show you.	tom	surprised	hasn't been alone
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Porch	TNB	So I stayed here with her. I was coming over anyway. I've been feeding Bready Mercury every day.	nara	happy	stayed here with her
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Porch	TNB	So I stayed here with her. I was coming over anyway. I've been feeding Bready Mercury every day.	tom	loving	every day
@@ -489,7 +489,7 @@ scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Odette	TNB	Bab
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Odette	Tom	Miss Odette? I'm sorry to bother you. TNB is standing up, and he's very skinny today.	tnb	happy	very skinny today
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Odette	Tom	Nothing. She's just like Mr. Washington.	tnb	sad	Nothing.
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Carmen	TNB	Babe, the pupusas are burning!	tom	scared	burning
-scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Carmen	Tom	Doña Carmen, I'm so sorry. I'm coming behind your counter. I know nobody's allowed back here.	tnb	surprised	behind your counter
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Carmen	Tom	Doña Carmen, I'm so sorry. I'm reaching over your counter. I know nobody touches the griddle.	tnb	surprised	over your counter
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Carmen	Tom	I flipped them. I'm ready for the towel. Go ahead.	tnb	scared	ready for the towel
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Carmen	TNB	She smacks you with that towel if you even look at the griddle.	tom	scared	even look at the griddle
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Carmen	Tom	I know! I've never wanted to be hit with a towel so badly!	tnb	sad	so badly
@@ -508,7 +508,7 @@ scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	On L
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	Two thousand four hundred and seventy-five.	tnb	unimpressed	seventy-five
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	It's not glass, and it's not glaze. I work with this kind of stuff all day and I have no idea what it is.	tom	scared	no idea what it is
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	There's a little round hole in the side, like somebody took a bite out of it.	tom	surprised	round hole in the side
-scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	The one at the pond has the same hole. And you can't pull it off. Rose tried, and then I tried.	tnb	surprised	the same hole
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	The one at the pond has a bite out of it too. It's stuck solid. Rose tried, and then I tried.	tnb	surprised	a bite out of it
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	Can I try anyway?	tom	happy	try anyway
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	Okay. Wow. Your turn.	tom	unimpressed	Your turn
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	I already lost to the small one. ...Maybe it's easier in California.	tnb	happy	easier in California
@@ -548,8 +548,8 @@ scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	TNB	That's
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Miss Odette	I brought gumbo for the whole block. TNB! Sit DOWN. You're too skinny!	washington	happy	gumbo for the whole block
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Miss Odette	I brought gumbo for the whole block. TNB! Sit DOWN. You're too skinny!	tnb	happy	Sit DOWN
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Miss Odette	I brought gumbo for the whole block. TNB! Sit DOWN. You're too skinny!	tom	happy	too skinny
-scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Doña Carmen	And YOU. Who went behind my counter?	tnb	surprised	And YOU
-scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Doña Carmen	And YOU. Who went behind my counter?	tom	happy	behind my counter
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Doña Carmen	And YOU. Who touched my griddle?	tnb	surprised	And YOU
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Doña Carmen	And YOU. Who touched my griddle?	tom	happy	my griddle
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Tom	Thank you, Doña Carmen! That's the best towel I've ever been hit with!	carmen	unimpressed	best towel
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Tom	Thank you, Doña Carmen! That's the best towel I've ever been hit with!	tnb	happy	ever been hit with
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Doña Carmen	They came out perfectly crispy. Don't ever do it again.	tom	proud	perfectly crispy

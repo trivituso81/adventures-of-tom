@@ -382,23 +382,28 @@ SCENES.ch2Loft=[
   {trace:'tnb-hello'},
   {talk:'TNB',lines:['My call time got pushed to Thursday. The lead actor lost a shoe. I already found it. So I\'m all yours.']},
   {talk:'Tom',lines:['...']},
-  {call:()=>{ sfx.pickup&&sfx.pickup(); }}, {face:'TNB',dir:'right'}, {wait:.9},
-  {talk:'Tom',lines:['Wait, why is the sky PURPLE? It\'s two in the afternoon!']},
-  {talk:'TNB',lines:['It\'s been like that since this morning. I held my soda up to it. It\'s the exact same color.']},
-  {talk:'TNB',lines:['I don\'t know what it is, babe. But it\'s pretty grape.']},
-  {talk:'Tom',lines:['Don\'t make me laugh, it\'s freaky! ...Okay. It IS a little grape.']},
   {talk:'Tom',lines:['Something strange happened on Long Island too. A blob of mud with eyes climbed in my mother\'s kitchen window and ran off with her rhubarb crisp.']},
   {talk:'TNB',lines:['The mud took Deedee\'s crisp? Is the mud okay?']},
   {talk:'Tom',lines:['We chased it to the pond. And there was a talking fish as big as a car, wearing her baking tin like a crown.']},
   {talk:'TNB',lines:['A talking fish! What did he say?']},
   {talk:'Tom',lines:['He said "Glub." Then he gave Rose a gold coin.']},
-  {talk:'TNB',lines:['Mud in the kitchen, a talking fish, and now a purple sky. Babe, something fishy is going on.']},
+  {talk:'TNB',lines:['Mud in the kitchen and a talking fish. Babe, something fishy is going on.']},
   {talk:'Tom',lines:['The fish was the nicest part!']},
-  {talk:'Tom',lines:['I want to go look at that sky with you. But first I have to feed Bready Mercury. He\'s been alone for a week.']},
+  {talk:'Tom',lines:['I want to take you home to Jefferson Park. But first I have to feed Bready Mercury. He\'s been alone for a week.']},
   {talk:'TNB',lines:['He hasn\'t been alone. Come on, I\'ll show you.']},
   {join:'tnb'},
   {wait:2.6},
   {toast:'Goal: home to 2nd Ave in Jefferson Park, south of Downtown. Tom’s house is 3468.',time:4.5}
+];
+// 2b. Outside the loft, on the boulevard: the purple sky (report r-20261114-103411-rd99, Tom: they cannot see the sky from inside the loft; it
+// happens once they step out, when the haze is over Downtown). Triggers on the first step onto the boulevard after TNB joins.
+SCENES.ch2Sky=[
+  {flag:'ch2-sky'},
+  {call:()=>{ sfx.pickup&&sfx.pickup(); }}, {wait:.9},
+  {talk:'Tom',lines:['Wait, why is the sky PURPLE? It\'s two in the afternoon!']},
+  {talk:'TNB',lines:['It\'s been like that since this morning. I held my soda up to it. It\'s the exact same color.']},
+  {talk:'TNB',lines:['I don\'t know what it is, babe. But it\'s pretty grape.']},
+  {talk:'Tom',lines:['Don\'t make me laugh, it\'s freaky! ...Okay. It IS a little grape.']}
 ];
 // 3. Jefferson Park: Nara is waiting on Tom's porch (her meeting scene is engine/nara.js). Then she joins, and TNB's bread bowl (Sit. Paw. Treat.).
 SCENES.ch2Porch=[
@@ -502,14 +507,14 @@ SCENES.ch2Odette=[
   {talk:'Tom',lines:['Miss Odette? I\'m sorry to bother you. TNB is standing up, and he\'s very skinny today.']},
   {talk:'Miss Odette',lines:['Stirring. Stirring.']},
   {talk:'Tom',lines:['Nothing. She\'s just like Mr. Washington.']},
-  {if:()=>!flag('ch2-carmen'),then:[{toast:'Goal: Doña Carmen next door (PUPUSAS).',time:3.5}],else:[]}
+  {if:()=>!flag('ch2-carmen'),then:[{talk:'Tom',lines:['Okay. One down. Let\'s check on Doña Carmen next door.']},{toast:'Goal: Doña Carmen next door (PUPUSAS).',time:3.5}],else:[]}
 ];
 SCENES.ch2Carmen=[
   {flag:'ch2-carmen'},
   {talk:'Doña Carmen',lines:['The pupusas are fine. Everything is fine. It\'s always this afternoon. Why did I ever flip them?']},
   {call:()=>sfx.sizzle?sfx.sizzle():sfx.whoosh()},
   {talk:'TNB',lines:['Babe, the pupusas are burning!']},
-  {talk:'Tom',lines:['Doña Carmen, I\'m so sorry. I\'m coming behind your counter. I know nobody\'s allowed back here.']},
+  {talk:'Tom',lines:['Doña Carmen, I\'m so sorry. I\'m reaching over your counter. I know nobody touches the griddle.']},
   {call:()=>sfx.sizzle?sfx.sizzle():sfx.whoosh()}, {wait:1.2},
   {talk:'Tom',lines:['I flipped them. I\'m ready for the towel. Go ahead.']},
   {wait:1},
@@ -517,7 +522,7 @@ SCENES.ch2Carmen=[
   {talk:'Tom',lines:['I know! I\'ve never wanted to be hit with a towel so badly!']},
   {call:()=>{ sfx.whoosh(); sfx.bark&&sfx.bark(); }}, {hearts:'nara'},
   {talk:'TNB',lines:['Nara is right. That\'s not kitchen smoke. It\'s the same purple smog, and it\'s blowing down from the hills.']},
-  {if:()=>!flag('ch2-odette'),then:[{toast:'Goal: Miss Odette next door (CREOLE).',time:3.5}],else:[]}
+  {if:()=>!flag('ch2-odette'),then:[{talk:'Tom',lines:['Okay. One down. Let\'s check on Miss Odette next door.']},{toast:'Goal: Miss Odette next door (CREOLE).',time:3.5}],else:[]}
 ];
 // 7. Back outside: the smog is coming down from Griffith Park.
 SCENES.ch2Source=[
@@ -534,8 +539,8 @@ const CH2_AFTER=(lost,lines)=>[
 ];
 SCENES.ch2Flurry=[
   {flag:'ch2-t1'},
-  {place:'Ticket Flurry',at:()=>[player.x+3,player.y-2]},
-  {walk:'Ticket Flurry',to:()=>[[player.x+2,player.y-1],[player.x+1,player.y-1],[player.x+1,player.y]],speed:.25},
+  {place:'Ticket Flurry',at:()=>[player.x-5,player.y]},
+  {walk:'Ticket Flurry',to:()=>[[player.x-4,player.y],[player.x-3,player.y],[player.x-2,player.y]],speed:.25},
   {talk:'Ticket Flurry',lines:['Street cleaning. Tuesday. Eight to ten. You didn\'t read the sign. And the smog says we can stay forever.']},
   {talk:'Tom',lines:['The parking tickets can TALK now? They were bad enough when they were quiet!']},
   {talk:'Tom',lines:['And I moved my car on Monday night! I set two alarms!']},
@@ -546,8 +551,8 @@ SCENES.ch2Flurry=[
 ];
 SCENES.ch2Coyote=[
   {flag:'ch2-tuts',value:'pending'},
-  {place:'Canyon Coyote',at:()=>[player.x-2,player.y-2]},
-  {walk:'Canyon Coyote',to:()=>[[player.x-1,player.y-2],[player.x-1,player.y-1]],speed:.3},
+  {place:'Canyon Coyote',at:()=>[player.x-5,player.y]},
+  {walk:'Canyon Coyote',to:()=>[[player.x-4,player.y],[player.x-3,player.y],[player.x-2,player.y]],speed:.3},
   {talk:'Canyon Coyote',lines:['Nice hike. You look like you have snacks. And the dog looks like a snack.']},
   {call:()=>{ sfx.growl?sfx.growl():sfx.bark&&sfx.bark(); }},
   {talk:'Tom',lines:['Excuse me! She is not a snack. She is our guest!']},
@@ -575,7 +580,7 @@ SCENES.ch2Lemon=[
   ch1Tug('tnb'), {sfx:'bonk'},
   {talk:'TNB',lines:['It\'s not glass, and it\'s not glaze. I work with this kind of stuff all day and I have no idea what it is.']},
   {talk:'TNB',lines:['There\'s a little round hole in the side, like somebody took a bite out of it.']},
-  {talk:'Tom',lines:['The one at the pond has the same hole. And you can\'t pull it off. Rose tried, and then I tried.']},
+  {talk:'Tom',lines:['The one at the pond has a bite out of it too. It\'s stuck solid. Rose tried, and then I tried.']},
   {talk:'TNB',lines:['Can I try anyway?']},
   ch1Tug('tnb'), {sfx:'bonk'}, ch1Tug('tnb'), {wait:.2},
   {talk:'TNB',lines:['Okay. Wow. Your turn.']},
@@ -641,21 +646,20 @@ SCENES.ch2AfterBoss=[
 // 11. 2nd Ave: Mr. Washington finishes his story, and both scoldings come back in person. Chapter complete.
 SCENES.ch2End=[
   {flag:'ch2-done',value:'pending'},
-  {place:'Mr. Washington',at:[10,18],dir:'left'},
-  {walk:'tom',to:routeTo('tom',8,18),speed:.22}, {face:'tom',dir:'right'},
-  {place:'tnb',at:[7,18],dir:'right'}, {place:'nara',at:[8,19],dir:'up'},
+  {place:'Mr. Washington',at:[12,18],dir:'right'},
+  {walk:'tom',to:routeTo('tom',14,18),speed:.22}, {face:'tom',dir:'left'},
   {talk:'Mr. Washington',lines:['...smelled like gumbo on a Saturday night. Zydeco from the boulevard. Kids on every porch.','Where was I? Oh. I was done. That was the whole story.']},
   {talk:'TNB',lines:['That\'s ten times now. It gets better every time.']},
   {talk:'Mr. Washington',lines:['Funny. For a while there I didn\'t want anything to change. Then I remembered the best parts all came from things changing.']},
   {talk:'Tom',lines:['Keep the old windows, though.']},
   {talk:'Mr. Washington',lines:['Keep the old windows. Smart man.']},
   {trace:'washington'},
-  {spawn:{name:'Miss Odette',look:'odette',at:[15,19],dir:'left'}},
-  {spawn:{name:'Doña Carmen',look:'carmen',at:[15,17],dir:'left'}},
-  {all:[{walk:'Miss Odette',to:[[14,19],[13,19],[12,19],[11,19]],speed:.3},{walk:'Doña Carmen',to:[[14,17],[13,17],[12,17],[11,17]],speed:.3}]},
+  {spawn:{name:'Miss Odette',look:'odette',at:[8,19],dir:'right'}},
+  {spawn:{name:'Doña Carmen',look:'carmen',at:[8,17],dir:'right'}},
+  {all:[{walk:'Miss Odette',to:routeTo('Miss Odette',13,19),speed:.3},{walk:'Doña Carmen',to:routeTo('Doña Carmen',13,17),speed:.3}]},
   {talk:'Miss Odette',lines:['I brought gumbo for the whole block. TNB! Sit DOWN. You\'re too skinny!']},
   {talk:'TNB',lines:['Yes, ma\'am!']},
-  {talk:'Doña Carmen',lines:['And YOU. Who went behind my counter?']},
+  {talk:'Doña Carmen',lines:['And YOU. Who touched my griddle?']},
   {call:()=>{ sfx.bonk&&sfx.bonk(); sfx.whoosh(); }}, {wait:.4},
   {talk:'Tom',lines:['Thank you, Doña Carmen! That\'s the best towel I\'ve ever been hit with!']},
   {talk:'Doña Carmen',lines:['They came out perfectly crispy. Don\'t ever do it again.']},
@@ -687,6 +691,7 @@ const TRIGGERS=[
   {id:'ch1-end',map:'grands',when:{...CH1,flag:'ch1-tin',notFlag:'ch1-done'},scene:'ch1End'},
   {id:'ch2-arrive',map:'blvd',when:{...CH2,notFlag:'ch2-goal'},scene:'ch2Arrive'},
   {id:'ch2-loft',map:'lofts',when:{...CH2,notFlag:'ch2-tnb'},scene:'ch2Loft'},
+  {id:'ch2-sky',map:'blvd',when:{...CH2,flag:'ch2-tnb',notFlag:'ch2-sky'},scene:'ch2Sky'},
   {id:'ch2-porch',map:'jpark',when:{...CH2,flag:'met-nara',notFlag:'ch2-nara'},scene:'ch2Porch'},
   {id:'ch2-starter',map:'tomhouse',when:{...CH2,flag:'ch2-nara',notFlag:'ch2-starter'},scene:'ch2Starter'},
   {id:'ch2-smog',map:'jpark',when:{...CH2,flag:'ch2-starter',notFlag:'ch2-smog'},scene:'ch2Smog'},
@@ -762,14 +767,13 @@ const STORY_MAPFX=[
   time=>{
     if(STORY.chapter!==2) return;
     const M=currentMap,smog=!!flag('ch2-smog')&&!flag('ch2-clear');
-    // The Observatory's pipes, coughing smog until the Big Shake is beaten.
+    // Smog puffs rise beside the Observatory's two side towers until the Big Shake is beaten (the code-drawn grey pipes are gone: report r-20261114-110455-n7ws, they looked pasted on).
     if(M.id==='griffith') for(const [px,py] of [[3.3,2.9],[9.9,2.9]]) {   // beside the Observatory's two side towers (`griffith2`)
       const x=Math.round(px*T),y=Math.round(py*T);
-      rect(x-3,y-14,8,16,OUT); rect(x-2,y-13,6,14,'#8e9aa8'); rect(x-4,y-16,10,4,OUT); rect(x-3,y-15,8,2,'#aeb3ba');
       if(smog||!flag('ch2-tnb')) for(let k=0;k<4;k++) { const ph=(time*.5+k/4)%1; gfx.globalAlpha=(1-ph)*.7; ellipse(x+1+Math.sin(time*2+k)*5,y-18-ph*40,5+ph*12,4+ph*8,k%2?'#8a5aa8':'#b48ad0'); }
       gfx.globalAlpha=1;
     }
-    if(!smog) return;
+    if(!smog&&!(M.id==='blvd'&&flag('ch2-goal')&&!flag('ch2-clear'))) return;   // Downtown is already under the haze when Tom lands (ch2Sky)
     const a=CH2_SMOG_MAPS[M.id]; if(!a) return;
     // A purple haze over the whole map, with slow drifting puffs.
     gfx.globalAlpha=a; rect(0,0,M.w*T,M.h*T,'#7a4aa0');
