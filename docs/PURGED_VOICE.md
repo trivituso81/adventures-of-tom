@@ -171,3 +171,7 @@ Dropped, can never play: the narration boxes now shown as actions (the bell, the
 ## 2026-11-14 (`backlog1`): 2 clips
 
 Reworded by Tom's reports, so the old clips can never play: `grace|It's so brown. It's the brownest thing I've ever seen.` and `tom|I'm trying, Rose. It's a marble and it's winning.` (data/voice/dialog-ch28.js, about 69 KB). Both lines need a re-record.
+
+## 2026-11-14 (`bern1`): Bernadette rewrite, 21 clips
+
+Bernadette got a new personality, new words and her own voice key, so her 19 chapter 6 clips in the old shared `penny` voice can never play, and TNB's two reworded lines ("Babe, she has a corkboard with red string. I've never felt so seen." and "Noted. On a corkboard. With red string."). Spec: tools/clip-audit/purge-bern1.json (about 596 KB). All need a new recording. Her seven potluck clips were kept and moved to the `bernadette` key (tools/voice-library/rekey-bern1.json).

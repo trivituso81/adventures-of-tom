@@ -47,7 +47,7 @@ const DIALOG_CAST={
     'Glitter Glue':'mudling',
     'Dodgeball Dread':'toad',
     'The Red Pen':'grump',
-    'Bernadette':'penny',
+    'Bernadette':'bernadette',
     'Acorn Agent':'skeeter',
     'Sticky Sap':'mudling',
     'Peanut Gallery':'toad',
@@ -155,7 +155,6 @@ const DIALOG_CAST={
     'Glitter Glue':'glue',
     'Dodgeball Dread':'dodge',
     'The Red Pen':'redpen',
-    'Bernadette':'older',
     'Acorn Agent':'agent',
     'Sticky Sap':'sap',
     'Peanut Gallery':'gallery',
@@ -263,6 +262,12 @@ const DIALOG_CAST={
     dolores:{name:'Dolores',type:'Neighbor: Starlite projectionist (the old Aunt Ellie voice)',stability:.5,
       desc:'A very elderly woman in her nineties with a grand, theatrical, sharp-witted voice and a refined mid-Atlantic accent. Dry, imperious and glamorous, slow deliberate delivery, every line a bon mot. Clean studio recording.',
       sample:'Tom. Stand up straight. There. Now you look like someone I am related to. I have been to Paris eleven times, darling. Long Island is charming, like a hat you wear once. Never apologize for being early, dressing up, or leaving a bad party.'},
+    // Bernadette (bern1, Tom 2026-11-14): her own voice key, so Penny and Nickel keep theirs. No new ElevenLabs voice (the account is full
+    // at 30): she uses Oolong's voice id (`from`), lifted a little at merge (fx bernadette) so she is sharper and younger than Oolong.
+    // The written scripts carry the acting: every tag says what she is doing to the other person, down to single words.
+    bernadette:{name:'Bernadette',type:'Neighbor: Neighborhood Watch Captain',from:'oolong',fx:'bernadette',stability:.5,
+      desc:'A woman of sixty-six, Neighborhood Watch Captain for nineteen years. Bossy, short-fused, snippy and resentful: she gives grown adults orders, corrects things nobody got wrong, keeps score, and has never once been thanked. Clipped and commanding, sour, a chip on her shoulder in every sentence. Clean studio recording.',
+      sample:'Stop right there. Neighborhood Watch. Names and house numbers. I have run this Watch for nineteen years without one thank-you card. So listen closely, because I am only saying this once. The squirrels are organized.'},
     // ---- Chapter 2 (Los Angeles) ----
     washington:{name:'Mr. Washington',type:'Neighbor: porch storyteller',stability:.5,
       desc:'An elderly man in his eighties with a deep, warm, slow voice and a gentle hint of Louisiana in it. A neighborhood storyteller on his porch, unhurried, kind, a little gravelly. Clean studio recording.',

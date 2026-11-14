@@ -31,7 +31,6 @@ chapter	file	line	character	mood	text
 1	data/scenes.js	169	Deedee	surprised	A WHAT climbed in my window?
 1	data/scenes.js	170	Rose	scared	It has EYES! The mud has EYES!
 1	data/scenes.js	171	Deedee	angry	Forty years in this kitchen. I've had ants. I've had a raccoon. I have never had THAT.
-1	data/scenes.js	172	Grace	unimpressed	It's so brown. It's the brownest thing I've ever seen.
 1	data/scenes.js	144	Tom	angry	That was UNCALLED for!
 1	data/scenes.js	174	Grace	surprised	It's running for the pond!
 1	data/scenes.js	145	Deedee	angry	It took the crisp AND my good tin! Grab your shoes, everybody. We're going after it, and I'm coming with you.
@@ -62,7 +61,6 @@ chapter	file	line	character	mood	text
 1	data/scenes.js	249	Rose	happy	I'm keeping it. It's stuck.
 1	data/scenes.js	251	Tom	proud	Let me.
 1	data/scenes.js	253	Rose	unimpressed	You're not trying.
-1	data/scenes.js	254	Tom	unimpressed	I'm trying, Rose. It's a marble and it's winning.
 1	data/scenes.js	255	Grace	surprised	There's a little round hole in the side. Like somebody took a bite.
 1	data/scenes.js	257	Deedee	angry	And somebody left a burnt light bulb. Now they're littering at my pond too.
 1	data/scenes.js	259	Deedee	angry	The tin. Go, go, go.
@@ -730,10 +728,14 @@ chapter	file	line	character	mood	text
 6	data/scenes.js	1882	Nara	happy	Nara knows the word WALK. She's always known the word walk. She's already at the end of the street.
 6	data/scenes.js	1883	Olivia	happy	Bring her back tired! Please! Michael, can you grab Isla? She's licking the mailbox.
 6	data/scenes.js	1893	Tom	none	Tom. 3468. I've lived on 2nd Ave for six years.
+6	data/scenes.js	2460	TNB	happy	Hi. I'm TNB.
 6	data/scenes.js	1896	TNB	proud	I KNEW it.
+6	data/scenes.js	2469	TNB	happy	Could you do the bits you know?
 6	data/scenes.js	1900	Nara	proud	Nara puts her nose to the grass and pulls. Hard. Left. Right. Back. Three fresh holes, three different directions.
 6	data/scenes.js	1901	Tom	surprised	The squirrels buried something in three different spots.
-6	data/scenes.js	1903	TNB	happy	Babe, she has a corkboard with red string. I've never felt so seen.
+6	data/scenes.js	2475	Tom	none	Are you coming with us?
+6	data/scenes.js	2477	TNB	surprised	Babe. She's scary, she's rude, and she has a corkboard with red string. I can't decide how I feel.
+6	data/scenes.js	2478	Tom	unimpressed	I can. Walk faster.
 6	data/scenes.js	1913	TNB	surprised	Is it heckling us? From inside a peanut?
 6	data/scenes.js	1915	Tom	unimpressed	My shoes don't have laces.
 6	data/scenes.js	1919	TNB	happy	The playground is clear. And Nara is staring at the sandbox like it owes her money.
@@ -793,8 +795,11 @@ chapter	file	line	character	mood	text
 6	data/scenes.js	2084	Tom	surprised	He finds something lonely, hands it a gold coin, and it tries to make one thing last forever.
 6	data/scenes.js	2085	TNB	happy	And then we show up and make friends with it, and the coin falls right off. Babe. We are ruining this man's whole year. Spooky. I love it. I hate it.
 6	data/scenes.js	2095	Olivia	happy	Tom! You found everything! Marisol’s balls, Mr. Washington’s glasses, Lachlan’s truck. He hasn't put it down. He's eating cereal with one hand.
-6	data/scenes.js	2097	TNB	happy	Noted. On a corkboard. With red string.
+6	data/scenes.js	2675	TNB	unimpressed	Noted. You were right, Bernadette.
+6	data/scenes.js	2677	TNB	unimpressed	...YOU WERE RIGHT, BERNADETTE.
 6	data/scenes.js	2101	Nara	loving	Nara takes it very gently. She'll never let go of it again. She's going to sleep for twelve hours, holding it.
+6	data/scenes.js	2685	Tom	happy	Bernadette, this is really kind of you.
+6	data/scenes.js	2687	Tom	none	...It looked thirsty.
 6	data/scenes.js	2106	TNB	happy	You know what today was, babe? Absolutely nuts.
 6	data/scenes.js	2107	Tom	unimpressed	...That's not a pun. That's just a word.
 6	data/scenes.js	2108	TNB	happy	It's a word with a pun in its heart.
@@ -804,11 +809,7 @@ chapter	file	line	character	mood	text
 7	data/scenes.js	2315	Grace	proud	Okay. Everybody up. I'm in charge of getting up. Up, up, UP.
 7	data/scenes.js	2326	Grace	proud	That's all three cards, Tata. Card one, card two, card three. Three gold letters.
 7	data/scenes.js	2327	Tom	none	The three gold letters spell the password for the Reading Room doors. We enter them in card order: one, two, three.
-7	data/scenes.js	2333	Grace	happy	Tata. TATA. Did you get my text? I sent it from Mom’s phone. She said I could. She said it after.
-7	data/scenes.js	2334	Tom	unimpressed	I got it. The library is whispering.
-7	data/scenes.js	2335	Grace	scared	Not a little bit. ALL the books. At the same time. And they're saying THINGS.
 7	data/scenes.js	2336	Rose	surprised	A book told me Boppy eats cookies in the car. In the CAR, Tata. Before DINNER.
-7	data/scenes.js	2337	Tom	unimpressed	...That one is true. Everybody knows that one.
 7	data/scenes.js	2338	Grace	angry	A book told everybody I sing in the shower. Which is PRIVATE. Also I'm very good.
 7	data/scenes.js	2338	Grace	unimpressed	Page says everything is fine. Page has said fine eleven times. I counted. Nobody says fine eleven times if it's fine.
 7	data/scenes.js	2348	Grace	unimpressed	Twelve.

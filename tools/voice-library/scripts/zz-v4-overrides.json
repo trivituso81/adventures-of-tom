@@ -940,46 +940,11 @@
 "script": "[quick, spooked] Washington's reading glasses, and Marisol says every tennis ball."
 },
 {
-"voice": "penny",
-"speaker": "",
-"text": "They have lookouts in the playground, a spy in the community garden,",
-"ctx": "v4 override",
-"script": "[conspiratorial, intense] They have lookouts in the playground, a spy in the community garden,"
-},
-{
-"voice": "penny",
-"speaker": "",
-"text": "and somebody at the picnic tables stuffing their cheeks with anything that's not nailed down.",
-"ctx": "v4 override",
-"script": "[appalled, clipped] and somebody at the picnic tables stuffing their cheeks with anything that's not nailed down."
-},
-{
-"voice": "penny",
-"speaker": "",
-"text": "Everything they steal goes up THAT tree, the Old Oak. There's a little door in the trunk that opens with a secret knock. I've only ever heard bits of it.",
-"ctx": "v4 override",
-"script": "[hushed, intense] Everything they steal goes up THAT tree, the Old Oak. [annoyed, muttering] There's a little door in the trunk that opens with a secret knock. I've only ever heard bits of it."
-},
-{
 "voice": "tom",
 "speaker": "",
 "text": "The squirrels buried something in three different spots.",
 "ctx": "v4 override",
 "script": "[quiet, grim] The squirrels buried something in three different spots."
-},
-{
-"voice": "penny",
-"speaker": "",
-"text": "Clear the squirrels out of those three spots, and Nara can dig up what they buried. I'd bet a piece of that secret knock is in each hole.",
-"ctx": "v4 override",
-"script": "[commanding, crisp] Clear the squirrels out of those three spots, and Nara can dig up what they buried. I'd bet a piece of that secret knock is in each hole."
-},
-{
-"voice": "penny",
-"speaker": "",
-"text": "I'll be here with my clipboard.",
-"ctx": "v4 override",
-"script": "[smug, officious] I'll be here with my clipboard."
 },
 {
 "voice": "tom",
@@ -1248,15 +1213,15 @@
 "script": "[focused, hushed] She's pointing east, toward the end of the boulevard. [excited, low] Babe, that's the old Car Barn, Division Nine. [reverent, warm] The streetcars ran out of there until 1963."
 },
 {
-"voice": "penny",
-"speaker": "",
+"voice": "bernadette",
+"speaker": "Bernadette",
 "text": "The barn has been chained up for sixty years. Here, take the committee key. I'm the committee.",
 "ctx": "v4 override",
 "script": "[skeptical, brisk] The barn has been chained up for sixty years. Here, take the committee key. I'm the committee."
 },
 {
-"voice": "penny",
-"speaker": "",
+"voice": "bernadette",
+"speaker": "Bernadette",
 "text": "We're closing the boulevard for the potluck tables, and I need the bread by six.",
 "ctx": "v4 override",
 "script": "[flat, officious] We're closing the boulevard for the potluck tables, and I need the bread by six."

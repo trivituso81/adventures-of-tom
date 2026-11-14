@@ -199,13 +199,6 @@
    "script": "[careful, curious] Olivia said you saw a flash on SUNDAY."
   },
   {
-   "voice": "penny",
-   "speaker": "Bernadette",
-   "text": "Sunday, 6:12 in the morning, at the picnic tables. One flash and no thunder. By 6:20 the squirrels had lookouts. Come and see what it left.",
-   "ctx": "chapter 6 (new)",
-   "script": "[crisp, official] Sunday, 6:12 in the morning, at the picnic tables. [hushed, grave] One flash and no thunder. By 6:20 the squirrels had LOOKOUTS. [beckoning, grim] Come and see what it left."
-  },
-  {
    "voice": "tom",
    "speaker": "Tom",
    "text": "The whole picnic is grey! And there's an orange block on the table. It's as big as a bathtub!",
@@ -218,13 +211,6 @@
    "text": "Babe, there's a picnic basket inside it. And a squirrel! He's halfway into the basket with his tail in the air!",
    "ctx": "chapter 6 (new)",
    "script": "[hushed, amazed] Babe, there's a picnic basket inside it. [gasping] And a SQUIRREL! [incredulous, delighted] He's halfway into the basket with his tail in the AIR!"
-  },
-  {
-   "voice": "penny",
-   "speaker": "Bernadette",
-   "text": "Caught in the act. I've wanted to see that for nineteen years. I didn't want to see it like THIS.",
-   "ctx": "chapter 6 (new)",
-   "script": "[grim, vindicated] Caught in the act. [wistful, clipped] I've wanted to see that for NINETEEN years. [pained, flat] I didn't want to see it like THIS."
   },
   {
    "voice": "tnb",
@@ -262,13 +248,6 @@
    "script": "[smug, fond] I learned from the BEST. [investigating] And there's going to be a burnt flashbulb. [puzzled] I just can't find it."
   },
   {
-   "voice": "penny",
-   "speaker": "Bernadette",
-   "text": "Are you looking for this? I found it under the last table at 6:31. Bagged, labeled and dated. Exhibit A.",
-   "ctx": "chapter 6 (new)",
-   "script": "[smug, officious] Are you looking for THIS? [crisp, proud] I found it under the last table at 6:31. [deadpan, grand] Bagged, labeled and dated. Exhibit A."
-  },
-  {
    "voice": "tom",
    "speaker": "Tom",
    "text": "That's the sixth one! Could we have it? My mother keeps them in a drawer.",
@@ -276,25 +255,11 @@
    "script": "[thrilled] That's the SIXTH one! [hopeful, polite] Could we have it? [earnest, helpful] My mother keeps them in a DRAWER."
   },
   {
-   "voice": "penny",
-   "speaker": "Bernadette",
-   "text": "It's evidence. Your mother can file a request.",
-   "ctx": "chapter 6 (new)",
-   "script": "[flat, officious] It's EVIDENCE. [prim, dry] Your mother can file a REQUEST."
-  },
-  {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Whose picnic was it?",
    "ctx": "chapter 6 (new)",
    "script": "[curious] Whose picnic was it?"
-  },
-  {
-   "voice": "penny",
-   "speaker": "Bernadette",
-   "text": "A birthday party, setting up early. They ran when the squirrels got big. The cake is still on table two. Nobody touch the cake. The cake is also evidence.",
-   "ctx": "chapter 6 (new)",
-   "script": "[matter-of-fact] A birthday party, setting up early. They ran when the squirrels got BIG. [grave, pointed] The cake is still on table two. [stern, deadpan] Nobody touch the cake. The cake is also EVIDENCE."
   },
   {
    "voice": "tom",
@@ -731,25 +696,11 @@
    "script": "[reasoning, rapid] So the block breaks, the color comes back, and the squirrels go back to being squirrels. [hushed, thrilled] Babe. It's a KEY."
   },
   {
-   "voice": "penny",
-   "speaker": "Bernadette",
-   "text": "Nineteen years I've watched this park, and I've never seen anything like that. What did you DO?",
-   "ctx": "chapter 6 (new)",
-   "script": "[stunned, indignant] Nineteen years I've watched this park, and I've never seen anything like THAT. [demanding, shrill] What did you DO?"
-  },
-  {
    "voice": "tom",
    "speaker": "Tom",
    "text": "The dog did it.",
    "ctx": "chapter 6 (new)",
    "script": "[simple, proud] The DOG did it."
-  },
-  {
-   "voice": "penny",
-   "speaker": "Bernadette",
-   "text": "Then the dog is going in the report.",
-   "ctx": "chapter 6 (new)",
-   "script": "[crisp, officious] Then the dog is going in the REPORT."
   },
   {
    "voice": "tom",
@@ -801,25 +752,11 @@
    "script": "[soft, fond] We owe her a THROW, babe."
   },
   {
-   "voice": "penny",
-   "speaker": "Bernadette",
-   "text": "Evidence released. Tell your mother to keep it somewhere dry.",
-   "ctx": "chapter 6 (new)",
-   "script": "[formal, grand] Evidence RELEASED. [prim, officious] Tell your mother to keep it somewhere DRY."
-  },
-  {
    "voice": "tom",
    "speaker": "Tom",
    "text": "First Bready Mercury goes home. Then the lemon, then the hat. And then I'm calling my mother.",
    "ctx": "chapter 6 (new)",
    "script": "[resolved, planning] First Bready Mercury goes home. Then the lemon, then the hat. [determined] And then I'm calling my MOTHER."
-  },
-  {
-   "voice": "penny",
-   "speaker": "Bernadette",
-   "text": "Also in the report: the squirrels are regular squirrels again, and a dog fixed my park.",
-   "ctx": "chapter 6 (new)",
-   "script": "[officious, crisp] Also in the report: the squirrels are regular squirrels again, [grudging, dry] and a DOG fixed my park."
   },
   {
    "voice": "tom",
@@ -1254,6 +1191,342 @@
    "text": "Then go and watch the next one in person. I'll feed Bready. Fifty and fifty, and I'll sing.",
    "ctx": "chapter 6 (new)",
    "script": "[tender, firm] Then go and watch the next one in PERSON. [easy, fond] I'll feed Bready. Fifty and fifty, and I'll sing."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Stop right there. Neighborhood Watch. Names and house numbers.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[ordering, sharp] STOP right there. [curt, pulling rank] Neighborhood Watch. [impatient] Names... [clipped, already bored] and house numbers."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "I know who you are, 3468. You WATER a drought garden. I've left you two notes about it.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[cutting him off, bored] I KNOW who you are, [flat, like a case number] 3468. [accusing, slow] You [emphasized]WATER [disgusted] a drought garden. [icy, keeping score] I've left you [emphasized]TWO [resentful] notes about it."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "I don't do initials. You're the Other Tom.",
+   "ctx": "chapter 6 (new)",
+   "script": "[dismissing, bored] I don't do... [sour, distasteful] initials. [punchline, deciding for him] You're the [emphasized]OTHER [flat, final] Tom."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Captain Bernadette. I've run this Watch for nineteen years without one thank-you card. So listen closely, because I'm only saying this once.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[correcting, pulling rank] [emphasized]CAPTAIN [normal] Bernadette. [bitter, keeping score] I've run this Watch for NINETEEN years... [resentful, biting each word] without ONE thank-you card. [talking down, slow] So listen closely, [snippy, warning] because I'm only saying this [emphasized]ONCE."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "The squirrels are organized.",
+   "ctx": "chapter 6 (new voice)",
+   "script": "[flat, daring them] The squirrels... [grim, hissing it] are ORGANIZED."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Don't humor me, Other Tom. I get humored at every block meeting.",
+   "ctx": "chapter 6 (new)",
+   "script": "[snapping at him] DON'T humor me, [cold, labeling him] Other Tom. [bitter, long-suffering] I get [emphasized]humored [resentful, sour] at EVERY block meeting."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "They have lookouts in the playground, a spy in the community garden, and one at the picnic tables eating anything that's not nailed down.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[lecturing, ticking them off] They have LOOKOUTS in the playground, [grim, lower] a SPY in the community garden, [disgusted, sneering] and one at the picnic tables eating [emphasized]ANYTHING [biting it off] that's not nailed down."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "I reported all of it. The city sent me a pamphlet about squirrels.",
+   "ctx": "chapter 6 (new)",
+   "script": "[aggrieved, martyred] I reported ALL of it. [flat, still furious] The city sent me... [punchline, spitting the word] a [emphasized]PAMPHLET. [withering, slow] About squirrels."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Everything they steal goes up THAT tree, the Old Oak. There's a little door in the trunk that opens with a secret knock. I've only ever heard bits of it.",
+   "ctx": "chapter 6 (new voice)",
+   "script": "[accusing, grim] Everything they steal goes up [emphasized]THAT [normal] tree, the Old Oak. [briefing them, clipped] There's a little door in the trunk that opens with a SECRET knock. [grudging, hates admitting it] I've only ever heard... [muttering, sour] BITS of it."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "I'm a Captain. I don't chitter.",
+   "ctx": "chapter 6 (new)",
+   "script": "[offended, icy] I'm a [emphasized]CAPTAIN. [punchline, withering] I don't... [disgusted, enunciating] CHITTER."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "I didn't \"see a flash.\" I logged one. Sunday, 6:12 in the morning, at the picnic tables, with no thunder. By 6:20 the squirrels had lookouts. Follow me, and keep up.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[correcting, snippy] I didn't [mocking his words] \"see a flash.\" [proud, precise] I [emphasized]LOGGED [normal] one. [reciting, clipped] Sunday, 6:12 in the morning, at the picnic tables, [grim] with NO thunder. [rubbing it in] By 6:20 the squirrels had LOOKOUTS. [ordering, brisk] Follow me, [impatient, snapping] and KEEP UP."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Nineteen years I've waited to catch one in the act. Now I have, and he's stuck in a block where I can't even write him up.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[bitter, savoring it] NINETEEN years I've waited to catch one in the act. [flat, cheated] Now I have, [punchline, aggrieved] and he's stuck in a block where I can't even... [furious, petty] WRITE him UP."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "That's because I found it first. Under the last table, at 6:31. Bagged, labeled and dated. Some of us were up.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[smug, cutting in] That's because [emphasized]I [normal] found it first. [precise, showing off] Under the last table, at 6:31. [crisp, proud] Bagged, labeled and DATED. [punchline, snide] Some of us... were UP."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Your mother keeps evidence in a drawer. Of course she does. No. She can file a request, and I'll deny it.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[appalled, repeating it back] Your mother keeps EVIDENCE... [disbelieving, sour] in a [emphasized]DRAWER. [withering, muttering] Of COURSE she does. [flat, final] No. [mock helpful, sweet] She can file a request, [punchline, enjoying it] and I'll DENY it."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "A birthday party, setting up early with no permit. They ran when the squirrels got big. The cake is still on table two, and the cake is evidence. I've counted the frosting roses, Other Tom.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[disapproving, clipped] A birthday party, setting up early... [scandalized, biting] with NO permit. [flat, unimpressed] They ran when the squirrels got big. [possessive, stern] The cake is still on table two, and the cake is EVIDENCE. [warning, slow] I've [emphasized]COUNTED [normal] the frosting roses, [cold, singling him out] Other Tom."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "You were looking.",
+   "ctx": "chapter 6 (new)",
+   "script": "[flat, accusing] You were [emphasized]LOOKING."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Then here's what you're going to do. Clear the squirrels out of those three spots and let the dog dig. I'd bet a piece of that knock is in every hole.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[ordering, not asking] Then here's what you're [emphasized]GOING [normal] to do. [brisk, assigning chores] Clear the squirrels out of those three spots [dismissive, won't say her name] and let the DOG dig. [grudging, sure of herself] I'd bet a piece of that knock is in EVERY hole."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "I'm the Captain. I supervise. I'll be right here with my clipboard, writing down how it goes.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[offended he asked] I'm the [emphasized]CAPTAIN. [pulling rank, slow] I SUPERVISE. [prim, settling in] I'll be right HERE with my clipboard, [punchline, a quiet threat] writing down... how it GOES."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Nineteen years I've watched this park, and the ONE time something happens, I'm at my car getting a pen. What did you DO?",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[furious, cheated] NINETEEN years I've watched this park, [bitter, building] and the [emphasized]ONE [normal] time something HAPPENS, [punchline, disgusted with herself] I'm at my car... getting a PEN. [accusing, shrill] What did you DO?"
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "The dog. Wonderful. Nineteen years, and a dog gets the credit. She's going in the report. Spell her name.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[flat, repeating it] The DOG. [sarcastic, sour] Wonnnderful. [resentful, martyred] NINETEEN years, and a [emphasized]dog [bitter] gets the credit. [grudging, through her teeth] She's going in the report. [ordering, snapping] Spell her name."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "I know how to spell Nara.",
+   "ctx": "chapter 6 (new)",
+   "script": "[snapping, insulted] I [emphasized]KNOW [normal] how to spell Nara."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Evidence released. Tell your mother to keep it somewhere dry. And don't thank me. Nobody does.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[grudging, stiff] Evidence... released. [bossy, talking down] Tell your mother to keep it somewhere DRY. [cutting him off early] And DON'T thank me. [punchline, martyred] [emphasized]NOBODY [bitter, flat] does."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "I said don't.",
+   "ctx": "chapter 6 (new)",
+   "script": "[snapping, thrown by it] I SAID... don't."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Captain's report: case closed.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[announcing, self-important] CAPTAIN'S report: [smug, final] case CLOSED."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "And I want it noted that I was right. For nineteen years. Out loud, please.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[gloating, slow] And I want it NOTED... that I was [emphasized]RIGHT. [bitter, rubbing it in] For NINETEEN years. [ordering, mock polite] Out LOUD, [icy] please."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Louder. Mr. Washington's porch didn't hear you.",
+   "ctx": "chapter 6 (new)",
+   "script": "[ordering, not satisfied] LOUDER. [punchline, petty and dry] Mr. Washington's [emphasized]PORCH [normal] didn't hear you."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Also in the report: the squirrels are regular squirrels again, and a dog fixed my park in one afternoon. I'm not discussing it.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[brisk, reading it off] Also in the report: the squirrels are REGULAR squirrels again, [resentful, through her teeth] and a [emphasized]dog [bitter] fixed MY park... in ONE afternoon. [snapping, shutting it down] I'm NOT discussing it."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "And these are Neighborhood Watch vests. I give out one every nineteen years. Today I'm giving out three, so don't make me regret it. The dog's fits best.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[grudging, stiff] And these are Neighborhood Watch vests. [bragging bitter] I give out ONE every NINETEEN years. [put-upon, warning] Today I'm giving out THREE, [snippy, threatening] so DON'T make me regret it. [punchline, a dig at them] The [emphasized]DOG'S [normal] fits best."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "It's reflective. Don't get sentimental. And 3468? Stop watering the cactus.",
+   "ctx": "chapter 6 (new)",
+   "script": "[deflecting, brusque] It's REFLECTIVE. [scolding, uncomfortable] Don't get sentimental. [not done with him] And 3468? [punchline, ordering, slow] STOP... watering... the CACTUS."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Captain Bernadette, Neighborhood Watch, nineteen years. Nothing gets past me.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[pulling rank, clipped] [emphasized]CAPTAIN [normal] Bernadette, Neighborhood Watch, [bitter, keeping score] NINETEEN years. [daring you to argue] NOTHING gets past me."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Except the squirrels. And if you repeat that, I'll know.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[grudging, through her teeth] Except... the squirrels. [punchline, threatening, low] And if you REPEAT that, [icy, certain] I'll KNOW."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Lookouts first: playground, garden, picnic tables. Then the dog digs. I don't know why I have to say everything twice.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[impatient, repeating herself] LOOKOUTS first: playground, garden, picnic tables. [slow, talking down] Then the dog DIGS. [punchline, martyred] I don't know WHY I have to say everything... [exasperated, biting] TWICE."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Then the tree. There's a knock, and no, I'm still not doing it.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[brisk, bossy] Then the TREE. [grudging] There's a knock, [punchline, cutting you off] and NO, [flat, insulted] I'm [emphasized]STILL [normal] not doing it."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "I SAID they were organized. Nobody believed me. I have the names of everybody who didn't.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[gloating, rubbing it in] I [emphasized]SAID [normal] they were organized. [bitter, wounded] NOBODY believed me. [punchline, quiet threat] I have the NAMES... of everybody who DIDN'T."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Case closed. I filed the report with myself, and I approved it. Somebody around here has to have standards.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[smug, final] Case CLOSED. [prim, self-satisfied] I filed the report with MYSELF, and I APPROVED it. [punchline, a dig at you] [emphasized]SOMEBODY [sour, pointed] around here has to have standards."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "You're an acceptable neighbor, 3468. The dog is a good one.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[grudging, it costs her] You're an... [picking the smallest word] ACCEPTABLE neighbor, [flat] 3468. [punchline, pointed] The [emphasized]DOG [normal] is a GOOD one."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Hi. I'm TNB.",
+   "ctx": "chapter 6 (new)",
+   "script": "[friendly, easy] Hi. I'm TNB."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Could you do the bits you know?",
+   "ctx": "chapter 6 (new)",
+   "script": "[innocent, hopeful] Could you DO the bits you know?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I wasn't going to touch it!",
+   "ctx": "chapter 6 (new)",
+   "script": "[defensive, caught out] I wasn't GOING to touch it!"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Are you coming with us?",
+   "ctx": "chapter 6 (new)",
+   "script": "[polite, hoping not] Are you coming... WITH us?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Babe. She's scary, she's rude, and she has a corkboard with red string. I can't decide how I feel.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[hushed, confiding] Babe. [listing, rattled] She's SCARY, she's RUDE, [punchline, impressed despite himself] and she has a corkboard with RED STRING. [torn, admitting] I can't decide how I FEEL."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I can. Walk faster.",
+   "ctx": "chapter 6 (new)",
+   "script": "[punchline, low and decided] I can. [urgent, muttering] Walk FASTER."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "N, A, R, A.",
+   "ctx": "chapter 6 (new)",
+   "script": "[helpful, careful] N, A, R, A."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Thank you, Bernadette.",
+   "ctx": "chapter 6 (new)",
+   "script": "[polite on purpose, patient] THANK you, Bernadette."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Noted. You were right, Bernadette.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[resigned, humoring her] Noted. [flat, getting it over with] You were right, Bernadette."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "...YOU WERE RIGHT, BERNADETTE.",
+   "ctx": "chapter 6 (new)",
+   "script": "[long-suffering, shouting it] ...YOU WERE RIGHT, BERNADETTE."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Bernadette, this is really kind of you.",
+   "ctx": "chapter 6 (new)",
+   "script": "[sincere, surprised] Bernadette, this is REALLY kind of you."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "...It looked thirsty.",
+   "ctx": "chapter 6 (new)",
+   "script": "[sheepish, admitting with guilt] ...It looked THIRSTY."
   }
  ]
 }

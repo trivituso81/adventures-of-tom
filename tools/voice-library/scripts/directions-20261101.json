@@ -3348,39 +3348,11 @@
 "script": "[loud, cheerful] Bring her back tired! Please! [alarmed, shouting] Michael, can you grab Isla? [exasperated, resigned] She's licking the mailbox."
 },
 {
-"voice": "penny",
-"speaker": "Bernadette",
-"text": "Halt. Neighborhood Watch. State your business.",
-"ctx": "Bernadette",
-"script": "[barking, officious] HALT. Neighborhood Watch. [stern, clipped] State your business."
-},
-{
 "voice": "tom",
 "speaker": "Tom",
 "text": "Tom. 3468. I've lived on 2nd Ave for six years.",
 "ctx": "",
 "script": "[calm, polite] Tom. 3468. [dry, level] I've lived on 2nd Ave for six years."
-},
-{
-"voice": "penny",
-"speaker": "Bernadette",
-"text": "I know who you are. You water your drought garden. Everybody knows.",
-"ctx": "Bernadette",
-"script": "[smug, knowing] I know who you are. [grave, pointed] You water your drought garden. ...EVERYBODY knows."
-},
-{
-"voice": "penny",
-"speaker": "Bernadette",
-"text": "Bernadette. Neighborhood Watch Captain, nineteen years. And I'll say it, because nobody else will.",
-"ctx": "Bernadette",
-"script": "[proud, clipped] Bernadette. Neighborhood Watch Captain, NINETEEN years. [grave, hushed] And I'll say it, because nobody else will."
-},
-{
-"voice": "penny",
-"speaker": "Bernadette",
-"text": "The squirrels are organized.",
-"ctx": "Bernadette",
-"script": "[hushed, deadpan] The squirrels... are ORGANIZED."
 },
 {
 "voice": "tnb",
@@ -3390,39 +3362,11 @@
 "script": "[thrilled, vindicated] I KNEW it."
 },
 {
-"voice": "penny",
-"speaker": "Bernadette",
-"text": "Lookouts in the playground. A spy in the community garden. Somebody at the picnic tables stuffing their cheeks with anything that's not nailed down.",
-"ctx": "Bernadette",
-"script": "[conspiratorial, intense] Lookouts in the playground. A SPY in the community garden. [appalled, clipped] Somebody at the picnic tables stuffing their cheeks with anything that's not nailed down."
-},
-{
-"voice": "penny",
-"speaker": "Bernadette",
-"text": "And it all goes up THAT tree. The Old Oak. There's a little door in the trunk. I've heard a secret knock. Only bits of it.",
-"ctx": "Bernadette",
-"script": "[hushed, intense] And it all goes up THAT tree. The Old Oak. There's a little door in the trunk. [annoyed, muttering] I've heard a secret knock. ...Only bits of it."
-},
-{
 "voice": "tom",
 "speaker": "Tom",
 "text": "They buried something. Three somethings.",
 "ctx": "",
 "script": "[quiet, grim] They buried something. [heavy, slow] Three somethings."
-},
-{
-"voice": "penny",
-"speaker": "Bernadette",
-"text": "Clear out those lookouts and your dog can dig. I'll be here. With my clipboard.",
-"ctx": "Bernadette",
-"script": "[commanding, crisp] Clear out those lookouts and your dog can dig. [smug, officious] I'll be here. ...With my clipboard."
-},
-{
-"voice": "tnb",
-"speaker": "TNB",
-"text": "Babe, she has a corkboard with red string. I've never felt so seen.",
-"ctx": "",
-"script": "[whispering, delighted] Babe, she has a corkboard with red string. [moved, soft] I've never felt so seen."
 },
 {
 "voice": "toad",
@@ -4013,39 +3957,11 @@
 "script": "[bright, breathless] Tom! You found everything! [warm, quick] Marisol’s balls, Mr. Washington’s glasses, Lachlan’s truck. [wry, fond] He hasn't put it down. He's eating cereal with one hand."
 },
 {
-"voice": "penny",
-"speaker": "Bernadette",
-"text": "Neighborhood Watch Captain’s report: case closed.",
-"ctx": "Bernadette",
-"script": "[crisp, officious] Neighborhood Watch Captain’s report: [grave, flat] case CLOSED."
-},
-{
-"voice": "penny",
-"speaker": "Bernadette",
-"text": "I'd like it noted that I was right.",
-"ctx": "Bernadette",
-"script": "[prim, smug] I'd like it NOTED... that I was right."
-},
-{
-"voice": "tnb",
-"speaker": "TNB",
-"text": "Noted. On a corkboard. With red string.",
-"ctx": "",
-"script": "[dry, amused] Noted. [easy, teasing] On a corkboard. With red string."
-},
-{
 "voice": "michael",
 "speaker": "Michael",
 "text": "Lachlan wants Nara to have this. He painted a tennis ball gold. It took him four days and most of a bottle of paint.",
 "ctx": "",
 "script": "[gentle, tired] Lachlan wants Nara to have this. [dry, fond] He painted a tennis ball gold. [flat, wry] It took him four days and most of a bottle of paint."
-},
-{
-"voice": "penny",
-"speaker": "Bernadette",
-"text": "And these. Neighborhood Watch Vests. I give out one every nineteen years. Today I'm giving out three. Even the dog.",
-"ctx": "Bernadette",
-"script": "[solemn, proud] And these. Neighborhood Watch Vests. I give out one every NINETEEN years. [grand, softer] Today I'm giving out three. [grave, clipped] ...Even the dog."
 },
 {
 "voice": "tnb",
@@ -4874,14 +4790,14 @@
 "script": "[easy, puzzled] Right. Well, it's cold. Everybody’s is cold. [hushed, spooked] I tried to light yours. The flame LEANED, babe. Sideways. [eerie, quiet] Toward the boulevard. Like it wanted to leave."
 },
 {
-"voice": "penny",
+"voice": "bernadette",
 "speaker": "Bernadette",
 "text": "Tom. Good. Neighborhood Watch Captain, potluck committee chair. Forty RSVPs. Thirty-nine dishes. One bread guy.",
 "ctx": "Bernadette",
 "script": "[brisk, officious] Tom. Good. Neighborhood Watch Captain, potluck committee chair. [clipped, precise] Forty RSVPs. Thirty-nine dishes. [deadpan, pointed] ...ONE bread guy."
 },
 {
-"voice": "penny",
+"voice": "bernadette",
 "speaker": "Bernadette",
 "text": "Every pilot light on 2nd Avenue went out at noon. Every one. Including mine. I had a casserole IN there.",
 "ctx": "Bernadette",
@@ -4895,7 +4811,7 @@
 "script": "[dry, practical] Did you call the gas company?"
 },
 {
-"voice": "penny",
+"voice": "bernadette",
 "speaker": "Bernadette",
 "text": "They said it's the weekend. I said it's the POTLUCK. They hung up. I've filed a report. With myself.",
 "ctx": "Bernadette",
@@ -4921,13 +4837,6 @@
 "text": "I've wanted to go in there since I MOVED here.",
 "ctx": "",
 "script": "[wistful, earnest] I've wanted to go in there since I MOVED here."
-},
-{
-"voice": "penny",
-"speaker": "Bernadette",
-"text": "The barn? It's been chained up for sixty years. Here. Committee key. I'm the committee. We're closing the boulevard for the tables. Bread by six.",
-"ctx": "Bernadette",
-"script": "[skeptical, brisk] The barn? It's been chained up for sixty years. [flat, officious] Here. Committee key. I'm the committee. [clipped, commanding] We're closing the boulevard for the tables. Bread by SIX."
 },
 {
 "voice": "olivia",
@@ -5392,14 +5301,14 @@
 "script": "[dry, sure] Look at the corners. Not a speck of ash on it. [low, thoughtful] Somebody put it there after the fire went out. [flat, resolved] I'm adding it to the list."
 },
 {
-"voice": "penny",
+"voice": "bernadette",
 "speaker": "Bernadette",
 "text": "Forty loaves. Six o’clock. On the dot. Potluck committee report: we're a success.",
 "ctx": "Bernadette",
 "script": "[crisp, proud] Forty loaves. Six o’clock. On the DOT. [formal, smug] Potluck committee report: we're a success."
 },
 {
-"voice": "penny",
+"voice": "bernadette",
 "speaker": "Bernadette",
 "text": "The gumbo is hot. The casserole is hot. Everything is hot. I'd like it noted.",
 "ctx": "Bernadette",
@@ -18137,55 +18046,6 @@
 "text": "Dana Park. Director. First feature. Please don't ask me how it's going.",
 "ctx": "",
 "script": "[weary, brisk] Dana Park. Director. First feature. [tense, deadpan] PLEASE don't ask me how it's going."
-},
-{
-"voice": "penny",
-"speaker": "penny",
-"text": "Case closed. I've filed my report. With myself. I approved it.",
-"ctx": "",
-"script": "[smug, officious] Case closed. I've filed my report. [deadpan, pleased] With myself. ...I approved it."
-},
-{
-"voice": "penny",
-"speaker": "penny",
-"text": "I said they were organized. Nobody believed me. Write that down.",
-"ctx": "",
-"script": "[smug, sharp] I SAID they were organized. Nobody believed me. [officious, clipped] ...Write that down."
-},
-{
-"voice": "penny",
-"speaker": "penny",
-"text": "You're a good neighbor, Tom. So is the dog. Mostly the dog.",
-"ctx": "",
-"script": "[warm, approving] You're a good neighbor, Tom. So is the dog. [flat, dry] ...MOSTLY the dog."
-},
-{
-"voice": "penny",
-"speaker": "penny",
-"text": "The lookouts first. Playground, garden, picnic tables. Then Nara digs.",
-"ctx": "",
-"script": "[brisk, authoritative] The lookouts first. Playground, garden, picnic tables. [knowing, pointed] Then Nara digs."
-},
-{
-"voice": "penny",
-"speaker": "penny",
-"text": "Then the tree. There's a knock. I have only ever heard parts of it.",
-"ctx": "",
-"script": "[hushed, ominous] Then the tree. There's a knock. [annoyed, quieter] I have only ever heard PARTS of it."
-},
-{
-"voice": "penny",
-"speaker": "penny",
-"text": "Bernadette. Neighborhood Watch Captain, nineteen years. Nothing gets past me.",
-"ctx": "",
-"script": "[crisp, proud] Bernadette. Neighborhood Watch Captain, nineteen years. [smug, firm] NOTHING gets past me."
-},
-{
-"voice": "penny",
-"speaker": "penny",
-"text": "Except squirrels. I'm working on it.",
-"ctx": "",
-"script": "[grave, sheepish] Except squirrels. [annoyed, muttering] ...I'm working on it."
 },
 {
 "voice": "luna",

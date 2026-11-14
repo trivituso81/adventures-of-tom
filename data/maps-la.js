@@ -616,9 +616,9 @@ LA_AREAS.push(
       ['trashcan',15,10,1,1,'Trash can','A trash can with a lid that clips shut. It\'s been opened anyway. From the inside, somehow.'],
       ['sign',13,11,2,2,'Park sign','OLD OAK PARK. Est. 1912. Please don\'t feed the squirrels. Underneath, in tiny writing: OR ELSE.']],
     npcs:[
-      {name:'Bernadette',x:13,y:14,look:'bernadette',roam:0,lines:['Bernadette. Neighborhood Watch Captain, nineteen years. Nothing gets past me.','Except squirrels. I\'m working on it.'],
-        when:[{...CH6_DONE,lines:['Case closed. I\'ve filed my report. With myself. I approved it.','I said they were organized. Nobody believed me. Write that down.','You\'re a good neighbor, Tom. So is the dog. Mostly the dog.']},
-              {...CH6_ON,flag:'ch6-park',lines:['The lookouts first. Playground, garden, picnic tables. Then Nara digs.','Then the tree. There\'s a knock. I have only ever heard parts of it.']}]}],
+      {name:'Bernadette',x:13,y:14,look:'bernadette',roam:0,lines:['Captain Bernadette, Neighborhood Watch, nineteen years. Nothing gets past me.','Except the squirrels. And if you repeat that, I\'ll know.'],
+        when:[{...CH6_DONE,lines:['Case closed. I filed the report with myself, and I approved it. Somebody around here has to have standards.','I SAID they were organized. Nobody believed me. I have the names of everybody who didn\'t.','You\'re an acceptable neighbor, 3468. The dog is a good one.']},
+              {...CH6_ON,flag:'ch6-park',lines:['Lookouts first: playground, garden, picnic tables. Then the dog digs. I don\'t know why I have to say everything twice.','Then the tree. There\'s a knock, and no, I\'m still not doing it.']}]}],
     monsters:OAKPARK_MONSTER_SPOTS},
   // Inside the Old Oak, painted plate (art/oak.webp, engine/plate.js), 24 x 20 tiles (the 2026-10-31 repaint). One loop: the entry steps (bottom) to the big hub
   // deck with the tea table, the stove and the bed nook. A staircase on the left wall climbs to the war room (top left, the corkboard on its wall) and a

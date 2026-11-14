@@ -242,5 +242,19 @@
    "bdd76417d28c626e",
    "d9d5693f2a7c1c95"
   ]
+ },
+ "bernadette": {
+  "at": 1794699000000,
+  "since": "2026-11-14T15:30:00-08:00",
+  "commit": "49f3cbf",
+  "hashes": [
+   "5b6a2f73d8ef3628",
+   "68a5fcb9e956d6f1",
+   "9162ccccf6eda9a6",
+   "c180b91c1ac0d2b2",
+   "f07bf655c74eb655",
+   "f0c2fafb288274f6",
+   "fe5a3334546ef604"
+  ]
  }
 }

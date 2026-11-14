@@ -730,10 +730,14 @@ chapter	file	line	character	mood	talk	text
 6	data/scenes.js	1882	Nara	happy		Nara knows the word WALK. She's always known the word walk. She's already at the end of the street.
 6	data/scenes.js	1883	Olivia	happy		Bring her back tired! Please! Michael, can you grab Isla? She's licking the mailbox.
 6	data/scenes.js	1893	Tom	none	tell	Tom. 3468. I've lived on 2nd Ave for six years.
+6	data/scenes.js	2460	TNB	happy	answer	Hi. I'm TNB.
 6	data/scenes.js	1896	TNB	proud		I KNEW it.
+6	data/scenes.js	2469	TNB	happy	ask	Could you do the bits you know?
 6	data/scenes.js	1900	Nara	proud		Nara puts her nose to the grass and pulls. Hard. Left. Right. Back. Three fresh holes, three different directions.
 6	data/scenes.js	1901	Tom	surprised	tell	The squirrels buried something in three different spots.
-6	data/scenes.js	1903	TNB	happy		Babe, she has a corkboard with red string. I've never felt so seen.
+6	data/scenes.js	2475	Tom	none	ask	Are you coming with us?
+6	data/scenes.js	2477	TNB	surprised		Babe. She's scary, she's rude, and she has a corkboard with red string. I can't decide how I feel.
+6	data/scenes.js	2478	Tom	unimpressed		I can. Walk faster.
 6	data/scenes.js	1913	TNB	surprised	ask	Is it heckling us? From inside a peanut?
 6	data/scenes.js	1915	Tom	unimpressed		My shoes don't have laces.
 6	data/scenes.js	1919	TNB	happy		The playground is clear. And Nara is staring at the sandbox like it owes her money.
@@ -793,8 +797,11 @@ chapter	file	line	character	mood	talk	text
 6	data/scenes.js	2084	Tom	surprised	tell	He finds something lonely, hands it a gold coin, and it tries to make one thing last forever.
 6	data/scenes.js	2085	TNB	happy		And then we show up and make friends with it, and the coin falls right off. Babe. We are ruining this man's whole year. Spooky. I love it. I hate it.
 6	data/scenes.js	2095	Olivia	happy		Tom! You found everything! Marisol’s balls, Mr. Washington’s glasses, Lachlan’s truck. He hasn't put it down. He's eating cereal with one hand.
-6	data/scenes.js	2097	TNB	happy	answer	Noted. On a corkboard. With red string.
+6	data/scenes.js	2675	TNB	unimpressed		Noted. You were right, Bernadette.
+6	data/scenes.js	2677	TNB	unimpressed		...YOU WERE RIGHT, BERNADETTE.
 6	data/scenes.js	2101	Nara	loving		Nara takes it very gently. She'll never let go of it again. She's going to sleep for twelve hours, holding it.
+6	data/scenes.js	2685	Tom	happy		Bernadette, this is really kind of you.
+6	data/scenes.js	2687	Tom	none	answer	...It looked thirsty.
 6	data/scenes.js	2106	TNB	happy		You know what today was, babe? Absolutely nuts.
 6	data/scenes.js	2107	Tom	unimpressed		...That's not a pun. That's just a word.
 6	data/scenes.js	2108	TNB	happy		It's a word with a pun in its heart.

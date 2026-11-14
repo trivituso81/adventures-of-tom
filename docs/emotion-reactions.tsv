@@ -1539,42 +1539,52 @@ scene	6	data/scenes.js	ch6Nara	Nara	Nara knows the word WALK. She's always known
 scene	6	data/scenes.js	ch6Nara	Nara	Nara knows the word WALK. She's always known the word walk. She's already at the end of the street.	olivia	happy
 scene	6	data/scenes.js	ch6Nara	Olivia	Bring her back tired! Please! Michael, can you grab Isla? She's licking the mailbox.	tom	happy
 scene	6	data/scenes.js	ch6Nara	Olivia	Bring her back tired! Please! Michael, can you grab Isla? She's licking the mailbox.	tnb	happy
-scene	6	data/scenes.js	ch6Park	Bernadette	Halt. Neighborhood Watch. State your business.	tom	surprised
-scene	6	data/scenes.js	ch6Park	Bernadette	Halt. Neighborhood Watch. State your business.	tnb	surprised
-scene	6	data/scenes.js	ch6Park	Bernadette	Halt. Neighborhood Watch. State your business.	nara	scared
-scene	6	data/scenes.js	ch6Park	Tom	Tom. 3468. I've lived on 2nd Ave for six years.	bernadette	unimpressed
-scene	6	data/scenes.js	ch6Park	Tom	Tom. 3468. I've lived on 2nd Ave for six years.	tnb	happy
-scene	6	data/scenes.js	ch6Park	Bernadette	I know who you are. You water your drought garden. Everybody knows.	tom	surprised
-scene	6	data/scenes.js	ch6Park	Bernadette	I know who you are. You water your drought garden. Everybody knows.	tnb	happy
-scene	6	data/scenes.js	ch6Park	Bernadette	Bernadette. Neighborhood Watch Captain, nineteen years. And I'll say it, because nobody else will.	tom	unimpressed
-scene	6	data/scenes.js	ch6Park	Bernadette	Bernadette. Neighborhood Watch Captain, nineteen years. And I'll say it, because nobody else will.	tnb	happy
+scene	6	data/scenes.js	ch6Park	Bernadette	Stop right there. Neighborhood Watch. Names and house numbers.	tom	surprised
+scene	6	data/scenes.js	ch6Park	Bernadette	Stop right there. Neighborhood Watch. Names and house numbers.	tnb	surprised
+scene	6	data/scenes.js	ch6Park	Bernadette	Stop right there. Neighborhood Watch. Names and house numbers.	nara	scared
+scene	6	data/scenes.js	ch6Park	Bernadette	I know who you are, 3468. You WATER a drought garden. I've left you two notes about it.	tom	sad
+scene	6	data/scenes.js	ch6Park	Bernadette	I know who you are, 3468. You WATER a drought garden. I've left you two notes about it.	tnb	surprised
+scene	6	data/scenes.js	ch6Park	TNB	Hi. I'm TNB.	bernadette	unimpressed
+scene	6	data/scenes.js	ch6Park	Bernadette	I don't do initials. You're the Other Tom.	tom	unimpressed
+scene	6	data/scenes.js	ch6Park	Bernadette	I don't do initials. You're the Other Tom.	tnb	surprised
+scene	6	data/scenes.js	ch6Park	Bernadette	Captain Bernadette. I've run this Watch for nineteen years without one thank-you card. So listen closely, because I'm only saying this once.	tom	unimpressed
+scene	6	data/scenes.js	ch6Park	Bernadette	Captain Bernadette. I've run this Watch for nineteen years without one thank-you card. So listen closely, because I'm only saying this once.	tnb	unimpressed
 scene	6	data/scenes.js	ch6Park	Bernadette	The squirrels are organized.	tom	surprised
 scene	6	data/scenes.js	ch6Park	Bernadette	The squirrels are organized.	tnb	surprised
 scene	6	data/scenes.js	ch6Park	Bernadette	The squirrels are organized.	nara	angry
-scene	6	data/scenes.js	ch6Park	TNB	I KNEW it.	tom	unimpressed
-scene	6	data/scenes.js	ch6Park	TNB	I KNEW it.	bernadette	proud
-scene	6	data/scenes.js	ch6Park	Bernadette	They have lookouts in the playground, a spy in the community garden,	tom	surprised
-scene	6	data/scenes.js	ch6Park	Bernadette	and somebody at the picnic tables stuffing their cheeks with anything that's not nailed down.	tom	surprised
-scene	6	data/scenes.js	ch6Park	Bernadette	They have lookouts in the playground, a spy in the community garden,	tnb	happy
-scene	6	data/scenes.js	ch6Park	Bernadette	and somebody at the picnic tables stuffing their cheeks with anything that's not nailed down.	tnb	happy
-scene	6	data/scenes.js	ch6Park	Bernadette	They have lookouts in the playground, a spy in the community garden,	nara	angry
-scene	6	data/scenes.js	ch6Park	Bernadette	and somebody at the picnic tables stuffing their cheeks with anything that's not nailed down.	nara	angry
+scene	6	data/scenes.js	ch6Park	Bernadette	Don't humor me, Other Tom. I get humored at every block meeting.	tom	unimpressed
+scene	6	data/scenes.js	ch6Park	Bernadette	Don't humor me, Other Tom. I get humored at every block meeting.	tnb	scared
+scene	6	data/scenes.js	ch6Park	Bernadette	They have lookouts in the playground, a spy in the community garden, and one at the picnic tables eating anything that's not nailed down.	tom	surprised
+scene	6	data/scenes.js	ch6Park	Bernadette	They have lookouts in the playground, a spy in the community garden, and one at the picnic tables eating anything that's not nailed down.	tnb	happy
+scene	6	data/scenes.js	ch6Park	Bernadette	They have lookouts in the playground, a spy in the community garden, and one at the picnic tables eating anything that's not nailed down.	nara	angry
+scene	6	data/scenes.js	ch6Park	Bernadette	I reported all of it. The city sent me a pamphlet about squirrels.	tom	unimpressed
+scene	6	data/scenes.js	ch6Park	Bernadette	I reported all of it. The city sent me a pamphlet about squirrels.	tnb	happy
 scene	6	data/scenes.js	ch6Park	Bernadette	Everything they steal goes up THAT tree, the Old Oak. There's a little door in the trunk that opens with a secret knock. I've only ever heard bits of it.	tom	surprised
 scene	6	data/scenes.js	ch6Park	Bernadette	Everything they steal goes up THAT tree, the Old Oak. There's a little door in the trunk that opens with a secret knock. I've only ever heard bits of it.	tnb	surprised
 scene	6	data/scenes.js	ch6Park	Bernadette	Everything they steal goes up THAT tree, the Old Oak. There's a little door in the trunk that opens with a secret knock. I've only ever heard bits of it.	nara	surprised
+scene	6	data/scenes.js	ch6Park	TNB	Could you do the bits you know?	bernadette	angry
+scene	6	data/scenes.js	ch6Park	TNB	Could you do the bits you know?	tom	scared
+scene	6	data/scenes.js	ch6Park	Bernadette	I'm a Captain. I don't chitter.	tom	unimpressed
+scene	6	data/scenes.js	ch6Park	Bernadette	I'm a Captain. I don't chitter.	tnb	sad
+scene	6	data/scenes.js	ch6Park	Bernadette	Then here's what you're going to do. Clear the squirrels out of those three spots and let the dog dig. I'd bet a piece of that knock is in every hole.	tom	unimpressed
+scene	6	data/scenes.js	ch6Park	Bernadette	Then here's what you're going to do. Clear the squirrels out of those three spots and let the dog dig. I'd bet a piece of that knock is in every hole.	tnb	unimpressed
+scene	6	data/scenes.js	ch6Park	Bernadette	Then here's what you're going to do. Clear the squirrels out of those three spots and let the dog dig. I'd bet a piece of that knock is in every hole.	nara	happy
+scene	6	data/scenes.js	ch6Park	Tom	Are you coming with us?	bernadette	unimpressed
+scene	6	data/scenes.js	ch6Park	Tom	Are you coming with us?	tnb	scared
+scene	6	data/scenes.js	ch6Park	Bernadette	I'm the Captain. I supervise. I'll be right here with my clipboard, writing down how it goes.	tom	unimpressed
+scene	6	data/scenes.js	ch6Park	Bernadette	I'm the Captain. I supervise. I'll be right here with my clipboard, writing down how it goes.	tnb	unimpressed
+scene	6	data/scenes.js	ch6Park	TNB	Babe. She's scary, she's rude, and she has a corkboard with red string. I can't decide how I feel.	tom	unimpressed
+scene	6	data/scenes.js	ch6Park	TNB	Babe. She's scary, she's rude, and she has a corkboard with red string. I can't decide how I feel.	bernadette	proud
+scene	6	data/scenes.js	ch6Park	Tom	I can. Walk faster.	tnb	happy
+scene	6	data/scenes.js	ch6Park	Tom	Tom. 3468. I've lived on 2nd Ave for six years.	bernadette	unimpressed
+scene	6	data/scenes.js	ch6Park	Tom	Tom. 3468. I've lived on 2nd Ave for six years.	tnb	happy
+scene	6	data/scenes.js	ch6Park	TNB	I KNEW it.	tom	unimpressed
+scene	6	data/scenes.js	ch6Park	TNB	I KNEW it.	bernadette	unimpressed
 scene	6	data/scenes.js	ch6Park	Nara	Nara puts her nose to the grass and pulls. Hard. Left. Right. Back. Three fresh holes, three different directions.	tom	surprised
 scene	6	data/scenes.js	ch6Park	Nara	Nara puts her nose to the grass and pulls. Hard. Left. Right. Back. Three fresh holes, three different directions.	tnb	surprised
 scene	6	data/scenes.js	ch6Park	Nara	Nara puts her nose to the grass and pulls. Hard. Left. Right. Back. Three fresh holes, three different directions.	bernadette	surprised
 scene	6	data/scenes.js	ch6Park	Tom	The squirrels buried something in three different spots.	tnb	surprised
 scene	6	data/scenes.js	ch6Park	Tom	The squirrels buried something in three different spots.	bernadette	proud
-scene	6	data/scenes.js	ch6Park	Bernadette	Clear the squirrels out of those three spots, and Nara can dig up what they buried. I'd bet a piece of that secret knock is in each hole.	tom	proud
-scene	6	data/scenes.js	ch6Park	Bernadette	I'll be here with my clipboard.	tom	proud
-scene	6	data/scenes.js	ch6Park	Bernadette	Clear the squirrels out of those three spots, and Nara can dig up what they buried. I'd bet a piece of that secret knock is in each hole.	tnb	happy
-scene	6	data/scenes.js	ch6Park	Bernadette	I'll be here with my clipboard.	tnb	happy
-scene	6	data/scenes.js	ch6Park	Bernadette	Clear the squirrels out of those three spots, and Nara can dig up what they buried. I'd bet a piece of that secret knock is in each hole.	nara	happy
-scene	6	data/scenes.js	ch6Park	Bernadette	I'll be here with my clipboard.	nara	happy
-scene	6	data/scenes.js	ch6Park	TNB	Babe, she has a corkboard with red string. I've never felt so seen.	tom	happy
-scene	6	data/scenes.js	ch6Park	TNB	Babe, she has a corkboard with red string. I've never felt so seen.	bernadette	proud
 scene	6	data/scenes.js	ch6Gallery	Peanut Gallery	BOO! BOOOO! Get off the stage! This is OUR playground!	tom	unimpressed
 scene	6	data/scenes.js	ch6Gallery	Peanut Gallery	BOO! BOOOO! Get off the stage! This is OUR playground!	tnb	surprised
 scene	6	data/scenes.js	ch6Gallery	Peanut Gallery	BOO! BOOOO! Get off the stage! This is OUR playground!	nara	angry
@@ -1746,18 +1756,23 @@ scene	6	data/scenes.js	ch6AfterBoss	Tom	That makes four. The sundial, your steam
 scene	6	data/scenes.js	ch6AfterBoss	Tom	He finds something lonely, hands it a gold coin, and it tries to make one thing last forever.	nara	happy
 scene	6	data/scenes.js	ch6AfterBoss	TNB	And then we show up and make friends with it, and the coin falls right off. Babe. We are ruining this man's whole year. Spooky. I love it. I hate it.	tom	unimpressed
 scene	6	data/scenes.js	ch6AfterBoss	TNB	And then we show up and make friends with it, and the coin falls right off. Babe. We are ruining this man's whole year. Spooky. I love it. I hate it.	nara	happy
+scene	6	data/scenes.js	ch6End	Bernadette	Captain's report: case closed.	tom	unimpressed
+scene	6	data/scenes.js	ch6End	Bernadette	Captain's report: case closed.	tnb	unimpressed
+scene	6	data/scenes.js	ch6End	Bernadette	Captain's report: case closed.	olivia	unimpressed
+scene	6	data/scenes.js	ch6End	Bernadette	And I want it noted that I was right. For nineteen years. Out loud, please.	tom	unimpressed
+scene	6	data/scenes.js	ch6End	Bernadette	And I want it noted that I was right. For nineteen years. Out loud, please.	tnb	unimpressed
+scene	6	data/scenes.js	ch6End	Bernadette	And I want it noted that I was right. For nineteen years. Out loud, please.	olivia	happy
+scene	6	data/scenes.js	ch6End	TNB	Noted. You were right, Bernadette.	bernadette	unimpressed
+scene	6	data/scenes.js	ch6End	TNB	Noted. You were right, Bernadette.	tom	happy
+scene	6	data/scenes.js	ch6End	Bernadette	Louder. Mr. Washington's porch didn't hear you.	tom	unimpressed
+scene	6	data/scenes.js	ch6End	Bernadette	Louder. Mr. Washington's porch didn't hear you.	tnb	unimpressed
+scene	6	data/scenes.js	ch6End	Bernadette	Louder. Mr. Washington's porch didn't hear you.	olivia	happy
+scene	6	data/scenes.js	ch6End	TNB	...YOU WERE RIGHT, BERNADETTE.	bernadette	proud
+scene	6	data/scenes.js	ch6End	TNB	...YOU WERE RIGHT, BERNADETTE.	tom	happy
+scene	6	data/scenes.js	ch6End	TNB	...YOU WERE RIGHT, BERNADETTE.	olivia	happy
 scene	6	data/scenes.js	ch6End	Olivia	Tom! You found everything! Marisol’s balls, Mr. Washington’s glasses, Lachlan’s truck. He hasn't put it down. He's eating cereal with one hand.	tom	happy
 scene	6	data/scenes.js	ch6End	Olivia	Tom! You found everything! Marisol’s balls, Mr. Washington’s glasses, Lachlan’s truck. He hasn't put it down. He's eating cereal with one hand.	tnb	happy
 scene	6	data/scenes.js	ch6End	Olivia	Tom! You found everything! Marisol’s balls, Mr. Washington’s glasses, Lachlan’s truck. He hasn't put it down. He's eating cereal with one hand.	nara	proud
-scene	6	data/scenes.js	ch6End	Bernadette	Neighborhood Watch Captain’s report: case closed.	tom	unimpressed
-scene	6	data/scenes.js	ch6End	Bernadette	Neighborhood Watch Captain’s report: case closed.	tnb	happy
-scene	6	data/scenes.js	ch6End	Bernadette	Neighborhood Watch Captain’s report: case closed.	olivia	unimpressed
-scene	6	data/scenes.js	ch6End	Bernadette	I'd like it noted that I was right.	tom	unimpressed
-scene	6	data/scenes.js	ch6End	Bernadette	I'd like it noted that I was right.	tnb	happy
-scene	6	data/scenes.js	ch6End	Bernadette	I'd like it noted that I was right.	olivia	happy
-scene	6	data/scenes.js	ch6End	TNB	Noted. On a corkboard. With red string.	bernadette	proud
-scene	6	data/scenes.js	ch6End	TNB	Noted. On a corkboard. With red string.	tom	happy
-scene	6	data/scenes.js	ch6End	TNB	Noted. On a corkboard. With red string.	olivia	happy
 scene	6	data/scenes.js	ch6End	Michael	Lachlan wants Nara to have this. He painted a tennis ball gold. It took him four days and most of a bottle of paint.	tom	loving
 scene	6	data/scenes.js	ch6End	Michael	Lachlan wants Nara to have this. He painted a tennis ball gold. It took him four days and most of a bottle of paint.	tnb	loving
 scene	6	data/scenes.js	ch6End	Michael	Lachlan wants Nara to have this. He painted a tennis ball gold. It took him four days and most of a bottle of paint.	nara	surprised
@@ -1766,10 +1781,14 @@ scene	6	data/scenes.js	ch6End	Nara	Nara takes it very gently. She'll never let g
 scene	6	data/scenes.js	ch6End	Nara	Nara takes it very gently. She'll never let go of it again. She's going to sleep for twelve hours, holding it.	tnb	loving
 scene	6	data/scenes.js	ch6End	Nara	Nara takes it very gently. She'll never let go of it again. She's going to sleep for twelve hours, holding it.	olivia	loving
 scene	6	data/scenes.js	ch6End	Nara	Nara takes it very gently. She'll never let go of it again. She's going to sleep for twelve hours, holding it.	michael	loving
-scene	6	data/scenes.js	ch6End	Bernadette	And these. Neighborhood Watch Vests. I give out one every nineteen years. Today I'm giving out three. Even the dog.	tom	proud
-scene	6	data/scenes.js	ch6End	Bernadette	And these. Neighborhood Watch Vests. I give out one every nineteen years. Today I'm giving out three. Even the dog.	tnb	surprised
-scene	6	data/scenes.js	ch6End	Bernadette	And these. Neighborhood Watch Vests. I give out one every nineteen years. Today I'm giving out three. Even the dog.	nara	proud
-scene	6	data/scenes.js	ch6End	Bernadette	And these. Neighborhood Watch Vests. I give out one every nineteen years. Today I'm giving out three. Even the dog.	olivia	happy
+scene	6	data/scenes.js	ch6End	Bernadette	And these are Neighborhood Watch vests. I give out one every nineteen years. Today I'm giving out three, so don't make me regret it. The dog's fits best.	tom	surprised
+scene	6	data/scenes.js	ch6End	Bernadette	And these are Neighborhood Watch vests. I give out one every nineteen years. Today I'm giving out three, so don't make me regret it. The dog's fits best.	tnb	unimpressed
+scene	6	data/scenes.js	ch6End	Tom	Bernadette, this is really kind of you.	bernadette	unimpressed
+scene	6	data/scenes.js	ch6End	Tom	Bernadette, this is really kind of you.	tnb	happy
+scene	6	data/scenes.js	ch6End	Bernadette	It's reflective. Don't get sentimental. And 3468? Stop watering the cactus.	tom	sad
+scene	6	data/scenes.js	ch6End	Bernadette	It's reflective. Don't get sentimental. And 3468? Stop watering the cactus.	tnb	happy
+scene	6	data/scenes.js	ch6End	Tom	...It looked thirsty.	tnb	happy
+scene	6	data/scenes.js	ch6End	Tom	...It looked thirsty.	bernadette	unimpressed
 scene	6	data/scenes.js	ch6End	TNB	You know what today was, babe? Absolutely nuts.	tom	unimpressed
 scene	6	data/scenes.js	ch6End	TNB	You know what today was, babe? Absolutely nuts.	nara	happy
 scene	6	data/scenes.js	ch6End	Tom	...That's not a pun. That's just a word.	tnb	happy
