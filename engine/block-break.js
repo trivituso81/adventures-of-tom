@@ -21,8 +21,7 @@
 //   block  the block picture and where it hangs: id (art/props/<id>.webp), centre x,y and width, all in plate art px; hole = where the round dent is
 //          as shares of the picture; roll = [x,y] where the coin starts on the table and [x,y] of the table top under the hole
 //   keep   what the block held and leaves behind: the basket stays on the table; the squirrel finishes its dive into it, pops out with a sandwich and
-//          sits beside it (art/props/oakpark/agent_*.webp from the approved ch6-squirrel-ordinary sheet; the basket is a code-drawn STAND-IN until
-//          Library entry ch6-basket is approved and baked to ch6_basket.webp)
+//          sits beside it (art/props/oakpark/agent_*.webp from the approved ch6-squirrel-ordinary sheet)
 //   ordinary  monster id -> picture and width of what it turns back into
 // The monsters (map.monsters) are taken off the map when the ring passes them and kept in BB.stash; a new game puts them back (bbSync).
 const BB_SPOTS={
@@ -101,15 +100,8 @@ function bbOrdinaryDraw(map,s) {
 // What the block held, left behind on the table.
 function bbBasket(k,s) {
   const b=k.basket,id='oakpark/ch6_basket';
-  if(PROPART.ready(id)) { const im=PROPART.get(id),h=b.w*im.naturalHeight/im.naturalWidth; PROPART.draw(id,b.x*s,(b.y-h/2)*s,{w:b.w*s}); return; }
-  ctx.save(); ctx.translate(b.x*s,b.y*s); ctx.scale(s,s); const w=b.w;   // stand-in: a wicker basket with its lid propped open
-  ellipse(0,2,w*.55,6,'#20202a40');
-  ctx.fillStyle='#8a5a2c'; ctx.strokeStyle='#4a2e12'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(-w*.42,-w*.44); ctx.lineTo(-w*.34,-w*.86); ctx.lineTo(w*.34,-w*.86); ctx.lineTo(w*.42,-w*.44); ctx.closePath(); ctx.fill(); ctx.stroke();   // the open lid behind
-  ctx.fillStyle='#f4f0e6'; ctx.fillRect(-w*.3,-w*.6,w*.24,w*.14); ctx.fillStyle='#e8c060'; ctx.fillRect(w*.02,-w*.62,w*.26,w*.16);   // sandwiches over the rim
-  ctx.fillStyle='#b27a3c'; ctx.beginPath(); ctx.moveTo(-w*.5,-w*.5); ctx.lineTo(w*.5,-w*.5); ctx.lineTo(w*.42,-2); ctx.lineTo(-w*.42,-2); ctx.closePath(); ctx.fill(); ctx.stroke();
-  ctx.strokeStyle='#7a4e22'; ctx.lineWidth=1; for(let i=1;i<6;i++) { const y=-w*.5+i*(w*.5-2)/6; ctx.beginPath(); ctx.moveTo(-w*.48+i*1.2,y); ctx.lineTo(w*.48-i*1.2,y); ctx.stroke(); }
-  for(let i=-3;i<=3;i++) { ctx.beginPath(); ctx.moveTo(i*w*.13,-w*.5); ctx.lineTo(i*w*.11,-2); ctx.stroke(); }
-  ctx.fillStyle='#d8b050'; ctx.fillRect(-w*.5,-w*.54,w,5); ctx.restore();
+  if(!PROPART.ready(id)) return;
+  { const im=PROPART.get(id),h=b.w*im.naturalHeight/im.naturalWidth; PROPART.draw(id,b.x*s,(b.y-h/2)*s,{w:b.w*s}); }
 }
 function bbKeepDraw(sp,t,s) {   // t < 0: the break is over and stays over
   const k=sp.keep; if(!k) return; const b=k.basket,F=BB_T.crack1,P=F+1.0,Q=P+.8;

@@ -8,6 +8,10 @@ Tom's Voice Library export of 2026-11-14 14:10 held 7 clips, all live chapter 2 
 - Voice Library: tools/voice-library/scripts/ch07-story-directions.json, 232 lines (208 new, 24 reworded) with a direction each, plus matching rows in harvest.json (src `scene:ch7...`, `dep:7:...`, `arr:7:tom`). Page uses her current voice (pagew). data/dialog-cast.js: two speaker labels added so the lines have a voice: "A dry old voice" (the Unread's voice, log) and "A picture book" (a tiny voice, the Mudling voice, because no new voices can be made). Index rebuilt. No baked clip edited; the 24 reworded lines stay silent until re-recorded. "That was UNCALLED for!" already has a clip and was left out.
 - No engine or scene code changed. Tested: validate.js OK, unused_voice.py unchanged (check 4 stays at its 52 from earlier work, same list with and without this change).
 
+## ch6s2d (2026-11-14): The approved picnic basket replaces the stand-in on the Old Oak Park table
+
+Tom approved Library entry `ch6-basket` (an open wicker basket with sandwiches and a red checked napkin, no squirrel). Baked to `art/props/oakpark/ch6_basket.webp`; the code-drawn stand-in and its try/except in the baker are removed.
+
 ## ch6s2c (2026-11-14): When a block breaks, what was inside it stays behind (the basket on the table, the squirrel pops out with a sandwich)
 
 Tom report r-20261114-142911-utr2 (chapter 6, Old Oak Park): "When the block breaks, there's nothing left behind. In other words, the squirrel and the basket are gone." `engine/block-break.js` now has a per-spot `keep` entry: the basket stays on the table, the squirrel finishes its dive into it, pops out with a sandwich and sits beside it, and the same stays after a reload (done flag). Reusable for the dragonfly, lemon, hat, fish and kickball blocks. New baked frames `art/props/oakpark/agent_dive.webp` and `agent_sandwich.webp` come from the approved ch6-squirrel-ordinary sheet. The basket is a code-drawn STAND-IN until Library entry `ch6-basket` (new, Props, group Chapter 6) is generated and approved, then run `bake_blockbreak_ch6.py`.
