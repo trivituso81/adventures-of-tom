@@ -22806,8 +22806,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE OBJECT\nA hard, clear orange block, the size of a grapefruit, glossy-clear but painted, like a stone of orange glass, with the same warm orange glow as a piece of amber candy. Inside it, one bright yellow lemon, whole, with its short green stem and two leaves, is frozen as if hanging on its branch. The thing inside is frozen and not moving, every detail visible. On one side, facing the viewer, is one small round dent, as if a bite had been taken out of the block. The block is shown alone, with a small snapped stub of branch coming out of its top.\n- Exactly ONE object (or the one group described), alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/ch2-coin-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794623723128
+    }
+   ],
    "rejects": [],
    "id": "ch2-coin",
    "tab": "Props",
