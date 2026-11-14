@@ -6,7 +6,7 @@ Runs tools/tag_check.py against --base (default HEAD, i.e. the files the bake ju
   - "<file> changed but still loads with ?v=<old>"        -> every literal `<file>?v=<old>` in index.html, voices.html, engine/, data/ becomes `<file>?v=<NEWTAG>`
   - "<file> changed but <NAME> is still '<old>' in <src>" -> the folder constant in <src> (ART_V, BG_V, prop V, flight v) becomes NEWTAG
 A script that holds a constant must move its own tag, and main.js moves with the build stamp, so it loops until the check passes (max 6 rounds).
-Also sets the title-screen stamp (`d.textContent='build ...'` in engine/main.js) to `build <NEWTAG>`. Prints what it changed. Exit 0 when tag_check passes."""
+Also sets the title-screen stamp (`d.textContent='build ...'` in engine/main.js) to `build <NEWTAG>` and adds NEWTAG with the time now to the build history (tools/build_history.py, data/build-history.js). Prints what it changed. Exit 0 when tag_check passes."""
 import os, re, subprocess, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -72,6 +72,9 @@ def main():
     if not re.fullmatch(r'[A-Za-z0-9_.-]+', new): print('bad tag', new); return 2
     log = []
     if set_stamp(new): log.append(f'stamp -> build {new}')
+    # The build history Tom opens from the build label (welcome screen and menu): stamp this build with the time now.
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'build_history.py'), 'add', new], capture_output=True, text=True, cwd=ROOT)
+    log.append((r.stdout + r.stderr).strip())
     for rnd in range(6):
         code, out = run_check(base)
         if code == 0:

@@ -99,14 +99,18 @@ startSplash();
   window.addEventListener('focus',check);
 })();
 
-// Build stamp on the title screen so we can tell which version a phone is running.
+// Build stamp on the title screen so we can tell which version a phone is running. Tapping it opens the build history
+// (engine/build-history.js), which also puts the same label in the menu.
 (function(){
   const sp=document.getElementById('splash'); if(!sp) return;
-  const d=document.createElement('div');
+  const d=document.createElement('button');
+  d.type='button'; d.id='build-stamp'; d.setAttribute('aria-label','Build history');
   // On an iPhone Duo the stamp also shows the page size and pose the game measured, so Tom can read them back (docs/DUO.md).
   d.textContent='build cutfront1';
-  const build=d.textContent,stamp=()=>{ d.textContent=build+(typeof duoMode!=='undefined'&&duoMode.device?' '+window.innerWidth+'x'+window.innerHeight+(duoMode.open?' duo open':' duo folded'):''); };
+  const build=d.textContent,stamp=()=>{ const w=typeof buildWhenLabel==='function'?buildWhenLabel(build.slice(6)).slice(2):'', duo=typeof duoMode!=='undefined'&&duoMode.device?window.innerWidth+'x'+window.innerHeight+(duoMode.open?' duo open':' duo folded'):'';
+    d.textContent=build; for(const t of [w,duo]) if(t){ const s=document.createElement('small'); s.textContent=t; d.appendChild(s); } };
+  window.BUILD_TAG=build.slice(6);
   stamp(); window.addEventListener('resize',()=>setTimeout(stamp,60));
-  d.style.cssText='position:absolute;left:8px;bottom:4px;font:10px monospace;color:#fff;opacity:.45;pointer-events:none;z-index:50';
   sp.appendChild(d);
+  if(typeof buildHistoryWire==='function') buildHistoryWire(d);
 })();

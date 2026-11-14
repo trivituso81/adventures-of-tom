@@ -111,6 +111,10 @@ Fact: the title screen waits for 51.5 MB of blocking scripts (306 `<script>` tag
 - **DONE in `mem1` (2026-11-03, Tom approved): memory for long sessions.** Battle and enemy painted sheets load on demand and are released when unused (`paintedTick` in `engine/painted.js`; overworld sheets still load at boot). Decoded voice clips are capped (`lruSet` in `engine/speech.js`). A new painted atlas whose id starts with a cast prefix (PAINTED_CAST) or `foe_` is lazy automatically; give a new cast member's prefix to PAINTED_CAST. Details: docs/CHANGES.md (118).
 - **POST-BUILD ONLY. Do not start these until Tom asks for them by name**, however slow loading looks: (1) voice clips as real `.mp3` files fetched on demand instead of base64 in JS, (2) a loading bar on the title screen, (3) sprite data loaded per party member and per area instead of at boot. Mention them at most once per session if loading comes up, then leave them alone.
 
+## Build label and build history (standing rule, Tom 2026-11-14)
+
+Tom (11-14 08:53) tells builds apart by the build label: a chip at the top left of the welcome screen and a Build box in the menu, each showing the build name and the time it was made. Tapping either opens BUILD HISTORY (`engine/build-history.js`), one day at a time, today first. Every push gets its own build name and its own entry: write the build's heading in `docs/CHANGES.md` first (`## <tag> (<date>): <one plain line>`, it becomes the line Tom reads), then run `python3 tools/art-library/bump_tags.py <TAG> --base origin/main`, which sets the stamp and calls `tools/build_history.py add <TAG>` (time now). Never reuse a build name and never push without a new one. Never hand-edit `data/build-history.js`; on a rebase conflict take upstream and run `python3 tools/build_history.py add <TAG>` again. Smoke fails when the stamp's build is not the newest entry. Test: `python3 tools/buildlog_test.py`.
+
 ## How to work
 
 1. Read only the files the task needs. The repo is large (`engine/battle2-kind.js` alone is 400 KB). Use search to find the section; do not open whole files.

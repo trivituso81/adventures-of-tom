@@ -1229,6 +1229,35 @@ function fail(){if(!d.classList.contains('js-running'))d.classList.add('js-faile
 window.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='SCRIPT'&&t.src)setTimeout(fail,8000);},true);
 setTimeout(fail,90000);
 document.addEventListener('click',function(e){var n=e.target.closest&&e.target.closest('#boot-retry');if(n){e.preventDefault();location.reload();}});})();</script>
+<style>
+/* Build label and build history (buildlog1, engine/build-history.js) */
+#build-stamp{position:absolute;left:calc(12px + env(safe-area-inset-left));top:calc(12px + env(safe-area-inset-top));z-index:50;display:grid;gap:2px;margin:0;min-height:40px;padding:5px 10px;border:1px solid #b8914a;border-radius:6px;background:#141a26d9;color:#f3dfa8;font:12px/1.1 ui-monospace,Menlo,monospace;text-align:left;box-shadow:0 0 0 2px #0a0e18;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+#build-stamp small{font-size:10px;color:#cfd5e2}
+html.landscape #build-stamp{top:calc(8px + env(safe-area-inset-top));min-height:34px;padding:3px 9px}
+.mbuild{display:grid;gap:2px;padding:7px 10px;text-align:left;font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.mbuild b{font-size:13px;word-break:break-all;color:var(--ink,#324235)}.mbuild small{font-size:10px;color:var(--label,#4f7a4a);text-decoration:underline dotted;text-underline-offset:2px}
+html.landscape .mbuild{padding:4px 10px;gap:1px}
+#buildlog{position:absolute;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;padding:calc(12px + env(safe-area-inset-top)) calc(10px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) calc(10px + env(safe-area-inset-left));background:#05070ccc;touch-action:auto}
+#buildlog[hidden]{display:none}
+.bl-panel{display:flex;flex-direction:column;width:min(100%,560px);max-height:100%;border:2px solid #b8914a;border-radius:6px;background:linear-gradient(#1b212e,#141924);box-shadow:0 0 0 2px #0a0e18;color:#f2e6cc;font-size:13px;overflow:hidden}
+.bl-head{display:flex;align-items:center;justify-content:space-between;padding:8px 8px 8px 14px;border-bottom:1px solid #6d5629;font-size:15px;letter-spacing:1px}
+.bl-close{width:38px;height:38px;border:1px solid #6d5629;border-radius:5px;background:#232834;color:#f3dfa8;font-size:16px}
+.bl-status{padding:9px 14px;color:#cfd5e2;line-height:1.35}.bl-status b{color:#f3dfa8}
+.bl-reload{margin-left:4px;padding:5px 10px;border:1px solid #b8914a;border-radius:5px;background:#3a2f14;color:#f3dfa8;font:inherit;font-size:12px}
+.bl-bar{display:flex;align-items:center;gap:6px;padding:6px 10px;border-top:1px solid #2c3342;border-bottom:1px solid #2c3342;background:#10141d}
+.bl-bar button{height:38px;min-width:40px;padding:0 10px;border:1px solid #4b5160;border-radius:5px;background:#232834;color:#f2e6cc;font:inherit;font-size:12px;touch-action:manipulation}
+.bl-bar button:disabled{opacity:.3}
+.bl-day{flex:1;display:grid;text-align:center;font-size:14px;color:#f3dfa8}.bl-day small{font-size:10px;color:#aeb6c6}
+.bl-list{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:2px 0}
+.bl-row{display:grid;grid-template-columns:70px 1fr;gap:8px;padding:8px 14px;border-bottom:1px solid #232a38}
+.bl-row.mine{background:#3a2f1466;box-shadow:inset 3px 0 0 #b8914a}
+.bl-time{color:#aeb6c6;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bl-main b{color:#f3dfa8;font-size:14px;font-weight:600}.bl-main i{margin-left:8px;padding:1px 5px;border:1px solid #b8914a;border-radius:3px;font-style:normal;font-size:9px;letter-spacing:.5px;color:#f3dfa8}
+.bl-what{display:block;margin-top:2px;color:#cfd5e2;font-size:12px;line-height:1.3}
+.bl-dayhead{padding:6px 14px;background:#10141d;color:#f3dfa8;font-size:11px;letter-spacing:.5px;position:sticky;top:0}
+.bl-empty{padding:26px 14px;text-align:center;color:#aeb6c6}
+.bl-foot{padding:7px 14px;border-top:1px solid #2c3342;color:#8790a3;font-size:10px;line-height:1.3}
+</style>
 </head>
 <body>
 <div id="stage">
@@ -1296,6 +1325,7 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
         <div class="mp-row"><span class="mp-lbl">Time</span><b id="menu-time">0:00</b></div>
         <div class="mp-row"><span class="mp-lbl">Coins</span><b id="menu-coins">0</b></div>
       </div>
+      <button id="menu-build" class="mwin mbuild" type="button" aria-label="Build history"></button>
     </div>
     <div class="mwin mmain">
       <div class="mtabs" id="menu-party" role="tablist" aria-label="Party member" hidden></div>
@@ -1689,6 +1719,8 @@ document.addEventListener('click',function(e){var n=e.target.closest&&e.target.c
 <script src="data/talk-types.js?v=ch4build1"></script><!-- talking pose per plain cast line (talk1, docs/TALK_POSES.md) -->
 <script src="engine/emotions.js?v=talk1"></script><!-- mood faces and poses in story dialogue (batch 0: chapter 1) -->
 <script src="engine/tapwalk.js?v=bossbig1"></script><!-- tap to walk -->
+<script src="data/build-history.js?v=buildlog1"></script><!-- build names and times (tools/build_history.py) -->
+<script src="engine/build-history.js?v=buildlog1"></script><!-- build label on the welcome screen and menu, tap for the build history -->
 <script src="engine/main.js?v=cutfront1"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
