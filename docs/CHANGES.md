@@ -1,3 +1,9 @@
+## talk3 (2026-11-14): talking poses installed for Tom, TNB, Grace, Rose, Deedee and Boppy
+- Tom approved six talking sheets (art/raw/characters/<id>-talk-v*.png). Cut with talk_frames.py (heads x1.00 Tom, x1.21 TNB, x1.30 Grace and Rose, x1.13 Deedee, x1.10 Boppy), baked with bake_story_poses.py into sets `<id>talk` (tk_tell, tk_point, tk_ask, tk_answer) in data/story-poses.js and art/chars/<id>talk-story.webp.
+- Looked at: contact sheet (four poses each, feet whole) and ch2Starter on the map (TNB tk_tell, Tom tk_ask, TNB tk_answer on pages 2 to 4, moods kept elsewhere).
+- NOT done: Amy, Justin, Aunt Ellie and Olivia (no approved talking sheet yet; they keep mood poses); Grace and Rose on a chapter 1 scene; landscape; Duo; phone. The bake also rewrote art/chars/pipemo-story.webp and data/npc-poses.js slightly; both reverted (unrelated).
+
+
 ## clips11 (2026-11-14): Tom's 80 chapter 3 Voice Library takes merged, DONE, nothing heard on a phone
 - Merged `local-clips-pending_9.json` (made 2026-11-14T15:03Z) with merge-local.js: 80 dialogue takes (Boppy 31, Tom 14, Deedee 12, Grace 11, Rose 8, The Big One 2, Oolong 2). All 80 are new keys in data/voice/dialog-ch28.js (chapter 3 story lines). No battle clips, none replaced.
 - All 80 takes are newer than their script rewrites (retake.json `ats`); one line (Oolong) has no rewrite entry.
