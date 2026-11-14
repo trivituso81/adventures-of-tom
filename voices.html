@@ -161,7 +161,7 @@ let HIST={}; try{ HIST=JSON.parse(localStorage.getItem('aot-vl-hist')||'{}')||{}
 // Accent voices (index `accent`: Boppy, Justin, Amy): the accent is shown and sent at the start of EVERY [bracket], whatever the
 // script's source (Tom's edit, ElevenLabs history, index). The first bracket alone does not hold the accent through a line.
 function accentAll(a,s){ if(!a||!s) return s; const re=/new york/i.test(a)?/new york/i:/long island/i.test(a)?/long island/i:new RegExp(a.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i');
-  s=s.replace(/\[([^\]]*)\]/g,(m,t)=>re.test(t)?m:'['+a+(t.trim()?', '+t.trim():'')+']'); return /^\s*\[/.test(s)?s:'['+a+'] '+s; }
+  s=s.replace(/\[([^\]]*)\]/g,(m,t)=>re.test(t)||/^\s*(short|long) pause\s*$/i.test(t)?m:'['+a+(t.trim()?', '+t.trim():'')+']'); return /^\s*\[/.test(s)?s:'['+a+'] '+s; }
 const scriptOf=it=>isDog(it)?rawScriptOf(it):accentAll((voiceOf(it)||{}).accent,rawScriptOf(it));
 const rawScriptOf=it=>SCRIPTS[lk(it)]!=null?SCRIPTS[lk(it)]:(HIST[lk(it)]!=null&&!it.rw&&!(voiceOf(it)||{}).ignore_history?HIST[lk(it)]:(isDog(it)?it.p:it.s));   // ignore_history (index): a recast voice uses its new written scripts; rw (index): a line whose direction was rewritten after its bake does too
 const hasWritten=it=>HIST[lk(it)]!=null||!it.auto;

@@ -18,7 +18,7 @@ TAG = re.compile(r'\[([^\]]*)\]')
 BAD = {'standing','grinning','pacing','pointing','shrugging','hands','hand','arms','arm','finger','fingers','hips','foot',
        'mouth','eyes','eye','head','shoulders','leaning','sitting','slumping','bouncing','hopping','leaping','clutching',
        'tapping','wiggling','waving','swinging','holding','tossing','flicking','rummaging','patting','wagging','pointing',
-       'beat','pause','chime','gunshot','yelp','groan','gasp','sigh','laugh','applause','music','grin','smile','nod',
+       'beat','chime','gunshot','yelp','groan','gasp','sigh','laugh','applause','music','grin','smile','nod',
        'ladder','couch','tv','screen','stopwatch','kettlebell','pliers','toolbox','sledgehammer','drill','flashlight'}
 def words(s): return re.sub(r'[^a-z0-9]+',' ',s.lower()).split()
 def canon(s):
@@ -28,7 +28,7 @@ def canon(s):
 def check(text, script):
     errs = []
     if '—' in script: errs.append('em dash')
-    tags = TAG.findall(script); spoken = TAG.sub('', script)
+    tags = [t for t in TAG.findall(script) if not re.fullmatch(r'\s*(short|long) pause\s*',t,re.I)]; spoken = TAG.sub('', script)   # pause tags sit outside the tag limit
     if canon(spoken) != canon(text): errs.append('words differ: %r' % ' '.join(canon(spoken)))
     n = len(words(text)); limit = 1 if n <= 4 else 2 if n <= 14 else 3
     if len(tags) > limit: errs.append('%d tags on %d words (max %d)' % (len(tags), n, limit))

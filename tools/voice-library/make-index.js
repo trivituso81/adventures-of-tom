@@ -138,8 +138,8 @@ for(const id of ['boppy','justin']) for(const k of ['battle|'+id,'dialog|'+id]){
 // Mr. Washington (Tom 2026-11-12 23:26, `washvoice1`): "a male version of Miss Odette, an older African-American man voice". No new voice
 // (the account is full at 30, Tom 18:30): he keeps his own ElevenLabs voice and carries this accent in every bracket. The Narrator
 // copies his voice id above, before this, so narration does not get the accent.
-const ACCENT={boppy:'thick New York accent',justin:'thick New York accent',amy:'heavy Long Island accent',washington:'older African American man, warm Louisiana drawl'};
-const ACCENT_HAS={boppy:/new york/i,justin:/new york/i,amy:/long island/i,washington:/african american/i};
+const ACCENT={boppy:'thick New York accent',justin:'thick New York accent',amy:'heavy Long Island accent',washington:'older African American man, warm Louisiana drawl',deedee:'warm Long Island accent',ellie:'heavy Long Island accent'};
+const ACCENT_HAS={boppy:/new york/i,justin:/new york/i,amy:/long island/i,washington:/african american/i,deedee:/long island/i,ellie:/long island/i};
 for(const id in ACCENT) for(const k of ['battle|'+id,'dialog|'+id]) if(voices[k]) voices[k].accent=ACCENT[id];
 const vname=id=>id[0]==='?'?id.slice(1):(NAMES[id]||(CAST.voices[id]&&CAST.voices[id].name)||id);
 // Merge effects: battle clips only deepen Boppy (tools/battle-baker/merge.js); dialogue adds speaker or voice fx, Boppy, Grace shrink (tools/clip-audit/merge.py).
@@ -291,7 +291,7 @@ const who={}; for(const it of items){ const k=it.v; who[k]=who[k]||{id:k,name:vn
 // Show the accent: write it at the start of EVERY [bracket] of every Boppy, Justin and Amy script, the way the baked takes that
 // kept the accent had it (finalText skips parts a script already has).
 for(const it of items) if(it.s&&ACCENT[it.v]){ const A=ACCENT[it.v], H=ACCENT_HAS[it.v];
-  it.s=it.s.replace(/\[([^\]]*)\]/g,(m,t)=>H.test(t)?m:'['+A+(t.trim()?', '+t.trim():'')+']');
+  it.s=it.s.replace(/\[([^\]]*)\]/g,(m,t)=>H.test(t)||/^\s*(short|long) pause\s*$/i.test(t)?m:'['+A+(t.trim()?', '+t.trim():'')+']');
   if(!/^\s*\[/.test(it.s)) it.s='['+A+'] '+it.s; }
 const out={made:new Date().toISOString().slice(0,10),files,voices,recast,who:Object.values(who).sort((a,b)=>(b.family-a.family)||(ORDER.indexOf(a.id)-ORDER.indexOf(b.id))||a.name.localeCompare(b.name)),
   chapters:Object.keys(titles).map(Number).sort((a,b)=>a-b).map(n=>({n,title:titles[n]})),items};

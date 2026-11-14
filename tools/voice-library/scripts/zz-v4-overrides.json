@@ -3150,6 +3150,13 @@
 "text": "I made a mug. It has the same handle as the first one. It's exactly too big.",
 "ctx": "v4 override",
 "script": "[easy, fond] I made a mug. [dry, deadpan] It has the same handle as the first one. It's exactly too big."
+},
+{
+"voice": "boppy",
+"speaker": "Boppy",
+"text": "Tom. Tackle box. We do this the old way.",
+"ctx": "v4 override",
+"script": "[serious, determined] Tom. Tackle box. We do this the OLD way."
 }
 ]
 }
