@@ -27,10 +27,10 @@ SOURCE_TAGS = {'tom': {'battle-sheet-1': 'battle-stance-1-v2', 'battle-sheet-2':
 # battles need screen-left. Sheet 1 is mirrored whole (the only frames of his set that cannot be used as painted); sheet 2 is painted facing left.
 MIRROR = {'tom': {'battle-sheet-1'}}
 
-def key_ground(path, ground):
+def key_ground(path, ground, dark_cos=0.985):
     """Key a pose sheet painted on a flat ground that is not magenta (the greeting hug came back crimson). Same recipe as walk_sheet_frames._key:
     ground = ground-coloured regions touching the border plus big enclosed holes; the 5 px rim is unmixed against the ground colour using the
-    nearest solid figure colour. Returns an RGBA array."""
+    nearest solid figure colour. dark_cos: how close in hue a shaded ground pocket must be (default .985; the v2 greeting hug sheet needs .95). Returns an RGBA array."""
     from scipy import ndimage as ndi
     a = np.array(Image.open(path).convert('RGB')).astype(float); M = np.array(ground, float)
     dist = np.sqrt(((a - M) ** 2).sum(2))
@@ -42,7 +42,7 @@ def key_ground(path, ground):
     # Shaded ground pockets between the figures (the ground darkened by the soft shadows, e.g. rgb 160 32 70): same hue, blue above green. A hair bow is red with blue at
     # green's level, so it is not taken.
     cos = (a @ M) / (np.linalg.norm(a, axis=2) * np.linalg.norm(M) + 1e-9)
-    dk = (cos > 0.985) & (a[:, :, 0] - a[:, :, 1] > 50) & (a[:, :, 2] - a[:, :, 1] > 22)
+    dk = (cos > dark_cos) & (a[:, :, 0] - a[:, :, 1] > 50) & (a[:, :, 2] - a[:, :, 1] > 22)
     dl, dn = ndi.label(dk); ds = ndi.sum(dk, dl, range(1, dn + 1))
     dark = np.isin(dl, [i + 1 for i in range(dn) if ds[i] >= 30]); bg = bg | dark
     near = ndi.binary_dilation(bg, iterations=5) & ~bg

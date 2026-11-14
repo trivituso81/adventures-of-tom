@@ -127,11 +127,11 @@ const S={
     update(dt){ while(this.i<list.length) { const s=list[this.i]; if(!this.started) { s.start(); this.started=true; } if(!s.update(dt)) return false; this.i++; this.started=false; } return true; }})
 };
 
-// The greeting (painted, data/story-poses.js set "hug", CHANGES 407): Tom hears the girls shout (hg_hear), lights up (hg_delight), crouches with his arms open (hg_crouch) and drops to one knee, arms open (hg_kneel, held while they run in)
-// while they run in; then one painted group picture at Tom's tile replaces the three of them (hg_run, hg_crash, then hg_group, held under the greeting lines).
+// The greeting (painted, data/story-poses.js set "hug", the approved Library sheet tom-grace-rose-greeting-hug v2): Tom hears the girls shout (hg_hear), lights up (hg_delight) and crouches with his arms open (hg_crouch, held while they run in);
+// then one painted group picture at Tom's tile replaces the three of them (hg_run, hg_crash, then hg_group, held under the greeting lines).
 // hugEndStep() brings the girls and Tom's walking figure back.
 function hugHearStep() {
-  const SEQ=[['hg_hear',0],['hg_delight',.32],['hg_crouch',.68],['hg_kneel',.95]];
+  const SEQ=[['hg_hear',0],['hg_delight',.32],['hg_crouch',.68]];
   return {t:0,start(){ this.t=0; if(typeof storyPosesLoad==='function') storyPosesLoad('tom'); player.scenePose={f:'hg_hear'}; },
     update(dt){ this.t+=dt; let f='hg_hear'; for(const [n,at] of SEQ) if(this.t>=at) f=n;
       player.scenePose={f}; return this.t>=1.2; }};

@@ -36,20 +36,15 @@ SETS = {
     # stays with its cell). Tom's body is 42 rows (his overworld stand), so the whole figure with Rose is 53.9 rows (727 px of the sit cell, of which Tom's body is 566).
     'tomride': {'member': 'tom', 'sheet': 'tomride-intro-v1.png', 'cut': (3, 2), 'k': 9, 'h': 53.9, 'ref': 'tr_sit',
                 'names': ['tr_kneel', 'tr_lift', 'tr_cheer', 'tr_laugh', 'tr_hopoff', 'tr_sit']},
-    # Greeting hug (2026-11-06, Tom: chapter 1 opening and every return to Long Island): 4 x 2 cells, Tom alone in the first three (hear, delight, crouch),
-    # Tom with Grace and Rose in cells 4 to 6 (run in, crash, group hug). Cells 7 and 8 are not used: each shows only ONE girl (Grace lifted in 7, Rose alone in 8),
-    # and a frame that replaces all three actors must hold both. Stored under member 'tom'. The generator painted this one on a
-    # crimson ground, not magenta, so it is keyed against its own ground colour (key_ground). One size factor: Tom's standing figure (cell 1) is his 42 overworld rows.
-    # 'feet' = x of Tom's own feet in each group frame's cut picture, in source pixels (measured by eye; checked with tools/shots/hug-feet.png), so he stays on one spot from frame 4 to 8.
-    'hug': {'member': 'tom', 'sheet': 'tom-grace-rose-greeting-hug-v1.png', 'ground': (211, 24, 95), 'cut': (4, 2), 'k': 9, 'h': 42, 'ref': 'hg_hear',
-            'names': ['hg_hear', 'hg_delight', 'hg_crouch', 'hg_run', 'hg_crash', 'hg_group', 'hg_kneel'],   # hg_kneel last: it takes cell 7 (not used) and is then replaced by its own picture
-            'feet': {'hg_run': 192, 'hg_crash': 143, 'hg_group': 146},
-            # Side crouch (2026-11-07, Tom: the crouch before the hug faces the girls, arms open): the approved painting `tom-greeting-crouch-v1.png` replaces cell 3.
-            # Its own sheet, so its size factor is set by head height: hair top to chin is about 334 px there and about 95 px in this sheet's standing Tom, so .284.
-            'crouch': {'sheet': 'tom-greeting-crouch-v1.png', 'ground': (219, 25, 95), 'scale': .284, 'name': 'hg_crouch'},
-            # Kneel (2026-11-13, Tom sent it in chat: "Tom kneeling in supplication of the hug"): held while the girls run in. Painted facing right, the girls come from the left, so it is
-            # mirrored (the only flip; named to Tom). Hair top to chin is about 387 px there and about 95 px in the standing Tom, so .245.
-            'kneel': {'sheet': 'tom-greeting-kneel-v1.png', 'ground': (255, 0, 255), 'scale': .245, 'name': 'hg_kneel', 'flip': True}},
+    # Greeting hug (hugv2, 2026-11-14, Tom: the approved sheet has everything): Tom's approved Library picture `tom-grace-rose-greeting-hug`, version 2
+    # (tom-grace-rose-greeting-hug-v2.png, 4 x 2 cells on magenta). Cells 1 to 3 are Tom alone (hear, delight, crouch with arms open), cells 4 to 6 are Tom with Grace and Rose
+    # (run in, crash, group hug). Cells 7 (squeeze) and 8 (looking up) are not played. Stored under member 'tom'. The figures overlap their cell edges, so they are cut by
+    # piece (cut_cells with merge distance 'dil' 4; the default 6 joins the crash and group frames), and the darkened ground between the feet is keyed with the looser
+    # hue test 'dark_cos' .88 (the default .985 leaves purple crumbs). One size factor: Tom's standing figure (cell 1) is his 42 overworld rows.
+    # 'feet' = x of Tom's own feet in each group frame's cut picture, in source pixels (measured with a ruler on the cut frames), so he stays on one spot from frame 4 to 6.
+    'hug': {'member': 'tom', 'sheet': 'tom-grace-rose-greeting-hug-v2.png', 'ground': (255, 0, 255), 'dark_cos': .88, 'dil': 4, 'cut': (4, 2), 'k': 9, 'h': 42, 'ref': 'hg_hear',
+            'names': ['hg_hear', 'hg_delight', 'hg_crouch', 'hg_run', 'hg_crash', 'hg_group'],
+            'feet': {'hg_run': 267, 'hg_crash': 194, 'hg_group': 175}},
 }
 
 # Emotion poses (emo7, 2026-11-06): the 8 full-body emotion frames of each character (art/emotions/<id>.webp strips, cut by emotion_frames.py), drawn on the
@@ -136,11 +131,11 @@ for _id in NPC_EMO:
     EMO_HEAD[_id] = npc_emo_head(_id)[0]
 
 
-def cut_cells(rgba, cols, rows, n):
+def cut_cells(rgba, cols, rows, n, dil=6):
     """Like battle_sheet_frames._cut, on an already keyed array: every piece goes to the grid cell its centre is in. Returns n RGBA crops in reading order."""
     from scipy import ndimage as ndi
     H, W = rgba.shape[:2]; A = rgba[:, :, 3] > 20
-    lab, cnt = ndi.label(ndi.binary_dilation(A, iterations=6))
+    lab, cnt = ndi.label(ndi.binary_dilation(A, iterations=dil))
     sizes = ndi.sum(A, lab, range(1, cnt + 1)); objs = ndi.find_objects(lab); cells = {}
     for i in range(cnt):
         if sizes[i] < 40: continue
@@ -254,13 +249,8 @@ for cid, S in SETS.items():
         if not S['k']:
             hd = EMO_HEAD.get(S['member'])
             S['k'] = max(5, min(10, int(hd * stand_frame(S['member'])[1]) if hd else int(figs[S['ref']].height / S['h'])))   # never upscale the painted frames
-    elif 'ground' in S: figs = dict(zip(S['names'], cut_cells(key_ground(os.path.join(RAW, S['sheet']), S['ground']), S['cut'][0], S['cut'][1], S['cut'][0] * S['cut'][1])))
+    elif 'ground' in S: figs = dict(zip(S['names'], cut_cells(key_ground(os.path.join(RAW, S['sheet']), S['ground'], S.get('dark_cos', .985)), S['cut'][0], S['cut'][1], S['cut'][0] * S['cut'][1], S.get('dil', 6))))
     elif 'cut' in S: figs = dict(zip(S['names'], _cut(os.path.join(RAW, S['sheet']), S['cut'][0], S['cut'][1], [n[3:] for n in S['names']] + ['x%d' % i for i in range(S['cut'][0] * S['cut'][1] - len(S['names']))]).values()))
-    for _extra in ('crouch', 'kneel'):
-        if not S.get(_extra): continue
-        C = S[_extra]; one = cut_cells(key_ground(os.path.join(RAW, C['sheet']), C['ground']), 1, 1, 1)[0]
-        if C.get('flip'): one = one.transpose(Image.FLIP_LEFT_RIGHT)
-        figs[C['name']] = one.resize((round(one.width * C['scale']), round(one.height * C['scale'])), Image.LANCZOS)
     if 'strip' not in S and 'cut' not in S and 'ground' not in S: figs = dict(zip(S['names'], grid(os.path.join(RAW, S['sheet']), 4, 2)))
     f = S['h'] * S['k'] / figs[S['ref']].height
     if 'strip' in S and S['member'] in EMO_HEAD:
