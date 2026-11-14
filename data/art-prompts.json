@@ -25496,7 +25496,7 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE SHEET OF TWO OBJECTS. Return exactly one image, nothing else. Generate it now.\n\nATTACHED IMAGES\nPicture 1 is the approved painting of the Unread, an ancient talking book from \"The Adventures of Tom\". Picture 2 is its calm sheet after the fight. Picture 3 is the painting of a Mudling, for the handbrushed finish only.\nPaint the same book, the same old brown cracked leather with the same brass corners, as a completely ordinary book: no eyes, no face, no teeth, no runes glowing.\n\nPAINT THIS SHEET\nOne image, 2 equal cells side by side on a flat solid magenta #FF00FF background, one object alone in each cell, filling most of its cell with clear magenta margin.\n1. Left: the old brown book standing upright, closed, seen from the front at a slight angle. The cover is plain: no picture and no title, only the words VOLUME ONE embossed small in the middle in worn gold, spelled exactly VOLUME ONE. The corners are brass and a little dented, the edges of the pages yellowed.\n2. Right: the same book lying open, seen from a three-quarter angle, the yellowed pages with soft grey blocks of tiny unreadable lines, and a sparkly bedazzled bookmark made by a nine year old: a long narrow strip of pink card covered in rows of little plastic gems in pink, purple and gold, with glitter glue edges and a short pink ribbon at the top sticking up out of the pages near the middle. \n\nPaint it like the attached pictures: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Warm golden light from the upper left, soft shadow falling to the lower right. No people, no hands. The only words are VOLUME ONE."
   },
   {
-   "status": "rejected",
+   "status": "approved",
    "versions": [
     {
      "n": 0,
@@ -25504,6 +25504,13 @@
      "date": "2026-11-14",
      "from": "v3",
      "at": 1794698813464
+    },
+    {
+     "n": 1,
+     "file": "art/raw/enemies/ch7-unread-boss-v2.png",
+     "date": "2026-11-14",
+     "from": "v4",
+     "at": 1794699337495
     }
    ],
    "rejects": [
