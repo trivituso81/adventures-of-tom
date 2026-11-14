@@ -104,7 +104,7 @@ startSplash();
   const sp=document.getElementById('splash'); if(!sp) return;
   const d=document.createElement('div');
   // On an iPhone Duo the stamp also shows the page size and pose the game measured, so Tom can read them back (docs/DUO.md).
-  d.textContent='build theftorder1';
+  d.textContent='build voicetags1';
   const build=d.textContent,stamp=()=>{ d.textContent=build+(typeof duoMode!=='undefined'&&duoMode.device?' '+window.innerWidth+'x'+window.innerHeight+(duoMode.open?' duo open':' duo folded'):''); };
   stamp(); window.addEventListener('resize',()=>setTimeout(stamp,60));
   d.style.cssText='position:absolute;left:8px;bottom:4px;font:10px monospace;color:#fff;opacity:.45;pointer-events:none;z-index:50';
