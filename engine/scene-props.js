@@ -93,6 +93,8 @@ SPK.charttable=(P)=>{
     ctx.save(); ctx.beginPath(); ctx.rect(x+w*.7,y+h*.8,T*2,T); ctx.clip(); ctx.restore(); ctx.fillStyle='#b8782e'; ctx.beginPath(); ctx.ellipse(px+4,py,T*.34,T*.18,0,0,Math.PI*2); ctx.fill(); }
 };
 
+// A painted picture: art/props/<art>.webp drawn with its feet at tile (x,y) and w tiles wide (the ears-row picture over the three of them). Fields art, x, y, w.
+SPK.img=(P)=>{ PROPART.draw(P.art,P.x*T,P.y*T-(P.w*T*(PROPART.ready(P.art)?PROPART.get(P.art).naturalHeight/PROPART.get(P.art).naturalWidth:1))/2,{w:P.w*T}); };
 function sceneActorOrNull(a) { try { return sceneActor(a); } catch(e) { return null; } }
 SCENE_OPS.prop=o=>S.call(()=>{ const id=o.prop; if(o.hide) { if(SCENE_PROPS[id]) SCENE_PROPS[id].show=false; return; } scenePropSet(id,o.kind,Object.assign({show:true},o.set||{})); });
 SCENE_OPS.propTo=o=>({t:0,start(){ this.t=0; this.P=SCENE_PROPS[o.propTo]; this.a=this.P?this.P[o.field]:0; this.b=this.P?this.P[o.field]:0; if(this.P) this.a=this.P[o.field]==null?0:this.P[o.field]; this.arc=o.arc||0; },

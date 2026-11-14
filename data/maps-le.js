@@ -719,7 +719,8 @@ LE_AREAS.push(
       ['bookcase',25,5,1,1,'Nonfiction',STACKS_SHELF.n[1],{wing:'n'}],
       ['readdoors',14,1,2,1,'Reading Room doors','Two tall doors: THE READING ROOM. A brass lock shaped like a card catalog drawer. Somebody behind them is whispering.',{catalog:true}],
       ['stackglobe',12,9,2,1,'Globe','An old globe. Half the countries have changed names. The globe hasn\'t been told. Nobody wants to tell it.'],
-      ['bookcart',16,9,2,1,'Returns cart','RETURNS. A cart of books waiting to go back on the shelves. One of them is a cookbook. It smells faintly of soup.'],
+      ['bookcart',16,9,2,1,'Returns cart','RETURNS. A cart of books waiting to go back on the shelves. One of them is a cookbook. It smells faintly of soup.',
+        {when:[{chapter:7,flag:'ch7-hall',notFlag:'bb-stacks',text:'A hard orange block as big as a golf cart. The returns cart is stuck inside it, with seven books in the middle of falling off.'}]}],
       ['lamptable',27,6,2,2,'Reading table','A long table with a green lamp. Someone left a note: QUIET PLEASE. Under it, smaller: we heard you.'],
       ['stacksign',20,8,1,1,'Stacks sign','THE STACKS. Please return books to the cart. Please don\'t answer the books.',
         {when:[{...CH7_DONE,text:'THE STACKS. Please return books to the cart. Somebody added, in glitter pen: AND READ THEM OUT LOUD.'}]}],
@@ -776,7 +777,7 @@ LE_AREAS.push(
       ['lamptable',14,9,6,3,'Reading table','A stack of returned books, all overdue. The newest one is from 1999.'],
       ['stackglobe',17,5,1,1,'Globe','A globe on a stand. Somebody has drawn a little clock face on the Pacific Ocean. In pen.'],
       ['lectern',9,5,2,1,'Lectern','A brass lectern with nothing on it. Whatever used to sit here\'s up on the dais now.',
-        {when:[{flag:'ch7-clear',text:'A brass lectern. The Unread sits on it now, open to page one, waiting for whoever is next.'}]}]]})
+        {when:[{flag:'ch7-clear',text:'An old brown book with a sparkly bookmark at page twelve. Saturdays only.'}]}]]})
 );
 
 // ---------- Chapter 9: the Moon Club (up the stairs behind Luna's observatory) and its Dome ----------
@@ -1164,7 +1165,7 @@ const LE_ROOMS=[
         "Someone shelved a sandwich under 'S'.",
         'Technically correct. Deeply concerning.'],
         when:[{...CH7_DONE,lines:['It\'s quiet. Properly quiet. The good kind. Thank you, Tom.','Story time is Saturdays now. The Unread asked for Grace. By name.']},
-              {...CH7_ON,flag:'ch7-page',lines:['The Stacks are through the staff door. Please be careful. And please don\'t answer the books.','I\'m fine. Everything is fine. The dictionaries haven\'t slept in a week.']},
+              {...CH7_ON,flag:'ch7-page',lines:['The Stacks are through the staff door. Please be careful. And please don\'t answer the books.','I\'m fine. Everything is fine. The dictionaries haven\'t slept since Monday.']},
               {...CH7_ON,lines:['It\'s fine. Everything is fine. Please whisper.','...Did you hear that? That wasn\'t me. I\'d know my own shush.']}]}],
     objects:[
       ['shelf',3,4,4,1,'Serious books','A book called "Advanced Napping" has fallen asleep.'],

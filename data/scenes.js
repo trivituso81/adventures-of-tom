@@ -2887,6 +2887,8 @@ const ch7CardSteps=c=>{ const C=CH7_CARDS.find(k=>k.c===c); return [
     {flag:'ch7-cards'}, {wait:4.2},
     {talk:'Grace',lines:['That\'s all three cards, Tata. Card one, card two, card three. Three gold letters.']},
     {talk:'Tom',lines:['The three gold letters spell the password for the Reading Room doors. We enter them in card order: one, two, three.']},
+    {talk:'Rose',lines:['S. H. H. ...Shh! The password is SHH!']},
+    {talk:'Grace',lines:['I was about to say that.']},
     {toast:'Goal: the Reading Room doors (top of the hall). Put the gold letters in card order.',time:5}],else:[]}]; };
 
 // 1. The Square: the bigger chart (story-ch07.md scene 1, ch7build stage 2). Tom has just thanked the plane (engine/travel.js ARRIVALS[7]); the girls
@@ -2923,7 +2925,7 @@ SCENES.ch7Arrive=[
   {talk:'Grace',lines:['Don\'t wrinkle row six!']},
   {talk:'Tom',lines:['First stop is Deedee\'s. I\'ve got three burnt bulbs for her drawer, and she\'s waiting for them.']},
   // The chart rolls up again with Rose coming out of it, and they head for Deedee's house.
-  {prop:'roseroll',hide:true}, {show:'rose'}, {place:'rose',at:[12,22],dir:'right'},
+  {call:()=>{ if(SCENE_PROPS.roseroll) SCENE_PROPS.roseroll.show=false; }}, {show:'rose'}, {place:'rose',at:[12,22],dir:'right'},
   {call:()=>{ const P=SCENE_PROPS.chart; P.follow=['grace','rose']; }},
   {propTo:'chart',field:'u',to:0,time:1.0},
   {trace:'grace-text'}, {hearts:'grace'},
@@ -3001,17 +3003,32 @@ SCENES.ch7Kitchen=[
   {flag:'ch7-kitchen'},
   {toast:'Goal: The Hush Library (BOOKS), at the top of the Square.',time:4.5}
 ];
-// 2. The Hush Library: Page admits it is not fine. The staff door to the Stacks.
+// 2. The Hush Library: Page admits it is not fine (story-ch07.md scene 3, ch7build stage 3). Grace questions her with the chart. The staff door to the Stacks.
 SCENES.ch7Page=[
   {flag:'ch7-page',value:'pending'},
   {walk:'Page',to:routeBeside('Page'),speed:.25},
   {talk:'Page',lines:['Oh! Tom. Girls. Welcome to the Hush Library. Everything is fine.']},
   {talk:'Grace',lines:['Twelve.']},
   {talk:'Whispers',lines:['...psst... Page hums in the elevator... psst... Page has never finished Moby Dick... psst...']},
-  {talk:'Page',lines:['...It\'s not fine. It started a week ago, and it\'s coming up from the Stacks, the old part of the library downstairs.',
+  {talk:'Page',lines:['...It\'s not fine. It started on Monday night, and it\'s coming up from the Stacks, the old part of the library downstairs.',
     'Every book down there is whispering everything it ever overheard.','That\'s seventy years of people reading quietly and thinking nobody was listening.']},
-  {talk:'Tom',lines:['Books overhear things.']},
+  {talk:'Tom',lines:['Books can HEAR? Oh no. I argue with my cookbooks!']},
   {talk:'Page',lines:['Books overhear EVERYTHING. That\'s why we whisper in here. It was never for the people. It\'s for the books.']},
+  // Grace questions Page with her chart, one box at a time.
+  {talk:'Grace',lines:['Page, on Monday night, was there a big flash?']},
+  {talk:'Page',lines:['...How do you know about the flash?']},
+  {talk:'Grace',lines:['It\'s on my chart. Is there a spot down there where all the color is gone?']},
+  {talk:'Page',lines:['Who TOLD you?']},
+  {talk:'Grace',lines:['Nobody told me. It\'s row seven. And is there a big orange block? Bigger than a bathtub?']},
+  {talk:'Page',lines:['My returns cart is inside it. I put a sheet over it. And a sign.']},
+  {talk:'Tom',lines:['What does the sign say?']},
+  {talk:'Page',lines:['"WET FLOOR." It was the only sign I had.']},
+  {talk:'Grace',lines:['And did you find a little burnt bulb on the floor?']},
+  {talk:'Page',lines:['I catalogued it. It\'s in the card catalog under B. "Bulb, burnt, origin unknown."']},
+  {talk:'Grace',lines:['Technically correct.']},
+  {talk:'Page',lines:['Deeply concerning.']},
+  {talk:'Tom',lines:['Page, why did you tell everybody it was fine?']},
+  {talk:'Page',lines:['Because a library that isn\'t quiet gets closed. And then nobody reads ANY of them.']},
   {talk:'Rose',lines:['Are there monsters down there? Say yes.']},
   {talk:'Page',lines:['The Stacks have three sections: Fiction, Nonfiction and Picture Books.','The Reading Room is at the very back, and I think the whispering starts in there.',
     'But the Reading Room doors use the old card catalog lock, and I lost the password in 1998.']},
@@ -3022,18 +3039,67 @@ SCENES.ch7Page=[
   {flag:'ch7-page'},
   {toast:'Goal: the Stacks, through the STAFF ONLY door (back right of the library).',time:4.5}
 ];
-// 3. The Stacks: the whispers. Grace reads the signs; Rose reads the pictures.
+// 3. The Stacks (story-ch07.md scene 4): the whispers tell on Tom and Rose, Pie crust, the ear-covering row, then the hall: Page's bedsheet, the block,
+// Grace's boxes, the quiet grey shelf. The ears row is the approved ch7-ears-row picture drawn over the three of them. Tom pulling the sheet is
+// still the ordinary Tom (the ch7-tom-poses sheet is not baked yet).
+var ch7HushUntil=0;   // the whispers go quiet for a moment (the one second after Grace's answer, the door)
 SCENES.ch7Stacks=[
   {flag:'ch7-stacks',value:'pending'},
   {talk:'Whispers',lines:['psst... psst... the uncle is here... the TALL one... psst... he talks to his bread...']},
-  {talk:'Tom',lines:['I do talk to my bread. It\'s part of the process.']},
+  {talk:'Tom',lines:['I do talk to my bread! He\'s a very good listener.']},
+  {talk:'Whispers',lines:['...psst... he sings to it too...']},
+  {talk:'Tom',lines:['That\'s TNB! If you\'re going to gossip, get it right!']},
   {talk:'Rose',lines:['Tata. Tata. The books are looking at us.']},
   {talk:'Grace',lines:['Books can\'t look. They don\'t have... okay, that one has eyes.']},
+  {talk:'Whispers',lines:['...psst... the small one... psst... she has a secret...']},
+  {talk:'Rose',lines:['I ATE THE COOKIE DOUGH! And I jumped on Boppy\'s chair! And I moved Grace\'s bookmark!']},
+  {talk:'Whispers',lines:['...psst... never mind... she tells everybody everything...']},
+  {talk:'Rose',lines:['I don\'t HAVE secrets. I\'m too loud.']},
+  {talk:'Whispers',lines:['...psst... Deedee\'s pie crust... psst... it comes from...']},
+  {talk:'Tom',lines:['LA LA LA LA LA! I can\'t hear you! I promised my mother!']},
+  // Tom covers Rose's ears, Rose covers Grace's, Grace covers Tom's. They stand in a row until the whisper gives up.
+  {call:()=>{ const t=position(sceneActor('tom')); scenePropSet('ears','img',{show:true,map:'stacks',art:'stacks/ch7_ears',x:t.x+.9,y:t.y+1,w:2.9}); sfx.pickup&&sfx.pickup(); }},
+  {hide:'tom'}, {hide:'grace'}, {hide:'rose'}, {wait:2.6},
+  {call:()=>{ ch7HushUntil=Date.now()+2500; }},
+  {propsClear:true}, {show:'tom'}, {show:'grace'}, {show:'rose'},
+  {talk:'Grace',lines:['Is it over?']},
+  {talk:'Tom',lines:['WHAT?']},
+  // The hall: the floor goes grey, there is something the size of a golf cart under a bedsheet with a yellow sign in front.
+  {flag:'ch7-hall'}, {call:()=>storyWorld()}, {cam:[12,9.5]},
+  {all:[{walk:'tom',to:routeTo('tom',12,10),speed:.2},{seq:[{wait:.3},{walk:'grace',to:routeTo('grace',11,10),speed:.2}]},{seq:[{wait:.6},{walk:'rose',to:routeTo('rose',10,10),speed:.2}]}]},
+  {face:'tom',dir:'right'}, {face:'grace',dir:'right'}, {face:'rose',dir:'right'}, {wait:.6},
+  {cam:[15,9]},
+  {talk:'Grace',lines:['The floor is grey. That\'s box two.']},
+  {walk:'tom',to:routeTo('tom',15,10),speed:.2}, {face:'tom',dir:'right'}, {wait:.3},
+  {call:()=>{ setFlag('ch7-unsheet'); sfx.whoosh&&sfx.whoosh(); }}, {wait:.8},
+  {talk:'Tom',lines:['It\'s an orange block as big as a golf cart! And there\'s a whole book cart inside it!']},
+  {talk:'Rose',lines:['The books are FALLING OFF! And they\'re stuck in the air!']},
+  {talk:'Grace',lines:['Bigger than a bathtub. Check.']},
+  {walk:'grace',to:routeTo('grace',19,10),speed:.2}, {face:'grace',dir:'up'},
+  {talk:'Grace',lines:['And there\'s the round hole. Check. It\'s exactly as big as a coin.']},
+  {talk:'Tom',lines:['You got every box right, and you did it at Deedee\'s kitchen table.']},
+  {talk:'Grace',lines:['I\'m going over it in pen.']},
+  // Rose puts her ear against a grey shelf (the first grey shelf end, left of the runner to the Reading Room doors).
+  {cam:[14,7.5]}, {walk:'rose',to:routeTo('rose',14,7),speed:.2}, {face:'rose',dir:'left'}, {wait:.5},
+  {talk:'Rose',lines:['These books aren\'t whispering.']},
+  {talk:'Grace',lines:['The grey ones are quiet. It\'s the only quiet spot down here.']},
+  {talk:'Tom',lines:['It\'s the only part of the library that still works like a library.']},
+  {talk:'Rose',lines:['I want to ride that cart.']},
+  {talk:'Grace',lines:['Rose. It\'s in a block.']},
+  {talk:'Rose',lines:['After.']},
+  {talk:'Rose',lines:['When we put the coin in, will the books stop talking?']},
+  {talk:'Grace',lines:['Everything that woke up goes back to the way it was, Rose. The big squirrel couldn\'t talk at all afterwards.']},
+  {call:()=>{ ch7HushUntil=Date.now()+1000; }}, {wait:1.2},
+  {talk:'Tom',lines:['If you can guess all of it before we get here, then it\'s no accident. Somebody stood right here on Monday night, in my nieces\' library.']},
+  {talk:'Grace',lines:['And they didn\'t even take out a book.']},
   {talk:'Grace',lines:['FICTION is that way. NONFICTION is that way. PICTURE BOOKS are down there. The READING ROOM is at the top.','I can read every sign. Rose can\'t read yet.']},
   {talk:'Rose',lines:['I can read PICTURES. Pictures are harder.']},
   {talk:'Grace',lines:['...That\'s actually true.']},
+  {talk:'Grace',lines:['The last box on row seven is something that woke up, with a coin. I bet it\'s behind those doors.']},
   {trace:'sisters-stacks'}, {hearts:'rose'},
-  {talk:'Tom',lines:['Something in each of these sections must know a piece of the password. We\'ll ask nicely first. Then we\'ll ask less nicely.']},
+  {talk:'Tom',lines:['Something in each of these sections must know a piece of the password. We\'ll ask nicely first. Then we\'ll ask nicely again, but louder.']},
+  {talk:'Rose',lines:['Louder? In a LIBRARY?']},
+  {cam:null},
   {flag:'ch7-stacks'},
   {toast:'Goal: Fiction (top left), Nonfiction (top right), Picture Books (bottom). Then the Reading Room doors (top).',time:5.5},
   {toast:'Tip: Picture Books has a story time chair. Rose has a book ready.',time:4}
@@ -3046,25 +3112,30 @@ SCENES.ch7Story=[
   {talk:'Tom',lines:['(a very small voice) Today I\'m going to jump on everybody.']},
   {talk:'Rose',lines:['THAT IS WHAT I DO.']},
   {talk:'Grace',lines:['Okay. That\'s actually a good book. Don\'t tell anyone I said that.']},
-  {talk:'Narrator',lines:['All around the rug, the picture books go quiet. One of them says, very softly: ...again?']},
+  {call:()=>{ ch7HushUntil=Date.now()+4000; sfx.whoosh&&sfx.whoosh(); }}, {wait:1.4},   // all around the rug, the picture books go quiet
+  {talk:'A picture book',lines:['...again?']},
   {hearts:'rose'}, {trace:'storytime'}, {call:()=>sfx.levelChime()},
   {heal:true},
   {give:'bandage'},
   {toast:'Everyone is healed. Rose found a Dino Bandage in Lamby’s book.',time:3.5}
 ];
-// 5. The three wings. A troublemaker in each one.
+// 5. The three wings (story-ch07.md scene 6). A troublemaker in each one, each walking up before its first line.
 SCENES.ch7Fic=[
   {flag:'ch7-fic',value:'pending'},
   {walk:'The Cliffhanger',to:routeBeside('The Cliffhanger'),speed:.25},
   {talk:'The Cliffhanger',lines:['And then... the uncle walked into Fiction... and he saw... he saw...']},
-  {talk:'Tom',lines:['Saw what.']},
+  {talk:'Tom',lines:['What did I see? Tell me! I love a twist!']},
   {talk:'The Cliffhanger',lines:['Find out next time!']},
   {talk:'Grace',lines:['That\'s SO annoying. Finish your SENTENCES.']},
+  {talk:'The Cliffhanger',lines:['And his mother\'s favorite child... has always, ALWAYS been...']},
+  {talk:'Tom',lines:['Been WHO? Me or Amy? Say it!']},
+  {talk:'The Cliffhanger',lines:['Find out next time!']},
+  {talk:'Tom',lines:['That was UNCALLED for!']},
   {battle:'cliffhanger',tut:'ch7cliff'},
   ...CH7_AFTER(()=>flag('battle:cliffhanger')!=='win',[
     {flag:'ch7-fic'},
     {talk:'Rose',lines:['Tata. What did you see? When you walked into Fiction?']},
-    {talk:'Tom',lines:['A green book being very dramatic.']},
+    {talk:'Tom',lines:['I don\'t know, Cozy Rosie! And I don\'t know who Deedee\'s favorite is! This is worse than a season finale!']},
     ...ch7CardSteps('fic')])
 ];
 SCENES.ch7Non=[
@@ -3075,14 +3146,18 @@ SCENES.ch7Non=[
   {talk:'The Know-It-All',lines:['Actually, you said it bossy.']},
   {talk:'Rose',lines:['Tata. It sounds like Grace.']},
   {talk:'Grace',lines:['It does NOT sound like me. Tata. Tell her.']},
-  {talk:'Tom',lines:['...Let\'s focus on the encyclopedia.']},
+  {talk:'The Know-It-All',lines:['Actually, Los Angeles is two thousand four hundred and seventy-five miles away. Everybody says three thousand. Actually.']},
+  {talk:'Tom',lines:['THANK you! Finally, somebody else is counting!']},
+  {talk:'Rose',lines:['Now it sounds like Tata.']},
+  {talk:'Tom',lines:['...It does. Grace, it sounds like BOTH of us.']},
+  {talk:'The Know-It-All',lines:['Actually, the password is none of your business. Actually.']},
   {battle:'knowitall',tut:'ch7know'},
   ...CH7_AFTER(()=>flag('battle:knowitall')!=='win',[
     {flag:'ch7-non'},
     {talk:'Grace',lines:['Tata. Am I a know-it-all? Be honest. Actually, don\'t be honest.']},
-    {talk:'Tom',lines:['You know a lot. And you tell people. Those are two different things, and only one of them needs a little work.',
-      'The other one is why you\'re in charge of the signs down here.']},
-    {talk:'Grace',lines:['...Okay. I can work on the telling part. A little. Starting tomorrow.']},
+    {talk:'Tom',lines:['You know a lot, and you tell people. So do I. You got it from me, and I got it from Deedee.',
+      'But that book never asked us one single question. We ask. That\'s why you\'re in charge of the signs down here.']},
+    {talk:'Grace',lines:['...Okay. I can work on the asking part. A little. Starting tomorrow.']},
     {trace:'grace-knowitall'}, {hearts:'grace'},
     ...ch7CardSteps('non')])
 ];
@@ -3105,18 +3180,19 @@ SCENES.ch7Pic=[
     {trace:'rose-boo'}, {hearts:'rose'},
     ...ch7CardSteps('pic')])
 ];
-// 6. The password works: the Reading Room doors open, and the whispering stops.
+// 6. The password works (story-ch07.md scene 7): the Reading Room doors open, and every book stops whispering at once.
 SCENES.ch7Door=[
   {flag:'ch7-door'},
-  {call:()=>{ sfx.thud(); }}, {wait:.6},
-  {talk:'Reading Room doors',lines:['Click. Click. CLUNK. The brass drawer slides shut by itself.']},
-  {call:()=>{ ch7OpenDoors(); storyWorld(); sfx.doorIn&&sfx.doorIn(); sfx.levelChime(); }},
-  {talk:'Narrator',lines:['All through the Stacks, every book stops whispering at once.','Then, from behind the doors, one voice. Old. Dry. Very slow. \"...Who\'s there?\"']},
+  {call:()=>{ sfx.thud(); }}, {wait:.5}, {call:()=>{ sfx.pickup&&sfx.pickup(); }}, {wait:.4}, {call:()=>{ sfx.pickup&&sfx.pickup(); }}, {wait:.4},   // click, click
+  {call:()=>{ sfx.thud(); sfx.doorIn&&sfx.doorIn(); }}, {wait:.6},   // CLUNK: the brass drawer slides shut by itself
+  {call:()=>{ ch7OpenDoors(); storyWorld(); sfx.levelChime(); }},
+  {wait:1.4},
+  {talk:'A dry old voice',lines:['...Who\'s there?']},
   {talk:'Rose',lines:['Tata. The door talked.']},
   {talk:'Tom',lines:['The thing behind the door talked. Stay close.']},
   {toast:'Goal: the Reading Room.',time:4}
 ];
-// 7. The Reading Room: The Unread, on the dais. Boss fight.
+// 7. The Reading Room (story-ch07.md scene 8): The Unread, on the dais. Boss fight.
 SCENES.ch7Boss=[
   {flag:'ch7-boss'}, {call:()=>storyWorld()},
   {hide:'The Unread'},
@@ -3125,14 +3201,23 @@ SCENES.ch7Boss=[
   {talk:'Grace',lines:['Tata. On the dais. It\'s a book. A really, REALLY big book.']},
   {call:()=>{ sfx.thud(); sfx.whoosh(); }},
   {show:'The Unread'}, {face:'The Unread',dir:'down'},
+  {talk:'Rose',lines:['It\'s as big as a SUITCASE! And it has an EYE!']},
   {talk:'The Unread',lines:['...Visitors. Nobody comes to the Reading Room. Nobody has come since 1952.']},
-  {talk:'Tom',lines:['You\'re the one whispering.']},
+  {talk:'Tom',lines:['Excuse me, sir. Are you the one who told the whole Square that I thank the airplane?']},
+  {talk:'The Unread',lines:['You do. Every single time. I think it\'s lovely. That\'s why I told everybody.']},
   {talk:'The Unread',lines:['I\'m the oldest book in the Stacks. I\'ve sat on this shelf for seventy years, and in all that time nobody has checked me out or opened me. Not once.',
     'So I listened instead. Everybody who ever sat in this room thought nobody could hear them, and I heard ALL of it.',
-    'If nobody will read me, then I\'ll read THEM. Out loud. To everybody.','A man in a long coat checked me out in 1952 and never read a page.','Last week he came back, slipped a gold coin in me, and said: keep them listening, and they\'ll never leave the room.']},
+    'On Monday night there was a flash out in the hall. For seventy years I had nothing to say it with. Now I do.',
+    'If nobody will read me, then I\'ll read THEM. Out loud. To everybody.']},
   {talk:'Rose',lines:['You told everybody Boppy eats cookies in the car.']},
   {talk:'The Unread',lines:['He does. In the CAR.']},
-  {talk:'Grace',lines:['You can\'t just tell people’s secrets! That\'s the rudest thing a book can do! That\'s a RULE!']},
+  {talk:'Grace',lines:['You can\'t just tell people’s secrets! That\'s the rudest thing a book can do! That\'s a RULE!',
+    'And what\'s your name? Your cover doesn\'t say anything. It only says "VOLUME ONE."']},
+  {talk:'The Unread',lines:['Volume one of what? I don\'t know either. Nobody ever opened me to find out.']},
+  {talk:'Rose',lines:['You don\'t have a picture on the front. That\'s why.']},
+  {talk:'The Unread',lines:['...Is THAT why?']},
+  {call:()=>sfx.pickup&&sfx.pickup()},   // Grace tugs Tom's sleeve and points at the gold edge showing between the pages
+  {talk:'Grace',lines:['Tata. Gold, between the pages. That\'s my last box.']},
   {talk:'The Unread',lines:['Then read me. Go on. Nobody ever does.']},
   {talk:'Tom',lines:['Girls, behind me. No touching, please.']},
   {battle:'unread',tut:'unread'},
@@ -3141,7 +3226,8 @@ SCENES.ch7Boss=[
     {talk:'Grace',lines:['Up, everybody. I\'m in charge now.','Tata, it TELLS us its chapter. Mystery, Chatter. Adventure, Kinetic. Read the message. And maybe somebody should just read it. Out loud. Three times.']},
     {toast:'Face The Unread and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
-// 8. After the boss (won in the scene, or on a retry with A): the Unread settles down. A coin, and a checkout card.
+// 8. After the boss (story-ch07.md scene 9; won in the scene, or on a retry with A): the coin is the book's first bookmark. Tom tells the book what the coin
+// does, the book chooses, Grace swaps the coin for her own bookmark, Tom lifts the book. Stage 4 carries it to the hall, where Grace opens the block.
 SCENES.ch7AfterBoss=()=>[
   {flag:'ch7-clear'},
   {call:()=>{ sfx.levelChime&&sfx.levelChime(); }},
@@ -3152,15 +3238,39 @@ SCENES.ch7AfterBoss=()=>[
     {talk:'The Unread',lines:['...Fine. The end. I\'ll be quiet. I\'m very good at quiet. I\'ve had a lot of practice.']}]),
   {finale:'unread'},
   {call:()=>{ setFlag('ch7-wrap'); storyWorld(); sfx.whoosh(); }},
-  {talk:'The Reading Room',lines:['The Unread closes, very slowly, and settles onto the lectern. The green lamps stop flickering.']},
-  {talk:'Grace',lines:['Tata, something fell out of it. Something gold. It was being used as a bookmark.']},
-  {call:()=>sfx.pickup()},
-  {coinFind:5},
-  {talk:'Tom',lines:['A gold coin. Same little clock face.','That\'s five coins. The sundial, the steamer, the sign-up sheet, my jar, and now a book that nobody has opened since 1952.']},
-  {talk:'Grace',lines:['Somebody DID open it, then. To put the coin in.','And look at the checkout card in the pocket. It has one stamp, DUE BACK 1952, and no name. There\'s just a little clock where the name should be.']},
-  {talk:'Rose',lines:['Somebody took it out and didn\'t READ it? That\'s so sad.']},
-  {talk:'Tom',lines:['And then he brought it back last week with a coin in it. Either he\'s very old, or he\'s very, very late.','I\'m adding it to the list.']},
-  {talk:'Grace',lines:['I\'m adding it to MY list. Mine has a chart AND a key now.','And my chart says the same thing every time, Tata. Something old that everybody forgot, then a gold coin, then something that won\'t stop.','The sundial, the movie, the clocks, the whispering.']},
+  ...(flag('kind:unread')?[
+    {talk:'Grace',lines:['There was a dragon in you the whole time, and nobody knew!']},
+    {talk:'The Unread',lines:['Neither did I. I only know chapter one. That\'s as far as anybody has ever read.']}]:[]),
+  {call:()=>sfx.pickup()},   // the book settles on the lectern; the green lamps stop flickering; a gold coin sticks out between its pages
+  {talk:'Grace',lines:['There\'s the coin! He\'s using it for a bookmark.']},
+  {talk:'The Unread',lines:['The little books brought it to me on Monday night. It\'s the first bookmark I ever had. You don\'t need one until somebody opens you.']},
+  {ch7Reveal:'coin'},
+  {talk:'Grace',lines:['It\'s a book CART. I wrote down "a book." I\'m giving myself half a point.']},
+  {face:'tom',dir:'right'},   // Grace reaches for the coin; Tom puts a hand on her shoulder
+  {talk:'Tom',lines:['Grace, wait. He should know what it does first.',
+    'Sir, that coin opens the orange block in the hall. When it does, everything that woke up on Monday night goes back to the way it was. The last one was a squirrel. He couldn\'t talk afterwards.']},
+  {talk:'The Unread',lines:['I know. I heard the one in charge explain it out in the hall. Books overhear everything.',
+    ...(flag('kind:unread')?['I talked for four days, and everybody covered their ears. You read to me for five minutes, and it was the best day I ever had.']:
+      ['I talked for four days, and nobody came to listen. Maybe the quiet ones get read.']),
+    'A book isn\'t supposed to talk. A book is supposed to be READ. So take the coin. But I have conditions.']},
+  {talk:'Grace',lines:['I LOVE conditions.']},
+  {talk:'The Unread',lines:['One. Somebody reads the rest of me. All of it. Out loud.']},
+  {talk:'Grace',lines:['Me. Saturdays. I\'ll do every voice.']},
+  {talk:'The Unread',lines:['Two. The small loud one is always the dragon.']},
+  {talk:'Rose',lines:['I was ALREADY always the dragon.']},
+  {talk:'The Unread',lines:['Three. I\'ve only just got a place, and I\'d hate to lose it. I\'m going to need a new bookmark.']},
+  {talk:'Grace',lines:['You can have mine. I bedazzled it myself.']},   // Grace takes a sparkly bookmark covered in plastic gems out of her notebook
+  {talk:'The Unread',lines:['It says, "THIS IS GRACE\'S PAGE. DO NOT MOVE IT. THIS MEANS YOU, ROSE."']},
+  {talk:'Rose',lines:['I only moved it ONE time!']},
+  {talk:'Grace',lines:['You moved it twice. It\'s in my notebook.']},
+  {talk:'The Unread',lines:['It\'s the most beautiful thing anybody has ever put in me.']},
+  {call:()=>{ setFlag('ch7-gracecoin'); sfx.pickup(); }},   // Grace slides the coin out and puts her bookmark in its place; she is holding the coin
+  {talk:'The Unread',lines:['And four. Carry me out to the hall. I\'ve never seen how anything ends.']},
+  {talk:'Tom',lines:['It would be an honor, sir. I\'m going to lift you by the spine. Is that all right?']},
+  {talk:'The Unread',lines:['Mind the corners. They\'re seventy.']},
+  {call:()=>sfx.thud&&sfx.thud()},   // Tom lifts the book off the lectern. His knees click.
+  {talk:'Tom',lines:['You\'re heavier than you look.']},
+  {talk:'The Unread',lines:['It\'s the dust.']},
   {toast:'Goal: back up to the Hush Library. Page is waiting.',time:4.5}
 ];
 // 9. The Hush Library: properly quiet. Rewards. TNB's text. Chapter complete.
@@ -3221,6 +3331,8 @@ STORY_WORLD.push(()=>{
   if(flag('ch7-door')||STORY.chapter>7) ch7OpenDoors();
   // Until the password works the two door tiles are solid, so the party cannot walk around the catalog lock (they are exits).
   else { const M=worlds.stacks; if(M&&!M.doorsOpen) for(const x of [14,15]) M.solid[1*M.w+x]=1; }
+  // The block in the Stacks hall is solid (tiles x 16 to 18, rows 7 and 8; row 9 is already shelf and row 10 stays open in front of it) until it is broken.
+  if(STORY.chapter===7&&flag('ch7-hall')&&!flag('bb-stacks')) { const M=worlds.stacks; if(M) for(const x of [16,17,18]) for(const y of [7,8]) M.solid[y*M.w+x]=1; }
   // The Unread stays out of sight until the party walks into the Reading Room, and settles on the lectern after.
   const b=findMonster('unread'); if(!b) return;
   b.mscale=1.5;
@@ -3281,7 +3393,7 @@ STORY_MAPFX.push(time=>{
     c.fillStyle=g; c.fillRect(0,0,M.w*T,M.h*T);
   }
   const loud=STORY.mode==='full'&&STORY.chapter===7&&!flag('ch7-wrap')&&(id==='stacks'||id==='readroom'||(id==='library'&&flag('ch7-goal')));
-  if(!loud) return;
+  if(!loud||Date.now()<ch7HushUntil||flag('ch7-door')) return;
   for(let k=0;k<(id==='library'?4:9);k++) {
     const n=hash(k,77),per=6+(n%5),ph=((time+(n%100)/10)%per)/per;
     const tx=(n>>>3)%(M.w-2)+1,ty=(n>>>11)%(M.h-2)+1; if(M.tiles[ty][tx]==='bkvoid') continue;

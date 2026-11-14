@@ -30,7 +30,16 @@ const BB_SPOTS={
     block:{id:'oakpark/ch6_block',x:292,y:932,w:190,hole:[.51,.9],roll:[[120,1074],[292,1058]]},
     coin:{r:11},
     keep:{basket:{x:292,y:1052,w:50},dive:[300,930],diveW:42,sitW:34,sit:[340,1054]},   // what is left on the table: the basket, and the squirrel that was frozen in it (art px)
-    ordinary:{acornagent:['oakpark/ord_squirrel',52],cheekstuffer:['oakpark/ord_cheeks',56],peanutgallery:['oakpark/ord_peanut',74],twigspy:['oakpark/ord_twig',74],chairman:['oakpark/ord_squirrel',60]}}
+    ordinary:{acornagent:['oakpark/ord_squirrel',52],cheekstuffer:['oakpark/ord_cheeks',56],peanutgallery:['oakpark/ord_peanut',74],twigspy:['oakpark/ord_twig',74],chairman:['oakpark/ord_squirrel',60]}},
+  // The Stacks hall (ch7build stage 3): the golf-cart-sized block hangs over the painted returns cart (plate x 1013 to 1149), so the cart does not show twice.
+  // cover: Page's bedsheet (sheet picture, drawn in place of the block) and the yellow WET FLOOR sign, until the flag cover.off is set (Tom pulls the sheet
+  // off); the sign stays until the break. Stage 4 adds what the block held (the cart dropping, seven books landing) and what turns ordinary.
+  stacks:{map:'stacks',on:'ch7-hall',done:'bb-stacks',
+    grey:{cx:1110,cy:590,r:340},
+    block:{id:'stacks/ch7_block',x:1110,y:531,w:210,hole:[.8,.62],roll:[[900,700],[1060,690]]},
+    coin:{r:10},
+    cover:{off:'ch7-unsheet',sheet:'stacks/ch7_sheet',sheetW:250,sign:'stacks/ch7_sign',signX:1006,signW:56,base:662},
+    ordinary:{}}
 };
 const BB_T={roll:2.4,close0:2.55,close1:4.45,still1:5.45,crack1:7.1,fall1:8.7,ringStart:8.7,shrink:.9,settle:.7,ringSpeed:330};
 const BB={run:null,t:0,stash:{},decor:{},shards:{}};
@@ -132,12 +141,14 @@ function bbDraw(map) {
       if(ringR>0) { ctx.moveTo((B.x+ringR)*s,B.y*s); ctx.arc(B.x*s,B.y*s,ringR*s,0,Math.PI*2,true); }
       ctx.clip('evenodd'); ctx.imageSmoothingEnabled=true; ctx.drawImage(gc,0,0,gc.width*k,gc.height*k); ctx.imageSmoothingEnabled=false; ctx.restore(); }
     // the block: whole, then cracked, then in pieces
-    const img=PROPART.ready(B.id)?PROPART.get(B.id):null,bh=sh.h;
+    const img=PROPART.ready(B.id)?PROPART.get(B.id):null,bh=sh.h,cv=sp.cover,covered=!!(cv&&!run&&!bbFlag(cv.off));
     if(img&&t<BB_T.fall1+.05) {
       const falling=t>=BB_T.crack1;
       if(!falling) {
         ellipse(B.x*s,(B.y+bh/2+4)*s,B.w*.55*s,9*s,'#20202a40');
-        ctx.save(); ctx.imageSmoothingEnabled=true; ctx.drawImage(img,(B.x-B.w/2)*s,(B.y-bh/2)*s,B.w*s,bh*s); ctx.restore();
+        if(covered&&PROPART.ready(cv.sheet)) { const si=PROPART.get(cv.sheet),sh2=cv.sheetW*si.naturalHeight/si.naturalWidth; PROPART.draw(cv.sheet,B.x*s,(cv.base-sh2/2)*s,{w:cv.sheetW*s}); }
+        else { ctx.save(); ctx.imageSmoothingEnabled=true; ctx.drawImage(img,(B.x-B.w/2)*s,(B.y-bh/2)*s,B.w*s,bh*s); ctx.restore(); }
+        if(cv&&!run&&PROPART.ready(cv.sign)) { const gi=PROPART.get(cv.sign),gh=cv.signW*gi.naturalHeight/gi.naturalWidth; PROPART.draw(cv.sign,cv.signX*s,(cv.base+34-gh/2)*s,{w:cv.signW*s}); }
       }
       // gold cracks growing out of the hole
       if(t>=BB_T.still1-.05&&!falling) {
@@ -187,7 +198,7 @@ function bbPlay(id,opts={}) {
   const sh=bbShardsFor(id,sp),map=typeof currentMap!=='undefined'?currentMap:null;
   if(!map||map.id!==sp.map) { if(opts.onDone) opts.onDone(); return false; }
   const far=Math.hypot(map.w*64,map.h*64)+sp.block.w;
-  PROPART.preload(['oakpark/agent_dive','oakpark/agent_sandwich','oakpark/ch6_basket',sp.block.id,...Object.values(sp.ordinary).map(v=>v[0])]);
+  PROPART.preload(['oakpark/agent_dive','oakpark/agent_sandwich','oakpark/ch6_basket',sp.block.id,...(sp.cover?[sp.cover.sheet,sp.cover.sign]:[]),...Object.values(sp.ordinary).map(v=>v[0])]);
   BB.t=0; BB.run={id,spot:sp,opts,seen:{},end:BB_T.ringStart+far/BB_T.ringSpeed+BB_T.settle,far,tick:0};
   return true;
 }
