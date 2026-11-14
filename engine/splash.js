@@ -150,6 +150,7 @@ const SPLASH_MODES={
     {name:'PORTRAIT CROPS',sub:'Choose how each face is cropped.',act:openPortraits},
     {name:'HEAD SIZES',sub:'Make any head bigger or smaller and see it on the body.',act:openHeads},
     {name:'WELCOME LAYOUT',sub:'Size and place each character on this screen.',act:splashEditOpen},
+    brpAdminItem(),
     {name:'BATTLE LAB',sub:'Boss fights from chapters 1 to 20.',act:()=>splashDifficulty(()=>{ splash.labPage=0; splashOpen('lab'); })},
     {name:'BACK',sub:'',cls:'back',act:splashBack}]},
   // Boss fights, six to a page (pick a difficulty first). PREV and NEXT PAGE wrap around. engine/battle2.js b2Lab runs the fight.

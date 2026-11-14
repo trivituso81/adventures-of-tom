@@ -12,6 +12,8 @@ Static site. `index.html` holds the markup, all CSS (portrait and landscape layo
 
 ## Load order (index.html), grouped
 
+`engine/report.js` is the first script of all: it wraps animation frames, timers and the game clock so REPORT can freeze the game (docs/REPORTS.md). Keep it first.
+
 | Group | Files | Notes |
 |---|---|---|
 | Monsters (data) | `data/monsters.js`, then one file per area: `la`, `marsh`, `backlot`, `school`, `oak`, `library`, `barn`, `club`, `terminal` | Each adds to the `MONSTERS` object and defines `*_MONSTER_SPOTS`. Later files reuse `padSprite` from `backlot-monsters.js`. |

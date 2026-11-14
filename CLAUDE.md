@@ -70,6 +70,10 @@ Tom (11-11 06:47): hero paintings appear only in the main menus (status screen) 
 
 Every monster that speaks in a dialogue box gets a portrait: a zoomed-in crop of its face, taken from the stance frame of its painted enemy sheet. Monsters that never speak need none. The list of speakers is `docs/MONSTER_PORTRAITS.md`; the baker is `tools/sprite-bake/bake_foe_portraits.py` (add the id to `SPEAKERS`, and to the `foe_` key list in `engine/menu.js` and the speaker name in `DIALOG_PORTRAIT_IDS` in `engine/overworld.js`). When you write a new line for a monster, or install a new monster sheet for a speaker, add its portrait in the same change and look at the contact sheet before pushing. People who are villains (Vance, Marlowe) are not monsters: they need a painted face of their own, not a boss crop.
 
+## In-game reports and "Fix the backlog" (standing rule, 2026-11-14)
+
+Tom files bugs and changes from inside the game with the pencil tab (REPORT): a note, a picture of the frozen screen with pins, and the full game state, saved on branch `inbox`. When Tom says "Fix the backlog" (or "check the backlog"), follow `docs/REPORTS.md`: `python3 tools/reports.py list`, look at every picture, reproduce, fix, test, push, quote his note and the report id in docs/CHANGES.md, then `python3 tools/reports.py done <ids>` for the ones that are fixed. A report that needs Tom stays open and is named in the reply with the one thing needed. `engine/report.js` loads first and wraps frames, timers and the clock: keep it first in `index.html`.
+
 ## Enemy sprite sheets (standing rule, 2026-10-29)
 
 Tom may drop a PNG enemy sprite sheet into any conversation, often with no words. That means "install this enemy". Follow `docs/ENEMY_SHEETS.md`: identify the enemy id, bake the sheet (tools/sprite-bake), wire the painted frames, test a fight against it, push, and log it in that doc's table.

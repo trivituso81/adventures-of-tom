@@ -1064,6 +1064,7 @@ function playScene(script,opts={}) {
   stageZone=null; intro.sceneCast=null;
   if((sid||opts.stage)&&Array.isArray(list)) { intro.sceneCast=stageCast(list); list=[{clearout:true},...list]; }   // extras leave before anyone is placed (clearout1)
   intro.active=true; intro.phase='scene'; intro.cur=null; intro.fadeLock=false;
+  intro.sid=sid;   // which SCENES id is playing (null for a wrapper script): REPORT records it (engine/report.js)
   intro.fade=opts.fade||0;
   intro.steps=compileScene(list);
   if(!opts.keep) intro.steps.push(S.call(()=>{ if(intro.active) endIntro(); }));   // scenes end themselves unless told not to

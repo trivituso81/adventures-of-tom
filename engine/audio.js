@@ -118,6 +118,7 @@ function audio() {
 // Wake the audio engine after an app switch, a call, or Siri. iOS only lets a stopped context restart from a touch.
 function wakeAudio() {
   const c=sound.ctx; if(!c) return;
+  if(typeof brp!=='undefined'&&brp.frozen) return;   // REPORT has the game frozen (engine/report.js): stay silent until it closes
   try {
     const p=c.resume(); if(p&&p.catch) p.catch(()=>{});
     const b=c.createBuffer(1,1,22050),s=c.createBufferSource(); s.buffer=b; s.connect(c.destination); s.start(0);

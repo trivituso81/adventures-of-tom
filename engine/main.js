@@ -90,7 +90,7 @@ startSplash();
   let last=Date.now(), done=false;
   function check() {
     const now=Date.now(), away=now-last; last=now;
-    if(done||away<60000||splash.active||battle.active||cutsceneOn()) return;
+    if(done||away<60000||splash.active||battle.active||cutsceneOn()||(typeof brp!=='undefined'&&brp.open)) return;   // never while a report is being written
     done=true; location.reload();
   }
   setInterval(check,1000);
