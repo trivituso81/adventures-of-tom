@@ -262,16 +262,17 @@ One image, 2 equal cells side by side on a flat solid magenta #FF00FF background
 
 Paint it like the attached pictures: matte, thick visible brush strokes, canvas grain, crisp painted edges, no gloss, not a smooth digital render. ${LIGHT} No people, no hands. The only words are VOLUME ONE.` },
 
-  { id: 'ch7-unread-boss', tab: 'Enemies', title: 'Chapter 7: the Unread on its lectern: eye opening, gold edge between its pages, with Grace\'s bookmark, shrinking, ordinary (6 poses facing right)', ar: '3:2', refs: [EN + 'enemy-unread-v2.png', EN + 'ending-unread-v1.png', EN + 'enemy-mudling-v2.png'], group: G,
-    prompt: plainSheet('the Unread, the oldest book in the library', UNREAD_REF + ' The cover has no title. The creature faces right in every pose and stays the same size in every cell except pose 5 and pose 6. Paint the same book: old cracked brown leather, brass corners, yellowed pages. It is a lonely, sad, patient old book, never fierce.',
-`Row 1:
-1. Sitting upright and closed, one big round eye on the cover just opening, the eyelid half raised, dust on its top.
-2. A little open, the one eye wide and surprised, and between its pages at the top a thin edge of shiny gold, the rim of a coin, showing like a bookmark.
-3. Open wide in a slow mournful pose as if speaking, the pages fanned a little, the eye wide and sad, the gold edge still showing between the pages.
-Row 2:
-4. The same open pose as 3, but now a sparkly bedazzled bookmark (a narrow pink strip covered in little gems and glitter with a pink ribbon) sticks up out of the pages in place of the gold, and the eye is soft and warm.
-5. Shrinking: the same book at about half the size of the other cells, its cover losing its runes, the eye half closed and sleepy, the book gently closing.
-6. An ordinary old brown book at the size of pose 5, closed, with no eye and no face at all, the sparkly bookmark sticking out of its top.`) },
+  { id: 'ch7-unread-boss', tab: 'Enemies', title: 'Chapter 7: the Unread on its lectern: eye opening, gold edge between its pages, with Grace\'s bookmark, shrinking, ordinary (6 poses facing right)', ar: '3:2', refs: [EN + 'enemy-unread-v2.png'], group: G,
+    prompt: `Copy the character in the attached image (the Unread, the old book monster) as closely as possible: the same book, the same face with two eyes, the same colors, the same hand-painted style.
+
+Draw it on a flat solid magenta #FF00FF background. One image, a grid of 3 columns by 2 rows of equal cells, one pose in each cell, the book facing right and the same size in every cell unless a pose says otherwise, with clear magenta space all round each one. No text, no grid lines.
+
+1. Sitting closed and upright. It has two eyes: the left eye is still shut and the right eye is open.
+2. Opened a little, both eyes wide and surprised. A thin edge of a gold coin shows between the pages at the top.
+3. Opened wide, both eyes wide and sad, its mouth open as if speaking. The gold coin edge still shows between the pages.
+4. Opened wide like pose 3, but a pink glittery bookmark with a pink ribbon sticks up out of the pages instead of the coin. Both eyes soft and warm.
+5. Half the size of the other cells, closing gently, both eyes half shut and sleepy.
+6. Half the size, an ordinary old brown closed book with no face and no eyes, the pink glittery bookmark sticking out of the top.` },
 
   // ---------------------------------------------------------------- characters
   { id: 'ch7-tom-poses', tab: 'Characters', title: 'Chapter 7: Tom story frames (6 frames: pats the plane door, pulls off a bedsheet, carries the big book, holds it up high, arms wide with a small book, pushes the cart)', ar: '3:2', refs: TOM, group: G,
