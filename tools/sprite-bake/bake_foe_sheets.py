@@ -125,7 +125,7 @@ SHADOW_BAND = {'directorscut', 'irongill'}
 CAST_ALL = {'irongill'}
 
 
-CHAPTER_SHEETS = {'ch1-bigone-lure-coin': 'bigone', 'ch3-irongill-coin': 'irongill', 'ch4-directorscut-coin': 'directorscut'}   # chapter 1: The Big One with the lure and the gold coin in its lip; chapter 3: Iron Gill with its coin; chapter 4: the Director's Cut with the coin on its beret
+CHAPTER_SHEETS = {'ch1-bigone-lure-coin': 'bigone', 'ch3-irongill-coin': 'irongill', 'ch4-directorscut-coin': 'directorscut', 'ch5-redpen-coin': 'redpen'}   # chapter 1: The Big One with the lure and the gold coin in its lip; chapter 3: Iron Gill with its coin; chapter 4: the Director's Cut with the coin on its beret
 
 def newest_files():
     d = json.load(open(os.path.join(ROOT, 'data/art-prompts.json')))

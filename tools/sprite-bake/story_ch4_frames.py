@@ -1,4 +1,4 @@
-"""Chapter 3 and 4 story pose sheets (coinart2, 2026-11-14): cut the approved Art Library sheets into one strip of equal frames each.
+"""Chapter 3, 4 and 5 story pose sheets (coinart2, 2026-11-14): cut the approved Art Library sheets into one strip of equal frames each.
 
 Sources (art/raw/characters, newest version): ch4-tom-poses, ch4-tnb-poses, ch4-nara-story-1, ch4-nara-story-2 (3 x 2 cells, reading order) and ch3-tom-net (one figure).
 Each cell is keyed and cleaned like a talking figure (emotion_frames.clean_cell), used as painted (no flip), and TNB's head grows by his HEAD SIZES factor
@@ -23,6 +23,9 @@ SHEETS = {
     'narach4a': ('ch4-nara-story-1', 3, 2, None, {}),
     'narach4b': ('ch4-nara-story-2', 3, 2, None, {}),
     'tomnet': ('ch3-tom-net', 1, 1, None, {}),
+    'tomch5': ('ch5-tom-poses', 3, 2, 'tom', {}),
+    'tomlift': ('ch5-tom-lifts-grace', 1, 1, None, {}),
+    'narach5': ('ch5-nara-story', 3, 2, None, {}),
 }
 
 def src(sid):

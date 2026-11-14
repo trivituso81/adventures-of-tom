@@ -81,7 +81,7 @@ const TRAVEL_TALK={
 // Story departures: each chapter's airport run has its own goodbyes (Tom, 26 Oct: no repeats). Keyed by the chapter the
 // flight starts. Any part left out (or demo mode) uses the lines above and in startTrip. Chapters 2 and 3 use the defaults.
 // driver, grace, rose, tom: the girls' goodbye on a westbound run (Sal speaks first). sol: Sol's one line eastbound.
-// tnb + tnbToast, and stay[id] {stay,toast,narrate}: recruits heading home. flight: Tom's two pages in the air.
+// tnb + tnbToast, and stay[id] {stay,toast,narrate} or {beats:[[who,pages] | {toast,whine}],toast}: recruits heading home. flight: Tom's two pages in the air.
 const DEPARTURES={
   4:{driver:['Los Angeles again? Cab seven loves this run. She hums the whole way.',"The girls stay home. Amy's rule. I don't argue with Amy."],
      grace:['Tata, you HAVE to be back for my meet. I already told everybody you\'re coming.'],
@@ -92,8 +92,8 @@ const DEPARTURES={
   5:{sol:'Airport. Your young man fixed my visor. He made me promise to drive careful. So I\'m going the speed limit. Everybody hates it.',
      tnb:['That\'s a wrap, babe. I have a five a.m. call and forty capes to steam.','Go survive conference night. Bring snacks. I packed you snacks. Check your bag.'],
      tnbToast:'TNB heads back to the lot. Forty capes won\'t steam themselves.',
-     stay:{nara:{stay:['Nara sits down on Tom’s feet. If he can\'t move, he can\'t leave.','Tom wiggles free. "A week. Maybe two. You guard the porch."','Nara lets out the biggest sigh a dog has ever sighed. Then she trots home.'],toast:'Nara heads back to 2nd Ave. Dramatically.',narrate:true}},
-     flight:['Six hours. Then conference night. My sister has a clipboard.','I\'m not scared. I\'m PREPARED. Those are different.']},
+     stay:{nara:{beats:[{toast:'Nara sits down on Tom\'s feet.',whine:true},['Tom',['Nara, I can\'t leave if you\'re sitting on my feet. Oh. That\'s the plan.','A week. Maybe two. You guard the porch.']],{toast:'Nara lets out the biggest sigh a dog has ever sighed, then walks over and leans on TNB.',whine:true}],stay:[],toast:'Nara heads back to 2nd Ave. Dramatically.'}},
+     flight:['Six hours. Then conference night. My sister has a clipboard.','Best costumes. That megaphone got it right.','I\'m not scared. I\'m PREPARED. Those are different.']},
   6:{driver:['Back to Los Angeles. Your sister gave me a gold star for using my blinker.','The girls stay home. School night. It\'s always a school night.'],
      grace:['Tata, Mom says I\'m in charge while you\'re gone. Of Rose.'],
      rose:['She\'s NOT in charge of me. Tata, tell her. TELL her.'],
@@ -272,9 +272,18 @@ const ARRIVALS={
   4:{tom:["Downtown LA. Seventy-two and sunny. I didn't have to check.","Six hours, no fish, and a pepper to find for Boppy. In that order."]},
   5:{tom:["Long Island. Quiet. Thursday is conference night. It won't stay quiet."],
      talk:[['Grace',["Tata! You're BACK! That's TWO times!","Mom made you a binder. It has TABS."]],
+           ['Tom',["Tabs! Nobody told me there would be tabs! I'm going to keep tabs on everything!"]],
            ['Rose',["Did you bring the snacks? Tata. The SNACKS."]],
            ['Tom',["TNB packed them. Check my bag. Carefully. He also packed a note."]],
-           ['Rose',["I'm checking NOW."]]]},
+           ['Rose',["I'm checking NOW."]],
+           ['Grace',["It says, \"Share these with everybody. Yes, babe, even with Amy.\""]],
+           ['Tom',["He knows me so well."]],
+           ['Rose',["Tata! LOOK!"]],
+           ['Tom',["Your tooth is gone! And a whole worm fits through! When did it come out?"]],
+           ['Rose',["On Tuesday. An apple got it."]],
+           ['Tom',["Tuesday. I was in Los Angeles on Tuesday."]],
+           ['Rose',["The tooth fairy gave me two dollars. Boppy says HIS teeth cost way more."]],
+           ['Tom',["Deedee paid for Boppy's. You're the only one in this family who ever MADE money on a tooth."]]]},
   6:{tom:["Downtown LA. Five hours and fifty-one minutes. Amy will want the number.","...Is that a squirrel on the cab? That's a squirrel on the cab."]},
   7:{tom:["Long Island. Quiet. Library quiet. That's a different kind."],
      talk:[['Grace',["Tata! THREE times! The library's still whispering. I SAID so. In a text."]],
@@ -340,7 +349,7 @@ function startTrip(n,dir) {
       S.wait(.8)); }
     else if(TRAVEL_TALK[f.id]) { const tt=(d.stay&&d.stay[f.id])||travelPick('stay-'+f.id,[TRAVEL_TALK[f.id],...((TRAVEL_POOLS.stay[f.id])||[])]); steps.push(
       S.call(()=>{ if(f===nara) { sfx.whine&&sfx.whine(); } }),
-      S.talk(tt.narrate?'Nara':f.name,tt.stay),
+      ...(tt.beats?tt.beats.map(b=>Array.isArray(b)?S.talk(b[0],b[1]):S.call(()=>{ if(b.whine) sfx.whine&&sfx.whine(); showToast(b.toast,3); })):[S.talk(tt.narrate?'Nara':f.name,tt.stay)]),
       S.call(()=>{ recruitLeave(f,true); sfx.doorOut(); showToast(tt.toast,3); }),
       S.wait(.6)); }
   }

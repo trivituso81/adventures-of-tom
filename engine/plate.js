@@ -463,12 +463,38 @@ function drawStage7Spot(map) {
   if(ch4TableAt>.05) ellipse(B.x*s,(Tb.y+34)*s,40*s,7*s,'#20202a38');   // nothing is holding the block up
   PROPART.draw('stage7/ch4_block',B.x*s,B.y*s,{w:B.w*s});
 }
+// The schoolyard, chapter 5 (ch5Pruitt on): the kickball field. A circle of the plate has no colour (second base is in it), six orange cones stand in a ring
+// around it, and the orange block with the red kickball and Moss's sneaker hangs in the air above second base, higher than Tom can reach. All of it stays until
+// the family comes back after chapter 6 (ch6-clear). The grey circle and the cones are STAND-INS made in code until a Library picture of the field is approved
+// (the built schoolyard plate has no kickball field). Centres in plate art px (64 per tile). Block from art/props/schoolyard/ch5_block.webp (tools/art-library/bake_story_ch5.py).
+const SCHOOL_GREY={cx:1184,cy:590,r:176}, SCHOOL_BLOCK={x:1184,y:372,w:124};
+function drawSchoolSpot(map) {
+  if(typeof flag!=='function'||typeof STORY==='undefined'||STORY.chapter<5||(STORY.chapter===5&&!flag('ch5-pruitt'))||flag('ch6-clear')) return;
+  const s=T/64,pl=typeof plateFor==='function'?plateFor(map):null;
+  const gc=pl&&pl.img&&pl.img.naturalWidth?sundialGreyCanvas(pl.img):null;
+  const G=SCHOOL_GREY;
+  if(gc) { const k=map.w*T/gc.width;
+    ctx.save(); ctx.beginPath(); ctx.arc(G.cx*s,G.cy*s,G.r*s,0,Math.PI*2); ctx.clip();
+    ctx.imageSmoothingEnabled=true; ctx.drawImage(gc,0,0,gc.width*k,gc.height*k); ctx.imageSmoothingEnabled=false; ctx.restore(); }
+  // Six cones in a ring (the ring is a flat ellipse, as the ground is seen from above and in front).
+  for(let i=0;i<6;i++) {
+    const a=i/6*Math.PI*2+.3,cx=G.cx+Math.cos(a)*(G.r+10),cy=G.cy+Math.sin(a)*(G.r*.62+8);
+    ellipse(cx*s,(cy+3)*s,13*s,4*s,'#20202a40');
+    ctx.fillStyle='#e8651c'; ctx.beginPath(); ctx.moveTo((cx-11)*s,(cy+2)*s); ctx.lineTo((cx-3)*s,(cy-30)*s); ctx.lineTo((cx+3)*s,(cy-30)*s); ctx.lineTo((cx+11)*s,(cy+2)*s); ctx.closePath(); ctx.fill();
+    ctx.fillStyle='#f4efe4'; ctx.beginPath(); ctx.moveTo((cx-7)*s,(cy-12)*s); ctx.lineTo((cx+7)*s,(cy-12)*s); ctx.lineTo((cx+5)*s,(cy-21)*s); ctx.lineTo((cx-5)*s,(cy-21)*s); ctx.closePath(); ctx.fill();
+    ctx.fillStyle='#c44d12'; ctx.fillRect((cx-13)*s,(cy+1)*s,26*s,4*s);
+  }
+  const B=SCHOOL_BLOCK;
+  ellipse(B.x*s,(G.cy+14)*s,46*s,8*s,'#20202a38');   // nothing is holding it up
+  PROPART.draw('schoolyard/ch5_block',B.x*s,B.y*s,{w:B.w*s});
+}
 function plateLive(map,time) {
   if(map&&PLATE_SIGNS[map.id]) drawPlateSigns(PLATE_SIGNS[map.id]);
   if(map&&map.id==='hollow') { drawHollowCrumbs(time); drawHollowSpot(); }
   if(map&&map.id==='griffith') drawGriffithSpot();
   if(map&&map.id==='sundial') drawSundialSpot(map);
   if(map&&map.id==='stage7') drawStage7Spot(map);
+  if(map&&map.id==='schoolyard') drawSchoolSpot(map);
   // Tom's kitchen island: Bready Mercury, except while the squirrels have him (chapter 6, until the Oak boss is beaten).
   if(map&&map.id==='tomhouse') { plateTime=time; drawHomeJar(time); }
   // The Crown of the Oak: Bready Mercury on the chest at the heart of the hoard (art px: centre x 672, base y 258; the jar stands about 62 px tall).

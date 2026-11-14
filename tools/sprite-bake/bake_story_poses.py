@@ -102,6 +102,10 @@ STORY_STRIPS = {
     'narach4a': {'member': 'nara', 'h': 31, 'ref': 'c4n_beg', 'names': ['c4n_howl', 'c4n_run', 'c4n_front', 'c4n_sit', 'c4n_beg', 'c4n_alert']},
     'narach4b': {'member': 'nara', 'h': 31, 'ref': 'c4n_tag', 'names': ['c4n_leap', 'c4n_hydrant', 'c4n_tag', 'c4n_sulk', 'c4n_bubble', 'c4n_post']},
     'tomnet': {'member': 'tom', 'h': 62.4, 'ref': 'c3t_net', 'names': ['c3t_net']},
+    # chapter 5 (ch5build1): Tom's six binder and sticker poses, Tom lifting Grace (the figure includes Grace above his head; Tom's body from hair to feet is .83 of it, so h = 42 / .83), Nara's six frames.
+    'tomch5': {'member': 'tom', 'h': 42, 'ref': 'c5t_hug', 'names': ['c5t_hug', 'c5t_over', 'c5t_flip', 'c5t_read', 'c5t_sticker', 'c5t_chest']},
+    'tomlift': {'member': 'tom', 'h': 50.6, 'ref': 'c5t_lift', 'names': ['c5t_lift']},
+    'narach5': {'member': 'nara', 'h': 31, 'ref': 'c5n_walk', 'names': ['c5n_sit', 'c5n_sigh', 'c5n_walk', 'c5n_sit2', 'c5n_look', 'c5n_tongue']},
 }
 for _id, _S in STORY_STRIPS.items():
     if os.path.exists(os.path.join(ROOT, 'art/story', _id + '.webp')): SETS[_id] = dict(_S, strip=os.path.join('art/story', _id + '.webp'), k=0, talk=True)
