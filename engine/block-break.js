@@ -31,15 +31,26 @@ const BB_SPOTS={
     coin:{r:11},
     keep:{basket:{x:292,y:1052,w:50},dive:[300,930],diveW:42,sitW:34,sit:[340,1054]},   // what is left on the table: the basket, and the squirrel that was frozen in it (art px)
     ordinary:{acornagent:['oakpark/ord_squirrel',52],cheekstuffer:['oakpark/ord_cheeks',56],peanutgallery:['oakpark/ord_peanut',74],twigspy:['oakpark/ord_twig',74],chairman:['oakpark/ord_squirrel',60]}},
-  // The Stacks hall (ch7build stage 3): the golf-cart-sized block hangs over the painted returns cart (plate x 1013 to 1149), so the cart does not show twice.
+  // The Stacks hall (ch7build stages 3 and 4): the golf-cart-sized block hangs over the painted returns cart (plate x 1013 to 1149), so the cart does not
+  // show twice: from the moment the block appears until flag keep.cart.back the painted cart is covered by a floor patch and its cut-out is switched off
+  // (PLATE_BEHIND.stacks, `off`), and the cart is drawn by the game instead.
   // cover: Page's bedsheet (sheet picture, drawn in place of the block) and the yellow WET FLOOR sign, until the flag cover.off is set (Tom pulls the sheet
-  // off); the sign stays until the break. Stage 4 adds what the block held (the cart dropping, seven books landing) and what turns ordinary.
+  // off); the sign stays until the break.
+  // keep.cart: what the block held. When the block falls apart the cart (art/props/stacks/ch7_cart.webp, w game px wide, x centre, base = its wheels'
+  // ground line) drops from tipped onto four wheels, the seven books land on it one after another (thump) and it rolls forward to rollTo and stops.
+  // Afterwards the scene moves it ({cartTo}, {cartSet}); flag keep.cart.back puts the painted cart back. stack = the books' rectangle in the picture's px.
+  // fixed: ordinary things that were never map monsters (the three wing troublemakers, who have their own story fights): they appear when the ring passes.
+  // freeAll: every monster on the map is taken off (no fights in the Stacks any more), with or without a picture of what it turns back into.
   stacks:{map:'stacks',on:'ch7-hall',done:'bb-stacks',
     grey:{cx:1110,cy:590,r:340},
     block:{id:'stacks/ch7_block',x:1110,y:531,w:210,hole:[.8,.62],roll:[[900,700],[1060,690]]},
-    coin:{r:10},
+    coin:{r:10,close:'art/closeup/ch7-coin.webp?v=ch7s3'},
     cover:{off:'ch7-unsheet',sheet:'stacks/ch7_sheet',sheetW:250,sign:'stacks/ch7_sign',signX:1006,signW:56,base:662},
-    ordinary:{}}
+    keep:{cart:{id:'stacks/ch7_cart',x:1082,base:660,w:125,rollTo:690,imgW:358,imgH:420,stack:[103,0,265,160],back:'ch7-hallend',
+      colors:['#b8782e','#3b5a9a','#c8541e','#3b5a9a','#5f7a34','#b8341c','#e0c070'],patch:[912,526,100,146,1010,520,142,150]}},
+    freeAll:true,
+    fixed:[{key:'cliff',id:'stacks/ord_cliff',w:62,x:416,base:314},{key:'know',id:'stacks/ord_know',w:62,x:1696,base:250},{key:'pop',id:'stacks/ord_pop',w:58,x:1056,base:1146}],
+    ordinary:{shusher:['stacks/ord_shusher',42],dogear:['stacks/ord_dogear',42]}}
 };
 const BB_T={roll:2.4,close0:2.55,close1:4.45,still1:5.45,crack1:7.1,fall1:8.7,ringStart:8.7,shrink:.9,settle:.7,ringSpeed:330};
 const BB={run:null,t:0,stash:{},decor:{},shards:{}};
@@ -89,7 +100,7 @@ function bbCloseupOn(spot) {
   const d=Math.round(Math.min(host.clientWidth*.72,host.clientHeight*.46,420));
   const box=document.createElement('div'); box.style.cssText='position:relative;width:'+d+'px;height:'+d+'px';
   const sock=document.createElement('div'); sock.style.cssText='position:absolute;left:12%;top:12%;width:76%;height:76%;border-radius:50%;background:radial-gradient(circle at 50% 42%,#6a2c08 0%,#a24a0e 55%,#e8841c 78%,#ffb050 92%,#ffd890 100%);box-shadow:0 0 '+Math.round(d*.12)+'px rgba(255,170,60,.55),inset 0 '+Math.round(d*.04)+'px '+Math.round(d*.08)+'px rgba(0,0,0,.55)';
-  const img=new Image(); img.src='art/closeup/ch6-coin.webp?v=ch6s2a'; img.alt='';
+  const img=new Image(); img.src=(spot.coin&&spot.coin.close)||'art/closeup/ch6-coin.webp?v=ch6s2a'; img.alt='';
   img.style.cssText='position:absolute;left:19%;top:19%;width:62%;height:62%;transform:translate(60%,-52%) rotate(24deg) scale(1.55);opacity:0;transition:transform 1.15s cubic-bezier(.3,.9,.3,1.05),opacity .3s';
   box.appendChild(sock); box.appendChild(img); el.appendChild(box); host.appendChild(el);
   requestAnimationFrame(()=>requestAnimationFrame(()=>{ el.style.background='rgba(10,8,6,.62)'; img.style.opacity='1'; setTimeout(()=>{ img.style.transform='translate(0,0) rotate(0deg) scale(1)'; },260); }));
@@ -112,8 +123,52 @@ function bbBasket(k,s) {
   if(!PROPART.ready(id)) return;
   { const im=PROPART.get(id),h=b.w*im.naturalHeight/im.naturalWidth; PROPART.draw(id,b.x*s,(b.y-h/2)*s,{w:b.w*s}); }
 }
+// ---- the Stacks' returns cart (keep.cart) ----
+const bbCartDefault=()=>({x:1082,base:690,books:7,rot:0,rose:false,follow:null,dx:0,dy:0});
+BB.cart=bbCartDefault();
+function bbCartHidden() { const sp=BB_SPOTS.stacks; return bbFlag(sp.on)&&!bbFlag(sp.keep.cart.back); }   // the painted cart is covered while the game draws its own
+function bbRingR(mapId) {   // how far the colour ring has run on that map (art px); -1 before it starts, huge once the area is free
+  for(const id in BB_SPOTS) { const sp=BB_SPOTS[id]; if(sp.map!==mapId) continue;
+    if(BB.run&&BB.run.id===id) return BB.t>=BB_T.ringStart?(BB.t-BB_T.ringStart)*BB_T.ringSpeed:-1;
+    if(bbFlag(sp.done)) return 1e9; }
+  return -1;
+}
+let BB_PATCH=null;
+function bbPatch(sp,map,s) {   // plain floor over the painted cart: a mirrored strip of floor from beside it, feathered at the edges
+  const c=sp.keep.cart,pl=typeof plateFor==='function'?plateFor(map):null; if(!pl||!pl.img||!pl.img.naturalWidth) return;
+  if(!BB_PATCH||BB_PATCH.src!==pl.img) { const [sx,sy,sw,sh,dx,dy,dw,dh]=c.patch,k=pl.img.naturalWidth/(map.w*64),oc=document.createElement('canvas'); oc.width=dw; oc.height=dh;
+    const g=oc.getContext('2d'); g.imageSmoothingEnabled=true;
+    for(let x=0,i=0;x<dw;x+=sw,i++) { g.save(); if(i%2===0) { g.translate(x+sw,0); g.scale(-1,1); } else g.translate(x,0); g.drawImage(pl.img,sx*k,sy*k,sw*k,sh*k,0,0,sw,sh); g.restore(); }
+    g.globalCompositeOperation='destination-in'; g.fillStyle='#fff'; g.shadowColor='#fff'; g.shadowBlur=16; g.fillRect(16,16,dw-32,dh-32);
+    BB_PATCH={src:pl.img,cv:oc,dx,dy,dw,dh}; }
+  ctx.save(); ctx.imageSmoothingEnabled=true; ctx.drawImage(BB_PATCH.cv,BB_PATCH.dx*s,BB_PATCH.dy*s,BB_PATCH.dw*s,BB_PATCH.dh*s); ctx.restore();
+}
+function bbCartDraw(sp,t,s) {   // t < 0: the break is over; the cart is wherever the scene left it
+  const c=sp.keep.cart,F=BB_T.crack1,L0=F+.45,gap=.2,rollT=L0+7*gap+.2;
+  if(!PROPART.ready(c.id)||bbFlag(c.back)) return;
+  let x=c.x,base=c.base,rot=0,books=7,fall=[],rose=false;
+  if(t>=0) { const u=bbClamp((t-F)/.5,0,1),e=bbEase(u); if(t<F) return;
+    rot=-.3*(1-e); base=c.base-30*(1-e);
+    books=0; for(let k=0;k<7;k++) { const lt=L0+k*gap; if(t>=lt) books++; else if(t>lt-.34) fall.push([k,(lt-t)/.34]); }
+    if(t>rollT) { const r=bbClamp((t-rollT)/1.1,0,1); base=c.base+(c.rollTo-c.base)*bbEase(r); } }
+  else { const K=BB.cart,f=K.follow&&typeof sceneActor==='function'?sceneActor(K.follow):null;
+    if(f) { const p=position(f); x=(p.x+.5)*64+K.dx; base=(p.y+1)*64+K.dy; } else { x=K.x; base=K.base; } rot=K.rot||0; rose=!!K.rose; }
+  const isRose=rose&&PROPART.ready('stacks/ch7_cartrose'),id=isRose?'stacks/ch7_cartrose':c.id,sc=(isRose?c.w/215:c.w/c.imgW);
+  ellipse(x*s,(base+2)*s,c.w*.46*s,6*s,'#20202a45');
+  ctx.save(); ctx.translate(x*s,base*s); ctx.rotate(rot); ctx.scale(sc*s,sc*s); ctx.imageSmoothingEnabled=true;
+  const im=PROPART.get(id);
+  if(!isRose&&books<7) { const [a,b,d,e2]=c.stack,top=e2-(books/7)*(e2-b);   // the stack is shown only as far up as the books that have landed
+    ctx.beginPath(); ctx.rect(-c.imgW,-c.imgH*2,c.imgW*2,c.imgH*3); ctx.rect(a-c.imgW/2,b-6-c.imgH,d-a,top-b+6); ctx.clip('evenodd'); }
+  if(!isRose) ctx.drawImage(im,-c.imgW/2,-c.imgH,c.imgW,c.imgH); else ctx.drawImage(im,-im.naturalWidth/2,-im.naturalHeight,im.naturalWidth,im.naturalHeight);
+  ctx.restore();
+  if(!isRose) { const [a,b,d,e2]=c.stack,sw=(d-a)*.92,sh=(e2-b)/7;   // the books still in the air
+    ctx.save(); ctx.translate(x*s,base*s); ctx.rotate(rot); ctx.scale(sc*s,sc*s);
+    for(const [k,u] of fall) { const ly=e2-(k+.5)*sh-c.imgH,y=ly-190*u*u,cx=(a+d)/2-c.imgW/2+(k%2?7:-7)*u;
+      ctx.save(); ctx.translate(cx,y); ctx.rotate((k%2?.25:-.25)*u); ctx.fillStyle=c.colors[k]; ctx.fillRect(-sw/2,-sh/2,sw,sh-2); ctx.fillStyle='#f4e6c0'; ctx.fillRect(-sw/2+6,sh/2-9,sw-12,5); ctx.fillStyle='#00000030'; ctx.fillRect(-sw/2,-sh/2,10,sh-2); ctx.restore(); }
+    ctx.restore(); }
+}
 function bbKeepDraw(sp,t,s) {   // t < 0: the break is over and stays over
-  const k=sp.keep; if(!k) return; const b=k.basket,F=BB_T.crack1,P=F+1.0,Q=P+.8;
+  const k=sp.keep; if(!k) return; if(k.cart) return bbCartDraw(sp,t,s); const b=k.basket,F=BB_T.crack1,P=F+1.0,Q=P+.8;
   bbBasket(k,s);
   const frame=(id,w,x,y,rot)=>{ if(!PROPART.ready(id)) return; const im=PROPART.get(id),h=w*im.naturalHeight/im.naturalWidth; ctx.save(); ctx.translate(x*s,(y-h/2)*s); if(rot) ctx.rotate(rot); PROPART.draw(id,0,0,{w:w*s}); ctx.restore(); return h; };
   const top=b.y-b.w*.5;
@@ -131,6 +186,7 @@ function bbDraw(map) {
   for(const id in BB_SPOTS) {
     const sp=BB_SPOTS[id]; if(sp.map!==map.id) continue;
     const run=BB.run&&BB.run.id===id?BB.run:null;
+    if(sp.keep&&sp.keep.cart&&bbFlag(sp.on)&&!bbFlag(sp.keep.cart.back)) bbPatch(sp,map,s);
     if(!run&&bbFlag(sp.done)) { bbKeepDraw(sp,-1,s); continue; }
     if(!run&&!bbFlag(sp.on)) continue;
     const t=run?BB.t:-1,B=sp.block,G=sp.grey,sh=bbShardsFor(id,sp);
@@ -198,7 +254,7 @@ function bbPlay(id,opts={}) {
   const sh=bbShardsFor(id,sp),map=typeof currentMap!=='undefined'?currentMap:null;
   if(!map||map.id!==sp.map) { if(opts.onDone) opts.onDone(); return false; }
   const far=Math.hypot(map.w*64,map.h*64)+sp.block.w;
-  PROPART.preload(['oakpark/agent_dive','oakpark/agent_sandwich','oakpark/ch6_basket',sp.block.id,...(sp.cover?[sp.cover.sheet,sp.cover.sign]:[]),...Object.values(sp.ordinary).map(v=>v[0])]);
+  PROPART.preload([...(sp.keep&&sp.keep.basket?['oakpark/agent_dive','oakpark/agent_sandwich','oakpark/ch6_basket']:[]),...(sp.keep&&sp.keep.cart?[sp.keep.cart.id,'stacks/ch7_cartrose']:[]),sp.block.id,...(sp.cover?[sp.cover.sheet,sp.cover.sign]:[]),...Object.values(sp.ordinary).map(v=>v[0]),...(sp.fixed||[]).map(f=>f.id)]);
   BB.t=0; BB.run={id,spot:sp,opts,seen:{},end:BB_T.ringStart+far/BB_T.ringSpeed+BB_T.settle,far,tick:0};
   return true;
 }
@@ -207,17 +263,19 @@ function bbPhase(name) { const r=BB.run; if(!r||r.seen[name]) return; r.seen[nam
 function bbMonsters(r) {
   const sp=r.spot,map=currentMap,B=sp.block,ringR=(BB.t-BB_T.ringStart)*BB_T.ringSpeed,hy=B.y;
   for(const n of map.npcs.slice()) {
-    if(!n.monster||!sp.ordinary[n.monster]) continue;
+    if(!n.monster||!(sp.ordinary[n.monster]||sp.freeAll)) continue;
     const d=Math.hypot((n.x+.5)*64-B.x,(n.y+1)*64-hy);
     if(n.bbT0==null&&ringR>=d) { n.bbT0=BB.t; n.bbShrink=1; }
     if(n.bbT0==null) continue;
     const u=bbClamp((BB.t-n.bbT0)/BB_T.shrink,0,1); n.bbShrink=1-bbEase(u)*.8;
     if(u>=1) bbFree(map,n,sp,true);
   }
+  const L=BB.decor[map.id]||(BB.decor[map.id]=new Map());
+  for(const f of sp.fixed||[]) if(!L.has(f.key)&&ringR>=Math.hypot(f.x-B.x,f.base-hy)) L.set(f.key,{id:f.id,w:f.w,x:f.x,base:f.base,t0:BB.t,fade:true});
 }
 function bbFree(map,n,sp,fade) {
-  const [pic,w]=sp.ordinary[n.monster],L=BB.decor[map.id]||(BB.decor[map.id]=new Map());
-  L.set(n.spot||n.name,{id:pic,w,x:(n.x+.5)*64,base:(n.y+1)*64-6,t0:BB.t,fade:!!fade});
+  const o=sp.ordinary[n.monster],L=BB.decor[map.id]||(BB.decor[map.id]=new Map());
+  if(o) L.set(n.spot||n.name,{id:o[0],w:o[1],x:(n.x+.5)*64,base:(n.y+1)*64-6,t0:BB.t,fade:!!fade});
   const i=map.npcs.indexOf(n); if(i>=0) map.npcs.splice(i,1);
   (BB.stash[map.id]=BB.stash[map.id]||[]).push(n); n.bbShrink=null; n.bbT0=null;
 }
@@ -235,14 +293,19 @@ function bbSync(dt) {
     if(t>=BB_T.still1&&!r.seen.crack) { bbCrackSnd(); bbPhase('crack'); }
     if(t>=BB_T.crack1&&!r.seen.fall) { bbShatterSnd(); bbPhase('fall'); }
     if(t>=BB_T.ringStart&&!r.seen.ring) { bbRingSnd(); bbPhase('ring'); }
+    if(sp.keep&&sp.keep.cart) { const k=bbClamp(Math.floor((t-(BB_T.crack1+.45))/.2)+1,0,7); r.landed=r.landed||0; while(r.landed<k) { r.landed++; if(typeof sfx!=='undefined'&&sfx.thud) sfx.thud(); } }
     if(t>=BB_T.ringStart) bbMonsters(r);
-    if(t>=r.end) { BB.run=null; for(const n of currentMap.npcs.slice()) if(n.monster&&sp.ordinary[n.monster]) bbFree(currentMap,n,sp,false);
+    if(t>=r.end) { BB.run=null; for(const n of currentMap.npcs.slice()) if(n.monster&&(sp.ordinary[n.monster]||sp.freeAll)) bbFree(currentMap,n,sp,false);
+      for(const f of sp.fixed||[]) { const L=BB.decor[currentMap.id]||(BB.decor[currentMap.id]=new Map()); if(!L.has(f.key)) L.set(f.key,{id:f.id,w:f.w,x:f.x,base:f.base,t0:BB.t,fade:false}); }
+      if(sp.keep&&sp.keep.cart) { BB.cart=bbCartDefault(); BB.cart.x=sp.keep.cart.x; BB.cart.base=sp.keep.cart.rollTo; }
       setFlag(sp.done); bbCloseupOff(); if(r.opts.onPhase) r.opts.onPhase('done'); if(r.opts.onDone) r.opts.onDone(); }
     return;
   }
   for(const id in BB_SPOTS) { const sp=BB_SPOTS[id]; if(sp.map!==currentMap.id) continue;
-    if(bbFlag(sp.done)) { for(const n of currentMap.npcs.slice()) if(n.monster&&sp.ordinary[n.monster]) bbFree(currentMap,n,sp,false); }
-    else { const st=BB.stash[sp.map]; if(st&&st.length) { for(const n of st) currentMap.npcs.push(n); BB.stash[sp.map]=[]; BB.decor[sp.map]=null; } } }
+    if(bbFlag(sp.done)) { for(const n of currentMap.npcs.slice()) if(n.monster&&(sp.ordinary[n.monster]||sp.freeAll)) bbFree(currentMap,n,sp,false);
+      for(const f of sp.fixed||[]) { const L=BB.decor[currentMap.id]||(BB.decor[currentMap.id]=new Map()); if(!L.has(f.key)&&!f.gone) L.set(f.key,{id:f.id,w:f.w,x:f.x,base:f.base,t0:-99,fade:false}); } }
+    else { const st=BB.stash[sp.map]; if(st&&st.length) { for(const n of st) currentMap.npcs.push(n); BB.stash[sp.map]=[]; }
+      if(BB.decor[sp.map]) BB.decor[sp.map]=null; if(sp.keep&&sp.keep.cart&&BB.cart.base!==690) BB.cart=bbCartDefault(); } }
 }
 const LE_update_bb=update;
 update=function(dt) { bbSync(dt); return LE_update_bb.apply(this,arguments); };
@@ -255,6 +318,12 @@ drawActor=function(a) {
 };
 // Scene step {blockbreak:'oakpark',onPhase:fn}: plays the whole sequence and waits for it.
 SCENE_OPS.blockbreak=o=>lazy(()=>{ let fin=false; return {start(){ if(!bbPlay(o.blockbreak,{onPhase:o.onPhase,onDone:()=>{ fin=true; }})) fin=true; },update(){ return fin; }}; });
+
+// {cartSet:{rose:true,follow:'tom',dx:-80,dy:-4}} sets the Stacks cart's state; {cartTo:[x,base],time} slides it (art px). {cartDrop:'know'} takes a freed thing off the floor.
+SCENE_OPS.cartSet=o=>S.call(()=>{ Object.assign(BB.cart,o.cartSet); });
+SCENE_OPS.cartTo=o=>({t:0,start(){ this.t=0; this.a=[BB.cart.x,BB.cart.base]; BB.cart.follow=null; },
+  update(dt){ this.t+=dt; const u=Math.min(1,this.t/(o.time||1)),e=bbEase(u); BB.cart.x=this.a[0]+(o.cartTo[0]-this.a[0])*e; BB.cart.base=this.a[1]+(o.cartTo[1]-this.a[1])*e; return u>=1; }});
+SCENE_OPS.freedDecor=o=>S.call(()=>{ const L=BB.decor[o.map||'stacks']; if(!L) return; if(o.remove) { L.delete(o.freedDecor); const f=(BB_SPOTS.stacks.fixed||[]).find(f=>f.key===o.freedDecor); if(f) f.gone=true; } else { const d=L.get(o.freedDecor); if(d) Object.assign(d,o.set||{}); } });
 
 // ---------- ADMIN > BLOCK BREAK LAB: Old Oak Park on the day of the discovery, the break plays by itself, then Tom can walk the freed park ----------
 function bbLabStart() {

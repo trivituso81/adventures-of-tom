@@ -39,6 +39,10 @@
 - Only admin plays: entering the ADMIN screens now fades the title theme (or any other track) out in 0.4 s instead of 1.3 s, and leaving fades the admin track out in 0.4 s. Looked for other sources: the synth song is already silent while clips are in charge, and the hidden game frame in Area Builder has no audio context (silent). A clip or track played on a library page already silences the admin track.
 - Tested: tools/admin_music_test.py (new checks: half level on pages and in the game; 1.3 s after entering ADMIN no other voice or synth song is left). Not heard on a phone.
 
+## ch7s4 (2026-11-14): Chapter 7 hall scene, the book cart rolls, the wrap-up with Deedee and Boppy
+
+Stage 4 of chapter 7. New hall scene (ch7Hall) where Grace opens the block: the cart drops onto four wheels, seven books land, the cart rolls into Tom's shins, the Unread shrinks in his arms, whispering stops shelf by shelf. Rewrote ch7End (Deedee and Boppy walk in as bench guests, the cookie, the seventh bulb and its card, Tom reads TNB's text). New engine ops cartSet, cartTo, freedDecor; plate zone `off` hook. Old ch7End Narrator and bigger-jar lines removed. New stand-in pictures: ord_know, ord_shusher, ord_dogear.
+
 ## ch7s3 (2026-11-14): chapter 7 build stage 3: the library scenes, the Stacks hall with the block, the three wings, the Reading Room and the bookmark swap
 - Tom: "Read claude/story-build.md, claude/story-ch07.md and claude/next-addendum-ch7s2.md. Continue the chapter 7 build at stage 3."
 - Scene 3 (SCENES.ch7Page): Page's story is now Monday night, Tom argues with his cookbooks, and Grace questions Page with her chart box by box (flash, grey spot, orange block, the sheet and WET FLOOR sign, the bulb filed under B, "Technically correct." "Deeply concerning.").

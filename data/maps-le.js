@@ -712,7 +712,8 @@ LE_AREAS.push(
       'XXXXXXXBppppppppppppppBXXXXXXX',
       'XXXXXXXBBBBBBBBBBBBBBBBXXXXXXX',
       'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'],true),
-    {objects:[
+    {npcs:[{name:'Page',x:20,y:10,look:'page',lines:['Everything is fine.']}],   // only there during the hall scene (data/scenes.js ch7Hall), hidden otherwise
+     objects:[
       ['bookcase',4,6,1,1,'Fiction',STACKS_SHELF.f[1],{wing:'f'}],
       ['bookcase',7,6,1,1,'Fiction',STACKS_SHELF.f[1],{wing:'f'}],
       ['bookcase',25,3,1,1,'Nonfiction',STACKS_SHELF.n[1],{wing:'n'}],

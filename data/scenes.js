@@ -2897,7 +2897,7 @@ TUTORIALS.chairman={tips:[
 // opens), ch7-stacks (the whispers; the Stacks wake up), ch7-story (optional: story time, Heart-Trace), ch7-fic (The
 // Cliffhanger), ch7-non (The Know-It-All), ch7-pic (Pop-Up Panic), ch7-cards (all three catalog cards), ch7-door (the
 // password; the Reading Room opens), ch7-boss, battle:unread ('win'), ch7-clear (the coin), ch7-wrap (the Unread
-// settles), ch7-done (the library).
+// settles), ch7-hallend (Grace opened the block in the hall, scene ch7Hall; the painted cart is back), ch7-done (the library).
 // ======================================================================================================
 const CH7={mode:'full',chapter:7};
 const CH7_CARDS=[
@@ -3302,6 +3302,74 @@ SCENES.ch7AfterBoss=()=>[
   {call:()=>sfx.thud&&sfx.thud()},   // Tom lifts the book off the lectern. His knees click.
   {talk:'Tom',lines:['You\'re heavier than you look.']},
   {talk:'The Unread',lines:['It\'s the dust.']},
+  {toast:'Goal: carry the book out to the hall in the Stacks. Grace has the coin.',time:4.5}
+];
+// 8b. The hall: Grace opens the block (story-ch07.md scene 10, ch7build stage 4). Tom carries the Unread out (a picture held in front of him, engine below), Page waits
+// by the block, Grace puts the coin in; the break is bbPlay('stacks') (engine/block-break.js: the cart drops onto four wheels, seven books land, the cart rolls into
+// Tom's shins, the colour ring shrinks the book in his arms and switches the whispering off shelf by shelf). Nobody speaks from the click until the colour has finished.
+var BB_HELD=null;   // {show,lift} the Unread in Tom's arms (drawn over Tom in STORY_MAPFX below)
+const ch7Page=(on)=>{ const M=worlds.stacks,n=M&&M.npcs.find(n=>n.name==='Page'); if(n) { n.sceneShow=!!on; n.hidden=!on; } };
+SCENES.ch7Hall=()=>flag('bb-stacks')?[{call:()=>{ setFlag('ch7-hallend'); ch7Page(false); BB_HELD=null; }}]:[
+  {call:()=>{ PROPART.preload(['stacks/ord_unread','stacks/ch7_cart','stacks/ch7_cartrose']); ch7Page(true); BB_HELD={show:true,lift:0,big:1}; storyWorld(); }},
+  {cam:[15,8.5]},
+  {place:'tom',at:[14,5],dir:'down'}, {place:'grace',at:[15,5],dir:'down'}, {place:'rose',at:[14,4],dir:'down'},
+  {place:'Page',at:[20,10],dir:'left'},
+  {all:[{walk:'tom',to:routeTo('tom',16,10),speed:.2},{seq:[{wait:.4},{walk:'grace',to:routeTo('grace',19,8),speed:.2}]},{seq:[{wait:.7},{walk:'rose',to:routeTo('rose',15,10),speed:.2}]}]},
+  {face:'tom',dir:'up'}, {face:'grace',dir:'left'}, {face:'rose',dir:'up'}, {face:'Page',dir:'left'}, {wait:.5},
+  {talk:'The Unread',lines:['Higher. I can\'t see over the globe.']},
+  {call:()=>{ BB_HELD.lift=22; sfx.pickup&&sfx.pickup(); }}, {wait:.6},
+  {talk:'Tom',lines:['First I held a net. Then I held a binder. Now I\'m a lectern! I keep getting promoted!']},
+  {talk:'Page',lines:['Is that the Reading Room book? It hasn\'t left that room since 1952!']},
+  {talk:'The Unread',lines:['Hello, Page. You hum in the elevator.']},
+  {talk:'Page',lines:['...Everything is fine.']},
+  {talk:'Grace',lines:['Thirteen.']},
+  {wait:.5},
+  {talk:'Grace',lines:['Tata. If I put it in, he stops.']},
+  {talk:'Tom',lines:['I know. He knows too. I\'m right here.']},
+  {talk:'The Unread',lines:['You\'re the one in charge, aren\'t you? Go on, then. Turn the page.']},
+  {cam:[17.2,9]}, {zoom:1.3,time:.7}, {wait:.4},
+  {blockbreak:'stacks'},
+  {wait:.8},
+  {talk:'Rose',lines:['Tata. He stopped.']},
+  {call:()=>{ sfx.pickup&&sfx.pickup(); BB_HELD.show=false; }},
+  {talk:'Grace',lines:['He didn\'t stop, Rose. He\'s on page twelve. He\'s waiting for Saturday.']},
+  {talk:'Tom',lines:['Thank you, sir.']},
+  {talk:'Grace',lines:['Tata, he can\'t hear you anymore.']},
+  {talk:'Tom',lines:['Neither can the airplane.']},
+  {talk:'Grace',lines:['...Thank you, sir.']},
+  {talk:'Rose',lines:['THANK YOU, BOOK!']},
+  {talk:'Page',lines:['Shhh.']},
+  {talk:'Rose',lines:['Thank you, book.']},
+  {talk:'Tom',lines:['I saw it. All of it, from right here. Not on a phone.']},
+  {talk:'Grace',lines:['You were standing in the way of the cart.']},
+  {talk:'Tom',lines:['I had the best seat in the house!']},
+  {zoom:1,time:.6},
+  // Rose climbs onto the cart and rides it
+  {walk:'rose',to:routeTo('rose',16,10),speed:.25}, {hide:'rose'}, {call:()=>{ BB.cart.rose=true; sfx.pickup&&sfx.pickup(); }}, {wait:.4},
+  {talk:'Rose',lines:['It\'s AFTER. Push me!']},
+  {talk:'Page',lines:['That cart is for returns only.']},
+  {talk:'Rose',lines:['I\'m RETURNING. I\'m returning upstairs.']},
+  {talk:'Grace',lines:['That\'s not how returns work.']},
+  {talk:'Tom',lines:['It\'s a little bit how returns work.']},
+  // Tom pushes the cart up the hall, past Fiction
+  {cam:null},
+  {call:()=>{ BB.cart.follow='tom'; BB.cart.dx=-70; BB.cart.dy=-8; }},
+  {all:[{walk:'tom',to:routeTo('tom',8,10),speed:.22},{seq:[{wait:.5},{walk:'grace',to:routeTo('grace',10,10),speed:.22}]},{seq:[{wait:.7},{walk:'Page',to:routeTo('Page',11,10),speed:.22}]}]},
+  {call:()=>{ BB.cart.follow=null; BB.cart.x=8*64+32-70; BB.cart.base=11*64-8; }},
+  {walk:'tom',to:routeTo('tom',6,5),speed:.22}, {face:'tom',dir:'left'}, {wait:.4},
+  {freedDecor:'cliff',remove:true}, {call:()=>sfx.pickup&&sfx.pickup()}, {wait:.8},
+  {talk:'Tom',lines:['"To be continued in volume two." Page! Where\'s volume two?']},
+  {talk:'Page',lines:['Checked out. In 1998. It was a bad week.']},
+  {talk:'Tom',lines:['NO!']},
+  // Picture Books: Rose hops off the cart and opens the pop-up book on the rug
+  {fade:'out',time:.5},
+  {call:()=>{ BB.cart.rose=false; }},
+  {place:'tom',at:[14,17],dir:'right'}, {place:'grace',at:[14,18],dir:'right'}, {place:'Page',at:[13,19],dir:'right'}, {place:'rose',at:[15,17],dir:'down'}, {show:'rose'}, {cam:[15.5,16.5]},
+  {fade:'in',time:.5}, {wait:.4},
+  {call:()=>sfx.thud&&sfx.thud()}, {freedDecor:'pop',set:{id:'stacks/ord_pop_open',w:120}}, {wait:.5},
+  {talk:'Rose',lines:['AAAAH! ...Again!']},
+  {cam:null},
+  {call:()=>{ setFlag('ch7-hallend'); ch7Page(false); BB_HELD=null; }},
   {toast:'Goal: back up to the Hush Library. Page is waiting.',time:4.5}
 ];
 // 9. The Hush Library: properly quiet. Rewards. TNB's text. Chapter complete.
@@ -3309,6 +3377,8 @@ SCENES.ch7End=[
   {flag:'ch7-done',value:'pending'},
   {walk:'Page',to:routeBeside('Page'),speed:.25},
   {talk:'Page',lines:['Listen. It\'s quiet. Properly quiet. The good kind. The dictionaries are snoring.']},
+  {talk:'Page',lines:['Everything is fine.']},
+  {talk:'Grace',lines:['Fourteen. And that\'s the first one I believe.']},
   {talk:'Grace',lines:['It just wanted somebody to read it. That\'s all. All of it was because nobody read it.']},
   {talk:'Page',lines:['Then we\'ll read it. Story time, Saturdays, out loud. And I think I know who should do the voices.',
     'Grace. This is for you. A Gold Library Card. No limit. No late fees. Ever.']},
@@ -3319,13 +3389,41 @@ SCENES.ch7End=[
   {give:'hushsweater'},
   {toast:'New outfit: the Hush Library Sweater. SHHH on the front. Anyone can wear it.',time:4},
   {talk:'Rose',lines:['It\'s itchy. I love it.']},
+  // Deedee walks in; Boppy stops in the doorway and looks at the shelves
+  {bench:'deedee',quiet:true}, {bench:'boppy',quiet:true},   // guests: they walk along but sit out fights (the party holds four)
+  {place:'deedee',at:[8,14],dir:'up'}, {place:'boppy',at:[7,13],dir:'up'},
+  {walk:'deedee',to:routeTo('deedee',9,11),speed:.25}, {face:'deedee',dir:'up'}, {wait:.3},
+  {talk:'Boppy',lines:['Is it safe? Has it stopped talking?']},
+  {talk:'Rose',lines:['It\'s all quiet, Boppy. It can\'t tell on you anymore.']},
+  {call:()=>sfx.pickup&&sfx.pickup()}, {wait:.7},   // Boppy takes a cookie out of his coat pocket and eats it
+  {talk:'Deedee',lines:['I saw that.']},
+  {talk:'Boppy',lines:['The books didn\'t.']},
+  {walk:'boppy',to:routeTo('boppy',7,11),speed:.25},
+  {talk:'Tom',lines:['Mom, here\'s number seven. Page had it filed in the card catalog.']},
+  {talk:'Page',lines:['It\'s checked out on Grace\'s card. It\'s due back in three weeks.']},
+  {talk:'Deedee',lines:['It\'s going in my drawer, and it\'s staying in my drawer.']},
+  {talk:'Page',lines:['Then there will be a late fee.']},
+  {talk:'Grace',lines:['NO late fees. EVER.']},
+  {talk:'Deedee',lines:['Tom. Did that library say anything about my pie crust?']},
+  {talk:'Tom',lines:['I didn\'t hear one word, Mom.']},
+  {talk:'Rose',lines:['He sang LA LA LA.']},
+  {talk:'Deedee',lines:['That\'s my favorite son.']},
+  {talk:'Tom',lines:['Mom, one of the books knew who your favorite really is.']},
+  {talk:'Deedee',lines:['And?']},
+  {talk:'Tom',lines:['It turned back into a regular book before it told me.']},
+  {talk:'Deedee',lines:['Smart book.']},
+  {talk:'Deedee',lines:['Seven bulbs. Somebody was in this library on Monday night, down there with the children\'s books. I don\'t like it one bit.']},
+  {talk:'Grace',lines:['And the next one is in Los Angeles, Deedee. It goes back and forth.']},
   {call:()=>{ sfx.ding&&sfx.ding(); }},
-  {talk:'Narrator',lines:['A text from TNB. \"Babe. Bernadette signed you up for the 2nd Ave potluck. You\'re on bread. For forty people.\"',
-    '\"I said yes for you. You\'re welcome. Bring the starter.\"']},
+  {talk:'Tom',lines:['It\'s TNB. "Babe. Bernadette signed you up for the 2nd Ave potluck. You\'re on bread. For forty people."',
+    '"I said yes for you. You\'re welcome. Bready and I have already started."']},
   {talk:'Grace',lines:['Forty people? Tata. That\'s a FEAST.']},
-  {talk:'Tom',lines:['...Bready Mercury is going to need a bigger jar.']},
+  {talk:'Tom',lines:['Forty people! It\'s a good thing he lives in a crock now.']},
+  {talk:'Grace',lines:['Tata, row eight is going to be in Los Angeles. I left room.']},
+  {talk:'Tom',lines:['I\'ll look for every box. And I\'ll call you before I touch anything.']},
+  {talk:'Grace',lines:['Good. I\'m in charge of row eight.']},
   {trace:'ch7-wrap'}, {hearts:'grace'}, {call:()=>sfx.levelChime()},
-  {party:null},
+  {leave:'boppy'}, {leave:'deedee'}, {party:null},
   {flag:'tombo:deedee2'},   // Pick the Rhubarb unlocks here (chapter 7)
   {fade:'out',time:.8}, {card:7,done:true,time:3.4}, {flag:'ch7-done'}, {fade:'in',time:.8},
   {save:true},
@@ -3342,7 +3440,8 @@ TRIGGERS.push(
   {id:'ch7-pic',map:'stacks',at:[8,13,21,19],when:{...CH7,flag:'ch7-stacks',notFlag:'ch7-pic'},scene:'ch7Pic'},
   {id:'ch7-boss',map:'readroom',when:{...CH7,flag:'ch7-door',notFlag:'ch7-boss'},scene:'ch7Boss'},
   {id:'ch7-after',map:'readroom',when:{...CH7,flag:{'battle:unread':'win'},notFlag:'ch7-clear'},scene:'ch7AfterBoss'},
-  {id:'ch7-end',map:'library',when:{...CH7,flag:'ch7-clear',notFlag:'ch7-done'},scene:'ch7End'}
+  {id:'ch7-hall',map:'stacks',when:{...CH7,flag:'ch7-clear',notFlag:'ch7-hallend'},scene:'ch7Hall'},
+  {id:'ch7-end',map:'library',when:{...CH7,flag:'ch7-hallend',notFlag:'ch7-done'},scene:'ch7End'}
 );
 // The Stacks hold still until the whispers scene; each wing's troublemaker holds still until its story fight.
 const CH7_WING_FLAG={cliffhanger:'ch7-fic',knowitall:'ch7-non',popup:'ch7-pic'};
@@ -3364,6 +3463,7 @@ STORY_WORLD.push(()=>{
   else { const M=worlds.stacks; if(M&&!M.doorsOpen) for(const x of [14,15]) M.solid[1*M.w+x]=1; }
   // The block in the Stacks hall is solid (tiles x 16 to 18, rows 7 and 8; row 9 is already shelf and row 10 stays open in front of it) until it is broken.
   if(STORY.chapter===7&&flag('ch7-hall')&&!flag('bb-stacks')) { const M=worlds.stacks; if(M) for(const x of [16,17,18]) for(const y of [7,8]) M.solid[y*M.w+x]=1; }
+  { const pg=worlds.stacks&&worlds.stacks.npcs.find(n=>n.name==='Page'); if(pg&&!pg.sceneShow) pg.hidden=true; }   // the second Page (hall scene) is only there while that scene plays
   // The Unread stays out of sight until the party walks into the Reading Room, and settles on the lectern after.
   const b=findMonster('unread'); if(!b) return;
   b.mscale=1.5;
@@ -3423,14 +3523,23 @@ STORY_MAPFX.push(time=>{
     const g=c.createRadialGradient(px,py,T*2.5,px,py,T*8); g.addColorStop(0,'rgba(18,10,8,0)'); g.addColorStop(1,'rgba(18,10,8,.5)');
     c.fillStyle=g; c.fillRect(0,0,M.w*T,M.h*T);
   }
-  const loud=STORY.mode==='full'&&STORY.chapter===7&&!flag('ch7-wrap')&&(id==='stacks'||id==='readroom'||(id==='library'&&flag('ch7-goal')));
+  const loud=STORY.mode==='full'&&STORY.chapter===7&&!flag('bb-stacks')&&(id==='stacks'||id==='readroom'||(id==='library'&&flag('ch7-goal')));
   if(!loud||Date.now()<ch7HushUntil||flag('ch7-door')) return;
   for(let k=0;k<(id==='library'?4:9);k++) {
     const n=hash(k,77),per=6+(n%5),ph=((time+(n%100)/10)%per)/per;
     const tx=(n>>>3)%(M.w-2)+1,ty=(n>>>11)%(M.h-2)+1; if(M.tiles[ty][tx]==='bkvoid') continue;
+    if(id==='stacks'&&typeof bbRingR==='function'&&bbRingR('stacks')>=Math.hypot((tx+.5)*64-1110,(ty+.5)*64-531)) continue;   // the colour ring has passed this shelf: it has gone quiet
     const x=tx*T,y=ty*T-ph*T*1.5;
     gfx.globalAlpha=Math.sin(ph*Math.PI)*.75; label(CH7_WHISPERS[(k+Math.floor(time/per))%CH7_WHISPERS.length],x,y,'#e9dcff',1); gfx.globalAlpha=1;
   }
+});
+
+// The Unread in Tom's arms (hall scene): the picture is held over Tom, big as a suitcase, and shrinks to an ordinary old book as the colour ring passes him.
+STORY_MAPFX.push(time=>{
+  const H=typeof BB_HELD!=='undefined'?BB_HELD:null; if(!H||!H.show||currentMap.id!=='stacks'||!PROPART.ready('stacks/ord_unread')) return;
+  const p=position(player),cx=(p.x+.5)*T,fy=(p.y+1)*T,d=Math.hypot(cx/T*64-1110,fy/T*64-531),r=bbRingR('stacks');
+  const u=r<0?0:bbClamp((r-d)/90,0,1),w=T*(1.7-1.0*bbEase(u)),im=PROPART.get('stacks/ord_unread'),h=w*im.naturalHeight/im.naturalWidth;
+  PROPART.draw('stacks/ord_unread',cx,fy-T*(.95+H.lift/64)-h*.15+(u?0:0),{w});
 });
 
 // Tips for the chapter 7 story fights and The Unread.
@@ -3917,7 +4026,7 @@ SCENES.ch9Letter=[
   {talk:'Deedee',lines:['And now the moon is missing. Three nights. I power walk at nine. I walked straight into the Hendersons’ hedge.']},
   {talk:'Tom',lines:['The moon is missing, a club that\'s been locked for fifty years just invited me, and the invitation has the same little gold clock as my coins.','Everybody get your shoes.']},
   {leave:'grace'}, {call:()=>{ ch9GirlsMove(); sfx.doorOut(); }},
-  {join:'deedee',quiet:true}, {join:'boppy',quiet:true},
+  {bench:'deedee',quiet:true}, {bench:'boppy',quiet:true},   // guests: they walk along but sit out fights (the party holds four)
   {party:{lock:['tom','deedee','boppy'],bar:['grace','rose'],allow:['deedee','boppy']}},
   {trace:'deedee-invite'}, {hearts:'tom'}, {call:()=>sfx.levelChime()},
   {toast:'Deedee and Boppy join the party. Grace and Rose stay with Aunt Ellie.',time:3.5},
