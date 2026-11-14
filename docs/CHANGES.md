@@ -1,3 +1,8 @@
+## micfix1 (2026-11-13): Voice Library microphone works after a clip has played
+- Tom 19:54: Show > Re-record took "The microphone is not available: AudioSession category is not compatible with audio capture" on his iPhone, after playing clips. Cause (fact): iOS keeps the page in playback mode once audio plays, and refuses the mic in that mode.
+- Fix (voices.html `startRec`): the audio session is switched to play-and-record before the mic is requested, and back to automatic when the take stops or fails. Stopping any playing clip was already done there.
+- Smoke passes. NOT done: nothing has been tested on Tom's iPhone; the audio session switch can only be checked on that device.
+
 ## voicetags2 (2026-11-13): chapter 1 to 5 voice directions redone beat by beat; chapter 1 re-record list
 - Tom 19:36, after sampling voicetags1: "no good". The tags sat only at the start of a sentence (usually two) and never inside one; he wants the stress on a word and the change of tone at the exact point in the sentence where it happens. Tom 19:49: the chapter 1 lines were not in his queue.
 - Scripts: all 469 lines of tools/voice-library/scripts/ch01 to ch05-story-directions.json re-directed (308 differ from voicetags1). The opening tag sets the baseline, the turn tag sits at the word where the voice changes (`But it's pretty... [playful] GRAPE.`), an ellipsis before the turn gives the beat, one CAPS word per sentence carries the stress, pace words where the pace changes. 183 lines keep one tag, 168 have a tag inside a sentence. Spoken words checked equal to the line text on all 469. Rules: claude/next-addendum-voicetags1.md, section SECOND PASS. The Boppy "Tackle box" entry in scripts/zz-v4-overrides.json follows.

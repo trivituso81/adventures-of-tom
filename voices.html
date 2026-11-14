@@ -375,18 +375,22 @@ let DOGLEN={}; try{ DOGLEN=JSON.parse(localStorage.getItem('aot-vl-doglen')||'{}
 const dogOf=it=>DOGLEN[lk(it)]||it.d||2;
 async function startRec(it){
   const key=lk(it); stopPlay();
+  // iOS (Safari 16.4+): the page is in playback mode after any clip plays, and iOS refuses the mic in that mode.
+  // Switch the audio session to play-and-record first, and back to automatic when the take ends or fails.
+  const setSession=t=>{ if(navigator.audioSession){ try{ navigator.audioSession.type=t; }catch(e){} } };
+  setSession('play-and-record');
   try{
     const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:true}});
     const mr=new MediaRecorder(stream), chunks=[];
     mr.ondataavailable=e=>{ if(e.data.size) chunks.push(e.data); };
-    mr.onstop=async()=>{ stream.getTracks().forEach(t=>t.stop()); const blob=new Blob(chunks,{type:mr.mimeType||'audio/mp4'}); delete REC[key];
+    mr.onstop=async()=>{ stream.getTracks().forEach(t=>t.stop()); setSession('auto'); const blob=new Blob(chunks,{type:mr.mimeType||'audio/mp4'}); delete REC[key];
       if(!apiKey()){ toast('Paste your ElevenLabs API key at the top first.'); repaint(it); return; }
       BUSY[key]='Turning your read into '+whoName(it)+'’s voice...'; repaint(it);
       try{ const mp3=await retry(()=>sts(voiceOf(it),blob)); await addTake(it,mp3,'my read','(recording)'); delete ERR[key]; }
       catch(e){ ERR[key]=e.message||String(e); }
       delete BUSY[key]; repaint(it); renderSum(); };
     REC[key]=mr; mr.start(); delete ERR[key]; repaint(it);
-  }catch(e){ ERR[key]='The microphone is not available: '+(e.message||e)+'. Allow the microphone for this app and try again.'; repaint(it); }
+  }catch(e){ setSession('auto'); ERR[key]='The microphone is not available: '+(e.message||e)+'. Allow the microphone for this app and try again.'; repaint(it); }
 }
 
 // ---------- filters ----------
