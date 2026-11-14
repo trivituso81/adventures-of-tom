@@ -22710,6 +22710,13 @@
      "date": "2026-11-14",
      "from": "v1",
      "at": 1794620949619
+    },
+    {
+     "n": 1,
+     "file": "art/raw/enemies/ch1-bigone-normal-v2.png",
+     "date": "2026-11-14",
+     "from": "v2",
+     "at": 1794620994815
     }
    ],
    "rejects": [],
