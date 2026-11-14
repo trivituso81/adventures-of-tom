@@ -1565,7 +1565,11 @@ function toggleObjective(open=!objectiveOpen) {
   const brand=document.querySelector('#hud .brand'); if(!brand) return;
   brand.setAttribute('role','button'); brand.setAttribute('tabindex','0'); brand.setAttribute('aria-expanded','false');
   brand.setAttribute('aria-label','Quest tracker. Tap for the quest log');
-  brand.addEventListener('click',e=>{ e.stopPropagation(); toggleObjective(); });
+  // Same touch handling as the menu button (engine/draw.js): act on the finger lifting, then ignore the click the browser sends after it,
+  // so one tap is one toggle on a phone (open, then a second tap closes).
+  let qtTouchAt=-1e9;
+  brand.addEventListener('touchend',e=>{ e.preventDefault(); e.stopPropagation(); qtTouchAt=performance.now(); toggleObjective(); },{passive:false});
+  brand.addEventListener('click',e=>{ e.stopPropagation(); if(performance.now()-qtTouchAt>500) toggleObjective(); });
 })();
 
 // ---------- Quest updates ----------
