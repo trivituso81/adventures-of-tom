@@ -1,3 +1,9 @@
+## clips12 (2026-11-14): Tom's 228 chapter 4 and 5 Voice Library takes merged, nothing heard on a phone
+
+- Merged `local-clips-pending_10.json` (made 2026-11-14T19:22Z) with merge-local.js: 228 dialogue takes (Tom 96, Amy 44, TNB 41, Grace 13, Rose 10, The Big One 6, Pip kid 4, Grump 3, Michael 3, Bean 2, Dot 2, LA woman 2, Bun 1, Oolong 1). No battle clips.
+- By chapter (matched by text against tools/voice-library/harvest.json): chapter 4 about 90, chapter 5 about 135, chapter 1 two. All 228 are new keys, added to data/voice/dialog-ch28.js (the story lines that are in the Library; each plays once its scene uses the exact words).
+- Checked: none of the takes is older than its script rewrite (retake.json `ats`), so none is stale. Not done: no take listened to; the `script` text each take carries was not copied into ch04/ch05-story-directions.json (see clips11 note).
+
 ## backlog1 (2026-11-14): fix the backlog from Tom's chapter 1 playthrough (19 reports): bosses stay beaten, party and monster staging, crumbs answer A, WIN NOW option
 - Tom 10:21 (r-20261114-102058-62ho): after beating The Big One, "he appears again as a character that you can beat"; once a boss is defeated it should stay in its finished state. engine/world.js `bossBeaten`/`monstersReturn`, engine/boss-finale.js `bossSettle`/`bossSettleAll`: a beaten story boss settles into its end frame and never returns as a fight (other monsters still return on re-entry). engine/overworld.js, engine/feel.js: a settled boss ignores A and shows no resting Z.
 - Tom 10:17 (r-20261114-101709-8n6x): "The big one is appearing on the land, but his graphic has water in it... we just need to change his position". data/monsters.js `bigone` spot [18,8] (in the water), data/scenes.js ch1Pond camera `{cam:[16,9]}`. Looked at portrait and landscape.
