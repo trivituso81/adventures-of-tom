@@ -401,8 +401,8 @@ function passCh(it,s){ s=s||F.ch; if(!s.size) return true; return it.c.length?it
 // clip is old (it.ov) and no take was chosen on this device, or the take chosen here was made before the recast.
 function isOld(it){ const at=IDX.recast&&IDX.recast[it.v]; if(!at) return false; const loc=localFor(it); return loc?(loc.t||0)<at:!!it.ov; }
 // New direction: the line's written direction was rewritten after its clip was recorded (it.rt, from retake.json) and no take
-// made after that rewrite (IDX.retakeAt) is chosen on this device.
-function isRetake(it){ if(!it.rt) return false; const loc=localFor(it); return !loc||(loc.t||0)<(IDX.retakeAt||0); }
+// made after that rewrite (it.rt, a time) is chosen on this device. A line with no recording at all is only under No clip yet.
+function isRetake(it){ if(!it.rt) return false; const loc=localFor(it); return loc?(loc.t||0)<it.rt:it.f>=0; }
 function passShow(it){ if(F.show==='retake') return isRetake(it); if(F.show==='old') return isOld(it); if(F.show==='phone') return !!localFor(it); if(F.show==='builtin') return !localFor(it)&&it.f>=0; if(F.show==='none') return it.f<0&&!localFor(it); if(F.show==='pending') return pendingItem(it); if(F.show==='sent') return sentItem(it); return true; }
 // Search forgives spelling: every word typed must appear in the line, its speaker, place, move name or direction, either inside a
 // word or within one typo (two for long words), so "yamamot" finds "Ymamot".
@@ -433,7 +433,7 @@ function renderFilters(){
   $('fShow').innerHTML='<span class="lab">Show</span>'+chip('show','all','All lines',F.show==='all',IDX.items.length)+chip('show','none','No clip yet',F.show==='none',nn)+chip('show','phone','Re-recorded on this device',F.show==='phone',p)+chip('show','pending','Pending upload',F.show==='pending',MERGED&&PH.size?nPend:null)+(nSent?chip('show','sent','Sent, not merged yet',F.show==='sent',nSent):'')+chip('show','builtin','Built-in clip',F.show==='builtin')+(IDX.recast&&Object.keys(IDX.recast).length?chip('show','old','Old voice',F.show==='old',IDX.items.filter(isOld).length):'')+(IDX.items.some(it=>it.rt)?chip('show','retake','New direction',F.show==='retake',IDX.items.filter(isRetake).length):'');
   { const n=$('fShowNote');
     if(F.show==='pending'){ n.textContent=(!MERGED?'The merge list could not be loaded, so nothing can be checked right now.':!PH.size?'Checking your phone clips...':'These are the clips you recorded since your last upload. Press Export pending clips and send the file to Claude. After you export they move to Sent, and they leave the lists once Claude has built them into the game.')+(MERGED&&MERGED.size===0?' (The merge list is empty, so every phone clip counts as pending.)':''); n.hidden=false; }
-    else if(F.show==='retake'){ n.textContent='These lines already have a recording, but their direction was rewritten afterwards. Make a new take of each one. A line leaves this list when you record it.'; n.hidden=false; }
+    else if(F.show==='retake'){ n.textContent='These lines have a recording or a phone take, but their direction was rewritten afterwards. Make a new take of each one. A line leaves this list when you record it.'; n.hidden=false; }
     else if(F.show==='sent'){ n.textContent='You exported these, but Claude has not built them into the game yet. If you re-record a line it goes back to Pending.'; n.hidden=false; }
     else n.hidden=true; }
 }

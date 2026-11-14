@@ -276,7 +276,8 @@ const recast={}; for(const v in OLDV) recast[v]=OLDV[v].at;
 // one hashed in the list. The Library lists it under Show > New direction; merging a new take clears it (the hash no longer matches).
 const RETAKE=fs.existsSync('tools/voice-library/retake.json')?JSON.parse(fs.readFileSync('tools/voice-library/retake.json','utf8')):{};
 { const sha=s=>require('crypto').createHash('sha1').update(s).digest('hex').slice(0,16); const H=RETAKE.hashes||{};
-  for(const it of items){ if(it.t!=='d'||it.f<0) continue; const a=DC.clips[it.v+'|'+it.x]; if(a&&H[it.v+'|'+norm(it.x)]===sha(a)) it.rt=1; }
+  const AT=RETAKE.ats||{};   // it.rt = time of the rewrite; '' in the list = the line had no baked clip then
+  for(const it of items){ if(it.t!=='d') continue; const k=it.v+'|'+norm(it.x); if(!(k in H)) continue; const a=DC.clips[it.v+'|'+it.x]; if((a?sha(a):'')===H[k]) it.rt=AT[k]||RETAKE.at||1; }
   console.log('new direction, clip still the old take:',items.filter(x=>x.rt).length,'of',Object.keys(H).length); }
 // Story order (Tom 2026-11-06): chapter first, then where the line first occurs in that chapter's scene source. Lines tied to no chapter
 // go last, in their old order. A line with the same speaker and words as an earlier one in story order is flagged dup (listed once,
@@ -300,7 +301,7 @@ const who={}; for(const it of items){ const k=it.v; who[k]=who[k]||{id:k,name:vn
 for(const it of items) if(it.s&&ACCENT[it.v]){ const A=ACCENT[it.v], H=ACCENT_HAS[it.v];
   it.s=it.s.replace(/\[([^\]]*)\]/g,(m,t)=>H.test(t)||/^\s*(short|long) pause\s*$/i.test(t)?m:'['+A+(t.trim()?', '+t.trim():'')+']');
   if(!/^\s*\[/.test(it.s)) it.s='['+A+'] '+it.s; }
-const out={made:new Date().toISOString().slice(0,10),files,voices,recast,retakeAt:RETAKE.at||0,who:Object.values(who).sort((a,b)=>(b.family-a.family)||(ORDER.indexOf(a.id)-ORDER.indexOf(b.id))||a.name.localeCompare(b.name)),
+const out={made:new Date().toISOString().slice(0,10),files,voices,recast,who:Object.values(who).sort((a,b)=>(b.family-a.family)||(ORDER.indexOf(a.id)-ORDER.indexOf(b.id))||a.name.localeCompare(b.name)),
   chapters:Object.keys(titles).map(Number).sort((a,b)=>a-b).map(n=>({n,title:titles[n]})),items};
 fs.writeFileSync('data/voice-index.json',JSON.stringify(out));
 const nb=items.filter(x=>x.t==='b').length, nd=items.length-nb, auto=items.filter(x=>x.auto).length;

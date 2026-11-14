@@ -15,9 +15,9 @@ for(const f of fs.readdirSync('data/voice').filter(f=>/^dialog-ch\d+\.js$/.test(
 const C=vm.runInContext('DIALOG_CLIPS',ctx).clips;
 const OUT='tools/voice-library/retake.json';
 const J=fs.existsSync(OUT)?JSON.parse(fs.readFileSync(OUT,'utf8')):{note:'Dialogue lines whose direction was rewritten after their clip was recorded and that Tom should record again. Made by retake.js. Key: voice|text; value: hash of the clip that was baked when the direction changed.',hashes:{}};
-let n=0, no=0;
+let n=0, no=0; const NOW=Date.now();
 for(const f of files){ const j=JSON.parse(fs.readFileSync(f,'utf8')); for(const l of (j.lines||j)){ if(!l||!l.voice||!l.text) continue;
-  const a=C[l.voice+'|'+l.text]; if(!a){ no++; continue; } J.hashes[l.voice+'|'+norm(l.text)]=sha(a); n++; } }
-J.at=Date.now(); J.since=new Date(J.at).toISOString();
+  const a=C[l.voice+'|'+l.text]; if(!a){ no++; continue; } J.hashes[l.voice+'|'+norm(l.text)]=sha(a); (J.ats=J.ats||{})[l.voice+'|'+norm(l.text)]=NOW; n++; } }
+J.at=NOW; J.since=new Date(NOW).toISOString();
 fs.writeFileSync(OUT,JSON.stringify(J,null,1)+'\n');
 console.log('retake list:',n,'lines with a clip added,',no,'lines have no clip yet (they are already under No clip yet) ->',OUT);

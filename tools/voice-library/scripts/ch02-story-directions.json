@@ -7,420 +7,420 @@
    "speaker": "Tom",
    "text": "Two thousand four hundred and seventy-five. Delta counts every one, and so do I.",
    "ctx": "chapter 2 (reworded)",
-   "script": "[precise, proud] Two thousand four hundred and seventy-FIVE. Delta counts every one... [earnest] and so do I."
+   "script": "[correcting] Um actually it's Two thousand four hundred and seventy-five. [reminding doting] Delta counts every one... [slowly, admitting with guilt] and so do I."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "How many SkyMiles is that now?",
    "ctx": "chapter 2 (reworded)",
-   "script": "[teasing] How many SkyMiles is that NOW?"
+   "script": "[skeptical] How many SkyMiles is that now?"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Four hundred and twelve thousand.",
    "ctx": "chapter 2 (new)",
-   "script": "[proud, precise] Four hundred and twelve thousand."
+   "script": "[proud, precise] Four hundred and twelve THOUSAND."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Babe! What are you saving them for?",
    "ctx": "chapter 2 (new)",
-   "script": "[amused] Babe! What are you [curious, warm] SAVING them for?"
+   "script": "[amused annoyed] Babe! What are you SAVING them for?"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Something really special.",
    "ctx": "chapter 2 (new)",
-   "script": "[dreamy, hushed] Something really... special."
+   "script": "[dreamy, hushed] Something really special."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "You said that at three hundred thousand.",
    "ctx": "chapter 2 (new)",
-   "script": "[teasing, easy] You said that at THREE hundred thousand."
+   "script": "[slightly skeptical] You said that at [emphasized]THREE [normal] hundred thousand."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "It has to be REALLY special. But I'd have flown here for zero miles.",
    "ctx": "chapter 2 (new)",
-   "script": "[defensive] It has to be REALLY special. [softening, warm] But I'd have flown here for ZERO miles."
+   "script": "[defensive] It has to be REALLY special. [warm, softly] But I'd have flown here for zero miles."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Zero miles. Babe. That's the most romantic thing a Delta person can say.",
    "ctx": "chapter 2 (new)",
-   "script": "[touched, softly] Zero miles. Babe. That's the most romantic thing [amused] a DELTA person can say."
+   "script": "[touched] Zero miles. Babe. [sarcastic] That's the most romantic thing a Delta person can say."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "All yours. I like that.",
    "ctx": "chapter 2 (reworded)",
-   "script": "[warm] All yours. [softly, happy] I like that."
+   "script": "..."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Why is the sky PURPLE? It's two in the afternoon!",
    "ctx": "chapter 2 (new)",
-   "script": "[alarmed] Why is the sky PURPLE? It's [disbelief] two in the afternoon!"
+   "script": "[alarmed] Wait, why is the sky [disbelief] PURPLE? [trailing, puzzled] It's two in the afternoon!"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "It's been like that since this morning. I held my soda up to it. It's the exact same color.",
    "ctx": "chapter 2 (reworded)",
-   "script": "[easy] It's been like that since this morning. I held my soda up to it. It's the [amused] EXACT same color."
+   "script": "[resigned, nonchalant] It's been like that since this morning. [investigating] I held my soda up to it. [pleasantly surprised] It's the EXACT same color."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "I don't know what it is, babe. But it's pretty grape.",
    "ctx": "chapter 2 (new)",
-   "script": "[easy] I don't know what it is, babe. But it's pretty... [playful] GRAPE."
+   "script": "[nonchalant] I don't know what it is, babe. [punchline] But it's pretty GRAPE."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Don't make me laugh, I'm scared of it! ...Okay. It's a little grape.",
    "ctx": "chapter 2 (new)",
-   "script": "[anxious, amused] Don't make me laugh, I'm SCARED of it! [quietly, giving in] ...Okay. It's a little grape."
+   "script": "[anxious, amused] Don't make me laugh, it's freaky! [admitting] ...Okay. [agreeing] It IS a little grape."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Something strange happened on Long Island too. A blob of mud with eyes climbed in my mother's kitchen window and ran off with her rhubarb crisp.",
    "ctx": "chapter 2 (new)",
-   "script": "[excited, rushed] Something strange happened on Long Island too. A blob of mud [amazed, slower] with EYES climbed in my mother's kitchen window and ran off with her rhubarb crisp."
+   "script": "[bursting to tell] Something strange happened on Long Island too. [storytelling, building] A blob of mud with EYES climbed in my mother's kitchen window [scandalized] and ran off with her rhubarb crisp."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "The mud took Deedee's crisp? Is the mud okay?",
    "ctx": "chapter 2 (new)",
-   "script": "[concerned] The mud took Deedee's CRISP? [sweet, earnest] Is the mud okay?"
+   "script": "[genuinely concerned] The mud took Deedee's crisp? [sincere, worried] Is the mud okay?"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "We chased it to the pond. And there was a talking fish as big as a car, wearing her baking tin like a crown.",
    "ctx": "chapter 2 (new)",
-   "script": "[excited] We chased it to the pond. And there was a talking fish as big as a CAR, [amazed, slower] wearing her baking tin like a crown."
+   "script": "[storytelling] We chased it to the pond. [amazed, building] And there was a talking fish as big as a CAR, [savoring the detail] wearing her baking tin like a crown."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "A talking fish! What did he say?",
    "ctx": "chapter 2 (new)",
-   "script": "[delighted] A talking fish! [eager] What did he SAY?"
+   "script": "[delighted] A talking fish! [eagerly curious] What did he SAY?"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "He said \"Glub.\" Then he gave Rose a gold coin.",
    "ctx": "chapter 2 (new)",
-   "script": "[matter-of-fact] He said... [deadpan] \"Glub.\" [short pause] [brightening, proud] Then he gave Rose a gold coin."
+   "script": "[setting it up] He said... [flat, deadpan] \"Glub.\" [proud uncle] Then he gave Rose a gold coin."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Mud in the kitchen, a talking fish, and now a purple sky. Babe, something fishy is going on.",
    "ctx": "chapter 2 (new)",
-   "script": "[thoughtful, easy] Mud in the kitchen, a talking fish, and now a purple sky. Babe, something... [playful] FISHY is going on."
+   "script": "[tallying, nonchalant] Mud in the kitchen, a talking fish, and now a purple sky. [punchline] Babe, something FISHY is going on."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "The fish was the nicest part!",
    "ctx": "chapter 2 (new)",
-   "script": "[earnest, protesting] The fish was the NICEST part!"
+   "script": "[defending the fish] The fish was the NICEST part!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "I want to go look at that sky with you. But first I have to feed Bready Mercury. He's been alone for a week.",
    "ctx": "chapter 2 (reworded)",
-   "script": "[warm] I want to go look at that sky with you. But first [sheepish] I have to feed Bready Mercury. He's been alone for a WEEK."
+   "script": "[sweet] I want to go look at that sky with you. [guilty, fussing] But first I have to feed Bready Mercury. [doting] He's been alone for a WEEK."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "He hasn't been alone. Come on, I'll show you.",
    "ctx": "chapter 2 (new)",
-   "script": "[warm, hushed] He hasn't been alone. [inviting] Come on, I'll show you."
+   "script": "[knowing, teasing] He hasn't been alone. [inviting] Come on, I'll show you."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "So I stayed here with her. I was coming over anyway. I've been feeding Bready Mercury every day.",
    "ctx": "chapter 2 (new)",
-   "script": "[casual] So I stayed here with her. I was coming over anyway. I've been feeding Bready Mercury [softly, proud] every day."
+   "script": "[casual] So I stayed here with her. [downplaying] I was coming over anyway. [quietly proud] I've been feeding Bready Mercury every day."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Every day? Fifty grams of flour and fifty grams of water?",
    "ctx": "chapter 2 (new)",
-   "script": "[touched] Every DAY? [precise, anxious] Fifty grams of flour and fifty grams of water?"
+   "script": "[touched] Every DAY? [nit picky, checking] Fifty grams of flour and fifty grams of water?"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Fifty and fifty. I used your little scale.",
    "ctx": "chapter 2 (new)",
-   "script": "[reassuring, easy] Fifty and fifty. I used your little scale."
+   "script": "[patient, reassuring] Fifty and fifty. [amused] I used your little scale."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "He got so big he was climbing out of the jar. So I baked a loaf with him.",
    "ctx": "chapter 2 (reworded)",
-   "script": "[amused] He got SO big he was climbing out of the jar. [casual, proud] So I baked a loaf with him."
+   "script": "[amused] He got SO big he was climbing out of the jar. [nonchalant] So I baked a loaf with him."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "It's perfectly round! How did you get it so round?",
    "ctx": "chapter 2 (reworded)",
-   "script": "[amazed] It's PERFECTLY round! [curious] How did you get it so round?"
+   "script": "[astonished] It's PERFECTLY round! [nit picky, curious] How did you get it so round?"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "I shaped it on my pottery wheel.",
    "ctx": "chapter 2 (new)",
-   "script": "[casual, proud] I shaped it on my pottery wheel."
+   "script": "[nonchalant, proud] I shaped it on my pottery wheel."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "On the pottery wheel! That's brilliant. Why have I been doing it with my hands?",
    "ctx": "chapter 2 (new)",
-   "script": "[amazed] On the pottery wheel! That's brilliant. Why have I been doing it [disbelief] with my HANDS?"
+   "script": "[mind blown] On the pottery wheel! [admiring] That's brilliant. [realizing, dismayed] Why have I been doing it with my HANDS?"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "I make bowls all day, babe. So I made you a bread bowl.",
    "ctx": "chapter 2 (new)",
-   "script": "[warm, easy] I make bowls all day, babe. So I made you a... [playful] BREAD bowl."
+   "script": "[matter-of-fact] I make bowls all day, babe. [punchline] So I made you a BREAD bowl."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "A bread bowl! Now we need soup.",
    "ctx": "chapter 2 (new)",
-   "script": "[thrilled] A bread bowl! [snappy, serious] Now we need soup."
+   "script": "[thrilled] A bread bowl! [suddenly businesslike] Now we need soup."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Nara, sit.",
    "ctx": "chapter 2 (new)",
-   "script": "[warm, firm] Nara, sit."
+   "script": "[firm, loving] Nara, sit."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Paw.",
    "ctx": "chapter 2 (new)",
-   "script": "[warm, firm] Paw."
+   "script": "[firm, loving] Paw."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "He's twice as big as when I left! What have you been doing with him?",
    "ctx": "chapter 2 (new)",
-   "script": "[amazed] He's TWICE as big as when I left! What have you been [playful, suspicious] doing with him?"
+   "script": "[astonished] He's TWICE as big as when I left! [playfully suspicious] What have you been doing with him?"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "I sing to him while I stir. He's Bready Mercury. He needs his music.",
    "ctx": "chapter 2 (reworded)",
-   "script": "[easy] I sing to him while I stir. He's Bready Mercury. [matter-of-fact] He NEEDS his music."
+   "script": "[nonchalant] I sing to him while I stir. [stating the obvious] He's Bready Mercury. [dead serious] He NEEDS his music."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Which songs?",
    "ctx": "chapter 2 (new)",
-   "script": "[curious] Which songs?"
+   "script": "[intrigued] Which songs?"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "\"Another One Bites the Crust.\"",
    "ctx": "chapter 2 (new)",
-   "script": "[deadpan] \"Another One Bites the... [proud] CRUST.\""
+   "script": "[deadpan] \"Another One Bites the... [punchline] CRUST.\""
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "\"Don't Stop Me Dough!\"",
    "ctx": "chapter 2 (reworded)",
-   "script": "[delighted, sing-song] \"Don't Stop Me DOUGH!\""
+   "script": "[delighted, singing along] \"Don't Stop Me DOUGH!\""
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Babe. That's so good. I'm singing that one tomorrow.",
    "ctx": "chapter 2 (reworded)",
-   "script": "[impressed, softly] Babe. That's SO good. [easy] I'm singing that one tomorrow."
+   "script": "[impressed] Babe. [admiring] That's SO good. [nonchalant] I'm singing that one tomorrow."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "That's the same purple as the sky! An hour ago it was way up on the hill. Now it's on my lawn!",
    "ctx": "chapter 2 (new)",
-   "script": "[alarmed] That's the same purple as the sky! An hour ago it was way up on the hill. Now it's [scared, louder] on my LAWN!"
+   "script": "[alarmed] That's the same purple as the sky! [working it out] An hour ago it was way up on the hill. [panicking] Now it's on my LAWN!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Mr. Washington is sitting out on his porch in that. Come on!",
    "ctx": "chapter 2 (new)",
-   "script": "[urgent] Mr. Washington is sitting out on his porch in that. Come ON!"
+   "script": "[worried, urgent] Mr. Washington is sitting out on his porch in that. [urging] Come ON!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "What happened in 1979?",
    "ctx": "chapter 2 (new)",
-   "script": "[gentle, curious] What happened in 1979?"
+   "script": "[gentle, humoring] What happened in 1979?"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "He just said the same thing again, word for word.",
    "ctx": "chapter 2 (new)",
-   "script": "[uneasy, quiet] He just said the same thing again... [slowly] word for word."
+   "script": "[unsettled] He just said the same thing again... [creeped out] word for word."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "He always finishes that story. I've heard it nine times. It ends with gumbo.",
    "ctx": "chapter 2 (reworded)",
-   "script": "[fond] He ALWAYS finishes that story. I've heard it nine times. [worried, quietly] It ends with gumbo."
+   "script": "[fond] He ALWAYS finishes that story. [nonchalant] I've heard it nine times. [worried] It ends with gumbo."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "It's not a nice afternoon, Mr. Washington! The air is purple!",
    "ctx": "chapter 2 (new)",
-   "script": "[alarmed, pleading] It's NOT a nice afternoon, Mr. Washington! The air is purple!"
+   "script": "[pleading, polite] It's NOT a nice afternoon, Mr. Washington! [alarmed] The air is purple!"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Babe. That cloud has a face. And it just talked to us.",
    "ctx": "chapter 2 (new)",
-   "script": "[shaken, hushed] Babe. That cloud has a face. And it just... [whispers] TALKED to us."
+   "script": "[rattled, hushed] Babe. That cloud has a face. [disbelief] And it just TALKED to us."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "It's like the mud at my mother's house! I told you they talk!",
    "ctx": "chapter 2 (new)",
-   "script": "[excited, vindicated] It's like the mud at my mother's house! I TOLD you they talk!"
+   "script": "[vindicated] It's like the mud at my mother's house! [triumphant] I TOLD you they talk!"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "You did tell me. It's a lot scarier in person.",
    "ctx": "chapter 2 (new)",
-   "script": "[rattled] You did tell me. It's a LOT scarier [quietly, honest] in person."
+   "script": "[admitting] You did tell me. [rattled] It's a LOT scarier in person."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "The man in the mask jumped out! I jumped higher!",
    "ctx": "chapter 2 (reworded)",
-   "script": "[defensive] The man in the mask jumped out! [proud] I jumped HIGHER!"
+   "script": "[defensive] The man in the mask jumped out! [proud of it] I jumped HIGHER!"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "And it rained popcorn on the whole room. Let's do that to these clouds.",
    "ctx": "chapter 2 (reworded)",
-   "script": "[amused] And it rained popcorn on the whole room. [scheming, playful] Let's do that to these clouds."
+   "script": "[amused, remembering] And it rained popcorn on the whole room. [scheming] Let's do that to these clouds."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "I don't have any popcorn!",
    "ctx": "chapter 2 (new)",
-   "script": "[panicked] I don't HAVE any popcorn!"
+   "script": "[panicking] I don't HAVE any popcorn!"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "You don't need popcorn. You just need to be that scared.",
    "ctx": "chapter 2 (new)",
-   "script": "[encouraging, easy] You don't need popcorn. You just need to be THAT scared."
+   "script": "[reassuring] You don't need popcorn. [coaching] You just need to be THAT scared."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Oh, I'm that scared.",
    "ctx": "chapter 2 (new)",
-   "script": "[deadpan, shaky] Oh, I'm that scared."
+   "script": "[deadpan, terrified] Oh, I'm that scared."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "That doesn't sound like him at all. He tells me how old he is every single morning. He's proud of it!",
    "ctx": "chapter 2 (reworded)",
-   "script": "[worried] That doesn't sound like him at all. He tells me how old he is every single morning. [fond, protesting] He's PROUD of it!"
+   "script": "[worried] That doesn't sound like him at all. [fond] He tells me how old he is every single morning. [insisting] He's PROUD of it!"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "If the smog did this to him, what about everybody on the boulevard?",
    "ctx": "chapter 2 (new)",
-   "script": "[worried] If the smog did this to HIM, what about everybody on the boulevard?"
+   "script": "[worried, realizing] If the smog did this to HIM, what about everybody on the boulevard?"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Miss Odette and Doña Carmen! Come on!",
    "ctx": "chapter 2 (new)",
-   "script": "[urgent] Miss Odette and Doña Carmen! Come on!"
+   "script": "[alarmed] Miss Odette and Doña Carmen! [urging] Come on!"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Miss Odette, it's me! Can I get a bowl of gumbo?",
    "ctx": "chapter 2 (new)",
-   "script": "[bright, hopeful] Miss Odette, it's me! Can I get a bowl of gumbo?"
+   "script": "[cheerful, hopeful] Miss Odette, it's me! [charming] Can I get a bowl of gumbo?"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Babe, this is bad. Every time I walk in here she yells \"Sit down, you're too skinny!\" before the door even closes.",
    "ctx": "chapter 2 (reworded)",
-   "script": "[worried, quiet] Babe, this is bad. Every time I walk in here she yells [louder, bossy] \"Sit down, you're too SKINNY!\" [quiet, worried] before the door even closes."
+   "script": "[worried] Babe, this is bad. [explaining] Every time I walk in here she yells [imitating her, bossy] \"Sit down, you're too SKINNY!\" [worried] before the door even closes."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Miss Odette? I'm sorry to bother you. TNB is standing up, and he's very skinny today.",
    "ctx": "chapter 2 (reworded)",
-   "script": "[polite, hopeful] Miss Odette? I'm sorry to bother you. TNB is standing up, and he's [earnest] VERY skinny today."
+   "script": "[overly polite] Miss Odette? I'm sorry to bother you. [baiting her, hopeful] TNB is standing up, and he's VERY skinny today."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Nothing. She's just like Mr. Washington.",
    "ctx": "chapter 2 (new)",
-   "script": "[worried, flat] Nothing. She's just like Mr. Washington."
+   "script": "[deflated] Nothing. [worried] She's just like Mr. Washington."
   },
   {
    "voice": "tnb",
@@ -434,63 +434,63 @@
    "speaker": "Tom",
    "text": "Doña Carmen, I'm so sorry. I'm coming behind your counter. I know nobody's allowed back here.",
    "ctx": "chapter 2 (new)",
-   "script": "[anxious, apologetic] Doña Carmen, I'm SO sorry. I'm coming behind your counter. [rushed] I know nobody's allowed back here."
+   "script": "[apologizing, nervous] Doña Carmen, I'm SO sorry. [announcing, guilty] I'm coming behind your counter. [rushed, apologizing] I know nobody's allowed back here."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "I flipped them. I'm ready for the towel. Go ahead.",
    "ctx": "chapter 2 (new)",
-   "script": "[proud] I flipped them. [bracing] I'm ready for the towel. [brave, quietly] Go ahead."
+   "script": "[reporting] I flipped them. [bracing] I'm ready for the towel. [brave] Go ahead."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "She smacks you with that towel if you even look at the griddle.",
    "ctx": "chapter 2 (new)",
-   "script": "[whispers, awed] She smacks you with that towel if you even LOOK at the griddle."
+   "script": "[whispering, awed] She smacks you with that towel if you even LOOK at the griddle."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "I know! I've never wanted to be hit with a towel so badly!",
    "ctx": "chapter 2 (new)",
-   "script": "[desperate] I KNOW! I've never wanted to be hit with a towel [pleading] so badly!"
+   "script": "[desperate] I KNOW! [yearning] I've never wanted to be hit with a towel so badly!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "The parking tickets can TALK now? They were bad enough when they were quiet!",
    "ctx": "chapter 2 (new)",
-   "script": "[outraged] The parking tickets can TALK now? They were bad enough [exasperated] when they were quiet!"
+   "script": "[outraged] The parking tickets can TALK now? [grumbling] They were bad enough when they were quiet!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "And I moved my car on Monday night! I set two alarms!",
    "ctx": "chapter 2 (new)",
-   "script": "[indignant] And I moved my car on Monday night! I set [precise, proud] TWO alarms!"
+   "script": "[indignant, pleading his case] And I moved my car on Monday night! [nit picky, proud] I set TWO alarms!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Fine. Can I pay it in SkyMiles?",
    "ctx": "chapter 2 (new)",
-   "script": "[flat, defeated] Fine. [short pause] [hopeful, scheming] Can I pay it in SkyMiles?"
+   "script": "[giving up] Fine. [scheming, hopeful] Can I pay it in SkyMiles?"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Excuse me! She is not a snack. She is our guest!",
    "ctx": "chapter 2 (new)",
-   "script": "[indignant] Excuse me! She is NOT a snack. [firm, polite] She is our guest!"
+   "script": "[offended, polite] Excuse me! [correcting] She is NOT a snack. [firm, proper] She is our guest!"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "We do have snacks, though. I've got half a bag of gummy worms.",
    "ctx": "chapter 2 (new)",
-   "script": "[easy, helpful] We DO have snacks, though. I've got half a bag of gummy worms."
+   "script": "[helpful, nonchalant] We DO have snacks, though. [offering] I've got half a bag of gummy worms."
   },
   {
    "voice": "grump",
@@ -504,308 +504,308 @@
    "speaker": "TNB",
    "text": "Babe, look at that tree. It's grey. The leaves, the trunk, even the dirt. It looks like an old black and white movie.",
    "ctx": "chapter 2 (new)",
-   "script": "[uneasy] Babe, look at that tree. It's GREY. The leaves, the trunk, even the dirt. It looks like [awed, quietly] an old black and white movie."
+   "script": "[uneasy] Babe, look at that tree. [disbelief] It's GREY. [listing, unsettled] The leaves, the trunk, even the dirt. [awed] It looks like an old black and white movie."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "There's one lemon on it. And the lemon is inside a block of something orange.",
    "ctx": "chapter 2 (new)",
-   "script": "[slowly, uneasy] There's one lemon on it. And the lemon is inside a block of something... [puzzled] orange."
+   "script": "[noticing, slowly] There's one lemon on it. [puzzled] And the lemon is inside a block of something... [baffled] orange."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "I've seen this before. There's one exactly like it at my parents' pond, with a dragonfly inside.",
    "ctx": "chapter 2 (new)",
-   "script": "[tense, quiet] I've seen this before. There's one EXACTLY like it at my parents' pond, with a dragonfly inside."
+   "script": "[recognizing, tense] I've seen this before. [serious] There's one EXACTLY like it at my parents' pond, with a dragonfly inside."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "On Long Island? Babe, that's three thousand miles away.",
    "ctx": "chapter 2 (new)",
-   "script": "[startled] On Long Island? Babe, that's [casual] three thousand miles away."
+   "script": "[startled] On Long Island? [nonchalant] Babe, that's three thousand miles away."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Two thousand four hundred and seventy-five.",
    "ctx": "chapter 2 (new)",
-   "script": "[snappy, firm] Two thousand four hundred and seventy-five."
+   "script": "[correcting, automatic] Two thousand four hundred and seventy-five."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "It's not glass, and it's not glaze. I work with this kind of stuff all day and I have no idea what it is.",
    "ctx": "chapter 2 (new)",
-   "script": "[curious] It's not glass, and it's not glaze. I work with this kind of stuff all day and I have [uneasy, slowly] NO idea what it is."
+   "script": "[investigating] It's not glass, and it's not glaze. [stumped] I work with this kind of stuff all day and I have NO idea what it is."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "There's a little round hole in the side, like somebody took a bite out of it.",
    "ctx": "chapter 2 (new)",
-   "script": "[puzzled] There's a little round hole in the side, like somebody [uneasy] took a bite out of it."
+   "script": "[investigating] There's a little round hole in the side, [uneasy] like somebody took a bite out of it."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "The one at the pond has the same hole. And you can't pull it off. Rose tried, and then I tried.",
    "ctx": "chapter 2 (new)",
-   "script": "[matter-of-fact] The one at the pond has the same hole. And you can't pull it off. Rose tried, [sheepish, quieter] and then I tried."
+   "script": "[informing] The one at the pond has the same hole. [warning] And you can't pull it off. [admitting, sheepish] Rose tried, and then I tried."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Can I try anyway?",
    "ctx": "chapter 2 (new)",
-   "script": "[hopeful, easy] Can I try anyway?"
+   "script": "[undeterred, nonchalant] Can I try anyway?"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Okay. Wow. Your turn.",
    "ctx": "chapter 2 (new)",
-   "script": "[stunned] Okay. Wow. [short pause] [easy, quick] Your turn."
+   "script": "[stunned] Okay. Wow. [conceding] Your turn."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "I already lost to the small one. ...Maybe it's easier in California.",
    "ctx": "chapter 2 (new)",
-   "script": "[sheepish] I already lost to the SMALL one. [hopeful] ...Maybe it's easier in California."
+   "script": "[admitting] I already lost to the SMALL one. [hopeful, reasoning] ...Maybe it's easier in California."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "It's not easier in California.",
    "ctx": "chapter 2 (new)",
-   "script": "[flat, defeated] It's NOT easier in California."
+   "script": "[defeated, flat] It's NOT easier in California."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "It's a burnt-out flashbulb. My mother found one exactly like it next to the dragonfly.",
    "ctx": "chapter 2 (new)",
-   "script": "[uneasy, quiet] It's a burnt-out flashbulb. My mother found one exactly like it next to the dragonfly."
+   "script": "[recognizing, uneasy] It's a burnt-out flashbulb. [serious] My mother found one exactly like it next to the dragonfly."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Who leaves the same bulb at a pond in New York and on a hill in Los Angeles?",
    "ctx": "chapter 2 (new)",
-   "script": "[puzzled, uneasy] Who leaves the same bulb at a pond in New York... AND on a hill in Los Angeles?"
+   "script": "[puzzling it out] Who leaves the same bulb at a pond in New York... [uneasy] AND on a hill in Los Angeles?"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "I don't know. And I really don't like it.",
    "ctx": "chapter 2 (new)",
-   "script": "[serious, quiet] I don't know. And I REALLY don't like it."
+   "script": "[serious] I don't know. [admitting, quiet] And I REALLY don't like it."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Me neither. And I like almost everything.",
    "ctx": "chapter 2 (new)",
-   "script": "[shaken] Me neither. And I like... [deadpan] almost everything."
+   "script": "[agreeing, shaken] Me neither. [punchline, deadpan] And I like almost everything."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "That hill has EYES! The whole hill just stood up!",
    "ctx": "chapter 2 (new)",
-   "script": "[startled, shouts] That hill has EYES! The whole hill just stood up!"
+   "script": "[shouting, shocked] That hill has EYES! [disbelief] The whole hill just stood up!"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Babe. I take naps on that hill.",
    "ctx": "chapter 2 (new)",
-   "script": "[hushed, appalled] Babe. I take... [slowly] NAPS on that hill."
+   "script": "[horrified, hushed] Babe. [confessing] I take NAPS on that hill."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "I think you've been napping on his face!",
    "ctx": "chapter 2 (new)",
-   "script": "[shocked] I think you've been napping [amazed, louder] on his FACE!"
+   "script": "[realizing, horrified] I think you've been napping on his FACE!"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "I'm so sorry, sir!",
    "ctx": "chapter 2 (new)",
-   "script": "[mortified, polite] I'm SO sorry, sir!"
+   "script": "[mortified, apologizing] I'm SO sorry, sir!"
   },
   {
    "voice": "bigone",
    "speaker": "The Big Shake",
    "text": "RUMBLE. There was a big flash up here this morning, and it woke me up.",
    "ctx": "chapter 2 (reworded)",
-   "script": "[deep, rumbling] RUMBLE. [groggy, slowly] There was a big flash up here this morning, and it woke me up."
+   "script": "[deep, rumbling] RUMBLE. [groggy, grumpy] There was a big flash up here this morning, and it woke me up."
   },
   {
    "voice": "bigone",
    "speaker": "The Big Shake",
    "text": "A million years under this city, and everybody up top is always leaving. Today nobody leaves. Not ever.",
    "ctx": "chapter 2 (reworded)",
-   "script": "[deep, lonely] A million years under this city, and everybody up top is ALWAYS leaving. Today [low, firm] nobody leaves. Not ever."
+   "script": "[deep, lonely] A million years under this city, and everybody up top is ALWAYS leaving. [stubborn, firm] Today nobody leaves. [pouting] Not ever."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "He'd know. He has four hundred and twelve thousand miles.",
    "ctx": "chapter 2 (new)",
-   "script": "[dry, fond] He'd know. He has four hundred and twelve THOUSAND miles."
+   "script": "[dry, vouching for him] He'd know. [sarcastic, fond] He has four hundred and twelve THOUSAND miles."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "I'm sorry I kept falling asleep on you. I didn't know you were a person.",
    "ctx": "chapter 2 (new)",
-   "script": "[sincere] I'm sorry I kept falling asleep on you. I didn't know [sheepish] you were a PERSON."
+   "script": "[apologizing, sincere] I'm sorry I kept falling asleep on you. [sheepish] I didn't know you were a PERSON."
   },
   {
    "voice": "bigone",
    "speaker": "The Big Shake",
    "text": "I liked the naps. You were the only one who ever stayed.",
    "ctx": "chapter 2 (new)",
-   "script": "[deep, gentle] I liked the naps. You were the only one [softly, touched] who ever stayed."
+   "script": "[deep, gentle] I liked the naps. [admitting, lonely] You were the only one who ever stayed."
   },
   {
    "voice": "bigone",
    "speaker": "The Big Shake",
    "text": "Something shiny has been stuck in my pipe all day. It tickles. Ah... ah... A-CHOO!",
    "ctx": "chapter 2 (new)",
-   "script": "[deep, rumbling] Something shiny has been stuck in my pipe all day. It TICKLES. [building, louder] Ah... ah... A-CHOO!"
+   "script": "[deep, complaining] Something shiny has been stuck in my pipe all day. [ticklish] It TICKLES. [building to a sneeze] Ah... ah... [huge, explosive] A-CHOO!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "It's a gold coin with a lemon on it. Rose's has a dragonfly.",
    "ctx": "chapter 2 (new)",
-   "script": "[amazed, quiet] It's a gold coin with a LEMON on it. Rose's has a dragonfly."
+   "script": "[examining, amazed] It's a gold coin with a LEMON on it. [connecting it] Rose's has a dragonfly."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "The one the fish gave her?",
    "ctx": "chapter 2 (new)",
-   "script": "[curious] The one the FISH gave her?"
+   "script": "[checking] The one the FISH gave her?"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Yes. A fish gave her one, and now a hill sneezed one at me.",
    "ctx": "chapter 2 (new)",
-   "script": "[baffled] Yes. A fish gave her one, and now a hill... [disbelief] SNEEZED one at me."
+   "script": "[confirming] Yes. [baffled, tallying] A fish gave her one, and now a hill... [disbelief] SNEEZED one at me."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Nara thinks it's a very small frisbee.",
    "ctx": "chapter 2 (new)",
-   "script": "[amused, dry] Nara thinks it's a very small frisbee."
+   "script": "[amused, observing] Nara thinks it's a very small frisbee."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Nara, I'm sorry. We don't play fetch with gold.",
    "ctx": "chapter 2 (new)",
-   "script": "[gentle, apologetic] Nara, I'm sorry. We don't play fetch with GOLD."
+   "script": "[apologizing to the dog] Nara, I'm sorry. [gently explaining] We don't play fetch with GOLD."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "The hill said a flash woke it up this morning. The fish at the pond said the same thing.",
    "ctx": "chapter 2 (reworded)",
-   "script": "[thoughtful, uneasy] The hill said a flash woke it up this morning. The fish at the pond said the SAME thing."
+   "script": "[thinking out loud] The hill said a flash woke it up this morning. [uneasy, connecting it] The fish at the pond said the SAME thing."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Two flashes, two orange blocks and two gold coins. Babe, I don't love that. Let's go check on Mr. Washington.",
    "ctx": "chapter 2 (reworded)",
-   "script": "[careful, slowly] Two flashes, two orange blocks and two gold coins. Babe, [uneasy] I don't love that. [brisk] Let's go check on Mr. Washington."
+   "script": "[tallying, slowly] Two flashes, two orange blocks and two gold coins. [understating, uneasy] Babe, I don't love that. [deciding] Let's go check on Mr. Washington."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "That's ten times now. It gets better every time.",
    "ctx": "chapter 2 (new)",
-   "script": "[fond, amused] That's TEN times now. It gets better every time."
+   "script": "[fond, amused] That's TEN times now. [sincere] It gets better every time."
   },
   {
    "voice": "odette",
    "speaker": "Miss Odette",
    "text": "I brought gumbo for the whole block. TNB! Sit DOWN. You're too skinny!",
    "ctx": "chapter 2 (new)",
-   "script": "[light Louisiana Creole accent, warm, booming] I brought gumbo for the whole block. TNB! [light Louisiana Creole accent, bossy, louder] Sit DOWN. You're too skinny!"
+   "script": "[light Louisiana Creole accent, announcing, warm] I brought gumbo for the whole block. [light Louisiana Creole accent, scolding, loud] TNB! Sit DOWN. You're too skinny!"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Yes, ma'am!",
    "ctx": "chapter 2 (new)",
-   "script": "[delighted, obedient] YES, ma'am!"
+   "script": "[overjoyed, obedient] YES, ma'am!"
   },
   {
    "voice": "carmen",
    "speaker": "Doña Carmen",
    "text": "And YOU. Who went behind my counter?",
    "ctx": "chapter 2 (new)",
-   "script": "[light Salvadoran accent, stern] And YOU. [light Salvadoran accent, sharp, slowly] Who went behind my counter?"
+   "script": "[light Salvadoran accent, stern] And YOU. [light Salvadoran accent, interrogating] Who went behind my counter?"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Thank you, Doña Carmen! That's the best towel I've ever been hit with!",
    "ctx": "chapter 2 (new)",
-   "script": "[thrilled, grateful] THANK you, Doña Carmen! That's the best towel I've ever been hit with!"
+   "script": "[overjoyed, grateful] THANK you, Doña Carmen! [sincere, thrilled] That's the best towel I've ever been hit with!"
   },
   {
    "voice": "carmen",
    "speaker": "Doña Carmen",
    "text": "They came out perfectly crispy. Don't ever do it again.",
    "ctx": "chapter 2 (new)",
-   "script": "[light Salvadoran accent, grudging] They came out perfectly crispy. [light Salvadoran accent, stern] Don't EVER do it again."
+   "script": "[light Salvadoran accent, grudgingly impressed] They came out perfectly crispy. [light Salvadoran accent, warning] Don't EVER do it again."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Babe. Gumbo. Go get the bread bowl!",
    "ctx": "chapter 2 (new)",
-   "script": "[excited] Babe. [snappy] Gumbo. Go get the BREAD bowl!"
+   "script": "[excited, realizing] Babe. Gumbo. [urging] Go get the BREAD bowl!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "It has a hole in the top. I gave that piece to Nara.",
    "ctx": "chapter 2 (new)",
-   "script": "[sheepish] It has a hole in the top. I gave that piece [quietly] to Nara."
+   "script": "[confessing, sheepish] It has a hole in the top. [guilty] I gave that piece to Nara."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "That's not a hole. That's where the gumbo goes in.",
    "ctx": "chapter 2 (new)",
-   "script": "[cheerful] That's not a hole. That's where the gumbo [playful] goes IN."
+   "script": "[reassuring] That's not a hole. [punchline] That's where the gumbo goes IN."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "With two thousand four hundred and seventy-five miles in between.",
    "ctx": "chapter 2 (new)",
-   "script": "[softly, fond] With two thousand four hundred and seventy-five miles in between."
+   "script": "[tender, wistful] With two thousand four hundred and seventy-five miles in between."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Each way. That's a lot of SkyMiles.",
    "ctx": "chapter 2 (new)",
-   "script": "[wry] Each way. [warm, happy] That's a LOT of SkyMiles."
+   "script": "[nit picky] Each way. [punchline, content] That's a LOT of SkyMiles."
   }
  ]
 }
