@@ -68,7 +68,8 @@ function talkToShopkeeper(n) {
   if(!n.visitedOnce) {
     n.visitedOnce=true;
     n.onClose=()=>openShop(pick((SHOPK||PENNY).hello));
-    openDialog(n.name,(SHOPK||PENNY).intro,n);
+    // Before the theft monsters are not ordinary yet: Penny does not mention snacks for fights or things that go POP.
+    openDialog(n.name,(SHOPK||PENNY).intro.filter(l=>!(SHOPK===PENNY&&/snacks for fights/.test(l)&&storyMatch({chapter:1,notFlag:'ch1-theft'}))),n);
     return;
   }
   n.facing=directionTo(player.x-n.x,player.y-n.y);

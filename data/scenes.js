@@ -307,6 +307,7 @@ SCENES.ch1AfterBoss=[
   {if:()=>!!flag('kind:bigone'),then:[{talk:'The Big One',lines:['And this is for the small one. It\'s my shiniest thing.']}],else:[]},
   {ch1Reveal:'coin'},
   {talk:'Rose',lines:['It has a bug on it! I\'m keeping it.']},
+  {if:()=>!bag.includes('dragonflycoin'),then:[{give:'dragonflycoin'}],else:[]},
   {talk:'Tom',lines:['This one you can keep.']},
   {talk:'The Big One',lines:['The old man with the cap. Is he coming tomorrow?']},
   {talk:'Grace',lines:['Boppy? He comes every day.']},

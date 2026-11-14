@@ -50,6 +50,7 @@ const items={
   fishline:{sell:14,name:'Spool of Line',icon:'\u{1F9F5}',slot:'Charm',desc:'Twenty yards of fishing line, somehow not tangled. Nothing slows you down.',perk:{immune:['slow']}},
   driftwood:{sell:15,name:'Driftwood Stick',icon:'\u{1FAB5}',slot:'Tool',desc:'Smooth from years in the marsh. Good for poking. Better for bonking.',stats:{pow:5,warmth:2}},
   pepperjar:{name:'Boppy’s Pepper Jar',icon:'\u{1FAD9}',slot:null,keepsake:true,desc:'Homegrown, pickled, and older than Amy. Still sealed. Still hot.'},
+  dragonflycoin:{name:'Dragonfly Coin',icon:'\u{1FA99}',slot:null,keepsake:true,desc:'Gold, stamped with a dragonfly. The Big One gave it to Rose, and Rose is keeping it in her pocket.'},
   oldcoin:{name:'Old Gold Coin',icon:'\u{1FA99}',slot:null,keepsake:true,desc:'Found wedged in the sundial. Heavy, worn smooth, and stamped with a little clock face. Somebody wants these.'},
   // Chapter 4 drops (the studio lot, data/backlot-monsters.js) and rewards.
   callsheet:{sell:2,name:'Call Sheet',icon:'\u{1F4C4}',slot:null,desc:'Call time 4 AM. Lunch at 1 PM. Wrap: TBD. It\'s always TBD.'},
