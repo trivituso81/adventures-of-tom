@@ -24077,8 +24077,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The finished painting of Tom, a tall grown man. 2) His walking sheet. 3) The finished painting of Grace, a nine year old girl. 4) Her walking sheet.\n\nPAINT THIS ONE POSE\nTom, standing with his feet apart, holding Grace up under her arms with both hands, her feet dangling a foot above the ground. Grace is high up and leaning forward, her face turned up to look at something above them and her hands held carefully behind her back, not touching anything, a serious, eager look. Tom is looking up at her with a calm, ready face. Both are seen from the side, facing right. Keep Grace's size correct compared to Tom: she is a child about half his height.\nStanding on a plain flat magenta #FF00FF background, nothing else in the picture, no text, no shadow on the ground.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Copy Tom and Grace from the attached pictures as exactly as possible: the same faces, ages, bodies, head sizes compared to their bodies, hair, clothes, colors, painting style and level of detail."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/ch5-rose-grin-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794668024590
+    }
+   ],
    "rejects": [],
    "id": "ch5-rose-grin",
    "tab": "Characters",
