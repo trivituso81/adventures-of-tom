@@ -202,10 +202,17 @@ function monsterFall(n,force) {
   n.defeatedUntil=0; n.chasing=false; n.alert=0; n.move=null;
   for(const m of Object.values(worlds)) { const i=m.npcs.indexOf(n); if(i>=0) { m.npcs.splice(i,1); (m.fallen=m.fallen||[]).push(n); return; } }
 }
+// A boss beaten in the story never comes back to fight (Tom, report r-20261114-102058-62ho): it stays in its finished state
+// (engine/boss-finale.js bossSettle) or stays gone. Ordinary monsters return as before.
+function bossBeaten(n) { return !!(n&&n.monster&&typeof b7IsBoss==='function'&&b7IsBoss(n)&&typeof STORY!=='undefined'&&STORY.mode==='full'&&typeof flag==='function'&&flag('battle:'+n.monster)==='win'); }
 function monstersReturn(map) {
   if(!map||!map.fallen||!map.fallen.length) return;
-  for(const n of map.fallen) { if(n.home) { n.x=n.home.x; n.y=n.home.y; } n.move=null; n.chasing=false; n.chaseOff=0; n.defeatedUntil=0; map.npcs.push(n); }
-  map.fallen=[];
+  const keep=[];
+  for(const n of map.fallen) {
+    if(bossBeaten(n)) { if(typeof bossSettle==='function'&&bossSettle(n)) map.npcs.push(n); else keep.push(n); continue; }
+    if(n.home) { n.x=n.home.x; n.y=n.home.y; } n.move=null; n.chasing=false; n.chaseOff=0; n.defeatedUntil=0; map.npcs.push(n);
+  }
+  map.fallen=keep;
 }
 
 // Saves keep the monsters already beaten in the area Tom is standing in (Tom 2026-11-12: saving and reloading in the same area must

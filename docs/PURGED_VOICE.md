@@ -167,3 +167,7 @@ Chapter 3 was rebuilt to the locked story (claude/story-ch03.md). Dropped, can n
 
 Dropped, can never play: the narration boxes now shown as actions (the bell, the pen leaving, conference night, Nara sitting on Tom's feet and her sigh, "Tom wiggles free"), and three Red Pen lines about the man in the long coat and the reworded "I did. I made the bells..." line. Spec: tools/clip-audit/purge-ch5build1.json.
 
+
+## 2026-11-14 (`backlog1`): 2 clips
+
+Reworded by Tom's reports, so the old clips can never play: `grace|It's so brown. It's the brownest thing I've ever seen.` and `tom|I'm trying, Rose. It's a marble and it's winning.` (data/voice/dialog-ch28.js, about 69 KB). Both lines need a re-record.

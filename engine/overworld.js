@@ -200,6 +200,7 @@ function pressAction() {
     if(n.shopkeeper) { talkToShopkeeper(n); return; }
     if(n.driver) { talkToDriver(n); return; }
     // What they say comes from their spec (data/maps-*.js): first-visit lines, or a `when` variant for this chapter/flags.
+    if(n.settled) return;   // a beaten boss in its finished state (bossSettle) is not fought again
     if(n.monster&&b7Overlevel(n)) { b7InstantWin(n); return; }   // way stronger: instant win (engine/feel.js)
     let lines=npcLines(n);
     if(n.monster) lines=n.lines=monsterLines(n);

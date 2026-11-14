@@ -116,6 +116,12 @@ with sync_playwright() as pw:
                 elif st['a'] and not st['d'] and not st['battle'] and os.environ.get('FIN'):
                     # no dialogue on screen: a finale or a walk is playing; keep a frame of it
                     fn=os.path.join(OUT,f"{C['name']}-fin-{len(fins):02d}.png"); pg.screenshot(path=fn); fins.append(fn); pg.wait_for_timeout(250)
+        for _ in range(100 if C.get('post') else 0):   # let the last scene finish before the post checks
+            if not pg.evaluate("()=>intro.active||dialog.active"): break
+            pg.wait_for_timeout(200)
+        for j,js in enumerate(C.get('post',[])):   # report fixes: code run after the scenes (a JS expression); each result and a frame are kept
+            info.setdefault('post',[]).append(pg.evaluate("()=>("+js+")")); pg.wait_for_timeout(700)
+            pg.screenshot(path=os.path.join(OUT,f"{C['name']}-post-{j:02d}.png"))
         res[C['name']]={'info':info,'snaps':snaps,'errs':errs[:5]}
         if shots:
             ims=[Image.open(f) for f in shots]; cols=6; w,h=ims[0].size; sc_=300/w; tw,th=int(w*sc_),int(h*sc_); rows=(len(ims)+cols-1)//cols

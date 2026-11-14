@@ -65,6 +65,7 @@ function battlePartyList() { return battle.v2?B2.party:party; }
 // cfg: party (ids), level (number) or levels ({id:level}), foes ([id,row,level] or {id,row,level}), bag (array; the real
 // bag in the full game), npc (the overworld monster, for rewards), carry (HP carries over), onEnd(result).
 function b2Start(cfg) {
+  B7.skipNow=false;
   B2.cfg=cfg; B2.onEnd=cfg.onEnd||null; B2.result=null; B2.stolen=[]; B2.round=0; B2.coinsWon=0; B2.prev=null; B2.move=null; B2.aim=null;
   B2.pieUsed=false; B2.snackWait=null; b7BattleStart();   // engine/feel.js
   B2.party=cfg.party.map((id,i)=>b2PartyUnit(id,(cfg.levels&&cfg.levels[id])||cfg.level||1,i,cfg.carry));
@@ -152,6 +153,7 @@ function b2Invincible(u) {
 function b2Advance() {
   if(!B2.active) return;
   b2Infinite();
+  if(B7.skipNow) { B7.skipNow=false; for(const c of b2LiveFoes()) { c.hp=0; b2FoeDown(c); } }   // WIN NOW (engine/feel.js b7SkipFight)
   if(B2.foes.some(f=>f.boss&&!b2Alive(f))) for(const c of b2LiveFoes()) if(c.D.inert) { c.hp=0; b2FoeDown(c); }   // buried acorns go with their boss
   if(!b2LiveFoes().length) return b2Win();
   if(!b2LiveParty().length) return b2Lose();

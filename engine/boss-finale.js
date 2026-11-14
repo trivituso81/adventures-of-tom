@@ -128,6 +128,27 @@ function bossFinaleStep(id) {
   };
 }
 SCENE_OPS.finale=o=>bossFinaleStep(o.finale);
+// Beaten bosses stay beaten (report r-20261114-102058-62ho): a boss whose ending is 'stay' returns to the map in its last painted
+// frame at the spot it ended on (The Big One floats in the pond), cannot be fought and ignores A; a leaving boss stays gone.
+function bossSettle(n) {
+  const sp=BOSS_FINALE[n.monster]; if(!sp||sp.end!=='stay'||typeof FOE_END==='undefined'||!FOE_END[n.monster]) return false;
+  const last=sp.seq[sp.seq.length-1],to=sp.path&&sp.path.to,fromX=n.home?n.home.x:n.x;
+  if(to) { n.x=to[0]; n.y=to[1]; } else if(n.home) { n.x=n.home.x; n.y=n.home.y; }
+  n.move=null; n.chasing=false; n.alert=0; n.settled=true; n.defeatedUntil=Infinity; n.scr=null;
+  n.fin={glow:Math.max(0,last.glow!==undefined?(Array.isArray(last.glow)?last.glow[1]:last.glow):0)*.6};
+  n.scenePose={foe:last.f,end:n.monster,dir:(to&&to[0]<fromX)?'left':'right'};
+  return true;
+}
+// Run from storyWorld (every frame outside cutscenes): puts every beaten boss, wherever it is waiting, into its finished state.
+function bossSettleAll() {
+  if((typeof intro!=='undefined'&&intro.active)||(typeof battle!=='undefined'&&battle.active)) return;
+  for(const m of Object.values(worlds)) for(const n of m.npcs.concat(m.fallen||[])) {
+    if(n.settled||n.bossAwait||n.bossSettle||n.sunk||!bossBeaten(n)) continue;
+    const fi=(m.fallen||[]).indexOf(n),ni=m.npcs.indexOf(n); if(fi>=0) m.fallen.splice(fi,1);
+    if(bossSettle(n)) { if(ni<0) m.npcs.push(n); } else { if(ni>=0) m.npcs.splice(ni,1); (m.fallen=m.fallen||[]).push(n); }
+  }
+}
+
 // Safety net 1: a boss left standing after a win with no scene playing leaves after a few seconds.
 const LE_updateNPCs_boss=updateNPCs;
 updateNPCs=function(dt) {

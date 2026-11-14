@@ -618,6 +618,7 @@ function updateNPCs(dt) {
     if(n.still) { if(!(dialog.active&&dialog.npc===n)) n.facing=n.arriveFace||n.still; continue; }   // posed NPC (data/scenes.js ch9Pose): never walks, turns back to its pose after a chat
     if(n.move&&!advanceMove(n,dt)) continue;
     if(n.amber) { n.path=[]; n.idle=1; continue; }   // set in amber (chapters 12 and 14): never wanders (Tom 2026-11-12)
+    if(n.stageRoute&&n.stageRoute.length) { const nx=n.stageRoute.shift(); if(startMove(n,directionTo(nx.x-n.x,nx.y-n.y))) { if(n.move) n.move.duration*=.5; } else n.stageRoute=[]; continue; }   // a monster walking out of a scene's picture (stageShooOut)
     if(n.monster) { b7MonsterTick(n,dt); continue; }   // wandering monsters (engine/feel.js)
 
     if(n.path.length) {

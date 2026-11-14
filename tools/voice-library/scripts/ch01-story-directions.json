@@ -53,9 +53,9 @@
   {
    "voice": "grace",
    "speaker": "Grace",
-   "text": "It's so brown. It's the brownest thing I've ever seen.",
+   "text": "It's so brown. It looks like a poop. A very fancy poop.",
    "ctx": "chapter 1 (new)",
-   "script": "[disgusted] It's SO brown. [dramatic, declaring] It's the brownest thing I've ever seen."
+   "script": "[disgusted] It's SO brown. [dramatic, declaring] It looks like a poop. [gleeful] A very fancy poop."
   },
   {
    "voice": "grace",
@@ -144,9 +144,9 @@
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "I'm trying, Rose. It's a marble and it's winning.",
+   "text": "I'm trying, Rose. Please don't tell Grace I lost to a marble.",
    "ctx": "chapter 1 (new)",
-   "script": "[patient, strained] I'm trying, Rose. [punchline, admitting defeat] It's a marble... and it's winning."
+   "script": "[patient, strained] I'm trying, Rose. [punchline, admitting defeat] Please don't tell Grace I lost to a marble."
   },
   {
    "voice": "grace",

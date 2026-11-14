@@ -417,7 +417,7 @@ const stagePos=a=>{ const p=position(a); return {x:Math.round(p.x),y:Math.round(
 // map (plus the scene's boss even while it is still hidden: it is about to rise there; not a boss that has finished its ending and settled). stageInBox: a person on tile (x,y) would overlap one.
 function stageBox(a) { const d=typeof monsterDef==='function'?monsterDef(a):null; if(!d||!d.sprite) return null;
   const s=monScale(a),p=stagePos(a); return {x:p.x,y:p.y,hw:d.sprite[0].length*s/2/T,ht:d.sprite.length*s/T,a}; }
-const stageBoxes=also=>currentMap.npcs.filter(n=>n.monster&&!n.bossSettle&&(!n.hidden||n===also)).map(stageBox).filter(Boolean);
+const stageBoxes=also=>currentMap.npcs.filter(n=>n.monster&&!n.bossSettle&&(!n.hidden||n===also)&&!stageExtra(n)).map(stageBox).filter(Boolean);
 const stageInBox=(B,x,y)=>B.some(b=>Math.abs(x-b.x)<b.hw+.6&&y>b.y-b.ht&&y<b.y+2.3);
 // Where Tom stands for a boss: on its LEFT ("characters need to stand to the left"), a tile clear of the boss and of any monster beside it,
 // level with it, reachable on foot. null when there is no such tile within reach.
@@ -449,7 +449,10 @@ function stageSpots(focus,movers,fixed,tpos,B=[]) {
   const dx=focus?focus.x-tx:0,dy=focus?focus.y-ty:1,side=Math.abs(dx)>=Math.abs(dy);
   const b=side?(dx>0?-1:1):0,v=side?0:(dy<0?1:-1);   // b: one column away from the focus (side bosses); v: one row away (bosses above or below)
   // Ideal offsets from Tom, best first. Side boss: a tight staggered block just behind him (close1: neighbours one column over, never the same column within two rows). Boss above or below: a row abreast, then a staggered second row.
-  const ideal=side?[[b,1],[2*b,0],[b,-2],[2*b,3],[3*b,1],[3*b,-2]]:[[-1,0],[1,0],[-2,v],[2,v],[-3,0],[3,0]];
+  // An ordinary monster (not a boss): the party lines up beside Tom in a staggered row, everyone next to someone (report r-20261114-101021-sybk:
+  // Deedee stood three rows above the line; Tom: "DD should be standing next to Tom").
+  const plain=focus&&focus.actor&&focus.actor.monster&&typeof b7IsBoss==='function'&&!b7IsBoss(focus.actor);
+  const ideal=side?(plain?[[b,1],[2*b,0],[3*b,1],[b,-2],[2*b,3],[3*b,-2]]:[[b,1],[2*b,0],[b,-2],[2*b,3],[3*b,1],[3*b,-2]]):[[-1,0],[1,0],[-2,v],[2,v],[-3,0],[3,0]];
   const taken=[{x:tx,y:ty},...fixed];
   const busy=new Set(),memo=new Map();
   for(const n of map.npcs) if(!n.hidden&&!stageExtra(n)) { const p=stagePos(n); busy.add(key(p.x,p.y)); }
@@ -496,7 +499,8 @@ function gatherStep(o) {
           if(t&&(t.x!==tp.x||t.y!==tp.y)) { tpos=t; player.x=tp.x; player.y=tp.y; player.move=null; this.tom={a:player,path:findPath(currentMap,{x:tp.x,y:tp.y},t),i:0}; } } }
       if(o.check&&!tpos) {
         const vis=[player,...all].filter(a=>!a.hidden),P=vis.map(stagePos);
-        const crowded=movers.some(f=>{ const i=vis.indexOf(f); return onBoss(f)||P.some((q,j)=>j!==i&&!stageApart(P[i],q)); });
+        const crowded=movers.some(f=>{ const i=vis.indexOf(f); return onBoss(f)||P.some((q,j)=>j!==i&&!stageApart(P[i],q))
+          ||(!f.stagePlaced&&(Math.abs(P[i].x-tp.x)>3||Math.abs(P[i].y-tp.y)>2)); });   // report r-20261114-101021-sybk: a party member left three rows off stands next to Tom
         if(!crowded) { if(this.focus&&this.focus.seen) { for(const f of movers) if(!f.stageFaced&&!f.move&&f.facing!==faceWant(f,this.focus)) faceToward(f,this.focus);
           if(!player.stageFaced&&!player.scenePose&&!player.move) faceToward(player,this.focus); } return; }
       }
@@ -816,7 +820,10 @@ const stageInZone=p=>!!stageZone&&p.x>=stageZone.x0&&p.x<=stageZone.x1&&p.y>=sta
 // just be totally cleared out of that area in a different part of the map, giving preference to the player characters"): someone who wanders
 // (roam above 0), is not held, posed, seated or spawned by the scene, and whose name appears nowhere in the scene's script (intro.sceneCast).
 // Extras never count when the party picks its spots (every `busy` list skips them), and stageClearOut walks them away.
-const stageExtra=n=>!!(intro.active&&intro.sceneCast&&n&&!n.hidden&&!n.held&&!n.still&&!n.scripted&&!n.monster&&!n.seat&&n.roam>0&&!n.kid&&n!==player&&!followers.includes(n)&&n!==intro.sceneCast.npc&&!intro.sceneCast.text.includes(n.name));
+// An ordinary monster that is not in the scene is an extra too (report r-20261114-101021-sybk, Tom: "if there was a monster in her way, the
+// enemy should have to move, not DD"): it walks off like a passer-by and never claims a spot. A boss, or a monster the scene names by its
+// name or its id (a fight it starts), stays.
+const stageExtra=n=>!!(intro.active&&intro.sceneCast&&n&&!n.hidden&&!n.held&&!n.still&&!n.scripted&&!n.seat&&(n.monster?(typeof b7IsBoss!=='function'||!b7IsBoss(n))&&!intro.sceneCast.text.includes('"'+n.monster+'"'):(n.roam>0&&!n.kid))&&n!==player&&!followers.includes(n)&&n!==intro.sceneCast.npc&&!intro.sceneCast.text.includes(n.name));
 function stageCast(list) { let text=''; try { text=JSON.stringify(list,(k,v)=>typeof v==='function'?String(v):v)||''; } catch(e) {}
   return {text,speakers:sceneSpeakers(list),npc:typeof dialog!=='undefined'&&dialog.npc?dialog.npc:null}; }
 // Every extra standing in the picture (stageZone) walks, quickly, to the nearest free tile outside it. Returns the ones sent off.
@@ -839,6 +846,7 @@ function stageShooOut() {
       const route=[]; for(let c=goal;c&&!(c.x===p.x&&c.y===p.y);c=prev.get(key(c.x,c.y))) route.unshift(c);
       return {goal,route,out:!stageInZone(goal),d:far(goal)}; };
     const A=search(true),B=A&&(A.out||A.d>=6)?null:search(false);
+    if(n.monster&&!(B&&(!A||B.out||B.d>A.d+2))&&A&&A.route.length) { n.stageRoute=A.route.slice(); n.stageShoo=true; n.chasing=false; n.alert=0; n.idle=2; out.push(n); continue; }   // a monster walks out along its route (updateNPCs)
     if(B&&(!A||B.out||B.d>A.d+2)) { n.x=B.goal.x; n.y=B.goal.y; n.move=null; n.path=[]; n.idle=2; out.push(n); continue; }
     if(A&&A.route.length) { n.path=A.route; n.stageShoo=true; n.idle=2; out.push(n); } }
   return out;
@@ -1189,7 +1197,7 @@ function storyArriveFace() {
 const LE_switchMap_story=switchMap;
 switchMap=function(portal) { LE_switchMap_story(portal); storyArriveFace(); };
 // Map rules for the story (data/scenes.js STORY_WORLD): run every frame outside cutscenes and right after a map change.
-function storyWorld() { if(STORY.mode==='full'&&typeof STORY_WORLD!=='undefined') for(const f of STORY_WORLD) f(); }
+function storyWorld() { if(STORY.mode==='full'&&typeof STORY_WORLD!=='undefined') { for(const f of STORY_WORLD) f(); if(typeof bossSettleAll==='function') bossSettleAll(); } }
 
 // Gates: an area spec can carry gates:[{at:[[x,y],...], cond, name, lines}] that close an exit while `cond` matches (storyMatch conditions).
 // Tom steps back and gets the gate's lines; a fallen branch is drawn across the opening.

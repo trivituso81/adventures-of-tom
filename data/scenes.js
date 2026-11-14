@@ -91,7 +91,7 @@ SCENES.ch1Goal=[
 // 2. Deedee and Boppy's house: the greeting, Tom's loaf, and the theft. Deedee joins.
 SCENES.ch1Theft=[
   {flag:'ch1-theft'},
-  {place:'Deedee',at:[7,9],dir:'down'}, {place:'Boppy',at:[10,8],dir:'down'},
+  {place:'Deedee',at:[7,9],dir:'down'}, {place:'Boppy',at:[12,4],dir:'right'},   // report r-20261114-100519-wlbn: Boppy is at the back of the house, facing right, busy elsewhere, until his line
   {walk:'tom',to:[[8,10]],speed:.25}, {face:'tom',dir:'up'},
   {place:'grace',at:[9,10],dir:'up'}, {place:'rose',at:[7,10],dir:'up'},
   {hearts:'Deedee'},
@@ -111,6 +111,7 @@ SCENES.ch1Theft=[
   {talk:'Tom',lines:['Mom, EVERYTHING gives you gas.']},
   {talk:'Deedee',lines:['And I eat it anyway. That\'s love, Tom.']},
   {flag:'tombo:deedee1'},
+  {walk:'Boppy',to:[[12,5],[12,6],[12,7],[11,7],[10,8]],speed:.3}, {face:'Boppy',dir:'down'},   // he walks over to his usual spot, then speaks
   {talk:'Boppy',lines:["Tom! Good. I'm not feeling good. It's the stomach."],voice:[['boppy','greet',0,"Tom! Good. I'm not feeling good. It's the stomach."]]},
   {sfx:'doorIn'}, {call:()=>storyPosesLoad('deedee')},
   {spawn:{name:'Big Mudling',monster:'mudling',mscale:1.34,at:[8,12],dir:'up'}},
@@ -169,7 +170,7 @@ SCENES.ch1Theft=[
   {talk:'Deedee',lines:['A WHAT climbed in my window?']},
   {talk:'Rose',lines:['It has EYES! The mud has EYES!']},
   {talk:'Deedee',lines:['Forty years in this kitchen. I\'ve had ants. I\'ve had a raccoon. I have never had THAT.']},
-  {talk:'Grace',lines:['It\'s so brown. It\'s the brownest thing I\'ve ever seen.']},
+  {talk:'Grace',lines:['It\'s so brown. It looks like a poop. A very fancy poop.']},
   {talk:'Tom',lines:['That was UNCALLED for!'],voice:[['tom','hurt',0,'That was UNCALLED for!']]},
   {talk:'Grace',lines:['It\'s running for the pond!']},
   {talk:'Deedee',lines:['It took the crisp AND my good tin! Grab your shoes, everybody. We\'re going after it, and I\'m coming with you.']},
@@ -193,8 +194,8 @@ SCENES.ch1Mudling=[
   {walk:'tom',to:[[6,19]],speed:.25}, {face:'tom',dir:'up'},
   {place:'grace',at:[7,19],dir:'up'}, {place:'rose',at:[7,20],dir:'up'}, {place:'deedee',at:[6,20],dir:'up'},
   {flag:'ch1-crumbs-a'},   // crumb pile and scatter on the steps (plate.js HOLLOW_TRAIL a)
+  {place:'Mudling',at:[9,16],dir:'left'},   // report r-20261114-100833-9dh8: the Mudling sits further right of the party and faces them (left)
   {talk:'Deedee',lines:['Look, rhubarb crumbs on the path. The little thief dropped them as it ran, so we can follow the trail.']},
-  {place:'Mudling',at:[7,16]},
   {talk:'Rose',lines:['Tata. The mud is MOVING.']},
   {sfx:'look'},
   {walk:'Mudling',to:[[8,16],[8,17],[7,17]],speed:.35},
@@ -251,7 +252,7 @@ SCENES.ch1Spot=[
   {talk:'Tom',lines:['Let me.']},
   ch1Tug('tom'), {sfx:'bonk'}, ch1Tug('tom'), {wait:.3},
   {talk:'Rose',lines:['You\'re not trying.']},
-  {talk:'Tom',lines:['I\'m trying, Rose. It\'s a marble and it\'s winning.']},
+  {talk:'Tom',lines:['I\'m trying, Rose. Please don\'t tell Grace I lost to a marble.']},
   {talk:'Grace',lines:['There\'s a little round hole in the side. Like somebody took a bite.']},
   {flag:'ch1-bulb'}, {call:()=>sfx.pickup()},
   {talk:'Deedee',lines:['And somebody left a burnt light bulb. Now they\'re littering at my pond too.']},
@@ -264,7 +265,7 @@ SCENES.ch1Spot=[
 // 4. The pond: the thief hands the tin to The Big One. Boss fight.
 SCENES.ch1Pond=[
   {flag:'ch1-pond'}, {call:()=>storyWorld()},
-  {hide:'The Big One'}, {cam:[16,12]},   // hold the camera between the party and the pond edge so The Big One (far right) is fully in frame
+  {hide:'The Big One'}, {cam:[16,9]},   // hold the camera between the party and the pond so The Big One (in the water, top right) is fully in frame
   // The painted heist frames (mh_*) face LEFT, toward the party, and already hold the tin, so no separate tin prop here.
   {spawn:{name:'Big Mudling',monster:'mudling',mscale:1.34,at:[21,12],dir:'left'}},
   {pose:'Big Mudling',f:['mh_scurry_a','mh_scurry_b'],fps:6,dir:'left'},
@@ -273,7 +274,7 @@ SCENES.ch1Pond=[
   {talk:'Grace',lines:['THERE! The thief! He still has the tin!']},
   {face:'Big Mudling',dir:'left'},
   {call:()=>{ sfx.splat(); sfx.thud(); }},
-  {pose:'The Big One',foe:'attack3',dir:'left'}, {show:'The Big One'},   // The Big One rises 3 tiles right of the thief (home spot 19,11) and faces the party; attack3 is his frown, the stance frame is the shocked one
+  {pose:'The Big One',foe:'attack3',dir:'left'}, {show:'The Big One'},   // The Big One rises in the pond water (home spot 18,8), right of the thief and faces the party; attack3 is his frown, the stance frame is the shocked one
   {talk:'The Big One',lines:['GLUB. Is that a pie? For me?']},
   {talk:'Big Mudling',lines:['Blub. I stole it for you, boss.']},
   {call:()=>{ const m=sceneActor('Big Mudling'); if(m) m.carry=null; setFlag('ch1-crown'); sfx.pickup(); }},
@@ -708,7 +709,7 @@ const STORY_WORLD=[
     if(under&&!b.sunk&&!b.fin) { b.sunk={x:b.x,y:b.y}; b.home={x:b.x,y:b.y}; b.x=15; b.y=7; b.move=null; b.hidden=true; }   // home stays the shore spot: a defeated Big One returns to `home`, and (15,7) is open water
     else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.home={x:b.sunk.x,y:b.sunk.y}; b.sunk=null; b.hidden=false; }
     // Once beaten he stays on the shore with the frown frame (the painted stance frame is the shocked one; scenes clear and reset scenePose).
-    if(!under&&flag('battle:bigone')==='win'&&!(b.scenePose&&b.scenePose.f)) b.scenePose={foe:'attack3',dir:'left'};
+    if(!under&&flag('battle:bigone')==='win'&&!b.settled&&!(b.scenePose&&b.scenePose.f)) b.scenePose={foe:'attack3',dir:'left'};
   },
   // Chapter 2: the Big Shake stays under the hill until the party reaches the Observatory.
   ()=>{

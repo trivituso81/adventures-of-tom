@@ -70,9 +70,13 @@ function monScale(a) {
 }
 const BOSS_FLIP=new WeakMap();
 function bossFacing(a,rows) {
-  if(!isMapBoss(a)||(a.scenePose&&a.scenePose.foe)||typeof player==='undefined'||!player) return rows;
-  const dx=position(player).x-position(a).x;
-  if(Math.abs(dx)>.5) a._bossFaceLeft=dx<0;   // dead zone: no flicker when the party is straight above or below
+  if(!a||!a.monster||(a.scenePose&&a.scenePose.foe)||typeof player==='undefined'||!player) return rows;
+  // An ordinary monster (report r-20261114-101145-rysi, Tom: "Enemy is facing the wrong way"): in a cutscene or while chasing it faces the
+  // party like a boss; otherwise it faces the way it walks (the painted sheets face RIGHT, so left is the mirror).
+  if(!isMapBoss(a)&&!(typeof intro!=='undefined'&&intro.active)&&!a.chasing) { a._bossFaceLeft=a.facing==='left'; }
+  else { const dx=position(player).x-position(a).x;
+    if(Math.abs(dx)>.5) a._bossFaceLeft=dx<0;   // dead zone: no flicker when the party is straight above or below
+    else if(a._bossFaceLeft===undefined) a._bossFaceLeft=a.facing==='left'; }
   if(!a._bossFaceLeft) return rows;
   let m=BOSS_FLIP.get(rows); if(!m) { m=mirrorRows(rows); BOSS_FLIP.set(rows,m); } return m;
 }

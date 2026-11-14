@@ -19,7 +19,7 @@ const B7_DIFF={
 // the same size in every chapter. (It used to scale monster POW, which the damage formula mostly cancelled out.)
 const B7_HF={mult:1.15,heart:5,open:.5,len:.6};               // the High-Five window, in battle seconds after a move starts
 const B7_MON={radius:2,leash:5,sight:4,chaseStep:.3,wanderStep:.62,over:5,popXp:.5};   // popXp: a tap-kill (overlevel instant win) pays this share of a real win's XP
-const B7={diff:'grace',speed:1,hf:true,auto:false,last:{},rec:null,hfWin:null,autoTimer:0,card:null,cardTimers:[],mapFx:[],noEngage:0,lastMap:null};
+const B7={diff:'grace',speed:1,hf:true,skipBtn:false,skipNow:false,auto:false,last:{},rec:null,hfWin:null,autoTimer:0,card:null,cardTimers:[],mapFx:[],noEngage:0,lastMap:null};
 
 // ---------- Settings ----------
 (function b7Load() {
@@ -28,10 +28,11 @@ const B7={diff:'grace',speed:1,hf:true,auto:false,last:{},rec:null,hfWin:null,au
     B7.speed=localStorage.getItem('aot-speed')==='2'?2:1;
     B7.hf=localStorage.getItem('aot-hf')!=='off';
     B7.autoSpend=localStorage.getItem('aot-autospend')!=='off';
+    B7.skipBtn=localStorage.getItem('aot-skipbtn')==='on';
   } catch(e) {}
 })();
 function b7Save() {
-  try { localStorage.setItem('aot-diff',B7.diff); localStorage.setItem('aot-speed',String(B7.speed)); localStorage.setItem('aot-hf',B7.hf?'on':'off'); localStorage.setItem('aot-autospend',B7.autoSpend===false?'off':'on'); } catch(e) {}
+  try { localStorage.setItem('aot-diff',B7.diff); localStorage.setItem('aot-speed',String(B7.speed)); localStorage.setItem('aot-hf',B7.hf?'on':'off'); localStorage.setItem('aot-skipbtn',B7.skipBtn?'on':'off'); localStorage.setItem('aot-autospend',B7.autoSpend===false?'off':'on'); } catch(e) {}
 }
 const b7Diff=()=>B7_DIFF[B7.diff]||B7_DIFF.grace;
 const b7Speed=()=>battle.active?B7.speed:1;
@@ -40,18 +41,26 @@ const b7FoeHp=()=>b7Diff().foeHp||1;
 const b7FoeSpeed=()=>b7Diff().foeSpeed||1;
 // Timers inside move animations follow the battle speed.
 function b7Later(fn,ms) { return setTimeout(fn,(ms||0)/b7Speed()); }
+// WIN NOW (admin option): every foe goes down at the next safe moment (the end of the move in progress, or at once on Tom's turn) and the fight
+// ends on the normal victory card, so XP, coins and drops are earned as usual. b2Advance (engine/battle2.js) reads B7.skipNow.
+function b7SkipFight() {
+  if(!B7.skipBtn||!B2.active||(B2.cfg&&B2.cfg.lab)) return;
+  B7.skipNow=true;
+  if(battle.state==='command') { B2.ui='busy'; b2Advance(); }
+}
 function b7SetDiff(id) {
   if(!B7_DIFF[id]) return; B7.diff=id; b7Save();
   if(id==='rose') { roseSpendAll(); if(typeof autoGear==='function') autoGear(ALL_MEMBERS()); if(typeof b6Badge==='function') b6Badge(); }   // switching to Rose Mode spends anything waiting
 }
 // Options also ride along in every save (engine/followers.js): Safari can wipe this frame's browser storage when the
 // app closes, which used to put the game back on Grace Mode at every launch. Loading a save brings them back.
-const b7Opts=()=>({diff:B7.diff,speed:B7.speed,hf:B7.hf,autoSpend:B7.autoSpend!==false,volMusic:sound.vol.music,volFx:sound.vol.fx,volVoice:sound.vol.voice});
+const b7Opts=()=>({diff:B7.diff,speed:B7.speed,hf:B7.hf,skipBtn:!!B7.skipBtn,autoSpend:B7.autoSpend!==false,volMusic:sound.vol.music,volFx:sound.vol.fx,volVoice:sound.vol.voice});
 function b7ApplyOpts(o) {
   if(!o) return;
   if(B7_DIFF[o.diff]) B7.diff=o.diff;
   if(o.speed===1||o.speed===2) B7.speed=o.speed;
   if(typeof o.hf==='boolean') B7.hf=o.hf;
+  if(typeof o.skipBtn==='boolean') B7.skipBtn=o.skipBtn;
   if(typeof o.autoSpend==='boolean') B7.autoSpend=o.autoSpend;
   if(o.volMusic>=1&&o.volMusic<=10) setVolume('music',o.volMusic);
   if(o.volFx>=1&&o.volFx<=10) setVolume('fx',o.volFx);
@@ -264,7 +273,8 @@ function b7SyncTools() {
   const st=T.parentElement;
   T.style.top=(cv.offsetTop+6)+'px';
   T.style.right=Math.max(4,st.clientWidth-(cv.offsetLeft+cv.offsetWidth)+6)+'px';
-  const s=$('b7-speed'),a=$('b7-auto'),x=$('b7-exit');
+  const s=$('b7-speed'),a=$('b7-auto'),x=$('b7-exit'),w=$('b7-skip');
+  if(w) w.hidden=!(B7.skipBtn&&B2.cfg&&!B2.cfg.lab);   // WIN NOW: admin option, real fights only (report r-20261114-101320-06hx)
   if(x) x.hidden=!(B2.cfg&&B2.cfg.lab);   // EXIT: Battle Lab fights only, back to boss select
   s.textContent=B7.speed+'x'; s.classList.toggle('on',B7.speed===2);
   a.textContent=B7.auto?'AUTO ON':'AUTO'; a.classList.toggle('on',B7.auto);
@@ -413,7 +423,7 @@ function b7DrawMapFx(time) {
     if(!n.monster||n.hidden) continue;
     const p=position(n),d=monsterDef(n),cx=Math.round((p.x+.5)*T),top=Math.round((p.y+1)*T-2-d.sprite.length);
     if(n.alert>0) { const yy=top-14-Math.round(Math.min(1,(.9-n.alert)*6)*4); rect(cx-5,yy-2,10,14,OUT); rect(cx-4,yy-1,8,12,'#fff1cb'); label('!',cx,yy+1,'#c8553d',2); }
-    else if(now<n.defeatedUntil) { const k=(time*.8)%1; gfx.globalAlpha=1-k; label('Z',cx+8+Math.round(k*8),top-4-Math.round(k*14),'#cfe0ff',1+(k<.5?1:0)); gfx.globalAlpha=1; }
+    else if(now<n.defeatedUntil&&!n.settled) { const k=(time*.8)%1; gfx.globalAlpha=1-k; label('Z',cx+8+Math.round(k*8),top-4-Math.round(k*14),'#cfe0ff',1+(k<.5?1:0)); gfx.globalAlpha=1; }
   }
   for(const f of B7.mapFx) {
     f.t=(now-f.t0)/1000; const u=f.t/f.dur,tt=f.t;
@@ -457,6 +467,9 @@ function b7RenderOptions(body) {
   const r5=card('AUTO-STAMP SPENDS POLISH AND TICKETS','ON: Auto-Stamp also ranks moves up with Polish Points and unlocks Remixes with Remix Tickets. OFF: it only stamps, and you spend those yourself.');
   r5.appendChild(opt('opt-as-on','ON',B7.autoSpend!==false,()=>{ B7.autoSpend=true; b7Save(); }));
   r5.appendChild(opt('opt-as-off','OFF',B7.autoSpend===false,()=>{ B7.autoSpend=false; b7Save(); }));
+  const r6=card('WIN NOW BUTTON (ADMIN)','ON: a WIN NOW button sits top right in every real fight. Press it and the fight ends in a victory at once, with all the XP, coins and drops. Off by default.');
+  r6.appendChild(opt('opt-skip-on','ON',!!B7.skipBtn,()=>{ B7.skipBtn=true; b7Save(); }));
+  r6.appendChild(opt('opt-skip-off','OFF',!B7.skipBtn,()=>{ B7.skipBtn=false; b7Save(); }));
   const c4=el('div','mcard b7-ocard'); c4.appendChild(el('div','slot-label','SMART REPEAT'));
   const n4=el('div','stat-note'); n4.textContent='In a fight, AUTO (top right) has everyone repeat their last move, skipping heals nobody needs. Tap it again to take over (R on a keyboard, Y on a controller).'; c4.appendChild(n4);
   body.appendChild(c4);
@@ -520,12 +533,13 @@ function b7SetKey(code) {
   const st=document.querySelector('#battle .battle-stage'),cv=$('battle-canvas'),B=$('battle');
   if(!st||!cv||!B) return;
   const tools=document.createElement('div'); tools.id='b7-tools'; tools.className='b7-tools'; tools.hidden=true;
-  tools.innerHTML='<button type="button" id="b7-exit" class="exit" aria-label="Exit to boss select" hidden>EXIT</button><button type="button" id="b7-set-btn" class="gear" aria-label="Sound settings: music and voice volume"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M5.5 2.6 13 1v9.2a2.3 2.3 0 1 1-1.5-2.1V4.1L7 5.1v7.1a2.3 2.3 0 1 1-1.5-2.1z"/></svg></button><button type="button" id="b7-speed" aria-label="Battle speed">1x</button><button type="button" id="b7-auto" aria-label="Smart Repeat">AUTO</button>';
+  tools.innerHTML='<button type="button" id="b7-exit" class="exit" aria-label="Exit to boss select" hidden>EXIT</button><button type="button" id="b7-set-btn" class="gear" aria-label="Sound settings: music and voice volume"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M5.5 2.6 13 1v9.2a2.3 2.3 0 1 1-1.5-2.1V4.1L7 5.1v7.1a2.3 2.3 0 1 1-1.5-2.1z"/></svg></button><button type="button" id="b7-speed" aria-label="Battle speed">1x</button><button type="button" id="b7-auto" aria-label="Smart Repeat">AUTO</button><button type="button" id="b7-skip" aria-label="End the fight with a win" hidden>WIN NOW</button>';
   st.appendChild(tools);
   $('b7-exit').addEventListener('click',e=>{ e.stopPropagation(); if(typeof b2LabExit==='function') b2LabExit(); });   // Battle Lab only
   $('b7-set-btn').addEventListener('click',e=>{ e.stopPropagation(); b7SetToggle(); });
   $('b7-speed').addEventListener('click',e=>{ e.stopPropagation(); b7ToggleSpeed(); });
   $('b7-auto').addEventListener('click',e=>{ e.stopPropagation(); b7ToggleAuto(); });
+  $('b7-skip').addEventListener('click',e=>{ e.stopPropagation(); b7SkipFight(); });
   cv.addEventListener('pointerdown',()=>{ if(B2.active&&battle.state!=='command') b7Tap(); });
   const card=document.createElement('div'); card.id='b7-card'; card.className='b7-card'; card.hidden=true;
   card.addEventListener('click',()=>b7CloseCard());

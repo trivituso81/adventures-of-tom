@@ -327,7 +327,7 @@ const MONSTERS={
     hint:'The boss of the Hollow. Heals every turn and belly flops the whole party.'}
 };
 // Where each one stands in Grump Hollow.
-const MONSTER_SPOTS=[['mudling',7,16],['skeeter',13,12],['grump',10,11],['toad',9,8],['log',7,10],['bigone',19,11]];   // Grump Hollow v3 walk map (`hollow5`)
+const MONSTER_SPOTS=[['mudling',7,16],['skeeter',13,12],['grump',10,11],['toad',9,8],['log',7,10],['bigone',18,8]];   // Grump Hollow v3 walk map (`hollow5`); the Big One stands in the pond water (report r-20261114-101709-8n6x: at 19,11 his painted water sat on dry land)
 function monsterDef(npc) { return MONSTERS[npc.monster]||MONSTERS.grump; }
 const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 
