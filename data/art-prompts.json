@@ -24653,8 +24653,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan or a sheet.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE PICTURE\nA big, wide corkboard filling the whole picture, hung inside a hollow tree, lit warmly from one side. Pinned to it with tiny acorn-shaped pins and joined with red string running from picture to picture, drawn the way a squirrel would draw: scratchy, in charcoal and crayon.\n- Top middle, a banner: a strip of leaf with the words OPERATION BIG BREAD scratched on it.\n- Center: a drawing of a tall round glass jar of sourdough starter, circled three times in thick red crayon, the red string from every other picture leading to it.\n- Left: a map of a street of little houses with a red X on every porch.\n- Right: a childlike charcoal drawing of a big curly dog, with the words THREAT LEVEL: VERY HIGH under it.\n- Lower left: a small page that reads BY ORDER OF THE CHAIRMAN. WINTER IS COMING. HOARD EVERYTHING.\n- Lower right corner: a small drawing of a picnic table with one sad face drawn on it, and under it the words AGENT CRUMB. STILL IN THE ORANGE THING. DAY THREE.\n- Bottom middle: a rope ladder sketched beside a bucket, with the words SUPPLY LINE. ROPE LADDER. SEE BUCKET, PANTRY.\nKeep every word short, large and clearly legible, painted letter by letter. No people.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/ch6-videocall-frame-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794683890742
+    }
+   ],
    "rejects": [],
    "id": "ch6-videocall-frame",
    "tab": "Props",
