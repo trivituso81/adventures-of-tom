@@ -15,6 +15,8 @@ chapter	file	line	character	mood	text
 1	data/scenes.js	69	Tom	unimpressed	Then we had better hurry. Before somebody licks the rest.
 1	data/scenes.js	81	Deedee	loving	My favorite son!
 1	data/scenes.js	81	Deedee	loving	And my girls! Come here, come here.
+1	data/scenes.js	100	Grace	proud	Tata, look at the door. Deedee measured me two times since you left.
+1	data/scenes.js	102	Rose	proud	I got one too. Mine's the low one.
 1	data/scenes.js	83	Deedee	loving	Tom, you must be starving! Sit. The crisp needs ten minutes on the counter.
 1	data/scenes.js	84	Deedee	surprised	Where are my reading glasses? I had them one second ago. I need to read the timer.
 1	data/scenes.js	85	Grace	unimpressed	Deedee. They're on your head.
@@ -26,34 +28,71 @@ chapter	file	line	character	mood	text
 1	data/scenes.js	91	Deedee	loving	And I eat it anyway. That's love, Tom.
 1	data/scenes.js	93	Boppy	angry	Tom! Good. I'm not feeling good. It's the stomach.
 1	data/scenes.js	126	Rose	scared	Deedee! A mud blob just climbed in the window, and it's running off with your crisp!
+1	data/scenes.js	169	Deedee	surprised	A WHAT climbed in my window?
+1	data/scenes.js	170	Rose	scared	It has EYES! The mud has EYES!
+1	data/scenes.js	171	Deedee	angry	Forty years in this kitchen. I've had ants. I've had a raccoon. I have never had THAT.
+1	data/scenes.js	172	Grace	unimpressed	It's so brown. It's the brownest thing I've ever seen.
 1	data/scenes.js	144	Tom	angry	That was UNCALLED for!
+1	data/scenes.js	174	Grace	surprised	It's running for the pond!
 1	data/scenes.js	145	Deedee	angry	It took the crisp AND my good tin! Grab your shoes, everybody. We're going after it, and I'm coming with you.
 1	data/scenes.js	146	Boppy	angry	It's headed for Grump Hollow. I've been saying for twenty years that something lives in that pond, and nobody listens to Boppy.
+1	data/scenes.js	177	Boppy	proud	Twenty years ago I'd have caught that thing before it got to the fence.
 1	data/scenes.js	146	Boppy	unimpressed	I'd come with you, but my stomach is acting up. If you see the Big One in that pond, bring him back for me.
+1	data/scenes.js	179	Boppy	loving	Tom. You stay in front of those girls.
 1	data/scenes.js	155	Deedee	loving	Up, up. Everybody up. Deedee kisses it better.
 1	data/scenes.js	155	Deedee	loving	There. Good as new. Try not to do that again.
 1	data/scenes.js	162	Deedee	surprised	Look, rhubarb crumbs on the path. The little thief dropped them as it ran, so we can follow the trail.
 1	data/scenes.js	164	Rose	scared	Tata. The mud is MOVING.
+1	data/scenes.js	202	Tom	surprised	It talks.
+1	data/scenes.js	203	Deedee	angry	It talks AND it steals.
 1	data/scenes.js	168	Grace	proud	Okay, everybody. Tata is in front. I'm in charge of choreography. FIGHT!
 1	data/scenes.js	171	Deedee	loving	Good job, girls. The crumb trail keeps going north, so that's the way we go.
 1	data/scenes.js	179	Grace	angry	Ew. Ew ew ew. Nobody touch my hair.
+1	data/scenes.js	217	Deedee	unimpressed	I've been bitten ten thousand times in my life. Not one of them ever said a word first.
 1	data/scenes.js	182	Deedee	loving	Everybody okay? Itchy isn't hurt. Keep walking.
 1	data/scenes.js	189	Rose	happy	I'm not laughing. I'm giggling. It's different.
 1	data/scenes.js	195	Deedee	loving	Hugs for everyone. There. All better.
 1	data/scenes.js	195	Deedee	none	The crumbs lead around the pond, toward Boppy's fishing spot.
 1	data/scenes.js	196	Grace	none	Boppy says the Big One lives over there.
+1	data/scenes.js	236	Tom	proud	Then nobody goes near the water. Stay close.
+1	data/scenes.js	245	Rose	happy	A MARBLE! There's a marble with a bug in it!
+1	data/scenes.js	246	Grace	surprised	That's a dragonfly. It's inside an orange rock. Its wings are open and it's not moving.
+1	data/scenes.js	247	Deedee	surprised	Look at the grass. It's grey. Just this bit, the size of my hand.
+1	data/scenes.js	248	Tom	surprised	It isn't dried out. It's just grey. Like somebody took the green out.
+1	data/scenes.js	249	Rose	happy	I'm keeping it. It's stuck.
+1	data/scenes.js	251	Tom	proud	Let me.
+1	data/scenes.js	253	Rose	unimpressed	You're not trying.
+1	data/scenes.js	254	Tom	unimpressed	I'm trying, Rose. It's a marble and it's winning.
+1	data/scenes.js	255	Grace	surprised	There's a little round hole in the side. Like somebody took a bite.
+1	data/scenes.js	257	Deedee	angry	And somebody left a burnt light bulb. Now they're littering at my pond too.
+1	data/scenes.js	259	Deedee	angry	The tin. Go, go, go.
+1	data/scenes.js	260	Rose	loving	Bye, marble. I'm coming back for you.
 1	data/scenes.js	210	Grace	surprised	THERE! The thief! He still has the tin!
+1	data/scenes.js	285	Tom	surprised	That's a fish. That fish is bigger than the cab.
+1	data/scenes.js	286	Grace	surprised	Boppy was RIGHT?
+1	data/scenes.js	287	Deedee	unimpressed	Nobody tell him.
 1	data/scenes.js	223	Deedee	angry	That's my GOOD tin, you overgrown handbag!
 1	data/scenes.js	224	Rose	happy	Tata, he looks like a turtle wearing a hat.
 1	data/scenes.js	225	Tom	proud	Nobody touches Deedee’s crisp. Everybody ready?
+1	data/scenes.js	296	Deedee	proud	Tom, you stand in front of whoever it stares at. Cozy Rosie, make it laugh. Then we try again.
+1	data/scenes.js	309	Rose	happy	It has a bug on it! I'm keeping it.
+1	data/scenes.js	311	Tom	loving	This one you can keep.
+1	data/scenes.js	313	Grace	happy	Boppy? He comes every day.
 1	data/scenes.js	229	Deedee	loving	Up, up. Everybody up. Deedee kisses it better.
 1	data/scenes.js	239	Deedee	happy	My tin! And look. Half the crisp is still in it.
 1	data/scenes.js	240	Grace	none	The Big One ate the other half. I saw crumbs on its chin.
 1	data/scenes.js	241	Deedee	happy	Then we split this half. Everybody home. Wait until Boppy hears about this.
 1	data/scenes.js	250	Boppy	proud	You found the Big One? I TOLD everybody. Twenty years.
+1	data/scenes.js	327	Grace	happy	Boppy, the mud TALKED. And the mosquitoes. And a puddle.
+1	data/scenes.js	328	Boppy	unimpressed	The mud talked? Forty years in this town, the mud never said one word to me.
 1	data/scenes.js	252	Tom	none	We did. And when it laughed, this fell out of its lip.
 1	data/scenes.js	253	Boppy	surprised	My LURE! I lost that in 2006. Still shiny. Unlike me.
 1	data/scenes.js	253	Boppy	loving	Keep it, Tom. For luck. The fish clearly didn't want it.
+1	data/scenes.js	332	Rose	proud	He gave me a present. Look.
+1	data/scenes.js	333	Boppy	proud	That's real gold, Cozy Rosie. Gold like my teeth. Look.
+1	data/scenes.js	335	Rose	surprised	Boppy has treasure in his mouth!
+1	data/scenes.js	336	Boppy	loving	You put that somewhere safe. Gold is for keeping.
+1	data/scenes.js	337	Boppy	proud	Next time something comes in that window, I'm coming. Stomach or no stomach.
 1	data/scenes.js	254	Deedee	loving	Sit. Everybody sit. Half a crisp is still a crisp.
 1	data/scenes.js	256	Rose	happy	This is the best half a crisp I ever had.
 1	data/scenes.js	257	Grace	happy	Tata, you're staying the WHOLE week, right?
@@ -121,6 +160,112 @@ chapter	file	line	character	mood	text
 2	data/scenes.js	459	TNB	happy	Doña Carmen says the pupusas came out perfectly crispy. Miss Odette is sending over gumbo. The whole block is cooking.
 2	data/scenes.js	460	Nara	happy	Nara leans on both of them at once. Tiny excited puddle. Nobody minds.
 2	data/scenes.js	462	Tom	loving	Long Island is home, and so is this. I have two homes. Okay. Good.
+2	tools/voice-library/scripts/ch02-story-directions.json	1	Tom	proud	Um, actually, it's two thousand four hundred and seventy-five. Delta counts every one, and so do I.
+2	tools/voice-library/scripts/ch02-story-directions.json	2	TNB	happy	How many SkyMiles is that now?
+2	tools/voice-library/scripts/ch02-story-directions.json	3	Tom	proud	Four hundred and twelve thousand.
+2	tools/voice-library/scripts/ch02-story-directions.json	4	TNB	surprised	Babe! What are you saving them for?
+2	tools/voice-library/scripts/ch02-story-directions.json	5	Tom	loving	Something really special.
+2	tools/voice-library/scripts/ch02-story-directions.json	6	TNB	unimpressed	You said that at three hundred thousand.
+2	tools/voice-library/scripts/ch02-story-directions.json	7	Tom	loving	It has to be REALLY special. But I'd have flown here for zero miles.
+2	tools/voice-library/scripts/ch02-story-directions.json	8	TNB	loving	Zero miles. Babe. That's the most romantic thing a Delta person can say.
+2	tools/voice-library/scripts/ch02-story-directions.json	9	Tom	surprised	Wait, why is the sky PURPLE? It's two in the afternoon!
+2	tools/voice-library/scripts/ch02-story-directions.json	10	TNB	happy	It's been like that since this morning. I held my soda up to it. It's the exact same color.
+2	tools/voice-library/scripts/ch02-story-directions.json	11	TNB	happy	I don't know what it is, babe. But it's pretty grape.
+2	tools/voice-library/scripts/ch02-story-directions.json	12	Tom	happy	Don't make me laugh, it's freaky! ...Okay. It IS a little grape.
+2	tools/voice-library/scripts/ch02-story-directions.json	13	Tom	surprised	Something strange happened on Long Island too. A blob of mud with eyes climbed in my mother's kitchen window and ran off with her rhubarb crisp.
+2	tools/voice-library/scripts/ch02-story-directions.json	14	TNB	surprised	The mud took Deedee's crisp? Is the mud okay?
+2	tools/voice-library/scripts/ch02-story-directions.json	15	Tom	surprised	We chased it to the pond. And there was a talking fish as big as a car, wearing her baking tin like a crown.
+2	tools/voice-library/scripts/ch02-story-directions.json	16	TNB	happy	A talking fish! What did he say?
+2	tools/voice-library/scripts/ch02-story-directions.json	17	Tom	unimpressed	He said "Glub." Then he gave Rose a gold coin.
+2	tools/voice-library/scripts/ch02-story-directions.json	18	TNB	happy	Mud in the kitchen, a talking fish, and now a purple sky. Babe, something fishy is going on.
+2	tools/voice-library/scripts/ch02-story-directions.json	19	Tom	loving	The fish was the nicest part!
+2	tools/voice-library/scripts/ch02-story-directions.json	20	Tom	loving	I want to go look at that sky with you. But first I have to feed Bready Mercury. He's been alone for a week.
+2	tools/voice-library/scripts/ch02-story-directions.json	21	TNB	happy	He hasn't been alone. Come on, I'll show you.
+2	tools/voice-library/scripts/ch02-story-directions.json	22	TNB	happy	So I stayed here with her. I was coming over anyway. I've been feeding Bready Mercury every day.
+2	tools/voice-library/scripts/ch02-story-directions.json	23	Tom	loving	Every day? Fifty grams of flour and fifty grams of water?
+2	tools/voice-library/scripts/ch02-story-directions.json	24	TNB	happy	Fifty and fifty. I used your little scale.
+2	tools/voice-library/scripts/ch02-story-directions.json	25	TNB	happy	He got so big he was climbing out of the jar. So I baked a loaf with him.
+2	tools/voice-library/scripts/ch02-story-directions.json	26	Tom	surprised	It's perfectly round! How did you get it so round?
+2	tools/voice-library/scripts/ch02-story-directions.json	27	TNB	proud	I shaped it on my pottery wheel.
+2	tools/voice-library/scripts/ch02-story-directions.json	28	Tom	surprised	On the pottery wheel! That's brilliant. Why have I been doing it with my hands?
+2	tools/voice-library/scripts/ch02-story-directions.json	29	TNB	happy	I make bowls all day, babe. So I made you a bread bowl.
+2	tools/voice-library/scripts/ch02-story-directions.json	30	Tom	happy	A bread bowl! Now we need soup.
+2	tools/voice-library/scripts/ch02-story-directions.json	31	Tom	loving	Nara, sit.
+2	tools/voice-library/scripts/ch02-story-directions.json	32	Tom	loving	Paw.
+2	tools/voice-library/scripts/ch02-story-directions.json	33	Tom	surprised	He's twice as big as when I left! What have you been doing with him?
+2	tools/voice-library/scripts/ch02-story-directions.json	34	TNB	proud	I sing to him while I stir. He's Bready Mercury. He needs his music.
+2	tools/voice-library/scripts/ch02-story-directions.json	35	Tom	happy	Which songs?
+2	tools/voice-library/scripts/ch02-story-directions.json	36	TNB	happy	"Another One Bites the Crust."
+2	tools/voice-library/scripts/ch02-story-directions.json	37	Tom	happy	"Don't Stop Me Dough!"
+2	tools/voice-library/scripts/ch02-story-directions.json	38	TNB	happy	Babe. That's so good. I'm singing that one tomorrow.
+2	tools/voice-library/scripts/ch02-story-directions.json	39	Tom	scared	That's the same purple as the sky! An hour ago it was way up on the hill. Now it's on my lawn!
+2	tools/voice-library/scripts/ch02-story-directions.json	40	Tom	scared	Mr. Washington is sitting out on his porch in that. Come on!
+2	tools/voice-library/scripts/ch02-story-directions.json	41	Tom	loving	What happened in 1979?
+2	tools/voice-library/scripts/ch02-story-directions.json	42	Tom	scared	He just said the same thing again, word for word.
+2	tools/voice-library/scripts/ch02-story-directions.json	43	TNB	scared	He always finishes that story. I've heard it nine times. It ends with gumbo.
+2	tools/voice-library/scripts/ch02-story-directions.json	44	Tom	scared	It's not a nice afternoon, Mr. Washington! The air is purple!
+2	tools/voice-library/scripts/ch02-story-directions.json	45	TNB	scared	Babe. That cloud has a face. And it just talked to us.
+2	tools/voice-library/scripts/ch02-story-directions.json	46	Tom	proud	It's like the mud at my mother's house! I told you they talk!
+2	tools/voice-library/scripts/ch02-story-directions.json	47	TNB	scared	You did tell me. It's a lot scarier in person.
+2	tools/voice-library/scripts/ch02-story-directions.json	48	Tom	proud	The man in the mask jumped out! I jumped higher!
+2	tools/voice-library/scripts/ch02-story-directions.json	49	TNB	happy	And it rained popcorn on the whole room. Let's do that to these clouds.
+2	tools/voice-library/scripts/ch02-story-directions.json	50	Tom	scared	I don't have any popcorn!
+2	tools/voice-library/scripts/ch02-story-directions.json	51	TNB	loving	You don't need popcorn. You just need to be that scared.
+2	tools/voice-library/scripts/ch02-story-directions.json	52	Tom	scared	Oh, I'm that scared.
+2	tools/voice-library/scripts/ch02-story-directions.json	53	Tom	sad	That doesn't sound like him at all. He tells me how old he is every single morning. He's proud of it!
+2	tools/voice-library/scripts/ch02-story-directions.json	54	TNB	scared	If the smog did this to him, what about everybody on the boulevard?
+2	tools/voice-library/scripts/ch02-story-directions.json	55	Tom	scared	Miss Odette and Doña Carmen! Come on!
+2	tools/voice-library/scripts/ch02-story-directions.json	56	TNB	happy	Miss Odette, it's me! Can I get a bowl of gumbo?
+2	tools/voice-library/scripts/ch02-story-directions.json	57	TNB	scared	Babe, this is bad. Every time I walk in here she yells "Sit down, you're too skinny!" before the door even closes.
+2	tools/voice-library/scripts/ch02-story-directions.json	58	Tom	happy	Miss Odette? I'm sorry to bother you. TNB is standing up, and he's very skinny today.
+2	tools/voice-library/scripts/ch02-story-directions.json	59	Tom	sad	Nothing. She's just like Mr. Washington.
+2	tools/voice-library/scripts/ch02-story-directions.json	60	TNB	scared	Babe, the pupusas are burning!
+2	tools/voice-library/scripts/ch02-story-directions.json	61	Tom	scared	Doña Carmen, I'm so sorry. I'm coming behind your counter. I know nobody's allowed back here.
+2	tools/voice-library/scripts/ch02-story-directions.json	62	Tom	scared	I flipped them. I'm ready for the towel. Go ahead.
+2	tools/voice-library/scripts/ch02-story-directions.json	63	TNB	scared	She smacks you with that towel if you even look at the griddle.
+2	tools/voice-library/scripts/ch02-story-directions.json	64	Tom	sad	I know! I've never wanted to be hit with a towel so badly!
+2	tools/voice-library/scripts/ch02-story-directions.json	65	Tom	angry	The parking tickets can TALK now? They were bad enough when they were quiet!
+2	tools/voice-library/scripts/ch02-story-directions.json	66	Tom	angry	And I moved my car on Monday night! I set two alarms!
+2	tools/voice-library/scripts/ch02-story-directions.json	67	Tom	unimpressed	Fine. Can I pay it in SkyMiles?
+2	tools/voice-library/scripts/ch02-story-directions.json	68	Tom	angry	Excuse me! She is not a snack. She is our guest!
+2	tools/voice-library/scripts/ch02-story-directions.json	69	TNB	happy	We do have snacks, though. I've got half a bag of gummy worms.
+2	tools/voice-library/scripts/ch02-story-directions.json	71	TNB	scared	Babe, look at that tree. It's grey. The leaves, the trunk, even the dirt. It looks like an old black and white movie.
+2	tools/voice-library/scripts/ch02-story-directions.json	72	Tom	surprised	There's one lemon on it. And the lemon is inside a block of something orange.
+2	tools/voice-library/scripts/ch02-story-directions.json	73	Tom	scared	I've seen this before. There's one exactly like it at my parents' pond, with a dragonfly inside.
+2	tools/voice-library/scripts/ch02-story-directions.json	74	TNB	surprised	On Long Island? Babe, that's three thousand miles away.
+2	tools/voice-library/scripts/ch02-story-directions.json	75	Tom	unimpressed	Two thousand four hundred and seventy-five.
+2	tools/voice-library/scripts/ch02-story-directions.json	76	TNB	surprised	It's not glass, and it's not glaze. I work with this kind of stuff all day and I have no idea what it is.
+2	tools/voice-library/scripts/ch02-story-directions.json	77	TNB	scared	There's a little round hole in the side, like somebody took a bite out of it.
+2	tools/voice-library/scripts/ch02-story-directions.json	78	Tom	unimpressed	The one at the pond has the same hole. And you can't pull it off. Rose tried, and then I tried.
+2	tools/voice-library/scripts/ch02-story-directions.json	79	TNB	happy	Can I try anyway?
+2	tools/voice-library/scripts/ch02-story-directions.json	80	TNB	surprised	Okay. Wow. Your turn.
+2	tools/voice-library/scripts/ch02-story-directions.json	81	Tom	unimpressed	I already lost to the small one. ...Maybe it's easier in California.
+2	tools/voice-library/scripts/ch02-story-directions.json	82	Tom	sad	It's not easier in California.
+2	tools/voice-library/scripts/ch02-story-directions.json	83	Tom	scared	It's a burnt-out flashbulb. My mother found one exactly like it next to the dragonfly.
+2	tools/voice-library/scripts/ch02-story-directions.json	84	TNB	scared	Who leaves the same bulb at a pond in New York and on a hill in Los Angeles?
+2	tools/voice-library/scripts/ch02-story-directions.json	85	Tom	scared	I don't know. And I really don't like it.
+2	tools/voice-library/scripts/ch02-story-directions.json	86	TNB	scared	Me neither. And I like almost everything.
+2	tools/voice-library/scripts/ch02-story-directions.json	87	Tom	scared	That hill has EYES! The whole hill just stood up!
+2	tools/voice-library/scripts/ch02-story-directions.json	88	TNB	scared	Babe. I take naps on that hill.
+2	tools/voice-library/scripts/ch02-story-directions.json	89	Tom	surprised	I think you've been napping on his face!
+2	tools/voice-library/scripts/ch02-story-directions.json	90	TNB	scared	I'm so sorry, sir!
+2	tools/voice-library/scripts/ch02-story-directions.json	93	TNB	happy	He'd know. He has four hundred and twelve thousand miles.
+2	tools/voice-library/scripts/ch02-story-directions.json	94	TNB	loving	I'm sorry I kept falling asleep on you. I didn't know you were a person.
+2	tools/voice-library/scripts/ch02-story-directions.json	97	Tom	surprised	It's a gold coin with a lemon on it. Rose's has a dragonfly.
+2	tools/voice-library/scripts/ch02-story-directions.json	98	TNB	surprised	The one the fish gave her?
+2	tools/voice-library/scripts/ch02-story-directions.json	99	Tom	unimpressed	Yes. A fish gave her one, and now a hill sneezed one at me.
+2	tools/voice-library/scripts/ch02-story-directions.json	100	TNB	happy	Nara thinks it's a very small frisbee.
+2	tools/voice-library/scripts/ch02-story-directions.json	101	Tom	loving	Nara, I'm sorry. We don't play fetch with gold.
+2	tools/voice-library/scripts/ch02-story-directions.json	102	Tom	scared	The hill said a flash woke it up this morning. The fish at the pond said the same thing.
+2	tools/voice-library/scripts/ch02-story-directions.json	103	TNB	scared	Two flashes, two orange blocks and two gold coins. Babe, I don't love that. Let's go check on Mr. Washington.
+2	tools/voice-library/scripts/ch02-story-directions.json	104	TNB	happy	That's ten times now. It gets better every time.
+2	tools/voice-library/scripts/ch02-story-directions.json	106	TNB	happy	Yes, ma'am!
+2	tools/voice-library/scripts/ch02-story-directions.json	108	Tom	happy	Thank you, Doña Carmen! That's the best towel I've ever been hit with!
+2	tools/voice-library/scripts/ch02-story-directions.json	110	TNB	happy	Babe. Gumbo. Go get the bread bowl!
+2	tools/voice-library/scripts/ch02-story-directions.json	111	Tom	sad	It has a hole in the top. I gave that piece to Nara.
+2	tools/voice-library/scripts/ch02-story-directions.json	112	TNB	happy	That's not a hole. That's where the gumbo goes in.
+2	tools/voice-library/scripts/ch02-story-directions.json	113	TNB	loving	With two thousand four hundred and seventy-five miles in between.
+2	tools/voice-library/scripts/ch02-story-directions.json	114	Tom	happy	Each way. That's a lot of SkyMiles.
 3	data/scenes.js	688	Grace	happy	Tata! Boppy has been waiting by his window since BREAKFAST. He has his fishing hat on.
 3	data/scenes.js	689	Rose	happy	He said if you were late he'd catch the fish without you. He catches one every time. It's always THIS big.
 3	data/scenes.js	690	Tom	unimpressed	Then we'd better hurry, before it gets any bigger.

@@ -88,62 +88,62 @@ chapters	file	line	character	where	mood	text
 1-10	data/maps-le.js	1435	Amy	map amyhouse, base	happy	Grace! Rose! Did you stretch before all this adventuring?
 1-10	data/maps-le.js	1436	Amy	map amyhouse, base	proud	Tom, I ran eight miles before you woke up. Just stating facts.
 1-10	data/maps-le.js	1437	Amy	map amyhouse, base	unimpressed	Justin is rewiring the hallway. Again. He says hi from the ladder.
-1-10	data/maps-le.js	1440	Amy	map amyhouse, revisit	proud	Race you to the fountain. No? Then I win.
-1-10	data/maps-le.js	1441	Amy	map amyhouse, revisit	loving	Twelve kids in my room, and not one of them as wild as you two. Which I love.
-1-10	data/maps-le.js	1442	Amy	map amyhouse, revisit	surprised	Rose, where are your shoes? Oh. Good.
-1-10	data/maps-le.js	1443	Amy	map amyhouse, revisit	happy	Grace, be nice to the slime. Then beat it. Those are the two rules.
-1-10	data/maps-le.js	1444	Amy	map amyhouse, revisit	unimpressed	Tom, if they come back faster than me, we need to talk.
-1-10	data/maps-le.js	1445	Amy	map amyhouse, revisit	unimpressed	Justin says the hallway light is almost done. It's been almost done since June.
-1-10	data/maps-le.js	1446	Amy	map amyhouse, revisit	unimpressed	Did Boppy give you that cap? Don't let him near the pond.
-1-10	data/maps-le.js	1447	Amy	map amyhouse, revisit	proud	One of my kids read a whole page out loud today. First time. I cried in the supply closet.
-1-10	data/maps-le.js	1448	Amy	map amyhouse, revisit	loving	Rose. Big feelings are allowed. Throwing Lamby isn't. Come here.
-1-10	data/maps-le.js	1449	Amy	map amyhouse, revisit	loving	Grace, you don't have to be the best at it. You have to be the one who keeps going. Okay, now be the best at it.
-5-10	data/maps-le.js	1438	Amy	map amyhouse, when {from:5,flag:ch5-done}	happy	Thirty conferences. Zero tears. Well. One. Mine. In the minivan.
-5-10	data/maps-le.js	1438	Amy	map amyhouse, when {from:5,flag:ch5-done}	loving	Tom. Thank you for coming. You're the good uncle. By a lot.
-1-10	data/maps-le.js	1488	Deedee	map grands, base	loving	My favorite son! And my girls! Come here, come here.
-1-10	data/maps-le.js	1489	Deedee	map grands, base	happy	Rhubarb crisp in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?
-1-10	data/maps-le.js	1490	Deedee	map grands, base	loving	Grace, Rose, Deedee loves you to the moon and back. Say it back. Louder.
-1-10	data/maps-le.js	1492	Deedee	map grands, revisit	proud	The tomatoes are coming in. You're going home with forty.
-1-10	data/maps-le.js	1493	Deedee	map grands, revisit	proud	I baked at five this morning. The neighbors have stopped asking why.
-1-10	data/maps-le.js	1494	Deedee	map grands, revisit	scared	Tom, is that a bruise? Sit. Eat. Explain.
-1-10	data/maps-le.js	1495	Deedee	map grands, revisit	loving	To the moon and back, girls. The MOON. And BACK.
-1-10	data/maps-le.js	1496	Deedee	map grands, revisit	unimpressed	Boppy says he's not feeling good. Boppy also won't stop fishing.
-1-10	data/maps-le.js	1497	Deedee	map grands, revisit	happy	Grace, Rose, who wants to help Deedee frost something?
-1-10	data/maps-le.js	1498	Deedee	map grands, revisit	loving	Rhubarb crisp is cooling on the counter. Don't touch it. Okay, one corner.
-1-10	data/maps-le.js	1499	Deedee	map grands, revisit	unimpressed	I already did my walk. Boppy did one lap around the recliner.
-1-10	data/maps-le.js	1500	Deedee	map grands, revisit	proud	Retired registered nurse. Tom calls me a registered nut. Tom is due for a checkup.
-1-10	data/maps-le.js	1501	Deedee	map grands, revisit	unimpressed	Sunday dinner is at six thirty. Don't make me call twice.
-1-10	data/maps-le.js	1502	Deedee	map grands, revisit	angry	I just cleaned the floors. Shoes OFF.
-1-10	data/maps-le.js	1503	Deedee	map grands, revisit	happy	A little glass of wine with dinner. Just one. Nurse's orders.
-1-10	data/maps-le.js	1504	Deedee	map grands, revisit	surprised	Have you seen my reading glasses? I had them a minute ago. I've looked everywhere. Twice.
-1-10	data/maps-le.js	1505	Deedee	map grands, revisit	happy	Found my glasses. They were in the fridge. Don't ask. Who wants a cookie?
-1-10	data/maps-le.js	1507	Deedee	map grands, hug:0	loving	Hugs for everyone. There. All better.
-1-10	data/maps-le.js	1508	Deedee	map grands, hug:1	loving	Hugs for everyone, just because. To the moon and back.
-1-10	data/maps-le.js	1515	Boppy	map grands, base	angry	Tom! Good. I'm not feeling good. Something with the stomach. Sit, I'll tell you about it.
-1-10	data/maps-le.js	1516	Boppy	map grands, base	loving	Grace, Rose, come give Boppy a hug. Gently. The stomach. And slow down, you two walk too fast.
-1-10	data/maps-le.js	1517	Boppy	map grands, base	proud	Did I ever tell you I was a champion cross country runner in college? Your mother has heard it. Sit down.
-1-10	data/maps-le.js	1518	Boppy	map grands, base	proud	Here, take my spare cap. For luck. I caught a twelve pounder in it. Nine. It was a big six.
-1-10	data/maps-le.js	1520	Boppy	map grands, revisit	proud	Assistant Deputy Warden at Rikers. All those years, nobody got past me. Except that fish.
-1-10	data/maps-le.js	1521	Boppy	map grands, revisit	unimpressed	At Rikers we did headcounts. Grace, one. Rose, two. Tom, you're dragging.
-1-10	data/maps-le.js	1522	Boppy	map grands, revisit	proud	In college I ran cross country. Champion. Through the woods, up the hills, never breathed hard.
-1-10	data/maps-le.js	1523	Boppy	map grands, revisit	happy	Did I tell you about the championship race? I did? Sit down. I'll tell you again.
-1-10	data/maps-le.js	1524	Boppy	map grands, revisit	sad	I'm not feeling good. I was fine an hour ago. Then I had a pepper.
-1-10	data/maps-le.js	1525	Boppy	map grands, revisit	angry	Slow down, Tom. Who walks this fast? I was a champion runner and I never walked this fast.
-1-10	data/maps-le.js	1526	Boppy	map grands, revisit	unimpressed	Deedee says I'm not allowed near the pond. The pond says otherwise.
-1-10	data/maps-le.js	1527	Boppy	map grands, revisit	proud	Grace, Rose, who's the strongest grandpa? Correct. Now help me up.
-1-10	data/maps-le.js	1528	Boppy	map grands, revisit	unimpressed	She's looking for her glasses again. They're on her head. I'm not saying anything. I'm saying it to you.
-1-10	data/maps-le.js	1569	Aunt Ellie	map elliehouse, base	unimpressed	Tom. Stand up straight. There. Now you look like someone I'm related to.
-1-10	data/maps-le.js	1570	Aunt Ellie	map elliehouse, base	proud	Yes, Deedee has an aunt. Yes, I'm older. No, you may not ask by how much.
-1-10	data/maps-le.js	1571	Aunt Ellie	map elliehouse, base	unimpressed	I've been to Paris eleven times, darling. Long Island is charming. But one must explore the world.
-1-10	data/maps-le.js	1574	Aunt Ellie	map elliehouse, revisit	happy	Deedee keeps offering me rhubarb crisp. I keep saying yes. That's called manners.
-1-10	data/maps-le.js	1575	Aunt Ellie	map elliehouse, revisit	unimpressed	Boppy says his stomach hurts. I told him to stop eating peppers. He looked at me like I insulted his mother.
-1-10	data/maps-le.js	1576	Aunt Ellie	map elliehouse, revisit	happy	Grace, darling, that outfit is wonderful. Rose, darling, that outfit is a choice. A brave one.
-1-10	data/maps-le.js	1577	Aunt Ellie	map elliehouse, revisit	proud	Wisdom is remembering what went wrong and saying so before it happens again.
-1-10	data/maps-le.js	1578	Aunt Ellie	map elliehouse, revisit	proud	Never apologize for being early, dressing up, or leaving a bad party.
-1-10	data/maps-le.js	1579	Aunt Ellie	map elliehouse, revisit	loving	Tom, you have a good heart. Now do something about the shoes.
-1-10	data/maps-le.js	1580	Aunt Ellie	map elliehouse, revisit	proud	Deedee says I'm sharp. I say everyone else is a little dull.
-1-10	data/maps-le.js	1581	Aunt Ellie	map elliehouse, revisit	unimpressed	A good scarf fixes almost anything. Not Boppy. But almost anything.
-1-10	data/maps-le.js	1582	Aunt Ellie	map elliehouse, revisit	proud	Somebody once told me I was too much. I outlived him. I dressed beautifully at the funeral.
+1-10	data/maps-le.js	1438	Amy	map amyhouse, revisit	proud	Race you to the fountain. No? Then I win.
+1-10	data/maps-le.js	1439	Amy	map amyhouse, revisit	loving	Twelve kids in my room, and not one of them as wild as you two. Which I love.
+1-10	data/maps-le.js	1440	Amy	map amyhouse, revisit	surprised	Rose, where are your shoes? Oh. Good.
+1-10	data/maps-le.js	1452	Amy	map amyhouse, revisit	happy	Grace, be nice to the slime. Then beat it. Those are the two rules.
+1-10	data/maps-le.js	1441	Amy	map amyhouse, revisit	unimpressed	Tom, if they come back faster than me, we need to talk.
+1-10	data/maps-le.js	1442	Amy	map amyhouse, revisit	unimpressed	Justin says the hallway light is almost done. It's been almost done since June.
+1-10	data/maps-le.js	1443	Amy	map amyhouse, revisit	unimpressed	Did Boppy give you that cap? Don't let him near the pond.
+1-10	data/maps-le.js	1444	Amy	map amyhouse, revisit	proud	One of my kids read a whole page out loud today. First time. I cried in the supply closet.
+1-10	data/maps-le.js	1445	Amy	map amyhouse, revisit	loving	Rose. Big feelings are allowed. Throwing Lamby isn't. Come here.
+1-10	data/maps-le.js	1446	Amy	map amyhouse, revisit	loving	Grace, you don't have to be the best at it. You have to be the one who keeps going. Okay, now be the best at it.
+5-10	data/maps-le.js	1447	Amy	map amyhouse, when {from:5,flag:ch5-done}	happy	Thirty conferences. Zero tears. Well. One. Mine. In the minivan.
+5-10	data/maps-le.js	1447	Amy	map amyhouse, when {from:5,flag:ch5-done}	loving	Tom. Thank you for coming. You're the good uncle. By a lot.
+1-10	data/maps-le.js	1497	Deedee	map grands, base	loving	My favorite son! And my girls! Come here, come here.
+1-10	data/maps-le.js	1498	Deedee	map grands, base	happy	Rhubarb crisp in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?
+1-10	data/maps-le.js	1499	Deedee	map grands, base	loving	Grace, Rose, Deedee loves you to the moon and back. Say it back. Louder.
+1-10	data/maps-le.js	1501	Deedee	map grands, revisit	proud	The tomatoes are coming in. You're going home with forty.
+1-10	data/maps-le.js	1502	Deedee	map grands, revisit	proud	I baked at five this morning. The neighbors have stopped asking why.
+1-10	data/maps-le.js	1503	Deedee	map grands, revisit	scared	Tom, is that a bruise? Sit. Eat. Explain.
+1-10	data/maps-le.js	1504	Deedee	map grands, revisit	loving	To the moon and back, girls. The MOON. And BACK.
+1-10	data/maps-le.js	1505	Deedee	map grands, revisit	unimpressed	Boppy says he's not feeling good. Boppy also won't stop fishing.
+1-10	data/maps-le.js	1506	Deedee	map grands, revisit	happy	Grace, Rose, who wants to help Deedee frost something?
+1-10	data/maps-le.js	1507	Deedee	map grands, revisit	loving	Rhubarb crisp is cooling on the counter. Don't touch it. Okay, one corner.
+1-10	data/maps-le.js	1508	Deedee	map grands, revisit	unimpressed	I already did my walk. Boppy did one lap around the recliner.
+1-10	data/maps-le.js	1509	Deedee	map grands, revisit	proud	Retired registered nurse. Tom calls me a registered nut. Tom is due for a checkup.
+1-10	data/maps-le.js	1510	Deedee	map grands, revisit	unimpressed	Sunday dinner is at six thirty. Don't make me call twice.
+1-10	data/maps-le.js	1511	Deedee	map grands, revisit	angry	I just cleaned the floors. Shoes OFF.
+1-10	data/maps-le.js	1512	Deedee	map grands, revisit	happy	A little glass of wine with dinner. Just one. Nurse's orders.
+1-10	data/maps-le.js	1513	Deedee	map grands, revisit	surprised	Have you seen my reading glasses? I had them a minute ago. I've looked everywhere. Twice.
+1-10	data/maps-le.js	1514	Deedee	map grands, revisit	happy	Found my glasses. They were in the fridge. Don't ask. Who wants a cookie?
+1-10	data/maps-le.js	1516	Deedee	map grands, hug:0	loving	Hugs for everyone. There. All better.
+1-10	data/maps-le.js	1517	Deedee	map grands, hug:1	loving	Hugs for everyone, just because. To the moon and back.
+1-10	data/maps-le.js	1524	Boppy	map grands, base	angry	Tom! Good. I'm not feeling good. Something with the stomach. Sit, I'll tell you about it.
+1-10	data/maps-le.js	1525	Boppy	map grands, base	loving	Grace, Rose, come give Boppy a hug. Gently. The stomach. And slow down, you two walk too fast.
+1-10	data/maps-le.js	1526	Boppy	map grands, base	proud	Did I ever tell you I was a champion cross country runner in college? Your mother has heard it. Sit down.
+1-10	data/maps-le.js	1527	Boppy	map grands, base	proud	Here, take my spare cap. For luck. I caught a twelve pounder in it. Nine. It was a big six.
+1-10	data/maps-le.js	1529	Boppy	map grands, revisit	proud	Assistant Deputy Warden at Rikers. All those years, nobody got past me. Except that fish.
+1-10	data/maps-le.js	1530	Boppy	map grands, revisit	unimpressed	At Rikers we did headcounts. Grace, one. Rose, two. Tom, you're dragging.
+1-10	data/maps-le.js	1531	Boppy	map grands, revisit	proud	In college I ran cross country. Champion. Through the woods, up the hills, never breathed hard.
+1-10	data/maps-le.js	1532	Boppy	map grands, revisit	happy	Did I tell you about the championship race? I did? Sit down. I'll tell you again.
+1-10	data/maps-le.js	1533	Boppy	map grands, revisit	sad	I'm not feeling good. I was fine an hour ago. Then I had a pepper.
+1-10	data/maps-le.js	1534	Boppy	map grands, revisit	angry	Slow down, Tom. Who walks this fast? I was a champion runner and I never walked this fast.
+1-10	data/maps-le.js	1535	Boppy	map grands, revisit	unimpressed	Deedee says I'm not allowed near the pond. The pond says otherwise.
+1-10	data/maps-le.js	1536	Boppy	map grands, revisit	proud	Grace, Rose, who's the strongest grandpa? Correct. Now help me up.
+1-10	data/maps-le.js	1537	Boppy	map grands, revisit	unimpressed	She's looking for her glasses again. They're on her head. I'm not saying anything. I'm saying it to you.
+1-10	data/maps-le.js	1578	Aunt Ellie	map elliehouse, base	unimpressed	Tom. Stand up straight. There. Now you look like someone I'm related to.
+1-10	data/maps-le.js	1579	Aunt Ellie	map elliehouse, base	proud	Yes, Deedee has an aunt. Yes, I'm older. No, you may not ask by how much.
+1-10	data/maps-le.js	1580	Aunt Ellie	map elliehouse, base	unimpressed	I've been to Paris eleven times, darling. Long Island is charming. But one must explore the world.
+1-10	data/maps-le.js	1583	Aunt Ellie	map elliehouse, revisit	happy	Deedee keeps offering me rhubarb crisp. I keep saying yes. That's called manners.
+1-10	data/maps-le.js	1584	Aunt Ellie	map elliehouse, revisit	unimpressed	Boppy says his stomach hurts. I told him to stop eating peppers. He looked at me like I insulted his mother.
+1-10	data/maps-le.js	1585	Aunt Ellie	map elliehouse, revisit	happy	Grace, darling, that outfit is wonderful. Rose, darling, that outfit is a choice. A brave one.
+1-10	data/maps-le.js	1586	Aunt Ellie	map elliehouse, revisit	proud	Wisdom is remembering what went wrong and saying so before it happens again.
+1-10	data/maps-le.js	1587	Aunt Ellie	map elliehouse, revisit	proud	Never apologize for being early, dressing up, or leaving a bad party.
+1-10	data/maps-le.js	1588	Aunt Ellie	map elliehouse, revisit	loving	Tom, you have a good heart. Now do something about the shoes.
+1-10	data/maps-le.js	1589	Aunt Ellie	map elliehouse, revisit	proud	Deedee says I'm sharp. I say everyone else is a little dull.
+1-10	data/maps-le.js	1590	Aunt Ellie	map elliehouse, revisit	unimpressed	A good scarf fixes almost anything. Not Boppy. But almost anything.
+1-10	data/maps-le.js	1591	Aunt Ellie	map elliehouse, revisit	proud	Somebody once told me I was too much. I outlived him. I dressed beautifully at the funeral.
 2-10	data/maps-la.js	168	Skye	map blvd, base	happy	I'm filming a day-in-my-life video. I live in the lofts.
 2-10	data/maps-la.js	168	Skye	map blvd, base	happy	This is the day. You're in my life now.
 2-10	data/maps-la.js	168	Skye	map blvd, base	proud	Say hi to my eleven followers.
@@ -299,10 +299,10 @@ chapters	file	line	character	where	mood	text
 9	data/maps-le.js	1312	Luna	map observatory, when {chapter:9,notFlag:ch9-done,flag:ch9-luna}	sad	If you see the moon up there, please tell it to come home. My telescope misses it.
 9	data/maps-le.js	1313	Luna	map observatory, when {chapter:9,notFlag:ch9-done}	sad	There's supposed to be a full moon tonight. My telescope can't find it.
 9	data/maps-le.js	1313	Luna	map observatory, when {chapter:9,notFlag:ch9-done}	surprised	It's not behind a cloud. It's just not THERE. I checked four times.
-9	data/maps-le.js	1513	Aunt Ellie	map grands, when {chapter:9,notFlag:ch9-done,flag:ch9-letter}	proud	The girls and I are playing cards. I'm winning. I'm also cheating. They're learning a great deal.
-9	data/maps-le.js	1513	Aunt Ellie	map grands, when {chapter:9,notFlag:ch9-done,flag:ch9-letter}	loving	Go. Dance. Somebody in this family should get to finish a party at the Moon Club.
-9-10	data/maps-le.js	1572	Aunt Ellie	map elliehouse, when {from:9,flag:ch9-done}	sad	My coat. Ticket seven. I left it at the last dance and never went back for it.
-9-10	data/maps-le.js	1572	Aunt Ellie	map elliehouse, when {from:9,flag:ch9-done}	unimpressed	I had a date with a man who turned out to be a disappointment. The coat wasn't. Keep it warm for me.
+9	data/maps-le.js	1522	Aunt Ellie	map grands, when {chapter:9,notFlag:ch9-done,flag:ch9-letter}	proud	The girls and I are playing cards. I'm winning. I'm also cheating. They're learning a great deal.
+9	data/maps-le.js	1522	Aunt Ellie	map grands, when {chapter:9,notFlag:ch9-done,flag:ch9-letter}	loving	Go. Dance. Somebody in this family should get to finish a party at the Moon Club.
+9-10	data/maps-le.js	1581	Aunt Ellie	map elliehouse, when {from:9,flag:ch9-done}	sad	My coat. Ticket seven. I left it at the last dance and never went back for it.
+9-10	data/maps-le.js	1581	Aunt Ellie	map elliehouse, when {from:9,flag:ch9-done}	unimpressed	I had a date with a man who turned out to be a disappointment. The coat wasn't. Keep it warm for me.
 8-10	data/maps-la.js	853	Olivia	map jpark, when {from:8,flag:ch8-done}	happy	Nara ate! A whole plate! Off your plate, but still! I'm counting it!
 8-10	data/maps-la.js	853	Olivia	map jpark, when {from:8,flag:ch8-done}	proud	Michael, Isla has a roll in each hand. That's fine. That's a balanced meal.
 8	data/maps-la.js	854	Olivia	map jpark, when {chapter:8,notFlag:ch8-done,flag:ch8-block}	scared	Did she eat? She won't eat cold food. She won't eat warm food either. She eats off YOUR plate, Tom.
@@ -372,86 +372,86 @@ chapters	file	line	character	where	mood	text
 2-10	data/maps-la.js	1550	Ryan	map dakota, lines	scared	Baby Hudson is asleep. Please whisper. Please. I'm begging.
 2-10	data/maps-la.js	1551	Ryan	map dakota, lines	unimpressed	We moved from the Westside for the space. And the character. Mostly the price. Which was still a lot.
 2-10	data/maps-la.js	1552	Ryan	map dakota, lines	angry	I work from home. Home is very loud on the Alvarez side. I bought noise-canceling headphones. They lost.
-2	data/scenes.js	366	Mr. Washington	scene ch2Smog	loving	Tom. Back in 1979, this whole block...
-2	data/scenes.js	370	Mr. Washington	scene ch2Smog	happy	Such a nice afternoon. It should always be this afternoon.
-2	data/scenes.js	386	Mr. Washington	scene ch2Smog	happy	Nobody needs to go anywhere. Nobody needs to get any older.
-2	data/scenes.js	481	Mr. Washington	scene ch2End	loving	...smelled like gumbo on a Saturday night. Zydeco from the boulevard. Kids on every porch.
-2	data/scenes.js	481	Mr. Washington	scene ch2End	surprised	Where was I? Oh. I was done. That was the whole story.
-2	data/scenes.js	482	Mr. Washington	scene ch2End	proud	Funny. For a while there I didn't want anything to change. Then I remembered the best parts all came from things changing.
-2	data/scenes.js	484	Mr. Washington	scene ch2End	happy	Keep the old windows. Smart man.
-3	data/scenes.js	753	Oolong	scene ch3Tea	happy	Boppy! The usual? Ginger, peppermint, and a little honey for the stomach.
-3	data/scenes.js	757	Oolong	scene ch3Tea	surprised	The kettle says a man in a long coat has been buying up gold coins at Penny's shop. He pays double, and he never takes his hat off.
-3	data/scenes.js	759	Oolong	scene ch3Tea	unimpressed	The kettle also says it'll rain on Tuesday. The kettle is wrong a lot. Enjoy the pier.
-3	data/scenes.js	1121	Kiki	scene ch3End	scared	(on the radio) ...kkkt... Stage 7! The big door just unlocked itself! From the INSIDE! Is that bad? That feels bad.
-4	data/scenes.js	1164	Ray	scene ch4Gate	happy	I wave at everybody. That's the job. Go on in.
-4	data/scenes.js	1166	Kiki	scene ch4Gate	scared	TNB! TNB! The rack! Rack two! It's GONE.
-4	data/scenes.js	1168	Kiki	scene ch4Gate	scared	It was right there in Stage 7. Then the fog machine turned itself on, and the lights went out, and things started CLAPPING.
-4	data/scenes.js	1170	Dana	scene ch4Gate	sad	I'm Dana Park, the director, and this is my first feature. Without the costumes we can't shoot, and without a shoot there's no movie.
-4	data/scenes.js	1171	Dana	scene ch4Gate	unimpressed	And the Backlot is full of little grumpy things. One of them ate a cue card. One of them is clapping at the horse.
-4	data/scenes.js	1182	Toni	scene ch4Snack	proud	Plain roast chicken. No salt, no skin, no sauce. I keep it for the grips. They're also picky.
-4	data/scenes.js	1187	Toni	scene ch4Snack	loving	Here. For the road. Don't tell the grips.
-4	data/scenes.js	1322	Dana	scene ch4End	happy	The rack! The costumes! We can shoot! We're shooting! That's a WRAP on today, everybody!
-4	data/scenes.js	1324	Kiki	scene ch4End	happy	WRAP PARTY AT CRAFTY! Toni made a cake! It's shaped like a clapper! It's not clapping!
-4	data/scenes.js	1325	Dana	scene ch4End	proud	TNB, the studio wants you to have this. Gold-plated. It's the steamer from the lot’s very first wardrobe department.
-4	data/scenes.js	1330	Dana	scene ch4End	happy	And crew jackets. Wrap Party Jackets. Only the crew gets one. You're crew now. Even the dog.
-5	data/scenes.js	1521	Principal Pruitt	scene ch5Pruitt	happy	Mrs. Gregori! Thank goodness. And you brought the whole family.
-5	data/scenes.js	1524	Principal Pruitt	scene ch5Pruitt	proud	Not haunted. Grumpy. Thirty-one years in this building. I know the difference.
-5	data/scenes.js	1525	Principal Pruitt	scene ch5Pruitt	scared	The bells ring at random. The clocks in the hall all say different times. And the sign-up sheet got up off the table and walked into the school.
-5	data/scenes.js	1526	Principal Pruitt	scene ch5Pruitt	scared	The Cafetorium doors run on the bell system, and the bells run on the hallway clocks.
-5	data/scenes.js	1526	Principal Pruitt	scene ch5Pruitt	scared	Until the clocks are right, those doors won't open, and thirty parents are on their way.
-5	data/scenes.js	1528	Principal Pruitt	scene ch5Pruitt	proud	So please set every clock in the hall to exactly seven o'clock. Not seven-thirty, and not six-fifty-nine. Seven.
-5	data/scenes.js	1558	Mr. Halverson	scene ch5Snack	proud	Every conference night. Twelve years. It's the only reason Gary shows up.
-5	data/scenes.js	1563	Mr. Halverson	scene ch5Snack	happy	Take some for the road. Don't tell Gary.
-5	data/scenes.js	1617	Principal Pruitt	scene ch5Clocks	unimpressed	(on the intercom) ...ksssh... Attention, please. The Cafetorium doors are OPEN. Parents, please wait in the hall. There's something in the Cafetorium.
-5	data/scenes.js	1618	Principal Pruitt	scene ch5Clocks	happy	Mrs. Gregori’s brother, please go into the Cafetorium. Thank you. ...ksssh.
-5	data/scenes.js	1671	Principal Pruitt	scene ch5AfterBoss	happy	You got the sheet back, and the bells and the clocks are working! Parents, come on in! Conference night is ON!
-5	data/scenes.js	1675	Principal Pruitt	scene ch5AfterBoss	proud	Mrs. Gregori. Best conference night in thirty-one years. Not one parent cried. Well. Mr. Delgado. Happy tears.
-5	data/scenes.js	1676	Principal Pruitt	scene ch5AfterBoss	proud	This is for you. My Golden Stopwatch. Thirty-one Field Days. It's never once stopped early.
-5	data/scenes.js	1680	Principal Pruitt	scene ch5AfterBoss	happy	And Field Day shirts. Staff shirts. You're all staff now. Even the small loud ones.
-6	data/scenes.js	1925	Michael	scene ch6Nara	surprised	I found my car keys in the gutter. With three peanuts. Arranged in a triangle.
-6	data/scenes.js	1941	Bernadette	scene ch6Park	angry	Halt. Neighborhood Watch. State your business.
-6	data/scenes.js	1943	Bernadette	scene ch6Park	proud	I know who you are. You water your drought garden. Everybody knows.
-6	data/scenes.js	1944	Bernadette	scene ch6Park	proud	Bernadette. Neighborhood Watch Captain, nineteen years. And I'll say it, because nobody else will.
-6	data/scenes.js	1944	Bernadette	scene ch6Park	scared	The squirrels are organized.
-6	data/scenes.js	1946	Bernadette	scene ch6Park	angry	They have lookouts in the playground, a spy in the community garden,
-6	data/scenes.js	1946	Bernadette	scene ch6Park	angry	and somebody at the picnic tables stuffing their cheeks with anything that's not nailed down.
-6	data/scenes.js	1947	Bernadette	scene ch6Park	surprised	Everything they steal goes up THAT tree, the Old Oak. There's a little door in the trunk that opens with a secret knock. I've only ever heard bits of it.
-6	data/scenes.js	1951	Bernadette	scene ch6Park	proud	Clear the squirrels out of those three spots, and Nara can dig up what they buried. I'd bet a piece of that secret knock is in each hole.
-6	data/scenes.js	1951	Bernadette	scene ch6Park	proud	I'll be here with my clipboard.
-6	data/scenes.js	2148	Bernadette	scene ch6End	proud	Neighborhood Watch Captain’s report: case closed.
-6	data/scenes.js	2148	Bernadette	scene ch6End	proud	I'd like it noted that I was right.
-6	data/scenes.js	2150	Michael	scene ch6End	loving	Lachlan wants Nara to have this. He painted a tennis ball gold. It took him four days and most of a bottle of paint.
-6	data/scenes.js	2154	Bernadette	scene ch6End	proud	And these. Neighborhood Watch Vests. I give out one every nineteen years. Today I'm giving out three. Even the dog.
-7	data/scenes.js	2401	Page	scene ch7Page	scared	Oh! Tom. Girls. Welcome to the Hush Library. Everything is fine.
-7	data/scenes.js	2404	Page	scene ch7Page	scared	...It's not fine. It started a week ago, and it's coming up from the Stacks, the old part of the library downstairs.
-7	data/scenes.js	2405	Page	scene ch7Page	surprised	Every book down there is whispering everything it ever overheard.
-7	data/scenes.js	2405	Page	scene ch7Page	surprised	That's seventy years of people reading quietly and thinking nobody was listening.
-7	data/scenes.js	2407	Page	scene ch7Page	unimpressed	Books overhear EVERYTHING. That's why we whisper in here. It was never for the people. It's for the books.
-7	data/scenes.js	2409	Page	scene ch7Page	proud	The Stacks have three sections: Fiction, Nonfiction and Picture Books.
-7	data/scenes.js	2409	Page	scene ch7Page	proud	The Reading Room is at the very back, and I think the whispering starts in there.
-7	data/scenes.js	2410	Page	scene ch7Page	sad	But the Reading Room doors use the old card catalog lock, and I lost the password in 1998.
-7	data/scenes.js	2412	Page	scene ch7Page	loving	Then you're in charge of the signs. Here. The staff door is open.
-7	data/scenes.js	2414	Page	scene ch7Page	scared	Please be careful. And please, don't answer the books. It only encourages them.
-7	data/scenes.js	2563	Page	scene ch7End	happy	Listen. It's quiet. Properly quiet. The good kind. The dictionaries are snoring.
-7	data/scenes.js	2565	Page	scene ch7End	happy	Then we'll read it. Story time, Saturdays, out loud. And I think I know who should do the voices.
-7	data/scenes.js	2566	Page	scene ch7End	loving	Grace. This is for you. A Gold Library Card. No limit. No late fees. Ever.
-7	data/scenes.js	2570	Page	scene ch7End	loving	And sweaters. I knit one every winter. I have run out of people. Please take some.
-8	data/scenes.js	2762	Bernadette	scene ch8Block	proud	Tom. Good. Neighborhood Watch Captain, potluck committee chair. Forty RSVPs. Thirty-nine dishes. One bread guy.
-8	data/scenes.js	2762	Bernadette	scene ch8Block	angry	Every pilot light on 2nd Avenue went out at noon. Every one. Including mine. I had a casserole IN there.
-8	data/scenes.js	2764	Bernadette	scene ch8Block	angry	They said it's the weekend. I said it's the POTLUCK. They hung up. I've filed a report. With myself.
-8	data/scenes.js	2771	Bernadette	scene ch8Block	proud	The barn has been chained up for sixty years. Here, take the committee key. I'm the committee.
-8	data/scenes.js	2771	Bernadette	scene ch8Block	proud	We're closing the boulevard for the potluck tables, and I need the bread by six.
-8	data/scenes.js	2932	Bernadette	scene ch8End	proud	Forty loaves. Six o’clock. On the dot. Potluck committee report: we're a success.
-8	data/scenes.js	2932	Bernadette	scene ch8End	proud	The gumbo is hot. The casserole is hot. Everything is hot. I'd like it noted.
-8	data/scenes.js	2936	Mr. Washington	scene ch8End	loving	Tom. Come here. This was my daddy’s. He drove the 7 line out of that barn for thirty years. Night run. He swore by the biscuits.
-8	data/scenes.js	2936	Mr. Washington	scene ch8End	loving	He'd want it on somebody who went back in there and lit that stove. Here.
-8	data/scenes.js	2940	Mr. Washington	scene ch8End	proud	I know you will. Now stand up straight. He'd say that too.
-8	data/scenes.js	2941	Michael	scene ch8End	happy	Lachlan has eaten three rolls and fallen asleep in the bread basket. I'm leaving him there. He's happy.
-9	data/scenes.js	3180	Luna	scene ch9Luna	happy	Oh! Visitors. At night. Is that... is that an INVITATION?
-9	data/scenes.js	3182	Luna	scene ch9Luna	sad	Twelve years I have swept this floor. That little silver door in the back has never once opened. I thought it was a closet.
-9	data/scenes.js	3182	Luna	scene ch9Luna	sad	And my telescope can't find the moon. It's not behind a cloud. It's not anywhere. It's just GONE.
-9	data/scenes.js	3186	Luna	scene ch9Luna	surprised	...It wasn't a closet.
-10	data/scenes.js	3632	Sal	scene ch10Start	happy	Cab seven! Everybody in. We're going to Long Island Regional Airport, to the door nobody uses.
+2	data/scenes.js	424	Mr. Washington	scene ch2Smog	loving	Tom. Back in 1979, this whole block...
+2	data/scenes.js	428	Mr. Washington	scene ch2Smog	happy	Such a nice afternoon. It should always be this afternoon.
+2	data/scenes.js	444	Mr. Washington	scene ch2Smog	happy	Nobody needs to go anywhere. Nobody needs to get any older.
+2	data/scenes.js	539	Mr. Washington	scene ch2End	loving	...smelled like gumbo on a Saturday night. Zydeco from the boulevard. Kids on every porch.
+2	data/scenes.js	539	Mr. Washington	scene ch2End	surprised	Where was I? Oh. I was done. That was the whole story.
+2	data/scenes.js	540	Mr. Washington	scene ch2End	proud	Funny. For a while there I didn't want anything to change. Then I remembered the best parts all came from things changing.
+2	data/scenes.js	542	Mr. Washington	scene ch2End	happy	Keep the old windows. Smart man.
+3	data/scenes.js	812	Oolong	scene ch3Tea	happy	Boppy! The usual? Ginger, peppermint, and a little honey for the stomach.
+3	data/scenes.js	816	Oolong	scene ch3Tea	surprised	The kettle says a man in a long coat has been buying up gold coins at Penny's shop. He pays double, and he never takes his hat off.
+3	data/scenes.js	818	Oolong	scene ch3Tea	unimpressed	The kettle also says it'll rain on Tuesday. The kettle is wrong a lot. Enjoy the pier.
+3	data/scenes.js	1180	Kiki	scene ch3End	scared	(on the radio) ...kkkt... Stage 7! The big door just unlocked itself! From the INSIDE! Is that bad? That feels bad.
+4	data/scenes.js	1223	Ray	scene ch4Gate	happy	I wave at everybody. That's the job. Go on in.
+4	data/scenes.js	1225	Kiki	scene ch4Gate	scared	TNB! TNB! The rack! Rack two! It's GONE.
+4	data/scenes.js	1227	Kiki	scene ch4Gate	scared	It was right there in Stage 7. Then the fog machine turned itself on, and the lights went out, and things started CLAPPING.
+4	data/scenes.js	1229	Dana	scene ch4Gate	sad	I'm Dana Park, the director, and this is my first feature. Without the costumes we can't shoot, and without a shoot there's no movie.
+4	data/scenes.js	1230	Dana	scene ch4Gate	unimpressed	And the Backlot is full of little grumpy things. One of them ate a cue card. One of them is clapping at the horse.
+4	data/scenes.js	1241	Toni	scene ch4Snack	proud	Plain roast chicken. No salt, no skin, no sauce. I keep it for the grips. They're also picky.
+4	data/scenes.js	1246	Toni	scene ch4Snack	loving	Here. For the road. Don't tell the grips.
+4	data/scenes.js	1381	Dana	scene ch4End	happy	The rack! The costumes! We can shoot! We're shooting! That's a WRAP on today, everybody!
+4	data/scenes.js	1383	Kiki	scene ch4End	happy	WRAP PARTY AT CRAFTY! Toni made a cake! It's shaped like a clapper! It's not clapping!
+4	data/scenes.js	1384	Dana	scene ch4End	proud	TNB, the studio wants you to have this. Gold-plated. It's the steamer from the lot’s very first wardrobe department.
+4	data/scenes.js	1389	Dana	scene ch4End	happy	And crew jackets. Wrap Party Jackets. Only the crew gets one. You're crew now. Even the dog.
+5	data/scenes.js	1580	Principal Pruitt	scene ch5Pruitt	happy	Mrs. Gregori! Thank goodness. And you brought the whole family.
+5	data/scenes.js	1583	Principal Pruitt	scene ch5Pruitt	proud	Not haunted. Grumpy. Thirty-one years in this building. I know the difference.
+5	data/scenes.js	1584	Principal Pruitt	scene ch5Pruitt	scared	The bells ring at random. The clocks in the hall all say different times. And the sign-up sheet got up off the table and walked into the school.
+5	data/scenes.js	1585	Principal Pruitt	scene ch5Pruitt	scared	The Cafetorium doors run on the bell system, and the bells run on the hallway clocks.
+5	data/scenes.js	1585	Principal Pruitt	scene ch5Pruitt	scared	Until the clocks are right, those doors won't open, and thirty parents are on their way.
+5	data/scenes.js	1587	Principal Pruitt	scene ch5Pruitt	proud	So please set every clock in the hall to exactly seven o'clock. Not seven-thirty, and not six-fifty-nine. Seven.
+5	data/scenes.js	1617	Mr. Halverson	scene ch5Snack	proud	Every conference night. Twelve years. It's the only reason Gary shows up.
+5	data/scenes.js	1622	Mr. Halverson	scene ch5Snack	happy	Take some for the road. Don't tell Gary.
+5	data/scenes.js	1676	Principal Pruitt	scene ch5Clocks	unimpressed	(on the intercom) ...ksssh... Attention, please. The Cafetorium doors are OPEN. Parents, please wait in the hall. There's something in the Cafetorium.
+5	data/scenes.js	1677	Principal Pruitt	scene ch5Clocks	happy	Mrs. Gregori’s brother, please go into the Cafetorium. Thank you. ...ksssh.
+5	data/scenes.js	1730	Principal Pruitt	scene ch5AfterBoss	happy	You got the sheet back, and the bells and the clocks are working! Parents, come on in! Conference night is ON!
+5	data/scenes.js	1734	Principal Pruitt	scene ch5AfterBoss	proud	Mrs. Gregori. Best conference night in thirty-one years. Not one parent cried. Well. Mr. Delgado. Happy tears.
+5	data/scenes.js	1735	Principal Pruitt	scene ch5AfterBoss	proud	This is for you. My Golden Stopwatch. Thirty-one Field Days. It's never once stopped early.
+5	data/scenes.js	1739	Principal Pruitt	scene ch5AfterBoss	happy	And Field Day shirts. Staff shirts. You're all staff now. Even the small loud ones.
+6	data/scenes.js	1984	Michael	scene ch6Nara	surprised	I found my car keys in the gutter. With three peanuts. Arranged in a triangle.
+6	data/scenes.js	2000	Bernadette	scene ch6Park	angry	Halt. Neighborhood Watch. State your business.
+6	data/scenes.js	2002	Bernadette	scene ch6Park	proud	I know who you are. You water your drought garden. Everybody knows.
+6	data/scenes.js	2003	Bernadette	scene ch6Park	proud	Bernadette. Neighborhood Watch Captain, nineteen years. And I'll say it, because nobody else will.
+6	data/scenes.js	2003	Bernadette	scene ch6Park	scared	The squirrels are organized.
+6	data/scenes.js	2005	Bernadette	scene ch6Park	angry	They have lookouts in the playground, a spy in the community garden,
+6	data/scenes.js	2005	Bernadette	scene ch6Park	angry	and somebody at the picnic tables stuffing their cheeks with anything that's not nailed down.
+6	data/scenes.js	2006	Bernadette	scene ch6Park	surprised	Everything they steal goes up THAT tree, the Old Oak. There's a little door in the trunk that opens with a secret knock. I've only ever heard bits of it.
+6	data/scenes.js	2010	Bernadette	scene ch6Park	proud	Clear the squirrels out of those three spots, and Nara can dig up what they buried. I'd bet a piece of that secret knock is in each hole.
+6	data/scenes.js	2010	Bernadette	scene ch6Park	proud	I'll be here with my clipboard.
+6	data/scenes.js	2207	Bernadette	scene ch6End	proud	Neighborhood Watch Captain’s report: case closed.
+6	data/scenes.js	2207	Bernadette	scene ch6End	proud	I'd like it noted that I was right.
+6	data/scenes.js	2209	Michael	scene ch6End	loving	Lachlan wants Nara to have this. He painted a tennis ball gold. It took him four days and most of a bottle of paint.
+6	data/scenes.js	2213	Bernadette	scene ch6End	proud	And these. Neighborhood Watch Vests. I give out one every nineteen years. Today I'm giving out three. Even the dog.
+7	data/scenes.js	2460	Page	scene ch7Page	scared	Oh! Tom. Girls. Welcome to the Hush Library. Everything is fine.
+7	data/scenes.js	2463	Page	scene ch7Page	scared	...It's not fine. It started a week ago, and it's coming up from the Stacks, the old part of the library downstairs.
+7	data/scenes.js	2464	Page	scene ch7Page	surprised	Every book down there is whispering everything it ever overheard.
+7	data/scenes.js	2464	Page	scene ch7Page	surprised	That's seventy years of people reading quietly and thinking nobody was listening.
+7	data/scenes.js	2466	Page	scene ch7Page	unimpressed	Books overhear EVERYTHING. That's why we whisper in here. It was never for the people. It's for the books.
+7	data/scenes.js	2468	Page	scene ch7Page	proud	The Stacks have three sections: Fiction, Nonfiction and Picture Books.
+7	data/scenes.js	2468	Page	scene ch7Page	proud	The Reading Room is at the very back, and I think the whispering starts in there.
+7	data/scenes.js	2469	Page	scene ch7Page	sad	But the Reading Room doors use the old card catalog lock, and I lost the password in 1998.
+7	data/scenes.js	2471	Page	scene ch7Page	loving	Then you're in charge of the signs. Here. The staff door is open.
+7	data/scenes.js	2473	Page	scene ch7Page	scared	Please be careful. And please, don't answer the books. It only encourages them.
+7	data/scenes.js	2622	Page	scene ch7End	happy	Listen. It's quiet. Properly quiet. The good kind. The dictionaries are snoring.
+7	data/scenes.js	2624	Page	scene ch7End	happy	Then we'll read it. Story time, Saturdays, out loud. And I think I know who should do the voices.
+7	data/scenes.js	2625	Page	scene ch7End	loving	Grace. This is for you. A Gold Library Card. No limit. No late fees. Ever.
+7	data/scenes.js	2629	Page	scene ch7End	loving	And sweaters. I knit one every winter. I have run out of people. Please take some.
+8	data/scenes.js	2821	Bernadette	scene ch8Block	proud	Tom. Good. Neighborhood Watch Captain, potluck committee chair. Forty RSVPs. Thirty-nine dishes. One bread guy.
+8	data/scenes.js	2821	Bernadette	scene ch8Block	angry	Every pilot light on 2nd Avenue went out at noon. Every one. Including mine. I had a casserole IN there.
+8	data/scenes.js	2823	Bernadette	scene ch8Block	angry	They said it's the weekend. I said it's the POTLUCK. They hung up. I've filed a report. With myself.
+8	data/scenes.js	2830	Bernadette	scene ch8Block	proud	The barn has been chained up for sixty years. Here, take the committee key. I'm the committee.
+8	data/scenes.js	2830	Bernadette	scene ch8Block	proud	We're closing the boulevard for the potluck tables, and I need the bread by six.
+8	data/scenes.js	2991	Bernadette	scene ch8End	proud	Forty loaves. Six o’clock. On the dot. Potluck committee report: we're a success.
+8	data/scenes.js	2991	Bernadette	scene ch8End	proud	The gumbo is hot. The casserole is hot. Everything is hot. I'd like it noted.
+8	data/scenes.js	2995	Mr. Washington	scene ch8End	loving	Tom. Come here. This was my daddy’s. He drove the 7 line out of that barn for thirty years. Night run. He swore by the biscuits.
+8	data/scenes.js	2995	Mr. Washington	scene ch8End	loving	He'd want it on somebody who went back in there and lit that stove. Here.
+8	data/scenes.js	2999	Mr. Washington	scene ch8End	proud	I know you will. Now stand up straight. He'd say that too.
+8	data/scenes.js	3000	Michael	scene ch8End	happy	Lachlan has eaten three rolls and fallen asleep in the bread basket. I'm leaving him there. He's happy.
+9	data/scenes.js	3239	Luna	scene ch9Luna	happy	Oh! Visitors. At night. Is that... is that an INVITATION?
+9	data/scenes.js	3241	Luna	scene ch9Luna	sad	Twelve years I have swept this floor. That little silver door in the back has never once opened. I thought it was a closet.
+9	data/scenes.js	3241	Luna	scene ch9Luna	sad	And my telescope can't find the moon. It's not behind a cloud. It's not anywhere. It's just GONE.
+9	data/scenes.js	3245	Luna	scene ch9Luna	surprised	...It wasn't a closet.
+10	data/scenes.js	3691	Sal	scene ch10Start	happy	Cab seven! Everybody in. We're going to Long Island Regional Airport, to the door nobody uses.
 1-10	engine/followers.js	56	Amy	recruit ask	happy	Also. I've been standing still for four minutes and it's killing me. Want a running partner out there?
 1-10	engine/followers.js	57	Amy	recruit yes	happy	Finally. Try to keep up. I mean that with love.
 1-10	engine/followers.js	57	Amy	recruit no	unimpressed	Fine. I'll do burpees until you change your mind.
@@ -753,3 +753,6 @@ chapters	file	line	character	where	mood	text
 20	data/scenes-ch20.js	266	Sal	scene ch20Epi1	proud	You’re the first passenger. Get in the train.
 20	data/scenes-ch20.js	269	Vance	scene ch20Epi1	happy	It has four. I asked.
 20	data/scenes-ch20.js	271	Vance	scene ch20Epi1	loving	I am going to call my daughter. I do not know whether she will pick up. I am going to call anyway.
+2	tools/voice-library/scripts/ch02-story-directions.json	736	Miss Odette	scene ch2End	proud	I brought gumbo for the whole block. TNB! Sit DOWN. You're too skinny!
+2	tools/voice-library/scripts/ch02-story-directions.json	750	Doña Carmen	scene ch2End	angry	And YOU. Who went behind my counter?
+2	tools/voice-library/scripts/ch02-story-directions.json	764	Doña Carmen	scene ch2End	proud	They came out perfectly crispy. Don't ever do it again.

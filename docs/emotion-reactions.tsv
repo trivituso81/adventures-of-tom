@@ -1,303 +1,565 @@
-kind	chapter	file	where	speaker	text	listener	mood
-scene	1	data/scenes.js	opening	Grace	TATA! You're BACK!	tom	loving
-scene	1	data/scenes.js	opening	Grace	We waited for you for a hundred years.	tom	loving
-scene	1	data/scenes.js	opening	Grace	We waited for you for a hundred years.	rose	happy
-scene	1	data/scenes.js	opening	Rose	A hundred MILLION years!	tom	happy
-scene	1	data/scenes.js	opening	Rose	A hundred MILLION years!	grace	happy
-scene	1	data/scenes.js	opening	Rose	Tata, up! Up up up!	tom	happy
-scene	1	data/scenes.js	opening	Rose	I'm the tallest! Giddyup, Tata!	tom	happy
-scene	1	data/scenes.js	opening	Rose	I'm the tallest! Giddyup, Tata!	grace	happy
-scene	1	data/scenes.js	opening	Tom	Hello, Rose. Please keep your arms and legs inside the uncle at all times.	rose	happy
-scene	1	data/scenes.js	opening	Tom	Hello, Rose. Please keep your arms and legs inside the uncle at all times.	grace	happy
-scene	1	data/scenes.js	opening	Grace	Tata, LOOK. A sparkling diamond gold dumpling squishy!	tom	surprised
-scene	1	data/scenes.js	opening	Grace	Tata, LOOK. A sparkling diamond gold dumpling squishy!	rose	surprised
-scene	1	data/scenes.js	opening	Grace	It's limited edition. There are only two in the whole world. You can squeeze it!	tom	happy
-scene	1	data/scenes.js	opening	Tom	That's the shiniest dumpling I've ever seen. And I've seen a LOT of dumplings.	grace	proud
-scene	1	data/scenes.js	opening	Tom	That's the shiniest dumpling I've ever seen. And I've seen a LOT of dumplings.	rose	happy
-scene	1	data/scenes.js	opening	Rose	Come on, Tata! Let's go!	tom	happy
-scene	1	data/scenes.js	opening	Rose	Come on, Tata! Let's go!	grace	happy
-scene	1	data/scenes.js	ch1Goal	Grace	Tata! Deedee made rhubarb crisp for you. It's cooling RIGHT NOW.	tom	happy
-scene	1	data/scenes.js	ch1Goal	Grace	Tata! Deedee made rhubarb crisp for you. It's cooling RIGHT NOW.	rose	happy
-scene	1	data/scenes.js	ch1Goal	Rose	I already licked the spoon. Don't tell.	tom	unimpressed
-scene	1	data/scenes.js	ch1Goal	Rose	I already licked the spoon. Don't tell.	grace	unimpressed
-scene	1	data/scenes.js	ch1Goal	Tom	Then we had better hurry. Before somebody licks the rest.	grace	happy
-scene	1	data/scenes.js	ch1Goal	Tom	Then we had better hurry. Before somebody licks the rest.	rose	happy
-scene	1	data/scenes.js	ch1Theft	Deedee	My favorite son!	tom	loving
-scene	1	data/scenes.js	ch1Theft	Deedee	And my girls! Come here, come here.	grace	loving
-scene	1	data/scenes.js	ch1Theft	Deedee	And my girls! Come here, come here.	rose	loving
-scene	1	data/scenes.js	ch1Theft	Deedee	Tom, you must be starving! Sit. The crisp needs ten minutes on the counter.	tom	happy
-scene	1	data/scenes.js	ch1Theft	Grace	Deedee. They're on your head.	deedee	surprised
-scene	1	data/scenes.js	ch1Theft	Grace	Deedee. They're on your head.	rose	happy
-scene	1	data/scenes.js	ch1Theft	Grace	Deedee. They're on your head.	tom	happy
-scene	1	data/scenes.js	ch1Theft	Deedee	So they are. Not one word to Boppy.	grace	happy
-scene	1	data/scenes.js	ch1Theft	Deedee	So they are. Not one word to Boppy.	tom	happy
-scene	1	data/scenes.js	ch1Theft	Tom	I brought you a sourdough loaf. Baked it yesterday. It flew here on my lap.	deedee	loving
-scene	1	data/scenes.js	ch1Theft	Deedee	Your bread and my rhubarb crisp. Now THAT is a meal.	tom	proud
-scene	1	data/scenes.js	ch1Theft	Deedee	Your bread and my rhubarb crisp. Now THAT is a meal.	grace	happy
-scene	1	data/scenes.js	ch1Theft	Tom	Mom, EVERYTHING gives you gas.	deedee	unimpressed
-scene	1	data/scenes.js	ch1Theft	Tom	Mom, EVERYTHING gives you gas.	grace	happy
-scene	1	data/scenes.js	ch1Theft	Tom	Mom, EVERYTHING gives you gas.	rose	happy
-scene	1	data/scenes.js	ch1Theft	Deedee	And I eat it anyway. That's love, Tom.	tom	loving
-scene	1	data/scenes.js	ch1Theft	Deedee	And I eat it anyway. That's love, Tom.	grace	happy
-scene	1	data/scenes.js	ch1Theft	Boppy	Tom! Good. I'm not feeling good. It's the stomach.	tom	unimpressed
-scene	1	data/scenes.js	ch1Theft	Boppy	Tom! Good. I'm not feeling good. It's the stomach.	deedee	unimpressed
-scene	1	data/scenes.js	ch1Theft	Rose	Deedee! A mud blob just climbed in the window, and it's running off with your crisp!	tom	surprised
-scene	1	data/scenes.js	ch1Theft	Rose	Deedee! A mud blob just climbed in the window, and it's running off with your crisp!	grace	surprised
-scene	1	data/scenes.js	ch1Theft	Tom	That was UNCALLED for!	deedee	angry
-scene	1	data/scenes.js	ch1Theft	Tom	That was UNCALLED for!	grace	angry
-scene	1	data/scenes.js	ch1Theft	Tom	That was UNCALLED for!	rose	scared
-scene	1	data/scenes.js	ch1Theft	Deedee	It took the crisp AND my good tin! Grab your shoes, everybody. We're going after it, and I'm coming with you.	tom	proud
-scene	1	data/scenes.js	ch1Theft	Deedee	It took the crisp AND my good tin! Grab your shoes, everybody. We're going after it, and I'm coming with you.	grace	proud
-scene	1	data/scenes.js	ch1Theft	Deedee	It took the crisp AND my good tin! Grab your shoes, everybody. We're going after it, and I'm coming with you.	rose	happy
-scene	1	data/scenes.js	ch1Theft	Boppy	It's headed for Grump Hollow. I've been saying for twenty years that something lives in that pond, and nobody listens to Boppy.	tom	unimpressed
-scene	1	data/scenes.js	ch1Theft	Boppy	It's headed for Grump Hollow. I've been saying for twenty years that something lives in that pond, and nobody listens to Boppy.	deedee	unimpressed
-scene	1	data/scenes.js	ch1Theft	Boppy	I'd come with you, but my stomach is acting up. If you see the Big One in that pond, bring him back for me.	tom	unimpressed
-scene	1	data/scenes.js	ch1Theft	Boppy	I'd come with you, but my stomach is acting up. If you see the Big One in that pond, bring him back for me.	grace	happy
-scene	1	data/scenes.js	CH1_AFTER	Deedee	Up, up. Everybody up. Deedee kisses it better.	tom	loving
-scene	1	data/scenes.js	CH1_AFTER	Deedee	Up, up. Everybody up. Deedee kisses it better.	grace	loving
-scene	1	data/scenes.js	CH1_AFTER	Deedee	Up, up. Everybody up. Deedee kisses it better.	rose	loving
-scene	1	data/scenes.js	CH1_AFTER	Deedee	There. Good as new. Try not to do that again.	tom	happy
-scene	1	data/scenes.js	CH1_AFTER	Deedee	There. Good as new. Try not to do that again.	grace	happy
-scene	1	data/scenes.js	CH1_AFTER	Deedee	There. Good as new. Try not to do that again.	rose	happy
-scene	1	data/scenes.js	ch1Mudling	Deedee	Look, rhubarb crumbs on the path. The little thief dropped them as it ran, so we can follow the trail.	grace	surprised
-scene	1	data/scenes.js	ch1Mudling	Deedee	Look, rhubarb crumbs on the path. The little thief dropped them as it ran, so we can follow the trail.	rose	surprised
-scene	1	data/scenes.js	ch1Mudling	Deedee	Look, rhubarb crumbs on the path. The little thief dropped them as it ran, so we can follow the trail.	tom	unimpressed
-scene	1	data/scenes.js	ch1Mudling	Rose	Tata. The mud is MOVING.	tom	surprised
-scene	1	data/scenes.js	ch1Mudling	Rose	Tata. The mud is MOVING.	grace	scared
-scene	1	data/scenes.js	ch1Mudling	Rose	Tata. The mud is MOVING.	deedee	surprised
-scene	1	data/scenes.js	ch1Mudling	Mudling	Blub. The pie went that way. You can't have it. Blub.	tom	unimpressed
-scene	1	data/scenes.js	ch1Mudling	Mudling	Blub. The pie went that way. You can't have it. Blub.	grace	angry
-scene	1	data/scenes.js	ch1Mudling	Mudling	Blub. The pie went that way. You can't have it. Blub.	rose	scared
-scene	1	data/scenes.js	ch1Mudling	Mudling	Blub. The pie went that way. You can't have it. Blub.	deedee	angry
-scene	1	data/scenes.js	ch1Mudling	Grace	Okay, everybody. Tata is in front. I'm in charge of choreography. FIGHT!	tom	unimpressed
-scene	1	data/scenes.js	ch1Mudling	Grace	Okay, everybody. Tata is in front. I'm in charge of choreography. FIGHT!	rose	happy
-scene	1	data/scenes.js	ch1Mudling	Grace	Okay, everybody. Tata is in front. I'm in charge of choreography. FIGHT!	deedee	proud
-scene	1	data/scenes.js	ch1Mudling	Deedee	Good job, girls. The crumb trail keeps going north, so that's the way we go.	grace	proud
-scene	1	data/scenes.js	ch1Mudling	Deedee	Good job, girls. The crumb trail keeps going north, so that's the way we go.	rose	proud
-scene	1	data/scenes.js	ch1Skeeter	Skeeter Swarm	Bzzz. Somebody smells like rhubarb. Bzzzzz.	grace	scared
-scene	1	data/scenes.js	ch1Skeeter	Skeeter Swarm	Bzzz. Somebody smells like rhubarb. Bzzzzz.	rose	scared
-scene	1	data/scenes.js	ch1Skeeter	Skeeter Swarm	Bzzz. Somebody smells like rhubarb. Bzzzzz.	tom	unimpressed
-scene	1	data/scenes.js	ch1Skeeter	Grace	Ew. Ew ew ew. Nobody touch my hair.	rose	happy
-scene	1	data/scenes.js	ch1Skeeter	Grace	Ew. Ew ew ew. Nobody touch my hair.	tom	unimpressed
-scene	1	data/scenes.js	ch1Skeeter	Grace	Ew. Ew ew ew. Nobody touch my hair.	deedee	loving
-scene	1	data/scenes.js	ch1Skeeter	Deedee	Everybody okay? Itchy isn't hurt. Keep walking.	grace	unimpressed
-scene	1	data/scenes.js	ch1Skeeter	Deedee	Everybody okay? Itchy isn't hurt. Keep walking.	rose	happy
-scene	1	data/scenes.js	ch1Grump	Pond Grump	Grrrumble. You're standing in my puddle. And the small one is LAUGHING at me.	rose	happy
-scene	1	data/scenes.js	ch1Grump	Pond Grump	Grrrumble. You're standing in my puddle. And the small one is LAUGHING at me.	grace	surprised
-scene	1	data/scenes.js	ch1Grump	Pond Grump	Grrrumble. You're standing in my puddle. And the small one is LAUGHING at me.	tom	unimpressed
-scene	1	data/scenes.js	ch1Grump	Rose	I'm not laughing. I'm giggling. It's different.	tom	happy
-scene	1	data/scenes.js	ch1Grump	Rose	I'm not laughing. I'm giggling. It's different.	grace	unimpressed
-scene	1	data/scenes.js	ch1Grump	Rose	I'm not laughing. I'm giggling. It's different.	deedee	happy
-scene	1	data/scenes.js	ch1Grump	Pond Grump	That's IT. Soggy Slap. For the giggler.	rose	scared
-scene	1	data/scenes.js	ch1Grump	Pond Grump	That's IT. Soggy Slap. For the giggler.	tom	angry
-scene	1	data/scenes.js	ch1Grump	Pond Grump	That's IT. Soggy Slap. For the giggler.	deedee	angry
-scene	1	data/scenes.js	ch1Grump	Deedee	Hugs for everyone. There. All better.	tom	loving
-scene	1	data/scenes.js	ch1Grump	Deedee	Hugs for everyone. There. All better.	grace	loving
-scene	1	data/scenes.js	ch1Grump	Deedee	Hugs for everyone. There. All better.	rose	loving
-scene	1	data/scenes.js	ch1Grump	Deedee	The crumbs lead around the pond, toward Boppy's fishing spot.	tom	proud
-scene	1	data/scenes.js	ch1Grump	Deedee	The crumbs lead around the pond, toward Boppy's fishing spot.	grace	proud
-scene	1	data/scenes.js	ch1Grump	Grace	Boppy says the Big One lives over there.	rose	scared
-scene	1	data/scenes.js	ch1Grump	Grace	Boppy says the Big One lives over there.	tom	unimpressed
-scene	1	data/scenes.js	ch1Pond	Grace	THERE! The thief! He still has the tin!	tom	proud
-scene	1	data/scenes.js	ch1Pond	Grace	THERE! The thief! He still has the tin!	rose	surprised
-scene	1	data/scenes.js	ch1Pond	Grace	THERE! The thief! He still has the tin!	deedee	angry
-scene	1	data/scenes.js	ch1Pond	The Big One	GLUB. Is that a pie? For me?	grace	surprised
-scene	1	data/scenes.js	ch1Pond	The Big One	GLUB. Is that a pie? For me?	rose	surprised
-scene	1	data/scenes.js	ch1Pond	The Big One	GLUB. Is that a pie? For me?	tom	unimpressed
-scene	1	data/scenes.js	ch1Pond	Big Mudling	Blub. I stole it for you, boss.	deedee	angry
-scene	1	data/scenes.js	ch1Pond	Big Mudling	Blub. I stole it for you, boss.	tom	unimpressed
-scene	1	data/scenes.js	ch1Pond	The Big One	The tin fits on my head like a crown. I'm the king of the pond now. GLUB.	grace	unimpressed
-scene	1	data/scenes.js	ch1Pond	The Big One	The tin fits on my head like a crown. I'm the king of the pond now. GLUB.	rose	happy
-scene	1	data/scenes.js	ch1Pond	The Big One	The tin fits on my head like a crown. I'm the king of the pond now. GLUB.	deedee	angry
-scene	1	data/scenes.js	ch1Pond	The Big One	The tin fits on my head like a crown. I'm the king of the pond now. GLUB.	tom	unimpressed
-scene	1	data/scenes.js	ch1Pond	Deedee	That's my GOOD tin, you overgrown handbag!	tom	happy
-scene	1	data/scenes.js	ch1Pond	Deedee	That's my GOOD tin, you overgrown handbag!	grace	happy
-scene	1	data/scenes.js	ch1Pond	Deedee	That's my GOOD tin, you overgrown handbag!	rose	happy
-scene	1	data/scenes.js	ch1Pond	Rose	Tata, he looks like a turtle wearing a hat.	tom	happy
-scene	1	data/scenes.js	ch1Pond	Rose	Tata, he looks like a turtle wearing a hat.	grace	happy
-scene	1	data/scenes.js	ch1Pond	Rose	Tata, he looks like a turtle wearing a hat.	deedee	unimpressed
-scene	1	data/scenes.js	ch1Pond	Tom	Nobody touches Deedee’s crisp. Everybody ready?	grace	proud
-scene	1	data/scenes.js	ch1Pond	Tom	Nobody touches Deedee’s crisp. Everybody ready?	rose	proud
-scene	1	data/scenes.js	ch1Pond	Tom	Nobody touches Deedee’s crisp. Everybody ready?	deedee	proud
-scene	1	data/scenes.js	ch1Pond	Deedee	Up, up. Everybody up. Deedee kisses it better.	tom	loving
-scene	1	data/scenes.js	ch1Pond	Deedee	Up, up. Everybody up. Deedee kisses it better.	grace	loving
-scene	1	data/scenes.js	ch1Pond	Deedee	Up, up. Everybody up. Deedee kisses it better.	rose	loving
-scene	1	data/scenes.js	ch1AfterBoss	The Big One	Glub. Nobody ever made me laugh before. You can have your tin back.	rose	loving
-scene	1	data/scenes.js	ch1AfterBoss	The Big One	Glub. Nobody ever made me laugh before. You can have your tin back.	grace	surprised
-scene	1	data/scenes.js	ch1AfterBoss	The Big One	Glub. Nobody ever made me laugh before. You can have your tin back.	deedee	loving
-scene	1	data/scenes.js	ch1AfterBoss	The Big One	Glub. Nobody ever made me laugh before. You can have your tin back.	tom	loving
-scene	1	data/scenes.js	ch1AfterBoss	The Big One	Glub. Fine. Take your tin. I'm going back in the pond to think about things.	deedee	happy
-scene	1	data/scenes.js	ch1AfterBoss	The Big One	Glub. Fine. Take your tin. I'm going back in the pond to think about things.	grace	happy
-scene	1	data/scenes.js	ch1AfterBoss	The Big One	Glub. Fine. Take your tin. I'm going back in the pond to think about things.	rose	happy
-scene	1	data/scenes.js	ch1AfterBoss	The Big One	Glub. Fine. Take your tin. I'm going back in the pond to think about things.	tom	unimpressed
-scene	1	data/scenes.js	ch1AfterBoss	Deedee	My tin! And look. Half the crisp is still in it.	grace	happy
-scene	1	data/scenes.js	ch1AfterBoss	Deedee	My tin! And look. Half the crisp is still in it.	rose	happy
-scene	1	data/scenes.js	ch1AfterBoss	Deedee	My tin! And look. Half the crisp is still in it.	tom	happy
-scene	1	data/scenes.js	ch1AfterBoss	Grace	The Big One ate the other half. I saw crumbs on its chin.	deedee	unimpressed
-scene	1	data/scenes.js	ch1AfterBoss	Grace	The Big One ate the other half. I saw crumbs on its chin.	rose	happy
-scene	1	data/scenes.js	ch1AfterBoss	Grace	The Big One ate the other half. I saw crumbs on its chin.	tom	happy
-scene	1	data/scenes.js	ch1AfterBoss	Deedee	Then we split this half. Everybody home. Wait until Boppy hears about this.	tom	happy
-scene	1	data/scenes.js	ch1AfterBoss	Deedee	Then we split this half. Everybody home. Wait until Boppy hears about this.	grace	happy
-scene	1	data/scenes.js	ch1AfterBoss	Deedee	Then we split this half. Everybody home. Wait until Boppy hears about this.	rose	happy
-scene	1	data/scenes.js	ch1End	Boppy	You found the Big One? I TOLD everybody. Twenty years.	tom	unimpressed
-scene	1	data/scenes.js	ch1End	Boppy	You found the Big One? I TOLD everybody. Twenty years.	grace	happy
-scene	1	data/scenes.js	ch1End	Boppy	You found the Big One? I TOLD everybody. Twenty years.	deedee	unimpressed
-scene	1	data/scenes.js	ch1End	Tom	We did. And when it laughed, this fell out of its lip.	boppy	surprised
-scene	1	data/scenes.js	ch1End	Tom	We did. And when it laughed, this fell out of its lip.	grace	proud
-scene	1	data/scenes.js	ch1End	Boppy	My LURE! I lost that in 2006. Still shiny. Unlike me.	tom	happy
-scene	1	data/scenes.js	ch1End	Boppy	My LURE! I lost that in 2006. Still shiny. Unlike me.	grace	happy
-scene	1	data/scenes.js	ch1End	Boppy	My LURE! I lost that in 2006. Still shiny. Unlike me.	rose	happy
-scene	1	data/scenes.js	ch1End	Boppy	My LURE! I lost that in 2006. Still shiny. Unlike me.	deedee	unimpressed
-scene	1	data/scenes.js	ch1End	Boppy	Keep it, Tom. For luck. The fish clearly didn't want it.	tom	loving
-scene	1	data/scenes.js	ch1End	Deedee	Sit. Everybody sit. Half a crisp is still a crisp.	tom	happy
-scene	1	data/scenes.js	ch1End	Deedee	Sit. Everybody sit. Half a crisp is still a crisp.	grace	happy
-scene	1	data/scenes.js	ch1End	Deedee	Sit. Everybody sit. Half a crisp is still a crisp.	rose	happy
-scene	1	data/scenes.js	ch1End	Deedee	Sit. Everybody sit. Half a crisp is still a crisp.	boppy	happy
-scene	1	data/scenes.js	ch1End	Rose	This is the best half a crisp I ever had.	deedee	loving
-scene	1	data/scenes.js	ch1End	Rose	This is the best half a crisp I ever had.	tom	happy
-scene	1	data/scenes.js	ch1End	Grace	Tata, you're staying the WHOLE week, right?	tom	loving
-scene	1	data/scenes.js	ch1End	Grace	Tata, you're staying the WHOLE week, right?	rose	happy
-scene	1	data/scenes.js	ch1End	Tom	The whole week. And nobody is stealing anything else.	grace	happy
-scene	1	data/scenes.js	ch1End	Tom	The whole week. And nobody is stealing anything else.	rose	happy
-scene	1	data/scenes.js	ch1End	Tom	The whole week. And nobody is stealing anything else.	deedee	loving
-scene	1	data/scenes.js	ch1End	Boppy	Slow down. Everybody eats too fast. My stomach.	deedee	unimpressed
-scene	1	data/scenes.js	ch1End	Boppy	Slow down. Everybody eats too fast. My stomach.	tom	unimpressed
-scene	1	data/scenes.js	ch1End	Boppy	Slow down. Everybody eats too fast. My stomach.	grace	happy
-scene	2	data/scenes.js	ch2Loft	TNB	Look who flew three thousand miles to see me.	tom	loving
+kind	chapter	file	where	speaker	text	listener	mood	at
+scene	1	data/scenes.js	opening	Grace	TATA! You're BACK!	tom	loving	TATA!
+scene	1	data/scenes.js	opening	Grace	We waited for you for a hundred years.	tom	loving	waited for you
+scene	1	data/scenes.js	opening	Grace	We waited for you for a hundred years.	rose	happy	a hundred years
+scene	1	data/scenes.js	opening	Rose	A hundred MILLION years!	tom	happy	MILLION
+scene	1	data/scenes.js	opening	Rose	A hundred MILLION years!	grace	happy	MILLION
+scene	1	data/scenes.js	opening	Rose	Tata, up! Up up up!	tom	happy	Tata, up!
+scene	1	data/scenes.js	opening	Rose	I'm the tallest! Giddyup, Tata!	tom	happy	Giddyup
+scene	1	data/scenes.js	opening	Rose	I'm the tallest! Giddyup, Tata!	grace	happy	tallest!
+scene	1	data/scenes.js	opening	Tom	Hello, Rose. Please keep your arms and legs inside the uncle at all times.	rose	happy	inside the uncle
+scene	1	data/scenes.js	opening	Tom	Hello, Rose. Please keep your arms and legs inside the uncle at all times.	grace	happy	inside the uncle
+scene	1	data/scenes.js	opening	Grace	Tata, LOOK. A sparkling diamond gold dumpling squishy!	tom	surprised	LOOK.
+scene	1	data/scenes.js	opening	Grace	Tata, LOOK. A sparkling diamond gold dumpling squishy!	rose	surprised	dumpling squishy
+scene	1	data/scenes.js	opening	Grace	It's limited edition. There are only two in the whole world. You can squeeze it!	tom	happy	squeeze it!
+scene	1	data/scenes.js	opening	Tom	That's the shiniest dumpling I've ever seen. And I've seen a LOT of dumplings.	grace	proud	shiniest dumpling I've ever seen.
+scene	1	data/scenes.js	opening	Tom	That's the shiniest dumpling I've ever seen. And I've seen a LOT of dumplings.	rose	happy	a LOT of dumplings
+scene	1	data/scenes.js	opening	Rose	Come on, Tata! Let's go!	tom	happy	Come on, Tata!
+scene	1	data/scenes.js	opening	Rose	Come on, Tata! Let's go!	grace	happy	Let's go!
+scene	1	data/scenes.js	ch1Goal	Grace	Tata! Deedee made rhubarb crisp for you. It's cooling RIGHT NOW.	tom	happy	rhubarb crisp for you
+scene	1	data/scenes.js	ch1Goal	Grace	Tata! Deedee made rhubarb crisp for you. It's cooling RIGHT NOW.	rose	happy	RIGHT NOW
+scene	1	data/scenes.js	ch1Goal	Rose	I already licked the spoon. Don't tell.	tom	unimpressed	licked the spoon.
+scene	1	data/scenes.js	ch1Goal	Rose	I already licked the spoon. Don't tell.	grace	unimpressed	licked the spoon.
+scene	1	data/scenes.js	ch1Goal	Tom	Then we had better hurry. Before somebody licks the rest.	grace	happy	licks the rest
+scene	1	data/scenes.js	ch1Goal	Tom	Then we had better hurry. Before somebody licks the rest.	rose	happy	licks the rest
+scene	1	data/scenes.js	ch1Theft	Deedee	My favorite son!	tom	loving	favorite son
+scene	1	data/scenes.js	ch1Theft	Deedee	And my girls! Come here, come here.	grace	loving	my girls!
+scene	1	data/scenes.js	ch1Theft	Deedee	And my girls! Come here, come here.	rose	loving	my girls!
+scene	1	data/scenes.js	ch1Theft	Grace	Tata, look at the door. Deedee measured me two times since you left.	tom	happy	two times
+scene	1	data/scenes.js	ch1Theft	Grace	Tata, look at the door. Deedee measured me two times since you left.	deedee	loving	measured me
+scene	1	data/scenes.js	ch1Theft	Rose	I got one too. Mine's the low one.	tom	loving	the low one
+scene	1	data/scenes.js	ch1Theft	Rose	I got one too. Mine's the low one.	grace	happy	the low one
+scene	1	data/scenes.js	ch1Theft	Rose	I got one too. Mine's the low one.	deedee	loving	the low one
+scene	1	data/scenes.js	ch1Theft	Deedee	Tom, you must be starving! Sit. The crisp needs ten minutes on the counter.	tom	happy	The crisp
+scene	1	data/scenes.js	ch1Theft	Deedee	Where are my reading glasses? I had them one second ago. I need to read the timer.	grace	unimpressed	I had them one second ago
+scene	1	data/scenes.js	ch1Theft	Grace	Deedee. They're on your head.	deedee	surprised	on your head
+scene	1	data/scenes.js	ch1Theft	Grace	Deedee. They're on your head.	rose	happy	on your head
+scene	1	data/scenes.js	ch1Theft	Grace	Deedee. They're on your head.	tom	happy	on your head
+scene	1	data/scenes.js	ch1Theft	Deedee	So they are. Not one word to Boppy.	grace	happy	Not one word
+scene	1	data/scenes.js	ch1Theft	Deedee	So they are. Not one word to Boppy.	tom	happy	Not one word to Boppy
+scene	1	data/scenes.js	ch1Theft	Tom	I brought you a sourdough loaf. Baked it yesterday. It flew here on my lap.	deedee	loving	sourdough loaf
+scene	1	data/scenes.js	ch1Theft	Deedee	Your bread and my rhubarb crisp. Now THAT is a meal.	tom	proud	Your bread
+scene	1	data/scenes.js	ch1Theft	Deedee	Your bread and my rhubarb crisp. Now THAT is a meal.	grace	happy	THAT is a meal
+scene	1	data/scenes.js	ch1Theft	Deedee	A sliver for me. Just a sliver. Sourdough gives me gas.	tom	unimpressed	gives me gas
+scene	1	data/scenes.js	ch1Theft	Deedee	A sliver for me. Just a sliver. Sourdough gives me gas.	grace	happy	gives me gas
+scene	1	data/scenes.js	ch1Theft	Deedee	A sliver for me. Just a sliver. Sourdough gives me gas.	rose	happy	gives me gas
+scene	1	data/scenes.js	ch1Theft	Tom	Mom, EVERYTHING gives you gas.	deedee	unimpressed	EVERYTHING
+scene	1	data/scenes.js	ch1Theft	Tom	Mom, EVERYTHING gives you gas.	grace	happy	gives you gas
+scene	1	data/scenes.js	ch1Theft	Tom	Mom, EVERYTHING gives you gas.	rose	happy	gives you gas
+scene	1	data/scenes.js	ch1Theft	Deedee	And I eat it anyway. That's love, Tom.	tom	loving	That's love
+scene	1	data/scenes.js	ch1Theft	Deedee	And I eat it anyway. That's love, Tom.	grace	happy	eat it anyway
+scene	1	data/scenes.js	ch1Theft	Boppy	Tom! Good. I'm not feeling good. It's the stomach.	tom	unimpressed	It's the stomach
+scene	1	data/scenes.js	ch1Theft	Boppy	Tom! Good. I'm not feeling good. It's the stomach.	deedee	unimpressed	not feeling good
+scene	1	data/scenes.js	ch1Theft	Rose	Deedee! A mud blob just climbed in the window, and it's running off with your crisp!	tom	surprised	A mud blob
+scene	1	data/scenes.js	ch1Theft	Rose	Deedee! A mud blob just climbed in the window, and it's running off with your crisp!	grace	surprised	A mud blob
+scene	1	data/scenes.js	ch1Theft	Rose	Deedee! A mud blob just climbed in the window, and it's running off with your crisp!	deedee	surprised	running off with your crisp
+scene	1	data/scenes.js	ch1Theft	Deedee	A WHAT climbed in my window?	rose	scared	
+scene	1	data/scenes.js	ch1Theft	Rose	It has EYES! The mud has EYES!	grace	scared	It has EYES!
+scene	1	data/scenes.js	ch1Theft	Rose	It has EYES! The mud has EYES!	tom	surprised	It has EYES!
+scene	1	data/scenes.js	ch1Theft	Rose	It has EYES! The mud has EYES!	deedee	surprised	The mud has EYES
+scene	1	data/scenes.js	ch1Theft	Deedee	Forty years in this kitchen. I've had ants. I've had a raccoon. I have never had THAT.	tom	unimpressed	a raccoon
+scene	1	data/scenes.js	ch1Theft	Deedee	Forty years in this kitchen. I've had ants. I've had a raccoon. I have never had THAT.	grace	surprised	a raccoon
+scene	1	data/scenes.js	ch1Theft	Grace	It's so brown. It's the brownest thing I've ever seen.	rose	happy	brownest thing
+scene	1	data/scenes.js	ch1Theft	Grace	It's so brown. It's the brownest thing I've ever seen.	tom	happy	I've ever seen
+scene	1	data/scenes.js	ch1Theft	Grace	It's so brown. It's the brownest thing I've ever seen.	deedee	unimpressed	brownest
+scene	1	data/scenes.js	ch1Theft	Tom	That was UNCALLED for!	deedee	angry	UNCALLED
+scene	1	data/scenes.js	ch1Theft	Tom	That was UNCALLED for!	grace	angry	UNCALLED
+scene	1	data/scenes.js	ch1Theft	Tom	That was UNCALLED for!	rose	scared	
+scene	1	data/scenes.js	ch1Theft	Grace	It's running for the pond!	tom	surprised	the pond
+scene	1	data/scenes.js	ch1Theft	Grace	It's running for the pond!	deedee	angry	the pond
+scene	1	data/scenes.js	ch1Theft	Grace	It's running for the pond!	rose	scared	the pond
+scene	1	data/scenes.js	ch1Theft	Deedee	It took the crisp AND my good tin! Grab your shoes, everybody. We're going after it, and I'm coming with you.	tom	proud	I'm coming with you
+scene	1	data/scenes.js	ch1Theft	Deedee	It took the crisp AND my good tin! Grab your shoes, everybody. We're going after it, and I'm coming with you.	grace	proud	We're going after it
+scene	1	data/scenes.js	ch1Theft	Deedee	It took the crisp AND my good tin! Grab your shoes, everybody. We're going after it, and I'm coming with you.	rose	happy	Grab your shoes
+scene	1	data/scenes.js	ch1Theft	Boppy	It's headed for Grump Hollow. I've been saying for twenty years that something lives in that pond, and nobody listens to Boppy.	tom	unimpressed	nobody listens to Boppy
+scene	1	data/scenes.js	ch1Theft	Boppy	It's headed for Grump Hollow. I've been saying for twenty years that something lives in that pond, and nobody listens to Boppy.	deedee	unimpressed	twenty years
+scene	1	data/scenes.js	ch1Theft	Boppy	Twenty years ago I'd have caught that thing before it got to the fence.	deedee	unimpressed	Twenty years ago
+scene	1	data/scenes.js	ch1Theft	Boppy	Twenty years ago I'd have caught that thing before it got to the fence.	grace	happy	caught that thing
+scene	1	data/scenes.js	ch1Theft	Boppy	Twenty years ago I'd have caught that thing before it got to the fence.	tom	unimpressed	before it got to the fence
+scene	1	data/scenes.js	ch1Theft	Boppy	I'd come with you, but my stomach is acting up. If you see the Big One in that pond, bring him back for me.	tom	unimpressed	my stomach is acting up
+scene	1	data/scenes.js	ch1Theft	Boppy	I'd come with you, but my stomach is acting up. If you see the Big One in that pond, bring him back for me.	grace	happy	the Big One
+scene	1	data/scenes.js	ch1Theft	Boppy	Tom. You stay in front of those girls.	tom	proud	in front of those girls
+scene	1	data/scenes.js	ch1Theft	Boppy	Tom. You stay in front of those girls.	deedee	loving	those girls
+scene	1	data/scenes.js	CH1_AFTER	Deedee	Up, up. Everybody up. Deedee kisses it better.	tom	loving	kisses it better
+scene	1	data/scenes.js	CH1_AFTER	Deedee	Up, up. Everybody up. Deedee kisses it better.	grace	loving	kisses it better
+scene	1	data/scenes.js	CH1_AFTER	Deedee	Up, up. Everybody up. Deedee kisses it better.	rose	loving	kisses it better
+scene	1	data/scenes.js	ch1Pond	Deedee	Up, up. Everybody up. Deedee kisses it better.	tom	loving	kisses it better
+scene	1	data/scenes.js	ch1Pond	Deedee	Up, up. Everybody up. Deedee kisses it better.	grace	loving	kisses it better
+scene	1	data/scenes.js	ch1Pond	Deedee	Up, up. Everybody up. Deedee kisses it better.	rose	loving	kisses it better
+scene	1	data/scenes.js	CH1_AFTER	Deedee	There. Good as new. Try not to do that again.	tom	happy	Good as new
+scene	1	data/scenes.js	CH1_AFTER	Deedee	There. Good as new. Try not to do that again.	grace	happy	Good as new
+scene	1	data/scenes.js	CH1_AFTER	Deedee	There. Good as new. Try not to do that again.	rose	happy	Good as new
+scene	1	data/scenes.js	ch1Mudling	Deedee	Look, rhubarb crumbs on the path. The little thief dropped them as it ran, so we can follow the trail.	grace	surprised	rhubarb crumbs
+scene	1	data/scenes.js	ch1Mudling	Deedee	Look, rhubarb crumbs on the path. The little thief dropped them as it ran, so we can follow the trail.	rose	surprised	rhubarb crumbs
+scene	1	data/scenes.js	ch1Mudling	Deedee	Look, rhubarb crumbs on the path. The little thief dropped them as it ran, so we can follow the trail.	tom	unimpressed	The little thief
+scene	1	data/scenes.js	ch1Mudling	Rose	Tata. The mud is MOVING.	tom	surprised	MOVING
+scene	1	data/scenes.js	ch1Mudling	Rose	Tata. The mud is MOVING.	grace	scared	MOVING
+scene	1	data/scenes.js	ch1Mudling	Rose	Tata. The mud is MOVING.	deedee	surprised	MOVING
+scene	1	data/scenes.js	ch1Mudling	Mudling	Blub. The pie went that way. You can't have it. Blub.	tom	surprised	Blub.
+scene	1	data/scenes.js	ch1Mudling	Mudling	Blub. The pie went that way. You can't have it. Blub.	rose	scared	Blub.
+scene	1	data/scenes.js	ch1Mudling	Mudling	Blub. The pie went that way. You can't have it. Blub.	grace	angry	You can't have it
+scene	1	data/scenes.js	ch1Mudling	Mudling	Blub. The pie went that way. You can't have it. Blub.	deedee	angry	You can't have it
+scene	1	data/scenes.js	ch1Mudling	Tom	It talks.	grace	surprised	It talks
+scene	1	data/scenes.js	ch1Mudling	Tom	It talks.	deedee	surprised	It talks
+scene	1	data/scenes.js	ch1Mudling	Tom	It talks.	rose	scared	It talks
+scene	1	data/scenes.js	ch1Mudling	Deedee	It talks AND it steals.	tom	unimpressed	AND it steals
+scene	1	data/scenes.js	ch1Mudling	Deedee	It talks AND it steals.	grace	happy	AND it steals
+scene	1	data/scenes.js	ch1Mudling	Grace	Okay, everybody. Tata is in front. I'm in charge of choreography. FIGHT!	tom	unimpressed	in charge of choreography
+scene	1	data/scenes.js	ch1Mudling	Grace	Okay, everybody. Tata is in front. I'm in charge of choreography. FIGHT!	deedee	proud	choreography
+scene	1	data/scenes.js	ch1Mudling	Grace	Okay, everybody. Tata is in front. I'm in charge of choreography. FIGHT!	rose	happy	FIGHT!
+scene	1	data/scenes.js	ch1Mudling	Deedee	Good job, girls. The crumb trail keeps going north, so that's the way we go.	grace	proud	Good job, girls
+scene	1	data/scenes.js	ch1Mudling	Deedee	Good job, girls. The crumb trail keeps going north, so that's the way we go.	rose	proud	Good job, girls
+scene	1	data/scenes.js	ch1Skeeter	Skeeter Swarm	Bzzz. Somebody smells like rhubarb. Bzzzzz.	grace	scared	Bzzz.
+scene	1	data/scenes.js	ch1Skeeter	Skeeter Swarm	Bzzz. Somebody smells like rhubarb. Bzzzzz.	rose	scared	Bzzz.
+scene	1	data/scenes.js	ch1Skeeter	Skeeter Swarm	Bzzz. Somebody smells like rhubarb. Bzzzzz.	tom	unimpressed	smells like rhubarb
+scene	1	data/scenes.js	ch1Skeeter	Grace	Ew. Ew ew ew. Nobody touch my hair.	rose	happy	Ew ew ew
+scene	1	data/scenes.js	ch1Skeeter	Grace	Ew. Ew ew ew. Nobody touch my hair.	tom	unimpressed	Nobody touch my hair
+scene	1	data/scenes.js	ch1Skeeter	Grace	Ew. Ew ew ew. Nobody touch my hair.	deedee	loving	my hair
+scene	1	data/scenes.js	ch1Skeeter	Deedee	I've been bitten ten thousand times in my life. Not one of them ever said a word first.	grace	happy	ten thousand times
+scene	1	data/scenes.js	ch1Skeeter	Deedee	I've been bitten ten thousand times in my life. Not one of them ever said a word first.	tom	happy	said a word first
+scene	1	data/scenes.js	ch1Skeeter	Deedee	Everybody okay? Itchy isn't hurt. Keep walking.	grace	unimpressed	Itchy isn't hurt
+scene	1	data/scenes.js	ch1Skeeter	Deedee	Everybody okay? Itchy isn't hurt. Keep walking.	rose	happy	Itchy
+scene	1	data/scenes.js	ch1Grump	Pond Grump	Grrrumble. You're standing in my puddle. And the small one is LAUGHING at me.	rose	happy	Grrrumble.
+scene	1	data/scenes.js	ch1Grump	Pond Grump	Grrrumble. You're standing in my puddle. And the small one is LAUGHING at me.	grace	surprised	my puddle
+scene	1	data/scenes.js	ch1Grump	Pond Grump	Grrrumble. You're standing in my puddle. And the small one is LAUGHING at me.	tom	unimpressed	LAUGHING at me
+scene	1	data/scenes.js	ch1Grump	Rose	I'm not laughing. I'm giggling. It's different.	tom	happy	giggling
+scene	1	data/scenes.js	ch1Grump	Rose	I'm not laughing. I'm giggling. It's different.	deedee	happy	giggling
+scene	1	data/scenes.js	ch1Grump	Rose	I'm not laughing. I'm giggling. It's different.	grace	unimpressed	It's different
+scene	1	data/scenes.js	ch1Grump	Pond Grump	That's IT. Soggy Slap. For the giggler.	rose	scared	Soggy Slap
+scene	1	data/scenes.js	ch1Grump	Pond Grump	That's IT. Soggy Slap. For the giggler.	tom	angry	For the giggler
+scene	1	data/scenes.js	ch1Grump	Pond Grump	That's IT. Soggy Slap. For the giggler.	deedee	angry	For the giggler
+scene	1	data/scenes.js	ch1Grump	Deedee	Hugs for everyone. There. All better.	tom	loving	Hugs for everyone
+scene	1	data/scenes.js	ch1Grump	Deedee	Hugs for everyone. There. All better.	grace	loving	Hugs for everyone
+scene	1	data/scenes.js	ch1Grump	Deedee	Hugs for everyone. There. All better.	rose	loving	Hugs for everyone
+scene	1	data/scenes.js	ch1Grump	Deedee	The crumbs lead around the pond, toward Boppy's fishing spot.	tom	proud	around the pond
+scene	1	data/scenes.js	ch1Grump	Deedee	The crumbs lead around the pond, toward Boppy's fishing spot.	grace	proud	around the pond
+scene	1	data/scenes.js	ch1Grump	Grace	Boppy says the Big One lives over there.	tom	unimpressed	Boppy says
+scene	1	data/scenes.js	ch1Grump	Grace	Boppy says the Big One lives over there.	rose	scared	the Big One
+scene	1	data/scenes.js	ch1Grump	Tom	Then nobody goes near the water. Stay close.	rose	loving	Stay close
+scene	1	data/scenes.js	ch1Grump	Tom	Then nobody goes near the water. Stay close.	grace	proud	Stay close
+scene	1	data/scenes.js	ch1Grump	Tom	Then nobody goes near the water. Stay close.	deedee	loving	Stay close
+scene	1	data/scenes.js	ch1Spot	Rose	A MARBLE! There's a marble with a bug in it!	grace	surprised	A MARBLE!
+scene	1	data/scenes.js	ch1Spot	Rose	A MARBLE! There's a marble with a bug in it!	tom	surprised	a bug in it
+scene	1	data/scenes.js	ch1Spot	Rose	A MARBLE! There's a marble with a bug in it!	deedee	surprised	a bug in it
+scene	1	data/scenes.js	ch1Spot	Grace	That's a dragonfly. It's inside an orange rock. Its wings are open and it's not moving.	rose	surprised	dragonfly
+scene	1	data/scenes.js	ch1Spot	Grace	That's a dragonfly. It's inside an orange rock. Its wings are open and it's not moving.	deedee	surprised	orange rock
+scene	1	data/scenes.js	ch1Spot	Grace	That's a dragonfly. It's inside an orange rock. Its wings are open and it's not moving.	tom	surprised	not moving
+scene	1	data/scenes.js	ch1Spot	Deedee	Look at the grass. It's grey. Just this bit, the size of my hand.	tom	surprised	It's grey
+scene	1	data/scenes.js	ch1Spot	Deedee	Look at the grass. It's grey. Just this bit, the size of my hand.	grace	surprised	It's grey
+scene	1	data/scenes.js	ch1Spot	Deedee	Look at the grass. It's grey. Just this bit, the size of my hand.	rose	surprised	It's grey
+scene	1	data/scenes.js	ch1Spot	Tom	It isn't dried out. It's just grey. Like somebody took the green out.	grace	scared	took the green out
+scene	1	data/scenes.js	ch1Spot	Tom	It isn't dried out. It's just grey. Like somebody took the green out.	deedee	surprised	took the green out
+scene	1	data/scenes.js	ch1Spot	Rose	I'm keeping it. It's stuck.	tom	happy	I'm keeping it
+scene	1	data/scenes.js	ch1Spot	Rose	I'm keeping it. It's stuck.	grace	unimpressed	I'm keeping it
+scene	1	data/scenes.js	ch1Spot	Rose	I'm keeping it. It's stuck.	deedee	happy	It's stuck
+scene	1	data/scenes.js	ch1Spot	Tom	Let me.	rose	happy	Let me
+scene	1	data/scenes.js	ch1Spot	Rose	You're not trying.	tom	unimpressed	not trying
+scene	1	data/scenes.js	ch1Spot	Rose	You're not trying.	grace	happy	not trying
+scene	1	data/scenes.js	ch1Spot	Rose	You're not trying.	deedee	happy	not trying
+scene	1	data/scenes.js	ch1Spot	Tom	I'm trying, Rose. It's a marble and it's winning.	rose	happy	it's winning
+scene	1	data/scenes.js	ch1Spot	Tom	I'm trying, Rose. It's a marble and it's winning.	grace	happy	it's winning
+scene	1	data/scenes.js	ch1Spot	Tom	I'm trying, Rose. It's a marble and it's winning.	deedee	happy	it's winning
+scene	1	data/scenes.js	ch1Spot	Grace	There's a little round hole in the side. Like somebody took a bite.	tom	surprised	round hole
+scene	1	data/scenes.js	ch1Spot	Grace	There's a little round hole in the side. Like somebody took a bite.	rose	scared	took a bite
+scene	1	data/scenes.js	ch1Spot	Grace	There's a little round hole in the side. Like somebody took a bite.	deedee	surprised	took a bite
+scene	1	data/scenes.js	ch1Spot	Deedee	And somebody left a burnt light bulb. Now they're littering at my pond too.	tom	surprised	burnt light bulb
+scene	1	data/scenes.js	ch1Spot	Deedee	And somebody left a burnt light bulb. Now they're littering at my pond too.	grace	happy	littering at my pond
+scene	1	data/scenes.js	ch1Spot	Deedee	The tin. Go, go, go.	tom	proud	Go, go, go
+scene	1	data/scenes.js	ch1Spot	Deedee	The tin. Go, go, go.	grace	proud	Go, go, go
+scene	1	data/scenes.js	ch1Spot	Deedee	The tin. Go, go, go.	rose	happy	Go, go, go
+scene	1	data/scenes.js	ch1Spot	Rose	Bye, marble. I'm coming back for you.	tom	loving	Bye, marble
+scene	1	data/scenes.js	ch1Spot	Rose	Bye, marble. I'm coming back for you.	deedee	loving	Bye, marble
+scene	1	data/scenes.js	ch1Spot	Rose	Bye, marble. I'm coming back for you.	grace	unimpressed	coming back for you
+scene	1	data/scenes.js	ch1Pond	Grace	THERE! The thief! He still has the tin!	tom	proud	THERE!
+scene	1	data/scenes.js	ch1Pond	Grace	THERE! The thief! He still has the tin!	rose	surprised	THERE!
+scene	1	data/scenes.js	ch1Pond	Grace	THERE! The thief! He still has the tin!	deedee	angry	still has the tin
+scene	1	data/scenes.js	ch1Pond	The Big One	GLUB. Is that a pie? For me?	grace	surprised	GLUB.
+scene	1	data/scenes.js	ch1Pond	The Big One	GLUB. Is that a pie? For me?	rose	surprised	GLUB.
+scene	1	data/scenes.js	ch1Pond	The Big One	GLUB. Is that a pie? For me?	tom	surprised	GLUB.
+scene	1	data/scenes.js	ch1Pond	Big Mudling	Blub. I stole it for you, boss.	deedee	angry	stole it
+scene	1	data/scenes.js	ch1Pond	Big Mudling	Blub. I stole it for you, boss.	tom	unimpressed	boss
+scene	1	data/scenes.js	ch1Pond	The Big One	The tin fits on my head like a crown. I'm the king of the pond now. GLUB.	rose	happy	like a crown
+scene	1	data/scenes.js	ch1Pond	The Big One	The tin fits on my head like a crown. I'm the king of the pond now. GLUB.	deedee	angry	on my head
+scene	1	data/scenes.js	ch1Pond	The Big One	The tin fits on my head like a crown. I'm the king of the pond now. GLUB.	grace	unimpressed	king of the pond
+scene	1	data/scenes.js	ch1Pond	The Big One	The tin fits on my head like a crown. I'm the king of the pond now. GLUB.	tom	unimpressed	king of the pond now
+scene	1	data/scenes.js	ch1Pond	Tom	That's a fish. That fish is bigger than the cab.	deedee	surprised	That's a fish
+scene	1	data/scenes.js	ch1Pond	Tom	That's a fish. That fish is bigger than the cab.	grace	surprised	bigger than the cab
+scene	1	data/scenes.js	ch1Pond	Tom	That's a fish. That fish is bigger than the cab.	rose	happy	bigger than the cab
+scene	1	data/scenes.js	ch1Pond	Grace	Boppy was RIGHT?	tom	surprised	RIGHT
+scene	1	data/scenes.js	ch1Pond	Grace	Boppy was RIGHT?	deedee	unimpressed	RIGHT
+scene	1	data/scenes.js	ch1Pond	Deedee	Nobody tell him.	tom	happy	Nobody tell him
+scene	1	data/scenes.js	ch1Pond	Deedee	Nobody tell him.	grace	happy	Nobody tell him
+scene	1	data/scenes.js	ch1Pond	Deedee	Nobody tell him.	rose	happy	Nobody tell him
+scene	1	data/scenes.js	ch1Pond	Deedee	That's my GOOD tin, you overgrown handbag!	tom	happy	overgrown handbag
+scene	1	data/scenes.js	ch1Pond	Deedee	That's my GOOD tin, you overgrown handbag!	grace	happy	overgrown handbag
+scene	1	data/scenes.js	ch1Pond	Deedee	That's my GOOD tin, you overgrown handbag!	rose	happy	overgrown handbag
+scene	1	data/scenes.js	ch1Pond	The Big One	This morning I was a fish. Then there was a big flash. Now I am a BIG fish. With a hat.	tom	surprised	a big flash
+scene	1	data/scenes.js	ch1Pond	The Big One	This morning I was a fish. Then there was a big flash. Now I am a BIG fish. With a hat.	grace	surprised	a big flash
+scene	1	data/scenes.js	ch1Pond	The Big One	This morning I was a fish. Then there was a big flash. Now I am a BIG fish. With a hat.	rose	happy	With a hat
+scene	1	data/scenes.js	ch1Pond	The Big One	This morning I was a fish. Then there was a big flash. Now I am a BIG fish. With a hat.	deedee	unimpressed	With a hat
+scene	1	data/scenes.js	ch1Pond	Rose	Tata, he looks like a turtle wearing a hat.	tom	happy	turtle wearing a hat
+scene	1	data/scenes.js	ch1Pond	Rose	Tata, he looks like a turtle wearing a hat.	grace	happy	turtle wearing a hat
+scene	1	data/scenes.js	ch1Pond	Rose	Tata, he looks like a turtle wearing a hat.	deedee	unimpressed	wearing a hat
+scene	1	data/scenes.js	ch1Pond	Tom	Nobody touches Deedee’s crisp. Everybody ready?	deedee	proud	crisp.
+scene	1	data/scenes.js	ch1Pond	Tom	Nobody touches Deedee’s crisp. Everybody ready?	grace	proud	Everybody ready
+scene	1	data/scenes.js	ch1Pond	Tom	Nobody touches Deedee’s crisp. Everybody ready?	rose	proud	Everybody ready
+scene	1	data/scenes.js	ch1Pond	Deedee	Tom, you stand in front of whoever it stares at. Cozy Rosie, make it laugh. Then we try again.	tom	proud	whoever it stares at
+scene	1	data/scenes.js	ch1Pond	Deedee	Tom, you stand in front of whoever it stares at. Cozy Rosie, make it laugh. Then we try again.	rose	happy	make it laugh
+scene	1	data/scenes.js	ch1Pond	Deedee	Tom, you stand in front of whoever it stares at. Cozy Rosie, make it laugh. Then we try again.	grace	proud	we try again
+scene	1	data/scenes.js	ch1AfterBoss	The Big One	Glub. Nobody ever made me laugh before. You can have your tin back.	rose	loving	made me laugh before
+scene	1	data/scenes.js	ch1AfterBoss	The Big One	Glub. Nobody ever made me laugh before. You can have your tin back.	tom	loving	made me laugh before
+scene	1	data/scenes.js	ch1AfterBoss	The Big One	Glub. Nobody ever made me laugh before. You can have your tin back.	grace	surprised	laugh before
+scene	1	data/scenes.js	ch1AfterBoss	The Big One	Glub. Nobody ever made me laugh before. You can have your tin back.	deedee	loving	your tin back
+scene	1	data/scenes.js	ch1AfterBoss	The Big One	Glub. Fine. Take your tin. I'm going back in the pond to think about things.	deedee	happy	Take your tin
+scene	1	data/scenes.js	ch1AfterBoss	The Big One	Glub. Fine. Take your tin. I'm going back in the pond to think about things.	grace	happy	Take your tin
+scene	1	data/scenes.js	ch1AfterBoss	The Big One	Glub. Fine. Take your tin. I'm going back in the pond to think about things.	rose	happy	think about things
+scene	1	data/scenes.js	ch1AfterBoss	The Big One	Glub. Fine. Take your tin. I'm going back in the pond to think about things.	tom	unimpressed	think about things
+scene	1	data/scenes.js	ch1AfterBoss	The Big One	And this is for the small one. It's my shiniest thing.	rose	surprised	for the small one
+scene	1	data/scenes.js	ch1AfterBoss	The Big One	And this is for the small one. It's my shiniest thing.	deedee	loving	for the small one
+scene	1	data/scenes.js	ch1AfterBoss	The Big One	And this is for the small one. It's my shiniest thing.	tom	loving	shiniest thing
+scene	1	data/scenes.js	ch1AfterBoss	The Big One	And this is for the small one. It's my shiniest thing.	grace	surprised	shiniest thing
+scene	1	data/scenes.js	ch1AfterBoss	Rose	It has a bug on it! I'm keeping it.	grace	happy	a bug on it
+scene	1	data/scenes.js	ch1AfterBoss	Rose	It has a bug on it! I'm keeping it.	tom	happy	I'm keeping it
+scene	1	data/scenes.js	ch1AfterBoss	Rose	It has a bug on it! I'm keeping it.	deedee	happy	keeping it
+scene	1	data/scenes.js	ch1AfterBoss	Tom	This one you can keep.	rose	happy	you can keep
+scene	1	data/scenes.js	ch1AfterBoss	Tom	This one you can keep.	grace	happy	you can keep
+scene	1	data/scenes.js	ch1AfterBoss	Tom	This one you can keep.	deedee	loving	you can keep
+scene	1	data/scenes.js	ch1AfterBoss	The Big One	The old man with the cap. Is he coming tomorrow?	grace	surprised	The old man with the cap
+scene	1	data/scenes.js	ch1AfterBoss	The Big One	The old man with the cap. Is he coming tomorrow?	tom	loving	coming tomorrow
+scene	1	data/scenes.js	ch1AfterBoss	The Big One	The old man with the cap. Is he coming tomorrow?	deedee	loving	coming tomorrow
+scene	1	data/scenes.js	ch1AfterBoss	Grace	Boppy? He comes every day.	tom	happy	every day
+scene	1	data/scenes.js	ch1AfterBoss	Grace	Boppy? He comes every day.	deedee	loving	every day
+scene	1	data/scenes.js	ch1AfterBoss	The Big One	Good. Don't tell him I asked.	tom	happy	Don't tell him
+scene	1	data/scenes.js	ch1AfterBoss	The Big One	Good. Don't tell him I asked.	grace	happy	Don't tell him I asked
+scene	1	data/scenes.js	ch1AfterBoss	The Big One	Good. Don't tell him I asked.	deedee	happy	Don't tell him I asked
+scene	1	data/scenes.js	ch1AfterBoss	The Big One	Good. Don't tell him I asked.	rose	happy	I asked
+scene	1	data/scenes.js	ch1AfterBoss	Deedee	My tin! And look. Half the crisp is still in it.	grace	happy	My tin!
+scene	1	data/scenes.js	ch1AfterBoss	Deedee	My tin! And look. Half the crisp is still in it.	rose	happy	Half the crisp
+scene	1	data/scenes.js	ch1AfterBoss	Deedee	My tin! And look. Half the crisp is still in it.	tom	happy	Half the crisp
+scene	1	data/scenes.js	ch1AfterBoss	Grace	The Big One ate the other half. I saw crumbs on its chin.	deedee	unimpressed	ate the other half
+scene	1	data/scenes.js	ch1AfterBoss	Grace	The Big One ate the other half. I saw crumbs on its chin.	rose	happy	crumbs on its chin
+scene	1	data/scenes.js	ch1AfterBoss	Grace	The Big One ate the other half. I saw crumbs on its chin.	tom	happy	crumbs on its chin
+scene	1	data/scenes.js	ch1AfterBoss	Deedee	Then we split this half. Everybody home. Wait until Boppy hears about this.	grace	happy	split this half
+scene	1	data/scenes.js	ch1AfterBoss	Deedee	Then we split this half. Everybody home. Wait until Boppy hears about this.	rose	happy	Everybody home
+scene	1	data/scenes.js	ch1AfterBoss	Deedee	Then we split this half. Everybody home. Wait until Boppy hears about this.	tom	happy	Boppy hears about this
+scene	1	data/scenes.js	ch1End	Boppy	You found the Big One? I TOLD everybody. Twenty years.	tom	unimpressed	I TOLD everybody
+scene	1	data/scenes.js	ch1End	Boppy	You found the Big One? I TOLD everybody. Twenty years.	grace	happy	I TOLD everybody
+scene	1	data/scenes.js	ch1End	Boppy	You found the Big One? I TOLD everybody. Twenty years.	deedee	unimpressed	Twenty years
+scene	1	data/scenes.js	ch1End	Grace	Boppy, the mud TALKED. And the mosquitoes. And a puddle.	boppy	surprised	TALKED
+scene	1	data/scenes.js	ch1End	Grace	Boppy, the mud TALKED. And the mosquitoes. And a puddle.	deedee	unimpressed	mosquitoes
+scene	1	data/scenes.js	ch1End	Grace	Boppy, the mud TALKED. And the mosquitoes. And a puddle.	rose	happy	a puddle
+scene	1	data/scenes.js	ch1End	Grace	Boppy, the mud TALKED. And the mosquitoes. And a puddle.	tom	happy	And a puddle
+scene	1	data/scenes.js	ch1End	Boppy	The mud talked? Forty years in this town, the mud never said one word to me.	deedee	unimpressed	Forty years in this town
+scene	1	data/scenes.js	ch1End	Boppy	The mud talked? Forty years in this town, the mud never said one word to me.	tom	happy	one word to me
+scene	1	data/scenes.js	ch1End	Boppy	The mud talked? Forty years in this town, the mud never said one word to me.	grace	happy	one word to me
+scene	1	data/scenes.js	ch1End	Boppy	The mud talked? Forty years in this town, the mud never said one word to me.	rose	happy	to me
+scene	1	data/scenes.js	ch1End	Tom	We did. And when it laughed, this fell out of its lip.	grace	proud	when it laughed
+scene	1	data/scenes.js	ch1End	Tom	We did. And when it laughed, this fell out of its lip.	boppy	surprised	fell out of its lip
+scene	1	data/scenes.js	ch1End	Boppy	My LURE! I lost that in 2006. Still shiny. Unlike me.	grace	happy	My LURE!
+scene	1	data/scenes.js	ch1End	Boppy	My LURE! I lost that in 2006. Still shiny. Unlike me.	rose	happy	My LURE!
+scene	1	data/scenes.js	ch1End	Boppy	My LURE! I lost that in 2006. Still shiny. Unlike me.	tom	happy	Unlike me
+scene	1	data/scenes.js	ch1End	Boppy	My LURE! I lost that in 2006. Still shiny. Unlike me.	deedee	unimpressed	Unlike me
+scene	1	data/scenes.js	ch1End	Boppy	Keep it, Tom. For luck. The fish clearly didn't want it.	tom	loving	Keep it, Tom
+scene	1	data/scenes.js	ch1End	Rose	He gave me a present. Look.	tom	loving	a present
+scene	1	data/scenes.js	ch1End	Rose	He gave me a present. Look.	deedee	loving	a present
+scene	1	data/scenes.js	ch1End	Rose	He gave me a present. Look.	boppy	surprised	Look
+scene	1	data/scenes.js	ch1End	Rose	He gave me a present. Look.	grace	happy	Look
+scene	1	data/scenes.js	ch1End	Boppy	That's real gold, Cozy Rosie. Gold like my teeth. Look.	rose	surprised	real gold
+scene	1	data/scenes.js	ch1End	Boppy	That's real gold, Cozy Rosie. Gold like my teeth. Look.	grace	surprised	real gold
+scene	1	data/scenes.js	ch1End	Boppy	That's real gold, Cozy Rosie. Gold like my teeth. Look.	tom	unimpressed	like my teeth
+scene	1	data/scenes.js	ch1End	Boppy	That's real gold, Cozy Rosie. Gold like my teeth. Look.	deedee	unimpressed	like my teeth
+scene	1	data/scenes.js	ch1End	Rose	Boppy has treasure in his mouth!	boppy	proud	treasure
+scene	1	data/scenes.js	ch1End	Rose	Boppy has treasure in his mouth!	tom	happy	treasure in his mouth
+scene	1	data/scenes.js	ch1End	Rose	Boppy has treasure in his mouth!	grace	happy	treasure in his mouth
+scene	1	data/scenes.js	ch1End	Rose	Boppy has treasure in his mouth!	deedee	happy	in his mouth
+scene	1	data/scenes.js	ch1End	Boppy	You put that somewhere safe. Gold is for keeping.	rose	proud	somewhere safe
+scene	1	data/scenes.js	ch1End	Boppy	You put that somewhere safe. Gold is for keeping.	tom	loving	Gold is for keeping
+scene	1	data/scenes.js	ch1End	Boppy	Next time something comes in that window, I'm coming. Stomach or no stomach.	tom	proud	I'm coming
+scene	1	data/scenes.js	ch1End	Boppy	Next time something comes in that window, I'm coming. Stomach or no stomach.	rose	happy	I'm coming
+scene	1	data/scenes.js	ch1End	Boppy	Next time something comes in that window, I'm coming. Stomach or no stomach.	deedee	loving	Stomach or no stomach
+scene	1	data/scenes.js	ch1End	Boppy	Next time something comes in that window, I'm coming. Stomach or no stomach.	grace	happy	Stomach or no stomach
+scene	1	data/scenes.js	ch1End	Deedee	Sit. Everybody sit. Half a crisp is still a crisp.	tom	happy	Everybody sit
+scene	1	data/scenes.js	ch1End	Deedee	Sit. Everybody sit. Half a crisp is still a crisp.	grace	happy	Everybody sit
+scene	1	data/scenes.js	ch1End	Deedee	Sit. Everybody sit. Half a crisp is still a crisp.	rose	happy	Half a crisp
+scene	1	data/scenes.js	ch1End	Deedee	Sit. Everybody sit. Half a crisp is still a crisp.	boppy	happy	still a crisp
+scene	1	data/scenes.js	ch1End	Rose	This is the best half a crisp I ever had.	deedee	loving	best half a crisp
+scene	1	data/scenes.js	ch1End	Rose	This is the best half a crisp I ever had.	tom	happy	I ever had
+scene	1	data/scenes.js	ch1End	Grace	Tata, you're staying the WHOLE week, right?	tom	loving	WHOLE week
+scene	1	data/scenes.js	ch1End	Grace	Tata, you're staying the WHOLE week, right?	rose	happy	WHOLE week
+scene	1	data/scenes.js	ch1End	Tom	The whole week. And nobody is stealing anything else.	grace	happy	The whole week
+scene	1	data/scenes.js	ch1End	Tom	The whole week. And nobody is stealing anything else.	rose	happy	The whole week
+scene	1	data/scenes.js	ch1End	Tom	The whole week. And nobody is stealing anything else.	deedee	loving	The whole week
+scene	1	data/scenes.js	ch1End	Boppy	Slow down. Everybody eats too fast. My stomach.	deedee	unimpressed	My stomach
+scene	1	data/scenes.js	ch1End	Boppy	Slow down. Everybody eats too fast. My stomach.	tom	unimpressed	My stomach
+scene	1	data/scenes.js	ch1End	Boppy	Slow down. Everybody eats too fast. My stomach.	grace	happy	My stomach
+scene	2	data/scenes.js	ch2Loft	TNB	Look who flew three thousand miles to see me.	tom	loving	Look who flew
 scene	2	data/scenes.js	ch2Loft	Tom	I flew three thousand miles to see you... and maybe the starter.	tnb	happy
 scene	2	data/scenes.js	ch2Loft	TNB	Main event. I'll take it.	tom	loving
-scene	2	data/scenes.js	ch2Loft	TNB	My call time got pushed to Thursday. The lead actor lost a shoe. I already found it. So I'm all yours.	tom	happy
+scene	2	data/scenes.js	ch2Loft	TNB	My call time got pushed to Thursday. The lead actor lost a shoe. I already found it. So I'm all yours.	tom	loving	I'm all yours
 scene	2	data/scenes.js	ch2Loft	TNB	Also, something is up. The sky over Griffith Park went purple this morning. Not sunset purple. Weird purple.	tom	surprised
 scene	2	data/scenes.js	ch2Loft	Tom	All yours. I like that. We'll go look at the purple sky together, but first I need one quick stop at my house.	tnb	loving
 scene	2	data/scenes.js	ch2Loft	Tom	My sourdough starter has been alone for a week.	tnb	loving
-scene	2	data/scenes.js	ch2Porch	TNB	Olivia dropped her off this morning. Family trip to the desert. No dogs at the hotel.	tom	surprised
-scene	2	data/scenes.js	ch2Porch	TNB	Olivia dropped her off this morning. Family trip to the desert. No dogs at the hotel.	nara	happy
-scene	2	data/scenes.js	ch2Porch	TNB	She's been sitting on your porch since eight. I tried to take her to the loft. She refused.	tom	loving
-scene	2	data/scenes.js	ch2Porch	TNB	She's been sitting on your porch since eight. I tried to take her to the loft. She refused.	nara	loving
+scene	2	data/scenes.js	ch2Porch	TNB	Olivia dropped her off this morning. Family trip to the desert. No dogs at the hotel.	tom	surprised	Olivia dropped her off
+scene	2	data/scenes.js	ch2Porch	TNB	Olivia dropped her off this morning. Family trip to the desert. No dogs at the hotel.	nara	happy	
+scene	2	data/scenes.js	ch2Porch	TNB	She's been sitting on your porch since eight. I tried to take her to the loft. She refused.	tom	loving	since eight
+scene	2	data/scenes.js	ch2Porch	TNB	She's been sitting on your porch since eight. I tried to take her to the loft. She refused.	nara	loving	She refused
 scene	2	data/scenes.js	ch2Porch	TNB	Also, your starter was bubbling out of the jar, so I baked a boule with it.	tom	surprised
 scene	2	data/scenes.js	ch2Porch	Tom	I'm proud. As long as you didn't spin it on your pottery wheel.	tnb	happy
 scene	2	data/scenes.js	ch2Porch	Nara	Tom tears off the heel and holds it up. "Sit." Nara sits, wiggling all over. "Paw." She gives him her paw. Very, very hard.	tnb	happy
 scene	2	data/scenes.js	ch2Porch	Nara	Tom tears off the heel and holds it up. "Sit." Nara sits, wiggling all over. "Paw." She gives him her paw. Very, very hard.	tom	happy
 scene	2	data/scenes.js	ch2Porch	Nara	She gets the bread. Tom gets a lick.	tnb	loving
-scene	2	data/scenes.js	ch2Porch	Tom	Sit, paw, treat. She knows the whole routine. So polite!	nara	proud
-scene	2	data/scenes.js	ch2Porch	Tom	Sit, paw, treat. She knows the whole routine. So polite!	tnb	happy
-scene	2	data/scenes.js	ch2Starter	Tom	Fifty grams of flour, fifty grams of water. Stir. Look at those bubbles.	tnb	unimpressed
+scene	2	data/scenes.js	ch2Porch	Tom	Sit, paw, treat. She knows the whole routine. So polite!	nara	proud	whole routine
+scene	2	data/scenes.js	ch2Porch	Tom	Sit, paw, treat. She knows the whole routine. So polite!	tnb	happy	So polite
+scene	2	data/scenes.js	ch2Starter	Tom	Hello, Bready Mercury. Did you miss me? You missed me.	tnb	happy	You missed me
+scene	2	data/scenes.js	ch2Starter	Tom	Fifty grams of flour, fifty grams of water. Stir. Look at those bubbles.	tnb	happy	Look at those bubbles
 scene	2	data/scenes.js	ch2Starter	TNB	You talk to that jar more than you talk to me.	tom	happy
 scene	2	data/scenes.js	ch2Starter	Tom	The jar gets fifty grams of flour. You get the whole week.	tnb	loving
 scene	2	data/scenes.js	ch2Starter	Tom	...And you steamed my shirts for the flight. You win. You always win.	tnb	proud
 scene	2	data/scenes.js	ch2Starter	TNB	I'll take it.	tom	loving
 scene	2	data/scenes.js	ch2Starter	Nara	Nara is at the front window, whining. Her tail is down.	tom	surprised
 scene	2	data/scenes.js	ch2Starter	Nara	Nara is at the front window, whining. Her tail is down.	tnb	surprised
-scene	2	data/scenes.js	ch2Starter	TNB	Babe. Look outside. Is the street... purple?	tom	surprised
-scene	2	data/scenes.js	ch2Starter	TNB	Babe. Look outside. Is the street... purple?	nara	scared
-scene	2	data/scenes.js	ch2Smog	Tom	Mr. Washington! Is everything okay?	tnb	scared
-scene	2	data/scenes.js	ch2Smog	Mr. Washington	Tom. Back in 1979, this whole block...	tom	happy
-scene	2	data/scenes.js	ch2Smog	Mr. Washington	Tom. Back in 1979, this whole block...	tnb	unimpressed
+scene	2	data/scenes.js	ch2Starter	TNB	Babe. Look outside. Is the street... purple?	tom	surprised	purple
+scene	2	data/scenes.js	ch2Starter	TNB	Babe. Look outside. Is the street... purple?	nara	scared	
+scene	2	data/scenes.js	ch2Smog	Tom	Mr. Washington! Is everything okay?	tnb	scared	Mr. Washington!
+scene	2	data/scenes.js	ch2Smog	Mr. Washington	Tom. Back in 1979, this whole block...	tom	surprised	this whole block...
+scene	2	data/scenes.js	ch2Smog	Mr. Washington	Tom. Back in 1979, this whole block...	tnb	surprised	this whole block...
 scene	2	data/scenes.js	ch2Smog	Mr. Washington	...	tom	surprised
 scene	2	data/scenes.js	ch2Smog	Mr. Washington	...	tnb	scared
 scene	2	data/scenes.js	ch2Smog	TNB	He's been saying that for a while, babe.	tom	scared
-scene	2	data/scenes.js	ch2Smog	Mr. Washington	Such a nice afternoon. It should always be this afternoon.	tom	scared
-scene	2	data/scenes.js	ch2Smog	Mr. Washington	Such a nice afternoon. It should always be this afternoon.	tnb	scared
-scene	2	data/scenes.js	ch2Smog	Mr. Washington	Such a nice afternoon. It should always be this afternoon.	nara	scared
-scene	2	data/scenes.js	ch2Smog	Tom	Excuse me, smog. That was UNCALLED for.	tnb	happy
-scene	2	data/scenes.js	ch2Smog	Smoglet	Cough. Nice street. We're going to sit on it for a while. Forever, actually.	tom	angry
-scene	2	data/scenes.js	ch2Smog	Smoglet	Cough. Nice street. We're going to sit on it for a while. Forever, actually.	tnb	scared
-scene	2	data/scenes.js	ch2Smog	Smoglet	Cough. Nice street. We're going to sit on it for a while. Forever, actually.	nara	angry
-scene	2	data/scenes.js	ch2Smog	TNB	Babe. Remember movie night? You threw the whole popcorn bowl.	tom	unimpressed
+scene	2	data/scenes.js	ch2Smog	Mr. Washington	Such a nice afternoon. It should always be this afternoon.	tom	scared	always be this afternoon
+scene	2	data/scenes.js	ch2Smog	Mr. Washington	Such a nice afternoon. It should always be this afternoon.	tnb	scared	always be this afternoon
+scene	2	data/scenes.js	ch2Smog	Mr. Washington	Such a nice afternoon. It should always be this afternoon.	nara	scared	
+scene	2	data/scenes.js	ch2Smog	Tom	Excuse me, smog. That was UNCALLED for.	tnb	happy	UNCALLED
+scene	2	data/scenes.js	ch2Smog	Smoglet	Cough. Nice street. We're going to sit on it for a while. Forever, actually.	nara	angry	Cough.
+scene	2	data/scenes.js	ch2Smog	Smoglet	Cough. Nice street. We're going to sit on it for a while. Forever, actually.	tnb	scared	Nice street
+scene	2	data/scenes.js	ch2Smog	Smoglet	Cough. Nice street. We're going to sit on it for a while. Forever, actually.	tom	angry	Forever, actually
+scene	2	data/scenes.js	ch2Smog	TNB	Babe. Remember movie night? You threw the whole popcorn bowl.	tom	unimpressed	threw the whole popcorn bowl
 scene	2	data/scenes.js	ch2Smog	Tom	I was startled. Briefly. With dignity.	tnb	happy
 scene	2	data/scenes.js	ch2Smog	TNB	It was a battle plan. You just didn't know it yet.	tom	unimpressed
-scene	2	data/scenes.js	ch2Smog	TNB	Okay. Okay. Everybody breathe. Through the nose. Not the smog.	tom	happy
-scene	2	data/scenes.js	ch2Smog	TNB	Okay. Okay. Everybody breathe. Through the nose. Not the smog.	nara	happy
-scene	2	data/scenes.js	ch2Smog	TNB	The smog monsters are gone, but Mr. Washington is still in a daze. Look at him.	tom	sad
-scene	2	data/scenes.js	ch2Smog	Mr. Washington	Nobody needs to go anywhere. Nobody needs to get any older.	tom	sad
-scene	2	data/scenes.js	ch2Smog	Mr. Washington	Nobody needs to go anywhere. Nobody needs to get any older.	tnb	sad
+scene	2	data/scenes.js	ch2Smog	TNB	Okay. Okay. Everybody breathe. Through the nose. Not the smog.	nara	happy	Everybody breathe
+scene	2	data/scenes.js	ch2Smog	TNB	Okay. Okay. Everybody breathe. Through the nose. Not the smog.	tom	happy	Not the smog
+scene	2	data/scenes.js	ch2Smog	TNB	The smog monsters are gone, but Mr. Washington is still in a daze. Look at him.	tom	sad	still in a daze
+scene	2	data/scenes.js	ch2Smog	Mr. Washington	Nobody needs to go anywhere. Nobody needs to get any older.	tom	sad	get any older
+scene	2	data/scenes.js	ch2Smog	Mr. Washington	Nobody needs to go anywhere. Nobody needs to get any older.	tnb	sad	get any older
 scene	2	data/scenes.js	ch2Smog	Tom	Mr. Washington would never say that. The smog is doing something to him. Let's go check on Miss Odette and Doña Carmen on the boulevard.	tnb	proud
-scene	2	data/scenes.js	ch2Odette	Miss Odette	Stirring. Stirring. The gumbo never has to be done, baby. Isn’t that nice?	tom	surprised
-scene	2	data/scenes.js	ch2Odette	Miss Odette	Stirring. Stirring. The gumbo never has to be done, baby. Isn’t that nice?	tnb	sad
+scene	2	data/scenes.js	ch2Odette	Miss Odette	Stirring. Stirring. The gumbo never has to be done, baby. Isn’t that nice?	tom	surprised	never has to be done
+scene	2	data/scenes.js	ch2Odette	Miss Odette	Stirring. Stirring. The gumbo never has to be done, baby. Isn’t that nice?	tnb	sad	never has to be done
 scene	2	data/scenes.js	ch2Odette	TNB	She's made that gumbo every day for fifty years. It's never once been "never done."	tom	sad
 scene	2	data/scenes.js	ch2Odette	Tom	The smog makes people want everything to stay exactly the same forever. That's not a nice afternoon. That's a hostage situation.	tnb	proud
-scene	2	data/scenes.js	ch2Carmen	Doña Carmen	The pupusas are fine. Everything is fine. It's always this afternoon. Why did I ever flip them?	tom	sad
-scene	2	data/scenes.js	ch2Carmen	Doña Carmen	The pupusas are fine. Everything is fine. It's always this afternoon. Why did I ever flip them?	tnb	sad
+scene	2	data/scenes.js	ch2Carmen	Doña Carmen	The pupusas are fine. Everything is fine. It's always this afternoon. Why did I ever flip them?	tom	sad	always this afternoon
+scene	2	data/scenes.js	ch2Carmen	Doña Carmen	The pupusas are fine. Everything is fine. It's always this afternoon. Why did I ever flip them?	tnb	scared	flip them
 scene	2	data/scenes.js	ch2Carmen	Nara	Nara sniffs the comal. She sneezes. The smoke smells like the hills.	tom	surprised
 scene	2	data/scenes.js	ch2Carmen	Nara	Nara sniffs the comal. She sneezes. The smoke smells like the hills.	tnb	surprised
-scene	2	data/scenes.js	ch2Carmen	TNB	Nara is right. That's not kitchen smoke. It's the same purple smog, and it's blowing down from the hills.	tom	proud
-scene	2	data/scenes.js	ch2Carmen	TNB	Nara is right. That's not kitchen smoke. It's the same purple smog, and it's blowing down from the hills.	nara	proud
-scene	2	data/scenes.js	ch2Source	TNB	Babe. Look north. It's all coming down off the hills.	tom	surprised
-scene	2	data/scenes.js	ch2Source	TNB	It's coming from the Observatory. The pipes on its side are pumping out smog like a smoke machine on a bad set.	tom	surprised
-scene	2	data/scenes.js	ch2Source	TNB	It's coming from the Observatory. The pipes on its side are pumping out smog like a smoke machine on a bad set.	nara	scared
-scene	2	data/scenes.js	ch2Source	Tom	Then that's where we're going. Nara, stay close.	tnb	proud
-scene	2	data/scenes.js	ch2Source	Tom	Then that's where we're going. Nara, stay close.	nara	proud
+scene	2	data/scenes.js	ch2Carmen	TNB	Nara is right. That's not kitchen smoke. It's the same purple smog, and it's blowing down from the hills.	nara	proud	Nara is right
+scene	2	data/scenes.js	ch2Carmen	TNB	Nara is right. That's not kitchen smoke. It's the same purple smog, and it's blowing down from the hills.	tom	surprised	same purple smog
+scene	2	data/scenes.js	ch2Source	TNB	Babe. Look north. It's all coming down off the hills.	tom	surprised	Look north
+scene	2	data/scenes.js	ch2Source	TNB	It's coming from the Observatory. The pipes on its side are pumping out smog like a smoke machine on a bad set.	tom	surprised	the Observatory
+scene	2	data/scenes.js	ch2Source	TNB	It's coming from the Observatory. The pipes on its side are pumping out smog like a smoke machine on a bad set.	nara	scared	pumping out smog
+scene	2	data/scenes.js	ch2Source	Tom	Then that's where we're going. Nara, stay close.	tnb	proud	where we're going
+scene	2	data/scenes.js	ch2Source	Tom	Then that's where we're going. Nara, stay close.	nara	proud	Nara, stay close
 scene	2	data/scenes.js	ch2Source	Nara	Nara presses against Tom’s leg. She's not letting him go anywhere without her.	tom	loving
 scene	2	data/scenes.js	ch2Source	Nara	Nara presses against Tom’s leg. She's not letting him go anywhere without her.	tnb	loving
-scene	2	data/scenes.js	CH2_AFTER	TNB	Up, everybody. Wardrobe says nobody is cut from this scene.	tom	happy
-scene	2	data/scenes.js	CH2_AFTER	TNB	Up, everybody. Wardrobe says nobody is cut from this scene.	nara	happy
-scene	2	data/scenes.js	ch2Flurry	Ticket Flurry	Street cleaning. Tuesday. Eight to ten. You didn't read the sign. And the smog says we can stay forever.	tom	unimpressed
-scene	2	data/scenes.js	ch2Flurry	Ticket Flurry	Street cleaning. Tuesday. Eight to ten. You didn't read the sign. And the smog says we can stay forever.	tnb	unimpressed
-scene	2	data/scenes.js	ch2Flurry	Ticket Flurry	Street cleaning. Tuesday. Eight to ten. You didn't read the sign. And the smog says we can stay forever.	nara	angry
-scene	2	data/scenes.js	ch2Flurry	TNB	I take the Metro. You have nothing on me.	tom	happy
-scene	2	data/scenes.js	ch2Flurry	Tom	I contest that ticket, and I'm granting my own appeal. Let's keep going.	tnb	happy
-scene	2	data/scenes.js	ch2Coyote	Canyon Coyote	Nice hike. You look like you have snacks. And the dog looks like a snack.	tom	angry
-scene	2	data/scenes.js	ch2Coyote	Canyon Coyote	Nice hike. You look like you have snacks. And the dog looks like a snack.	tnb	scared
-scene	2	data/scenes.js	ch2Coyote	Canyon Coyote	Nice hike. You look like you have snacks. And the dog looks like a snack.	nara	scared
+scene	2	data/scenes.js	CH2_AFTER	TNB	Up, everybody. Wardrobe says nobody is cut from this scene.	nara	happy	Up, everybody
+scene	2	data/scenes.js	CH2_AFTER	TNB	Up, everybody. Wardrobe says nobody is cut from this scene.	tom	happy	nobody is cut
+scene	2	data/scenes.js	ch2Flurry	Ticket Flurry	Street cleaning. Tuesday. Eight to ten. You didn't read the sign. And the smog says we can stay forever.	tnb	unimpressed	Street cleaning.
+scene	2	data/scenes.js	ch2Flurry	Ticket Flurry	Street cleaning. Tuesday. Eight to ten. You didn't read the sign. And the smog says we can stay forever.	tom	angry	You didn't read the sign
+scene	2	data/scenes.js	ch2Flurry	Ticket Flurry	Street cleaning. Tuesday. Eight to ten. You didn't read the sign. And the smog says we can stay forever.	nara	angry	
+scene	2	data/scenes.js	ch2Flurry	TNB	I take the Metro. You have nothing on me.	tom	happy	I take the Metro
+scene	2	data/scenes.js	ch2Flurry	Tom	I contest that ticket, and I'm granting my own appeal. Let's keep going.	tnb	happy	granting my own appeal
+scene	2	data/scenes.js	ch2Coyote	Canyon Coyote	Nice hike. You look like you have snacks. And the dog looks like a snack.	tom	angry	the dog looks like a snack
+scene	2	data/scenes.js	ch2Coyote	Canyon Coyote	Nice hike. You look like you have snacks. And the dog looks like a snack.	nara	angry	the dog looks like a snack
+scene	2	data/scenes.js	ch2Coyote	Canyon Coyote	Nice hike. You look like you have snacks. And the dog looks like a snack.	tnb	surprised	the dog looks like a snack
 scene	2	data/scenes.js	ch2Coyote	Nara	Nara’s hackles go up. She stands right in front of Tom.	tom	loving
 scene	2	data/scenes.js	ch2Coyote	Nara	Nara’s hackles go up. She stands right in front of Tom.	tnb	proud
-scene	2	data/scenes.js	ch2Coyote	Canyon Coyote	Pack Howl. For the fluffy one.	nara	angry
-scene	2	data/scenes.js	ch2Coyote	Canyon Coyote	Pack Howl. For the fluffy one.	tom	angry
-scene	2	data/scenes.js	ch2Coyote	Canyon Coyote	Pack Howl. For the fluffy one.	tnb	scared
-scene	2	data/scenes.js	ch2Coyote	TNB	Quick wardrobe adjustment, quick heal, and a quick kiss for the road. Ready, babe?	tom	loving
-scene	2	data/scenes.js	ch2Coyote	TNB	Quick wardrobe adjustment, quick heal, and a quick kiss for the road. Ready, babe?	nara	happy
-scene	2	data/scenes.js	ch2Coyote	Tom	Ready. Kiss accepted. The Observatory is up at the top left. Follow the purple.	tnb	loving
-scene	2	data/scenes.js	ch2Coyote	Tom	Ready. Kiss accepted. The Observatory is up at the top left. Follow the purple.	nara	happy
-scene	2	data/scenes.js	ch2Boss	TNB	The ground is humming. That's never a good sign. I've seen this movie forty-seven times.	tom	unimpressed
-scene	2	data/scenes.js	ch2Boss	TNB	The ground is humming. That's never a good sign. I've seen this movie forty-seven times.	nara	scared
+scene	2	data/scenes.js	ch2Coyote	Canyon Coyote	Pack Howl. For the fluffy one.	nara	angry	Pack Howl
+scene	2	data/scenes.js	ch2Coyote	Canyon Coyote	Pack Howl. For the fluffy one.	tnb	scared	Pack Howl
+scene	2	data/scenes.js	ch2Coyote	Canyon Coyote	Pack Howl. For the fluffy one.	tom	angry	fluffy one
+scene	2	data/scenes.js	ch2Coyote	TNB	Quick wardrobe adjustment, quick heal, and a quick kiss for the road. Ready, babe?	nara	happy	quick heal
+scene	2	data/scenes.js	ch2Coyote	TNB	Quick wardrobe adjustment, quick heal, and a quick kiss for the road. Ready, babe?	tom	loving	quick kiss
+scene	2	data/scenes.js	ch2Coyote	Tom	Ready. Kiss accepted. The Observatory is up at the top left. Follow the purple.	tnb	loving	Kiss accepted
+scene	2	data/scenes.js	ch2Coyote	Tom	Ready. Kiss accepted. The Observatory is up at the top left. Follow the purple.	nara	happy	Follow the purple
+scene	2	data/scenes.js	ch2Boss	TNB	The ground is humming. That's never a good sign. I've seen this movie forty-seven times.	nara	scared	humming
+scene	2	data/scenes.js	ch2Boss	TNB	The ground is humming. That's never a good sign. I've seen this movie forty-seven times.	tom	unimpressed	forty-seven times
 scene	2	data/scenes.js	ch2Boss	The Big Shake	RUMBLE. A man in a long coat plugged my vents.	tom	surprised
-scene	2	data/scenes.js	ch2Boss	The Big Shake	Now all my grumbling comes out of those pipes as purple smog, and everything it touches gets stuck. And I LIKE stuck.	tom	surprised
+scene	2	data/scenes.js	ch2Boss	The Big Shake	Now all my grumbling comes out of those pipes as purple smog, and everything it touches gets stuck. And I LIKE stuck.	nara	scared	grumbling
+scene	2	data/scenes.js	ch2Boss	The Big Shake	Now all my grumbling comes out of those pipes as purple smog, and everything it touches gets stuck. And I LIKE stuck.	tom	surprised	purple smog
+scene	2	data/scenes.js	ch2Boss	The Big Shake	Now all my grumbling comes out of those pipes as purple smog, and everything it touches gets stuck. And I LIKE stuck.	tnb	scared	I LIKE stuck
 scene	2	data/scenes.js	ch2Boss	The Big Shake	RUMBLE. A man in a long coat plugged my vents.	tnb	scared
-scene	2	data/scenes.js	ch2Boss	The Big Shake	Now all my grumbling comes out of those pipes as purple smog, and everything it touches gets stuck. And I LIKE stuck.	tnb	scared
 scene	2	data/scenes.js	ch2Boss	The Big Shake	RUMBLE. A man in a long coat plugged my vents.	nara	scared
-scene	2	data/scenes.js	ch2Boss	The Big Shake	Now all my grumbling comes out of those pipes as purple smog, and everything it touches gets stuck. And I LIKE stuck.	nara	scared
-scene	2	data/scenes.js	ch2Boss	The Big Shake	When everything is stuck, nothing moves and nothing changes, and nobody ever has to say goodbye.	tom	sad
-scene	2	data/scenes.js	ch2Boss	The Big Shake	When everything is stuck, nothing moves and nothing changes, and nobody ever has to say goodbye.	tnb	sad
-scene	2	data/scenes.js	ch2Boss	Tom	Everybody says goodbye. Then they come back. That's what planes are for.	tnb	loving
-scene	2	data/scenes.js	ch2Boss	Tom	Things have to move.	tnb	proud
-scene	2	data/scenes.js	ch2Boss	Tom	Things have to move.	nara	proud
+scene	2	data/scenes.js	ch2Boss	The Big Shake	When everything is stuck, nothing moves and nothing changes, and nobody ever has to say goodbye.	tom	sad	say goodbye
+scene	2	data/scenes.js	ch2Boss	The Big Shake	When everything is stuck, nothing moves and nothing changes, and nobody ever has to say goodbye.	tnb	sad	say goodbye
+scene	2	data/scenes.js	ch2Boss	Tom	Everybody says goodbye. Then they come back. That's what planes are for.	tnb	loving	they come back
+scene	2	data/scenes.js	ch2Boss	Tom	Things have to move.	tnb	proud	have to move
+scene	2	data/scenes.js	ch2Boss	Tom	Things have to move.	nara	proud	have to move
 scene	2	data/scenes.js	ch2Boss	Nara	Nara barks at the hill. Once. Very loudly. Then she checks that Tom saw.	tom	loving
 scene	2	data/scenes.js	ch2Boss	Nara	Nara barks at the hill. Once. Very loudly. Then she checks that Tom saw.	tnb	happy
-scene	2	data/scenes.js	ch2Boss	TNB	Well, well, well... looks like we're in a bit of a shaky situation.	tom	unimpressed
-scene	2	data/scenes.js	ch2Boss	TNB	Well, well, well... looks like we're in a bit of a shaky situation.	nara	happy
-scene	2	data/scenes.js	ch2Boss	TNB	Cut. Reset. Back to one, everybody.	tom	happy
-scene	2	data/scenes.js	ch2Boss	TNB	Cut. Reset. Back to one, everybody.	nara	happy
-scene	2	data/scenes.js	ch2Boss	TNB	Babe, heal right after the Aftershock. When it clogs up, hit it with water or sparkle. Or one of our Tombos.	tom	proud
-scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	Rumble. You asked how I was doing. Nobody has asked in a million years.	tom	loving
-scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	Rumble. You asked how I was doing. Nobody has asked in a million years.	tnb	loving
-scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	Rumble. You asked how I was doing. Nobody has asked in a million years.	nara	loving
-scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	...I'll let things move. A little. Two inches a year. That's my best offer.	tom	happy
-scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	...I'll let things move. A little. Two inches a year. That's my best offer.	tnb	happy
-scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	Rumble. Fine. The pipes are clear. I'm going back under the hill to think about my choices.	tom	unimpressed
-scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	Rumble. Fine. The pipes are clear. I'm going back under the hill to think about my choices.	tnb	happy
-scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	Rumble. Fine. The pipes are clear. I'm going back under the hill to think about my choices.	nara	happy
-scene	2	data/scenes.js	ch2AfterBoss	TNB	Look. The sky is blue again. Los Angeles blue. Slightly brown, but blue.	tom	happy
-scene	2	data/scenes.js	ch2AfterBoss	TNB	Look. The sky is blue again. Los Angeles blue. Slightly brown, but blue.	nara	happy
+scene	2	data/scenes.js	ch2Boss	TNB	Well, well, well... looks like we're in a bit of a shaky situation.	tom	unimpressed	shaky situation
+scene	2	data/scenes.js	ch2Boss	TNB	Well, well, well... looks like we're in a bit of a shaky situation.	nara	happy	shaky situation
+scene	2	data/scenes.js	ch2Boss	TNB	Cut. Reset. Back to one, everybody.	tom	happy	Back to one
+scene	2	data/scenes.js	ch2Boss	TNB	Cut. Reset. Back to one, everybody.	nara	happy	Back to one
+scene	2	data/scenes.js	ch2Boss	TNB	Babe, heal right after the Aftershock. When it clogs up, hit it with water or sparkle. Or one of our Tombos.	tom	proud	heal right after the Aftershock
+scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	Rumble. You asked how I was doing. Nobody has asked in a million years.	tom	loving	asked how I was doing
+scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	Rumble. You asked how I was doing. Nobody has asked in a million years.	tnb	loving	a million years
+scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	Rumble. You asked how I was doing. Nobody has asked in a million years.	nara	loving	a million years
+scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	...I'll let things move. A little. Two inches a year. That's my best offer.	tom	happy	Two inches a year
+scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	...I'll let things move. A little. Two inches a year. That's my best offer.	tnb	happy	best offer
+scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	Rumble. Fine. The pipes are clear. I'm going back under the hill to think about my choices.	tnb	happy	pipes are clear
+scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	Rumble. Fine. The pipes are clear. I'm going back under the hill to think about my choices.	nara	happy	pipes are clear
+scene	2	data/scenes.js	ch2AfterBoss	The Big Shake	Rumble. Fine. The pipes are clear. I'm going back under the hill to think about my choices.	tom	unimpressed	think about my choices
+scene	2	data/scenes.js	ch2AfterBoss	TNB	Look. The sky is blue again. Los Angeles blue. Slightly brown, but blue.	tom	happy	blue again
+scene	2	data/scenes.js	ch2AfterBoss	TNB	Look. The sky is blue again. Los Angeles blue. Slightly brown, but blue.	nara	happy	blue again
 scene	2	data/scenes.js	ch2AfterBoss	Tom	So a man in a long coat plugged those vents on purpose. He wanted this whole city stuck in one afternoon. I'd like to know why.	tnb	surprised
 scene	2	data/scenes.js	ch2AfterBoss	TNB	Spooky. I love it. Let's go check on Mr. Washington.	tom	happy
 scene	2	data/scenes.js	ch2AfterBoss	TNB	Spooky. I love it. Let's go check on Mr. Washington.	nara	happy
-scene	2	data/scenes.js	ch2End	Mr. Washington	...smelled like gumbo on a Saturday night. Zydeco from the boulevard. Kids on every porch.	tom	loving
-scene	2	data/scenes.js	ch2End	Mr. Washington	...smelled like gumbo on a Saturday night. Zydeco from the boulevard. Kids on every porch.	tnb	loving
-scene	2	data/scenes.js	ch2End	Mr. Washington	Where was I? Oh. I was done. That was the whole story.	tom	happy
-scene	2	data/scenes.js	ch2End	Mr. Washington	Where was I? Oh. I was done. That was the whole story.	tnb	happy
-scene	2	data/scenes.js	ch2End	Mr. Washington	Funny. For a while there I didn't want anything to change. Then I remembered the best parts all came from things changing.	tom	loving
-scene	2	data/scenes.js	ch2End	Mr. Washington	Funny. For a while there I didn't want anything to change. Then I remembered the best parts all came from things changing.	tnb	loving
-scene	2	data/scenes.js	ch2End	Tom	Keep the old windows, though.	washington	happy
-scene	2	data/scenes.js	ch2End	Tom	Keep the old windows, though.	tnb	happy
-scene	2	data/scenes.js	ch2End	Mr. Washington	Keep the old windows. Smart man.	tom	proud
-scene	2	data/scenes.js	ch2End	Mr. Washington	Keep the old windows. Smart man.	tnb	happy
+scene	2	data/scenes.js	ch2End	Mr. Washington	...smelled like gumbo on a Saturday night. Zydeco from the boulevard. Kids on every porch.	tnb	happy	gumbo on a Saturday night
+scene	2	data/scenes.js	ch2End	Mr. Washington	...smelled like gumbo on a Saturday night. Zydeco from the boulevard. Kids on every porch.	tom	loving	Kids on every porch
+scene	2	data/scenes.js	ch2End	Mr. Washington	Where was I? Oh. I was done. That was the whole story.	tom	happy	I was done
+scene	2	data/scenes.js	ch2End	Mr. Washington	Where was I? Oh. I was done. That was the whole story.	tnb	happy	the whole story
+scene	2	data/scenes.js	ch2End	Mr. Washington	Funny. For a while there I didn't want anything to change. Then I remembered the best parts all came from things changing.	tom	loving	things changing
+scene	2	data/scenes.js	ch2End	Mr. Washington	Funny. For a while there I didn't want anything to change. Then I remembered the best parts all came from things changing.	tnb	loving	things changing
+scene	2	data/scenes.js	ch2End	Tom	Keep the old windows, though.	washington	happy	old windows
+scene	2	data/scenes.js	ch2End	Tom	Keep the old windows, though.	tnb	happy	old windows
+scene	2	data/scenes.js	ch2End	Mr. Washington	Keep the old windows. Smart man.	tom	proud	Smart man
+scene	2	data/scenes.js	ch2End	Mr. Washington	Keep the old windows. Smart man.	tnb	happy	Smart man
 scene	2	data/scenes.js	ch2End	TNB	Doña Carmen says the pupusas came out perfectly crispy. Miss Odette is sending over gumbo. The whole block is cooking.	tom	happy
 scene	2	data/scenes.js	ch2End	TNB	Doña Carmen says the pupusas came out perfectly crispy. Miss Odette is sending over gumbo. The whole block is cooking.	nara	happy
 scene	2	data/scenes.js	ch2End	TNB	Doña Carmen says the pupusas came out perfectly crispy. Miss Odette is sending over gumbo. The whole block is cooking.	washington	happy
 scene	2	data/scenes.js	ch2End	Nara	Nara leans on both of them at once. Tiny excited puddle. Nobody minds.	tom	loving
 scene	2	data/scenes.js	ch2End	Nara	Nara leans on both of them at once. Tiny excited puddle. Nobody minds.	tnb	loving
-scene	2	data/scenes.js	ch2End	Tom	Long Island is home, and so is this. I have two homes. Okay. Good.	tnb	loving
-scene	2	data/scenes.js	ch2End	Tom	Long Island is home, and so is this. I have two homes. Okay. Good.	nara	loving
+scene	2	data/scenes.js	ch2End	Tom	Long Island is home, and so is this. I have two homes. Okay. Good.	tnb	loving	so is this
+scene	2	data/scenes.js	ch2End	Tom	Long Island is home, and so is this. I have two homes. Okay. Good.	nara	loving	two homes
+scene	2	data/scenes.js	ch2Loft	TNB	Well, well, well...	tom	loving	Well, well, well
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	Um, actually, it's two thousand four hundred and seventy-five. Delta counts every one, and so do I.	tnb	happy	and so do I
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	How many SkyMiles is that now?	tom	proud	SkyMiles
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	Four hundred and twelve thousand.	tnb	surprised	twelve thousand
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	Babe! What are you saving them for?	tom	proud	saving them for
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	Something really special.	tnb	unimpressed	really special
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	You said that at three hundred thousand.	tom	surprised	three hundred thousand
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	It has to be REALLY special. But I'd have flown here for zero miles.	tnb	loving	zero miles
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	Zero miles. Babe. That's the most romantic thing a Delta person can say.	tom	loving	most romantic thing
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	Wait, why is the sky PURPLE? It's two in the afternoon!	tnb	happy	PURPLE
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	It's been like that since this morning. I held my soda up to it. It's the exact same color.	tom	surprised	since this morning
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	I don't know what it is, babe. But it's pretty grape.	tom	happy	pretty grape
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	Don't make me laugh, it's freaky! ...Okay. It IS a little grape.	tnb	happy	It IS a little grape
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	Something strange happened on Long Island too. A blob of mud with eyes climbed in my mother's kitchen window and ran off with her rhubarb crisp.	tnb	surprised	mud with eyes
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	The mud took Deedee's crisp? Is the mud okay?	tom	happy	Is the mud okay
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	We chased it to the pond. And there was a talking fish as big as a car, wearing her baking tin like a crown.	tnb	surprised	talking fish
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	A talking fish! What did he say?	tom	happy	What did he say
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	He said "Glub." Then he gave Rose a gold coin.	tnb	happy	Glub.
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	Mud in the kitchen, a talking fish, and now a purple sky. Babe, something fishy is going on.	tom	happy	something fishy
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	The fish was the nicest part!	tnb	happy	nicest part
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	I want to go look at that sky with you. But first I have to feed Bready Mercury. He's been alone for a week.	tnb	happy	alone for a week
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	He hasn't been alone. Come on, I'll show you.	tom	surprised	hasn't been alone
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Porch	TNB	So I stayed here with her. I was coming over anyway. I've been feeding Bready Mercury every day.	nara	happy	stayed here with her
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Porch	TNB	So I stayed here with her. I was coming over anyway. I've been feeding Bready Mercury every day.	tom	loving	every day
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Porch	Tom	Every day? Fifty grams of flour and fifty grams of water?	tnb	happy	fifty grams of water
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Porch	TNB	Fifty and fifty. I used your little scale.	tom	happy	your little scale
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Porch	TNB	He got so big he was climbing out of the jar. So I baked a loaf with him.	tom	surprised	climbing out of the jar
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Porch	Tom	It's perfectly round! How did you get it so round?	tnb	proud	perfectly round
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Porch	TNB	I shaped it on my pottery wheel.	tom	surprised	pottery wheel
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Porch	Tom	On the pottery wheel! That's brilliant. Why have I been doing it with my hands?	tnb	proud	That's brilliant
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Porch	TNB	I make bowls all day, babe. So I made you a bread bowl.	tom	happy	bread bowl
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Porch	Tom	A bread bowl! Now we need soup.	tnb	happy	Now we need soup
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Porch	Tom	Nara, sit.	nara	happy	Nara
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Porch	Tom	Paw.	nara	happy	Paw
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Porch	Tom	Paw.	tnb	happy	Paw
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Starter	Tom	He's twice as big as when I left! What have you been doing with him?	tnb	proud	twice as big
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Starter	TNB	I sing to him while I stir. He's Bready Mercury. He needs his music.	tom	happy	I sing to him
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Starter	TNB	"Another One Bites the Crust."	tom	happy	Crust
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Starter	Tom	"Don't Stop Me Dough!"	tnb	surprised	Dough
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Starter	TNB	Babe. That's so good. I'm singing that one tomorrow.	tom	proud	That's so good
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Starter	Tom	That's the same purple as the sky! An hour ago it was way up on the hill. Now it's on my lawn!	nara	scared	
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Starter	Tom	That's the same purple as the sky! An hour ago it was way up on the hill. Now it's on my lawn!	tnb	surprised	same purple as the sky
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Starter	Tom	Mr. Washington is sitting out on his porch in that. Come on!	tnb	scared	on his porch in that
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Smog	Tom	He just said the same thing again, word for word.	tnb	scared	word for word
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Smog	TNB	He always finishes that story. I've heard it nine times. It ends with gumbo.	tom	scared	He always finishes that story
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Smog	Tom	It's not a nice afternoon, Mr. Washington! The air is purple!	tnb	scared	The air is purple
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Smog	TNB	Babe. That cloud has a face. And it just talked to us.	tom	proud	it just talked to us
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Smog	Tom	It's like the mud at my mother's house! I told you they talk!	tnb	surprised	I told you they talk
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Smog	TNB	You did tell me. It's a lot scarier in person.	tom	scared	scarier in person
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Smog	Tom	The man in the mask jumped out! I jumped higher!	tnb	happy	I jumped higher
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Smog	TNB	And it rained popcorn on the whole room. Let's do that to these clouds.	tom	surprised	do that to these clouds
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Smog	Tom	I don't have any popcorn!	tnb	happy	popcorn
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Smog	TNB	You don't need popcorn. You just need to be that scared.	tom	scared	that scared
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Smog	Tom	Oh, I'm that scared.	tnb	happy	I'm that scared
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Smog	Tom	That doesn't sound like him at all. He tells me how old he is every single morning. He's proud of it!	tnb	sad	doesn't sound like him at all
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Smog	TNB	If the smog did this to him, what about everybody on the boulevard?	tom	scared	everybody on the boulevard
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Smog	Tom	Miss Odette and Doña Carmen! Come on!	tnb	scared	Doña Carmen!
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Odette	TNB	Babe, this is bad. Every time I walk in here she yells "Sit down, you're too skinny!" before the door even closes.	tom	sad	this is bad
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Odette	Tom	Miss Odette? I'm sorry to bother you. TNB is standing up, and he's very skinny today.	tnb	happy	very skinny today
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Odette	Tom	Nothing. She's just like Mr. Washington.	tnb	sad	Nothing.
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Carmen	TNB	Babe, the pupusas are burning!	tom	scared	burning
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Carmen	Tom	Doña Carmen, I'm so sorry. I'm coming behind your counter. I know nobody's allowed back here.	tnb	surprised	behind your counter
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Carmen	Tom	I flipped them. I'm ready for the towel. Go ahead.	tnb	scared	ready for the towel
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Carmen	TNB	She smacks you with that towel if you even look at the griddle.	tom	scared	even look at the griddle
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Carmen	Tom	I know! I've never wanted to be hit with a towel so badly!	tnb	sad	so badly
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Flurry	Tom	The parking tickets can TALK now? They were bad enough when they were quiet!	tnb	happy	bad enough when they were quiet
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Flurry	Tom	And I moved my car on Monday night! I set two alarms!	tnb	happy	two alarms
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Flurry	Tom	Fine. Can I pay it in SkyMiles?	tnb	happy	SkyMiles
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Coyote	Tom	Excuse me! She is not a snack. She is our guest!	nara	proud	our guest
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Coyote	Tom	Excuse me! She is not a snack. She is our guest!	tnb	happy	our guest
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Coyote	TNB	We do have snacks, though. I've got half a bag of gummy worms.	tom	surprised	We do have snacks
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Coyote	Canyon Coyote	Coyotes don't eat gummy worms.	tnb	surprised	don't eat gummy worms
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	Babe, look at that tree. It's grey. The leaves, the trunk, even the dirt. It looks like an old black and white movie.	tom	surprised	It's grey
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	Babe, look at that tree. It's grey. The leaves, the trunk, even the dirt. It looks like an old black and white movie.	nara	scared	even the dirt
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	There's one lemon on it. And the lemon is inside a block of something orange.	tnb	surprised	something orange
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	I've seen this before. There's one exactly like it at my parents' pond, with a dragonfly inside.	tnb	surprised	seen this before
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	On Long Island? Babe, that's three thousand miles away.	tom	unimpressed	three thousand miles
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	Two thousand four hundred and seventy-five.	tnb	unimpressed	seventy-five
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	It's not glass, and it's not glaze. I work with this kind of stuff all day and I have no idea what it is.	tom	scared	no idea what it is
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	There's a little round hole in the side, like somebody took a bite out of it.	tom	surprised	round hole in the side
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	The one at the pond has the same hole. And you can't pull it off. Rose tried, and then I tried.	tnb	surprised	the same hole
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	Can I try anyway?	tom	happy	try anyway
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	Okay. Wow. Your turn.	tom	unimpressed	Your turn
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	I already lost to the small one. ...Maybe it's easier in California.	tnb	happy	easier in California
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	It's not easier in California.	tnb	happy	not easier in California
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	It's a burnt-out flashbulb. My mother found one exactly like it next to the dragonfly.	nara	proud	flashbulb
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	It's a burnt-out flashbulb. My mother found one exactly like it next to the dragonfly.	tnb	scared	exactly like it
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	Who leaves the same bulb at a pond in New York and on a hill in Los Angeles?	tom	scared	on a hill in Los Angeles
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	I don't know. And I really don't like it.	tnb	scared	really don't like it
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	Me neither. And I like almost everything.	tom	happy	almost everything
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Boss	Tom	That hill has EYES! The whole hill just stood up!	tnb	scared	EYES!
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Boss	Tom	That hill has EYES! The whole hill just stood up!	nara	scared	EYES!
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Boss	TNB	Babe. I take naps on that hill.	tom	surprised	naps on that hill
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Boss	Tom	I think you've been napping on his face!	tnb	scared	on his face
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Boss	The Big Shake	RUMBLE. There was a big flash up here this morning, and it woke me up.	tnb	scared	RUMBLE.
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Boss	The Big Shake	RUMBLE. There was a big flash up here this morning, and it woke me up.	nara	scared	RUMBLE.
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Boss	The Big Shake	RUMBLE. There was a big flash up here this morning, and it woke me up.	tom	surprised	big flash
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Boss	The Big Shake	A million years under this city, and everybody up top is always leaving. Today nobody leaves. Not ever.	tom	sad	always leaving
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Boss	The Big Shake	A million years under this city, and everybody up top is always leaving. Today nobody leaves. Not ever.	tnb	sad	always leaving
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Boss	The Big Shake	A million years under this city, and everybody up top is always leaving. Today nobody leaves. Not ever.	nara	scared	Not ever
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Boss	TNB	He'd know. He has four hundred and twelve thousand miles.	tom	proud	twelve thousand miles
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2AfterBoss	TNB	I'm sorry I kept falling asleep on you. I didn't know you were a person.	tom	happy	you were a person
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2AfterBoss	The Big Shake	I liked the naps. You were the only one who ever stayed.	tnb	loving	liked the naps
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2AfterBoss	The Big Shake	I liked the naps. You were the only one who ever stayed.	tom	loving	ever stayed
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2AfterBoss	The Big Shake	Something shiny has been stuck in my pipe all day. It tickles. Ah... ah... A-CHOO!	tnb	happy	It tickles
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2AfterBoss	The Big Shake	Something shiny has been stuck in my pipe all day. It tickles. Ah... ah... A-CHOO!	tom	surprised	A-CHOO
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2AfterBoss	The Big Shake	Something shiny has been stuck in my pipe all day. It tickles. Ah... ah... A-CHOO!	nara	happy	A-CHOO
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2AfterBoss	Tom	It's a gold coin with a lemon on it. Rose's has a dragonfly.	tnb	surprised	a lemon on it
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2AfterBoss	Tom	Yes. A fish gave her one, and now a hill sneezed one at me.	tnb	happy	sneezed one at me
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2AfterBoss	TNB	Nara thinks it's a very small frisbee.	tom	happy	very small frisbee
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2AfterBoss	TNB	Nara thinks it's a very small frisbee.	nara	happy	frisbee
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2AfterBoss	Tom	Nara, I'm sorry. We don't play fetch with gold.	nara	sad	fetch with gold
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2AfterBoss	Tom	Nara, I'm sorry. We don't play fetch with gold.	tnb	happy	fetch with gold
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2AfterBoss	Tom	The hill said a flash woke it up this morning. The fish at the pond said the same thing.	tnb	surprised	the same thing
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2AfterBoss	TNB	Two flashes, two orange blocks and two gold coins. Babe, I don't love that. Let's go check on Mr. Washington.	tom	scared	I don't love that
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	TNB	That's ten times now. It gets better every time.	tom	happy	ten times
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	TNB	That's ten times now. It gets better every time.	washington	happy	better every time
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Miss Odette	I brought gumbo for the whole block. TNB! Sit DOWN. You're too skinny!	washington	happy	gumbo for the whole block
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Miss Odette	I brought gumbo for the whole block. TNB! Sit DOWN. You're too skinny!	tnb	happy	Sit DOWN
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Miss Odette	I brought gumbo for the whole block. TNB! Sit DOWN. You're too skinny!	tom	happy	too skinny
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Doña Carmen	And YOU. Who went behind my counter?	tnb	surprised	And YOU
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Doña Carmen	And YOU. Who went behind my counter?	tom	happy	behind my counter
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Tom	Thank you, Doña Carmen! That's the best towel I've ever been hit with!	carmen	unimpressed	best towel
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Tom	Thank you, Doña Carmen! That's the best towel I've ever been hit with!	tnb	happy	ever been hit with
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Doña Carmen	They came out perfectly crispy. Don't ever do it again.	tom	proud	perfectly crispy
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Doña Carmen	They came out perfectly crispy. Don't ever do it again.	tnb	happy	Don't ever do it again
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	TNB	Babe. Gumbo. Go get the bread bowl!	tom	surprised	bread bowl
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Tom	It has a hole in the top. I gave that piece to Nara.	tnb	happy	to Nara
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Tom	It has a hole in the top. I gave that piece to Nara.	nara	happy	to Nara
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	TNB	That's not a hole. That's where the gumbo goes in.	tom	happy	gumbo goes in
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	TNB	With two thousand four hundred and seventy-five miles in between.	tom	loving	seventy-five
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2End	Tom	Each way. That's a lot of SkyMiles.	tnb	happy	a lot of SkyMiles
 scene	3	data/scenes.js	ch3Arrive	Grace	Tata! Boppy has been waiting by his window since BREAKFAST. He has his fishing hat on.	tom	happy
 scene	3	data/scenes.js	ch3Arrive	Grace	Tata! Boppy has been waiting by his window since BREAKFAST. He has his fishing hat on.	rose	happy
 scene	3	data/scenes.js	ch3Arrive	Rose	He said if you were late he'd catch the fish without you. He catches one every time. It's always THIS big.	tom	unimpressed

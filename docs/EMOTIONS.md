@@ -62,6 +62,8 @@ Tom: "currently, emotion states are just flagged on a character based on their d
 
 Status: TAGGED; chapter 1 scene lines WIRED as a pilot (react2, `tools/reaction-apply.py 1`); other chapters and kinds not wired. `docs/emotion-reactions.tsv` holds 9,852 reactions on 3,094 dialogue lines (one row per line and listener). Readable copy `docs/REACTION_INDEX.md`; check and rebuild `python3 tools/reaction-index.py`. The game does not load it.
 
+Timing (reacttime1, Tom 2026-11-13): a reaction row may end with an `at` value, the exact words of the line that cause the reaction; the listener reacts when the line reaches the end of those words (clip clock, or typewriter when silent). Empty = at the start of the line. Chapters 1 and 2 are on and fully cued (`python3 tools/reaction-apply.py 1 2`). When tagging a new line always give the cue words. Test: tools/reaction_timing_test.py.
+
 ### Every place a dialogue box appears
 
 | # | Scenario | Lines | Tagged | Who can react |

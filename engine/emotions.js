@@ -6,7 +6,7 @@
 // Cast story scenes (S.talk) show it only in chapters in EMO_CHAPTERS. Every other dialogue box (map NPC talk, recruit and shop intro lines, cab lines, townsfolk lines in scenes)
 // looks its line up in NPC_EMOTION_MOODS (data/npc-emotion-moods.js, from docs/npc-emotion-lines.tsv by tools/npc-emotion-apply.py; npcemo7). The NPC is drawn in its pose
 // (data/npc-poses.js). Both clear when the line advances, on a line with no mood, and when the scene ends or is skipped.
-const EMO={starting:false,actor:null,id:null,mood:null,listeners:[]};
+const EMO={starting:false,actor:null,id:null,mood:null,listeners:[],pending:[],cueW:null,cueLine:-1};
 const EMO_PORTRAIT_DEFAULT=()=>{ const box=$('dialog-portrait'); return box&&box.querySelector('img'); };
 const emoPreloaded=new Set();
 function emoOn() { return typeof EMO_CHAPTERS!=='undefined'&&typeof STORY!=='undefined'&&EMO_CHAPTERS.has(STORY.chapter); }
@@ -54,17 +54,61 @@ function emoActorById(id) {
 function emoClear() {
   if(EMO.actor&&EMO.actor.scenePose&&EMO.actor.scenePose.emo) EMO.actor.scenePose=null;
   for(const a of EMO.listeners) if(a.scenePose&&a.scenePose.emo) a.scenePose=null;
-  EMO.listeners=[]; EMO.actor=null; EMO.mood=null; EMO.id=null;
+  EMO.listeners=[]; EMO.actor=null; EMO.mood=null; EMO.id=null; EMO.pending=[]; EMO.cueW=null; EMO.cueLine=-1;
 }
+// Reaction timing (reacttime1, Tom 2026-11-13: a listener reacts when the line reaches the words that cause it, not when the line starts).
+// A reaction may carry a third value: the character position in the line where its cue words end (the `at` column of docs/emotion-reactions.tsv,
+// turned into a position by tools/reaction-apply.py). No third value = react as the line starts. How far the line has got:
+// - a spoken clip is playing: the clip's own clock, spread over the text by emoCueWeights (letters take time, commas and sentence ends take longer);
+// - no clip, or sound off, or fast-forward: the typewriter (dialog.shown); a tap that shows the whole page fires what is left.
+// A cue near the end of a clip fires at least EMO_CUE_TAIL seconds before the clip ends so the pose is seen.
+const EMO_CUE_TAIL=.35;
+function emoCueWeights(chars) {
+  const w=[0]; let t=0;
+  for(let i=0;i<chars.length;i++) {
+    const c=chars[i],n=chars[i+1];
+    t+=1;
+    if(c===','||c===';'||c===':') t+=3;
+    else if(/[.!?\u2026]/.test(c)&&!(n&&/[.!?\u2026]/.test(n))) t+=7;   // one pause per run of dots
+    w.push(t);
+  }
+  return w;
+}
+function emoCueReached() {
+  const n=dialog.chars?dialog.chars.length:0;
+  if(typeof DV!=='undefined'&&DV.page===dialog.index&&DV.playing) {
+    if(DV.t0==null||!DV.dur) return 0;                                   // the clip is still being decoded
+    const c=audio(); if(!c) return dialog.shown;
+    const w=EMO.cueW||(EMO.cueW=emoCueWeights(dialog.chars)),total=w[n]||1;
+    const el=c.currentTime-DV.t0,tail=Math.max(0,DV.dur-EMO_CUE_TAIL);
+    if(el>=tail) return n;
+    const heard=el/DV.dur*total; let i=0; while(i<n&&w[i+1]<=heard) i++;
+    return i;
+  }
+  if(typeof DV!=='undefined'&&DV.page===dialog.index&&DV.t0!=null) return n;   // the clip has finished
+  return dialog.shown;
+}
+function emoPose(lid,mood) {
+  const a=emoActorById(lid);
+  if(a&&!a.scenePose&&typeof STORY_POSES!=='undefined'&&STORY_POSES[lid]&&STORY_POSES[lid]['em_'+mood]) { a.scenePose={f:'em_'+mood,mid:lid,emo:true}; EMO.listeners.push(a); }
+}
+function emoCueTick() {
+  if(!EMO.pending.length) return;
+  if(!dialog.active||dialog.index!==EMO.cueLine) { EMO.pending=[]; return; }
+  const at=emoCueReached(),keep=[];
+  for(const p of EMO.pending) { if(at>=p[2]) emoPose(p[0],p[1]); else keep.push(p); }
+  EMO.pending=keep;
+}
+setInterval(()=>{ try { emoCueTick(); } catch(e) {} },50);
 function emoReact(speakerId,text) {
   const rs=emoReactionsOf(dialog.name,text); if(!rs) return;
   const nx=dialog.lines[dialog.index+1],ns=nx&&emoReactionsOf(dialog.name,nx);   // warm the next line's sheets
   for(const [lid] of (ns||[])) if(typeof storyPosesLoad==='function') storyPosesLoad(lid);
-  for(const [lid,mood] of rs) {
+  EMO.cueLine=dialog.index;
+  for(const [lid,mood,at] of rs) {
     if(lid===speakerId||typeof EMOTION_FACES==='undefined'||!EMOTION_FACES.includes(lid)) continue;
     if(typeof storyPosesLoad==='function') storyPosesLoad(lid);
-    const a=emoActorById(lid);
-    if(a&&!a.scenePose&&typeof STORY_POSES!=='undefined'&&STORY_POSES[lid]&&STORY_POSES[lid]['em_'+mood]) { a.scenePose={f:'em_'+mood,mid:lid,emo:true}; EMO.listeners.push(a); }
+    if(at>0) EMO.pending.push([lid,mood,at]); else emoPose(lid,mood);
   }
 }
 function emoApply() {
@@ -98,7 +142,7 @@ const LE_loadDialogLine_emo=loadDialogLine;
 loadDialogLine=function() { LE_loadDialogLine_emo(); emoApply(); };
 const LE_advanceDialog_emo=advanceDialog;
 advanceDialog=function() { LE_advanceDialog_emo(); if(!dialog.active&&(EMO.mood||EMO.actor||EMO.listeners.length)) emoClear(); };
-setInterval(()=>{ if(!dialog.active&&(EMO.mood||EMO.actor||EMO.listeners.length)) emoClear(); },100);   // a skipped or interrupted scene must leave no pose behind
+setInterval(()=>{ if(!dialog.active&&(EMO.mood||EMO.actor||EMO.listeners.length||EMO.pending.length)) emoClear(); },100);   // a skipped or interrupted scene must leave no pose behind
 const LE_endIntro_emo=endIntro;
 endIntro=function() { emoClear(); return LE_endIntro_emo(); };
-addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{EMO,emoMoodOf}); });
+addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{EMO,emoMoodOf,emoCueReached,emoCueWeights}); });

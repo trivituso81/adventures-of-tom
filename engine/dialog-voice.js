@@ -8,7 +8,7 @@
 // - While a clip plays, the typewriter blips are quiet.
 // Clip files load after startup, one after another, so they never slow the title screen.
 // Loaded after engine/chapter-select.js (wraps say, stopSpeech, loadDialogLine, advanceDialog, pickChoice, S.talk).
-const DV={src:null,token:0,cache:new Map(),page:-1,playing:false,pendingSay:[]};
+const DV={src:null,token:0,cache:new Map(),page:-1,playing:false,pendingSay:[],t0:null,dur:0};   // t0, dur: audio-clock start and length of the clip now playing (reaction cues, engine/emotions.js)
 
 function dvVoiceOf(name) { return DIALOG_CAST.speakers[String(name||'').trim()]||null; }
 function dvClip(name,text) {
@@ -16,7 +16,7 @@ function dvClip(name,text) {
   return DIALOG_CLIPS.clips[v+'|'+text]||(typeof CONTRACT_OLD!=='undefined'&&CONTRACT_OLD[text]&&DIALOG_CLIPS.clips[v+'|'+CONTRACT_OLD[text]])||null;
 }
 function dvStop() {
-  DV.token++; DV.playing=false;
+  DV.token++; DV.playing=false; DV.t0=null;
   if(DV.src) { try { DV.src.onended=null; DV.src.stop(); } catch(e) {} DV.src=null; }
 }
 function dvMuted() {
@@ -39,7 +39,7 @@ function dvPlay(b64) {
     if(tok!==DV.token||dvMuted()) { if(tok===DV.token) DV.playing=false; return; }
     const src=c.createBufferSource(); src.buffer=buf; src.connect(sound.voiceBus||sound.master);
     src.onended=()=>{ if(DV.src===src) { DV.src=null; DV.playing=false; } };
-    DV.src=src; src.start(); guard(Math.round(buf.duration*1000)+1200);
+    DV.src=src; src.start(); DV.t0=c.currentTime; DV.dur=buf.duration; guard(Math.round(buf.duration*1000)+1200);
   };
   // Only the 20 most recent lines stay decoded (lruSet, engine/speech.js, mem1).
   if(DV.cache.has(b64)) { go(lruGet(DV.cache,b64)); return; }

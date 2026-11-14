@@ -39,13 +39,14 @@ def main():
         f = r['file']
         if f not in files: files[f] = norm(open(os.path.join(ROOT, f), encoding='utf-8').read())
         if r['text'] not in files[f]: bad.append(('text not in file', f, r['text'][:60]))
+        if (r.get('at') or '') and r['at'] not in r['text']: bad.append(('at words not in the line', r['at'], r['text'][:60]))
         k = (r['where'], r['speaker'], r['text'], r['listener'])
         if k in once and r['kind'] == 'map': bad.append(('listener twice on one line', r['where'], r['text'][:50]))
         once.add(k)
         two.setdefault((r['speaker'], r['text'], r['listener']), set()).add(r['mood'])
     clash = sum(1 for v in two.values() if len(v) > 1)
     lines = collections.OrderedDict()
-    for r in rows: lines.setdefault((r['kind'], r['chapter'], r['where'], r['speaker'], r['text']), []).append((r['listener'], r['mood']))
+    for r in rows: lines.setdefault((r['kind'], r['chapter'], r['where'], r['speaker'], r['text']), []).append((r['listener'], r['mood'] + (' (at "%s")' % r['at'] if (r.get('at') or '') else '')))
     print('rows', len(rows), 'lines', len(lines), 'listeners', len({r['listener'] for r in rows}), 'same line, two moods in two places:', clash)
     if bad:
         for b in bad[:60]: print('BAD', b)
