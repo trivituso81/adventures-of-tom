@@ -25541,8 +25541,16 @@
    "prompt": "Draw Grace in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of Grace. Picture 2 is the walking sheet. Pictures 3 and 4 are the battle sheets.\n\nCopy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as the battle sheets. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\n\nRow 1:\n1. Standing in profile, facing right, one arm stretched out in front of her holding a small gold coin up at the level of her face, her thumb and finger pinching it, her other hand pressed against her chest, a serious, nervous, brave face, as if she does not want to do this.\n2. Standing, holding a big old brown open book in both hands in front of her, her head bent to read it, her mouth open a little, as if reading aloud, bright and absorbed.\n3. Standing, holding up a shiny rectangular gold library card high in one hand over her head, her other hand on her hip, a huge triumphant grin.\nRow 2:\n4. Standing, one arm stretched out to the side pointing with a pencil at something at the edge of her cell (nothing drawn there), her other hand holding a rolled sheet of paper under her arm, her chin up, bossy, in charge, a serious teacher face.\n5. Standing, holding out one sparkly pink bedazzled bookmark covered in plastic gems in one outstretched hand toward the right, with a warm, proud, generous smile.\n6. Leaning toward the left, one hand tugging at something at the left edge of her cell (a sleeve, nothing drawn there) and the other arm pointing urgently down and to the right, her eyes wide, her mouth open, whispering urgently.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/ch7-rose-poses-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794697154802
+    }
+   ],
    "rejects": [],
    "id": "ch7-rose-poses",
    "tab": "Characters",
