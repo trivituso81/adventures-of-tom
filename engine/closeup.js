@@ -249,7 +249,7 @@ function closeupReveal(img,label,onDone,v,opts) {
     for(let i=0;i<(q.n||26);i++) { const f=cuEl('i','',sn), z=1.5+((i*7)%4)*.8; Object.assign(f.style,{left:((i*37)%97+1)+'%',width:z+'px',height:z+'px',animationDuration:(7+((i*5)%6))+'s',animationDelay:'-'+((i*1.7)%9).toFixed(1)+'s'}); f.style.setProperty('--dx',(((i*13)%9)-4)*3+'px'); } }
   const cap=closeup.cap=cuEl('div','cu-cap',el); cap.textContent=label;
   const pad=closeup.pad=cuEl('div','cu-pad',el);
-  const b=cuEl('button','cu-b a',pad); b.type='button'; b.textContent='A  CONTINUE'; b.setAttribute('aria-label','Continue'); b.addEventListener('click',closeupRevealEnd);
+  const b=cuEl('button','cu-b a',pad); b.type='button'; b.textContent='CONTINUE'; b.setAttribute('aria-label','Continue'); b.addEventListener('click',closeupRevealEnd);
   el.addEventListener('click',closeupRevealEnd);
   const lay=()=>{
     const W=el.clientWidth,H=el.clientHeight; if(!W||!H) return;
@@ -327,7 +327,7 @@ function closeupWatchAct() {
   }
 }
 function closeupWatchEnd() {
-  closeup.wphase='end'; const def=closeup.def; closeup.cap.textContent=def.endCaption||''; closeup.wbtn.textContent='A  CONTINUE';
+  closeup.wphase='end'; const def=closeup.def; closeup.cap.textContent=def.endCaption||''; closeup.wbtn.textContent='CONTINUE';
   if(def.onEnd) def.onEnd();
 }
 
