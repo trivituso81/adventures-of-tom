@@ -24708,8 +24708,16 @@
    "prompt": "Draw Chairman Cheeks, a giant red squirrel, shrinking back into an ordinary squirrel as one pose sheet for a family role-playing game.\n\nPicture 1 is the approved painting of Chairman Cheeks in the game: keep his red fur, his round belly, his big bushy tail, his face and his red tie. Picture 2 is the Cheek Stuffer, for the painted finish of an ordinary squirrel. Picture 3 is the finished painting of Deedee and Boppy's house, for the handbrushed finish only.\n\nIn every cell there is NO throne, no robe, no top hat and no monocle: he stands on the ground wearing only his red tie, on a plain flat ground line. The six poses are the same character at six stages, so that the game can shrink him from the first to the last.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, the ground line the same in every cell, each figure well inside its cell with clear magenta margin, nothing touching a cell edge, in profile or three-quarter view facing right unless a frame says otherwise. No grid lines, numbers, text, effects or shadows.\n\nRow 1:\n1. Standing very tall and proud on his hind legs, one paw raised high in a grand speech, mouth open wide, chin up, the red tie neat. Far too red.\n2. The same pose, but the red of his fur is fading toward a normal brown, his paw halfway down, his eyes starting to look uncertain, the tie beginning to look too big for his neck.\n3. Smaller, a plain ordinary grey-brown squirrel with only a little orange left in his fur, mouth still open mid-sentence and a startled look, the tie hanging loose and sliding down.\nRow 2:\n4. A small, plain, ordinary grey-brown squirrel, sitting up, mouth open in one tiny squeak, eyes wide, the red tie dropping off his neck and falling in the air beside him.\n5. The same ordinary squirrel standing on all fours, looking up and a little confused, tail low, the tie lying on the ground beside him.\n6. The ordinary squirrel running away to the right, tail high and streaming, away from the viewer's attention, no tie.\n\nDo not add frames, merge frames or repeat a pose. Paint it like the attached pictures: matte, visible brush strokes, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Family friendly."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/ch6-ribbon-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794683899877
+    }
+   ],
    "rejects": [],
    "id": "ch6-ribbon",
    "tab": "Props",
