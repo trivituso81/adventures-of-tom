@@ -23551,8 +23551,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE SHEET. Return exactly one image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The approved painting of The Red Pen, the giant red pen in glasses that is the boss of the school, a boss of \"The Adventures of Tom\", a family role-playing game. Keep the same creature, shape, colors and painted finish.\n2) The approved painting of Grump Hollow's Mudling, for the handbrushed finish only.\n\nPAINT THIS SHEET\nThe same 6 poses as attachment 1, in the same 3 by 2 layout: top row poses 1 to 3, bottom row poses 4 to 6, each pose filling most of its cell, nothing overlapping, the creature facing right in every pose.\nTHE NEW SHEET IS A NORMAL-SIZED RED PEN, not a giant: in every pose it is an ordinary red ballpoint pen with a pocket clip, as long as a grown person's hand, with no face, no glasses, no glow and no coin. Six simple poses: 1 lying flat, 2 upright in a cup, 3 lying at an angle, 4 clicked open with the tip out, 5 clicked shut, 6 rolling slightly.\nPaint it like attachment 1: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/ch5-binder-closed-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794624124190
+    }
+   ],
    "rejects": [],
    "id": "ch5-binder-closed",
    "tab": "Props",
