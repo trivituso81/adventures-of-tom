@@ -24732,8 +24732,16 @@
    "prompt": "Draw one ordinary, normal-sized, grey-brown squirrel (not red, not giant, no clothes, no tie, no glow) as one pose sheet for a family role-playing game.\n\nPicture 1 is the approved painting of the Cheek Stuffer, a chubby cartoon squirrel with a big bushy tail, from \"The Adventures of Tom\". Paint a squirrel of the same kind, with the same painted finish. Picture 2 is the finished painting of Deedee and Boppy's house, for the handbrushed finish only.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, the ground line the same in every cell, each figure well inside its cell with clear magenta margin, nothing touching a cell edge, in profile or three-quarter view facing right unless a frame says otherwise. No grid lines, numbers, text, effects or shadows.\n\nRow 1:\n1. Diving head first, front paws stretched out ahead of it, back legs kicking in the air behind it, its bushy tail straight up, as if diving into a basket.\n2. Sitting back on its haunches with a little square of sandwich held in its mouth, looking surprised, blinking, its tail curled up behind it.\n3. Sitting upright and still, front paws folded on its chest, tail curled up behind it, looking straight ahead.\nRow 2:\n4. Running straight up a tree trunk, seen from the side with the trunk drawn as one plain vertical bark column on the left edge of its cell, paws gripping the bark, tail trailing, in a hurry.\n5. Sitting up with both cheeks stuffed round and full of food, its eyes big, holding a paw up to its mouth.\n6. Perched on a branch, looking back down over its shoulder, its tail flicking up in a curl, calm.\n\nDo not add frames, merge frames or repeat a pose. Paint it like the attached pictures: matte, visible brush strokes, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Family friendly."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/enemies/ch6-chairman-shrink-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794684560228
+    }
+   ],
    "rejects": [],
    "id": "ch6-chairman-shrink",
    "tab": "Enemies",
