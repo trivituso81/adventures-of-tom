@@ -14,7 +14,7 @@
 //    open for a recording) and fades back 1.5 s after it ends. Quiet while the page is hidden.
 (function() {
   if(window.adminMusic) return;
-  const KEY='aot-admin-music', ID='admin', XF=2.5, LEVEL=.5;
+  const KEY='aot-admin-music', ID='admin', XF=2.5, LEVEL=.25;
   let ctx=null, out=null, buf=null, loading=false, started=false, startedAt=0, offset=0, copies=[], nextAt=0, timer=0, saveTimer=0;
   const holds=new Set();
   const wantOn=()=>{ try { return localStorage.getItem('le-music')!=='off'; } catch(e) { return true; } };

@@ -10,6 +10,8 @@ const MC_TRACKS={"title":["l",30.1],"battle":["l",75.1],"boss":["l",88.4],"victo
 const MC={bufs:new Map(),loading:new Map(),failed:new Set(),cur:null,old:[],jingle:null,jingleDone:false,inBattle:false,
   duck:null,out:null,ducked:false,XF:2.5,MAXLOOPS:3,lastWant:undefined,log:[]};
 const MC_IN=Float32Array.from({length:64},(_,i)=>Math.sin(i/63*Math.PI/2)),MC_OUT=Float32Array.from({length:64},(_,i)=>Math.cos(i/63*Math.PI/2));
+// Level each track plays at (1 = as made). The admin track is half as loud (Tom 2026-11-14).
+const MC_LEVEL={admin:.5};
 const mcOk=id=>!!MC_TRACKS[id]&&!MC.failed.has(id);
 
 function mcChain() {
@@ -77,7 +79,7 @@ function mcStart(id,fade) {
   const c=sound.ctx,dest=mcChain(),buf=mcBuf(id); if(!dest||!buf) return null;
   const v={id,buf,loop:MC_TRACKS[id][0]==='l',gain:c.createGain(),copies:[],nextAt:0,dead:false},t=c.currentTime+.03;
   v.gain.connect(dest);
-  v.gain.gain.setValueAtTime(0,t); v.gain.gain.linearRampToValueAtTime(1,t+Math.max(.02,fade));
+  v.gain.gain.setValueAtTime(0,t); v.gain.gain.linearRampToValueAtTime(MC_LEVEL[id]||1,t+Math.max(.02,fade));
   mcCopy(v,t);
   if(!v.loop) v.end=t+buf.duration;
   return v;
@@ -188,7 +190,9 @@ function clipTick() {
     if(!mcBuf(want)) { mcLoad(want); if(!MC.loading.has(want)&&MC.failed.has(want)) return undefined; return true; }
     const jingle=MC_TRACKS[want][0]==='j',fast=jingle||want==='battle'||want==='boss'||(cur&&(cur.id==='battle'||cur.id==='boss'));
     const fade=jingle?.05:fast?.45:1.3;
-    if(cur) mcFadeOut(cur,jingle?.3:fast?.45:1.3);
+    // Into or out of the admin track the old track leaves quickly, so the admin track is the only music heard.
+    const adm=want==='admin'||(cur&&cur.id==='admin');
+    if(cur) mcFadeOut(cur,adm?.4:jingle?.3:fast?.45:1.3);
     MC.cur=mcStart(want,fade);
   }
   const v=MC.cur;

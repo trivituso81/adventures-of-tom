@@ -78,3 +78,5 @@ Not verified (say so plainly): the phone; the live ElevenLabs Music call (the re
 ## 7. The admin track (`adminmusic1`, `adminmusic2`, 2026-11-14)
 
 Track `admin` ("Admin Calm", group Admin, use Admin, loop, 87 s, 39th track) plays on every admin screen. In the game, `mcAdminScreen()` in engine/music-clips.js picks it for the ADMIN list, the Battle Lab list and its sub pages, and the Welcome layout editor. On the separate pages (voices, art, music, areas, portraits, heads) engine/admin-music.js plays it (a take Tom marks In the game on the phone replaces the built-in mp3 there too). The built-in mp3 is Tom's ElevenLabs take of 2026-11-14 15:02, merged with merge-local.py (loudness -20 LUFS, fade-out cut at 87.4 s). Test: `python3 tools/admin_music_test.py`.
+
+Level (`adminmusic3`): the admin track plays at half level (`MC_LEVEL.admin` in engine/music-clips.js; `LEVEL` in engine/admin-music.js). Changing tracks to or from it fades the other track out in 0.4 s.

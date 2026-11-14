@@ -1,3 +1,9 @@
+## adminmusic3 (2026-11-14): admin music at half volume, and no other music under it
+- Tom: "Any other music that's playing at that time? should be stopped. so that only the anime music is playing. and also the anime music needs to be decreased to volume by 50%." (voice dictation: "anime" = admin)
+- Volume: `MC_LEVEL={admin:.5}` in engine/music-clips.js (game) and `LEVEL=.25` in engine/admin-music.js (pages, was .5): half of the first level, amplitude halved (about 6 dB quieter).
+- Only admin plays: entering the ADMIN screens now fades the title theme (or any other track) out in 0.4 s instead of 1.3 s, and leaving fades the admin track out in 0.4 s. Looked for other sources: the synth song is already silent while clips are in charge, and the hidden game frame in Area Builder has no audio context (silent). A clip or track played on a library page already silences the admin track.
+- Tested: tools/admin_music_test.py (new checks: half level on pages and in the game; 1.3 s after entering ADMIN no other voice or synth song is left). Not heard on a phone.
+
 ## ch7s3 (2026-11-14): chapter 7 build stage 3: the library scenes, the Stacks hall with the block, the three wings, the Reading Room and the bookmark swap
 - Tom: "Read claude/story-build.md, claude/story-ch07.md and claude/next-addendum-ch7s2.md. Continue the chapter 7 build at stage 3."
 - Scene 3 (SCENES.ch7Page): Page's story is now Monday night, Tom argues with his cookbooks, and Grace questions Page with her chart box by box (flash, grey spot, orange block, the sheet and WET FLOOR sign, the bulb filed under B, "Technically correct." "Deeply concerning.").
