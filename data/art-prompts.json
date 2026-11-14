@@ -23170,8 +23170,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE SHEET. Return exactly one image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The approved painting of Old Iron-Gill, the giant mustached fish boss of the Whispering Marsh, a boss of \"The Adventures of Tom\", a family role-playing game. Keep the same creature, shape, colors and painted finish.\n2) The approved painting of Grump Hollow's Mudling, for the handbrushed finish only.\n\nPAINT THIS SHEET\nThe same 6 poses as attachment 1, in the same 3 by 2 layout: top row poses 1 to 3, bottom row poses 4 to 6, each pose filling most of its cell, nothing overlapping, the creature facing right in every pose.\nTHE NEW SHEET IS A NORMAL-SIZED POND FISH, not a giant: in every pose it is about as long as a grown person's forearm, an ordinary, calm perch with a few cat-like whiskers (not a big mustache). Top row: 1 hanging calmly in the water, mouth closed. 2 turning with a small splash. 3 blowing one small bubble. Bottom row: 4 a happy wiggle, tail flick. 5 a small gulp. 6 swimming away, tail sweeping. No glowing eyes, no coin, no spray.\nPaint it like attachment 1: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
-   "status": "rejected",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/ch3-boppy-hat-coin-v1.png",
+     "date": "2026-11-14",
+     "from": "v8",
+     "at": 1794624831904
+    }
+   ],
    "rejects": [
     {
      "date": "2026-11-14",
@@ -23189,7 +23197,7 @@
     "art/grands.webp"
    ],
    "group": "Chapter 3",
-   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The painting of Boppy, a grandfather who always wears one old fishing hat. Copy his hat from this picture exactly: the same shape, colors, fabric and wear. 2) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE OBJECT\nBoppy's fishing hat alone, seen from the front and slightly above, upright, filling about 80 percent of the picture. Tucked into the hatband on the front is one small gold coin with a jumping fish stamp, half showing, shining. Two old fishing lures hang from the band as well. No head, no hands.\nBackground: one flat solid pure magenta #FF00FF, edge to edge, with no gradient and no magenta in the hat.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No words, letters or numbers."
+   "prompt": "Just the object, no people, no other items, just boppys cap Facing backwards with the coin tucked in the with a fish on it magenta bacground no words on it"
   },
   {
    "status": "draft",
