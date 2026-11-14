@@ -1,0 +1,1259 @@
+{
+ "tag": "20261114ch6",
+ "chapter": 6,
+ "lines": [
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I missed that tooth. I'm not missing the next one.",
+   "ctx": "chapter 6 (new)",
+   "script": "[wistful, admitting] I missed that TOOTH. [resolved, quiet] I'm not missing the NEXT one."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It's TNB. \"Babe. Come home. Your house. NOW. It's about Bready Mercury.\"",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[reading, puzzled] It's TNB. [reading aloud, urgent] \"Babe. Come home. Your house. NOW. It's about Bready Mercury.\""
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "\"Also there are acorns in the flour.\"",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[reading, baffled] \"Also there are ACORNS in the flour.\""
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Hi, babe. I missed you. Now please don't panic, but look at the island.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[tender, quick] Hi, babe. I missed you. [calm, bracing him] Now please don't panic, but look at the ISLAND."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "The jar is gone! Where's Bready Mercury?",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[alarmed] The jar is GONE! [frantic] Where's Bready Mercury?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I fed him at eight and sang him his song. Then I went out for grape soda, and when I came back the window was open and he was gone.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[recounting, calm] I fed him at eight and sang him his song. [sheepish] Then I went out for grape soda, [bewildered] and when I came back the window was open and he was GONE."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Which song did you sing him?",
+   "ctx": "chapter 6 (new)",
+   "script": "[curious, serious] Which song did you sing him?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "\"I Want to Bake Free.\"",
+   "ctx": "chapter 6 (new)",
+   "script": "[straight-faced] \"I Want to... [punchline] Bake FREE.\""
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "And now he HAS!",
+   "ctx": "chapter 6 (new)",
+   "script": "[punchline, delighted] And now he HAS!"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "He had help, babe. Four toes in front and five in back. I looked it up. Those are squirrel feet.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[informing, calm] He had help, babe. [precise, proud] Four toes in front and five in back. I looked it up. [grave] Those are SQUIRREL feet."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "A squirrel took our starter? He's nine years old! He's flown Delta One twice!",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[outraged, disbelief] A SQUIRREL took our starter? [punchline, indignant] He's nine years old! He's flown Delta One TWICE!"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "And it left this. I've seen every horror movie ever made, babe, and this is how they all start.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[ominous, hushed] And it left THIS. [resigned, nonchalant] I've seen every horror movie ever made, babe, [grave, matter-of-fact] and this is how they ALL start."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "The window was open, so it isn't breaking and entering. It's baking and entering.",
+   "ctx": "chapter 6 (new)",
+   "script": "[reasoning, lawyerly] The window was open, so it isn't breaking and entering. [punchline, proud] It's BAKING and entering."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Don't make me laugh. This is all very jarring.",
+   "ctx": "chapter 6 (new)",
+   "script": "[stifled, anxious] Don't make me laugh. [punchline, strained] This is all very JARRING."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Babe! That's seven! Amy texted me about the other six. I've never been so proud.",
+   "ctx": "chapter 6 (new)",
+   "script": "[thrilled] Babe! That's SEVEN! [fond, amused] Amy texted me about the other six. [melting, proud] I've never been so PROUD."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I have news from Long Island too. It happened at Amy's school. A kickball and a sneaker are frozen in an orange block as big as a washing machine, and it's hanging in the air over second base.",
+   "ctx": "chapter 6 (new)",
+   "script": "[sober, reporting] I have news from Long Island too. It happened at Amy's school. [amazed, precise] A kickball and a sneaker are frozen in an orange block as big as a washing machine, [disbelief] and it's HANGING in the air over second base."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "That makes five. And every one is bigger than the last. Babe, what comes after a washing machine?",
+   "ctx": "chapter 6 (new)",
+   "script": "[counting, uneasy] That makes FIVE. [ominous] And every one is bigger than the last. [dread, quiet] Babe, what comes after a WASHING MACHINE?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I don't know. I just don't want to find out in my kitchen.",
+   "ctx": "chapter 6 (new)",
+   "script": "[admitting, small] I don't know. [firm, anxious] I just don't want to find out in my KITCHEN."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "And nobody goes anywhere alone. So we get him back together.",
+   "ctx": "chapter 6 (new)",
+   "script": "[firm, protective] And nobody goes anywhere ALONE. [warm, resolved] So we get him back TOGETHER."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Together. Hold on, Bready Mercury. We're coming!",
+   "ctx": "chapter 6 (new)",
+   "script": "[resolved] Together. [calling out, heroic] Hold on, Bready Mercury. We're COMING!"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "A peanut triangle! What does it mean?",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[astonished] A peanut TRIANGLE! [pleading, curious] What does it mean?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Nothing good, babe. In the movies a triangle never means anything good.",
+   "ctx": "chapter 6 (new)",
+   "script": "[grim, nonchalant] Nothing good, babe. [dry, knowing] In the movies a triangle NEVER means anything good."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "They took something of ours too. Bready Mercury is gone, jar and all.",
+   "ctx": "chapter 6 (new)",
+   "script": "[hurt, realizing] They took something of OURS too. [aggrieved] Bready Mercury is gone, jar and all."
+  },
+  {
+   "voice": "olivia",
+   "speaker": "Olivia",
+   "text": "Your bread jar? Oh, Tom. I'm so sorry.",
+   "ctx": "chapter 6 (new)",
+   "script": "[confused, sympathetic] Your bread jar? [soft, sincere] Oh, Tom. I'm so SORRY."
+  },
+  {
+   "voice": "olivia",
+   "speaker": "Olivia",
+   "text": "She also says there was a big flash in the park on Sunday morning. She wrote down the time.",
+   "ctx": "chapter 6 (new)",
+   "script": "[relaying, hushed] She also says there was a big FLASH in the park on Sunday morning. [wide-eyed, matter-of-fact] She wrote down the TIME."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "A flash! TNB, did you hear that?",
+   "ctx": "chapter 6 (new)",
+   "script": "[alarmed] A FLASH! [turning, urgent] TNB, did you hear that?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I heard it, babe. I was hoping I didn't.",
+   "ctx": "chapter 6 (new)",
+   "script": "[grim, resigned] I heard it, babe. [wry, defeated] I was HOPING I didn't."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Olivia said you saw a flash on Sunday.",
+   "ctx": "chapter 6 (new)",
+   "script": "[careful, curious] Olivia said you saw a flash on SUNDAY."
+  },
+  {
+   "voice": "penny",
+   "speaker": "Bernadette",
+   "text": "Sunday, 6:12 in the morning, at the picnic tables. One flash and no thunder. By 6:20 the squirrels had lookouts. Come and see what it left.",
+   "ctx": "chapter 6 (new)",
+   "script": "[crisp, official] Sunday, 6:12 in the morning, at the picnic tables. [hushed, grave] One flash and no thunder. By 6:20 the squirrels had LOOKOUTS. [beckoning, grim] Come and see what it left."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "The whole picnic is grey! And there's an orange block on the table. It's as big as a bathtub!",
+   "ctx": "chapter 6 (new)",
+   "script": "[stunned] The whole picnic is GREY! [alarmed] And there's an orange block on the table. [disbelief] It's as big as a BATHTUB!"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Babe, there's a picnic basket inside it. And a squirrel! He's halfway into the basket with his tail in the air!",
+   "ctx": "chapter 6 (new)",
+   "script": "[hushed, amazed] Babe, there's a picnic basket inside it. [gasping] And a SQUIRREL! [incredulous, delighted] He's halfway into the basket with his tail in the AIR!"
+  },
+  {
+   "voice": "penny",
+   "speaker": "Bernadette",
+   "text": "Caught in the act. I've wanted to see that for nineteen years. I didn't want to see it like THIS.",
+   "ctx": "chapter 6 (new)",
+   "script": "[grim, vindicated] Caught in the act. [wistful, clipped] I've wanted to see that for NINETEEN years. [pained, flat] I didn't want to see it like THIS."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "She's never had one hold still before. She doesn't know what to do with it.",
+   "ctx": "chapter 6 (new)",
+   "script": "[amused, fond] She's never had one hold STILL before. [wry] She doesn't know what to do with it."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Excuse me, Mr. Squirrel. Are you all right in there?",
+   "ctx": "chapter 6 (new)",
+   "script": "[polite, concerned] Excuse me, Mr. Squirrel. [gentle, earnest] Are you all right in THERE?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Okay. I know this part now. There's going to be a little round hole in the side. There it is.",
+   "ctx": "chapter 6 (new)",
+   "script": "[settling in, calm] Okay. I know this part now. [knowing] There's going to be a little round hole in the side. [pleased, grim] There it IS."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "You know the signs!",
+   "ctx": "chapter 6 (new)",
+   "script": "[impressed, delighted] You know the SIGNS!"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I learned from the best. And there's going to be a burnt flashbulb. I just can't find it.",
+   "ctx": "chapter 6 (new)",
+   "script": "[smug, fond] I learned from the BEST. [investigating] And there's going to be a burnt flashbulb. [puzzled] I just can't find it."
+  },
+  {
+   "voice": "penny",
+   "speaker": "Bernadette",
+   "text": "Are you looking for this? I found it under the last table at 6:31. Bagged, labeled and dated. Exhibit A.",
+   "ctx": "chapter 6 (new)",
+   "script": "[smug, officious] Are you looking for THIS? [crisp, proud] I found it under the last table at 6:31. [deadpan, grand] Bagged, labeled and dated. Exhibit A."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "That's the sixth one! Could we have it? My mother keeps them in a drawer.",
+   "ctx": "chapter 6 (new)",
+   "script": "[thrilled] That's the SIXTH one! [hopeful, polite] Could we have it? [earnest, helpful] My mother keeps them in a DRAWER."
+  },
+  {
+   "voice": "penny",
+   "speaker": "Bernadette",
+   "text": "It's evidence. Your mother can file a request.",
+   "ctx": "chapter 6 (new)",
+   "script": "[flat, officious] It's EVIDENCE. [prim, dry] Your mother can file a REQUEST."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Whose picnic was it?",
+   "ctx": "chapter 6 (new)",
+   "script": "[curious] Whose picnic was it?"
+  },
+  {
+   "voice": "penny",
+   "speaker": "Bernadette",
+   "text": "A birthday party, setting up early. They ran when the squirrels got big. The cake is still on table two. Nobody touch the cake. The cake is also evidence.",
+   "ctx": "chapter 6 (new)",
+   "script": "[matter-of-fact] A birthday party, setting up early. They ran when the squirrels got BIG. [grave, pointed] The cake is still on table two. [stern, deadpan] Nobody touch the cake. The cake is also EVIDENCE."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Dragonfly, lemon, fish, hat, kickball, and now a whole picnic basket. This is the biggest one yet, and it's five blocks from my house.",
+   "ctx": "chapter 6 (new)",
+   "script": "[tallying, rapid] Dragonfly, lemon, fish, hat, kickball, and now a whole picnic basket. [alarmed] This is the BIGGEST one yet, [anxious, small] and it's five blocks from my HOUSE."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "One thing at a time, babe. That block isn't going anywhere. Bready Mercury already did.",
+   "ctx": "chapter 6 (new)",
+   "script": "[soothing, calm] One thing at a time, babe. That block isn't going anywhere. [punchline, dry] Bready Mercury already DID."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "That peanut is as big as a trash can, and it's booing us!",
+   "ctx": "chapter 6 (new)",
+   "script": "[amazed] That peanut is as big as a TRASH CAN, [incredulous] and it's BOOING us!"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "...I looked anyway.",
+   "ctx": "chapter 6 (new)",
+   "script": "[sheepish, admitting] ...I looked ANYWAY."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Tough crowd. Don't worry, babe. They'll come out of their shell.",
+   "ctx": "chapter 6 (new)",
+   "script": "[sympathetic, dry] Tough crowd. Don't worry, babe. [punchline, playful] They'll come out of their SHELL."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Who's the Chairman?",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[curious, polite] Who's the CHAIRMAN?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Excuse me, Mr. Twig. We're looking for a jar of sourdough starter. He answers to Bready Mercury.",
+   "ctx": "chapter 6 (new)",
+   "script": "[polite, formal] Excuse me, Mr. Twig. [earnest] We're looking for a jar of sourdough starter. [proud, fond] He answers to Bready Mercury."
+  },
+  {
+   "voice": "skeeter",
+   "speaker": "Twig Spy",
+   "text": "I've never heard of Operation Big Bread.",
+   "ctx": "chapter 6 (new)",
+   "script": "[stiff, evasive] I've NEVER heard of... [flustered, quick] Operation Big Bread."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Babe. He just told us the name of the operation.",
+   "ctx": "chapter 6 (new)",
+   "script": "[incredulous, delighted] Babe. He just told us the name of the OPERATION."
+  },
+  {
+   "voice": "mudling",
+   "speaker": "Cheek Stuffer",
+   "text": "Mmf mmf. (And nobody touches Agent Crumb. He's on a mission.)",
+   "ctx": "chapter 6 (new)",
+   "script": "[muffled, fierce] Mmf mmf. [muffled, proud] (And nobody touches Agent Crumb. He's on a MISSION.)"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Is Agent Crumb the one in the basket?",
+   "ctx": "chapter 6 (new)",
+   "script": "[curious, polite] Is Agent Crumb the one in the BASKET?"
+  },
+  {
+   "voice": "mudling",
+   "speaker": "Cheek Stuffer",
+   "text": "Mmf. (Three days in there. Bravest squirrel we have.)",
+   "ctx": "chapter 6 (new)",
+   "script": "[muffled, solemn] Mmf. [muffled, reverent] (Three days in there. Bravest squirrel we HAVE.)"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I'm wearing most of the sandbox, babe.",
+   "ctx": "chapter 6 (new)",
+   "script": "[deadpan, patient] I'm wearing most of the SANDBOX, babe."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It suits you. You've always looked good in earth tones.",
+   "ctx": "chapter 6 (new)",
+   "script": "[warm, sincere] It suits you. [punchline, playful] You've always looked good in EARTH tones."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "A little yellow toy truck. That's Lachlan's.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[fond, proud] A little yellow toy truck. [warm, certain] That's LACHLAN'S."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I always keep a heel of sourdough in my jacket for emergencies. Nara, this is an emergency.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[proud, matter-of-fact] I always keep a heel of sourdough in my jacket for EMERGENCIES. [grave, firm] Nara, this is an emergency."
+  },
+  {
+   "voice": "skeeter",
+   "speaker": "Tiny voice",
+   "text": "Password accepted. Welcome, Agent...",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[tiny, formal] Password accepted. Welcome, Agent..."
+  },
+  {
+   "voice": "skeeter",
+   "speaker": "Tiny voice",
+   "text": "...wait. You're very tall. Are you a squirrel?",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[puzzled, tiny] ...wait. You're very TALL. [suspicious, squeaky] Are you a squirrel?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I know! I feel terrible. I'm going to apologize as soon as we get up there.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[guilty, anguished] I know! I feel TERRIBLE. [resolved, earnest] I'm going to apologize as soon as we get up there."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "She smells bread! Bready Mercury is up at the top of this tree, and there's no ladder.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[excited] She smells BREAD! [realizing, anxious] Bready Mercury is up at the top of this tree, [dismayed] and there's no LADDER."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "HANG IN THERE, BREADY! WE KNEAD YOU!",
+   "ctx": "chapter 6 (new)",
+   "script": "[bellowing, heroic] HANG IN THERE, BREADY! [punchline, booming] WE KNEAD YOU!"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Was that \"need\" with a K?",
+   "ctx": "chapter 6 (new)",
+   "script": "[puzzled, curious] Was that \"need\" with a K?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "It's always with a K, babe.",
+   "ctx": "chapter 6 (new)",
+   "script": "[matter-of-fact, proud] It's ALWAYS with a K, babe."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "There's an X on every porch on 2nd Avenue. And there's a drawing of Nara. It says \"THREAT LEVEL: VERY HIGH.\"",
+   "ctx": "chapter 6 (new)",
+   "script": "[reading, stunned] There's an X on every porch on 2nd Avenue. [amazed] And there's a drawing of NARA. [reading aloud, solemn] It says \"THREAT LEVEL: VERY HIGH.\""
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "She likes it. They got her good side.",
+   "ctx": "chapter 6 (new)",
+   "script": "[amused, fond] She likes it. [proud, dry] They got her good SIDE."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "It says \"OPERATION BIG BREAD\" across the top. Everything connects to the jar, babe. That's how corkboards work.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[reading aloud, hushed] It says \"OPERATION BIG BREAD\" across the top. [knowing] Everything connects to the jar, babe. [dry, delighted] That's how corkboards WORK."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "\"BY ORDER OF THE CHAIRMAN. WINTER IS COMING. HOARD EVERYTHING.\"",
+   "ctx": "chapter 6 (new)",
+   "script": "[reading aloud, grave] \"BY ORDER OF THE CHAIRMAN. [ominous] WINTER IS COMING. HOARD EVERYTHING.\""
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "And look in the corner. It's the picnic table, with a sad face drawn on it. \"AGENT CRUMB. STILL IN THE ORANGE THING. DAY THREE.\"",
+   "ctx": "chapter 6 (new)",
+   "script": "[hushed, gentle] And look in the corner. It's the picnic table, with a sad face drawn on it. [reading aloud, somber] \"AGENT CRUMB. STILL IN THE ORANGE THING. [grave] DAY THREE.\""
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "They can't get him out either.",
+   "ctx": "chapter 6 (new)",
+   "script": "[quiet, sympathetic] They can't get him out EITHER."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "\"SUPPLY LINE. ROPE LADDER. SEE BUCKET, PANTRY.\" Babe, that's our way up.",
+   "ctx": "chapter 6 (new)",
+   "script": "[reading aloud, brisk] \"SUPPLY LINE. ROPE LADDER. SEE BUCKET, PANTRY.\" [excited] Babe, that's our way UP."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "She really pulled her weight.",
+   "ctx": "chapter 6 (new)",
+   "script": "[punchline, proud] She really pulled her WEIGHT."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "All forty pounds of it.",
+   "ctx": "chapter 6 (new)",
+   "script": "[deadpan, fond] All FORTY pounds of it."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "That squirrel is as big as a mailbox, and he's wearing a TIE!",
+   "ctx": "chapter 6 (new)",
+   "script": "[awestruck] That squirrel is as big as a MAILBOX, [incredulous, delighted] and he's wearing a TIE!"
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Chairman Cheeks",
+   "text": "On Sunday there was a flash at the picnic tables. It took my best agent, and it made me big enough to run things. So I'm running things.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[grim, pompous] On Sunday there was a flash at the picnic tables. [aching, small] It took my best agent, [grandiose, defiant] and it made me big enough to run things. So I'm RUNNING things."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Sir, at the door I told one of your squirrels that I was a squirrel. That wasn't true, and I'm sorry.",
+   "ctx": "chapter 6 (new)",
+   "script": "[formal, humble] Sir, at the door I told one of your squirrels that I was a SQUIRREL. [guilty, earnest] That wasn't true, [sincere] and I'm SORRY."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Chairman Cheeks",
+   "text": "Apology noted. You're still trespassing.",
+   "ctx": "chapter 6 (new)",
+   "script": "[stiff, grudging] Apology noted. [pompous, firm] You're still TRESPASSING."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "That's eight! Babe, you're on a roll.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[delighted] That's EIGHT! [fond, proud] Babe, you're on a ROLL."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "And look at the bottom of the jar. Something gold is stuck to it.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[noticing, curious] And look at the bottom of the jar. [intrigued] Something GOLD is stuck to it."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It's a gold coin with a picnic basket on it! He climbed out of the jar again and glued it on.",
+   "ctx": "chapter 6 (new)",
+   "script": "[amazed] It's a gold coin with a picnic basket on it! [exasperated, fond] He climbed out of the jar AGAIN [punchline, amused] and glued it on."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Chairman Cheeks",
+   "text": "I found that under the picnic table on Sunday. It's the shiniest thing I own, so I kept it under the best thing I own.",
+   "ctx": "chapter 6 (new)",
+   "script": "[proud, wistful] I found that under the picnic table on Sunday. [grand, earnest] It's the SHINIEST thing I own, [tender, simple] so I kept it under the best thing I own."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Nara! That's not bread! It only smells like bread!",
+   "ctx": "chapter 6 (new)",
+   "script": "[alarmed] Nara! That's not BREAD! [pleading] It only SMELLS like bread!"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Let her carry it, babe. She's wanted a gold frisbee since the lemon.",
+   "ctx": "chapter 6 (new)",
+   "script": "[easy, soothing] Let her carry it, babe. [fond, amused] She's wanted a gold FRISBEE since the lemon."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Chairman Cheeks",
+   "text": "The dog has my coin. ...Fine. I'm practicing sharing. I'll walk you out. It's procedure.",
+   "ctx": "chapter 6 (new)",
+   "script": "[stunned, flat] The dog has my coin. ...Fine. [stiff, dignified] I'm practicing SHARING. I'll walk you out. It's PROCEDURE."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Chairman Cheeks",
+   "text": "That coin is MINE. I'm following that dog.",
+   "ctx": "chapter 6 (new)",
+   "script": "[outraged, shrill] That coin is MINE. [stubborn, sputtering] I'm following that DOG."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Chairman Cheeks",
+   "text": "Agent Crumb. Bravest squirrel I ever commanded. He went in for one sandwich.",
+   "ctx": "chapter 6 (new)",
+   "script": "[hushed, grieving] Agent Crumb. Bravest squirrel I ever COMMANDED. [aching, small] He went in for one SANDWICH."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Chairman Cheeks",
+   "text": "That's MY coin, and that's MY agent in there. I want them both back.",
+   "ctx": "chapter 6 (new)",
+   "script": "[indignant, shrill] That's MY coin, [aching, demanding] and that's MY agent in there. I want them both BACK."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I'm sorry about your friend, sir.",
+   "ctx": "chapter 6 (new)",
+   "script": "[quiet, sincere] I'm sorry about your FRIEND, sir."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Nara, I've told you. We don't play fetch with gold.",
+   "ctx": "chapter 6 (new)",
+   "script": "[gentle, correcting] Nara, I've told you. [firm, fond] We don't play fetch with GOLD."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "She only eats bread if you throw it, babe. And that coin smells like Bready Mercury.",
+   "ctx": "chapter 6 (new)",
+   "script": "[reasoning, easy] She only eats bread if you THROW it, babe. [amused, coaxing] And that coin smells like Bready Mercury."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "...One throw. A very small one.",
+   "ctx": "chapter 6 (new)",
+   "script": "[giving in, sheepish] ...One throw. A very SMALL one."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It rolled into the little round hole. TNB, it fits! It fits exactly!",
+   "ctx": "chapter 6 (new)",
+   "script": "[stunned, hushed] It rolled into the little round HOLE. [wonder, rising] TNB, it fits! It fits EXACTLY!"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Babe. It's cracking.",
+   "ctx": "chapter 6 (new)",
+   "script": "[awed, hushed] Babe. It's CRACKING."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Chairman Cheeks",
+   "text": "AGENT CRUMB! You're out! By order of the Chairman, I hereby declare this the greatest day in the history of...",
+   "ctx": "chapter 6 (new)",
+   "script": "[ecstatic, shouting] AGENT CRUMB! You're OUT! [pompous, grandiose] By order of the Chairman, I hereby declare this the GREATEST day in the history of..."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Chairman Cheeks",
+   "text": "Squeak.",
+   "ctx": "chapter 6 (new)",
+   "script": "[tiny, startled] Squeak."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "The grass is green. The tables are brown. Babe, it all came back.",
+   "ctx": "chapter 6 (new)",
+   "script": "[awed, quiet] The grass is green. The tables are brown. [overwhelmed] Babe, it all came BACK."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "And the Chairman is just a squirrel. Sir? Mr. Chairman?",
+   "ctx": "chapter 6 (new)",
+   "script": "[gentle, stunned] And the Chairman is just a SQUIRREL. [tentative, hopeful] Sir? Mr. Chairman?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "He can't talk anymore.",
+   "ctx": "chapter 6 (new)",
+   "script": "[quiet, sad] He can't talk ANYMORE."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "He still knows where your back fence is. Saturdays, babe. A deal is a deal.",
+   "ctx": "chapter 6 (new)",
+   "script": "[gentle, wry] He still knows where your back fence is. [warm, firm] Saturdays, babe. A deal is a DEAL."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "But what just HAPPENED?",
+   "ctx": "chapter 6 (new)",
+   "script": "[reeling, wild] But what just HAPPENED?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "The coin has a picnic basket on it, and the block had a picnic basket in it. That hole is exactly as big as a coin.",
+   "ctx": "chapter 6 (new)",
+   "script": "[reasoning, slow] The coin has a picnic basket on it, and the block had a picnic basket IN it. [realizing, dawning] That hole is exactly as big as a COIN."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "TNB, the coin came OUT of that hole. Nara just put it back!",
+   "ctx": "chapter 6 (new)",
+   "script": "[breathless, realizing] TNB, the coin came OUT of that hole. [amazed, rising] Nara just put it BACK!"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "So the block breaks, the color comes back, and the squirrels go back to being squirrels. Babe. It's a key.",
+   "ctx": "chapter 6 (new)",
+   "script": "[reasoning, rapid] So the block breaks, the color comes back, and the squirrels go back to being squirrels. [hushed, thrilled] Babe. It's a KEY."
+  },
+  {
+   "voice": "penny",
+   "speaker": "Bernadette",
+   "text": "Nineteen years I've watched this park, and I've never seen anything like that. What did you DO?",
+   "ctx": "chapter 6 (new)",
+   "script": "[stunned, indignant] Nineteen years I've watched this park, and I've never seen anything like THAT. [demanding, shrill] What did you DO?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "The dog did it.",
+   "ctx": "chapter 6 (new)",
+   "script": "[simple, proud] The DOG did it."
+  },
+  {
+   "voice": "penny",
+   "speaker": "Bernadette",
+   "text": "Then the dog is going in the report.",
+   "ctx": "chapter 6 (new)",
+   "script": "[crisp, officious] Then the dog is going in the REPORT."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "TNB. I have a coin with a lemon on it in my pocket.",
+   "ctx": "chapter 6 (new)",
+   "script": "[quiet, realizing] TNB. [dawning, intense] I have a coin with a LEMON on it in my pocket."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "And I have a hat.",
+   "ctx": "chapter 6 (new)",
+   "script": "[dazed, quiet] And I have a HAT."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Rose has the dragonfly. My father has the fish. Amy has the kickball.",
+   "ctx": "chapter 6 (new)",
+   "script": "[tallying, quick] Rose has the DRAGONFLY. My father has the FISH. [amazed] Amy has the KICKBALL."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Five blocks and five coins. Babe, we've been carrying the answer around like loose change.",
+   "ctx": "chapter 6 (new)",
+   "script": "[stunned, dry] Five blocks and five coins. [punchline, wry] Babe, we've been carrying the answer around like LOOSE CHANGE."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Nara, you're a genius. You're getting so much chicken.",
+   "ctx": "chapter 6 (new)",
+   "script": "[proud, doting] Nara, you're a GENIUS. [promising, delighted] You're getting SO much chicken."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "...I'm sorry. I think that one is used up.",
+   "ctx": "chapter 6 (new)",
+   "script": "[gently, apologetic] ...I'm sorry. [kind, sad] I think that one is used UP."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "We owe her a throw, babe.",
+   "ctx": "chapter 6 (new)",
+   "script": "[soft, fond] We owe her a THROW, babe."
+  },
+  {
+   "voice": "penny",
+   "speaker": "Bernadette",
+   "text": "Evidence released. Tell your mother to keep it somewhere dry.",
+   "ctx": "chapter 6 (new)",
+   "script": "[formal, grand] Evidence RELEASED. [prim, officious] Tell your mother to keep it somewhere DRY."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "First Bready Mercury goes home. Then the lemon, then the hat. And then I'm calling my mother.",
+   "ctx": "chapter 6 (new)",
+   "script": "[resolved, planning] First Bready Mercury goes home. Then the lemon, then the hat. [determined] And then I'm calling my MOTHER."
+  },
+  {
+   "voice": "penny",
+   "speaker": "Bernadette",
+   "text": "Also in the report: the squirrels are regular squirrels again, and a dog fixed my park.",
+   "ctx": "chapter 6 (new)",
+   "script": "[officious, crisp] Also in the report: the squirrels are regular squirrels again, [grudging, dry] and a DOG fixed my park."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "A gold ball. Nara, THIS gold we can throw!",
+   "ctx": "chapter 6 (new)",
+   "script": "[delighted] A gold ball. [announcing, thrilled] Nara, THIS gold we can THROW!"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Finally! She's been waiting since the lemon.",
+   "ctx": "chapter 6 (new)",
+   "script": "[relieved, fond] FINALLY! She's been waiting since the LEMON."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Before you put him back, I have something. I was saving it for when you landed. Then the squirrels happened.",
+   "ctx": "chapter 6 (new)",
+   "script": "[tender, shy] Before you put him back, I have something. [gentle] I was saving it for when you landed. [punchline, wry] Then the squirrels HAPPENED."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "He kept climbing out of the jar, so I made him a bigger home. I threw it on the wheel last week. It came out of the kiln on Thursday.",
+   "ctx": "chapter 6 (new)",
+   "script": "[explaining, shy] He kept climbing out of the jar, so I made him a bigger HOME. [proud, quiet] I threw it on the wheel last week. [soft, bright] It came out of the kiln on THURSDAY."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "You made him a crock! It has his name on it. And a crown!",
+   "ctx": "chapter 6 (new)",
+   "script": "[overjoyed] You made him a CROCK! [amazed, delighted] It has his name on it. And a CROWN!"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "He's a Queen fan, babe. He needs a crown.",
+   "ctx": "chapter 6 (new)",
+   "script": "[matter-of-fact, fond] He's a Queen fan, babe. [punchline, dry] He needs a CROWN."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It's perfect. ...It came out on Thursday? I was at conference night. I love watching you open the kiln.",
+   "ctx": "chapter 6 (new)",
+   "script": "[overwhelmed, soft] It's PERFECT. [realizing, wistful] ...It came out on Thursday? I was at conference night. [admitting, tender] I love watching you open the KILN."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I know. I almost waited.",
+   "ctx": "chapter 6 (new)",
+   "script": "[gentle, rueful] I know. I almost WAITED."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Don't wait for me. Just save me the next one.",
+   "ctx": "chapter 6 (new)",
+   "script": "[warm, generous] Don't wait for me. [tender, hopeful] Just save me the NEXT one."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "There. Now he's got room to rise to the occasion.",
+   "ctx": "chapter 6 (new)",
+   "script": "[satisfied, easy] There. [punchline, playful] Now he's got room to RISE to the occasion."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Nuts! I've been waiting all day for you to say it.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[delighted] NUTS! [thrilled, teasing] I've been waiting ALL DAY for you to say it."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I was saving it for the end. Tell Amy to put me down for one.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[smug, easy] I was saving it for the END. [playful, fond] Tell Amy to put me down for ONE."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It was completely nuts. And I wouldn't have missed it.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[contented, warm] It was completely NUTS. [sincere, soft] And I wouldn't have missed it."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "This coin has flown nine thousand nine hundred miles in my pocket, and it never earned one SkyMile.",
+   "ctx": "chapter 6 (new)",
+   "script": "[proud, precise] This coin has flown nine thousand nine hundred miles in my pocket, [punchline, aggrieved] and it never earned one SKYMILE."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Then give it somewhere to land, babe.",
+   "ctx": "chapter 6 (new)",
+   "script": "[gentle, wry] Then give it somewhere to LAND, babe."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It worked! It worked on purpose!",
+   "ctx": "chapter 6 (new)",
+   "script": "[ecstatic] It WORKED! [disbelief, thrilled] It worked on PURPOSE!"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Look at her face. That dog has no zest for it at all.",
+   "ctx": "chapter 6 (new)",
+   "script": "[amused, observing] Look at her face. [punchline, deadpan] That dog has no ZEST for it at all."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "He's a hill again. Goodnight, sir. I'm still coming up for a nap on Sunday.",
+   "ctx": "chapter 6 (new)",
+   "script": "[soft, fond] He's a hill again. Goodnight, sir. [gentle, wry] I'm still coming up for a NAP on Sunday."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "He liked the naps.",
+   "ctx": "chapter 6 (new)",
+   "script": "[quiet, tender] He liked the NAPS."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I know. That's why I'm going.",
+   "ctx": "chapter 6 (new)",
+   "script": "[soft, simple] I know. That's why I'm GOING."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "My first award. I've had it for nine days.",
+   "ctx": "chapter 6 (new)",
+   "script": "[wistful, fond] My first award. [dry, proud] I've had it for NINE days."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "You don't have to use it. We could look for another way.",
+   "ctx": "chapter 6 (new)",
+   "script": "[gentle, concerned] You don't have to use it. [offering] We could look for another way."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Babe. There's a hat stuck in a block, and I'm wardrobe. It was an honor just to be nominated.",
+   "ctx": "chapter 6 (new)",
+   "script": "[easy, loving] Babe. There's a hat stuck in a block, and I'm WARDROBE. [punchline, mock-solemn] It was an honor just to be NOMINATED."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "And THAT is why you put the table back.",
+   "ctx": "chapter 6 (new)",
+   "script": "[triumphant, smug] And THAT is why you put the table BACK."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Great take.",
+   "ctx": "chapter 6 (new)",
+   "script": "[satisfied] Great take."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "You just gave away the only award you ever won.",
+   "ctx": "chapter 6 (new)",
+   "script": "[moved, amazed] You just gave away the only award you EVER won."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I've still got the gold steamer. And I've got a babe who flew out to watch me work. I'm still on a streak.",
+   "ctx": "chapter 6 (new)",
+   "script": "[easy, content] I've still got the gold steamer. [tender, teasing] And I've got a babe who flew out to watch me work. [punchline, smug] I'm still on a STREAK."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "My favorite son! Did you eat?",
+   "ctx": "chapter 6 (new)",
+   "script": "[warm Long Island accent, delighted] My favorite SON! [warm Long Island accent, bossy] Did you EAT?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Mom, get everybody. Rose's coin, Dad's coin and Amy's coin. I know what they're for!",
+   "ctx": "chapter 6 (new)",
+   "script": "[urgent, breathless] Mom, get everybody. Rose's coin, Dad's coin and Amy's coin. [triumphant] I know what they're FOR!"
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Slow down. You sound like your father with a fish.",
+   "ctx": "chapter 6 (new)",
+   "script": "[warm Long Island accent, firm] Slow down. [warm Long Island accent, punchline, dry] You sound like your father with a FISH."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Every coin goes back into the little round hole in its own block. The block breaks, the color comes back, and everything that woke up goes back to normal. Nara figured it out.",
+   "ctx": "chapter 6 (new)",
+   "script": "[explaining, rapid] Every coin goes back into the little round hole in its own block. [excited] The block breaks, the color comes back, and everything that woke up goes back to normal. [proud, fond] Nara figured it OUT."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "The round hole is where the coin came OUT! Tata, I drew that hole on every single page!",
+   "ctx": "chapter 6 (new)",
+   "script": "[bursting, triumphant] The round hole is where the coin came OUT! [indignant, proud] Tata, I drew that hole on every single PAGE!"
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Then we're going to the pond. All of us, together. Amy, hold the phone up so your brother can see.",
+   "ctx": "chapter 6 (new)",
+   "script": "[warm Long Island accent, commanding] Then we're going to the pond. All of us, TOGETHER. [warm Long Island accent, bossy] Amy, hold the phone up so your brother can SEE."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "But it's my treasure.",
+   "ctx": "chapter 6 (new)",
+   "script": "[pouting, small] But it's my TREASURE."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Cozy Rosie, that dragonfly has been stuck in there a long time.",
+   "ctx": "chapter 6 (new)",
+   "script": "[warm Long Island accent, gentle] Cozy Rosie, that dragonfly has been stuck in there a long TIME."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "...Okay. Fly, bug.",
+   "ctx": "chapter 6 (new)",
+   "script": "[sniffling, giving in] ...Okay. Fly, BUG."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "It's a GUMBALL MACHINE! You put the coin in and the bug comes out!",
+   "ctx": "chapter 6 (new)",
+   "script": "[shrieking, thrilled] It's a GUMBALL MACHINE! [excited, explaining] You put the coin in and the bug comes OUT!"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "That's not how gumball machines work.",
+   "ctx": "chapter 6 (new)",
+   "script": "[matter-of-fact, prim] That's NOT how gumball machines work."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "It is NOW.",
+   "ctx": "chapter 6 (new)",
+   "script": "[defiant, bright] It is NOW."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I saw it! Amy, hold the phone still!",
+   "ctx": "chapter 6 (new)",
+   "script": "[thrilled] I SAW it! [pleading, quick] Amy, hold the phone STILL!"
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "I AM holding it still. Rose is jumping.",
+   "ctx": "chapter 6 (new)",
+   "script": "[brisk, exasperated] I AM holding it still. [dry] Rose is JUMPING."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "Gold like my teeth. Best thing I ever caught.",
+   "ctx": "chapter 6 (new)",
+   "script": "[deep voice, thick New York accent, bragging] Gold like my TEETH. [thick New York accent, fond] Best thing I ever caught."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Boppy, you have to put it in.",
+   "ctx": "chapter 6 (new)",
+   "script": "[insisting, bright] Boppy, you HAVE to put it in."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "Have to? I WANT to. Gold is for keeping. Fish are for jumping.",
+   "ctx": "chapter 6 (new)",
+   "script": "[deep voice, thick New York accent, defensive] Have to? I WANT to. [thick New York accent, punchline, proud] Gold is for keeping. Fish are for JUMPING."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "...He was a small one anyway.",
+   "ctx": "chapter 6 (new)",
+   "script": "[deep voice, thick New York accent, rueful] ...He was a small one ANYWAY."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "You gave away your gold, hubby.",
+   "ctx": "chapter 6 (new)",
+   "script": "[warm Long Island accent, amused] You gave away your GOLD, hubby."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "I've got plenty left.",
+   "ctx": "chapter 6 (new)",
+   "script": "[deep voice, thick New York accent, smug] I've got PLENTY left."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "I paid for those.",
+   "ctx": "chapter 6 (new)",
+   "script": "[warm Long Island accent, punchline, dry] I PAID for those."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "My one gold star.",
+   "ctx": "chapter 6 (new)",
+   "script": "[wistful, quiet] My one gold STAR."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Mom, you give out forty of those a week.",
+   "ctx": "chapter 6 (new)",
+   "script": "[matter-of-fact, precise] Mom, you give out FORTY of those a week."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "I give them out. Nobody ever gave ME one.",
+   "ctx": "chapter 6 (new)",
+   "script": "[dry] I give them OUT. [wry, wistful] Nobody ever gave ME one."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "...Moss needs his shoe.",
+   "ctx": "chapter 6 (new)",
+   "script": "[softening, resolved] ...Moss needs his SHOE."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "Monday morning just got a lot easier to explain.",
+   "ctx": "chapter 6 (new)",
+   "script": "[relieved, brisk] Monday morning just got a lot easier to EXPLAIN."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Amy! Put me down for nine today. And put Tom down for eight.",
+   "ctx": "chapter 6 (new)",
+   "script": "[cheerful, teasing] Amy! Put me down for NINE today. [playful] And put Tom down for EIGHT."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "Nine? I'm not counting yours. You're a professional.",
+   "ctx": "chapter 6 (new)",
+   "script": "[incredulous, brisk] Nine? I'm not counting YOURS. [dry, punchline] You're a PROFESSIONAL."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "That's all six. Tata, I need a bigger chart.",
+   "ctx": "chapter 6 (new)",
+   "script": "[satisfied, brisk] That's all SIX. [bossy, matter-of-fact] Tata, I need a bigger CHART."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Good. Now who is DOING this? Somebody is going around with a flashbulb.",
+   "ctx": "chapter 6 (new)",
+   "script": "[warm Long Island accent, firm] Good. [warm Long Island accent, suspicious] Now who is DOING this? Somebody is going around with a flashbulb."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I don't know yet, Mom. I have three more bulbs for your drawer.",
+   "ctx": "chapter 6 (new)",
+   "script": "[admitting, honest] I don't know yet, Mom. [helpful, earnest] I have three more bulbs for your DRAWER."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "The drawer is ready.",
+   "ctx": "chapter 6 (new)",
+   "script": "[warm Long Island accent, brisk] The DRAWER is ready."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Tata, one more thing. The library is WHISPERING. Like actually. Page says it's fine. It's NOT fine. Come home.",
+   "ctx": "chapter 6 (reworded)",
+   "script": "[urgent, hushed] Tata, one more thing. The library is WHISPERING. [insisting] Like actually. Page says it's fine. [alarmed, bossy] It's NOT fine. Come home."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "They did all three, and I watched it on a phone.",
+   "ctx": "chapter 6 (new)",
+   "script": "[amazed, quiet] They did all three, [wistful, rueful] and I watched it on a PHONE."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Then go and watch the next one in person. I'll feed Bready. Fifty and fifty, and I'll sing.",
+   "ctx": "chapter 6 (new)",
+   "script": "[tender, firm] Then go and watch the next one in PERSON. [easy, fond] I'll feed Bready. Fifty and fifty, and I'll sing."
+  }
+ ]
+}
