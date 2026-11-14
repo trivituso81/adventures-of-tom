@@ -14,21 +14,21 @@
    "speaker": "Tom",
    "text": "Then we have ten minutes! I'll take all ten. I have so much to tell you.",
    "ctx": "chapter 4 (reworded)",
-   "script": "[eager, warm] Then we have ten minutes! I'll take all TEN. I have so much to tell you."
+   "script": "[eager] Then we have ten minutes! I'll take all TEN. [warm] I have so much to tell you."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "A fish on Long Island jumped out of the water and froze in the air, inside one of those orange blocks. It's still hanging up there!",
    "ctx": "chapter 4 (new)",
-   "script": "[excited, amazed] A fish on Long Island jumped out of the water and froze in the air, inside one of those orange blocks. It's STILL hanging up there!"
+   "script": "[excited] A fish on Long Island jumped out of the water and FROZE in the air, inside one of those orange blocks. [amazed, slower] It's still hanging up there!"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "It's just hanging in the air? Babe! That's a flying fish!",
    "ctx": "chapter 4 (new)",
-   "script": "[disbelief] It's just hanging in the air? [delighted, playful] Babe! That's a FLYING fish!"
+   "script": "[disbelief] It's just hanging in the air? Babe! That's a... [playful, delighted] FLYING fish!"
   },
   {
    "voice": "tnb",
@@ -42,21 +42,21 @@
    "speaker": "Tom",
    "text": "Nobody has more air time than me. He's seven feet up. I was at thirty-six thousand.",
    "ctx": "chapter 4 (new)",
-   "script": "[indignant, proud] NOBODY has more air time than me. [precise] He's seven feet up. I was at thirty-six thousand."
+   "script": "[indignant] NOBODY has more air time than me. He's seven feet up. I was at [precise, proud] thirty-six thousand."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "And my mother made a rule. Nobody in the family goes anywhere alone, and that goes for Los Angeles too.",
    "ctx": "chapter 4 (new)",
-   "script": "[serious, earnest] And my mother made a rule. Nobody in the family goes anywhere alone, and that goes for Los Angeles too."
+   "script": "[serious, earnest] And my mother made a rule. Nobody in the family goes anywhere alone, and that goes for Los Angeles TOO."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Nobody in the family. Does that count me?",
    "ctx": "chapter 4 (new)",
-   "script": "[careful] Nobody in the family. [hopeful, quietly] Does that count me?"
+   "script": "[careful] Nobody in the family. Does that... [hopeful, quietly] count me?"
   },
   {
    "voice": "tom",
@@ -70,14 +70,14 @@
    "speaker": "TNB",
    "text": "Then it's a good thing I got you this.",
    "ctx": "chapter 4 (new)",
-   "script": "[warm, pleased] Then it's a good thing I got you this."
+   "script": "[warm, pleased] Then it's a good thing I got you THIS."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "A lanyard! With my name on it! It's LAMINATED!",
    "ctx": "chapter 4 (new)",
-   "script": "[thrilled, shouts] A lanyard! With my name on it! It's LAMINATED!"
+   "script": "[thrilled] A lanyard! With my name on it! [shouts, amazed] It's LAMINATED!"
   },
   {
    "voice": "tnb",
@@ -98,14 +98,14 @@
    "speaker": "TNB",
    "text": "Never. Where I go, you go. That's Deedee's rule. So stick close, babe, and don't leave me hanging like that fish.",
    "ctx": "chapter 4 (new)",
-   "script": "[tender] Never. Where I go, you go. That's Deedee's rule. [playful] So stick close, babe, and don't leave me HANGING like that fish."
+   "script": "[tender] Never. Where I go, you go. That's Deedee's rule. So stick close, babe, and don't leave me... [playful] HANGING like that fish."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Very, very important. I have a lanyard. And now so do you.",
    "ctx": "chapter 4 (reworded)",
-   "script": "[mock serious, proud] Very, VERY important. I have a lanyard. [warm] And now so do you."
+   "script": "[mock serious] Very, VERY important. I have a lanyard. [warm] And now so do you."
   },
   {
    "voice": "tom",
@@ -126,7 +126,7 @@
    "speaker": "Tom",
    "text": "It says STUNT DOUBLE. Whose stunt double is she?",
    "ctx": "chapter 4 (new)",
-   "script": "[delighted, curious] It says STUNT DOUBLE. Whose stunt double is she?"
+   "script": "[delighted] It says STUNT DOUBLE. [curious] Whose stunt double is she?"
   },
   {
    "voice": "tnb",
@@ -147,28 +147,28 @@
    "speaker": "Tom",
    "text": "Hello, Ray. I'm Tom. I'm a visitor. It says so right here.",
    "ctx": "chapter 4 (new)",
-   "script": "[polite, proud] Hello, Ray. I'm Tom. I'm a visitor. [pleased] It says so right HERE."
+   "script": "[polite, proud] Hello, Ray. I'm Tom. I'm a visitor. It says so [pleased] right HERE."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "He didn't even look at it.",
    "ctx": "chapter 4 (new)",
-   "script": "[quiet, crestfallen] He didn't even look at it."
+   "script": "[quiet, crestfallen] He didn't even LOOK at it."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "He never looks. But you held it up beautifully.",
    "ctx": "chapter 4 (new)",
-   "script": "[warm, consoling] He never looks. [sincere] But you held it up BEAUTIFULLY."
+   "script": "[consoling] He never looks. But you held it up... [sincere, warm] BEAUTIFULLY."
   },
   {
    "voice": "dot",
    "speaker": "Kiki",
    "text": "It was right there in Stage 7. Then there was a HUGE flash, and the fog machine turned itself on, and the lights went out, and things started CLAPPING.",
    "ctx": "chapter 4 (reworded)",
-   "script": "[frantic, rushed] It was right there in Stage 7. Then there was a HUGE flash, and the fog machine turned itself on, and the lights went out, and things started CLAPPING."
+   "script": "[frantic, rushed] It was right there in Stage 7. Then there was a HUGE flash, and the fog machine turned itself on, and the lights went out, [speeding up, shrill] and things started CLAPPING."
   },
   {
    "voice": "tom",
@@ -189,21 +189,21 @@
    "speaker": "Tom",
    "text": "I've seen grumpy things like that! On my street, and at my parents' pond. They always show up right after a flash.",
    "ctx": "chapter 4 (reworded)",
-   "script": "[serious, quick] I've seen grumpy things like that! On my street, and at my parents' pond. They always show up right after a flash."
+   "script": "[serious, quick] I've seen grumpy things like that! On my street, and at my parents' pond. They ALWAYS show up right after a flash."
   },
   {
    "voice": "la_woman",
    "speaker": "Dana",
    "text": "You've seen them before? Wonderful. You're hired.",
    "ctx": "chapter 4 (new)",
-   "script": "[brisk, relieved] You've seen them before? Wonderful. [snappy] You're hired."
+   "script": "[brisk] You've seen them before? [relieved] Wonderful. [snappy] You're hired."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "I'm hired! I've been a visitor for one hour!",
    "ctx": "chapter 4 (new)",
-   "script": "[amazed, delighted] I'm HIRED! I've been a visitor for one hour!"
+   "script": "[amazed, delighted] I'm HIRED! I've been a visitor for [proud] one hour!"
   },
   {
    "voice": "tom",
@@ -224,42 +224,42 @@
    "speaker": "TNB",
    "text": "Babe. I'd know grape anywhere. It's my favorite color and my favorite flavor.",
    "ctx": "chapter 4 (new)",
-   "script": "[warm, certain] Babe. I'd know grape anywhere. [playful] It's my favorite color AND my favorite flavor."
+   "script": "[certain, warm] Babe. I'd know grape ANYWHERE. It's my favorite color [playful] and my favorite flavor."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Stage 7 is locked from the inside, though. And every set out here has one of those grumpy things on it, wrecking the shoot. The crew can't work like this.",
    "ctx": "chapter 4 (reworded)",
-   "script": "[worried, practical] Stage 7 is locked from the inside, though. And every set out here has one of those grumpy things on it, wrecking the shoot. The crew can't work like this."
+   "script": "[worried, practical] Stage 7 is locked from the inside, though. And every set out here has one of those grumpy things on it, wrecking the shoot. [quieter, serious] The crew can't work like this."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Then we get them off the sets, one at a time: Main Street, the Western street and New York. After that we deal with Stage 7.",
    "ctx": "chapter 4 (reworded)",
-   "script": "[calm, determined] Then we get them off the sets, one at a time: Main Street, the Western street and New York. [firm] After that we deal with Stage 7."
+   "script": "[calm, determined] Then we get them off the sets, ONE at a time: Main Street, the Western street and New York. [firm] After that we deal with Stage 7."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "That crab is made of cue cards! And it's holding one up for us to read!",
    "ctx": "chapter 4 (new)",
-   "script": "[amazed, delighted] That crab is made of cue cards! And it's holding one up for us to READ!"
+   "script": "[amazed] That crab is made of CUE cards! And it's holding one up [delighted] for us to read!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Excuse me, Mr. Crab. Do you have a card that says PLEASE COME IN?",
    "ctx": "chapter 4 (new)",
-   "script": "[polite, hopeful] Excuse me, Mr. Crab. Do you have a card that says PLEASE COME IN?"
+   "script": "[polite, hopeful] Excuse me, Mr. Crab. Do you have a card that says [slowly, clearly] PLEASE COME IN?"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Babe, I think we're on the wrong side of the cards.",
    "ctx": "chapter 4 (new)",
-   "script": "[wry, playful] Babe, I think we're on the wrong side of the CARDS."
+   "script": "[wry] Babe, I think we're on the wrong side... [playful] of the CARDS."
   },
   {
    "voice": "tom",
@@ -294,49 +294,49 @@
    "speaker": "TNB",
    "text": "I like the click. That's how I know you're home.",
    "ctx": "chapter 4 (new)",
-   "script": "[warm, softly] I like the click. That's how I know you're home."
+   "script": "[softly, warm] I like the click. That's how I know you're home."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Cover your ears, babe. When a boom mic screeches, nobody can get a word out.",
    "ctx": "chapter 4 (reworded)",
-   "script": "[urgent, practical] Cover your ears, babe. When a boom mic screeches, nobody can get a word out."
+   "script": "[urgent, practical] Cover your ears, babe. When a boom mic screeches, NOBODY can get a word out."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "It's very dark in here. Could you hold my lanyard?",
    "ctx": "chapter 4 (new)",
-   "script": "[quiet, anxious] It's very dark in here. [short pause] [polite] Could you hold my lanyard?"
+   "script": "[quiet, anxious] It's VERY dark in here. [short pause] [polite, small] Could you hold my lanyard?"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "I've got your lanyard, babe.",
    "ctx": "chapter 4 (new)",
-   "script": "[warm, gentle] I've got your lanyard, babe."
+   "script": "[gentle, warm] I've got your lanyard, babe."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Blue, orange, red. And one strip of gaffer tape. Okay, two. Okay, four.",
    "ctx": "chapter 4 (reworded)",
-   "script": "[easy, confident] Blue, orange, red. And ONE strip of gaffer tape. [sheepish] Okay, two. [quietly] Okay, four."
+   "script": "[easy, confident] Blue, orange, red. And ONE strip of gaffer tape. [sheepish] Okay, two. [quieter] Okay, four."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "You fixed a whole soundstage with tape! Can you fix my knees?",
    "ctx": "chapter 4 (reworded)",
-   "script": "[impressed] You fixed a whole soundstage with TAPE! [hopeful, playful] Can you fix my knees?"
+   "script": "[impressed] You fixed a whole SOUNDSTAGE with tape! [hopeful, playful] Can you fix my knees?"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Hold on. One of the lights must still be out. That whole patch of floor is grey.",
    "ctx": "chapter 4 (new)",
-   "script": "[puzzled, easy] Hold on. One of the lights must still be out. That whole patch of floor is grey."
+   "script": "[easy] Hold on. One of the lights must still be out. That whole patch of floor [puzzled] is grey."
   },
   {
    "voice": "tom",
@@ -350,28 +350,28 @@
    "speaker": "TNB",
    "text": "Then why is my table grey? And the floor? And my tape marks?",
    "ctx": "chapter 4 (new)",
-   "script": "[confused] Then why is my table grey? [anxious, speeding up] And the floor? And my tape marks?"
+   "script": "[confused] Then why is my table grey? And the floor? [anxious, speeding up] And my tape marks?"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Babe. That's the hero hat. The cowboy wears it in every scene of the movie. And it's inside a big orange block!",
    "ctx": "chapter 4 (new)",
-   "script": "[startled] Babe. That's the hero hat. The cowboy wears it in every scene of the movie. [disbelief, louder] And it's inside a big orange BLOCK!"
+   "script": "[startled] Babe. That's the hero hat. The cowboy wears it in every scene of the movie. And it's inside... [disbelief, louder] a big orange BLOCK!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "It's just like the dragonfly, the lemon and the fish. And every one is bigger than the last.",
    "ctx": "chapter 4 (new)",
-   "script": "[uneasy, awed] It's just like the dragonfly, the lemon and the fish. [slowly] And every one is BIGGER than the last."
+   "script": "[uneasy, awed] It's just like the dragonfly, the lemon and the fish. And every one [slowly] is BIGGER than the last."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Well, hats off to whoever did this. No, really. I can't get the hat off.",
    "ctx": "chapter 4 (new)",
-   "script": "[rattled, wry] Well, hats off to whoever did this. [short pause] [flat, anxious] No, really. I can't get the hat OFF."
+   "script": "[rattled, wry] Well, HATS off to whoever did this. [short pause] [flat, anxious] No, really. I can't get the hat off."
   },
   {
    "voice": "tom",
@@ -399,14 +399,14 @@
    "speaker": "TNB",
    "text": "You knew exactly where to look. Babe, how are you this good at it?",
    "ctx": "chapter 4 (new)",
-   "script": "[amazed, uneasy] You knew exactly where to look. Babe, how are you this GOOD at it?"
+   "script": "[amazed] You knew EXACTLY where to look. Babe, [uneasy, quieter] how are you this good at it?"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "I've had three practices. And I've lost a pulling contest to a plum, a grapefruit and a watermelon. I'm not pulling on a beach ball.",
    "ctx": "chapter 4 (new)",
-   "script": "[matter-of-fact] I've had three practices. [dry, resigned] And I've lost a pulling contest to a plum, a grapefruit and a watermelon. [firm] I'm NOT pulling on a beach ball."
+   "script": "[matter-of-fact] I've had three practices. And I've lost a pulling contest to a plum, a grapefruit [dry, resigned] and a watermelon. [firm] I'm NOT pulling on a beach ball."
   },
   {
    "voice": "tnb",
@@ -420,7 +420,7 @@
    "speaker": "TNB",
    "text": "I moved the table. The hat didn't come with it.",
    "ctx": "chapter 4 (new)",
-   "script": "[stunned, quiet] I moved the table. [short pause] The hat didn't come WITH it."
+   "script": "[stunned, quiet] I moved the table. The hat... [slowly] didn't come WITH it."
   },
   {
    "voice": "tom",
@@ -434,42 +434,42 @@
    "speaker": "TNB",
    "text": "I don't like it. Put the table back. I want the table back under it right now.",
    "ctx": "chapter 4 (new)",
-   "script": "[rattled] I don't like it. Put the table back. [pleading, speeding up] I want the table back under it right NOW."
+   "script": "[rattled] I don't like it. Put the table back. I want the table back under it [pleading, speeding up] right NOW."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Thank you. That's better. That's a hat on a table. That's normal.",
    "ctx": "chapter 4 (new)",
-   "script": "[relieved, shaky] Thank you. That's better. [reassuring, slowly] That's a hat on a table. That's NORMAL."
+   "script": "[relieved, shaky] Thank you. That's better. That's a hat on a table. [slowly, reassuring] That's NORMAL."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Hat: grey floor, orange block, round hole, burnt bulb. I'm sending it to Amy for Grace. She keeps the list in her notebook.",
    "ctx": "chapter 4 (new)",
-   "script": "[precise, steady] Hat: grey floor, orange block, round hole, burnt bulb. [matter-of-fact] I'm sending it to Amy for Grace. She keeps the list in her notebook."
+   "script": "[precise, steady] Hat: grey floor, orange block, round hole, burnt bulb. [matter-of-fact, quicker] I'm sending it to Amy for Grace. She keeps the list in her notebook."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Who brings a flashbulb onto a movie set? We have four hundred lights in here and not one of them is that.",
    "ctx": "chapter 4 (new)",
-   "script": "[baffled, uneasy] Who brings a flashbulb onto a movie set? We have four hundred lights in here and not ONE of them is that."
+   "script": "[baffled] Who brings a flashbulb onto a movie set? We have four HUNDRED lights in here [uneasy] and not one of them is that."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "That came from the stage set. And that's where the wheel tracks go.",
    "ctx": "chapter 4 (new)",
-   "script": "[alert, low] That came from the stage set. And that's where the wheel tracks go."
+   "script": "[alert, low] That came from the stage set. And THAT'S where the wheel tracks go."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "That megaphone is as big as a refrigerator! And it's sitting on your costumes!",
    "ctx": "chapter 4 (new)",
-   "script": "[startled, shouts] That megaphone is as big as a REFRIGERATOR! And it's sitting on your costumes!"
+   "script": "[startled, shouts] That megaphone is as big as a REFRIGERATOR! [appalled] And it's sitting on your costumes!"
   },
   {
    "voice": "bigone",
@@ -483,21 +483,21 @@
    "speaker": "Tom",
    "text": "Excuse me, sir. Those are his costumes. He steamed all forty by hand. While humming.",
    "ctx": "chapter 4 (reworded)",
-   "script": "[polite, firm] Excuse me, sir. Those are his costumes. He steamed all forty by hand. [short pause] [earnest] While humming."
+   "script": "[polite, firm] Excuse me, sir. Those are HIS costumes. He steamed all forty by hand. [short pause] [earnest, quieter] While humming."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "And look at the beret. That's a gold coin.",
    "ctx": "chapter 4 (new)",
-   "script": "[quiet, curious] And look at the beret. That's a gold coin."
+   "script": "[quiet, curious] And look at the beret. That's a gold COIN."
   },
   {
    "voice": "bigone",
    "speaker": "The Director’s Cut",
    "text": "That's my AWARD. I found it on the floor. Forty years on this lot, and it's my first one.",
    "ctx": "chapter 4 (new)",
-   "script": "[booming, defensive] That's my AWARD. I found it on the floor. [proud, quieter] Forty years on this lot, and it's my first one."
+   "script": "[booming, defensive] That's my AWARD. I found it on the floor. Forty years on this lot, [quieter, proud] and it's my first one."
   },
   {
    "voice": "tom",
@@ -511,21 +511,21 @@
    "speaker": "The Director’s Cut",
    "text": "If I can get a \"great take\", somebody else should get the award. Best costumes. It goes to the skinny one with the tape.",
    "ctx": "chapter 4 (new)",
-   "script": "[booming, softened] If I can get a \"great take\", somebody else should get the award. [generous, loud] Best costumes. It goes to the skinny one with the tape."
+   "script": "[booming, softened] If I can get a \"great take\", somebody else should get the award. Best costumes. [generous, loud] It goes to the skinny one with the TAPE."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "I've never won anything! I'd like to thank my steamer. I'd like to thank my tape.",
    "ctx": "chapter 4 (new)",
-   "script": "[overwhelmed, delighted] I've never won ANYTHING! [earnest] I'd like to thank my steamer. I'd like to thank my tape."
+   "script": "[overwhelmed] I've never won ANYTHING! [earnest, shaky] I'd like to thank my steamer. I'd like to thank my tape."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "And I'd like to thank my babe, who flew two thousand four hundred and seventy-five miles to watch me work.",
    "ctx": "chapter 4 (new)",
-   "script": "[tender, emotional] And I'd like to thank my babe, who flew two thousand four hundred and seventy-five miles to watch me work."
+   "script": "[tender, emotional] And I'd like to thank my babe, who flew [slowly, precise] two thousand four hundred and seventy-five miles to watch me work."
   },
   {
    "voice": "tom",
@@ -546,7 +546,7 @@
    "speaker": "TNB",
    "text": "And now I have a hat. Babe, I love my award. I don't love that there are four of them.",
    "ctx": "chapter 4 (new)",
-   "script": "[happy] And now I have a hat. Babe, I LOVE my award. [uneasy, quietly] I don't love that there are four of them."
+   "script": "[happy] And now I have a hat. Babe, I LOVE my award. I don't love [uneasy, quietly] that there are four of them."
   },
   {
    "voice": "tnb",
@@ -560,35 +560,35 @@
    "speaker": "The Director’s Cut",
    "text": "The lighting was too flat. Nobody asked me. But it was.",
    "ctx": "chapter 4 (new)",
-   "script": "[booming, grumpy] The lighting was too flat. [quieter, grumbling] Nobody asked me. But it was."
+   "script": "[booming, grumpy] The lighting was too flat. Nobody asked me. [quieter, grumbling] But it was."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Help me push. This thing has four wheels and four opinions.",
    "ctx": "chapter 4 (reworded)",
-   "script": "[easy, amused] Help me push. This thing has four wheels and four OPINIONS."
+   "script": "[easy, amused] Help me push. This thing has four wheels and four... [dry] OPINIONS."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "The hero hat is still stuck in there. Good thing wardrobe always has a double.",
    "ctx": "chapter 4 (new)",
-   "script": "[wry, easy] The hero hat is still stuck in there. Good thing wardrobe always has a DOUBLE."
+   "script": "[wry, easy] The hero hat is still stuck in there. Good thing wardrobe always has a... [playful] DOUBLE."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "A backup hat! You're the most prepared man I know. And I set two alarms for everything.",
    "ctx": "chapter 4 (new)",
-   "script": "[amazed, proud] A backup hat! You're the most prepared man I know. [short pause] [earnest] And I set two alarms for everything."
+   "script": "[amazed, proud] A backup hat! You're the most prepared man I know. [short pause] [earnest] And I set TWO alarms for everything."
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "I always keep one under my hat.",
    "ctx": "chapter 4 (new)",
-   "script": "[deadpan, playful] I always keep one under my HAT."
+   "script": "[deadpan] I always keep one... [playful] under my HAT."
   },
   {
    "voice": "tnb",
@@ -602,7 +602,7 @@
    "speaker": "TNB",
    "text": "Two awards in one day, babe. I'm on a hot steam streak.",
    "ctx": "chapter 4 (new)",
-   "script": "[proud, playful] Two awards in one day, babe. I'm on a hot STEAM streak."
+   "script": "[proud] Two awards in one day, babe. I'm on a hot... [playful] STEAM streak."
   },
   {
    "voice": "la_woman",
@@ -616,49 +616,49 @@
    "speaker": "Tom",
    "text": "A second lanyard! I have TWO lanyards!",
    "ctx": "chapter 4 (new)",
-   "script": "[thrilled, shouts] A second lanyard! I have TWO lanyards!"
+   "script": "[thrilled] A second lanyard! [shouts] I have TWO lanyards!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Steam-ulating! I flew two thousand four hundred and seventy-five miles for that pun.",
    "ctx": "chapter 4 (reworded)",
-   "script": "[delighted] STEAM-ulating! [amused, exasperated] I flew two thousand four hundred and seventy-five miles for that pun."
+   "script": "[delighted] STEAM-ulating! I flew two thousand four hundred and seventy-five miles [amused, exasperated] for that pun."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Worth it. Every mile. I'd have flown them for zero puns.",
    "ctx": "chapter 4 (reworded)",
-   "script": "[warm, tender] Worth it. Every mile. [softly] I'd have flown them for zero puns."
+   "script": "[warm, tender] Worth it. Every mile. I'd have flown them [softly] for ZERO puns."
   },
   {
    "voice": "bun",
    "speaker": "Toni",
    "text": "Not next to the cake! ...Fine. She's crew.",
    "ctx": "chapter 4 (new)",
-   "script": "[alarmed] Not next to the CAKE! [softening, grudging] ...Fine. She's crew."
+   "script": "[alarmed] Not next to the CAKE! [grudging, softening] ...Fine. She's crew."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "It's Amy. \"Grace put the hat on page three. Also, parent-teacher conference night is Thursday. Thirty parents. I need backup. Bring snacks. And bring the good uncle.\"",
    "ctx": "chapter 4 (reworded)",
-   "script": "[amused] It's Amy. [precise, steady] \"Grace put the hat on page three. Also, parent-teacher conference night is Thursday. Thirty parents. I need backup. Bring snacks. [dry] And bring the GOOD uncle.\""
+   "script": "[amused] It's Amy. [precise, brisk] \"Grace put the hat on page three. Also, parent-teacher conference night is Thursday. Thirty parents. I need backup. Bring snacks. And bring the... [dry] GOOD uncle.\""
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "Go. But nobody goes anywhere alone, so take my picture for the plane.",
    "ctx": "chapter 4 (new)",
-   "script": "[warm] Go. [playful] But nobody goes anywhere alone, so take my PICTURE for the plane."
+   "script": "[warm] Go. But nobody goes anywhere alone, [playful] so take my PICTURE for the plane."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "That's the one I'm looking at for six hours.",
    "ctx": "chapter 4 (new)",
-   "script": "[softly, happy] That's the one I'm looking at for six hours."
+   "script": "[softly, happy] That's the one I'm looking at for SIX hours."
   }
  ]
 }

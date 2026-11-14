@@ -21,28 +21,28 @@
    "speaker": "Deedee",
    "text": "Twice! You must be starving!",
    "ctx": "chapter 3 (new)",
-   "script": "[warm Long Island accent, alarmed] TWICE! [warm Long Island accent, warm, urgent] You must be starving!"
+   "script": "[warm Long Island accent, alarmed] TWICE! [warm Long Island accent, urgent, warm] You must be starving!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Wait, I have to show you something first. A hill in Los Angeles stood up, talked to us, and sneezed this at me.",
    "ctx": "chapter 3 (new)",
-   "script": "[excited, rushed] Wait, I have to show you something first. [amazed] A hill in Los Angeles stood up, talked to us, and SNEEZED this at me."
+   "script": "[excited, rushed] Wait, I have to show you something first. A hill in Los Angeles stood up, talked to us, and... [amazed] SNEEZED this at me."
   },
   {
    "voice": "deedee",
    "speaker": "Deedee",
    "text": "A hill stood up? Out there too? First my kitchen, now California!",
    "ctx": "chapter 3 (new)",
-   "script": "[warm Long Island accent, alarmed] A hill stood up? Out there too? [warm Long Island accent, indignant] First my kitchen, now CALIFORNIA!"
+   "script": "[warm Long Island accent, alarmed] A hill stood up? Out there TOO? First my kitchen, [warm Long Island accent, indignant] now California!"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "That's gold like my teeth! Cozy Rosie has one, and now you have one. Where's mine?",
    "ctx": "chapter 3 (new)",
-   "script": "[thrilled] That's gold like my teeth! Cozy Rosie has one, and now you have one. [playful, complaining] Where's MINE?"
+   "script": "[thrilled] That's gold like my teeth! Cozy Rosie has one, and now you have one. [complaining, playful] Where's MINE?"
   },
   {
    "voice": "rose",
@@ -56,7 +56,7 @@
    "speaker": "Boppy",
    "text": "Then I know just the fish. The Whisker Perch. Whiskers like a cat. I saw him at Cattail Pier in 1994, and he was THIS big.",
    "ctx": "chapter 3 (reworded)",
-   "script": "[boastful, delighted] Then I know just the fish. The Whisker Perch. Whiskers like a cat. [slowly, proud] I saw him at Cattail Pier in 1994, and he was THIS big."
+   "script": "[boastful] Then I know just the fish. The Whisker Perch. Whiskers like a cat. I saw him at Cattail Pier in 1994, and he was... [slowly, proud] THIS big."
   },
   {
    "voice": "rose",
@@ -70,21 +70,21 @@
    "speaker": "Boppy",
    "text": "He grew. It's been thirty years.",
    "ctx": "chapter 3 (new)",
-   "script": "[defensive] He GREW. [playful] It's been thirty years."
+   "script": "[defensive] He GREW. [playful, grumbling] It's been thirty years."
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "We believe you now, Boppy. You were right about the Big One.",
    "ctx": "chapter 3 (new)",
-   "script": "[warm, sincere] We believe you now, Boppy. You were right about the Big One."
+   "script": "[warm, sincere] We believe you now, Boppy. You were RIGHT about the Big One."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "Say that again, slower. Deary, are you hearing this?",
    "ctx": "chapter 3 (new)",
-   "script": "[delighted] Say that again, SLOWER. [playful, loud] Deary, are you hearing this?"
+   "script": "[delighted] Say that again... [drawn out] SLOWER. [loud, playful] Deary, are you hearing this?"
   },
   {
    "voice": "deedee",
@@ -98,21 +98,21 @@
    "speaker": "Tom",
    "text": "I believe every fish story you ever told me. I'm bringing the big net.",
    "ctx": "chapter 3 (new)",
-   "script": "[warm, sincere] I believe every fish story you ever told me. [eager] I'm bringing the BIG net."
+   "script": "[warm, sincere] I believe every fish story you EVER told me. [eager] I'm bringing the big net."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Mom, there's one more thing. There was a lemon frozen inside an orange block, just like the dragonfly. And this was lying under it.",
    "ctx": "chapter 3 (new)",
-   "script": "[serious, careful] Mom, there's one more thing. There was a lemon frozen inside an orange block, just like the dragonfly. [quiet] And this was lying under it."
+   "script": "[serious, careful] Mom, there's one more thing. There was a lemon frozen inside an orange block, just like the dragonfly. And THIS [quiet] was lying under it."
   },
   {
    "voice": "deedee",
    "speaker": "Deedee",
    "text": "Same bulb. One at my pond and one three thousand miles away.",
    "ctx": "chapter 3 (new)",
-   "script": "[warm Long Island accent, uneasy, quiet] Same bulb. One at my pond... and one three thousand miles away."
+   "script": "[warm Long Island accent, uneasy, quiet] Same bulb. One at my pond... and one three THOUSAND miles away."
   },
   {
    "voice": "tom",
@@ -133,7 +133,7 @@
    "speaker": "Deedee",
    "text": "I don't know what this is and I don't like it. They're both going in the drawer, and all four of you are coming home in one piece. That's not a request.",
    "ctx": "chapter 3 (new)",
-   "script": "[warm Long Island accent, uneasy, firm] I don't know what this is and I don't like it. [warm Long Island accent, brisk, commanding] They're both going in the drawer, and all four of you are coming home in one piece. [warm Long Island accent, flat, firm] That's NOT a request."
+   "script": "[warm Long Island accent, uneasy] I don't know what this is and I don't LIKE it. [warm Long Island accent, brisk, commanding] They're both going in the drawer, and all four of you are coming home in one piece. [warm Long Island accent, flat, firm] That's not a request."
   },
   {
    "voice": "tom",
@@ -154,21 +154,21 @@
    "speaker": "Oolong",
    "text": "The kettle says there was a big flash over the marsh this morning. Like lightning, but with no thunder and no rain.",
    "ctx": "chapter 3 (reworded)",
-   "script": "[hushed, gossipy] The kettle says there was a big flash over the marsh this morning. Like lightning... but with no thunder and no rain."
+   "script": "[hushed, gossipy] The kettle says there was a big flash over the marsh this morning. Like lightning... [slowly] but with NO thunder and no rain."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "A flash! The fish at the pond said that. So did the hill!",
    "ctx": "chapter 3 (reworded)",
-   "script": "[startled, excited] A flash! The fish at the pond said that. So did the HILL!"
+   "script": "[startled] A flash! The fish at the pond said that. [excited] So did the HILL!"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "Lightning over my marsh? If anybody's frying that perch, it's me.",
    "ctx": "chapter 3 (new)",
-   "script": "[indignant] Lightning over MY marsh? [playful] If anybody's frying that perch, it's me."
+   "script": "[indignant] Lightning over MY marsh? If anybody's frying that perch, [playful] it's me."
   },
   {
    "voice": "tom",
@@ -182,14 +182,14 @@
    "speaker": "Boppy",
    "text": "Those are WHISKERS! That's him! That's the Whisker Perch! Old Iron-Gill himself!",
    "ctx": "chapter 3 (reworded)",
-   "script": "[thrilled, shouts] Those are WHISKERS! That's him! That's the Whisker Perch! Old Iron-Gill himself!"
+   "script": "[thrilled, shouts] Those are WHISKERS! That's him! That's the Whisker Perch! [awed, slower] Old Iron-Gill himself!"
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "Boppy, he's way bigger than THIS big. He's bigger than the pier!",
    "ctx": "chapter 3 (new)",
-   "script": "[amazed, loud] Boppy, he's way bigger than THIS big. He's bigger than the pier!"
+   "script": "[amazed, loud] Boppy, he's way bigger than THIS big. [disbelief] He's bigger than the PIER!"
   },
   {
    "voice": "boppy",
@@ -203,7 +203,7 @@
    "speaker": "Boppy",
    "text": "He TALKS? Thirty years I've been talking to that fish, and NOW he answers?",
    "ctx": "chapter 3 (new)",
-   "script": "[disbelief, loud] He TALKS? [outraged, playful] Thirty years I've been talking to that fish, and NOW he answers?"
+   "script": "[disbelief, loud] He TALKS? Thirty years I've been talking to that fish, [outraged, playful] and NOW he answers?"
   },
   {
    "voice": "rose",
@@ -217,21 +217,21 @@
    "speaker": "Boppy",
    "text": "I saw one! And Deedee is going to believe me. That's worse. She'll want details.",
    "ctx": "chapter 3 (new)",
-   "script": "[delighted] I saw one! And Deedee is going to believe me... [worried, quick] That's WORSE. She'll want details."
+   "script": "[delighted] I SAW one! And Deedee is going to believe me... [worried, quick] That's worse. She'll want details."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "A talking sock! All my life I've been losing socks, and THIS is where they go?",
    "ctx": "chapter 3 (reworded)",
-   "script": "[amazed] A talking SOCK! [indignant] All my life I've been losing socks, and THIS is where they go?"
+   "script": "[amazed] A talking SOCK! All my life I've been losing socks, [indignant] and THIS is where they go?"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Excuse me, Mr. Sock. We haven't seen your other sock. We're very sorry.",
    "ctx": "chapter 3 (new)",
-   "script": "[polite, earnest] Excuse me, Mr. Sock. We haven't seen your other sock. [sincere] We're very sorry."
+   "script": "[polite, earnest] Excuse me, Mr. Sock. We haven't seen your other sock. [sincere, softly] We're VERY sorry."
   },
   {
    "voice": "grace",
@@ -245,28 +245,28 @@
    "speaker": "Boppy",
    "text": "It was windy. Write that down. It was very windy.",
    "ctx": "chapter 3 (new)",
-   "script": "[defensive] It was windy. [bossy] Write that down. [slowly, firm] It was VERY windy."
+   "script": "[defensive] It was windy. [bossy] Write that down. It was... [slowly, firm] VERY windy."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "The old reeds. I played back in there when I was nine. There's a sundial in a clearing. We called it Sundial Hollow.",
    "ctx": "chapter 3 (reworded)",
-   "script": "[nostalgic, warm] The old reeds. I played back in there when I was nine. There's a sundial in a clearing. [softly] We called it Sundial Hollow."
+   "script": "[nostalgic, warm] The old reeds. I played back in there when I was nine. There's a sundial in a clearing. We called it [softly] Sundial Hollow."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "He means please. Could you please shove over?",
    "ctx": "chapter 3 (new)",
-   "script": "[polite, earnest] He means please. Could you PLEASE shove over?"
+   "script": "[polite, earnest] He means please. Could you... [extra polite] PLEASE shove over?"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "That's my boot! I lost that boot in 1988!",
    "ctx": "chapter 3 (new)",
-   "script": "[amazed, thrilled] That's my BOOT! I lost that boot in 1988!"
+   "script": "[amazed] That's my BOOT! [thrilled] I lost that boot in 1988!"
   },
   {
    "voice": "boppy",
@@ -280,7 +280,7 @@
    "speaker": "Boppy",
    "text": "It was green. All of this was green. Who took the green out of my hollow?",
    "ctx": "chapter 3 (new)",
-   "script": "[quiet, hurt] It was green. All of this was green. [slowly, confused] Who took the green out of my hollow?"
+   "script": "[quiet, hurt] It was green. ALL of this was green. Who took the green [slowly, confused] out of my hollow?"
   },
   {
    "voice": "rose",
@@ -294,28 +294,28 @@
    "speaker": "Grace",
    "text": "It's inside an orange block, like the dragonfly. It's just hanging there. Nothing is holding it up!",
    "ctx": "chapter 3 (new)",
-   "script": "[amazed, quick] It's inside an orange block, like the dragonfly. It's just hanging there. [disbelief] NOTHING is holding it up!"
+   "script": "[amazed, quick] It's inside an orange block, like the dragonfly. It's just hanging there. [disbelief, slower] NOTHING is holding it up!"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "That fish jumped, and he never came down. Seventy-some years I've been fishing, and I never saw a fish stay up.",
    "ctx": "chapter 3 (new)",
-   "script": "[hushed, amazed] That fish jumped, and he never came down. [slowly, reverent] Seventy-some years I've been fishing, and I never saw a fish stay UP."
+   "script": "[hushed, amazed] That fish jumped, and he never came down. Seventy-some years I've been fishing, and I never saw a fish... [slowly, reverent] stay UP."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "Tom. Get under it with the net.",
    "ctx": "chapter 3 (new)",
-   "script": "[commanding, serious] Tom. Get under it with the net."
+   "script": "[commanding] Tom. Get under it with the net."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "It can't be moved. I tried one at the pond and one in California.",
    "ctx": "chapter 3 (new)",
-   "script": "[reasonable, uneasy] It can't be moved. I tried one at the pond and one in California."
+   "script": "[reasonable, uneasy] It can't be moved. I tried one at the pond AND one in California."
   },
   {
    "voice": "boppy",
@@ -336,14 +336,14 @@
    "speaker": "Boppy",
    "text": "Good. Hold it better.",
    "ctx": "chapter 3 (new)",
-   "script": "[bossy] Good. [playful] Hold it BETTER."
+   "script": "[bossy] Good... [playful] Hold it BETTER."
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "There's a little round hole in the side, like the dragonfly one had. I'm drawing it.",
    "ctx": "chapter 3 (new)",
-   "script": "[focused, matter-of-fact] There's a little round hole in the side, like the dragonfly one had. I'm drawing it."
+   "script": "[focused, matter-of-fact] There's a little round hole in the side, like the dragonfly one had. [brisk] I'm drawing it."
   },
   {
    "voice": "rose",
@@ -357,7 +357,7 @@
    "speaker": "Grace",
    "text": "Dragonfly: grey grass, orange block, round hole, burnt bulb. Fish: grey reeds, orange block, round hole, burnt bulb.",
    "ctx": "chapter 3 (new)",
-   "script": "[precise, steady] Dragonfly: grey grass, orange block, round hole, burnt bulb. Fish: grey reeds, orange block, round hole, burnt bulb."
+   "script": "[precise, steady] Dragonfly: grey grass, orange block, round hole, burnt bulb. [slower] Fish: grey reeds, orange block, round hole, burnt bulb."
   },
   {
    "voice": "tom",
@@ -371,14 +371,14 @@
    "speaker": "Grace",
    "text": "I'm writing that down too. In pen.",
    "ctx": "chapter 3 (reworded)",
-   "script": "[serious, determined] I'm writing that down too. [firm] In PEN."
+   "script": "[serious] I'm writing that down too. [firm] In PEN."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "Somebody want to tell me what it means?",
    "ctx": "chapter 3 (new)",
-   "script": "[puzzled, quiet] Somebody want to tell me what it means?"
+   "script": "[puzzled, quiet] Somebody want to tell me what it MEANS?"
   },
   {
    "voice": "grace",
@@ -392,21 +392,21 @@
    "speaker": "Boppy",
    "text": "Well, it's a small one anyway. Mine was double.",
    "ctx": "chapter 3 (new)",
-   "script": "[boastful, playful] Well, it's a small one anyway. MINE was double."
+   "script": "[boastful, playful] Well, it's a SMALL one anyway. Mine was double."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "That's the Deep Pool. That's where Iron-Gill goes to sulk. Tom, you can put the net down.",
    "ctx": "chapter 3 (reworded)",
-   "script": "[alert, serious] That's the Deep Pool. That's where Iron-Gill goes to sulk. [fond, easy] Tom, you can put the net down."
+   "script": "[alert, serious] That's the Deep Pool. That's where Iron-Gill goes to sulk. [easy, fond] Tom, you can put the net down."
   },
   {
    "voice": "bigone",
    "speaker": "Old Iron-Gill",
    "text": "This morning there was a flash over the hollow. Now I'm big enough to come up and say it to your face.",
    "ctx": "chapter 3 (reworded)",
-   "script": "[deep, hurt] This morning there was a flash over the hollow. [low, firm] Now I'm big enough to come up and say it to your FACE."
+   "script": "[deep, hurt] This morning there was a flash over the hollow. Now I'm big enough to come up and say it [low, firm] to your FACE."
   },
   {
    "voice": "rose",
@@ -420,7 +420,7 @@
    "speaker": "Boppy",
    "text": "First the Big One asks about me, and now this one. I'm very big with the fish, Tom.",
    "ctx": "chapter 3 (new)",
-   "script": "[proud, delighted] First the Big One asks about me, and now this one. [boastful] I'm VERY big with the fish, Tom."
+   "script": "[proud] First the Big One asks about me, and now this one. I'm VERY big [boastful, playful] with the fish, Tom."
   },
   {
    "voice": "tom",
@@ -434,14 +434,14 @@
    "speaker": "Boppy",
    "text": "Tom. Tackle box. We do this the old way.",
    "ctx": "chapter 3 (reworded)",
-   "script": "[serious, determined] Tom. Tackle box. We do this the OLD way."
+   "script": "[serious] Tom. Tackle box. We do this [determined] the OLD way."
   },
   {
    "voice": "bigone",
    "speaker": "Old Iron-Gill",
    "text": "And take this. It's been itching my mustache all day.",
    "ctx": "chapter 3 (new)",
-   "script": "[deep, gentle] And take this. [grumbling, softly] It's been itching my mustache all day."
+   "script": "[deep, gentle] And take this. It's been itching my mustache [grumbling] ALL day."
   },
   {
    "voice": "boppy",
@@ -455,35 +455,35 @@
    "speaker": "Rose",
    "text": "Boppy got treasure! Now your mouth matches your hat!",
    "ctx": "chapter 3 (new)",
-   "script": "[delighted, teasing] Boppy got treasure! Now your mouth matches your HAT!"
+   "script": "[delighted] Boppy got treasure! Now your mouth [teasing] matches your HAT!"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "Put the date. Put the time. And put that he was THIS big.",
    "ctx": "chapter 3 (reworded)",
-   "script": "[bossy, proud] Put the date. Put the time. And put that he was THIS big."
+   "script": "[bossy, proud] Put the date. Put the time. And put that he was... [slowly] THIS big."
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "Boppy, he was bigger than that.",
    "ctx": "chapter 3 (new)",
-   "script": "[dry, matter-of-fact] Boppy, he was bigger than that."
+   "script": "[dry, matter-of-fact] Boppy, he was BIGGER than that."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "First time in my life I ever undersold a fish.",
    "ctx": "chapter 3 (new)",
-   "script": "[amazed, playful] First time in my life I ever UNDERSOLD a fish."
+   "script": "[amazed] First time in my life I ever... [playful] UNDERSOLD a fish."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "Still up there. Somebody ought to let that fish finish his jump.",
    "ctx": "chapter 3 (new)",
-   "script": "[quiet, gentle] Still up there. Somebody ought to let that fish finish his jump."
+   "script": "[quiet, gentle] Still up there. Somebody ought to let that fish [softly] finish his jump."
   },
   {
    "voice": "boppy",
@@ -518,14 +518,14 @@
    "speaker": "Deedee",
    "text": "Fifty-one years I've been married to you, hubby, and you never once brought ME gold from a fish.",
    "ctx": "chapter 3 (new)",
-   "script": "[warm Long Island accent, dry, teasing] Fifty-one years I've been married to you, hubby, and you never once brought ME gold from a fish."
+   "script": "[warm Long Island accent, dry] Fifty-one years I've been married to you, hubby, and you never once brought... [warm Long Island accent, teasing] ME gold from a fish."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "It's gold like my teeth!",
    "ctx": "chapter 3 (new)",
-   "script": "[delighted] It's gold like my teeth!"
+   "script": "[delighted] It's gold like my TEETH!"
   },
   {
    "voice": "deedee",
@@ -539,7 +539,7 @@
    "speaker": "Grace",
    "text": "Deedee, there's another orange block. There's a fish in it, and it's stuck up in the air over the water.",
    "ctx": "chapter 3 (new)",
-   "script": "[serious, careful] Deedee, there's another orange block. There's a fish in it, and it's stuck up in the air over the water."
+   "script": "[serious, careful] Deedee, there's another orange block. There's a fish in it, and it's stuck up in the AIR over the water."
   },
   {
    "voice": "rose",
@@ -553,14 +553,14 @@
    "speaker": "Deedee",
    "text": "Three. My pond, California, and the marsh.",
    "ctx": "chapter 3 (new)",
-   "script": "[warm Long Island accent, quiet, serious] Three. My pond, California, and the marsh."
+   "script": "[warm Long Island accent, quiet, serious] Three. [warm Long Island accent, slowly] My pond, California, and the marsh."
   },
   {
    "voice": "deedee",
    "speaker": "Deedee",
    "text": "New rule. Nobody in this family goes anywhere alone. Not to the pond, not to the pier, not to the mailbox. Tom, that goes for Los Angeles too.",
    "ctx": "chapter 3 (new)",
-   "script": "[warm Long Island accent, firm, commanding] New rule. Nobody in this family goes anywhere alone. [warm Long Island accent, brisk] Not to the pond, not to the pier, not to the mailbox. [warm Long Island accent, firm, warm] Tom, that goes for Los Angeles too."
+   "script": "[warm Long Island accent, firm] New rule. Nobody in this family goes anywhere ALONE. [warm Long Island accent, brisk] Not to the pond, not to the pier, not to the mailbox. Tom, [warm Long Island accent, firm, warm] that goes for Los Angeles too."
   },
   {
    "voice": "tom",
