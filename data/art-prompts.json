@@ -23120,8 +23120,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\nPicture 1 is the finished painting of Nara, a brown curly dog. Picture 2 is her walking sheet. Pictures 3 and 4 are her battle sheets.\n\nPAINT THIS ONE POSE\nNara, standing in profile, facing right, in the same view as the profile frames of her walking sheet. A small round gold coin is held gently between her front teeth, sticking out at the side of her mouth. Her head is up, her ears are up and her tail is high and wagging: very proud.\nStanding on a plain flat magenta #FF00FF background, nothing else in the picture, no text, no shadow on the ground.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Copy Nara from the attached pictures as exactly as possible: the same face, age, body, head size compared to the body, hair, clothes, colors, painting style and level of detail.\n- She is a dog, with paws and no hands. The coin is plain gold with no picture and no words."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/ch2-nara-story-1-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794667939278
+    }
+   ],
    "rejects": [],
    "id": "ch2-nara-story-1",
    "tab": "Characters",
