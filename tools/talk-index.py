@@ -19,8 +19,9 @@ The engine (engine/emotions.js) shows the talk pose instead of the mood pose onl
 until then every line looks exactly as before.
 
 Usage:
-    python3 tools/talk-index.py --init     # (re)write docs/talk-lines.tsv from docs/emotion-index-lines.tsv (overwrites Tom's corrections: only for a fresh start)
-    python3 tools/talk-index.py --add      # add rows for emotion-index lines that docs/talk-lines.tsv does not have yet (keeps every existing row)
+    python3 tools/talk-index.py --init     # NEVER run again: it would throw away the line-by-line review (talk2, 2026-11-14) and start over from the rule
+    python3 tools/talk-index.py --add      # add rows for cast lines docs/talk-lines.tsv does not have yet (emotion index plus harvest.json; keeps every existing row).
+                                           # New rows get the rule's guess: read each new row and correct its `talk` by hand in the same change (talk2 standard).
 Then: python3 tools/talk-apply.py   (builds data/talk-types.js)
 The same rule for a line with no row is in engine/emotions.js (talkRule); keep the two in step.
 """
@@ -84,6 +85,30 @@ def write(rows):
         for r in rows: fh.write('\t'.join(r[c] for c in COLS) + '\n')
 
 
+CAST_NAMES = {'Tom', 'TNB', 'Grace', 'Rose', 'Amy', 'Justin', 'Olivia', 'Deedee', 'Boppy', 'Aunt Ellie'}
+
+
+def add_harvest(rows):
+    """Every other cast line the game speaks (tools/voice-library/harvest.json): scene lines the emotion index lacks, press-A chats with family,
+    recruit, decline, follower, travel, departure, arrival and pool lines. chapter = the scene's chapter when its name says it, else empty
+    (empty = the same type in every chapter); file = the harvest source; mood = the line's mood from either emotion index, else none."""
+    import json
+    h = json.load(open(os.path.join(ROOT, 'tools/voice-library/harvest.json'), encoding='utf-8'))['lines']
+    have = {(r['character'], r['text']) for r in rows}
+    moods = {(r['character'], r['text']): r['mood'] for r in read(SRC)}
+    npc = os.path.join(ROOT, 'docs/npc-emotion-lines.tsv')
+    if os.path.exists(npc):
+        for r in read(npc): moods.setdefault((r['character'], r['text']), r['mood'])
+    n = 0
+    for l in h:
+        k = (l['speaker'], l['text'])
+        if l['speaker'] not in CAST_NAMES or k in have: continue
+        have.add(k); m = re.match(r'scene:ch(\d+)', l['src']); mood = moods.get(k, 'none')
+        rows.append({'chapter': m.group(1) if m else '', 'file': l['src'], 'line': '', 'character': l['speaker'], 'mood': mood,
+                     'talk': classify(l['speaker'], mood, l['text']), 'text': l['text']}); n += 1
+    return n
+
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] not in ('--init', '--add'): sys.exit(__doc__)
     src = read(SRC); key = lambda r: (r['chapter'], r['character'], r['text'])
@@ -94,6 +119,7 @@ def main():
         if k in have: rows.append(have.pop(k)); continue
         rows.append({**{c: r[c] for c in COLS if c in r}, 'talk': classify(r['character'], r['mood'], r['text'])}); added += 1
     rows += list(have.values())   # rows Tom added by hand that the emotion index does not have
+    added += add_harvest(rows)
     write(rows)
     c = collections.Counter(r['talk'] for r in rows if r['talk']); d = collections.Counter(r['mood'] for r in rows if r['talk'])
     print('wrote', os.path.relpath(OUT, ROOT), len(rows), 'rows,', added, 'new; talk lines', sum(c.values()), dict(c), 'from moods', dict(d))

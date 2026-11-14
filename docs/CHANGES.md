@@ -1,3 +1,9 @@
+## talk2 (2026-11-14): every cast line tagged with its talking pose by hand
+- Tom 06:57: "what about tagging all of the dialog with the correct talking pose?" talk1 had tagged by a keyword rule, scene lines only.
+- docs/talk-lines.tsv now holds every cast line the game speaks (2,387 rows; tools/talk-index.py `add_harvest` adds the 51 missing scene lines and the 349 press-A, recruit, decline, follower, travel, departure, arrival and pool lines from harvest.json). Every row except sad, angry and scared (2,006) read by hand: 461 corrections (291 back to their mood, 85 tell to point, 42 to answer, 20 ask to answer, the rest small). Now 955 talk lines: tell 500, point 223, answer 149, ask 83. data/talk-types.js rebuilt (944 keys).
+- `talk-index.py --init` must never run again (it would discard the review); `--add` for new lines, then correct each new row by hand. docs/TALK_POSES.md "Line-by-line review".
+- No engine change; still no talking art installed, so nothing on screen changes yet.
+
 ## talk1 (2026-11-13): four talking poses for the main cast (Art Library entries, line tags, cutter, bake and engine), waiting on Tom's art
 - Tom 23:17: four full-body talking poses per main character, used when a line has no strong feeling, including lines whose mood was borderline. Full write-up: docs/TALK_POSES.md.
 - Types (from the cast dialogue): `tell` (explaining, describing, plans), `point` (look, over there, orders and rules), `ask` (questions), `answer` (short replies, five words or fewer).

@@ -13,7 +13,15 @@ Picked from the game's cast dialogue (1,997 lines in docs/emotion-index-lines.ts
 | 3 | `ask` | head tilted, both palms up at the waist | every question | 85 |
 | 4 | `answer` | weight on one leg, small one-shoulder shrug, loose hand | short replies and one-liners, five words or fewer ("Probably.", "By default.", "Twelve.") | 127 |
 
-## Which lines use them
+## Line-by-line review (talk2, 2026-11-14)
+
+Tom 06:57: "what about tagging all of the dialog with the correct talking pose?" The first pass was a keyword rule over the scene lines only. talk2:
+- Coverage: every cast line the game speaks is now a row (2,387): the 51 scene lines the emotion index lacked, plus press-A chats with family, recruit, decline, follower, travel, departure, arrival and pool lines (from tools/voice-library/harvest.json).
+- Every row that is not sad, angry or scared (2,006) was read and judged by hand; 461 corrections. Main kinds: 291 lines put back to their mood because the words do carry the feeling (boasts, jokes, loving lines, deadpan); 85 tell to point (orders, "look", rally calls like "Up, everybody", assigning jobs); 42 to answer (short replies); 20 rhetorical complaints ("A school? At night? My stomach says no.") from ask to answer.
+- Result: 955 talk lines (tell 500, point 223, answer 149, ask 83); the rest keep their mood. Sad, angry and scared lines (340) were not changed. The 400 non-scene lines have no mood in either index, so they all use a talk pose.
+- From now on docs/talk-lines.tsv is hand-judged: never rerun `talk-index.py --init`. New lines: `--add`, then read and correct each new row.
+
+## Which lines use them (first pass, talk1; superseded where talk2 corrected a row)
 
 - Every cast line tagged `none` (110).
 - Borderline moods (820): lines tagged happy, loving, proud, surprised or unimpressed whose words carry no sign of that feeling: no "!", no shouted word in capitals, none of that mood's cue words (tools/talk-index.py `CUES`). Example: Amy "Here's the plan. Tom up front, girls with me." was proud, now `point`; Tom "That's five coins. The sundial, the steamer..." was surprised, now `tell`.
