@@ -66,6 +66,10 @@ Tom's Voice Library export of 2026-11-14 14:10 held 7 clips, all live chapter 2 
 - Voice Library: tools/voice-library/scripts/ch07-story-directions.json, 232 lines (208 new, 24 reworded) with a direction each, plus matching rows in harvest.json (src `scene:ch7...`, `dep:7:...`, `arr:7:tom`). Page uses her current voice (pagew). data/dialog-cast.js: two speaker labels added so the lines have a voice: "A dry old voice" (the Unread's voice, log) and "A picture book" (a tiny voice, the Mudling voice, because no new voices can be made). Index rebuilt. No baked clip edited; the 24 reworded lines stay silent until re-recorded. "That was UNCALLED for!" already has a clip and was left out.
 - No engine or scene code changed. Tested: validate.js OK, unused_voice.py unchanged (check 4 stays at its 52 from earlier work, same list with and without this change).
 
+## ch6s2g (2026-11-14): The new orange block (small basket, squirrel diving in) is installed on the Old Oak Park table
+
+Tom approved `ch6-orange-block` v3 ("it looks good. Let's implement it"). Baked to `art/props/oakpark/ch6_block.webp` by `bake_blockbreak_ch6.py`; the freed basket (50 art px) now matches the basket inside the block.
+
 ## unread1 (2026-11-14): Art Library: the Unread boss sheet prompt rewritten short, two eyes, back in To do
 
 Tom: "the boss enemy animation is just totally wrong. You need to simplify it completely ... copy the referenced image ... as closely as possible against the magenta background ... don't say one eye ... say two eyes." Entry `ch7-unread-boss` now has one reference (the approved Unread, `enemy-unread-v2`) and a short prompt: copy it closely, magenta #FF00FF, six poses with two eyes each (pose 1: left eye shut, right eye open). The old v1 picture stays on file; the entry is marked rejected so it shows in To do. Nothing in the game uses it yet.
