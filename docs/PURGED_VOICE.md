@@ -150,3 +150,7 @@ Tom decided on a full dialogue clarity rewrite (docs/CHANGES.md `dialogclear1`).
 ## 2026-11-13 (`ch1build1`): chapter 1 rewrite, four clips
 
 Chapter 1 was rebuilt to the locked story. Dropped, can never play: tom "Boppy also says the stomach thing is serious. Stay close." (reworded), deedee "Tom, you stand in front of whoever it stares at. Rosie, make it laugh. Then we try again." (reworded to Cozy Rosie), and boppy "Speaking of strange. A fella was down at the pond yesterday..." plus "I said twenty years. He wrote it down." (the dropped long coat beat). About 134 KB; audio is in git history.
+
+## 2026-11-13 (`ch2build1`): chapter 2 story build, two clips
+
+Dropped, can never play: bigone "RUMBLE. A man in a long coat plugged my vents." and bigone "That's what the man promised me. Nobody leaves. Not ever." (the Big Shake lines were reworded to the flash story; the long-coat man is gone from chapter 2). Audio is in git history (the parent of the `ch2build1` commit).

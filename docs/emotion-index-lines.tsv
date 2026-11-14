@@ -99,66 +99,38 @@ chapter	file	line	character	mood	text
 1	data/scenes.js	258	Tom	loving	The whole week. And nobody is stealing anything else.
 1	data/scenes.js	259	Boppy	angry	Slow down. Everybody eats too fast. My stomach.
 2	data/scenes.js	278	Tom	none	TNB said he'd be home. Spring Street loft.
-2	data/scenes.js	278	Tom	sad	...He said he'd be home.
 2	data/scenes.js	287	TNB	happy	Well, well, well...
 2	data/scenes.js	288	TNB	happy	Look who flew three thousand miles to see me.
-2	data/scenes.js	289	Tom	unimpressed	I flew three thousand miles to see you... and maybe the starter.
-2	data/scenes.js	290	TNB	happy	Main event. I'll take it.
 2	data/scenes.js	292	TNB	loving	My call time got pushed to Thursday. The lead actor lost a shoe. I already found it. So I'm all yours.
-2	data/scenes.js	292	TNB	surprised	Also, something is up. The sky over Griffith Park went purple this morning. Not sunset purple. Weird purple.
-2	data/scenes.js	294	Tom	loving	All yours. I like that. We'll go look at the purple sky together, but first I need one quick stop at my house.
-2	data/scenes.js	294	Tom	loving	My sourdough starter has been alone for a week.
 2	data/scenes.js	304	TNB	none	Olivia dropped her off this morning. Family trip to the desert. No dogs at the hotel.
 2	data/scenes.js	304	TNB	none	She's been sitting on your porch since eight. I tried to take her to the loft. She refused.
-2	data/scenes.js	305	TNB	happy	Also, your starter was bubbling out of the jar, so I baked a boule with it.
-2	data/scenes.js	306	Tom	proud	I'm proud. As long as you didn't spin it on your pottery wheel.
-2	data/scenes.js	308	Nara	happy	Tom tears off the heel and holds it up. "Sit." Nara sits, wiggling all over. "Paw." She gives him her paw. Very, very hard.
-2	data/scenes.js	308	Nara	happy	She gets the bread. Tom gets a lick.
 2	data/scenes.js	312	Tom	happy	Sit, paw, treat. She knows the whole routine. So polite!
 2	data/scenes.js	320	Tom	loving	Hello, Bready Mercury. Did you miss me? You missed me.
 2	data/scenes.js	322	Tom	happy	Fifty grams of flour, fifty grams of water. Stir. Look at those bubbles.
-2	data/scenes.js	324	TNB	unimpressed	You talk to that jar more than you talk to me.
-2	data/scenes.js	325	Tom	loving	The jar gets fifty grams of flour. You get the whole week.
-2	data/scenes.js	325	Tom	loving	...And you steamed my shirts for the flight. You win. You always win.
 2	data/scenes.js	326	TNB	happy	I'll take it.
-2	data/scenes.js	328	Nara	scared	Nara is at the front window, whining. Her tail is down.
 2	data/scenes.js	329	TNB	surprised	Babe. Look outside. Is the street... purple?
 2	data/scenes.js	339	Tom	scared	Mr. Washington! Is everything okay?
-2	data/scenes.js	343	TNB	scared	He's been saying that for a while, babe.
 2	data/scenes.js	345	Tom	angry	Excuse me, smog. That was UNCALLED for.
 2	data/scenes.js	350	TNB	happy	Babe. Remember movie night? You threw the whole popcorn bowl.
-2	data/scenes.js	351	Tom	unimpressed	I was startled. Briefly. With dignity.
-2	data/scenes.js	352	TNB	happy	It was a battle plan. You just didn't know it yet.
 2	data/scenes.js	357	TNB	loving	Okay. Okay. Everybody breathe. Through the nose. Not the smog.
 2	data/scenes.js	359	TNB	scared	The smog monsters are gone, but Mr. Washington is still in a daze. Look at him.
-2	data/scenes.js	361	Tom	scared	Mr. Washington would never say that. The smog is doing something to him. Let's go check on Miss Odette and Doña Carmen on the boulevard.
-2	data/scenes.js	368	TNB	scared	She's made that gumbo every day for fifty years. It's never once been "never done."
-2	data/scenes.js	369	Tom	unimpressed	The smog makes people want everything to stay exactly the same forever. That's not a nice afternoon. That's a hostage situation.
-2	data/scenes.js	376	Nara	surprised	Nara sniffs the comal. She sneezes. The smoke smells like the hills.
 2	data/scenes.js	377	TNB	surprised	Nara is right. That's not kitchen smoke. It's the same purple smog, and it's blowing down from the hills.
 2	data/scenes.js	383	TNB	surprised	Babe. Look north. It's all coming down off the hills.
 2	data/scenes.js	383	TNB	none	It's coming from the Observatory. The pipes on its side are pumping out smog like a smoke machine on a bad set.
 2	data/scenes.js	384	Tom	proud	Then that's where we're going. Nara, stay close.
-2	data/scenes.js	385	Nara	loving	Nara presses against Tom’s leg. She's not letting him go anywhere without her.
 2	data/scenes.js	390	TNB	loving	Up, everybody. Wardrobe says nobody is cut from this scene.
 2	data/scenes.js	398	TNB	proud	I take the Metro. You have nothing on me.
 2	data/scenes.js	400	Tom	unimpressed	I contest that ticket, and I'm granting my own appeal. Let's keep going.
-2	data/scenes.js	407	Nara	proud	Nara’s hackles go up. She stands right in front of Tom.
 2	data/scenes.js	413	TNB	loving	Quick wardrobe adjustment, quick heal, and a quick kiss for the road. Ready, babe?
 2	data/scenes.js	415	Tom	happy	Ready. Kiss accepted. The Observatory is up at the top left. Follow the purple.
 2	data/scenes.js	423	TNB	scared	The ground is humming. That's never a good sign. I've seen this movie forty-seven times.
 2	data/scenes.js	427	Tom	loving	Everybody says goodbye. Then they come back. That's what planes are for.
 2	data/scenes.js	427	Tom	proud	Things have to move.
-2	data/scenes.js	428	Nara	proud	Nara barks at the hill. Once. Very loudly. Then she checks that Tom saw.
 2	data/scenes.js	429	TNB	happy	Well, well, well... looks like we're in a bit of a shaky situation.
 2	data/scenes.js	433	TNB	proud	Cut. Reset. Back to one, everybody.
 2	data/scenes.js	433	TNB	none	Babe, heal right after the Aftershock. When it clogs up, hit it with water or sparkle. Or one of our Tombos.
 2	data/scenes.js	443	TNB	happy	Look. The sky is blue again. Los Angeles blue. Slightly brown, but blue.
-2	data/scenes.js	444	Tom	surprised	So a man in a long coat plugged those vents on purpose. He wanted this whole city stuck in one afternoon. I'd like to know why.
-2	data/scenes.js	445	TNB	happy	Spooky. I love it. Let's go check on Mr. Washington.
 2	data/scenes.js	456	Tom	loving	Keep the old windows, though.
-2	data/scenes.js	459	TNB	happy	Doña Carmen says the pupusas came out perfectly crispy. Miss Odette is sending over gumbo. The whole block is cooking.
-2	data/scenes.js	460	Nara	happy	Nara leans on both of them at once. Tiny excited puddle. Nobody minds.
 2	data/scenes.js	462	Tom	loving	Long Island is home, and so is this. I have two homes. Okay. Good.
 2	tools/voice-library/scripts/ch02-story-directions.json	1	Tom	proud	Um, actually, it's two thousand four hundred and seventy-five. Delta counts every one, and so do I.
 2	tools/voice-library/scripts/ch02-story-directions.json	2	TNB	happy	How many SkyMiles is that now?

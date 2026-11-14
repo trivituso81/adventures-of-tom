@@ -51,6 +51,7 @@ const items={
   driftwood:{sell:15,name:'Driftwood Stick',icon:'\u{1FAB5}',slot:'Tool',desc:'Smooth from years in the marsh. Good for poking. Better for bonking.',stats:{pow:5,warmth:2}},
   pepperjar:{name:'Boppy’s Pepper Jar',icon:'\u{1FAD9}',slot:null,keepsake:true,desc:'Homegrown, pickled, and older than Amy. Still sealed. Still hot.'},
   dragonflycoin:{name:'Dragonfly Coin',icon:'\u{1FA99}',slot:null,keepsake:true,desc:'Gold, stamped with a dragonfly. The Big One gave it to Rose, and Rose is keeping it in her pocket.'},
+  lemoncoin:{name:'Lemon Coin',icon:'\u{1FA99}',slot:null,keepsake:true,desc:'Gold, stamped with a lemon. The Big Shake sneezed it out of a pipe, and Nara fetched it. Tom is keeping it in his pocket.'},
   oldcoin:{name:'Old Gold Coin',icon:'\u{1FA99}',slot:null,keepsake:true,desc:'Found wedged in the sundial. Heavy, worn smooth, and stamped with a little clock face. Somebody wants these.'},
   // Chapter 4 drops (the studio lot, data/backlot-monsters.js) and rewards.
   callsheet:{sell:2,name:'Call Sheet',icon:'\u{1F4C4}',slot:null,desc:'Call time 4 AM. Lunch at 1 PM. Wrap: TBD. It\'s always TBD.'},

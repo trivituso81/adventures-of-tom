@@ -366,9 +366,19 @@ function drawHollowSpot() {
     PROPART.draw(id,x*s,y*s,{w:w*s});
   }
 }
+// The lemon tree below the Observatory, chapter 2 scene 9 (ch2Lemon): a small tree with no colour in a grey circle of dirt, one lemon hanging in a
+// grapefruit-sized orange block. Both stay until the family comes back after chapter 6. Centres in plate art px (64 per tile), width in art px.
+// Built from art/props/griffith/ch2_*.webp (tools/art-library/bake_closeup_ch2.py).
+const GRIFFITH_SPOT=[['griffith/ch2_tree',225,455,128],['griffith/ch2_block',247,445,44]];
+function drawGriffithSpot() {
+  if(typeof flag!=='function'||typeof STORY==='undefined'||STORY.chapter<2||flag('ch6-clear')) return;
+  const s=T/64;
+  for(const [id,x,y,w] of GRIFFITH_SPOT) { if(!PROPART.ready(id)) continue; PROPART.draw(id,x*s,y*s,{w:w*s}); }
+}
 function plateLive(map,time) {
   if(map&&PLATE_SIGNS[map.id]) drawPlateSigns(PLATE_SIGNS[map.id]);
   if(map&&map.id==='hollow') { drawHollowCrumbs(time); drawHollowSpot(); }
+  if(map&&map.id==='griffith') drawGriffithSpot();
   // Tom's kitchen island: Bready Mercury, except while the squirrels have him (chapter 6, until the Oak boss is beaten).
   if(map&&map.id==='tomhouse') { plateTime=time; drawHomeJar(time); }
   // The Crown of the Oak: Bready Mercury on the chest at the heart of the hoard (art px: centre x 672, base y 258; the jar stands about 62 px tall).
