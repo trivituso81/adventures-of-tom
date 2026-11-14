@@ -281,35 +281,63 @@ function plateWalkBehind(map,plate,time=0) {
   // half wall, so the old flat 130 let anyone standing a few rows in front of a counter keep their head under the redrawn counter (Tom 2026-11-09:
   // Amy's head was cut off by the shop counter). 6.6 ft covers the tallest cast member (Justin 6'4) plus hair.
   const bodyH=fy=>plate.roomScale?roomPxPerFoot(plate.roomScale,fy)*6.6:130;
-  for(const z of zones) {
+  // Depth pass (cutfront1, Tom 2026-11-14: "when the character is near a cut out element, it overlaps them"). A slice is drawn again when
+  // anyone stands behind it, and it used to cover everyone whose body reached into it, including people standing in FRONT of it (the
+  // Grump Hollow bench drew over Boppy's head while Rose stood behind it). Now the hit slices and everyone in front of a hit slice are sorted
+  // by ground line (a slice by its base, a person by their feet) and drawn back to front; each person in front of an already drawn slice is
+  // drawn again clipped to that slice only, so nothing else on screen changes (no doubled shadows). This used to need front:true per zone.
+  const zoneBox=z=>{
     if(z.pts&&!z.bb) z.bb=[Math.min(...z.pts.map(q=>q[0])),Math.min(...z.pts.map(q=>q[1])),Math.max(...z.pts.map(q=>q[0])),Math.max(...z.pts.map(q=>q[1]))];
-    const x0=z.pts?z.bb[0]:z.cx!==undefined?z.cx-z.rx:z.x, x1=z.pts?z.bb[2]:z.cx!==undefined?z.cx+z.rx:z.x+z.w;
-    const y0=z.pts?z.bb[1]:z.cy!==undefined?z.cy-z.ry:z.y, y1=z.pts?z.bb[3]:z.cy!==undefined?z.cy+z.ry:z.y+z.h;
-    let hit=false;
-    for(const a of list) {
-      const p=position(a), fx=(p.x+.5)*64, fy=(p.y+1)*64;
-      if(fy>z.base) continue;                       // feet south of the base: in front of it
-      if(fx+36<x0||fx-36>x1||fy+4<y0||fy-bodyH(fy)>y1) continue;   // body box (about 72 art px wide, bodyH tall) misses the zone
-      hit=true; break;
-    }
-    if(!hit) continue;
-    if(!ctxDone) { ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high'; ctxDone=true; }
-    ctx.save();
+    return [z.pts?z.bb[0]:z.cx!==undefined?z.cx-z.rx:z.x, z.pts?z.bb[2]:z.cx!==undefined?z.cx+z.rx:z.x+z.w,
+            z.pts?z.bb[1]:z.cy!==undefined?z.cy-z.ry:z.y, z.pts?z.bb[3]:z.cy!==undefined?z.cy+z.ry:z.y+z.h];
+  };
+  const clipZone=z=>{
     ctx.beginPath();
     if(z.pts) { z.pts.forEach((q,i)=>i?ctx.lineTo(q[0]*s,q[1]*s):ctx.moveTo(q[0]*s,q[1]*s)); ctx.closePath(); }
     else if(z.cx!==undefined) ctx.ellipse(z.cx*s,z.cy*s,z.rx*s,z.ry*s,0,0,Math.PI*2); else ctx.rect(z.x*s,z.y*s,z.w*s,z.h*s);
     ctx.clip();
-    if(z.fg) { if(!plate.fgImg) { plate.fgImg=new Image(); plate.fgImg.src=plate.fgSrc||'art/'+map.id+'-fg.webp?v=20261031f'; } if(plate.fgImg.complete&&plate.fgImg.naturalWidth) ctx.drawImage(plate.fgImg,0,0,map.w*T,map.h*T); }
-    else ctx.drawImage(plate.img,0,0,map.w*T,map.h*T);
-    ctx.restore();
-    if(z.jar) jarOver=true;
-    redrawn.push({x0,x1,y0,y1,base:z.base});
-    // front:true (shop counters): the painted counter is tall, so anyone standing in FRONT of it (feet south of the base) but with a body that
-    // reaches up into the zone would be covered too. Tom 2026-11-01: the party was hidden by the counter. Draw those actors again on top.
-    if(z.front) for(const a of list) {
-      const p=position(a), fx=(p.x+.5)*64, fy=(p.y+1)*64;
-      if(fy<=z.base||fx+36<x0||fx-36>x1||fy-bodyH(fy)>y1) continue;
-      if(!redraw.includes(a)) redraw.push(a);
+  };
+  const feet=list.map(a=>{ const p=position(a); return {a,fx:(p.x+.5)*64,fy:(p.y+1)*64}; });
+  // Generous body box: big monsters and bosses (monScale) reach far wider and higher than a person. Too wide only costs a clipped redraw.
+  const reach=a=>a.monster?{w:420,h:900}:{w:110,h:420};
+  const hits=[];
+  for(const z of zones) {
+    const [x0,x1,y0,y1]=zoneBox(z);
+    let hit=false;
+    for(const f of feet) {
+      if(f.fy>z.base) continue;                       // feet south of the base: in front of it
+      if(f.fx+36<x0||f.fx-36>x1||f.fy+4<y0||f.fy-bodyH(f.fy)>y1) continue;   // body box (about 72 art px wide, bodyH tall) misses the zone
+      hit=true; break;
+    }
+    if(hit) hits.push({z,x0,x1,y0,y1});
+  }
+  const order=hits.map(h=>({k:h.z.base,zone:h}));
+  if(hits.length) {
+    const minBase=Math.min(...hits.map(h=>h.z.base));
+    for(const f of feet) if(f.fy>minBase) order.push({k:f.fy,who:f});
+  }
+  order.sort((p,q)=>p.k-q.k||(p.who?-1:1)-(q.who?-1:1));   // a person whose feet are exactly on a base is behind it
+  const drawn=[];
+  for(const it of order) {
+    if(it.zone) {
+      const {z,x0,x1,y0,y1}=it.zone;
+      ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high'; ctxDone=true;
+      ctx.save(); clipZone(z);
+      if(z.fg) { if(!plate.fgImg) { plate.fgImg=new Image(); plate.fgImg.src=plate.fgSrc||'art/'+map.id+'-fg.webp?v=20261031f'; } if(plate.fgImg.complete&&plate.fgImg.naturalWidth) ctx.drawImage(plate.fgImg,0,0,map.w*T,map.h*T); }
+      else ctx.drawImage(plate.img,0,0,map.w*T,map.h*T);
+      ctx.restore();
+      if(z.jar) jarOver=true;
+      redrawn.push({x0,x1,y0,y1,base:z.base});
+      drawn.push(it.zone);
+      continue;
+    }
+    const {a,fx,fy}=it.who, r=reach(a), top=fy-Math.max(r.h,bodyH(fy)*1.15);
+    for(const h of drawn) {
+      if(fy<=h.z.base||fx+r.w<h.x0||fx-r.w>h.x1||top>h.y1) continue;
+      ctx.imageSmoothingEnabled=false;
+      ctx.save(); clipZone(h.z);
+      if(typeof drawActorSpaced==='function') drawActorSpaced(a); else drawActor(a);
+      ctx.restore();
     }
   }
   // Live props (not baked into the painting, e.g. the Moon Club mirror stands) standing IN FRONT of a slice that was just drawn again
