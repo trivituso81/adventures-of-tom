@@ -1,3 +1,8 @@
+## theftorder1 (2026-11-13): chapter 1 kitchen, height picture and pie theft reordered
+- Tom 19:13: (1) the door frame height picture should show after Grace talks about it, not before; (2) while the mud blob steals the pie only Rose's line plays, the rest of the reaction comes after it has left.
+- Done (`SCENES.ch1Theft`, data/scenes.js): `{ch1Reveal:'doorframe'}` moved from before Grace's "Tata, look at the door" to right after it (Rose's "Mine's the low one" follows the picture). Deedee's "A WHAT climbed", Rose's "It has EYES", Deedee's "Forty years" and Grace's "brownest thing" now play after the blob has gone out the door and the three are back on their feet, before Tom's "That was UNCALLED for". Text unchanged, so no clip is silenced.
+- Tested: scene played through in the harness (page order as above, no errors). NOT looked at: landscape, Duo, a phone.
+
 ## ch1fix1 (2026-11-13): chapter 1 leftovers
 - Dragonfly Coin keepsake (data/party.js) given after Rose's "I'm keeping it" in ch1AfterBoss. Amy's "be nice to the slime" revisit line and Penny's "snacks for fights" intro line are held back in chapter 1 until `ch1-theft` (when entry in data/maps-le.js; filter in engine/shop.js). Smoke FAILS []; closeup_ch1_test passes. Not played on a phone.
 
