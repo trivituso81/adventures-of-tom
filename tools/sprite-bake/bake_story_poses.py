@@ -44,6 +44,9 @@ SETS = {
     # 'feet' = x of Tom's own feet in each group frame's cut picture, in source pixels (measured with a ruler on the cut frames), so he stays on one spot from frame 4 to 6.
     'hug': {'member': 'tom', 'sheet': 'tom-grace-rose-greeting-hug-v2.png', 'ground': (255, 0, 255), 'dark_cos': .88, 'dil': 4, 'cut': (4, 2), 'k': 9, 'h': 42, 'ref': 'hg_hear',
             'names': ['hg_hear', 'hg_delight', 'hg_crouch', 'hg_run', 'hg_crash', 'hg_group'],
+            # hugface1 (Tom 16:47: "Tom is facing right instead of left before he hugs the girls"): the girls run in from the left, but v2 paints Tom's first three frames turned toward
+            # screen-right, so these three are mirrored (the only flip in this set; named to Tom). The group frames are as painted.
+            'flip': ['hg_hear', 'hg_delight', 'hg_crouch'],
             'feet': {'hg_run': 267, 'hg_crash': 194, 'hg_group': 175}},
 }
 
@@ -251,6 +254,7 @@ for cid, S in SETS.items():
             S['k'] = max(5, min(10, int(hd * stand_frame(S['member'])[1]) if hd else int(figs[S['ref']].height / S['h'])))   # never upscale the painted frames
     elif 'ground' in S: figs = dict(zip(S['names'], cut_cells(key_ground(os.path.join(RAW, S['sheet']), S['ground'], S.get('dark_cos', .985)), S['cut'][0], S['cut'][1], S['cut'][0] * S['cut'][1], S.get('dil', 6))))
     elif 'cut' in S: figs = dict(zip(S['names'], _cut(os.path.join(RAW, S['sheet']), S['cut'][0], S['cut'][1], [n[3:] for n in S['names']] + ['x%d' % i for i in range(S['cut'][0] * S['cut'][1] - len(S['names']))]).values()))
+    for _n in S.get('flip', []): figs[_n] = figs[_n].transpose(Image.FLIP_LEFT_RIGHT)
     if 'strip' not in S and 'cut' not in S and 'ground' not in S: figs = dict(zip(S['names'], grid(os.path.join(RAW, S['sheet']), 4, 2)))
     f = S['h'] * S['k'] / figs[S['ref']].height
     if 'strip' in S and S['member'] in EMO_HEAD:

@@ -1,3 +1,9 @@
+## hugface1 (2026-11-13): Tom faces the girls before the hug
+- Tom 16:47: "Tom is facing right instead of left before he hugs the girls." Cause (fact): the girls run in from the left (`SCENES.opening`, gStart west of the taxi door), but in hug sheet v2 Tom's first three frames (`hg_hear`, `hg_delight`, `hg_crouch`) are painted turned toward screen-right.
+- Done: those three frames are mirrored in the bake (`'flip'` in set `hug`, tools/sprite-bake/bake_story_poses.py). This is the one flip in the set; named to Tom here. The run-in, crash and group frames are as painted. Only the `hug` block of data/story-poses.js and art/chars/hug-story.webp changed (Pip's mood files that the rebake wants to change were left out again).
+- Side effect (fact): the NES controller on his shirt is mirrored in those three frames only.
+- Looked at: the six baked frames side by side (first three look left, crouch near front). NOT looked at: the opening in motion in the game, a phone.
+
 ## hugv2 (2026-11-13): the greeting uses only the approved hug sheet v2; the separate crouch and kneel pictures are gone
 - Tom 16:20: "I don't think we need a separate crouch and kneel frame anymore. The approved greeting hug sheet should now have everything you need." He had just approved version 2 of the Library entry `tom-grace-rose-greeting-hug` (`art/raw/characters/tom-grace-rose-greeting-hug-v2.png`, 4 x 2, all eight cells with both girls).
 - Done: set `hug` in `tools/sprite-bake/bake_story_poses.py` is cut from v2: `hg_hear`, `hg_delight`, `hg_crouch` (cell 3, Tom alone crouched with arms open), `hg_run`, `hg_crash`, `hg_group` (cells 4 to 6). Cells 7 (squeeze) and 8 (looking up) are not played. `hg_kneel` is removed; `hugHearStep` (engine/intro.js) now plays hear, delight, crouch and holds the crouch while the girls run in. Painted as painted: no flip, one size factor (Tom standing = 42 rows).
