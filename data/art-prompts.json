@@ -23671,8 +23671,16 @@
    "prompt": "Draw TNB in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of TNB. Picture 2 is the walking sheet. Pictures 3 and 4 are the battle sheets.\n\nCopy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as the battle sheets. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\n\nRow 1:\n1. Leaning back and pulling hard on the edge of a table with both hands, feet braced (no table drawn), a determined face.\n2. Catching a small gold coin one-handed in front of him, eyes wide, mouth open in surprise.\n3. Grinning proudly, holding a small gold coin up in his right hand and a gold-plated clothes steamer up in his left hand.\nRow 2:\n4. Both hands pressed to his cheeks, eyes wide, mouth open, shocked and rattled.\n5. Holding a brown cowboy hat out to the side in one hand, the other hand on his hip, calm and pleased.\n6. One hand pressed to his heart, the other hand holding a small gold coin against his chest, eyes wet and happy, as if giving a thank-you speech.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/ch4-nara-story-1-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794667980487
+    }
+   ],
    "rejects": [],
    "id": "ch4-nara-story-1",
    "tab": "Characters",
