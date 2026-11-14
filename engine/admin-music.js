@@ -2,7 +2,7 @@
 // engine/admin-music.js: the calm track (music/admin.mp3, "Admin Calm" in the Music Library) on the separate admin pages
 // (Voice Library, Art Library, Music Library, Area Builder, Portrait Crops, Head Sizes). The ADMIN menu inside the game plays the
 // same track through engine/music-clips.js (mcAdminScreen). This file stands alone: it uses no game globals, so a page only needs
-//   <script src="engine/admin-music.js?v=..."></script>
+//   <script src="engine/admin-music.js?v=adminmusic3"></script>
 // Behaviour:
 //  - Follows the game's music switch (localStorage 'le-music' = 'off' keeps it silent).
 //  - Plays a take Tom picked for 'admin' in the Music Library on this phone (IndexedDB 'aot-music-library'), else music/admin.mp3.
