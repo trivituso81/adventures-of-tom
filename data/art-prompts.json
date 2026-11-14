@@ -22879,7 +22879,7 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE SHEET. Return exactly one image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The approved painting of The Big One, the giant pond fish boss of \"The Adventures of Tom\", a family role-playing game. Keep the same creature, shape, colors and painted finish.\n2) The approved painting of Grump Hollow's Mudling, for the handbrushed finish only.\n\nPAINT THIS SHEET\nThe same 6 poses as attachment 1, in the same 3 by 2 layout: top row poses 1 to 3, bottom row poses 4 to 6, each pose filling most of its cell, nothing overlapping.\nTop row: 1 hanging calmly in the water, a plain green fish, mouth closed. 2 turning, a small splash. 3 blowing one small bubble. Bottom row: 4 a happy wiggle, tail flick. 5 a small open-mouthed gulp. 6 swimming away, tail sweeping low.\nTHIS IS A NORMAL-SIZED POND FISH, not a giant: in every pose it is about as long as a grown person's forearm, ordinary and calm. NO tin on its head, NO lure, NO coin, NO water spraying, NO glowing eyes. Same green and blue scales as attachment 1 but painted quieter.\nPaint it like attachment 1: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -22889,7 +22889,14 @@
      "at": 1794619960082
     }
    ],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-14",
+     "note": "Only some teeth should gold others white",
+     "from": "v2",
+     "at": 1794667756352
+    }
+   ],
    "id": "ch1-boppy-grin",
    "tab": "Characters",
    "title": "Boppy grinning, gold fillings showing (one full-body pose; reused in chapters 3, 13 and 14)",
@@ -22899,7 +22906,7 @@
     "art/raw/characters/boppy-emotions-v6.png"
    ],
    "group": "Chapter 1",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of Boppy from \"The Adventures of Tom\", a family role-playing game. Keep his face, build, clothes and cap exactly as in attachment 1. Paint this new pose from him.\n2) The approved emotion sheet of Boppy, for the happy expression only.\n\nPAINT THIS ONE POSE\nBoppy, a grandfather in his sixties, standing full body, facing the viewer. He is grinning wide with his mouth open, and his back teeth show gold fillings that shine the same gold as a coin. One hand is raised near his cheek with one finger touching a back tooth, proud of it. Warm, delighted, a little mischievous. Standing on a plain flat magenta background, nothing else in the picture, no text.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- The gold fillings must be clearly visible in the grin."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of Boppy from \"The Adventures of Tom\", a family role-playing game. Keep his face, build, clothes and cap exactly as in attachment 1. Paint this new pose from him.\n2) The approved emotion sheet of Boppy, for the happy expression only.\n\nPAINT THIS ONE POSE\nBoppy, a grandfather in his sixties, standing full body, facing the viewer. He is grinning wide with his mouth open, and his back teeth show 3 gold fillings that shine the same gold as a coin. One hand is raised near his cheek with one finger touching a back tooth, proud of it. Warm, delighted, a little mischievous. Standing on a plain flat magenta background, nothing else in the picture, no text. It is extremely important that all teeth are not gold. Only three teeth should be gold\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- The gold fillings must be clearly visible in the grin."
   },
   {
    "status": "approved",
