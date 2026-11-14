@@ -209,7 +209,7 @@
 "speaker": "Reel",
 "text": "Your father has been fishing this pier since before the pier. He catches something every day. The size, I round down.",
 "ctx": "v4 override",
-"script": "[slow, fond] Your father has been fishing this pier since BEFORE the pier. He catches something every day. [deadpan, knowing] The size, I round down."
+"script": "[brisk, fond] Your father has been fishing this pier since BEFORE the pier. He catches something every day. [deadpan, knowing] The size, I round down."
 },
 {
 "voice": "boppy",
@@ -235,9 +235,9 @@
 {
 "voice": "deedee",
 "speaker": "",
-"text": "Tom, you must be starving! Sit. The crisp needs ten minutes on the counter.",
+"text": "Tom you must be starving! Sit. The crisp needs ten minutes on the counter.",
 "ctx": "v4 override",
-"script": "[warm, fussing] Tom, you must be starving! [brisk, firm] Sit. The crisp needs ten minutes on the counter."
+"script": "[warm, fussing] Tom you must be starving! [brisk, firm] Sit. The crisp needs ten minutes on the counter."
 },
 {
 "voice": "deedee",
@@ -480,9 +480,9 @@
 {
 "voice": "rose",
 "speaker": "",
-"text": "Deedee! A mud blob just climbed in the window, and it's running off with your crisp!",
+"text": "Oh no! The mud blob is stealing Deedee's crisp!",
 "ctx": "v4 override",
-"script": "[alarmed, breathless] Deedee! [shrill, urgent] A mud blob just climbed in the window, and it's running off with your crisp!"
+"script": "[scared, flabbergasted] Oh no! [shrill, breathless] The mud blob is stealing Deedee's crisp!"
 },
 {
 "voice": "deedee",
@@ -508,9 +508,16 @@
 {
 "voice": "deedee",
 "speaker": "",
-"text": "Look, rhubarb crumbs on the path. The little thief dropped them as it ran, so we can follow the trail.",
+"text": "Look, rhubarb crumbs on the path. The little thief must have dropped them as it ran.",
 "ctx": "v4 override",
-"script": "[brisk, keen] Look, rhubarb crumbs on the path. [indignant, fussing] The little thief dropped them as it ran, so we can follow the trail."
+"script": "[noticing, curious] Look, rhubarb crumbs on the path. [thoughtful] The little thief must have dropped them as it ran."
+},
+{
+"voice": "deedee",
+"speaker": "",
+"text": "That means we can follow the trail!",
+"ctx": "v4 override",
+"script": "[realizing, excited] That means we can follow the trail!"
 },
 {
 "voice": "deedee",

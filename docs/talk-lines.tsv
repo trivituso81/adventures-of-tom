@@ -17,7 +17,7 @@ chapter	file	line	character	mood	talk	text
 1	data/scenes.js	81	Deedee	loving		And my girls! Come here, come here.
 1	data/scenes.js	100	Grace	proud	point	Tata, look at the door. Deedee measured me two times since you left.
 1	data/scenes.js	102	Rose	proud		I got one too. Mine's the low one.
-1	data/scenes.js	83	Deedee	loving		Tom, you must be starving! Sit. The crisp needs ten minutes on the counter.
+1	data/scenes.js	83	Deedee	loving		Tom you must be starving! Sit. The crisp needs ten minutes on the counter.
 1	data/scenes.js	84	Deedee	surprised	ask	Where are my reading glasses? I had them one second ago. I need to read the timer.
 1	data/scenes.js	85	Grace	unimpressed		Deedee. They're on your head.
 1	data/scenes.js	86	Deedee	happy	answer	So they are. Not one word to Boppy.
@@ -27,11 +27,11 @@ chapter	file	line	character	mood	talk	text
 1	data/scenes.js	90	Tom	unimpressed		Mom, EVERYTHING gives you gas.
 1	data/scenes.js	91	Deedee	loving		And I eat it anyway. That's love, Tom.
 1	data/scenes.js	93	Boppy	angry		Tom! Good. I'm not feeling good. It's the stomach.
-1	data/scenes.js	126	Rose	scared		Deedee! A mud blob just climbed in the window, and it's running off with your crisp!
-1	data/scenes.js	169	Deedee	surprised		A WHAT climbed in my window?
-1	data/scenes.js	170	Rose	scared		It has EYES! The mud has EYES!
-1	data/scenes.js	171	Deedee	angry		Forty years in this kitchen. I've had ants. I've had a raccoon. I have never had THAT.
-1	data/scenes.js	172	Grace	unimpressed		It's so brown. It's the brownest thing I've ever seen.
+1	data/scenes.js	126	Rose	scared		Oh no! The mud blob is stealing Deedee's crisp!
+1	data/scenes.js	169	Deedee	surprised		What in goodness sake was THAT?
+1	data/scenes.js	170	Rose	scared		It had EYES! The mud had EYES!
+1	data/scenes.js	171	Deedee	angry		Ants, I can handle. A raccoon, I can handle. Your father at midnight with a serving spoon, I've handled for forty years. But a MUD BLOB?
+1	data/scenes.js	172	Grace	happy		It's so brown. It looks like a poop. A very sneaky poop.
 1	data/scenes.js	144	Tom	angry		That was UNCALLED for!
 1	data/scenes.js	174	Grace	surprised		It's running for the pond!
 1	data/scenes.js	145	Deedee	angry		It took the crisp AND my good tin! Grab your shoes, everybody. We're going after it, and I'm coming with you.
@@ -41,7 +41,8 @@ chapter	file	line	character	mood	talk	text
 1	data/scenes.js	179	Boppy	loving	point	Tom. You stay in front of those girls.
 1	data/scenes.js	229	Deedee	loving		Up, up. Everybody up. Deedee kisses it better.
 1	data/scenes.js	155	Deedee	loving		There. Good as new. Try not to do that again.
-1	data/scenes.js	162	Deedee	surprised	point	Look, rhubarb crumbs on the path. The little thief dropped them as it ran, so we can follow the trail.
+1	data/scenes.js	162	Deedee	surprised	point	Look, rhubarb crumbs on the path. The little thief must have dropped them as it ran.
+1	data/scenes.js	162	Deedee	happy		That means we can follow the trail!
 1	data/scenes.js	164	Rose	scared		Tata. The mud is MOVING.
 1	data/scenes.js	202	Tom	surprised		It talks.
 1	data/scenes.js	203	Deedee	angry		It talks AND it steals.
@@ -62,7 +63,6 @@ chapter	file	line	character	mood	talk	text
 1	data/scenes.js	249	Rose	happy	answer	I'm keeping it. It's stuck.
 1	data/scenes.js	251	Tom	proud	answer	Let me.
 1	data/scenes.js	253	Rose	unimpressed		You're not trying.
-1	data/scenes.js	254	Tom	unimpressed		I'm trying, Rose. It's a marble and it's winning.
 1	data/scenes.js	255	Grace	surprised	tell	There's a little round hole in the side. Like somebody took a bite.
 1	data/scenes.js	257	Deedee	angry		And somebody left a burnt light bulb. Now they're littering at my pond too.
 1	data/scenes.js	259	Deedee	angry		The tin. Go, go, go.

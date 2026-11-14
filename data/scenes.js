@@ -101,7 +101,7 @@ SCENES.ch1Theft=[
   {ch1Reveal:'doorframe'},
   {talk:'Rose',lines:['I got one too. Mine\'s the low one.']},
   {wait:1.2},
-  {talk:'Deedee',lines:['Tom, you must be starving! Sit. The crisp needs ten minutes on the counter.']},
+  {talk:'Deedee',lines:['Tom you must be starving! Sit. The crisp needs ten minutes on the counter.']},
   {talk:'Deedee',lines:['Where are my reading glasses? I had them one second ago. I need to read the timer.']},
   {talk:'Grace',lines:['Deedee. They\'re on your head.']},
   {talk:'Deedee',lines:['So they are. Not one word to Boppy.']},
@@ -149,7 +149,7 @@ SCENES.ch1Theft=[
   {pose:'Big Mudling',f:'mh_reach',dir:'left'}, {wait:.45},
   {pose:'Big Mudling',f:'mh_grab',dir:'left'}, {sfx:'pickup'}, {wait:.5},
   {pose:'Big Mudling',f:'mh_hug',dir:'left'},
-  {talk:'Rose',lines:['Deedee! A mud blob just climbed in the window, and it\'s running off with your crisp!']},
+  {talk:'Rose',lines:['Oh no! The mud blob is stealing Deedee\'s crisp!']},
   {pose:'Big Mudling',f:'mh_glance',dir:'left'}, {wait:.5},
   // The blob scurries back down the middle (mirrored, it travels right), giggles once it is past the corridor mouth, and sneaks out the door;
   // then the three scramble up (kneel, then stand) and Deedee hops back to her counter.
@@ -167,11 +167,11 @@ SCENES.ch1Theft=[
   ]},
   {place:'Deedee',at:[7,9],dir:'down'},
   {cam:null},
-  {talk:'Deedee',lines:['A WHAT climbed in my window?']},
-  {talk:'Rose',lines:['It has EYES! The mud has EYES!']},
-  {talk:'Deedee',lines:['Forty years in this kitchen. I\'ve had ants. I\'ve had a raccoon. I have never had THAT.']},
-  {talk:'Grace',lines:['It\'s so brown. It looks like a poop. A very fancy poop.']},
   {talk:'Tom',lines:['That was UNCALLED for!'],voice:[['tom','hurt',0,'That was UNCALLED for!']]},
+  {talk:'Deedee',lines:['What in goodness sake was THAT?']},
+  {talk:'Rose',lines:['It had EYES! The mud had EYES!']},
+  {talk:'Deedee',lines:['Ants, I can handle. A raccoon, I can handle. Your father at midnight with a serving spoon, I\'ve handled for forty years. But a MUD BLOB?']},
+  {talk:'Grace',lines:['It\'s so brown. It looks like a poop. A very sneaky poop.']},
   {talk:'Grace',lines:['It\'s running for the pond!']},
   {talk:'Deedee',lines:['It took the crisp AND my good tin! Grab your shoes, everybody. We\'re going after it, and I\'m coming with you.']},
   {talk:'Boppy',lines:['It\'s headed for Grump Hollow. I\'ve been saying for twenty years that something lives in that pond, and nobody listens to Boppy.']},
@@ -195,7 +195,8 @@ SCENES.ch1Mudling=[
   {place:'grace',at:[7,19],dir:'up'}, {place:'rose',at:[7,20],dir:'up'}, {place:'deedee',at:[6,20],dir:'up'},
   {flag:'ch1-crumbs-a'},   // crumb pile and scatter on the steps (plate.js HOLLOW_TRAIL a)
   {place:'Mudling',at:[9,16],dir:'left'},   // report r-20261114-100833-9dh8: the Mudling sits further right of the party and faces them (left)
-  {talk:'Deedee',lines:['Look, rhubarb crumbs on the path. The little thief dropped them as it ran, so we can follow the trail.']},
+  {talk:'Deedee',lines:['Look, rhubarb crumbs on the path. The little thief must have dropped them as it ran.']},
+  {talk:'Deedee',lines:['That means we can follow the trail!']},
   {talk:'Rose',lines:['Tata. The mud is MOVING.']},
   {sfx:'look'},
   {walk:'Mudling',to:[[8,16],[8,17],[7,17]],speed:.35},
@@ -715,6 +716,15 @@ const STORY_WORLD=[
     else if(!under&&b.sunk) { b.x=b.sunk.x; b.y=b.sunk.y; b.home={x:b.sunk.x,y:b.sunk.y}; b.sunk=null; b.hidden=false; }
     // Once beaten he stays on the shore with the frown frame (the painted stance frame is the shocked one; scenes clear and reset scenePose).
     if(!under&&flag('battle:bigone')==='win'&&!b.settled&&!(b.scenePose&&b.scenePose.f)) b.scenePose={foe:'attack3',dir:'left'};
+  },
+  // Chapter 1: until the Theft scene plays, Boppy is already at the back of the house (12,4), facing right, so the player never sees him move
+  // when the scene starts. (Tom, 2026-11-14, report r-20261114-150730-vqel and r-20261114-100519-wlbn: he was by the front door, then sped to the back.)
+  ()=>{
+    if(currentMap.id!=='grands') return;
+    const b=currentMap.npcs.find(n=>n.name==='Boppy'); if(!b) return;
+    const pre=STORY.chapter===1&&!flag('ch1-theft');
+    if(pre&&!b.theftPre) { b.theftPre=true; b.x=12; b.y=4; b.facing='right'; b.path=[]; b.move=null; b.idle=1e9; }
+    else if(!pre&&b.theftPre) { b.theftPre=false; b.idle=0; }
   },
   // Chapter 2: the Big Shake stays under the hill until the party reaches the Observatory.
   ()=>{

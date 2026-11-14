@@ -30,7 +30,7 @@ scene	1	data/scenes.js	ch1Theft	Grace	Tata, look at the door. Deedee measured me
 scene	1	data/scenes.js	ch1Theft	Rose	I got one too. Mine's the low one.	tom	loving	the low one
 scene	1	data/scenes.js	ch1Theft	Rose	I got one too. Mine's the low one.	grace	happy	the low one
 scene	1	data/scenes.js	ch1Theft	Rose	I got one too. Mine's the low one.	deedee	loving	the low one
-scene	1	data/scenes.js	ch1Theft	Deedee	Tom, you must be starving! Sit. The crisp needs ten minutes on the counter.	tom	happy	The crisp
+scene	1	data/scenes.js	ch1Theft	Deedee	Tom you must be starving! Sit. The crisp needs ten minutes on the counter.	tom	happy	The crisp
 scene	1	data/scenes.js	ch1Theft	Deedee	Where are my reading glasses? I had them one second ago. I need to read the timer.	grace	unimpressed	I had them one second ago
 scene	1	data/scenes.js	ch1Theft	Grace	Deedee. They're on your head.	deedee	surprised	on your head
 scene	1	data/scenes.js	ch1Theft	Grace	Deedee. They're on your head.	rose	happy	on your head
@@ -50,18 +50,15 @@ scene	1	data/scenes.js	ch1Theft	Deedee	And I eat it anyway. That's love, Tom.	to
 scene	1	data/scenes.js	ch1Theft	Deedee	And I eat it anyway. That's love, Tom.	grace	happy	eat it anyway
 scene	1	data/scenes.js	ch1Theft	Boppy	Tom! Good. I'm not feeling good. It's the stomach.	tom	unimpressed	It's the stomach
 scene	1	data/scenes.js	ch1Theft	Boppy	Tom! Good. I'm not feeling good. It's the stomach.	deedee	unimpressed	not feeling good
-scene	1	data/scenes.js	ch1Theft	Rose	Deedee! A mud blob just climbed in the window, and it's running off with your crisp!	tom	surprised	A mud blob
-scene	1	data/scenes.js	ch1Theft	Rose	Deedee! A mud blob just climbed in the window, and it's running off with your crisp!	grace	surprised	A mud blob
-scene	1	data/scenes.js	ch1Theft	Rose	Deedee! A mud blob just climbed in the window, and it's running off with your crisp!	deedee	surprised	running off with your crisp
-scene	1	data/scenes.js	ch1Theft	Deedee	A WHAT climbed in my window?	rose	scared	
-scene	1	data/scenes.js	ch1Theft	Rose	It has EYES! The mud has EYES!	grace	scared	It has EYES!
-scene	1	data/scenes.js	ch1Theft	Rose	It has EYES! The mud has EYES!	tom	surprised	It has EYES!
-scene	1	data/scenes.js	ch1Theft	Rose	It has EYES! The mud has EYES!	deedee	surprised	The mud has EYES
-scene	1	data/scenes.js	ch1Theft	Deedee	Forty years in this kitchen. I've had ants. I've had a raccoon. I have never had THAT.	tom	unimpressed	a raccoon
-scene	1	data/scenes.js	ch1Theft	Deedee	Forty years in this kitchen. I've had ants. I've had a raccoon. I have never had THAT.	grace	surprised	a raccoon
-scene	1	data/scenes.js	ch1Theft	Grace	It's so brown. It's the brownest thing I've ever seen.	rose	happy	brownest thing
-scene	1	data/scenes.js	ch1Theft	Grace	It's so brown. It's the brownest thing I've ever seen.	tom	happy	I've ever seen
-scene	1	data/scenes.js	ch1Theft	Grace	It's so brown. It's the brownest thing I've ever seen.	deedee	unimpressed	brownest
+scene	1	data/scenes.js	ch1Theft	Rose	Oh no! The mud blob is stealing Deedee's crisp!	tom	surprised	mud blob
+scene	1	data/scenes.js	ch1Theft	Rose	Oh no! The mud blob is stealing Deedee's crisp!	grace	surprised	mud blob
+scene	1	data/scenes.js	ch1Theft	Rose	Oh no! The mud blob is stealing Deedee's crisp!	deedee	surprised	stealing Deedee's crisp
+scene	1	data/scenes.js	ch1Theft	Deedee	What in goodness sake was THAT?	rose	scared	
+scene	1	data/scenes.js	ch1Theft	Rose	It had EYES! The mud had EYES!	grace	scared	It had EYES!
+scene	1	data/scenes.js	ch1Theft	Rose	It had EYES! The mud had EYES!	tom	surprised	It had EYES!
+scene	1	data/scenes.js	ch1Theft	Rose	It had EYES! The mud had EYES!	deedee	surprised	The mud had EYES
+scene	1	data/scenes.js	ch1Theft	Deedee	Ants, I can handle. A raccoon, I can handle. Your father at midnight with a serving spoon, I've handled for forty years. But a MUD BLOB?	tom	unimpressed	serving spoon
+scene	1	data/scenes.js	ch1Theft	Deedee	Ants, I can handle. A raccoon, I can handle. Your father at midnight with a serving spoon, I've handled for forty years. But a MUD BLOB?	grace	surprised	serving spoon
 scene	1	data/scenes.js	ch1Theft	Tom	That was UNCALLED for!	deedee	angry	UNCALLED
 scene	1	data/scenes.js	ch1Theft	Tom	That was UNCALLED for!	grace	angry	UNCALLED
 scene	1	data/scenes.js	ch1Theft	Tom	That was UNCALLED for!	rose	scared	
@@ -89,9 +86,10 @@ scene	1	data/scenes.js	ch1Pond	Deedee	Up, up. Everybody up. Deedee kisses it bet
 scene	1	data/scenes.js	CH1_AFTER	Deedee	There. Good as new. Try not to do that again.	tom	happy	Good as new
 scene	1	data/scenes.js	CH1_AFTER	Deedee	There. Good as new. Try not to do that again.	grace	happy	Good as new
 scene	1	data/scenes.js	CH1_AFTER	Deedee	There. Good as new. Try not to do that again.	rose	happy	Good as new
-scene	1	data/scenes.js	ch1Mudling	Deedee	Look, rhubarb crumbs on the path. The little thief dropped them as it ran, so we can follow the trail.	grace	surprised	rhubarb crumbs
-scene	1	data/scenes.js	ch1Mudling	Deedee	Look, rhubarb crumbs on the path. The little thief dropped them as it ran, so we can follow the trail.	rose	surprised	rhubarb crumbs
-scene	1	data/scenes.js	ch1Mudling	Deedee	Look, rhubarb crumbs on the path. The little thief dropped them as it ran, so we can follow the trail.	tom	unimpressed	The little thief
+scene	1	data/scenes.js	ch1Mudling	Deedee	Look, rhubarb crumbs on the path. The little thief must have dropped them as it ran.	grace	surprised	rhubarb crumbs
+scene	1	data/scenes.js	ch1Mudling	Deedee	Look, rhubarb crumbs on the path. The little thief must have dropped them as it ran.	rose	surprised	rhubarb crumbs
+scene	1	data/scenes.js	ch1Mudling	Deedee	Look, rhubarb crumbs on the path. The little thief must have dropped them as it ran.	tom	unimpressed	The little thief
+scene	1	data/scenes.js	ch1Mudling	Deedee	That means we can follow the trail!	tom	happy	follow the trail
 scene	1	data/scenes.js	ch1Mudling	Rose	Tata. The mud is MOVING.	tom	surprised	MOVING
 scene	1	data/scenes.js	ch1Mudling	Rose	Tata. The mud is MOVING.	grace	scared	MOVING
 scene	1	data/scenes.js	ch1Mudling	Rose	Tata. The mud is MOVING.	deedee	surprised	MOVING
@@ -156,9 +154,6 @@ scene	1	data/scenes.js	ch1Spot	Tom	Let me.	rose	happy	Let me
 scene	1	data/scenes.js	ch1Spot	Rose	You're not trying.	tom	unimpressed	not trying
 scene	1	data/scenes.js	ch1Spot	Rose	You're not trying.	grace	happy	not trying
 scene	1	data/scenes.js	ch1Spot	Rose	You're not trying.	deedee	happy	not trying
-scene	1	data/scenes.js	ch1Spot	Tom	I'm trying, Rose. It's a marble and it's winning.	rose	happy	it's winning
-scene	1	data/scenes.js	ch1Spot	Tom	I'm trying, Rose. It's a marble and it's winning.	grace	happy	it's winning
-scene	1	data/scenes.js	ch1Spot	Tom	I'm trying, Rose. It's a marble and it's winning.	deedee	happy	it's winning
 scene	1	data/scenes.js	ch1Spot	Grace	There's a little round hole in the side. Like somebody took a bite.	tom	surprised	round hole
 scene	1	data/scenes.js	ch1Spot	Grace	There's a little round hole in the side. Like somebody took a bite.	rose	scared	took a bite
 scene	1	data/scenes.js	ch1Spot	Grace	There's a little round hole in the side. Like somebody took a bite.	deedee	surprised	took a bite

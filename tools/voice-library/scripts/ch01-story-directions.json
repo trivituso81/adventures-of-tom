@@ -32,30 +32,30 @@
   {
    "voice": "deedee",
    "speaker": "Deedee",
-   "text": "A WHAT climbed in my window?",
+   "text": "What in goodness sake was THAT?",
    "ctx": "chapter 1 (new)",
-   "script": "[outraged, disbelief] A WHAT climbed in my window?"
+   "script": "[appalled, shocked] What in goodness sake was THAT?"
   },
   {
    "voice": "rose",
    "speaker": "Rose",
-   "text": "It has EYES! The mud has EYES!",
+   "text": "It had EYES! The mud had EYES!",
    "ctx": "chapter 1 (new)",
-   "script": "[shrieking] It has EYES! [insisting, shrill] The mud has EYES!"
+   "script": "[shrieking] It had EYES! [insisting, shrill] The mud had EYES!"
   },
   {
    "voice": "deedee",
    "speaker": "Deedee",
-   "text": "Forty years in this kitchen. I've had ants. I've had a raccoon. I have never had THAT.",
+   "text": "Ants, I can handle. A raccoon, I can handle. Your father at midnight with a serving spoon, I've handled for forty years. But a MUD BLOB?",
    "ctx": "chapter 1 (new)",
-   "script": "[indignant] Forty years in this kitchen. [listing, unimpressed] I've had ants. I've had a raccoon. [appalled, slowly] I have never had... THAT."
+   "script": "[exasperated] Ants, I can handle. [dry] A raccoon, I can handle. [deadpan, weary] Your father at midnight with a serving spoon, I've handled for forty years. [outraged, rising] But a MUD BLOB?"
   },
   {
    "voice": "grace",
    "speaker": "Grace",
-   "text": "It's so brown. It looks like a poop. A very fancy poop.",
+   "text": "It's so brown. It looks like a poop. A very sneaky poop.",
    "ctx": "chapter 1 (new)",
-   "script": "[disgusted] It's SO brown. [dramatic, declaring] It looks like a poop. [gleeful] A very fancy poop."
+   "script": "[disgusted] It's SO brown. [snickering, delighted] It looks like a poop. [giggling, immature] A very sneaky poop."
   },
   {
    "voice": "grace",

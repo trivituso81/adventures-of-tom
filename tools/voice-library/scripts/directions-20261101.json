@@ -9162,7 +9162,7 @@
 "speaker": "Larry",
 "text": "I’m blowing leaves. The leaf landed. It LANDED. Thirty years I’ve waited. Thank you.",
 "ctx": "Scene ch12After",
-"script": "[solemn, amazed] I’m blowing leaves. The leaf landed. It LANDED. [slow, moved] THIRTY years I’ve waited. [deadpan, heartfelt] ...Thank you."
+"script": "[solemn, amazed] I’m blowing leaves. The leaf landed. It LANDED. [brisk, moved] THIRTY years I’ve waited. [deadpan, heartfelt] ...Thank you."
 },
 {
 "voice": "?Marlowe",
@@ -16225,21 +16225,21 @@
 "speaker": "gus",
 "text": "I'm training for the annual sit-down.",
 "ctx": "",
-"script": "[slow, dignified] I'm training for the annual sit-down."
+"script": "[brisk, dignified] I'm training for the annual sit-down."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "My coach is a bench.",
 "ctx": "",
-"script": "[deadpan, dignified] My coach... is a bench."
+"script": "[deadpan, quick] My coach... is a bench."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "We have a very supportive relationship.",
 "ctx": "",
-"script": "[deadpan, warm] We have a VERY supportive relationship."
+"script": "[deadpan, quick, fond] We have a VERY supportive relationship."
 },
 {
 "voice": "bean",
@@ -16295,7 +16295,7 @@
 "speaker": "gus",
 "text": "Your father caught Old Iron-Gill? And let him GO? Forty years of telling that story, and now it's true.",
 "ctx": "",
-"script": "[amazed, slow] Your father caught Old Iron-Gill? And let him GO? [deadpan, dry] FORTY years of telling that story, and now it's true."
+"script": "[amazed, brisk] Your father caught Old Iron-Gill? And let him GO? [deadpan, dry] FORTY years of telling that story, and now it's true."
 },
 {
 "voice": "gus",
@@ -16309,21 +16309,21 @@
 "speaker": "gus",
 "text": "You saw it? Old Iron-Gill? Forty years I have run this shack. I thought it was a story.",
 "ctx": "",
-"script": "[hushed, incredulous] You saw it? Old Iron-Gill? [slow, weighty] Forty years I have run this shack. [small, wondering] I thought it was a story."
+"script": "[hushed, incredulous] You saw it? Old Iron-Gill? [brisk, weighty] Forty years I have run this shack. [small, wondering] I thought it was a story."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "It went west, into the marsh. The Whispering Marsh. The reeds talk out there. Mostly nonsense.",
 "ctx": "",
-"script": "[low, slow] It went west, into the marsh. The Whispering Marsh. The reeds talk out there. [deadpan, dismissive] ...Mostly nonsense."
+"script": "[low, brisk] It went west, into the marsh. The Whispering Marsh. The reeds talk out there. [deadpan, dismissive] ...Mostly nonsense."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "Bait shack is open. Worms, minnows, and a sandwich I'm not selling.",
 "ctx": "",
-"script": "[dry, slow] Bait shack is open. [deadpan, flat] Worms, minnows, and a sandwich I'm NOT selling."
+"script": "[dry, brisk] Bait shack is open. [deadpan, flat] Worms, minnows, and a sandwich I'm NOT selling."
 },
 {
 "voice": "gus",
@@ -16442,14 +16442,14 @@
 "speaker": "gus",
 "text": "I'm here for my grandson. He's in the second grade. I was in the second grade here in 1956.",
 "ctx": "",
-"script": "[slow, warm] I'm here for my grandson. He's in the second grade. [unhurried, wistful] I was in the second grade here... in 1956."
+"script": "[brisk, warm] I'm here for my grandson. He's in the second grade. [quick, wistful] I was in the second grade here... in 1956."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "The bells were wrong in 1956 too. Nobody fixed them. Things were simpler.",
 "ctx": "",
-"script": "[dry, unhurried] The bells were wrong in 1956 too. Nobody fixed them. [deadpan, fond] ...Things were simpler."
+"script": "[dry, quick] The bells were wrong in 1956 too. Nobody fixed them. [deadpan, fond] ...Things were simpler."
 },
 {
 "voice": "bun",
@@ -17856,7 +17856,7 @@
 "speaker": "Larry",
 "text": "The leaf landed. It LANDED. I’ve been blowing that leaf since the smog. Thank you.",
 "ctx": "Talking to Larry (jpark)",
-"script": "[overcome, slow] The leaf landed. It LANDED. [tired, deadpan] I’ve been blowing that leaf since the smog. [warm, sincere] ...Thank you."
+"script": "[overcome, brisk] The leaf landed. It LANDED. [tired, deadpan] I’ve been blowing that leaf since the smog. [warm, sincere] ...Thank you."
 },
 {
 "voice": "gus",
@@ -17877,21 +17877,21 @@
 "speaker": "gus",
 "text": "It's a whole system. Their system is better.",
 "ctx": "",
-"script": "[grudging, slow] It's a whole system. [deadpan, dignified] ...Their system is BETTER."
+"script": "[grudging, brisk] It's a whole system. [deadpan, dignified] ...Their system is BETTER."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "I'm blowing leaves. The same leaf. Over and over.",
 "ctx": "",
-"script": "[flat, droning] I'm blowing leaves. [slow, hollow] The same leaf. Over... and over."
+"script": "[flat, droning] I'm blowing leaves. [brisk, hollow] The same leaf. Over... and over."
 },
 {
 "voice": "gus",
 "speaker": "gus",
 "text": "It never lands. It never has to. Very peaceful.",
 "ctx": "",
-"script": "[drifting, content] It never lands. It never has to. [serene, slow] Very peaceful."
+"script": "[quick, content] It never lands. It never has to. [serene, brisk] Very peaceful."
 },
 {
 "voice": "gus",

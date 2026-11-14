@@ -122,6 +122,8 @@ if(voices['dialog|narrator']) voices['dialog|narrator'].direction='theatrical st
 if(voices['dialog|narrator']) voices['dialog|narrator'].speed=1.15; // ElevenLabs speaking rate (0.7 to 1.2); Tom: the narrator spoke too slowly in the preview
 // Child voices (report r-20261114-102303-9h7v, Tom: "doesn't sound like a child and it sounds very slow"): quicker speaking rate for the kids.
 for(const k of ['dialog|mosskid','dialog|dotkid','dialog|pipkid']) if(voices[k]) voices[k].speed=1.12;
+// Gus (report r-20261114-102918-kviv, Tom: "he needs to speak faster in general"; "not coming off funny"): quicker rate, and his tags use brisk deadpan timing instead of slow.
+if(voices['dialog|gus']) voices['dialog|gus'].speed=1.15;
 // The Mirrorball (Tom 11-08): Dolores' voice no longer exists on ElevenLabs (404), so she reuses an existing lady voice (no new
 // slot). fallback_ids: voices.html tries the next id when ElevenLabs answers 404 (voice deleted), so one missing voice never blocks a bake.
 // Tom 11-09: exaggerated, over the top, almost cartoonish fancy lady: stability 0 (most expressive) and a campy direction on every line.
