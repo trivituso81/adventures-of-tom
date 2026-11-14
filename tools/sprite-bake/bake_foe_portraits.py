@@ -18,7 +18,7 @@ SIZE = 256
 BG = (243, 233, 214)
 ZOOM = 2.6       # square side = ZOOM x face size (face size = larger of eye spacing and eye-to-mouth distance)
 ZOOM_FOR = {'chairman': 1.6, 'censor': 1.7, 'redpen': 1.9, 'slushslug': 1.8, 'coathanger': 2.0, 'skeeter': 1.6}
-CROP_FOR = {'skeeter': (262, 205, 190)}   # centre x, centre y, side in frame px (the big mosquito; its mouth point is the proboscis tip)
+CROP_FOR = {'irongill': (262, 175, 250), 'skeeter': (262, 205, 190)}   # centre x, centre y, side in frame px (the big mosquito; its mouth point is the proboscis tip)
 SHIFT_FOR = {'chairman': -.42, 'censor': -.3, 'redpen': -.12}   # move the square up (negative) by this share of its side
 MIN_FACE = 70    # source px, so a one-eyed or tiny face is not blown up past its pixels
 

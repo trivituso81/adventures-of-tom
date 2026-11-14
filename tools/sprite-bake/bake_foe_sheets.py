@@ -43,7 +43,7 @@ MARK = {
     'bobber':  {'eyes': [(.61, .32), (.73, .33)], 'mouth': (.60, .53)},
     'tangle':  {'eyes': [(.62, .41), (.71, .41)], 'mouth': (.64, .59)},
     'snag':    {'eyes': [(.59, .67), (.71, .67)], 'mouth': (.65, .74)},
-    'irongill': {'eyes': [(.70, .59), (.89, .61)], 'mouth': (.80, .72)},
+    'irongill': {'eyes': [(.59, .41), (.80, .40)], 'mouth': (.77, .58)},
     'boommoth': {'eyes': [(.66, .51), (.75, .56)], 'mouth': (.72, .61)},
     'clapper': {'eyes': [(.52, .48), (.67, .49)], 'mouth': (.50, .64)},
     'cuecrab': {'eyes': [(.53, .49), (.62, .48)], 'mouth': (.53, .62)},
@@ -125,7 +125,7 @@ SHADOW_BAND = {'directorscut', 'irongill'}
 CAST_ALL = {'irongill'}
 
 
-CHAPTER_SHEETS = {'ch1-bigone-lure-coin': 'bigone'}   # chapter 1: The Big One with the lure and the gold coin in its lip
+CHAPTER_SHEETS = {'ch1-bigone-lure-coin': 'bigone', 'ch3-irongill-coin': 'irongill', 'ch4-directorscut-coin': 'directorscut'}   # chapter 1: The Big One with the lure and the gold coin in its lip; chapter 3: Iron Gill with its coin; chapter 4: the Director's Cut with the coin on its beret
 
 def newest_files():
     d = json.load(open(os.path.join(ROOT, 'data/art-prompts.json')))

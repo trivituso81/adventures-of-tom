@@ -1,3 +1,8 @@
+## coinart1 (2026-11-14): the Director's Cut and Iron Gill wear their coins (approved Art Library sheets installed)
+- tools/sprite-bake/bake_foe_sheets.py `CHAPTER_SHEETS` (same hook as the chapter 1 Big One): `ch4-directorscut-coin` (v2, newest) replaces the Director's Cut sheet (coin pinned to the beret) and `ch3-irongill-coin` (v1) replaces Iron Gill (coin in its lip). A rebake with no change reproduced the old files byte for byte first. Rebaked art/foes/{directorscut,irongill}.webp and data/foes/*-hires.js; contact sheets looked at (six frames each, coin in every frame).
+- Iron Gill's eye and mouth points (MARK) re-measured on the new stance (moves that aim at eyes or mouth read them); its dialogue portrait uses a hand crop (CROP_FOR in bake_foe_portraits.py) because the automatic crop cut off the eyes. Director's Cut portrait rebaked from the new stance (no change in the crop).
+- Not touched: the Director's Cut ending sheet (ending-directorscut-v2, no coin); the megaphone-normal sheet (waits until after chapter 6).
+- NOT done: a fight against either boss on screen, landscape, Duo, a phone.
 ## talk3 (2026-11-14): talking poses installed for Tom, TNB, Grace, Rose, Deedee and Boppy
 - Tom approved six talking sheets (art/raw/characters/<id>-talk-v*.png). Cut with talk_frames.py (heads x1.00 Tom, x1.21 TNB, x1.30 Grace and Rose, x1.13 Deedee, x1.10 Boppy), baked with bake_story_poses.py into sets `<id>talk` (tk_tell, tk_point, tk_ask, tk_answer) in data/story-poses.js and art/chars/<id>talk-story.webp.
 - Looked at: contact sheet (four poses each, feet whole) and ch2Starter on the map (TNB tk_tell, Tom tk_ask, TNB tk_answer on pages 2 to 4, moods kept elsewhere).
