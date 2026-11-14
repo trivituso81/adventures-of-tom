@@ -24769,8 +24769,16 @@
    "prompt": "Draw an ordinary peanut shell and two baby squirrels (the Peanut Gallery turned back to normal) as one pose sheet for a family role-playing game.\n\nPicture 1 is the approved painting of the Peanut Gallery, a giant peanut shell with two squirrels, from \"The Adventures of Tom\". Paint the same two baby squirrels, small and cute, with the same fur and the same painted finish, but with no glow, no boo faces, no big eyes and no mouths open in a shout, and the shell is an ordinary peanut shell, as big as a trash can in the game, with no face. Picture 2 is the finished painting of Deedee and Boppy's house, for the handbrushed finish only.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, the ground line the same in every cell, each figure well inside its cell with clear magenta margin, nothing touching a cell edge, in profile or three-quarter view facing right unless a frame says otherwise. No grid lines, numbers, text, effects or shadows.\n\nRow 1:\n1. The ordinary peanut shell lying on its side on the ground, the two baby squirrels curled up asleep inside it, their little tails sticking out.\n2. The same shell, with the two baby squirrels waking up and peeking out of the opening, blinking, sleepy and confused.\n3. The two baby squirrels climbing out of the shell onto the ground, one behind the other.\nRow 2:\n4. The two baby squirrels standing side by side on the ground, looking up at something tall, tails curled.\n5. The two baby squirrels scampering away to the right, tails up, together.\n6. The empty peanut shell alone, lying on the ground, cracked open a little, nothing in it.\n\nDo not add frames, merge frames or repeat a pose. Paint it like the attached pictures: matte, visible brush strokes, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Family friendly."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/npcs/ch6-bernadette-bag-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794684454464
+    }
+   ],
    "rejects": [],
    "id": "ch6-bernadette-bag",
    "tab": "NPCs",
