@@ -396,74 +396,132 @@ chapter	file	line	character	mood	talk	text
 4	data/scenes.js	1088	TNB	none	tell	All three sets are clear, and Stage 7 just unlocked itself. That's where the fog came from, so that's where my rack is.
 4	data/scenes.js	1097	TNB	happy	answer	Well, well, well...
 4	data/scenes.js	1101	TNB	happy		Look who flew in for my big day. I'm on a forty-minute lunch. I spent thirty of it on the Metro.
-4	data/scenes.js	1102	Tom	loving	tell	You took the train to meet the plane.
-4	data/scenes.js	1103	TNB	loving		I took the train to meet the man. The plane was a bonus.
 4	data/scenes.js	1105	TNB	proud		Big shoot today. BACKLOT BEDLAM. Car chases, a saloon, a fake New York. I have forty costumes on one rack, and every single one is steamed.
 4	data/scenes.js	1105	TNB	none	tell	Also, Olivia dropped Nara at your place again. Family trip to the desert. She's been howling at your front door since nine.
 4	data/scenes.js	1107	Tom	loving	tell	Then we get Nara. Then I watch you be very important. I'm not joking.
 4	data/scenes.js	1108	TNB	proud		Very, very important. I have a lanyard.
-4	data/scenes.js	1116	Nara	happy		A howl from 2nd Ave. Nara has spotted Tom from the porch, two whole blocks away.
-4	data/scenes.js	1119	Nara	happy		She does three laps around Tom, slams into his shins, and leans on him with all forty pounds.
 4	data/scenes.js	1120	Tom	loving		Hi. Hi. Yes. I know. I was gone FOREVER. It was six days.
 4	data/scenes.js	1122	TNB	happy		She's coming to set. I already asked. Nobody said yes, but nobody said no fast enough.
 4	data/scenes.js	1129	TNB	unimpressed		Ray, it's me. Wardrobe. I left eighty minutes ago. You waved.
 4	data/scenes.js	1133	TNB	unimpressed		Gone? It's a rack. It has wheels. It doesn't have ambitions.
-4	data/scenes.js	1138	Tom	surprised	tell	Those sound like Friction Sprites. Grumpy little monsters, loose on a closed set.
 4	data/scenes.js	1139	TNB	sad		Babe. Forty costumes. I steamed every single one. By hand. While humming.
 4	data/scenes.js	1140	Tom	proud	point	Then we go get them back. Nara, stay close. This is a professional environment.
-4	data/scenes.js	1141	Nara	happy		Nara is already sniffing the craft services table.
-4	data/scenes.js	1150	Nara	happy		Nara takes it very gently. Then she inhales it. Then she sits again, in case there's more.
 4	data/scenes.js	1152	TNB	surprised	tell	She's never eaten anything that fast. Not even my shoe.
 4	data/scenes.js	1161	TNB	none	point	The Backlot. Main Street up on the left, the Western street on the right, New York down on the left. All fake. All very expensive.
-4	data/scenes.js	1163	Nara	surprised		Nara’s ears go straight up. Something shiny is skittering across New York.
 4	data/scenes.js	1164	Tom	scared		Nara. NARA. Don't...
 4	data/scenes.js	1166	TNB	scared		That's a closed set! She's not on the call sheet!
-4	data/scenes.js	1170	Nara	happy		Nara sniffs the fire hydrant. She gets VERY excited about the fire hydrant.
 4	data/scenes.js	1172	TNB	angry		She peed on the hydrant. That hydrant is fiberglass. That hydrant is a PROP.
 4	data/scenes.js	1173	Tom	loving	answer	She doesn't know that. Let her have this.
-4	data/scenes.js	1176	Nara	proud		She drops something at Tom’s feet. Very proud. Very slobbery.
 4	data/scenes.js	1178	TNB	surprised		That's a costume tag. That's MY tag. WARDROBE, RACK 2, HAND WASH ONLY. I underlined it twice.
 4	data/scenes.js	1178	TNB	surprised	tell	And it smells like grape fog juice. Only Stage 7 has a fog machine, so my rack must be in Stage 7.
 4	data/scenes.js	1180	Tom	loving		Good girl. Professional environment, very good girl.
-4	data/scenes.js	1183	TNB	none	tell	Stage 7 is locked from the inside, though. And every set out here has a Sprite on it wrecking the shoot. The crew can't work like this.
-4	data/scenes.js	1184	Tom	proud	point	Then we clear the Sprites off the sets, one at a time: Main Street, the Western street and New York. After that we deal with Stage 7.
 4	data/scenes.js	1192	TNB	surprised		Those are the neatest cue cards I've ever seen. Is that calligraphy?
 4	data/scenes.js	1197	TNB	happy	tell	Main Street is clear. The bank is safe. The pie is still foam.
-4	data/scenes.js	1204	Tom	unimpressed		It's very fast. And very loud.
-4	data/scenes.js	1205	TNB	unimpressed		That's every clapper I've ever met.
 4	data/scenes.js	1209	Tom	happy	tell	The Western street is clear. The horse can come out of its trailer now.
 4	data/scenes.js	1216	Tom	angry		That was UNCALLED for!
-4	data/scenes.js	1217	TNB	none	tell	Watch the screech, babe. It shuts you right up. No skills.
 4	data/scenes.js	1221	TNB	happy		New York is clear. It never looked better. It's plywood.
 4	data/scenes.js	1226	TNB	surprised	point	Somebody killed the work lights. And look, the catwalk is up. You only raise a catwalk when you're hiding something up there.
 4	data/scenes.js	1227	Tom	none	point	The stage set is at the top. The rack is up there. I can smell the steamer.
 4	data/scenes.js	1228	TNB	none	tell	The main light rig runs the catwalk motor. If I get power back to it, the catwalk comes down.
 4	data/scenes.js	1228	TNB	none	tell	Three junction boxes. They have to come up in the right order or the dimmer pops. The rig will tell us the order.
-4	data/scenes.js	1236	TNB	happy	tell	Blue, amber, red. And one strip of gaffer tape. Okay, two. Okay, four.
-4	data/scenes.js	1240	Tom	surprised	tell	You fixed a whole soundstage with tape.
 4	data/scenes.js	1241	TNB	proud		I fix everything with tape. You know this. Your kitchen drawer knows this.
 4	data/scenes.js	1251	TNB	happy		My rack. MY RACK. All forty. Still steamed. Oh, I could cry.
-4	data/scenes.js	1256	Tom	unimpressed		You took the rack.
 4	data/scenes.js	1258	TNB	surprised	tell	Babe. It's a megaphone in a beret. It has notes.
-4	data/scenes.js	1259	Nara	angry		Nara growls at the megaphone. Very small growl. Very serious.
 4	data/scenes.js	1260	Tom	proud	point	This is a closed set. And you're not on the call sheet.
 4	data/scenes.js	1264	TNB	loving	point	Back to one, everybody. Touch-ups.
 4	data/scenes.js	1264	TNB	none	tell	Babe, when it says CUT, put WARDROBE on whoever is next. When it braces, Popcorn Jump. Or just tell it GREAT TAKE. Three times.
 4	data/scenes.js	1276	TNB	happy	tell	Forty. I counted. I'm going to count again. Forty.
-4	data/scenes.js	1277	TNB	surprised	tell	And look. Somebody stuck a note on the steamer. "Paid in full." With a gold coin taped to it.
-4	data/scenes.js	1278	Tom	surprised	tell	Another gold coin, same as the one in the sundial. First he stops a sundial for a fish, and now he pays a megaphone to stop a movie.
-4	data/scenes.js	1278	Tom	surprised	tell	Somebody in a long coat really wants things to stand still.
-4	data/scenes.js	1279	TNB	happy		Spooky. I love it. I hate it. Help me push. This thing has four wheels and four opinions.
 4	data/scenes.js	1292	TNB	happy		I'm going to cry. I'm not going to cry. I'm a professional. I'm crying a little.
 4	data/scenes.js	1293	Tom	loving		You're a professional. A crying professional. I'm so proud of you.
 4	data/scenes.js	1297	TNB	happy		You know what this whole day was? A real steam-ulating experience.
 4	data/scenes.js	1298	Tom	unimpressed		...
-4	data/scenes.js	1298	Tom	unimpressed		I flew three thousand miles for that pun.
 4	data/scenes.js	1299	TNB	happy	ask	Worth it?
-4	data/scenes.js	1301	Tom	loving		Worth it. Every mile. But for the record? That was a CLOSED set!
-4	data/scenes.js	1302	Nara	happy		Nara leans on both of them. A tiny excited puddle. Nobody minds. Craft services minds a little.
 4	data/scenes.js	1307	TNB	unimpressed		You're the only uncle.
 4	data/scenes.js	1308	Tom	unimpressed		Which makes me the good one. By default. I'll take it.
+4	data/scenes.js	1412	Tom	happy		Then we have ten minutes! I'll take all ten. I have so much to tell you.
+4	data/scenes.js	1414	Tom	surprised		A fish on Long Island jumped out of the water and froze in the air, inside one of those orange blocks. It's still hanging up there!
+4	data/scenes.js	1415	TNB	happy		It's just hanging in the air? Babe! That's a flying fish!
+4	data/scenes.js	1415	TNB	none	tell	And he's got more air time than you do.
+4	data/scenes.js	1416	Tom	proud		Nobody has more air time than me. He's seven feet up. I was at thirty-six thousand.
+4	data/scenes.js	1417	Tom	none	tell	And my mother made a rule. Nobody in the family goes anywhere alone, and that goes for Los Angeles too.
+4	data/scenes.js	1418	TNB	none	ask	Nobody in the family. Does that count me?
+4	data/scenes.js	1419	Tom	loving		You were the first one I thought of.
+4	data/scenes.js	1420	TNB	happy	tell	Then it's a good thing I got you this.
+4	data/scenes.js	1422	Tom	surprised		A lanyard! With my name on it! It's LAMINATED!
+4	data/scenes.js	1423	TNB	loving	tell	Of course it's laminated. I wanted this to last.
+4	data/scenes.js	1424	Tom	scared		Do I have to give it back?
+4	data/scenes.js	1425	TNB	loving		Never. Where I go, you go. That's Deedee's rule. So stick close, babe, and don't leave me hanging like that fish.
+4	data/scenes.js	1429	TNB	loving	tell	Very, very important. I have a lanyard. And now so do you.
+4	data/scenes.js	1442	Tom	none	ask	She has to come. Nobody goes anywhere alone. Does she get a lanyard?
+4	data/scenes.js	1443	TNB	none	tell	I only had one spare badge.
+4	data/scenes.js	1445	Tom	happy		It says STUNT DOUBLE. Whose stunt double is she?
+4	data/scenes.js	1446	TNB	unimpressed		The horse's.
+4	data/scenes.js	1448	Tom	happy		Nara! You're in the movies!
+4	data/scenes.js	1456	Tom	proud	tell	Hello, Ray. I'm Tom. I'm a visitor. It says so right here.
+4	data/scenes.js	1458	Tom	sad		He didn't even look at it.
+4	data/scenes.js	1459	TNB	none	tell	He never looks. But you held it up beautifully.
+4	data/scenes.js	1464	Tom	scared		A flash! What kind of flash?
+4	data/scenes.js	1469	Tom	none	tell	I've seen grumpy things like that! On my street, and at my parents' pond. They always show up right after a flash.
+4	data/scenes.js	1471	Tom	surprised		I'm hired! I've been a visitor for one hour!
+4	data/scenes.js	1499	Tom	none	tell	She's the stunt double! She has a badge!
+4	data/scenes.js	1512	Tom	none	ask	You can tell it's grape from one sniff?
+4	data/scenes.js	1513	TNB	none	tell	Babe. I'd know grape anywhere. It's my favorite color and my favorite flavor.
+4	data/scenes.js	1517	TNB	scared		Stage 7 is locked from the inside, though. And every set out here has one of those grumpy things on it, wrecking the shoot. The crew can't work like this.
+4	data/scenes.js	1518	Tom	none	point	Then we get them off the sets, one at a time: Main Street, the Western street and New York. After that we deal with Stage 7.
+4	data/scenes.js	1526	Tom	surprised		That crab is made of cue cards! And it's holding one up for us to read!
+4	data/scenes.js	1530	Tom	none	ask	Excuse me, Mr. Crab. Do you have a card that says PLEASE COME IN?
+4	data/scenes.js	1532	TNB	unimpressed		Babe, I think we're on the wrong side of the cards.
+4	data/scenes.js	1543	Tom	none	ask	He goes first? All right. Rules are rules. Where's my mark? I'd like to stand on my mark.
+4	data/scenes.js	1544	TNB	none	tell	Babe, you're not in the movie.
+4	data/scenes.js	1545	Tom	none	answer	I have a lanyard!
+4	data/scenes.js	1550	TNB	none	point	Stand down, Nara. The horse is doing his own stunts today.
+4	data/scenes.js	1558	TNB	loving		I like the click. That's how I know you're home.
+4	data/scenes.js	1559	TNB	none	tell	Cover your ears, babe. When a boom mic screeches, nobody can get a word out.
+4	data/scenes.js	1570	Tom	scared		It's very dark in here. Could you hold my lanyard?
+4	data/scenes.js	1571	TNB	loving		I've got your lanyard, babe.
+4	data/scenes.js	1580	TNB	none	tell	Blue, orange, red. And one strip of gaffer tape. Okay, two. Okay, four.
+4	data/scenes.js	1583	Tom	none	ask	You fixed a whole soundstage with tape! Can you fix my knees?
+4	data/scenes.js	1594	TNB	none	point	Hold on. One of the lights must still be out. That whole patch of floor is grey.
+4	data/scenes.js	1595	Tom	none	tell	It's not the lights. Look up. Every one of them is on.
+4	data/scenes.js	1596	TNB	scared		Then why is my table grey? And the floor? And my tape marks?
+4	data/scenes.js	1597	TNB	scared		Babe. That's the hero hat. The cowboy wears it in every scene of the movie. And it's inside a big orange block!
+4	data/scenes.js	1598	Tom	scared		It's just like the dragonfly, the lemon and the fish. And every one is bigger than the last.
+4	data/scenes.js	1599	TNB	scared		Well, hats off to whoever did this. No, really. I can't get the hat off.
+4	data/scenes.js	1600	Tom	none	tell	There's going to be a little round hole in the side.
+4	data/scenes.js	1602	Tom	none	answer	There it is.
+4	data/scenes.js	1603	Tom	none	tell	And there's going to be a burnt flashbulb on the floor, somewhere close.
+4	data/scenes.js	1606	TNB	surprised		You knew exactly where to look. Babe, how are you this good at it?
+4	data/scenes.js	1607	Tom	none	tell	I've had three practices. And I've lost a pulling contest to a plum, a grapefruit and a watermelon. I'm not pulling on a beach ball.
+4	data/scenes.js	1608	TNB	none	tell	Then I'll just move the table.
+4	data/scenes.js	1610	TNB	surprised		I moved the table. The hat didn't come with it.
+4	data/scenes.js	1611	Tom	happy		That's what the fish does!
+4	data/scenes.js	1612	TNB	scared		I don't like it. Put the table back. I want the table back under it right now.
+4	data/scenes.js	1614	TNB	happy		Thank you. That's better. That's a hat on a table. That's normal.
+4	data/scenes.js	1615	Tom	none	tell	Hat: grey floor, orange block, round hole, burnt bulb. I'm sending it to Amy for Grace. She keeps the list in her notebook.
+4	data/scenes.js	1616	TNB	surprised	ask	Who brings a flashbulb onto a movie set? We have four hundred lights in here and not one of them is that.
+4	data/scenes.js	1619	TNB	none	tell	That came from the stage set. And that's where the wheel tracks go.
+4	data/scenes.js	1632	Tom	surprised		That megaphone is as big as a refrigerator! And it's sitting on your costumes!
+4	data/scenes.js	1637	Tom	proud	tell	Excuse me, sir. Those are his costumes. He steamed all forty by hand. While humming.
+4	data/scenes.js	1639	TNB	none	point	And look at the beret. That's a gold coin.
+4	data/scenes.js	1643	Tom	none	answer	We are. We have lanyards.
+4	data/scenes.js	1662	TNB	surprised		I've never won anything! I'd like to thank my steamer. I'd like to thank my tape.
+4	data/scenes.js	1663	TNB	loving		And I'd like to thank my babe, who flew two thousand four hundred and seventy-five miles to watch me work.
+4	data/scenes.js	1664	Tom	happy		He said the right number!
+4	data/scenes.js	1666	Tom	none	tell	It has a cowboy hat on it. Rose has a dragonfly, I have a lemon, and my father has a fish.
+4	data/scenes.js	1667	TNB	happy		And now I have a hat. Babe, I love my award. I don't love that there are four of them.
+4	data/scenes.js	1669	TNB	proud	tell	It's not a frisbee, Nara. It's an award.
+4	data/scenes.js	1674	TNB	unimpressed		Help me push. This thing has four wheels and four opinions.
+4	data/scenes.js	1680	TNB	unimpressed	tell	The hero hat is still stuck in there. Good thing wardrobe always has a double.
+4	data/scenes.js	1682	Tom	none	tell	A backup hat! You're the most prepared man I know. And I set two alarms for everything.
+4	data/scenes.js	1683	TNB	unimpressed		I always keep one under my hat.
+4	data/scenes.js	1660	TNB	happy		Finders keepers. I'm calling it best costumes.
+4	data/scenes.js	1698	TNB	proud	tell	Two awards in one day, babe. I'm on a hot steam streak.
+4	data/scenes.js	1703	Tom	surprised		A second lanyard! I have TWO lanyards!
+4	data/scenes.js	1705	Tom	happy		Steam-ulating! I flew two thousand four hundred and seventy-five miles for that pun.
+4	data/scenes.js	1708	Tom	loving		Worth it. Every mile. I'd have flown them for zero puns.
+4	data/scenes.js	1713	Tom	happy		It's Amy. "Grace put the hat on page three. Also, parent-teacher conference night is Thursday. Thirty parents. I need backup. Bring snacks. And bring the good uncle."
+4	data/scenes.js	1716	TNB	loving		Go. But nobody goes anywhere alone, so take my picture for the plane.
+4	data/scenes.js	1718	Tom	loving		That's the one I'm looking at for six hours.
 5	data/scenes.js	1445	Amy	proud		Up! Everybody up! Walk it off. Hydrate. We go again.
 5	data/scenes.js	1454	Amy	happy		TOM. Oh, thank goodness.
 5	data/scenes.js	1456	Amy	loving	tell	Two coffees. Both mine. Here, have one. That's how much I need you tonight.
@@ -2386,3 +2444,4 @@ Nine Scoops	data/bonus-nine-scoops.js	1047	Rose	happy	answer	Count the duck too.
 	pool:welcome:6:Rose		Rose	none	tell	She made me do a spreadsheet.
 	pool:welcome:6:Tom		Tom	none	answer	A spreadsheet. Of course.
 	pool:welcome:6:Grace		Grace	none	tell	It was a very good spreadsheet.
+	dep:4:flight		Tom	none	tell	Rose, please don't lose that tooth until I'm back. I want to see the hole.
