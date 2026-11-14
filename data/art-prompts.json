@@ -22571,9 +22571,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else.\n\nThe first attached picture is the painted game character; the second attached picture is her frozen in amber. Keep the second picture EXACTLY as it is: the same figure, face, pose, size, position and canvas, the same block of amber at the same place. Change only what is described below.\n\nChange: the amber is breaking apart and falling away in warm gold flakes and small shards that drift down around her, caught in mid-air, with a bright golden glow. Her face, arms and upper body are already free of the amber; the last of it still clings around her feet. She is still pointing and still mid-sentence, and now her face is lit up and alive, as if she is about to finish her sentence.\n\nSame hand-painted style, warm golden light from the upper left, smooth soft shading, no thick outlines, not pixel art, not 16-bit. No text, no frame, no floor, no cast shadow on the background. Background: one flat solid #FF00FF magenta, with nothing else in the picture, with the same margin of magenta around the block."
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-14",
+     "note": "The years don't make sense. Don't put them there, put ages instead of years",
+     "from": "v1",
+     "at": 1794620740562
+    }
+   ],
    "id": "ch1-doorframe",
    "tab": "Props",
    "title": "Chapter 1 close-up: the kitchen door frame with pencil height marks (one square painting)",
