@@ -25451,8 +25451,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE SHEET OF FOUR OBJECTS. Return exactly one square image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) A finished painting of an ordinary thick book from the same game, for the painted finish only.\n2) The Cliffhanger, a fat green novel that walks. 3) The Know-It-All, an encyclopedia volume that walks. 4) The Pop-Up Panic, a pop-up picture book that walks. Paint the same three books, with the same covers and colors, as completely ordinary books: no eyes, no faces, no legs, no arms, no teeth.\n\nPAINT THIS SHEET\nOne image, a grid of 2 columns by 2 rows of equal cells on a flat solid magenta #FF00FF background, one object alone in each cell, each filling most of its cell with clear magenta margin, nothing touching a cell edge.\n1. Top left: the fat green novel from picture 2, lying flat, closed, seen from a three-quarter angle, with a bookmark ribbon hanging out.\n2. Top right: the thick encyclopedia volume from picture 3, standing upright with its spine toward the viewer at a three-quarter angle, with a plain gold label on the spine and no readable words.\n3. Bottom left: the pop-up picture book from picture 4, lying flat and closed, with its colorful cover up.\n4. Bottom right: the same pop-up picture book lying open flat, and from its pages a paper dragon in red and orange rises up, standing straight out of the page, with wide paper wings and a paper tail.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces. No words or letters anywhere. No grid lines, numbers or shadows."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/ch7-unread-ordinary-v1.png",
+     "date": "2026-11-14",
+     "from": "v1",
+     "at": 1794696143243
+    }
+   ],
    "rejects": [],
    "id": "ch7-unread-ordinary",
    "tab": "Props",
