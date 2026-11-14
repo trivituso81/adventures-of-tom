@@ -17,6 +17,10 @@ Tom's Voice Library export of 2026-11-14 14:10 held 7 clips, all live chapter 2 
 - Voice Library: tools/voice-library/scripts/ch07-story-directions.json, 232 lines (208 new, 24 reworded) with a direction each, plus matching rows in harvest.json (src `scene:ch7...`, `dep:7:...`, `arr:7:tom`). Page uses her current voice (pagew). data/dialog-cast.js: two speaker labels added so the lines have a voice: "A dry old voice" (the Unread's voice, log) and "A picture book" (a tiny voice, the Mudling voice, because no new voices can be made). Index rebuilt. No baked clip edited; the 24 reworded lines stay silent until re-recorded. "That was UNCALLED for!" already has a clip and was left out.
 - No engine or scene code changed. Tested: validate.js OK, unused_voice.py unchanged (check 4 stays at its 52 from earlier work, same list with and without this change).
 
+## ch6s2e (2026-11-14): The freed picnic basket is smaller; the block's basket prompt asks for a smaller basket too
+
+Tom: "the basket needs to be smaller even when it's freed from the amber ... you just need to resize it. But what we do need to redraw is the picnic basket inside of the amber block because right now it's too big." Freed basket, diving squirrel and sandwich squirrel resized in `engine/block-break.js`. Library entry `ch6-orange-block` prompt now asks for a small lunch-for-two basket about a third of the block's width (needs a new Generate and Approve; the old picture stays in use until then).
+
 ## ch6s2d (2026-11-14): The approved picnic basket replaces the stand-in on the Old Oak Park table
 
 Tom approved Library entry `ch6-basket` (an open wicker basket with sandwiches and a red checked napkin, no squirrel). Baked to `art/props/oakpark/ch6_basket.webp`; the code-drawn stand-in and its try/except in the baker are removed.

@@ -29,7 +29,7 @@ const BB_SPOTS={
     grey:{cx:330,cy:1010,r:330},
     block:{id:'oakpark/ch6_block',x:292,y:932,w:190,hole:[.51,.9],roll:[[120,1074],[292,1058]]},
     coin:{r:11},
-    keep:{basket:{x:292,y:1052,w:84},dive:[302,920],diveW:58,sitW:46,sit:[356,1054]},   // what is left on the table: the basket, and the squirrel that was frozen in it (art px)
+    keep:{basket:{x:292,y:1052,w:50},dive:[300,930],diveW:42,sitW:34,sit:[340,1054]},   // what is left on the table: the basket, and the squirrel that was frozen in it (art px)
     ordinary:{acornagent:['oakpark/ord_squirrel',52],cheekstuffer:['oakpark/ord_cheeks',56],peanutgallery:['oakpark/ord_peanut',74],twigspy:['oakpark/ord_twig',74],chairman:['oakpark/ord_squirrel',60]}}
 };
 const BB_T={roll:2.4,close0:2.55,close1:4.45,still1:5.45,crack1:7.1,fall1:8.7,ringStart:8.7,shrink:.9,settle:.7,ringSpeed:330};
