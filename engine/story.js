@@ -15,6 +15,7 @@
 const STORY={mode:'demo',chapter:0,flags:{},traces:0,traceLog:{},override:null};
 function resetStory(mode='demo',chapter=0) {
   STORY.mode=mode; STORY.chapter=chapter; STORY.flags={}; STORY.traces=0; STORY.traceLog={}; STORY.override=null;
+  if(typeof scenePropsClear==='function') scenePropsClear();   // engine/scene-props.js
 }
 const flag=k=>STORY.flags[k];
 function setFlag(k,v=true) { if(v===false||v==null) delete STORY.flags[k]; else STORY.flags[k]=v; }
@@ -1349,7 +1350,7 @@ talkToDriver=function(n) {
   // Chapter 6 is over: Sol says so before the usual airport offer (the flight starts chapter 7).
   if(STORY.mode==='full'&&STORY.chapter===6&&flag('ch6-done')&&!flag('ch7-sol')) {
     setFlag('ch7-sol'); n.visitedOnce=true;
-    openDialog(n.name,['The 110 is open again. The squirrels let it go. I don\'t ask questions.','Your niece called the depot. Long distance. Something about a library. She sounded very serious about the library.'],n);
+    openDialog(n.name,['The 110 is open again. I heard a dog fixed it. I don\'t ask questions.','Your niece called the depot. Long distance. Something about a library. She sounded very serious about the library.'],n);
     n.onClose=()=>LE_talkToDriver_story(n); return;
   }
   // Chapter 7 is over: Sal says so before the usual airport offer (the flight starts chapter 8).

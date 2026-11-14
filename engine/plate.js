@@ -495,6 +495,7 @@ function plateLive(map,time) {
   if(map&&map.id==='sundial') drawSundialSpot(map);
   if(map&&map.id==='stage7') drawStage7Spot(map);
   if(map&&map.id==='schoolyard') drawSchoolSpot(map);
+  if(map&&typeof scenePropsDraw==='function') scenePropsDraw(map,time);   // engine/scene-props.js: the chart, the gold ball, the bulbs a scene put here
   if(map&&typeof bbDraw==='function') bbDraw(map);   // block-break (engine/block-break.js): the picnic block, grey circle, the break and the colour ring
   // Tom's kitchen island: Bready Mercury, except while the squirrels have him (chapter 6, until the Oak boss is beaten).
   if(map&&map.id==='tomhouse') { plateTime=time; drawHomeJar(time); }

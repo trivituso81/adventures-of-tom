@@ -100,11 +100,39 @@ const DEPARTURES={
      tom:['Nobody is in charge of anybody. Your mom is in charge of everybody.','That\'s how it\'s always worked. Trust me. I was there.'],
      stay:{amy:{stay:['I survived conference night. I can survive you leaving.','Text me when you land. I\'m timing the flight. Don\'t lose.'],toast:'Amy runs home. She\'s timing that too.'}},
      flight:['Delta One. Nobody is grading me up here.','The flight attendant asked what I wanted. I said a nap. She laughed. I was SERIOUS.']},
-  7:{sol:'LAX. I\'m taking the long way. There are squirrels on the short way.',
-     tnb:['Bready Mercury is safe, the squirrels signed a treaty, and I owe the landlord a fence.','Go. I\'ll feed the starter. Twice a day, room temperature, no squirrels. I wrote it down.'],
-     tnbToast:'TNB stays in LA. Bready Mercury is in good hands.',
-     stay:{nara:{stay:['Nara spots a squirrel across the street. She looks at the squirrel. She looks at Tom.','She picks Tom. She leans on his legs for one long minute.','Then she picks the squirrel. Fair enough.'],toast:'Nara heads back to 2nd Ave. The squirrel situation is ongoing.',narrate:true}},
-     flight:['Somewhere down there, a squirrel is plotting.','Not my problem. For six whole hours.']},
+  7:{sol:'LAX. The short way is open. A squirrel ran across the 110 this morning and didn\'t charge me a toll. First time all week.',
+     // Chapter 7 (story-ch07.md scene 0): TNB, the kiss, then Nara and the gold ball, then TNB's last line, all before either of them heads home.
+     script:()=>{
+       const nf=()=>followers.find(x=>x.member===nara),tf=()=>followers.find(x=>x.member===tnb);
+       const dirRoom=()=>{ const n=nf(),m=currentMap; if(!n) return {dx:1,tiles:[]}; const p=position(n),r=[]; let best=null;
+         for(const dx of [1,-1]) { const t=[]; for(let k=1;k<=9;k++) { const x=Math.round(p.x)+dx*k,y=Math.round(p.y); if(!walkable(m,x,y)||m.portals.has(key(x,y))) break; t.push([x,y]); } if(!best||t.length>best.tiles.length) best={dx,tiles:t}; }
+         return best; };
+       let run=null;
+       return [
+         S.talk('TNB',['Bready Mercury is in his crock, the crown fits, and the heel goes on your back fence on Saturday. A deal is a deal.']),
+         S.talk('Tom',['You\'re keeping my deal with a squirrel!']),
+         S.talk('TNB',['He was a Chairman, babe. You don\'t stiff a Chairman.','And call me if it gets spooky. A library that whispers is how at least four horror movies start.']),
+         S.talk('Tom',['Only four?']),
+         S.talk('TNB',['Four good ones.','Go. See this one with your own eyes. I\'ll feed him fifty and fifty, and I\'ll sing.']),
+         S.call(()=>{ const t=tf(); if(t) { kiss={npc:t,start:elapsedTime}; sfx.kiss(); } }),
+         S.wait(1.1),
+         // Nara walks up with the gold ball and drops it on Tom's shoe.
+         S.call(()=>{ const n=nf(); if(!n) return; const p=position(player); n.facing=directionTo(p.x-position(n).x,p.y-position(n).y); sfx.whine&&sfx.whine();
+           scenePropSet('ball','ball',{map:currentMap.id,show:true,x:p.x+.1,y:p.y,z:0}); }),
+         S.wait(.7),
+         S.talk('Tom',['One throw. Then I have a plane to catch.']),
+         S.call(()=>{ run=dirRoom(); const p=position(player); player.facing=run.dx>0?'right':'left'; scenePropSet('ball',null,{x:p.x+.1,y:p.y,z:0}); }),
+         {start(){ const to=run.tiles.length?run.tiles[run.tiles.length-1][0]:SCENE_PROPS.ball.x; this.s=compileScene([{propTo:'ball',field:'x',to:to,time:.9,zField:'z',arc:1.4,linear:true}])[0]; this.s.start(); },
+           update(dt){ return this.s.update(dt); }},
+         {start(){ const n=nf(); this.s=n&&run.tiles.length?S.walk(n,run.tiles,.11):S.wait(.1); this.s.start(); },
+           update(dt){ return this.s.update(dt); }},
+         S.call(()=>{ const n=nf(); if(n) n.hidden=true; SCENE_PROPS.ball&&(SCENE_PROPS.ball.show=false); sfx.bark&&sfx.bark(); }),
+         S.wait(.6),
+         S.talk('TNB',['She\'ll be on your porch when you get home. She always is.']),
+         S.call(()=>{ recruitLeave(tnb,true); recruitLeave(nara,true); scenePropsClear(); showToast('TNB stays in LA. Nara is off down 2nd Ave with the gold ball.',3.2); }),
+         S.wait(.8)];
+     },
+     flight:['He made a crown for a jar of flour and water. I\'m keeping him.','Six hours. Then I find out what a library says when it thinks nobody is listening.']},
   8:{driver:['Los Angeles again? I\'m starting to think you live there.','The girls stay home. School tomorrow. Library books are due.'],
      grace:['Tata, I checked out a book about Los Angeles. Now I\'ll know where you are. Every minute.'],
      rose:['I checked out a book about a pig. It\'s not about Los Angeles. It\'s better.'],
@@ -285,11 +313,8 @@ const ARRIVALS={
            ['Rose',["The tooth fairy gave me two dollars. Boppy says HIS teeth cost way more."]],
            ['Tom',["Deedee paid for Boppy's. You're the only one in this family who ever MADE money on a tooth."]]]},
   6:{tom:["Downtown LA. Five hours and fifty-one minutes. Amy will want the number.","...Is that a squirrel on the cab? That's a squirrel on the cab."]},
-  7:{tom:["Long Island. Quiet. Library quiet. That's a different kind."],
-     talk:[['Grace',["Tata! THREE times! The library's still whispering. I SAID so. In a text."]],
-           ['Rose',["It said my name. It said ROSE. Then it said shhh."]],
-           ['Tom',["Then we go find out what it wants. After a sandwich."]],
-           ['Grace',["I'm bringing a flashlight. And a pencil. For notes."]]]},
+  // Chapter 7 (story-ch07.md scene 0): Tom pats the plane door and thanks it. The girls' welcome is the Square scene (SCENES.ch7Arrive), so none plays here.
+  7:{tom:["Thank you. Lovely flying."],pat:true,noWelcome:true},
   8:{tom:["Downtown LA. It smells like somebody's grill. Everybody's grill.","TNB says bring an empty stomach and forty bread pans. I've got the stomach."]},
   9:{tom:["Long Island. No moon tonight. Somebody's going to make that my problem."],
      talk:[['Grace',["Tata! FOUR! I have a chart now. You're on it."]],
@@ -341,8 +366,11 @@ function startTrip(n,dir) {
     steps.push(S.talk('Sol',d.sol?[d.sol]:travelPick('sol',TRAVEL_POOLS.sol)));
   }
   const dest=dir==='west'?'la':'le';
+  const leaves=f=>{ const h=memberHome(f.id); return !(h==='any'||h===dest); };
+  const customScript=!!(d.script&&extras().includes(tnb)&&extras().includes(nara)&&leaves(tnb)&&leaves(nara));
   for(const f of extras()) {
     const home=memberHome(f.id); if(home==='any'||home===dest) continue;   // party rules (engine/story.js) say who lives where
+    if(customScript&&(f===tnb||f===nara)) continue;   // the chapter's own script (d.script) says goodbye to both
     if(f===tnb) { const tp=d.tnb?{}:travelPick('tnb',TRAVEL_POOLS.tnb); steps.push(
       S.talk('TNB',d.tnb||tp.lines),
       S.call(()=>{ const tf=followers.find(x=>x.member===tnb); if(tf) { kiss={npc:tf,start:elapsedTime}; sfx.kiss(); } recruitLeave(tnb,true); showToast(d.tnbToast||tp.toast,3.2); }),
@@ -353,6 +381,7 @@ function startTrip(n,dir) {
       S.call(()=>{ recruitLeave(f,true); sfx.doorOut(); showToast(tt.toast,3); }),
       S.wait(.6)); }
   }
+  if(customScript) steps.push(...d.script());
   if(typeof storyTripSteps==='function') steps.push(...storyTripSteps(dir));   // engine/story.js: a new chapter can start here
   steps.push(...flightSteps(dir,d.flight,arr));
   runScene(steps);
@@ -442,8 +471,9 @@ function arriveHome(arr,card=[]) {
     ...card,
     ...compileScene([{zoom:2,time:.9}]),   // camera pushes in right before the stretch (Tom 11-06: every taxi exit, like the opening)
     stretchStep(),
+    ...(arr&&arr.pat?[S.call(()=>{ player.facing='up'; }),S.wait(.35),S.call(()=>sfx.thud&&sfx.thud()),S.wait(.3),S.call(()=>sfx.thud&&sfx.thud()),S.wait(.5)]:[]),   // he pats the door frame of the plane
     S.talk('Tom',(arr&&arr.tom)||travelPick('arrHome',TRAVEL_POOLS.arrHome)),
-    S.call(()=>{ intro.bubble={text:'TATA!!!',t:0}; say('grace','introshout'); say('rose','introshout',.5); snd.gasp(); }),
+    ...(arr&&arr.noWelcome?[]:[S.call(()=>{ intro.bubble={text:'TATA!!!',t:0}; say('grace','introshout'); say('rose','introshout',.5); snd.gasp(); }),
     hugHearStep(),
     S.call(()=>{ player.facing='left';
       g.x=gStart; g.y=row; g.facing='right'; g.hidden=false;
@@ -455,7 +485,7 @@ function arriveHome(arr,card=[]) {
       update(dt){ return this.s.update(dt); }},
     S.call(()=>{ intro.bubble=null; g.facing='right'; r.facing='up'; }),
     hugStep(),
-    ...(arr&&arr.talk?arr.talk:travelPick('welcome',TRAVEL_POOLS.welcome)).map(([who,pages])=>S.talk(who,pages)),
+    ...(arr&&arr.talk?arr.talk:travelPick('welcome',TRAVEL_POOLS.welcome)).map(([who,pages])=>S.talk(who,pages))]),
     // Zoom back out, unless this chapter's own arrival scene (ch3, ch7, ch9: SCENES.chNArrive) is about to play: it keeps the zoom through its lines and zooms out itself.
     {start(){ const n=STORY.chapter,sc=SCENES['ch'+n+'Arrive']; keepZoom=Array.isArray(sc)&&sc.some(x=>x.zoom>1)&&!STORY.flags['ch'+n+'-goal'];
         this.z=keepZoom?null:compileScene([{zoom:1,time:.8}])[0]; if(this.z) this.z.start(); },
@@ -467,6 +497,7 @@ function arriveHome(arr,card=[]) {
       const f=followers.find(m=>m!==g&&m!==r); if(f) { f.x=r.x; f.y=r.y; f.move=null; }
       player.facing='down';
       trail.length=0; trail.push({x:r.x,y:r.y},{x:g.x,y:g.y},{x:player.x,y:player.y});
+      if(arr&&arr.noWelcome) { g.hidden=true; r.hidden=true; }   // the Square scene (SCENES.ch7Arrive) brings the girls running in
       sfx.levelChime();
       showToast('Grace and Rose rejoin the party!',3);
       saveGame('auto',true);
