@@ -550,20 +550,6 @@
 {
 "voice": "tom",
 "speaker": "",
-"text": "Speaking of strange. A fella was down at the pond yesterday. Long coat, in this heat. He asked how long the Big One has been alone down there.",
-"ctx": "v4 override",
-"script": "[wry, grumbling] Speaking of strange. A fella was down at the pond yesterday. Long coat, in this heat. He asked how long the Big One has been alone down there."
-},
-{
-"voice": "tom",
-"speaker": "",
-"text": "I said twenty years. He wrote it down.",
-"ctx": "v4 override",
-"script": "[low, suspicious] I said twenty years. [flat, uneasy] He wrote it down."
-},
-{
-"voice": "tom",
-"speaker": "",
 "text": "All yours. I like that. We'll go look at the purple sky together, but first I need one quick stop at my house.",
 "ctx": "v4 override",
 "script": "[soft, pleased] All yours. I like that. We'll go look at the purple sky together, but first I need one quick stop at my house."

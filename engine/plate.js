@@ -354,9 +354,21 @@ function drawHollowCrumbs(time) {
     PROPART.draw(id,x*s,y*s,{w:w*s});
   }
 }
+// Boppy's fishing spot, chapter 1 scene 7: a hand-sized grey patch of grass, a plum-sized orange block with a dragonfly in it sitting on the patch, and a
+// burnt flashbulb beside them (Deedee pockets it in ch1Spot, flag ch1-bulb). The patch and block stay until the family comes back after chapter 6.
+// Centres in plate art px (64 per tile), width in art px. Built from art/props/hollow/ch1_*.webp (tools/art-library/bake_closeup_ch1.py).
+const HOLLOW_SPOT=[['hollow/ch1_patch',1100,700,100,null],['hollow/ch1_block',1100,682,52,null],['hollow/ch1_bulb',1166,696,20,'ch1-bulb']];
+function drawHollowSpot() {
+  if(typeof flag!=='function') return;
+  const s=T/64;
+  for(const [id,x,y,w,gone] of HOLLOW_SPOT) {
+    if((gone&&flag(gone))||!PROPART.ready(id)) continue;
+    PROPART.draw(id,x*s,y*s,{w:w*s});
+  }
+}
 function plateLive(map,time) {
   if(map&&PLATE_SIGNS[map.id]) drawPlateSigns(PLATE_SIGNS[map.id]);
-  if(map&&map.id==='hollow') drawHollowCrumbs(time);
+  if(map&&map.id==='hollow') { drawHollowCrumbs(time); drawHollowSpot(); }
   // Tom's kitchen island: Bready Mercury, except while the squirrels have him (chapter 6, until the Oak boss is beaten).
   if(map&&map.id==='tomhouse') { plateTime=time; drawHomeJar(time); }
   // The Crown of the Oak: Bready Mercury on the chest at the heart of the hoard (art px: centre x 672, base y 258; the jar stands about 62 px tall).

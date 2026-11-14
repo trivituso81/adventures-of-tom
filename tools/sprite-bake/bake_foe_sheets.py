@@ -125,12 +125,17 @@ SHADOW_BAND = {'directorscut', 'irongill'}
 CAST_ALL = {'irongill'}
 
 
+CHAPTER_SHEETS = {'ch1-bigone-lure-coin': 'bigone'}   # chapter 1: The Big One with the lure and the gold coin in its lip
+
 def newest_files():
     d = json.load(open(os.path.join(ROOT, 'data/art-prompts.json')))
     out = {}
     for e in d['entries']:
         if e['id'].startswith('enemy-') and e.get('status') == 'approved' and e.get('versions'):
             if e['id'][6:] in MARK: out[e['id'][6:]] = e['versions'][-1]['file']   # entries like enemy-julian-hero are reference pictures, not enemies
+    # Chapter entries that replace an enemy's sheet (same 3 x 2 layout): the newest approved version wins over the enemy-<id> entry.
+    for e in d['entries']:
+        if e.get('status') == 'approved' and e.get('versions') and e['id'] in CHAPTER_SHEETS: out[CHAPTER_SHEETS[e['id']]] = e['versions'][-1]['file']
     return out
 
 

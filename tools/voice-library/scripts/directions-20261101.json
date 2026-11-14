@@ -387,13 +387,6 @@
 "script": "[dry, protective] Nobody touches Deedee’s crisp. [steady, calm] Everybody ready?"
 },
 {
-"voice": "deedee",
-"speaker": "Deedee",
-"text": "Tom, you stand in front of whoever it stares at. Rosie, make it laugh. Then we try again.",
-"ctx": "",
-"script": "[brisk, commanding] Tom, you stand in front of whoever it stares at. [bright, encouraging] Rosie, make it laugh. [firm, warm] Then we try again."
-},
-{
 "voice": "bigone",
 "speaker": "The Big One",
 "text": "Glub. Nobody ever made me laugh before. You can have your tin back.",

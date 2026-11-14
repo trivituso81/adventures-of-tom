@@ -97,6 +97,10 @@ SCENES.ch1Theft=[
   {hearts:'Deedee'},
   {talk:'Deedee',lines:["My favorite son!",'And my girls! Come here, come here.'],voice:[['deedee','greet',0,"My favorite son!"]]},
   {trace:'deedee-hug'},
+  {ch1Reveal:'doorframe'},
+  {talk:'Grace',lines:['Tata, look at the door. Deedee measured me two times since you left.']},
+  {talk:'Rose',lines:['I got one too. Mine\'s the low one.']},
+  {wait:1.2},
   {talk:'Deedee',lines:['Tom, you must be starving! Sit. The crisp needs ten minutes on the counter.']},
   {talk:'Deedee',lines:['Where are my reading glasses? I had them one second ago. I need to read the timer.']},
   {talk:'Grace',lines:['Deedee. They\'re on your head.']},
@@ -145,6 +149,10 @@ SCENES.ch1Theft=[
   {pose:'Big Mudling',f:'mh_grab',dir:'left'}, {sfx:'pickup'}, {wait:.5},
   {pose:'Big Mudling',f:'mh_hug',dir:'left'},
   {talk:'Rose',lines:['Deedee! A mud blob just climbed in the window, and it\'s running off with your crisp!']},
+  {talk:'Deedee',lines:['A WHAT climbed in my window?']},
+  {talk:'Rose',lines:['It has EYES! The mud has EYES!']},
+  {talk:'Deedee',lines:['Forty years in this kitchen. I\'ve had ants. I\'ve had a raccoon. I have never had THAT.']},
+  {talk:'Grace',lines:['It\'s so brown. It\'s the brownest thing I\'ve ever seen.']},
   {pose:'Big Mudling',f:'mh_glance',dir:'left'}, {wait:.5},
   // The blob scurries back down the middle (mirrored, it travels right), giggles once it is past the corridor mouth, and sneaks out the door;
   // then the three scramble up (kneel, then stand) and Deedee hops back to her counter.
@@ -163,8 +171,12 @@ SCENES.ch1Theft=[
   {place:'Deedee',at:[7,9],dir:'down'},
   {cam:null},
   {talk:'Tom',lines:['That was UNCALLED for!'],voice:[['tom','hurt',0,'That was UNCALLED for!']]},
+  {talk:'Grace',lines:['It\'s running for the pond!']},
   {talk:'Deedee',lines:['It took the crisp AND my good tin! Grab your shoes, everybody. We\'re going after it, and I\'m coming with you.']},
-  {talk:'Boppy',lines:['It\'s headed for Grump Hollow. I\'ve been saying for twenty years that something lives in that pond, and nobody listens to Boppy.','I\'d come with you, but my stomach is acting up. If you see the Big One in that pond, bring him back for me.']},
+  {talk:'Boppy',lines:['It\'s headed for Grump Hollow. I\'ve been saying for twenty years that something lives in that pond, and nobody listens to Boppy.']},
+  {talk:'Boppy',lines:['Twenty years ago I\'d have caught that thing before it got to the fence.']},
+  {talk:'Boppy',lines:['I\'d come with you, but my stomach is acting up. If you see the Big One in that pond, bring him back for me.']},
+  {talk:'Boppy',lines:['Tom. You stay in front of those girls.']},
   {join:'deedee'},
   {wait:2.8},
   {toast:'New Tombo: Wine and Gossip (Tom + Deedee).',time:3},
@@ -187,6 +199,8 @@ SCENES.ch1Mudling=[
   {sfx:'look'},
   {walk:'Mudling',to:[[8,16],[8,17],[7,17]],speed:.35},
   {talk:'Mudling',lines:['Blub. The pie went that way. You can\'t have it. Blub.']},
+  {talk:'Tom',lines:['It talks.']},
+  {talk:'Deedee',lines:['It talks AND it steals.']},
   {talk:'Grace',lines:['Okay, everybody. Tata is in front. I\'m in charge of choreography. FIGHT!']},
   {battle:'mudling',tut:'basics'},
   ...CH1_AFTER(()=>flag('battle:mudling')!=='win',[
@@ -200,6 +214,7 @@ SCENES.ch1Skeeter=[
   {walk:'Skeeter Swarm',to:()=>[[player.x+2,player.y],[player.x+1,player.y]],speed:.2},
   {talk:'Skeeter Swarm',lines:['Bzzz. Somebody smells like rhubarb. Bzzzzz.']},
   {talk:'Grace',lines:['Ew. Ew ew ew. Nobody touch my hair.']},
+  {talk:'Deedee',lines:['I\'ve been bitten ten thousand times in my life. Not one of them ever said a word first.']},
   {battle:'skeeter',tut:'dance'},
   ...CH1_AFTER(()=>flag('battle:skeeter')!=='win',[
     {talk:'Deedee',lines:['Everybody okay? Itchy isn\'t hurt. Keep walking.']}])
@@ -218,8 +233,32 @@ SCENES.ch1Grump=[
   {flag:'ch1-crumbs-c'},   // crumbs east to Boppy's bench (HOLLOW_TRAIL c), shown with the "around the pond" line
   {talk:'Deedee',lines:['Hugs for everyone. There. All better.','The crumbs lead around the pond, toward Boppy\'s fishing spot.']},
   {talk:'Grace',lines:['Boppy says the Big One lives over there.']},
-  {talk:'Tom',lines:['Boppy also says the stomach thing is serious. Stay close.']},
+  {talk:'Tom',lines:['Then nobody goes near the water. Stay close.']},
   {toast:'Goal: follow the crumbs east, around the pond. The Hollow’s monsters are awake now.',time:5}
+];
+
+// 3b. Boppy's fishing spot: the grey patch and the orange block with the dragonfly (story-ch01.md scene 7). Rose and Tom pull and fail; Deedee pockets the bulb.
+const ch1Tug=id=>({hop:id,from:()=>{ const a=sceneActor(id); return [a.x,a.y]; },to:()=>{ const a=sceneActor(id); return [a.x,a.y]; },time:.28,arc:6});
+SCENES.ch1Spot=[
+  {flag:'ch1-spot'},
+  {around:[17.2,11.2],size:[1.7,.9]},
+  {talk:'Rose',lines:['A MARBLE! There\'s a marble with a bug in it!']},
+  {talk:'Grace',lines:['That\'s a dragonfly. It\'s inside an orange rock. Its wings are open and it\'s not moving.']},
+  {talk:'Deedee',lines:['Look at the grass. It\'s grey. Just this bit, the size of my hand.']},
+  {talk:'Tom',lines:['It isn\'t dried out. It\'s just grey. Like somebody took the green out.']},
+  {talk:'Rose',lines:['I\'m keeping it. It\'s stuck.']},
+  ch1Tug('rose'), {sfx:'bonk'}, ch1Tug('rose'), {wait:.2},
+  {talk:'Tom',lines:['Let me.']},
+  ch1Tug('tom'), {sfx:'bonk'}, ch1Tug('tom'), {wait:.3},
+  {talk:'Rose',lines:['You\'re not trying.']},
+  {talk:'Tom',lines:['I\'m trying, Rose. It\'s a marble and it\'s winning.']},
+  {talk:'Grace',lines:['There\'s a little round hole in the side. Like somebody took a bite.']},
+  {flag:'ch1-bulb'}, {call:()=>sfx.pickup()},
+  {talk:'Deedee',lines:['And somebody left a burnt light bulb. Now they\'re littering at my pond too.']},
+  {call:()=>{ sfx.splat(); sfx.thud(); }}, {wait:.8},
+  {talk:'Deedee',lines:['The tin. Go, go, go.']},
+  {talk:'Rose',lines:['Bye, marble. I\'m coming back for you.']},
+  {toast:'Goal: the splash came from across the pond. Follow it.',time:4.5}
 ];
 
 // 4. The pond: the thief hands the tin to The Big One. Boss fight.
@@ -243,14 +282,18 @@ SCENES.ch1Pond=[
   {walk:'Big Mudling',to:[[17,12]],speed:.3},
   {call:()=>sfx.splat()}, {despawn:'Big Mudling'},
   {talk:'The Big One',lines:['The tin fits on my head like a crown. I\'m the king of the pond now. GLUB.']},
+  {talk:'Tom',lines:['That\'s a fish. That fish is bigger than the cab.']},
+  {talk:'Grace',lines:['Boppy was RIGHT?']},
+  {talk:'Deedee',lines:['Nobody tell him.']},
   {talk:'Deedee',lines:['That\'s my GOOD tin, you overgrown handbag!']},
+  {talk:'The Big One',lines:['This morning I was a fish. Then there was a big flash. Now I am a BIG fish. With a hat.']},
   {talk:'Rose',lines:['Tata, he looks like a turtle wearing a hat.']},
   {talk:'Tom',lines:['Nobody touches Deedee’s crisp. Everybody ready?']},
   {pose:'The Big One',f:null},
   {battle:'bigone',tut:'bigone'},
   {if:()=>flag('battle:bigone')!=='win',then:[
     {heal:true},
-    {talk:'Deedee',lines:['Up, up. Everybody up. Deedee kisses it better.','Tom, you stand in front of whoever it stares at. Rosie, make it laugh. Then we try again.']},
+    {talk:'Deedee',lines:['Up, up. Everybody up. Deedee kisses it better.','Tom, you stand in front of whoever it stares at. Cozy Rosie, make it laugh. Then we try again.']},
     {toast:'Face The Big One and press A to try again. Deedee healed everyone.',time:5}],else:[]}
 ];
 // 5. After The Big One (won in the scene, or on a retry with A): the tin comes back.
@@ -261,6 +304,13 @@ SCENES.ch1AfterBoss=[
     then:[{talk:'The Big One',lines:['Glub. Nobody ever made me laugh before. You can have your tin back.']}],
     else:[{talk:'The Big One',lines:['Glub. Fine. Take your tin. I\'m going back in the pond to think about things.']}]},
   {finale:'bigone'},
+  {if:()=>!!flag('kind:bigone'),then:[{talk:'The Big One',lines:['And this is for the small one. It\'s my shiniest thing.']}],else:[]},
+  {ch1Reveal:'coin'},
+  {talk:'Rose',lines:['It has a bug on it! I\'m keeping it.']},
+  {talk:'Tom',lines:['This one you can keep.']},
+  {talk:'The Big One',lines:['The old man with the cap. Is he coming tomorrow?']},
+  {talk:'Grace',lines:['Boppy? He comes every day.']},
+  {talk:'The Big One',lines:['Good. Don\'t tell him I asked.']},
   {talk:'Deedee',lines:['My tin! And look. Half the crisp is still in it.']},
   {talk:'Grace',lines:['The Big One ate the other half. I saw crumbs on its chin.']},
   {talk:'Deedee',lines:['Then we split this half. Everybody home. Wait until Boppy hears about this.']},
@@ -273,15 +323,22 @@ SCENES.ch1End=()=>[
   {walk:'tom',to:[[8,10]],speed:.25}, {face:'tom',dir:'up'},
   {place:'grace',at:[9,11],dir:'up'}, {place:'rose',at:[7,11],dir:'up'}, {place:'deedee',at:[6,9],dir:'right'},
   {talk:'Boppy',lines:['You found the Big One? I TOLD everybody. Twenty years.']},
+  {talk:'Grace',lines:['Boppy, the mud TALKED. And the mosquitoes. And a puddle.']},
+  {talk:'Boppy',lines:['The mud talked? Forty years in this town, the mud never said one word to me.']},
   ...(bag.includes('lure')?[
     {talk:'Tom',lines:['We did. And when it laughed, this fell out of its lip.']},
     {talk:'Boppy',lines:['My LURE! I lost that in 2006. Still shiny. Unlike me.','Keep it, Tom. For luck. The fish clearly didn\'t want it.']}]:[]),
+  {talk:'Rose',lines:['He gave me a present. Look.']},
+  {talk:'Boppy',lines:['That\'s real gold, Cozy Rosie. Gold like my teeth. Look.']},
+  {ch1Reveal:'grin'},
+  {talk:'Rose',lines:['Boppy has treasure in his mouth!']},
+  {talk:'Boppy',lines:['You put that somewhere safe. Gold is for keeping.']},
+  {talk:'Boppy',lines:['Next time something comes in that window, I\'m coming. Stomach or no stomach.']},
   {talk:'Deedee',lines:['Sit. Everybody sit. Half a crisp is still a crisp.']},
   {trace:'ch1-crisp'}, {hearts:'tom'}, {call:()=>sfx.levelChime()},
   {talk:'Rose',lines:['This is the best half a crisp I ever had.']},
   {talk:'Grace',lines:['Tata, you\'re staying the WHOLE week, right?']},
   {talk:'Tom',lines:['The whole week. And nobody is stealing anything else.']},
-  {talk:'Boppy',lines:['Speaking of strange. A fella was down at the pond yesterday. Long coat, in this heat. He asked how long the Big One has been alone down there.','I said twenty years. He wrote it down.']},
   {talk:'Boppy',lines:['Slow down. Everybody eats too fast. My stomach.']},
   {fade:'out',time:.8}, {card:1,done:true,time:3.4}, {flag:'ch1-done'}, {fade:'in',time:.8},
   {save:true},
@@ -501,7 +558,8 @@ const TRIGGERS=[
   {id:'ch1-t1',map:'hollow',at:[4,17,8,21],when:{...CH1,flag:'ch1-theft',notFlag:'ch1-t1'},scene:'ch1Mudling'},
   {id:'ch1-t2',map:'hollow',at:[1,1,22,15],when:{...CH1,flag:'ch1-t1',notFlag:'ch1-t2'},scene:'ch1Skeeter'},
   {id:'ch1-t3',map:'hollow',at:[1,1,22,14],when:{...CH1,flag:'ch1-t2',notFlag:'ch1-tuts'},scene:'ch1Grump'},
-  {id:'ch1-pond',map:'hollow',at:[14,1,22,20],when:{...CH1,flag:'ch1-tuts',notFlag:'ch1-pond'},scene:'ch1Pond'},
+  {id:'ch1-spot',map:'hollow',at:[14,1,22,20],when:{...CH1,flag:'ch1-tuts',notFlag:'ch1-spot'},scene:'ch1Spot'},
+  {id:'ch1-pond',map:'hollow',at:[14,1,22,20],when:{...CH1,flag:'ch1-spot',notFlag:'ch1-pond'},scene:'ch1Pond'},
   {id:'ch1-after',map:'hollow',when:{...CH1,flag:{'battle:bigone':'win'},notFlag:'ch1-tin'},scene:'ch1AfterBoss'},
   {id:'ch1-end',map:'grands',when:{...CH1,flag:'ch1-tin',notFlag:'ch1-done'},scene:'ch1End'},
   {id:'ch2-arrive',map:'blvd',when:{...CH2,notFlag:'ch2-goal'},scene:'ch2Arrive'},

@@ -146,3 +146,7 @@ Also dropped, not merged: 38 battle takes in phone export 14 for lines the game 
 ## 2026-11-12 (`dialogclear1`): old wording of the 283 reworded dialogue lines
 
 Tom decided on a full dialogue clarity rewrite (docs/CHANGES.md `dialogclear1`). The baked dialogue clips for the old wording (clip key is `voice|text`) can never play, so 275 were purged (about 10.8 MB). Audio is in git history (the parent of the `dialogclear1` commit). Clips per voice: tom 90, tnb 32, amy 26, boppy 18, bigone 16, michael 15, deedee 12, sal 12, grace 12, rose 8, penny 7, page 4, pagew 4, grump 3, kit 3, mudling 2, la_woman 2, log 2, skeeter 2, oolong 1, olivia 1, carmen 1, narrator 1, mirrorball 1. The old texts are the `old` column of the "Lines to bake" table in docs/CHANGES.md `dialogclear1`.
+
+## 2026-11-13 (`ch1build1`): chapter 1 rewrite, four clips
+
+Chapter 1 was rebuilt to the locked story. Dropped, can never play: tom "Boppy also says the stomach thing is serious. Stay close." (reworded), deedee "Tom, you stand in front of whoever it stares at. Rosie, make it laugh. Then we try again." (reworded to Cozy Rosie), and boppy "Speaking of strange. A fella was down at the pond yesterday..." plus "I said twenty years. He wrote it down." (the dropped long coat beat). About 134 KB; audio is in git history.

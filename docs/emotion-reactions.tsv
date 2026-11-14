@@ -98,8 +98,6 @@ scene	1	data/scenes.js	ch1Grump	Deedee	The crumbs lead around the pond, toward B
 scene	1	data/scenes.js	ch1Grump	Deedee	The crumbs lead around the pond, toward Boppy's fishing spot.	grace	proud
 scene	1	data/scenes.js	ch1Grump	Grace	Boppy says the Big One lives over there.	rose	scared
 scene	1	data/scenes.js	ch1Grump	Grace	Boppy says the Big One lives over there.	tom	unimpressed
-scene	1	data/scenes.js	ch1Grump	Tom	Boppy also says the stomach thing is serious. Stay close.	grace	happy
-scene	1	data/scenes.js	ch1Grump	Tom	Boppy also says the stomach thing is serious. Stay close.	deedee	unimpressed
 scene	1	data/scenes.js	ch1Pond	Grace	THERE! The thief! He still has the tin!	tom	proud
 scene	1	data/scenes.js	ch1Pond	Grace	THERE! The thief! He still has the tin!	rose	surprised
 scene	1	data/scenes.js	ch1Pond	Grace	THERE! The thief! He still has the tin!	deedee	angry
@@ -124,9 +122,6 @@ scene	1	data/scenes.js	ch1Pond	Tom	Nobody touches Deedee’s crisp. Everybody re
 scene	1	data/scenes.js	ch1Pond	Deedee	Up, up. Everybody up. Deedee kisses it better.	tom	loving
 scene	1	data/scenes.js	ch1Pond	Deedee	Up, up. Everybody up. Deedee kisses it better.	grace	loving
 scene	1	data/scenes.js	ch1Pond	Deedee	Up, up. Everybody up. Deedee kisses it better.	rose	loving
-scene	1	data/scenes.js	ch1Pond	Deedee	Tom, you stand in front of whoever it stares at. Rosie, make it laugh. Then we try again.	tom	proud
-scene	1	data/scenes.js	ch1Pond	Deedee	Tom, you stand in front of whoever it stares at. Rosie, make it laugh. Then we try again.	rose	proud
-scene	1	data/scenes.js	ch1Pond	Deedee	Tom, you stand in front of whoever it stares at. Rosie, make it laugh. Then we try again.	grace	proud
 scene	1	data/scenes.js	ch1AfterBoss	The Big One	Glub. Nobody ever made me laugh before. You can have your tin back.	rose	loving
 scene	1	data/scenes.js	ch1AfterBoss	The Big One	Glub. Nobody ever made me laugh before. You can have your tin back.	grace	surprised
 scene	1	data/scenes.js	ch1AfterBoss	The Big One	Glub. Nobody ever made me laugh before. You can have your tin back.	deedee	loving

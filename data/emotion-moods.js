@@ -1313,7 +1313,6 @@ const EMOTION_MOODS={
 "Tom|Behind us the glass closes. Long Island is the size of a snow globe now, and a cable is taking it up into the sky.": "sad",
 "Tom|Best fishing trip ever. Nobody fell in. Mostly.": "happy",
 "Tom|Books overhear things.": "unimpressed",
-"Tom|Boppy also says the stomach thing is serious. Stay close.": "unimpressed",
 "Tom|Boppy speed, everybody. We walk at Boppy speed.": "loving",
 "Tom|Boppy's peppers. Red, redder, and one that's looking at me.": "unimpressed",
 "Tom|Bready Mercury is nine years old. He has flown Delta One. Twice.": "proud",

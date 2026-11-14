@@ -51,6 +51,10 @@ main:has(#closeup:not([hidden])) #controls{visibility:hidden}
 #closeup .cu-snow i{position:absolute;top:-6%;border-radius:50%;background:#fff;opacity:0;animation:cuSnow linear infinite}
 @keyframes cuSnow{0%{transform:translate(0,0);opacity:0}12%{opacity:.9}85%{opacity:.8}100%{transform:translate(var(--dx),112%);opacity:0}}
 #closeup .cu-rev.settled .cu-spin{animation:cuBob 2.6s ease-in-out infinite}
+#closeup .cu-rev.still .cu-spin{animation:cuFade .5s ease-out both}
+#closeup .cu-rev.still.settled .cu-spin{animation:none}
+#closeup .cu-rev.still img{border-radius:10px}
+@keyframes cuFade{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
 #closeup .cu-sun{position:absolute;border-radius:50%;pointer-events:none;background:radial-gradient(circle,#ffe9a066 0,#ffd24a00 68%);animation:cuSun 2.6s ease-in-out infinite}
 #closeup.watch{background:radial-gradient(ellipse at 50% 40%,#2a1d12,#0b0805 80%)}
 #closeup .cu-w{position:absolute;pointer-events:none;will-change:transform,opacity}
@@ -239,6 +243,7 @@ function closeupReveal(img,label,onDone,v,opts) {
   const el=closeup.el=cuEl('div','reveal',host); el.id='closeup'; el.hidden=false; closeup.reveal=true; closeup.def=null; closeup.hooks={};
   closeup.busy=true; closeup.active=true; closeup.done=onDone||null;
   const sun=cuEl('div','cu-sun',el), box=cuEl('div','cu-rev',el), spin=cuEl('div','cu-spin',box);
+  if(opts&&opts.still) box.classList.add('still');   // no spin or bob: a flat picture (a door frame) just fades in
   const im=cuImg(img+(v?'?v='+v:'')); spin.appendChild(im);
   if(opts&&opts.snow) { const sn=cuEl('div','cu-snow',spin), q=opts.snow; Object.assign(sn.style,{left:((q.x-q.r)*100)+'%',top:((q.y-q.r)*100)+'%',width:(q.r*200)+'%',height:(q.r*200)+'%'});
     for(let i=0;i<(q.n||26);i++) { const f=cuEl('i','',sn), z=1.5+((i*7)%4)*.8; Object.assign(f.style,{left:((i*37)%97+1)+'%',width:z+'px',height:z+'px',animationDuration:(7+((i*5)%6))+'s',animationDelay:'-'+((i*1.7)%9).toFixed(1)+'s'}); f.style.setProperty('--dx',(((i*13)%9)-4)*3+'px'); } }
