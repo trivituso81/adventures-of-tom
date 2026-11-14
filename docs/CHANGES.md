@@ -1,3 +1,8 @@
+## adminmusic2 (2026-11-14): Tom's ElevenLabs take replaces the first admin track
+- Tom sent his Music Library export (one take, `admin`, 90.1 s, prompt unchanged). Merged with `merge-local.py` (-20 LUFS, -1.5 dBTP, 96 kbps, fade-out cut at 87.4 s, so the track is now 87 s): music/admin.mp3, music/manifest.json, data/music-index.json, MC_TRACKS row (`admin` 87 s).
+- Purged the stand-in: tools/music-library/make-admin-ambient.py (the synthesized first version) deleted, docs/MUSIC_LIBRARY.md section 7 rewritten. Grep for make-admin-ambient: 0 references outside the adminmusic1 history entry.
+- Not heard on a phone. Loop seam file for listening: tools/shots/seam-admin.wav (not committed).
+
 ## adminmusic1 (2026-11-14): calm "Admin Calm" music plays on every admin screen
 - Tom: "I want to add music in the music library that is for whenever any admin screen is open and it's playing it within any admin screen. It should be soft, gentle, relaxing, sort of just giving the feeling of expansiveness and just calming."
 - New Music Library track `admin` (group Admin, use Admin, loop, 96 s): `music/admin.mp3`, entry in tools/music-library/tracks.json with an ElevenLabs prompt, `MC_TRACKS` row, manifest and index rebuilt, Admin chips added to music.html and the index validator. Because the sandbox has no ElevenLabs key, this first version is synthesized by `tools/music-library/make-admin-ambient.py` (slow D add9, G maj7, B min9, A add9 pads, deep drone, a few soft bells, hall reverb, seamless loop, -20 LUFS like the other tracks). Re-make it in the Music Library (prompt is already there) and the new take plays instead.

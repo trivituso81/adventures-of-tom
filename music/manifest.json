@@ -575,7 +575,19 @@
  },
  "admin": {
   "kind": "loop",
-  "dur": 96.03,
-  "bytes": 1152671
+  "name": "Admin Calm",
+  "dur_in": 90.12,
+  "lufs_in": -13.58,
+  "tp_in": -2.44,
+  "lead_silence": 0.0,
+  "tail_silence": 0.0,
+  "trim_tail": 87.4,
+  "prompt": "Soft, slow, weightless ambient music for a quiet workspace, about 60 beats per minute with no drums and no beat you can tap. Long sustained pads and warm strings that swell and fade like slow breathing, a deep gentle drone underneath, a few soft glassy bells and a distant harp note far apart from each other, wide open space and a large airy hall reverb. Major and lydian harmony that never resolves hard and never gets tense. Calm, spacious, expansive, like looking at a wide sky. Nothing sudden, nothing loud, no melody to follow. Instrumental only, no vocals. Composed to loop: steady energy from start to finish, no fade-out and no big final ending. Rich, detailed, modern production. Family-friendly adventure game score.",
+  "len": 90,
+  "model": "music_v1",
+  "dur": 87.01,
+  "bytes": 1044525,
+  "lufs_out": -20.45,
+  "tp_out": -9.22
  }
 }
