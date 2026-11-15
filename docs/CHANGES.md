@@ -1,3 +1,9 @@
+## posefaces2 (2026-11-14): Every main character's dialogue face re-cut from Tom's Pose Editor lines
+
+Tom (2026-11-14 23:24): "I adjusted everything for every single character in every single pose." His save of 23:23 has lines on all 15 poses of Tom, TNB, Justin, Boppy, Amy, Deedee, Olivia, Ellie, Grace and Rose and the 3 standing poses of Jojo, all checked, plus a head target of 96 for Olivia.
+- Re-cut from those lines at the master frame (top of head 13 percent down the box, chin 86 percent): the plain talking face, the 8 feelings faces and the 4 talking-pose faces of the ten, and Jojo's plain face. 131 pictures.
+- Looked at: one contact sheet of all of them. Heads sit at the same height in every box.
+- Not done: the poses themselves are not resized in the game yet (the walking, feelings and talking figures on the map). That is the apply build, next.
 ## posefaces1b (2026-11-14): Tom's and TNB's faces cut from Tom's newest lines
 
 Three of Tom's feelings faces (happy, loving, unimpressed) re-cut with the lines he moved after posefaces1 was baked, and TNB's feelings and talking faces cut from the lines he set at 22:2x. No other change.
