@@ -22876,6 +22876,12 @@
      "note": "There needs to be a separate ruler on the doorframe, not on the actual door",
      "from": "v4",
      "at": 1794702739131
+    },
+    {
+     "date": "2026-11-15",
+     "note": "The red markings should be left aligned, same as the ruler, and then there should only be a drawer frame and a door in this picture. There should be no room in the background",
+     "from": "v5",
+     "at": 1794702845431
     }
    ],
    "id": "ch1-doorframe",
