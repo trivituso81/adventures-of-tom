@@ -144,6 +144,7 @@ const SPLASH_MODES={
   admin:{tab:'Admin',cue:'A / Enter to pick. B / Esc to go back',choices:()=>[
     {name:'DEMO',sub:'The original Long Island and Los Angeles.',act:openDemo},
     {name:'VOICE LIBRARY',sub:'Hear and re-record any line in the game.',act:openVoices},
+    {name:'SCRIPT EDITOR',sub:'Reword, reorder and play every scene.',act:openScript},
     {name:'ART LIBRARY',sub:'Make and approve the game\'s pictures.',act:openArt},
     {name:'MUSIC LIBRARY',sub:'Hear and re-make any track in the game.',act:openMusic},
     {name:'AREA BUILDER',sub:'See and fix where you can walk in any area.',act:openAreas},
@@ -282,6 +283,12 @@ function openVoices() {
   sfx.select(); splash.active=false;
   $('splash').classList.add('out');
   setTimeout(()=>{ location.href=new URL('voices.html',location.href).href; },250);
+}
+// The Script Editor (script.html): edit the words of every scene, play the edited scene in the real engine, send the edits to Claude.
+function openScript() {
+  sfx.select(); splash.active=false;
+  $('splash').classList.add('out');
+  setTimeout(()=>{ location.href=new URL('script.html',location.href).href; },250);
 }
 // The Art Library (art.html): generate and approve pictures with the image service.
 function openArt() {

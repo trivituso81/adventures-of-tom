@@ -74,6 +74,10 @@ Every monster that speaks in a dialogue box gets a portrait: a zoomed-in crop of
 
 Tom files bugs and changes from inside the game with the pencil tab (REPORT): a note, a picture of the frozen screen with pins, and the full game state, saved on branch `inbox`. When Tom says "Fix the backlog" (or "check the backlog"), follow `docs/REPORTS.md`: `python3 tools/reports.py list`, look at every picture, reproduce, fix, test, push, quote his note and the report id in docs/CHANGES.md, then `python3 tools/reports.py done <ids>` for the ones that are fixed. A report that needs Tom stays open and is named in the reply with the one thing needed. `engine/report.js` loads first and wraps frames, timers and the clock: keep it first in `index.html`.
 
+## Script Editor (standing rule, 2026-11-14)
+
+Tom edits the story's words in ADMIN > SCRIPT EDITOR (`script.html`, `docs/SCRIPT_EDITOR.md`) and sends them with Send to Claude (`data/script-edits.json` on `main`). When Tom says "Apply my script edits": follow docs/SCRIPT_EDITOR.md (`python3 tools/script-index/apply.py`, look at each edited scene, test, push, tell him which lines now wait for a recording). Whenever you add or change a scene, run `python3 tools/script-index/build.py` and commit `data/script-index.json` (and `stage.py <id>` for a new scene). Before writing new dialogue read `docs/tom-edits.tsv`: his rewrites are the humor guide.
+
 ## Enemy sprite sheets (standing rule, 2026-10-29)
 
 Tom may drop a PNG enemy sprite sheet into any conversation, often with no words. That means "install this enemy". Follow `docs/ENEMY_SHEETS.md`: identify the enemy id, bake the sheet (tools/sprite-bake), wire the painted frames, test a fight against it, push, and log it in that doc's table.

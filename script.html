@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#14122b">
+<title>Script Editor</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:#14122b;color:#f4f1ff;font:16px/1.4 -apple-system,system-ui,"Segoe UI",sans-serif}
+body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+header{display:flex;align-items:center;gap:10px;padding:10px 14px;position:sticky;top:0;background:#14122b;border-bottom:1px solid #2c2852;z-index:5;flex-wrap:wrap}
+header h1{font-size:19px;margin:0;flex:1;min-width:130px}
+a.back{color:#ffd34d;text-decoration:none;font-weight:600;padding:10px 4px}
+main{max-width:760px;margin:0 auto;padding:10px 0 140px}
+.pad{padding:0 14px}
+button{font:inherit;border:0;border-radius:12px;padding:8px 12px;min-height:44px;min-width:44px;background:#3a3566;color:#fff;font-weight:600;cursor:pointer}
+button:disabled{opacity:.4}
+button.gold{background:#ffd34d;color:#241b00}
+button.purple{background:#7b6cff}
+button.rec{background:#c8414f}
+button.small{min-height:44px;padding:6px 10px;font-size:14px;border-radius:10px}
+button.ghost{background:transparent;border:1px solid #3a3566;color:#d9d4ff}
+button.on{background:#7b6cff}
+input[type=search],input[type=number],textarea,select{width:100%;padding:11px;border-radius:10px;border:1px solid #3a3566;background:#0f0d24;color:#fff;font:inherit;font-size:16px}
+textarea{min-height:76px;resize:vertical;line-height:1.35}
+.hint{color:#b9b3e6;font-size:13px}.err{color:#ff8b97;font-size:13px}.ok{color:#7be0a6;font-size:13px}.warn{color:#ffd34d;font-size:13px}
+.bar2{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:6px 14px}
+.sw{display:flex;gap:0;border:1px solid #3a3566;border-radius:12px;overflow:hidden}
+.sw button{border-radius:0;background:#0f0d24;min-height:40px}
+.sw button.on{background:#7b6cff}
+.chap{margin:10px 0;border-top:1px solid #2c2852}
+.chap>.hd{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#1a1736}
+.chap>.hd .t{flex:1;font-weight:700;font-size:17px;cursor:pointer;min-height:44px;display:flex;align-items:center}
+.chap>.hd .n{font-weight:400;color:#b9b3e6;font-size:13px;margin-left:8px}
+.scene{margin:8px 14px;background:#1d1a3d;border:1px solid #2c2852;border-radius:14px;overflow:hidden}
+.scene>.hd{display:flex;align-items:center;gap:8px;padding:8px 12px;flex-wrap:wrap}
+.scene>.hd .t{flex:1;min-width:120px;font-weight:600;cursor:pointer;min-height:44px;display:flex;flex-direction:column;justify-content:center}
+.scene>.hd .t small{font-weight:400;color:#b9b3e6;font-size:12px}
+.badge{display:inline-block;background:#ffd34d;color:#241b00;border-radius:10px;padding:1px 8px;font-size:12px;font-weight:700;margin-left:6px}
+.stage{padding:0 12px}
+.stage img{width:100%;border-radius:10px;display:block;background:#0f0d24}
+.who{padding:4px 12px 8px;font-size:13px;color:#b9b3e6}
+.lines{padding:2px 8px 10px}
+.act{margin:6px 6px;color:#b9b3e6;font-style:italic;font-size:14px}
+.grp{margin:8px 6px 2px;color:#ffd34d;font-size:12px;text-transform:uppercase;letter-spacing:1px}
+.row{display:flex;gap:8px;align-items:flex-start;padding:7px 6px;border-top:1px solid #2c2852}
+.row.ind{margin-left:14px}
+.row.rm .tx{text-decoration:line-through;opacity:.5}
+.row.ed{background:#242052}
+.chk{width:26px;height:26px;margin-top:8px;accent-color:#7b6cff;flex:none}
+.sp{flex:none;min-width:58px;max-width:92px;font-weight:700;color:#ffd34d;font-size:14px;padding-top:2px;word-break:break-word;cursor:pointer;min-height:44px;display:flex;align-items:flex-start;padding-top:9px}
+.body{flex:1;min-width:0}
+.tx{cursor:text;min-height:30px;padding:5px 0;word-wrap:break-word}
+.tx .cue{background:#3a3566;border-radius:5px;padding:0 2px}
+.meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:2px}
+.tag{font-size:12px;border:1px solid #3a3566;border-radius:10px;padding:2px 8px;color:#d9d4ff;display:inline-flex;align-items:center;gap:4px;min-height:26px}
+.tag.chg{border-color:#ffd34d;color:#ffd34d}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block;background:#555}
+.dot.clip{background:#7be0a6}.dot.old{background:#ffb24d}.dot.none{background:transparent;border:2px solid #8f88c4}.dot.new{background:transparent;border:2px dashed #ffd34d}
+.acts{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
+.panel{background:#14122b;border:1px solid #3a3566;border-radius:12px;padding:10px;margin-top:6px}
+.panel h4{margin:8px 0 4px;font-size:13px;color:#b9b3e6;text-transform:uppercase;letter-spacing:1px}
+.pr{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:4px 0}
+.beat{margin:6px 6px;padding:6px 10px;border:1px dashed #3a3566;border-radius:10px;color:#b9b3e6;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sheet{position:fixed;inset:0;background:#000a;z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.sheet[hidden]{display:none}
+.sheet>div{background:#1d1a3d;border-radius:18px 18px 0 0;width:100%;max-width:760px;max-height:82vh;overflow:auto;padding:14px;padding-bottom:calc(14px + env(safe-area-inset-bottom))}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px}
+.grid button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px;font-size:13px;background:#0f0d24;border:1px solid #3a3566;min-height:44px}
+.grid button.on{border-color:#ffd34d}
+.grid img{width:72px;height:72px;object-fit:cover;border-radius:8px;background:#2c2852}
+.cuew{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.cuew button{min-height:44px;background:#0f0d24;border:1px solid #3a3566}
+.empty{padding:30px;text-align:center;color:#b9b3e6}
+#toast{position:fixed;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));background:#7b6cff;color:#fff;padding:12px 14px;border-radius:12px;z-index:30;display:none}
+.selbar{position:fixed;left:0;right:0;bottom:0;background:#1d1a3d;border-top:1px solid #3a3566;padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:none;gap:8px;align-items:center;z-index:10}
+</style>
+</head>
+<body>
+<header>
+  <a class="back" href="index.html">Game</a>
+  <h1>Script Editor</h1>
+  <button class="small ghost" id="bSel">Select</button>
+  <button class="small" id="bCopyAll">Copy whole game</button>
+  <button class="small gold" id="bSend">Send to Claude</button>
+</header>
+<div class="bar2">
+  <div class="sw" id="fmt"><button data-f="words" class="on">Words only</button><button data-f="expr">With expressions and pauses</button></div>
+  <div style="flex:1;min-width:150px"><input type="search" id="q" placeholder="Find a line, a speaker or a scene"></div>
+</div>
+<div class="bar2"><span class="hint" id="sum">Loading the script...</span></div>
+<main id="list"></main>
+<div class="selbar" id="selbar"><span id="selN" class="hint" style="flex:1"></span><button class="gold" id="bCopySel">Copy ticked</button><button class="ghost" id="bSelOff">Done</button></div>
+<div id="toast"></div>
+<div id="sheet" class="sheet" hidden><div id="sheetIn"></div></div>
+<script src="engine/admin-music.js?v=adminmusic3"></script>
+<script src="engine/script-edits.js?v=scriptedit1"></script>
+<script src="engine/script-voice.js?v=scriptedit1"></script>
+<script>
+'use strict';
+// script.html: the Script Editor (docs/SCRIPT_EDITOR.md). Every scene's dialogue in story order, read from data/script-index.json (tools/script-index/build.py).
+// Edits are kept on this phone (localStorage aot-script-draft) and applied by engine/script-edits.js when a scene plays; SEND TO CLAUDE writes them to
+// data/script-edits.json in the repo, and a Claude session folds them into the scene files ("Apply my script edits", tools/script-index/apply.py).
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const MOODS=['happy','proud','loving','surprised','unimpressed','scared','angry','sad'];
+const TALKS=[['tell','Explaining'],['point','Pointing'],['ask','Asking'],['answer','Answering']];
+const PAUSES=[0,.3,.6,1,1.5,2,3];
+let IX=null, DRAFT={scenes:{}}, SENT={scenes:{}}, FMT='words', SELMODE=false, Q='';
+const OPEN=new Set(), OPENCH=new Set(), PANEL=new Set(), EDITING=new Set(), CUEMODE={}, SEL=new Set();
+function toast(m,ms){ const t=$('toast'); t.textContent=m; t.style.display='block'; clearTimeout(toast.h); toast.h=setTimeout(()=>t.style.display='none',ms||3200); }
+function saveDraft(){ try{ localStorage.setItem('aot-script-draft',JSON.stringify(DRAFT)); }catch(e){ toast('This phone would not save your edits. Free some space and try again.'); } }
+// the state of one scene: the unsent copy if there is one, else what was sent and is not folded in yet
+function stateOf(id){ return DRAFT.scenes[id]||SENT.scenes[id]||null; }
+function mut(id){ // a writable copy of the scene's state, stored in the draft
+  if(!DRAFT.scenes[id]){ const s=SENT.scenes[id]; DRAFT.scenes[id]=s?JSON.parse(JSON.stringify(s)):{lines:{},ins:[],order:[]}; }
+  const s=DRAFT.scenes[id]; s.lines=s.lines||{}; s.ins=s.ins||[]; return s;
+}
+function tidy(id){ // drop empty entries; a scene with nothing left leaves the draft
+  const s=DRAFT.scenes[id]; if(!s) return;
+  for(const r of Object.keys(s.lines)){ const e=s.lines[r]; for(const k of Object.keys(e)) if(e[k]===undefined||e[k]===''||e[k]===null||(k==='react'&&!e[k].length)||((k==='pre'||k==='post')&&!e[k])) delete e[k]; if(!Object.keys(e).length) delete s.lines[r]; }
+  const sc=IX.scenes[id], base=sc?baseOrder(sc):[];
+  if(s.order&&!s.ins.length&&JSON.stringify(s.order)===JSON.stringify(base)) delete s.order;
+  if(!Object.keys(s.lines).length&&!s.ins.length&&!s.order) delete DRAFT.scenes[id];
+  saveDraft();
+}
+function baseOrder(sc){ const r=[]; for(const st of sc.steps) if(st.k==='talk') for(const ln of st.lines) r.push(ln.ref); return r; }
+function ensureOrder(id){ const s=mut(id); if(!s.order||!s.order.length) s.order=baseOrder(IX.scenes[id]); return s; }
+function editCount(id){ const s=stateOf(id); if(!s) return 0; let n=Object.keys(s.lines||{}).length+(s.ins||[]).length; if(s.order&&JSON.stringify(s.order)!==JSON.stringify(baseOrder(IX.scenes[id]))&&!(s.ins||[]).length) n++; return n; }
+function draftCount(){ return Object.keys(DRAFT.scenes).length; }
+
+// ---------- the scene as the game will play it (engine/script-edits.js seApply, show mode) ----------
+function synth(sc){ // index steps -> nested step arrays, with the non-talk steps as {act}
+  const top=[],at={'':top},grp={};
+  for(const st of sc.steps){
+    if(st.k==='group'){ const arr=[]; let g=grp[st.i]; if(!g){ g={__grp:1,label:st.label}; grp[st.i]=g; const parentKey=st.i.includes('.')?st.i.slice(0,st.i.lastIndexOf('.',st.i.lastIndexOf('.')-1)+1):''; (at[parentKey]||top).push(g); } g[st.op]=arr; g.label=g.label||st.label; at[st.i+'.'+st.op+'.']=arr; continue; }
+    const key=st.i.includes('.')?st.i.slice(0,st.i.lastIndexOf('.')+1):''; const arr=at[key]||top;
+    if(st.k==='talk'){ const o={talk:st.who,lines:st.lines.map(l=>l.t)}; arr.push(o); }
+    else arr.push({act:st.d||null,op:st.op});
+  }
+  return top;
+}
+function view(id){ const sc=IX.scenes[id]; return seApply(id,synth(sc),stateOf(id)||{},{show:true}); }
+const LN={}; // ref -> index line (per scene id), built on first use
+function lineOf(id,ref){ if(!LN[id]){ LN[id]={}; for(const st of IX.scenes[id].steps) if(st.k==='talk') for(const ln of st.lines) LN[id][ln.ref]=Object.assign({who:st.who,vid:st.vid},ln); } return LN[id][ref]||null; }
+function flat(arr,depth,out){ out=out||[]; for(const o of arr){ if(o.talk!==undefined||o.beat!==undefined||o.act!==undefined) out.push({o,depth}); else if(o.__grp){ out.push({grp:o,depth}); for(const k of ['all','seq','then','else']) if(o[k]){ if(k==='then'||k==='else') out.push({sub:k==='then'?'If this happens':'Otherwise',depth:depth+1}); flat(o[k],depth+1,out); } } } return out; }
+function faceId(name){ return String(name||'').toLowerCase().replace(/[^a-z0-9]/g,''); }
+function face(id,mood){ return 'portraits/emo/'+faceId(id)+'-'+mood+'.webp'; }
+function talkImg(id,t){ return 'portraits/talk/pose/'+faceId(id)+'-'+t+'.webp'; }
+function words(s){ return s.split(/(\s+)/); }
+
+// ---------- plain text for Copy ----------
+function sceneText(id,expr){
+  const sc=IX.scenes[id], st=stateOf(id)||{}; const out=[];
+  out.push('Scene: '+sc.title+(sc.map?'  ('+sc.map+')':''));
+  const who=sc.cast.filter(Boolean); if(who.length) out.push('Who is there: '+who.join(', ')+'.');
+  const rows=flat(view(id),0,[]);
+  for(const r of rows){
+    if(r.sub){ out.push('['+r.sub+':]'); continue; }
+    if(r.grp) continue;
+    const o=r.o;
+    if(o.act!==undefined){ if(o.act) out.push(o.act); continue; }
+    if(o.beat!==undefined){ if(expr) out.push('[A silent beat, '+o.wait+' seconds.]'); continue; }
+    if(o.rm) continue;
+    const ref=o.refs[0], e=(st.lines&&st.lines[ref])||(st.ins||[]).find(x=>x.uid===ref)||{}, ln=lineOf(id,ref);
+    let head=o.talk.toUpperCase();
+    if(expr){ const mood=e.mood||(ln&&ln.mood), talk=e.talk||(ln&&ln.talk); const bits=[]; if(mood) bits.push(mood); else if(talk) bits.push(TALKS.find(t=>t[0]===talk)[1].toLowerCase()); if(bits.length) head+=' ('+bits.join(', ')+')'; }
+    if(expr&&e.pre) out.push('[Pause '+e.pre+' seconds.]');
+    out.push(head+': '+o.lines[0]);
+    if(expr){ const rs=e.react||(ln&&ln.react&&ln.react.map(x=>[x[0],x[1],x[3]]))||[]; for(const x of rs) out.push('['+x[0]+' reacts: '+x[1]+(x[2]?', on "'+x[2]+'"':'')+'.]'); }
+    if(expr&&e.post) out.push('[Pause '+e.post+' seconds.]');
+  }
+  return out.join('\n');
+}
+function chapterText(n,expr){ const c=IX.chapters.find(c=>String(c.n)===String(n)); const t=[(c.n==='ns'?'':'Chapter '+c.n+': ')+c.title]; for(const id of c.scenes) t.push('\n'+sceneText(id,expr)); return t.join('\n'); }
+async function copyOut(text,label){
+  try{ await navigator.clipboard.writeText(text); toast('Copied '+label+' ('+text.split('\n').length.toLocaleString()+' lines of text).'); return; }catch(e){}
+  try{ const f=new File([text],'script.txt',{type:'text/plain'}); if(navigator.canShare&&navigator.canShare({files:[f]})){ await navigator.share({files:[f],title:label}); return; } }catch(e){ if(e&&e.name==='AbortError') return; }
+  const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); toast('Copied '+label+'.'); }catch(e){ toast('Could not copy. Use the Share option or try a smaller part.'); } ta.remove();
+}
+
+// ---------- rendering ----------
+const SPK_NOTE=(t)=>{ const w=[]; if(/[—–]/.test(t)) w.push('No em dashes in game text.'); if(/\b(I am|do not|does not|did not|is not|are not|cannot|can not|will not|it is|that is|I will|I have|we are|you are|let us)\b/.test(t)) w.push('Game dialogue uses contractions (I\'m, it\'s, don\'t).'); return w; };
+function matches(id){ if(!Q) return true; const sc=IX.scenes[id]; if(sc.title.toLowerCase().includes(Q)) return true; for(const st of sc.steps) if(st.k==='talk'){ if(st.who.toLowerCase().includes(Q)) return true; for(const l of st.lines) if(l.t.toLowerCase().includes(Q)) return true; } return false; }
+function render(){
+  const root=$('list'); let h=''; let nEd=0; for(const id of Object.keys(DRAFT.scenes)) nEd+=editCount(id);
+  $('sum').textContent=IX.chapters.reduce((n,c)=>n+c.scenes.length,0)+' scenes, '+Object.values(IX.scenes).reduce((n,s)=>n+s.steps.filter(x=>x.k==='talk').reduce((m,x)=>m+x.lines.length,0),0).toLocaleString()+' lines. '+(draftCount()?draftCount()+' scene'+(draftCount()>1?'s':'')+' with unsent changes.':'No unsent changes.');
+  $('bSend').textContent=draftCount()?'Send to Claude ('+draftCount()+')':'Send to Claude';
+  for(const c of IX.chapters){
+    const ids=c.scenes.filter(matches); if(!ids.length) continue;
+    const open=OPENCH.has(String(c.n))||!!Q; const ne=c.scenes.reduce((n,id)=>n+editCount(id),0);
+    h+='<section class="chap"><div class="hd"><div class="t" data-ch="'+c.n+'">'+(c.n==='ns'?'':'Chapter '+c.n+': ')+esc(c.title)+'<span class="n">'+ids.length+' scenes'+(ne?' <span class="badge">'+ne+' edited</span>':'')+'</span></div>'
+      +'<button class="small" data-copych="'+c.n+'">Copy</button></div>';
+    if(open) for(const id of ids) h+=sceneHtml(id);
+    h+='</section>';
+  }
+  root.innerHTML=h||'<div class="empty">Nothing matches.</div>';
+  $('selbar').style.display=SELMODE?'flex':'none'; $('selN').textContent=SEL.size+' ticked';
+  for(const ta of root.querySelectorAll('textarea.tx')) grow(ta);
+}
+function grow(ta){ ta.style.height='auto'; ta.style.height=(ta.scrollHeight+2)+'px'; }
+function sceneHtml(id){
+  const sc=IX.scenes[id], n=editCount(id), open=OPEN.has(id)||!!Q;
+  const chk=SELMODE?'<input type="checkbox" class="chk" data-selscene="'+id+'"'+(SEL.has('s:'+id)?' checked':'')+'>':'';
+  let h='<div class="scene" id="sc-'+id+'"><div class="hd">'+chk+'<div class="t" data-scene="'+id+'">'+esc(sc.title)+(n?'<span class="badge">'+n+' edited</span>':'')+'<small>'+esc(id)+(sc.map?' · '+esc(sc.map):'')+'</small></div>'
+    +'<button class="small" data-copysc="'+id+'">Copy</button><button class="small purple" data-play="'+id+'">Play</button></div>';
+  if(open){
+    h+='<div class="stage"><img loading="lazy" alt="" src="art/script-stage/'+id+'.webp" onerror="this.parentNode.style.display=\'none\'"></div>';
+    h+='<div class="who">Who is there: '+esc(sc.cast.join(', ')||'nobody listed')+(sc.recipe.from==='none'?' · <span class="warn">No working Play recipe yet for this scene.</span>':'')+'</div>';
+    h+='<div class="lines">'+linesHtml(id)+'</div>';
+    h+='<div class="pad" style="padding-bottom:10px"><button class="small ghost" data-addend="'+id+'">+ Add a line at the end</button></div>';
+  }
+  return h+'</div>';
+}
+function linesHtml(id){
+  const rows=flat(view(id),0,[]), st=stateOf(id)||{}; let h='';
+  const sibs=rows.filter(r=>r.o&&r.o.talk!==undefined||r.o&&r.o.beat!==undefined);
+  rows.forEach((r,i)=>{
+    const ind=r.depth?' ind':'';
+    if(r.grp){ return; }
+    if(r.sub){ h+='<div class="grp" style="margin-left:'+(r.depth*14)+'px">'+r.sub+'</div>'; return; }
+    const o=r.o;
+    if(o.act!==undefined){ if(o.act) h+='<div class="act" style="margin-left:'+(r.depth*14)+'px">'+esc(o.act)+'</div>'; return; }
+    if(o.beat!==undefined){ h+=beatHtml(id,o,r); return; }
+    h+=rowHtml(id,o,r,rows,i);
+  });
+  return h||'<div class="empty">No lines.</div>';
+}
+function beatHtml(id,o,r){ const k=id+'|'+o.beat;
+  return '<div class="beat" style="margin-left:'+(r.depth*14)+'px"><b>Silent beat</b> <select data-beatsec="'+id+'|'+o.beat+'" style="width:auto">'+[.3,.6,1,1.5,2,3].map(v=>'<option'+(v===o.wait?' selected':'')+'>'+v+'</option>').join('')+'</select> sec'
+    +'<button class="small" data-mv="up|'+id+'|'+o.beat+'">▲</button><button class="small" data-mv="dn|'+id+'|'+o.beat+'">▼</button><button class="small" data-del="'+id+'|'+o.beat+'">✕</button></div>'; }
+function rowHtml(id,o,r,rows,i){
+  const ref=o.refs[0], st=stateOf(id)||{}, ln=lineOf(id,ref), isIns=!!o.ins;
+  const e=(st.lines&&st.lines[ref])||(isIns?(st.ins||[]).find(x=>x.uid===ref):null)||{};
+  const key=id+'|'+ref, edited=!!(isIns||(st.lines&&st.lines[ref])), rm=o.rm;
+  const sc=IX.scenes[id];
+  const mood=e.mood||(ln&&ln.mood)||'', talk=e.talk||(ln&&ln.talk)||'';
+  let status='new', stT='New line: no recording yet';
+  if(ln&&!isIns){ const changed=(typeof e.to==='string'&&e.to!==ln.t)||(e.who&&e.who!==ln.who); if(!changed){ status=ln.status; stT=ln.status==='clip'?'Recorded':ln.status==='old'?'Old voice':'No clip yet'; } else stT='Changed: recording replaced'; }
+  const chk=SELMODE?'<input type="checkbox" class="chk" data-selline="'+esc(key)+'"'+(SEL.has('l:'+key)?' checked':'')+'>':'';
+  const editing=EDITING.has(key), cue=CUEMODE[key];
+  let tx;
+  if(editing) tx='<textarea class="tx" data-edit="'+esc(key)+'">'+esc(o.lines[0])+'</textarea><div class="pr"><button class="small gold" data-done="'+esc(key)+'">Done</button>'+(ln&&!isIns&&o.lines[0]!==ln.t?'<button class="small ghost" data-undotext="'+esc(key)+'">Back to the game\'s words</button>':'')+'</div>';
+  else if(cue) tx='<div class="tx">'+words(o.lines[0]).map((w,j)=>/^\s+$/.test(w)?w:'<span class="cue" data-cuew="'+esc(key)+'|'+j+'" style="cursor:pointer;padding:6px 3px">'+esc(w)+'</span>').join('')+'</div><div class="hint">Tap the word where '+esc(cue.listener)+' should react.</div>';
+  else tx='<div class="tx" data-start="'+esc(key)+'">'+esc(o.lines[0])+'</div>';
+  const notes=editing?'':SPK_NOTE(o.lines[0]).map(w=>'<div class="warn">'+esc(w)+'</div>').join('');
+  const wasClip=ln&&!isIns&&ln.status!=='none'&&typeof e.to==='string'&&e.to!==ln.t;
+  const rs=e.react||(ln&&ln.react?ln.react.map(x=>[x[0],x[1],x[3]]):[]);
+  let h='<div class="row'+(rm?' rm':'')+(edited&&!rm?' ed':'')+(r.depth?' ind':'')+'" style="margin-left:'+(r.depth*14)+'px">'+chk
+    +'<div class="sp" data-who="'+esc(key)+'">'+esc(o.talk)+'</div><div class="body">'+tx+notes+(wasClip?'<div class="warn">Changing this silences the recording.</div>':'')
+    +'<div class="meta"><span class="tag" title="'+esc(stT)+'"><span class="dot '+status+'"></span>'+esc(stT)+'</span>'
+    +(mood?'<span class="tag'+(e.mood?' chg':'')+'">'+esc(mood)+'</span>':'')+(talk&&!mood?'<span class="tag'+(e.talk?' chg':'')+'">'+esc(TALKS.find(t=>t[0]===talk)[1])+'</span>':'')
+    +rs.map(x=>'<span class="tag'+(e.react?' chg':'')+'">'+esc(x[0])+': '+esc(x[1])+(x[2]?' on "'+esc(x[2])+'"':'')+'</span>').join('')
+    +(e.pre?'<span class="tag chg">pause before '+e.pre+'s</span>':'')+(e.post?'<span class="tag chg">pause after '+e.post+'s</span>':'')+(ln&&ln.cond?'<span class="tag">only sometimes</span>':'')+'</div>'
+    +'<div class="acts">'+(rm?'<button class="small ghost" data-undo="'+esc(key)+'">Put it back</button>':
+      '<button class="small" data-mv="up|'+esc(key)+'">▲</button><button class="small" data-mv="dn|'+esc(key)+'">▼</button><button class="small" data-del="'+esc(key)+'">✕</button><button class="small'+(PANEL.has(key)?' on':'')+'" data-panel="'+esc(key)+'">More</button>'
+      +(edited?'<button class="small ghost" data-undo="'+esc(key)+'">Undo</button>':''))+'</div>';
+  if(PANEL.has(key)&&!rm) h+=panelHtml(id,o,ln,e,key,isIns,mood,talk,rs);
+  return h+'</div></div>';
+}
+function castFor(id,exclude){ const sc=IX.scenes[id]; const all=new Set([...sc.cast]); return [...all].filter(n=>n&&n!==exclude); }
+function panelHtml(id,o,ln,e,key,isIns,mood,talk,rs){
+  const sc=IX.scenes[id]; const vp=VOICE.panel(key,id,o,ln,e,isIns);
+  let h='<div class="panel">';
+  h+='<h4>Pauses</h4><div class="pr"><span class="hint">Before</span><select data-pre="'+esc(key)+'" style="width:auto">'+PAUSES.map(v=>'<option'+(v===(e.pre||0)?' selected':'')+'>'+v+'</option>').join('')+'</select>'
+    +'<span class="hint">After</span><select data-post="'+esc(key)+'" style="width:auto">'+PAUSES.map(v=>'<option'+(v===(e.post||0)?' selected':'')+'>'+v+'</option>').join('')+'</select><span class="hint">seconds</span></div>';
+  h+='<h4>Expression for '+esc(o.talk)+'</h4><div class="pr"><button class="small" data-pickmood="'+esc(key)+'">Mood: '+esc(mood||'none')+'</button><button class="small" data-picktalk="'+esc(key)+'">Talking pose: '+esc(talk?TALKS.find(t=>t[0]===talk)[1]:'none')+'</button>'+(e.mood||e.talk?'<button class="small ghost" data-resetexpr="'+esc(key)+'">Back to the game\'s</button>':'')+'</div>';
+  h+='<h4>How the others react</h4><div class="pr">'+rs.map((x,j)=>'<span class="tag">'+esc(x[0])+': '+esc(x[1])+(x[2]?' on "'+esc(x[2])+'"':'')+'<button class="small ghost" data-rcue="'+esc(key)+'|'+j+'" style="min-height:34px;padding:2px 8px">Cue</button><button class="small ghost" data-rmood="'+esc(key)+'|'+j+'" style="min-height:34px;padding:2px 8px">Mood</button><button class="small ghost" data-rdel="'+esc(key)+'|'+j+'" style="min-height:34px;padding:2px 8px">✕</button></span>').join('')
+    +'<button class="small" data-radd="'+esc(key)+'">+ Reaction</button>'+(e.react?'<button class="small ghost" data-rreset="'+esc(key)+'">Back to the game\'s</button>':'')+'</div>';
+  h+='<h4>Add</h4><div class="pr"><button class="small" data-addafter="'+esc(key)+'">+ Line after this</button><button class="small" data-beatafter="'+esc(key)+'">+ Silent beat after this</button></div>';
+  h+=vp;
+  return h+'</div>';
+}
+
+// ---------- editing actions ----------
+function parseKey(k){ const i=k.indexOf('|'); return [k.slice(0,i),k.slice(i+1)]; }
+function lineState(id,ref,create){ const s=mut(id); const ins=s.ins.find(x=>x.uid===ref); if(ins) return ins; if(create) return s.lines[ref]||(s.lines[ref]={}); return s.lines[ref]||{}; }
+function setTo(id,ref,text){ const ln=lineOf(id,ref); const s=mut(id); const ins=s.ins.find(x=>x.uid===ref); if(ins){ ins.text=text; } else { const e=lineState(id,ref,true); if(text===ln.t) delete e.to; else e.to=text; } tidy(id); }
+function newUid(){ return 'u'+Date.now().toString(36)+Math.random().toString(36).slice(2,5); }
+function addIns(id,afterRef,x){ const s=ensureOrder(id); const uid=newUid(); const rec=Object.assign({uid},x); s.ins.push(rec); const k=afterRef?s.order.indexOf(afterRef):-1; s.order.splice(k+1,0,uid); tidy(id); return uid; }
+function visibleOrder(id){ // refs and uids in the order they show, skipping removed lines
+  const rows=flat(view(id),0,[]); const r=[]; for(const x of rows) if(x.o&&(x.o.refs||x.o.beat!==undefined)&&!x.o.rm) r.push({ref:x.o.refs?x.o.refs[0]:x.o.beat,depth:x.depth}); return r;
+}
+function move(id,ref,dir){
+  const s=ensureOrder(id); const vis=visibleOrder(id); const i=vis.findIndex(v=>v.ref===ref); const j=i+(dir==='up'?-1:1);
+  if(i<0||j<0||j>=vis.length||vis[j].depth!==vis[i].depth){ toast('That is as far as it goes inside this part of the scene.'); return; }
+  const a=s.order.indexOf(ref), b=s.order.indexOf(vis[j].ref); if(a<0||b<0) return;
+  s.order[a]=vis[j].ref; s.order[b]=ref; tidy(id);
+}
+function removeLine(id,ref){ const s=mut(id); const k=s.ins.findIndex(x=>x.uid===ref); if(k>=0){ s.ins.splice(k,1); if(s.order){ const q=s.order.indexOf(ref); if(q>=0) s.order.splice(q,1); } } else lineState(id,ref,true).rm=1; tidy(id); }
+function undoLine(id,ref){ const s=mut(id); delete s.lines[ref]; tidy(id); }
+function setField(id,ref,k,v){ const s=mut(id); const ins=s.ins.find(x=>x.uid===ref); const e=ins||lineState(id,ref,true); if(v===undefined||v===''||v===null) delete e[k]; else e[k]=v; tidy(id); }
+function curReact(id,ref){ const ln=lineOf(id,ref); const s=mut(id); const ins=s.ins.find(x=>x.uid===ref); const e=ins||s.lines[ref]||{}; if(e.react) return e.react; return ln&&ln.react?ln.react.map(x=>[x[0],x[1],x[3]]):[]; }
+function cueFor(text,j){ // the shortest words ending at the tapped word that the game finds first at that spot (tools/reaction-apply.py uses text.find)
+  const ws=words(text), clean=x=>x.replace(/[.,!?;:"\u201c\u201d]+$/,'').replace(/^["\u201c]+/,'');
+  const starts=[]; let off=0; for(const w of ws){ starts.push(off); off+=w.length; }
+  const idx=[]; ws.forEach((w,q)=>{ if(!/^\s+$/.test(w)) idx.push(q); });
+  const my=idx.indexOf(j);
+  for(let n=0;n<=my;n++){ const from=idx[my-n]; const raw=ws.slice(from,j+1).join(''); const lead=raw.length-raw.replace(/^["\u201c]+/,'').length; const ph=clean(raw); if(text.indexOf(ph)===starts[from]+lead) return ph; }
+  return clean(ws[j]);
+}
+
+// ---------- sheets ----------
+function sheet(html){ $('sheetIn').innerHTML=html; $('sheet').hidden=false; }
+function closeSheet(){ $('sheet').hidden=true; $('sheetIn').innerHTML=''; }
+function pickMoodSheet(title,speakerId,cur,cb){
+  window.__pick=cb;
+  sheet('<h3 style="margin-top:0">'+esc(title)+'</h3><div class="grid">'+MOODS.map(m=>'<button data-pm="'+m+'" class="'+(m===cur?'on':'')+'"><img src="'+face(speakerId,m)+'" alt="" onerror="this.style.visibility=\'hidden\'">'+m+'</button>').join('')+'</div><div class="pr" style="margin-top:10px"><button class="ghost" data-pm="">Back to the game\'s</button><button class="ghost" data-close="1">Cancel</button></div>');
+}
+function pickTalkSheet(title,speakerId,cur,cb){
+  window.__pick=cb;
+  sheet('<h3 style="margin-top:0">'+esc(title)+'</h3><div class="grid">'+TALKS.map(t=>'<button data-pm="'+t[0]+'" class="'+(t[0]===cur?'on':'')+'"><img src="'+talkImg(speakerId,t[0])+'" alt="" onerror="this.style.visibility=\'hidden\'">'+t[1]+'</button>').join('')+'</div><div class="pr" style="margin-top:10px"><button class="ghost" data-pm="">Back to the game\'s</button><button class="ghost" data-close="1">Cancel</button></div>');
+}
+function pickWho(id,cur,cb){
+  window.__pick=cb; const sc=IX.scenes[id]; const others=[...new Set(Object.values(IX.scenes).flatMap(s=>s.cast))].filter(n=>n&&!sc.cast.includes(n)).sort();
+  sheet('<h3 style="margin-top:0">Who says it?</h3><h4 class="hint">In this scene</h4><div class="grid">'+sc.cast.map(n=>'<button data-pm="'+esc(n)+'" class="'+(n===cur?'on':'')+'"><img src="'+face(n,'happy')+'" alt="" onerror="this.style.visibility=\'hidden\'">'+esc(n)+'</button>').join('')+'</div><h4 class="hint">Anyone else</h4><div class="cuew">'+others.map(n=>'<button data-pm="'+esc(n)+'">'+esc(n)+'</button>').join('')+'</div><button class="ghost" data-close="1">Cancel</button>');
+}
+
+// ---------- events ----------
+function keyOf(el,attr){ return el.dataset[attr]; }
+document.addEventListener('click',async ev=>{
+  const t=ev.target.closest('[data-ch],[data-scene],[data-copych],[data-copysc],[data-play],[data-start],[data-done],[data-undotext],[data-mv],[data-del],[data-undo],[data-panel],[data-who],[data-pickmood],[data-picktalk],[data-resetexpr],[data-radd],[data-rcue],[data-rmood],[data-rdel],[data-rreset],[data-addafter],[data-beatafter],[data-addend],[data-pm],[data-close],[data-cuew],[data-v]');
+  if(!t) return;
+  const d=t.dataset;
+  if(d.ch!==undefined){ const k=String(d.ch); OPENCH.has(k)?OPENCH.delete(k):OPENCH.add(k); render(); return; }
+  if(d.scene){ OPEN.has(d.scene)?OPEN.delete(d.scene):OPEN.add(d.scene); render(); return; }
+  if(d.copych!==undefined){ copyOut(chapterText(d.copych,FMT==='expr'),'the chapter'); return; }
+  if(d.copysc){ copyOut(sceneText(d.copysc,FMT==='expr'),'the scene'); return; }
+  if(d.play){ playScene(d.play); return; }
+  if(d.start){ EDITING.add(d.start); render(); const ta=document.querySelector('textarea[data-edit="'+CSS.escape(d.start)+'"]'); if(ta){ ta.focus(); ta.setSelectionRange(ta.value.length,ta.value.length); } return; }
+  if(d.done){ commitEdit(d.done); return; }
+  if(d.undotext){ const [id,ref]=parseKey(d.undotext); const e=lineState(id,ref,true); delete e.to; tidy(id); EDITING.delete(d.undotext); render(); return; }
+  if(d.mv){ const [dir,id,ref]=(()=>{ const a=d.mv.split('|'); return [a[0],a[1],a.slice(2).join('|')]; })(); move(id,ref,dir); render(); return; }
+  if(d.del){ const [id,ref]=parseKey(d.del); removeLine(id,ref); render(); return; }
+  if(d.undo){ const [id,ref]=parseKey(d.undo); undoLine(id,ref); render(); return; }
+  if(d.panel){ PANEL.has(d.panel)?PANEL.delete(d.panel):PANEL.add(d.panel); render(); return; }
+  if(d.who){ const [id,ref]=parseKey(d.who); const ln=lineOf(id,ref); const cur=(stateOf(id)&&((stateOf(id).lines||{})[ref]||{}).who)||(ln&&ln.who)||((stateOf(id).ins||[]).find(x=>x.uid===ref)||{}).who;
+    pickWho(id,cur,n=>{ setField(id,ref,'who',(ln&&n===ln.who)?undefined:n); closeSheet(); render(); }); return; }
+  if(d.pickmood){ const [id,ref]=parseKey(d.pickmood); const spk=speakerOf(id,ref); pickMoodSheet(spk+' looks...',spk,curVal(id,ref,'mood'),m=>{ setField(id,ref,'mood',m||undefined); closeSheet(); render(); }); return; }
+  if(d.picktalk){ const [id,ref]=parseKey(d.picktalk); const spk=speakerOf(id,ref); pickTalkSheet(spk+' talks like...',spk,curVal(id,ref,'talk'),m=>{ setField(id,ref,'talk',m||undefined); closeSheet(); render(); }); return; }
+  if(d.resetexpr){ const [id,ref]=parseKey(d.resetexpr); setField(id,ref,'mood',undefined); setField(id,ref,'talk',undefined); render(); return; }
+  if(d.radd){ const [id,ref]=parseKey(d.radd); const spk=speakerOf(id,ref); const others=castFor(id,spk);
+    window.__pick=n=>{ pickMoodSheet(n+' reacts...',n,'',m=>{ if(!m){ closeSheet(); return; } const rs=curReact(id,ref).map(x=>x.slice()); rs.push([faceId(n),m,'']); setField(id,ref,'react',rs); closeSheet(); render(); }); };
+    sheet('<h3 style="margin-top:0">Who reacts?</h3><div class="grid">'+others.map(n=>'<button data-pm="'+esc(n)+'"><img src="'+face(n,'happy')+'" alt="" onerror="this.style.visibility=\'hidden\'">'+esc(n)+'</button>').join('')+'</div><button class="ghost" data-close="1">Cancel</button>'); return; }
+  if(d.rmood){ const a=d.rmood.split('|'); const id=a[0],rest=a.slice(1).join('|'); const j=+rest.slice(rest.lastIndexOf('|')+1),ref=rest.slice(0,rest.lastIndexOf('|')); const rs=curReact(id,ref).map(x=>x.slice());
+    pickMoodSheet(rs[j][0]+' reacts...',rs[j][0],rs[j][1],m=>{ if(m) rs[j][1]=m; setField(id,ref,'react',rs); closeSheet(); render(); }); return; }
+  if(d.rcue){ const a=d.rcue.split('|'); const id=a[0],rest=a.slice(1).join('|'); const j=+rest.slice(rest.lastIndexOf('|')+1),ref=rest.slice(0,rest.lastIndexOf('|')); const rs=curReact(id,ref);
+    CUEMODE[id+'|'+ref]={listener:rs[j][0],j}; render(); return; }
+  if(d.rdel){ const a=d.rdel.split('|'); const id=a[0],rest=a.slice(1).join('|'); const j=+rest.slice(rest.lastIndexOf('|')+1),ref=rest.slice(0,rest.lastIndexOf('|')); const rs=curReact(id,ref).map(x=>x.slice()); rs.splice(j,1); setField(id,ref,'react',rs.length?rs:[]); if(!rs.length){ const e=lineState(id,ref,true); e.react=[]; } render(); return; }
+  if(d.rreset){ const [id,ref]=parseKey(d.rreset); setField(id,ref,'react',undefined); render(); return; }
+  if(d.cuew){ const a=d.cuew.split('|'); const id=a[0],rest=a.slice(1).join('|'); const j=+rest.slice(rest.lastIndexOf('|')+1),key=id+'|'+rest.slice(0,rest.lastIndexOf('|')),ref=rest.slice(0,rest.lastIndexOf('|')); const cm=CUEMODE[key]; if(!cm) return;
+    const text=textOf(id,ref); const rs=curReact(id,ref).map(x=>x.slice()); rs[cm.j][2]=cueFor(text,j); setField(id,ref,'react',rs); delete CUEMODE[key]; render(); return; }
+  if(d.addafter){ const [id,ref]=parseKey(d.addafter); const spk=speakerOf(id,ref); const uid=addIns(id,ref,{who:spk,text:'New line.'}); PANEL.add(id+'|'+uid); EDITING.add(id+'|'+uid); render(); return; }
+  if(d.beatafter){ const [id,ref]=parseKey(d.beatafter); addIns(id,ref,{who:null,beat:1}); render(); return; }
+  if(d.addend){ const id=d.addend; const vis=visibleOrder(id); const last=vis.length?vis[vis.length-1].ref:null; const sc=IX.scenes[id]; const uid=addIns(id,last,{who:sc.cast[0]||'Tom',text:'New line.'}); PANEL.add(id+'|'+uid); EDITING.add(id+'|'+uid); render(); return; }
+  if(d.pm!==undefined){ const f=window.__pick; if(f) f(d.pm); return; }
+  if(d.close){ closeSheet(); return; }
+});
+function textOf(id,ref){ const rows=flat(view(id),0,[]); const r=rows.find(x=>x.o&&x.o.refs&&x.o.refs[0]===ref); return r?r.o.lines[0]:''; }
+function speakerOf(id,ref){ const rows=flat(view(id),0,[]); const r=rows.find(x=>x.o&&x.o.refs&&x.o.refs[0]===ref); return r?r.o.talk:'Tom'; }
+function curVal(id,ref,k){ const s=stateOf(id)||{}; const e=(s.lines||{})[ref]||(s.ins||[]).find(x=>x.uid===ref)||{}; if(e[k]) return e[k]; const ln=lineOf(id,ref); return ln&&ln[k]||''; }
+function commitEdit(key){
+  const ta=document.querySelector('textarea[data-edit="'+CSS.escape(key)+'"]'); const [id,ref]=parseKey(key);
+  if(ta){ const v=ta.value.replace(/\s+$/,''); if(v) setTo(id,ref,v); else toast('A line cannot be empty. Use the ✕ button to remove it.'); }
+  EDITING.delete(key); render();
+}
+document.addEventListener('input',ev=>{ const ta=ev.target.closest('textarea.tx'); if(ta) grow(ta); });
+document.addEventListener('change',ev=>{
+  const t=ev.target; const d=t.dataset||{};
+  if(d.pre!==undefined||d.post!==undefined){ const k=d.pre!==undefined?d.pre:d.post; const [id,ref]=parseKey(k); setField(id,ref,d.pre!==undefined?'pre':'post',+t.value||undefined); render(); return; }
+  if(d.beatsec!==undefined){ const [id,uid]=parseKey(d.beatsec); const s=mut(id); const x=s.ins.find(y=>y.uid===uid); if(x){ x.beat=+t.value; tidy(id); render(); } return; }
+  if(d.selscene!==undefined){ t.checked?SEL.add('s:'+d.selscene):SEL.delete('s:'+d.selscene); $('selN').textContent=SEL.size+' ticked'; return; }
+  if(d.selline!==undefined){ t.checked?SEL.add('l:'+d.selline):SEL.delete('l:'+d.selline); $('selN').textContent=SEL.size+' ticked'; return; }
+});
+$('fmt').addEventListener('click',ev=>{ const b=ev.target.closest('button'); if(!b) return; FMT=b.dataset.f; for(const x of $('fmt').children) x.classList.toggle('on',x===b); });
+$('q').addEventListener('input',()=>{ Q=$('q').value.trim().toLowerCase(); render(); });
+$('bSel').onclick=()=>{ SELMODE=!SELMODE; if(!SELMODE) SEL.clear(); $('bSel').classList.toggle('on',SELMODE); render(); };
+$('bSelOff').onclick=()=>{ SELMODE=false; SEL.clear(); $('bSel').classList.remove('on'); render(); };
+$('bCopyAll').onclick=()=>{ const t=['The Adventures of Tom: full script']; for(const c of IX.chapters) t.push('\n'+chapterText(c.n,FMT==='expr')); copyOut(t.join('\n'),'the whole game'); };
+$('bCopySel').onclick=()=>{
+  if(!SEL.size) return toast('Tick a scene or a line first.');
+  const parts=[]; const sceneIds=new Set(); for(const k of SEL) if(k.startsWith('s:')) sceneIds.add(k.slice(2));
+  for(const c of IX.chapters) for(const id of c.scenes){
+    if(sceneIds.has(id)){ parts.push(sceneText(id,FMT==='expr')); continue; }
+    const lines=[...SEL].filter(k=>k.startsWith('l:'+id+'|')); if(!lines.length) continue;
+    const refs=new Set(lines.map(k=>k.slice(('l:'+id+'|').length))); const expr=FMT==='expr'; const out=['Scene: '+IX.scenes[id].title];
+    for(const r of flat(view(id),0,[])){ const o=r.o; if(!o||!o.refs||o.rm||!refs.has(o.refs[0])) continue; out.push(o.talk.toUpperCase()+': '+o.lines[0]); }
+    parts.push(out.join('\n'));
+  }
+  copyOut(parts.join('\n\n'),'what you ticked');
+};
+// ---------- Play ----------
+function playScene(id){
+  const sc=IX.scenes[id];
+  if(sc.recipe.from==='none'||!sc.recipe.map){ toast('This scene has no working Play recipe yet. Ask Claude to add one.',4500); return; }
+  try{ localStorage.setItem('aot-script-play',JSON.stringify({id,recipe:sc.recipe})); }catch(e){ toast('This phone would not start Play.'); return; }
+  location.href=new URL('index.html',location.href).href;
+}
+// ---------- Send to Claude ----------
+const TOKEN='aot-gh-token',REPO='trivituso81/adventures-of-tom',PATH='data/script-edits.json';
+const b64t=s=>btoa(unescape(encodeURIComponent(s))), t64=s=>decodeURIComponent(escape(atob(s.replace(/\n/g,''))));
+async function ghGet(tok){ const r=await fetch('https://api.github.com/repos/'+REPO+'/contents/'+PATH+'?ref=main&t='+Date.now(),{cache:'no-store',headers:{Authorization:'Bearer '+tok,Accept:'application/vnd.github+json'}}); if(r.status===404) return {sha:null,json:{scenes:{}}}; if(!r.ok) throw new Error('GitHub '+r.status); const j=await r.json(); let cur={scenes:{}}; try{ cur=JSON.parse(t64(j.content||''))||{scenes:{}}; }catch(e){} cur.scenes=cur.scenes||{}; return {sha:j.sha,json:cur}; }
+$('bSend').onclick=async()=>{
+  if(!draftCount()) return toast('Nothing to send. Change a line first.');
+  const tok=(()=>{ try{ return localStorage.getItem(TOKEN)||''; }catch(e){ return ''; } })();
+  const mine=JSON.parse(JSON.stringify(DRAFT));
+  if(!tok){ // no token on this phone: share the file instead
+    const text=JSON.stringify({made:new Date().toISOString(),scenes:Object.assign({},SENT.scenes,mine.scenes)},null,1);
+    const f=new File([text],'script-edits.json',{type:'application/json'});
+    try{ if(navigator.canShare&&navigator.canShare({files:[f]})){ await navigator.share({files:[f],title:'Script edits'}); toast('Shared. Send that file to Claude with "Apply my script edits".',5000); return; } }catch(e){ if(e&&e.name==='AbortError') return; }
+    const a=document.createElement('a'); a.href=URL.createObjectURL(f); a.download='script-edits.json'; document.body.appendChild(a); a.click(); a.remove(); toast('Saved as a file. Send it to Claude with "Apply my script edits".',5000); return;
+  }
+  $('bSend').disabled=true; $('bSend').textContent='Sending...';
+  try{
+    for(let tries=0;;tries++){
+      const cur=await ghGet(tok); const merged=Object.assign({},cur.json.scenes,mine.scenes);
+      const body={message:'Script edits from Tom: '+Object.keys(mine.scenes).join(', ').slice(0,120),content:b64t(JSON.stringify({made:new Date().toISOString(),scenes:merged},null,1)+'\n'),branch:'main'}; if(cur.sha) body.sha=cur.sha;
+      const r=await fetch('https://api.github.com/repos/'+REPO+'/contents/'+PATH,{method:'PUT',headers:{Authorization:'Bearer '+tok,Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify(body)});
+      if(r.status===409&&tries<3) continue; if(!r.ok) throw new Error('GitHub '+r.status);
+      SENT.scenes=merged; break; }
+    for(const id of Object.keys(mine.scenes)) delete DRAFT.scenes[id]; saveDraft();
+    toast('Sent. In the next Claude conversation say: Apply my script edits',6000);
+  }catch(e){ toast('Could not send ('+(e.message||e)+'). Your edits are still saved on this phone.',6000); }
+  $('bSend').disabled=false; render();
+};
+// ---------- start ----------
+(async()=>{
+  try{ DRAFT=JSON.parse(localStorage.getItem('aot-script-draft')||'null')||{scenes:{}}; DRAFT.scenes=DRAFT.scenes||{}; }catch(e){ DRAFT={scenes:{}}; }
+  try{ const r=await fetch('data/script-edits.json?'+Date.now(),{cache:'no-store'}); if(r.ok){ const j=await r.json(); SENT={scenes:(j&&j.scenes)||{}}; } }catch(e){}
+  try{ const r=await fetch('data/script-index.json?'+Date.now(),{cache:'no-store'}); if(!r.ok) throw new Error('HTTP '+r.status); IX=await r.json(); }
+  catch(e){ $('list').innerHTML='<div class="empty err">Could not load the script ('+esc(e.message||e)+'). Check the connection and reload.</div>'; return; }
+  const h=(location.hash||'').slice(1); if(h&&IX.scenes[h]){ OPENCH.add(String(IX.scenes[h].chapter)); OPEN.add(h); }
+  render();
+  if(h&&IX.scenes[h]) setTimeout(()=>{ const el=$('sc-'+h); if(el) el.scrollIntoView(); },60);
+  window.__SCRIPT_READY=true;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+scene	step	text
+opening	73	
+ch10Door	10	
+ch10AfterBoss	28	[The Long coat walks away.]
+ch10AfterBoss	29	
+ch11Bridge	4	
+ch16After	39	
+ch18Pinnacle	35	[Warm light fills the room.]
+ch18Fight	6	[Warm light fills the room.]
+ch18After	1	[Warm light fills the room.]
+ch19Open	1	
+ch20Calm	68	[Hearts float up.]
+ch20Epi1	44	[Hearts float up.]
+ch20Epi2	14	[Hearts float up.]
+nsOpening	57	
+nsPond	19.then.11	
+nsEnd	3	[Everyone shows up for the party.]
+nsInvPip	6.else.0	
+nsInvMoss	6.else.0	
+nsInvDot	6.else.0	
