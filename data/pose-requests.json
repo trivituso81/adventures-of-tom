@@ -1,6 +1,6 @@
 {
  "version": 2,
- "saved": "2026-11-15T06:13:23.601Z",
+ "saved": "2026-11-15T06:18:16.866Z",
  "heights": {},
  "target": {},
  "frames": {
@@ -207,7 +207,14 @@
     "sheet": "tnb-walking-sheet-v2.png",
     "top": 14.7,
     "chin": 130,
-    "ok": false
+    "ok": true,
+    "page": {
+     "f": 0.905,
+     "h": 1.228,
+     "a": 130,
+     "headRows": 12.715,
+     "wholeRows": 41.408
+    }
    },
    "up_stand": {
     "sheet": "tnb-walking-sheet-v2.png",
@@ -233,6 +240,162 @@
      "a": 126.8,
      "headRows": 12.715,
      "wholeRows": 41.141
+    }
+   },
+   "em_happy": {
+    "sheet": "tnb-emotions-v3.png",
+    "top": 17.1,
+    "chin": 164.1,
+    "ok": true,
+    "page": {
+     "f": 1.074,
+     "h": 1.14,
+     "a": 164.1,
+     "headRows": 12.715,
+     "wholeRows": 41.266
+    }
+   },
+   "em_loving": {
+    "sheet": "tnb-emotions-v3.png",
+    "top": 24,
+    "chin": 146.1,
+    "ok": true,
+    "page": {
+     "f": 1.02,
+     "h": 1.373,
+     "a": 146.1,
+     "headRows": 12.715,
+     "wholeRows": 42.287
+    }
+   },
+   "em_sad": {
+    "sheet": "tnb-emotions-v3.png",
+    "top": 20.7,
+    "chin": 169.5,
+    "ok": true,
+    "page": {
+     "f": 1.139,
+     "h": 1.126,
+     "a": 169.5,
+     "headRows": 12.715,
+     "wholeRows": 41.556
+    }
+   },
+   "em_angry": {
+    "sheet": "tnb-emotions-v3.png",
+    "top": 29.5,
+    "chin": 183.2,
+    "ok": true,
+    "page": {
+     "f": 1.201,
+     "h": 1.09,
+     "a": 183.2,
+     "headRows": 12.715,
+     "wholeRows": 42.228
+    }
+   },
+   "em_scared": {
+    "sheet": "tnb-emotions-v3.png",
+    "top": 21.7,
+    "chin": 157.6,
+    "ok": true,
+    "page": {
+     "f": 1.015,
+     "h": 1.233,
+     "a": 157.6,
+     "headRows": 12.715,
+     "wholeRows": 41.818
+    }
+   },
+   "em_surprised": {
+    "sheet": "tnb-emotions-v3.png",
+    "top": 20.8,
+    "chin": 154.3,
+    "ok": true,
+    "page": {
+     "f": 0.985,
+     "h": 1.255,
+     "a": 154.3,
+     "headRows": 12.715,
+     "wholeRows": 41.768
+    }
+   },
+   "em_proud": {
+    "sheet": "tnb-emotions-v3.png",
+    "top": 10.3,
+    "chin": 144.1,
+    "ok": true,
+    "page": {
+     "f": 0.963,
+     "h": 1.253,
+     "a": 144.1,
+     "headRows": 12.715,
+     "wholeRows": 40.766
+    }
+   },
+   "em_unimpressed": {
+    "sheet": "tnb-emotions-v3.png",
+    "top": 23.1,
+    "chin": 169,
+    "ok": true,
+    "page": {
+     "f": 1.023,
+     "h": 1.149,
+     "a": 169,
+     "headRows": 12.715,
+     "wholeRows": 41.8
+    }
+   },
+   "tk_tell": {
+    "sheet": "tnb-talk-v2.png",
+    "top": 24.9,
+    "chin": 173.4,
+    "ok": true,
+    "page": {
+     "f": 1.059,
+     "h": 1.344,
+     "a": 173.4,
+     "headRows": 12.715,
+     "wholeRows": 41.919
+    }
+   },
+   "tk_point": {
+    "sheet": "tnb-talk-v2.png",
+    "top": 24.5,
+    "chin": 163.8,
+    "ok": true,
+    "page": {
+     "f": 1.054,
+     "h": 1.433,
+     "a": 163.8,
+     "headRows": 12.715,
+     "wholeRows": 42.024
+    }
+   },
+   "tk_ask": {
+    "sheet": "tnb-talk-v2.png",
+    "top": 1.2,
+    "chin": 149.6,
+    "ok": true,
+    "page": {
+     "f": 0.956,
+     "h": 1.345,
+     "a": 149.6,
+     "headRows": 12.715,
+     "wholeRows": 39.89
+    }
+   },
+   "tk_answer": {
+    "sheet": "tnb-talk-v2.png",
+    "top": 0,
+    "chin": 156.9,
+    "ok": true,
+    "page": {
+     "f": 0.971,
+     "h": 1.272,
+     "a": 156.9,
+     "headRows": 12.715,
+     "wholeRows": 39.787
     }
    }
   }
