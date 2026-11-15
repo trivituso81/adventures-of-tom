@@ -1,0 +1,10 @@
+W ch2Starter 1
+L1: Hello, Bready Mercury. Did you miss me? You missed me. Don't play it cool.
+L3: He's twice as big as when I left! What are you feeding him, protein shakes?
+L8: Babe. That's so good. I'm singing that one tomorrow. He'll rise to it.
+L9: babe. look outside. is the street... purple?
+L10 option 1: TOM: That's the sky's purple! It was way up on the hill an hour ago. Now it's on my lawn! I just seeded that lawn!
+L10 option 2: TOM: That's the same purple as the sky! It was on the hill an hour ago. Now it's on my lawn. It didn't even ask. Rude.
+L10 option 3: TOM: The sky's purple is on my street! An hour ago it was up on the hill. Now it's parked on my lawn like it pays taxes here!
+L10+: TNB: it's kind of nice on the sidewalk. like a bruise but cheerful
+L11: TOM: Mr. Washington is sitting out on his porch in that. In a lawn chair! Come on!

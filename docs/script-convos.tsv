@@ -1,0 +1,217 @@
+scene	step	check	title	purpose	plot	force
+ch1AfterBoss	3.then.0	Glub. Nobody ever made me laugh before.		Kindness wins: the Big One gives back the tin, gives Rose a gold dragonfly coin and asks after Boppy.	The Big One: And this is for the small one ; The Big One: The old man with the cap	
+ch1AfterBoss	7	It has a bug on it! I'm keeping it.				merge
+ch1End	7	You found the Big One? I TOLD everybody.		Boppy hears the story, gets back the lure he lost in 2006 and sees Rose's gold coin.	Rose: He gave me a present	
+ch1End	13	Boppy has treasure in his mouth!		The family sits down to half a crisp and Tom promises the whole week; the chapter ends.		
+ch1Goal	1	Tata! Deedee made rhubarb crisp for you.		Gives the first goal: get to Deedee's house before the rhubarb crisp is gone.	Grace: Tata! Deedee made rhubarb crisp	
+ch1Grump	3	Grrrumble. You're standing in my puddle.		Pond Grump picks a fight over Rose's giggling.		
+ch1Grump	12	Hugs for everyone. There. All better.		After the fight, the crumb trail points to Boppy's fishing spot, where the Big One lives.	Deedee: The crumbs lead around the pond	
+ch1Mudling	8	Look, rhubarb crumbs on the path. The li		First monster: the crumb trail, a mudling that talks, and the first fight, with Deedee healing.	Deedee: Look, rhubarb crumbs	
+ch1Pond	8	THERE! The thief! He still has the tin!		Boss reveal: the Big One wears Deedee's tin as a crown, Boppy was right all along, and a big flash changed the fish this morning.	The Big One: This morning I was a fish	
+ch1Pond	21	The tin fits on my head like a crown. I'				merge
+ch1Skeeter	4	Bzzz. Somebody smells like rhubarb. Bzzz		A mosquito swarm fight; Deedee shrugs off the bites and keeps everyone walking.		
+ch1Spot	2	A MARBLE! There's a marble with a bug in		First clue spot: a dragonfly in an orange block, a hand-sized grey patch, a round hole and a burnt bulb; Rose can't pull her marble out.	Grace: That's a dragonfly ; Deedee: Look at the grass. It's grey ; Grace: There's a little round hole ; Deedee: And somebody left a burnt light bulb	
+ch1Theft	8	My favorite son!		Homecoming at Deedee and Boppy's: warm family chaos (the door marks, the glasses, the gas jokes) and Boppy's stomach, just before trouble hits.		
+ch1Theft	12	I got one too. Mine's the low one.				merge
+ch1Theft	53	Oh no! The mud blob is stealing Deedee's		A mud blob steals the crisp and Deedee's good tin; the family reacts and heads for the pond.	Grace: It's running for the pond ; Deedee: It took the crisp AND my good tin	split
+ch1Theft	66	It's headed for Grump Hollow. I've been		Boppy stays behind with his stomach, points them to Grump Hollow and tells Tom to stay in front of the girls.	Boppy: It's headed for Grump Hollow	
+ch2AfterBoss	2.then.0	Rumble. You asked how I was doing. Nobod		Kindness wins: the Big Shake was lonely, lets things move again and sneezes up a gold lemon coin.	The Big Shake: Something shiny ; Tom: It's a gold coin with a lemon	
+ch2AfterBoss	17	It's a gold coin with a lemon on it. Ros				merge
+ch2AfterBoss	23	Look. The sky is blue again. Los Angeles		The sky clears and they line up the pattern: two flashes, two orange blocks, two coins.	TNB: Two flashes	
+ch2Arrive	2	TNB said he'd be home. Spring Street lof		Tom lands in Los Angeles and heads for TNB's loft.		
+ch2Boss	4	The ground is humming. That's never a go		The hill TNB naps on stands up: the Big Shake, woken by a flash, wants nothing to move; boss fight.	The Big Shake: RUMBLE. There was a big flash	
+ch2Carmen	1	The pupusas are fine. Everything is fine		Tom flips Doña Carmen's burning pupusas; Nara shows the smog is blowing down from the hill.	TNB: Nara is right	
+ch2Coyote	3	Nice hike. You look like you have snacks		A coyote sees Nara as a snack; fight; TNB heals and points the way to the Observatory.		
+ch2Coyote	13	Quick wardrobe adjustment, quick heal, a				merge
+ch2End	4	...smelled like gumbo on a Saturday nigh		Mr. Washington finishes his story at last and is himself again.		
+ch2End	13	I brought gumbo for the whole block. TNB		The neighbors are back to normal with gumbo and a towel smack; Tom says he has two homes.		
+ch2Flurry	3	Street cleaning. Tuesday. Eight to ten.		Parking-ticket monsters on the hike and Tom's car grudge; fight.		
+ch2Lemon	2	Babe, look at that tree. It's grey. The		Second clue spot: a grey lemon tree with a lemon in an orange block and the same burnt bulb; Long Island and Los Angeles are linked.	TNB: Babe, look at that tree ; Tom: I've seen this before ; Tom: It's a burnt-out flashbulb	
+ch2Loft	5	Well, well, well...		Reunion with TNB: SkyMiles banter, then Tom tells him about the mud and the talking fish.	Tom: He said	
+ch2Odette	1	Stirring. Stirring. The gumbo never has		Miss Odette is stuck stirring and doesn't know TNB: shows how far the daze reaches.		
+ch2Porch	3	Olivia dropped her off this morning. Fam		Nara is staying with them while Olivia's family is away, and TNB has kept Bready Mercury fed.	TNB: Olivia dropped her off	
+ch2Porch	9	It's perfectly round! How did you get it		TNB's pottery-wheel bread bowl and Nara's tricks: home life before the trouble.		
+ch2Sky	3	Wait, why is the sky PURPLE? It's two in		They notice the sky over Los Angeles is purple.	Tom: Wait, why is the sky PURPLE	
+ch2Smog	8	Mr. Washington! Is everything okay?		Mr. Washington is dazed, repeating himself and wanting the afternoon to never end: what the smog does to people.	Mr. Washington: Such a nice afternoon	
+ch2Smog	24	Excuse me, smog. That was UNCALLED for.		Talking smog appears; TNB's movie-night memory turns fear into a plan; the first fight in Los Angeles.		
+ch2Smog	42	The smog monsters are gone, but Mr. Wash		Mr. Washington is still in a daze, so they go check on Miss Odette and Doña Carmen.	Tom: Miss Odette and Doña Carmen	
+ch2Source	2	Babe. Look north. It's all coming down o		They trace the smog to the Observatory and set the goal.	TNB: It's coming from the Observatory	
+ch2Starter	2	Hello, Bready Mercury. Did you miss me?		Tom greets his starter, the Bready Mercury song puns, then the purple smog reaches the street and they go check on Mr. Washington.	TNB: Babe. Look outside ; Tom: Mr. Washington is sitting	
+ch3AfterBoss	18	Boppy got treasure! Now your mouth match		Boppy finally catches Iron-Gill and lets him go with a promise to visit.		
+ch3AfterBoss	32	Boppy, can we go home now? I want to tel		Heading home; Boppy notes the fish still stuck mid-jump in its block.		
+ch3AfterBoss	c40	Blorp. You told me about 1970. Nobody te		Kindness wins: Iron-Gill wants company, gives back the jar and gives Boppy a gold fish coin.	Old Iron-Gill: And take this	
+ch3Arrive	2	Tata! Boppy has been waiting by his wind		Back on Long Island: the girls say Boppy has been waiting to go fishing.		
+ch3End	8	There they are! Well? Did anybody catch		Home: Boppy's big catch, Rose tattles about the pepper, the gold coin and the third orange block.	Grace: Deedee, there's another orange block	
+ch3End	28	Three. My pond, California, and the mars		Deedee counts three blocks and makes a new rule: nobody goes anywhere alone. Crisp to close.	Deedee: New rule	
+ch3Fishing	8	My favorite son!		Deedee's welcome and Boppy's rush to go fishing; Tom starts to show the lemon coin.		
+ch3Fishing	15	A hill stood up? Out there too? First my		The coin makes Boppy want the Whisker Perch, and the girls finally believe his fish stories.	Boppy: Then I know just the fish	
+ch3Fishing	23	I heard it. Don't let it go to your head		Tom tells Deedee about the lemon in the orange block.	Tom: Mom, there's one more thing	
+ch3Fishing	30	Same bulb. One at my pond and one three		Deedee worries about the matching bulbs, Grace brings a notebook, Boppy brings his pepper jar against orders.	Boppy: And I'm bringing THIS	
+ch3Fishing	43	I never eat peppers on an empty stomach.		Boppy keeps his promise to come along, stomach or no stomach.		
+ch3Hollow	4	This is Sundial Hollow. I haven't been b		Third clue spot: the hollow has gone grey and a fish hangs in the sky in an orange block; Grace logs the pattern; on to the Deep Pool.	Rose: Tata! There's a fish in the SKY ; Tom: Lemon: grey tree ; Boppy: That's the Deep Pool	
+ch3Pier	6	This is the spot. Forty years, this spot		Boppy's quiet fishing system on the pier and the forbidden pepper snack.		
+ch3Pier	30	BLORP.		Old Iron-Gill appears, talks and steals Boppy's pepper jar.	Old Iron-Gill: GULP	
+ch3Pier	42	That was UNCALLED for!		Boppy vows to get his peppers back and leads them into the Whispering Marsh.	Boppy: Iron-Gill swam west	
+ch3Pool	9	The Deep Pool. Nobody has ever seen the		Iron-Gill took the jar for attention after forty years of Boppy talking at him, and a flash made him big; boss fight.	Old Iron-Gill: This morning there was a flash	
+ch3Snag	4	Creak. This was a boardwalk once. Now it		A log wearing Boppy's lost boot blocks the way to Sundial Hollow; fight.		
+ch3Snag	17	A secret boardwalk. Of course there's a		They take the old boardwalk nobody uses anymore.		
+ch3Sock	4	Squelch. Have you seen my other sock? It		A talking sock fight and Boppy's headcount.		
+ch3Story	1	Did I ever tell you about 1970? Sit down		Boppy retells his 1970 cross country win; the girls race ahead and Tom sets Boppy speed.		
+ch3Tangle	4	Snarl. Somebody cast me badly in 1997. I		Tangle, a line Boppy cast badly in 1997; fight.		
+ch3Tangle	12	Boppy, you're breathing kind of hard.		Boppy is getting winded; Tom slows the pace and follows Iron-Gill's wake northwest.		
+ch3Tea	1	Boppy! The usual? Ginger, peppermint, an		Oolong's kettle reports a flash over the marsh, which points the trip there.	Oolong: The kettle says there was a big flash	
+ch3Wait	1	The old reeds. I played back in there wh		Boppy remembers a path through the old reeds from when he was nine.		
+ch4AfterBoss	2.then.0	...Great take. Nobody has ever said that		Kindness wins: hearing 'great take' calms the Director's Cut; it wraps, and TNB wins its award and thanks Tom.		
+ch4AfterBoss	11	It has a cowboy hat on it. Rose has a dr		A gold hat coin joins the collection; TNB counts all forty costumes and they push the rack out.	Tom: It has a cowboy hat on it	
+ch4AfterBoss	18	Forty. I counted. I'm going to count aga				merge
+ch4Arrive	5	Well, well, well...		TNB's forty-minute lunch: Tom tells him about the fish in the sky and Deedee's rule, and TNB counts himself as family.	Tom: And my mother made a rule	
+ch4Arrive	23	A lanyard! With my name on it! It's LAMI		TNB gives Tom a laminated lanyard and explains today's Backlot Bedlam shoot; they will pick up Nara.		
+ch4Backup	1	The hero hat is still stuck in there. Go		TNB pulls out a backup hero hat, since the real one is stuck in the block.		
+ch4Boss	8	My rack. MY RACK. All forty. Still steam		The Director's Cut sits on the costume rack: forty years of blame, a flash made it big, so it took the costumes; boss fight.	The Director’s Cut: This morning there was a big flash ; The Director’s Cut: So I took the costumes	
+ch4Clapper	3	SNAP! Scene one, take one! SNAP! I go fi		Clapper Snapper insists on going first; fight on the Western street.		
+ch4Clapper	10	The Western street is clear. The horse c		The Western street is clear; once all three sets are clear, Stage 7 unlocks.	Kiki: (on the radio)	
+ch4Crab	3	That crab is made of cue cards! And it's		Cue Card Crab on Main Street pushes kindness away; fight.		
+ch4Crab	13	Main Street is clear. The bank is safe.		Main Street is clear; once all three sets are clear, Stage 7 unlocks.	Kiki: (on the radio)	
+ch4End	2	The rack! The costumes! We can shoot! We		Wrap party: Dana gives TNB a gold steamer and everyone crew jackets.		
+ch4End	19	A second lanyard! I have TWO lanyards!		Tom gets a second lanyard; Amy texts about parent-teacher conferences, so Tom flies back east with TNB's picture.	Tom: It's Amy	
+ch4Fetch	2	The Backlot. Main Street up on the left,		Nara sniffs out grape fog juice, so the costumes are on Stage 7; it is locked, so they clear the three sets first.	TNB: And it smells like grape fog juice ; Tom: Then we get them off the sets	
+ch4Gate	1	Sunset Gold Studios. Closed set. Name?		Into the studio: Ray waves them in, Dana says forty costumes were stolen and the Backlot is full of grumpy things, and Tom is hired to get them back.	TNB: Babe. Forty costumes	
+ch4Hat	7	Hold on. One of the lights must still be		Fourth clue spot: the hero hat in an orange block on a grey patch, a round hole, a burnt bulb; wheel tracks lead to the stage set.	TNB: Babe. That's the hero hat ; Tom: Hat: grey floor ; TNB: That came from the stage set	
+ch4Moth	3	Bzzz. I hear everything on this set. Eve		Boom Mic Moth mocks Tom's clicking knees and TNB defends him; fight.		
+ch4Moth	10	New York is clear. It never looked bette		The New York street is clear; once all three sets are clear, Stage 7 unlocks.	Kiki: (on the radio)	
+ch4Nara	8	Hi. Hi. Yes. I know. I was gone FOREVER.		Nara comes to set with a STUNT DOUBLE badge (the horse's).		
+ch4Rig	2	Blue, orange, red. And one strip of gaff		TNB fixes the rig with gaffer tape; Tom asks him to fix his knees.		
+ch4Snack	1	Plain roast chicken. No salt, no skin, n		Toni at craft services feeds Nara and sends snacks for the road.		
+ch4Stage	1	Somebody killed the work lights. And loo		Stage 7 is dark; TNB has to power three junction boxes in the right order to run the catwalk.	TNB: Three junction boxes	
+ch5AfterBoss	7	Mom calls me her favorite son every sing				merge
+ch5AfterBoss	10	It's a gold coin, Mom. It has a kickball		Grace finds a gold kickball coin: five coins, five blocks; the sign-up sheet is back.	Grace: It's a gold coin, Mom	
+ch5AfterBoss	34	She said my son is KIND!		Conference night goes well: a happy crying parent, Pruitt thanks Amy and makes everyone staff.		
+ch5AfterBoss	c56	...Nice handwriting. Nobody has ever sai		Kindness wins: praise for its handwriting calms the Red Pen; it gives Amy a gold star; favorite-child banter.		
+ch5Arrive	5	TOM. Oh, thank goodness.		Amy meets Tom with coffee and a tabbed binder; tab four is the flash at recess, a grey field and haunted bells; everyone goes to school at night.	Amy: Tab four was empty ; Grace: I was THERE	
+ch5Arrive	10	You're sharing your iced coffee? Amy, yo				merge
+ch5Arrive	15	It has TABS! Color-coded tabs! Amy, this				merge
+ch5Art	3	That bell is HOPPING! Tom! It has a FACE		Tardy Bell calls everyone late, and Amy has never been late; fight.		
+ch5Boss	8	There! The sign-up sheet! On the podium!		The Red Pen, Amy's own pen grown by the flash, marks every name on the sign-up sheet wrong; boss fight.	Amy: That's MY red pen	
+ch5Clocks	3	Seven o'clock exactly. On my watch too.		Every clock reads seven and Pruitt opens the Cafetorium.	Principal Pruitt: (on the intercom)	
+ch5End	6	Thirty conferences. One gold star. One v		Justin texts that he's stuck at work; casserole, the van home, and Tom keeps the binder.		
+ch5Field	6	There it is. I put six cones around it.		Fifth clue spot: the kickball and Moss's sneaker in an orange block on grey grass; Amy counts five and asks who is doing this.	Grace: Kickball: grey grass ; Amy: That's five	
+ch5Gym	3	BOING. Everybody against the wall. Nobod		Dodgeball Dread, Amy's fourth-grade nemesis, and the Rivituso Rule; fight.		
+ch5Gym	10	You know I was terrified of that thing?		Amy admits dodgeball scared her; the Thanksgiving pie catch.		
+ch5Hall	2	...Every clock in this hall says a diffe		Every clock in the hall shows a different time.		
+ch5Hall	6	Tata! Tata! SPARKLY FOOTPRINTS!		The girls follow glitter footprints into Art, Music and the Gym; clear each room so its clock comes right.	Tom: Then we clear the monsters	
+ch5Hall	11	Girls. That's excellent detective work.				merge
+ch5Music	2	Squelch. I glued the piano. I glued the		Glitter Glue gums up the music room; fight.		
+ch5Music	10	The glitter footprints stop here! And ov		The piano works again, Amy sings the big note, and the footprints double.		
+ch5Pruitt	10	That's Clara. She's in my class. Hi, Cla		Grace's classmate Clara waits alone for her dad, who works far away a lot; Rose shares a gummy worm.	Clara: He's coming	
+ch5Pruitt	17	Mrs. Gregori! Thank goodness. And you br		Principal Pruitt explains: since the flash the bells ring at random, and the Cafetorium stays shut until every clock reads exactly seven.	Principal Pruitt: Until the clocks are right ; Principal Pruitt: So please set every clock	
+ch5Pruitt	32	Exactly seven. Amy, I like this man.		Tom takes the job and keeps the girls close.		
+ch5Pruitt	38	You said five thirty.		Clara's dad, the man in the long coat, arrives late again and apologizes.	Man in the long coat: I know, sweetheart	
+ch5Snack	1	FOR EVERYONE, LOVE DEEDEE. That's Deedee		Deedee's secret: she brings crisp to the staff room every conference night.		
+ch6AfterBoss	3	Fine. FINE. This meeting is adjourned. I		Bready Mercury is back, and a gold coin is stuck to the jar.		
+ch6AfterBoss	20	It's a gold coin with a picnic basket on		The coin has a picnic basket on it; Nara grabs it and the Chairman follows.		
+ch6Arrive	3	"It's TNB. ""Babe. Come home. Your house."		TNB's text calls Tom home: something happened to Bready Mercury, and there are acorns in the flour.		
+ch6Board	1	Babe. Babe. They have a corkboard. With		The squirrels' corkboard: Operation Big Bread with Tom's jar at the centre, the Chairman's orders, and the rope ladder route.	"Tom: ""BY ORDER OF THE CHAIRMAN ; TNB: ""SUPPLY LINE"	
+ch6Boss	7	Babe. Look. On top of the pile.		Chairman Cheeks hoards everything on 2nd Avenue, starter included; boss fight.		
+ch6Call	8	My favorite son! Did you eat?		Tom video-calls Long Island: every coin goes back into its own block; the family heads for the pond.	Tom: Every coin goes back	
+ch6Call	20	But it's my treasure.		Rose agrees to let her dragonfly coin go.		
+ch6Call	28	It's a GUMBALL MACHINE! You put the coin		The dragonfly is free and Rose decides the block is a gumball machine.		
+ch6Call	39	Gold like my teeth. Best thing I ever ca		Boppy chooses to give back his fish coin.		
+ch6Call	45	...He was a small one anyway.		The fish finishes its jump; gold teeth joke.		
+ch6Call	54	My one gold star.		Amy gives up her gold star coin so Moss gets his shoe back.		
+ch6Call	61	Monday morning just got a lot easier to		All six blocks are free; Deedee asks who is doing this; Grace says the library is whispering.	Deedee: Good. Now who is DOING this ; Grace: Tata, one more thing	
+ch6Call	75	The library is whispering. Is that not j		TNB sends Tom to the whispering library on Long Island.		
+ch6Crock	7	Before you put him back, I have somethin		TNB gives Bready Mercury a handmade crock with a crown; the 'nuts' pun pays off.		
+ch6Dig_garden	5.then.0	I'm wearing most of the sandbox, babe.		Digging in the garden finds Mr. Washington's glasses and an acorn scrap; all three scraps give the knock code.	Tom: One acorn: TAP TAP	
+ch6Dig_picnic	5.then.0	I'm wearing most of the sandbox, babe.		Digging at the picnic finds Lachlan's truck and an acorn scrap; all three scraps give the knock code.	Tom: One acorn: TAP TAP	
+ch6Dig_play	5.then.0	I'm wearing most of the sandbox, babe.		Digging at the playground finds Marisol's tennis balls and an acorn scrap; all three scraps give the knock code.	Tom: One acorn: TAP TAP	
+ch6Discovery	12	That's MY coin, and that's MY agent in t		At the picnic table block, Tom throws the coin for Nara.		
+ch6Discovery	22.all.1.seq.1	It rolled into the little round hole. TN		Discovery: the coin fits the round hole, the block melts, Agent Crumb is free, colour comes back, and Tom plans to return every coin.	Tom: It rolled into the little round hole ; TNB: The grass is green ; Tom: First Bready Mercury goes home	
+ch6Door	7	Password accepted. Welcome, Agent...		The knock code opens the squirrels' door in the oak, and Tom lies that he's a squirrel.		
+ch6End	8	Tom! You found everything! Marisol’s bal		Back on the block: things returned, Bernadette was right, and she gives a gold ball and Watch vests.		
+ch6Fetch	1	I always keep a heel of sourdough in my		Nara eats Tom's emergency sourdough, but only when he throws it.		
+ch6Gallery	2	That peanut is as big as a trash can, an		Peanut Gallery heckles them off the playground; fight.		
+ch6Hat	8	My first award. I've had it for nine day		TNB gives up his hat coin award to free the hero hat at Soundstage 7.		
+ch6Hat	14	And THAT is why you put the table back.				merge
+ch6Kitchen	9	Well, well, well...		The starter jar is gone and the tracks are a squirrel's; Tom is outraged.	TNB: He had help	
+ch6Kitchen	22	And it left this. I've seen every horror		The squirrel left a calling card; they swap news, Nara is growling at trees, and they set off together.	TNB: Olivia texted me too	
+ch6Ladder	1	It's a counterweight. Put enough weight		Nara rides the counterweight bucket so the ladder comes down.		
+ch6Lemon	5	This coin has flown nine thousand nine h		Tom returns the lemon coin at Griffith Park; the block melts and the hill goes back to sleep.		
+ch6Lemon	10	It worked! It worked on purpose!				merge
+ch6Nara	3.then.0	Tom! Oh, thank goodness. You already hav		Olivia brings Nara: things are going missing all over 2nd Avenue, and Michael found his keys with a peanut triangle.	Michael: I found my car keys	
+ch6Nara	6	A triangle. Babe. A triangle is a SYMBOL		The peanut triangle is a sign; Bernadette blames squirrels and a flash in the park on Sunday; they take Nara to the park.	Olivia: She also says there was a big flash	
+ch6Oak	2	Babe. We're inside a tree. This is the s		Inside the oak, Nara smells Bready Mercury at the top.		
+ch6Park	2	Stop right there. Neighborhood Watch. Na		Captain Bernadette of the Neighborhood Watch grills them and sends them to clear three spots where squirrels buried things.	Tom: The squirrels buried something ; Bernadette: Then here's what you're going to do	
+ch6Spy	2	...You didn't see me. I'm a stick. Stick		Twig Spy blurts out the Chairman and Operation Big Bread; fight.	Twig Spy: Standard issue ; Twig Spy: I've never heard of Operation Big Bread	
+ch6Stuffer	2	Mmmf. Mmmf mmf! (These are MY sandwiches		Cheek Stuffer hoards a birthday picnic and guards Agent Crumb in the basket; fight.	Cheek Stuffer: Mmf mmf. (And nobody touches Agent Crumb	
+ch7AfterBoss	10	There's the coin! He's using it for a bo		The coin is its bookmark; Tom explains what the coin will do, and the Unread chooses to give it.	Tom: Sir, that coin opens	
+ch7AfterBoss	13	"It's a book CART. I wrote down ""a book."""				merge
+ch7AfterBoss	c36	...You read me. Out loud. With VOICES.		Kindness wins: they read it out loud with voices, and it had a dragon in it all along.		
+ch7Arrive	10	Tata! You came home! The library is stil		The girls report the library is whispering everyone's secrets; Grace's bigger chart; first stop Deedee's with the bulbs.	Grace: Tata! You came home	
+ch7Boss	7	Tata. On the dais. It's a book. A really		The Unread, the oldest book, unread for seventy years, has been telling everyone's secrets; boss fight.	The Unread: I'm the oldest book	
+ch7Door	11	...Who's there?		A dry old voice answers from behind the Reading Room door.		
+ch7End	6	Listen. It's quiet. Properly quiet. The		The library is properly quiet; Page starts Saturday story time and gives Grace a Gold Library Card and sweaters.		
+ch7End	17	It's itchy. I love it.		Family wrap: bulb seven for Deedee, TNB's forty-person potluck, and row eight will be in Los Angeles.	"Tom: ""I said yes for you ; Grace: Tata, row eight"	
+ch7Fic	2	And then... the uncle walked into Fictio		The Cliffhanger teases who Deedee's favorite is; fight.		
+ch7Fic	13	Tata. What did you see? When you walked		Fiction's card gives the letter S; with all three cards the password is SHH.	Grace: The first letter is circled in gold pen. S ; Rose: S. H. H.	
+ch7Hall	14	Higher. I can't see over the globe.		Tom carries the Unread out to the hall; it knows Grace is in charge and tells her to turn the page.		
+ch7Hall	32	Tata. He stopped.		The block opens and the Unread goes quiet on page twelve; volume two was checked out in 1998.		
+ch7Kitchen	9	My favorite son! The drawer is open. Han		Tom hands Deedee the last three bulbs: six, all the same.		
+ch7Kitchen	17	Gracie, my crisp is under there.		Grace presents her chart: one strange thing, six times; she has pencilled in the library row and her meet.	Grace: It's not six strange things	
+ch7Kitchen	48	Seven times, on two sides of the country		Deedee wants to know who is doing this; Boppy's meteor story; Deedee sends the three off together, with a warning about pie crust secrets.	Deedee: Seven times	
+ch7Non	2	Actually, it's li-BRAR-y. Two Rs. Everyb		The Know-It-All sounds like both Grace and Tom; fight.		
+ch7Non	15	Tata. Am I a know-it-all? Be honest. Act		Grace asks if she's a know-it-all and Tom says asking is the difference; Nonfiction's card gives an H.	Grace: The first letter is circled in gold pen. H ; Rose: S. H. H.	
+ch7Page	6	Oh! Tom. Girls. Welcome to the Hush Libr		Page admits it is not fine: the books whisper seventy years of secrets; three sections and a Reading Room with a lost password; Grace runs the signs.	Page: The Stacks have three sections ; Page: But the Reading Room doors	
+ch7Pic	3	BOO!		Pop-Up Panic tries to scare Rose and she scares it back; fight.		
+ch7Pic	13	Tata, did you see? I scared it back. It		Rose's best scaring ever; Picture Books' card gives an H.	Grace: The first letter is circled in gold pen. H ; Rose: S. H. H.	
+ch7Stacks	2	psst... psst... the uncle is here... the		The books gossip about Tom and Rose; Tom drowns out Deedee's pie crust secret.		
+ch7Stacks	24	Is it over?		Seventh clue spot: a book cart in an orange block on a grey floor; each section holds a piece of the password.	Tom: It's an orange block as big as a golf cart ; Tom: Something in each of these sections	
+ch7Story	1	Lamby’s Big Day. Page one. Lamby woke up		Tom reads Lamby's Big Day to Rose, with voices.		
+ch7Story	5	Okay. That's actually a good book. Don't				merge
+ch8AfterBoss	9	Two hours later.		Two hours later: forty loaves, and Nara digs something out of the ash pan.		
+ch8AfterBoss	20	A gold coin. Same little clock face.		A gold coin with a clock face and no ash on it: somebody planted it, and six times something of theirs let go.	Tom: There's not a speck of ash ; Tom: Six times	
+ch8AfterBoss	c24	...Bread. There's bread in me. And a lit		Kindness wins: someone bakes in her again; she lets the flames go and agrees to bake forty loaves.		
+ch8Arrive	2	A text from TNB.		TNB texts: the potluck is tonight, Tom is on bread, and every oven on 2nd Ave went cold.	"Narrator: ""Also every oven"	
+ch8Barn	1	Oh. Oh, babe. Look at it. The tracks are		Inside the barn the missing pilot lights drift past; three are stuck in three rooms.	Tom: Those little flames are pilot lights ; TNB: And three of them got stuck	
+ch8Block	7	Well, well, well...		TNB greets Tom: the stoves are cold.		
+ch8Block	15	Tom. Good. Neighborhood Watch Captain, p		Bernadette says every pilot light went out at noon; Olivia brings Nara, who won't eat.	Bernadette: Every pilot light	
+ch8Block	25	She's pointing east, toward the end of t		Nara points at the old car barn and Bernadette hands over the key.	TNB: She's pointing east	
+ch8Boss	7	Babe. It's warm in here. Like, really wa		Old Ironbelly, a 1912 boiler that baked for the night crew, took every pilot light because nobody comes down any more; boss fight.	Old Ironbelly: I'm Old Ironbelly ; Old Ironbelly: I baked biscuits	
+ch8End	10	Forty loaves. Six o’clock. On the dot. P		The potluck starts on time and Nara eats off Tom's plate.		
+ch8End	14	Tom. Come here. This was my daddy’s. He		Mr. Washington gives Tom his father's cap; the toast pun; Deedee texts about a Moon Club letter with a clock on the seal.	"Narrator: ""It says THE MOON CLUB ; Tom: A little clock on the seal"	
+ch8Lunch	2	Ew. EW. Who are you. What's that. Is tha		The Picky Eater, a lunchbox as picky as Nara, holds Tom's own pilot light; fight.		
+ch8Lunch	9	...Fine. FINE. Take it. I'll try a bite		Tom's pilot light is free.		
+ch8Motor	1	Okay. Burner one. Burner two. Burner thr		TNB fires up the turntable motor.		
+ch8Pail	1	A note taped inside the lid: FOR THE NEX		An old lunch pail left for the next shift sixty years ago.		
+ch8Paint	2	...Oh. Visitors. Great. I suppose you wa		Wet Blanket in the Paint Shop sulks that everything goes out; fight.		
+ch8Paint	8	It dried out a little. Look. It's almost		The first pilot light is free; three are needed for the turntable motor.	TNB: If I put a flame in each one	
+ch8Plate	1	Tom takes out the sandwich he packed for		Nara eats Tom's sandwich: she only eats what is on his plate.	Tom: It was on my plate	
+ch8Shop	2	Wooooo. Pfft. Pfft. Pfft. That was me. I		The Draft blew out the flames for someone called Ironbelly; fight.	The Draft: Ironbelly asked for the flames	
+ch8Shop	9	So somebody named Ironbelly wanted every		Ironbelly must be a stove; the second pilot light is free.	TNB: That's either a boat or a stove	
+ch8Turn	1	CLANK. Hissss. The whole turntable groan		The turntable swings and Nara smells oven warmth across the pit.		
+nsAfterBoss	7.then.0	...Nobody ever warmed me up before. Take		Kindness wins: warmed up, Brain Freeze gives everything back, hears Mr. Pistachio remembered, and is invited to the party.		
+nsBanner	8	There they are. No scoops. One defrosted		Amy's plan: bring the party to him, warm and loud; Justin's banner.	Amy: You bring the party TO him	
+nsBoss2	1.then.1	Up, up. It's still my birthday. We go AG		The try-again line after losing the rematch.		
+nsCreamery	9	Tata. It's SNOWING. Inside.		It is snowing inside the creamery and Mr. Pistachio is frozen in an ice cube.		
+nsCreamery	16	Brr! Tiny! Angry! The scoops are OURS!		Gremlin fight; Mr. Pistachio says Brain Freeze, a walking chest freezer, took the scoops; home by four.	Mr. Pistachio: It was BRAIN FREEZE	
+nsEnd	9	You got them? All nine? Tom, I could KIS		Home with all nine scoops: the family reacts.		
+nsEnd	13	My rock says happy birthday. He's on the		Pip, Moss and Dot arrive with their quirks.		
+nsEnd	19	I brought ice. Where do you want the ice		Brain Freeze arrives with ice and Mr. Pistachio greets his old friend.		
+nsEnd	24	Everybody, this is the Nine Scoop Sundae		The sundae, the candles, Grace's secret wish, and Penny's birthday things at the shop.		
+nsFountain	3	THERE. Under the slug. Vanilla, strawber		Slushie Slug has three scoops; Rose's sneaky plan; fight.		
+nsGoal	1	Tata! Sprinkle Street Creamery! The sund		Goal: pick up the nine-scoop dairy-free sundae at Sprinkle Street Creamery; Rose's puppy question begins.	Grace: Tata! Sprinkle Street Creamery ; Tom: Nine dairy-free scoops	
+nsInvDot	1	Dot! My birthday party. Today. Will you		Grace invites Dot, who will count the guests.		
+nsInvMoss	1	Moss! Party. My house. Four. Bring nothi		Grace invites Moss; his tree says the freezer went north.	Moss: Also, the tree says	
+nsInvPip	1	Pip! My party. Today. Four o'clock. Ther		Grace invites Pip and his nervous rock.		
+nsInvite	2	Hold on. It's your mom.		Amy: the invitations never went out, so Grace will invite Pip, Moss and Dot herself.	Amy: The invitations never went out	
+nsOldFreezer	6	You're back! Did you... oh. No scoops. A		Mr. Pistachio reveals Brain Freeze was his first freezer, unplugged in the spring, and never had a birthday; cocoa and a message.	Mr. Pistachio: ...He was mine ; Mr. Pistachio: In twenty years	
+nsOldFreezer	19	Take these. Hot cocoa. My recipe. If you				merge
+nsOpening	13	Oof, I'm finally here! Six hours on Delt		Tom arrives for Grace's ninth birthday; the girls claim him; Grace shows Moo-rielle and her nines-only dice.		
+nsPeppers	1	Boppy's peppers. Red, redder, and one th		Gremlins raid the pepper garden; Rose pockets a pepper; next, ask Mr. Pistachio how a freezer works.		
+nsPond	4	Grrrumble. Something moved into my pond.		Brain Freeze at the pond: nobody came to his birthday, so nobody gets one; he freezes Rose and they retreat to warm her.	Brain Freeze: Nobody came to MY birthday ; Grace: He took the scoops. He took Moo-rielle	
+nsPond	14	Nine scoops. Nine candles. Nine years. A				merge
+nsPond2	4	...You came back.		The rematch: they bring the party, his lid starts to open; round two.		
+nsRetry	0.seq.1.then.1	Up, up. It's still my birthday. We go AG		The try-again line after losing.		
+nsThaw	8	My favorite son! And my girls! And my...		Deedee thaws Rose with love and reads the cake box: warm beats cold.	Deedee: Cold doesn't beat cold	
+nsThaw	26	My peppers. Out back, in the garden. The		Boppy offers his garden peppers as warm things, except the ghost one.		
+nsTrail	7	Halt. We hold the scoops. Chocolate. Coo		Cone Heads hold three scoops and Moo-rielle; Brain Freeze sulks that nobody filmed his birthday; fight.	Brain Freeze: ...Nobody filmed MY birthday	
+opening	10	Oof, I'm finally here! At least the 6 ho		Tom lands on Long Island and the girls claim him: sets up Uncle Tom, Rose on his shoulders and Grace's dumpling squishy.		

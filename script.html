@@ -75,6 +75,28 @@ textarea{min-height:76px;resize:vertical;line-height:1.35}
 .cuew button{min-height:44px;background:#0f0d24;border:1px solid #3a3566}
 .empty{padding:30px;text-align:center;color:#b9b3e6}
 #toast{position:fixed;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));background:#7b6cff;color:#fff;padding:12px 14px;border-radius:12px;z-index:30;display:none}
+.cv{scroll-margin-top:130px;margin:10px 6px;border:1px solid #2c2852;border-radius:12px;overflow:hidden;background:#191634}
+.cvh{display:flex;gap:8px;align-items:flex-start;padding:8px 10px;background:#221e48}
+.cvh .t{flex:1;min-width:0;font-weight:700;font-size:15px;cursor:pointer;min-height:44px}
+.cvh .t small{display:block;font-weight:400;color:#b9b3e6;font-size:13px;margin-top:2px}
+.cvh .t small.miss{color:#8f88c4;font-style:italic}
+.st{font-size:12px;border-radius:10px;padding:3px 9px;font-weight:700;white-space:nowrap;border:0;min-height:30px;min-width:0;margin-top:6px}
+.st.none{background:#3a3566;color:#d9d4ff}.st.work{background:#ff8b5c;color:#2a0f00}.st.shop{background:#7b6cff;color:#fff}.st.lock{background:#7be0a6;color:#06240f}
+.cvb{display:flex;gap:6px;flex-wrap:wrap;padding:6px 10px;border-bottom:1px solid #2c2852}
+.note{margin:6px 10px;padding:8px 10px;border-left:3px solid #ffd34d;background:#14122b;font-size:14px;white-space:pre-wrap;cursor:pointer}
+.cvhid{margin:8px 12px;color:#8f88c4;font-size:13px}
+.sg{margin:2px 6px 8px;padding:8px 10px;border:1px dashed #7b6cff;border-radius:10px;background:#14122b}
+.sg .src{font-size:12px;color:#b9b3e6;margin-bottom:4px}
+.sg .bf{color:#8f88c4;text-decoration:line-through;font-size:14px}
+.sg .af{color:#fff;font-size:15px;margin:4px 0}
+.sg .opt{border-top:1px solid #2c2852;padding-top:6px;margin-top:6px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:4px 14px 8px;-webkit-overflow-scrolling:touch}
+.chips button{flex:none;white-space:nowrap;min-height:40px;background:#0f0d24;border:1px solid #3a3566;font-size:14px}
+.chips button.on{background:#7b6cff;border-color:#7b6cff}
+.chips .c{font-weight:400;opacity:.8;margin-left:4px}
+.tag.plot{border-color:#7be0a6;color:#7be0a6}
+.stbtn{display:block;width:100%;text-align:left;margin:6px 0;padding:10px 12px}
+.stbtn small{display:block;font-weight:400;opacity:.85}
 .selbar{position:fixed;left:0;right:0;bottom:0;background:#1d1a3d;border-top:1px solid #3a3566;padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:none;gap:8px;align-items:center;z-index:10}
 </style>
 </head>
@@ -84,15 +106,17 @@ textarea{min-height:76px;resize:vertical;line-height:1.35}
   <h1>Script Editor</h1>
   <button class="small ghost" id="bSel">Select</button>
   <button class="small" id="bCopyAll">Copy whole game</button>
+  <button class="small" id="bPaste">Paste back</button>
   <button class="small gold" id="bSend">Send to Claude</button>
 </header>
 <div class="bar2">
   <div class="sw" id="fmt"><button data-f="words" class="on">Words only</button><button data-f="expr">With expressions and pauses</button></div>
   <div style="flex:1;min-width:150px"><input type="search" id="q" placeholder="Find a line, a speaker or a scene"></div>
 </div>
+<div class="chips" id="chips"></div>
 <div class="bar2"><span class="hint" id="sum">Loading the script...</span></div>
 <main id="list"></main>
-<div class="selbar" id="selbar"><span id="selN" class="hint" style="flex:1"></span><button class="gold" id="bCopySel">Copy ticked</button><button class="ghost" id="bSelOff">Done</button></div>
+<div class="selbar" id="selbar"><span id="selN" class="hint" style="flex:1"></span><button class="purple" id="bShopSel">Workshop ticked</button><button class="gold" id="bCopySel">Copy ticked</button><button class="ghost" id="bSelOff">Done</button></div>
 <div id="toast"></div>
 <div id="sheet" class="sheet" hidden><div id="sheetIn"></div></div>
 <script src="engine/admin-music.js?v=adminmusic3"></script>
@@ -156,8 +180,9 @@ function sceneText(id,expr){
   const sc=IX.scenes[id], st=stateOf(id)||{}; const out=[];
   out.push('Scene: '+sc.title+(sc.map?'  ('+sc.map+')':''));
   const who=sc.cast.filter(Boolean); if(who.length) out.push('Who is there: '+who.join(', ')+'.');
-  const rows=flat(view(id),0,[]);
-  for(const r of rows){
+  const gs=groups(id);
+  for(const g of gs) for(const r of g.rows){
+    if(r===g.rows[0]&&gs.length>1) out.push('\n-- '+g.n+'. '+g.title+' --');
     if(r.sub){ out.push('['+r.sub+':]'); continue; }
     if(r.grp) continue;
     const o=r.o;
@@ -185,13 +210,16 @@ async function copyOut(text,label){
 const SPK_NOTE=(t)=>{ const w=[]; if(/[—–]/.test(t)) w.push('No em dashes in game text.'); if(/\b(I am|do not|does not|did not|is not|are not|cannot|can not|will not|it is|that is|I will|I have|we are|you are|let us)\b/.test(t)) w.push('Game dialogue uses contractions (I\'m, it\'s, don\'t).'); return w; };
 function matches(id){ if(!Q) return true; const sc=IX.scenes[id]; if(sc.title.toLowerCase().includes(Q)) return true; for(const st of sc.steps) if(st.k==='talk'){ if(st.who.toLowerCase().includes(Q)) return true; for(const l of st.lines) if(l.t.toLowerCase().includes(Q)) return true; } return false; }
 function render(){
+  for(const k of Object.keys(GC)) delete GC[k];
   const root=$('list'); let h=''; let nEd=0; for(const id of Object.keys(DRAFT.scenes)) nEd+=editCount(id);
+  renderChips();
   $('sum').textContent=IX.chapters.reduce((n,c)=>n+c.scenes.length,0)+' scenes, '+Object.values(IX.scenes).reduce((n,s)=>n+s.steps.filter(x=>x.k==='talk').reduce((m,x)=>m+x.lines.length,0),0).toLocaleString()+' lines. '+(draftCount()?draftCount()+' scene'+(draftCount()>1?'s':'')+' with unsent changes.':'No unsent changes.');
-  $('bSend').textContent=draftCount()?'Send to Claude ('+draftCount()+')':'Send to Claude';
+  const pc=pendingCount(); $('bSend').textContent=pc?'Send to Claude ('+pc+')':'Send to Claude';
+  const auto=FILTER!=='all'&&FILTER!=='none';
   for(const c of IX.chapters){
-    const ids=c.scenes.filter(matches); if(!ids.length) continue;
-    const open=OPENCH.has(String(c.n))||!!Q; const ne=c.scenes.reduce((n,id)=>n+editCount(id),0);
-    h+='<section class="chap"><div class="hd"><div class="t" data-ch="'+c.n+'">'+(c.n==='ns'?'':'Chapter '+c.n+': ')+esc(c.title)+'<span class="n">'+ids.length+' scenes'+(ne?' <span class="badge">'+ne+' edited</span>':'')+'</span></div>'
+    const ids=c.scenes.filter(id=>matches(id)&&(FILTER==='all'||lightGroups(id).some(g=>g.vis))); if(!ids.length) continue;
+    const open=OPENCH.has(String(c.n))||!!Q||auto; const ne=c.scenes.reduce((n,id)=>n+editCount(id),0);
+    h+='<section class="chap"><div class="hd"><div class="t" data-ch="'+c.n+'">'+(c.n==='ns'?'':'Chapter '+c.n+': ')+esc(c.title)+'<span class="n">'+ids.length+' scenes · '+countsText(c.scenes)+(ne?' <span class="badge">'+ne+' edited</span>':'')+'</span></div>'
       +'<button class="small" data-copych="'+c.n+'">Copy</button></div>';
     if(open) for(const id of ids) h+=sceneHtml(id);
     h+='</section>';
@@ -202,14 +230,14 @@ function render(){
 }
 function grow(ta){ ta.style.height='auto'; ta.style.height=(ta.scrollHeight+2)+'px'; }
 function sceneHtml(id){
-  const sc=IX.scenes[id], n=editCount(id), open=OPEN.has(id)||!!Q;
+  const sc=IX.scenes[id], n=editCount(id), open=OPEN.has(id)||!!Q||(FILTER!=='all'&&FILTER!=='none');
   const chk=SELMODE?'<input type="checkbox" class="chk" data-selscene="'+id+'"'+(SEL.has('s:'+id)?' checked':'')+'>':'';
-  let h='<div class="scene" id="sc-'+id+'"><div class="hd">'+chk+'<div class="t" data-scene="'+id+'">'+esc(sc.title)+(n?'<span class="badge">'+n+' edited</span>':'')+'<small>'+esc(id)+(sc.map?' · '+esc(sc.map):'')+'</small></div>'
+  let h='<div class="scene" id="sc-'+id+'"><div class="hd">'+chk+'<div class="t" data-scene="'+id+'">'+esc(sc.title)+(n?'<span class="badge">'+n+' edited</span>':'')+'<small>'+esc(id)+(sc.map?' · '+esc(sc.map):'')+' · '+countsText([id])+'</small></div>'
     +'<button class="small" data-copysc="'+id+'">Copy</button><button class="small purple" data-play="'+id+'">Play</button></div>';
   if(open){
     h+='<div class="stage"><img loading="lazy" alt="" src="art/script-stage/'+id+'.webp" onerror="this.parentNode.style.display=\'none\'"></div>';
     h+='<div class="who">Who is there: '+esc(sc.cast.join(', ')||'nobody listed')+(sc.recipe.from==='none'?' · <span class="warn">No working Play recipe yet for this scene.</span>':'')+'</div>';
-    h+='<div class="lines">'+linesHtml(id)+'</div>';
+    h+='<div class="lines">'+convosHtml(id)+'</div>';
     h+='<div class="pad" style="padding-bottom:10px"><button class="small ghost" data-addend="'+id+'">+ Add a line at the end</button></div>';
   }
   return h+'</div>';
@@ -253,7 +281,7 @@ function rowHtml(id,o,r,rows,i){
     +'<div class="meta"><span class="tag" title="'+esc(stT)+'"><span class="dot '+status+'"></span>'+esc(stT)+'</span>'
     +(mood?'<span class="tag'+(e.mood?' chg':'')+'">'+esc(mood)+'</span>':'')+(talk&&!mood?'<span class="tag'+(e.talk?' chg':'')+'">'+esc(TALKS.find(t=>t[0]===talk)[1])+'</span>':'')
     +rs.map(x=>'<span class="tag'+(e.react?' chg':'')+'">'+esc(x[0])+': '+esc(x[1])+(x[2]?' on "'+esc(x[2])+'"':'')+'</span>').join('')
-    +(e.pre?'<span class="tag chg">pause before '+e.pre+'s</span>':'')+(e.post?'<span class="tag chg">pause after '+e.post+'s</span>':'')+(ln&&ln.cond?'<span class="tag">only sometimes</span>':'')+'</div>'
+    +(e.pre?'<span class="tag chg">pause before '+e.pre+'s</span>':'')+(e.post?'<span class="tag chg">pause after '+e.post+'s</span>':'')+(ln&&ln.cond?'<span class="tag">only sometimes</span>':'')+(plotRefs(id).has(ref)?'<span class="tag plot">📌 plot line</span>':'')+'</div>'
     +'<div class="acts">'+(rm?'<button class="small ghost" data-undo="'+esc(key)+'">Put it back</button>':
       '<button class="small" data-mv="up|'+esc(key)+'">▲</button><button class="small" data-mv="dn|'+esc(key)+'">▼</button><button class="small" data-del="'+esc(key)+'">✕</button><button class="small'+(PANEL.has(key)?' on':'')+'" data-panel="'+esc(key)+'">More</button>'
       +(edited?'<button class="small ghost" data-undo="'+esc(key)+'">Undo</button>':''))+'</div>';
@@ -270,6 +298,7 @@ function panelHtml(id,o,ln,e,key,isIns,mood,talk,rs){
   h+='<h4>How the others react</h4><div class="pr">'+rs.map((x,j)=>'<span class="tag">'+esc(x[0])+': '+esc(x[1])+(x[2]?' on "'+esc(x[2])+'"':'')+'<button class="small ghost" data-rcue="'+esc(key)+'|'+j+'" style="min-height:34px;padding:2px 8px">Cue</button><button class="small ghost" data-rmood="'+esc(key)+'|'+j+'" style="min-height:34px;padding:2px 8px">Mood</button><button class="small ghost" data-rdel="'+esc(key)+'|'+j+'" style="min-height:34px;padding:2px 8px">✕</button></span>').join('')
     +'<button class="small" data-radd="'+esc(key)+'">+ Reaction</button>'+(e.react?'<button class="small ghost" data-rreset="'+esc(key)+'">Back to the game\'s</button>':'')+'</div>';
   h+='<h4>Add</h4><div class="pr"><button class="small" data-addafter="'+esc(key)+'">+ Line after this</button><button class="small" data-beatafter="'+esc(key)+'">+ Silent beat after this</button></div>';
+  h+='<h4>Conversation</h4><div class="pr"><button class="small" data-cvsplit="'+esc(key)+'">Start a new conversation here</button></div>';
   h+=vp;
   return h+'</div>';
 }
@@ -391,6 +420,270 @@ $('bCopySel').onclick=()=>{
   }
   copyOut(parts.join('\n\n'),'what you ticked');
 };
+// ---------- conversations, review status, Workshop, Paste back, suggestions (build scriptconvo1, docs/SCRIPT_EDITOR.md) ----------
+// A scene is split into conversations by tools/script-index/convos.py (data/script-index.json scenes[id].convos). On this phone (draft aot-script-draft):
+//   DRAFT.review  {cid:{st,note,title,purpose}}   st: none (Not reviewed), work (Needs work), shop (Workshopping), lock (Locked)
+//   DRAFT.cv      {scene:{split:[line ref],merge:[cid]}}   Tom's Split and Merge (replaces the sent copy of that scene)
+//   DRAFT.packets {code:{map:{n:{id,ref,fp,who,cid}},made}}  what each copied Workshop packet numbered, for Paste back
+//   DRAFT.sugg    {scene:{key:{ref,kind,opts,who,fp,code}}}   Paste back suggestions waiting for Accept or Reject (kind re, rm, add)
+//   DRAFT.res     {'scene|ref':{v:'a'|'r',cid,d}}   Claude suggestions Tom accepted or rejected (removed from the file on Send)
+// Sent copies: data/script-review.json {convos,splits,resolved}; Claude's suggestions: data/script-suggestions.json {items:{'scene|ref':{opts,reason,from,date}}}.
+const STS=[['none','Not reviewed','You have not been through it yet.'],['work','Needs work','You want it better. It travels with Send to Claude.'],['shop','Workshopping','A packet was copied or suggestions are waiting.'],['lock','Locked','You are happy. Writing sessions must not change these lines. You can still edit them yourself.']];
+const STN=Object.fromEntries(STS.map(x=>[x[0],x[1]]));
+let FILTER='all', REVIEW={convos:{},splits:{},resolved:{}}, SUGG={items:{}}, BRIEF={brief:'',speakers:{},pairs:[]};
+const GC={}, LG={};
+const fp=s=>{ let h=5381; for(const ch of String(s)) h=((h*33)^ch.charCodeAt(0))>>>0; return h.toString(36); };
+function cvState(id){ const s=(DRAFT.cv&&DRAFT.cv[id])||REVIEW.splits[id]||{}; return {split:(s.split||[]).slice(),merge:(s.merge||[]).slice()}; }
+function cvMut(id){ DRAFT.cv=DRAFT.cv||{}; if(!DRAFT.cv[id]) DRAFT.cv[id]=cvState(id); return DRAFT.cv[id]; }
+function rvOf(cid){ return Object.assign({},REVIEW.convos[cid]||{},(DRAFT.review||{})[cid]||{}); }
+function rvSet(cid,k,v){ DRAFT.review=DRAFT.review||{}; const e=DRAFT.review[cid]||(DRAFT.review[cid]={}); const sent=(REVIEW.convos[cid]||{})[k];
+  if((v||'')===(sent||'')) delete e[k]; else e[k]=v; if(!Object.keys(e).length) delete DRAFT.review[cid]; saveDraft(); }
+function plotRefs(id){ const sc=IX.scenes[id]; if(!sc._plot) sc._plot=new Set((sc.convos||[]).flatMap(c=>c.plot||[])); return sc._plot; }
+function sceneMap(id){ const sc=IX.scenes[id]; const m=(sc.recipe&&sc.recipe.map)||sc.map; return (IX.mapNames&&IX.mapNames[m])||m||''; }
+function autoTitle(id,rows){ const cnt={}; for(const r of rows) if(r.o&&r.o.refs&&!r.o.rm&&r.o.talk!=='Narrator') cnt[r.o.talk]=(cnt[r.o.talk]||0)+1;
+  const n=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a]); const who=!n.length?'The narrator':n.length===1?n[0]:n.length===2?n[0]+' and '+n[1]:n.length===3?n[0]+', '+n[1]+' and '+n[2]:n[0]+', '+n[1]+' and '+(n.length-2)+' more';
+  const pl=sceneMap(id); return who+(pl?' at '+pl:''); }
+function startsOf(id){ const sc=IX.scenes[id], cv=cvState(id), list=sc.convos||[], st={}, order=[];
+  list.forEach((c,i)=>{ if(i&&cv.merge.includes(c.id)) return; st[c.ref]=c; order.push(c); });
+  for(const ref of cv.split) if(!st[ref]){ const c={id:id+':u:'+ref,ref,u:true,title:'',purpose:'',plot:[]}; st[ref]=c; order.push(c); }
+  return {st,first:order[0]||{id:id+':0',ref:null,title:'',purpose:'',plot:[]}}; }
+function decorate(id,g,n,hasS){ const c=g.c, rv=rvOf(c.id); g.n=n; g.cid=c.id; g.rv=rv; g.title=rv.title||(c.u?autoTitle(id,g.rows||[]):c.title)||'Conversation '+n;
+  g.purpose=rv.purpose||c.purpose||''; g.sugg=hasS; g.st=rv.st||(hasS?'shop':'none'); g.vis=FILTER==='all'||(FILTER==='sugg'?hasS:g.st===FILTER); return g; }
+// full groups for an open scene: the rows as the editor draws them (edits applied), cut at each conversation's first line
+function groups(id){
+  if(GC[id]) return GC[id];
+  const {st,first}=startsOf(id); const rows=flat(view(id),0,[]); const out=[]; let cur=null; const used=new Set();
+  for(const r of rows){
+    const ref=r.o&&r.o.refs?r.o.refs[0]:null, c=ref&&st[ref];
+    if(c&&!used.has(c)){ used.add(c); if(cur&&!cur.c) cur.c=c; else { cur={c,rows:[]}; out.push(cur); } }
+    if(!cur){ cur={c:null,rows:[]}; out.push(cur); }
+    cur.rows.push(r);
+  }
+  if(!out.length) out.push({c:first,rows:[]});
+  for(const g of out) if(!g.c) g.c=first;
+  out.forEach((g,i)=>decorate(id,g,i+1,g.rows.some(r=>r.o&&r.o.refs&&suggFor(id,r.o.refs[0]).length)));
+  return GC[id]=out;
+}
+// light groups for headers, counts and the filter: the index's line order, no edits drawn (cheap for all scenes)
+function lightGroups(id){
+  const key=id+'|'+FILTER; if(LG[key]&&LG[key].v===lgVer) return LG[key].g;
+  const {st,first}=startsOf(id); const out=[]; let cur=null;
+  for(const ref of baseOrder(IX.scenes[id])){ const c=st[ref]; if(c){ cur={c,refs:[]}; out.push(cur); } if(!cur){ cur={c:first,refs:[]}; out.push(cur); } cur.refs.push(ref); }
+  for(const x of ((DRAFT.sugg||{})[id]?Object.values(DRAFT.sugg[id]):[])) if(!out.some(g=>g.refs.includes(x.ref))&&out[0]) out[0].refs.push(x.ref);
+  if(!out.length) out.push({c:first,refs:[]});
+  out.forEach((g,i)=>decorate(id,g,i+1,g.refs.some(r=>suggFor(id,r).length)));
+  LG[key]={v:lgVer,g:out}; return out;
+}
+let lgVer=0; function bump(){ lgVer++; for(const k of Object.keys(GC)) delete GC[k]; }
+function countsText(ids){ let n=0; const c={work:0,shop:0,lock:0,none:0}; let sg=0; for(const id of ids) for(const g of lightGroups(id)){ n++; c[g.st]++; if(g.sugg) sg++; }
+  const bits=[n+' conversation'+(n===1?'':'s')]; if(c.work) bits.push(c.work+' need'+(c.work===1?'s':'')+' work'); if(c.shop) bits.push(c.shop+' workshopping'); if(c.lock) bits.push(c.lock+' locked'); if(c.none&&c.none<n) bits.push(c.none+' not reviewed'); if(sg) bits.push(sg+' with suggestions');
+  return bits.join(' · '); }
+function renderChips(){ const all=Object.keys(IX.scenes); const c={all:0,none:0,work:0,shop:0,lock:0,sugg:0};
+  for(const id of all) for(const g of lightGroups(id)){ c.all++; c[g.st]++; if(g.sugg) c.sugg++; }
+  const L=[['all','All'],['none','Not reviewed'],['work','Needs work'],['shop','Workshopping'],['lock','Locked'],['sugg','Has suggestions']];
+  $('chips').innerHTML=L.map(x=>'<button data-filter="'+x[0]+'" class="'+(FILTER===x[0]?'on':'')+'">'+x[1]+'<span class="c">'+c[x[0]]+'</span></button>').join(''); }
+// ---------- suggestions ----------
+function resolvedC(ck){ return (DRAFT.res&&DRAFT.res[ck])||(REVIEW.resolved&&REVIEW.resolved[ck]); }
+function suggFor(id,ref){ const out=[]; const p=(DRAFT.sugg||{})[id]||{};
+  for(const k of Object.keys(p)) if(p[k].ref===ref) out.push(Object.assign({key:k,src:'paste'},p[k]));
+  const ck=id+'|'+ref, it=SUGG.items&&SUGG.items[ck]; if(it&&Array.isArray(it.opts)&&it.opts.length&&!resolvedC(ck)) out.push({key:ck,src:'claude',kind:'re',ref,opts:it.opts.slice(0,3),reason:it.reason||'',from:it.from,date:it.date});
+  return out; }
+const CUT=/^[\[(]?\s*(cut|remove|removed|delete|deleted|drop)\s*(this line|it)?\s*[\])]?\.?$/i;
+function suggHtml(id,ref,g){
+  const L=suggFor(id,ref); if(!L.length) return ''; const cur=textOf(id,ref), spk=speakerOf(id,ref); let h='';
+  for(const x of L){
+    const k=esc(id+'|'+x.src+'|'+x.key);
+    const stale=x.src==='paste'?(x.fp&&x.fp!==fp(cur)):(x.from&&x.from!==cur);
+    h+='<div class="sg"><div class="src">'+(x.src==='claude'?'Suggestion from Claude'+(x.reason?': '+esc(x.reason):''):'Suggestion from Paste back')+'</div>'+(stale?'<div class="warn">This line changed since you copied it.</div>':'');
+    if(x.kind==='rm') h+='<div class="bf">'+esc(spk+': '+cur)+'</div><div class="af">Cut this line.</div><div class="pr"><button class="small gold" data-sga="'+k+'|0">Accept</button><button class="small ghost" data-sgr="'+k+'">Reject</button></div>';
+    else if(x.kind==='add') h+='<div class="af">Add after this line: <b>'+esc(x.who||'(who says it?)')+'</b>: '+esc(x.opts[0])+'</div>'+SPK_NOTE(x.opts[0]).map(w=>'<div class="warn">'+esc(w)+'</div>').join('')+'<div class="pr"><button class="small gold" data-sga="'+k+'|0">Accept</button><button class="small ghost" data-sgr="'+k+'">Reject</button></div>';
+    else { h+='<div class="bf">'+esc(cur)+'</div>';
+      x.opts.forEach((o,j)=>{ const cut=CUT.test(o); h+='<div class="'+(j?'opt':'')+'"><div class="af">'+(x.opts.length>1?'<b>'+(j+1)+'.</b> ':'')+esc(cut?'Cut this line.':o)+'</div>'+(cut?'':SPK_NOTE(o).map(w=>'<div class="warn">'+esc(w)+'</div>').join(''))+'<div class="pr"><button class="small gold" data-sga="'+k+'|'+j+'">'+(x.opts.length>1?'Use '+(j+1):'Accept')+'</button>'+(x.opts.length>1?'':'<button class="small ghost" data-sgr="'+k+'">Reject</button>')+'</div></div>'; });
+      if(x.opts.length>1) h+='<div class="pr"><button class="small ghost" data-sgr="'+k+'">Reject all</button></div>'; }
+    h+='</div>';
+  }
+  return h;
+}
+function findSugg(id,src,key){ if(src==='paste'){ const x=((DRAFT.sugg||{})[id]||{})[key]; return x?Object.assign({key,src},x):null; } const L=suggFor(id,key.slice(id.length+1)); return L.find(x=>x.src==='claude'&&x.key===key)||null; }
+function dropSugg(id,x,v){ if(x.src==='paste'){ delete DRAFT.sugg[id][x.key]; if(!Object.keys(DRAFT.sugg[id]).length) delete DRAFT.sugg[id]; }
+  else { DRAFT.res=DRAFT.res||{}; const g=groups(id).find(g=>g.rows.some(r=>r.o&&r.o.refs&&r.o.refs[0]===x.ref)); DRAFT.res[x.key]={v,cid:g?g.cid:'',d:new Date().toISOString().slice(0,10)}; }
+  saveDraft(); bump(); }
+function acceptSugg(id,x,j,done){
+  const ref=x.ref, o=x.opts?x.opts[j]:'';
+  if(x.kind==='rm'||(x.kind==='re'&&CUT.test(o))){ removeLine(id,ref); dropSugg(id,x,'a'); return done&&done(); }
+  if(x.kind==='add'){ const cast=IX.scenes[id].cast.map(n=>n.toLowerCase()); const go=w=>{ addIns(id,ref,{who:w,text:o}); dropSugg(id,x,'a'); done&&done(); };
+    const w=x.who&&IX.scenes[id].cast.find(n=>n.toLowerCase()===String(x.who).toLowerCase());
+    if(w) return go(w);
+    return pickWho(id,x.who,n=>{ closeSheet(); go(n); render(); }); }
+  const s=mut(id); if(s.lines[ref]) delete s.lines[ref].rm; setTo(id,ref,o); dropSugg(id,x,'a'); done&&done();
+}
+// ---------- packets ----------
+function chapterOf(id){ return IX.chapters.find(c=>c.scenes.includes(id)); }
+function leadIn(id,g){ const gs=groups(id), out=[]; const before=[]; for(const h of gs){ if(h===g) break; for(const r of h.rows) if(r.o&&r.o.refs&&!r.o.rm) before.push(r.o.talk.toUpperCase()+': '+r.o.lines[0]); }
+  if(!before.length){ const c=chapterOf(id); const k=c?c.scenes.indexOf(id):-1; if(k>0){ const p=c.scenes[k-1]; for(const h of groups(p)) for(const r of h.rows) if(r.o&&r.o.refs&&!r.o.rm) before.push(r.o.talk.toUpperCase()+': '+r.o.lines[0]); } }
+  return before.slice(-3); }
+function speakerNote(n){ return BRIEF.speakers[n]||BRIEF.speakers[n.replace(/^The /,'')]||('a side character or monster: '+(BRIEF.speakers.Monster||'keep the voice these lines already have.')); }
+function packetText(code,items){ // items: [{id,g}]
+  const map={}; let n=0; const who=new Set(); const body=[];
+  for(const {id,g} of items){
+    const sc=IX.scenes[id], c=chapterOf(id), plot=new Set(g.c.plot||[]);
+    const conv=[];
+    for(const r of g.rows){
+      if(r.sub){ conv.push('['+r.sub+':]'); continue; } if(r.grp) continue; const o=r.o; if(!o) continue;
+      if(o.act!==undefined){ if(o.act) conv.push(o.act); continue; }
+      if(o.beat!==undefined){ conv.push('[A silent beat.]'); continue; }
+      if(o.rm) continue;
+      n++; map[n]={id,ref:o.refs[0],fp:fp(o.lines[0]),who:o.talk,cid:g.cid}; if(o.talk!=='Narrator') who.add(o.talk); else who.add('Narrator');
+      conv.push('L'+n+' '+o.talk.toUpperCase()+': '+o.lines[0]+(plot.has(o.refs[0])?'  (plot: keep the meaning)':''));
+    }
+    const li=leadIn(id,g); for(const l of li) who.add(l.split(':')[0].replace(/^./,x=>x).trim());
+    body.push('WHERE WE ARE'+(items.length>1?' ('+g.title+')':''),
+      (c?(c.n==='ns'?'':'Chapter '+c.n+': ')+c.title+'. ':'')+'Scene: '+sc.title+'. Place: '+(sceneMap(id)||'unknown')+'. Present: '+(sc.cast.join(', ')||'nobody listed')+'.',
+      'What this conversation has to do: '+(g.purpose||'(not written yet: keep what happens the same)'), '');
+    if(li.length) body.push('LEAD-IN (context, do not change)',...li,'');
+    body.push('THE CONVERSATION',...conv,'');
+    if(g.rv.note) body.push("TOM'S NOTE",g.rv.note,'');
+  }
+  const names=[...who].map(w=>{ const m=[...new Set(Object.values(IX.scenes).flatMap(s=>s.cast))].find(x=>x.toUpperCase()===w.toUpperCase()); return m||w; }).filter((v,i,a)=>a.indexOf(v)===i);
+  const pairs=BRIEF.pairs||[]; const mine=pairs.filter(p=>names.includes(p[0])), rest=pairs.filter(p=>!names.includes(p[0])); const pick=mine.concat(rest).slice(0,20);
+  const t=[code,'',
+    'This is a Workshop packet from The Adventures of Tom, a family video game (a story RPG) starring a real family. Every line below is spoken out loud in a dialogue box. Please punch up the humor of the conversation. Keep it short.','',
+    'HUMOR BRIEF',BRIEF.brief||'',''];
+  if(pick.length){ t.push("TOM'S OWN REWRITES (this is the humor he wants)"); for(const p of pick) t.push(p[3]==='removed'?'- Cut: '+p[0]+': "'+p[1]+'"':p[3]==='added'?'- Added: '+p[0]+': "'+p[2]+'"':'- '+p[0]+': "'+p[1]+'" became "'+p[2]+'"'); t.push(''); }
+  t.push('WHO IS SPEAKING',...names.map(w=>'- '+w+': '+speakerNote(w)),'');
+  t.push(...body);
+  t.push('RULES','- No em dashes. Use contractions (I\'m, it\'s, don\'t).','- No new characters. Only people in "Present" may speak.','- Same number of lines unless a cut or an added line is clearly better.','- Keep each line near its current length. Lines marked (plot: keep the meaning) must still say the same fact.','- Lines in [brackets] are actions: do not number or change them.','');
+  t.push('REPLY FORMAT','Reply with the packet code on the first line, then only the lines you change, one per line, exactly like this:',code,'L3: new words for line 3','L5: [cut]','L6+: TNB: a new line added after line 6','L8 option 1: first choice for line 8','L8 option 2: second choice for line 8','Leave unchanged lines out. Give up to three options for a line when you are unsure. No other text.');
+  return {text:t.join('\n'),map};
+}
+function storePacket(code,map){ DRAFT.packets=DRAFT.packets||{}; DRAFT.packets[code]={map,made:Date.now()};
+  const ks=Object.keys(DRAFT.packets).sort((a,b)=>DRAFT.packets[b].made-DRAFT.packets[a].made); for(const k of ks.slice(40)) delete DRAFT.packets[k]; saveDraft(); }
+function workshop(items,code){ const live=items.filter(x=>x.g.st!=='lock'); if(!live.length) return toast('Locked conversations are not workshopped. Unlock it first.');
+  if(live.length<items.length) toast('Locked conversations were left out.');
+  const {text,map}=packetText(code,live); storePacket(code,map); for(const x of live) rvSet(x.g.cid,'st','shop'); bump(); render(); copyOut(text,'the Workshop packet. Paste it into any AI'); }
+// ---------- Paste back ----------
+function parseReply(text){
+  const out={lines:[],codes:[]}; let code=null;
+  for(const raw of String(text||'').split(/\r?\n/)){
+    let s=raw.replace(/[*_`~]+/g,'').replace(/^[\s>#\-•·–—]+/,'').replace(/^\d+[.)]\s+(?=L\s?\d)/i,'').trim(); if(!s) continue;
+    const cm=/^(?:packet(?:\s*code)?\s*:?\s*)?W\s+([A-Za-z][\w]*)\s+(\w+)\s*$/i.exec(s); if(cm){ code='W '+cm[1]+' '+cm[2]; out.codes.push(code); continue; }
+    const lm=/^(?:L|Line\s*)(\d+)\s*(\+)?\s*(?:[(\[]?\s*(?:option|opt\.?|alt(?:ernative)?|choice)\s*(\d+)\s*[)\]]?)?(?:\s*[:.)\]\-–—]\s*|\s+(?=[A-Za-z][\w.' ]{0,24}:))(.*)$/i.exec(s);
+    if(lm) out.lines.push({code,n:+lm[1],add:!!lm[2],opt:lm[3]?+lm[3]:0,v:lm[4].trim(),raw:raw.trim()});
+  }
+  return out;
+}
+const unq=v=>{ v=v.trim(); const m=/^["“”'](.*)["“”']$/.exec(v); return m?m[1].trim():v; };
+function mapForCode(code,ctx){
+  if(code&&DRAFT.packets&&DRAFT.packets[code]) return DRAFT.packets[code].map;
+  let id=null,n=0; const m=code&&/^W (\S+) (\d+)$/.exec(code); if(m&&IX.scenes[m[1]]){ id=m[1]; n=+m[2]; } else if(!code&&ctx){ id=ctx.id; n=groups(ctx.id).findIndex(g=>g.cid===ctx.cid)+1; }
+  if(!id||!n) return null; const g=groups(id)[n-1]; if(!g) return null; return packetText('W '+id+' '+n,[{id,g}]).map;
+}
+function placeReply(text,ctx){
+  const P=parseReply(text), bad=[], placed=new Set(); let nPl=0, same=0; const addIdx={};
+  if(!P.lines.length) return {n:0,bad:[],msg:'No lines like "L3: new words" were found in what you pasted.'};
+  for(const L of P.lines){
+    const map=mapForCode(L.code,ctx); if(!map){ bad.push(L.raw+(L.code?'':'   (no packet code: tap Paste back on the conversation instead)')); continue; }
+    const T=map[L.n]; if(!T||!IX.scenes[T.id]){ bad.push(L.raw); continue; }
+    const g=groups(T.id).find(g=>g.rows.some(r=>r.o&&r.o.refs&&r.o.refs[0]===T.ref)); if(g&&g.st==='lock'){ bad.push(L.raw+'   (that conversation is Locked)'); continue; }
+    let v=unq(L.v), who=null; const sm=/^([A-Za-z][\w.' ]{0,24}?)\s*:\s*(.+)$/.exec(v);
+    if(sm&&(L.add||sm[1].toLowerCase()===String(T.who).toLowerCase())){ who=sm[1].trim(); v=unq(sm[2]); }
+    if(!v){ bad.push(L.raw); continue; }
+    const kind=L.add?'add':CUT.test(v)?'rm':'re';
+    if(kind==='re'&&v===textOf(T.id,T.ref)){ same++; continue; }
+    DRAFT.sugg=DRAFT.sugg||{}; const S=DRAFT.sugg[T.id]||(DRAFT.sugg[T.id]={});
+    let key=T.ref+'|'+kind; if(kind==='add'){ const a=T.ref+'|'+L.n; addIdx[a]=addIdx[a]||0; if(!L.opt||L.opt===1) addIdx[a]++; key+='|'+L.n+'.'+addIdx[a]; }
+    const x=S[key]||(S[key]={ref:T.ref,kind,opts:[],fp:T.fp,code:L.code||''});
+    if(kind==='add') x.who=who||x.who||null;
+    if(kind!=='rm'&&!x.opts.includes(v)&&x.opts.length<3) x.opts.push(v); if(kind==='rm') x.opts=['[cut]'];
+    nPl++; if(g) placed.add(T.id+'|'+g.cid);
+  }
+  for(const k of placed){ const i=k.indexOf('|'); const cid=k.slice(i+1); if(rvOf(cid).st!=='lock') rvSet(cid,'st','shop'); }
+  saveDraft(); bump();
+  return {n:nPl,same,bad,placed:[...placed]};
+}
+function pasteSheet(ctx){
+  window.__pbctx=ctx||null;
+  sheet('<h3 style="margin-top:0">Paste back</h3><div class="hint">Paste the AI\'s whole reply. Chat text around the lines is fine.'+(ctx?' Lines with no packet code go to this conversation.':'')+'</div>'
+    +'<textarea id="pbx" style="min-height:200px;margin-top:8px" placeholder="W ch2Starter 1&#10;L3: new words"></textarea>'
+    +'<div class="pr" style="margin-top:8px"><button class="gold" data-pbgo="1">Place the lines</button><button data-pbclip="1">Paste from clipboard</button><button class="ghost" data-close="1">Cancel</button></div>');
+}
+function pasteResult(R){
+  if(!R.n&&!R.bad.length){ sheet('<h3 style="margin-top:0">Nothing placed</h3><div>'+esc(R.msg||(R.same?'Every line came back unchanged.':'No changed lines were found.'))+'</div><div class="pr" style="margin-top:10px"><button class="ghost" data-close="1">Close</button></div>'); return; }
+  for(const k of R.placed||[]){ const id=k.slice(0,k.indexOf('|')); OPEN.add(id); OPENCH.add(String(IX.scenes[id].chapter)); }
+  let h='<h3 style="margin-top:0">'+R.n+' suggestion'+(R.n===1?'':'s')+' placed</h3><div class="hint">They show under each line with Accept and Reject.'+(R.same?' '+R.same+' came back unchanged.':'')+'</div>';
+  if(R.bad.length){ window.__bad=R.bad.join('\n'); h+='<h4 class="hint" style="margin-top:12px">Could not place these</h4><div class="panel" style="white-space:pre-wrap;font-size:14px">'+esc(R.bad.join('\n'))+'</div><div class="pr"><button data-copybad="1">Copy them</button></div>'; }
+  h+='<div class="pr" style="margin-top:10px"><button class="gold" data-gotofirst="'+esc((R.placed||[])[0]||'')+'">Show me</button><button class="ghost" data-close="1">Close</button></div>';
+  render(); sheet(h);
+}
+// ---------- conversation containers ----------
+function convosHtml(id){
+  const gs=groups(id); let h=''; let hidden=0;
+  for(const g of gs){
+    if(!g.vis){ hidden++; continue; }
+    const ck=esc(id+'|'+g.cid), stt=g.st, many=gs.length>1;
+    const chk=SELMODE?'<input type="checkbox" class="chk" data-selcv="'+ck+'"'+(SEL.has('c:'+id+'|'+g.cid)?' checked':'')+'>':'';
+    const nS=g.rows.reduce((n,r)=>n+(r.o&&r.o.refs?suggFor(id,r.o.refs[0]).length:0),0);
+    h+='<div class="cv" id="cv-'+esc(g.cid.replace(/[^\w-]/g,'_'))+'"><div class="cvh">'+chk+'<div class="t" data-cvedit="'+ck+'">'+(many?g.n+'. ':'')+esc(g.title)+'<small class="'+(g.purpose?'':'miss')+'">'+esc(g.purpose||'Purpose not written yet')+'</small></div><button class="st '+stt+'" data-cvst="'+ck+'">'+STN[stt]+'</button></div>';
+    h+='<div class="cvb"><button class="small" data-cvnote="'+ck+'">Note</button>'+(stt==='lock'?'':'<button class="small purple" data-cvshop="'+ck+'">Workshop</button><button class="small" data-cvpaste="'+ck+'">Paste back</button>')
+      +(nS?'<button class="small gold" data-cvaccall="'+ck+'">Accept all</button><button class="small ghost" data-cvrejall="'+ck+'">Reject all</button>':'')
+      +(g.n>1?'<button class="small ghost" data-cvmerge="'+ck+'">Merge with the one above</button>':'')+'</div>';
+    if(g.rv.note) h+='<div class="note" data-cvnote="'+ck+'">'+esc(g.rv.note)+'</div>';
+    for(const r of g.rows){
+      const ind=r.depth?' ind':'';
+      if(r.grp) continue;
+      if(r.sub){ h+='<div class="grp" style="margin-left:'+(r.depth*14)+'px">'+r.sub+'</div>'; continue; }
+      const o=r.o;
+      if(o.act!==undefined){ if(o.act) h+='<div class="act" style="margin-left:'+(r.depth*14)+'px">'+esc(o.act)+'</div>'; continue; }
+      if(o.beat!==undefined){ h+=beatHtml(id,o,r); continue; }
+      h+=rowHtml(id,o,r,null,0)+suggHtml(id,o.refs[0],g);
+    }
+    h+='</div>';
+  }
+  if(hidden) h+='<div class="cvhid">'+hidden+' other conversation'+(hidden===1?' is':'s are')+' hidden by the filter.</div>';
+  return h||'<div class="empty">No lines.</div>';
+}
+function groupByKey(k){ const id=k.slice(0,k.indexOf('|')), cid=k.slice(k.indexOf('|')+1); return {id,cid,g:groups(id).find(g=>g.cid===cid)}; }
+function stSheet(k){ const {g}=groupByKey(k);
+  sheet('<h3 style="margin-top:0">'+esc(g.title)+'</h3>'+STS.map(x=>'<button class="stbtn'+(g.st===x[0]?' on':'')+'" data-stpick="'+esc(k)+'|'+x[0]+'">'+x[1]+'<small>'+x[2]+'</small></button>').join('')+'<button class="ghost" data-close="1">Cancel</button>'); }
+function noteSheet(k){ const {g}=groupByKey(k);
+  sheet('<h3 style="margin-top:0">Note: '+esc(g.title)+'</h3><div class="hint">In your words. It travels in the Workshop packet and with Send to Claude.</div><textarea id="cvnote" style="margin-top:8px;min-height:120px">'+esc(g.rv.note||'')+'</textarea><div class="pr" style="margin-top:8px"><button class="gold" data-notesave="'+esc(k)+'">Save</button><button class="ghost" data-close="1">Cancel</button></div>'); }
+function editSheet(k){ const {g}=groupByKey(k);
+  sheet('<h3 style="margin-top:0">Title and purpose</h3><h4 class="hint">Title</h4><input type="search" id="cvtitle" value="'+esc(g.title)+'"><h4 class="hint">Purpose (what this exchange has to do in the story)</h4><textarea id="cvpurpose">'+esc(g.purpose)+'</textarea>'
+    +'<div class="pr" style="margin-top:8px"><button class="gold" data-tpsave="'+esc(k)+'">Save</button><button class="small" data-copycv="'+esc(k)+'">Copy this conversation</button><button class="ghost" data-close="1">Cancel</button></div>'); }
+function convoText(id,g){ const out=['-- '+g.title+' --']; for(const r of g.rows){ const o=r.o; if(!o) continue; if(o.act) out.push(o.act); else if(o.refs&&!o.rm) out.push(o.talk.toUpperCase()+': '+o.lines[0]); } return out.join('\n'); }
+document.addEventListener('click',ev=>{
+  const t=ev.target.closest('[data-filter],[data-cvst],[data-stpick],[data-cvnote],[data-notesave],[data-cvedit],[data-tpsave],[data-copycv],[data-cvmerge],[data-cvsplit],[data-cvshop],[data-cvpaste],[data-pbgo],[data-pbclip],[data-copybad],[data-gotofirst],[data-sga],[data-sgr],[data-cvaccall],[data-cvrejall]');
+  if(!t) return; const d=t.dataset;
+  if(d.filter){ FILTER=d.filter; bump(); render(); window.scrollTo(0,0); return; }
+  if(d.cvst){ stSheet(d.cvst); return; }
+  if(d.stpick){ const a=d.stpick.split('|'), st=a.pop(), k=a.join('|'); const {cid}=groupByKey(k); rvSet(cid,'st',st==='none'?'none':st); closeSheet(); bump(); render(); return; }
+  if(d.cvnote){ noteSheet(d.cvnote); return; }
+  if(d.notesave){ const {cid}=groupByKey(d.notesave); rvSet(cid,'note',$('cvnote').value.trim()); closeSheet(); bump(); render(); return; }
+  if(d.cvedit){ editSheet(d.cvedit); return; }
+  if(d.tpsave){ const {id,cid,g}=groupByKey(d.tpsave); const c=g.c; const ti=$('cvtitle').value.trim(), pu=$('cvpurpose').value.trim();
+    const autoT=c.u?autoTitle(id,g.rows):c.title; rvSet(cid,'title',ti&&ti!==autoT?ti:''); rvSet(cid,'purpose',pu&&pu!==(c.purpose||'')?pu:''); closeSheet(); bump(); render(); return; }
+  if(d.copycv){ const {id,g}=groupByKey(d.copycv); copyOut(convoText(id,g),'the conversation'); return; }
+  if(d.cvmerge){ const {id,g}=groupByKey(d.cvmerge); const cv=cvMut(id); if(g.c.u) cv.split=cv.split.filter(r=>r!==g.c.ref); else if(!cv.merge.includes(g.cid)) cv.merge.push(g.cid); saveDraft(); bump(); render(); toast('Merged with the conversation above.'); return; }
+  if(d.cvsplit){ const [id,ref]=parseKey(d.cvsplit); const gs=groups(id); if(gs[0].rows.find(r=>r.o&&r.o.refs)&&gs[0].rows.find(r=>r.o&&r.o.refs).o.refs[0]===ref) return toast('This line already starts the first conversation.');
+    const ix=(IX.scenes[id].convos||[]).find(c=>c.ref===ref); const cv=cvMut(id); if(ix){ cv.merge=cv.merge.filter(x=>x!==ix.id); } else if(!cv.split.includes(ref)) cv.split.push(ref); else return toast('A conversation already starts here.');
+    saveDraft(); bump(); PANEL.delete(d.cvsplit); render(); toast('New conversation starts at this line.'); return; }
+  if(d.cvshop){ const {id,g}=groupByKey(d.cvshop); workshop([{id,g}],'W '+id+' '+g.n); return; }
+  if(d.cvpaste){ const {id,cid}=groupByKey(d.cvpaste); pasteSheet({id,cid}); return; }
+  if(d.pbclip){ (async()=>{ try{ $('pbx').value=await navigator.clipboard.readText(); }catch(e){ toast('This phone would not read the clipboard. Long-press the box and choose Paste.'); } })(); return; }
+  if(d.pbgo){ const R=placeReply($('pbx').value,window.__pbctx); closeSheet(); pasteResult(R); return; }
+  if(d.copybad){ copyOut(window.__bad||'','the lines that could not be placed'); return; }
+  if(d.gotofirst!==undefined){ closeSheet(); const k=d.gotofirst; if(!k) return; const id=k.slice(0,k.indexOf('|')), cid=k.slice(k.indexOf('|')+1); render(); const el=document.getElementById('cv-'+cid.replace(/[^\w-]/g,'_')); if(el) el.scrollIntoView(); return; }
+  if(d.sga||d.sgr){ const a=(d.sga||d.sgr).split('|'); const j=d.sga?+a.pop():0; const id=a[0], src=a[1], key=a.slice(2).join('|'); const x=findSugg(id,src,key); if(!x) return render();
+    if(d.sgr){ dropSugg(id,x,'r'); render(); return; } acceptSugg(id,x,j,()=>render()); return; }
+  if(d.cvaccall||d.cvrejall){ const {id,g}=groupByKey(d.cvaccall||d.cvrejall); const refs=g.rows.filter(r=>r.o&&r.o.refs).map(r=>r.o.refs[0]); let n=0;
+    for(const ref of refs) for(const x of suggFor(id,ref)){ if(d.cvrejall){ dropSugg(id,x,'r'); n++; continue; } if(x.kind==='add'&&!(x.who&&IX.scenes[id].cast.some(c=>c.toLowerCase()===String(x.who).toLowerCase()))) continue; acceptSugg(id,x,0,null); n++; }
+    bump(); render(); toast((d.cvaccall?'Accepted ':'Rejected ')+n+'.'+(d.cvaccall?' Lines with several options took option 1.':'')); return; }
+});
+document.addEventListener('change',ev=>{ const t=ev.target, d=t.dataset||{}; if(d.selcv===undefined) return; const k='c:'+d.selcv; t.checked?SEL.add(k):SEL.delete(k); $('selN').textContent=SEL.size+' ticked'; });
+$('bShopSel').onclick=()=>{ const items=[]; for(const c of IX.chapters) for(const id of c.scenes){ if(SEL.has('s:'+id)){ for(const g of groups(id)) items.push({id,g}); continue; } for(const g of groups(id)) if(SEL.has('c:'+id+'|'+g.cid)) items.push({id,g}); }
+  if(!items.length) return toast('Tick a conversation or a scene first.'); DRAFT.packetN=(DRAFT.packetN||0)+1; workshop(items,'W set '+DRAFT.packetN); };
+$('bPaste').onclick=()=>pasteSheet(null);
+function pendingCount(){ return draftCount()+Object.keys(DRAFT.review||{}).length+Object.keys(DRAFT.cv||{}).length+Object.keys(DRAFT.res||{}).length; }
 // ---------- Play ----------
 function playScene(id){
   const sc=IX.scenes[id];
@@ -399,36 +692,51 @@ function playScene(id){
   location.href=new URL('index.html',location.href).href;
 }
 // ---------- Send to Claude ----------
+// Writes up to three files on main with Tom's GitHub token: data/script-edits.json (line edits, as before), data/script-review.json (statuses, notes,
+// titles, purposes, Merge and Split, and which Claude suggestions were accepted or rejected; merged, never replaced) and data/script-suggestions.json
+// (the accepted and rejected suggestions are taken out). With no token the phone shares one file, script-send.json, holding all of it.
 const TOKEN='aot-gh-token',REPO='trivituso81/adventures-of-tom',PATH='data/script-edits.json';
 const b64t=s=>btoa(unescape(encodeURIComponent(s))), t64=s=>decodeURIComponent(escape(atob(s.replace(/\n/g,''))));
-async function ghGet(tok){ const r=await fetch('https://api.github.com/repos/'+REPO+'/contents/'+PATH+'?ref=main&t='+Date.now(),{cache:'no-store',headers:{Authorization:'Bearer '+tok,Accept:'application/vnd.github+json'}}); if(r.status===404) return {sha:null,json:{scenes:{}}}; if(!r.ok) throw new Error('GitHub '+r.status); const j=await r.json(); let cur={scenes:{}}; try{ cur=JSON.parse(t64(j.content||''))||{scenes:{}}; }catch(e){} cur.scenes=cur.scenes||{}; return {sha:j.sha,json:cur}; }
+async function ghGetFile(tok,path,empty){ const r=await fetch('https://api.github.com/repos/'+REPO+'/contents/'+path+'?ref=main&t='+Date.now(),{cache:'no-store',headers:{Authorization:'Bearer '+tok,Accept:'application/vnd.github+json'}}); if(r.status===404) return {sha:null,json:empty()}; if(!r.ok) throw new Error('GitHub '+r.status); const j=await r.json(); let cur=empty(); try{ cur=JSON.parse(t64(j.content||''))||empty(); }catch(e){} return {sha:j.sha,json:cur}; }
+async function ghPutFile(tok,path,build,msg){ for(let tries=0;;tries++){ const cur=await ghGetFile(tok,path,()=>({})); const next=build(cur.json);
+    const body={message:msg,content:b64t(JSON.stringify(next,null,1)+'\n'),branch:'main'}; if(cur.sha) body.sha=cur.sha;
+    const r=await fetch('https://api.github.com/repos/'+REPO+'/contents/'+path,{method:'PUT',headers:{Authorization:'Bearer '+tok,Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify(body)});
+    if(r.status===409&&tries<3) continue; if(!r.ok) throw new Error('GitHub '+r.status); return next; } }
+function mergeReview(cur,rv,cv,res){ const out={made:new Date().toISOString(),convos:Object.assign({},cur.convos||{}),splits:Object.assign({},cur.splits||{}),resolved:Object.assign({},cur.resolved||{})};
+  for(const [cid,e] of Object.entries(rv)){ const m=Object.assign({},out.convos[cid]||{},e); for(const k of Object.keys(m)) if(m[k]===''||(k==='st'&&m[k]==='none')) delete m[k]; if(Object.keys(m).length) out.convos[cid]=m; else delete out.convos[cid]; }
+  for(const [sid,e] of Object.entries(cv)){ if((e.split||[]).length||(e.merge||[]).length) out.splits[sid]=e; else delete out.splits[sid]; }
+  Object.assign(out.resolved,res); return out; }
 $('bSend').onclick=async()=>{
-  if(!draftCount()) return toast('Nothing to send. Change a line first.');
+  if(!pendingCount()) return toast('Nothing to send. Change a line, a status or a note first.');
   const tok=(()=>{ try{ return localStorage.getItem(TOKEN)||''; }catch(e){ return ''; } })();
-  const mine=JSON.parse(JSON.stringify(DRAFT));
+  const mine=JSON.parse(JSON.stringify(DRAFT.scenes)), rv=JSON.parse(JSON.stringify(DRAFT.review||{})), cv=JSON.parse(JSON.stringify(DRAFT.cv||{})), res=JSON.parse(JSON.stringify(DRAFT.res||{}));
+  const clear=()=>{ for(const id of Object.keys(mine)) delete DRAFT.scenes[id]; for(const k of Object.keys(rv)) delete DRAFT.review[k]; for(const k of Object.keys(cv)) delete DRAFT.cv[k]; for(const k of Object.keys(res)) delete DRAFT.res[k]; saveDraft(); };
   if(!tok){ // no token on this phone: share the file instead
-    const text=JSON.stringify({made:new Date().toISOString(),scenes:Object.assign({},SENT.scenes,mine.scenes)},null,1);
-    const f=new File([text],'script-edits.json',{type:'application/json'});
+    const text=JSON.stringify({made:new Date().toISOString(),edits:{scenes:Object.assign({},SENT.scenes,mine)},review:mergeReview(REVIEW,rv,cv,res)},null,1);
+    const f=new File([text],'script-send.json',{type:'application/json'});
     try{ if(navigator.canShare&&navigator.canShare({files:[f]})){ await navigator.share({files:[f],title:'Script edits'}); toast('Shared. Send that file to Claude with "Apply my script edits".',5000); return; } }catch(e){ if(e&&e.name==='AbortError') return; }
-    const a=document.createElement('a'); a.href=URL.createObjectURL(f); a.download='script-edits.json'; document.body.appendChild(a); a.click(); a.remove(); toast('Saved as a file. Send it to Claude with "Apply my script edits".',5000); return;
+    const a=document.createElement('a'); a.href=URL.createObjectURL(f); a.download='script-send.json'; document.body.appendChild(a); a.click(); a.remove(); toast('Saved as a file. Send it to Claude with "Apply my script edits".',5000); return;
   }
   $('bSend').disabled=true; $('bSend').textContent='Sending...';
   try{
-    for(let tries=0;;tries++){
-      const cur=await ghGet(tok); const merged=Object.assign({},cur.json.scenes,mine.scenes);
-      const body={message:'Script edits from Tom: '+Object.keys(mine.scenes).join(', ').slice(0,120),content:b64t(JSON.stringify({made:new Date().toISOString(),scenes:merged},null,1)+'\n'),branch:'main'}; if(cur.sha) body.sha=cur.sha;
-      const r=await fetch('https://api.github.com/repos/'+REPO+'/contents/'+PATH,{method:'PUT',headers:{Authorization:'Bearer '+tok,Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify(body)});
-      if(r.status===409&&tries<3) continue; if(!r.ok) throw new Error('GitHub '+r.status);
-      SENT.scenes=merged; break; }
-    for(const id of Object.keys(mine.scenes)) delete DRAFT.scenes[id]; saveDraft();
-    toast('Sent. In the next Claude conversation say: Apply my script edits',6000);
-  }catch(e){ toast('Could not send ('+(e.message||e)+'). Your edits are still saved on this phone.',6000); }
+    if(Object.keys(mine).length){ const out=await ghPutFile(tok,PATH,cur=>({made:new Date().toISOString(),scenes:Object.assign({},cur.scenes||{},mine)}),'Script edits from Tom: '+Object.keys(mine).join(', ').slice(0,120)); SENT.scenes=out.scenes; }
+    if(Object.keys(rv).length||Object.keys(cv).length||Object.keys(res).length){
+      REVIEW=await ghPutFile(tok,'data/script-review.json',cur=>mergeReview(cur,rv,cv,res),'Script review from Tom: '+(Object.keys(rv).length+Object.keys(cv).length)+' conversations');
+      if(Object.keys(res).length) SUGG=await ghPutFile(tok,'data/script-suggestions.json',cur=>{ const it=Object.assign({},cur.items||{}); for(const k of Object.keys(res)) delete it[k]; return {made:cur.made||'',items:it}; },'Script suggestions: '+Object.keys(res).length+' answered by Tom');
+    }
+    clear(); bump();
+    toast(Object.keys(mine).length?'Sent. In the next Claude conversation say: Apply my script edits':'Sent. In the next Claude conversation say: Workshop my flagged conversations',6000);
+  }catch(e){ toast('Could not send ('+(e.message||e)+'). Your changes are still saved on this phone.',6000); }
   $('bSend').disabled=false; render();
 };
 // ---------- start ----------
 (async()=>{
   try{ DRAFT=JSON.parse(localStorage.getItem('aot-script-draft')||'null')||{scenes:{}}; DRAFT.scenes=DRAFT.scenes||{}; }catch(e){ DRAFT={scenes:{}}; }
   try{ const r=await fetch('data/script-edits.json?'+Date.now(),{cache:'no-store'}); if(r.ok){ const j=await r.json(); SENT={scenes:(j&&j.scenes)||{}}; } }catch(e){}
+  const getJ=async(u,dflt)=>{ try{ const r=await fetch(u+'?'+Date.now(),{cache:'no-store'}); if(r.ok) return await r.json(); }catch(e){} return dflt; };
+  { const j=await getJ('data/script-review.json',{}); REVIEW={convos:j.convos||{},splits:j.splits||{},resolved:j.resolved||{}}; }
+  { const j=await getJ('data/script-suggestions.json',{}); SUGG={items:j.items||{}}; }
+  { const j=await getJ('data/script-brief.json',{}); BRIEF={brief:j.brief||'',speakers:j.speakers||{},pairs:j.pairs||[]}; }
   try{ const r=await fetch('data/script-index.json?'+Date.now(),{cache:'no-store'}); if(!r.ok) throw new Error('HTTP '+r.status); IX=await r.json(); }
   catch(e){ $('list').innerHTML='<div class="empty err">Could not load the script ('+esc(e.message||e)+'). Check the connection and reload.</div>'; return; }
   const h=(location.hash||'').slice(1); if(h&&IX.scenes[h]){ OPENCH.add(String(IX.scenes[h].chapter)); OPEN.add(h); }

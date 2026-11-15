@@ -102,11 +102,40 @@ for sid, sc in res['scenes'].items():
     elif 'from' not in r: r['from'] = 'recipe'
     sc['recipe'] = r
     sc.pop('trig', None)
-out = {'made': time.strftime('%Y-%m-%d %H:%M:%S'), 'files': vi['files'], 'speakers': res['speakers'], 'chapters': [c for c in chs if c['scenes']], 'scenes': res['scenes']}
+# conversations inside each scene (tools/script-index/convos.py, docs/script-convos.tsv)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import convos
+cprob = convos.attach(res['scenes'], res.get('mapNames', {}))
+out = {'made': time.strftime('%Y-%m-%d %H:%M:%S'), 'files': vi['files'], 'speakers': res['speakers'], 'mapNames': res.get('mapNames', {}), 'chapters': [c for c in chs if c['scenes']], 'scenes': res['scenes']}
 json.dump(out, open(os.path.join(ROOT, 'data', 'script-index.json'), 'w', encoding='utf8'), ensure_ascii=False, separators=(',', ':'))
+# the Workshop packet's fixed parts (script.html): humor brief and speaker notes (docs/humor-brief.md), Tom's newest rewrites (docs/tom-edits.tsv)
+def brief():
+    txt = open(os.path.join(ROOT, 'docs', 'humor-brief.md'), encoding='utf8').read()
+    import re as _re
+    def part(h):
+        m = _re.search(r'(?m)^## ' + h + r'\s*$', txt)
+        return txt[m.end():].split('\n## ', 1)[0].strip() if m else ''
+    spk = {}
+    for ln in part('Speakers').splitlines():
+        if ln.startswith('- ') and ':' in ln: k, v = ln[2:].split(':', 1); spk[k.strip()] = v.strip()
+    pairs = [[r.get('speaker', ''), r.get('before', ''), r.get('after', ''), r.get('kind', '')] for r in tsv('docs/tom-edits.tsv') if r.get('kind') in ('reworded', 'added', 'removed')]
+    return {'brief': part('Brief'), 'speakers': spk, 'pairs': pairs[::-1][:80]}
+json.dump(brief(), open(os.path.join(ROOT, 'data', 'script-brief.json'), 'w', encoding='utf8'), ensure_ascii=False, indent=1)
 print('scenes', len(res['scenes']), 'talk lines', nlines, 'with a clip', nclip)
 print('walk errors', res['errs'][:5], 'page errors', errs[:3])
 print('no map recipe', sum(1 for s in res['scenes'].values() if s['recipe']['from'] == 'none'))
 print('steps reading [something happens]:', len(res['missing']))
 if '--missing' in sys.argv:
     for k in res['missing']: print(k)
+print('conversations', sum(len(s['convos']) for s in res['scenes'].values()), '| script-convos.tsv rows to fix', len(cprob['stale']), '| plot lines not found', len(cprob['plotmiss']), '| purpose missing (ch 1 to 8, Nine Scoops)', len(cprob['nopurpose']))
+for x in cprob['stale'] + cprob['plotmiss']: print('  ' + x)
+# review and suggestion entries whose conversation or line no longer exists are listed, never dropped
+cids = {c['id'] for s in res['scenes'].values() for c in s['convos']}
+refs = {(sid, ln['ref']) for sid, s in res['scenes'].items() for st in s['steps'] if st['k'] == 'talk' for ln in st['lines']}
+for name, chk in (('data/script-review.json', 'convos'), ('data/script-suggestions.json', 'items')):
+    pth = os.path.join(ROOT, name)
+    if not os.path.exists(pth): continue
+    d = json.load(open(pth, encoding='utf8')).get(chk) or {}
+    if chk == 'convos': gone = [k for k in d if k not in cids and ':u:' not in k]
+    else: gone = [k for k in d if (k.split('|', 1)[0], k.split('|', 1)[1]) not in refs]
+    if gone: print(name, 'entries that no longer match a', 'conversation' if chk == 'convos' else 'line', '(fix by hand):', gone[:20])

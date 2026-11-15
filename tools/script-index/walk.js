@@ -53,7 +53,14 @@
       }
       if(did) return;
       const op=Object.keys(o).find(k=>k!=='time'&&k!=='speed')||'?';
-      list.push({i:path,k:'step',op,d:describe(o,sid,path,cast)});
+      const rec={i:path,k:'step',op,d:describe(o,sid,path,cast)};
+      // hints for the conversation split (tools/script-index/convos.py): a move to another map, a fade, a long wait, who arrives or leaves
+      if(op==='call'||op==='step') { const f=o.call||o.step,src=typeof f==='function'?String(f):'';
+        if(/currentMap\s*=|[a-z0-9]Place\(|refreshAreaUI\(/.test(src)) { rec.mv=1; const m=/worlds\.(\w+)|Place\(\s*'(\w+)'/.exec(src); if(m) rec.to=m[1]||m[2]; } }
+      if(op==='fade') rec.fd=o.fade;
+      if(op==='wait') rec.w=+o.wait||0;
+      if(['spawn','despawn','join','leave'].includes(op)) { const s=o[op]; const n=typeof s==='string'?s:nm(Array.isArray(s)?s[0]:s); if(typeof n==='string') rec.who=n; }
+      list.push(rec);
     });
   }
   // A scene function can branch on game state (bag, flags). Read it twice: as it stands, and again with every flag true and every item in the bag,
@@ -93,6 +100,7 @@
     out.scenes[id]={id,chapter:ch,title:words(id),dyn,map:tr?tr.map:null,trig:tr,cast:[...cast],steps:list};
     out.order.push(id);
   }
+  out.mapNames={}; if(typeof worlds!=='undefined') for(const [k,m] of Object.entries(worlds)) if(m&&m.name) out.mapNames[k]=m.name;
   out.speakers=(typeof DIALOG_CAST!=='undefined'&&DIALOG_CAST.speakers)||{};
   out.chapters=(typeof CHAPTERS!=='undefined'?CHAPTERS:[]).filter(c=>c.n>0).map(c=>({n:c.n,title:c.title,party:c.party||{}}));
   return out;

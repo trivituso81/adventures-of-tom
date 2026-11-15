@@ -278,6 +278,9 @@ def patch_moods(done, ix, purge, mood_set, em0):
 def main():
     if not os.path.exists(EDITS): sys.exit('no edits file ' + EDITS)
     ed = json.load(open(EDITS, encoding='utf8')); scenes = ed.get('scenes') or {}
+    # conversations (scriptconvo1): Tom's Merge, Split, titles and purposes from data/script-review.json go into docs/script-convos.tsv
+    if not DRY and os.path.exists('data/script-review.json'):
+        r = subprocess.run(['python3', 'tools/script-index/convos.py', 'apply-review'], capture_output=True, text=True); print('CONVERSATIONS:', (r.stdout + r.stderr).strip())
     if not scenes: print('Nothing to apply: data/script-edits.json has no scenes.'); return
     ix = json.load(open('data/script-index.json', encoding='utf8'))
     files = [f for f in glob.glob('data/scenes*.js') + glob.glob('data/bonus-*.js')]
