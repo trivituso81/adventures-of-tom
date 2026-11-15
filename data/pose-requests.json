@@ -1,6 +1,6 @@
 {
  "version": 2,
- "saved": "2026-11-15T06:59:08.602Z",
+ "saved": "2026-11-15T07:05:53.321Z",
  "heights": {},
  "target": {
   "olivia": 96
@@ -1470,6 +1470,225 @@
      "a": 109,
      "headRows": 11.818,
      "wholeRows": 38.401
+    }
+   }
+  },
+  "ellie": {
+   "tk_tell": {
+    "sheet": "ellie-talk-v1.png",
+    "top": 15.4,
+    "chin": 171.4,
+    "ok": true,
+    "sAdj": 0.96,
+    "hAdj": 1.08,
+    "page": {
+     "f": 0.94,
+     "h": 1.483,
+     "a": 171.4,
+     "headRows": 13.183,
+     "wholeRows": 36.444
+    }
+   },
+   "tk_point": {
+    "sheet": "ellie-talk-v1.png",
+    "top": 15.4,
+    "chin": 164.3,
+    "ok": true,
+    "hAdj": 1.01,
+    "page": {
+     "f": 0.961,
+     "h": 1.514,
+     "a": 164.3,
+     "headRows": 12.842,
+     "wholeRows": 37.012
+    }
+   },
+   "tk_ask": {
+    "sheet": "ellie-talk-v1.png",
+    "top": 0,
+    "chin": 142.2,
+    "ok": true,
+    "hAdj": 0.95,
+    "page": {
+     "f": 0.892,
+     "h": 1.491,
+     "a": 142.2,
+     "headRows": 12.079,
+     "wholeRows": 34.889
+    }
+   },
+   "tk_answer": {
+    "sheet": "ellie-talk-v1.png",
+    "top": 0,
+    "chin": 149.3,
+    "ok": true,
+    "sAdj": 0.96,
+    "hAdj": 1.05,
+    "page": {
+     "f": 0.869,
+     "h": 1.507,
+     "a": 149.3,
+     "headRows": 12.816,
+     "wholeRows": 34.764
+    }
+   },
+   "down_stand": {
+    "sheet": "ellie-walking-sheet-v1.png",
+    "top": 10.9,
+    "chin": 134.1,
+    "ok": true,
+    "page": {
+     "f": 0.856,
+     "h": 1.348,
+     "a": 134.1,
+     "headRows": 12.715,
+     "wholeRows": 36.676
+    }
+   },
+   "up_stand": {
+    "sheet": "ellie-walking-sheet-v1.png",
+    "top": 4.6,
+    "chin": 123.1,
+    "ok": true,
+    "page": {
+     "f": 0.873,
+     "h": 1.401,
+     "a": 123.1,
+     "headRows": 12.715,
+     "wholeRows": 36.045
+    }
+   },
+   "left_stand": {
+    "sheet": "ellie-walking-sheet-v1.png",
+    "top": 5.1,
+    "chin": 131.7,
+    "ok": true,
+    "page": {
+     "f": 0.829,
+     "h": 1.312,
+     "a": 131.7,
+     "headRows": 12.715,
+     "wholeRows": 36.063
+    }
+   },
+   "em_happy": {
+    "sheet": "ellie-emotions-v3.png",
+    "top": 14.8,
+    "chin": 149.5,
+    "ok": true,
+    "sAdj": 0.99,
+    "hAdj": 0.94,
+    "page": {
+     "f": 1.01,
+     "h": 1.399,
+     "a": 149.5,
+     "headRows": 11.832,
+     "wholeRows": 35.707
+    }
+   },
+   "em_loving": {
+    "sheet": "ellie-emotions-v3.png",
+    "top": 16.7,
+    "chin": 154.1,
+    "ok": true,
+    "sAdj": 0.97,
+    "hAdj": 0.96,
+    "page": {
+     "f": 0.962,
+     "h": 1.372,
+     "a": 154.1,
+     "headRows": 11.84,
+     "wholeRows": 35.409
+    }
+   },
+   "em_sad": {
+    "sheet": "ellie-emotions-v3.png",
+    "top": 17.7,
+    "chin": 181.5,
+    "ok": true,
+    "sAdj": 0.89,
+    "hAdj": 1.18,
+    "page": {
+     "f": 0.965,
+     "h": 1.298,
+     "a": 181.5,
+     "headRows": 13.353,
+     "wholeRows": 35.195
+    }
+   },
+   "em_angry": {
+    "sheet": "ellie-emotions-v3.png",
+    "top": 18.9,
+    "chin": 185.7,
+    "ok": true,
+    "sAdj": 0.88,
+    "hAdj": 1.18,
+    "page": {
+     "f": 1.008,
+     "h": 1.261,
+     "a": 185.7,
+     "headRows": 13.203,
+     "wholeRows": 34.867
+    }
+   },
+   "em_scared": {
+    "sheet": "ellie-emotions-v3.png",
+    "top": 10.7,
+    "chin": 157.2,
+    "ok": true,
+    "sAdj": 0.92,
+    "hAdj": 1.05,
+    "page": {
+     "f": 0.937,
+     "h": 1.335,
+     "a": 157.2,
+     "headRows": 12.282,
+     "wholeRows": 34.213
+    }
+   },
+   "em_surprised": {
+    "sheet": "ellie-emotions-v3.png",
+    "top": 18.1,
+    "chin": 158.5,
+    "ok": true,
+    "sAdj": 0.93,
+    "hAdj": 1.02,
+    "page": {
+     "f": 0.924,
+     "h": 1.368,
+     "a": 158.5,
+     "headRows": 12.061,
+     "wholeRows": 34.864
+    }
+   },
+   "em_proud": {
+    "sheet": "ellie-emotions-v3.png",
+    "top": 16.5,
+    "chin": 129,
+    "ok": true,
+    "hAdj": 0.79,
+    "sAdj": 1.02,
+    "page": {
+     "f": 0.909,
+     "h": 1.45,
+     "a": 129,
+     "headRows": 10.245,
+     "wholeRows": 34.896
+    }
+   },
+   "em_unimpressed": {
+    "sheet": "ellie-emotions-v3.png",
+    "top": 14.8,
+    "chin": 149.2,
+    "ok": true,
+    "sAdj": 0.97,
+    "hAdj": 0.94,
+    "page": {
+     "f": 0.918,
+     "h": 1.374,
+     "a": 149.2,
+     "headRows": 11.593,
+     "wholeRows": 34.988
     }
    }
   }
