@@ -72,7 +72,8 @@ for _id, _h in EMO_H.items():
 # heights1 (2026-11-11): Boppy 5'5 to 5'7 and Olivia 5'5 to 5'8 (data/heights.json). Mood poses are drawn at the walk's draw scale, so they grew with the
 # figure (3 and 4.6 percent) while the standing head stayed Tom's size; each factor took half of that back (1.89 to 1.92, 1.32 to 1.35), the same
 # height and face split as above.
-EMO_HEAD = {'tom': 1.39, 'tnb': 1.35, 'grace': 1.37, 'rose': 1.67, 'amy': 1.36, 'justin': 1.32, 'deedee': 1.30, 'boppy': 1.92, 'olivia': 1.35, 'ellie': 1.43}
+# ch2fix1 (report r-20261114-160921-smrp, Tom: "This emotion state is size down too much for TNB"): TNB 1.35 to 1.27, his moods about 6 percent bigger.
+EMO_HEAD = {'tom': 1.39, 'tnb': 1.27, 'grace': 1.37, 'rose': 1.67, 'amy': 1.36, 'justin': 1.32, 'deedee': 1.30, 'boppy': 1.92, 'olivia': 1.35, 'ellie': 1.43}
 # headmood1 (2026-11-12, Tom: the HEAD SIZES factor applies to every state): emotion_frames.py grows each mood figure's head by that character's factor (head_tweak.json)
 # and records the figure's height growth as 'hg' in data/emotions.js. Moods keep their height (the walk keeps height too), so the strip scale takes the growth back.
 def _emo_hg():

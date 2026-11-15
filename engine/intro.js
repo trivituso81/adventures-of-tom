@@ -93,7 +93,7 @@ function restoreOption() {
   }};
 }
 function endIntro() {
-  intro.active=false; intro.phase=''; intro.steps=[]; intro.cur=null;
+  intro.active=false; intro.poseFocus=null; intro.phase=''; intro.steps=[]; intro.cur=null;
   intro.bubble=null; intro.squishy=null; intro.showcase=null; intro.hearts=[];
   for(const k of intro.noGo) { if(typeof k==='string') town.npcNoGo.delete(k); else k.map.npcNoGo.delete(k.k); }
   intro.noGo=[]; intro.fadeLock=false; intro.card=null;

@@ -15,7 +15,7 @@ grace	em_scared	r
 grace	em_surprised	r
 grace	em_proud	r
 grace	em_unimpressed	r
-rose	em_happy	f
+rose	em_happy	r
 rose	em_loving	f
 rose	em_sad	f
 rose	em_angry	f
@@ -23,13 +23,13 @@ rose	em_scared	r
 rose	em_surprised	r
 rose	em_proud	r
 rose	em_unimpressed	r
-deedee	em_happy	f
-deedee	em_loving	f
+deedee	em_happy	l
+deedee	em_loving	l
 deedee	em_sad	f
 deedee	em_angry	r
 deedee	em_scared	r
 deedee	em_surprised	r
-deedee	em_proud	f
+deedee	em_proud	r
 deedee	em_unimpressed	r
 boppy	em_happy	f
 boppy	em_loving	l
@@ -47,7 +47,7 @@ ellie	em_scared	r
 ellie	em_surprised	r
 ellie	em_proud	r
 ellie	em_unimpressed	r
-amy	em_happy	f
+amy	em_happy	r
 amy	em_loving	f
 amy	em_sad	f
 amy	em_angry	f
@@ -61,9 +61,9 @@ justin	em_sad	f
 justin	em_angry	f
 justin	em_scared	l
 justin	em_surprised	l
-justin	em_proud	f
+justin	em_proud	r
 justin	em_unimpressed	r
-olivia	em_happy	f
+olivia	em_happy	r
 olivia	em_loving	f
 olivia	em_sad	f
 olivia	em_angry	f
@@ -71,8 +71,8 @@ olivia	em_scared	r
 olivia	em_surprised	r
 olivia	em_proud	r
 olivia	em_unimpressed	r
-tnb	em_happy	f
-tnb	em_loving	f
+tnb	em_happy	r
+tnb	em_loving	l
 tnb	em_sad	f
 tnb	em_angry	f
 tnb	em_scared	r
@@ -83,11 +83,11 @@ nara	em_happy	l
 nara	em_loving	f
 nara	em_sad	f
 nara	em_angry	l
-nara	em_scared	f
+nara	em_scared	l
 nara	em_surprised	l
 nara	em_proud	f
 nara	em_unimpressed	f
-alvarez	em_happy	f
+alvarez	em_happy	r
 alvarez	em_loving	f
 alvarez	em_sad	f
 alvarez	em_angry	f
@@ -95,7 +95,7 @@ alvarez	em_scared	r
 alvarez	em_surprised	r
 alvarez	em_proud	r
 alvarez	em_unimpressed	r
-bean	em_happy	f
+bean	em_happy	r
 bean	em_loving	f
 bean	em_sad	f
 bean	em_angry	l
@@ -103,7 +103,7 @@ bean	em_scared	r
 bean	em_surprised	r
 bean	em_proud	r
 bean	em_unimpressed	r
-bernadette	em_happy	f
+bernadette	em_happy	r
 bernadette	em_loving	f
 bernadette	em_sad	f
 bernadette	em_angry	f
@@ -119,7 +119,7 @@ beto	em_scared	r
 beto	em_surprised	r
 beto	em_proud	r
 beto	em_unimpressed	r
-bev	em_happy	f
+bev	em_happy	r
 bev	em_loving	f
 bev	em_sad	f
 bev	em_angry	f
@@ -135,7 +135,7 @@ boomie	em_scared	r
 boomie	em_surprised	r
 boomie	em_proud	r
 boomie	em_unimpressed	r
-bun	em_happy	f
+bun	em_happy	r
 bun	em_loving	f
 bun	em_sad	f
 bun	em_angry	f
@@ -143,7 +143,7 @@ bun	em_scared	r
 bun	em_surprised	r
 bun	em_proud	r
 bun	em_unimpressed	r
-carmen	em_happy	f
+carmen	em_happy	r
 carmen	em_loving	f
 carmen	em_sad	f
 carmen	em_angry	f
@@ -151,7 +151,7 @@ carmen	em_scared	r
 carmen	em_surprised	r
 carmen	em_proud	r
 carmen	em_unimpressed	r
-chet	em_happy	f
+chet	em_happy	r
 chet	em_loving	f
 chet	em_sad	f
 chet	em_angry	f
@@ -159,7 +159,7 @@ chet	em_scared	r
 chet	em_surprised	r
 chet	em_proud	r
 chet	em_unimpressed	r
-claudia	em_happy	f
+claudia	em_happy	r
 claudia	em_loving	f
 claudia	em_sad	f
 claudia	em_angry	f
@@ -167,7 +167,7 @@ claudia	em_scared	r
 claudia	em_surprised	r
 claudia	em_proud	r
 claudia	em_unimpressed	r
-daisy	em_happy	f
+daisy	em_happy	r
 daisy	em_loving	f
 daisy	em_sad	f
 daisy	em_angry	f
@@ -175,7 +175,7 @@ daisy	em_scared	r
 daisy	em_surprised	r
 daisy	em_proud	r
 daisy	em_unimpressed	r
-dakota	em_happy	f
+dakota	em_happy	r
 dakota	em_loving	f
 dakota	em_sad	f
 dakota	em_angry	f
@@ -183,7 +183,7 @@ dakota	em_scared	r
 dakota	em_surprised	r
 dakota	em_proud	r
 dakota	em_unimpressed	r
-dana	em_happy	f
+dana	em_happy	l
 dana	em_loving	f
 dana	em_sad	f
 dana	em_angry	f
@@ -191,7 +191,7 @@ dana	em_scared	r
 dana	em_surprised	r
 dana	em_proud	r
 dana	em_unimpressed	r
-dash	em_happy	f
+dash	em_happy	r
 dash	em_loving	f
 dash	em_sad	f
 dash	em_angry	f
@@ -199,7 +199,7 @@ dash	em_scared	r
 dash	em_surprised	r
 dash	em_proud	r
 dash	em_unimpressed	r
-delgado	em_happy	f
+delgado	em_happy	r
 delgado	em_loving	f
 delgado	em_sad	f
 delgado	em_angry	f
@@ -207,7 +207,7 @@ delgado	em_scared	r
 delgado	em_surprised	r
 delgado	em_proud	r
 delgado	em_unimpressed	r
-dolores	em_happy	f
+dolores	em_happy	r
 dolores	em_loving	f
 dolores	em_sad	f
 dolores	em_angry	f
@@ -215,7 +215,7 @@ dolores	em_scared	r
 dolores	em_surprised	r
 dolores	em_proud	r
 dolores	em_unimpressed	r
-dot	em_happy	f
+dot	em_happy	r
 dot	em_loving	f
 dot	em_sad	f
 dot	em_angry	f
@@ -223,7 +223,7 @@ dot	em_scared	r
 dot	em_surprised	r
 dot	em_proud	r
 dot	em_unimpressed	r
-fern	em_happy	f
+fern	em_happy	r
 fern	em_loving	f
 fern	em_sad	f
 fern	em_angry	f
@@ -231,7 +231,7 @@ fern	em_scared	r
 fern	em_surprised	r
 fern	em_proud	r
 fern	em_unimpressed	r
-gus	em_happy	f
+gus	em_happy	r
 gus	em_loving	f
 gus	em_sad	f
 gus	em_angry	f
@@ -239,7 +239,7 @@ gus	em_scared	r
 gus	em_surprised	r
 gus	em_proud	r
 gus	em_unimpressed	r
-halverson	em_happy	f
+halverson	em_happy	r
 halverson	em_loving	f
 halverson	em_sad	f
 halverson	em_angry	f
@@ -255,7 +255,7 @@ ike	em_scared	r
 ike	em_surprised	r
 ike	em_proud	r
 ike	em_unimpressed	r
-jojo	em_happy	f
+jojo	em_happy	r
 jojo	em_loving	f
 jojo	em_sad	f
 jojo	em_angry	f
@@ -263,7 +263,7 @@ jojo	em_scared	r
 jojo	em_surprised	r
 jojo	em_proud	r
 jojo	em_unimpressed	r
-jordan	em_happy	f
+jordan	em_happy	r
 jordan	em_loving	f
 jordan	em_sad	f
 jordan	em_angry	f
@@ -271,7 +271,7 @@ jordan	em_scared	r
 jordan	em_surprised	r
 jordan	em_proud	r
 jordan	em_unimpressed	r
-juniper	em_happy	f
+juniper	em_happy	r
 juniper	em_loving	f
 juniper	em_sad	f
 juniper	em_angry	f
@@ -287,7 +287,7 @@ kenji	em_scared	r
 kenji	em_surprised	r
 kenji	em_proud	r
 kenji	em_unimpressed	r
-kevin	em_happy	f
+kevin	em_happy	r
 kevin	em_loving	f
 kevin	em_sad	f
 kevin	em_angry	f
@@ -295,7 +295,7 @@ kevin	em_scared	r
 kevin	em_surprised	r
 kevin	em_proud	r
 kevin	em_unimpressed	r
-kiki	em_happy	f
+kiki	em_happy	r
 kiki	em_loving	f
 kiki	em_sad	f
 kiki	em_angry	f
@@ -303,7 +303,7 @@ kiki	em_scared	r
 kiki	em_surprised	r
 kiki	em_proud	r
 kiki	em_unimpressed	r
-kit	em_happy	f
+kit	em_happy	r
 kit	em_loving	f
 kit	em_sad	f
 kit	em_angry	f
@@ -311,7 +311,7 @@ kit	em_scared	r
 kit	em_surprised	r
 kit	em_proud	r
 kit	em_unimpressed	r
-kowalski	em_happy	f
+kowalski	em_happy	r
 kowalski	em_loving	f
 kowalski	em_sad	f
 kowalski	em_angry	f
@@ -319,7 +319,7 @@ kowalski	em_scared	r
 kowalski	em_surprised	r
 kowalski	em_proud	r
 kowalski	em_unimpressed	r
-larry	em_happy	f
+larry	em_happy	l
 larry	em_loving	f
 larry	em_sad	f
 larry	em_angry	f
@@ -335,7 +335,7 @@ luna	em_scared	r
 luna	em_surprised	r
 luna	em_proud	r
 luna	em_unimpressed	r
-marguerite	em_happy	f
+marguerite	em_happy	r
 marguerite	em_loving	f
 marguerite	em_sad	f
 marguerite	em_angry	f
@@ -351,7 +351,7 @@ marisol	em_scared	r
 marisol	em_surprised	r
 marisol	em_proud	r
 marisol	em_unimpressed	r
-marlowe	em_happy	f
+marlowe	em_happy	r
 marlowe	em_loving	f
 marlowe	em_sad	f
 marlowe	em_angry	f
@@ -359,7 +359,7 @@ marlowe	em_scared	r
 marlowe	em_surprised	r
 marlowe	em_proud	r
 marlowe	em_unimpressed	r
-mateo	em_happy	f
+mateo	em_happy	r
 mateo	em_loving	f
 mateo	em_sad	f
 mateo	em_angry	f
@@ -375,7 +375,7 @@ michael	em_scared	f
 michael	em_surprised	f
 michael	em_proud	f
 michael	em_unimpressed	f
-moss	em_happy	f
+moss	em_happy	r
 moss	em_loving	f
 moss	em_sad	f
 moss	em_angry	f
@@ -383,7 +383,7 @@ moss	em_scared	r
 moss	em_surprised	r
 moss	em_proud	r
 moss	em_unimpressed	r
-nickel	em_happy	f
+nickel	em_happy	r
 nickel	em_loving	f
 nickel	em_sad	f
 nickel	em_angry	f
@@ -391,7 +391,7 @@ nickel	em_scared	r
 nickel	em_surprised	r
 nickel	em_proud	r
 nickel	em_unimpressed	r
-odette	em_happy	f
+odette	em_happy	r
 odette	em_loving	f
 odette	em_sad	f
 odette	em_angry	f
@@ -399,7 +399,7 @@ odette	em_scared	r
 odette	em_surprised	r
 odette	em_proud	r
 odette	em_unimpressed	r
-oolong	em_happy	f
+oolong	em_happy	r
 oolong	em_loving	f
 oolong	em_sad	f
 oolong	em_angry	f
@@ -407,7 +407,7 @@ oolong	em_scared	r
 oolong	em_surprised	r
 oolong	em_proud	r
 oolong	em_unimpressed	r
-page	em_happy	f
+page	em_happy	r
 page	em_loving	f
 page	em_sad	f
 page	em_angry	f
@@ -415,7 +415,7 @@ page	em_scared	r
 page	em_surprised	r
 page	em_proud	r
 page	em_unimpressed	r
-penny	em_happy	f
+penny	em_happy	r
 penny	em_loving	f
 penny	em_sad	f
 penny	em_angry	f
@@ -423,7 +423,7 @@ penny	em_scared	r
 penny	em_surprised	r
 penny	em_proud	r
 penny	em_unimpressed	r
-pip	em_happy	f
+pip	em_happy	r
 pip	em_loving	f
 pip	em_sad	f
 pip	em_angry	f
@@ -431,7 +431,7 @@ pip	em_scared	r
 pip	em_surprised	r
 pip	em_proud	r
 pip	em_unimpressed	r
-priya	em_happy	f
+priya	em_happy	r
 priya	em_loving	f
 priya	em_sad	f
 priya	em_angry	f
@@ -439,7 +439,7 @@ priya	em_scared	r
 priya	em_surprised	r
 priya	em_proud	r
 priya	em_unimpressed	r
-pruitt	em_happy	f
+pruitt	em_happy	r
 pruitt	em_loving	f
 pruitt	em_sad	f
 pruitt	em_angry	f
@@ -455,7 +455,7 @@ ray	em_scared	r
 ray	em_surprised	r
 ray	em_proud	r
 ray	em_unimpressed	r
-reel	em_happy	f
+reel	em_happy	r
 reel	em_loving	f
 reel	em_sad	f
 reel	em_angry	f
@@ -463,7 +463,7 @@ reel	em_scared	r
 reel	em_surprised	r
 reel	em_proud	r
 reel	em_unimpressed	r
-ryan	em_happy	f
+ryan	em_happy	r
 ryan	em_loving	f
 ryan	em_sad	f
 ryan	em_angry	f
@@ -471,7 +471,7 @@ ryan	em_scared	r
 ryan	em_surprised	r
 ryan	em_proud	r
 ryan	em_unimpressed	r
-sage	em_happy	f
+sage	em_happy	r
 sage	em_loving	f
 sage	em_sad	f
 sage	em_angry	f
@@ -479,7 +479,7 @@ sage	em_scared	r
 sage	em_surprised	r
 sage	em_proud	r
 sage	em_unimpressed	r
-sal	em_happy	f
+sal	em_happy	r
 sal	em_loving	f
 sal	em_sad	f
 sal	em_angry	f
@@ -487,7 +487,7 @@ sal	em_scared	r
 sal	em_surprised	r
 sal	em_proud	r
 sal	em_unimpressed	r
-sam	em_happy	f
+sam	em_happy	r
 sam	em_loving	f
 sam	em_sad	f
 sam	em_angry	f
@@ -495,7 +495,7 @@ sam	em_scared	r
 sam	em_surprised	r
 sam	em_proud	r
 sam	em_unimpressed	r
-skye	em_happy	f
+skye	em_happy	r
 skye	em_loving	f
 skye	em_sad	f
 skye	em_angry	f
@@ -503,7 +503,7 @@ skye	em_scared	r
 skye	em_surprised	r
 skye	em_proud	r
 skye	em_unimpressed	r
-sofi	em_happy	f
+sofi	em_happy	r
 sofi	em_loving	f
 sofi	em_sad	f
 sofi	em_angry	f
@@ -511,7 +511,7 @@ sofi	em_scared	r
 sofi	em_surprised	r
 sofi	em_proud	r
 sofi	em_unimpressed	r
-sol	em_happy	f
+sol	em_happy	r
 sol	em_loving	f
 sol	em_sad	f
 sol	em_angry	f
@@ -519,7 +519,7 @@ sol	em_scared	r
 sol	em_surprised	r
 sol	em_proud	r
 sol	em_unimpressed	r
-toni	em_happy	f
+toni	em_happy	r
 toni	em_loving	f
 toni	em_sad	f
 toni	em_angry	f
@@ -527,7 +527,7 @@ toni	em_scared	r
 toni	em_surprised	r
 toni	em_proud	r
 toni	em_unimpressed	r
-tony	em_happy	f
+tony	em_happy	r
 tony	em_loving	f
 tony	em_sad	f
 tony	em_angry	f
@@ -536,14 +536,14 @@ tony	em_surprised	r
 tony	em_proud	r
 tony	em_unimpressed	r
 washington	em_happy	l
-washington	em_loving	f
+washington	em_loving	l
 washington	em_sad	f
 washington	em_angry	f
 washington	em_scared	r
 washington	em_surprised	r
 washington	em_proud	r
 washington	em_unimpressed	r
-wes	em_happy	f
+wes	em_happy	r
 wes	em_loving	f
 wes	em_sad	f
 wes	em_angry	f
@@ -551,7 +551,7 @@ wes	em_scared	r
 wes	em_surprised	r
 wes	em_proud	r
 wes	em_unimpressed	r
-yesenia	em_happy	f
+yesenia	em_happy	r
 yesenia	em_loving	f
 yesenia	em_sad	f
 yesenia	em_angry	f
@@ -562,15 +562,15 @@ yesenia	em_unimpressed	r
 tom	tk_tell	r
 tom	tk_point	r
 tom	tk_ask	f
-tom	tk_answer	f
+tom	tk_answer	l
 tnb	tk_tell	l
 tnb	tk_point	r
 tnb	tk_ask	f
-tnb	tk_answer	f
+tnb	tk_answer	r
 grace	tk_tell	r
 grace	tk_point	r
 grace	tk_ask	f
-grace	tk_answer	f
+grace	tk_answer	r
 rose	tk_tell	r
 rose	tk_point	r
 rose	tk_ask	f
@@ -582,11 +582,11 @@ amy	tk_answer	r
 justin	tk_tell	r
 justin	tk_point	r
 justin	tk_ask	f
-justin	tk_answer	f
+justin	tk_answer	r
 deedee	tk_tell	r
 deedee	tk_point	r
 deedee	tk_ask	f
-deedee	tk_answer	f
+deedee	tk_answer	r
 boppy	tk_tell	l
 boppy	tk_point	r
 boppy	tk_ask	f
@@ -594,7 +594,7 @@ boppy	tk_answer	l
 ellie	tk_tell	r
 ellie	tk_point	r
 ellie	tk_ask	f
-ellie	tk_answer	f
+ellie	tk_answer	r
 olivia	tk_tell	r
 olivia	tk_point	r
 olivia	tk_ask	f

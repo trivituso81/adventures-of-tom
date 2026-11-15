@@ -33,4 +33,5 @@ square(trim(key(RAW+'/ch2-coin-v1.png')),512).save('art/closeup/ch2-coin.webp',q
 square(trim(key(RAW+'/ch2-loaf-whole-v1.png')),512).save('art/closeup/ch2-loaf.webp',quality=92,method=6)
 for n,src in (('ch2_tree','ch2-lemon-tree-grey-v1'),('ch2_block','ch2-orange-block-v1')):
     p=trim(key(RAW+'/'+src+'.png')); sc=384/max(p.size); p.resize((max(1,round(p.width*sc)),max(1,round(p.height*sc))),Image.LANCZOS).save('art/props/griffith/%s.webp'%n,quality=92,method=6)
+import sys as _s; _s.path.insert(0,os.path.dirname(os.path.abspath(__file__))); import shrink_mound; shrink_mound.shrink('art/props/griffith/ch2_tree.webp')
 print('ok')

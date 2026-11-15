@@ -71,9 +71,32 @@ def portrait(pid):
     return out, round(s)
 
 
+# Ending-frame portraits (ch2fix1, report r-20261114-110543-oed4, Tom: "The dialog portrait for the monster should match his new state after defeating
+# him"): while a boss stands in a painted ending frame (engine/boss-finale.js bossFrame), its lines show that frame's face. Square (centre x, centre y,
+# side) in the frame's own pixels of art/foes/<id>-end.webp, set by eye. Output portraits/foes/<id>-<frame>.webp.
+END_CROP = {'bigshake': {'calm': (213, 148, 175), 'touched': (213, 160, 175)}}
+
+
+def end_portrait(pid, frame):
+    t = open(os.path.join(ROOT, 'data', 'foes', pid + '-end-hires.js'), encoding='utf-8').read()
+    d = json.loads(re.search(r'FOE_END\.%s=(\{.*\})' % pid, t).group(1).split(',"rows"')[0] + '}')   # src, k, frames and rects come before the rows
+    x0, y0, w, h = d['rects'][frame]
+    fr = Image.open(os.path.join(ROOT, d['src'])).convert('RGBA').crop((x0, y0, x0 + w, y0 + h))
+    cx, cy, s = END_CROP[pid][frame]
+    box = (round(cx - s / 2), round(cy - s / 2), round(cx + s / 2), round(cy + s / 2))
+    canvas = Image.new('RGBA', (box[2] - box[0], box[3] - box[1]), BG + (255,)); canvas.paste(fr, (-box[0], -box[1]), fr)
+    out = canvas.convert('RGB').resize((SIZE, SIZE), Image.LANCZOS)
+    out.save(os.path.join(OUT, '%s-%s.webp' % (pid, frame)), quality=88, method=6)
+    return out
+
+
 def main():
     ids = sys.argv[1:] or SPEAKERS
     os.makedirs(OUT, exist_ok=True)
+    if sys.argv[1:2] == ['--ends']:
+        for pid, fr in END_CROP.items():
+            for f in fr: end_portrait(pid, f).save('/tmp/end-%s-%s.png' % (pid, f)); print('portraits/foes/%s-%s.webp' % (pid, f))
+        return
     shots = []
     for pid in ids:
         c, s = portrait(pid)

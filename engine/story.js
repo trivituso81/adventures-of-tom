@@ -357,9 +357,17 @@ function poseFacingWant(a) {
   const p=position(a),ax=p.x+.5,side=dx=>dx<0?'l':'r';
   const st=typeof intro!=='undefined'&&intro.objStage;
   if(st&&st.walkers&&st.walkers.includes(a)) { const dx=(st.R.x0+st.R.x1)/2-ax; if(Math.abs(dx)>.3) return side(dx); }
+  // ch2fix1 (report r-20261114-162440-1v7s, Tom: "Tom keeps facing the wrong way" at the boss): in a boss scene everyone looks at the boss.
+  const bf=typeof intro!=='undefined'&&intro.poseFocus&&stageFocus(intro.poseFocus);
+  if(bf&&bf.seen&&bf.actor!==a) { const dx=bf.x+.5-ax; if(Math.abs(dx)>=.5) return side(dx); }
   if(a.facing==='left') return 'l'; if(a.facing==='right') return 'r';
   const spk=typeof EMO!=='undefined'&&EMO.spk;
   if(spk&&spk!==a&&!spk.hidden) { const dx=position(spk).x-p.x; if(Math.abs(dx)>=.5) return side(dx); }
+  // ch2fix1 (report r-20261114-161528-ex1k, Tom: "TNB is facing the wrong way yet again"): the speaker talks to Tom when Tom stands to one
+  // side; Tom himself talks to the nearest person to one side. Before, the middle of everyone else often fell right on the speaker (no side).
+  if(spk===a) { const to=a===player?null:player; if(to&&!to.hidden) { const dx=position(to).x-p.x; if(Math.abs(dx)>=.5) return side(dx); }
+    const near=[player,...followers].filter(o=>o&&o!==a&&!o.hidden&&!o.seat&&Math.abs(position(o).x-p.x)>=.5).sort((u,v)=>Math.hypot(position(u).x-p.x,position(u).y-p.y)-Math.hypot(position(v).x-p.x,position(v).y-p.y))[0];
+    if(near) return side(position(near).x-p.x); }
   const others=[player,...followers].filter(o=>o&&o!==a&&!o.hidden&&!o.seat);
   if(spk&&spk!==a&&!others.includes(spk)) others.push(spk);
   if(!others.length) return null;
@@ -516,7 +524,7 @@ function gatherStep(o) {
     update(dt){ let done=true; for(const f of this.movers) if(f.move&&!advanceMove(f,dt)) done=false;
       const m=this.tom; if(m) { const a=m.a;
         if(a.move&&!advanceMove(a,dt)) done=false;
-        else if(m.i<m.path.length) { const t=m.path[m.i++]; a.facing=directionTo(t.x-a.x,t.y-a.y); a.move={fx:a.x,fy:a.y,tx:t.x,ty:t.y,elapsed:0,duration:.15}; done=false; } }
+        else if(m.i<m.path.length) { const t=m.path[m.i++],e=m.path[m.path.length-1]; a.facing=(e.x!==a.x||e.y!==a.y)?directionTo(e.x-a.x,e.y-a.y):directionTo(t.x-a.x,t.y-a.y);   /* face where they are going, not each zig-zag step (report casc: "it kind of wobbles back and forth") */ a.move={fx:a.x,fy:a.y,tx:t.x,ty:t.y,elapsed:0,duration:.15}; done=false; } }
       if(done) { for(const f of this.movers) { if(this.focus&&this.focus.seen) faceToward(f,this.focus); else if(f._pf) f.facing=f._pf; }   // no boss in view yet: keep the way they were facing
         if(m) { if(this.focus) { const p=stagePos(player),dx=this.focus.x-p.x,dy=this.focus.y-p.y; if(dx||dy) player.facing=directionTo(dx,dy); } this.tom=null; } }
       return done; }};
@@ -804,7 +812,7 @@ function huddleStep(o) {
       if(this.t<2.2&&currentMap.npcs.some(n=>n.stageShoo&&(n.path.length||n.move)&&stageInZone(stagePos(n)))) done=false;   // give townsfolk a moment to walk out of the picture
       for(const m of this.moves) { const a=m.a;
         if(a.move&&!advanceMove(a,dt)) { done=false; continue; }
-        if(m.i<m.path.length) { const t=m.path[m.i++]; a.facing=directionTo(t.x-a.x,t.y-a.y);
+        if(m.i<m.path.length) { const t=m.path[m.i++],e=m.path[m.path.length-1]; a.facing=(e.x!==a.x||e.y!==a.y)?directionTo(e.x-a.x,e.y-a.y):directionTo(t.x-a.x,t.y-a.y);   /* face where they are going, not each zig-zag step (report casc: "it kind of wobbles back and forth") */
           a.move={fx:a.x,fy:a.y,tx:t.x,ty:t.y,elapsed:0,duration:.15}; done=false; } }
       if(done) huddleTurn(this.g);
       return done; }};
@@ -926,7 +934,7 @@ function approachStep(o) {
     update(dt){ let done=true;
       for(const m of this.moves) { const a=m.a;
         if(a.move&&!advanceMove(a,dt)) { done=false; continue; }
-        if(m.i<m.path.length) { const t=m.path[m.i++]; a.facing=directionTo(t.x-a.x,t.y-a.y);
+        if(m.i<m.path.length) { const t=m.path[m.i++],e=m.path[m.path.length-1]; a.facing=(e.x!==a.x||e.y!==a.y)?directionTo(e.x-a.x,e.y-a.y):directionTo(t.x-a.x,t.y-a.y);   /* face where they are going, not each zig-zag step (report casc: "it kind of wobbles back and forth") */
           a.move={fx:a.x,fy:a.y,tx:t.x,ty:t.y,elapsed:0,duration:.15}; done=false; } }
       if(done&&this.g) { this.g.lookAt=intro.nearBox&&intro.nearBox.a; huddleTurn(this.g); }
       return done; }};
@@ -978,7 +986,7 @@ function aroundStep(o) {
       const walkers=[player,...followers.filter(f=>stageWalks(f)&&!f.scenePose&&!f.scr)];
       const spots=aroundSpots(R,walkers,o.tom,o.at);
       walkers.forEach((a,k)=>{ const p=stagePos(a); a.x=p.x; a.y=p.y; a.move=null; a.lag=0; storyHold(a); a.stagePlaced=true; a.stageFaced=true;
-        this.moves.push({a,path:spots[k].path,i:0,wait:k*.22,dur:o.speed||.17}); });   // they set off one after another, so nobody walks inside anybody
+        this.moves.push({a,path:spots[k].path,i:0,wait:k*.22,dur:o.speed||.26}); });   // ch2fix1 (casc, Tom: "the character's walk unnaturally fast"): .17 s a tile was faster than a normal walk   // they set off one after another, so nobody walks inside anybody
       intro.objStage={R,walkers,keep:o.keepTom?player.facing:null};
       if(typeof stageFrame==='function') stageFrame({roster:walkers,others:[]},this.moves);   // the cutscene camera frames and zooms on the group at the object (cutstage1)
     },
@@ -986,7 +994,7 @@ function aroundStep(o) {
       for(const m of this.moves) { const a=m.a;
         if(m.wait>0) { m.wait-=dt; if(m.path.length) done=false; continue; }
         if(a.move&&!advanceMove(a,dt)) { done=false; continue; }
-        if(m.i<m.path.length) { const t=m.path[m.i++]; a.facing=directionTo(t.x-a.x,t.y-a.y);
+        if(m.i<m.path.length) { const t=m.path[m.i++],e=m.path[m.path.length-1]; a.facing=(e.x!==a.x||e.y!==a.y)?directionTo(e.x-a.x,e.y-a.y):directionTo(t.x-a.x,t.y-a.y);   /* face where they are going, not each zig-zag step (report casc: "it kind of wobbles back and forth") */
           a.move={fx:a.x,fy:a.y,tx:t.x,ty:t.y,elapsed:0,duration:m.dur}; done=false; } }
       if(done&&this.on) aroundFace(intro.objStage);
       return done; }};
@@ -1065,6 +1073,7 @@ function playScene(script,opts={}) {
   let list=typeof script==='function'?script(opts.ctx||{}):script;
   for(const f of [...followers,player]) { f.stagePlaced=false; f.stageFaced=false; }
   intro.monGather=null; intro.nearBox=null; intro.nearBoxes=null; intro.objStage=null;
+  intro.poseFocus=sid&&BOSS_STAGE[sid]||null;   // mood and talking poses face the boss (poseFacingWant)
   if(sid&&BOSS_STAGE[sid]&&Array.isArray(list)) { const fc=BOSS_STAGE[sid]; list=stageScript(list,fc,(first,st)=>[first?{gather:fc}:{gather:fc,check:true},{huddle:true,focus:fc,with:st&&typeof st.talk==='string'?st.talk:null}]); }
   // opts.stage: a wrapper script (playScene(()=>[...])) that should be staged like a SCENES id (facing1: the Part 2 opening).
   else if((sid||opts.stage)&&Array.isArray(list)&&!JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v).includes('"gather"')) { const self=sceneSelfStaged(list),near=self?null:sceneSpeakers(list),ob=self?null:objPressLive();   // ob: the scene started at an object Tom pressed A on (item1)

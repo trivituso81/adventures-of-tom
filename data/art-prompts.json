@@ -25768,6 +25768,320 @@
    ],
    "group": "Chapter 7",
    "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The painting of Grace, a nine year old girl. 2) The painting of Rose, a six year old girl. 3) The finished painting of a phone showing a photo of the girls from the same game: paint the phone and the photo in the same way.\n\nPAINT THIS ONE OBJECT\nA modern smartphone, seen straight on, upright, filling about 80 percent of the picture. The whole screen is one painted photo, in a library: Grace in front, grinning, holding a shiny gold library card up high in one hand, and behind her Rose sitting on top of a stack of books on a library cart, both arms thrown up, laughing, with the shelves of a library blurred behind them. Copy each girl's face, hair and colors from attachments 1 and 2 as exactly as possible. The phone is plain black with a thin frame. No hands.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No words, letters or numbers anywhere."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch1-mudling-heist",
+   "tab": "Enemies",
+   "group": "Report fixes",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/enemies/enemy-mudling-v2.png",
+    "art/raw/enemies/enemy-grump-v3.png"
+   ],
+   "title": "Chapter 1: the Mudling steals the crisp, 16 frames 4 x 4, facing left (replaces the cartoon heist frames)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE SHEET. Return exactly one square image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The approved painting of the Mudling, a blob of pond mud with eyes, from \"The Adventures of Tom\", a family role-playing game. Keep this exact creature: the same mud body, colors, eyes, mouth and painted finish. It has NO leaves, NO sprout, NO cute cartoon face.\n2) The approved painting of the Pond Grump, for the hand-brushed finish only.\n\nPAINT THIS SHEET\n16 poses of the same Mudling in a 4 by 4 grid, read left to right, top row first. Every pose faces to the LEFT of the picture. Each pose fills most of its cell; nothing touches or overlaps the next cell. The same size of creature in every cell.\nRow 1: 1 oozing forward low and flat. 2 oozing forward, a little taller. 3 stopping, eyes wide, spotting something tasty. 4 winding up, leaning back.\nRow 2: 5 charging forward. 6 shoving with its whole body. 7 squeezing tall and thin to fit through a gap. 8 wobbling after the squeeze.\nRow 3: 9 stretching one muddy arm out to reach. 10 grabbing a round metal pie tin full of rhubarb crisp. 11 hugging the pie tin to its body. 12 glancing back over its shoulder, holding the tin.\nRow 4: 13 scurrying away holding the tin. 14 scurrying, the other step. 15 a sneaky giggle, tin held tight. 16 sneaking off on tiptoe, low, tin held tight.\nFrom pose 10 on, the pie tin of rhubarb crisp is in every pose, held by the Mudling.\nMatte, thick visible brush strokes on the mud, canvas grain, crisp painted edges, no gloss, not a smooth digital render.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch1-deedee-glasses-head",
+   "tab": "Characters",
+   "group": "Report fixes",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/deedee-talk-v4.png"
+   ],
+   "title": "Chapter 1: Deedee looking for the reading glasses that are on top of her head (one full-body pose, for the map and her dialogue face)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of Deedee from \"The Adventures of Tom\", a family role-playing game. This is exactly how Deedee looks.\n2) The approved talking sheet of Deedee, for the size of the head against the body and the painted finish.\n\nPAINT THIS ONE POSE\nDeedee, a grandmother, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. A pair of reading glasses is pushed up on TOP of her head, resting in her hair, clearly visible. She is patting the pockets of her clothes with both hands, looking down and to the side, puzzled, searching for the glasses she cannot see are on her own head. Funny and warm.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments. Her face must be clearly visible from the front so it can be cropped for a portrait.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch1-spot-together",
+   "tab": "Props",
+   "group": "Report fixes",
+   "ar": "1:1",
+   "refs": [
+    "art/hollow.webp",
+    "art/raw/props/ch1-grey-patch-v3.png",
+    "art/raw/props/ch1-orange-block-v1.png",
+    "art/raw/props/ch1-flashbulb-v1.png"
+   ],
+   "title": "Chapter 1: the fishing spot as one picture: grey grass patch with the orange block and the burnt bulb in it (one object)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGES\n1) The finished painting of Grump Hollow from \"The Adventures of Tom\", a family role-playing game, for the view, light and brushwork only.\n2) The approved grey grass patch. 3) The approved orange block with a dragonfly inside. 4) The approved burnt-out flashbulb.\n\nPAINT THIS ONE OBJECT\nThe grey grass patch of attachment 2, seen from the same high, angled view as attachment 1, so it lies flat on the ground and is about twice as wide as it is tall. Sitting IN the grass, a little left of the middle, is the orange block of attachment 3, the size of a plum, with the dragonfly inside and a small round dent facing the viewer; its bottom sinks into the grass so it clearly rests on the ground. Lying on its side in the grass to the right of the block, small, is the burnt-out flashbulb of attachment 4. All three are painted together as one picture with one light, so nothing looks pasted on: the block and the bulb cast soft grey shadows on the grass to the lower right. Only the grass and its earth are drained of colour; the block stays orange and the bulb keeps its dark metal base.\n- Exactly ONE patch, alone, centered, large: it fills about 80 percent of the width of the picture. Nothing else: no pond, no path, no trees.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No people, no words, letters or numbers.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "boppy-em-unimpressed",
+   "tab": "Characters",
+   "group": "Report fixes",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/boppy-hero-ref-v1.png",
+    "art/raw/characters/boppy-emotions-v6.png"
+   ],
+   "title": "Boppy unimpressed WITH his mustache (one full-body pose; replaces the 8th frame of his emotion sheet)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of Boppy from \"The Adventures of Tom\", a family role-playing game. This is exactly how Boppy looks.\n2) The approved emotion sheet of Boppy. Copy the LAST pose (unimpressed: leaning on one hip, one hand on the hip, eyes half closed, mouth turned down, his fishing rod over his shoulder).\n\nPAINT THIS ONE POSE\nBoppy, a grandfather in his sixties, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Copy the last pose of attachment 2 exactly: unimpressed, leaning on one hip, one hand on the hip, eyelids half closed, mouth turned down, the fishing rod over his shoulder.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments. He has his thick white mustache, exactly as in attachment 1. The mustache must be clearly visible.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch1-deedee-bulb",
+   "tab": "Characters",
+   "group": "Report fixes",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/deedee-talk-v4.png",
+    "art/raw/props/ch1-flashbulb-v1.png"
+   ],
+   "title": "Chapter 1: Deedee holding up the burnt flashbulb she found at the pond (one full-body pose)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of Deedee from \"The Adventures of Tom\", a family role-playing game. This is exactly how Deedee looks.\n2) The approved talking sheet of Deedee, for the size of the head against the body and the painted finish.\n3) The approved burnt-out flashbulb. She holds exactly this bulb.\n\nPAINT THIS ONE POSE\nDeedee, a grandmother, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. She holds the burnt-out flashbulb of attachment 3 up between her thumb and finger at shoulder height, looking at it with a frown, disapproving, like someone found litter at her pond. The bulb is small but clearly visible.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch3-rose-bulb",
+   "tab": "Characters",
+   "group": "Report fixes",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/rose-talk-v2.png",
+    "art/raw/props/ch1-flashbulb-v1.png"
+   ],
+   "title": "Chapter 3: Rose holding up the burnt flashbulb she found on the sundial (one full-body pose)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of Rose from \"The Adventures of Tom\", a family role-playing game. This is exactly how Rose looks.\n2) The approved talking sheet of Rose, for the size of the head against the body and the painted finish.\n3) The approved burnt-out flashbulb. She holds exactly this bulb.\n\nPAINT THIS ONE POSE\nRose, a girl of six, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. She holds the burnt-out flashbulb of attachment 3 up high over her head with one hand, proud, on her tiptoes, big grin, showing everyone what she found. The bulb is small but clearly visible.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch2-dazed-washington",
+   "tab": "Characters",
+   "group": "Report fixes",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/npcs/npc-photo-washington-v2.png"
+   ],
+   "title": "Chapter 2: Mr. Washington in the smog's daze (one full-body pose: glassy eyes, dreamy smile)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved painting of Mr. Washington, a neighbour in \"The Adventures of Tom\", a family role-playing game. This is exactly how Mr. Washington looks.\n\nPAINT THIS ONE POSE\nMr. Washington, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Mr. Washington is in a trance: the eyes are glassy, half closed and unfocused, looking at nothing far away, the eyebrows slightly raised, a slack, dreamy little smile, the head tilted a little to one side, the shoulders loose. Arms hang relaxed; he stands with one hand resting on his belly. Calm and a little funny, never scary.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch2-dazed-odette",
+   "tab": "Characters",
+   "group": "Report fixes",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/npcs/npc-photo-odette-v2.png"
+   ],
+   "title": "Chapter 2: Miss Odette in the smog's daze (one full-body pose: glassy eyes, dreamy smile)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved painting of Miss Odette, a neighbour in \"The Adventures of Tom\", a family role-playing game. This is exactly how Miss Odette looks.\n\nPAINT THIS ONE POSE\nMiss Odette, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Miss Odette is in a trance: the eyes are glassy, half closed and unfocused, looking at nothing far away, the eyebrows slightly raised, a slack, dreamy little smile, the head tilted a little to one side, the shoulders loose. Arms hang relaxed; she holds a long wooden spoon loosely, as if stirring the air. Calm and a little funny, never scary.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch2-dazed-carmen",
+   "tab": "Characters",
+   "group": "Report fixes",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/npcs/npc-photo-carmen-v2.png"
+   ],
+   "title": "Chapter 2: Doña Carmen in the smog's daze (one full-body pose: glassy eyes, dreamy smile)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved painting of Doña Carmen, a neighbour in \"The Adventures of Tom\", a family role-playing game. This is exactly how Doña Carmen looks.\n\nPAINT THIS ONE POSE\nDoña Carmen, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Doña Carmen is in a trance: the eyes are glassy, half closed and unfocused, looking at nothing far away, the eyebrows slightly raised, a slack, dreamy little smile, the head tilted a little to one side, the shoulders loose. Arms hang relaxed; she holds a griddle spatula loosely at her side. Calm and a little funny, never scary.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch2-dazed-marisol",
+   "tab": "Characters",
+   "group": "Report fixes",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/npcs/npc-photo-marisol-v2.png"
+   ],
+   "title": "Chapter 2: Marisol in the smog's daze (one full-body pose: glassy eyes, dreamy smile)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved painting of Marisol, a neighbour in \"The Adventures of Tom\", a family role-playing game. This is exactly how Marisol looks.\n\nPAINT THIS ONE POSE\nMarisol, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Marisol is in a trance: the eyes are glassy, half closed and unfocused, looking at nothing far away, the eyebrows slightly raised, a slack, dreamy little smile, the head tilted a little to one side, the shoulders loose. Arms hang relaxed; she holds a dog leash loosely in one hand, the leash hanging slack. Calm and a little funny, never scary.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch2-dazed-larry",
+   "tab": "Characters",
+   "group": "Report fixes",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/npcs/npc-photo-larry-v2.png"
+   ],
+   "title": "Chapter 2: Larry in the smog's daze (one full-body pose: glassy eyes, dreamy smile)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved painting of Larry, a neighbour in \"The Adventures of Tom\", a family role-playing game. This is exactly how Larry looks.\n\nPAINT THIS ONE POSE\nLarry, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Larry is in a trance: the eyes are glassy, half closed and unfocused, looking at nothing far away, the eyebrows slightly raised, a slack, dreamy little smile, the head tilted a little to one side, the shoulders loose. Arms hang relaxed; he holds his leaf blower loosely, pointing at the ground, switched off. Calm and a little funny, never scary.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tom-think",
+   "tab": "Characters",
+   "group": "Report fixes",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/tom-hero-ref-v1.png",
+    "art/raw/characters/tom-talk-v2.png"
+   ],
+   "title": "Tom thinking and listening (one full-body pose; the fifth talking pose, for lines where someone thinks about what another person says)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of Tom from \"The Adventures of Tom\", a family role-playing game. This is exactly how Tom looks.\n2) The approved talking sheet of Tom, for the size of the head against the body and the painted finish.\n\nPAINT THIS ONE POSE\nTom, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Thinking hard about what someone else is saying: one hand on the chin, the other arm folded across the body supporting that elbow, the head tilted a little, eyes looking up and to the side, the mouth closed in a thoughtful little line. Curious and attentive, not sad.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments. The pose matches the attached talking sheet in size and finish, so it can sit next to those four poses.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "tnb-think",
+   "tab": "Characters",
+   "group": "Report fixes",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/tnb-hero-ref-v1.png",
+    "art/raw/characters/tnb-talk-v2.png"
+   ],
+   "title": "TNB thinking and listening (one full-body pose; the fifth talking pose, for lines where someone thinks about what another person says)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of TNB from \"The Adventures of Tom\", a family role-playing game. This is exactly how TNB looks.\n2) The approved talking sheet of TNB, for the size of the head against the body and the painted finish.\n\nPAINT THIS ONE POSE\nTNB, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Thinking hard about what someone else is saying: one hand on the chin, the other arm folded across the body supporting that elbow, the head tilted a little, eyes looking up and to the side, the mouth closed in a thoughtful little line. Curious and attentive, not sad.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments. The pose matches the attached talking sheet in size and finish, so it can sit next to those four poses.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "grace-think",
+   "tab": "Characters",
+   "group": "Report fixes",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/grace-hero-ref-v1.png",
+    "art/raw/characters/grace-talk-v2.png"
+   ],
+   "title": "Grace thinking and listening (one full-body pose; the fifth talking pose, for lines where someone thinks about what another person says)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of Grace from \"The Adventures of Tom\", a family role-playing game. This is exactly how Grace looks.\n2) The approved talking sheet of Grace, for the size of the head against the body and the painted finish.\n\nPAINT THIS ONE POSE\nGrace, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Thinking hard about what someone else is saying: one hand on the chin, the other arm folded across the body supporting that elbow, the head tilted a little, eyes looking up and to the side, the mouth closed in a thoughtful little line. Curious and attentive, not sad.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments. The pose matches the attached talking sheet in size and finish, so it can sit next to those four poses.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "rose-think",
+   "tab": "Characters",
+   "group": "Report fixes",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/rose-hero-ref-v1.png",
+    "art/raw/characters/rose-talk-v2.png"
+   ],
+   "title": "Rose thinking and listening (one full-body pose; the fifth talking pose, for lines where someone thinks about what another person says)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of Rose from \"The Adventures of Tom\", a family role-playing game. This is exactly how Rose looks.\n2) The approved talking sheet of Rose, for the size of the head against the body and the painted finish.\n\nPAINT THIS ONE POSE\nRose, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Thinking hard about what someone else is saying: one hand on the chin, the other arm folded across the body supporting that elbow, the head tilted a little, eyes looking up and to the side, the mouth closed in a thoughtful little line. Curious and attentive, not sad.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments. The pose matches the attached talking sheet in size and finish, so it can sit next to those four poses.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "deedee-think",
+   "tab": "Characters",
+   "group": "Report fixes",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/deedee-hero-ref-v1.png",
+    "art/raw/characters/deedee-talk-v4.png"
+   ],
+   "title": "Deedee thinking and listening (one full-body pose; the fifth talking pose, for lines where someone thinks about what another person says)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of Deedee from \"The Adventures of Tom\", a family role-playing game. This is exactly how Deedee looks.\n2) The approved talking sheet of Deedee, for the size of the head against the body and the painted finish.\n\nPAINT THIS ONE POSE\nDeedee, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Thinking hard about what someone else is saying: one hand on the chin, the other arm folded across the body supporting that elbow, the head tilted a little, eyes looking up and to the side, the mouth closed in a thoughtful little line. Curious and attentive, not sad.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments. The pose matches the attached talking sheet in size and finish, so it can sit next to those four poses.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "boppy-think",
+   "tab": "Characters",
+   "group": "Report fixes",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/boppy-hero-ref-v1.png",
+    "art/raw/characters/boppy-talk-v3.png"
+   ],
+   "title": "Boppy thinking and listening (one full-body pose; the fifth talking pose, for lines where someone thinks about what another person says)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of Boppy from \"The Adventures of Tom\", a family role-playing game. This is exactly how Boppy looks.\n2) The approved talking sheet of Boppy, for the size of the head against the body and the painted finish.\n\nPAINT THIS ONE POSE\nBoppy, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Thinking hard about what someone else is saying: one hand on the chin, the other arm folded across the body supporting that elbow, the head tilted a little, eyes looking up and to the side, the mouth closed in a thoughtful little line. Curious and attentive, not sad.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments. The pose matches the attached talking sheet in size and finish, so it can sit next to those four poses.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "amy-think",
+   "tab": "Characters",
+   "group": "Report fixes",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/amy-hero-ref-v1.png",
+    "art/raw/characters/amy-talk-v1.png"
+   ],
+   "title": "Amy thinking and listening (one full-body pose; the fifth talking pose, for lines where someone thinks about what another person says)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of Amy from \"The Adventures of Tom\", a family role-playing game. This is exactly how Amy looks.\n2) The approved talking sheet of Amy, for the size of the head against the body and the painted finish.\n\nPAINT THIS ONE POSE\nAmy, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Thinking hard about what someone else is saying: one hand on the chin, the other arm folded across the body supporting that elbow, the head tilted a little, eyes looking up and to the side, the mouth closed in a thoughtful little line. Curious and attentive, not sad.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments. The pose matches the attached talking sheet in size and finish, so it can sit next to those four poses.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "justin-think",
+   "tab": "Characters",
+   "group": "Report fixes",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/justin-hero-ref-v1.png",
+    "art/raw/characters/justin-talk-v1.png"
+   ],
+   "title": "Justin thinking and listening (one full-body pose; the fifth talking pose, for lines where someone thinks about what another person says)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of Justin from \"The Adventures of Tom\", a family role-playing game. This is exactly how Justin looks.\n2) The approved talking sheet of Justin, for the size of the head against the body and the painted finish.\n\nPAINT THIS ONE POSE\nJustin, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Thinking hard about what someone else is saying: one hand on the chin, the other arm folded across the body supporting that elbow, the head tilted a little, eyes looking up and to the side, the mouth closed in a thoughtful little line. Curious and attentive, not sad.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments. The pose matches the attached talking sheet in size and finish, so it can sit next to those four poses.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ellie-think",
+   "tab": "Characters",
+   "group": "Report fixes",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/ellie-hero-ref-v1.png",
+    "art/raw/characters/ellie-talk-v1.png"
+   ],
+   "title": "Aunt Ellie thinking and listening (one full-body pose; the fifth talking pose, for lines where someone thinks about what another person says)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of Aunt Ellie from \"The Adventures of Tom\", a family role-playing game. This is exactly how Aunt Ellie looks.\n2) The approved talking sheet of Aunt Ellie, for the size of the head against the body and the painted finish.\n\nPAINT THIS ONE POSE\nAunt Ellie, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Thinking hard about what someone else is saying: one hand on the chin, the other arm folded across the body supporting that elbow, the head tilted a little, eyes looking up and to the side, the mouth closed in a thoughtful little line. Curious and attentive, not sad.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments. The pose matches the attached talking sheet in size and finish, so it can sit next to those four poses.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "olivia-think",
+   "tab": "Characters",
+   "group": "Report fixes",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/olivia-hero-ref-v1.png",
+    "art/raw/characters/olivia-talk-v1.png"
+   ],
+   "title": "Olivia thinking and listening (one full-body pose; the fifth talking pose, for lines where someone thinks about what another person says)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of Olivia from \"The Adventures of Tom\", a family role-playing game. This is exactly how Olivia looks.\n2) The approved talking sheet of Olivia, for the size of the head against the body and the painted finish.\n\nPAINT THIS ONE POSE\nOlivia, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Thinking hard about what someone else is saying: one hand on the chin, the other arm folded across the body supporting that elbow, the head tilted a little, eyes looking up and to the side, the mouth closed in a thoughtful little line. Curious and attentive, not sad.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments. The pose matches the attached talking sheet in size and finish, so it can sit next to those four poses.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
   }
  ]
 }

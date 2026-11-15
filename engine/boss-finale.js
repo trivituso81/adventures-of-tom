@@ -66,6 +66,8 @@ function bossActor(id) { return currentMap.npcs.find(n=>n.monster===id)||sceneAc
 function bossKind(id) { return !!flag('kind:'+id); }
 const BOSS_EFFECT={
   sparkle:(g)=>bossFx(g.x,g.y-g.h*.5,'#fff3b0',12,{speed:40,s:2,dur:1}),
+  // ch2fix1 (report r-20261114-110624-w82d, Tom: "The whole sneezing animation is missing"): a big spray of dust and grit out of the face, a puff at the base, a glint of gold.
+  sneeze:(g)=>{ bossFx(g.x,g.y-g.h*.55,'#e9dcc4',34,{speed:110,s:3,dur:.9}); bossFx(g.x,g.y-g.h*.55,'#a98458',18,{speed:80,s:3,dur:1}); bossFx(g.x,g.y,'#c9a77a',14,{up:true,w:g.h*.8,speed:40}); setTimeout(()=>bossFx(g.x,g.y-g.h*.4,'#ffe08a',10,{speed:60,s:3,dur:.8}),180); },
   splash:(g)=>{ bossFx(g.x,g.y,'#bfe6f2',22,{up:true,w:g.h*.5,speed:52,s:2}); bossFx(g.x,g.y,'#ffffff',10,{up:true,w:g.h*.3,speed:60,s:2}); },
   rings:(g)=>{ for(let i=0;i<3;i++) setTimeout(()=>bossRing(g.x,g.y,g.h*(.7+i*.45),'#d8f1fa'),i*260); },
   bigring:(g)=>{ for(let i=0;i<3;i++) setTimeout(()=>bossRing(g.x,g.y-g.h*.4,g.h*(1.2+i*.9),'#ffe9a8'),i*300); },
@@ -206,6 +208,24 @@ SCENE_OPS.endprop=o=>S.call(()=>{
   BOSS_PROPS.push({id:q.id,f:q.f,x0:p.x+q.dx,y0:p.y+q.dy,x1:p.x+(q.to?q.to[0]:q.dx),y1:p.y+(q.to?q.to[1]:q.dy),t0:performance.now(),dur:q.dur||0,arc:q.arc||0,fade:q.fade||0,dir:q.dir||'right'});
   if(q.sfx&&typeof sfx!=='undefined'&&sfx[q.sfx]) setTimeout(()=>sfx[q.sfx](),(q.dur||0)*1000*.9);
 });
+
+// {towel:{from:'Doña Carmen',to:'tom'}} (ch2fix1, report r-20261114-162821-2mrs, Tom: "We need an actual animation here where she hits him with the
+// towel. It would be hilarious"): the painted dish towel (deedee/towel_snap, hand end on its left) whips from her hand to his head in a quarter
+// second with a crack, a few cloth flecks fly, then it snaps back. Drawn over the map like the boss props.
+const TOWEL_FX=[];
+SCENE_OPS.towel=o=>S.call(()=>{ const a=bossActorByName(o.towel.from)||sceneActor(o.towel.from),b=sceneActor(o.towel.to)||player; if(!a||!b) return;
+  if(typeof PROPART!=='undefined') PROPART.preload(['deedee/towel_snap']);
+  TOWEL_FX.push({a,b,t0:performance.now()}); if(typeof sfx!=='undefined') { sfx.whoosh&&sfx.whoosh(); setTimeout(()=>{ sfx.bonk&&sfx.bonk(); },200); } });
+const LE_b7DrawMapFx_towel=b7DrawMapFx;
+b7DrawMapFx=function(time) {
+  LE_b7DrawMapFx_towel(time);
+  const now=performance.now();
+  for(let i=TOWEL_FX.length-1;i>=0;i--) { const f=TOWEL_FX[i],t=(now-f.t0)/1000; if(t>.75) { TOWEL_FX.splice(i,1); continue; }
+    const pa=position(f.a),pb=position(f.b),hx=(pa.x+.5)*T+(pb.x>pa.x?6:-6),hy=(pa.y+1)*T-T*1.25,tx=(pb.x+.5)*T,ty=(pb.y+1)*T-T*1.9;
+    const out=t<.22?t/.22:t<.4?1:Math.max(0,1-(t-.4)/.35),e=out*out*(3-2*out),dx=tx-hx,dy=ty-hy,L=Math.max(8,Math.hypot(dx,dy)*e),th=Math.atan2(dy,dx);
+    if(typeof PROPART!=='undefined') PROPART.draw('deedee/towel_snap',hx+Math.cos(th)*L/2,hy+Math.sin(th)*L/2,{w:L+6,h:Math.max(10,L*.34),rot:th});
+    if(t>.2&&t<.24&&!f.hit) { f.hit=true; bossFx(tx,ty,'#f4ead6',10,{speed:70,s:2,dur:.5}); bossFx(tx,ty,'#c94a3a',4,{speed:50,s:2,dur:.5}); } }
+};
 const LE_b7DrawMapFx_props=b7DrawMapFx;
 b7DrawMapFx=function(time) {
   LE_b7DrawMapFx_props(time);

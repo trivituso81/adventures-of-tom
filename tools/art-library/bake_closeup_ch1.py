@@ -23,8 +23,11 @@ def trim(im,pad=4):
     return im.crop((max(0,x0-pad),max(0,y0-pad),min(im.width,x1+pad),min(im.height,y1+pad)))
 def square(im,side):
     s=max(im.size); sq=Image.new('RGBA',(s,s),(0,0,0,0)); sq.paste(im,((s-im.width)//2,(s-im.height)//2),im); return sq.resize((side,side),Image.LANCZOS)
+import glob as _glob, re as _re
+def newest(stem):   # the newest approved version file stem-v<N>.png (Tom approves a new version in the Art Library)
+    return max(_glob.glob(stem+'-v*.png'),key=lambda p:int(_re.search(r'-v(\d+)\.png$',p).group(1)))
 os.makedirs('art/closeup',exist_ok=True); os.makedirs('art/props/hollow',exist_ok=True)
-Image.open(RAW+'/props/ch1-doorframe-v1.png').convert('RGB').save('art/closeup/ch1-doorframe.webp',quality=90,method=6)
+Image.open(newest(RAW+'/props/ch1-doorframe')).convert('RGB').save('art/closeup/ch1-doorframe.webp',quality=90,method=6)
 square(trim(key(RAW+'/props/ch1-coin-v1.png')),512).save('art/closeup/ch1-coin.webp',quality=92,method=6)
 g=key(RAW+'/characters/ch1-boppy-grin-v1.png'); ga=np.array(g); pk=(ga[...,0].astype(int)-ga[...,1]>110)&(ga[...,2].astype(int)-ga[...,1]>90); ga[pk,3]=0; g=trim(Image.fromarray(ga));   # also key magenta trapped inside the rod loop
 g=g.crop((0,0,g.width,int(g.height*.58)))   # head, cap, hand on the teeth, vest top

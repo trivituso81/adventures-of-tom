@@ -44,10 +44,42 @@ def chin_share(cid):
     return float(np.median([rows[i] / figs[i].height for i in EF.UPRIGHT]))
 
 
+def walk_head_share(cid):
+    """The head's share of the standing walk figure on screen (top of hair to chin over full height), as the walk bake draws it."""
+    import walk_sheet_frames as W
+    f = W.HEAD_TWEAK.get(cid, 1.0)
+    if cid in W.WALK_MATCH: return W.tom_head_rows() * f / W.figure_rows(cid)
+    p = W.PLAIN.get(cid)
+    return p * f / (1 - p + p * f) if p else None
+
+
+def talk_head_share(cid, figs):
+    """Chin row over height on the painted Telling and Pointing figures (the two standing ones), or None when it cannot be read."""
+    import emotion_chin as EC
+    try:
+        bx = EC._boxes(cid, figs[:2]); raw = [EC._read(f, b) for f, b in zip(figs[:2], bx)]
+    except Exception: return None
+    v = [r / f.height for r, f in zip(raw, figs) if r and .15 < r / f.height < .4]
+    return float(np.mean(v)) if v else None
+
+
+# Hand-set where the chin reading misses (Ellie's glasses read as her chin line; checked next to her walk stand frame).
+TALK_FIX = {'ellie': 1.5}
+
+
+def head_grow(cid, figs):
+    """talkhead1 (report r-20261114-160717-lnkb, Tom: "Head size needs to be amplified in all of the talking poses, just like it is for the walking"):
+    the walk bake draws an adult's head at Tom's head height x their HEAD SIZES factor on a body of their real height, so walking heads are a bigger share
+    of the figure than the painted talking heads x the factor. The talking head now grows to the walk's head share (never less than the factor)."""
+    fct = EF.head_factor(cid); T = walk_head_share(cid); s = talk_head_share(cid, figs)
+    if cid in TALK_FIX: return TALK_FIX[cid], s or chin_share(cid)
+    if not T or not s: return fct, chin_share(cid)
+    return max(fct, T * (1 - s) / (s * (1 - T))), s
+
+
 def bake(cid):
-    figs = cut(cid); fct = EF.head_factor(cid)
+    figs = cut(cid); fct, sh = head_grow(cid, figs)
     if fct != 1.0:
-        sh = chin_share(cid)
         figs = [EF.grow_frame_head(f, fct, int(round(sh * f.height))) for f in figs]
     fw = max(f.width for f in figs) + 4; fh = max(f.height for f in figs) + 2
     atlas = Image.new('RGBA', (fw * 4, fh), (0, 0, 0, 0))

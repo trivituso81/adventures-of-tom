@@ -1,3 +1,29 @@
+## ch2fix1b (2026-11-14): chapter 2 feedback, part 2: facing, staging, bigger talking heads, even face crops, sneeze and towel, door frame v2
+- Facing:
+  - r-20261114-161528-ex1k "TNB is facing the wrong way yet again", r-20261114-161310-ywn0 "She's facing the wrong way", r-20261114-104125-es1t (Washington), r-20261114-102152-a0r8 (Dot, ch1 town): 67 mood and talking paintings that were marked front-facing actually lean (every townsperson's happy pose leans right, as Dot's does; TNB, Deedee, Rose, Olivia, Amy, Justin moods; five answer poses), so they now turn toward who they talk to (docs/pose-facing.tsv, looked at frame by frame). The speaker of a line now turns to Tom (Tom to the nearest person) when nobody else gives a side (poseFacingWant in engine/story.js).
+  - r-20261114-162440-1v7s "Tom keeps facing the wrong way" (boss): in every boss scene mood and talking poses face the boss (intro.poseFocus).
+  - r-20261114-104218-fmss smog facing: already fixed by rysi (ordinary monsters face the party in cutscenes); checked in the ch2Smog frames.
+  - r-20261114-160921-smrp TNB's mood poses "size down too much ... and facing the wrong way": his mood factor 1.35 to 1.27 (about 6 percent bigger), happy and loving lean marked.
+- Staging:
+  - r-20261114-161716-9078 "the smog is still behind the post ... Mr Washington needs to have moved away": he drifts back up his walk while the smog rolls in and the first Smoglet takes his spot in front of the mailbox.
+  - r-20261114-104958-4dlv "the dog is not standing next to them": ch2Source places Nara beside Tom.
+  - r-20261114-161002-ak0n "Nara ... used to stop him before he enters the house": a replay or chapter jump in the same session kept her old "met" mark; it is reset while met-nara is not set.
+  - r-20261114-161456-casc "wobbles back and forth ... walk unnaturally fast": gathering around an object walks at .26 s a tile (was .17) and faces the destination, not each zig-zag step.
+  - r-20261114-160528-230r "Should be zoomed in on Tom": ch2Arrive pushes in (zoom 2) for Tom's line and eases out after it.
+- Heads and faces:
+  - r-20261114-160717-lnkb "Head size needs to be amplified in all of the talking poses, just like it is for the walking": talk_frames.py grows each talking head to the walk's head share (the walk draws adult heads at Tom's head height times their factor), never less than the HEAD SIZES factor; all ten talking sheets rebaked, then bake_story_poses.py.
+  - r-20261114-161209-5qyh "the very top of their head ... a little bit below the bottom of their chin ... centered ... for every emotion state and every talking state ... equally" and r-20261114-160904-64qv (TNB's crop cut his face): every mood face, plain talk face and talking-pose face is now framed from the hair top to just below the chin (square = head height x 1.24, 5 percent paper above), centred on the jaw; a misread head height falls back to that person's median (bake_emotion_faces.frame_square, bake_talk_faces, bake_talkpose_faces). All 552 mood faces of cast and townsfolk rebaked.
+  - r-20261114-110543-oed4 "The dialog portrait for the monster should match his new state": The Big Shake's ending frames have their own faces (portraits/foes/bigshake-calm and -touched, bake_foe_portraits.py --ends); the dialog shows the face of the ending frame he stands in.
+- Animations:
+  - r-20261114-110624-w82d "The whole sneezing animation is missing": he goes wide-eyed for the build-up, then a big dust and grit spray out of his face (BOSS_EFFECT.sneeze), a thud and he settles calm.
+  - r-20261114-162821-2mrs "an actual animation here where she hits him with the towel": Doña Carmen steps up and whips the painted dish towel (new {towel} scene step, engine/boss-finale.js) at Tom's head with a crack and flecks; Tom staggers. Checked by positions in the frames before and after, not frame by frame.
+  - r-20261114-162358-jykk (holding the bulb, partly): Tom now holds up the bulb in his painted bulb pose at the lemon tree (ch2) and at second base (ch5), as in ch4. Deedee (ch1) and Rose (ch3) need new pictures (Art Library below).
+- Art:
+  - r-20261114-162235-r3vz "The base of the tree, like the mound, should be smaller": the dirt circle under the grey and the colour lemon tree is now 58 percent as wide (tools/art-library/shrink_mound.py, run by bake_closeup_ch2.py and bake_story_ch6b.py).
+  - r-20261114-145325-4sgz door frame: Tom approved v2; bake_closeup_ch1.py now always takes the newest approved version and the door frame close-up shows v2.
+  - New Art Library group "Report fixes" (tools/art-library/ch2fix-prompts.js, 21 drafts): ch1-mudling-heist (mxvd), ch1-deedee-glasses-head (7v5z), ch1-spot-together (nre4), boppy-em-unimpressed (1a2w: his unimpressed mood frame lost the mustache), ch1-deedee-bulb and ch3-rose-bulb (jykk), ch2-dazed-washington, -odette, -carmen, -marisol, -larry (g4gl), and a thinking pose for each of the ten family members (c5no).
+- EMO_V, TALK_V and ART_V bumped.
+
 ## ch2fix1a (2026-11-14): chapter 2 feedback, part 1: six lines rewritten, TNB mellow, Tom with feeling, dazed voices, drawn-out RUMBLE
 - Lines rewritten (old clips purged, tools/clip-audit/purge-ch2fix1.json; the new lines show under No clip yet):
   - r-20261114-160750-y9u1 "I don't get this line. Change it to something wittier": ch2Loft Tom "The fish was the nicest part!" is now "I flew six hours for that pun?" (answers TNB's fishy pun; mood unimpressed).

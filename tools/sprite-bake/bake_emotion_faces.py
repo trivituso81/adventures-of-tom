@@ -72,6 +72,33 @@ def head_scale(pid):
     return f / json.loads(m.group(1))[pid].get('hg', 1.0)
 
 
+# facecrop1 (report r-20261114-161209-5qyh, Tom: "the very top of their head ... and then the bottom a little bit below the bottom of their chin showing a
+# little bit of their neck, and it needs to be sort of centered ... for every emotion state and every talking state ... equally"; r-20261114-160904-64qv:
+# TNB's crop cut off his face). Every face is framed the same way: the frame's hair top to its chin (read on the frame, emotion_chin._read), the square is
+# that height x HEAD_PAD with TOP_GAP of paper above the hair, centred on the jaw. The older hero-measured square (x0, y0, s) only says where to look.
+HEAD_PAD = 1.24
+TOP_GAP = 0.05
+def frame_square(f, x0, y0, s):
+    import emotion_chin as EC
+    a = np.array(f); al = a[:, :, 3] > 40; Hh, Ww = al.shape
+    try: chin = EC._read(f, (x0, y0, s))
+    except Exception: chin = None
+    if chin is None or not (y0 + .45 * s < chin < y0 + 1.25 * s): chin = y0 + .86 * s
+    cx0 = x0 + s / 2; c0, c1 = int(max(0, cx0 - .3 * s)), int(min(Ww, cx0 + .3 * s))
+    r0 = int(max(0, y0 - .35 * s)); top = None
+    for r in range(r0, int(chin)):
+        if al[r, c0:c1].sum() >= 3: top = r; break
+    if top is None: top = y0
+    j0 = int(chin - .3 * (chin - top)); xs = np.where(al[j0:int(chin), int(max(0, cx0 - .5 * s)):int(min(Ww, cx0 + .5 * s))])[1]
+    cx = (xs.mean() + max(0, cx0 - .5 * s)) if len(xs) else cx0
+    return top, chin, cx
+
+
+def square_of(top, chin, cx):
+    side = (chin - top) * HEAD_PAD
+    return cx - side / 2, top - TOP_GAP * side, side
+
+
 def bake(pid):
     q, dy, dx = (0, 0, 0) if pid == 'nara' else hero_metrics(pid)
     fr = frames(pid)
@@ -84,6 +111,14 @@ def bake(pid):
     H *= head_scale(pid)   # headmood1: the head grew by the HEAD SIZES factor but the figure by less (emotion_frames.py); frame the bigger head as the old head was framed
     os.makedirs(OUT, exist_ok=True)
     outs = []
+    frames_sq = []
+    if pid != 'nara':   # facecrop1: hair top and chin per frame; a head height far from this person's median is a misread (a bowed head, a hand): use the median
+        reads = []
+        for m, f, (top, _, al) in zip(MOODS, fr, boxes):
+            band = al[top:top + max(4, int(H * .05))]; cx = np.where(band)[1].mean(); sq = q * H
+            reads.append(frame_square(f, cx + dx * H - sq / 2, top + dy * H + sq * OVERRIDE.get(pid, {}).get(m, MOOD_DY[m]), sq))
+        hm = float(np.median([c - t for t, c, _ in reads]))
+        frames_sq = [square_of(t, c if .88 * hm <= c - t <= 1.3 * hm else t + min(max(c - t, .88 * hm), 1.3 * hm), x) for t, c, x in reads]
     for m, f, (top, _, al) in zip(MOODS, fr, boxes):
         if pid == 'nara':
             bx, by, s = NARA_BOX[m]; x0, y0 = bx - s / 2, by - s / 2
@@ -93,6 +128,7 @@ def bake(pid):
             s = q * H
             x0 = cx + dx * H - s / 2
             y0 = top + dy * H + s * OVERRIDE.get(pid, {}).get(m, MOOD_DY[m])
+            x0, y0, s = frames_sq[MOODS.index(m)]
         bg = Image.new('RGBA', (int(s) + 2, int(s) + 2), PAPER + (255,))
         bg2 = Image.new('RGBA', f.size, PAPER + (255,)); bg2.alpha_composite(f)
         pad = int(s)

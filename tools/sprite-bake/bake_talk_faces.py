@@ -24,7 +24,7 @@ ROOT = EF.ROOT
 OUT = os.path.join(ROOT, 'portraits', 'talk')
 PAPER = EF.PAPER
 CAST = ['tom', 'tnb', 'grace', 'rose', 'amy', 'justin', 'olivia', 'deedee', 'boppy', 'ellie', 'nara']
-WALK_FRAMED = ['amy']   # cast whose new walk head is smaller than the hero's (hero ratios cut her chin off): framed on the walk frame like the townsfolk
+WALK_FRAMED = ['amy', 'olivia']   # cast whose new walk head is smaller than the hero's (hero ratios cut her chin off): framed on the walk frame like the townsfolk
 IDS = CAST + EF.NPC_IDS
 HEAD_PAD = 1.18   # square side over hair-top-to-neck height
 TOP_GAP = 0.04    # paper above the hair, as a share of the side
@@ -60,6 +60,7 @@ def bake(pid):
         band = al[:max(4, int(H * .05))]
         cx = np.where(band)[1].mean()
         s = q * H; x0 = cx + dx * H - s / 2; y0 = dy * H
+        x0, y0, s = EF.square_of(*EF.frame_square(f, x0, y0, s))   # facecrop1: hair top to just below the chin, as the mood faces
     else:
         # Townsfolk: frame the head on the walk frame itself (walk heads are drawn bigger than on the hero, so the hero's ratios cut the chin off):
         # the neck is the narrowest row between 18 and 50 percent of the height; the square runs from just above the hair top past the chin.

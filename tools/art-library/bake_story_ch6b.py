@@ -15,6 +15,7 @@ def put(src,out,long=None,size=None):
         s=long/max(p.size); p=p.resize((max(1,round(p.width*s)),max(1,round(p.height*s))),Image.LANCZOS)
     os.makedirs(os.path.dirname(out),exist_ok=True); p.save(out,quality=92,method=6); print(out,p.size)
 put('ch6-lemon-tree-color','art/props/griffith/ch6_tree_color.webp',size=(238,384))
+import shrink_mound; shrink_mound.shrink('art/props/griffith/ch6_tree_color.webp')   # same small mound as the grey tree (r3vz)
 put('ch6-hat-stand','art/props/stage7/ch6_hatstand.webp',long=256)
 put('ch6-fish-splash','art/props/sundial/ch6_fish.webp',long=300)
 put('ch6-sneaker','art/props/schoolyard/ch6_sneaker.webp',long=192)

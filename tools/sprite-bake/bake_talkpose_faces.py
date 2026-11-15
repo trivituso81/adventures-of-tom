@@ -17,6 +17,7 @@ SRC = os.path.join(ROOT, 'art', 'talk')
 TYPES = ['tell', 'point', 'ask', 'answer']
 BE.OUT = os.path.join(ROOT, 'portraits', 'talk', 'pose')
 BE.MOODS = TYPES
+MOOD_DY_EMO = dict(BE.MOOD_DY)
 BE.MOOD_DY = {t: float(os.environ.get('DY', '0.03')) for t in TYPES}
 BE.head_scale = lambda pid: float(os.environ.get('HS', '1.0'))
 
@@ -28,11 +29,32 @@ def frames(pid):
 
 BE.frames = frames
 
+# facecrop1: on the talking frames the chin reading misses (hands and arms near the face), so the chin is the frame's hair top plus this person's
+# talking head share (talk_frames.py grows the head to exactly that share: the walk's), times the figure's height. Centre: the jaw rows.
+import numpy as np
+import talk_frames as TF
+SHARE = {}
+def talk_square(f, x0, y0, s):
+    al = np.array(f)[:, :, 3] > 40; rows = np.where(al.any(1))[0]; ftop, fbot = rows.min(), rows.max(); H = fbot - ftop
+    top = ftop; band = np.where(al[top:top + max(4, int(H * .05))].any(0))[0]; cx0 = band.mean()   # the hair top is the figure's top in every talking pose
+    hh = SHARE['v'] * H; c0, c1 = int(max(0, cx0 - .55 * hh)), int(min(al.shape[1], cx0 + .55 * hh))
+    chin = top + hh
+    j0 = int(chin - .3 * (chin - top)); xs = np.where(al[j0:int(chin), c0:c1])[1]
+    return top, chin, (xs.mean() + c0) if len(xs) else cx0
+BE.frame_square = talk_square
+def share_of(pid):
+    sh = Image.open(os.path.join(SRC, pid + '.webp'))   # the baked strip already has the grown head; read its share the way talk_frames set it
+    keep = BE.MOOD_DY; BE.MOOD_DY = MOOD_DY_EMO   # the chin reading in talk_frames.head_grow looks up the mood shifts by mood name
+    try: figs = TF.cut(pid); F, s = TF.head_grow(pid, figs)
+    finally: BE.MOOD_DY = keep
+    return s * F / (1 - s + s * F)
+
 
 def main():
     ids = sys.argv[1:] or sorted(f[:-5] for f in os.listdir(SRC) if f.endswith('.webp'))
     rows = []
     for pid in ids:
+        SHARE['v'] = share_of(pid)
         outs = BE.bake(pid)
         tf = os.path.join(ROOT, 'portraits', 'talk', pid + '.webp')
         rows.append([Image.open(tf).convert('RGB')] + outs); print('baked', pid)
