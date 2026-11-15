@@ -184,8 +184,9 @@ function sePlaySetup(R) {
   player.x=s[0]; player.y=s[1]; player.facing=s[2]||'down'; player.move=null; player.hidden=false;
   placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; storyWorld();
   window.storyTriggers=()=>false;   // nothing else starts while the scene is watched
-  SCENE_OPS.battle=o=>S.call(()=>{ let mm=typeof o.battle==='function'?o.battle():typeof o.battle==='object'?o.battle:findMonster(o.battle);
-    const id=(mm&&mm.monster)||o.battle; if(mm) monsterFall(mm); setFlag('battle:'+id,'win'); storyWorld(); });   // a fight in the scene is won at once
+  // a fight in the scene is won at once; a recipe with lose:true skips the fight and leaves it unwon, so the scene's try-again lines play
+  SCENE_OPS.battle=o=>S.call(()=>{ if(R.lose) return; let mm=typeof o.battle==='function'?o.battle():typeof o.battle==='object'?o.battle:findMonster(o.battle);
+    const id=(mm&&mm.monster)||o.battle; if(mm) monsterFall(mm); setFlag('battle:'+id,'win'); storyWorld(); });
 }
 function sePlayBack() { try { location.href=new URL('script.html'+(SE.play&&SE.play.id?'#'+SE.play.id:''),location.href).href; } catch(e) { location.href='script.html'; } }
 async function sePlayBoot() {

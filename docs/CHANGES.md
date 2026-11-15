@@ -1,3 +1,10 @@
+## scripted2 (2026-11-14): Script Editor: Play now works for all 52 scenes that said "no working Play recipe yet"
+
+Tom: "Fix the Play button for every scene in the Script Editor that says no working Play recipe yet, test each one, and push."
+- New `docs/script-recipes.json`: a map (and where needed flags) for each of the 52 scenes the game starts from code instead of a map trigger (the opening, the optional snack, fetch, jukebox, photo booth and dig scenes, door scenes, the chapter 11 to 20 openers and fights, Nine Scoops). `build.py` already reads it, so the index now shows 0 scenes without a recipe.
+- The three dig scenes unflag the other digs, so the "sandbox" lines (first dig only) play. ch14Gate sets `ch14-gate` so it plays the same try-again version the editor lists.
+- New recipe key `lose: true` (`engine/script-edits.js`): Play skips the fight and leaves it unwon, so the try-again lines of ch17Fight, ch19Fight, ch20Fight1 and ch20Fight2 play. Without it those four scenes played no dialog, because Play wins a fight at once.
+- New test `python3 tools/script_play_test.py /tmp/sp [ids]`: plays each recipe scene the way PLAY does, taps through the dialog and closeups, and checks the scene's first listed line appears with no page error. All 52 pass (FAILS: []). `script_editor_test.py` and smoke pass.
 ## poseedit4 (2026-11-14): Pose Editor: every resized pose is now exactly the person's height (the game itself is unchanged)
 
 Tom (2026-11-14 21:55, with a picture of his talking pose resized taller than his standing pose): "I set the bottom of the chin in the top of the head for each, but now they're all different heights but what should be happening is that based on me setting the chin and the top of the head, you should be able to make all of the head sizes equal and then place them on the body and then each body needs to be set to the exact height of the character. can't deviate, so you're gonna have to as a result of the height calculation end up shrinking the body accordingly".

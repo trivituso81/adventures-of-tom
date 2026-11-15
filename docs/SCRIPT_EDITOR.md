@@ -22,11 +22,11 @@ Tom's tool for editing the words of every scene. Open it from the title screen: 
 | Optional hand-fixed Play recipes | `docs/script-recipes.json` |
 | Apply step | `python3 tools/script-index/apply.py` |
 | Humor guide | `docs/tom-edits.tsv` and `claude/tom-line-edits.md` (Project) |
-| Test | `python3 tools/script_editor_test.py` |
+| Test | `python3 tools/script_editor_test.py`, `python3 tools/script_play_test.py` (Play for every recipe scene) |
 
 ## Whenever a scene changes
 
-Run `python3 tools/script-index/build.py` and commit `data/script-index.json`. Run `stage.py <id>` for a scene whose first spoken moment changed. Scenes with no map recipe (`from:'none'` in the index) show "no working Play recipe yet": add a recipe to `docs/script-recipes.json`.
+Run `python3 tools/script-index/build.py` and commit `data/script-index.json`. Run `stage.py <id>` for a scene whose first spoken moment changed. Scenes with no map recipe (`from:'none'` in the index) show "no working Play recipe yet": add a recipe to `docs/script-recipes.json` (`map`, optional `flags`, `unflag`, `party`, `start`, `lose:true` to leave a fight unwon so its try-again lines play), then test it with `python3 tools/script_play_test.py /tmp/sp <id>`. All 221 scenes have a recipe as of scripted2.
 
 ## "Apply my script edits"
 

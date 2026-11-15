@@ -1,0 +1,180 @@
+{
+ "opening": {
+  "map": "town"
+ },
+ "ch4Snack": {
+  "map": "studio"
+ },
+ "ch4Rig": {
+  "map": "stage7"
+ },
+ "ch5Snack": {
+  "map": "school"
+ },
+ "ch5Clocks": {
+  "map": "school"
+ },
+ "ch6Dig_play": {
+  "map": "oakpark",
+  "unflag": [
+   "ch6-dig-play",
+   "ch6-dig-garden",
+   "ch6-dig-picnic"
+  ]
+ },
+ "ch6Dig_garden": {
+  "map": "oakpark",
+  "unflag": [
+   "ch6-dig-play",
+   "ch6-dig-garden",
+   "ch6-dig-picnic"
+  ]
+ },
+ "ch6Dig_picnic": {
+  "map": "oakpark",
+  "unflag": [
+   "ch6-dig-play",
+   "ch6-dig-garden",
+   "ch6-dig-picnic"
+  ]
+ },
+ "ch6Fetch": {
+  "map": "oakpark"
+ },
+ "ch6Door": {
+  "map": "stageset"
+ },
+ "ch6Board": {
+  "map": "oak"
+ },
+ "ch6Ladder": {
+  "map": "oak"
+ },
+ "ch7Story": {
+  "map": "stacks"
+ },
+ "ch7Door": {
+  "map": "stacks"
+ },
+ "ch8Plate": {
+  "map": "carbarn"
+ },
+ "ch8Pail": {
+  "map": "carbarn"
+ },
+ "ch8Motor": {
+  "map": "carbarn"
+ },
+ "ch8Turn": {
+  "map": "carbarn"
+ },
+ "ch9Dance": {
+  "map": "moonclub"
+ },
+ "ch9Door": {
+  "map": "moonclub"
+ },
+ "ch10Start": {
+  "map": "taxi"
+ },
+ "ch10Photo": {
+  "map": "terminal"
+ },
+ "ch10Door": {
+  "map": "readroom"
+ },
+ "part2Open": {
+  "map": "town"
+ },
+ "ch11Lost": {
+  "map": "concourse"
+ },
+ "ch11Vance": {
+  "map": "concourse"
+ },
+ "ch12Open": {
+  "map": "concourse"
+ },
+ "ch13Open": {
+  "map": "lacab"
+ },
+ "ch14Deedee": {
+  "map": "row"
+ },
+ "ch14Gate": {
+  "map": "row",
+  "flags": {
+   "ch14-gate": true
+  }
+ },
+ "ch15Fight": {
+  "map": "grands"
+ },
+ "ch16Fight": {
+  "map": "town"
+ },
+ "ch17Open": {
+  "map": "lacab"
+ },
+ "ch17Race": {
+  "map": "towerstairs"
+ },
+ "ch17Fight": {
+  "map": "towervault",
+  "lose": true
+ },
+ "ch18Open": {
+  "map": "towervault"
+ },
+ "ch18Fight": {
+  "map": "towerpinnacle"
+ },
+ "ch19Claim": {
+  "map": "deadletter"
+ },
+ "ch19Fight": {
+  "map": "deadletter",
+  "lose": true
+ },
+ "ch20CoreOpen": {
+  "map": "stillcore"
+ },
+ "ch20Open": {
+  "map": "towervault"
+ },
+ "ch20Heart": {
+  "map": "stillcore"
+ },
+ "ch20Fight1": {
+  "map": "foreverheart",
+  "lose": true
+ },
+ "ch20Fight2": {
+  "map": "foreverheart",
+  "lose": true
+ },
+ "ch20Epi1": {
+  "map": "town"
+ },
+ "ch20Epi2": {
+  "map": "jpark"
+ },
+ "nsOpening": {
+  "map": "town"
+ },
+ "nsPeppers": {
+  "map": "grands"
+ },
+ "nsBoss2": {
+  "map": "town"
+ },
+ "nsInvPip": {
+  "map": "town"
+ },
+ "nsInvMoss": {
+  "map": "town"
+ },
+ "nsInvDot": {
+  "map": "town"
+ }
+}
