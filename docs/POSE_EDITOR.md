@@ -17,5 +17,13 @@ For every pose Tom has checked (walking, feelings, talking; later sets the same)
 - A two-finger pinch on the picture is ignored on purpose.
 - Result picture: the standing guide is always drawn at the rule size, so its dashed lines are where every resized head must sit.
 
+## Dialogue faces follow the lines (Tom 2026-11-14 22:08, `posefaces1`)
+- Every dialogue face (plain talk face from the front standing pose, the 8 feelings faces, the 4 talking-pose faces) of a pose where Tom has set his own lines is cut by those lines: the top-of-head line sits at `top` and the chin line at `chin` of the square, centred on the skull. Module `tools/pose-editor/pose_faces.py`; hooks in `bake_emotion_faces.py`, `bake_talk_faces.py`, `bake_talkpose_faces.py` (`PF.has`, `PF.face`).
+- The master setting is `data/portrait-frame.json` (`{"top": 0.13, "chin": 0.86}`). Tom changes it in POSE EDITOR > EVERYONE > Portrait frame; that saves `portrait:{top,chin}` in the request file, which wins in the bake. When applying, copy it into `data/portrait-frame.json`.
+- A pose Tom has not lined keeps the old framing (his lines are used even when the pose is not checked; my proposals are never used for faces: they are too rough).
+- "Apply my pose sizes" therefore ALSO means: rebake the faces of everyone in the request file: `bake_emotion_faces.py <ids>`, `bake_talk_faces.py <ids>`, `bake_talkpose_faces.py <ids>`, look at the CHECK sheets, bump `EMO_V` (engine/emotions.js) and `TALK_V` (engine/overworld.js). This part needs no other bake and can be done before the pose sizes themselves are baked.
+- Saved hero crops were deleted on Tom's order (`data/portrait-crops.json` is `{}`), so menu and battle portraits (`portraits/<id>.png`, from the hero paintings) are back to `bake_portraits.py` FACE framing. Hero paintings have no Pose Editor lines yet. RECOMMENDED NEXT (say it to Tom, do not build unasked): add each hero painting to the Pose Editor as a "Menu portrait" pose with the same two lines, cut `portraits/<id>.png` with `pose_faces`, then retire PORTRAIT CROPS (`portraits.html`, `data/portrait-crops*.json`).
+- Watch: Tom's own front standing pose has TOP at 0.6 px (set in his first save, before the pinch fix) while his other poses have TOP near 6 to 13 px. That makes his plain talk face bigger than his feelings faces AND makes his standing head, the measure for everyone, about 15 percent taller. Ask him to look at that one line.
+
 ## Not built yet
 Applying the saved sizes in the bakes. Method notes: claude/pose-editor-poseedit2.md "NEXT: the apply build" (use this file's rule 2 and 3 for the body, per pose).

@@ -17,6 +17,7 @@ SRC = os.path.join(ROOT, 'art', 'talk')
 TYPES = ['tell', 'point', 'ask', 'answer']
 BE.OUT = os.path.join(ROOT, 'portraits', 'talk', 'pose')
 BE.MOODS = TYPES
+BE.KEY_PREFIX = 'tk_'
 MOOD_DY_EMO = dict(BE.MOOD_DY)
 BE.MOOD_DY = {t: float(os.environ.get('DY', '0.03')) for t in TYPES}
 BE.head_scale = lambda pid: float(os.environ.get('HS', '1.0'))

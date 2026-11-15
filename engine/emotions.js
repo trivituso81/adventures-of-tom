@@ -23,7 +23,7 @@ function emoPreload(id) {
   for(const m of EMOTIONS_LIST) new Image().src='portraits/emo/'+id+'-'+m+'.webp?v='+EMO_V;
 }
 const TALKPOSE_V='tpface1';
-const EMOTIONS_LIST=["happy","loving","sad","angry","scared","surprised","proud","unimpressed"],EMO_V='ch2fix1b';
+const EMOTIONS_LIST=["happy","loving","sad","angry","scared","surprised","proud","unimpressed"],EMO_V='posefaces1';
 function emoActorFor(id,name,npc) {
   const pm=typeof playerMember==='function'?playerMember():null;
   if(pm&&pm.id===id) return typeof roseRider==='function'&&roseRider()?null:player;   // Tom carrying Rose keeps the ride picture

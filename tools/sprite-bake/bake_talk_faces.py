@@ -48,6 +48,8 @@ def stand_frame(cid):
 
 
 def bake(pid):
+    if EF.PF.has(pid, 'down_stand'):   # posefaces1: Tom set the front standing pose's lines in the Pose Editor: framed by them
+        c = EF.PF.face(pid, 'down_stand'); os.makedirs(OUT, exist_ok=True); c.save(os.path.join(OUT, pid + '.webp'), 'WEBP', quality=90, method=6); return c
     f = stand_frame(pid)
     al = np.array(f)[:, :, 3] > 40
     H = f.height

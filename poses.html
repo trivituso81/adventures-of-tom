@@ -88,6 +88,8 @@ details{margin-top:8px}summary{cursor:pointer;color:#d9d4ff;padding:8px 0;min-he
   </div>
   <div class="card"><h2>Result</h2>
     <canvas id="cRes" width="720" height="560"></canvas>
+    <div class="row" style="align-items:flex-start;flex-wrap:nowrap"><canvas id="cFace" width="256" height="256" style="width:96px;height:96px;flex:0 0 96px"></canvas>
+      <div class="hint" style="margin:0">Face in the dialogue box for this pose. It is cut by your two lines, so every face sits at the same height. Change where the lines sit for everyone on EVERYONE > Portrait frame.</div></div>
     <div id="verdict"></div>
     <div id="hand">
       <div class="row"><span class="lab">Whole pose</span><button class="sm" data-a="s" data-d="-1">-</button><input type="range" id="slS" min="60" max="150" step="1"><button class="sm" data-a="s" data-d="1">+</button><span class="val" id="vS">100%</span></div>
@@ -105,6 +107,13 @@ details{margin-top:8px}summary{cursor:pointer;color:#d9d4ff;padding:8px 0;min-he
     <div class="hint">The white tick beside each person is their real height. Tap a person to pick them.</div></div>
   <div class="card"><h2>Head row</h2><div class="scroll"><canvas id="cHeads" width="1500" height="300" style="touch-action:pan-x"></canvas></div>
     <div class="hint">Chins sit on the blue line. The red line is the top of Tom's head: a head the same size as Tom's touches it. The number is the head as a share of Tom's.</div></div>
+  <div class="card"><h2>Portrait frame (one setting for every face)</h2>
+    <div class="scroll"><canvas id="cFaces" width="1500" height="190" style="touch-action:pan-x"></canvas></div>
+    <div class="row"><span class="lab">Top of head</span><button class="sm" data-p="top" data-d="-1">-</button><input type="range" id="slPT" min="2" max="40" step="1"><button class="sm" data-p="top" data-d="1">+</button><span class="val" id="vPT"></span></div>
+    <div class="row"><span class="lab">Chin</span><button class="sm" data-p="chin" data-d="-1">-</button><input type="range" id="slPC" min="60" max="98" step="1"><button class="sm" data-p="chin" data-d="1">+</button><span class="val" id="vPC"></span></div>
+    <div class="row"><button id="pfReset">Back to the standard frame</button></div>
+    <div class="hint">These say how far down the dialogue box the red line (top of head) and the blue line (chin) sit, for every person and every pose. Lower Top of head to show more hair; raise Chin to show more neck. The row shows everyone's face in the pose picked above.</div>
+  </div>
   <div class="card"><h2 id="castWho">This person</h2>
     <div class="row" style="margin-top:0"><span class="lab" style="flex-basis:50px">Height</span><input type="number" id="hFt" min="2" max="7" step="1" inputmode="numeric"><span>ft</span><input type="number" id="hIn" min="0" max="11.5" step="0.5" inputmode="decimal"><span>in</span><span class="hint" id="hNote" style="margin:0"></span></div>
     <div class="row"><span class="lab" style="flex-basis:50px">Head</span><button class="sm" data-t="-1">-1</button><input type="range" id="slT" min="50" max="130" step="1"><button class="sm" data-t="1">+1</button><input type="number" id="inT" min="50" max="130" step="1" inputmode="numeric"><span>% of Tom's</span></div>
@@ -128,8 +137,8 @@ const textToB64=t=>btoa(unescape(encodeURIComponent(t)));
 $('exitbtn').onclick=()=>{location.href='index.html?admin=1';};
 
 let M=null,IMG={},cur='tom',curSet='walk',curKey='down_stand',tab='Pose',line='chin',castKey='down_stand';
-// D = everything Tom changed: {heights:{id:inches}, target:{id:percent}, frames:{id:{key:{sheet,top,chin,ok,sAdj,hAdj,fAdj,own}}}}. SAVED = what is in the request file.
-let D={heights:{},target:{},frames:{}},SAVED={heights:{},target:{},frames:{}},UNDO=[];
+// D = everything Tom changed: {heights:{id:inches}, target:{id:percent}, portrait:{top,chin}, frames:{id:{key:{sheet,top,chin,ok,sAdj,hAdj,fAdj,own}}}}. SAVED = what is in the request file.
+let D={heights:{},target:{},frames:{}},SAVED={heights:{},target:{},frames:{}},UNDO=[],FRAME0={top:.13,chin:.86};   // FRAME0: the master portrait frame in data/portrait-frame.json; D.portrait is Tom's change to it
 const clone=o=>JSON.parse(JSON.stringify(o));
 const r1=v=>Math.round(v*10)/10,r3=v=>Math.round(v*1000)/1000,med=a=>{a=a.slice().sort((x,y)=>x-y);const n=a.length;return n%2?a[(n-1)/2]:(a[n/2-1]+a[n/2])/2;};
 
@@ -222,6 +231,28 @@ function drawRes(){
   text(ctx,'This pose',xs[1],cv.height-30,'#d9d4ff','center',19);text(ctx,'in the game now',xs[1],cv.height-9,'#b9b3e6','center',15);
   text(ctx,'This pose',xs[2],cv.height-30,'#fff','center',19);text(ctx,isOk(cur,curKey)?'resized':'not resized yet',xs[2],cv.height-9,isOk(cur,curKey)?'#7dffa5':'#ffd34d','center',15);
 }
+// ---- dialogue face: the square cut by the two lines (same maths as tools/pose-editor/pose_faces.py)
+const pframe=()=>D.portrait||FRAME0;
+const ALPHA={};
+function alphaOf(id,k){const fr=FR(id,k);if(!ALPHA[fr.img]){const c=document.createElement('canvas');c.width=fr.w;c.height=fr.h;const x=c.getContext('2d');x.drawImage(IMG[fr.img],0,0);ALPHA[fr.img]=x.getImageData(0,0,fr.w,fr.h).data;}return ALPHA[fr.img];}
+function faceSquare(id,k){
+  const fr=FR(id,k),m=marks(id,k),F=pframe(),side=(m.chin-m.top)/(F.chin-F.top),hd=m.chin-m.top,a=alphaOf(id,k),mids=[];
+  for(let y=Math.max(0,Math.floor(m.top+.2*hd));y<Math.min(fr.h,Math.floor(m.top+.55*hd));y++){let best=0,bm=null,st=-1;
+    for(let x=0;x<=fr.w;x++){const on=x<fr.w&&a[(y*fr.w+x)*4+3]>40;if(on&&st<0) st=x;if(!on&&st>=0){if(x-st>best){best=x-st;bm=(st+x)/2;}st=-1;}}
+    if(bm!=null) mids.push(bm);}
+  const cx=mids.length?med(mids):fr.ax;return {x:cx-side/2,y:m.top-F.top*side,s:side};
+}
+function drawFace(ctx,id,k,dx,dy,px,guides){
+  const q=faceSquare(id,k),fr=FR(id,k),sc=px/q.s;ctx.save();ctx.beginPath();ctx.rect(dx,dy,px,px);ctx.clip();ctx.fillStyle='#fcedd4';ctx.fillRect(dx,dy,px,px);
+  ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(IMG[fr.img],dx-q.x*sc,dy-q.y*sc,fr.w*sc,fr.h*sc);
+  if(guides){const F=pframe();hline(ctx,dx,dx+px,dy+F.top*px,COL.top,[5,4],1.5);hline(ctx,dx,dx+px,dy+F.chin*px,COL.chin,[5,4],1.5);}
+  ctx.restore();
+}
+function drawFaces(){
+  const ids=M.order.filter(id=>C(id).frames[castKey]&&!C(id).locked),cw=150,cv=$('cFaces');cv.width=Math.max(700,cw*ids.length+10);cv.style.width=(cv.width/2)+'px';cv.style.height=(cv.height/2)+'px';
+  const ctx=cv.getContext('2d');ctx.fillStyle='#1f1b40';ctx.fillRect(0,0,cv.width,cv.height);
+  ids.forEach((id,i)=>{drawFace(ctx,id,castKey,cw*i+8,8,134,true);text(ctx,C(id).name,cw*i+75,174,'#fff','center',18);});
+}
 let STRIPHIT=[],CASTHIT=[];
 function drawStrip(){
   const cv=$('cStrip'),keys=C(cur).sets[curSet].keys,Z=5.2,cw=Math.max(118,Math.max(...keys.map(k=>FR(cur,k).w*S(cur,k)))*Z*1.12+14);
@@ -294,11 +325,12 @@ function castUI(){
   $('hNote').textContent=isTom?'Tom is the ruler: changing his height moves everyone else.':D.heights[cur]!=null?'was '+ftin(c.inches):'';
   $('slT').value=$('inT').value=isTom?100:target(cur);$('slT').disabled=$('inT').disabled=lock||isTom;document.querySelectorAll('#vCast button[data-t]').forEach(b=>b.disabled=lock||isTom);
   $('castHint').textContent=isTom?'Tom\'s head is the measure for everyone, so his is always 100.':lock?c.locked:'Head is how big this person\'s head is next to Tom\'s, top of head to chin. 100 is the same as Tom. Every checked pose of this person is matched to it.';
+  const F=pframe();$('slPT').value=Math.round(F.top*100);$('slPC').value=Math.round(F.chin*100);$('vPT').textContent=Math.round(F.top*100)+'%';$('vPC').textContent=Math.round(F.chin*100)+'%';$('pfReset').disabled=!D.portrait;
   const ks=castKeys();if(!ks.includes(castKey)) castKey='down_stand';
   $('castPose').innerHTML=ks.map(k=>'<option value="'+k+'"'+(k===castKey?' selected':'')+'>'+(k.startsWith('em_')?'Feeling: ':k.startsWith('tk_')?'Talking: ':'Walking: ')+shortName(k)+'</option>').join('');
 }
 function dirtyCount(){
-  let n=0;const cmp=(a,b)=>JSON.stringify(a||null)!==JSON.stringify(b||null);
+  let n=0;const cmp=(a,b)=>JSON.stringify(a||null)!==JSON.stringify(b||null);if(cmp(D.portrait,SAVED.portrait)) n++;
   for(const k of new Set([...Object.keys(D.heights),...Object.keys(SAVED.heights)])) if(cmp(D.heights[k],SAVED.heights[k])) n++;
   for(const k of new Set([...Object.keys(D.target),...Object.keys(SAVED.target)])) if(cmp(D.target[k],SAVED.target[k])) n++;
   for(const id of new Set([...Object.keys(D.frames),...Object.keys(SAVED.frames)])){const a=D.frames[id]||{},b=SAVED.frames[id]||{};for(const k of new Set([...Object.keys(a),...Object.keys(b)])) if(cmp(a[k],b[k])) n++;}
@@ -310,12 +342,13 @@ function redraw(){
   document.querySelectorAll('#tabs button').forEach(b=>b.className=b.dataset.t===tab?'on':'');
   $('vPose').className='view'+(tab==='Pose'?' on':'');$('vCast').className='view'+(tab==='Cast'?' on':'');
   bars();
-  if(tab==='Pose'){poseUI();drawStrip();drawMark();drawRes();verdict();}
-  if(tab==='Cast'){castUI();drawCast();}
+  if(tab==='Pose'){poseUI();drawStrip();drawMark();drawRes();verdict();faceNow();}
+  if(tab==='Cast'){castUI();drawCast();drawFaces();}
   const n=dirtyCount();$('save').textContent=n?'SAVE '+n+' CHANGE'+(n>1?'S':''):'SAVE';$('save').disabled=!n;$('undo').disabled=!UNDO.length;
   if(!$('msg').className) $('msg').textContent=n?n+' change'+(n>1?'s':'')+' on this phone not saved yet.':'';
   LS.set(DRAFT_KEY,JSON.stringify(D));
 }
+function faceNow(){const cv=$('cFace'),ctx=cv.getContext('2d');if(C(cur).locked){ctx.fillStyle='#385540';ctx.fillRect(0,0,256,256);return;}drawFace(ctx,cur,curKey,0,0,256,false);}
 function msg(t,c){const e=$('msg');e.textContent=t;e.className=c||'';}
 function snap(){UNDO.push(JSON.stringify(D));if(UNDO.length>20) UNDO.shift();}
 function edit(fn){snap();msg('');fn();redraw();}
@@ -351,9 +384,9 @@ $('cMark').addEventListener('pointerdown',ev=>{
   if(C(cur).locked||ownKey(cur,curKey)!==curKey) return;
   const y=ptY(ev),m=marks(cur,curKey),dT=Math.abs(VIEW.oy+m.top*VIEW.s-y),dC=Math.abs(VIEW.oy+m.chin*VIEW.s-y),l=dT<dC?'top':'chin',d=Math.min(dT,dC);
   line=l;snap();drawMark();drag={l,off:d>70?0:(VIEW.oy+m[l]*VIEW.s-y)};$('cMark').setPointerCapture(ev.pointerId);
-  setMark(l,(y+drag.off-VIEW.oy)/VIEW.s);drawMark();drawRes();verdict();ev.preventDefault();
+  setMark(l,(y+drag.off-VIEW.oy)/VIEW.s);drawMark();drawRes();verdict();faceNow();ev.preventDefault();
 });
-$('cMark').addEventListener('pointermove',ev=>{if(!drag||fingers>1) return;setMark(drag.l,(ptY(ev)+drag.off-VIEW.oy)/VIEW.s);drawMark();drawRes();verdict();ev.preventDefault();});
+$('cMark').addEventListener('pointermove',ev=>{if(!drag||fingers>1) return;setMark(drag.l,(ptY(ev)+drag.off-VIEW.oy)/VIEW.s);drawMark();drawRes();verdict();faceNow();ev.preventDefault();});
 const endDrag=()=>{fingers=Math.max(0,fingers-1);if(drag){drag=null;confirmFrame(cur,curKey);msg('');redraw();}};   // a line Tom placed is a line he means: the pose counts as checked
 $('cMark').addEventListener('pointerup',endDrag);$('cMark').addEventListener('pointercancel',endDrag);
 
@@ -373,10 +406,14 @@ $('hFt').onchange=setHeight;$('hIn').onchange=setHeight;
 function setTarget(v){v=Math.max(50,Math.min(130,Math.round(v)));edit(()=>{if(v===defTarget(cur)) delete D.target[cur];else D.target[cur]=v;});}
 $('slT').oninput=()=>setTarget(+$('slT').value);$('inT').onchange=()=>setTarget(+$('inT').value);
 document.querySelectorAll('#vCast button[data-t]').forEach(b=>b.onclick=()=>setTarget(target(cur)+(+b.dataset.t)));
+function setFrame(key,pct){edit(()=>{const F=Object.assign({},pframe());F[key]=Math.round(pct)/100;F.top=Math.max(.02,Math.min(.4,F.top));F.chin=Math.max(.6,Math.min(.98,F.chin));if(Math.abs(F.top-FRAME0.top)<.001&&Math.abs(F.chin-FRAME0.chin)<.001) delete D.portrait;else D.portrait=F;});}
+$('slPT').oninput=()=>setFrame('top',+$('slPT').value);$('slPC').oninput=()=>setFrame('chin',+$('slPC').value);
+document.querySelectorAll('#vCast button[data-p]').forEach(b=>b.onclick=()=>setFrame(b.dataset.p,pframe()[b.dataset.p]*100+(+b.dataset.d)));
+$('pfReset').onclick=()=>edit(()=>{delete D.portrait;});
 
 // ---------------------------------------------------------------- saving: one GitHub commit holding everything changed (reads the file fresh, retries when it moved)
 function doc(){   // what Claude applies: Tom's lines, plus the sizes the page worked out for every checked pose so the bake can check its own maths
-  const out={version:2,saved:new Date().toISOString(),heights:D.heights,target:D.target,frames:{}};
+  const out={version:2,saved:new Date().toISOString(),heights:D.heights,target:D.target,frames:{}};if(D.portrait) out.portrait=D.portrait;
   for(const id of Object.keys(D.frames)) for(const k of Object.keys(D.frames[id])){
     const o=Object.assign({},D.frames[id][k]);if(ownKey(id,k)===k&&isOk(id,k)){const z=size(id,k),g=geom(id,k,z);o.page={f:r3(z.f),h:r3(z.h),a:r1(z.a),headRows:r3(g.head),wholeRows:r3(g.whole)};}
     (out.frames[id]=out.frames[id]||{})[k]=o;
@@ -420,6 +457,7 @@ async function loadSaved(){
 }
 function tidy(d){   // a saved or stored draft: keep only what this page knows (lines, checked, hand tuning), drop people and frames that no longer exist, flag lines made on an older sheet
   const o={heights:{},target:{},frames:{}};if(!d) return o;
+  if(d.portrait&&d.portrait.top!=null&&d.portrait.chin!=null) o.portrait={top:d.portrait.top,chin:d.portrait.chin};
   for(const id of Object.keys(d.heights||{})) if(M.chars[id]) o.heights[id]=d.heights[id];
   for(const id of Object.keys(d.target||{})) if(M.chars[id]) o.target[id]=d.target[id];
   for(const id of Object.keys(d.frames||{})) if(M.chars[id]) for(const k of Object.keys(d.frames[id])) if(M.chars[id].frames[k]){
@@ -434,11 +472,12 @@ function tidy(d){   // a saved or stored draft: keep only what this page knows (
     M=await (await fetch('data/pose-manifest.json?t='+Date.now(),{cache:'no-store'})).json();
     const all=[];for(const id of M.order) for(const k of Object.keys(M.chars[id].frames)) all.push(M.chars[id].frames[k].img);
     await Promise.all(all.map(async s=>{IMG[s]=await loadImg(s);}));
+    try{const r=await fetch('data/portrait-frame.json?t='+Date.now(),{cache:'no-store'});if(r.ok) FRAME0=await r.json();}catch(e){}
     SAVED=tidy(await loadSaved());
     let local=null;try{local=JSON.parse(LS.get(DRAFT_KEY)||'null');}catch(e){}
     D=local?tidy(local):clone(SAVED);
     if(LS.get('aot-pose-intro')==='3') $('intro').style.display='none';
-    window.__PE={ready:true,ruleSize,M,get D(){return D;},get SAVED(){return SAVED;},geom,size,marks,status,isOk,autoH,autoF,targetRows,tomHead,Rrows,inches,target,span,nowSize,dirtyCount,doc,pick,
+    window.__PE={ready:true,ruleSize,faceSquare,pframe,M,get D(){return D;},get SAVED(){return SAVED;},geom,size,marks,status,isOk,autoH,autoF,targetRows,tomHead,Rrows,inches,target,span,nowSize,dirtyCount,doc,pick,
       get view(){return VIEW;},get cur(){return cur;},get curKey(){return curKey;},get curSet(){return curSet;},set tab(v){tab=v;redraw();}};
     redraw();
   }catch(e){document.body.insertAdjacentHTML('beforeend','<p style="padding:12px;color:#ff8d9b">Could not load the Pose Editor: '+e.message+'</p>');}

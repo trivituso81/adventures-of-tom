@@ -18,6 +18,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bake_portraits as BP
 
 ROOT = BP.ROOT
+sys.path.insert(0, os.path.join(ROOT, 'tools', 'pose-editor'))
+import pose_faces as PF
+KEY_PREFIX = 'em_'   # Pose Editor frame keys of the frames this baker cuts (bake_talkpose_faces.py sets 'tk_')
 EM = os.path.join(ROOT, 'art', 'emotions')
 OUT = os.path.join(ROOT, 'portraits', 'emo')
 MOODS = ["happy", "loving", "sad", "angry", "scared", "surprised", "proud", "unimpressed"]
@@ -129,6 +132,8 @@ def bake(pid):
             x0 = cx + dx * H - s / 2
             y0 = top + dy * H + s * OVERRIDE.get(pid, {}).get(m, MOOD_DY[m])
             x0, y0, s = frames_sq[MOODS.index(m)]
+        if PF.has(pid, KEY_PREFIX + m):   # posefaces1: Tom set this pose's lines in the Pose Editor: the face is framed by them (top of head and chin at the master heights)
+            c = PF.face(pid, KEY_PREFIX + m); c.save(os.path.join(OUT, f'{pid}-{m}.webp'), 'WEBP', quality=88, method=6); outs.append(c); continue
         bg = Image.new('RGBA', (int(s) + 2, int(s) + 2), PAPER + (255,))
         bg2 = Image.new('RGBA', f.size, PAPER + (255,)); bg2.alpha_composite(f)
         pad = int(s)
