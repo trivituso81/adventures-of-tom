@@ -109,6 +109,7 @@ const DIALOG_CAST={
     'Podium':'narrator',
     'Conference night':'narrator',
     'Little door':'narrator',
+    'Tiny voice':'skeeter',   // the squirrel behind the little door (ch6 scene 8); the account is at its 30 voice limit, so it borrows the Twig Spy's voice
     'Corkboard':'narrator',
     'Inside the Old Oak':'narrator',
     'The hoard':'narrator',
@@ -161,6 +162,7 @@ const DIALOG_CAST={
     'Twig Spy':'twig',
     'Cheek Stuffer':'stuffer',
     'Acorn Cache':'tiny',
+    'Tiny voice':'tiny',
     'Chairman Cheeks':'chairman',
     'Shusher':'shush',
     'Dog-Ear':'dogear',

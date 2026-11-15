@@ -99,7 +99,8 @@ const DEPARTURES={
      rose:['She\'s NOT in charge of me. Tata, tell her. TELL her.'],
      tom:['Nobody is in charge of anybody. Your mom is in charge of everybody.','That\'s how it\'s always worked. Trust me. I was there.'],
      stay:{amy:{stay:['I survived conference night. I can survive you leaving.','Text me when you land. I\'m timing the flight. Don\'t lose.'],toast:'Amy runs home. She\'s timing that too.'}},
-     flight:['Delta One. Nobody is grading me up here.','The flight attendant asked what I wanted. I said a nap. She laughed. I was SERIOUS.']},
+     photo:{img:'art/closeup/ch5-phone.webp',label:'GRACE AND ROSE. ROSE IS GRINNING WITH THE GAP SHOWING.',v:'ch5a'},
+     flight:['Delta One. Nobody is grading me up here.','The flight attendant asked what I wanted. I said a nap. She laughed. I was SERIOUS.','I missed that tooth. I\'m not missing the next one.']},
   7:{sol:'LAX. The short way is open. A squirrel ran across the 110 this morning and didn\'t charge me a toll. First time all week.',
      // Chapter 7 (story-ch07.md scene 0): TNB, the kiss, then Nara and the gold ball, then TNB's last line, all before either of them heads home.
      script:()=>{
@@ -383,7 +384,7 @@ function startTrip(n,dir) {
   }
   if(customScript) steps.push(...d.script());
   if(typeof storyTripSteps==='function') steps.push(...storyTripSteps(dir));   // engine/story.js: a new chapter can start here
-  steps.push(...flightSteps(dir,d.flight,arr));
+  steps.push(...flightSteps(dir,d.flight,arr,d.photo));
   runScene(steps);
 }
 
@@ -408,7 +409,8 @@ function flightSound(mode,dir) {
     tone({type:'sine',f0:1200,f1:500,dur:.25,vol:.06,delay:2.3});
   }
 }
-function flightSteps(dir,talk,arr) {
+// photo: {img,label,v} puts the photo on Tom's phone on screen (the REVEAL close-up) before his first flight line (story-ch06.md scene 0).
+function flightSteps(dir,talk,arr,photo) {
   const west=dir==='west';
   // The new chapter's title card (engine/story.js): shown after landing, once Tom is standing in the new area, never before the flight.
   const card=typeof storyArrivalCard==='function'?storyArrivalCard(dir):[];
@@ -417,7 +419,7 @@ function flightSteps(dir,talk,arr) {
     ...(typeof flightArtReady==='function'&&flightArtReady()?[flightPhase('cabin',2.6)]:[]),   // engine/flight-art.js: seat 1A, a painted beat before takeoff
     flightPhase('takeoff',4),
     S.all(flightPhase('map',8),
-      S.seq(S.wait(1.6),S.talk('Tom',talk||travelPick(west?'flightW':'flightE',west?TRAVEL_POOLS.flightW:TRAVEL_POOLS.flightE)))),
+      S.seq(S.wait(1.6),...(photo?[{start(){ this.done=false; if(typeof closeupReveal!=='function'||!closeupReveal(photo.img,photo.label,()=>{ this.done=true; },photo.v)) this.done=true; },update(){ return this.done; }}]:[]),S.talk('Tom',talk||travelPick(west?'flightW':'flightE',west?TRAVEL_POOLS.flightW:TRAVEL_POOLS.flightE)))),
     flightPhase('landing',4.2),
     S.call(()=>{ intro.flight=null; }),
     ...(west?arriveLA(arr,card):arriveHome(arr,card))

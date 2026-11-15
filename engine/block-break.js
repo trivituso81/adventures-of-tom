@@ -22,6 +22,7 @@
 //          as shares of the picture; roll = [x,y] where the coin starts on the table and [x,y] of the table top under the hole
 //   keep   what the block held and leaves behind: the basket stays on the table; the squirrel finishes its dive into it, pops out with a sandwich and
 //          sits beside it (art/props/oakpark/agent_*.webp from the approved ch6-squirrel-ordinary sheet)
+//   run    {flag,to,dur,monsters}: after the break the freed squirrel and these monsters run up the Old Oak to `to` (bbRunStart), then the flag keeps them gone
 //   ordinary  monster id -> picture and width of what it turns back into
 // The monsters (map.monsters) are taken off the map when the ring passes them and kept in BB.stash; a new game puts them back (bbSync).
 const BB_SPOTS={
@@ -30,6 +31,7 @@ const BB_SPOTS={
     block:{id:'oakpark/ch6_block',x:292,y:932,w:190,hole:[.51,.9],roll:[[120,1074],[292,1058]]},
     coin:{r:11},
     keep:{basket:{x:292,y:1052,w:50},dive:[300,930],diveW:42,sitW:34,sit:[340,1054]},   // what is left on the table: the basket, and the squirrel that was frozen in it (art px)
+    run:{flag:'bb-oakpark-run',to:[820,340],dur:3.4,monsters:['chairman']},   // after the break the freed squirrel (keep) and the Chairman run up the Old Oak together
     ordinary:{acornagent:['oakpark/ord_squirrel',52],cheekstuffer:['oakpark/ord_cheeks',56],peanutgallery:['oakpark/ord_peanut',74],twigspy:['oakpark/ord_twig',74],chairman:['oakpark/ord_squirrel',60]}},
   // The Stacks hall (ch7build stages 3 and 4): the golf-cart-sized block hangs over the painted returns cart (plate x 1013 to 1149), so the cart does not
   // show twice: from the moment the block appears until flag keep.cart.back the painted cart is covered by a floor patch and its cut-out is switched off
@@ -53,7 +55,7 @@ const BB_SPOTS={
     ordinary:{shusher:['stacks/ord_shusher',42],dogear:['stacks/ord_dogear',42]}}
 };
 const BB_T={roll:2.4,close0:2.55,close1:4.45,still1:5.45,crack1:7.1,fall1:8.7,ringStart:8.7,shrink:.9,settle:.7,ringSpeed:330};
-const BB={run:null,t:0,stash:{},decor:{},shards:{}};
+const BB={run:null,t:0,stash:{},decor:{},shards:{},pre:null,runUp:null};
 const bbFlag=k=>typeof flag==='function'&&!!flag(k);
 const bbClamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const bbEase=u=>u*u*(3-2*u);
@@ -111,7 +113,9 @@ function bbCloseupOff() { const e=BB.close||document.getElementById('bbclose'); 
 // ---------- drawing (called from plateLive in engine/plate.js, in plate art px: 64 per tile, scale s=T/64) ----------
 function bbOrdinaryDraw(map,s) {
   const L=BB.decor[map.id]; if(!L) return;
+  const sp0=Object.values(BB_SPOTS).find(q=>q.map===map.id);
   for(const d of L.values()) { if(!PROPART.ready(d.id)) continue;
+    if(sp0&&sp0.run&&d.mon&&sp0.run.monsters.includes(d.mon)&&(BB.runUp||bbFlag(sp0.run.flag))) continue;   // he is running up the Oak, or has gone
     const im=PROPART.get(d.id),h=d.w*im.naturalHeight/im.naturalWidth,a=bbClamp((BB.t-d.t0)/.5,0,1);
     ctx.save(); ctx.globalAlpha=d.fade?a:1; ellipse(d.x*s,d.base*s,d.w*.42*s,5*s,'#20202a38'); ctx.restore();
     ctx.save(); ctx.globalAlpha=d.fade?a:1; PROPART.draw(d.id,d.x*s,(d.base-h/2)*s,{w:d.w*s}); ctx.restore();
@@ -174,15 +178,38 @@ function bbKeepDraw(sp,t,s) {   // t < 0: the break is over and stays over
   const top=b.y-b.w*.5;
   if(t>=0&&t<F) return;
   if(t>=0&&t<P) { const u=(t-F)/(P-F),x=k.dive[0]+(b.x-k.dive[0])*u*u,y=k.dive[1]+(top-18-k.dive[1])*u-Math.sin(u*Math.PI)*12*(1-u); frame('oakpark/agent_dive',k.diveW,x,y,(u-.4)*.5); return; }
+  if(t<0&&sp.run&&(BB.runUp||bbFlag(sp.run.flag))) return;   // it has run up the Oak
   let u=t<0?1:bbClamp((t-P)/(Q-P),0,1);   // pops out of the basket with a sandwich and sits beside it
   const x=b.x+(k.sit[0]-b.x)*bbEase(u),by=top+8+(k.sit[1]-top-8)*bbEase(u)-Math.sin(u*Math.PI)*26;
   const im=PROPART.get('oakpark/agent_sandwich'); if(!PROPART.ready('oakpark/agent_sandwich')) return;
   const h=k.sitW*im.naturalHeight/im.naturalWidth; if(u>=1) ellipse(x*s,(k.sit[1]+1)*s,k.sitW*.38*s,4*s,'#20202a38');
   frame('oakpark/agent_sandwich',k.sitW,x,by+(u<1?0:0),0);
 }
+// The freed squirrel and the Chairman run up the Old Oak together, sandwich and all (story-ch06.md scene 14, beats 11 and 12). {squirrelsrun:'oakpark'}
+// starts it and waits; the flag spot.run.flag keeps them gone afterwards (bbKeepDraw, bbOrdinaryDraw and bbFree check it).
+function bbRunStart(id,onDone) {
+  const sp=BB_SPOTS[id],map=typeof currentMap!=='undefined'?currentMap:null;
+  if(!sp||!sp.run||!map||map.id!==sp.map||BB.runUp||bbFlag(sp.run.flag)) { if(onDone) onDone(); return false; }
+  const L=BB.decor[map.id],ch=L&&[...L.values()].find(d=>sp.run.monsters.includes(d.mon)),k=sp.keep;
+  const who=[{id:'oakpark/agent_sandwich',w:k.sitW,from:k.sit.slice(),delay:0}];
+  if(ch) who.push({id:ch.id,w:ch.w,from:[ch.x,ch.base],delay:.35});
+  PROPART.preload(who.map(q=>q.id));
+  BB.runUp={id,sp,who,t0:performance.now()/1000,onDone}; return true;
+}
+function bbRunDraw(map,s) {
+  const R=BB.runUp; if(!R||R.sp.map!==map.id) return;
+  const now=performance.now()/1000-R.t0,dur=R.sp.run.dur,to=R.sp.run.to; let allDone=true;
+  for(const q of R.who) {
+    const u=bbClamp((now-q.delay)/dur,0,1); if(u<1) allDone=false; if(!PROPART.ready(q.id)) continue;
+    const e=bbEase(u),x=q.from[0]+(to[0]-q.from[0])*e,y=q.from[1]+(to[1]-q.from[1])*e,hop=Math.abs(Math.sin(u*Math.PI*9))*9*(1-u*.4),al=u<.8?1:bbClamp((1-u)/.2,0,1);
+    const im=PROPART.get(q.id),h=q.w*im.naturalHeight/im.naturalWidth,w=q.w*(1-u*.35);
+    ctx.save(); ctx.globalAlpha=al; ctx.translate(x*s,(y-hop)*s); if(to[0]<q.from[0]) ctx.scale(-1,1); PROPART.draw(q.id,0,-h/2*s*(1-u*.35),{w:w*s}); ctx.restore();
+  }
+  if(allDone) { BB.runUp=null; setFlag(R.sp.run.flag); if(R.onDone) R.onDone(); }
+}
 function bbDraw(map) {
   const s=T/64;
-  bbOrdinaryDraw(map,s);
+  bbOrdinaryDraw(map,s); bbRunDraw(map,s);
   for(const id in BB_SPOTS) {
     const sp=BB_SPOTS[id]; if(sp.map!==map.id) continue;
     const run=BB.run&&BB.run.id===id?BB.run:null;
@@ -226,6 +253,11 @@ function bbDraw(map) {
         ctx.save(); ctx.globalAlpha=bbClamp(1-u*1.4,0,1)*.6; ellipse(B.x*s,(B.y+bh/2)*s,B.w*.5*s*(1+u),10*s,'#fff2c0'); ctx.restore(); }
     }
     if(run&&t>=BB_T.crack1) bbKeepDraw(sp,t,s);   // the basket and the squirrel that was in it, from the moment the block falls apart
+    // the coin lying on the table where Nara dropped it, before anyone touches it (BB.pre)
+    if(!run&&BB.pre===id) { const [x0,y0]=B.roll[0],r=sp.coin.r; ellipse(x0*s,(y0+r*.9)*s,r*.9*s,3.5*s,'#20202a40');
+      ctx.save(); ctx.translate(x0*s,y0*s); ctx.scale(.9,1); const g=ctx.createRadialGradient(-r*.3*s,-r*.3*s,1,0,0,r*s);
+      g.addColorStop(0,'#fff2a8'); g.addColorStop(.6,'#f0b830'); g.addColorStop(1,'#a8721a'); ctx.fillStyle=g; ctx.strokeStyle='#6a4410'; ctx.lineWidth=1.5*s;
+      ctx.beginPath(); ctx.arc(0,0,r*s,0,Math.PI*2); ctx.fill(); ctx.stroke(); ctx.restore(); }
     // the coin rolling along the groove and hopping into the hole
     if(run&&t<BB_T.roll) {
       const [x0,y0]=B.roll[0],[x1,y1]=B.roll[1],hx=B.x+(B.hole[0]-.5)*B.w,hy=B.y+(B.hole[1]-.5)*bh,tr=BB_T.roll-.32,r=sp.coin.r;
@@ -255,7 +287,7 @@ function bbPlay(id,opts={}) {
   if(!map||map.id!==sp.map) { if(opts.onDone) opts.onDone(); return false; }
   const far=Math.hypot(map.w*64,map.h*64)+sp.block.w;
   PROPART.preload([...(sp.keep&&sp.keep.basket?['oakpark/agent_dive','oakpark/agent_sandwich','oakpark/ch6_basket']:[]),...(sp.keep&&sp.keep.cart?[sp.keep.cart.id,'stacks/ch7_cartrose']:[]),sp.block.id,...(sp.cover?[sp.cover.sheet,sp.cover.sign]:[]),...Object.values(sp.ordinary).map(v=>v[0]),...(sp.fixed||[]).map(f=>f.id)]);
-  BB.t=0; BB.run={id,spot:sp,opts,seen:{},end:BB_T.ringStart+far/BB_T.ringSpeed+BB_T.settle,far,tick:0};
+  BB.pre=null; BB.t=0; BB.run={id,spot:sp,opts,seen:{},end:BB_T.ringStart+far/BB_T.ringSpeed+BB_T.settle,far,tick:0};
   return true;
 }
 function bbPhase(name) { const r=BB.run; if(!r||r.seen[name]) return; r.seen[name]=true; if(r.opts.onPhase) r.opts.onPhase(name); }
@@ -275,9 +307,10 @@ function bbMonsters(r) {
 }
 function bbFree(map,n,sp,fade) {
   const o=sp.ordinary[n.monster],L=BB.decor[map.id]||(BB.decor[map.id]=new Map());
-  if(o) L.set(n.spot||n.name,{id:o[0],w:o[1],x:(n.x+.5)*64,base:(n.y+1)*64-6,t0:BB.t,fade:!!fade});
+  if(o&&!(sp.run&&bbFlag(sp.run.flag)&&sp.run.monsters.includes(n.monster))) L.set(n.spot||n.name,{id:o[0],w:o[1],x:(n.x+.5)*64,base:(n.y+1)*64-6,t0:BB.t,fade:!!fade,mon:n.monster});
   const i=map.npcs.indexOf(n); if(i>=0) map.npcs.splice(i,1);
-  (BB.stash[map.id]=BB.stash[map.id]||[]).push(n); n.bbShrink=null; n.bbT0=null;
+  if(!n.scripted) (BB.stash[map.id]=BB.stash[map.id]||[]).push(n);   // a monster a scene spawned (the Chairman at the table) is not put back by a new game
+  n.bbShrink=null; n.bbT0=null;
 }
 // Every frame: run the sequence, and keep the freed areas freed (a loaded save has the flag but a fresh map) or restored (a new game has no flag).
 function bbSync(dt) {
@@ -316,6 +349,7 @@ drawActor=function(a) {
     gfx.save(); gfx.translate(cx,base); gfx.scale(k,k); gfx.translate(-cx,-base); try { LE_drawActor_bb.apply(this,arguments); } finally { gfx.restore(); } return; }
   return LE_drawActor_bb.apply(this,arguments);
 };
+SCENE_OPS.squirrelsrun=o=>lazy(()=>{ let fin=false; return {start(){ if(!bbRunStart(o.squirrelsrun,()=>{ fin=true; })) fin=true; },update(){ return fin; }}; });
 // Scene step {blockbreak:'oakpark',onPhase:fn}: plays the whole sequence and waits for it.
 SCENE_OPS.blockbreak=o=>lazy(()=>{ let fin=false; return {start(){ if(!bbPlay(o.blockbreak,{onPhase:o.onPhase,onDone:()=>{ fin=true; }})) fin=true; },update(){ return fin; }}; });
 
@@ -339,4 +373,4 @@ function bbLabStart() {
   playScene([{wait:1.2},{cam:[4.5,15.2]},{zoom:1.5,time:.8},{wait:.4},{blockbreak:'oakpark'},{wait:.8},{cam:null},{zoom:1,time:.8},
     {toast:'Old Oak Park is free. Walk around: no monsters, no fights. Admin > Block Break Lab plays it again.',time:6}],{fade:.7});
 }
-addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{bbPlay,bbLabStart,BB,BB_SPOTS}); });
+addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{bbPlay,bbLabStart,bbRunStart,BB,BB_SPOTS}); });

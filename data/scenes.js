@@ -2376,7 +2376,9 @@ syncAwayNpcs(); // once at load too, so a visitor's second copy (Aunt Ellie at t
 // ch6-garden (Twig Spy), ch6-picnic (Cheek Stuffer), ch6-dig-play, ch6-dig-garden, ch6-dig-picnic (Nara digs each cache:
 // a lost thing and a scrap of the knock), ch6-scraps (all three), ch6-fetch (optional: the dog park, Heart-Trace),
 // ch6-door (the secret knock), ch6-oak, ch6-board (the corkboard), ch6-ladder (Nara rides the bucket), ch6-boss,
-// battle:chairman ('win'), ch6-clear (Bready Mercury is back, with a gold coin), ch6-wrap (the Chairman leaves), ch6-done.
+// battle:chairman ('win'), ch6-clear (Bready Mercury is back, with a gold coin), ch6-wrap (the Chairman leaves), ch6-oak-block (the picnic
+// block and grey circle show), ch6-disc (the discovery at the picnic table: bb-oakpark and bb-oakpark-run are set by the block break and the
+// squirrels' run up the Oak), ch6-street (2nd Ave: vests, gold ball), ch6-crock (TNB's crock on the island), ch6-done.
 // ======================================================================================================
 const CH6={mode:'full',chapter:6};
 const CH6_CACHES=[
@@ -2391,15 +2393,15 @@ const CH6_AFTER=(lost,lines)=>[
   ...lines
 ];
 
-// 1. Downtown, right off the plane: a text from TNB.
+// 1. Downtown, right off the plane: a text from TNB (story-ch06.md scene 1). Tom reads it out loud.
 SCENES.ch6Arrive=[
   {flag:'ch6-goal'},
-  {call:()=>sfx.ding&&sfx.ding()},
-  {talk:'Narrator',lines:['A text from TNB.','"Babe. Come home. Your house. NOW. It\'s about Bready Mercury."','"Also there are acorns in the flour."']},
-  {talk:'Tom',lines:['He has a key. I gave him a key for exactly this kind of emergency.','I didn\'t picture acorns.']},
+  {call:()=>sfx.ding&&sfx.ding()}, {wait:.6},
+  {talk:'Tom',lines:[`It's TNB. "Babe. Come home. Your house. NOW. It's about Bready Mercury."`,`"Also there are acorns in the flour."`,
+    `He has a key. I gave him a key for exactly this kind of emergency.`,`I didn't picture acorns.`]},
   {toast:'Goal: Tom’s house (3468) in Jefferson Park, south of Downtown.',time:4.5}
 ];
-// 2. Tom's kitchen: the jar is gone. The heart-kiss. TNB joins.
+// 2. Tom's kitchen: the jar is gone. The heart-kiss. TNB joins (story-ch06.md scene 2).
 SCENES.ch6Kitchen=[
   {flag:'ch6-tnb'},
   {join:'tnb',quiet:true},
@@ -2407,26 +2409,38 @@ SCENES.ch6Kitchen=[
   {place:'tnb',at:[10,5],dir:'up'}, {show:'tnb'},   // in front of the spot on the island where the jar stood (item1: they stand at the thing they talk about)
   {walk:'tom',to:routeTo('tom',11,5),speed:.2}, {face:'tom',dir:'left'},
   {wait:.5}, {face:'tnb',dir:'right'}, {wait:.3},
-  {talk:'TNB',lines:['Well, well, well...'],voice:[['tnb','greet',0,'Well, well, well...']]},
+  {talk:'TNB',lines:[`Well, well, well...`],voice:[['tnb','greet',0,'Well, well, well...']]},
   ch4Kiss(),
-  {talk:'TNB',lines:['Okay. Hi. Missed you. Don\'t panic. Look at the island.']},
+  {talk:'TNB',lines:[`Hi, babe. I missed you. Now please don't panic, but look at the island.`]},
   {around:[918/78.4,322/78.4],tom:[11,5],at:{tnb:[12,4]}},   // both turn to the spot on the island where the jar stood, and keep looking at it
-  {talk:'Tom',lines:['...Where\'s Bready Mercury.']},
-  {talk:'TNB',lines:['That\'s the thing. I came over to feed him, like you asked. The jar was gone. The window was open.','And there were tiny footprints in the flour. Four toes in front, five in back. I looked it up.']},
-  {talk:'Tom',lines:['Bready Mercury is nine years old. He has flown Delta One. Twice.']},
-  {talk:'TNB',lines:['I know, babe. I\'ve seen every horror movie ever made. This is exactly how they start.','And this was on the windowsill. An acorn. With a tiny X carved in it.']},
-  {call:()=>sfx.pickup()},
-  {talk:'Tom',lines:['Somebody took my starter. And left a calling card.','That was UNCALLED for!'],voice:[['tom','hurt',1,'That was UNCALLED for!']]},
+  {talk:'Tom',lines:[`The jar is gone! Where's Bready Mercury?`]},
+  {talk:'TNB',lines:[`I fed him at eight and sang him his song. Then I went out for grape soda, and when I came back the window was open and he was gone.`]},
+  {talk:'Tom',lines:[`Which song did you sing him?`]},
+  {talk:'TNB',lines:[`"I Want to Bake Free."`]},
+  {talk:'Tom',lines:[`And now he HAS!`]},
+  {call:()=>sfx.pickup()},   // TNB points at the flour: tiny footprints run across it to the windowsill
+  {talk:'TNB',lines:[`He had help, babe. Four toes in front and five in back. I looked it up. Those are squirrel feet.`]},
+  {talk:'Tom',lines:[`A squirrel took our starter? He's nine years old! He's flown Delta One twice!`]},
+  {ch6Reveal:'acorn'},   // TNB holds up the acorn from the windowsill, a tiny X carved in it
+  {talk:'TNB',lines:[`And it left this. I've seen every horror movie ever made, babe, and this is how they all start.`]},
+  {talk:'Tom',lines:[`That was UNCALLED for!`],voice:[['tom','hurt',1,'That was UNCALLED for!']]},
+  {talk:'TNB',lines:[`The window was open, so it isn't breaking and entering. It's baking and entering.`]},
+  {talk:'Tom',lines:[`Don't make me laugh. This is all very jarring.`]},
+  {talk:'TNB',lines:[`Babe! That's seven! Amy texted me about the other six. I've never been so proud.`]},
   {trace:'tnb-hello6'}, {hearts:'tom'},
-  {talk:'TNB',lines:['Olivia texted me too. Nara hasn\'t slept in three days. She just stands at the window and growls at trees.']},
-  {talk:'Tom',lines:['Nara is scared of the vacuum. Nara doesn\'t growl at trees.']},
-  {talk:'TNB',lines:['Exactly. Something is going on out there.']},
+  {talk:'Tom',lines:[`I have news from Long Island too. It happened at Amy's school. A kickball and a sneaker are frozen in an orange block as big as a washing machine, and it's hanging in the air over second base.`]},
+  {talk:'TNB',lines:[`That makes five. And every one is bigger than the last. Babe, what comes after a washing machine?`]},
+  {talk:'Tom',lines:[`I don't know. I just don't want to find out in my kitchen.`]},
+  {talk:'TNB',lines:[`Olivia texted me too. Nara hasn't slept in three days. She just stands at the window and growls at trees.`]},
+  {talk:'Tom',lines:[`Nara is scared of the vacuum. Nara doesn't growl at trees.`]},
+  {talk:'TNB',lines:[`Exactly. Something is going on out there.`,`And nobody goes anywhere alone. So we get him back together.`]},
+  {talk:'Tom',lines:[`Together. Hold on, Bready Mercury. We're coming!`]},
   {party:{lock:['tom','tnb']}},
   {flag:'tombo:tnb2'},   // Red Line Transfer unlocks here (chapter 6)
   {toast:'New Tombo: Red Line Transfer (Tom + TNB). 50% HEART.',time:3.2},
   {toast:'Goal: out to 2nd Ave. Find Olivia, Michael and Nara.',time:4.5}
 ];
-// 3. 2nd Ave: Olivia hands over Nara. The whole block is missing things.
+// 3. 2nd Ave: Nara growls at the jacaranda, Olivia and Michael list what is missing, Bernadette saw a flash (story-ch06.md scene 3).
 SCENES.ch6Nara=[
   {flag:'ch6-nara'},
   {call:()=>{ sfx.bark&&sfx.bark(); sfx.bark&&sfx.bark(.2); }},
@@ -2434,228 +2448,286 @@ SCENES.ch6Nara=[
   // Tom may have met Nara first (she waits on the porch and joins when asked). Then Olivia only fills him in.
   {if:()=>inParty(nara),
     then:[
-      {talk:'Olivia',lines:['Tom! Oh, thank goodness. You already have her. She hasn\'t slept since Sunday.']},
-      {talk:'Nara',lines:['Nara leans on Tom with all forty pounds.','Then she spins around and growls at the jacaranda.']}],
+      {talk:'Olivia',lines:[`Tom! Oh, thank goodness. You already have her. She hasn't slept since Sunday.`]},
+      {hearts:'tom'}, {call:()=>{ sfx.bark&&sfx.bark(); }}, {wait:.8}],
     else:[
-      {talk:'Olivia',lines:['Tom! Oh, thank goodness. Can you take her? Please? She hasn\'t slept since Sunday.']},
-      {walk:'nara',to:routeBeside('nara'),speed:.1},
-      {talk:'Nara',lines:['Nara does three laps around Tom, slams into his shins, and leans on him with all forty pounds.','Then she spins around and growls at the jacaranda.']}]},
-  {hearts:'tom'},
-  {talk:'Olivia',lines:['She\'s been doing that all night. And it\'s not just us. Things are going missing all over the block: Lachlan\'s toy truck, Mr.','Washington\'s reading glasses, and Marisol says every tennis ball.']},
-  {talk:'Michael',lines:['I found my car keys in the gutter. With three peanuts. Arranged in a triangle.']},
-  {talk:'TNB',lines:['A triangle. Babe. A triangle is a SYMBOL.']},
-  {talk:'Tom',lines:['TNB has seen a lot of movies.','...He\'s usually right about this stuff.']},
-  {talk:'Olivia',lines:['Bernadette from the Neighborhood Watch says it\'s squirrels. She has a clipboard about it. She\'s in Old Oak Park, at the south end of 2nd Ave.']},
+      {talk:'Olivia',lines:[`Tom! Oh, thank goodness. Can you take her? Please? She hasn't slept since Sunday.`]},
+      {walk:'nara',to:routeBeside('nara'),speed:.1},   // she runs three laps round Tom, slams into his shins and leans on him (no new frames yet: she runs up and the hearts show it)
+      {hearts:'tom'}, {call:()=>{ sfx.bark&&sfx.bark(); }}, {wait:.8}]},
+  {talk:'Olivia',lines:[`She's been doing that all night. And it's not just us. Things are going missing all over the block: Lachlan's toy truck, Mr.`,`Washington's reading glasses, and Marisol says every tennis ball.`]},
+  {talk:'Michael',lines:[`I found my car keys in the gutter. With three peanuts. Arranged in a triangle.`]},
+  {talk:'TNB',lines:[`A triangle. Babe. A triangle is a SYMBOL.`]},
+  {talk:'Tom',lines:[`A peanut triangle! What does it mean?`]},
+  {talk:'TNB',lines:[`Nothing good, babe. In the movies a triangle never means anything good.`]},
+  {talk:'Tom',lines:[`They took something of ours too. Bready Mercury is gone, jar and all.`]},
+  {talk:'Olivia',lines:[`Your bread jar? Oh, Tom. I'm so sorry.`]},
+  {talk:'Olivia',lines:[`Bernadette from the Neighborhood Watch says it's squirrels. She has a clipboard about it. She's in Old Oak Park, at the south end of 2nd Ave.`,
+    `She also says there was a big flash in the park on Sunday morning. She wrote down the time.`]},
+  {talk:'Tom',lines:[`A flash! TNB, did you hear that?`]},
+  {talk:'TNB',lines:[`I heard it, babe. I was hoping I didn't.`]},
   {join:'nara'},
-  {talk:'Tom',lines:['Nara. Want to go for a walk?']},
-  {talk:'Nara',lines:['Nara knows the word WALK. She\'s always known the word walk. She\'s already at the end of the street.']},
-  {talk:'Olivia',lines:['Bring her back tired! Please! Michael, can you grab Isla? She\'s licking the mailbox.']},
+  {talk:'Tom',lines:[`Nara. Want to go for a walk?`]},
+  {call:()=>{ sfx.bark&&sfx.bark(); }}, {wait:.6},   // she is at the end of the street before he finishes the word, and looks back and barks
+  {talk:'Olivia',lines:[`Bring her back tired! Please! Michael, can you grab Isla? She's licking the mailbox.`]},
   {flag:'tombo:nara2'},   // Tug of War unlocks here (chapter 6)
   {toast:'New Tombo: Tug of War (Tom + Nara). 50% HEART.',time:3.2},
   {toast:'Goal: Old Oak Park, through the south end of 2nd Ave.',time:4.5}
 ];
-// 4. Old Oak Park: Bernadette's briefing. Three lookouts, three fresh holes, one tree.
+// 4. Old Oak Park: Bernadette's briefing, then the picnic tables: the grey circle, the block, the round hole, the bulb in her bag (story-ch06.md scene 4).
 // bern1 (Tom 2026-11-14): Bernadette is bossy, short-fused and keeps score. Tom is "3468", TNB is "the Other Tom", Nara is "the dog".
 // Tom and TNB trade looks: an action the player watches, no words. Two people turn to each other for a beat, then turn back to `back`.
 const sceneTurn=(a,to)=>{ if(!a||!to||a===to) return; const dx=to.x-a.x,dy=to.y-a.y; if(!dx&&!dy) return; a.facing=Math.abs(dx)>=Math.abs(dy)?(dx>0?'right':'left'):(dy>0?'down':'up'); };
 const lookBeat=(a,b,back,hold=1.1)=>[
   {call:()=>{ const A=sceneActor(a),B=sceneActor(b); sceneTurn(A,B); sceneTurn(B,A); }}, {wait:hold},
   {call:()=>{ const K=sceneActor(back); sceneTurn(sceneActor(a),K); sceneTurn(sceneActor(b),K); }}, {wait:.25}];
+// Waits (in a {seq} that runs beside another step) until fn() is true.
+const ch6Wait=fn=>({step:{start(){},update(){ return !!fn(); }}});
 SCENES.ch6Park=[
   {flag:'ch6-park',value:'pending'},
   {walk:'Bernadette',to:routeBeside('Bernadette'),speed:.2},
-  {talk:'Bernadette',lines:['Stop right there. Neighborhood Watch. Names and house numbers.']},
-  {talk:'Tom',lines:['Tom. 3468. I\'ve lived on 2nd Ave for six years.']},
-  {talk:'Bernadette',lines:['I know who you are, 3468. You WATER a drought garden. I\'ve left you two notes about it.']},
-  {talk:'TNB',lines:['Hi. I\'m TNB.']},
-  {talk:'Bernadette',lines:['I don\'t do initials. You\'re the Other Tom.']},
+  {talk:'Bernadette',lines:[`Stop right there. Neighborhood Watch. Names and house numbers.`]},
+  {talk:'Tom',lines:[`Tom. 3468. I've lived on 2nd Ave for six years.`]},
+  {talk:'Bernadette',lines:[`I know who you are, 3468. You WATER a drought garden. I've left you two notes about it.`]},
+  {talk:'TNB',lines:[`Hi. I'm TNB.`]},
+  {talk:'Bernadette',lines:[`I don't do initials. You're the Other Tom.`]},
   ...lookBeat('tom','tnb','Bernadette'),
-  {talk:'Bernadette',lines:['Captain Bernadette. I\'ve run this Watch for nineteen years without one thank-you card. So listen closely, because I\'m only saying this once.','The squirrels are organized.']},
-  {talk:'TNB',lines:['I KNEW it.']},
-  {talk:'Bernadette',lines:['Don\'t humor me, Other Tom. I get humored at every block meeting.',
-    'They have lookouts in the playground, a spy in the community garden, and one at the picnic tables eating anything that\'s not nailed down.',
-    'I reported all of it. The city sent me a pamphlet about squirrels.',
-    'Everything they steal goes up THAT tree, the Old Oak. There\'s a little door in the trunk that opens with a secret knock. I\'ve only ever heard bits of it.']},
-  {talk:'TNB',lines:['Could you do the bits you know?']},
-  {talk:'Bernadette',lines:['I\'m a Captain. I don\'t chitter.']},
-  {call:()=>sfx.bark&&sfx.bark()},
-  {talk:'Nara',lines:['Nara puts her nose to the grass and pulls. Hard. Left. Right. Back. Three fresh holes, three different directions.']},
-  {talk:'Tom',lines:['The squirrels buried something in three different spots.']},
-  {talk:'Bernadette',lines:['Then here\'s what you\'re going to do. Clear the squirrels out of those three spots and let the dog dig. I\'d bet a piece of that knock is in every hole.']},
-  {talk:'Tom',lines:['Are you coming with us?']},
-  {talk:'Bernadette',lines:['I\'m the Captain. I supervise. I\'ll be right here with my clipboard, writing down how it goes.']},
-  {talk:'TNB',lines:['Babe. She\'s scary, she\'s rude, and she has a corkboard with red string. I can\'t decide how I feel.']},
-  {talk:'Tom',lines:['I can. Walk faster.']},
+  {talk:'Bernadette',lines:[`Captain Bernadette. I've run this Watch for nineteen years without one thank-you card. So listen closely, because I'm only saying this once.`,`The squirrels are organized.`]},
+  {talk:'TNB',lines:[`I KNEW it.`]},
+  {talk:'Bernadette',lines:[`Don't humor me, Other Tom. I get humored at every block meeting.`,
+    `They have lookouts in the playground, a spy in the community garden, and one at the picnic tables eating anything that's not nailed down.`,
+    `I reported all of it. The city sent me a pamphlet about squirrels.`,
+    `Everything they steal goes up THAT tree, the Old Oak. There's a little door in the trunk that opens with a secret knock. I've only ever heard bits of it.`]},
+  {talk:'TNB',lines:[`Could you do the bits you know?`]},
+  {talk:'Bernadette',lines:[`I'm a Captain. I don't chitter.`]},
+  {talk:'Tom',lines:[`Olivia said you saw a flash on Sunday.`]},
+  {talk:'Bernadette',lines:[`I didn't "see a flash." I logged one. Sunday, 6:12 in the morning, at the picnic tables, with no thunder. By 6:20 the squirrels had lookouts. Follow me, and keep up.`]},
+  // She walks them to the picnic tables (bottom left). The party stands east of the last table; Bernadette beside them.
+  {walk:'Bernadette',to:routeTo('Bernadette',9,16),speed:.22},
+  {walk:'tom',to:routeTo('tom',7,16),speed:.2}, {walk:'tnb',to:routeTo('tnb',7,17),speed:.2}, {walk:'nara',to:routeTo('nara',6,17),speed:.2},
+  {face:'tom',dir:'left'}, {face:'tnb',dir:'left'}, {face:'nara',dir:'left'}, {face:'Bernadette',dir:'left'},
+  {cam:[5.6,15.4]}, {zoom:1.4,time:.8},
+  {flag:'ch6-oak-block'},   // the grey circle and the orange block show from here (engine/block-break.js BB_SPOTS.oakpark)
+  {call:()=>sfx.whoosh&&sfx.whoosh()}, {wait:1},
+  {talk:'Tom',lines:[`The whole picnic is grey! And there's an orange block on the table. It's as big as a bathtub!`]},
+  {talk:'TNB',lines:[`Babe, there's a picnic basket inside it. And a squirrel! He's halfway into the basket with his tail in the air!`]},
+  {talk:'Bernadette',lines:[`Nineteen years I've waited to catch one in the act. Now I have, and he's stuck in a block where I can't even write him up.`]},
+  // Nara charges the block and barks at the squirrel. It doesn't move. She bows to it. Nothing. She sits down and tilts her head (no new frames yet: she runs up, barks and waits).
+  {walk:'nara',to:routeTo('nara',6,16),speed:.08}, {call:()=>{ sfx.bark&&sfx.bark(); }}, {wait:.5}, {call:()=>{ sfx.bark&&sfx.bark(.15); }}, {wait:1.2},
+  {talk:'TNB',lines:[`She's never had one hold still before. She doesn't know what to do with it.`]},
+  {talk:'Tom',lines:[`Excuse me, Mr. Squirrel. Are you all right in there?`]},
+  {talk:'TNB',lines:[`Okay. I know this part now. There's going to be a little round hole in the side. There it is.`]},
+  {talk:'Tom',lines:[`You know the signs!`]},
+  {talk:'TNB',lines:[`I learned from the best. And there's going to be a burnt flashbulb. I just can't find it.`]},
+  {talk:'Bernadette',lines:[`That's because I found it first. Under the last table, at 6:31. Bagged, labeled and dated. Some of us were up.`]},
+  {talk:'Tom',lines:[`That's the sixth one! Could we have it? My mother keeps them in a drawer.`]},
+  {talk:'Bernadette',lines:[`Your mother keeps evidence in a drawer. Of course she does. No. She can file a request, and I'll deny it.`]},
+  ...lookBeat('tom','tnb','Bernadette',1.4),   // Tom opens his mouth. TNB puts a hand on his arm.
+  {talk:'TNB',lines:[`Whose picnic was it?`]},
+  {talk:'Bernadette',lines:[`A birthday party, setting up early with no permit. They ran when the squirrels got big. The cake is still on table two, and the cake is evidence. I've counted the frosting roses, Other Tom.`]},
+  {talk:'TNB',lines:[`I wasn't going to touch it!`]},
+  {talk:'Bernadette',lines:[`You were looking.`]},
+  {talk:'Tom',lines:[`Dragonfly, lemon, fish, hat, kickball, and now a whole picnic basket. This is the biggest one yet, and it's five blocks from my house.`]},
+  {talk:'TNB',lines:[`One thing at a time, babe. That block isn't going anywhere. Bready Mercury already did.`]},
+  // Nara puts her nose to the grass and pulls: left, right, back. Three fresh holes, three different directions.
+  {face:'nara',dir:'down'}, {call:()=>{ sfx.bark&&sfx.bark(); }}, {wait:.4}, {face:'nara',dir:'right'}, {wait:.4}, {face:'nara',dir:'up'}, {wait:.4},
+  {talk:'Tom',lines:[`The squirrels buried something in three different spots.`]},
+  {talk:'Bernadette',lines:[`Then here's what you're going to do. Clear the squirrels out of those three spots and let the dog dig. I'd bet a piece of that knock is in every hole.`]},
+  {talk:'Tom',lines:[`Are you coming with us?`]},
+  {talk:'Bernadette',lines:[`I'm the Captain. I supervise. I'll be right here with my clipboard, writing down how it goes.`]},
+  {talk:'TNB',lines:[`Babe. She's scary, she's rude, and she has a corkboard with red string. I can't decide how I feel.`]},
+  {talk:'Tom',lines:[`I can. Walk faster.`]},
+  {cam:null}, {zoom:1,time:.6},
+  {walk:'Bernadette',to:routeTo('Bernadette',13,14),speed:.22},   // back to her post, and the party back out of the picnic corner so the lookout there does not start at once
+  {walk:'tom',to:routeTo('tom',12,16),speed:.2},
   {flag:'ch6-park'},
   {toast:'Goal: clear the playground (top left), the garden (top right) and the picnic tables (bottom left). Then let Nara dig.',time:5.5},
   {toast:'Tip: the dog park (bottom right) has a bench. Nara looks very hopeful.',time:4}
 ];
-// 5. The three lookouts.
+// 5. The three lookouts (story-ch06.md scene 5). Each one is walked up before anyone speaks.
 SCENES.ch6Gallery=[
   {flag:'ch6-play',value:'pending'},
   {walk:'Peanut Gallery',to:routeBeside('Peanut Gallery'),speed:.25},
-  {talk:'Peanut Gallery',lines:['BOO! BOOOO! Get off the stage! This is OUR playground!']},
-  {talk:'TNB',lines:['Is it heckling us? From inside a peanut?']},
-  {talk:'Peanut Gallery',lines:['Your shoes are untied! Made you look! BOOOO!']},
-  {talk:'Tom',lines:['My shoes don\'t have laces.']},
+  {talk:'Tom',lines:[`That peanut is as big as a trash can, and it's booing us!`]},
+  {talk:'Peanut Gallery',lines:[`BOO! BOOOO! Get off the stage! This is OUR playground!`]},
+  {talk:'TNB',lines:[`Is it heckling us? From inside a peanut?`]},
+  {talk:'Peanut Gallery',lines:[`Your shoes are untied! Made you look! BOOOO!`]},
+  {talk:'Tom',lines:[`My shoes don't have laces.`,`...I looked anyway.`]},
+  {talk:'TNB',lines:[`Tough crowd. Don't worry, babe. They'll come out of their shell.`]},
   {battle:'peanutgallery',tut:'ch6gallery'},
   ...CH6_AFTER(()=>flag('battle:peanutgallery')!=='win',[
     {flag:'ch6-play'},
-    {talk:'TNB',lines:['The playground is clear. And Nara is staring at the sandbox like it owes her money.']},
+    {talk:'TNB',lines:[`The playground is clear. And Nara is staring at the sandbox like it owes her money.`]},
     {toast:'Nara can dig in the sandbox now (the fresh dirt, by the climbing dome).',time:4}])
 ];
 SCENES.ch6Spy=[
   {flag:'ch6-garden',value:'pending'},
   {walk:'Twig Spy',to:routeBeside('Twig Spy'),speed:.3},
-  {talk:'Twig Spy',lines:['...You didn\'t see me. I\'m a stick. Sticks don\'t talk.']},
-  {talk:'TNB',lines:['That stick has binoculars.']},
-  {talk:'Twig Spy',lines:['Standard issue. Code name: Twig. I report to the Chairman. Pretend I said nothing.']},
-  {talk:'Tom',lines:['The Chairman.']},
-  {talk:'Twig Spy',lines:['I said NOTHING.']},
+  {talk:'Twig Spy',lines:[`...You didn't see me. I'm a stick. Sticks don't talk.`]},
+  {talk:'TNB',lines:[`That stick has binoculars.`]},
+  {talk:'Twig Spy',lines:[`Standard issue. Code name: Twig. I report to the Chairman. Pretend I said nothing.`]},
+  {talk:'Tom',lines:[`Who's the Chairman?`]},
+  {talk:'Twig Spy',lines:[`I said NOTHING.`]},
+  {talk:'Tom',lines:[`Excuse me, Mr. Twig. We're looking for a jar of sourdough starter. He answers to Bready Mercury.`]},
+  {talk:'Twig Spy',lines:[`I've never heard of Operation Big Bread.`]},
+  {talk:'TNB',lines:[`Babe. He just told us the name of the operation.`]},
+  {talk:'Twig Spy',lines:[`I said NOTHING.`]},
   {battle:'twigspy',tut:'ch6spy'},
   ...CH6_AFTER(()=>flag('battle:twigspy')!=='win',[
     {flag:'ch6-garden'},
-    {talk:'Tom',lines:['The garden is clear. Every tomato has exactly one bite out of it. That\'s a policy.']},
+    {talk:'Tom',lines:[`The garden is clear. Every tomato has exactly one bite out of it. That's a policy.`]},
     {toast:'Nara can dig in the garden now (the fresh dirt, between the beds).',time:4}])
 ];
 SCENES.ch6Stuffer=[
   {flag:'ch6-picnic',value:'pending'},
   {walk:'Cheek Stuffer',to:routeBeside('Cheek Stuffer'),speed:.35},
-  {talk:'Cheek Stuffer',lines:['Mmmf. Mmmf mmf! (These are MY sandwiches.)']},
-  {talk:'Tom',lines:['Those are somebody’s sandwiches. Somebody’s whole birthday picnic.']},
-  {talk:'Cheek Stuffer',lines:['Mmf. (Winter is coming. Winter is ALWAYS coming.)']},
-  {talk:'TNB',lines:['Buddy. It\'s Los Angeles. It\'s seventy-four degrees.']},
+  {talk:'Cheek Stuffer',lines:[`Mmmf. Mmmf mmf! (These are MY sandwiches.)`]},
+  {talk:'Tom',lines:[`Those are somebody’s sandwiches. Somebody’s whole birthday picnic.`]},
+  {talk:'Cheek Stuffer',lines:[`Mmf. (Winter is coming. Winter is ALWAYS coming.)`]},
+  {talk:'TNB',lines:[`Buddy. It's Los Angeles. It's seventy-four degrees.`]},
+  {call:()=>{ const c=sceneActor('Cheek Stuffer'),t=sceneActor('tom'); if(c&&t) c.facing='left'; }},   // he points a paw at the orange block (it is up and to his left)
+  {talk:'Cheek Stuffer',lines:[`Mmf mmf. (And nobody touches Agent Crumb. He's on a mission.)`]},
+  {talk:'Tom',lines:[`Is Agent Crumb the one in the basket?`]},
+  {talk:'Cheek Stuffer',lines:[`Mmf. (Three days in there. Bravest squirrel we have.)`]},
   {battle:'cheekstuffer',tut:'ch6stuffer'},
   ...CH6_AFTER(()=>flag('battle:cheekstuffer')!=='win',[
     {flag:'ch6-picnic'},
-    {talk:'TNB',lines:['The picnic is clear. The cake survived. The cake is a hero.']},
+    {talk:'TNB',lines:[`The picnic is clear. The cake survived. The cake is a hero.`]},
     {toast:'Nara can dig at the picnic tables now (the fresh dirt, under the last table).',time:4}])
 ];
 // 6. Nara digs up a cache: a lost thing from 2nd Ave, and a scrap of the secret knock (data in CH6_CACHES).
 const ch6DigScene=C=>[
   {flag:'ch6-dig-'+C.c},
-  {call:()=>{ sfx.bark&&sfx.bark(); sfx.run&&sfx.run(); }},
-  {talk:'Nara',lines:['Nara digs. Dirt goes everywhere. Mostly on TNB.']},
+  {call:()=>{ sfx.bark&&sfx.bark(); sfx.run&&sfx.run(); }}, {wait:.5}, {call:()=>{ sfx.run&&sfx.run(); }}, {wait:.6},   // Nara digs. Dirt goes everywhere. Most of it lands on TNB.
+  {if:()=>CH6_CACHES.filter(k=>ch6Dug(k.c)).length===1,then:[
+    {talk:'TNB',lines:[`I'm wearing most of the sandbox, babe.`]},
+    {talk:'Tom',lines:[`It suits you. You've always looked good in earth tones.`]}],else:[]},
   {call:()=>sfx.pickup()},
-  {talk:'Tom',lines:[cap(C.item)+'. Those are '+C.who+'’s.']},
+  {talk:'Tom',lines:[C.c==='picnic'?`A little yellow toy truck. That's Lachlan's.`:cap(C.item)+'. Those are '+C.who+'’s.']},
   ...(C.c==='garden'?[
-    {talk:'Tom',lines:['Mr. Washington reads the paper on his porch every morning. He\'s been reading the same headline for three days.']},
-    {talk:'TNB',lines:['We bring them back today. Personally. With a pastry.']},
+    {talk:'Tom',lines:[`Mr. Washington reads the paper on his porch every morning. He's been reading the same headline for three days.`]},
+    {talk:'TNB',lines:[`We bring them back today. Personally. With a pastry.`]},
     {trace:'washington-glasses'}, {hearts:'nara'}]:[]),
-  {talk:'TNB',lines:['And there\'s a scrap of paper in here. A drawing of '+['','one acorn','two acorns','three acorns'][C.acorns]+'. And one word: '+C.knock+'.']},
+  {talk:'TNB',lines:[`And there's a scrap of paper in here. A drawing of `+['','one acorn','two acorns','three acorns'][C.acorns]+`. And one word: `+C.knock+`.`]},
   {call:()=>sfx.levelChime()},
   {toast:'Knock scrap: '+['','one acorn','two acorns','three acorns'][C.acorns]+', '+C.knock+'.',time:4},
   {if:()=>CH6_CACHES.every(k=>ch6Dug(k.c)),then:[
     {flag:'ch6-scraps'}, {wait:4.2},
-    {talk:'TNB',lines:['That\'s all three scraps. One acorn, two acorns, three acorns. It\'s a sequence, babe. It\'s ALWAYS a sequence.']},
-    {talk:'Tom',lines:['One acorn: TAP TAP. Two acorns: SCRATCH. Three acorns: CHITTER.']},
+    {talk:'TNB',lines:[`That's all three scraps. One acorn, two acorns, three acorns. It's a sequence, babe. It's ALWAYS a sequence.`]},
+    {talk:'Tom',lines:[`One acorn: TAP TAP. Two acorns: SCRATCH. Three acorns: CHITTER.`]},
     {toast:'Goal: the little door in the Old Oak (top of the park). Knock the way the scraps say.',time:5}],else:[]}
 ];
 for(const C of CH6_CACHES) SCENES['ch6Dig_'+C.c]=ch6DigScene(C);
 // 7. Optional: the dog park. What will Nara fetch? (data in ch6Throw below).
 SCENES.ch6Fetch=[
   {flag:'ch6-fetch'},
-  {talk:'Narrator',lines:['Tom always keeps a heel of sourdough in his jacket. For emergencies. This is an emergency.']},
-  {call:()=>sfx.whoosh()},
-  {talk:'Nara',lines:['Nara catches it in midair. She runs one lap. Two laps. Six laps. She lies down on Tom’s feet and eats it very, very slowly.']},
+  {talk:'Tom',lines:[`I always keep a heel of sourdough in my jacket for emergencies. Nara, this is an emergency.`]},
+  {call:()=>sfx.whoosh()},   // he throws it. She catches it in midair, runs six laps, lies down on his feet and eats it very, very slowly.
+  {walk:'nara',to:routeBeside('nara'),speed:.08}, {wait:.8},
   {call:()=>{ sfx.bark&&sfx.bark(); }},
   {hearts:'nara'}, {trace:'nara-dogpark'}, {call:()=>sfx.levelChime()},
-  {talk:'TNB',lines:['She hasn\'t eaten in three days, and she just ate your emergency bread.']},
-  {talk:'Tom',lines:['She\'ll only eat bread if I throw it. Still true. Still very picky. Still very athletic.']},
+  {talk:'TNB',lines:[`She hasn't eaten in three days, and she just ate your emergency bread.`]},
+  {talk:'Tom',lines:[`She'll only eat bread if I throw it. Still true. Still very picky. Still very athletic.`]},
   {heal:true},
   {toast:'Everyone is healed. Nara is very, very proud of herself.',time:3.5}
 ];
-// 8. The secret knock works: the little door opens.
+// 8. The secret knock works: the little door opens (story-ch06.md scene 8).
 SCENES.ch6Door=[
   {flag:'ch6-door'},
-  {call:()=>{ sfx.thud(); }}, {wait:.6},
-  {talk:'Little door',lines:['A pause. Then, from inside, a tiny voice: "Password accepted. Welcome, Agent..."','"...wait. You\'re very tall. Are you a squirrel?"']},
-  {talk:'Tom',lines:['Yes.']},
-  {talk:'Little door',lines:['Running footsteps. Very small ones. Going up.']},
+  {call:()=>{ sfx.thud(); }}, {wait:.4}, {call:()=>{ sfx.thud(); }}, {wait:.4}, {call:()=>{ sfx.thud(); }}, {wait:.8},   // Tom knocks: tap tap, scratch, chitter
+  {talk:'Tiny voice',lines:[`Password accepted. Welcome, Agent...`,`...wait. You're very tall. Are you a squirrel?`]},
+  {talk:'Tom',lines:[`Yes.`]},
+  {call:()=>{ sfx.run&&sfx.run(); }}, {wait:.6}, {call:()=>{ sfx.run&&sfx.run(); }}, {wait:.4},   // very small running footsteps, going up
   {call:()=>{ ch6OpenDoor(); storyWorld(); sfx.doorIn&&sfx.doorIn(); sfx.levelChime(); }},
-  {talk:'TNB',lines:['Babe. You lied to a squirrel.']},
-  {talk:'Tom',lines:['It lied to me first. It said it was an acorn.']},
+  {talk:'TNB',lines:[`Babe. You lied to a squirrel.`]},
+  {talk:'Tom',lines:[`I know! I feel terrible. I'm going to apologize as soon as we get up there.`]},
   {toast:'Goal: inside the Old Oak.',time:4}
 ];
 // 9. Inside the Old Oak.
 SCENES.ch6Oak=[
   {flag:'ch6-oak'},
   {call:()=>{ if(!flag('ch6-door')) { setFlag('ch6-door',true); ch6OpenDoor(); storyWorld(); } }},   // anyone already inside (old saves) counts as past the door
-  {talk:'TNB',lines:['Babe. We\'re inside a tree. This is the second act of every horror movie I\'ve ever seen.']},
-  {talk:'Tom',lines:['Then we stay together.']},
-  {talk:'TNB',lines:['That\'s what they always say in the second act.']},
-  {call:()=>sfx.bark&&sfx.bark()},
-  {talk:'Nara',lines:['Nara sniffs the air, and her tail goes straight up. Bread. Far above. Very faint.']},
-  {talk:'Tom',lines:['Bready Mercury is up there at the top of the tree, and there\'s no ladder to reach him.']},
+  {talk:'TNB',lines:[`Babe. We're inside a tree. This is the second act of every horror movie I've ever seen.`]},
+  {talk:'Tom',lines:[`Then we stay together.`]},
+  {talk:'TNB',lines:[`That's what they always say in the second act.`]},
+  {face:'nara',dir:'up'}, {call:()=>sfx.bark&&sfx.bark()}, {wait:.8},   // Nara sniffs the air, her tail goes straight up and she looks straight up the trunk
+  {talk:'Tom',lines:[`She smells bread! Bready Mercury is up at the top of this tree, and there's no ladder.`]},
+  {talk:'TNB',lines:[`HANG IN THERE, BREADY! WE KNEAD YOU!`]},
+  {talk:'Tom',lines:[`Was that "need" with a K?`]},
+  {talk:'TNB',lines:[`It's always with a K, babe.`]},
   {toast:'Goal: find a way up. The war room is on the left, the pantry on the right.',time:4.5}
 ];
-// 10. The war room corkboard.
+// 10. The war room corkboard: Tom and TNB read it out loud (story-ch06.md scene 10).
 SCENES.ch6Board=[
   {flag:'ch6-board'},
-  {talk:'TNB',lines:['Babe. Babe. They have a corkboard. With RED STRING. I\'ve waited my whole life for this.']},
-  {talk:'Corkboard',lines:['Photos of 2nd Ave. A map with X’s on every porch. A drawing of Nara, labeled THREAT LEVEL: VERY HIGH.','In the middle, circled three times: Tom’s jar. Across the top: OPERATION BIG BREAD.']},
-  {talk:'Tom',lines:['That\'s my house. That\'s my JAR. Why is my jar in the middle of everything?']},
-  {talk:'TNB',lines:['Everything connects to the jar, babe. That\'s how corkboards work.']},
-  {talk:'Corkboard',lines:['A note, pinned at the bottom: BY ORDER OF THE CHAIRMAN. WINTER IS COMING. HOARD EVERYTHING.','Another note: SUPPLY LINE. ROPE LADDER. SEE BUCKET (PANTRY).']},
-  {talk:'Nara',lines:['Nara looks at the drawing of herself. She seems pleased with it.']},
+  {talk:'TNB',lines:[`Babe. Babe. They have a corkboard. With RED STRING. I've waited my whole life for this.`]},
+  {ch6Reveal:'board'},
+  {talk:'Tom',lines:[`There's an X on every porch on 2nd Avenue. And there's a drawing of Nara. It says "THREAT LEVEL: VERY HIGH."`]},
+  {hearts:'nara'},   // Nara looks at the drawing of herself. Her tail wags.
+  {talk:'TNB',lines:[`She likes it. They got her good side.`]},
+  {talk:'Tom',lines:[`That's my house. That's my JAR. Why is my jar in the middle of everything?`]},
+  {talk:'TNB',lines:[`It says "OPERATION BIG BREAD" across the top. Everything connects to the jar, babe. That's how corkboards work.`]},
+  {talk:'Tom',lines:[`"BY ORDER OF THE CHAIRMAN. WINTER IS COMING. HOARD EVERYTHING."`]},
+  {talk:'TNB',lines:[`And look in the corner. It's the picnic table, with a sad face drawn on it. "AGENT CRUMB. STILL IN THE ORANGE THING. DAY THREE."`]},
+  {talk:'Tom',lines:[`They can't get him out either.`]},
+  {talk:'TNB',lines:[`"SUPPLY LINE. ROPE LADDER. SEE BUCKET, PANTRY." Babe, that's our way up.`]},
   {toast:'Goal: the pantry (right). Look for the bucket on the rope.',time:4.5}
 ];
 // 11. The bucket: Nara is the counterweight. The rope ladder comes down.
 SCENES.ch6Ladder=[
   {flag:'ch6-ladder'},
-  {talk:'TNB',lines:['It\'s a counterweight. Put enough weight in the bucket and the ladder comes down. Classic pulley.']},
-  {talk:'Tom',lines:['We need about forty pounds.']},
-  {talk:'TNB',lines:['...']},
-  {talk:'Tom',lines:['...']},
-  {talk:'Tom',lines:['Nara. Sit. In the bucket.']},
-  {talk:'Nara',lines:['Nara looks at the bucket. Nara looks at Tom. Nara gets in the bucket.','She\'d do anything for Tom. She makes very sure he knows it.']},
-  {call:()=>{ sfx.thud(); sfx.whoosh(); }},
-  {call:()=>{ ch6LowerLadder(); storyWorld(); }},
-  {talk:'Inside the Old Oak',lines:['CREEEEAK. The bucket sinks. Across the trunk, a rope ladder unrolls down the middle, all the way to the floor.']},
-  {talk:'Nara',lines:['Nara is out of the bucket before it stops moving. She leans on Tom with all forty pounds.']},
-  {talk:'Tom',lines:['Very brave. Extremely brave. You\'ll be getting a lot of chicken.']},
+  {talk:'TNB',lines:[`It's a counterweight. Put enough weight in the bucket and the ladder comes down. Classic pulley.`]},
+  {talk:'Tom',lines:[`We need about forty pounds.`]},
+  {talk:'TNB',lines:[`...`]},
+  {talk:'Tom',lines:[`...`]},
+  {talk:'Tom',lines:[`Nara. Sit. In the bucket.`]},
+  {hearts:'nara'}, {wait:.9},   // Nara looks at the bucket. She looks at Tom. She gets in the bucket.
+  {call:()=>{ sfx.thud(); sfx.whoosh(); }}, {wait:.5},
+  {call:()=>{ ch6LowerLadder(); storyWorld(); }},   // the bucket sinks with a long creak and a rope ladder unrolls down the middle of the trunk
+  {wait:1}, {hearts:'tom'},   // she is out of the bucket before it stops moving, and leans on Tom with all her weight
+  {talk:'Tom',lines:[`Very brave. Extremely brave. You'll be getting a lot of chicken.`]},
+  {talk:'TNB',lines:[`She really pulled her weight.`]},
+  {talk:'Tom',lines:[`All forty pounds of it.`]},
   {trace:'nara-bucket'}, {hearts:'nara'},
   {toast:'Goal: up the rope ladder to the top of the Oak.',time:4.5}
 ];
-// 12. The crown: Chairman Cheeks, on the hoard, with Bready Mercury on top. Boss fight.
+// 12. The crown: Chairman Cheeks, on the hoard, with Bready Mercury on top. Boss fight (story-ch06.md scene 12).
 SCENES.ch6Boss=[
   {flag:'ch6-boss'}, {call:()=>storyWorld()},
   {hide:'Chairman Cheeks'},
   {walk:'tom',to:routeTo('tom',9,7),speed:.25}, {face:'tom',dir:'up'},
   {place:'tnb',at:[8,7],dir:'up'}, {place:'nara',at:[10,7],dir:'up'},
-  {talk:'TNB',lines:['Babe. Look. On top of the pile.']},
-  {talk:'Tom',lines:['BREADY MERCURY!']},
+  {talk:'TNB',lines:[`Babe. Look. On top of the pile.`]},
+  {talk:'Tom',lines:[`BREADY MERCURY!`]},
   {call:()=>{ sfx.thud(); sfx.whoosh(); }},
   {show:'Chairman Cheeks'}, {face:'Chairman Cheeks',dir:'down'},
-  {talk:'Chairman Cheeks',lines:['ORDER. ORDER! Who let a DOG into the Oak?',
-    'I\'m Chairman Cheeks.','Every acorn, every peanut and every shiny thing on 2nd Avenue gets carried up this tree, because winter is coming and we need a hoard.']},
-  {talk:'Tom',lines:['It\'s Los Angeles. Winter is a light jacket.']},
-  {talk:'Chairman Cheeks',lines:['That\'s what they WANT you to think.',
-    'And this jar is the best thing we ever took. You feed it and it grows, so it never runs out. It smells like bread FOREVER. It\'s the perfect hoard.','A man in a long coat told me where you keep it. He gave me a gold coin and said a hoard that never runs out means winter never has to come.']},
-  {talk:'Tom',lines:['That\'s Bready Mercury. He\'s nine. You feed him flour and water, and then you SHARE the bread. That\'s the whole point of him.']},
-  {talk:'Chairman Cheeks',lines:['Share? ...Nobody shares with a squirrel. For twenty years I\'ve been chased off every bird feeder on this block.']},
-  {talk:'Nara',lines:['Nara growls. A very small growl. Very serious. She\'s waited three days for this.']},
-  {talk:'TNB',lines:['It\'s a squirrel in a tiny tie, babe. I\'m so scared and so delighted.']},
-  {talk:'Tom',lines:['Put the starter down. No touching, please.']},
+  {talk:'Tom',lines:[`That squirrel is as big as a mailbox, and he's wearing a TIE!`]},
+  {talk:'Chairman Cheeks',lines:[`ORDER. ORDER! Who let a DOG into the Oak?`,
+    `I'm Chairman Cheeks.`,`Every acorn, every peanut and every shiny thing on 2nd Avenue gets carried up this tree, because winter is coming and we need a hoard.`]},
+  {talk:'Tom',lines:[`It's Los Angeles. Winter is a light jacket.`]},
+  {talk:'Chairman Cheeks',lines:[`That's what they WANT you to think.`,
+    `And this jar is the best thing we ever took. You feed it and it grows, so it never runs out. It smells like bread FOREVER. It's the perfect hoard.`,
+    `On Sunday there was a flash at the picnic tables. It took my best agent, and it made me big enough to run things. So I'm running things.`]},
+  {talk:'Tom',lines:[`That's Bready Mercury. He's nine. You feed him flour and water, and then you SHARE the bread. That's the whole point of him.`]},
+  {talk:'Chairman Cheeks',lines:[`Share? ...Nobody shares with a squirrel. For twenty years I've been chased off every bird feeder on this block.`]},
+  {call:()=>{ sfx.bark&&sfx.bark(); }}, {wait:.5},   // Nara growls. A very small growl. Very serious.
+  {talk:'TNB',lines:[`It's a squirrel in a tiny tie, babe. I'm so scared and so delighted.`]},
+  {talk:'Tom',lines:[`Sir, at the door I told one of your squirrels that I was a squirrel. That wasn't true, and I'm sorry.`]},
+  {talk:'Chairman Cheeks',lines:[`Apology noted. You're still trespassing.`]},
+  {talk:'Tom',lines:[`Put the starter down. No touching, please.`]},
   {battle:'chairman',tut:'chairman'},
   {if:()=>flag('battle:chairman')!=='win',then:[
     {heal:true},
-    {talk:'TNB',lines:['Okay. Shake it off. Everybody gets a snack.','Babe, when it buries an acorn, break the acorn before it can eat it. Nara digs them up for double. And maybe try sharing something with it.','Three times should do it.']},
+    {talk:'TNB',lines:[`Okay. Shake it off. Everybody gets a snack.`,`Babe, when it buries an acorn, break the acorn before it can eat it. Nara digs them up for double. And maybe try sharing something with it.`,`Three times should do it.`]},
     {toast:'Face Chairman Cheeks and press A to try again. Everyone is healed.',time:5}],else:[]}
 ];
-// 13. After the boss (won in the scene, or on a retry with A): Bready Mercury comes home, with a gold coin.
+// 13. After the boss (won in the scene, or on a retry with A): Bready Mercury comes home, with a gold coin glued to his bottom (story-ch06.md scene 13).
+// Nara takes the coin and walks off with it. The Chairman walks the party out (he hops ahead and waits at the picnic tables, scene 14).
 SCENES.ch6AfterBoss=()=>[
   {flag:'ch6-clear'},
   {flag:'ch6-take',value:'pending'},   // keeps the painted jar on the chest (engine/plate.js crownJarState) until Tom lifts it below
   {call:()=>{ sfx.levelChime&&sfx.levelChime(); }},
-  ...(flag('kind:chairman')?[
-    {talk:'Chairman Cheeks',lines:['...Shared. You shared with me. Three times. Nobody has ever... I\'m going to need a minute.','Take the jar. And... could I maybe have a slice? Sometimes?']},
-    {talk:'Tom',lines:['Saturdays. On my back fence. One slice. The heel.']},
-    {talk:'Chairman Cheeks',lines:['The heel is the best part.']}]:[
-    {talk:'Chairman Cheeks',lines:['Fine. FINE. This meeting is adjourned. I\'m going to go stare at a bird feeder.']}]),
-  {finale:'chairman'},
-  {call:()=>{ setFlag('ch6-wrap'); storyWorld(); sfx.whoosh(); }},
-  {talk:'The hoard',lines:['Chairman Cheeks hops off the hoard, straightens its tie, and scampers down the far side of the Oak.']},
+  {talk:'Chairman Cheeks',lines:[`Fine. FINE. This meeting is adjourned. I'm going to go stare at a bird feeder.`]},
+  {call:()=>{ const b=findMonster('chairman'); if(b) b.facing='down'; sfx.whoosh&&sfx.whoosh(); }}, {wait:.7},   // he straightens his tie
   // Tom walks up to the chest and lifts Bready Mercury off the hoard himself.
   {walk:'tom',to:routeTo('tom',10,5),speed:.25}, {face:'tom',dir:'up'},
   {wait:.4},
@@ -2663,49 +2735,140 @@ SCENES.ch6AfterBoss=()=>[
   {hearts:'tom'},
   {wait:.9},
   {give:'bready'},
-  {talk:'Tom',lines:['Hello, Bready Mercury. Did you miss me? You were on an adventure.','You\'re going to be extremely sour about this.']},
-  {talk:'TNB',lines:['Was that a pun? Babe. Did you just make a PUN?']},
-  {talk:'Tom',lines:['He\'s a starter. Sour is a compliment.']},
-  {talk:'TNB',lines:['And look. Something taped to the lid. A gold coin. With a little clock face.']},
-  {coinFind:4},
-  {talk:'Tom',lines:['Squirrels hoard shiny things. Squirrels don\'t tape things. Look at those corners.','That makes four. The sundial, your steamer, the sign-up sheet, and now my jar.','He finds something lonely, hands it a gold coin, and it tries to make one thing last forever.']},
-  {talk:'TNB',lines:['And then we show up and make friends with it, and the coin falls right off. Babe. We are ruining this man\'s whole year. Spooky. I love it. I hate it.']},
-  {talk:'Tom',lines:['He knows where I keep my starter, though. That\'s the part I don\'t love.']},
-  {toast:'Goal: take Bready Mercury home to 2nd Ave. Everybody is waiting.',time:4.5}
+  {talk:'Tom',lines:[`Hello, Bready Mercury. Did you miss me? You were on an adventure.`,`You're going to be extremely sour about this.`]},
+  {talk:'TNB',lines:[`That's eight! Babe, you're on a roll.`]},
+  {talk:'Tom',lines:[`He's a starter. Sour is a compliment.`]},
+  {talk:'TNB',lines:[`And look at the bottom of the jar. Something gold is stuck to it.`]},
+  {ch6Reveal:'jar'},
+  {call:()=>sfx.pickup()},   // Tom peels it off
+  {ch6Reveal:'coin'},
+  {talk:'Tom',lines:[`It's a gold coin with a picnic basket on it! He climbed out of the jar again and glued it on.`]},
+  ...(flag('kind:chairman')?[{talk:'Chairman Cheeks',lines:[`I found that under the picnic table on Sunday. It's the shiniest thing I own, so I kept it under the best thing I own.`]}]:[]),
+  {walk:'nara',to:routeTo('nara',9,6),speed:.1}, {hearts:'nara'}, {call:()=>sfx.pickup&&sfx.pickup()}, {wait:.7},   // Nara sniffs the coin, licks it, takes it very gently out of Tom's hand
+  {talk:'Tom',lines:[`Nara! That's not bread! It only smells like bread!`]},
+  {talk:'TNB',lines:[`Let her carry it, babe. She's wanted a gold frisbee since the lemon.`]},
+  {talk:'Chairman Cheeks',lines:[flag('kind:chairman')?`The dog has my coin. ...Fine. I'm practicing sharing. I'll walk you out. It's procedure.`:`That coin is MINE. I'm following that dog.`]},
+  {finale:'chairman'},   // he hops off the hoard and goes ahead of them
+  {call:()=>{ setFlag('ch6-wrap'); storyWorld(); }},
+  {toast:'Goal: out of the Oak and back to the picnic tables, with Nara.',time:4.5}
 ];
-// 14. 2nd Ave: everything comes back. Rewards. Chapter complete.
+// 14. THE DISCOVERY: the picnic table (story-ch06.md scene 14). The coin rolls into the round hole; the block breaks; the colour comes back.
+// The Chairman is the one voice allowed over the break: he is cut off in the middle of a sentence by the colour (engine/block-break.js shrinks him).
+const CH6D={};
+SCENES.ch6Discovery=[
+  {flag:'ch6-disc',value:'pending'},
+  {call:()=>{ for(const k of ['click','close','still','crack','fall','ring','done']) CH6D[k]=false; }},
+  // they come out of the Oak and walk past the grey tables; the Chairman has gone ahead and hops up on the last table
+  {spawn:{name:'Chairman Cheeks',monster:'chairman',look:'moss',at:[6,16],dir:'left',mscale:1.1}},
+  {walk:'tom',to:routeTo('tom',7,16),speed:.2}, {walk:'tnb',to:routeTo('tnb',7,17),speed:.2}, {walk:'nara',to:routeTo('nara',8,16),speed:.2},
+  {face:'tom',dir:'left'}, {face:'tnb',dir:'left'}, {face:'nara',dir:'left'},
+  {cam:[5.6,15.4]}, {zoom:1.4,time:.8}, {wait:.5},
+  {talk:'Chairman Cheeks',lines:[flag('kind:chairman')?`Agent Crumb. Bravest squirrel I ever commanded. He went in for one sandwich.`:`That's MY coin, and that's MY agent in there. I want them both back.`]},
+  {talk:'Tom',lines:[`I'm sorry about your friend, sir.`]},
+  // Nara jumps onto the bench, puts her front paws on the table and drops the coin on the tabletop in front of Tom. She backs up and barks once.
+  {walk:'nara',to:routeTo('nara',6,17),speed:.1}, {call:()=>{ BB.pre='oakpark'; sfx.coin&&sfx.coin(); sfx.bark&&sfx.bark(); }}, {wait:.8},
+  {talk:'Tom',lines:[`Nara, I've told you. We don't play fetch with gold.`]},
+  {talk:'TNB',lines:[`She only eats bread if you throw it, babe. And that coin smells like Bready Mercury.`]},
+  {talk:'Tom',lines:[`...One throw. A very small one.`]},
+  {call:()=>{ sfx.pickup&&sfx.pickup(); }}, {wait:.3},
+  {all:[
+    {blockbreak:'oakpark',onPhase:ph=>{ CH6D[ph]=true; }},
+    {seq:[
+      ch6Wait(()=>CH6D.still),
+      {talk:'Tom',lines:[`It rolled into the little round hole. TNB, it fits! It fits exactly!`]},
+      ch6Wait(()=>CH6D.crack),
+      {talk:'TNB',lines:[`Babe. It's cracking.`]},
+      ch6Wait(()=>CH6D.fall), {wait:.9},
+      {talk:'Chairman Cheeks',lines:[`AGENT CRUMB! You're out! By order of the Chairman, I hereby declare this the greatest day in the history of...`]},
+      ch6Wait(()=>!currentMap.npcs.some(n=>n.monster==='chairman')),   // the colour has reached him and he is an ordinary squirrel
+      {talk:'Chairman Cheeks',lines:[`Squeak.`]}]}]},
+  {flag:'bb-oakpark'}, {wait:.6},
+  {talk:'TNB',lines:[`The grass is green. The tables are brown. Babe, it all came back.`]},
+  {talk:'Tom',lines:[`And the Chairman is just a squirrel. Sir? Mr. Chairman?`]},
+  {squirrelsrun:'oakpark'}, {flag:'bb-oakpark-run'},   // the two squirrels on the table look at each other, then run up the Old Oak together, sandwich and all
+  {talk:'Tom',lines:[`He can't talk anymore.`]},
+  {talk:'TNB',lines:[`He still knows where your back fence is. Saturdays, babe. A deal is a deal.`,`But what just HAPPENED?`]},
+  {talk:'Tom',lines:[`The coin has a picnic basket on it, and the block had a picnic basket in it. That hole is exactly as big as a coin.`,
+    `TNB, the coin came OUT of that hole. Nara just put it back!`]},
+  {talk:'TNB',lines:[`So the block breaks, the color comes back, and the squirrels go back to being squirrels. Babe. It's a key.`]},
+  {walk:'Bernadette',to:routeTo('Bernadette',9,16),speed:.12},   // she runs up with her clipboard
+  {talk:'Bernadette',lines:[`Nineteen years I've watched this park, and the ONE time something happens, I'm at my car getting a pen. What did you DO?`]},
+  {talk:'Tom',lines:[`The dog did it.`]},
+  {talk:'Bernadette',lines:[`The dog. Wonderful. Nineteen years, and a dog gets the credit. She's going in the report. Spell her name.`]},
+  {talk:'TNB',lines:[`N, A, R, A.`]},
+  {talk:'Bernadette',lines:[`I know how to spell Nara.`]},
+  ...lookBeat('tnb','tom','Bernadette',1.4),   // TNB looks at Tom. Tom looks at the sky.
+  {talk:'Tom',lines:[`TNB. I have a coin with a lemon on it in my pocket.`]},
+  {talk:'TNB',lines:[`And I have a hat.`]},
+  {talk:'Tom',lines:[`Rose has the dragonfly. My father has the fish. Amy has the kickball.`]},
+  {talk:'TNB',lines:[`Five blocks and five coins. Babe, we've been carrying the answer around like loose change.`]},
+  {talk:'Tom',lines:[`Nara, you're a genius. You're getting so much chicken.`]},
+  {face:'nara',dir:'right'}, {wait:.8}, {face:'nara',dir:'up'}, {wait:.8},   // Nara sits on the bench and looks at the place where the coin was. Then she looks at Tom.
+  {talk:'Tom',lines:[`...I'm sorry. I think that one is used up.`]},
+  {talk:'TNB',lines:[`We owe her a throw, babe.`]},
+  {talk:'Bernadette',lines:[`Evidence released. Tell your mother to keep it somewhere dry. And don't thank me. Nobody does.`]},
+  {talk:'Tom',lines:[`Thank you, Bernadette.`]},
+  {talk:'Bernadette',lines:[`I said don't.`]},
+  {talk:'Tom',lines:[`First Bready Mercury goes home. Then the lemon, then the hat. And then I'm calling my mother.`]},
+  {cam:null}, {zoom:1,time:.6},
+  {walk:'Bernadette',to:routeTo('Bernadette',13,14),speed:.22},
+  {flag:'ch6-disc'},
+  {toast:'Goal: 2nd Ave. Show everybody that Bready Mercury is home.',time:4.5}
+];
+// 15. 2nd Ave: everything comes back; Nara gets her gold ball thrown; the vests (story-ch06.md scene 15).
 SCENES.ch6End=[
-  {flag:'ch6-done',value:'pending'},
+  {flag:'ch6-street',value:'pending'},
   {walk:'tom',to:routeTo('tom',12,20),speed:.2}, {face:'tom',dir:'up'},
   {place:'Olivia',at:[12,19],dir:'down'}, {place:'Michael',at:[13,19],dir:'down'},
   {place:'tnb',at:[11,20],dir:'up'}, {place:'nara',at:[13,20],dir:'up'},
   {spawn:{name:'Bernadette',look:'bernadette',at:[10,19],dir:'right'}},
-  {talk:'Olivia',lines:['Tom! You found everything! Marisol’s balls, Mr. Washington’s glasses, Lachlan’s truck. He hasn\'t put it down. He\'s eating cereal with one hand.']},
-  {talk:'Bernadette',lines:['Captain\'s report: case closed.','And I want it noted that I was right. For nineteen years. Out loud, please.']},
-  {talk:'TNB',lines:['Noted. You were right, Bernadette.']},
-  {talk:'Bernadette',lines:['Louder. Mr. Washington\'s porch didn\'t hear you.']},
-  {talk:'TNB',lines:['...YOU WERE RIGHT, BERNADETTE.']},
-  {talk:'Michael',lines:['Lachlan wants Nara to have this. He painted a tennis ball gold. It took him four days and most of a bottle of paint.']},
+  {talk:'Olivia',lines:[`Tom! You found everything! Marisol’s balls, Mr. Washington’s glasses, Lachlan’s truck. He hasn't put it down. He's eating cereal with one hand.`]},
+  {talk:'Bernadette',lines:[`Captain's report: case closed.`,`And I want it noted that I was right. For nineteen years. Out loud, please.`]},
+  {talk:'TNB',lines:[`Noted. You were right, Bernadette.`]},
+  {talk:'Bernadette',lines:[`Louder. Mr. Washington's porch didn't hear you.`]},
+  {talk:'TNB',lines:[`...YOU WERE RIGHT, BERNADETTE.`]},
+  {talk:'Bernadette',lines:[`Also in the report: the squirrels are regular squirrels again, and a dog fixed my park in one afternoon. I'm not discussing it.`]},
+  {talk:'Michael',lines:[`Lachlan wants Nara to have this. He painted a tennis ball gold. It took him four days and most of a bottle of paint.`]},
   {give:'y_goldball'},
   {toast:'Nara gets a new Signature Tool: the Golden Tennis Ball (POW +6, WARMTH +4). Equip it in the menu.',time:4.5},
-  {talk:'Nara',lines:['Nara takes it very gently. She\'ll never let go of it again. She\'s going to sleep for twelve hours, holding it.']},
-  {talk:'Bernadette',lines:['And these are Neighborhood Watch vests. I give out one every nineteen years. Today I\'m giving out three, so don\'t make me regret it. The dog\'s fits best.']},
+  // Nara takes it very gently. Then she drops it on Tom's shoe and backs up, tail going.
+  {walk:'nara',to:routeTo('nara',12,21),speed:.1}, {hearts:'nara'}, {wait:.5},
+  {talk:'Tom',lines:[`A gold ball. Nara, THIS gold we can throw!`]},
+  {call:()=>sfx.whoosh&&sfx.whoosh()},   // he throws it. She catches it in midair and runs a lap around the whole block.
+  {walk:'nara',to:routeTo('nara',16,20),speed:.06}, {walk:'nara',to:routeTo('nara',12,21),speed:.06}, {hearts:'nara'},
+  {talk:'TNB',lines:[`Finally! She's been waiting since the lemon.`]},
+  {talk:'Bernadette',lines:[`And these are Neighborhood Watch vests. I give out one every nineteen years. Today I'm giving out three, so don't make me regret it. The dog's fits best.`]},
   {give:'watchvest'},
   {toast:'New outfit: the Neighborhood Watch Vest. Reflective orange. Anyone can wear it.',time:4},
-  {talk:'Tom',lines:['Bernadette, this is really kind of you.']},
-  {talk:'Bernadette',lines:['It\'s reflective. Don\'t get sentimental. And 3468? Stop watering the cactus.']},
-  {talk:'Tom',lines:['...It looked thirsty.']},
+  {talk:'Tom',lines:[`Bernadette, this is really kind of you.`]},
+  {talk:'Bernadette',lines:[`It's reflective. Don't get sentimental. And 3468? Stop watering the cactus.`]},
+  {talk:'Tom',lines:[`...It looked thirsty.`]},
   {despawn:'Bernadette'},
-  {talk:'TNB',lines:['You know what today was, babe? Absolutely nuts.']},
-  {talk:'Tom',lines:['...That\'s not a pun. That\'s just a word.']},
-  {talk:'TNB',lines:['It\'s a word with a pun in its heart.']},
+  {flag:'ch6-street'},
+  {toast:'Goal: Tom’s house (3468). Put Bready Mercury back on the island.',time:5}
+];
+// 15b. Tom's kitchen: TNB's crock for Bready Mercury, and the last pun. Chapter 6 ends here (story-ch06.md scene 15).
+SCENES.ch6Crock=[
+  {flag:'ch6-done',value:'pending'},
+  {place:'tnb',at:[10,5],dir:'right'}, {show:'tnb'},
+  {walk:'tom',to:routeTo('tom',11,5),speed:.2}, {face:'tom',dir:'left'},
+  {around:[918/78.4,322/78.4],tom:[11,5],at:{tnb:[12,4]}},
+  {wait:.5},   // Tom goes to put the jar back on the island. TNB stops him and opens a cupboard.
+  {talk:'TNB',lines:[`Before you put him back, I have something. I was saving it for when you landed. Then the squirrels happened.`]},
+  {ch6Reveal:'crock'},
+  {talk:'TNB',lines:[`He kept climbing out of the jar, so I made him a bigger home. I threw it on the wheel last week. It came out of the kiln on Thursday.`]},
+  {talk:'Tom',lines:[`You made him a crock! It has his name on it. And a crown!`]},
+  {talk:'TNB',lines:[`He's a Queen fan, babe. He needs a crown.`]},
+  {talk:'Tom',lines:[`It's perfect. ...It came out on Thursday? I was at conference night. I love watching you open the kiln.`]},
+  {talk:'TNB',lines:[`I know. I almost waited.`]},
+  {talk:'Tom',lines:[`Don't wait for me. Just save me the next one.`]},
+  {call:()=>{ setFlag('ch6-crock'); sfx.pickup&&sfx.pickup(); }}, {wait:.8},   // Tom pours the starter into the crock. It fits, with room to spare.
+  {talk:'TNB',lines:[`There. Now he's got room to rise to the occasion.`,`You know what today was, babe? Absolutely nuts.`]},
+  {talk:'Tom',lines:[`Nuts! I've been waiting all day for you to say it.`]},
+  {talk:'TNB',lines:[`I was saving it for the end. Tell Amy to put me down for one.`]},
   ch4Kiss(),
-  {talk:'Tom',lines:['Fine. It was nuts.']},
+  {talk:'Tom',lines:[`It was completely nuts. And I wouldn't have missed it.`]},
   {trace:'ch6-wrap'}, {hearts:'tom'},
-  {call:()=>{ sfx.ding&&sfx.ding(); }},
-  {talk:'Narrator',lines:['A text from Grace. "TATA. The library is WHISPERING. Like actually. Page says it\'s fine. It\'s NOT fine. Come home."']},
-  {talk:'TNB',lines:['The library is whispering. Is that not just... its job?']},
-  {talk:'Tom',lines:['Not on Long Island. On Long Island, the library shushes YOU.']},
   {party:null},
   {fade:'out',time:.8}, {card:6,done:true,time:3.4}, {flag:'ch6-done'}, {fade:'in',time:.8},
   {save:true},
@@ -2722,7 +2885,9 @@ TRIGGERS.push(
   {id:'ch6-oak',map:'oak',when:{...CH6,notFlag:'ch6-oak'},scene:'ch6Oak'},
   {id:'ch6-boss',map:'crown',when:{...CH6,flag:'ch6-ladder',notFlag:'ch6-boss'},scene:'ch6Boss'},
   {id:'ch6-after',map:'crown',when:{...CH6,flag:{'battle:chairman':'win'},notFlag:'ch6-clear'},scene:'ch6AfterBoss'},
-  {id:'ch6-end',map:'jpark',when:{...CH6,flag:'ch6-clear',notFlag:'ch6-done'},scene:'ch6End'}
+  {id:'ch6-discovery',map:'oakpark',when:{...CH6,flag:'ch6-clear',notFlag:'ch6-disc'},scene:'ch6Discovery'},
+  {id:'ch6-end',map:'jpark',when:{...CH6,flag:'ch6-disc',notFlag:'ch6-street'},scene:'ch6End'},
+  {id:'ch6-crock',map:'tomhouse',when:{...CH6,flag:'ch6-street',notFlag:'ch6-done'},scene:'ch6Crock'}
 );
 // The park holds still until Bernadette's briefing; each lookout holds still until its story fight.
 const CH6_LOOKOUT_FLAG={peanutgallery:'ch6-play',twigspy:'ch6-garden',cheekstuffer:'ch6-picnic'};

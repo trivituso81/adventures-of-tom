@@ -368,6 +368,12 @@ function plateWalkBehind(map,plate,time=0) {
 // Bready Mercury on Tom's kitchen island, except while the squirrels have him (chapter 6, until the Oak boss is beaten).
 function drawHomeJar(time) {
   if(typeof storyMatch==='function'&&storyMatch({chapter:6,notFlag:'ch6-clear'})) return;
+  if(typeof flag==='function'&&flag('ch6-crock')) {   // TNB's crock (story-ch06.md scene 15): Bready Mercury lives in it from here on
+    const im=PROPART.get('tomhouse/ch6_crock'),u=.8*T/78.4; if(!(im.complete&&im.naturalWidth)) return;
+    const h=58*u,w=h*im.naturalWidth/im.naturalHeight,cx=918*T/78.4,by=322*T/78.4;
+    ctx.save(); ctx.fillStyle='rgba(60,40,20,.30)'; ctx.beginPath(); ctx.ellipse(cx+1*u,by,w*.42,3.4*u,0,0,Math.PI*2); ctx.fill();
+    ctx.imageSmoothingEnabled=true; if('imageSmoothingQuality' in ctx) ctx.imageSmoothingQuality='high'; ctx.drawImage(im,cx-w/2,by-h+1*u,w,h); ctx.restore(); return;
+  }
   drawBreadyJar(918*T/78.4,322*T/78.4,0.8*T/78.4,time);
 }
 // Grump Hollow crumb trail, chapter 1 (crumbs3). Three overlays built by tools/sprite-bake/bake_hollow_crumbs.py from single painted bits of the
