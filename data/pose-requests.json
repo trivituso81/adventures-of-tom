@@ -1,6 +1,6 @@
 {
  "version": 2,
- "saved": "2026-11-15T05:53:35.518Z",
+ "saved": "2026-11-15T05:54:30.909Z",
  "heights": {},
  "target": {},
  "frames": {
@@ -9,77 +9,196 @@
     "sheet": "tom-walking-sheet-v3.png",
     "top": 0.6,
     "chin": 144.7,
-    "ok": false
+    "ok": true,
+    "page": {
+     "f": 1,
+     "h": 1,
+     "a": 144.7,
+     "headRows": 12.715,
+     "wholeRows": 42
+    }
    },
    "em_happy": {
     "sheet": "tom-emotions-v7.png",
     "top": 10.3,
-    "chin": 147.1
+    "chin": 147.1,
+    "ok": true,
+    "page": {
+     "f": 0.989,
+     "h": 1.163,
+     "a": 147.1,
+     "headRows": 12.715,
+     "wholeRows": 41.903
+    }
    },
    "em_loving": {
     "sheet": "tom-emotions-v7.png",
     "top": 12.9,
-    "chin": 151.4
+    "chin": 151.4,
+    "ok": true,
+    "page": {
+     "f": 0.989,
+     "h": 1.148,
+     "a": 151.4,
+     "headRows": 12.715,
+     "wholeRows": 41.308
+    }
    },
    "em_sad": {
     "sheet": "tom-emotions-v7.png",
     "top": 12.2,
-    "chin": 172.6
+    "chin": 172.6,
+    "ok": true,
+    "page": {
+     "f": 0.989,
+     "h": 0.992,
+     "a": 172.6,
+     "headRows": 12.715,
+     "wholeRows": 38.786
+    }
    },
    "em_angry": {
     "sheet": "tom-emotions-v7.png",
     "top": 10.2,
-    "chin": 175.1
+    "chin": 175.1,
+    "ok": true,
+    "page": {
+     "f": 0.989,
+     "h": 0.965,
+     "a": 175.1,
+     "headRows": 12.715,
+     "wholeRows": 37.762
+    }
    },
    "em_scared": {
     "sheet": "tom-emotions-v7.png",
     "top": 8.3,
-    "chin": 154.1
+    "chin": 154.1,
+    "ok": true,
+    "page": {
+     "f": 0.989,
+     "h": 1.091,
+     "a": 154.1,
+     "headRows": 12.715,
+     "wholeRows": 41.16
+    }
    },
    "em_surprised": {
     "sheet": "tom-emotions-v7.png",
     "top": 6.8,
-    "chin": 146.3
+    "chin": 146.3,
+    "ok": true,
+    "page": {
+     "f": 0.989,
+     "h": 1.14,
+     "a": 146.3,
+     "headRows": 12.715,
+     "wholeRows": 42.567
+    }
    },
    "em_proud": {
     "sheet": "tom-emotions-v7.png",
     "top": 6,
-    "chin": 123.8
+    "chin": 123.8,
+    "ok": true,
+    "page": {
+     "f": 0.989,
+     "h": 1.35,
+     "a": 123.8,
+     "headRows": 12.715,
+     "wholeRows": 45.187
+    }
    },
    "em_unimpressed": {
     "sheet": "tom-emotions-v7.png",
     "top": 9.9,
-    "chin": 148.2
+    "chin": 148.2,
+    "ok": true,
+    "page": {
+     "f": 0.989,
+     "h": 1.15,
+     "a": 148.2,
+     "headRows": 12.715,
+     "wholeRows": 43.265
+    }
    },
    "tk_tell": {
     "sheet": "tom-talk-v2.png",
     "top": 5.8,
-    "chin": 154.9
+    "chin": 154.9,
+    "ok": true,
+    "page": {
+     "f": 0.955,
+     "h": 1.2,
+     "a": 154.9,
+     "headRows": 12.715,
+     "wholeRows": 42.297
+    }
    },
    "tk_point": {
     "sheet": "tom-talk-v2.png",
     "top": 7.3,
-    "chin": 152.8
+    "chin": 152.8,
+    "ok": true,
+    "page": {
+     "f": 0.955,
+     "h": 1.23,
+     "a": 152.8,
+     "headRows": 12.715,
+     "wholeRows": 42.731
+    }
    },
    "tk_ask": {
     "sheet": "tom-talk-v2.png",
     "top": 3.4,
-    "chin": 148.8
+    "chin": 148.8,
+    "ok": true,
+    "page": {
+     "f": 0.955,
+     "h": 1.23,
+     "a": 148.8,
+     "headRows": 12.715,
+     "wholeRows": 43.68
+    }
    },
    "tk_answer": {
     "sheet": "tom-talk-v2.png",
     "top": 0,
-    "chin": 147
+    "chin": 147,
+    "ok": true,
+    "page": {
+     "f": 0.955,
+     "h": 1.217,
+     "a": 147,
+     "headRows": 12.715,
+     "wholeRows": 43.771
+    }
    },
    "up_stand": {
     "sheet": "tom-walking-sheet-v3.png",
     "top": 3.3,
-    "chin": 135.7
+    "chin": 135.7,
+    "ok": true,
+    "page": {
+     "f": 1.017,
+     "h": 1.088,
+     "a": 135.7,
+     "headRows": 12.715,
+     "wholeRows": 42.264
+    }
    },
    "left_stand": {
     "sheet": "tom-walking-sheet-v3.png",
     "top": 8.4,
-    "chin": 137.9
+    "chin": 137.9,
+    "ok": true,
+    "page": {
+     "f": 0.954,
+     "h": 1.113,
+     "a": 137.9,
+     "headRows": 12.715,
+     "wholeRows": 42.772
+    }
    }
   },
   "tnb": {
