@@ -51,7 +51,7 @@ const entries = [
     prompt: `IMAGE REQUEST: ONE SINGLE SHEET. Return exactly one square image, nothing else. Generate it now.
 
 ATTACHED IMAGES
-1) The approved painting of the Mudling, a blob of pond mud with eyes, from "The Adventures of Tom", a family role-playing game. Keep this exact creature: the same mud body, colors, eyes, mouth and painted finish. It has NO leaves, NO sprout, NO cute cartoon face.
+1) The approved painting of the Mudling, a blob of pond mud with eyes and a small green sprout on top, from "The Adventures of Tom", a family role-playing game. Keep this exact creature: the same dripping mud body, the same sprout, colors, eyes and mouth, and above all the same rich painted finish and light. Not a flat cartoon, not a simpler drawing: it must look like the same painting as attachment 1.
 2) The approved painting of the Pond Grump, for the hand-brushed finish only.
 
 PAINT THIS SHEET

@@ -21,7 +21,7 @@
 - Art:
   - r-20261114-162235-r3vz "The base of the tree, like the mound, should be smaller": the dirt circle under the grey and the colour lemon tree is now 58 percent as wide (tools/art-library/shrink_mound.py, run by bake_closeup_ch2.py and bake_story_ch6b.py).
   - r-20261114-145325-4sgz door frame: Tom approved v2; bake_closeup_ch1.py now always takes the newest approved version and the door frame close-up shows v2.
-  - New Art Library group "Report fixes" (tools/art-library/ch2fix-prompts.js, 21 drafts): ch1-mudling-heist (mxvd), ch1-deedee-glasses-head (7v5z), ch1-spot-together (nre4), boppy-em-unimpressed (1a2w: his unimpressed mood frame lost the mustache), ch1-deedee-bulb and ch3-rose-bulb (jykk), ch2-dazed-washington, -odette, -carmen, -marisol, -larry (g4gl), and a thinking pose for each of the ten family members (c5no).
+  - New Art Library group "Report fixes" (tools/art-library/ch2fix-prompts.js, 21 drafts): ch1-mudling-heist (mxvd: the same Mudling with its sprout, in the battle sheet's painted finish), ch1-deedee-glasses-head (7v5z), ch1-spot-together (nre4), boppy-em-unimpressed (1a2w: his unimpressed mood frame lost the mustache), ch1-deedee-bulb and ch3-rose-bulb (jykk), ch2-dazed-washington, -odette, -carmen, -marisol, -larry (g4gl), and a thinking pose for each of the ten family members (c5no).
 - EMO_V, TALK_V and ART_V bumped.
 
 ## ch2fix1a (2026-11-14): chapter 2 feedback, part 1: six lines rewritten, TNB mellow, Tom with feeling, dazed voices, drawn-out RUMBLE
