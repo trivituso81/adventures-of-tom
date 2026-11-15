@@ -1,6 +1,6 @@
 {
  "version": 2,
- "saved": "2026-11-15T06:18:16.866Z",
+ "saved": "2026-11-15T06:28:56.330Z",
  "heights": {},
  "target": {},
  "frames": {
@@ -396,6 +396,227 @@
      "a": 156.9,
      "headRows": 12.715,
      "wholeRows": 39.787
+    }
+   }
+  },
+  "justin": {
+   "tk_tell": {
+    "sheet": "justin-talk-v1.png",
+    "top": 19.7,
+    "chin": 159.6,
+    "ok": true,
+    "sAdj": 1.1,
+    "page": {
+     "f": 1.144,
+     "h": 1.611,
+     "a": 159.6,
+     "headRows": 13.986,
+     "wholeRows": 50.096
+    }
+   },
+   "down_stand": {
+    "sheet": "justin-walking-sheet-v3.png",
+    "top": 10.7,
+    "chin": 123.5,
+    "ok": true,
+    "sAdj": 1.03,
+    "page": {
+     "f": 0.956,
+     "h": 1.227,
+     "a": 123.5,
+     "headRows": 13.096,
+     "wholeRows": 46.306
+    }
+   },
+   "up_stand": {
+    "sheet": "justin-walking-sheet-v3.png",
+    "top": 13.2,
+    "chin": 112.6,
+    "ok": true,
+    "sAdj": 1.03,
+    "page": {
+     "f": 0.976,
+     "h": 1.392,
+     "a": 112.6,
+     "headRows": 13.096,
+     "wholeRows": 46.803
+    }
+   },
+   "left_stand": {
+    "sheet": "justin-walking-sheet-v3.png",
+    "top": 14.8,
+    "chin": 128.2,
+    "ok": true,
+    "sAdj": 1.03,
+    "page": {
+     "f": 0.918,
+     "h": 1.22,
+     "a": 128.2,
+     "headRows": 13.096,
+     "wholeRows": 46.773
+    }
+   },
+   "em_happy": {
+    "sheet": "justin-emotions-v4.png",
+    "top": 17.6,
+    "chin": 144.9,
+    "ok": true,
+    "sAdj": 1.03,
+    "hAdj": 0.96,
+    "page": {
+     "f": 1.184,
+     "h": 1.295,
+     "a": 144.9,
+     "headRows": 12.572,
+     "wholeRows": 46.254
+    }
+   },
+   "em_loving": {
+    "sheet": "justin-emotions-v4.png",
+    "top": 17.5,
+    "chin": 142.5,
+    "ok": true,
+    "sAdj": 1.04,
+    "hAdj": 0.96,
+    "page": {
+     "f": 1.138,
+     "h": 1.331,
+     "a": 142.5,
+     "headRows": 12.694,
+     "wholeRows": 46.725
+    }
+   },
+   "em_sad": {
+    "sheet": "justin-emotions-v4.png",
+    "top": 16.4,
+    "chin": 173.7,
+    "ok": true,
+    "sAdj": 0.93,
+    "hAdj": 1.16,
+    "page": {
+     "f": 1.134,
+     "h": 1.143,
+     "a": 173.7,
+     "headRows": 13.717,
+     "wholeRows": 44.083
+    }
+   },
+   "em_angry": {
+    "sheet": "justin-emotions-v4.png",
+    "top": 25.5,
+    "chin": 182.2,
+    "ok": true,
+    "sAdj": 0.87,
+    "hAdj": 1.17,
+    "page": {
+     "f": 1.117,
+     "h": 1.083,
+     "a": 182.2,
+     "headRows": 12.942,
+     "wholeRows": 42.123
+    }
+   },
+   "em_scared": {
+    "sheet": "justin-emotions-v4.png",
+    "top": 27.7,
+    "chin": 150.2,
+    "ok": true,
+    "sAdj": 0.98,
+    "hAdj": 0.94,
+    "page": {
+     "f": 1.237,
+     "h": 1.253,
+     "a": 150.2,
+     "headRows": 11.713,
+     "wholeRows": 44.741
+    }
+   },
+   "em_surprised": {
+    "sheet": "justin-emotions-v4.png",
+    "top": 24.6,
+    "chin": 141.5,
+    "ok": true,
+    "sAdj": 0.97,
+    "hAdj": 0.96,
+    "page": {
+     "f": 1.066,
+     "h": 1.328,
+     "a": 141.5,
+     "headRows": 11.84,
+     "wholeRows": 44.412
+    }
+   },
+   "em_proud": {
+    "sheet": "justin-emotions-v4.png",
+    "top": 19.7,
+    "chin": 125.1,
+    "ok": true,
+    "hAdj": 0.84,
+    "page": {
+     "f": 1.019,
+     "h": 1.328,
+     "a": 125.1,
+     "headRows": 10.68,
+     "wholeRows": 43.598
+    }
+   },
+   "em_unimpressed": {
+    "sheet": "justin-emotions-v4.png",
+    "top": 14,
+    "chin": 135.5,
+    "ok": true,
+    "sAdj": 1.01,
+    "hAdj": 0.96,
+    "page": {
+     "f": 1.09,
+     "h": 1.33,
+     "a": 135.5,
+     "headRows": 12.328,
+     "wholeRows": 45.071
+    }
+   },
+   "tk_point": {
+    "sheet": "justin-talk-v1.png",
+    "top": 19.7,
+    "chin": 156.2,
+    "ok": true,
+    "hAdj": 0.93,
+    "sAdj": 1.03,
+    "page": {
+     "f": 1.086,
+     "h": 1.438,
+     "a": 156.2,
+     "headRows": 12.179,
+     "wholeRows": 45.865
+    }
+   },
+   "tk_ask": {
+    "sheet": "justin-talk-v1.png",
+    "top": 0,
+    "chin": 131.6,
+    "ok": true,
+    "hAdj": 0.98,
+    "page": {
+     "f": 0.965,
+     "h": 1.526,
+     "a": 131.6,
+     "headRows": 12.46,
+     "wholeRows": 43.486
+    }
+   },
+   "tk_answer": {
+    "sheet": "justin-talk-v1.png",
+    "top": 0,
+    "chin": 120.2,
+    "ok": true,
+    "sAdj": 0.99,
+    "hAdj": 0.88,
+    "page": {
+     "f": 0.94,
+     "h": 1.485,
+     "a": 120.2,
+     "headRows": 11.077,
+     "wholeRows": 41.728
     }
    }
   }
