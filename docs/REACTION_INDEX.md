@@ -228,7 +228,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Mr. Washington | Such a nice afternoon. It should always be this afternoon. | Tom scared, TNB scared, Nara scared |
 | Tom | Excuse me, smog. That was UNCALLED for. | TNB happy |
 | Smoglet | Cough. Nice street. We're going to sit on it for a while. Forever, actually. | Tom angry, TNB scared, Nara angry |
-| TNB | Babe. Remember movie night? You threw the whole popcorn bowl. | Tom unimpressed |
+| TNB | Scarier than movie night. Remember? You threw the whole popcorn bowl. | Tom unimpressed |
 | Tom | I was startled. Briefly. With dignity. | TNB happy |
 | TNB | It was a battle plan. You just didn't know it yet. | Tom unimpressed |
 | TNB | Okay. Okay. Everybody breathe. Through the nose. Not the smog. | Tom happy, Nara happy |

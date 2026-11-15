@@ -131,14 +131,14 @@
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "The fish was the nicest part!",
+   "text": "I flew six hours for that pun?",
    "ctx": "chapter 2 (new)",
    "script": "[defending the fish] The fish was the NICEST part!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "I want to take you home to Jefferson Park. But first I have to feed Bready Mercury. He's been alone for a week.",
+   "text": "Let's go home to Jefferson Park. Bready Mercury has been alone all week.",
    "ctx": "chapter 2 (reworded)",
    "script": "[sweet] I want to take you home to Jefferson Park. [guilty, fussing] But first I have to feed Bready Mercury. [doting] He's been alone for a WEEK."
   },
@@ -257,7 +257,7 @@
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "\"Don't Stop Me Dough!\"",
+   "text": "\"Bohemian Rye-psody!\"",
    "ctx": "chapter 2 (reworded)",
    "script": "[delighted, singing along] \"Don't Stop Me DOUGH!\""
   },
@@ -565,7 +565,7 @@
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "I already lost to the small one. ...Maybe it's easier in California.",
+   "text": "I couldn't pull the one at the pond out either. ...Maybe it's easier in California.",
    "ctx": "chapter 2 (new)",
    "script": "[admitting] I already lost to the SMALL one. [hopeful, reasoning] ...Maybe it's easier in California."
   },

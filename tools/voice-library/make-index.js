@@ -142,9 +142,12 @@ for(const id of ['boppy','justin']) for(const k of ['battle|'+id,'dialog|'+id]){
 // Mr. Washington (Tom 2026-11-12 23:26, `washvoice1`): "a male version of Miss Odette, an older African-American man voice". No new voice
 // (the account is full at 30, Tom 18:30): he keeps his own ElevenLabs voice and carries this accent in every bracket. The Narrator
 // copies his voice id above, before this, so narration does not get the accent.
-const ACCENT={boppy:'thick New York accent',justin:'thick New York accent',amy:'heavy Long Island accent',washington:'older African American man, warm Louisiana drawl',deedee:'warm Long Island accent',ellie:'heavy Long Island accent',oolong:'warm Chinese accent'};
-const ACCENT_HAS={boppy:/new york/i,justin:/new york/i,amy:/long island/i,washington:/african american/i,deedee:/long island/i,ellie:/long island/i,oolong:/chinese/i};
+const ACCENT={boppy:'thick New York accent',justin:'thick New York accent',amy:'heavy Long Island accent',washington:'older African American man, warm Louisiana drawl',deedee:'warm Long Island accent',ellie:'heavy Long Island accent',oolong:'warm Chinese accent',tnb:'mellow, laid-back, low-key'};
+const ACCENT_HAS={boppy:/new york/i,justin:/new york/i,amy:/long island/i,washington:/african american/i,deedee:/long island/i,ellie:/long island/i,oolong:/chinese/i,tnb:/mellow|laid-back/i};
 for(const id in ACCENT) for(const k of ['battle|'+id,'dialog|'+id]) if(voices[k]) voices[k].accent=ACCENT[id];
+// TNB (report r-20261114-161131-z688, Tom: "he needs a much more mellow and nonchalant kind of voice... from now on we have to modify it with annotations"):
+// "mellow, laid-back, low-key" goes into every bracket of every TNB script (ACCENT above), and a steadier voice setting keeps takes from getting effusive.
+for(const k of ['dialog|tnb','battle|tnb']) if(voices[k]&&voices[k].stability<.6) voices[k].stability=.6;
 const vname=id=>id[0]==='?'?id.slice(1):(NAMES[id]||(CAST.voices[id]&&CAST.voices[id].name)||id);
 // Merge effects: battle clips only deepen Boppy (tools/battle-baker/merge.js); dialogue adds speaker or voice fx, Boppy, Grace shrink (tools/clip-audit/merge.py).
 const fxOf=(voice,speaker,battle)=>battle?voice==='boppy':!!((speaker&&CAST.speakerFx&&CAST.speakerFx[speaker])||voice==='boppy'||voice==='grace'||(CAST.voices[voice]&&CAST.voices[voice].fx));

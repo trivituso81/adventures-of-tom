@@ -328,7 +328,7 @@ scene	2	data/scenes.js	ch2Smog	Tom	Excuse me, smog. That was UNCALLED for.	tnb	h
 scene	2	data/scenes.js	ch2Smog	Smoglet	Cough. Nice street. We're going to sit on it for a while. Forever, actually.	nara	angry	Cough.
 scene	2	data/scenes.js	ch2Smog	Smoglet	Cough. Nice street. We're going to sit on it for a while. Forever, actually.	tnb	scared	Nice street
 scene	2	data/scenes.js	ch2Smog	Smoglet	Cough. Nice street. We're going to sit on it for a while. Forever, actually.	tom	angry	Forever, actually
-scene	2	data/scenes.js	ch2Smog	TNB	Babe. Remember movie night? You threw the whole popcorn bowl.	tom	unimpressed	threw the whole popcorn bowl
+scene	2	data/scenes.js	ch2Smog	TNB	Scarier than movie night. Remember? You threw the whole popcorn bowl.	tom	unimpressed	threw the whole popcorn bowl
 scene	2	data/scenes.js	ch2Smog	Tom	I was startled. Briefly. With dignity.	tnb	happy
 scene	2	data/scenes.js	ch2Smog	TNB	It was a battle plan. You just didn't know it yet.	tom	unimpressed
 scene	2	data/scenes.js	ch2Smog	TNB	Okay. Okay. Everybody breathe. Through the nose. Not the smog.	nara	happy	Everybody breathe
@@ -381,8 +381,8 @@ scene	2	data/scenes.js	ch2Boss	The Big Shake	Now all my grumbling comes out of t
 scene	2	data/scenes.js	ch2Boss	The Big Shake	Now all my grumbling comes out of those pipes as purple smog, and everything it touches gets stuck. And I LIKE stuck.	tnb	scared	I LIKE stuck
 scene	2	data/scenes.js	ch2Boss	The Big Shake	RUMBLE. A man in a long coat plugged my vents.	tnb	scared
 scene	2	data/scenes.js	ch2Boss	The Big Shake	RUMBLE. A man in a long coat plugged my vents.	nara	scared
-scene	2	data/scenes.js	ch2Boss	The Big Shake	When everything is stuck, nothing moves and nothing changes, and nobody ever has to say goodbye.	tom	sad	say goodbye
-scene	2	data/scenes.js	ch2Boss	The Big Shake	When everything is stuck, nothing moves and nothing changes, and nobody ever has to say goodbye.	tnb	sad	say goodbye
+scene	2	data/scenes.js	ch2Boss	The Big Shake	If everybody is stuck, nobody can leave. No moving trucks. No airports. No goodbyes.	tom	sad	No goodbyes
+scene	2	data/scenes.js	ch2Boss	The Big Shake	If everybody is stuck, nobody can leave. No moving trucks. No airports. No goodbyes.	tnb	sad	No goodbyes
 scene	2	data/scenes.js	ch2Boss	Tom	Everybody says goodbye. Then they come back. That's what planes are for.	tnb	loving	they come back
 scene	2	data/scenes.js	ch2Boss	Tom	Things have to move.	tnb	proud	have to move
 scene	2	data/scenes.js	ch2Boss	Tom	Things have to move.	nara	proud	have to move
@@ -442,8 +442,8 @@ scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	We ch
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	A talking fish! What did he say?	tom	happy	What did he say
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	He said "Glub." Then he gave Rose a gold coin.	tnb	happy	Glub.
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	Mud in the kitchen and a talking fish. Babe, something fishy is going on.	tom	happy	something fishy
-scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	The fish was the nicest part!	tnb	happy	nicest part
-scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	I want to take you home to Jefferson Park. But first I have to feed Bready Mercury. He's been alone for a week.	tnb	happy	alone for a week
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	I flew six hours for that pun?	tnb	happy	that pun
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	Let's go home to Jefferson Park. Bready Mercury has been alone all week.	tnb	happy	alone all week
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	He hasn't been alone. Come on, I'll show you.	tom	surprised	hasn't been alone
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Porch	TNB	So I stayed here with her. I was coming over anyway. I've been feeding Bready Mercury every day.	nara	happy	stayed here with her
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Porch	TNB	So I stayed here with her. I was coming over anyway. I've been feeding Bready Mercury every day.	tom	loving	every day
@@ -461,7 +461,7 @@ scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Porch	Tom	Paw.
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Starter	Tom	He's twice as big as when I left! What have you been doing with him?	tnb	proud	twice as big
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Starter	TNB	I sing to him while I stir. He's Bready Mercury. He needs his music.	tom	happy	I sing to him
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Starter	TNB	"Another One Bites the Crust."	tom	happy	Crust
-scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Starter	Tom	"Don't Stop Me Dough!"	tnb	surprised	Dough
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Starter	Tom	"Bohemian Rye-psody!"	tnb	surprised	Rye-psody
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Starter	TNB	Babe. That's so good. I'm singing that one tomorrow.	tom	proud	That's so good
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Starter	Tom	That's the same purple as the sky! An hour ago it was way up on the hill. Now it's on my lawn!	nara	scared	
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Starter	Tom	That's the same purple as the sky! An hour ago it was way up on the hill. Now it's on my lawn!	tnb	surprised	same purple as the sky
@@ -506,7 +506,7 @@ scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	Ther
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	The one at the pond has a bite out of it too. It's stuck solid. Rose tried, and then I tried.	tnb	surprised	a bite out of it
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	Can I try anyway?	tom	happy	try anyway
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	TNB	Okay. Wow. Your turn.	tom	unimpressed	Your turn
-scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	I already lost to the small one. ...Maybe it's easier in California.	tnb	happy	easier in California
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	I couldn't pull the one at the pond out either. ...Maybe it's easier in California.	tnb	happy	easier in California
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	It's not easier in California.	tnb	happy	not easier in California
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	It's a burnt-out flashbulb. My mother found one exactly like it next to the dragonfly.	nara	proud	flashbulb
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Lemon	Tom	It's a burnt-out flashbulb. My mother found one exactly like it next to the dragonfly.	tnb	scared	exactly like it

@@ -111,7 +111,7 @@ chapter	file	line	character	mood	text
 2	data/scenes.js	329	TNB	surprised	Babe. Look outside. Is the street... purple?
 2	data/scenes.js	339	Tom	scared	Mr. Washington! Is everything okay?
 2	data/scenes.js	345	Tom	angry	Excuse me, smog. That was UNCALLED for.
-2	data/scenes.js	350	TNB	happy	Babe. Remember movie night? You threw the whole popcorn bowl.
+2	data/scenes.js	350	TNB	happy	Scarier than movie night. Remember? You threw the whole popcorn bowl.
 2	data/scenes.js	357	TNB	loving	Okay. Okay. Everybody breathe. Through the nose. Not the smog.
 2	data/scenes.js	359	TNB	scared	The smog monsters are gone, but Mr. Washington is still in a daze. Look at him.
 2	data/scenes.js	377	TNB	surprised	Nara is right. That's not kitchen smoke. It's the same purple smog, and it's blowing down from the hills.
@@ -150,8 +150,8 @@ chapter	file	line	character	mood	text
 2	tools/voice-library/scripts/ch02-story-directions.json	16	TNB	happy	A talking fish! What did he say?
 2	tools/voice-library/scripts/ch02-story-directions.json	17	Tom	unimpressed	He said "Glub." Then he gave Rose a gold coin.
 2	tools/voice-library/scripts/ch02-story-directions.json	18	TNB	happy	Mud in the kitchen and a talking fish. Babe, something fishy is going on.
-2	tools/voice-library/scripts/ch02-story-directions.json	19	Tom	loving	The fish was the nicest part!
-2	tools/voice-library/scripts/ch02-story-directions.json	20	Tom	loving	I want to take you home to Jefferson Park. But first I have to feed Bready Mercury. He's been alone for a week.
+2	tools/voice-library/scripts/ch02-story-directions.json	19	Tom	unimpressed	I flew six hours for that pun?
+2	tools/voice-library/scripts/ch02-story-directions.json	20	Tom	loving	Let's go home to Jefferson Park. Bready Mercury has been alone all week.
 2	tools/voice-library/scripts/ch02-story-directions.json	21	TNB	happy	He hasn't been alone. Come on, I'll show you.
 2	tools/voice-library/scripts/ch02-story-directions.json	22	TNB	happy	So I stayed here with her. I was coming over anyway. I've been feeding Bready Mercury every day.
 2	tools/voice-library/scripts/ch02-story-directions.json	23	Tom	loving	Every day? Fifty grams of flour and fifty grams of water?
@@ -168,7 +168,7 @@ chapter	file	line	character	mood	text
 2	tools/voice-library/scripts/ch02-story-directions.json	34	TNB	proud	I sing to him while I stir. He's Bready Mercury. He needs his music.
 2	tools/voice-library/scripts/ch02-story-directions.json	35	Tom	happy	Which songs?
 2	tools/voice-library/scripts/ch02-story-directions.json	36	TNB	happy	"Another One Bites the Crust."
-2	tools/voice-library/scripts/ch02-story-directions.json	37	Tom	happy	"Don't Stop Me Dough!"
+2	tools/voice-library/scripts/ch02-story-directions.json	37	Tom	happy	"Bohemian Rye-psody!"
 2	tools/voice-library/scripts/ch02-story-directions.json	38	TNB	happy	Babe. That's so good. I'm singing that one tomorrow.
 2	tools/voice-library/scripts/ch02-story-directions.json	39	Tom	scared	That's the same purple as the sky! An hour ago it was way up on the hill. Now it's on my lawn!
 2	tools/voice-library/scripts/ch02-story-directions.json	40	Tom	scared	Mr. Washington is sitting out on his porch in that. Come on!
@@ -211,7 +211,7 @@ chapter	file	line	character	mood	text
 2	tools/voice-library/scripts/ch02-story-directions.json	78	Tom	unimpressed	The one at the pond has a bite out of it too. It's stuck solid. Rose tried, and then I tried.
 2	tools/voice-library/scripts/ch02-story-directions.json	79	TNB	happy	Can I try anyway?
 2	tools/voice-library/scripts/ch02-story-directions.json	80	TNB	surprised	Okay. Wow. Your turn.
-2	tools/voice-library/scripts/ch02-story-directions.json	81	Tom	unimpressed	I already lost to the small one. ...Maybe it's easier in California.
+2	tools/voice-library/scripts/ch02-story-directions.json	81	Tom	unimpressed	I couldn't pull the one at the pond out either. ...Maybe it's easier in California.
 2	tools/voice-library/scripts/ch02-story-directions.json	82	Tom	sad	It's not easier in California.
 2	tools/voice-library/scripts/ch02-story-directions.json	83	Tom	scared	It's a burnt-out flashbulb. My mother found one exactly like it next to the dragonfly.
 2	tools/voice-library/scripts/ch02-story-directions.json	84	TNB	scared	Who leaves the same bulb at a pond in New York and on a hill in Los Angeles?

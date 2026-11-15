@@ -627,9 +627,9 @@
 {
 "voice": "bigone",
 "speaker": "",
-"text": "When everything is stuck, nothing moves and nothing changes, and nobody ever has to say goodbye.",
+"text": "If everybody is stuck, nobody can leave. No moving trucks. No airports. No goodbyes.",
 "ctx": "v4 override",
-"script": "[heavy, slow] When everything is stuck, nothing moves and nothing changes, and nobody ever has to say goodbye."
+"script": "[heavy, slow] If everybody is stuck, nobody can leave. No moving trucks. No airports. No goodbyes."
 },
 {
 "voice": "bigone",

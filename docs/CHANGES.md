@@ -1,3 +1,19 @@
+## ch2fix1a (2026-11-14): chapter 2 feedback, part 1: six lines rewritten, TNB mellow, Tom with feeling, dazed voices, drawn-out RUMBLE
+- Lines rewritten (old clips purged, tools/clip-audit/purge-ch2fix1.json; the new lines show under No clip yet):
+  - r-20261114-160750-y9u1 "I don't get this line. Change it to something wittier": ch2Loft Tom "The fish was the nicest part!" is now "I flew six hours for that pun?" (answers TNB's fishy pun; mood unimpressed).
+  - r-20261114-160816-ppze "the starter is at home in Jefferson Park": "I want to take you home to Jefferson Park. But first I have to feed Bready Mercury..." is now "Let's go home to Jefferson Park. Bready Mercury has been alone all week."
+  - r-20261114-161546-dvvp "dough doesn't rhyme with now": "Don't Stop Me Dough!" is now "Bohemian Rye-psody!"
+  - r-20261114-161803-mgjd "doesn't flow well with the previous line": TNB "Babe. Remember movie night?..." is now "Scarier than movie night. Remember? You threw the whole popcorn bowl." (follows "It's a lot scarier in person").
+  - r-20261114-162336-mrck "lost at what, and what are they trying?": Tom "I already lost to the small one..." is now "I couldn't pull the one at the pond out either. ...Maybe it's easier in California."
+  - r-20261114-162526-jhu3 "very strange, abstract language": The Big Shake "When everything is stuck, nothing moves..." is now "If everybody is stuck, nobody can leave. No moving trucks. No airports. No goodbyes."
+- Voice direction (new file tools/voice-library/scripts/zzz-ch2fix1-directions.json, loads last so it wins; 119 lines, all marked Rewritten and New direction so the Voice Library lists them for a re-take):
+  - r-20261114-161131-z688 TNB "much more mellow and nonchalant": every TNB script now carries "mellow, laid-back, low-key" in every bracket (ACCENT in make-index.js, all chapters), his dialogue and battle voice stability is at least 0.6, and his 79 chapter 2 and loft scripts lost the effusive tags, capital-letter shouting and exclamation marks.
+  - r-20261114-162555-y2ct Tom "no emotion or emphasis": 14 chapter 2 Tom lines that still used the old generic scripts got real acting tags (the planes line, Things have to move, the starter feeding, Sit paw treat, and the rest).
+  - r-20261114-162452-hb2d The Big Shake "RUMBLE ... should be elongated and drawn out": his three Rumble lines are spoken "Rrrrummmmble..." with a long drawn-out tag.
+  - r-20261114-104623-ux5f dazed people "in a tonal voice": Mr. Washington, Miss Odette, Doña Carmen, Marisol and Larry's smog lines carry "dazed, dreamy, faraway sing-song monotone" in every bracket.
+  - r-20261114-161343-6knk Boomie "still pronouncing Tom like tomb": the baked clip was made before the name-capitals fix (e931). New script without capitals; the line is listed for a re-take.
+- Generators: reaction-apply 1 2, talk-apply, make-index. emotion-apply is still blocked by chapter 7 rows with no scene, so data/emotion-moods.js was edited by hand for the six lines (tsv rows match).
+
 ## ch6s4 (2026-11-14): chapter 6 stage 4: the lemon, the hat and the call home; all five old blocks open one by one and the chapter ends after the call
 
 Tom (11-14): "Continue the chapter 6 build at stage 4 (scenes 16 to 18)." Chairman fight and crock scene unchanged.

@@ -114,7 +114,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Tom | Scared | Mr. Washington! Is everything okay? |
 | TNB | Scared | He's been saying that for a while, babe. |
 | Tom | Angry | Excuse me, smog. That was UNCALLED for. |
-| TNB | Happy | Babe. Remember movie night? You threw the whole popcorn bowl. |
+| TNB | Happy | Scarier than movie night. Remember? You threw the whole popcorn bowl. |
 | Tom | Unimpressed | I was startled. Briefly. With dignity. |
 | TNB | Happy | It was a battle plan. You just didn't know it yet. |
 | TNB | Loving | Okay. Okay. Everybody breathe. Through the nose. Not the smog. |

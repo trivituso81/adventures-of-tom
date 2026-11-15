@@ -1,0 +1,839 @@
+{
+ "tag": "ch2fix1",
+ "chapter": 2,
+ "lines": [
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Well, well, well...",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[easy] Well, well, well..."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Look who flew three thousand miles to see me.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[smooth, amused] Look who flew three thousand miles to see me."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "How many SkyMiles is that now?",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[skeptical] How many SkyMiles is that now?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Babe! What are you saving them for?",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[amused annoyed] Babe. What are you saving them for?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "You said that at three hundred thousand.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[slightly skeptical] You said that at three hundred thousand."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Zero miles. Babe. That's the most romantic thing a Delta person can say.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[quietly touched] Zero miles. Babe. [dry] That's the most romantic thing a Delta person can say."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "My call time got pushed to Thursday. The lead actor lost a shoe. I already found it. So I'm all yours.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[easy, wry] My call time got pushed to Thursday. [deadpan, casual] The lead actor lost a shoe. I already found it. [warm, soft] So I'm all yours."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "The mud took Deedee's crisp? Is the mud okay?",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[genuinely concerned] The mud took Deedee's crisp? [sincere, softly concerned] Is the mud okay?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "A talking fish! What did he say?",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[quietly pleased] A talking fish. [quietly pleased, curious] What did he say?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Mud in the kitchen and a talking fish. Babe, something fishy is going on.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[tallying, nonchalant] Mud in the kitchen and a talking fish. [punchline] Babe, something fishy is going on."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "He hasn't been alone. Come on, I'll show you.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[knowing, teasing] He hasn't been alone. [inviting] Come on, I'll show you."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "It's been like that since this morning. I held my soda up to it. It's the exact same color.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[resigned, nonchalant] It's been like that since this morning. [investigating] I held my soda up to it. [pleasantly surprised] It's the exact same color."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I don't know what it is, babe. But it's pretty grape.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[nonchalant] I don't know what it is, babe. [punchline] But it's pretty grape."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Olivia dropped her off this morning. Family trip to the desert. No dogs at the hotel.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[easy, warm] Olivia dropped her off this morning. [easy, matter-of-fact] Family trip to the desert. [dry] No dogs at the hotel."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "She's been sitting on your porch since eight. I tried to take her to the loft. She refused.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[easy, amused] She's been sitting on your porch since eight. [dry, rueful] I tried to take her to the loft. [deadpan] She refused."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "So I stayed here with her. I was coming over anyway. I've been feeding Bready Mercury every day.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[casual] So I stayed here with her. [downplaying] I was coming over anyway. [quietly proud] I've been feeding Bready Mercury every day."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Fifty and fifty. I used your little scale.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[patient, reassuring] Fifty and fifty. [amused] I used your little scale."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "He got so big he was climbing out of the jar. So I baked a loaf with him.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[amused] He got so big he was climbing out of the jar. [nonchalant] So I baked a loaf with him."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I shaped it on my pottery wheel.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[nonchalant, proud] I shaped it on my pottery wheel."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I make bowls all day, babe. So I made you a bread bowl.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[matter-of-fact] I make bowls all day, babe. [punchline] So I made you a bread bowl."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I sing to him while I stir. He's Bready Mercury. He needs his music.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[nonchalant] I sing to him while I stir. [stating the obvious] He's Bready Mercury. [dead serious] He needs his music."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "\"Another One Bites the Crust.\"",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[deadpan] \"Another One Bites the... [punchline] crust.\""
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Babe. That's so good. I'm singing that one tomorrow.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[quietly impressed] Babe. [admiring] That's so good. [nonchalant] I'm singing that one tomorrow."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Babe. Look outside. Is the street... purple?",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[easy, puzzled] Babe. Look outside. [slow, uneasy] Is the street... purple?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "He always finishes that story. I've heard it nine times. It ends with gumbo.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[fond] He always finishes that story. [nonchalant] I've heard it nine times. [softly concerned] It ends with gumbo."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Babe. That cloud has a face. And it just talked to us.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[low-key concerned, hushed] Babe. That cloud has a face. [quiet quiet quiet disbelief] And it just talked to us."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "You did tell me. It's a lot scarier in person.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[admitting] You did tell me. [low-key concerned] It's a lot scarier in person."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Scarier than movie night. Remember? You threw the whole popcorn bowl.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[low-key, amused] Scarier than movie night. [dry, teasing] Remember? You threw the whole popcorn bowl."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "And it rained popcorn on the whole room. Let's do that to these clouds.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[amused, remembering] And it rained popcorn on the whole room. [scheming] Let's do that to these clouds."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "You don't need popcorn. You just need to be that scared.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[reassuring] You don't need popcorn. [coaching] You just need to be that scared."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Okay. Okay. Everybody breathe. Through the nose. Not the smog.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[calm, steadying] Okay. Okay. Everybody breathe. [dry, easy] Through the nose. Not the smog."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "The smog monsters are gone, but Mr. Washington is still in a daze. Look at him.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[low, softly concerned] The smog monsters are gone, but Mr. [quiet, uneasy] Washington is still in a daze. Look at him."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "If the smog did this to him, what about everybody on the boulevard?",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[softly concerned, realizing] If the smog did this to him, what about everybody on the boulevard?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Miss Odette, it's me! Can I get a bowl of gumbo?",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[quietly pleased, hopeful] Miss Odette, it's me. [charming] Can I get a bowl of gumbo?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Babe, this is bad. Every time I walk in here she yells \"Sit down, you're too skinny!\" before the door even closes.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[softly concerned] Babe, this is bad. [explaining] Every time I walk in here she yells [imitating her, bossy] \"Sit down, you're too skinny.\" [softly concerned] before the door even closes."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Babe, the pupusas are burning!",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[low-key concerned] Babe, the pupusas are burning."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "She smacks you with that towel if you even look at the griddle.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[whispering, awed] She smacks you with that towel if you even look at the griddle."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Nara is right. That's not kitchen smoke. It's the same purple smog, and it's blowing down from the hills.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[low, alert] Nara is right. [tense, wry] That's not kitchen smoke. It's the same purple smog, and it's blowing down from the hills."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Babe. Look north. It's all coming down off the hills.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[low, calm] Babe. Look north. [uneasy, hushed] It's all coming down off the hills."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "It's coming from the Observatory. The pipes on its side are pumping out smog like a smoke machine on a bad set.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[dry, grim] It's coming from the Observatory. [dry, flat] The pipes on its side are pumping out smog like a smoke machine on a bad set."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I take the Metro. You have nothing on me.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[smooth, smug] I take the Metro. [dry, unbothered] You have nothing on me."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Up, everybody. Wardrobe says nobody is cut from this scene.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[easy, calm] Up, everybody. [wry, warm] Wardrobe says nobody is cut from this scene."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "We do have snacks, though. I've got half a bag of gummy worms.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[helpful, nonchalant] We do have snacks, though. [offering] I've got half a bag of gummy worms."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Quick wardrobe adjustment, quick heal, and a quick kiss for the road. Ready, babe?",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[easy, flirty] Quick wardrobe adjustment, quick heal, and a quick kiss for the road. [teasing, soft] Ready, babe?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Babe, look at that tree. It's grey. The leaves, the trunk, even the dirt. It looks like an old black and white movie.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[uneasy] Babe, look at that tree. [quiet quiet quiet disbelief] It's grey. [listing, unsettled] The leaves, the trunk, even the dirt. [awed] It looks like an old black and white movie."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "On Long Island? Babe, that's three thousand miles away.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[low-key concerned] On Long Island? [nonchalant] Babe, that's three thousand miles away."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "It's not glass, and it's not glaze. I work with this kind of stuff all day and I have no idea what it is.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[investigating] It's not glass, and it's not glaze. [stumped] I work with this kind of stuff all day and I have no idea what it is."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "There's a little round hole in the side, like somebody took a bite out of it.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[investigating] There's a little round hole in the side, [uneasy] like somebody took a bite out of it."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Can I try anyway?",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[undeterred, nonchalant] Can I try anyway?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Okay. Wow. Your turn.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[quietly impressed] Okay. Wow. [conceding] Your turn."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Who leaves the same bulb at a pond in New York and on a hill in Los Angeles?",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[puzzling it out] Who leaves the same bulb at a pond in New York... [uneasy] and on a hill in Los Angeles?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Me neither. And I like almost everything.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[agreeing, shaken] Me neither. [punchline, deadpan] And I like almost everything."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "The ground is humming. That's never a good sign. I've seen this movie forty-seven times.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[low, uneasy] The ground is humming. That's never a good sign. [dry, ominous] I've seen this movie forty-seven times."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Babe. I take naps on that hill.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[low-key concerned, hushed] Babe. [confessing] I take naps on that hill."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I'm so sorry, sir!",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[low-key concerned, apologizing] I'm so sorry, sir."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "He'd know. He has four hundred and twelve thousand miles.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[dry, vouching for him] He'd know. [dry, fond] He has four hundred and twelve thousand miles."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Well, well, well... looks like we're in a bit of a shaky situation.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[playful, smooth] Well, well, well... [dry, punny] looks like we're in a bit of a shaky situation."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Cut. Reset. Back to one, everybody.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[calm] Cut. Reset. [calm, easy] Back to one, everybody."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Babe, heal right after the Aftershock. When it clogs up, hit it with water or sparkle. Or one of our Tombos.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[easy, coaching] Babe, heal right after the Aftershock. [calm, practical] When it clogs up, hit it with water or sparkle. [wry, upbeat] Or one of our Tombos."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I'm sorry I kept falling asleep on you. I didn't know you were a person.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[apologizing, sincere] I'm sorry I kept falling asleep on you. [sheepish] I didn't know you were a person."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "The one the fish gave her?",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[checking] The one the fish gave her?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Nara thinks it's a very small frisbee.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[amused, observing] Nara thinks it's a very small frisbee."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Look. The sky is blue again. Los Angeles blue. Slightly brown, but blue.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[relieved, easy] Look. The sky is blue again. Los Angeles blue. [deadpan, fond] Slightly brown, but blue."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Two flashes, two orange blocks and two gold coins. Babe, I don't love that. Let's go check on Mr. Washington.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[tallying, slowly] Two flashes, two orange blocks and two gold coins. [understating, uneasy] Babe, I don't love that. [deciding] Let's go check on Mr. Washington."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "That's ten times now. It gets better every time.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[fond, amused] That's ten times now. [sincere] It gets better every time."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Yes, ma'am!",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[quietly pleased, obedient] yes, ma'am."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Babe. Gumbo. Go get the bread bowl!",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[quietly pleased, realizing] Babe. Gumbo. [calm] Go get the bread bowl."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "That's not a hole. That's where the gumbo goes in.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[reassuring] That's not a hole. [punchline] That's where the gumbo goes in."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "With two thousand four hundred and seventy-five miles in between.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[tender, wistful] With two thousand four hundred and seventy-five miles in between."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Hey, you. Did you eat? I made a bowl. I also made a bowl. Pottery joke.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[warm, easy] Hey, you. Did you eat? I made a bowl. [sly, amused] I also made a bowl. [dry, pleased] Pottery joke."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Welcome to the loft. Kiln by one window, wheel by the other, garment bags everywhere else. Spring Street, baby.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[relaxed, proud] Welcome to the loft. Kiln by one window, wheel by the other, garment bags everywhere else. [warm, fond] Spring Street, baby."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Take my jacket. It gets cold up in Griffith Park at night, and a cold Tom is a no-go.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[tender, easy] Take my jacket. It gets cold up in Griffith Park at night, [soft, teasing] and a cold Tom is a no-go."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Took the longboard down Spring Street this morning. Smooth. There's a crack by Fourth Street I've named.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[easy, content] Took the longboard down Spring Street this morning. Smooth. [dry, amused] There's a crack by Fourth Street I've named."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Threw six mugs this morning. The glaze came out of the kiln like sea glass. Come look before you claim one.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[pleased, quietly pleased] Threw six mugs this morning. The glaze came out of the kiln like sea glass. [warm, inviting] Come look before you claim one."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Go on, I'll be right here. I'm pot-sitive about it.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[easy, smooth] Go on, I'll be right here. [smug, amused] I'm pot-sitive about it."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Horror movie tonight. You pick. You always pick the scary one and then hold my arm the whole time.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[amused, fond] Horror movie tonight. You pick. [dry, teasing] You always pick the scary one and then hold my arm the whole time."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Watered your plants on 2nd Ave. The fern asked about you. I said you're fine.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[easy, light] Watered your plants on 2nd Ave. [dry, amused] The fern asked about you. [soft, reassuring] I said you're fine."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Rode the train to the clay studio. Forty minutes. Best forty minutes of my day. Met a man who knows every line.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[content, easy] Rode the train to the clay studio. Forty minutes. [warm, glowing] Best forty minutes of my day. [quietly pleased] Met a man who knows every line."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "The slime? It just needs someone to mold it. I have more of these. You know I do.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[warm, low] The slime? It just needs someone to mold it. [sly, amused] I have more of these. [smooth, fond] You know I do."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Long day on set. Eleven costume changes. One actor lost a shoe. I found it. I always find it.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[tired, wry] Long day on set. Eleven costume changes. One actor lost a shoe. [quietly proud] I found it. [smooth, easy] I always find it."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Be careful out there. I like you un-cracked.",
+   "ctx": "chapter 2 (ch2fix1: TNB mellow)",
+   "script": "[tender, soft] Be careful out there. [warm, teasing] I like you un-cracked."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I flew six hours for that pun?",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[dry, mock-exhausted] I flew SIX hours... [deadpan] for that pun?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Let's go home to Jefferson Park. Bready Mercury has been alone all week.",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[warm, eager] Let's go home to Jefferson Park. [fretting, doting] Bready Mercury has been alone ALL week."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "\"Bohemian Rye-psody!\"",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[delighted, singing it out] \"Bohemian... [proud of the pun] RYE-psody!\""
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I couldn't pull the one at the pond out either. ...Maybe it's easier in California.",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[admitting, sheepish] I couldn't pull the one at the pond out either. [hopeful, reasoning] ...Maybe it's easier in California."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "The Big Shake",
+   "text": "If everybody is stuck, nobody can leave. No moving trucks. No airports. No goodbyes.",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[deep, slow, stubborn] If everybody is stuck, nobody can leave. [listing, grumbling] No moving trucks. No airports. [lonely, low] No goodbyes."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "The Big Shake",
+   "text": "RUMBLE. There was a big flash up here this morning, and it woke me up.",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[deep, slow, long drawn-out rumble] Rrrrrummmmmmmble... [groggy, grumpy] There was a big flash up here this morning, and it woke me up."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "The Big Shake",
+   "text": "Rumble. You asked how I was doing. Nobody has asked in a million years.",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[deep, soft, long drawn-out rumble] Rrrummmmble... [stunned, small] You asked how I was doing. [wondering] Nobody has asked in a million years."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "The Big Shake",
+   "text": "Rumble. Fine. The pipes are clear. I'm going back under the hill to think about my choices.",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[deep, sulky, long drawn-out rumble] Rrrummmmble... [sulky] Fine. The pipes are clear. [muttering, sheepish] I'm going back under the hill to think about my choices."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Everybody says goodbye. Then they come back. That's what planes are for.",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[firm, heartfelt, leaning in] Everybody says goodbye. [warm, with feeling] Then they COME BACK. [proud, a little smile] That's what planes are FOR."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Things have to move.",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[gentle but firm, emphatic] Things HAVE to move."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "TNB said he'd be home. Spring Street loft.",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[eager, a little giddy] TNB said he'd be home. [brisk, excited] Spring Street loft."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Sit, paw, treat. She knows the whole routine. So polite!",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[proud, counting it off] Sit, paw, treat. [impressed] She knows the WHOLE routine. [gushing] So polite!"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Hello, Bready Mercury. Did you miss me? You missed me.",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[baby talk, cooing] Hello, Bready Mercury. [teasing, sing-song] Did you miss me? [delighted, certain] You MISSED me."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Fifty grams of flour, fifty grams of water. Stir. Look at those bubbles.",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[precise, focused] Fifty grams of flour, fifty grams of water. [concentrating] Stir. [thrilled, proud parent] Look at those BUBBLES."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Mr. Washington! Is everything okay?",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[calling out, worried] Mr. Washington! [anxious, gentle] Is everything okay?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Excuse me, smog. That was UNCALLED for.",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[coughing, offended] Excuse me, smog. [scandalized, outraged] That was UNCALLED for."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Then that's where we're going. Nara, stay close.",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[determined, steely] Then that's where we're going. [protective, tender] Nara, stay close."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Ready. Kiss accepted. The Observatory is up at the top left. Follow the purple.",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[smitten, dry] Ready. Kiss accepted. [snapping into leader mode] The Observatory is up at the top left. [determined] Follow the purple."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Keep the old windows, though.",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[dry, conspiratorial, smiling] Keep the old windows, though."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I contest that ticket, and I'm granting my own appeal. Let's keep going.",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[pompous, mock-official] I contest that ticket, [smug, triumphant] and I'm granting my own appeal. [brisk] Let's keep going."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Okay. One down. Let's check on Doña Carmen next door.",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[relieved, exhaling] Okay. One down. [determined] Let's check on Doña Carmen next door."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Okay. One down. Let's check on Miss Odette next door.",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[relieved, exhaling] Okay. One down. [determined] Let's check on Miss Odette next door."
+  },
+  {
+   "voice": "boomie2",
+   "speaker": "Boomie",
+   "text": "TOM! Get over here. Hug. Mmm-hmm. There it is.",
+   "ctx": "chapter 2 (ch2fix1)",
+   "script": "[big, booming, overjoyed to see him] Tom! [warm, insisting] Get over here. [melting, satisfied] Hug. Mmm-hmm. There it is."
+  },
+  {
+   "voice": "washington",
+   "speaker": "Mr. Washington",
+   "text": "Tom. Back in 1979, this whole block...",
+   "ctx": "chapter 2 (ch2fix1: dazed)",
+   "script": "[dazed, dreamy, faraway sing-song monotone] Tom. [dazed, dreamy, faraway sing-song monotone, drifting off] Back in 1979, this whole block..."
+  },
+  {
+   "voice": "washington",
+   "speaker": "Mr. Washington",
+   "text": "Back in 1979, this whole block...",
+   "ctx": "chapter 2 (ch2fix1: dazed)",
+   "script": "[dazed, dreamy, faraway sing-song monotone, drifting off] Back in 1979, this whole block..."
+  },
+  {
+   "voice": "washington",
+   "speaker": "Mr. Washington",
+   "text": "Such a nice afternoon. It should always be this afternoon.",
+   "ctx": "chapter 2 (ch2fix1: dazed)",
+   "script": "[dazed, dreamy, faraway sing-song monotone] Such a nice afternoon. [dazed, dreamy, faraway sing-song monotone] It should always be this afternoon."
+  },
+  {
+   "voice": "washington",
+   "speaker": "Mr. Washington",
+   "text": "Such a nice afternoon. It should always be this afternoon. Nobody needs to get any older.",
+   "ctx": "chapter 2 (ch2fix1: dazed)",
+   "script": "[dazed, dreamy, faraway sing-song monotone] Such a nice afternoon. It should always be this afternoon. [dazed, dreamy, faraway sing-song monotone] Nobody needs to get any older."
+  },
+  {
+   "voice": "washington",
+   "speaker": "Mr. Washington",
+   "text": "Nobody needs to go anywhere. Nobody needs to get any older.",
+   "ctx": "chapter 2 (ch2fix1: dazed)",
+   "script": "[dazed, dreamy, faraway sing-song monotone] Nobody needs to go anywhere. [dazed, dreamy, faraway sing-song monotone] Nobody needs to get any older."
+  },
+  {
+   "voice": "odette",
+   "speaker": "Miss Odette",
+   "text": "Stirring. Stirring. The gumbo never has to be done, baby. Isn’t that nice?",
+   "ctx": "chapter 2 (ch2fix1: dazed)",
+   "script": "[light Louisiana Creole accent, dazed, dreamy, faraway sing-song monotone] Stirring. ...Stirring. [light Louisiana Creole accent, dazed, dreamy, faraway sing-song monotone] The gumbo never has to be done, baby. Isn't that nice?"
+  },
+  {
+   "voice": "odette",
+   "speaker": "Miss Odette",
+   "text": "Stirring. Stirring.",
+   "ctx": "chapter 2 (ch2fix1: dazed)",
+   "script": "[light Louisiana Creole accent, dazed, dreamy, faraway sing-song monotone] Stirring. ...Stirring."
+  },
+  {
+   "voice": "odette",
+   "speaker": "Miss Odette",
+   "text": "The gumbo never has to be done, baby. Isn't that nice? Nothing ever has to be done.",
+   "ctx": "chapter 2 (ch2fix1: dazed)",
+   "script": "[light Louisiana Creole accent, dazed, dreamy, faraway sing-song monotone] The gumbo never has to be done, baby. Isn't that nice? [light Louisiana Creole accent, dazed, dreamy, faraway sing-song monotone] Nothing ever has to be done."
+  },
+  {
+   "voice": "carmen",
+   "speaker": "Doña Carmen",
+   "text": "The pupusas are fine. Everything is fine. It's always this afternoon. Why did I ever flip them?",
+   "ctx": "chapter 2 (ch2fix1: dazed)",
+   "script": "[light Salvadoran accent, dazed, dreamy, faraway sing-song monotone] The pupusas are fine. Everything is fine. [light Salvadoran accent, dazed, dreamy, faraway sing-song monotone] It's always this afternoon. Why did I ever flip them?"
+  },
+  {
+   "voice": "carmen",
+   "speaker": "Doña Carmen",
+   "text": "The pupusas are fine. Everything is fine.",
+   "ctx": "chapter 2 (ch2fix1: dazed)",
+   "script": "[light Salvadoran accent, dazed, dreamy, faraway sing-song monotone] The pupusas are fine. Everything is fine."
+  },
+  {
+   "voice": "carmen",
+   "speaker": "Doña Carmen",
+   "text": "It's always this afternoon. Why'd I ever flip them?",
+   "ctx": "chapter 2 (ch2fix1: dazed)",
+   "script": "[light Salvadoran accent, dazed, dreamy, faraway sing-song monotone] It's always this afternoon. Why'd I ever flip them?"
+  },
+  {
+   "voice": "la_woman",
+   "speaker": "Marisol",
+   "text": "I'm walking my dog. I've always been walking my dog.",
+   "ctx": "chapter 2 (ch2fix1: dazed)",
+   "script": "[dazed, dreamy, faraway sing-song monotone] I'm walking my dog. I've always been walking my dog."
+  },
+  {
+   "voice": "la_woman",
+   "speaker": "Marisol",
+   "text": "I'll always be walking my dog. Isn't that nice?",
+   "ctx": "chapter 2 (ch2fix1: dazed)",
+   "script": "[dazed, dreamy, faraway sing-song monotone] I'll always be walking my dog. Isn't that nice?"
+  },
+  {
+   "voice": "gus",
+   "speaker": "Larry",
+   "text": "I'm blowing leaves. The same leaf. Over and over.",
+   "ctx": "chapter 2 (ch2fix1: dazed)",
+   "script": "[dazed, dreamy, faraway sing-song monotone] I'm blowing leaves. The same leaf. Over and over."
+  },
+  {
+   "voice": "gus",
+   "speaker": "Larry",
+   "text": "It never lands. It never has to. Very peaceful.",
+   "ctx": "chapter 2 (ch2fix1: dazed)",
+   "script": "[dazed, dreamy, faraway sing-song monotone] It never lands. It never has to. Very peaceful."
+  }
+ ]
+}
