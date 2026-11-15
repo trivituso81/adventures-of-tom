@@ -26082,6 +26082,408 @@
    ],
    "title": "Olivia thinking and listening (one full-body pose; the fifth talking pose, for lines where someone thinks about what another person says)",
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of Olivia from \"The Adventures of Tom\", a family role-playing game. This is exactly how Olivia looks.\n2) The approved talking sheet of Olivia, for the size of the head against the body and the painted finish.\n\nPAINT THIS ONE POSE\nOlivia, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Thinking hard about what someone else is saying: one hand on the chin, the other arm folded across the body supporting that elbow, the head tilted a little, eyes looking up and to the side, the mouth closed in a thoughtful little line. Curious and attentive, not sad.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments. The pose matches the attached talking sheet in size and finish, so it can sit next to those four poses.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-yard-grey",
+   "tab": "Areas",
+   "title": "Chapter 8: a front lawn on 2nd Avenue with a hose and three porch steps, all in grey inside a circle (grey patch on the built Jefferson Park plate)",
+   "ar": "4:3",
+   "refs": [
+    "art/jpark.webp",
+    "art/grands.webp"
+   ],
+   "group": "Chapter 8",
+   "prompt": "Create the actual environment painting for Jefferson Park, the neighborhood with 2nd Avenue from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram or example sheet.\n\nATTACHED IMAGES (in this order)\n1) the current painting of this place: use it for LAYOUT AND DETAILS. Keep every sign lettering exactly as in attachment 1 (DOWNTOWN, CREOLE, PUPUSAS, SKATE, JUICE, CAR BARN, NOVAK, ALVAREZ, RIVITUSO, WESTON, OLD OAK PARK), the road, every house, tree, lamp and mailbox exactly where they are. Keep the same camera, the same canvas size and aspect, and every path, building, prop, exit and open space in the same place and the same size.\n2) the finished painting of Deedee and Boppy's house, the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nTHE ONE CHANGE\nOn the front lawn in the lower left of the picture, the one with the wooden bench and the flower beds beside the RIVITUSO house, one circle about as wide as a minivan and a half has lost its color. Inside the circle the lawn is bare grass with a garden hose coiled on it and, at the edge nearest the street, a small set of three wooden porch steps with a simple railing, all of it painted new. The color is gone from this one patch: every surface inside it is painted in only grey and pale silver-grey, with no green, no brown and no color at all, but still in the same brushwork and the same light and shadow. The grey patch has one clean, sharp, circular edge all the way round, as if it was cut with scissors. Outside the circle everything keeps its normal rich color, and the color even looks a little stronger next to the grey. The bench, the flower beds and the RIVITUSO house stay outside the circle in full color. Leave the middle of the circle completely clear, at least the size of a minivan, because the game places a large object there.\nEverything else stays exactly as in attachment 1, painted with the same care. No people, no animals, no text added anywhere.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-potluck-day",
+   "tab": "Areas",
+   "title": "Chapter 8: 2nd Avenue at six o'clock with long tables down the middle of the road, steaming dishes and folding chairs (potluck on the built plate)",
+   "ar": "4:3",
+   "refs": [
+    "art/jpark.webp",
+    "art/grands.webp"
+   ],
+   "group": "Chapter 8",
+   "prompt": "Create the actual environment painting for Jefferson Park, the neighborhood with 2nd Avenue from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram or example sheet.\n\nATTACHED IMAGES (in this order)\n1) the current painting of this place: use it for LAYOUT AND DETAILS. Keep every sign lettering exactly as in attachment 1, every house, tree, lamp, mailbox and the arches exactly where they are. Only the road in the foreground changes. Keep the same camera, the same canvas size and aspect, and every path, building, prop, exit and open space in the same place and the same size.\n2) the finished painting of Deedee and Boppy's house, the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nTHE ONE CHANGE\nThe road in the lower middle of the picture, between the OLD OAK PARK arch and the houses, has been closed for a neighborhood potluck. Three long tables with white paper cloths run down the middle of the road end to end, crowded with steaming dishes of every kind: a big pot of gumbo at the front, pupusas, a lasagna, salads, pies, bowls and many round loaves of bread in baskets, with wisps of steam rising. Folding chairs stand along both sides of the tables and a few are pushed back as if people have just stood up. Strings of small lamps are lit over the tables. The light is the warm gold of six o'clock. No people.\nEverything else stays exactly as in attachment 1, painted with the same care. No people, no animals, no text added anywhere.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-potluck-night",
+   "tab": "Areas",
+   "title": "Chapter 8: 2nd Avenue at night after the potluck, tables bare, folding chairs half stacked, strings of lamps lit (night version of the potluck)",
+   "ar": "4:3",
+   "refs": [
+    "art/jpark.webp",
+    "art/grands.webp"
+   ],
+   "group": "Chapter 8",
+   "prompt": "Create the actual environment painting for Jefferson Park, the neighborhood with 2nd Avenue from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram or example sheet.\n\nATTACHED IMAGES (in this order)\n1) the current painting of this place: use it for LAYOUT AND DETAILS. Keep every sign lettering exactly as in attachment 1, every house, tree, lamp, mailbox and the arches exactly where they are. Only the lighting and the road in the foreground change. Keep the same camera, the same canvas size and aspect, and every path, building, prop, exit and open space in the same place and the same size.\n2) the finished painting of Deedee and Boppy's house, the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nTHE ONE CHANGE\nIt is night and the potluck is over. The road in the lower middle of the picture still has three long tables with white paper cloths down the middle, now nearly empty: a few bowls, crumpled napkins, one half-eaten pie. Folding chairs are half stacked in tall leaning piles at the edges and a few are still unfolded. Strings of small lamps over the tables glow warm gold against a deep blue night sky with a few stars, and the porch lights of the houses are lit. The whole picture is a dark blue night with warm pools of lamplight. No people.\nEverything else stays exactly as in attachment 1, painted with the same care. No people, no animals, no text added anywhere.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-orange-block",
+   "tab": "Props",
+   "title": "Chapter 8: the orange block, minivan-sized, a whole rosebush inside with a paper notice taped to one stem, a round hole on the street side (one object)",
+   "ar": "1:1",
+   "refs": [
+    "art/grands.webp",
+    "art/raw/props/ch7-orange-block-v1.png"
+   ],
+   "group": "Chapter 8",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGES\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n2) The finished painting of an orange block from the same game. Paint the same hard, clear, glowing orange material, the same painted finish and the same orange glass, but this block has a round coin-sized hole instead of a dent. Only the size and what is inside change.\n\nPAINT THIS ONE OBJECT\nA hard, clear orange block, as big as a minivan, long and wide and clearly bigger than the golf-cart-sized block of the attached picture, glossy-clear but painted, like a stone of orange glass, with the same warm orange glow as a piece of amber candy. Inside it, frozen and not moving, every detail visible: a whole red rosebush, full and round and a little overgrown, covered in red roses and green leaves, with thorny stems. A single sheet of white paper is taped to one stem near the front, hanging a little crooked, with small lines of printed text on it too small to read. One round hole, about the size of a coin slot big enough to push a gold coin into, is in the side facing the viewer, about halfway up, a clean circular hole, deeper than a dent. The block stands alone with a flat bottom.\n- Exactly ONE object (or the one group described), alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-coin",
+   "tab": "Props",
+   "title": "Chapter 8 close-up: the gold coin with a rosebush stamp (one object, large)",
+   "ar": "1:1",
+   "refs": [
+    "art/grands.webp",
+    "art/raw/props/ch7-coin-v1.png"
+   ],
+   "group": "Chapter 8",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGES\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n2) The finished painting of a gold coin from the same game. Paint the same coin: the same gold, the same raised rim, the same soft highlights, the same size in the picture. Only the stamp changes.\n\nPAINT THIS ONE OBJECT\nA small gold coin, seen face on and filling most of the picture. It has a rosebush stamped in raised relief in the middle: a small round bush with a few five-petal roses and leaves on thin thorny stems, drawn clearly, and a rim around the edge. The gold is warm and shiny, painted with soft highlights and a deeper gold in the shadows. It lies flat, no stand, no shadow on a surface.\n- Exactly ONE object (or the one group described), alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-notice",
+   "tab": "Props",
+   "title": "Chapter 8: Bernadette's paper notice lying on the grass, with its printed words (one object)",
+   "ar": "1:1",
+   "refs": [
+    "art/grands.webp"
+   ],
+   "group": "Chapter 8",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE OBJECT\nOne sheet of white printer paper, a little creased, with a strip of clear tape still stuck to the top edge, lying flat on its back as if it just drifted down, seen from above at a slight angle. Printed on it in neat black capitals, spelled exactly: NOTICE at the top in large letters, below it TRIM TO REGULATION HEIGHT. in medium letters, and at the bottom, in small letters, THE WATCH. Nothing else is printed on it and there is no handwriting. No grass is painted: only the paper and a soft shadow under it.\n- Exactly ONE object (or the one group described), alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-rosebush",
+   "tab": "Props",
+   "title": "Chapter 8: the rosebush in full color, red roses and green leaves (one object, for after the block opens)",
+   "ar": "1:1",
+   "refs": [
+    "art/grands.webp"
+   ],
+   "group": "Chapter 8",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE OBJECT\nA whole red rosebush, full and round and a little overgrown, about as wide as a minivan, covered in red roses in every stage from buds to open flowers, with deep green leaves and thorny stems, standing on a small flat patch of green grass. Painted in rich, bright, saturated color.\n- Exactly ONE object (or the one group described), alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-dough-counter",
+   "tab": "Props",
+   "title": "Chapter 8: a kitchen counter crowded with bowls of rising dough under dish towels, two stockpots with dough rising over the rim, and a salad spinner (one group)",
+   "ar": "3:2",
+   "refs": [
+    "art/grands.webp",
+    "art/raw/props/ch2-loaf-whole-v1.png"
+   ],
+   "group": "Chapter 8",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one wide image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE OBJECT\nOne long kitchen counter seen from the front at a slight angle, crowded edge to edge with rising bread dough: eleven mixing bowls of different sizes and colors (glass, ceramic, steel) each full of pale round dough humped up over the rim, some under checked dish towels, two tall steel stockpots with dough pushing up past the rim, and one clear plastic salad spinner with dough pressed up against its lid. A bag of flour with a scoop in it stands at one end. Everything is painted warm and cozy. The counter is cut out of the picture: just the top of the counter and what sits on it, with a flat bottom edge.\n- Exactly ONE object (or the one group described), alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-spinner",
+   "tab": "Props",
+   "title": "Chapter 8: a salad spinner full of pale bread dough pressed up against its clear lid (one object)",
+   "ar": "1:1",
+   "refs": [
+    "art/grands.webp"
+   ],
+   "group": "Chapter 8",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE OBJECT\nA salad spinner: a round white plastic bowl with a clear dome lid and a small crank knob on top, packed with pale bread dough that presses up against the clear lid so you can see it, a little flour dusted on the outside of the bowl.\n- Exactly ONE object (or the one group described), alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-loaves",
+   "tab": "Props",
+   "title": "Chapter 8: a stack of forty golden-brown round loaves of bread in neat rows along a wall (one object)",
+   "ar": "3:2",
+   "refs": [
+    "art/grands.webp",
+    "art/raw/props/ch2-loaf-whole-v1.png"
+   ],
+   "group": "Chapter 8",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one wide image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGES\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n2) The finished painting of a round sourdough loaf from the same game. Paint the loaves in the same way: the same golden crust, the same scored top, the same painted finish.\n\nPAINT THIS ONE OBJECT\nForty round loaves of sourdough bread, golden brown with a crisp scored cross on top and a dusting of flour, stacked in four neat rows of ten on a long low wooden shelf, steam rising from the nearest ones, seen from the front at a slight angle. Each loaf the same size, painted with warm light on the crusts. The shelf is cut out of the picture with a flat bottom edge.\n- Exactly ONE object (or the one group described), alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-barn-door",
+   "tab": "Props",
+   "title": "Chapter 8: the old Car Barn door, shut with a heavy rusty chain, and the same door with the chain hanging loose and one leaf open a hand's width (2 objects, side by side)",
+   "ar": "3:2",
+   "refs": [
+    "art/carbarn.webp",
+    "art/grands.webp"
+   ],
+   "group": "Chapter 8",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one wide image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE OBJECT\nTWO objects side by side, the same on both sides apart from the chain. Left: a tall pair of old double wooden doors in a brick archway with dark green painted wood, tall iron strap hinges and a small round window high up in each leaf, shut tight with a heavy rusty chain wrapped twice across both handles and closed with one big old padlock. Right: exactly the same doors, the padlock open and hanging from one link, the chain slid loose and hanging down in loops, and one leaf of the doors open a hand's width showing a dark gap with a faint cold blue glow inside. The wood is weathered, the brick is soot-dark, and there is a little frost on the lower boards.\n- Exactly TWO objects side by side, each large, alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-blanket-states",
+   "tab": "Props",
+   "title": "Chapter 8: the Damp Blanket draped over a workbench with a small blue flame trapped under it, steaming, and the same blanket as an ordinary blanket on a hook (2 objects, side by side)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/enemies/enemy-wetblanket-v1.png",
+    "art/carbarn.webp",
+    "art/grands.webp"
+   ],
+   "group": "Chapter 8",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one wide image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGES\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n2) The approved painting of the Wet Blanket monster, a blue-grey wet cloth. Paint the cloth in the same blue-grey, the same painted folds and the same finish. The blanket here has no face.\n\nPAINT THIS ONE OBJECT\nTWO objects side by side. Left: a small wooden workbench with a big wet grey-blue moving blanket draped over it, the soft folds hanging down to the floor on every side, and under the cloth a small blue flame glowing through the fabric from the middle of the bench top, steam curling up from the damp cloth. Right: the same blanket as an ordinary blanket, now dry and plain, hanging folded over a single iron wall hook, with no flame, no face and no steam.\n- Exactly TWO objects side by side, each large, alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-draft-states",
+   "tab": "Props",
+   "title": "Chapter 8: a small blue flame leaning hard sideways on a windowsill, and an old window banging shut (2 objects, side by side)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/enemies/enemy-thedraft-v1.png",
+    "art/carbarn.webp",
+    "art/grands.webp"
+   ],
+   "group": "Chapter 8",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one wide image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGES\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n2) The approved painting of the Draft monster, a swirl of pale blue wind. Paint the wind lines in the same pale blue and the same painted finish. Nothing here has a face.\n\nPAINT THIS ONE OBJECT\nTWO objects side by side. Left: an old stone windowsill in a brick wall with one small blue pilot flame standing on it, bent almost flat sideways by an unseen wind, its tip streaming to the left, a few pale swirling wind lines around it. Right: a tall old iron-framed window of small glass panes, swung shut with a bang, the panes rattling, a few dust motes and small curved motion lines at its edge to show it just slammed.\n- Exactly TWO objects side by side, each large, alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-lunchbox-states",
+   "tab": "Props",
+   "title": "Chapter 8: a dented red metal lunchbox with a small blue flame glowing inside and its lid snapping, and the same lunchbox ordinary with its lid hanging open (2 objects, side by side)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/enemies/enemy-pickyeater-v1.png",
+    "art/grands.webp"
+   ],
+   "group": "Chapter 8",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one wide image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGES\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n2) The approved painting of the Picky Eater monster, a red metal lunchbox with arms and legs. Paint the same red lunchbox: the same red, the same silver handle and latch and the same painted finish. The lunchbox here has no face, no arms and no legs.\n\nPAINT THIS ONE OBJECT\nTWO objects side by side. Left: an old dented red metal lunchbox with a silver handle and a silver latch, sitting on a bench, its lid open a crack and snapping, with a small blue flame glowing inside so a blue light spills out of the crack. Right: the same lunchbox, ordinary and empty, the lid hanging wide open, a plain empty inside, a crumb or two, no flame and no face.\n- Exactly TWO objects side by side, each large, alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-call-grace",
+   "tab": "Props",
+   "title": "Chapter 8: a video call frame of Grace in front of a wall-sized chart with a color key, with LOS ANGELES gone over in pen (one portrait screen picture)",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/grace-hero-v1.png",
+    "art/raw/characters/grace-walking-sheet-v2.png",
+    "art/raw/props/ch7-chart-unrolled-v1.png",
+    "art/raw/props/ch6-videocall-frame-v1.png"
+   ],
+   "group": "Chapter 8",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PICTURE. Return exactly one tall portrait image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The finished painting of Grace, a nine year old girl. 2) Her walking sheet. 3) Her chart, drawn flat. 4) The painted video call frame from the same game.\n\nPAINT THIS ONE PICTURE\nWhat a phone screen shows during a video call, filling the whole picture edge to edge, with no phone around it: Grace, from the waist up, close to the camera and facing it, in front of a bedroom wall completely covered by her chart. The chart is made of many sheets of paper taped edge to edge in rows of boxes joined by lines, with a COLOR KEY box in the top right corner with small colored squares, and on one box in the middle, the words LOS ANGELES written and gone over in thick black pen, spelled exactly LOS ANGELES. She holds a pencil behind her ear and a black pen in one hand, up beside her face, with a very pleased, triumphant, I-told-you-so grin. A warm bedroom lamp lights her from the left. No other words anywhere except small illegible scribbles on the chart.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Copy Grace from the attached pictures as exactly as possible: the same face, age, hair and clothes, the same painting style.\n- The picture looks like a phone camera view, a little close and slightly from below."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-call-rose",
+   "tab": "Props",
+   "title": "Chapter 8: a video call frame of Rose jumping up into the picture from below, mouth open yelling, hair flying (one portrait screen picture)",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/rose-hero-v1.png",
+    "art/raw/characters/rose-walking-sheet-v2.png",
+    "art/raw/props/ch6-videocall-frame-v1.png"
+   ],
+   "group": "Chapter 8",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PICTURE. Return exactly one tall portrait image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The finished painting of Rose, a six year old girl. 2) Her walking sheet. 3) The painted video call frame from the same game.\n\nPAINT THIS ONE PICTURE\nWhat a phone screen shows during a video call, filling the whole picture edge to edge, with no phone around it: Rose jumping up from the bottom of the picture straight into the camera, her face and shoulders huge and close, her arms thrown up and her hands like claws, her mouth wide open yelling, her eyes wide and sparkling, her hair flying up as if she just jumped, her gap-toothed grin showing. Behind her is the blurred edge of a wall covered in colored paper. Warm lamp light.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Copy Rose from the attached pictures as exactly as possible: the same face, age, hair and clothes, the same painting style.\n- No words anywhere."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-flame-sheet",
+   "tab": "Enemies",
+   "title": "Chapter 8: the walking pilot flame (6 poses facing right: standing, two walking steps, hopping up, landing, leaning sideways)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/enemies/enemy-thedraft-v1.png",
+    "art/grands.webp"
+   ],
+   "group": "Chapter 8",
+   "prompt": "Draw a small living pilot flame, about the size of a pea-green apple: a teardrop of clear bright blue flame with a warmer yellow-white heart, two small round dark eyes in the blue and a tiny curved mouth, standing on two tiny stubby legs made of flame, with a thin soft glow round it. It is cute, calm and a little determined, never scary. as one pose sheet for a family role-playing game.\n\nPicture 1 is the approved painting of the Draft, a swirl of pale blue wind, for the painted finish only. Picture 2 is the finished painting of Deedee and Boppy's house, for the handbrushed finish only.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, the ground line the same in every cell, each figure well inside its cell with clear magenta margin, nothing touching a cell edge, in profile or three-quarter view facing right unless a frame says otherwise. No grid lines, numbers, text, effects or shadows.\n\nRow 1:\n1. Standing still, facing right, upright, calm, looking forward.\n2. Walking, facing right, the left stubby leg forward, the flame leaning a little forward, glowing.\n3. Walking, facing right, the right stubby leg forward, the flame leaning a little back.\nRow 2:\n4. Hopping, facing right, both legs tucked up, high in the air, the flame stretched tall and bright.\n5. Landing, facing right, squashed down low with both legs bent, the flame wide and short.\n6. Standing, facing right, the flame bent hard sideways to the right as if blown by a wind, the little eyes shut tight.\n\nDo not add frames, merge frames or repeat a pose. Paint it like the attached pictures: matte, visible brush strokes, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Family friendly."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-ironbelly-sheet",
+   "tab": "Enemies",
+   "title": "Chapter 8: Old Ironbelly in his story states (6 poses facing right: frosted over with flames in his firebox and the coin on his door, frost cracking, glowing dull red, loaded with loaves, loaves out on the door shelf, an ordinary cold oven)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/enemies/enemy-ironbelly-v2.png",
+    "art/raw/enemies/ending-ironbelly-v1.png",
+    "art/raw/enemies/enemy-mudling-v2.png"
+   ],
+   "group": "Chapter 8",
+   "prompt": "IMAGE REQUEST: ONE SINGLE SHEET. Return exactly one image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The approved painting of Old Ironbelly, a boss of \"The Adventures of Tom\", a family role-playing game. Keep the same creature, shape, colors and painted finish.\n2) The approved painting of Grump Hollow's Mudling, for the handbrushed finish only.\n\nPAINT THIS SHEET\nThe same 6 poses as attachment 1, in the same 3 by 2 layout: top row poses 1 to 3, bottom row poses 4 to 6, each pose filling most of its cell, nothing overlapping, the creature facing right in every pose.\nPaint the same round cast-iron oven, but keep him an old, proud, plain, male-looking workman of an oven: no eyelashes, no lipstick, no bow, nothing decorative. In these six poses the six cells are different states, all facing right:\n1. Frosted over: his iron is covered in white frost and little icicles, his firebox mouth full of crowded small blue flames, a small gold coin stuck to the middle of his round door, his eyes narrowed and grumpy.\n2. Frosted and cracking: the frost is breaking away in flakes at the top and sides, the flames in the firebox leaning toward the viewer, a flash of warm orange at the rim of the door, the coin still stuck to the door, his eyes surprised.\n3. Glowing dull red: the frost gone, his whole body glowing a soft dull red-orange, a calm warm light in the firebox, three round loaves of bread sitting on a small iron shelf that has swung out under the door, the coin still stuck to the door, his eyes half closed, a gruff satisfied look.\n4. Loading: his door swung wide open to show a bright glowing firebox, a long wooden bread peel with two round loaves on it going in, steam rising, his eyes wide and proud.\n5. Working: his door open and a row of four round golden loaves sliding out onto the door shelf, steam rising, a bright orange glow, his eyes shut in concentration.\n6. Ordinary and cold: the same body as an old cast-iron oven with no face, no eyes and no mouth, the door shut, dark and dull, the iron cool and matte, a thin curl of smoke from the chimney, a plain small iron shelf under the door.\nPaint it like attachment 1: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-tom-poses",
+   "tab": "Characters",
+   "title": "Chapter 8: Tom story frames (6 frames: carries the salad spinner in both arms, holds out a coin, wraps a flashbulb in a dish towel, stacks folding chairs, holds his phone up high, looks at a photo on his phone)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/tom-hero-v2.png",
+    "art/raw/characters/tom-walking-sheet-v3.png",
+    "art/raw/characters/tom-battle-sheet-1-v1.png",
+    "art/raw/characters/tom-battle-sheet-2-v1.png"
+   ],
+   "group": "Chapter 8",
+   "prompt": "Draw Tom in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of Tom. Picture 2 is the walking sheet. Pictures 3 and 4 are the battle sheets.\n\nCopy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as the battle sheets. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\n\nRow 1:\n1. Standing, facing the viewer, carrying a white plastic salad spinner with a clear lid in both arms against his chest, the lid full of pale dough, his chin tucked, a determined, slightly embarrassed face.\n2. Standing in profile, facing right, one arm stretched out in front of him with his open palm up and a small gold coin held between his thumb and finger toward someone at the edge of his cell (nobody drawn), a calm, respectful, serious face.\n3. Standing, facing the viewer, a small burnt-out round flashbulb in one hand and a folded checked dish towel in the other, wrapping the bulb carefully, his head bent over it, a careful, concentrating face.\nRow 2:\n4. Standing in profile, facing right, carrying a tall stack of five metal folding chairs held against his side with both arms, leaning a little to balance them, a tired but cheerful face.\n5. Standing, facing the viewer, holding a smartphone up high at arm's length in one hand with the screen turned away to the right as if showing something to someone, his other hand pointing at it, a serious, urgent face.\n6. Standing, facing the viewer, holding a smartphone in both hands in front of his chest and looking down at its screen with a quiet, soft, faraway expression, his shoulders a little low.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-tnb-poses",
+   "tab": "Characters",
+   "title": "Chapter 8: TNB story frames (6 frames: stops at the edge of the grey with one toe back, stares at the turntable, looks back at three little flames, carries a tower of bowls, sits on the counter with a grape soda, kneels to feed a motor)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/tnb-hero-v1.png",
+    "art/raw/characters/tnb-walking-sheet-v2.png",
+    "art/raw/characters/tnb-battle-sheet-1-v1.png",
+    "art/raw/characters/tnb-battle-sheet-2-v1.png"
+   ],
+   "group": "Chapter 8",
+   "prompt": "Draw TNB in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of TNB. Picture 2 is the walking sheet. Pictures 3 and 4 are the battle sheets.\n\nCopy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as the battle sheets. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\n\nRow 1:\n1. Standing in profile, facing right, hands in his pockets, one foot stopped and his toe drawn back from a line on the ground in front of him (draw no line), his eyebrows raised, a calm, wary, I-am-not-doing-that look.\n2. Standing, facing the viewer, hands loosely at his sides, his head tilted back and his mouth a little open, staring up in delighted wonder, as if looking at the best thing he has ever seen, his eyes shining.\n3. Standing, turned a little to the left and looking down and back over his shoulder, a gentle amused smile, one hand held out low behind him with the fingers open as if letting small things follow him (draw nothing behind him).\nRow 2:\n4. Standing, facing the viewer, carrying a tall wobbling tower of nine colorful pottery bowls stacked in both arms up to his chin, peering round the side of the stack, a mellow, unbothered face.\n5. Sitting on the edge of a counter, facing the viewer, one leg swinging, holding a can of grape soda in one hand, relaxed and easy, a slow smile, his eyes half closed (draw only a plain flat painted counter edge under him).\n6. Kneeling on one knee in profile, facing right, one hand held forward at the level of his chest as if feeding something small into a machine at the edge of his cell (nothing drawn there), the other hand holding a small silver screwdriver, a focused, quiet, happy face.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-bernadette-poses",
+   "tab": "Characters",
+   "title": "Chapter 8: Bernadette story frames (6 frames: holds up a key on a ring, counts loaves with a pen, drinks a grape soda with her back turned, arms folded at a chain, points at the block, leans into a phone screen)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/npcs/npc-photo-bernadette-v2.png",
+    "art/raw/npcs/npc-walk-bernadette-v1.png"
+   ],
+   "group": "Chapter 8",
+   "prompt": "Draw Bernadette in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of Bernadette. Picture 2 is the walking sheet.\n\nCopy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as the walking sheet. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\n\nRow 1:\n1. Standing, facing the viewer, holding up one big old iron key on a ring in her raised hand beside her face, her chin high, a stern, long-suffering, I-was-never-asked look.\n2. Standing in profile, facing right, her clipboard held against her chest and a pen pointing out in her other hand, moving the pen along as if counting rows of something at the edge of her cell (nothing drawn there), her lips moving, her eyes narrowed.\n3. Standing with her back turned to the viewer, her head turned a little to the right, a can of grape soda held up at her mouth, her clipboard under her other arm, caught mid sip.\nRow 2:\n4. Standing in profile, facing right, her arms folded tight with her clipboard under one elbow, her mouth in a flat line and one eyebrow raised, standing guard.\n5. Standing in profile, facing right, one arm stretched out straight and pointing, the clipboard in the other hand, her mouth open mid-sentence, bossy and exact.\n6. Leaning in toward the viewer from the left, her face large and close, one eyebrow raised and her lips pursed, her clipboard held up at the bottom of the cell, as if peering into a phone screen to inspect someone.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-washington-poses",
+   "tab": "Characters",
+   "title": "Chapter 8: Mr. Washington story frames (6 frames: angry and pointing at his roses, pushes a coin into a hole, reads a notice, bites a slice of bread, stands hands on hips, sighs with a hand on his forehead)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/npcs/npc-photo-washington-v2.png",
+    "art/raw/npcs/npc-walk-washington-v1.png"
+   ],
+   "group": "Chapter 8",
+   "prompt": "Draw Mr. Washington in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of Mr. Washington. Picture 2 is the walking sheet.\n\nCopy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as the walking sheet. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\n\nRow 1:\n1. Standing in profile, facing right, one arm stretched out pointing straight ahead, the other fist on his hip, his mouth open, his eyebrows low, loudly angry about something at the edge of his cell (nothing drawn there).\n2. Standing in profile, facing right, one arm stretched out in front of him with his thumb and finger pushing a small gold coin into a hole at the edge of his cell (nothing drawn there), his lips pressed together, his eyes narrowed, a doubtful, steady look.\n3. Standing, facing the viewer, holding a white sheet of paper out in front of him in both hands at chest height and reading it with his glasses low on his nose, his eyebrows rising.\nRow 2:\n4. Standing, facing the viewer, one hand holding a thick slice of fresh bread up to his mouth with a big bite just taken, his eyes closed, his face gone still and soft.\n5. Standing, facing the viewer, both fists on his hips, his chin up, a sour, put-upon, patient scowl.\n6. Standing, facing the viewer, one hand flat on his forehead and his eyes closed, his head tilted back a little, a long-suffering sigh.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-cooks-poses",
+   "tab": "Characters",
+   "title": "Chapter 8: Miss Odette and Doña Carmen on the sidewalk holding spoons (6 frames: Odette 3, Carmen 3)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/npcs/npc-photo-odette-v2.png",
+    "art/raw/npcs/npc-walk-odette-v1.png",
+    "art/raw/npcs/npc-photo-carmen-v2.png",
+    "art/raw/npcs/npc-walk-carmen-v1.png"
+   ],
+   "group": "Chapter 8",
+   "prompt": "Draw Miss Odette (the first three frames) and Doña Carmen (the last three frames) in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of Miss Odette. Picture 2 is her walking sheet. Picture 3 is the finished painting of Doña Carmen. Picture 4 is her walking sheet.\n\nCopy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as the walking sheet. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\n\nRow 1, Miss Odette, always Odette's own face, age, body, hair and clothes:\n1. Standing, facing the viewer, holding a big wooden spoon up in one hand like a scepter and the other hand on her hip, her mouth open scolding, a stern, warm, no-nonsense face.\n2. Standing in profile, facing right, pointing the wooden spoon forward at someone at the edge of her cell (nobody drawn), her eyebrow high, a doubtful look.\n3. Standing, facing the viewer, one hand holding the wooden spoon against her cheek, her eyes rolled up and her mouth a thin line, deeply unimpressed.\nRow 2, Doña Carmen, always Carmen's own face, age, body, hair and clothes:\n4. Standing, facing the viewer, holding a metal spatula up in one hand and her other fist on her hip, her chin up, a fierce, proud, offended face.\n5. Standing in profile, facing right, her spatula held across her chest with both hands and her head tipped back, one eyebrow high, a skeptical look.\n6. Standing, facing the viewer, one hand held out palm up and open, the spatula in the other, her face twisted in a mock-tragic grimace, as if mourning something cold.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-michael-carry",
+   "tab": "Characters",
+   "title": "Chapter 8: Michael carrying everything: a toddler girl on his hip, a small boy tucked under one arm, three dinner plates stacked on his other hand (one pose)",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/michael-hero-ref-v1.png",
+    "art/raw/characters/michael-walking-sheet-v1.png",
+    "art/raw/characters/lachlan-ref-v1.png"
+   ],
+   "group": "Chapter 8",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\nPicture 1 is the finished painting of Michael, a calm dad. Picture 2 is his walking sheet. Picture 3 is a picture of his son Lachlan, a small boy.\n\nPAINT THIS ONE POSE\nMichael, standing and facing the viewer, a toddler girl of about two with curly hair sitting on his left hip with one arm round his neck, a small boy of about five (the boy of picture 3) tucked sideways under his right arm like a parcel, his legs dangling, and on his right hand three white dinner plates balanced in a stack, with a few peas on the top plate. Michael is calm and a little amused, one eyebrow slightly raised, completely unbothered.\nStanding on a plain flat magenta #FF00FF background, nothing else in the picture, no text, no shadow on the ground.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Copy Michael from the attached pictures as exactly as possible: the same face, age, body, head size compared to the body, hair, clothes, colors, painting style and level of detail.\n- Keep his height, figure size and head size as in the walking sheet. The two children are small and painted in the same style."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-olivia-quote",
+   "tab": "Characters",
+   "title": "Chapter 8: Olivia with a phone held out like a microphone and a pleased, sharp smirk (one pose)",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/olivia-hero-v1.png",
+    "art/raw/characters/olivia-walking-sheet-v2.png"
+   ],
+   "group": "Chapter 8",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\nPicture 1 is the finished painting of Olivia, a journalist and mom. Picture 2 is her walking sheet.\n\nPAINT THIS ONE POSE\nOlivia, standing and facing the viewer, one arm held straight out toward the viewer with a smartphone in her hand held out flat like a microphone, her other hand on her hip, her chin up and one eyebrow raised, a sharp, delighted, caught-you smirk.\nStanding on a plain flat magenta #FF00FF background, nothing else in the picture, no text, no shadow on the ground.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Copy Olivia from the attached pictures as exactly as possible: the same face, age, body, head size compared to the body, hair, clothes, colors, painting style and level of detail.\n- Keep her height, figure size and head size as in the walking sheet."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch8-nara-story",
+   "tab": "Characters",
+   "title": "Chapter 8: Nara story frames (6 frames: jumps up on Tom, watches the flame go, looks up at Tom, looks pointedly away, sits very still by the loaves, under a table with half a loaf)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/characters/nara-hero-v1.png",
+    "art/raw/characters/nara-walking-sheet-v2.png",
+    "art/raw/characters/nara-battle-sheet-1-v1.png",
+    "art/raw/characters/nara-battle-sheet-2-v1.png"
+   ],
+   "group": "Chapter 8",
+   "prompt": "Draw Nara in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of Nara. Picture 2 is the walking sheet. Pictures 3 and 4 are the battle sheets.\n\nCopy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as the battle sheets. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\n\nRow 1:\n1. Standing on her hind legs facing right with both front paws up in the air against an invisible person at the edge of her cell (draw nobody), her tongue out and her tail a blur, wild with joy.\n2. Standing in profile, facing right, her head low and turned to follow something small moving away along the ground at the edge of her cell (draw nothing there), her ears up, her eyes wide and still.\n3. Sitting facing the viewer with her head tipped up and a little to the side, looking up at someone above her, a worried, searching, questioning face, one ear lifted.\nRow 2:\n4. Sitting in profile, facing right, her nose lifted and her head turned far away from the viewer, her eyes shut, very obviously not looking at something, her chin high.\n5. Sitting very, very still, facing right, perfectly upright and stiff, her eyes fixed on something just beyond the edge of her cell (draw nothing there), a long string of drool hanging from her mouth, her tail flat on the ground.\n6. Lying flat on her belly facing right, crouched low as if under a table, with half a round loaf of bread held in her mouth, her eyes looking sideways with guilty innocence, her ears back.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
   }
  ]
 }

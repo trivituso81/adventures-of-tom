@@ -1,0 +1,1252 @@
+{
+ "tag": "20261114ch8",
+ "chapter": 8,
+ "lines": [
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Number eight is in Los Angeles. Call me BEFORE you touch it. I sharpened the pencil.",
+   "ctx": "chapter 8 (new, text message, read aloud)",
+   "script": "[brisk, bossy] Number eight is in Los Angeles. [firm, urgent] Call me BEFORE you touch it. [proud, matter-of-fact] I sharpened the pencil."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I promise. I packed a ruler.",
+   "ctx": "chapter 8 (new, text message, read aloud)",
+   "script": "[quiet, sincere] I promise. [dry, deadpan] I packed a RULER."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Welcome home. Don't open the salad spinner. That's loaf thirty-one.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, warm] welcome home. [easy, matter-of-fact] don't open the salad spinner. [relaxed] that's loaf thirty-one."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "You started without me. I made a schedule on the plane. It has tabs.",
+   "ctx": "chapter 8 (new)",
+   "script": "[delighted, pleased] You started without me. [proud, brisk] I made a schedule on the plane. [pleased] It has TABS."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Bready Mercury was climbing out of the crock at five this morning. I wasn't going to argue with him.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, easy] bready mercury was climbing out of the crock at five this morning. [shrugging, unbothered] i wasn't going to argue with him."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Forty loaves, two at a time, forty-five minutes each. That's fifteen hours of oven, and we have nine.",
+   "ctx": "chapter 8 (new)",
+   "script": "[quick, calculating] Forty loaves, two at a time, forty-five minutes each. [rising, tense] That's fifteen HOURS of oven, [flat, grim] and we have nine."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "So we bring twenty-four and tell Bernadette it's a tasting menu.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, easy] so we bring twenty-four and tell bernadette [punchline, deadpan] it's a tasting menu."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "She'll count them. She counted the folding chairs at Mr. Washington's birthday.",
+   "ctx": "chapter 8 (new)",
+   "script": "[wary, certain] She'll count them. [dry, remembering] She counted the folding chairs at Mr. Washington's birthday."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "She came by at seven to check on us. She called me the Other Tom and said my bowls were too close together.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, easy] she came by at seven to check on us. [amused, laid-back] she called me the other tom and said my bowls were too close together."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "What did you tell her?",
+   "ctx": "chapter 8 (new)",
+   "script": "[curious, eager] What did you tell her?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I said, 'Great note, Bernadette.' Then she stood there waiting for me to move them, and I opened a soda.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, easy] i said, great note, bernadette. [lazy, amused] then she stood there waiting for me to move them, [unhurried, deadpan] and i opened a soda."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "How long did she wait?",
+   "ctx": "chapter 8 (new)",
+   "script": "[delighted, leaning in] How long did she WAIT?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "It was a long soda.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, deadpan] it was a long soda."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I've seen this movie, you know. The lady who runs the potluck always has something in her basement.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, knowing] i've seen this movie, you know. [easy, lightly ominous] the lady who runs the potluck always has something in her basement."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "She doesn't have a basement. She has that shed with the two padlocks.",
+   "ctx": "chapter 8 (new)",
+   "script": "[helpful, joining in] She doesn't have a basement. [conspiratorial, low] She has that shed with the TWO padlocks."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Two padlocks. On a shed.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, quietly thrilled] two padlocks. [slow, savoring] on a shed."
+  },
+  {
+   "voice": "washington",
+   "speaker": "Mr. Washington",
+   "text": "Tom! Get out here and look at my roses!",
+   "ctx": "chapter 8 (new)",
+   "script": "[shouting from the street, indignant] Tom! [loud, aggrieved] Get out here and look at my ROSES!"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "That's your whole rosebush. It's inside an orange block the size of a minivan.",
+   "ctx": "chapter 8 (new)",
+   "script": "[stunned, plain] That's your whole rosebush. [flat, amazed] It's inside an orange block the size of a MINIVAN."
+  },
+  {
+   "voice": "washington",
+   "speaker": "Mr. Washington",
+   "text": "And the red's gone out of everything around it. The roses, the lawn, my good hose. All grey.",
+   "ctx": "chapter 8 (new)",
+   "script": "[bitter, aggrieved] And the red's gone out of everything around it. [pained, listing] The roses, the lawn, my good HOSE. [flat, hurt] All grey."
+  },
+  {
+   "voice": "washington",
+   "speaker": "Mr. Washington",
+   "text": "You're the one who's always on a plane, Tom. Did you bring this home with you?",
+   "ctx": "chapter 8 (new)",
+   "script": "[suspicious, pointed] You're the one who's always on a plane, Tom. [narrowed, accusing] Did you bring this home with you?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "No, sir. But I've seen seven of them, and I know how to open one.",
+   "ctx": "chapter 8 (new)",
+   "script": "[respectful, firm] No, sir. [steady, reassuring] But I've seen SEVEN of them, and I know how to open one."
+  },
+  {
+   "voice": "washington",
+   "speaker": "Mr. Washington",
+   "text": "Seven. And it never once came up at a block meeting.",
+   "ctx": "chapter 8 (new)",
+   "script": "[dry, stunned] Seven. [wounded, pedantic] And it never once came up at a block meeting."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I'm going to stand over here, on the part of the sidewalk that still has a color.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, polite] i'm going to stand over here, [calm, firm] on the part of the sidewalk that still has a color."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "They don't do anything. They just sit there.",
+   "ctx": "chapter 8 (new)",
+   "script": "[reassuring, easy] They don't do anything. [patient] They just sit there."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "That's what I don't like about it. The dough rises. The dog jumps. That thing is just waiting.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, uneasy] that's what i don't like about it. [low, thoughtful] the dough rises. the dog jumps. [quiet, ominous] that thing is just waiting."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Mr. Washington, there's a notice taped to your roses in there.",
+   "ctx": "chapter 8 (new)",
+   "script": "[noticing, careful] Mr. Washington, there's a notice taped to your roses in there."
+  },
+  {
+   "voice": "washington",
+   "speaker": "Mr. Washington",
+   "text": "That'll be from her.",
+   "ctx": "chapter 8 (new)",
+   "script": "[weary, certain] That'll be from HER."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "3468. You're back. Don't touch that. It's on my street.",
+   "ctx": "chapter 8 (new)",
+   "script": "[clipped, commanding] Three four six eight. You're back. [sharp] Don't touch that. [possessive, flat] It's on MY street."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "8:42 this morning. White sedan, parked across the Washington driveway for four minutes. Rental. Airport lot sticker on the windshield. I have the plate.",
+   "ctx": "chapter 8 (new)",
+   "script": "[crisp, reporting] Eight forty-two this morning. White sedan, parked across the Washington driveway for four minutes. [dry, precise] Rental. Airport lot sticker on the windshield. [satisfied, flat] I have the PLATE."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "You saw a person do this?",
+   "ctx": "chapter 8 (new)",
+   "script": "[intent, quiet] You saw a PERSON do this?"
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "One man. Long coat, in this heat. He pointed something at the roses, there was a flash, and when I could see again, there was that.",
+   "ctx": "chapter 8 (new)",
+   "script": "[crisp, disapproving] One man. [dry] Long coat, in this heat. [measured, reporting] He pointed something at the roses, there was a flash, [flat, gesturing] and when I could see again, there was THAT."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Then something small and on fire picked a gold thing up off the sidewalk and ran toward the boulevard. I wrote it down as a raccoon. I know it wasn't a raccoon.",
+   "ctx": "chapter 8 (new)",
+   "script": "[crisp, reporting] Then something small and on fire picked a gold thing up off the sidewalk and ran toward the boulevard. [dry, reluctant] I wrote it down as a raccoon. [flat, certain] I know it wasn't a raccoon."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Bernadette, that's the most useful thing anyone has told me in eight of these.",
+   "ctx": "chapter 8 (new)",
+   "script": "[sincere, impressed] Bernadette, that's the most useful thing anyone has told me in EIGHT of these."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Write that down and sign it. Nobody on this street ever does.",
+   "ctx": "chapter 8 (new)",
+   "script": "[brusque, pleased underneath] Write that down and sign it. [dry, grumbling] Nobody on this street ever does."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "He was here fifteen minutes before your cab, 3468. You'd have seen him yourself if you were ever home.",
+   "ctx": "chapter 8 (new)",
+   "script": "[dry, pointed] He was here fifteen minutes before your cab, three four six eight. [flat, jabbing] You'd have seen him yourself if you were ever HOME."
+  },
+  {
+   "voice": "washington",
+   "speaker": "Mr. Washington",
+   "text": "The only thing at the end of the boulevard is the old Car Barn. My father drove the night streetcar out of it.",
+   "ctx": "chapter 8 (new)",
+   "script": "[thoughtful, gruff] The only thing at the end of the boulevard is the old Car Barn. [quieter, proud] My father drove the night streetcar out of it."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Chained since 1963. I have the key. Nobody has ever asked me for it.",
+   "ctx": "chapter 8 (new)",
+   "script": "[flat, dry] Chained since nineteen sixty-three. [pointed, matter-of-fact] I have the key. [deadpan] Nobody has ever ASKED me for it."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Before I touch anything, I have to make a phone call. I promised a nine-year-old.",
+   "ctx": "chapter 8 (new)",
+   "script": "[firm, polite] Before I touch anything, I have to make a phone call. [dry, straightforward] I promised a nine-year-old."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Then she can run the block meeting, because she'd be the first person on this street to keep a promise.",
+   "ctx": "chapter 8 (new)",
+   "script": "[dry, grudging] Then she can run the block meeting, [sharp, deadpan] because she'd be the first person on this street to keep a promise."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Tata. Did you touch it?",
+   "ctx": "chapter 8 (new)",
+   "script": "[sharp, intent] Tata. [serious, demanding] Did you TOUCH it?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I did not touch it. Look. Round hole, burnt bulb, grey patch.",
+   "ctx": "chapter 8 (new)",
+   "script": "[calm, proud] I did NOT touch it. [steady, showing] Look. Round hole, burnt bulb, grey patch."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "How big?",
+   "ctx": "chapter 8 (new)",
+   "script": "[sharp, businesslike] How BIG?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "A minivan.",
+   "ctx": "chapter 8 (new)",
+   "script": "[plain, awed] A minivan."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "That's bigger than the golf cart. And it's in Los Angeles. I said Los Angeles.",
+   "ctx": "chapter 8 (new)",
+   "script": "[thrilled, precise] That's bigger than the golf cart. [rising, triumphant] And it's in Los Angeles. [proud, savoring] I said LOS ANGELES."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Is that the chart? It has a key. It's color coded. That's the wall the detective has right before they take his badge away.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, impressed] is that the chart? it has a key. it's color coded. [easy, delighted] that's the wall the detective has right before they take his badge away."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Thank you. Who's the lady behind you with the clipboard?",
+   "ctx": "chapter 8 (new)",
+   "script": "[pleased, polite] Thank you. [curious, direct] Who's the lady behind you with the clipboard?"
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Who's asking?",
+   "ctx": "chapter 8 (new)",
+   "script": "[sharp, suspicious] Who's asking?"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "I'm Grace. I'm nine. I keep the chart.",
+   "ctx": "chapter 8 (new)",
+   "script": "[crisp, official] I'm Grace. I'm nine. [proud, matter-of-fact] I keep the CHART."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Grace, somebody saw a man do this one. He came in a rental car.",
+   "ctx": "chapter 8 (new)",
+   "script": "[quick, careful] Grace, somebody saw a man do this one. [steady] He came in a rental car."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "A person! I said it was a person. What kind of car? What time? Did anybody get the license plate?",
+   "ctx": "chapter 8 (new)",
+   "script": "[explosive, thrilled] A PERSON! I said it was a person. [rapid-fire, demanding] What kind of car? What time? [urgent] Did anybody get the license plate?"
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "White sedan. 8:42. Yes.",
+   "ctx": "chapter 8 (new)",
+   "script": "[clipped, flat] White sedan. [crisp] Eight forty-two. [satisfied] Yes."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Tata, I like her.",
+   "ctx": "chapter 8 (new)",
+   "script": "[delighted, sincere] Tata, I like HER."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Give the niece my number, 3468. And don't get ideas. I'm not being friendly. She keeps records, and I respect records.",
+   "ctx": "chapter 8 (new)",
+   "script": "[gruff, dismissive] Give the niece my number, three four six eight. [warning, sharp] And don't get ideas. [flat, firm] I'm not being friendly. [dry, matter-of-fact] She keeps records, and I respect RECORDS."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "There are two of them now.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, quietly awed] there are two of them now."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I know. They're going to start a newsletter.",
+   "ctx": "chapter 8 (new)",
+   "script": "[dry, resigned] I know. [deadpan] They're going to start a newsletter."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "BOO!",
+   "ctx": "chapter 8 (new)",
+   "script": "[gleeful, shouting] BOO!"
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Why didn't he jump?",
+   "ctx": "chapter 8 (new)",
+   "script": "[puzzled, disappointed] Why didn't he JUMP?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I watch a lot of scary movies. That was good, though. Top ten.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, fair] i watch a lot of scary movies. [easy, generous] that was good, though. [warm, deadpan] top ten."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "I'm going to be number one.",
+   "ctx": "chapter 8 (new)",
+   "script": "[fierce, certain] I'm going to be NUMBER ONE."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "The gold coin is with the biggest thing that woke up. Find it, put it in the hole, and call me when the color comes back.",
+   "ctx": "chapter 8 (new)",
+   "script": "[brisk, instructing] The gold coin is with the biggest thing that woke up. [firm, businesslike] Find it, put it in the hole, [proud, final] and call me when the color comes back."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It ran toward the boulevard, and it was on fire.",
+   "ctx": "chapter 8 (new)",
+   "script": "[puzzled, plain] It ran toward the boulevard, [flat, bewildered] and it was on FIRE."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "That's new. I need a new color for fire.",
+   "ctx": "chapter 8 (new)",
+   "script": "[thoughtful, intrigued] That's new. [scribbling, matter-of-fact] I need a new color for FIRE."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Our pilot light just walked out of the house.",
+   "ctx": "chapter 8 (new)",
+   "script": "[stunned, flat] Our pilot light just WALKED out of the house."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Through the dog door. Nara's never once used the dog door.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, wondering] through the dog door. [dry, amazed] nara's never once used the dog door."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "We have forty loaves of raw dough and no fire.",
+   "ctx": "chapter 8 (new)",
+   "script": "[tense, level] We have forty loaves of raw dough and NO fire."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Then I guess we're following a flame down the street. Bring the dough. I'm not leaving loaf thirty-one alone with the dog.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, resigned] then i guess we're following a flame down the street. [easy, practical] bring the dough. [deadpan] i'm not leaving loaf thirty-one alone with the dog."
+  },
+  {
+   "voice": "odette",
+   "speaker": "Miss Odette",
+   "text": "Tom! My gumbo's been on since six, and right now it's the temperature of a handshake.",
+   "ctx": "chapter 8 (new)",
+   "script": "[indignant, Creole warmth] Tom! [stern, aggrieved] My gumbo's been on since six, [flat, withering] and right now it's the temperature of a HANDSHAKE."
+  },
+  {
+   "voice": "carmen",
+   "speaker": "Doña Carmen",
+   "text": "My griddle is cold. Do you know what a pupusa is off a cold griddle? It's an apology.",
+   "ctx": "chapter 8 (new)",
+   "script": "[fierce, proud] My griddle is cold. [pointed, rhetorical] Do you know what a pupusa is off a cold griddle? [dry, devastating] It's an APOLOGY."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Every flame on the block walked out. We're following them.",
+   "ctx": "chapter 8 (new)",
+   "script": "[urgent, plain] Every flame on the block walked out. [steady] We're following them."
+  },
+  {
+   "voice": "odette",
+   "speaker": "Miss Odette",
+   "text": "You're following them with a salad spinner.",
+   "ctx": "chapter 8 (new)",
+   "script": "[flat, incredulous] You're following them with a SALAD SPINNER."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It's loaf thirty-one.",
+   "ctx": "chapter 8 (new)",
+   "script": "[dignified, patient] It's loaf thirty-one."
+  },
+  {
+   "voice": "carmen",
+   "speaker": "Doña Carmen",
+   "text": "And this one is drinking purple soda before noon.",
+   "ctx": "chapter 8 (new)",
+   "script": "[dry, sidelong] And THIS one is drinking purple soda before noon."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "It's grape. Do you want one?",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, helpful] it's grape. [easy, generous] do you want one?"
+  },
+  {
+   "voice": "carmen",
+   "speaker": "Doña Carmen",
+   "text": "No. Is it cold?",
+   "ctx": "chapter 8 (new)",
+   "script": "[curt, then curious] No. [grudging, interested] Is it cold?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "It's the only thing on this street that's the right temperature.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, deadpan] it's the only thing on this street that's the right temperature."
+  },
+  {
+   "voice": "odette",
+   "speaker": "Miss Odette",
+   "text": "Go on, then. And Tom, if my gumbo isn't hot by six, I'm telling Bernadette it was your idea.",
+   "ctx": "chapter 8 (new)",
+   "script": "[brisk, shooing] Go on, then. [sweet, menacing] And Tom, if my gumbo isn't hot by six, [firm, delighted] I'm telling Bernadette it was your IDEA."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Nineteen years I've carried this key. You're welcome in advance, since I won't hear it afterwards.",
+   "ctx": "chapter 8 (new)",
+   "script": "[dry, long-suffering] Nineteen years I've carried this key. [flat, pointed] You're welcome in advance, since I won't hear it afterwards."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Thank you, Bernadette.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, sincere] thank you, bernadette."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Don't be smart, Other Tom.",
+   "ctx": "chapter 8 (new)",
+   "script": "[sharp, wary] Don't be smart, Other Tom."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Chained from the outside since 1963. You lock a building to keep people out. You chain it to keep something in.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, low] chained from the outside since nineteen sixty-three. [quiet, thoughtful] you lock a building to keep people out. [slow, ominous] you chain it to keep something in."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "So we're not going in?",
+   "ctx": "chapter 8 (new)",
+   "script": "[hopeful, careful] So we're not going in?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Oh, we're going in. I just want it on the record that I knew.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, cheerful] oh, we're going in. [easy, wry] i just want it on the record that i knew."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Forty loaves. Six o'clock. I don't care what's in there.",
+   "ctx": "chapter 8 (new)",
+   "script": "[clipped, final] Forty loaves. Six o'clock. [flat, unmoved] I don't care what's in there."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Tom. That's a turntable. They used to spin a whole streetcar on that.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, hushed, thrilled] tom. that's a turntable. [reverent, quiet] they used to spin a whole streetcar on that."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Do you need a minute?",
+   "ctx": "chapter 8 (new)",
+   "script": "[gentle, amused] Do you need a minute?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I need about an hour. But go ahead.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, dreamy] i need about an hour. [easy, generous] but go ahead."
+  },
+  {
+   "voice": "log",
+   "speaker": "Damp Blanket",
+   "text": "Stop right there. Somebody's had a fire going in this building, and I'm putting an end to it.",
+   "ctx": "chapter 8 (new)",
+   "script": "[stern, soggy, disapproving] Stop right there. [cold, officious] Somebody's had a fire going in this building, [self-righteous] and I'm putting an end to it."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "That blanket is talking, and it's soaking wet.",
+   "ctx": "chapter 8 (new)",
+   "script": "[stunned, flat] That blanket is talking, [dry, observing] and it's soaking WET."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "It's a wet blanket. I'm not making a joke. Look at it.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, earnest] it's a wet blanket. [easy, deadpan] i'm not making a joke. [calm] look at it."
+  },
+  {
+   "voice": "log",
+   "speaker": "Damp Blanket",
+   "text": "First it's one little flame. Then it's music. Then people have friends over. I've seen where it goes.",
+   "ctx": "chapter 8 (new)",
+   "script": "[ominous, soggy] First it's one little flame. [darker, building] Then it's music. [grim] Then people have friends over. [flat, haunted] I've seen where it goes."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "We're having forty people over at six.",
+   "ctx": "chapter 8 (new)",
+   "script": "[dry, deadpan] We're having forty people over at six."
+  },
+  {
+   "voice": "log",
+   "speaker": "Damp Blanket",
+   "text": "Then I got here just in time.",
+   "ctx": "chapter 8 (new)",
+   "script": "[grim, smug] Then I got here just in TIME."
+  },
+  {
+   "voice": "log",
+   "speaker": "Damp Blanket",
+   "text": "Fine. Have your fun. Keep it down after ten.",
+   "ctx": "chapter 8 (new, after the fight)",
+   "script": "[sullen, giving in] Fine. [grudging, petty] Have your fun. [muttering] Keep it down after TEN."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Did you feel that?",
+   "ctx": "chapter 8 (new)",
+   "script": "[uneasy, quiet] Did you feel that?"
+  },
+  {
+   "voice": "skeeter",
+   "speaker": "The Draft",
+   "text": "No, he didn't. There's no draft in here.",
+   "ctx": "chapter 8 (new)",
+   "script": "[smooth, evasive] No, he didn't. [bland, denying] There's no draft in here."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Hi. We can hear you.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, polite] hi. [easy, amused] we can hear you."
+  },
+  {
+   "voice": "skeeter",
+   "speaker": "The Draft",
+   "text": "It's an old building. They all do this. Have you tried a sweater?",
+   "ctx": "chapter 8 (new)",
+   "script": "[slippery, landlord-like] It's an old building. They all do this. [breezy, unhelpful] Have you tried a sweater?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "You're holding one of our flames.",
+   "ctx": "chapter 8 (new)",
+   "script": "[firm, patient] You're holding one of our flames."
+  },
+  {
+   "voice": "skeeter",
+   "speaker": "The Draft",
+   "text": "I'm not holding anything. That flame was like that when I got here.",
+   "ctx": "chapter 8 (new)",
+   "script": "[airy, defensive] I'm not holding anything. [smooth, shifting blame] That flame was like that when I got here."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "You sound exactly like my first landlord.",
+   "ctx": "chapter 8 (new)",
+   "script": "[wry, recognizing] You sound EXACTLY like my first landlord."
+  },
+  {
+   "voice": "skeeter",
+   "speaker": "The Draft",
+   "text": "I'll be back in the winter. I always am.",
+   "ctx": "chapter 8 (new, after the fight)",
+   "script": "[sly, fading] I'll be back in the winter. [soft, promising] I always am."
+  },
+  {
+   "voice": "toad",
+   "speaker": "Picky Lunchbox",
+   "text": "What's in the salad spinner? Is that sourdough? No. Too sour.",
+   "ctx": "chapter 8 (new)",
+   "script": "[sniffy, fussy] What's in the salad spinner? [suspicious] Is that sourdough? [dismissive, curt] No. Too SOUR."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "The starter is nine years old and it has a name.",
+   "ctx": "chapter 8 (new)",
+   "script": "[proud, defensive] The starter is nine years old [firm, dignified] and it has a NAME."
+  },
+  {
+   "voice": "toad",
+   "speaker": "Picky Lunchbox",
+   "text": "That makes it worse. Do you have it in white? With the crusts cut off?",
+   "ctx": "chapter 8 (new)",
+   "script": "[prissy, appalled] That makes it WORSE. [hopeful, demanding] Do you have it in white? [petulant] With the crusts cut off?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "You've got a flame in there. You could warm something up.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, helpful] you've got a flame in there. [easy, practical] you could warm something up."
+  },
+  {
+   "voice": "toad",
+   "speaker": "Picky Lunchbox",
+   "text": "I tried. It was too hot. Before that it was too cold. I'd like to speak to whoever packed me.",
+   "ctx": "chapter 8 (new)",
+   "script": "[tired, aggrieved] I tried. [fussy] It was too HOT. [peevish] Before that it was too COLD. [haughty, entitled] I'd like to speak to whoever packed me."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Nara, this is what you sound like.",
+   "ctx": "chapter 8 (new)",
+   "script": "[dry, to the dog] Nara, [deadpan, fond] this is what you sound like."
+  },
+  {
+   "voice": "toad",
+   "speaker": "Picky Lunchbox",
+   "text": "I'm still not eating the crust.",
+   "ctx": "chapter 8 (new, after the fight)",
+   "script": "[stubborn, small] I'm still not eating the CRUST."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Three flames, one motor. On set I once fixed a zipper with a paper clip while the actor was still walking. This thing's holding still.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, focused] three flames, one motor. [easy, remembering] on set i once fixed a zipper with a paper clip while the actor was still walking. [confident, calm] this thing's holding still."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "It says Boiler Room. I'm just reading it out loud so we both know.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, wry] it says boiler room. [easy, deadpan] i'm just reading it out loud so we both know."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "After you.",
+   "ctx": "chapter 8 (new)",
+   "script": "[polite, dry] After you."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "No, you go. You're the one who's polite to things.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, amused] no, you go. [warm, teasing] you're the one who's polite to things."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Old Ironbelly",
+   "text": "Shut that door. You're letting the cold in.",
+   "ctx": "chapter 8 (new)",
+   "script": "[gruff, cold, old workman] Shut that door. [grumbling] You're letting the cold in."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "That oven is the size of our kitchen, and every flame on the block is inside it.",
+   "ctx": "chapter 8 (new)",
+   "script": "[awed, plain] That oven is the size of our kitchen, [stunned] and every flame on the block is inside it."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Old Ironbelly",
+   "text": "Fifty years I fed the night crews out of this room. Then one morning in 1963 they shut off my gas and chained the door, and not one of them said a word to me about it.",
+   "ctx": "chapter 8 (new)",
+   "script": "[gruff, proud, old workman] Fifty years I fed the night crews out of this room. [flat, simmering] Then one morning in nineteen sixty-three they shut off my gas and chained the door, [bitter, indignant] and not one of them said a WORD to me about it."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Those flames belong to the stoves on 2nd Avenue.",
+   "ctx": "chapter 8 (new)",
+   "script": "[careful, firm] Those flames belong to the stoves on Second Avenue."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Old Ironbelly",
+   "text": "I've seen your stoves. A flame the size of a pea, burning all day and all night so somebody can boil one egg. I'm putting them to work.",
+   "ctx": "chapter 8 (new)",
+   "script": "[scornful, gruff] I've seen your stoves. [withering] A flame the size of a pea, burning all day and all night [contemptuous] so somebody can boil one EGG. [stubborn, final] I'm putting them to work."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "He's got a point about the egg.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, fair] he's got a point about the egg."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Old Ironbelly",
+   "text": "And they're no good. Every flame on the street, and I still can't get warm. A fire's no use with nothing to bake.",
+   "ctx": "chapter 8 (new)",
+   "script": "[weary, grudging] And they're no good. [low, frustrated] Every flame on the street, and I still can't get warm. [quiet, bitter] A fire's no use with nothing to bake."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "We have dough.",
+   "ctx": "chapter 8 (new)",
+   "script": "[plain, hopeful] We have dough."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Old Ironbelly",
+   "text": "I don't take bread from a man holding a salad spinner.",
+   "ctx": "chapter 8 (new)",
+   "script": "[flat, scathing] I don't take bread from a man holding a SALAD SPINNER."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Old Ironbelly",
+   "text": "Too wet. Who taught you to shape a loaf?",
+   "ctx": "chapter 8 (new, fight line, after loaf one)",
+   "script": "[gruff, critical] Too wet. [sour, grading] Who taught you to shape a loaf?"
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Old Ironbelly",
+   "text": "Better. Cut the top deeper next time. It needs somewhere to go.",
+   "ctx": "chapter 8 (new, fight line, after loaf two)",
+   "script": "[grudging, instructing] Better. [gruff, coaching] Cut the top deeper next time. [dry, matter-of-fact] It needs somewhere to go."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Old Ironbelly",
+   "text": "Hm. That one's a loaf.",
+   "ctx": "chapter 8 (new, fight line, after loaf three)",
+   "script": "[low, grudging approval] Hm. [gruff, quiet] That one's a LOAF."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Old Ironbelly",
+   "text": "That's the first bread out of me since 1963. Don't stand there looking at it. Cut it.",
+   "ctx": "chapter 8 (new)",
+   "script": "[gruff, moved but hiding it] That's the first bread out of me since nineteen sixty-three. [brusque, covering] Don't stand there looking at it. [gruff] Cut it."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "There's a gold coin on your door. I need it, and I have to tell you what it does before I take it.",
+   "ctx": "chapter 8 (new)",
+   "script": "[respectful, careful] There's a gold coin on your door. [steady, honest] I need it, [serious] and I have to tell you what it does before I take it."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Old Ironbelly",
+   "text": "I know what it is. It's my pension. Sixty years late, and a little flame carried it in this morning.",
+   "ctx": "chapter 8 (new)",
+   "script": "[gruff, certain] I know what it is. [proud, flat] It's my PENSION. [gruff, vindicated] Sixty years late, and a little flame carried it in this morning."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It isn't your pension. It opens an orange block on our street. When it does, every flame goes home and you go back to being an oven. A cold one. You won't be able to talk.",
+   "ctx": "chapter 8 (new)",
+   "script": "[gentle, honest] It isn't your pension. [steady] It opens an orange block on our street. [careful, plain] When it does, every flame goes home and you go back to being an oven. [quiet, sorry] A cold one. [soft] You won't be able to talk."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Old Ironbelly",
+   "text": "So it's not even mine.",
+   "ctx": "chapter 8 (new)",
+   "script": "[slow, flat] So it's not even MINE."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "No. It has a rosebush on it.",
+   "ctx": "chapter 8 (new)",
+   "script": "[gentle, plain] No. [quiet, honest] It has a rosebush on it."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Old Ironbelly",
+   "text": "Sixty years, and the first gold through that door belongs to a shrub.",
+   "ctx": "chapter 8 (new)",
+   "script": "[disbelieving, dry, wounded pride] Sixty years, [flat, bitter] and the first gold through that door belongs to a SHRUB."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Old Ironbelly",
+   "text": "What time is this potluck?",
+   "ctx": "chapter 8 (new)",
+   "script": "[gruff, abrupt] What time is this potluck?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Six o'clock.",
+   "ctx": "chapter 8 (new)",
+   "script": "[plain, careful] Six o'clock."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Old Ironbelly",
+   "text": "How many loaves?",
+   "ctx": "chapter 8 (new)",
+   "script": "[gruff, businesslike] How many loaves?"
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Forty.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, easy] forty."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Old Ironbelly",
+   "text": "I used to do two hundred before midnight. Load me. If this is my last shift, I'm not ending it on three.",
+   "ctx": "chapter 8 (new)",
+   "script": "[gruff, proud, rousing] I used to do two hundred before midnight. [commanding] Load me. [firm, dignified] If this is my last shift, I'm not ending it on THREE."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Old Ironbelly",
+   "text": "Somebody's going to stand up tonight and say they arranged this bread. Somebody always did.",
+   "ctx": "chapter 8 (new)",
+   "script": "[dry, knowing] Somebody's going to stand up tonight and say they arranged this bread. [flat, weary] Somebody ALWAYS did."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "We know exactly who.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, deadpan] we know exactly who."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "Old Ironbelly",
+   "text": "Take your shrub money. And shut my door on the way out. I'd like to cool down slowly.",
+   "ctx": "chapter 8 (new)",
+   "script": "[gruff, letting go] Take your shrub money. [low, tired] And shut my door on the way out. [quiet, dignified] I'd like to cool down slowly."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Thank you for the bread.",
+   "ctx": "chapter 8 (new)",
+   "script": "[quiet, sincere] Thank you for the bread."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It goes in the round hole. It's your rosebush, so it should be you.",
+   "ctx": "chapter 8 (new)",
+   "script": "[warm, simple] It goes in the round hole. [steady, kind] It's your rosebush, so it should be YOU."
+  },
+  {
+   "voice": "washington",
+   "speaker": "Mr. Washington",
+   "text": "If this turns out to be a parking meter, I'm going to be upset.",
+   "ctx": "chapter 8 (new)",
+   "script": "[gruff, suspicious] If this turns out to be a parking meter, [dry, warning] I'm going to be upset."
+  },
+  {
+   "voice": "washington",
+   "speaker": "Mr. Washington",
+   "text": "'Trim to regulation height.' Bernadette, you taped a notice to my roses.",
+   "ctx": "chapter 8 (new)",
+   "script": "[reading, flat] Trim to regulation height. [disbelieving, turning] Bernadette, you taped a notice to my ROSES."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "At 5:30 this morning. Before the incident. It still applies.",
+   "ctx": "chapter 8 (new)",
+   "script": "[crisp, unbothered] At five thirty this morning. [firm] Before the incident. [flat, immovable] It still applies."
+  },
+  {
+   "voice": "washington",
+   "speaker": "Mr. Washington",
+   "text": "It was inside a block all day.",
+   "ctx": "chapter 8 (new)",
+   "script": "[dry, incredulous] It was inside a block all DAY."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "The date's on it.",
+   "ctx": "chapter 8 (new)",
+   "script": "[flat, final] The date's on it."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "Okay. Now I'll stand on the lawn.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, relieved] okay. [easy, content] now i'll stand on the lawn."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "That bulb is evidence, 3468.",
+   "ctx": "chapter 8 (new)",
+   "script": "[sharp, possessive] That bulb is evidence, three four six eight."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It's going in my mother's junk drawer with the other seven.",
+   "ctx": "chapter 8 (new)",
+   "script": "[polite, firm] It's going in my mother's junk drawer with the other seven."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Then I want it logged first.",
+   "ctx": "chapter 8 (new)",
+   "script": "[dry, immovable] Then I want it LOGGED first."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Thirty-eight. Thirty-nine. That's thirty-nine, 3468. I said forty.",
+   "ctx": "chapter 8 (new)",
+   "script": "[counting, precise] Thirty-eight. Thirty-nine. [flat, accusing] That's thirty-nine, three four six eight. [sharp] I said FORTY."
+  },
+  {
+   "voice": "olivia",
+   "speaker": "Olivia",
+   "text": "That's my dog under the table, and I've never seen that loaf before in my life.",
+   "ctx": "chapter 8 (new)",
+   "script": "[quick, innocent, sharp] That's my dog under the table, [deadpan, sweet] and I've never seen that loaf before in my LIFE."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "The dog owes this street a loaf.",
+   "ctx": "chapter 8 (new)",
+   "script": "[stern, flat] The dog owes this street a loaf."
+  },
+  {
+   "voice": "olivia",
+   "speaker": "Olivia",
+   "text": "She can get in line. She owes me a couch.",
+   "ctx": "chapter 8 (new)",
+   "script": "[dry, quick] She can get in line. [wry, deadpan] She owes me a COUCH."
+  },
+  {
+   "voice": "michael",
+   "speaker": "Michael",
+   "text": "I've got it. Nobody get up.",
+   "ctx": "chapter 8 (new)",
+   "script": "[calm, unbothered, under load] I've got it. [easy, gentle] Nobody get up."
+  },
+  {
+   "voice": "olivia",
+   "speaker": "Olivia",
+   "text": "He's got it.",
+   "ctx": "chapter 8 (new)",
+   "script": "[dry, fond, not looking] He's got it."
+  },
+  {
+   "voice": "olivia",
+   "speaker": "Olivia",
+   "text": "Tom. A rosebush got sealed in orange glass, every stove on the block went out, and it was all fixed by six. I'd love a quote.",
+   "ctx": "chapter 8 (new)",
+   "script": "[brisk, reporter] Tom. [rapid, delighted] A rosebush got sealed in orange glass, every stove on the block went out, and it was all fixed by six. [sweet, sharp] I'd love a QUOTE."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "No comment.",
+   "ctx": "chapter 8 (new)",
+   "script": "[prim, deadpan] No comment."
+  },
+  {
+   "voice": "olivia",
+   "speaker": "Olivia",
+   "text": "That's a quote. I'm using it.",
+   "ctx": "chapter 8 (new)",
+   "script": "[gleeful, quick] That's a QUOTE. [pleased, final] I'm using it."
+  },
+  {
+   "voice": "odette",
+   "speaker": "Miss Odette",
+   "text": "Bernadette, your diagram had my gumbo behind the paper plates.",
+   "ctx": "chapter 8 (new)",
+   "script": "[pointed, Creole warmth] Bernadette, your diagram had my gumbo behind the paper plates."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "Hot dishes on the left. Everyone got the diagram.",
+   "ctx": "chapter 8 (new)",
+   "script": "[crisp, defensive] Hot dishes on the left. [flat, firm] Everyone got the DIAGRAM."
+  },
+  {
+   "voice": "carmen",
+   "speaker": "Doña Carmen",
+   "text": "Everyone got it. Then we moved the table.",
+   "ctx": "chapter 8 (new)",
+   "script": "[dry, serene] Everyone got it. [calm, delighted] Then we moved the table."
+  },
+  {
+   "voice": "bernadette",
+   "speaker": "Bernadette",
+   "text": "If I could have your attention. The Watch would like to thank the Watch for arranging the bread.",
+   "ctx": "chapter 8 (new)",
+   "script": "[formal, tapping a glass] If I could have your attention. [grand, flat] The Watch would like to thank the Watch for arranging the bread."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "He called it.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, quietly delighted] he called it."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Somebody always did.",
+   "ctx": "chapter 8 (new)",
+   "script": "[dry, low, delighted] Somebody always did."
+  },
+  {
+   "voice": "washington",
+   "speaker": "Mr. Washington",
+   "text": "Hold on. This is the Car Barn loaf. My father brought one home every morning until they shut that place. Who baked this?",
+   "ctx": "chapter 8 (new)",
+   "script": "[slow, stopped short] Hold on. [quiet, wondering] This is the Car Barn loaf. [soft, remembering] My father brought one home every morning until they shut that place. [gruff, asking] Who baked this?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "An old-timer from the barn. He retired today.",
+   "ctx": "chapter 8 (new)",
+   "script": "[gentle, plain] An old-timer from the barn. [quiet, warm] He retired today."
+  },
+  {
+   "voice": "washington",
+   "speaker": "Mr. Washington",
+   "text": "Well, he took his time about it. You know, in 1979, when I bought that house...",
+   "ctx": "chapter 8 (new)",
+   "script": "[gruff, softening] Well, he took his time about it. [settling in, storyteller] You know, in nineteen seventy-nine, when I bought that house..."
+  },
+  {
+   "voice": "odette",
+   "speaker": "The Neighbors",
+   "text": "Thirty-eight thousand dollars, and the porch was already crooked.",
+   "ctx": "chapter 8 (new, Olivia, Miss Odette, Doña Carmen and Bernadette together)",
+   "script": "[in unison, flat, bored, together] Thirty-eight thousand dollars, [deadpan, together] and the porch was already crooked."
+  },
+  {
+   "voice": "washington",
+   "speaker": "Mr. Washington",
+   "text": "I'm glad somebody on this street listens.",
+   "ctx": "chapter 8 (new)",
+   "script": "[dry, satisfied] I'm glad somebody on this street LISTENS."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "The drawer is ready for number eight. Also, a fancy letter came for you from the Moon Club. That place has been locked since 1971. I did not open it.",
+   "ctx": "chapter 8 (new, text message, read aloud)",
+   "script": "[warm Long Island accent, brisk] The drawer is ready for number eight. [warm Long Island accent, curious] Also, a fancy letter came for you from the Moon Club. [warm Long Island accent, firm] That place has been locked since nineteen seventy-one. [warm Long Island accent, proud] I did not OPEN it."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "I held it up to the lamp. There's a piano on it.",
+   "ctx": "chapter 8 (new, text message, read aloud)",
+   "script": "[warm Long Island accent, conspiratorial] I held it up to the lamp. [warm Long Island accent, intrigued] There's a PIANO on it."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Your father says he once baked sixty loaves in one morning. He has never baked.",
+   "ctx": "chapter 8 (new, text message, read aloud)",
+   "script": "[warm Long Island accent, dry] Your father says he once baked sixty loaves in one morning. [warm Long Island accent, flat, deadpan] He has NEVER baked."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "The man rented a car AT THE AIRPORT. That means he flies back and forth. Like you. The next one is here. Come home.",
+   "ctx": "chapter 8 (new, text message, read aloud)",
+   "script": "[urgent, triumphant] The man rented a car AT THE AIRPORT. [sharp, working it out] That means he flies back and forth. [pointed] Like YOU. [serious, firm] The next one is here. [quiet, plain] Come home."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I have to fly back tomorrow.",
+   "ctx": "chapter 8 (new)",
+   "script": "[quiet, plain] I have to fly back tomorrow."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "I figured. Take a loaf for your mom.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, easy] i figured. [warm] take a loaf for your mom."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "That leaves you alone on this street with Bernadette.",
+   "ctx": "chapter 8 (new)",
+   "script": "[concerned, dry] That leaves you alone on this street with Bernadette."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "We're fine. She thinks I moved the bowls.",
+   "ctx": "chapter 8 (new)",
+   "script": "[mellow, content] we're fine. [easy, deadpan] she thinks i moved the bowls."
+  }
+ ]
+}

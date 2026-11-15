@@ -65,6 +65,7 @@ const DIALOG_CAST={
     'Lukewarm':'mudling',
     'Leftover':'mudling',
     'Wet Blanket':'log',
+    'Damp Blanket':'log','Picky Lunchbox':'toad','The Neighbors':'odette',   // chapter 8: the script's names for the three barn troublemakers (the fight sprites keep Wet Blanket and Picky Eater), and four neighbors speaking as one
     'The Draft':'skeeter',
     'The Picky Eater':'toad',
     'Old Ironbelly':'bigone',
@@ -173,6 +174,7 @@ const DIALOG_CAST={
     'Lukewarm':'lukewarm',
     'Leftover':'leftover',
     'Wet Blanket':'wetblanket',
+    'Damp Blanket':'wetblanket','Picky Lunchbox':'picky',
     'The Draft':'draft',
     'The Picky Eater':'picky',
     'Old Ironbelly':'ironbelly',
