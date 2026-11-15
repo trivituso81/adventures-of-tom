@@ -1,0 +1,17 @@
+{
+ "version": 1,
+ "saved": "2026-11-15T05:11:35.339Z",
+ "heights": {},
+ "target": {},
+ "frames": {
+  "tom": {
+   "down_stand": {
+    "sheet": "tom-walking-sheet-v3.png",
+    "top": 0.6,
+    "chin": 144.7,
+    "feet": 476,
+    "ok": false
+   }
+  }
+ }
+}
