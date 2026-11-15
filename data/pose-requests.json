@@ -1,6 +1,6 @@
 {
  "version": 2,
- "saved": "2026-11-15T06:43:34.871Z",
+ "saved": "2026-11-15T06:50:53.715Z",
  "heights": {},
  "target": {},
  "frames": {
@@ -1040,6 +1040,219 @@
      "a": 126.9,
      "headRows": 12.715,
      "wholeRows": 37.147
+    }
+   }
+  },
+  "deedee": {
+   "down_stand": {
+    "sheet": "deedee-walking-sheet-v2.png",
+    "top": 10.5,
+    "chin": 140.1,
+    "ok": true,
+    "page": {
+     "f": 0.903,
+     "h": 1.22,
+     "a": 140.1,
+     "headRows": 12.715,
+     "wholeRows": 38.451
+    }
+   },
+   "up_stand": {
+    "sheet": "deedee-walking-sheet-v2.png",
+    "top": 6.9,
+    "chin": 121.6,
+    "ok": true,
+    "sAdj": 0.99,
+    "page": {
+     "f": 0.947,
+     "h": 1.364,
+     "a": 121.6,
+     "headRows": 12.588,
+     "wholeRows": 37.804
+    }
+   },
+   "left_stand": {
+    "sheet": "deedee-walking-sheet-v2.png",
+    "top": 8.7,
+    "chin": 131.9,
+    "ok": true,
+    "page": {
+     "f": 0.853,
+     "h": 1.283,
+     "a": 131.9,
+     "headRows": 12.715,
+     "wholeRows": 38.318
+    }
+   },
+   "em_happy": {
+    "sheet": "deedee-emotions-v3.png",
+    "top": 9.2,
+    "chin": 151.2,
+    "ok": true,
+    "page": {
+     "f": 1.006,
+     "h": 1.315,
+     "a": 151.2,
+     "headRows": 12.715,
+     "wholeRows": 38.244
+    }
+   },
+   "em_loving": {
+    "sheet": "deedee-emotions-v3.png",
+    "top": 7.1,
+    "chin": 150,
+    "ok": true,
+    "sAdj": 0.97,
+    "page": {
+     "f": 0.995,
+     "h": 1.268,
+     "a": 150,
+     "headRows": 12.333,
+     "wholeRows": 36.911
+    }
+   },
+   "em_sad": {
+    "sheet": "deedee-emotions-v3.png",
+    "top": 12.7,
+    "chin": 177.9,
+    "ok": true,
+    "sAdj": 0.91,
+    "hAdj": 1.1,
+    "page": {
+     "f": 1,
+     "h": 1.131,
+     "a": 177.9,
+     "headRows": 12.727,
+     "wholeRows": 36.23
+    }
+   },
+   "em_angry": {
+    "sheet": "deedee-emotions-v3.png",
+    "top": 14.1,
+    "chin": 187.9,
+    "ok": true,
+    "sAdj": 0.9,
+    "hAdj": 1.09,
+    "page": {
+     "f": 1.012,
+     "h": 1.054,
+     "a": 187.9,
+     "headRows": 12.473,
+     "wholeRows": 35.756
+    }
+   },
+   "em_scared": {
+    "sheet": "deedee-emotions-v3.png",
+    "top": 8.5,
+    "chin": 157.8,
+    "ok": true,
+    "sAdj": 0.89,
+    "hAdj": 1.06,
+    "page": {
+     "f": 0.921,
+     "h": 1.18,
+     "a": 157.8,
+     "headRows": 11.995,
+     "wholeRows": 34.693
+    }
+   },
+   "em_surprised": {
+    "sheet": "deedee-emotions-v3.png",
+    "top": 13.6,
+    "chin": 150.8,
+    "ok": true,
+    "sAdj": 0.88,
+    "hAdj": 1.05,
+    "page": {
+     "f": 0.902,
+     "h": 1.258,
+     "a": 150.8,
+     "headRows": 11.748,
+     "wholeRows": 34.679
+    }
+   },
+   "em_proud": {
+    "sheet": "deedee-emotions-v3.png",
+    "top": 10.1,
+    "chin": 145.4,
+    "ok": true,
+    "sAdj": 0.96,
+    "hAdj": 0.96,
+    "page": {
+     "f": 0.928,
+     "h": 1.272,
+     "a": 145.4,
+     "headRows": 11.718,
+     "wholeRows": 36.289
+    }
+   },
+   "em_unimpressed": {
+    "sheet": "deedee-emotions-v3.png",
+    "top": 11.6,
+    "chin": 154.6,
+    "ok": true,
+    "hAdj": 0.94,
+    "sAdj": 0.98,
+    "page": {
+     "f": 0.984,
+     "h": 1.203,
+     "a": 154.6,
+     "headRows": 11.713,
+     "wholeRows": 36.843
+    }
+   },
+   "tk_tell": {
+    "sheet": "deedee-talk-v4.png",
+    "top": 14.7,
+    "chin": 177.3,
+    "ok": true,
+    "page": {
+     "f": 0.994,
+     "h": 1.339,
+     "a": 177.3,
+     "headRows": 12.715,
+     "wholeRows": 38.57
+    }
+   },
+   "tk_point": {
+    "sheet": "deedee-talk-v4.png",
+    "top": 9.1,
+    "chin": 169.4,
+    "ok": true,
+    "page": {
+     "f": 0.989,
+     "h": 1.359,
+     "a": 169.4,
+     "headRows": 12.715,
+     "wholeRows": 38.142
+    }
+   },
+   "tk_ask": {
+    "sheet": "deedee-talk-v4.png",
+    "top": 0,
+    "chin": 162.6,
+    "ok": true,
+    "sAdj": 0.97,
+    "page": {
+     "f": 0.925,
+     "h": 1.299,
+     "a": 162.6,
+     "headRows": 12.333,
+     "wholeRows": 36.298
+    }
+   },
+   "tk_answer": {
+    "sheet": "deedee-talk-v4.png",
+    "top": 0,
+    "chin": 150.9,
+    "ok": true,
+    "sAdj": 0.97,
+    "page": {
+     "f": 0.899,
+     "h": 1.4,
+     "a": 150.9,
+     "headRows": 12.333,
+     "wholeRows": 36.298
     }
    }
   }
