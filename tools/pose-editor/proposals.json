@@ -1,0 +1,168 @@
+{
+ "_about": "Pose Editor proposals read by eye on the ruler pictures (RULER=dir python3 tools/pose-editor/manifest.py): [top of skull, bottom of chin] as shares of the front standing frame height, per walking direction. One sheet file each; a newer sheet makes them stale. Front lines were read one by one (pose1, 2026-11-14); back lines copy the front; side lines were read for tom, tnb, justin, boppy, amy and copy the front for the rest.",
+ "tom": {
+  "sheet": "tom-walking-sheet-v3.png",
+  "down": [
+   0.045,
+   0.304
+  ],
+  "up": [
+   0.045,
+   0.304
+  ],
+  "left": [
+   0.03,
+   0.285
+  ]
+ },
+ "tnb": {
+  "sheet": "tnb-walking-sheet-v2.png",
+  "down": [
+   0.05,
+   0.282
+  ],
+  "up": [
+   0.05,
+   0.282
+  ],
+  "left": [
+   0.045,
+   0.275
+  ]
+ },
+ "justin": {
+  "sheet": "justin-walking-sheet-v3.png",
+  "down": [
+   0.06,
+   0.26
+  ],
+  "up": [
+   0.06,
+   0.26
+  ],
+  "left": [
+   0.06,
+   0.27
+  ]
+ },
+ "boppy": {
+  "sheet": "boppy-walking-sheet-v4.png",
+  "down": [
+   0.04,
+   0.345
+  ],
+  "up": [
+   0.04,
+   0.345
+  ],
+  "left": [
+   0.04,
+   0.32
+  ]
+ },
+ "amy": {
+  "sheet": "amy-walking-sheet-v3.png",
+  "down": [
+   0.035,
+   0.23
+  ],
+  "up": [
+   0.035,
+   0.23
+  ],
+  "left": [
+   0.035,
+   0.235
+  ]
+ },
+ "deedee": {
+  "sheet": "deedee-walking-sheet-v2.png",
+  "down": [
+   0.04,
+   0.293
+  ],
+  "up": [
+   0.04,
+   0.293
+  ],
+  "left": [
+   0.04,
+   0.293
+  ]
+ },
+ "olivia": {
+  "sheet": "olivia-walking-sheet-v2.png",
+  "down": [
+   0.035,
+   0.23199999999999998
+  ],
+  "up": [
+   0.035,
+   0.23199999999999998
+  ],
+  "left": [
+   0.035,
+   0.23199999999999998
+  ]
+ },
+ "ellie": {
+  "sheet": "ellie-walking-sheet-v1.png",
+  "down": [
+   0.035,
+   0.275
+  ],
+  "up": [
+   0.035,
+   0.275
+  ],
+  "left": [
+   0.035,
+   0.275
+  ]
+ },
+ "jojo": {
+  "sheet": "jojo-walk-sheet-v2.png",
+  "down": [
+   0.035,
+   0.233
+  ],
+  "up": [
+   0.035,
+   0.233
+  ],
+  "left": [
+   0.035,
+   0.233
+  ]
+ },
+ "grace": {
+  "sheet": "grace-walking-sheet-v2.png",
+  "down": [
+   0.04,
+   0.266
+  ],
+  "up": [
+   0.04,
+   0.266
+  ],
+  "left": [
+   0.04,
+   0.266
+  ]
+ },
+ "rose": {
+  "sheet": "rose-walking-sheet-v2.png",
+  "down": [
+   0.04,
+   0.28300000000000003
+  ],
+  "up": [
+   0.04,
+   0.28300000000000003
+  ],
+  "left": [
+   0.04,
+   0.28300000000000003
+  ]
+ }
+}

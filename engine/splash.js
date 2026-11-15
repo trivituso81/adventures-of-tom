@@ -150,6 +150,7 @@ const SPLASH_MODES={
     {name:'AREA BUILDER',sub:'See and fix where you can walk in any area.',act:openAreas},
     {name:'PORTRAIT CROPS',sub:'Choose how each face is cropped.',act:openPortraits},
     {name:'HEAD SIZES',sub:'Make any head bigger or smaller and see it on the body.',act:openHeads},
+    {name:'POSE EDITOR',sub:'Size every pose: height, head, chin.',act:openPoses},
     {name:'WELCOME LAYOUT',sub:'Size and place each character on this screen.',act:splashEditOpen},
     brpAdminItem(),
     {name:'BLOCK BREAK LAB',sub:'Old Oak Park: the coin, the cracks, the colour coming back.',act:()=>splashGo(bbLabStart)},
@@ -319,6 +320,12 @@ function openHeads() {
   sfx.select(); splash.active=false;
   $('splash').classList.add('out');
   setTimeout(()=>{ location.href=new URL('heads.html',location.href).href; },250);
+}
+// The Pose Editor (poses.html): set the top of head, chin and feet lines on every pose, auto size or hand size it, save it for Claude to bake.
+function openPoses() {
+  sfx.select(); splash.active=false;
+  $('splash').classList.add('out');
+  setTimeout(()=>{ location.href=new URL('poses.html',location.href).href; },250);
 }
 // After a Battle Lab fight: back to the title screen on the lab list.
 function splashToLab() {

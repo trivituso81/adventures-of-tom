@@ -1,0 +1,2223 @@
+{
+ "tomRows": 42.0,
+ "taper": 12,
+ "order": [
+  "tom",
+  "tnb",
+  "justin",
+  "boppy",
+  "amy",
+  "deedee",
+  "olivia",
+  "ellie",
+  "jojo",
+  "grace",
+  "rose",
+  "nara",
+  "michael"
+ ],
+ "baseline": "tom",
+ "kids": [
+  "grace",
+  "rose"
+ ],
+ "chars": {
+  "tom": {
+   "name": "Tom",
+   "inches": 71,
+   "R": 42.0,
+   "standH": 476,
+   "sheet": "tom-walking-sheet-v3.png",
+   "headTweak": 1.0,
+   "now": {
+    "f": 1.0,
+    "h": 1.0,
+    "anchor": 126.61
+   },
+   "locked": null,
+   "frames": {
+    "down_stand": {
+     "set": "walk",
+     "key": "down_stand",
+     "label": "Tom, walking, front standing",
+     "img": "art/poses/tom/walk-down_stand.webp",
+     "w": 150,
+     "h": 476,
+     "ax": 73.5,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 21.4,
+      "chin": 144.7,
+      "feet": 476
+     },
+     "conf": "high"
+    },
+    "down_step1": {
+     "set": "walk",
+     "key": "down_step1",
+     "label": "Tom, walking, front step 1",
+     "img": "art/poses/tom/walk-down_step1.webp",
+     "w": 180,
+     "h": 478,
+     "ax": 88.5,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 21.4,
+      "chin": 144.7,
+      "feet": 478
+     },
+     "conf": "high"
+    },
+    "down_step2": {
+     "set": "walk",
+     "key": "down_step2",
+     "label": "Tom, walking, front step 2",
+     "img": "art/poses/tom/walk-down_step2.webp",
+     "w": 175,
+     "h": 477,
+     "ax": 89.5,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 21.4,
+      "chin": 144.7,
+      "feet": 477
+     },
+     "conf": "high"
+    },
+    "up_stand": {
+     "set": "walk",
+     "key": "up_stand",
+     "label": "Tom, walking, back standing",
+     "img": "art/poses/tom/walk-up_stand.webp",
+     "w": 148,
+     "h": 461,
+     "ax": 72.0,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 21.4,
+      "chin": 144.7,
+      "feet": 461
+     },
+     "conf": "low"
+    },
+    "up_step1": {
+     "set": "walk",
+     "key": "up_step1",
+     "label": "Tom, walking, back step 1",
+     "img": "art/poses/tom/walk-up_step1.webp",
+     "w": 176,
+     "h": 462,
+     "ax": 96.0,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 21.4,
+      "chin": 144.7,
+      "feet": 462
+     },
+     "conf": "low"
+    },
+    "up_step2": {
+     "set": "walk",
+     "key": "up_step2",
+     "label": "Tom, walking, back step 2",
+     "img": "art/poses/tom/walk-up_step2.webp",
+     "w": 175,
+     "h": 461,
+     "ax": 92.0,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 21.4,
+      "chin": 144.7,
+      "feet": 461
+     },
+     "conf": "low"
+    },
+    "left_stand": {
+     "set": "walk",
+     "key": "left_stand",
+     "label": "Tom, walking, side standing",
+     "img": "art/poses/tom/walk-left_stand.webp",
+     "w": 137,
+     "h": 484,
+     "ax": 51.5,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 14.3,
+      "chin": 135.7,
+      "feet": 484
+     },
+     "conf": "low"
+    },
+    "left_step1": {
+     "set": "walk",
+     "key": "left_step1",
+     "label": "Tom, walking, side step 1",
+     "img": "art/poses/tom/walk-left_step1.webp",
+     "w": 279,
+     "h": 480,
+     "ax": 126.5,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 14.3,
+      "chin": 135.7,
+      "feet": 480
+     },
+     "conf": "low"
+    },
+    "left_step2": {
+     "set": "walk",
+     "key": "left_step2",
+     "label": "Tom, walking, side step 2",
+     "img": "art/poses/tom/walk-left_step2.webp",
+     "w": 202,
+     "h": 485,
+     "ax": 91.0,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 14.3,
+      "chin": 135.7,
+      "feet": 485
+     },
+     "conf": "low"
+    }
+   }
+  },
+  "tnb": {
+   "name": "TNB",
+   "inches": 70,
+   "R": 41.408,
+   "standH": 461,
+   "sheet": "tnb-walking-sheet-v2.png",
+   "headTweak": 1.21,
+   "now": {
+    "f": 0.9355,
+    "h": 1.16585,
+    "anchor": 129.08
+   },
+   "locked": null,
+   "frames": {
+    "down_stand": {
+     "set": "walk",
+     "key": "down_stand",
+     "label": "TNB, walking, front standing",
+     "img": "art/poses/tnb/walk-down_stand.webp",
+     "w": 172,
+     "h": 461,
+     "ax": 90.4,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 23.1,
+      "chin": 130.0,
+      "feet": 461
+     },
+     "conf": "high"
+    },
+    "down_step1": {
+     "set": "walk",
+     "key": "down_step1",
+     "label": "TNB, walking, front step 1",
+     "img": "art/poses/tnb/walk-down_step1.webp",
+     "w": 185,
+     "h": 465,
+     "ax": 91.0,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 23.1,
+      "chin": 130.0,
+      "feet": 465
+     },
+     "conf": "high"
+    },
+    "down_step2": {
+     "set": "walk",
+     "key": "down_step2",
+     "label": "TNB, walking, front step 2",
+     "img": "art/poses/tnb/walk-down_step2.webp",
+     "w": 183,
+     "h": 464,
+     "ax": 89.5,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 23.1,
+      "chin": 130.0,
+      "feet": 464
+     },
+     "conf": "high"
+    },
+    "up_stand": {
+     "set": "walk",
+     "key": "up_stand",
+     "label": "TNB, walking, back standing",
+     "img": "art/poses/tnb/walk-up_stand.webp",
+     "w": 165,
+     "h": 469,
+     "ax": 83.0,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 23.1,
+      "chin": 130.0,
+      "feet": 469
+     },
+     "conf": "low"
+    },
+    "up_step1": {
+     "set": "walk",
+     "key": "up_step1",
+     "label": "TNB, walking, back step 1",
+     "img": "art/poses/tnb/walk-up_step1.webp",
+     "w": 185,
+     "h": 472,
+     "ax": 98.0,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 23.1,
+      "chin": 130.0,
+      "feet": 472
+     },
+     "conf": "low"
+    },
+    "up_step2": {
+     "set": "walk",
+     "key": "up_step2",
+     "label": "TNB, walking, back step 2",
+     "img": "art/poses/tnb/walk-up_step2.webp",
+     "w": 189,
+     "h": 473,
+     "ax": 91.5,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 23.1,
+      "chin": 130.0,
+      "feet": 473
+     },
+     "conf": "low"
+    },
+    "left_stand": {
+     "set": "walk",
+     "key": "left_stand",
+     "label": "TNB, walking, side standing",
+     "img": "art/poses/tnb/walk-left_stand.webp",
+     "w": 169,
+     "h": 479,
+     "ax": 94.0,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 20.7,
+      "chin": 126.8,
+      "feet": 479
+     },
+     "conf": "low"
+    },
+    "left_step1": {
+     "set": "walk",
+     "key": "left_step1",
+     "label": "TNB, walking, side step 1",
+     "img": "art/poses/tnb/walk-left_step1.webp",
+     "w": 290,
+     "h": 479,
+     "ax": 156.5,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 20.7,
+      "chin": 126.8,
+      "feet": 479
+     },
+     "conf": "low"
+    },
+    "left_step2": {
+     "set": "walk",
+     "key": "left_step2",
+     "label": "TNB, walking, side step 2",
+     "img": "art/poses/tnb/walk-left_step2.webp",
+     "w": 193,
+     "h": 480,
+     "ax": 124.5,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 20.7,
+      "chin": 126.8,
+      "feet": 480
+     },
+     "conf": "low"
+    }
+   }
+  },
+  "justin": {
+   "name": "Justin",
+   "inches": 76,
+   "R": 44.958,
+   "standH": 475,
+   "sheet": "justin-walking-sheet-v3.png",
+   "headTweak": 1.2,
+   "now": {
+    "f": 0.92344,
+    "h": 1.24243,
+    "anchor": 114.0
+   },
+   "locked": null,
+   "frames": {
+    "down_stand": {
+     "set": "walk",
+     "key": "down_stand",
+     "label": "Justin, walking, front standing",
+     "img": "art/poses/justin/walk-down_stand.webp",
+     "w": 156,
+     "h": 475,
+     "ax": 78.5,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 28.5,
+      "chin": 123.5,
+      "feet": 475
+     },
+     "conf": "high"
+    },
+    "down_step1": {
+     "set": "walk",
+     "key": "down_step1",
+     "label": "Justin, walking, front step 1",
+     "img": "art/poses/justin/walk-down_step1.webp",
+     "w": 182,
+     "h": 473,
+     "ax": 93.5,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 28.5,
+      "chin": 123.5,
+      "feet": 473
+     },
+     "conf": "high"
+    },
+    "down_step2": {
+     "set": "walk",
+     "key": "down_step2",
+     "label": "Justin, walking, front step 2",
+     "img": "art/poses/justin/walk-down_step2.webp",
+     "w": 180,
+     "h": 474,
+     "ax": 93.5,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 28.5,
+      "chin": 123.5,
+      "feet": 474
+     },
+     "conf": "high"
+    },
+    "up_stand": {
+     "set": "walk",
+     "key": "up_stand",
+     "label": "Justin, walking, back standing",
+     "img": "art/poses/justin/walk-up_stand.webp",
+     "w": 153,
+     "h": 456,
+     "ax": 76.4,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 28.5,
+      "chin": 123.5,
+      "feet": 456
+     },
+     "conf": "low"
+    },
+    "up_step1": {
+     "set": "walk",
+     "key": "up_step1",
+     "label": "Justin, walking, back step 1",
+     "img": "art/poses/justin/walk-up_step1.webp",
+     "w": 178,
+     "h": 459,
+     "ax": 100.0,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 28.5,
+      "chin": 123.5,
+      "feet": 459
+     },
+     "conf": "low"
+    },
+    "up_step2": {
+     "set": "walk",
+     "key": "up_step2",
+     "label": "Justin, walking, back step 2",
+     "img": "art/poses/justin/walk-up_step2.webp",
+     "w": 172,
+     "h": 459,
+     "ax": 78.5,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 28.5,
+      "chin": 123.5,
+      "feet": 459
+     },
+     "conf": "low"
+    },
+    "left_stand": {
+     "set": "walk",
+     "key": "left_stand",
+     "label": "Justin, walking, side standing",
+     "img": "art/poses/justin/walk-left_stand.webp",
+     "w": 149,
+     "h": 494,
+     "ax": 69.5,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 28.5,
+      "chin": 128.2,
+      "feet": 494
+     },
+     "conf": "low"
+    },
+    "left_step1": {
+     "set": "walk",
+     "key": "left_step1",
+     "label": "Justin, walking, side step 1",
+     "img": "art/poses/justin/walk-left_step1.webp",
+     "w": 307,
+     "h": 490,
+     "ax": 157.0,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 28.5,
+      "chin": 128.2,
+      "feet": 490
+     },
+     "conf": "low"
+    },
+    "left_step2": {
+     "set": "walk",
+     "key": "left_step2",
+     "label": "Justin, walking, side step 2",
+     "img": "art/poses/justin/walk-left_step2.webp",
+     "w": 216,
+     "h": 494,
+     "ax": 101.5,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 28.5,
+      "chin": 128.2,
+      "feet": 494
+     },
+     "conf": "low"
+    }
+   }
+  },
+  "boppy": {
+   "name": "Boppy",
+   "inches": 67,
+   "R": 39.634,
+   "standH": 480,
+   "sheet": "boppy-walking-sheet-v4.png",
+   "headTweak": 1.1,
+   "now": {
+    "f": 0.97865,
+    "h": 1.05102,
+    "anchor": 141.6
+   },
+   "locked": null,
+   "frames": {
+    "down_stand": {
+     "set": "walk",
+     "key": "down_stand",
+     "label": "Boppy, walking, front standing",
+     "img": "art/poses/boppy/walk-down_stand.webp",
+     "w": 212,
+     "h": 480,
+     "ax": 116.4,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 19.2,
+      "chin": 165.6,
+      "feet": 480
+     },
+     "conf": "high"
+    },
+    "down_step1": {
+     "set": "walk",
+     "key": "down_step1",
+     "label": "Boppy, walking, front step 1",
+     "img": "art/poses/boppy/walk-down_step1.webp",
+     "w": 231,
+     "h": 482,
+     "ax": 119.5,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 19.2,
+      "chin": 165.6,
+      "feet": 482
+     },
+     "conf": "high"
+    },
+    "down_step2": {
+     "set": "walk",
+     "key": "down_step2",
+     "label": "Boppy, walking, front step 2",
+     "img": "art/poses/boppy/walk-down_step2.webp",
+     "w": 217,
+     "h": 482,
+     "ax": 103.9,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 19.2,
+      "chin": 165.6,
+      "feet": 482
+     },
+     "conf": "high"
+    },
+    "up_stand": {
+     "set": "walk",
+     "key": "up_stand",
+     "label": "Boppy, walking, back standing",
+     "img": "art/poses/boppy/walk-up_stand.webp",
+     "w": 201,
+     "h": 453,
+     "ax": 111.5,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 19.2,
+      "chin": 165.6,
+      "feet": 453
+     },
+     "conf": "low"
+    },
+    "up_step1": {
+     "set": "walk",
+     "key": "up_step1",
+     "label": "Boppy, walking, back step 1",
+     "img": "art/poses/boppy/walk-up_step1.webp",
+     "w": 216,
+     "h": 454,
+     "ax": 116.9,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 19.2,
+      "chin": 165.6,
+      "feet": 454
+     },
+     "conf": "low"
+    },
+    "up_step2": {
+     "set": "walk",
+     "key": "up_step2",
+     "label": "Boppy, walking, back step 2",
+     "img": "art/poses/boppy/walk-up_step2.webp",
+     "w": 214,
+     "h": 451,
+     "ax": 116.0,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 19.2,
+      "chin": 165.6,
+      "feet": 451
+     },
+     "conf": "low"
+    },
+    "left_stand": {
+     "set": "walk",
+     "key": "left_stand",
+     "label": "Boppy, walking, side standing",
+     "img": "art/poses/boppy/walk-left_stand.webp",
+     "w": 218,
+     "h": 473,
+     "ax": 99.5,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 19.2,
+      "chin": 153.6,
+      "feet": 473
+     },
+     "conf": "low"
+    },
+    "left_step1": {
+     "set": "walk",
+     "key": "left_step1",
+     "label": "Boppy, walking, side step 1",
+     "img": "art/poses/boppy/walk-left_step1.webp",
+     "w": 288,
+     "h": 468,
+     "ax": 147.3,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 19.2,
+      "chin": 153.6,
+      "feet": 468
+     },
+     "conf": "low"
+    },
+    "left_step2": {
+     "set": "walk",
+     "key": "left_step2",
+     "label": "Boppy, walking, side step 2",
+     "img": "art/poses/boppy/walk-left_step2.webp",
+     "w": 222,
+     "h": 474,
+     "ax": 106.8,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 19.2,
+      "chin": 153.6,
+      "feet": 474
+     },
+     "conf": "low"
+    }
+   }
+  },
+  "amy": {
+   "name": "Amy",
+   "inches": 65,
+   "R": 38.451,
+   "standH": 477,
+   "sheet": "amy-walking-sheet-v3.png",
+   "headTweak": 1.27,
+   "now": {
+    "f": 0.85273,
+    "h": 1.41916,
+    "anchor": 124.02
+   },
+   "locked": null,
+   "frames": {
+    "down_stand": {
+     "set": "walk",
+     "key": "down_stand",
+     "label": "Amy, walking, front standing",
+     "img": "art/poses/amy/walk-down_stand.webp",
+     "w": 168,
+     "h": 477,
+     "ax": 85.5,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 16.7,
+      "chin": 109.7,
+      "feet": 477
+     },
+     "conf": "high"
+    },
+    "down_step1": {
+     "set": "walk",
+     "key": "down_step1",
+     "label": "Amy, walking, front step 1",
+     "img": "art/poses/amy/walk-down_step1.webp",
+     "w": 171,
+     "h": 476,
+     "ax": 89.1,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 16.7,
+      "chin": 109.7,
+      "feet": 476
+     },
+     "conf": "high"
+    },
+    "down_step2": {
+     "set": "walk",
+     "key": "down_step2",
+     "label": "Amy, walking, front step 2",
+     "img": "art/poses/amy/walk-down_step2.webp",
+     "w": 175,
+     "h": 477,
+     "ax": 88.7,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 16.7,
+      "chin": 109.7,
+      "feet": 477
+     },
+     "conf": "high"
+    },
+    "up_stand": {
+     "set": "walk",
+     "key": "up_stand",
+     "label": "Amy, walking, back standing",
+     "img": "art/poses/amy/walk-up_stand.webp",
+     "w": 161,
+     "h": 474,
+     "ax": 82.7,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 16.7,
+      "chin": 109.7,
+      "feet": 474
+     },
+     "conf": "low"
+    },
+    "up_step1": {
+     "set": "walk",
+     "key": "up_step1",
+     "label": "Amy, walking, back step 1",
+     "img": "art/poses/amy/walk-up_step1.webp",
+     "w": 181,
+     "h": 474,
+     "ax": 98.0,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 16.7,
+      "chin": 109.7,
+      "feet": 474
+     },
+     "conf": "low"
+    },
+    "up_step2": {
+     "set": "walk",
+     "key": "up_step2",
+     "label": "Amy, walking, back step 2",
+     "img": "art/poses/amy/walk-up_step2.webp",
+     "w": 178,
+     "h": 473,
+     "ax": 88.0,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 16.7,
+      "chin": 109.7,
+      "feet": 473
+     },
+     "conf": "low"
+    },
+    "left_stand": {
+     "set": "walk",
+     "key": "left_stand",
+     "label": "Amy, walking, side standing",
+     "img": "art/poses/amy/walk-left_stand.webp",
+     "w": 163,
+     "h": 484,
+     "ax": 89.9,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 16.7,
+      "chin": 112.1,
+      "feet": 484
+     },
+     "conf": "low"
+    },
+    "left_step1": {
+     "set": "walk",
+     "key": "left_step1",
+     "label": "Amy, walking, side step 1",
+     "img": "art/poses/amy/walk-left_step1.webp",
+     "w": 261,
+     "h": 482,
+     "ax": 170.9,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 16.7,
+      "chin": 112.1,
+      "feet": 482
+     },
+     "conf": "low"
+    },
+    "left_step2": {
+     "set": "walk",
+     "key": "left_step2",
+     "label": "Amy, walking, side step 2",
+     "img": "art/poses/amy/walk-left_step2.webp",
+     "w": 206,
+     "h": 484,
+     "ax": 129.9,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 16.7,
+      "chin": 112.1,
+      "feet": 484
+     },
+     "conf": "low"
+    }
+   }
+  },
+  "deedee": {
+   "name": "Deedee",
+   "inches": 65,
+   "R": 38.451,
+   "standH": 478,
+   "sheet": "deedee-walking-sheet-v2.png",
+   "headTweak": 1.13,
+   "now": {
+    "f": 0.95276,
+    "h": 1.1129,
+    "anchor": 141.01
+   },
+   "locked": null,
+   "frames": {
+    "down_stand": {
+     "set": "walk",
+     "key": "down_stand",
+     "label": "Deedee, walking, front standing",
+     "img": "art/poses/deedee/walk-down_stand.webp",
+     "w": 155,
+     "h": 478,
+     "ax": 78.5,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 19.1,
+      "chin": 140.1,
+      "feet": 478
+     },
+     "conf": "high"
+    },
+    "down_step1": {
+     "set": "walk",
+     "key": "down_step1",
+     "label": "Deedee, walking, front step 1",
+     "img": "art/poses/deedee/walk-down_step1.webp",
+     "w": 158,
+     "h": 477,
+     "ax": 80.0,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 19.1,
+      "chin": 140.1,
+      "feet": 477
+     },
+     "conf": "high"
+    },
+    "down_step2": {
+     "set": "walk",
+     "key": "down_step2",
+     "label": "Deedee, walking, front step 2",
+     "img": "art/poses/deedee/walk-down_step2.webp",
+     "w": 166,
+     "h": 477,
+     "ax": 86.5,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 19.1,
+      "chin": 140.1,
+      "feet": 477
+     },
+     "conf": "high"
+    },
+    "up_stand": {
+     "set": "walk",
+     "key": "up_stand",
+     "label": "Deedee, walking, back standing",
+     "img": "art/poses/deedee/walk-up_stand.webp",
+     "w": 142,
+     "h": 440,
+     "ax": 71.0,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 19.1,
+      "chin": 140.1,
+      "feet": 440
+     },
+     "conf": "low"
+    },
+    "up_step1": {
+     "set": "walk",
+     "key": "up_step1",
+     "label": "Deedee, walking, back step 1",
+     "img": "art/poses/deedee/walk-up_step1.webp",
+     "w": 161,
+     "h": 439,
+     "ax": 77.0,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 19.1,
+      "chin": 140.1,
+      "feet": 439
+     },
+     "conf": "low"
+    },
+    "up_step2": {
+     "set": "walk",
+     "key": "up_step2",
+     "label": "Deedee, walking, back step 2",
+     "img": "art/poses/deedee/walk-up_step2.webp",
+     "w": 158,
+     "h": 440,
+     "ax": 85.0,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 19.1,
+      "chin": 140.1,
+      "feet": 440
+     },
+     "conf": "low"
+    },
+    "left_stand": {
+     "set": "walk",
+     "key": "left_stand",
+     "label": "Deedee, walking, side standing",
+     "img": "art/poses/deedee/walk-left_stand.webp",
+     "w": 151,
+     "h": 489,
+     "ax": 87.7,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 19.1,
+      "chin": 140.1,
+      "feet": 489
+     },
+     "conf": "low"
+    },
+    "left_step1": {
+     "set": "walk",
+     "key": "left_step1",
+     "label": "Deedee, walking, side step 1",
+     "img": "art/poses/deedee/walk-left_step1.webp",
+     "w": 262,
+     "h": 486,
+     "ax": 164.7,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 19.1,
+      "chin": 140.1,
+      "feet": 486
+     },
+     "conf": "low"
+    },
+    "left_step2": {
+     "set": "walk",
+     "key": "left_step2",
+     "label": "Deedee, walking, side step 2",
+     "img": "art/poses/deedee/walk-left_step2.webp",
+     "w": 197,
+     "h": 489,
+     "ax": 132.7,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 19.1,
+      "chin": 140.1,
+      "feet": 489
+     },
+     "conf": "low"
+    }
+   }
+  },
+  "olivia": {
+   "name": "Olivia",
+   "inches": 68,
+   "R": 40.225,
+   "standH": 411,
+   "sheet": "olivia-walking-sheet-v2.png",
+   "headTweak": 1.2,
+   "now": {
+    "f": 0.87729,
+    "h": 1.3886,
+    "anchor": 98.64
+   },
+   "locked": null,
+   "frames": {
+    "down_stand": {
+     "set": "walk",
+     "key": "down_stand",
+     "label": "Olivia, walking, front standing",
+     "img": "art/poses/olivia/walk-down_stand.webp",
+     "w": 147,
+     "h": 411,
+     "ax": 72.3,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 14.4,
+      "chin": 95.4,
+      "feet": 411
+     },
+     "conf": "high"
+    },
+    "down_step1": {
+     "set": "walk",
+     "key": "down_step1",
+     "label": "Olivia, walking, front step 1",
+     "img": "art/poses/olivia/walk-down_step1.webp",
+     "w": 163,
+     "h": 417,
+     "ax": 80.4,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 14.4,
+      "chin": 95.4,
+      "feet": 417
+     },
+     "conf": "high"
+    },
+    "down_step2": {
+     "set": "walk",
+     "key": "down_step2",
+     "label": "Olivia, walking, front step 2",
+     "img": "art/poses/olivia/walk-down_step2.webp",
+     "w": 157,
+     "h": 416,
+     "ax": 77.4,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 14.4,
+      "chin": 95.4,
+      "feet": 416
+     },
+     "conf": "high"
+    },
+    "up_stand": {
+     "set": "walk",
+     "key": "up_stand",
+     "label": "Olivia, walking, back standing",
+     "img": "art/poses/olivia/walk-up_stand.webp",
+     "w": 143,
+     "h": 401,
+     "ax": 74.0,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 14.4,
+      "chin": 95.4,
+      "feet": 401
+     },
+     "conf": "low"
+    },
+    "up_step1": {
+     "set": "walk",
+     "key": "up_step1",
+     "label": "Olivia, walking, back step 1",
+     "img": "art/poses/olivia/walk-up_step1.webp",
+     "w": 162,
+     "h": 403,
+     "ax": 90.5,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 14.4,
+      "chin": 95.4,
+      "feet": 403
+     },
+     "conf": "low"
+    },
+    "up_step2": {
+     "set": "walk",
+     "key": "up_step2",
+     "label": "Olivia, walking, back step 2",
+     "img": "art/poses/olivia/walk-up_step2.webp",
+     "w": 161,
+     "h": 407,
+     "ax": 88.5,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 14.4,
+      "chin": 95.4,
+      "feet": 407
+     },
+     "conf": "low"
+    },
+    "left_stand": {
+     "set": "walk",
+     "key": "left_stand",
+     "label": "Olivia, walking, side standing",
+     "img": "art/poses/olivia/walk-left_stand.webp",
+     "w": 130,
+     "h": 421,
+     "ax": 68.1,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 14.4,
+      "chin": 95.4,
+      "feet": 421
+     },
+     "conf": "low"
+    },
+    "left_step1": {
+     "set": "walk",
+     "key": "left_step1",
+     "label": "Olivia, walking, side step 1",
+     "img": "art/poses/olivia/walk-left_step1.webp",
+     "w": 267,
+     "h": 418,
+     "ax": 163.8,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 14.4,
+      "chin": 95.4,
+      "feet": 418
+     },
+     "conf": "low"
+    },
+    "left_step2": {
+     "set": "walk",
+     "key": "left_step2",
+     "label": "Olivia, walking, side step 2",
+     "img": "art/poses/olivia/walk-left_step2.webp",
+     "w": 179,
+     "h": 420,
+     "ax": 112.9,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 14.4,
+      "chin": 95.4,
+      "feet": 420
+     },
+     "conf": "low"
+    }
+   }
+  },
+  "ellie": {
+   "name": "Ellie",
+   "inches": 62,
+   "R": 36.676,
+   "standH": 479,
+   "sheet": "ellie-walking-sheet-v1.png",
+   "headTweak": 1.2,
+   "now": {
+    "f": 0.93153,
+    "h": 1.14625,
+    "anchor": 152.74
+   },
+   "locked": null,
+   "frames": {
+    "down_stand": {
+     "set": "walk",
+     "key": "down_stand",
+     "label": "Ellie, walking, front standing",
+     "img": "art/poses/ellie/walk-down_stand.webp",
+     "w": 174,
+     "h": 479,
+     "ax": 87.5,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 16.8,
+      "chin": 131.7,
+      "feet": 479
+     },
+     "conf": "high"
+    },
+    "down_step1": {
+     "set": "walk",
+     "key": "down_step1",
+     "label": "Ellie, walking, front step 1",
+     "img": "art/poses/ellie/walk-down_step1.webp",
+     "w": 195,
+     "h": 482,
+     "ax": 102.0,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 16.8,
+      "chin": 131.7,
+      "feet": 482
+     },
+     "conf": "high"
+    },
+    "down_step2": {
+     "set": "walk",
+     "key": "down_step2",
+     "label": "Ellie, walking, front step 2",
+     "img": "art/poses/ellie/walk-down_step2.webp",
+     "w": 195,
+     "h": 482,
+     "ax": 98.5,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 16.8,
+      "chin": 131.7,
+      "feet": 482
+     },
+     "conf": "high"
+    },
+    "up_stand": {
+     "set": "walk",
+     "key": "up_stand",
+     "label": "Ellie, walking, back standing",
+     "img": "art/poses/ellie/walk-up_stand.webp",
+     "w": 169,
+     "h": 461,
+     "ax": 84.5,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 16.8,
+      "chin": 131.7,
+      "feet": 461
+     },
+     "conf": "low"
+    },
+    "up_step1": {
+     "set": "walk",
+     "key": "up_step1",
+     "label": "Ellie, walking, back step 1",
+     "img": "art/poses/ellie/walk-up_step1.webp",
+     "w": 185,
+     "h": 463,
+     "ax": 97.5,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 16.8,
+      "chin": 131.7,
+      "feet": 463
+     },
+     "conf": "low"
+    },
+    "up_step2": {
+     "set": "walk",
+     "key": "up_step2",
+     "label": "Ellie, walking, back step 2",
+     "img": "art/poses/ellie/walk-up_step2.webp",
+     "w": 189,
+     "h": 463,
+     "ax": 97.6,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 16.8,
+      "chin": 131.7,
+      "feet": 463
+     },
+     "conf": "low"
+    },
+    "left_stand": {
+     "set": "walk",
+     "key": "left_stand",
+     "label": "Ellie, walking, side standing",
+     "img": "art/poses/ellie/walk-left_stand.webp",
+     "w": 165,
+     "h": 488,
+     "ax": 73.2,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 16.8,
+      "chin": 131.7,
+      "feet": 488
+     },
+     "conf": "low"
+    },
+    "left_step1": {
+     "set": "walk",
+     "key": "left_step1",
+     "label": "Ellie, walking, side step 1",
+     "img": "art/poses/ellie/walk-left_step1.webp",
+     "w": 290,
+     "h": 484,
+     "ax": 155.5,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 16.8,
+      "chin": 131.7,
+      "feet": 484
+     },
+     "conf": "low"
+    },
+    "left_step2": {
+     "set": "walk",
+     "key": "left_step2",
+     "label": "Ellie, walking, side step 2",
+     "img": "art/poses/ellie/walk-left_step2.webp",
+     "w": 212,
+     "h": 488,
+     "ax": 98.6,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 16.8,
+      "chin": 131.7,
+      "feet": 488
+     },
+     "conf": "low"
+    }
+   }
+  },
+  "jojo": {
+   "name": "Jojo",
+   "inches": 66,
+   "R": 39.042,
+   "standH": 473,
+   "sheet": "jojo-walk-sheet-v2.png",
+   "headTweak": 1.15,
+   "now": {
+    "f": 0.88282,
+    "h": 1.37106,
+    "anchor": 113.52
+   },
+   "locked": null,
+   "frames": {
+    "down_stand": {
+     "set": "walk",
+     "key": "down_stand",
+     "label": "Jojo, walking, front standing",
+     "img": "art/poses/jojo/walk-down_stand.webp",
+     "w": 179,
+     "h": 473,
+     "ax": 91.2,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 16.6,
+      "chin": 110.2,
+      "feet": 473
+     },
+     "conf": "high"
+    },
+    "down_step1": {
+     "set": "walk",
+     "key": "down_step1",
+     "label": "Jojo, walking, front step 1",
+     "img": "art/poses/jojo/walk-down_step1.webp",
+     "w": 197,
+     "h": 483,
+     "ax": 97.7,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 16.6,
+      "chin": 110.2,
+      "feet": 483
+     },
+     "conf": "high"
+    },
+    "down_step2": {
+     "set": "walk",
+     "key": "down_step2",
+     "label": "Jojo, walking, front step 2",
+     "img": "art/poses/jojo/walk-down_step2.webp",
+     "w": 174,
+     "h": 478,
+     "ax": 90.2,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 16.6,
+      "chin": 110.2,
+      "feet": 478
+     },
+     "conf": "high"
+    },
+    "up_stand": {
+     "set": "walk",
+     "key": "up_stand",
+     "label": "Jojo, walking, back standing",
+     "img": "art/poses/jojo/walk-up_stand.webp",
+     "w": 153,
+     "h": 444,
+     "ax": 69.2,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 16.6,
+      "chin": 110.2,
+      "feet": 444
+     },
+     "conf": "low"
+    },
+    "up_step1": {
+     "set": "walk",
+     "key": "up_step1",
+     "label": "Jojo, walking, back step 1",
+     "img": "art/poses/jojo/walk-up_step1.webp",
+     "w": 176,
+     "h": 450,
+     "ax": 95.9,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 16.6,
+      "chin": 110.2,
+      "feet": 450
+     },
+     "conf": "low"
+    },
+    "up_step2": {
+     "set": "walk",
+     "key": "up_step2",
+     "label": "Jojo, walking, back step 2",
+     "img": "art/poses/jojo/walk-up_step2.webp",
+     "w": 163,
+     "h": 449,
+     "ax": 83.7,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 16.6,
+      "chin": 110.2,
+      "feet": 449
+     },
+     "conf": "low"
+    },
+    "left_stand": {
+     "set": "walk",
+     "key": "left_stand",
+     "label": "Jojo, walking, side standing",
+     "img": "art/poses/jojo/walk-left_stand.webp",
+     "w": 153,
+     "h": 504,
+     "ax": 83.8,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 16.6,
+      "chin": 110.2,
+      "feet": 504
+     },
+     "conf": "low"
+    },
+    "left_step1": {
+     "set": "walk",
+     "key": "left_step1",
+     "label": "Jojo, walking, side step 1",
+     "img": "art/poses/jojo/walk-left_step1.webp",
+     "w": 287,
+     "h": 501,
+     "ax": 167.6,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 16.6,
+      "chin": 110.2,
+      "feet": 501
+     },
+     "conf": "low"
+    },
+    "left_step2": {
+     "set": "walk",
+     "key": "left_step2",
+     "label": "Jojo, walking, side step 2",
+     "img": "art/poses/jojo/walk-left_step2.webp",
+     "w": 224,
+     "h": 507,
+     "ax": 114.8,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 16.6,
+      "chin": 110.2,
+      "feet": 507
+     },
+     "conf": "low"
+    }
+   }
+  },
+  "grace": {
+   "name": "Grace",
+   "inches": 50,
+   "R": 29.577,
+   "standH": 465,
+   "sheet": "grace-walking-sheet-v2.png",
+   "headTweak": 1.3,
+   "now": {
+    "f": 0.88904,
+    "h": 1.3,
+    "anchor": 125.55
+   },
+   "locked": null,
+   "frames": {
+    "down_stand": {
+     "set": "walk",
+     "key": "down_stand",
+     "label": "Grace, walking, front standing",
+     "img": "art/poses/grace/walk-down_stand.webp",
+     "w": 218,
+     "h": 465,
+     "ax": 98.5,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 18.6,
+      "chin": 123.7,
+      "feet": 465
+     },
+     "conf": "high"
+    },
+    "down_step1": {
+     "set": "walk",
+     "key": "down_step1",
+     "label": "Grace, walking, front step 1",
+     "img": "art/poses/grace/walk-down_step1.webp",
+     "w": 220,
+     "h": 467,
+     "ax": 99.5,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 18.6,
+      "chin": 123.7,
+      "feet": 467
+     },
+     "conf": "high"
+    },
+    "down_step2": {
+     "set": "walk",
+     "key": "down_step2",
+     "label": "Grace, walking, front step 2",
+     "img": "art/poses/grace/walk-down_step2.webp",
+     "w": 217,
+     "h": 467,
+     "ax": 99.0,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 18.6,
+      "chin": 123.7,
+      "feet": 467
+     },
+     "conf": "high"
+    },
+    "up_stand": {
+     "set": "walk",
+     "key": "up_stand",
+     "label": "Grace, walking, back standing",
+     "img": "art/poses/grace/walk-up_stand.webp",
+     "w": 201,
+     "h": 449,
+     "ax": 106.4,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 18.6,
+      "chin": 123.7,
+      "feet": 449
+     },
+     "conf": "low"
+    },
+    "up_step1": {
+     "set": "walk",
+     "key": "up_step1",
+     "label": "Grace, walking, back step 1",
+     "img": "art/poses/grace/walk-up_step1.webp",
+     "w": 197,
+     "h": 450,
+     "ax": 105.0,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 18.6,
+      "chin": 123.7,
+      "feet": 450
+     },
+     "conf": "low"
+    },
+    "up_step2": {
+     "set": "walk",
+     "key": "up_step2",
+     "label": "Grace, walking, back step 2",
+     "img": "art/poses/grace/walk-up_step2.webp",
+     "w": 204,
+     "h": 450,
+     "ax": 110.4,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 18.6,
+      "chin": 123.7,
+      "feet": 450
+     },
+     "conf": "low"
+    },
+    "left_stand": {
+     "set": "walk",
+     "key": "left_stand",
+     "label": "Grace, walking, side standing",
+     "img": "art/poses/grace/walk-left_stand.webp",
+     "w": 198,
+     "h": 494,
+     "ax": 99.3,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 18.6,
+      "chin": 123.7,
+      "feet": 494
+     },
+     "conf": "low"
+    },
+    "left_step1": {
+     "set": "walk",
+     "key": "left_step1",
+     "label": "Grace, walking, side step 1",
+     "img": "art/poses/grace/walk-left_step1.webp",
+     "w": 293,
+     "h": 490,
+     "ax": 184.8,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 18.6,
+      "chin": 123.7,
+      "feet": 490
+     },
+     "conf": "low"
+    },
+    "left_step2": {
+     "set": "walk",
+     "key": "left_step2",
+     "label": "Grace, walking, side step 2",
+     "img": "art/poses/grace/walk-left_step2.webp",
+     "w": 238,
+     "h": 503,
+     "ax": 137.3,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 18.6,
+      "chin": 123.7,
+      "feet": 503
+     },
+     "conf": "low"
+    }
+   }
+  },
+  "rose": {
+   "name": "Rose",
+   "inches": 40,
+   "R": 23.662,
+   "standH": 467,
+   "sheet": "rose-walking-sheet-v2.png",
+   "headTweak": 1.3,
+   "now": {
+    "f": 0.88904,
+    "h": 1.3,
+    "anchor": 126.09
+   },
+   "locked": null,
+   "frames": {
+    "down_stand": {
+     "set": "walk",
+     "key": "down_stand",
+     "label": "Rose, walking, front standing",
+     "img": "art/poses/rose/walk-down_stand.webp",
+     "w": 202,
+     "h": 467,
+     "ax": 102.2,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 18.7,
+      "chin": 132.2,
+      "feet": 467
+     },
+     "conf": "high"
+    },
+    "down_step1": {
+     "set": "walk",
+     "key": "down_step1",
+     "label": "Rose, walking, front step 1",
+     "img": "art/poses/rose/walk-down_step1.webp",
+     "w": 205,
+     "h": 465,
+     "ax": 103.8,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 18.7,
+      "chin": 132.2,
+      "feet": 465
+     },
+     "conf": "high"
+    },
+    "down_step2": {
+     "set": "walk",
+     "key": "down_step2",
+     "label": "Rose, walking, front step 2",
+     "img": "art/poses/rose/walk-down_step2.webp",
+     "w": 205,
+     "h": 467,
+     "ax": 102.9,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 18.7,
+      "chin": 132.2,
+      "feet": 467
+     },
+     "conf": "high"
+    },
+    "up_stand": {
+     "set": "walk",
+     "key": "up_stand",
+     "label": "Rose, walking, back standing",
+     "img": "art/poses/rose/walk-up_stand.webp",
+     "w": 193,
+     "h": 459,
+     "ax": 92.5,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 18.7,
+      "chin": 132.2,
+      "feet": 459
+     },
+     "conf": "low"
+    },
+    "up_step1": {
+     "set": "walk",
+     "key": "up_step1",
+     "label": "Rose, walking, back step 1",
+     "img": "art/poses/rose/walk-up_step1.webp",
+     "w": 200,
+     "h": 460,
+     "ax": 98.1,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 18.7,
+      "chin": 132.2,
+      "feet": 460
+     },
+     "conf": "low"
+    },
+    "up_step2": {
+     "set": "walk",
+     "key": "up_step2",
+     "label": "Rose, walking, back step 2",
+     "img": "art/poses/rose/walk-up_step2.webp",
+     "w": 194,
+     "h": 460,
+     "ax": 93.4,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 18.7,
+      "chin": 132.2,
+      "feet": 460
+     },
+     "conf": "low"
+    },
+    "left_stand": {
+     "set": "walk",
+     "key": "left_stand",
+     "label": "Rose, walking, side standing",
+     "img": "art/poses/rose/walk-left_stand.webp",
+     "w": 192,
+     "h": 500,
+     "ax": 110.0,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 18.7,
+      "chin": 132.2,
+      "feet": 500
+     },
+     "conf": "low"
+    },
+    "left_step1": {
+     "set": "walk",
+     "key": "left_step1",
+     "label": "Rose, walking, side step 1",
+     "img": "art/poses/rose/walk-left_step1.webp",
+     "w": 284,
+     "h": 496,
+     "ax": 184.5,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 18.7,
+      "chin": 132.2,
+      "feet": 496
+     },
+     "conf": "low"
+    },
+    "left_step2": {
+     "set": "walk",
+     "key": "left_step2",
+     "label": "Rose, walking, side step 2",
+     "img": "art/poses/rose/walk-left_step2.webp",
+     "w": 234,
+     "h": 508,
+     "ax": 151.0,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 18.7,
+      "chin": 132.2,
+      "feet": 508
+     },
+     "conf": "low"
+    }
+   }
+  },
+  "nara": {
+   "name": "Nara",
+   "inches": 42,
+   "R": 32.0,
+   "standH": 375,
+   "sheet": "nara-walking-sheet-v2.png",
+   "headTweak": 0.97,
+   "now": {
+    "f": 1.02357,
+    "h": 0.97,
+    "anchor": 165.0
+   },
+   "locked": "Nara is a dog: she has no chin to match, so only her whole size can change (later phase).",
+   "frames": {
+    "down_stand": {
+     "set": "walk",
+     "key": "down_stand",
+     "label": "Nara, walking, front standing",
+     "img": "art/poses/nara/walk-down_stand.webp",
+     "w": 238,
+     "h": 375,
+     "ax": 108.5,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 19.4,
+      "chin": 161.2,
+      "feet": 375
+     },
+     "conf": "low"
+    },
+    "down_step1": {
+     "set": "walk",
+     "key": "down_step1",
+     "label": "Nara, walking, front step 1",
+     "img": "art/poses/nara/walk-down_step1.webp",
+     "w": 246,
+     "h": 381,
+     "ax": 120.6,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 19.4,
+      "chin": 161.2,
+      "feet": 381
+     },
+     "conf": "low"
+    },
+    "down_step2": {
+     "set": "walk",
+     "key": "down_step2",
+     "label": "Nara, walking, front step 2",
+     "img": "art/poses/nara/walk-down_step2.webp",
+     "w": 236,
+     "h": 382,
+     "ax": 116.5,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 19.4,
+      "chin": 161.2,
+      "feet": 382
+     },
+     "conf": "low"
+    },
+    "up_stand": {
+     "set": "walk",
+     "key": "up_stand",
+     "label": "Nara, walking, back standing",
+     "img": "art/poses/nara/walk-up_stand.webp",
+     "w": 215,
+     "h": 377,
+     "ax": 113.5,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 19.4,
+      "chin": 161.2,
+      "feet": 377
+     },
+     "conf": "low"
+    },
+    "up_step1": {
+     "set": "walk",
+     "key": "up_step1",
+     "label": "Nara, walking, back step 1",
+     "img": "art/poses/nara/walk-up_step1.webp",
+     "w": 229,
+     "h": 380,
+     "ax": 131.2,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 19.4,
+      "chin": 161.2,
+      "feet": 380
+     },
+     "conf": "low"
+    },
+    "up_step2": {
+     "set": "walk",
+     "key": "up_step2",
+     "label": "Nara, walking, back step 2",
+     "img": "art/poses/nara/walk-up_step2.webp",
+     "w": 219,
+     "h": 379,
+     "ax": 118.7,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 19.4,
+      "chin": 161.2,
+      "feet": 379
+     },
+     "conf": "low"
+    },
+    "left_stand": {
+     "set": "walk",
+     "key": "left_stand",
+     "label": "Nara, walking, side standing",
+     "img": "art/poses/nara/walk-left_stand.webp",
+     "w": 369,
+     "h": 325,
+     "ax": 218.5,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 19.4,
+      "chin": 161.2,
+      "feet": 325
+     },
+     "conf": "low"
+    },
+    "left_step1": {
+     "set": "walk",
+     "key": "left_step1",
+     "label": "Nara, walking, side step 1",
+     "img": "art/poses/nara/walk-left_step1.webp",
+     "w": 379,
+     "h": 323,
+     "ax": 219.5,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 19.4,
+      "chin": 161.2,
+      "feet": 323
+     },
+     "conf": "low"
+    },
+    "left_step2": {
+     "set": "walk",
+     "key": "left_step2",
+     "label": "Nara, walking, side step 2",
+     "img": "art/poses/nara/walk-left_step2.webp",
+     "w": 378,
+     "h": 327,
+     "ax": 200.5,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 19.4,
+      "chin": 161.2,
+      "feet": 327
+     },
+     "conf": "low"
+    }
+   }
+  },
+  "michael": {
+   "name": "Michael",
+   "inches": 76,
+   "R": 44.958,
+   "standH": 394,
+   "sheet": "michael-walking-sheet-v1.png",
+   "headTweak": 1.35,
+   "now": {
+    "f": 1.0,
+    "h": 1.0,
+    "anchor": 100.0
+   },
+   "locked": "Michael carries Lachlan and Isla: three heads in one picture. He joins in a later phase.",
+   "frames": {
+    "down_stand": {
+     "set": "walk",
+     "key": "down_stand",
+     "label": "Michael, walking, front standing",
+     "img": "art/poses/michael/walk-down_stand.webp",
+     "w": 221,
+     "h": 394,
+     "ax": 109.9,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 12.0,
+      "chin": 100.0,
+      "feet": 394
+     },
+     "conf": "low"
+    },
+    "down_step1": {
+     "set": "walk",
+     "key": "down_step1",
+     "label": "Michael, walking, front step 1",
+     "img": "art/poses/michael/walk-down_step1.webp",
+     "w": 215,
+     "h": 395,
+     "ax": 107.2,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 12.0,
+      "chin": 100.0,
+      "feet": 395
+     },
+     "conf": "low"
+    },
+    "down_step2": {
+     "set": "walk",
+     "key": "down_step2",
+     "label": "Michael, walking, front step 2",
+     "img": "art/poses/michael/walk-down_step2.webp",
+     "w": 215,
+     "h": 395,
+     "ax": 107.0,
+     "upright": true,
+     "link": "down_stand",
+     "marks": {
+      "top": 12.0,
+      "chin": 100.0,
+      "feet": 395
+     },
+     "conf": "low"
+    },
+    "up_stand": {
+     "set": "walk",
+     "key": "up_stand",
+     "label": "Michael, walking, back standing",
+     "img": "art/poses/michael/walk-up_stand.webp",
+     "w": 195,
+     "h": 371,
+     "ax": 97.1,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 12.0,
+      "chin": 100.0,
+      "feet": 371
+     },
+     "conf": "low"
+    },
+    "up_step1": {
+     "set": "walk",
+     "key": "up_step1",
+     "label": "Michael, walking, back step 1",
+     "img": "art/poses/michael/walk-up_step1.webp",
+     "w": 196,
+     "h": 375,
+     "ax": 99.0,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 12.0,
+      "chin": 100.0,
+      "feet": 375
+     },
+     "conf": "low"
+    },
+    "up_step2": {
+     "set": "walk",
+     "key": "up_step2",
+     "label": "Michael, walking, back step 2",
+     "img": "art/poses/michael/walk-up_step2.webp",
+     "w": 196,
+     "h": 376,
+     "ax": 97.2,
+     "upright": true,
+     "link": "up_stand",
+     "marks": {
+      "top": 12.0,
+      "chin": 100.0,
+      "feet": 376
+     },
+     "conf": "low"
+    },
+    "left_stand": {
+     "set": "walk",
+     "key": "left_stand",
+     "label": "Michael, walking, side standing",
+     "img": "art/poses/michael/walk-left_stand.webp",
+     "w": 151,
+     "h": 406,
+     "ax": 82.0,
+     "upright": true,
+     "link": null,
+     "marks": {
+      "top": 12.0,
+      "chin": 100.0,
+      "feet": 406
+     },
+     "conf": "low"
+    },
+    "left_step1": {
+     "set": "walk",
+     "key": "left_step1",
+     "label": "Michael, walking, side step 1",
+     "img": "art/poses/michael/walk-left_step1.webp",
+     "w": 212,
+     "h": 401,
+     "ax": 122.0,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 12.0,
+      "chin": 100.0,
+      "feet": 401
+     },
+     "conf": "low"
+    },
+    "left_step2": {
+     "set": "walk",
+     "key": "left_step2",
+     "label": "Michael, walking, side step 2",
+     "img": "art/poses/michael/walk-left_step2.webp",
+     "w": 155,
+     "h": 404,
+     "ax": 84.5,
+     "upright": true,
+     "link": "left_stand",
+     "marks": {
+      "top": 12.0,
+      "chin": 100.0,
+      "feet": 404
+     },
+     "conf": "low"
+    }
+   }
+  }
+ }
+}
