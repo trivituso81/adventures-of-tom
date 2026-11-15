@@ -1,6 +1,6 @@
 {
  "version": 2,
- "saved": "2026-11-15T05:50:54.956Z",
+ "saved": "2026-11-15T05:52:35.251Z",
  "heights": {},
  "target": {},
  "frames": {
@@ -65,6 +65,11 @@
     "sheet": "tom-talk-v2.png",
     "top": 3.4,
     "chin": 148.8
+   },
+   "tk_answer": {
+    "sheet": "tom-talk-v2.png",
+    "top": 0,
+    "chin": 147
    }
   },
   "tnb": {
