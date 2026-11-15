@@ -1,3 +1,6 @@
+## posefaces1b (2026-11-14): Tom's faces re-cut from his 22:13 save
+
+Three of Tom's feelings faces (happy, loving, unimpressed) re-cut with the lines he moved after posefaces1 was baked. No other change.
 ## posefaces1 (2026-11-14): Dialogue faces are now framed by the Pose Editor lines; saved portrait crops deleted
 
 Tom (2026-11-14 22:08): "Delete all portrait crop that are saved and default every portrait crop no matter what the pose, whether it is walk, talk, or feelings based on the red line for the head top of the head and the green line for the bottom of the chin for every character to center them exactly in the same way based on that, so basically we just need like a fixed position for where in the portrait the top of a character's head goes and the bottom of the character's head goes, which maybe is like a master setting in the portrait cropper tool, but then once I set them for each pose in the pose editor, it'll automatically make sure that all of the portraits look correct".
