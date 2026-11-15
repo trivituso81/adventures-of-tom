@@ -1,8 +1,10 @@
 {
  "version": 2,
- "saved": "2026-11-15T06:51:04.066Z",
+ "saved": "2026-11-15T06:59:08.602Z",
  "heights": {},
- "target": {},
+ "target": {
+  "olivia": 96
+ },
  "frames": {
   "tom": {
    "down_stand": {
@@ -1253,6 +1255,221 @@
      "a": 158.2,
      "headRows": 12.333,
      "wholeRows": 36.298
+    }
+   }
+  },
+  "olivia": {
+   "down_stand": {
+    "sheet": "olivia-walking-sheet-v2.png",
+    "top": 14.4,
+    "chin": 95.4,
+    "ok": true,
+    "sAdj": 1.03,
+    "hAdj": 0.98,
+    "page": {
+     "f": 0.848,
+     "h": 1.554,
+     "a": 95.4,
+     "headRows": 12.321,
+     "wholeRows": 41.117
+    }
+   },
+   "up_stand": {
+    "sheet": "olivia-walking-sheet-v2.png",
+    "top": 14.4,
+    "chin": 95.4,
+    "ok": true,
+    "page": {
+     "f": 0.851,
+     "h": 1.54,
+     "a": 95.4,
+     "headRows": 12.206,
+     "wholeRows": 40.225
+    }
+   },
+   "left_stand": {
+    "sheet": "olivia-walking-sheet-v2.png",
+    "top": 14.4,
+    "chin": 95.4,
+    "ok": true,
+    "page": {
+     "f": 0.797,
+     "h": 1.54,
+     "a": 95.4,
+     "headRows": 12.206,
+     "wholeRows": 40.225
+    }
+   },
+   "em_happy": {
+    "sheet": "olivia-emotions-v3.png",
+    "top": 8.2,
+    "chin": 116.6,
+    "ok": true,
+    "sAdj": 1.06,
+    "page": {
+     "f": 0.933,
+     "h": 1.6,
+     "a": 116.6,
+     "headRows": 12.938,
+     "wholeRows": 41.317
+    }
+   },
+   "em_loving": {
+    "sheet": "olivia-emotions-v3.png",
+    "top": 10.8,
+    "chin": 118.3,
+    "ok": true,
+    "page": {
+     "f": 0.879,
+     "h": 1.522,
+     "a": 118.3,
+     "headRows": 12.206,
+     "wholeRows": 39.282
+    }
+   },
+   "em_sad": {
+    "sheet": "olivia-emotions-v3.png",
+    "top": 8.5,
+    "chin": 144.7,
+    "ok": true,
+    "sAdj": 0.93,
+    "hAdj": 1.23,
+    "page": {
+     "f": 0.906,
+     "h": 1.374,
+     "a": 144.7,
+     "headRows": 13.963,
+     "wholeRows": 38.989
+    }
+   },
+   "em_angry": {
+    "sheet": "olivia-emotions-v3.png",
+    "top": 8.5,
+    "chin": 150,
+    "ok": true,
+    "sAdj": 0.93,
+    "hAdj": 1.29,
+    "page": {
+     "f": 0.932,
+     "h": 1.387,
+     "a": 150,
+     "headRows": 14.644,
+     "wholeRows": 39.703
+    }
+   },
+   "em_scared": {
+    "sheet": "olivia-emotions-v3.png",
+    "top": 10.8,
+    "chin": 137.7,
+    "ok": true,
+    "sAdj": 0.93,
+    "hAdj": 1.11,
+    "page": {
+     "f": 0.867,
+     "h": 1.331,
+     "a": 137.7,
+     "headRows": 12.6,
+     "wholeRows": 37.772
+    }
+   },
+   "em_surprised": {
+    "sheet": "olivia-emotions-v3.png",
+    "top": 15.1,
+    "chin": 125.4,
+    "ok": true,
+    "sAdj": 0.95,
+    "page": {
+     "f": 0.83,
+     "h": 1.409,
+     "a": 125.4,
+     "headRows": 11.596,
+     "wholeRows": 37.74
+    }
+   },
+   "em_proud": {
+    "sheet": "olivia-emotions-v3.png",
+    "top": 9.2,
+    "chin": 110.8,
+    "ok": true,
+    "sAdj": 1.05,
+    "hAdj": 0.87,
+    "page": {
+     "f": 0.862,
+     "h": 1.471,
+     "a": 110.8,
+     "headRows": 11.15,
+     "wholeRows": 39.203
+    }
+   },
+   "em_unimpressed": {
+    "sheet": "olivia-emotions-v3.png",
+    "top": 2.8,
+    "chin": 121.5,
+    "ok": true,
+    "sAdj": 1.02,
+    "hAdj": 1.01,
+    "page": {
+     "f": 0.864,
+     "h": 1.42,
+     "a": 121.5,
+     "headRows": 12.575,
+     "wholeRows": 39.244
+    }
+   },
+   "tk_tell": {
+    "sheet": "olivia-talk-v1.png",
+    "top": 10.5,
+    "chin": 144.9,
+    "ok": true,
+    "page": {
+     "f": 0.994,
+     "h": 1.499,
+     "a": 144.9,
+     "headRows": 12.206,
+     "wholeRows": 39.009
+    }
+   },
+   "tk_point": {
+    "sheet": "olivia-talk-v1.png",
+    "top": 20.4,
+    "chin": 135,
+    "ok": true,
+    "page": {
+     "f": 0.977,
+     "h": 1.758,
+     "a": 135,
+     "headRows": 12.206,
+     "wholeRows": 40.228
+    }
+   },
+   "tk_ask": {
+    "sheet": "olivia-talk-v1.png",
+    "top": 0,
+    "chin": 107.4,
+    "ok": true,
+    "hAdj": 0.95,
+    "sAdj": 1.03,
+    "page": {
+     "f": 0.933,
+     "h": 1.836,
+     "a": 107.4,
+     "headRows": 11.944,
+     "wholeRows": 38.533
+    }
+   },
+   "tk_answer": {
+    "sheet": "olivia-talk-v1.png",
+    "top": 0,
+    "chin": 109,
+    "ok": true,
+    "sAdj": 1.03,
+    "hAdj": 0.94,
+    "page": {
+     "f": 0.931,
+     "h": 1.79,
+     "a": 109,
+     "headRows": 11.818,
+     "wholeRows": 38.401
     }
    }
   }
