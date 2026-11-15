@@ -1,3 +1,6 @@
+## clips14 (2026-11-14): 261 phone voice takes merged (230 new, 31 re-takes)
+- Export local-clips-pending_12.json made 2026-11-14 15:57 on Tom's phone: 261 dialogue clips (tom 75, tnb 64, bernadette 43, oolong 16, deedee 13, bigone 9, rose 9, mosskid 8, grace 7, amy 6, boppy 5, mudling 2, olivia 2, pagew 1, skeeter 1). Merged with merge-local.js: 230 added to data/voice/dialog-ch29.js, 31 replaced older takes in dialog-ch1, 2, 3, 5, 8, 25, 26, 27, 28.
+- Voice index rebuilt. `unused_voice.py` check 4 shows 68 before and after (unchanged baseline, other sessions' lines); checks 1, 2, 3, 5 are 0. No game text or scripts changed.
 ## ch7s4 (2026-11-14): Chapter 7 hall scene, the book cart rolls, the wrap-up with Deedee and Boppy
 
 Stage 4 of chapter 7. New hall scene (ch7Hall) where Grace opens the block: the cart drops onto four wheels, seven books land, the cart rolls into Tom's shins, the Unread shrinks in his arms, whispering stops shelf by shelf. Rewrote ch7End (Deedee and Boppy walk in as bench guests, the cookie, the seventh bulb and its card, Tom reads TNB's text). New engine ops cartSet, cartTo, freedDecor; plate zone `off` hook. Old ch7End Narrator and bigger-jar lines removed. New stand-in pictures: ord_know, ord_shusher, ord_dogear.
