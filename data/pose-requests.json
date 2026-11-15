@@ -1,6 +1,6 @@
 {
  "version": 2,
- "saved": "2026-11-15T07:08:44.314Z",
+ "saved": "2026-11-15T07:16:24.708Z",
  "heights": {},
  "target": {
   "olivia": 96
@@ -1735,6 +1735,224 @@
      "a": 106.3,
      "headRows": 12.71,
      "wholeRows": 39.535
+    }
+   }
+  },
+  "grace": {
+   "down_stand": {
+    "sheet": "grace-walking-sheet-v2.png",
+    "top": 18.6,
+    "chin": 125.9,
+    "ok": true,
+    "hAdj": 0.96,
+    "page": {
+     "f": 0.806,
+     "h": 1.431,
+     "a": 125.9,
+     "headRows": 9.765,
+     "wholeRows": 29.077
+    }
+   },
+   "up_stand": {
+    "sheet": "grace-walking-sheet-v2.png",
+    "top": 7.9,
+    "chin": 115.9,
+    "ok": true,
+    "page": {
+     "f": 0.821,
+     "h": 1.481,
+     "a": 115.9,
+     "headRows": 10.172,
+     "wholeRows": 28.558
+    }
+   },
+   "left_stand": {
+    "sheet": "grace-walking-sheet-v2.png",
+    "top": 18.6,
+    "chin": 123.7,
+    "ok": true,
+    "hAdj": 0.93,
+    "page": {
+     "f": 0.736,
+     "h": 1.415,
+     "a": 123.7,
+     "headRows": 9.46,
+     "wholeRows": 28.736
+    }
+   },
+   "em_happy": {
+    "sheet": "grace-emotions-v3.png",
+    "top": 26.9,
+    "chin": 148.4,
+    "ok": true,
+    "sAdj": 0.98,
+    "hAdj": 0.98,
+    "page": {
+     "f": 0.91,
+     "h": 1.584,
+     "a": 148.4,
+     "headRows": 9.769,
+     "wholeRows": 29.212
+    }
+   },
+   "em_loving": {
+    "sheet": "grace-emotions-v3.png",
+    "top": 21.4,
+    "chin": 142,
+    "ok": true,
+    "sAdj": 0.97,
+    "hAdj": 0.96,
+    "page": {
+     "f": 0.912,
+     "h": 1.547,
+     "a": 142,
+     "headRows": 9.472,
+     "wholeRows": 28.246
+    }
+   },
+   "em_sad": {
+    "sheet": "grace-emotions-v3.png",
+    "top": 23.3,
+    "chin": 163.9,
+    "ok": true,
+    "sAdj": 0.91,
+    "hAdj": 1.24,
+    "page": {
+     "f": 0.907,
+     "h": 1.608,
+     "a": 163.9,
+     "headRows": 11.478,
+     "wholeRows": 29.529
+    }
+   },
+   "em_angry": {
+    "sheet": "grace-emotions-v3.png",
+    "top": 16.2,
+    "chin": 166.2,
+    "ok": true,
+    "sAdj": 0.89,
+    "hAdj": 1.26,
+    "page": {
+     "f": 0.897,
+     "h": 1.498,
+     "a": 166.2,
+     "headRows": 11.407,
+     "wholeRows": 28.434
+    }
+   },
+   "em_scared": {
+    "sheet": "grace-emotions-v3.png",
+    "top": 22.6,
+    "chin": 150,
+    "ok": true,
+    "hAdj": 1.12,
+    "sAdj": 0.88,
+    "page": {
+     "f": 0.815,
+     "h": 1.55,
+     "a": 150,
+     "headRows": 10.025,
+     "wholeRows": 27.38
+    }
+   },
+   "em_surprised": {
+    "sheet": "grace-emotions-v3.png",
+    "top": 20.6,
+    "chin": 144.9,
+    "ok": true,
+    "sAdj": 0.95,
+    "hAdj": 1.04,
+    "page": {
+     "f": 0.849,
+     "h": 1.593,
+     "a": 144.9,
+     "headRows": 10.05,
+     "wholeRows": 28.494
+    }
+   },
+   "em_proud": {
+    "sheet": "grace-emotions-v3.png",
+    "top": 18.9,
+    "chin": 132.2,
+    "ok": true,
+    "sAdj": 0.98,
+    "hAdj": 0.93,
+    "page": {
+     "f": 0.832,
+     "h": 1.612,
+     "a": 132.2,
+     "headRows": 9.271,
+     "wholeRows": 28.07
+    }
+   },
+   "em_unimpressed": {
+    "sheet": "grace-emotions-v3.png",
+    "top": 20.6,
+    "chin": 142.2,
+    "ok": true,
+    "page": {
+     "f": 0.871,
+     "h": 1.648,
+     "a": 142.2,
+     "headRows": 10.172,
+     "wholeRows": 29.537
+    }
+   },
+   "tk_tell": {
+    "sheet": "grace-talk-v2.png",
+    "top": 20.3,
+    "chin": 144.5,
+    "ok": true,
+    "page": {
+     "f": 0.904,
+     "h": 1.78,
+     "a": 144.5,
+     "headRows": 10.172,
+     "wholeRows": 29.477
+    }
+   },
+   "tk_point": {
+    "sheet": "grace-talk-v2.png",
+    "top": 20.3,
+    "chin": 141.2,
+    "ok": true,
+    "sAdj": 0.96,
+    "page": {
+     "f": 0.86,
+     "h": 1.756,
+     "a": 141.2,
+     "headRows": 9.765,
+     "wholeRows": 28.341
+    }
+   },
+   "tk_ask": {
+    "sheet": "grace-talk-v2.png",
+    "top": 5.2,
+    "chin": 120.6,
+    "ok": true,
+    "hAdj": 0.93,
+    "sAdj": 1.01,
+    "page": {
+     "f": 0.823,
+     "h": 1.8,
+     "a": 120.6,
+     "headRows": 9.554,
+     "wholeRows": 27.766
+    }
+   },
+   "tk_answer": {
+    "sheet": "grace-talk-v2.png",
+    "top": 0,
+    "chin": 117.4,
+    "ok": true,
+    "sAdj": 0.97,
+    "hAdj": 0.95,
+    "page": {
+     "f": 0.784,
+     "h": 1.735,
+     "a": 117.4,
+     "headRows": 9.373,
+     "wholeRows": 26.461
     }
    }
   }
