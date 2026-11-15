@@ -1,6 +1,6 @@
 {
  "version": 2,
- "saved": "2026-11-15T07:16:24.708Z",
+ "saved": "2026-11-15T07:23:13.538Z",
  "heights": {},
  "target": {
   "olivia": 96
@@ -1953,6 +1953,223 @@
      "a": 117.4,
      "headRows": 9.373,
      "wholeRows": 26.461
+    }
+   }
+  },
+  "rose": {
+   "tk_tell": {
+    "sheet": "rose-talk-v2.png",
+    "top": 7.2,
+    "chin": 153.1,
+    "ok": true,
+    "hAdj": 1.06,
+    "page": {
+     "f": 0.912,
+     "h": 1.811,
+     "a": 153.1,
+     "headRows": 9.3,
+     "wholeRows": 24.23
+    }
+   },
+   "tk_point": {
+    "sheet": "rose-talk-v2.png",
+    "top": 20.9,
+    "chin": 147.9,
+    "ok": true,
+    "page": {
+     "f": 0.908,
+     "h": 1.963,
+     "a": 147.9,
+     "headRows": 8.773,
+     "wholeRows": 24.667
+    }
+   },
+   "tk_ask": {
+    "sheet": "rose-talk-v2.png",
+    "top": 0,
+    "chin": 142.3,
+    "ok": true,
+    "hAdj": 1.06,
+    "page": {
+     "f": 0.832,
+     "h": 1.857,
+     "a": 142.3,
+     "headRows": 9.3,
+     "wholeRows": 23.772
+    }
+   },
+   "tk_answer": {
+    "sheet": "rose-talk-v2.png",
+    "top": 22.2,
+    "chin": 156.6,
+    "ok": true,
+    "sAdj": 0.99,
+    "page": {
+     "f": 0.85,
+     "h": 1.836,
+     "a": 156.6,
+     "headRows": 8.685,
+     "wholeRows": 24.425
+    }
+   },
+   "down_stand": {
+    "sheet": "rose-walking-sheet-v2.png",
+    "top": 6.3,
+    "chin": 132.2,
+    "ok": true,
+    "page": {
+     "f": 0.842,
+     "h": 1.375,
+     "a": 132.2,
+     "headRows": 8.773,
+     "wholeRows": 23.662
+    }
+   },
+   "up_stand": {
+    "sheet": "rose-walking-sheet-v2.png",
+    "top": 5.9,
+    "chin": 132.2,
+    "ok": true,
+    "sAdj": 1.02,
+    "hAdj": 0.95,
+    "page": {
+     "f": 0.881,
+     "h": 1.328,
+     "a": 132.2,
+     "headRows": 8.501,
+     "wholeRows": 23.616
+    }
+   },
+   "left_stand": {
+    "sheet": "rose-walking-sheet-v2.png",
+    "top": 9,
+    "chin": 132.2,
+    "ok": true,
+    "page": {
+     "f": 0.765,
+     "h": 1.405,
+     "a": 132.2,
+     "headRows": 8.773,
+     "wholeRows": 23.864
+    }
+   },
+   "em_happy": {
+    "sheet": "rose-emotions-v3.png",
+    "top": 6.1,
+    "chin": 138,
+    "ok": true,
+    "sAdj": 1.05,
+    "hAdj": 0.92,
+    "page": {
+     "f": 0.995,
+     "h": 1.561,
+     "a": 138,
+     "headRows": 8.475,
+     "wholeRows": 24.006
+    }
+   },
+   "em_loving": {
+    "sheet": "rose-emotions-v3.png",
+    "top": 7.9,
+    "chin": 138,
+    "ok": true,
+    "hAdj": 0.96,
+    "page": {
+     "f": 0.961,
+     "h": 1.572,
+     "a": 138,
+     "headRows": 8.422,
+     "wholeRows": 23.367
+    }
+   },
+   "em_sad": {
+    "sheet": "rose-emotions-v3.png",
+    "top": 8.7,
+    "chin": 169.5,
+    "ok": true,
+    "sAdj": 0.93,
+    "hAdj": 1.18,
+    "page": {
+     "f": 1.021,
+     "h": 1.454,
+     "a": 169.5,
+     "headRows": 9.628,
+     "wholeRows": 23.642
+    }
+   },
+   "em_angry": {
+    "sheet": "rose-emotions-v3.png",
+    "top": 11.1,
+    "chin": 171.9,
+    "ok": true,
+    "sAdj": 0.91,
+    "hAdj": 1.14,
+    "page": {
+     "f": 0.984,
+     "h": 1.375,
+     "a": 171.9,
+     "headRows": 9.101,
+     "wholeRows": 22.921
+    }
+   },
+   "em_scared": {
+    "sheet": "rose-emotions-v3.png",
+    "top": 7.1,
+    "chin": 148.7,
+    "ok": true,
+    "sAdj": 0.91,
+    "hAdj": 1.08,
+    "page": {
+     "f": 0.859,
+     "h": 1.479,
+     "a": 148.7,
+     "headRows": 8.622,
+     "wholeRows": 22.231
+    }
+   },
+   "em_surprised": {
+    "sheet": "rose-emotions-v3.png",
+    "top": 7.1,
+    "chin": 144,
+    "ok": true,
+    "sAdj": 0.97,
+    "hAdj": 0.98,
+    "page": {
+     "f": 0.91,
+     "h": 1.48,
+     "a": 144,
+     "headRows": 8.34,
+     "wholeRows": 22.781
+    }
+   },
+   "em_proud": {
+    "sheet": "rose-emotions-v3.png",
+    "top": 3,
+    "chin": 121.3,
+    "ok": true,
+    "hAdj": 0.82,
+    "sAdj": 1.03,
+    "page": {
+     "f": 0.877,
+     "h": 1.521,
+     "a": 121.3,
+     "headRows": 7.41,
+     "wholeRows": 22.399
+    }
+   },
+   "em_unimpressed": {
+    "sheet": "rose-emotions-v3.png",
+    "top": 5.7,
+    "chin": 139,
+    "ok": true,
+    "sAdj": 1.04,
+    "hAdj": 0.91,
+    "page": {
+     "f": 0.929,
+     "h": 1.513,
+     "a": 139,
+     "headRows": 8.303,
+     "wholeRows": 23.649
     }
    }
   }
