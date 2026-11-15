@@ -1,3 +1,7 @@
+## ch7s4 (2026-11-14): Chapter 7 hall scene, the book cart rolls, the wrap-up with Deedee and Boppy
+
+Stage 4 of chapter 7. New hall scene (ch7Hall) where Grace opens the block: the cart drops onto four wheels, seven books land, the cart rolls into Tom's shins, the Unread shrinks in his arms, whispering stops shelf by shelf. Rewrote ch7End (Deedee and Boppy walk in as bench guests, the cookie, the seventh bulb and its card, Tom reads TNB's text). New engine ops cartSet, cartTo, freedDecor; plate zone `off` hook. Old ch7End Narrator and bigger-jar lines removed. New stand-in pictures: ord_know, ord_shusher, ord_dogear.
+
 ## ch1fix1 (2026-11-14): chapter 1 feedback: Theft and Mudling lines reworded, talking-pose dialog faces, Boppy waits at the back, grey patch v3 baked, Gus faster
 - Tom's reports on chapter 1 (build ch6s2d, adminmusic1), each quoted:
   - r-20261114-151025-2kx7 "Remove the comma after Tom in both the text and for a new...": Deedee now says "Tom you must be starving! Sit. The crisp needs ten minutes on the counter." (text and direction).
@@ -38,10 +42,6 @@
 - Volume: `MC_LEVEL={admin:.5}` in engine/music-clips.js (game) and `LEVEL=.25` in engine/admin-music.js (pages, was .5): half of the first level, amplitude halved (about 6 dB quieter).
 - Only admin plays: entering the ADMIN screens now fades the title theme (or any other track) out in 0.4 s instead of 1.3 s, and leaving fades the admin track out in 0.4 s. Looked for other sources: the synth song is already silent while clips are in charge, and the hidden game frame in Area Builder has no audio context (silent). A clip or track played on a library page already silences the admin track.
 - Tested: tools/admin_music_test.py (new checks: half level on pages and in the game; 1.3 s after entering ADMIN no other voice or synth song is left). Not heard on a phone.
-
-## ch7s4 (2026-11-14): Chapter 7 hall scene, the book cart rolls, the wrap-up with Deedee and Boppy
-
-Stage 4 of chapter 7. New hall scene (ch7Hall) where Grace opens the block: the cart drops onto four wheels, seven books land, the cart rolls into Tom's shins, the Unread shrinks in his arms, whispering stops shelf by shelf. Rewrote ch7End (Deedee and Boppy walk in as bench guests, the cookie, the seventh bulb and its card, Tom reads TNB's text). New engine ops cartSet, cartTo, freedDecor; plate zone `off` hook. Old ch7End Narrator and bigger-jar lines removed. New stand-in pictures: ord_know, ord_shusher, ord_dogear.
 
 ## ch7s3 (2026-11-14): chapter 7 build stage 3: the library scenes, the Stacks hall with the block, the three wings, the Reading Room and the bookmark swap
 - Tom: "Read claude/story-build.md, claude/story-ch07.md and claude/next-addendum-ch7s2.md. Continue the chapter 7 build at stage 3."
