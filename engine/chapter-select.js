@@ -74,7 +74,8 @@ function chapterJump(n) {
   // Nobody is along yet: the chapter's own scenes bring people in.
   for(const m of extras()) recruitLeave(m,true);
   if(la) setGirlsAway(true);
-  const arrive=la?arriveLA():arriveHome();
+  const arr=typeof ARRIVALS!=='undefined'?ARRIVALS[n]||null:null;   // the same landing the real flight plays (ch7t1: chapter 7 got the generic welcome, so the girls ran up twice)
+  const arrive=la?arriveLA(arr):arriveHome(arr);
   playScene(()=>[{card:n,time:3.2},...arrive],{fade:.7});   // the arrival ends the scene; the chapter's first trigger takes it from there
 }
 // Chapter 10 starts at the taxi depot with Sal's ride (chapter 9 is over, the girls are along).

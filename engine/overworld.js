@@ -442,9 +442,9 @@ function updateCamera(dt) {
   else if(mh>=H) {
     // A framed conversation on the last rows of an outdoor map: while the dialogue box is on screen the view may slide past the map's bottom
     // edge by up to the part the box covers, so the people talking are never behind it (the strip past the edge is hidden by the box).
-    const dlg=document.getElementById('dialog'),under=framed&&sceneAuto&&sceneAutoBox&&currentMap.outside&&dlg&&!dlg.hidden?Math.max(0,dlg.offsetHeight/scale-6):0;
+    const dlg=document.getElementById('dialog'),held=typeof sceneCam!=='undefined'&&!!sceneCam,under=((framed&&sceneAuto&&sceneAutoBox)||held)&&currentMap.outside&&dlg&&!dlg.hidden?Math.max(0,dlg.offsetHeight/scale-6):0;   // a held {cam} tile on the last rows may slide past the edge too (ch7t1: the chart in the Square was under the box)
     ty=clamp((p.y+.5)*T-safeTop-available/2,0,mh-H+under);
-    if(under) ty=Math.min(mh-H+under,Math.max(ty,(sceneAutoBox.y1+1)*T+4-(H-safeBottom)));
+    if(under&&sceneAutoBox&&!held) ty=Math.min(mh-H+under,Math.max(ty,(sceneAutoBox.y1+1)*T+4-(H-safeBottom)));
     // Square painted rooms only (rooms of the older fit keep their own): near the top or bottom edge the painting would be flush with the
     // screen and put Tom's tile under the title bar or the controls, so scroll past the edge just far enough to keep his tile in the safe
     // band; that strip shows the soft backdrop (engine/draw.js plateBackdrop). Outdoor maps do NOT do this (Tom, 2026-10-30): the camera

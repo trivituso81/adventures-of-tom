@@ -45,7 +45,7 @@ const BB_SPOTS={
   // freeAll: every monster on the map is taken off (no fights in the Stacks any more), with or without a picture of what it turns back into.
   stacks:{map:'stacks',on:'ch7-hall',done:'bb-stacks',
     grey:{cx:1110,cy:590,r:340},
-    block:{id:'stacks/ch7_block',x:1110,y:531,w:210,hole:[.8,.62],roll:[[900,700],[1060,690]]},
+    block:{id:'stacks/ch7_block',x:1110,y:531,w:210,hole:[.8,.62],roll:[[1236,690],[1196,650]]},
     coin:{r:10,close:'art/closeup/ch7-coin.webp?v=ch7s3'},
     cover:{off:'ch7-unsheet',sheet:'stacks/ch7_sheet',sheetW:250,sign:'stacks/ch7_sign',signX:1006,signW:56,base:662},
     keep:{cart:{id:'stacks/ch7_cart',x:1082,base:660,w:125,rollTo:690,imgW:358,imgH:420,stack:[103,0,265,160],back:'ch7-hallend',
