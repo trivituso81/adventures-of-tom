@@ -1,0 +1,914 @@
+{
+ "v": 1,
+ "id": "r-20261114-161310-ywn0",
+ "at": "2026-11-14T16:13:18-08:00",
+ "kind": "bug",
+ "note": "She's facing the wrong way",
+ "pins": [],
+ "shot": "reports/r-20261114-161310-ywn0.jpg",
+ "where": {
+  "mode": "dialog",
+  "build": "ch1fix1",
+  "url": "/adventures-of-tom/index.html",
+  "screen": {
+   "layout": "landscape",
+   "rotated": false,
+   "duo": "open",
+   "tablet": true,
+   "w": 867,
+   "h": 669,
+   "dpr": 3
+  },
+  "ua": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.2 Mobile/15E148 Safari/604.1",
+  "story": {
+   "mode": "full",
+   "chapter": 2,
+   "goal": "Feed the starter."
+  },
+  "map": {
+   "id": "blvd",
+   "name": "Downtown LA",
+   "x": 9,
+   "y": 14,
+   "facing": "right",
+   "cam": [
+    0,
+    154
+   ],
+   "zoom": 1
+  },
+  "party": [
+   "tom",
+   "tnb",
+   "nara"
+  ],
+  "bench": [],
+  "walkers": [
+   {
+    "id": "tnb",
+    "x": 9,
+    "y": 13,
+    "facing": "down"
+   },
+   {
+    "id": "nara",
+    "x": 9,
+    "y": 12,
+    "facing": "down"
+   }
+  ],
+  "near": [
+   {
+    "name": "Skye",
+    "x": 10,
+    "y": 14,
+    "facing": "left"
+   },
+   {
+    "name": "Wes",
+    "x": 9,
+    "y": 23,
+    "facing": "right"
+   },
+   {
+    "name": "Boomie",
+    "x": 4,
+    "y": 13,
+    "facing": "right"
+   }
+  ],
+  "scene": null,
+  "dialog": {
+   "who": "Skye",
+   "page": 1,
+   "pages": 3,
+   "text": "I'm filming a day-in-my-life video. I live in the lofts.",
+   "shown": "I'm filming a day-in-my-life video. I live in the lofts.",
+   "choice": false
+  },
+  "battle": null,
+  "menu": null,
+  "flags": {
+   "opening-done": true,
+   "saw-squishy": true,
+   "tombo:rose1": true,
+   "tombo:grace1": true,
+   "ch1-goal": true,
+   "ch1-theft": true,
+   "tombo:deedee1": true,
+   "ch1-t1": true,
+   "ch1-crumbs-a": true,
+   "battle:mudling": "win",
+   "ch1-crumbs-b": true,
+   "ch1-t2": true,
+   "battle:skeeter": "win",
+   "battle:grump": "win",
+   "ch1-tuts": true,
+   "ch1-crumbs-c": true,
+   "ch1-spot": true,
+   "ch1-bulb": true,
+   "ch1-pond": true,
+   "ch1-crown": true,
+   "battle:bigone": "win",
+   "ch1-tin": true,
+   "ch1-done": true,
+   "ch2-goal": true,
+   "goal": "feed the starter. Kitchen island, inside Tom’s house.",
+   "goalCh": 2,
+   "ch2-tnb": true,
+   "goalLog": [
+    {
+     "c": 2,
+     "t": "TNB's Loft (LOFTS), Spring Street, bottom middle of Downtown."
+    },
+    {
+     "c": 2,
+     "t": "home to 2nd Ave in Jefferson Park, south of Downtown. Tom’s house is 3468."
+    }
+   ],
+   "ch2-sky": true,
+   "met-nara": true,
+   "ch2-nara": true,
+   "tombo:nara1": true
+  },
+  "faults": [],
+  "errors": [
+   {
+    "at": 1794701143160,
+    "msg": "ResizeObserver loop completed with undelivered notifications.",
+    "src": "adventures-of-tom/index.html:0"
+   },
+   {
+    "at": 1794701442282,
+    "msg": "ResizeObserver loop completed with undelivered notifications.",
+    "src": "adventures-of-tom/index.html:0"
+   },
+   {
+    "at": 1794701451099,
+    "msg": "ResizeObserver loop completed with undelivered notifications.",
+    "src": "adventures-of-tom/index.html:0"
+   }
+  ],
+  "save": {
+   "v": 4,
+   "when": 1794701590575,
+   "map": "blvd",
+   "x": 9,
+   "y": 14,
+   "facing": "right",
+   "visited": [
+    "lofts",
+    "tomhouse"
+   ],
+   "allVisited": false,
+   "bag": [
+    "notebook",
+    "button",
+    "dragonflycoin",
+    "fridgephoto"
+   ],
+   "coins": 85,
+   "time": 50,
+   "grump": {
+    "tier": 0,
+    "maxHp": 22
+   },
+   "monsters": {
+    "mudling": {
+     "tier": 0,
+     "maxHp": 12
+    },
+    "skeeter": {
+     "tier": 0,
+     "maxHp": 16
+    },
+    "grump": {
+     "tier": 0,
+     "maxHp": 22
+    },
+    "toad": {
+     "tier": 0,
+     "maxHp": 34
+    },
+    "log": {
+     "tier": 0,
+     "maxHp": 50
+    },
+    "bigone": {
+     "tier": 0,
+     "maxHp": 78
+    },
+    "soggysock": {
+     "tier": 0,
+     "maxHp": 20
+    },
+    "bobber": {
+     "tier": 0,
+     "maxHp": 18
+    },
+    "tangle": {
+     "tier": 0,
+     "maxHp": 26
+    },
+    "snag": {
+     "tier": 0,
+     "maxHp": 52
+    },
+    "irongill": {
+     "tier": 0,
+     "maxHp": 90
+    },
+    "popquiz": {
+     "tier": 0,
+     "maxHp": 16
+    },
+    "tardybell": {
+     "tier": 0,
+     "maxHp": 24
+    },
+    "glitterglue": {
+     "tier": 0,
+     "maxHp": 26
+    },
+    "dodgeball": {
+     "tier": 0,
+     "maxHp": 30
+    },
+    "redpen": {
+     "tier": 0,
+     "maxHp": 110
+    },
+    "shusher": {
+     "tier": 0,
+     "maxHp": 18
+    },
+    "dogear": {
+     "tier": 0,
+     "maxHp": 22
+    },
+    "cliffhanger": {
+     "tier": 0,
+     "maxHp": 30
+    },
+    "knowitall": {
+     "tier": 0,
+     "maxHp": 32
+    },
+    "popup": {
+     "tier": 0,
+     "maxHp": 34
+    },
+    "unread": {
+     "tier": 0,
+     "maxHp": 120
+    },
+    "velvetrope": {
+     "tier": 0,
+     "maxHp": 22
+    },
+    "stuffedshirt": {
+     "tier": 0,
+     "maxHp": 25
+    },
+    "coathanger": {
+     "tier": 0,
+     "maxHp": 32
+    },
+    "soreloser": {
+     "tier": 0,
+     "maxHp": 34
+    },
+    "wallflower": {
+     "tier": 0,
+     "maxHp": 36
+    },
+    "mirrorball": {
+     "tier": 0,
+     "maxHp": 128
+    },
+    "carryon": {
+     "tier": 0,
+     "maxHp": 24
+    },
+    "jetlag": {
+     "tier": 0,
+     "maxHp": 23
+    },
+    "longline": {
+     "tier": 0,
+     "maxHp": 33
+    },
+    "unclaimed": {
+     "tier": 0,
+     "maxHp": 35
+    },
+    "armresthog": {
+     "tier": 0,
+     "maxHp": 37
+    },
+    "lastcall": {
+     "tier": 0,
+     "maxHp": 132
+    },
+    "finalcall": {
+     "tier": 0,
+     "maxHp": 150
+    },
+    "standbysprite": {
+     "tier": 0,
+     "maxHp": 38
+    },
+    "lostluggage": {
+     "tier": 0,
+     "maxHp": 36
+    },
+    "redeye": {
+     "tier": 0,
+     "maxHp": 35
+    },
+    "hushling": {
+     "tier": 0,
+     "maxHp": 36
+    },
+    "signalfault": {
+     "tier": 0,
+     "maxHp": 38
+    },
+    "turnstile": {
+     "tier": 0,
+     "maxHp": 42
+    },
+    "drillworm": {
+     "tier": 0,
+     "maxHp": 170
+    },
+    "pausesprite": {
+     "tier": 0,
+     "maxHp": 44
+    },
+    "paperweight": {
+     "tier": 0,
+     "maxHp": 52
+    },
+    "curator": {
+     "tier": 0,
+     "maxHp": 56
+    },
+    "twinlens": {
+     "tier": 0,
+     "maxHp": 330
+    },
+    "vance": {
+     "tier": 0,
+     "maxHp": 99999
+    },
+    "deadletter": {
+     "tier": 0,
+     "maxHp": 58
+    },
+    "rubberstamp": {
+     "tier": 0,
+     "maxHp": 66
+    },
+    "censor": {
+     "tier": 0,
+     "maxHp": 330
+    },
+    "leviathan": {
+     "tier": 0,
+     "maxHp": 620
+    },
+    "julian": {
+     "tier": 0,
+     "maxHp": 620
+    },
+    "gridlockprime": {
+     "tier": 0,
+     "maxHp": 160
+    },
+    "smoglet": {
+     "tier": 0,
+     "maxHp": 14
+    },
+    "tickets": {
+     "tier": 0,
+     "maxHp": 17
+    },
+    "coyote": {
+     "tier": 0,
+     "maxHp": 24
+    },
+    "gridlock": {
+     "tier": 0,
+     "maxHp": 36
+    },
+    "tarblob": {
+     "tier": 0,
+     "maxHp": 52
+    },
+    "bigshake": {
+     "tier": 0,
+     "maxHp": 84
+    },
+    "cuecrab": {
+     "tier": 0,
+     "maxHp": 40
+    },
+    "clapper": {
+     "tier": 0,
+     "maxHp": 22
+    },
+    "boommoth": {
+     "tier": 0,
+     "maxHp": 22
+    },
+    "extra": {
+     "tier": 0,
+     "maxHp": 14
+    },
+    "fogwisp": {
+     "tier": 0,
+     "maxHp": 24
+    },
+    "directorscut": {
+     "tier": 0,
+     "maxHp": 100
+    },
+    "acornagent": {
+     "tier": 0,
+     "maxHp": 18
+    },
+    "peanutgallery": {
+     "tier": 0,
+     "maxHp": 26
+    },
+    "twigspy": {
+     "tier": 0,
+     "maxHp": 26
+    },
+    "cheekstuffer": {
+     "tier": 0,
+     "maxHp": 32
+    },
+    "stickysap": {
+     "tier": 0,
+     "maxHp": 22
+    },
+    "chairman": {
+     "tier": 0,
+     "maxHp": 120
+    },
+    "lukewarm": {
+     "tier": 0,
+     "maxHp": 20
+    },
+    "leftover": {
+     "tier": 0,
+     "maxHp": 24
+    },
+    "wetblanket": {
+     "tier": 0,
+     "maxHp": 32
+    },
+    "thedraft": {
+     "tier": 0,
+     "maxHp": 30
+    },
+    "pickyeater": {
+     "tier": 0,
+     "maxHp": 36
+    },
+    "ironbelly": {
+     "tier": 0,
+     "maxHp": 124
+    }
+   },
+   "flags": {
+    "town": {},
+    "row": {},
+    "hollow": {},
+    "pier": {},
+    "reeds": {},
+    "sundial": {},
+    "schoolyard": {},
+    "school": {},
+    "cafetorium": {},
+    "stacks": {},
+    "readroom": {},
+    "moonclub": {},
+    "dome": {},
+    "terminal": {},
+    "gatezero": {},
+    "flightzero": {},
+    "gate00": {},
+    "concourse": {},
+    "subdepot": {},
+    "subtunnel": {},
+    "subchamber": {},
+    "towerlobby": {},
+    "towerstairs": {},
+    "towershelves": {},
+    "towervault": {},
+    "towerpinnacle": {},
+    "deadletter": {},
+    "memgrace": {},
+    "memrose": {},
+    "memamy": {},
+    "memtnb": {},
+    "stillcore": {},
+    "foreverheart": {},
+    "bakery": {},
+    "library": {},
+    "greenhouse": {},
+    "post": {},
+    "tea": {},
+    "observatory": {},
+    "shop": {},
+    "taxi": {},
+    "amyhouse": {},
+    "grands": {},
+    "elliehouse": {},
+    "blvd": {},
+    "jpark": {},
+    "griffith": {},
+    "studio": {},
+    "backlot": {},
+    "stage7": {},
+    "stageset": {},
+    "oakpark": {},
+    "oak": {},
+    "crown": {},
+    "carbarn": {},
+    "boiler": {},
+    "coffee": {},
+    "ramen": {},
+    "juicebar": {},
+    "nickels": {},
+    "wardrobe": {},
+    "cinema": {},
+    "boards": {},
+    "lacab": {},
+    "tomhouse": {},
+    "tomsuite": {},
+    "casa": {},
+    "loftlobby": {},
+    "lofts": {},
+    "tower": {},
+    "creole": {},
+    "pupuseria": {},
+    "jordansam": {},
+    "dakota": {}
+   },
+   "fallen": [],
+   "party": [
+    {
+     "id": "tom",
+     "level": 3,
+     "xp": 0,
+     "hp": 160,
+     "maxHp": 160
+    },
+    {
+     "id": "tnb",
+     "level": 3,
+     "xp": 0,
+     "hp": 132,
+     "maxHp": 132
+    },
+    {
+     "id": "nara",
+     "level": 3,
+     "xp": 0,
+     "hp": 121,
+     "maxHp": 121
+    }
+   ],
+   "members": [
+    {
+     "id": "tom",
+     "level": 3,
+     "xp": 0,
+     "wins": 0,
+     "hp": 160,
+     "maxHp": 160,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "k_keyboard",
+      "Outfit": "sweater",
+      "Charm": "beanie"
+     },
+     "stamps": [
+      "A1",
+      "B1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {
+      "sig": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "grace",
+     "level": 3,
+     "xp": 0,
+     "wins": 0,
+     "hp": 126,
+     "maxHp": 126,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "g_dumpling",
+      "Outfit": "gtee",
+      "Charm": "sunhat"
+     },
+     "stamps": [
+      "A1",
+      "B1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {
+      "sig": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "rose",
+     "level": 3,
+     "xp": 0,
+     "wins": 0,
+     "hp": 119,
+     "maxHp": 119,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "r_lambytoy",
+      "Outfit": "rdress",
+      "Charm": "rclip"
+     },
+     "stamps": [
+      "B1",
+      "A1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {
+      "sig": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "amy",
+     "level": 3,
+     "xp": 0,
+     "wins": 0,
+     "hp": 144,
+     "maxHp": 144,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "a_whistle",
+      "Outfit": "shirt",
+      "Charm": "pebble"
+     },
+     "stamps": [
+      "A1",
+      "B1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {
+      "sig": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "deedee",
+     "level": 3,
+     "xp": 0,
+     "wins": 0,
+     "hp": 127,
+     "maxHp": 127,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "d_pin",
+      "Outfit": null,
+      "Charm": null
+     },
+     "stamps": [
+      "A1",
+      "B1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {
+      "sig": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "boppy",
+     "level": 3,
+     "xp": 0,
+     "wins": 0,
+     "hp": 156,
+     "maxHp": 156,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "b_rod",
+      "Outfit": null,
+      "Charm": null
+     },
+     "stamps": [
+      "A1",
+      "B1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {
+      "sig": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "tnb",
+     "level": 3,
+     "xp": 0,
+     "wins": 0,
+     "hp": 132,
+     "maxHp": 132,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "n_rib",
+      "Outfit": null,
+      "Charm": "naraball"
+     },
+     "stamps": [
+      "B1",
+      "A1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {
+      "sig": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "nara",
+     "level": 3,
+     "xp": 0,
+     "wins": 0,
+     "hp": 121,
+     "maxHp": 121,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "y_stick",
+      "Outfit": null,
+      "Charm": "claytaco"
+     },
+     "stamps": [
+      "B1",
+      "A1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {
+      "sig": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "justin",
+     "level": 3,
+     "xp": 0,
+     "wins": 0,
+     "hp": 147,
+     "maxHp": 147,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "j_tester",
+      "Outfit": null,
+      "Charm": null
+     },
+     "stamps": [
+      "A1",
+      "B1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {
+      "sig": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    },
+    {
+     "id": "olivia",
+     "level": 3,
+     "xp": 0,
+     "wins": 0,
+     "hp": 132,
+     "maxHp": 132,
+     "spBonus": 0,
+     "equipment": {
+      "Tool": "o_phone",
+      "Outfit": null,
+      "Charm": null
+     },
+     "stamps": [
+      "A1",
+      "B1"
+     ],
+     "ver": {},
+     "remix": [],
+     "ranks": {
+      "sig": 2
+     },
+     "ticketBonus": 0,
+     "loadouts": null,
+     "loadout": 0
+    }
+   ],
+   "opts": {
+    "diff": "rose",
+    "speed": 2,
+    "hf": true,
+    "skipBtn": false,
+    "autoSpend": true,
+    "volMusic": 5,
+    "volFx": 10,
+    "volVoice": 10
+   },
+   "story": {
+    "mode": "full",
+    "chapter": 2,
+    "flags": {
+     "opening-done": true,
+     "saw-squishy": true,
+     "tombo:rose1": true,
+     "tombo:grace1": true,
+     "ch1-goal": true,
+     "ch1-theft": true,
+     "tombo:deedee1": true,
+     "ch1-t1": true,
+     "ch1-crumbs-a": true,
+     "battle:mudling": "win",
+     "ch1-crumbs-b": true,
+     "ch1-t2": true,
+     "battle:skeeter": "win",
+     "battle:grump": "win",
+     "ch1-tuts": true,
+     "ch1-crumbs-c": true,
+     "ch1-spot": true,
+     "ch1-bulb": true,
+     "ch1-pond": true,
+     "ch1-crown": true,
+     "battle:bigone": "win",
+     "ch1-tin": true,
+     "ch1-done": true,
+     "ch2-goal": true,
+     "goal": "feed the starter. Kitchen island, inside Tom’s house.",
+     "goalCh": 2,
+     "ch2-tnb": true,
+     "goalLog": [
+      {
+       "c": 2,
+       "t": "TNB's Loft (LOFTS), Spring Street, bottom middle of Downtown."
+      },
+      {
+       "c": 2,
+       "t": "home to 2nd Ave in Jefferson Park, south of Downtown. Tom’s house is 3468."
+      }
+     ],
+     "ch2-sky": true,
+     "met-nara": true,
+     "ch2-nara": true,
+     "tombo:nara1": true
+    },
+    "traces": 2,
+    "traceLog": {
+     "2:tnb-hello": 1,
+     "2:nara-meet": 1
+    },
+    "override": null,
+    "bench": []
+   }
+  }
+ }
+}
