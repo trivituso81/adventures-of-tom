@@ -1,6 +1,6 @@
 {
  "version": 2,
- "saved": "2026-11-15T07:05:53.321Z",
+ "saved": "2026-11-15T07:08:44.314Z",
  "heights": {},
  "target": {
   "olivia": 96
@@ -1689,6 +1689,52 @@
      "a": 149.2,
      "headRows": 11.593,
      "wholeRows": 34.988
+    }
+   }
+  },
+  "jojo": {
+   "down_stand": {
+    "sheet": "jojo-walk-sheet-v2.png",
+    "top": 7.7,
+    "chin": 120.9,
+    "ok": true,
+    "sAdj": 1.02,
+    "page": {
+     "f": 0.885,
+     "h": 1.388,
+     "a": 120.9,
+     "headRows": 12.969,
+     "wholeRows": 39.823
+    }
+   },
+   "up_stand": {
+    "sheet": "jojo-walk-sheet-v2.png",
+    "top": 6,
+    "chin": 100.4,
+    "ok": true,
+    "sAdj": 1.03,
+    "hAdj": 0.98,
+    "page": {
+     "f": 0.911,
+     "h": 1.647,
+     "a": 100.4,
+     "headRows": 12.834,
+     "wholeRows": 39.86
+    }
+   },
+   "left_stand": {
+    "sheet": "jojo-walk-sheet-v2.png",
+    "top": 6.8,
+    "chin": 106.3,
+    "ok": true,
+    "sAdj": 1.02,
+    "hAdj": 0.98,
+    "page": {
+     "f": 0.779,
+     "h": 1.547,
+     "a": 106.3,
+     "headRows": 12.71,
+     "wholeRows": 39.535
     }
    }
   }
