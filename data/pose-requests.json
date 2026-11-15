@@ -1,6 +1,6 @@
 {
- "version": 1,
- "saved": "2026-11-15T05:11:35.339Z",
+ "version": 2,
+ "saved": "2026-11-15T05:49:27.427Z",
  "heights": {},
  "target": {},
  "frames": {
@@ -9,7 +9,19 @@
     "sheet": "tom-walking-sheet-v3.png",
     "top": 0.6,
     "chin": 144.7,
-    "feet": 476,
+    "ok": false
+   },
+   "em_happy": {
+    "sheet": "tom-emotions-v7.png",
+    "top": 10.3,
+    "chin": 147.1
+   }
+  },
+  "tnb": {
+   "down_stand": {
+    "sheet": "tnb-walking-sheet-v2.png",
+    "top": 14.7,
+    "chin": 130,
     "ok": false
    }
   }
