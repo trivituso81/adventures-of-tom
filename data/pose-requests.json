@@ -1,6 +1,6 @@
 {
  "version": 2,
- "saved": "2026-11-15T05:53:09.406Z",
+ "saved": "2026-11-15T05:53:35.518Z",
  "heights": {},
  "target": {},
  "frames": {
@@ -75,6 +75,11 @@
     "sheet": "tom-walking-sheet-v3.png",
     "top": 3.3,
     "chin": 135.7
+   },
+   "left_stand": {
+    "sheet": "tom-walking-sheet-v3.png",
+    "top": 8.4,
+    "chin": 137.9
    }
   },
   "tnb": {
