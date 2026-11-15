@@ -44,14 +44,20 @@
      "w": 150,
      "h": 476,
      "ax": 73.5,
-     "upright": true,
      "link": null,
+     "sheet": "tom-walking-sheet-v3.png",
      "marks": {
       "top": 21.4,
       "chin": 144.7,
       "feet": 476
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.088235,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 126.61
+     }
     },
     "down_step1": {
      "set": "walk",
@@ -61,14 +67,20 @@
      "w": 180,
      "h": 478,
      "ax": 88.5,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "tom-walking-sheet-v3.png",
      "marks": {
       "top": 21.4,
       "chin": 144.7,
       "feet": 478
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.088235,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 126.61
+     }
     },
     "down_step2": {
      "set": "walk",
@@ -78,14 +90,20 @@
      "w": 175,
      "h": 477,
      "ax": 89.5,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "tom-walking-sheet-v3.png",
      "marks": {
       "top": 21.4,
       "chin": 144.7,
       "feet": 477
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.088235,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 126.61
+     }
     },
     "up_stand": {
      "set": "walk",
@@ -95,14 +113,20 @@
      "w": 148,
      "h": 461,
      "ax": 72.0,
-     "upright": true,
      "link": null,
+     "sheet": "tom-walking-sheet-v3.png",
      "marks": {
       "top": 21.4,
       "chin": 144.7,
       "feet": 461
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.088235,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 126.61
+     }
     },
     "up_step1": {
      "set": "walk",
@@ -112,14 +136,20 @@
      "w": 176,
      "h": 462,
      "ax": 96.0,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "tom-walking-sheet-v3.png",
      "marks": {
       "top": 21.4,
       "chin": 144.7,
       "feet": 462
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.088235,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 126.61
+     }
     },
     "up_step2": {
      "set": "walk",
@@ -129,14 +159,20 @@
      "w": 175,
      "h": 461,
      "ax": 92.0,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "tom-walking-sheet-v3.png",
      "marks": {
       "top": 21.4,
       "chin": 144.7,
       "feet": 461
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.088235,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 126.61
+     }
     },
     "left_stand": {
      "set": "walk",
@@ -146,14 +182,20 @@
      "w": 137,
      "h": 484,
      "ax": 51.5,
-     "upright": true,
      "link": null,
+     "sheet": "tom-walking-sheet-v3.png",
      "marks": {
       "top": 14.3,
       "chin": 135.7,
       "feet": 484
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.088235,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 126.61
+     }
     },
     "left_step1": {
      "set": "walk",
@@ -163,14 +205,20 @@
      "w": 279,
      "h": 480,
      "ax": 126.5,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "tom-walking-sheet-v3.png",
      "marks": {
       "top": 14.3,
       "chin": 135.7,
       "feet": 480
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.088235,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 126.61
+     }
     },
     "left_step2": {
      "set": "walk",
@@ -180,14 +228,346 @@
      "w": 202,
      "h": 485,
      "ax": 91.0,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "tom-walking-sheet-v3.png",
      "marks": {
       "top": 14.3,
       "chin": 135.7,
       "feet": 485
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.088235,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 126.61
+     }
+    },
+    "em_happy": {
+     "set": "mood",
+     "key": "em_happy",
+     "label": "Tom, feeling happy",
+     "img": "art/poses/tom/mood-em_happy.webp",
+     "w": 171,
+     "h": 503,
+     "ax": 75.0,
+     "link": null,
+     "sheet": "tom-emotions-v7.png",
+     "marks": {
+      "top": 17.6,
+      "chin": 119.0,
+      "feet": 503
+     },
+     "conf": "low",
+     "s0": 0.079936,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 119.0
+     }
+    },
+    "em_loving": {
+     "set": "mood",
+     "key": "em_loving",
+     "label": "Tom, feeling loving",
+     "img": "art/poses/tom/mood-em_loving.webp",
+     "w": 188,
+     "h": 497,
+     "ax": 78.0,
+     "link": null,
+     "sheet": "tom-emotions-v7.png",
+     "marks": {
+      "top": 19.7,
+      "chin": 133.0,
+      "feet": 497
+     },
+     "conf": "low",
+     "s0": 0.079936,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 133.0
+     }
+    },
+    "em_sad": {
+     "set": "mood",
+     "key": "em_sad",
+     "label": "Tom, feeling sad",
+     "img": "art/poses/tom/mood-em_sad.webp",
+     "w": 148,
+     "h": 490,
+     "ax": 75.5,
+     "link": null,
+     "sheet": "tom-emotions-v7.png",
+     "marks": {
+      "top": 22.9,
+      "chin": 155.0,
+      "feet": 490
+     },
+     "conf": "low",
+     "s0": 0.079936,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 155.0
+     }
+    },
+    "em_angry": {
+     "set": "mood",
+     "key": "em_angry",
+     "label": "Tom, feeling angry",
+     "img": "art/poses/tom/mood-em_angry.webp",
+     "w": 298,
+     "h": 482,
+     "ax": 142.0,
+     "link": null,
+     "sheet": "tom-emotions-v7.png",
+     "marks": {
+      "top": 25.0,
+      "chin": 169.0,
+      "feet": 482
+     },
+     "conf": "low",
+     "s0": 0.079936,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 169.0
+     }
+    },
+    "em_scared": {
+     "set": "mood",
+     "key": "em_scared",
+     "label": "Tom, feeling scared",
+     "img": "art/poses/tom/mood-em_scared.webp",
+     "w": 195,
+     "h": 504,
+     "ax": 77.5,
+     "link": null,
+     "sheet": "tom-emotions-v7.png",
+     "marks": {
+      "top": 20.0,
+      "chin": 135.0,
+      "feet": 504
+     },
+     "conf": "low",
+     "s0": 0.079936,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 135.0
+     }
+    },
+    "em_surprised": {
+     "set": "mood",
+     "key": "em_surprised",
+     "label": "Tom, feeling surprised",
+     "img": "art/poses/tom/mood-em_surprised.webp",
+     "w": 272,
+     "h": 515,
+     "ax": 126.7,
+     "link": null,
+     "sheet": "tom-emotions-v7.png",
+     "marks": {
+      "top": 18.5,
+      "chin": 125.0,
+      "feet": 515
+     },
+     "conf": "low",
+     "s0": 0.079936,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 125.0
+     }
+    },
+    "em_proud": {
+     "set": "mood",
+     "key": "em_proud",
+     "label": "Tom, feeling proud",
+     "img": "art/poses/tom/mood-em_proud.webp",
+     "w": 245,
+     "h": 524,
+     "ax": 101.0,
+     "link": null,
+     "sheet": "tom-emotions-v7.png",
+     "marks": {
+      "top": 18.2,
+      "chin": 123.0,
+      "feet": 524
+     },
+     "conf": "low",
+     "s0": 0.079936,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 123.0
+     }
+    },
+    "em_unimpressed": {
+     "set": "mood",
+     "key": "em_unimpressed",
+     "label": "Tom, feeling unimpressed",
+     "img": "art/poses/tom/mood-em_unimpressed.webp",
+     "w": 186,
+     "h": 522,
+     "ax": 89.5,
+     "link": null,
+     "sheet": "tom-emotions-v7.png",
+     "marks": {
+      "top": 18.9,
+      "chin": 128.0,
+      "feet": 522
+     },
+     "conf": "low",
+     "s0": 0.079936,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 128.0
+     }
+    },
+    "tk_tell": {
+     "set": "talk",
+     "key": "tk_tell",
+     "label": "Tom, talking, telling",
+     "img": "art/poses/tom/talk-tk_tell.webp",
+     "w": 314,
+     "h": 582,
+     "ax": 109.5,
+     "link": null,
+     "sheet": "tom-talk-v2.png",
+     "marks": {
+      "top": 22.0,
+      "chin": 148.7,
+      "feet": 582
+     },
+     "conf": "low",
+     "s0": 0.071066,
+     "now": {
+      "f": 1.0,
+      "h": 1.05555,
+      "anchor": 148.74
+     }
+    },
+    "tk_point": {
+     "set": "talk",
+     "key": "tk_point",
+     "label": "Tom, talking, pointing",
+     "img": "art/poses/tom/talk-tk_point.webp",
+     "w": 397,
+     "h": 584,
+     "ax": 242.8,
+     "link": null,
+     "sheet": "tom-talk-v2.png",
+     "marks": {
+      "top": 22.1,
+      "chin": 149.2,
+      "feet": 584
+     },
+     "conf": "low",
+     "s0": 0.071066,
+     "now": {
+      "f": 1.0,
+      "h": 1.05555,
+      "anchor": 149.25
+     }
+    },
+    "tk_ask": {
+     "set": "talk",
+     "key": "tk_ask",
+     "label": "Tom, talking, asking",
+     "img": "art/poses/tom/talk-tk_ask.webp",
+     "w": 266,
+     "h": 599,
+     "ax": 129.0,
+     "link": null,
+     "sheet": "tom-talk-v2.png",
+     "marks": {
+      "top": 22.6,
+      "chin": 153.1,
+      "feet": 599
+     },
+     "conf": "low",
+     "s0": 0.071066,
+     "now": {
+      "f": 1.0,
+      "h": 1.05555,
+      "anchor": 153.08
+     }
+    },
+    "tk_answer": {
+     "set": "talk",
+     "key": "tk_answer",
+     "label": "Tom, talking, answering",
+     "img": "art/poses/tom/talk-tk_answer.webp",
+     "w": 271,
+     "h": 603,
+     "ax": 174.5,
+     "link": null,
+     "sheet": "tom-talk-v2.png",
+     "marks": {
+      "top": 22.8,
+      "chin": 154.1,
+      "feet": 603
+     },
+     "conf": "low",
+     "s0": 0.071066,
+     "now": {
+      "f": 1.0,
+      "h": 1.05555,
+      "anchor": 154.1
+     }
+    }
+   },
+   "sets": {
+    "walk": {
+     "name": "Walking",
+     "keys": [
+      "down_stand",
+      "down_step1",
+      "down_step2",
+      "up_stand",
+      "up_step1",
+      "up_step2",
+      "left_stand",
+      "left_step1",
+      "left_step2"
+     ],
+     "upright": null
+    },
+    "mood": {
+     "name": "Feelings",
+     "keys": [
+      "em_happy",
+      "em_loving",
+      "em_sad",
+      "em_angry",
+      "em_scared",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ],
+     "upright": [
+      "em_happy",
+      "em_loving",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ]
+    },
+    "talk": {
+     "name": "Talking",
+     "keys": [
+      "tk_tell",
+      "tk_point",
+      "tk_ask",
+      "tk_answer"
+     ],
+     "upright": [
+      "tk_tell",
+      "tk_point"
+     ]
     }
    }
   },
@@ -213,14 +593,20 @@
      "w": 172,
      "h": 461,
      "ax": 90.4,
-     "upright": true,
      "link": null,
+     "sheet": "tnb-walking-sheet-v2.png",
      "marks": {
       "top": 23.1,
       "chin": 130.0,
       "feet": 461
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.089823,
+     "now": {
+      "f": 0.9355,
+      "h": 1.16585,
+      "anchor": 129.08
+     }
     },
     "down_step1": {
      "set": "walk",
@@ -230,14 +616,20 @@
      "w": 185,
      "h": 465,
      "ax": 91.0,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "tnb-walking-sheet-v2.png",
      "marks": {
       "top": 23.1,
       "chin": 130.0,
       "feet": 465
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.089823,
+     "now": {
+      "f": 0.9355,
+      "h": 1.16585,
+      "anchor": 129.08
+     }
     },
     "down_step2": {
      "set": "walk",
@@ -247,14 +639,20 @@
      "w": 183,
      "h": 464,
      "ax": 89.5,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "tnb-walking-sheet-v2.png",
      "marks": {
       "top": 23.1,
       "chin": 130.0,
       "feet": 464
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.089823,
+     "now": {
+      "f": 0.9355,
+      "h": 1.16585,
+      "anchor": 129.08
+     }
     },
     "up_stand": {
      "set": "walk",
@@ -264,14 +662,20 @@
      "w": 165,
      "h": 469,
      "ax": 83.0,
-     "upright": true,
      "link": null,
+     "sheet": "tnb-walking-sheet-v2.png",
      "marks": {
       "top": 23.1,
       "chin": 130.0,
       "feet": 469
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.089823,
+     "now": {
+      "f": 0.9355,
+      "h": 1.16585,
+      "anchor": 129.08
+     }
     },
     "up_step1": {
      "set": "walk",
@@ -281,14 +685,20 @@
      "w": 185,
      "h": 472,
      "ax": 98.0,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "tnb-walking-sheet-v2.png",
      "marks": {
       "top": 23.1,
       "chin": 130.0,
       "feet": 472
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.089823,
+     "now": {
+      "f": 0.9355,
+      "h": 1.16585,
+      "anchor": 129.08
+     }
     },
     "up_step2": {
      "set": "walk",
@@ -298,14 +708,20 @@
      "w": 189,
      "h": 473,
      "ax": 91.5,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "tnb-walking-sheet-v2.png",
      "marks": {
       "top": 23.1,
       "chin": 130.0,
       "feet": 473
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.089823,
+     "now": {
+      "f": 0.9355,
+      "h": 1.16585,
+      "anchor": 129.08
+     }
     },
     "left_stand": {
      "set": "walk",
@@ -315,14 +731,20 @@
      "w": 169,
      "h": 479,
      "ax": 94.0,
-     "upright": true,
      "link": null,
+     "sheet": "tnb-walking-sheet-v2.png",
      "marks": {
       "top": 20.7,
       "chin": 126.8,
       "feet": 479
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.089823,
+     "now": {
+      "f": 0.9355,
+      "h": 1.16585,
+      "anchor": 129.08
+     }
     },
     "left_step1": {
      "set": "walk",
@@ -332,14 +754,20 @@
      "w": 290,
      "h": 479,
      "ax": 156.5,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "tnb-walking-sheet-v2.png",
      "marks": {
       "top": 20.7,
       "chin": 126.8,
       "feet": 479
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.089823,
+     "now": {
+      "f": 0.9355,
+      "h": 1.16585,
+      "anchor": 129.08
+     }
     },
     "left_step2": {
      "set": "walk",
@@ -349,14 +777,346 @@
      "w": 193,
      "h": 480,
      "ax": 124.5,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "tnb-walking-sheet-v2.png",
      "marks": {
       "top": 20.7,
       "chin": 126.8,
       "feet": 480
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.089823,
+     "now": {
+      "f": 0.9355,
+      "h": 1.16585,
+      "anchor": 129.08
+     }
+    },
+    "em_happy": {
+     "set": "mood",
+     "key": "em_happy",
+     "label": "TNB, feeling happy",
+     "img": "art/poses/tnb/mood-em_happy.webp",
+     "w": 223,
+     "h": 496,
+     "ax": 113.5,
+     "link": null,
+     "sheet": "tnb-emotions-v3.png",
+     "marks": {
+      "top": 23.6,
+      "chin": 133.0,
+      "feet": 496
+     },
+     "conf": "low",
+     "s0": 0.075859,
+     "now": {
+      "f": 1.0,
+      "h": 1.21,
+      "anchor": 133.0
+     }
+    },
+    "em_loving": {
+     "set": "mood",
+     "key": "em_loving",
+     "label": "TNB, feeling loving",
+     "img": "art/poses/tnb/mood-em_loving.webp",
+     "w": 241,
+     "h": 494,
+     "ax": 119.0,
+     "link": null,
+     "sheet": "tnb-emotions-v3.png",
+     "marks": {
+      "top": 24.0,
+      "chin": 135.0,
+      "feet": 494
+     },
+     "conf": "low",
+     "s0": 0.075859,
+     "now": {
+      "f": 1.0,
+      "h": 1.21,
+      "anchor": 135.0
+     }
+    },
+    "em_sad": {
+     "set": "mood",
+     "key": "em_sad",
+     "label": "TNB, feeling sad",
+     "img": "art/poses/tnb/mood-em_sad.webp",
+     "w": 239,
+     "h": 483,
+     "ax": 114.5,
+     "link": null,
+     "sheet": "tnb-emotions-v3.png",
+     "marks": {
+      "top": 28.1,
+      "chin": 158.0,
+      "feet": 483
+     },
+     "conf": "low",
+     "s0": 0.075859,
+     "now": {
+      "f": 1.0,
+      "h": 1.21,
+      "anchor": 158.0
+     }
+    },
+    "em_angry": {
+     "set": "mood",
+     "key": "em_angry",
+     "label": "TNB, feeling angry",
+     "img": "art/poses/tnb/mood-em_angry.webp",
+     "w": 309,
+     "h": 481,
+     "ax": 138.4,
+     "link": null,
+     "sheet": "tnb-emotions-v3.png",
+     "marks": {
+      "top": 29.5,
+      "chin": 166.0,
+      "feet": 481
+     },
+     "conf": "low",
+     "s0": 0.075859,
+     "now": {
+      "f": 1.0,
+      "h": 1.21,
+      "anchor": 166.0
+     }
+    },
+    "em_scared": {
+     "set": "mood",
+     "key": "em_scared",
+     "label": "TNB, feeling scared",
+     "img": "art/poses/tnb/mood-em_scared.webp",
+     "w": 239,
+     "h": 508,
+     "ax": 106.0,
+     "link": null,
+     "sheet": "tnb-emotions-v3.png",
+     "marks": {
+      "top": 21.7,
+      "chin": 122.0,
+      "feet": 508
+     },
+     "conf": "low",
+     "s0": 0.075859,
+     "now": {
+      "f": 1.0,
+      "h": 1.21,
+      "anchor": 122.0
+     }
+    },
+    "em_surprised": {
+     "set": "mood",
+     "key": "em_surprised",
+     "label": "TNB, feeling surprised",
+     "img": "art/poses/tnb/mood-em_surprised.webp",
+     "w": 270,
+     "h": 515,
+     "ax": 125.5,
+     "link": null,
+     "sheet": "tnb-emotions-v3.png",
+     "marks": {
+      "top": 20.8,
+      "chin": 117.0,
+      "feet": 515
+     },
+     "conf": "low",
+     "s0": 0.075859,
+     "now": {
+      "f": 1.0,
+      "h": 1.21,
+      "anchor": 117.0
+     }
+    },
+    "em_proud": {
+     "set": "mood",
+     "key": "em_proud",
+     "label": "TNB, feeling proud",
+     "img": "art/poses/tnb/mood-em_proud.webp",
+     "w": 303,
+     "h": 513,
+     "ax": 152.3,
+     "link": null,
+     "sheet": "tnb-emotions-v3.png",
+     "marks": {
+      "top": 19.5,
+      "chin": 110.0,
+      "feet": 513
+     },
+     "conf": "low",
+     "s0": 0.075859,
+     "now": {
+      "f": 1.0,
+      "h": 1.21,
+      "anchor": 110.0
+     }
+    },
+    "em_unimpressed": {
+     "set": "mood",
+     "key": "em_unimpressed",
+     "label": "TNB, feeling unimpressed",
+     "img": "art/poses/tnb/mood-em_unimpressed.webp",
+     "w": 221,
+     "h": 517,
+     "ax": 114.4,
+     "link": null,
+     "sheet": "tnb-emotions-v3.png",
+     "marks": {
+      "top": 23.1,
+      "chin": 130.0,
+      "feet": 517
+     },
+     "conf": "low",
+     "s0": 0.075859,
+     "now": {
+      "f": 1.0,
+      "h": 1.21,
+      "anchor": 130.0
+     }
+    },
+    "tk_tell": {
+     "set": "talk",
+     "key": "tk_tell",
+     "label": "TNB, talking, telling",
+     "img": "art/poses/tnb/talk-tk_tell.webp",
+     "w": 327,
+     "h": 573,
+     "ax": 201.2,
+     "link": null,
+     "sheet": "tnb-talk-v2.png",
+     "marks": {
+      "top": 24.9,
+      "chin": 140.0,
+      "feet": 573
+     },
+     "conf": "low",
+     "s0": 0.063689,
+     "now": {
+      "f": 1.0,
+      "h": 1.49877,
+      "anchor": 140.01
+     }
+    },
+    "tk_point": {
+     "set": "talk",
+     "key": "tk_point",
+     "label": "TNB, talking, pointing",
+     "img": "art/poses/tnb/talk-tk_point.webp",
+     "w": 397,
+     "h": 565,
+     "ax": 175.5,
+     "link": null,
+     "sheet": "tnb-talk-v2.png",
+     "marks": {
+      "top": 24.5,
+      "chin": 138.1,
+      "feet": 565
+     },
+     "conf": "low",
+     "s0": 0.063689,
+     "now": {
+      "f": 1.0,
+      "h": 1.49877,
+      "anchor": 138.06
+     }
+    },
+    "tk_ask": {
+     "set": "talk",
+     "key": "tk_ask",
+     "label": "TNB, talking, asking",
+     "img": "art/poses/tnb/talk-tk_ask.webp",
+     "w": 311,
+     "h": 592,
+     "ax": 147.6,
+     "link": null,
+     "sheet": "tnb-talk-v2.png",
+     "marks": {
+      "top": 25.7,
+      "chin": 144.7,
+      "feet": 592
+     },
+     "conf": "low",
+     "s0": 0.063689,
+     "now": {
+      "f": 1.0,
+      "h": 1.49877,
+      "anchor": 144.66
+     }
+    },
+    "tk_answer": {
+     "set": "talk",
+     "key": "tk_answer",
+     "label": "TNB, talking, answering",
+     "img": "art/poses/tnb/talk-tk_answer.webp",
+     "w": 313,
+     "h": 593,
+     "ax": 140.2,
+     "link": null,
+     "sheet": "tnb-talk-v2.png",
+     "marks": {
+      "top": 25.7,
+      "chin": 144.9,
+      "feet": 593
+     },
+     "conf": "low",
+     "s0": 0.063689,
+     "now": {
+      "f": 1.0,
+      "h": 1.49877,
+      "anchor": 144.9
+     }
+    }
+   },
+   "sets": {
+    "walk": {
+     "name": "Walking",
+     "keys": [
+      "down_stand",
+      "down_step1",
+      "down_step2",
+      "up_stand",
+      "up_step1",
+      "up_step2",
+      "left_stand",
+      "left_step1",
+      "left_step2"
+     ],
+     "upright": null
+    },
+    "mood": {
+     "name": "Feelings",
+     "keys": [
+      "em_happy",
+      "em_loving",
+      "em_sad",
+      "em_angry",
+      "em_scared",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ],
+     "upright": [
+      "em_happy",
+      "em_loving",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ]
+    },
+    "talk": {
+     "name": "Talking",
+     "keys": [
+      "tk_tell",
+      "tk_point",
+      "tk_ask",
+      "tk_answer"
+     ],
+     "upright": [
+      "tk_tell",
+      "tk_point"
+     ]
     }
    }
   },
@@ -382,14 +1142,20 @@
      "w": 156,
      "h": 475,
      "ax": 78.5,
-     "upright": true,
      "link": null,
+     "sheet": "justin-walking-sheet-v3.png",
      "marks": {
       "top": 28.5,
       "chin": 123.5,
       "feet": 475
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.094648,
+     "now": {
+      "f": 0.92344,
+      "h": 1.24243,
+      "anchor": 114.0
+     }
     },
     "down_step1": {
      "set": "walk",
@@ -399,14 +1165,20 @@
      "w": 182,
      "h": 473,
      "ax": 93.5,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "justin-walking-sheet-v3.png",
      "marks": {
       "top": 28.5,
       "chin": 123.5,
       "feet": 473
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.094648,
+     "now": {
+      "f": 0.92344,
+      "h": 1.24243,
+      "anchor": 114.0
+     }
     },
     "down_step2": {
      "set": "walk",
@@ -416,14 +1188,20 @@
      "w": 180,
      "h": 474,
      "ax": 93.5,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "justin-walking-sheet-v3.png",
      "marks": {
       "top": 28.5,
       "chin": 123.5,
       "feet": 474
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.094648,
+     "now": {
+      "f": 0.92344,
+      "h": 1.24243,
+      "anchor": 114.0
+     }
     },
     "up_stand": {
      "set": "walk",
@@ -433,14 +1211,20 @@
      "w": 153,
      "h": 456,
      "ax": 76.4,
-     "upright": true,
      "link": null,
+     "sheet": "justin-walking-sheet-v3.png",
      "marks": {
       "top": 28.5,
       "chin": 123.5,
       "feet": 456
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.094648,
+     "now": {
+      "f": 0.92344,
+      "h": 1.24243,
+      "anchor": 114.0
+     }
     },
     "up_step1": {
      "set": "walk",
@@ -450,14 +1234,20 @@
      "w": 178,
      "h": 459,
      "ax": 100.0,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "justin-walking-sheet-v3.png",
      "marks": {
       "top": 28.5,
       "chin": 123.5,
       "feet": 459
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.094648,
+     "now": {
+      "f": 0.92344,
+      "h": 1.24243,
+      "anchor": 114.0
+     }
     },
     "up_step2": {
      "set": "walk",
@@ -467,14 +1257,20 @@
      "w": 172,
      "h": 459,
      "ax": 78.5,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "justin-walking-sheet-v3.png",
      "marks": {
       "top": 28.5,
       "chin": 123.5,
       "feet": 459
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.094648,
+     "now": {
+      "f": 0.92344,
+      "h": 1.24243,
+      "anchor": 114.0
+     }
     },
     "left_stand": {
      "set": "walk",
@@ -484,14 +1280,20 @@
      "w": 149,
      "h": 494,
      "ax": 69.5,
-     "upright": true,
      "link": null,
+     "sheet": "justin-walking-sheet-v3.png",
      "marks": {
       "top": 28.5,
       "chin": 128.2,
       "feet": 494
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.094648,
+     "now": {
+      "f": 0.92344,
+      "h": 1.24243,
+      "anchor": 114.0
+     }
     },
     "left_step1": {
      "set": "walk",
@@ -501,14 +1303,20 @@
      "w": 307,
      "h": 490,
      "ax": 157.0,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "justin-walking-sheet-v3.png",
      "marks": {
       "top": 28.5,
       "chin": 128.2,
       "feet": 490
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.094648,
+     "now": {
+      "f": 0.92344,
+      "h": 1.24243,
+      "anchor": 114.0
+     }
     },
     "left_step2": {
      "set": "walk",
@@ -518,14 +1326,346 @@
      "w": 216,
      "h": 494,
      "ax": 101.5,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "justin-walking-sheet-v3.png",
      "marks": {
       "top": 28.5,
       "chin": 128.2,
       "feet": 494
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.094648,
+     "now": {
+      "f": 0.92344,
+      "h": 1.24243,
+      "anchor": 114.0
+     }
+    },
+    "em_happy": {
+     "set": "mood",
+     "key": "em_happy",
+     "label": "Justin, feeling happy",
+     "img": "art/poses/justin/mood-em_happy.webp",
+     "w": 187,
+     "h": 498,
+     "ax": 104.5,
+     "link": null,
+     "sheet": "justin-emotions-v4.png",
+     "marks": {
+      "top": 24.0,
+      "chin": 104.0,
+      "feet": 498
+     },
+     "conf": "low",
+     "s0": 0.076292,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 104.0
+     }
+    },
+    "em_loving": {
+     "set": "mood",
+     "key": "em_loving",
+     "label": "Justin, feeling loving",
+     "img": "art/poses/justin/mood-em_loving.webp",
+     "w": 201,
+     "h": 513,
+     "ax": 84.0,
+     "link": null,
+     "sheet": "justin-emotions-v4.png",
+     "marks": {
+      "top": 26.1,
+      "chin": 113.0,
+      "feet": 513
+     },
+     "conf": "low",
+     "s0": 0.076292,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 113.0
+     }
+    },
+    "em_sad": {
+     "set": "mood",
+     "key": "em_sad",
+     "label": "Justin, feeling sad",
+     "img": "art/poses/justin/mood-em_sad.webp",
+     "w": 176,
+     "h": 508,
+     "ax": 85.5,
+     "link": null,
+     "sheet": "justin-emotions-v4.png",
+     "marks": {
+      "top": 34.2,
+      "chin": 148.0,
+      "feet": 508
+     },
+     "conf": "low",
+     "s0": 0.076292,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 148.0
+     }
+    },
+    "em_angry": {
+     "set": "mood",
+     "key": "em_angry",
+     "label": "Justin, feeling angry",
+     "img": "art/poses/justin/mood-em_angry.webp",
+     "w": 313,
+     "h": 500,
+     "ax": 130.0,
+     "link": null,
+     "sheet": "justin-emotions-v4.png",
+     "marks": {
+      "top": 36.2,
+      "chin": 157.0,
+      "feet": 500
+     },
+     "conf": "low",
+     "s0": 0.076292,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 157.0
+     }
+    },
+    "em_scared": {
+     "set": "mood",
+     "key": "em_scared",
+     "label": "Justin, feeling scared",
+     "img": "art/poses/justin/mood-em_scared.webp",
+     "w": 209,
+     "h": 472,
+     "ax": 85.5,
+     "link": null,
+     "sheet": "justin-emotions-v4.png",
+     "marks": {
+      "top": 27.7,
+      "chin": 120.0,
+      "feet": 472
+     },
+     "conf": "low",
+     "s0": 0.076292,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 120.0
+     }
+    },
+    "em_surprised": {
+     "set": "mood",
+     "key": "em_surprised",
+     "label": "Justin, feeling surprised",
+     "img": "art/poses/justin/mood-em_surprised.webp",
+     "w": 259,
+     "h": 510,
+     "ax": 128.4,
+     "link": null,
+     "sheet": "justin-emotions-v4.png",
+     "marks": {
+      "top": 29.5,
+      "chin": 128.0,
+      "feet": 510
+     },
+     "conf": "low",
+     "s0": 0.076292,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 128.0
+     }
+    },
+    "em_proud": {
+     "set": "mood",
+     "key": "em_proud",
+     "label": "Justin, feeling proud",
+     "img": "art/poses/justin/mood-em_proud.webp",
+     "w": 289,
+     "h": 521,
+     "ax": 112.5,
+     "link": null,
+     "sheet": "justin-emotions-v4.png",
+     "marks": {
+      "top": 26.8,
+      "chin": 116.0,
+      "feet": 521
+     },
+     "conf": "low",
+     "s0": 0.076292,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 116.0
+     }
+    },
+    "em_unimpressed": {
+     "set": "mood",
+     "key": "em_unimpressed",
+     "label": "Justin, feeling unimpressed",
+     "img": "art/poses/justin/mood-em_unimpressed.webp",
+     "w": 209,
+     "h": 511,
+     "ax": 79.0,
+     "link": null,
+     "sheet": "justin-emotions-v4.png",
+     "marks": {
+      "top": 27.9,
+      "chin": 121.0,
+      "feet": 511
+     },
+     "conf": "low",
+     "s0": 0.076292,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 121.0
+     }
+    },
+    "tk_tell": {
+     "set": "talk",
+     "key": "tk_tell",
+     "label": "Justin, talking, telling",
+     "img": "art/poses/justin/talk-tk_tell.webp",
+     "w": 340,
+     "h": 638,
+     "ax": 110.1,
+     "link": null,
+     "sheet": "justin-talk-v1.png",
+     "marks": {
+      "top": 31.2,
+      "chin": 135.1,
+      "feet": 638
+     },
+     "conf": "low",
+     "s0": 0.062064,
+     "now": {
+      "f": 1.0,
+      "h": 1.58122,
+      "anchor": 135.12
+     }
+    },
+    "tk_point": {
+     "set": "talk",
+     "key": "tk_point",
+     "label": "Justin, talking, pointing",
+     "img": "art/poses/justin/talk-tk_point.webp",
+     "w": 411,
+     "h": 628,
+     "ax": 216.9,
+     "link": null,
+     "sheet": "justin-talk-v1.png",
+     "marks": {
+      "top": 30.7,
+      "chin": 133.0,
+      "feet": 628
+     },
+     "conf": "low",
+     "s0": 0.062064,
+     "now": {
+      "f": 1.0,
+      "h": 1.58122,
+      "anchor": 133.0
+     }
+    },
+    "tk_ask": {
+     "set": "talk",
+     "key": "tk_ask",
+     "label": "Justin, talking, asking",
+     "img": "art/poses/justin/talk-tk_ask.webp",
+     "w": 298,
+     "h": 646,
+     "ax": 142.7,
+     "link": null,
+     "sheet": "justin-talk-v1.png",
+     "marks": {
+      "top": 31.6,
+      "chin": 136.8,
+      "feet": 646
+     },
+     "conf": "low",
+     "s0": 0.062064,
+     "now": {
+      "f": 1.0,
+      "h": 1.58122,
+      "anchor": 136.82
+     }
+    },
+    "tk_answer": {
+     "set": "talk",
+     "key": "tk_answer",
+     "label": "Justin, talking, answering",
+     "img": "art/poses/justin/talk-tk_answer.webp",
+     "w": 317,
+     "h": 642,
+     "ax": 108.5,
+     "link": null,
+     "sheet": "justin-talk-v1.png",
+     "marks": {
+      "top": 31.4,
+      "chin": 136.0,
+      "feet": 642
+     },
+     "conf": "low",
+     "s0": 0.062064,
+     "now": {
+      "f": 1.0,
+      "h": 1.58122,
+      "anchor": 135.97
+     }
+    }
+   },
+   "sets": {
+    "walk": {
+     "name": "Walking",
+     "keys": [
+      "down_stand",
+      "down_step1",
+      "down_step2",
+      "up_stand",
+      "up_step1",
+      "up_step2",
+      "left_stand",
+      "left_step1",
+      "left_step2"
+     ],
+     "upright": null
+    },
+    "mood": {
+     "name": "Feelings",
+     "keys": [
+      "em_happy",
+      "em_loving",
+      "em_sad",
+      "em_angry",
+      "em_scared",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ],
+     "upright": [
+      "em_happy",
+      "em_loving",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ]
+    },
+    "talk": {
+     "name": "Talking",
+     "keys": [
+      "tk_tell",
+      "tk_point",
+      "tk_ask",
+      "tk_answer"
+     ],
+     "upright": [
+      "tk_tell",
+      "tk_point"
+     ]
     }
    }
   },
@@ -551,14 +1691,20 @@
      "w": 212,
      "h": 480,
      "ax": 116.4,
-     "upright": true,
      "link": null,
+     "sheet": "boppy-walking-sheet-v4.png",
      "marks": {
       "top": 19.2,
       "chin": 165.6,
       "feet": 480
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.08257,
+     "now": {
+      "f": 0.97865,
+      "h": 1.05102,
+      "anchor": 141.6
+     }
     },
     "down_step1": {
      "set": "walk",
@@ -568,14 +1714,20 @@
      "w": 231,
      "h": 482,
      "ax": 119.5,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "boppy-walking-sheet-v4.png",
      "marks": {
       "top": 19.2,
       "chin": 165.6,
       "feet": 482
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.08257,
+     "now": {
+      "f": 0.97865,
+      "h": 1.05102,
+      "anchor": 141.6
+     }
     },
     "down_step2": {
      "set": "walk",
@@ -585,14 +1737,20 @@
      "w": 217,
      "h": 482,
      "ax": 103.9,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "boppy-walking-sheet-v4.png",
      "marks": {
       "top": 19.2,
       "chin": 165.6,
       "feet": 482
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.08257,
+     "now": {
+      "f": 0.97865,
+      "h": 1.05102,
+      "anchor": 141.6
+     }
     },
     "up_stand": {
      "set": "walk",
@@ -602,14 +1760,20 @@
      "w": 201,
      "h": 453,
      "ax": 111.5,
-     "upright": true,
      "link": null,
+     "sheet": "boppy-walking-sheet-v4.png",
      "marks": {
       "top": 19.2,
       "chin": 165.6,
       "feet": 453
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.08257,
+     "now": {
+      "f": 0.97865,
+      "h": 1.05102,
+      "anchor": 141.6
+     }
     },
     "up_step1": {
      "set": "walk",
@@ -619,14 +1783,20 @@
      "w": 216,
      "h": 454,
      "ax": 116.9,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "boppy-walking-sheet-v4.png",
      "marks": {
       "top": 19.2,
       "chin": 165.6,
       "feet": 454
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.08257,
+     "now": {
+      "f": 0.97865,
+      "h": 1.05102,
+      "anchor": 141.6
+     }
     },
     "up_step2": {
      "set": "walk",
@@ -636,14 +1806,20 @@
      "w": 214,
      "h": 451,
      "ax": 116.0,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "boppy-walking-sheet-v4.png",
      "marks": {
       "top": 19.2,
       "chin": 165.6,
       "feet": 451
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.08257,
+     "now": {
+      "f": 0.97865,
+      "h": 1.05102,
+      "anchor": 141.6
+     }
     },
     "left_stand": {
      "set": "walk",
@@ -653,14 +1829,20 @@
      "w": 218,
      "h": 473,
      "ax": 99.5,
-     "upright": true,
      "link": null,
+     "sheet": "boppy-walking-sheet-v4.png",
      "marks": {
       "top": 19.2,
       "chin": 153.6,
       "feet": 473
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.08257,
+     "now": {
+      "f": 0.97865,
+      "h": 1.05102,
+      "anchor": 141.6
+     }
     },
     "left_step1": {
      "set": "walk",
@@ -670,14 +1852,20 @@
      "w": 288,
      "h": 468,
      "ax": 147.3,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "boppy-walking-sheet-v4.png",
      "marks": {
       "top": 19.2,
       "chin": 153.6,
       "feet": 468
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.08257,
+     "now": {
+      "f": 0.97865,
+      "h": 1.05102,
+      "anchor": 141.6
+     }
     },
     "left_step2": {
      "set": "walk",
@@ -687,14 +1875,346 @@
      "w": 222,
      "h": 474,
      "ax": 106.8,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "boppy-walking-sheet-v4.png",
      "marks": {
       "top": 19.2,
       "chin": 153.6,
       "feet": 474
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.08257,
+     "now": {
+      "f": 0.97865,
+      "h": 1.05102,
+      "anchor": 141.6
+     }
+    },
+    "em_happy": {
+     "set": "mood",
+     "key": "em_happy",
+     "label": "Boppy, feeling happy",
+     "img": "art/poses/boppy/mood-em_happy.webp",
+     "w": 323,
+     "h": 498,
+     "ax": 158.6,
+     "link": null,
+     "sheet": "boppy-emotions-v6.png",
+     "marks": {
+      "top": 17.9,
+      "chin": 154.0,
+      "feet": 498
+     },
+     "conf": "low",
+     "s0": 0.068433,
+     "now": {
+      "f": 1.0,
+      "h": 1.1,
+      "anchor": 154.0
+     }
+    },
+    "em_loving": {
+     "set": "mood",
+     "key": "em_loving",
+     "label": "Boppy, feeling loving",
+     "img": "art/poses/boppy/mood-em_loving.webp",
+     "w": 256,
+     "h": 495,
+     "ax": 98.6,
+     "link": null,
+     "sheet": "boppy-emotions-v6.png",
+     "marks": {
+      "top": 17.3,
+      "chin": 149.0,
+      "feet": 495
+     },
+     "conf": "low",
+     "s0": 0.068433,
+     "now": {
+      "f": 1.0,
+      "h": 1.1,
+      "anchor": 149.0
+     }
+    },
+    "em_sad": {
+     "set": "mood",
+     "key": "em_sad",
+     "label": "Boppy, feeling sad",
+     "img": "art/poses/boppy/mood-em_sad.webp",
+     "w": 272,
+     "h": 477,
+     "ax": 129.0,
+     "link": null,
+     "sheet": "boppy-emotions-v6.png",
+     "marks": {
+      "top": 20.6,
+      "chin": 178.0,
+      "feet": 477
+     },
+     "conf": "low",
+     "s0": 0.068433,
+     "now": {
+      "f": 1.0,
+      "h": 1.1,
+      "anchor": 178.0
+     }
+    },
+    "em_angry": {
+     "set": "mood",
+     "key": "em_angry",
+     "label": "Boppy, feeling angry",
+     "img": "art/poses/boppy/mood-em_angry.webp",
+     "w": 347,
+     "h": 482,
+     "ax": 160.1,
+     "link": null,
+     "sheet": "boppy-emotions-v6.png",
+     "marks": {
+      "top": 21.9,
+      "chin": 189.0,
+      "feet": 482
+     },
+     "conf": "low",
+     "s0": 0.068433,
+     "now": {
+      "f": 1.0,
+      "h": 1.1,
+      "anchor": 189.0
+     }
+    },
+    "em_scared": {
+     "set": "mood",
+     "key": "em_scared",
+     "label": "Boppy, feeling scared",
+     "img": "art/poses/boppy/mood-em_scared.webp",
+     "w": 268,
+     "h": 508,
+     "ax": 126.9,
+     "link": null,
+     "sheet": "boppy-emotions-v6.png",
+     "marks": {
+      "top": 20.4,
+      "chin": 176.0,
+      "feet": 508
+     },
+     "conf": "low",
+     "s0": 0.068433,
+     "now": {
+      "f": 1.0,
+      "h": 1.1,
+      "anchor": 176.0
+     }
+    },
+    "em_surprised": {
+     "set": "mood",
+     "key": "em_surprised",
+     "label": "Boppy, feeling surprised",
+     "img": "art/poses/boppy/mood-em_surprised.webp",
+     "w": 301,
+     "h": 508,
+     "ax": 149.1,
+     "link": null,
+     "sheet": "boppy-emotions-v6.png",
+     "marks": {
+      "top": 19.4,
+      "chin": 167.0,
+      "feet": 508
+     },
+     "conf": "low",
+     "s0": 0.068433,
+     "now": {
+      "f": 1.0,
+      "h": 1.1,
+      "anchor": 167.0
+     }
+    },
+    "em_proud": {
+     "set": "mood",
+     "key": "em_proud",
+     "label": "Boppy, feeling proud",
+     "img": "art/poses/boppy/mood-em_proud.webp",
+     "w": 316,
+     "h": 515,
+     "ax": 138.9,
+     "link": null,
+     "sheet": "boppy-emotions-v6.png",
+     "marks": {
+      "top": 17.9,
+      "chin": 154.0,
+      "feet": 515
+     },
+     "conf": "low",
+     "s0": 0.068433,
+     "now": {
+      "f": 1.0,
+      "h": 1.1,
+      "anchor": 154.0
+     }
+    },
+    "em_unimpressed": {
+     "set": "mood",
+     "key": "em_unimpressed",
+     "label": "Boppy, feeling unimpressed",
+     "img": "art/poses/boppy/mood-em_unimpressed.webp",
+     "w": 272,
+     "h": 520,
+     "ax": 112.5,
+     "link": null,
+     "sheet": "boppy-emotions-v6.png",
+     "marks": {
+      "top": 16.5,
+      "chin": 142.0,
+      "feet": 520
+     },
+     "conf": "low",
+     "s0": 0.068433,
+     "now": {
+      "f": 1.0,
+      "h": 1.1,
+      "anchor": 142.0
+     }
+    },
+    "tk_tell": {
+     "set": "talk",
+     "key": "tk_tell",
+     "label": "Boppy, talking, telling",
+     "img": "art/poses/boppy/talk-tk_tell.webp",
+     "w": 365,
+     "h": 582,
+     "ax": 190.2,
+     "link": null,
+     "sheet": "boppy-talk-v3.png",
+     "marks": {
+      "top": 19.5,
+      "chin": 168.4,
+      "feet": 582
+     },
+     "conf": "low",
+     "s0": 0.065922,
+     "now": {
+      "f": 1.0,
+      "h": 1.10348,
+      "anchor": 168.42
+     }
+    },
+    "tk_point": {
+     "set": "talk",
+     "key": "tk_point",
+     "label": "Boppy, talking, pointing",
+     "img": "art/poses/boppy/talk-tk_point.webp",
+     "w": 426,
+     "h": 589,
+     "ax": 220.8,
+     "link": null,
+     "sheet": "boppy-talk-v3.png",
+     "marks": {
+      "top": 19.8,
+      "chin": 170.5,
+      "feet": 589
+     },
+     "conf": "low",
+     "s0": 0.065922,
+     "now": {
+      "f": 1.0,
+      "h": 1.10348,
+      "anchor": 170.45
+     }
+    },
+    "tk_ask": {
+     "set": "talk",
+     "key": "tk_ask",
+     "label": "Boppy, talking, asking",
+     "img": "art/poses/boppy/talk-tk_ask.webp",
+     "w": 332,
+     "h": 606,
+     "ax": 173.6,
+     "link": null,
+     "sheet": "boppy-talk-v3.png",
+     "marks": {
+      "top": 20.3,
+      "chin": 175.4,
+      "feet": 606
+     },
+     "conf": "low",
+     "s0": 0.065922,
+     "now": {
+      "f": 1.0,
+      "h": 1.10348,
+      "anchor": 175.37
+     }
+    },
+    "tk_answer": {
+     "set": "talk",
+     "key": "tk_answer",
+     "label": "Boppy, talking, answering",
+     "img": "art/poses/boppy/talk-tk_answer.webp",
+     "w": 325,
+     "h": 608,
+     "ax": 203.2,
+     "link": null,
+     "sheet": "boppy-talk-v3.png",
+     "marks": {
+      "top": 20.4,
+      "chin": 175.9,
+      "feet": 608
+     },
+     "conf": "low",
+     "s0": 0.065922,
+     "now": {
+      "f": 1.0,
+      "h": 1.10348,
+      "anchor": 175.95
+     }
+    }
+   },
+   "sets": {
+    "walk": {
+     "name": "Walking",
+     "keys": [
+      "down_stand",
+      "down_step1",
+      "down_step2",
+      "up_stand",
+      "up_step1",
+      "up_step2",
+      "left_stand",
+      "left_step1",
+      "left_step2"
+     ],
+     "upright": null
+    },
+    "mood": {
+     "name": "Feelings",
+     "keys": [
+      "em_happy",
+      "em_loving",
+      "em_sad",
+      "em_angry",
+      "em_scared",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ],
+     "upright": [
+      "em_happy",
+      "em_loving",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ]
+    },
+    "talk": {
+     "name": "Talking",
+     "keys": [
+      "tk_tell",
+      "tk_point",
+      "tk_ask",
+      "tk_answer"
+     ],
+     "upright": [
+      "tk_tell",
+      "tk_point"
+     ]
     }
    }
   },
@@ -720,14 +2240,20 @@
      "w": 168,
      "h": 477,
      "ax": 85.5,
-     "upright": true,
      "link": null,
+     "sheet": "amy-walking-sheet-v3.png",
      "marks": {
       "top": 16.7,
       "chin": 109.7,
       "feet": 477
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.080609,
+     "now": {
+      "f": 0.85273,
+      "h": 1.41916,
+      "anchor": 124.02
+     }
     },
     "down_step1": {
      "set": "walk",
@@ -737,14 +2263,20 @@
      "w": 171,
      "h": 476,
      "ax": 89.1,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "amy-walking-sheet-v3.png",
      "marks": {
       "top": 16.7,
       "chin": 109.7,
       "feet": 476
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.080609,
+     "now": {
+      "f": 0.85273,
+      "h": 1.41916,
+      "anchor": 124.02
+     }
     },
     "down_step2": {
      "set": "walk",
@@ -754,14 +2286,20 @@
      "w": 175,
      "h": 477,
      "ax": 88.7,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "amy-walking-sheet-v3.png",
      "marks": {
       "top": 16.7,
       "chin": 109.7,
       "feet": 477
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.080609,
+     "now": {
+      "f": 0.85273,
+      "h": 1.41916,
+      "anchor": 124.02
+     }
     },
     "up_stand": {
      "set": "walk",
@@ -771,14 +2309,20 @@
      "w": 161,
      "h": 474,
      "ax": 82.7,
-     "upright": true,
      "link": null,
+     "sheet": "amy-walking-sheet-v3.png",
      "marks": {
       "top": 16.7,
       "chin": 109.7,
       "feet": 474
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.080609,
+     "now": {
+      "f": 0.85273,
+      "h": 1.41916,
+      "anchor": 124.02
+     }
     },
     "up_step1": {
      "set": "walk",
@@ -788,14 +2332,20 @@
      "w": 181,
      "h": 474,
      "ax": 98.0,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "amy-walking-sheet-v3.png",
      "marks": {
       "top": 16.7,
       "chin": 109.7,
       "feet": 474
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.080609,
+     "now": {
+      "f": 0.85273,
+      "h": 1.41916,
+      "anchor": 124.02
+     }
     },
     "up_step2": {
      "set": "walk",
@@ -805,14 +2355,20 @@
      "w": 178,
      "h": 473,
      "ax": 88.0,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "amy-walking-sheet-v3.png",
      "marks": {
       "top": 16.7,
       "chin": 109.7,
       "feet": 473
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.080609,
+     "now": {
+      "f": 0.85273,
+      "h": 1.41916,
+      "anchor": 124.02
+     }
     },
     "left_stand": {
      "set": "walk",
@@ -822,14 +2378,20 @@
      "w": 163,
      "h": 484,
      "ax": 89.9,
-     "upright": true,
      "link": null,
+     "sheet": "amy-walking-sheet-v3.png",
      "marks": {
       "top": 16.7,
       "chin": 112.1,
       "feet": 484
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.080609,
+     "now": {
+      "f": 0.85273,
+      "h": 1.41916,
+      "anchor": 124.02
+     }
     },
     "left_step1": {
      "set": "walk",
@@ -839,14 +2401,20 @@
      "w": 261,
      "h": 482,
      "ax": 170.9,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "amy-walking-sheet-v3.png",
      "marks": {
       "top": 16.7,
       "chin": 112.1,
       "feet": 482
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.080609,
+     "now": {
+      "f": 0.85273,
+      "h": 1.41916,
+      "anchor": 124.02
+     }
     },
     "left_step2": {
      "set": "walk",
@@ -856,14 +2424,346 @@
      "w": 206,
      "h": 484,
      "ax": 129.9,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "amy-walking-sheet-v3.png",
      "marks": {
       "top": 16.7,
       "chin": 112.1,
       "feet": 484
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.080609,
+     "now": {
+      "f": 0.85273,
+      "h": 1.41916,
+      "anchor": 124.02
+     }
+    },
+    "em_happy": {
+     "set": "mood",
+     "key": "em_happy",
+     "label": "Amy, feeling happy",
+     "img": "art/poses/amy/mood-em_happy.webp",
+     "w": 217,
+     "h": 492,
+     "ax": 106.9,
+     "link": null,
+     "sheet": "amy-emotions-v4.png",
+     "marks": {
+      "top": 16.9,
+      "chin": 111.0,
+      "feet": 492
+     },
+     "conf": "low",
+     "s0": 0.070237,
+     "now": {
+      "f": 1.0,
+      "h": 1.27,
+      "anchor": 111.0
+     }
+    },
+    "em_loving": {
+     "set": "mood",
+     "key": "em_loving",
+     "label": "Amy, feeling loving",
+     "img": "art/poses/amy/mood-em_loving.webp",
+     "w": 200,
+     "h": 493,
+     "ax": 95.5,
+     "link": null,
+     "sheet": "amy-emotions-v4.png",
+     "marks": {
+      "top": 16.9,
+      "chin": 111.0,
+      "feet": 493
+     },
+     "conf": "low",
+     "s0": 0.070237,
+     "now": {
+      "f": 1.0,
+      "h": 1.27,
+      "anchor": 111.0
+     }
+    },
+    "em_sad": {
+     "set": "mood",
+     "key": "em_sad",
+     "label": "Amy, feeling sad",
+     "img": "art/poses/amy/mood-em_sad.webp",
+     "w": 197,
+     "h": 487,
+     "ax": 99.4,
+     "link": null,
+     "sheet": "amy-emotions-v4.png",
+     "marks": {
+      "top": 18.3,
+      "chin": 120.0,
+      "feet": 487
+     },
+     "conf": "low",
+     "s0": 0.070237,
+     "now": {
+      "f": 1.0,
+      "h": 1.27,
+      "anchor": 120.0
+     }
+    },
+    "em_angry": {
+     "set": "mood",
+     "key": "em_angry",
+     "label": "Amy, feeling angry",
+     "img": "art/poses/amy/mood-em_angry.webp",
+     "w": 300,
+     "h": 483,
+     "ax": 129.5,
+     "link": null,
+     "sheet": "amy-emotions-v4.png",
+     "marks": {
+      "top": 19.5,
+      "chin": 128.0,
+      "feet": 483
+     },
+     "conf": "low",
+     "s0": 0.070237,
+     "now": {
+      "f": 1.0,
+      "h": 1.27,
+      "anchor": 128.0
+     }
+    },
+    "em_scared": {
+     "set": "mood",
+     "key": "em_scared",
+     "label": "Amy, feeling scared",
+     "img": "art/poses/amy/mood-em_scared.webp",
+     "w": 246,
+     "h": 502,
+     "ax": 116.5,
+     "link": null,
+     "sheet": "amy-emotions-v4.png",
+     "marks": {
+      "top": 15.8,
+      "chin": 104.0,
+      "feet": 502
+     },
+     "conf": "low",
+     "s0": 0.070237,
+     "now": {
+      "f": 1.0,
+      "h": 1.27,
+      "anchor": 104.0
+     }
+    },
+    "em_surprised": {
+     "set": "mood",
+     "key": "em_surprised",
+     "label": "Amy, feeling surprised",
+     "img": "art/poses/amy/mood-em_surprised.webp",
+     "w": 308,
+     "h": 520,
+     "ax": 120.7,
+     "link": null,
+     "sheet": "amy-emotions-v4.png",
+     "marks": {
+      "top": 16.9,
+      "chin": 111.0,
+      "feet": 520
+     },
+     "conf": "low",
+     "s0": 0.070237,
+     "now": {
+      "f": 1.0,
+      "h": 1.27,
+      "anchor": 111.0
+     }
+    },
+    "em_proud": {
+     "set": "mood",
+     "key": "em_proud",
+     "label": "Amy, feeling proud",
+     "img": "art/poses/amy/mood-em_proud.webp",
+     "w": 305,
+     "h": 526,
+     "ax": 129.2,
+     "link": null,
+     "sheet": "amy-emotions-v4.png",
+     "marks": {
+      "top": 16.3,
+      "chin": 107.0,
+      "feet": 526
+     },
+     "conf": "low",
+     "s0": 0.070237,
+     "now": {
+      "f": 1.0,
+      "h": 1.27,
+      "anchor": 107.0
+     }
+    },
+    "em_unimpressed": {
+     "set": "mood",
+     "key": "em_unimpressed",
+     "label": "Amy, feeling unimpressed",
+     "img": "art/poses/amy/mood-em_unimpressed.webp",
+     "w": 230,
+     "h": 518,
+     "ax": 99.9,
+     "link": null,
+     "sheet": "amy-emotions-v4.png",
+     "marks": {
+      "top": 18.0,
+      "chin": 118.0,
+      "feet": 518
+     },
+     "conf": "low",
+     "s0": 0.070237,
+     "now": {
+      "f": 1.0,
+      "h": 1.27,
+      "anchor": 118.0
+     }
+    },
+    "tk_tell": {
+     "set": "talk",
+     "key": "tk_tell",
+     "label": "Amy, talking, telling",
+     "img": "art/poses/amy/talk-tk_tell.webp",
+     "w": 312,
+     "h": 587,
+     "ax": 133.1,
+     "link": null,
+     "sheet": "amy-talk-v1.png",
+     "marks": {
+      "top": 20.3,
+      "chin": 133.6,
+      "feet": 587
+     },
+     "conf": "low",
+     "s0": 0.053998,
+     "now": {
+      "f": 1.0,
+      "h": 1.98508,
+      "anchor": 133.57
+     }
+    },
+    "tk_point": {
+     "set": "talk",
+     "key": "tk_point",
+     "label": "Amy, talking, pointing",
+     "img": "art/poses/amy/talk-tk_point.webp",
+     "w": 387,
+     "h": 591,
+     "ax": 129.1,
+     "link": null,
+     "sheet": "amy-talk-v1.png",
+     "marks": {
+      "top": 20.5,
+      "chin": 134.5,
+      "feet": 591
+     },
+     "conf": "low",
+     "s0": 0.053998,
+     "now": {
+      "f": 1.0,
+      "h": 1.98508,
+      "anchor": 134.48
+     }
+    },
+    "tk_ask": {
+     "set": "talk",
+     "key": "tk_ask",
+     "label": "Amy, talking, asking",
+     "img": "art/poses/amy/talk-tk_ask.webp",
+     "w": 278,
+     "h": 598,
+     "ax": 144.5,
+     "link": null,
+     "sheet": "amy-talk-v1.png",
+     "marks": {
+      "top": 20.7,
+      "chin": 136.1,
+      "feet": 598
+     },
+     "conf": "low",
+     "s0": 0.053998,
+     "now": {
+      "f": 1.0,
+      "h": 1.98508,
+      "anchor": 136.07
+     }
+    },
+    "tk_answer": {
+     "set": "talk",
+     "key": "tk_answer",
+     "label": "Amy, talking, answering",
+     "img": "art/poses/amy/talk-tk_answer.webp",
+     "w": 300,
+     "h": 604,
+     "ax": 136.0,
+     "link": null,
+     "sheet": "amy-talk-v1.png",
+     "marks": {
+      "top": 20.9,
+      "chin": 137.4,
+      "feet": 604
+     },
+     "conf": "low",
+     "s0": 0.053998,
+     "now": {
+      "f": 1.0,
+      "h": 1.98508,
+      "anchor": 137.44
+     }
+    }
+   },
+   "sets": {
+    "walk": {
+     "name": "Walking",
+     "keys": [
+      "down_stand",
+      "down_step1",
+      "down_step2",
+      "up_stand",
+      "up_step1",
+      "up_step2",
+      "left_stand",
+      "left_step1",
+      "left_step2"
+     ],
+     "upright": null
+    },
+    "mood": {
+     "name": "Feelings",
+     "keys": [
+      "em_happy",
+      "em_loving",
+      "em_sad",
+      "em_angry",
+      "em_scared",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ],
+     "upright": [
+      "em_happy",
+      "em_loving",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ]
+    },
+    "talk": {
+     "name": "Talking",
+     "keys": [
+      "tk_tell",
+      "tk_point",
+      "tk_ask",
+      "tk_answer"
+     ],
+     "upright": [
+      "tk_tell",
+      "tk_point"
+     ]
     }
    }
   },
@@ -889,14 +2789,20 @@
      "w": 155,
      "h": 478,
      "ax": 78.5,
-     "upright": true,
      "link": null,
+     "sheet": "deedee-walking-sheet-v2.png",
      "marks": {
       "top": 19.1,
       "chin": 140.1,
       "feet": 478
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.080441,
+     "now": {
+      "f": 0.95276,
+      "h": 1.1129,
+      "anchor": 141.01
+     }
     },
     "down_step1": {
      "set": "walk",
@@ -906,14 +2812,20 @@
      "w": 158,
      "h": 477,
      "ax": 80.0,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "deedee-walking-sheet-v2.png",
      "marks": {
       "top": 19.1,
       "chin": 140.1,
       "feet": 477
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.080441,
+     "now": {
+      "f": 0.95276,
+      "h": 1.1129,
+      "anchor": 141.01
+     }
     },
     "down_step2": {
      "set": "walk",
@@ -923,14 +2835,20 @@
      "w": 166,
      "h": 477,
      "ax": 86.5,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "deedee-walking-sheet-v2.png",
      "marks": {
       "top": 19.1,
       "chin": 140.1,
       "feet": 477
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.080441,
+     "now": {
+      "f": 0.95276,
+      "h": 1.1129,
+      "anchor": 141.01
+     }
     },
     "up_stand": {
      "set": "walk",
@@ -940,14 +2858,20 @@
      "w": 142,
      "h": 440,
      "ax": 71.0,
-     "upright": true,
      "link": null,
+     "sheet": "deedee-walking-sheet-v2.png",
      "marks": {
       "top": 19.1,
       "chin": 140.1,
       "feet": 440
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.080441,
+     "now": {
+      "f": 0.95276,
+      "h": 1.1129,
+      "anchor": 141.01
+     }
     },
     "up_step1": {
      "set": "walk",
@@ -957,14 +2881,20 @@
      "w": 161,
      "h": 439,
      "ax": 77.0,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "deedee-walking-sheet-v2.png",
      "marks": {
       "top": 19.1,
       "chin": 140.1,
       "feet": 439
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.080441,
+     "now": {
+      "f": 0.95276,
+      "h": 1.1129,
+      "anchor": 141.01
+     }
     },
     "up_step2": {
      "set": "walk",
@@ -974,14 +2904,20 @@
      "w": 158,
      "h": 440,
      "ax": 85.0,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "deedee-walking-sheet-v2.png",
      "marks": {
       "top": 19.1,
       "chin": 140.1,
       "feet": 440
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.080441,
+     "now": {
+      "f": 0.95276,
+      "h": 1.1129,
+      "anchor": 141.01
+     }
     },
     "left_stand": {
      "set": "walk",
@@ -991,14 +2927,20 @@
      "w": 151,
      "h": 489,
      "ax": 87.7,
-     "upright": true,
      "link": null,
+     "sheet": "deedee-walking-sheet-v2.png",
      "marks": {
       "top": 19.1,
       "chin": 140.1,
       "feet": 489
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.080441,
+     "now": {
+      "f": 0.95276,
+      "h": 1.1129,
+      "anchor": 141.01
+     }
     },
     "left_step1": {
      "set": "walk",
@@ -1008,14 +2950,20 @@
      "w": 262,
      "h": 486,
      "ax": 164.7,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "deedee-walking-sheet-v2.png",
      "marks": {
       "top": 19.1,
       "chin": 140.1,
       "feet": 486
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.080441,
+     "now": {
+      "f": 0.95276,
+      "h": 1.1129,
+      "anchor": 141.01
+     }
     },
     "left_step2": {
      "set": "walk",
@@ -1025,14 +2973,346 @@
      "w": 197,
      "h": 489,
      "ax": 132.7,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "deedee-walking-sheet-v2.png",
      "marks": {
       "top": 19.1,
       "chin": 140.1,
       "feet": 489
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.080441,
+     "now": {
+      "f": 0.95276,
+      "h": 1.1129,
+      "anchor": 141.01
+     }
+    },
+    "em_happy": {
+     "set": "mood",
+     "key": "em_happy",
+     "label": "Deedee, feeling happy",
+     "img": "art/poses/deedee/mood-em_happy.webp",
+     "w": 198,
+     "h": 510,
+     "ax": 106.0,
+     "link": null,
+     "sheet": "deedee-emotions-v3.png",
+     "marks": {
+      "top": 19.4,
+      "chin": 142.0,
+      "feet": 510
+     },
+     "conf": "low",
+     "s0": 0.068091,
+     "now": {
+      "f": 1.0,
+      "h": 1.13,
+      "anchor": 142.0
+     }
+    },
+    "em_loving": {
+     "set": "mood",
+     "key": "em_loving",
+     "label": "Deedee, feeling loving",
+     "img": "art/poses/deedee/mood-em_loving.webp",
+     "w": 193,
+     "h": 502,
+     "ax": 94.6,
+     "link": null,
+     "sheet": "deedee-emotions-v3.png",
+     "marks": {
+      "top": 20.4,
+      "chin": 150.0,
+      "feet": 502
+     },
+     "conf": "low",
+     "s0": 0.068091,
+     "now": {
+      "f": 1.0,
+      "h": 1.13,
+      "anchor": 150.0
+     }
+    },
+    "em_sad": {
+     "set": "mood",
+     "key": "em_sad",
+     "label": "Deedee, feeling sad",
+     "img": "art/poses/deedee/mood-em_sad.webp",
+     "w": 185,
+     "h": 508,
+     "ax": 99.4,
+     "link": null,
+     "sheet": "deedee-emotions-v3.png",
+     "marks": {
+      "top": 23.2,
+      "chin": 170.0,
+      "feet": 508
+     },
+     "conf": "low",
+     "s0": 0.068091,
+     "now": {
+      "f": 1.0,
+      "h": 1.13,
+      "anchor": 170.0
+     }
+    },
+    "em_angry": {
+     "set": "mood",
+     "key": "em_angry",
+     "label": "Deedee, feeling angry",
+     "img": "art/poses/deedee/mood-em_angry.webp",
+     "w": 274,
+     "h": 511,
+     "ax": 146.5,
+     "link": null,
+     "sheet": "deedee-emotions-v3.png",
+     "marks": {
+      "top": 23.7,
+      "chin": 174.0,
+      "feet": 511
+     },
+     "conf": "low",
+     "s0": 0.068091,
+     "now": {
+      "f": 1.0,
+      "h": 1.13,
+      "anchor": 174.0
+     }
+    },
+    "em_scared": {
+     "set": "mood",
+     "key": "em_scared",
+     "label": "Deedee, feeling scared",
+     "img": "art/poses/deedee/mood-em_scared.webp",
+     "w": 186,
+     "h": 507,
+     "ax": 90.0,
+     "link": null,
+     "sheet": "deedee-emotions-v3.png",
+     "marks": {
+      "top": 20.3,
+      "chin": 149.0,
+      "feet": 507
+     },
+     "conf": "low",
+     "s0": 0.068091,
+     "now": {
+      "f": 1.0,
+      "h": 1.13,
+      "anchor": 149.0
+     }
+    },
+    "em_surprised": {
+     "set": "mood",
+     "key": "em_surprised",
+     "label": "Deedee, feeling surprised",
+     "img": "art/poses/deedee/mood-em_surprised.webp",
+     "w": 236,
+     "h": 503,
+     "ax": 120.0,
+     "link": null,
+     "sheet": "deedee-emotions-v3.png",
+     "marks": {
+      "top": 19.5,
+      "chin": 143.0,
+      "feet": 503
+     },
+     "conf": "low",
+     "s0": 0.068091,
+     "now": {
+      "f": 1.0,
+      "h": 1.13,
+      "anchor": 143.0
+     }
+    },
+    "em_proud": {
+     "set": "mood",
+     "key": "em_proud",
+     "label": "Deedee, feeling proud",
+     "img": "art/poses/deedee/mood-em_proud.webp",
+     "w": 241,
+     "h": 518,
+     "ax": 110.5,
+     "link": null,
+     "sheet": "deedee-emotions-v3.png",
+     "marks": {
+      "top": 18.8,
+      "chin": 138.0,
+      "feet": 518
+     },
+     "conf": "low",
+     "s0": 0.068091,
+     "now": {
+      "f": 1.0,
+      "h": 1.13,
+      "anchor": 138.0
+     }
+    },
+    "em_unimpressed": {
+     "set": "mood",
+     "key": "em_unimpressed",
+     "label": "Deedee, feeling unimpressed",
+     "img": "art/poses/deedee/mood-em_unimpressed.webp",
+     "w": 190,
+     "h": 514,
+     "ax": 89.5,
+     "link": null,
+     "sheet": "deedee-emotions-v3.png",
+     "marks": {
+      "top": 19.9,
+      "chin": 146.0,
+      "feet": 514
+     },
+     "conf": "low",
+     "s0": 0.068091,
+     "now": {
+      "f": 1.0,
+      "h": 1.13,
+      "anchor": 146.0
+     }
+    },
+    "tk_tell": {
+     "set": "talk",
+     "key": "tk_tell",
+     "label": "Deedee, talking, telling",
+     "img": "art/poses/deedee/talk-tk_tell.webp",
+     "w": 304,
+     "h": 601,
+     "ax": 93.5,
+     "link": null,
+     "sheet": "deedee-talk-v4.png",
+     "marks": {
+      "top": 22.1,
+      "chin": 161.8,
+      "feet": 601
+     },
+     "conf": "low",
+     "s0": 0.058386,
+     "now": {
+      "f": 1.0,
+      "h": 1.32691,
+      "anchor": 161.79
+     }
+    },
+    "tk_point": {
+     "set": "talk",
+     "key": "tk_point",
+     "label": "Deedee, talking, pointing",
+     "img": "art/poses/deedee/talk-tk_point.webp",
+     "w": 375,
+     "h": 595,
+     "ax": 180.4,
+     "link": null,
+     "sheet": "deedee-talk-v4.png",
+     "marks": {
+      "top": 21.8,
+      "chin": 160.2,
+      "feet": 595
+     },
+     "conf": "low",
+     "s0": 0.058386,
+     "now": {
+      "f": 1.0,
+      "h": 1.32691,
+      "anchor": 160.17
+     }
+    },
+    "tk_ask": {
+     "set": "talk",
+     "key": "tk_ask",
+     "label": "Deedee, talking, asking",
+     "img": "art/poses/deedee/talk-tk_ask.webp",
+     "w": 265,
+     "h": 604,
+     "ax": 101.6,
+     "link": null,
+     "sheet": "deedee-talk-v4.png",
+     "marks": {
+      "top": 22.2,
+      "chin": 162.6,
+      "feet": 604
+     },
+     "conf": "low",
+     "s0": 0.058386,
+     "now": {
+      "f": 1.0,
+      "h": 1.32691,
+      "anchor": 162.59
+     }
+    },
+    "tk_answer": {
+     "set": "talk",
+     "key": "tk_answer",
+     "label": "Deedee, talking, answering",
+     "img": "art/poses/deedee/talk-tk_answer.webp",
+     "w": 288,
+     "h": 604,
+     "ax": 93.1,
+     "link": null,
+     "sheet": "deedee-talk-v4.png",
+     "marks": {
+      "top": 22.2,
+      "chin": 162.6,
+      "feet": 604
+     },
+     "conf": "low",
+     "s0": 0.058386,
+     "now": {
+      "f": 1.0,
+      "h": 1.32691,
+      "anchor": 162.59
+     }
+    }
+   },
+   "sets": {
+    "walk": {
+     "name": "Walking",
+     "keys": [
+      "down_stand",
+      "down_step1",
+      "down_step2",
+      "up_stand",
+      "up_step1",
+      "up_step2",
+      "left_stand",
+      "left_step1",
+      "left_step2"
+     ],
+     "upright": null
+    },
+    "mood": {
+     "name": "Feelings",
+     "keys": [
+      "em_happy",
+      "em_loving",
+      "em_sad",
+      "em_angry",
+      "em_scared",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ],
+     "upright": [
+      "em_happy",
+      "em_loving",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ]
+    },
+    "talk": {
+     "name": "Talking",
+     "keys": [
+      "tk_tell",
+      "tk_point",
+      "tk_ask",
+      "tk_answer"
+     ],
+     "upright": [
+      "tk_tell",
+      "tk_point"
+     ]
     }
    }
   },
@@ -1058,14 +3338,20 @@
      "w": 147,
      "h": 411,
      "ax": 72.3,
-     "upright": true,
      "link": null,
+     "sheet": "olivia-walking-sheet-v2.png",
      "marks": {
       "top": 14.4,
       "chin": 95.4,
       "feet": 411
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.097872,
+     "now": {
+      "f": 0.87729,
+      "h": 1.3886,
+      "anchor": 98.64
+     }
     },
     "down_step1": {
      "set": "walk",
@@ -1075,14 +3361,20 @@
      "w": 163,
      "h": 417,
      "ax": 80.4,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "olivia-walking-sheet-v2.png",
      "marks": {
       "top": 14.4,
       "chin": 95.4,
       "feet": 417
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.097872,
+     "now": {
+      "f": 0.87729,
+      "h": 1.3886,
+      "anchor": 98.64
+     }
     },
     "down_step2": {
      "set": "walk",
@@ -1092,14 +3384,20 @@
      "w": 157,
      "h": 416,
      "ax": 77.4,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "olivia-walking-sheet-v2.png",
      "marks": {
       "top": 14.4,
       "chin": 95.4,
       "feet": 416
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.097872,
+     "now": {
+      "f": 0.87729,
+      "h": 1.3886,
+      "anchor": 98.64
+     }
     },
     "up_stand": {
      "set": "walk",
@@ -1109,14 +3407,20 @@
      "w": 143,
      "h": 401,
      "ax": 74.0,
-     "upright": true,
      "link": null,
+     "sheet": "olivia-walking-sheet-v2.png",
      "marks": {
       "top": 14.4,
       "chin": 95.4,
       "feet": 401
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.097872,
+     "now": {
+      "f": 0.87729,
+      "h": 1.3886,
+      "anchor": 98.64
+     }
     },
     "up_step1": {
      "set": "walk",
@@ -1126,14 +3430,20 @@
      "w": 162,
      "h": 403,
      "ax": 90.5,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "olivia-walking-sheet-v2.png",
      "marks": {
       "top": 14.4,
       "chin": 95.4,
       "feet": 403
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.097872,
+     "now": {
+      "f": 0.87729,
+      "h": 1.3886,
+      "anchor": 98.64
+     }
     },
     "up_step2": {
      "set": "walk",
@@ -1143,14 +3453,20 @@
      "w": 161,
      "h": 407,
      "ax": 88.5,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "olivia-walking-sheet-v2.png",
      "marks": {
       "top": 14.4,
       "chin": 95.4,
       "feet": 407
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.097872,
+     "now": {
+      "f": 0.87729,
+      "h": 1.3886,
+      "anchor": 98.64
+     }
     },
     "left_stand": {
      "set": "walk",
@@ -1160,14 +3476,20 @@
      "w": 130,
      "h": 421,
      "ax": 68.1,
-     "upright": true,
      "link": null,
+     "sheet": "olivia-walking-sheet-v2.png",
      "marks": {
       "top": 14.4,
       "chin": 95.4,
       "feet": 421
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.097872,
+     "now": {
+      "f": 0.87729,
+      "h": 1.3886,
+      "anchor": 98.64
+     }
     },
     "left_step1": {
      "set": "walk",
@@ -1177,14 +3499,20 @@
      "w": 267,
      "h": 418,
      "ax": 163.8,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "olivia-walking-sheet-v2.png",
      "marks": {
       "top": 14.4,
       "chin": 95.4,
       "feet": 418
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.097872,
+     "now": {
+      "f": 0.87729,
+      "h": 1.3886,
+      "anchor": 98.64
+     }
     },
     "left_step2": {
      "set": "walk",
@@ -1194,14 +3522,346 @@
      "w": 179,
      "h": 420,
      "ax": 112.9,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "olivia-walking-sheet-v2.png",
      "marks": {
       "top": 14.4,
       "chin": 95.4,
       "feet": 420
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.097872,
+     "now": {
+      "f": 0.87729,
+      "h": 1.3886,
+      "anchor": 98.64
+     }
+    },
+    "em_happy": {
+     "set": "mood",
+     "key": "em_happy",
+     "label": "Olivia, feeling happy",
+     "img": "art/poses/olivia/mood-em_happy.webp",
+     "w": 214,
+     "h": 506,
+     "ax": 108.9,
+     "link": null,
+     "sheet": "olivia-emotions-v3.png",
+     "marks": {
+      "top": 16.8,
+      "chin": 111.0,
+      "feet": 506
+     },
+     "conf": "low",
+     "s0": 0.074603,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 111.0
+     }
+    },
+    "em_loving": {
+     "set": "mood",
+     "key": "em_loving",
+     "label": "Olivia, feeling loving",
+     "img": "art/poses/olivia/mood-em_loving.webp",
+     "w": 194,
+     "h": 508,
+     "ax": 86.0,
+     "link": null,
+     "sheet": "olivia-emotions-v3.png",
+     "marks": {
+      "top": 17.4,
+      "chin": 115.0,
+      "feet": 508
+     },
+     "conf": "low",
+     "s0": 0.074603,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 115.0
+     }
+    },
+    "em_sad": {
+     "set": "mood",
+     "key": "em_sad",
+     "label": "Olivia, feeling sad",
+     "img": "art/poses/olivia/mood-em_sad.webp",
+     "w": 183,
+     "h": 499,
+     "ax": 95.0,
+     "link": null,
+     "sheet": "olivia-emotions-v3.png",
+     "marks": {
+      "top": 20.4,
+      "chin": 135.0,
+      "feet": 499
+     },
+     "conf": "low",
+     "s0": 0.074603,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 135.0
+     }
+    },
+    "em_angry": {
+     "set": "mood",
+     "key": "em_angry",
+     "label": "Olivia, feeling angry",
+     "img": "art/poses/olivia/mood-em_angry.webp",
+     "w": 299,
+     "h": 495,
+     "ax": 122.0,
+     "link": null,
+     "sheet": "olivia-emotions-v3.png",
+     "marks": {
+      "top": 21.6,
+      "chin": 143.0,
+      "feet": 495
+     },
+     "conf": "low",
+     "s0": 0.074603,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 143.0
+     }
+    },
+    "em_scared": {
+     "set": "mood",
+     "key": "em_scared",
+     "label": "Olivia, feeling scared",
+     "img": "art/poses/olivia/mood-em_scared.webp",
+     "w": 206,
+     "h": 507,
+     "ax": 110.5,
+     "link": null,
+     "sheet": "olivia-emotions-v3.png",
+     "marks": {
+      "top": 15.7,
+      "chin": 104.0,
+      "feet": 507
+     },
+     "conf": "low",
+     "s0": 0.074603,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 104.0
+     }
+    },
+    "em_surprised": {
+     "set": "mood",
+     "key": "em_surprised",
+     "label": "Olivia, feeling surprised",
+     "img": "art/poses/olivia/mood-em_surprised.webp",
+     "w": 222,
+     "h": 518,
+     "ax": 109.5,
+     "link": null,
+     "sheet": "olivia-emotions-v3.png",
+     "marks": {
+      "top": 15.1,
+      "chin": 100.0,
+      "feet": 518
+     },
+     "conf": "low",
+     "s0": 0.074603,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 100.0
+     }
+    },
+    "em_proud": {
+     "set": "mood",
+     "key": "em_proud",
+     "label": "Olivia, feeling proud",
+     "img": "art/poses/olivia/mood-em_proud.webp",
+     "w": 264,
+     "h": 527,
+     "ax": 104.4,
+     "link": null,
+     "sheet": "olivia-emotions-v3.png",
+     "marks": {
+      "top": 16.0,
+      "chin": 106.0,
+      "feet": 527
+     },
+     "conf": "low",
+     "s0": 0.074603,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 106.0
+     }
+    },
+    "em_unimpressed": {
+     "set": "mood",
+     "key": "em_unimpressed",
+     "label": "Olivia, feeling unimpressed",
+     "img": "art/poses/olivia/mood-em_unimpressed.webp",
+     "w": 193,
+     "h": 527,
+     "ax": 88.4,
+     "link": null,
+     "sheet": "olivia-emotions-v3.png",
+     "marks": {
+      "top": 17.1,
+      "chin": 113.0,
+      "feet": 527
+     },
+     "conf": "low",
+     "s0": 0.074603,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 113.0
+     }
+    },
+    "tk_tell": {
+     "set": "talk",
+     "key": "tk_tell",
+     "label": "Olivia, talking, telling",
+     "img": "art/poses/olivia/talk-tk_tell.webp",
+     "w": 343,
+     "h": 571,
+     "ax": 157.5,
+     "link": null,
+     "sheet": "olivia-talk-v1.png",
+     "marks": {
+      "top": 20.5,
+      "chin": 136.0,
+      "feet": 571
+     },
+     "conf": "low",
+     "s0": 0.060584,
+     "now": {
+      "f": 1.0,
+      "h": 1.59907,
+      "anchor": 135.98
+     }
+    },
+    "tk_point": {
+     "set": "talk",
+     "key": "tk_point",
+     "label": "Olivia, talking, pointing",
+     "img": "art/poses/olivia/talk-tk_point.webp",
+     "w": 411,
+     "h": 567,
+     "ax": 213.8,
+     "link": null,
+     "sheet": "olivia-talk-v1.png",
+     "marks": {
+      "top": 20.4,
+      "chin": 135.0,
+      "feet": 567
+     },
+     "conf": "low",
+     "s0": 0.060584,
+     "now": {
+      "f": 1.0,
+      "h": 1.59907,
+      "anchor": 135.03
+     }
+    },
+    "tk_ask": {
+     "set": "talk",
+     "key": "tk_ask",
+     "label": "Olivia, talking, asking",
+     "img": "art/poses/olivia/talk-tk_ask.webp",
+     "w": 327,
+     "h": 572,
+     "ax": 147.5,
+     "link": null,
+     "sheet": "olivia-talk-v1.png",
+     "marks": {
+      "top": 20.6,
+      "chin": 136.2,
+      "feet": 572
+     },
+     "conf": "low",
+     "s0": 0.060584,
+     "now": {
+      "f": 1.0,
+      "h": 1.59907,
+      "anchor": 136.22
+     }
+    },
+    "tk_answer": {
+     "set": "talk",
+     "key": "tk_answer",
+     "label": "Olivia, talking, answering",
+     "img": "art/poses/olivia/talk-tk_answer.webp",
+     "w": 306,
+     "h": 575,
+     "ax": 147.5,
+     "link": null,
+     "sheet": "olivia-talk-v1.png",
+     "marks": {
+      "top": 20.7,
+      "chin": 136.9,
+      "feet": 575
+     },
+     "conf": "low",
+     "s0": 0.060584,
+     "now": {
+      "f": 1.0,
+      "h": 1.59907,
+      "anchor": 136.93
+     }
+    }
+   },
+   "sets": {
+    "walk": {
+     "name": "Walking",
+     "keys": [
+      "down_stand",
+      "down_step1",
+      "down_step2",
+      "up_stand",
+      "up_step1",
+      "up_step2",
+      "left_stand",
+      "left_step1",
+      "left_step2"
+     ],
+     "upright": null
+    },
+    "mood": {
+     "name": "Feelings",
+     "keys": [
+      "em_happy",
+      "em_loving",
+      "em_sad",
+      "em_angry",
+      "em_scared",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ],
+     "upright": [
+      "em_happy",
+      "em_loving",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ]
+    },
+    "talk": {
+     "name": "Talking",
+     "keys": [
+      "tk_tell",
+      "tk_point",
+      "tk_ask",
+      "tk_answer"
+     ],
+     "upright": [
+      "tk_tell",
+      "tk_point"
+     ]
     }
    }
   },
@@ -1227,14 +3887,20 @@
      "w": 174,
      "h": 479,
      "ax": 87.5,
-     "upright": true,
      "link": null,
+     "sheet": "ellie-walking-sheet-v1.png",
      "marks": {
       "top": 16.8,
       "chin": 131.7,
       "feet": 479
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.076568,
+     "now": {
+      "f": 0.93153,
+      "h": 1.14625,
+      "anchor": 152.74
+     }
     },
     "down_step1": {
      "set": "walk",
@@ -1244,14 +3910,20 @@
      "w": 195,
      "h": 482,
      "ax": 102.0,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "ellie-walking-sheet-v1.png",
      "marks": {
       "top": 16.8,
       "chin": 131.7,
       "feet": 482
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.076568,
+     "now": {
+      "f": 0.93153,
+      "h": 1.14625,
+      "anchor": 152.74
+     }
     },
     "down_step2": {
      "set": "walk",
@@ -1261,14 +3933,20 @@
      "w": 195,
      "h": 482,
      "ax": 98.5,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "ellie-walking-sheet-v1.png",
      "marks": {
       "top": 16.8,
       "chin": 131.7,
       "feet": 482
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.076568,
+     "now": {
+      "f": 0.93153,
+      "h": 1.14625,
+      "anchor": 152.74
+     }
     },
     "up_stand": {
      "set": "walk",
@@ -1278,14 +3956,20 @@
      "w": 169,
      "h": 461,
      "ax": 84.5,
-     "upright": true,
      "link": null,
+     "sheet": "ellie-walking-sheet-v1.png",
      "marks": {
       "top": 16.8,
       "chin": 131.7,
       "feet": 461
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.076568,
+     "now": {
+      "f": 0.93153,
+      "h": 1.14625,
+      "anchor": 152.74
+     }
     },
     "up_step1": {
      "set": "walk",
@@ -1295,14 +3979,20 @@
      "w": 185,
      "h": 463,
      "ax": 97.5,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "ellie-walking-sheet-v1.png",
      "marks": {
       "top": 16.8,
       "chin": 131.7,
       "feet": 463
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.076568,
+     "now": {
+      "f": 0.93153,
+      "h": 1.14625,
+      "anchor": 152.74
+     }
     },
     "up_step2": {
      "set": "walk",
@@ -1312,14 +4002,20 @@
      "w": 189,
      "h": 463,
      "ax": 97.6,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "ellie-walking-sheet-v1.png",
      "marks": {
       "top": 16.8,
       "chin": 131.7,
       "feet": 463
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.076568,
+     "now": {
+      "f": 0.93153,
+      "h": 1.14625,
+      "anchor": 152.74
+     }
     },
     "left_stand": {
      "set": "walk",
@@ -1329,14 +4025,20 @@
      "w": 165,
      "h": 488,
      "ax": 73.2,
-     "upright": true,
      "link": null,
+     "sheet": "ellie-walking-sheet-v1.png",
      "marks": {
       "top": 16.8,
       "chin": 131.7,
       "feet": 488
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.076568,
+     "now": {
+      "f": 0.93153,
+      "h": 1.14625,
+      "anchor": 152.74
+     }
     },
     "left_step1": {
      "set": "walk",
@@ -1346,14 +4048,20 @@
      "w": 290,
      "h": 484,
      "ax": 155.5,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "ellie-walking-sheet-v1.png",
      "marks": {
       "top": 16.8,
       "chin": 131.7,
       "feet": 484
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.076568,
+     "now": {
+      "f": 0.93153,
+      "h": 1.14625,
+      "anchor": 152.74
+     }
     },
     "left_step2": {
      "set": "walk",
@@ -1363,14 +4071,346 @@
      "w": 212,
      "h": 488,
      "ax": 98.6,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "ellie-walking-sheet-v1.png",
      "marks": {
       "top": 16.8,
       "chin": 131.7,
       "feet": 488
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.076568,
+     "now": {
+      "f": 0.93153,
+      "h": 1.14625,
+      "anchor": 152.74
+     }
+    },
+    "em_happy": {
+     "set": "mood",
+     "key": "em_happy",
+     "label": "Ellie, feeling happy",
+     "img": "art/poses/ellie/mood-em_happy.webp",
+     "w": 225,
+     "h": 503,
+     "ax": 95.5,
+     "link": null,
+     "sheet": "ellie-emotions-v3.png",
+     "marks": {
+      "top": 14.8,
+      "chin": 116.0,
+      "feet": 503
+     },
+     "conf": "low",
+     "s0": 0.062789,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 116.0
+     }
+    },
+    "em_loving": {
+     "set": "mood",
+     "key": "em_loving",
+     "label": "Ellie, feeling loving",
+     "img": "art/poses/ellie/mood-em_loving.webp",
+     "w": 240,
+     "h": 518,
+     "ax": 91.5,
+     "link": null,
+     "sheet": "ellie-emotions-v3.png",
+     "marks": {
+      "top": 16.7,
+      "chin": 131.0,
+      "feet": 518
+     },
+     "conf": "low",
+     "s0": 0.062789,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 131.0
+     }
+    },
+    "em_sad": {
+     "set": "mood",
+     "key": "em_sad",
+     "label": "Ellie, feeling sad",
+     "img": "art/poses/ellie/mood-em_sad.webp",
+     "w": 185,
+     "h": 516,
+     "ax": 99.6,
+     "link": null,
+     "sheet": "ellie-emotions-v3.png",
+     "marks": {
+      "top": 17.7,
+      "chin": 139.0,
+      "feet": 516
+     },
+     "conf": "low",
+     "s0": 0.062789,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 139.0
+     }
+    },
+    "em_angry": {
+     "set": "mood",
+     "key": "em_angry",
+     "label": "Ellie, feeling angry",
+     "img": "art/poses/ellie/mood-em_angry.webp",
+     "w": 312,
+     "h": 503,
+     "ax": 136.0,
+     "link": null,
+     "sheet": "ellie-emotions-v3.png",
+     "marks": {
+      "top": 18.9,
+      "chin": 148.0,
+      "feet": 503
+     },
+     "conf": "low",
+     "s0": 0.062789,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 148.0
+     }
+    },
+    "em_scared": {
+     "set": "mood",
+     "key": "em_scared",
+     "label": "Ellie, feeling scared",
+     "img": "art/poses/ellie/mood-em_scared.webp",
+     "w": 212,
+     "h": 512,
+     "ax": 97.4,
+     "link": null,
+     "sheet": "ellie-emotions-v3.png",
+     "marks": {
+      "top": 18.6,
+      "chin": 146.0,
+      "feet": 512
+     },
+     "conf": "low",
+     "s0": 0.062789,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 146.0
+     }
+    },
+    "em_surprised": {
+     "set": "mood",
+     "key": "em_surprised",
+     "label": "Ellie, feeling surprised",
+     "img": "art/poses/ellie/mood-em_surprised.webp",
+     "w": 244,
+     "h": 522,
+     "ax": 124.4,
+     "link": null,
+     "sheet": "ellie-emotions-v3.png",
+     "marks": {
+      "top": 18.1,
+      "chin": 142.0,
+      "feet": 522
+     },
+     "conf": "low",
+     "s0": 0.062789,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 142.0
+     }
+    },
+    "em_proud": {
+     "set": "mood",
+     "key": "em_proud",
+     "label": "Ellie, feeling proud",
+     "img": "art/poses/ellie/mood-em_proud.webp",
+     "w": 261,
+     "h": 531,
+     "ax": 112.4,
+     "link": null,
+     "sheet": "ellie-emotions-v3.png",
+     "marks": {
+      "top": 16.5,
+      "chin": 129.0,
+      "feet": 531
+     },
+     "conf": "low",
+     "s0": 0.062789,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 129.0
+     }
+    },
+    "em_unimpressed": {
+     "set": "mood",
+     "key": "em_unimpressed",
+     "label": "Ellie, feeling unimpressed",
+     "img": "art/poses/ellie/mood-em_unimpressed.webp",
+     "w": 239,
+     "h": 530,
+     "ax": 102.0,
+     "link": null,
+     "sheet": "ellie-emotions-v3.png",
+     "marks": {
+      "top": 14.8,
+      "chin": 116.0,
+      "feet": 530
+     },
+     "conf": "low",
+     "s0": 0.062789,
+     "now": {
+      "f": 1.0,
+      "h": 1.2,
+      "anchor": 116.0
+     }
+    },
+    "tk_tell": {
+     "set": "talk",
+     "key": "tk_tell",
+     "label": "Ellie, talking, telling",
+     "img": "art/poses/ellie/talk-tk_tell.webp",
+     "w": 335,
+     "h": 578,
+     "ax": 110.5,
+     "link": null,
+     "sheet": "ellie-talk-v1.png",
+     "marks": {
+      "top": 15.4,
+      "chin": 121.0,
+      "feet": 578
+     },
+     "conf": "low",
+     "s0": 0.056978,
+     "now": {
+      "f": 1.0,
+      "h": 1.5,
+      "anchor": 121.0
+     }
+    },
+    "tk_point": {
+     "set": "talk",
+     "key": "tk_point",
+     "label": "Ellie, talking, pointing",
+     "img": "art/poses/ellie/talk-tk_point.webp",
+     "w": 397,
+     "h": 578,
+     "ax": 92.5,
+     "link": null,
+     "sheet": "ellie-talk-v1.png",
+     "marks": {
+      "top": 15.4,
+      "chin": 121.0,
+      "feet": 578
+     },
+     "conf": "low",
+     "s0": 0.056978,
+     "now": {
+      "f": 1.0,
+      "h": 1.5,
+      "anchor": 121.0
+     }
+    },
+    "tk_ask": {
+     "set": "talk",
+     "key": "tk_ask",
+     "label": "Ellie, talking, asking",
+     "img": "art/poses/ellie/talk-tk_ask.webp",
+     "w": 303,
+     "h": 587,
+     "ax": 120.9,
+     "link": null,
+     "sheet": "ellie-talk-v1.png",
+     "marks": {
+      "top": 15.7,
+      "chin": 122.9,
+      "feet": 587
+     },
+     "conf": "low",
+     "s0": 0.056978,
+     "now": {
+      "f": 1.0,
+      "h": 1.5,
+      "anchor": 122.88
+     }
+    },
+    "tk_answer": {
+     "set": "talk",
+     "key": "tk_answer",
+     "label": "Ellie, talking, answering",
+     "img": "art/poses/ellie/talk-tk_answer.webp",
+     "w": 309,
+     "h": 588,
+     "ax": 136.5,
+     "link": null,
+     "sheet": "ellie-talk-v1.png",
+     "marks": {
+      "top": 15.7,
+      "chin": 123.1,
+      "feet": 588
+     },
+     "conf": "low",
+     "s0": 0.056978,
+     "now": {
+      "f": 1.0,
+      "h": 1.5,
+      "anchor": 123.09
+     }
+    }
+   },
+   "sets": {
+    "walk": {
+     "name": "Walking",
+     "keys": [
+      "down_stand",
+      "down_step1",
+      "down_step2",
+      "up_stand",
+      "up_step1",
+      "up_step2",
+      "left_stand",
+      "left_step1",
+      "left_step2"
+     ],
+     "upright": null
+    },
+    "mood": {
+     "name": "Feelings",
+     "keys": [
+      "em_happy",
+      "em_loving",
+      "em_sad",
+      "em_angry",
+      "em_scared",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ],
+     "upright": [
+      "em_happy",
+      "em_loving",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ]
+    },
+    "talk": {
+     "name": "Talking",
+     "keys": [
+      "tk_tell",
+      "tk_point",
+      "tk_ask",
+      "tk_answer"
+     ],
+     "upright": [
+      "tk_tell",
+      "tk_point"
+     ]
     }
    }
   },
@@ -1396,14 +4436,20 @@
      "w": 179,
      "h": 473,
      "ax": 91.2,
-     "upright": true,
      "link": null,
+     "sheet": "jojo-walk-sheet-v2.png",
      "marks": {
       "top": 16.6,
       "chin": 110.2,
       "feet": 473
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.082542,
+     "now": {
+      "f": 0.88282,
+      "h": 1.37106,
+      "anchor": 113.52
+     }
     },
     "down_step1": {
      "set": "walk",
@@ -1413,14 +4459,20 @@
      "w": 197,
      "h": 483,
      "ax": 97.7,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "jojo-walk-sheet-v2.png",
      "marks": {
       "top": 16.6,
       "chin": 110.2,
       "feet": 483
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.082542,
+     "now": {
+      "f": 0.88282,
+      "h": 1.37106,
+      "anchor": 113.52
+     }
     },
     "down_step2": {
      "set": "walk",
@@ -1430,14 +4482,20 @@
      "w": 174,
      "h": 478,
      "ax": 90.2,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "jojo-walk-sheet-v2.png",
      "marks": {
       "top": 16.6,
       "chin": 110.2,
       "feet": 478
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.082542,
+     "now": {
+      "f": 0.88282,
+      "h": 1.37106,
+      "anchor": 113.52
+     }
     },
     "up_stand": {
      "set": "walk",
@@ -1447,14 +4505,20 @@
      "w": 153,
      "h": 444,
      "ax": 69.2,
-     "upright": true,
      "link": null,
+     "sheet": "jojo-walk-sheet-v2.png",
      "marks": {
       "top": 16.6,
       "chin": 110.2,
       "feet": 444
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.082542,
+     "now": {
+      "f": 0.88282,
+      "h": 1.37106,
+      "anchor": 113.52
+     }
     },
     "up_step1": {
      "set": "walk",
@@ -1464,14 +4528,20 @@
      "w": 176,
      "h": 450,
      "ax": 95.9,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "jojo-walk-sheet-v2.png",
      "marks": {
       "top": 16.6,
       "chin": 110.2,
       "feet": 450
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.082542,
+     "now": {
+      "f": 0.88282,
+      "h": 1.37106,
+      "anchor": 113.52
+     }
     },
     "up_step2": {
      "set": "walk",
@@ -1481,14 +4551,20 @@
      "w": 163,
      "h": 449,
      "ax": 83.7,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "jojo-walk-sheet-v2.png",
      "marks": {
       "top": 16.6,
       "chin": 110.2,
       "feet": 449
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.082542,
+     "now": {
+      "f": 0.88282,
+      "h": 1.37106,
+      "anchor": 113.52
+     }
     },
     "left_stand": {
      "set": "walk",
@@ -1498,14 +4574,20 @@
      "w": 153,
      "h": 504,
      "ax": 83.8,
-     "upright": true,
      "link": null,
+     "sheet": "jojo-walk-sheet-v2.png",
      "marks": {
       "top": 16.6,
       "chin": 110.2,
       "feet": 504
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.082542,
+     "now": {
+      "f": 0.88282,
+      "h": 1.37106,
+      "anchor": 113.52
+     }
     },
     "left_step1": {
      "set": "walk",
@@ -1515,14 +4597,20 @@
      "w": 287,
      "h": 501,
      "ax": 167.6,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "jojo-walk-sheet-v2.png",
      "marks": {
       "top": 16.6,
       "chin": 110.2,
       "feet": 501
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.082542,
+     "now": {
+      "f": 0.88282,
+      "h": 1.37106,
+      "anchor": 113.52
+     }
     },
     "left_step2": {
      "set": "walk",
@@ -1532,14 +4620,37 @@
      "w": 224,
      "h": 507,
      "ax": 114.8,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "jojo-walk-sheet-v2.png",
      "marks": {
       "top": 16.6,
       "chin": 110.2,
       "feet": 507
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.082542,
+     "now": {
+      "f": 0.88282,
+      "h": 1.37106,
+      "anchor": 113.52
+     }
+    }
+   },
+   "sets": {
+    "walk": {
+     "name": "Walking",
+     "keys": [
+      "down_stand",
+      "down_step1",
+      "down_step2",
+      "up_stand",
+      "up_step1",
+      "up_step2",
+      "left_stand",
+      "left_step1",
+      "left_step2"
+     ],
+     "upright": null
     }
    }
   },
@@ -1565,14 +4676,20 @@
      "w": 218,
      "h": 465,
      "ax": 98.5,
-     "upright": true,
      "link": null,
+     "sheet": "grace-walking-sheet-v2.png",
      "marks": {
       "top": 18.6,
       "chin": 123.7,
       "feet": 465
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.063607,
+     "now": {
+      "f": 0.88904,
+      "h": 1.3,
+      "anchor": 125.55
+     }
     },
     "down_step1": {
      "set": "walk",
@@ -1582,14 +4699,20 @@
      "w": 220,
      "h": 467,
      "ax": 99.5,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "grace-walking-sheet-v2.png",
      "marks": {
       "top": 18.6,
       "chin": 123.7,
       "feet": 467
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.063607,
+     "now": {
+      "f": 0.88904,
+      "h": 1.3,
+      "anchor": 125.55
+     }
     },
     "down_step2": {
      "set": "walk",
@@ -1599,14 +4722,20 @@
      "w": 217,
      "h": 467,
      "ax": 99.0,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "grace-walking-sheet-v2.png",
      "marks": {
       "top": 18.6,
       "chin": 123.7,
       "feet": 467
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.063607,
+     "now": {
+      "f": 0.88904,
+      "h": 1.3,
+      "anchor": 125.55
+     }
     },
     "up_stand": {
      "set": "walk",
@@ -1616,14 +4745,20 @@
      "w": 201,
      "h": 449,
      "ax": 106.4,
-     "upright": true,
      "link": null,
+     "sheet": "grace-walking-sheet-v2.png",
      "marks": {
       "top": 18.6,
       "chin": 123.7,
       "feet": 449
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.063607,
+     "now": {
+      "f": 0.88904,
+      "h": 1.3,
+      "anchor": 125.55
+     }
     },
     "up_step1": {
      "set": "walk",
@@ -1633,14 +4768,20 @@
      "w": 197,
      "h": 450,
      "ax": 105.0,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "grace-walking-sheet-v2.png",
      "marks": {
       "top": 18.6,
       "chin": 123.7,
       "feet": 450
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.063607,
+     "now": {
+      "f": 0.88904,
+      "h": 1.3,
+      "anchor": 125.55
+     }
     },
     "up_step2": {
      "set": "walk",
@@ -1650,14 +4791,20 @@
      "w": 204,
      "h": 450,
      "ax": 110.4,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "grace-walking-sheet-v2.png",
      "marks": {
       "top": 18.6,
       "chin": 123.7,
       "feet": 450
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.063607,
+     "now": {
+      "f": 0.88904,
+      "h": 1.3,
+      "anchor": 125.55
+     }
     },
     "left_stand": {
      "set": "walk",
@@ -1667,14 +4814,20 @@
      "w": 198,
      "h": 494,
      "ax": 99.3,
-     "upright": true,
      "link": null,
+     "sheet": "grace-walking-sheet-v2.png",
      "marks": {
       "top": 18.6,
       "chin": 123.7,
       "feet": 494
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.063607,
+     "now": {
+      "f": 0.88904,
+      "h": 1.3,
+      "anchor": 125.55
+     }
     },
     "left_step1": {
      "set": "walk",
@@ -1684,14 +4837,20 @@
      "w": 293,
      "h": 490,
      "ax": 184.8,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "grace-walking-sheet-v2.png",
      "marks": {
       "top": 18.6,
       "chin": 123.7,
       "feet": 490
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.063607,
+     "now": {
+      "f": 0.88904,
+      "h": 1.3,
+      "anchor": 125.55
+     }
     },
     "left_step2": {
      "set": "walk",
@@ -1701,14 +4860,346 @@
      "w": 238,
      "h": 503,
      "ax": 137.3,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "grace-walking-sheet-v2.png",
      "marks": {
       "top": 18.6,
       "chin": 123.7,
       "feet": 503
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.063607,
+     "now": {
+      "f": 0.88904,
+      "h": 1.3,
+      "anchor": 125.55
+     }
+    },
+    "em_happy": {
+     "set": "mood",
+     "key": "em_happy",
+     "label": "Grace, feeling happy",
+     "img": "art/poses/grace/mood-em_happy.webp",
+     "w": 251,
+     "h": 518,
+     "ax": 122.2,
+     "link": null,
+     "sheet": "grace-emotions-v3.png",
+     "marks": {
+      "top": 19.5,
+      "chin": 130.0,
+      "feet": 518
+     },
+     "conf": "low",
+     "s0": 0.050767,
+     "now": {
+      "f": 1.0,
+      "h": 1.3,
+      "anchor": 130.0
+     }
+    },
+    "em_loving": {
+     "set": "mood",
+     "key": "em_loving",
+     "label": "Grace, feeling loving",
+     "img": "art/poses/grace/mood-em_loving.webp",
+     "w": 249,
+     "h": 507,
+     "ax": 114.0,
+     "link": null,
+     "sheet": "grace-emotions-v3.png",
+     "marks": {
+      "top": 21.4,
+      "chin": 142.0,
+      "feet": 507
+     },
+     "conf": "low",
+     "s0": 0.050767,
+     "now": {
+      "f": 1.0,
+      "h": 1.3,
+      "anchor": 142.0
+     }
+    },
+    "em_sad": {
+     "set": "mood",
+     "key": "em_sad",
+     "label": "Grace, feeling sad",
+     "img": "art/poses/grace/mood-em_sad.webp",
+     "w": 239,
+     "h": 510,
+     "ax": 121.4,
+     "link": null,
+     "sheet": "grace-emotions-v3.png",
+     "marks": {
+      "top": 23.3,
+      "chin": 155.0,
+      "feet": 510
+     },
+     "conf": "low",
+     "s0": 0.050767,
+     "now": {
+      "f": 1.0,
+      "h": 1.3,
+      "anchor": 155.0
+     }
+    },
+    "em_angry": {
+     "set": "mood",
+     "key": "em_angry",
+     "label": "Grace, feeling angry",
+     "img": "art/poses/grace/mood-em_angry.webp",
+     "w": 335,
+     "h": 509,
+     "ax": 155.5,
+     "link": null,
+     "sheet": "grace-emotions-v3.png",
+     "marks": {
+      "top": 23.8,
+      "chin": 158.0,
+      "feet": 509
+     },
+     "conf": "low",
+     "s0": 0.050767,
+     "now": {
+      "f": 1.0,
+      "h": 1.3,
+      "anchor": 158.0
+     }
+    },
+    "em_scared": {
+     "set": "mood",
+     "key": "em_scared",
+     "label": "Grace, feeling scared",
+     "img": "art/poses/grace/mood-em_scared.webp",
+     "w": 253,
+     "h": 521,
+     "ax": 125.1,
+     "link": null,
+     "sheet": "grace-emotions-v3.png",
+     "marks": {
+      "top": 22.6,
+      "chin": 150.0,
+      "feet": 521
+     },
+     "conf": "low",
+     "s0": 0.050767,
+     "now": {
+      "f": 1.0,
+      "h": 1.3,
+      "anchor": 150.0
+     }
+    },
+    "em_surprised": {
+     "set": "mood",
+     "key": "em_surprised",
+     "label": "Grace, feeling surprised",
+     "img": "art/poses/grace/mood-em_surprised.webp",
+     "w": 272,
+     "h": 529,
+     "ax": 130.0,
+     "link": null,
+     "sheet": "grace-emotions-v3.png",
+     "marks": {
+      "top": 20.6,
+      "chin": 137.0,
+      "feet": 529
+     },
+     "conf": "low",
+     "s0": 0.050767,
+     "now": {
+      "f": 1.0,
+      "h": 1.3,
+      "anchor": 137.0
+     }
+    },
+    "em_proud": {
+     "set": "mood",
+     "key": "em_proud",
+     "label": "Grace, feeling proud",
+     "img": "art/poses/grace/mood-em_proud.webp",
+     "w": 334,
+     "h": 535,
+     "ax": 139.0,
+     "link": null,
+     "sheet": "grace-emotions-v3.png",
+     "marks": {
+      "top": 18.9,
+      "chin": 126.0,
+      "feet": 535
+     },
+     "conf": "low",
+     "s0": 0.050767,
+     "now": {
+      "f": 1.0,
+      "h": 1.3,
+      "anchor": 126.0
+     }
+    },
+    "em_unimpressed": {
+     "set": "mood",
+     "key": "em_unimpressed",
+     "label": "Grace, feeling unimpressed",
+     "img": "art/poses/grace/mood-em_unimpressed.webp",
+     "w": 243,
+     "h": 536,
+     "ax": 125.5,
+     "link": null,
+     "sheet": "grace-emotions-v3.png",
+     "marks": {
+      "top": 20.6,
+      "chin": 137.0,
+      "feet": 536
+     },
+     "conf": "low",
+     "s0": 0.050767,
+     "now": {
+      "f": 1.0,
+      "h": 1.3,
+      "anchor": 137.0
+     }
+    },
+    "tk_tell": {
+     "set": "talk",
+     "key": "tk_tell",
+     "label": "Grace, talking, telling",
+     "img": "art/poses/grace/talk-tk_tell.webp",
+     "w": 341,
+     "h": 563,
+     "ax": 153.0,
+     "link": null,
+     "sheet": "grace-talk-v2.png",
+     "marks": {
+      "top": 20.3,
+      "chin": 135.0,
+      "feet": 563
+     },
+     "conf": "low",
+     "s0": 0.046005,
+     "now": {
+      "f": 1.0,
+      "h": 1.52438,
+      "anchor": 135.0
+     }
+    },
+    "tk_point": {
+     "set": "talk",
+     "key": "tk_point",
+     "label": "Grace, talking, pointing",
+     "img": "art/poses/grace/talk-tk_point.webp",
+     "w": 411,
+     "h": 563,
+     "ax": 234.0,
+     "link": null,
+     "sheet": "grace-talk-v2.png",
+     "marks": {
+      "top": 20.3,
+      "chin": 135.0,
+      "feet": 563
+     },
+     "conf": "low",
+     "s0": 0.046005,
+     "now": {
+      "f": 1.0,
+      "h": 1.52438,
+      "anchor": 135.0
+     }
+    },
+    "tk_ask": {
+     "set": "talk",
+     "key": "tk_ask",
+     "label": "Grace, talking, asking",
+     "img": "art/poses/grace/talk-tk_ask.webp",
+     "w": 333,
+     "h": 583,
+     "ax": 164.7,
+     "link": null,
+     "sheet": "grace-talk-v2.png",
+     "marks": {
+      "top": 21.0,
+      "chin": 139.8,
+      "feet": 583
+     },
+     "conf": "low",
+     "s0": 0.046005,
+     "now": {
+      "f": 1.0,
+      "h": 1.52438,
+      "anchor": 139.8
+     }
+    },
+    "tk_answer": {
+     "set": "talk",
+     "key": "tk_answer",
+     "label": "Grace, talking, answering",
+     "img": "art/poses/grace/talk-tk_answer.webp",
+     "w": 332,
+     "h": 584,
+     "ax": 155.7,
+     "link": null,
+     "sheet": "grace-talk-v2.png",
+     "marks": {
+      "top": 21.1,
+      "chin": 140.0,
+      "feet": 584
+     },
+     "conf": "low",
+     "s0": 0.046005,
+     "now": {
+      "f": 1.0,
+      "h": 1.52438,
+      "anchor": 140.04
+     }
+    }
+   },
+   "sets": {
+    "walk": {
+     "name": "Walking",
+     "keys": [
+      "down_stand",
+      "down_step1",
+      "down_step2",
+      "up_stand",
+      "up_step1",
+      "up_step2",
+      "left_stand",
+      "left_step1",
+      "left_step2"
+     ],
+     "upright": null
+    },
+    "mood": {
+     "name": "Feelings",
+     "keys": [
+      "em_happy",
+      "em_loving",
+      "em_sad",
+      "em_angry",
+      "em_scared",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ],
+     "upright": [
+      "em_happy",
+      "em_loving",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ]
+    },
+    "talk": {
+     "name": "Talking",
+     "keys": [
+      "tk_tell",
+      "tk_point",
+      "tk_ask",
+      "tk_answer"
+     ],
+     "upright": [
+      "tk_tell",
+      "tk_point"
+     ]
     }
    }
   },
@@ -1734,14 +5225,20 @@
      "w": 202,
      "h": 467,
      "ax": 102.2,
-     "upright": true,
      "link": null,
+     "sheet": "rose-walking-sheet-v2.png",
      "marks": {
       "top": 18.7,
       "chin": 132.2,
       "feet": 467
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.050668,
+     "now": {
+      "f": 0.88904,
+      "h": 1.3,
+      "anchor": 126.09
+     }
     },
     "down_step1": {
      "set": "walk",
@@ -1751,14 +5248,20 @@
      "w": 205,
      "h": 465,
      "ax": 103.8,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "rose-walking-sheet-v2.png",
      "marks": {
       "top": 18.7,
       "chin": 132.2,
       "feet": 465
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.050668,
+     "now": {
+      "f": 0.88904,
+      "h": 1.3,
+      "anchor": 126.09
+     }
     },
     "down_step2": {
      "set": "walk",
@@ -1768,14 +5271,20 @@
      "w": 205,
      "h": 467,
      "ax": 102.9,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "rose-walking-sheet-v2.png",
      "marks": {
       "top": 18.7,
       "chin": 132.2,
       "feet": 467
      },
-     "conf": "high"
+     "conf": "high",
+     "s0": 0.050668,
+     "now": {
+      "f": 0.88904,
+      "h": 1.3,
+      "anchor": 126.09
+     }
     },
     "up_stand": {
      "set": "walk",
@@ -1785,14 +5294,20 @@
      "w": 193,
      "h": 459,
      "ax": 92.5,
-     "upright": true,
      "link": null,
+     "sheet": "rose-walking-sheet-v2.png",
      "marks": {
       "top": 18.7,
       "chin": 132.2,
       "feet": 459
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.050668,
+     "now": {
+      "f": 0.88904,
+      "h": 1.3,
+      "anchor": 126.09
+     }
     },
     "up_step1": {
      "set": "walk",
@@ -1802,14 +5317,20 @@
      "w": 200,
      "h": 460,
      "ax": 98.1,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "rose-walking-sheet-v2.png",
      "marks": {
       "top": 18.7,
       "chin": 132.2,
       "feet": 460
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.050668,
+     "now": {
+      "f": 0.88904,
+      "h": 1.3,
+      "anchor": 126.09
+     }
     },
     "up_step2": {
      "set": "walk",
@@ -1819,14 +5340,20 @@
      "w": 194,
      "h": 460,
      "ax": 93.4,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "rose-walking-sheet-v2.png",
      "marks": {
       "top": 18.7,
       "chin": 132.2,
       "feet": 460
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.050668,
+     "now": {
+      "f": 0.88904,
+      "h": 1.3,
+      "anchor": 126.09
+     }
     },
     "left_stand": {
      "set": "walk",
@@ -1836,14 +5363,20 @@
      "w": 192,
      "h": 500,
      "ax": 110.0,
-     "upright": true,
      "link": null,
+     "sheet": "rose-walking-sheet-v2.png",
      "marks": {
       "top": 18.7,
       "chin": 132.2,
       "feet": 500
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.050668,
+     "now": {
+      "f": 0.88904,
+      "h": 1.3,
+      "anchor": 126.09
+     }
     },
     "left_step1": {
      "set": "walk",
@@ -1853,14 +5386,20 @@
      "w": 284,
      "h": 496,
      "ax": 184.5,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "rose-walking-sheet-v2.png",
      "marks": {
       "top": 18.7,
       "chin": 132.2,
       "feet": 496
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.050668,
+     "now": {
+      "f": 0.88904,
+      "h": 1.3,
+      "anchor": 126.09
+     }
     },
     "left_step2": {
      "set": "walk",
@@ -1870,14 +5409,346 @@
      "w": 234,
      "h": 508,
      "ax": 151.0,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "rose-walking-sheet-v2.png",
      "marks": {
       "top": 18.7,
       "chin": 132.2,
       "feet": 508
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.050668,
+     "now": {
+      "f": 0.88904,
+      "h": 1.3,
+      "anchor": 126.09
+     }
+    },
+    "em_happy": {
+     "set": "mood",
+     "key": "em_happy",
+     "label": "Rose, feeling happy",
+     "img": "art/poses/rose/mood-em_happy.webp",
+     "w": 252,
+     "h": 504,
+     "ax": 131.1,
+     "link": null,
+     "sheet": "rose-emotions-v3.png",
+     "marks": {
+      "top": 19.5,
+      "chin": 138.0,
+      "feet": 504
+     },
+     "conf": "low",
+     "s0": 0.041173,
+     "now": {
+      "f": 1.0,
+      "h": 1.3,
+      "anchor": 138.0
+     }
+    },
+    "em_loving": {
+     "set": "mood",
+     "key": "em_loving",
+     "label": "Rose, feeling loving",
+     "img": "art/poses/rose/mood-em_loving.webp",
+     "w": 216,
+     "h": 499,
+     "ax": 110.2,
+     "link": null,
+     "sheet": "rose-emotions-v3.png",
+     "marks": {
+      "top": 19.5,
+      "chin": 138.0,
+      "feet": 499
+     },
+     "conf": "low",
+     "s0": 0.041173,
+     "now": {
+      "f": 1.0,
+      "h": 1.3,
+      "anchor": 138.0
+     }
+    },
+    "em_sad": {
+     "set": "mood",
+     "key": "em_sad",
+     "label": "Rose, feeling sad",
+     "img": "art/poses/rose/mood-em_sad.webp",
+     "w": 212,
+     "h": 488,
+     "ax": 105.0,
+     "link": null,
+     "sheet": "rose-emotions-v3.png",
+     "marks": {
+      "top": 22.6,
+      "chin": 160.0,
+      "feet": 488
+     },
+     "conf": "low",
+     "s0": 0.041173,
+     "now": {
+      "f": 1.0,
+      "h": 1.3,
+      "anchor": 160.0
+     }
+    },
+    "em_angry": {
+     "set": "mood",
+     "key": "em_angry",
+     "label": "Rose, feeling angry",
+     "img": "art/poses/rose/mood-em_angry.webp",
+     "w": 281,
+     "h": 495,
+     "ax": 126.9,
+     "link": null,
+     "sheet": "rose-emotions-v3.png",
+     "marks": {
+      "top": 23.9,
+      "chin": 169.0,
+      "feet": 495
+     },
+     "conf": "low",
+     "s0": 0.041173,
+     "now": {
+      "f": 1.0,
+      "h": 1.3,
+      "anchor": 169.0
+     }
+    },
+    "em_scared": {
+     "set": "mood",
+     "key": "em_scared",
+     "label": "Rose, feeling scared",
+     "img": "art/poses/rose/mood-em_scared.webp",
+     "w": 245,
+     "h": 517,
+     "ax": 122.4,
+     "link": null,
+     "sheet": "rose-emotions-v3.png",
+     "marks": {
+      "top": 19.5,
+      "chin": 138.0,
+      "feet": 517
+     },
+     "conf": "low",
+     "s0": 0.041173,
+     "now": {
+      "f": 1.0,
+      "h": 1.3,
+      "anchor": 138.0
+     }
+    },
+    "em_surprised": {
+     "set": "mood",
+     "key": "em_surprised",
+     "label": "Rose, feeling surprised",
+     "img": "art/poses/rose/mood-em_surprised.webp",
+     "w": 287,
+     "h": 514,
+     "ax": 132.7,
+     "link": null,
+     "sheet": "rose-emotions-v3.png",
+     "marks": {
+      "top": 19.7,
+      "chin": 139.0,
+      "feet": 514
+     },
+     "conf": "low",
+     "s0": 0.041173,
+     "now": {
+      "f": 1.0,
+      "h": 1.3,
+      "anchor": 139.0
+     }
+    },
+    "em_proud": {
+     "set": "mood",
+     "key": "em_proud",
+     "label": "Rose, feeling proud",
+     "img": "art/poses/rose/mood-em_proud.webp",
+     "w": 292,
+     "h": 527,
+     "ax": 123.8,
+     "link": null,
+     "sheet": "rose-emotions-v3.png",
+     "marks": {
+      "top": 17.3,
+      "chin": 122.0,
+      "feet": 527
+     },
+     "conf": "low",
+     "s0": 0.041173,
+     "now": {
+      "f": 1.0,
+      "h": 1.3,
+      "anchor": 122.0
+     }
+    },
+    "em_unimpressed": {
+     "set": "mood",
+     "key": "em_unimpressed",
+     "label": "Rose, feeling unimpressed",
+     "img": "art/poses/rose/mood-em_unimpressed.webp",
+     "w": 227,
+     "h": 527,
+     "ax": 113.9,
+     "link": null,
+     "sheet": "rose-emotions-v3.png",
+     "marks": {
+      "top": 19.7,
+      "chin": 139.0,
+      "feet": 527
+     },
+     "conf": "low",
+     "s0": 0.041173,
+     "now": {
+      "f": 1.0,
+      "h": 1.3,
+      "anchor": 139.0
+     }
+    },
+    "tk_tell": {
+     "set": "talk",
+     "key": "tk_tell",
+     "label": "Rose, talking, telling",
+     "img": "art/poses/rose/talk-tk_tell.webp",
+     "w": 326,
+     "h": 598,
+     "ax": 110.0,
+     "link": null,
+     "sheet": "rose-talk-v2.png",
+     "marks": {
+      "top": 21.1,
+      "chin": 149.2,
+      "feet": 598
+     },
+     "conf": "low",
+     "s0": 0.035199,
+     "now": {
+      "f": 1.0,
+      "h": 1.44693,
+      "anchor": 149.15
+     }
+    },
+    "tk_point": {
+     "set": "talk",
+     "key": "tk_point",
+     "label": "Rose, talking, pointing",
+     "img": "art/poses/rose/talk-tk_point.webp",
+     "w": 389,
+     "h": 593,
+     "ax": 190.4,
+     "link": null,
+     "sheet": "rose-talk-v2.png",
+     "marks": {
+      "top": 20.9,
+      "chin": 147.9,
+      "feet": 593
+     },
+     "conf": "low",
+     "s0": 0.035199,
+     "now": {
+      "f": 1.0,
+      "h": 1.44693,
+      "anchor": 147.91
+     }
+    },
+    "tk_ask": {
+     "set": "talk",
+     "key": "tk_ask",
+     "label": "Rose, talking, asking",
+     "img": "art/poses/rose/talk-tk_ask.webp",
+     "w": 287,
+     "h": 629,
+     "ax": 135.5,
+     "link": null,
+     "sheet": "rose-talk-v2.png",
+     "marks": {
+      "top": 22.2,
+      "chin": 156.9,
+      "feet": 629
+     },
+     "conf": "low",
+     "s0": 0.035199,
+     "now": {
+      "f": 1.0,
+      "h": 1.44693,
+      "anchor": 156.89
+     }
+    },
+    "tk_answer": {
+     "set": "talk",
+     "key": "tk_answer",
+     "label": "Rose, talking, answering",
+     "img": "art/poses/rose/talk-tk_answer.webp",
+     "w": 338,
+     "h": 628,
+     "ax": 127.1,
+     "link": null,
+     "sheet": "rose-talk-v2.png",
+     "marks": {
+      "top": 22.2,
+      "chin": 156.6,
+      "feet": 628
+     },
+     "conf": "low",
+     "s0": 0.035199,
+     "now": {
+      "f": 1.0,
+      "h": 1.44693,
+      "anchor": 156.64
+     }
+    }
+   },
+   "sets": {
+    "walk": {
+     "name": "Walking",
+     "keys": [
+      "down_stand",
+      "down_step1",
+      "down_step2",
+      "up_stand",
+      "up_step1",
+      "up_step2",
+      "left_stand",
+      "left_step1",
+      "left_step2"
+     ],
+     "upright": null
+    },
+    "mood": {
+     "name": "Feelings",
+     "keys": [
+      "em_happy",
+      "em_loving",
+      "em_sad",
+      "em_angry",
+      "em_scared",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ],
+     "upright": [
+      "em_happy",
+      "em_loving",
+      "em_surprised",
+      "em_proud",
+      "em_unimpressed"
+     ]
+    },
+    "talk": {
+     "name": "Talking",
+     "keys": [
+      "tk_tell",
+      "tk_point",
+      "tk_ask",
+      "tk_answer"
+     ],
+     "upright": [
+      "tk_tell",
+      "tk_point"
+     ]
     }
    }
   },
@@ -1903,14 +5774,20 @@
      "w": 238,
      "h": 375,
      "ax": 108.5,
-     "upright": true,
      "link": null,
+     "sheet": "nara-walking-sheet-v2.png",
      "marks": {
       "top": 19.4,
       "chin": 161.2,
       "feet": 375
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.085333,
+     "now": {
+      "f": 1.02357,
+      "h": 0.97,
+      "anchor": 165.0
+     }
     },
     "down_step1": {
      "set": "walk",
@@ -1920,14 +5797,20 @@
      "w": 246,
      "h": 381,
      "ax": 120.6,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "nara-walking-sheet-v2.png",
      "marks": {
       "top": 19.4,
       "chin": 161.2,
       "feet": 381
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.085333,
+     "now": {
+      "f": 1.02357,
+      "h": 0.97,
+      "anchor": 165.0
+     }
     },
     "down_step2": {
      "set": "walk",
@@ -1937,14 +5820,20 @@
      "w": 236,
      "h": 382,
      "ax": 116.5,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "nara-walking-sheet-v2.png",
      "marks": {
       "top": 19.4,
       "chin": 161.2,
       "feet": 382
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.085333,
+     "now": {
+      "f": 1.02357,
+      "h": 0.97,
+      "anchor": 165.0
+     }
     },
     "up_stand": {
      "set": "walk",
@@ -1954,14 +5843,20 @@
      "w": 215,
      "h": 377,
      "ax": 113.5,
-     "upright": true,
      "link": null,
+     "sheet": "nara-walking-sheet-v2.png",
      "marks": {
       "top": 19.4,
       "chin": 161.2,
       "feet": 377
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.085333,
+     "now": {
+      "f": 1.02357,
+      "h": 0.97,
+      "anchor": 165.0
+     }
     },
     "up_step1": {
      "set": "walk",
@@ -1971,14 +5866,20 @@
      "w": 229,
      "h": 380,
      "ax": 131.2,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "nara-walking-sheet-v2.png",
      "marks": {
       "top": 19.4,
       "chin": 161.2,
       "feet": 380
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.085333,
+     "now": {
+      "f": 1.02357,
+      "h": 0.97,
+      "anchor": 165.0
+     }
     },
     "up_step2": {
      "set": "walk",
@@ -1988,14 +5889,20 @@
      "w": 219,
      "h": 379,
      "ax": 118.7,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "nara-walking-sheet-v2.png",
      "marks": {
       "top": 19.4,
       "chin": 161.2,
       "feet": 379
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.085333,
+     "now": {
+      "f": 1.02357,
+      "h": 0.97,
+      "anchor": 165.0
+     }
     },
     "left_stand": {
      "set": "walk",
@@ -2005,14 +5912,20 @@
      "w": 369,
      "h": 325,
      "ax": 218.5,
-     "upright": true,
      "link": null,
+     "sheet": "nara-walking-sheet-v2.png",
      "marks": {
       "top": 19.4,
       "chin": 161.2,
       "feet": 325
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.085333,
+     "now": {
+      "f": 1.02357,
+      "h": 0.97,
+      "anchor": 165.0
+     }
     },
     "left_step1": {
      "set": "walk",
@@ -2022,14 +5935,20 @@
      "w": 379,
      "h": 323,
      "ax": 219.5,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "nara-walking-sheet-v2.png",
      "marks": {
       "top": 19.4,
       "chin": 161.2,
       "feet": 323
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.085333,
+     "now": {
+      "f": 1.02357,
+      "h": 0.97,
+      "anchor": 165.0
+     }
     },
     "left_step2": {
      "set": "walk",
@@ -2039,14 +5958,37 @@
      "w": 378,
      "h": 327,
      "ax": 200.5,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "nara-walking-sheet-v2.png",
      "marks": {
       "top": 19.4,
       "chin": 161.2,
       "feet": 327
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.085333,
+     "now": {
+      "f": 1.02357,
+      "h": 0.97,
+      "anchor": 165.0
+     }
+    }
+   },
+   "sets": {
+    "walk": {
+     "name": "Walking",
+     "keys": [
+      "down_stand",
+      "down_step1",
+      "down_step2",
+      "up_stand",
+      "up_step1",
+      "up_step2",
+      "left_stand",
+      "left_step1",
+      "left_step2"
+     ],
+     "upright": null
     }
    }
   },
@@ -2072,14 +6014,20 @@
      "w": 221,
      "h": 394,
      "ax": 109.9,
-     "upright": true,
      "link": null,
+     "sheet": "michael-walking-sheet-v1.png",
      "marks": {
       "top": 12.0,
       "chin": 100.0,
       "feet": 394
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.114106,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 100.0
+     }
     },
     "down_step1": {
      "set": "walk",
@@ -2089,14 +6037,20 @@
      "w": 215,
      "h": 395,
      "ax": 107.2,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "michael-walking-sheet-v1.png",
      "marks": {
       "top": 12.0,
       "chin": 100.0,
       "feet": 395
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.114106,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 100.0
+     }
     },
     "down_step2": {
      "set": "walk",
@@ -2106,14 +6060,20 @@
      "w": 215,
      "h": 395,
      "ax": 107.0,
-     "upright": true,
      "link": "down_stand",
+     "sheet": "michael-walking-sheet-v1.png",
      "marks": {
       "top": 12.0,
       "chin": 100.0,
       "feet": 395
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.114106,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 100.0
+     }
     },
     "up_stand": {
      "set": "walk",
@@ -2123,14 +6083,20 @@
      "w": 195,
      "h": 371,
      "ax": 97.1,
-     "upright": true,
      "link": null,
+     "sheet": "michael-walking-sheet-v1.png",
      "marks": {
       "top": 12.0,
       "chin": 100.0,
       "feet": 371
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.114106,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 100.0
+     }
     },
     "up_step1": {
      "set": "walk",
@@ -2140,14 +6106,20 @@
      "w": 196,
      "h": 375,
      "ax": 99.0,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "michael-walking-sheet-v1.png",
      "marks": {
       "top": 12.0,
       "chin": 100.0,
       "feet": 375
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.114106,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 100.0
+     }
     },
     "up_step2": {
      "set": "walk",
@@ -2157,14 +6129,20 @@
      "w": 196,
      "h": 376,
      "ax": 97.2,
-     "upright": true,
      "link": "up_stand",
+     "sheet": "michael-walking-sheet-v1.png",
      "marks": {
       "top": 12.0,
       "chin": 100.0,
       "feet": 376
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.114106,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 100.0
+     }
     },
     "left_stand": {
      "set": "walk",
@@ -2174,14 +6152,20 @@
      "w": 151,
      "h": 406,
      "ax": 82.0,
-     "upright": true,
      "link": null,
+     "sheet": "michael-walking-sheet-v1.png",
      "marks": {
       "top": 12.0,
       "chin": 100.0,
       "feet": 406
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.114106,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 100.0
+     }
     },
     "left_step1": {
      "set": "walk",
@@ -2191,14 +6175,20 @@
      "w": 212,
      "h": 401,
      "ax": 122.0,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "michael-walking-sheet-v1.png",
      "marks": {
       "top": 12.0,
       "chin": 100.0,
       "feet": 401
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.114106,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 100.0
+     }
     },
     "left_step2": {
      "set": "walk",
@@ -2208,14 +6198,37 @@
      "w": 155,
      "h": 404,
      "ax": 84.5,
-     "upright": true,
      "link": "left_stand",
+     "sheet": "michael-walking-sheet-v1.png",
      "marks": {
       "top": 12.0,
       "chin": 100.0,
       "feet": 404
      },
-     "conf": "low"
+     "conf": "low",
+     "s0": 0.114106,
+     "now": {
+      "f": 1.0,
+      "h": 1.0,
+      "anchor": 100.0
+     }
+    }
+   },
+   "sets": {
+    "walk": {
+     "name": "Walking",
+     "keys": [
+      "down_stand",
+      "down_step1",
+      "down_step2",
+      "up_stand",
+      "up_step1",
+      "up_step2",
+      "left_stand",
+      "left_step1",
+      "left_step2"
+     ],
+     "upright": null
     }
    }
   }

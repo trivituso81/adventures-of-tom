@@ -32,6 +32,42 @@ LABEL = {'down': 'front', 'up': 'back', 'left': 'side'}; SLABEL = {'stand': 'sta
 TAPER = 12
 PROP = os.path.join(HERE, 'proposals.json')
 
+MOODS = ['happy', 'loving', 'sad', 'angry', 'scared', 'surprised', 'proud', 'unimpressed']; MOOD_UP = ['happy', 'loving', 'surprised', 'proud', 'unimpressed']
+TALKS = ['tell', 'point', 'ask', 'answer']; TALK_UP = ['tell', 'point']; TALK_NAME = {'tell': 'telling', 'point': 'pointing', 'ask': 'asking', 'answer': 'answering'}
+def _story_consts():
+    """EMO_HEAD and EMO_H as typed in bake_story_poses.py (that file must never be imported: importing it runs the 11 minute bake)."""
+    import re, ast
+    t = open(os.path.join(ROOT, 'tools', 'sprite-bake', 'bake_story_poses.py')).read()
+    return ast.literal_eval(re.search(r"^EMO_HEAD = (\{.*?\})", t, re.M).group(1)), ast.literal_eval(re.search(r"^EMO_H = (\{.*?\})", t, re.M).group(1))
+def story_sets(cid, ch, cells):
+    """Feelings (em_*) and talking (tk_*) frames, cut as painted. `now` = how the bakes size them today: the head grown by the HEAD SIZES rule about a measured
+    chin row, then the whole strip at one scale (bake_story_poses.py: EMO_HEAD for the moods, the Telling figure = the stand height for the talking set),
+    drawn at the member's walk scale (data/walk-scale.js)."""
+    import re
+    import emotion_frames as EF, talk_frames as TF, emotion_chin as EC, heights as HT
+    EMO_HEAD, EMO_H = _story_consts(); owk = 1.0
+    m = re.search(r"\b%s:\{inches:[\d.]+,rows:[\d.]+,k:([\d.]+)\}" % cid, open(os.path.join(ROOT, 'data', 'walk-scale.js')).read())
+    if m: owk = float(m.group(1))
+    R = ch['R']; std = ch['frames']['down_stand']['marks']; tshare = std['top'] / std['chin']   # hair allowance guess: the standing frame's skull top as a share of its chin row
+    def add(setname, key, label, fig, chin, u, fct, sheet):
+        rel = 'art/poses/%s/%s-%s.webp' % (ch['_id'], setname, key); fig.save(os.path.join(ROOT, rel), 'WEBP', quality=92, method=6, exact=True)
+        a = np.array(fig)[:, :, 3] > 40; band = np.where(a[max(0, int(chin) - 10):max(1, int(chin)), :].any(0))[0]
+        ch['frames'][key] = {'set': setname, 'key': key, 'label': label, 'img': rel, 'w': fig.width, 'h': fig.height, 'ax': round(float(band.mean()) if len(band) else fig.width / 2.0, 1),
+                             'link': None, 'sheet': sheet, 'marks': {'top': round(chin * tshare, 1), 'chin': round(float(chin), 1), 'feet': fig.height}, 'conf': 'low',
+                             's0': round(u, 6), 'now': {'f': 1.0, 'h': round(fct, 5), 'anchor': round(float(chin), 2)}}
+        if cells is not None: cells.append((ch['_id'], key, fig, chin * tshare, chin, fig.height, 'low', fig.height))
+    if EF.has_sheet(cid) and cid in EMO_HEAD:
+        figs = EF.cut(cid); sheet = os.path.basename(EF.src_path(cid)); fct = EF.head_factor(cid); rows = EC.chin_rows(cid, figs, EF.src_path(cid))
+        grown = [EF.grow_frame_head(f, fct, c) for f, c in zip(figs, rows)] if fct != 1.0 else figs
+        hg = float(np.median([grown[i].height / figs[i].height for i in EF.UPRIGHT])); u = owk / (EMO_HEAD[cid] * hg * HT.stand(cid)[1])
+        for mname, f, c in zip(MOODS, figs, rows): add('mood', 'em_' + mname, '%s, feeling %s' % (ch['name'], mname), f, c, u, fct, sheet)
+        ch['sets']['mood'] = {'name': 'Feelings', 'keys': ['em_' + x for x in MOODS], 'upright': ['em_' + x for x in MOOD_UP]}
+    if cid in TF.CAST and TF.src_path(cid) and cid in EMO_H:
+        figs = TF.cut(cid); sheet = os.path.basename(TF.src_path(cid)); fct, sh = TF.head_grow(cid, figs)
+        tell = EF.grow_frame_head(figs[0], fct, int(round(sh * figs[0].height))) if fct != 1.0 else figs[0]; u = EMO_H[cid] * owk / tell.height
+        for tname, f in zip(TALKS, figs): add('talk', 'tk_' + tname, '%s, talking, %s' % (ch['name'], TALK_NAME[tname]), f, sh * f.height, u, fct, sheet)
+        ch['sets']['talk'] = {'name': 'Talking', 'keys': ['tk_' + x for x in TALKS], 'upright': ['tk_' + x for x in TALK_UP]}
+
 def main():
     props = json.load(open(PROP)) if os.path.exists(PROP) else {}
     chins = json.load(open(os.path.join(ROOT, 'tools', 'sprite-bake', 'chin_lines.json')))
@@ -50,7 +86,7 @@ def main():
         now = {'f': round(f, 5), 'h': round(h, 5), 'anchor': round(anchor, 2)}
         pr = props.get(cid); fresh = bool(pr and pr.get('sheet') == sheet)
         ch = {'name': NAMES[cid], 'inches': W.INCHES.get(cid), 'R': round(R, 3), 'standH': H, 'sheet': sheet, 'headTweak': tw, 'now': now,
-              'locked': LOCKED.get(cid), 'frames': {}}
+              'locked': LOCKED.get(cid), '_id': cid, 'frames': {}}
         os.makedirs(os.path.join(ROOT, 'art', 'poses', cid), exist_ok=True)
         for r, d in enumerate(DIRS):
             if fresh and d in pr: tshare, cshare = pr[d]; conf = 'high' if d == 'down' else 'low'
@@ -62,10 +98,14 @@ def main():
                 a = np.array(fig)[:, :, 3] > 40; rows = np.where(a.any(1))[0]; top, chin = tshare * H, cshare * H
                 band = np.where(a[max(0, int(chin) - 10):max(1, int(chin)), :].any(0))[0]
                 ch['frames'][key] = {'set': 'walk', 'key': key, 'label': '%s, walking, %s %s' % (NAMES[cid], LABEL[d], SLABEL[st]), 'img': rel, 'w': fig.width, 'h': fig.height,
-                                     'ax': round(float(band.mean()) if len(band) else fig.width / 2.0, 1), 'upright': True, 'link': None if st == 'stand' else d + '_stand',
+                                     'ax': round(float(band.mean()) if len(band) else fig.width / 2.0, 1), 'link': None if st == 'stand' else d + '_stand', 'sheet': sheet,
                                      'marks': {'top': round(top, 1), 'chin': round(chin, 1), 'feet': int(rows.max()) + 1}, 'conf': conf}
                 if (ruler and st == 'stand') or check: cells.append((cid, key, fig, top, chin, int(rows.max()) + 1, conf, H))
+        for fr in ch['frames'].values(): fr['s0'] = round(s0, 6); fr['now'] = now
+        ch['sets'] = {'walk': {'name': 'Walking', 'keys': list(ch['frames']), 'upright': None}}
+        if not LOCKED.get(cid): story_sets(cid, ch, cells if check else None)
         out['chars'][cid] = ch
+    for c in out['chars'].values(): c.pop('_id', None)
     json.dump(out, open(os.path.join(ROOT, 'data', 'pose-manifest.json'), 'w'), indent=1); print('manifest -> data/pose-manifest.json', sum(len(c['frames']) for c in out['chars'].values()), 'frames')
     if ruler:
         os.makedirs(ruler, exist_ok=True); Z = 3
@@ -87,9 +127,10 @@ def main():
                 for i in g: sh.paste(i.convert('RGB'), (x, 0)); x += i.width
                 sh.save(os.path.join(ruler, 'ruler-%s-%d.png' % (d, n // 5))); print(os.path.join(ruler, 'ruler-%s-%d.png' % (d, n // 5)), sh.size)
     if check:
-        cw = max(c[2].width for c in cells) + 8; chh = max(c[2].height for c in cells) + 8; sh = Image.new('RGB', (cw * 9, chh * len(ORDER)), (60, 90, 70)); dr = ImageDraw.Draw(sh)
+        only = os.environ.get('SET'); cells = [c for c in cells if not only or c[1].startswith(only)]; per = 12 if only else 9
+        cw = max(c[2].width for c in cells) + 8; chh = max(c[2].height for c in cells) + 8; sh = Image.new('RGB', (cw * per, chh * -(-len(cells) // per)), (60, 90, 70)); dr = ImageDraw.Draw(sh)
         for n, (cid, key, fig, top, chin, feet, conf, H) in enumerate(cells):
-            x, y = (n % 9) * cw + 4, (n // 9) * chh + 4; sh.paste(fig, (x, y), fig)
+            x, y = (n % per) * cw + 4, (n // per) * chh + 4; sh.paste(fig, (x, y), fig)
             for v, col in ((top, (255, 60, 60)), (chin, (80, 160, 255)), (feet, (255, 255, 255))): dr.line([(x, y + v), (x + fig.width, y + v)], fill=col, width=1)
         sh.save(check); print(check, sh.size)
 
