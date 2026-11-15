@@ -67,7 +67,7 @@ details{margin-top:8px}summary{cursor:pointer;color:#d9d4ff;padding:8px 0;min-he
 <div id="intro"><b>How this works</b>
   <ol><li>Pick a person, then Walking, Feelings or Talking, then a pose.</li>
   <li>Drag the <b style="color:#ff7a84">red line</b> to the top of the head (the skull, not the hair) and the <b style="color:#7fb0ff">blue line</b> to the bottom of the chin.</li>
-  <li>The pose is resized by itself so its head and height match the person's standing pose, and its dot turns green. The picture underneath shows the result. If my lines were already right, tap LINES ARE RIGHT instead.</li>
+  <li>The pose is resized by itself: the head becomes the same size as in the standing pose and the body is fitted under it so the pose is exactly the person's height, and its dot turns green. The picture underneath shows the result. If my lines were already right, tap LINES ARE RIGHT instead.</li>
   <li>Still too big or too small? Under the result, slide Whole pose or Head only.</li>
   <li>When you are done, tap SAVE and tell Claude "apply my pose sizes". Nothing changes in the game before that.</li></ol>
   <button id="introx" class="go">Got it</button></div>
@@ -155,12 +155,14 @@ const autoH=(id,k)=>{const m=marks(id,k);return targetRows(id)/((m.chin-m.top)*S
 function hairRows(id){const m=marks(id,'down_stand');return m.top*S(id,'down_stand')*autoH(id,'down_stand');}
 // body multiplier that makes hair + head + body = the real height, for one upright frame
 function bodyOf(id,k){const m=marks(id,k),tp=TP(),s=S(id,k),h=autoH(id,k);return (Rrows(id)/s-hairRows(id)/s-h*(m.chin-m.top+tp/2))/(m.feet-m.chin-tp/2);}
-// a walking frame takes the body of its own standing frame; feelings and talking frames share one body size per set (the middle of the upright ones)
-function autoF(id,k){const fr=FR(id,k),up=C(id).sets[fr.set].upright;if(!up) return bodyOf(id,fr.link||k);return med(up.map(u=>bodyOf(id,u)));}
+// Tom 2026-11-14 21:55: every pose is EXACTLY the person's height, no deviation: the head is the person's head size and the body shrinks or grows to fit under it.
+// A walking step takes the body of its own standing frame (so the walk does not pulse); every other pose is fitted by itself.
+function autoF(id,k){return bodyOf(id,FR(id,k).link||k);}
+function ruleSize(id,k){const src=ownKey(id,k),a=adj(id,k);return {f:autoF(id,src)*a.f,h:autoH(id,src)*a.h,a:marks(id,src).chin};}
 const nowSize=(id,k)=>{const n=FR(id,k).now;return {f:n.f,h:n.h,a:n.anchor};};
 function size(id,k){   // {f: body multiplier, h: head multiplier, a: the row the head is scaled about}
   const src=ownKey(id,k);if(C(id).locked||!isOk(id,k)) return nowSize(id,k);
-  const a=adj(id,k);return {f:autoF(id,src)*a.f,h:autoH(id,src)*a.h,a:marks(id,src).chin};
+  return ruleSize(id,k);
 }
 const rowScale=(y,z,tp)=>y<z.a?z.h:y>=z.a+tp?z.f:z.f+(z.h-z.f)*(1-(y-z.a)/tp);
 function span(id,k,z,y0,y1){   // rows on screen between picture rows y0 and y1
@@ -211,12 +213,12 @@ function drawRes(){
   const cv=$('cRes'),ctx=cv.getContext('2d');ctx.fillStyle='#385540';ctx.fillRect(0,0,cv.width,cv.height);
   const tall=Math.max(M.tomRows*1.1,Rrows(cur)*1.22),baseY=cv.height-56,Z=(baseY-30)/tall,xs=[cv.width*.16,cv.width*.46,cv.width*.76];
   hline(ctx,0,cv.width,baseY,'rgba(255,255,255,.55)',null,2);
-  const ref=drawFig(ctx,cur,'down_stand',size(cur,'down_stand'),xs[0],baseY,Z,1);
+  const ref=drawFig(ctx,cur,'down_stand',C(cur).locked?size(cur,'down_stand'):ruleSize(cur,'down_stand'),xs[0],baseY,Z,1);   // the guide: the standing pose at the rule size, so the dashed lines are where every head must sit
   hline(ctx,0,cv.width-64,ref.top,COL.top,[6,6],1.5);hline(ctx,0,cv.width-64,ref.chin,COL.chin,[6,6],1.5);
   const a=drawFig(ctx,cur,curKey,nowSize(cur,curKey),xs[1],baseY,Z,1),b=drawFig(ctx,cur,curKey,size(cur,curKey),xs[2],baseY,Z,1);
   for(const g of [[a,xs[1]],[b,xs[2]]]){hline(ctx,g[1]-g[0].halfW*.7,g[1]+g[0].halfW*.7,g[0].top,COL.top,null,2.5);hline(ctx,g[1]-g[0].halfW*.7,g[1]+g[0].halfW*.7,g[0].chin,COL.chin,null,2.5);}
   ruler(ctx,cv.width-4,baseY,Z,tall);
-  text(ctx,'Standing',xs[0],cv.height-30,'#d9d4ff','center',19);text(ctx,'(the guide)',xs[0],cv.height-9,'#b9b3e6','center',15);
+  text(ctx,'Standing',xs[0],cv.height-30,'#d9d4ff','center',19);text(ctx,'(the guide, '+ftin(inches(cur)||0)+')',xs[0],cv.height-9,'#b9b3e6','center',15);
   text(ctx,'This pose',xs[1],cv.height-30,'#d9d4ff','center',19);text(ctx,'in the game now',xs[1],cv.height-9,'#b9b3e6','center',15);
   text(ctx,'This pose',xs[2],cv.height-30,'#fff','center',19);text(ctx,isOk(cur,curKey)?'resized':'not resized yet',xs[2],cv.height-9,isOk(cur,curKey)?'#7dffa5':'#ffd34d','center',15);
 }
@@ -271,7 +273,7 @@ function verdict(){
   const g=geom(cur,curKey),n=geom(cur,curKey,nowSize(cur,curKey)),ok=isOk(cur,curKey),pct=v=>Math.round((v/g.target-1)*100),say=p=>p===0?'the right size':Math.abs(p)+'% too '+(p>0?'big':'small');
   const pn=pct(n.head),cls=p=>Math.abs(p)>10?'red':Math.abs(p)>4?'amber':'good';
   let h='In the game now this head is <b class="'+cls(pn)+'">'+say(pn)+'</b> next to the standing pose.<br>';
-  if(ok){const pa=pct(g.head);h+='Resized: <b class="'+cls(pa)+'">'+say(pa)+'</b>.'+((g.h<.75||g.h>1.45)?'<br><b class="red">That is more change than this painting can take. It will look stretched: this pose should be painted again.</b>':'');}
+  if(ok){const pa=pct(g.head),a=adj(cur,curKey);h+='Resized: head <b class="'+cls(pa)+'">'+say(pa)+'</b>, '+(a.s===1&&a.f===1&&a.ho===1?'<b class="good">exactly '+ftin(inches(cur)||0)+' tall</b> (the body was '+(g.f<nowSize(cur,curKey).f?'shrunk':'stretched')+' to fit).':'height changed by your sliders.')+((g.h<.75||g.h>1.45)?'<br><b class="red">That is more change than this painting can take. It will look stretched: this pose should be painted again.</b>':'');}
   else h+=ownKey(cur,curKey)!==curKey?'It will be resized when its standing pose is checked.':'Move a line, or tap LINES ARE RIGHT if they are already right, and it will be resized.';
   $('verdict').innerHTML=h;
 }
@@ -436,7 +438,7 @@ function tidy(d){   // a saved or stored draft: keep only what this page knows (
     let local=null;try{local=JSON.parse(LS.get(DRAFT_KEY)||'null');}catch(e){}
     D=local?tidy(local):clone(SAVED);
     if(LS.get('aot-pose-intro')==='3') $('intro').style.display='none';
-    window.__PE={ready:true,M,get D(){return D;},get SAVED(){return SAVED;},geom,size,marks,status,isOk,autoH,autoF,targetRows,tomHead,Rrows,inches,target,span,nowSize,dirtyCount,doc,pick,
+    window.__PE={ready:true,ruleSize,M,get D(){return D;},get SAVED(){return SAVED;},geom,size,marks,status,isOk,autoH,autoF,targetRows,tomHead,Rrows,inches,target,span,nowSize,dirtyCount,doc,pick,
       get view(){return VIEW;},get cur(){return cur;},get curKey(){return curKey;},get curSet(){return curSet;},set tab(v){tab=v;redraw();}};
     redraw();
   }catch(e){document.body.insertAdjacentHTML('beforeend','<p style="padding:12px;color:#ff8d9b">Could not load the Pose Editor: '+e.message+'</p>');}

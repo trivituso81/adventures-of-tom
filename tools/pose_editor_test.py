@@ -77,9 +77,9 @@ with sync_playwright() as pw:
             for key, fr in c['frames'].items():
                 g = E(p, '__PE.geom("%s","%s")' % (cid, key)); ck(name + ': ' + cid + ' ' + key + ' head on target', abs(g['head'] - t) < .03, (g['head'], t))
                 if key.endswith('_stand'): ck(name + ': ' + cid + ' ' + key + ' at the real height', abs(g['whole'] - c['R']) < (.06 if key == 'down_stand' else .9), (g['whole'], c['R']))   # back and side carry the front pose's hair allowance, so their own top can sit a little off
-            if 'mood' in c['sets']:
-                f = [E(p, '__PE.size("%s","%s")' % (cid, k2))['f'] for k2 in c['sets']['mood']['keys']]; ck(name + ': ' + cid + ' feelings share one body size', max(f) - min(f) < 1e-9)
-                w = sorted(E(p, '__PE.geom("%s","%s")' % (cid, k2))['whole'] for k2 in c['sets']['mood']['upright'])[2]; ck(name + ': ' + cid + ' upright feelings near the real height', abs(w / c['R'] - 1) < .06, (w, c['R']))
+            tops = [E(p, '(()=>{const m=__PE.marks("%s","%s");return __PE.span("%s","%s",__PE.size("%s","%s"),m.top,m.feet);})()' % (cid, k2, cid, k2, cid, k2)) for k2 in c['frames'] if not c['frames'][k2]['link']]
+            ck(name + ': ' + cid + ' every pose has the top of the head at exactly the same height', max(tops) - min(tops) < .02, (min(tops), max(tops)))
+            ck(name + ': ' + cid + ' that height is the real height less the hair', abs(tops[0] + E(p, '(()=>{const m=__PE.marks("%s","down_stand");return __PE.span("%s","down_stand",__PE.size("%s","down_stand"),0,m.top);})()' % (cid, cid, cid)) - c['R']) < .06)
         ck(name + ': adults match Tom\'s head', abs(E(p, '__PE.geom("boppy","tk_tell")')['head'] - E(p, '__PE.tomHead()')) < .03)
         ck(name + ': kids keep their own share', E(p, '__PE.target("rose")') < E(p, '__PE.target("grace")') < 100)
         # fine tune one pose

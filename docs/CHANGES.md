@@ -1,3 +1,11 @@
+## poseedit4 (2026-11-14): Pose Editor: every resized pose is now exactly the person's height (the game itself is unchanged)
+
+Tom (2026-11-14 21:55, with a picture of his talking pose resized taller than his standing pose): "I set the bottom of the chin in the top of the head for each, but now they're all different heights but what should be happening is that based on me setting the chin and the top of the head, you should be able to make all of the head sizes equal and then place them on the body and then each body needs to be set to the exact height of the character. can't deviate, so you're gonna have to as a result of the height calculation end up shrinking the body accordingly".
+- Cause: in poseedit2 the feelings and talking poses shared one body size per set, so a pose whose painted body is longer came out taller than the person.
+- Now each pose is fitted by itself: the head is the person's head size, and the body under it is shrunk or stretched until the pose is exactly the real height. Checked in the test for every pose of every person: the top of the head sits at the same height in all of them (within 0.02 row).
+- The Result picture's standing guide is always drawn at the rule size, so the two dashed lines are exactly where the resized head must sit. The sentence under it now says "exactly 5 ft 11 tall (the body was shrunk to fit)".
+- The rules in force are now written in `docs/POSE_EDITOR.md`.
+- Side effect to watch: crouched or bowed poses (scared, sad) are stretched to full height by this rule. The Whole pose slider is there for any one that looks wrong.
 ## poseedit3 (2026-11-14): Pose Editor: zoom slider, size sliders, pinching no longer scrambles the lines (the game itself is unchanged)
 
 Tom (2026-11-14 21:51): "For the life of me, I can't figure out how to zoom in or out on a character. I'm trying to pinch and whatever with my fingers on the iPhone, but it's going haywire. Can we just have like a zoom slider".
