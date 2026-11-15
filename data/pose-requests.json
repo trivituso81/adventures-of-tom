@@ -1,6 +1,6 @@
 {
  "version": 2,
- "saved": "2026-11-15T05:49:41.274Z",
+ "saved": "2026-11-15T05:49:48.804Z",
  "heights": {},
  "target": {},
  "frames": {
@@ -20,6 +20,11 @@
     "sheet": "tom-emotions-v7.png",
     "top": 12.9,
     "chin": 151.4
+   },
+   "em_sad": {
+    "sheet": "tom-emotions-v7.png",
+    "top": 12.2,
+    "chin": 172.6
    }
   },
   "tnb": {
