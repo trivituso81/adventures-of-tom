@@ -43,7 +43,7 @@ canvas{display:block;background:#385540;border-radius:8px}
 .row input[type=range]{flex:1;min-width:50px;min-height:40px}
 .row input[type=number]{width:56px;min-height:40px;background:#0f0d24;border:1px solid #3a3566;border-radius:8px;padding:4px 6px;text-align:center}
 .row button.sm{min-width:48px;padding:5px 6px}
-.lab{flex:0 0 50px;font-weight:700}
+.lab{flex:0 0 84px;font-weight:700}
 .val{min-width:54px;text-align:center;font-weight:700}
 #lineBtns button[data-l=top].on{background:#c8343f;border-color:#ff7a84}
 #lineBtns button[data-l=chin].on{background:#2f6fd0;border-color:#7fb0ff}
@@ -67,7 +67,8 @@ details{margin-top:8px}summary{cursor:pointer;color:#d9d4ff;padding:8px 0;min-he
 <div id="intro"><b>How this works</b>
   <ol><li>Pick a person, then Walking, Feelings or Talking, then a pose.</li>
   <li>Drag the <b style="color:#ff7a84">red line</b> to the top of the head (the skull, not the hair) and the <b style="color:#7fb0ff">blue line</b> to the bottom of the chin.</li>
-  <li>Tap LINES ARE RIGHT. The pose is resized by itself so its head and height match the person's standing pose. The picture underneath shows the result.</li>
+  <li>The pose is resized by itself so its head and height match the person's standing pose, and its dot turns green. The picture underneath shows the result. If my lines were already right, tap LINES ARE RIGHT instead.</li>
+  <li>Still too big or too small? Under the result, slide Whole pose or Head only.</li>
   <li>When you are done, tap SAVE and tell Claude "apply my pose sizes". Nothing changes in the game before that.</li></ol>
   <button id="introx" class="go">Got it</button></div>
 <div class="bar" id="tabs"><button data-t="Pose">ONE PERSON</button><button data-t="Cast">EVERYONE</button></div>
@@ -76,23 +77,24 @@ details{margin-top:8px}summary{cursor:pointer;color:#d9d4ff;padding:8px 0;min-he
 <div class="view" id="vPose">
   <div class="bar" id="sets" style="padding:0"></div>
   <div class="card full"><h2 id="stripWho">Poses</h2><div class="scroll"><canvas id="cStrip" width="1600" height="330" style="touch-action:pan-x"></canvas></div>
-    <div class="hint">Tap a pose. Yellow dot: lines not checked yet. Green dot: checked and resized. Grey dot: follows its standing pose.</div></div>
+    <div class="hint">Tap a pose. Yellow dot: not resized yet (move a line, or tap LINES ARE RIGHT). Green dot: resized. Grey dot: follows its standing pose.</div></div>
   <div class="card"><h2 id="who">Pose</h2>
     <canvas id="cMark" width="720" height="620"></canvas>
+    <div class="row" style="margin-top:6px"><span class="lab" style="flex-basis:auto">Picture zoom</span><button class="sm" id="zOut">-</button><input type="range" id="slZ" min="0" max="100" step="5" value="100"><button class="sm" id="zIn">+</button></div>
     <div class="hint" id="linkNote"></div>
     <div class="row" id="lineBtns"><button data-l="top">TOP OF HEAD</button><button data-l="chin">CHIN</button><button class="sm" id="nUp">&#9650;</button><button class="sm" id="nDn">&#9660;</button></div>
     <div class="row"><button class="go" id="confirm">LINES ARE RIGHT</button><button id="unlink"></button></div>
-    <div class="hint">Drag a line on the picture. For a small move, tap TOP OF HEAD or CHIN, then the arrows.</div>
+    <div class="hint">Drag a line with one finger. For a small move, tap TOP OF HEAD or CHIN, then the arrows. Pinching does nothing here: use Picture zoom to see more or less of the pose. Zoom only changes what you see, not the pose.</div>
   </div>
   <div class="card"><h2>Result</h2>
     <canvas id="cRes" width="720" height="560"></canvas>
     <div id="verdict"></div>
-    <details id="hand"><summary>Fine tune this pose by hand</summary>
-      <div class="row" style="margin-top:0"><span class="lab">Head</span><button class="sm" data-a="h" data-d="-2">smaller</button><span class="val" id="vH">100%</span><button class="sm" data-a="h" data-d="2">bigger</button></div>
-      <div class="row"><span class="lab">Body</span><button class="sm" data-a="f" data-d="-2">smaller</button><span class="val" id="vF">100%</span><button class="sm" data-a="f" data-d="2">bigger</button></div>
+    <div id="hand">
+      <div class="row"><span class="lab">Whole pose</span><button class="sm" data-a="s" data-d="-1">-</button><input type="range" id="slS" min="60" max="150" step="1"><button class="sm" data-a="s" data-d="1">+</button><span class="val" id="vS">100%</span></div>
+      <div class="row"><span class="lab">Head only</span><button class="sm" data-a="h" data-d="-2">-</button><input type="range" id="slH" min="60" max="150" step="1"><button class="sm" data-a="h" data-d="2">+</button><span class="val" id="vH">100%</span></div>
       <div class="row"><button id="handReset">Back to automatic</button><button id="unconfirm">Leave this pose as it is in the game</button></div>
-      <div class="hint">100% is the automatic size. These change only this pose.</div>
-    </details>
+      <div class="hint">To make this pose bigger or smaller, slide Whole pose. To change just the head, slide Head only. 100% is the automatic size. Moving a slider also marks the lines as checked.</div>
+    </div>
   </div>
 </div>
 
@@ -104,8 +106,8 @@ details{margin-top:8px}summary{cursor:pointer;color:#d9d4ff;padding:8px 0;min-he
   <div class="card"><h2>Head row</h2><div class="scroll"><canvas id="cHeads" width="1500" height="300" style="touch-action:pan-x"></canvas></div>
     <div class="hint">Chins sit on the blue line. The red line is the top of Tom's head: a head the same size as Tom's touches it. The number is the head as a share of Tom's.</div></div>
   <div class="card"><h2 id="castWho">This person</h2>
-    <div class="row" style="margin-top:0"><span class="lab">Height</span><input type="number" id="hFt" min="2" max="7" step="1" inputmode="numeric"><span>ft</span><input type="number" id="hIn" min="0" max="11.5" step="0.5" inputmode="decimal"><span>in</span><span class="hint" id="hNote" style="margin:0"></span></div>
-    <div class="row"><span class="lab">Head</span><button class="sm" data-t="-1">-1</button><input type="range" id="slT" min="50" max="130" step="1"><button class="sm" data-t="1">+1</button><input type="number" id="inT" min="50" max="130" step="1" inputmode="numeric"><span>% of Tom's</span></div>
+    <div class="row" style="margin-top:0"><span class="lab" style="flex-basis:50px">Height</span><input type="number" id="hFt" min="2" max="7" step="1" inputmode="numeric"><span>ft</span><input type="number" id="hIn" min="0" max="11.5" step="0.5" inputmode="decimal"><span>in</span><span class="hint" id="hNote" style="margin:0"></span></div>
+    <div class="row"><span class="lab" style="flex-basis:50px">Head</span><button class="sm" data-t="-1">-1</button><input type="range" id="slT" min="50" max="130" step="1"><button class="sm" data-t="1">+1</button><input type="number" id="inT" min="50" max="130" step="1" inputmode="numeric"><span>% of Tom's</span></div>
     <div class="hint" id="castHint"></div>
   </div>
 </div>
@@ -126,7 +128,7 @@ const textToB64=t=>btoa(unescape(encodeURIComponent(t)));
 $('exitbtn').onclick=()=>{location.href='index.html?admin=1';};
 
 let M=null,IMG={},cur='tom',curSet='walk',curKey='down_stand',tab='Pose',line='chin',castKey='down_stand';
-// D = everything Tom changed: {heights:{id:inches}, target:{id:percent}, frames:{id:{key:{sheet,top,chin,ok,hAdj,fAdj,own}}}}. SAVED = what is in the request file.
+// D = everything Tom changed: {heights:{id:inches}, target:{id:percent}, frames:{id:{key:{sheet,top,chin,ok,sAdj,hAdj,fAdj,own}}}}. SAVED = what is in the request file.
 let D={heights:{},target:{},frames:{}},SAVED={heights:{},target:{},frames:{}},UNDO=[];
 const clone=o=>JSON.parse(JSON.stringify(o));
 const r1=v=>Math.round(v*10)/10,r3=v=>Math.round(v*1000)/1000,med=a=>{a=a.slice().sort((x,y)=>x-y);const n=a.length;return n%2?a[(n-1)/2]:(a[n/2-1]+a[n/2])/2;};
@@ -141,7 +143,7 @@ const ownKey=(id,k)=>{const fr=FR(id,k),e=ent(id,k);return fr.link&&!(e&&e.own)?
 function marks(id,k){const src=ownKey(id,k),fr=FR(id,src),e=ent(id,src)||{};return {top:e.top!=null?e.top:fr.marks.top,chin:e.chin!=null?e.chin:fr.marks.chin,feet:FR(id,k).marks.feet};}
 const isOk=(id,k)=>{const e=ent(id,ownKey(id,k));return !!(e&&e.ok&&!e.stale);};
 const status=(id,k)=>ownKey(id,k)!==k?'link':isOk(id,k)?'ok':'prop';
-const adj=(id,k)=>{const e=ent(id,ownKey(id,k))||{};return {h:e.hAdj||1,f:e.fAdj||1};};
+const adj=(id,k)=>{const e=ent(id,ownKey(id,k))||{},s=e.sAdj||1;return {h:(e.hAdj||1)*s,f:(e.fAdj||1)*s,s,ho:e.hAdj||1};};   // sAdj: whole pose, hAdj: head only, fAdj: body only (older saves)
 function headNow(id){const fr=FR(id,'down_stand');return (fr.marks.chin-fr.marks.top)*fr.s0*fr.now.h;}
 const defTarget=id=>M.kids.includes(id)?Math.round(headNow(id)/headNow(M.baseline)*100):100;
 const target=id=>D.target[id]!=null?D.target[id]:defTarget(id);
@@ -193,11 +195,11 @@ const COL={top:'#ff5a64',chin:'#5aa0ff'};
 const shortName=k=>k.startsWith('em_')||k.startsWith('tk_')?({tell:'telling',point:'pointing',ask:'asking',answer:'answering'})[k.slice(3)]||k.slice(3):({down:'front',up:'back',left:'side'})[k.split('_')[0]]+' '+({stand:'stand',step1:'step 1',step2:'step 2'})[k.split('_')[1]];
 
 // the painting, zoomed on the head, with the two lines. VIEW maps picture px to canvas px.
-let VIEW={s:1,ox:0,oy:0},drag=null;
+let VIEW={s:1,ox:0,oy:0},drag=null,viewZoom=1,fingers=0;   // viewZoom: 1 = close on the head, 0 = the whole pose (what Tom sees only)
 function drawMark(){
   const cv=$('cMark'),ctx=cv.getContext('2d'),fr=FR(cur,curKey),img=IMG[fr.img],m=marks(cur,curKey);
-  if(!drag){const hd=Math.max(30,m.chin-m.top),y0=Math.max(0,m.top-hd*.55),y1=Math.min(fr.h,m.chin+hd*.6),s=Math.min((cv.height-20)/(y1-y0),(cv.width-150)/Math.min(fr.w,(y1-y0)*1.25));
-    VIEW={s,ox:(cv.width-110)/2-fr.ax*s,oy:10-y0*s};}
+  if(!drag){const hd=Math.max(30,m.chin-m.top),z=viewZoom,y0=Math.max(0,m.top-hd*.55)*z,y1=fr.h+(Math.min(fr.h,m.chin+hd*.6)-fr.h)*z,s=Math.min((cv.height-20)/(y1-y0),(cv.width-150)/Math.min(fr.w,(y1-y0)*1.25));
+    VIEW={s,ox:(cv.width-110)/2-(fr.ax*z+fr.w/2*(1-z))*s,oy:10-y0*s};}
   ctx.fillStyle='#385540';ctx.fillRect(0,0,cv.width,cv.height);ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
   ctx.drawImage(img,VIEW.ox,VIEW.oy,fr.w*VIEW.s,fr.h*VIEW.s);
   const follow=ownKey(cur,curKey)!==curKey||!!C(cur).locked;
@@ -270,7 +272,7 @@ function verdict(){
   const pn=pct(n.head),cls=p=>Math.abs(p)>10?'red':Math.abs(p)>4?'amber':'good';
   let h='In the game now this head is <b class="'+cls(pn)+'">'+say(pn)+'</b> next to the standing pose.<br>';
   if(ok){const pa=pct(g.head);h+='Resized: <b class="'+cls(pa)+'">'+say(pa)+'</b>.'+((g.h<.75||g.h>1.45)?'<br><b class="red">That is more change than this painting can take. It will look stretched: this pose should be painted again.</b>':'');}
-  else h+=ownKey(cur,curKey)!==curKey?'It will be resized when its standing pose is checked.':'Check the two lines, then tap LINES ARE RIGHT to resize it.';
+  else h+=ownKey(cur,curKey)!==curKey?'It will be resized when its standing pose is checked.':'Move a line, or tap LINES ARE RIGHT if they are already right, and it will be resized.';
   $('verdict').innerHTML=h;
 }
 function poseUI(){
@@ -281,8 +283,8 @@ function poseUI(){
   $('unlink').style.display=fr.link&&!lock?'':'none';$('unlink').textContent=follow?'Mark this step by itself':'Follow the standing pose again';
   $('linkNote').textContent=lock?c.locked:follow?'This step uses the lines and size of its standing pose, so the walk does not jump.':'';$('linkNote').style.display=$('linkNote').textContent?'':'none';
   $('confirm').disabled=lock;$('confirm').textContent=follow?'NEXT POSE':ok?'✓ CHECKED. NEXT POSE':'LINES ARE RIGHT';
-  const a=adj(cur,curKey);$('vH').textContent=Math.round(a.h*100)+'%';$('vF').textContent=Math.round(a.f*100)+'%';
-  document.querySelectorAll('#hand button').forEach(b=>b.disabled=lock||!ok);
+  const a=adj(cur,curKey);$('vH').textContent=Math.round(a.ho*100)+'%';$('vS').textContent=Math.round(a.s*100)+'%';$('slH').value=Math.round(a.ho*100);$('slS').value=Math.round(a.s*100);
+  document.querySelectorAll('#hand button,#hand input').forEach(b=>b.disabled=lock);$('handReset').disabled=$('unconfirm').disabled=lock||!ok;
 }
 function castUI(){
   const c=C(cur),lock=!!c.locked,i=inches(cur)||0,isTom=cur===M.baseline;$('castWho').textContent=c.name;
@@ -316,7 +318,7 @@ function msg(t,c){const e=$('msg');e.textContent=t;e.className=c||'';}
 function snap(){UNDO.push(JSON.stringify(D));if(UNDO.length>20) UNDO.shift();}
 function edit(fn){snap();msg('');fn();redraw();}
 $('undo').onclick=()=>{if(UNDO.length){D=JSON.parse(UNDO.pop());msg('');redraw();}};
-$('introx').onclick=()=>{$('intro').style.display='none';LS.set('aot-pose-intro','2');};
+$('introx').onclick=()=>{$('intro').style.display='none';LS.set('aot-pose-intro','3');};
 $('help').onclick=()=>{const e=$('intro');e.style.display=e.style.display==='none'?'':'none';};
 document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;redraw();});
 
@@ -327,7 +329,7 @@ function setMark(l,v){
   const e=ent(cur,curKey,true);if(e.top==null){e.top=m.top;e.chin=m.chin;}e[l]=r1(v);delete e.stale;
 }
 document.querySelectorAll('#lineBtns button[data-l]').forEach(b=>b.onclick=()=>{line=b.dataset.l;redraw();});
-const nudge=d=>edit(()=>setMark(line,marks(cur,curKey)[line]+d));
+const nudge=d=>edit(()=>{setMark(line,marks(cur,curKey)[line]+d);if(ownKey(cur,curKey)===curKey) confirmFrame(cur,curKey);});
 $('nUp').onclick=()=>nudge(-1);$('nDn').onclick=()=>nudge(1);
 $('unlink').onclick=()=>edit(()=>{const e=ent(cur,curKey,true),m=marks(cur,curKey);if(e.own){delete D.frames[cur][curKey];}else{e.own=true;e.top=m.top;e.chin=m.chin;e.ok=false;}});
 function confirmFrame(id,k){const e=ent(id,k,true),m=marks(id,k);e.top=m.top;e.chin=m.chin;e.ok=true;delete e.stale;e.sheet=FR(id,k).sheet;}
@@ -342,18 +344,23 @@ $('confirm').onclick=()=>edit(()=>{
 });
 const ptY=ev=>{const cv=$('cMark'),r=cv.getBoundingClientRect();return (ev.clientY-r.top)*cv.height/r.height;};
 $('cMark').addEventListener('pointerdown',ev=>{
+  fingers++;
+  if(fingers>1){if(drag){drag=null;if(UNDO.length) D=JSON.parse(UNDO.pop());redraw();}return;}   // a pinch: put the line back and ignore it
   if(C(cur).locked||ownKey(cur,curKey)!==curKey) return;
   const y=ptY(ev),m=marks(cur,curKey),dT=Math.abs(VIEW.oy+m.top*VIEW.s-y),dC=Math.abs(VIEW.oy+m.chin*VIEW.s-y),l=dT<dC?'top':'chin',d=Math.min(dT,dC);
   line=l;snap();drawMark();drag={l,off:d>70?0:(VIEW.oy+m[l]*VIEW.s-y)};$('cMark').setPointerCapture(ev.pointerId);
   setMark(l,(y+drag.off-VIEW.oy)/VIEW.s);drawMark();drawRes();verdict();ev.preventDefault();
 });
-$('cMark').addEventListener('pointermove',ev=>{if(!drag) return;setMark(drag.l,(ptY(ev)+drag.off-VIEW.oy)/VIEW.s);drawMark();drawRes();verdict();ev.preventDefault();});
-const endDrag=()=>{if(drag){drag=null;msg('');redraw();}};
+$('cMark').addEventListener('pointermove',ev=>{if(!drag||fingers>1) return;setMark(drag.l,(ptY(ev)+drag.off-VIEW.oy)/VIEW.s);drawMark();drawRes();verdict();ev.preventDefault();});
+const endDrag=()=>{fingers=Math.max(0,fingers-1);if(drag){drag=null;confirmFrame(cur,curKey);msg('');redraw();}};   // a line Tom placed is a line he means: the pose counts as checked
 $('cMark').addEventListener('pointerup',endDrag);$('cMark').addEventListener('pointercancel',endDrag);
 
 // ---- fine tune, strip, cast
-document.querySelectorAll('#hand button[data-a]').forEach(b=>b.onclick=()=>edit(()=>{const e=ent(cur,ownKey(cur,curKey),true),key=b.dataset.a==='h'?'hAdj':'fAdj',v=Math.max(.6,Math.min(1.5,Math.round(((e[key]||1)*100)+(+b.dataset.d))/100));if(v===1) delete e[key];else e[key]=v;}));
-$('handReset').onclick=()=>edit(()=>{const e=ent(cur,ownKey(cur,curKey));if(e){delete e.hAdj;delete e.fAdj;}});
+function setAdj(key,v){edit(()=>{const src=ownKey(cur,curKey);if(!isOk(cur,curKey)) confirmFrame(cur,src);const e=ent(cur,src,true);v=Math.max(.6,Math.min(1.5,Math.round(v*100)/100));if(v===1) delete e[key];else e[key]=v;});}
+document.querySelectorAll('#hand button[data-a]').forEach(b=>b.onclick=()=>{const a=adj(cur,curKey),key=b.dataset.a==='h'?'hAdj':'sAdj';setAdj(key,(key==='hAdj'?a.ho:a.s)+(+b.dataset.d)/100);});
+$('slS').oninput=()=>setAdj('sAdj',+$('slS').value/100);$('slH').oninput=()=>setAdj('hAdj',+$('slH').value/100);
+$('slZ').oninput=()=>{viewZoom=+$('slZ').value/100;drawMark();};$('zOut').onclick=()=>{viewZoom=Math.max(0,viewZoom-.25);$('slZ').value=viewZoom*100;drawMark();};$('zIn').onclick=()=>{viewZoom=Math.min(1,viewZoom+.25);$('slZ').value=viewZoom*100;drawMark();};
+$('handReset').onclick=()=>edit(()=>{const e=ent(cur,ownKey(cur,curKey));if(e){delete e.sAdj;delete e.hAdj;delete e.fAdj;}});
 $('unconfirm').onclick=()=>edit(()=>{const e=ent(cur,ownKey(cur,curKey));if(e) e.ok=false;});
 const hitX=(cv,ev)=>{const r=cv.getBoundingClientRect();return (ev.clientX-r.left)*cv.width/r.width;};
 $('cStrip').onclick=ev=>{const x=hitX($('cStrip'),ev),h=STRIPHIT.find(h=>x>=h.x0&&x<h.x1);if(h){curKey=h.k;redraw();}};
@@ -414,7 +421,7 @@ function tidy(d){   // a saved or stored draft: keep only what this page knows (
   for(const id of Object.keys(d.heights||{})) if(M.chars[id]) o.heights[id]=d.heights[id];
   for(const id of Object.keys(d.target||{})) if(M.chars[id]) o.target[id]=d.target[id];
   for(const id of Object.keys(d.frames||{})) if(M.chars[id]) for(const k of Object.keys(d.frames[id])) if(M.chars[id].frames[k]){
-    const s=d.frames[id][k],e={sheet:s.sheet||M.chars[id].frames[k].sheet};for(const f of ['top','chin','ok','hAdj','fAdj','own']) if(s[f]!=null) e[f]=s[f];
+    const s=d.frames[id][k],e={sheet:s.sheet||M.chars[id].frames[k].sheet};for(const f of ['top','chin','ok','sAdj','hAdj','fAdj','own']) if(s[f]!=null) e[f]=s[f];
     if(e.sheet!==M.chars[id].frames[k].sheet){e.stale=true;e.ok=false;}
     (o.frames[id]=o.frames[id]||{})[k]=e;
   }
@@ -428,7 +435,7 @@ function tidy(d){   // a saved or stored draft: keep only what this page knows (
     SAVED=tidy(await loadSaved());
     let local=null;try{local=JSON.parse(LS.get(DRAFT_KEY)||'null');}catch(e){}
     D=local?tidy(local):clone(SAVED);
-    if(LS.get('aot-pose-intro')==='2') $('intro').style.display='none';
+    if(LS.get('aot-pose-intro')==='3') $('intro').style.display='none';
     window.__PE={ready:true,M,get D(){return D;},get SAVED(){return SAVED;},geom,size,marks,status,isOk,autoH,autoF,targetRows,tomHead,Rrows,inches,target,span,nowSize,dirtyCount,doc,pick,
       get view(){return VIEW;},get cur(){return cur;},get curKey(){return curKey;},get curSet(){return curSet;},set tab(v){tab=v;redraw();}};
     redraw();

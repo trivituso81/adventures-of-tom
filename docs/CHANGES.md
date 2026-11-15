@@ -1,3 +1,11 @@
+## poseedit3 (2026-11-14): Pose Editor: zoom slider, size sliders, pinching no longer scrambles the lines (the game itself is unchanged)
+
+Tom (2026-11-14 21:51): "For the life of me, I can't figure out how to zoom in or out on a character. I'm trying to pinch and whatever with my fingers on the iPhone, but it's going haywire. Can we just have like a zoom slider".
+- Cause: the picture only understood one finger dragging a line, so each finger of a pinch grabbed a line and dragged it. Now a second finger cancels the drag, puts the line back and is ignored.
+- Picture zoom: a slider with - and + under the picture, from the whole pose to close on the head. It changes only what Tom sees.
+- Size: two sliders under the Result picture, always visible (they replace the folded "fine tune" buttons). Whole pose makes the whole figure bigger or smaller; Head only changes just the head. Each has - and + and shows its percent; 100% is the automatic size. Moving one also marks the pose as checked.
+- Moving a line now marks the pose as checked by itself (Tom's save of 21:4x had new lines on all twelve of his own feelings and talking poses and none was checked, so nothing would have been resized). LINES ARE RIGHT is only needed when the proposed lines are already right. Lines saved before this build stay unchecked until he touches them or taps the button.
+- Test: `python3 tools/pose_editor_test.py` FAILS: [] (adds: zoom slider, both size sliders, a slider on an unchecked pose, a dragged line checks the pose, a two-finger pinch moves nothing). Looked at: the pose screen in portrait.
 ## poseedit2 (2026-11-14): Pose Editor: feelings and talking poses added, and the page reworked into one simple flow (the game itself is unchanged)
 
 Tom (2026-11-14 21:20): "I'm having a hard time figuring out how this thing works, and also I don't see how to resize their emotion states and talking states, which is probably the most important thing because that's where I'm seeing the most discrepancy."

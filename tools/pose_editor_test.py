@@ -54,14 +54,15 @@ with sync_playwright() as pw:
         p.click('#chips button[data-id=amy]')
         ck(name + ': walking, feelings and talking sets', p.eval_on_selector_all('#sets button', 'b=>b.map(x=>x.dataset.s)') == ['walk', 'mood', 'talk'])
         p.click('#sets button[data-s=mood]'); ck(name + ': feelings open on happy', E(p, '__PE.curKey') == 'em_happy')
+        ck(name + ': not resized until the lines are checked', E(p, '__PE.size("amy","em_happy")')['h'] == MAN['chars']['amy']['frames']['em_happy']['now']['h'])
         # drag the chin line 20 canvas px down on the picture
         m0 = E(p, '__PE.marks("amy","em_happy")'); v = E(p, '__PE.view'); p.locator('#cMark').scroll_into_view_if_needed(); p.evaluate('window.scrollBy(0,-20)')
         box = p.locator('#cMark').bounding_box(); k = box['height'] / 620.0; x = box['x'] + box['width'] / 2; y = box['y'] + (v['oy'] + m0['chin'] * v['s']) * k
         p.mouse.move(x, y); p.mouse.down(); p.mouse.move(x, y + 10 * k, steps=3); p.mouse.move(x, y + 20 * k, steps=3); p.mouse.up()
         m1 = E(p, '__PE.marks("amy","em_happy")'); ck(name + ': dragging moves the chin line', abs((m1['chin'] - m0['chin']) - 20 / v['s']) < 1.5, (m0, m1))
-        p.click('#undo'); ck(name + ': undo puts the line back', abs(E(p, '__PE.marks("amy","em_happy")')['chin'] - m0['chin']) < .01)
+        ck(name + ': a dragged line checks the pose', E(p, '__PE.isOk("amy","em_happy")'))
+        p.click('#undo'); ck(name + ': undo puts the line back', abs(E(p, '__PE.marks("amy","em_happy")')['chin'] - m0['chin']) < .01 and not E(p, '__PE.isOk("amy","em_happy")'))
         p.click('#lineBtns button[data-l=top]'); p.click('#nDn'); p.click('#nDn'); ck(name + ': arrows nudge the chosen line', abs(E(p, '__PE.marks("amy","em_happy")')['top'] - m0['top'] - 2) < .11)
-        ck(name + ': not resized until the lines are checked', E(p, '__PE.size("amy","em_happy")')['h'] == MAN['chars']['amy']['frames']['em_happy']['now']['h'])
         p.click('#confirm'); ck(name + ': LINES ARE RIGHT checks the pose and moves on', E(p, '__PE.isOk("amy","em_happy")') and E(p, '__PE.curKey') == 'em_loving')
         g = E(p, '__PE.geom("amy","em_happy")'); ck(name + ': a checked pose gets the target head', abs(g['head'] - g['target']) < .02, g)
         # check every pose of everyone by tapping the button, then test the sizes
@@ -84,6 +85,14 @@ with sync_playwright() as pw:
         # fine tune one pose
         p.evaluate('__PE.pick("justin","em_sad")'); h0 = E(p, '__PE.size("justin","em_sad")')['h']; p.evaluate("document.getElementById('hand').open=true"); p.click('#hand button[data-a=h][data-d="2"]')
         ck(name + ': head bigger tunes only this pose', abs(E(p, '__PE.size("justin","em_sad")')['h'] / h0 - 1.02) < 1e-6 and E(p, '__PE.D.frames.justin.em_sad.hAdj') == 1.02)
+        p.fill('#slS', '110'); p.dispatch_event('#slS', 'input'); z = E(p, '__PE.size("justin","em_sad")'); ck(name + ': whole pose slider scales head and body together', abs(z['h'] / h0 - 1.02 * 1.10) < 1e-6 and E(p, '__PE.D.frames.justin.em_sad.sAdj') == 1.1)
+        p.evaluate('__PE.pick("tnb","tk_ask")'); p.click('#unconfirm'); p.fill('#slH', '95'); p.dispatch_event('#slH', 'input'); ck(name + ': a slider on an unchecked pose checks it', E(p, '__PE.isOk("tnb","tk_ask")') and E(p, '__PE.D.frames.tnb.tk_ask.hAdj') == .95)
+        v1 = E(p, '__PE.view')['s']; p.fill('#slZ', '0'); p.dispatch_event('#slZ', 'input'); ck(name + ': picture zoom shows the whole pose', E(p, '__PE.view')['s'] < v1 * .6); p.click('#zIn'); p.click('#zIn'); p.click('#zIn'); p.click('#zIn')
+        # a pinch (two fingers) must not move a line
+        mm = E(p, '__PE.marks("tnb","tk_ask")'); p.evaluate('''(()=>{const c=document.getElementById('cMark'),r=c.getBoundingClientRect(),f=(t,id,y)=>c.dispatchEvent(new PointerEvent(t,{pointerId:id,clientX:r.left+r.width/2,clientY:r.top+y,bubbles:true}));
+          c.setPointerCapture=()=>{};f('pointerdown',11,r.height*.3);f('pointerdown',12,r.height*.7);f('pointermove',11,r.height*.1);f('pointermove',12,r.height*.9);f('pointerup',11,r.height*.1);f('pointerup',12,r.height*.9);})()''')
+        ck(name + ': pinching moves no line', E(p, '__PE.marks("tnb","tk_ask")') == mm, (mm, E(p, '__PE.marks("tnb","tk_ask")')))
+        p.evaluate('__PE.pick("justin","em_sad")')
         p.locator('#cRes').scroll_into_view_if_needed(); p.screenshot(path=os.path.join(SHOTS, 'poses-pose-%s.png' % name), full_page=True)
         # everyone, height, head target
         p.evaluate('__PE.tab="Cast"'); p.select_option('#castPose', 'em_happy'); p.click('#chips button[data-id=amy]')
@@ -93,7 +102,7 @@ with sync_playwright() as pw:
         p.screenshot(path=os.path.join(SHOTS, 'poses-cast-%s.png' % name), full_page=True)
         n = E(p, '__PE.dirtyCount()'); ck(name + ': save button counts the changes', n > 100 and ('SAVE %d CHANGES' % n) in p.inner_text('#save'), p.inner_text('#save'))
         p.click('#save'); p.wait_for_function("document.getElementById('msg').textContent.indexOf('Saved')>=0", timeout=8000)
-        d = STORE['doc']; ck(name + ': save wrote the request file', d and d['version'] == 2 and d['target'] == {'amy': 90} and d['frames']['justin']['em_sad']['hAdj'] == 1.02 and d['frames']['amy']['em_happy']['ok'] is True, str(d)[:300])
+        d = STORE['doc']; ck(name + ': save wrote the request file', d and d['version'] == 2 and d['target'] == {'amy': 90} and d['frames']['justin']['em_sad']['hAdj'] == 1.02 and d['frames']['justin']['em_sad']['sAdj'] == 1.1 and d['frames']['amy']['em_happy']['ok'] is True, str(d)[:300])
         ck(name + ': checked poses carry the page numbers', abs(d['frames']['boppy']['tk_tell']['page']['headRows'] - E(p, '__PE.tomHead()')) < .03)
         ck(name + ': nothing left to save', E(p, '__PE.dirtyCount()') == 0)
         p.evaluate("localStorage.removeItem('aot-pose-draft')"); p.reload(); p.wait_for_function('window.__PE&&window.__PE.ready', timeout=60000)
