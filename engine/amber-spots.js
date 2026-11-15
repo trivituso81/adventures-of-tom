@@ -7,7 +7,7 @@
 // tiles that answer A without being made solid (already solid tiles, like water under the floating fish); lines = [speaker id, text].
 const AMBER_SPOTS=[
   // Chapter 1, Boppy's fishing spot (engine/plate.js HOLLOW_SPOT, SCENES.ch1Spot): the plum-sized block on the grey patch, tile (17,10).
-  {id:'ch1',map:'hollow',name:'Orange block',show:()=>true,found:'ch1-spot',solid:[[17,10]],
+  {id:'ch1',map:'hollow',name:'Orange block',show:()=>!flag('bb-hollow'),found:'ch1-spot',solid:[[17,10]],
     lines:[['grace','That\'s a dragonfly. It\'s inside an orange rock. Its wings are open and it\'s not moving.'],
       ['deedee','Look at the grass. It\'s grey. Just this bit, the size of my hand.'],
       ['tom','It isn\'t dried out. It\'s just grey. Like somebody took the green out.'],
@@ -21,22 +21,22 @@ const AMBER_SPOTS=[
   {id:'ch1-crumbs-c',map:'hollow',name:'Rhubarb crumbs',show:()=>!flag('ch1-tin'),found:'ch1-crumbs-c',solid:[],press:[[9,11],[10,11],[11,11],[12,11],[13,11],[14,11],[15,11],[16,11],[17,11],[18,11],[10,10],[11,10],[12,10],[13,10],[14,10],[15,10],[16,10]],
     lines:[['deedee','The crumbs lead around the pond, toward Boppy\'s fishing spot.']]},
   // Chapter 2, the grey lemon tree on the Griffith trail (GRIFFITH_SPOT, SCENES.ch2Lemon): the trunk (row 7) and the dirt circle (row 8).
-  {id:'ch2',map:'griffith',name:'Orange block',show:()=>STORY.chapter>=2&&!flag('ch6-clear'),found:'ch2-lemon',solid:[[3,7],[4,7],[3,8],[4,8]],
+  {id:'ch2',map:'griffith',name:'Orange block',show:()=>STORY.chapter>=2&&!flag('bb-griffith'),found:'ch2-lemon',solid:[[3,7],[4,7],[3,8],[4,8]],
     lines:[['tnb','Babe, look at that tree. It\'s grey. The leaves, the trunk, even the dirt. It looks like an old black and white movie.'],
       ['tom','There\'s one lemon on it. And the lemon is inside a block of something orange.'],
       ['tnb','It\'s not glass, and it\'s not glaze. I work with this kind of stuff all day and I have no idea what it is.']]},
   // Chapter 3, Sundial Hollow (SUNDIAL_SPOT, SCENES.ch3Hollow): the fish hangs over the water, which is already solid; A from the bank.
-  {id:'ch3',map:'sundial',name:'Orange block',show:()=>STORY.chapter>=3&&!flag('ch6-clear'),found:'ch3-hollow',solid:[],press:[[9,9],[10,9],[11,9]],
+  {id:'ch3',map:'sundial',name:'Orange block',show:()=>STORY.chapter>=3&&!flag('bb-sundial'),found:'ch3-hollow',solid:[],press:[[9,9],[10,9],[11,9]],
     lines:[['grace','It\'s inside an orange block, like the dragonfly. It\'s just hanging there. Nothing is holding it up!'],
       ['boppy','That fish jumped, and he never came down. Seventy-some years I\'ve been fishing, and I never saw a fish stay up.'],
       ['tom','It can\'t be moved. I tried one at the pond and one in California.']]},
   // Chapter 4, Soundstage 7 (STAGE7_*, SCENES.ch4Hat): TNB's wardrobe table (row 10) and the floor under the hanging block (row 9).
-  {id:'ch4',map:'stage7',name:'Orange block',show:()=>STORY.chapter>=4&&flag('ch4-rig')&&!flag('ch6-clear'),found:'ch4-hat',solid:[[8,9],[9,9],[10,9],[8,10],[9,10],[10,10]],
+  {id:'ch4',map:'stage7',name:'Orange block',show:()=>STORY.chapter>=4&&flag('ch4-rig')&&!flag('bb-stage7'),found:'ch4-hat',solid:[[8,9],[9,9],[10,9],[8,10],[9,10],[10,10]],
     lines:[['tnb','Babe. That\'s the hero hat. The cowboy wears it in every scene of the movie. And it\'s inside a big orange block!'],
       ['tom','It\'s just like the dragonfly, the lemon and the fish. And every one is bigger than the last.'],
       ['tnb','Well, hats off to whoever did this. No, really. I can\'t get the hat off.']]},
   // Chapter 5, the schoolyard kickball field (SCHOOL_BLOCK in engine/plate.js, SCENES.ch5Field): the block hangs over second base; the two tiles under it are solid.
-  {id:'ch5',map:'schoolyard',name:'Orange block',show:()=>STORY.chapter>=5&&(STORY.chapter>5||flag('ch5-pruitt'))&&!flag('ch6-clear'),found:'ch5-field',solid:[[18,8],[19,8]],
+  {id:'ch5',map:'schoolyard',name:'Orange block',show:()=>STORY.chapter>=5&&(STORY.chapter>5||flag('ch5-pruitt'))&&!flag('bb-schoolyard'),found:'ch5-field',solid:[[18,8],[19,8]],
     lines:[['amy','There it is. I put six cones around it. I didn\'t know what else to do. Cones are what we have.'],
       ['rose','The ball is in the SKY! And a SHOE!'],
       ['grace','That\'s Moss\'s sneaker. Moss kicked so hard that it flew off, and then the flash got the ball and the shoe together. Moss had to hop to the bus.'],

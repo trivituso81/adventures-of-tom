@@ -64,6 +64,14 @@ SPK.ball=(P)=>{
   ctx.fillStyle=g; ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fill();
 };
 
+// The ordinary red megaphone (chapter 6, scene 17): the Director's Cut after the break. Fields x,y (tile). A STAND-IN drawn in code.
+SPK.megaphone=(P)=>{
+  const cx=(P.x+.5)*T,gy=(P.y+.9)*T;
+  ctx.fillStyle='#20202a40'; ctx.beginPath(); ctx.ellipse(cx,gy,T*.28,T*.08,0,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='#c8281c'; ctx.beginPath(); ctx.moveTo(cx-T*.1,gy-T*.34); ctx.lineTo(cx+T*.26,gy-T*.5); ctx.lineTo(cx+T*.26,gy-T*.1); ctx.lineTo(cx-T*.1,gy-T*.2); ctx.closePath(); ctx.fill();
+  ctx.fillStyle='#f4ece0'; ctx.fillRect(cx+T*.02,gy-T*.4,T*.06,T*.24); ctx.fillStyle='#8a1410'; ctx.fillRect(cx-T*.22,gy-T*.3,T*.12,T*.09);
+};
+
 // Burnt flashbulbs in a row (Deedee's table). Fields x,y (tile of the first), n, gap (tiles), lit (how many are shown). Replaced by ch7-bulbs-six.
 SPK.bulbs=(P)=>{
   for(let i=0;i<Math.min(P.n,P.lit==null?P.n:P.lit);i++) {

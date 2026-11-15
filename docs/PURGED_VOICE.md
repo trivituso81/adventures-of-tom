@@ -175,3 +175,7 @@ Reworded by Tom's reports, so the old clips can never play: `grace|It's so brown
 ## 2026-11-14 (`bern1`): Bernadette rewrite, 21 clips
 
 Bernadette got a new personality, new words and her own voice key, so her 19 chapter 6 clips in the old shared `penny` voice can never play, and TNB's two reworded lines ("Babe, she has a corkboard with red string. I've never felt so seen." and "Noted. On a corkboard. With red string."). Spec: tools/clip-audit/purge-bern1.json (about 596 KB). All need a new recording. Her seven potluck clips were kept and moved to the `bernadette` key (tools/voice-library/rekey-bern1.json).
+
+## 2026-11-14 (`ch6s4`): 68 dialogue clips
+
+Chapter 6 was rebuilt to the locked script, so the old wording (old AfterBoss lines, the old Stage 7, Hollow, school yard and call lines) can never play. Full keys in `tools/clip-audit/purge-ch6s4.json` (`speaker|text`), about 2.2 MB, in `data/voice/dialog-ch4.js`, `ch5`, `ch7`, `ch22`, `ch25`, `ch26`, `ch28`. Audio is in git history (the parent of the `ch6s4` commit).

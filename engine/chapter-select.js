@@ -44,6 +44,7 @@ function chselStateBefore(n) {
   }
   const cond=v=>{ if(typeof v==='string') take(v); else if(Array.isArray(v)) v.forEach(k=>take(k)); else if(v&&typeof v==='object') for(const k in v) take(k,v[k]); };
   for(const t of TRIGGERS) { const w=t.when||{}; if(w.mode!=='full'||!(w.chapter<n)) continue; cond(w.flag); cond(w.notFlag); }
+  if(n>6) for(let i=gives.length-1;i>=0;i--) if(['dragonflycoin','fishcoin','lemoncoin','hatcoin','kickcoin'].includes(gives[i])) gives.splice(i,1);   // chapter 6 uses all six coins up
   return {flags,gives};
 }
 

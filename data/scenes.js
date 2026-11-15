@@ -2378,7 +2378,8 @@ syncAwayNpcs(); // once at load too, so a visitor's second copy (Aunt Ellie at t
 // ch6-door (the secret knock), ch6-oak, ch6-board (the corkboard), ch6-ladder (Nara rides the bucket), ch6-boss,
 // battle:chairman ('win'), ch6-clear (Bready Mercury is back, with a gold coin), ch6-wrap (the Chairman leaves), ch6-oak-block (the picnic
 // block and grey circle show), ch6-disc (the discovery at the picnic table: bb-oakpark and bb-oakpark-run are set by the block break and the
-// squirrels' run up the Oak), ch6-street (2nd Ave: vests, gold ball), ch6-crock (TNB's crock on the island), ch6-done.
+// squirrels' run up the Oak), ch6-street (2nd Ave: vests, gold ball), ch6-crock (TNB's crock on the island), ch6-ret (the crock scene is over),
+// ch6-lemon, ch6-hat (the return scenes; bb-griffith, bb-stage7, bb-hollow, bb-sundial, bb-schoolyard are set by each block break), ch6-done (the call home).
 // ======================================================================================================
 const CH6={mode:'full',chapter:6};
 const CH6_CACHES=[
@@ -2847,9 +2848,9 @@ SCENES.ch6End=[
   {flag:'ch6-street'},
   {toast:'Goal: Tom’s house (3468). Put Bready Mercury back on the island.',time:5}
 ];
-// 15b. Tom's kitchen: TNB's crock for Bready Mercury, and the last pun. Chapter 6 ends here (story-ch06.md scene 15).
+// 15b. Tom's kitchen: TNB's crock for Bready Mercury, and the last pun. The return (scenes 16 to 18, ch6Lemon, ch6Hat, ch6Call) follows; chapter 6 ends in ch6Call.
 SCENES.ch6Crock=[
-  {flag:'ch6-done',value:'pending'},
+  {flag:'ch6-ret',value:'pending'},
   {place:'tnb',at:[10,5],dir:'right'}, {show:'tnb'},
   {walk:'tom',to:routeTo('tom',11,5),speed:.2}, {face:'tom',dir:'left'},
   {around:[918/78.4,322/78.4],tom:[11,5],at:{tnb:[12,4]}},
@@ -2869,6 +2870,141 @@ SCENES.ch6Crock=[
   ch4Kiss(),
   {talk:'Tom',lines:[`It was completely nuts. And I wouldn't have missed it.`]},
   {trace:'ch6-wrap'}, {hearts:'tom'},
+  {flag:'ch6-ret'},
+  {toast:'Goal: Griffith Park. Take the lemon coin to the grey lemon tree.',time:6}
+];
+// Scenes 16 to 18 (story-ch06.md): the return. Tom and TNB open the lemon and the hat with their own coins, then Tom calls home and the family opens the other three.
+// The break itself is engine/block-break.js (BB_SPOTS griffith, stage7, hollow, sundial, schoolyard); the call is engine/video-call.js.
+// Stand-ins, said plainly to Tom: Nara has no catch or sour-face frames (a hop stands in), the hill is not shown closing its eyes, the megaphone and the
+// lemon, dragonfly and kickball are drawn in code, Boppy is not shown soaked and Rose's two-handed coin pose is not used.
+const ch6Hop=(who,arc,time)=>({hop:who,from:()=>{ const p=position(sceneActor(who)); return [p.x,p.y]; },to:()=>{ const p=position(sceneActor(who)); return [p.x,p.y]; },time:time||.5,arc:arc||26});
+const ch6Coin=item=>({call:()=>{ const i=bag.indexOf(item); if(i>=0) bag.splice(i,1); sfx.pickup&&sfx.pickup(); }});
+// 16. The lemon (Griffith Park, below the Observatory).
+SCENES.ch6Lemon=[
+  {flag:'ch6-lemon',value:'pending'},
+  {around:[3.6,7.9],size:[2.2,1.1]},
+  {cam:[3.9,7.6]}, {zoom:1.5,time:.8}, {wait:.3},
+  {talk:'Tom',lines:[`This coin has flown nine thousand nine hundred miles in my pocket, and it never earned one SkyMile.`]},
+  {talk:'TNB',lines:[`Then give it somewhere to land, babe.`]},
+  ch6Coin('lemoncoin'),
+  // Nobody speaks from the click until the colour is back. Nara jumps for the lemon as it falls (the block falls apart 7.1 s in, the lemon lands about 8.1 s).
+  {all:[{blockbreak:'griffith'},{seq:[{wait:7.7},ch6Hop('nara',30,.5)]}]},
+  {flag:'bb-griffith'},
+  {talk:'Tom',lines:[`It worked! It worked on purpose!`]},
+  {talk:'TNB',lines:[`Look at her face. That dog has no zest for it at all.`]},
+  {hearts:'nara'},
+  {talk:'TNB',lines:[`He's a hill again. Goodnight, sir. I'm still coming up for a nap on Sunday.`]},
+  {talk:'Tom',lines:[`He liked the naps.`]},
+  {talk:'TNB',lines:[`I know. That's why I'm going.`]},
+  {cam:null}, {zoom:1,time:.8},
+  {flag:'ch6-lemon'},
+  {toast:'Goal: Soundstage 7. TNB has a hat to open.',time:6}
+];
+// 17. The hat (Soundstage 7).
+SCENES.ch6Hat=[
+  {flag:'ch6-hat',value:'pending'},
+  {call:()=>ch4Table(0)},
+  {place:'tom',at:[9,11],dir:'up'}, {place:'tnb',at:[8,11],dir:'up'}, {place:'nara',at:[10,11],dir:'up'},
+  {cam:[9.2,9.6]}, {zoom:1.4,time:.7}, {wait:.4},
+  {talk:'TNB',lines:[`My first award. I've had it for nine days.`]},
+  {talk:'Tom',lines:[`You don't have to use it. We could look for another way.`]},
+  {talk:'TNB',lines:[`Babe. There's a hat stuck in a block, and I'm wardrobe. It was an honor just to be nominated.`]},
+  ch6Coin('hatcoin'),
+  {blockbreak:'stage7'},
+  {flag:'bb-stage7'},
+  {talk:'TNB',lines:[`And THAT is why you put the table back.`]},
+  {prop:'mega',kind:'megaphone',set:{map:'stage7',x:13,y:11,show:true}},
+  {walk:'tnb',to:routeTo('tnb',12,11),speed:.2}, {face:'tnb',dir:'right'}, {wait:.3},
+  {call:()=>sfx.pickup&&sfx.pickup()},
+  {walk:'tnb',to:routeTo('tnb',16,9),speed:.2}, {propTo:'mega',field:'x',to:16.5,time:.1}, {prop:'mega',kind:'megaphone',set:{y:8.4}},
+  {talk:'TNB',lines:[`Great take.`]},
+  {walk:'tnb',to:routeTo('tnb',9,11),speed:.2}, {face:'tnb',dir:'up'},
+  {talk:'Tom',lines:[`You just gave away the only award you ever won.`]},
+  {talk:'TNB',lines:[`I've still got the gold steamer. And I've got a babe who flew out to watch me work. I'm still on a streak.`]},
+  {cam:null}, {zoom:1,time:.8},
+  {flag:'ch6-hat'},
+  {toast:'Goal: Tom\'s porch. Call home.',time:6}
+];
+// 18. The call home. Tom on his porch; the three Long Island scenes fill the screen with Tom and TNB in the corner (engine/video-call.js).
+const CH6_FAM=(map)=>({
+  hollow:[{id:'rose',at:[16,11],dir:'right'},{id:'deedee',at:[17,12],dir:'up'},{id:'grace',at:[15,12],dir:'right'},{id:'boppy',at:[19,11],dir:'left'},{id:'amy',at:[18,12],dir:'up'}],
+  sundial:[{id:'boppy',at:[10,10],dir:'up'},{id:'rose',at:[11,10],dir:'up'},{id:'deedee',at:[9,10],dir:'up'},{id:'grace',at:[12,10],dir:'up'},{id:'amy',at:[13,10],dir:'up'}],
+  schoolyard:[{id:'amy',at:[17,9],dir:'right'},{id:'grace',at:[19,10],dir:'up'},{id:'rose',at:[16,10],dir:'up'},{id:'deedee',at:[20,9],dir:'left'},{id:'boppy',at:[21,10],dir:'left'}]})[map];
+SCENES.ch6Call=[
+  {flag:'ch6-done',value:'pending'},
+  {walk:'tom',to:routeTo('tom',6,17),speed:.2}, {face:'tom',dir:'down'},
+  {place:'tnb',at:[7,17],dir:'down'}, {place:'nara',at:[5,17],dir:'down'},
+  {prop:'ball',kind:'ball',set:{map:'jpark',x:5,y:17.3,z:0,show:true}},
+  {wait:.5}, {call:()=>sfx.pickup&&sfx.pickup()},   // Tom makes a video call; Nara is asleep on the gold ball
+  {talk:'Deedee',lines:[`My favorite son! Did you eat?`]},
+  {talk:'Tom',lines:[`Mom, get everybody. Rose's coin, Dad's coin and Amy's coin. I know what they're for!`]},
+  {talk:'Deedee',lines:[`Slow down. You sound like your father with a fish.`]},
+  {talk:'Tom',lines:[`Every coin goes back into the little round hole in its own block. The block breaks, the color comes back, and everything that woke up goes back to normal. Nara figured it out.`]},
+  {talk:'Grace',lines:[`The round hole is where the coin came OUT! Tata, I drew that hole on every single page!`]},
+  {talk:'Deedee',lines:[`Then we're going to the pond. All of us, together. Amy, hold the phone up so your brother can see.`]},
+  // The pond
+  {fade:'out',time:.6},
+  {callto:{map:'hollow',view:[17,13],cast:CH6_FAM('hollow')}}, {callframe:true},
+  {cam:[17.2,10.9]}, {zoom:1.55,time:.01},
+  {fade:'in',time:.7},
+  {talk:'Rose',lines:[`But it's my treasure.`]},
+  {talk:'Deedee',lines:[`Cozy Rosie, that dragonfly has been stuck in there a long time.`]},
+  {face:'rose',dir:'up'}, {wait:.8},
+  {talk:'Rose',lines:[`...Okay. Fly, bug.`]},
+  ch6Coin('dragonflycoin'),
+  {blockbreak:'hollow'},
+  {flag:'bb-hollow'},
+  {talk:'Rose',lines:[`It's a GUMBALL MACHINE! You put the coin in and the bug comes out!`]},
+  {talk:'Grace',lines:[`That's not how gumball machines work.`]},
+  {talk:'Rose',lines:[`It is NOW.`]},
+  {all:[ch6Hop('rose',34,.5),{seq:[{wait:.2},ch6Hop('rose',34,.5)]}]},
+  {talk:'Tom',lines:[`I saw it! Amy, hold the phone still!`]},
+  {talk:'Amy',lines:[`I AM holding it still. Rose is jumping.`]},
+  // Sundial Hollow
+  {fade:'out',time:.6},
+  {callto:{map:'sundial',view:[10,12],cast:CH6_FAM('sundial')}},
+  {cam:[10.5,8.9]}, {zoom:1.4,time:.01},
+  {fade:'in',time:.7},
+  {talk:'Boppy',lines:[`Gold like my teeth. Best thing I ever caught.`]},
+  {talk:'Rose',lines:[`Boppy, you have to put it in.`]},
+  {talk:'Boppy',lines:[`Have to? I WANT to. Gold is for keeping. Fish are for jumping.`]},
+  ch6Coin('fishcoin'),
+  {blockbreak:'sundial'},
+  {flag:'bb-sundial'},
+  {talk:'Boppy',lines:[`...He was a small one anyway.`]},
+  {talk:'Deedee',lines:[`You gave away your gold, hubby.`]},
+  {talk:'Boppy',lines:[`I've got plenty left.`]},   // he grins and taps a gold tooth (no frame for it yet)
+  {talk:'Deedee',lines:[`I paid for those.`]},
+  // The kickball field
+  {fade:'out',time:.6},
+  {callto:{map:'schoolyard',view:[18,12],cast:CH6_FAM('schoolyard')}},
+  {cam:[18.5,7.9]}, {zoom:1.3,time:.01},
+  {fade:'in',time:.7},
+  {talk:'Amy',lines:[`My one gold star.`]},
+  {talk:'Grace',lines:[`Mom, you give out forty of those a week.`]},
+  {talk:'Amy',lines:[`I give them out. Nobody ever gave ME one.`]},
+  {talk:'Amy',lines:[`...Moss needs his shoe.`]},
+  ch6Coin('kickcoin'),
+  {all:[{blockbreak:'schoolyard'},{seq:[{wait:8.1},ch6Hop('amy',30,.5)]}]},
+  {flag:'bb-schoolyard'},
+  {talk:'Amy',lines:[`Monday morning just got a lot easier to explain.`]},
+  {talk:'TNB',lines:[`Amy! Put me down for nine today. And put Tom down for eight.`]},
+  {talk:'Amy',lines:[`Nine? I'm not counting yours. You're a professional.`]},
+  // The end of the call
+  {talk:'Grace',lines:[`That's all six. Tata, I need a bigger chart.`]},
+  {talk:'Deedee',lines:[`Good. Now who is DOING this? Somebody is going around with a flashbulb.`]},
+  {talk:'Tom',lines:[`I don't know yet, Mom. I have three more bulbs for your drawer.`]},
+  {talk:'Deedee',lines:[`The drawer is ready.`]},
+  {talk:'Grace',lines:[`Tata, one more thing. The library is WHISPERING. Like actually. Page says it's fine. It's NOT fine. Come home.`]},
+  {fade:'out',time:.6},
+  {callback:true}, {callframe:false}, {cam:null}, {zoom:1,time:.01},
+  {fade:'in',time:.7},
+  {talk:'TNB',lines:[`The library is whispering. Is that not just... its job?`]},
+  {talk:'Tom',lines:[`Not on Long Island. On Long Island, the library shushes YOU.`]},
+  {wait:.6},
+  {talk:'Tom',lines:[`They did all three, and I watched it on a phone.`]},
+  {talk:'TNB',lines:[`Then go and watch the next one in person. I'll feed Bready. Fifty and fifty, and I'll sing.`]},
+  {prop:'ball',hide:true},
   {party:null},
   {fade:'out',time:.8}, {card:6,done:true,time:3.4}, {flag:'ch6-done'}, {fade:'in',time:.8},
   {save:true},
@@ -2887,7 +3023,10 @@ TRIGGERS.push(
   {id:'ch6-after',map:'crown',when:{...CH6,flag:{'battle:chairman':'win'},notFlag:'ch6-clear'},scene:'ch6AfterBoss'},
   {id:'ch6-discovery',map:'oakpark',when:{...CH6,flag:'ch6-clear',notFlag:'ch6-disc'},scene:'ch6Discovery'},
   {id:'ch6-end',map:'jpark',when:{...CH6,flag:'ch6-disc',notFlag:'ch6-street'},scene:'ch6End'},
-  {id:'ch6-crock',map:'tomhouse',when:{...CH6,flag:'ch6-street',notFlag:'ch6-done'},scene:'ch6Crock'}
+  {id:'ch6-crock',map:'tomhouse',when:{...CH6,flag:'ch6-street',notFlag:'ch6-ret'},scene:'ch6Crock'},
+  {id:'ch6-lemon',map:'griffith',at:[1,1,8,9],when:{...CH6,flag:'ch6-ret',notFlag:'ch6-lemon'},scene:'ch6Lemon'},
+  {id:'ch6-hat',map:'stage7',when:{...CH6,flag:'ch6-lemon',notFlag:'ch6-hat'},scene:'ch6Hat'},
+  {id:'ch6-call',map:'jpark',when:{...CH6,flag:'ch6-hat',notFlag:'ch6-done'},scene:'ch6Call'}
 );
 // The park holds still until Bernadette's briefing; each lookout holds still until its story fight.
 const CH6_LOOKOUT_FLAG={peanutgallery:'ch6-play',twigspy:'ch6-garden',cheekstuffer:'ch6-picnic'};

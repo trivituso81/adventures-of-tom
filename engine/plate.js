@@ -392,12 +392,18 @@ function drawHollowCrumbs(time) {
 // Boppy's fishing spot, chapter 1 scene 7: a hand-sized grey patch of grass, a plum-sized orange block with a dragonfly in it sitting on the patch, and a
 // burnt flashbulb beside them (Deedee pockets it in ch1Spot, flag ch1-bulb). The patch and block stay until the family comes back after chapter 6.
 // Centres in plate art px (64 per tile), width in art px. Built from art/props/hollow/ch1_*.webp (tools/art-library/bake_closeup_ch1.py).
+// Where one of the five old blocks (chapters 1 to 5) stands in chapter 6's return (engine/block-break.js BB_SPOTS): 'on' = standing, 'run' = the break is
+// playing (block-break.js draws the grey circle, the block and the colour ring), 'done' = opened. ring = how far the colour ring has run (art px).
+const bbState=id=>(typeof BB!=='undefined'&&BB.run&&BB.run.id===id)?'run':(typeof flag==='function'&&flag('bb-'+id)?'done':'on');
+const bbRing=id=>typeof bbRingR==='function'?bbRingR(currentMap.id):-1;
 const HOLLOW_SPOT=[['hollow/ch1_patch',1100,700,100,null],['hollow/ch1_block',1100,682,52,null],['hollow/ch1_bulb',1166,696,20,'ch1-bulb']];
-function drawHollowSpot() {
+function drawHollowSpot(after) {
   if(typeof flag!=='function') return;
-  const s=T/64;
+  const s=T/64,st=bbState('hollow');
+  if((st==='run')!==!!after) return;   // during the break these are drawn after the grey circle (bbUnderDraw), so it does not cover them
   for(const [id,x,y,w,gone] of HOLLOW_SPOT) {
     if((gone&&flag(gone))||!PROPART.ready(id)) continue;
+    if(st==='done'||(st==='run'&&id!=='hollow/ch1_bulb')) continue;   // the patch and the block go with the break
     PROPART.draw(id,x*s,y*s,{w:w*s});
   }
 }
@@ -405,14 +411,17 @@ function drawHollowSpot() {
 // grapefruit-sized orange block. Both stay until the family comes back after chapter 6. Centres in plate art px (64 per tile), width in art px.
 // Built from art/props/griffith/ch2_*.webp (tools/art-library/bake_closeup_ch2.py).
 const GRIFFITH_SPOT=[['griffith/ch2_tree',225,455,128],['griffith/ch2_block',247,445,44]];
-function drawGriffithSpot() {
-  if(typeof flag!=='function'||typeof STORY==='undefined'||STORY.chapter<2||flag('ch6-clear')) return;
-  const s=T/64;
-  for(const [id,x,y,w] of GRIFFITH_SPOT) { if(!PROPART.ready(id)) continue; PROPART.draw(id,x*s,y*s,{w:w*s}); }
+function drawGriffithSpot(after) {
+  if(typeof flag!=='function'||typeof STORY==='undefined'||STORY.chapter<2) return;
+  const s=T/64,st=bbState('griffith'),ring=st==='run'?bbRing('griffith'):-1;
+  if((st==='run')!==!!after) return;
+  const colour=st==='done'||(st==='run'&&ring>=28);   // the tree turns back to colour when the ring reaches the trunk
+  if(colour) { if(PROPART.ready('griffith/ch6_tree_color')) PROPART.draw('griffith/ch6_tree_color',225*s,455*s,{w:128*s}); return; }
+  for(const [id,x,y,w] of GRIFFITH_SPOT) { if(!PROPART.ready(id)) continue; if(id==='griffith/ch2_block'&&st!=='on') continue; PROPART.draw(id,x*s,y*s,{w:w*s}); }
 }
 // Sundial Hollow, chapter 3 scene 8 (ch3Hollow): the clearing has no colour, in a circle with a clean edge (reeds, sundial and water), and a
 // fish frozen mid-jump hangs in a watermelon-sized orange block in the air over the grey water, higher than Tom's head. A burnt flashbulb
-// sits on top of the sundial until Rose takes it (flag ch3-bulb). All of it stays until the family comes back after chapter 6 (ch6-clear).
+// sits on top of the sundial until Rose takes it (flag ch3-bulb). All of it stays until the family opens the block in chapter 6 (flag bb-sundial, engine/block-break.js).
 // The grey circle is a STAND-IN made in code (the plate itself, turned grey inside the circle) until the Library picture ch3-hollow-grey
 // is approved. Centres in plate art px (64 per tile), width in art px. Block from art/props/sundial/ch3_block.webp (bake_closeup_ch3.py);
 // the bulb reuses chapter 1's hollow/ch1_bulb.
@@ -428,32 +437,37 @@ function sundialGreyCanvas(img) {
     g.putImageData(d,0,0); } catch(e) { return null; }
   greyPlates.set(img,c); return c;
 }
-function drawSundialSpot(map) {
-  if(typeof flag!=='function'||typeof STORY==='undefined'||STORY.chapter<3||flag('ch6-clear')) return;
+function drawSundialSpot(map,after) {
+  if(typeof flag!=='function'||typeof STORY==='undefined'||STORY.chapter<3) return;
+  const st=bbState('sundial');
+  if(st==='done'||(st==='run')!==!!after) return;
   const s=T/64,pl=typeof plateFor==='function'?plateFor(map):null;
   const gc=pl&&pl.img&&pl.img.naturalWidth?sundialGreyCanvas(pl.img):null;
-  if(gc) { const k=map.w*T/gc.width,G=SUNDIAL_GREY;
+  if(gc&&st==='on') { const k=map.w*T/gc.width,G=SUNDIAL_GREY;
     ctx.save(); ctx.beginPath(); ctx.arc(G.cx*s,G.cy*s,G.r*s,0,Math.PI*2); ctx.clip();
     ctx.imageSmoothingEnabled=true; ctx.drawImage(gc,0,0,gc.width*k,gc.height*k); ctx.imageSmoothingEnabled=false; ctx.restore(); }
   for(const [id,x,y,w,gone] of SUNDIAL_SPOT) {
     if((gone&&flag(gone))||!PROPART.ready(id)) continue;
+    if(id==='sundial/ch3_block'&&st!=='on') continue;
     if(id==='sundial/ch3_block') ellipse(x*s,(y+78)*s,24*s,5*s,'#20202a38');   // a faint shadow on the water below: nothing is holding it up
     PROPART.draw(id,x*s,y*s,{w:w*s});
   }
 }
 // Soundstage 7, chapter 4 scene 8 (ch4Hat): once the lights are on, a circle of the floor has no colour, TNB's wardrobe table stands in it, and the
 // hero cowboy hat hangs in a beach-ball-sized orange block above the table. When the table is pulled away the block stays where it was in the air
-// (a faint shadow shows on the floor). All of it stays until the family comes back after chapter 6 (ch6-clear). The grey circle is a STAND-IN made in
+// (a faint shadow shows on the floor). All of it stays until the block is opened in chapter 6 (flag bb-stage7). The grey circle is a STAND-IN made in
 // code until the Library picture ch4-stage7-grey is approved; the table is drawn in code too. Centres in plate art px (64 per tile).
 // Block from art/props/stage7/ch4_block.webp (tools/art-library/bake_story_ch4.py).
 const STAGE7_GREY={cx:590,cy:625,r:178}, STAGE7_BLOCK={x:590,y:528,w:118}, STAGE7_TABLE={x:590,y:624,w:156,slide:-150};
 let ch4TableTo=0, ch4TableAt=0, ch4TableT=0;
 function ch4Table(to) { ch4TableTo=to; }   // scene calls: ch4Table(1) slides the table out from under the block, ch4Table(0) slides it back
-function drawStage7Spot(map) {
-  if(typeof flag!=='function'||typeof STORY==='undefined'||STORY.chapter<4||!flag('ch4-rig')||flag('ch6-clear')) return;
+function drawStage7Spot(map,after) {
+  if(typeof flag!=='function'||typeof STORY==='undefined'||STORY.chapter<4||!flag('ch4-rig')) return;
+  if((bbState('stage7')==='run')!==!!after) return;
+  const st=bbState('stage7'),ring=st==='run'?bbRing('stage7'):-1,warm=st==='done'||(st==='run'&&ring>=110);   // the table keeps standing; it turns warm when the ring reaches it
   const s=T/64,pl=typeof plateFor==='function'?plateFor(map):null;
   const gc=pl&&pl.img&&pl.img.naturalWidth?sundialGreyCanvas(pl.img):null;
-  if(gc) { const k=map.w*T/gc.width,G=STAGE7_GREY;
+  if(gc&&st==='on') { const k=map.w*T/gc.width,G=STAGE7_GREY;
     ctx.save(); ctx.beginPath(); ctx.arc(G.cx*s,G.cy*s,G.r*s,0,Math.PI*2); ctx.clip();
     ctx.imageSmoothingEnabled=true; ctx.drawImage(gc,0,0,gc.width*k,gc.height*k); ctx.imageSmoothingEnabled=false; ctx.restore(); }
   const now=performance.now(), dt=Math.min(.1,(now-(ch4TableT||now))/1000); ch4TableT=now;
@@ -463,37 +477,47 @@ function drawStage7Spot(map) {
   // The table: a plain grey wardrobe table, top, front edge and four legs.
   const top=Tb.y-34,hw=Tb.w/2;
   ellipse(tx*s,(Tb.y+44)*s,hw*.95*s,9*s,'#20202a30');
-  ctx.fillStyle='#474953'; for(const lx of [-hw+8,hw-14,-hw+22,hw-28]) ctx.fillRect((tx+lx)*s,(top+14)*s,6*s,(Tb.y+40-top-14)*s);
-  ctx.fillStyle='#c4c6d0'; ctx.fillRect((tx-hw)*s,top*s,Tb.w*s,10*s);
-  ctx.fillStyle='#8a8c98'; ctx.fillRect((tx-hw)*s,(top+10)*s,Tb.w*s,9*s);
-  ctx.strokeStyle='#33353e'; ctx.lineWidth=2*s; ctx.strokeRect((tx-hw)*s,top*s,Tb.w*s,19*s);
+  ctx.fillStyle=warm?'#5a4030':'#474953'; for(const lx of [-hw+8,hw-14,-hw+22,hw-28]) ctx.fillRect((tx+lx)*s,(top+14)*s,6*s,(Tb.y+40-top-14)*s);
+  ctx.fillStyle=warm?'#c89a62':'#c4c6d0'; ctx.fillRect((tx-hw)*s,top*s,Tb.w*s,10*s);
+  ctx.fillStyle=warm?'#9a6e42':'#8a8c98'; ctx.fillRect((tx-hw)*s,(top+10)*s,Tb.w*s,9*s);
+  ctx.strokeStyle=warm?'#4a3220':'#33353e'; ctx.lineWidth=2*s; ctx.strokeRect((tx-hw)*s,top*s,Tb.w*s,19*s);
+  if(st!=='on') return;   // the break (engine/block-break.js) draws the block, the pieces and the hat on its stand
   if(ch4TableAt>.05) ellipse(B.x*s,(Tb.y+34)*s,40*s,7*s,'#20202a38');   // nothing is holding the block up
   PROPART.draw('stage7/ch4_block',B.x*s,B.y*s,{w:B.w*s});
 }
 // The schoolyard, chapter 5 (ch5Pruitt on): the kickball field. A circle of the plate has no colour (second base is in it), six orange cones stand in a ring
 // around it, and the orange block with the red kickball and Moss's sneaker hangs in the air above second base, higher than Tom can reach. All of it stays until
-// the family comes back after chapter 6 (ch6-clear). The grey circle and the cones are STAND-INS made in code until a Library picture of the field is approved
+// the block is opened in chapter 6 (flag bb-schoolyard). The grey circle and the cones are STAND-INS made in code until a Library picture of the field is approved
 // (the built schoolyard plate has no kickball field). Centres in plate art px (64 per tile). Block from art/props/schoolyard/ch5_block.webp (tools/art-library/bake_story_ch5.py).
 const SCHOOL_GREY={cx:1184,cy:590,r:176}, SCHOOL_BLOCK={x:1184,y:372,w:124};
-function drawSchoolSpot(map) {
-  if(typeof flag!=='function'||typeof STORY==='undefined'||STORY.chapter<5||(STORY.chapter===5&&!flag('ch5-pruitt'))||flag('ch6-clear')) return;
+function drawSchoolSpot(map,after) {
+  if(typeof flag!=='function'||typeof STORY==='undefined'||STORY.chapter<5||(STORY.chapter===5&&!flag('ch5-pruitt'))) return;
+  const st=bbState('schoolyard'),ring=st==='run'?bbRing('schoolyard'):-1;
+  if(st==='done'||(st==='run')!==!!after) return;
   const s=T/64,pl=typeof plateFor==='function'?plateFor(map):null;
   const gc=pl&&pl.img&&pl.img.naturalWidth?sundialGreyCanvas(pl.img):null;
   const G=SCHOOL_GREY;
-  if(gc) { const k=map.w*T/gc.width;
+  if(gc&&st==='on') { const k=map.w*T/gc.width;
     ctx.save(); ctx.beginPath(); ctx.arc(G.cx*s,G.cy*s,G.r*s,0,Math.PI*2); ctx.clip();
     ctx.imageSmoothingEnabled=true; ctx.drawImage(gc,0,0,gc.width*k,gc.height*k); ctx.imageSmoothingEnabled=false; ctx.restore(); }
   // Six cones in a ring (the ring is a flat ellipse, as the ground is seen from above and in front).
   for(let i=0;i<6;i++) {
     const a=i/6*Math.PI*2+.3,cx=G.cx+Math.cos(a)*(G.r+10),cy=G.cy+Math.sin(a)*(G.r*.62+8);
+    if(st==='run'&&ring>=Math.hypot(cx-SCHOOL_BLOCK.x,cy-SCHOOL_BLOCK.y)) continue;   // the cones go as the ring passes
     ellipse(cx*s,(cy+3)*s,13*s,4*s,'#20202a40');
     ctx.fillStyle='#e8651c'; ctx.beginPath(); ctx.moveTo((cx-11)*s,(cy+2)*s); ctx.lineTo((cx-3)*s,(cy-30)*s); ctx.lineTo((cx+3)*s,(cy-30)*s); ctx.lineTo((cx+11)*s,(cy+2)*s); ctx.closePath(); ctx.fill();
     ctx.fillStyle='#f4efe4'; ctx.beginPath(); ctx.moveTo((cx-7)*s,(cy-12)*s); ctx.lineTo((cx+7)*s,(cy-12)*s); ctx.lineTo((cx+5)*s,(cy-21)*s); ctx.lineTo((cx-5)*s,(cy-21)*s); ctx.closePath(); ctx.fill();
     ctx.fillStyle='#c44d12'; ctx.fillRect((cx-13)*s,(cy+1)*s,26*s,4*s);
   }
+  if(st!=='on') return;
   const B=SCHOOL_BLOCK;
   ellipse(B.x*s,(G.cy+14)*s,46*s,8*s,'#20202a38');   // nothing is holding it up
   PROPART.draw('schoolyard/ch5_block',B.x*s,B.y*s,{w:B.w*s});
+}
+// During a break engine/block-break.js draws the grey circle over the plate; the props that stand in it are drawn after it from here.
+function bbUnderDraw(id,map) {
+  if(id==='hollow') drawHollowSpot(true); else if(id==='griffith') drawGriffithSpot(true); else if(id==='sundial') drawSundialSpot(map,true);
+  else if(id==='stage7') drawStage7Spot(map,true); else if(id==='schoolyard') drawSchoolSpot(map,true);
 }
 function plateLive(map,time) {
   if(map&&PLATE_SIGNS[map.id]) drawPlateSigns(PLATE_SIGNS[map.id]);

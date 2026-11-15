@@ -79,3 +79,5 @@ if '--write-spec' in sys.argv:
     for c in fallback: dk.setdefault(c, []).append('attack')
     for c, v in replaced.items(): dk.setdefault(c, []).extend(v)
     json.dump({'deadKinds': dk, 'orphanClips': orph, 'orphanDialog': od}, open(out, 'w'), indent=1); print('spec written', out)
+# OD_JSON=<path> writes check 4 keys in full as a purge spec for purge_unused.js (the printout above cuts them at 120 characters)
+if os.environ.get('OD_JSON'): json.dump({'orphanDialog': od}, open(os.environ['OD_JSON'], 'w'), indent=1, ensure_ascii=False)

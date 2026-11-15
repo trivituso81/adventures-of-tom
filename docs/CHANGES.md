@@ -1,3 +1,14 @@
+## ch6s4 (2026-11-14): chapter 6 stage 4: the lemon, the hat and the call home; all five old blocks open one by one and the chapter ends after the call
+
+Tom (11-14): "Continue the chapter 6 build at stage 4 (scenes 16 to 18)." Chairman fight and crock scene unchanged.
+
+- Scenes: `ch6Lemon` (Griffith Park), `ch6Hat` (Soundstage 7), `ch6Call` (the video call from Tom's porch with three Long Island scenes: Rivituso Hollow, Sundial Hollow, the school yard; family NPCs placed per map, `engine/video-call.js`). Harvest srcs ch6Lemon, ch6Hat, ch6Call. Chapter end moved after scene 18.
+- Blocks: the `ch6-clear` removal of the five old blocks is gone. `engine/block-break.js` has BB_SPOTS for griffith, stage7, hollow, sundial, schoolyard; the old props draw from `engine/plate.js` and, during a break, draw over the grey circle (`bbUnderDraw`). Done flags bb-griffith, bb-stage7, bb-hollow, bb-sundial, bb-schoolyard drive the aftermath.
+- Art: `tools/art-library/bake_story_ch6b.py` bakes the colour tree, hat stand, fish splash and sneaker. STAND-INS: the lemon, dragonfly and kickball are drawn in code (the keyed cutouts were unusable); Nara has no catch or sour-face frames (a hop stands in); the megaphone is code-drawn.
+- Voice: 68 dialogue clips that could never play were purged (`tools/clip-audit/purge-ch6s4.json`, see docs/PURGED_VOICE.md). `unused_voice.py` now reports 0 on all checks and can write the full keys with `OD_JSON=<path>`.
+- Test: `python3 tools/ch6return_test.py /tmp/ret [lemon|hat|call]` plays the three scenes in portrait and landscape (no page errors, flags set, monsters freed, call returns to Tom's porch).
+- Not done: talk and emotion rows for the new lines still use existing faces (no new rows added); ch6Park picnic and ch6Kitchen landscape frames not re-looked.
+
 ## ch6s3 (2026-11-14): chapter 6 stage 3: scenes 0 to 15 rewritten to the locked script (picnic tables, the Discovery, the gold ball, the crock)
 - Scenes ch6Arrive to ch6Crock in data/scenes.js now follow claude/story-ch06.md scenes 1 to 15 (new, changed and kept lines, exact text). Old long-coat lines, Narrator boxes and the library text are gone from these scenes (library text and scenes 16 to 18 are stage 4).
 - New: ch6Discovery (trigger on arrival at Old Oak Park after the crown): the coin lies on the table, Nara drops it, the block breaks (engine/block-break.js), the Chairman is cut off mid-sentence by the colour, the squirrels run up the Old Oak (`{squirrelsrun}`, flag bb-oakpark-run). ch6End is the 2nd Ave vests and gold ball; ch6Crock is TNB's crock in Tom's kitchen (art/props/tomhouse/ch6_crock.webp, drawn on the island once ch6-crock is set).

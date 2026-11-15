@@ -448,7 +448,7 @@ const LE_AREAS=[
     monsters:SUNDIAL_MONSTER_SPOTS,
     objects:[
       ['sundial',11,12,2,2,'The sundial','An old stone sundial. It\'s grey all over, moss and all, like the reeds around it.',
-        {when:[{flag:'ch6-clear',text:'An old stone sundial, green with moss again. Boppy says it looks just like it did when he was nine.'}]}],
+        {when:[{flag:'bb-sundial',text:'An old stone sundial, green with moss again. Boppy says it looks just like it did when he was nine.'}]}],
       ['sign',8,15,1,1,'Mossy sign','SUNDIAL HOLLOW. Mind the moss.'],
       ['sign',14,6,1,1,'Pool marker','THE DEEP POOL. Depth: yes. No fishing. (Someone has crossed out NO.)'],
       ['bench',3,13,4,2,'Stone bench','Carved into the stone: WAITED HERE 1970. Under it, newer: STILL WAITING.']]},

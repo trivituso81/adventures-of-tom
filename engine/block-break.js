@@ -52,7 +52,45 @@ const BB_SPOTS={
       colors:['#b8782e','#3b5a9a','#c8541e','#3b5a9a','#5f7a34','#b8341c','#e0c070'],patch:[912,526,100,146,1010,520,142,150]}},
     freeAll:true,
     fixed:[{key:'cliff',id:'stacks/ord_cliff',w:62,x:416,base:314},{key:'know',id:'stacks/ord_know',w:62,x:1696,base:250},{key:'pop',id:'stacks/ord_pop',w:58,x:1056,base:1146}],
-    ordinary:{shusher:['stacks/ord_shusher',42],dogear:['stacks/ord_dogear',42]}}
+    ordinary:{shusher:['stacks/ord_shusher',42],dogear:['stacks/ord_dogear',42]}},
+  // The five blocks of chapters 1 to 5, opened in chapter 6 stage 4 (story-ch06.md scenes 16 to 18). Same sequence, same engine. Differences from the
+  // picnic table: `on` is a flag nothing ever sets (the old drawers in engine/plate.js draw the standing block, grey patch and props until the
+  // break starts, then hand over to this file); `ar` = the block picture's height over its width; `sy`/`sw` = where the block's shadow lies when it hangs
+  // in the air; `arc` = how high the coin hops into the hole; freeAll switches every encounter on the map off. keep.items = what the block held:
+  // {id|kind, w, from, to (feet, art px), t0 (s after the crack), dur, ease:'fall', bounce, life (s it lingers after landing), stay (still there
+  // afterwards)}. kind = a stand-in drawn in code (BBK below) for a picture that is not usable yet. The HOLE POSITION is a guess for hat, kickball and
+  // dragonfly: those block pictures show no dent.
+  hollow:{map:'hollow',on:'bb-never',done:'bb-hollow',
+    grey:{cx:1100,cy:700,r:52},
+    block:{id:'hollow/ch1_block',x:1100,y:682,w:52,ar:1.062,hole:[.5,.78],roll:[[1038,718],[1088,712]],arc:14},
+    coin:{r:6,close:'art/closeup/ch1-coin.webp?v=ch6s4'},
+    keep:{items:[{kind:'dragonfly',w:34,from:[1100,684],to:[1380,420],t0:.5,dur:3.2,fade:true}]},
+    freeAll:true,ordinary:{}},
+  griffith:{map:'griffith',on:'bb-never',done:'bb-griffith',
+    grey:{cx:226,cy:482,r:86},
+    block:{id:'griffith/ch2_block',x:247,y:445,w:44,ar:1.27,hole:[.49,.64],roll:[[190,494],[238,488]],arc:30,sy:494,sw:20},
+    coin:{r:7,close:'art/closeup/ch2-coin.webp?v=ch6s4'},
+    keep:{items:[{kind:'lemon',w:26,from:[247,452],to:[236,494],t0:.45,dur:.55,ease:'fall',life:.7}]},
+    freeAll:true,ordinary:{}},
+  sundial:{map:'sundial',on:'bb-never',done:'bb-sundial',
+    grey:{cx:720,cy:620,r:330},
+    block:{id:'sundial/ch3_block',x:672,y:462,w:84,ar:1.005,hole:[.42,.13],roll:[[596,692],[648,656]],arc:30,sy:540,sw:26},
+    coin:{r:8,close:'art/closeup/ch3-coin.webp?v=ch6s4'},
+    keep:{items:[{id:'sundial/ch6_fish',w:100,w0:40,from:[672,470],to:[672,642],t0:.4,dur:.7,ease:'fall',life:1.5}]},
+    freeAll:true,ordinary:{}},
+  stage7:{map:'stage7',on:'bb-never',done:'bb-stage7',
+    grey:{cx:590,cy:625,r:178},
+    block:{id:'stage7/ch4_block',x:590,y:528,w:118,ar:1.076,hole:[.86,.75],roll:[[520,598],[612,596]],arc:34},
+    coin:{r:8,close:'art/closeup/ch4-coin.webp?v=ch6s4'},
+    keep:{items:[{id:'stage7/ch6_hatstand',w:72,from:[590,586],to:[590,596],t0:0,dur:.45,ease:'fall',stay:true}]},
+    freeAll:true,ordinary:{}},
+  schoolyard:{map:'schoolyard',on:'bb-never',done:'bb-schoolyard',
+    grey:{cx:1184,cy:590,r:176},
+    block:{id:'schoolyard/ch5_block',x:1184,y:372,w:124,ar:1.235,hole:[.8,.78],roll:[[1088,608],[1150,600]],arc:150,sy:604,sw:44},
+    coin:{r:9,close:'art/closeup/ch5-coin.webp?v=ch6s4'},
+    keep:{items:[{kind:'kickball',w:34,from:[1172,392],to:[1148,602],t0:.2,dur:1.1,bounce:true,life:.9},
+      {id:'schoolyard/ch6_sneaker',w:36,from:[1202,392],to:[1186,600],t0:.4,dur:.8,ease:'fall',stay:true}]},
+    freeAll:true,ordinary:{}}
 };
 const BB_T={roll:2.4,close0:2.55,close1:4.45,still1:5.45,crack1:7.1,fall1:8.7,ringStart:8.7,shrink:.9,settle:.7,ringSpeed:330};
 const BB={run:null,t:0,stash:{},decor:{},shards:{},pre:null,runUp:null};
@@ -69,7 +107,7 @@ function bbClip(poly,nx,ny,c) {   // keep the side where nx*x+ny*y <= c
   return out;
 }
 function bbShards(spot) {
-  const B=spot.block,w=B.w,h=B.w*1.23,n=17,seeds=[];
+  const B=spot.block,w=B.w,h=B.w*(B.ar||1.23),n=17,seeds=[];
   for(let i=0;i<n;i++) seeds.push([(bbHash(i,3)-.5)*w*.92,(bbHash(i,7)-.5)*h*.92]);
   const hole=[(B.hole[0]-.5)*w,(B.hole[1]-.5)*h],cells=[];
   seeds.forEach((s,i)=>{ let poly=[[-w/2,-h/2],[w/2,-h/2],[w/2,h/2],[-w/2,h/2]];
@@ -171,8 +209,35 @@ function bbCartDraw(sp,t,s) {   // t < 0: the break is over; the cart is whereve
       ctx.save(); ctx.translate(cx,y); ctx.rotate((k%2?.25:-.25)*u); ctx.fillStyle=c.colors[k]; ctx.fillRect(-sw/2,-sh/2,sw,sh-2); ctx.fillStyle='#f4e6c0'; ctx.fillRect(-sw/2+6,sh/2-9,sw-12,5); ctx.fillStyle='#00000030'; ctx.fillRect(-sw/2,-sh/2,10,sh-2); ctx.restore(); }
     ctx.restore(); }
 }
+// ---- keep.items: what a block of chapters 1 to 5 held (see the BB_SPOTS note). Code-drawn stand-ins first. ----
+const BBK={};
+BBK.lemon=(x,y,w)=>{ const r=w/2; ctx.save(); ctx.translate(x,y-r*.8); ctx.fillStyle='#f0d020'; ctx.strokeStyle='#a88a10'; ctx.lineWidth=Math.max(1,w*.06);
+  ctx.beginPath(); ctx.ellipse(0,0,r,r*.78,0,0,Math.PI*2); ctx.fill(); ctx.stroke(); ctx.fillStyle='#b8a010'; ctx.beginPath(); ctx.arc(r,0,r*.14,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='#4a8a2a'; ctx.beginPath(); ctx.ellipse(-r*.1,-r*.82,r*.4,r*.16,-.5,0,Math.PI*2); ctx.fill(); ctx.restore(); };
+BBK.kickball=(x,y,w)=>{ const r=w/2; ctx.save(); ctx.translate(x,y-r); const g=ctx.createRadialGradient(-r*.3,-r*.3,1,0,0,r); g.addColorStop(0,'#f06a50'); g.addColorStop(.7,'#c8281c'); g.addColorStop(1,'#8a1410');
+  ctx.fillStyle=g; ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.fill(); ctx.strokeStyle='#f4ece0'; ctx.lineWidth=Math.max(1,w*.05); ctx.beginPath(); ctx.arc(0,0,r*.62,.4,2.6); ctx.stroke(); ctx.beginPath(); ctx.arc(0,0,r*.62,3.5,5.7); ctx.stroke(); ctx.restore(); };
+BBK.dragonfly=(x,y,w,u,age)=>{ const fl=Math.sin(age*58)*.5+.5; ctx.save(); ctx.translate(x,y); ctx.rotate(-.5); ctx.fillStyle='#3a5a8a'; ctx.strokeStyle='#243a5a'; ctx.lineWidth=Math.max(1,w*.03);
+  ctx.beginPath(); ctx.ellipse(0,0,w*.5,w*.05,0,0,Math.PI*2); ctx.fill(); ctx.beginPath(); ctx.arc(w*.5,0,w*.07,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='rgba(210,235,250,.62)'; for(const dx of [.1,-.1]) for(const sg of [-1,1]) { ctx.beginPath(); ctx.ellipse(w*dx,sg*w*(.12+.14*fl),w*.3,w*(.06+.05*fl),sg*.25,0,Math.PI*2); ctx.fill(); ctx.stroke(); } ctx.restore(); };
+function bbItemsDraw(sp,t,s) {   // t < 0: the break is over and stays over (only items with `stay`)
+  const F=BB_T.crack1;
+  for(const it of sp.keep.items) {
+    let u,age;
+    if(t<0) { if(!it.stay) continue; u=1; age=99; }
+    else { age=t-F-(it.t0||0); if(age<0) continue; u=bbClamp(age/it.dur,0,1); if(!it.stay&&!it.fade&&age>it.dur+(it.life||0)) continue; }
+    const k=it.ease==='fall'?u*u:(it.bounce?Math.min(1,u*1.6)*Math.min(1,u*1.6):bbEase(u));
+    let x=it.from[0]+(it.to[0]-it.from[0])*(it.bounce?Math.min(1,u*1.6):k),y=it.from[1]+(it.to[1]-it.from[1])*k;
+    if(it.bounce&&u>.62) { const v=(u-.62)/.38; y-=Math.abs(Math.sin(v*Math.PI*2))*(1-v)*30; }
+    if(it.fade) y-=Math.sin(u*Math.PI*3)*14*(it.kind==='dragonfly'?1:0);
+    let al=1; if(it.fade) al=1-bbClamp((u-.7)/.3,0,1); else if(!it.stay&&t>=0&&age>it.dur) al=bbClamp((it.dur+(it.life||0)-age)/.25,0,1);
+    const w=(it.w0!=null?it.w0+(it.w-it.w0)*k:it.w);
+    ctx.save(); ctx.globalAlpha=al;
+    if(it.kind) BBK[it.kind](x*s,y*s,w*s,u,age); else if(PROPART.ready(it.id)) { const im=PROPART.get(it.id),h=w*im.naturalHeight/im.naturalWidth; PROPART.draw(it.id,x*s,(y-h/2)*s,{w:w*s}); }
+    ctx.restore();
+  }
+}
 function bbKeepDraw(sp,t,s) {   // t < 0: the break is over and stays over
-  const k=sp.keep; if(!k) return; if(k.cart) return bbCartDraw(sp,t,s); const b=k.basket,F=BB_T.crack1,P=F+1.0,Q=P+.8;
+  const k=sp.keep; if(!k) return; if(k.cart) return bbCartDraw(sp,t,s); if(k.items) return bbItemsDraw(sp,t,s); const b=k.basket,F=BB_T.crack1,P=F+1.0,Q=P+.8;
   bbBasket(k,s);
   const frame=(id,w,x,y,rot)=>{ if(!PROPART.ready(id)) return; const im=PROPART.get(id),h=w*im.naturalHeight/im.naturalWidth; ctx.save(); ctx.translate(x*s,(y-h/2)*s); if(rot) ctx.rotate(rot); PROPART.draw(id,0,0,{w:w*s}); ctx.restore(); return h; };
   const top=b.y-b.w*.5;
@@ -220,15 +285,16 @@ function bbDraw(map) {
     const ringR=run&&t>=BB_T.ringStart?(t-BB_T.ringStart)*BB_T.ringSpeed:-1;
     // the grey circle (a stand-in: the plate turned grey), and the colour coming back from the block outward
     const pl=typeof plateFor==='function'?plateFor(map):null,gc=pl&&pl.img&&pl.img.naturalWidth&&typeof sundialGreyCanvas==='function'?sundialGreyCanvas(pl.img):null;
-    if(gc&&!(ringR>=G.r+B.w)) { const k=map.w*T/gc.width; ctx.save(); ctx.beginPath(); ctx.arc(G.cx*s,G.cy*s,G.r*s,0,Math.PI*2);
+    if(gc&&!(ringR>=Math.hypot(G.cx-B.x,G.cy-B.y)+G.r)) { const k=map.w*T/gc.width; ctx.save(); ctx.beginPath(); ctx.arc(G.cx*s,G.cy*s,G.r*s,0,Math.PI*2);
       if(ringR>0) { ctx.moveTo((B.x+ringR)*s,B.y*s); ctx.arc(B.x*s,B.y*s,ringR*s,0,Math.PI*2,true); }
       ctx.clip('evenodd'); ctx.imageSmoothingEnabled=true; ctx.drawImage(gc,0,0,gc.width*k,gc.height*k); ctx.imageSmoothingEnabled=false; ctx.restore(); }
+    if(run&&typeof bbUnderDraw==='function') bbUnderDraw(id,map);   // the old props that stand in the grey circle (engine/plate.js), drawn over it
     // the block: whole, then cracked, then in pieces
     const img=PROPART.ready(B.id)?PROPART.get(B.id):null,bh=sh.h,cv=sp.cover,covered=!!(cv&&!run&&!bbFlag(cv.off));
     if(img&&t<BB_T.fall1+.05) {
       const falling=t>=BB_T.crack1;
       if(!falling) {
-        ellipse(B.x*s,(B.y+bh/2+4)*s,B.w*.55*s,9*s,'#20202a40');
+        ellipse(B.x*s,(B.sy!=null?B.sy:B.y+bh/2+4)*s,(B.sw||B.w*.55)*s,9*s,'#20202a40');
         if(covered&&PROPART.ready(cv.sheet)) { const si=PROPART.get(cv.sheet),sh2=cv.sheetW*si.naturalHeight/si.naturalWidth; PROPART.draw(cv.sheet,B.x*s,(cv.base-sh2/2)*s,{w:cv.sheetW*s}); }
         else { ctx.save(); ctx.imageSmoothingEnabled=true; ctx.drawImage(img,(B.x-B.w/2)*s,(B.y-bh/2)*s,B.w*s,bh*s); ctx.restore(); }
         if(cv&&!run&&PROPART.ready(cv.sign)) { const gi=PROPART.get(cv.sign),gh=cv.signW*gi.naturalHeight/gi.naturalWidth; PROPART.draw(cv.sign,cv.signX*s,(cv.base+34-gh/2)*s,{w:cv.signW*s}); }
@@ -263,7 +329,7 @@ function bbDraw(map) {
       const [x0,y0]=B.roll[0],[x1,y1]=B.roll[1],hx=B.x+(B.hole[0]-.5)*B.w,hy=B.y+(B.hole[1]-.5)*bh,tr=BB_T.roll-.32,r=sp.coin.r;
       let x,y,sq,sc=1;
       if(t<tr) { const u=t/tr,e=u*(2-u*.4)/1.6; x=x0+(x1-x0)*e; y=y0+(y1-y0)*e; sq=.18+.82*Math.abs(Math.cos(e*Math.PI*7)); }
-      else { const u=(t-tr)/(BB_T.roll-tr),e=bbEase(u); x=x1+(hx-x1)*e; y=y1+(hy-y1)*e-Math.sin(u*Math.PI)*16; sq=.45+.55*u; sc=1-.35*u; }
+      else { const u=(t-tr)/(BB_T.roll-tr),e=bbEase(u); x=x1+(hx-x1)*e; y=y1+(hy-y1)*e-Math.sin(u*Math.PI)*(B.arc||16); sq=.45+.55*u; sc=1-.35*u; }
       ellipse(x*s,(y1+r*.9)*s,r*.9*s,3.5*s,'#20202a40');
       ctx.save(); ctx.translate(x*s,y*s); ctx.scale(sq*sc,sc); const g=ctx.createRadialGradient(-r*.3*s,-r*.3*s,1,0,0,r*s);
       g.addColorStop(0,'#fff2a8'); g.addColorStop(.6,'#f0b830'); g.addColorStop(1,'#a8721a'); ctx.fillStyle=g; ctx.strokeStyle='#6a4410'; ctx.lineWidth=1.5*s;
@@ -286,7 +352,7 @@ function bbPlay(id,opts={}) {
   const sh=bbShardsFor(id,sp),map=typeof currentMap!=='undefined'?currentMap:null;
   if(!map||map.id!==sp.map) { if(opts.onDone) opts.onDone(); return false; }
   const far=Math.hypot(map.w*64,map.h*64)+sp.block.w;
-  PROPART.preload([...(sp.keep&&sp.keep.basket?['oakpark/agent_dive','oakpark/agent_sandwich','oakpark/ch6_basket']:[]),...(sp.keep&&sp.keep.cart?[sp.keep.cart.id,'stacks/ch7_cartrose']:[]),sp.block.id,...(sp.cover?[sp.cover.sheet,sp.cover.sign]:[]),...Object.values(sp.ordinary).map(v=>v[0]),...(sp.fixed||[]).map(f=>f.id)]);
+  PROPART.preload([...(sp.keep&&sp.keep.basket?['oakpark/agent_dive','oakpark/agent_sandwich','oakpark/ch6_basket']:[]),...(sp.keep&&sp.keep.cart?[sp.keep.cart.id,'stacks/ch7_cartrose']:[]),...(sp.keep&&sp.keep.items?sp.keep.items.filter(i=>i.id).map(i=>i.id):[]),sp.block.id,...(sp.cover?[sp.cover.sheet,sp.cover.sign]:[]),...Object.values(sp.ordinary).map(v=>v[0]),...(sp.fixed||[]).map(f=>f.id)]);
   BB.pre=null; BB.t=0; BB.run={id,spot:sp,opts,seen:{},end:BB_T.ringStart+far/BB_T.ringSpeed+BB_T.settle,far,tick:0};
   return true;
 }
