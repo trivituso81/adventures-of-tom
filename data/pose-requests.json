@@ -1,6 +1,6 @@
 {
  "version": 2,
- "saved": "2026-11-15T06:28:56.330Z",
+ "saved": "2026-11-15T06:35:15.422Z",
  "heights": {},
  "target": {},
  "frames": {
@@ -617,6 +617,218 @@
      "a": 120.2,
      "headRows": 11.077,
      "wholeRows": 41.728
+    }
+   }
+  },
+  "boppy": {
+   "tk_tell": {
+    "sheet": "boppy-talk-v3.png",
+    "top": 14.2,
+    "chin": 189.1,
+    "ok": true,
+    "page": {
+     "f": 0.973,
+     "h": 1.103,
+     "a": 189.1,
+     "headRows": 12.715,
+     "wholeRows": 38.999
+    }
+   },
+   "up_stand": {
+    "sheet": "boppy-walking-sheet-v4.png",
+    "top": 3.7,
+    "chin": 137.8,
+    "ok": true,
+    "page": {
+     "f": 0.967,
+     "h": 1.148,
+     "a": 137.8,
+     "headRows": 12.715,
+     "wholeRows": 38.317
+    }
+   },
+   "down_stand": {
+    "sheet": "boppy-walking-sheet-v4.png",
+    "top": 19.2,
+    "chin": 165.6,
+    "ok": true,
+    "page": {
+     "f": 0.971,
+     "h": 1.052,
+     "a": 165.6,
+     "headRows": 12.715,
+     "wholeRows": 39.634
+    }
+   },
+   "left_stand": {
+    "sheet": "boppy-walking-sheet-v4.png",
+    "top": 8.5,
+    "chin": 153.6,
+    "ok": true,
+    "page": {
+     "f": 0.956,
+     "h": 1.061,
+     "a": 153.6,
+     "headRows": 12.715,
+     "wholeRows": 38.711
+    }
+   },
+   "em_happy": {
+    "sheet": "boppy-emotions-v6.png",
+    "top": 12.4,
+    "chin": 184.3,
+    "ok": true,
+    "page": {
+     "f": 1.178,
+     "h": 1.081,
+     "a": 184.3,
+     "headRows": 12.715,
+     "wholeRows": 38.883
+    }
+   },
+   "em_loving": {
+    "sheet": "boppy-emotions-v6.png",
+    "top": 17.3,
+    "chin": 170.4,
+    "ok": true,
+    "hAdj": 0.94,
+    "sAdj": 1.02,
+    "page": {
+     "f": 1.158,
+     "h": 1.164,
+     "a": 170.4,
+     "headRows": 12.191,
+     "wholeRows": 39.295
+    }
+   },
+   "em_sad": {
+    "sheet": "boppy-emotions-v6.png",
+    "top": 20.6,
+    "chin": 211,
+    "ok": true,
+    "page": {
+     "f": 1.397,
+     "h": 0.976,
+     "a": 211,
+     "headRows": 12.715,
+     "wholeRows": 39.342
+    }
+   },
+   "em_angry": {
+    "sheet": "boppy-emotions-v6.png",
+    "top": 21.9,
+    "chin": 215.5,
+    "ok": true,
+    "sAdj": 0.86,
+    "hAdj": 1.15,
+    "page": {
+     "f": 1.199,
+     "h": 0.949,
+     "a": 215.5,
+     "headRows": 12.575,
+     "wholeRows": 35.765
+    }
+   },
+   "em_scared": {
+    "sheet": "boppy-emotions-v6.png",
+    "top": 20.4,
+    "chin": 194.7,
+    "ok": true,
+    "sAdj": 0.86,
+    "hAdj": 1.14,
+    "page": {
+     "f": 1.015,
+     "h": 1.045,
+     "a": 194.7,
+     "headRows": 12.465,
+     "wholeRows": 35.694
+    }
+   },
+   "em_surprised": {
+    "sheet": "boppy-emotions-v6.png",
+    "top": 19.4,
+    "chin": 184.7,
+    "ok": true,
+    "sAdj": 0.9,
+    "hAdj": 1.13,
+    "page": {
+     "f": 1.028,
+     "h": 1.143,
+     "a": 184.7,
+     "headRows": 12.931,
+     "wholeRows": 37.229
+    }
+   },
+   "em_proud": {
+    "sheet": "boppy-emotions-v6.png",
+    "top": 17.9,
+    "chin": 154,
+    "ok": true,
+    "sAdj": 1.05,
+    "hAdj": 0.81,
+    "page": {
+     "f": 1.067,
+     "h": 1.161,
+     "a": 154,
+     "headRows": 10.814,
+     "wholeRows": 38.638
+    }
+   },
+   "em_unimpressed": {
+    "sheet": "boppy-emotions-v6.png",
+    "top": 7.4,
+    "chin": 179.6,
+    "ok": true,
+    "page": {
+     "f": 1.084,
+     "h": 1.079,
+     "a": 179.6,
+     "headRows": 12.715,
+     "wholeRows": 38.513
+    }
+   },
+   "tk_point": {
+    "sheet": "boppy-talk-v3.png",
+    "top": 19.8,
+    "chin": 189.2,
+    "ok": true,
+    "sAdj": 0.98,
+    "hAdj": 1.04,
+    "page": {
+     "f": 0.936,
+     "h": 1.16,
+     "a": 189.2,
+     "headRows": 12.959,
+     "wholeRows": 39.238
+    }
+   },
+   "tk_ask": {
+    "sheet": "boppy-talk-v3.png",
+    "top": 0,
+    "chin": 174.6,
+    "ok": true,
+    "sAdj": 0.94,
+    "hAdj": 1.05,
+    "page": {
+     "f": 0.832,
+     "h": 1.09,
+     "a": 174.6,
+     "headRows": 12.549,
+     "wholeRows": 36.306
+    }
+   },
+   "tk_answer": {
+    "sheet": "boppy-talk-v3.png",
+    "top": 0,
+    "chin": 149.2,
+    "ok": true,
+    "hAdj": 0.97,
+    "page": {
+     "f": 0.829,
+     "h": 1.254,
+     "a": 149.2,
+     "headRows": 12.333,
+     "wholeRows": 37.57
     }
    }
   }
