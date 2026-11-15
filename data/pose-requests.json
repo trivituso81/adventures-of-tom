@@ -1,6 +1,6 @@
 {
  "version": 2,
- "saved": "2026-11-15T06:11:19.084Z",
+ "saved": "2026-11-15T06:13:23.601Z",
  "heights": {},
  "target": {},
  "frames": {
@@ -20,28 +20,28 @@
    },
    "em_happy": {
     "sheet": "tom-emotions-v7.png",
-    "top": 10.3,
+    "top": 4.5,
     "chin": 147.1,
     "ok": true,
     "page": {
-     "f": 1.025,
-     "h": 1.163,
+     "f": 1.026,
+     "h": 1.115,
      "a": 147.1,
      "headRows": 12.715,
-     "wholeRows": 42.904
+     "wholeRows": 42.348
     }
    },
    "em_loving": {
     "sheet": "tom-emotions-v7.png",
-    "top": 12.9,
+    "top": 0.8,
     "chin": 151.4,
     "ok": true,
     "page": {
-     "f": 1.057,
-     "h": 1.148,
+     "f": 1.058,
+     "h": 1.056,
      "a": 151.4,
      "headRows": 12.715,
-     "wholeRows": 43.131
+     "wholeRows": 42.015
     }
    },
    "em_sad": {
@@ -111,16 +111,16 @@
    },
    "em_unimpressed": {
     "sheet": "tom-emotions-v7.png",
-    "top": 0,
-    "chin": 159.5,
+    "top": 3.5,
+    "chin": 151.8,
     "ok": true,
     "hAdj": 0.98,
     "page": {
-     "f": 1.009,
-     "h": 0.977,
-     "a": 159.5,
+     "f": 0.986,
+     "h": 1.051,
+     "a": 151.8,
      "headRows": 12.46,
-     "wholeRows": 41.683
+     "wholeRows": 41.977
     }
    },
    "tk_tell": {
@@ -208,6 +208,32 @@
     "top": 14.7,
     "chin": 130,
     "ok": false
+   },
+   "up_stand": {
+    "sheet": "tnb-walking-sheet-v2.png",
+    "top": 11.3,
+    "chin": 130,
+    "ok": true,
+    "page": {
+     "f": 0.884,
+     "h": 1.193,
+     "a": 130,
+     "headRows": 12.715,
+     "wholeRows": 40.998
+    }
+   },
+   "left_stand": {
+    "sheet": "tnb-walking-sheet-v2.png",
+    "top": 12.2,
+    "chin": 126.8,
+    "ok": true,
+    "page": {
+     "f": 0.849,
+     "h": 1.235,
+     "a": 126.8,
+     "headRows": 12.715,
+     "wholeRows": 41.141
+    }
    }
   }
  }
