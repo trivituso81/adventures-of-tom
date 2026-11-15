@@ -1,6 +1,6 @@
 {
  "version": 2,
- "saved": "2026-11-15T05:52:48.106Z",
+ "saved": "2026-11-15T05:53:09.406Z",
  "heights": {},
  "target": {},
  "frames": {
@@ -70,6 +70,11 @@
     "sheet": "tom-talk-v2.png",
     "top": 0,
     "chin": 147
+   },
+   "up_stand": {
+    "sheet": "tom-walking-sheet-v3.png",
+    "top": 3.3,
+    "chin": 135.7
    }
   },
   "tnb": {
