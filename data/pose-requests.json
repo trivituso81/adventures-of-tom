@@ -1,6 +1,6 @@
 {
  "version": 2,
- "saved": "2026-11-16T17:32:20.713Z",
+ "saved": "2026-11-16T17:54:48.415Z",
  "heights": {},
  "target": {},
  "frames": {
@@ -625,6 +625,417 @@
      "a": 137.9,
      "headRows": 11.56,
      "wholeRows": 43.719
+    }
+   }
+  },
+  "boppy": {
+   "em_happy": {
+    "sheet": "boppy-emotions-v6.png",
+    "top": 15.3,
+    "chin": 186.3,
+    "ok": true,
+    "sAdj": 0.95,
+    "hAdj": 1.09,
+    "page": {
+     "f": 1.149,
+     "h": 1.088,
+     "a": 186.3,
+     "headRows": 12.727,
+     "wholeRows": 38.347
+    }
+   },
+   "em_loving": {
+    "sheet": "boppy-emotions-v6.png",
+    "top": 8.8,
+    "chin": 169.7,
+    "ok": true,
+    "sAdj": 0.97,
+    "page": {
+     "f": 1.122,
+     "h": 1.083,
+     "a": 169.7,
+     "headRows": 11.922,
+     "wholeRows": 37.533
+    }
+   },
+   "em_sad": {
+    "sheet": "boppy-emotions-v6.png",
+    "top": 20.6,
+    "chin": 203.3,
+    "ok": true,
+    "sAdj": 0.86,
+    "hAdj": 1.27,
+    "page": {
+     "f": 1.189,
+     "h": 1.074,
+     "a": 203.3,
+     "headRows": 13.424,
+     "wholeRows": 37.16
+    }
+   },
+   "em_angry": {
+    "sheet": "boppy-emotions-v6.png",
+    "top": 21.9,
+    "chin": 217,
+    "ok": true,
+    "sAdj": 0.74,
+    "hAdj": 1.39,
+    "page": {
+     "f": 1.059,
+     "h": 0.947,
+     "a": 217,
+     "headRows": 12.643,
+     "wholeRows": 33.212
+    }
+   },
+   "em_scared": {
+    "sheet": "boppy-emotions-v6.png",
+    "top": 14.8,
+    "chin": 194.3,
+    "ok": true,
+    "sAdj": 0.87,
+    "hAdj": 1.2,
+    "page": {
+     "f": 1.046,
+     "h": 1.045,
+     "a": 194.3,
+     "headRows": 12.832,
+     "wholeRows": 36.347
+    }
+   },
+   "em_surprised": {
+    "sheet": "boppy-emotions-v6.png",
+    "top": 19.4,
+    "chin": 186.5,
+    "ok": true,
+    "sAdj": 0.9,
+    "hAdj": 1.07,
+    "page": {
+     "f": 1.054,
+     "h": 1.035,
+     "a": 186.5,
+     "headRows": 11.836,
+     "wholeRows": 36.396
+    }
+   },
+   "em_proud": {
+    "sheet": "boppy-emotions-v6.png",
+    "top": 17.9,
+    "chin": 154,
+    "ok": true,
+    "hAdj": 0.81,
+    "sAdj": 1.05,
+    "page": {
+     "f": 1.089,
+     "h": 1.122,
+     "a": 154,
+     "headRows": 10.454,
+     "wholeRows": 38.738
+    }
+   },
+   "em_unimpressed": {
+    "sheet": "boppy-emotions-v6.png",
+    "top": 4.1,
+    "chin": 177.3,
+    "ok": true,
+    "sAdj": 0.96,
+    "hAdj": 1.05,
+    "page": {
+     "f": 1.054,
+     "h": 1.045,
+     "a": 177.3,
+     "headRows": 12.389,
+     "wholeRows": 37.405
+    }
+   },
+   "up_stand": {
+    "sheet": "boppy-walking-sheet-v4.png",
+    "top": 10.5,
+    "chin": 135.7,
+    "ok": true,
+    "page": {
+     "f": 0.978,
+     "h": 1.189,
+     "a": 135.7,
+     "headRows": 12.291,
+     "wholeRows": 39.053
+    }
+   },
+   "tk_tell": {
+    "sheet": "boppy-talk-v3.png",
+    "top": 9.3,
+    "chin": 188.7,
+    "ok": true,
+    "hAdj": 1.06,
+    "sAdj": 0.97,
+    "page": {
+     "f": 0.962,
+     "h": 1.069,
+     "a": 188.7,
+     "headRows": 12.638,
+     "wholeRows": 38.276
+    }
+   },
+   "tk_point": {
+    "sheet": "boppy-talk-v3.png",
+    "top": 16,
+    "chin": 190,
+    "ok": true,
+    "page": {
+     "f": 0.977,
+     "h": 1.072,
+     "a": 190,
+     "headRows": 12.291,
+     "wholeRows": 39.152
+    }
+   },
+   "tk_ask": {
+    "sheet": "boppy-talk-v3.png",
+    "top": 0,
+    "chin": 166.7,
+    "ok": true,
+    "sAdj": 0.96,
+    "hAdj": 1.02,
+    "page": {
+     "f": 0.85,
+     "h": 1.095,
+     "a": 166.7,
+     "headRows": 12.035,
+     "wholeRows": 36.745
+    }
+   },
+   "tk_answer": {
+    "sheet": "boppy-talk-v3.png",
+    "top": 20.4,
+    "chin": 175.9,
+    "ok": true,
+    "sAdj": 0.92,
+    "hAdj": 1.03,
+    "page": {
+     "f": 0.827,
+     "h": 1.136,
+     "a": 175.9,
+     "headRows": 11.647,
+     "wholeRows": 36.86
+    }
+   }
+  },
+  "amy": {
+   "down_stand": {
+    "sheet": "amy-walking-sheet-v3.png",
+    "top": 4.6,
+    "chin": 115.6,
+    "ok": true,
+    "page": {
+     "f": 0.872,
+     "h": 1.374,
+     "a": 115.6,
+     "headRows": 12.291,
+     "wholeRows": 38.451
+    }
+   },
+   "up_stand": {
+    "sheet": "amy-walking-sheet-v3.png",
+    "top": 6.2,
+    "chin": 133.6,
+    "ok": true,
+    "page": {
+     "f": 0.93,
+     "h": 1.197,
+     "a": 133.6,
+     "headRows": 12.291,
+     "wholeRows": 38.539
+    }
+   },
+   "left_stand": {
+    "sheet": "amy-walking-sheet-v3.png",
+    "top": 0,
+    "chin": 120.5,
+    "ok": true,
+    "hAdj": 1.1,
+    "sAdj": 0.97,
+    "page": {
+     "f": 0.843,
+     "h": 1.35,
+     "a": 120.5,
+     "headRows": 13.115,
+     "wholeRows": 38.055
+    }
+   },
+   "em_happy": {
+    "sheet": "amy-emotions-v4.png",
+    "top": 12.8,
+    "chin": 132.6,
+    "ok": true,
+    "page": {
+     "f": 1.009,
+     "h": 1.461,
+     "a": 132.6,
+     "headRows": 12.291,
+     "wholeRows": 39.255
+    }
+   },
+   "em_loving": {
+    "sheet": "amy-emotions-v4.png",
+    "top": 16.9,
+    "chin": 111,
+    "ok": true,
+    "sAdj": 1.01,
+    "hAdj": 0.75,
+    "page": {
+     "f": 0.951,
+     "h": 1.409,
+     "a": 111,
+     "headRows": 9.311,
+     "wholeRows": 36.691
+    }
+   },
+   "em_sad": {
+    "sheet": "amy-emotions-v4.png",
+    "top": 18.3,
+    "chin": 120,
+    "ok": true,
+    "sAdj": 0.96,
+    "hAdj": 0.75,
+    "page": {
+     "f": 0.944,
+     "h": 1.239,
+     "a": 120,
+     "headRows": 8.85,
+     "wholeRows": 34.892
+    }
+   },
+   "em_angry": {
+    "sheet": "amy-emotions-v4.png",
+    "top": 19.5,
+    "chin": 154.7,
+    "ok": true,
+    "sAdj": 0.83,
+    "hAdj": 1.15,
+    "page": {
+     "f": 0.92,
+     "h": 1.235,
+     "a": 154.7,
+     "headRows": 11.732,
+     "wholeRows": 34.782
+    }
+   },
+   "em_scared": {
+    "sheet": "amy-emotions-v4.png",
+    "top": 2.9,
+    "chin": 139.1,
+    "ok": true,
+    "sAdj": 0.92,
+    "hAdj": 1.04,
+    "page": {
+     "f": 0.922,
+     "h": 1.229,
+     "a": 139.1,
+     "headRows": 11.76,
+     "wholeRows": 35.629
+    }
+   },
+   "em_surprised": {
+    "sheet": "amy-emotions-v4.png",
+    "top": 16.9,
+    "chin": 125.7,
+    "ok": true,
+    "sAdj": 0.88,
+    "hAdj": 0.82,
+    "page": {
+     "f": 0.806,
+     "h": 1.161,
+     "a": 125.7,
+     "headRows": 8.869,
+     "wholeRows": 32.712
+    }
+   },
+   "em_proud": {
+    "sheet": "amy-emotions-v4.png",
+    "top": 9.9,
+    "chin": 117.1,
+    "ok": true,
+    "hAdj": 0.83,
+    "sAdj": 1.02,
+    "page": {
+     "f": 0.9,
+     "h": 1.382,
+     "a": 117.1,
+     "headRows": 10.406,
+     "wholeRows": 37.411
+    }
+   },
+   "em_unimpressed": {
+    "sheet": "amy-emotions-v4.png",
+    "top": 18,
+    "chin": 118,
+    "ok": true,
+    "sAdj": 0.99,
+    "hAdj": 0.73,
+    "page": {
+     "f": 0.891,
+     "h": 1.265,
+     "a": 118,
+     "headRows": 8.883,
+     "wholeRows": 35.678
+    }
+   },
+   "tk_tell": {
+    "sheet": "amy-talk-v1.png",
+    "top": 20.3,
+    "chin": 133.6,
+    "ok": true,
+    "hAdj": 0.81,
+    "page": {
+     "f": 1.035,
+     "h": 1.627,
+     "a": 133.6,
+     "headRows": 9.956,
+     "wholeRows": 37.266
+    }
+   },
+   "tk_point": {
+    "sheet": "amy-talk-v1.png",
+    "top": 20.5,
+    "chin": 134.5,
+    "ok": true,
+    "hAdj": 0.84,
+    "page": {
+     "f": 1.028,
+     "h": 1.677,
+     "a": 134.5,
+     "headRows": 10.325,
+     "wholeRows": 37.728
+    }
+   },
+   "tk_ask": {
+    "sheet": "amy-talk-v1.png",
+    "top": 20.7,
+    "chin": 136.1,
+    "ok": true,
+    "hAdj": 0.8,
+    "sAdj": 0.97,
+    "page": {
+     "f": 0.986,
+     "h": 1.531,
+     "a": 136.1,
+     "headRows": 9.538,
+     "wholeRows": 36.006
+    }
+   },
+   "tk_answer": {
+    "sheet": "amy-talk-v1.png",
+    "top": 20.9,
+    "chin": 137.4,
+    "ok": true,
+    "sAdj": 0.98,
+    "hAdj": 0.86,
+    "page": {
+     "f": 0.986,
+     "h": 1.647,
+     "a": 137.4,
+     "headRows": 10.359,
+     "wholeRows": 37.268
     }
    }
   }
