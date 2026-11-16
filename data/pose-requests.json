@@ -1,6 +1,6 @@
 {
  "version": 2,
- "saved": "2026-11-16T17:19:18.465Z",
+ "saved": "2026-11-16T17:32:20.713Z",
  "heights": {},
  "target": {},
  "frames": {
@@ -505,6 +505,126 @@
      "a": 128.2,
      "headRows": 11.803,
      "wholeRows": 43.869
+    }
+   },
+   "em_happy": {
+    "sheet": "justin-emotions-v4.png",
+    "top": 18.8,
+    "chin": 144,
+    "ok": true,
+    "sAdj": 0.94,
+    "hAdj": 0.9,
+    "page": {
+     "f": 1.081,
+     "h": 1.089,
+     "a": 144,
+     "headRows": 10.398,
+     "wholeRows": 41.158
+    }
+   },
+   "em_loving": {
+    "sheet": "justin-emotions-v4.png",
+    "top": 10.6,
+    "chin": 140.5,
+    "ok": true,
+    "sAdj": 0.97,
+    "hAdj": 0.97,
+    "page": {
+     "f": 1.06,
+     "h": 1.167,
+     "a": 140.5,
+     "headRows": 11.565,
+     "wholeRows": 42.679
+    }
+   },
+   "em_sad": {
+    "sheet": "justin-emotions-v4.png",
+    "top": 16.9,
+    "chin": 173.7,
+    "ok": true,
+    "sAdj": 0.87,
+    "hAdj": 1.15,
+    "page": {
+     "f": 1.065,
+     "h": 1.028,
+     "a": 173.7,
+     "headRows": 12.297,
+     "wholeRows": 40.759
+    }
+   },
+   "em_angry": {
+    "sheet": "justin-emotions-v4.png",
+    "top": 19.6,
+    "chin": 180.6,
+    "ok": true,
+    "sAdj": 0.84,
+    "hAdj": 1.19,
+    "page": {
+     "f": 1.077,
+     "h": 1,
+     "a": 180.6,
+     "headRows": 12.286,
+     "wholeRows": 39.996
+    }
+   },
+   "em_scared": {
+    "sheet": "justin-emotions-v4.png",
+    "top": 20.4,
+    "chin": 154.1,
+    "ok": true,
+    "sAdj": 0.87,
+    "hAdj": 1.03,
+    "page": {
+     "f": 1.118,
+     "h": 1.08,
+     "a": 154.1,
+     "headRows": 11.014,
+     "wholeRows": 39.784
+    }
+   },
+   "em_surprised": {
+    "sheet": "justin-emotions-v4.png",
+    "top": 23.8,
+    "chin": 139.7,
+    "ok": true,
+    "sAdj": 0.93,
+    "hAdj": 0.91,
+    "page": {
+     "f": 1.02,
+     "h": 1.176,
+     "a": 139.7,
+     "headRows": 10.402,
+     "wholeRows": 41.427
+    }
+   },
+   "em_proud": {
+    "sheet": "justin-emotions-v4.png",
+    "top": 20.1,
+    "chin": 127.8,
+    "ok": true,
+    "hAdj": 0.82,
+    "sAdj": 1.01,
+    "page": {
+     "f": 1.041,
+     "h": 1.239,
+     "a": 127.8,
+     "headRows": 10.18,
+     "wholeRows": 43.386
+    }
+   },
+   "em_unimpressed": {
+    "sheet": "justin-emotions-v4.png",
+    "top": 14.7,
+    "chin": 137.9,
+    "ok": true,
+    "sAdj": 0.99,
+    "hAdj": 0.95,
+    "page": {
+     "f": 1.079,
+     "h": 1.23,
+     "a": 137.9,
+     "headRows": 11.56,
+     "wholeRows": 43.719
     }
    }
   }
