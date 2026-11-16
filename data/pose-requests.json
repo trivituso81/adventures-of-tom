@@ -1,6 +1,6 @@
 {
  "version": 2,
- "saved": "2026-11-16T16:51:53.717Z",
+ "saved": "2026-11-16T17:19:18.465Z",
  "heights": {},
  "target": {},
  "frames": {
@@ -124,28 +124,28 @@
    },
    "em_proud": {
     "sheet": "tom-emotions-v7.png",
-    "top": 6,
-    "chin": 123,
+    "top": 1.3,
+    "chin": 138.4,
     "ok": true,
     "page": {
-     "f": 0.906,
-     "h": 1.314,
-     "a": 123,
+     "f": 0.946,
+     "h": 1.122,
+     "a": 138.4,
      "headRows": 12.291,
-     "wholeRows": 42.154
+     "wholeRows": 41.64
     }
    },
    "em_unimpressed": {
     "sheet": "tom-emotions-v7.png",
     "top": 5.2,
-    "chin": 150.2,
+    "chin": 156.6,
     "ok": true,
     "page": {
-     "f": 0.982,
-     "h": 1.06,
-     "a": 150.2,
+     "f": 1.001,
+     "h": 1.016,
+     "a": 156.6,
      "headRows": 12.291,
-     "wholeRows": 41.964
+     "wholeRows": 41.946
     }
    },
    "tk_tell": {
@@ -198,6 +198,313 @@
      "a": 147,
      "headRows": 12.291,
      "wholeRows": 41.524
+    }
+   }
+  },
+  "tnb": {
+   "down_stand": {
+    "sheet": "tnb-walking-sheet-v2.png",
+    "top": 11.8,
+    "chin": 130,
+    "ok": true,
+    "page": {
+     "f": 0.934,
+     "h": 1.158,
+     "a": 130,
+     "headRows": 12.291,
+     "wholeRows": 41.408
+    }
+   },
+   "up_stand": {
+    "sheet": "tnb-walking-sheet-v2.png",
+    "top": 9.5,
+    "chin": 124.9,
+    "ok": true,
+    "page": {
+     "f": 0.897,
+     "h": 1.186,
+     "a": 124.9,
+     "headRows": 12.291,
+     "wholeRows": 41.193
+    }
+   },
+   "left_stand": {
+    "sheet": "tnb-walking-sheet-v2.png",
+    "top": 8.6,
+    "chin": 126.8,
+    "ok": true,
+    "page": {
+     "f": 0.877,
+     "h": 1.158,
+     "a": 126.8,
+     "headRows": 12.291,
+     "wholeRows": 41.076
+    }
+   },
+   "em_happy": {
+    "sheet": "tnb-emotions-v3.png",
+    "top": 19.2,
+    "chin": 166.6,
+    "ok": true,
+    "page": {
+     "f": 1.116,
+     "h": 1.099,
+     "a": 166.6,
+     "headRows": 12.291,
+     "wholeRows": 41.782
+    }
+   },
+   "em_loving": {
+    "sheet": "tnb-emotions-v3.png",
+    "top": 4.6,
+    "chin": 158.7,
+    "ok": true,
+    "page": {
+     "f": 1.097,
+     "h": 1.051,
+     "a": 158.7,
+     "headRows": 12.291,
+     "wholeRows": 40.548
+    }
+   },
+   "em_sad": {
+    "sheet": "tnb-emotions-v3.png",
+    "top": 10.4,
+    "chin": 171,
+    "ok": true,
+    "page": {
+     "f": 1.182,
+     "h": 1.009,
+     "a": 171,
+     "headRows": 12.291,
+     "wholeRows": 40.977
+    }
+   },
+   "em_angry": {
+    "sheet": "tnb-emotions-v3.png",
+    "top": 1.8,
+    "chin": 161.1,
+    "ok": true,
+    "page": {
+     "f": 1.152,
+     "h": 1.017,
+     "a": 161.1,
+     "headRows": 12.291,
+     "wholeRows": 40.32
+    }
+   },
+   "em_scared": {
+    "sheet": "tnb-emotions-v3.png",
+    "top": 4.5,
+    "chin": 162.9,
+    "ok": true,
+    "page": {
+     "f": 1.066,
+     "h": 1.023,
+     "a": 162.9,
+     "headRows": 12.291,
+     "wholeRows": 40.531
+    }
+   },
+   "em_surprised": {
+    "sheet": "tnb-emotions-v3.png",
+    "top": 4.8,
+    "chin": 153.2,
+    "ok": true,
+    "page": {
+     "f": 1.015,
+     "h": 1.092,
+     "a": 153.2,
+     "headRows": 12.291,
+     "wholeRows": 40.579
+    }
+   },
+   "em_proud": {
+    "sheet": "tnb-emotions-v3.png",
+    "top": 8.5,
+    "chin": 136.7,
+    "ok": true,
+    "hAdj": 0.92,
+    "page": {
+     "f": 0.972,
+     "h": 1.163,
+     "a": 136.7,
+     "headRows": 11.308,
+     "wholeRows": 39.902
+    }
+   },
+   "em_unimpressed": {
+    "sheet": "tnb-emotions-v3.png",
+    "top": 8,
+    "chin": 149.8,
+    "ok": true,
+    "sAdj": 0.99,
+    "hAdj": 0.95,
+    "page": {
+     "f": 0.989,
+     "h": 1.075,
+     "a": 149.8,
+     "headRows": 11.56,
+     "wholeRows": 39.798
+    }
+   },
+   "tk_tell": {
+    "sheet": "tnb-talk-v2.png",
+    "top": 16.4,
+    "chin": 171.2,
+    "ok": true,
+    "sAdj": 0.98,
+    "hAdj": 1.03,
+    "page": {
+     "f": 1.066,
+     "h": 1.258,
+     "a": 171.2,
+     "headRows": 12.407,
+     "wholeRows": 41.068
+    }
+   },
+   "tk_point": {
+    "sheet": "tnb-talk-v2.png",
+    "top": 18.2,
+    "chin": 186.7,
+    "ok": true,
+    "sAdj": 0.98,
+    "hAdj": 1.06,
+    "page": {
+     "f": 1.135,
+     "h": 1.19,
+     "a": 186.7,
+     "headRows": 12.768,
+     "wholeRows": 41.505
+    }
+   },
+   "tk_ask": {
+    "sheet": "tnb-talk-v2.png",
+    "top": 0,
+    "chin": 144.7,
+    "ok": true,
+    "hAdj": 0.92,
+    "page": {
+     "f": 0.974,
+     "h": 1.227,
+     "a": 144.7,
+     "headRows": 11.308,
+     "wholeRows": 39.157
+    }
+   },
+   "tk_answer": {
+    "sheet": "tnb-talk-v2.png",
+    "top": 0,
+    "chin": 142.4,
+    "ok": true,
+    "hAdj": 0.91,
+    "page": {
+     "f": 0.967,
+     "h": 1.233,
+     "a": 142.4,
+     "headRows": 11.185,
+     "wholeRows": 39.029
+    }
+   }
+  },
+  "justin": {
+   "tk_tell": {
+    "sheet": "justin-talk-v1.png",
+    "top": 22.5,
+    "chin": 155.5,
+    "ok": true,
+    "hAdj": 1.04,
+    "page": {
+     "f": 1.034,
+     "h": 1.549,
+     "a": 155.5,
+     "headRows": 12.783,
+     "wholeRows": 46.088
+    }
+   },
+   "tk_point": {
+    "sheet": "justin-talk-v1.png",
+    "top": 20,
+    "chin": 150.6,
+    "ok": true,
+    "page": {
+     "f": 1.044,
+     "h": 1.516,
+     "a": 150.6,
+     "headRows": 12.291,
+     "wholeRows": 45.294
+    }
+   },
+   "tk_ask": {
+    "sheet": "justin-talk-v1.png",
+    "top": 0,
+    "chin": 129.6,
+    "ok": true,
+    "page": {
+     "f": 0.964,
+     "h": 1.528,
+     "a": 129.6,
+     "headRows": 12.291,
+     "wholeRows": 43.412
+    }
+   },
+   "tk_answer": {
+    "sheet": "justin-talk-v1.png",
+    "top": 0,
+    "chin": 103.8,
+    "ok": true,
+    "hAdj": 0.77,
+    "sAdj": 1.07,
+    "page": {
+     "f": 0.985,
+     "h": 1.572,
+     "a": 103.8,
+     "headRows": 10.127,
+     "wholeRows": 43.251
+    }
+   },
+   "down_stand": {
+    "sheet": "justin-walking-sheet-v3.png",
+    "top": 13.8,
+    "chin": 123.5,
+    "ok": true,
+    "hAdj": 0.96,
+    "sAdj": 0.99,
+    "page": {
+     "f": 0.922,
+     "h": 1.125,
+     "a": 123.5,
+     "headRows": 11.681,
+     "wholeRows": 43.934
+    }
+   },
+   "up_stand": {
+    "sheet": "justin-walking-sheet-v3.png",
+    "top": 12.7,
+    "chin": 113,
+    "ok": true,
+    "sAdj": 0.98,
+    "page": {
+     "f": 0.934,
+     "h": 1.269,
+     "a": 113,
+     "headRows": 12.045,
+     "wholeRows": 44.068
+    }
+   },
+   "left_stand": {
+    "sheet": "justin-walking-sheet-v3.png",
+    "top": 12.5,
+    "chin": 128.2,
+    "ok": true,
+    "sAdj": 0.99,
+    "hAdj": 0.97,
+    "page": {
+     "f": 0.886,
+     "h": 1.078,
+     "a": 128.2,
+     "headRows": 11.803,
+     "wholeRows": 43.869
     }
    }
   }
