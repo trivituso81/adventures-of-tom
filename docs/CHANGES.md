@@ -1,3 +1,9 @@
+## 2026-11-18 (454): Art Library bake, clip-rose-boop (`artbake1485`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- clip-rose-boop: clip `rose-boop` cut from art/raw/clips/clip-rose-boop-v1.json (24 pictures a second; video frames 0 to 72, every 2, hit at frame 34; 37 pictures kept; played at 1.5x). rose_boop frames 37 frame px 432 376 rows 108 94 sheet (2160, 3008) kb 781 dur ms 2056 kind strike impact ms 944 reach [49.0, 69.1]
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## calib3 (2026-11-18): Your 16 new voice takes are in the game (Aunt Ellie's door scene and three re-takes), and 10 subtitles now say what the voice says
 
 - Tom's pending export (22:29 UTC, 16 clips) merged into `data/voice/dialog-ch1.js`: the 12 lines of the scene at Aunt Ellie's door (`ch1Ellie`), a new take of Aunt Ellie's first line, and the three round 3 re-takes (Tom "Your mother says I'm slow.", Grace "You are slow.", Amy "I carried both of them"). The script of each take he kept is in `tools/voice-library/scripts/ch01-story-directions.json`, checked character for character against the export (16 of 16).
