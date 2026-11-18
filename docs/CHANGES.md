@@ -1,3 +1,12 @@
+## 2026-11-18 (452): Art Library bake, clip-rose-strike-lite, clip-rose-strike-2s, clip-rose-sleep, clip-mudling-idle (`artbake1481`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- clip-rose-strike-lite: study video saved as art/raw/clips/clip-rose-strike-lite-v1.mp4 (755 KB). No clip was cut and nothing in the game changed.
+- clip-rose-strike-2s: study video saved as art/raw/clips/clip-rose-strike-2s-v1.mp4 (529 KB). No clip was cut and nothing in the game changed.
+- clip-rose-sleep: study video saved as art/raw/clips/clip-rose-sleep-v1.mp4 (797 KB). No clip was cut and nothing in the game changed.
+- clip-mudling-idle: study video saved as art/raw/clips/clip-mudling-idle-v1.mp4 (592 KB). No clip was cut and nothing in the game changed.
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## clipstudy1 (2026-11-18): Art Library clips: four test videos to generate (cheap model, 2 second strike, Rose lying down, Mudling idle)
 
 Next step of the animation tool test (claude/animation-tool-test-exam.md in the Project).
