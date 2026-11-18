@@ -2,7 +2,7 @@
 // engine/admin-music.js: the calm track (music/admin.mp3, "Admin Calm" in the Music Library) on the separate admin pages
 // (Voice Library, Art Library, Music Library, Area Builder, Portrait Crops, Head Sizes). The ADMIN menu inside the game plays the
 // same track through engine/music-clips.js (mcAdminScreen). This file stands alone: it uses no game globals, so a page only needs
-//   <script src="engine/admin-music.js?v=adminmusic3"></script>
+//   <script src="engine/admin-music.js?v=adminvol1"></script>
 // Behaviour:
 //  - Follows the game's music switch (localStorage 'le-music' = 'off' keeps it silent).
 //  - Adds a "Music On/Off" button and a volume slider to the page's top bar (<header>). Off is kept in localStorage
