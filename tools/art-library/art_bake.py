@@ -64,7 +64,8 @@ def bake_clip(e, p):
     import urllib.request
     c = e['clip']; v = e['versions'][-1]; m = v.get('marks') or {}
     if not re.fullmatch(r'[a-z0-9-]+', c['id']) or not re.fullmatch(r'[a-z0-9]+', c['owner']): raise SystemExit(f'{e["id"]}: odd clip id or owner')
-    if not all(isinstance(m.get(k), (int, float)) for k in ('first', 'hit', 'last')) or not (0 <= m['first'] < m['hit'] < m['last']):
+    study = bool(c.get('test'))                                              # a study video (clipstudy1): keep the video, cut nothing
+    if not study and (not all(isinstance(m.get(k), (int, float)) for k in ('first', 'hit', 'last')) or not (0 <= m['first'] < m['hit'] < m['last'])):
         raise SystemExit(f'{e["id"]}: the approved version has no usable START, HIT and END marks: {m}')
     mp4 = os.path.join(ROOT, p)
     if p.endswith('.json'):
@@ -77,6 +78,7 @@ def bake_clip(e, p):
             if not url.startswith('https://'): raise SystemExit(f'{e["id"]}: odd video address')
             mp4 = mp4[:-5] + '.mp4'
             with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'art-bake'}), timeout=120) as r, open(mp4, 'wb') as f: shutil.copyfileobj(r, f)
+    if study: return f'{e["id"]}: study video saved as {os.path.relpath(mp4, ROOT)} ({os.path.getsize(mp4) // 1024} KB). No clip was cut and nothing in the game changed.'
     pr = sh('ffmpeg', '-nostdin', '-i', mp4)                              # ffmpeg only (no ffprobe): it prints the video's facts and stops
     fm = re.search(r', ([\d.]+) fps', pr.stderr); dm = re.search(r'Duration: (\d+):(\d+):([\d.]+)', pr.stderr)
     if not fm or not dm: raise SystemExit(f'{e["id"]}: could not read the video {p}\n{pr.stderr[-600:]}')

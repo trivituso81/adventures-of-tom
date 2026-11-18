@@ -31,7 +31,7 @@ def make_video(path):
     shutil.rmtree(d)
 
 def servers(nocors, video):
-    env = dict(os.environ, STUB_VIDEO=video, STUB_CLEAR='clip-rose-strike'); env.pop('STUB_VIDEO_NOCORS', None)
+    env = dict(os.environ, STUB_VIDEO=video, STUB_CLEAR='clip-rose-strike,clip-mudling-idle'); env.pop('STUB_VIDEO_NOCORS', None)
     if nocors: env['STUB_VIDEO_NOCORS'] = '1'
     web = subprocess.Popen([sys.executable, '-m', 'http.server', '8813'], cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     stub = subprocess.Popen([sys.executable, os.path.join(ROOT, 'tools', 'art-library', 'stub.py'), '8814'], env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -74,7 +74,7 @@ def page_run(br, name, vp, nocors, video):
         pg.wait_for_function("()=>/out of order/.test(document.getElementById('rvmsg').textContent)"); ok(True, f'{name}: marks in the wrong order are named')
         seek(pg, 0.5); pg.click('[data-mark="first"]'); pg.click('#cpf'); pg.wait_for_function("()=>Math.abs(document.getElementById('rvvid').currentTime-.533)<.02"); ok(True, f'{name}: the frame button steps one thirtieth of a second')
         pg.wait_for_function("()=>!/out of order/.test(document.getElementById('rvmsg').textContent)")
-        ok(pg.evaluate("()=>document.querySelector('[data-speed].set').dataset.speed") == '3', f'{name}: SPEED starts at the entry\'s own 3x')
+        ok(pg.evaluate("()=>document.querySelector('[data-speed].set').dataset.speed") == '1.5', f'{name}: SPEED starts at the entry\'s own 1.5x')
         pg.click('[data-speed="4"]'); pg.wait_for_function("()=>document.querySelector('[data-speed].set').dataset.speed==='4'")
         if not nocors:
             pg.click('#cpbf'); pg.wait_for_timeout(1500)
@@ -117,6 +117,43 @@ def page_run(br, name, vp, nocors, video):
     finally:
         web.terminate(); stub.terminate(); time.sleep(.3)
 
+def study_run(br, video):
+    """A study video (clip.test, clipstudy1): the Mudling idle. No marks or speed rows; APPROVE with no marks saves the video only."""
+    SID = 'clip-mudling-idle'; web, stub = servers(False, video)
+    try:
+        c = br.new_context(viewport={'width': 390, 'height': 844}); pg = c.new_page(); errs = []
+        pg.on('pageerror', lambda e: errs.append(str(e)))
+        pg.goto(URL); pg.evaluate("()=>{ localStorage.setItem('aot-art-key','test'); localStorage.setItem('aot-gh-token','test'); localStorage.removeItem('aot-art-spend'); localStorage.removeItem('aot-clip-pending'); }")
+        pg.goto(URL); pg.wait_for_selector('[data-tab="Clips"]'); pg.click('[data-tab="Clips"]'); pg.evaluate("()=>{ UI.filter='all'; paintList(); }")
+        ids = pg.evaluate("()=>DATA.entries.filter(e=>e.clip).map(e=>e.id+':'+e.clip.model+':'+e.clip.dur+':'+clipCost(e).toFixed(2))")
+        ok(ids == ['clip-rose-strike:grok-imagine-video-1.5:3:0.25', 'clip-rose-strike-lite:grok-imagine-video-1.5-lite:3:0.07', 'clip-rose-strike-2s:grok-imagine-video-1.5:2:0.17', 'clip-rose-sleep:grok-imagine-video-1.5:4:0.33', 'clip-mudling-idle:grok-imagine-video-1.5:3:0.25'], f'study: the five clip entries with their models, lengths and prices {ids}')
+        if not pg.locator(f'[data-toggle="{SID}"]').count(): pg.click('[data-grp="Clips|Monsters"]')
+        if not pg.locator(f'.card[data-id="{SID}"]').count(): pg.click(f'[data-toggle="{SID}"]')
+        pg.wait_for_function("()=>{ const i=document.querySelector('.card[data-id=clip-mudling-idle] .ref img'); return i&&i.complete&&i.naturalWidth>0; }"); ok(True, 'study: the Mudling start picture shows on its card')
+        pg.screenshot(path=os.path.join(SHOTS, 'artclip-study-card.png'))
+        pg.click(f'.card[data-id="{SID}"] [data-gen]'); pg.wait_for_selector(f'.card[data-id="{SID}"] .res video', timeout=60000)
+        ok('No marks needed' in pg.locator(f'.card[data-id="{SID}"]').inner_text(), 'study: the card says no marks are needed')
+        pg.click(f'.card[data-id="{SID}"] .res [data-res]'); pg.wait_for_selector('#rv:not([hidden])'); pg.wait_for_function("()=>document.getElementById('rvvid').readyState>=2", timeout=20000)
+        vis = pg.evaluate("()=>({marks:document.querySelector('.cliprow.marks').offsetHeight, speed:document.querySelector('.cliprow.speed').offsetHeight, note:document.getElementById('clipstudy').offsetHeight, play:document.getElementById('cpplay').offsetHeight})")
+        ok(vis['marks'] == 0 and vis['speed'] == 0 and vis['note'] > 0 and vis['play'] > 0, f'study: review hides the marks and speed rows and shows the test note {vis}')
+        pg.screenshot(path=os.path.join(SHOTS, 'artclip-study-review.png'))
+        pg.click('#rvok'); pg.wait_for_timeout(300); pg.click('#rvok'); pg.wait_for_function("()=>ENTRY['clip-mudling-idle'].status==='approved'", timeout=30000)
+        F = files(pg); p = f'art/raw/clips/{SID}-v1.mp4'
+        ok(p in F and 'saved for Claude' in pg.evaluate("()=>MSG['clip-mudling-idle'].text"), 'study: APPROVE with no marks committed the video and says nothing changes in the game')
+        ok(not errs, f'study: no page errors {errs[:2]}'); c.close()
+    finally:
+        web.terminate(); stub.terminate(); time.sleep(.3)
+
+def study_bake(video_bytes):
+    T = tempfile.mkdtemp(); shutil.copytree(os.path.join(ROOT, 'tools/art-library'), os.path.join(T, 'tools/art-library'), ignore=shutil.ignore_patterns('*.pyc', '__pycache__', 'prompts', 'tombo-split'))
+    os.makedirs(os.path.join(T, 'art/raw/clips')); p = 'art/raw/clips/clip-mudling-idle-v1.mp4'; open(os.path.join(T, p), 'wb').write(video_bytes)
+    open(os.path.join(T, 'index.html'), 'w').write('<script src="data/clips/other.js?v=clip1"></script>\n')
+    e = next(x for x in json.load(open(os.path.join(ROOT, 'data/art-prompts.json')))['entries'] if x['id'] == 'clip-mudling-idle'); e = dict(e, versions=[{'n': 1, 'file': p}])
+    spec = importlib.util.spec_from_file_location('art_bake_s', os.path.join(T, 'tools/art-library/art_bake.py')); m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+    note = m.bake_clip(e, p); print('     ', note)
+    ok('study video saved' in note and not os.path.exists(os.path.join(T, 'data/clips')) and 'mudling' not in open(os.path.join(T, 'index.html')).read(), 'study bake: the video is kept, no clip is cut and index.html is untouched')
+    shutil.rmtree(T)
+
 def bake_check(video_bytes):
     """art_bake.bake_clip in a scratch tree: the approved video and marks become art/clips/rose-strike.webp + data/clips/rose-strike.js."""
     T = tempfile.mkdtemp()
@@ -147,7 +184,8 @@ def main():
         vid = page_run(br, 'portrait', {'width': 390, 'height': 844}, False, video)
         page_run(br, 'landscape', {'width': 852, 'height': 393}, False, video)
         page_run(br, 'nocopy', {'width': 390, 'height': 844}, True, video)
+        study_run(br, video)
         br.close()
-    bake_check(vid)
+    bake_check(vid); study_bake(vid)
     print('FAILS', fails); sys.exit(1 if fails else 0)
 if __name__ == '__main__': main()

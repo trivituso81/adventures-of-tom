@@ -40,7 +40,7 @@ function clipCard(e){
   '<details class="pr" data-po="'+id+'"'+(UI.po[e.id]?' open':'')+'><summary>Prompt'+(ed?' <span class="chip c-wait">edited</span>':'')+' <span class="hint" style="font-weight:400">tap to read or edit</span></summary><div class="pin">'+(ed?'<button class="small" data-revert="'+id+'">Use the default prompt</button> <span class="hint">(this box holds your own edit, saved on this device)</span>':'<span class="hint">Edit here, it is sent as written.</span>')+'<textarea data-prompt="'+id+'">'+esc(promptOf(e))+'</textarea></div></details>'+
   '<div class="row"><button class="gold" data-gen="'+id+'"'+(blk?' disabled':'')+'>'+(pend?'FETCH THE VIDEO':'GENERATE VIDEO')+'</button><span class="hint">'+(pend?'A video is already being made for this. No new charge.':c.dur+' second video, '+c.res+', about $'+clipCost(e).toFixed(2)+' each. Takes 1 to 3 minutes.')+'</span></div>'+
   '<div class="'+(MSG[e.id]&&MSG[e.id].err?'err':'hint')+'" id="m-'+id+'">'+esc(MSG[e.id]?MSG[e.id].text:'')+'</div>'+
-  (rs.length?'<div class="hint">Tap REVIEW to mark the start, the hit and the end, then approve or reject.</div>':'')+
+  (rs.length?'<div class="hint">'+(c.test?'Tap REVIEW to watch it, then approve or reject. No marks needed.':'Tap REVIEW to mark the start, the hit and the end, then approve or reject.')+'</div>':'')+
   '<div class="res">'+rs.map(r=>'<div><video class="clipthumb" src="'+esc(clipSrc(r))+'#t=0.1" muted playsinline preload="metadata"></video><span>v'+r.n+'</span>'+(apr(r.n)?' <span class="chip c-approved">approved</span>':rjc(r.n)?' <span class="chip c-rejected">rejected</span>':'')+(r.blob?'':' <span class="chip c-wait">address only</span>')+' <button class="small" data-res="'+esc(r.key)+'">REVIEW</button></div>').join('')+'</div>'+
   ((e.versions||[]).length?'<div class="hint ok">Approved: '+e.versions.map(v=>esc(v.file)).join(', ')+'</div>':'')+
   ((e.rejects||[]).length?'<div class="hint">Rejected before: '+e.rejects.length+' (notes are saved for Claude)</div>':'')+'</div>';
@@ -106,11 +106,12 @@ function clipRvSetup(){
   cg('rvstage').insertAdjacentHTML('beforeend','<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="clipkey" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%"><feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -3 6 -3 0 4.5"/></filter></svg><video id="rvvid" muted playsinline preload="auto" hidden></video><canvas id="rvcan" hidden></canvas>');
   cg('rvnote').insertAdjacentHTML('beforebegin','<div id="cliptools" hidden>'+
     '<div class="row cliprow"><button class="small" id="cpb" aria-label="One frame back">&lsaquo; frame</button><input type="range" id="cps" min="0" max="3" step="0.0333" value="0" aria-label="Position in the video"><button class="small" id="cpf" aria-label="One frame forward">frame &rsaquo;</button></div>'+
-    '<div class="row cliprow"><button class="small" id="cpplay">PLAY</button><span class="hint" id="cpt"></span><button class="small" id="cpbf">ON THE BATTLEFIELD</button></div>'+
-    '<div class="hint">Speed in the game (times faster than the video):</div><div class="row cliprow speed">'+CLIP_SPEEDS.map(x=>'<button class="small" data-speed="'+x+'">'+x+'x</button>').join('')+'</div>'+
-    '<div class="hint">Move to a moment, then tap what it is:</div>'+
-    '<div class="row cliprow marks"><button class="small" data-mark="first">START<br><span></span></button><button class="small" data-mark="hit">HIT<br><span></span></button><button class="small" data-mark="last">END<br><span></span></button></div>'+
-    '<div class="hint">START: standing still, just before the move. HIT: the moment the hit should land. END: back to standing.</div></div>');
+    '<div class="row cliprow"><button class="small" id="cpplay">PLAY</button><span class="hint" id="cpt"></span><button class="small forgame" id="cpbf">ON THE BATTLEFIELD</button></div>'+
+    '<div class="hint ok" id="clipstudy" hidden>Test video for Claude. Watch it, then APPROVE to save it (no marks needed) or REJECT with a note. Nothing changes in the game.</div>'+
+    '<div class="hint forgame">Speed in the game (times faster than the video):</div><div class="row cliprow speed forgame">'+CLIP_SPEEDS.map(x=>'<button class="small" data-speed="'+x+'">'+x+'x</button>').join('')+'</div>'+
+    '<div class="hint forgame">Move to a moment, then tap what it is:</div>'+
+    '<div class="row cliprow marks forgame"><button class="small" data-mark="first">START<br><span></span></button><button class="small" data-mark="hit">HIT<br><span></span></button><button class="small" data-mark="last">END<br><span></span></button></div>'+
+    '<div class="hint forgame">START: standing still, just before the move. HIT: the moment the hit should land. END: back to standing.</div></div>');
   const v=cg('rvvid'), s=cg('cps');
   const seek=t=>{ clipBf(false); v.pause(); v.currentTime=Math.max(0,Math.min((v.duration||+s.max)-.01,t)); };
   s.addEventListener('input',()=>seek(+s.value));
@@ -141,6 +142,7 @@ function clipRvDraw(e,r){
   const isClip=!!(e&&e.clip&&r), v=cg('rvvid');
   cg('rvimg').hidden=isClip; v.hidden=!isClip; cg('cliptools').hidden=!isClip; cg('rvcan').hidden=true;
   if(!isClip){ v.pause(); v.removeAttribute('src'); CV.r=null; return; }
+  const study=!!e.clip.test; document.querySelectorAll('#cliptools .forgame').forEach(x=>x.hidden=study); cg('clipstudy').hidden=!study;   // a study video: no marks, no speed
   CV.r=r; const src=clipSrc(r); if(v.getAttribute('src')!==src){ v.src=src; v.load(); }
   v.pause(); clipPaintMarks();
   // An approved video this device holds only as an address: fetch the game's own copy (same site, so it can be kept) and use it from now on.
@@ -187,6 +189,6 @@ document.addEventListener('DOMContentLoaded',()=>{ const st=document.createEleme
   st.textContent='.clipthumb{width:100%;aspect-ratio:4/3;object-fit:contain;background:#0f0d24;border:1px solid #3a3566;border-radius:8px;display:block;margin-bottom:4px}'+
   '#rvvid,#rvcan{width:100%;height:100%;object-fit:contain}#rvcan{position:absolute;inset:0}'+
   '.cliprow{display:flex;gap:8px;align-items:center;margin:4px 0}.cliprow input[type=range]{flex:1;min-width:0;height:36px}.cliprow .hint{flex:1;text-align:center}'+
-  '.cliprow.speed{gap:4px}.cliprow.speed button{flex:1;min-width:0;min-height:40px;padding:4px 0}.cliprow.speed button.set{border-color:#a89dff;background:#7b6cff;color:#fff}'+
+  '#cliptools [hidden]{display:none!important}.cliprow.speed{gap:4px}.cliprow.speed button{flex:1;min-width:0;min-height:40px;padding:4px 0}.cliprow.speed button.set{border-color:#a89dff;background:#7b6cff;color:#fff}'+
   '.cliprow.marks button{flex:1;min-height:48px;line-height:1.25}.cliprow.marks button span{font-weight:400;font-size:12px}.cliprow.marks button.set{border-color:#2f9e63;background:#143524}';
   document.head.appendChild(st); });

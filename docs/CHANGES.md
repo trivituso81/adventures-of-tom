@@ -1,3 +1,15 @@
+## clipstudy1 (2026-11-18): Art Library clips: four test videos to generate (cheap model, 2 second strike, Rose lying down, Mudling idle)
+
+Next step of the animation tool test (claude/animation-tool-test-exam.md in the Project).
+
+- Checked: the art-bake Action with the ffmpeg from pip works. Tom's two approves on 11-18 baked in 2.5 and 5.5 minutes (was about 10.5), no errors.
+- Tom approved `clip-rose-strike` twice at 1.5x on 11-18 after trying up to 3x the day before, so 1.5 is now the default `clip.speed` for attack clips (`tools/art-library/clip-prompts.js`).
+- New: study videos (`clip.test: true`). APPROVE needs no marks, the review screen hides the marks, speed and battlefield rows and says it is a test, and the Action only saves the video in `art/raw/clips/` (`bake_clip` in `art_bake.py` returns before cutting). No clip is cut, no script tag is added, nothing in the game changes.
+- Four study entries in ADMIN > ART LIBRARY > Clips: `clip-rose-strike-lite` (same strike on `grok-imagine-video-1.5-lite`, about $0.07), `clip-rose-strike-2s` (2 second video, about $0.17), `clip-rose-sleep` (Rose gets sleepy and lies down, 4 s, about $0.33; the wording now insists she ends lying on her side and keeps her bow, the two misses of the 11-17 exam) and `clip-mudling-idle` (group Monsters, 3 s, about $0.25).
+- `tools/clip-bake/make_start.py` now takes a monster id: it uses the `stance` rect of `data/foes/<id>-hires.js`, drops loose specks, and places the body at 70 percent of the frame height, centred. New start picture `art/clips/start/mudling.png`. Rose's start picture rebuilds byte for byte.
+- Not known: whether the xAI API accepts the model name `grok-imagine-video-1.5-lite` as written (taken from the price list, never called). If it is refused the card shows the service's error and nothing is charged.
+- Tests: `python3 tools/art-library/clip_lib_test.py` (57 checks, 7 new for study videos), `python3 tools/clip_test.py`, `python3 tools/smoke.py`.
+
 ## linegap1 (2026-11-18): story scenes play on AUTO, and each chapter 1 line has its own pause before the next speaker
 
 Tom (2026-11-18 07:26): "What about the pacing between when different characters speak?" then "Go".
