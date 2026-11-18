@@ -2,6 +2,10 @@
 """Fake xAI and GitHub endpoints for testing the Art Library (no real keys).
 Run: python3 tools/art-library/stub.py [port]   (default 8765)
 xAI:    POST /v1/images/generations and /v1/images/edits  (Bearer must be 'test'; 401 otherwise; 400 if the body shape is wrong)
+        POST /v1/videos/generations (needs model, prompt, image.url as a data: address, duration, resolution) answers {request_id};
+        GET /v1/videos/<request_id> answers {status:'pending'} twice, then {status:'done', video:{url}}; the url serves the file named
+        by the STUB_VIDEO environment variable (GET /video.bin; with STUB_VIDEO_NOCORS=1 it is sent without the CORS header, like a
+        video host that does not let a web page keep a copy).
 GitHub: PUT /repos/<o>/<r>/contents/<path>, GET same path (404 until put; data/art-prompts.json is pre-seeded from the repo with sha 'seed'; a PUT to an existing path without the right sha answers 409; GET /files lists everything stored). Calls are logged to /log (GET) for assertions.
 CORS is open so a page on another port can call it."""
 import base64, json, sys, zlib, struct
@@ -17,7 +21,7 @@ def png(w=96, h=128):
     def ch(t, d): return struct.pack('>I', len(d)) + t + d + struct.pack('>I', zlib.crc32(t + d) & 0xffffffff)
     return b'\x89PNG\r\n\x1a\n' + ch(b'IHDR', struct.pack('>IIBBBBB', w, h, 8, 2, 0, 0, 0)) + ch(b'IDAT', data) + ch(b'IEND', b'')
 
-LOG, FILES = [], {}
+LOG, FILES, VIDEOS = [], {}, {}
 import os
 _seed = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'data', 'art-prompts.json')
 if os.path.exists(_seed):
@@ -36,6 +40,18 @@ class H(BaseHTTPRequestHandler):
         self.end_headers(); self.wfile.write(b)
     def do_OPTIONS(self): self._send(204)
     def do_GET(self):
+        if self.path.startswith('/video.bin'):
+            b = open(os.environ['STUB_VIDEO'], 'rb').read()
+            self.send_response(200); self.send_header('Content-Type', 'video/webm'); self.send_header('Accept-Ranges', 'bytes')
+            if not os.environ.get('STUB_VIDEO_NOCORS'): self.send_header('Access-Control-Allow-Origin', '*')
+            self.send_header('Content-Length', str(len(b))); self.end_headers(); self.wfile.write(b); return
+        if self.path.startswith('/v1/videos/'):
+            if self.headers.get('Authorization') != 'Bearer test': return self._send(401, {'error': 'bad key'})
+            rid = self.path.rsplit('/', 1)[-1]
+            if rid not in VIDEOS: return self._send(404, {'error': 'no such request'})
+            VIDEOS[rid] += 1; LOG.append({'xai': 'poll', 'rid': rid})
+            if VIDEOS[rid] < 3: return self._send(200, {'status': 'pending'})
+            return self._send(200, {'status': 'done', 'video': {'url': 'http://%s/video.bin?%s' % (self.headers.get('Host'), rid), 'duration': 3}, 'model': 'stub'})
         if self.path == '/log': return self._send(200, LOG)
         if self.path == '/files': return self._send(200, FILES)
         if self.path.startswith('/repos/'):
@@ -50,6 +66,12 @@ class H(BaseHTTPRequestHandler):
     def do_POST(self):
         b = self._body()
         if self.headers.get('Authorization') != 'Bearer test': return self._send(401, {'error': 'bad key'})
+        if self.path == '/v1/videos/generations':
+            ok = isinstance(b, dict) and b.get('model') and b.get('prompt') and isinstance(b.get('image'), dict) and str(b['image'].get('url', '')).startswith('data:image/') and isinstance(b.get('duration'), int) and b.get('resolution') in ('480p', '720p', '1080p')
+            if not ok: return self._send(400, {'error': 'bad request shape'})
+            rid = 'req%d' % (len(VIDEOS) + 1); VIDEOS[rid] = 0
+            LOG.append({'xai': self.path, 'model': b['model'], 'duration': b['duration'], 'resolution': b['resolution'], 'rid': rid})
+            return self._send(200, {'request_id': rid})
         if self.path in ('/v1/images/generations', '/v1/images/edits'):
             ok = isinstance(b, dict) and b.get('model') and b.get('prompt')
             if self.path.endswith('edits'):

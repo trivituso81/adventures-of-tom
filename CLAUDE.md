@@ -42,6 +42,10 @@ Then only what he needs to judge the work (decisions I made, one line each). The
 
 Tom (11-02, and again 11-03 14:49 with "ALWAYS"): he creates images only in the Art Library (he presses Generate, then Approve or Reject). Never plan on, suggest or write prompts for him to run in any outside image AI, not even as a fallback after repeated misses. When the Library keeps missing, the options are a different Library method (a reference picture, a different entry shape) or an input he supplies into the Library. Older notes that mention his outside AI are history.
 
+## Battle clip videos are made in the Art Library too (clipgen1, 2026-11-17)
+
+ADMIN > ART LIBRARY > Clips: an entry with a `clip` field (`tools/art-library/clip-prompts.js`, run it with node to add entries) is a short video of a character made on the xAI video API from a start picture (`python3 tools/clip-bake/make_start.py <owner>`, built from the battle idle frame). Tom presses GENERATE VIDEO, marks START, HIT and END in REVIEW, then APPROVE; the art-bake Action cuts the clip (`art_bake.py` `bake_clip`, `tools/clip-bake/bake_clip.py`). Code: `engine/art-clips.js`, engine side `engine/clips.js`. Test: `python3 tools/art-library/clip_lib_test.py`. State and next steps of the animation test: `claude/animation-tool-test-exam.md` in the Project.
+
 ## Purge replaced files completely (standing rule, Tom 2026-11-05)
 
 Tom (11-05 18:40): "remember from now on to purge old files completely after replacing them." When a new picture, sheet, sound, script or data file replaces an old one, remove everything the old one left behind in the same change: the old files, the code that drew or loaded the old thing (fallbacks, wrappers, helper functions, constants), stale comments, tag or cache entries, and Project or doc notes that describe it. Then grep for the old names and ids and confirm zero references. Git history keeps the old copy, so deleting is safe. Do not keep an old version "as a fallback" unless Tom asks. Frozen `demo/` is the one exception (never edited). Approved sources in `art/raw/` stay: the Art Library reads them.

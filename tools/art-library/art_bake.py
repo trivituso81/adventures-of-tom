@@ -7,6 +7,10 @@ What it does, for every APPROVED entry of data/art-prompts.json whose newest ver
   2. copies the picture to `bake.src` (a path under tools/sprite-bake/src/ that the bake script reads);
   3. runs the bake script: `python3 -I tools/sprite-bake/<bake.script> <bake.args...>`;
   4. then (once for the whole run) moves every cache tag the tag check demands (tools/art-library/bump_tags.py) and puts a CHANGES entry at the top.
+A CLIP entry (field `clip`, tab Clips: a short video of a character, see tools/art-library/clip-prompts.js) needs no `bake`
+field: its approved file is art/raw/clips/<id>-v<n>.mp4 (or a .json holding the video's address when the phone could not keep
+a copy; the video is then downloaded next to it), and the newest version carries Tom's three marks in seconds
+(`marks`: first, hit, last). bake_clip() turns the marks into frame numbers and runs tools/clip-bake/bake_clip.py.
 An entry with no `bake` field is reported and left alone (art that only lives in art/raw/ until a bake is wired for it).
 
 The `bake` object in data/art-prompts.json (set by Claude in tools/art-library/make-prompts.js, never by Tom):
@@ -55,6 +59,38 @@ def key_background(src, dst):
     Image.fromarray(a).save(dst)
     return [int(x) for x in col]
 
+def bake_clip(e, p):
+    """One approved clip video -> art/clips/<clip.id>.webp + data/clips/<clip.id>.js (+ its <script> tag in index.html). Returns a note."""
+    import urllib.request
+    c = e['clip']; v = e['versions'][-1]; m = v.get('marks') or {}
+    if not re.fullmatch(r'[a-z0-9-]+', c['id']) or not re.fullmatch(r'[a-z0-9]+', c['owner']): raise SystemExit(f'{e["id"]}: odd clip id or owner')
+    if not all(isinstance(m.get(k), (int, float)) for k in ('first', 'hit', 'last')) or not (0 <= m['first'] < m['hit'] < m['last']):
+        raise SystemExit(f'{e["id"]}: the approved version has no usable START, HIT and END marks: {m}')
+    mp4 = os.path.join(ROOT, p)
+    if p.endswith('.json'):
+        url = json.load(open(mp4, encoding='utf-8'))['url']
+        if not url.startswith('https://'): raise SystemExit(f'{e["id"]}: odd video address')
+        mp4 = mp4[:-5] + '.mp4'
+        with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'art-bake'}), timeout=120) as r, open(mp4, 'wb') as f: shutil.copyfileobj(r, f)
+    pr = sh('ffprobe', '-v', 'error', '-select_streams', 'v:0', '-count_frames', '-show_entries', 'stream=r_frame_rate,nb_read_frames', '-of', 'json', mp4, check=True)
+    st = json.loads(pr.stdout)['streams'][0]; a, b = st['r_frame_rate'].split('/'); fps = float(a) / float(b); nfr = int(st['nb_read_frames'])
+    step = max(1, round(c.get('step', 3) * fps / 30))                     # clip.step is written for a 30 a second video
+    first = min(nfr - 1, round(m['first'] * fps)); last = min(nfr - 1, round(m['last'] * fps))
+    kept = list(range(first, last + 1, step))
+    if len(kept) < 4: raise SystemExit(f'{e["id"]}: START and END are too close together ({len(kept)} pictures)')
+    impact = min(kept[1:], key=lambda f: abs(f - m['hit'] * fps))         # the kept picture nearest Tom's HIT mark (never the standing first one)
+    r = sh(sys.executable, '-I', os.path.join('tools', 'clip-bake', 'bake_clip.py'), mp4, c['id'], c['owner'], '--first', str(first), '--last', str(kept[-1]),
+           '--step', str(step), '--impact', str(impact), '--fig-rows', str(c['figRows']), '--speed', str(c.get('speed', 1)), '--fps', str(fps))
+    print(r.stdout[-1500:]); print(r.stderr[-1500:], file=sys.stderr)
+    if r.returncode: raise SystemExit(f'art_bake: bake_clip.py failed for {e["id"]}')
+    tagline = f'<script src="data/clips/{c["id"]}.js?v=clip0"></script>'       # bump_tags moves the tag
+    ix = os.path.join(ROOT, 'index.html'); html = open(ix, encoding='utf-8').read()
+    if f'data/clips/{c["id"]}.js' not in html:
+        tags = re.findall(r'<script src="data/clips/[^"]+"></script>\n', html)
+        if not tags: raise SystemExit('art_bake: index.html has no data/clips script tag to put the new clip next to')
+        html = html.replace(tags[-1], tags[-1] + tagline + '\n'); open(ix, 'w', encoding='utf-8').write(html)
+    return f'{e["id"]}: clip `{c["id"]}` cut from {p} ({fps:g} pictures a second; video frames {first} to {kept[-1]}, every {step}, hit at frame {impact}; {len(kept)} pictures kept). {r.stdout.strip().splitlines()[-1] if r.stdout.strip() else ""}'
+
 def next_number():
     f = os.path.join(ROOT, 'docs', 'CHANGES.md')
     nums = [int(m) for m in re.findall(r'^## \d{4}-\d{2}-\d{2} \((\d+)\)', open(f, encoding='utf-8').read(), re.M)]
@@ -74,7 +110,7 @@ def main():
     argv = sys.argv[1:]
     dry = '--dry' in argv
     files = changed_files(argv)
-    raws = [p for p in files if p.startswith('art/raw/') and p.lower().endswith('.png') and os.path.exists(os.path.join(ROOT, p))]
+    raws = [p for p in files if p.startswith('art/raw/') and (p.lower().endswith('.png') or (p.startswith('art/raw/clips/') and p.lower().endswith(('.mp4', '.json')))) and os.path.exists(os.path.join(ROOT, p))]
     if not raws:
         print('art_bake: no art/raw picture changed, nothing to do'); return 0
     entries = json.load(open(DATA, encoding='utf-8'))['entries']
@@ -84,7 +120,7 @@ def main():
         if e.get('status') != 'approved' or not vs: continue
         newest = vs[-1].get('file') or vs[-1].get('path')
         if newest not in raws: continue
-        (todo if e.get('bake') else skipped).append((e, newest))
+        (todo if e.get('bake') or e.get('clip') else skipped).append((e, newest))
     for e, p in skipped: print(f'art_bake: {e["id"]} ({p}) has no `bake` field yet: stored only, nothing baked')
     # a picture in art/raw that no approved entry claims (e.g. committed by hand)
     claimed = {p for _, p in todo + skipped}
@@ -94,6 +130,10 @@ def main():
         print('art_bake: nothing to bake'); return 0
     notes, ids = [], []
     for e, p in todo:
+        if e.get('clip'):
+            print(f'art_bake: {e["id"]}: clip video {p} -> art/clips/{e["clip"]["id"]}.webp')
+            if not dry: notes.append(bake_clip(e, p)); ids.append(e['id'])
+            continue
         b = e['bake']; src = b['src']
         if not src.startswith('tools/sprite-bake/src/') or '..' in src or '..' in b['script'] or '/' in b['script']:
             print(f'art_bake: {e["id"]}: refusing odd bake paths {src!r} {b["script"]!r}'); return 1

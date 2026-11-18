@@ -1,3 +1,16 @@
+## clipgen1 (2026-11-17): Art Library can now make battle clip videos: new Clips tab, Generate, mark Start, Hit and End, Approve
+
+Tom (2026-11-17, animation tool test, next step after clip1): video generation built into the Art Library on the xAI API, so a clip is Generate then Approve with no outside tool. Nothing in the story game changed.
+- Checked first (xAI docs, 2026-11-17): the video API takes a start picture (as the first frame), 480p, 1 to 15 seconds, and answers with a request number that is polled until the video address arrives. Model `grok-imagine-video-1.5`. Price: $0.08 a second at 480p plus $0.01 for the picture, so a 3 second clip is about $0.25 (the same model costs about $0.09 a clip in Sorceress). An end frame exists only in the reference mode, not used.
+- New tab **Clips** in `art.html` (code in `engine/art-clips.js`). First entry: **Rose: strike (Boop) video clip** (`clip-rose-strike`, from `tools/art-library/clip-prompts.js`).
+- Start picture: `tools/clip-bake/make_start.py <owner>` builds `art/clips/start/<owner>.png` from the character's own battle idle frame on flat magenta (figure 60 percent of the frame height, right of the middle so a lunge has room). This is clip1's hand-off fix: the video starts from the same painting the game draws.
+- GENERATE VIDEO sends the start picture and the prompt, then waits (1 to 3 minutes). The request number is kept on the device until the video is in, so a closed page or dropped connection never pays twice (the button reads FETCH THE VIDEO).
+- REVIEW shows the video with a frame slider and three marks: START (standing still before the move), HIT (when the hit lands), END (standing again). ON THE BATTLEFIELD loops START to END at game speed with the magenta removed over a battle background. APPROVE is refused until the three marks are set in order.
+- APPROVE commits `art/raw/clips/<id>-v<n>.mp4` and the marks; the art-bake Action (`tools/art-library/art_bake.py`, new `bake_clip`) turns the marks into frame numbers and runs `tools/clip-bake/bake_clip.py`, adds the clip's script tag to `index.html` when it is new, and moves the cache tags. If the phone is not allowed to keep a copy of the video, the video's address is committed instead and the Action downloads it.
+- Approving `clip-rose-strike` replaces the Wan-made `rose-strike` clip that Battle Lab > CLIP TEST: ROSE plays. The new clip is cut at 3x the video's speed (Tom, clip3: "do 3x").
+- Clip pictures now carry their own cache tag inside `data/clips/<id>.js` (`bake_clip.py --tag`), so a re-cut clip reaches the phone without moving the tag of every painted sheet.
+- Test: new `tools/art-library/clip_lib_test.py` against the fake services in `tools/art-library/stub.py` (portrait, landscape, and a video the browser may not copy): 43 checks pass. Not tested: the real xAI video service (no key here). `tools/art-library/test.py` was already failing before this change (its expected entry counts are old) and is not fixed here.
+
 ## clip3 (2026-11-17): Rose's test punch plays at 3x the video's speed
 
 Tom (2026-11-17 17:51): "do 3x - its still too slow". The CLIP TEST: ROSE punch now plays at 3x (was 2x): 1.1 s, punch lands 0.53 s after she starts. Same 33 frames, now shown at 30 a second. `python3 tools/clip_test.py`: FAILS [].

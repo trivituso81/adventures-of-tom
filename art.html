@@ -140,6 +140,7 @@ header{padding:10px 28px}
 </div>
 <div id="toast"></div>
 <script src="engine/admin-music.js?v=admin1"></script>
+<script src="engine/art-clips.js?v=clipgen1"></script>
 <script>
 // Art Library (Phase B). Prompts come from data/art-prompts.json (Claude writes them with tools/art-library/make-prompts.js).
 // GENERATE calls the xAI image API from this device with the key pasted below (localStorage 'aot-art-key', never in the repo, never logged).
@@ -198,7 +199,7 @@ function setupOpen(open){ $('setupbody').hidden=!open; $('setuptog').textContent
 $('setuptog').onclick=()=>setupOpen($('setupbody').hidden);
 // --- tabs, filters, groups and one-line rows (UX rebuild, CHANGES 110)
 // Every entry is one collapsed row. Rows sit in groups (the `group` field from make-prompts.js) and groups sit in tabs. Only an open row draws its prompt, references and results.
-const TABS=['Characters','NPCs','Areas','Rooms','Props','Enemies','Battle','Title','Portraits','Flight'];
+const TABS=['Characters','NPCs','Areas','Rooms','Props','Enemies','Battle','Clips','Title','Portraits','Flight'];   // Clips = video entries (engine/art-clips.js)
 const FILTERS=[['todo','To do'],['ingame','In game, not approved'],['all','All'],['ready','Ready'],['wait','Waiting on me'],['rejected','Rejected'],['approved','Approved'],['blocked','Blocked']];
 const STATE_NAME={ready:'Ready',wait:'Waiting on me',rejected:'Rejected',approved:'Approved',blocked:'Blocked'};
 // ready = can be generated now; wait = a picture is generated and not yet approved or rejected; blocked = a reference picture is not made yet
@@ -264,6 +265,7 @@ function paintFilters(){
   $('filters').innerHTML=FILTERS.map(f=>'<button class="tab'+(f[0]===UI.filter?' on':'')+'" data-filter="'+f[0]+'">'+f[1]+' '+n(f[0])+'</button>').join('');
 }
 function renderCard(e){
+  if(e.clip) return clipCard(e);   // a video entry (engine/art-clips.js)
   const id=esc(e.id), rs=RES[e.id]||[], blk=blockInfo(e), ed=EDITS[e.id]!==undefined&&EDITS[e.id]!==e.prompt;
   const refs=(e.refs||[]).map((p,i)=>'<label class="ref"><img loading="lazy" decoding="async" src="'+esc(rp(p))+'" data-path="'+esc(rp(p))+'" alt="" onerror="refMiss(this)"><input type="checkbox" data-ref="'+id+'" data-i="'+i+'" '+(USE[e.id+'|'+i]===false?'':'checked')+'> '+esc(rp(p).split('/').pop())+'</label>').join('');
   const apr=n=>(e.versions||[]).some(v=>v.from==='v'+n), rjc=n=>(e.rejects||[]).some(v=>v.from==='v'+n);
@@ -366,6 +368,7 @@ async function uploadOwn(id,file){
 }
 async function generate(id,btn){
   const e=DATA.entries.find(x=>x.id===id), key=LS.get('aot-art-key');
+  if(e&&e.clip) return clipGenerate(id,btn);
   if(!key) return setMsg(id,'Paste the xAI key at the top first.',true);
   const blk=blockInfo(e); if(blk) return setMsg(id,blk.why,true);
   const prompt=(promptOf(e)||'').trim(); if(!prompt) return setMsg(id,'The prompt is empty.',true);
@@ -461,6 +464,8 @@ async function decide(kind,resKey,btn){
   if(!LS.get('aot-gh-token')) return setMsg(id,'Close this, open Setup at the top of the page and paste the GitHub token first.',true), false;
   const note=(NOTES[id]||'').trim();
   if(kind==='no'&&!note){ setMsg(id,'Type a note for Claude first: what is wrong or what to change.',true); if(btn.classList.contains('rvb')) $('rvnote').focus(); return false; }
+  const mk=e.clip&&kind==='ok'?clipMarks(r):null;   // a video needs its three marks before it can be approved
+  if(e.clip&&kind==='ok'&&!mk) return setMsg(id,'Mark START, HIT and END first (in that order).',true), false;
   const armKey=kind+'|'+resKey;
   // two taps: the first arms the button (it keeps its width and label; the message line says what the second tap does)
   if(ARMED!==armKey){ ARMED=armKey; rvDisarm(); btn.classList.add('armed'); setMsg(id,'Tap '+(kind==='ok'?'APPROVE':'REJECT')+' again to confirm (v'+r.n+').'); clearTimeout(decide.h); decide.h=setTimeout(()=>{ if(ARMED===armKey){ ARMED=null; rvDisarm(); setMsg(id,''); } },4000); return false; }
@@ -469,9 +474,10 @@ async function decide(kind,resKey,btn){
     const today=new Date().toISOString().slice(0,10), NOWMS=Date.now();
     if(kind==='ok'){
       setMsg(id,'Saving the picture to the game files...');
-      const slug=(e.tab||'misc').toLowerCase(); let k=Math.max(0,...(e.versions||[]).map(v=>v.n||0))+1, path='', b64=await blobToB64(await shrinkBig(r.blob)), done=false, srv=0;
+      const slug=(e.tab||'misc').toLowerCase(); let k=Math.max(0,...(e.versions||[]).map(v=>v.n||0))+1, path='', b64=e.clip?(r.blob?await blobToB64(r.blob):textToB64(JSON.stringify({url:r.url})+'\n')):await blobToB64(await shrinkBig(r.blob)), done=false, srv=0;
+      const ext=e.clip?(r.blob?'.mp4':'.json'):'.png';   // a video this browser could not keep goes up as its address; the bake Action downloads it
       for(let tries=0;tries<9&&!done;tries++){
-        path='art/raw/'+slug+'/'+id+'-v'+k+'.png';
+        path='art/raw/'+slug+'/'+id+'-v'+k+ext;
         const w=await gh('PUT',path,{message:'Art Library: approve '+id+' v'+k,content:b64,branch:GH_BRANCH});
         if(w.ok) done=true;
         else if(w.status===409||w.status===422) k++;
@@ -481,9 +487,9 @@ async function decide(kind,resKey,btn){
       if(!done) throw new Error('Could not find a free version number for the picture.');
       k--;
       setMsg(id,'Saving the prompt...');
-      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.prompt=r.prompt; x.status='approved'; x.versions=x.versions||[]; x.versions.push({n:k,file:path,date:today,from:'v'+r.n,at:NOWMS}); },'Art Library: '+id+' approved (v'+k+')');
-      e.prompt=r.prompt; e.status='approved'; e.versions=(e.versions||[]).concat([{n:k,file:path,date:today,from:'v'+r.n,at:NOWMS}]); delete EDITS[id]; saveEdits();
-      MSG[id]={text:'Approved. Saved as '+path+'. Claude will pick it up next session.',err:false};
+      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.prompt=r.prompt; x.status='approved'; x.versions=x.versions||[]; x.versions.push(Object.assign({n:k,file:path,date:today,from:'v'+r.n,at:NOWMS},mk?{marks:mk}:{})); },'Art Library: '+id+' approved (v'+k+')');
+      e.prompt=r.prompt; e.status='approved'; e.versions=(e.versions||[]).concat([Object.assign({n:k,file:path,date:today,from:'v'+r.n,at:NOWMS},mk?{marks:mk}:{})]); delete EDITS[id]; saveEdits();
+      MSG[id]={text:e.clip?'Approved. The game is cutting the clip now (about 5 minutes). Then press RELOAD on the title screen and open ADMIN > BATTLE LAB > CLIP TEST.':'Approved. Saved as '+path+'. Claude will pick it up next session.',err:false};
     } else {
       setMsg(id,'Saving your note...');
       const txt=promptOf(e);
@@ -503,7 +509,7 @@ function rvOpen(id,vi){
   const w=waitingIds(); if(w.indexOf(id)>=0){ RV.q=w; RV.mode='queue'; } else { RV.q=[id]; RV.mode='one'; }
   RV.i=RV.q.indexOf(id); RV.v=vi||0; $('rv').hidden=false; document.body.style.overflow='hidden'; rvDraw();
 }
-function rvClose(){ $('rv').hidden=true; document.body.style.overflow=''; ARMED=null; clearTimeout(decide.h); }
+function rvClose(){ clipRvStop(); $('rv').hidden=true; document.body.style.overflow=''; ARMED=null; clearTimeout(decide.h); }
 function rvDisarm(){ document.querySelectorAll('.rvb.armed').forEach(b=>b.classList.remove('armed')); }
 function rvDraw(){
   const id=rvId(), e=ENTRY[id], rs=RES[id]||[]; if(!e) return rvClose(); if(RV.v>=rs.length) RV.v=0;
@@ -511,7 +517,8 @@ function rvDraw(){
   $('rvtitle').textContent=rowLabel(e); $('rvsub').textContent=e.tab+(e.group&&e.group!==e.tab?' · '+e.group:'')+' · '+STATE_NAME[ST[id]];
   const left=RV.q.filter(x=>ST[x]==='wait').length;
   $('rvcount').textContent=RV.mode==='queue'?(RV.i+1)+' of '+RV.q.length+' in this queue · '+left+' still waiting on you':'Not in the waiting queue';
-  const r=rs[RV.v]; if(r) $('rvimg').src=urlOf(r); else $('rvimg').removeAttribute('src');
+  const r=rs[RV.v]; if(r&&!e.clip) $('rvimg').src=urlOf(r); else $('rvimg').removeAttribute('src');
+  clipRvDraw(e,r);
   const ap=n=>(e.versions||[]).some(v=>v.from==='v'+n), rj=n=>(e.rejects||[]).some(v=>v.from==='v'+n);
   $('rvchips').innerHTML=rs.map((x,k)=>'<button data-vi="'+k+'" class="'+(k===RV.v?'on ':'')+(ap(x.n)?'ap ':rj(x.n)?'rj ':'')+'">v'+x.n+(ap(x.n)?' approved':rj(x.n)?' rejected':'')+'</button>').join('');
   const lr=(e.rejects||[]).slice(-1)[0]; $('rvhist').textContent=lr&&lr.note?'Last rejection note: '+lr.note:'';
@@ -581,7 +588,7 @@ async function makeZip(files){
   return new Blob([...parts,...cd,end.buffer],{type:'application/zip'});
 }
 $('exp').onclick=async()=>{
-  const all=(await tx('readonly',s=>s.getAll())).filter(r=>r.id!=='__own'); const files=all.map(r=>({name:'art/'+r.id+'-v'+r.n+'.png',blob:r.blob}));
+  const all=(await tx('readonly',s=>s.getAll())).filter(r=>r.id!=='__own'&&r.blob); const files=all.map(r=>({name:'art/'+r.id+'-v'+r.n+(r.video?'.mp4':'.png'),blob:r.blob}));
   const prompts=DATA.entries.map(e=>({id:e.id,tab:e.tab,title:e.title,prompt:promptOf(e),refs:e.refs,status:e.status}));
   files.push({name:'art-prompts-edited.json',blob:new Blob([JSON.stringify(prompts,null,1)],{type:'application/json'})});
   download(await makeZip(files),'art-library-export.zip'); toast('Exported '+all.length+' pictures.');
