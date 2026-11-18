@@ -25,7 +25,11 @@ function b3LevelStats(level) {
 // ---------- Units ----------
 function b3BlankUnit(key,side,slot) {
   return {key,side,slot,st:{},wait:0,pri:0,pushes:0,pulls:0,placed:false,granted:0,pepRound:0,turns:0,ko:false,stripped:{},peeves:[],resists:[],
-    shields:[],counters:{},crack:0,cracked:{},passives:[],used:{}};
+    shields:[],counters:{},crack:0,cracked:{},passives:[],used:{},
+    // Composure (spec 2.7): pips left and at the start; pipLock = cannot lose pips (from a Break until its next turn ends);
+    // broken = Flustered and waiting for its next turn; flusterTurn = that turn is running; flusterMove = fall back when this turn ends.
+    pips:0,maxPips:0,pipLock:false,broken:false,flusterTurn:false,flusterMove:false,
+    mark:null};   // the key of the family member this foe has Marked for its follow-up act (bestiary 1.1)
 }
 function b3PartyUnit(F,id,level,slot) {
   const C=B3_CAST[id]; if(!C) throw new Error('Battle 3 has no kit yet for '+id);
@@ -39,12 +43,38 @@ function b3PartyUnit(F,id,level,slot) {
   if(F.cfg.hpPct!=null) u.hp=Math.max(1,Math.round(u.maxHp*F.cfg.hpPct));
   return u;
 }
-function b3FoeUnit(F,id,row,slot) {
+// o.add: a foe called in mid-fight (bestiary 1.1): half its entry's HP unless o.hp prints a number, and 0 pips.
+function b3FoeUnit(F,id,row,slot,o) {
   const D=B3_FOES[id]; if(!D) throw new Error('Battle 3 has no enemy row yet for '+id);
-  const u=b3BlankUnit('f'+slot,'foe',slot);
-  Object.assign(u,{id,name:D.name,D,row:row||D.row,atk:D.atk,def:D.def,spd:D.spd,pips:D.pips,peeves:D.peeves,resists:D.resists,
-    actIx:0,lastUse:{},charge:null,letter:''});
-  u.hp=u.maxHp=Math.max(1,Math.round(D.hp*F.mods.foeHp));
+  const u=b3BlankUnit('f'+slot,'foe',slot),add=!!(o&&o.add),pips=add?0:D.pips||0;
+  Object.assign(u,{id,name:D.name,D,row:row||D.row,atk:D.atk,def:D.def,spd:D.spd,pips,maxPips:pips,peeves:D.peeves,resists:D.resists,add,
+    actIx:0,lastUse:{},lastRound:{},everyUsed:{},uses:{},lastAim:{},charge:null,letter:''});
+  // A boss prints its HP for the party size its chapter expects, and a second number for the other size (bestiary 1.1 "Party of 3").
+  const n=F.party.length,base=add?(o.hp||D.hp*B3_RULES.add.hp):(n===3&&D.hp3)||(n===4&&D.hp4)||D.hp;
+  u.hp=u.maxHp=Math.max(1,Math.round(base*F.mods.foeHp));
+  return u;
+}
+// Slot numbers run left to right along one line, Front row first, then Back (spec 2.1 "Adjacent"). A newcomer stands last in its row.
+function b3Reslot(F) {
+  const rank=f=>f.row==='back'?1:0;
+  F.foes.slice().sort((a,b)=>rank(a)-rank(b)||a.slot-b.slot).forEach((f,i)=>{ f.slot=i; });
+}
+// Two or more of the same monster get a letter each (Mudling A, Mudling B), in the order they joined.
+function b3NameFoes(F) {
+  const count={},seen={}; for(const f of F.foes) count[f.id]=(count[f.id]||0)+1;
+  for(const f of F.foes) if(count[f.id]>1) { f.letter='ABCDEFGH'[seen[f.id]=(seen[f.id]||0)]; seen[f.id]++; f.name=f.D.name+' '+f.letter; }
+}
+// An add joins the fight. Returns the new unit, or null when its row is full. It waits like anyone arriving (100 x 100 / Speed).
+function b3Summon(F,id,row,hp) {
+  const D=B3_FOES[id]; if(!D) throw new Error('Battle 3 has no enemy row yet for '+id);
+  const r=(row||D.row)==='back'?'back':'front';
+  if(b3Live(F,'foe').filter(f=>(f.row==='back'?'back':'front')===r).length>=B3_RULES.add.room[r]) return null;
+  const u=b3FoeUnit(F,id,r,999,{add:true,hp});
+  u.key='f'+F.foes.length;
+  F.foes.push(u); F.units.push(u);
+  b3Reslot(F); b3NameFoes(F);
+  u.wait=b3WaitFor(F,u,B3_RULES.arrive);
+  for(const s of D.start) b3AddStatus(F,u,s,{src:u});
   return u;
 }
 const b3Alive=u=>!!u&&!u.ko&&u.hp>0;
@@ -70,8 +100,7 @@ function b3NewFight(cfg) {
   // Front row first, then Back: slot numbers run left to right along one line (spec 2.1 "Adjacent").
   const ordered=[...list.filter(f=>(f.row||B3_FOES[f.id].row)!=='back'),...list.filter(f=>(f.row||B3_FOES[f.id].row)==='back')];
   F.foes=ordered.map((f,i)=>b3FoeUnit(F,f.id,f.row,i));
-  const count={}; for(const f of F.foes) count[f.id]=(count[f.id]||0)+1;
-  const seen={}; for(const f of F.foes) if(count[f.id]>1) { f.letter='ABCDE'[seen[f.id]=(seen[f.id]||0)]; seen[f.id]++; f.name=f.D.name+' '+f.letter; }
+  b3NameFoes(F);
   F.units=[...F.party,...F.foes];
   for(const u of F.units) u.wait=b3WaitFor(F,u,B3_RULES.startWait[u.side],true);
   for(const f of F.foes) for(const id of f.D.start) b3AddStatus(F,f,id,{src:f});
@@ -137,16 +166,25 @@ function b3Icons(u) {
 
 // Everything a unit carries, for the full list the player opens by tapping it: statuses, shields, counters and the hazards
 // on its side's floor. Rows: {name, short, color, kind, left (text), desc}.
+// `left` is the whole phrase the screen prints ("2 turns left", "until its next turn").
 function b3Carried(F,u) {
-  const turns=n=>n+(n===1?' turn':' turns'),rows=[];
+  const turns=n=>n+(n===1?' turn':' turns')+' left',rows=[];
+  // Composure, a wound-up act and a Mark come first: they are what the player plans around.
+  if(u.maxPips) rows.push({name:'Composure',short:u.pips+' OF '+u.maxPips,color:'#ffd27a',kind:'pips',left:u.pipLock?'locked':'',
+    desc:'Pet Peeve hits and Detonations knock pips off, 3 at most in one action. At 0 it is Flustered: it loses a wound-up attack and any stance, falls back on the turn bar and takes 35% more damage until its next turn.'});
+  if(u.charge) { const m=u.mark&&b3Unit(F,u.mark);
+    rows.push({name:'Winding up '+u.charge.name,short:'!!',color:'#ff8f80',kind:'charge',left:'next turn',
+      desc:'It lands on its next turn'+(m?', aimed at '+m.name:'')+'. A Break cancels it, and so does a Skill that interrupts.'}); }
+  for(const f of F.foes) if(f.mark===u.key&&b3Alive(f)) rows.push({name:'Marked',short:'MARKED',color:'#ff8f80',kind:'marked',left:'next turn',
+    desc:f.name+(f.charge?' will use '+f.charge.name+' on '+u.name:' is aiming at '+u.name)+' on its next turn. A Mark cannot be cleansed.'});
   const ids=Object.keys(u.st).sort((a,b)=>B3_STATUS[b].weight-B3_STATUS[a].weight||u.st[a].at-u.st[b].at);
   for(const id of ids) { const S=B3_STATUS[id],s=u.st[id];
-    rows.push({name:S.name,short:S.short,color:S.color,kind:S.kind,left:s.unit==='round'?s.n+(s.n===1?' round':' rounds'):turns(s.n),desc:S.desc}); }
+    rows.push({name:S.name,short:S.short,color:S.color,kind:S.kind,left:s.unit==='round'?s.n+(s.n===1?' round':' rounds')+' left':s.unit==='begin'?'until its next turn':turns(s.n),desc:S.desc}); }
   for(const sh of u.shields) rows.push({name:'Shield',short:'SHIELD',color:'#9fd0ff',kind:'buff',left:turns(sh.n),desc:'Soaks the next '+sh.amt+' damage before HP.'});
   for(const k in u.counters) if(u.counters[k]) rows.push({name:k,short:String(u.counters[k]),color:'#fff1cb',kind:'counter',left:'',desc:'Built up: '+u.counters[k]+'.'});
   if(u.crack) rows.push({name:'Cracked',short:'CRACKED',color:'#e6b08a',kind:'debuff',left:'this fight',desc:'Defense is cut by '+Math.round(u.crack*100)+'% for the rest of the fight.'});
   for(const hz of F.hazards) if(hz.side===u.side) { const H=B3_HAZARDS[hz.id];
-    rows.push({name:H.name,short:H.short,color:H.color,kind:'hazard',left:hz.uses+(hz.uses===1?' slip':' slips')+', '+hz.rounds+(hz.rounds===1?' round':' rounds'),desc:H.desc}); }
+    rows.push({name:H.name,short:H.short,color:H.color,kind:'hazard',left:hz.uses+(hz.uses===1?' slip':' slips')+', '+hz.rounds+(hz.rounds===1?' round':' rounds')+' left',desc:H.desc}); }
   return rows;
 }
 
@@ -209,10 +247,11 @@ function b3Options(F,u,S) {
 // ---------- The simple player ----------
 // Picks one move and one target for a party member. No randomness. The simulator plays whole fights with it, and Rose Mode's
 // recommended move (stage 7) will ask it too, so there is one piece of code to keep right.
-function b3Auto(F,u) {
+// `only` (optional) narrows the moves it may pick from: only(S) is true for a move it may use.
+function b3Auto(F,u,only) {
   let best=null;
   for(const S of b3Skills(F,u)) {
-    if(!b3CanUse(F,u,S).ok) continue;
+    if((only&&!only(S))||!b3CanUse(F,u,S).ok) continue;
     for(const O of b3Options(F,u,S)) { if(O.no) continue; const sc=b3AutoScore(F,u,S,O); if(!best||sc>best.sc+1e-9) best={skill:S.id,target:O.key,sc}; }
   }
   return best;
@@ -231,6 +270,10 @@ function b3AutoScore(F,u,S,O) {
       const bonus=has('damage')&&has('damage').bonus,d=per(t)*(1+(bonus&&bonus.per==='stripped'?nb*bonus.add:0));
       sc+=d+(d>=t.hp?20:0)+(1-t.hp/t.maxHp)*2+(S.flavor.some(fl=>b3FindDetonation(t,fl))?8:0)+nb*6;
       if(has('interrupt')&&t.charge) sc+=25;
+      // Composure: each pip this move should knock off is worth a little, and the pip that Breaks is worth a lot.
+      if(t.maxPips&&!t.pipLock&&t.pips>0) { const det=S.flavor.map(fl=>b3FindDetonation(t,fl)).find(Boolean);
+        const p=Math.min(R.composure.capPerAction,(S.flavor.some(fl=>t.peeves.includes(fl))?R.composure.peeve:0)+(det?det.pips:0)+(S.composure||0));
+        sc+=p*3+(p>=t.pips?14:0); }
     } else sc+=O.units.reduce((s,t)=>s+per(t),0)/O.units.length*(S.target==='all_foes'?O.units.length*R.aoeShare:1);
   } else if(has('place')) sc+=4+O.units[0].wait/6;
   else if(has('revive')) sc+=60;
@@ -240,7 +283,8 @@ function b3AutoScore(F,u,S,O) {
     sc+=F.hazards.some(h=>h.id===H.id)||!n?-99:std(foes[0])*R.power.light*Math.min(H.uses,n+1)+8;
   } else if(has('intercept')) {
     // Worth it by how hurt the family next to him is.
-    const id=has('intercept').id; sc+=O.units.reduce((s,m)=>s+(m.st[id]?0:(1-m.hp/m.maxHp)*30),0);
+    // A Marked neighbour is about to take a wound-up hit: stepping in is worth that hit.
+    const id=has('intercept').id; sc+=O.units.reduce((s,m)=>s+(m.st[id]?0:(1-m.hp/m.maxHp)*30+(foes.some(f=>f.mark===m.key)?24:0)),0);
   } else {
     // A ward: worth the hits it should answer before it runs out.
     const st=has('status'),L=st&&B3_STATUS[st.id].on&&B3_STATUS[st.id].on.afterHit,dm=L&&L.react&&L.effects.find(e=>e.op==='damage');
@@ -257,6 +301,7 @@ function b3CheckData() {
     if((e.op==='status'||e.op==='prime'||e.op==='intercept')&&!B3_STATUS[e.id]) bad.push(where+': unknown status '+e.id);
     if(e.op==='intercept'&&B3_STATUS[e.id]&&!B3_STATUS[e.id].intercept) bad.push(where+': status '+e.id+' has no intercept field');
     if(e.op==='hazard'&&!B3_HAZARDS[e.id]) bad.push(where+': unknown hazard '+e.id);
+    if(e.op==='summon'&&!B3_FOES[e.id]) bad.push(where+': unknown foe to call '+e.id);
     if(e.op==='damage'&&e.power!=null&&(!flav(e.flavor)||(typeof e.power!=='number'&&B3_RULES.power[e.power]==null))) bad.push(where+': a damage effect with its own power needs a flavor and a known tier'); } };
   for(const id in B3_STATUS) { const S=B3_STATUS[id];
     if(S.id!==id) bad.push('status '+id+': id does not match its key');
@@ -281,7 +326,15 @@ function b3CheckData() {
   for(const id in B3_FOES) { const D=B3_FOES[id],w='foe '+id;
     if(D.id!==id) bad.push(w+': id does not match its key'); if(!flav(D.peeves)||!flav(D.resists)) bad.push(w+': unknown Pet Peeve or Resist flavor');
     for(const s of D.start) if(!B3_STATUS[s]) bad.push(w+': unknown starting status '+s);
-    for(const A of D.acts) { if(!flav(A.flavor)) bad.push(w+' '+A.id+': unknown flavor'); if(!['one','all','self'].includes(A.hits)) bad.push(w+' '+A.id+': hits "'+A.hits+'" not built yet'); effects(w+' '+A.id,A.effects); } }
+    if(D.pips&&!['elite','boss'].includes(D.role)) bad.push(w+': only an Elite or a Boss has Composure pips');
+    for(const A of D.acts) { const wa=w+' '+A.id;
+      if(!flav(A.flavor)) bad.push(wa+': unknown flavor'); if(!B3_FOE_HITS.includes(A.hits)) bad.push(wa+': hits "'+A.hits+'" not built yet');
+      for(const k in (A.when||{})) if(!B3_FOE_WHEN.includes(k)) bad.push(wa+': condition "'+k+'" not built yet');
+      for(const k of ['then','after']) if(A[k]&&!D.acts.some(x=>x.id===A[k])) bad.push(wa+': '+k+' names an act this foe does not have: '+A[k]);
+      if(A.then&&!D.acts.some(x=>x.id===A.then&&x.after===A.id)) bad.push(wa+': its follow-up must say after:\''+A.id+'\'');
+      if(A.hits==='marked'&&!D.acts.some(x=>x.then===A.id&&x.effects.some(e=>e.op==='mark'))) bad.push(wa+': hits the Marked ally, but no act Marks for it');
+      if(A.hits==='attacker'&&A.recovery!==0) bad.push(wa+': a counter act has Recovery 0');
+      effects(wa,A.effects); } }
   for(const id in B3_FORMATIONS) for(const f of B3_FORMATIONS[id].foes) if(!B3_FOES[f.id]) bad.push('formation '+id+': unknown foe '+f.id);
   return bad;
 }

@@ -15,13 +15,16 @@
 //   detonate {src, tgt, id, name, prime}
 //   push {tgt, n, bar}  pull {tgt, n, bar, placed}
 //   pep {tgt, n, pep}
-//   telegraph {src, id, name}         an enemy announces a charged act
+//   telegraph {src, id, name, mark}   an enemy announces a charged act; mark: the key of the family member it is aimed at, if it Marked one
+//   pips {tgt, n, left, max, refill}  Composure pips come off (refill: they are back to full as its next turn begins)
+//   break {src, tgt, bar}             a foe's pips reached 0: it is Flustered and has fallen back on the turn bar
+//   summon {src, tgt, id, name, row, hp, bar}   an add joins the fight
 //   ko {tgt}
 //   heal {tgt, n, hp, id}  shield {tgt, n, sh}  shieldBroken {tgt}  shieldEnd {tgt, sh}  soak {tgt, id}
 //   revive {src, tgt, hp, bar}  standUp {tgt, hp}  skip {who}
 //   intercept {src, tgt}              src takes the hit that was aimed at tgt
 //   react {src, tgt, id, name}        a reaction begins (a ward's answer); its beats share its `g` ('r0', 'r1'...)
-//   interrupt {src, tgt, name}        a wound-up act is cancelled
+//   interrupt {src, tgt, name, why}   a wound-up act is cancelled (why 'break': a Break took it; src is null when no Skill did it)
 //   hazardOn {id, side, uses, rounds}  hazardTrip {id, tgt, left}  hazardEnd {id, side}
 //   counter {tgt, id, v}  crack {tgt, v}
 //   endTurn {who, bar}                the actor's wait is set (`g` is 'end' for everything a turn's end writes)
@@ -33,7 +36,11 @@
 function b3BeginTurn(F,u,beats) {
   F.acting=u; u.turns++; F.turnLog.push(u.key);
   beats.push({t:'turn',who:u.key,round:F.round,clock:F.clock,bar:b3BarSnap(F,u,0)});
-  const c={F,actor:u,src:null,targets:[u],hit:[],beats,g:'pre',detonated:{}};
+  const c={F,actor:u,src:null,targets:[u],hit:[],beats,g:'pre',detonated:{},ledger:{}};
+  // What lasts "until its next turn begins" ends here, before anything else (Flustered: a burn this turn is back at normal damage).
+  for(const id of Object.keys(u.st)) if(u.st[id].unit==='begin') { b3EndStatus(F,u,id,'time'); beats.push({t:'statusEnd',tgt:u.key,id,g:'pre'}); }
+  // A foe that was Broken gets this turn whatever else is on it, with its pips full again; they stay locked until the turn ends (spec 2.7).
+  if(u.broken) { u.broken=false; u.flusterTurn=true; u.pips=u.maxPips; beats.push({t:'pips',tgt:u.key,n:0,left:u.pips,max:u.maxPips,refill:true,g:'pre'}); }
   for(const id of Object.keys(u.st)) {
     const S=B3_STATUS[id],s=u.st[id]; if(!S.tick||!s) continue;
     const fl=S.tick.flavor,pv=u.peeves.includes(fl),rs=u.resists.includes(fl);
@@ -48,6 +55,7 @@ function b3BeginTurn(F,u,beats) {
   b3Fire(F,'turnStart',{src:u,tgt:u,g:'pre'},beats);
   if(b3Alive(u)&&b3HasFlag(u,'skipTurn')) {
     for(const id of Object.keys(u.st)) if(B3_STATUS[id].flags.includes('skipTurn')) { b3EndStatus(F,u,id,'used'); beats.push({t:'statusEnd',tgt:u.key,id,g:'pre'}); }
+    if(u.flusterTurn) return true;   // "A foe always gets that turn": the Stun is spent and the turn is not lost
     beats.push({t:'skip',who:u.key,g:'pre'});
     b3EndTurn(F,u,B3_RULES.forecast,beats);
     return false;
@@ -70,6 +78,10 @@ function b3Next(F) {
 function b3EndTurn(F,u,recovery,beats) {
   if(b3Alive(u)) {
     b3SetWait(F,u,recovery);
+    // Broken during its own turn (a ward's answer, a slip): it falls back now that its wait is set.
+    if(u.flusterMove) { u.flusterMove=false; b3FlusterMove(F,u,0); }
+    // The turn a Broken foe was owed is over: its pips can be shaved again.
+    if(u.flusterTurn) { u.flusterTurn=false; u.pipLock=false; }
     for(const id of Object.keys(u.st)) { const s=u.st[id]; if(s.unit!=='turn') continue;
       if(s.skip) { s.skip=false; continue; }
       if(--s.n<=0) { b3EndStatus(F,u,id,'time'); beats.push({t:'statusEnd',tgt:u.key,id,g:'end'}); b3Fire(F,'statusEnded',{src:u,tgt:u,id,g:'end'},beats); } }
@@ -98,11 +110,56 @@ function b3Hurt(F,c,t,dmg,info) {
 }
 function b3KoCheck(F,c) {
   for(const u of F.units) if(!u.ko&&u.hp<=0) {
-    u.ko=true; u.st={}; u.shields=[]; u.charge=null; u.wait=0;
+    u.ko=true; u.st={}; u.shields=[]; u.charge=null; u.mark=null; u.broken=false; u.flusterMove=false; u.wait=0;
     c.beats.push({t:'ko',tgt:u.key,g:c.g});
     b3Fire(F,'ko',{src:c.actor,tgt:u,g:c.g},c.beats);
   }
 }
+// ---------- Composure and Break (spec 2.7) ----------
+// Every action keeps a ledger per foe: {n: pips from Detonations and printed Composure numbers, peeve: a Pet Peeve hit landed}.
+// A Pet Peeve is worth 1 pip per action however many hits landed. Only Elites and Bosses have pips.
+function b3Pips(c,t,n,peeve) {
+  if(!t||t.side!=='foe'||!t.maxPips) return;
+  const LG=c.ledger||(c.ledger={}),L=LG[t.key]||(LG[t.key]={n:0,peeve:false});
+  if(peeve) L.peeve=true; else L.n+=n;
+}
+// The ledger is paid when the action ends: 3 pips at most from one foe, from every source together (c.pipCap raises it to 4
+// for a Full Family Ruckus). A foe whose pips are locked loses none. At 0 pips the foe Breaks.
+function b3PayLedger(F,c) {
+  const R=B3_RULES.composure,cap=c.pipCap||R.capPerAction,LG=c.ledger||{},paid=c.paid||(c.paid={});
+  for(const key of Object.keys(LG)) {
+    const t=b3Unit(F,key),L=LG[key]; delete LG[key];
+    if(!b3Alive(t)||t.pipLock||t.pips<=0) continue;
+    const n=Math.min(cap-(paid[key]||0),L.n+(L.peeve&&!paid[key+':pv']?R.peeve:0),t.pips);
+    if(L.peeve) paid[key+':pv']=true;
+    if(n<=0) continue;
+    t.pips-=n; paid[key]=(paid[key]||0)+n;
+    c.beats.push({t:'pips',tgt:key,n,left:t.pips,max:t.maxPips,g:c.g});
+    b3Fire(F,'pipsShaved',{src:c.actor,tgt:t,n,g:c.g,c},c.beats);
+    if(t.pips<=0) b3Break(F,c,t);
+  }
+}
+// A foe stops winding up: the act is gone and its Mark with it. The lost act counts as used: its "every Nth turn" count starts
+// again and a once-in-the-fight act does not come back. `A` names an act lost before it was wound up. Returns the act it lost.
+function b3LoseCharge(F,t,A) {
+  A=A||t.charge; t.charge=null; t.mark=null;
+  if(A) { t.lastUse[A.id]=t.turns; t.uses[A.id]=(t.uses[A.id]||0)+1; }
+  return A;
+}
+// Break: the foe is Flustered. It loses a wound-up act and any stance, goes behind every unit due inside the next 100 ticks,
+// takes 35% more damage and cannot be pushed until its next turn begins. Its pips refill then, and stay locked until that turn ends.
+function b3Break(F,c,t) {
+  t.pipLock=true; t.broken=true;
+  const lost=b3LoseCharge(F,t);
+  if(lost) c.beats.push({t:'interrupt',src:null,tgt:t.key,id:lost.id,name:lost.name,why:'break',g:c.g});
+  for(const id of Object.keys(t.st)) if(B3_STATUS[id].kind==='stance') { b3EndStatus(F,t,id,'break'); c.beats.push({t:'statusEnd',tgt:t.key,id,why:'strip',g:c.g}); }
+  b3AddStatus(F,t,'flustered',{src:c.actor}); c.beats.push({t:'status',tgt:t.key,id:'flustered',g:c.g});
+  // During its own turn its wait is not set yet, so it falls back when that turn ends (b3EndTurn).
+  if(F.acting===t) t.flusterMove=true; else b3FlusterMove(F,t,c.actor===F.acting?c.rec:0);
+  c.beats.push({t:'break',src:c.actor.key,tgt:t.key,bar:b3BarSnap(F,F.acting,c.rec),g:c.g});
+  b3Fire(F,'break',{src:c.actor,tgt:t,g:c.g,c},c.beats);
+}
+
 // The Detonation a hit of this flavor would set off on this unit: the row for its oldest matching Prime (spec 2.5).
 function b3FindDetonation(t,flavor) {
   let best=null;
@@ -117,6 +174,7 @@ function b3Cond(F,c,cond,t) {
 // One hit on one target. `per` is the Skill Power of each flavor part of this hit.
 function b3Hit(F,c,t,per,flavors,e,single) {
   const a=c.actor,B=c.beats;
+  c.ledger=c.ledger||{};
   // Misses: Blind (the next single-target attack), an accuracy penalty, then the target's Evasion.
   if(single&&b3HasFlag(a,'blind')) {
     for(const id of Object.keys(a.st)) if(B3_STATUS[id].flags.includes('blind')) { b3EndStatus(F,a,id,'used'); B.push({t:'statusEnd',tgt:a.key,id,g:c.g}); }
@@ -146,11 +204,16 @@ function b3Hit(F,c,t,per,flavors,e,single) {
       c.detonated[t.key]=true; b3EndStatus(F,t,det.prime,'detonated');
       B.push({t:'detonate',src:a.key,tgt:t.key,id:det.id,name:det.name,prime:det.prime,g:c.g});
       b3RunEffects(F,Object.assign({},c,{tgt:t,partDmg:dmg}),det.effects);
+      b3Pips(c,t,det.pips);
       const got=b3Pep(F,a,B3_RULES.pep.detonation,'detonation'); if(got) B.push({t:'pep',tgt:a.key,n:got,pep:a.pep,g:c.g});
       b3Fire(F,'detonation',{src:a,tgt:t,id:det.id,g:c.g},B);
     }
     b3Hurt(F,c,t,dmg,{src:a.key,flavor:fl,crit,peeve:pv,resist:rs});
     if(!c.hit.includes(t)) c.hit.push(t);
+    if(a.side==='party'&&t.side==='foe') {
+      if(pv) b3Pips(c,t,0,true);          // a Pet Peeve hit: 1 pip per action, not per hit (spec 2.7)
+      b3QueueCounters(F,c,t,a);           // an enemy's counter act answers, once per action (engine/b3-foe.js)
+    }
     // The Prime of the move's first flavor, unless this action detonated on this target (spec 2.5).
     const P=fi===0?B3_FLAVORS[fl].prime:null;
     if(P&&a.side==='party'&&t.side==='foe'&&!c.detonated[t.key]&&t.hp>0) {
@@ -204,16 +267,21 @@ function b3Act(F,u,skillId,optKey) {
   const O=b3Options(F,u,S).find(o=>o.key===optKey);
   if(!O||O.no) return {ok:false,why:(O&&O.no)||'Nobody to use that on right now.'};
   const beats=[],rec=B3_RULES.recovery[S.slot],cost=b3Cost(F,u,S);
-  const c={F,actor:u,src:u,skill:S,rec,targets:O.units.slice(),hit:[],beats,g:'pre',detonated:{},reacted:{},tags:S.tags||[]};
+  const c={F,actor:u,src:u,skill:S,rec,targets:O.units.slice(),hit:[],beats,g:'pre',detonated:{},reacted:{},tags:S.tags||[],ledger:{}};
   beats.push({t:'act',src:u.key,id:S.id,name:S.name,flavor:S.flavor,shape:(S.anim&&S.anim.shape)||'strike',hits:Math.max(1,S.hits||1),tgts:O.units.map(t=>t.key),g:'pre'});
   if(cost) { b3Pep(F,u,-cost,'cost'); beats.push({t:'pep',tgt:u.key,n:-cost,pep:u.pep,g:'pre'}); }
   if(S.slot==='basic') { const got=b3Pep(F,u,B3_RULES.pep.basic,'basic'); if(got) beats.push({t:'pep',tgt:u.key,n:got,pep:u.pep,g:'pre'}); }
   b3Fire(F,'actionDeclared',{src:u,g:'pre'},beats);
   b3RunEffects(F,c,S.effects);
   c.g='post';
+  // A Skill's own printed Composure number, on every monster it hit (or aimed at, when it deals no damage).
+  if(S.composure) for(const t of (c.hit.length?c.hit:c.targets)) b3Pips(c,t,S.composure);
   b3KoCheck(F,c);
+  // Composure is paid before anything answers: a foe this action Broke has lost its counter (architecture 2.6, step 6).
+  b3PayLedger(F,c);
   b3RunReactions(F,beats);
   b3Fire(F,'actionEnd',{src:u,g:'post',c},beats);
+  b3PayLedger(F,c);   // pips a Trait or Quirk added as the action ended
   b3KoCheck(F,c);
   b3EndTurn(F,u,rec,beats);
   return {ok:true,beats};

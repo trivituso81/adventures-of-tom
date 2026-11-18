@@ -15,6 +15,8 @@ const B3_HOOKS=['battleStart','roundStart','turnStart','actionDeclared','beforeH
 //   limit    'action' (once per action), 'round' (once a round) or 'battle' (once a fight), per holder
 //   react    true: the effects run as a REACTION after the action that set them off has finished (a ward's answer, a counter).
 //            The holder is the attacker of the reaction and `to:'attacker'` aims at the unit that set it off.
+//            A reaction shares the `reacted` record of the action that set it off, so an "once per action" answer cannot be
+//            set off a second time by the answers to it (a ward against a counter act against a ward...).
 //   effects  ops to run (engine/b3-ops.js)
 //   consume  (statuses) the status is used up
 function b3ListenOk(F,u,L,ev,putBy,useKey) {
@@ -30,9 +32,10 @@ function b3ListenOk(F,u,L,ev,putBy,useKey) {
 }
 function b3Listen(F,u,L,ev,beats,useKey,statusId,name) {
   if(L.limit==='action') { if(ev.c) (ev.c.reacted=ev.c.reacted||{})[u.key+useKey]=true; } else if(L.limit) u.used[useKey]=F.round;
-  if(L.react) { F.reactions.push({u,L,src:ev.src||null,status:statusId,name}); return; }
+  if(L.react) { F.reactions.push({u,L,src:ev.src||null,status:statusId,name,root:ev.c&&ev.c.reacted}); return; }
   // A status's effects run with the event's source as the actor (Squished pays the attacker); a passive's run as its holder.
-  b3RunEffects(F,{F,actor:statusId?(ev.src||u):u,src:ev.src||null,tgt:ev.tgt||u,carrier:u,targets:[ev.tgt||u],hit:[],beats,g:ev.g,detonated:{}},L.effects);
+  // Composure they shave is written into the ledger of the action that set them off, inside its 3-pip cap (spec 2.7).
+  b3RunEffects(F,{F,actor:statusId?(ev.src||u):u,src:ev.src||null,tgt:ev.tgt||u,carrier:u,targets:[ev.tgt||u],hit:[],beats,g:ev.g,detonated:{},ledger:(ev.c&&ev.c.ledger)||{}},L.effects);
   if(L.consume&&statusId&&b3EndStatus(F,u,statusId,'used')) beats.push({t:'statusEnd',tgt:u.key,id:statusId,g:ev.g});
 }
 function b3Fire(F,hook,ev,beats) {
@@ -46,16 +49,20 @@ function b3Fire(F,hook,ev,beats) {
   }
 }
 // The reactions an action set off, in the order they were set off (architecture 2.6, step 6: "counter acts answer").
-// Each is its own small action: its beats carry their own `g` ('r0', 'r1'...) so the screen plays them after the move.
+// Each is its own small action: its beats carry their own `g` ('r0', 'r1'...) so the screen plays them after the move, and it
+// has its own Composure ledger with its own 3-pip cap (my call: an answer is not part of the action it answers).
+// An enemy's counter act (R.act, queued by b3QueueCounters in engine/b3-foe.js) does not answer while that enemy is Flustered:
+// a Break takes its counter-auras away until its next turn begins (spec 2.7).
 function b3RunReactions(F,beats) {
   for(let guard=0;F.reactions.length&&guard<20;guard++) {
     const R=F.reactions.shift(),u=R.u,a=R.src;
-    if(!b3Alive(u)||!a||!b3Alive(a)||(R.status&&!u.st[R.status])) continue;
+    if(!b3Alive(u)||!a||!b3Alive(a)||(R.status&&!u.st[R.status])||(R.act&&u.broken)) continue;
     const g='r'+(F.reactSeq++);
     beats.push({t:'react',src:u.key,tgt:a.key,id:R.status,name:R.name,g});
-    const c={F,actor:u,src:a,tgt:a,carrier:u,targets:[a],hit:[],beats,g,detonated:{},reacted:{},tags:['counter']};
+    const c={F,actor:u,src:a,tgt:a,carrier:u,targets:[a],hit:[],beats,g,detonated:{},reacted:R.root||{},tags:R.tags||['counter'],ledger:{}};
     b3RunEffects(F,c,R.L.effects);
     b3KoCheck(F,c);
+    b3PayLedger(F,c);
     b3Fire(F,'counter',{src:u,tgt:a,g},beats);
   }
   F.reactions.length=0;

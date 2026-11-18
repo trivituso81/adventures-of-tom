@@ -20,7 +20,7 @@ function b3LabBack() {
   splash.last=performance.now(); requestAnimationFrame(splashFrame);
 }
 SPLASH_MODES.lab3={tab:'Battle Lab: new battle',cue:'A / Enter to fight. B / Esc to go back',
-  text:'The new battle system, one stage at a time. These fights use the new rules: the turn bar, Pep, flavors, Primes and Detonations, and now Skills, wards, hazards and Pick-Me-Up.',
+  text:'The new battle system, one stage at a time. These fights use the new rules: the turn bar, Pep, flavors, Primes and Detonations, Skills, wards, hazards and Pick-Me-Up, and now Composure pips, Breaks and Marks on an Elite and the chapter 1 boss.',
   choices:()=>[...B3_LAB.map((L,i)=>({name:L.name,sub:L.sub,cast:L.party,act:()=>b3LabGo(i)})),{name:'BACK',sub:'',cls:'back',act:splashBack}]};
 SPLASH_PARENT.lab3='lab';
 window.addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{B3,B3P,B3_LAB,b3Start,b3Lab,b3End,b3Dir,b3A,b3Back,b3Pick,b3Commit,b3Auto,b3OpenInfo}); });

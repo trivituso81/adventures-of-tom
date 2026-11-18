@@ -9,7 +9,8 @@ const B3_OP_LIST=['damage','heal','shield','status','prime','cleanse','strip','s
 // c is the action in progress: {F, actor, src, skill, rec, targets (chosen), hit (units a damage op landed on), beats, g (which
 // part of the move the beats belong to), detonated, tgt (set while a Detonation's, a hook's or a hazard's effects run), partDmg,
 // tags (the act's tags), outExtra ({kind: amount} damage modifiers for this action only), stripped and cleansed (counts so far),
-// inter (who took a hit for whom), lost and soak (HP lost and shield soaked per target this action), ledger (Composure, stage 3)}.
+// inter (who took a hit for whom), lost and soak (HP lost and shield soaked per target this action),
+// ledger (Composure this action has shaved per foe, paid at its end: engine/b3-resolve.js b3PayLedger), pipCap (4 for a Full Family Ruckus)}.
 // Who an effect lands on.
 function b3Who(F,c,to) {
   if(to==='self') return [c.actor];
@@ -91,11 +92,19 @@ const B3_OPS={
     for(const t of b3Who(F,c,e.to)) { if(t.pep==null||!b3Alive(t)) continue;
       const got=b3Pep(F,t,e.n,'effect'); if(got) c.beats.push({t:'pep',tgt:t.key,n:got,pep:t.pep,g:c.g}); }
   },
-  // interrupt: the act a foe is winding up is cancelled (bestiary 1.1). Its "every Nth turn" count starts again.
+  // interrupt: the act a foe is winding up is cancelled, and its Mark with it (bestiary 1.1). Its "every Nth turn" count starts again.
   interrupt(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)||!t.charge) continue;
-      const A=t.charge; t.charge=null; t.lastUse[A.id]=t.turns;
+      const A=b3LoseCharge(F,t);
       c.beats.push({t:'interrupt',src:c.actor.key,tgt:t.key,id:A.id,name:A.name,g:c.g}); }
+  },
+  // mark: an enemy act Marks the ally it aimed at for its follow-up (bestiary 1.1). Not a status: nothing cleanses it, and it stays
+  // through a row change. It is on the ally the act AIMED at, even when someone stepped in and took the act's own hit.
+  mark(F,c,e) { const t=c.targets[0]; if(t&&b3Alive(t)) c.actor.mark=t.key; },
+  // summon: calls n adds of one kind into a row (bestiary 1.1 "Adds"). A full row takes no more.
+  summon(F,c,e) {
+    for(let i=0;i<(e.n||1);i++) { const u=b3Summon(F,e.id,e.row,e.hp); if(!u) break;
+      c.beats.push({t:'summon',src:c.actor.key,tgt:u.key,id:u.id,name:u.name,row:u.row,hp:u.hp,bar:b3BarSnap(F,F.acting,c.rec),g:c.g}); }
   },
   // hazard: lays a B3_HAZARDS row on one side's floor. Laying the same one again replaces it.
   hazard(F,c,e) {
@@ -112,14 +121,15 @@ const B3_OPS={
       if(e.once) t.cracked[e.once]=true;
       t.crack=Math.min(B3_RULES.caps.crack,t.crack+e.n); c.beats.push({t:'crack',tgt:t.key,v:t.crack,g:c.g}); }
   },
-  // composure: writes pips into the action's ledger. Stage 3 pays the ledger out (the 3-pip cap, Break); until then nothing reads it.
-  composure(F,c,e) { for(const t of b3Who(F,c,e.to)) if(t.pips>0) { c.ledger=c.ledger||{}; c.ledger[t.key]=(c.ledger[t.key]||0)+e.n; } },
+  // composure: a printed Composure number. It goes into the action's ledger, which is paid when the action ends (the 3-pip cap, the Break).
+  composure(F,c,e) { for(const t of b3Who(F,c,e.to)) b3Pips(c,t,e.n); },
   // splash: a share of the hit that set it off, as plain damage of one flavor (Short Circuit!).
   splash(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)) continue;
       const pv=t.peeves.includes(e.flavor),rs=t.resists.includes(e.flavor);
       const dmg=Math.max(1,Math.round((c.partDmg||0)*e.share*(pv?B3_RULES.peeve:1)*(rs?B3_RULES.resist:1)*b3TakenMult(t)));
-      b3Hurt(F,c,t,dmg,{src:c.actor.key,flavor:e.flavor,peeve:pv,resist:rs,splash:true}); }
+      b3Hurt(F,c,t,dmg,{src:c.actor.key,flavor:e.flavor,peeve:pv,resist:rs,splash:true});
+      if(pv&&c.actor.side==='party') b3Pips(c,t,0,true); }
   }
 };
 function b3RunEffects(F,c,effects) {

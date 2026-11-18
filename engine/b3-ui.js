@@ -9,6 +9,7 @@
 // BASIC and SKILLS work. RUCKUS (stage 6) and BAG are greyed out with the reason.
 // Tapping a family member's card or a monster while the cross or the Skill list is up opens that unit's full list (B3.ui 'info'):
 // every status with how long it has left and what it does, shields, and what lies on its side's floor (spec 2.8, the screen rule).
+// For an Elite or a Boss the list starts with its Composure pips and the act it is winding up; a Marked family member's list says who Marked them.
 // Keys: I opens it on whoever is up, up and down step through everyone, Esc goes back.
 
 // ---------- Start and end ----------
@@ -108,9 +109,10 @@ function b3RenderBar(moved) {
   const seen={};
   box.innerHTML='<span class="b2-rib-lbl">TURN</span>'+list.map(e=>{
     const u=b3Unit(B3.F,e.k),n=seen[e.k]=(seen[e.k]||0)+1,key=e.k+'#'+n,foe=u.side==='foe';
-    const cls='b2-tk '+(foe?'foe':'pty')+(e.now?' now':'')+(e.ghost?' ghost':'')+(moved===e.k&&n===1?' b3-moved':'');
+    const flus=foe&&n===1&&((B3.view.u[e.k]||{}).st||[]).includes('flustered');
+    const cls='b2-tk '+(foe?'foe':'pty')+(e.now?' now':'')+(e.ghost?' ghost':'')+(moved===e.k&&n===1?' b3-moved':'')+(flus?' b3-flus':'');
     const img=foe?b2Thumb(u.id):b2Portrait(u.id);
-    const badge=foe&&n===1&&B3.view.charge[e.k]?'<i class="b2-int all" title="Winding up '+b2Esc(B3.view.charge[e.k])+'">!!</i>':'';
+    const badge=flus?'<i class="b2-int b3-brk" title="Flustered">BREAK</i>':foe&&n===1&&B3.view.charge[e.k]?'<i class="b2-int all" title="Winding up '+b2Esc(B3.view.charge[e.k])+'">!!</i>':'';
     return (e.div?'<i class="b3-div" title="Round '+e.div+' starts here"><b>'+e.div+'</b></i>':'')+
       '<div class="'+cls+'" data-k="'+key+'" title="'+b2Esc(u.name)+'">'+(img?'<img alt="" src="'+img+'">':'<span>'+b2Esc(u.name.charAt(0))+'</span>')+(u.letter?'<b>'+u.letter+'</b>':'')+badge+'</div>';
   }).join('');
@@ -131,7 +133,10 @@ function b3RenderParty() {
     const v=B3.view.u[u.key],r=Math.max(0,v.hp)/v.maxHp;
     const cls='b2-pc'+(u===B3.actor&&battle.state==='command'?' act':'')+(v.ko?' ko':'')+(tgt.includes(u)||(B3.ui==='info'&&B3.infoKey===u.key)?' tgt':'');
     const pips=Array.from({length:B3_RULES.pep.max},(_,k)=>'<i'+(k<v.pep?' class="on"':'')+'></i>').join('');
-    const st=b3ViewIcons(u.key).map(id=>'<span class="b2-st" style="color:'+B3_STATUS[id].color+'" title="'+b2Esc(B3_STATUS[id].name)+'">'+B3_STATUS[id].short+'</span>').join('');
+    // A Mark is not a status, but the card says so first; it takes the third icon's place so a card never shows more than 3.
+    const mk=b3ViewMarked(u.key)&&!v.ko;
+    const st=(mk?'<span class="b2-st b3-mk" title="A monster\u2019s wound-up attack is aimed here">MARKED</span>':'')+
+      b3ViewIcons(u.key).slice(0,mk?2:3).map(id=>'<span class="b2-st" style="color:'+B3_STATUS[id].color+'" title="'+b2Esc(B3_STATUS[id].name)+'">'+B3_STATUS[id].short+'</span>').join('');
     const img=b2Portrait(u.id);
     return '<div class="'+cls+'" data-i="'+i+'"><span class="b2-pt">'+(img?'<img alt="" src="'+img+'">':'<span class="b2-ph">'+u.name.charAt(0)+'</span>')+'</span>'+
       '<div><div class="b2-nm">'+b2Esc(u.name)+'<em>Lv'+u.level+'</em></div>'+(st?'<div class="b3-chips">'+st+'</div>':'')+
@@ -158,7 +163,7 @@ function b3RenderCmd() {
   if(B3.ui==='info') {
     const t=b3Unit(B3.F,B3.infoKey),v=B3.view.u[t.key],rows=b3Carried(B3.F,t);
     box.innerHTML='<div class="b2-list b3-info"><div class="b3-inf-h"><span>'+b2Esc(t.name.toUpperCase())+'</span><em>'+(v.ko?'Knocked out':'HP '+Math.max(0,v.hp)+'/'+v.maxHp+(v.sh?' +'+v.sh+' shield':''))+'</em></div>'+
-      (rows.length?rows.map(r=>'<div class="b3-inf"><div class="b3-inf-t"><span class="b2-st" style="color:'+r.color+'">'+b2Esc(r.short)+'</span><b>'+b2Esc(r.name)+'</b>'+(r.left?'<i>'+b2Esc(r.left)+' left</i>':'')+'</div><p>'+b2Esc(r.desc)+'</p></div>').join('')
+      (rows.length?rows.map(r=>'<div class="b3-inf"><div class="b3-inf-t"><span class="b2-st" style="color:'+r.color+'">'+b2Esc(r.short)+'</span><b>'+b2Esc(r.name)+'</b>'+(r.left?'<i>'+b2Esc(r.left)+'</i>':'')+'</div><p>'+b2Esc(r.desc)+'</p></div>').join('')
         :'<div class="b3-inf"><p>Nothing on '+b2Esc(t.name)+' right now.</p></div>')+back+'</div>';
     return;
   }
@@ -168,7 +173,7 @@ function b3RenderCmd() {
       return '<button type="button" class="b2-btn'+(i===B3.sel?' sel':'')+(can.ok?'':' no')+'" data-i="'+i+'"><div class="b2-top"><span class="b2-sn">'+b2Esc(S.name)+'</span><i class="b2-cost">'+c+' PEP</i></div><em class="b2-els">'+b3FlavorChips(S)+'</em></button>'; }).join('')+back+'</div>';
   } else if(B3.ui==='target') {
     box.innerHTML='<div class="b2-list">'+B3.opts.map((o,i)=>{ const t1=o.units.length===1?o.units[0]:null,v=t1?B3.view.u[t1.key]:null;
-      const sub=o.no?o.no:t1?(v.ko?'Knocked out':'HP '+v.hp+'/'+v.maxHp+b3ViewIcons(t1.key).map(id=>' · '+B3_STATUS[id].name).join('')):o.units.length+' targets';
+      const sub=o.no?o.no:t1?(v.ko?'Knocked out':'HP '+v.hp+'/'+v.maxHp+(v.maxPips?' · '+v.pips+' of '+v.maxPips+' pips':'')+b3ViewIcons(t1.key).map(id=>' · '+B3_STATUS[id].name).join('')):o.units.length+' targets';
       return '<button type="button" class="b2-btn'+(i===B3.sel?' sel':'')+(o.no?' no':'')+'" data-i="'+i+'"><span>'+b2Esc(o.label.toUpperCase())+'</span><em>'+b2Esc(sub)+'</em></button>'; }).join('')+back+'</div>';
   }
 }
@@ -263,6 +268,7 @@ function b3Pad(dir,dirEdge,A,B) {
 function b3FoeAt(x,y) {
   let best=null,bd=1e9;
   for(const f of b3Live(B3.F,'foe')) {
+    if(!B3P.foe[f.key]) continue;   // an add that has not walked in yet
     const p=b3FoeBox(f.key),pad=8;
     if(x<p.x-p.w/2-pad||x>p.x+p.w/2+pad||y<p.y-p.h-pad||y>p.y+22) continue;
     const d=Math.hypot(x-p.x,y-(p.y-p.h/2)); if(d<bd) { bd=d; best=f; }

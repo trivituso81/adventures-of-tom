@@ -61,6 +61,22 @@ function b3Place(F,u) {
   return amt;
 }
 
+// A Flustered foe goes behind every unit due inside the next 100 ticks (spec 2.7). This ignores the halving of repeat pushes and
+// is not a push: nothing blocks it. The unit whose turn is running counts with the wait its move is about to give it (`rec`).
+// A foe already further back than all of them stays where it is.
+function b3FlusterMove(F,t,rec) {
+  let far=-1;
+  for(const o of b3LiveAll(F)) {
+    if(o===t) continue;
+    if(o===F.acting&&!rec) continue;
+    const w=o===F.acting?b3WaitFor(F,o,rec):o.wait;
+    if(w<=B3_RULES.composure.flusterWindow+1e-9) far=Math.max(far,w);
+  }
+  if(far<t.wait-1e-9) return 0;
+  const moved=far-t.wait; t.wait=far; t.pri=-1;   // pri -1: last among anyone due at the same tick
+  return moved;
+}
+
 // ---------- Forecast: the next n turns ----------
 // Runs the same clock forward on a copy of the waits, counting every future action as Recovery 100.
 // opt.actor: the unit whose turn it is now (listed first, `now`). opt.recovery: the Base Recovery of the move it is using or

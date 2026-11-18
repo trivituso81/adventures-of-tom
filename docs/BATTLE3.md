@@ -7,7 +7,7 @@
 | Where it is played today | ADMIN > BATTLE LAB > NEW BATTLE (first choice on every Lab page). Story fights still use battle 2. |
 | Naming | Every Battle 3 global starts with `B3` or `b3`, every file with `b3-`. The game is classic scripts in one shared scope, so the prefix is what lets old and new load together. |
 | The one structural rule | Rules first, pictures second. The rules work out the whole result of an action and return a list of beats. The play layer shows the beats. The rules never wait for an animation. |
-| Stages built so far | Stage 1, the core loop (build `b3s1`), and stage 2 (build `b3s2`): statuses, caps, shields, healing, knock-outs and Pick-Me-Up, rows, aggro, the hook bus, wards, intercepts, hazards. What is in and what is not: the tables at the end. |
+| Stages built so far | Stage 1, the core loop (build `b3s1`). Stage 2 (build `b3s2`): statuses, caps, shields, healing, knock-outs and Pick-Me-Up, rows, aggro, the hook bus, wards, intercepts, hazards. Stage 3 (build `b3s3`): Composure pips, Break and Flustered, Marks, the full enemy act runner, counter acts, adds, the chapter 1 Elite and boss. What is in and what is not: the tables at the end. |
 
 ## Files
 
@@ -21,7 +21,7 @@
 | Rules (no drawing) | `engine/b3-core.js`, `b3-timeline.js`, `b3-hooks.js`, `b3-ops.js`, `b3-resolve.js`, `b3-foe.js` | Fight state and stat maths, the tick clock, hooks, effect ops, one action from cost to beats, the enemy turn |
 | Play layer | `engine/b3-play.js` | Beats to pictures: default animations, numbers, the view the screen shows, Battle 3's own draw function |
 | Screen | `engine/b3-ui.js` | Start and end, the turn flow, turn bar, party cards, command cross, lists, targeting, input |
-| Check | `tools/b3-sim.js` (node), `tools/b3-check-s2.js`, `tools/b3_test.py` (browser) | Fights with no screen and the rule tests (stage 1's groups in `b3-sim.js`, stage 2's in `b3-check-s2.js`; `check` runs both); fights on screen with contact sheets |
+| Check | `tools/b3-sim.js` (node), `tools/b3-check-s2.js`, `tools/b3-check-s3.js`, `tools/b3_test.py` (browser) | Fights with no screen and the rule tests (stage 1's groups in `b3-sim.js`, stage 2's in `b3-check-s2.js`, stage 3's in `b3-check-s3.js`; `check` runs all three); fights on screen with contact sheets |
 
 The six rules files never touch the canvas, the page, a timer, battle 2 or the game's own party and monster objects. `tools/b3-sim.js` loads them into an empty sandbox, so a rules file that reaches for any of those fails there.
 
@@ -31,7 +31,11 @@ The six rules files never touch the canvas, the page, a timer, battle 2 or the g
 |---|---|---|
 | Any number (HP, power, Pep cost, percent, length, cap) | A `data/b3-*.js` row | No |
 | What a move does, when existing ops cover it | Its `effects` list | No |
-| An enemy's acts, Pet Peeves, formation | Its row in `data/b3-foes-ch<NN>.js` | No |
+| An enemy's acts, Pet Peeves, Composure pips, formation | Its row in `data/b3-foes-ch<NN>.js`. Every act field (`hits`, `when`, `aim`, `then`, `after`, `grow`) is listed at the top of `data/b3-foes-ch01.js`; the order a foe picks in is at the top of `engine/b3-foe.js`. | No |
+| A wind-up that is itself an act and Marks its target (Big Glare) | The wind-up row gets `then:'<follow-up id>'` and `effects:[{op:'mark'}]`; the follow-up row gets `after:'<wind-up id>'` and `hits:'marked'` | No |
+| A counter act (it answers whoever hit the foe) | An act row with `hits:'attacker'`, `recovery:0` and a `when` (for example `{has:'<its stance>'}`) | No |
+| A monster that calls adds | An act with `hits:'field'` and `effects:[{op:'summon',id,row,n}]`. An add has half its entry's HP and no pips (`B3_RULES.add`). | No |
+| How many pips an action can take, how hard Flustered hits | `B3_RULES.composure` | No |
 | A new kind of effect | A new op in `engine/b3-ops.js` (the full list is `B3_OP_LIST`; an op in the list with no function throws "not built yet") | Yes, small |
 | A new moment to react to | `B3_HOOKS` in `engine/b3-hooks.js` | Yes, small |
 | What a status or a hazard says in the list the player opens by tapping a unit | Its `desc` (and `short`, `color`) in `data/b3-status.js`. The data check fails a status with no `desc`. | No |
@@ -39,7 +43,7 @@ The six rules files never touch the canvas, the page, a timer, battle 2 or the g
 | Who steps in for whom | A status row with `intercept:{reduce}`; the `intercept` op puts it on the allies | No |
 | A Trait or a Quirk | A row in `B3_TRAITS` or `B3_QUIRKS` with `on` (a hook name) and the listener fields at the top of `engine/b3-hooks.js`. A party unit picks up the rows its Vibe names. None are written yet (stage 5). | No |
 
-An action's beats come in this order: `pre` (cost, set-up), one group per hit (`g` is the hit number), `post`, then one group per reaction (`g` is `r0`, `r1`...: a ward's answer, played after the move that set it off), then `end` (what the turn's end wrote: statuses and shields running out, the new wait, the fight ending). A hazard's slip comes before the enemy's `act` beat.
+An action's beats come in this order: `pre` (cost, set-up), one group per hit (`g` is the hit number), `post` (this is where `pips` and `break` land: Composure is paid once, when the action's own effects are done), then one group per reaction (`g` is `r0`, `r1`...: a ward's answer, played after the move that set it off), then `end` (what the turn's end wrote: statuses and shields running out, the new wait, the fight ending). A hazard's slip comes before the enemy's `act` beat.
 
 A fight is one plain object `F` from `b3NewFight(cfg)`. `b3Next(F)` moves the clock to the next turn, `b3Act(F,unit,skillId,targetKey)` and `b3FoeTurn(F,unit)` resolve an action. Each returns beats (the list at the top of `engine/b3-resolve.js`). Random numbers come from the fight's seed, so the same seed replays the same fight in the simulator and on screen.
 
@@ -63,12 +67,37 @@ Helpers Battle 3 borrows from battle 2 files (the purge stage must move or renam
 node tools/b3-sim.js check            # data check and rule tests: FAILS: []   (tools/smoke.py runs this too)
 node tools/b3-sim.js new1 200         # 200 fights with the simple player: wins, rounds to win, knock-outs, errors
 node tools/b3-sim.js new2 1 --seed=7 --log
+node tools/b3-sim.js new6 300 --support=4   # every 4th action of each family member is a move that deals no damage, if they have one
 python3 tools/b3_test.py              # every NEW BATTLE fight on screen, portrait and landscape; sheets in tools/shots/b3-*.png
+python3 tools/b3_test.py s3           # only the stage 3 section (The Big One: pips, Mark, Break, adds), about 5 minutes
 ```
 
-`tools/b3_test.py` plays each fight by hand through the real screen (keys and taps), checks that Windex Spritz then a Clobber hit shows Hydro-Slip!, compares the on-screen turn order with the simulator for the same seed, plays a fight to the lose screen, and checks a battle 2 fight still owns its screen afterwards. On the Pond Grump fight it also runs the stage 2 moves (section 5 in the file's header): there it aims the monsters with pokes (a test taunt, `actIx`) so every run shows a slip, a ward's answer, an intercept, an interrupt and a revive. All four fights take about 12 minutes; one fight: `python3 tools/b3_test.py new3`. Look at the sheets before pushing.
+The simple player attacks whenever attacking scores higher, which is nearly always. The bestiary's boss HP model (its section 1.6) assumes about one action in four is a support move, so a boss is measured both ways: plain, and with `--support=4`.
+
+`tools/b3_test.py` plays each fight by hand through the real screen (keys and taps), checks that Windex Spritz then a Clobber hit shows Hydro-Slip!, compares the on-screen turn order with the simulator for the same seed, plays a fight to the lose screen, and checks a battle 2 fight still owns its screen afterwards. On the Pond Grump fight it also runs the stage 2 moves (section 5 in the file's header): there it aims the monsters with pokes (a test taunt, `actIx`) so every run shows a slip, a ward's answer, an intercept, an interrupt and a revive. On The Big One it also runs the stage 3 section (section 6 in the file's header): it pokes the boss into Big Glare at Rose three times and answers it three ways (Tom's Suite Door Slide takes the bite, Crunchy Sugar-Cube Pop cancels it, a Break cancels it), tops the boss's pips up between family turns so a Break only comes when the test wants one, and calls two Mudlings and a Skeeter Swarm in as adds. All six fights take about 25 minutes; one fight: `python3 tools/b3_test.py new3`. Look at the sheets before pushing.
 
 Gotcha for any test that drives the SKILLS list with the keys: move the mouse off the list first (`pg.mouse.move(2,2)`). A mouse left resting over a row moves the cursor to that row every time the list is redrawn.
+
+## What stage 3 holds, and what waits
+
+| In (build `b3s3`) | Waits for |
+|---|---|
+| Composure (spec 2.7): a ledger per foe per action. A Pet Peeve hit is 1 pip per action, a Detonation takes its row's pips, a printed number (`composure` on a Skill, the `composure` op) is added. Paid once at the end of the action, 3 pips at most (`c.pipCap` 4 for a Full Family Ruckus). | Family Ruckus itself (stage 6). Pips a boss loses when a helper is knocked out (chapters 6, 13, 15, 20). |
+| Break: the foe is Flustered (`flustered` status, 35% more damage, no pushes, until its next turn begins). It loses a wound-up act, its Mark and any stance, and goes behind every unit due inside the next 100 ticks. Pips refill as its next turn begins and stay locked until that turn ends. That turn cannot be lost to a Stun. | The +15% Ruckus for a Break (stage 6). Traits and Quirks that listen to `pipsShaved` and `break` (stage 5 on): the hooks fire now. |
+| Wind-ups: a `charge_up` act is announced one turn and fires the next (stage 1). New: an act with `then` is itself the wind-up (Big Glare lands, Marks, and Swamp Chomp fires next turn). | The last boss's count that only a Break stops (chapter 20). |
+| Mark (bestiary 1.1): on the foe (`mark` = the ally's key), not a status. Ends when the follow-up fires or is cancelled; an intercept redirects the follow-up; a hidden Marked ally makes it miss; a knocked-out one sends it to a new target. | |
+| The act runner: `when` with everyTurn, everyRound, waitRounds, once, hpBelow, hpAbove, stripped, has, lacks, notSameAllyTurns. `hits`: one, all, self, marked, attacker, two_random, two_adjacent (with `grow`), fastest, foes, field. `aim:'back'`. | Phases and phase lines (chapter 20). Stance-swapping Pet Peeves (chapter 17). Enemy acts that trade the family's rows (chapter 11). |
+| Counter acts (`hits:'attacker'`): answer once per ally action, Recovery 0, not while Flustered. Tested with a test row; the first real one is Points Off (chapter 5). | |
+| Adds (`summon` op): half HP, 0 pips, the arriving wait, 3 in Front and 2 in Back at most, letters and slots renumbered. On screen an add fades in between the caller and the family. Tested with a test row and a poke; the first real caller is Old Iron-Gill (chapter 3). | Helper links ("while it stands the boss takes X% less") and feedback (chapters 13, 15, 20). |
+| Boss HP by party size (`hp3`, `hp4` on the foe row) | |
+| Log Lump and The Big One, formations `log` and `bigone`, Lab fights NEW 5 and NEW 6. Statuses `mossy_brace`, `muffin_crown`. | |
+| Screen: pips under an Elite's or a Boss's HP meter; BREAK!, the slumped monster with stars, its tipped face and BREAK badge on the turn bar; MARKED over the family member and on their card; Composure, the wind-up and the Mark in the lists a tap opens; pips in the target list | Pet Peeve and Resist icons once seen, preview of the pips a move would take (stage 7) |
+| Ops built now: mark, summon (and composure pays out) | steal, invert, swapBar, ruckus, ward as its own op, grant, aggro, taunt, pullForward, detonateAll, later, row |
+| The simple player values pips, the pip that Breaks, and stepping in for a Marked neighbour. `b3Auto(F,u,only)` can be narrowed to some moves. | |
+
+Simulator, 300 fights each, level 2 party of Grace, Tom, Rose and Deedee: Log Lump with a Skeeter Swarm 3.28 rounds (3.78 with `--support=4`), 0.57 Breaks a fight. The Big One 4.89 rounds (5.64 with `--support=4`), 1 Break a fight, about 10 pips shaved. All won, no knock-outs, the family ends with 86% to 91% of its HP. The stage's target for The Big One was 5 to 7 rounds: it is met with support moves and missed by 0.1 without them. Nothing was changed: the bestiary's model gives 6 rounds by assuming a quarter of actions are support, and enemy HP belongs to the balance pass (stage 14). For that pass: 462 HP (10% more) gives 5.24 rounds attacking only, and The Big One gets only about 5 turns in the whole fight (Speed 96, long Recoveries, Drenched and pushes on top).
+
+Calls made in stage 3 (all in data or one line of rules; none confirmed by Tom): a ward's answer and a slip on the wet floor each have their own 3-pip cap (an answer is not part of the action it answers); burn and Bleed ticks never take a pip; a splash in a Pet Peeve flavor counts as a Pet Peeve hit; the fall-back on a Break counts the breaker's own coming wait among "every unit waiting inside the next 100 ticks"; pips show empty while Flustered and refill as its next turn begins; a Break that comes on the foe's own turn before it acts (a slip) costs it that act; Big Glare is the wind-up turn of Swamp Chomp (glare one turn, bite the next), not an act announced a turn earlier; with nobody in the Back row Big Glare picks by aggro, and the Lab party all stand in Front (their Vibes' Leans); the Mark stays on the one the glare was aimed at even when Tom stepped in for the glare, and a taunt does not move the bite off them; a once-in-the-fight act that is cancelled does not come back; a counter act is not redirected by Suite Door Slide; "below 50% HP" includes exactly 50%; the Muffin-Tin Crown is one buff (its Attack and its Mend come off together), and its Mend can lift The Big One back over half HP, which delays Muddy Belly-Flop; a Stun on a Flustered Elite is spent without costing the turn it is owed.
 
 ## What stage 2 holds, and what waits
 
@@ -79,10 +108,10 @@ Gotcha for any test that drives the SKILLS list with the keys: move the mouse of
 | Knock-out, Pick-Me-Up (4 Pep, 25% HP, back on the bar 100 ticks out), standing up at 1 HP after a win | |
 | Party rows (default by Lean, `rows` in the fight's cfg, at least 1 in Front), Back row weighs 60, taunt flag, untargetable flag | A way for the player to choose rows (the Vibes menu, stage 4). Enemy Taunt on a family member (chapter 5). |
 | The hook bus: statuses and passives listen, with `limit` (action, round, battle) and reactions that run after the action | The Trait and Quirk rows themselves (stage 5) |
-| Wards (Zone One Blockade), intercepts (Suite Door Slide, +1 Pep per enemy action), hazards (Wet-Floor Hazard), interrupts (Crunchy Sugar-Cube Pop) | Composure: the `composure` op only writes into the action's ledger; stage 3 pays it out. Marks. |
-| Ops built: damage (also with its own power, for answers and falls), status, prime, intercept, strip (n or all), cleanse, heal, shield, revive, push, pull, place, pep, interrupt, hazard, counter, crack, composure (ledger only), splash | steal, invert, swapBar, ruckus, ward as its own op (a status row does the job), mark, grant, aggro, taunt, pullForward, detonateAll, later, summon, row |
+| Wards (Zone One Blockade), intercepts (Suite Door Slide, +1 Pep per enemy action), hazards (Wet-Floor Hazard), interrupts (Crunchy Sugar-Cube Pop) | |
+| Ops built: damage (also with its own power, for answers and falls), status, prime, intercept, strip (n or all), cleanse, heal, shield, revive, push, pull, place, pep, interrupt, hazard, counter, crack, composure, splash | See the stage 3 table |
 | Skill 1 and Skill 2 of Frequent Flier, Squishy Collector, Sugar Rush and Neat Freak | Their Capstones, Traits and Quirks (stage 5) |
-| Pond Grump and Bog Toad, formations `grump` and `toad`, Lab fights NEW 3 and NEW 4 | Log Lump and The Big One (stage 3) |
+| Pond Grump and Bog Toad, formations `grump` and `toad`, Lab fights NEW 3 and NEW 4 | |
 | The full list on tap: a party card or a monster, while the cross or the SKILLS list is up (keys: I, up and down, Esc) | Preview, Pet Peeves in the list, gamepad for the list (stage 7) |
 | The simple player scores wards, hazards, intercepts, interrupts and revives in "damage worth" | |
 
@@ -94,14 +123,14 @@ Calls made in stage 2 (all in data): Zone One Blockade's answer is a standard Cl
 
 | In (build `b3s1`) | Waits for |
 |---|---|
-| Tick timeline, Recovery, 100-tick rounds, push, pull and place with halving, the forecast | Flustered (stage 3), granted actions (stage 5) |
+| Tick timeline, Recovery, 100-tick rounds, push, pull and place with halving, the forecast | Granted actions (stage 5) |
 | Pep 0 to 10, start 4, Basic +2, the +3 a round refund cap | Cost discounts (stage 5) |
 | Damage formula, power tiers, the all-foes 70% rule, Pet Peeve and Resist, crits, Evasion, accuracy penalties, Back row | Shields, healing, the full caps test file (stage 2) |
-| The 3 Primes and the 6 Detonations (rule tests set off every one) | Composure pips (stage 3), Ruckus gains (stage 6) |
+| The 3 Primes and the 6 Detonations (rule tests set off every one) | Ruckus gains (stage 6) |
 | Statuses with same-kind-adds and different-kinds-multiply, 13 rows | The rest of the status table, the 3-icon full list on tap (stage 2) |
-| Enemy turn: printed-order cycle, "every Nth turn", charge_up telegraphs, aim by aggro weight | Marks, waits in rounds, counters, adds, phases, interrupts (stage 3) |
+| Enemy turn: printed-order cycle, "every Nth turn", charge_up telegraphs, aim by aggro weight | Phases (chapter 20) |
 | Tom, Grace, Rose, Deedee: the Basic of their first Sig Vibe; NeeDoh Stretch Pass; The Floor Is Lava! | Stat Leans and ranks (stage 4), Traits and Quirks (stage 5), everything else in the kits |
-| Mudling and Skeeter Swarm, formations `mudling` and `skeeter` | The rest of chapter 1 (stages 2 and 3) |
+| Mudling and Skeeter Swarm, formations `mudling` and `skeeter` | |
 | Turn bar with round dividers, a ghost for the highlighted move and sliding faces; party cards with 10 Pep dots; the new cross (RUCKUS and BAG greyed); tap an enemy or a party card to aim; keys and gamepad | Preview, inspect, Rose Mode pictures (stage 7) |
 | Default animations by shape (strike, cast, throw, give), hit and knock-out looks from existing frames, win and lose | Body-state table finished, clips, enemy hold (stage 8); spoken lines for the new moves (none exist yet); the victory card and rewards (stage 15) |
 

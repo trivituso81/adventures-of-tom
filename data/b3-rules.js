@@ -31,8 +31,11 @@ const B3_RULES={
   aggro:{front:100,back:60},
   // Party rows (spec 2.1): the row a family member stands in by default, from their Main Vibe's Lean. At least 1 stands in Front.
   rowByLean:{guard:'front',striker:'front',tempo:'front',support:'back'},
-  // Composure (spec 2.7). Built in stage 3; the numbers live here from the start.
-  composure:{capPerAction:3,capFullRuckus:4,flusteredTaken:.35},
+  // Composure (spec 2.7). One action shaves 3 pips at most from one foe (4 for a Full Family Ruckus). At 0 pips the foe is
+  // Flustered: it goes behind every unit due inside the next `flusterWindow` ticks and takes `flusteredTaken` more damage.
+  composure:{capPerAction:3,capFullRuckus:4,flusteredTaken:.35,peeve:1,flusterWindow:100},
+  // Adds (bestiary 1.1): a foe called in mid-fight arrives at this share of its entry's HP, with 0 pips. A side shows 3 in Front and 2 in Back at most.
+  add:{hp:.5,room:{front:3,back:2}},
   // Family Ruckus (spec 2.10). Built in stage 6.
   ruckus:{mix:5,detonation:8,extraHit:1,brk:15,doubleTeam:50,full:100,doubleTeamPower:.5},
   // Vibe Mastery (spec section 1). Built in stage 4.
@@ -53,7 +56,7 @@ const B3_FLAVORS={
 };
 
 // The six Detonations (spec 2.6). A row matches when the foe holds `prime` and a hit of `flavor` arrives.
-// Every Detonation consumes the Prime and gives the attacker +1 Pep. `pips` is the Composure it shaves (stage 3).
+// Every Detonation consumes the Prime and gives the attacker +1 Pep. `pips` is the Composure it shaves.
 const B3_DETONATIONS=[
   {id:'steam_cloud',name:'Steam Cloud!',prime:'toasty',flavor:'drench',pips:2,effects:[{op:'status',id:'blind'}]},
   {id:'steam_cloud',name:'Steam Cloud!',prime:'drenched',flavor:'sizzle',pips:2,effects:[{op:'status',id:'blind'}]},

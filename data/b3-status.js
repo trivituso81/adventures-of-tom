@@ -2,7 +2,8 @@
 // data/b3-status.js — Battle 3: one row per status, buff, stance, mark and Prime (architecture section 2.3), and the hazards.
 //   kind    buff, debuff, prime, stance or mark
 //   group   'mental' for the statuses a mental cleanse removes (spec 2.8), else null
-//   dur     {n, unit}: unit 'turn' counts the carrier's own turns (at the end of each), 'round' counts round dividers
+//   dur     {n, unit}: unit 'turn' counts the carrier's own turns (at the end of each), 'round' counts round dividers,
+//           'begin' ends when the carrier's next turn begins (Flustered)
 //   mods    [{stat, kind, v}]: `kind` is the stacking bucket. Same kind adds, different kinds multiply (spec 2.4).
 //           stats: spd, atk, def (the stat itself), out (damage dealt), taken (damage taken), reduce (damage reduction),
 //           crit (own Crit Rate), critTaken (Crit Rate of attacks against it), eva (Evasion), acc (chance its attacks miss,
@@ -42,6 +43,10 @@ const B3_STATUS={
     short:'GUARD',color:'#e6c988',weight:5,desc:'Takes 25% less damage.'},
   mend:{id:'mend',name:'Mend',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[],flags:[],regen:.03,
     short:'MEND',color:'#8fe3a6',weight:5,desc:'Heals a little at the start of each turn. It can be stripped.'},
+  // Flustered (spec 2.7): what a foe is from the moment its Composure pips reach 0 until its next turn begins. The Break itself
+  // (falling back on the turn bar, losing a wound-up act and any stance) is in engine/b3-resolve.js b3Break.
+  flustered:{id:'flustered',name:'Flustered',kind:'debuff',group:null,dur:{n:1,unit:'begin'},mods:[{stat:'taken',kind:'flustered',v:B3_RULES.composure.flusteredTaken}],flags:['pushImmune'],
+    short:'FLUSTERED',color:'#ff9a8a',weight:10,desc:'Out of Composure. Takes 35% more damage and cannot be pushed until its next turn begins.'},
   // ---- From the Detonations (spec 2.6) ----
   overloaded:{id:'overloaded',name:'Sensory Overload',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'out',kind:'overload',v:-.25}],flags:[],
     short:'OVERLOAD',color:'#d7a4f5',weight:4,desc:'Deals 25% less damage.'},
@@ -49,7 +54,7 @@ const B3_STATUS={
   eyes_on_me:{id:'eyes_on_me',name:'Eyes On Me',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'aggro',kind:'eyesOnMe',v:.50}],flags:[],
     short:'EYES ON ME',color:'#ffd27a',weight:4,desc:'Monsters aim at Tom more often.'},
   // Zone One Blockade (spec 3.1): a ward. Each enemy action that hits Tom with a melee or projectile act is answered once.
-  // The Clobber answer is standard power (my call: the spec gives no tier). The Composure pip is paid from stage 3 on.
+  // The Clobber answer is standard power (my call: the spec gives no tier). Its Composure pip is paid when the answer ends (an answer has its own 3-pip cap).
   zone_one:{id:'zone_one',name:'Zone One Blockade',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[],flags:[],
     on:{afterHit:{carrier:'target',from:'foe',tags:['melee','projectile'],limit:'action',react:true,
       effects:[{op:'damage',flavor:['clobber'],power:'standard',to:'attacker'},{op:'composure',n:1,to:'attacker'}]}},
@@ -70,7 +75,13 @@ const B3_STATUS={
     short:'WINDEX',color:'#8fd0ff',weight:4,desc:'Each of its attacks has a 15% chance to miss.'},
   // ---- Enemy statuses: chapter 1 ----
   jitterflight:{id:'jitterflight',name:'Jitterflight',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'jitter',v:.20}],flags:[],
-    short:'JITTER',color:'#d8e68a',weight:4,desc:'Dodges 20% of attacks. It can be stripped.'}
+    short:'JITTER',color:'#d8e68a',weight:4,desc:'Dodges 20% of attacks. It can be stripped.'},
+  // Log Lump starts braced: Guard Stance under its own name (bestiary: "Mossy Brace: Guard Stance (2t)").
+  mossy_brace:{id:'mossy_brace',name:'Mossy Brace',kind:'stance',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'reduce',kind:'guard',v:.25}],flags:[],
+    short:'GUARD',color:'#e6c988',weight:5,desc:'Braced: takes 25% less damage. Panic Boil! or a Break ends it.'},
+  // The Big One wears Deedee's muffin tin: +15% Attack and Mend 3%. It is one buff, so any buff strip knocks the whole crown off.
+  muffin_crown:{id:'muffin_crown',name:'Muffin-Tin Crown',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'crown',v:.15}],flags:[],regen:.03,
+    short:'CROWN',color:'#f2d36b',weight:6,desc:'Wearing Deedee\u2019s muffin tin: 15% more Attack, and it heals a little at the start of each turn. Any buff strip knocks it off.'}
 };
 
 // Hazards: things on the floor of one side for a while (the `hazard` op lays them, engine/b3-foe.js trips them).

@@ -1,6 +1,7 @@
 # Battle 3 screen test: plays the NEW BATTLE Lab fights in a real browser and saves contact sheets of frames to look at.
 # Usage (repo root):  python3 tools/b3_test.py            every fight in data/b3-lab.js
 #                     python3 tools/b3_test.py new1       one fight
+#                     python3 tools/b3_test.py s3         only the stage 3 section (The Big One: pips, Mark, Break, adds), about 5 min
 # Env: CHROMIUM = chromium binary (optional), SEED = the fight's seed (default 7), OUT = folder for the sheets (default tools/shots).
 #
 # For each fight it checks, and prints FAILS: [] when all pass:
@@ -10,16 +11,23 @@
 #      CONTINUE must land back on the NEW BATTLE list.
 #   2. The same seed played by the simple player on screen gives the same turn order as `node tools/b3-sim.js <fight> 1 --seed=N`,
 #      and after every turn the first face on the bar is the unit that really acts next.
-#   3. A fight the party loses (2% HP against 20x monster HP) reaches the lose screen.
+#   3. A fight the party loses (2% HP against 20x monster HP, with the monsters poked to 6 times their Speed) reaches the lose
+#      screen. The Speed poke is there because a lone boss that acts once a round cannot out-pace four people using Pick-Me-Up
+#      on each other: at 20x HP the simulator's fight against The Big One runs about 420 turns before the family loses.
 #   4. Landscape: a turn by hand, frames of a whole fight, and EXIT back to the list.
 #   5. Stage 2, once, on the Pond Grump fight (portrait, then a short pass in landscape): Zone One Blockade, "Giddyup, Tata!"
 #      Launch and Wet-Floor Hazard from the SKILLS list; a monster slips and Tom's ward answers; the full status list opens by
 #      tapping a party card and a monster, and shows every status when the card can only show 3; Pick-Me-Up revives; Suite Door
 #      Slide takes a hit for Grace; Crunchy Sugar-Cube Pop cancels a wind-up. Monsters are aimed by pokes so every run shows each.
-#   6. A battle 2 fight still starts and shows its own screen afterwards.
+#   6. Stage 3, once, on The Big One (portrait, then a short pass in landscape): Composure pips show under the boss and a Pet Peeve
+#      hit takes one; Big Glare Marks Rose (the MARKED chip on her card, the arrow over her head, both lists); Tom's Suite Door
+#      Slide takes Swamp Chomp; Crunchy Sugar-Cube Pop cancels the next one; a Break cancels the third, shows BREAK!, tips the
+#      boss's face on the turn bar and empties its pips, and they come back as its next turn begins; two adds walk in.
+#   7. A battle 2 fight still starts and shows its own screen afterwards.
 # Sheets: b3-<fight>-hand.png, b3-<fight>-slip.png and b3-<fight>-slip-bar.png (the Hydro-Slip! frames: the stage, and every turn bar
 # stacked and doubled), b3-<fight>-lose.png, b3-<fight>-land.png, b3-s2-moves.png (the stage during the stage 2 moves),
-# b3-s2-info.png (the status lists and Pick-Me-Up), b3-s2-land.png.
+# b3-s2-info.png (the status lists and Pick-Me-Up), b3-s2-land.png, b3-s3-mark.png (pips, the Mark, the bite taken and cancelled),
+# b3-s3-break.png (the Break frames), b3-s3-info.png (the lists and the adds), b3-s3-land.png.
 import threading, http.server, socketserver, functools, os, sys, json, subprocess, io
 from playwright.sync_api import sync_playwright
 from PIL import Image
@@ -102,8 +110,9 @@ def hand_fight(pg,idx,fid):
     st=state(pg)
     if st['over']!='win': fails.append(f"{fid} hand: expected a win, got {st['over']}")
     pg.wait_for_timeout(500); frames.append(shot(pg))
+    solo=pg.evaluate("()=>B3.F.foes.length")==1   # one monster: BASIC fires at once, so there is no target to tap
     for k,v in did.items():
-        if not v: fails.append(f'{fid} hand: never used {k}')
+        if not v and not(solo and k=='tapfoe'): fails.append(f'{fid} hand: never used {k}')
     pg.click('#b3-cmd [data-done]'); pg.wait_for_timeout(700)
     back=pg.evaluate("()=>({mode:splash.mode,active:splash.active,hidden:document.getElementById('battle').hidden,b3:B3.active,v3:!!battle.v3,cls:document.getElementById('battle').className})")
     if not(back['mode']=='lab3' and back['active'] and back['hidden'] and not back['b3'] and not back['v3']): fails.append(f'{fid} hand: CONTINUE did not land on the NEW BATTLE list: {back}')
@@ -235,10 +244,147 @@ def stage2_land(pg,idx):
     sheet(fr,4,os.path.join(OUT,'b3-s2-land.png'),scale=.6)
     pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
 
-def auto_fight(pg,idx,fid,opt,frames=None,every=450):
+# Stage 3 pokes: count the Breaks and the Marks on Rose as they are shown, and (while `keep` is set) top the boss's pips up at
+# every family turn, so that the scripted Mark steps are not cut short by a Break that the family's own hits bring on.
+S3_HOOK="""()=>{ window.__s3={brk:0,marks:0,keep:false}; if(!window.__s3wrap){ window.__s3wrap=1;
+  const os=b3Show; b3Show=function(b){ if(b.t==='break') window.__s3.brk++; if(b.t==='telegraph'&&b.mark==='p2') window.__s3.marks++; return os.apply(this,arguments); };
+  const oo=b3Open; b3Open=function(m){ if(window.__s3.keep&&B3.F&&m==='cross'){ const f=B3.F.foes[0]; if(f.maxPips&&!f.broken&&!f.flusterTurn){ f.pips=f.maxPips; f.pipLock=false; b3ViewSync(); } } return oo.apply(this,arguments); }; } }"""
+def glare_at_rose(pg,S,fr,n):
+    """Pokes The Big One into Big Glare at Rose and plays Basics until it has Marked her n times in all."""
+    pg.evaluate("()=>{ const f=B3.F.foes[0]; b3AddStatus(B3.F,B3.F.party[2],'t_taunt',{}); f.actIx=0; f.charge=null; f.mark=null; f.wait=Math.min(f.wait,1); }")
+    for turn in range(8):
+        if pg.evaluate("()=>window.__s3.marks")>=n: break
+        basic(pg); fr+=burst(pg,7,260); wait_cmd(pg)
+    else: fails.append(S+f'The Big One never Marked Rose (time {n}): '+log(pg,8)[-300:])
+    pg.evaluate("()=>{ b3EndStatus(B3.F,B3.F.party[2],'t_taunt'); b3ViewSync(); b3Render(); }"); pg.wait_for_timeout(150)
+def hold(pg,ticks=160):
+    """Keeps the boss's next turn back until the whole family has had a turn (they all act inside 100 ticks)."""
+    pg.evaluate("(n)=>{ B3.F.foes[0].wait=n; b3Render(); }",ticks); pg.wait_for_timeout(100)
+def breaks(pg): return pg.evaluate("()=>window.__s3.brk")
+def marked(pg): return pg.evaluate("()=>({mark:B3.view.mark.f0||null,charge:B3.view.charge.f0||null,chip:document.querySelector('#b3-party .b2-pc[data-i=\"2\"]').innerText.includes('MARKED'),real:B3.F.foes[0].mark,rc:B3.F.foes[0].charge&&B3.F.foes[0].charge.id})")
+def stage3_fight(pg,idx):
+    """Portrait, The Big One. Composure, the Mark and its three answers, a Break, and adds. Monsters are aimed by pokes."""
+    S='stage 3: '; fr=[]; brk=[]; info=[]
+    start(pg,idx,{'seed':SEED}); wait_cmd(pg); pg.wait_for_timeout(300); pg.evaluate(POKE_ROWS); pg.evaluate(S3_HOOK)
+    v=pg.evaluate("()=>[B3.view.u.f0.pips,B3.view.u.f0.maxPips,B3.view.u.f0.st.includes('muffin_crown')]")
+    if v!=[6,6,True]: fails.append(S+f'The Big One should start with 6 of 6 pips and its crown: {v}')
+    fr.append(shot(pg))
+    basic(pg); wait_cmd(pg); pg.wait_for_timeout(150)                      # Grace
+    if who(pg)!='tom': fails.append(S+f'expected Tom second, got {who(pg)}')
+    basic(pg); fr+=burst(pg,6,250); wait_cmd(pg)                          # Tom: Racket is its Pet Peeve
+    if pg.evaluate("()=>B3.view.u.f0.pips")!=5: fails.append(S+'a Pet Peeve hit did not take 1 pip on screen')
+    # Big Glare at Rose: the Mark
+    shot(pg).save(os.path.join(OUT,'b3-s3-pips.png'))
+    pg.evaluate("()=>{ window.__s3.keep=true; }")
+    glare_at_rose(pg,S,fr,1); m=marked(pg); fr.append(shot(pg)); shot(pg).save(os.path.join(OUT,'b3-s3-marked.png'))
+    if m!={'mark':'p2','charge':'Swamp Chomp','chip':True,'real':'p2','rc':'swamp_chomp'}: fails.append(S+f'after Big Glare the screen should show Rose Marked for Swamp Chomp: {m}')
+    if not pg.evaluate("()=>!!document.querySelector('#b3-bar .b2-tk.foe .b2-int')"): fails.append(S+'the boss has no wind-up badge on the turn bar')
+    hold(pg)
+    pg.click('#b3-party .b2-pc[data-i="2"]'); pg.wait_for_timeout(300); info.append(shot(pg)); T=pg.inner_text('#b3-cmd')
+    if 'Marked' not in T or 'Swamp Chomp' not in T: fails.append(S+"Rose's list does not say who Marked her: "+T[:200])
+    tap_foe(pg,'f0'); pg.wait_for_timeout(300); info.append(shot(pg)); T=pg.inner_text('#b3-cmd')
+    if 'Composure' not in T or 'Winding up Swamp Chomp' not in T or 'aimed at Rose' not in T: fails.append(S+"the boss's list does not show Composure and the wind-up: "+T[:260])
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(150)
+    # Answer 1: Tom's Suite Door Slide takes the bite
+    for turn in range(6):
+        if who(pg)=='tom': break
+        basic(pg); wait_cmd(pg); pg.wait_for_timeout(120)
+    pg.evaluate("()=>{ B3.actor.pep=10; b3Render(); }"); skill(pg,'Suite Door Slide'); pg.keyboard.press('Enter'); fr+=burst(pg,4); wait_cmd(pg)
+    hp0=pg.evaluate("()=>B3.F.party[2].hp"); pg.evaluate("()=>{ B3.F.foes[0].wait=1; }")
+    for turn in range(6):
+        if 'Tom steps in for Rose' in log(pg,14): break
+        basic(pg); fr+=burst(pg,9,250); wait_cmd(pg)
+    L=log(pg,16)
+    if 'Tom steps in for Rose' not in L or 'The Big One uses Swamp Chomp.' not in L: fails.append(S+'Tom did not take Swamp Chomp for Rose: '+L[-300:])
+    if pg.evaluate("()=>B3.F.party[2].hp")!=hp0: fails.append(S+'Rose lost HP to the bite Tom took')
+    m=marked(pg)
+    if m['mark'] or m['chip'] or m['real'] or m['charge']: fails.append(S+f'the Mark should be gone after the bite: {m}')
+    # Answer 2: Grace's Crunchy Sugar-Cube Pop cancels it
+    glare_at_rose(pg,S,fr,2); hold(pg)
+    for turn in range(6):
+        if who(pg)=='grace': break
+        basic(pg); wait_cmd(pg); pg.wait_for_timeout(120)
+    pg.evaluate("()=>{ B3.actor.pep=10; b3Render(); }"); skill(pg,'Crunchy Sugar-Cube Pop'); fr.append(shot(pg)); pg.keyboard.press('Enter'); pg.wait_for_timeout(220)
+    if pg.evaluate("()=>B3.ui")=='target': pg.keyboard.press('Enter')
+    fr+=burst(pg,7); wait_cmd(pg); m=marked(pg)
+    if 'loses Swamp Chomp. It was cancelled' not in log(pg,10) or m['mark'] or m['chip'] or m['real'] or m['rc']: fails.append(S+f'Crunchy Sugar-Cube Pop did not cancel the bite and the Mark: {m} '+log(pg,6)[-240:])
+    # Answer 3: a Break cancels it. The boss is down to its last pip (a poke); the next pip off Breaks it.
+    glare_at_rose(pg,S,fr,3); hold(pg,95); n0=breaks(pg)
+    pg.evaluate("()=>{ window.__s3.keep=false; const f=B3.F.foes[0]; f.pips=1; f.pipLock=false; b3ViewSync(); b3Render(); }"); pg.wait_for_timeout(200); brk.append(shot(pg))
+    for turn in range(6):
+        if breaks(pg)>n0: break
+        basic(pg); brk+=burst(pg,10,220); wait_cmd(pg)
+    shot(pg).save(os.path.join(OUT,'b3-s3-flustered.png'))
+    L=log(pg,14); v=pg.evaluate("()=>({fl:B3.view.u.f0.st.includes('flustered'),pips:B3.view.u.f0.pips,bar:!!document.querySelector('#b3-bar .b2-tk.b3-flus'),badge:(document.querySelector('#b3-bar .b2-tk.b3-flus .b2-int')||{}).textContent,lock:B3.F.foes[0].pipLock,guard:B3.F.foes[0].st.flustered&&true})")
+    if breaks(pg)!=n0+1 or 'BREAK!' not in L or 'loses Swamp Chomp' not in L: fails.append(S+'the Break did not show, or did not cancel the wind-up: '+L[-300:])
+    if not(v['fl'] and v['pips']==0 and v['bar'] and v['badge']=='BREAK' and v['lock']): fails.append(S+f'after the Break the screen should show a Flustered boss with empty pips and a tipped face on the bar: {v}')
+    m=marked(pg)
+    if m['mark'] or m['chip'] or m['real']: fails.append(S+f'the Mark should be gone after the Break: {m}')
+    brk.append(shot(pg))
+    tap_foe(pg,'f0'); pg.wait_for_timeout(300); info.append(shot(pg)); T=pg.inner_text('#b3-cmd')
+    if 'Flustered' not in T or 'until its next turn' not in T or '0 OF 6' not in T: fails.append(S+"the boss's list does not show Flustered: "+T[:260])
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(150)
+    # Its next turn begins: Flustered ends and the pips are back
+    pg.evaluate("()=>{ B3.F.foes[0].wait=Math.min(B3.F.foes[0].wait,1); }")
+    for turn in range(6):
+        if pg.evaluate("()=>B3.view.u.f0.pips")==6: break
+        basic(pg); brk+=burst(pg,8,250); wait_cmd(pg)
+    v=pg.evaluate("()=>[B3.view.u.f0.pips,B3.view.u.f0.st.includes('flustered'),!!document.querySelector('#b3-bar .b2-tk.b3-flus')]")
+    if v!=[6,False,False]: fails.append(S+f'on its next turn the pips should be back and Flustered gone: {v}')
+    # Adds walk in (a poke: no chapter 1 monster calls any)
+    pg.evaluate("""()=>{ const F=B3.F,c={F,actor:F.foes[0],beats:[],g:'pre',rec:0,targets:[],hit:[],detonated:{}};
+      b3RunEffects(F,c,[{op:'summon',id:'mudling',row:'front',n:2},{op:'summon',id:'skeeter',row:'back'}]); for(const b of c.beats) b3Show(b); b3Render(); }""")
+    pg.wait_for_timeout(900); info.append(shot(pg)); shot(pg).save(os.path.join(OUT,'b3-s3-adds.png'))
+    v=pg.evaluate("()=>({n:B3.F.foes.length,laid:['f1','f2','f3'].every(k=>!!B3P.foe[k]),names:B3.F.foes.map(f=>f.name),hp:B3.F.foes[1].maxHp,bar:B3.view.bar.some(e=>e.k==='f1')})")
+    if not(v['n']==4 and v['laid'] and v['names'][1:]==['Mudling A','Mudling B','Skeeter Swarm'] and v['hp']==30): fails.append(S+f'the adds did not join as expected: {v}')
+    tap_foe(pg,'f3'); pg.wait_for_timeout(300); info.append(shot(pg))
+    if pg.evaluate("()=>B3.infoKey")!='f3': fails.append(S+'tapping an add did not open its list')
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(150)
+    pg.keyboard.press('ArrowUp'); pg.wait_for_timeout(250)
+    if pg.evaluate("()=>B3.ui")!='target' or pg.evaluate("()=>B3.opts.length")!=4: fails.append(S+'the target list should offer the boss and the three adds')
+    info.append(shot(pg)); pg.keyboard.press('Escape'); pg.wait_for_timeout(150)
+    # Finish: the simple player takes over against 1 HP monsters
+    pg.evaluate("()=>{ for(const f of B3.F.foes) f.hp=1; b3ViewSync(); B3.cfg.auto=true; const p=b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); }")
+    pg.wait_for_function("()=>B3.ui==='done'",timeout=90000); pg.wait_for_timeout(400); fr.append(shot(pg))
+    if pg.evaluate("()=>B3.F.over")!='win': fails.append(S+'the fight did not end in a win')
+    pg.click('#b3-cmd [data-done]'); pg.wait_for_timeout(600)
+    if pg.evaluate("()=>splash.mode")!='lab3': fails.append(S+'CONTINUE did not go back to the list')
+    w=fr[0].size[0]
+    sheet([f.crop((0,0,w,300)) for f in fr][::2],6,os.path.join(OUT,'b3-s3-mark.png'),scale=.75)
+    sheet([f.crop((0,0,w,300)) for f in brk],6,os.path.join(OUT,'b3-s3-break.png'),scale=.75)
+    sheet(info,4,os.path.join(OUT,'b3-s3-info.png'),scale=.6)
+def stage3_land(pg,idx):
+    """Landscape: the pips, the Mark, a Break."""
+    S='stage 3 landscape: '; fr=[]
+    pg.evaluate("()=>{ B7.speed=1; toggleLayout(); }"); pg.wait_for_timeout(500); rot=pg.evaluate("()=>layout.rotated")
+    R=lambda f: f.rotate(90,expand=True) if rot else f
+    start(pg,idx,{'seed':SEED}); wait_cmd(pg); pg.wait_for_timeout(300); pg.evaluate(POKE_ROWS); pg.evaluate(S3_HOOK)
+    fr.append(R(shot(pg)))
+    glare_at_rose(pg,S,[],1); hold(pg,95); fr.append(R(shot(pg))); m=marked(pg)
+    if not(m['mark']=='p2' and m['chip']): fails.append(S+f'Rose is not shown Marked: {m}')
+    pg.click('#b3-party .b2-pc[data-i="2"]'); pg.wait_for_timeout(300); fr.append(R(shot(pg)))
+    if pg.evaluate("()=>B3.ui")!='info': fails.append(S+"tapping Rose's card did not open her list")
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(150)
+    pg.evaluate("()=>{ const f=B3.F.foes[0]; f.pips=1; f.pipLock=false; b3ViewSync(); b3Render(); }")
+    for turn in range(6):
+        if breaks(pg): break
+        basic(pg); fr+=burst(pg,5,300,rot=rot); wait_cmd(pg)
+    R(shot(pg)).save(os.path.join(OUT,'b3-s3-land-break.png'))
+    if not breaks(pg) or not pg.evaluate("()=>!!document.querySelector('#b3-bar .b2-tk.b3-flus')"): fails.append(S+'no Break on screen')
+    fr.append(R(shot(pg)))
+    tap_foe(pg,'f0'); pg.wait_for_timeout(300); fr.append(R(shot(pg)))
+    if pg.evaluate("()=>B3.infoKey")!='f0': fails.append(S+'tapping the boss did not open its list')
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(150); pg.click('#b3-exit'); pg.wait_for_timeout(500)
+    if pg.evaluate("()=>splash.mode")!='lab3' or pg.evaluate("()=>B3.active"): fails.append(S+'EXIT did not go back to the list')
+    sheet(fr,4,os.path.join(OUT,'b3-s3-land.png'),scale=.6)
+    pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
+
+FAST_FOES="()=>{ for(const f of B3.F.foes) { f.spd*=6; f.wait/=6; } }"
+def auto_fight(pg,idx,fid,opt,frames=None,every=450,poke=None):
     """The simple player on screen. Records every turn and the bar after every turn."""
     pg.evaluate("""()=>{ window.__b3={ends:[],turns:[]}; if(!window.__b3wrap){ window.__b3wrap=1; const os=b3Show; b3Show=function(b){ if(b.t==='endTurn') window.__b3.ends.push(b.bar.length?b.bar[0].k:null); if(b.t==='turn') window.__b3.turns.push(b.who); return os.apply(this,arguments); }; } }""")
     start(pg,idx,dict(opt,auto=True))
+    if poke: pg.evaluate(poke)
     for k in range(400):
         pg.wait_for_timeout(every)
         if frames is not None and len(frames)<24: frames.append(shot(pg))
@@ -255,7 +401,7 @@ with sync_playwright() as pw:
     pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start',timeout=180000); pg.wait_for_timeout(1500)
-    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); want=[a for a in sys.argv[1:] if not a.startswith('-')] or lab
+    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); want=[a for a in sys.argv[1:] if not a.startswith('-') and a!='s3'] or ([] if 's3' in sys.argv else lab)
     # The way in: ADMIN > BATTLE LAB shows NEW BATTLE, which opens the list.
     pg.evaluate("()=>{ splashSetMode('lab'); }"); pg.wait_for_timeout(200)
     names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
@@ -280,7 +426,7 @@ with sync_playwright() as pw:
         else: print(f"  the bar named the next unit right after all {len(R['ends'])} turns")
         pg.evaluate("()=>b3Pick(0)"); pg.wait_for_timeout(400)
         # 3. a loss
-        fr=[]; R=auto_fight(pg,idx,fid,{'seed':SEED,'hpPct':.02,'mods':{'foeHp':20}},frames=fr,every=500)
+        fr=[]; R=auto_fight(pg,idx,fid,{'seed':SEED,'hpPct':.02,'mods':{'foeHp':20}},frames=fr,every=500,poke=FAST_FOES)
         if R['over']!='lose': fails.append(f"{fid}: the fight set up to be lost ended {R['over']}")
         sheet(fr[-8:],4,os.path.join(OUT,f'b3-{fid}-lose.png'))
         pg.click('#b3-cmd [data-done]'); pg.wait_for_timeout(500)
@@ -305,7 +451,11 @@ with sync_playwright() as pw:
     if 'new3' in want:
         print('stage 2 moves'); pg.evaluate("()=>{ B7.speed=1; }")
         stage2_fight(pg,lab.index('new3')); stage2_land(pg,lab.index('new3'))
-    # 6. battle 2 still owns its screen
+    # 6. stage 3: Composure, the Mark, the Break, adds, on The Big One
+    if 'new6' in want or 's3' in sys.argv:
+        print('stage 3 moves'); pg.evaluate("()=>{ B7.speed=1; }")
+        stage3_fight(pg,lab.index('new6')); stage3_land(pg,lab.index('new6'))
+    # 7. battle 2 still owns its screen
     pg.evaluate("()=>{ B7.speed=1; splash.active=false; document.getElementById('splash').hidden=true; window.__LE.b2Start({party:['tom','grace','rose'],level:12,foes:[['mudling','front']],bag:[]}); }")
     pg.wait_for_function("()=>window.__LE.battle.state==='command'&&window.__LE.B2.actor&&window.__LE.B2.actor.side==='party'",timeout=40000)
     v=pg.evaluate("()=>({b2:!document.getElementById('b2-ui').hidden,b3:!document.getElementById('b3-ui').hidden,bar3:!document.getElementById('b3-bar').hidden,v3:document.getElementById('battle').classList.contains('v3'),tools:!document.getElementById('b3-tools').hidden})")

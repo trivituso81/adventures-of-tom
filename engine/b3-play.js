@@ -10,6 +10,8 @@
 // engine/battle.js calls b3Update and engine/battle-draw.js calls b3Draw while battle.v3 is set.
 //
 // Reactions (a ward's answer) play after the move that set them off, one at a time; what a turn's end writes comes last.
+// Composure: an Elite or a Boss wears its pips under its HP meter. A Break shows BREAK!, the monster slumps with stars over its
+// head and its face on the turn bar tips over; a Marked family member wears a red arrow and a MARKED chip on their card.
 //
 // Three animation kinds per move (anim.kind in the move's data row): 'default' is built here from the move's shape with
 // frames every character already has. 'script' (a hand-made ST.play timeline) and 'clip' (a video clip) arrive in stage 8.
@@ -42,11 +44,13 @@ function b3PlayReset() { Object.assign(B3P,{t:0,q:[],body:{},foe:{},fa:{},pops:[
 
 // ---------- The view: what the screen shows right now ----------
 function b3ViewSync() {
-  const F=B3.F,V=B3.view||(B3.view={u:{},bar:[],charge:{},haz:[]});
-  for(const u of F.units) V.u[u.key]=Object.assign(V.u[u.key]||{},{hp:u.hp,maxHp:u.maxHp,pep:u.pep,st:Object.keys(u.st),ko:u.ko,sh:b3ShieldTotal(u)});
+  const F=B3.F,V=B3.view||(B3.view={u:{},bar:[],charge:{},mark:{},haz:[]});
+  for(const u of F.units) V.u[u.key]=Object.assign(V.u[u.key]||{},{hp:u.hp,maxHp:u.maxHp,pep:u.pep,st:Object.keys(u.st),ko:u.ko,sh:b3ShieldTotal(u),pips:u.pips,maxPips:u.maxPips});
   V.haz=F.hazards.map(h=>({id:h.id,side:h.side,uses:h.uses}));
-  for(const f of F.foes) { if(f.charge) V.charge[f.key]=f.charge.name; else delete V.charge[f.key]; }
+  for(const f of F.foes) { if(f.charge) V.charge[f.key]=f.charge.name; else delete V.charge[f.key]; if(f.mark) V.mark[f.key]=f.mark; else delete V.mark[f.key]; }
 }
+// Is this family member Marked by a monster right now (in the view)?
+const b3ViewMarked=key=>Object.keys(B3.view.mark).some(f=>B3.view.mark[f]===key);
 // The 3 icons for a unit in the view (spec 2.8): its Prime, its strongest debuff, its strongest buff.
 function b3ViewIcons(key) {
   const ids=(B3.view.u[key]||{}).st||[],pick=kinds=>ids.filter(id=>B3_STATUS[id]&&kinds.includes(B3_STATUS[id].kind)).sort((a,b)=>B3_STATUS[b].weight-B3_STATUS[a].weight)[0];
@@ -63,6 +67,17 @@ function b3LayoutFoes() {
     B3P.foe[f.key]={def,px,py,sc:Math.max(base*.7,Math.min(base*1.3,want/w))*k*(def.shrink||1)}; B3P.fa[f.key]={lunge:null,hurtUntil:0,shakeUntil:0,flashUntil:0,die:null,hold:0}; };
   fr.forEach((f,k)=>place(f,(fx[fr.length]||fx[3])[k%3],(fy[fr.length]||fy[3])[k%3],1));
   bk.forEach((f,k)=>place(f,(bx[bk.length]||bx[2])[k%2],(by[bk.length]||by[2])[k%2],.9));
+}
+// An add walks in mid-fight: it takes the free spot of its row that is furthest from everyone standing. Nobody else moves.
+// Front adds stand between the caller and the family (they are its blockers); Back adds stand behind it.
+const B3_ADD_SPOTS={front:[[246,230],[240,304],[262,267]],back:[[92,214],[70,268],[58,236]]};
+function b3LayoutAdd(key) {
+  const F=B3.F,f=b3Unit(F,key),def=b2BattleDef(MONSTERS[f.id]),base=def.scale||3,w=def.sprite[0].length,back=f.row==='back';
+  const taken=F.foes.filter(o=>o!==f&&B3P.foe[o.key]&&b3Alive(o)).map(o=>B3P.foe[o.key]);
+  let best=null,bd=-1;
+  for(const s of B3_ADD_SPOTS[back?'back':'front']) { const d=taken.reduce((m,o)=>Math.min(m,Math.hypot((o.px-s[0])*.6,o.py-s[1])),1e9); if(d>bd) { bd=d; best=s; } }
+  B3P.foe[key]={def,px:best[0],py:best[1],sc:Math.max(base*.7,Math.min(base*1.3,58/w))*(back?.9:1)*(def.shrink||1)};   // an add is drawn small: 58 wide
+  B3P.fa[key]={lunge:null,hurtUntil:0,shakeUntil:0,flashUntil:0,die:null,hold:0,born:B3P.t};
 }
 function b3FoeBox(key) { const L=B3P.foe[key],R=L.def.sprite,w=R[0].length*L.sc,h=R.length*L.sc,hov=(B3_FOE_LOOK[L.def.id]||{}).hover||0; return {x:L.px,y:L.py-hov,w,h}; }
 // A point on a unit: its middle (aim here), the top of its head, and the spot an attacker stands at.
@@ -102,7 +117,7 @@ function b3Show(b) {
     else { B3P.body[b.tgt]={kind:'hit',t0:now,dur:.45}; b3Sfx('hitParty'); }
     B3P.fx.push({kind:'burst',x:b3Spot(b.tgt).x,y:b3Spot(b.tgt).y,color:fl.color,t0:now,dur:.35});
   }
-  else if(b.t==='miss') { b3Pop(b.tgt,b.why==='dodge'?'DODGE':'MISS','#e8ecf4'); b3Sfx('whoosh'); }
+  else if(b.t==='miss') { b3Pop(b.tgt,b.why==='dodge'?'DODGE':'MISS','#e8ecf4'); b3Sfx('whoosh'); if(b.why==='hidden') b3Say(b3Name(b.src)+' cannot find '+b3Name(b.tgt)+'. It misses.'); }
   else if(b.t==='status') {
     // An enemy wears its top 3 statuses over its head, so the new tag is the news; anything else gets a rising tag.
     const had=b.tgt[0]==='f'?b3ViewIcons(b.tgt).length:0;
@@ -131,7 +146,21 @@ function b3Show(b) {
     if(b.src[0]==='f') B3P.fa[b.src].hold=now+.4*K; else B3P.body[b.src]={kind:'pose',f:B3_BODY.strike,t0:now,dur:.6*K};
     B3P.fx.push({kind:'proj',x0:a.x,y0:a.y,x1:z.x,y1:z.y,color:(S&&S.color)||'#fff1cb',t0:now+.05,dur:.28*K,arc:22}); b3Sfx('whoosh');
   }
-  else if(b.t==='interrupt') { delete V.charge[b.tgt]; b3Pop(b.tgt,'INTERRUPTED','#ffe27a',{sc:2}); b3Sfx('combo'); b3Say(b3Name(b.tgt)+' loses '+b.name+'. It was cancelled.'); }
+  else if(b.t==='interrupt') { delete V.charge[b.tgt]; delete V.mark[b.tgt]; b3Pop(b.tgt,b.why==='break'?'LOST IT':'INTERRUPTED','#ffe27a',{sc:2}); b3Sfx('combo'); b3Say(b3Name(b.tgt)+' loses '+b.name+'. It was cancelled.'); }
+  else if(b.t==='pips') {
+    vu.pips=b.left; vu.maxPips=b.max;
+    if(b.refill) b3Pop(b.tgt,'COMPOSURE BACK','#ffd27a',{sc:2});
+    else { b3Pop(b.tgt,'-'+b.n+(b.n===1?' PIP':' PIPS'),'#ffd27a',{sc:2}); B3P.fa[b.tgt].pipAt=now; }
+  }
+  else if(b.t==='break') {
+    V.bar=b.bar; b3RenderBar(b.tgt);
+    b3Word('BREAK!','#ff9a8a'); B3P.flash={color:'#ff9a8a',t0:now,dur:.45}; b3Sfx('combo'); B3P.fa[b.tgt].shakeUntil=now+.5; B3P.fa[b.tgt].hurtUntil=now+.9;
+    b3Say('BREAK! '+b3Name(b.tgt)+' is Flustered: it takes 35% more damage until its next turn.');
+  }
+  else if(b.t==='summon') {
+    V.u[b.tgt]={hp:b.hp,maxHp:b.hp,pep:undefined,st:[],ko:false,sh:0,pips:0,maxPips:0};
+    b3LayoutAdd(b.tgt); V.bar=b.bar; b3RenderBar(b.tgt); b3Sfx('intro'); b3Say(b.name+' joins the fight!');
+  }
   else if(b.t==='hazardOn') { V.haz=V.haz.filter(h=>!(h.id===b.id&&h.side===b.side)); V.haz.push({id:b.id,side:b.side,uses:b.uses}); b3Word(B3_HAZARDS[b.id].name.toUpperCase(),B3_HAZARDS[b.id].color); }
   else if(b.t==='hazardTrip') { const h=V.haz.find(x=>x.id===b.id); if(h) h.uses=b.left; b3Pop(b.tgt,'SLIPPED!',B3_HAZARDS[b.id].color); b3Sfx('thud'); b3Say(b3Name(b.tgt)+' slips on the '+B3_HAZARDS[b.id].name.toLowerCase()+'.'); }
   else if(b.t==='hazardEnd') { V.haz=V.haz.filter(h=>!(h.id===b.id&&h.side===b.side)); }
@@ -145,10 +174,14 @@ function b3Show(b) {
   else if(b.t==='push') { V.bar=b.bar; b3RenderBar(b.tgt); b3Pop(b.tgt,'PUSHED BACK','#ffb070',{sc:2}); }
   else if(b.t==='pull') { V.bar=b.bar; b3RenderBar(b.tgt); b3Pop(b.tgt,b.placed?'UP NEXT':'PULLED UP','#9be39a',{sc:2}); b3Sfx('jumpWhistle'); }
   else if(b.t==='pep') { vu.pep=b.pep; if(b.g!=='pre') b3Pop(b.tgt,(b.n>0?'+':'')+b.n+' PEP',b.n>0?'#8dc4e6':'#ff9a8a',{sc:2}); }
-  else if(b.t==='telegraph') { V.charge[b.src]=b.name; b3Pop(b.src,'!!','#ff8f80',{sc:4}); b3Sfx('charge'); b3Say(b3Name(b.src)+' is winding up '+b.name+'. It lands on its next turn.'); }
-  else if(b.t==='act') { if(b.foe) delete V.charge[b.src]; }
+  else if(b.t==='telegraph') {
+    V.charge[b.src]=b.name; b3Pop(b.src,'!!','#ff8f80',{sc:4}); b3Sfx('charge');
+    if(b.mark) { V.mark[b.src]=b.mark; b3Pop(b.mark,'MARKED','#ff8f80',{sc:2}); b3Say(b3Name(b.src)+' has Marked '+b3Name(b.mark)+'. '+b.name+' lands on '+b3Name(b.mark)+' on its next turn.'); }
+    else b3Say(b3Name(b.src)+' is winding up '+b.name+'. It lands on its next turn.');
+  }
+  else if(b.t==='act') { if(b.foe) { delete V.charge[b.src]; delete V.mark[b.src]; } }
   else if(b.t==='ko') {
-    vu.ko=true; vu.st=[]; delete V.charge[b.tgt];
+    vu.ko=true; vu.st=[]; delete V.charge[b.tgt]; delete V.mark[b.tgt];
     if(b.tgt[0]==='f') { B3P.fa[b.tgt].die=now; b3Sfx('grumpDie'); }
     else { B3P.body[b.tgt]={kind:'ko',t0:now,dur:1e9}; b3Sfx('thud'); b3Say(b3Name(b.tgt)+' is knocked out.'); }
   }
@@ -244,11 +277,11 @@ function b3Draw() {
   // What lies on a side's floor (hazards): a sheen under that side's feet and a tag in the top corner on that side.
   for(const h of V.haz||[]) { const H=B3_HAZARDS[h.id],foe=h.side==='foe',L=foe?F.foes.filter(f=>!V.u[f.key].ko&&f.row!=='back'):[];
     gfx.globalAlpha=.3+.08*Math.sin(t*3);
-    if(foe) for(const f of L) { const P=B3P.foe[f.key]; ellipse(P.px,P.py+1,P.def.sprite[0].length*P.sc*.62,7,H.color); }
+    if(foe) for(const f of L) { const P=B3P.foe[f.key]; if(P) ellipse(P.px,P.py+1,P.def.sprite[0].length*P.sc*.62,7,H.color); }
     else for(const u of F.party) { const hm=b3PartyHome(u); ellipse(hm.cx,hm.base,34,6,H.color); }
     gfx.globalAlpha=1; b3Text(H.short+' x'+h.uses,foe?70:500,14,H.color,2); }
   // Enemies, back to front.
-  for(const f of F.foes.slice().sort((a,b)=>B3P.foe[a.key].py-B3P.foe[b.key].py)) b3DrawFoe(f,t,picked.includes(f.key));
+  for(const f of F.foes.filter(f=>B3P.foe[f.key]).sort((a,b)=>B3P.foe[a.key].py-B3P.foe[b.key].py)) b3DrawFoe(f,t,picked.includes(f.key));   // an add shows once its `summon` beat has played
   // Party, back to front (slot order runs up-screen to down-screen).
   for(const u of F.party) b3DrawMember(u,t,picked.includes(u.key));
   // Things in flight and bursts.
@@ -274,24 +307,31 @@ function b3DrawFoe(f,t,picked) {
   if(dq>=1) return;
   const look=B3_FOE_LOOK[f.id]||{},hov=look.hover||0;
   let lq=0,lp=0; if(A.lunge) { lp=(t-A.lunge.t0)/A.lunge.dur; if(lp>=1) A.lunge=null; else lq=Math.sin(Math.PI*lp); }
-  const hurt=dying||t<A.hurtUntil,holding=t<A.hold;
+  const fl=!dying&&vu.st.includes('flustered');
+  const hurt=dying||fl||t<A.hurtUntil,holding=!fl&&t<A.hold;
   let R=R0;
   if(FR) { if(A.lunge&&FR.attack.length) R=FR.attack[Math.min(FR.attack.length-1,Math.floor(lp*FR.attack.length))]; else if(hurt&&FR.hurt) R=FR.hurt; else if(holding&&FR.attack.length) R=FR.attack[0]; }
   const w=R[0].length*sc,h=R.length*sc,sw=R0[0].length*sc;
   const bob=hov&&!dying?Math.round(Math.sin(t*3+f.slot*1.7)*2)-hov:0,breath=dying||hov?0:(.5+.5*Math.sin(t*1.7+f.slot*1.7))*.008;
   const dx=A.lunge?(A.lunge.tx-L.px-sw*.5)*lq:0,dy=A.lunge?(A.lunge.ty-L.py)*lq-lq*10:0;
-  const shake=t<A.shakeUntil?rand(-4,4):0,lean=holding&&!A.lunge?8:0;
-  const x=Math.round(L.px-w/2+dx+shake-lean),y=Math.round(L.py-h+bob+dy-dq*30);
+  const shake=t<A.shakeUntil?rand(-4,4):0,lean=holding&&!A.lunge?8:0,sway=fl&&!shake?Math.round(Math.sin(t*4.5+f.slot)*2):0;
+  const x=Math.round(L.px-w/2+dx+shake-lean+sway),y=Math.round(L.py-h+bob+dy-dq*30);
   if(!dying) ellipse(L.px+dx,L.py-1+(A.lunge?(A.lunge.ty-L.py)*lq:0),sw*.48*(hov?.8:1),Math.max(4,sc*2),hov?'rgba(30,50,40,.22)':'rgba(30,50,40,.3)');
-  const flash=t<A.flashUntil||(dying&&dq>.1),alpha=1-dq;
-  if(breath&&!A.lunge&&!shake&&!holding) { gfx.save(); gfx.translate(L.px,L.py); gfx.scale(1,1+breath); gfx.translate(-L.px,-L.py); drawSprite(R,def.pal,x,y,sc,{flash,alpha}); gfx.restore(); }
+  const flash=t<A.flashUntil||(dying&&dq>.1),alpha=(1-dq)*(A.born!=null?Math.min(1,(t-A.born)/.5):1);
+  if(breath&&!A.lunge&&!shake&&!holding&&!fl) { gfx.save(); gfx.translate(L.px,L.py); gfx.scale(1,1+breath); gfx.translate(-L.px,-L.py); drawSprite(R,def.pal,x,y,sc,{flash,alpha}); gfx.restore(); }
   else drawSprite(R,def.pal,x,y,sc,{flash,alpha});
   if(dying) return;
   // HP meter and letter under the feet; statuses and a wind-up badge over the head.
-  const bw=Math.max(40,Math.min(64,sw*.7)),bx=Math.round(L.px-bw/2),byy=Math.min(L.py+9,324-12),r=vu.hp/vu.maxHp;
+  const np=vu.maxPips||0,bw=Math.max(40,Math.min(64,sw*.7)),bx=Math.round(L.px-bw/2),byy=Math.min(L.py+9,324-12-(np?9:0)),r=vu.hp/vu.maxHp;
   b2Meter(bx,byy,bw,7,r,r<=.25?B2_METER.crit:r<=.5?B2_METER.low:B2_METER.hp);
   if(f.letter) b2MeterTag(bx-10,byy+5,f.letter);
+  // Composure pips under the HP meter: gold while it holds, empty as they are knocked off, all red-rimmed while it is Flustered.
+  if(np) { const pw=Math.max(5,Math.min(10,Math.floor((bw-(np-1)*2)/np))),x0=Math.round(L.px-(np*pw+(np-1)*2)/2),py=byy+10,pop=A.pipAt!=null&&t-A.pipAt<.35;
+    for(let i=0;i<np;i++) { const on=i<vu.pips,px=x0+i*(pw+2);
+      rect(px-1,py-1,pw+2,7,fl?'#a8443c':'#0b0d12'); rect(px,py,pw,5,on?(pop?'#ffffff':'#ffd27a'):'#3a3340'); if(on) rect(px,py,pw,1,'#fff1cb'); } }
   const top=L.py-R0.length*sc+bob;
+  // Stars circle a Flustered monster's head.
+  if(fl) for(let k=0;k<3;k++) { const a=t*3.4+k*2.094,xx=L.px+Math.cos(a)*sw*.3,yy=top+2+Math.sin(a)*4; rect(Math.round(xx)-2,Math.round(yy)-2,5,5,'#141a22'); rect(Math.round(xx)-1,Math.round(yy)-1,3,3,k%2?'#fff1cb':'#ffe27a'); }
   let sy=top-14;
   if(B3.view.charge[f.key]) { const yy=sy-Math.round(Math.abs(Math.sin(t*6))*3); b3Text('!! '+B3.view.charge[f.key],L.px,yy,'#ff8f80',2); sy-=14; }
   for(const id of b3ViewIcons(f.key)) { const S=B3_STATUS[id]; b3Text(S.short,L.px,sy,S.color,2); sy-=13; }
@@ -328,6 +368,8 @@ function b3DrawMember(u,t,picked) {
   activeKneelCut=0;
   // The turn marker and the target arrow. (A family member's statuses show on their card, not over the head.)
   const sy=y-10;
+  // Marked by a monster's wound-up act: a red arrow and the word, until the act fires or is cancelled.
+  if(b3ViewMarked(u.key)&&!picked) { const yy=sy-2-Math.round(Math.abs(Math.sin(t*6))*4); b3Arrow(cx,yy,'#ff8f80'); b3Text('MARKED',cx,yy-12,'#ff8f80',2); }
   if(picked) b3Arrow(cx,sy-2-Math.round(Math.abs(Math.sin(t*6))*5),'#9be39a');
-  else if(B3.actor===u&&battle.state==='command'&&B3.ui!=='target') b3Arrow(cx,sy-2-Math.round(Math.abs(Math.sin(t*5))*4),'#fff1cb');
+  else if(B3.actor===u&&battle.state==='command'&&B3.ui!=='target'&&!b3ViewMarked(u.key)) b3Arrow(cx,sy-2-Math.round(Math.abs(Math.sin(t*5))*4),'#fff1cb');
 }

@@ -7,6 +7,9 @@
 //   node tools/b3-sim.js new1 200              play Lab fight new1 200 times with the simple player
 //   node tools/b3-sim.js new2 1 --seed=7 --log one fight, print every turn (who, clock, round, move, target)
 //   options: --seed=N (first seed; fight k uses N+k), --hp=0.05 (party starts at that share of HP), --json (machine output)
+//   --support=4: every 4th action of each family member is a move that deals no damage (a ward, a pass, a hazard), when they
+//                have one they can pay for. The bestiary's boss HP model assumes about one action in four is support (section
+//                1.6); without this option the simple player attacks whenever attacking scores higher, which is nearly always.
 // <fight> is a B3_LAB id (data/b3-lab.js) or a B3_FORMATIONS id (then --party=tom,grace,rose,deedee --level=2).
 //   --foehp=20 multiplies monster HP (with --hp it makes a fight the party loses, for the lose screen test).
 'use strict';
@@ -27,9 +30,10 @@ const args=process.argv.slice(2),flag=k=>{ const a=args.find(x=>x.startsWith('--
 const pos=args.filter(a=>!a.startsWith('--'));
 
 // One whole fight with the simple player. Returns what happened.
-function play(cfg,log) {
-  const F=G('b3NewFight')(cfg),b3Next=G('b3Next'),b3Auto=G('b3Auto'),b3Act=G('b3Act'),b3FoeTurn=G('b3FoeTurn'),SK=G('B3_SKILLS');
-  const out={seed:F.seed,turns:0,dets:{},kos:0,moves:{}};
+function play(cfg,log,opt) {
+  const F=G('b3NewFight')(cfg),b3Next=G('b3Next'),b3Auto=G('b3Auto'),b3Act=G('b3Act'),b3FoeTurn=G('b3FoeTurn'),SK=G('B3_SKILLS'),PW=G('B3_RULES').power;
+  const out={seed:F.seed,turns:0,dets:{},kos:0,moves:{},breaks:0,pips:0,support:0},every=(opt&&opt.support)||0,acted={};
+  const quiet=S=>!((typeof S.power==='number'?S.power:PW[S.power])>0);
   let guard=0;
   while(!F.over) {
     if(++guard>2000) throw new Error('fight did not end after 2000 turns');
@@ -37,20 +41,27 @@ function play(cfg,log) {
     if(u) {
       out.turns++;
       if(u.side==='party') {
-        const pick=b3Auto(F,u); if(!pick) throw new Error(u.name+' has nothing to do');
+        const n=acted[u.key]=(acted[u.key]||0)+1;
+        let pick=every&&(n+u.slot)%every===0?b3Auto(F,u,quiet):null;
+        if(pick&&pick.sc<-50) pick=null;   // nothing useful to set up (the ward is already up, the floor is already wet)
+        if(pick) out.support++; else pick=b3Auto(F,u);
+        if(!pick) throw new Error(u.name+' has nothing to do');
         const r=b3Act(F,u,pick.skill,pick.target); if(!r.ok) throw new Error('simple player picked an illegal move: '+r.why);
         beats=beats.concat(r.beats); out.moves[pick.skill]=(out.moves[pick.skill]||0)+1;
         if(log) console.log(`  r${F.round} t${N.beats.find(b=>b.t==='turn').clock.toFixed(1).padStart(6)}  ${u.name.padEnd(14)} ${SK[pick.skill].name}${pick.target==='*'?'':' -> '+F.units.find(x=>x.key===pick.target).name}`);
       } else {
         const fb=b3FoeTurn(F,u); beats=beats.concat(fb);
         const a=fb.find(b=>b.t==='act'),tg=fb.find(b=>b.t==='telegraph');
-        if(log) console.log(`  r${F.round} t${N.beats.find(b=>b.t==='turn').clock.toFixed(1).padStart(6)}  ${u.name.padEnd(14)} ${tg?'winds up '+tg.name:a?a.name+(a.tgts.length===1&&a.tgts[0]!==u.key?' -> '+F.units.find(x=>x.key===a.tgts[0]).name:''):'waits'}`);
+        const nm=k=>F.units.find(x=>x.key===k).name;
+        if(log) console.log(`  r${F.round} t${N.beats.find(b=>b.t==='turn').clock.toFixed(1).padStart(6)}  ${u.name.padEnd(14)} ${a?a.name+(a.tgts.length===1&&a.tgts[0]!==u.key?' -> '+nm(a.tgts[0]):''):''}${a&&tg?', then ':''}${tg?'winds up '+tg.name+(tg.mark?' at '+nm(tg.mark):''):''}${a||tg?'':'loses the turn'}`);
       }
     }
     for(const b of beats) { if(b.t==='detonate') out.dets[b.id]=(out.dets[b.id]||0)+1; if(b.t==='ko'&&b.tgt[0]==='p') out.kos++;
-      if(log&&['detonate','push','pull','ko','miss'].includes(b.t)) console.log('        '+b.t+' '+JSON.stringify(Object.assign({},b,{bar:undefined,t:undefined,g:undefined}))); }
+      if(b.t==='break') out.breaks++; if(b.t==='pips'&&!b.refill) out.pips+=b.n;
+      if(log&&['detonate','push','pull','ko','miss','pips','break','interrupt','intercept','summon'].includes(b.t)) console.log('        '+b.t+' '+JSON.stringify(Object.assign({},b,{bar:undefined,t:undefined,g:undefined}))); }
   }
   out.result=F.over; out.rounds=F.clock/100; out.order=F.turnLog; out.hpLeft=F.party.map(p=>p.hp);
+  out.hpShare=F.party.reduce((s,p)=>s+p.hp,0)/F.party.reduce((s,p)=>s+p.maxHp,0);
   return out;
 }
 function cfgFor(id) {
@@ -74,7 +85,7 @@ function check() {
   SK.t_two={id:'t_two',vibe:'tom_flier',slot:'s1',name:'Test two',pep:0,flavor:['drench','clobber'],power:'standard',hits:1,target:'foe',tags:[],composure:0,effects:[{op:'damage'}]};
   SK.t_all={id:'t_all',vibe:'tom_flier',slot:'s1',name:'Test all',pep:0,flavor:['racket'],power:'standard',hits:1,target:'all_foes',tags:[],composure:0,effects:[{op:'damage'}]};
   SK.t_multi={id:'t_multi',vibe:'tom_flier',slot:'s1',name:'Test multi',pep:0,flavor:['clobber'],power:'standard',hits:3,target:'foe',tags:[],composure:0,effects:[{op:'damage'}]};
-  SK.t_unbuilt={id:'t_unbuilt',vibe:'tom_flier',slot:'s1',name:'Test unbuilt',pep:0,flavor:['support'],power:0,hits:0,target:'self',tags:[],composure:0,effects:[{op:'summon'}]};
+  SK.t_unbuilt={id:'t_unbuilt',vibe:'tom_flier',slot:'s1',name:'Test unbuilt',pep:0,flavor:['support'],power:0,hits:0,target:'self',tags:[],composure:0,effects:[{op:'steal'}]};
   ST.t_out_a={id:'t_out_a',name:'A',kind:'buff',group:null,dur:{n:9,unit:'turn'},mods:[{stat:'out',kind:'a',v:.8}],flags:[],weight:1};
   ST.t_out_b={id:'t_out_b',name:'B',kind:'buff',group:null,dur:{n:9,unit:'turn'},mods:[{stat:'out',kind:'b',v:.8}],flags:[],weight:1};
   ST.t_red_a={id:'t_red_a',name:'RA',kind:'buff',group:null,dur:{n:9,unit:'turn'},mods:[{stat:'reduce',kind:'a',v:.5}],flags:[],weight:1};
@@ -202,13 +213,15 @@ function check() {
     const u=N.unit.side==='party'?N.unit:null; if(u) { const a=G('b3Forecast')(F,9,{actor:u,recovery:80,ghost:true}),b=G('b3Forecast')(F,9,{actor:u,recovery:120,ghost:true});
       ok(a.filter(e=>e.ghost).length===1&&a.findIndex(e=>e.ghost)<=b.findIndex(e=>e.ghost),'ghost moves later for a slower move'); ok(a.some(e=>e.div),'the forecast marks a round divider'); } });
   // 25. An op that is not built says so
-  { const {F,u}=tom0(); let msg=''; try { act(F,u,'t_unbuilt',u.key); } catch(e) { msg=e.message; } ok(/not built yet: summon/.test(msg),'unbuilt op error: '+msg); }
+  { const {F,u}=tom0(); let msg=''; try { act(F,u,'t_unbuilt',u.key); } catch(e) { msg=e.message; } ok(/not built yet: steal/.test(msg),'unbuilt op error: '+msg); }
   // 26. Win and lose
   { const w=play({party:base.party,level:2,formation:'mudling',seed:1}); ok(w.result==='win','new1 can be won'); const l=play({party:base.party,level:2,formation:'mudling',seed:1,hpPct:.02,mods:{foeHp:20}}); ok(l.result==='lose'&&l.kos===4,'a party at 2% HP against 20x monsters loses: '+l.result); }
   // 27. Same seed, same fight
   { const a=play({party:base.party,level:2,formation:'skeeter',seed:77}),b=play({party:base.party,level:2,formation:'skeeter',seed:77}); ok(a.order.join()===b.order.join()&&a.rounds===b.rounds,'a seed replays exactly'); }
   // Stage 2's groups (28 on) live in their own file.
   require('./b3-check-s2.js')({G,ok,near,play,noCrit});
+  // Stage 3's groups (46 on): Composure, Break, Marks, the act runner, adds.
+  require('./b3-check-s3.js')({G,ok,near,play,noCrit});
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);
 }
@@ -220,19 +233,20 @@ else {
   const errs=[],R=[];
   for(let i=0;i<n;i++) {
     const cfg=Object.assign({},cfg0,{seed:seed0+i});
-    try { if(has('log')) console.log('fight '+(i+1)+', seed '+cfg.seed); R.push(play(cfg,has('log'))); }
+    try { if(has('log')) console.log('fight '+(i+1)+', seed '+cfg.seed); R.push(play(cfg,has('log'),{support:Number(flag('support')||0)})); }
     catch(e) { errs.push('seed '+cfg.seed+': '+e.message); }
   }
   const wins=R.filter(r=>r.result==='win'),W=wins.map(r=>r.rounds).sort((a,b)=>a-b),avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
   const dets={},moves={}; for(const r of R) { for(const k in r.dets) dets[k]=(dets[k]||0)+r.dets[k]; for(const k in r.moves) moves[k]=(moves[k]||0)+r.moves[k]; }
   const sum={fight:pos[0],fights:n,wins:wins.length,losses:R.length-wins.length,errors:errs,
     roundsToWin:W.length?{avg:+avg(W).toFixed(2),min:+W[0].toFixed(2),median:+W[Math.floor(W.length/2)].toFixed(2),max:+W[W.length-1].toFixed(2)}:null,
-    knockOutsPerFight:+avg(R.map(r=>r.kos)).toFixed(2),turnsPerFight:+avg(R.map(r=>r.turns)).toFixed(1),detonations:dets,moves};
+    knockOutsPerFight:+avg(R.map(r=>r.kos)).toFixed(2),turnsPerFight:+avg(R.map(r=>r.turns)).toFixed(1),supportMovesPerFight:+avg(R.map(r=>r.support)).toFixed(1),hpLeftShare:+avg(R.map(r=>r.hpShare)).toFixed(2),breaksPerFight:+avg(R.map(r=>r.breaks)).toFixed(2),pipsPerFight:+avg(R.map(r=>r.pips)).toFixed(1),detonations:dets,moves};
   if(has('json')) console.log(JSON.stringify(Object.assign(sum,has('order')?{order:R[0]&&R[0].order}:{})));
   else {
     console.log(`${sum.fight}: ${sum.fights} fights, ${sum.wins} won, ${sum.losses} lost, ${errs.length} errors`);
     if(sum.roundsToWin) console.log(`rounds to win: average ${sum.roundsToWin.avg}, shortest ${sum.roundsToWin.min}, middle ${sum.roundsToWin.median}, longest ${sum.roundsToWin.max}`);
-    console.log(`knock-outs per fight: ${sum.knockOutsPerFight}   turns per fight: ${sum.turnsPerFight}`);
+    console.log(`knock-outs per fight: ${sum.knockOutsPerFight}   turns per fight: ${sum.turnsPerFight}   Breaks per fight: ${sum.breaksPerFight}   pips shaved per fight: ${sum.pipsPerFight}`);
+    console.log(`support moves per fight: ${sum.supportMovesPerFight}   party HP left at the end: ${Math.round(sum.hpLeftShare*100)}%`);
     console.log('detonations: '+(Object.keys(dets).map(k=>k+' '+dets[k]).join(', ')||'none'));
     console.log('moves used: '+Object.keys(moves).map(k=>k+' '+moves[k]).join(', '));
     for(const e of errs.slice(0,10)) console.log('ERROR '+e);
