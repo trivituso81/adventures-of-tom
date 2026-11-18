@@ -1282,6 +1282,66 @@ html.landscape .mbuild{padding:4px 10px;gap:1px}
 .bl-empty{padding:26px 14px;text-align:center;color:#aeb6c6}
 .bl-foot{padding:7px 14px;border-top:1px solid #2c3342;color:#8790a3;font-size:10px;line-height:1.3}
 </style>
+<style>
+/* Desktop battle HUD (Tom 2026-11-18, build deskhud1): on a computer the screen has spare room, so the turn bar is 2.5x bigger and the
+   right-hand panel is bigger everywhere: one party tile per row (about 3x taller, full width) and larger type in the message, the
+   command cross, the lists and the status list. Only a wide landscape window that is not a tablet or a Duo; phones are untouched. */
+@media(min-width:1100px) and (min-height:560px){
+html.landscape:not(.tablet):not(.duo) #battle.v2{--b2pw:clamp(320px,25vw,420px)}
+html.landscape:not(.tablet):not(.duo) #battle.v2 #battle-canvas{width:min(100cqw,calc((100cqh - 96px) * 16 / 9))}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-ribbon{min-height:0;padding:6px 10px;gap:8px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-rib-lbl{font-size:20px;letter-spacing:2px;margin-right:8px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-tk{width:55px;height:55px;font-size:22px;border-radius:8px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-tk img{border-radius:8px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-tk.now{width:65px;height:65px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-tk b{font-size:20px;right:3px;bottom:1px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-bar{gap:8px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-div{width:22px;margin:0 3px;border-left-width:3px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-div b{font-size:20px;padding-left:2px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-ui{gap:8px;padding:calc(8px + env(safe-area-inset-top)) calc(10px + env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) 8px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-low{gap:8px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-msg{font-size:16px;line-height:1.3;padding:8px 11px;max-height:6.2em}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-party{grid-template-columns:minmax(0,1fr);gap:6px;padding:6px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-pc{grid-template-columns:70px minmax(0,1fr);gap:12px;padding:6px 8px;align-items:center;min-height:82px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-pc img,html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-ph{width:70px;height:70px;border-radius:6px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-nm{font-size:24px;letter-spacing:.3px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-nm em{font-size:18px;padding-left:6px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-chips{gap:4px 6px;margin-top:3px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-st{font-size:13px;padding:1px 6px;border-radius:3px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-bar{height:13px;margin-top:5px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-sub{font-size:17px;margin-top:4px;gap:8px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-sub>span:first-child{font-size:17px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-vp{gap:3px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-vp i{width:6px;height:13px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-shn{margin-left:5px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-heart{padding:2px 6px 6px;gap:8px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-heart .lbl{font-size:15px;letter-spacing:1.4px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-heart svg{width:24px;height:22px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-heart b{font-size:17px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-tr{font-size:12px;line-height:14px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-cmd{padding:8px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-cross{gap:6px;max-height:none;width:min(100%,calc(100cqh));margin:auto}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:19px;border-width:2px;border-radius:8px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x .ar{width:17px;height:17px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x small{font-size:15px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x small.long{font-size:14px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 button.b2-mid small,html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-pepn{font-size:14px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-grid{gap:6px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-list{gap:6px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-btn{padding:8px 11px;gap:3px;border-width:2px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-btn span{font-size:21px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-btn em{font-size:15px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-top{gap:8px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-cost{font-size:16px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-el{font-size:13px;line-height:16px;padding:0 5px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-role{font-size:13px;line-height:16px;padding:1px 6px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-ic{width:18px;height:18px;padding:2px;vertical-align:-4px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-tbp img,html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-tbp .b2-ph{width:44px;height:44px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-back{padding:8px 11px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-empty{font-size:16px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-info{gap:8px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf{padding:8px 11px;border-radius:7px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf-h span{font-size:24px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf-h em{font-size:16px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf-t{gap:8px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf-t b{font-size:20px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf-t i{font-size:16px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf-t .b2-st{font-size:13px;padding:1px 6px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf p{font-size:16px;margin-top:5px;line-height:1.3}
+}
+@media(min-width:1100px) and (min-height:560px) and (max-height:860px){
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-msg{font-size:14px;padding:6px 10px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-ui,html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-low{gap:6px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-party{gap:4px;padding:5px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-pc{grid-template-columns:54px minmax(0,1fr);gap:10px;padding:4px 7px;min-height:64px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-pc img,html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-ph{width:54px;height:54px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-nm{font-size:20px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-nm em{font-size:15px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-bar{height:11px;margin-top:3px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-sub,html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-sub>span:first-child{font-size:14px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-sub{margin-top:2px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-vp i{width:5px;height:11px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x small{font-size:13px}
+}
+</style>
 </head>
 <body>
 <div id="stage">

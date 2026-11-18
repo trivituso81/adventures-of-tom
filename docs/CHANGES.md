@@ -1,3 +1,10 @@
+## deskhud1 (2026-11-18): Desktop battle screen: turn bar 2.5x bigger, one party tile per row, bigger type in the whole right panel
+
+- Tom (11-18 13:42): "in desktop browser view, we have plenty of dead space to better show some small information: 1 - Turn bar - make 2.5x bigger. 2 - party status on the top right - stack each character vertically giving them full horizontal space within the right bar." Then (13:43): "each tile could be 3x as tall allowing for bigger font sizes across the entire right hand panel area".
+- What changed: CSS only, one new `<style>` block after the last one in index.html (marked `deskhud1`). It applies only to a wide landscape window (1100 px or wider, 560 px or taller) that is not iPad mode (`html.tablet`) and not an unfolded Duo (`html.duo`). Phones, iPad and Duo look exactly as before.
+- Turn bar: faces 22 to 55 px (the current turn 26 to 65 px), TURN label, round number and divider scaled the same. The picture reserves room for the taller bar, so on a short window the picture can be a little smaller.
+- Right panel: wider (25% of the window, 320 to 420 px). Party is one column, each tile about 3x taller (70 px face, 24 px name, 17 px HP, 13 px bar). The message, command cross, Skills and Bag lists, HEART row and the full status list (what is on Tom) all have larger type. Windows shorter than 860 px get a slightly tighter version so the command cross is not clipped.
+- Applies to both battle screens (Battle 3 and the old battle), since they share these classes. Tested by screenshot at 1550x900, 1280x720 and phone landscape 844x390 (unchanged).
 ## b3s2 (2026-11-18): New battle, stage 2: Skills, wards, the wet floor, Pick-Me-Up, status lists and two more fights
 
 - Stage 2 of 23 of the new battle system ("Battle 3", `docs/BATTLE3.md`, plan `claude/battle-architecture.md` in the Project). Still Battle Lab only: ADMIN > BATTLE LAB > NEW BATTLE. Story fights use the old battle and nothing in it changed.
