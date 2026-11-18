@@ -25,6 +25,11 @@ def key(a):
     corners = np.concatenate([a[:30, :30].reshape(-1, 3), a[:30, -30:].reshape(-1, 3)])
     bg = np.median(corners, 0)
     d = np.sqrt(((a - bg) ** 2).sum(2))
+    # A floor shadow the video model painted on the magenta is a DARKER magenta (same colour direction, less light):
+    # count it as background too. Grok's first real clip had one under the lunge (2026-11-17).
+    lum = np.linalg.norm(a, axis=2) + 1e-6
+    shade = ((a @ bg) / (lum * np.linalg.norm(bg)) > .965) & (a[..., 1] < .4 * np.maximum(a[..., 0], a[..., 2])) & (lum > 40)
+    d = np.where(shade, 0, d)
     hard = d > 95
     lab, n = ndi.label(hard)
     if n > 1:                                   # keep the big shapes only (loose specks and sparkles go)

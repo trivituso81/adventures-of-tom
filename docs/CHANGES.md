@@ -1,3 +1,8 @@
+## clipgen1d (2026-11-17): Rose's first Grok-made punch is in the CLIP TEST fight, floor shadow removed
+
+Tom approved clip-rose-strike v1 (Grok Imagine Video 1.5, made in the Art Library). The Action cut it (artbake1478): 37 pictures, 1.0 s at 3x, hit at 0.53 s. Seen in the frames: she is the same painting as her battle sprite (same colours and head), no sparkles, dust or burst lines, hair stays in frame. One flaw: Grok painted a dark floor shadow under the lunge. The cutter (`tools/clip-bake/bake_clip.py`) now treats darker magenta as background, and the clip was cut again with the same marks: the shadow is gone and the game's own shadow is used. `python3 tools/clip_test.py`: FAILS [].
+- Fact: installing the video tool in the Action took about 6 minutes, so a clip reaches the game about 10 minutes after APPROVE (not 5). Not fixed here.
+
 ## 2026-11-18 (449): Art Library bake, clip-rose-strike (`artbake1478`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
