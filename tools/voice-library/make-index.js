@@ -48,6 +48,9 @@ for(const f of fs.readdirSync('data').filter(f=>/^scenes.*\.js$/.test(f)||f==='b
   else { const m=f.match(/^scenes-ch(\d+)\.js$/); const n=m?+m[1]:f==='scenes-p2.js'?11:f==='bonus-nine-scoops.js'?21:null; if(n==null) continue;
     const t=s.match(/Chapter \d+ "([^"]+)"/); if(t) titles[n]=t[1]; if(n===21) titles[21]=titles[21]||'Nine Scoops (bonus)'; segs.push({n,s}); }
 }
+// Every built chapter needs its `// CHAPTER n: Title` heading in data/scenes.js. Without it the chapter drops out of the Library's
+// chapter list and its lines are filed under the next chapter (voicefilter1: the chapter 1 rebuild lost the colon and the title).
+for(let n=1;n<=10;n++) if(!titles[n]) throw new Error('make-index: no "// CHAPTER '+n+': Title" heading in data/scenes.js');
 const textCh={}, textWho={};   // norm(text) -> [chapters], -> speaker shown
 const sceneCh={};
 for(const {n,s} of segs) for(const m of s.matchAll(/SCENES\.(\w+)\s*=/g)) sceneCh[m[1]]=sceneCh[m[1]]||n;

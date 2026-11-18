@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## 2026-11-18 (453): Art Library bake, clip-mudling-idle (`artbake1484`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
@@ -24,6 +25,15 @@ Next step of the animation tool test (claude/animation-tool-test-exam.md in the 
 - `tools/clip-bake/make_start.py` now takes a monster id: it uses the `stance` rect of `data/foes/<id>-hires.js`, drops loose specks, and places the body at 70 percent of the frame height, centred. New start picture `art/clips/start/mudling.png`. Rose's start picture rebuilds byte for byte.
 - Not known: whether the xAI API accepts the model name `grok-imagine-video-1.5-lite` as written (taken from the price list, never called). If it is refused the card shows the service's error and nothing is charged.
 - Tests: `python3 tools/art-library/clip_lib_test.py` (57 checks, 7 new for study videos), `python3 tools/clip_test.py`, `python3 tools/smoke.py`.
+=======
+## voicefilter1 (2026-11-18): Voice Library: the Chapter 1 filter is back, with its 95 unrecorded lines
+
+Tom (2026-11-18 08:00): "Chapter 1 filter is not in the voice library anymore".
+- Cause: the chapter 1 rebuild (ch1rebuild1, 11-17) rewrote the chapter heading in `data/scenes.js` without the `CHAPTER 1: Title` form the Voice Library reads. Chapter 1 dropped out of the chapter list and its 95 new lines were filed under Chapter 2.
+- Fix: the heading is back (`// CHAPTER 1: The Soup Dumpling Protocol`), index rebuilt. Chapter 1 lists 268 lines, 95 under No clip yet; Chapter 2 is back to its own 305.
+- Guard: `make-index.js` now stops with an error if any of chapters 1 to 10 has no heading.
+- No line, clip or scene changed.
+>>>>>>> 25e873c (voicefilter1: Voice Library Chapter 1 filter restored (chapter heading form), guard in make-index)
 
 ## linegap1 (2026-11-18): story scenes play on AUTO, and each chapter 1 line has its own pause before the next speaker
 

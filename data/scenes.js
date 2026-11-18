@@ -72,7 +72,7 @@ SCENES.opening=()=>{
 // A walk route along the map from where the actor stands now to (x,y) (for walks that start wherever Tom happens to be).
 const routeTo=(a,x,y)=>()=>{ const n=sceneActor(a); return n?findPath(currentMap,n,{x,y}).map(p=>[p.x,p.y]):[]; };
 // ======================================================================================================
-// CHAPTER 1 (rebuilt 2026-11-17 from claude/story-ch01-draft2.md, locked by Tom; every line is word for word from that file).
+// CHAPTER 1: The Soup Dumpling Protocol (the heading must keep the form `CHAPTER n: Title`: tools/voice-library/make-index.js files lines by it). Rebuilt 2026-11-17 from claude/story-ch01-draft2.md, locked by Tom; every line is word for word from that file).
 // Long Island only; no flights. Flags, in story order: opening-done, ch1-goal (scene 1, the Square), ch1-amy (scene 2, Rivituso Row),
 // ch1-ellie (optional scene 2b), ch1-theft (scene 3, Deedee joins), ch1-t1 (scene 4, one fight of three Mudlings), ch1-tuts (Grump Hollow's
 // other monsters wake up), ch1-spot (scene 5), ch1-pond (scene 6, the Big One surfaces), ch1-crown (it wears the pan), battle:bigone ('win'),
