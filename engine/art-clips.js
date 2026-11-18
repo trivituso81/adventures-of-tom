@@ -17,7 +17,10 @@
 // it still plays and can be marked and approved (the Action downloads it), but the address expires, so approve soon.
 const CLIP_RATE={'grok-imagine-video-1.5':{'480p':.08,'720p':.14,'1080p':.25},'grok-imagine-video-1.5-lite':{'480p':.02,'720p':.03,'1080p':.14}};   // dollars per second of video (xAI list price, 2026-11)
 const CLIP_FRAME=1/30, CLIP_PREVIEW_BG='bgs/01-pond-town.webp';
-const clipCost=e=>((CLIP_RATE[e.clip.model]||{})[e.clip.res]||.08)*e.clip.dur+.01;   // + one input picture
+// Pinned pictures (clippin1): `clip.keys` [{image, t}] are pictures the video must pass through at t seconds, `clip.last` is the picture
+// it must end on. Sent as `keyframes` and `last_frame` (xAI: grok-imagine-video-1.5 only; times snap to thirds of a second).
+const clipPins=c=>(c.keys||[]).map(k=>({path:k.image,t:k.t,what:'at '+(+k.t).toFixed(1)+' s'})).concat(c.last?[{path:c.last,what:'last frame'}]:[]);
+const clipCost=e=>((CLIP_RATE[e.clip.model]||{})[e.clip.res]||.08)*e.clip.dur+.01*(1+clipPins(e.clip).length);   // + one cent per input picture
 const clipPend={get(){ try{ return JSON.parse(LS.get('aot-clip-pending')||'{}')||{}; }catch(x){ return {}; } }, set(o){ LS.set('aot-clip-pending',JSON.stringify(o)); }};
 const clipSrc=r=>r.blob?urlOf(r):r.url;
 // clip.kind (clipkinds1): 'strike' (default) needs START, HIT and END. 'loop' (an idle that repeats) and 'state' (ends in a
@@ -42,6 +45,7 @@ function clipCard(e){
   return '<div class="card" data-id="'+id+'">'+
   (blk?'<div class="blk">Blocked. '+esc(blk.why)+'</div>':'')+
   '<label>Start picture (first frame of the video, made from the battle sprite)</label><div class="refs"><div class="ref"><img src="'+esc(c.start)+'" data-path="'+esc(c.start)+'" alt="" onerror="refMiss(this)">'+esc(c.start.split('/').pop())+'</div></div>'+
+  (clipPins(c).length?'<label>Pinned pictures (the video must pass through these, so the pose comes from her painted frames, not from words)</label><div class="refs">'+clipPins(c).map(k=>'<div class="ref"><img src="'+esc(k.path)+'" data-path="'+esc(k.path)+'" alt="" onerror="refMiss(this)">'+esc(k.what)+'</div>').join('')+'</div>':'')+
   '<details class="pr" data-po="'+id+'"'+(UI.po[e.id]?' open':'')+'><summary>Prompt'+(ed?' <span class="chip c-wait">edited</span>':'')+' <span class="hint" style="font-weight:400">tap to read or edit</span></summary><div class="pin">'+(ed?'<button class="small" data-revert="'+id+'">Use the default prompt</button> <span class="hint">(this box holds your own edit, saved on this device)</span>':'<span class="hint">Edit here, it is sent as written.</span>')+'<textarea data-prompt="'+id+'">'+esc(promptOf(e))+'</textarea></div></details>'+
   '<div class="row"><button class="gold" data-gen="'+id+'"'+(blk?' disabled':'')+'>'+(pend?'FETCH THE VIDEO':'GENERATE VIDEO')+'</button><span class="hint">'+(pend?'A video is already being made for this. No new charge.':c.dur+' second video, '+c.res+', about $'+clipCost(e).toFixed(2)+' each. Takes 1 to 3 minutes.')+'</span></div>'+
   '<div class="'+(MSG[e.id]&&MSG[e.id].err?'err':'hint')+'" id="m-'+id+'">'+esc(MSG[e.id]?MSG[e.id].text:'')+'</div>'+
@@ -67,7 +71,11 @@ async function clipGenerate(id,btn){
       setMsg(id,'Sending the start picture...');
       let sr=await fetch(c.start,{cache:'no-store'}), sb=null; if(sr.ok) sb=await sr.blob(); else if(LS.get('aot-gh-token')){ try{ sb=await ghFile(c.start); }catch(x){} }
       if(!sb) throw new Error('Could not load the start picture '+c.start+'.');
-      let r; try{ r=await fetch(XAI_BASE()+'/v1/videos/generations',{method:'POST',headers:hdr,body:JSON.stringify({model:c.model,prompt,image:{url:await blobToDataUri(sb)},duration:c.dur,resolution:c.res})}); }catch(err){ throw new Error(unreachable); }
+      const pic=async path=>{ let q=await fetch(path,{cache:'no-store'}), b=null; if(q.ok) b=await q.blob(); else if(LS.get('aot-gh-token')){ try{ b=await ghFile(path); }catch(x){} } if(!b) throw new Error('Could not load the picture '+path+'.'); return {url:await blobToDataUri(b)}; };
+      const body={model:c.model,prompt,image:{url:await blobToDataUri(sb)},duration:c.dur,resolution:c.res};
+      if(c.keys&&c.keys.length){ body.keyframes=[]; for(const k of c.keys) body.keyframes.push({image:await pic(k.image),timestamp_s:k.t}); }
+      if(c.last) body.last_frame=await pic(c.last);
+      let r; try{ r=await fetch(XAI_BASE()+'/v1/videos/generations',{method:'POST',headers:hdr,body:JSON.stringify(body)}); }catch(err){ throw new Error(unreachable); }
       const txt=await r.text(); let j=null; try{ j=JSON.parse(txt); }catch(x){}
       if(!r.ok) throw new Error('The video service said '+r.status+': '+clean(txt));
       if(!j||!j.request_id) throw new Error('The video service gave no request number: '+clean(txt));

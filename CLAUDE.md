@@ -54,7 +54,8 @@ Tom (11-18 13:58): "a common issue you have with image and video prompt generati
 - Describes only what should be seen: the exact pose or motion wanted. No lists of things to avoid, no backstory, no repeating in words what the attached picture already shows.
 - One verb per action, plain body words, a real height or direction when it matters ("at shoulder height", not "at the height of her own nose").
 - A video clip prompt is the one-line `LOOK_SHORT` in `tools/art-library/clip-prompts.js`, a blank line, then the motion in one or two sentences, with an ending action so the model does not fill spare time by repeating the move. Nothing about speed, sound or length.
-- Before pushing a prompt, count its words and cut. The Boop prompt is 49 words; a prompt over about 80 needs a reason.
+- Before pushing a prompt, count its words and cut. A prompt over about 80 words needs a reason.
+- When words miss a pose twice, stop rewording and pin the pose with pictures (clippin1): `clip.keys` (pictures the video must pass through, each at a time in seconds) and `clip.last` (the picture it ends on), made from the character's own painted frames with `python3 tools/clip-bake/make_start.py <owner> --pose <frame key> <name>`. Pinned pictures need the full model `grok-imagine-video-1.5`. The Boop is the model: idle, her painted jab frame at 0.667 s, idle again, 2 seconds, and a 33 word prompt.
 
 When a prompt of an existing entry is rewritten, `clip-prompts.js` raises the entry's `promptRev`, and the Library drops an older edit of that prompt saved on Tom's device (`retireOldEdits` in `art.html`), so GENERATE uses the new text.
 

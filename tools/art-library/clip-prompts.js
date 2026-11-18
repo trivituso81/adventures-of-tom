@@ -37,13 +37,18 @@ const STRIKE = 'MOTION: WIND-UP INTO A STRIKE\nStart in the relaxed ready stance
 // seen. Nothing about speed, sound or length (the length is the API's `duration`). Give the clip an ending action so the model does not
 // fill the spare time by repeating the move.
 const LOOK_SHORT = 'Animate the character in the attached picture. Same drawing style, same flat magenta background, fixed camera, whole body in view.';
-// BOOP: Rose's free move. Tom 2026-11-18: "the boop should be a like sharp jab (not necessarily on the nose) with her finger." Level, not
-// upward. The ending is the painted move's last two frames (docs/CANON.md, Rm.boopShow: scrunched laugh, proud hands on hips).
-const BOOP = 'She makes one sharp jab with her index finger, arm straight out in front of her at shoulder height. Then she rests both hands on her hips and giggles.';
+// PINNED PICTURES (clippin1, 2026-11-18): words alone could not hold the Boop. Seven videos missed four different ways (finger up at an
+// adult's nose; two pokes, twice; pointing at the viewer, moving off her spot and wiggling). So the pose now comes from PICTURES: the
+// video starts on her idle picture, must pass through her own painted jab frame (`clip.keys`, made by `make_start.py --pose`), and must
+// end on the idle picture again (`clip.last`). The text only names the action. Pinned frames need the full model (`G15`); the xAI docs
+// list `last_frame` and `keyframes` for grok-imagine-video-1.5 only. Keyframe times snap to thirds of a second.
+// BOOP: Rose's free move. Tom 2026-11-18: "the boop should be a like sharp jab (not necessarily on the nose) with her finger."
+const ROSE_JAB = 'art/clips/keys/rose-boop-jab.png';   // her painted frame ab_boop_1: arm straight out and level, one finger
+const BOOP = 'She makes one sharp jab with her index finger, then stands as before.';
 const G15 = 'grok-imagine-video-1.5', LITE = G15 + '-lite', ROSE = 'art/clips/start/rose.png';
 const entries = [
-  { id: 'clip-rose-boop', tab: 'Clips', group: 'Rose', title: 'Rose: Boop (one sharp finger jab) video clip', ar: '4:3', refs: [ROSE],
-    clip: { id: 'rose-boop', owner: 'rose', start: ROSE, model: LITE, res: '480p', dur: 3, figRows: 83, step: 3, speed: 1.5 },
+  { id: 'clip-rose-boop', tab: 'Clips', group: 'Rose', title: 'Rose: Boop (one sharp finger jab) video clip', ar: '4:3', refs: [ROSE, ROSE_JAB],
+    clip: { id: 'rose-boop', owner: 'rose', start: ROSE, keys: [{ image: ROSE_JAB, t: 0.667 }], last: ROSE, model: G15, res: '480p', dur: 2, figRows: 83, step: 3, speed: 1.5 },
     prompt: LOOK_SHORT + '\n\n' + BOOP },
   // The first clip made: a general wind-up and strike, which came back as a karate chop. Battle Lab > CLIP TEST: ROSE plays it only until
   // the Boop clip above is approved (RM.rose.boop). Purge this entry, its files and the fallback once Boop is approved.

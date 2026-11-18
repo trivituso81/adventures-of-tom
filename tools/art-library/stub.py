@@ -75,8 +75,11 @@ class H(BaseHTTPRequestHandler):
         if self.path == '/v1/videos/generations':
             ok = isinstance(b, dict) and b.get('model') and b.get('prompt') and isinstance(b.get('image'), dict) and str(b['image'].get('url', '')).startswith('data:image/') and isinstance(b.get('duration'), int) and b.get('resolution') in ('480p', '720p', '1080p')
             if not ok: return self._send(400, {'error': 'bad request shape'})
+            kf, lf = b.get('keyframes') or [], b.get('last_frame')   # pinned pictures (clippin1): the full model only, times strictly inside the clip
+            pin_ok = isinstance(kf, list) and len(kf) <= 4 and all(isinstance(k, dict) and str((k.get('image') or {}).get('url', '')).startswith('data:image/') and isinstance(k.get('timestamp_s'), (int, float)) and 0 < k['timestamp_s'] < b['duration'] for k in kf) and (lf is None or (isinstance(lf, dict) and str(lf.get('url', '')).startswith('data:image/')))
+            if not pin_ok or ((kf or lf) and b['model'] != 'grok-imagine-video-1.5'): return self._send(400, {'error': 'bad pinned pictures'})
             rid = 'req%d' % (len(VIDEOS) + 1); VIDEOS[rid] = 0
-            LOG.append({'xai': self.path, 'model': b['model'], 'duration': b['duration'], 'resolution': b['resolution'], 'rid': rid})
+            LOG.append({'xai': self.path, 'model': b['model'], 'duration': b['duration'], 'resolution': b['resolution'], 'rid': rid, 'keys': [k['timestamp_s'] for k in kf], 'last': bool(lf), 'words': len(b['prompt'].split())})
             return self._send(200, {'request_id': rid})
         if self.path in ('/v1/images/generations', '/v1/images/edits'):
             ok = isinstance(b, dict) and b.get('model') and b.get('prompt')
