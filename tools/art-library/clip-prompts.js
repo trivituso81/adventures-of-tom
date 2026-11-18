@@ -30,9 +30,19 @@ const LOOK_FOE = 'IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exact
   'LOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\n' +
   'CAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\n';
 const STRIKE = 'MOTION: WIND-UP INTO A STRIKE\nStart in the relaxed ready stance of the attached picture and hold it still for a brief moment. Twist the body away to the right, pull the near arm back, weight on the back leg, eyes narrowed. Then spring forward to the left in one fast move, lunging with the front knee bent and the arm at full reach, mouth open in a shout. Stay the same size and keep both feet on the same ground line while lunging. Hold the lunge for a moment, then ease back to the exact ready stance of the first frame. Hands empty, nothing is hit and nothing appears at the end of the arm.';
+// BOOP (clipboop1, 2026-11-18): Rose's free move. Canon (docs/CANON.md, engine/rose-moves.js Rm.boopShow): she marches up and gives ONE
+// finger poke on the nose, on tiptoe, then a scrunched laugh and proud hands on hips. A generic "strike" came back as a karate chop
+// (Tom: "she's karate chopping not booping"), so an attack prompt names the move's real gesture. Tom's prompt rules hold here: only what
+// should appear is named, nothing about speed, and the words for the two sides are not used in the motion text.
+const BOOP = 'MOTION: A ONE-FINGER BOOP ON THE NOSE\nStart in the relaxed stance of the attached picture. She grins, lifts one hand and points its index finger straight ahead, the way she is facing, with the other fingers curled into her palm. She leans forward, rises up on her tiptoes and reaches that arm all the way out, straight and level at the height of her own nose, until the fingertip gives one tiny gentle tap on the air in front of her, the way a child boops a friend on the nose. Her mouth opens to say "boop". She holds the finger out for a moment. Then she pulls the hand back, stands tall with both hands on her hips and scrunches her eyes shut in a proud giggle. Her feet stay on the same spot the whole time and both hands are empty.';
 const G15 = 'grok-imagine-video-1.5', LITE = G15 + '-lite', ROSE = 'art/clips/start/rose.png';
 const entries = [
-  { id: 'clip-rose-strike', tab: 'Clips', group: 'Rose', title: 'Rose: strike (Boop) video clip', ar: '4:3', refs: [ROSE],
+  { id: 'clip-rose-boop', tab: 'Clips', group: 'Rose', title: 'Rose: Boop (one finger on the nose) video clip', ar: '4:3', refs: [ROSE],
+    clip: { id: 'rose-boop', owner: 'rose', start: ROSE, model: LITE, res: '480p', dur: 3, figRows: 83, step: 3, speed: 1.5 },
+    prompt: LOOK + BOOP + END(3) },
+  // The first clip made: a general wind-up and strike, which came back as a karate chop. Battle Lab > CLIP TEST: ROSE plays it only until
+  // the Boop clip above is approved (RM.rose.boop). Purge this entry, its files and the fallback once Boop is approved.
+  { id: 'clip-rose-strike', tab: 'Clips', group: 'Rose', title: 'OLD TEST: Rose strike (a chop, not Boop)', ar: '4:3', refs: [ROSE],
     clip: { id: 'rose-strike', owner: 'rose', start: ROSE, model: G15, res: '480p', dur: 3, figRows: 83, step: 3, speed: 1.5 },
     prompt: LOOK + STRIKE + END(3) },
   // ---- study videos (clipstudy1): the next cells of the tool test. Approve saves the video only. ----
@@ -55,7 +65,9 @@ if (require.main === module) {
   for (const e of entries) {
     const i = doc.entries.findIndex(x => x.id === e.id), old = i >= 0 ? doc.entries[i] : null;
     const n = { status: old ? old.status : 'draft', versions: old ? old.versions || [] : [], rejects: old ? old.rejects || [] : [], ...e };
-    if (old) doc.entries[i] = n; else doc.entries.push(n);
+    if (old) { doc.entries[i] = n; continue; }
+    const next = entries.slice(entries.indexOf(e) + 1).map(x => doc.entries.findIndex(y => y.id === x.id)).find(j => j >= 0);   // keep this file's order in the Library
+    if (next === undefined) doc.entries.push(n); else doc.entries.splice(next, 0, n);
   }
   fs.writeFileSync(out, JSON.stringify(doc, null, 1) + '\n');
   console.log('clips in', out, entries.map(e => e.id).join(', '));

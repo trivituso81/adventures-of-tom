@@ -20,7 +20,7 @@ READY="()=>{ const L=window.__LE; return L.battle.state==='command'&&L.B2.actor&
 LOG="""()=>{ window.__log=[]; const P=r=>r&&r._paint?[r._paint.a,r._paint.f]:['',-1];
   window.__tick=setInterval(()=>{ const u=B2.party.find(p=>p.id==='rose'),nap=u.hp<=0?bclipFor('rose','state'):null;
     const koAt=window.__LE.battle.fx[u.idx].koAt;
-    window.__log.push([B2.foes.map(f=>P(b2FoeFrame(f,f.def.sprite))[1]),u.hp,nap&&koAt!=null?P(bclipFrameAt(nap,(window.__LE.battle.time-koAt)*1000))[1]:-1,B2.foes.map(f=>P(b2FoeFrame(f,f.def.sprite))[0])]); },50); }"""
+    window.__log.push([B2.foes.map(f=>P(b2FoeFrame(f,f.def.sprite))[1]),u.hp,nap&&koAt!=null?P(bclipFrameAt(nap,(window.__LE.battle.time-koAt)*1000))[1]:-1,B2.foes.map(f=>P(b2FoeFrame(f,f.def.sprite))[0]),performance.now()]); },50); }"""
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server','--autoplay-policy=no-user-gesture-required']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
@@ -43,7 +43,10 @@ with sync_playwright() as pw:
         if any(n!='clip_mudling_idle' for r in log for n in r[3]): fails.append(layout+': a Mudling was not drawn from the loop clip')
         if len(set(a))<C['loop']*.6: fails.append(f'{layout}: only {len(set(a))} of {C["loop"]} loop pictures were drawn')
         if not any(y<x for x,y in zip(a,a[1:])) or not any(y>x for x,y in zip(a,a[1:])): fails.append(layout+': the loop did not run forward and backward')
-        if max(abs(y-x) for x,y in zip(a,a[1:]))>3: fails.append(layout+': the loop jumped (more than 3 pictures between two looks)')
+        # A jump is more than 3 pictures between two looks taken less than 120 ms apart. A longer gap is the test browser stalling (a
+        # screenshot stops the page for 200 ms or more here), and the quick blink at the end of the Mudling loop is 3 pictures in 125 ms.
+        ts=[r[4] for r in log]
+        if any(abs(y-x)>3 and t1-t0<120 for x,y,t0,t1 in zip(a,a[1:],ts,ts[1:])): fails.append(layout+': the loop jumped (more than 3 pictures between two looks)')
         if sum(x==y for x,y in zip(a,b))>len(a)*.2: fails.append(layout+': the two Mudlings move in step')
         nap=[r[2] for r in log if r[1]<=0 and r[2]>=0]
         print(layout,'loop pictures',len(set(a)),'of',C['loop'],'| nap pictures',len(set(nap)),'of',C['nap'],'last',nap[-1:] )

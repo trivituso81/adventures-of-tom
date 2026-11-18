@@ -23,7 +23,7 @@ FIRE="""()=>{ const L=window.__LE,B2=L.B2,u=B2.party.find(p=>p.id==='rose'),act=
   for(const f of B2.foes){ f.maxHp=f.hp=99999; }
   B2.actor=u; L.battle.actor=u.idx; const o=L.b2TargetOptions(act,u)[0];
   window.__log=[]; window.__hp0=B2.foes[0].hp; window.__t0=performance.now();
-  window.__tick=setInterval(()=>{ const st=RFX.ST.cur,fr=st&&st.fx&&st.fx.path&&st.frame,p=fr&&fr._paint; window.__log.push([Math.round(performance.now()-window.__t0),p&&p.a==='clip_rose_strike'?p.f:-1,B2.foes[0].hp]); },16);
+  window.__tick=setInterval(()=>{ const st=RFX.ST.cur,fr=st&&st.fx&&st.fx.path&&st.frame,p=fr&&fr._paint; window.__log.push([Math.round(performance.now()-window.__t0),p&&p.a==='clip_'+window.__clip?p.f:-1,B2.foes[0].hp]); },16);
   L.b2Do(act,o); return o.label; }"""
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server','--autoplay-policy=no-user-gesture-required']}
@@ -33,12 +33,13 @@ with sync_playwright() as pw:
         pg=br.new_page(viewport=vp,device_scale_factor=2)
         errs=[]; pg.on('pageerror',lambda e: errs.append(str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
         pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b2Start',timeout=30000); pg.wait_for_timeout(2500)
-        if pg.evaluate("()=>!!PAINTED.clip_rose_strike.img"): fails.append(layout+': the clip picture was loaded before any fight')
+        CID=pg.evaluate("()=>window.__clip=BCLIPS.rose_boop?'rose_boop':'rose_strike'")   # Boop plays her real Boop clip once it is baked, the old chop test until then (Rm.boopClip)
+        if pg.evaluate("(id)=>!!PAINTED['clip_'+id].img",CID): fails.append(layout+': the clip picture was loaded before any fight')
         if layout=='landscape': pg.evaluate("()=>window.__LE.toggleLayout()")   # landscape is the game's own toggle: the whole stage turns on the upright phone
         if pg.evaluate(START,speed)<0: fails.append('no CLIP TEST fight in B2_LAB'); break
         pg.wait_for_function(READY,timeout=40000)
-        if not pg.evaluate("()=>bclipReady('rose_strike')"): fails.append(layout+': the clip picture is not loaded in the fight')
-        C=pg.evaluate("()=>({n:BCLIPS.rose_strike.n,impact:BCLIPS.rose_strike.impact,dur:BCLIPS.rose_strike.dur,at:BCLIPS.rose_strike.ms[BCLIPS.rose_strike.impact]})")
+        if not pg.evaluate("(id)=>bclipReady(id)",CID): fails.append(layout+': the clip picture is not loaded in the fight')
+        C=pg.evaluate("(id)=>({n:BCLIPS[id].n,impact:BCLIPS[id].impact,dur:BCLIPS[id].dur,at:BCLIPS[id].ms[BCLIPS[id].impact]})",CID)
         pg.evaluate(FIRE); t0=time.time(); frames=[]
         times=[.5]+[.9+C['dur']/1000*k/9 for k in range(10)]+[.9+C['dur']/1000+.5]
         for k,ft in enumerate(times):
@@ -50,7 +51,7 @@ with sync_playwright() as pw:
         log=pg.evaluate("()=>{ clearInterval(window.__tick); return window.__log; }"); hp0=pg.evaluate("()=>window.__hp0")
         seen=[f for _,f,_ in log if f>=0]; order=[f for i,f in enumerate(seen) if i==0 or f!=seen[i-1]]
         hit=next((r for r in log if r[2]<hp0),None)
-        print(layout,'clip frames seen',len(order),'of',C['n'],'first',order[:1],'last',order[-1:],'| hit at',hit,'| impact frame',C['impact'])
+        print(layout,'clip',CID,'frames seen',len(order),'of',C['n'],'first',order[:1],'last',order[-1:],'| hit at',hit,'| impact frame',C['impact'])
         if not order or order[0]>2 or order[-1]<C['n']-3 or order!=sorted(order): fails.append(f'{layout}: clip frames out of order or cut short: {order}')
         if len(order)<C['n']*(.55 if speed==1 else .3): fails.append(f'{layout}: only {len(order)} of {C["n"]} clip frames were drawn')
         if not hit: fails.append(layout+': no damage landed')

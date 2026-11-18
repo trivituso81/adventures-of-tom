@@ -1,3 +1,13 @@
+## clipboop1 (2026-11-18): Animation test: Rose's real Boop video is ready to generate in the Art Library (one finger on the nose, not a chop)
+
+- Tom (11-18 11:10): "this cannot be Rose's final boop animation because she's karate chopping not booping." He was right: the first video was made from a general "wind-up into a strike" prompt, and the video model answered with a chop.
+- New entry in ADMIN > ART LIBRARY > Clips > Rose: **Boop (one finger on the nose) video clip** (`clip-rose-boop`, clip `rose-boop`; cheap model `grok-imagine-video-1.5-lite`, 3 seconds, about $0.07). Its motion text is the canon gesture (docs/CANON.md, `Rm.boopShow`): one hand up, pointer finger out, a lean forward on tiptoe, one gentle tap with the fingertip, then hands on hips and a scrunched giggle. Rule for every attack prompt from now on: name the move's real gesture.
+- Wired ahead of the video: Battle Lab > CLIP TEST: ROSE > Boop plays `rose_boop` as soon as the art-bake Action has cut it (`Rm.boopClip` in `engine/rose-moves.js`, `RM.rose.boop` in `engine/battle2-moves.js`), with the painted move's own messages ("Pointer finger out.", "Boop. One finger. Right on the nose."). Until then it plays the old chop. Rehearsed with a stand-in clip named `rose_boop`: the fight switched to it and the hit landed on its marked frame in portrait and landscape.
+- The old entry is retitled **OLD TEST: Rose strike (a chop, not Boop)**. It, its files and the fallback are purged once Tom approves the Boop video (Purge rule); not before, so the Lab fight keeps working.
+- `tools/art-library/clip-prompts.js` now puts a new entry where it is written in that file instead of at the end of the list, so Boop is the first row under Rose.
+- Tests: `tools/clip_test.py` follows whichever clip Boop plays. `tools/clip_kinds_test.py`: the "loop jumped" check failed about every second run on the unchanged build, because a screenshot stalls the test browser for longer than the Mudling's quick blink lasts; it now ignores looks more than 120 ms apart (a real jump at the loop's seam is still caught). `tools/art-library/clip_lib_test.py` (66 checks, six clip entries), `tools/smoke.py`.
+- No video exists yet: it is made when Tom presses GENERATE VIDEO. Not seen on the phone yet.
+
 ## calib2 (2026-11-18): Your 10 tuned chapter 1 voice takes are in the game; the Voice Library shows the line before and can send your take history
 
 - Tom's two pending exports (16:45 and 18:54 UTC, 11 clips) merged: 10 chapter 1 lines now have built-in clips (Grace 3, Tom 3, Amy 2, Rose 1, Aunt Ellie 1). Round 2's Amy "Brother!" take replaces round 1's.
