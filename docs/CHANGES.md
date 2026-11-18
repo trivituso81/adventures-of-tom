@@ -1,3 +1,9 @@
+## 2026-11-18 (449): Art Library bake, clip-rose-strike (`artbake1478`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- clip-rose-strike: clip `rose-strike` cut from art/raw/clips/clip-rose-strike-v1.json (24 pictures a second; video frames 0 to 72, every 2, hit at frame 38; 37 pictures kept). rose_strike frames 37 frame px 528 344 rows 132 86 sheet (2112, 3440) kb 884 dur ms 1028 impact ms 528 reach [64.8, 49.9]
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## clipgen1c (2026-11-17): Art Library: ON THE BATTLEFIELD now works for every clip video
 
 Tom (2026-11-17 18:32): "On the battlefield is disabled even though I approved the image". Fact: the xAI video host does not let a web page keep a copy of the video (the result showed "address only"), and the preview needed a copy to remove the magenta, so the button was switched off. It now works without a copy: the video itself is shown through a colour filter that makes the magenta see-through, over the battle background (`#clipkey` in `engine/art-clips.js`). The button only needs the three marks. Tested in the test browser (`tools/art-library/clip_lib_test.py`, 43 checks pass); not seen on an iPhone yet. The preview has a thin pink edge that the real cut does not have.
