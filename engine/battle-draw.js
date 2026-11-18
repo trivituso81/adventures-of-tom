@@ -130,7 +130,9 @@ function drawBattle() {
     else if(fx.koAt!=null) { fx.koAt=null; if(alive(m)) fx.hop=.35; }
     const koE=down?t-fx.koAt:0;
     let koSink=0;
-    if(down) {
+    const napClip=down&&typeof bclipFor==='function'?bclipFor(m.id,'state'):null;   // a video-made out-of-the-fight clip (engine/clips.js): played once, last picture held
+    if(napClip) frame=bclipFrameAt(napClip,koE*1000);
+    else if(down) {
       frame=koE<.16?sp.idle:koFrame(sp);
       koSink=koE<.16?Math.round(koE/.16*8):-Math.round(Math.max(0,Math.sin(Math.min(1,(koE-.16)/.3)*Math.PI))*5);
     }
@@ -218,7 +220,8 @@ function drawBattle() {
     const x=cx-w/2-(punching&&!sp.noShift?sp.scale*3:0),y=base-h;
     battle.drawnAt[i]={cx,base,h,x,w};
     if(!noShadow) { const ft=feetOf(frameOverride||frame); ellipse(cx+ft.dx*sp.scale*pathSc,base-1,Math.max(ft.w*sp.scale*.62,w*.3)*pathSc,5*pathSc,'rgba(47,73,54,.34)'); };
-    if(down) drawKnockedOut(m,i,sp,frame,x,y,cx,base,koE,t,fx);
+    if(napClip) drawSprite(frame,sp.pal,x,y,sp.scale,{flash:fx.flash>0});
+    else if(down) drawKnockedOut(m,i,sp,frame,x,y,cx,base,koE,t,fx);
     else if(rot!==0||pathSc!==1||gwPose||((fx.pogo>0||fx.flop>0||fx.dismount>0||fx.rebound>0||fx.path)&&frameOverride)) {
       const fr2=gwPose?gwPose.fr:(frameOverride||sp.idle),w2=fr2[0].length*sp.scale,h2=fr2.length*sp.scale;
       gfx.save(); gfx.translate(cx,base-h2/2*pathSc+(gwPose&&!rot?gwPose.drop:0)); gfx.scale(pathSc,pathSc); gfx.rotate(rot);

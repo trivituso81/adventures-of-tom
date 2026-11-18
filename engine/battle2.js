@@ -1503,4 +1503,5 @@ function b2Lab(i,who) {
   const solo=!!L.solo,party=solo?[who||L.party[0]]:L.party;
   B2.labLA=!!L.la; B2.labStudio=!!L.studio; B2.labSchool=!!L.school; B2.labCafe=!!L.cafe; B2.labOak=!!L.oak; B2.labCrown=!!L.crown; B2.labStacks=!!L.stacks; B2.labRead=!!L.readroom; B2.labBarn=!!L.barn; B2.labBoiler=!!L.boiler; B2.labClub=!!L.club; B2.labDome=!!L.dome; B2.labTerm=!!L.term; B2.labGate=!!L.gate; B2.labClip=!!L.clip;
   b2Start({lab:true,solo,party,level:L.level,foes:L.foes,bag:B2_LAB_BAG.slice(),heart:100,infinite:true,tombos:'all',allSkills:true,onEnd:()=>{ B2.labLA=false; B2.labStudio=false; B2.labSchool=false; B2.labCafe=false; B2.labOak=false; B2.labCrown=false; B2.labStacks=false; B2.labRead=false; B2.labBarn=false; B2.labBoiler=false; B2.labClub=false; B2.labDome=false; B2.labTerm=false; B2.labGate=false; B2.labClip=false; if(typeof splashToLab==='function') splashToLab(); }});
+  if(L.nap&&typeof bclipLabNap==='function') bclipLabNap(L.nap);   // CLIP TEST: SLEEPY ROSE (engine/clips.js)
 }

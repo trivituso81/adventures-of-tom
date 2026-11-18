@@ -102,7 +102,8 @@ function b2FoeFrame(f,R0) {
   const now=performance.now(), hit=f.dying>=0||f.flash>0||f.shake>0||(aimed&&(battle.shakeEnemy>0||battle.enemyKnock>0));
   if(hit) { if(!f._hurtOn) { f._hurtOn=true; f._hurtUntil=now+B2_HURT_HOLD; } } else f._hurtOn=false;
   if(f._hurtOn||now<(f._hurtUntil||0)) return FR.hurt;
-  return R0;
+  const L=typeof bclipFor==='function'?bclipFor(f.id,'loop'):null;   // a video-made idle loop (engine/clips.js); each monster starts at its own point
+  return L?bclipFrameAt(L,(now+f.idx*900)%L.dur):R0;
 }
 // ---------- Painted meters (Tom, 2026-11-05) ----------
 // One look for every battle meter, on the canvas (enemies) and in the party window (index.html, .b2-bar): a rounded well with the
@@ -187,10 +188,10 @@ function b2DrawEnemies(t) {
     const spun=f.spinAt&&performance.now()-f.spinAt<150&&!dying;
     if(spun) { gfx.save(); gfx.translate(x+w/2+(f.ox||0),y+h/2+(f.oy||0)); gfx.rotate((f.spin||0)+sway); if(f.fsc) gfx.scale(f.fsc,f.fsc); drawSprite(R,P,-w/2,-h/2,sc,{flash,alpha:(1-q)*spawn}); gfx.restore(); }
     else if(sway) { gfx.save(); gfx.translate(x+w/2,y+h); gfx.rotate(sway); drawSprite(R,P,-w/2,-h,sc,{flash,alpha:(1-q)*spawn}); gfx.restore(); }
-    else if(breath&&!f.hold&&!f.lunge&&!f.shake&&!aimed) { gfx.save(); gfx.translate(f.px,f.py); gfx.scale(1,1+breath); gfx.translate(-f.px,-f.py); drawSprite(R,P,x,y,sc,{flash,alpha:(1-q)*spawn}); gfx.restore(); }
+    else if(breath&&!R._clip&&!f.hold&&!f.lunge&&!f.shake&&!aimed) { gfx.save(); gfx.translate(f.px,f.py); gfx.scale(1,1+breath); gfx.translate(-f.px,-f.py); drawSprite(R,P,x,y,sc,{flash,alpha:(1-q)*spawn}); gfx.restore(); }
     else drawSprite(R,P,x,y,sc,{flash,alpha:(1-q)*spawn});
     if(dying) continue;
-    const top=y+(f.def._top||0)*sc;
+    const top=y+(R._clip?h-R0.length*sc:0)+(f.def._top||0)*sc;   // a clip frame has more empty rows above the head than the stance
     // Deedee's pie tin, worn like a helmet.
     if(f.st.pietin) { const hx=x+w/2,hy=f.def.tinY!=null?y+h*f.def.tinY:top+4; ellipse(hx,hy,w*.26+4,9,OUT); ellipse(hx,hy,w*.26+2,7,'#c9ccd4'); ellipse(hx,hy-3,w*.2,5,'#e8ecf2'); rect(hx-w*.2,hy-2,w*.4,2,'#9aa0aa'); }
     // Goofed: spinning stars and question marks. Smitten: hearts. Staggered: stars. Grumbled: a sulky "...".

@@ -1,3 +1,14 @@
+## clipkinds1 (2026-11-18): Animation test: a Mudling that moves on its own and Rose lying down for a nap, in two Battle Lab fights
+
+- Tom approved four study videos in the Art Library on 11-18 07:56. Looked at every frame (contact sheets, magenta cut with the game's own cutter). Results: the cheap model (`grok-imagine-video-1.5-lite`, about 7 cents) held the style, left no floor shadow and had no smeared in-between picture, so it is the default for new clip entries (full model is the second try). The 2 second strike lost the shout (she laughs with closed eyes) and has a colour-smeared picture in the lunge, so attacks stay 3 seconds. Rose's sleep video ends lying down with her bow unchanged. The Mudling's base stays on its line in all 73 pictures; its mouth is open at the start and closed at the end, which the loop blend covers.
+- New clip kinds (`clip.kind` on a Library entry, `--kind` in `tools/clip-bake/bake_clip.py`, `kind` in `data/clips/<id>.js`): `strike` (as before), `loop` (an idle that repeats: no hit, the last 4 pictures are dissolved into the first) and `state` (plays once and holds its last picture: out of the fight). `clip.k` sets the sharpness (8 for a monster).
+- Engine (`engine/clips.js` `bclipFor`): a monster with a loop clip is drawn from it whenever it is not winding up, attacking or being hit (`b2FoeFrame`), each monster at its own point of the loop, without the old breathing stretch. A party member with a state clip plays it from the moment they go down instead of the knocked-out drawing (`drawBattle`). Both only in Battle Lab clip fights (`B2.labClip`), like the strike.
+- New clips cut from Tom's approved videos: `mudling-idle` (25 pictures, 3.1 s loop, 499 KB) and `rose-sleep` (39 pictures, 2.2 s at 1.5x, 711 KB). The cut marks are recorded on the approved versions in `data/art-prompts.json` (Mudling 0 to 3.0 s, sleep 0 to 3.17 s), so a rebake gives the same clips. Both entries are no longer study entries.
+- Battle Lab: new fight CLIP TEST: SLEEPY ROSE (two Mudlings; Rose goes out of the fight about 3 seconds in, through the game's own knock-out path, `bclipLabNap`). CLIP TEST: ROSE gained a Mudling next to Old Iron-Gill.
+- Art Library review: an entry of kind loop or state shows START and END only (no HIT), with its own help line; APPROVE and the bake accept two marks for those kinds.
+- Tests: `python3 tools/clip_kinds_test.py` (new: loop pictures advance, wrap and are out of step; the sleep clip runs to its last picture and holds; the fight goes on; portrait and landscape), `tools/art-library/clip_lib_test.py` (65 checks, was 57), `tools/clip_test.py`, `tools/smoke.py`.
+- Not seen on the phone yet.
+
 ## voicefilter1b (2026-11-18): change log cleaned up after voicefilter1
 
 The voicefilter1 push went out while a rebase was unfinished and left merge conflict markers at the top of this file (nowhere else). Removed here. Nothing in the game changed.

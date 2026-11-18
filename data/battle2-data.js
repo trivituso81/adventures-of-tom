@@ -1287,7 +1287,8 @@ const B2_TOMBOS=[
 // ---- Battle Lab: test fights reached from the title screen until the full game opens. ----
 // Battle Lab: one fight per chapter boss, chapters 1 to 20 (chapter 20 has two). Paged in engine/splash.js. Chapter 18's boss cannot be beaten by design.
 const B2_LAB=[
-  {ch:0,name:'CLIP TEST: ROSE',sub:'Animation test. Pick ATTACK, then Boop: Rose plays her new video-made punch.',clip:true,party:['tom','grace','rose'],level:12,foes:[['irongill','front']]},
+  {ch:0,name:'CLIP TEST: ROSE',sub:'Animation test. Pick ATTACK, then Boop: Rose plays her new video-made punch. The Mudling moves on its own.',clip:true,party:['tom','grace','rose'],level:12,foes:[['irongill','front'],['mudling','front']]},
+  {ch:0,name:'CLIP TEST: SLEEPY ROSE',sub:'Animation test. Just watch: after 3 seconds Rose yawns and lies down for a nap. The Mudling moves on its own.',clip:true,nap:'rose',party:['tom','grace','rose'],level:12,foes:[['mudling','front'],['mudling','front']]},
   {ch:0,name:'JUSTIN’S TRYOUT',sub:'Test fight. Tom, Grace, Rose and Justin, every move unlocked.',party:['tom','grace','rose','justin'],level:12,foes:[['irongill','front']]},
   {ch:0,name:'SOLO',sub:'Test fight. Pick anyone, alone, every move unlocked. Nobody can be hurt. Leave with EXIT.',solo:true,party:['justin'],level:12,foes:[['irongill','front']]},
   {ch:0,name:'OLIVIA\u2019S TRYOUT',sub:'Test fight. Tom, Grace, Rose and Olivia, every move unlocked.',party:['tom','grace','rose','olivia'],level:12,foes:[['irongill','front']]},

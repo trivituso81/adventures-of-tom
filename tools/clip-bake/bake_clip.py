@@ -8,6 +8,11 @@ Writes art/clips/<id>.webp (every kept frame, side by side in a grid, magenta re
   --first/--last  the part of the video that is kept (drop the still frames before and after the move)
   --step          keep every Nth frame (video models repeat frames; 3 of 30 fps gives 10 pictures a second)
   --impact        the video frame where the hit lands (must be one of the kept frames); the game lands damage there
+                  (kind strike only)
+  --kind          strike (default): a one-shot move with an impact frame.
+                  loop: an idle that repeats (a monster waiting). No impact. The last --blend kept frames are dissolved
+                        toward the first one, so the jump from the last picture back to the first is not seen.
+                  state: a one-shot that ends in a pose the game holds (out of the fight: asleep). No impact.
   --fig-rows      how many sprite rows tall the STANDING figure is in the owner's battle idle frame (Rose 83), so the
                   clip is drawn exactly as tall as the painted battle sprite and follows BATTLE_SIZE with it
   --speed         playback speed (1.5 = one and a half times faster than the video)
@@ -51,7 +56,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('clip'); ap.add_argument('id'); ap.add_argument('owner')
     ap.add_argument('--first', type=int, required=True); ap.add_argument('--last', type=int, required=True)
-    ap.add_argument('--step', type=int, default=3); ap.add_argument('--impact', type=int, required=True)
+    ap.add_argument('--step', type=int, default=3); ap.add_argument('--impact', type=int, default=-1)
+    ap.add_argument('--kind', default='strike', choices=['strike', 'loop', 'state']); ap.add_argument('--blend', type=int, default=4)
     ap.add_argument('--fig-rows', type=float, required=True); ap.add_argument('--speed', type=float, default=1)
     ap.add_argument('--k', type=int, default=4); ap.add_argument('--fps', type=float, default=30)
     ap.add_argument('--tag', default='clip0'); ap.add_argument('--quality', type=int, default=86); ap.add_argument('--sheet', default='')
@@ -61,8 +67,14 @@ def main():
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', A.clip, f'{tmp}/r%04d.png'], check=True)
     files = sorted(glob.glob(f'{tmp}/r*.png'))
     picks = list(range(A.first, A.last + 1, A.step))
-    if A.impact not in picks: sys.exit(f'impact frame {A.impact} is not one of the kept frames {picks}')
+    if A.kind == 'strike' and A.impact not in picks: sys.exit(f'impact frame {A.impact} is not one of the kept frames {picks}')
     keyed = [key(np.asarray(Image.open(files[i]).convert('RGB'))) for i in picks]
+    if A.kind == 'loop':                         # dissolve the tail into the first picture (premultiplied, so edges stay clean)
+        nb = min(A.blend, len(keyed) - 2); f0 = keyed[0].astype(float); p0 = f0[..., :3] * f0[..., 3:] / 255
+        for j in range(nb):
+            w = (j + 1) / (nb + 1); f = keyed[len(keyed) - nb + j].astype(float); pm = f[..., :3] * f[..., 3:] / 255
+            al = f[..., 3] * (1 - w) + f0[..., 3] * w; pm = pm * (1 - w) + p0 * w
+            keyed[len(keyed) - nb + j] = np.dstack([np.clip(pm * 255 / np.maximum(al, 1)[..., None], 0, 255), al]).astype('uint8')
     # The standing pose (first kept frame) sets height, feet line and middle.
     ys, xs = np.where(keyed[0][..., 3] > 128)
     top, feet, mid = ys.min(), ys.max() + 1, (xs.min() + xs.max() + 1) / 2
@@ -88,7 +100,7 @@ def main():
         band = al[max(0, low - max(3, round(fh * .07))):low]
         cs = np.where(band.any(0))[0]
         feet_info.append([0, W * .5] if not len(cs) else [float(round(((cs.min() + cs.max()) / 2 - fw / 2) / A.k, 1)), float(round((cs.max() - cs.min() + 1) / A.k, 1))])
-    ii = picks.index(A.impact)
+    ii = picks.index(A.impact) if A.kind == 'strike' else 0
     al = np.asarray(sheet.crop(((ii % cols) * fw, (ii // cols) * fh, (ii % cols) * fw + fw, (ii // cols) * fh + fh)))[..., 3] > 100
     cs = np.where(al.any(0))[0]; lx = cs.min(); ly = np.where(al[:, lx:lx + 3 * A.k].any(1))[0]
     reach = [float(round((fw / 2 - lx) / A.k, 1)), float(round((fh - (ly.min() + ly.max()) / 2) / A.k, 1))]   # the leading point (fist) at the hit: rows left of the middle, rows above the feet
@@ -97,14 +109,15 @@ def main():
     sheet.save(out, 'WEBP', quality=A.quality, method=6)
     ms = [round((p - A.first) / A.fps * 1000 / A.speed) for p in picks]
     D = dict(owner=A.owner, src=f'art/clips/{A.id}.webp?v={A.tag}', k=A.k, w=W, h=H, cols=cols, n=n, ms=ms,
-             dur=round(ms[-1] + A.step / A.fps * 1000 / A.speed), impact=ii, reach=reach, feet=feet_info)
+             dur=round(ms[-1] + A.step / A.fps * 1000 / A.speed), kind=A.kind, impact=ii, reach=reach, feet=feet_info)
+    if A.kind != 'strike': del D['impact'], D['reach']
     # src carries its own cache tag: tools/tag_check.py reads it and bump_tags.py moves it when the picture changes
     key_id = A.id.replace('-', '_')
     with open(f'{root}/data/clips/{A.id}.js', 'w') as f:
         f.write("'use strict';\n// data/clips/%s.js: GENERATED by tools/clip-bake/bake_clip.py; do not hand-edit. Read by engine/clips.js.\n" % A.id)
-        f.write('// Source frames %d to %d of the video, every %d, impact at video frame %d, played at %sx.\n' % (A.first, A.last, A.step, A.impact, A.speed))
+        f.write('// Source frames %d to %d of the video, every %d, %s, played at %sx.\n' % (A.first, A.last, A.step, 'impact at video frame %d' % A.impact if A.kind == 'strike' else 'kind ' + A.kind, A.speed))
         f.write('bclipDefine(%s,%s);\n' % (json.dumps(key_id), json.dumps(D, separators=(',', ':'))))
-    print(key_id, 'frames', n, 'frame px', fw, fh, 'rows', W, H, 'sheet', sheet.size, 'kb', os.path.getsize(out) // 1024, 'dur ms', D['dur'], 'impact ms', ms[ii], 'reach', reach)
+    print(key_id, 'frames', n, 'frame px', fw, fh, 'rows', W, H, 'sheet', sheet.size, 'kb', os.path.getsize(out) // 1024, 'dur ms', D['dur'], 'kind', A.kind, 'impact ms', ms[ii], 'reach', reach)
     if A.sheet:                                  # a contact sheet on grey, for looking at the cutout
         bgc = Image.new('RGBA', sheet.size, (96, 120, 96, 255)); bgc.alpha_composite(sheet); bgc.convert('RGB').save(A.sheet)
 

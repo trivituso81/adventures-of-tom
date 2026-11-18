@@ -8,6 +8,12 @@
 // clip fields: id (file name of the baked clip: art/clips/<id>.webp, data/clips/<id>.js), owner, start, model, res,
 // dur (seconds billed), figRows (printed by make_start.py), step (keep every Nth picture of a 30 a second video), speed
 // (the default for attack clips is 1.5: Tom approved the strike at 1.5x twice on 2026-11-18 after trying up to 3x).
+// kind: 'strike' (default: START, HIT, END), 'loop' (an idle that repeats: START and END, the baker blends the end into the
+// start) or 'state' (ends in a pose the game holds, such as asleep: START and END). k: atlas pixels per sprite row (default 4;
+// 8 for a monster, whose painted sheet is about that sharp).
+// MODEL (Tom's study videos, 2026-11-18): the cheap model LITE held the style, kept the background clean (no floor shadow) and
+// had no smeared in-between picture, at about a quarter of the price. New entries use LITE; G15 is the second try.
+// LENGTH: 3 s for attacks. The 2 s study video dropped the shout and smeared the lunge.
 // test: true marks a STUDY video (clipstudy1): APPROVE needs no marks and only saves the video in art/raw/clips/ for Claude to
 // look at; no clip is cut and nothing changes in the game. Drop the flag once the engine can play that kind of clip.
 const fs = require('fs');
@@ -22,24 +28,24 @@ const LOOK_FOE = 'IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exact
   'LOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\n' +
   'CAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\n';
 const STRIKE = 'MOTION: WIND-UP INTO A STRIKE\nStart in the relaxed ready stance of the attached picture and hold it still for a brief moment. Twist the body away to the right, pull the near arm back, weight on the back leg, eyes narrowed. Then spring forward to the left in one fast move, lunging with the front knee bent and the arm at full reach, mouth open in a shout. Stay the same size and keep both feet on the same ground line while lunging. Hold the lunge for a moment, then ease back to the exact ready stance of the first frame. Hands empty, nothing is hit and nothing appears at the end of the arm.';
-const G15 = 'grok-imagine-video-1.5', ROSE = 'art/clips/start/rose.png';
+const G15 = 'grok-imagine-video-1.5', LITE = G15 + '-lite', ROSE = 'art/clips/start/rose.png';
 const entries = [
   { id: 'clip-rose-strike', tab: 'Clips', group: 'Rose', title: 'Rose: strike (Boop) video clip', ar: '4:3', refs: [ROSE],
     clip: { id: 'rose-strike', owner: 'rose', start: ROSE, model: G15, res: '480p', dur: 3, figRows: 83, step: 3, speed: 1.5 },
     prompt: LOOK + STRIKE + END(3) },
   // ---- study videos (clipstudy1): the next cells of the tool test. Approve saves the video only. ----
   { id: 'clip-rose-strike-lite', tab: 'Clips', group: 'Rose', title: 'TEST: Rose strike on the cheap model (about 7 cents)', ar: '4:3', refs: [ROSE],
-    clip: { id: 'rose-strike-lite', owner: 'rose', start: ROSE, model: G15 + '-lite', res: '480p', dur: 3, figRows: 83, step: 3, speed: 1.5, test: true },
+    clip: { id: 'rose-strike-lite', owner: 'rose', start: ROSE, model: LITE, res: '480p', dur: 3, figRows: 83, step: 3, speed: 1.5, test: true },
     prompt: LOOK + STRIKE + END(3) },
   { id: 'clip-rose-strike-2s', tab: 'Clips', group: 'Rose', title: 'TEST: Rose strike as a 2 second video', ar: '4:3', refs: [ROSE],
     clip: { id: 'rose-strike-2s', owner: 'rose', start: ROSE, model: G15, res: '480p', dur: 2, figRows: 83, step: 3, speed: 1.5, test: true },
     prompt: LOOK + STRIKE.replace('and hold it still for a brief moment. Twist', 'for an instant. Straight away twist').replace('Hold the lunge for a moment, then ease back', 'Then snap straight back') + END(2) },
-  { id: 'clip-rose-sleep', tab: 'Clips', group: 'Rose', title: 'TEST: Rose gets sleepy and lies down (out of the fight)', ar: '4:3', refs: [ROSE],
-    clip: { id: 'rose-sleep', owner: 'rose', start: ROSE, model: G15, res: '480p', dur: 4, figRows: 83, step: 3, speed: 1, test: true },
+  { id: 'clip-rose-sleep', tab: 'Clips', group: 'Rose', title: 'Rose: gets sleepy and lies down (out of the fight) video clip', ar: '4:3', refs: [ROSE],
+    clip: { id: 'rose-sleep', owner: 'rose', start: ROSE, model: G15, res: '480p', dur: 4, figRows: 83, step: 2, speed: 1.5, kind: 'state' },
     prompt: LOOK.replace('Feet stay on the same ground line. Walking away from or toward the camera is not allowed.', 'The character stays in the same place in the frame and ends resting on the same line where the feet stand in the attached picture. Walking away from or toward the camera is not allowed.') +
       'MOTION: TOO SLEEPY, LIES DOWN FOR A NAP\nStart in the relaxed stance of the attached picture. A big yawn with one hand over the mouth, eyelids drooping, a slow tired sway. By the middle of the clip the knees fold and the character sinks straight down in place and sits. Then the character tips gently over onto one side and lies all the way down on the ground line, curled up small like a sleeping child: knees tucked in, head resting on the hands, eyes closed, a small peaceful smile. The character MUST be lying down, fully on the side, well before the end; sitting or kneeling at the end is wrong. Soft and gentle, like a tired child at bedtime, never a hard fall. The hair, the hair bow and every accessory stay exactly as in the attached picture, the same shape, size and color. The curled-up body stays small and compact and stays in the middle of the frame. Hold the sleeping pose completely still for the last second of the clip.' + END(4) },
-  { id: 'clip-mudling-idle', tab: 'Clips', group: 'Monsters', title: 'TEST: Mudling waiting in place (idle loop)', ar: '4:3', refs: ['art/clips/start/mudling.png'],
-    clip: { id: 'mudling-idle', owner: 'mudling', start: 'art/clips/start/mudling.png', model: G15, res: '480p', dur: 3, figRows: 44.6, step: 3, speed: 1, test: true },
+  { id: 'clip-mudling-idle', tab: 'Clips', group: 'Monsters', title: 'Mudling: waiting in place (idle loop) video clip', ar: '4:3', refs: ['art/clips/start/mudling.png'],
+    clip: { id: 'mudling-idle', owner: 'mudling', start: 'art/clips/start/mudling.png', model: G15, res: '480p', dur: 3, figRows: 44.6, step: 4, speed: 1, kind: 'loop', k: 8 },
     prompt: LOOK_FOE + 'MOTION: IDLE LOOP\nThe creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One slow blink. The eyes glance to one side and back. The leaf sprout on its head sways gently and stays attached. The mud arms sag and lift a little; drips wobble but nothing falls off or lands on the ground. The last moment of the clip matches the first moment exactly so the clip loops with no visible jump. Keep the motion small and natural.' + END(3) },
 ];
 if (require.main === module) {

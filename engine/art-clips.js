@@ -20,7 +20,12 @@ const CLIP_FRAME=1/30, CLIP_PREVIEW_BG='bgs/01-pond-town.webp';
 const clipCost=e=>((CLIP_RATE[e.clip.model]||{})[e.clip.res]||.08)*e.clip.dur+.01;   // + one input picture
 const clipPend={get(){ try{ return JSON.parse(LS.get('aot-clip-pending')||'{}')||{}; }catch(x){ return {}; } }, set(o){ LS.set('aot-clip-pending',JSON.stringify(o)); }};
 const clipSrc=r=>r.blob?urlOf(r):r.url;
-const clipMarks=r=>{ const m=r&&r.marks; return m&&m.first>=0&&m.hit>m.first&&m.last>m.hit?Object.assign({first:m.first,hit:m.hit,last:m.last},r.speed?{speed:r.speed}:{}):null; };
+// clip.kind (clipkinds1): 'strike' (default) needs START, HIT and END. 'loop' (an idle that repeats) and 'state' (ends in a
+// held pose, such as asleep) have no hit: START and END only.
+const clipKind=r=>(r&&ENTRY[r.id]&&ENTRY[r.id].clip&&ENTRY[r.id].clip.kind)||'strike';
+const clipMarks=r=>{ const m=r&&r.marks, sp=r&&r.speed?{speed:r.speed}:{}; if(!m||!(m.first>=0)) return null;
+  if(clipKind(r)!=='strike') return m.last>m.first?Object.assign({first:m.first,last:m.last},sp):null;
+  return m.hit>m.first&&m.last>m.hit?Object.assign({first:m.first,hit:m.hit,last:m.last},sp):null; };
 // SPEED (clipspeed1): how many times faster than the video the clip plays in the game. Tom picks it in REVIEW; it is saved on
 // the result, sent with the marks on APPROVE, and the bake uses it instead of the entry's own clip.speed.
 const CLIP_SPEEDS=[1,1.5,2,2.5,3,4,5];
@@ -40,7 +45,7 @@ function clipCard(e){
   '<details class="pr" data-po="'+id+'"'+(UI.po[e.id]?' open':'')+'><summary>Prompt'+(ed?' <span class="chip c-wait">edited</span>':'')+' <span class="hint" style="font-weight:400">tap to read or edit</span></summary><div class="pin">'+(ed?'<button class="small" data-revert="'+id+'">Use the default prompt</button> <span class="hint">(this box holds your own edit, saved on this device)</span>':'<span class="hint">Edit here, it is sent as written.</span>')+'<textarea data-prompt="'+id+'">'+esc(promptOf(e))+'</textarea></div></details>'+
   '<div class="row"><button class="gold" data-gen="'+id+'"'+(blk?' disabled':'')+'>'+(pend?'FETCH THE VIDEO':'GENERATE VIDEO')+'</button><span class="hint">'+(pend?'A video is already being made for this. No new charge.':c.dur+' second video, '+c.res+', about $'+clipCost(e).toFixed(2)+' each. Takes 1 to 3 minutes.')+'</span></div>'+
   '<div class="'+(MSG[e.id]&&MSG[e.id].err?'err':'hint')+'" id="m-'+id+'">'+esc(MSG[e.id]?MSG[e.id].text:'')+'</div>'+
-  (rs.length?'<div class="hint">'+(c.test?'Tap REVIEW to watch it, then approve or reject. No marks needed.':'Tap REVIEW to mark the start, the hit and the end, then approve or reject.')+'</div>':'')+
+  (rs.length?'<div class="hint">'+(c.test?'Tap REVIEW to watch it, then approve or reject. No marks needed.':(c.kind&&c.kind!=='strike'?'Tap REVIEW to mark the start and the end, then approve or reject.':'Tap REVIEW to mark the start, the hit and the end, then approve or reject.'))+'</div>':'')+
   '<div class="res">'+rs.map(r=>'<div><video class="clipthumb" src="'+esc(clipSrc(r))+'#t=0.1" muted playsinline preload="metadata"></video><span>v'+r.n+'</span>'+(apr(r.n)?' <span class="chip c-approved">approved</span>':rjc(r.n)?' <span class="chip c-rejected">rejected</span>':'')+(r.blob?'':' <span class="chip c-wait">address only</span>')+' <button class="small" data-res="'+esc(r.key)+'">REVIEW</button></div>').join('')+'</div>'+
   ((e.versions||[]).length?'<div class="hint ok">Approved: '+e.versions.map(v=>esc(v.file)).join(', ')+'</div>':'')+
   ((e.rejects||[]).length?'<div class="hint">Rejected before: '+e.rejects.length+' (notes are saved for Claude)</div>':'')+'</div>';
@@ -111,7 +116,7 @@ function clipRvSetup(){
     '<div class="hint forgame">Speed in the game (times faster than the video):</div><div class="row cliprow speed forgame">'+CLIP_SPEEDS.map(x=>'<button class="small" data-speed="'+x+'">'+x+'x</button>').join('')+'</div>'+
     '<div class="hint forgame">Move to a moment, then tap what it is:</div>'+
     '<div class="row cliprow marks forgame"><button class="small" data-mark="first">START<br><span></span></button><button class="small" data-mark="hit">HIT<br><span></span></button><button class="small" data-mark="last">END<br><span></span></button></div>'+
-    '<div class="hint forgame">START: standing still, just before the move. HIT: the moment the hit should land. END: back to standing.</div></div>');
+    '<div class="hint forgame" id="cliphelp"></div></div>');
   const v=cg('rvvid'), s=cg('cps');
   const seek=t=>{ clipBf(false); v.pause(); v.currentTime=Math.max(0,Math.min((v.duration||+s.max)-.01,t)); };
   s.addEventListener('input',()=>seek(+s.value));
@@ -130,8 +135,10 @@ function clipRvSetup(){
 function clipPaintMarks(){
   const m=(CV.r&&CV.r.marks)||{}, ok=!!clipMarks(CV.r);
   document.querySelectorAll('#cliptools [data-mark]').forEach(b=>{ const t=m[b.dataset.mark]; b.querySelector('span').textContent=clipT(t); b.classList.toggle('set',t>=0); });
-  const set=m.first>=0&&m.hit>=0&&m.last>=0;
-  if(CV.r&&rvId()===CV.r.id&&set&&!ok) setMsg(CV.r.id,'The marks are out of order: START must come before HIT, and HIT before END.',true);
+  const kind=clipKind(CV.r), hb=document.querySelector('#cliptools [data-mark="hit"]'); if(hb) hb.hidden=kind!=='strike';
+  cg('cliphelp').textContent=kind==='loop'?'START: where the repeat begins. END: where it ends (the game blends the end back into the start).':kind==='state'?'START: standing still, just before it begins. END: the pose that stays (the game holds this picture).':'START: standing still, just before the move. HIT: the moment the hit should land. END: back to standing.';
+  const set=m.first>=0&&m.last>=0&&(kind!=='strike'||m.hit>=0);
+  if(CV.r&&rvId()===CV.r.id&&set&&!ok) setMsg(CV.r.id,kind==='strike'?'The marks are out of order: START must come before HIT, and HIT before END.':'The marks are out of order: START must come before END.',true);
   else if(CV.r&&MSG[CV.r.id]&&/marks/.test(MSG[CV.r.id].text)) setMsg(CV.r.id,'');
   cg('cpbf').disabled=!ok;
   const spd=clipSpeed(CV.r); document.querySelectorAll('#cliptools [data-speed]').forEach(b=>b.classList.toggle('set',+b.dataset.speed===spd));

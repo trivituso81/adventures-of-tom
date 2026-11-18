@@ -65,8 +65,11 @@ def bake_clip(e, p):
     c = e['clip']; v = e['versions'][-1]; m = v.get('marks') or {}
     if not re.fullmatch(r'[a-z0-9-]+', c['id']) or not re.fullmatch(r'[a-z0-9]+', c['owner']): raise SystemExit(f'{e["id"]}: odd clip id or owner')
     study = bool(c.get('test'))                                              # a study video (clipstudy1): keep the video, cut nothing
-    if not study and (not all(isinstance(m.get(k), (int, float)) for k in ('first', 'hit', 'last')) or not (0 <= m['first'] < m['hit'] < m['last'])):
-        raise SystemExit(f'{e["id"]}: the approved version has no usable START, HIT and END marks: {m}')
+    kind = c.get('kind', 'strike')                                           # strike | loop | state (tools/clip-bake/bake_clip.py); only a strike has a HIT
+    if kind not in ('strike', 'loop', 'state'): raise SystemExit(f'{e["id"]}: odd clip kind {kind!r}')
+    need = ('first', 'hit', 'last') if kind == 'strike' else ('first', 'last')
+    if not study and (not all(isinstance(m.get(k), (int, float)) for k in need) or not all(m[a] < m[b] for a, b in zip(need, need[1:])) or m['first'] < 0):
+        raise SystemExit(f'{e["id"]}: the approved version has no usable {", ".join(need)} marks: {m}')
     mp4 = os.path.join(ROOT, p)
     if p.endswith('.json'):
         d = json.load(open(mp4, encoding='utf-8'))
@@ -88,9 +91,9 @@ def bake_clip(e, p):
     first = min(nfr - 1, round(m['first'] * fps)); last = min(nfr - 1, round(m['last'] * fps))
     kept = list(range(first, last + 1, step))
     if len(kept) < 4: raise SystemExit(f'{e["id"]}: START and END are too close together ({len(kept)} pictures)')
-    impact = min(kept[1:], key=lambda f: abs(f - m['hit'] * fps))         # the kept picture nearest Tom's HIT mark (never the standing first one)
+    impact = min(kept[1:], key=lambda f: abs(f - m['hit'] * fps)) if kind == 'strike' else -1   # the kept picture nearest Tom's HIT mark (never the standing first one)
     r = sh(sys.executable, '-I', os.path.join('tools', 'clip-bake', 'bake_clip.py'), mp4, c['id'], c['owner'], '--first', str(first), '--last', str(kept[-1]),
-           '--step', str(step), '--impact', str(impact), '--fig-rows', str(c['figRows']), '--speed', str(speed), '--fps', str(fps))
+           '--step', str(step), '--impact', str(impact), '--fig-rows', str(c['figRows']), '--speed', str(speed), '--fps', str(fps), '--kind', kind, '--k', str(c.get('k', 4)))
     print(r.stdout[-1500:]); print(r.stderr[-1500:], file=sys.stderr)
     if r.returncode: raise SystemExit(f'art_bake: bake_clip.py failed for {e["id"]}')
     tagline = f'<script src="data/clips/{c["id"]}.js?v=clip0"></script>'       # bump_tags moves the tag
@@ -99,7 +102,7 @@ def bake_clip(e, p):
         tags = re.findall(r'<script src="data/clips/[^"]+"></script>\n', html)
         if not tags: raise SystemExit('art_bake: index.html has no data/clips script tag to put the new clip next to')
         html = html.replace(tags[-1], tags[-1] + tagline + '\n'); open(ix, 'w', encoding='utf-8').write(html)
-    return f'{e["id"]}: clip `{c["id"]}` cut from {p} ({fps:g} pictures a second; video frames {first} to {kept[-1]}, every {step}, hit at frame {impact}; {len(kept)} pictures kept; played at {speed:g}x). {r.stdout.strip().splitlines()[-1] if r.stdout.strip() else ""}'
+    return f'{e["id"]}: clip `{c["id"]}` cut from {p} ({fps:g} pictures a second; video frames {first} to {kept[-1]}, every {step}, {"hit at frame " + str(impact) if kind == "strike" else kind}; {len(kept)} pictures kept; played at {speed:g}x). {r.stdout.strip().splitlines()[-1] if r.stdout.strip() else ""}'
 
 def next_number():
     f = os.path.join(ROOT, 'docs', 'CHANGES.md')
