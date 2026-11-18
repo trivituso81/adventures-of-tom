@@ -182,11 +182,13 @@ function beginOpening() {
   playScene('opening',{fade:.7});
 }
 function finishOpening() {
-  const {g,r}=IA(),dx=player.x,row=player.y;
+  const {g,r}=IA(),dx=player.x,row=player.y,riding=!!r.seat;   // riding: the chapter 1 opening ends with Rose still on Tom's shoulders (ch1Goal takes her down)
   introKeepZoom=true; setTimeout(()=>{ if(introKeepZoom&&!intro.active&&!dialog.active) { introKeepZoom=false; sceneZoomManual=false; } },4000);   // ch1Goal follows at once; if it never starts, release the zoom
   endIntro();
   g.x=dx-1; g.y=row; g.facing='right'; g.move=null;
   r.x=dx-1; r.y=row+1; r.facing='up'; r.move=null;
+  if(riding) { r.x=dx; r.y=row; r.scr={x:dx,y:row}; r.lift=SHOULDER; r.seat=true; r.noShadow=true; r.depthBias=-.05; r.facing='left'; player.scenePose={f:'tr_sit'};
+    setTimeout(()=>{ if(!intro.active&&r.seat) { r.seat=false; r.noShadow=false; r.lift=0; r.scr=null; r.depthBias=0; r.y=row+1; r.x=dx-1; player.scenePose=null; } },4000); }   // ch1Goal never started: put her down
   player.facing='down';
   // Followers walk the trail of tiles Tom leaves: Grace first, then Rose.
   trail.length=0; trail.push({x:r.x,y:r.y},{x:g.x,y:g.y},{x:player.x,y:player.y});
@@ -222,7 +224,9 @@ function drawIntroWorld(time) {
     const sc=2,txt=intro.bubble.text,w=txt.length*4*sc+12;
     // Shouted from off to the left: pin it to the left edge of the screen until the girls are in view.
     const gx=g.hidden?-1e9:(position(g).x+.5)*T;
-    const x=Math.round(Math.max(camera.x+w/2+8,gx)),y=Math.round((player.y+.3)*T-40+Math.sin(time*20)*1.5);
+    // Eased toward its spot (roofnpc1, Gemini audit 2026-11-18: it jumped sideways when the girls came into view): it glides from the edge to them.
+    const want=Math.max(camera.x+w/2+8,gx),b=intro.bubble; b.x=b.x===undefined?want:b.x+(want-b.x)*Math.min(1,(time-(b.tt||time))*7||0); b.tt=time;
+    const x=Math.round(b.x),y=Math.round((player.y+.3)*T-40+Math.sin(time*20)*1.5);
     BUBBLE.draw('burst',x,y+7,w+48,44);
     BUBBLE.text(txt,x,y+2,'#b4553f',sc);
   }

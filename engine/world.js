@@ -183,7 +183,7 @@ function buildArea(spec) {
   for(const s of spec.npcs||[]) map.npcs.push(npcFromSpec(s,false));
   placeMonsters(map,spec.monsters);
   if(spec.plateMask) applyPlateMask(map,spec.plateMask);
-  for(const [x,y] of spec.noGo||[]) map.npcNoGo.add(key(x,y));   // tiles NPCs never wander onto (keeps chokepoints clear)
+  for(const [x,y] of [...(spec.noGo||[]),...(spec.noGoRoof||[])]) map.npcNoGo.add(key(x,y));   // tiles NPCs never wander onto (keeps chokepoints clear; noGoRoof: feet on a painted roof, roofnpc1)
   finishMap(map);
   for(const o of map.objects) if((spec.liveKinds||[]).includes(o.kind)) o.baked=false;   // props still drawn on a painted plate (puzzle pieces)
   return map;

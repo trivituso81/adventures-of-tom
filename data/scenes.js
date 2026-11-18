@@ -59,11 +59,7 @@ SCENES.opening=()=>{
     {pose:'grace',f:'sq_wave'},
     {pose:'tom',f:'tr_laugh'},
     {talk:'Rose',lines:["Come on, Tata! Let's go!"],voice:[['rose','intro4']]},
-    {pose:'grace'},
-    {call:()=>snd.whee(true)}, {pose:'tom',f:'tr_hopoff'}, {wait:.4},   // she springs off his shoulders (painted), then lands beside him
-    {pose:'tom'},
-    {call:()=>{ const r=sceneActor('rose'); r.noShadow=false; r.seat=false; }},
-    {hop:'rose',from:[dx-1,row],to:[dx-1,row+1],time:.2,arc:5,lift:[10,0]},
+    {pose:'grace'}, {pose:'tom',f:'tr_sit'},   // Rose stays up on his shoulders into Grace's list (ch1Goal); she hops down at its end (roofnpc1)
     {flag:'opening-done'},
     {call:finishOpening}
   ];
@@ -81,6 +77,20 @@ const routeTo=(a,x,y)=>()=>{ const n=sceneActor(a); return n?findPath(currentMap
 // ======================================================================================================
 const CH1_TIN_LINE='Take the pan home to Rivituso Row.';
 
+// Rose hops down from Tom's shoulders and the party walks onto the plaza path (end of ch1Goal). Only when she is still up there (a save
+// loaded mid-scene or a skipped opening may have her on the ground already).
+const CH1_DISMOUNT=()=>{ const up=()=>{ const r=sceneActor('rose'); return !!(r&&r.seat); }; let at=null;
+  return [
+    {if:up,then:[
+      {call:()=>{ const r=sceneActor('rose'); at=[player.x,player.y]; snd.whee(true); }}, {pose:'tom',f:'tr_hopoff'}, {wait:.4}, {pose:'tom'},
+      {call:()=>{ const r=sceneActor('rose'); r.noShadow=false; r.seat=false; r.depthBias=0; }},
+      {hop:'rose',from:()=>at,to:()=>[at[0]-1,at[1]+1],time:.25,arc:8,lift:[SHOULDER,0]},
+      {call:()=>{ const r=sceneActor('rose'); r.x=at[0]-1; r.y=at[1]+1; r.scr=null; r.lift=0; }}
+    ]},
+    {all:[{walk:'tom',to:routeTo('tom',16,22),speed:.28},{walk:'grace',to:routeTo('grace',17,22),speed:.28},{walk:'rose',to:routeTo('rose',17,23),speed:.28}]},
+    {face:'tom',dir:'down'}, {face:'grace',dir:'left'}, {face:'rose',dir:'left'}
+  ];
+};
 // 1. The Square, right after the opening (the squishy beat stays exactly as built): Grace's list.
 SCENES.ch1Goal=[
   {flag:'ch1-goal'},
@@ -92,11 +102,15 @@ SCENES.ch1Goal=[
   {talk:'Grace',lines:["Number two. Deedee made apple muffins. They're for you, so nobody's allowed to have one yet."]},
   {talk:'Rose',lines:["I licked one. Only the top!"]},
   {talk:'Tom',lines:["Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait."]},
-  {face:'tom',dir:'down'}, {wait:.8},   // Rose turns Tom by the ears toward Rivituso Row (no ear frame: Tom just turns)
+  {face:'tom',dir:'down'}, {wait:.25},   // Rose, still on his shoulders, turns Tom by the ears toward Rivituso Row (no ear frame yet); a short beat so the box does not sit closed
   {talk:'Grace',lines:["Number three. Rose licked a muffin."]},
   {toast:'New Tombos: Squishy Delivery (Grace) and Double-Decker Airplane (Rose). In battle, find them inside ▶︎ HEAL (Squishy Delivery) and ▲ ATTACK (Double-Decker Airplane).',time:4},
   {toast:"Goal: Deedee and Boppy's house. Rivituso Row, south of the Square.",time:4.5},
-  {call:()=>{ introKeepZoom=false; }}, {zoom:1,time:.8}   // the one zoom out of the intro, after the last word
+  // Rose springs off his shoulders (painted) now that they are setting off, then the three walk out onto the open plaza path toward the
+  // Rivituso Row arch, so control comes back on the main path and not in the pocket by the Taxi Co. door (roofnpc1, Gemini audit 2026-11-18).
+  ...CH1_DISMOUNT(),
+  {call:()=>{ introKeepZoom=false; }}, {zoom:1,time:1.2},   // the one zoom out of the intro, after the last word
+  {call:()=>showToast("Goal: Deedee and Boppy's house. Head south through the Rivituso Row arch.",4.5)}   // the one popup objective of a new game (roofnpc1)
 ];
 
 // 2. Rivituso Row, passing Amy's house. Amy watches from her window, unseen: her two texts are text boxes.

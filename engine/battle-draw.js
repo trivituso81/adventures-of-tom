@@ -624,6 +624,9 @@ function updateNPCs(dt) {
     if(n.amber) { n.path=[]; n.idle=1; continue; }   // set in amber (chapters 12 and 14): never wanders (Tom 2026-11-12)
     if(n.stageRoute&&n.stageRoute.length) { const nx=n.stageRoute.shift(); if(startMove(n,directionTo(nx.x-n.x,nx.y-n.y))) { if(n.move) n.move.duration*=.5; } else n.stageRoute=[]; continue; }   // a monster walking out of a scene's picture (stageShooOut)
     if(n.monster) { b7MonsterTick(n,dt); continue; }   // wandering monsters (engine/feel.js)
+    // During a cutscene townsfolk stand where they are (roofnpc1, Gemini audit 2026-11-18: they strolled through the shot); one being walked
+    // out of the picture (stageShoo) still goes.
+    if(intro.active&&intro.phase==='scene'&&!n.stageShoo&&!(typeof stageExtra==='function'&&stageZone&&stageExtra(n)&&stageInZone(n))) { n.path=[]; n.idle=Math.max(n.idle,.6); continue; }
 
     if(n.path.length) {
       // A cutscene keeps townsfolk out of the picture (engine/story.js stageZone); one walking out of it (stageShoo) may pass through.

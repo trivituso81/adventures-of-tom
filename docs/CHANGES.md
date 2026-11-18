@@ -1,3 +1,20 @@
+## roofnpc1 (2026-11-18): chapter 1 scene 1 fixes from Gemini's video audit: Rose rides into Grace's list, the party walks onto the plaza, no townsfolk on roofs
+
+Tom sent Gemini's audit of a recording of chapter 1 scene 1 (the opening and Grace's list). What each finding got:
+
+| Finding | What I did |
+|---|---|
+| P0 soft-lock by the Taxi Co. door | Could not reproduce (two runs, keyboard and iPhone touch D-pad: the party walked out both times). Fixed anyway: at the end of ch1Goal the party walks out to (16,22) on the open plaza by the Rivituso Row arch, so control comes back on the main path, and a stalled-step guard (`cutWatchdog`, engine/skip.js) drops any scene step that is not waiting on the player and has run 40 s, so a scene can no longer freeze the game with FAST and SKIP up. |
+| P1 townsfolk on roofs, fountain rim, bushes | New `noGoRoof` list on the Square (data/maps-le.js, made by `tools/npc_roof_tiles.py town`): 82 tiles where a standing person's feet land on a painted roof, rim or bench. Townsfolk never step there; Tom still can. `reach_test.py town`: 0 fails. During any cutscene townsfolk now stand still (engine/battle-draw.js `updateNPCs`) unless the scene is walking them out of the picture. |
+| P1 FAST and SKIP over the title page, stuck in free roam | They now come up 0.9 s after a scene starts (not over the fading START NEW page) and straight away when a scene follows a scene. Stuck in free roam: see the stalled-step guard above. |
+| P1 Rose set down before walking | Rose stays on Tom's shoulders from "Giddyup, Tata!" through all of Grace's list (she is the one turning him by the ears), then hops down (painted hop-off) and the three walk out together. `finishOpening` keeps her seated across the scene change; Nine Scoops is unchanged. |
+| P2 textbox hitch before "Number three" | The beat between Tom's line and Grace's is 0.25 s (was 0.8 s); the zoom out after it eases over 1.2 s (was 0.8 s). |
+| P2 TATA!!! bubble jump | The bubble now glides from the screen edge to the girls instead of snapping. |
+| P2 "Grace and Rose joins the party!" | Checked: the game says "join" (engine/intro.js). No change. |
+| P2 first objective cue | Scene toasts stay silent, but this one goal pops up once in free roam: "Goal: Deedee and Boppy's house. Head south through the Rivituso Row arch." |
+
+No dialogue was changed. Tests: two full runs of the opening and ch1Goal (portrait, landscape, iPhone touch), `reach_test.py town`, `tools/smoke.py`.
+
 ## b3s3 (2026-11-18): New battle, stage 3: Composure pips, Breaks, Marks, and two new fights (Log Lump and The Big One)
 
 - Stage 3 of 23 of the new battle system ("Battle 3", `docs/BATTLE3.md`, plan `claude/battle-architecture.md` in the Project). Still Battle Lab only: ADMIN > BATTLE LAB > NEW BATTLE. Story fights use the old battle and nothing in it changed.

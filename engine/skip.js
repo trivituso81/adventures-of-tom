@@ -62,8 +62,20 @@ updateIntro=function(dt) {
     if(battle.active) cutReset();
     return;
   }
+  cutWatchdog(dt);
   return LE_updateIntro_cut(dt);
 };
+// Stalled-step guard (roofnpc1, Gemini audit 2026-11-18: FAST and SKIP stayed up after a scene and Tom could not walk). A scene step that
+// is not waiting on the player (no dialogue, choice, fight, close-up, report or map change) and has not finished in 40 seconds is dropped,
+// so the scene carries on and ends instead of freezing the game. Nothing in a scene legitimately runs that long without one of those.
+const cutWatch={cur:null,t:0};
+function cutWatchdog(dt) {
+  if(intro.cur!==cutWatch.cur) { cutWatch.cur=intro.cur; cutWatch.t=0; return; }
+  if(!intro.cur||dialog.active||battle.active||(typeof closeup!=='undefined'&&closeup.active)||(typeof brp!=='undefined'&&brp.open)||(typeof transition!=='undefined'&&transition)) { cutWatch.t=0; return; }
+  if((cutWatch.t+=dt)<40) return;
+  console.warn('scene step stalled for 40 s, moving on',intro.sid);
+  intro.cur=null; cutWatch.cur=null; cutWatch.t=0;
+}
 
 // ---------- Buttons ----------
 (function() {
@@ -77,10 +89,14 @@ updateIntro=function(dt) {
   };
   bind($('cut-ff'),cutFF); bind($('cut-skip'),cutSkip);
 })();
+// FAST and SKIP come up a moment after a scene starts, so they never sit over the title page while it fades (roofnpc1, Gemini audit).
+let cutShownAt=0,cutLiveEnd=-1e9;
 function refreshCutUI() {
-  const on=cutsceneOn();
+  const live=cutsceneOn(),now=performance.now();
+  if(!live) { if(cutShownAt) cutLiveEnd=now; cutShownAt=0; } else if(!cutShownAt) cutShownAt=now-(now-cutLiveEnd<1500?1e4:0);   // scene straight after a scene: no flicker
+  const on=live&&now-cutShownAt>900;
   const w=$('cut-ctrl'); if(w.hidden===on) w.hidden=!on;
-  document.documentElement.classList.toggle('cutscene',on);
+  document.documentElement.classList.toggle('cutscene',live);
   $('cut-ff').classList.toggle('on',cut.ff);
   $('cut-skip').classList.toggle('on',cut.skip);
 }
