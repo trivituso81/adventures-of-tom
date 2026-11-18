@@ -128,6 +128,7 @@ function paintedWanted() {
   const want=new Set();
   try { for(const m of party) if(m&&m.id) want.add(m.id); } catch(e) {}
   try { if(B2.active) { for(const u of B2.party) { want.add(u.id); want.add('tbo:'+u.id); } for(const f of B2.foes) want.add('foe_'+f.id); } } catch(e) {}
+  try { if(typeof B3!=='undefined'&&B3.active&&B3.F) { for(const u of B3.F.party) want.add(u.id); for(const f of B3.F.foes) want.add('foe_'+f.id); } } catch(e) {}   // Battle 3 (engine/b3-ui.js)
   try { if(typeof bclipWanted==='function') for(const id of bclipWanted()) want.add('clip_'+id); } catch(e) {}
   try { for(const n of (currentMap&&currentMap.npcs)||[]) if(n.monster) for(const id of paintedFormation(n.monster)) want.add('foe_'+id); } catch(e) {}
   return want;

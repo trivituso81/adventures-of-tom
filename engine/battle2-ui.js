@@ -615,6 +615,7 @@ function b2BagRows() {
 }
 const b2Shushed=(u,s)=>!!((u.st.shushed&&s&&(s.elem||[]).includes('chatter'))||(u.st.silenced&&s&&u.kit.skills.includes(s)));
 function b2Render() {
+  if(battle.v3) return;   // a Battle 3 fight owns the screen (engine/b3-ui.js)
   if(!B2.active&&!$('battle').classList.contains('v2')) return;
   b2RenderRibbon(); b2RenderParty(); b2RenderCmd(); b2Info();
   b7AfterRender();   // engine/feel.js: Rose Mode's gold tip, the speed and AUTO buttons

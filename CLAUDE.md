@@ -161,6 +161,7 @@ The game must be served over http. Opening `index.html` as a file will not work.
 | Spoken battle lines | `data/lines.js` |
 | Spoken dialogue speakers and voices | `data/dialog-cast.js` |
 | The pause between two speakers in a story scene (snap, normal, beat) | `docs/line-gaps.tsv`, then `python3 tools/gap-apply.py` (seconds: `DA_GAP` in `engine/dialog-auto.js`) |
+| The new battle system ("Battle 3", v11 rules, Battle Lab > NEW BATTLE only for now) | `docs/BATTLE3.md`; numbers and moves in `data/b3-*.js`, rules in `engine/b3-core.js` and the other rules files, screen in `engine/b3-play.js` and `engine/b3-ui.js`; `node tools/b3-sim.js check`, `python3 tools/b3_test.py` |
 | Difficulty modes | `B7_DIFF` in `engine/feel.js` |
 | Stats, items, party members | `data/party.js`, `data/abilities.js`, `data/progress.js` |
 | Menus | `engine/menu.js`, `engine/progress.js`, `engine/shop.js` |

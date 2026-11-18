@@ -775,6 +775,21 @@ html.landscape #battle.v2 .bp-grid .bp-btn{height:62px}html.landscape #battle.v2
 
 /* ---- F7 (engine/feel.js): speed and AUTO buttons, Rose Mode tip, victory card, Options ---- */
 .battle-stage{position:relative}
+/* Battle 3 (engine/b3-ui.js): the turn bar's round divider and moved face, 10 Pep dots, the CONTINUE button. Layout comes from the .b2-* rules above. */
+.b3-bar{gap:3px}
+.b3-div{flex:0 0 auto;align-self:stretch;display:flex;align-items:center;justify-content:center;width:11px;margin:0 1px;border-left:2px dashed var(--gold);font-style:normal}
+.b3-div b{font-size:8px;font-weight:900;line-height:1;color:var(--gold);padding-left:1px}
+.b3-bar .b2-tk{transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.b3-bar .b2-tk.b3-moved{box-shadow:0 0 0 2px #ffb070,0 0 8px 2px #ffb070cc;z-index:2}
+.b3-bar .b2-tk.ghost{opacity:.72}
+.b3-pep{gap:1px}.b3-pep i{width:4px}
+.b3-chips{display:flex;flex-wrap:wrap;gap:2px 3px;margin-top:2px}.b3-chips .b2-st{margin-left:0;white-space:nowrap}
+.b3-pepn{font-size:9px;font-weight:800;letter-spacing:.6px;color:#8dc4e6}
+#b3-cmd .b2-mid{flex-direction:column;gap:3px;display:flex;align-items:center;justify-content:center}#b3-cmd .b2-mid img{width:64%}#b3-cmd .b2-mid.off{opacity:.6}
+.b3-go{align-items:center;text-align:center;padding:14px 9px}.b3-go em{justify-content:center}
+html.landscape #battle.v2 .b3-div{width:8px}html.landscape #battle.v2 .b3-div b{font-size:7px}
+html.landscape #battle.v2 .b3-pep i{width:2px}
+html.landscape #battle.v2 .b3-chips{gap:1px 2px;margin-top:1px}html.landscape #battle.v2 .b3-chips .b2-st{font-size:6.5px;padding:0 2px}
 .b7-tools{position:absolute;z-index:3;display:flex;gap:4px}
 .b7-tools button{min-width:36px;height:26px;padding:0 8px;border:2px solid #fff1c766;border-radius:5px;background:#0b0d12bf;color:#fff1cb;font:inherit;font-size:10px;font-weight:900;letter-spacing:.6px;touch-action:manipulation;cursor:pointer}
 .b7-tools button.gear{display:grid;place-items:center;min-width:30px;padding:0 6px}
@@ -1304,12 +1319,20 @@ html.landscape .mbuild{padding:4px 10px;gap:1px}
   <div id="announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 </main>
 <div id="battle" role="dialog" aria-modal="true" aria-label="Battle" hidden>
-  <div class="battle-stage"><div class="b2-ribbon" id="b2-ribbon" hidden></div><canvas id="battle-canvas" width="1152" height="648"></canvas></div>
+  <div class="battle-stage"><div class="b2-ribbon" id="b2-ribbon" hidden></div><div class="b2-ribbon b3-bar" id="b3-bar" hidden></div><canvas id="battle-canvas" width="1152" height="648"></canvas></div>
   <div class="b2-ui" id="b2-ui" hidden>
     <div class="battle-box b2-msg" id="b2-msg" aria-live="polite"></div>
     <div class="b2-low" id="b2-low">
       <div class="battle-box b2-party" id="b2-party"></div>
       <div class="battle-box b2-cmd" id="b2-cmd"></div>
+    </div>
+  </div>
+  <!-- Battle 3 (engine/b3-ui.js): its own boxes with the same layout classes as battle 2 -->
+  <div class="b2-ui b3-ui" id="b3-ui" hidden>
+    <div class="battle-box b2-msg" id="b3-msg" aria-live="polite"></div>
+    <div class="b2-low">
+      <div class="battle-box b2-party" id="b3-party"></div>
+      <div class="battle-box b2-cmd" id="b3-cmd"></div>
     </div>
   </div>
 </div>
@@ -1712,6 +1735,24 @@ html.landscape .mbuild{padding:4px 10px;gap:1px}
 <script src="engine/ch20-render.js"></script>
 <script src="engine/splash.js?v=poseedit1"></script>
 <script src="engine/splash-edit.js?v=wlayout2"></script>
+<!-- Battle 3: the v11 battle system, loaded beside battle 2 (docs/BATTLE3.md). Data, then the rules (no drawing), then the screen. -->
+<script src="data/b3-rules.js?v=b3s1"></script>
+<script src="data/b3-status.js?v=b3s1"></script>
+<script src="data/b3-kit-tom.js?v=b3s1"></script>
+<script src="data/b3-kit-grace.js?v=b3s1"></script>
+<script src="data/b3-kit-rose.js?v=b3s1"></script>
+<script src="data/b3-kit-deedee.js?v=b3s1"></script>
+<script src="data/b3-foes-ch01.js?v=b3s1"></script>
+<script src="data/b3-lab.js?v=b3s1"></script>
+<script src="engine/b3-core.js?v=b3s1"></script>
+<script src="engine/b3-timeline.js?v=b3s1"></script>
+<script src="engine/b3-hooks.js?v=b3s1"></script>
+<script src="engine/b3-ops.js?v=b3s1"></script>
+<script src="engine/b3-resolve.js?v=b3s1"></script>
+<script src="engine/b3-foe.js?v=b3s1"></script>
+<script src="engine/b3-play.js?v=b3s1"></script>
+<script src="engine/b3-ui.js?v=b3s1"></script>
+<script src="engine/b3-lab.js?v=b3s1"></script>
 <script src="engine/save-backup.js?v=slotless1"></script>
 <script src="engine/save-sync.js?v=slotless1"></script>
 <script src="engine/skip.js"></script>

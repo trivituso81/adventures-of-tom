@@ -75,6 +75,7 @@ function drawBattleBackdrop(t) {
 }
 
 function drawBattle() {
+  if(battle.v3) { b3Draw(); return; }   // Battle 3 draws its own party and enemies on the same stage (engine/b3-play.js)
   battleFit();
   gfx=fightCtx; gfx.setTransform(BS,0,0,BS,0,0);
   const party=battlePartyList();   // the new battle (engine/battle2.js) draws its own party units here

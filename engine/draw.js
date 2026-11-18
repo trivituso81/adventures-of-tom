@@ -318,7 +318,7 @@ const keyboard={
 };
 
 window.addEventListener('keydown',e=>{
-  if(battle.active) { b2Key(e); return; }
+  if(battle.active) { if(battle.v3) b3Key(e); else b2Key(e); return; }   // Battle 3: engine/b3-ui.js
   if(e.code==='KeyL'&&!e.repeat) { toggleLayout(); return; }
   if(shopOpen) {
     if(e.code==='Escape'||e.code==='KeyM') { e.preventDefault(); closeShop(); }

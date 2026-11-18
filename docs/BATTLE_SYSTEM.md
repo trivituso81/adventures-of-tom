@@ -1,5 +1,7 @@
 # Battle system
 
+> The replacement, "Battle 3" (the v11 rules), is being built in stages beside this one and is played only in ADMIN > BATTLE LAB > NEW BATTLE for now. Its doc is `docs/BATTLE3.md`. Everything below describes battle 2, which every story fight still uses.
+
 The live battle is "battle 2" (`engine/battle2*.js`, numbers in `data/battle2-data.js`). `engine/battle.js` and `engine/battle-draw.js` are the shared runtime (per-frame timers, drawing, props) underneath it. When this document and the code disagree, the code wins; fix this document.
 
 ## Rules in one table

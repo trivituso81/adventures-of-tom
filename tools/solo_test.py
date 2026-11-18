@@ -23,7 +23,7 @@ with sync_playwright() as pw:
     if 'SOLO' not in names: fails.append('no SOLO entry')
     if any('SOLO' in n and n!='SOLO' for n in names): fails.append('old *SOLO entries still listed: '+str(names))
     idx=names.index('SOLO')
-    pg.evaluate(f"()=>{{ splash.active=true; document.getElementById('splash').hidden=false; splashSetMode('lab'); splash.labPage=Math.floor({idx}/SPLASH_LAB_PER); splashPick({idx}%SPLASH_LAB_PER); }}")
+    pg.evaluate(f"()=>{{ splash.active=true; document.getElementById('splash').hidden=false; splash.labPage=Math.floor({idx}/SPLASH_LAB_PER); splashSetMode('lab'); splashPick(splash.list.findIndex(c=>c.name==='SOLO')); }}")   # by name: NEW BATTLE (Battle 3) sits first on every Lab page
     pg.wait_for_timeout(500)
     mode=pg.evaluate("()=>splash.mode"); picker=pg.evaluate("()=>splash.list.map(c=>c.name)")
     print('mode',mode,'picker',picker)

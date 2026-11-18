@@ -2,6 +2,7 @@
 // engine/battle.js — Shared battle runtime: the per-frame timers every battle animation uses (updateBattle) and the
 // thrown props (drawProp). The old battle flow (command menu, MP attacks, single-enemy turns) was removed in F4;
 // the battle itself is engine/battle2.js with engine/battle2-ui.js and engine/battle2-moves.js.
+// Battle 3 (the v11 system, engine/b3-*.js, docs/BATTLE3.md) runs on the same screen while battle.v3 is set.
 function updateBattle(dt) {
   battle.time+=dt;
   battle.shakeEnemy=Math.max(0,battle.shakeEnemy-dt);
@@ -31,6 +32,7 @@ function updateBattle(dt) {
   for(const p of battle.pops) p.t+=dt;
   battle.pops=battle.pops.filter(p=>p.t<1);
   if(battle.v2) { try { b2Update(dt); } catch(err) { gameFault('turn update',err); } }
+  if(battle.v3) { try { b3Update(dt); } catch(err) { gameFault('turn update',err); } }   // Battle 3 (engine/b3-play.js)
 }
 
 // Thrown and dropped things for the recruits' moves. Drawn centered at the origin.

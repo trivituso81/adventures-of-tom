@@ -17,6 +17,7 @@ function pollGamepad() {
   if(splash.active) { input.padDir=null; splashPad(dir,dirEdge,A,B); return; }
   if(battle.active) {
     input.padDir=null;
+    if(battle.v3) { b3Pad(dir,dirEdge,A,B); if(R1) b3Speed(); return; }   // Battle 3: engine/b3-ui.js
     b2Pad(dir,dirEdge,A,B);
     if(R1) b7ToggleSpeed(); if(Y) b7ToggleAuto(); if(SEL) b7SetToggle();   // engine/feel.js: 1x / 2x and Smart Repeat
     return;

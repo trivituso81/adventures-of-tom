@@ -160,8 +160,10 @@ const SPLASH_MODES={
   lab:{get tab(){ return splashLabTab(); },cue:'A / Enter to fight. B / Esc to go back',choices:()=>{
     const per=SPLASH_LAB_PER,pages=Math.ceil(B2_LAB.length/per),pg=Math.max(0,Math.min(pages-1,splash.labPage||0));
     const from=pg*per,list=B2_LAB.slice(from,from+per).map((L,k)=>({name:L.name,sub:L.sub,act:()=>L.solo?splashSoloOpen(from+k):splashLab(from+k)}));
-    list.push({name:'PREV PAGE',sub:'Page '+(((pg+pages-1)%pages)+1)+' of '+pages+'.',cls:'nav',act:()=>splashLabPage(pg-1,per,per)},
-              {name:'NEXT PAGE',sub:'Page '+(((pg+1)%pages)+1)+' of '+pages+'.',cls:'nav',act:()=>splashLabPage(pg+1,per,per+1)},
+    const nb=typeof B3_LAB!=='undefined'?1:0;   // NEW BATTLE: the Battle 3 fights (engine/b3-lab.js), first on every page
+    if(nb) list.unshift({name:'NEW BATTLE',sub:'The new battle system. '+B3_LAB.length+' test fights.',cls:'nav',to:'lab3'});
+    list.push({name:'PREV PAGE',sub:'Page '+(((pg+pages-1)%pages)+1)+' of '+pages+'.',cls:'nav',act:()=>splashLabPage(pg-1,per,per+nb)},
+              {name:'NEXT PAGE',sub:'Page '+(((pg+1)%pages)+1)+' of '+pages+'.',cls:'nav',act:()=>splashLabPage(pg+1,per,per+1+nb)},
               {name:'BACK',sub:'',cls:'back',act:splashBack});
     return list; }}
 };

@@ -76,5 +76,8 @@ if pf.returncode: fails.append(pf.stdout.strip())
 # Line gaps (linegap1): the hold after each story line (docs/line-gaps.tsv) matches data/line-gaps.js and data/scenes.js.
 lg=subprocess.run([sys.executable,os.path.join(HERE,'gap-apply.py'),'--check'],capture_output=True,text=True); print(lg.stdout.strip())
 if lg.returncode: fails.append(lg.stdout.strip())
+# Battle 3 (docs/BATTLE3.md): the data check and the rule tests, with no screen (about half a second).
+b3=subprocess.run(['node',os.path.join(HERE,'b3-sim.js'),'check'],capture_output=True,text=True); print('b3 rules',b3.stdout.strip().replace('\n',' '))
+if b3.returncode: fails.append('battle 3 rules: '+(b3.stdout.strip() or b3.stderr.strip())[:400])
 print('FAILS:',fails)
 raise SystemExit(1 if fails else 0)
