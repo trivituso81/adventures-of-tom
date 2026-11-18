@@ -1,3 +1,9 @@
+## 2026-11-18 (453): Art Library bake, clip-mudling-idle (`artbake1484`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- clip-mudling-idle: study video saved as art/raw/clips/clip-mudling-idle-v1.mp4 (592 KB). No clip was cut and nothing in the game changed.
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## 2026-11-18 (452): Art Library bake, clip-rose-strike-lite, clip-rose-strike-2s, clip-rose-sleep, clip-mudling-idle (`artbake1481`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
