@@ -275,6 +275,7 @@ let sceneCam=null;   // {cam:[x,y]} holds the camera on a tile while a scene fli
 const lazy=fn=>({start(){ this.s=fn(); this.s.start(); },update(dt){ return this.s.update(dt); }});
 const SCENE_OPS={
   wait:o=>S.wait(o.wait),
+  noHuddle:o=>S.call(()=>{}),   // marker only: playScene adds no huddles to this scene
   call:o=>S.call(o.call),
   step:o=>o.step,
   talk:o=>S.talk(o.talk,Array.isArray(o.lines)?o.lines:[o.lines],o.voice),
@@ -1076,7 +1077,9 @@ function playScene(script,opts={}) {
   intro.poseFocus=sid&&BOSS_STAGE[sid]||null;   // mood and talking poses face the boss (poseFacingWant)
   if(sid&&BOSS_STAGE[sid]&&Array.isArray(list)) { const fc=BOSS_STAGE[sid]; list=stageScript(list,fc,(first,st)=>[first?{gather:fc}:{gather:fc,check:true},{huddle:true,focus:fc,with:st&&typeof st.talk==='string'?st.talk:null}]); }
   // opts.stage: a wrapper script (playScene(()=>[...])) that should be staged like a SCENES id (facing1: the Part 2 opening).
-  else if((sid||opts.stage)&&Array.isArray(list)&&!JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v).includes('"gather"')) { const self=sceneSelfStaged(list),near=self?null:sceneSpeakers(list),ob=self?null:objPressLive();   // ob: the scene started at an object Tom pressed A on (item1)
+  // {noHuddle:true} anywhere in a scene: it stages everyone itself and no automatic huddle runs before its lines (roofnpc2: in ch1Theft the
+  // huddle walked the party between the doormat and the island each time the speaker changed, which read as teleporting).
+  else if((sid||opts.stage)&&Array.isArray(list)&&!/"(gather|noHuddle)"/.test(JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v))) { const self=sceneSelfStaged(list),near=self?null:sceneSpeakers(list),ob=self?null:objPressLive();   // ob: the scene started at an object Tom pressed A on (item1)
     list=stageScript(list,null,(first,st)=>{ const h={huddle:true,with:st&&typeof st.talk==='string'?st.talk:null,lookAt:st&&typeof st.lookAt==='string'?st.lookAt:null};
       return first&&ob?[{around:{x:ob.x,y:ob.y,w:ob.w,h:ob.h},tom:[player.x,player.y],keepTom:true,auto:ob},h]:first&&near&&near.length?[{approach:near},h]:h; }); }
   stageZone=null; intro.sceneCast=null;
@@ -1251,8 +1254,14 @@ endIntro=function() {
   for(const n of intro.held||[]) { n.held=false; n.path=[]; n.move=null; n.idle=1+Math.random(); if(n.monster&&!n.scripted&&n.heldFrom&&!n.sunk) { n.x=n.heldFrom.x; n.y=n.heldFrom.y; } }
   intro.held=[];
   for(const n of currentMap.npcs) if(n.arriveFace) n.arriveFace=null;
+  const et=intro.endTrail; intro.endTrail=null;
   LE_endIntro_story();
-  placeFollowers();
+  // intro.endTrail (a scene sets it, roofnpc2): the tiles behind Tom, oldest first, ending on Tom's tile. The followers keep standing in that
+  // line instead of all stacking on Tom's tile (Gemini audit: three people on one doormat tile when Deedee joined).
+  if(et&&et.length>1) { trail.length=0; for(const t of et) trail.push({x:t[0],y:t[1]}); const gap=(currentMap&&!currentMap.outside)?1.5:1;
+    followers.forEach((f,k)=>{ const at=Math.max(0,trail.length-1-gap*(k+1)),lo=Math.floor(at),a=trail[lo],b=trail[Math.ceil(at)],fr=at-lo;
+      f.x=a.x+(b.x-a.x)*fr; f.y=a.y+(b.y-a.y)*fr; f.move=null; f.lag=0; f.facing=player.facing; }); }
+  else placeFollowers();
 };
 // Story monsters (scripted) never wander or engage; STORY_HOLD (data/scenes.js) can keep a whole map still.
 const LE_b7MonsterTick_story=b7MonsterTick;

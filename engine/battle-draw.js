@@ -677,14 +677,14 @@ function switchMap(portal) {
     visited.add(house.id);
     showToast(house.shop?house.name+'\nBuy, sell, browse. Talk to '+(house.keeper||'Penny')+'.':(house.taxi?house.name+'\nOne driver. One cab. Big plans.':house.name+'\nOne resident. Four curious things.'),2.8);
     if(firstVisit&&souvenirs[house.id])
-      setTimeout(()=>grantItem(souvenirs[house.id]),3000);
+      { const id=souvenirs[house.id],give=()=>{ if(intro.active||dialog.active||battle.active) { setTimeout(give,1500); return; } grantItem(id); }; setTimeout(give,3000); }   // waits until no scene or talk is on (roofnpc2: the pepper popped mid-greeting)
   } else if(portal.kind==='edge') {
     const to=worlds[portal.to]||town;
     currentMap=to;
     player.x=portal.spawn.x;
     player.y=portal.spawn.y;
     player.facing=portal.facing;
-    showToast(to.name+'. '+(to.tag||''),2.8);
+    showToast(to.name+'. '+(to.tag||''),2.8,true);
   } else {
     currentMap=worlds[house.area]||town;
     player.x=house.door.x;

@@ -1,3 +1,26 @@
+## roofnpc2 (2026-11-18): chapter 1 house and Rivituso Row fixes from Gemini's second audit: the heist plays in order, the party holds its spots, no pepper mid-greeting
+
+Tom sent Gemini's second audit (the walk down Rivituso Row and the kitchen). What each finding got:
+
+| Finding | What I did |
+|---|---|
+| P1 heist lines after they stood up | Tom, Grace and Rose now stay on the floor through "AHHH! DEEDEE!", "GAH! I'm on the floor" and "Tata, get UP" and get up right after Grace's line (data/scenes.js ch1Theft). |
+| P1 Mudling pops up behind Tom | It fades in on the front doorway (8,14) and oozes up the hall (spawn `fade:0` plus `fadeActor`). |
+| P1 counter tin still drawn after the theft | NOT fixed: the pie and muffin trays are painted into the room picture. The approved empty-pan picture (Art Library "Chapter 1") is the fix. |
+| P1 "Got Boppy's Pepper" mid-greeting | A room's first-visit souvenir now waits until no scene, talk or fight is on (engine/battle-draw.js). |
+| P1 textbox closing, D-pad flashing, Grace and Rose teleporting | The D-pad arrows are hidden for the whole of a cutscene (index.html `html.cutscene`). New scene marker `{noHuddle:true}` (engine/story.js): ch1Theft stages everyone itself, the party walks in together and holds its spots, Tom turns to whoever talks. The automatic huddle used to move them between the doormat and the island at each change of speaker. |
+| P1 Deedee blurry for half a second | Deedee's and Boppy's story poses load on Rivituso Row (ch1Amy) and again as the kitchen scene starts. |
+| P1 townsfolk on Ellie's roof and Rivituso's porch | Rivituso Row gets a `noGoRoof` list (49 roof tiles from `tools/npc_roof_tiles.py row` plus the Rivituso porch steps). The parked bikes by GREGORI (8,7 to 10,7) are now solid, so nobody walks through them. `reach_test.py row town`: 0 fails. |
+| P2 three people on one tile when Deedee joins, Rose stranded | After she joins, Grace, Rose and Deedee walk into a line beside Tom, and the scene end keeps that line (`intro.endTrail`, engine/story.js) instead of stacking everyone on Tom's tile. |
+| P2 Boppy walking over the dining chairs | Boppy stays seated at the table (13,10) for all of chapter 1. |
+| P2 THE DOOR FRAME cut in cold, FAST and SKIP over it | Tom looks right, then up toward the back hall before the close-up; FAST and SKIP are hidden while any close-up picture is up (engine/skip.js). |
+| P2 area name toast over the LONG ISLAND SQUARE arch | Arrival toasts (walking into a new area) now show near the bottom of the screen (`#toast.low`). |
+| P2 no direction after the heist | One popup when the scene ends: "Goal: follow the muddy trail to Grump Hollow, north of the Square." |
+| P2 Rose behind the entry half-wall while talking to Boppy | NOT fixed: the strip behind the half-wall (row 11) is used by scenes in chapters 3, 7, 9, 10 and 15, so closing it needs a check of each. Next session. |
+| P2 followers vanishing after the Row scene and cutting over grass | Partly: the bikes are solid now. After most scenes the followers still regroup on Tom's tile; only ch1Theft uses the new end line so far. |
+
+No dialogue was changed. Tests: ch1Theft and ch1Goal frames (reaction_test, portrait), `reach_test.py row town`, `tools/smoke.py`.
+
 ## clipcal1 (2026-11-18): Rose's approved Boop is in the Battle Lab; the pinned-picture experiment is removed; rule: fix a miss with the smallest change
 
 - Tom (11-18 15:12): "that didnt work either - youre overcorrecting, swinging like a pendulum between extremes and it's really unimpressive and disspointing... i need you to correct this behavior going forwad immediately. i used gemini with this prompt and got an accetable result, so i approved it".

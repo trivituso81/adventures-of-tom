@@ -116,6 +116,7 @@ SCENES.ch1Goal=[
 // 2. Rivituso Row, passing Amy's house. Amy watches from her window, unseen: her two texts are text boxes.
 SCENES.ch1Amy=[
   {flag:'ch1-amy'},
+  {call:()=>{ if(typeof storyPosesLoad==='function') { storyPosesLoad('deedee'); storyPosesLoad('boppy'); } }},   // Deedee's greeting poses are ready before the kitchen (roofnpc2: they showed blurry for half a second)
   {call:()=>sfx.ding()},
   {talk:'Amy',lines:["Brother! I'm watching you from the window. I've seen people move faster walking on the sand at Robert Moses."]},
   {talk:'Tom',lines:["I'm carrying a child and receiving a news report."]},
@@ -151,22 +152,27 @@ SCENES.ch1Ellie=[
 
 // 3. Deedee's kitchen: twelve muffins, Boppy's bread story, and the mud ball. Deedee joins.
 SCENES.ch1Theft=[
-  {flag:'ch1-theft'},
+  {flag:'ch1-theft'}, {noHuddle:true},   // staged by hand below: the party holds its spots by the island instead of hopping between speakers
+  {call:()=>{ if(typeof storyPosesLoad==='function') { storyPosesLoad('deedee'); storyPosesLoad('boppy'); } }},
   {place:'Deedee',at:[7,9],dir:'down'}, {place:'Boppy',at:[13,10],dir:'up'},   // Boppy sits at the dining table with an empty plate, his back to the door
   {prop:'muffinpan',kind:'muffinpan',set:{map:'grands',x:3.1,y:7.1}},   // twelve muffins on the baking island (stand-in)
-  {walk:'tom',to:[[8,10]],speed:.25}, {face:'tom',dir:'up'},
-  {place:'grace',at:[9,10],dir:'up'}, {place:'rose',at:[7,10],dir:'up'},
+  {all:[{walk:'tom',to:routeTo('tom',8,10),speed:.25},{walk:'grace',to:routeTo('grace',9,11),speed:.25},{walk:'rose',to:routeTo('rose',7,11),speed:.25}]},   // they walk in together (no snapping)
+  {face:'tom',dir:'up'}, {face:'grace',dir:'up'}, {face:'rose',dir:'up'},
   {talk:'Deedee',lines:["There he is! Come here. Let me look at you. I missed that face. Now sit, you're having a muffin."]},
   {talk:'Tom',lines:["Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since we flew over Kansas."]},
   {talk:'Deedee',lines:["Twelve of them, and all twelve are still there. I've been standing between that pan and your father since six this morning."]},
+  {face:'tom',dir:'right'}, {face:'grace',dir:'right'},
   {talk:'Boppy',lines:["In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat..."]},
+  {face:'tom',dir:'right'}, {wait:.35}, {face:'tom',dir:'up'}, {wait:.45},   // Tom looks over at the door frame by the back hall before the close-up (roofnpc2: it cut in cold)
   {ch1Reveal:'doorframe'},   // Tom sets his bag down by the pantry door frame and looks at two new pencil marks (the close-up is the silent action)
   {wait:.8},
   {sfx:'bonk'}, {sfx:'doorIn'}, {call:()=>storyPosesLoad('deedee')},
-  {spawn:{name:'Big Mudling',monster:'mudling',mscale:1.34,at:[8,12],dir:'up'}},
+  // It comes in through the front door (roofnpc2, Gemini audit: it popped up right behind Tom): fades in on the doorway and oozes up the hall.
+  {spawn:{name:'Big Mudling',monster:'mudling',mscale:1.34,at:[8,14],dir:'up',fade:0}},
   // The painted heist frames (mh_*, data/mudling-heist.js) give the mud ball its acting. They already hold a pie tin: the twelve-cup pan is a stand-in until new art is approved.
   {pose:'Big Mudling',f:['mh_ooze_a','mh_ooze_b'],fps:5,dir:'left'},
-  {walk:'Big Mudling',to:[[8,11]],speed:.4,onStep:()=>sfx.splat()},
+  {fadeActor:'Big Mudling',to:1,time:.4},
+  {walk:'Big Mudling',to:[[8,13],[8,12],[8,11]],speed:.4,onStep:()=>sfx.splat()},
   {pose:'Big Mudling',f:'mh_spot',dir:'left'},
   {sfx:'look'}, {wait:.5},
   {pose:'Big Mudling',f:'mh_windup',dir:'left'}, {wait:.3},
@@ -200,27 +206,37 @@ SCENES.ch1Theft=[
           {pose:'Big Mudling',f:'mh_sneak',dir:'right'},
           {walk:'Big Mudling',to:[[8,12.4]],speed:.3},
           {sfx:'doorOut'},{despawn:'Big Mudling'}]},
-    {getup:'tom',to:[8,10],delay:1.15,dir:'down'},
-    {getup:'rose',to:[8,11],delay:1.25,dir:'up'},   // Rose scrambles behind Tom
-    {getup:'grace',to:[9,10],delay:1.35,dir:'down'},
     {seq:[{wait:1.2},{hop:'Deedee',from:()=>[8,7],to:[7,9],time:.4,arc:10}]}
   ]},
   {place:'Deedee',at:[7,9],dir:'down'},
   {cam:null},
+  // They stay on the floor through their floor lines and get up on Grace's "get UP" (roofnpc2, Gemini audit: they stood up before the lines).
   {talk:'Rose',lines:["AHHH! DEEDEE!"]},
   {talk:'Tom',lines:["GAH! I'm on the floor. Grace, is that your elbow or mine?"]},
   {talk:'Grace',lines:["It's mine! Tata, get UP, it's getting away!"]},
+  {all:[
+    {getup:'tom',to:[8,10],dir:'up'},
+    {getup:'rose',to:[7,11],delay:.1,dir:'up'},   // Rose scrambles behind Tom
+    {getup:'grace',to:[9,11],delay:.2,dir:'up'}
+  ]},
   {talk:'Deedee',lines:["That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER."]},
+  {face:'tom',dir:'right'},
   {talk:'Boppy',lines:["...and I only caught him because the hat kept getting taller. Where'd the muffins go?"]},
   {talk:'Deedee',lines:["A ball of mud came through the door and took them. Pan and all."]},
   {talk:'Boppy',lines:["The mud gets a muffin and I don't?"]},
   {talk:'Deedee',lines:["Girls, sneakers. Tom, hold the door. Hubby, you stay right there. When we get them back, the first one's yours."]},
   {talk:'Boppy',lines:["The first one. Tom, you heard her."]},
   {join:'deedee'},   // Deedee, Tom and the girls run out the back door; Boppy sits back down with his empty plate
-  {wait:2.8},
+  // Deedee steps out of her kitchen spot into line; the girls line up beside Tom (roofnpc2: they used to stack on one tile).
+  {place:'deedee',at:[7,9],dir:'down'},
+  {all:[{walk:'grace',to:routeTo('grace',9,10),speed:.22},{walk:'rose',to:routeTo('rose',11,10),speed:.22},{walk:'deedee',to:routeTo('deedee',12,10),speed:.22}]},
+  {face:'tom',dir:'down'}, {face:'grace',dir:'left'}, {face:'rose',dir:'left'}, {face:'deedee',dir:'left'},
+  {call:()=>{ intro.endTrail=[[12,10],[11,10],[10,10],[9,10],[8,10]]; }},
+  {wait:1.2},
   {flag:'tombo:deedee1'},
   {toast:'New Tombo: Wine and Gossip (Tom + Deedee).',time:3},
-  {toast:'Goal: follow the thief into Grump Hollow, north of the Square.',time:4.5}
+  {toast:'Goal: follow the thief into Grump Hollow, north of the Square.',time:4.5},
+  {call:()=>showToast('Goal: follow the muddy trail to Grump Hollow, north of the Square.',4.5)}   // pops up once (roofnpc2, Gemini audit: players stalled at the front gate)
 ];
 
 // 4. The path into Grump Hollow: Rose asks the mud nicely. ONE fight, three Mudlings (the old three tutorial fights are gone; 'basics' teaches all of it).
@@ -764,12 +780,12 @@ const STORY_WORLD=[
     // Once beaten he stays on the shore with the frown frame (the painted stance frame is the shocked one; scenes clear and reset scenePose).
     if(!under&&flag('battle:bigone')==='win'&&!b.settled&&!(b.scenePose&&b.scenePose.f)) b.scenePose={foe:'attack3',dir:'left'};
   },
-  // Chapter 1: until the Theft scene plays, Boppy is already at the dining table (13,10), his back to the door, so the player never sees him move
+  // Chapter 1: Boppy stays at the dining table (13,10) all chapter; before the Theft scene he is already there, his back to the door, so the player never sees him move
   // when the scene starts. (Tom, 2026-11-14, report r-20261114-150730-vqel and r-20261114-100519-wlbn: he was by the front door, then sped to the back.)
   ()=>{
     if(currentMap.id!=='grands') return;
     const b=currentMap.npcs.find(n=>n.name==='Boppy'); if(!b) return;
-    const pre=STORY.chapter===1&&!flag('ch1-theft');
+    const pre=STORY.chapter===1;   // all of chapter 1 (roofnpc2, Gemini audit 2026-11-18: after the theft he wandered across the dining chairs; he sits back down with his plate)
     if(pre&&!b.theftPre) { b.theftPre=true; b.x=13; b.y=10; b.facing='up'; b.path=[]; b.move=null; b.idle=1e9; }
     else if(!pre&&b.theftPre) { b.theftPre=false; b.idle=0; }
   },

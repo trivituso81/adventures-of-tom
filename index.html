@@ -969,6 +969,8 @@ html.landscape .sc-drawer{top:0;bottom:auto;box-shadow:none}
 #cut-ctrl button{font:inherit;font-size:11px;font-weight:800;letter-spacing:1px;padding:9px 12px;border:2px solid var(--edge);border-radius:8px;background:var(--win);color:var(--ink);box-shadow:var(--bevel),0 3px 0 #0006;touch-action:none;cursor:pointer}
 #cut-ctrl button.on{color:#1b2d27;background:var(--gold)}
 html.cutscene #minimap-wrap{visibility:hidden}
+#toast.low{top:auto;bottom:calc(196px + env(safe-area-inset-bottom))}html.landscape #toast.low{top:auto;bottom:150px}
+html.cutscene #dpad .dir{visibility:hidden}   /* roofnpc2: the arrows stay hidden for a whole scene, so they no longer flash on between lines */
 html.landscape #cut-ctrl{top:62px}
 /* HUD: no minimap or door count; save button sits where rotate was. Save popup reuses the quit popup look. */
 #minimap-wrap,#hud .progress{display:none!important}

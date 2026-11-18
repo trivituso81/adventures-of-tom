@@ -94,7 +94,7 @@ let cutShownAt=0,cutLiveEnd=-1e9;
 function refreshCutUI() {
   const live=cutsceneOn(),now=performance.now();
   if(!live) { if(cutShownAt) cutLiveEnd=now; cutShownAt=0; } else if(!cutShownAt) cutShownAt=now-(now-cutLiveEnd<1500?1e4:0);   // scene straight after a scene: no flicker
-  const on=live&&now-cutShownAt>900;
+  const on=live&&now-cutShownAt>900&&!(typeof closeup!=='undefined'&&closeup.active);   // not over a close-up picture (roofnpc2)
   const w=$('cut-ctrl'); if(w.hidden===on) w.hidden=!on;
   document.documentElement.classList.toggle('cutscene',live);
   $('cut-ff').classList.toggle('on',cut.ff);

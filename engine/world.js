@@ -262,7 +262,7 @@ function makeRoom(spec) {
   placeObjects(map,spec.objects);
   for(const s of spec.npcs||[]) map.npcs.push(npcFromSpec(s,true));
   if(spec.plateMask) applyPlateMask(map,spec.plateMask);   // painted plate: the mask is the walk map
-  for(const [x,y] of spec.noGo||[]) map.npcNoGo.add(key(x,y));   // tiles NPCs never wander onto (keeps lanes open)
+  for(const [x,y] of [...(spec.noGo||[]),...(spec.noGoRoof||[])]) map.npcNoGo.add(key(x,y));   // tiles NPCs never wander onto (keeps lanes open)
 
   finishMap(map);
   if(house.region==='la') map.region='la';
@@ -331,8 +331,8 @@ const dialog={
 let toastUntil=0,lastTouchTime=-10000,elapsedTime=0,lastBump=0;
 let kiss=null; // {npc,start} while Tom and TNB greet
 
-function showToast(text,seconds=2.8) {
-  $('toast').textContent=text;
+function showToast(text,seconds=2.8,low=false) {
+  $('toast').textContent=text; $('toast').classList.toggle('low',!!low);   // low: shown near the bottom (area names on arrival, so they never cover the painted arch sign; roofnpc2)
   toastUntil=performance.now()+seconds*1000;
 }
 
