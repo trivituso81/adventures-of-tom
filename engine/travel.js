@@ -501,7 +501,7 @@ function arriveHome(arr,card=[]) {
       trail.length=0; trail.push({x:r.x,y:r.y},{x:g.x,y:g.y},{x:player.x,y:player.y});
       if(arr&&arr.noWelcome) { g.hidden=true; r.hidden=true; }   // the Square scene (SCENES.ch7Arrive) brings the girls running in
       sfx.levelChime();
-      showToast('Grace and Rose rejoin the party!',3);
+      partyBanner('grace','join'); partyBanner('rose','join');   // partybanner1
       saveGame('auto',true);
     })
   );

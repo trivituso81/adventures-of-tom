@@ -118,7 +118,7 @@ SCENES.ch18After=()=>[
   {talk:'Amy',lines:['Okay. Okay. Plan. Mom and Dad are stone. Tom is somewhere the Loom couldn’t put him.','And there’s exactly one thing in this city that never forgets where things go.']},
   {talk:'Grace',lines:['The post office.']},
   {talk:'TNB',lines:['I’ll make coffee first. Tom would want me to make coffee first.']},
-  {call:()=>showToast&&showToast('Tom has left the party. His portrait is gone from the menu.',6)},
+  {call:()=>partyBanner('tom','leave','His portrait is gone from the menu.')},   // partybanner1
   {flag:'ch18-after'},
   {fade:'out',time:.8},{card:18,done:true,time:3.4},{flag:'ch18-done'},
   {fade:'in',time:.8},

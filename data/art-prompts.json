@@ -26780,6 +26780,286 @@
     "k": 8
    },
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short looping animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: IDLE LOOP\nThe creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One slow blink. The eyes glance to one side and back. The leaf sprout on its head sways gently and stays attached. The mud arms stay where they are; drips wobble a little but nothing falls off or lands on the ground. The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-join-grace",
+   "tab": "Characters",
+   "title": "Party banner: Grace joins the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/grace-hero-v1.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-leave-grace",
+   "tab": "Characters",
+   "title": "Party banner: Grace leaves the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/grace-hero-v1.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-join-rose",
+   "tab": "Characters",
+   "title": "Party banner: Rose joins the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/rose-hero-v1.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-leave-rose",
+   "tab": "Characters",
+   "title": "Party banner: Rose leaves the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/rose-hero-v1.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-join-amy",
+   "tab": "Characters",
+   "title": "Party banner: Amy joins the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/amy-hero-v2.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-leave-amy",
+   "tab": "Characters",
+   "title": "Party banner: Amy leaves the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/amy-hero-v2.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-join-deedee",
+   "tab": "Characters",
+   "title": "Party banner: Deedee joins the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/deedee-hero-v1.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-leave-deedee",
+   "tab": "Characters",
+   "title": "Party banner: Deedee leaves the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/deedee-hero-v1.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-join-boppy",
+   "tab": "Characters",
+   "title": "Party banner: Boppy joins the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/boppy-hero-v2.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-leave-boppy",
+   "tab": "Characters",
+   "title": "Party banner: Boppy leaves the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/boppy-hero-v2.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-join-tnb",
+   "tab": "Characters",
+   "title": "Party banner: TNB joins the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/tnb-hero-v1.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-leave-tnb",
+   "tab": "Characters",
+   "title": "Party banner: TNB leaves the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/tnb-hero-v1.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-join-justin",
+   "tab": "Characters",
+   "title": "Party banner: Justin joins the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/justin-hero-v2.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-leave-justin",
+   "tab": "Characters",
+   "title": "Party banner: Justin leaves the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/justin-hero-v2.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-join-olivia",
+   "tab": "Characters",
+   "title": "Party banner: Olivia joins the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/olivia-hero-v1.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-leave-olivia",
+   "tab": "Characters",
+   "title": "Party banner: Olivia leaves the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/olivia-hero-v1.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-join-nara",
+   "tab": "Characters",
+   "title": "Party banner: Nara joins the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/nara-hero-v1.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The dog is the exact dog in the attached picture: same face, fur, markings and painted style.\n\nLAYOUT\nA wide horizontal banner. The dog fills the right third, seen from the front, head and front paws, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nFront paws up, mouth open in a happy bark, ears perked.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-leave-nara",
+   "tab": "Characters",
+   "title": "Party banner: Nara leaves the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/nara-hero-v1.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The dog is the exact dog in the attached picture: same face, fur, markings and painted style.\n\nLAYOUT\nA wide horizontal banner. The dog fills the right third, seen from the front, head and front paws, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nSitting, one front paw raised in a goodbye wave, head tilted.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-join-tom",
+   "tab": "Characters",
+   "title": "Party banner: Tom joins the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/tom-hero-v2.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nBoth arms raised in a happy cheer, a big open smile, glad to be on the team.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "banner-leave-tom",
+   "tab": "Characters",
+   "title": "Party banner: Tom leaves the party (one wide painting, no words)",
+   "ar": "2:1",
+   "refs": [
+    "art/raw/characters/tom-hero-v2.png"
+   ],
+   "group": "Party banners",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
   }
  ]
 }

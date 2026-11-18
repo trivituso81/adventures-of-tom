@@ -101,7 +101,7 @@ function recruitLeave(m,quiet) {
   const fi=followers.findIndex(f=>f.member===m); if(fi>=0) followers.splice(fi,1);
   if(m.homeNpc&&m.homeMap) { m.homeNpc.x=m.homeNpc.homeX; m.homeNpc.y=m.homeNpc.homeY; m.homeNpc.move=null; m.homeNpc.path=[]; if(!m.homeMap.npcs.includes(m.homeNpc)) m.homeMap.npcs.push(m.homeNpc); }
   m.homeNpc=null; m.homeMap=null;
-  if(!quiet) showToast(RECRUIT_TALK[m.id].bye,3.2);
+  if(!quiet) partyBanner(m.id,'leave',RECRUIT_TALK[m.id].bye);   // partybanner1
   if(menuChar>=party.length) menuChar=0;
 }
 function recruitJoin(m,npc,silent=false,map=currentMap,replace=null) {
@@ -117,11 +117,10 @@ function recruitJoin(m,npc,silent=false,map=currentMap,replace=null) {
   f.x=silent?player.x:npc.x; f.y=silent?player.y:npc.y; f.facing=npc.facing;
   followers.push(f);
   if(silent) return;
-  sfx.levelChime();
   // Shared story XP (engine/progress.js b6Sync): say so when they caught up with Tom while at home.
   const sp=b6SpLeft(m),caught=m.caughtUp; m.caughtUp=0;
   b6Badge();
-  showToast(m.name+' joins the party!'+(caught?' Caught up to Lv '+m.level+'.':'')+(sp&&b6Stampable(m)?' '+sp+' Stamp Point'+(sp>1?'s':'')+' to spend.':''),caught||sp?3.4:2.6);
+  partyBanner(m.id,'join',((caught?'Caught up to Lv '+m.level+'. ':'')+(sp&&b6Stampable(m)?sp+' Stamp Point'+(sp>1?'s':'')+' to spend.':'')).trim());   // one banner per person, with its jingle (partybanner1)
   openDialog(m.name,[RECRUIT_TALK[m.id].yes]);
 }
 

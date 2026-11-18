@@ -970,6 +970,20 @@ html.landscape .sc-drawer{top:0;bottom:auto;box-shadow:none}
 #cut-ctrl button.on{color:#1b2d27;background:var(--gold)}
 html.cutscene #minimap-wrap{visibility:hidden}
 #toast.low{top:auto;bottom:calc(196px + env(safe-area-inset-bottom))}html.landscape #toast.low{top:auto;bottom:150px}
+/* Party JOIN and LEAVE banners (engine/party-banner.js, partybanner1): one at a time, painted art once baked, a ribbon stand-in until then */
+#party-banner{position:absolute;z-index:6;left:50%;top:24%;width:min(92%,560px);transform:translate(-50%,-14px) scale(.96);opacity:0;pointer-events:none;transition:opacity .35s,transform .35s}
+#party-banner.on{opacity:1;transform:translate(-50%,0) scale(1)}
+#party-banner .pb-card{position:relative;aspect-ratio:2/1;border-radius:12px;overflow:hidden;background:linear-gradient(#fff6df,#f1dfb6);border:3px solid #c9a24a;box-shadow:0 0 0 2px #6b4e1c inset,0 6px 0 #0005}
+#party-banner.leave .pb-card{background:linear-gradient(#f3eee6,#ddd3c3);border-color:#a89a80}
+#party-banner .pb-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+#party-banner.painted .pb-art{display:block}
+#party-banner .pb-face{position:absolute;right:4%;bottom:6%;height:84%;aspect-ratio:1;object-fit:cover;border-radius:50%;border:3px solid #c9a24a;background:#fff3d6}
+#party-banner.painted .pb-face{display:none}
+#party-banner .pb-words{position:absolute;left:5%;top:0;bottom:0;width:50%;display:flex;flex-direction:column;justify-content:center;gap:6px;color:#3a2a12;text-align:left}
+#party-banner .pb-line{font-size:clamp(14px,4.2vw,22px);font-weight:700;line-height:1.15;text-shadow:0 1px 0 #fff8}
+#party-banner .pb-note{font-size:clamp(10px,2.9vw,14px);line-height:1.3;opacity:.85}
+#party-banner .pb-note:empty{display:none}
+html.landscape #party-banner{top:16%;width:min(60%,520px)}
 html.cutscene #dpad .dir{visibility:hidden}   /* roofnpc2: the arrows stay hidden for a whole scene, so they no longer flash on between lines */
 html.landscape #cut-ctrl{top:62px}
 /* HUD: no minimap or door count; save button sits where rotate was. Save popup reuses the quit popup look. */
@@ -1493,6 +1507,8 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="data/talkpose-faces.js?v=ch2fix1b"></script>
 <script src="engine/menu.js?v=posefaces1"></script>
 <script src="engine/followers.js?v=fallen1"></script>
+<script src="data/party-banners.js?v=partybanner1"></script>
+<script src="engine/party-banner.js?v=partybanner1"></script>
 <script src="engine/shop.js?v=ch1fix1"></script>
 <script src="engine/audio.js?v=report1"></script>
 <script src="data/lines.js?v=roselets1"></script>

@@ -153,7 +153,7 @@ SCENES.ch19Fight=()=>[
 
 SCENES.ch19After=()=>[
   {flag:'ch19-after',value:'pending'},
-  {call:()=>{ tomBack(); const m=ch19Censor(); if(m) { m.x=12; m.y=9; } }},
+  {call:()=>{ tomBack(); partyBanner('tom','join'); const m=ch19Censor(); if(m) { m.x=12; m.y=9; } }},   // partybanner1
   {wait:.6},
   {talk:'Narrator',lines:['The Censor lowers his stamp. The black bar over his face slides to the side, a little at a time, and under it is only a small tired man with ink on his cuffs.']},
   {talk:'Oblivion Censor',lines:['I have never been argued with by so many people at once. It was... full.']},

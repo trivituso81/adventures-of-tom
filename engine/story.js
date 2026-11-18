@@ -206,7 +206,7 @@ function forceJoin(m,quiet=true) {
   const h=homeNpcOf(m); if(!h) return false;
   if(party.length>=PARTY_MAX) { const out=extras().find(canLeave); if(!out) return false; recruitLeave(out,true); }
   recruitJoin(m,h.npc,true,h.map);
-  if(!quiet) { sfx.levelChime(); showToast(m.name+' joins the party!',2.6); }
+  if(!quiet) partyBanner(m.id,'join');   // banner and jingle (partybanner1)
   return true;
 }
 function forceLeave(m,quiet=true) {

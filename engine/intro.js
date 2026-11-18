@@ -192,8 +192,7 @@ function finishOpening() {
   player.facing='down';
   // Followers walk the trail of tiles Tom leaves: Grace first, then Rose.
   trail.length=0; trail.push({x:r.x,y:r.y},{x:g.x,y:g.y},{x:player.x,y:player.y});
-  sfx.levelChime();
-  showToast('Grace and Rose join the party!',3);
+  partyBanner('grace','join'); partyBanner('rose','join');   // one banner each, one after the other (partybanner1)
   setTimeout(()=>{ if(!dialog.active) showToast('Tap the map to walk, or use the D-pad. A / Enter says hello.',4); },3400);
   saveGame('auto',true);
 }
