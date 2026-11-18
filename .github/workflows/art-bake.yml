@@ -11,6 +11,11 @@ on:
     paths:
       - 'art/raw/**'
   workflow_dispatch:
+    inputs:
+      files:
+        description: 'Bake these art/raw files again (comma separated). Empty: the newest push.'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -36,11 +41,17 @@ jobs:
       - name: Video tools (only when a clip video was approved)
         run: |
           if ls art/raw/clips >/dev/null 2>&1 && ! command -v ffmpeg >/dev/null; then sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg; fi
+      # APPROVE makes two commits: the file (this starts the job), then the approval record in data/art-prompts.json a few
+      # seconds later. The bake needs the record (and a clip needs its marks), so wait and move to the newest main first.
+      - name: Wait for the approval record
+        run: |
+          sleep 25
+          git fetch origin main && git checkout -B main origin/main
       - name: Bake approved pictures and bump tags
         run: |
           BEFORE="${{ github.event.before }}"
           if [ -z "$BEFORE" ]; then BEFORE=HEAD~1; fi
-          python3 tools/art-library/art_bake.py --before "$BEFORE"
+          if [ -n "${{ github.event.inputs.files }}" ]; then python3 tools/art-library/art_bake.py --files "${{ github.event.inputs.files }}"; else python3 tools/art-library/art_bake.py --before "$BEFORE"; fi
       - name: Tag check
         run: python3 tools/tag_check.py
         env:

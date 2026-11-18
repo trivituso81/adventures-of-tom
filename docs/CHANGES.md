@@ -1,3 +1,7 @@
+## clipgen1b (2026-11-17): Fix: an approved clip video was not being cut into the game
+
+Tom approved the first real Grok video (clip-rose-strike v1, 18:30). The xAI video service worked. Fact found: APPROVE makes two commits (the file, then the approval record with the marks), and the art-bake Action started on the first one, before the record existed, so it baked nothing. The Action now waits 25 seconds and moves to the newest main before baking, and it can be started by hand for named files (`files` input). No game file changed.
+
 ## ch1rebuild1 (2026-11-17): Chapter 1 rebuilt to Tom's locked script, 95 new lines, stand-in art
 
 Tom locked chapter 1 (claude/story-ch01-draft2.md, 8 scenes plus Aunt Ellie's optional 2b) and answered the teardown questions (claude/ch01-teardown.md). Built word for word; the 7 recorded intro lines and the squishy beat are untouched.
