@@ -91,7 +91,9 @@ const cg=id=>document.getElementById(id);
 const clipT=t=>t==null||t<0?'not set':t.toFixed(2)+' s';
 function clipRvSetup(){
   if(cg('rvvid')) return;
-  cg('rvstage').insertAdjacentHTML('beforeend','<video id="rvvid" muted playsinline preload="auto" hidden></video><canvas id="rvcan" hidden></canvas>');
+  // #clipkey: a colour filter that makes flat magenta see-through (alpha = 6G - 3R - 3B + 4.5, cut to 0..1). Used by the
+  // battlefield preview for a video the browser may show but not read (address only), where a canvas cannot key it.
+  cg('rvstage').insertAdjacentHTML('beforeend','<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="clipkey" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%"><feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -3 6 -3 0 4.5"/></filter></svg><video id="rvvid" muted playsinline preload="auto" hidden></video><canvas id="rvcan" hidden></canvas>');
   cg('rvnote').insertAdjacentHTML('beforebegin','<div id="cliptools" hidden>'+
     '<div class="row cliprow"><button class="small" id="cpb" aria-label="One frame back">&lsaquo; frame</button><input type="range" id="cps" min="0" max="3" step="0.0333" value="0" aria-label="Position in the video"><button class="small" id="cpf" aria-label="One frame forward">frame &rsaquo;</button></div>'+
     '<div class="row cliprow"><button class="small" id="cpplay">PLAY</button><span class="hint" id="cpt"></span><button class="small" id="cpbf">ON THE BATTLEFIELD</button></div>'+
@@ -117,7 +119,7 @@ function clipPaintMarks(){
   const set=m.first>=0&&m.hit>=0&&m.last>=0;
   if(CV.r&&rvId()===CV.r.id&&set&&!ok) setMsg(CV.r.id,'The marks are out of order: START must come before HIT, and HIT before END.',true);
   else if(CV.r&&MSG[CV.r.id]&&/marks/.test(MSG[CV.r.id].text)) setMsg(CV.r.id,'');
-  cg('cpbf').disabled=!ok||!CV.r.blob; cg('cpbf').title=CV.r&&!CV.r.blob?'Not available for a video this browser could not keep a copy of.':'';
+  cg('cpbf').disabled=!ok;
 }
 // Called by rvDraw (art.html) for every entry: shows the video tools for a clip result, hides them for a picture.
 function clipRvDraw(e,r){
@@ -133,10 +135,19 @@ function clipRvStop(){ clipBf(false); const v=cg('rvvid'); if(v) v.pause(); }
 // the cutout and the timing only; the real cut (edge clean-up, size, shadow) is made by the baker after APPROVE.
 function clipBf(on){
   const v=cg('rvvid'), can=cg('rvcan'); if(!v||!can) return;
+  const stg=cg('rvstage');
   cancelAnimationFrame(CV.raf); if(CV.on){ v.pause(); v.playbackRate=1; } CV.on=false; can.hidden=true; if(cg('cpbf')) cg('cpbf').textContent='ON THE BATTLEFIELD';
+  v.style.filter=''; stg.style.backgroundImage='';
   if(!on){ if(!v.hidden) v.style.opacity=''; return; }
-  const m=clipMarks(CV.r), e=ENTRY[CV.r.id]; if(!m||!CV.r.blob) return;
-  CV.on=true; can.hidden=false; v.style.opacity='0'; cg('cpbf').textContent='BACK TO THE VIDEO';
+  const m=clipMarks(CV.r), e=ENTRY[CV.r.id]; if(!m) return;
+  CV.on=true; cg('cpbf').textContent='BACK TO THE VIDEO';
+  if(!CV.r.blob){   // address only: the video itself is shown through the magenta filter over the background picture
+    v.style.filter='url(#clipkey)'; stg.style.backgroundImage='url('+CLIP_PREVIEW_BG+')'; stg.style.backgroundSize='cover'; stg.style.backgroundPosition='center';
+    v.currentTime=m.first; v.playbackRate=(e.clip&&e.clip.speed)||1; v.play();
+    const loop=()=>{ if(!CV.on) return; if(v.currentTime>=m.last||v.paused||v.ended){ v.currentTime=m.first; v.play(); } CV.raf=requestAnimationFrame(loop); };
+    CV.raf=requestAnimationFrame(loop); return;
+  }
+  can.hidden=false; v.style.opacity='0';
   if(!CV.bg){ CV.bg=new Image(); CV.bg.src=CLIP_PREVIEW_BG; }
   const W=can.width=640, H=can.height=480, g=can.getContext('2d'), off=document.createElement('canvas'), og=off.getContext('2d',{willReadFrequently:true});
   v.currentTime=m.first; v.playbackRate=(e.clip&&e.clip.speed)||1; v.play();

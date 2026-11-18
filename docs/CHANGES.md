@@ -1,3 +1,7 @@
+## clipgen1c (2026-11-17): Art Library: ON THE BATTLEFIELD now works for every clip video
+
+Tom (2026-11-17 18:32): "On the battlefield is disabled even though I approved the image". Fact: the xAI video host does not let a web page keep a copy of the video (the result showed "address only"), and the preview needed a copy to remove the magenta, so the button was switched off. It now works without a copy: the video itself is shown through a colour filter that makes the magenta see-through, over the battle background (`#clipkey` in `engine/art-clips.js`). The button only needs the three marks. Tested in the test browser (`tools/art-library/clip_lib_test.py`, 43 checks pass); not seen on an iPhone yet. The preview has a thin pink edge that the real cut does not have.
+
 ## clipgen1b (2026-11-17): Fix: an approved clip video was not being cut into the game
 
 Tom approved the first real Grok video (clip-rose-strike v1, 18:30). The xAI video service worked. Fact found: APPROVE makes two commits (the file, then the approval record with the marks), and the art-bake Action started on the first one, before the record existed, so it baked nothing. The Action now waits 25 seconds and moves to the newest main before baking, and it can be started by hand for named files (`files` input). No game file changed.

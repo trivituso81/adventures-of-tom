@@ -81,7 +81,11 @@ def page_run(br, name, vp, nocors, video):
             pg.screenshot(path=os.path.join(SHOTS, f'artclip-{name}-battlefield.png'))
             pg.click('#cpbf')
         else:
-            ok(pg.evaluate("()=>document.getElementById('cpbf').disabled"), f'{name}: no battlefield preview for an address-only video')
+            pg.click('#cpbf'); pg.wait_for_timeout(1500)
+            st = pg.evaluate("()=>{ const v=document.getElementById('rvvid'); return {f:v.style.filter, bg:document.getElementById('rvstage').style.backgroundImage, t:v.currentTime, paused:v.paused}; }")
+            ok('clipkey' in st['f'] and 'bgs/' in st['bg'] and .45 <= st['t'] <= 2.65 and not st['paused'], f'{name}: the battlefield preview also plays for an address-only video (magenta filter over the background) {st}')
+            pg.screenshot(path=os.path.join(SHOTS, f'artclip-{name}-battlefield.png'))
+            pg.click('#cpbf')
         pg.screenshot(path=os.path.join(SHOTS, f'artclip-{name}-review.png'))
         pg.click('#rvok'); pg.wait_for_timeout(300); pg.click('#rvok')
         ext = '.json' if nocors else '.mp4'
