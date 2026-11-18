@@ -34,70 +34,80 @@
    "speaker": "Grace",
    "text": "Number two. Deedee made apple muffins. They're for you, so nobody's allowed to have one yet.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[reading aloud] Number two. Deedee made apple muffins. [strict] They're for you, so nobody's allowed to have one yet."
+   "script": "[reading aloud] Number two. [announcing, cheerfull] Deedee made apple muffins. [cheerful] They're for you, [very stern, quick] so [emphasized] nobody's allowed to have one yet.",
+   "takeId": "tmwmbvpffansu"
   },
   {
    "voice": "rose",
    "speaker": "Rose",
    "text": "I licked one. Only the top!",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[cheerful confession] I licked one. [quick, reassuring] Only the TOP!"
+   "script": "[excited confession] I licked one... [quick, excusing] Only the TOP!",
+   "takeId": "tmwmchzpjw2r6"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry. Number two can't wait.",
+   "text": "Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[warm, formal] Thank you for telling me, Rose. That one's yours. [truly apologetic] Grace, I'm so sorry. [urgent] Number two can't WAIT."
+   "script": "[warm] Thank you for telling me, Rose. [deadpan] That one's yours. [dry] Grace, I'm so sorry but [flat, smirkingly] number two [emphasized] can't wait.",
+   "takeId": "tmwmcam92tzll"
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "Number three. Rose licked a muffin.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[flat, writing as she talks, punchline] Number three. Rose licked a muffin."
+   "script": "[sigh, resigned, quick] Number three. [flat, deadpan] Rose licked a muffin.",
+   "takeId": "tmwmcr7g3l1kn"
   },
   {
    "voice": "amy",
    "speaker": "Amy",
-   "text": "Brother! I'm watching you from the window. I've seen people walk faster in ski boots.",
+   "text": "Brother! I'm watching you from the window. I've seen people move faster walking on the sand at Robert Moses.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[loud, teasing] Brother! I'm watching you from the window. [punchline, cheerful] I've seen people walk faster in SKI boots."
+   "script": "[heavy Long Island accent, calling] Brother! [heavy Long Island accent, taunting, teasing] I'm watching you from the window. [heavy Long Island accent, joking] I've seen people move faster walking on the sand at Robert Moses!",
+   "takeId": "tmwmfdhw6ffo6"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "I'm carrying a child and receiving a news report.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[dignified, defending himself] I'm carrying a child and receiving a NEWS report."
+   "script": "[mild disdain] I'm carrying a child and receiving a news report!",
+   "takeId": "tmwmfsx1kkq13"
   },
   {
    "voice": "amy",
    "speaker": "Amy",
-   "text": "I carried both of them up that street with the groceries. Go hug Mom. I'm coming over after my run.",
+   "text": "I carried both of them up that street with the groceries. Go see Mom. I'm coming over after my run.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[bragging, fast] I carried BOTH of them up that street with the groceries. [warm, bossy] Go hug Mom. I'm coming over after my run."
+   "script": "[heavy Long Island accent, comparing, smirking, quick] I carried BOTH of them up that street [heavy Long Island accent, emphasized] with the groceries! [heavy Long Island accent, busy] Go see Mom, [heavy Long Island accent, informing] I'm coming over after my run.",
+   "takeId": "tmwmh4h3k1u63"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Your mother says I'm slow.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[mock wounded] Your mother says I'm slow."
+   "script": "[under his breath, annoyed] Your mother says I'm slow.",
+   "takeId": "tmwmhc8fuse8j"
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "You are slow. I've been on number four since the mailbox.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[flat, sassy] You ARE slow. [punchline, level] I've been on number four since the mailbox."
+   "script": "[quick, flat] You [emphasized]ARE slow. [deadpan] I've been on number four since the mailbox!",
+   "takeId": "tmwmhbcuthu8d"
   },
   {
    "voice": "ellie",
    "speaker": "Aunt Ellie",
    "text": "Tom. They gave you a seat that turns into a bed, and you still got off that plane wrinkled.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[cool, elegant] Tom. [measured, faintly disappointed] They gave you a seat that turns into a BED, [punchline, level] and you still got off that plane wrinkled."
+   "script": "[heavy Long Island accent, cool, elegant] Tom. [heavy Long Island accent, measured, faintly disappointed] They gave you a seat that turns into a BED, [heavy Long Island accent, punchline, level] and you still got off that plane wrinkled.",
+   "takeId": "tmwmeusf7rlak"
   },
   {
    "voice": "tom",

@@ -299,6 +299,16 @@ const RETAKE=fs.existsSync('tools/voice-library/retake.json')?JSON.parse(fs.read
   order.forEach((o,k)=>{ o.it.o=k; const key=keyOf(o.it); if(seen.has(key)){ o.it.dup=1; nd++; } else seen.add(key); if(o.r[0]===999) any++; });
   console.log('story order: total',items.length,'| listed after dedup',items.length-nd,'| duplicates dropped',nd,'| no chapter (Anywhere)',any); }
 items.forEach((it,i)=>it.i=i);
+// The line before (calib2; Tom 2026-11-18: "humor relies on how the characters play off each other"): docs/line-gaps.tsv lists the story lines in
+// play order (ch, scene, speaker, after, text). Each listed dialogue line gets it.pv = [speaker, words, pause after it, index of that line here or -1]
+// for the line spoken just before it in the same scene, or it.pv = 0 when it opens its scene. The Voice Library shows it above the script.
+{ const G='docs/line-gaps.tsv'; let n=0, miss=0;
+  if(fs.existsSync(G)){ const by={}; for(const it of items) if(it.t==='d'){ const k=(it.sp||'')+'|'+norm(it.x); if(!(k in by)) by[k]=it; }
+    const rows=fs.readFileSync(G,'utf8').split('\n').slice(1).filter(r=>r.trim()).map(r=>r.split('\t'));
+    rows.forEach((r,j)=>{ const it=by[r[2]+'|'+norm(r[4])]; if(!it){ miss++; return; } if(it.pv!==undefined) return;   // a line said twice keeps its first place
+      const p=j&&rows[j-1][1]===r[1]&&rows[j-1][0]===r[0]?rows[j-1]:null;
+      if(!p){ it.pv=0; n++; return; } const pi=by[p[2]+'|'+norm(p[4])]; it.pv=[p[2],p[4],p[3],pi?pi.i:-1]; n++; }); }
+  console.log('line before (docs/line-gaps.tsv):',n,'lines'+(miss?', '+miss+' rows matched no Library line':'')); }
 // Rewritten after the bake (tools/voice-library/rewritten.json): the Library must show the new written direction for these lines,
 // not the direction read back from Tom's ElevenLabs history (which is the one the old clip was made with).
 { const RW=fs.existsSync('tools/voice-library/rewritten.json')?new Set(JSON.parse(fs.readFileSync('tools/voice-library/rewritten.json','utf8')).keys):new Set();

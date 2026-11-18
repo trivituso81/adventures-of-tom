@@ -56,6 +56,8 @@ button.link{background:none;padding:4px 0;min-height:0;color:#ffd34d;font-weight
 .tag.mv.combo{color:#ffb3e0;border-color:#9a4a7e;background:#341a2c}
 .play{flex:none;width:44px;height:44px;border-radius:50%;background:#3a3566;font-size:15px;padding:0;min-height:0}
 .play.on{background:#ffd34d;color:#241b00}
+.prevline{display:flex;gap:8px;align-items:center;margin-top:6px;padding:6px 8px;border-left:3px solid #5a4fa8;background:#14122c;border-radius:0 8px 8px 0;font-size:13px;line-height:1.35;color:#b9b3e6}
+.prevline b{color:#d9d4ff}.prevline .play{width:34px;height:34px;font-size:11px}.prevline .w{flex:1;min-width:0}
 .edit{margin-top:10px;display:flex;flex-direction:column;gap:8px}
 .acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .takes{display:flex;flex-direction:column;gap:6px}
@@ -121,9 +123,10 @@ header{padding:10px 28px}
     <div class="tools">
       <button class="small" id="exp">Export pending clips</button>
       <button class="small" id="expall">Export all phone clips</button>
+      <button class="small" id="exptrail">Export take history</button>
       <button class="small danger" id="clr">Remove all phone clips</button>
     </div>
-    <p class="hint">Phone clips are kept in this app only. Clearing the app's website data removes them. Export pending clips sends only what you recorded since your last upload, so Claude can build it into the game for good.</p>
+    <p class="hint">Phone clips are kept in this app only. Clearing the app's website data removes them. Export pending clips sends only what you recorded since your last upload, so Claude can build it into the game for good. Export take history sends the words of every take saved here (the directions you tried, kept or not), with no audio, so Claude can learn from the ones you threw away.</p>
   </div>
 </main>
 <div class="bar" id="bar" hidden></div>
@@ -248,7 +251,23 @@ async function addTake(it,mp3,label,script){
   const t={id:'t'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),line:lk(it),mp3,label,script,t:Date.now()};
   await tx(TDB,'takes',s=>s.put(t)); TAKES.set(t.id,slim(t)); await useTake(it,t); return slim(t);
 }
-async function delTake(id){ await tx(TDB,'takes',s=>s.delete(id)); TAKES.delete(id); }
+// Deleting a take keeps its words (never its audio): the script he tried and threw away is what the take history is for.
+let DROPPED=[]; try{ DROPPED=JSON.parse(localStorage.getItem('aot-vl-dropped')||'[]')||[]; }catch(e){}
+async function delTake(id){ const t=TAKES.get(id); if(t&&t.script&&t.script!=='(recording)'){ DROPPED.push({id:t.id,line:t.line,label:t.label,script:t.script,t:t.t}); if(DROPPED.length>4000) DROPPED=DROPPED.slice(-4000); try{ localStorage.setItem('aot-vl-dropped',JSON.stringify(DROPPED)); }catch(e){} }
+  await tx(TDB,'takes',s=>s.delete(id)); TAKES.delete(id); }
+// Take history (calib2): every take still saved for the given lines (all lines when keys is null), words only, oldest first.
+// kept = the take the game plays now on this device. deleted = a take he removed (its script was kept, see delTake).
+function trailRows(keys){
+  const inUse=new Set([...LOCAL.values()].map(r=>r.takeId).filter(Boolean)), out=[];
+  for(const t of TAKES.values()) if(!keys||keys.has(t.line)) out.push({line:t.line,takeId:t.id,t:t.t,label:t.label,script:t.script,kept:inUse.has(t.id)});
+  for(const t of DROPPED) if(!keys||keys.has(t.line)) out.push({line:t.line,takeId:t.id,t:t.t,label:t.label,script:t.script,kept:false,deleted:true});
+  return out.sort((a,b)=>a.line<b.line?-1:a.line>b.line?1:a.t-b.t);
+}
+async function exportTrail(){
+  const trail=trailRows(null); if(!trail.length) return toast('No takes are saved on this device yet.');
+  const blob=new Blob([JSON.stringify({made:new Date().toISOString(),kind:'take-history',lines:new Set(trail.map(t=>t.line)).size,trail})],{type:'application/json'});
+  if(await sendBlob(blob,'take-history.json','Take history (words only)')) toast('Take history: '+trail.length+' takes, words only. Send the file to Claude.');
+}
 
 // ---------- the clip the game plays now ----------
 // Clip files are plain scripts that fill VOICE_CLIPS / DIALOG_CLIPS. Each is loaded once, on first play, into its own table.
@@ -286,6 +305,18 @@ function playB64(b64,btn){
   const a=AUD; a.muted=false; a.src='data:audio/mpeg;base64,'+b64; playing={a,btn}; btn&&btn.classList.add('on');
   a.onended=()=>{ if(playing&&playing.a===a){ btn&&btn.classList.remove('on'); playing=null; } };
   a.play().catch(()=>{ btn&&btn.classList.remove('on'); toast('Could not play that. Turn the ring switch on and try again.'); });
+}
+// The clip the game plays now for a line (phone take first, else built in), or null.
+async function clipOf(it){ const loc=localFor(it); if(loc) return await mp3Of(LDB,'clips',loc.id); if(it.f<0) return null; try{ return await builtIn(it); }catch(e){ return null; } }
+// The line before, the game's own pause (DA_GAP in engine/dialog-auto.js: snap, normal, beat), then this line. A second tap stops it.
+const GAP_S={snap:.15,normal:.65,beat:1.25};
+async function playBoth(it,btn){
+  if(playing&&playing.btn===btn) return stopPlay();
+  const pi=IDX.items[it.pv[3]]; stopPlay(); btn.classList.add('on'); const me={a:AUD,btn}; playing=me;
+  const [a,b]=[await clipOf(pi),await clipOf(it)]; if(playing!==me) return;
+  if(!a||!b){ stopPlay(); return toast('One of the two lines has no clip saved.'); }
+  const run=(b64,then)=>{ AUD.muted=false; AUD.src='data:audio/mpeg;base64,'+b64; AUD.onended=()=>{ if(playing===me) then(); }; AUD.play().catch(()=>{ if(playing===me) stopPlay(); toast('Could not play that. Turn the ring switch on and try again.'); }); };
+  run(a,()=>setTimeout(()=>{ if(playing===me) run(b,()=>stopPlay()); },(GAP_S[it.pv[2]]||GAP_S.normal)*1000));
 }
 async function playNow(it,btn){
   const loc=localFor(it);
@@ -463,9 +494,14 @@ function rowHtml(it){
   h+='<div class="body"><div class="meta"><b>'+esc(whoName(it))+'</b>'+(it.t==='b'?(it.mv?mvTags(it):'<span class="tag">'+esc(it.k[0])+(it.k.length>1?' +'+(it.k.length-1):'')+'</span>'):'')+
      (it.c.length?'<span class="tag">'+it.c.map(n=>n===21?'Bonus':'Ch '+n).join(', ')+'</span>':'')+(it.w&&it.t==='d'?'<span>'+esc(it.w)+'</span>':'')+
      (loc?'<span class="tag phone">phone take</span>':'')+(it.f<0&&!loc?'<span class="tag none">'+(it.nv?'no clip · no voice yet':'no clip')+'</span>':'')+'</div>';
+  // The line spoken just before this one in its scene (index pv, from docs/line-gaps.tsv), so a take is tuned against what it answers.
+  if(it.pv){ const pi=IDX.items[it.pv[3]], has=pi&&(localFor(pi)||pi.f>=0);
+    h+='<div class="prevline">'+(has?'<button class="play" data-act="playprev" aria-label="Play the line before">&#9654;</button>':'')+'<span class="w">Just before, <b>'+esc(it.pv[0])+'</b>: '+esc(it.pv[1])+(has?'':' <i>(no clip yet)</i>')+'</span></div>'; }
+  else if(it.pv===0) h+='<div class="prevline"><span class="w">This line opens its scene.</span></div>';
   // The text box IS the line: what ElevenLabs reads (or Nara's sound description). Edits save as you type and drive every new take.
   h+='<textarea class="line" data-act="script" rows="1" spellcheck="false">'+esc(scriptOf(it))+'</textarea>';
   h+='<div class="rowacts"><button class="link" data-act="open">'+(open?'Close':'Takes and record &#8250;')+'</button>'+
+     (it.pv&&IDX.items[it.pv[3]]&&(localFor(IDX.items[it.pv[3]])||IDX.items[it.pv[3]].f>=0)&&(loc||it.f>=0)?'<button class="link" data-act="playboth">&#9654; Play with the line before</button>':'')+
      (SCRIPTS[key]!=null?'<span class="hint">edited</span><button class="link" data-act="resetscript">Undo edits</button>':'')+
      (BUSY[key]&&!open?'<span class="hint">'+esc(BUSY[key])+'</span>':'')+(ERR[key]&&!open?'<span class="err">'+esc(ERR[key])+'</span>':'')+'</div>';
   if(open){
@@ -618,6 +654,7 @@ document.addEventListener('click',async e=>{
   if(t.id==='selmode'){ visible().forEach(it=>SEL.add(lk(it))); renderList(); renderBar(); return; }
   if(t.id==='exp') return exportClips(true);
   if(t.id==='expall') return exportClips(false);
+  if(t.id==='exptrail') return exportTrail();
   if(t.id==='clr'){ if(BULK) return; if(confirm('Remove every clip made on this device (here and on the Bake page)? The game goes back to the voices built into it. Your takes stay in the library.')){ await tx(LDB,'clips',s=>s.clear()).catch(()=>{}); LOCAL.clear(); renderAll(); toast('Removed.'); } return; }
   if(t.classList.contains('chip')) return toggle(t.dataset.g,t.dataset.v);
   const act=t.dataset.act;
@@ -630,6 +667,8 @@ document.addEventListener('click',async e=>{
   const key=lk(it);
   if(act==='open'){ const prev=openKey&&itemByKey(openKey); openKey=openKey===key?null:key; if(prev) repaint(prev); if(openKey) repaint(it); return; }
   if(act==='play') return playNow(it,t);
+  if(act==='playprev'){ const pi=it.pv&&IDX.items[it.pv[3]]; if(pi) return playNow(pi,t); return; }
+  if(act==='playboth') return playBoth(it,t);
   if(act==='playbuiltin'){ t.textContent='...'; try{ const b=await builtIn(it); t.innerHTML='&#9654;'; b?playB64(b,t):toast('No built-in clip.'); }catch(err){ t.innerHTML='&#9654;'; toast(err.message); } return; }
   if(act==='playlocal'){ const l=localFor(it); if(l) playB64(await mp3Of(LDB,'clips',l.id),t); return; }
   if(act==='playtake'){ const tk=TAKES.get(t.dataset.id); if(tk) playB64(await mp3Of(TDB,'takes',tk.id),t); return; }
@@ -675,7 +714,9 @@ async function exportClips(pending){
   // Read the clips one at a time into a growing Blob, so the whole export is never one giant string in memory.
   let blob=new Blob(['{"made":'+JSON.stringify(new Date().toISOString())+',"clips":['],{type:'application/json'}), n=0;
   await eachBatch(LDB,'clips',20,rows=>{ rows=rows.filter(r=>!RETIRED.has(r.id)&&(!want||want.has(r.id))); blob=new Blob([blob,...rows.map(r=>(n++?',':'')+JSON.stringify(r))],{type:'application/json'}); });
-  blob=new Blob([blob,']}'],{type:'application/json'});
+  // The take history of the exported lines rides along (words only): every script he tried for them, kept or not.
+  let trail=[]; try{ const keys=new Set(); for(const it of IDX.items) if(kinds(it).some(k=>!want||want.has(rowId(it,k)))&&localFor(it)) keys.add(lk(it)); trail=trailRows(keys); }catch(e){}
+  blob=new Blob([blob,'],"trail":'+JSON.stringify(trail)+'}'],{type:'application/json'});
   const done=await sendBlob(blob,pending?'local-clips-pending.json':'local-clips-export.json',pending?'Pending voice clips':'Phone voice clips');
   if(done&&pending){ hashes.forEach(h=>SENT.add(h)); saveSent(); renderFilters(); if(F.show==='pending'||F.show==='sent') renderAll(); }
 }
@@ -714,7 +755,7 @@ async function loadPhone(force){
   renderAll();
   loadMerged().then(hashPhone);
 }
-window.__VL={get IDX(){return IDX;},F,SEL,LOCAL,TAKES,lk,visible,newTake,useBuiltIn,builtIn,itemByKey};
+window.__VL={get IDX(){return IDX;},F,SEL,LOCAL,TAKES,lk,visible,newTake,useBuiltIn,builtIn,itemByKey,trailRows,addTake,delTake};
 </script>
 </body>
 </html>
