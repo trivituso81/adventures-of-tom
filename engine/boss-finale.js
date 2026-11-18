@@ -133,6 +133,7 @@ SCENE_OPS.finale=o=>bossFinaleStep(o.finale);
 // Beaten bosses stay beaten (report r-20261114-102058-62ho): a boss whose ending is 'stay' returns to the map in its last painted
 // frame at the spot it ended on (The Big One floats in the pond), cannot be fought and ignores A; a leaving boss stays gone.
 function bossSettle(n) {
+  if(n.monster==='bigone') return false;   // chapter 1 (rebuilt 2026-11-17): the Big One sinks in the BOO scene and stays gone; the old painted ending is no longer played
   const sp=BOSS_FINALE[n.monster]; if(!sp||sp.end!=='stay'||typeof FOE_END==='undefined'||!FOE_END[n.monster]) return false;
   const last=sp.seq[sp.seq.length-1],to=sp.path&&sp.path.to,fromX=n.home?n.home.x:n.x;
   if(to) { n.x=to[0]; n.y=to[1]; } else if(n.home) { n.x=n.home.x; n.y=n.home.y; }

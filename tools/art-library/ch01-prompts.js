@@ -61,6 +61,22 @@ ${extra}
 Paint it like attachment 1: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text.`;
 }
 
+// 2026-11-17 rebuild stand-ins (docs/CHANGES.md ch1rebuild1): a close square scene that may hold the people named in the description.
+function sceneWith(what, ref) {
+  return `IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or several states.
+
+ATTACHED IMAGE
+1) ${ref || HOUSE}
+
+PAINT THIS ONE PICTURE
+${what} It is a close-up picture that fills the whole square.
+
+${ART}
+- ${LIGHT}
+- Paint only the people and things named above. Faces look like the attached approved character paintings: oversized head, slim body.
+- No words, letters or numbers anywhere unless the description above says to paint them.`;
+}
+
 const entries = [
   { id: 'ch1-doorframe', tab: 'Props', title: 'Chapter 1 close-up: the kitchen door frame with pencil height marks (one square painting)', ar: '1:1', refs: ['art/grands.webp'], group: 'Chapter 1',
     prompt: plate(`The inside of Deedee's kitchen door frame, painted white wood, close up, seen straight on. A painted tape-measure ruler with inch numbers runs up the left side of the frame. Family height marks are drawn on the frame in RED MARKER, a short line for each measuring, with the name and the age written by hand in the same red marker, right up against the ruler (for example GRACE 6, ROSE 4). Ages only: no calendar years anywhere. The marks are unevenly spaced, the way a real family does it, not a neat grid, and the handwriting is a little wobbly and slanted. ROSE has four marks at ages 3, 4, 5 and 6 (low on the frame; the ROSE 6 mark is the highest ROSE mark and is about as high as a six year old). GRACE has marks at ages 5, 6, 7 and 8, and the GRACE 5 mark is LOWER on the frame than the ROSE 6 mark. Near the top of Grace's marks are FOUR OR FIVE separate GRACE 9 marks bunched very close together, a few millimetres apart, because she was measured again and again today. The GRACE 9 marks are the highest marks on the frame, nothing is above them. Real painted wood grain, the paint chipped a little at the edges, warm kitchen light on the frame. No people. Nothing else on the wall.`) },
@@ -116,6 +132,30 @@ ${ART}
 - ${LIGHT}
 - The gold fillings must be clearly visible in the grin.`,
   },
+
+  // ---- Rebuild stand-ins (Tom 2026-11-17: "Put the stand-ins on the Art Library list so I can replace them later."). The game draws a code stand-in for each until a picture is approved. ----
+  { id: 'ch1-muffin-pan', tab: 'Props', title: 'Chapter 1: Deedee\'s good twelve-cup muffin pan holding twelve apple muffins with cinnamon topping (one object)', ar: '1:1', refs: ['art/grands.webp'], group: 'Chapter 1',
+    prompt: single('A heavy, well-loved silver twelve-cup muffin pan in a 4 by 3 grid, seen from a slightly raised front angle. Every cup holds one golden apple muffin with a cinnamon-sugar topping and a paper liner. A little steam rises. The pan has a few old baked-on stains and a small worn dent on one corner, the look of a pan used for thirty years.') },
+  { id: 'ch1-muffin-pan-empty', tab: 'Props', title: 'Chapter 1: the same twelve-cup muffin pan, empty, with a little pond mud on it (one object)', ar: '1:1', refs: ['art/grands.webp'], group: 'Chapter 1',
+    prompt: single('The same heavy silver twelve-cup muffin pan in a 4 by 3 grid, seen from a slightly raised front angle, completely empty: twelve clean empty cups. A few smears of pond mud on the rim and a small green water weed stuck to one corner. The same worn dent on one corner and old baked-on stains.') },
+  { id: 'ch1-muffin-papers', tab: 'Props', title: 'Chapter 1: nine crumpled paper muffin liners scattered on muddy ground (one object group)', ar: '1:1', refs: ['art/hollow.webp'], group: 'Chapter 1',
+    prompt: single('Nine crumpled paper muffin liners, cream and pale brown, scattered loosely in a small group, a few crumbs in them and a little mud on some. Exactly nine liners, easy to count, none overlapping.') },
+  { id: 'ch1-mudling-muffins', tab: 'Enemies', title: 'Chapter 1: a Mudling holding muffins in both hands (one creature, large)', ar: '1:1', refs: ['art/raw/enemies/enemy-mudling-v2.png'], group: 'Chapter 1',
+    prompt: sceneWith('The approved Mudling from attachment 1, the same creature, shape, colors and painted finish, standing facing the viewer on a flat solid magenta #FF00FF background edge to edge, holding three apple muffins in each hand, a muffin in its mouth with the cheeks full, looking pleased with itself. No scenery. Exactly one creature.', 'The approved painting of the Mudling, a small ball of living mud from Grump Hollow in "The Adventures of Tom". Keep the same creature, shape, colors and painted finish.') },
+  { id: 'ch1-bigone-green-pan', tab: 'Enemies', title: 'The Big One bright green, a muffin pan on its head like a crown, no lure: sheet, 6 frames facing right (chapter 1 rebuild)', ar: '3:2', refs: ['art/raw/enemies/enemy-bigone-v2.png'], group: 'Chapter 1',
+    prompt: bigOneSheet('Poses 1 to 3: sitting half out of the water, grumpy, then proud, then roaring. Poses 4 to 6: sulking low in the shallows, startled with the pan flying off its head, laughing with its mouth wide open.', 'Change from attachment 1: the fish is a BRIGHT GREEN, the size of a cab, and a silver twelve-cup muffin pan sits on its head like a crown in poses 1 to 4 and 6. A small gold coin glints in its lip. No fishing lure, no tin.') },
+  { id: 'ch1-grace-list', tab: 'Props', title: 'Chapter 1 close-up: Grace\'s numbered list on notebook paper, held in two small hands (one square painting)', ar: '1:1', refs: ['art/grands.webp'], group: 'Chapter 1',
+    prompt: sceneWith('Two small child hands hold up a sheet of lined notebook paper with a neat numbered list in pencil: the numbers 1 to 4 down the left, each followed by a short line of scribbled pencil writing that is not readable, number 3 crossed out and rewritten. A pencil is tucked behind a finger. The paper fills most of the picture. No faces.') },
+  { id: 'ch1-amy-window', tab: 'Props', title: 'Chapter 1: Amy at her house window holding an iced coffee, waving (one square painting)', ar: '1:1', refs: ['art/grands.webp'], group: 'Chapter 1',
+    prompt: sceneWith('A cozy suburban house window with white trim and flower boxes, seen from the street. Behind the glass, Amy, a woman with a warm smile, shoulder-length hair and a running jacket, holds a tall iced coffee in one hand and waves with the other. Soft curtains frame her.') },
+  { id: 'ch1-ellie-door', tab: 'Props', title: 'Chapter 1: Aunt Ellie\'s front door open, a spotless white hall behind it (one square painting)', ar: '1:1', refs: ['art/grands.webp'], group: 'Chapter 1',
+    prompt: sceneWith('An elegant front door standing open on Aunt Ellie\'s house. Behind it a spotless white hallway where everything is in its place, a runner rug and a polished side table with one vase. Aunt Ellie, a tall woman in a pressed cardigan with a cool, composed look and one raised eyebrow, stands in the doorway.') },
+  { id: 'ch1-rose-shoulders', tab: 'Characters', title: 'Chapter 1: Rose sitting on Tom\'s shoulders, hands on his ears (one full-body pose)', ar: '2:3', refs: ['art/raw/characters/boppy-hero-v2.png'], group: 'Chapter 1',
+    prompt: sceneWith('Tom, a tall man with a shaved head and a dry calm look, stands facing the viewer with Rose, a six year old girl, sitting on his shoulders, both small hands holding his ears, grinning. Flat solid magenta #FF00FF background edge to edge, nothing else in the picture.') },
+  { id: 'ch1-cab-pulls-away', tab: 'Props', title: 'Chapter 1: Cab 7 pulling away down a Long Island street, Tom waving out the back window (one square painting)', ar: '1:1', refs: ['art/town.webp'], group: 'Chapter 1',
+    prompt: sceneWith('A yellow taxi with the number 7 on its roof sign pulls away from the viewer down a sunny Long Island street, seen from behind. A man\'s arm and shaved head show in the back window, waving. Painted storefronts and trees line the street.', 'The finished painting of the Square from "The Adventures of Tom", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color.') },
+  { id: 'ch1-phone-on-seat', tab: 'Props', title: 'Chapter 1 close-up: a phone lighting up on a taxi back seat (one square painting)', ar: '1:1', refs: ['art/grands.webp'], group: 'Chapter 1',
+    prompt: plate('A smartphone lying face up on a worn taxi back seat, its screen lit and glowing with a new message that is not readable. A jacket sleeve rests beside it. A purple-grey haze shows through the window beyond.') },
 ];
 
 module.exports = { entries };

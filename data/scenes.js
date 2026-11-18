@@ -69,62 +69,93 @@ SCENES.opening=()=>{
   ];
 };
 
+// A walk route along the map from where the actor stands now to (x,y) (for walks that start wherever Tom happens to be).
+const routeTo=(a,x,y)=>()=>{ const n=sceneActor(a); return n?findPath(currentMap,n,{x,y}).map(p=>[p.x,p.y]):[]; };
 // ======================================================================================================
-// CHAPTER 1: The Soup Dumpling Protocol (build plan C1). Long Island only; no flights.
-// Flags, in story order: opening-done, ch1-goal, ch1-theft (Deedee joins), ch1-t1, ch1-t2, ch1-tuts (the three tutorial
-// fights are done; Grump Hollow's monsters wake up), ch1-pond (the Big One surfaces), ch1-crown (it wears the tin),
-// battle:bigone ('win'), ch1-tin (tin back), ch1-done. Tombos: tombo:grace1 and tombo:rose1 (opening), tombo:deedee1 (theft).
+// CHAPTER 1 (rebuilt 2026-11-17 from claude/story-ch01-draft2.md, locked by Tom; every line is word for word from that file).
+// Long Island only; no flights. Flags, in story order: opening-done, ch1-goal (scene 1, the Square), ch1-amy (scene 2, Rivituso Row),
+// ch1-ellie (optional scene 2b), ch1-theft (scene 3, Deedee joins), ch1-t1 (scene 4, one fight of three Mudlings), ch1-tuts (Grump Hollow's
+// other monsters wake up), ch1-spot (scene 5), ch1-pond (scene 6, the Big One surfaces), ch1-crown (it wears the pan), battle:bigone ('win'),
+// ch1-tin (the BOO scene, pan back), ch1-home (scene 7), ch1-job (scene 8a), ch1-done (scene 8b). Tombos: tombo:rose1 and tombo:grace1 (opening),
+// tombo:deedee1 (when Deedee joins, scene 3).
 // ======================================================================================================
-const CH1_TIN_LINE='Take the tin home to Rivituso Row.';
+const CH1_TIN_LINE='Take the pan home to Rivituso Row.';
 
-// 1. Right after the opening: why we are going to Deedee's.
+// 1. The Square, right after the opening (the squishy beat stays exactly as built): Grace's list.
 SCENES.ch1Goal=[
   {flag:'ch1-goal'},
-  {talk:'Grace',lines:['Tata! Deedee made rhubarb crisp for you. It\'s cooling RIGHT NOW.']},
-  {talk:'Rose',lines:['I already licked the spoon. Don\'t tell.']},
-  {talk:'Tom',lines:['Then we had better hurry. Before somebody licks the rest.']},
+  {wait:.6},   // Grace unfolds a piece of notebook paper (no frame for it yet: Art Library list)
+  {talk:'Grace',lines:["Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One again."]},
+  {talk:'Rose',lines:["It's bigger than a BUS! It ate a boat!"]},
+  {talk:'Grace',lines:["It did not eat a boat. Nobody's ever seen it but Boppy, and he's been saying it for twenty years."]},
+  {talk:'Tom',lines:["Twenty years, one witness. That's a strong number one. What's number two?"]},
+  {talk:'Grace',lines:["Number two. Deedee made apple muffins. They're for you, so nobody's allowed to have one yet."]},
+  {talk:'Rose',lines:["I licked one. Only the top!"]},
+  {talk:'Tom',lines:["Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry. Number two can't wait."]},
+  {face:'tom',dir:'down'}, {wait:.8},   // Rose turns Tom by the ears toward Rivituso Row (no ear frame: Tom just turns)
+  {talk:'Grace',lines:["Number three. Rose licked a muffin."]},
   {toast:'New Tombos: Squishy Delivery (Grace) and Double-Decker Airplane (Rose). In battle, find them inside ▶︎ HEAL (Squishy Delivery) and ▲ ATTACK (Double-Decker Airplane).',time:4},
   {toast:"Goal: Deedee and Boppy's house. Rivituso Row, south of the Square.",time:4.5},
   {call:()=>{ introKeepZoom=false; }}, {zoom:1,time:.8}   // the one zoom out of the intro, after the last word
 ];
 
-// 2. Deedee and Boppy's house: the greeting, Tom's loaf, and the theft. Deedee joins.
+// 2. Rivituso Row, passing Amy's house. Amy watches from her window, unseen: her two texts are text boxes.
+SCENES.ch1Amy=[
+  {flag:'ch1-amy'},
+  {call:()=>sfx.ding()},
+  {talk:'Amy',lines:["Brother! I'm watching you from the window. I've seen people walk faster in ski boots."]},
+  {talk:'Tom',lines:["I'm carrying a child and receiving a news report."]},
+  {call:()=>sfx.ding()},
+  {talk:'Amy',lines:["I carried both of them up that street with the groceries. Go hug Mom. I'm coming over after my run."]},
+  {talk:'Tom',lines:["Your mother says I'm slow."]},
+  {talk:'Grace',lines:["You are slow. I've been on number four since the mailbox."]}
+];
+
+// 2b. Optional: Aunt Ellie's door.
+SCENES.ch1Ellie=[
+  {flag:'ch1-ellie'},
+  {walk:'tom',to:routeTo('tom',6,19),speed:.25}, {face:'tom',dir:'up'},
+  {place:'grace',at:[7,19],dir:'up'}, {place:'rose',at:[5,19],dir:'up'},
+  {spawn:{name:'Aunt Ellie',look:'oolong',sheet:'ellie',kin:true,at:[7,18],dir:'down'}},
+  {sfx:'doorIn'}, {wait:.4},
+  {talk:'Aunt Ellie',lines:["Tom. They gave you a seat that turns into a bed, and you still got off that plane wrinkled."]},
+  {talk:'Tom',lines:["Hi, Aunt Ellie. It's a travel wrinkle. It's supposed to fall out by dinner."]},
+  {talk:'Aunt Ellie',lines:["Then I'll look at you again at dinner. Come in. Rose, darling, what is that on your hands?"]},
+  {talk:'Rose',lines:["Cinnamon! From Deedee's muffin!"]},
+  {talk:'Aunt Ellie',lines:["Then you'll stay up there, please. Your uncle wipes clean. My chairs don't."]},
+  {talk:'Grace',lines:["Aunt Ellie, I'm reading Tata everything he missed. You're number four."]},
+  {talk:'Aunt Ellie',lines:["Am I? What did I do?"]},
+  {talk:'Grace',lines:["You got new curtains."]},
+  {talk:'Aunt Ellie',lines:["I did. And what's number three?"]},
+  {talk:'Grace',lines:["Rose licked a muffin."]},
+  {talk:'Aunt Ellie',lines:["Then the curtains are three, Grace. Fix your list. I'm not coming in behind a licked muffin."]},
+  {wait:.9},   // Grace sighs and erases
+  {talk:'Rose',lines:["Aunt Ellie, did you miss Tata?"]},
+  {talk:'Aunt Ellie',lines:["Fine. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind."]},
+  {sfx:'doorOut'}, {despawn:'Aunt Ellie'}
+];
+
+// 3. Deedee's kitchen: twelve muffins, Boppy's bread story, and the mud ball. Deedee joins.
 SCENES.ch1Theft=[
   {flag:'ch1-theft'},
-  {place:'Deedee',at:[7,9],dir:'down'}, {place:'Boppy',at:[12,4],dir:'right'},   // report r-20261114-100519-wlbn: Boppy is at the back of the house, facing right, busy elsewhere, until his line
+  {place:'Deedee',at:[7,9],dir:'down'}, {place:'Boppy',at:[13,10],dir:'up'},   // Boppy sits at the dining table with an empty plate, his back to the door
+  {prop:'muffinpan',kind:'muffinpan',set:{map:'grands',x:3.1,y:7.1}},   // twelve muffins on the baking island (stand-in)
   {walk:'tom',to:[[8,10]],speed:.25}, {face:'tom',dir:'up'},
   {place:'grace',at:[9,10],dir:'up'}, {place:'rose',at:[7,10],dir:'up'},
-  {hearts:'Deedee'},
-  {talk:'Deedee',lines:["My favorite son!",'And my girls! Come here, come here.'],voice:[['deedee','greet',0,"My favorite son!"]]},
-  {trace:'deedee-hug'},
-  {talk:'Grace',lines:['Tata, look at the door. Deedee measured me two times since you left.']},
-  {ch1Reveal:'doorframe'},
-  {talk:'Rose',lines:['I got one too. Mine\'s the low one.']},
-  {wait:1.2},
-  {talk:'Deedee',lines:['Tom you must be starving! Sit. The crisp needs ten minutes on the counter.']},
-  {talk:'Deedee',lines:['Where are my reading glasses? I had them one second ago. I need to read the timer.']},
-  {talk:'Grace',lines:['Deedee. They\'re on your head.']},
-  {talk:'Deedee',lines:['So they are. Not one word to Boppy.']},
-  {talk:'Tom',lines:['I brought you a sourdough loaf. Baked it yesterday. It flew here on my lap.']},
-  {talk:'Deedee',lines:['Your bread and my rhubarb crisp. Now THAT is a meal.']},
-  {talk:'Deedee',lines:['A sliver for me. Just a sliver. Sourdough gives me gas.']},
-  {talk:'Tom',lines:['Mom, EVERYTHING gives you gas.']},
-  {talk:'Deedee',lines:['And I eat it anyway. That\'s love, Tom.']},
-  {flag:'tombo:deedee1'},
-  {walk:'Boppy',to:[[12,5],[12,6],[12,7],[11,7],[10,8]],speed:.3}, {face:'Boppy',dir:'down'},   // he walks over to his usual spot, then speaks
-  {talk:'Boppy',lines:["Tom! Good. I'm not feeling good. It's the stomach."],voice:[['boppy','greet',0,"Tom! Good. I'm not feeling good. It's the stomach."]]},
-  {sfx:'doorIn'}, {call:()=>storyPosesLoad('deedee')},
+  {talk:'Deedee',lines:["There he is! Come here. Let me look at you. I missed that face. Now sit, you're having a muffin."]},
+  {talk:'Tom',lines:["Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since we flew over Kansas."]},
+  {talk:'Deedee',lines:["Twelve of them, and all twelve are still there. I've been standing between that pan and your father since six this morning."]},
+  {talk:'Boppy',lines:["In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat..."]},
+  {ch1Reveal:'doorframe'},   // Tom sets his bag down by the pantry door frame and looks at two new pencil marks (the close-up is the silent action)
+  {wait:.8},
+  {sfx:'bonk'}, {sfx:'doorIn'}, {call:()=>storyPosesLoad('deedee')},
   {spawn:{name:'Big Mudling',monster:'mudling',mscale:1.34,at:[8,12],dir:'up'}},
-  // The painted heist frames (mh_*, data/mudling-heist.js) give the blob its acting: ooze in, spot the pie, wind up, charge, shove, squeeze through,
-  // wobble, reach, grab, hug, side-eye, scurry out, giggle, sneak out. The frames already hold the tin, so the game's own tin prop is not used.
+  // The painted heist frames (mh_*, data/mudling-heist.js) give the mud ball its acting. They already hold a pie tin: the twelve-cup pan is a stand-in until new art is approved.
   {pose:'Big Mudling',f:['mh_ooze_a','mh_ooze_b'],fps:5,dir:'left'},
   {walk:'Big Mudling',to:[[8,11]],speed:.4,onStep:()=>sfx.splat()},
   {pose:'Big Mudling',f:'mh_spot',dir:'left'},
   {sfx:'look'}, {wait:.5},
   {pose:'Big Mudling',f:'mh_windup',dir:'left'}, {wait:.3},
-  // The shove (Tom, 2026-10-30): the blob charges up the middle and bowls Tom, Grace and Rose over (battle hurt, then lying KO frames),
-  // Deedee hops out of its way, and it squelches on to the counter. Nobody is overlapped: the three land clear of its path (the diagonal
-  // from the corridor to the island) and it never walks through anyone.
   {cam:[8,10]},
   {all:[
     {seq:[{pose:'Big Mudling',f:'mh_charge',dir:'left'},
@@ -143,16 +174,11 @@ SCENES.ch1Theft=[
   {place:'Deedee',at:[8,7],dir:'down'},
   {pose:'Deedee',f:'em_surprised',mid:'deedee',dir:'down'}, {pose:'Boppy',f:'em_surprised',mid:'boppy',dir:'down'},
   {wait:.3},
-  // The painted surprised poses only face the camera, so after the first startled beat (looking down at the three on the floor) Deedee and Boppy
-  // turn left to watch the blob (it is on their left, at the counter) take the pie. (Tom, 2026-11-12: they were facing the wrong way.)
   {pose:'Deedee'}, {pose:'Boppy'}, {face:'Deedee',dir:'left'}, {face:'Boppy',dir:'left'},
   {pose:'Big Mudling',f:'mh_reach',dir:'left'}, {wait:.45},
-  {pose:'Big Mudling',f:'mh_grab',dir:'left'}, {sfx:'pickup'}, {wait:.5},
+  {pose:'Big Mudling',f:'mh_grab',dir:'left'}, {sfx:'pickup'}, {prop:'muffinpan',hide:true}, {wait:.5},
   {pose:'Big Mudling',f:'mh_hug',dir:'left'},
-  {talk:'Rose',lines:['Oh no! The mud blob is stealing Deedee\'s crisp!']},
   {pose:'Big Mudling',f:'mh_glance',dir:'left'}, {wait:.5},
-  // The blob scurries back down the middle (mirrored, it travels right), giggles once it is past the corridor mouth, and sneaks out the door;
-  // then the three scramble up (kneel, then stand) and Deedee hops back to her counter.
   {all:[
     {seq:[{pose:'Big Mudling',f:['mh_scurry_a','mh_scurry_b'],fps:6,dir:'right'},
           {walk:'Big Mudling',to:[[7,9.2],[8,10.2],[8,11.3]],speed:.22,onStep:()=>sfx.splat()},
@@ -161,30 +187,29 @@ SCENES.ch1Theft=[
           {walk:'Big Mudling',to:[[8,12.4]],speed:.3},
           {sfx:'doorOut'},{despawn:'Big Mudling'}]},
     {getup:'tom',to:[8,10],delay:1.15,dir:'down'},
-    {getup:'rose',to:[7,10],delay:1.25,dir:'down'},
+    {getup:'rose',to:[8,11],delay:1.25,dir:'up'},   // Rose scrambles behind Tom
     {getup:'grace',to:[9,10],delay:1.35,dir:'down'},
     {seq:[{wait:1.2},{hop:'Deedee',from:()=>[8,7],to:[7,9],time:.4,arc:10}]}
   ]},
   {place:'Deedee',at:[7,9],dir:'down'},
   {cam:null},
-  {talk:'Tom',lines:['That was UNCALLED for!'],voice:[['tom','hurt',0,'That was UNCALLED for!']]},
-  {talk:'Deedee',lines:['What in goodness sake was THAT?']},
-  {talk:'Rose',lines:['It had EYES! The mud had EYES!']},
-  {talk:'Deedee',lines:['Ants, I can handle. A raccoon, I can handle. Your father at midnight with a serving spoon, I\'ve handled for forty years. But a MUD BLOB?']},
-  {talk:'Grace',lines:['It\'s so brown. It looks like a poop. A very sneaky poop.']},
-  {talk:'Grace',lines:['It\'s running for the pond!']},
-  {talk:'Deedee',lines:['It took the crisp AND my good tin! Grab your shoes, everybody. We\'re going after it, and I\'m coming with you.']},
-  {talk:'Boppy',lines:['It\'s headed for Grump Hollow. I\'ve been saying for twenty years that something lives in that pond, and nobody listens to Boppy.']},
-  {talk:'Boppy',lines:['Twenty years ago I\'d have caught that thing before it got to the fence.']},
-  {talk:'Boppy',lines:['I\'d come with you, but my stomach is acting up. If you see the Big One in that pond, bring him back for me.']},
-  {talk:'Boppy',lines:['Tom. You stay in front of those girls.']},
-  {join:'deedee'},
+  {talk:'Rose',lines:["AHHH! DEEDEE!"]},
+  {talk:'Tom',lines:["GAH! I'm on the floor. Grace, is that your elbow or mine?"]},
+  {talk:'Grace',lines:["It's mine! Tata, get UP, it's getting away!"]},
+  {talk:'Deedee',lines:["That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER."]},
+  {talk:'Boppy',lines:["...and I only caught him because the hat kept getting taller. Where'd the muffins go?"]},
+  {talk:'Deedee',lines:["A ball of mud came through the door and took them. Pan and all."]},
+  {talk:'Boppy',lines:["The mud gets a muffin and I don't?"]},
+  {talk:'Deedee',lines:["Girls, sneakers. Tom, hold the door. Hubby, you stay right there. When we get them back, the first one's yours."]},
+  {talk:'Boppy',lines:["The first one. Tom, you heard her."]},
+  {join:'deedee'},   // Deedee, Tom and the girls run out the back door; Boppy sits back down with his empty plate
   {wait:2.8},
+  {flag:'tombo:deedee1'},
   {toast:'New Tombo: Wine and Gossip (Tom + Deedee).',time:3},
   {toast:'Goal: follow the thief into Grump Hollow, north of the Square.',time:4.5}
 ];
 
-// 3. Grump Hollow: three tutorial fights on the path in.
+// 4. The path into Grump Hollow: Rose asks the mud nicely. ONE fight, three Mudlings (the old three tutorial fights are gone; 'basics' teaches all of it).
 const CH1_AFTER=(lost,lines)=>[
   {if:()=>lost(),then:[{heal:true},{talk:'Deedee',lines:['Up, up. Everybody up. Deedee kisses it better.','There. Good as new. Try not to do that again.']}],else:[]},
   ...lines
@@ -193,104 +218,66 @@ SCENES.ch1Mudling=[
   {flag:'ch1-t1'},
   {walk:'tom',to:[[6,19]],speed:.25}, {face:'tom',dir:'up'},
   {place:'grace',at:[7,19],dir:'up'}, {place:'rose',at:[7,20],dir:'up'}, {place:'deedee',at:[6,20],dir:'up'},
-  {flag:'ch1-crumbs-a'},   // crumb pile and scatter on the steps (plate.js HOLLOW_TRAIL a)
-  {place:'Mudling',at:[9,16],dir:'left'},   // report r-20261114-100833-9dh8: the Mudling sits further right of the party and faces them (left)
-  {talk:'Deedee',lines:['Look, rhubarb crumbs on the path. The little thief must have dropped them as it ran.']},
-  {talk:'Deedee',lines:['That means we can follow the trail!']},
-  {talk:'Rose',lines:['Tata. The mud is MOVING.']},
-  {sfx:'look'},
-  {walk:'Mudling',to:[[8,16],[8,17],[7,17]],speed:.35},
-  {talk:'Mudling',lines:['Blub. The pie went that way. You can\'t have it. Blub.']},
-  {talk:'Tom',lines:['It talks.']},
-  {talk:'Deedee',lines:['It talks AND it steals.']},
-  {talk:'Grace',lines:['Okay, everybody. Tata is in front. I\'m in charge of choreography. FIGHT!']},
-  {battle:'mudling',tut:'basics'},
+  {place:'Mudling',at:[9,16],dir:'left'},
+  {call:()=>{ const m=findMonster('mudling'); if(m) m.carry='muffins'; }},
+  {spawn:{name:'Mudling B',monster:'mudling',carry:'muffins',at:[10,15],dir:'left'}},
+  {spawn:{name:'Mudling C',monster:'mudling',carry:'muffins',at:[10,17],dir:'left'}},
+  {talk:'Rose',lines:["Hello, mud! Can we please have Deedee's muffins back? Thank you!"]},
+  {talk:'Mudling',lines:["No. Ours now."]},
+  {talk:'Rose',lines:["But I said PLEASE!"]},
+  {talk:'Tom',lines:["She did. I was right here. It was an excellent please."]},
+  {talk:'Deedee',lines:["Girls, behind me. You three have till I count to three. Then I'm getting the hose."]},
+  {call:()=>{ for(const n of ['Mudling','Mudling B','Mudling C']) { const a=sceneActor(n); if(a) a.carry=null; } sfx.splat(); }}, {wait:.6},   // the Mudlings push all the muffins into their mouths at once
+  {talk:'Deedee',lines:["Three."]},
+  {despawn:'Mudling B'}, {despawn:'Mudling C'},
+  {battle:'mudling',tut:'basics',count:3},
   ...CH1_AFTER(()=>flag('battle:mudling')!=='win',[
-    {flag:'ch1-crumbs-b'},   // crumbs north through the arch (HOLLOW_TRAIL b)
-    {talk:'Deedee',lines:['Good job, girls. The crumb trail keeps going north, so that\'s the way we go.']}])
-];
-SCENES.ch1Skeeter=[
-  {flag:'ch1-t2'},
-  {place:'Skeeter Swarm',at:()=>[Math.min(21,player.x+3),player.y]},
-  {sfx:'whoosh'},
-  {walk:'Skeeter Swarm',to:()=>[[player.x+2,player.y],[player.x+1,player.y]],speed:.2},
-  {talk:'Skeeter Swarm',lines:['Bzzz. Somebody smells like rhubarb. Bzzzzz.']},
-  {talk:'Grace',lines:['Ew. Ew ew ew. Nobody touch my hair.']},
-  {talk:'Deedee',lines:['I\'ve been bitten ten thousand times in my life. Not one of them ever said a word first.']},
-  {battle:'skeeter',tut:'dance'},
-  ...CH1_AFTER(()=>flag('battle:skeeter')!=='win',[
-    {talk:'Deedee',lines:['Everybody okay? Itchy isn\'t hurt. Keep walking.']}])
-];
-SCENES.ch1Grump=[
-  {flag:'ch1-tuts',value:'pending'},
-  {place:'Pond Grump',at:()=>[player.x+1,player.y-2]},
-  {walk:'Pond Grump',to:()=>[[player.x+1,player.y-1]],speed:.4,onStep:()=>sfx.splat()},
-  {talk:'Pond Grump',lines:['Grrrumble. You\'re standing in my puddle. And the small one is LAUGHING at me.']},
-  {talk:'Rose',lines:['I\'m not laughing. I\'m giggling. It\'s different.']},
-  {talk:'Pond Grump',lines:['That\'s IT. Soggy Slap. For the giggler.']},
-  {battle:'grump',tut:'defend'},
-  ...CH1_AFTER(()=>flag('battle:grump')!=='win',[]),
-  {flag:'ch1-tuts'},
-  {hearts:'deedee'}, {heal:true},
-  {flag:'ch1-crumbs-c'},   // crumbs east to Boppy's bench (HOLLOW_TRAIL c), shown with the "around the pond" line
-  {talk:'Deedee',lines:['Hugs for everyone. There. All better.','The crumbs lead around the pond, toward Boppy\'s fishing spot.']},
-  {talk:'Grace',lines:['Boppy says the Big One lives over there.']},
-  {talk:'Tom',lines:['Then nobody goes near the water. Stay close.']},
-  {toast:'Goal: follow the crumbs east, around the pond. The Hollow’s monsters are awake now.',time:5}
+    {call:()=>{ sfx.splat(); }},   // the mud melts into the path
+    {prop:'papers',kind:'papers',set:{map:'hollow',x:9,y:16}},   // nine muffin papers left in the reeds (stand-in)
+    {talk:'Grace',lines:["Nine papers. There were twelve. So the one with the pan still has three."]},
+    {talk:'Deedee',lines:["Then it has three of my muffins and my pan. Keep walking."]},
+    {flag:'ch1-tuts'},
+    {toast:'Goal: head east, around the pond, to Boppy’s fishing spot. The Hollow’s monsters are awake now.',time:5}])
 ];
 
-// 3b. Boppy's fishing spot: the grey patch and the orange block with the dragonfly (story-ch01.md scene 7). Rose and Tom pull and fail; Deedee pockets the bulb.
+// 5. Boppy's fishing spot: the grey patch and the orange block with the dragonfly. Tom pulls and fails; Deedee lifts the bulb with a tissue.
 const ch1Tug=id=>({hop:id,from:()=>{ const a=sceneActor(id); return [a.x,a.y]; },to:()=>{ const a=sceneActor(id); return [a.x,a.y]; },time:.28,arc:6});
 SCENES.ch1Spot=[
   {flag:'ch1-spot'},
   {around:[17.2,11.2],size:[1.7,.9]},
-  {talk:'Rose',lines:['A MARBLE! There\'s a marble with a bug in it!']},
-  {talk:'Grace',lines:['That\'s a dragonfly. It\'s inside an orange rock. Its wings are open and it\'s not moving.']},
-  {talk:'Deedee',lines:['Look at the grass. It\'s grey. Just this bit, the size of my hand.']},
-  {talk:'Tom',lines:['It isn\'t dried out. It\'s just grey. Like somebody took the green out.']},
-  {talk:'Rose',lines:['I\'m keeping it. It\'s stuck.']},
-  ch1Tug('rose'), {sfx:'bonk'}, ch1Tug('rose'), {wait:.2},
-  {talk:'Tom',lines:['Let me.']},
-  ch1Tug('tom'), {sfx:'bonk'}, ch1Tug('tom'), {wait:.3},
-  {talk:'Rose',lines:['You\'re not trying.']},
-  {talk:'Tom',lines:['I\'m trying, Rose. Please don\'t tell Grace I lost to a marble.']},
-  {talk:'Grace',lines:['There\'s a little round hole in the side. Like somebody took a bite.']},
-  {flag:'ch1-bulb'}, {call:()=>sfx.pickup()},
-  {talk:'Deedee',lines:['And somebody left a burnt light bulb. Now they\'re littering at my pond too.']},
-  {call:()=>{ sfx.splat(); sfx.thud(); }}, {wait:.8},
-  {talk:'Deedee',lines:['The tin. Go, go, go.']},
-  {talk:'Rose',lines:['Bye, marble. I\'m coming back for you.']},
+  {talk:'Rose',lines:["The grass is Boppy color!"]},
+  {talk:'Grace',lines:["It's grey, Rose. Just that one spot. And that orange cube has a dragonfly in it."]},
+  {talk:'Rose',lines:["He's stuck! Tata, get him out!"]},
+  {talk:'Tom',lines:["Yes. Right away. Everybody give the dragonfly some room."]},
+  ch1Tug('tom'), {sfx:'bonk'}, ch1Tug('tom'), {sfx:'bonk'}, {wait:.3},
+  {talk:'Tom',lines:["It's the size of a plum. I carried a suitcase through two airports this morning."]},
+  {talk:'Rose',lines:["Your face is RED, Tata!"]},
+  {talk:'Grace',lines:["Tata, stop. You're getting fingerprints on it. And look, it has a dent. Did you do that?"]},
+  {talk:'Tom',lines:["Grace. I couldn't even make it wobble."]},
+  {flag:'ch1-bulb'}, {call:()=>sfx.pickup()},   // Deedee bends down and picks something out of the grass with a tissue
+  {talk:'Grace',lines:["Deedee, what's that?"]},
+  {talk:'Deedee',lines:["A flashbulb, from an old camera. It's burnt. Somebody set it off right here and left it by your grandfather's chair."]},
+  {talk:'Grace',lines:["Don't throw it out! It's a clue. I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it. I'm writing it in pencil."]},
+  {talk:'Tom',lines:["Why pencil?"]},
+  {talk:'Grace',lines:["Because I don't know what any of it means yet."]},
+  {call:()=>{ sfx.splat(); sfx.thud(); }}, {wait:.8},   // a huge splash from across the pond; everyone turns
   {toast:'Goal: the splash came from across the pond. Follow it.',time:4.5}
 ];
 
-// 4. The pond: the thief hands the tin to The Big One. Boss fight.
+// 6. The Big One. It already wears the pan. After the fight (ch1AfterBoss) it is still wearing it and sulking; Rose's BOO does the rest.
 SCENES.ch1Pond=[
   {flag:'ch1-pond'}, {call:()=>storyWorld()},
-  {hide:'The Big One'}, {cam:[16,9]},   // hold the camera between the party and the pond so The Big One (in the water, top right) is fully in frame
-  // The painted heist frames (mh_*) face LEFT, toward the party, and already hold the tin, so no separate tin prop here.
-  {spawn:{name:'Big Mudling',monster:'mudling',mscale:1.34,at:[21,12],dir:'left'}},
-  {pose:'Big Mudling',f:['mh_scurry_a','mh_scurry_b'],fps:6,dir:'left'},
-  {walk:'Big Mudling',to:[[20,12],[18,12],[16,12]],speed:.3,onStep:()=>sfx.splat()},
-  {pose:'Big Mudling',f:'mh_hug',dir:'left'},
-  {talk:'Grace',lines:['THERE! The thief! He still has the tin!']},
-  {face:'Big Mudling',dir:'left'},
-  {call:()=>{ sfx.splat(); sfx.thud(); }},
-  {pose:'The Big One',foe:'attack3',dir:'left'}, {show:'The Big One'},   // The Big One rises in the pond water (home spot 18,8), right of the thief and faces the party; attack3 is his frown, the stance frame is the shocked one
-  {talk:'The Big One',lines:['GLUB. Is that a pie? For me?']},
-  {talk:'Big Mudling',lines:['Blub. I stole it for you, boss.']},
-  {call:()=>{ const m=sceneActor('Big Mudling'); if(m) m.carry=null; setFlag('ch1-crown'); sfx.pickup(); }},
-  {pose:'Big Mudling',f:null},
-  {face:'Big Mudling',dir:'right'},
-  {walk:'Big Mudling',to:[[17,12]],speed:.3},
-  {call:()=>sfx.splat()}, {despawn:'Big Mudling'},
-  {talk:'The Big One',lines:['The tin fits on my head like a crown. I\'m the king of the pond now. GLUB.']},
-  {talk:'Tom',lines:['That\'s a fish. That fish is bigger than the cab.']},
-  {talk:'Grace',lines:['Boppy was RIGHT?']},
-  {talk:'Deedee',lines:['Nobody tell him.']},
-  {talk:'Deedee',lines:['That\'s my GOOD tin, you overgrown handbag!']},
-  {talk:'The Big One',lines:['This morning I was a fish. Then there was a big flash. Now I am a BIG fish. With a hat.']},
-  {talk:'Rose',lines:['Tata, he looks like a turtle wearing a hat.']},
-  {talk:'Tom',lines:['Nobody touches Deedee’s crisp. Everybody ready?']},
+  {hide:'The Big One'}, {cam:[16,9]},
+  {call:()=>setFlag('ch1-crown')},   // the pan is on its head from the start
+  {pose:'The Big One',foe:'attack3',dir:'left'}, {show:'The Big One'}, {call:()=>{ sfx.splat(); sfx.thud(); }}, {wait:.6},
+  {talk:'Tom',lines:["GAH! Grace, I'm holding your hand. That's for me, not for you."]},
+  {talk:'Grace',lines:["I know, Tata. You're squeezing. Is that the Big One? Boppy only said it was as big as the couch!"]},
+  {talk:'Deedee',lines:["For once in his life he rounded down."]},
+  {talk:'The Big One',lines:["GLUB. I was small at breakfast. Then a flash. Now I don't fit under my log."]},
+  {talk:'Deedee',lines:["And that's my good twelve-cup pan on your head. It's never been in pond water in its life."]},
+  {talk:'The Big One',lines:["It's my crown. A little muddy one brought it. I'm keeping it."]},
+  {talk:'Tom',lines:["Mom. That's a boss. You don't just walk up to a boss."]},
+  {talk:'Deedee',lines:["I worked the night shift, Tom. I've walked up to worse. Mister, take off my pan."]},
   {pose:'The Big One',f:null},
   {battle:'bigone',tut:'bigone'},
   {if:()=>flag('battle:bigone')!=='win',then:[
@@ -298,52 +285,82 @@ SCENES.ch1Pond=[
     {talk:'Deedee',lines:['Up, up. Everybody up. Deedee kisses it better.','Tom, you stand in front of whoever it stares at. Cozy Rosie, make it laugh. Then we try again.']},
     {toast:'Face The Big One and press A to try again. Deedee healed everyone.',time:5}],else:[]}
 ];
-// 5. After The Big One (won in the scene, or on a retry with A): the tin comes back.
+// 6b. After the fight (won in the scene, or on a retry with A): the fish still wears the pan and sulks. BOO. It laughs, the pan comes off, the coin.
 SCENES.ch1AfterBoss=[
-  {flag:'ch1-tin'}, {flag:'ch1-crown',value:false},
+  {flag:'ch1-tin'},
+  {pose:'The Big One',foe:'attack3',dir:'left'},   // sulking in the shallows, still wearing the pan
+  {walk:'rose',to:routeTo('rose',16,10),speed:.2}, {face:'rose',dir:'up'},   // Rose tiptoes through the reeds behind it
+  {talk:'Rose',lines:["BOO!"]},
+  {call:()=>{ setFlag('ch1-crown',false); sfx.splat(); sfx.thud(); }},   // the fish jumps and the pan flies off its head
+  {prop:'muffinpan',kind:'muffinpan',set:{map:'hollow',x:16.5,y:7.5,empty:true,z:0}},
+  {propTo:'muffinpan',field:'x',to:14.5,time:.7,zField:'z',arc:1.6}, {sfx:'bonk'},
+  {talk:'The Big One',lines:["GLUB! HA! You got me! I see everybody. I never saw you!"]},
+  {talk:'Tom',lines:["Nobody does. She's gotten me in an empty room."]},
+  {propTo:'muffinpan',field:'y',to:11.5,time:1.2}, {sfx:'splat'},   // the fish pushes the pan across the water with its nose
   {call:()=>sfx.pickup()},
-  {if:()=>!!flag('kind:bigone'),
-    then:[{talk:'The Big One',lines:['Glub. Nobody ever made me laugh before. You can have your tin back.']}],
-    else:[{talk:'The Big One',lines:['Glub. Fine. Take your tin. I\'m going back in the pond to think about things.']}]},
-  {finale:'bigone'},
-  {if:()=>!!flag('kind:bigone'),then:[{talk:'The Big One',lines:['And this is for the small one. It\'s my shiniest thing.']}],else:[]},
+  {talk:'The Big One',lines:["Take the pan. The sneaky one gets this. It's the only thing I've got."]},
   {ch1Reveal:'coin'},
-  {talk:'Rose',lines:['It has a bug on it! I\'m keeping it.']},
   {if:()=>!bag.includes('dragonflycoin'),then:[{give:'dragonflycoin'}],else:[]},
-  {talk:'Tom',lines:['This one you can keep.']},
-  {talk:'The Big One',lines:['The old man with the cap. Is he coming tomorrow?']},
-  {talk:'Grace',lines:['Boppy? He comes every day.']},
-  {talk:'The Big One',lines:['Good. Don\'t tell him I asked.']},
-  {talk:'Deedee',lines:['My tin! And look. Half the crisp is still in it.']},
-  {talk:'Grace',lines:['The Big One ate the other half. I saw crumbs on its chin.']},
-  {talk:'Deedee',lines:['Then we split this half. Everybody home. Wait until Boppy hears about this.']},
+  {talk:'Rose',lines:["Thank you, fish! There's a bug on my money!"]},
+  {talk:'The Big One',lines:["The man in the folding chair. Will he be back?"]},
+  {talk:'Grace',lines:["That's Boppy. He's here every single day."]},
+  {talk:'The Big One',lines:["Good. He was in the middle of a story. The one about the race."]},
+  {talk:'Deedee',lines:["He's been in the middle of that one for fifty-one years."]},
+  {call:()=>sfx.splat()}, {hide:'The Big One'},   // the fish sinks
+  {prop:'muffinpan',hide:true}, {call:()=>sfx.pickup()},   // Deedee picks up the pan. It is empty.
+  {pose:'The Big One',f:null},
   {toast:'Goal: '+CH1_TIN_LINE,time:4.5}
 ];
-// 6. Home: half a crisp, Boppy's lure, chapter complete.
+
+// 7. Home. Boppy is proved right about the fish and still wants his muffin.
 SCENES.ch1End=()=>[
-  {flag:'ch1-done',value:'pending'},
-  {place:'Boppy',at:[8,8],dir:'down'},
+  {flag:'ch1-home'},
+  {place:'Boppy',at:[13,10],dir:'up'},
   {walk:'tom',to:[[8,10]],speed:.25}, {face:'tom',dir:'up'},
-  {place:'grace',at:[9,11],dir:'up'}, {place:'rose',at:[7,11],dir:'up'}, {place:'deedee',at:[6,9],dir:'right'},
-  {talk:'Boppy',lines:['You found the Big One? I TOLD everybody. Twenty years.']},
-  {talk:'Grace',lines:['Boppy, the mud TALKED. And the mosquitoes. And a puddle.']},
-  {talk:'Boppy',lines:['The mud talked? Forty years in this town, the mud never said one word to me.']},
-  ...(bag.includes('lure')?[
-    {talk:'Tom',lines:['We did. And when it laughed, this fell out of its lip.']},
-    {talk:'Boppy',lines:['My LURE! I lost that in 2006. Still shiny. Unlike me.','Keep it, Tom. For luck. The fish clearly didn\'t want it.']}]:[]),
-  {talk:'Rose',lines:['He gave me a present. Look.']},
-  {talk:'Boppy',lines:['That\'s real gold, Cozy Rosie. Gold like my teeth. Look.']},
-  {ch1Reveal:'grin'},
-  {talk:'Rose',lines:['Boppy has treasure in his mouth!']},
-  {talk:'Boppy',lines:['You put that somewhere safe. Gold is for keeping.']},
-  {talk:'Boppy',lines:['Next time something comes in that window, I\'m coming. Stomach or no stomach.']},
-  {talk:'Deedee',lines:['Sit. Everybody sit. Half a crisp is still a crisp.']},
-  {trace:'ch1-crisp'}, {hearts:'tom'}, {call:()=>sfx.levelChime()},
-  {talk:'Rose',lines:['This is the best half a crisp I ever had.']},
-  {talk:'Grace',lines:['Tata, you\'re staying the WHOLE week, right?']},
-  {talk:'Tom',lines:['The whole week. And nobody is stealing anything else.']},
-  {talk:'Boppy',lines:['Slow down. Everybody eats too fast. My stomach.']},
-  {fade:'out',time:.8}, {card:1,done:true,time:3.4}, {flag:'ch1-done'}, {fade:'in',time:.8},
+  {place:'grace',at:[9,11],dir:'up'}, {place:'rose',at:[7,11],dir:'up'}, {place:'deedee',at:[7,9],dir:'down'},
+  {call:()=>sfx.pickup()},   // Deedee tucks the flashbulb, still in its tissue, into the back of the kitchen drawer
+  {talk:'Rose',lines:["Boppy! Your fish is REAL! He's CAR size and he gave me money!"]},
+  {talk:'Boppy',lines:["CAR size? Cozy Rosie, I told everybody a couch. Twenty years! I didn't want to brag!"]},
+  {talk:'Boppy',lines:["Now that's real gold. Same as these. Look."]},
+  {ch1Reveal:'grin'},   // he grins and taps a back tooth
+  {talk:'Rose',lines:["You've got money in your TEETH!"]},
+  {talk:'Boppy',lines:["Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look."]},
+  {talk:'Rose',lines:["Under Lamby! Nobody looks under Lamby!"]},
+  {talk:'Boppy',lines:["Good girl. Now. Your grandmother promised me the first muffin. Who's got my muffin?"]},
+  {talk:'Grace',lines:["The fish ate them, Boppy. The last three."]},
+  {talk:'Boppy',lines:["The fish gets THREE?"]},
+  {talk:'Deedee',lines:["Twelve more. Forty minutes. The first one's still yours."]},   // Deedee sets the empty pan on the counter and takes the flour down
+  {talk:'Boppy',lines:["Girls, you heard that. Forty minutes. Somebody watch the clock."]},
+  {toast:"Goal: it's Sunday. Head out the front door. Cab 7 is waiting at the Square.",time:5}
+];
+
+// 8a. Rivituso Row, the front door: Grace's job and her second best pencil; Rose wants the long way.
+SCENES.ch1Job=[
+  {flag:'ch1-job'},
+  {talk:'Grace',lines:["Tata, you have a job. If you see anything grey in California, or an orange cube, you write it down and text me."]},
+  {talk:'Tom',lines:["I have a job. Yes. Does the job come with a pencil?"]},
+  {talk:'Grace',lines:["That's my second best one. Don't lose it."]},   // she thinks, then takes a pencil from behind her ear
+  {call:()=>sfx.pickup()},
+  {talk:'Tom',lines:["Second best. It's going in the pocket with the zipper."]},
+  {talk:'Rose',lines:["One more ride, Tata! To the cab! Go the LONG way!"]},
+  {talk:'Tom',lines:["The long way. That's all the way around the Square. Twice."]},
+  {toast:'Goal: Cab 7, at the Square. Take the long way.',time:4}
+];
+// 8b. The Square: one lap with Rose on his shoulders, a fade for the second, the cab, TNB's text on the seat (Tom does not read it).
+SCENES.ch1Sunday=[
+  {flag:'ch1-sunday'},
+  {call:()=>{ const r=sceneActor('rose'); if(r) { r.noShadow=true; r.seat=true; } }},
+  {pose:'tom',f:'tr_sit'},
+  {walk:'tom',to:routeTo('tom',17,14),speed:.2},
+  {walk:'tom',to:[[17,10],[5,10],[5,14],[13,14]],speed:.2},   // one lap round the fountain
+  {fade:'out',time:.8}, {wait:.5},   // the second lap happens while the screen is dark
+  {call:()=>{ const r=sceneActor('rose'); if(r) { r.noShadow=false; r.seat=false; } }}, {pose:'tom'},
+  {fade:'in',time:.8},
+  {sfx:'doorOut'}, {wait:.6},
+  {fade:'out',time:.8},   // Cab 7 pulls away
+  {call:()=>sfx.ding()},
+  {talk:'TNB',lines:["hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over."]},
+  {card:1,done:true,time:3.4}, {flag:'ch1-done'}, {fade:'in',time:.8},
   {save:true},
   {toast:'Chapter 1 complete! Long Island is yours to explore.',time:6}
 ];
@@ -355,8 +372,6 @@ SCENES.ch1End=()=>[
 // ch2-odette, ch2-carmen, ch2-source (the trail opens), ch2-t1, ch2-tuts, ch2-lemon (the grey lemon tree), ch2-boss, battle:bigshake ('win'), ch2-clear, ch2-done.
 // ======================================================================================================
 const CH2={mode:'full',chapter:2};
-// A walk route along the map from where the actor stands now to (x,y) (for walks that start wherever Tom happens to be).
-const routeTo=(a,x,y)=>()=>{ const n=sceneActor(a); return n?findPath(currentMap,n,{x,y}).map(p=>[p.x,p.y]):[]; };
 
 // 1. Landing downtown: where TNB is.
 SCENES.ch2Arrive=[
@@ -698,14 +713,16 @@ SCENES.ch2End=[
 const CH1={mode:'full',chapter:1};
 const TRIGGERS=[
   {id:'ch1-goal',map:'town',when:{...CH1,flag:'opening-done',notFlag:'ch1-goal'},scene:'ch1Goal'},
+  {id:'ch1-amy',map:'row',when:{...CH1,flag:'ch1-goal',notFlag:'ch1-amy'},scene:'ch1Amy'},
+  {id:'ch1-ellie',map:'row',at:[4,15,9,19],when:{...CH1,flag:'ch1-amy',notFlag:['ch1-ellie','ch1-theft']},scene:'ch1Ellie'},
   {id:'ch1-theft',map:'grands',when:{...CH1,notFlag:'ch1-theft'},scene:'ch1Theft'},
   {id:'ch1-t1',map:'hollow',at:[4,17,8,21],when:{...CH1,flag:'ch1-theft',notFlag:'ch1-t1'},scene:'ch1Mudling'},
-  {id:'ch1-t2',map:'hollow',at:[1,1,22,15],when:{...CH1,flag:'ch1-t1',notFlag:'ch1-t2'},scene:'ch1Skeeter'},
-  {id:'ch1-t3',map:'hollow',at:[1,1,22,14],when:{...CH1,flag:'ch1-t2',notFlag:'ch1-tuts'},scene:'ch1Grump'},
   {id:'ch1-spot',map:'hollow',at:[14,1,22,20],when:{...CH1,flag:'ch1-tuts',notFlag:'ch1-spot'},scene:'ch1Spot'},
   {id:'ch1-pond',map:'hollow',at:[14,1,22,20],when:{...CH1,flag:'ch1-spot',notFlag:'ch1-pond'},scene:'ch1Pond'},
   {id:'ch1-after',map:'hollow',when:{...CH1,flag:{'battle:bigone':'win'},notFlag:'ch1-tin'},scene:'ch1AfterBoss'},
-  {id:'ch1-end',map:'grands',when:{...CH1,flag:'ch1-tin',notFlag:'ch1-done'},scene:'ch1End'},
+  {id:'ch1-end',map:'grands',when:{...CH1,flag:'ch1-tin',notFlag:'ch1-home'},scene:'ch1End'},
+  {id:'ch1-job',map:'row',when:{...CH1,flag:'ch1-home',notFlag:'ch1-job'},scene:'ch1Job'},
+  {id:'ch1-sunday',map:'town',when:{...CH1,flag:'ch1-job',notFlag:'ch1-done'},scene:'ch1Sunday'},
   {id:'ch2-arrive',map:'blvd',when:{...CH2,notFlag:'ch2-goal'},scene:'ch2Arrive'},
   {id:'ch2-loft',map:'lofts',when:{...CH2,notFlag:'ch2-tnb'},scene:'ch2Loft'},
   {id:'ch2-sky',map:'blvd',when:{...CH2,flag:'ch2-tnb',notFlag:'ch2-sky'},scene:'ch2Sky'},
@@ -733,13 +750,13 @@ const STORY_WORLD=[
     // Once beaten he stays on the shore with the frown frame (the painted stance frame is the shocked one; scenes clear and reset scenePose).
     if(!under&&flag('battle:bigone')==='win'&&!b.settled&&!(b.scenePose&&b.scenePose.f)) b.scenePose={foe:'attack3',dir:'left'};
   },
-  // Chapter 1: until the Theft scene plays, Boppy is already at the back of the house (12,4), facing right, so the player never sees him move
+  // Chapter 1: until the Theft scene plays, Boppy is already at the dining table (13,10), his back to the door, so the player never sees him move
   // when the scene starts. (Tom, 2026-11-14, report r-20261114-150730-vqel and r-20261114-100519-wlbn: he was by the front door, then sped to the back.)
   ()=>{
     if(currentMap.id!=='grands') return;
     const b=currentMap.npcs.find(n=>n.name==='Boppy'); if(!b) return;
     const pre=STORY.chapter===1&&!flag('ch1-theft');
-    if(pre&&!b.theftPre) { b.theftPre=true; b.x=12; b.y=4; b.facing='right'; b.path=[]; b.move=null; b.idle=1e9; }
+    if(pre&&!b.theftPre) { b.theftPre=true; b.x=13; b.y=10; b.facing='up'; b.path=[]; b.move=null; b.idle=1e9; }
     else if(!pre&&b.theftPre) { b.theftPre=false; b.idle=0; }
   },
   // Chapter 2: the Big Shake stays under the hill until the party reaches the Observatory.
@@ -778,14 +795,18 @@ const HOLD_RULES=[
   n=>STORY.chapter===1&&flag('ch1-tuts')!==true&&currentMap.id==='hollow',
   n=>STORY.chapter===2&&flag('ch2-tuts')!==true&&currentMap.id==='griffith'];   // Griffith Park holds still until its two story fights
 const STORY_HOLD=n=>HOLD_RULES.some(f=>f(n));
-// Deedee's pie tin: carried by the thief, then worn by The Big One.
-const STORY_CROWN=a=>a.monster==='bigone'&&flag('ch1-crown')?'tin':null;
+// Deedee's twelve-cup muffin pan, worn by The Big One (a code-drawn stand-in: Art Library list).
+const STORY_CROWN=a=>a.monster==='bigone'&&flag('ch1-crown')?'pan':null;
 const STORY_PROPS={
-  tin(cx,y,a,worn) {
-    const w=worn?13:9,yy=Math.round(y-(worn?2:6));
-    ellipse(cx,yy+3,w+1,4,'#2b2a26'); ellipse(cx,yy+2,w,3,'#c9cfd3'); ellipse(cx,yy+1,w-2,2,'#eef2f4');
-    ellipse(cx,yy+1,w-4,2,'#b4553f'); rect(cx-3,yy,2,1,'#e07a6a'); rect(cx+2,yy+1,2,1,'#e07a6a'); rect(cx-1,yy+1,1,1,'#f2c27a');
-    if(worn) { rect(cx-w,yy+3,2*w,1,'#8a9196'); }
+  // The pan on the Big One's head: silver, twelve cups.
+  pan(cx,y,a,worn) {
+    const w=worn?15:10,yy=Math.round(y-(worn?2:6));
+    ellipse(cx,yy+4,w+1,5,'#2b2a26'); ellipse(cx,yy+3,w,4,'#9aa1a6'); ellipse(cx,yy+2,w-1,3,'#c9cfd3');
+    for(let r=0;r<2;r++) for(let c=0;c<4;c++) ellipse(cx-w*.6+c*(w*.4),yy+1+r*3,2,1,'#6f767b');
+  },
+  // Muffins held in both hands by a Mudling (twelve is too many to draw: a heap of four).
+  muffins(cx,y,a) {
+    for(const [dx,dy] of [[-5,2],[0,-1],[5,2],[0,4]]) { ellipse(cx+dx,y+dy+2,4,2,'#7a4a24'); ellipse(cx+dx,y+dy,4,3,'#c98a46'); rect(cx+dx-2,y+dy-3,4,1,'#f1d9a8'); }
   }
 };
 
@@ -845,32 +866,22 @@ function drawTranceStars(n,time) {
   gfx.globalAlpha=1;
 }
 
-// Tips for the three tutorial fights (engine/story.js b2TutTip). ▲ Attack (basic move first), ▶︎ Heal, ◀︎ Warmth, ▼ Bag, B Inspect. Tombos sit inside whichever of the first three fits.
+// Tips for the tutorial fights (engine/story.js b2TutTip): one fight of three Mudlings now carries 'basics', the Big One carries 'bigone'. ▲ Attack (basic move first), ▶︎ Heal, ◀︎ Warmth, ▼ Bag, B Inspect. Tombos sit inside whichever of the first three fits.
 const TUTORIALS={
   basics:{tips:[
     {id:'tom',who:'tom',dir:'up',text:'Tom’s turn. Tap ▲ Attack (or press A). His free basic move, Disconnected Controller, is first; basic moves also earn 1 VP.'},
     {id:'grace',who:'grace',dir:'up',text:'See the pink bar under each Mudling? That\'s Warmth. Kind moves fill it, and a full bar sends a monster home happy. ▲ Attack, then Cartwheel, for now.'},
     {id:'rose',who:'rose',dir:'left',text:'Rose’s RASPBERRY is under the ◀︎ WARMTH button. A Goofed monster loses its next turn, and Mudlings love a raspberry (lots of Warmth).'},
     {id:'deedee',who:'deedee',text:'B, or tapping the portrait in the middle, Inspects a monster: why it\'s grumpy, what it likes, and what it\'s weak to.'},
-    {id:'vp',who:'tom',text:'VP is the blue pips on each card: +2 every turn, +1 for a basic move. Skills learned with Stamp Points cost VP.'}]},
-  dance:{tips:[
-    {id:'dance',who:'grace',dir:'right',when:()=>b2LiveParty().some(p=>p.hp<p.maxHp*.85),text:'Everybody is itchy. Grace’s DANCE (▶︎) heals the whole party.'},
+    {id:'vp',who:'tom',text:'VP is the blue pips on each card: +2 every turn, +1 for a basic move. Skills learned with Stamp Points cost VP.'},
+    {id:'dance',who:'grace',dir:'right',when:()=>b2LiveParty().some(p=>p.hp<p.maxHp*.85),text:'Somebody is hurt. Grace’s DANCE (▶︎) heals the whole party.'},
+    {id:'hug',who:'deedee',dir:'right',when:()=>b2LiveParty().some(p=>p.hp<p.maxHp*.9),text:'Deedee’s MOON & BACK (▶︎) hugs everyone: a heal now, and Tucked In heals a little more each turn.'},
     {id:'heart',who:'tom',tombo:true,when:u=>b2TomboRows(u).some(r=>!r.why),text:'The HEART meter (the pink hearts) is a quarter full. A TOMBO is Tom plus a partner: look for the pink TOMBO rows inside ▲ ATTACK, ▶︎ HEAL and ◀︎ WARMTH.'},
     {id:'heart2',who:'rose',tombo:true,when:u=>b2TomboRows(u).some(r=>!r.why),text:'Rose can start a Tombo too. ▲ ATTACK, TOMBO: Double-Decker Airplane.'}]},
-  defend:{
-    // The Pond Grump telegraphs a big Soggy Slap on Rose, and acts after the whole party.
-    setup() {
-      const g=B2.foes[0],r=B2.party.find(p=>p.id==='rose'&&b2Alive(p)); if(!g||!r) return;
-      g.intent={kind:'lock',target:r,act:{name:'Soggy Slap',stat:'pow',mult:1.7,elem:'splash',target:'one',msg:'{e} winds up and SOGGY SLAPS {t}!'}};
-      g.ct=Math.max(...B2.party.map(p=>p.ct))+40;
-    },
-    tips:[
-      {id:'defend',who:'tom',dir:'right',when:()=>B2.foes.some(f=>f.intent&&f.intent.kind==='lock'&&b2Alive(f.intent.target)&&!f.intent.target.st.guarded),
-        text:'The Pond Grump has locked onto Rose (the red LOCK). ▶︎ HEAL, DEFEND, then Rose: Tom steps in front and takes it.'},
-      {id:'hug',who:'deedee',dir:'right',when:()=>b2LiveParty().some(p=>p.hp<p.maxHp*.9),text:'Deedee’s MOON & BACK (▶︎) hugs everyone: a heal now, and Tucked In heals a little more each turn.'}]},
   // The boss: a few reminders, only when they matter.
   bigone:{tips:[
-    {id:'tin',who:'rose',dir:'right',when:()=>B2.foes.some(f=>f.st.pietin&&b2Alive(f)),text:'That pie tin is a helmet (GRIT +50%). Make The Big One laugh: Rose’s RASPBERRY (▶︎) knocks it right off.'},
+    {id:'tin',who:'rose',dir:'right',when:()=>B2.foes.some(f=>f.st.pietin&&b2Alive(f)),text:'That muffin pan is a helmet (GRIT +50%). Make The Big One laugh: Rose’s RASPBERRY (▶︎) knocks it right off.'},
+    {id:'defend',who:'tom',dir:'right',when:()=>B2.foes.some(f=>f.intent&&f.intent.kind==='lock'&&b2Alive(f.intent.target)&&!f.intent.target.st.guarded),text:'The red LOCK means a big hit is coming for one person. ▶︎ HEAL, DEFEND, then that person: Tom steps in front and takes it.'},
     {id:'shield',who:'*',when:()=>B2.foes.some(f=>f.shield&&b2Alive(f)),text:'A shield! Two Sparkle or Chatter hits crack it before the Belly-Flop. RASPBERRY counts, and any Tombo breaks it at once.'},
     {id:'tombo',who:'tom',tombo:true,when:u=>b2TomboRows(u).some(r=>!r.why),text:'HEART is ready. TOMBOs: ▶︎ HEAL has Wine and Gossip (heals everyone a lot); ▲ ATTACK has Double-Decker Airplane (hits hard and stuns).'}]},
   // Chapter 2 (Los Angeles): the new crew's signatures and their Tombos.

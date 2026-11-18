@@ -1,3 +1,24 @@
+## ch1rebuild1 (2026-11-17): Chapter 1 rebuilt to Tom's locked script, 95 new lines, stand-in art
+
+Tom locked chapter 1 (claude/story-ch01-draft2.md, 8 scenes plus Aunt Ellie's optional 2b) and answered the teardown questions (claude/ch01-teardown.md). Built word for word; the 7 recorded intro lines and the squishy beat are untouched.
+
+| Piece | What |
+|---|---|
+| Scenes | `ch1Goal`, `ch1Amy`, `ch1Ellie`, `ch1Theft`, `ch1Mudling`, `ch1Spot`, `ch1Pond`, `ch1AfterBoss`, `ch1End`, `ch1Job`, `ch1Sunday` replace the old chapter 1 scenes and their 11 triggers. Old scenes `ch1Grump`, `ch1Skeeter` and the pie and crumb story are gone. |
+| Fights | One Mudling fight (3 foes, `startBattle` takes `count`), then the Big One. Skeeter Swarm and Pond Grump stay as free-play monsters. |
+| BOO scene | Plays after either kind of win. The fish still wears the pan and sulks when the fight ends. Rose's BOO, the pan, the laugh and the coin all happen in `ch1AfterBoss`. The fish stays gone afterwards (`bossSettle` returns false for bigone). |
+| Rewards kept | Dragonfly coin (BOO scene), Deedee joins and Wine and Gossip Tombo (scene 3), Rose's and Grace's Tombos and the New Tombos toast (scene 1), chapter card 1 (scene 8b). The 2006 lure drop is kept as built; no later chapter uses the lure, tin, crisp or chapter 1 card. |
+| Amy | Stays inside her house. Two texts as text boxes, no wave until there is window art. |
+| Scene 8 | 8a at the Row door, 8b on the Square: one lap in view, fade for the second, TNB's text as a box after the cab fades, no reaction from Tom. |
+| Text changed | Battle strings (MUFFIN PAN!, the pan clatters off, wearing the pan like a helmet), the `basics` and `bigone` tutorial tips (dance, hug, heart, defend moved), the Goal toasts, the amber spot lines for chapter 1. |
+| Removed | Rhubarb crumb trail art (`art/props/hollow/trail_*.webp`), `HOLLOW_TRAIL` and `drawHollowCrumbs` in plate.js, `tools/crumbs_test.py`, `tools/sprite-bake/bake_hollow_crumbs.py`. The Library sheet `prop-trail-hollow` stays as an approved source only. |
+| Voice | 95 locked scripts written verbatim to `tools/voice-library/scripts/ch01-story-directions.json` (42 break the v4 tag rules in apply-scripts.py; kept exactly as Tom wrote them). Purged 1 clip nothing plays: `tom|I'm trying, Rose. Please don't tell Grace I lost to a marble.` (docs/PURGED_VOICE.md). `unused_voice.py` reports 0 for all checks. |
+| Moods and talk | 95 rows added to docs/emotion-index-lines.tsv and 88 to docs/talk-lines.tsv (the Big One and the Mudling have no talk poses); stale chapter 1 rows removed from the emotion, reaction and talk files; data/emotion-moods.js, emotion-reactions.js and talk-types.js regenerated. No listener reactions are written for the new lines yet. |
+| Script Editor | docs/script-convos.tsv chapter 1 rows rewritten with purposes from the locked ideas; `build.py` reports 0 rows to fix. |
+| Art Library | 11 stand-in entries added to group Chapter 1: muffin pan, empty pan, muffin papers, Mudling with muffins, green Big One with pan, Grace's list, Amy's window, Aunt Ellie's open door, Rose on shoulders, Cab 7 pulling away, phone on the seat. |
+| Known stand-ins | The pan on the Big One's head is code over the painted sheet, which still has the old tin cap baked in. The heist frames still show a pie tin. The battle UI still draws the old tin ellipse. |
+| Tested | Every scene played from the harness in portrait; frames looked at (scene 3 and 6 reveals stubbed because the harness cannot press A). `tools/smoke.py` run. |
+
 ## clipgen1 (2026-11-17): Art Library can now make battle clip videos: new Clips tab, Generate, mark Start, Hit and End, Approve
 
 Tom (2026-11-17, animation tool test, next step after clip1): video generation built into the Art Library on the xAI API, so a clip is Generate then Approve with no outside tool. Nothing in the story game changed.

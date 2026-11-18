@@ -498,9 +498,9 @@ function b2TrySkip(u,t,id,chance) {
   const p=b2FoePoint(t);
   if(id==='goofed'&&t.st.pietin) {
     delete t.st.pietin;
-    battle.texts.push({txt:'PIE TIN!',x:p.x,y:p.y-28,color:'#ffe08a',sc:2,t:0,dur:1.4});
+    battle.texts.push({txt:'MUFFIN PAN!',x:p.x,y:p.y-28,color:'#ffe08a',sc:2,t:0,dur:1.4});
     b2Fx({kind:'tin',x:b2FoeCanvasPos(t).x,y:b2FoeCanvasPos(t).y-b2FoeCanvasPos(t).h,t:0,dur:1.1});
-    b2Msg(cap(t.def.the)+' tips its head. Deedee’s pie tin clatters off! Its GRIT is back to normal.');
+    b2Msg(cap(t.def.the)+' tips its head. Deedee’s muffin pan clatters off! Its GRIT is back to normal.');
     sfx.bonk&&sfx.bonk();
   }
   let c=chance;
@@ -734,7 +734,7 @@ function b2BossOpen(e) {
   if(e.boss==='bigone') {
     const g=B2.party.find(p=>p.id==='grace'&&b2Alive(p))||pick(b2LiveParty());
     e.lastLock=true;
-    return [()=>{ b2SetLock(e,g); b2Msg(cap(e.def.the)+' is wearing Deedee’s pie tin like a helmet (GRIT +50%). It stares right at '+g.name+'.'); b2Render(); },1800,
+    return [()=>{ b2SetLock(e,g); b2Msg(cap(e.def.the)+' is wearing Deedee’s muffin pan like a helmet (GRIT +50%). It stares right at '+g.name+'.'); b2Render(); },1800,
       ()=>b2Msg('Lock-on: Swamp Chomp is coming for '+g.name+'.'+(b2Tom()?' Tom can DEFEND '+(g.id==='grace'?'her':'them')+'.':'')),1600];
   }
   if(e.boss==='redpen') {
@@ -1489,8 +1489,8 @@ function b2RewardsData() {
 // ---------- The full game: walking into a monster on the map ----------
 // opts (story fights, engine/story.js): tut (a TUTORIALS key: tips and a setup for the fight), level (the monster's level).
 function startBattle(npc,opts={}) {
-  const id=npc.monster,d=monsterDef(npc),lvl=opts.level||b7MonLevel(npc);   // base level plus wins; Director mode keeps it near Tom's level (engine/feel.js)
-  const F=B2_FORMATIONS[id],form=((typeof F==='function'?F():F)||[[id,'front']]).map(f=>[f[0],f[1],lvl]);   // a function: crowds of a random size
+  const id=npc.monster,d=monsterDef(npc),lvl=opts.level||b7MonLevel(npc);   // opts.count: a story fight of that many of the same monster (chapter 1: three Mudlings)   // base level plus wins; Director mode keeps it near Tom's level (engine/feel.js)
+  const F=B2_FORMATIONS[id],form=(opts.count?Array.from({length:opts.count},()=>[id,'front']):((typeof F==='function'?F():F)||[[id,'front']])).map(f=>[f[0],f[1],lvl]);   // a function: crowds of a random size
   // noBattle members (Justin, until his kit is built) follow Tom on the map but sit fights out.
   const fighters=party.filter(p=>!p.noBattle);
   const levels={}; for(const p of fighters) levels[p.id]=p.level;

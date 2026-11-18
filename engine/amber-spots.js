@@ -8,18 +8,10 @@
 const AMBER_SPOTS=[
   // Chapter 1, Boppy's fishing spot (engine/plate.js HOLLOW_SPOT, SCENES.ch1Spot): the plum-sized block on the grey patch, tile (17,10).
   {id:'ch1',map:'hollow',name:'Orange block',show:()=>!flag('bb-hollow'),found:'ch1-spot',solid:[[17,10]],
-    lines:[['grace','That\'s a dragonfly. It\'s inside an orange rock. Its wings are open and it\'s not moving.'],
-      ['deedee','Look at the grass. It\'s grey. Just this bit, the size of my hand.'],
-      ['tom','It isn\'t dried out. It\'s just grey. Like somebody took the green out.'],
-      ['rose','I\'m keeping it. It\'s stuck.']]},
-  // Chapter 1 crumb trails (HOLLOW_TRAIL in engine/plate.js; report r-20261114-100952-si36, Tom: "the player should be able to interact with any of the
-  // crumb trails, including this big piece in front of Tom"). Nothing is solid: A on a crumb tile replays Deedee's line from when the trail appeared.
-  {id:'ch1-crumbs-a',map:'hollow',name:'Rhubarb crumbs',show:()=>!flag('ch1-tin'),found:'ch1-crumbs-a',solid:[],press:[[7,17],[8,17],[7,18],[8,18]],
-    lines:[['deedee','Look, rhubarb crumbs on the path. The little thief dropped them as it ran, so we can follow the trail.']]},
-  {id:'ch1-crumbs-b',map:'hollow',name:'Rhubarb crumbs',show:()=>!flag('ch1-tin'),found:'ch1-crumbs-b',solid:[],press:[[7,12],[7,13],[8,13]],
-    lines:[['deedee','Good job, girls. The crumb trail keeps going north, so that\'s the way we go.']]},
-  {id:'ch1-crumbs-c',map:'hollow',name:'Rhubarb crumbs',show:()=>!flag('ch1-tin'),found:'ch1-crumbs-c',solid:[],press:[[9,11],[10,11],[11,11],[12,11],[13,11],[14,11],[15,11],[16,11],[17,11],[18,11],[10,10],[11,10],[12,10],[13,10],[14,10],[15,10],[16,10]],
-    lines:[['deedee','The crumbs lead around the pond, toward Boppy\'s fishing spot.']]},
+    lines:[['rose','The grass is Boppy color!'],
+      ['grace','It\'s grey, Rose. Just that one spot. And that orange cube has a dragonfly in it.'],
+      ['rose','He\'s stuck! Tata, get him out!'],
+      ['tom','It\'s the size of a plum. I carried a suitcase through two airports this morning.']]},
   // Chapter 2, the grey lemon tree on the Griffith trail (GRIFFITH_SPOT, SCENES.ch2Lemon): the trunk (row 7) and the dirt circle (row 8).
   {id:'ch2',map:'griffith',name:'Orange block',show:()=>STORY.chapter>=2&&!flag('bb-griffith'),found:'ch2-lemon',solid:[[3,7],[4,7],[3,8],[4,8]],
     lines:[['tnb','Babe, look at that tree. It\'s grey. The leaves, the trunk, even the dirt. It looks like an old black and white movie.'],

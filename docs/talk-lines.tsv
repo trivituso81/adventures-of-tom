@@ -10,94 +10,101 @@ chapter	file	line	character	mood	talk	text
 1	data/scenes.js	44	Grace	proud		It's limited edition. There are only two in the whole world. You can squeeze it!
 1	data/scenes.js	47	Tom	happy		That's the shiniest dumpling I've ever seen. And I've seen a LOT of dumplings.
 1	data/scenes.js	48	Rose	happy		Come on, Tata! Let's go!
-1	data/scenes.js	67	Grace	happy		Tata! Deedee made rhubarb crisp for you. It's cooling RIGHT NOW.
-1	data/scenes.js	68	Rose	happy		I already licked the spoon. Don't tell.
-1	data/scenes.js	69	Tom	unimpressed		Then we had better hurry. Before somebody licks the rest.
 1	data/scenes.js	81	Deedee	loving		My favorite son!
-1	data/scenes.js	81	Deedee	loving		And my girls! Come here, come here.
-1	data/scenes.js	100	Grace	proud	point	Tata, look at the door. Deedee measured me two times since you left.
-1	data/scenes.js	102	Rose	proud		I got one too. Mine's the low one.
-1	data/scenes.js	83	Deedee	loving		Tom you must be starving! Sit. The crisp needs ten minutes on the counter.
-1	data/scenes.js	84	Deedee	surprised	ask	Where are my reading glasses? I had them one second ago. I need to read the timer.
-1	data/scenes.js	85	Grace	unimpressed		Deedee. They're on your head.
-1	data/scenes.js	86	Deedee	happy	answer	So they are. Not one word to Boppy.
-1	data/scenes.js	87	Tom	loving	tell	I brought you a sourdough loaf. Baked it yesterday. It flew here on my lap.
-1	data/scenes.js	88	Deedee	happy		Your bread and my rhubarb crisp. Now THAT is a meal.
-1	data/scenes.js	89	Deedee	happy	tell	A sliver for me. Just a sliver. Sourdough gives me gas.
-1	data/scenes.js	90	Tom	unimpressed		Mom, EVERYTHING gives you gas.
-1	data/scenes.js	91	Deedee	loving		And I eat it anyway. That's love, Tom.
-1	data/scenes.js	93	Boppy	angry		Tom! Good. I'm not feeling good. It's the stomach.
-1	data/scenes.js	126	Rose	scared		Oh no! The mud blob is stealing Deedee's crisp!
-1	data/scenes.js	169	Deedee	surprised		What in goodness sake was THAT?
-1	data/scenes.js	170	Rose	scared		It had EYES! The mud had EYES!
-1	data/scenes.js	171	Deedee	angry		Ants, I can handle. A raccoon, I can handle. Your father at midnight with a serving spoon, I've handled for forty years. But a MUD BLOB?
-1	data/scenes.js	172	Grace	happy		It's so brown. It looks like a poop. A very sneaky poop.
 1	data/scenes.js	144	Tom	angry		That was UNCALLED for!
-1	data/scenes.js	174	Grace	surprised		It's running for the pond!
-1	data/scenes.js	145	Deedee	angry		It took the crisp AND my good tin! Grab your shoes, everybody. We're going after it, and I'm coming with you.
-1	data/scenes.js	146	Boppy	angry		It's headed for Grump Hollow. I've been saying for twenty years that something lives in that pond, and nobody listens to Boppy.
-1	data/scenes.js	177	Boppy	proud		Twenty years ago I'd have caught that thing before it got to the fence.
-1	data/scenes.js	146	Boppy	unimpressed		I'd come with you, but my stomach is acting up. If you see the Big One in that pond, bring him back for me.
-1	data/scenes.js	179	Boppy	loving	point	Tom. You stay in front of those girls.
 1	data/scenes.js	229	Deedee	loving		Up, up. Everybody up. Deedee kisses it better.
 1	data/scenes.js	155	Deedee	loving		There. Good as new. Try not to do that again.
-1	data/scenes.js	162	Deedee	surprised	point	Look, rhubarb crumbs on the path. The little thief must have dropped them as it ran.
-1	data/scenes.js	162	Deedee	happy		That means we can follow the trail!
-1	data/scenes.js	164	Rose	scared		Tata. The mud is MOVING.
-1	data/scenes.js	202	Tom	surprised		It talks.
-1	data/scenes.js	203	Deedee	angry		It talks AND it steals.
-1	data/scenes.js	168	Grace	proud		Okay, everybody. Tata is in front. I'm in charge of choreography. FIGHT!
-1	data/scenes.js	171	Deedee	loving		Good job, girls. The crumb trail keeps going north, so that's the way we go.
-1	data/scenes.js	179	Grace	angry		Ew. Ew ew ew. Nobody touch my hair.
-1	data/scenes.js	217	Deedee	unimpressed		I've been bitten ten thousand times in my life. Not one of them ever said a word first.
-1	data/scenes.js	182	Deedee	loving	ask	Everybody okay? Itchy isn't hurt. Keep walking.
-1	data/scenes.js	189	Rose	happy		I'm not laughing. I'm giggling. It's different.
 1	data/scenes.js	195	Deedee	loving		Hugs for everyone. There. All better.
-1	data/scenes.js	195	Deedee	none	tell	The crumbs lead around the pond, toward Boppy's fishing spot.
-1	data/scenes.js	196	Grace	none	point	Boppy says the Big One lives over there.
-1	data/scenes.js	236	Tom	proud	point	Then nobody goes near the water. Stay close.
-1	data/scenes.js	245	Rose	happy		A MARBLE! There's a marble with a bug in it!
-1	data/scenes.js	246	Grace	surprised	tell	That's a dragonfly. It's inside an orange rock. Its wings are open and it's not moving.
-1	data/scenes.js	247	Deedee	surprised	point	Look at the grass. It's grey. Just this bit, the size of my hand.
-1	data/scenes.js	248	Tom	surprised	tell	It isn't dried out. It's just grey. Like somebody took the green out.
-1	data/scenes.js	249	Rose	happy	answer	I'm keeping it. It's stuck.
-1	data/scenes.js	251	Tom	proud	answer	Let me.
-1	data/scenes.js	253	Rose	unimpressed		You're not trying.
-1	data/scenes.js	255	Grace	surprised	tell	There's a little round hole in the side. Like somebody took a bite.
-1	data/scenes.js	257	Deedee	angry		And somebody left a burnt light bulb. Now they're littering at my pond too.
-1	data/scenes.js	259	Deedee	angry		The tin. Go, go, go.
-1	data/scenes.js	260	Rose	loving		Bye, marble. I'm coming back for you.
-1	data/scenes.js	210	Grace	surprised		THERE! The thief! He still has the tin!
-1	data/scenes.js	285	Tom	surprised		That's a fish. That fish is bigger than the cab.
-1	data/scenes.js	286	Grace	surprised		Boppy was RIGHT?
-1	data/scenes.js	287	Deedee	unimpressed		Nobody tell him.
-1	data/scenes.js	223	Deedee	angry		That's my GOOD tin, you overgrown handbag!
-1	data/scenes.js	224	Rose	happy		Tata, he looks like a turtle wearing a hat.
-1	data/scenes.js	225	Tom	proud	point	Nobody touches Deedee’s crisp. Everybody ready?
 1	data/scenes.js	296	Deedee	proud	point	Tom, you stand in front of whoever it stares at. Cozy Rosie, make it laugh. Then we try again.
-1	data/scenes.js	309	Rose	happy		It has a bug on it! I'm keeping it.
-1	data/scenes.js	311	Tom	loving		This one you can keep.
-1	data/scenes.js	313	Grace	happy	answer	Boppy? He comes every day.
 1	data/scenes.js	229	Deedee	loving		Up, up. Everybody up. Deedee kisses it better.
-1	data/scenes.js	239	Deedee	happy		My tin! And look. Half the crisp is still in it.
-1	data/scenes.js	240	Grace	none	tell	The Big One ate the other half. I saw crumbs on its chin.
-1	data/scenes.js	241	Deedee	happy		Then we split this half. Everybody home. Wait until Boppy hears about this.
-1	data/scenes.js	250	Boppy	proud		You found the Big One? I TOLD everybody. Twenty years.
-1	data/scenes.js	327	Grace	happy		Boppy, the mud TALKED. And the mosquitoes. And a puddle.
-1	data/scenes.js	328	Boppy	unimpressed		The mud talked? Forty years in this town, the mud never said one word to me.
-1	data/scenes.js	252	Tom	none	tell	We did. And when it laughed, this fell out of its lip.
-1	data/scenes.js	253	Boppy	surprised		My LURE! I lost that in 2006. Still shiny. Unlike me.
-1	data/scenes.js	253	Boppy	loving		Keep it, Tom. For luck. The fish clearly didn't want it.
-1	data/scenes.js	332	Rose	proud		He gave me a present. Look.
-1	data/scenes.js	333	Boppy	proud		That's real gold, Cozy Rosie. Gold like my teeth. Look.
-1	data/scenes.js	335	Rose	surprised		Boppy has treasure in his mouth!
-1	data/scenes.js	336	Boppy	loving	tell	You put that somewhere safe. Gold is for keeping.
-1	data/scenes.js	337	Boppy	proud		Next time something comes in that window, I'm coming. Stomach or no stomach.
-1	data/scenes.js	254	Deedee	loving	point	Sit. Everybody sit. Half a crisp is still a crisp.
-1	data/scenes.js	256	Rose	happy		This is the best half a crisp I ever had.
-1	data/scenes.js	257	Grace	happy		Tata, you're staying the WHOLE week, right?
-1	data/scenes.js	258	Tom	loving	tell	The whole week. And nobody is stealing anything else.
-1	data/scenes.js	259	Boppy	angry		Slow down. Everybody eats too fast. My stomach.
+1	data/scenes.js	88	Grace	proud	tell	Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One again.
+1	data/scenes.js	89	Rose	happy		It's bigger than a BUS! It ate a boat!
+1	data/scenes.js	90	Grace	unimpressed		It did not eat a boat. Nobody's ever seen it but Boppy, and he's been saying it for twenty years.
+1	data/scenes.js	91	Tom	unimpressed		Twenty years, one witness. That's a strong number one. What's number two?
+1	data/scenes.js	92	Grace	none	tell	Number two. Deedee made apple muffins. They're for you, so nobody's allowed to have one yet.
+1	data/scenes.js	93	Rose	happy		I licked one. Only the top!
+1	data/scenes.js	94	Tom	loving		Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry. Number two can't wait.
+1	data/scenes.js	96	Grace	unimpressed		Number three. Rose licked a muffin.
+1	data/scenes.js	106	Amy	happy		Brother! I'm watching you from the window. I've seen people walk faster in ski boots.
+1	data/scenes.js	107	Tom	unimpressed		I'm carrying a child and receiving a news report.
+1	data/scenes.js	109	Amy	proud	tell	I carried both of them up that street with the groceries. Go hug Mom. I'm coming over after my run.
+1	data/scenes.js	110	Tom	unimpressed		Your mother says I'm slow.
+1	data/scenes.js	111	Grace	unimpressed		You are slow. I've been on number four since the mailbox.
+1	data/scenes.js	121	Aunt Ellie	unimpressed		Tom. They gave you a seat that turns into a bed, and you still got off that plane wrinkled.
+1	data/scenes.js	122	Tom	happy	tell	Hi, Aunt Ellie. It's a travel wrinkle. It's supposed to fall out by dinner.
+1	data/scenes.js	123	Aunt Ellie	unimpressed		Then I'll look at you again at dinner. Come in. Rose, darling, what is that on your hands?
+1	data/scenes.js	124	Rose	proud		Cinnamon! From Deedee's muffin!
+1	data/scenes.js	125	Aunt Ellie	unimpressed	point	Then you'll stay up there, please. Your uncle wipes clean. My chairs don't.
+1	data/scenes.js	126	Grace	proud	tell	Aunt Ellie, I'm reading Tata everything he missed. You're number four.
+1	data/scenes.js	127	Aunt Ellie	surprised		Am I? What did I do?
+1	data/scenes.js	128	Grace	none	answer	You got new curtains.
+1	data/scenes.js	129	Aunt Ellie	unimpressed		I did. And what's number three?
+1	data/scenes.js	96	Grace	none	answer	Rose licked a muffin.
+1	data/scenes.js	131	Aunt Ellie	unimpressed		Then the curtains are three, Grace. Fix your list. I'm not coming in behind a licked muffin.
+1	data/scenes.js	133	Rose	happy	ask	Aunt Ellie, did you miss Tata?
+1	data/scenes.js	134	Aunt Ellie	loving	tell	Fine. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind.
+1	data/scenes.js	145	Deedee	loving		There he is! Come here. Let me look at you. I missed that face. Now sit, you're having a muffin.
+1	data/scenes.js	146	Tom	happy	ask	Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since we flew over Kansas.
+1	data/scenes.js	147	Deedee	proud	tell	Twelve of them, and all twelve are still there. I've been standing between that pan and your father since six this morning.
+1	data/scenes.js	148	Boppy	angry		In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat...
+1	data/scenes.js	196	Rose	scared		AHHH! DEEDEE!
+1	data/scenes.js	197	Tom	surprised		GAH! I'm on the floor. Grace, is that your elbow or mine?
+1	data/scenes.js	198	Grace	scared		It's mine! Tata, get UP, it's getting away!
+1	data/scenes.js	199	Deedee	angry		That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER.
+1	data/scenes.js	200	Boppy	happy		...and I only caught him because the hat kept getting taller. Where'd the muffins go?
+1	data/scenes.js	201	Deedee	none	tell	A ball of mud came through the door and took them. Pan and all.
+1	data/scenes.js	202	Boppy	sad		The mud gets a muffin and I don't?
+1	data/scenes.js	203	Deedee	proud	point	Girls, sneakers. Tom, hold the door. Hubby, you stay right there. When we get them back, the first one's yours.
+1	data/scenes.js	204	Boppy	proud	tell	The first one. Tom, you heard her.
+1	data/scenes.js	225	Rose	happy		Hello, mud! Can we please have Deedee's muffins back? Thank you!
+1	data/scenes.js	227	Rose	angry		But I said PLEASE!
+1	data/scenes.js	228	Tom	unimpressed		She did. I was right here. It was an excellent please.
+1	data/scenes.js	229	Deedee	proud	point	Girls, behind me. You three have till I count to three. Then I'm getting the hose.
+1	data/scenes.js	231	Deedee	unimpressed		Three.
+1	data/scenes.js	237	Grace	none	tell	Nine papers. There were twelve. So the one with the pan still has three.
+1	data/scenes.js	238	Deedee	unimpressed		Then it has three of my muffins and my pan. Keep walking.
+1	data/scenes.js	248	Rose	happy		The grass is Boppy color!
+1	data/scenes.js	249	Grace	none	tell	It's grey, Rose. Just that one spot. And that orange cube has a dragonfly in it.
+1	data/scenes.js	250	Rose	scared		He's stuck! Tata, get him out!
+1	data/scenes.js	251	Tom	proud	answer	Yes. Right away. Everybody give the dragonfly some room.
+1	data/scenes.js	253	Tom	none	tell	It's the size of a plum. I carried a suitcase through two airports this morning.
+1	data/scenes.js	254	Rose	happy		Your face is RED, Tata!
+1	data/scenes.js	255	Grace	unimpressed		Tata, stop. You're getting fingerprints on it. And look, it has a dent. Did you do that?
+1	data/scenes.js	256	Tom	unimpressed	point	Grace. I couldn't even make it wobble.
+1	data/scenes.js	258	Grace	surprised		Deedee, what's that?
+1	data/scenes.js	259	Deedee	none	tell	A flashbulb, from an old camera. It's burnt. Somebody set it off right here and left it by your grandfather's chair.
+1	data/scenes.js	260	Grace	surprised		Don't throw it out! It's a clue. I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it. I'm writing it in pencil.
+1	data/scenes.js	261	Tom	none	ask	Why pencil?
+1	data/scenes.js	262	Grace	none	tell	Because I don't know what any of it means yet.
+1	data/scenes.js	273	Tom	surprised		GAH! Grace, I'm holding your hand. That's for me, not for you.
+1	data/scenes.js	274	Grace	scared		I know, Tata. You're squeezing. Is that the Big One? Boppy only said it was as big as the couch!
+1	data/scenes.js	275	Deedee	unimpressed		For once in his life he rounded down.
+1	data/scenes.js	277	Deedee	angry		And that's my good twelve-cup pan on your head. It's never been in pond water in its life.
+1	data/scenes.js	279	Tom	scared		Mom. That's a boss. You don't just walk up to a boss.
+1	data/scenes.js	280	Deedee	proud	tell	I worked the night shift, Tom. I've walked up to worse. Mister, take off my pan.
+1	data/scenes.js	293	Rose	happy		BOO!
+1	data/scenes.js	298	Tom	unimpressed	point	Nobody does. She's gotten me in an empty room.
+1	data/scenes.js	304	Rose	happy		Thank you, fish! There's a bug on my money!
+1	data/scenes.js	306	Grace	surprised	tell	That's Boppy. He's here every single day.
+1	data/scenes.js	308	Deedee	unimpressed		He's been in the middle of that one for fifty-one years.
+1	data/scenes.js	322	Rose	happy		Boppy! Your fish is REAL! He's CAR size and he gave me money!
+1	data/scenes.js	323	Boppy	surprised		CAR size? Cozy Rosie, I told everybody a couch. Twenty years! I didn't want to brag!
+1	data/scenes.js	324	Boppy	proud	tell	Now that's real gold. Same as these. Look.
+1	data/scenes.js	326	Rose	surprised		You've got money in your TEETH!
+1	data/scenes.js	327	Boppy	proud	tell	Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look.
+1	data/scenes.js	328	Rose	happy		Under Lamby! Nobody looks under Lamby!
+1	data/scenes.js	329	Boppy	happy	ask	Good girl. Now. Your grandmother promised me the first muffin. Who's got my muffin?
+1	data/scenes.js	330	Grace	none	tell	The fish ate them, Boppy. The last three.
+1	data/scenes.js	331	Boppy	sad		The fish gets THREE?
+1	data/scenes.js	332	Deedee	none	tell	Twelve more. Forty minutes. The first one's still yours.
+1	data/scenes.js	333	Boppy	happy	tell	Girls, you heard that. Forty minutes. Somebody watch the clock.
+1	data/scenes.js	340	Grace	proud	tell	Tata, you have a job. If you see anything grey in California, or an orange cube, you write it down and text me.
+1	data/scenes.js	341	Tom	proud	ask	I have a job. Yes. Does the job come with a pencil?
+1	data/scenes.js	342	Grace	unimpressed		That's my second best one. Don't lose it.
+1	data/scenes.js	344	Tom	loving	tell	Second best. It's going in the pocket with the zipper.
+1	data/scenes.js	345	Rose	happy		One more ride, Tata! To the cab! Go the LONG way!
+1	data/scenes.js	346	Tom	happy	tell	The long way. That's all the way around the Square. Twice.
+1	data/scenes.js	362	TNB	none	tell	hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over.
 2	data/scenes.js	278	Tom	none	tell	TNB said he'd be home. Spring Street loft.
 2	data/scenes.js	287	TNB	happy	answer	Well, well, well...
 2	data/scenes.js	288	TNB	happy		Look who flew three thousand miles to see me.

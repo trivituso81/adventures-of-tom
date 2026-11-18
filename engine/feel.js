@@ -190,7 +190,7 @@ function b7Recommend(u) {
   if(sp&&sp.kind==='defend'&&ok(sp)&&lock&&lock.intent.target!==u&&!lock.intent.target.st.guarded)
     return {dir:'down',i:0,name:sp.name,why:'Step in front of '+lock.intent.target.name+'. '+cap(lock.def.the)+' has locked on.'};
   const tin=foes.find(f=>f.st.pietin);
-  if(sp&&sp.key==='silly'&&ok(sp)&&tin) return {dir:'down',i:0,name:sp.name,why:'Make '+tin.def.the+' laugh and the pie tin falls off.'};
+  if(sp&&sp.key==='silly'&&ok(sp)&&tin) return {dir:'down',i:0,name:sp.name,why:'Make '+tin.def.the+' laugh and the muffin pan falls off.'};
   const down=B2.party.find(p=>p.hp<=0);
   if(sp&&sp.key==='wardrobe'&&ok(sp)&&down) return {dir:'down',i:0,name:sp.name,why:'Get '+down.name+' back on their feet.'};
   const low=live.filter(p=>p.hp/p.maxHp<.45);

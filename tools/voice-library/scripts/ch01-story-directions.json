@@ -1,306 +1,670 @@
 {
- "tag": "20261113ch1",
+ "tag": "20261117ch1",
  "lines": [
   {
    "voice": "grace",
    "speaker": "Grace",
-   "text": "Tata, look at the door. Deedee measured me two times since you left.",
-   "ctx": "chapter 1 (new)",
-   "script": "[showing off] Tata, look at the door. [bragging] Deedee measured me TWO times since you left."
+   "text": "Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One again.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[bossy, small teacher] Tata, don't walk yet. [proud] I wrote down EVERYTHING that happened since you left. [reading aloud] Number one. Boppy saw the Big One again."
   },
   {
    "voice": "rose",
    "speaker": "Rose",
-   "text": "I got one too. Mine's the low one.",
-   "ctx": "chapter 1 (new)",
-   "script": "[butting in] I got one too. [proud anyway] Mine's the LOW one."
+   "text": "It's bigger than a BUS! It ate a boat!",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[shouting, delighted] It's bigger than a BUS! [certain, stating a fact] It ate a boat!"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "It did not eat a boat. Nobody's ever seen it but Boppy, and he's been saying it for twenty years.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[flat, correcting] It did NOT eat a boat. [matter of fact] Nobody's ever seen it but Boppy, and he's been saying it for twenty years."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Twenty years, one witness. That's a strong number one. What's number two?",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[serious, taking notes in his head] Twenty years, one witness. [sincere, impressed] That's a STRONG number one. [eager] What's number two?"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Number two. Deedee made apple muffins. They're for you, so nobody's allowed to have one yet.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[reading aloud] Number two. Deedee made apple muffins. [strict] They're for you, so nobody's allowed to have one yet."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "I licked one. Only the top!",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[cheerful confession] I licked one. [quick, reassuring] Only the TOP!"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry. Number two can't wait.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[warm, formal] Thank you for telling me, Rose. That one's yours. [truly apologetic] Grace, I'm so sorry. [urgent] Number two can't WAIT."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Number three. Rose licked a muffin.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[flat, writing as she talks] [punchline] Number three. Rose licked a muffin."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "Brother! I'm watching you from the window. I've seen people walk faster in ski boots.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[loud, teasing, Long Island] Brother! I'm watching you from the window. [punchline, cheerful] I've seen people walk faster in SKI boots."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I'm carrying a child and receiving a news report.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[dignified, defending himself] I'm carrying a child and receiving a NEWS report."
+  },
+  {
+   "voice": "amy",
+   "speaker": "Amy",
+   "text": "I carried both of them up that street with the groceries. Go hug Mom. I'm coming over after my run.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[bragging, fast] I carried BOTH of them up that street with the groceries. [warm, bossy] Go hug Mom. I'm coming over after my run."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Your mother says I'm slow.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[mock wounded] Your mother says I'm slow."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "You are slow. I've been on number four since the mailbox.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[flat, sassy] You ARE slow. [punchline, level] I've been on number four since the mailbox."
+  },
+  {
+   "voice": "ellie",
+   "speaker": "Aunt Ellie",
+   "text": "Tom. They gave you a seat that turns into a bed, and you still got off that plane wrinkled.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[cool, elegant, Long Island] Tom. [measured, faintly disappointed] They gave you a seat that turns into a BED, [punchline, level] and you still got off that plane wrinkled."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Hi, Aunt Ellie. It's a travel wrinkle. It's supposed to fall out by dinner.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[warm, a little defensive] Hi, Aunt Ellie. [earnest, explaining] It's a TRAVEL wrinkle. It's supposed to fall out by dinner."
+  },
+  {
+   "voice": "ellie",
+   "speaker": "Aunt Ellie",
+   "text": "Then I'll look at you again at dinner. Come in. Rose, darling, what is that on your hands?",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[dry, unhurried] Then I'll look at you again at dinner. [gracious] Come in. [crisp, kind] Rose, darling, what is that on your HANDS?"
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Cinnamon! From Deedee's muffin!",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[proud, loud] Cinnamon! From Deedee's MUFFIN!"
+  },
+  {
+   "voice": "ellie",
+   "speaker": "Aunt Ellie",
+   "text": "Then you'll stay up there, please. Your uncle wipes clean. My chairs don't.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[calm, certain] Then you'll stay up there, please. [punchline, cool] Your uncle wipes clean. My CHAIRS don't."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Aunt Ellie, I'm reading Tata everything he missed. You're number four.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[bossy, reporting] Aunt Ellie, I'm reading Tata everything he missed. [important] You're number FOUR."
+  },
+  {
+   "voice": "ellie",
+   "speaker": "Aunt Ellie",
+   "text": "Am I? What did I do?",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[one raised eyebrow] Am I? [mild interest] What did I do?"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "You got new curtains.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[plain, reading] You got new curtains."
+  },
+  {
+   "voice": "ellie",
+   "speaker": "Aunt Ellie",
+   "text": "I did. And what's number three?",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[level] I did. [careful] And what's number THREE?"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Rose licked a muffin.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[flat] Rose licked a muffin."
+  },
+  {
+   "voice": "ellie",
+   "speaker": "Aunt Ellie",
+   "text": "Then the curtains are three, Grace. Fix your list. I'm not coming in behind a licked muffin.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[crisp, final] Then the curtains are three, Grace. Fix your list. [punchline, composed] I'm not coming in behind a LICKED muffin."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Aunt Ellie, did you miss Tata?",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[loud, curious] Aunt Ellie, did you MISS Tata?"
+  },
+  {
+   "voice": "ellie",
+   "speaker": "Aunt Ellie",
+   "text": "Fine. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[clipped, reluctant] Fine. [plain, quick] The street was quieter without him, and I didn't CARE for it. [brisk, businesslike] Now go and see your mother, Tom, before I change my mind."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "There he is! Come here. Let me look at you. I missed that face. Now sit, you're having a muffin.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[bright, thrilled, Long Island] There he is! Come here. Let me look at you. [warm, plain] I missed that FACE. [firm] Now sit, you're having a muffin."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since we flew over Kansas.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[warm] Hi, Mom. I missed yours too. [sniffing, hopeful] Is that the cinnamon topping? [earnest confession] I've been thinking about that topping since we flew over KANSAS."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Twelve of them, and all twelve are still there. I've been standing between that pan and your father since six this morning.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[proud] Twelve of them, and all twelve are still there. [dry, pointed] I've been standing between that pan and your FATHER since six this morning."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
-   "text": "Twenty years ago I'd have caught that thing before it got to the fence.",
-   "ctx": "chapter 1 (new)",
-   "script": "[bragging] Twenty years ago I'd have caught that thing [wistful, admitting] before it got to the fence."
+   "text": "In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat...",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[goofy outrage] In my own KITCHEN! [chatty, building] Tom, back at Rikers I had a key to every door in the place, and here I can't get near a MUFFIN. [settling into a story, relaxed] You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat..."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "AHHH! DEEDEE!",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[real scream] AHHH! DEEDEE!"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "GAH! I'm on the floor. Grace, is that your elbow or mine?",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[real yelp] GAH! [breathless, amazed] I'm on the floor. [polite, laughing at himself] Grace, is that your elbow or mine?"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "It's mine! Tata, get UP, it's getting away!",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[scared kid] It's MINE! [taking charge, urgent] Tata, get UP, it's getting away!"
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[shocked, loud] That thing took my good twelve-cup PAN! [low, indignant] I don't even put that pan in the DISHWASHER."
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
-   "text": "Tom. You stay in front of those girls.",
-   "ctx": "chapter 1 (new)",
-   "script": "[serious] Tom. [giving an order] You stay in FRONT of those girls."
+   "text": "...and I only caught him because the hat kept getting taller. Where'd the muffins go?",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[finishing his story, pleased, has noticed nothing] ...and I only caught him because the hat kept getting TALLER. [mild, puzzled] Where'd the muffins go?"
   },
   {
    "voice": "deedee",
    "speaker": "Deedee",
-   "text": "What in goodness sake was THAT?",
-   "ctx": "chapter 1 (new)",
-   "script": "[appalled, shocked] What in goodness sake was THAT?"
+   "text": "A ball of mud came through the door and took them. Pan and all.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[brisk, matter of fact] A ball of mud came through the door and took them. Pan and all."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "The mud gets a muffin and I don't?",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[hurt, baffled] [punchline] The MUD gets a muffin and I don't?"
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Girls, sneakers. Tom, hold the door. Hubby, you stay right there. When we get them back, the first one's yours.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[charge nurse, fast] Girls, sneakers. Tom, hold the door. Hubby, you stay right there. [softer, a promise] When we get them back, the first one's yours."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "The first one. Tom, you heard her.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[satisfied, pointing] The FIRST one. Tom, you heard her."
   },
   {
    "voice": "rose",
    "speaker": "Rose",
-   "text": "It had EYES! The mud had EYES!",
-   "ctx": "chapter 1 (new)",
-   "script": "[shrieking] It had EYES! [insisting, shrill] The mud had EYES!"
+   "text": "Hello, mud! Can we please have Deedee's muffins back? Thank you!",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[loud, friendly, very polite] Hello, mud! Can we PLEASE have Deedee's muffins back? Thank you!"
   },
   {
-   "voice": "deedee",
-   "speaker": "Deedee",
-   "text": "Ants, I can handle. A raccoon, I can handle. Your father at midnight with a serving spoon, I've handled for forty years. But a MUD BLOB?",
-   "ctx": "chapter 1 (new)",
-   "script": "[exasperated] Ants, I can handle. [dry] A raccoon, I can handle. [deadpan, weary] Your father at midnight with a serving spoon, I've handled for forty years. [outraged, rising] But a MUD BLOB?"
-  },
-  {
-   "voice": "grace",
-   "speaker": "Grace",
-   "text": "It's so brown. It looks like a poop. A very sneaky poop.",
-   "ctx": "chapter 1 (new)",
-   "script": "[disgusted] It's SO brown. [snickering, delighted] It looks like a poop. [giggling, immature] A very sneaky poop."
-  },
-  {
-   "voice": "grace",
-   "speaker": "Grace",
-   "text": "It's running for the pond!",
-   "ctx": "chapter 1 (new)",
-   "script": "[alarmed, pointing it out] It's running for the pond!"
-  },
-  {
-   "voice": "tom",
-   "speaker": "Tom",
-   "text": "It talks.",
-   "ctx": "chapter 1 (new)",
-   "script": "[stunned, flat] It talks."
-  },
-  {
-   "voice": "deedee",
-   "speaker": "Deedee",
-   "text": "It talks AND it steals.",
-   "ctx": "chapter 1 (new)",
-   "script": "[dry] It talks... [fed up] AND it steals."
-  },
-  {
-   "voice": "deedee",
-   "speaker": "Deedee",
-   "text": "I've been bitten ten thousand times in my life. Not one of them ever said a word first.",
-   "ctx": "chapter 1 (new)",
-   "script": "[offended] I've been bitten ten THOUSAND times in my life. [punchline, deadpan] Not one of them ever said a word first."
-  },
-  {
-   "voice": "tom",
-   "speaker": "Tom",
-   "text": "Then nobody goes near the water. Stay close.",
-   "ctx": "chapter 1 (changed)",
-   "script": "[taking charge, quiet] Then nobody goes near the water. [protective] Stay close."
+   "voice": "mudling",
+   "speaker": "Mudling",
+   "text": "No. Ours now.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[thick, wet, flat] No. Ours now."
   },
   {
    "voice": "rose",
    "speaker": "Rose",
-   "text": "A MARBLE! There's a marble with a bug in it!",
-   "ctx": "chapter 1 (new)",
-   "script": "[shrieking, delighted] A MARBLE! [amazed] There's a marble with a BUG in it!"
+   "text": "But I said PLEASE!",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[outraged, disbelieving] But I said PLEASE!"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "She did. I was right here. It was an excellent please.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[formal, indignant for her] She did. I was right here. [punchline, certain] It was an EXCELLENT please."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Girls, behind me. You three have till I count to three. Then I'm getting the hose.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[clipped, in charge] Girls, behind me. [low, slow, almost polite] You three have till I count to three. Then I'm getting the HOSE."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Three.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[flat, immediate] [punchline] Three."
   },
   {
    "voice": "grace",
    "speaker": "Grace",
-   "text": "That's a dragonfly. It's inside an orange rock. Its wings are open and it's not moving.",
-   "ctx": "chapter 1 (new)",
-   "script": "[correcting] That's a dragonfly. [investigating] It's inside an orange rock. [hushed, uneasy] Its wings are open... and it's not moving."
+   "text": "Nine papers. There were twelve. So the one with the pan still has three.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[counting, small teacher] Nine papers. There were twelve. [working it out] So the one with the pan still has three."
   },
   {
    "voice": "deedee",
    "speaker": "Deedee",
-   "text": "Look at the grass. It's grey. Just this bit, the size of my hand.",
-   "ctx": "chapter 1 (new)",
-   "script": "[noticing, sharp] Look at the grass. [puzzled] It's... GREY. [measuring it] Just this bit, the size of my hand."
-  },
-  {
-   "voice": "tom",
-   "speaker": "Tom",
-   "text": "It isn't dried out. It's just grey. Like somebody took the green out.",
-   "ctx": "chapter 1 (new)",
-   "script": "[investigating] It isn't dried out. [uneasy] It's just... grey. [thinking out loud] Like somebody took the green OUT."
+   "text": "Then it has three of my muffins and my pan. Keep walking.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[grim, decided] Then it has three of my muffins and my pan. Keep walking."
   },
   {
    "voice": "rose",
    "speaker": "Rose",
-   "text": "I'm keeping it. It's stuck.",
-   "ctx": "chapter 1 (new)",
-   "script": "[claiming it] I'm keeping it. [frustrated, whining] It's STUCK."
-  },
-  {
-   "voice": "tom",
-   "speaker": "Tom",
-   "text": "Let me.",
-   "ctx": "chapter 1 (new)",
-   "script": "[confident] Let me."
-  },
-  {
-   "voice": "rose",
-   "speaker": "Rose",
-   "text": "You're not trying.",
-   "ctx": "chapter 1 (new)",
-   "script": "[accusing] You're not TRYING."
-  },
-  {
-   "voice": "tom",
-   "speaker": "Tom",
-   "text": "I'm trying, Rose. Please don't tell Grace I lost to a marble.",
-   "ctx": "chapter 1 (new)",
-   "script": "[patient, strained] I'm trying, Rose. [punchline, admitting defeat] Please don't tell Grace I lost to a marble."
+   "text": "The grass is Boppy color!",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[delighted discovery] The grass is BOPPY color!"
   },
   {
    "voice": "grace",
    "speaker": "Grace",
-   "text": "There's a little round hole in the side. Like somebody took a bite.",
-   "ctx": "chapter 1 (new)",
-   "script": "[investigating] There's a little round hole in the side. [amused] Like somebody took a BITE."
-  },
-  {
-   "voice": "deedee",
-   "speaker": "Deedee",
-   "text": "And somebody left a burnt light bulb. Now they're littering at my pond too.",
-   "ctx": "chapter 1 (new)",
-   "script": "[annoyed, noticing] And somebody left a burnt light bulb. [indignant] Now they're littering at MY pond too."
-  },
-  {
-   "voice": "deedee",
-   "speaker": "Deedee",
-   "text": "The tin. Go, go, go.",
-   "ctx": "chapter 1 (new)",
-   "script": "[remembering, urgent] The tin. [ordering] Go, go, GO."
+   "text": "It's grey, Rose. Just that one spot. And that orange cube has a dragonfly in it.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[correcting, patient] It's grey, Rose. Just that one spot. [curious, slower] And that orange cube has a dragonfly in it."
   },
   {
    "voice": "rose",
    "speaker": "Rose",
-   "text": "Bye, marble. I'm coming back for you.",
-   "ctx": "chapter 1 (new)",
-   "script": "[sweet] Bye, marble. [promising, fierce] I'm coming BACK for you."
+   "text": "He's stuck! Tata, get him out!",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[worried for him, loud] He's STUCK! [demanding] Tata, get him out!"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "That's a fish. That fish is bigger than the cab.",
-   "ctx": "chapter 1 (new)",
-   "script": "[stunned] That's a fish. [awed, slowly] That fish is bigger than the CAB."
+   "text": "Yes. Right away. Everybody give the dragonfly some room.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[instant, serious, taking an order] Yes. Right away. [clearing the area] Everybody give the dragonfly some ROOM."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "It's the size of a plum. I carried a suitcase through two airports this morning.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[strained, out of breath] It's the size of a PLUM. [baffled at himself] I carried a suitcase through two airports this morning."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Your face is RED, Tata!",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[delighted] Your face is RED, Tata!"
   },
   {
    "voice": "grace",
    "speaker": "Grace",
-   "text": "Boppy was RIGHT?",
-   "ctx": "chapter 1 (new)",
-   "script": "[disbelief, dismayed] Boppy was RIGHT?"
+   "text": "Tata, stop. You're getting fingerprints on it. And look, it has a dent. Did you do that?",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[bossy] Tata, stop. You're getting fingerprints on it. [noticing] And look, it has a dent. [suspicious] Did YOU do that?"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Grace. I couldn't even make it wobble.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[flat, laughing at himself] Grace. [punchline] I couldn't even make it WOBBLE."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Deedee, what's that?",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[curious] Deedee, what's that?"
   },
   {
    "voice": "deedee",
    "speaker": "Deedee",
-   "text": "Nobody tell him.",
-   "ctx": "chapter 1 (new)",
-   "script": "[whispering, plotting] Nobody tell him."
+   "text": "A flashbulb, from an old camera. It's burnt. Somebody set it off right here and left it by your grandfather's chair.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[plain, certain] A flashbulb, from an old camera. It's burnt. [annoyed] Somebody set it off right here and left it by your grandfather's chair."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Don't throw it out! It's a clue. I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it. I'm writing it in pencil.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[alarmed] Don't throw it out! [important] It's a clue. I'm starting a new list. [writing, one at a time] Burnt bulb. Grey grass. Orange cube with a dragonfly in it. [firm] I'm writing it in PENCIL."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Why pencil?",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[curious, respectful] Why pencil?"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Because I don't know what any of it means yet.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[honest, plain] Because I don't know what any of it MEANS yet."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "GAH! Grace, I'm holding your hand. That's for me, not for you.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[real yelp] GAH! [quiet, amazed at himself] Grace, I'm holding your hand. [punchline, honest] That's for ME, not for you."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "I know, Tata. You're squeezing. Is that the Big One? Boppy only said it was as big as the couch!",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[small, scared] I know, Tata. You're squeezing. [loud question] Is that the Big One? Boppy only said it was as big as the COUCH!"
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "For once in his life he rounded down.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[dry, staring up at it] [punchline] For once in his life he rounded DOWN."
   },
   {
    "voice": "bigone",
    "speaker": "The Big One",
-   "text": "This morning I was a fish. Then there was a big flash. Now I am a BIG fish. With a hat.",
-   "ctx": "chapter 1 (new)",
-   "script": "[bubbly, explaining] This morning I was a fish. [amazed] Then there was a big flash. [bragging] Now I am a BIG fish. [punchline, delighted] With a hat."
+   "text": "GLUB. I was small at breakfast. Then a flash. Now I don't fit under my log.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[huge, wet, slow] GLUB. I was small at breakfast. Then a flash. [glum] Now I don't fit under my log."
   },
   {
    "voice": "deedee",
    "speaker": "Deedee",
-   "text": "Tom, you stand in front of whoever it stares at. Cozy Rosie, make it laugh. Then we try again.",
-   "ctx": "chapter 1 (changed)",
-   "script": "[giving orders] Tom, you stand in front of whoever it stares at. [coaching] Cozy Rosie, make it LAUGH. [determined] Then we try again."
+   "text": "And that's my good twelve-cup pan on your head. It's never been in pond water in its life.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[sharp, pointing] And that's my good twelve-cup pan on your head. [offended, fast] It's never been in POND water in its life."
   },
   {
    "voice": "bigone",
    "speaker": "The Big One",
-   "text": "And this is for the small one. It's my shiniest thing.",
-   "ctx": "chapter 1 (new)",
-   "script": "[shy, offering] And this is for the small one. [proud, tender] It's my SHINIEST thing."
-  },
-  {
-   "voice": "rose",
-   "speaker": "Rose",
-   "text": "It has a bug on it! I'm keeping it.",
-   "ctx": "chapter 1 (new)",
-   "script": "[delighted] It has a BUG on it! [claiming it] I'm keeping it."
+   "text": "It's my crown. A little muddy one brought it. I'm keeping it.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[huge, stubborn] It's my crown. A little muddy one brought it. I'm keeping it."
   },
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "This one you can keep.",
-   "ctx": "chapter 1 (new)",
-   "script": "[amused, allowing it] THIS one you can keep."
+   "text": "Mom. That's a boss. You don't just walk up to a boss.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[urgent whisper] Mom. That's a BOSS. [earnest] You don't just walk UP to a boss."
   },
   {
-   "voice": "bigone",
-   "speaker": "The Big One",
-   "text": "The old man with the cap. Is he coming tomorrow?",
-   "ctx": "chapter 1 (new)",
-   "script": "[shy] The old man with the cap. [hopeful, trying to sound casual] Is he coming tomorrow?"
-  },
-  {
-   "voice": "grace",
-   "speaker": "Grace",
-   "text": "Boppy? He comes every day.",
-   "ctx": "chapter 1 (new)",
-   "script": "[stating the obvious] Boppy? He comes EVERY day."
-  },
-  {
-   "voice": "bigone",
-   "speaker": "The Big One",
-   "text": "Good. Don't tell him I asked.",
-   "ctx": "chapter 1 (new)",
-   "script": "[relieved] Good. [embarrassed, whispering] Don't tell him I asked."
-  },
-  {
-   "voice": "grace",
-   "speaker": "Grace",
-   "text": "Boppy, the mud TALKED. And the mosquitoes. And a puddle.",
-   "ctx": "chapter 1 (new)",
-   "script": "[bursting to tell] Boppy, the mud TALKED. [listing, breathless] And the mosquitoes. And a puddle."
-  },
-  {
-   "voice": "boppy",
-   "speaker": "Boppy",
-   "text": "The mud talked? Forty years in this town, the mud never said one word to me.",
-   "ctx": "chapter 1 (new)",
-   "script": "[disbelief] The mud talked? [punchline, offended] Forty years in this town, the mud never said one word to ME."
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "I worked the night shift, Tom. I've walked up to worse. Mister, take off my pan.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[unbothered, brisk] I worked the night shift, Tom. I've walked up to worse. [firm, to the fish] Mister, take off my pan."
   },
   {
    "voice": "rose",
    "speaker": "Rose",
-   "text": "He gave me a present. Look.",
-   "ctx": "chapter 1 (new)",
-   "script": "[bragging] He gave me a present. [showing off] LOOK."
+   "text": "BOO!",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[full volume] BOO!"
   },
   {
-   "voice": "boppy",
-   "speaker": "Boppy",
-   "text": "That's real gold, Cozy Rosie. Gold like my teeth. Look.",
-   "ctx": "chapter 1 (new)",
-   "script": "[impressed] That's REAL gold, Cozy Rosie. [bragging] Gold like my teeth. [showing off] Look."
+   "voice": "bigone",
+   "speaker": "The Big One",
+   "text": "GLUB! HA! You got me! I see everybody. I never saw you!",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[startled, then roaring with laughter] GLUB! HA! You GOT me! [amazed] I see everybody. I never saw YOU!"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Nobody does. She's gotten me in an empty room.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[dry, weary, fond] Nobody does. [punchline, flat] She's gotten me in an EMPTY room."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "The Big One",
+   "text": "Take the pan. The sneaky one gets this. It's the only thing I've got.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[huge, gentle] Take the pan. The sneaky one gets this. [plain, a little shy] It's the only thing I've got."
   },
   {
    "voice": "rose",
    "speaker": "Rose",
-   "text": "Boppy has treasure in his mouth!",
-   "ctx": "chapter 1 (new)",
-   "script": "[amazed, shouting] Boppy has TREASURE in his mouth!"
+   "text": "Thank you, fish! There's a bug on my money!",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[thrilled, polite] Thank you, fish! [shouting the news] There's a BUG on my money!"
+  },
+  {
+   "voice": "bigone",
+   "speaker": "The Big One",
+   "text": "The man in the folding chair. Will he be back?",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[huge, careful, hopeful] The man in the folding chair. Will he be back?"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "That's Boppy. He's here every single day.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[surprised] That's Boppy. [plain] He's here every single day."
+  },
+  {
+   "voice": "bigone",
+   "speaker": "The Big One",
+   "text": "Good. He was in the middle of a story. The one about the race.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[relieved] Good. He was in the middle of a story. The one about the race."
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "He's been in the middle of that one for fifty-one years.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[dry, level] [punchline] He's been in the middle of that one for FIFTY-ONE years."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Boppy! Your fish is REAL! He's CAR size and he gave me money!",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[shouting, running] Boppy! Your fish is REAL! He's CAR size and he gave me money!"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
-   "text": "You put that somewhere safe. Gold is for keeping.",
-   "ctx": "chapter 1 (new)",
-   "script": "[serious, advising] You put that somewhere safe. [meaning it] Gold is for keeping."
+   "text": "CAR size? Cozy Rosie, I told everybody a couch. Twenty years! I didn't want to brag!",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[sharp lift, stunned] CAR size? [warm, goofy, injured] Cozy Rosie, I told everybody a COUCH. Twenty years! [punchline, big] I didn't want to BRAG!"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
-   "text": "Next time something comes in that window, I'm coming. Stomach or no stomach.",
-   "ctx": "chapter 1 (new)",
-   "script": "[vowing] Next time something comes in that window, I'm COMING. [grumbling] Stomach or no stomach."
+   "text": "Now that's real gold. Same as these. Look.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[impressed, slow] Now that's real gold. [proud] Same as these. Look."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "You've got money in your TEETH!",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[amazed, loud] You've got money in your TEETH!"
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[certain, chatty] Safest place there is. [plain, a rule] Gold is for keeping, Cozy Rosie. [conspiring] You put that where nobody's going to LOOK."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "Under Lamby! Nobody looks under Lamby!",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[instant, certain] Under Lamby! [stating a fact] NOBODY looks under Lamby!"
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "Good girl. Now. Your grandmother promised me the first muffin. Who's got my muffin?",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[pleased] Good girl. [turning to business] Now. Your grandmother promised me the first muffin. [looking around] Who's got my muffin?"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "The fish ate them, Boppy. The last three.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[plain, reporting] The fish ate them, Boppy. The last three."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "The fish gets THREE?",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[hurt, baffled, louder than before] [punchline] The FISH gets THREE?"
+  },
+  {
+   "voice": "deedee",
+   "speaker": "Deedee",
+   "text": "Twelve more. Forty minutes. The first one's still yours.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[brisk, not looking up] Twelve more. Forty minutes. [quieter, plain] The first one's still yours."
+  },
+  {
+   "voice": "boppy",
+   "speaker": "Boppy",
+   "text": "Girls, you heard that. Forty minutes. Somebody watch the clock.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[gleeful, showman] Girls, you heard that. FORTY minutes. Somebody watch the clock."
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "Tata, you have a job. If you see anything grey in California, or an orange cube, you write it down and text me.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[bossy, serious] Tata, you have a JOB. If you see anything grey in California, or an orange cube, you write it down and text me."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "I have a job. Yes. Does the job come with a pencil?",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[honored, serious] I have a job. Yes. [hopeful] Does the job come with a pencil?"
+  },
+  {
+   "voice": "grace",
+   "speaker": "Grace",
+   "text": "That's my second best one. Don't lose it.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[reluctant, sideways] That's my second best one. [firm] Don't LOSE it."
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "Second best. It's going in the pocket with the zipper.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[touched, formal] Second best. [solemn promise] It's going in the pocket with the ZIPPER."
+  },
+  {
+   "voice": "rose",
+   "speaker": "Rose",
+   "text": "One more ride, Tata! To the cab! Go the LONG way!",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[demanding, loud] One more ride, Tata! To the cab! Go the LONG way!"
+  },
+  {
+   "voice": "tom",
+   "speaker": "Tom",
+   "text": "The long way. That's all the way around the Square. Twice.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[agreeing at once, official] The long way. [working it out, pleased] That's all the way around the Square. [beat] TWICE."
+  },
+  {
+   "voice": "tnb",
+   "speaker": "TNB",
+   "text": "hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over.",
+   "ctx": "chapter 1 (locked rebuild)",
+   "script": "[mellow, easy] hey babe. safe flight. [tossed off] the smog over 2nd ave turned purple this morning. [punchline, level, light touch] it'll probably blow over."
   }
  ]
 }

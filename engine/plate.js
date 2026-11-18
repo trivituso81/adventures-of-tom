@@ -376,19 +376,6 @@ function drawHomeJar(time) {
   }
   drawBreadyJar(918*T/78.4,322*T/78.4,0.8*T/78.4,time);
 }
-// Grump Hollow crumb trail, chapter 1 (crumbs3). Three overlays built by tools/sprite-bake/bake_hollow_crumbs.py from single painted bits of the
-// approved sheet prop-trail-hollow. Each entry: picture, the flag that shows it, its centre in plate art px (64 per tile) and its width.
-// a: pile and scatter on the entrance steps (ch1Mudling, Deedee's first line). b: north through the arch into the clearing (after the Mudling).
-// c: east along the pond to Boppy's bench (ch1Grump). All hide when the tin is back. Rebake prints this table.
-const HOLLOW_TRAIL=[['hollow/trail_a','ch1-crumbs-a',502,1124.5,92],['hollow/trail_b','ch1-crumbs-b',488.5,829,55],['hollow/trail_c','ch1-crumbs-c',905,717.5,730]];
-function drawHollowCrumbs(time) {
-  if(typeof flag!=='function'||flag('ch1-tin')) return;
-  const s=T/64;
-  for(const [id,f,x,y,w] of HOLLOW_TRAIL) {
-    if(!flag(f)||!PROPART.ready(id)) continue;
-    PROPART.draw(id,x*s,y*s,{w:w*s});
-  }
-}
 // Boppy's fishing spot, chapter 1 scene 7: a hand-sized grey patch of grass, a plum-sized orange block with a dragonfly in it sitting on the patch, and a
 // burnt flashbulb beside them (Deedee pockets it in ch1Spot, flag ch1-bulb). The patch and block stay until the family comes back after chapter 6.
 // Centres in plate art px (64 per tile), width in art px. Built from art/props/hollow/ch1_*.webp (tools/art-library/bake_closeup_ch1.py).
@@ -521,7 +508,7 @@ function bbUnderDraw(id,map) {
 }
 function plateLive(map,time) {
   if(map&&PLATE_SIGNS[map.id]) drawPlateSigns(PLATE_SIGNS[map.id]);
-  if(map&&map.id==='hollow') { drawHollowCrumbs(time); drawHollowSpot(); }
+  if(map&&map.id==='hollow') { drawHollowSpot(); }
   if(map&&map.id==='griffith') drawGriffithSpot();
   if(map&&map.id==='sundial') drawSundialSpot(map);
   if(map&&map.id==='stage7') drawStage7Spot(map);

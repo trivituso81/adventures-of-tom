@@ -2,6 +2,10 @@
 
 Tom asked (again) for voice lines and clips that the full game never plays to be removed, because every unused line shows up in the Voice Library and the bake lists and costs ElevenLabs credits. This is the record. The audio itself is not lost: it is in git history at commit `6624b03` (the parent of the purge commit), so `git show 6624b03:data/voice/<id>.js` brings any of it back.
 
+## 2026-11-17 (`ch1rebuild1`): 1 dialogue clip
+
+Chapter 1 was rebuilt to the locked script. Of the old chapter 1 lines only one had a recorded clip: `tom|I'm trying, Rose. Please don't tell Grace I lost to a marble.` (data/voice/dialog-ch28.js, about 29 KB). The other 94 old lines never had a clip. Townsfolk and shop lines were not touched.
+
 ## 2026-11-14 `ch4build1`: 4 chapter 4 clips whose lines left the story
 - `narrator|The rig hums. The work lights bang on, one row at a time. Up the middle, the catwalk groans down into place.` and `narrator|The megaphone hops off the rack and rolls away under the set, muttering about lighting.` (narration boxes, now actions); `bigone|A man in a long coat paid me to do it. One gold coin. He said a day with no takes is a day that never has to end.` (the Director's Cut, long-coat man removed); `narrator|A text from Amy. "Parent-teacher conference night is Thursday. ..."` (Tom now reads the text aloud). Removed with `purge_unused.js` from data/voice/dialog-ch28.js, about 205 KB.
 

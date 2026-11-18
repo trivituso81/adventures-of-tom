@@ -26509,6 +26509,160 @@
     "speed": 3
    },
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the person in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this person: the same face, the same head size compared to the body, the same hair, clothes, shoes, colors, proportions and the same drawing style. Do not redesign, restyle, simplify or change the outfit or any accessory.\n\nLOOK (must hold in every moment of the clip)\n- The exact drawing style of the attached picture: a hand-drawn colored pencil and ink caricature, with soft shading and fine pencil lines. Keep this style in every moment. Not 3D, not anime, not a flat cartoon, not a photo.\n- The head stays the same size for the whole clip. The body stays the same height. Nothing grows, shrinks or morphs.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- Feet stay on the same ground line. Walking away from or toward the camera is not allowed. The whole body, hair and arms stay inside the frame at every moment.\n- The character keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the left).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the character. No ground, no cast shadow, no floor shadow, no dust, no sparkles, no stars, no burst lines, no motion lines, no speed lines, no impact flash, no effects of any kind, no text, no extra people or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: WIND-UP INTO A STRIKE\nStart in the relaxed ready stance of the attached picture and hold it still for a brief moment. Twist the body away to the right, pull the near arm back, weight on the back leg, eyes narrowed. Then spring forward to the left in one fast move, lunging with the front knee bent and the arm at full reach, mouth open in a shout. Stay the same size and keep both feet on the same ground line while lunging. Hold the lunge for a moment, then ease back to the exact ready stance of the first frame. Hands empty, nothing is hit and nothing appears at the end of the arm.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch1-muffin-pan",
+   "tab": "Props",
+   "title": "Chapter 1: Deedee's good twelve-cup muffin pan holding twelve apple muffins with cinnamon topping (one object)",
+   "ar": "1:1",
+   "refs": [
+    "art/grands.webp"
+   ],
+   "group": "Chapter 1",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE OBJECT\nA heavy, well-loved silver twelve-cup muffin pan in a 4 by 3 grid, seen from a slightly raised front angle. Every cup holds one golden apple muffin with a cinnamon-sugar topping and a paper liner. A little steam rises. The pan has a few old baked-on stains and a small worn dent on one corner, the look of a pan used for thirty years.\n- Exactly ONE object, alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch1-muffin-pan-empty",
+   "tab": "Props",
+   "title": "Chapter 1: the same twelve-cup muffin pan, empty, with a little pond mud on it (one object)",
+   "ar": "1:1",
+   "refs": [
+    "art/grands.webp"
+   ],
+   "group": "Chapter 1",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE OBJECT\nThe same heavy silver twelve-cup muffin pan in a 4 by 3 grid, seen from a slightly raised front angle, completely empty: twelve clean empty cups. A few smears of pond mud on the rim and a small green water weed stuck to one corner. The same worn dent on one corner and old baked-on stains.\n- Exactly ONE object, alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch1-muffin-papers",
+   "tab": "Props",
+   "title": "Chapter 1: nine crumpled paper muffin liners scattered on muddy ground (one object group)",
+   "ar": "1:1",
+   "refs": [
+    "art/hollow.webp"
+   ],
+   "group": "Chapter 1",
+   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE OBJECT\nNine crumpled paper muffin liners, cream and pale brown, scattered loosely in a small group, a few crumbs in them and a little mud on some. Exactly nine liners, easy to count, none overlapping.\n- Exactly ONE object, alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch1-mudling-muffins",
+   "tab": "Enemies",
+   "title": "Chapter 1: a Mudling holding muffins in both hands (one creature, large)",
+   "ar": "1:1",
+   "refs": [
+    "art/raw/enemies/enemy-mudling-v2.png"
+   ],
+   "group": "Chapter 1",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or several states.\n\nATTACHED IMAGE\n1) The approved painting of the Mudling, a small ball of living mud from Grump Hollow in \"The Adventures of Tom\". Keep the same creature, shape, colors and painted finish.\n\nPAINT THIS ONE PICTURE\nThe approved Mudling from attachment 1, the same creature, shape, colors and painted finish, standing facing the viewer on a flat solid magenta #FF00FF background edge to edge, holding three apple muffins in each hand, a muffin in its mouth with the cheeks full, looking pleased with itself. No scenery. Exactly one creature. It is a close-up picture that fills the whole square.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Paint only the people and things named above. Faces look like the attached approved character paintings: oversized head, slim body.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch1-bigone-green-pan",
+   "tab": "Enemies",
+   "title": "The Big One bright green, a muffin pan on its head like a crown, no lure: sheet, 6 frames facing right (chapter 1 rebuild)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/enemies/enemy-bigone-v2.png"
+   ],
+   "group": "Chapter 1",
+   "prompt": "IMAGE REQUEST: ONE SINGLE SHEET. Return exactly one image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The approved painting of The Big One, the giant pond fish boss of \"The Adventures of Tom\", a family role-playing game. Keep the same creature, shape, colors and painted finish.\n2) The approved painting of Grump Hollow's Mudling, for the handbrushed finish only.\n\nPAINT THIS SHEET\nThe same 6 poses as attachment 1, in the same 3 by 2 layout: top row poses 1 to 3, bottom row poses 4 to 6, each pose filling most of its cell, nothing overlapping.\nPoses 1 to 3: sitting half out of the water, grumpy, then proud, then roaring. Poses 4 to 6: sulking low in the shallows, startled with the pan flying off its head, laughing with its mouth wide open.\nChange from attachment 1: the fish is a BRIGHT GREEN, the size of a cab, and a silver twelve-cup muffin pan sits on its head like a crown in poses 1 to 4 and 6. A small gold coin glints in its lip. No fishing lure, no tin.\nPaint it like attachment 1: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch1-grace-list",
+   "tab": "Props",
+   "title": "Chapter 1 close-up: Grace's numbered list on notebook paper, held in two small hands (one square painting)",
+   "ar": "1:1",
+   "refs": [
+    "art/grands.webp"
+   ],
+   "group": "Chapter 1",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE PICTURE\nTwo small child hands hold up a sheet of lined notebook paper with a neat numbered list in pencil: the numbers 1 to 4 down the left, each followed by a short line of scribbled pencil writing that is not readable, number 3 crossed out and rewritten. A pencil is tucked behind a finger. The paper fills most of the picture. No faces. It is a close-up picture that fills the whole square.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Paint only the people and things named above. Faces look like the attached approved character paintings: oversized head, slim body.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch1-amy-window",
+   "tab": "Props",
+   "title": "Chapter 1: Amy at her house window holding an iced coffee, waving (one square painting)",
+   "ar": "1:1",
+   "refs": [
+    "art/grands.webp"
+   ],
+   "group": "Chapter 1",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE PICTURE\nA cozy suburban house window with white trim and flower boxes, seen from the street. Behind the glass, Amy, a woman with a warm smile, shoulder-length hair and a running jacket, holds a tall iced coffee in one hand and waves with the other. Soft curtains frame her. It is a close-up picture that fills the whole square.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Paint only the people and things named above. Faces look like the attached approved character paintings: oversized head, slim body.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch1-ellie-door",
+   "tab": "Props",
+   "title": "Chapter 1: Aunt Ellie's front door open, a spotless white hall behind it (one square painting)",
+   "ar": "1:1",
+   "refs": [
+    "art/grands.webp"
+   ],
+   "group": "Chapter 1",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE PICTURE\nAn elegant front door standing open on Aunt Ellie's house. Behind it a spotless white hallway where everything is in its place, a runner rug and a polished side table with one vase. Aunt Ellie, a tall woman in a pressed cardigan with a cool, composed look and one raised eyebrow, stands in the doorway. It is a close-up picture that fills the whole square.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Paint only the people and things named above. Faces look like the attached approved character paintings: oversized head, slim body.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch1-rose-shoulders",
+   "tab": "Characters",
+   "title": "Chapter 1: Rose sitting on Tom's shoulders, hands on his ears (one full-body pose)",
+   "ar": "2:3",
+   "refs": [
+    "art/raw/characters/boppy-hero-v2.png"
+   ],
+   "group": "Chapter 1",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE PICTURE\nTom, a tall man with a shaved head and a dry calm look, stands facing the viewer with Rose, a six year old girl, sitting on his shoulders, both small hands holding his ears, grinning. Flat solid magenta #FF00FF background edge to edge, nothing else in the picture. It is a close-up picture that fills the whole square.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Paint only the people and things named above. Faces look like the attached approved character paintings: oversized head, slim body.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch1-cab-pulls-away",
+   "tab": "Props",
+   "title": "Chapter 1: Cab 7 pulling away down a Long Island street, Tom waving out the back window (one square painting)",
+   "ar": "1:1",
+   "refs": [
+    "art/town.webp"
+   ],
+   "group": "Chapter 1",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or several states.\n\nATTACHED IMAGE\n1) The finished painting of the Square from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color.\n\nPAINT THIS ONE PICTURE\nA yellow taxi with the number 7 on its roof sign pulls away from the viewer down a sunny Long Island street, seen from behind. A man's arm and shaved head show in the back window, waving. Painted storefronts and trees line the street. It is a close-up picture that fills the whole square.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Paint only the people and things named above. Faces look like the attached approved character paintings: oversized head, slim body.\n- No words, letters or numbers anywhere unless the description above says to paint them."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch1-phone-on-seat",
+   "tab": "Props",
+   "title": "Chapter 1 close-up: a phone lighting up on a taxi back seat (one square painting)",
+   "ar": "1:1",
+   "refs": [
+    "art/grands.webp"
+   ],
+   "group": "Chapter 1",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE PICTURE\nA smartphone lying face up on a worn taxi back seat, its screen lit and glowing with a new message that is not readable. A jacket sleeve rests beside it. A purple-grey haze shows through the window beyond. It is a close-up, straight-on picture that fills the whole square.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
   }
  ]
 }

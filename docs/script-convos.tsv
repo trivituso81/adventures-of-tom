@@ -1,20 +1,20 @@
 scene	step	check	title	purpose	plot	force
-ch1AfterBoss	3.then.0	Glub. Nobody ever made me laugh before.		Kindness wins: the Big One gives back the tin, gives Rose a gold dragonfly coin and asks after Boppy.	The Big One: And this is for the small one ; The Big One: The old man with the cap	
-ch1AfterBoss	7	It has a bug on it! I'm keeping it.				merge
-ch1End	7	You found the Big One? I TOLD everybody.		Boppy hears the story, gets back the lure he lost in 2006 and sees Rose's gold coin.	Rose: He gave me a present	
-ch1End	13	Boppy has treasure in his mouth!		The family sits down to half a crisp and Tom promises the whole week; the chapter ends.		
-ch1Goal	1	Tata! Deedee made rhubarb crisp for you.		Gives the first goal: get to Deedee's house before the rhubarb crisp is gone.	Grace: Tata! Deedee made rhubarb crisp	
-ch1Grump	3	Grrrumble. You're standing in my puddle.		Pond Grump picks a fight over Rose's giggling.		
-ch1Grump	12	Hugs for everyone. There. All better.		After the fight, the crumb trail points to Boppy's fishing spot, where the Big One lives.	Deedee: The crumbs lead around the pond	
-ch1Mudling	8	Look, rhubarb crumbs on the path. The li		First monster: the crumb trail, a mudling that talks, and the first fight, with Deedee healing.	Deedee: Look, rhubarb crumbs	
-ch1Pond	8	THERE! The thief! He still has the tin!		Boss reveal: the Big One wears Deedee's tin as a crown, Boppy was right all along, and a big flash changed the fish this morning.	The Big One: This morning I was a fish	
-ch1Pond	21	The tin fits on my head like a crown. I'				merge
-ch1Skeeter	4	Bzzz. Somebody smells like rhubarb. Bzzz		A mosquito swarm fight; Deedee shrugs off the bites and keeps everyone walking.		
-ch1Spot	2	A MARBLE! There's a marble with a bug in		First clue spot: a dragonfly in an orange block, a hand-sized grey patch, a round hole and a burnt bulb; Rose can't pull her marble out.	Grace: That's a dragonfly ; Deedee: Look at the grass. It's grey ; Grace: There's a little round hole ; Deedee: And somebody left a burnt light bulb	
-ch1Theft	8	My favorite son!		Homecoming at Deedee and Boppy's: warm family chaos (the door marks, the glasses, the gas jokes) and Boppy's stomach, just before trouble hits.		
-ch1Theft	12	I got one too. Mine's the low one.				merge
-ch1Theft	53	Oh no! The mud blob is stealing Deedee's		A mud blob steals the crisp and Deedee's good tin; the family reacts and heads for the pond.	Grace: It's running for the pond ; Deedee: It took the crisp AND my good tin	split
-ch1Theft	66	It's headed for Grump Hollow. I've been		Boppy stays behind with his stomach, points them to Grump Hollow and tells Tom to stay in front of the girls.	Boppy: It's headed for Grump Hollow	
+ch1Goal	2	Tata, don't walk yet. I wrote down every		Grace has written down everything Tom missed and wants to read it in order. Rose only cares about the muffins.		
+ch1Amy	2	Brother! I'm watching you from the windo		Amy times everything. Tom defends his walking speed and Grace takes Amy's side.		
+ch1Ellie	8	Tom. They gave you a seat that turns int		Aunt Ellie's house is spotless and Rose has cinnamon on her hands. Then Aunt Ellie finds out where she ranks on Grace's list.		
+ch1Theft	8	There he is! Come here. Let me look at y		Deedee has guarded twelve muffins from Boppy all morning.		
+ch1Theft	47	AHHH! DEEDEE!		A ball of mud takes all twelve muffins in two seconds, and Boppy's only problem is that the mud got one before he did.		
+ch1Mudling	10	Hello, mud! Can we please have Deedee's 		Rose asks the mud nicely, and can't believe that saying please didn't work.		
+ch1Mudling	14	Girls, behind me. You three have till I 				merge
+ch1Mudling	24	Nine papers. There were twelve. So the o				merge
+ch1Spot	2	The grass is Boppy color!		Rose wants the dragonfly rescued. Tom takes the job seriously and loses to something the size of a plum, while Grace runs the investigation.		
+ch1Pond	9	GAH! Grace, I'm holding your hand. That'		For twenty years Boppy has been underselling this fish. And the fish has been listening to Boppy the whole time.		
+ch1AfterBoss	4	BOO!		Rose's BOO makes the Big One laugh. Kindness wins: the pan comes back and Rose gets the gold dragonfly coin.		
+ch1AfterBoss	17	Thank you, fish! There's a bug on my mon				merge
+ch1End	8	Boppy! Your fish is REAL! He's CAR size 		Boppy is finally proved right about his fish, and he still wants to know who got his muffin.		
+ch1End	12	You've got money in your TEETH!				merge
+ch1Job	1	Tata, you have a job. If you see anythin		Grace gives Tom a job so he stays on the case from California.		
+ch1Sunday	14	hey babe. safe flight. the smog over 2nd		Rose makes Tom take the long way to the cab, and he does. TNB's text lights up on the seat and Tom never reads it.		
 ch2AfterBoss	2.then.0	Rumble. You asked how I was doing. Nobod		Kindness wins: the Big Shake was lonely, lets things move again and sneezes up a gold lemon coin.	The Big Shake: Something shiny ; Tom: It's a gold coin with a lemon	
 ch2AfterBoss	17	It's a gold coin with a lemon on it. Ros				merge
 ch2AfterBoss	23	Look. The sky is blue again. Los Angeles		The sky clears and they line up the pattern: two flashes, two orange blocks, two coins.	TNB: Two flashes	

@@ -316,7 +316,7 @@ const SCENE_OPS={
   partClear:o=>S.call(()=>savePartClear()),
   card:o=>({t:0,start(){ this.t=0; if(!o.done) cardBackdrop(o.card); intro.card={n:o.card,t:0,done:!!o.done}; sfx.levelChime&&sfx.levelChime(); },
     update(dt){ this.t+=dt; intro.card.t=this.t; if(this.t>=(o.time||3)) { intro.card=null; return true; } return false; }}),
-  battle:o=>({start(){ this.m=typeof o.battle==='function'?o.battle():typeof o.battle==='object'?o.battle:findMonster(o.battle); this.go=false; if(this.m) { startBattle(this.m,{tut:o.tut,level:o.level}); this.go=true; } },
+  battle:o=>({start(){ this.m=typeof o.battle==='function'?o.battle():typeof o.battle==='object'?o.battle:findMonster(o.battle); this.go=false; if(this.m) { startBattle(this.m,{tut:o.tut,count:o.count,level:o.level}); this.go=true; } },
     update(){ if(!this.go) return true; if(battle.active) return false;
       setFlag('battle:'+(this.m.monster||o.battle),B2.result==='win'?'win':'lose'); return true; }}),
   give:o=>S.call(()=>grantItem(o.give)),
@@ -1237,6 +1237,7 @@ function storyHold(n) {
 function storySpawn(o) {
   const [x,y]=scenePos(o.at);
   const a=actor(o.name,x,y,o.look||'moss',[]);
+  if(o.sheet) a.sheet=o.sheet; if(o.kin) a.kin=true;
   Object.assign(a,{monster:o.monster||null,mscale:o.mscale||1,carry:o.carry||null,scripted:true,tier:0,maxHp:1,defeatedUntil:0,roam:0,facing:o.dir||'down'});
   if(o.fade!=null) a.fade=o.fade;   // spawn invisible ({fade:0}) and bring them in with {fadeActor}
   currentMap.npcs.push(a); storyHold(a);

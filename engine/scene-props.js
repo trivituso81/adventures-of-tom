@@ -101,6 +101,22 @@ SPK.charttable=(P)=>{
     ctx.save(); ctx.beginPath(); ctx.rect(x+w*.7,y+h*.8,T*2,T); ctx.clip(); ctx.restore(); ctx.fillStyle='#b8782e'; ctx.beginPath(); ctx.ellipse(px+4,py,T*.34,T*.18,0,0,Math.PI*2); ctx.fill(); }
 };
 
+// A muffin pan (twelve-cup, a STAND-IN until Tom approves a painted one) on a tile: fields x,y (tile), z (height in tiles), empty (no muffins).
+// Chapter 1: twelve muffins on Deedee's baking island; the empty pan flying off the Big One's head and across the water.
+SPK.muffinpan=(P)=>{
+  const cx=(P.x+.5)*T,b=(P.y+.8)*T-(P.z||0)*T,w=T*.95;
+  ctx.fillStyle='#20202a40'; ctx.beginPath(); ctx.ellipse((P.x+.5)*T,(P.y+.8)*T,w*.5,4,0,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='#8f969b'; ctx.fillRect(cx-w/2,b-T*.32,w,T*.3); ctx.strokeStyle='#5d6469'; ctx.lineWidth=1.5; ctx.strokeRect(cx-w/2,b-T*.32,w,T*.3);
+  for(let r=0;r<2;r++) for(let c=0;c<6;c++) { const mx=cx-w/2+w*(c+.5)/6,my=b-T*.24+r*T*.12;
+    if(!P.empty) { ctx.fillStyle='#c98a46'; ctx.beginPath(); ctx.arc(mx,my-2,w/14,Math.PI,0); ctx.fill(); ctx.fillStyle='#f1d9a8'; ctx.fillRect(mx-2,my-w/14-2,4,2); }
+    else { ctx.fillStyle='#6f767b'; ctx.beginPath(); ctx.ellipse(mx,my,w/16,3,0,0,Math.PI*2); ctx.fill(); } }
+};
+// Nine muffin papers scattered in the reeds (STAND-IN). Fields x,y (tile).
+SPK.papers=(P)=>{
+  const pts=[[.1,.5],[.4,.2],[.7,.6],[1.0,.3],[1.3,.7],[.2,.9],[.9,.95],[1.5,.4],[1.2,1.0]];
+  for(const [dx,dy] of pts) { const x=(P.x+dx)*T,y=(P.y+dy)*T; ctx.fillStyle='#f3e9d2'; ctx.beginPath(); ctx.ellipse(x,y,5,3,.3,0,Math.PI*2); ctx.fill(); ctx.strokeStyle='#bfae86'; ctx.lineWidth=1; ctx.stroke(); }
+};
+
 // A painted picture: art/props/<art>.webp drawn with its feet at tile (x,y) and w tiles wide (the ears-row picture over the three of them). Fields art, x, y, w.
 SPK.img=(P)=>{ PROPART.draw(P.art,P.x*T,P.y*T-(P.w*T*(PROPART.ready(P.art)?PROPART.get(P.art).naturalHeight/PROPART.get(P.art).naturalWidth:1))/2,{w:P.w*T}); };
 function sceneActorOrNull(a) { try { return sceneActor(a); } catch(e) { return null; } }
