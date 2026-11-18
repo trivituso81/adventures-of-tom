@@ -1,3 +1,11 @@
+## adminvol1 (2026-11-18): music volume slider and Music On/Off button in the Admin top bar
+
+- Tom: "in Admin at the top bar, add a music volume slider for the background music as well as a way to turn the background music off."
+- What Tom sees: on every admin page with a top bar (Voice Library, Art Library, Music Library, Script Editor, Area Builder, Portrait Crops, Head Sizes) the bar now has a Music On / Music Off button and a volume slider. Slider 0 to 100, default 50 = the level it had before (nothing changes until he moves it). Off silences the admin track at once, and it stays off on the next admin page. Tapping Music Off again turns it back on (and also clears the game's own music switch if that was off).
+- Where: `engine/admin-music.js` builds the controls in the page's `<header>` (so no page file changed except its script tag version). Saved on the phone in localStorage `aot-admin-music-vol` (0 to 1) and `aot-admin-music-off` ('1'), shared by all admin pages. The game's ADMIN menu reads the same two values (`mcLevel`, `mcAdminOff` in `engine/music-clips.js`), so a volume or off chosen on a page also applies there; the game has no slider of its own.
+- Not done: Pose Editor (`poses.html`) has no admin music and no control; the game's own ADMIN screens have no slider or button (they have no top bar).
+- Tested: `tools/admin_music_test.py` (new checks: slider 100 doubles, slider 20 is low, off silences and stays off on the next page, on restores the saved volume, the game's ADMIN menu is silent when off); looked at the top bar in portrait and landscape on all seven pages (no header grew; `areas.html` already scrolled sideways in portrait before this change).
+
 ## b3s1 (2026-11-18): New battle system, stage 1: two test fights in the Battle Lab on the new rules
 
 - What Tom sees: ADMIN > BATTLE LAB now starts with NEW BATTLE on every page. It opens two fights, NEW 1: TWO MUDLINGS and NEW 2: MUDLING AND SKEETER, played by Tom, Grace, Rose and Deedee on the v11 rules. Story fights and the old Lab boss fights are unchanged (they still run battle 2).

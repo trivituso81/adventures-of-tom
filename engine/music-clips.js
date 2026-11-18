@@ -12,6 +12,13 @@ const MC={bufs:new Map(),loading:new Map(),failed:new Set(),cur:null,old:[],jing
 const MC_IN=Float32Array.from({length:64},(_,i)=>Math.sin(i/63*Math.PI/2)),MC_OUT=Float32Array.from({length:64},(_,i)=>Math.cos(i/63*Math.PI/2));
 // Level each track plays at (1 = as made). The admin track is half as loud (Tom 2026-11-14).
 const MC_LEVEL={admin:.5};
+// The admin track's volume and off switch are set from the top bar of the admin pages (engine/admin-music.js): volume 0 to 1 (default .5 = MC_LEVEL.admin as is).
+function mcAdminOff() { try { return localStorage.getItem('aot-admin-music-off')==='1'; } catch(e) { return false; } }
+function mcLevel(id) {
+  if(id!=='admin') return MC_LEVEL[id]||1;
+  try { const v=parseFloat(localStorage.getItem('aot-admin-music-vol')); if(v>=0&&v<=1) return MC_LEVEL.admin*v/.5; } catch(e) {}
+  return MC_LEVEL.admin;
+}
 const mcOk=id=>!!MC_TRACKS[id]&&!MC.failed.has(id);
 
 function mcChain() {
@@ -79,7 +86,7 @@ function mcStart(id,fade) {
   const c=sound.ctx,dest=mcChain(),buf=mcBuf(id); if(!dest||!buf) return null;
   const v={id,buf,loop:MC_TRACKS[id][0]==='l',gain:c.createGain(),copies:[],nextAt:0,dead:false},t=c.currentTime+.03;
   v.gain.connect(dest);
-  v.gain.gain.setValueAtTime(0,t); v.gain.gain.linearRampToValueAtTime(MC_LEVEL[id]||1,t+Math.max(.02,fade));
+  v.gain.gain.setValueAtTime(0,t); v.gain.gain.linearRampToValueAtTime(mcLevel(id),t+Math.max(.02,fade));
   mcCopy(v,t);
   if(!v.loop) v.end=t+buf.duration;
   return v;
@@ -140,7 +147,7 @@ function clipWanted() {
   // Title theme: the whole title screen (every menu) and the prompts it opens over the town (new game warning, load list,
   // chapter jump), until a game actually begins (intro.phase leaves 'title').
   const onTitle=(typeof splash!=='undefined'&&splash.active)||(typeof intro!=='undefined'&&intro.active&&intro.phase==='title');
-  if(mcAdminScreen()&&mcOk('admin')) return 'admin';
+  if(mcAdminScreen()&&mcOk('admin')) return mcAdminOff()?null:'admin';
   if(onTitle&&mcOk('title')) return 'title';
   const a=mcAreaTrack(currentMap);
   return a&&mcOk(a)?a:undefined;

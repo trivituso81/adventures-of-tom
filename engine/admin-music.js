@@ -5,6 +5,9 @@
 //   <script src="engine/admin-music.js?v=adminmusic3"></script>
 // Behaviour:
 //  - Follows the game's music switch (localStorage 'le-music' = 'off' keeps it silent).
+//  - Adds a "Music On/Off" button and a volume slider to the page's top bar (<header>). Off is kept in localStorage
+//    'aot-admin-music-off' ('1'), volume 0 to 1 in 'aot-admin-music-vol' (default .5 = the old level). Both are shared by
+//    all admin pages, and the game's ADMIN screens read the same volume and off switch (MC_ADMIN in engine/music-clips.js).
 //  - Plays a take Tom picked for 'admin' in the Music Library on this phone (IndexedDB 'aot-music-library'), else music/admin.mp3.
 //  - Loops by crossfading the track into itself (2.5 s), like the game does.
 //  - Carries on from where the last admin page left off (position kept in localStorage 'aot-admin-music'), so moving between
@@ -14,13 +17,14 @@
 //    open for a recording) and fades back 1.5 s after it ends. Quiet while the page is hidden.
 (function() {
   if(window.adminMusic) return;
-  const KEY='aot-admin-music', ID='admin', XF=2.5, LEVEL=.25;
+  const KEY='aot-admin-music', OFF_KEY='aot-admin-music-off', VOL_KEY='aot-admin-music-vol', ID='admin', XF=2.5, LEVEL=.25;
   let ctx=null, out=null, buf=null, loading=false, started=false, startedAt=0, offset=0, copies=[], nextAt=0, timer=0, saveTimer=0;
   const holds=new Set();
-  const wantOn=()=>{ try { return localStorage.getItem('le-music')!=='off'; } catch(e) { return true; } };
+  const wantOn=()=>{ try { return localStorage.getItem('le-music')!=='off'&&localStorage.getItem(OFF_KEY)!=='1'; } catch(e) { return true; } };
+  function volume() { try { const v=parseFloat(localStorage.getItem(VOL_KEY)); return v>=0&&v<=1?v:.5; } catch(e) { return .5; } }
 
   function mine() { return ctx&&buf; }
-  function target() { return (!wantOn()||document.hidden||holds.size)?0:LEVEL; }
+  function target() { return (!wantOn()||document.hidden||holds.size)?0:LEVEL*volume()/.5; }
   function fade(to,secs) {
     if(!out) return; const t=ctx.currentTime;
     out.gain.cancelScheduledValues(t); out.gain.setValueAtTime(out.gain.value,t); out.gain.linearRampToValueAtTime(to,t+secs);
@@ -137,8 +141,38 @@
     if(document.hidden) { if(started) { save(); fade(0,.3); setTimeout(()=>{ if(document.hidden&&ctx&&ctx.state==='running') ctx.suspend(); },400); } }
     else { if(ctx&&ctx.state==='suspended') { try { ctx.resume(); } catch(e) {} } if(started) apply(2); else kick(); } });
   window.addEventListener('pagehide',save);
-  window.addEventListener('storage',e=>{ if(e.key==='le-music') { if(wantOn()) kick(); else stop(); } });
+  window.addEventListener('storage',e=>{ if(e.key==='le-music'||e.key===OFF_KEY) { if(wantOn()) kick(); else stop(); syncUi(); }
+    else if(e.key===VOL_KEY) { apply(.2); syncUi(); } });
+
+  // ---- the controls in the page's top bar ----
+  let uiBtn=null, uiRange=null;
+  function syncUi() {
+    if(!uiBtn) return;
+    const on=wantOn(), game=(()=>{ try { return localStorage.getItem('le-music')==='off'; } catch(e) { return false; } })();
+    uiBtn.textContent=on?'Music On':'Music Off'; uiBtn.setAttribute('aria-pressed',on?'true':'false');
+    uiBtn.title=game?'The game music switch is off, so admin music is silent too':'';
+    uiRange.value=Math.round(volume()*100); uiRange.disabled=!on;
+  }
+  function buildUi() {
+    const h=document.querySelector('header'); if(!h||document.getElementById('amctl')) return;
+    const w=document.createElement('span'); w.id='amctl';
+    w.style.cssText='display:inline-flex;align-items:center;gap:6px;flex:none;font:12px system-ui,sans-serif;color:#cfd0ee';
+    uiBtn=document.createElement('button'); uiBtn.type='button';
+    uiBtn.style.cssText='min-height:30px;padding:3px 10px;border-radius:8px;border:1px solid #4a4585;background:#241f4d;color:#fff;font:inherit;cursor:pointer';
+    uiRange=document.createElement('input'); uiRange.type='range'; uiRange.min=0; uiRange.max=100; uiRange.step=1;
+    uiRange.setAttribute('aria-label','Admin music volume'); uiRange.style.cssText='width:64px;margin:0;accent-color:#e9b949';
+    uiBtn.addEventListener('click',()=>{
+      const on=wantOn();
+      try { if(on) localStorage.setItem(OFF_KEY,'1'); else { localStorage.removeItem(OFF_KEY); localStorage.removeItem('le-music'); } } catch(e) {}
+      if(wantOn()) kick(); else stop();
+      syncUi(); });
+    uiRange.addEventListener('input',()=>{
+      try { localStorage.setItem(VOL_KEY,String(uiRange.value/100)); } catch(e) {}
+      apply(.1); });
+    w.appendChild(uiBtn); w.appendChild(uiRange); h.appendChild(w); syncUi();
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',buildUi); else buildUi();
   load();
-  window.adminMusic={hold,stop,kick,get playing() { return started; },get level() { return out?out.gain.value:0; },
+  window.adminMusic={hold,stop,kick,get volume() { return volume(); },get playing() { return started; },get level() { return out?out.gain.value:0; },
     get state() { return {ctx:ctx&&ctx.state,loaded:!!buf,started,holds:holds.size,pos:position()}; }};
 })();
