@@ -1,3 +1,10 @@
+## clipspeed1 (2026-11-17): Art Library clips: a SPEED control in the review screen
+
+Tom (2026-11-17 19:07): "Can there be a control for the speed". REVIEW now has a row SPEED IN THE GAME: 1x, 1.5x, 2x, 2.5x, 3x, 4x, 5x (times faster than the video). It starts at the entry's own speed (3x). ON THE BATTLEFIELD plays at the picked speed, and APPROVE sends it with the marks, so the clip is cut at that speed (`marks.speed`, read by `bake_clip` in `tools/art-library/art_bake.py`).
+- Changing the speed of a clip that is already approved: open REVIEW on the same result, pick the speed, APPROVE again. Nothing is generated or paid again: the game's own saved copy of the video is used (a small pointer file is committed, `{"src": ...}`). An approved video the phone held only as an address is now fetched from the game's copy when REVIEW opens, so it keeps playing after the xAI address expires.
+- The cutting job is faster: it uses a ready-made video tool from pip (seconds) where the apt install took about 6 minutes, and no longer needs ffprobe. Not yet seen running in the Action.
+- Test: `python3 tools/art-library/clip_lib_test.py`, 50 checks pass (speed pick, preview speed, approve again as a pointer, bake at the picked speed).
+
 ## clipgen1d (2026-11-17): Rose's first Grok-made punch is in the CLIP TEST fight, floor shadow removed
 
 Tom approved clip-rose-strike v1 (Grok Imagine Video 1.5, made in the Art Library). The Action cut it (artbake1478): 37 pictures, 1.0 s at 3x, hit at 0.53 s. Seen in the frames: she is the same painting as her battle sprite (same colours and head), no sparkles, dust or burst lines, hair stays in frame. One flaw: Grok painted a dark floor shadow under the lunge. The cutter (`tools/clip-bake/bake_clip.py`) now treats darker magenta as background, and the clip was cut again with the same marks: the shadow is gone and the game's own shadow is used. `python3 tools/clip_test.py`: FAILS [].

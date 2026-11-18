@@ -31,7 +31,7 @@ def make_video(path):
     shutil.rmtree(d)
 
 def servers(nocors, video):
-    env = dict(os.environ, STUB_VIDEO=video); env.pop('STUB_VIDEO_NOCORS', None)
+    env = dict(os.environ, STUB_VIDEO=video, STUB_CLEAR='clip-rose-strike'); env.pop('STUB_VIDEO_NOCORS', None)
     if nocors: env['STUB_VIDEO_NOCORS'] = '1'
     web = subprocess.Popen([sys.executable, '-m', 'http.server', '8813'], cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     stub = subprocess.Popen([sys.executable, os.path.join(ROOT, 'tools', 'art-library', 'stub.py'), '8814'], env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -74,8 +74,11 @@ def page_run(br, name, vp, nocors, video):
         pg.wait_for_function("()=>/out of order/.test(document.getElementById('rvmsg').textContent)"); ok(True, f'{name}: marks in the wrong order are named')
         seek(pg, 0.5); pg.click('[data-mark="first"]'); pg.click('#cpf'); pg.wait_for_function("()=>Math.abs(document.getElementById('rvvid').currentTime-.533)<.02"); ok(True, f'{name}: the frame button steps one thirtieth of a second')
         pg.wait_for_function("()=>!/out of order/.test(document.getElementById('rvmsg').textContent)")
+        ok(pg.evaluate("()=>document.querySelector('[data-speed].set').dataset.speed") == '3', f'{name}: SPEED starts at the entry\'s own 3x')
+        pg.click('[data-speed="4"]'); pg.wait_for_function("()=>document.querySelector('[data-speed].set').dataset.speed==='4'")
         if not nocors:
             pg.click('#cpbf'); pg.wait_for_timeout(1500)
+            ok(pg.evaluate("()=>document.getElementById('rvvid').playbackRate") == 4, f'{name}: the battlefield preview plays at the picked 4x')
             px = pg.evaluate("()=>{ const c=document.getElementById('rvcan'), g=c.getContext('2d'); const p=(x,y)=>Array.from(g.getImageData(x,y,1,1).data); return {hidden:c.hidden, corner:p(8,8), t:document.getElementById('rvvid').currentTime}; }")
             ok(not px['hidden'] and not (px['corner'][0] > 230 and px['corner'][1] < 40 and px['corner'][2] > 230) and .45 <= px['t'] <= 2.65, f'{name}: the battlefield preview plays START to END with the magenta gone ({px})')
             pg.screenshot(path=os.path.join(SHOTS, f'artclip-{name}-battlefield.png'))
@@ -92,7 +95,14 @@ def page_run(br, name, vp, nocors, video):
         pg.wait_for_function("()=>ENTRY['clip-rose-strike'].status==='approved'", timeout=30000)
         F = files(pg); p = f'art/raw/clips/{ID}-v1{ext}'
         doc = json.loads(base64.b64decode(F['data/art-prompts.json']['content'])); e = next(x for x in doc['entries'] if x['id'] == ID); v = e['versions'][-1]
-        ok(p in F and v['file'] == p and all(abs((v.get('marks') or {}).get(k, -9) - t) < .02 for k, t in (('first', .5), ('hit', 1.5), ('last', 2.6))) and e['status'] == 'approved', f'{name}: APPROVE committed {p} and the marks {v.get("marks")}')
+        ok(p in F and v['file'] == p and all(abs((v.get('marks') or {}).get(k, -9) - t) < .02 for k, t in (('first', .5), ('hit', 1.5), ('last', 2.6))) and v['marks'].get('speed') == 4 and e['status'] == 'approved', f'{name}: APPROVE committed {p}, the marks and the speed {v.get("marks")}')
+        if not nocors:   # the same result approved again at another speed: only a pointer to the game's own copy goes up
+            pg.click('.res [data-res]'); pg.wait_for_selector('#rv:not([hidden])'); pg.click('[data-speed="2"]'); pg.wait_for_function("()=>document.querySelector('[data-speed].set').dataset.speed==='2'")
+            pg.click('#rvok'); pg.wait_for_timeout(300); pg.click('#rvok'); pg.wait_for_function("()=>ENTRY['clip-rose-strike'].versions.length==2", timeout=30000); pg.wait_for_timeout(500)
+            F2 = files(pg); p2 = f'art/raw/clips/{ID}-v2.json'; doc2 = json.loads(base64.b64decode(F2['data/art-prompts.json']['content'])); v2 = next(x for x in doc2['entries'] if x['id'] == ID)['versions'][-1]
+            p2 = v2['file']
+            ok(p2.endswith('.json') and p2 in F2 and json.loads(base64.b64decode(F2[p2]['content'])) == {'src': p} and v2['marks'].get('speed') == 2, f'{name}: approving again at 2x commits only a pointer to {p} with speed 2')
+            pg.evaluate("()=>rvClose()")
         if nocors: ok(json.loads(base64.b64decode(F[p]['content']))['url'].startswith('http://127.0.0.1:8814/video.bin'), f'{name}: the committed file holds the video address')
         pg.screenshot(path=os.path.join(SHOTS, f'artclip-{name}-approved.png'))
         ok(not errs, f'{name}: no page errors {errs[:2]}')
@@ -116,12 +126,14 @@ def bake_check(video_bytes):
     p = 'art/raw/clips/clip-rose-strike-v1.mp4'; open(os.path.join(T, p), 'wb').write(video_bytes)
     e = next(x for x in json.load(open(os.path.join(ROOT, 'data/art-prompts.json')))['entries'] if x['id'] == ID)
     e = dict(e, versions=[{'n': 1, 'file': p, 'marks': {'first': .5, 'hit': 1.5, 'last': 2.6}}])
+    p0 = p; p = 'art/raw/clips/clip-rose-strike-v2.json'; json.dump({'src': p0}, open(os.path.join(T, p), 'w'))   # approved again at 2x: a pointer to the first copy
+    e = dict(e, versions=e['versions'] + [{'n': 2, 'file': p, 'marks': {'first': .5, 'hit': 1.5, 'last': 2.6, 'speed': 2}}])
     spec = importlib.util.spec_from_file_location('art_bake_t', os.path.join(T, 'tools/art-library/art_bake.py')); m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
     note = m.bake_clip(e, p); print('     ', note)
     js = open(os.path.join(T, 'data/clips/rose-strike.js')).read(); D = json.loads(re.search(r'bclipDefine\("rose_strike",(\{.*\})\);', js).group(1))
     im = Image.open(os.path.join(T, 'art/clips/rose-strike.webp'))
     # marks .5 / 1.5 / 2.6 s at 30 a second, every 3rd: frames 15..78, 22 pictures, hit at frame 45 = picture 10
-    ok(D['n'] == 22 and D['impact'] == 10 and D['owner'] == 'rose' and D['src'].startswith('art/clips/rose-strike.webp?v=') and abs(D['ms'][10] - 333) <= 1, f'bake: 22 pictures, hit on picture 10 at 333 ms (3x speed) (n {D["n"]}, impact {D["impact"]}, ms {D["ms"][10]})')
+    ok(D['n'] == 22 and D['impact'] == 10 and D['owner'] == 'rose' and D['src'].startswith('art/clips/rose-strike.webp?v=') and abs(D['ms'][10] - 500) <= 1, f'bake: 22 pictures, hit on picture 10 at 500 ms (the picked 2x speed, from a pointer file) (n {D["n"]}, impact {D["impact"]}, ms {D["ms"][10]})')
     ok(abs(D['h'] - 84) <= 2 and im.size == (D['cols'] * D['w'] * D['k'], -(-D['n'] // D['cols']) * D['h'] * D['k']), f'bake: the figure is {D["h"]} rows tall (her battle idle is 83) and the sheet fits its grid {im.size}')
     ok(D['reach'][0] > 30, f'bake: at the hit she reaches {D["reach"][0]} rows left of her middle (she slid left)')
     ok('data/clips/rose-strike.js' in open(os.path.join(T, 'index.html')).read(), 'bake: a new clip gets its script tag in index.html')

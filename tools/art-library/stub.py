@@ -25,7 +25,13 @@ LOG, FILES, VIDEOS = [], {}, {}
 import os
 _seed = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'data', 'art-prompts.json')
 if os.path.exists(_seed):
-    _b = base64.b64encode(open(_seed, 'rb').read()).decode()
+    _raw = open(_seed, 'rb').read()
+    if os.environ.get('STUB_CLEAR'):   # a test wants this entry as never approved (comma separated ids)
+        _d = json.loads(_raw)
+        for _e in _d['entries']:
+            if _e['id'] in os.environ['STUB_CLEAR'].split(','): _e.update(status='draft', versions=[], rejects=[])
+        _raw = (json.dumps(_d, indent=1) + '\n').encode()
+    _b = base64.b64encode(_raw).decode()
     FILES['data/art-prompts.json'] = {'sha': 'seed', 'content': '\n'.join(_b[i:i + 60] for i in range(0, len(_b), 60))}   # GitHub wraps base64 lines
 class H(BaseHTTPRequestHandler):
     def log_message(self, *a): pass

@@ -68,19 +68,27 @@ def bake_clip(e, p):
         raise SystemExit(f'{e["id"]}: the approved version has no usable START, HIT and END marks: {m}')
     mp4 = os.path.join(ROOT, p)
     if p.endswith('.json'):
-        url = json.load(open(mp4, encoding='utf-8'))['url']
-        if not url.startswith('https://'): raise SystemExit(f'{e["id"]}: odd video address')
-        mp4 = mp4[:-5] + '.mp4'
-        with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'art-bake'}), timeout=120) as r, open(mp4, 'wb') as f: shutil.copyfileobj(r, f)
-    pr = sh('ffprobe', '-v', 'error', '-select_streams', 'v:0', '-count_frames', '-show_entries', 'stream=r_frame_rate,nb_read_frames', '-of', 'json', mp4, check=True)
-    st = json.loads(pr.stdout)['streams'][0]; a, b = st['r_frame_rate'].split('/'); fps = float(a) / float(b); nfr = int(st['nb_read_frames'])
+        d = json.load(open(mp4, encoding='utf-8'))
+        if d.get('src'):                                                     # the same video approved again (new marks or speed): the game's own copy
+            if not re.fullmatch(r'art/raw/clips/[a-z0-9-]+\.mp4', d['src']) or not os.path.exists(os.path.join(ROOT, d['src'])): raise SystemExit(f'{e["id"]}: the earlier copy {d["src"]!r} is not in the game files')
+            mp4 = os.path.join(ROOT, d['src'])
+        else:
+            url = d['url']
+            if not url.startswith('https://'): raise SystemExit(f'{e["id"]}: odd video address')
+            mp4 = mp4[:-5] + '.mp4'
+            with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'art-bake'}), timeout=120) as r, open(mp4, 'wb') as f: shutil.copyfileobj(r, f)
+    pr = sh('ffmpeg', '-nostdin', '-i', mp4)                              # ffmpeg only (no ffprobe): it prints the video's facts and stops
+    fm = re.search(r', ([\d.]+) fps', pr.stderr); dm = re.search(r'Duration: (\d+):(\d+):([\d.]+)', pr.stderr)
+    if not fm or not dm: raise SystemExit(f'{e["id"]}: could not read the video {p}\n{pr.stderr[-600:]}')
+    fps = float(fm.group(1)); nfr = max(1, round((int(dm.group(1)) * 3600 + int(dm.group(2)) * 60 + float(dm.group(3))) * fps))
+    speed = m.get('speed') if isinstance(m.get('speed'), (int, float)) and .25 <= m['speed'] <= 8 else c.get('speed', 1)   # Tom's SPEED pick in REVIEW wins over the entry's
     step = max(1, round(c.get('step', 3) * fps / 30))                     # clip.step is written for a 30 a second video
     first = min(nfr - 1, round(m['first'] * fps)); last = min(nfr - 1, round(m['last'] * fps))
     kept = list(range(first, last + 1, step))
     if len(kept) < 4: raise SystemExit(f'{e["id"]}: START and END are too close together ({len(kept)} pictures)')
     impact = min(kept[1:], key=lambda f: abs(f - m['hit'] * fps))         # the kept picture nearest Tom's HIT mark (never the standing first one)
     r = sh(sys.executable, '-I', os.path.join('tools', 'clip-bake', 'bake_clip.py'), mp4, c['id'], c['owner'], '--first', str(first), '--last', str(kept[-1]),
-           '--step', str(step), '--impact', str(impact), '--fig-rows', str(c['figRows']), '--speed', str(c.get('speed', 1)), '--fps', str(fps))
+           '--step', str(step), '--impact', str(impact), '--fig-rows', str(c['figRows']), '--speed', str(speed), '--fps', str(fps))
     print(r.stdout[-1500:]); print(r.stderr[-1500:], file=sys.stderr)
     if r.returncode: raise SystemExit(f'art_bake: bake_clip.py failed for {e["id"]}')
     tagline = f'<script src="data/clips/{c["id"]}.js?v=clip0"></script>'       # bump_tags moves the tag
@@ -89,7 +97,7 @@ def bake_clip(e, p):
         tags = re.findall(r'<script src="data/clips/[^"]+"></script>\n', html)
         if not tags: raise SystemExit('art_bake: index.html has no data/clips script tag to put the new clip next to')
         html = html.replace(tags[-1], tags[-1] + tagline + '\n'); open(ix, 'w', encoding='utf-8').write(html)
-    return f'{e["id"]}: clip `{c["id"]}` cut from {p} ({fps:g} pictures a second; video frames {first} to {kept[-1]}, every {step}, hit at frame {impact}; {len(kept)} pictures kept). {r.stdout.strip().splitlines()[-1] if r.stdout.strip() else ""}'
+    return f'{e["id"]}: clip `{c["id"]}` cut from {p} ({fps:g} pictures a second; video frames {first} to {kept[-1]}, every {step}, hit at frame {impact}; {len(kept)} pictures kept; played at {speed:g}x). {r.stdout.strip().splitlines()[-1] if r.stdout.strip() else ""}'
 
 def next_number():
     f = os.path.join(ROOT, 'docs', 'CHANGES.md')

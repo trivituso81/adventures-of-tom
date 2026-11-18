@@ -10,6 +10,7 @@
 //   REVIEW    the video plays in the review screen. Tom marks three moments: START (standing still, before the move),
 //             HIT (the moment the hit should land) and END (back in the standing pose). ON THE BATTLEFIELD plays START
 //             to END at game speed with the magenta removed over a battle background.
+//             SPEED sets how many times faster than the video the clip plays in the game (the preview plays at it).
 //   APPROVE   (decide() in art.html) commits the video to art/raw/clips/<id>-v<n>.mp4 with the three marks; the art-bake
 //             Action cuts it into the game clip (tools/art-library/art_bake.py runs tools/clip-bake/bake_clip.py).
 // If the browser may not download the finished video (the video host blocks it), the result keeps only its address:
@@ -19,7 +20,16 @@ const CLIP_FRAME=1/30, CLIP_PREVIEW_BG='bgs/01-pond-town.webp';
 const clipCost=e=>((CLIP_RATE[e.clip.model]||{})[e.clip.res]||.08)*e.clip.dur+.01;   // + one input picture
 const clipPend={get(){ try{ return JSON.parse(LS.get('aot-clip-pending')||'{}')||{}; }catch(x){ return {}; } }, set(o){ LS.set('aot-clip-pending',JSON.stringify(o)); }};
 const clipSrc=r=>r.blob?urlOf(r):r.url;
-const clipMarks=r=>{ const m=r&&r.marks; return m&&m.first>=0&&m.hit>m.first&&m.last>m.hit?{first:m.first,hit:m.hit,last:m.last}:null; };
+const clipMarks=r=>{ const m=r&&r.marks; return m&&m.first>=0&&m.hit>m.first&&m.last>m.hit?Object.assign({first:m.first,hit:m.hit,last:m.last},r.speed?{speed:r.speed}:{}):null; };
+// SPEED (clipspeed1): how many times faster than the video the clip plays in the game. Tom picks it in REVIEW; it is saved on
+// the result, sent with the marks on APPROVE, and the bake uses it instead of the entry's own clip.speed.
+const CLIP_SPEEDS=[1,1.5,2,2.5,3,4,5];
+const clipSpeed=r=>(r&&r.speed)||(r&&ENTRY[r.id]&&ENTRY[r.id].clip.speed)||1;
+// The game's own copy of an approved video (the Action saves it next to the approved file). Approving the same result
+// again (new marks or a new speed) points at that copy, so nothing is uploaded or downloaded twice and an expired address
+// does not matter.
+const clipPrior=(e,r)=>{ const v=(e.versions||[]).filter(x=>x.from==='v'+r.n&&/^art\/raw\/clips\/[a-z0-9-]+\.(mp4|json)$/.test(x.file||''))[0]; return v?v.file.replace(/\.json$/,'.mp4'):''; };
+const clipApproveFile=async(e,r)=>{ const prior=clipPrior(e,r); if(prior) return {ext:'.json',b64:textToB64(JSON.stringify({src:prior})+'\n')}; return r.blob?{ext:'.mp4',b64:await blobToB64(r.blob)}:{ext:'.json',b64:textToB64(JSON.stringify({url:r.url})+'\n')}; };
 
 function clipCard(e){
   const id=esc(e.id), rs=RES[e.id]||[], blk=blockInfo(e), ed=EDITS[e.id]!==undefined&&EDITS[e.id]!==e.prompt, c=e.clip, pend=clipPend.get()[e.id];
@@ -97,6 +107,7 @@ function clipRvSetup(){
   cg('rvnote').insertAdjacentHTML('beforebegin','<div id="cliptools" hidden>'+
     '<div class="row cliprow"><button class="small" id="cpb" aria-label="One frame back">&lsaquo; frame</button><input type="range" id="cps" min="0" max="3" step="0.0333" value="0" aria-label="Position in the video"><button class="small" id="cpf" aria-label="One frame forward">frame &rsaquo;</button></div>'+
     '<div class="row cliprow"><button class="small" id="cpplay">PLAY</button><span class="hint" id="cpt"></span><button class="small" id="cpbf">ON THE BATTLEFIELD</button></div>'+
+    '<div class="hint">Speed in the game (times faster than the video):</div><div class="row cliprow speed">'+CLIP_SPEEDS.map(x=>'<button class="small" data-speed="'+x+'">'+x+'x</button>').join('')+'</div>'+
     '<div class="hint">Move to a moment, then tap what it is:</div>'+
     '<div class="row cliprow marks"><button class="small" data-mark="first">START<br><span></span></button><button class="small" data-mark="hit">HIT<br><span></span></button><button class="small" data-mark="last">END<br><span></span></button></div>'+
     '<div class="hint">START: standing still, just before the move. HIT: the moment the hit should land. END: back to standing.</div></div>');
@@ -109,7 +120,9 @@ function clipRvSetup(){
   v.addEventListener('loadedmetadata',()=>{ s.max=String(v.duration||3); clipPaintMarks(); });
   v.addEventListener('timeupdate',()=>{ if(!CV.on) s.value=String(v.currentTime); cg('cpt').textContent=v.currentTime.toFixed(2)+' of '+(v.duration||0).toFixed(2)+' s'; });
   v.addEventListener('play',()=>cg('cpplay').textContent='PAUSE'); v.addEventListener('pause',()=>cg('cpplay').textContent='PLAY');
-  cg('cliptools').addEventListener('click',async ev=>{ const b=ev.target.closest('[data-mark]'); if(!b||!CV.r) return;
+  cg('cliptools').addEventListener('click',async ev=>{ const sp=ev.target.closest('[data-speed]');
+    if(sp&&CV.r){ CV.r.speed=+sp.dataset.speed; await tx('readwrite',st=>st.put(CV.r)); clipPaintMarks(); if(CV.on) v.playbackRate=CV.r.speed; return; }
+    const b=ev.target.closest('[data-mark]'); if(!b||!CV.r) return;
     const r=CV.r; r.marks=Object.assign({first:-1,hit:-1,last:-1},r.marks||{}); r.marks[b.dataset.mark]=Math.round(v.currentTime*1000)/1000;
     await tx('readwrite',st=>st.put(r)); clipPaintMarks(); });
 }
@@ -120,6 +133,7 @@ function clipPaintMarks(){
   if(CV.r&&rvId()===CV.r.id&&set&&!ok) setMsg(CV.r.id,'The marks are out of order: START must come before HIT, and HIT before END.',true);
   else if(CV.r&&MSG[CV.r.id]&&/marks/.test(MSG[CV.r.id].text)) setMsg(CV.r.id,'');
   cg('cpbf').disabled=!ok;
+  const spd=clipSpeed(CV.r); document.querySelectorAll('#cliptools [data-speed]').forEach(b=>b.classList.toggle('set',+b.dataset.speed===spd));
 }
 // Called by rvDraw (art.html) for every entry: shows the video tools for a clip result, hides them for a picture.
 function clipRvDraw(e,r){
@@ -129,6 +143,9 @@ function clipRvDraw(e,r){
   if(!isClip){ v.pause(); v.removeAttribute('src'); CV.r=null; return; }
   CV.r=r; const src=clipSrc(r); if(v.getAttribute('src')!==src){ v.src=src; v.load(); }
   v.pause(); clipPaintMarks();
+  // An approved video this device holds only as an address: fetch the game's own copy (same site, so it can be kept) and use it from now on.
+  const prior=!r.blob&&clipPrior(e,r);
+  if(prior) fetch(prior,{cache:'no-store'}).then(x=>x.ok?x.blob():null).then(async b=>{ if(!b||b.size<1000||r.blob) return; r.blob=new Blob([b],{type:'video/mp4'}); r.url=''; await tx('readwrite',st=>st.put(r)); if(CV.r===r){ clipBf(false); v.src=clipSrc(r); v.load(); clipPaintMarks(); } }).catch(()=>{});
 }
 function clipRvStop(){ clipBf(false); const v=cg('rvvid'); if(v) v.pause(); }
 // ON THE BATTLEFIELD: START to END, looping, at the game's speed, magenta removed, over a battle background. A look at
@@ -143,14 +160,14 @@ function clipBf(on){
   CV.on=true; cg('cpbf').textContent='BACK TO THE VIDEO';
   if(!CV.r.blob){   // address only: the video itself is shown through the magenta filter over the background picture
     v.style.filter='url(#clipkey)'; stg.style.backgroundImage='url('+CLIP_PREVIEW_BG+')'; stg.style.backgroundSize='cover'; stg.style.backgroundPosition='center';
-    v.currentTime=m.first; v.playbackRate=(e.clip&&e.clip.speed)||1; v.play();
+    v.currentTime=m.first; v.playbackRate=clipSpeed(CV.r); v.play();
     const loop=()=>{ if(!CV.on) return; if(v.currentTime>=m.last||v.paused||v.ended){ v.currentTime=m.first; v.play(); } CV.raf=requestAnimationFrame(loop); };
     CV.raf=requestAnimationFrame(loop); return;
   }
   can.hidden=false; v.style.opacity='0';
   if(!CV.bg){ CV.bg=new Image(); CV.bg.src=CLIP_PREVIEW_BG; }
   const W=can.width=640, H=can.height=480, g=can.getContext('2d'), off=document.createElement('canvas'), og=off.getContext('2d',{willReadFrequently:true});
-  v.currentTime=m.first; v.playbackRate=(e.clip&&e.clip.speed)||1; v.play();
+  v.currentTime=m.first; v.playbackRate=clipSpeed(CV.r); v.play();
   const draw=()=>{ if(!CV.on) return;
     if(v.currentTime>=m.last||v.paused||v.ended){ v.currentTime=m.first; v.play(); }
     const vw=v.videoWidth, vh=v.videoHeight;
@@ -170,5 +187,6 @@ document.addEventListener('DOMContentLoaded',()=>{ const st=document.createEleme
   st.textContent='.clipthumb{width:100%;aspect-ratio:4/3;object-fit:contain;background:#0f0d24;border:1px solid #3a3566;border-radius:8px;display:block;margin-bottom:4px}'+
   '#rvvid,#rvcan{width:100%;height:100%;object-fit:contain}#rvcan{position:absolute;inset:0}'+
   '.cliprow{display:flex;gap:8px;align-items:center;margin:4px 0}.cliprow input[type=range]{flex:1;min-width:0;height:36px}.cliprow .hint{flex:1;text-align:center}'+
+  '.cliprow.speed{gap:4px}.cliprow.speed button{flex:1;min-width:0;min-height:40px;padding:4px 0}.cliprow.speed button.set{border-color:#a89dff;background:#7b6cff;color:#fff}'+
   '.cliprow.marks button{flex:1;min-height:48px;line-height:1.25}.cliprow.marks button span{font-weight:400;font-size:12px}.cliprow.marks button.set{border-color:#2f9e63;background:#143524}';
   document.head.appendChild(st); });
