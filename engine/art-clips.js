@@ -136,7 +136,7 @@ function clipPaintMarks(){
   const m=(CV.r&&CV.r.marks)||{}, ok=!!clipMarks(CV.r);
   document.querySelectorAll('#cliptools [data-mark]').forEach(b=>{ const t=m[b.dataset.mark]; b.querySelector('span').textContent=clipT(t); b.classList.toggle('set',t>=0); });
   const kind=clipKind(CV.r), hb=document.querySelector('#cliptools [data-mark="hit"]'); if(hb) hb.hidden=kind!=='strike';
-  cg('cliphelp').textContent=kind==='loop'?'START: where the repeat begins. END: where it ends (the game blends the end back into the start).':kind==='state'?'START: standing still, just before it begins. END: the pose that stays (the game holds this picture).':'START: standing still, just before the move. HIT: the moment the hit should land. END: back to standing.';
+  cg('cliphelp').textContent=kind==='loop'?'Pick a calm stretch. START: where it begins. END: where it ends. The game plays it forward, then backward, so it never jumps.':kind==='state'?'START: standing still, just before it begins. END: the pose that stays (the game holds this picture).':'START: standing still, just before the move. HIT: the moment the hit should land. END: back to standing.';
   const set=m.first>=0&&m.last>=0&&(kind!=='strike'||m.hit>=0);
   if(CV.r&&rvId()===CV.r.id&&set&&!ok) setMsg(CV.r.id,kind==='strike'?'The marks are out of order: START must come before HIT, and HIT before END.':'The marks are out of order: START must come before END.',true);
   else if(CV.r&&MSG[CV.r.id]&&/marks/.test(MSG[CV.r.id].text)) setMsg(CV.r.id,'');

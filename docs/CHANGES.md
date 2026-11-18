@@ -1,3 +1,12 @@
+## cliploop1 (2026-11-18): Animation test: the Mudling moves less and its loop no longer jumps at the repeat
+
+- Tom (11-18 08:50): "the monsters look pretty good but they have too much movement, and at the end of the animation when it loops, their eyes transition in a strange way. it's like it's not referencing the image for both animation start and end". He is right: the video model is only given the first picture, so the last picture never matches it, and the half second dissolve that hid the jump (clipkinds1) showed as double eyes.
+- Loop clips now play forward, then backward (`bclipLoopFrame` in `engine/clips.js`), so the repeat cannot jump. The dissolve is removed from `tools/clip-bake/bake_clip.py` (`--blend` is gone).
+- `mudling-idle` recut from the same approved video: only its calmest stretch (1.5 to 2.4 s: a small sway and one blink), played at 0.6x. 8 pictures, 144 KB (was 25 pictures, 499 KB). The blink is the turning point, so it reads as one slow blink about every 3 seconds. Marks and speed recorded on the approved version in `data/art-prompts.json`.
+- The Mudling idle prompt for any future video asks for much less movement and a mouth that stays as painted. The Library help line for a loop says to pick a calm stretch.
+- Tests: `tools/clip_kinds_test.py` (the loop runs forward and backward and never jumps), `tools/art-library/clip_lib_test.py`, `tools/clip_test.py`, `tools/smoke.py`.
+- Not seen on the phone yet.
+
 ## clipkinds1 (2026-11-18): Animation test: a Mudling that moves on its own and Rose lying down for a nap, in two Battle Lab fights
 
 - Tom approved four study videos in the Art Library on 11-18 07:56. Looked at every frame (contact sheets, magenta cut with the game's own cutter). Results: the cheap model (`grok-imagine-video-1.5-lite`, about 7 cents) held the style, left no floor shadow and had no smeared in-between picture, so it is the default for new clip entries (full model is the second try). The 2 second strike lost the shout (she laughs with closed eyes) and has a colour-smeared picture in the lunge, so attacks stay 3 seconds. Rose's sleep video ends lying down with her bow unchanged. The Mudling's base stays on its line in all 73 pictures; its mouth is open at the start and closed at the end, which the loop blend covers.

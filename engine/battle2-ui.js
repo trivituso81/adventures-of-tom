@@ -103,7 +103,7 @@ function b2FoeFrame(f,R0) {
   if(hit) { if(!f._hurtOn) { f._hurtOn=true; f._hurtUntil=now+B2_HURT_HOLD; } } else f._hurtOn=false;
   if(f._hurtOn||now<(f._hurtUntil||0)) return FR.hurt;
   const L=typeof bclipFor==='function'?bclipFor(f.id,'loop'):null;   // a video-made idle loop (engine/clips.js); each monster starts at its own point
-  return L?bclipFrameAt(L,(now+f.idx*900)%L.dur):R0;
+  return L?bclipLoopFrame(L,now+f.idx*900):R0;
 }
 // ---------- Painted meters (Tom, 2026-11-05) ----------
 // One look for every battle meter, on the canvas (enemies) and in the party window (index.html, .b2-bar): a rounded well with the

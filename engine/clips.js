@@ -18,8 +18,9 @@
 // Kinds (D.kind, set by the baker; clipkinds1):
 //   strike  (default) a one-shot move with an impact frame, played by a move through ST.clip.
 //   loop    an idle that repeats: a monster waiting. b2FoeFrame (engine/battle2-ui.js) draws it instead of the painted
-//           stance whenever the monster is not winding up, attacking or being hit. The baker dissolves the last pictures
-//           into the first, so the repeat is not seen.
+//           stance whenever the monster is not winding up, attacking or being hit. It plays forward, then backward
+//           (bclipLoopFrame), so the repeat has no jump: a video's last picture never matches its first (the video
+//           model is only given the first picture).
 //   state   a one-shot that ends in a held pose: a party member going out of the fight (asleep). drawBattle
 //           (engine/battle-draw.js) plays it once from the moment they go down and holds its last picture.
 // bclipFor(owner,kind) gives the loaded clip of that kind for a party member or monster id, or null.
@@ -43,6 +44,8 @@ function bclipWanted() {
   for(const id in BCLIPS) if(B2.party.some(u=>u.id===BCLIPS[id].owner)||B2.foes.some(f=>f.id===BCLIPS[id].owner)) out.push(id);
   return out;
 }
+// A loop clip at ms: forward to its last picture, then backward to its first, over and over.
+function bclipLoopFrame(C,ms) { const t=ms%(2*C.dur); return bclipFrameAt(C,t>=C.dur?2*C.dur-t-1:t); }
 function bclipFor(owner,kind) {
   if(typeof B2==='undefined'||!B2.active||!B2.labClip) return null;
   for(const id in BCLIPS) { const C=BCLIPS[id]; if(C.owner===owner&&C.kind===kind&&bclipReady(id)) return C; }

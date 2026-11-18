@@ -1,6 +1,6 @@
 # Clip kinds test (clipkinds1): a LOOP clip and a STATE clip (engine/clips.js) play in a real fight.
 # Starts the Battle Lab's CLIP TEST: SLEEPY ROSE fight and checks, in portrait and landscape:
-#   1. both Mudlings are drawn from the idle loop clip, the pictures advance and wrap around, and the two are out of step
+#   1. both Mudlings are drawn from the idle loop clip, the pictures run forward then backward with no jump, and the two are out of step
 #   2. about 3 s in Rose goes out of the fight; her body is drawn from the sleep clip, in order, and stays on its last picture
 #   3. the fight goes on (Grace acts, the turn passes, Rose never gets a turn) with no errors
 # Saves a contact sheet tools/shots/clipkinds-<layout>.png.
@@ -42,7 +42,8 @@ with sync_playwright() as pw:
         a=[r[0][0] for r in log]; b=[r[0][1] for r in log]
         if any(n!='clip_mudling_idle' for r in log for n in r[3]): fails.append(layout+': a Mudling was not drawn from the loop clip')
         if len(set(a))<C['loop']*.6: fails.append(f'{layout}: only {len(set(a))} of {C["loop"]} loop pictures were drawn')
-        if not any(y<x for x,y in zip(a,a[1:])): fails.append(layout+': the loop never wrapped around')
+        if not any(y<x for x,y in zip(a,a[1:])) or not any(y>x for x,y in zip(a,a[1:])): fails.append(layout+': the loop did not run forward and backward')
+        if max(abs(y-x) for x,y in zip(a,a[1:]))>3: fails.append(layout+': the loop jumped (more than 3 pictures between two looks)')
         if sum(x==y for x,y in zip(a,b))>len(a)*.2: fails.append(layout+': the two Mudlings move in step')
         nap=[r[2] for r in log if r[1]<=0 and r[2]>=0]
         print(layout,'loop pictures',len(set(a)),'of',C['loop'],'| nap pictures',len(set(nap)),'of',C['nap'],'last',nap[-1:] )

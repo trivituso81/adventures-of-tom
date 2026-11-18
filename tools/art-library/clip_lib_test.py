@@ -169,7 +169,7 @@ def kind_run(br, video):
         ok('mark the start and the end' in pg.locator(f'.card[data-id="{SID}"]').inner_text(), 'loop: the card asks for the start and the end only')
         pg.click(f'.card[data-id="{SID}"] .res [data-res]'); pg.wait_for_selector('#rv:not([hidden])'); pg.wait_for_function("()=>document.getElementById('rvvid').readyState>=2", timeout=20000)
         vis = pg.evaluate("()=>({hit:document.querySelector('[data-mark=hit]').offsetHeight, first:document.querySelector('[data-mark=first]').offsetHeight, last:document.querySelector('[data-mark=last]').offsetHeight, help:document.getElementById('cliphelp').textContent})")
-        ok(vis['hit'] == 0 and vis['first'] > 0 and vis['last'] > 0 and 'repeat' in vis['help'], f'loop: review shows START and END, no HIT, and says what they mean {vis}')
+        ok(vis['hit'] == 0 and vis['first'] > 0 and vis['last'] > 0 and 'backward' in vis['help'], f'loop: review shows START and END, no HIT, and says what they mean {vis}')
         pg.click('#rvok'); pg.wait_for_timeout(400); ok('Mark START and END first' in pg.inner_text('#rvmsg'), 'loop: APPROVE is refused until START and END are set')
         for t, k in ((.5, 'first'), (2.5, 'last')): seek(pg, t); pg.click(f'[data-mark="{k}"]')
         pg.screenshot(path=os.path.join(SHOTS, 'artclip-loop-review.png'))

@@ -10,8 +10,9 @@ Writes art/clips/<id>.webp (every kept frame, side by side in a grid, magenta re
   --impact        the video frame where the hit lands (must be one of the kept frames); the game lands damage there
                   (kind strike only)
   --kind          strike (default): a one-shot move with an impact frame.
-                  loop: an idle that repeats (a monster waiting). No impact. The last --blend kept frames are dissolved
-                        toward the first one, so the jump from the last picture back to the first is not seen.
+                  loop: an idle that repeats (a monster waiting). No impact. The game plays it forward, then backward
+                        (engine/clips.js bclipLoopFrame), so the repeat has no jump: a video model is only given the
+                        first picture, so its last picture never matches the first.
                   state: a one-shot that ends in a pose the game holds (out of the fight: asleep). No impact.
   --fig-rows      how many sprite rows tall the STANDING figure is in the owner's battle idle frame (Rose 83), so the
                   clip is drawn exactly as tall as the painted battle sprite and follows BATTLE_SIZE with it
@@ -57,7 +58,7 @@ def main():
     ap.add_argument('clip'); ap.add_argument('id'); ap.add_argument('owner')
     ap.add_argument('--first', type=int, required=True); ap.add_argument('--last', type=int, required=True)
     ap.add_argument('--step', type=int, default=3); ap.add_argument('--impact', type=int, default=-1)
-    ap.add_argument('--kind', default='strike', choices=['strike', 'loop', 'state']); ap.add_argument('--blend', type=int, default=4)
+    ap.add_argument('--kind', default='strike', choices=['strike', 'loop', 'state'])
     ap.add_argument('--fig-rows', type=float, required=True); ap.add_argument('--speed', type=float, default=1)
     ap.add_argument('--k', type=int, default=4); ap.add_argument('--fps', type=float, default=30)
     ap.add_argument('--tag', default='clip0'); ap.add_argument('--quality', type=int, default=86); ap.add_argument('--sheet', default='')
@@ -69,12 +70,6 @@ def main():
     picks = list(range(A.first, A.last + 1, A.step))
     if A.kind == 'strike' and A.impact not in picks: sys.exit(f'impact frame {A.impact} is not one of the kept frames {picks}')
     keyed = [key(np.asarray(Image.open(files[i]).convert('RGB'))) for i in picks]
-    if A.kind == 'loop':                         # dissolve the tail into the first picture (premultiplied, so edges stay clean)
-        nb = min(A.blend, len(keyed) - 2); f0 = keyed[0].astype(float); p0 = f0[..., :3] * f0[..., 3:] / 255
-        for j in range(nb):
-            w = (j + 1) / (nb + 1); f = keyed[len(keyed) - nb + j].astype(float); pm = f[..., :3] * f[..., 3:] / 255
-            al = f[..., 3] * (1 - w) + f0[..., 3] * w; pm = pm * (1 - w) + p0 * w
-            keyed[len(keyed) - nb + j] = np.dstack([np.clip(pm * 255 / np.maximum(al, 1)[..., None], 0, 255), al]).astype('uint8')
     # The standing pose (first kept frame) sets height, feet line and middle.
     ys, xs = np.where(keyed[0][..., 3] > 128)
     top, feet, mid = ys.min(), ys.max() + 1, (xs.min() + xs.max() + 1) / 2
