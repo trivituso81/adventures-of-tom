@@ -1,0 +1,96 @@
+ch	scene	speaker	after	text
+1	ch1Goal	Grace	snap	Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One again.
+1	ch1Goal	Rose	snap	It's bigger than a BUS! It ate a boat!
+1	ch1Goal	Grace	normal	It did not eat a boat. Nobody's ever seen it but Boppy, and he's been saying it for twenty years.
+1	ch1Goal	Tom	normal	Twenty years, one witness. That's a strong number one. What's number two?
+1	ch1Goal	Grace	beat	Number two. Deedee made apple muffins. They're for you, so nobody's allowed to have one yet.
+1	ch1Goal	Rose	normal	I licked one. Only the top!
+1	ch1Goal	Tom	normal	Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry. Number two can't wait.
+1	ch1Goal	Grace	normal	Number three. Rose licked a muffin.
+1	ch1Amy	Amy	normal	Brother! I'm watching you from the window. I've seen people walk faster in ski boots.
+1	ch1Amy	Tom	normal	I'm carrying a child and receiving a news report.
+1	ch1Amy	Amy	normal	I carried both of them up that street with the groceries. Go hug Mom. I'm coming over after my run.
+1	ch1Amy	Tom	snap	Your mother says I'm slow.
+1	ch1Amy	Grace	normal	You are slow. I've been on number four since the mailbox.
+1	ch1Ellie	Aunt Ellie	normal	Tom. They gave you a seat that turns into a bed, and you still got off that plane wrinkled.
+1	ch1Ellie	Tom	normal	Hi, Aunt Ellie. It's a travel wrinkle. It's supposed to fall out by dinner.
+1	ch1Ellie	Aunt Ellie	snap	Then I'll look at you again at dinner. Come in. Rose, darling, what is that on your hands?
+1	ch1Ellie	Rose	normal	Cinnamon! From Deedee's muffin!
+1	ch1Ellie	Aunt Ellie	normal	Then you'll stay up there, please. Your uncle wipes clean. My chairs don't.
+1	ch1Ellie	Grace	beat	Aunt Ellie, I'm reading Tata everything he missed. You're number four.
+1	ch1Ellie	Aunt Ellie	normal	Am I? What did I do?
+1	ch1Ellie	Grace	normal	You got new curtains.
+1	ch1Ellie	Aunt Ellie	snap	I did. And what's number three?
+1	ch1Ellie	Grace	beat	Rose licked a muffin.
+1	ch1Ellie	Aunt Ellie	normal	Then the curtains are three, Grace. Fix your list. I'm not coming in behind a licked muffin.
+1	ch1Ellie	Rose	beat	Aunt Ellie, did you miss Tata?
+1	ch1Ellie	Aunt Ellie	normal	Fine. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind.
+1	ch1Theft	Deedee	normal	There he is! Come here. Let me look at you. I missed that face. Now sit, you're having a muffin.
+1	ch1Theft	Tom	normal	Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since we flew over Kansas.
+1	ch1Theft	Deedee	snap	Twelve of them, and all twelve are still there. I've been standing between that pan and your father since six this morning.
+1	ch1Theft	Boppy	snap	In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat...
+1	ch1Theft	Rose	snap	AHHH! DEEDEE!
+1	ch1Theft	Tom	snap	GAH! I'm on the floor. Grace, is that your elbow or mine?
+1	ch1Theft	Grace	snap	It's mine! Tata, get UP, it's getting away!
+1	ch1Theft	Deedee	beat	That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER.
+1	ch1Theft	Boppy	normal	...and I only caught him because the hat kept getting taller. Where'd the muffins go?
+1	ch1Theft	Deedee	beat	A ball of mud came through the door and took them. Pan and all.
+1	ch1Theft	Boppy	snap	The mud gets a muffin and I don't?
+1	ch1Theft	Deedee	normal	Girls, sneakers. Tom, hold the door. Hubby, you stay right there. When we get them back, the first one's yours.
+1	ch1Theft	Boppy	normal	The first one. Tom, you heard her.
+1	ch1Mudling	Rose	beat	Hello, mud! Can we please have Deedee's muffins back? Thank you!
+1	ch1Mudling	Mudling	snap	No. Ours now.
+1	ch1Mudling	Rose	snap	But I said PLEASE!
+1	ch1Mudling	Tom	normal	She did. I was right here. It was an excellent please.
+1	ch1Mudling	Deedee	normal	Girls, behind me. You three have till I count to three. Then I'm getting the hose.
+1	ch1Mudling	Deedee	snap	Three.
+1	ch1Mudling	Grace	normal	Nine papers. There were twelve. So the one with the pan still has three.
+1	ch1Mudling	Deedee	normal	Then it has three of my muffins and my pan. Keep walking.
+1	ch1Spot	Rose	snap	The grass is Boppy color!
+1	ch1Spot	Grace	normal	It's grey, Rose. Just that one spot. And that orange cube has a dragonfly in it.
+1	ch1Spot	Rose	snap	He's stuck! Tata, get him out!
+1	ch1Spot	Tom	normal	Yes. Right away. Everybody give the dragonfly some room.
+1	ch1Spot	Tom	snap	It's the size of a plum. I carried a suitcase through two airports this morning.
+1	ch1Spot	Rose	normal	Your face is RED, Tata!
+1	ch1Spot	Grace	beat	Tata, stop. You're getting fingerprints on it. And look, it has a dent. Did you do that?
+1	ch1Spot	Tom	normal	Grace. I couldn't even make it wobble.
+1	ch1Spot	Grace	normal	Deedee, what's that?
+1	ch1Spot	Deedee	snap	A flashbulb, from an old camera. It's burnt. Somebody set it off right here and left it by your grandfather's chair.
+1	ch1Spot	Grace	normal	Don't throw it out! It's a clue. I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it. I'm writing it in pencil.
+1	ch1Spot	Tom	normal	Why pencil?
+1	ch1Spot	Grace	normal	Because I don't know what any of it means yet.
+1	ch1Pond	Tom	normal	GAH! Grace, I'm holding your hand. That's for me, not for you.
+1	ch1Pond	Grace	beat	I know, Tata. You're squeezing. Is that the Big One? Boppy only said it was as big as the couch!
+1	ch1Pond	Deedee	beat	For once in his life he rounded down.
+1	ch1Pond	The Big One	snap	GLUB. I was small at breakfast. Then a flash. Now I don't fit under my log.
+1	ch1Pond	Deedee	normal	And that's my good twelve-cup pan on your head. It's never been in pond water in its life.
+1	ch1Pond	The Big One	normal	It's my crown. A little muddy one brought it. I'm keeping it.
+1	ch1Pond	Tom	snap	Mom. That's a boss. You don't just walk up to a boss.
+1	ch1Pond	Deedee	normal	I worked the night shift, Tom. I've walked up to worse. Mister, take off my pan.
+1	ch1AfterBoss	Rose	snap	BOO!
+1	ch1AfterBoss	The Big One	normal	GLUB! HA! You got me! I see everybody. I never saw you!
+1	ch1AfterBoss	Tom	normal	Nobody does. She's gotten me in an empty room.
+1	ch1AfterBoss	The Big One	normal	Take the pan. The sneaky one gets this. It's the only thing I've got.
+1	ch1AfterBoss	Rose	beat	Thank you, fish! There's a bug on my money!
+1	ch1AfterBoss	The Big One	normal	The man in the folding chair. Will he be back?
+1	ch1AfterBoss	Grace	normal	That's Boppy. He's here every single day.
+1	ch1AfterBoss	The Big One	beat	Good. He was in the middle of a story. The one about the race.
+1	ch1AfterBoss	Deedee	normal	He's been in the middle of that one for fifty-one years.
+1	ch1End	Rose	snap	Boppy! Your fish is REAL! He's CAR size and he gave me money!
+1	ch1End	Boppy	normal	CAR size? Cozy Rosie, I told everybody a couch. Twenty years! I didn't want to brag!
+1	ch1End	Boppy	normal	Now that's real gold. Same as these. Look.
+1	ch1End	Rose	normal	You've got money in your TEETH!
+1	ch1End	Boppy	snap	Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look.
+1	ch1End	Rose	normal	Under Lamby! Nobody looks under Lamby!
+1	ch1End	Boppy	beat	Good girl. Now. Your grandmother promised me the first muffin. Who's got my muffin?
+1	ch1End	Grace	beat	The fish ate them, Boppy. The last three.
+1	ch1End	Boppy	normal	The fish gets THREE?
+1	ch1End	Deedee	normal	Twelve more. Forty minutes. The first one's still yours.
+1	ch1End	Boppy	normal	Girls, you heard that. Forty minutes. Somebody watch the clock.
+1	ch1Job	Grace	normal	Tata, you have a job. If you see anything grey in California, or an orange cube, you write it down and text me.
+1	ch1Job	Tom	normal	I have a job. Yes. Does the job come with a pencil?
+1	ch1Job	Grace	normal	That's my second best one. Don't lose it.
+1	ch1Job	Tom	normal	Second best. It's going in the pocket with the zipper.
+1	ch1Job	Rose	snap	One more ride, Tata! To the cab! Go the LONG way!
+1	ch1Job	Tom	normal	The long way. That's all the way around the Square. Twice.
+1	ch1Sunday	TNB	normal	hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over.

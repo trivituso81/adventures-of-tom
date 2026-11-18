@@ -73,5 +73,8 @@ if ht.returncode: fails.append('heights: '+'; '.join(l for l in ht.stdout.split(
 # Pose facing (facing1): every baked mood or talking frame says which way its painting leans (docs/pose-facing.tsv).
 pf=subprocess.run([sys.executable,os.path.join(HERE,'pose-facing-apply.py'),'--check'],capture_output=True,text=True); print(pf.stdout.strip())
 if pf.returncode: fails.append(pf.stdout.strip())
+# Line gaps (linegap1): the hold after each story line (docs/line-gaps.tsv) matches data/line-gaps.js and data/scenes.js.
+lg=subprocess.run([sys.executable,os.path.join(HERE,'gap-apply.py'),'--check'],capture_output=True,text=True); print(lg.stdout.strip())
+if lg.returncode: fails.append(lg.stdout.strip())
 print('FAILS:',fails)
 raise SystemExit(1 if fails else 0)

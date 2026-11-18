@@ -1,3 +1,12 @@
+## linegap1 (2026-11-18): story scenes play on AUTO, and each chapter 1 line has its own pause before the next speaker
+
+Tom (2026-11-18 07:26): "What about the pacing between when different characters speak?" then "Go".
+- Before: with AUTO OFF the next line started when the player tapped; with AUTO ON every line in the game was followed by the same 0.65 seconds.
+- Now every story line can carry a hold that runs after its clip ends: snap 0.15 s (the next person cuts in), normal 0.65 s (unchanged default), beat 1.25 s (a held moment before a deadpan). Hand-judged table: `docs/line-gaps.tsv` (all 95 chapter 1 lines: 24 snap, 14 beat, 57 normal). `python3 tools/gap-apply.py` writes `data/line-gaps.js`; the seconds are `DA_GAP` in `engine/dialog-auto.js`. Chapters 2 to 20 have no rows yet and stay at 0.65.
+- Story scenes (cutscenes) now open with AUTO ON. It has its own remembered setting (`le-scene-auto`): turning it off during a scene keeps it off for scenes; ordinary conversations keep their old setting (OFF unless turned on). Tapping still moves on at once. Rose Mode is unchanged.
+- A line with no recording keeps its reading time (a beat adds to it, a snap never shortens it), so the pauses are only fully heard once the chapter 1 lines are recorded.
+- A line cannot start before the one before it ends: no talking over each other.
+- Test: `python3 tools/linegap_test.py` (plays ch1Amy with no button press; 9 checks pass). Smoke runs `gap-apply.py --check`. NOT heard with real clips: chapter 1's 95 lines have none yet, so the three lengths are first guesses.
 ## 2026-11-18 (451): Art Library bake, clip-rose-strike (`artbake1480`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).

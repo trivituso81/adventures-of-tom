@@ -7,6 +7,9 @@
 // - Never answers a yes/no prompt: when choices are showing, AUTO holds and the player picks.
 // - Tapping the box (or A / Enter) still moves on immediately, and the timer restarts on the next page.
 // - The setting is remembered between visits. Keyboard: T toggles it. Gamepad: X toggles it.
+// - Story scenes (cutscenes) have their own remembered setting and it starts ON (linegap1, Tom 2026-11-18), so the
+//   pause written for each line reaches the player. Other conversations keep the old setting, which starts OFF.
+// - The hold after a spoken line comes from data/line-gaps.js (docs/line-gaps.tsv, tools/gap-apply.py): snap, normal, beat.
 // Loaded after engine/dialog-voice.js (uses DV and dvMuted from there) and before engine/main.js.
 const DA={on:false,t:0,last:performance.now(),padX:false};
 try { DA.on=localStorage.getItem('le-dialog-auto')==='on'; } catch(e) {}
@@ -20,9 +23,11 @@ function daSync() {
 // Rose Mode (engine/feel.js): every conversation opens with AUTO ON, since Rose cannot read yet. The button still
 // turns it off for that one conversation; the saved setting belongs to Grace and Director Modes and is left alone.
 const daRose=()=>typeof B7!=='undefined'&&B7.diff==='rose';
+const daScene=()=>typeof cutsceneOn==='function'&&cutsceneOn();
+function daSceneWant() { try { return localStorage.getItem('le-scene-auto')!=='off'; } catch(e) { return true; } }
 function setDialogAuto(on,quiet) {
   DA.on=!!on; DA.t=0;
-  if(!daRose()) { try { localStorage.setItem('le-dialog-auto',DA.on?'on':'off'); } catch(e) {} }
+  if(!daRose()) { try { localStorage.setItem(daScene()?'le-scene-auto':'le-dialog-auto',DA.on?'on':'off'); } catch(e) {} }
   daSync();
   if(!quiet&&typeof sfx!=='undefined') sfx.select();
 }
@@ -30,15 +35,25 @@ const LE_openDialog_da=openDialog;
 openDialog=function(name,lines,npc) {
   const r=LE_openDialog_da(name,lines,npc);
   let want=true;
-  if(!daRose()) { want=false; try { want=localStorage.getItem('le-dialog-auto')==='on'; } catch(e) {} }   // the saved setting
+  if(daRose()) want=true;
+  else if(daScene()) want=daSceneWant();                                                              // story scenes: ON unless turned off
+  else { want=false; try { want=localStorage.getItem('le-dialog-auto')==='on'; } catch(e) {} }      // the saved setting
   if(DA.on!==want) { DA.on=want; DA.t=0; daSync(); }
   return r;
 };
 
 // Seconds to hold once the page's text is fully shown (and any spoken clip has ended).
+// A spoken page holds for its own gap (snap: the next person cuts in; beat: a held moment). A page with no clip keeps
+// its read time, and a beat is added on top; a snap never shortens reading.
+const DA_GAP={snap:.15,normal:.65,beat:1.25};
+function daGap() {
+  const k=typeof LINE_GAPS!=='undefined'&&dialog.lines?LINE_GAPS[dialog.name+'|'+dialog.lines[dialog.index]]:null;
+  return DA_GAP[k]||DA_GAP.normal;
+}
 function daWait() {
-  if(DV.page===dialog.index&&!dvMuted()) return .65;
-  return Math.max(1.4,Math.min(5,.8+dialog.chars.length*.032));
+  const g=daGap();
+  if(DV.page===dialog.index&&!dvMuted()) return g;
+  return Math.max(1.4,Math.min(5,.8+dialog.chars.length*.032))+Math.max(0,g-DA_GAP.normal);
 }
 function daReady() {
   return dialog.active&&!document.hidden&&!transition&&!menuOpen&&!shopOpen&&!battle.active

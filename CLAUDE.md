@@ -160,6 +160,7 @@ The game must be served over http. Opening `index.html` as a file will not work.
 | A Tombo or Family Finish or Director's Cut (two-character combo) | `data/battle2-data.js` (numbers), `engine/battle2-kind.js` (animation) |
 | Spoken battle lines | `data/lines.js` |
 | Spoken dialogue speakers and voices | `data/dialog-cast.js` |
+| The pause between two speakers in a story scene (snap, normal, beat) | `docs/line-gaps.tsv`, then `python3 tools/gap-apply.py` (seconds: `DA_GAP` in `engine/dialog-auto.js`) |
 | Difficulty modes | `B7_DIFF` in `engine/feel.js` |
 | Stats, items, party members | `data/party.js`, `data/abilities.js`, `data/progress.js` |
 | Menus | `engine/menu.js`, `engine/progress.js`, `engine/shop.js` |
