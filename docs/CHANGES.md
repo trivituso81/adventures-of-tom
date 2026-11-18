@@ -1,3 +1,11 @@
+## clippace1 (2026-11-18): Animation test: the Mudling's body sways at half the speed and its blink is quick
+
+- Tom (11-18 10:56): "i think the body motions can be slowed more, but the eyes opening and closing could be faster. is there a way to do this?" Yes: the blink and the sway sit in different pictures of the video, so each part can have its own pace.
+- `tools/clip-bake/bake_clip.py --pace F:STEP:SPEED` (and `clip.pace: [[second, step, speed]]` on a Library entry, passed on by `art_bake.py`): from that point of the video on, pictures are kept and timed at their own step and speed.
+- `mudling-idle` recut from the same approved video: the sway (video frames 36 to 53) keeps every picture at 0.3x, 2.5 s one way (was 1.3 s); the blink (frames 54 to 56) plays at full speed, about a quarter of a second to close and open (was about 0.8 s). One blink about every 5 seconds. 21 pictures, 365 KB. Marks and pace recorded on the approved version and the entry.
+- Tests: `tools/art-library/clip_lib_test.py` (66 checks: a paced loop bake), `tools/clip_kinds_test.py`, `tools/clip_test.py`, `tools/smoke.py`.
+- Not seen on the phone yet.
+
 ## b3tempo1 (2026-11-18): New battle: attack animations take twice as long
 
 - Tom (11-18 09:54, after playing `b3s1`): "the attack animations are about 2x too fast".

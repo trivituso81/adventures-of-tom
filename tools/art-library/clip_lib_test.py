@@ -192,8 +192,10 @@ def kind_bake(video_bytes):
     spec = importlib.util.spec_from_file_location('art_bake_k', os.path.join(T, 'tools/art-library/art_bake.py')); m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
     note = m.bake_clip(e, p); print('     ', note)
     js = open(os.path.join(T, 'data/clips/mudling-idle.js')).read(); D = json.loads(re.search(r'bclipDefine\("mudling_idle",(\{.*\})\);', js).group(1))
-    # marks .5 / 2.5 s at 30 a second, every 4th: frames 15..75, 16 pictures
-    ok(D['kind'] == 'loop' and 'impact' not in D and 'reach' not in D and D['n'] == 16 and D['k'] == 8 and D['owner'] == 'mudling', f'loop bake: 16 pictures, kind loop, no hit, 8 pixels a row (n {D["n"]}, k {D["k"]}, kind {D["kind"]})')
+    # marks .5 / 2.5 s at 30 a second: frames 15..75. Entry step 1 at 0.3x, then clip.pace [[2.25 s, 1, 1]]: frames 68..75 at 1x. 61 pictures.
+    g = [y - x for x, y in zip(D['ms'], D['ms'][1:])]
+    ok(D['kind'] == 'loop' and 'impact' not in D and 'reach' not in D and D['n'] == 61 and D['k'] == 8 and D['owner'] == 'mudling', f'loop bake: 61 pictures, kind loop, no hit, 8 pixels a row (n {D["n"]}, k {D["k"]}, kind {D["kind"]})')
+    ok(110 <= g[0] <= 112 and 33 <= g[-1] <= 34 and g.index(g[-1]) >= 52, f'loop bake: the body part is slow (111 ms a picture) and the paced part is quick (33 ms) (first gap {g[0]}, last gap {g[-1]})')
     ok('data/clips/mudling-idle.js' in open(os.path.join(T, 'index.html')).read(), 'loop bake: the new clip gets its script tag in index.html')
     shutil.rmtree(T)
 
