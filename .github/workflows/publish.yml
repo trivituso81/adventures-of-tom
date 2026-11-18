@@ -1,0 +1,91 @@
+name: publish
+
+# Puts main on the live site (GitHub Pages). Replaces GitHub's built-in "pages build and deployment" (pubfast1, 2026-11-18).
+# Why: the built-in publish cancels the one in progress every time a new push lands, so during a run of pushes (Art Library
+# approvals, several Claude sessions) nothing reached the phone until the pushes stopped: 7 minutes typical, 15 to 44 on busy
+# days. This one always finishes the publish in progress, then publishes the newest main once.
+#
+# It does NOTHING until Tom sets the repo's Settings > Pages > Source to "GitHub Actions" (the check job reads that setting).
+# Setting it back to "Deploy from a branch" returns to the built-in publish; this file can stay.
+#
+# What is left off the site: only folders no page reads (see the sparse-checkout list). Rules for adding to that list are in
+# docs/WORKFLOW.md "How main reaches the phone".
+
+on:
+  push:
+    branches: [main]
+  # art-bake pushes its commit with the Actions token, and such a push does not start other workflows: publish after it instead.
+  workflow_run:
+    workflows: [art-bake]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Build the site bundle but do not put it live (to time it)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One at a time. A publish in progress is never cancelled; of the ones waiting only the newest is kept, and it takes the newest main.
+concurrency:
+  group: publish-site
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    outputs:
+      go: ${{ steps.mode.outputs.go }}
+    steps:
+      - id: mode
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DRY: ${{ inputs.dry_run }}
+        run: |
+          # build_type is "legacy" (Deploy from a branch) or "workflow" (GitHub Actions). If it cannot be read, publish anyway:
+          # a wrong skip after the switch would freeze the site, a wrong try before it only fails harmlessly.
+          t=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq .build_type 2>/dev/null || echo unknown)
+          echo "Pages source: $t"
+          if [ "$DRY" = "true" ]; then go=dry
+          elif [ "$t" = "legacy" ]; then go=no
+          else go=yes; fi
+          echo "go=$go" >> "$GITHUB_OUTPUT"
+          if [ "$go" = "no" ]; then echo "::notice::Pages still publishes from the branch (the built-in publish). Nothing to do here until Settings > Pages > Source is GitHub Actions."; fi
+
+  build:
+    needs: check
+    if: needs.check.outputs.go != 'no'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main            # always the newest main, also for a run that waited in the queue
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/tools/sprite-bake/src/
+      - name: Size of the site
+        run: du -sh --exclude=.git . && git log --oneline -1
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: [check, build]
+    if: needs.check.outputs.go == 'yes'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

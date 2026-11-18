@@ -1,3 +1,12 @@
+## pubfast1 (2026-11-18): New versions reach the phone sooner: a publish in progress is no longer cancelled by the next push
+
+- Tom (11-18 09:00): "when claude make a new version of the app in github, its been taking longer and longer for it to become available to me on the web". He is right. Measured over the last 1,105 publishes: one publish takes about 3.7 minutes, and GitHub's built-in publish cancels the one in progress every time another push lands. With several sessions pushing and every Art Library APPROVE making three pushes, 60 to 90 percent of publishes were cancelled on busy days: a push waited 7 minutes typically, 15 to 44 minutes at worst.
+- Second finding: the published site is 2.17 GB against GitHub's 1 GB limit (its log warns "Deployment might fail" on every publish). 1.3 GB of that is `art/raw`, which grows with every approval, so each publish also gets slower over time.
+- Added `.github/workflows/publish.yml`: one publish at a time, never cancelled, the newest waiting push goes next, and it also publishes after the art-bake job. It leaves `tools/sprite-bake/src` (244 MB, read by no page) off the site. Replaying the week's real pushes through this queue gives 4.9 minutes typical and 6.8 at worst.
+- It is OFF until Tom changes one GitHub setting (Settings > Pages > Source > GitHub Actions). Until then it only checks the setting and stops; the built-in publish carries on unchanged. Nothing in the game changed.
+- Not done: taking `art/raw` off the site (publish about 1.5 minutes, site under 1 GB). That needs the Art Library to read approved pictures straight from GitHub and is its own build (`pubfast2`). docs/WORKFLOW.md "How main reaches the phone" has the facts and the rules.
+- Tests: the trimmed checkout pattern on a local copy (5,442 of 5,591 files, the src folder gone), the workflow file parses, `tools/smoke.py`. The publish itself cannot run before the setting changes.
+
 ## cliploop1 (2026-11-18): Animation test: the Mudling moves less and its loop no longer jumps at the repeat
 
 - Tom (11-18 08:50): "the monsters look pretty good but they have too much movement, and at the end of the animation when it loops, their eyes transition in a strange way. it's like it's not referencing the image for both animation start and end". He is right: the video model is only given the first picture, so the last picture never matches it, and the half second dissolve that hid the jump (clipkinds1) showed as double eyes.
