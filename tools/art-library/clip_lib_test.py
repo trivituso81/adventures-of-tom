@@ -222,6 +222,31 @@ def bake_check(video_bytes):
     bg = Image.new('RGBA', im.size, (96, 120, 96, 255)); bg.alpha_composite(im.convert('RGBA')); bg.convert('RGB').save(os.path.join(SHOTS, 'artclip-baked-sheet.png'))
     shutil.rmtree(T)
 
+def edit_run(br, video):
+    """promptrev1: an edit saved on the device is dropped when the entry's prompt was rewritten after it (promptRev went up),
+    and an edit made on the current prompt is kept."""
+    BID = 'clip-rose-boop'; web, stub = servers(False, video)
+    try:
+        c = br.new_context(viewport={'width': 390, 'height': 844}); pg = c.new_page(); errs = []
+        pg.on('pageerror', lambda e: errs.append(str(e)))
+        pg.goto(URL); pg.evaluate("(id)=>{ localStorage.setItem('aot-art-key','test'); localStorage.setItem('aot-gh-token','test'); localStorage.setItem('aot-art-edits',JSON.stringify({[id]:'an old edit made on the phone'})); localStorage.removeItem('aot-art-edit-rev'); }", BID)
+        pg.goto(URL); pg.wait_for_selector('[data-tab="Clips"]'); pg.click('[data-tab="Clips"]'); pg.evaluate("()=>{ UI.filter='all'; paintList(); }")
+        r = pg.evaluate("(id)=>({rev:ENTRY[id].promptRev||0,same:promptOf(ENTRY[id])===ENTRY[id].prompt,kept:JSON.parse(localStorage.getItem('aot-art-edits'))[id]!==undefined,words:ENTRY[id].prompt.split(/\\s+/).length})", BID)
+        ok(r['rev'] >= 1, f"edits: the rewritten Boop prompt carries a promptRev ({r['rev']})")
+        ok(r['same'] and not r['kept'], f'edits: the older edit on the device was dropped, GENERATE uses the new prompt ({r})')
+        ok(r['words'] <= 60, f"edits: the Boop prompt is short ({r['words']} words)")
+        if not pg.locator(f'.card[data-id="{BID}"]').count():
+            if not pg.locator(f'[data-toggle="{BID}"]').count(): pg.click('[data-grp="Clips|Rose"]')
+            pg.click(f'[data-toggle="{BID}"]')
+        pg.wait_for_selector(f'.card[data-id="{BID}"] details.pr'); pg.evaluate("(id)=>{ document.querySelector('.card[data-id=\"'+id+'\"] details.pr').open=true; }", BID)
+        pg.fill(f'textarea[data-prompt="{BID}"]', 'my new edit on the current prompt')
+        pg.goto(URL); pg.wait_for_selector('[data-tab="Clips"]'); pg.wait_for_timeout(600)
+        k = pg.evaluate("(id)=>promptOf(ENTRY[id])", BID)
+        ok(k == 'my new edit on the current prompt', f'edits: an edit made on the current prompt survives a reload ({k[:40]!r})')
+        ok(not errs, f'edits: no page errors {errs[:2]}')
+        c.close()
+    finally:
+        web.terminate(); stub.terminate(); web.wait(); stub.wait()
 def main():
     video = os.path.join(tempfile.mkdtemp(), 'test.webm'); make_video(video)
     with sync_playwright() as pw:
@@ -229,7 +254,7 @@ def main():
         vid = page_run(br, 'portrait', {'width': 390, 'height': 844}, False, video)
         page_run(br, 'landscape', {'width': 852, 'height': 393}, False, video)
         page_run(br, 'nocopy', {'width': 390, 'height': 844}, True, video)
-        study_run(br, video); kind_run(br, video)
+        study_run(br, video); kind_run(br, video); edit_run(br, video)
         br.close()
     bake_check(vid); study_bake(vid); kind_bake(vid)
     print('FAILS', fails); sys.exit(1 if fails else 0)

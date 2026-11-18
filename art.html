@@ -325,7 +325,11 @@ $('q').addEventListener('input',()=>{
 });
 let scrollT; addEventListener('scroll',()=>{ clearTimeout(scrollT); scrollT=setTimeout(()=>{ UI.sy[UI.tab]=Math.round(scrollY); saveUI(); },400); },{passive:true});
 const promptOf=e=>EDITS[e.id]!==undefined?EDITS[e.id]:e.prompt;
-$('list').addEventListener('input',e=>{ const id=e.target.dataset&&e.target.dataset.prompt; if(id){EDITS[id]=e.target.value;saveEdits();} });
+// promptrev1: an edit saved on this device belongs to the prompt text it was made on. When Claude rewrites an entry's prompt its
+// `promptRev` goes up (tools/art-library/clip-prompts.js), and the older on-device edit is dropped so GENERATE uses the new text.
+let EDITREV={}; try{EDITREV=JSON.parse(LS.get('aot-art-edit-rev')||'{}')||{};}catch(e){}
+function retireOldEdits(){ let ch=false; for(const id in EDITS){ const e=ENTRY[id]; if(e&&(e.promptRev||0)>(EDITREV[id]||0)){ delete EDITS[id]; delete EDITREV[id]; ch=true; } } if(ch){ saveEdits(); LS.set('aot-art-edit-rev',JSON.stringify(EDITREV)); } }
+$('list').addEventListener('input',e=>{ const id=e.target.dataset&&e.target.dataset.prompt; if(id){EDITS[id]=e.target.value;saveEdits(); EDITREV[id]=(ENTRY[id]&&ENTRY[id].promptRev)||0; LS.set('aot-art-edit-rev',JSON.stringify(EDITREV));} });
 $('list').addEventListener('change',async e=>{ const t=e.target; if(t.dataset.upl&&t.files&&t.files[0]){ const f=t.files[0]; t.value=''; return uploadOwn(t.dataset.upl,f); } if(t.dataset.ownadd&&t.files&&t.files[0]){ if(!DB) return toast('This browser would not keep the picture.'); const r={key:'own|'+t.dataset.ownadd,id:'__own',slot:t.dataset.ownadd,blob:t.files[0],t:Date.now()}; await tx('readwrite',s=>s.put(r)); OWN[r.slot]=r; refreshItem(t.dataset.id); return; } if(t.dataset.ref){ USE[t.dataset.ref+'|'+t.dataset.i]=t.checked; refreshItem(t.dataset.ref); } if(t.dataset.ar){const en=ENTRY[t.dataset.ar]; if(en) en.ar=t.value;} });
 $('list').addEventListener('click',async e=>{
   const t=e.target;
@@ -608,6 +612,7 @@ addEventListener('message',e=>{ if(e.data==='aot-flight-preview-close'&&$('fpov'
   DATA.live=live;
   { let t=null; if(live){ try{ t=await (await ghFile('data/art-ingame.json')).text(); }catch(e){} } if(t===null){ try{ const r=await fetch('data/art-ingame.json',{cache:'no-store'}); if(r.ok) t=await r.text(); }catch(e){} } try{ if(t) INGAME=JSON.parse(t).items||{}; }catch(e){ console.warn('in-game list not readable',e); } }
   for(const e of DATA.entries){ ENTRY[e.id]=e; if(!e.group) e.group=e.tab; }
+  retireOldEdits();
   await loadResults();
   const first=TABS.find(t=>DATA.entries.some(e=>e.tab===t)); if(first&&(!TABS.includes(UI.tab)||!DATA.entries.some(e=>e.tab===UI.tab))) UI.tab=first;
   if(!FILTERS.some(f=>f[0]===UI.filter)) UI.filter='todo';

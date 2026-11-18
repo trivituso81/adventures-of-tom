@@ -44,7 +44,19 @@ Tom (11-02, and again 11-03 14:49 with "ALWAYS"): he creates images only in the 
 
 ## Battle clip videos are made in the Art Library too (clipgen1, 2026-11-17)
 
-ADMIN > ART LIBRARY > Clips: an entry with a `clip` field (`tools/art-library/clip-prompts.js`, run it with node to add entries) is a short video of a character made on the xAI video API from a start picture (`python3 tools/clip-bake/make_start.py <owner>`, built from the battle idle frame). Tom presses GENERATE VIDEO, marks START, HIT and END in REVIEW, then APPROVE; the art-bake Action cuts the clip (`art_bake.py` `bake_clip`, `tools/clip-bake/bake_clip.py`). Code: `engine/art-clips.js`, engine side `engine/clips.js`. Kinds (`clip.kind`, clipkinds1): `strike` (START, HIT, END), `loop` (a monster's idle, START and END) and `state` (ends in a held pose such as asleep, START and END); loop and state clips play in the Battle Lab clip fights (`bclipFor` in `engine/clips.js`). New entries use the cheap model `grok-imagine-video-1.5-lite`, 3 seconds for attacks. Tests: `python3 tools/art-library/clip_lib_test.py`, `python3 tools/clip_test.py`, `python3 tools/clip_kinds_test.py`. State and next steps of the animation test: `claude/animation-tool-test-exam.md` in the Project.
+ADMIN > ART LIBRARY > Clips: an entry with a `clip` field (`tools/art-library/clip-prompts.js`, run it with node to add entries) is a short video of a character made on the xAI video API from a start picture (`python3 tools/clip-bake/make_start.py <owner>`, built from the battle idle frame). Tom presses GENERATE VIDEO, marks START, HIT and END in REVIEW, then APPROVE; the art-bake Action cuts the clip (`art_bake.py` `bake_clip`, `tools/clip-bake/bake_clip.py`). Code: `engine/art-clips.js`, engine side `engine/clips.js`. Kinds (`clip.kind`, clipkinds1): `strike` (START, HIT, END), `loop` (a monster's idle, START and END) and `state` (ends in a held pose such as asleep, START and END); loop and state clips play in the Battle Lab clip fights (`bclipFor` in `engine/clips.js`). New entries use the cheap model `grok-imagine-video-1.5-lite`, 3 seconds for attacks. Their prompts follow the short prompt rule below. Tests: `python3 tools/art-library/clip_lib_test.py`, `python3 tools/clip_test.py`, `python3 tools/clip_kinds_test.py`. State and next steps of the animation test: `claude/animation-tool-test-exam.md` in the Project.
+
+## Image and video prompts are short (standing rule, Tom 2026-11-18)
+
+Tom (11-18 13:58): "a common issue you have with image and video prompt generation is that you confuse the generator with extraneous information and duplicating information. it needs to be concise clean and only describe the exact motion. you must remember this going forward." Every prompt written for a generator, picture or video:
+
+- Says each thing once. Two sentences about the same action come back as two actions (the long Boop prompt described one reach three ways and Rose booped twice).
+- Describes only what should be seen: the exact pose or motion wanted. No lists of things to avoid, no backstory, no repeating in words what the attached picture already shows.
+- One verb per action, plain body words, a real height or direction when it matters ("at shoulder height", not "at the height of her own nose").
+- A video clip prompt is the one-line `LOOK_SHORT` in `tools/art-library/clip-prompts.js`, a blank line, then the motion in one or two sentences, with an ending action so the model does not fill spare time by repeating the move. Nothing about speed, sound or length.
+- Before pushing a prompt, count its words and cut. The Boop prompt is 49 words; a prompt over about 80 needs a reason.
+
+When a prompt of an existing entry is rewritten, `clip-prompts.js` raises the entry's `promptRev`, and the Library drops an older edit of that prompt saved on Tom's device (`retireOldEdits` in `art.html`), so GENERATE uses the new text.
 
 ## Purge replaced files completely (standing rule, Tom 2026-11-05)
 

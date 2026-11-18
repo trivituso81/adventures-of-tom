@@ -39,6 +39,7 @@ Other canon: Michael is about 10% taller than the other adults; Justin (6'5" in 
 - The original game is kept as a frozen **demo**; the new build is the **full game**.
 - Voice: ElevenLabs v4. Tom runs all voice baking himself, once all ability updates are done. Do not build voice bakers or ask him to bake mid-stream.
 - Loved: Rose's original Boop. Disliked: its replacement "Tiny Tap". Do not revive Tiny Tap.
+- What a Boop is (Tom, 2026-11-18): "a like sharp jab (not necessarily on the nose) with her finger." One jab, level, never aimed up at an adult's nose.
 
 ## Part 2, Chapter 11 (canon, 2026-10-28)
 - Terminal Infinity is the layover between Long Island and Los Angeles: always dusk, every flight ON TIME, every gate PAUSED. Gate 00 shows two glass domes, green for Long Island and orange for Los Angeles.
