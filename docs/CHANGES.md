@@ -1,3 +1,18 @@
+## voicelearn1 (2026-11-18): Voice Library button "Send my takes to Claude" sends every take, kept and thrown away, with audio, to a repo branch
+
+Stage 1 of claude/voice-learning-plan.md (Tom: he will not review every line; Claude learns from the sound of his takes).
+
+| What | How |
+|---|---|
+| Button | Voice Library footer: "Send my takes to Claude (N waiting)". No file, no attaching. Needs the GitHub token already saved for the Art Library and the REPORT tab. |
+| Which takes | Every take of every line that has more than one take (kept or not, with audio, script, label, time, and a `kept` flag for the one the phone plays). A line with a single take is left out until it gets a second. A take already sent is never sent twice (localStorage `aot-vl-takes-sent`), so a later press carries only the new ones. |
+| Where | Branch `takes` of this repo (no shared history with main, never served, never merged). The phone creates it from an empty history if it is missing. Same route as the REPORT tab's `inbox` (GitHub contents API). Files: `takes/<session>/part-NNN.json` (each under 13 MB of JSON, so under 20 MB on the wire) and `takes/<session>/state.json` (the take history words and which take is kept at that moment, including takes he deleted). |
+| Automatic | Two quiet minutes after the last new take, the phone sends by itself (silent; if it fails, the next send or the button tries again). |
+| Failure | GitHub down or no token: nothing is marked sent, the toast says the takes are kept on the phone with the count. |
+| Not touched | No take is ever deleted by this. Take audio is read one take at a time. Export pending clips, Export take history and the merge path are unchanged. |
+
+Test: `python3 tools/voice-library/send_takes_test.py` (stand-in GitHub; branch creation, split into parts, 20 MB cap, kept flag, no resend, only-new resend, failure and retry, automatic send). trail_test, pending_test and smoke pass. A real send from Tom's phone has NOT been run: it needs his token on the real repo.
+
 ## roofnpc2 (2026-11-18): chapter 1 house and Rivituso Row fixes from Gemini's second audit: the heist plays in order, the party holds its spots, no pepper mid-greeting
 
 Tom sent Gemini's second audit (the walk down Rivituso Row and the kitchen). What each finding got:

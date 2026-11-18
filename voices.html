@@ -123,10 +123,11 @@ header{padding:10px 28px}
     <div class="tools">
       <button class="small" id="exp">Export pending clips</button>
       <button class="small" id="expall">Export all phone clips</button>
+      <button class="small" id="sendtakes">Send my takes to Claude</button>
       <button class="small" id="exptrail">Export take history</button>
       <button class="small danger" id="clr">Remove all phone clips</button>
     </div>
-    <p class="hint">Phone clips are kept in this app only. Clearing the app's website data removes them. Export pending clips sends only what you recorded since your last upload, so Claude can build it into the game for good. Export take history sends the words of every take saved here (the directions you tried, kept or not), with no audio, so Claude can learn from the ones you threw away.</p>
+    <p class="hint">Phone clips are kept in this app only. Clearing the app's website data removes them. Export pending clips sends only what you recorded since your last upload, so Claude can build it into the game for good. Send my takes to Claude uploads every take of every line you tried more than once, the ones you kept and the ones you threw away, with their audio, straight to the game's repository: no file to export or attach. It also sends by itself a couple of minutes after you finish making takes (it needs the GitHub token set in ADMIN &gt; ART LIBRARY &gt; Setup). Export take history sends the words of every take saved here (the directions you tried, kept or not), with no audio, so Claude can learn from the ones you threw away.</p>
   </div>
 </main>
 <div class="bar" id="bar" hidden></div>
@@ -249,7 +250,7 @@ async function useBuiltIn(it){
 }
 async function addTake(it,mp3,label,script){
   const t={id:'t'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),line:lk(it),mp3,label,script,t:Date.now()};
-  await tx(TDB,'takes',s=>s.put(t)); TAKES.set(t.id,slim(t)); await useTake(it,t); return slim(t);
+  await tx(TDB,'takes',s=>s.put(t)); TAKES.set(t.id,slim(t)); await useTake(it,t); paintSendTakes(); autoSendTakes(); return slim(t);
 }
 // Deleting a take keeps its words (never its audio): the script he tried and threw away is what the take history is for.
 let DROPPED=[]; try{ DROPPED=JSON.parse(localStorage.getItem('aot-vl-dropped')||'[]')||[]; }catch(e){}
@@ -268,6 +269,96 @@ async function exportTrail(){
   const blob=new Blob([JSON.stringify({made:new Date().toISOString(),kind:'take-history',lines:new Set(trail.map(t=>t.line)).size,trail})],{type:'application/json'});
   if(await sendBlob(blob,'take-history.json','Take history (words only)')) toast('Take history: '+trail.length+' takes, words only. Send the file to Claude.');
 }
+
+// ---------- send every take to Claude (voicelearn1) ----------
+// Branch `takes` of the game repo (no shared history with main, never served), written by the phone through the GitHub contents API,
+// the same route the REPORT tab uses for `inbox` (engine/report.js brpPut). Per send: takes/<session>/part-NNN.json (each under TK_PART bytes
+// of JSON, so under 20 MB once GitHub wraps it in base64) and takes/<session>/state.json (which take is kept on this device, plus the words of
+// takes he deleted). Only lines with more than one take go; a take already sent is not sent again (localStorage aot-vl-takes-sent).
+const TK_REPO='trivituso81/adventures-of-tom', TK_BRANCH='takes', TK_PART=13*1024*1024;
+let TSENT=new Set(); try{ TSENT=new Set(JSON.parse(localStorage.getItem('aot-vl-takes-sent')||'[]')); }catch(e){}
+const saveTSent=()=>{ try{ localStorage.setItem('aot-vl-takes-sent',JSON.stringify([...TSENT])); }catch(e){} };
+let TSENDING=false, TAUTO=null;
+function takesToSend(){   // slim take rows of lines with more than one take, not yet sent
+  const by=new Map(); for(const t of TAKES.values()){ if(!by.has(t.line)) by.set(t.line,[]); by.get(t.line).push(t); }
+  const out=[]; for(const [,a] of by) if(a.length>1) for(const t of a) if(!TSENT.has(t.id)) out.push(t);
+  return out.sort((a,b)=>a.t-b.t);
+}
+const tkBase=()=>(new URLSearchParams(location.search).get('gh')||'https://api.github.com').replace(/\/+$/,'');
+function tkErr(r){ return new Error(r.status===401?'GitHub said the token is wrong or expired. Paste a new one in ADMIN > ART LIBRARY > Setup.'
+  :(r.status===403||r.status===404)?'GitHub would not take it ('+r.status+'). The token needs "Contents: Read and write" on the game repository.':'GitHub said '+r.status+'.'); }
+async function tkApi(method,path,body){
+  const tok=localStorage.getItem('aot-gh-token'); if(!tok) throw new Error('NOTOKEN');
+  let r; try{ r=await fetch(tkBase()+'/repos/'+TK_REPO+path,{method,cache:'no-store',headers:{Authorization:'Bearer '+tok,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},body:body?JSON.stringify(body):undefined}); }
+  catch(e){ throw new Error('No connection right now.'); }
+  return r;
+}
+async function tkEnsureBranch(){   // the branch is made once, from an empty history, if it is not there yet
+  let r=await tkApi('GET','/git/ref/heads/'+TK_BRANCH); if(r.ok) return;
+  if(r.status!==404) throw tkErr(r);
+  const j=async(r2)=>{ if(!r2.ok) throw tkErr(r2); return r2.json(); };
+  const blob=await j(await tkApi('POST','/git/blobs',{content:'Takes sent from the Voice Library (voicelearn1). Never merged into main.\n',encoding:'utf-8'}));
+  const tree=await j(await tkApi('POST','/git/trees',{tree:[{path:'README.md',mode:'100644',type:'blob',sha:blob.sha}]}));
+  const com=await j(await tkApi('POST','/git/commits',{message:'takes branch: start',tree:tree.sha,parents:[]}));
+  r=await tkApi('POST','/git/refs',{ref:'refs/heads/'+TK_BRANCH,sha:com.sha}); if(!r.ok&&r.status!==422) throw tkErr(r);
+}
+function tkB64(blob){ return new Promise((res,rej)=>{ const f=new FileReader(); f.onload=()=>res(String(f.result).split(',')[1]||''); f.onerror=()=>rej(new Error('Could not read the take file.')); f.readAsDataURL(blob); }); }
+async function tkPut(path,blob,message){
+  const content=await tkB64(blob);
+  for(let i=0;i<4;i++){
+    if(i) await new Promise(r=>setTimeout(r,900*i));
+    const r=await tkApi('PUT','/contents/'+path,{message,content,branch:TK_BRANCH});
+    if(r.ok||r.status===422) return;   // 422: already there (a retry after a half-sent part)
+    if(r.status===409) continue;       // the branch moved under us
+    throw tkErr(r);
+  }
+  throw new Error('GitHub was busy. It will try again.');
+}
+// Sends what is waiting. Returns {sent,parts,left,err}. Never throws. onProgress(text) is optional.
+async function sendTakes(onProgress){
+  if(TSENDING) return {sent:0,parts:0,left:0,err:'Already sending.'};
+  const list=takesToSend(); if(!list.length) return {sent:0,parts:0,left:0,err:''};
+  if(!localStorage.getItem('aot-gh-token')) return {sent:0,parts:0,left:list.length,err:'NOTOKEN'};
+  TSENDING=true; let sent=0, parts=0;
+  try{
+    await tkEnsureBranch();
+    const session=new Date().toISOString().replace(/[-:]/g,'').replace(/\..*/,'')+'-'+Math.random().toString(36).slice(2,5);
+    const dir='takes/'+session, head='{"kind":"takes-part","session":'+JSON.stringify(session)+',"takes":[';
+    let chunks=[], size=0, ids=[];
+    const flush=async()=>{ if(!ids.length) return; parts++;
+      const blob=new Blob([head,...chunks,']}\n'],{type:'application/json'});
+      onProgress&&onProgress('Sending takes: part '+parts+', '+sent+' of '+list.length+' done...');
+      await tkPut(dir+'/part-'+String(parts).padStart(3,'0')+'.json',blob,'Takes '+session+' part '+parts+' ('+ids.length+' takes)');
+      ids.forEach(id=>TSENT.add(id)); saveTSent(); sent+=ids.length; chunks=[]; size=0; ids=[]; };
+    for(const t of list){
+      const mp3=await mp3Of(TDB,'takes',t.id); if(!mp3){ TSENT.add(t.id); continue; }   // audio gone from this device: nothing to send
+      const piece=(ids.length?',':'')+JSON.stringify({id:t.id,line:t.line,t:t.t,label:t.label,script:t.script,kept:!!([...LOCAL.values()].some(r=>r.takeId===t.id)),mp3});
+      if(ids.length&&size+piece.length>TK_PART) await flush();
+      chunks.push(ids.length?piece:piece.replace(/^,/,'')); size+=piece.length; ids.push(t.id);
+    }
+    await flush();
+    // the state of the library at this moment: which take is kept now, the words of every take (kept, thrown away, deleted)
+    const trail=trailRows(null);
+    await tkPut(dir+'/state.json',new Blob([JSON.stringify({kind:'takes-state',session,made:new Date().toISOString(),parts,sent,trail},null,1)+'\n'],{type:'application/json'}),'Takes '+session+': state');
+    return {sent,parts,left:0,err:''};
+  }catch(e){ return {sent,parts,left:takesToSend().length,err:e.message||'Something went wrong while sending.'}; }
+  finally{ TSENDING=false; paintSendTakes(); }
+}
+function paintSendTakes(){ const b=$('sendtakes'); if(!b) return; const n=takesToSend().length;
+  b.textContent=n?'Send my takes to Claude ('+n+' waiting)':'Send my takes to Claude'; b.disabled=TSENDING; }
+async function sendTakesNow(){
+  if(TSENDING) return;
+  if(!takesToSend().length) return toast(TAKES.size?'Nothing new to send. Every take of a line you tried more than once is already with Claude.':'No takes are saved on this device yet.');
+  const b=$('sendtakes'); if(b) b.disabled=true;
+  const r=await sendTakes(m=>toast(m));
+  if(r.err==='NOTOKEN') toast('No GitHub token on this device. Set it in ADMIN > ART LIBRARY > Setup, then press this again.');
+  else if(r.err) toast('Takes kept on this phone ('+r.left+' waiting). '+r.err);
+  else toast('Sent. '+r.sent+' takes are with Claude.');
+  paintSendTakes();
+}
+// After he finishes making takes: two quiet minutes, then it sends by itself (silently; if it fails, the next send or the button tries again).
+function autoSendTakes(){ if(!localStorage.getItem('aot-gh-token')) return; clearTimeout(TAUTO);
+  TAUTO=setTimeout(async()=>{ if(TSENDING||Object.values(BUSY).some(Boolean)) return autoSendTakes(); if(takesToSend().length) await sendTakes(); paintSendTakes(); },120000); }
 
 // ---------- the clip the game plays now ----------
 // Clip files are plain scripts that fill VOICE_CLIPS / DIALOG_CLIPS. Each is loaded once, on first play, into its own table.
@@ -655,6 +746,7 @@ document.addEventListener('click',async e=>{
   if(t.id==='exp') return exportClips(true);
   if(t.id==='expall') return exportClips(false);
   if(t.id==='exptrail') return exportTrail();
+  if(t.id==='sendtakes') return sendTakesNow();
   if(t.id==='clr'){ if(BULK) return; if(confirm('Remove every clip made on this device (here and on the Bake page)? The game goes back to the voices built into it. Your takes stay in the library.')){ await tx(LDB,'clips',s=>s.clear()).catch(()=>{}); LOCAL.clear(); renderAll(); toast('Removed.'); } return; }
   if(t.classList.contains('chip')) return toggle(t.dataset.g,t.dataset.v);
   const act=t.dataset.act;
@@ -752,10 +844,10 @@ async function loadPhone(force){
   for(const t of await allSlim(TDB,'takes')) TAKES.set(t.id,t);
   await purgeRetired();
   try{ localStorage.removeItem('aot-vl-boot'); }catch(e){}
-  renderAll();
+  renderAll(); paintSendTakes();
   loadMerged().then(hashPhone);
 }
-window.__VL={get IDX(){return IDX;},F,SEL,LOCAL,TAKES,lk,visible,newTake,useBuiltIn,builtIn,itemByKey,trailRows,addTake,delTake};
+window.__VL={get IDX(){return IDX;},F,SEL,LOCAL,TAKES,lk,visible,newTake,useBuiltIn,builtIn,itemByKey,trailRows,addTake,delTake,sendTakes,takesToSend};
 </script>
 </body>
 </html>
