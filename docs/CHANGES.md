@@ -1,3 +1,7 @@
+## clip2 (2026-11-17): Rose's test punch plays at 2x the video's speed
+
+Tom (2026-11-17 17:44): "it shuld be even faster, maybe 2x the videos speed." The CLIP TEST: ROSE punch now plays at 2x (was 1.5x): 1.65 s instead of 2.2 s, punch lands 0.8 s after she starts. Same 33 frames. `python3 tools/clip_test.py`: FAILS [].
+
 ## clip1 (2026-11-17): Animation test: Rose's video-made punch plays in a real fight (Battle Lab > CLIP TEST: ROSE)
 
 Tom (2026-11-17, animation tool test): the six-shot exam is done; this is the no-credit engine prototype. Nothing in the story game changed: the clip plays only in the new Battle Lab fight.
