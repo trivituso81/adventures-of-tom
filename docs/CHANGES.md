@@ -1,3 +1,9 @@
+## 2026-11-18 (451): Art Library bake, clip-rose-strike (`artbake1480`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- clip-rose-strike: clip `rose-strike` cut from art/raw/clips/clip-rose-strike-v3.json (24 pictures a second; video frames 0 to 72, every 2, hit at frame 38; 37 pictures kept; played at 1.5x). rose_strike frames 37 frame px 528 344 rows 132 86 sheet (2112, 3440) kb 784 dur ms 2056 impact ms 1056 reach [64.8, 50.2]
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## 2026-11-18 (450): Art Library bake, clip-rose-strike (`artbake1479`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
