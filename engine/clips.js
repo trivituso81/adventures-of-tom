@@ -8,7 +8,7 @@
 // a clip is drawn at the owner's own sprite scale and follows BATTLE_SIZE like every other pose.
 //
 // In a move (engine/<name>-moves.js), with ST = RFX.ST:
-//   const C=ST.clip('rose_strike',{onImpact}); // null if the clip does not exist
+//   const C=ST.clip('rose_boop',{onImpact}); // null if the clip does not exist
 //   C.dur     how long the clip plays, in ms at 1x (the timeline's own speed setting applies on top)
 //   C.impact  ms from the clip's start to its impact frame (for the High-Five window and sounds); the hit itself goes in
 //             ST.clip(id,{onImpact:fn}), which runs when the impact frame is really on screen. C.fire() forces it

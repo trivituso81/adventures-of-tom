@@ -1090,21 +1090,20 @@ Rm.boopShow=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),n=no
 // A clip (engine/clips.js) is a strip of frames cut from an AI video of Rose. She runs over on her painted run frames,
 // the clip plays where she stands, damage lands on the clip's marked impact frame, and she runs home. The leading point
 // on the impact frame (her fingertip) is placed on the monster's nose (C.reach).
-// Which clip: `rose_boop` (her real one-finger Boop, Art Library entry clip-rose-boop) as soon as it is baked; until then
-// `rose_strike`, the first test video, which is a chop. Purge the `rose_strike` half once Boop is approved.
-Rm.boopClip=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),n=noseOf(f),real=!!BCLIPS.rose_boop;
-  const C=ST.clip(real?'rose_boop':'rose_strike',{onImpact:()=>{ ST.jolt(f,.35); landHit(100); scene('rv_big',1.1,{x:F.x,y:F.top-74,txt:'BOOP!',c:PINK2,sc:5});
+// Clip: `rose_boop` (her one-finger Boop, Art Library entry clip-rose-boop).
+Rm.boopClip=E2=>{ const {m,fx}=E2,f=firstFoe(E2),F=ST.unit(f),p=front(F,44),n=noseOf(f);
+  const C=ST.clip('rose_boop',{onImpact:()=>{ ST.jolt(f,.35); landHit(100); scene('rv_big',1.1,{x:F.x,y:F.top-74,txt:'BOOP!',c:PINK2,sc:5});
     scene('rv_rings',.6,{x:n.x,y:n.y,r:34}); scene('rv_burst',.7,{x:n.x,y:n.y,n:8,r:40,sz:6}); }});
   const T0=900,HIT=T0+C.impact,T1=T0+C.dur,jx=Math.min(548,Math.max(p.x-48,n.x+C.reach.dx-4)),jy=cl(n.y+C.reach.up,p.y-12,p.y+6);
   ST.keys(fx,[{t:0,x:'home',y:'home',f:'run',hop:6,hn:6},{t:T0,x:jx,y:jy,f:C.f,ease:'lin'},{t:T1,f:'runR'},{t:T1+700,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
     [0,()=>{ setMessage('Rose marches right up to '+f.name+'.'); warmClip('rose','Boop!'); }],
-    [T0,()=>{ setMessage(real?'Pointer finger out.':'She winds up.'); }],
+    [T0,()=>{ setMessage('Pointer finger out.'); }],
     [HIT-80,()=>{ say(m.id,'boop',0,null,{text:'Boop!',len:45756,from:1.39,to:1.75}); }],
     [HIT-50,()=>{ sfx.boop?sfx.boop():sfx.bonk(); }],
     ['hf',HIT],
     [T1+700,()=>C.fire()],   // safety net: the hit always lands, even if her body path was cut short
-    [T1+800,'end',res(E2)+(real?'Boop. One finger. Right on the nose.':'Boop. Right on the nose.')]]); };
+    [T1+800,'end',res(E2)+'Boop. One finger. Right on the nose.']]); };
 
 Rm.sillyShow=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),cx=Math.min(470,F.x+F.w*.5+96),cy=Math.min(312,F.base+6),lie=lieDy();
   // Her six painted Raspberry frames: huge breath, cheeks puffed, tongue out and flapping, hands by her ears, doubled over laughing, wiping her mouth.

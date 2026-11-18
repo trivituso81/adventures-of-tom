@@ -1,3 +1,16 @@
+## clippurge1 (2026-11-18): animation test: the old Rose chop test is removed now that her one-finger Boop video is approved and in the Battle Lab
+
+Purge of the replaced chop (Purge rule). Nothing Tom plays changes: Battle Lab > CLIP TEST: ROSE > ATTACK > Boop already played the approved Boop clip.
+
+| Removed | Detail |
+|---|---|
+| Art Library entries | `clip-rose-strike`, `clip-rose-strike-lite`, `clip-rose-strike-2s` (from `tools/art-library/clip-prompts.js` and `data/art-prompts.json`), and the `STRIKE` text |
+| Files | `art/raw/clips/clip-rose-strike*` (videos and pointers), `art/clips/rose-strike.webp`, `data/clips/rose-strike.js` and its tag in index.html |
+| Code | the `rose_strike` halves of `RM.rose.boop` and `Rm.boopClip` (the Boop messages are now always the painted move's), the Lab fight's sub text, test and comment mentions |
+| Tests | `clip_lib_test.py` runs on the Boop entry (the study checks flag it as a study entry for the run); `clip_test.py` and `clip_kinds_test.py` use `rose_boop` |
+
+Kept: `LOOK` and `END` (the nap uses them), `LOOK_FOE` (the Mudling). Grep for `rose-strike` and `rose_strike`: zero outside this file and build history. Tests passed: clip_lib_test (FAILS []), clip_test, clip_kinds_test. `validate.js` no longer fails on `clip-rose-strike`; it still flags `clip-rose-boop` for the word "sprite" in Tom's approved prompt (never reworded) and the old "bad tab Clips" on the nap and Mudling entries.
+
 ## roselets1 (2026-11-18): Rose no longer says "Come on, Tata! Let's go!" at the end of the opening; it goes straight into Grace's list
 
 - Tom (11-18 15:40): "scene 1, rose shouldnt say Let's go - it should move right into the next scene where Grace says Tata dont walk yet."

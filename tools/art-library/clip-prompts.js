@@ -29,7 +29,6 @@ const LOOK_FOE = 'IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exact
   'WHAT THIS IS\nA short looping animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\n' +
   'LOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\n' +
   'CAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\n';
-const STRIKE = 'MOTION: WIND-UP INTO A STRIKE\nStart in the relaxed ready stance of the attached picture and hold it still for a brief moment. Twist the body away to the right, pull the near arm back, weight on the back leg, eyes narrowed. Then spring forward to the left in one fast move, lunging with the front knee bent and the arm at full reach, mouth open in a shout. Stay the same size and keep both feet on the same ground line while lunging. Hold the lunge for a moment, then ease back to the exact ready stance of the first frame. Hands empty, nothing is hit and nothing appears at the end of the arm.';
 // BOOP: Rose's free move. Tom 2026-11-18: "the boop should be a like sharp jab (not necessarily on the nose) with her finger."
 // THIS IS THE APPROVED PROMPT, word for word. Tom had Gemini write it after three of Claude's rewrites missed, and approved its video
 // (art/raw/clips/clip-rose-boop-v1.mp4: cheap model, 3 s, start picture only). Do not reword it. It is the pattern for every new clip:
@@ -45,18 +44,6 @@ const entries = [
   { id: 'clip-rose-boop', tab: 'Clips', group: 'Rose', title: 'Rose: Boop (one sharp finger jab) video clip', ar: '4:3', refs: [ROSE],
     clip: { id: 'rose-boop', owner: 'rose', start: ROSE, model: LITE, res: '480p', dur: 3, figRows: 83, step: 3, speed: 1.5 },
     prompt: BOOP_APPROVED },
-  // The first clip made: a general wind-up and strike, which came back as a karate chop. Battle Lab > CLIP TEST: ROSE plays it only until
-  // the Boop clip above is approved (RM.rose.boop). Purge this entry, its files and the fallback once Boop is approved.
-  { id: 'clip-rose-strike', tab: 'Clips', group: 'Rose', title: 'OLD TEST: Rose strike (a chop, not Boop)', ar: '4:3', refs: [ROSE],
-    clip: { id: 'rose-strike', owner: 'rose', start: ROSE, model: G15, res: '480p', dur: 3, figRows: 83, step: 3, speed: 1.5 },
-    prompt: LOOK + STRIKE + END(3) },
-  // ---- study videos (clipstudy1): the next cells of the tool test. Approve saves the video only. ----
-  { id: 'clip-rose-strike-lite', tab: 'Clips', group: 'Rose', title: 'TEST: Rose strike on the cheap model (about 7 cents)', ar: '4:3', refs: [ROSE],
-    clip: { id: 'rose-strike-lite', owner: 'rose', start: ROSE, model: LITE, res: '480p', dur: 3, figRows: 83, step: 3, speed: 1.5, test: true },
-    prompt: LOOK + STRIKE + END(3) },
-  { id: 'clip-rose-strike-2s', tab: 'Clips', group: 'Rose', title: 'TEST: Rose strike as a 2 second video', ar: '4:3', refs: [ROSE],
-    clip: { id: 'rose-strike-2s', owner: 'rose', start: ROSE, model: G15, res: '480p', dur: 2, figRows: 83, step: 3, speed: 1.5, test: true },
-    prompt: LOOK + STRIKE.replace('and hold it still for a brief moment. Twist', 'for an instant. Straight away twist').replace('Hold the lunge for a moment, then ease back', 'Then snap straight back') + END(2) },
   { id: 'clip-rose-sleep', tab: 'Clips', group: 'Rose', title: 'Rose: gets sleepy and lies down (out of the fight) video clip', ar: '4:3', refs: [ROSE],
     clip: { id: 'rose-sleep', owner: 'rose', start: ROSE, model: G15, res: '480p', dur: 4, figRows: 83, step: 2, speed: 1.5, kind: 'state' },
     prompt: LOOK.replace('Feet stay on the same ground line. Walking away from or toward the camera is not allowed.', 'The character stays in the same place in the frame and ends resting on the same line where the feet stand in the attached picture. Walking away from or toward the camera is not allowed.') +

@@ -32,7 +32,7 @@ with sync_playwright() as pw:
         if layout=='landscape': pg.evaluate("()=>window.__LE.toggleLayout()")
         if pg.evaluate(START)<0: fails.append('no nap fight in B2_LAB'); break
         pg.wait_for_function(READY,timeout=40000)
-        C=pg.evaluate("()=>({loop:BCLIPS.mudling_idle.n,nap:BCLIPS.rose_sleep.n,napDur:BCLIPS.rose_sleep.dur,kinds:[BCLIPS.mudling_idle.kind,BCLIPS.rose_sleep.kind,BCLIPS.rose_strike.kind]})")
+        C=pg.evaluate("()=>({loop:BCLIPS.mudling_idle.n,nap:BCLIPS.rose_sleep.n,napDur:BCLIPS.rose_sleep.dur,kinds:[BCLIPS.mudling_idle.kind,BCLIPS.rose_sleep.kind,BCLIPS.rose_boop.kind]})")
         if C['kinds']!=['loop','state','strike']: fails.append(f'{layout}: clip kinds are {C["kinds"]}')
         pg.evaluate("()=>{ for(const f of B2.foes) f.maxHp=f.hp=99999; }")   # the fight must outlast the test
         pg.evaluate(LOG); frames=[]

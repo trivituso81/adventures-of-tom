@@ -33,7 +33,7 @@ with sync_playwright() as pw:
         pg=br.new_page(viewport=vp,device_scale_factor=2)
         errs=[]; pg.on('pageerror',lambda e: errs.append(str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
         pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b2Start',timeout=30000); pg.wait_for_timeout(2500)
-        CID=pg.evaluate("()=>window.__clip=BCLIPS.rose_boop?'rose_boop':'rose_strike'")   # Boop plays her real Boop clip once it is baked, the old chop test until then (Rm.boopClip)
+        CID=pg.evaluate("()=>window.__clip='rose_boop'")   # Boop plays her real Boop clip (Rm.boopClip)
         if pg.evaluate("(id)=>!!PAINTED['clip_'+id].img",CID): fails.append(layout+': the clip picture was loaded before any fight')
         if layout=='landscape': pg.evaluate("()=>window.__LE.toggleLayout()")   # landscape is the game's own toggle: the whole stage turns on the upright phone
         if pg.evaluate(START,speed)<0: fails.append('no CLIP TEST fight in B2_LAB'); break
