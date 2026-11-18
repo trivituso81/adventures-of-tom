@@ -1,3 +1,13 @@
+## clip1 (2026-11-17): Animation test: Rose's video-made punch plays in a real fight (Battle Lab > CLIP TEST: ROSE)
+
+Tom (2026-11-17, animation tool test): the six-shot exam is done; this is the no-credit engine prototype. Nothing in the story game changed: the clip plays only in the new Battle Lab fight.
+- New Battle Lab fight, first on page 1: **CLIP TEST: ROSE** (Tom, Grace, Rose against Old Iron-Gill). ATTACK > Boop plays Rose's Wan 3.0 strike video as her body: she runs over on her painted run frames, the clip plays (wind-up, hop, punch, settle, 2.2 s), she runs home.
+- New "clip" frame type: `engine/clips.js`. A clip is a sheet of frames cut from an AI video with a marked impact frame. `ST.clip(id,{onImpact})` gives a move the frame chooser for `ST.keys`; the hit is fired by the clip when its impact frame is drawn (the body path and the move timeline run on different clocks and drift on a busy phone, measured 2 frames apart in the landscape test before this). The clip is drawn at the owner's sprite scale, so it follows `BATTLE_SIZE`.
+- New baker `tools/clip-bake/bake_clip.py`: video in, `art/clips/<id>.webp` and `data/clips/<id>.js` out (magenta keyed, edge pulled in 1 px, specks dropped, one fixed box, shadow and fist point measured). Rose's strike: 33 frames (every third video frame of 27 to 123, played 1.5x), 200 x 340 px each, 526 KB, impact on frame 16.
+- Memory: a clip picture is never loaded at boot. It loads when a fight that uses it starts and is released with the other fight sheets (`paintedLazy`, `paintedWanted`).
+- Test: new `tools/clip_test.py` (portrait and landscape): picture not loaded before the fight, all 33 frames drawn in order, damage lands on the impact frame, move ends, no errors. FAILS [].
+- Seen in the frames, not fixed here: the clip Rose is paler and a little slimmer-faced than her painted battle sprite (the video started from her hero painting, not her battle idle), so there is a visible change at the hand-off from the run frames. No voice lines added or changed (she says the existing "Boop!").
+
 ## scriptconvo1 (2026-11-15): Script Editor splits scenes into conversations you can review, workshop with any AI and paste back
 
 Tom (2026-11-15): "How can we make the script editor separate out conversations for easy review and workshopping with AI", then "Go" on claude/script-workshop-plan.md. All seven steps built.

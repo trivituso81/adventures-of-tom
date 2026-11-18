@@ -76,7 +76,8 @@ RM.boppy.grumble=E2=>{ const {m,fx}=E2;
     'They feel awful about it. They hit softer, and they glare at Boppy.',()=>checkEnemy());
 };
 // Rose's basic: Boop. (The old battle did this one inline.)
-RM.rose.boop=E2=>{ if(E2.act&&E2.act.o3&&RM.rose.boopShow) return RM.rose.boopShow(E2); const {m,fx}=E2;
+RM.rose.boop=E2=>{ if(B2.labClip&&RM.rose.boopClip&&RFX.ST.clip('rose_strike')) return RM.rose.boopClip(E2);   // Battle Lab CLIP TEST: the video-made strike (engine/clips.js)
+  if(E2.act&&E2.act.o3&&RM.rose.boopShow) return RM.rose.boopShow(E2); const {m,fx}=E2;
   enqueue(()=>{ setMessage('Rose walks right up to it.'); fx.appr=1.6; fx.apprDur=1.6; say('rose','boop',.45); },
     520,()=>{ fx.poke=.7; battle.boop={t:0,dur:1.1}; sfx.boop?sfx.boop():sfx.bonk(); },180,()=>landHit(100),750,'Boop. '+E2.result,()=>checkEnemy());
 };

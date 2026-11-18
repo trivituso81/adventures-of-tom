@@ -32,10 +32,12 @@ ST.unwarp=(X,Y)=>{ const A=typeof B2!=='undefined'&&B2.aim; if(!A) return [X,Y];
   let x=(X-A.dx*A.xp/A.L)/(1-A.dx/A.L),w=(A.xp-x)/A.L;
   if(w>1) { w=1; x=X-A.dx; } else if(w<0) { w=0; x=X; }
   return [x,Y-A.dy*w]; };
-// Frames: a sprite key, 'run' (left-facing run cycle), 'runR' (right-facing), 'walk'/'walkR' (slower), or a function.
+// Frames: a sprite key, 'run' (left-facing run cycle), 'runR' (right-facing), 'walk'/'walkR' (slower), or a function
+// (u,t) that returns a key or a frame (ST.clip(id).f plays a clip: engine/clips.js).
 function frameOf(sp,f,u,t) {
   if(typeof f==='function') f=f(u,t);
   if(!f) return null;
+  if(Array.isArray(f)) return f;   // a frame itself (a clip frame: engine/clips.js)
   if(f==='run') return sp.run?sp.run[Math.floor(t*12)%2]:sp.idle;
   if(f==='runR') return sp.runFlip?sp.runFlip[Math.floor(t*12)%2]:sp.flip;
   if(f==='walk') return sp.run?sp.run[Math.floor(t*7)%2]:sp.idle;
