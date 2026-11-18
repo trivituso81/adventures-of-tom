@@ -44,20 +44,29 @@ Tom (11-02, and again 11-03 14:49 with "ALWAYS"): he creates images only in the 
 
 ## Battle clip videos are made in the Art Library too (clipgen1, 2026-11-17)
 
-ADMIN > ART LIBRARY > Clips: an entry with a `clip` field (`tools/art-library/clip-prompts.js`, run it with node to add entries) is a short video of a character made on the xAI video API from a start picture (`python3 tools/clip-bake/make_start.py <owner>`, built from the battle idle frame). Tom presses GENERATE VIDEO, marks START, HIT and END in REVIEW, then APPROVE; the art-bake Action cuts the clip (`art_bake.py` `bake_clip`, `tools/clip-bake/bake_clip.py`). Code: `engine/art-clips.js`, engine side `engine/clips.js`. Kinds (`clip.kind`, clipkinds1): `strike` (START, HIT, END), `loop` (a monster's idle, START and END) and `state` (ends in a held pose such as asleep, START and END); loop and state clips play in the Battle Lab clip fights (`bclipFor` in `engine/clips.js`). New entries use the cheap model `grok-imagine-video-1.5-lite`, 3 seconds for attacks. Their prompts follow the short prompt rule below. Tests: `python3 tools/art-library/clip_lib_test.py`, `python3 tools/clip_test.py`, `python3 tools/clip_kinds_test.py`. State and next steps of the animation test: `claude/animation-tool-test-exam.md` in the Project.
+ADMIN > ART LIBRARY > Clips: an entry with a `clip` field (`tools/art-library/clip-prompts.js`, run it with node to add entries) is a short video of a character made on the xAI video API from a start picture (`python3 tools/clip-bake/make_start.py <owner>`, built from the battle idle frame). Tom presses GENERATE VIDEO, marks START, HIT and END in REVIEW, then APPROVE; the art-bake Action cuts the clip (`art_bake.py` `bake_clip`, `tools/clip-bake/bake_clip.py`). Code: `engine/art-clips.js`, engine side `engine/clips.js`. Kinds (`clip.kind`, clipkinds1): `strike` (START, HIT, END), `loop` (a monster's idle, START and END) and `state` (ends in a held pose such as asleep, START and END); loop and state clips play in the Battle Lab clip fights (`bclipFor` in `engine/clips.js`). New entries use the cheap model `grok-imagine-video-1.5-lite`, 3 seconds for attacks. Their prompts follow the approved Boop prompt's pattern (rule below). Tests: `python3 tools/art-library/clip_lib_test.py`, `python3 tools/clip_test.py`, `python3 tools/clip_kinds_test.py`. State and next steps of the animation test: `claude/animation-tool-test-exam.md` in the Project.
 
-## Image and video prompts are short (standing rule, Tom 2026-11-18)
+## Fix a miss with the smallest change (standing rule, Tom 2026-11-18)
 
-Tom (11-18 13:58): "a common issue you have with image and video prompt generation is that you confuse the generator with extraneous information and duplicating information. it needs to be concise clean and only describe the exact motion. you must remember this going forward." Every prompt written for a generator, picture or video:
+Tom (11-18 15:12), after Claude rewrote one video prompt three times and each rewrite missed a new way: "youre overcorrecting, swinging like a pendulum between extremes and it's really unimpressive and disspointing... this is costing me Fable credits and API credits from xai. i need you to correct this behavior going forwad immediately." This applies to every kind of work (prompts, dialogue, art, code), not only prompts:
 
-- Says each thing once. Two sentences about the same action come back as two actions (the long Boop prompt described one reach three ways and Rose booped twice).
-- Describes only what should be seen: the exact pose or motion wanted. No lists of things to avoid, no backstory, no repeating in words what the attached picture already shows.
-- One verb per action, plain body words, a real height or direction when it matters ("at shoulder height", not "at the height of her own nose").
-- A video clip prompt is the one-line `LOOK_SHORT` in `tools/art-library/clip-prompts.js`, a blank line, then the motion in one or two sentences, with an ending action so the model does not fill spare time by repeating the move. Nothing about speed, sound or length.
-- Before pushing a prompt, count its words and cut. A prompt over about 80 words needs a reason.
-- When words miss a pose twice, stop rewording and pin the pose with pictures (clippin1): `clip.keys` (pictures the video must pass through, each at a time in seconds) and `clip.last` (the picture it ends on), made from the character's own painted frames with `python3 tools/clip-bake/make_start.py <owner> --pose <frame key> <name>`. Pinned pictures need the full model `grok-imagine-video-1.5`. The Boop is the model: idle, her painted jab frame at 0.667 s, idle again, 2 seconds, and a 33 word prompt.
+- When something misses, start from the closest version that worked, or nearly worked, and change only what the feedback names. Keep everything it did not name.
+- One change per try, so the result says what that change did. Never change the wording, the length, the model and the method in one step.
+- Feedback about one fault is not a new rule for everything. "Too long and repetitive" means cut the repeats, not cut to a fifth of the length. Do not turn a note into an absolute ("never mention X") unless Tom states it as one.
+- Before pushing a fix, name what was kept and what was changed. If nearly nothing was kept, that is a swing: stop and redo it as an edit.
+- Every try costs Tom money (video and picture generations, Claude credits). Do not hand him a try whose only basis is a guess; say what the evidence is.
+- What happened, so it is not repeated: the first Boop prompt was about 330 words and said one reach three ways (finger went up; then two pokes). Tom asked for "concise clean and only describe the exact motion". Claude swung to 49 words, which dropped the facing and the planted feet (she pointed at the viewer and moved off her spot), then swung again to a different method (pictures pinned into the video, another model, 2 seconds), which also missed. A 158 word prompt written by Gemini, the same three-part shape as the original with the repeats cut, worked on the next try.
 
-When a prompt of an existing entry is rewritten, `clip-prompts.js` raises the entry's `promptRev`, and the Library drops an older edit of that prompt saved on Tom's device (`retireOldEdits` in `art.html`), so GENERATE uses the new text.
+## Image and video prompts: clean, each thing once (standing rule, Tom 2026-11-18)
+
+Tom (11-18 13:58): "a common issue you have with image and video prompt generation is that you confuse the generator with extraneous information and duplicating information. it needs to be concise clean and only describe the exact motion. you must remember this going forward."
+
+- The pattern for a clip video is the approved Boop prompt, `BOOP_APPROVED` in `tools/art-library/clip-prompts.js` (never reword it): about 150 words in three labelled parts. WHAT THIS IS: the exact character of the first-frame picture, face, proportions, outfit and drawing style kept. CAMERA AND BACKGROUND: locked camera, which way she faces, feet planted on the same spot, flat magenta background, silent. MOTION: two sentences that name the gesture, say how many times ("once", "without repeating the gesture") and end in a pose that is held for the rest of the clip.
+- Say each thing once. Describing one action two or three ways comes back as two or three actions.
+- Keep the rules that hold the picture steady (facing, feet, camera, background). Cutting them is not "concise": the video drifts.
+- Leave out backstory, long lists of things to avoid, and anything about speed.
+
+When a prompt of an existing entry is rewritten, `clip-prompts.js` raises the entry's `promptRev`, and the Library drops an older edit of that prompt saved on Tom's device (`retireOldEdits` in `art.html`), so GENERATE uses the new text. A rejected entry goes back under To do.
 
 ## Purge replaced files completely (standing rule, Tom 2026-11-05)
 

@@ -9,13 +9,6 @@ height, feet at 85 percent, standing right of the middle (55 percent) so a lunge
 starts from the same painting the game draws, the hand-off from painted pose to clip does not jump (clip1 finding 2).
 Prints the standing figure's height in sprite rows: that is the baker's --fig-rows (clip.figRows in the Library entry).
 
-  python3 tools/clip-bake/make_start.py <owner> --pose <frame key> <name>
-
---pose (clippin1) writes art/clips/keys/<name>.png: one of the owner's own painted frames (any atlas in data/<owner>-hires.js,
-for example Rose's `ab_boop_1`) on the same canvas, at the same scale and standing on the same spot as the start picture, so
-the two can be pinned in one video (the Library sends it as a keyframe or as the last frame; `clip.keys`, `clip.last`).
-The frame's rect is placed where the game would draw it over the idle rect: rect centres and rect bottoms line up.
-
 A monster (an id with data/foes/<id>-hires.js and no data/<id>-hires.js) uses the `stance` rect of its enemy atlas
 instead: loose specks and droplets are dropped, the body is 70 percent of the frame height (a monster's face needs more
 of the picture than a person's), centred, and it keeps the facing of its sheet.
@@ -59,32 +52,5 @@ def make(owner):
     out.convert('RGB').save(f'{ROOT}/art/clips/start/{owner}.png', optimize=True)
     print(owner, 'fig rows', rows, 'scale', round(s, 2), '->', f'art/clips/start/{owner}.png')
 
-def any_rect(owner, key):
-    """(path, k, rect) of a painted frame, from whichever atlas of data/<owner>-hires.js holds it."""
-    src = open(f'{ROOT}/data/{owner}-hires.js', encoding='utf-8').read()
-    for m in re.finditer(r'"\w+":\s*\{"src":\s*"([^"]+)",\s*"k":\s*([\d.]+),\s*"rects":\s*', src):
-        d = json.JSONDecoder().raw_decode(src[m.end():])[0]
-        if key in d: return m.group(1), float(m.group(2)), d[key]
-    sys.exit(f'{owner}: no painted frame `{key}` in data/{owner}-hires.js')
-
-def make_pose(owner, key, name):
-    ip, ik, (x, y, w, h) = idle_rect(owner)
-    a = np.asarray(Image.open(f'{ROOT}/{ip}').convert('RGBA').crop((x, y, x + w, y + h)))[..., 3] > 128
-    ys, xs = np.where(a); s = H * SHARE / (ys.max() + 1 - ys.min())               # the start picture's scale
-    cx = W * MIDX - (xs.min() + xs.max() + 1) / 2 * s + w * s / 2                  # where the idle rect's centre sits on the canvas
-    by = H * FEET - (ys.max() + 1) * s + h * s                                     # and its bottom edge
-    pp, pk, (px, py, pw, ph) = any_rect(owner, key)
-    f = Image.open(f'{ROOT}/{pp}').convert('RGBA').crop((px, py, px + pw, py + ph)); s2 = s * ik / pk
-    f = f.resize((round(pw * s2), round(ph * s2)), Image.LANCZOS)
-    x0, y0 = round(cx - f.width / 2), round(by - f.height)
-    if x0 < 0 or y0 < 0 or x0 + f.width > W or y0 + f.height > H: sys.exit(f'{owner} {key}: the pose leaves the {W} x {H} picture')
-    out = Image.new('RGBA', (W, H), (255, 0, 255, 255)); out.alpha_composite(f, (x0, y0))
-    os.makedirs(f'{ROOT}/art/clips/keys', exist_ok=True)
-    out.convert('RGB').save(f'{ROOT}/art/clips/keys/{name}.png', optimize=True)
-    print(owner, key, 'scale', round(s2, 2), '->', f'art/clips/keys/{name}.png')
-
 if __name__ == '__main__':
-    if '--pose' in sys.argv:
-        i = sys.argv.index('--pose'); make_pose(sys.argv[1], sys.argv[i + 1], sys.argv[i + 2])
-    else:
-        for o in sys.argv[1:]: make(o)
+    for o in sys.argv[1:]: make(o)

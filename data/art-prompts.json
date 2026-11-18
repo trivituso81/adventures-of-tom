@@ -26527,23 +26527,15 @@
    "title": "Rose: Boop (one sharp finger jab) video clip",
    "ar": "4:3",
    "refs": [
-    "art/clips/start/rose.png",
-    "art/clips/keys/rose-boop-jab.png"
+    "art/clips/start/rose.png"
    ],
    "clip": {
     "id": "rose-boop",
     "owner": "rose",
     "start": "art/clips/start/rose.png",
-    "keys": [
-     {
-      "image": "art/clips/keys/rose-boop-jab.png",
-      "t": 0.667
-     }
-    ],
-    "last": "art/clips/start/rose.png",
-    "model": "grok-imagine-video-1.5",
+    "model": "grok-imagine-video-1.5-lite",
     "res": "480p",
-    "dur": 2,
+    "dur": 3,
     "figRows": 83,
     "step": 3,
     "speed": 1.5

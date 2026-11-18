@@ -30,26 +30,21 @@ const LOOK_FOE = 'IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exact
   'LOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\n' +
   'CAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\n';
 const STRIKE = 'MOTION: WIND-UP INTO A STRIKE\nStart in the relaxed ready stance of the attached picture and hold it still for a brief moment. Twist the body away to the right, pull the near arm back, weight on the back leg, eyes narrowed. Then spring forward to the left in one fast move, lunging with the front knee bent and the arm at full reach, mouth open in a shout. Stay the same size and keep both feet on the same ground line while lunging. Hold the lunge for a moment, then ease back to the exact ready stance of the first frame. Hands empty, nothing is hit and nothing appears at the end of the arm.';
-// SHORT PROMPTS (clipboop2, Tom 2026-11-18): "you confuse the generator with extraneous information and duplicating information. it
-// needs to be concise clean and only describe the exact motion." The long Boop prompt (the LOOK block plus a paragraph that said the
-// same reach three ways and aimed it at "her own nose") gave a finger pointing up at an adult's nose, then two boops. So a new entry is:
-// LOOK_SHORT, a blank line, then the motion in one or two sentences. Each thing is said once. One verb per action. Only what should be
-// seen. Nothing about speed, sound or length (the length is the API's `duration`). Give the clip an ending action so the model does not
-// fill the spare time by repeating the move.
-const LOOK_SHORT = 'Animate the character in the attached picture. Same drawing style, same flat magenta background, fixed camera, whole body in view.';
-// PINNED PICTURES (clippin1, 2026-11-18): words alone could not hold the Boop. Seven videos missed four different ways (finger up at an
-// adult's nose; two pokes, twice; pointing at the viewer, moving off her spot and wiggling). So the pose now comes from PICTURES: the
-// video starts on her idle picture, must pass through her own painted jab frame (`clip.keys`, made by `make_start.py --pose`), and must
-// end on the idle picture again (`clip.last`). The text only names the action. Pinned frames need the full model (`G15`); the xAI docs
-// list `last_frame` and `keyframes` for grok-imagine-video-1.5 only. Keyframe times snap to thirds of a second.
 // BOOP: Rose's free move. Tom 2026-11-18: "the boop should be a like sharp jab (not necessarily on the nose) with her finger."
-const ROSE_JAB = 'art/clips/keys/rose-boop-jab.png';   // her painted frame ab_boop_1: arm straight out and level, one finger
-const BOOP = 'She makes one sharp jab with her index finger, then stands as before.';
+// THIS IS THE APPROVED PROMPT, word for word. Tom had Gemini write it after three of Claude's rewrites missed, and approved its video
+// (art/raw/clips/clip-rose-boop-v1.mp4: cheap model, 3 s, start picture only). Do not reword it. It is the pattern for every new clip:
+// about 150 words in three labelled parts (WHAT THIS IS, CAMERA AND BACKGROUND, MOTION), each rule said once, the facing and "feet
+// planted on the exact same spot" kept, the motion as two sentences that name the count ("once", "without repeating") and end in a
+// pose that is held. What went wrong before it (do not repeat): a 330 word prompt that said one reach three ways; then a swing to 49
+// words that dropped the facing and the planted feet; then a swing to a different method (pinned pictures, full model, 2 s). Tom:
+// "youre overcorrecting, swinging like a pendulum between extremes". When a prompt misses, start from the closest version that
+// worked and change the one thing the note names (repo CLAUDE.md, "Fix a miss with the smallest change").
+const BOOP_APPROVED = "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SINGLE INDEX FINGER TAP\nFrom her starting relaxed stance, she smiles, rises onto her tiptoes, and smoothly extends one arm straight forward to the left at nose height, tapping the air once with a single extended index finger. Without repeating the gesture, she immediately pulls her arm back, settles onto flat feet with both hands resting on her hips, and remains completely still in that proud, smiling pose for the rest of the clip.";
 const G15 = 'grok-imagine-video-1.5', LITE = G15 + '-lite', ROSE = 'art/clips/start/rose.png';
 const entries = [
-  { id: 'clip-rose-boop', tab: 'Clips', group: 'Rose', title: 'Rose: Boop (one sharp finger jab) video clip', ar: '4:3', refs: [ROSE, ROSE_JAB],
-    clip: { id: 'rose-boop', owner: 'rose', start: ROSE, keys: [{ image: ROSE_JAB, t: 0.667 }], last: ROSE, model: G15, res: '480p', dur: 2, figRows: 83, step: 3, speed: 1.5 },
-    prompt: LOOK_SHORT + '\n\n' + BOOP },
+  { id: 'clip-rose-boop', tab: 'Clips', group: 'Rose', title: 'Rose: Boop (one sharp finger jab) video clip', ar: '4:3', refs: [ROSE],
+    clip: { id: 'rose-boop', owner: 'rose', start: ROSE, model: LITE, res: '480p', dur: 3, figRows: 83, step: 3, speed: 1.5 },
+    prompt: BOOP_APPROVED },
   // The first clip made: a general wind-up and strike, which came back as a karate chop. Battle Lab > CLIP TEST: ROSE plays it only until
   // the Boop clip above is approved (RM.rose.boop). Purge this entry, its files and the fallback once Boop is approved.
   { id: 'clip-rose-strike', tab: 'Clips', group: 'Rose', title: 'OLD TEST: Rose strike (a chop, not Boop)', ar: '4:3', refs: [ROSE],

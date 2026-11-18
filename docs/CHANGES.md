@@ -1,3 +1,14 @@
+## clipcal1 (2026-11-18): Rose's approved Boop is in the Battle Lab; the pinned-picture experiment is removed; rule: fix a miss with the smallest change
+
+- Tom (11-18 15:12): "that didnt work either - youre overcorrecting, swinging like a pendulum between extremes and it's really unimpressive and disspointing... i need you to correct this behavior going forwad immediately. i used gemini with this prompt and got an accetable result, so i approved it".
+- He was right. The swings: a 330 word prompt, then 49 words (which dropped the facing and the planted feet), then a different method altogether (pictures pinned into the video, another model, 2 seconds). The prompt that worked is 158 words, the same three-part shape as the first one with the repeats cut.
+- His approved video (`art/raw/clips/clip-rose-boop-v1.mp4`, 3 seconds, 73 pictures) was looked at picture by picture: one jab to the side she faces, then hands on hips, held. The automatic cut made the clip `rose_boop` (37 pictures, hit on video frame 34). Battle Lab > CLIP TEST: ROSE > Boop now plays it: `tools/clip_test.py` passes in portrait and landscape, and the hit lands on the monster's nose.
+- `tools/art-library/clip-prompts.js` carries the approved prompt word for word (`BOOP_APPROVED`), so running that script can never overwrite it, and the entry's settings are back to what made the approved video (cheap model, 3 seconds, start picture only).
+- Removed (Purge rule): everything clippin1 added for pinned pictures (Library request fields and card row, the `--pose` picture maker, `art/clips/keys/rose-boop-jab.png`, its test checks). It was tried once and Tom's result was not acceptable.
+- CLAUDE.md: new standing rule "Fix a miss with the smallest change" (start from the closest version that worked, change only what the note names, one change per try). The prompt rule from clipboop2 is rewritten around the approved prompt; its "49 words" yardstick is gone.
+- Tests: `tools/art-library/clip_lib_test.py`, `tools/clip_test.py`, `tools/smoke.py`. Not done: the old chop test (`clip-rose-strike` and its two study entries) is still in the repo; it is the next session's one task.
+
+
 ## roofnpc1 (2026-11-18): chapter 1 scene 1 fixes from Gemini's video audit: Rose rides into Grace's list, the party walks onto the plaza, no townsfolk on roofs
 
 Tom sent Gemini's audit of a recording of chapter 1 scene 1 (the opening and Grace's list). What each finding got:
