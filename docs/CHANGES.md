@@ -1,3 +1,11 @@
+## ch1tags1 (2026-11-17): chapter 1 voice tags checked against Gemini's ElevenLabs v4 research, 10 lines retagged
+
+Tom (2026-11-17 19:32): "Check the chapter 1 voice tags against it. Change only tags that the research says will sound worse, do not change any spoken words, update the Voice Library in the game to match."
+- 6 lines had two brackets back to back (`[hurt, baffled] [punchline]`). A tag only acts on the words after it, so the first bracket acted on nothing. Merged into one bracket, same words: Grace "Number three.", Boppy "The MUD gets a muffin", Deedee "Three.", Deedee "rounded DOWN", Deedee "FIFTY-ONE years", Boppy "The FISH gets THREE?".
+- 3 opening lines (Amy "Brother!", Aunt Ellie "Tom.", Deedee "There he is!") carried a bare "Long Island" in the first bracket, which stopped the Library writing the full accent wording there. Removed, so every bracket of those lines now carries the same accent wording as all their other lines.
+- Tom "TWICE.": `[beat]` became `[pause]`, the documented tag for a beat before a punchline.
+- `tools/voice-library/scripts/ch01-story-directions.json` and `data/voice-index.json` only. No spoken word changed, no clip existed for any of the 10 lines, nothing in the game scenes changed. The other 85 chapter 1 scripts are unchanged.
+
 ## clipspeed1 (2026-11-17): Art Library clips: a SPEED control in the review screen
 
 Tom (2026-11-17 19:07): "Can there be a control for the speed". REVIEW now has a row SPEED IN THE GAME: 1x, 1.5x, 2x, 2.5x, 3x, 4x, 5x (times faster than the video). It starts at the entry's own speed (3x). ON THE BATTLEFIELD plays at the picked speed, and APPROVE sends it with the marks, so the clip is cut at that speed (`marks.speed`, read by `bake_clip` in `tools/art-library/art_bake.py`).

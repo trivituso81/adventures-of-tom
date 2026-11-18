@@ -55,14 +55,14 @@
    "speaker": "Grace",
    "text": "Number three. Rose licked a muffin.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[flat, writing as she talks] [punchline] Number three. Rose licked a muffin."
+   "script": "[flat, writing as she talks, punchline] Number three. Rose licked a muffin."
   },
   {
    "voice": "amy",
    "speaker": "Amy",
    "text": "Brother! I'm watching you from the window. I've seen people walk faster in ski boots.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[loud, teasing, Long Island] Brother! I'm watching you from the window. [punchline, cheerful] I've seen people walk faster in SKI boots."
+   "script": "[loud, teasing] Brother! I'm watching you from the window. [punchline, cheerful] I've seen people walk faster in SKI boots."
   },
   {
    "voice": "tom",
@@ -97,7 +97,7 @@
    "speaker": "Aunt Ellie",
    "text": "Tom. They gave you a seat that turns into a bed, and you still got off that plane wrinkled.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[cool, elegant, Long Island] Tom. [measured, faintly disappointed] They gave you a seat that turns into a BED, [punchline, level] and you still got off that plane wrinkled."
+   "script": "[cool, elegant] Tom. [measured, faintly disappointed] They gave you a seat that turns into a BED, [punchline, level] and you still got off that plane wrinkled."
   },
   {
    "voice": "tom",
@@ -188,7 +188,7 @@
    "speaker": "Deedee",
    "text": "There he is! Come here. Let me look at you. I missed that face. Now sit, you're having a muffin.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[bright, thrilled, Long Island] There he is! Come here. Let me look at you. [warm, plain] I missed that FACE. [firm] Now sit, you're having a muffin."
+   "script": "[bright, thrilled] There he is! Come here. Let me look at you. [warm, plain] I missed that FACE. [firm] Now sit, you're having a muffin."
   },
   {
    "voice": "tom",
@@ -258,7 +258,7 @@
    "speaker": "Boppy",
    "text": "The mud gets a muffin and I don't?",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[hurt, baffled] [punchline] The MUD gets a muffin and I don't?"
+   "script": "[hurt, baffled, punchline] The MUD gets a muffin and I don't?"
   },
   {
    "voice": "deedee",
@@ -314,7 +314,7 @@
    "speaker": "Deedee",
    "text": "Three.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[flat, immediate] [punchline] Three."
+   "script": "[flat, immediate, punchline] Three."
   },
   {
    "voice": "grace",
@@ -440,7 +440,7 @@
    "speaker": "Deedee",
    "text": "For once in his life he rounded down.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[dry, staring up at it] [punchline] For once in his life he rounded DOWN."
+   "script": "[dry, staring up at it, punchline] For once in his life he rounded DOWN."
   },
   {
    "voice": "bigone",
@@ -538,7 +538,7 @@
    "speaker": "Deedee",
    "text": "He's been in the middle of that one for fifty-one years.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[dry, level] [punchline] He's been in the middle of that one for FIFTY-ONE years."
+   "script": "[dry, level, punchline] He's been in the middle of that one for FIFTY-ONE years."
   },
   {
    "voice": "rose",
@@ -601,7 +601,7 @@
    "speaker": "Boppy",
    "text": "The fish gets THREE?",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[hurt, baffled, louder than before] [punchline] The FISH gets THREE?"
+   "script": "[hurt, baffled, louder than before, punchline] The FISH gets THREE?"
   },
   {
    "voice": "deedee",
@@ -657,7 +657,7 @@
    "speaker": "Tom",
    "text": "The long way. That's all the way around the Square. Twice.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[agreeing at once, official] The long way. [working it out, pleased] That's all the way around the Square. [beat] TWICE."
+   "script": "[agreeing at once, official] The long way. [working it out, pleased] That's all the way around the Square. [pause] TWICE."
   },
   {
    "voice": "tnb",
