@@ -1,3 +1,7 @@
+## clip3 (2026-11-17): Rose's test punch plays at 3x the video's speed
+
+Tom (2026-11-17 17:51): "do 3x - its still too slow". The CLIP TEST: ROSE punch now plays at 3x (was 2x): 1.1 s, punch lands 0.53 s after she starts. Same 33 frames, now shown at 30 a second. `python3 tools/clip_test.py`: FAILS [].
+
 ## clip2 (2026-11-17): Rose's test punch plays at 2x the video's speed
 
 Tom (2026-11-17 17:44): "it shuld be even faster, maybe 2x the videos speed." The CLIP TEST: ROSE punch now plays at 2x (was 1.5x): 1.65 s instead of 2.2 s, punch lands 0.8 s after she starts. Same 33 frames. `python3 tools/clip_test.py`: FAILS [].

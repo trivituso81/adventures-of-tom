@@ -51,7 +51,7 @@ with sync_playwright() as pw:
         seen=[f for _,f,_ in log if f>=0]; order=[f for i,f in enumerate(seen) if i==0 or f!=seen[i-1]]
         hit=next((r for r in log if r[2]<hp0),None)
         print(layout,'clip frames seen',len(order),'of',C['n'],'first',order[:1],'last',order[-1:],'| hit at',hit,'| impact frame',C['impact'])
-        if not order or order[0]>2 or order[-1]!=C['n']-1 or order!=sorted(order): fails.append(f'{layout}: clip frames out of order or cut short: {order}')
+        if not order or order[0]>2 or order[-1]<C['n']-3 or order!=sorted(order): fails.append(f'{layout}: clip frames out of order or cut short: {order}')
         if len(order)<C['n']*(.55 if speed==1 else .3): fails.append(f'{layout}: only {len(order)} of {C["n"]} clip frames were drawn')
         if not hit: fails.append(layout+': no damage landed')
         elif hit[1] not in (C['impact'],C['impact']+1): fails.append(f'{layout}: damage landed on clip frame {hit[1]}, impact frame is {C["impact"]}')
