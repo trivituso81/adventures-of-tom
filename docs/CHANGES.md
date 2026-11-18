@@ -1,3 +1,7 @@
+## voicefilter1b (2026-11-18): change log cleaned up after voicefilter1
+
+The voicefilter1 push went out while a rebase was unfinished and left merge conflict markers at the top of this file (nowhere else). Removed here. Nothing in the game changed.
+
 ## voicefilter1 (2026-11-18): Voice Library: the Chapter 1 filter is back, with its 95 unrecorded lines
 
 Tom (2026-11-18 08:00): "Chapter 1 filter is not in the voice library anymore".
