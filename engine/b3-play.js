@@ -17,6 +17,9 @@ const B3={active:false,F:null,cfg:null,view:null,ui:'busy',sel:0,opts:[],pending
 const B3P={t:0,q:[],body:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false};
 // How an enemy stands that is not in its art: flyers hover this many pixels off the ground.
 const B3_FOE_LOOK={skeeter:{hover:14}};
+// How long the default move animations take, as a multiple of the first build's pace. Tom, 2026-11-18: they were about 2x too fast.
+// One number: 1 is the old quick pace, 2 is twice as long. The battle speed button (1x / 2x) still halves it for the player.
+const B3_TEMPO=2;
 // Body states (architecture 2.7): which painted frame shows each state. Stage 8 finishes this table and lets a cell be a clip.
 const B3_BODY={idle:'idle',hit:'hurtPose',low:'kneel',windup:'windup',dash:'leap',strike:'act',cast:'castPose',give:'point',victory:'celeb'};
 
@@ -144,14 +147,16 @@ function b3PlayMove(beats,done) {
   const src=head.src,who=b3Name(src);
   b3Say(who+(head.foe?' uses ':': ')+head.name+'.');
   let shown=0;
+  // Every time below is written at the old quick pace and stretched by B3_TEMPO (K): at(), the body's keys and poses, things in flight.
+  const K=B3_TEMPO,at=(s,fn)=>b3After(s*K,fn);
   const reveal=()=>{ const h=hits[shown++]; if(h) for(const b of h.beats) b3Show(b); };
-  const finish=at=>b3After(at,()=>{ while(shown<hits.length) reveal(); for(const b of post) b3Show(b); b3ViewSync(); b3RenderParty(); b3After(.5,done); });
+  const finish=s=>at(s,()=>{ while(shown<hits.length) reveal(); for(const b of post) b3Show(b); b3ViewSync(); b3RenderParty(); b3After(.6,done); });
   const shape=head.shape,foe=src[0]==='f',fl=B3_FLAVORS[head.flavor[0]]||B3_FLAVORS.support;
   // A move with no hits (a pass, a self buff): a pose, then the effects.
   if(!hits.length) {
     const tg=head.tgts[0];
-    if(foe) B3P.fa[src].hold=B3P.t+.5; else B3P.body[src]={kind:'pose',f:shape==='give'?B3_BODY.give:B3_BODY.cast,t0:B3P.t,dur:.75};
-    if(tg&&tg!==src) { const a=b3Spot(src),z=b3Spot(tg); B3P.fx.push({kind:'proj',x0:a.x,y0:a.y,x1:z.x,y1:z.y,color:fl.color,t0:B3P.t+.2,dur:.3,arc:40}); }
+    if(foe) B3P.fa[src].hold=B3P.t+.5*K; else B3P.body[src]={kind:'pose',f:shape==='give'?B3_BODY.give:B3_BODY.cast,t0:B3P.t,dur:.75*K};
+    if(tg&&tg!==src) { const a=b3Spot(src),z=b3Spot(tg); B3P.fx.push({kind:'proj',x0:a.x,y0:a.y,x1:z.x,y1:z.y,color:fl.color,t0:B3P.t+.2*K,dur:.3*K,arc:40}); }
     finish(.55); return;
   }
   let t=.05;
@@ -159,27 +164,30 @@ function b3PlayMove(beats,done) {
     // Wind up, dash to the target, strike (reveal), hop back for the next hit, then home.
     const keys=[],home=foe?null:b3PartyHome(b3Unit(B3.F,src));
     if(foe) {
-      for(const h of hits) { const z=b3Spot(h.swing.tgts[0]); B3P.q.push({at:B3P.t+t,fn:()=>{ B3P.fa[src].lunge={t0:B3P.t,dur:.55,tx:z.sx,ty:z.sb}; }}); b3After(t+.27,reveal); t+=.6; }
+      // An enemy leans back first (the hold), then lunges; the hit shows at the far point of the lunge.
+      B3P.fa[src].hold=B3P.t+.22*K; t=.22;
+      for(const h of hits) { const z=b3Spot(h.swing.tgts[0]); at(t,()=>{ B3P.fa[src].lunge={t0:B3P.t,dur:.55*K,tx:z.sx,ty:z.sb}; }); at(t+.27,reveal); t+=.6; }
       finish(t); return;
     }
-    keys.push({t:0,x:home.cx,y:home.base,f:B3_BODY.windup},{t:.16,x:home.cx,y:home.base,f:B3_BODY.windup});
-    t=.16;
+    keys.push({t:0,x:home.cx,y:home.base,f:B3_BODY.windup},{t:.2,x:home.cx,y:home.base,f:B3_BODY.windup});
+    t=.2;
     hits.forEach((h,k)=>{ const z=b3Spot(h.swing.tgts[0]);
-      keys.push({t:t+.15,x:z.sx,y:z.sb,f:B3_BODY.dash},{t:t+.16,x:z.sx-8,y:z.sb,f:B3_BODY.strike},{t:t+.28,x:z.sx-8,y:z.sb,f:B3_BODY.strike});
-      b3After(t+.16,reveal); t+=.28;
+      keys.push({t:t+.15,x:z.sx,y:z.sb,f:B3_BODY.dash},{t:t+.16,x:z.sx-8,y:z.sb,f:B3_BODY.strike},{t:t+.3,x:z.sx-8,y:z.sb,f:B3_BODY.strike});
+      at(t+.16,reveal); t+=.3;
       if(k<hits.length-1) { keys.push({t:t+.1,x:z.sx+26,y:z.sb,f:B3_BODY.dash,hop:14}); t+=.1; } });
     keys.push({t:t+.24,x:home.cx,y:home.base,f:B3_BODY.idle});
-    B3P.body[src]={kind:'path',keys,t0:B3P.t,dur:t+.24};
+    for(const q of keys) q.t*=K;
+    B3P.body[src]={kind:'path',keys,t0:B3P.t,dur:(t+.24)*K};
     finish(t+.2); return;
   }
   // cast, throw, give: stay home, send something across, reveal when it arrives.
   const a=b3Spot(src);
-  if(foe) B3P.fa[src].hold=B3P.t+.25+hits.length*.34;
-  else B3P.body[src]={kind:'pose',f:shape==='give'?B3_BODY.give:shape==='throw'?B3_BODY.strike:B3_BODY.cast,t0:B3P.t,dur:.35+hits.length*.34};
+  if(foe) B3P.fa[src].hold=B3P.t+(.25+hits.length*.34)*K;
+  else B3P.body[src]={kind:'pose',f:shape==='give'?B3_BODY.give:shape==='throw'?B3_BODY.strike:B3_BODY.cast,t0:B3P.t,dur:(.35+hits.length*.34)*K};
   t=.2;
   for(const h of hits) {
-    for(const k of h.swing.tgts) { const z=b3Spot(k); B3P.fx.push({kind:'proj',x0:a.x+(foe?20:-20),y0:a.y,x1:z.x,y1:z.y,color:fl.color,t0:B3P.t+t,dur:.26,arc:shape==='throw'?46:10}); }
-    b3After(t+.26,reveal); t+=.34;
+    for(const k of h.swing.tgts) { const z=b3Spot(k); B3P.fx.push({kind:'proj',x0:a.x+(foe?20:-20),y0:a.y,x1:z.x,y1:z.y,color:fl.color,t0:B3P.t+t*K,dur:.26*K,arc:shape==='throw'?46:10}); }
+    at(t+.26,reveal); t+=.34;
   }
   finish(t+.1);
 }

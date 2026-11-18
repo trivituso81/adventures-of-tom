@@ -1,3 +1,10 @@
+## b3tempo1 (2026-11-18): New battle: attack animations take twice as long
+
+- Tom (11-18 09:54, after playing `b3s1`): "the attack animations are about 2x too fast".
+- `engine/b3-play.js`: one number, `B3_TEMPO` (now 2), stretches every default move animation: the wind-up, the dash, the strike, the return, things in flight, an enemy's lunge. A Basic that took about 1.2 seconds now takes about 2.4. Numbers, tags and the Detonation word keep their own lengths. An enemy now leans back for a moment before it lunges. The battle speed button (1x / 2x) still halves it; the setting is remembered from the old battle, so a phone left on 2x plays the new battle at 2x too.
+- Rules untouched: `node tools/b3-sim.js check` FAILS: []. `python3 tools/b3_test.py` FAILS: [] (same turn order as the simulator; its waits were lengthened to match). Smoke passes.
+- Not seen on the phone yet.
+
 ## adminvol1 (2026-11-18): music volume slider and Music On/Off button in the Admin top bar
 
 - Tom: "in Admin at the top bar, add a music volume slider for the background music as well as a way to turn the background music off."

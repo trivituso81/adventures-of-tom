@@ -68,7 +68,7 @@ def hand_fight(pg,idx,fid):
             if state(pg)['ui']!='target': fails.append(f'{fid} hand: tapping NeeDoh Stretch Pass did not open the target list')
             frames.append(shot(pg))
             pg.click('#b3-party .b2-pc[data-i="2"]'); did['skill']=True; did['card']=True
-            pg.wait_for_timeout(700); frames.append(shot(pg))
+            pg.wait_for_timeout(1100); frames.append(shot(pg))
         else:
             if who=='deedee': tgt=([f for f in live if not f['drenched']] or live)[0]
             elif who in('grace','rose') and wet: tgt=wet[0]; expect_slip=True
@@ -86,12 +86,12 @@ def hand_fight(pg,idx,fid):
                 if state(pg)['ui']=='target': tap_foe(pg,tgt['key']); did['tapfoe']=True
             if expect_slip and not did['slip']:
                 bar0=pg.evaluate("()=>B3.view.bar.map(e=>e.k)")
-                for k in range(12): pg.wait_for_timeout(130); slip.append(shot(pg))
+                for k in range(12): pg.wait_for_timeout(230); slip.append(shot(pg))
                 log=pg.evaluate("()=>B3.log.slice(-6).join(' | ')")
                 if 'Hydro-Slip!' in log: did['slip']=True
                 else: fails.append(f'{fid} hand: a Clobber hit on a Drenched monster did not show Hydro-Slip!: {log}')
             else:
-                pg.wait_for_timeout(420); 
+                pg.wait_for_timeout(800)
                 if turn<6: frames.append(shot(pg))
         wait_cmd(pg); pg.wait_for_timeout(200)
     st=state(pg)
@@ -167,7 +167,7 @@ with sync_playwright() as pw:
         pg.keyboard.press('ArrowUp'); pg.wait_for_timeout(250); fr.append(shot(pg))
         key=[f['key'] for f in state(pg)['foes'] if f['alive']][0]
         if state(pg)['ui']=='target': tap_foe(pg,key)
-        pg.wait_for_timeout(500); fr.append(shot(pg)); wait_cmd(pg); pg.wait_for_timeout(250)
+        pg.wait_for_timeout(900); fr.append(shot(pg)); wait_cmd(pg); pg.wait_for_timeout(250)
         if state(pg)['actor']!='grace': fails.append(f"{fid} landscape: tapping the enemy did not use Tom's Basic (now {state(pg)['actor']})")
         pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(250); fr.append(shot(pg)); pg.keyboard.press('Escape'); pg.wait_for_timeout(150)
         pg.click('#b3-exit'); pg.wait_for_timeout(500)
