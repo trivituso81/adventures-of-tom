@@ -26486,8 +26486,21 @@
    "prompt": "Draw Nara in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of Nara. Picture 2 is the walking sheet. Pictures 3 and 4 are the battle sheets.\n\nCopy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as the battle sheets. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\n\nRow 1:\n1. Standing on her hind legs facing right with both front paws up in the air against an invisible person at the edge of her cell (draw nobody), her tongue out and her tail a blur, wild with joy.\n2. Standing in profile, facing right, her head low and turned to follow something small moving away along the ground at the edge of her cell (draw nothing there), her ears up, her eyes wide and still.\n3. Sitting facing the viewer with her head tipped up and a little to the side, looking up at someone above her, a worried, searching, questioning face, one ear lifted.\nRow 2:\n4. Sitting in profile, facing right, her nose lifted and her head turned far away from the viewer, her eyes shut, very obviously not looking at something, her chin high.\n5. Sitting very, very still, facing right, perfectly upright and stiff, her eyes fixed on something just beyond the edge of her cell (draw nothing there), a long string of drool hanging from her mouth, her tail flat on the ground.\n6. Lying flat on her belly facing right, crouched low as if under a table, with half a round loaf of bread held in her mouth, her eyes looking sideways with guilty innocence, her ears back.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/clips/clip-rose-boop-v1.json",
+     "date": "2026-11-18",
+     "from": "v6",
+     "at": 1795043487101,
+     "marks": {
+      "first": 0,
+      "hit": 1.399,
+      "last": 3.03
+     }
+    }
+   ],
    "rejects": [
     {
      "date": "2026-11-18",
@@ -26535,7 +26548,7 @@
     "step": 3,
     "speed": 1.5
    },
-   "prompt": "Animate the character in the attached picture. Same drawing style, same flat magenta background, fixed camera, whole body in view.\n\nShe makes one sharp jab with her index finger, then stands as before.",
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SINGLE INDEX FINGER TAP\nFrom her starting relaxed stance, she smiles, rises onto her tiptoes, and smoothly extends one arm straight forward to the left at nose height, tapping the air once with a single extended index finger. Without repeating the gesture, she immediately pulls her arm back, settles onto flat feet with both hands resting on her hips, and remains completely still in that proud, smiling pose for the rest of the clip.",
    "promptRev": 2
   },
   {
