@@ -1,3 +1,9 @@
+## 2026-11-18 (450): Art Library bake, clip-rose-strike (`artbake1479`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- clip-rose-strike: clip `rose-strike` cut from art/raw/clips/clip-rose-strike-v3.json (24 pictures a second; video frames 0 to 72, every 2, hit at frame 38; 37 pictures kept; played at 1.5x). rose_strike frames 37 frame px 528 344 rows 132 86 sheet (2112, 3440) kb 784 dur ms 2056 impact ms 1056 reach [64.8, 50.2]
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## ch1tags1 (2026-11-17): chapter 1 voice tags checked against Gemini's ElevenLabs v4 research, 10 lines retagged
 
 Tom (2026-11-17 19:32): "Check the chapter 1 voice tags against it. Change only tags that the research says will sound worse, do not change any spoken words, update the Voice Library in the game to match."
