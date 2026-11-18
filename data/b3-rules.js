@@ -9,6 +9,7 @@ const B3_RULES={
   recovery:{basic:80,s1:100,s2:100,cap:120},  // Base Recovery by skill slot
   telegraph:80,                               // an enemy's announce turn (charge_up) uses this Base Recovery (my call: matches Big Glare and Inlet Submerge)
   startWait:{party:50,foe:75},                // opening waits, x 100 / Speed (architecture section 6)
+  arrive:100,                                 // a revived family member rejoins the bar waiting this x 100 / Speed (spec 2.1's rule for arriving)
   forecast:100,                               // the turn bar counts every future action as this Recovery
   halving:.5,                                 // each further push (or pull) on the same unit inside one round
   grantedPerRound:1,
@@ -24,9 +25,12 @@ const B3_RULES={
   shieldTurns:3,
   backRowClobber:.20,                         // Back-row units take this much less single-target Clobber damage
   statusTurns:2,                              // common statuses last 2 turns unless a row says otherwise
+  stunBossTicks:30,                           // a Stun on a Boss is a 30-tick push instead of a lost turn (spec 2.8)
   primeTurns:2,
   // Aggro (spec 2.8)
   aggro:{front:100,back:60},
+  // Party rows (spec 2.1): the row a family member stands in by default, from their Main Vibe's Lean. At least 1 stands in Front.
+  rowByLean:{guard:'front',striker:'front',tempo:'front',support:'back'},
   // Composure (spec 2.7). Built in stage 3; the numbers live here from the start.
   composure:{capPerAction:3,capFullRuckus:4,flusteredTaken:.35},
   // Family Ruckus (spec 2.10). Built in stage 6.
@@ -72,3 +76,8 @@ const B3_LEVELS=[
 
 // Filled by the kit files (data/b3-kit-*.js), the status file and the enemy files (data/b3-foes-*.js).
 const B3_CAST={},B3_VIBES={},B3_SKILLS={},B3_TRAITS={},B3_QUIRKS={},B3_FOES={},B3_FORMATIONS={};
+
+// Pick-Me-Up (spec 2.9): every family member has this command in every Vibe. It shows in SKILLS while someone is knocked out.
+B3_SKILLS.pick_me_up={id:'pick_me_up',vibe:null,common:true,slot:'s1',name:'Pick-Me-Up',pep:B3_RULES.pickMeUp.pep,flavor:['support'],power:0,hits:0,
+  target:'ko_ally',tags:[],composure:0,effects:[{op:'revive',hp:B3_RULES.pickMeUp.hp}],line:null,anim:{kind:'default',shape:'give'},
+  desc:'Gets a knocked-out family member back on their feet with a quarter of their HP.'};

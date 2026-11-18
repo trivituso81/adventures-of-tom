@@ -1,5 +1,5 @@
 'use strict';
-// data/b3-kit-rose.js — Battle 3 kit: Rose (spec section 3.3). Stage 1: Sugar Rush's Basic and Skill 1.
+// data/b3-kit-rose.js — Battle 3 kit: Rose (spec section 3.3). Built so far: Sugar Rush's Basic, Skill 1 and Skill 2.
 // A multi-hit move's `power` is the whole move's power, shared evenly by its hits (my call: the spec gives one tier per move).
 B3_CAST.rose={id:'rose',name:'Rose',vibes:['rose_sugar'],stat:{hp:1,atk:1,def:1,spd:1}};
 B3_VIBES.rose_sugar={id:'rose_sugar',owner:'rose',name:'Sugar Rush',sig:1,lean:'striker',
@@ -12,3 +12,9 @@ B3_SKILLS.lamb_tuck_ankle_tackle={id:'lamb_tuck_ankle_tackle',vibe:'rose_sugar',
 B3_SKILLS.the_floor_is_lava={id:'the_floor_is_lava',vibe:'rose_sugar',slot:'s1',name:'The Floor Is Lava!',pep:3,flavor:['clobber'],power:'standard',hits:3,
   target:'random_foes',tags:[],composure:0,effects:[{op:'damage',bonus:{if:'targetHas',ids:['toasty','dazzled'],add:.25}}],line:null,anim:{kind:'default',shape:'strike'},
   desc:'Three Clobber hops onto random monsters. Each hop hits 25% harder on a Toasty or Dazzled monster.'};
+// "Giddyup, Tata!" Launch: the spec's header says Sizzle and its text says "heavy Clobber + Sizzle friction", so it is a two-flavor
+// move, Sizzle first (it leaves Toasty), heavy in total. My calls: the shoulders Rose climbs are the next family member due on the
+// turn bar, and their +20% Attack lasts the common 2 turns.
+B3_SKILLS.giddyup_tata_launch={id:'giddyup_tata_launch',vibe:'rose_sugar',slot:'s2',name:'"Giddyup, Tata!" Launch',pep:4,flavor:['sizzle','clobber'],power:'heavy',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'status',id:'giddyup',to:'nextAlly'},{op:'damage'}],line:null,anim:{kind:'default',shape:'strike'},
+  desc:'Rose climbs the next family member in line: they get 20% more Attack for 2 turns. Then she cannonballs one monster for a heavy Sizzle and Clobber hit.'};

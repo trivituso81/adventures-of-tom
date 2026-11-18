@@ -6,7 +6,10 @@
 // The battle screen's layout is shared with battle 2: Battle 3 has its own boxes (#b3-bar, #b3-ui in index.html) that carry
 // the same layout classes (.b2-ribbon, .b2-ui, .b2-party, .b2-cmd...), so portrait, landscape and tablet sizes come for free.
 //
-// Stage 1: BASIC and SKILLS work. RUCKUS (stage 6) and BAG are greyed out with the reason.
+// BASIC and SKILLS work. RUCKUS (stage 6) and BAG are greyed out with the reason.
+// Tapping a family member's card or a monster while the cross or the Skill list is up opens that unit's full list (B3.ui 'info'):
+// every status with how long it has left and what it does, shields, and what lies on its side's floor (spec 2.8, the screen rule).
+// Keys: I opens it on whoever is up, up and down step through everyone, Esc goes back.
 
 // ---------- Start and end ----------
 // cfg: party (ids), level or levels, formation (a B3_FORMATIONS id) or foes, bg (a backdrop key), seed, lab (true in the
@@ -14,7 +17,7 @@
 function b3Start(cfg) {
   B3.cfg=cfg; B3.result=null; B3.actor=null; B3.pending=null; B3.opts=[]; B3.ui='busy'; B3.sel=0; B3.view=null; B3.log=[]; B3.turnOf=null;
   const mods=Object.assign({foeHp:b7FoeHp(),taken:b7Taken(),foeSpeed:typeof b7FoeSpeed==='function'?b7FoeSpeed():1},cfg.mods||{});
-  B3.F=b3NewFight({party:cfg.party,level:cfg.level,levels:cfg.levels,formation:cfg.formation,foes:cfg.foes,seed:cfg.seed,hpPct:cfg.hpPct,mods});
+  B3.F=b3NewFight({party:cfg.party,level:cfg.level,levels:cfg.levels,formation:cfg.formation,foes:cfg.foes,seed:cfg.seed,hpPct:cfg.hpPct,rows:cfg.rows,mods});
   b3PlayReset(); b3ViewSync(); b3LayoutFoes();
   B3.view.bar=b3BarSnap(B3.F,null,0);
   clearBattleQueue(); clearInput();
@@ -84,7 +87,8 @@ function b3Open(mode,sel) {
   B3.ui=mode; battle.state='command'; B3.sel=sel||0;
   b3Render();
 }
-const b3SkillRows=u=>u.skills.map(id=>B3_SKILLS[id]);
+// The SKILLS list: the Vibe's Skills, then Pick-Me-Up while someone is knocked out.
+const b3SkillRows=u=>b3Skills(B3.F,u).slice(1);
 // The Base Recovery of what the cursor is on, for the ghost on the turn bar.
 function b3PreviewRecovery() {
   const u=B3.actor; if(!u||battle.state!=='command') return null;
@@ -125,14 +129,14 @@ function b3RenderParty() {
   const tgt=B3.ui==='target'&&B3.opts[B3.sel]?B3.opts[B3.sel].units:[];
   box.innerHTML=B3.F.party.map((u,i)=>{
     const v=B3.view.u[u.key],r=Math.max(0,v.hp)/v.maxHp;
-    const cls='b2-pc'+(u===B3.actor&&battle.state==='command'?' act':'')+(v.ko?' ko':'')+(tgt.includes(u)?' tgt':'');
+    const cls='b2-pc'+(u===B3.actor&&battle.state==='command'?' act':'')+(v.ko?' ko':'')+(tgt.includes(u)||(B3.ui==='info'&&B3.infoKey===u.key)?' tgt':'');
     const pips=Array.from({length:B3_RULES.pep.max},(_,k)=>'<i'+(k<v.pep?' class="on"':'')+'></i>').join('');
     const st=b3ViewIcons(u.key).map(id=>'<span class="b2-st" style="color:'+B3_STATUS[id].color+'" title="'+b2Esc(B3_STATUS[id].name)+'">'+B3_STATUS[id].short+'</span>').join('');
     const img=b2Portrait(u.id);
     return '<div class="'+cls+'" data-i="'+i+'"><span class="b2-pt">'+(img?'<img alt="" src="'+img+'">':'<span class="b2-ph">'+u.name.charAt(0)+'</span>')+'</span>'+
       '<div><div class="b2-nm">'+b2Esc(u.name)+'<em>Lv'+u.level+'</em></div>'+(st?'<div class="b3-chips">'+st+'</div>':'')+
       '<div class="b2-bar"><i class="'+(r<=.25?'crit':r<=.5?'low':'')+'" style="width:'+Math.round(r*100)+'%"></i></div>'+
-      '<div class="b2-sub"><span>'+(v.ko?'KNOCKED OUT':'HP '+Math.max(0,v.hp)+'/'+v.maxHp)+'</span><span class="b2-vp b3-pep" aria-label="Pep '+v.pep+' of 10" title="Pep '+v.pep+' of 10">'+pips+'</span></div></div></div>';
+      '<div class="b2-sub"><span>'+(v.ko?'KNOCKED OUT':'HP '+Math.max(0,v.hp)+'/'+v.maxHp+(v.sh?'<b class="b3-shn" title="Shield '+v.sh+'">+'+v.sh+'</b>':''))+'</span><span class="b2-vp b3-pep" aria-label="Pep '+v.pep+' of 10" title="Pep '+v.pep+' of 10">'+pips+'</span></div></div></div>';
   }).join('');
 }
 
@@ -151,20 +155,28 @@ function b3RenderCmd() {
     return;
   }
   const back='<button type="button" class="b2-btn b2-back" data-back="1"><span>Back</span><em>B / Esc</em></button>';
+  if(B3.ui==='info') {
+    const t=b3Unit(B3.F,B3.infoKey),v=B3.view.u[t.key],rows=b3Carried(B3.F,t);
+    box.innerHTML='<div class="b2-list b3-info"><div class="b3-inf-h"><span>'+b2Esc(t.name.toUpperCase())+'</span><em>'+(v.ko?'Knocked out':'HP '+Math.max(0,v.hp)+'/'+v.maxHp+(v.sh?' +'+v.sh+' shield':''))+'</em></div>'+
+      (rows.length?rows.map(r=>'<div class="b3-inf"><div class="b3-inf-t"><span class="b2-st" style="color:'+r.color+'">'+b2Esc(r.short)+'</span><b>'+b2Esc(r.name)+'</b>'+(r.left?'<i>'+b2Esc(r.left)+' left</i>':'')+'</div><p>'+b2Esc(r.desc)+'</p></div>').join('')
+        :'<div class="b3-inf"><p>Nothing on '+b2Esc(t.name)+' right now.</p></div>')+back+'</div>';
+    return;
+  }
   if(B3.ui==='skills') {
     const rows=b3SkillRows(u);
     box.innerHTML='<div class="b2-list">'+rows.map((S,i)=>{ const can=b3CanUse(B3.F,u,S),c=b3Cost(B3.F,u,S);
       return '<button type="button" class="b2-btn'+(i===B3.sel?' sel':'')+(can.ok?'':' no')+'" data-i="'+i+'"><div class="b2-top"><span class="b2-sn">'+b2Esc(S.name)+'</span><i class="b2-cost">'+c+' PEP</i></div><em class="b2-els">'+b3FlavorChips(S)+'</em></button>'; }).join('')+back+'</div>';
   } else if(B3.ui==='target') {
     box.innerHTML='<div class="b2-list">'+B3.opts.map((o,i)=>{ const t1=o.units.length===1?o.units[0]:null,v=t1?B3.view.u[t1.key]:null;
-      const sub=o.no?o.no:t1?'HP '+v.hp+'/'+v.maxHp+b3ViewIcons(t1.key).map(id=>' · '+B3_STATUS[id].name).join(''):o.units.length+' targets';
+      const sub=o.no?o.no:t1?(v.ko?'Knocked out':'HP '+v.hp+'/'+v.maxHp+b3ViewIcons(t1.key).map(id=>' · '+B3_STATUS[id].name).join('')):o.units.length+' targets';
       return '<button type="button" class="b2-btn'+(i===B3.sel?' sel':'')+(o.no?' no':'')+'" data-i="'+i+'"><span>'+b2Esc(o.label.toUpperCase())+'</span><em>'+b2Esc(sub)+'</em></button>'; }).join('')+back+'</div>';
   }
 }
 // What the cursor is on, in the message line.
 function b3Info() {
   const u=B3.actor; if(battle.state!=='command'||!u||B3.ui==='done') return;
-  if(B3.ui==='cross') b3Say(u.name+'’s turn. ▲ BASIC is free and gives 2 Pep. ▶ SKILLS cost Pep.');
+  if(B3.ui==='cross') b3Say(u.name+'’s turn. ▲ BASIC is free and gives 2 Pep. ▶ SKILLS cost Pep. Tap anyone to see what is on them.');
+  else if(B3.ui==='info') b3Say('What is on '+b3Unit(B3.F,B3.infoKey).name+'. Tap another family member or monster to see theirs.');
   else if(B3.ui==='skills') { const S=b3SkillRows(u)[B3.sel]; if(S) { const can=b3CanUse(B3.F,u,S); b3Say(can.ok?S.desc:can.why); } }
   else if(B3.ui==='target'&&B3.pending) { const o=B3.opts[B3.sel]; b3Say(B3.pending.name+': '+(o&&o.no?o.no:B3.pending.desc)); }
 }
@@ -173,6 +185,16 @@ function b3Render() {
   b3RenderBar(); b3RenderParty(); b3RenderCmd(); b3Info(); b3SyncTools();
   const sel=document.querySelector('#b3-cmd .b2-btn.sel'); if(sel&&sel.scrollIntoView) sel.scrollIntoView({block:'nearest'});
 }
+
+// ---------- The full list for one unit (statuses, shields, the floor) ----------
+function b3OpenInfo(key) {
+  if(!B3.active||battle.state!=='command'||!B3.actor||!['cross','skills','info'].includes(B3.ui)||!b3Unit(B3.F,key)) return false;
+  if(B3.ui!=='info') { B3.infoFrom=B3.ui; B3.infoSel=B3.sel; }
+  B3.infoKey=key; b3Sfx('move'); b3Open('info');
+  return true;
+}
+// Everyone the list can step through: the family, then the monsters still standing.
+const b3InfoKeys=()=>[...B3.F.party,...b3Live(B3.F,'foe')].map(u=>u.key);
 
 // ---------- Choosing ----------
 function b3Choose(S) {
@@ -199,10 +221,12 @@ function b3Pick(i) {
 }
 function b3Back() {
   if(battle.state!=='command'||B3.ui==='done') return;
-  if(B3.ui==='skills') { b3Sfx('move'); b3Open('cross'); }
+  if(B3.ui==='info') { b3Sfx('move'); b3Open(B3.infoFrom==='skills'?'skills':'cross',B3.infoSel||0); }
+  else if(B3.ui==='skills') { b3Sfx('move'); b3Open('cross'); }
   else if(B3.ui==='target') { b3Sfx('move'); const p=B3.prevUi==='skills'?'skills':'cross'; B3.pending=null; B3.opts=[]; b3Open(p,B3.prevSel||0); }
 }
 function b3Move(d) {
+  if(B3.ui==='info') { const K=b3InfoKeys(),i=Math.max(0,K.indexOf(B3.infoKey)); B3.infoKey=K[(i+(d==='up'||d==='left'?K.length-1:1))%K.length]; b3Sfx('move'); b3Render(); return; }
   const n=B3.ui==='skills'?b3SkillRows(B3.actor).length:B3.ui==='target'?B3.opts.length:0; if(!n) return;
   B3.sel=(B3.sel+(d==='up'||d==='left'?n-1:1))%n; b3Sfx('move'); b3Render();
 }
@@ -220,12 +244,13 @@ function b3Dir(d) {
 }
 function b3A() {
   if(!B3.active||battle.state!=='command') return;
-  if(B3.ui==='cross') b3Cross('up'); else b3Pick(B3.sel);
+  if(B3.ui==='cross') b3Cross('up'); else if(B3.ui==='info') b3Back(); else b3Pick(B3.sel);
 }
 function b3Key(e) {
   const c=e.code,dirs={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right',KeyW:'up',KeyS:'down',KeyA:'left',KeyD:'right'};
   if(c==='KeyL') { if(!e.repeat) toggleLayout(); return; }
   if(c==='KeyF') { if(!e.repeat) b3Speed(); return; }
+  if(c==='KeyI') { if(!e.repeat) { if(B3.ui==='info') b3Back(); else if(B3.actor) b3OpenInfo(B3.actor.key); } return; }
   if(dirs[c]) { e.preventDefault(); if(!e.repeat||B3.ui!=='cross') b3Dir(dirs[c]); }
   else if((c==='Enter'||c==='Space')&&!e.repeat) { e.preventDefault(); b3A(); }
   else if((c==='Escape'||c==='Backspace'||c==='KeyX')&&!e.repeat) { e.preventDefault(); b3Back(); }
@@ -285,23 +310,26 @@ function b3Exit() { if(!B3.active) return; b3Sfx('select'); b3End('run'); }
       if(B3.ptr&&B3.ptr!=='mouse'&&B3.ui==='skills'&&i!==B3.sel) { b3Sfx('move'); b3Hover(i); return; }
       b3Pick(i); return;
     }
-    // Tap a party card to aim at that family member.
+    // Tap a party card to aim at that family member; with no target to pick, the tap opens their full list.
     const pc=e.target.closest('.b2-pc');
     if(pc&&B3.ui==='target') { const u=B3.F.party[Number(pc.dataset.i)],k=B3.opts.findIndex(o=>o.units.length===1&&o.units[0]===u); if(k>=0) b3Pick(k); }
+    else if(pc) { const u=B3.F.party[Number(pc.dataset.i)]; if(u) b3OpenInfo(u.key); }
   });
   ui.addEventListener('pointerover',e=>{
     if(!B3.active||battle.state!=='command'||e.pointerType!=='mouse') return;
     const b=e.target.closest('.b2-btn'); if(b&&b.dataset.i!=null&&Number(b.dataset.i)!==B3.sel) b3Hover(Number(b.dataset.i));
   });
-  // Tap an enemy on the picture to aim at it.
+  // Tap an enemy on the picture to aim at it; with no target to pick, the tap opens its full list.
   cv.addEventListener('click',e=>{
+    if(B3.active&&battle.state==='command'&&B3.ui!=='target'&&B3.ui!=='done') { const q=b2CanvasPt(e.clientX,e.clientY),f=q&&q.inside?b3FoeAt(q.x,q.y):null; if(f) b3OpenInfo(f.key); return; }
     const k=b3TargetAt(e.clientX,e.clientY); if(k<0) return;
     if(B3.opts[k].units.length>1&&k!==B3.sel) { b3Sfx('move'); b3Hover(k); return; }
     b3Pick(k);
   });
   cv.addEventListener('pointermove',e=>{
     if(!B3.active||e.pointerType!=='mouse') return;
-    const k=b3TargetAt(e.clientX,e.clientY); cv.style.cursor=k>=0?'pointer':'';
+    const k=b3TargetAt(e.clientX,e.clientY),q=B3.ui!=='target'&&battle.state==='command'?b2CanvasPt(e.clientX,e.clientY):null;
+    cv.style.cursor=k>=0||(q&&q.inside&&b3FoeAt(q.x,q.y))?'pointer':'';
     if(k>=0&&k!==B3.sel) b3Hover(k);
   });
 })();

@@ -19,7 +19,7 @@ function b3WaitFor(F,u,recovery) {
 }
 function b3SetWait(F,u,recovery) { if(!recovery) return; u.wait=b3WaitFor(F,u,recovery); u.pri=0; }   // Recovery 0: the act does not move the unit on the bar
 
-// A new round: "1/round" counts reset, pushes and pulls stop halving, round-length statuses count down.
+// A new round: "1/round" counts reset, pushes and pulls stop halving, round-length statuses count down, hazards dry.
 function b3RoundStart(F,beats) {
   F.round++;
   beats.push({t:'round',n:F.round});
@@ -27,6 +27,8 @@ function b3RoundStart(F,beats) {
     u.pushes=0; u.pulls=0; u.placed=false; u.granted=0; u.pepRound=0;
     for(const id of Object.keys(u.st)) { const s=u.st[id]; if(s.unit==='round'&&--s.n<=0) { b3EndStatus(F,u,id,'time'); beats.push({t:'statusEnd',tgt:u.key,id}); } }
   }
+  // Hazards dry up after their rounds.
+  for(const hz of F.hazards.slice()) if(--hz.rounds<=0) { F.hazards.splice(F.hazards.indexOf(hz),1); beats.push({t:'hazardEnd',id:hz.id,side:hz.side}); }
   b3Fire(F,'roundStart',{},beats);
 }
 // Move the clock to the next turn and say whose it is. Round dividers crossed on the way are started first.

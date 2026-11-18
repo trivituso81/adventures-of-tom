@@ -55,7 +55,7 @@ function play(cfg,log) {
 }
 function cfgFor(id) {
   const L=G('B3_LAB').find(x=>x.id===id);
-  const cfg=L?{party:L.party.slice(),level:L.level,formation:L.formation}:{party:(flag('party')||'tom,grace,rose,deedee').split(','),level:Number(flag('level')||2),formation:id};
+  const cfg=L?{party:L.party.slice(),level:L.level,formation:L.formation,rows:L.rows}:{party:(flag('party')||'tom,grace,rose,deedee').split(','),level:Number(flag('level')||2),formation:id};
   if(flag('hp')) cfg.hpPct=Number(flag('hp'));
   if(flag('foehp')) cfg.mods={foeHp:Number(flag('foehp'))};
   return cfg;
@@ -74,7 +74,7 @@ function check() {
   SK.t_two={id:'t_two',vibe:'tom_flier',slot:'s1',name:'Test two',pep:0,flavor:['drench','clobber'],power:'standard',hits:1,target:'foe',tags:[],composure:0,effects:[{op:'damage'}]};
   SK.t_all={id:'t_all',vibe:'tom_flier',slot:'s1',name:'Test all',pep:0,flavor:['racket'],power:'standard',hits:1,target:'all_foes',tags:[],composure:0,effects:[{op:'damage'}]};
   SK.t_multi={id:'t_multi',vibe:'tom_flier',slot:'s1',name:'Test multi',pep:0,flavor:['clobber'],power:'standard',hits:3,target:'foe',tags:[],composure:0,effects:[{op:'damage'}]};
-  SK.t_unbuilt={id:'t_unbuilt',vibe:'tom_flier',slot:'s1',name:'Test unbuilt',pep:0,flavor:['support'],power:0,hits:0,target:'self',tags:[],composure:0,effects:[{op:'shield'}]};
+  SK.t_unbuilt={id:'t_unbuilt',vibe:'tom_flier',slot:'s1',name:'Test unbuilt',pep:0,flavor:['support'],power:0,hits:0,target:'self',tags:[],composure:0,effects:[{op:'summon'}]};
   ST.t_out_a={id:'t_out_a',name:'A',kind:'buff',group:null,dur:{n:9,unit:'turn'},mods:[{stat:'out',kind:'a',v:.8}],flags:[],weight:1};
   ST.t_out_b={id:'t_out_b',name:'B',kind:'buff',group:null,dur:{n:9,unit:'turn'},mods:[{stat:'out',kind:'b',v:.8}],flags:[],weight:1};
   ST.t_red_a={id:'t_red_a',name:'RA',kind:'buff',group:null,dur:{n:9,unit:'turn'},mods:[{stat:'reduce',kind:'a',v:.5}],flags:[],weight:1};
@@ -202,11 +202,13 @@ function check() {
     const u=N.unit.side==='party'?N.unit:null; if(u) { const a=G('b3Forecast')(F,9,{actor:u,recovery:80,ghost:true}),b=G('b3Forecast')(F,9,{actor:u,recovery:120,ghost:true});
       ok(a.filter(e=>e.ghost).length===1&&a.findIndex(e=>e.ghost)<=b.findIndex(e=>e.ghost),'ghost moves later for a slower move'); ok(a.some(e=>e.div),'the forecast marks a round divider'); } });
   // 25. An op that is not built says so
-  { const {F,u}=tom0(); let msg=''; try { act(F,u,'t_unbuilt',u.key); } catch(e) { msg=e.message; } ok(/not built yet: shield/.test(msg),'unbuilt op error: '+msg); }
+  { const {F,u}=tom0(); let msg=''; try { act(F,u,'t_unbuilt',u.key); } catch(e) { msg=e.message; } ok(/not built yet: summon/.test(msg),'unbuilt op error: '+msg); }
   // 26. Win and lose
   { const w=play({party:base.party,level:2,formation:'mudling',seed:1}); ok(w.result==='win','new1 can be won'); const l=play({party:base.party,level:2,formation:'mudling',seed:1,hpPct:.02,mods:{foeHp:20}}); ok(l.result==='lose'&&l.kos===4,'a party at 2% HP against 20x monsters loses: '+l.result); }
   // 27. Same seed, same fight
   { const a=play({party:base.party,level:2,formation:'skeeter',seed:77}),b=play({party:base.party,level:2,formation:'skeeter',seed:77}); ok(a.order.join()===b.order.join()&&a.rounds===b.rounds,'a seed replays exactly'); }
+  // Stage 2's groups (28 on) live in their own file.
+  require('./b3-check-s2.js')({G,ok,near,play,noCrit});
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);
 }
