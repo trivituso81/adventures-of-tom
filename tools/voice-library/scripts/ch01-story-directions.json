@@ -82,74 +82,80 @@
    "speaker": "Amy",
    "text": "I carried both of them up that street with the groceries. Go see Mom. I'm coming over after my run.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[heavy Long Island accent, comparing, smirking, quick] I carried BOTH of them up that street [heavy Long Island accent, emphasized] with the groceries! [heavy Long Island accent, busy] Go see Mom, [heavy Long Island accent, informing] I'm coming over after my run.",
-   "takeId": "tmwmh4h3k1u63"
+   "script": "[heavy Long Island accent, comparing, smirking, quick] I carried BOTH of them up that street [heavy Long Island accent, emphasized] WITH the groceries! [heavy Long Island accent, busy] Go see Mom, [heavy Long Island accent, informing] I'm coming over after my run.",
+   "takeId": "tmwmnou6zws69"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Your mother says I'm slow.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[under his breath, annoyed] Your mother says I'm slow.",
-   "takeId": "tmwmhc8fuse8j"
+   "script": "[under his breath] Your mother says I'm slow!",
+   "takeId": "tmwmnmgc8baom"
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "You are slow. I've been on number four since the mailbox.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[quick, flat] You [emphasized]ARE slow. [deadpan] I've been on number four since the mailbox!",
-   "takeId": "tmwmhbcuthu8d"
+   "script": "[quick, flat] You [emphasized]ARE slow. [flat, deadpan] I've been on number four since the mailbox!",
+   "takeId": "tmwmnpl7tz6oh"
   },
   {
    "voice": "ellie",
    "speaker": "Aunt Ellie",
    "text": "Tom. They gave you a seat that turns into a bed, and you still got off that plane wrinkled.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[heavy Long Island accent, cool, elegant] Tom. [heavy Long Island accent, measured, faintly disappointed] They gave you a seat that turns into a BED, [heavy Long Island accent, punchline, level] and you still got off that plane wrinkled.",
-   "takeId": "tmwmeusf7rlak"
+   "script": "[heavy Long Island accent, greeting] Tom. [heavy Long Island accent, skeptical, quick] They gave you a seat that turns into a BED, [heavy Long Island accent, punchline, level] and you still got off that plane wrinkled.",
+   "takeId": "tmwmol3pl7h1o"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Hi, Aunt Ellie. It's a travel wrinkle. It's supposed to fall out by dinner.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[warm, a little defensive] Hi, Aunt Ellie. [earnest, explaining] It's a TRAVEL wrinkle. It's supposed to fall out by dinner."
+   "script": "[defensive] Hi, Aunt Ellie. [sheepish] It's a [emphasized] TRAVEL wrinkle. [informing, flat] It's supposed to fall out by dinner.",
+   "takeId": "tmwmonkn71bdr"
   },
   {
    "voice": "ellie",
    "speaker": "Aunt Ellie",
    "text": "Then I'll look at you again at dinner. Come in. Rose, darling, what is that on your hands?",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[dry, unhurried] Then I'll look at you again at dinner. [gracious] Come in. [crisp, kind] Rose, darling, what is that on your HANDS?"
+   "script": "[heavy Long Island accent, dry] Then I'll look at you again at dinner. [heavy Long Island accent, firm] Come in. [heavy Long Island accent, crisp, kind] Rose, darling, what is that on your HANDS?",
+   "takeId": "tmwmoofugpin2"
   },
   {
    "voice": "rose",
    "speaker": "Rose",
    "text": "Cinnamon! From Deedee's muffin!",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[proud, loud] Cinnamon! From Deedee's MUFFIN!"
+   "script": "[announcing] Cinnamon! [educating] From Deedee's MUFFIN!",
+   "takeId": "tmwmop4vnaj07"
   },
   {
    "voice": "ellie",
    "speaker": "Aunt Ellie",
    "text": "Then you'll stay up there, please. Your uncle wipes clean. My chairs don't.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[calm, certain] Then you'll stay up there, please. [punchline, cool] Your uncle wipes clean. My CHAIRS don't."
+   "script": "[heavy Long Island accent, calm, certain] Then you'll stay up [heavy Long Island accent, emphasized] there, please. [heavy Long Island accent, conditional] Your uncle wipes clean. [heavy Long Island accent, flat] My CHAIRS don't.",
+   "takeId": "tmwmoukbu43gb"
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "Aunt Ellie, I'm reading Tata everything he missed. You're number four.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[bossy, reporting] Aunt Ellie, I'm reading Tata everything he missed. [important] You're number FOUR."
+   "script": "[bossy, stating plainly] Aunt Ellie, I'm reading Tata everything he missed. [informing] You're number FOUR.",
+   "takeId": "tmwmovged91tq"
   },
   {
    "voice": "ellie",
    "speaker": "Aunt Ellie",
    "text": "Am I? What did I do?",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[one raised eyebrow] Am I? [mild interest] What did I do?"
+   "script": "[heavy Long Island accent, one raised eyebrow] Am I? [heavy Long Island accent, very interested] What did I do?",
+   "takeId": "tmwmowp5i7lyc"
   },
   {
    "voice": "grace",
@@ -163,21 +169,24 @@
    "speaker": "Aunt Ellie",
    "text": "I did. And what's number three?",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[level] I did. [careful] And what's number THREE?"
+   "script": "[heavy Long Island accent, level] I did. [heavy Long Island accent, not amused] And what's number THREE?",
+   "takeId": "tmwmoyljxlh0j"
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "Rose licked a muffin.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[flat] Rose licked a muffin."
+   "script": "[dry, flat, quick] Rose licked a muffin.",
+   "takeId": "tmwmoz238n7op"
   },
   {
    "voice": "ellie",
    "speaker": "Aunt Ellie",
    "text": "Then the curtains are three, Grace. Fix your list. I'm not coming in behind a licked muffin.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[crisp, final] Then the curtains are three, Grace. Fix your list. [punchline, composed] I'm not coming in behind a LICKED muffin."
+   "script": "[heavy Long Island accent, crisp, final] Then the curtains are three, Grace. Fix your list. [heavy Long Island accent, punchline, composed] I'm not coming in behind a LICKED muffin.",
+   "takeId": "tmwmojzdiafi1"
   },
   {
    "voice": "rose",
@@ -189,9 +198,10 @@
   {
    "voice": "ellie",
    "speaker": "Aunt Ellie",
-   "text": "Fine. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind.",
+   "text": "Sure. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[clipped, reluctant] Fine. [plain, quick] The street was quieter without him, and I didn't CARE for it. [brisk, businesslike] Now go and see your mother, Tom, before I change my mind."
+   "script": "[heavy Long Island accent, clipped, reluctant] Sure. [heavy Long Island accent, plain, quick] The street was quieter without him, and I didn't CARE for it. [heavy Long Island accent, brisk, businesslike] Now go and see your mother, Tom, before I change my mind.",
+   "takeId": "tmwmozumkjf53"
   },
   {
    "voice": "deedee",

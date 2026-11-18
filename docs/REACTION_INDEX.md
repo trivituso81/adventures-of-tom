@@ -111,7 +111,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Deedee | Up, up. Everybody up. Deedee kisses it better. | Tom loving, Grace loving, Rose loving |
+| Deedee | Up, up. Everybody up. Deedee will make it better. | Tom loving, Grace loving, Rose loving |
 | Deedee | There. Good as new. Try not to do that again. | Tom happy, Grace happy, Rose happy |
 
 ## scene: ch1Mudling (chapter 1)
@@ -155,7 +155,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Deedee | That's my GOOD tin, you overgrown handbag! | Tom happy, Grace happy, Rose happy |
 | Rose | Tata, he looks like a turtle wearing a hat. | Tom happy, Grace happy, Deedee unimpressed |
 | Tom | Nobody touches Deedee’s crisp. Everybody ready? | Grace proud, Rose proud, Deedee proud |
-| Deedee | Up, up. Everybody up. Deedee kisses it better. | Tom loving, Grace loving, Rose loving |
+| Deedee | Up, up. Everybody up. Deedee will make it better. | Tom loving, Grace loving, Rose loving |
 | Deedee | Tom, you stand in front of whoever it stares at. Rosie, make it laugh. Then we try again. | Tom proud, Rose proud, Grace proud |
 
 ## scene: ch1AfterBoss (chapter 1)
@@ -1807,7 +1807,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | Line | Reactions |
 |---|---|---|
 | Speaker | DING. Welcome aboard Flight Zero, nonstop to Wherever. Please stow your bags, your seatbacks, and your questions. | Tom unimpressed |
-| Rose | BOO! We’re stowaways! Tata, what’s a stowaway? | Tom unimpressed, Grace happy |
+| Rose | BOO! We’re stowaways! Tata, what’s a stowaway anyways? | Tom unimpressed, Grace happy |
 | Tom | It’s a person who hides on a plane they weren’t invited to. | Rose surprised, Grace happy |
 | Tom | Which is illegal. And also, apparently, a family tradition. | Grace happy, Rose happy |
 | Grace | We weren’t hiding. We were pre-boarding. Rose got the good blanket. | Tom unimpressed, Rose happy |
@@ -1816,7 +1816,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Tom | Nobody is subscribing to a stowaway. | Grace unimpressed, Rose happy |
 | Amy | STOP THE PLANE. I have a ticket. I don’t have a ticket. I have my running shoes. | Tom surprised, Grace scared, Rose scared |
 | Amy | My daughters ran out of the house in their socks, Tom. I’m their ride home. And I’m faster than you. | Tom unimpressed, Grace scared, Rose happy |
-| Tom | Nobody here is racing. | Amy unimpressed, Grace happy, Rose happy |
+| Tom | Nobody here is racing, Amy. | Amy unimpressed, Grace happy, Rose happy |
 | Amy | That’s what the person who loses says. | Tom unimpressed, Grace happy, Rose happy |
 | Speaker | Ladies and gentlemen, we are experiencing a little weather. It is not the kind with rain. Please look out the window. | Tom unimpressed, Amy surprised, Grace surprised, Rose surprised |
 | Rose | The sky has a hole in it. The hole is pink. Tata, can I touch it? | Tom scared, Amy scared, Grace surprised |
@@ -1853,7 +1853,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Standby Sprite | Hold it. Hold it right there. Name? | Tom unimpressed, Amy angry, Grace scared, Rose scared |
 | Standby Sprite | Not on the list. Nobody is ever on the list. You’re standby. Congratulations. You’re number eighteen. | Tom unimpressed, Amy angry, Grace unimpressed, Rose surprised |
-| Tom | Who is number seventeen? | Amy happy, Grace happy, Rose happy |
+| Tom | Then who’s seventeen? | Amy happy, Grace happy, Rose happy |
 | Standby Sprite | Me. I’ve been seventeen since 1998. If you pass me, I move up. Nobody passes me. | Tom sad, Amy unimpressed, Grace sad, Rose sad |
 | Amy | I’ve never been on standby in my life. I’ve been on time, or I’ve been first. | Tom happy, Grace happy, Rose happy |
 | Grace | Rose, he has a paddle that says STANDBY and he thinks it’s a weapon. | Rose happy, Tom happy, Amy happy |
@@ -4056,15 +4056,15 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Kenji | Irasshaimase! Welcome! | Tom happy, TNB happy, Nara happy |
 | Kenji | Tom-san, your Japanese is very good. | Tom proud, TNB happy, Nara happy |
-| Kenji | It's not. But you're trying very hard, and I respect that. | Tom happy, TNB happy, Nara happy |
+| Kenji | Actually, it's not. But you're trying very hard, and I respect that. | Tom happy, TNB happy, Nara happy |
 
 ## map: map juicebar, base (chapter 2-10)
 
 | Speaker | Line | Reactions |
 |---|---|---|
 | Sage | Welcome. Breathe in. Now order. | Tom unimpressed, TNB happy, Nara happy |
-| Sage | We opened in March. The pupuseria next door has been here since 1994. We're learning a lot. | Tom happy, TNB happy, Nara happy |
-| Sage | Today's special is celery. Doña Carmen says that's not a meal. She's right. | Tom unimpressed, TNB happy, Nara happy |
+| Sage | We opened in March. The pupuseria next door has been here since 1994. | Tom happy, TNB happy, Nara happy |
+| Sage | Today's special is celery. Doña Carmen says that's not a meal. | Tom unimpressed, TNB happy, Nara happy |
 
 ## map: map wardrobe, base (chapter 2-10)
 

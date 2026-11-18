@@ -20,12 +20,12 @@ scene	1	data/scenes.js	ch1Theft	Deedee	My favorite son!	tom	loving	favorite son
 scene	1	data/scenes.js	ch1Theft	Tom	That was UNCALLED for!	deedee	angry	UNCALLED
 scene	1	data/scenes.js	ch1Theft	Tom	That was UNCALLED for!	grace	angry	UNCALLED
 scene	1	data/scenes.js	ch1Theft	Tom	That was UNCALLED for!	rose	scared	
-scene	1	data/scenes.js	CH1_AFTER	Deedee	Up, up. Everybody up. Deedee kisses it better.	tom	loving	kisses it better
-scene	1	data/scenes.js	CH1_AFTER	Deedee	Up, up. Everybody up. Deedee kisses it better.	grace	loving	kisses it better
-scene	1	data/scenes.js	CH1_AFTER	Deedee	Up, up. Everybody up. Deedee kisses it better.	rose	loving	kisses it better
-scene	1	data/scenes.js	ch1Pond	Deedee	Up, up. Everybody up. Deedee kisses it better.	tom	loving	kisses it better
-scene	1	data/scenes.js	ch1Pond	Deedee	Up, up. Everybody up. Deedee kisses it better.	grace	loving	kisses it better
-scene	1	data/scenes.js	ch1Pond	Deedee	Up, up. Everybody up. Deedee kisses it better.	rose	loving	kisses it better
+scene	1	data/scenes.js	CH1_AFTER	Deedee	Up, up. Everybody up. Deedee will make it better.	tom	loving	make it better
+scene	1	data/scenes.js	CH1_AFTER	Deedee	Up, up. Everybody up. Deedee will make it better.	grace	loving	make it better
+scene	1	data/scenes.js	CH1_AFTER	Deedee	Up, up. Everybody up. Deedee will make it better.	rose	loving	make it better
+scene	1	data/scenes.js	ch1Pond	Deedee	Up, up. Everybody up. Deedee will make it better.	tom	loving	make it better
+scene	1	data/scenes.js	ch1Pond	Deedee	Up, up. Everybody up. Deedee will make it better.	grace	loving	make it better
+scene	1	data/scenes.js	ch1Pond	Deedee	Up, up. Everybody up. Deedee will make it better.	rose	loving	make it better
 scene	1	data/scenes.js	CH1_AFTER	Deedee	There. Good as new. Try not to do that again.	tom	happy	Good as new
 scene	1	data/scenes.js	CH1_AFTER	Deedee	There. Good as new. Try not to do that again.	grace	happy	Good as new
 scene	1	data/scenes.js	CH1_AFTER	Deedee	There. Good as new. Try not to do that again.	rose	happy	Good as new
@@ -2844,8 +2844,8 @@ scene	11	data/scenes-p2.js	part2Open	Boppy	Bring me back a pretzel. A real one. 
 scene	11	data/scenes-p2.js	part2Open	Deedee	To the moon and back, Tom. Both ways.	tom	loving
 scene	11	data/scenes-p2.js	part2Open	Deedee	To the moon and back, Tom. Both ways.	boppy	loving
 scene	11	data/scenes-p2.js	ch11Cabin	Speaker	DING. Welcome aboard Flight Zero, nonstop to Wherever. Please stow your bags, your seatbacks, and your questions.	tom	unimpressed
-scene	11	data/scenes-p2.js	ch11Cabin	Rose	BOO! We’re stowaways! Tata, what’s a stowaway?	tom	unimpressed
-scene	11	data/scenes-p2.js	ch11Cabin	Rose	BOO! We’re stowaways! Tata, what’s a stowaway?	grace	happy
+scene	11	data/scenes-p2.js	ch11Cabin	Rose	BOO! We’re stowaways! Tata, what’s a stowaway anyways?	tom	unimpressed
+scene	11	data/scenes-p2.js	ch11Cabin	Rose	BOO! We’re stowaways! Tata, what’s a stowaway anyways?	grace	happy
 scene	11	data/scenes-p2.js	ch11Cabin	Tom	It’s a person who hides on a plane they weren’t invited to.	rose	surprised
 scene	11	data/scenes-p2.js	ch11Cabin	Tom	It’s a person who hides on a plane they weren’t invited to.	grace	happy
 scene	11	data/scenes-p2.js	ch11Cabin	Tom	Which is illegal. And also, apparently, a family tradition.	grace	happy
@@ -2864,9 +2864,9 @@ scene	11	data/scenes-p2.js	ch11Cabin	Amy	STOP THE PLANE! I don’t have a ticket
 scene	11	data/scenes-p2.js	ch11Cabin	Amy	They ran out of the house in their socks, Tom. Wherever this plane is going, I’m going too. I’m their ride home. And I’m faster than you.	tom	unimpressed
 scene	11	data/scenes-p2.js	ch11Cabin	Amy	They ran out of the house in their socks, Tom. Wherever this plane is going, I’m going too. I’m their ride home. And I’m faster than you.	grace	scared
 scene	11	data/scenes-p2.js	ch11Cabin	Amy	They ran out of the house in their socks, Tom. Wherever this plane is going, I’m going too. I’m their ride home. And I’m faster than you.	rose	happy
-scene	11	data/scenes-p2.js	ch11Cabin	Tom	Nobody here is racing.	amy	unimpressed
-scene	11	data/scenes-p2.js	ch11Cabin	Tom	Nobody here is racing.	grace	happy
-scene	11	data/scenes-p2.js	ch11Cabin	Tom	Nobody here is racing.	rose	happy
+scene	11	data/scenes-p2.js	ch11Cabin	Tom	Nobody here is racing, Amy.	amy	unimpressed
+scene	11	data/scenes-p2.js	ch11Cabin	Tom	Nobody here is racing, Amy.	grace	happy
+scene	11	data/scenes-p2.js	ch11Cabin	Tom	Nobody here is racing, Amy.	rose	happy
 scene	11	data/scenes-p2.js	ch11Cabin	Amy	That’s what the person who loses says.	tom	unimpressed
 scene	11	data/scenes-p2.js	ch11Cabin	Amy	That’s what the person who loses says.	grace	happy
 scene	11	data/scenes-p2.js	ch11Cabin	Amy	That’s what the person who loses says.	rose	happy
@@ -2940,9 +2940,9 @@ scene	11	data/scenes-p2.js	ch11Stby	Standby Sprite	You’re not on the list. Nob
 scene	11	data/scenes-p2.js	ch11Stby	Standby Sprite	You’re not on the list. Nobody is ever on the list. That makes you standby passengers. Congratulations, you’re number eighteen.	amy	angry
 scene	11	data/scenes-p2.js	ch11Stby	Standby Sprite	You’re not on the list. Nobody is ever on the list. That makes you standby passengers. Congratulations, you’re number eighteen.	grace	unimpressed
 scene	11	data/scenes-p2.js	ch11Stby	Standby Sprite	You’re not on the list. Nobody is ever on the list. That makes you standby passengers. Congratulations, you’re number eighteen.	rose	surprised
-scene	11	data/scenes-p2.js	ch11Stby	Tom	Who is number seventeen?	amy	happy
-scene	11	data/scenes-p2.js	ch11Stby	Tom	Who is number seventeen?	grace	happy
-scene	11	data/scenes-p2.js	ch11Stby	Tom	Who is number seventeen?	rose	happy
+scene	11	data/scenes-p2.js	ch11Stby	Tom	Then who’s seventeen?	amy	happy
+scene	11	data/scenes-p2.js	ch11Stby	Tom	Then who’s seventeen?	grace	happy
+scene	11	data/scenes-p2.js	ch11Stby	Tom	Then who’s seventeen?	rose	happy
 scene	11	data/scenes-p2.js	ch11Stby	Standby Sprite	Me. I’ve been number seventeen since 1998, waiting for a seat. Nobody gets through this checkpoint ahead of me.	tom	sad
 scene	11	data/scenes-p2.js	ch11Stby	Standby Sprite	Me. I’ve been number seventeen since 1998, waiting for a seat. Nobody gets through this checkpoint ahead of me.	amy	unimpressed
 scene	11	data/scenes-p2.js	ch11Stby	Standby Sprite	Me. I’ve been number seventeen since 1998, waiting for a seat. Nobody gets through this checkpoint ahead of me.	grace	sad
@@ -8560,18 +8560,18 @@ map	2-10	data/maps-la.js	map ramen, base	Kenji	Irasshaimase! Welcome!	nara	happy
 map	2-10	data/maps-la.js	map ramen, base	Kenji	Tom-san, your Japanese is very good.	tom	proud
 map	2-10	data/maps-la.js	map ramen, base	Kenji	Tom-san, your Japanese is very good.	tnb	happy
 map	2-10	data/maps-la.js	map ramen, base	Kenji	Tom-san, your Japanese is very good.	nara	happy
-map	2-10	data/maps-la.js	map ramen, base	Kenji	It's not. But you're trying very hard, and I respect that.	tom	happy
-map	2-10	data/maps-la.js	map ramen, base	Kenji	It's not. But you're trying very hard, and I respect that.	tnb	happy
-map	2-10	data/maps-la.js	map ramen, base	Kenji	It's not. But you're trying very hard, and I respect that.	nara	happy
+map	2-10	data/maps-la.js	map ramen, base	Kenji	Actually, it's not. But you're trying very hard, and I respect that.	tom	happy
+map	2-10	data/maps-la.js	map ramen, base	Kenji	Actually, it's not. But you're trying very hard, and I respect that.	tnb	happy
+map	2-10	data/maps-la.js	map ramen, base	Kenji	Actually, it's not. But you're trying very hard, and I respect that.	nara	happy
 map	2-10	data/maps-la.js	map juicebar, base	Sage	Welcome. Breathe in. Now order.	tom	unimpressed
 map	2-10	data/maps-la.js	map juicebar, base	Sage	Welcome. Breathe in. Now order.	tnb	happy
 map	2-10	data/maps-la.js	map juicebar, base	Sage	Welcome. Breathe in. Now order.	nara	happy
-map	2-10	data/maps-la.js	map juicebar, base	Sage	We opened in March. The pupuseria next door has been here since 1994. We're learning a lot.	tom	happy
-map	2-10	data/maps-la.js	map juicebar, base	Sage	We opened in March. The pupuseria next door has been here since 1994. We're learning a lot.	tnb	happy
-map	2-10	data/maps-la.js	map juicebar, base	Sage	We opened in March. The pupuseria next door has been here since 1994. We're learning a lot.	nara	happy
-map	2-10	data/maps-la.js	map juicebar, base	Sage	Today's special is celery. Doña Carmen says that's not a meal. She's right.	tom	unimpressed
-map	2-10	data/maps-la.js	map juicebar, base	Sage	Today's special is celery. Doña Carmen says that's not a meal. She's right.	tnb	happy
-map	2-10	data/maps-la.js	map juicebar, base	Sage	Today's special is celery. Doña Carmen says that's not a meal. She's right.	nara	happy
+map	2-10	data/maps-la.js	map juicebar, base	Sage	We opened in March. The pupuseria next door has been here since 1994.	tom	happy
+map	2-10	data/maps-la.js	map juicebar, base	Sage	We opened in March. The pupuseria next door has been here since 1994.	tnb	happy
+map	2-10	data/maps-la.js	map juicebar, base	Sage	We opened in March. The pupuseria next door has been here since 1994.	nara	happy
+map	2-10	data/maps-la.js	map juicebar, base	Sage	Today's special is celery. Doña Carmen says that's not a meal.	tom	unimpressed
+map	2-10	data/maps-la.js	map juicebar, base	Sage	Today's special is celery. Doña Carmen says that's not a meal.	tnb	happy
+map	2-10	data/maps-la.js	map juicebar, base	Sage	Today's special is celery. Doña Carmen says that's not a meal.	nara	happy
 map	2-10	data/maps-la.js	map wardrobe, base	Marguerite	Backlot Wardrobe. If it was worn on screen, it lived here first.	tom	happy
 map	2-10	data/maps-la.js	map wardrobe, base	Marguerite	Backlot Wardrobe. If it was worn on screen, it lived here first.	tnb	proud
 map	2-10	data/maps-la.js	map wardrobe, base	Marguerite	Backlot Wardrobe. If it was worn on screen, it lived here first.	nara	happy

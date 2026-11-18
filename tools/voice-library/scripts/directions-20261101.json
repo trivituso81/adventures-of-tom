@@ -249,9 +249,10 @@
 {
 "voice": "deedee",
 "speaker": "Deedee",
-"text": "Up, up. Everybody up. Deedee kisses it better.",
+"text": "Up, up. Everybody up. Deedee will make it better.",
 "ctx": "",
-"script": "[soothing, tender] Up, up. Everybody up. [warm, cooing] Deedee kisses it better."
+"script": "[soothing, tender] Up, up. Everybody up. [warm, cooing] Deedee will make it better.",
+"takeId": "tmw4h985k1bpa"
 },
 {
 "voice": "deedee",
@@ -7186,9 +7187,10 @@
 {
 "voice": "rose",
 "speaker": "Rose",
-"text": "BOO! We’re stowaways! Tata, what’s a stowaway?",
+"text": "BOO! We’re stowaways! Tata, what’s a stowaway anyways?",
 "ctx": "Chapter 11: ch11Cabin",
-"script": "[bursting, gleeful] BOO! We’re stowaways! [innocent, earnest] Tah Tah, what’s a stowaway?"
+"script": "[bursting, gleeful] BOO! We're stowaways! [questioning] Tah Tah... [confused] what's a stowaway anyways?",
+"takeId": "tmwe8rg9xdc6b"
 },
 {
 "voice": "tom",
@@ -7249,9 +7251,10 @@
 {
 "voice": "tom",
 "speaker": "Tom",
-"text": "Nobody here is racing.",
+"text": "Nobody here is racing, Amy.",
 "ctx": "Chapter 11: ch11Cabin",
-"script": "[dry, tired] Nobody here is racing."
+"script": "[joking] Nobody here is racing, Amy",
+"takeId": "tmwe8vjkqxjb9"
 },
 {
 "voice": "amy",
@@ -7417,9 +7420,10 @@
 {
 "voice": "tom",
 "speaker": "Tom",
-"text": "Who is number seventeen?",
+"text": "Then who’s seventeen?",
 "ctx": "Chapter 11: ch11Stby",
-"script": "[dry, curious] Who is number seventeen?"
+"script": "[curious] Then who's seventeen?",
+"takeId": "tmwe95cghgcdp"
 },
 {
 "voice": "?Standby Sprite",
@@ -18085,9 +18089,10 @@
 {
 "voice": "kenji",
 "speaker": "kenji",
-"text": "It's not. But you're trying very hard, and I respect that.",
+"text": "Actually, it's not. But you're trying very hard, and I respect that.",
 "ctx": "",
-"script": "[blunt, gentle] It's not. [warm, respectful] But you're trying VERY hard, and I respect that."
+"script": "[straightforward] Actually, [explaining, flat] It's not. [excusing, flat] But you're trying very hard, and I respect that.",
+"takeId": "tmw9k8bhgi5vf"
 },
 {
 "voice": "fern",
@@ -18099,16 +18104,18 @@
 {
 "voice": "fern",
 "speaker": "fern",
-"text": "We opened in March. The pupuseria next door has been here since 1994. We're learning a lot.",
+"text": "We opened in March. The pupuseria next door has been here since 1994.",
 "ctx": "",
-"script": "[serene, mild] We opened in March. The pupuseria next door has been here since 1994. [calm, soft] ...We're learning a LOT."
+"script": "[serene, mild] We opened in March. The pupuseria next door has been here since [contrasting] \"1994\".",
+"takeId": "tmw9k1frluog0"
 },
 {
 "voice": "fern",
 "speaker": "fern",
-"text": "Today's special is celery. Doña Carmen says that's not a meal. She's right.",
+"text": "Today's special is celery. Doña Carmen says that's not a meal.",
 "ctx": "",
-"script": "[calm, soothing] Today's special is celery. [serene, matter-of-fact] Doña Carmen says that's not a meal. ...She's right."
+"script": "[calm, soothing] Today's special is celery. [serene, amused] Doña Carmen says that's not a meal.",
+"takeId": "tmw9js7qpiofg"
 },
 {
 "voice": "penny",

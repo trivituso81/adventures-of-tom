@@ -59,7 +59,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Deedee | Angry | That's my GOOD tin! Grab your shoes. I'm coming with you. |
 | Boppy | Angry | I TOLD you something lives in that pond. Twenty years I've been saying it. Nobody listens to Boppy. |
 | Boppy | Unimpressed | I'd come, but the stomach. Bring me back that fish. |
-| Deedee | Loving | Up, up. Everybody up. Deedee kisses it better. |
+| Deedee | Loving | Up, up. Everybody up. Deedee will make it better. |
 | Deedee | Loving | There. Good as new. Try not to do that again. |
 | Deedee | Surprised | Crumbs! Rhubarb crumbs. That little thief went right through here. |
 | Rose | Scared | Tata. The mud is MOVING. |
@@ -74,7 +74,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Deedee | Angry | That's my GOOD tin, you overgrown handbag! |
 | Rose | Happy | Tata, he looks like a turtle wearing a hat. |
 | Tom | Proud | Nobody touches Deedee’s crisp. Everybody ready? |
-| Deedee | Loving | Up, up. Everybody up. Deedee kisses it better. |
+| Deedee | Loving | Up, up. Everybody up. Deedee will make it better. |
 | Deedee | Happy | My tin! And look. Half the crisp is still in it. |
 | Deedee | Happy | Then we split this half. Everybody home. Wait until Boppy hears about this. |
 | Boppy | Proud | You found the Big One? I TOLD everybody. Twenty years. |
@@ -826,7 +826,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Tom | Surprised | A pod seat. A real one. Somebody upgraded me and nobody told me why. |
 | Tom | Surprised | And something in seat 5B is giggling. |
 | Tom | Unimpressed | Whoever is under the blanket, you’re breathing very loudly. |
-| Rose | Happy | BOO! We’re stowaways! Tata, what’s a stowaway? |
+| Rose | Happy | BOO! We’re stowaways! Tata, what’s a stowaway anyways? |
 | Tom | Unimpressed | Which is illegal. And also, apparently, a family tradition. |
 | Grace | Proud | We weren’t hiding. We were pre-boarding. Rose got the good blanket. |
 | Rose | Happy | It’s the one with the tiny planes on it. |
@@ -834,7 +834,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Tom | Unimpressed | Nobody is subscribing to a stowaway. |
 | Amy | Scared | STOP THE PLANE. I have a ticket. I don’t have a ticket. I have my running shoes. |
 | Amy | Proud | My daughters ran out of the house in their socks, Tom. I’m their ride home. And I’m faster than you. |
-| Tom | Unimpressed | Nobody here is racing. |
+| Tom | Unimpressed | Nobody here is racing, Amy. |
 | Amy | Proud | That’s what the person who loses says. |
 | Rose | Surprised | The sky has a hole in it. The hole is pink. Tata, can I touch it? |
 | Tom | Unimpressed | No touching, please. |
@@ -849,7 +849,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Tom | Unimpressed | Careful. A town paused is still a town. Don’t lick the glass. |
 | Rose | Happy | I wasn’t going to. |
 | Rose | Happy | I was going to look at it with my face. |
-| Tom | Surprised | Who is number seventeen? |
+| Tom | Surprised | Then who’s seventeen? |
 | Amy | Proud | I’ve never been on standby in my life. I’ve been on time, or I’ve been first. |
 | Grace | Unimpressed | Rose, he has a paddle that says STANDBY and he thinks it’s a weapon. |
 | Tom | Proud | Stay behind me. If he sends someone to the back of the line, we’ll get them right back. |

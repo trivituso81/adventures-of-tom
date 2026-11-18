@@ -9,7 +9,7 @@ const EMOTION_REACTIONS={
 "Deedee|My favorite son!|1": [["tom", "loving", 15]],
 "Deedee|There. Good as new. Try not to do that again.|1": [["grace", "happy", 18], ["rose", "happy", 18], ["tom", "happy", 18]],
 "Deedee|Tom, you stand in front of whoever it stares at. Cozy Rosie, make it laugh. Then we try again.|1": [["grace", "proud", 93], ["rose", "happy", 74], ["tom", "proud", 47]],
-"Deedee|Up, up. Everybody up. Deedee kisses it better.|1": [["grace", "loving", 45], ["rose", "loving", 45], ["tom", "loving", 45]],
+"Deedee|Up, up. Everybody up. Deedee will make it better.|1": [["grace", "loving", 48], ["rose", "loving", 48], ["tom", "loving", 48]],
 "Doña Carmen|And YOU. Who touched my griddle?|2": [["tnb", "surprised", 7], ["tom", "happy", 31]],
 "Doña Carmen|The pupusas are fine. Everything is fine. It's always this afternoon. Why did I ever flip them?|2": [["tnb", "scared", 94], ["tom", "sad", 68]],
 "Doña Carmen|They came out perfectly crispy. Don't ever do it again.|2": [["tnb", "happy", 54], ["tom", "proud", 30]],

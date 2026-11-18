@@ -675,15 +675,15 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 |---|---|---|---|
 | 2-10 | map ramen, base | Happy | Irasshaimase! Welcome! |
 | 2-10 | map ramen, base | Happy | Tom-san, your Japanese is very good. |
-| 2-10 | map ramen, base | Loving | It's not. But you're trying very hard, and I respect that. |
+| 2-10 | map ramen, base | Loving | Actually, it's not. But you're trying very hard, and I respect that. |
 
 ### Sage (3)
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
 | 2-10 | map juicebar, base | Happy | Welcome. Breathe in. Now order. |
-| 2-10 | map juicebar, base | Happy | We opened in March. The pupuseria next door has been here since 1994. We're learning a lot. |
-| 2-10 | map juicebar, base | Unimpressed | Today's special is celery. Doña Carmen says that's not a meal. She's right. |
+| 2-10 | map juicebar, base | Happy | We opened in March. The pupuseria next door has been here since 1994. |
+| 2-10 | map juicebar, base | Unimpressed | Today's special is celery. Doña Carmen says that's not a meal. |
 
 ### Marguerite (3)
 

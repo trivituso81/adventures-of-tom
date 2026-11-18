@@ -131,7 +131,7 @@ SCENES.ch1Ellie=[
   {talk:'Aunt Ellie',lines:["Then the curtains are three, Grace. Fix your list. I'm not coming in behind a licked muffin."]},
   {wait:.9},   // Grace sighs and erases
   {talk:'Rose',lines:["Aunt Ellie, did you miss Tata?"]},
-  {talk:'Aunt Ellie',lines:["Fine. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind."]},
+  {talk:'Aunt Ellie',lines:["Sure. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind."]},
   {sfx:'doorOut'}, {despawn:'Aunt Ellie'}
 ];
 
@@ -211,7 +211,7 @@ SCENES.ch1Theft=[
 
 // 4. The path into Grump Hollow: Rose asks the mud nicely. ONE fight, three Mudlings (the old three tutorial fights are gone; 'basics' teaches all of it).
 const CH1_AFTER=(lost,lines)=>[
-  {if:()=>lost(),then:[{heal:true},{talk:'Deedee',lines:['Up, up. Everybody up. Deedee kisses it better.','There. Good as new. Try not to do that again.']}],else:[]},
+  {if:()=>lost(),then:[{heal:true},{talk:'Deedee',lines:['Up, up. Everybody up. Deedee will make it better.','There. Good as new. Try not to do that again.']}],else:[]},
   ...lines
 ];
 SCENES.ch1Mudling=[
@@ -282,7 +282,7 @@ SCENES.ch1Pond=[
   {battle:'bigone',tut:'bigone'},
   {if:()=>flag('battle:bigone')!=='win',then:[
     {heal:true},
-    {talk:'Deedee',lines:['Up, up. Everybody up. Deedee kisses it better.','Tom, you stand in front of whoever it stares at. Cozy Rosie, make it laugh. Then we try again.']},
+    {talk:'Deedee',lines:['Up, up. Everybody up. Deedee will make it better.','Tom, you stand in front of whoever it stares at. Cozy Rosie, make it laugh. Then we try again.']},
     {toast:'Face The Big One and press A to try again. Deedee healed everyone.',time:5}],else:[]}
 ];
 // 6b. After the fight (won in the scene, or on a retry with A): the fish still wears the pan and sulks. BOO. It laughs, the pan comes off, the coin.

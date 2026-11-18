@@ -260,10 +260,10 @@ chapters	file	line	character	where	mood	text
 2-10	data/maps-la.js	887	Juniper	map coffee, base	happy	Your name is Tom? I wrote TAM. It's basically the same.
 2-10	data/maps-la.js	923	Kenji	map ramen, base	happy	Irasshaimase! Welcome!
 2-10	data/maps-la.js	924	Kenji	map ramen, base	happy	Tom-san, your Japanese is very good.
-2-10	data/maps-la.js	925	Kenji	map ramen, base	loving	It's not. But you're trying very hard, and I respect that.
+2-10	data/maps-la.js	925	Kenji	map ramen, base	loving	Actually, it's not. But you're trying very hard, and I respect that.
 2-10	data/maps-la.js	956	Sage	map juicebar, base	happy	Welcome. Breathe in. Now order.
-2-10	data/maps-la.js	957	Sage	map juicebar, base	happy	We opened in March. The pupuseria next door has been here since 1994. We're learning a lot.
-2-10	data/maps-la.js	958	Sage	map juicebar, base	unimpressed	Today's special is celery. Doña Carmen says that's not a meal. She's right.
+2-10	data/maps-la.js	957	Sage	map juicebar, base	happy	We opened in March. The pupuseria next door has been here since 1994.
+2-10	data/maps-la.js	958	Sage	map juicebar, base	unimpressed	Today's special is celery. Doña Carmen says that's not a meal.
 2-10	data/maps-la.js	1024	Marguerite	map wardrobe, base	proud	Backlot Wardrobe. If it was worn on screen, it lived here first.
 2-10	data/maps-la.js	1025	Marguerite	map wardrobe, base	surprised	You're Tom? TNB's Tom! He found a shoe for us once. A lead actor's shoe. Four minutes before the take.
 2-10	data/maps-la.js	1026	Marguerite	map wardrobe, base	loving	We still talk about the shoe. Tell him there's always a rack here with his name on it.

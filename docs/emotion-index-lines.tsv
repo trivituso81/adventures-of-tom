@@ -12,10 +12,10 @@ chapter	file	line	character	mood	text
 1	data/scenes.js	48	Rose	happy	Come on, Tata! Let's go!
 1	data/scenes.js	81	Deedee	loving	My favorite son!
 1	data/scenes.js	144	Tom	angry	That was UNCALLED for!
-1	data/scenes.js	155	Deedee	loving	Up, up. Everybody up. Deedee kisses it better.
+1	data/scenes.js	155	Deedee	loving	Up, up. Everybody up. Deedee will make it better.
 1	data/scenes.js	155	Deedee	loving	There. Good as new. Try not to do that again.
 1	data/scenes.js	296	Deedee	proud	Tom, you stand in front of whoever it stares at. Cozy Rosie, make it laugh. Then we try again.
-1	data/scenes.js	229	Deedee	loving	Up, up. Everybody up. Deedee kisses it better.
+1	data/scenes.js	229	Deedee	loving	Up, up. Everybody up. Deedee will make it better.
 1	data/scenes.js	88	Grace	proud	Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One again.
 1	data/scenes.js	89	Rose	happy	It's bigger than a BUS! It ate a boat!
 1	data/scenes.js	90	Grace	unimpressed	It did not eat a boat. Nobody's ever seen it but Boppy, and he's been saying it for twenty years.
@@ -41,7 +41,7 @@ chapter	file	line	character	mood	text
 1	data/scenes.js	96	Grace	none	Rose licked a muffin.
 1	data/scenes.js	131	Aunt Ellie	unimpressed	Then the curtains are three, Grace. Fix your list. I'm not coming in behind a licked muffin.
 1	data/scenes.js	133	Rose	happy	Aunt Ellie, did you miss Tata?
-1	data/scenes.js	134	Aunt Ellie	loving	Fine. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind.
+1	data/scenes.js	134	Aunt Ellie	loving	Sure. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind.
 1	data/scenes.js	145	Deedee	loving	There he is! Come here. Let me look at you. I missed that face. Now sit, you're having a muffin.
 1	data/scenes.js	146	Tom	happy	Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since we flew over Kansas.
 1	data/scenes.js	147	Deedee	proud	Twelve of them, and all twelve are still there. I've been standing between that pan and your father since six this morning.
@@ -1153,7 +1153,7 @@ chapter	file	line	character	mood	text
 11	data/scenes-p2.js	36	Tom	surprised	Flight Zero was waiting at the gate with one seat made up. A real pod seat. Somebody upgraded me, and nobody told me why.
 11	data/scenes-p2.js	36	Tom	surprised	And something in seat 5B is giggling.
 11	data/scenes-p2.js	38	Tom	unimpressed	Whoever is under the blanket, you’re breathing very loudly.
-11	data/scenes-p2.js	43	Rose	happy	BOO! We’re stowaways! Tata, what’s a stowaway?
+11	data/scenes-p2.js	43	Rose	happy	BOO! We’re stowaways! Tata, what’s a stowaway anyways?
 11	data/scenes-p2.js	44	Tom	none	It’s a person who hides on a plane they weren’t invited to.
 11	data/scenes-p2.js	44	Tom	unimpressed	Which is illegal. And also, apparently, a family tradition.
 11	data/scenes-p2.js	45	Grace	proud	We weren’t hiding. We were pre-boarding. Rose got the good blanket.
@@ -1162,7 +1162,7 @@ chapter	file	line	character	mood	text
 11	data/scenes-p2.js	48	Tom	unimpressed	Nobody is subscribing to a stowaway.
 11	data/scenes-p2.js	53	Amy	scared	STOP THE PLANE! I don’t have a ticket. I have my running shoes, and I just chased my daughters across a whole airport.
 11	data/scenes-p2.js	55	Amy	proud	They ran out of the house in their socks, Tom. Wherever this plane is going, I’m going too. I’m their ride home. And I’m faster than you.
-11	data/scenes-p2.js	56	Tom	unimpressed	Nobody here is racing.
+11	data/scenes-p2.js	56	Tom	unimpressed	Nobody here is racing, Amy.
 11	data/scenes-p2.js	57	Amy	proud	That’s what the person who loses says.
 11	data/scenes-p2.js	63	Rose	surprised	The sky has a hole in it. The hole is pink. Tata, can I touch it?
 11	data/scenes-p2.js	64	Tom	unimpressed	No touching, please.
@@ -1182,7 +1182,7 @@ chapter	file	line	character	mood	text
 11	data/scenes-p2.js	91	Rose	happy	I was going to look at it with my face.
 11	data/scenes-p2.js	92	Tom	none	Gate Infinity is the big door at the far end. I think the man in the long coat is behind it.
 11	data/scenes-p2.js	92	Tom	none	But there’s a checkpoint in the middle, and somebody is standing in it.
-11	data/scenes-p2.js	102	Tom	surprised	Who is number seventeen?
+11	data/scenes-p2.js	102	Tom	surprised	Then who’s seventeen?
 11	data/scenes-p2.js	104	Amy	proud	I’ve never been on standby in my life. I’ve been on time, or I’ve been first.
 11	data/scenes-p2.js	105	Grace	unimpressed	Rose, he has a paddle that says STANDBY and he thinks it’s a weapon.
 11	data/scenes-p2.js	106	Tom	proud	Stay behind me. If he sends someone to the back of the line, we’ll get them right back.

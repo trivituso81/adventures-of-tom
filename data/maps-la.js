@@ -922,7 +922,7 @@ const LA_ROOMS=[
       {name:'Kenji',x:7,y:6,look:'kenji',lines:[
         'Irasshaimase! Welcome!',
         'Tom-san, your Japanese is very good.',
-        'It\'s not. But you\'re trying very hard, and I respect that.']}],
+        'Actually, it\'s not. But you\'re trying very hard, and I respect that.']}],
     objects:[
       ['counter',3,3,8,3,'Ramen counter','Five stools. A pot of broth that\'s been simmering since Tuesday.',{variant:'tea'}],
       ['shelf',12,1,3,4,'Sake shelf','The bottles are labeled in kanji. Tom can read two. He\'s very proud.'],
@@ -954,8 +954,8 @@ const LA_ROOMS=[
     npcs:[
       {name:'Sage',x:8,y:7,look:'sage',roam:0,lines:[
         'Welcome. Breathe in. Now order.',
-        'We opened in March. The pupuseria next door has been here since 1994. We\'re learning a lot.',
-        "Today's special is celery. Doña Carmen says that's not a meal. She's right."]}],
+        'We opened in March. The pupuseria next door has been here since 1994.',
+        "Today's special is celery. Doña Carmen says that's not a meal."]}],
     objects:[
       ['counter',4,4,8,3,'Juice bar','A blender the size of a car engine. It sounds like one too.',{variant:'tea',across:true}],
       ['pot',12,2,3,3,'Fern','It\'s thriving. It\'s the only thing here that\'s not stressed.'],
