@@ -36,7 +36,6 @@ const EMOTION_REACTIONS={
 "Nara|She gets the bread. Tom gets a lick.|2": [["tnb", "loving"]],
 "Nara|Tom tears off the heel and holds it up. \"Sit.\" Nara sits, wiggling all over. \"Paw.\" She gives him her paw. Very, very hard.|2": [["tnb", "happy"], ["tom", "happy"]],
 "Rose|A hundred MILLION years!|1": [["grace", "happy", 17], ["tom", "happy", 17]],
-"Rose|Come on, Tata! Let's go!|1": [["grace", "happy", 24], ["tom", "happy", 14]],
 "Rose|I'm the tallest! Giddyup, Tata!|1": [["grace", "happy", 16], ["tom", "happy", 24]],
 "Rose|Tata, up! Up up up!|1": [["tom", "happy", 9]],
 "Smoglet|Cough. Nice street. We're going to sit on it for a while. Forever, actually.|2": [["nara", "angry", 6], ["tnb", "scared", 18], ["tom", "angry", 75]],

@@ -57,8 +57,6 @@ SCENES.opening=()=>{
     {pose:'grace',f:'sq_hug'},
     {talk:'Tom',lines:['That\'s the shiniest dumpling I\'ve ever seen. And I\'ve seen a LOT of dumplings.'],voice:[['tom','intro3']]},
     {pose:'grace',f:'sq_wave'},
-    {pose:'tom',f:'tr_laugh'},
-    {talk:'Rose',lines:["Come on, Tata! Let's go!"],voice:[['rose','intro4']]},
     {pose:'grace'}, {pose:'tom',f:'tr_sit'},   // Rose stays up on his shoulders into Grace's list (ch1Goal); she hops down at its end (roofnpc1)
     {flag:'opening-done'},
     {call:finishOpening}

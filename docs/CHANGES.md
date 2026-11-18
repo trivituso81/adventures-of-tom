@@ -1,3 +1,10 @@
+## roselets1 (2026-11-18): Rose no longer says "Come on, Tata! Let's go!" at the end of the opening; it goes straight into Grace's list
+
+- Tom (11-18 15:40): "scene 1, rose shouldnt say Let's go - it should move right into the next scene where Grace says Tata dont walk yet."
+- data/scenes.js opening: Rose's line and Tom's laughing pose that went with it are removed; after "That's the shiniest dumpling" Tom settles and ch1Goal starts with Grace's "Tata, don't walk yet."
+- The line is gone everywhere: data/lines.js (`rose.intro4`), its baked clip (purge_unused.js, docs/PURGED_VOICE.md), docs/emotion-index-lines.tsv, docs/talk-lines.tsv, docs/emotion-reactions.tsv and their generated files, data/emotion-moods.js (edited as text: emotion-apply.py still stops on the 56 pre-existing rows), harvest.json, the directions script, battle-scripts.json, the voice index.
+- Nothing else changed. Tests: opening run from START NEW, `unused_voice.py` (only the 93 pre-existing dialogue keys), `tools/smoke.py`.
+
 ## voicelearn1 (2026-11-18): Voice Library button "Send my takes to Claude" sends every take, kept and thrown away, with audio, to a repo branch
 
 Stage 1 of claude/voice-learning-plan.md (Tom: he will not review every line; Claude learns from the sound of his takes).

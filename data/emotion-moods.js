@@ -952,7 +952,6 @@ const EMOTION_MOODS={
 "Rose|Cinnamon! From Deedee's muffin!": "proud",
 "Rose|Clay doesn’t move. Cereal moves.": "happy",
 "Rose|Come back with the same wrist, Tata. I tied it already. You just have to come.": "loving",
-"Rose|Come on, Tata! Let's go!": "happy",
 "Rose|Copy copy! Tata, I have a pretzel for Nara!": "happy",
 "Rose|Copy copy.": "happy",
 "Rose|Count the duck too.": "happy",

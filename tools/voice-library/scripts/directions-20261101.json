@@ -72,13 +72,6 @@
 "script": "[dry, impressed] That's the shiniest dumpling I've ever seen. [deadpan, flat] And I've seen a LOT of dumplings."
 },
 {
-"voice": "rose",
-"speaker": "Rose",
-"text": "Come on, Tata! Let's go!",
-"ctx": "",
-"script": "[eager, giddy] Come on, Tah Tah! Let's go!"
-},
-{
 "voice": "grace",
 "speaker": "Grace",
 "text": "Tata! Deedee made rhubarb crisp for you. It's cooling RIGHT NOW.",

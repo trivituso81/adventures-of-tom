@@ -14,8 +14,6 @@ scene	1	data/scenes.js	opening	Grace	Tata, LOOK. A sparkling diamond gold dumpli
 scene	1	data/scenes.js	opening	Grace	It's limited edition. There are only two in the whole world. You can squeeze it!	tom	happy	squeeze it!
 scene	1	data/scenes.js	opening	Tom	That's the shiniest dumpling I've ever seen. And I've seen a LOT of dumplings.	grace	proud	shiniest dumpling I've ever seen.
 scene	1	data/scenes.js	opening	Tom	That's the shiniest dumpling I've ever seen. And I've seen a LOT of dumplings.	rose	happy	a LOT of dumplings
-scene	1	data/scenes.js	opening	Rose	Come on, Tata! Let's go!	tom	happy	Come on, Tata!
-scene	1	data/scenes.js	opening	Rose	Come on, Tata! Let's go!	grace	happy	Let's go!
 scene	1	data/scenes.js	ch1Theft	Deedee	My favorite son!	tom	loving	favorite son
 scene	1	data/scenes.js	ch1Theft	Tom	That was UNCALLED for!	deedee	angry	UNCALLED
 scene	1	data/scenes.js	ch1Theft	Tom	That was UNCALLED for!	grace	angry	UNCALLED

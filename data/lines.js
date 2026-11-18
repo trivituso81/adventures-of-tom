@@ -43,7 +43,7 @@ const LINES={
     puppy_eyes:['Whimper. Whiiine? Wuff.','Mmmmm? Whine.'],tombo:['Arf! ...Wuff!'],tombo2:['Grrrr! GRRRR! Arf!'],tombo3:['Mmmf. ...Huff.'],dc1:['Snff snff snff... ARF!'],dc2:['Yip! Yip! ARF!'],dc3:['Snff! ...Wuff!'],
     puppy:['Whimper. Whiiine? Wuff.','Mmmmm? Whine.'],hurt:['Yip!','Yelp!','Arf?!'],low:['Whine...','Whimper. Tom?'],ko:['Whimper...'],
     win:['Arf arf! Good girl? Good girl!','Awoo! Treat? TREAT!','Arf! Arf! Again! Again!']},
-  rose:{introshout:['Ta-Ta!'],intro1:["A hundred *MILLION* years!"],intro2:['Ta-Ta, up! Up up up!'],intro3:["I'm the tallest! Giddyup, TAta!"],intro4:["Come on, TA-ta! Let's go!"],
+  rose:{introshout:['Ta-Ta!'],intro1:["A hundred *MILLION* years!"],intro2:['Ta-Ta, up! Up up up!'],intro3:["I'm the tallest! Giddyup, TAta!"],
     hurt:['Owie!','No fair!','Ta-Ta!','Ta-Ta, help!'],silly:['Bleh!','You\'re a silly slime!'],low:['My eye hurts.','Ta-Ta, carry me.'],ko:['I want to go home.'],win:['Yay!','Yay, Ta-Ta!'],
     boop:['Boop!'],boo:['BOOOO!! Did I scare you? I did!'],dress_up_tiara:["I drew you a unicorn on a rainbow! Snip snip!"],
     giggle_storm:['Tickle storm! Everybody laugh! HA HA HA!'],lamby_hug:['A hug from Lamby AND Backup Lamby!'],floor_is_lava:['The floor is LAVA! Get on a cushion!'],

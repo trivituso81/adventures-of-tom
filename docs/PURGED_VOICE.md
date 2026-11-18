@@ -2,6 +2,10 @@
 
 Tom asked (again) for voice lines and clips that the full game never plays to be removed, because every unused line shows up in the Voice Library and the bake lists and costs ElevenLabs credits. This is the record. The audio itself is not lost: it is in git history at commit `6624b03` (the parent of the purge commit), so `git show 6624b03:data/voice/<id>.js` brings any of it back.
 
+## 2026-11-18 (`roselets1`): 1 battle-table clip
+
+- `rose.intro4` "Come on, TA-ta! Let's go!": Tom cut Rose's line from the opening (the scene goes straight into Grace's list). Removed from data/lines.js and data/voice-clips.js.
+
 ## 2026-11-17 (`ch1rebuild1`): 1 dialogue clip
 
 Chapter 1 was rebuilt to the locked script. Of the old chapter 1 lines only one had a recorded clip: `tom|I'm trying, Rose. Please don't tell Grace I lost to a marble.` (data/voice/dialog-ch28.js, about 29 KB). The other 94 old lines never had a clip. Townsfolk and shop lines were not touched.
