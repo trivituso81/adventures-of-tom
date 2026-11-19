@@ -17,7 +17,7 @@ socketserver.TCPServer.allow_reuse_address=True
 srv=socketserver.TCPServer(('127.0.0.1',0),functools.partial(Q,directory=ROOT)); port=srv.server_address[1]
 threading.Thread(target=srv.serve_forever,daemon=True).start()
 fails=[]
-START="""(speed)=>{ try{ B7.speed=speed; }catch(e){} const i=B2_LAB.findIndex(L=>L.clip); splash.active=false; const el=document.getElementById('splash'); if(el) el.hidden=true; b2Lab(i); return i; }"""
+START="""(speed)=>{ try{ B7.speed=speed; }catch(e){} const i=B2_LAB.findIndex(L=>L.name==='CLIP TEST: ROSE'); splash.active=false; const el=document.getElementById('splash'); if(el) el.hidden=true; b2Lab(i); return i; }"""
 READY="()=>{ const L=window.__LE; return L.battle.state==='command'&&L.B2.actor&&L.B2.actor.side==='party'&&paintedFightReady(); }"
 FIRE="""()=>{ const L=window.__LE,B2=L.B2,u=B2.party.find(p=>p.id==='rose'),act=L.B2_SKILLS.rose.o3.find(a=>a.key==='boop');
   for(const f of B2.foes){ f.maxHp=f.hp=99999; }

@@ -93,6 +93,7 @@ const b2Aimed=f=>!!(B2.aim&&B2.aim.targets.includes(f));
 // lunges the attack frames play in order across the lunge; otherwise the stance. Enemies without frames always draw their stance.
 const B2_HURT_HOLD=700;
 function b2FoeFrame(f,R0) {
+  const SH=typeof bclipShowFrame==='function'?bclipShowFrame(f.id,battle.time):null; if(SH) return SH;   // a chapter review shows this monster's clip (engine/clips.js)
   const FR=f.def.frames; if(!FR) return R0;
   if(f.hold>0&&!(f.lunge>0)&&FR.attack.length) return FR.attack[0];   // wind-up (audit fix 2a): first attack frame held before the lunge
   if(f.lunge>0) { if(f.lunge>(f._lm||0)) f._lm=f.lunge; } else f._lm=0;

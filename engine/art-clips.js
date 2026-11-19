@@ -51,20 +51,22 @@ function clipCard(e){
   ((e.rejects||[]).length?'<div class="hint">Rejected before: '+e.rejects.length+' (notes are saved for Claude)</div>':'')+'</div>';
 }
 
-async function clipGenerate(id,btn){
+// clipMake (clipbatch1): makes one video and keeps it as the entry's newest result. GENERATE VIDEO (clipGenerate) and GENERATE CHAPTER
+// (clipBatchStart) both call it; it throws an Error with a plain message when it cannot, and `say` shows progress.
+async function clipMake(id,say){
+  say=say||((t,err)=>setMsg(id,t,err));
   const e=ENTRY[id], c=e.clip, key=LS.get('aot-art-key');
-  if(!key) return setMsg(id,'Paste the xAI key at the top first.',true);
-  if(!DB) return setMsg(id,'This browser would not keep the video.',true);
-  const blk=blockInfo(e); if(blk) return setMsg(id,blk.why,true);
+  if(!key) throw new Error('Paste the xAI key at the top first.');
+  if(!DB) throw new Error('This browser would not keep the video.');
+  const blk=blockInfo(e); if(blk) throw new Error(blk.why);
   const hdr={'Content-Type':'application/json',Authorization:'Bearer '+key}, clean=t=>String(t).split(key).join('[key]').slice(0,300);
   const unreachable='The browser could not reach the video service. Either the network is down or the service blocks browsers; if it is the second, a relay address is needed (the Relay field at the top).';
   let P=clipPend.get(), p=P[id];
-  btn.disabled=true;
-  try{
+  {
     if(!p){
       const prompt=(promptOf(e)||'').trim(); if(!prompt) throw new Error('The prompt is empty.');
-      const cost=clipCost(e), o=spendGet(); if(o.total+cost>o.cap) throw new Error('Spend cap reached ($'+o.cap.toFixed(0)+'). Press +$10 at the top to allow more.');
-      setMsg(id,'Sending the start picture...');
+      const cost=clipCost(e), o=spendGet(); if(o.total+cost>o.cap) throw Object.assign(new Error('Spend cap reached ($'+o.cap.toFixed(0)+'). Press +$10 at the top to allow more.'),{stop:true});
+      say('Sending the start picture...');
       let sr=await fetch(c.start,{cache:'no-store'}), sb=null; if(sr.ok) sb=await sr.blob(); else if(LS.get('aot-gh-token')){ try{ sb=await ghFile(c.start); }catch(x){} }
       if(!sb) throw new Error('Could not load the start picture '+c.start+'.');
       let r; try{ r=await fetch(XAI_BASE()+'/v1/videos/generations',{method:'POST',headers:hdr,body:JSON.stringify({model:c.model,prompt,image:{url:await blobToDataUri(sb)},duration:c.dur,resolution:c.res})}); }catch(err){ throw new Error(unreachable); }
@@ -76,11 +78,11 @@ async function clipGenerate(id,btn){
     }
     let url='';
     for(let i=0;i<150&&!url;i++){   // 5 s apart, up to 12 minutes
-      setMsg(id,'The video is being made ('+Math.round((Date.now()-p.t)/1000)+' s so far, usually 1 to 3 minutes). Keep this page open.');
+      say('The video is being made ('+Math.round((Date.now()-p.t)/1000)+' s so far, usually 1 to 3 minutes). Keep this page open.');
       await new Promise(res=>setTimeout(res,i?5000:1500));
       let r; try{ r=await fetch(XAI_BASE()+'/v1/videos/'+encodeURIComponent(p.rid),{headers:{Authorization:'Bearer '+key},cache:'no-store'}); }catch(err){ continue; }   // a dropped connection: try again
       const txt=await r.text(); let j=null; try{ j=JSON.parse(txt); }catch(x){}
-      if(r.status===401||r.status===403) throw new Error('The video service refused the key ('+r.status+'). Press FETCH THE VIDEO after fixing the key; the video is not lost.');
+      if(r.status===401||r.status===403) throw Object.assign(new Error('The video service refused the key ('+r.status+'). Press FETCH THE VIDEO after fixing the key; the video is not lost.'),{stop:true});
       const st=j&&j.status, v=j&&(j.video||(j.response&&j.response.video));
       if(v&&v.url){ url=v.url; break; }
       if(st==='failed'||st==='expired'||r.status===404||(r.status>=400&&r.status<500&&r.status!==429)){
@@ -89,7 +91,7 @@ async function clipGenerate(id,btn){
       }
     }
     if(!url) throw new Error('The video is still not ready after 12 minutes. Press FETCH THE VIDEO in a few minutes; it will not be charged again.');
-    setMsg(id,'Downloading the video...');
+    say('Downloading the video...');
     let blob=null; try{ const vr=await fetch(url); if(vr.ok) blob=await vr.blob(); }catch(err){}
     const have=await results(id), n=(have[0]?have[0].n:0)+1;
     await tx('readwrite',s=>s.put({key:id+'|'+n,id,n,blob,url:blob?'':url,video:true,prompt:p.prompt,refs:[c.start],t:Date.now()}));
@@ -97,7 +99,128 @@ async function clipGenerate(id,btn){
     P=clipPend.get(); delete P[id]; clipPend.set(P);
     RES[id]=await results(id); e.status='generated';
     MSG[id]={text:'Done: v'+n+'. Tap REVIEW.'+(blob?'':' This browser was not allowed to keep a copy, so approve or reject it within the hour.'),err:false}; refreshItem(id);
-  }catch(err){ setMsg(id,String(err.message||err),true); btn.disabled=false; if(clipPend.get()[id]) btn.textContent='FETCH THE VIDEO'; }
+    return n;
+  }
+}
+async function clipGenerate(id,btn){
+  btn.disabled=true;
+  try{ await clipMake(id); }
+  catch(err){ setMsg(id,String(err.message||err),true); btn.disabled=false; if(clipPend.get()[id]) btn.textContent='FETCH THE VIDEO'; }
+}
+
+// ---- GENERATE CHAPTER (clipbatch1): a whole chapter's clips as one batch
+// A group of the Clips tab named "Chapter <n>" gets a GENERATE CHAPTER button. It makes every clip of the group that is not made yet,
+// cuts its marks by itself (clipAutoMarks), writes them to the result as if Tom had marked them, and approves it (decide, auto), so
+// the art-bake Action cuts the clip. Tom then watches the chapter once in Battle Lab > CHAPTER <n> REVIEW and sends REDO for what looks wrong.
+const CLIP_FPS=30, CLIP_PAR=3, CLIP_HOLD=15;   // CLIP_PAR: videos being made at once (each takes 1 to 3 minutes; the spend cap is checked before each is sent)
+const r3=x=>Math.round(x*1000)/1000;
+const clipSeek=(v,t)=>new Promise(res=>{ let done=false; const f=()=>{ if(done) return; done=true; v.removeEventListener('seeked',f); res(); }; v.addEventListener('seeked',f); v.currentTime=t; setTimeout(f,4000); });
+// The picture's figure: everything that is not the flat magenta (the median colour of the four corners). 128 wide is plenty to see a limb move.
+function clipMask(d,W,H){
+  const ch=[[],[],[]], pt=(x0,y0)=>{ for(let y=y0;y<y0+6;y++) for(let x=x0;x<x0+6;x++){ const i=(y*W+x)*4; ch[0].push(d[i]); ch[1].push(d[i+1]); ch[2].push(d[i+2]); } };
+  pt(0,0); pt(W-6,0); pt(0,H-6); pt(W-6,H-6);
+  const bg=ch.map(a=>a.sort((x,y)=>x-y)[a.length>>1]), m=new Uint8Array(W*H); let area=0;
+  for(let i=0,p=0;i<m.length;i++,p+=4){ const dr=d[p]-bg[0], dg=d[p+1]-bg[1], db=d[p+2]-bg[2]; if(dr*dr+dg*dg+db*db>4900){ m[i]=1; area++; } }
+  return {m,area};
+}
+const clipDilate=(m,W,H,n)=>{ let a=m; for(let k=0;k<n;k++){ const b=new Uint8Array(W*H); for(let y=0;y<H;y++) for(let x=0;x<W;x++){ const i=y*W+x; if(a[i]||(x>0&&a[i-1])||(x<W-1&&a[i+1])||(y>0&&a[i-W])||(y<H-1&&a[i+W])) b[i]=1; } a=b; } return a; };
+// The marks, found from the video itself (Tom 2026-11-18: "Tom never marks"):
+//   START  the first picture (the video begins on the start picture, standing).
+//   END    the last picture where the figure still changes, plus a half second hold (never past the video). loop: the last picture.
+//   HIT    (strike) the picture where the figure reaches farthest outside its standing outline: the limb at full reach.
+// Returns {first,hit?,last} in seconds, or null when the video does not move enough to tell (the clip then waits for Tom's REVIEW).
+async function clipAutoMarks(blob,kind){
+  const url=URL.createObjectURL(blob), v=document.createElement('video'); v.muted=true; v.playsInline=true; v.preload='auto'; v.src=url;
+  try{
+    await new Promise((res,rej)=>{ v.onloadeddata=res; v.onerror=()=>rej(new Error('The browser could not open this video to find the marks.')); setTimeout(()=>rej(new Error('Opening the video took too long.')),30000); });
+    const dur=v.duration, vw=v.videoWidth, vh=v.videoHeight; if(!(dur>.5)||!vw||!vh) return null;
+    const n=Math.floor(dur*CLIP_FPS+1e-6);
+    if(kind==='loop') return n>=8?{first:0,last:r3((n-1)/CLIP_FPS)}:null;
+    const W=128, H=Math.max(16,Math.round(W*vh/vw)), c=document.createElement('canvas'); c.width=W; c.height=H; const g=c.getContext('2d',{willReadFrequently:true}), M=[];
+    for(let i=0;i<n;i++){ await clipSeek(v,(i+.5)/CLIP_FPS); g.drawImage(v,0,0,W,H); M.push(clipMask(g.getImageData(0,0,W,H).data,W,H)); }
+    const A0=Math.max(1,M[0].area), mot=[0];
+    for(let i=1;i<n;i++){ let x=0; const a=M[i].m, b=M[i-1].m; for(let p=0;p<a.length;p++) x+=a[p]^b[p]; mot.push(x/A0); }
+    const sm=mot.map((_,i)=>(mot[Math.max(0,i-1)]+mot[i]+mot[Math.min(n-1,i+1)])/3), peak=Math.max(...sm);
+    if(peak<.01) return null;
+    const thr=Math.max(peak*.12,.004); let lastMoving=0, firstMoving=-1; for(let i=1;i<n;i++) if(sm[i]>=thr){ lastMoving=i; if(firstMoving<0) firstMoving=i; }
+    if(lastMoving<5) return null;
+    const last=Math.min(n-1,lastMoving+CLIP_HOLD);
+    if(kind!=='strike') return {first:0,last:r3(last/CLIP_FPS)};
+    const ring=clipDilate(M[0].m,W,H,2); let hit=-1, best=-1;
+    for(let i=3;i<=Math.min(lastMoving,last-2);i++){ let x=0; const a=M[i].m; for(let p=0;p<a.length;p++) if(a[p]&&!ring[p]) x++; if(x>best){ best=x; hit=i; } }
+    if(best<.02*A0){ best=-1; for(let i=3;i<=Math.min(lastMoving,last-2);i++) if(sm[i]>best){ best=sm[i]; hit=i; } }   // nothing leaves the outline (a hop, a spin): the busiest picture
+    if(hit<3||hit>=last) return null;
+    return {first:0,hit:r3(hit/CLIP_FPS),last:r3(last/CLIP_FPS)};
+  } finally { v.removeAttribute('src'); v.load(); URL.revokeObjectURL(url); }
+}
+// Decisions go to GitHub one at a time (each one rewrites data/art-prompts.json), whichever clip finished first.
+let clipDecideChain=Promise.resolve();
+const clipDecideSerial=f=>{ const p=clipDecideChain.then(f,f); clipDecideChain=p.catch(()=>{}); return p; };
+const clipChapterGroup=g=>/^Chapter \d+$/.test(g||'');
+// A rejected entry is made again only after its prompt was rewritten since the rejection (promptRev went up): the same prompt would only
+// cost money to fail the same way. A rejection with no revision on record (made in the Library before clipbatch1) counts as ready.
+const clipRedoReady=e=>{ const r=(e.rejects||[]).slice(-1)[0]; return !r||r.rev==null||(e.promptRev||0)>r.rev; };
+function clipBatchItems(g){
+  const all=(groupsOf('Clips').get(g)||[]).filter(e=>e.clip&&!e.clip.test), o={all,todo:[],redo:[],redoWait:[],wait:[],blocked:[],approved:0};
+  for(const e of all){ const s=ST[e.id]; if(s==='approved') o.approved++; else if(s==='blocked') o.blocked.push(e); else if(s==='wait') o.wait.push(e); else if(s==='rejected') (clipRedoReady(e)?o.redo:o.redoWait).push(e); else o.todo.push(e); }
+  return o;
+}
+const CB={run:null,msg:{}};   // run: the batch that is going; msg[group]: the last line for that group's bar
+function clipBatchText(g){
+  const b=clipBatchItems(g), est=[].concat(b.todo,b.redo).reduce((t,e)=>t+clipCost(e),0);
+  const bits=[b.todo.length+' to make',b.redo.length?b.redo.length+' to redo':'',b.wait.length?b.wait.length+' made, waiting for marks':'',b.redoWait.length?b.redoWait.length+' redo waiting for Claude\'s fix':'',b.blocked.length?b.blocked.length+' blocked':'',b.approved+' of '+b.all.length+' approved'].filter(Boolean);
+  return bits.join(', ')+(est?'. About $'+est.toFixed(2)+' for the ones to make.':'.');
+}
+function clipBatchBar(g){
+  const run=CB.run&&CB.run.g===g, m=CB.msg[g]||{text:'',err:false};
+  return '<div class="card cbar" data-cb="'+esc(g)+'"><div class="row"><button class="gold" data-batch="'+esc(g)+'"'+(CB.run?' disabled':'')+'>'+(run?'MAKING THE CHAPTER...':'GENERATE '+esc(g.toUpperCase()))+'</button><button class="small" data-batchstop="'+esc(g)+'"'+(run?'':' hidden')+'>STOP</button></div>'+
+    '<div class="hint">'+esc(clipBatchText(g))+'</div><div class="'+(m.err?'err':'hint')+'" data-cbmsg>'+esc(m.text)+'</div></div>';
+}
+function clipBatchPaint(g){ const el=findBy('.cbar','cb',g); if(!el) return; const tmp=document.createElement('div'); tmp.innerHTML=clipBatchBar(g); el.replaceWith(tmp.firstElementChild); }
+function clipBatchSay(g,text,err){ CB.msg[g]={text,err:!!err}; clipBatchPaint(g); }
+function clipBatchStop(){ if(CB.run){ CB.run.stop=true; clipBatchSay(CB.run.g,'Stopping after the videos that are already being made.'); } }
+// One clip, end to end: make it (unless a result is already waiting), find its marks, write them to the result, approve it.
+async function clipBatchOne(e,R){
+  const id=e.id, say=t=>{ R.live[id]=t; clipBatchProgress(R); };
+  if(ST[id]!=='wait'||!(RES[id]||[]).length) await clipMake(id,say);
+  let r=(RES[id]||[])[0]; if(!r) throw new Error('No video came back.');
+  say('Finding the marks...');
+  if(!r.blob){ try{ const vr=await fetch(r.url); if(vr.ok){ r.blob=new Blob([await vr.blob()],{type:'video/mp4'}); r.url=''; await tx('readwrite',st=>st.put(r)); } }catch(x){} }
+  if(!r.blob) throw new Error('This browser was not allowed to keep the video, so it cannot find the marks. Open REVIEW on it and mark it by hand.');
+  const marks=await clipAutoMarks(r.blob,clipKind(r));
+  if(!marks) throw new Error('The video hardly moves, so the marks cannot be found. Open REVIEW on it and mark it by hand, or reject it with a note.');
+  r.marks=Object.assign({first:-1,hit:-1,last:-1},marks); await tx('readwrite',st=>st.put(r));
+  say('Approving...');
+  const done=await clipDecideSerial(()=>decide('ok',r.key,null,true));
+  if(!done) throw new Error((MSG[id]&&MSG[id].text)||'The approval did not go through.');
+  return marks;
+}
+function clipBatchProgress(R){
+  const live=Object.keys(R.live).length?' Now: '+Object.keys(R.live).map(k=>k.replace(/^clip-/,'')+' ('+R.live[k].replace(/ \(.*$/,'').replace(/\.\.\.$/,'')+')').join('; ')+'.':'';
+  const o=spendGet();
+  clipBatchSay(R.g,'Chapter batch: '+R.done.length+' of '+R.total+' done'+(R.fail.length?', '+R.fail.length+' need you':'')+'. Spent $'+(o.total-R.spent0).toFixed(2)+' in this batch ($'+o.total.toFixed(2)+' of the $'+o.cap.toFixed(0)+' cap).'+live);
+}
+async function clipBatchStart(g){
+  if(CB.run) return;
+  if(!LS.get('aot-art-key')||!LS.get('aot-gh-token')) return clipBatchSay(g,'Open Setup at the top and paste both the xAI key and the GitHub token first.',true);
+  computeStates(); const b=clipBatchItems(g), queue=[].concat(b.wait,b.todo,b.redo);
+  if(!queue.length) return clipBatchSay(g,b.redoWait.length?'Nothing to make yet: the '+b.redoWait.length+' clip(s) you sent back wait for Claude\'s fix (it rewrites their prompts).':b.blocked.length?'Nothing can start: '+b.blocked.length+' clip(s) wait on a start picture that is not published yet.':'Everything in this chapter is approved.');
+  const need=queue.filter(e=>ST[e.id]!=='wait').reduce((t,e)=>t+clipCost(e),0), o=spendGet();
+  if(o.total+need>o.cap+1e-9) return clipBatchSay(g,'This batch needs about $'+need.toFixed(2)+' and only $'+Math.max(0,o.cap-o.total).toFixed(2)+' is left under the $'+o.cap.toFixed(2)+' cap. Press +$10 at the top (as many times as needed), then press this again.',true);
+  const R=CB.run={g,queue:queue.slice(),total:queue.length,done:[],fail:[],live:{},stop:false,spent0:o.total};
+  clipBatchPaint(g); clipBatchProgress(R);
+  const worker=async()=>{
+    while(!R.stop){
+      const e=R.queue.shift(); if(!e) break;
+      try{ const m=await clipBatchOne(e,R); R.done.push(e.id); R.marks=R.marks||{}; R.marks[e.id]=m; }
+      catch(err){ R.fail.push({id:e.id,why:String(err.message||err)}); setMsg(e.id,String(err.message||err),true); if(err&&err.stop) R.stop=true; }
+      delete R.live[e.id]; refreshItem(e.id); clipBatchProgress(R);
+      if(!R.stop&&R.queue.length) await new Promise(res=>setTimeout(res,CLIP_PAR>1?1500:0));
+    }
+  };
+  await Promise.all(Array.from({length:CLIP_PAR},(_,i)=>new Promise(res=>setTimeout(res,i*1200)).then(worker)));
+  CB.run=null; const left=R.queue.length, o2=spendGet();
+  clipBatchSay(g,(R.stop?'Stopped. ':'Finished. ')+R.done.length+' clip(s) made and approved; the game is cutting them now (the first ones show in Battle Lab > '+g.toUpperCase()+' REVIEW after about 3 minutes and a RELOAD on the title screen). '+(left?left+' not started. ':'')+(R.fail.length?R.fail.length+' need you: '+R.fail.map(f=>f.id.replace(/^clip-/,'')+' ('+f.why.replace(/ Open REVIEW.*$/,'').slice(0,90)+')').join('; ')+'. ':'')+'Spent $'+(o2.total-R.spent0).toFixed(2)+'.',R.fail.length>0);
 }
 
 // ---- review screen: the video, a frame slider, three marks, and the battlefield preview

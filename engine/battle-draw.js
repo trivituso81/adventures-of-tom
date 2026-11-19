@@ -137,7 +137,9 @@ function drawBattle() {
       frame=koE<.16?sp.idle:koFrame(sp);
       koSink=koE<.16?Math.round(koE/.16*8):-Math.round(Math.max(0,Math.sin(Math.min(1,(koE-.16)/.3)*Math.PI))*5);
     }
-    if(!down&&battle.v2&&roseSeatBattle(m,i,frame,sp,fx,hurt,t)) { activeTint=null; return; }   // sitting on Tom (engine/rose-ride.js)
+    const shownClip=!down&&typeof bclipShowFrame==='function'?bclipShowFrame(m.id,t):null;   // a chapter review shows this member's clip in place (engine/clips.js)
+    if(shownClip) frame=shownClip;
+    if(!down&&!shownClip&&battle.v2&&roseSeatBattle(m,i,frame,sp,fx,hurt,t)) { activeTint=null; return; }   // sitting on Tom (engine/rose-ride.js)
     const w=frame[0].length*sp.scale,h=frame.length*sp.scale;
     let hop=cheering?Math.round(Math.abs(Math.sin(t*6))*20):dancing?Math.round(Math.abs(Math.sin(t*9))*16):(twirling?Math.round(Math.abs(Math.sin(t*9))*10):(silly?Math.round(Math.abs(Math.sin(t*10))*22):0));
     if(coaching) hop=Math.round(Math.abs(Math.sin(t*7))*14);

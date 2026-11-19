@@ -95,7 +95,7 @@ def bake_clip(e, p):
     impact = min(kept[1:], key=lambda f: abs(f - m['hit'] * fps)) if kind == 'strike' else -1   # the kept picture nearest Tom's HIT mark (never the standing first one)
     r = sh(sys.executable, '-I', os.path.join('tools', 'clip-bake', 'bake_clip.py'), mp4, c['id'], c['owner'], '--first', str(first), '--last', str(kept[-1]),
            '--step', str(step), '--impact', str(impact), '--fig-rows', str(c['figRows']), '--speed', str(speed), '--fps', str(fps), '--kind', kind, '--k', str(c.get('k', 4)), *(['--pace', pace] if pace else []),
-           *(['--calm', str(c['calm'])] if c.get('calm') and kind == 'loop' else []))   # clip.calm (seconds, clipfoes1): the baker picks the calmest stretch between START and END
+           *(['--calm', str(c['calm'])] if c.get('calm') and kind == 'loop' else []), '--stamp', clip_stamp(e))   # clip.calm (seconds, clipfoes1): the baker picks the calmest stretch between START and END
     print(r.stdout[-1500:]); print(r.stderr[-1500:], file=sys.stderr)
     if r.returncode: raise SystemExit(f'art_bake: bake_clip.py failed for {e["id"]}')
     tagline = f'<script src="data/clips/{c["id"]}.js?v=clip0"></script>'       # bump_tags moves the tag
@@ -106,6 +106,27 @@ def bake_clip(e, p):
         html = html.replace(tags[-1], tags[-1] + tagline + '\n'); open(ix, 'w', encoding='utf-8').write(html)
     return f'{e["id"]}: clip `{c["id"]}` cut from {p} ({fps:g} pictures a second; video frames {first} to {kept[-1]}, every {step}, {"hit at frame " + str(impact) if kind == "strike" else kind}; {len(kept)} pictures kept; played at {speed:g}x). {r.stdout.strip().splitlines()[-1] if r.stdout.strip() else ""}' + (' Calm stretch: ' + next((l for l in r.stdout.splitlines() if l.startswith('calm stretch')), '?') if c.get('calm') and kind == 'loop' else '')
 
+def clip_stamp(e):
+    """What a baked clip was cut from: the newest approved file and its marks. bake_clip.py writes it into data/clips/<id>.js."""
+    v = e['versions'][-1]
+    return (v.get('file') or v.get('path') or '') + ' ' + json.dumps(v.get('marks') or {}, sort_keys=True)
+
+def stale_clips(entries):
+    """Approved clips that were never cut, or were cut from an older approval (clipbatch1). A batch approves dozens of clips in a row, each
+    approval starts this job, and GitHub keeps only the newest waiting run per workflow: a run that is cancelled would leave its clip
+    uncut. So every run also cuts any approved clip the game does not have yet. A clip file with no stamp (cut before clipbatch1) counts as current."""
+    out = set()
+    for e in entries:
+        c = e.get('clip'); vs = e.get('versions') or []
+        if not c or c.get('test') or e.get('status') != 'approved' or not vs: continue
+        newest = vs[-1].get('file') or vs[-1].get('path') or ''
+        if not newest or not os.path.exists(os.path.join(ROOT, newest)): continue
+        js = os.path.join(ROOT, 'data', 'clips', c['id'] + '.js')
+        if not os.path.exists(js): out.add(e['id']); continue
+        m = re.search(r'^// Baked from: (.*)$', open(js, encoding='utf-8').read(), re.M)
+        if m and m.group(1).strip() != clip_stamp(e): out.add(e['id'])
+    return out
+
 def next_number():
     f = os.path.join(ROOT, 'docs', 'CHANGES.md')
     nums = [int(m) for m in re.findall(r'^## \d{4}-\d{2}-\d{2} \((\d+)\)', open(f, encoding='utf-8').read(), re.M)]
@@ -115,7 +136,7 @@ def prepend_changes(ids, tag, notes):
     f = os.path.join(ROOT, 'docs', 'CHANGES.md')
     txt = open(f, encoding='utf-8').read()
     today = datetime.date.today().isoformat()
-    body = (f'## {today} ({next_number()}): Art Library bake, {", ".join(ids)} (`{tag}`, made by the art-bake Action)\n\n'
+    body = (f'## {today} ({next_number()}): Art Library bake, {", ".join(ids) if len(ids) <= 6 else str(len(ids)) + " entries"} (`{tag}`, made by the art-bake Action)\n\n'
             f'- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).\n'
             + ''.join(f'- {n}\n' for n in notes)
             + '- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.\n\n')
@@ -126,15 +147,16 @@ def main():
     dry = '--dry' in argv
     files = changed_files(argv)
     raws = [p for p in files if p.startswith('art/raw/') and (p.lower().endswith('.png') or (p.startswith('art/raw/clips/') and p.lower().endswith(('.mp4', '.json')))) and os.path.exists(os.path.join(ROOT, p))]
-    if not raws:
-        print('art_bake: no art/raw picture changed, nothing to do'); return 0
     entries = json.load(open(DATA, encoding='utf-8'))['entries']
+    catchup = stale_clips(entries)
+    if not raws and not catchup:
+        print('art_bake: no art/raw picture changed, nothing to do'); return 0
     todo, skipped = [], []
     for e in entries:
         vs = e.get('versions') or []
         if e.get('status') != 'approved' or not vs: continue
         newest = vs[-1].get('file') or vs[-1].get('path')
-        if newest not in raws: continue
+        if newest not in raws and e['id'] not in catchup: continue
         (todo if e.get('bake') or e.get('clip') else skipped).append((e, newest))
     for e, p in skipped: print(f'art_bake: {e["id"]} ({p}) has no `bake` field yet: stored only, nothing baked')
     # a picture in art/raw that no approved entry claims (e.g. committed by hand)
@@ -143,11 +165,14 @@ def main():
         if p not in claimed: print(f'art_bake: {p} is not the newest approved version of any entry: ignored')
     if not todo:
         print('art_bake: nothing to bake'); return 0
-    notes, ids = [], []
+    notes, ids, failed = [], [], []
     for e, p in todo:
         if e.get('clip'):
-            print(f'art_bake: {e["id"]}: clip video {p} -> art/clips/{e["clip"]["id"]}.webp')
-            if not dry: notes.append(bake_clip(e, p)); ids.append(e['id'])
+            print(f'art_bake: {e["id"]}: clip video {p} -> art/clips/{e["clip"]["id"]}.webp' + (' (catch-up: not cut yet)' if e['id'] in catchup and p not in raws else ''))
+            if not dry:
+                try: notes.append(bake_clip(e, p)); ids.append(e['id'])
+                except (SystemExit, Exception) as x:   # one bad clip must not stop the other 69 (clipbatch1); it is named in the CHANGES entry and tried again by the next run
+                    failed.append(e['id']); notes.append(f'FAILED to cut {e["id"]} ({p}): {x}'); print(f'art_bake: FAILED {e["id"]}: {x}', file=sys.stderr)
             continue
         b = e['bake']; src = b['src']
         if not src.startswith('tools/sprite-bake/src/') or '..' in src or '..' in b['script'] or '/' in b['script']:
@@ -167,6 +192,8 @@ def main():
         notes.append(f'{e["id"]}: `{b["script"]} {" ".join(b.get("args", []))}` ran from {p}')
         ids.append(e['id'])
     if dry: return 0
+    if not ids and failed:
+        print(f'art_bake: nothing could be cut: {failed}'); return 0
     tag = (argv[argv.index('--tag') + 1] if '--tag' in argv else 'artbake' + os.environ.get('GITHUB_RUN_NUMBER', datetime.datetime.utcnow().strftime('%m%d%H%M')))
     r = sh(sys.executable, os.path.join('tools', 'art-library', 'bump_tags.py'), tag)
     print(r.stdout); print(r.stderr, file=sys.stderr)

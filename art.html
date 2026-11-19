@@ -291,7 +291,7 @@ function renderItem(e){
 function renderGroup(tab,g,items,single){
   const shown=items.filter(visible); if(!shown.length) return '';
   const k=gkey(tab,g), open=single||!!qNow()||!!UI.grp[k];
-  return '<section class="grp" data-gk="'+esc(k)+'">'+(single?'':'<button class="gh'+(open?' open':'')+'" data-grp="'+esc(k)+'" aria-expanded="'+open+'"><span class="car"></span><b>'+esc(g)+'</b><span class="gc">'+groupCount(items)+'</span></button>')+(open?'<div class="gbody">'+shown.map(renderItem).join('')+'</div>':'')+'</section>';
+  return '<section class="grp" data-gk="'+esc(k)+'">'+(single?'':'<button class="gh'+(open?' open':'')+'" data-grp="'+esc(k)+'" aria-expanded="'+open+'"><span class="car"></span><b>'+esc(g)+'</b><span class="gc">'+groupCount(items)+'</span></button>')+(open?'<div class="gbody">'+(tab==='Clips'&&clipChapterGroup(g)?clipBatchBar(g):'')+shown.map(renderItem).join('')+'</div>':'')+'</section>';
 }
 function paintList(fromProbe){
   computeStates(); paintTabs(); paintFilters();
@@ -337,6 +337,8 @@ $('list').addEventListener('click',async e=>{
   const h=t.closest('[data-toggle]'); if(h) return toggleItem(h.dataset.toggle);
   if(t.dataset.ownrm){ await tx('readwrite',s=>s.delete('own|'+t.dataset.ownrm)); delete OWN[t.dataset.ownrm]; return refreshItem(t.dataset.id); }
   if(t.dataset.revert){ delete EDITS[t.dataset.revert]; saveEdits(); return refreshItem(t.dataset.revert); }
+  if(t.dataset.batch) return clipBatchStart(t.dataset.batch);
+  if(t.dataset.batchstop) return clipBatchStop();
   if(t.dataset.gen) return generate(t.dataset.gen,t);
   if(t.dataset.res){ const it=t.closest('.item'); if(it){ const rs=RES[it.dataset.id]||[]; rvOpen(it.dataset.id,Math.max(0,rs.findIndex(r=>r.key===t.dataset.res))); } return; }
   if(t.dataset.save){ const r=await tx('readonly',s=>s.get(t.dataset.save)); if(r) download(r.blob,r.id+'-v'+r.n+'.png'); }
@@ -462,7 +464,7 @@ async function shrinkBig(b){
     return o&&o.size<b.size?o:b;
   }catch(x){ return b; }
 }
-async function decide(kind,resKey,btn){
+async function decide(kind,resKey,btn,auto){   // auto (clipbatch1): GENERATE CHAPTER approves without the two-tap confirm
   const r=await tx('readonly',s=>s.get(resKey)); if(!r) return false;
   const id=r.id, e=DATA.entries.find(x=>x.id===id); if(!e) return false;
   if(!LS.get('aot-gh-token')) return setMsg(id,'Close this, open Setup at the top of the page and paste the GitHub token first.',true), false;
@@ -472,7 +474,7 @@ async function decide(kind,resKey,btn){
   if(e.clip&&!e.clip.test&&kind==='ok'&&!mk) return setMsg(id,e.clip.kind&&e.clip.kind!=='strike'?'Mark START and END first (in that order).':'Mark START, HIT and END first (in that order).',true), false;
   const armKey=kind+'|'+resKey;
   // two taps: the first arms the button (it keeps its width and label; the message line says what the second tap does)
-  if(ARMED!==armKey){ ARMED=armKey; rvDisarm(); btn.classList.add('armed'); setMsg(id,'Tap '+(kind==='ok'?'APPROVE':'REJECT')+' again to confirm (v'+r.n+').'); clearTimeout(decide.h); decide.h=setTimeout(()=>{ if(ARMED===armKey){ ARMED=null; rvDisarm(); setMsg(id,''); } },4000); return false; }
+  if(!auto&&ARMED!==armKey){ ARMED=armKey; rvDisarm(); btn.classList.add('armed'); setMsg(id,'Tap '+(kind==='ok'?'APPROVE':'REJECT')+' again to confirm (v'+r.n+').'); clearTimeout(decide.h); decide.h=setTimeout(()=>{ if(ARMED===armKey){ ARMED=null; rvDisarm(); setMsg(id,''); } },4000); return false; }
   ARMED=null; clearTimeout(decide.h); rvDisarm(); document.querySelectorAll('.rvb').forEach(b=>b.disabled=true);
   try{
     const today=new Date().toISOString().slice(0,10), NOWMS=Date.now();
@@ -493,12 +495,12 @@ async function decide(kind,resKey,btn){
       setMsg(id,'Saving the prompt...');
       await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.prompt=r.prompt; x.status='approved'; x.versions=x.versions||[]; x.versions.push(Object.assign({n:k,file:path,date:today,from:'v'+r.n,at:NOWMS},mk?{marks:mk}:{})); },'Art Library: '+id+' approved (v'+k+')');
       e.prompt=r.prompt; e.status='approved'; e.versions=(e.versions||[]).concat([Object.assign({n:k,file:path,date:today,from:'v'+r.n,at:NOWMS},mk?{marks:mk}:{})]); delete EDITS[id]; saveEdits();
-      MSG[id]={text:e.clip&&e.clip.test?'Approved. The video is saved for Claude to look at. Nothing changes in the game.':e.clip?'Approved. The game is cutting the clip now (about 3 minutes). Then press RELOAD on the title screen and open ADMIN > BATTLE LAB > CLIP TEST.':'Approved. Saved as '+path+'. Claude will pick it up next session.',err:false};
+      MSG[id]={text:e.clip&&e.clip.test?'Approved. The video is saved for Claude to look at. Nothing changes in the game.':e.clip?'Approved. The game is cutting the clip now (about 3 minutes). Then press RELOAD on the title screen'+(clipChapterGroup(e.group)?' and open ADMIN > BATTLE LAB > '+e.group.toUpperCase()+' REVIEW':'')+'.':'Approved. Saved as '+path+'. Claude will pick it up next session.',err:false};
     } else {
       setMsg(id,'Saving your note...');
       const txt=promptOf(e);
-      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.rejects=x.rejects||[]; x.rejects.push({date:today,note,from:'v'+r.n,at:NOWMS}); x.status='rejected'; x.prompt=txt; },'Art Library: '+id+' rejected, note saved');
-      e.rejects=(e.rejects||[]).concat([{date:today,note,from:'v'+r.n,at:NOWMS}]); e.status='rejected'; e.prompt=txt; delete EDITS[id]; saveEdits(); NOTES[id]='';
+      await commitJson(doc=>{ const x=doc.entries.find(q=>q.id===id); if(!x) return false; x.rejects=x.rejects||[]; x.rejects.push(Object.assign({date:today,note,from:'v'+r.n,at:NOWMS},x.clip?{rev:x.promptRev||0}:{})); x.status='rejected'; x.prompt=txt; },'Art Library: '+id+' rejected, note saved');
+      e.rejects=(e.rejects||[]).concat([Object.assign({date:today,note,from:'v'+r.n,at:NOWMS},e.clip?{rev:e.promptRev||0}:{})]); e.status='rejected'; e.prompt=txt; delete EDITS[id]; saveEdits(); NOTES[id]='';
       MSG[id]={text:'Rejected. Your note is saved for Claude.',err:false};
     }
     refreshItem(id); return true;

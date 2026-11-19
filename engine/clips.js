@@ -40,9 +40,12 @@ function bclipDefine(id,D) {
 }
 // The frame showing at ms into the clip.
 function bclipFrameAt(C,ms) { let i=0; while(i<C.n-1&&ms>=C.ms[i+1]) i++; return C.frames[i]; }
-// Which clips the current fight needs. For now clips play only in the Battle Lab's CLIP TEST fight (B2.labClip).
+// Which clips the current fight needs. For now clips play only in Battle Lab clip fights (B2.labClip): CLIP TEST: ROSE and the chapter reviews.
+// A chapter review (B2.labReview, engine/clip-review.js) holds a chapter's worth of clips, far more than a phone can keep decoded at once
+// (about 10 MB each), so it wants only the monsters' idle loops on the field and the one clip being shown.
 function bclipWanted() {
   const out=[]; if(typeof B2==='undefined'||!B2.active||!B2.labClip) return out;
+  if(B2.labReview) { for(const id in BCLIPS) if(BCLIPS[id].kind==='loop'&&B2.foes.some(f=>f.id===BCLIPS[id].owner)) out.push(id); if(B2.clipShow) out.push(B2.clipShow.id); return out; }
   for(const id in BCLIPS) if(B2.party.some(u=>u.id===BCLIPS[id].owner)||B2.foes.some(f=>f.id===BCLIPS[id].owner)) out.push(id);
   return out;
 }
@@ -50,19 +53,23 @@ function bclipWanted() {
 function bclipLoopFrame(C,ms) { const t=ms%(2*C.dur); return bclipFrameAt(C,t>=C.dur?2*C.dur-t-1:t); }
 function bclipFor(owner,kind) {
   if(typeof B2==='undefined'||!B2.active||!B2.labClip) return null;
-  const ko=BCLIPS[owner+'_ko'];   // clipko1: a knocked-out clip beats any other state clip (the nap is a Sleep status, Tom 2026-11-18)
+  const ko=BCLIPS[owner+'_ko'];   // clipko1: a knocked-out clip beats any other state clip (a nap is a Sleep status, not a knock-out: Tom 2026-11-18)
   if(kind==='state'&&ko&&bclipReady(ko.id)) return ko;
   for(const id in BCLIPS) { const C=BCLIPS[id]; if(C.owner===owner&&C.kind===kind&&bclipReady(id)) return C; }
   return null;
 }
-// Battle Lab > CLIP TEST: SLEEPY ROSE (lab field nap:'<party id>'): that party member goes out of the fight about 3 s in,
-// through the game's own knock-out path, so the state clip can be watched without waiting for a monster to do it.
-// Never on that member's own turn (it waits a second and tries again).
-function bclipLabNap(id) { setTimeout(()=>{ if(typeof B2==='undefined'||!B2.active||!B2.labClip) return;
-  const u=B2.party.find(p=>p.id===id); if(!u||u.hp<=0) return;
-  if(battle.state!=='command'||B2.actor===u) return bclipLabNap(id);
-  u.hp=0; b2PartyDown(u); b2Render(); b2Msg(u.name+' is all tuckered out.'); },3000); }
 function bclipReady(id) { const a=PAINTED['clip_'+id]; return !!(a&&a.ready); }
+// The frame of the clip a chapter review is showing for this party member or monster (Battle Lab > CHAPTER n REVIEW, engine/clip-review.js),
+// or null. The clip plays in place, in the real fight, over the real backdrop: a loop goes forward and back once, a one-shot plays once and
+// its last picture stays a moment, then the review is told (B2.clipShow.onEnd) so it can start the next one. t is battle.time in seconds.
+function bclipShowFrame(owner,t) {
+  const S=typeof B2!=='undefined'&&B2.active&&B2.labReview&&B2.clipShow; if(!S||S.owner!==owner) return null;
+  const C=BCLIPS[S.id]; if(!C||!bclipReady(S.id)) return null;
+  if(S.t0==null) S.t0=t;   // the clock starts when the first picture can be drawn
+  const ms=(t-S.t0)*1000, len=C.kind==='loop'?2*C.dur:C.dur+(C.kind==='state'?1500:500);
+  if(ms>=len) { if(!S.over) { S.over=true; const f=S.onEnd; setTimeout(()=>{ if(B2.clipShow===S) B2.clipShow=null; if(f) f(S.id); },0); } return C.kind==='loop'?bclipLoopFrame(C,0):bclipFrameAt(C,C.dur); }
+  return C.kind==='loop'?bclipLoopFrame(C,ms):bclipFrameAt(C,Math.min(ms,C.dur));
+}
 // ST.clip(id,{onImpact}): onImpact runs once, the moment the impact frame is first drawn. The body path runs on the
 // frame clock and the move timeline on timers, and on a busy phone the two drift apart, so a hit that must sit on a
 // clip frame is fired by the clip itself (after the draw, never inside it), not by a timeline time.

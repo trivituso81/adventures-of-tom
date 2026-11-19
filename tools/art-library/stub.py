@@ -21,15 +21,19 @@ def png(w=96, h=128):
     def ch(t, d): return struct.pack('>I', len(d)) + t + d + struct.pack('>I', zlib.crc32(t + d) & 0xffffffff)
     return b'\x89PNG\r\n\x1a\n' + ch(b'IHDR', struct.pack('>IIBBBBB', w, h, 8, 2, 0, 0, 0)) + ch(b'IDAT', data) + ch(b'IEND', b'')
 
-LOG, FILES, VIDEOS = [], {}, {}
+LOG, FILES, VIDEOS, PICK = [], {}, {}, {}
 import os
 _seed = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'data', 'art-prompts.json')
 if os.path.exists(_seed):
     _raw = open(_seed, 'rb').read()
-    if os.environ.get('STUB_CLEAR'):   # a test wants this entry as never approved (comma separated ids)
+    if os.environ.get('STUB_CLEAR') or os.environ.get('STUB_GROUP'):   # a test wants this entry as never approved (comma separated ids)
         _d = json.loads(_raw)
         for _e in _d['entries']:
             if _e['id'] in os.environ['STUB_CLEAR'].split(','): _e.update(status='draft', versions=[], rejects=[])
+        if os.environ.get('STUB_GROUP'):   # clipbatch1: 'id1,id2=Chapter 1' puts those entries in that group (the Library's chapter batch button needs a group named Chapter n)
+            _ids, _g = os.environ['STUB_GROUP'].split('=', 1)
+            for _e in _d['entries']:
+                if _e['id'] in _ids.split(','): _e['group'] = _g
         _raw = (json.dumps(_d, indent=1) + '\n').encode()
     _b = base64.b64encode(_raw).decode()
     FILES['data/art-prompts.json'] = {'sha': 'seed', 'content': '\n'.join(_b[i:i + 60] for i in range(0, len(_b), 60))}   # GitHub wraps base64 lines
@@ -47,7 +51,8 @@ class H(BaseHTTPRequestHandler):
     def do_OPTIONS(self): self._send(204)
     def do_GET(self):
         if self.path.startswith('/video.bin'):
-            b = open(os.environ['STUB_VIDEO'], 'rb').read()
+            still = PICK.get(self.path.split('?', 1)[-1]) == 'still' and os.environ.get('STUB_VIDEO_STILL')   # clipbatch1: a request whose prompt says STILL gets a video that does not move
+            b = open(os.environ['STUB_VIDEO_STILL'] if still else os.environ['STUB_VIDEO'], 'rb').read()
             self.send_response(200); self.send_header('Content-Type', 'video/webm'); self.send_header('Accept-Ranges', 'bytes')
             if not os.environ.get('STUB_VIDEO_NOCORS'): self.send_header('Access-Control-Allow-Origin', '*')
             self.send_header('Content-Length', str(len(b))); self.end_headers(); self.wfile.write(b); return
@@ -75,8 +80,10 @@ class H(BaseHTTPRequestHandler):
         if self.path == '/v1/videos/generations':
             ok = isinstance(b, dict) and b.get('model') and b.get('prompt') and isinstance(b.get('image'), dict) and str(b['image'].get('url', '')).startswith('data:image/') and isinstance(b.get('duration'), int) and b.get('resolution') in ('480p', '720p', '1080p')
             if not ok: return self._send(400, {'error': 'bad request shape'})
+            inflight = sum(1 for k, n in VIDEOS.items() if n < 3)   # requests sent and not yet finished, before this one (a batch must not flood the service)
             rid = 'req%d' % (len(VIDEOS) + 1); VIDEOS[rid] = 0
-            LOG.append({'xai': self.path, 'model': b['model'], 'duration': b['duration'], 'resolution': b['resolution'], 'rid': rid})
+            if 'STILL' in str(b.get('prompt')): PICK[rid] = 'still'
+            LOG.append({'xai': self.path, 'model': b['model'], 'duration': b['duration'], 'resolution': b['resolution'], 'rid': rid, 'inflight': inflight})
             return self._send(200, {'request_id': rid})
         if self.path in ('/v1/images/generations', '/v1/images/edits'):
             ok = isinstance(b, dict) and b.get('model') and b.get('prompt')
