@@ -128,11 +128,11 @@
    "id": "t-ch1art",
    "title": "Approve the chapter 1 stand-in pictures",
    "theme": "Areas",
-   "lane": "tom",
+   "lane": "claude",
    "col": "up",
    "next": "ADMIN > ART LIBRARY, group \"Chapter 1\" (picture tabs, not Clips): 11 stand-in entries (muffin pan, empty pan, papers, Mudling with muffins, green Big One with pan, Grace's list, Amy's window, Ellie's door, Rose on shoulders, cab shot, phone on seat). Generate and Approve, or Reject with a note.",
    "blocks": [],
-   "changed": "2026-11-17",
+   "changed": "2026-11-19",
    "created": "2026-11-17",
    "chat": {
     "url": "",
@@ -142,6 +142,10 @@
     {
      "d": "2026-11-17",
      "t": "On the board from the first fill (board1)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Moved from tom/up to claude/up by Tom."
     }
    ]
   },
