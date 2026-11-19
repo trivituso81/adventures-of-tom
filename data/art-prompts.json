@@ -27803,7 +27803,7 @@
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: LOUNGE PASS FLEX\nFrom his starting relaxed stance, he gives a smug little smile, brings a small lounge pass card out from behind his back, and holds it up forward at face height once, showing it off. Without repeating the gesture, he tucks the card behind his back again. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip."
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -27818,7 +27818,15 @@
      }
     }
    ],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-19",
+     "note": "dont know what this is but looks like a strange animation",
+     "from": "review",
+     "at": 1795125710735,
+     "rev": 0
+    }
+   ],
    "id": "clip-tom-blockade",
    "tab": "Clips",
    "group": "Chapter 1",
