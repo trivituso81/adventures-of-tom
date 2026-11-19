@@ -70,3 +70,19 @@ Exploratory sweep (not part of the bar, run after the primary failed): other lay
 What this does not rule out: with 179 lines the standard error is about 3.7 points, so a picker at 55% could hide. And "kept" is the take he stopped on (341 of 345 lines), not necessarily the take he preferred. Nothing here says taste among clean takes does not exist; it says these tools, on this data, cannot find it.
 
 Files: `embed.py`, `embtest.py` (`sweep`, `maxnull` modes), `results/embtest_primary.json`, `results/embtest_sweep.json`, `results/embtest_sweep.log`, `results/embtest_maxnull.log`. Embeddings are rebuilt in about 20 minutes on 2 CPU cores (torch and transformers from PyPI, model files from huggingface.co); the pip torch wheel is large (about 3 GB with CUDA libraries).
+
+## voicelearn4 (stage 3): the failure guard
+No picker exists (voicelearn2, voicelearn3), so stage 3 is only a guard against bad takes. Nothing here scores taste.
+
+| Piece | What it does | Test result |
+|---|---|---|
+| `guard.py` | Transcribes a take (Whisper tiny.en through sherpa-onnx, audio at 16 kHz) and flags it when it speaks 3 or more words that are not in its script. `guard.py takes <dir>` checks every take of a send; `guard.py wav <mp3> --script "<script>"` checks one take (exit 3 = flagged); `check_audio(raw_mp3_bytes, script)` is the call for the generation job. | Fresh run on all 922 takes: 39 flagged (31 lines), 2 of them kept. Same rule on the voicelearn2 transcripts: 41 flagged. The 2 takes that differ were Whisper hallucinating on the 24 kHz audio of ordinary-pace takes (16 and 11 "extra" words, normal speed); the 16 kHz run reads them right. Results: `results/guard_takes.json`. |
+| The 2 flagged kept takes | Boppy "Nobody take them fast" (said twice in the audio; he kept it) and Kenji "Irasshaimase" (Whisper mishears a Japanese word). | Exceptions to look at, not misses. A guard flag is a regenerate trigger for the job, never a deletion. |
+| `lint_tags.py` | Lists any script whose first bracket tag is 100+ characters (`data/voice-index.json` and `tools/voice-library/scripts/*.json`). Run from the repo root; exit 1 when it finds one. | 11,023 scripts checked, 2 found: the Washington line "Back in 1979, this whole block..." (105 characters, clip already baked) and a Justin line in `justin-dialogue.json` ("Grace, Rose, come here...", 110 characters, not in the index and no clip). Neither was changed. |
+| `results/gains.json` | Gain in dB that would bring each voice's mean kept-take loudness to the median (-22.5 LUFS), for voices with 5+ kept takes. | Deedee -4.6, Amy -3.4, Toad -1.9, Luna -1.6, Ellie -1.5, Rose -1.1, TNB -0.8, Grump -0.1, Washington +0.3, Big One +1.3, Grace +1.5, Tom +1.6, Skeeter +1.8, Mudling +1.9, Log +2.9, Boppy +3.3. |
+
+Loudness is report only. The baker (`merge-local.js`) applies no per-voice gain and the game plays every clip at the same level (`dvPlay` in `engine/dialog-voice.js` does not know the speaker), so there was nothing to wire. Levelling would need a per-voice gain in playback; no baked clip was changed. Measured on raw takes, before the baker's pitch and speed effects.
+
+A duration check (words per second against the voice's usual) was tried as a second signal and dropped: 37 of 38 flagged takes run slow, but so do 82 of 873 clean ones.
+
+The generation job is planned in `tools/voice-learn/GENERATION_JOB_PLAN.md`. It has not been built or run.

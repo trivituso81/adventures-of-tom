@@ -1,3 +1,12 @@
+## voicelearn4 (2026-11-18): Voice failure guard: a take checker, a first-tag lint, a loudness report and the plan for a take-making job (tools only, no game change)
+
+- Stage 3 of the voice learning plan (`claude/voice-learning-plan.md`). Nothing in the game changed: no script, clip, engine file or setting. Tools and notes only, in `tools/voice-learn/`.
+- `guard.py`: transcribes a take with Whisper tiny and flags it when it speaks 3 or more words that are not in its script. On Tom's 922 real takes: 39 flagged (31 lines), 2 of them kept (a repeated phrase he kept, and a Japanese word Whisper mishears). Run on the old stage 2 transcripts the same rule gave 41; the 2 extra were Whisper hallucinating on 24 kHz audio of normal takes. Also callable per take for a generation job.
+- `lint_tags.py`: 2 scripts have a first bracket tag of 100+ characters: a Washington line (clip already baked) and a Justin line in `justin-dialogue.json` (no clip). Neither changed.
+- `results/gains.json`: per-voice gain that would level the kept takes (Deedee -4.6 dB to Boppy +3.3 dB). Report only: the baker and the game apply no per-voice gain, so nothing was wired and no baked clip changed.
+- `tools/voice-learn/GENERATION_JOB_PLAN.md`: plan for a manual GitHub Action that makes one checked take for each of the 258 lines with no clip. 28,384 characters to send, about 29,700 with regenerates; about 1 credit per character, v4 rate unconfirmed. Not built, not run, no ElevenLabs spending, no key needed yet.
+- Tests: guard on all 922 takes (live and from cache), lint on 11,023 scripts, `python3 tools/smoke.py`.
+
 ## b3s5a (2026-11-18): New battle, stage 5a: Traits, Quirks and Grand Capstones for the first Vibes of Tom, Grace, Rose and Deedee
 
 - Stage 5a of 23 of the new battle system ("Battle 3", `docs/BATTLE3.md`, plan `claude/battle-architecture.md` in the Project). Story fights still use the old battle and nothing in it changed. Stage 5 is split in two: 5b does the same for the second Vibes (Gamer Geek, Craft Artist, Cozy Rosie, Registered Nut).

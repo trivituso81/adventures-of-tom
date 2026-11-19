@@ -1,0 +1,86 @@
+{
+ "note": "voicelearn4: gain in dB that would bring each voice's mean kept-take loudness (LUFS) to the median of voices with 5+ kept takes. Measured on the takes Tom kept (raw generator output, before the baker pitch and speed effects). Report only: nothing in the game or the baker reads this file.",
+ "target_lufs": -22.5,
+ "voices": {
+  "amy": {
+   "n": 32,
+   "kept_lufs": -19.06,
+   "gain_db": -3.4
+  },
+  "bigone": {
+   "n": 19,
+   "kept_lufs": -23.81,
+   "gain_db": 1.3
+  },
+  "boppy": {
+   "n": 17,
+   "kept_lufs": -25.76,
+   "gain_db": 3.3
+  },
+  "deedee": {
+   "n": 96,
+   "kept_lufs": -17.91,
+   "gain_db": -4.6
+  },
+  "ellie": {
+   "n": 16,
+   "kept_lufs": -20.97,
+   "gain_db": -1.5
+  },
+  "grace": {
+   "n": 13,
+   "kept_lufs": -24.0,
+   "gain_db": 1.5
+  },
+  "grump": {
+   "n": 8,
+   "kept_lufs": -22.39,
+   "gain_db": -0.1
+  },
+  "log": {
+   "n": 9,
+   "kept_lufs": -25.37,
+   "gain_db": 2.9
+  },
+  "luna": {
+   "n": 6,
+   "kept_lufs": -20.91,
+   "gain_db": -1.6
+  },
+  "mudling": {
+   "n": 11,
+   "kept_lufs": -24.36,
+   "gain_db": 1.9
+  },
+  "rose": {
+   "n": 9,
+   "kept_lufs": -21.4,
+   "gain_db": -1.1
+  },
+  "skeeter": {
+   "n": 8,
+   "kept_lufs": -24.3,
+   "gain_db": 1.8
+  },
+  "tnb": {
+   "n": 13,
+   "kept_lufs": -21.66,
+   "gain_db": -0.8
+  },
+  "toad": {
+   "n": 10,
+   "kept_lufs": -20.64,
+   "gain_db": -1.9
+  },
+  "tom": {
+   "n": 54,
+   "kept_lufs": -24.06,
+   "gain_db": 1.6
+  },
+  "washington": {
+   "n": 7,
+   "kept_lufs": -22.77,
+   "gain_db": 0.3
+  }
+ }
+}
