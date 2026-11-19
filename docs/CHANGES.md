@@ -1,3 +1,16 @@
+## voicelearn2 (2026-11-18): voice learning stage 2: no sound measure picks Tom's kept take on re-rolls; a transcript check catches looped and tag-read takes
+
+Stage 2 of claude/voice-learning-plan.md, run on his real send (branch `takes`: 922 takes, 345 lines). Nothing in the game changed; tools and results only (tools/voice-learn/, README there has every number).
+
+| Question | Answer |
+|---|---|
+| Can pace, loudness, pitch, pauses or voice colour pick the kept take better than chance on held out lines? | No. On 180 pure re-roll lines (same script in every take): best single measure 56% against 49.5% chance (corrected p 0.94); 10-fold model of all measures 49% against 49.5%. |
+| Why did pace look like it worked on all lines? | 41 takes loop the line or read a tag aloud (1.5x long). Without them the all-lines pace result is 51% against 45% (p 0.59). On lines where his script changed pace stays (54% against 39%): that is his own script words. |
+| What separates kept from thrown away? | A transcript check (Whisper tiny.en, sherpa-onnx): 3 or more spoken words not in the script. 41 takes, 2 kept; the kept take is the clean one in 31 of 32 mixed lines. Cause: a first bracket tag of 100+ characters (Deedee's old tag block) fails 65% of takes, under 60 characters about 1%. The scripts now in `data/voice-index.json` have none (one baked Washington line). |
+| Verdict | Plan stage 3 as written (score takes against a kept-take profile) has nothing to score with: stop. The transcript check is a failure filter only. Nothing was pushed to scripts, voices or speeds. |
+
+Tests: `tools/voice-learn/run.sh` rebuilds everything from branch `takes`; `tools/smoke.py`.
+
 ## partybanner1 (2026-11-18): every join and every leave now shows its own banner with a jingle, one after another; 20 banner paintings added to the Art Library
 
 - Tom (11-18 15:42): "we need art for whenever any character joins the party - add this to the art library. they should never be combined. if multiple people join the party at once, each banner should be displayed sequentially. (not at the same time) there should also be a sound that plays when a character joins the party, like in final fantasy." (15:43): "we also need the same thing for when someone leaves the party."

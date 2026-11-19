@@ -1,0 +1,302 @@
+{
+ "veto_hit": 0.4855362821932589,
+ "chance": 0.44963973365136156,
+ "lines": 344,
+ "mixed_lines_th3": 32,
+ "kept_clean_th3": 31,
+ "flagged": 41,
+ "flagged_kept": 2,
+ "flagged_lines": 33,
+ "discarded": 576,
+ "flagged_dur_ge1.3": 0.6097560975609756,
+ "veto_hit_same": 0.4953703703703704,
+ "chance_same": 0.4953703703703704,
+ "same_lines": 180,
+ "same_lines_with_flag": 2,
+ "veto_perm_p": 0.0,
+ "veto_null_mean": 0.44961334381864904,
+ "pace": [
+  {
+   "voice": "amy",
+   "kind": "changed",
+   "lines": 18,
+   "kept_over_thrown_pace": 0.991,
+   "se_log": 0.012
+  },
+  {
+   "voice": "amy",
+   "kind": "same",
+   "lines": 13,
+   "kept_over_thrown_pace": 1.019,
+   "se_log": 0.018
+  },
+  {
+   "voice": "bigone",
+   "kind": "changed",
+   "lines": 3,
+   "kept_over_thrown_pace": 1.232,
+   "se_log": 0.054
+  },
+  {
+   "voice": "bigone",
+   "kind": "same",
+   "lines": 16,
+   "kept_over_thrown_pace": 0.998,
+   "se_log": 0.006
+  },
+  {
+   "voice": "boppy",
+   "kind": "same",
+   "lines": 17,
+   "kept_over_thrown_pace": 1.007,
+   "se_log": 0.021
+  },
+  {
+   "voice": "deedee",
+   "kind": "changed",
+   "lines": 40,
+   "kept_over_thrown_pace": 1.093,
+   "se_log": 0.039
+  },
+  {
+   "voice": "deedee",
+   "kind": "same",
+   "lines": 31,
+   "kept_over_thrown_pace": 1.005,
+   "se_log": 0.009
+  },
+  {
+   "voice": "ellie",
+   "kind": "changed",
+   "lines": 6,
+   "kept_over_thrown_pace": 1.027,
+   "se_log": 0.012
+  },
+  {
+   "voice": "ellie",
+   "kind": "same",
+   "lines": 10,
+   "kept_over_thrown_pace": 0.999,
+   "se_log": 0.009
+  },
+  {
+   "voice": "fern",
+   "kind": "changed",
+   "lines": 3,
+   "kept_over_thrown_pace": 1.035,
+   "se_log": 0.026
+  },
+  {
+   "voice": "grace",
+   "kind": "changed",
+   "lines": 7,
+   "kept_over_thrown_pace": 1.022,
+   "se_log": 0.029
+  },
+  {
+   "voice": "grace",
+   "kind": "same",
+   "lines": 6,
+   "kept_over_thrown_pace": 1.017,
+   "se_log": 0.012
+  },
+  {
+   "voice": "grump",
+   "kind": "same",
+   "lines": 7,
+   "kept_over_thrown_pace": 1.024,
+   "se_log": 0.013
+  },
+  {
+   "voice": "log",
+   "kind": "same",
+   "lines": 9,
+   "kept_over_thrown_pace": 0.984,
+   "se_log": 0.018
+  },
+  {
+   "voice": "luna",
+   "kind": "same",
+   "lines": 6,
+   "kept_over_thrown_pace": 1.057,
+   "se_log": 0.023
+  },
+  {
+   "voice": "mudling",
+   "kind": "same",
+   "lines": 11,
+   "kept_over_thrown_pace": 0.984,
+   "se_log": 0.017
+  },
+  {
+   "voice": "rose",
+   "kind": "changed",
+   "lines": 4,
+   "kept_over_thrown_pace": 0.994,
+   "se_log": 0.028
+  },
+  {
+   "voice": "rose",
+   "kind": "same",
+   "lines": 5,
+   "kept_over_thrown_pace": 1.026,
+   "se_log": 0.01
+  },
+  {
+   "voice": "skeeter",
+   "kind": "same",
+   "lines": 8,
+   "kept_over_thrown_pace": 1.027,
+   "se_log": 0.011
+  },
+  {
+   "voice": "tnb",
+   "kind": "changed",
+   "lines": 11,
+   "kept_over_thrown_pace": 1.07,
+   "se_log": 0.028
+  },
+  {
+   "voice": "toad",
+   "kind": "same",
+   "lines": 10,
+   "kept_over_thrown_pace": 0.978,
+   "se_log": 0.013
+  },
+  {
+   "voice": "tom",
+   "kind": "changed",
+   "lines": 30,
+   "kept_over_thrown_pace": 1.05,
+   "se_log": 0.024
+  },
+  {
+   "voice": "tom",
+   "kind": "same",
+   "lines": 24,
+   "kept_over_thrown_pace": 1.009,
+   "se_log": 0.015
+  },
+  {
+   "voice": "washington",
+   "kind": "changed",
+   "lines": 7,
+   "kept_over_thrown_pace": 1.151,
+   "se_log": 0.016
+  }
+ ],
+ "kept_by_voice": [
+  {
+   "voice": "amy",
+   "n": 32,
+   "lufs": -19.06,
+   "f0": 15.69,
+   "wps": 2.4
+  },
+  {
+   "voice": "bigone",
+   "n": 19,
+   "lufs": -23.81,
+   "f0": 11.06,
+   "wps": 2.03
+  },
+  {
+   "voice": "boppy",
+   "n": 17,
+   "lufs": -25.76,
+   "f0": 0.82,
+   "wps": 2.33
+  },
+  {
+   "voice": "deedee",
+   "n": 96,
+   "lufs": -17.91,
+   "f0": 15.21,
+   "wps": 2.24
+  },
+  {
+   "voice": "ellie",
+   "n": 16,
+   "lufs": -20.97,
+   "f0": 9.83,
+   "wps": 2.35
+  },
+  {
+   "voice": "grace",
+   "n": 13,
+   "lufs": -24.0,
+   "f0": 16.82,
+   "wps": 2.61
+  },
+  {
+   "voice": "grump",
+   "n": 8,
+   "lufs": -22.39,
+   "f0": 13.32,
+   "wps": 1.89
+  },
+  {
+   "voice": "log",
+   "n": 9,
+   "lufs": -25.37,
+   "f0": 7.13,
+   "wps": 1.88
+  },
+  {
+   "voice": "luna",
+   "n": 6,
+   "lufs": -20.91,
+   "f0": 13.65,
+   "wps": 2.5
+  },
+  {
+   "voice": "mudling",
+   "n": 11,
+   "lufs": -24.36,
+   "f0": 16.67,
+   "wps": 1.76
+  },
+  {
+   "voice": "rose",
+   "n": 9,
+   "lufs": -21.4,
+   "f0": 18.76,
+   "wps": 2.21
+  },
+  {
+   "voice": "skeeter",
+   "n": 8,
+   "lufs": -24.3,
+   "f0": 17.39,
+   "wps": 2.31
+  },
+  {
+   "voice": "tnb",
+   "n": 13,
+   "lufs": -21.66,
+   "f0": 6.61,
+   "wps": 2.73
+  },
+  {
+   "voice": "toad",
+   "n": 10,
+   "lufs": -20.64,
+   "f0": 12.72,
+   "wps": 2.2
+  },
+  {
+   "voice": "tom",
+   "n": 54,
+   "lufs": -24.06,
+   "f0": 5.42,
+   "wps": 2.49
+  },
+  {
+   "voice": "washington",
+   "n": 7,
+   "lufs": -22.77,
+   "f0": 3.29,
+   "wps": 2.15
+  }
+ ]
+}
