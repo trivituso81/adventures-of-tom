@@ -79,5 +79,8 @@ if lg.returncode: fails.append(lg.stdout.strip())
 # Battle 3 (docs/BATTLE3.md): the data check and the rule tests, with no screen (about half a second).
 b3=subprocess.run(['node',os.path.join(HERE,'b3-sim.js'),'check'],capture_output=True,text=True); print('b3 rules',b3.stdout.strip().replace('\n',' '))
 if b3.returncode: fails.append('battle 3 rules: '+(b3.stdout.strip() or b3.stderr.strip())[:400])
+# Board (board1): data/board.json is valid and every card has what the page needs (claude/board-plan.md).
+bc=subprocess.run([sys.executable,os.path.join(HERE,'board_check.py')],capture_output=True,text=True); print(bc.stdout.strip())
+if bc.returncode: fails.append(bc.stdout.strip()[:400])
 print('FAILS:',fails)
 raise SystemExit(1 if fails else 0)

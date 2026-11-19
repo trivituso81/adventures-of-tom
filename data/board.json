@@ -1,0 +1,590 @@
+{
+ "version": 1,
+ "themes": [
+  "Voice Clips",
+  "Battle Animations",
+  "Battle System",
+  "Areas",
+  "Characters",
+  "Story and Dialogue",
+  "Game Shell",
+  "Tools",
+  "Project Ops"
+ ],
+ "columns": [
+  {
+   "id": "up",
+   "name": "Up next"
+  },
+  {
+   "id": "prog",
+   "name": "In progress"
+  },
+  {
+   "id": "wait",
+   "name": "Waiting"
+  },
+  {
+   "id": "done",
+   "name": "Done"
+  }
+ ],
+ "lanes": [
+  {
+   "id": "tom",
+   "name": "Tom",
+   "covers": "Play-tests, reviews, recording, image generation in the Art Library, decisions, settings only you can change"
+  },
+  {
+   "id": "claude",
+   "name": "Claude",
+   "covers": "Builds, fixes, merges, prompt writing: anything a session does next"
+  },
+  {
+   "id": "xai",
+   "name": "xAI",
+   "covers": "Grok image and video generation (Art Library, clip-gen Action): credit, outages, price checks"
+  },
+  {
+   "id": "elevenlabs",
+   "name": "ElevenLabs",
+   "covers": "Voice and music takes (voice-gen Action, Voice and Music Library): credits, voice slots (account full at 30)"
+  },
+  {
+   "id": "imagegen",
+   "name": "Image generator",
+   "covers": "The outside image AI used from Claude's prompts"
+  },
+  {
+   "id": "github",
+   "name": "GitHub",
+   "covers": "Pages publish, Actions runs, tokens and secrets, repo access"
+  }
+ ],
+ "cards": [
+  {
+   "id": "t-ch1clips",
+   "title": "Review the chapter 1 battle clips",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "next": "Wait for the publish after main 297bc74 (about 4 min), RELOAD on the title screen, then ADMIN > BATTLE LAB > CHAPTER 1 REVIEW and CHAPTER 1 REVIEW: THE BIG ONE. PLAY ALL, REDO with a note on what looks wrong. The automatic marks were only checked on stand-ins, so your review is the real test.",
+   "blocks": [
+    "c-clipch1fix"
+   ],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "clipgen2 made all 67 chapter 1 clips for $5.34; none needed you."
+    }
+   ]
+  },
+  {
+   "id": "t-ch1play",
+   "title": "Play chapter 1 on your phone and report",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "up",
+   "next": "Title screen > NEW GAME > CH 1 (or ADMIN chapter select). Play Boppy at the table, Aunt Ellie's door, the three Mudlings, the BOO scene, the lap around the Square, the chapter card. Report what you saw in the chapter 2 session prompt.",
+   "blocks": [
+    "c-ch2build"
+   ],
+   "changed": "2026-11-17",
+   "created": "2026-11-17",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-17",
+     "t": "On the board from the first fill (board1)."
+    }
+   ]
+  },
+  {
+   "id": "t-roofnpc",
+   "title": "Check the Gemini audit fixes (scene 1 to the kitchen heist)",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "up",
+   "next": "START NEW and play to Grump Hollow. Expect: Rose stays on your shoulders through Grace's list then hops down; a \"Goal:\" popup; no townsfolk on roofs or walking in scenes; in the kitchen the party holds its spots; no pepper popup until the scene ends; Deedee joins beside you.",
+   "blocks": [],
+   "changed": "2026-11-18",
+   "created": "2026-11-18",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-18",
+     "t": "On the board from the first fill (board1)."
+    }
+   ]
+  },
+  {
+   "id": "t-ch1art",
+   "title": "Approve the chapter 1 stand-in pictures",
+   "theme": "Areas",
+   "lane": "tom",
+   "col": "up",
+   "next": "ADMIN > ART LIBRARY, group \"Chapter 1\" (picture tabs, not Clips): 11 stand-in entries (muffin pan, empty pan, papers, Mudling with muffins, green Big One with pan, Grace's list, Amy's window, Ellie's door, Rose on shoulders, cab shot, phone on seat). Generate and Approve, or Reject with a note.",
+   "blocks": [],
+   "changed": "2026-11-17",
+   "created": "2026-11-17",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-17",
+     "t": "On the board from the first fill (board1)."
+    }
+   ]
+  },
+  {
+   "id": "t-ch2play",
+   "title": "Play chapter 2 and generate the Report fixes pictures",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "up",
+   "next": "Play chapter 2 from the loft to the towel. Then ADMIN > ART LIBRARY, group \"Report fixes\": generate and approve the 21 drafts (7 open reports wait on them). ADMIN > VOICE LIBRARY: 119 lines under New direction and 6 under No clip yet.",
+   "blocks": [],
+   "changed": "2026-11-14",
+   "created": "2026-11-14",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-14",
+     "t": "On the board from the first fill (board1)."
+    }
+   ]
+  },
+  {
+   "id": "t-ch6play",
+   "title": "Play chapter 6 from the Chairman fight to the end",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "up",
+   "next": "Judge the stand-ins: lemon, dragonfly, kickball and megaphone are code drawn; Nara hops instead of catching or making a sour face.",
+   "blocks": [],
+   "changed": "2026-11-14",
+   "created": "2026-11-14",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-14",
+     "t": "On the board from the first fill (board1)."
+    }
+   ]
+  },
+  {
+   "id": "t-ch7play",
+   "title": "Play chapter 7 and approve its art and voices",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "up",
+   "next": "Play chapter 7 from Chapter Select. ADMIN > ART LIBRARY group \"Chapter 7\" (27 entries). ADMIN > VOICE LIBRARY chapter 7 (232 lines): record, export, send the file to the chapter 7 build conversation.",
+   "blocks": [],
+   "changed": "2026-11-14",
+   "created": "2026-11-14",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-14",
+     "t": "On the board from the first fill (board1)."
+    }
+   ]
+  },
+  {
+   "id": "t-ch8art",
+   "title": "Chapter 8 pictures and voices",
+   "theme": "Areas",
+   "lane": "tom",
+   "col": "up",
+   "next": "ADMIN > ART LIBRARY group \"Chapter 8\" (26 entries): GENERATE and APPROVE, starting with ch8-flame-sheet, ch8-orange-block, ch8-coin, ch8-yard-grey. ADMIN > VOICE LIBRARY chapter 8 (178 lines, 176 to record; Show > No clip yet): export and send the file to the chapter 8 build conversation.",
+   "blocks": [],
+   "changed": "2026-11-14",
+   "created": "2026-11-14",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-14",
+     "t": "On the board from the first fill (board1)."
+    }
+   ]
+  },
+  {
+   "id": "t-narr",
+   "title": "Record the Narrator and Washington lines",
+   "theme": "Voice Clips",
+   "lane": "tom",
+   "col": "up",
+   "next": "ADMIN > VOICE LIBRARY. Narr1: record the 57 Narrator lines with no clip (silent until then). Washvoice1: re-record Mr. Washington's 32 lines (Show > Old voice). One export can carry both; send it to the voice conversation. Do not delete takes.",
+   "blocks": [],
+   "changed": "2026-11-14",
+   "created": "2026-11-14",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-14",
+     "t": "On the board from the first fill (board1)."
+    }
+   ]
+  },
+  {
+   "id": "t-sendtakes",
+   "title": "Optional: send more voice takes to Claude",
+   "theme": "Voice Clips",
+   "lane": "tom",
+   "col": "up",
+   "next": "ADMIN > VOICE LIBRARY, bottom, \"Send my takes to Claude (N waiting)\". Expect \"Sent. N takes are with Claude.\" If it says no GitHub token: ADMIN > ART LIBRARY > Setup. Do not delete takes. Optional: more takes make a later picker test stronger.",
+   "blocks": [],
+   "changed": "2026-11-18",
+   "created": "2026-11-18",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-18",
+     "t": "On the board from the first fill (board1)."
+    }
+   ]
+  },
+  {
+   "id": "t-scriptconvo",
+   "title": "Try the Script Editor conversations and Workshop",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "up",
+   "next": "ADMIN > SCRIPT EDITOR: conversations, Workshop and Paste back. Test steps are in claude/next-addendum-scriptconvo1.md.",
+   "blocks": [],
+   "changed": "2026-11-15",
+   "created": "2026-11-15",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-15",
+     "t": "On the board from the first fill (board1)."
+    }
+   ]
+  },
+  {
+   "id": "t-report1",
+   "title": "Check the REPORT pencil tab",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "up",
+   "next": "Pencil tab on the right screen edge (ADMIN > REPORT TAB if missing). Tap it: the game freezes and a REPORT screen shows a picture. Type a note, tap the picture to drop a pin, SEND. Expect \"Report sent.\" If it says kept on the phone, send the exact message.",
+   "blocks": [],
+   "changed": "2026-11-14",
+   "created": "2026-11-14",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-14",
+     "t": "On the board from the first fill (board1)."
+    }
+   ]
+  },
+  {
+   "id": "t-oldchecks",
+   "title": "Older phone checks (no build waits on them)",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "up",
+   "next": "facing1, cutfront1, amberspot1 (A on the orange blocks replays the family's lines), clips9, clips10 (keep recording: Show > New direction and No clip yet, export, send), introzoom1, bossbig1, item1, clearout1, cutstage1, near1. Details per tag in docs/CHANGES.md.",
+   "blocks": [],
+   "changed": "2026-11-14",
+   "created": "2026-11-14",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-14",
+     "t": "On the board from the first fill (board1)."
+    }
+   ]
+  },
+  {
+   "id": "t-arttogen",
+   "title": "Art to generate: Gate Zero rooms and Young Boppy",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "up",
+   "next": "In the Art Library generate `room-gatezero-noplane` and `room-gatezero-plane` (Rooms, Airport), and Young Boppy Van Cortlandt '70 (then Claude bakes `ab_xcult_*`). Clipfix1 re-takes: amy ch11 \"Easy. Kind.\" order, gus \"Larry is amber\", \"Round N\" lines, amy \"With a little heart.\"",
+   "blocks": [],
+   "changed": "2026-11-14",
+   "created": "2026-11-14",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-14",
+     "t": "On the board from the first fill (board1)."
+    }
+   ]
+  },
+  {
+   "id": "t-boardtest",
+   "title": "Play-test the new BOARD",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "up",
+   "next": "ADMIN > BOARD. Check: Tom's lane is first and open; the one-line summary at the top; tap a card; try Done and Move to on a card you do not mind moving (needs the GitHub token from ADMIN > ART LIBRARY > Setup). Report what is confusing.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGLejGvLceposV63gR",
+    "opening": "Read claude/board-plan.md and claude/handoff-rules.md, then build board1."
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "On the board from the first fill (board1)."
+    }
+   ]
+  },
+  {
+   "id": "c-clipch1fix",
+   "title": "Fix chapter 1 clips from the review notes (clipch1fix)",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "wait",
+   "next": "Raise promptRev on each entry Tom redid, then run the clip-gen Action again for only those. Start: claude/animation-chapter-plan.md and claude/next-addendum-clipgen2.md.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "On the board from the first fill (board1)."
+    }
+   ],
+   "waiting_on": "tom",
+   "prompt": {
+    "what": "Reads Tom's chapter 1 REDO notes, makes the smallest prompt edit per clip, regenerates only those.",
+    "before": [
+     "Open ADMIN > BATTLE LAB > CHAPTER 1 REVIEW, PLAY ALL, and REDO with a note on every clip that looks wrong."
+    ],
+    "model": "Claude Opus 5.5 (row D: generator prompts judged by eye)",
+    "effort": "medium (each note is a small edit of a prompt that exists)",
+    "text": "Read claude/animation-chapter-plan.md and claude/next-addendum-clipgen2.md, then build clipch1fix. You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-ch2build",
+   "title": "Build chapter 2 to the locked script",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "wait",
+   "next": "One chapter per conversation. Lines go in word for word from the locked file. Start: claude/story-next.md.",
+   "blocks": [],
+   "changed": "2026-11-17",
+   "created": "2026-11-17",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-17",
+     "t": "On the board from the first fill (board1)."
+    }
+   ],
+   "waiting_on": "tom",
+   "prompt": {
+    "what": "Builds chapter 2 from the locked script, tests it start to finish, then stops for Tom's phone play.",
+    "before": [
+     "Play chapter 1 (card \"Play chapter 1 on your phone and report\").",
+     "Replace the text in angle brackets with what you saw."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the locked script is written, tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/story-next.md and continue. Chapter 1 play feedback: <what Tom saw>. You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-b3s8",
+   "title": "New battle system, stage 8: clips in Battle 3",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Stage 8 of 23: the first video attack, the chapter 1 boss. Read the architecture section 5 row 8, claude/battle-animation-list-ch1-v11.md section 7 and docs/BATTLE3.md \"Clips: facts for stage 8\". Tom does not test until milestone A (after stage 8).",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "On the board from the first fill (board1)."
+    }
+   ],
+   "prompt": {
+    "what": "Builds stage 8 of the new battle system: clips in Battle 3.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: engine wiring; use Claude Opus 5.5 if it turns into judging video by eye)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/battle-build.md and build stage 8 of the new battle system. You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-pubfast2",
+   "title": "Publishing speed, step 2: art/raw off the site",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "up",
+   "next": "Take art/raw out of the published site to cut a publish from about 4 min to about 1.5 min. Plan in claude/next-addendum-pubfast1.md.",
+   "blocks": [],
+   "changed": "2026-11-18",
+   "created": "2026-11-18",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-18",
+     "t": "On the board from the first fill (board1)."
+    }
+   ],
+   "prompt": {
+    "what": "Builds pubfast2: moves art/raw off the published site and checks the publish time.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the plan is written)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/next-addendum-pubfast1.md and build pubfast2. You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-ch8",
+   "title": "Chapter 8 build, stage 2",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Walking pilot flame and a teardown map of the built chapter 8 text. Tracker: claude/ch08-build.md.",
+   "blocks": [],
+   "changed": "2026-11-14",
+   "created": "2026-11-14",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-14",
+     "t": "On the board from the first fill (board1)."
+    }
+   ],
+   "prompt": {
+    "what": "Continues the chapter 8 build at stage 2.",
+    "before": [
+     "Nothing to do first (the Art Library chapter 8 pictures help but do not block)."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: build with a tracker)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/ch08-build.md and claude/story-ch08.md. Continue the chapter 8 build at stage 2. You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-ch6left",
+   "title": "Chapter 6 leftovers",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Talk and emotion rows for new lines, landscape frames of ch6Park and ch6Kitchen, Chairman finale at the picnic table, then Tom's phone report. Notes: claude/next-addendum-ch6stage4done.md.",
+   "blocks": [],
+   "changed": "2026-11-14",
+   "created": "2026-11-14",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-14",
+     "t": "On the board from the first fill (board1)."
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the chapter 6 leftovers, then handles Tom's report.",
+    "before": [
+     "Optional: play chapter 6 first and have a report ready."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: leftovers are listed)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/next-addendum-ch6stage4done.md and claude/story-ch06.md. Fix the chapter 6 leftovers, then handle my report. You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-board1",
+   "title": "Build the status board (board1)",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "next": "Shipped. Sessions now update this board at the start and end of every session.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGLejGvLceposV63gR",
+    "opening": "Read claude/board-plan.md and claude/handoff-rules.md, then build board1."
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Built board.html, data/board.json, tools/board_check.py."
+    }
+   ],
+   "done": "2026-11-19"
+  }
+ ]
+}

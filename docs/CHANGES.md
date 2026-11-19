@@ -1,3 +1,9 @@
+## board1 (2026-11-19): ADMIN > BOARD, a kanban of every open item by who has the next move
+
+- New admin page `board.html` (first entry in the ADMIN list), data in `data/board.json`. Rows are lanes (Tom, Claude, xAI, ElevenLabs, Image generator, GitHub; a new lane is a new entry in the file's `lanes` list), columns are Up next, In progress, Waiting, Done (Done drops off the page after 7 days). Top line: "Waiting on you: N (oldest D days). Blocking Claude: M." (tap to show only Tom's lane). Theme filter chips; age turns amber at 3 days and red at 7.
+- Tap a card for the detail: next step, what it blocks, chat link, the next-session prompt with before-steps, model and effort (tap to copy), history. Buttons Done, Move to and Note save straight to `data/board.json` on main with the token from ART LIBRARY > Setup (read the latest file first, change only that card, so other sessions' edits are kept). No token: the page says so.
+- First fill from claude/next.md: 15 Tom cards, 6 Claude cards, board1 itself done. `tools/board_check.py` (in smoke) validates the file; `tools/board_test.py` looks at 390x844, 951x648 and 1440x900 and drives Note, Move and Done against `tools/art-library/stub.py` (now also seeds data/board.json). FAILS: [].
+
 ## b3s7 (2026-11-19): New battle: tap to preview a move, the recommended move, and Rose Mode pictures (Lab only)
 
 - Battle 3 stage 7. Preview: `engine/b3-preview.js` plays a move on a copy of the fight and shows what it would do (damage, Pet Peeve, Resist, Detonation, pips, Break, pushes, heals, revives, the turn bar after). A first touch previews, a second uses. Gamepad Y opens the info list.

@@ -143,6 +143,7 @@ const SPLASH_MODES={
       {name:'BACK',sub:'',cls:'back',act:splashBack}]},
   admin:{tab:'Admin',cue:'A / Enter to pick. B / Esc to go back',choices:()=>[
     {name:'DEMO',sub:'The original Long Island and Los Angeles.',act:openDemo},
+    {name:'BOARD',sub:'Who has the next move on every open item.',act:openBoard},
     {name:'VOICE LIBRARY',sub:'Hear and re-record any line in the game.',act:openVoices},
     {name:'SCRIPT EDITOR',sub:'Reword, reorder and play every scene.',act:openScript},
     {name:'ART LIBRARY',sub:'Make and approve the game\'s pictures.',act:openArt},
@@ -298,6 +299,12 @@ function openArt() {
   sfx.select(); splash.active=false;
   $('splash').classList.add('out');
   setTimeout(()=>{ location.href=new URL('art.html',location.href).href; },250);
+}
+// The Board (board.html): kanban of every open item by who has the next move (data/board.json; rules in claude/handoff-rules.md).
+function openBoard() {
+  sfx.select(); splash.active=false;
+  $('splash').classList.add('out');
+  setTimeout(()=>{ location.href=new URL('board.html',location.href).href; },250);
 }
 // The Music Library (music.html): hear, re-make and pick the game's music tracks (takes stay on this phone; engine/local-music.js plays them).
 function openMusic() {
