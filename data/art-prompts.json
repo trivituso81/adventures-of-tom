@@ -28366,7 +28366,7 @@
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SQUISHY SQUEEZE\nFrom her starting relaxed stance, she brings a small round dumpling-shaped squishy toy out from behind her back, holds it out forward in both hands at chest height, and squeezes it hard once with a delighted grin. Without repeating the squeeze, she tucks the toy behind her back again. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -28381,7 +28381,15 @@
      }
     }
    ],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-19",
+     "note": "feet sink into ground, size cahnges",
+     "from": "review",
+     "at": 1795126025063,
+     "rev": 0
+    }
+   ],
    "id": "clip-grace-cubepop",
    "tab": "Clips",
    "group": "Chapter 1",
