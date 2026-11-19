@@ -233,7 +233,7 @@ function b3Hit(F,c,t,per,flavors,e,single) {
   // Family Ruckus: each hit after the first of a multi-hit move that lands (engine/b3-ruckus.js).
   if(a.side==='party'&&t.side==='foe'&&e.power==null&&c.skill&&(c.skill.hits||1)>1&&(c.hitNo||0)>=1) b3RuckusAdd(F,B,c.g,B3_RULES.ruckus.extraHit,a.key,'hits');
   // One crit roll per hit: base rate, the attacker's own bonus, and what the target gives away (Dazzled).
-  const crit=b3Rand(F)<b3CritChance(a,t,e);
+  const crit=!F.preview&&b3Rand(F)<b3CritChance(a,t,e);   // a preview (engine/b3-preview.js) never shows luck
   if(crit) b3Fire(F,'crit',{src:a,tgt:t,g:c.g},B);
   // An intercepted hit lands that much weaker on the one who stepped in.
   const red=c.inter&&c.inter[t.key]?c.inter[t.key].reduce:0;

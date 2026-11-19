@@ -261,6 +261,7 @@ function b3vRender() {
   }
   box.querySelector('.b3v-say').textContent=B3V.say||(L?'Tap anything to read what it does.':'');
   body.scrollTop=top;
+  if(typeof b3pVibes==='function') b3pVibes(box,L);   // Rose Mode pictures (engine/b3-pictures.js); does nothing in the other modes
   if(keep) { const f=box.querySelector('[data-k="'+keep+'"]')||box.querySelector('.b3v-tab.active'); if(f) { f.focus({preventScroll:true}); f.scrollIntoView({block:'nearest'}); } }
 }
 

@@ -4,6 +4,7 @@
 #                     python3 tools/b3_test.py s3         only the stage 3 section (The Big One: pips, Mark, Break, adds), about 5 min
 #                     python3 tools/b3_test.py s4         only the stage 4 section (the Vibes screen, the Lab's Ranks, the save fields), about 2 min
 #                     python3 tools/b3_test.py s5         only the stage 5a section (Rank 5 on The Big One: the four Capstones, the free Skill, Traits and Quirks), about 3 min
+#                     python3 tools/b3_test.py s7         only the stage 7 section (Rose Mode: pictures, preview, the recommended move, keys and pad), about 2 min
 # Env: CHROMIUM = chromium binary (optional), SEED = the fight's seed (default 7), OUT = folder for the sheets (default tools/shots).
 #
 # For each fight it checks, and prints FAILS: [] when all pass:
@@ -868,6 +869,110 @@ def stage6(pg,lab,landscape=False):
     st=pg.evaluate("()=>localStorage.getItem('aot-b3-ruckus')"); need(st==str(round(g)),f'leaving should store the gauge ({g}): {st}')
     sheet(caps,4,os.path.join(OUT,'b3-s6'+('-land' if landscape else '')+'.png'),scale=.5)
     pg.evaluate("()=>localStorage.removeItem('aot-b3-ruckus')")
+
+def s7(pg): return pg.evaluate("""()=>{ const q=sel=>[...document.querySelectorAll(sel)], cmd=document.getElementById('b3-cmd'), pv=document.getElementById('b3-pv'); const rows=q('#b3-cmd .b2-btn,#b3-cmd .b2-x');
+    return {ui:B3.ui,sel:B3.sel,armed:B3.armed,actor:B3.actor&&B3.actor.id,turns:B3.F.turnLog.length,rec:q('#b3-cmd .rec').length,recWhere:q('#b3-cmd .rec').map(e=>e.dataset.d||e.dataset.i),
+      noPic:rows.filter(e=>!e.querySelector('img')).map(e=>(e.dataset.d||e.dataset.i||'')+':'+e.textContent.trim().slice(0,12)),
+      words:q('#b3-cmd .b2-btn:not(.b2-back):not([data-back]) .bp-w').length,star:q('#b3-cmd .b3p-star').length,pvThere:!!pv,pvImgs:pv?pv.querySelectorAll('img').length:0,pvText:pv?pv.textContent.trim():'',pvHeight:pv?Math.round(pv.getBoundingClientRect().height):0,
+      cmdBox:Math.round(cmd.getBoundingClientRect().height),cmdScroll:cmd.scrollHeight,over:B3.F.over,msg:document.getElementById('b3-msg').textContent,
+      info:(document.querySelector('#b3-cmd .b3p-info')||null)!==null,moveGhost:q('#b3-bar .b3-ghost,#b3-bar .b3-pvm').length,logTail:B3.log.slice(-6).join(' | ')}; }""")
+def stage7(pg,lab,landscape=False):
+    S='stage 7'+(' landscape' if landscape else '')+': '; caps=[]; idx=lab.index('new1')
+    rot=landscape and pg.evaluate("()=>layout.rotated")
+    R=lambda f: f.rotate(90,expand=True) if rot else f
+    def need(cond,what):
+        if not cond: fails.append(S+what)
+    pg.evaluate("()=>{ B7.speed=1; b7SetDiff('rose'); }"); need(pg.evaluate("()=>b7Diff().pictures&&b7Diff().recommend"),'Rose Mode should turn on pictures and the recommended move')
+    pg.evaluate(S5_BOOK)
+    start(pg,idx,{'seed':SEED},keep=True); wait_cmd(pg); pg.evaluate(POKE_ROWS); pg.evaluate(S5_PREP); pg.wait_for_timeout(400); pg.mouse.move(2,2)
+    # 1. the cross: pictures only, one glowing button, a star on it
+    v=s7(pg); caps.append(R(shot(pg)))
+    need(v['ui']=='cross','the fight should open on the cross: '+v['ui'])
+    need(v['noPic']==[] or all(x.startswith('down') for x in v['noPic']),f"every cross button should be a picture (Bag may be grey): {v['noPic']}")
+    need(v['rec']==1 and v['star']==1,f"exactly one button glows and carries the star: {v['rec']} {v['star']} {v['recWhere']}")
+    # 2. keys: open Skills, the cursor starts on the recommended row, the preview box is there with pictures, then Esc
+    pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(350); v=s7(pg); f=shot(pg); caps.append(R(f)); f.save(os.path.join(OUT,'b3-s7-skills-'+('landscape' if landscape else 'portrait')+'.png')) if False else None
+    need(v['ui']=='skills','Right should open SKILLS: '+v['ui'])
+    need(v['noPic']==[] or all(x.startswith('back') or 'Back' in x or x=='' for x in v['noPic']),f"every Skill row should be a picture: {v['noPic']}")
+    need(v['rec']<=1,f"at most one recommended Skill row: {v['rec']}")
+    need(v['pvThere'] and v['pvImgs']>=1,f"the preview box shows pictures for the row under the cursor: {v['pvThere']} {v['pvImgs']}")
+    need(v['pvText']=='' or len(v['pvText'])<=40,f"the preview box carries no sentences in Rose Mode: {v['pvText'][:80]}")
+    n0=v['turns']
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(250); need(s7(pg)['ui']=='cross','Esc from SKILLS returns to the cross')
+    # 3. touch: first tap on a Skill row arms it (preview), second tap uses it
+    pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(300); pg.mouse.move(2,2)
+    n=pg.evaluate("()=>document.querySelectorAll('#b3-cmd .b2-btn[data-i]').length"); need(n>=2,'the SKILLS list should have rows: '+str(n))
+    pg.evaluate("()=>{ B3.armed=-1; }")
+    TAP="(i)=>{ const e=document.querySelector('#b3-cmd .b2-btn[data-i=\"'+i+'\"]'); e.dispatchEvent(new PointerEvent('pointerdown',{pointerType:'touch',bubbles:true})); e.click(); }"
+    pg.evaluate(TAP,1); pg.wait_for_timeout(350); v=s7(pg)
+    need(v['sel']==1 and v['turns']==n0 and v['ui']=='skills',f"a first touch on a row previews it and does not use it: sel {v['sel']} turns {v['turns']} ui {v['ui']}")
+    need(v['pvImgs']>=1,'and the preview box is showing for that row')
+    pg.evaluate(TAP,1); pg.wait_for_timeout(400); v=s7(pg)
+    need(v['ui']!='skills' or v['turns']>n0,f"a second touch on the same row uses it (target list or the move): ui {v['ui']} turns {v['turns']}")
+    caps.append(R(shot(pg)))
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(250)
+    if s7(pg)['ui']!='cross': pg.keyboard.press('Escape'); pg.wait_for_timeout(250)
+    # 4. a target list: pictures of the monsters, one star, the preview box says what the hit would do
+    pg.keyboard.press('ArrowUp'); pg.wait_for_timeout(350); v=s7(pg)
+    need(v['ui']=='target','Basic on two monsters opens the target list: '+v['ui'])
+    if v['ui']=='target':
+        need(v['noPic']==[] or all('Back' in x for x in v['noPic']),f"every target row should be a picture: {v['noPic']}"); need(v['pvImgs']>=1,'the target list has its preview box'); caps.append(R(shot(pg)))
+        pg.keyboard.press('Escape'); pg.wait_for_timeout(250)
+    # 5. the Ruckus list (gauge full)
+    pg.evaluate("()=>{ B3.F.ruckus=100; b3ViewSync(); b3Render(); }"); pg.wait_for_timeout(250); pg.mouse.move(2,2); pg.keyboard.press('ArrowLeft'); pg.wait_for_timeout(350); v=s7(pg)
+    need(v['ui']=='ruckus','Left opens RUCKUS with the gauge full: '+v['ui']); need(v['noPic']==[] or all('Back' in x for x in v['noPic']),f"the RUCKUS rows are pictures: {v['noPic']}"); caps.append(R(shot(pg)))
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(250)
+    # 6. the info list (key I, and the gamepad's Y), both with pictures; Y again closes it
+    pg.keyboard.press('KeyI'); pg.wait_for_timeout(350); v=s7(pg); need(v['ui']=='info' or v['info'],f"I opens the info list: {v['ui']}"); caps.append(R(shot(pg)))
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(250); u1=s7(pg)['ui']
+    pg.evaluate("()=>b3Pad(null,null,false,false,true)"); pg.wait_for_timeout(300); u2=s7(pg)['ui']; need(u2!=u1,f"the gamepad's Y opens the info list: {u1} then {u2}")
+    pg.evaluate("()=>b3Pad(null,null,false,true,false)"); pg.wait_for_timeout(300)
+    # 7. the gamepad walks every list: up, right, down, left, A to go in, B to go back
+    pg.evaluate("()=>b3Pad('right',true,false,false,false)"); pg.wait_for_timeout(300); a=s7(pg)['ui']; pg.evaluate("()=>b3Pad(null,null,false,true,false)"); pg.wait_for_timeout(250); b=s7(pg)['ui']
+    need(a=='skills' and b=='cross',f"the pad's right then B goes Skills then back: {a} {b}")
+    pg.evaluate("()=>b3Pad('left',true,false,false,false)"); pg.wait_for_timeout(300); a=s7(pg)['ui']; pg.evaluate("()=>b3Pad(null,null,false,true,false)"); pg.wait_for_timeout(250); b=s7(pg)['ui']
+    need(a in('ruckus','cross') and b=='cross',f"the pad's left then B: {a} {b}")
+    # 8. the recommended Basic really plays with one tap of A on the recommended button
+    pg.mouse.move(2,2); k=s7(pg); t0=k['turns']; rw=k['recWhere'][0] if k['recWhere'] else None
+    if rw in('up','right','left'):
+        pg.evaluate("(d)=>b3Pad(d,true,false,false,false)",rw); pg.wait_for_timeout(300)
+        seq=[pg.evaluate("()=>B3.ui")]
+        for _ in range(3):
+            if pg.evaluate("()=>B3.ui")in('skills','target','ruckus'): pg.keyboard.press('Enter'); pg.wait_for_timeout(300); seq.append(pg.evaluate("()=>B3.ui+':'+B3.sel"))
+        for _ in range(4):
+            pg.wait_for_timeout(2200); wait_cmd(pg); pg.wait_for_timeout(300)
+            if pg.evaluate("()=>B3.ui")in('skills','target') and s7(pg)['turns']<=t0+0 or pg.evaluate("()=>!!B3.F.grant&&B3.ui!=='busy'"): pg.keyboard.press('Enter'); pg.wait_for_timeout(300); seq.append('grant:'+pg.evaluate("()=>B3.ui"))
+            else: break
+        need(s7(pg)['turns']>t0 or s7(pg)['over'],f"following the star ({rw}) plays a turn: {t0} -> {s7(pg)['turns']} via {seq} {s7(pg)['msg'][:80]}")
+    else: need(False,'no recommended button to follow: '+str(k['recWhere']))
+    caps.append(R(shot(pg)))
+    # 9. the glow stays on exactly one button every turn for ten turns
+    bad=[]
+    for i in range(10):
+        pg.evaluate(S5_PREP); pg.mouse.move(2,2); v=s7(pg)
+        if v['ui']=='cross' and v['rec']!=1: bad.append((v['actor'],v['rec']))
+        pg.keyboard.press('ArrowUp'); pg.wait_for_timeout(250)
+        if pg.evaluate("()=>B3.ui")=='target': pg.keyboard.press('Enter')
+        pg.wait_for_timeout(2200)
+        if pg.evaluate("()=>B3.F.over||B3.ui==='done'"): break
+        wait_cmd(pg)
+    need(bad==[],f"one glowing button on every cross: {bad}")
+    # 10. Rose Mode picks the loadouts: every member went into the fight with the Sig Vibes and the newest written Quirks, whatever the book says
+    ra=pg.evaluate("()=>B3.F.party.map(p=>{ const L=b3RoseLoadout(p.id,b3LabBook()[p.id]); return {id:p.id,main:p.vibe===L.main,pocket:p.pocket===L.pocket,quirks:p.quirks.join()===L.quirks.filter(Boolean).join()}; })")
+    need(all(x['main'] and x['pocket'] and x['quirks'] for x in ra),f"each member started with Rose Mode's automatic loadout: {ra}")
+    need(pg.evaluate("()=>b3LabBook().deedee.quirks.join()")=='car_crumb_vacuum,spit_shine','the Lab book itself (the Quirks Tom picked) was not rewritten by the fight: '+pg.evaluate("()=>b3LabBook().deedee.quirks.join()"))
+    # 11. the Vibes screen in Rose Mode: a picture on every ladder row, no small words, the line that says Rose Mode picks, the acts as pictures
+    pg.click('#b3-exit'); pg.wait_for_timeout(500)
+    pg.evaluate("()=>{ b3vOpen('lab'); }"); pg.wait_for_timeout(500)
+    vv=pg.evaluate("""()=>{ const q=s=>[...document.querySelectorAll('#b3-vibes '+s)]; return {rows:q('.b3v-row').length,noPic:q('.b3v-row').filter(b=>!b.querySelector('small.b3p-vi img')).length,words:q('.b3v-row small:not(.b3p-vi)').length,
+      tags:q('.b3v-row em').filter(e=>/PEP|EQUIPPED|SOON|RANK/.test(e.textContent)).length,auto:q('.b3p-auto').length,roles:q('.b3v-role').filter(r=>!r.querySelector('img')||r.textContent.trim()).length,acts:q('.b3v-act').filter(a=>!a.querySelector('img')).length,
+      over:document.getElementById('b3-vibes').scrollWidth>document.getElementById('b3-vibes').clientWidth+2}; }""")
+    need(vv['rows']>=6 and vv['noPic']==0 and vv['words']==0 and vv['tags']==0,f"every ladder row on the Vibes screen is a picture with no small words: {vv}")
+    need(vv['auto']==1 and vv['roles']==0 and vv['acts']==0 and not vv['over'],f"the Vibes screen has its Rose Mode line, picture roles and picture buttons, and nothing spills sideways: {vv}")
+    caps.append(R(shot(pg))); f=shot(pg); f.save(os.path.join(OUT,'b3-s7-vibes-'+('landscape' if landscape else 'portrait')+'.png'))
+    pg.evaluate("()=>{ b3vClose(); }"); pg.wait_for_timeout(300)
+    sheet(caps,4,os.path.join(OUT,'b3-s7'+('-land' if landscape else '')+'.png'),scale=.5)
+    pg.evaluate("()=>{ b7SetDiff('grace'); }"); pg.click('#b3-exit') if pg.evaluate("()=>!!document.getElementById('b3-exit')&&B3.active") else None; pg.wait_for_timeout(400)
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
@@ -875,7 +980,7 @@ with sync_playwright() as pw:
     pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start',timeout=180000); pg.wait_for_timeout(1500)
-    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6')] or ([] if only else lab)
+    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7')] or ([] if only else lab)
     # The way in: ADMIN > BATTLE LAB shows NEW BATTLE, which opens the list.
     pg.evaluate("()=>{ splashSetMode('lab'); }"); pg.wait_for_timeout(200)
     names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
@@ -949,6 +1054,11 @@ with sync_playwright() as pw:
     if 's6' in sys.argv or not only and len(want)==len(lab):
         print('stage 6: Family Ruckus'); stage6(pg,lab)
         pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage6(pg,lab,True)
+        pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
+    # 6g. stage 7: tap to preview, Rose Mode pictures, the recommended move (portrait, then a pass in landscape)
+    if 's7' in sys.argv or not only and len(want)==len(lab):
+        print('stage 7: preview and Rose Mode'); stage7(pg,lab)
+        pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage7(pg,lab,True)
         pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
     # 7. battle 2 still owns its screen
     pg.evaluate("()=>{ B7.speed=1; splash.active=false; document.getElementById('splash').hidden=true; window.__LE.b2Start({party:['tom','grace','rose'],level:12,foes:[['mudling','front']],bag:[]}); }")

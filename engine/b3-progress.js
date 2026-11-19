@@ -45,6 +45,16 @@ function b3QuirkPool(id,L) {
   for(const v of B3_CAST[id].vibes) for(const q of b3Ladder(B3_VIBES[v],b3VibeRank(L,v))) if(q.kind==='quirk'&&q.open) out.push(q.id);
   return out;
 }
+// ROSE MODE's automatic loadout (stage 7): the two Sig Vibes as Main and Pocket, and the two newest written Quirks the Ranks have opened
+// (the last two of the pool, which runs Vibe by Vibe, rung by rung). Ranks, Vibe Points and the row are kept. A new object: the book it
+// came from is never changed, so switching back to Grace Mode brings the player's own picks back.
+function b3RoseLoadout(id,L) {
+  const F=b3FixLoadout(id,L),ids=B3_CAST[id].vibes,sig=n=>ids.find(v=>B3_VIBES[v].sig===n);
+  const main=sig(1)||F.main,pocket=sig(2)&&sig(2)!==main?sig(2):F.pocket,out={main,pocket,quirks:[],vp:Object.assign({},F.vp),row:F.row};
+  const pool=b3QuirkPool(id,out).filter(q=>B3_QUIRKS[q]&&!B3_QUIRKS[q].soon);
+  out.quirks=pool.slice(-B3_RULES.quirkSlots); while(out.quirks.length<B3_RULES.quirkSlots) out.quirks.push(null);
+  return b3FixLoadout(id,out);
+}
 // A valid copy of a loadout: missing parts filled in, anything this build does not know put back to its default.
 // A save from before the Vibe fields existed (or a member whose kit arrived later) gets b3NewLoadout through this.
 function b3FixLoadout(id,L) {

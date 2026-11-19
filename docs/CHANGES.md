@@ -1,3 +1,9 @@
+## b3s7 (2026-11-19): New battle: tap to preview a move, the recommended move, and Rose Mode pictures (Lab only)
+
+- Battle 3 stage 7. Preview: `engine/b3-preview.js` plays a move on a copy of the fight and shows what it would do (damage, Pet Peeve, Resist, Detonation, pips, Break, pushes, heals, revives, the turn bar after). A first touch previews, a second uses. Gamepad Y opens the info list.
+- Recommended move (Rose Mode): one button glows with a star and a short reason; `tools/b3-sim.js --rec` plays with it. Rose Mode also shows picture menus (`engine/b3-pictures.js`), the Vibes screen as pictures, and picks the Vibes and Quirks itself (`b3RoseLoadout`).
+- Tests: rule tests 1008 checks, `b3_test.py s7`, and s3 to s6 still pass. New files are in `index.html` at the right load points. No voice lines added or changed.
+
 ## clipgen2b (2026-11-19): Chapter 1's 67 battle clips are made, approved and baked; a bake started by hand now starts the publish
 
 - The real run of clipgen2 (below, entry `clipgen2`): all 67 clips of group Chapter 1 approved and cut for $5.34 of xAI credit. This push also makes `art-bake` start `publish` at its end when it was started by hand, because GitHub sent no publish after the Action-started bake. This push itself publishes main with the clips.

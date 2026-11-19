@@ -11,6 +11,7 @@
 //                have one they can pay for. The bestiary's boss HP model assumes about one action in four is support (section
 //                1.6); without this option the simple player attacks whenever attacking scores higher, which is nearly always.
 // <fight> is a B3_LAB id (data/b3-lab.js) or a B3_FORMATIONS id (then --party=tom,grace,rose,deedee --level=2).
+//   --rec: the family plays with Rose Mode's recommended move (b3Recommend) instead of the simple player.
 //   --foehp=20 multiplies monster HP (with --hp it makes a fight the party loses, for the lose screen test).
 //   --rank=3: every Vibe at that Rank (left out: 2, the Rank the Battle Lab starts at). --swap=tom,rose (or --swap=all): those
 //   family members fight with their second Sig Vibe as Main and their first as Pocket.
@@ -23,7 +24,7 @@ const DATA=['data/b3-rules.js','data/b3-status.js',
   ...fs.readdirSync(path.join(ROOT,'data')).filter(f=>/^b3-kit-.*\.js$/.test(f)).sort().map(f=>'data/'+f),
   ...fs.readdirSync(path.join(ROOT,'data')).filter(f=>/^b3-foes-.*\.js$/.test(f)).sort().map(f=>'data/'+f),
   'data/b3-lab.js'];
-const RULES=['engine/b3-core.js','engine/b3-progress.js','engine/b3-timeline.js','engine/b3-hooks.js','engine/b3-ops.js','engine/b3-custom.js','engine/b3-resolve.js','engine/b3-ruckus.js','engine/b3-foe.js'];
+const RULES=['engine/b3-core.js','engine/b3-progress.js','engine/b3-timeline.js','engine/b3-hooks.js','engine/b3-ops.js','engine/b3-custom.js','engine/b3-resolve.js','engine/b3-ruckus.js','engine/b3-preview.js','engine/b3-foe.js'];
 function load() {
   const ctx=vm.createContext({Math,JSON,Object,Array,String,Number,Error,console:{log(){},error(){}}});
   for(const f of [...DATA,...RULES]) vm.runInContext(fs.readFileSync(path.join(ROOT,f),'utf8'),ctx,{filename:f});
@@ -47,15 +48,17 @@ function play(cfg,log,opt) {
       if(u.side==='party') {
         const n=acted[u.key]=(acted[u.key]||0)+1;
         // Stage 6: with opt.ruckus the player also spends the Family Ruckus (engine/b3-ruckus.js b3AutoRuckus); the older groups leave it off.
-        const rk=opt&&opt.ruckus?G('b3AutoRuckus')(F,u):null;
-        let pick=rk?{skill:'ruckus_'+rk.kind}:every&&(n+u.slot)%every===0?b3Auto(F,u,quiet):null;
-        if(pick&&!rk&&pick.sc<-50) pick=null;   // nothing useful to set up (the ward is already up, the floor is already wet)
-        if(pick&&!rk) out.support++; else if(!pick) pick=b3Auto(F,u);
+        // Stage 7: with opt.rec the player is Rose Mode's recommended move (engine/b3-preview.js b3Recommend) instead of the simple player.
+        const recP=opt&&opt.rec?G('b3Recommend')(F,u):null;
+        const rk=recP?(recP.kind==='ruckus'?{kind:recP.skill.slice(7),target:recP.target}:null):opt&&opt.ruckus?G('b3AutoRuckus')(F,u):null;
+        let pick=rk?{skill:'ruckus_'+rk.kind}:recP?recP:every&&(n+u.slot)%every===0?b3Auto(F,u,quiet):null;
+        if(pick&&!rk&&!recP&&pick.sc<-50) pick=null;   // nothing useful to set up (the ward is already up, the floor is already wet)
+        if(pick&&!rk&&!recP) out.support++; else if(!pick) pick=b3Auto(F,u);
         if(!pick) throw new Error(u.name+' has nothing to do');
         const r=rk?G('b3Ruckus')(F,u,rk.kind,rk.target):b3Act(F,u,pick.skill,pick.target); if(!r.ok) throw new Error('simple player picked an illegal move: '+r.why);
         beats=beats.concat(r.beats); out.moves[pick.skill]=(out.moves[pick.skill]||0)+1;
         // A granted action (Colossal Diamond-Gold Dumpling): that family member picks a free Skill at once, before the clock moves.
-        while(F.grant&&!F.over) { const g=F.units.find(x=>x.key===F.grant.key),gp=b3Auto(F,g); if(!gp) { F.grant=null; break; }
+        while(F.grant&&!F.over) { const g=F.units.find(x=>x.key===F.grant.key),gp=(opt&&opt.rec&&G('b3Recommend')(F,g))||b3Auto(F,g); if(!gp) { F.grant=null; break; }
           const gr=b3Act(F,g,gp.skill,gp.target); if(!gr.ok) throw new Error('simple player picked an illegal free Skill: '+gr.why);
           beats=beats.concat(gr.beats); out.moves[gp.skill]=(out.moves[gp.skill]||0)+1; out.free=(out.free||0)+1;
           if(log) console.log(`           free: ${g.name.padEnd(8)} ${SK[gp.skill].name}`); }
@@ -253,6 +256,8 @@ function check() {
   require('./b3-check-s5c.js')({G,ok,near,play,noCrit});
   // Stage 6's groups (127 on): the Family Ruckus gauge, its gains, Double Team and Full Family Ruckus.
   require('./b3-check-s6.js')({G,ok,near,play,noCrit});
+  // Stage 7's groups (135 on): the preview on a copy of the fight, and the recommended move.
+  require('./b3-check-s7.js')({G,ok,near,play,noCrit});
   console.log('CHECKS:',checks);
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);
@@ -265,7 +270,7 @@ else {
   const errs=[],R=[];
   for(let i=0;i<n;i++) {
     const cfg=Object.assign({},cfg0,{seed:seed0+i});
-    try { if(has('log')) console.log('fight '+(i+1)+', seed '+cfg.seed); R.push(play(cfg,has('log'),{support:Number(flag('support')||0),ruckus:has('ruckus')})); }
+    try { if(has('log')) console.log('fight '+(i+1)+', seed '+cfg.seed); R.push(play(cfg,has('log'),{support:Number(flag('support')||0),ruckus:has('ruckus'),rec:has('rec')})); }
     catch(e) { errs.push('seed '+cfg.seed+': '+e.message); }
   }
   const wins=R.filter(r=>r.result==='win'),W=wins.map(r=>r.rounds).sort((a,b)=>a-b),avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;

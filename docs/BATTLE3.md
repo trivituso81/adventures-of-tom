@@ -22,6 +22,8 @@
 | Rules (no drawing) | `engine/b3-core.js`, `b3-progress.js`, `b3-timeline.js`, `b3-hooks.js`, `b3-ops.js`, `b3-custom.js`, `b3-resolve.js`, `b3-foe.js` | Fight state and stat maths, Vibe Mastery (Ranks, Vibe Points, loadouts and what a loadout gives a unit), the tick clock, hooks, effect ops, the one-off rules a kit line needs when data cannot say it (one so far: Twin-Lamb Relay), one action from cost to beats, the enemy turn |
 | Vibes screen and where loadouts are kept | `engine/b3-menu.js` | The Vibes screen (both doors), the save's two fields per member, the Lab's book on the device, Vibe Points on a Lab win |
 | Play layer | `engine/b3-play.js` | Beats to pictures: default animations, numbers, the view the screen shows, Battle 3's own draw function |
+| Preview and recommendation (no drawing) | `engine/b3-preview.js` | `b3Clone` (a safe copy of a fight), `b3Matchups`, `b3Preview` (a move played on a copy, nothing real changes, never rolls luck), `b3PreviewValue`, `b3Recommend` (the move that glows) |
+| Rose Mode pictures | `engine/b3-pictures.js` | Pictures for the cross, the lists, the info list, the preview box and the Vibes screen; reuses battle 2's `bp*` helpers and CSS. Words versions stay in `b3-ui.js` and are used when Rose Mode is off |
 | Screen | `engine/b3-ui.js` | Start and end, the turn flow, turn bar, party cards, command cross, lists, targeting, input |
 | Check | `tools/b3-sim.js` (node), `tools/b3-check-s2.js`, `tools/b3-check-s3.js`, `tools/b3-check-s4.js`, `tools/b3-check-s5.js`, `tools/b3_test.py` (browser) | Fights with no screen and the rule tests (stage 1's groups in `b3-sim.js`, one file per stage after that; `check` runs them all); fights and the Vibes screen on screen with contact sheets |
 
@@ -91,6 +93,7 @@ node tools/b3-sim.js new6 300 --support=4   # every 4th action of each family me
 python3 tools/b3_test.py              # every NEW BATTLE fight on screen, portrait and landscape; sheets in tools/shots/b3-*.png
 python3 tools/b3_test.py s3           # only the stage 3 section (The Big One: pips, Mark, Break, adds), about 5 minutes
 python3 tools/b3_test.py s4           # only the stage 4 section (the Vibes screen from both doors, Ranks, the save fields), about 2 minutes
+python3 tools/b3_test.py s7           # only the stage 7 section (Rose Mode: pictures, preview, the star, keys and pad, the Vibes screen; portrait then landscape), about 3 minutes
 python3 tools/b3_test.py s6           # only the stage 6 section (RUCKUS button fill, the list, Double Team, Full), about 2 minutes
 python3 tools/b3_test.py s5c          # only the stage 5c section (Cozy Rosie and Registered Nut on The Big One, FORT, JACKET, LAMBY OUT), about 2 minutes
 python3 tools/b3_test.py s5b          # only the stage 5b section (Gamer Geek and Craft Artist on The Big One, NEXT TARGET, BUZZING, GLUE), about 2 minutes
@@ -98,6 +101,7 @@ python3 tools/b3_test.py s5           # only the stage 5a section (Rank 5 on The
 node tools/b3-sim.js new6 300 --rank=1            # every Vibe at Rank 1 (left out: 2, the Rank the Lab starts at)
 node tools/b3-sim.js new6 300 --swap=tom,rose     # those members fight with their second Sig Vibe as Main (--swap=all: everyone)
 node tools/b3-sim.js new6 300 --rank=5            # the simulator fills both Quirk slots with what the Rank unlocks and is written (--quirks=none: empty slots)
+node tools/b3-sim.js new6 300 --rank=5 --rec          # the recommended-move player (b3Recommend) plays instead of the simple player
 node tools/b3-sim.js new4 300 --rank=5 --foehp=3  # triple monster HP: long enough for the simple player to bank Pep for every Capstone
 ```
 
@@ -110,6 +114,20 @@ The simple player attacks whenever attacking scores higher, which is nearly alwa
 `tools/b3_test.py` plays each fight by hand through the real screen (keys and taps), checks that Windex Spritz then a Clobber hit shows Hydro-Slip!, compares the on-screen turn order with the simulator for the same seed, plays a fight to the lose screen, and checks a battle 2 fight still owns its screen afterwards. On the Pond Grump fight it also runs the stage 2 moves (section 5 in the file's header): there it aims the monsters with pokes (a test taunt, `actIx`) so every run shows a slip, a ward's answer, an intercept, an interrupt and a revive. On The Big One it also runs the stage 3 section (section 6 in the file's header): it pokes the boss into Big Glare at Rose three times and answers it three ways (Tom's Suite Door Slide takes the bite, Crunchy Sugar-Cube Pop cancels it, a Break cancels it), tops the boss's pips up between family turns so a Break only comes when the test wants one, and calls two Mudlings and a Skeeter Swarm in as adds. All six fights take about 25 minutes; one fight: `python3 tools/b3_test.py new3`. Look at the sheets before pushing.
 
 Gotcha for any test that drives the SKILLS list with the keys: move the mouse off the list first (`pg.mouse.move(2,2)`). A mouse left resting over a row moves the cursor to that row every time the list is redrawn.
+
+## What stage 7 holds, and what waits
+
+| In (build `b3s7`) | Waits for |
+|---|---|
+| `engine/b3-preview.js`: `b3Preview(F,u,id,key)` plays a move on `b3Clone(F)` with `F.preview` set (`b3Rand` returns .999 and a hit never rolls a crit, so the numbers are exact and never show luck) and reads the beats: damage per monster, Pet Peeve, Resist, Detonation, pips, Break, pushes and pulls, heals, shields, adds, KOs, revives, interrupts, Ruckus gauge, and the turn bar afterwards. `b3Matchups` is the cheap version for a move not yet aimed. | Spoken lines (none). |
+| Tap to preview: in SKILLS, RUCKUS and the target list the first touch arms a row and shows its preview box, the second touch uses it. A mouse still previews on hover and uses on click; keys move the cursor and Enter uses. A tapped party card or monster opens the info list; the gamepad's Y opens it too (I on the keyboard). The turn bar shows the actor's ghost and the pushed or pulled faces. | |
+| `b3Recommend(F,u)`: tries every usable move on every target (and the two Ruckus spends) through `b3Preview` and scores the outcome (`B3_REC`: damage, a kill, Detonation, Break, pips, heals, shields, revive, interrupt, buffs, a Basic's free Pep). One button glows with a star, the cursor starts on it, and the message line says why. Only when `b7Diff().recommend` is on (Rose Mode). `tools/b3-sim.js --rec` plays with it. | Tuning from Tom's play at the first milestone. |
+| Rose Mode pictures (`b7Diff().pictures`): the cross, the SKILLS, RUCKUS and target lists, the info list and the preview box are pictures (3-icon rule: at most flavor icons, Pep drops and one effect icon on a row), with the star and glow on the recommended one. | A hand-drawn icon set in place of the emoji and pixel icons. |
+| Rose Mode automatic loadouts: `b3RoseLoadout` (in `b3-progress.js`) gives every member the two Sig Vibes as Main and Pocket and the two newest written Quirks their Ranks have opened. `b3Start` applies it to each fight when pictures are on; the saved book is never rewritten. The Vibes screen shows the same pictures and a line saying Rose Mode picks. | The story switch (stage 15). |
+
+Test sandbox rows for this stage are named `t7_*` in `tools/b3-check-s7.js` (groups 135 to 138) and deleted at the end.
+
+Calls made in stage 7 (none confirmed by Tom): a preview never shows a miss or a crit; the first touch arms and the second confirms in SKILLS, RUCKUS and targets (a mouse uses hover and click); the recommender scores previews and is not the simple player (the simple player is untouched); the recommended Basic says "Free, and it builds Pep."; gamepad Y opens the info list; "newest written Quirks" means the last two of the pool.
 
 ## What stage 6 holds, and what waits
 

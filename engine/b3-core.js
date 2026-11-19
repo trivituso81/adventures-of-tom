@@ -12,7 +12,7 @@
 // status, ko...). engine/b3-play.js plays them; the simulator ignores them.
 
 // ---------- Random numbers: seeded, so the same fight can be replayed (simulator against screen) ----------
-function b3Rand(F) { let t=F.rng=(F.rng+0x6D2B79F5)|0; t=Math.imul(t^(t>>>15),t|1); t^=t+Math.imul(t^(t>>>7),t|61); return ((t^(t>>>14))>>>0)/4294967296; }
+function b3Rand(F) { if(F.preview) return .999; let t=F.rng=(F.rng+0x6D2B79F5)|0; t=Math.imul(t^(t>>>15),t|1); t^=t+Math.imul(t^(t>>>7),t|61); return ((t^(t>>>14))>>>0)/4294967296; }
 
 // ---------- Character Level stats (B3_LEVELS: straight lines between the bestiary's chapter rows) ----------
 function b3LevelStats(level) {

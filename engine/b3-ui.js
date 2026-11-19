@@ -13,7 +13,13 @@
 // Tapping a family member's card or a monster while the cross or the Skill list is up opens that unit's full list (B3.ui 'info'):
 // every status with how long it has left and what it does, shields, and what lies on its side's floor (spec 2.8, the screen rule).
 // For an Elite or a Boss the list starts with its Composure pips and the act it is winding up; a Marked family member's list says who Marked them.
-// Keys: I opens it on whoever is up, up and down step through everyone, Esc goes back.
+// Keys: I opens it on whoever is up, up and down step through everyone, Esc goes back. On a gamepad Y does what I does.
+// TAP TO PREVIEW (stage 7): the SKILLS, RUCKUS and target lists carry a preview box (#b3-pv) at the top: the Pep cost, the flavor,
+// PET PEEVE or RESIST on each monster, the Detonation it would set off, the pips it would take, who it heals or shields, and the
+// turn bar as it would be after (a ghost face for the actor, an arrow on whoever is pushed or pulled). It is worked out by
+// engine/b3-preview.js on a copy of the fight. On a phone the first tap on a row only arms it and shows this; a second tap on the
+// same row uses it. With a mouse, hovering previews and a click uses. With keys or a gamepad the cursor previews and A uses.
+// RECOMMENDED MOVE: in a difficulty with `recommend` (Rose Mode) one move glows (b3Recommend) and the cursor starts on it.
 
 // ---------- Start and end ----------
 // cfg: party (ids), level or levels, formation (a B3_FORMATIONS id) or foes, bg (a backdrop key), seed, lab (true in the
@@ -21,10 +27,16 @@
 // loadouts ({id: loadout}: each member's Vibes, Quirks, VP and row, engine/b3-progress.js) or rank (every Vibe at that Rank),
 // award(F) (called once on a win; returns the line the win screen adds, for example the Vibe Points earned).
 function b3Start(cfg) {
-  B3.cfg=cfg; B3.awarded=false; B3.won=''; B3.result=null; B3.actor=null; B3.pending=null; B3.opts=[]; B3.ui='busy'; B3.sel=0; B3.view=null; B3.log=[]; B3.turnOf=null;
+  B3.cfg=cfg; B3.recC=null; B3.pvC=null; B3.armed=-1; B3.awarded=false; B3.won=''; B3.result=null; B3.actor=null; B3.pending=null; B3.opts=[]; B3.ui='busy'; B3.sel=0; B3.view=null; B3.log=[]; B3.turnOf=null;
   const mods=Object.assign({foeHp:b7FoeHp(),taken:b7Taken(),foeSpeed:typeof b7FoeSpeed==='function'?b7FoeSpeed():1},cfg.mods||{});
+  // Rose Mode (pictures on) picks the Vibes and Quirks itself: the Sig Vibes and the newest written Quirks, from the same Ranks.
+  let loadouts=cfg.loadouts;
+  if(!cfg.plain&&typeof b7Diff==='function'&&b7Diff().pictures&&(loadouts||cfg.rank)) {
+    const src=loadouts||{}; loadouts={};
+    for(const id of cfg.party) if(typeof b3HasKit==='function'&&b3HasKit(id)) loadouts[id]=b3RoseLoadout(id,src[id]||b3NewLoadout(id,cfg.rank));
+  }
   B3.F=b3NewFight({party:cfg.party,level:cfg.level,levels:cfg.levels,formation:cfg.formation,foes:cfg.foes,seed:cfg.seed,hpPct:cfg.hpPct,rows:cfg.rows,
-    loadouts:cfg.loadouts,rank:cfg.rank,plain:cfg.plain,mods,ruckus:cfg.ruckus});
+    loadouts,rank:cfg.rank,plain:cfg.plain,mods,ruckus:cfg.ruckus});
   b3PlayReset(); b3ViewSync(); b3LayoutFoes();
   B3.view.bar=b3BarSnap(B3.F,null,0);
   clearBattleQueue(); clearInput();
@@ -84,7 +96,7 @@ function b3AfterAct() {
   if(g) {
     B3.actor=g;
     if(B3.cfg.auto) { const p=b3Auto(B3.F,g); if(p&&b3Commit(p.skill,p.target)) return; B3.F.grant=null; B3.actor=null; }
-    else { b3Sfx('select'); b3Open('skills',0); return; }
+    else { b3Sfx('select'); b3Open('skills',b3RecRow()); return; }
   }
   b3Flow();
 }
@@ -109,9 +121,20 @@ function b3Finish() {
 
 // ---------- Opening a menu ----------
 function b3Open(mode,sel) {
-  B3.ui=mode; battle.state='command'; B3.sel=sel||0;
+  B3.ui=mode; battle.state='command'; B3.sel=sel||0; B3.armed=-1;
   b3Render();
 }
+// ---------- The recommended move (difficulties with `recommend`: Rose Mode) ----------
+const b3RecOn=()=>{ try { return !!b7Diff().recommend; } catch(e) { return false; } };
+function b3Rec() {
+  if(!B3.actor||!B3.F||battle.state!=='command'||!b3RecOn()) return null;
+  const k=B3.actor.key+'|'+B3.F.clock+'|'+B3.F.turnLog.length+'|'+(B3.F.grant?1:0)+'|'+B3.F.ruckus;
+  if(!B3.recC||B3.recC.k!==k) B3.recC={k,r:b3Recommend(B3.F,B3.actor)};
+  return B3.recC.r;
+}
+// Where the cursor starts: on the recommended row when there is one.
+function b3RecRow() { const r=b3Rec(); if(!r||r.kind==='ruckus') return 0; return Math.max(0,b3SkillRows(B3.actor).findIndex(S=>S.id===r.skill)); }
+function b3RecTarget(opts,id) { const r=b3Rec(),i=r&&r.skill===id?opts.findIndex(o=>o.key===r.target&&!o.no):-1; return i>=0?i:Math.max(0,opts.findIndex(o=>!o.no)); }
 // The SKILLS list: the Main Vibe's Skills, then the Pocket Vibe's (tagged POCKET), then Pick-Me-Up while someone is knocked out.
 // While a granted action waits for this member the list is only what the grant allows (b3Skills leaves the Basic out then).
 const b3SkillRows=u=>b3Granted()===u?b3Skills(B3.F,u):b3Skills(B3.F,u).slice(1);
@@ -130,6 +153,10 @@ function b3RenderBar(moved) {
   let list;
   // A free Skill does not move anyone: the bar is the plain forecast, with the family member who is picking shown first.
   if(B3.active&&battle.state==='command'&&B3.actor&&B3.ui!=='done'&&b3Granted()===B3.actor) list=[{k:B3.actor.key,now:true,div:0,ghost:false},...b3Forecast(B3.F,8,{}).map(e=>({k:e.u.key,now:false,div:e.div,ghost:false}))];
+  else if(B3.active&&battle.state==='command'&&B3.actor&&B3.ui!=='done'&&B3.pvNow&&B3.pvNow.P&&B3.pvNow.P.bar.length) {
+    // What the highlighted move would really do to the bar: the actor now, then the bar as it stands after the move (the actor's next turn is the ghost).
+    let g=false; list=[{k:B3.actor.key,now:true,div:0,ghost:false},...B3.pvNow.P.bar.slice(0,8).map(e=>{ const gh=!g&&e.k===B3.actor.key; if(gh) g=true; return {k:e.k,now:false,div:e.div,ghost:gh}; })];
+  }
   else if(B3.active&&battle.state==='command'&&B3.actor&&B3.ui!=='done') list=b3Forecast(B3.F,9,{actor:B3.actor,recovery:b3PreviewRecovery(),ghost:true}).map(e=>({k:e.u.key,now:e.now,div:e.div,ghost:e.ghost}));
   else list=B3.view.bar||[];
   // Remember where each face was, so a face that changes place slides there (a push visibly moves the monster back).
@@ -138,9 +165,10 @@ function b3RenderBar(moved) {
   box.innerHTML='<span class="b2-rib-lbl">TURN</span>'+list.map(e=>{
     const u=b3Unit(B3.F,e.k),n=seen[e.k]=(seen[e.k]||0)+1,key=e.k+'#'+n,foe=u.side==='foe';
     const flus=foe&&n===1&&((B3.view.u[e.k]||{}).st||[]).includes('flustered');
-    const cls='b2-tk '+(foe?'foe':'pty')+(e.now?' now':'')+(e.ghost?' ghost':'')+(moved===e.k&&n===1?' b3-moved':'')+(flus?' b3-flus':'');
+    const pm=n===1&&B3.pvNow&&B3.pvNow.P&&battle.state==='command'?B3.pvNow.moved[e.k]:null;
+    const cls='b2-tk '+(foe?'foe':'pty')+(e.now?' now':'')+(e.ghost?' ghost':'')+(moved===e.k&&n===1?' b3-moved':'')+(pm?' b3-pvm':'')+(flus?' b3-flus':'');
     const img=foe?b2Thumb(u.id):b2Portrait(u.id);
-    const badge=flus?'<i class="b2-int b3-brk" title="Flustered">BREAK</i>':foe&&n===1&&B3.view.charge[e.k]?'<i class="b2-int all" title="Winding up '+b2Esc(B3.view.charge[e.k])+'">!!</i>':'';
+    const badge=pm?'<i class="b2-int b3-pvb" title="'+(pm.kind==='push'?'Pushed back ':'Pulled forward ')+pm.n+' ticks">'+(pm.kind==='push'?'\u25B6':'\u25C0')+'</i>':flus?'<i class="b2-int b3-brk" title="Flustered">BREAK</i>':foe&&n===1&&B3.view.charge[e.k]?'<i class="b2-int all" title="Winding up '+b2Esc(B3.view.charge[e.k])+'">!!</i>':'';
     return (e.div?'<i class="b3-div" title="Round '+e.div+' starts here"><b>'+e.div+'</b></i>':'')+
       '<div class="'+cls+'" data-k="'+key+'" title="'+b2Esc(u.name)+'">'+(img?'<img alt="" src="'+img+'">':'<span>'+b2Esc(u.name.charAt(0))+'</span>')+(u.letter?'<b>'+u.letter+'</b>':'')+badge+'</div>';
   }).join('');
@@ -182,7 +210,8 @@ function b3RenderCmd() {
   const cmdOn=battle.state==='command'&&u;
   if(!cmdOn||B3.ui==='cross'||B3.ui==='busy') {
     const rk=Math.round(B3.view.ruckus||0),pu=u||B3.F.party.find(p=>p.key===B3.turnOf)||B3.F.party[0],off=cmdOn?'':' off',img=b2Portrait(pu.id),nS=b3SkillRows(pu).length;
-    const X=(d,name,sub,grey)=>'<button type="button" class="b2-x '+d+(grey?' off':off)+'" data-d="'+d+'"><span class="ar"></span>'+name+'<small'+(sub.length>11?' class="long"':'')+'>'+b2Esc(sub)+'</small></button>';
+    const rc=b3Rec(),rk0=rc?(rc.kind==='basic'?'up':rc.kind==='ruckus'?'left':'right'):'';
+    const X=(d,name,sub,grey)=>'<button type="button" class="b2-x '+d+(grey?' off':off)+(d===rk0?' rec':'')+'" data-d="'+d+'"><span class="ar"></span>'+name+'<small'+(sub.length>11?' class="long"':'')+'>'+b2Esc(sub)+'</small></button>';
     box.innerHTML='<div class="b2-cross">'+X('up','BASIC',B3_SKILLS[pu.basic].name)+X('left','RUCKUS',rk+'%',rk<B3_RULES.ruckus.doubleTeam).replace('class="b2-x left','style="--rk:'+rk+'%" class="b3-rk b2-x left')+
       '<div class="b2-mid'+off+'">'+(img?'<img alt="" src="'+img+'">':'')+'<small class="b3-pepn">'+B3.view.u[pu.key].pep+' PEP</small></div>'+
       X('right','SKILLS',nS?nS+(nS===1?' skill':' skills'):'None yet',!nS)+X('down','BAG','Not yet',true)+'</div>';
@@ -198,21 +227,24 @@ function b3RenderCmd() {
   }
   if(B3.ui==='skills') {
     const rows=b3SkillRows(u),free=b3Granted()===u;
-    box.innerHTML='<div class="b2-list">'+(free?'<div class="b3-free">FREE SKILL FOR '+b2Esc(u.name.toUpperCase())+'</div>':'')+rows.map((S,i)=>{ const can=b3CanUse(B3.F,u,S),c=b3Cost(B3.F,u,S);
-      return '<button type="button" class="b2-btn'+(i===B3.sel?' sel':'')+(can.ok?'':' no')+'" data-i="'+i+'"><div class="b2-top"><span class="b2-sn">'+b2Esc(S.name)+'</span><i class="b2-cost">'+(free&&!c?'FREE':c+' PEP')+'</i></div><em class="b2-els">'+b3FlavorChips(S)+(u.pocketSkills.includes(S.id)?'<span class="b2-el b3-pk" title="From the Pocket Vibe">POCKET</span>':'')+'</em></button>'; }).join('')+(free?'':back)+'</div>';
+    const rc=b3Rec();
+    box.innerHTML='<div class="b2-list">'+(free?'<div class="b3-free">FREE SKILL FOR '+b2Esc(u.name.toUpperCase())+'</div>':'')+'<div class="b3-pv" id="b3-pv"></div>'+rows.map((S,i)=>{ const can=b3CanUse(B3.F,u,S),c=b3Cost(B3.F,u,S);
+      return '<button type="button" class="b2-btn'+(i===B3.sel?' sel':'')+(can.ok?'':' no')+(rc&&rc.skill===S.id?' rec':'')+'" data-i="'+i+'"><div class="b2-top"><span class="b2-sn">'+b2Esc(S.name)+'</span><i class="b2-cost">'+(free&&!c?'FREE':c+' PEP')+'</i></div><em class="b2-els">'+b3FlavorChips(S)+(u.pocketSkills.includes(S.id)?'<span class="b2-el b3-pk" title="From the Pocket Vibe">POCKET</span>':'')+'</em></button>'; }).join('')+(free?'':back)+'</div>';
   } else if(B3.ui==='ruckus') {
-    box.innerHTML='<div class="b2-list"><div class="b3-free b3-rkh">FAMILY RUCKUS '+Math.round(B3.view.ruckus||0)+'%</div>'+['double','full'].map((k,i)=>{ const P=b3RuckusPlan(B3.F,u,k);
-      return '<button type="button" class="b2-btn'+(i===B3.sel?' sel':'')+(P.ok?'':' no')+'" data-i="'+i+'"><div class="b2-top"><span class="b2-sn">'+b2Esc(b3RuckusName(k).toUpperCase())+'</span><i class="b2-cost">'+P.cost+'%</i></div><em>'+b2Esc(P.ok?'With '+P.partner.name+': '+(k==='full'?'their best Skills, free':'both Basics, +50% power'):P.why)+'</em></button>'; }).join('')+back+'</div>';
+    const rc=b3Rec();
+    box.innerHTML='<div class="b2-list"><div class="b3-free b3-rkh">FAMILY RUCKUS '+Math.round(B3.view.ruckus||0)+'%</div><div class="b3-pv" id="b3-pv"></div>'+['double','full'].map((k,i)=>{ const P=b3RuckusPlan(B3.F,u,k);
+      return '<button type="button" class="b2-btn'+(i===B3.sel?' sel':'')+(P.ok?'':' no')+(rc&&rc.skill==='ruckus:'+k?' rec':'')+'" data-i="'+i+'"><div class="b2-top"><span class="b2-sn">'+b2Esc(b3RuckusName(k).toUpperCase())+'</span><i class="b2-cost">'+P.cost+'%</i></div><em>'+b2Esc(P.ok?'With '+P.partner.name+': '+(k==='full'?'their best Skills, free':'both Basics, +50% power'):P.why)+'</em></button>'; }).join('')+back+'</div>';
   } else if(B3.ui==='target') {
-    box.innerHTML='<div class="b2-list">'+B3.opts.map((o,i)=>{ const t1=o.units.length===1?o.units[0]:null,v=t1?B3.view.u[t1.key]:null;
+    const rc=b3Rec();
+    box.innerHTML='<div class="b2-list"><div class="b3-pv" id="b3-pv"></div>'+B3.opts.map((o,i)=>{ const t1=o.units.length===1?o.units[0]:null,v=t1?B3.view.u[t1.key]:null;
       const sub=o.no?o.no:t1?(v.ko?'Knocked out':'HP '+v.hp+'/'+v.maxHp+(v.maxPips?' · '+v.pips+' of '+v.maxPips+' pips':'')+b3ViewIcons(t1.key).map(id=>' · '+B3_STATUS[id].name).join('')):o.units.length+' targets';
-      return '<button type="button" class="b2-btn'+(i===B3.sel?' sel':'')+(o.no?' no':'')+'" data-i="'+i+'"><span>'+b2Esc(o.label.toUpperCase())+'</span><em>'+b2Esc(sub)+'</em></button>'; }).join('')+back+'</div>';
+      return '<button type="button" class="b2-btn'+(i===B3.sel?' sel':'')+(o.no?' no':'')+(rc&&B3.pending&&rc.skill===B3.pending.id&&rc.target===o.key?' rec':'')+'" data-i="'+i+'"><span>'+b2Esc(o.label.toUpperCase())+'</span><em>'+b2Esc(sub)+'</em></button>'; }).join('')+back+'</div>';
   }
 }
 // What the cursor is on, in the message line.
 function b3Info() {
   const u=B3.actor; if(battle.state!=='command'||!u||B3.ui==='done') return;
-  if(B3.ui==='cross') b3Say(u.name+'’s turn. ▲ BASIC is free and gives 2 Pep. ▶ SKILLS cost Pep. Tap anyone to see what is on them.');
+  if(B3.ui==='cross') { const rc=b3Rec(); b3Say(u.name+'’s turn. ▲ BASIC is free and gives 2 Pep. ▶ SKILLS cost Pep. Tap anyone to see what is on them.'+(rc?' Suggested: '+(rc.kind==='ruckus'?b3RuckusName(rc.skill.slice(7)):B3_SKILLS[rc.skill].name)+(rc.why?'. '+rc.why:'.'):'')); }
   else if(B3.ui==='info') b3Say('What is on '+b3Unit(B3.F,B3.infoKey).name+'. Tap another family member or monster to see theirs.');
   else if(B3.ui==='ruckus') { const k=['double','full'][B3.sel]||'double',P=b3RuckusPlan(B3.F,u,k); b3Say(P.ok?b3RuckusName(k)+' with '+P.partner.name+', who is next on the turn bar: '+(k==='full'?'both fire their best Main Vibe Skill free, one action, up to 4 Composure pips. ':'both use their Basic on one monster at +50% power. ')+'No Pep, and '+P.partner.name+' still gets their own turn.':P.why); }
   else if(B3.ui==='skills') { const S=b3SkillRows(u)[B3.sel]; if(S) { const can=b3CanUse(B3.F,u,S),g=b3Granted()===u?b3Unit(B3.F,B3.F.grant.by):null;
@@ -221,8 +253,60 @@ function b3Info() {
 }
 function b3Render() {
   if(!B3.F||!B3.view) return;
-  b3RenderBar(); b3RenderParty(); b3RenderCmd(); b3Info(); b3SyncTools();
+  b3PvCompute(); b3RenderBar(); b3RenderParty(); b3RenderCmd(); b3RenderPv(); b3Info(); b3SyncTools();
   const sel=document.querySelector('#b3-cmd .b2-btn.sel'); if(sel&&sel.scrollIntoView) sel.scrollIntoView({block:'nearest'});
+}
+
+// ---------- Tap to preview ----------
+// B3.pvNow is what the cursor is on, worked out by engine/b3-preview.js: {ok, why, name, cost, flavor, pepGain, rows, gives, bar, moved, P}.
+// rows: one per monster the move meets, {key, name, peeve, resist, det, pips:{n,left,max,brk}, hp, hpAfter, dmg, ko}. moved: {key:{kind,n}}.
+function b3PvCompute() {
+  B3.pvNow=null;
+  const u=B3.actor,F=B3.F; if(!u||!F||battle.state!=='command'||!['skills','ruckus','target'].includes(B3.ui)) return;
+  let id=null,key=null,S=null,why='';
+  if(B3.ui==='skills') { S=b3SkillRows(u)[B3.sel]; if(!S) return; id=S.id; const can=b3CanUse(F,u,S); if(!can.ok) { B3.pvNow={ok:false,why:can.why,name:S.name,rows:[],gives:[],moved:{},P:null}; return; }
+    const os=b3Options(F,u,S).filter(o=>!o.no); if(os.length===1) key=os[0].key; else key=undefined; }
+  else if(B3.ui==='ruckus') { const k=['double','full'][B3.sel]||'double',P=b3RuckusPlan(F,u,k); if(!P.ok) { B3.pvNow={ok:false,why:P.why,name:b3RuckusName(k),rows:[],gives:[],moved:{},P:null}; return; }
+    id='ruckus:'+k; key=P.foeOpts.length===0?null:P.foeOpts.length===1?P.foeOpts[0].key:undefined; }
+  else { const o=B3.opts[B3.sel]; if(!B3.pending||!o) return; if(o.no) { B3.pvNow={ok:false,why:o.no,name:B3.pending.name,rows:[],gives:[],moved:{},P:null}; return; } id=B3.pending.id; key=o.key; if(B3.pending.ruckus) { /* a spend */ } else S=B3_SKILLS[id]; }
+  const ck=[B3.ui,id,key,u.key,F.clock,F.turnLog.length,F.ruckus,F.round].join('|');
+  if(B3.pvC&&B3.pvC.k===ck) { B3.pvNow=B3.pvC.v; return; }
+  let v;
+  if(key===undefined) {
+    // Not aimed yet: what the move would meet on each monster, and nothing more.
+    const ms=S?b3Matchups(F,u,S):[];
+    v={ok:true,name:S?S.name:'',cost:S?b3Cost(F,u,S):0,flavor:S?S.flavor.slice():[],pepGain:S&&S.slot==='basic'?2:0,rows:ms.map(m=>({key:m.key,name:m.name,peeve:m.peeve,resist:m.resist,det:m.det,pips:m.maxPips?{n:0,left:m.pips,max:m.maxPips}:null})),gives:[],moved:{},P:null,unaimed:true};
+  } else {
+    const P=b3Preview(F,u,id,key);
+    if(!P.ok) v={ok:false,why:P.why,name:'',rows:[],gives:[],moved:{},P:null};
+    else {
+      const nm=k=>b3Unit(F,k).name,rows=[];
+      for(const k of Object.keys(P.tgts)) { const t=b3Unit(F,k); if(!t||t.side!=='foe') continue; const T=P.tgts[k],pp=P.pips.filter(x=>x.tgt===k),dt=P.dets.filter(x=>x.tgt===k)[0];
+        rows.push({key:k,name:t.name,peeve:T.peeve,resist:T.resist,det:dt?{name:dt.name,prime:dt.prime}:null,pips:pp.length?{n:pp.reduce((a,x)=>a+x.n,0),left:pp[pp.length-1].left,max:pp[0].max,brk:P.breaks.includes(k)}:null,hp:t.hp,hpAfter:T.hpAfter,dmg:T.dmg,ko:T.ko}); }
+      const gives=[...P.heals.map(h=>({k:'heal',who:nm(h.tgt),n:h.n})),...P.shields.map(h=>({k:'shield',who:nm(h.tgt),n:h.n})),...P.revives.map(k=>({k:'revive',who:nm(k),n:0}))];
+      const moved={}; for(const m of P.moves) if(!moved[m.tgt]) moved[m.tgt]={kind:m.kind,n:m.n}; else moved[m.tgt].n+=m.n;
+      v={ok:true,name:P.name,cost:P.cost,flavor:P.flavor,pepGain:P.pep,rows,gives,moved,P,ruckus:P.ruckus};
+    }
+  }
+  B3.pvC={k:ck,v}; B3.pvNow=v;
+}
+// The words version of the preview box (Rose Mode's pictures replace this: engine/b3-pictures.js).
+function b3PvHtml(v) {
+  if(!v) return '';
+  if(!v.ok) return '<div class="b3-pv-n">'+b2Esc(v.why||'')+'</div>';
+  const chip=(t,c)=>'<span class="b3-pv-c" style="color:'+c+'">'+b2Esc(t)+'</span>';
+  const fl=v.flavor.map(f=>chip(B3_FLAVORS[f].name.toUpperCase(),B3_FLAVORS[f].color)).join('');
+  const head='<div class="b3-pv-h"><b>'+(v.cost?v.cost+' PEP':'FREE')+'</b>'+fl+(v.pepGain>0?'<i>+'+v.pepGain+' Pep</i>':'')+'</div>';
+  const rows=v.rows.map(r=>'<div class="b3-pv-r"><span>'+b2Esc(r.name)+'</span>'+(r.peeve?chip('PET PEEVE','#8fe3a6'):'')+(r.resist?chip('RESISTS','#ff9a8a'):'')+(r.det?chip(r.det.name.toUpperCase(),'#ffe27a'):'')+
+    (r.pips&&r.pips.n?chip('PIPS -'+r.pips.n+' ('+r.pips.left+' of '+r.pips.max+')','#ffd36b'):'')+(r.pips&&r.pips.brk?chip('BREAK!','#ff9a8a'):'')+(r.ko?chip('KNOCKED OUT','#ff9a8a'):'')+'</div>').join('');
+  const gv=v.gives.map(g=>'<div class="b3-pv-r"><span>'+b2Esc(g.who)+'</span>'+chip(g.k==='heal'?'+'+g.n+' HP':g.k==='shield'?'+'+g.n+' SHIELD':'BACK UP','#8fe3a6')+'</div>').join('');
+  const mv=Object.keys(v.moved).map(k=>{ const m=v.moved[k]; return '<div class="b3-pv-r"><span>'+b2Esc(b3Unit(B3.F,k).name)+'</span>'+chip((m.kind==='push'?'FALLS BACK ':'COMES SOONER ')+m.n,'#ffb070')+'</div>'; }).join('');
+  const nxt=v.P&&B3.actor?(()=>{ const i=v.P.bar.findIndex(e=>e.k===B3.actor.key); return i<0?'':'<div class="b3-pv-b">'+b2Esc(B3.actor.name)+'\u2019s next turn: '+(i===0?'right after this':'after '+i+(i===1?' other turn':' other turns'))+'.</div>'; })():'';
+  return head+rows+gv+mv+nxt;
+}
+function b3RenderPv() {
+  const el=document.getElementById('b3-pv'); if(!el) return;
+  el.innerHTML=b3PvHtml(B3.pvNow);
 }
 
 // ---------- The full list for one unit (statuses, shields, the floor) ----------
@@ -243,7 +327,7 @@ function b3Choose(S) {
   b3Sfx('select');
   if(opts.length===1&&!opts[0].no) { b3Commit(S.id,opts[0].key); return; }
   B3.pending=S; B3.opts=opts; B3.prevUi=B3.ui; B3.prevSel=B3.sel;
-  b3Open('target',Math.max(0,opts.findIndex(o=>!o.no)));
+  b3Open('target',b3RecTarget(opts,S.id));
 }
 // RUCKUS > DOUBLE TEAM or FULL FAMILY RUCKUS: a move aimed at one monster asks which; otherwise it goes at once.
 function b3ChooseRuckus(kind) {
@@ -253,13 +337,13 @@ function b3ChooseRuckus(kind) {
   if(!P.foeOpts.length) { b3Commit('ruckus:'+kind,null); return; }
   if(P.foeOpts.length===1) { b3Commit('ruckus:'+kind,P.foeOpts[0].key); return; }
   B3.pending={id:'ruckus:'+kind,ruckus:kind,name:b3RuckusName(kind),desc:'Pick the monster. '+P.partner.name+' joins in.'}; B3.opts=P.foeOpts; B3.prevUi='ruckus'; B3.prevSel=B3.sel;
-  b3Open('target',0);
+  b3Open('target',b3RecTarget(B3.opts,B3.pending.id));
 }
 function b3Cross(d) {
   const u=B3.actor; if(!u) return;
   if(d==='up') b3Choose(B3_SKILLS[u.basic]);
-  else if(d==='right') { if(!b3SkillRows(u).length) { b3Sfx('nope'); b3Say(u.name+' has no Skills in this build yet. They arrive in the next stages.'); return; } b3Sfx('select'); b3Open('skills',0); }
-  else if(d==='left') { if((B3.F.ruckus||0)<B3_RULES.ruckus.doubleTeam) { b3Sfx('nope'); b3Say('The Family Ruckus is at '+Math.round(B3.F.ruckus)+'%. A Mix, a Detonation, extra hits and a Break fill it. Double Team costs 50%, Full Family Ruckus 100%.'); return; } b3Sfx('select'); b3Open('ruckus',0); }
+  else if(d==='right') { if(!b3SkillRows(u).length) { b3Sfx('nope'); b3Say(u.name+' has no Skills in this build yet. They arrive in the next stages.'); return; } b3Sfx('select'); b3Open('skills',b3RecRow()); }
+  else if(d==='left') { if((B3.F.ruckus||0)<B3_RULES.ruckus.doubleTeam) { b3Sfx('nope'); b3Say('The Family Ruckus is at '+Math.round(B3.F.ruckus)+'%. A Mix, a Detonation, extra hits and a Break fill it. Double Team costs 50%, Full Family Ruckus 100%.'); return; } b3Sfx('select'); b3Open('ruckus',(()=>{ const r=b3Rec(); return r&&r.kind==='ruckus'&&r.skill==='ruckus:full'?1:0; })()); }
   else if(d==='down') { b3Sfx('nope'); b3Say('The BAG is not built yet in the new battle. It arrives in a later stage.'); }
 }
 function b3Pick(i) {
@@ -279,13 +363,13 @@ function b3Back() {
 function b3Move(d) {
   if(B3.ui==='info') { const K=b3InfoKeys(),i=Math.max(0,K.indexOf(B3.infoKey)); B3.infoKey=K[(i+(d==='up'||d==='left'?K.length-1:1))%K.length]; b3Sfx('move'); b3Render(); return; }
   const n=B3.ui==='ruckus'?2:B3.ui==='skills'?b3SkillRows(B3.actor).length:B3.ui==='target'?B3.opts.length:0; if(!n) return;
-  B3.sel=(B3.sel+(d==='up'||d==='left'?n-1:1))%n; b3Sfx('move'); b3Render();
+  B3.sel=(B3.sel+(d==='up'||d==='left'?n-1:1))%n; B3.armed=B3.sel; b3Sfx('move'); b3Render();
 }
 // The cursor moves without rebuilding the buttons under the finger.
 function b3Hover(i) {
-  B3.sel=i;
+  B3.sel=i; B3.armed=i;
   document.querySelectorAll('#b3-cmd .b2-btn[data-i]').forEach(b=>b.classList.toggle('sel',Number(b.dataset.i)===i));
-  b3RenderBar(); b3RenderParty(); b3Info();
+  b3PvCompute(); b3RenderBar(); b3RenderParty(); b3RenderPv(); b3Info();
 }
 
 // ---------- Input: touch, keyboard, gamepad ----------
@@ -306,7 +390,8 @@ function b3Key(e) {
   else if((c==='Enter'||c==='Space')&&!e.repeat) { e.preventDefault(); b3A(); }
   else if((c==='Escape'||c==='Backspace'||c==='KeyX')&&!e.repeat) { e.preventDefault(); b3Back(); }
 }
-function b3Pad(dir,dirEdge,A,B) {
+function b3Pad(dir,dirEdge,A,B,Y) {
+  if(Y) { if(B3.ui==='info') b3Back(); else if(B3.actor) b3OpenInfo(B3.actor.key); return; }   // the same as the I key
   if(dirEdge&&dir) b3Dir(dir);
   if(A) b3A(); else if(B) b3Back();
 }
@@ -349,6 +434,7 @@ function b3Exit() { if(!B3.active) return; b3Sfx('select'); b3End('run'); }
   $('b3-exit').addEventListener('click',e=>{ e.stopPropagation(); b3Exit(); });
   $('b3-speed').addEventListener('click',e=>{ e.stopPropagation(); b3Speed(); });
   ui.addEventListener('pointerdown',e=>{ B3.ptr=e.pointerType||'touch'; },true);
+  cv.addEventListener('pointerdown',e=>{ B3.ptr=e.pointerType||'touch'; },true);
   ui.addEventListener('click',e=>{
     if(!B3.active||battle.state!=='command') return;
     if(e.target.closest('[data-done]')) { b3Pick(0); return; }
@@ -359,12 +445,13 @@ function b3Exit() { if(!B3.active) return; b3Sfx('select'); b3End('run'); }
     if(b&&b.dataset.i!=null) {
       const i=Number(b.dataset.i);
       // On a phone the first tap on a Skill only highlights it and says what it does; a tap on the highlighted row uses it.
-      if(B3.ptr&&B3.ptr!=='mouse'&&(B3.ui==='skills'||B3.ui==='ruckus')&&i!==B3.sel) { b3Sfx('move'); b3Hover(i); return; }
+      if(B3.ptr&&B3.ptr!=='mouse'&&(B3.ui==='skills'||B3.ui==='ruckus'||B3.ui==='target')&&i!==B3.armed) { b3Sfx('move'); b3Hover(i); return; }
       b3Pick(i); return;
     }
     // Tap a party card to aim at that family member; with no target to pick, the tap opens their full list.
     const pc=e.target.closest('.b2-pc');
-    if(pc&&B3.ui==='target') { const u=B3.F.party[Number(pc.dataset.i)],k=B3.opts.findIndex(o=>o.units.length===1&&o.units[0]===u); if(k>=0) b3Pick(k); }
+    if(pc&&B3.ui==='target') { const u=B3.F.party[Number(pc.dataset.i)],k=B3.opts.findIndex(o=>o.units.length===1&&o.units[0]===u);
+      if(k>=0) { if(B3.ptr&&B3.ptr!=='mouse'&&k!==B3.armed) { b3Sfx('move'); b3Hover(k); } else b3Pick(k); } }
     else if(pc) { const u=B3.F.party[Number(pc.dataset.i)]; if(u) b3OpenInfo(u.key); }
   });
   ui.addEventListener('pointerover',e=>{
@@ -375,7 +462,7 @@ function b3Exit() { if(!B3.active) return; b3Sfx('select'); b3End('run'); }
   cv.addEventListener('click',e=>{
     if(B3.active&&battle.state==='command'&&B3.ui!=='target'&&B3.ui!=='done') { const q=b2CanvasPt(e.clientX,e.clientY),f=q&&q.inside?b3FoeAt(q.x,q.y):null; if(f) b3OpenInfo(f.key); return; }
     const k=b3TargetAt(e.clientX,e.clientY); if(k<0) return;
-    if(B3.opts[k].units.length>1&&k!==B3.sel) { b3Sfx('move'); b3Hover(k); return; }
+    if(k!==B3.armed&&((B3.ptr&&B3.ptr!=='mouse')||(B3.opts[k].units.length>1&&k!==B3.sel))) { b3Sfx('move'); b3Hover(k); return; }
     b3Pick(k);
   });
   cv.addEventListener('pointermove',e=>{
