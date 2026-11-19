@@ -51,11 +51,6 @@
    "covers": "Voice and music takes (voice-gen Action, Voice and Music Library): credits, voice slots (account full at 30)"
   },
   {
-   "id": "imagegen",
-   "name": "Image generator",
-   "covers": "The outside image AI used from Claude's prompts"
-  },
-  {
    "id": "github",
    "name": "GitHub",
    "covers": "Pages publish, Actions runs, tokens and secrets, repo access"
@@ -142,9 +137,9 @@
    "id": "t-ch1art",
    "title": "Approve the chapter 1 stand-in pictures",
    "theme": "Areas",
-   "lane": "claude",
-   "col": "up",
-   "next": "ADMIN > ART LIBRARY, group \"Chapter 1\" (picture tabs, not Clips): 11 stand-in entries (muffin pan, empty pan, papers, Mudling with muffins, green Big One with pan, Grace's list, Amy's window, Ellie's door, Rose on shoulders, cab shot, phone on seat). Generate and Approve, or Reject with a note.",
+   "lane": "tom",
+   "col": "done",
+   "next": "Done: you approved muffin pan, empty pan, muffin papers, phone on seat and the kitchen with the empty island, and rejected Grace's list, Amy's window, Aunt Ellie's door and the cab pulling away, each with a note.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-17",
@@ -164,16 +159,21 @@
     {
      "d": "2026-11-19",
      "t": "Moved from claude/up to claude/up by Tom."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Your pass is done (11-19): 5 approved, 4 rejected with notes. You moved this card to Claude; the board had no way to turn that into a job. The audit split it into two Claude cards."
     }
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "t-narr",
    "title": "Record the Narrator and Washington lines",
    "theme": "Voice Clips",
-   "lane": "claude",
-   "col": "up",
-   "next": "ADMIN > VOICE LIBRARY. Narr1: record the 57 Narrator lines with no clip (silent until then). Washvoice1: re-record Mr. Washington's 32 lines (Show > Old voice). One export can carry both; send it to the voice conversation. Do not delete takes.",
+   "lane": "tom",
+   "col": "done",
+   "next": "Done long ago: the Narrator and Mr. Washington lines all have clips.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-14",
@@ -193,8 +193,13 @@
     {
      "d": "2026-11-19",
      "t": "Tom sent a pending export (31 takes: 30 chapter 1 re-takes, 1 Washington line, no Narrator, no old-voice Washington) and it was merged (ch1takes1). His Voice Library showed Narrator no clip yet 0 and Old voice 28. Looks done since voice3 (Nov 13); asked Tom whether to remove this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Stale: both recordings were merged in an earlier voice build; ch1takes1 found 0 Narrator lines without a clip. Closed by the board audit."
     }
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "t-boardtest",
@@ -227,21 +232,25 @@
    "title": "Clip quality gate, vision check (clipgate2)",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "up",
-   "next": "Build the vision check (claude/clip-gate-plan.md section 4), replay it on the 67 clips until measured plus vision flag all 44 of your rejects, then wire the gate into the clip-gen Action so a failing clip is held, not approved. Spends about $1 of xAI credit on looking only, no videos.",
+   "col": "prog",
+   "next": "Built so far (clipgate2a): the vision check and the clip-gate Action. Left: run the Action on the 67 clips (about $1 of xAI credit, cap $2), replay until it flags all 44 of your rejects, then wire the gate into clip-gen so a failing clip is held, not approved.",
    "blocks": [
     "c-clipch1fix"
    ],
    "changed": "2026-11-19",
    "created": "2026-11-19",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukG8zkAesiDwcGiooGb",
+    "url": "https://claude.ai/code/session_01RXeukEzpb5pgdERsbp6vCT",
     "opening": "\"Read claude/animation-chapter-plan.md and the review notes saved in data/art-prompts.json\""
    },
    "history": [
     {
      "d": "2026-11-19",
      "t": "Planned by clipgate1."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Board audit: part shipped as clipgate2a from the chat linked here; nothing spent yet. Moved to In progress."
     }
    ],
    "prompt": {
@@ -316,10 +325,10 @@
    "title": "Build chapter 2 to the locked script",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "wait",
-   "next": "One chapter per conversation. Lines go in word for word from the locked file. Start: claude/story-next.md.",
+   "col": "up",
+   "next": "First writes the chapter 2 teardown list and shows you the questions marked ASK; builds only after you answer. Lines go in word for word from the locked file. One chapter per conversation. Start: claude/story-next.md.",
    "blocks": [],
-   "changed": "2026-11-17",
+   "changed": "2026-11-19",
    "created": "2026-11-17",
    "chat": {
     "url": "",
@@ -329,18 +338,20 @@
     {
      "d": "2026-11-17",
      "t": "On the board from the first fill (board1)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked by the board audit: you marked the chapter 1 play done on 11-19. The prompt no longer has a blank for you to fill in."
     }
    ],
-   "waiting_on": "tom",
    "prompt": {
     "what": "Builds chapter 2 from the locked script, tests it start to finish, then stops for Tom's phone play.",
     "before": [
-     "Play chapter 1 (card \"Play chapter 1 on your phone and report\").",
-     "Replace the text in angle brackets with what you saw."
+     "Nothing to do first. If you have chapter 1 notes you did not send with the REPORT tab, type them after the prompt."
     ],
     "model": "Claude Sonnet 5.5 (row B: the locked script is written, tests catch mistakes)",
     "effort": "medium (steps are known)",
-    "text": "Read claude/story-next.md and continue. Chapter 1 play feedback: <what Tom saw>. You have my full permission to access the repo."
+    "text": "Read claude/story-next.md and continue with the chapter 2 build. I have played chapter 1. You have my full permission to access the repo."
    }
   },
   {
@@ -572,8 +583,7 @@
    "title": "New battle system, stage 9: first late joiners and the next kits",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "up",
    "next": "Builds stage 9 as the architecture section 5 row 9 says. Read that row, claude/battle-kit-ops.md, docs/BATTLE3.md and docs/handoff/b3s8.md. Milestone A notes from Tom are handled first.",
    "blocks": [],
    "changed": "2026-11-19",
@@ -586,12 +596,16 @@
     {
      "d": "2026-11-19",
      "t": "Added by board refresh: next stage after b3s8."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked by the board audit: you marked milestone A done on 11-19."
     }
    ],
    "prompt": {
     "what": "Builds stage 9 of the new battle system (late joiners and the next characters' kits), after handling any milestone A notes.",
     "before": [
-     "Play milestone A (card \"Milestone A: play the new battle\") and have notes ready, or say you have none."
+     "Have your milestone A notes ready to type after the prompt, or say you have none."
     ],
     "model": "Claude Opus 5.5 (row D: 12 of the lines need their own function; Sonnet 5.5 if the session splits it like 5a to 5c)",
     "effort": "medium (steps are known)",
@@ -603,8 +617,8 @@
    "title": "Generate and approve the kitchen picture with the muffin plates gone",
    "theme": "Areas",
    "lane": "tom",
-   "col": "up",
-   "next": "ADMIN > ART LIBRARY, group \"Chapter 1\", entry ch1-kitchen-empty-island (Props tab): press Generate, look at the island (the three muffin plates must be gone, the pie and the cake under the dome kept, the rest of the kitchen unchanged), then Approve, or Reject with a note on what is wrong.",
+   "col": "done",
+   "next": "Done: you approved the kitchen picture with the muffin plates gone.",
    "blocks": [
     "c-cutpolish4b"
    ],
@@ -618,17 +632,21 @@
     {
      "d": "2026-11-19",
      "t": "Added by cutpolish4: the empty counter after the theft could not be made by code."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "You approved ch1-kitchen-empty-island in the Art Library on 11-19; the board had not noticed. Closed by the board audit."
     }
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "c-cutpolish4b",
-   "title": "Install the empty counter after the theft (cutpolish4b)",
+   "title": "Install the approved chapter 1 pictures (empty counter, muffin pan, empty pan, papers, phone on seat)",
    "theme": "Areas",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
-   "next": "After you approve ch1-kitchen-empty-island: crop the island patch, draw it in both kitchen layers once the theft has happened, look at it in portrait and landscape.",
+   "col": "up",
+   "next": "The empty counter first: crop the island patch from ch1-kitchen-empty-island and draw it in both kitchen layers once the theft has happened. Then swap the code stand-ins for the other pictures you approved (muffin pan, empty pan, muffin papers, phone on seat). Look at each in portrait and landscape.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -640,16 +658,20 @@
     {
      "d": "2026-11-19",
      "t": "Queued by cutpolish4; waits on t-kitchenempty."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked by the board audit: the picture is approved. The other approved chapter 1 pictures were added to this install."
     }
    ],
    "prompt": {
-    "what": "Crops the empty-island patch from the approved kitchen picture and shows it in both kitchen layers after the theft (audit item 4e).",
+    "what": "Installs the five chapter 1 pictures you approved in the Art Library, starting with the empty kitchen counter after the theft.",
     "before": [
-     "ADMIN > ART LIBRARY, group Chapter 1, entry ch1-kitchen-empty-island: Generate, then Approve (card t-kitchenempty)."
+     "Nothing to do first (the pictures are approved)."
     ],
     "model": "Claude Sonnet 5.5 (row B: the box, the layers and the flag are written down in claude/next-addendum-cutpolish4.md, frames catch mistakes)",
     "effort": "medium (steps are known)",
-    "text": "Read claude/next-addendum-cutpolish4.md, then install the empty counter patch (cutpolish4b). You have my full permission to access the repo."
+    "text": "Read claude/next-addendum-cutpolish4.md and claude/next-addendum-ch1rebuild1.md, then install the empty counter patch (cutpolish4b) and every other approved stand-in picture in Art Library group Chapter 1. You have my full permission to access the repo."
    }
   },
   {
@@ -711,6 +733,176 @@
     "effort": "low (one rule and one badge on a page that exists)",
     "text": "Read claude/next-addendum-board1.md, then build the board card c-boardready (green Ready badge). You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "c-ch1art2",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Areas",
+   "title": "Fix the four chapter 1 pictures you rejected, from your notes",
+   "next": "Rewrite the prompts of ch1-grace-list, ch1-amy-window, ch1-ellie-door and ch1-cab-pulls-away from your reject notes by the smallest change, set them back to draft, and say which chapter 1 entries still have no decision (Mudling with muffins, green Big One with pan, Rose on shoulders had none on 11-19).",
+   "prompt": {
+    "what": "Fixes the prompts of the four chapter 1 pictures you rejected, using your notes, so you can generate them again.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5 (row D: generator prompts judged by eye)",
+    "effort": "medium (each note is a small edit of a prompt that exists)",
+    "text": "In data/art-prompts.json, group Chapter 1, four picture entries are rejected with my notes: ch1-grace-list, ch1-amy-window, ch1-ellie-door, ch1-cab-pulls-away. Fix each prompt from its note by the smallest change, set the entry back to draft, and tell me which Chapter 1 picture entries still have no decision. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by the board audit from your Art Library rejects of 11-19."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "c-boardaudit",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Project Ops",
+   "title": "Audit the board against how Tom and Claude work",
+   "next": "Done: the board was not noticing finished work (two of your cards and three of Claude's were in the wrong place), linked only 5 of the day's 12 conversations and never showed what was running. Data fixes are in this change; the build plan is claude/board2-plan.md.",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFc3ANMLuB2qSqohxj",
+    "opening": "\"Audit the Kennan board and make sure it actually makes sense for how you and work with each other.\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Tom: \"I want to create a seamless flow where cards are on the board and moved automatically and there are easy ways for me to initiate next steps with you. The issue is I'm losing track of all the conversations we have going in parallel\"."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "t-projinstr",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Project Ops",
+   "title": "Replace one paragraph in the Project instructions",
+   "next": "In Claude, open this Project > Instructions. Replace the bullet that starts \"Session handoff (standing rule)\" with the paragraph in the audit chat (also claude/board2-plan.md section 7). It makes every new conversation start from the board, whatever you type first.",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFc3ANMLuB2qSqohxj",
+    "opening": "\"Audit the Kennan board and make sure it actually makes sense for how you and work with each other.\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by the board audit: the Project instructions still tell sessions to start from claude/next.md and never mention the board."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "c-board2",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "blocks": [
+    "c-board3"
+   ],
+   "title": "Board that keeps itself current (board2)",
+   "next": "Builds claude/board2-plan.md sections 2 to 6: a GitHub job that moves cards from what actually happened in the repo (your approvals, shipped builds, finished blockers, running jobs), a \"Conversations\" strip that lists every chat with a link, buttons that say what you mean (\"I did this\", \"Claude takes this\"), and a push check so no build skips the board.",
+   "prompt": {
+    "what": "Builds the automatic board: cards move by themselves and every conversation is listed with a link.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the plan is written, the board check and the board test catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/board2-plan.md and claude/handoff-rules.md, then build board2. Start by applying claude/board-audit/apply_audit.py. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFc3ANMLuB2qSqohxj",
+    "opening": "\"Read claude/board2-plan.md and claude/handoff-rules.md, then build board2. Start by applying claude/board-audit/apply_audit.py.\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Planned by the board audit."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: audit fixes applied to the board, build in progress."
+    }
+   ],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "c-board3",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Tools",
+   "title": "START button: one tap on a card opens the conversation for you (board3)",
+   "next": "Waits for board2. Builds claude/board2-plan.md section 8: a START button on Claude cards that starts the conversation on the right model and effort and puts its link on the card. Ends with one setup card for you (about 10 minutes at a computer).",
+   "prompt": {
+    "what": "Builds the START button so a Claude card starts its own conversation, with no copying or model picking.",
+    "before": [
+     "Nothing to do first (board2 must be finished)."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a new tool feature that depends on a Claude feature still in preview)",
+    "effort": "medium (the steps and the fallback are written in the plan)",
+    "text": "Read claude/board2-plan.md section 8 and claude/handoff-rules.md, then build board3. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Planned by the board audit; waits on board2."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "c-nextclean",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Project Ops",
+   "title": "Make the board the only list of open work (cut claude/next.md down)",
+   "next": "claude/next.md is 45,000 bytes against its own 20,000 limit and still carries a second, older list of open items and prompts. Put every item that is still wanted on a card, drop the rest, and leave next.md with rules, tests and the push steps only.",
+   "prompt": {
+    "what": "Moves every open item out of claude/next.md onto the board and cuts that file down to rules and tests.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the cleanup rules are written in claude/project-cleanup-plan.md)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/board2-plan.md section 6, claude/project-cleanup-plan.md and claude/handoff-rules.md, then make the board the only list of open work and cut claude/next.md down. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by the board audit."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
   }
  ]
 }

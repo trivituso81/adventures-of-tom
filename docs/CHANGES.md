@@ -1,3 +1,7 @@
+## board2-start (2026-11-19): Audit fixes applied to the board (finished cards closed, blocked cards unblocked, 5 new cards); board2 build started
+
+- Ran claude/board-audit/apply_audit.py on the live board: kitchen picture, Narrator and ch1 art cards closed, cutpolish4b, b3s9 and ch2build unblocked, clipgate2 moved to In progress, the Image generator lane removed. Cards added: c-ch1art2, c-board2, c-board3, c-nextclean, t-projinstr, c-boardaudit. c-board2 is In progress with this conversation's link. No game code changed.
+
 ## board-ready (2026-11-19): Board card added: green Ready badge on Claude cards that are unblocked
 
 - Tom (11-19 15:17) asked what happens after he marks a card Done, then said yes to a badge that shows which Claude card is ready to start. Added Claude card c-boardready (Tools, Up next) with its prompt. Data only; nothing built yet.
