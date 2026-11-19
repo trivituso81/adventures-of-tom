@@ -26544,8 +26544,16 @@
    "promptRev": 2
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/ch1-muffin-pan-v1.png",
+     "date": "2026-11-19",
+     "from": "v1",
+     "at": 1795127930014
+    }
+   ],
    "rejects": [],
    "id": "ch1-muffin-pan",
    "tab": "Props",
