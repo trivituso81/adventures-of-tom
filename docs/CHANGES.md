@@ -40,6 +40,17 @@ Not done: new clips are not loudness levelled (they sit at a different level fro
 - Not in the job: no levelling, no choosing between takes, no script changes, no change to a baked clip.
 - Test: `python3 -I tools/voice-learn/voicegen_test.py` (stand-in ElevenLabs server and a stand-in guard; 23 checks: dry run sends nothing, 5 voices at limit 5, request body, once and twice flagged, needs-human, second run skips done lines, retry, long first tag, max-chars, no key, key never printed).
 
+## b3s6 (2026-11-19): New battle, stage 6: the Family Ruckus (gauge, Double Team, Full Family Ruckus)
+
+- Stage 6 of 23 of the new battle system ("Battle 3", `docs/BATTLE3.md`). Story fights still use the old battle and nothing in it changed. Stage 7 is next.
+- What Tom sees. ADMIN > BATTLE LAB > NEW BATTLE, any fight: the RUCKUS button on the left of the command cross is now the gauge. It fills from the bottom in gold and shows its percent, and it is lit once the gauge reaches 50. Press it for a list with DOUBLE TEAM (50%) and FULL FAMILY RUCKUS (100%). Each row names the partner, the next family member on the turn bar, or says why it cannot be used (a monster is next, gauge too low). The gauge keeps its value between Lab fights on that device.
+- The gauge (0 to 100, shared by the party). Gains: a Mix +5 (a second flavor on a monster in one round, once per monster per round), a Detonation +8, each hit after the first of a multi-hit move +1, a Break +15. Traits that already added points (Gamer's Intuition, Bouncy Physics) still do, on top.
+- Double Team (50): on a family member's turn, when the next unit on the bar is also family, the pair replaces the first member's action. Costs 0 Pep, does not use up the partner's coming turn. Both use their Main Vibe's Basic on one monster at +50% power and both flavors count.
+- Full Family Ruckus (100): both fire their highest unlocked Main Vibe Skill free as one action, with a Composure cap of 4 pips.
+- Simple player: spends Full at 100 and Double Team only when it would otherwise only Basic. It was not given a score for single-target `later` effects, and the Capstones are still used.
+- Tests: `node tools/b3-sim.js check` CHECKS 960, FAILS [] (groups 127 to 134 in `tools/b3-check-s6.js`). Screen: `python3 tools/b3_test.py s6` (portrait and landscape), plus s4, s5, s5b and s5c all pass. Stage 5 expectations changed where the new gains changed a number. No spoken lines added.
+- Not in this build: the gauge in a saved game (waits for stage 15); `python3 tools/clip-audit/unused_voice.py` check 4 reports 93 dialogue clips not in harvest or source, from before this build (no voice, line or scene file was touched).
+
 ## b3s5c (2026-11-18): New battle, stage 5c: Rose's Cozy Rosie and Deedee's Registered Nut are complete
 
 - Stage 5c of 23 of the new battle system ("Battle 3", `docs/BATTLE3.md`). Story fights still use the old battle and nothing in it changed. All eight Sig Vibes now have every Skill, Trait and Quirk; none shows SOON. Stage 6 is next.

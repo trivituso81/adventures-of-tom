@@ -47,8 +47,8 @@ module.exports=function(T) {
     ok(has(b,'detonate',x=>x.id==='sensory_overload')&&h.dmg===calc(1.5*1.2),'a hit that sets the Prime off still counts it, and the Peeve and the Prime make one +20%, not two: '+h.dmg+' want '+calc(1.5*1.2));
     f0.st={}; add(F,f0,'dazzled',{src:tom}); h=hits(go(F,grace,'t_clobber','f0'),'f0')[0]; ok(h.dmg===Math.round(stat(grace,'atk')*100/(100+def(f0))),'Grace gets nothing from Tom’s Trait: '+h.dmg); });
   noCrit(()=>{ const {F,tom,grace,f0}=fight(); ok(F.ruckus===0,'the gauge starts empty'); go(F,tom,'t_clobber','f0'); ok(F.ruckus===0,'a plain hit adds nothing');
-    f0.st={}; add(F,f0,'dazzled',{src:grace}); const b=go(F,tom,'t_racket','f0'); ok(F.ruckus===5&&has(b,'ruckus',x=>x.n===5),'a Detonation Tom sets off adds 5: '+F.ruckus);
-    f0.st={}; add(F,f0,'dazzled',{src:tom}); go(F,grace,'t_racket','f0'); ok(F.ruckus===5,'one Grace sets off does not: '+F.ruckus); });
+    f0.st={}; add(F,f0,'dazzled',{src:grace}); const b=go(F,tom,'t_racket','f0'); ok(F.ruckus===13&&has(b,'ruckus',x=>x.why==='detonation'&&x.n===8)&&has(b,'ruckus',x=>x.why==='trait'&&x.n===5),'a Detonation fills 8 (stage 6) and Tom\u2019s Trait adds 5 on top: '+F.ruckus);
+    f0.st={}; add(F,f0,'dazzled',{src:tom}); const g=go(F,grace,'t_racket','f0'); ok(F.ruckus===26&&has(g,'ruckus',x=>x.why==='detonation'&&x.n===8)&&!has(g,'ruckus',x=>x.why==='trait'),'one Grace sets off fills 8 and a Mix 5, with no Trait extra: '+F.ruckus); });
 
   // 103. Elixir Hoarder: 6 Pep or more as his turn starts gives 15% Speed and 15% crit until his next turn begins
   noCrit(()=>{ const {F,tom}=fight({tom:['elixir_hoarder']}); const s0=stat(tom,'spd'),c0=sumOf(tom,'crit'); tom.pep=5; let b=[]; beginTurn(F,tom,b);

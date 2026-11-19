@@ -813,6 +813,61 @@ def stage5c(pg,lab,landscape=False):
     pg.wait_for_timeout(600); v=s5c(pg); caps.append(R(shot(pg)))
     need('Give Lamby Back!' in v['log'] and 'lamby_stuck' not in v['foe'],f"Rose's next turn should bring Lamby back and clear the mark: {v['foe']} {v['log'][-200:]}")
     sheet(caps,3 if landscape else 3,os.path.join(OUT,'b3-s5c'+('-land' if landscape else '')+'.png'),scale=.55)
+
+def s6(pg): return pg.evaluate("""()=>{ const F=B3.F; return {ui:B3.ui,actor:B3.actor&&B3.actor.id,ruckus:F.ruckus,view:B3.view.ruckus,turns:F.turnLog.length,
+    btn:(document.querySelector('#b3-cmd .b3-rk small')||{}).textContent||'',btnOff:!!document.querySelector('#b3-cmd .b3-rk.off'),fill:(document.querySelector('#b3-cmd .b3-rk')||{style:{}}).style.cssText||'',
+    rows:[...document.querySelectorAll('#b3-cmd .b2-btn .b2-sn')].map(e=>e.textContent),costs:[...document.querySelectorAll('#b3-cmd .b2-btn .b2-cost')].map(e=>e.textContent),
+    head:(document.querySelector('#b3-cmd .b3-rkh')||{}).textContent||'',msg:document.getElementById('b3-msg').textContent,
+    pep:F.party.map(p=>p.pep),next:F.units.slice().sort(b3Before).map(u=>u.key).slice(0,5),log:B3.log.slice(-40).join(' | '),stored:localStorage.getItem('aot-b3-ruckus')}; }""")
+def stage6(pg,lab,landscape=False):
+    S='stage 6'+(' landscape' if landscape else '')+': '; caps=[]; idx=lab.index('new6')
+    rot=landscape and pg.evaluate("()=>layout.rotated")
+    R=lambda f: f.rotate(90,expand=True) if rot else f
+    def need(cond,what):
+        if not cond: fails.append(S+what)
+    pg.evaluate("()=>{ B7.speed=1; }")
+    pg.evaluate("()=>localStorage.removeItem('aot-b3-ruckus')")
+    start(pg,idx,{'seed':SEED},keep=True); wait_cmd(pg); pg.evaluate(POKE_ROWS); pg.evaluate(S5_PREP); pg.wait_for_timeout(300)
+    v=s6(pg); need(v['ruckus']==0 and v['btn']=='0%' and v['btnOff'],f"a fresh fight shows RUCKUS 0% greyed: {v['ruckus']} {v['btn']} {v['btnOff']}")
+    caps.append(R(shot(pg)))
+    pg.keyboard.press('ArrowLeft'); pg.wait_for_timeout(300); v=s6(pg)
+    need(v['ui']=='cross' and 'Double Team costs 50%' in v['msg'],f"RUCKUS at 0% should say how the gauge fills and stay on the cross: {v['ui']} {v['msg'][:120]}")
+    # Fill it to 100 and look at the button, then the list.
+    pg.evaluate("()=>{ B3.F.ruckus=100; b3ViewSync(); b3Render(); }"); pg.wait_for_timeout(200); v=s6(pg)
+    need(v['btn']=='100%' and not v['btnOff'] and '100%' in v['fill'],f"RUCKUS at 100% should be lit and full: {v['btn']} {v['btnOff']} {v['fill']}")
+    caps.append(R(shot(pg)))
+    pg.mouse.move(2,2); pg.keyboard.press('ArrowLeft'); pg.wait_for_timeout(300); v=s6(pg)
+    need(v['ui']=='ruckus' and len(v['rows'])==2 and v['rows'][0]=='DOUBLE TEAM' and v['rows'][1]=='FULL FAMILY RUCKUS' and v['costs']==['50%','100%'] and 'RUCKUS 100%' in v['head'],f"the RUCKUS list should offer both spends: {v['ui']} {v['rows']} {v['costs']} {v['head']}")
+    caps.append(R(shot(pg)))
+    # Esc goes back to the cross.
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(250); need(s6(pg)['ui']=='cross','Esc from the RUCKUS list should return to the cross')
+    # Double Team: the first member of a party turn, partner next on the bar.
+    turns0=s6(pg)['turns']; peps=s6(pg)['pep']; who0=who(pg); nxt=s6(pg)['next'][1]
+    pg.keyboard.press('ArrowLeft'); pg.wait_for_timeout(250); pg.keyboard.press('Enter'); pg.wait_for_timeout(500)
+    need(s6(pg)['ui']=='busy' or s6(pg)['ui']=='cross','Double Team on a lone boss should go without a target list')
+    pg.wait_for_timeout(1500); caps.append(R(shot(pg)))
+    wait_cmd(pg); pg.wait_for_timeout(500); v=s6(pg)
+    need('Double Team' in v['log'],f"the log should name Double Team: {v['log'][-240:]}")
+    need(v['ruckus']<100 and v['ruckus']>=50,f"50% was spent (and the pair's own hits filled some): {v['ruckus']}")
+    # The partner kept their own turn: it is now the partner's.
+    need(who(pg) is not None,'a family member should be up after the pair')
+    caps.append(R(shot(pg)))
+    # Full Family Ruckus needs a family member next: find a turn where one is, fill the gauge and spend it.
+    for _ in range(10):
+        pg.evaluate("()=>{ B3.F.ruckus=100; b3ViewSync(); b3Render(); }"); pg.wait_for_timeout(150)
+        nx=pg.evaluate("()=>{ const o=b3TurnOrder(B3.F).filter(x=>x!==B3.actor)[0]; return o&&o.side; }")
+        if nx=='party': break
+        pg.evaluate(S5_PREP); basic(pg); aim(pg,None); wait_cmd(pg); pg.wait_for_timeout(300)
+    pg.keyboard.press('ArrowLeft'); pg.wait_for_timeout(250); pg.keyboard.press('ArrowDown'); pg.wait_for_timeout(200)
+    v=s6(pg); need(v['ui']=='ruckus','the RUCKUS list should be open for the Full spend: '+v['ui']); caps.append(R(shot(pg)))
+    pg.keyboard.press('Enter'); pg.wait_for_timeout(2500); wait_cmd(pg); pg.wait_for_timeout(600); v=s6(pg)
+    need('Full Family Ruckus' in v['log'],f"the log should name Full Family Ruckus: {v['log'][-240:]}")
+    caps.append(R(shot(pg)))
+    # The gauge goes on to the next fight: leave and read what the Lab stored.
+    g=s6(pg)['ruckus']; pg.click('#b3-exit'); pg.wait_for_timeout(500)
+    st=pg.evaluate("()=>localStorage.getItem('aot-b3-ruckus')"); need(st==str(round(g)),f'leaving should store the gauge ({g}): {st}')
+    sheet(caps,4,os.path.join(OUT,'b3-s6'+('-land' if landscape else '')+'.png'),scale=.5)
+    pg.evaluate("()=>localStorage.removeItem('aot-b3-ruckus')")
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
@@ -820,7 +875,7 @@ with sync_playwright() as pw:
     pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start',timeout=180000); pg.wait_for_timeout(1500)
-    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c')] or ([] if only else lab)
+    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6')] or ([] if only else lab)
     # The way in: ADMIN > BATTLE LAB shows NEW BATTLE, which opens the list.
     pg.evaluate("()=>{ splashSetMode('lab'); }"); pg.wait_for_timeout(200)
     names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
@@ -890,6 +945,11 @@ with sync_playwright() as pw:
         print('stage 5c: Cozy Rosie and Registered Nut'); stage5c(pg,lab)
         pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage5c(pg,lab,True)
         pg.click('#b3-exit'); pg.wait_for_timeout(500); pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
+    # 6f. stage 6: the Family Ruckus (portrait, then a pass in landscape)
+    if 's6' in sys.argv or not only and len(want)==len(lab):
+        print('stage 6: Family Ruckus'); stage6(pg,lab)
+        pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage6(pg,lab,True)
+        pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
     # 7. battle 2 still owns its screen
     pg.evaluate("()=>{ B7.speed=1; splash.active=false; document.getElementById('splash').hidden=true; window.__LE.b2Start({party:['tom','grace','rose'],level:12,foes:[['mudling','front']],bag:[]}); }")
     pg.wait_for_function("()=>window.__LE.battle.state==='command'&&window.__LE.B2.actor&&window.__LE.B2.actor.side==='party'",timeout=40000)

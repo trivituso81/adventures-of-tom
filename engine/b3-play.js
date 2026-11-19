@@ -48,6 +48,7 @@ function b3ViewSync() {
   V.aim=V.aim||{};
   for(const u of F.units) V.u[u.key]=Object.assign(V.u[u.key]||{},{hp:u.hp,maxHp:u.maxHp,pep:u.pep,st:Object.keys(u.st),ko:u.ko,sh:b3ShieldTotal(u),pips:u.pips,maxPips:u.maxPips,ctr:b3CounterShown(u)});
   V.haz=F.hazards.map(h=>({id:h.id,side:h.side,uses:h.uses}));
+  V.ruckus=F.ruckus;   // the Family Ruckus gauge (0 to 100)
   // The aim Cartridge Blow showed (a monster's `intent`): kept while it holds, gone when the monster's turn spends it.
   for(const f of F.foes) { if(f.intent&&f.intent.aim) V.aim[f.key]=f.intent.aim; else delete V.aim[f.key]; }
   for(const f of F.foes) { if(f.charge) V.charge[f.key]=f.charge.name; else delete V.charge[f.key]; if(f.mark) V.mark[f.key]=f.mark; else delete V.mark[f.key]; }
@@ -187,8 +188,10 @@ function b3Show(b) {
   // A granted action: the family member who got it picks a free Skill as soon as this move has played (engine/b3-ui.js b3AfterAct).
   else if(b.t==='grant') { b3Pop(b.tgt,'FREE SKILL!','#ffe27a'); b3Sfx('combo'); b3Say(b3Name(b.tgt)+' gets a free Skill from '+b3Name(b.src)+'. It does not use up '+b3Name(b.tgt)+'’s turn.'); }
   else if(b.t==='grantEnd') { V.bar=b.bar; b3RenderBar(); }
-  // The Family Ruckus gauge is counted by the rules from stage 5a on; the screen shows it from stage 6.
-  else if(b.t==='ruckus') { V.ruckus=b.v; }
+  // The Family Ruckus (stage 6): the gauge moves (the RUCKUS button is its bar), a Mix is named, and a spend is announced.
+  else if(b.t==='ruckus') { V.ruckus=b.v; if(b.n>0&&b.src) b3Pop(b.src,'RUCKUS +'+b.n+'%','#ffd36b'); b3RenderCmd(); }
+  else if(b.t==='mix') { b3Pop(b.tgt,'MIX!','#ffe27a',{sc:2}); b3Sfx('combo'); b3Say('A Mix: '+b3Name(b.src)+' hit '+b3Name(b.tgt)+' with a different flavor than their teammate.'); }
+  else if(b.t==='ruckusSpend') { b3Word(b.name.toUpperCase()+'!','#ffd36b'); b3Sfx('combo'); b3Say(b3Name(b.src)+' and '+b3Name(b.partner)+': '+b.name+'!'); }
   else if(b.t==='detonate') {
     const D=B3_DETONATIONS.find(d=>d.id===b.id),c=B3_FLAVORS[D.flavor].color;
     vu.st=vu.st.filter(id=>id!==b.prime);   // the Prime is used up
@@ -220,11 +223,14 @@ function b3Show(b) {
 function b3Play(beats,done) {
   const i=beats.findIndex(b=>b.t==='act'||b.t==='telegraph'),lead=i<0?beats:beats.slice(0,i),rest=i<0?[]:beats.slice(i);
   let wait=0;
-  for(const b of lead) { if(b.t==='over') continue; const w=wait; b3After(w,()=>b3Show(b)); if(b.t==='round') wait+=.55; else if(b.t==='hit'||b.t==='heal') wait+=.45; else if(b.t==='ko') wait+=.5; else if(b.t==='hazardTrip') wait+=.6; else if(b.t==='skip') wait+=.8; }
+  for(const b of lead) { if(b.t==='over') continue; const w=wait; b3After(w,()=>b3Show(b)); if(b.t==='round') wait+=.55; else if(b.t==='hit'||b.t==='heal') wait+=.45; else if(b.t==='ko') wait+=.5; else if(b.t==='hazardTrip') wait+=.6; else if(b.t==='skip') wait+=.8; else if(b.t==='ruckusSpend') wait+=.9; }
   if(!rest.length) { b3After(wait+.05,done); return; }
-  b3After(wait,()=>b3PlayMove(rest,done));
+  // A Family Ruckus spend is one action with two moves in it: the second move's `act` beat is marked part2 and plays after the first.
+  const segs=[]; let cur=[]; for(const b of rest) { if(b.t==='act'&&b.part2&&cur.length) { segs.push(cur); cur=[]; } cur.push(b); } segs.push(cur);
+  const run=k=>b3PlayMove(segs[k],k+1<segs.length?()=>run(k+1):done,k+1<segs.length);
+  b3After(wait,()=>run(0));
 }
-function b3PlayMove(beats,done) {
+function b3PlayMove(beats,done,mid) {   // mid: the first move of a Family Ruckus pair (the screen is synced when the pair has finished)
   const head=beats[0];
   if(head.t==='telegraph') { for(const b of beats) if(b.t!=='over') b3Show(b); B3P.fa[head.src].hold=B3P.t+.8; b3After(1.15,done); return; }
   const pre=beats.filter(b=>b.g==='pre'),post=beats.filter(b=>b.g==='post'&&b.t!=='over'),swings=beats.filter(b=>b.t==='swing');
@@ -241,7 +247,7 @@ function b3PlayMove(beats,done) {
   // Every time below is written at the old quick pace and stretched by B3_TEMPO (K): at(), the body's keys and poses, things in flight.
   const K=B3_TEMPO,at=(s,fn)=>b3After(s*K,fn);
   const reveal=()=>{ const h=hits[shown++]; if(h) for(const b of h.beats) b3Show(b); };
-  const wrap=()=>{ for(const b of tail) b3Show(b); b3ViewSync(); b3RenderParty(); b3After(.6,done); };
+  const wrap=()=>{ if(mid) { b3After(.25,done); return; } for(const b of tail) b3Show(b); b3ViewSync(); b3RenderParty(); b3After(.6,done); };
   const react=i=>{ const R=reacts[i]; if(!R) { wrap(); return; }
     b3Show(R.beats[0]); b3After(.34*K,()=>{ for(const b of R.beats.slice(1)) b3Show(b); b3After(.5*K,()=>react(i+1)); }); };
   const finish=s=>at(s,()=>{ while(shown<hits.length) reveal(); for(const b of post) b3Show(b); if(reacts.length) b3After(.3*K,()=>react(0)); else wrap(); });

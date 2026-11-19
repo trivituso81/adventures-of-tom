@@ -23,7 +23,7 @@ const DATA=['data/b3-rules.js','data/b3-status.js',
   ...fs.readdirSync(path.join(ROOT,'data')).filter(f=>/^b3-kit-.*\.js$/.test(f)).sort().map(f=>'data/'+f),
   ...fs.readdirSync(path.join(ROOT,'data')).filter(f=>/^b3-foes-.*\.js$/.test(f)).sort().map(f=>'data/'+f),
   'data/b3-lab.js'];
-const RULES=['engine/b3-core.js','engine/b3-progress.js','engine/b3-timeline.js','engine/b3-hooks.js','engine/b3-ops.js','engine/b3-custom.js','engine/b3-resolve.js','engine/b3-foe.js'];
+const RULES=['engine/b3-core.js','engine/b3-progress.js','engine/b3-timeline.js','engine/b3-hooks.js','engine/b3-ops.js','engine/b3-custom.js','engine/b3-resolve.js','engine/b3-ruckus.js','engine/b3-foe.js'];
 function load() {
   const ctx=vm.createContext({Math,JSON,Object,Array,String,Number,Error,console:{log(){},error(){}}});
   for(const f of [...DATA,...RULES]) vm.runInContext(fs.readFileSync(path.join(ROOT,f),'utf8'),ctx,{filename:f});
@@ -46,18 +46,20 @@ function play(cfg,log,opt) {
       out.turns++;
       if(u.side==='party') {
         const n=acted[u.key]=(acted[u.key]||0)+1;
-        let pick=every&&(n+u.slot)%every===0?b3Auto(F,u,quiet):null;
-        if(pick&&pick.sc<-50) pick=null;   // nothing useful to set up (the ward is already up, the floor is already wet)
-        if(pick) out.support++; else pick=b3Auto(F,u);
+        // Stage 6: with opt.ruckus the player also spends the Family Ruckus (engine/b3-ruckus.js b3AutoRuckus); the older groups leave it off.
+        const rk=opt&&opt.ruckus?G('b3AutoRuckus')(F,u):null;
+        let pick=rk?{skill:'ruckus_'+rk.kind}:every&&(n+u.slot)%every===0?b3Auto(F,u,quiet):null;
+        if(pick&&!rk&&pick.sc<-50) pick=null;   // nothing useful to set up (the ward is already up, the floor is already wet)
+        if(pick&&!rk) out.support++; else if(!pick) pick=b3Auto(F,u);
         if(!pick) throw new Error(u.name+' has nothing to do');
-        const r=b3Act(F,u,pick.skill,pick.target); if(!r.ok) throw new Error('simple player picked an illegal move: '+r.why);
+        const r=rk?G('b3Ruckus')(F,u,rk.kind,rk.target):b3Act(F,u,pick.skill,pick.target); if(!r.ok) throw new Error('simple player picked an illegal move: '+r.why);
         beats=beats.concat(r.beats); out.moves[pick.skill]=(out.moves[pick.skill]||0)+1;
         // A granted action (Colossal Diamond-Gold Dumpling): that family member picks a free Skill at once, before the clock moves.
         while(F.grant&&!F.over) { const g=F.units.find(x=>x.key===F.grant.key),gp=b3Auto(F,g); if(!gp) { F.grant=null; break; }
           const gr=b3Act(F,g,gp.skill,gp.target); if(!gr.ok) throw new Error('simple player picked an illegal free Skill: '+gr.why);
           beats=beats.concat(gr.beats); out.moves[gp.skill]=(out.moves[gp.skill]||0)+1; out.free=(out.free||0)+1;
           if(log) console.log(`           free: ${g.name.padEnd(8)} ${SK[gp.skill].name}`); }
-        if(log) console.log(`  r${F.round} t${N.beats.find(b=>b.t==='turn').clock.toFixed(1).padStart(6)}  ${u.name.padEnd(14)} ${SK[pick.skill].name}${pick.target==='*'?'':' -> '+F.units.find(x=>x.key===pick.target).name}`);
+        if(log) console.log(`  r${F.round} t${N.beats.find(b=>b.t==='turn').clock.toFixed(1).padStart(6)}  ${u.name.padEnd(14)} ${(SK[pick.skill]||{name:pick.skill.toUpperCase()}).name}${!pick.target||pick.target==='*'?'':' -> '+F.units.find(x=>x.key===pick.target).name}`);
       } else {
         const fb=b3FoeTurn(F,u); beats=beats.concat(fb);
         const a=fb.find(b=>b.t==='act'),tg=fb.find(b=>b.t==='telegraph');
@@ -249,6 +251,8 @@ function check() {
   require('./b3-check-s5b.js')({G,ok,near,play,noCrit});
   // Stage 5c's groups (114 on): Rose's Cozy Rosie and Deedee's Registered Nut complete.
   require('./b3-check-s5c.js')({G,ok,near,play,noCrit});
+  // Stage 6's groups (127 on): the Family Ruckus gauge, its gains, Double Team and Full Family Ruckus.
+  require('./b3-check-s6.js')({G,ok,near,play,noCrit});
   console.log('CHECKS:',checks);
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);
@@ -261,7 +265,7 @@ else {
   const errs=[],R=[];
   for(let i=0;i<n;i++) {
     const cfg=Object.assign({},cfg0,{seed:seed0+i});
-    try { if(has('log')) console.log('fight '+(i+1)+', seed '+cfg.seed); R.push(play(cfg,has('log'),{support:Number(flag('support')||0)})); }
+    try { if(has('log')) console.log('fight '+(i+1)+', seed '+cfg.seed); R.push(play(cfg,has('log'),{support:Number(flag('support')||0),ruckus:has('ruckus')})); }
     catch(e) { errs.push('seed '+cfg.seed+': '+e.message); }
   }
   const wins=R.filter(r=>r.result==='win'),W=wins.map(r=>r.rounds).sort((a,b)=>a-b),avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;

@@ -7,8 +7,12 @@ function b3Lab(i,opt) {
   const L=B3_LAB[i]; if(!L) return;
   const vp=(B3_FORMATIONS[L.formation]||{}).vp||0;
   b3Start(Object.assign({lab:true,party:L.party.slice(),level:L.level,formation:L.formation,bg:L.bg,rows:L.rows,
-    loadouts:JSON.parse(JSON.stringify(b3LabBook())),award:()=>b3LabAward(vp),onEnd:b3LabBack},opt||{}));
+    loadouts:JSON.parse(JSON.stringify(b3LabBook())),award:()=>b3LabAward(vp),onEnd:b3LabBack,ruckus:b3LabRuckus(),onRuckus:b3LabRuckusSave},opt||{}));
 }
+// The Family Ruckus gauge keeps its value between Lab fights (spec 2.10), on this device. A saved game keeps its own (stage 15 joins them).
+const B3_RUCKUS_KEY='aot-b3-ruckus';
+function b3LabRuckus() { try { const v=Number(JSON.parse(localStorage.getItem(B3_RUCKUS_KEY)||'0')); return v>0?Math.min(B3_RULES.ruckus.full,Math.round(v)):0; } catch(e) { return 0; } }
+function b3LabRuckusSave(v) { try { localStorage.setItem(B3_RUCKUS_KEY,JSON.stringify(Math.round(v||0))); } catch(e) {} }
 // Leave the title screen and start Lab fight i.
 function b3LabGo(i) {
   sfx.select(); unlockAudio(); splash.active=false;

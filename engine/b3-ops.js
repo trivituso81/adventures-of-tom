@@ -144,9 +144,9 @@ const B3_OPS={
   },
   // taunt: a status that carries the `taunt` flag: every single-target enemy attack must aim at its carrier (spec 2.8 "locks aggro").
   taunt(F,c,e) { for(const t of b3Who(F,c,e.to||'self')) if(b3Alive(t)) b3PutStatus(F,c,t,e); },
-  // ruckus: adds to the Family Ruckus gauge (0 to 100, shared by the party). The gauge's own gains, the screen's bar and what
-  // it buys arrive with stage 6; until then only Traits and Quirks that print a gain reach it.
-  ruckus(F,c,e) { const was=F.ruckus; F.ruckus=Math.max(0,Math.min(B3_RULES.ruckus.full,was+e.n)); if(F.ruckus!==was) c.beats.push({t:'ruckus',n:F.ruckus-was,v:F.ruckus,g:c.g}); },
+  // ruckus: adds to the Family Ruckus gauge (0 to 100, shared by the party). The gauge's own gains and the two spends are in
+  // engine/b3-ruckus.js; this is how a Trait, Quirk or Skill that prints its own gain adds to them.
+  ruckus(F,c,e) { b3RuckusAdd(F,c.beats,c.g,e.n,c.actor&&c.actor.key,'trait'); },
   // grant: the chosen family member takes one Skill at once, out of turn (spec 2.2 "Granted actions": one per unit per round).
   //   maxPep  only Skills that cost this much or less (never a Basic, never a Grand Capstone);  free  it costs them nothing.
   // The rules only open the door (F.grant). Whoever drives the fight (the screen, the simulator) asks that member for their

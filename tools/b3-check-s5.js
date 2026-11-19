@@ -140,9 +140,9 @@ module.exports=function(T) {
 
   // 91. Bouncy Physics: +2% Family Ruckus for each hit of a move that hits more than once
   noCrit(()=>{ const {F,rose,tom,f0}=fight(1); ok(F.ruckus===0,'the gauge starts empty');
-    let b=go(F,rose,'lamb_tuck_ankle_tackle','f0'); ok(F.ruckus===4&&b.filter(x=>x.t==='ruckus').length===2,'two hits: 4%: '+F.ruckus);
-    rose.pep=10; go(F,rose,'the_floor_is_lava','*'); ok(F.ruckus===10,'three more hits: 10%: '+F.ruckus);
-    go(F,rose,'t_clobber','f0'); ok(F.ruckus===10,'a move that hits once adds nothing'); go(F,tom,'t_multi','f0'); ok(F.ruckus===10,'and it is Rose\'s Trait, not Tom\'s');
+    let b=go(F,rose,'lamb_tuck_ankle_tackle','f0'); ok(F.ruckus===5&&b.filter(x=>x.t==='ruckus'&&x.why==='trait').length===2&&b.filter(x=>x.why==='hits').length===1,'two hits: 2% each from Bouncy Physics and 1% for the second hit: '+F.ruckus);
+    rose.pep=10; go(F,rose,'the_floor_is_lava','*'); ok(F.ruckus===13,'three more hits: 3 x 2% and 2 x 1%: '+F.ruckus);
+    go(F,rose,'t_clobber','f0'); ok(F.ruckus===13,'a move that hits once adds nothing'); go(F,tom,'t_multi','f0'); ok(F.ruckus===15,'Tom\u2019s three hits add only the 1% each for hits 2 and 3, not Rose\u2019s Trait: '+F.ruckus);
     F.ruckus=99; go(F,rose,'lamb_tuck_ankle_tackle','f0'); ok(F.ruckus===100,'the gauge stops at 100'); });
   ok(NF({party:LAB,level:2,formation:'mudling',seed:5,ruckus:40}).ruckus===40,'a fight can start with the gauge the family walked in with');
 
@@ -169,7 +169,7 @@ module.exports=function(T) {
   // 94. Double-Lamby Return-Cart Blitz: six ricochets, capstone power shared; on a Flustered monster each hit is 10% more than the last
   noCrit(()=>{ const {F,rose,f0}=fight(4,null,'bigone'); rose.pep=10; const per=stat(rose,'atk')*2.2/6*100/117;
     const b=go(F,rose,'double_lamby_return_cart_blitz','*'),d=hits(b,f0.key).map(x=>x.dmg);
-    ok(d.length===6&&d.every(x=>x===Math.round(per)),'six hits of capstone power shared: '+J(d)); ok(rose.pep===4&&near(rose.wait,120),'6 Pep, Recovery 120'); ok(F.ruckus===12,'Bouncy Physics counts all six: '+F.ruckus);
+    ok(d.length===6&&d.every(x=>x===Math.round(per)),'six hits of capstone power shared: '+J(d)); ok(rose.pep===4&&near(rose.wait,120),'6 Pep, Recovery 120'); ok(F.ruckus===17,'Bouncy Physics counts all six, and five hits after the first add 1% each: '+F.ruckus);
     add(F,f0,'flustered',{src:rose}); rose.pep=10; const d2=hits(go(F,rose,'double_lamby_return_cart_blitz','*'),f0.key).map(x=>x.dmg),want=[1,2,3,4,5,6].map(k=>Math.round(per*(1+.1*k)*1.35));
     ok(J(d2)===J(want),'on a Flustered monster: +10% for the 1st up to +60% for the 6th (and Flustered\'s own 35%): '+J(d2)+' want '+J(want)); });
   noCrit(()=>{ const {F,rose,f0,f1}=fight(4); rose.pep=10; const b=go(F,rose,'double_lamby_return_cart_blitz','*'); ok(hits(b).length===6&&hits(b,f0.key).length>0&&hits(b,f1.key).length>0,'the six ricochet between the monsters'); });

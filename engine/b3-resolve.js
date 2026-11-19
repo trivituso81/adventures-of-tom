@@ -195,6 +195,7 @@ function b3Break(F,c,t) {
   // During its own turn its wait is not set yet, so it falls back when that turn ends (b3EndTurn).
   if(F.acting===t) t.flusterMove=true; else b3FlusterMove(F,t,c.actor===F.acting?c.rec:0);
   c.beats.push({t:'break',src:c.actor.key,tgt:t.key,bar:b3BarSnap(F,F.acting,c.rec),g:c.g});
+  if(c.actor&&c.actor.side==='party') b3RuckusAdd(F,c.beats,c.g,B3_RULES.ruckus.brk,c.actor.key,'break');
   b3Fire(F,'break',{src:c.actor,tgt:t,g:c.g,c},c.beats);
 }
 
@@ -229,6 +230,8 @@ function b3Hit(F,c,t,per,flavors,e,single) {
   const mc=b3MissChance(a); if(mc>0&&b3Rand(F)<mc) { B.push({t:'miss',src:a.key,tgt:t.key,why:'acc',g:c.g}); return; }
   const ev=b3Evasion(t); if(ev>0&&b3Rand(F)<ev) { B.push({t:'miss',src:a.key,tgt:t.key,why:'dodge',g:c.g}); b3Fire(F,'dodge',{src:a,tgt:t,g:c.g},B); return; }
   c.landed=(c.landed||0)+1;   // hits this action has landed so far ("It's OUR Longboard Now")
+  // Family Ruckus: each hit after the first of a multi-hit move that lands (engine/b3-ruckus.js).
+  if(a.side==='party'&&t.side==='foe'&&e.power==null&&c.skill&&(c.skill.hits||1)>1&&(c.hitNo||0)>=1) b3RuckusAdd(F,B,c.g,B3_RULES.ruckus.extraHit,a.key,'hits');
   // One crit roll per hit: base rate, the attacker's own bonus, and what the target gives away (Dazzled).
   const crit=b3Rand(F)<b3CritChance(a,t,e);
   if(crit) b3Fire(F,'crit',{src:a,tgt:t,g:c.g},B);
@@ -257,9 +260,11 @@ function b3Hit(F,c,t,per,flavors,e,single) {
       b3RunEffects(F,Object.assign({},c,{tgt:t,partDmg:dmg}),det.effects);
       b3Pips(c,t,det.pips);
       const got=b3Pep(F,a,B3_RULES.pep.detonation,'detonation'); if(got) B.push({t:'pep',tgt:a.key,n:got,pep:a.pep,g:c.g});
+      b3RuckusAdd(F,B,c.g,B3_RULES.ruckus.detonation,a.key,'detonation');   // the gauge's own Detonation gain; a Trait's extra comes with the hook
       b3Fire(F,'detonation',{src:a,tgt:t,id:det.id,g:c.g,c},B);
     }
     b3Hurt(F,c,t,dmg,{src:a.key,flavor:fl,crit,peeve:pv,resist:rs});
+    b3RuckusMix(F,c,a,t,fl);
     if(!c.hit.includes(t)) c.hit.push(t);
     if(a.side==='party'&&t.side==='foe') {
       if(pv) b3Pips(c,t,0,true);          // a Pet Peeve hit: 1 pip per action, not per hit (spec 2.7)
@@ -292,7 +297,7 @@ function b3DamageOp(F,c,e) {
   if(own) { for(let h=0;h<hits;h++) for(const t of b3Who(F,c,e.to).filter(b3Alive)) b3Hit(F,c,t,per,S.flavor,e,!all); return; }
   c.didDamage=true;
   for(let h=0;h<hits;h++) {
-    c.g=h; c.hitNo=h;
+    c.g=h+(c.gOff||0); c.hitNo=h;
     let tg;
     if(S.target==='random_foes') { const L=b3Live(F,b3Other(a.side)); tg=L.length?[L[Math.floor(b3Rand(F)*L.length)]]:[]; }
     else tg=c.targets.filter(b3Alive);
@@ -300,7 +305,7 @@ function b3DamageOp(F,c,e) {
     // An enemy's single-target hit is redirected to whoever stepped in for its target (spec 2.8). Party-wide acts are not.
     if(!all&&a.side==='foe') tg=tg.map(t=>{ const I=b3Interceptor(F,t); if(!I) return t;
       (c.inter=c.inter||{})[I.u.key]={reduce:I.reduce,forKey:t.key}; c.beats.push({t:'intercept',src:I.u.key,tgt:t.key,g:h}); return I.u; });
-    c.beats.push({t:'swing',src:a.key,tgts:tg.map(t=>t.key),g:h});
+    c.beats.push({t:'swing',src:a.key,tgts:tg.map(t=>t.key),g:c.g});
     for(const t of tg) b3Hit(F,c,t,per,S.flavor,e,!all);
     // Taking a hit for someone gives +1 Pep, once per enemy action (spec 2.3).
     if(c.inter) for(const t of tg) if(c.inter[t.key]&&!c.inter[t.key].paid) { c.inter[t.key].paid=true;
