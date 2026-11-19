@@ -1,3 +1,8 @@
+## b3s8 (2026-11-19): New battle: video clips play in fights, with the Big One's attacks (Lab only)
+
+- Battle 3 stage 8. Idle loops, guard, hit, dodge, knock-out and victory now play from clips; Rose's Ankle Tackle, Tom's Lounge Pass, Grace's Squeeze, Deedee's Windex and the other wired moves play as video, and the hit shows on the clip's impact frame. The Big One's glare, tail slap, chomp, belly flop and polish are clips too; the Mudling's bump and throw as well.
+- A move switches between clip and default by a data edit only (`anim` on the move row). Memory: only idle loops stay loaded, other clips load just before use and release after; a clip that is not ready in 2.5 s falls back to the default animation. New files: `data/b3-clips.js`, `engine/b3-clips.js`. `engine/clips.js` and `engine/painted.js` know Battle 3's wanted clips.
+- Tests: rule tests 1008 checks, `b3_test.py s8` (new) plus s3 to s7. No voice lines added or changed.
 ## board1 (2026-11-19): ADMIN > BOARD, a kanban of every open item by who has the next move
 
 - New admin page `board.html` (first entry in the ADMIN list), data in `data/board.json`. Rows are lanes (Tom, Claude, xAI, ElevenLabs, Image generator, GitHub; a new lane is a new entry in the file's `lanes` list), columns are Up next, In progress, Waiting, Done (Done drops off the page after 7 days). Top line: "Waiting on you: N (oldest D days). Blocking Claude: M." (tap to show only Tom's lane). Theme filter chips; age turns amber at 3 days and red at 7.

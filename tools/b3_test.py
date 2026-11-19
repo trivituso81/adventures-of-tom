@@ -4,6 +4,7 @@
 #                     python3 tools/b3_test.py s3         only the stage 3 section (The Big One: pips, Mark, Break, adds), about 5 min
 #                     python3 tools/b3_test.py s4         only the stage 4 section (the Vibes screen, the Lab's Ranks, the save fields), about 2 min
 #                     python3 tools/b3_test.py s5         only the stage 5a section (Rank 5 on The Big One: the four Capstones, the free Skill, Traits and Quirks), about 3 min
+#                     python3 tools/b3_test.py s8         only the stage 8 section (video clips: idle loops, clip moves on the impact frame, The Big One's acts, body states, the fallback), about 4 min
 #                     python3 tools/b3_test.py s7         only the stage 7 section (Rose Mode: pictures, preview, the recommended move, keys and pad), about 2 min
 # Env: CHROMIUM = chromium binary (optional), SEED = the fight's seed (default 7), OUT = folder for the sheets (default tools/shots).
 #
@@ -187,6 +188,9 @@ def stage2_fight(pg,idx):
     if not pg.evaluate("()=>B3.view.u.p3.st.includes('giddyup')&&B3.view.u.f0.st.includes('toasty')"): fails.append(S+'Giddyup did not buff Deedee or leave Toasty')
     # Deedee: Wet-Floor Hazard, then the Mudling's melee Wobble at Tom
     skill(pg,'Wet-Floor Hazard'); pg.keyboard.press('Enter'); fr+=burst(pg,4)
+    for _ in range(40):
+        if pg.evaluate("()=>B3.view.haz.length")==1: break
+        pg.wait_for_timeout(150)
     if pg.evaluate("()=>B3.view.haz.length")!=1: fails.append(S+'the wet floor is not on the screen')
     pg.evaluate("()=>{ b3AddStatus(B3.F,B3.F.party[1],'t_taunt',{}); B3.F.foes[1].actIx=0; B3.F.foes[0].actIx=0; }")
     fr+=burst(pg,26,240); wait_cmd(pg); L=log(pg)
@@ -664,7 +668,7 @@ def stage5(pg,lab):
     need(v['hp']<h0,'the Porsche should hurt the boss')
     # Rose: Double-Lamby Return-Cart Blitz
     if turn_of(pg,'rose',S):
-        r0=s5(pg)['ruckus']; pg.evaluate("()=>{ window.__s5hits=0; if(!window.__s5wrap){ window.__s5wrap=1; const os=b3Show; b3Show=function(b){ if(b.t==='hit'&&b.tgt==='f0'&&b.src==='p2') window.__s5hits++; return os.apply(this,arguments); }; } }")
+        pg.evaluate("()=>{ B3.F.ruckus=40; }"); r0=s5(pg)['ruckus']; pg.evaluate("()=>{ window.__s5hits=0; if(!window.__s5wrap){ window.__s5wrap=1; const os=b3Show; b3Show=function(b){ if(b.t==='hit'&&b.tgt==='f0'&&b.src==='p2') window.__s5hits++; return os.apply(this,arguments); }; } }")
         use(pg,'Double-Lamby Return-Cart Blitz'); caps+=burst(pg,7,360); wait_cmd(pg); pg.wait_for_timeout(300); v=s5(pg); caps.append(shot(pg))
         n=pg.evaluate("()=>window.__s5hits"); need(n==6,f'the Blitz should show six hits on the boss: {n}')
         need(v['ruckus']>=r0+12,f"Bouncy Physics: six hits should add 12% to the gauge: {r0} to {v['ruckus']}")
@@ -973,6 +977,108 @@ def stage7(pg,lab,landscape=False):
     pg.evaluate("()=>{ b3vClose(); }"); pg.wait_for_timeout(300)
     sheet(caps,4,os.path.join(OUT,'b3-s7'+('-land' if landscape else '')+'.png'),scale=.5)
     pg.evaluate("()=>{ b7SetDiff('grace'); }"); pg.click('#b3-exit') if pg.evaluate("()=>!!document.getElementById('b3-exit')&&B3.active") else None; pg.wait_for_timeout(400)
+
+# ---------- Stage 8: video clips in Battle 3 (idle loops, clip moves landing on the impact frame, body states, The Big One's acts) ----------
+S8_TRACE="""()=>{ if(window.__c8) { window.__c8.hits=[]; window.__c8.moves=[]; return; } window.__c8={hits:[],moves:[],cl:{}}; setInterval(()=>{ for(const k in B3P.fa){ const A=B3P.fa[k]; if(A&&A.cl) window.__c8.cl[A.cl.id]=1; } },50);
+  const os=b3Show,om=b3PlayMove;
+  b3Show=function(b){ if(b.t==='hit'){ const cur=[]; for(const k in B3P.body){ const B=B3P.body[k]; if(B&&B.kind==='cmove') cur.push({who:k,t0:B.t0,T0:B.T0,id:B.C.id,imp:B.C.kind==='strike'?B.C.ms[B.C.impact]/1000:null,dur:B.C.dur/1000}); }
+      for(const k in B3P.fa){ const A=B3P.fa[k]; if(A&&A.cl&&B3P.t<A.cl.t0+A.cl.dur) cur.push({who:k,t0:A.cl.t0,T0:0,id:A.cl.id,imp:BCLIPS[A.cl.id].kind==='strike'?BCLIPS[A.cl.id].ms[BCLIPS[A.cl.id].impact]/1000:null,dur:A.cl.dur}); }
+      window.__c8.hits.push({t:B3P.t,tgt:b.tgt,cur}); } return os.apply(this,arguments); };
+  b3PlayMove=function(beats,done,mid,waited){ const h=beats[0]; if(h.t==='act'&&!waited) window.__c8.moves.push({src:h.src,id:h.id,clip:h.anim&&h.anim.clip||null,ready:h.anim?b3cReady(h.anim.clip):null,foe:!!h.foe}); return om.apply(this,arguments); }; }"""
+def s8(pg): return pg.evaluate("""()=>({ui:B3.ui,actor:B3.actor&&B3.actor.id,over:B3.F.over,loaded:b3cLoaded(),peak:B3C.peak,
+  idle:B3.F.units.map(u=>{ const id=b3cOf(u.id,'idle'); return id+':'+b3cReady(id); }),moves:window.__c8?window.__c8.moves.length:0})""")
+def shoot_move(pg,frames,n=10,gap=170):
+    for k in range(n): pg.wait_for_timeout(gap); frames.append(shot(pg))
+def stage8(pg,lab,landscape=False):
+    S='stage 8'+(' landscape' if landscape else '')+': '; caps=[]; idx=lab.index('new6')
+    rot=landscape and pg.evaluate("()=>layout.rotated")
+    R=lambda f: f.rotate(90,expand=True) if rot else f
+    def need(cond,what):
+        if not cond: fails.append(S+what)
+    pg.evaluate("()=>{ B7.speed=1; b7SetDiff('grace'); }")
+    start(pg,idx,{'seed':SEED}); wait_cmd(pg); pg.evaluate(POKE_ROWS); pg.evaluate(S5_PREP); pg.evaluate(S8_TRACE); pg.wait_for_timeout(900 if not landscape else 4500)
+    v=s8(pg); caps.append(R(shot(pg)))
+    need(all(x.endswith(':true') for x in v['idle']),f"every fighter's idle loop is loaded when the fight opens: {v['idle']}")
+    need(v['loaded']<=10,f"no more than the idle loops plus a few leftovers are loaded at the start (about 10 MB each): {v['loaded']}")
+    # the idle loop is what is drawn: the same picture changes over a second
+    a=pg.evaluate("()=>{ const u=B3.F.party[1],vu=B3.view.u[u.key]; const f1=b3cMemberFrame(u,vu,B3P.t,null),f2=b3cMemberFrame(u,vu,B3P.t+1.1,null); return {c1:!!f1&&!!f1._clip,differ:f1!==f2}; }")
+    need(a['c1'] and a['differ'],f'a family member is drawn from the idle clip and it moves: {a}')
+    # 1. each family member's Basic lands on its clip's impact frame
+    for member in ['tom','grace','rose','deedee']:
+        if not turn_of(pg,member,S): continue
+        n0=pg.evaluate("()=>window.__c8.hits.length"); basic(pg); aim(pg,None); fr=[]
+        shoot_move(pg,fr,8,200); caps.append(R(fr[2])); caps.append(R(fr[4]))
+        if member=='rose': sheet([R(f) for f in fr],4,os.path.join(OUT,'b3-s8-rose-move'+('-land' if landscape else '')+'.png'),scale=.5)
+        wait_cmd(pg); pg.wait_for_timeout(200)
+        H=pg.evaluate("(n)=>window.__c8.hits.slice(n)",n0)
+        key=pg.evaluate('(m)=>B3.F.party.find(u=>u.id===m).key',member)
+        first=[h for h in H if any(c['who']==key and c['imp'] is not None for c in h['cur'])]
+        need(len(first)>=1,f'{member}: the Basic should be played by its clip and show a hit: {H[:2]}')
+        if first:
+            c=[c for c in first[0]['cur'] if c['who']==key][0]; d=first[0]['t']-(c['t0']+c['T0'])-c['imp']
+            need(-.02<=d<=.14,f"{member}: the hit should show on the clip's impact frame (off by {d:.3f} s, clip {c['id']})")
+            print('  ',member,c['id'],'hit off the impact frame by',round(d,3),'s')
+    # 2. the Big One's acts: low HP so every act comes up; each act that has a clip is played by it
+    pg.evaluate("()=>{ const f=B3.F.foes[0]; f.maxHp=f.hp=6000; f.hp=2700; b3ViewSync(); b3Render(); }")
+    seen=set(); bfr=[]
+    for k in range(34):
+        wait_cmd(pg,90000); pg.wait_for_timeout(150)
+        if pg.evaluate("()=>B3.ui==='done'"): break
+        pg.evaluate(S5_PREP); pg.evaluate("()=>{ const f=B3.F.foes[0]; if(f.hp>5000) f.hp=2700; }")
+        for m in pg.evaluate("()=>window.__c8.moves.filter(m=>m.foe).map(m=>m.id)"): seen.add(m)
+        if len(bfr)<10 and pg.evaluate("()=>{ const f=B3.F.foes[0]; return !!f.charge||!!(B3P.fa.f0&&B3P.fa.f0.cl); }"): bfr.append(R(shot(pg)))
+        basic(pg); aim(pg,None); pg.wait_for_timeout(300)
+        if {'big_glare','tail_slap','swamp_chomp','muddy_belly_flop','crown_polish'}<=seen: break
+    M=pg.evaluate("()=>window.__c8.moves.filter(m=>m.foe)")
+    cl=pg.evaluate("()=>Object.keys(window.__c8.cl)")
+    need(all(m['clip'] in cl for m in M if m['clip']),f"every Big One act with a clip was played by it: {[m['clip'] for m in M if m['clip'] and m['clip'] not in cl]} (played {cl})")
+    need({'big_glare','swamp_chomp'}<=seen,f'the Big One used Big Glare and Swamp Chomp: {sorted(seen)}')
+    print('   Big One acts seen:',sorted(seen))
+    caps+=bfr[:6]
+    # 3. body states drawn from clips: a family member hit by a monster, a monster hit, the guard loop, a knock-out, the victory
+    st=pg.evaluate("""()=>{ const out={}; const u=B3.F.party[0],vu=B3.view.u[u.key];
+      b3cWant(b3cOf(u.id,'hit'),9000); b3cWant(b3cOf(B3.F.party[2].id,'ko'),9000); b3cWant(b3cOf(u.id,'guard'),9000); return out; }""")
+    pg.wait_for_timeout(1800)
+    st=pg.evaluate("()=>{ const u=B3.F.party[0]; b3cBodyClip(u.key,'hit'); return {hitBody:B3P.body[u.key]&&B3P.body[u.key].kind}; }")
+    st2=pg.evaluate("""()=>{ const out={}; const u=B3.F.party[0],vu=B3.view.u[u.key]; delete B3P.body[u.key];
+      vu.sh=30; out.guard=!!b3cMemberFrame(u,vu,B3P.t,null)&&b3cGuarding(u); vu.sh=0;
+      const f=B3.F.foes[0],A=B3P.fa[f.key]; A.cl=null; b3cFoeClip(f.key,'hit'); out.foeHit=!!A.cl;
+      const w=B3.F.party[2],vw=B3.view.u[w.key]; vw.ko=true; out.ko=!!b3cMemberFrame(w,vw,B3P.t,{kind:'ko',t0:B3P.t-5}); vw.ko=false;
+      vu.st.push('flustered'); A.flusT=B3P.t-1; out.flus=!!b3cFoeFrame(f,A,vu.st?B3.view.u[f.key]:null,B3P.t); return out; }""")
+    print('   states',st,st2)
+    need(st['hitBody']=='cs',f"a hit on a family member plays the hit clip: {st}")
+    need(st2['guard'] and st2['foeHit'] and st2['ko'],f'guard loop, a monster hit clip and a knock-out clip are available and drawn: {st2}')
+    # Flustered: the held picture, then restore
+    pg.evaluate("()=>{ const f=B3.F.foes[0],vf=B3.view.u[f.key]; if(!vf.st.includes('flustered')) vf.st.push('flustered'); B3P.fa[f.key].flusT=B3P.t-.2; }"); pg.wait_for_timeout(1700); caps.append(R(shot(pg)))
+    pg.evaluate("()=>{ const f=B3.F.foes[0],vf=B3.view.u[f.key]; vf.st=vf.st.filter(x=>x!=='flustered'); }")
+    pg.evaluate("()=>{ const f=B3.F.foes[0]; f.hp=1; }")
+    # 4. finish the fight: the boss falls with its defeated clip and the family cheers from the victory clips
+    for k in range(30):
+        if pg.evaluate("()=>B3.ui==='done'"): break
+        wait_cmd(pg,90000); pg.wait_for_timeout(150)
+        if pg.evaluate("()=>B3.ui==='done'"): break
+        pg.evaluate("()=>{ const f=B3.F.foes[0]; f.hp=1; }"); basic(pg); aim(pg,None); pg.wait_for_timeout(250)
+        if k==0: shoot_move(pg,caps,3,330)
+    pg.wait_for_timeout(2600); caps.append(R(shot(pg)))
+    done=pg.evaluate("""()=>({over:B3.F.over,vic:B3.F.party.map(u=>{ const f=b3cMemberFrame(u,B3.view.u[u.key],B3P.t,B3P.body[u.key]); return !!f&&!!f._clip; }),die:!!(B3P.fa.f0&&B3P.fa.f0.die!=null),loaded:b3cLoaded(),peak:B3C.peak})""")
+    print('   end',done)
+    need(done['over']=='win','the boss fight was won')
+    need(all(done['vic']),f"the family cheers from victory clips: {done['vic']}")
+    need(done['peak']<=16,f"no more than 16 clip pictures (about 160 MB) were ever held at once: peak {done['peak']}")
+    sheet(caps[:24],4,os.path.join(OUT,'b3-s8'+('-land' if landscape else '')+'.png'),scale=.5)
+    f=shot(pg); f.save(os.path.join(OUT,'b3-s8-end-'+('landscape' if landscape else 'portrait')+'.png'))
+    pg.click('#b3-cmd [data-done]'); pg.wait_for_timeout(500)
+    # 5. a clip that cannot load: the move waits 2.5 s, then plays its default animation and the hit still lands
+    if not landscape:
+        pg.evaluate("()=>{ b3LabReset(); }"); start(pg,lab.index('new1'),{'seed':SEED}); wait_cmd(pg); pg.evaluate(S8_TRACE)
+        pg.evaluate("()=>{ const a=PAINTED.clip_rose_tackle; paintedRelease(a); a.src='art/clips/does-not-exist.webp'; a.failed=false; B3C.need.delete('rose_tackle'); }")
+        if turn_of(pg,'rose',S):
+            n0=pg.evaluate("()=>window.__c8.hits.length"); basic(pg); aim(pg,None); pg.wait_for_timeout(300)
+            wait_cmd(pg,60000); H=pg.evaluate("(n)=>window.__c8.hits.slice(n)",n0); body=pg.evaluate("()=>window.__c8.moves.slice(-3).map(m=>m.id+':'+m.ready)")
+            need(len(H)>=1,f'a move whose clip cannot load still lands its hit after the wait: {H} {body}')
+            need(not any(c['id']=='rose_tackle' for h in H for c in h['cur']),'that move was played by the default animation, not the missing clip')
+        pg.evaluate("()=>{ const a=PAINTED.clip_rose_tackle; a.src='art/clips/rose-tackle.webp?v=clip0'; a.failed=false; }")
+        pg.click('#b3-exit'); pg.wait_for_timeout(500)
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
@@ -980,7 +1086,7 @@ with sync_playwright() as pw:
     pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start',timeout=180000); pg.wait_for_timeout(1500)
-    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7')] or ([] if only else lab)
+    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7','s8')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7','s8')] or ([] if only else lab)
     # The way in: ADMIN > BATTLE LAB shows NEW BATTLE, which opens the list.
     pg.evaluate("()=>{ splashSetMode('lab'); }"); pg.wait_for_timeout(200)
     names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
@@ -1059,6 +1165,11 @@ with sync_playwright() as pw:
     if 's7' in sys.argv or not only and len(want)==len(lab):
         print('stage 7: preview and Rose Mode'); stage7(pg,lab)
         pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage7(pg,lab,True)
+        pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
+    # 6h. stage 8: video clips in Battle 3 (portrait, then a pass in landscape)
+    if 's8' in sys.argv or not only and len(want)==len(lab):
+        print('stage 8: clips'); stage8(pg,lab)
+        pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage8(pg,lab,True)
         pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
     # 7. battle 2 still owns its screen
     pg.evaluate("()=>{ B7.speed=1; splash.active=false; document.getElementById('splash').hidden=true; window.__LE.b2Start({party:['tom','grace','rose'],level:12,foes:[['mudling','front']],bag:[]}); }")

@@ -143,7 +143,7 @@ function paintedTick() {
     const a=PAINTED[id]; if(!a.lazy) continue;
     const need=paintedOwners(id).some(o=>want.has(o));
     if(need) paintedLoad(a);
-    else if(a.img&&(!fight||(/^clip_/.test(id)&&typeof B2!=='undefined'&&B2.labReview))&&now-a.used>(fight?3000:PAINTED_IDLE)) paintedRelease(a);   // a chapter review (engine/clip-review.js) plays dozens of clips one after another: each is released 3 s after its last picture, even mid-fight
+    else if(a.img&&(!fight||(/^clip_/.test(id)&&((typeof B2!=='undefined'&&B2.labReview)||(typeof B3!=='undefined'&&B3.active))))&&now-a.used>(fight?3000:PAINTED_IDLE)) paintedRelease(a);   // a chapter review (engine/clip-review.js) plays dozens of clips one after another: each is released 3 s after its last picture, even mid-fight
   }
 }
 // True once every sheet the current fight needs has loaded (or failed, which falls back to the old rows).

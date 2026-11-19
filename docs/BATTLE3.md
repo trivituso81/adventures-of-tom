@@ -292,13 +292,32 @@ Calls made in stage 2 (all in data): Zone One Blockade's answer is a standard Cl
 | Tom, Grace, Rose, Deedee: the Basic of their first Sig Vibe; NeeDoh Stretch Pass; The Floor Is Lava! | Stat Leans and ranks (stage 4), Traits and Quirks (stage 5), everything else in the kits |
 | Mudling and Skeeter Swarm, formations `mudling` and `skeeter` | |
 | Turn bar with round dividers, a ghost for the highlighted move and sliding faces; party cards with 10 Pep dots; the new cross (RUCKUS and BAG greyed); tap an enemy or a party card to aim; keys and gamepad | Preview, inspect, Rose Mode pictures (stage 7) |
-| Default animations by shape (strike, cast, throw, give), hit and knock-out looks from existing frames, win and lose | Body-state table finished, clips, enemy hold (stage 8); spoken lines for the new moves (none exist yet); the victory card and rewards (stage 15) |
+| Default animations by shape (strike, cast, throw, give), hit and knock-out looks from existing frames, win and lose; stage 8: body-state clips (idle, guard, hit, dodge, KO, victory), video clip moves, the Big One's clip acts and held wind-ups | Spoken lines for the new moves (none exist yet); the victory card and rewards (stage 15) |
 
 Pace: `B3_TEMPO` in `engine/b3-play.js` stretches every default move animation (2 since `b3tempo1`: Tom found the first build about 2x too fast).
 
 Calls made in stage 1 (all in data, all changeable without engine edits): a multi-hit move's power is the whole move's power shared by its hits; an enemy's announce turn uses Base Recovery 80; "every 3rd turn" starts counting again after the act fires; a status put on yourself during your own turn does not count that turn; a turn's wait is set before its statuses count down, so a 2-turn Slow slows two Recoveries; Short Circuit!'s splash is 40% of the hit that set it off; NeeDoh Stretch Pass puts the ally at the very front of the bar; Buzz Cloud comes up only after Jitterflight was stripped, not when it runs out.
 
-## Clips: facts for stage 8 (from the animation test, build `clippack1`, 2026-11-18)
+## Clips in Battle 3 (built in `b3s8`, 2026-11-19)
+
+Files: `data/b3-clips.js` (`B3_BODY_CLIPS`: owner then state to clip id), `engine/b3-clips.js` (loading, memory, body-state frames, clip move helpers). Play layer hooks are in `engine/b3-play.js`; the act beat in `b3-resolve.js` and `b3-foe.js` carries `anim`, telegraph beats carry `wind`.
+
+| Thing | Rule |
+|---|---|
+| A move plays from a clip | Data only: `anim:{kind:'clip',clip:'<id>'[,at:share]}` on the move row (party) or foe act. Remove the field and the default animation plays again. |
+| When the hit shows | On the clip's own impact frame (`impact` in `data/clips/<id>.js`), through the battle clock, so rules and picture cannot drift. A clip with no impact (state kind) lands at `at` of its length (default .5). Several hits are spaced .35 s. Measured: 0 to 17 ms off the impact frame. |
+| Party strike clips | The character first crosses to the monster (`C.reach` places the fist or spray at its near side), plays the clip, then runs home on the mirrored run clip. Foe clips play in place. |
+| Foe wind-up | `wind:'<clip>'` holds that clip's last picture while the foe is charged up. |
+| Body states | `B3_BODY_CLIPS[owner]`: idle, guard (while shielded, in a stance or marked), hit, dodge, ko, victory, run, give, cast; monsters: idle, hit, slip, die, flustered. A missing state falls back to the existing painted pose. |
+| Memory | Only idle loops stay loaded for the whole fight. Other clips are warmed just before use (`b3cWarmBeats`, `b3cWant`, kept 4.5 s) and `paintedTick` releases them 3 s after last use. Peak in a boss fight: 14 to 16 clips. |
+| A clip that is not ready | The move waits up to 2.5 s for it (`B3C.waitMax`), then plays its default animation. The hit still lands. |
+| Pace | `B3_TEMPO` does not stretch clips. |
+| Clips wired | Tom: Lounge Pass Flex, Zone One Blockade. Grace: Soup-Dumpling Squeeze, Cube Pop. Rose: Lamb-Tuck Ankle Tackle, The Floor Is Lava!, Giddyup. Deedee: Windex Spritz, Wet-Floor Hazard, Dust Tsunami. Mudling: bump, throw. The Big One: glare, tail slap, chomp, belly flop, polish. |
+| Tests | `python3 tools/b3_test.py s8` (portrait and landscape: idle loops, impact timing for four members, the Big One's acts, hit/guard/KO, flustered, victory, load fallback). |
+
+## Clips: facts from the animation test (build `clippack1`, 2026-11-18)
+
+Background for the section above. The "battle 2 only" row below is now answered by `b3cWanted` (called from `bclipWanted` when `B3.active`).
 
 Three approved clips exist and play only in battle 2's Battle Lab clip fights (`B2.labClip`): `rose_boop` (strike), `rose_sleep` (state: out of the fight), `mudling_idle` (loop). The animation thread adds no more battle 2 wiring; clips enter this system here, through `B3_BODY` and a move's `anim` (architecture 2.7).
 

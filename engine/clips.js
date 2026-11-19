@@ -44,7 +44,8 @@ function bclipFrameAt(C,ms) { let i=0; while(i<C.n-1&&ms>=C.ms[i+1]) i++; return
 // A chapter review (B2.labReview, engine/clip-review.js) holds a chapter's worth of clips, far more than a phone can keep decoded at once
 // (about 10 MB each), so it wants only the monsters' idle loops on the field and the one clip being shown.
 function bclipWanted() {
-  const out=[]; if(typeof B2==='undefined'||!B2.active||!B2.labClip) return out;
+  const out=[]; if(typeof B3!=='undefined'&&B3.active) return b3cWanted();   // Battle 3 (engine/b3-clips.js): idle loops for the fight, the rest as asked
+  if(typeof B2==='undefined'||!B2.active||!B2.labClip) return out;
   if(B2.labReview) { for(const id in BCLIPS) if(BCLIPS[id].kind==='loop'&&B2.foes.some(f=>f.id===BCLIPS[id].owner)) out.push(id); if(B2.clipShow) out.push(B2.clipShow.id); return out; }
   // clipch1: a Lab fight that names its clips (L.clips, B2.labClips) loads only those: once chapter 1 is baked, Tom, Grace and Rose have about
   // ten clips each, and loading every clip of everyone on the field would not fit in a phone's memory.

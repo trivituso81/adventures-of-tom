@@ -114,7 +114,7 @@ function b3Finish() {
   const win=B3.F.over==='win';
   // A win may pay something (Vibe Points in the Battle Lab): the line it returns is said on the win screen.
   if(win) { if(B3.cfg.award&&!B3.awarded) { B3.awarded=true; B3.won=B3.cfg.award(B3.F)||''; }
-    B3P.cheer=true; b3Sfx('win'); b3Word('YOU WIN!','#ffe27a'); b3Say('The family wins! '+(B3.won?B3.won+' ':'')+'Tap CONTINUE.'); }
+    B3P.cheer=true; B3P.cheerAt=null; for(const m of B3.F.party) b3cWant(b3cOf(m.id,'victory'),9000); b3Sfx('win'); b3Word('YOU WIN!','#ffe27a'); b3Say('The family wins! '+(B3.won?B3.won+' ':'')+'Tap CONTINUE.'); }
   else { b3Sfx('lose'); b3Word('KNOCKED OUT','#ff9a8a'); b3Say('Everyone is knocked out. Tap CONTINUE.'); }
   B3.ui='done'; battle.state='command'; b3Render();
 }
@@ -325,6 +325,7 @@ function b3Choose(S) {
   if(!can.ok) { b3Sfx('nope'); b3Say(can.why); return; }
   const opts=b3Options(B3.F,u,S);
   b3Sfx('select');
+  if(S.anim&&S.anim.kind==='clip') { b3cWant(S.anim.clip,12000); b3cWant(b3cOf(u.id,'run'),12000); }   // start loading the move's clip while the player picks the target
   if(opts.length===1&&!opts[0].no) { b3Commit(S.id,opts[0].key); return; }
   B3.pending=S; B3.opts=opts; B3.prevUi=B3.ui; B3.prevSel=B3.sel;
   b3Open('target',b3RecTarget(opts,S.id));

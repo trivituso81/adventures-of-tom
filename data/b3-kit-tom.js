@@ -15,10 +15,10 @@ B3_VIBES.tom_flier={id:'tom_flier',owner:'tom',name:'Frequent Flier',sig:1,lean:
   trait:'priority_boarding',basic:'lounge_pass_flex',skills:['zone_one_blockade','suite_door_slide','tarmac_porsche_transfer'],
   quirks:['upgrade_certificate','million_miler_status'],counter:null};
 B3_SKILLS.lounge_pass_flex={id:'lounge_pass_flex',vibe:'tom_flier',slot:'basic',name:'Lounge Pass Flex',pep:0,flavor:['racket'],power:'light',hits:1,
-  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'eyes_on_me',to:'self'}],line:null,anim:{kind:'default',shape:'cast'},
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'eyes_on_me',to:'self'}],line:null,anim:{kind:'clip',clip:'tom_loungepass',shape:'cast'},
   desc:'Light Racket hit. Eyes On Me: monsters aim at Tom more until his next turn ends.'};
 B3_SKILLS.zone_one_blockade={id:'zone_one_blockade',vibe:'tom_flier',slot:'s1',name:'Zone One Blockade',pep:2,flavor:['clobber'],power:0,hits:0,
-  target:'self',tags:[],composure:0,effects:[{op:'status',id:'zone_one',to:'self'}],line:null,anim:{kind:'default',shape:'cast'},
+  target:'self',tags:[],composure:0,effects:[{op:'status',id:'zone_one',to:'self'}],line:null,anim:{kind:'clip',clip:'tom_blockade',shape:'cast'},
   desc:'For 2 turns, any monster that hits Tom with a melee or thrown attack gets a Clobber hip-check back.'};
 // The family next to Tom when he slides the doors shut are the ones covered (the status sits on them, engine/b3-ops.js `intercept`).
 B3_SKILLS.suite_door_slide={id:'suite_door_slide',vibe:'tom_flier',slot:'s2',name:'Suite Door Slide',pep:3,flavor:['support'],power:0,hits:0,

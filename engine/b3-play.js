@@ -14,17 +14,18 @@
 // head and its face on the turn bar tips over; a Marked family member wears a red arrow and a MARKED chip on their card.
 //
 // Three animation kinds per move (anim.kind in the move's data row): 'default' is built here from the move's shape with
-// frames every character already has. 'script' (a hand-made ST.play timeline) and 'clip' (a video clip) arrive in stage 8.
+// frames every character already has. 'clip' (a video clip, engine/b3-clips.js) plays the move from a clip the move's row names and lands
+// its hit on the clip's impact frame. 'script' (a hand-made ST.play timeline) is not built yet.
 // Every kind ends by calling reveal(), which shows the next hit's beats.
 
 const B3={active:false,F:null,cfg:null,view:null,ui:'busy',sel:0,opts:[],pending:null,actor:null,result:null,artWait:false,log:[]};
-const B3P={t:0,q:[],body:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false};
+const B3P={t:0,q:[],body:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false,cheerAt:null};
 // How an enemy stands that is not in its art: flyers hover this many pixels off the ground.
 const B3_FOE_LOOK={skeeter:{hover:14}};
 // How long the default move animations take, as a multiple of the first build's pace. Tom, 2026-11-18: they were about 2x too fast.
 // One number: 1 is the old quick pace, 2 is twice as long. The battle speed button (1x / 2x) still halves it for the player.
 const B3_TEMPO=2;
-// Body states (architecture 2.7): which painted frame shows each state. Stage 8 finishes this table and lets a cell be a clip.
+// Body states (architecture 2.7): which painted frame shows each state when no clip does. A state's clip is in B3_BODY_CLIPS (data/b3-clips.js).
 const B3_BODY={idle:'idle',hit:'hurtPose',low:'kneel',windup:'windup',dash:'leap',strike:'act',cast:'castPose',give:'point',victory:'celeb'};
 
 // ---------- Timing: everything runs on the battle clock, so 2x speed and the REPORT freeze both work ----------
@@ -40,7 +41,7 @@ function b3Update(dt) {
   B3P.pops=B3P.pops.filter(p=>B3P.t-p.t0<p.dur); B3P.words=B3P.words.filter(w=>B3P.t-w.t0<w.dur); B3P.fx=B3P.fx.filter(f=>B3P.t-f.t0<f.dur);
   if(B3P.flash&&B3P.t-B3P.flash.t0>=B3P.flash.dur) B3P.flash=null;
 }
-function b3PlayReset() { Object.assign(B3P,{t:0,q:[],body:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false}); }
+function b3PlayReset() { Object.assign(B3P,{t:0,q:[],body:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false,cheerAt:null}); }
 
 // ---------- The view: what the screen shows right now ----------
 function b3ViewSync() {
@@ -122,11 +123,11 @@ function b3Show(b) {
     if(b.peeve) b3Pop(b.tgt,'PET PEEVE','#ffe27a',{sc:2}); else if(b.resist) b3Pop(b.tgt,'RESIST','#aeb6c6',{sc:2});
     if(b.tick) b3Pop(b.tgt,B3_STATUS[b.tick].short,B3_STATUS[b.tick].color,{sc:2});
     if(b.soak) { vu.sh=b.sh; b3Pop(b.tgt,'SHIELD TOOK '+b.soak,'#9fd0ff',{sc:2}); }
-    if(b.tgt[0]==='f') { const a=B3P.fa[b.tgt]; a.hurtUntil=now+.7; a.shakeUntil=now+.28; a.flashUntil=now+.09; b3Sfx('hitEnemy'); }
-    else { B3P.body[b.tgt]={kind:'hit',t0:now,dur:.45}; b3Sfx('hitParty'); }
+    if(b.tgt[0]==='f') { const a=B3P.fa[b.tgt],hc=b3cFoeClip(b.tgt,'hit'); a.hurtUntil=now+.7; a.shakeUntil=now+(hc?0:.28); a.flashUntil=now+.09; b3Sfx('hitEnemy'); }
+    else { if(!b3cBodyClip(b.tgt,'hit',true)) B3P.body[b.tgt]={kind:'hit',t0:now,dur:.45}; b3Sfx('hitParty'); }
     B3P.fx.push({kind:'burst',x:b3Spot(b.tgt).x,y:b3Spot(b.tgt).y,color:fl.color,t0:now,dur:.35});
   }
-  else if(b.t==='miss') { b3Pop(b.tgt,b.why==='dodge'?'DODGE':'MISS','#e8ecf4'); b3Sfx('whoosh'); if(b.why==='hidden') b3Say(b3Name(b.src)+' cannot find '+b3Name(b.tgt)+'. It misses.'); }
+  else if(b.t==='miss') { b3Pop(b.tgt,b.why==='dodge'?'DODGE':'MISS','#e8ecf4'); b3Sfx('whoosh'); if(b.tgt[0]!=='f') b3cBodyClip(b.tgt,'dodge'); if(b.why==='hidden') b3Say(b3Name(b.src)+' cannot find '+b3Name(b.tgt)+'. It misses.'); }
   else if(b.t==='status') {
     // An enemy wears its top 3 statuses over its head, so the new tag is the news; anything else gets a rising tag.
     const had=b.tgt[0]==='f'?b3ViewIcons(b.tgt).length:0;
@@ -157,7 +158,7 @@ function b3Show(b) {
     if(b.src[0]==='f') B3P.fa[b.src].hold=now+.4*K; else B3P.body[b.src]={kind:'pose',f:B3_BODY.strike,t0:now,dur:.6*K};
     B3P.fx.push({kind:'proj',x0:a.x,y0:a.y,x1:z.x,y1:z.y,color:(S&&S.color)||'#fff1cb',t0:now+.05,dur:.28*K,arc:22}); b3Sfx('whoosh');
   }
-  else if(b.t==='interrupt') { delete V.charge[b.tgt]; delete V.mark[b.tgt]; b3Pop(b.tgt,b.why==='break'?'LOST IT':'INTERRUPTED','#ffe27a',{sc:2}); b3Sfx('combo'); b3Say(b3Name(b.tgt)+' loses '+b.name+'. It was cancelled.'); }
+  else if(b.t==='interrupt') { delete V.charge[b.tgt]; delete V.mark[b.tgt]; if(B3P.fa[b.tgt]) B3P.fa[b.tgt].windId=null; b3Pop(b.tgt,b.why==='break'?'LOST IT':'INTERRUPTED','#ffe27a',{sc:2}); b3Sfx('combo'); b3Say(b3Name(b.tgt)+' loses '+b.name+'. It was cancelled.'); }
   else if(b.t==='pips') {
     vu.pips=b.left; vu.maxPips=b.max;
     if(b.refill) b3Pop(b.tgt,'COMPOSURE BACK','#ffd27a',{sc:2});
@@ -165,7 +166,7 @@ function b3Show(b) {
   }
   else if(b.t==='break') {
     V.bar=b.bar; b3RenderBar(b.tgt);
-    b3Word('BREAK!','#ff9a8a'); B3P.flash={color:'#ff9a8a',t0:now,dur:.45}; b3Sfx('combo'); B3P.fa[b.tgt].shakeUntil=now+.5; B3P.fa[b.tgt].hurtUntil=now+.9;
+    b3Word('BREAK!','#ff9a8a'); B3P.flash={color:'#ff9a8a',t0:now,dur:.45}; b3Sfx('combo'); B3P.fa[b.tgt].shakeUntil=now+.5; B3P.fa[b.tgt].hurtUntil=now+.9; B3P.fa[b.tgt].flusT=now; B3P.fa[b.tgt].windId=null;
     b3Say('BREAK! '+b3Name(b.tgt)+' is Flustered: it takes 35% more damage until its next turn.');
   }
   else if(b.t==='summon') {
@@ -173,7 +174,7 @@ function b3Show(b) {
     b3LayoutAdd(b.tgt); V.bar=b.bar; b3RenderBar(b.tgt); b3Sfx('intro'); b3Say(b.name+' joins the fight!');
   }
   else if(b.t==='hazardOn') { V.haz=V.haz.filter(h=>!(h.id===b.id&&h.side===b.side)); V.haz.push({id:b.id,side:b.side,uses:b.uses}); b3Word(B3_HAZARDS[b.id].name.toUpperCase(),B3_HAZARDS[b.id].color); }
-  else if(b.t==='hazardTrip') { const h=V.haz.find(x=>x.id===b.id),H=B3_HAZARDS[b.id]; if(h) h.uses=b.left; b3Pop(b.tgt,H.pop||'SLIPPED!',H.color); b3Sfx('thud'); b3Say(b3Name(b.tgt)+' '+(H.verb||'slips on')+' the '+H.name.toLowerCase()+'.'); }
+  else if(b.t==='hazardTrip') { const h=V.haz.find(x=>x.id===b.id),H=B3_HAZARDS[b.id]; if(h) h.uses=b.left; b3Pop(b.tgt,H.pop||'SLIPPED!',H.color); b3Sfx('thud'); if(b.tgt[0]==='f') b3cFoeClip(b.tgt,'slip'); b3Say(b3Name(b.tgt)+' '+(H.verb||'slips on')+' the '+H.name.toLowerCase()+'.'); }
   else if(b.t==='foresee') {
     // Cartridge Blow: the monster's next act, and who it is aimed at when it is aimed at one family member.
     const who=b3Name(b.foe),at=b.tgt?b3Name(b.tgt):'';
@@ -204,10 +205,11 @@ function b3Show(b) {
   else if(b.t==='pep') { vu.pep=b.pep; if(b.g!=='pre') b3Pop(b.tgt,(b.n>0?'+':'')+b.n+' PEP',b.n>0?'#8dc4e6':'#ff9a8a',{sc:2}); }
   else if(b.t==='telegraph') {
     V.charge[b.src]=b.name; b3Pop(b.src,'!!','#ff8f80',{sc:4}); b3Sfx('charge');
+    if(b.wind&&b.src[0]==='f') { B3P.fa[b.src].windId=b.wind; B3P.fa[b.src].windT0=null; b3cWant(b.wind,9000); }   // the monster holds its wound-up picture until the act fires
     if(b.mark) { V.mark[b.src]=b.mark; b3Pop(b.mark,'MARKED','#ff8f80',{sc:2}); b3Say(b3Name(b.src)+' has Marked '+b3Name(b.mark)+'. '+b.name+' lands on '+b3Name(b.mark)+' on its next turn.'); }
     else b3Say(b3Name(b.src)+' is winding up '+b.name+'. It lands on its next turn.');
   }
-  else if(b.t==='act') { if(b.foe) { delete V.charge[b.src]; delete V.mark[b.src]; delete V.aim[b.src]; } }
+  else if(b.t==='act') { if(b.foe) { delete V.charge[b.src]; delete V.mark[b.src]; delete V.aim[b.src]; B3P.fa[b.src].windId=null; } }
   else if(b.t==='ko') {
     vu.ko=true; vu.st=[]; delete V.charge[b.tgt]; delete V.mark[b.tgt]; delete V.aim[b.tgt];
     if(b.tgt[0]==='f') { B3P.fa[b.tgt].die=now; b3Sfx('grumpDie'); }
@@ -230,8 +232,12 @@ function b3Play(beats,done) {
   const run=k=>b3PlayMove(segs[k],k+1<segs.length?()=>run(k+1):done,k+1<segs.length);
   b3After(wait,()=>run(0));
 }
-function b3PlayMove(beats,done,mid) {   // mid: the first move of a Family Ruckus pair (the screen is synced when the pair has finished)
+function b3PlayMove(beats,done,mid,waited) {   // mid: the first move of a Family Ruckus pair (the screen is synced when the pair has finished)
   const head=beats[0];
+  // Clips (engine/b3-clips.js): ask for what this move will show. A move whose clip is still loading waits for it (2.5 s at most), then plays its default animation.
+  b3cWarmBeats(beats);
+  const cid=head.t==='act'&&head.anim&&head.anim.kind==='clip'?head.anim.clip:null;
+  if(cid&&BCLIPS[cid]&&!b3cReady(cid)&&(waited||0)<B3C.waitMax) { b3After(.1,()=>b3PlayMove(beats,done,mid,(waited||0)+.1)); return; }
   if(head.t==='telegraph') { for(const b of beats) if(b.t!=='over') b3Show(b); B3P.fa[head.src].hold=B3P.t+.8; b3After(1.15,done); return; }
   const pre=beats.filter(b=>b.g==='pre'),post=beats.filter(b=>b.g==='post'&&b.t!=='over'),swings=beats.filter(b=>b.t==='swing');
   // Reactions, each a group of beats that share a `g` ('r0', 'r1'...), and what the turn's end wrote ('end').
@@ -250,12 +256,28 @@ function b3PlayMove(beats,done,mid) {   // mid: the first move of a Family Rucku
   const wrap=()=>{ if(mid) { b3After(.25,done); return; } for(const b of tail) b3Show(b); b3ViewSync(); b3RenderParty(); b3After(.6,done); };
   const react=i=>{ const R=reacts[i]; if(!R) { wrap(); return; }
     b3Show(R.beats[0]); b3After(.34*K,()=>{ for(const b of R.beats.slice(1)) b3Show(b); b3After(.5*K,()=>react(i+1)); }); };
-  const finish=s=>at(s,()=>{ while(shown<hits.length) reveal(); for(const b of post) b3Show(b); if(reacts.length) b3After(.3*K,()=>react(0)); else wrap(); });
+  const finishNow=()=>{ while(shown<hits.length) reveal(); for(const b of post) b3Show(b); if(reacts.length) b3After(.3*K,()=>react(0)); else wrap(); };
+  const finish=s=>at(s,finishNow);
   const shape=head.shape,foe=src[0]==='f',fl=B3_FLAVORS[head.flavor[0]]||B3_FLAVORS.support;
+  // A video clip plays the move (the move's or act's row says which, engine/b3-clips.js). It plays at the clock's own pace, not B3_TEMPO's:
+  // the hit shows on the clip's impact frame (a clip with no impact lands at `at` of its length). A family member crosses to the monster first.
+  const CL=cid&&b3cReady(cid)?BCLIPS[cid]:null;
+  if(CL) {
+    const land=b3cLandAt(CL,head.anim),dur=CL.dur/1000;
+    let T0=0;
+    if(foe) B3P.fa[src].cl={id:cid,t0:B3P.t,dur};
+    else {
+      const home=b3PartyHome(b3Unit(B3.F,src)),tg=hits.length&&hits[0].swing.tgts[0],travel=!!tg&&tg[0]==='f';
+      let jx=home.cx,jy=home.base; if(travel) { const st=b3cStand(src,CL,tg); jx=st.x; jy=st.y; T0=.55; }
+      B3P.body[src]={kind:'cmove',t0:B3P.t,T0,jx,jy,C:CL,back:travel?.5:0,dur:T0+dur+.12+(travel?.5:0)};
+    }
+    if(hits.length) hits.forEach((h,k)=>b3After(T0+land+k*.35,reveal)); else b3After(T0+land,()=>{ for(const b of late) b3Show(b); });
+    b3After(Math.max(T0+dur+.1,T0+land+Math.max(0,hits.length-1)*.35+.25),finishNow); return;
+  }
   // A move with no hits (a pass, a self buff): a pose, then the effects.
   if(!hits.length) {
     const tg=head.tgts[0];
-    if(foe) B3P.fa[src].hold=B3P.t+.5*K; else B3P.body[src]={kind:'pose',f:shape==='give'?B3_BODY.give:B3_BODY.cast,t0:B3P.t,dur:.75*K};
+    if(foe) B3P.fa[src].hold=B3P.t+.5*K; else if(!b3cBodyClip(src,shape==='give'?'give':'cast')) B3P.body[src]={kind:'pose',f:shape==='give'?B3_BODY.give:B3_BODY.cast,t0:B3P.t,dur:.75*K};
     if(tg&&tg!==src) { const a=b3Spot(src),z=b3Spot(tg); B3P.fx.push({kind:'proj',x0:a.x,y0:a.y,x1:z.x,y1:z.y,color:fl.color,t0:B3P.t+.2*K,dur:.3*K,arc:40}); }
     at(.5,()=>{ for(const b of late) b3Show(b); });
     finish(.6); return;
@@ -284,7 +306,7 @@ function b3PlayMove(beats,done,mid) {   // mid: the first move of a Family Rucku
   // cast, throw, give: stay home, send something across, reveal when it arrives.
   const a=b3Spot(src);
   if(foe) B3P.fa[src].hold=B3P.t+(.25+hits.length*.34)*K;
-  else B3P.body[src]={kind:'pose',f:shape==='give'?B3_BODY.give:shape==='throw'?B3_BODY.strike:B3_BODY.cast,t0:B3P.t,dur:(.35+hits.length*.34)*K};
+  else if(shape==='throw'||!b3cBodyClip(src,shape==='give'?'give':'cast')) B3P.body[src]={kind:'pose',f:shape==='give'?B3_BODY.give:shape==='throw'?B3_BODY.strike:B3_BODY.cast,t0:B3P.t,dur:(.35+hits.length*.34)*K};
   t=.2;
   for(const h of hits) {
     for(const k of h.swing.tgts) { const z=b3Spot(k); B3P.fx.push({kind:'proj',x0:a.x+(foe?20:-20),y0:a.y,x1:z.x,y1:z.y,color:fl.color,t0:B3P.t+t*K,dur:.26*K,arc:shape==='throw'?46:10}); }
@@ -334,7 +356,8 @@ function b3Draw() {
 }
 function b3DrawFoe(f,t,picked) {
   const L=B3P.foe[f.key],A=B3P.fa[f.key],vu=B3.view.u[f.key],def=L.def,R0=def.sprite,FR=def.frames,sc=L.sc;
-  const dying=A.die!=null,dq=dying?Math.min(1,(t-A.die)/.9):0;
+  const dying=A.die!=null,dc=dying?b3cGet(f.id,'die',9000):null;   // a defeated clip plays out, then the monster fades (engine/b3-clips.js)
+  const dq=dying?(dc?Math.max(0,Math.min(1,(t-A.die-dc.dur/1000)/.4)):Math.min(1,(t-A.die)/.9)):0;
   if(dq>=1) return;
   const look=B3_FOE_LOOK[f.id]||{},hov=look.hover||0;
   let lq=0,lp=0; if(A.lunge) { lp=(t-A.lunge.t0)/A.lunge.dur; if(lp>=1) A.lunge=null; else lq=Math.sin(Math.PI*lp); }
@@ -342,14 +365,16 @@ function b3DrawFoe(f,t,picked) {
   const hurt=dying||fl||t<A.hurtUntil,holding=!fl&&t<A.hold;
   let R=R0;
   if(FR) { if(A.lunge&&FR.attack.length) R=FR.attack[Math.min(FR.attack.length-1,Math.floor(lp*FR.attack.length))]; else if(hurt&&FR.hurt) R=FR.hurt; else if(holding&&FR.attack.length) R=FR.attack[0]; }
+  const cr=b3cFoeFrame(f,A,vu,t),CFr=cr?cr.fr:null;   // a clip picture, when this monster has one for what it is doing and it is loaded
+  if(CFr) R=CFr;
   const w=R[0].length*sc,h=R.length*sc,sw=R0[0].length*sc;
-  const bob=hov&&!dying?Math.round(Math.sin(t*3+f.slot*1.7)*2)-hov:0,breath=dying||hov?0:(.5+.5*Math.sin(t*1.7+f.slot*1.7))*.008;
+  const bob=hov&&!dying?Math.round(Math.sin(t*3+f.slot*1.7)*2)-hov:0,breath=dying||hov||CFr?0:(.5+.5*Math.sin(t*1.7+f.slot*1.7))*.008;
   const dx=A.lunge?(A.lunge.tx-L.px-sw*.5)*lq:0,dy=A.lunge?(A.lunge.ty-L.py)*lq-lq*10:0;
-  const shake=t<A.shakeUntil?rand(-4,4):0,lean=holding&&!A.lunge?8:0,sway=fl&&!shake?Math.round(Math.sin(t*4.5+f.slot)*2):0;
-  const x=Math.round(L.px-w/2+dx+shake-lean+sway),y=Math.round(L.py-h+bob+dy-dq*30);
-  if(!dying) ellipse(L.px+dx,L.py-1+(A.lunge?(A.lunge.ty-L.py)*lq:0),sw*.48*(hov?.8:1),Math.max(4,sc*2),hov?'rgba(30,50,40,.22)':'rgba(30,50,40,.3)');
-  const flash=t<A.flashUntil||(dying&&dq>.1),alpha=(1-dq)*(A.born!=null?Math.min(1,(t-A.born)/.5):1);
-  if(breath&&!A.lunge&&!shake&&!holding&&!fl) { gfx.save(); gfx.translate(L.px,L.py); gfx.scale(1,1+breath); gfx.translate(-L.px,-L.py); drawSprite(R,def.pal,x,y,sc,{flash,alpha}); gfx.restore(); }
+  const shake=t<A.shakeUntil?rand(-4,4):0,lean=holding&&!A.lunge&&!CFr?8:0,sway=fl&&!shake&&!CFr?Math.round(Math.sin(t*4.5+f.slot)*2):0;
+  const x=Math.round(L.px-w/2+dx+shake-lean+sway),y=Math.round(L.py-h+bob+dy-(dc?0:dq*30));
+  if(!dying||dc) ellipse(L.px+dx,L.py-1+(A.lunge?(A.lunge.ty-L.py)*lq:0),sw*.48*(hov?.8:1),Math.max(4,sc*2),hov?'rgba(30,50,40,.22)':'rgba(30,50,40,.3)');
+  const flash=t<A.flashUntil||(dying&&!dc&&dq>.1),alpha=(1-dq)*(A.born!=null?Math.min(1,(t-A.born)/.5):1);
+  if(breath&&!A.lunge&&!shake&&!holding&&!fl&&!CFr) { gfx.save(); gfx.translate(L.px,L.py); gfx.scale(1,1+breath); gfx.translate(-L.px,-L.py); drawSprite(R,def.pal,x,y,sc,{flash,alpha}); gfx.restore(); }
   else drawSprite(R,def.pal,x,y,sc,{flash,alpha});
   if(dying) return;
   // HP meter and letter under the feet; statuses and a wind-up badge over the head.
@@ -370,8 +395,11 @@ function b3DrawFoe(f,t,picked) {
 }
 function b3DrawMember(u,t,picked) {
   const sp=BATTLE_SPRITES[u.id],home=b3PartyHome(u),vu=B3.view.u[u.key],A=B3P.body[u.key];
-  let cx=home.cx,base=home.base,fk=B3_BODY.idle,flash=false,hop=0;
+  let cx=home.cx,base=home.base,fk=B3_BODY.idle,flash=false,hop=0,CF=null;
   if(vu.ko) {
+    const KF=b3cMemberFrame(u,vu,t,A);   // a knock-out clip plays once and its last picture is held (engine/b3-clips.js)
+    if(KF) { const w=KF[0].length*sp.scale,h=KF.length*sp.scale,ft=feetOf(KF);
+      ellipse(cx+ft.dx*sp.scale,base-1,Math.max(ft.w*sp.scale*.62,w*.3),5,'rgba(47,73,54,.34)'); drawSprite(KF,sp.pal,Math.round(cx-w/2),Math.round(base-h),sp.scale,{flash:0}); return; }
     const koE=A&&A.kind==='ko'?t-A.t0:9,frame=koE<.16?sp.idle:koFrame(sp),w=frame[0].length*sp.scale,h=frame.length*sp.scale;
     const sink=koE<.16?Math.round(koE/.16*8):-Math.round(Math.max(0,Math.sin(Math.min(1,(koE-.16)/.3)*Math.PI))*5);
     ellipse(cx,base-1,w*.3,5,'rgba(47,73,54,.34)');
@@ -385,14 +413,24 @@ function b3DrawMember(u,t,picked) {
     const e=t-B.t0,K=B.keys; let i=0; while(i<K.length-2&&e>=K[i+1].t) i++;
     const a=K[i],b=K[i+1],q=Math.max(0,Math.min(1,(e-a.t)/Math.max(.001,b.t-a.t))),s=q*q*(3-2*q);
     cx=a.x+(b.x-a.x)*s; base=a.y+(b.y-a.y)*s; fk=q<1?a.f:b.f; if(b.hop) hop=Math.sin(q*Math.PI)*b.hop;
+    if(fk===B3_BODY.dash) { const R=b3cGet(u.id,'run'); if(R) { CF=bclipLoopFrame(R,e*1000); if(b.x>a.x+1) CF=b3cMirror(CF); } }   // crossing the field: the run clip (it faces the monsters)
+  } else if(B&&B.kind==='cmove') {
+    // A move played by a clip: run over to the monster, play the clip where they stand, run home.
+    const e=t-B.t0,cd=B.C.dur/1000,ease=q=>{ q=Math.max(0,Math.min(1,q)); return q*q*(3-2*q); },R=b3cGet(u.id,'run');
+    if(e<B.T0) { const s=ease(e/B.T0); cx=home.cx+(B.jx-home.cx)*s; base=home.base+(B.jy-home.base)*s; if(R) CF=bclipLoopFrame(R,e*1000); else fk=B3_BODY.dash; }
+    else if(e<B.T0+cd+.12) { cx=B.jx; base=B.jy; CF=b3cOnce(B.C,(e-B.T0)*1000); }
+    else { const s=ease((e-B.T0-cd-.12)/Math.max(.01,B.back)); cx=B.jx+(home.cx-B.jx)*s; base=B.jy+(home.base-B.jy)*s; if(B.back&&s<1) { if(R) CF=b3cMirror(bclipLoopFrame(R,e*1000)); else fk=B3_BODY.dash; } }
   } else if(B&&B.kind==='pose') fk=B.f;
   else if(B&&B.kind==='hit') { fk=B3_BODY.hit; const e=t-B.t0; if(e<.25) cx+=rand(-4,4); flash=e<.08; }
   else if(B3P.cheer) { fk=B3_BODY.victory; hop=Math.abs(Math.sin(t*6+u.slot))*16; }
   else if(low) fk=B3_BODY.low;
-  const frame=sp[fk]||sp.idle,w=frame[0].length*sp.scale,h=frame.length*sp.scale,ft=feetOf(frame);
+  // A clip, when one shows this state and is loaded: idle and guard loops, a hit, a dodge, a give or cast, the victory (engine/b3-clips.js).
+  if(!CF&&!(B&&(B.kind==='path'||B.kind==='cmove'||B.kind==='pose'||B.kind==='hit'))&&!(low&&!B3P.cheer)) CF=b3cMemberFrame(u,vu,t,B);
+  if(CF&&B3P.cheer&&!B) hop=0;
+  const frame=CF||sp[fk]||sp.idle,w=frame[0].length*sp.scale,h=frame.length*sp.scale,ft=feetOf(frame);
   ellipse(cx+ft.dx*sp.scale,base-1,Math.max(ft.w*sp.scale*.62,w*.3),5,'rgba(47,73,54,.34)');
   const x=Math.round(cx-w/2),y=Math.round(base-h-hop);
-  const idle=fk===B3_BODY.idle,breath=idle?(.5+.5*Math.sin(t*1.7+u.slot*1.3))*.008:0;
+  const idle=fk===B3_BODY.idle&&!CF,breath=idle?(.5+.5*Math.sin(t*1.7+u.slot*1.3))*.008:0;
   activeKneelCut=frame===sp.kneel&&!sp.noShift?Math.round(sp.idle.length*.62):0;
   if(breath) { gfx.save(); gfx.translate(cx,base); gfx.scale(1,1+breath); gfx.translate(-cx,-base); drawSprite(frame,sp.pal,x,y,sp.scale,{flash}); gfx.restore(); }
   else drawSprite(frame,sp.pal,x,y,sp.scale,{flash});
