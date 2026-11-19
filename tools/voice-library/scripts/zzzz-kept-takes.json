@@ -1,0 +1,17 @@
+{
+ "note": "Scripts of takes Tom kept, for lines no chapter script file holds (merge-local.js). Loads last, so it wins.",
+ "lines": [
+  {
+   "voice": "deedee",
+   "text": "Up, up. Everybody up. Deedee will make it better.",
+   "script": "[warm Long Island accent] Up, up. Everybody up. [warm Long Island accent] Deedee will make it better.",
+   "takeId": "tmwo5rtcausx8"
+  },
+  {
+   "voice": "tom",
+   "text": "Hello, Rose. Please keep your arms and legs inside the uncle at all times.",
+   "script": "[dry, deadpan] Hello, Rose. [official announcement] Please keep your arms and legs inside the uncle at all times.",
+   "takeId": "tmwnr6e69kgzb"
+  }
+ ]
+}

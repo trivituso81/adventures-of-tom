@@ -1,3 +1,10 @@
+## ch1takes1 (2026-11-19): 31 phone voice takes merged (30 chapter 1 re-takes, 1 new Mr. Washington line); nothing heard on a phone
+
+- Tom sent `local-clips-pending_4_.json` (made 2026-11-19 23:08 UTC, 31 clips: Grace 16, Deedee 6, Tom 4, Boppy 2, Amy 1, Rose 1, Washington 1) with "You do all this". Merged with `merge-local.js` per claude/next-addendum-calib2.md and claude/next-addendum-pending1.md: 30 takes replaced existing clips in data/voice/dialog-ch1.js, 1 new clip added to data/voice/dialog-ch8.js (Washington "That'll be from her.", one of the two lines the voicegen2 job could not make).
+- His kept scripts were written into tools/voice-library/scripts (19 written, 12 already the same, 2 appended in zzzz-kept-takes.json). `data/merged-takes.json` holds the new fingerprints, so Pending upload clears on his phone. Voice index rebuilt: dialogue lines with no clip 1.
+- The export holds no Narrator takes and no old-voice Washington re-takes. Voice Library on his phone (Narrator no clip yet: 0) matches claude/ch01-handoff.md, which says narr1 and washvoice1 were merged in voice3; board card t-narr is stale (noted on the card, not removed: Tom has not said to).
+- Checks: `unused_voice.py` checks 1, 2, 3 and 5 are 0; check 4 is 93 before and after (the same older lines voicegen2 recorded, not from these clips). New clips are not loudness levelled (see voicegen2).
+
 ## scene1fix1 (2026-11-19): The girls' party banners wait until all of scene 1 is done, and the TATA bubble is smaller and sits above the running girls
 
 - Tom (11-19 15:12): "the girls joining the party banner shouldnt happen until all of scene 1 is complete. in chapter 1 scene 1 the tata speech bubble while the girls running is too big and overlaps the girls".
@@ -11,6 +18,7 @@
 - New `tools/clip-gate/vision.py`: for each clip it builds the pictures the game shows (loops forward then back, 12 evenly spaced plus the eye event, the start of the fall and the farthest left and right pictures, on mid grey, game time under each) and a second picture (the start picture large and head crops), adds a move card written as a rule for that kind of move, and asks an xAI vision model a fixed yes/no checklist as JSON. The model also describes the action blind before it reads the card. Majority of the runs counts; a tie counts as a fault. The model is chosen at run time from xAI's own model list (the cheapest one that takes image input and does not reason). The spend is counted from the usage xAI returns and the run stops before a call that could pass the cap (default $1.80, kept across reruns); runs go round-robin so a stop leaves whole runs; answers already paid for are skipped on a rerun.
 - New Action `clip-gate` (`.github/workflows/clip-gate.yml`, manual only): the key is a repo secret that only Actions can read, so the paid calls run there. Keeps `vision.json` on branch `clipgate` (never merge it). It makes no videos.
 - Tests: `python3 -I tools/clip-gate/vision_test.py` against a stand-in xAI server (`vision_stub.py`): model choice, two jpeg pictures per call, majority verdicts, resume without paying twice, the cap, a refused key. FAILS: [].
+
 ## clipgate1 (2026-11-19): A measured quality gate for battle clips, replayed against Tom's chapter 1 review; nothing re-made, nothing spent
 
 - Tom (11-19): "Build an automatic quality gate for battle clips before any re-make: measured frame checks first, replayed against Tom's 47 notes, then plan the vision-model check. Do not generate or spend anything until the gate flags the clips he rejected."

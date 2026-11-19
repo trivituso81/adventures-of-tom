@@ -6,7 +6,8 @@
    "speaker": "Grace",
    "text": "Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One again.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[bossy, small teacher] Tata, don't walk yet. [proud] I wrote down EVERYTHING that happened since you left. [reading aloud] Number one. Boppy saw the Big One again."
+   "script": "[bossy] Tata, don't walk yet. [proud] I wrote down [emphasized] EVERYTHING that happened since you left. [reading aloud] Number one. Boppy saw the Big One again!",
+   "takeId": "tmwo5ax6ttscw"
   },
   {
    "voice": "rose",
@@ -20,38 +21,40 @@
    "speaker": "Grace",
    "text": "It did not eat a boat. Nobody's ever seen it but Boppy, and he's been saying it for twenty years.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[flat, correcting] It did NOT eat a boat. [matter of fact] Nobody's ever seen it but Boppy, and he's been saying it for twenty years."
+   "script": "[flat, correcting] It did NOT eat a boat. [flat] Nobody's ever seen it but Boppy, and he's been saying it for [emphasized]twenty years.",
+   "takeId": "tmwo5c23jtgq5"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Twenty years, one witness. That's a strong number one. What's number two?",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[serious, taking notes in his head] Twenty years, one witness. [sincere, impressed] That's a STRONG number one. [eager] What's number two?"
+   "script": "[surprised] Twenty years! [pause, suspicious]one witness... [pause, flat] That's a STRONG number one. [confirming] What's number two?",
+   "takeId": "tmwo5ehc2e5au"
   },
   {
    "voice": "grace",
    "speaker": "Grace",
    "text": "Number two. Deedee made apple muffins. They're for you, so nobody's allowed to have one yet.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[reading aloud] Number two. [announcing, cheerfull] Deedee made apple muffins. [cheerful] They're for you, [very stern, quick] so [emphasized] nobody's allowed to have one yet.",
-   "takeId": "tmwmbvpffansu"
+   "script": "[quick, reading aloud] Number two. [quick, flat, announcing] Deedee made apple muffins. [noting] They're for you, [mildly annoyed, quick] so [emphasized] nobody's allowed to have one yet.",
+   "takeId": "tmwnromgtjbch"
   },
   {
    "voice": "rose",
    "speaker": "Rose",
    "text": "I licked one. Only the top!",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[excited confession] I licked one... [quick, excusing] Only the TOP!",
-   "takeId": "tmwmchzpjw2r6"
+   "script": "[excited confession] I licked one... [pause] [quick, excusing] Only the TOP!",
+   "takeId": "tmwnrpu63b7b0"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[warm] Thank you for telling me, Rose. [deadpan] That one's yours. [dry] Grace, I'm so sorry but [flat, smirkingly] number two [emphasized] can't wait.",
-   "takeId": "tmwmcam92tzll"
+   "script": "[wary, disgusted, amused] Thank you for telling me, Rose... [pause, very very deadpan] That one's yours. [very dismissive] Grace, I'm so sorry but number two can't wait. [hungry] I'm starving!",
+   "takeId": "tmwo5jgy3mcb5"
   },
   {
    "voice": "grace",
@@ -66,8 +69,8 @@
    "speaker": "Amy",
    "text": "Brother! I'm watching you from the window. I've seen people move faster walking on the sand at Robert Moses.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[heavy Long Island accent, calling] Brother! [heavy Long Island accent, taunting, teasing] I'm watching you from the window. [heavy Long Island accent, joking] I've seen people move faster walking on the sand at Robert Moses!",
-   "takeId": "tmwmfdhw6ffo6"
+   "script": "[heavy Long Island accent, calling] Brother! [heavy Long Island accent, taunting, teasing] I'm watching you from the window! [heavy Long Island accent, joking] I've seen people move faster walking on the sand at Robert Moses!",
+   "takeId": "tmwo5kbk5ik6d"
   },
   {
    "voice": "tom",
@@ -98,8 +101,8 @@
    "speaker": "Grace",
    "text": "You are slow. I've been on number four since the mailbox.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[quick, flat] You [emphasized]ARE slow. [flat, deadpan] I've been on number four since the mailbox!",
-   "takeId": "tmwmnpl7tz6oh"
+   "script": "[quick, flat] You [emphasized]ARE slow. [flat, deadpan] I've been on number four since the taxi place!",
+   "takeId": "tmwo5llcrcgzn"
   },
   {
    "voice": "ellie",
@@ -208,15 +211,16 @@
    "speaker": "Deedee",
    "text": "There he is! Come here. Let me look at you. I missed that face. Now sit, you're having a muffin.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[warm Long Island accent, bright, thrilled] There he is! Come here. Let me look at you. [warm Long Island accent, warm, plain] I missed that FACE. [warm Long Island accent, firm] Now sit, you're having a muffin.",
-   "takeId": "gen-c82ffe4f21"
+   "script": "[warm Long Island accent, bright, thrilled] My favorite son! [warm Long Island accent, warm, plain] I missed that FACE. [warm Long Island accent, firm] Now sit, you're having a muffin.",
+   "takeId": "tmwo5mo07kihu"
   },
   {
    "voice": "tom",
    "speaker": "Tom",
    "text": "Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since we flew over Kansas.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[warm] Hi, Mom. I missed yours too. [sniffing, hopeful] Is that the cinnamon topping? [earnest confession] I've been thinking about that topping since we flew over KANSAS."
+   "script": "[warm] Hi, Mom. I missed yours too. [sniffing, hopeful] Is that the cinnamon topping? [earnest confession] I've been thinking about that topping since I flew over KANSAS!",
+   "takeId": "tmwo5n9pbpvz2"
   },
   {
    "voice": "deedee",
@@ -269,16 +273,16 @@
    "speaker": "Boppy",
    "text": "...and I only caught him because the hat kept getting taller. Where'd the muffins go?",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[thick New York accent, finishing his story, pleased, has noticed nothing] ...and I only caught him because the hat kept getting TALLER. [thick New York accent, mild, puzzled] Where'd the muffins go?",
-   "takeId": "gen-963a76a198"
+   "script": "[deep voice, thick New York accent, finishing his story, pleased, has noticed nothing] ...and I only caught him because the hat kept getting TALLER. [thick New York accent, mild, puzzled] Wait, where'd the muffins go?",
+   "takeId": "tmwo5pb225sc9"
   },
   {
    "voice": "deedee",
    "speaker": "Deedee",
    "text": "A ball of mud came through the door and took them. Pan and all.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[warm Long Island accent, brisk, matter of fact] A ball of mud came through the door and took them. Pan and all.",
-   "takeId": "gen-fd223e6f4e"
+   "script": "[warm Long Island accent, outraged] A ball of mud came through the door and took them. Pan and all!",
+   "takeId": "tmwo5pv9g15sw"
   },
   {
    "voice": "boppy",
@@ -293,16 +297,16 @@
    "speaker": "Deedee",
    "text": "Girls, sneakers. Tom, hold the door. Hubby, you stay right there. When we get them back, the first one's yours.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[warm Long Island accent, charge nurse, fast] Girls, sneakers. Tom, hold the door. Hubby, you stay right there. [warm Long Island accent, softer, a promise] When we get them back, the first one's yours.",
-   "takeId": "gen-9a8743e26a"
+   "script": "[warm Long Island accent, charge nurse, fast] Girls, sneakers. Tom, hold the door. Hubby, you stay right there.",
+   "takeId": "tmwo5qklydgiv"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "The first one. Tom, you heard her.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[thick New York accent, satisfied, pointing] The FIRST one. Tom, you heard her.",
-   "takeId": "gen-45fffeff6e"
+   "script": "[deep voice, thick New York accent, deferring] Tom, you heard her.",
+   "takeId": "tmwo5r7oola8x"
   },
   {
    "voice": "rose",
@@ -337,16 +341,16 @@
    "speaker": "Deedee",
    "text": "Girls, behind me. You three have till I count to three. Then I'm getting the hose.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[warm Long Island accent, clipped, in charge] Girls, behind me. [warm Long Island accent, low, slow, almost polite] You three have till I count to three. Then I'm getting the HOSE.",
-   "takeId": "gen-b4a5b179b1"
+   "script": "[warm Long Island accent, clipped, in charge] Girls, behind me. [warm Long Island accent, low, fast, threatening] You three have till I count to three. Then I'm getting the HOSE.",
+   "takeId": "tmwo5sndg64vb"
   },
   {
    "voice": "deedee",
    "speaker": "Deedee",
    "text": "Three.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[warm Long Island accent, flat, immediate, punchline] Three.",
-   "takeId": "gen-3ce27d26ff"
+   "script": "[warm Long Island accent, stern] Three!",
+   "takeId": "tmwo5umc8rozw"
   },
   {
    "voice": "grace",
