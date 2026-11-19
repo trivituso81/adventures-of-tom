@@ -126,10 +126,22 @@ function b3Kit(id,L) {
   return {main:V.id,pocket:P?P.id:null,basic:V.basic,skills:[...mainSkills,...pocketSkills],pocketSkills,trait:V.trait,quirks:L.quirks.filter(Boolean),
     lean:V.lean,row:b3RowOf(L),counters,rank:b3VibeRank(L,V.id)};
 }
-// The passive rows a kit puts on a unit: the Trait, the equipped Quirks (those whose rule is written), and one listener per
-// Portable Counter that adds to it by its rule.
+// What a kit's Trait and equipped Quirks (those whose rule is written) put on a unit:
+//   listeners  flat rows for the hook bus (engine/b3-hooks.js). A row with `on` is one listener; a row with `listen:[...]` is
+//              one per entry (ids '<row id>:0', '<row id>:1'...). Each Portable Counter adds one that builds it by its rule.
+//   mods       the rows' own mods (engine/b3-core.js b3Mods: they may carry `when` and `per`)
+//   counters   counters a Quirk keeps for itself ({id, name, max}: Upgrade Certificate)
+//   custom     {<one-off rule name>: its numbers} (engine/b3-custom.js)
 function b3KitPassives(K) {
-  const rows=[B3_TRAITS[K.trait],...K.quirks.map(q=>B3_QUIRKS[q])].filter(P=>P&&!P.soon);
-  for(const C of K.counters) rows.push(Object.assign({},C,{id:'counter:'+C.id,name:C.name,effects:[{op:'counter',id:C.id,n:C.n||1,max:C.max,to:'self'}]}));
-  return rows;
+  const out={listeners:[],mods:[],counters:[],custom:{}};
+  for(const P of [B3_TRAITS[K.trait],...K.quirks.map(q=>B3_QUIRKS[q])]) {
+    if(!P||P.soon) continue;
+    if(P.on) out.listeners.push(P);
+    (P.listen||[]).forEach((L,i)=>out.listeners.push(Object.assign({},L,{id:P.id+':'+i,pid:P.id,name:P.name})));
+    for(const m of (P.mods||[])) out.mods.push(Object.assign({},m,{from:P.id}));
+    if(P.counter) out.counters.push(P.counter);
+    if(P.custom) out.custom[P.custom]=P.n||{};
+  }
+  for(const C of K.counters) out.listeners.push(Object.assign({},C,{id:'counter:'+C.id,name:C.name,effects:[{op:'counter',id:C.id,n:C.n||1,max:C.max,to:'self'}]}));
+  return out;
 }

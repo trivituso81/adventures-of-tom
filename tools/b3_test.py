@@ -3,6 +3,7 @@
 #                     python3 tools/b3_test.py new1       one fight
 #                     python3 tools/b3_test.py s3         only the stage 3 section (The Big One: pips, Mark, Break, adds), about 5 min
 #                     python3 tools/b3_test.py s4         only the stage 4 section (the Vibes screen, the Lab's Ranks, the save fields), about 2 min
+#                     python3 tools/b3_test.py s5         only the stage 5a section (Rank 5 on The Big One: the four Capstones, the free Skill, Traits and Quirks), about 3 min
 # Env: CHROMIUM = chromium binary (optional), SEED = the fight's seed (default 7), OUT = folder for the sheets (default tools/shots).
 #
 # For each fight it checks, and prints FAILS: [] when all pass:
@@ -29,6 +30,14 @@
 #      SKILLS list with POCKET tags, the Lean, the rows) and a win pays Vibe Points, kept across a reload. Then the save: the new
 #      fields are written, the pause menu's VIBES command opens the same screen (portrait and landscape), a change lands in the
 #      autosave and in the Lab's book, save then load brings it back, and three old or broken saves load with fresh loadouts.
+#   6c. Stage 5a, once, on The Big One with every Vibe at Rank 5 and both Quirks of the first Sig Vibes equipped (portrait, then a
+#      short pass in landscape): Tom starts in Guard Stance; a tap list names the Trait and the Quirks; Grace's Colossal
+#      Diamond-Gold Dumpling opens the FREE SKILL list for Rose (no way back out of it, FREE on every row) and Rose's free Skill
+#      plays without moving her on the bar; Deedee's Fifty-Year Dust Tsunami scrubs the Crown, leaves the boss Drenched and
+#      Shined and the family with Attack up; Tom's Tarmac Porsche Transfer puts ALL EYES on him and the boss then aims at him;
+#      Rose's Double-Lamby Return-Cart Blitz lands six hits and gives her Speed; Tom steps in for Grace, stamps a Certificate
+#      (the number on his portrait) and answers with Million-Miler Status; Controller Toss cashes the Certificates; Deedee's
+#      Scrub on the Drenched boss shows Spotless Floor's extra pip.
 #   7. A battle 2 fight still starts and shows its own screen afterwards.
 # Sheets: b3-<fight>-hand.png, b3-<fight>-slip.png and b3-<fight>-slip-bar.png (the Hydro-Slip! frames: the stage, and every turn bar
 # stacked and doubled), b3-<fight>-lose.png, b3-<fight>-land.png, b3-s2-moves.png (the stage during the stage 2 moves),
@@ -36,6 +45,8 @@
 # b3-s3-break.png (the Break frames), b3-s3-info.png (the lists and the adds), b3-s3-land.png, b3-s4-lab.png (the Vibes screen from
 # the Lab), b3-s4-fight.png (the fight with changed Vibes), b3-s4-menu.png (the pause menu's door, with a landscape frame), and three
 # full-size frames: b3-s4-vibes-portrait.png, b3-s4-vibes-menu-landscape.png, b3-s4-menu-landscape.png, b3-s4-fight-skills.png.
+# Stage 5a: b3-s5-caps.png (the four Capstones and the free Skill), b3-s5-quirks.png (stepping in, Certificates, Million-Miler,
+# Spotless Floor), b3-s5-land.png, and full-size b3-s5-free-portrait.png, b3-s5-info-portrait.png, b3-s5-free-landscape.png.
 import threading, http.server, socketserver, functools, os, sys, json, subprocess, io
 from playwright.sync_api import sync_playwright
 from PIL import Image
@@ -434,7 +445,7 @@ def stage4(pg,lab):
     need(v['rank']==['2'],f"the Lab starts with every Vibe at Rank 2: {v['rank']}")
     c=v['cards']
     need(len(c)==2 and c[0]['role']=='MAIN VIBE' and c[0]['name']=='Frequent Flier' and '60 / 220 VP' in c[0]['vp'] and c[0]['rows']==7,f'Tom\'s Main Vibe card is wrong: {c[:1]}')
-    need(c[0]['live']==['Lounge Pass Flex','Zone One Blockade','Suite Door Slide'],f"what is in use from the Main Vibe at Rank 2: {c[0]['live']}")
+    need(c[0]['live']==['Priority Boarding','Lounge Pass Flex','Zone One Blockade','Suite Door Slide'],f"what is in use from the Main Vibe at Rank 2 (the Trait counts since stage 5a wrote it): {c[0]['live']}")
     need(c[1]['role']=='POCKET VIBE' and c[1]['name']=='Gamer Geek' and c[1]['live']==['Controller Toss'],f'the Pocket Vibe adds only its unlocked Skills: {c[1:]}')
     vib(pg,'row-tom_flier-suite_door_slide'); v=vstate(pg); need('Skill, 3 Pep' in v['say'] and 'Tom' in v['say'],f"tapping a Skill row should say what it does: {v['say']}")
     vib(pg,'row-tom_flier-upgrade_certificate'); v=vstate(pg); need('Unlocks at Rank 3 (220 Vibe Points)' in v['say'],f"a locked Quirk should say when it unlocks: {v['say']}")
@@ -525,7 +536,7 @@ def stage4(pg,lab):
     need(v['open'] and v['door']=='menu' and v['tabs']==['TOM','GRACE','ROSE'],f"the pause menu's Vibes screen should list the party: {v['tabs']} {v['open']}")
     need('Story fights still use the old battle' in v['head'],f"the pause menu's screen should say where the Vibes are used: {v['head']}")
     need(not v['rank'] and pg.evaluate("()=>!document.querySelector('#b3-vibes .b3v-rank')"),'the Rank picker belongs to the Lab only')
-    need(v['cards'][0]['live']==['Lounge Pass Flex','Zone One Blockade'] and '0 / 60 VP' in v['cards'][0]['vp'],f"a new game is Rank 1 with 0 VP: {v['cards'][0]}")
+    need(v['cards'][0]['live']==['Priority Boarding','Lounge Pass Flex','Zone One Blockade'] and '0 / 60 VP' in v['cards'][0]['vp'],f"a new game is Rank 1 with 0 VP: {v['cards'][0]}")
     vib(pg,'main-tom_gamer',350); vib(pg,'who-1'); vbottom(pg); vib(pg,'rowpick-back'); mm.append(shot(pg))
     pg.keyboard.press('KeyM'); pg.keyboard.press('ArrowLeft'); pg.wait_for_timeout(150)
     need(pg.evaluate("()=>menuOpen&&B3V.open&&menuTab==='home'"),'keys must not reach the pause menu while the Vibes screen is open over it')
@@ -570,6 +581,134 @@ def stage4(pg,lab):
     # Full-size frames of the three views Tom will use most, to look at closely.
     for name,im in (('b3-s4-vibes-portrait.png',fr[1]),('b3-s4-vibes-menu-landscape.png',land),('b3-s4-menu-landscape.png',land2),('b3-s4-fight-skills.png',ff[1])): im.save(os.path.join(OUT,name))
 
+# ---------- Stage 5a: the Traits, Quirks and Capstones of the four first Sig Vibes, at Rank 5 on The Big One ----------
+S5_BOOK="""()=>{ const B=b3LabReset(5),Q={tom:['upgrade_certificate','million_miler_status'],grace:['slow_rise_memory_foam','ultra_rare_limited_edition'],rose:['twin_lamb_relay','its_our_longboard_now'],deedee:['car_crumb_vacuum','spit_shine']};
+  for(const id in Q) Q[id].forEach((q,i)=>b3SetQuirk(id,B[id],i,q)); b3LabSave(); return Object.keys(Q).map(id=>B[id].quirks.join('+')); }"""
+# Before each scripted family turn: full Pep and HP for the family, and the boss's pips topped up so a Break never gets in the way.
+S5_PREP="""()=>{ for(const p of B3.F.party) { p.pep=10; if(!p.ko) p.hp=p.maxHp; } const f=B3.F.foes[0]; if(!f.broken&&!f.flusterTurn) { f.pips=f.maxPips; f.pipLock=false; } b3ViewSync(); b3Render(); }"""
+def s5(pg): return pg.evaluate("""()=>{ const F=B3.F,P={}; for(const p of F.party) P[p.id]=p; const f=F.foes[0],chips=i=>[...document.querySelectorAll('#b3-party .b2-pc[data-i="'+i+'"] .b2-st')].map(e=>e.textContent);
+  return {ui:B3.ui,actor:B3.actor&&B3.actor.id,grant:F.grant&&F.grant.key,turns:F.turnLog.length,ruckus:F.ruckus,pips:f.pips,
+    foe:Object.keys(f.st),hp:f.hp,tom:Object.keys(P.tom.st),grace:Object.keys(P.grace.st),rose:Object.keys(P.rose.st),deedee:Object.keys(P.deedee.st),
+    cert:P.tom.counters.certificate||0,roseWait:P.rose.wait,roseTurns:P.rose.turns,clock:F.clock,chips:[0,1,2,3].map(chips),
+    ctr:(document.querySelector('#b3-party .b2-pc[data-i="1"] .b3-ctr')||{}).textContent||'',
+    rows:[...document.querySelectorAll('#b3-cmd .b2-btn .b2-sn')].map(e=>e.textContent),costs:[...document.querySelectorAll('#b3-cmd .b2-btn .b2-cost')].map(e=>e.textContent),
+    free:(document.querySelector('#b3-cmd .b3-free')||{}).textContent||'',back:!!document.querySelector('#b3-cmd [data-back]'),msg:document.getElementById('b3-msg').textContent,
+    bar:[...document.querySelectorAll('#b3-bar .b2-tk')].map(e=>e.dataset.k+(e.classList.contains('now')?'!':'')+(e.classList.contains('ghost')?'?':''))}; }""")
+def pick_row(pg,name):
+    """With the SKILLS list already open (a free Skill): put the cursor on a row with the keys and press Enter."""
+    pg.mouse.move(2,2)
+    names=pg.evaluate("()=>[...document.querySelectorAll('#b3-cmd .b2-btn .b2-sn')].map(e=>e.textContent)"); sel=pg.evaluate("()=>B3.sel")
+    if name not in names: fails.append(f'stage 5a: {name} is not in the list: {names}'); return
+    for _ in range((names.index(name)-sel)%len(names)): pg.keyboard.press('ArrowDown'); pg.wait_for_timeout(80)
+    pg.keyboard.press('Enter'); pg.wait_for_timeout(250)
+def aim(pg,label):
+    """If a target list is open, put the cursor on the named target and press Enter."""
+    if pg.evaluate("()=>B3.ui")!='target': return
+    labels=pg.evaluate("()=>B3.opts.map(o=>o.label)"); sel=pg.evaluate("()=>B3.sel")
+    if label in labels:
+        for _ in range((labels.index(label)-sel)%len(labels)): pg.keyboard.press('ArrowDown'); pg.wait_for_timeout(80)
+    pg.keyboard.press('Enter'); pg.wait_for_timeout(250)
+def use(pg,name,target=None):
+    skill(pg,name); pg.keyboard.press('Enter'); pg.wait_for_timeout(250); aim(pg,target)
+def turn_of(pg,member,S,limit=8):
+    """Plays Basics until it is that family member's turn (monsters take theirs in between). Returns False if it never comes."""
+    for _ in range(limit):
+        wait_cmd(pg); pg.wait_for_timeout(250)
+        if pg.evaluate("()=>B3.ui==='done'"): break
+        if who(pg)==member: pg.evaluate(S5_PREP); return True
+        pg.evaluate(S5_PREP); basic(pg); aim(pg,None); pg.wait_for_timeout(500)
+    fails.append(f"{S}{member}'s turn never came"); return False
+def stage5(pg,lab):
+    S='stage 5a: '; caps=[]; qk=[]; idx=lab.index('new6')
+    def need(cond,what):
+        if not cond: fails.append(S+what)
+    pg.evaluate("()=>{ B7.speed=1; }")
+    q=pg.evaluate(S5_BOOK); need(all('+' in x for x in q),f'the Lab book did not take both Quirks for everyone: {q}')
+    start(pg,idx,{'seed':SEED},keep=True); wait_cmd(pg); pg.evaluate(POKE_ROWS); pg.evaluate(S5_PREP); pg.wait_for_timeout(300)
+    v=s5(pg); caps.append(shot(pg))
+    need(v['actor']=='grace',f"Grace should open at Rank 5: {v['actor']}")
+    need('guard_stance' in v['tom'] and 'GUARD' in v['chips'][1],f"Priority Boarding: Tom should start in Guard Stance with its chip on his card: {v['tom']} {v['chips'][1]}")
+    # The list a tap opens names the Trait and the Quirks
+    pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-cmd').innerText"); f=shot(pg); f.save(os.path.join(OUT,'b3-s5-info-portrait.png')); caps.append(f)
+    need('Sensory Satisfying' in txt and 'TRAIT' in txt and 'Slow-Rise Memory Foam' in txt and 'Ultra-Rare Limited Edition' in txt and 'QUIRK' in txt,f"Grace's list should name her Trait and both Quirks: {txt[:300]}")
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
+    # Grace: Colossal Diamond-Gold Dumpling for Rose
+    names=skill(pg,'Colossal Diamond-Gold Dumpling'); caps.append(shot(pg)); need(pg.evaluate("()=>B3.ui")=='skills','the SKILLS list did not open for Grace')
+    before=s5(pg); need(any(k.endswith('?') for k in before['bar']),f"the turn bar shows Grace's ghost for the highlighted Capstone: {before['bar']}")
+    pg.keyboard.press('Enter'); pg.wait_for_timeout(250); aim(pg,'Rose'); caps+=burst(pg,3,330)
+    pg.wait_for_function("()=>window.__LE.battle.state==='command'&&B3.actor&&B3.ui==='skills'",timeout=20000); pg.wait_for_timeout(300)
+    v=s5(pg); f=shot(pg); f.save(os.path.join(OUT,'b3-s5-free-portrait.png')); caps.append(f)
+    need(v['actor']=='rose' and v['grant']=='p2',f"the free Skill should be Rose's to pick: actor {v['actor']}, grant {v['grant']}")
+    need(v['free']=='FREE SKILL FOR ROSE' and not v['back'],f"the list should be headed FREE SKILL FOR ROSE with no Back row: '{v['free']}', back {v['back']}")
+    need(v['rows']==['The Floor Is Lava!','"Giddyup, Tata!" Launch'] and all(c=='FREE' for c in v['costs']),f"Rose's free choices: {v['rows']} {v['costs']}")
+    need(v['bar'][0]=='p2#1!' and not any(k.endswith('?') for k in v['bar']),f"the bar shows Rose picking, with no ghost (a free Skill moves nobody): {v['bar']}")
+    need('Free from Grace' in v['msg'],f"the message line should say it is free: {v['msg']}")
+    need('so_satisfying' in v['deedee'] and 'SATISFYING' in v['chips'][3],f"Sensory Satisfying: Deedee is next after Grace and should carry it: {v['deedee']} {v['chips'][3]}")
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(200); need(pg.evaluate("()=>B3.ui")=='skills' and 'Pick a free Skill' in pg.evaluate("()=>document.getElementById('b3-msg').textContent"),'Esc should not leave the free Skill list')
+    w0=v['roseWait']-0; c0=v['clock']; t0=v['turns']
+    # Rose takes The Floor Is Lava! (Clobber leaves no Prime, so the Tsunami that follows leaves the boss Drenched; the landscape pass takes the Launch)
+    pick_row(pg,'The Floor Is Lava!'); aim(pg,None); caps+=burst(pg,4,330); wait_cmd(pg); pg.wait_for_timeout(300); v=s5(pg)
+    need(v['grant'] is None and v['roseTurns']==0,f"after the free Skill the door is closed and it was not Rose's turn: grant {v['grant']}, Rose's turns {v['roseTurns']}")
+    need(abs((v['roseWait']+v['clock'])-(w0+c0))<1e-6,f"Rose keeps her place on the bar: due at {w0+c0:.2f} before, {v['roseWait']+v['clock']:.2f} after")
+    need(v['actor']=='deedee',f"the turn order carries on with Deedee: {v['actor']}")
+    L=log(pg,40); need('gets a free Skill from Grace' in L and 'for free' in L,f'the log should say who got the free Skill and that it was free: {L[-400:]}')
+    # Deedee: Fifty-Year Dust Tsunami
+    pg.evaluate(S5_PREP); p0=s5(pg)['pips']; use(pg,'Fifty-Year Dust Tsunami'); caps+=burst(pg,4,330); wait_cmd(pg); pg.wait_for_timeout(300); v=s5(pg); caps.append(shot(pg))
+    need('muffin_crown' not in v['foe'] and 'drenched' in v['foe'] and 'spit_shine' in v['foe'],f"the Tsunami should scrub the Crown and leave the boss Drenched and Shined: {v['foe']}")
+    need(all('crumb_free' in v[k] for k in ('tom','grace','rose','deedee')),f"Car-Crumb Vacuum: the whole family should have Attack up: {[v[k] for k in ('tom','grace','rose','deedee')]}")
+    need(v['actor']=='tom',f"Tom is up after Deedee: {v['actor']}")
+    # Tom: Tarmac Porsche Transfer
+    pg.evaluate(S5_PREP); h0=s5(pg)['hp']; use(pg,'Tarmac Porsche Transfer'); caps+=burst(pg,4,330); wait_cmd(pg); pg.wait_for_timeout(300); v=s5(pg); caps.append(shot(pg))
+    need('high_beams' in v['tom'] and 'ALL EYES' in v['chips'][1],f"High Beams should be on Tom with its chip: {v['tom']} {v['chips'][1]}")
+    need(v['hp']<h0,'the Porsche should hurt the boss')
+    # Rose: Double-Lamby Return-Cart Blitz
+    if turn_of(pg,'rose',S):
+        r0=s5(pg)['ruckus']; pg.evaluate("()=>{ window.__s5hits=0; if(!window.__s5wrap){ window.__s5wrap=1; const os=b3Show; b3Show=function(b){ if(b.t==='hit'&&b.tgt==='f0'&&b.src==='p2') window.__s5hits++; return os.apply(this,arguments); }; } }")
+        use(pg,'Double-Lamby Return-Cart Blitz'); caps+=burst(pg,7,360); wait_cmd(pg); pg.wait_for_timeout(300); v=s5(pg); caps.append(shot(pg))
+        n=pg.evaluate("()=>window.__s5hits"); need(n==6,f'the Blitz should show six hits on the boss: {n}')
+        need(v['ruckus']>=r0+12,f"Bouncy Physics: six hits should add 12% to the gauge: {r0} to {v['ruckus']}")
+    # The boss has had its first turn by now, with High Beams on Tom: whatever it used, it aimed at Tom
+    aimed=pg.evaluate("()=>Object.values(B3.F.foes[0].lastAim||{}).map(x=>x.key)")
+    need(len(aimed)>0 and all(k=='p1' for k in aimed),f'with High Beams on Tom the boss should aim at Tom (p1): {aimed}')
+    sheet(caps,5,os.path.join(OUT,'b3-s5-caps.png'))
+    # Tom steps in for Grace: a Certificate, and Million-Miler Status answers
+    if turn_of(pg,'tom',S):
+        # The family's Basics keep pushing the boss back (Windex Spritz then a Clobber hit is a Hydro-Slip!), so the test pokes it
+        # to the front of the bar, clears what would make it miss or bite a Marked Tom, and aims a Tail Slap at Grace right after Tom's turn.
+        pg.evaluate("()=>{ const F=B3.F,t=F.party[1],f=F.foes[0]; b3EndStatus(F,t,'high_beams'); for(const id of ['blind','windexed','flustered']) b3EndStatus(F,f,id); f.broken=false; f.charge=null; f.mark=null; f.actIx=f.D.acts.findIndex(A=>A.id==='tail_slap'); f.wait=.01; b3AddStatus(F,F.party[0],'t_taunt',{}); b3ViewSync(); b3Render(); }")
+        use(pg,'Suite Door Slide'); qk+=burst(pg,8,330); wait_cmd(pg); pg.wait_for_timeout(250)
+        qk.append(shot(pg)); v=s5(pg); L=log(pg,60); got=v['cert']>=1
+        need(got and v['ctr']==str(v['cert']),f"stepping in for Grace should stamp a Certificate and show its number on Tom's portrait: {v['cert']} '{v['ctr']}'")
+        need('Tom: Upgrade Certificate.' in L,f'the screen should name Upgrade Certificate when it stamps: {L[-500:]}')
+        need('Tom: Million-Miler Status!' in L,f'Million-Miler Status should answer when Tom steps in: {L[-500:]}')
+        if turn_of(pg,'tom',S):
+            c=s5(pg)['cert']; pg.evaluate("()=>{ window.__s5d=[]; const os=b3Show; if(!window.__s5wrap2){ window.__s5wrap2=1; b3Show=function(b){ if(b.t==='hit'&&b.src==='p1') window.__s5d.push(b.dmg); return os.apply(this,arguments); }; } }")
+            use(pg,'Controller Toss'); qk+=burst(pg,3,330); wait_cmd(pg); pg.wait_for_timeout(250); v=s5(pg); qk.append(shot(pg))
+            need(c>=1 and v['cert']==0 and v['ctr']=='',f"Controller Toss should cash the Certificates: {c} before, {v['cert']} after, portrait '{v['ctr']}'")
+    # Deedee's Scrub on the Drenched boss: Hydro-Slip! and Spotless Floor's extra pip
+    if turn_of(pg,'deedee',S):
+        pg.evaluate("()=>{ const F=B3.F,f=F.foes[0]; if(!f.st.drenched) b3AddStatus(F,f,'drenched',{src:F.party[3]}); f.pips=f.maxPips; f.pipLock=false; F.party[3].used={}; b3ViewSync(); b3Render(); }")
+        p0=s5(pg)['pips']; use(pg,'"Hand Me My Glasses" Scrub'); qk+=burst(pg,4,330); wait_cmd(pg); pg.wait_for_timeout(250); v=s5(pg); L=log(pg,30); qk.append(shot(pg))
+        need('Deedee: Spotless Floor.' in L and v['pips']==p0-2,f"Spotless Floor: Hydro-Slip!'s pip and 1 more should come off ({p0} to {v['pips']}): {L[-300:]}")
+    sheet(qk,5,os.path.join(OUT,'b3-s5-quirks.png'))
+    pg.click('#b3-exit'); pg.wait_for_timeout(500)
+    # Landscape: the free Skill list and a Capstone
+    pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(500); rot=pg.evaluate("()=>layout.rotated"); R=lambda f: f.rotate(90,expand=True) if rot else f; fr=[]
+    pg.evaluate(S5_BOOK); start(pg,idx,{'seed':SEED},keep=True); wait_cmd(pg); pg.evaluate(POKE_ROWS); pg.evaluate(S5_PREP); pg.wait_for_timeout(300); fr.append(R(shot(pg)))
+    pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); fr.append(R(shot(pg))); pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
+    use(pg,'Colossal Diamond-Gold Dumpling','Rose'); fr+=[R(f) for f in burst(pg,2,400)]
+    pg.wait_for_function("()=>window.__LE.battle.state==='command'&&B3.actor&&B3.ui==='skills'",timeout=20000); pg.wait_for_timeout(300); v=s5(pg); f=R(shot(pg)); f.save(os.path.join(OUT,'b3-s5-free-landscape.png')); fr.append(f)
+    need(v['actor']=='rose' and v['free']=='FREE SKILL FOR ROSE',f"landscape: the free Skill list should open for Rose: {v['actor']} '{v['free']}'")
+    vis=pg.evaluate("()=>{ const h=document.querySelector('#b3-cmd .b3-free'),b=document.getElementById('b3-cmd').getBoundingClientRect(),r=h.getBoundingClientRect(); return r.width>0&&r.height>0&&r.top>=b.top-1&&r.bottom<=b.bottom+1&&r.left>=b.left-1&&r.right<=b.right+1; }")
+    need(vis,'landscape: the FREE SKILL heading is not inside the command box')
+    pick_row(pg,'"Giddyup, Tata!" Launch'); aim(pg,None); fr+=[R(f) for f in burst(pg,3,400)]; wait_cmd(pg); pg.wait_for_timeout(250)
+    need(s5(pg)['actor']=='deedee','landscape: the turn order should carry on with Deedee after the free Skill')
+    pg.evaluate(S5_PREP); use(pg,'Fifty-Year Dust Tsunami'); fr+=[R(f) for f in burst(pg,3,400)]; wait_cmd(pg); pg.wait_for_timeout(250); fr.append(R(shot(pg)))
+    pg.click('#b3-exit'); pg.wait_for_timeout(500)
+    if pg.evaluate("()=>splash.mode")!='lab3' or pg.evaluate("()=>B3.active"): fails.append(S+'landscape: EXIT did not go back to the list')
+    sheet(fr,4,os.path.join(OUT,'b3-s5-land.png'))
+    pg.evaluate("()=>{ toggleLayout(); b3LabReset(); B7.speed=1; }"); pg.wait_for_timeout(400)
+
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
@@ -577,7 +716,7 @@ with sync_playwright() as pw:
     pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start',timeout=180000); pg.wait_for_timeout(1500)
-    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4')] or ([] if only else lab)
+    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5')] or ([] if only else lab)
     # The way in: ADMIN > BATTLE LAB shows NEW BATTLE, which opens the list.
     pg.evaluate("()=>{ splashSetMode('lab'); }"); pg.wait_for_timeout(200)
     names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
@@ -634,6 +773,9 @@ with sync_playwright() as pw:
     # 6b. stage 4: the Vibes screen from both doors, the Lab's Ranks, a fight with changed Vibes, the save fields
     if 's4' in sys.argv or not only and len(want)==len(lab):
         print('stage 4: Vibes'); stage4(pg,lab)
+    # 6c. stage 5a: the Traits, Quirks and Capstones of the four first Sig Vibes, at Rank 5 on The Big One
+    if 's5' in sys.argv or not only and len(want)==len(lab):
+        print('stage 5a: Traits, Quirks, Capstones'); stage5(pg,lab)
     # 7. battle 2 still owns its screen
     pg.evaluate("()=>{ B7.speed=1; splash.active=false; document.getElementById('splash').hidden=true; window.__LE.b2Start({party:['tom','grace','rose'],level:12,foes:[['mudling','front']],bag:[]}); }")
     pg.wait_for_function("()=>window.__LE.battle.state==='command'&&window.__LE.B2.actor&&window.__LE.B2.actor.side==='party'",timeout=40000)

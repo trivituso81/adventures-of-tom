@@ -14,6 +14,8 @@
 //   --foehp=20 multiplies monster HP (with --hp it makes a fight the party loses, for the lose screen test).
 //   --rank=3: every Vibe at that Rank (left out: 2, the Rank the Battle Lab starts at). --swap=tom,rose (or --swap=all): those
 //   family members fight with their second Sig Vibe as Main and their first as Pocket.
+//   Quirks: each member's two slots are filled with the Quirks their Rank has unlocked whose rules are written, the Main Vibe's
+//   first, then the Pocket Vibe's (Rank 3 unlocks Quirk A, Rank 5 Quirk B). --quirks=none leaves the slots empty.
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const ROOT=path.dirname(__dirname);
@@ -21,7 +23,7 @@ const DATA=['data/b3-rules.js','data/b3-status.js',
   ...fs.readdirSync(path.join(ROOT,'data')).filter(f=>/^b3-kit-.*\.js$/.test(f)).sort().map(f=>'data/'+f),
   ...fs.readdirSync(path.join(ROOT,'data')).filter(f=>/^b3-foes-.*\.js$/.test(f)).sort().map(f=>'data/'+f),
   'data/b3-lab.js'];
-const RULES=['engine/b3-core.js','engine/b3-progress.js','engine/b3-timeline.js','engine/b3-hooks.js','engine/b3-ops.js','engine/b3-resolve.js','engine/b3-foe.js'];
+const RULES=['engine/b3-core.js','engine/b3-progress.js','engine/b3-timeline.js','engine/b3-hooks.js','engine/b3-ops.js','engine/b3-custom.js','engine/b3-resolve.js','engine/b3-foe.js'];
 function load() {
   const ctx=vm.createContext({Math,JSON,Object,Array,String,Number,Error,console:{log(){},error(){}}});
   for(const f of [...DATA,...RULES]) vm.runInContext(fs.readFileSync(path.join(ROOT,f),'utf8'),ctx,{filename:f});
@@ -50,6 +52,11 @@ function play(cfg,log,opt) {
         if(!pick) throw new Error(u.name+' has nothing to do');
         const r=b3Act(F,u,pick.skill,pick.target); if(!r.ok) throw new Error('simple player picked an illegal move: '+r.why);
         beats=beats.concat(r.beats); out.moves[pick.skill]=(out.moves[pick.skill]||0)+1;
+        // A granted action (Colossal Diamond-Gold Dumpling): that family member picks a free Skill at once, before the clock moves.
+        while(F.grant&&!F.over) { const g=F.units.find(x=>x.key===F.grant.key),gp=b3Auto(F,g); if(!gp) { F.grant=null; break; }
+          const gr=b3Act(F,g,gp.skill,gp.target); if(!gr.ok) throw new Error('simple player picked an illegal free Skill: '+gr.why);
+          beats=beats.concat(gr.beats); out.moves[gp.skill]=(out.moves[gp.skill]||0)+1; out.free=(out.free||0)+1;
+          if(log) console.log(`           free: ${g.name.padEnd(8)} ${SK[gp.skill].name}`); }
         if(log) console.log(`  r${F.round} t${N.beats.find(b=>b.t==='turn').clock.toFixed(1).padStart(6)}  ${u.name.padEnd(14)} ${SK[pick.skill].name}${pick.target==='*'?'':' -> '+F.units.find(x=>x.key===pick.target).name}`);
       } else {
         const fb=b3FoeTurn(F,u); beats=beats.concat(fb);
@@ -59,8 +66,8 @@ function play(cfg,log,opt) {
       }
     }
     for(const b of beats) { if(b.t==='detonate') out.dets[b.id]=(out.dets[b.id]||0)+1; if(b.t==='ko'&&b.tgt[0]==='p') out.kos++;
-      if(b.t==='break') out.breaks++; if(b.t==='pips'&&!b.refill) out.pips+=b.n;
-      if(log&&['detonate','push','pull','ko','miss','pips','break','interrupt','intercept','summon'].includes(b.t)) console.log('        '+b.t+' '+JSON.stringify(Object.assign({},b,{bar:undefined,t:undefined,g:undefined}))); }
+      if(b.t==='break') out.breaks++; if(b.t==='pips'&&!b.refill) out.pips+=b.n; if(b.t==='ruckus') out.ruckus=b.v;
+      if(log&&['detonate','push','pull','ko','miss','pips','break','interrupt','intercept','summon','passive','grant','counter'].includes(b.t)) console.log('        '+b.t+' '+JSON.stringify(Object.assign({},b,{bar:undefined,t:undefined,g:undefined}))); }
   }
   out.result=F.over; out.rounds=F.clock/100; out.order=F.turnLog; out.hpLeft=F.party.map(p=>p.hp);
   out.hpShare=F.party.reduce((s,p)=>s+p.hp,0)/F.party.reduce((s,p)=>s+p.maxHp,0);
@@ -72,7 +79,10 @@ function cfgFor(id) {
   // Loadouts: every Vibe at --rank (the Lab's starting Rank when left out); --swap=tom,rose trades Main and Pocket for those members.
   const rank=Number(flag('rank')||G('B3_RULES').labRank),swap=(flag('swap')||'').split(',').filter(Boolean);
   cfg.loadouts={};
-  for(const m of cfg.party) { const Ld=G('b3NewLoadout')(m,rank); if(swap.includes(m)||swap.includes('all')) G('b3SetMain')(m,Ld,Ld.pocket); cfg.loadouts[m]=Ld; }
+  for(const m of cfg.party) { const Ld=G('b3NewLoadout')(m,rank); if(swap.includes(m)||swap.includes('all')) G('b3SetMain')(m,Ld,Ld.pocket);
+    if(flag('quirks')!=='none') { const pool=G('b3QuirkPool')(m,Ld),V=G('B3_VIBES'),Q=G('B3_QUIRKS');
+      [...V[Ld.main].quirks,...(Ld.pocket?V[Ld.pocket].quirks:[])].filter(q=>pool.includes(q)&&!Q[q].soon).slice(0,2).forEach((q,i)=>G('b3SetQuirk')(m,Ld,i,q)); }
+    cfg.loadouts[m]=Ld; }
   if(flag('hp')) cfg.hpPct=Number(flag('hp'));
   if(flag('foehp')) cfg.mods={foeHp:Number(flag('foehp'))};
   return cfg;
@@ -80,7 +90,7 @@ function cfgFor(id) {
 
 // ---------- Rule tests ----------
 function check() {
-  const fails=[],ok=(cond,what)=>{ if(!cond) fails.push(what); },near=(a,b,eps)=>Math.abs(a-b)<=(eps==null?1e-6:eps);
+  let checks=0; const fails=[],ok=(cond,what)=>{ checks++; if(!cond) fails.push(what); },near=(a,b,eps)=>Math.abs(a-b)<=(eps==null?1e-6:eps);
   const [next,act,foeTurn,U,RULES_,SK,ST,FOES]=['b3Next','b3Act','b3FoeTurn','b3Unit','B3_RULES','B3_SKILLS','B3_STATUS','B3_FOES'].map(G);
   // The groups of stages 1 to 3 were written against the bare unit: first Vibe only, Skill 1 and Skill 2, no Lean, no Pocket Vibe,
   // no Trait (cfg.plain in engine/b3-core.js). They keep it, so their numbers stay what they were. Stage 4's file tests real loadouts.
@@ -233,6 +243,9 @@ function check() {
   require('./b3-check-s3.js')({G,ok,near,play:playPlain,noCrit});
   // Stage 4's groups (67 on): Ranks, Vibe Points, overflow, loadouts, Leans, Portable Counters, the second Sig Vibes' first moves.
   require('./b3-check-s4.js')({G,ok,near,play,noCrit});
+  // Stage 5a's groups (82 on): the Traits, Quirks and Capstones of the four first Sig Vibes, and the general pieces they needed.
+  require('./b3-check-s5.js')({G,ok,near,play,noCrit});
+  console.log('CHECKS:',checks);
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);
 }

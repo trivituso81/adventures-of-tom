@@ -1,6 +1,7 @@
 'use strict';
-// data/b3-kit-rose.js — Battle 3 kit: Rose (spec section 3.3). Built so far: Sugar Rush's Basic, Skill 1 and Skill 2;
-// Cozy Rosie's Basic. Trait and Quirk rows marked `soon:true` have a name and a sentence but no rule yet (stage 5).
+// data/b3-kit-rose.js — Battle 3 kit: Rose (spec section 3.3). Built so far: all of Sugar Rush (stage 5a wrote its Trait, both
+// Quirks and its Grand Capstone); Cozy Rosie's Basic. Trait and Quirk rows marked `soon:true` have a name and a sentence but
+// no rule yet (stage 5b).
 // A multi-hit move's `power` is the whole move's power, shared evenly by its hits (my call: the spec gives one tier per move).
 B3_CAST.rose={id:'rose',name:'Rose',vibes:['rose_sugar','rose_cozy'],stat:{hp:1,atk:1,def:1,spd:1}};
 B3_VIBES.rose_sugar={id:'rose_sugar',owner:'rose',name:'Sugar Rush',sig:1,lean:'striker',
@@ -20,13 +21,26 @@ B3_SKILLS.giddyup_tata_launch={id:'giddyup_tata_launch',vibe:'rose_sugar',slot:'
   target:'foe',tags:[],composure:0,effects:[{op:'status',id:'giddyup',to:'nextAlly'},{op:'damage'}],line:null,anim:{kind:'default',shape:'strike'},
   desc:'Rose climbs the next family member in line: they get 20% more Attack for 2 turns. Then she cannonballs one monster for a heavy Sizzle and Clobber hit.'};
 
-B3_SOON.double_lamby_return_cart_blitz='Double-Lamby Return-Cart Blitz';
-B3_TRAITS.bouncy_physics={id:'bouncy_physics',vibe:'rose_sugar',name:'Bouncy Physics',soon:true,
+// Double-Lamby Return-Cart Blitz (Grand Capstone): six ricochet hits on random monsters, capstone power shared by the six.
+// "+10% escalating dmg/hit vs Flustered": a hit that lands on a Flustered monster is 10% stronger for every hit of the move so
+// far (the 1st +10%, the 6th +60%).
+B3_SKILLS.double_lamby_return_cart_blitz={id:'double_lamby_return_cart_blitz',vibe:'rose_sugar',slot:'cap',name:'Double-Lamby Return-Cart Blitz',pep:6,flavor:['clobber'],power:'capstone',hits:6,
+  target:'random_foes',tags:[],composure:0,effects:[{op:'damage',bonus:{if:'targetHas',ids:['flustered'],add:.10,grow:true}}],line:null,anim:{kind:'default',shape:'strike'},
+  desc:'Six Clobber ricochets onto random monsters. On a Flustered monster each one hits harder than the last: 10% more for the 1st, up to 60% more for the 6th.'};
+// Bouncy Physics: +2% Family Ruckus for every hit that lands of a move that hits more than once. The gauge is counted now; the
+// screen's bar and what the gauge buys arrive with stage 6.
+B3_TRAITS.bouncy_physics={id:'bouncy_physics',vibe:'rose_sugar',name:'Bouncy Physics',
+  on:'afterHit',carrier:'source',multiHit:true,effects:[{op:'ruckus',n:2}],
   desc:'Every hit of a move that hits more than once fills the Family Ruckus gauge 2% more.'};
-B3_QUIRKS.twin_lamb_relay={id:'twin_lamb_relay',vibe:'rose_sugar',name:'Twin-Lamb Relay',soon:true,
-  desc:'Backup Lamby tags in. On Rose’s moves that hit more than once, extras that ride on a hit go off on every hit, at 40% strength.'};
-B3_QUIRKS.its_our_longboard_now={id:'its_our_longboard_now',vibe:'rose_sugar',name:'"It’s OUR Longboard Now"',soon:true,
-  desc:'When Rose lands 3 or more hits in one turn, she gets 25% more Speed for 1 turn.'};
+// Twin-Lamb Relay: one of the lines that needs its own function (engine/b3-custom.js says exactly what it does). `n.share` is the 40%.
+B3_QUIRKS.twin_lamb_relay={id:'twin_lamb_relay',vibe:'rose_sugar',name:'Twin-Lamb Relay',
+  custom:'twinLambRelay',n:{share:.40},
+  desc:'Backup Lamby tags in. A bonus someone left on a monster for the next hit (Deedee’s Spit Shine) is not used up by the first hit of Rose’s multi-hit moves: every later hit gets it too, at 40% strength.'};
+// "It's OUR Longboard Now": 3 hits landed in one action. The Speed is on her from that moment until her next turn begins, so
+// it shortens exactly one wait: the one she is about to start (my call for "1t" on a Speed buff she earns as her turn ends).
+B3_QUIRKS.its_our_longboard_now={id:'its_our_longboard_now',vibe:'rose_sugar',name:'"It’s OUR Longboard Now"',
+  on:'actionEnd',carrier:'source',landed:3,effects:[{op:'status',id:'our_longboard',to:'self'}],
+  desc:'When Rose lands 3 or more hits in one turn, she gets 25% more Speed until her next turn: she comes back up the turn bar sooner.'};
 
 // ---- Cozy Rosie (second Sig Vibe) ----
 B3_VIBES.rose_cozy={id:'rose_cozy',owner:'rose',name:'Cozy Rosie',sig:2,lean:'support',

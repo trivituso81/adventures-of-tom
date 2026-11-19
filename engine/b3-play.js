@@ -166,8 +166,15 @@ function b3Show(b) {
   }
   else if(b.t==='hazardOn') { V.haz=V.haz.filter(h=>!(h.id===b.id&&h.side===b.side)); V.haz.push({id:b.id,side:b.side,uses:b.uses}); b3Word(B3_HAZARDS[b.id].name.toUpperCase(),B3_HAZARDS[b.id].color); }
   else if(b.t==='hazardTrip') { const h=V.haz.find(x=>x.id===b.id); if(h) h.uses=b.left; b3Pop(b.tgt,'SLIPPED!',B3_HAZARDS[b.id].color); b3Sfx('thud'); b3Say(b3Name(b.tgt)+' slips on the '+B3_HAZARDS[b.id].name.toLowerCase()+'.'); }
-  else if(b.t==='hazardEnd') { V.haz=V.haz.filter(h=>!(h.id===b.id&&h.side===b.side)); }
+  else if(b.t==='hazardEnd') { V.haz=V.haz.filter(h=>!(h.id===b.id&&h.side===b.side)); if(b.why==='strip') b3Say('The '+B3_HAZARDS[b.id].name.toLowerCase()+' is scrubbed away.'); }
   else if(b.t==='crack') { b3Pop(b.tgt,'CRACKED','#e6b08a',{sc:2}); }
+  // A Trait or Quirk went off (only the ones whose row asks to be named: engine/b3-hooks.js `show`).
+  else if(b.t==='passive') { b3Pop(b.src,b.name.toUpperCase(),'#c9e6a8',{sc:2}); b3Say(b3Name(b.src)+': '+b.name+'.'); }
+  // A granted action: the family member who got it picks a free Skill as soon as this move has played (engine/b3-ui.js b3AfterAct).
+  else if(b.t==='grant') { b3Pop(b.tgt,'FREE SKILL!','#ffe27a'); b3Sfx('combo'); b3Say(b3Name(b.tgt)+' gets a free Skill from '+b3Name(b.src)+'. It does not use up '+b3Name(b.tgt)+'’s turn.'); }
+  else if(b.t==='grantEnd') { V.bar=b.bar; b3RenderBar(); }
+  // The Family Ruckus gauge is counted by the rules from stage 5a on; the screen shows it from stage 6.
+  else if(b.t==='ruckus') { V.ruckus=b.v; }
   else if(b.t==='detonate') {
     const D=B3_DETONATIONS.find(d=>d.id===b.id),c=B3_FLAVORS[D.flavor].color;
     vu.st=vu.st.filter(id=>id!==b.prime);   // the Prime is used up
@@ -215,7 +222,7 @@ function b3PlayMove(beats,done) {
   const late=swings.length?[]:pre.filter(b=>b.t!=='act'&&!(b.t==='pep'&&b.n<0));
   for(const b of pre) if(!late.includes(b)) b3Show(b);
   const src=head.src,who=b3Name(src);
-  b3Say(who+(head.foe?' uses ':': ')+head.name+'.');
+  b3Say(who+(head.foe?' uses ':': ')+head.name+(head.free?', for free.':'.'));
   let shown=0;
   // Every time below is written at the old quick pace and stretched by B3_TEMPO (K): at(), the body's keys and poses, things in flight.
   const K=B3_TEMPO,at=(s,fn)=>b3After(s*K,fn);

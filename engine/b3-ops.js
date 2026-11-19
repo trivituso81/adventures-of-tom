@@ -11,6 +11,9 @@ const B3_OP_LIST=['damage','heal','shield','status','prime','cleanse','strip','s
 // tags (the act's tags), outExtra ({kind: amount} damage modifiers for this action only), stripped and cleansed (counts so far),
 // inter (who took a hit for whom), lost and soak (HP lost and shield soaked per target this action),
 // ledger (Composure this action has shaved per foe, paid at its end: engine/b3-resolve.js b3PayLedger), pipCap (4 for a Full Family Ruckus)}.
+// Also kept on c: landed (hits landed so far), hitNo (which hit of the move is landing), detPrime (the Prime this action set off
+// per target), reacted (what has already answered this action: "once per action"), spend (counters a bonus cashed in), relay and
+// scale (engine/b3-custom.js). Every event an op fires carries c, so a listener can be limited to once per action.
 // Who an effect lands on.
 function b3Who(F,c,to) {
   if(to==='self') return [c.actor];
@@ -21,6 +24,8 @@ function b3Who(F,c,to) {
   if(to==='lowestAlly') return b3Live(F,c.actor.side).sort((x,y)=>x.hp/x.maxHp-y.hp/y.maxHp||x.slot-y.slot).slice(0,1);
   // The next unit of the actor's own side due on the turn bar, not counting the actor.
   if(to==='nextAlly') return b3TurnOrder(F).filter(o=>o.side===c.actor.side&&o!==c.actor).slice(0,1);
+  // Whoever is due next on the turn bar, but only if that is someone else on the actor's side (Sensory Satisfying).
+  if(to==='nextIfAlly') { const n=b3TurnOrder(F)[0]; return n&&n!==c.actor&&n.side===c.actor.side?[n]:[]; }
   if(to==='target'||to==null) return c.tgt?[c.tgt]:(c.didDamage?c.hit.slice():c.targets.slice());
   throw new Error('Battle 3 effect target not built yet: '+to);
 }
@@ -31,7 +36,7 @@ function b3PutStatus(F,c,t,e) {
   // A Stun on a Boss is a push instead of a lost turn (spec 2.8).
   if(S.flags.includes('skipTurn')&&t.D&&t.D.role==='boss') { B3_OPS.push(F,Object.assign({},c,{tgt:t}),{n:B3_RULES.stunBossTicks,to:'target'}); return; }
   b3AddStatus(F,t,e.id,{src:c.actor,n:e.n,v:e.v}); c.beats.push({t:'status',tgt:t.key,id:e.id,g:c.g});
-  b3Fire(F,S.kind==='prime'?'primeApplied':'statusApplied',{src:c.actor,tgt:t,id:e.id,g:c.g},c.beats);
+  b3Fire(F,S.kind==='prime'?'primeApplied':'statusApplied',{src:c.actor,tgt:t,id:e.id,g:c.g,c},c.beats);
 }
 const B3_OPS={
   damage(F,c,e) { b3DamageOp(F,c,e); },
@@ -45,13 +50,19 @@ const B3_OPS={
   // intercept: the status goes on each chosen ally (never on the actor); its data row says how much weaker the actor takes the hit.
   intercept(F,c,e) { for(const t of b3Who(F,c,e.to)) if(b3Alive(t)&&t!==c.actor) b3PutStatus(F,c,t,e); },
   // strip: kind 'stance' drops every stance; kind 'buff' removes n buffs, the heaviest first, or all of them with all:true.
+  // kind 'hazard' clears what the other side laid on the actor's own floor (it needs no target).
   // The number removed is kept in c.stripped for a damage bonus that counts it.
   strip(F,c,e) {
+    if(e.kind==='hazard') {
+      for(const hz of F.hazards.filter(h=>h.side===c.actor.side)) { F.hazards.splice(F.hazards.indexOf(hz),1); c.stripped=(c.stripped||0)+1;
+        c.beats.push({t:'hazardEnd',id:hz.id,side:hz.side,why:'strip',g:c.g}); b3Fire(F,'buffStripped',{src:c.actor,tgt:null,id:hz.id,hazard:true,g:c.g,c},c.beats); }
+      return;
+    }
     for(const t of b3Who(F,c,e.to)) {
       let ids=Object.keys(t.st).filter(id=>B3_STATUS[id].kind===e.kind).sort((a,b)=>B3_STATUS[b].weight-B3_STATUS[a].weight);
       if(e.kind!=='stance'&&!e.all) ids=ids.slice(0,e.n||1);
       c.stripped=(c.stripped||0)+ids.length;
-      for(const id of ids) { b3EndStatus(F,t,id,'strip'); c.beats.push({t:'statusEnd',tgt:t.key,id,why:'strip',g:c.g}); b3Fire(F,'buffStripped',{src:c.actor,tgt:t,id,g:c.g},c.beats); }
+      for(const id of ids) { b3EndStatus(F,t,id,'strip'); c.beats.push({t:'statusEnd',tgt:t.key,id,why:'strip',g:c.g}); b3Fire(F,'buffStripped',{src:c.actor,tgt:t,id,g:c.g,c},c.beats); }
     }
   },
   // cleanse: takes debuffs, Primes and marks off (or only `ids`, or only a `group` such as 'mental'); n = at most that many, heaviest first.
@@ -62,33 +73,33 @@ const B3_OPS={
       if(e.n) ids=ids.slice(0,e.n);
       c.cleansed=(c.cleansed||0)+ids.length;
       for(const id of ids) { b3EndStatus(F,t,id,'cleanse'); c.beats.push({t:'statusEnd',tgt:t.key,id,why:'cleanse',g:c.g}); }
-      if(ids.length) b3Fire(F,'cleansed',{src:c.actor,tgt:t,g:c.g},c.beats); }
+      if(ids.length) b3Fire(F,'cleansed',{src:c.actor,tgt:t,g:c.g,c},c.beats); }
   },
   // heal: pct is a share of the target's Max HP (a number, or a name from B3_RULES.heal). Heals and shields grow with the giver's healGiven.
   heal(F,c,e) {
     const pct=typeof e.pct==='number'?e.pct:B3_RULES.heal[e.pct];
-    for(const t of b3Who(F,c,e.to)) { const got=b3Heal(F,t,t.maxHp*pct*b3Mult(c.actor,'healGiven')); if(!got) continue;
-      c.beats.push({t:'heal',tgt:t.key,n:got,hp:t.hp,g:c.g}); b3Fire(F,'healed',{src:c.actor,tgt:t,n:got,g:c.g},c.beats); }
+    for(const t of b3Who(F,c,e.to)) { const got=b3Heal(F,t,t.maxHp*pct*b3Mult(c.actor,'healGiven')*(c.scale||1)); if(!got) continue;
+      c.beats.push({t:'heal',tgt:t.key,n:got,hp:t.hp,g:c.g}); b3Fire(F,'healed',{src:c.actor,tgt:t,n:got,g:c.g,c},c.beats); }
   },
   shield(F,c,e) {
-    for(const t of b3Who(F,c,e.to)) { const got=b3AddShield(F,t,t.maxHp*e.pct*b3Mult(c.actor,'healGiven'),{src:c.actor,n:e.turns});
+    for(const t of b3Who(F,c,e.to)) { const got=b3AddShield(F,t,t.maxHp*e.pct*b3Mult(c.actor,'healGiven')*(c.scale||1),{src:c.actor,n:e.turns});
       c.beats.push({t:'shield',tgt:t.key,n:got,sh:b3ShieldTotal(t),g:c.g}); }
   },
   revive(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { if(!b3Revive(F,t,e.hp)) continue;
-      c.beats.push({t:'revive',src:c.actor.key,tgt:t.key,hp:t.hp,pep:t.pep,bar:b3BarSnap(F,F.acting,c.rec),g:c.g}); b3Fire(F,'revive',{src:c.actor,tgt:t,g:c.g},c.beats); }
+      c.beats.push({t:'revive',src:c.actor.key,tgt:t.key,hp:t.hp,pep:t.pep,bar:b3BarSnap(F,F.acting,c.rec),g:c.g}); b3Fire(F,'revive',{src:c.actor,tgt:t,g:c.g,c},c.beats); }
   },
   push(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { const amt=b3Push(F,t,e.n); if(!amt) continue;
-      c.beats.push({t:'push',tgt:t.key,n:amt,bar:b3BarSnap(F,F.acting,c.rec),g:c.g}); b3Fire(F,'barMoved',{src:c.actor,tgt:t,n:amt,g:c.g},c.beats); }
+      c.beats.push({t:'push',tgt:t.key,n:amt,bar:b3BarSnap(F,F.acting,c.rec),g:c.g}); b3Fire(F,'barMoved',{src:c.actor,tgt:t,n:amt,g:c.g,c},c.beats); }
   },
   pull(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { const amt=b3Pull(F,t,e.n); if(!amt) continue;
-      c.beats.push({t:'pull',tgt:t.key,n:amt,bar:b3BarSnap(F,F.acting,c.rec),g:c.g}); b3Fire(F,'barMoved',{src:c.actor,tgt:t,n:-amt,g:c.g},c.beats); }
+      c.beats.push({t:'pull',tgt:t.key,n:amt,bar:b3BarSnap(F,F.acting,c.rec),g:c.g}); b3Fire(F,'barMoved',{src:c.actor,tgt:t,n:-amt,g:c.g,c},c.beats); }
   },
   place(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { const amt=b3Place(F,t);
-      c.beats.push({t:'pull',tgt:t.key,n:amt,placed:true,bar:b3BarSnap(F,F.acting,c.rec),g:c.g}); b3Fire(F,'barMoved',{src:c.actor,tgt:t,n:-amt,g:c.g},c.beats); }
+      c.beats.push({t:'pull',tgt:t.key,n:amt,placed:true,bar:b3BarSnap(F,F.acting,c.rec),g:c.g}); b3Fire(F,'barMoved',{src:c.actor,tgt:t,n:-amt,g:c.g,c},c.beats); }
   },
   pep(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { if(t.pep==null||!b3Alive(t)) continue;
@@ -123,13 +134,28 @@ const B3_OPS={
       if(e.once) t.cracked[e.once]=true;
       t.crack=Math.min(B3_RULES.caps.crack,t.crack+e.n); c.beats.push({t:'crack',tgt:t.key,v:t.crack,g:c.g}); }
   },
+  // taunt: a status that carries the `taunt` flag: every single-target enemy attack must aim at its carrier (spec 2.8 "locks aggro").
+  taunt(F,c,e) { for(const t of b3Who(F,c,e.to||'self')) if(b3Alive(t)) b3PutStatus(F,c,t,e); },
+  // ruckus: adds to the Family Ruckus gauge (0 to 100, shared by the party). The gauge's own gains, the screen's bar and what
+  // it buys arrive with stage 6; until then only Traits and Quirks that print a gain reach it.
+  ruckus(F,c,e) { const was=F.ruckus; F.ruckus=Math.max(0,Math.min(B3_RULES.ruckus.full,was+e.n)); if(F.ruckus!==was) c.beats.push({t:'ruckus',n:F.ruckus-was,v:F.ruckus,g:c.g}); },
+  // grant: the chosen family member takes one Skill at once, out of turn (spec 2.2 "Granted actions": one per unit per round).
+  //   maxPep  only Skills that cost this much or less (never a Basic, never a Grand Capstone);  free  it costs them nothing.
+  // The rules only open the door (F.grant). Whoever drives the fight (the screen, the simulator) asks that member for their
+  // pick and calls b3Act for them before the clock moves on; b3Act then leaves their wait and their statuses' turn counts alone.
+  // A door nobody used is closed by b3Next.
+  grant(F,c,e) {
+    const t=b3Who(F,c,e.to)[0]; if(!t||!b3Alive(t)||t.granted>=B3_RULES.grantedPerRound||!b3GrantSkills(F,t,e).length) return;
+    t.granted++; F.grant={key:t.key,by:c.actor.key,maxPep:e.maxPep,free:!!e.free};
+    c.beats.push({t:'grant',src:c.actor.key,tgt:t.key,g:c.g});
+  },
   // composure: a printed Composure number. It goes into the action's ledger, which is paid when the action ends (the 3-pip cap, the Break).
   composure(F,c,e) { for(const t of b3Who(F,c,e.to)) b3Pips(c,t,e.n); },
   // splash: a share of the hit that set it off, as plain damage of one flavor (Short Circuit!).
   splash(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)) continue;
       const pv=t.peeves.includes(e.flavor),rs=t.resists.includes(e.flavor);
-      const dmg=Math.max(1,Math.round((c.partDmg||0)*e.share*(pv?B3_RULES.peeve:1)*(rs?B3_RULES.resist:1)*b3TakenMult(t)));
+      const dmg=Math.max(1,Math.round((c.partDmg||0)*e.share*(c.scale||1)*(pv?B3_RULES.peeve:1)*(rs?B3_RULES.resist:1)*b3TakenMult(t)));
       b3Hurt(F,c,t,dmg,{src:c.actor.key,flavor:e.flavor,peeve:pv,resist:rs,splash:true});
       if(pv&&c.actor.side==='party') b3Pips(c,t,0,true); }
   }
@@ -138,8 +164,12 @@ const B3_OPS={
 //   cleansed  a cleanse in this action took at least one thing off
 //   stripped  a strip in this action took at least one buff or stance off
 const B3_EFFECT_WHEN=['cleansed','stripped'];
+// c.scale below 1 (a rider held for the later hits of a multi-hit move, engine/b3-custom.js): only the ops whose size can be
+// cut run, at that share; an effect that cannot be split (1 Pep, a status) does not repeat.
+const B3_SCALABLE=['damage','splash','heal','shield'];
 function b3RunEffects(F,c,effects) {
   for(const e of (effects||[])) { const fn=B3_OPS[e.op]; if(!fn) throw new Error('Battle 3 op not built yet: '+e.op);
+    if(c.scale!=null&&c.scale<1&&!B3_SCALABLE.includes(e.op)) continue;
     if(e.when) { if(!B3_EFFECT_WHEN.includes(e.when)) throw new Error('Battle 3 effect condition not built yet: '+e.when); if(!(c[e.when]>0)) continue; }
     fn(F,c,e); }
 }

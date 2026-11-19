@@ -1,7 +1,9 @@
 'use strict';
-// data/b3-kit-tom.js — Battle 3 kit: Tom (spec section 3.1). Built so far: Frequent Flier's Basic, Skill 1 and Skill 2;
-// Gamer Geek's Basic and Skill 1. Every Trait and Quirk has its name and sentence for the Vibes screen; `soon:true` marks one
-// whose rule is not written yet (stage 5 writes `on` and `effects` and takes the flag off).
+// data/b3-kit-tom.js — Battle 3 kit: Tom (spec section 3.1). Built so far: all of Frequent Flier (stage 5a wrote its Trait, both
+// Quirks and its Grand Capstone); Gamer Geek's Basic and Skill 1. Every Trait and Quirk has its name and sentence for the Vibes
+// screen; `soon:true` marks one whose rule is not written yet (stage 5b writes Gamer Geek's and takes the flag off).
+// A working Trait or Quirk row is one listener (`on` plus the listener fields of engine/b3-hooks.js and `effects`), several
+// (`listen:[...]`), `mods` (engine/b3-core.js b3Mods: a mod may carry `when` and `per`), a `counter` of its own, or any mix.
 // The Vibe row names every Skill, Trait and Quirk from the spec; a move exists in a fight once its own row is in B3_SKILLS.
 // A cast row: vibes (this member's Vibe ids, in the order the Vibes screen lists the ones not equipped), stat (multipliers on the level table).
 // A Vibe row: owner, name, sig (1 = the Main Vibe on joining, 2 = the Pocket Vibe on joining, 0 = neither), lean (guard, striker,
@@ -24,13 +26,33 @@ B3_SKILLS.suite_door_slide={id:'suite_door_slide',vibe:'tom_flier',slot:'s2',nam
   target:'adjacent_allies',tags:[],composure:0,effects:[{op:'intercept',id:'suite_door'}],line:null,anim:{kind:'default',shape:'give'},
   desc:'For 2 turns, a hit aimed only at the family next to Tom lands on Tom instead, 35% weaker. Each one he takes gives him 1 Pep.'};
 
-B3_SOON.tarmac_porsche_transfer='Tarmac Porsche Transfer';
-B3_TRAITS.priority_boarding={id:'priority_boarding',vibe:'tom_flier',name:'Priority Boarding',soon:true,
-  desc:'Tom starts every fight in Guard Stance for 1 turn. When he takes a hit for someone under half HP, it lands 20% weaker.'};
-B3_QUIRKS.upgrade_certificate={id:'upgrade_certificate',vibe:'tom_flier',name:'Upgrade Certificate',soon:true,
-  desc:'Each hit Tom takes for someone stamps 1 Certificate, 3 at most. His next Clobber Skill cashes them in for 20% more damage each.'};
-B3_QUIRKS.million_miler_status={id:'million_miler_status',vibe:'tom_flier',name:'Million-Miler Status',soon:true,
-  desc:'When Tom counters or takes a hit for someone, 1 more Composure pip comes off and Tom moves 10 ticks up the turn bar.'};
+// Tarmac Porsche Transfer (Grand Capstone): the spec prints "heavy AoE" (heavy tier at the all-monsters share), "strips 1 buff"
+// and "locks aggro". My calls: 1 buff comes off each monster it hits, and the lock is a taunt that lasts 2 turns.
+B3_SKILLS.tarmac_porsche_transfer={id:'tarmac_porsche_transfer',vibe:'tom_flier',slot:'cap',name:'Tarmac Porsche Transfer',pep:5,flavor:['racket'],power:'heavy',hits:1,
+  target:'all_foes',tags:[],composure:0,effects:[{op:'damage'},{op:'strip',kind:'buff',n:1,to:'target'},{op:'taunt',id:'high_beams',to:'self'}],line:null,anim:{kind:'default',shape:'cast'},
+  desc:'Heavy Racket hit on every monster. Each one it hits loses 1 buff. For 2 turns, any attack aimed at one family member has to aim at Tom.'};
+// Priority Boarding: the Guard Stance is put on as the fight begins and is counted like one Tom put on during his own turn,
+// so it lasts until his second turn ends and covers the monsters' first attacks (my call: counted from the fight's start it
+// would end before most monsters have moved). The 20% is its own kind of reduction: it adds to Suite Door Slide's 35%.
+B3_TRAITS.priority_boarding={id:'priority_boarding',vibe:'tom_flier',name:'Priority Boarding',
+  on:'battleStart',effects:[{op:'status',id:'guard_stance',n:2,to:'self'}],
+  mods:[{stat:'reduce',kind:'priorityBoarding',v:.20,when:{steppingIn:.5}}],
+  desc:'Tom starts every fight in Guard Stance, until his second turn ends. When he takes a hit for someone at half HP or less, it lands 20% weaker.'};
+// Upgrade Certificate: one stamp per enemy action Tom steps in for. "Next Clobber skill" is the next Clobber hit of his that is
+// not a Basic: a Clobber Skill on his own turn (Controller Toss), or a hip-check from Zone One Blockade (my call: that hit is
+// the Clobber Skill's own). Every hit of that action gets the bonus, then the Certificates are gone.
+B3_QUIRKS.upgrade_certificate={id:'upgrade_certificate',vibe:'tom_flier',name:'Upgrade Certificate',
+  on:'intercept',carrier:'target',show:true,effects:[{op:'counter',id:'certificate',n:1,max:3,to:'self'}],
+  counter:{id:'certificate',name:'Certificates',max:3},
+  mods:[{stat:'out',kind:'certificate',v:.20,per:{counter:'certificate',spend:true},when:{flavor:'clobber',notBasic:true}}],
+  desc:'Each time Tom takes a hit for someone he stamps 1 Certificate, 3 at most. His next Clobber Skill, or his next Blockade hip-check, cashes them in for 20% more damage each.'};
+// Million-Miler Status. A counterattack is an answer Tom gives when hit (Zone One Blockade's hip-check): the pip is added to
+// that answer. Stepping in for someone has no answer of its own, so the Quirk gives one: 1 pip off the attacker, as Tom's own
+// small action after the monster's (its own 3-pip cap, like any answer). Each also pulls Tom 10 ticks (pulls halve inside a round).
+B3_QUIRKS.million_miler_status={id:'million_miler_status',vibe:'tom_flier',name:'Million-Miler Status',
+  listen:[{on:'counter',carrier:'source',show:true,effects:[{op:'composure',n:1,to:'target'},{op:'pull',n:10,to:'self'}]},
+    {on:'intercept',carrier:'target',react:true,quiet:true,effects:[{op:'composure',n:1,to:'attacker'},{op:'pull',n:10,to:'self'}]}],
+  desc:'When Tom counters or takes a hit for someone, 1 more Composure pip comes off the monster and Tom moves 10 ticks up the turn bar.'};
 
 // ---- Gamer Geek (second Sig Vibe) ----
 B3_VIBES.tom_gamer={id:'tom_gamer',owner:'tom',name:'Gamer Geek',sig:2,lean:'striker',

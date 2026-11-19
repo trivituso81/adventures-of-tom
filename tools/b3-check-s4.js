@@ -32,7 +32,10 @@ module.exports=function(T) {
     ok(open(4)==='trait,basic,skill:s1,skill:s2,quirk:a,cap','Rank 4 adds the Grand Capstone: '+open(4));
     ok(open(5)==='trait,basic,skill:s1,skill:s2,quirk:a,cap,quirk:b','Rank 5 adds Quirk B: '+open(5));
     ok(J([1,2,3,4,5].map(r=>subtitle(V,r)))===J(['Sky Club Applicant','Sky Club Applicant','Diamond Medallion','Diamond Medallion','Delta 360 VIP']),'Subtitles change at Ranks 3 and 5');
-    const cap=ladder(V,5).find(x=>x.kind==='cap'); ok(cap&&!cap.built&&cap.name==='Tarmac Porsche Transfer','a Skill with no row yet shows its name from B3_SOON and is not built: '+J(cap)); }
+    // A Skill that is still only a name (stage 5a wrote Frequent Flier's Capstone, so this looks at Gamer Geek's until 5b writes it; then at none).
+    const soonId=Object.keys(SOON).find(k=>VIBES.tom_gamer.skills.includes(k)),row=soonId&&ladder(VIBES.tom_gamer,5).find(x=>x.id===soonId);
+    if(soonId) ok(row&&!row.built&&row.name===SOON[soonId],'a Skill with no row yet shows its name from B3_SOON and is not built: '+J(row));
+    const cap=ladder(V,5).find(x=>x.kind==='cap'); ok(cap&&cap.built&&cap.name==='Tarmac Porsche Transfer','a Skill with its own row is built: '+J(cap)); }
 
   // 69. A fresh loadout: the two Sig Vibes, no Quirks, 0 VP, the row by Lean
   for(const [id,m,p,row] of [['tom','tom_flier','tom_gamer','front'],['grace','grace_squishy','grace_craft','front'],['rose','rose_sugar','rose_cozy','front'],['deedee','deedee_neat','deedee_nurse','front']]) {
@@ -120,11 +123,13 @@ module.exports=function(T) {
   // The Trait comes with the Main Vibe only; a Quirk comes with its slot whatever Vibe it is from; one whose rule is not written is left off.
   { const L=newL('tom',5); setPocket('tom',L,'t_v3'); setQuirk('tom',L,0,'t_v3_qa'); setQuirk('tom',L,1,'t_v3_qb');
     const F=NF({party:LAB,level:2,formation:'mudling',seed:5,loadouts:{tom:L}}),t=F.party[1];
-    ok(!t.st.guard_stance&&!t.passives.some(P=>P.id==='t_v3_trait'),'a Pocket Vibe does not bring its Trait');
+    ok(!t.passives.some(P=>P.id==='t_v3_trait')&&t.trait==='priority_boarding','a Pocket Vibe does not bring its Trait');
     ok(t.passives.some(P=>P.id==='t_v3_qa')&&!t.passives.some(P=>P.id==='t_v3_qb'),'an equipped Quirk listens; one marked soon does not: '+J(t.passives.map(P=>P.id)));
     setMain('tom',L,'t_v3'); const F2=NF({party:LAB,level:2,formation:'mudling',seed:5,loadouts:{tom:L}}); next(F2);
     ok(!!F2.party[1].st.guard_stance,'as Main Vibe its Trait runs (here: Guard Stance as the fight begins)');
-    ok(!NF({party:LAB,level:2,formation:'mudling',seed:5,loadouts:book(5)}).party.some(p=>p.passives.length),'the real Traits and Quirks are not written yet (stage 5), so nobody carries a passive'); }
+    // Stage 5a wrote the four first Sig Vibes' Traits: with no Quirk in a slot, each member carries exactly their Main Vibe's Trait.
+    const ids=NF({party:LAB,level:2,formation:'mudling',seed:5,loadouts:book(5)}).party.map(p=>p.passives.map(P=>P.id).join('+')).join();
+    ok(ids==='sensory_satisfying,priority_boarding,bouncy_physics,spotless_floor','with no Quirk equipped everyone carries their Main Vibe\'s Trait and nothing else: '+ids); }
 
   // 78. Stat Leans: the Main Vibe's only, and a kind of their own (they multiply with other bonuses)
   noCrit(()=>{ const F=NF({party:LAB,level:2,formation:'mudling',seed:5,loadouts:book(2)}),[g,t,r,d]=F.party;

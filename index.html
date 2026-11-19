@@ -804,6 +804,9 @@ html.landscape #battle.v2 .b3-pep i{width:2px}
 html.landscape #battle.v2 .b3-chips{gap:1px 2px;margin-top:1px}html.landscape #battle.v2 .b3-chips .b2-st{font-size:6.5px;padding:0 2px}
 /* Battle 3 (engine/b3-ui.js): a Skill that comes from the Pocket Vibe, and a Portable Counter's number on its owner's portrait. */
 .b2-el.b3-pk{color:#8dc4e6;border:1px solid #8dc4e688;border-radius:3px;padding:0 3px}
+/* Battle 3: the heading over the SKILLS list while someone picks a free Skill (a granted action). */
+.b3-free{font-size:10.5px;font-weight:900;letter-spacing:.6px;color:#ffe27a;padding:0 2px}
+html.landscape #battle.v2 .b3-free{font-size:8px}
 .b3-rowtag{margin-left:5px;padding:0 .35em;border:1px solid #8dc4e688;border-radius:3px;font-style:normal;font-size:.6em;font-weight:900;letter-spacing:.05em;color:#8dc4e6;vertical-align:middle}
 .b3-ctr{position:absolute;right:-3px;bottom:-3px;min-width:14px;height:14px;padding:0 2px;border-radius:7px;background:var(--gold);color:#1a1e26;font-size:9px;font-weight:900;line-height:14px;text-align:center;box-shadow:0 0 0 1px var(--edge-ink)}
 /* Battle 3 Vibes screen (engine/b3-menu.js): one layer over the pause menu or the title screen. Portrait is one column of Vibe cards; a wide screen puts them side by side. */
@@ -1398,6 +1401,7 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-tbp img,html.landscape:not(
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-back{padding:8px 11px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-empty{font-size:16px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-info{gap:8px}
+html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-free{font-size:17px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf{padding:8px 11px;border-radius:7px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf-h span{font-size:24px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf-h em{font-size:16px}
 html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf-t{gap:8px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf-t b{font-size:20px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf-t i{font-size:16px}html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-inf-t .b2-st{font-size:13px;padding:1px 6px}
@@ -1894,6 +1898,7 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/b3-timeline.js?v=b3s3"></script>
 <script src="engine/b3-hooks.js?v=b3s3"></script>
 <script src="engine/b3-ops.js?v=b3s4"></script>
+<script src="engine/b3-custom.js?v=b3s5a"></script>
 <script src="engine/b3-resolve.js?v=b3s4"></script>
 <script src="engine/b3-foe.js?v=b3s3"></script>
 <script src="engine/b3-play.js?v=b3s4"></script>

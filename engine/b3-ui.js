@@ -7,6 +7,9 @@
 // the same layout classes (.b2-ribbon, .b2-ui, .b2-party, .b2-cmd...), so portrait, landscape and tablet sizes come for free.
 //
 // BASIC and SKILLS work. RUCKUS (stage 6) and BAG are greyed out with the reason.
+// A granted action (Grace's Colossal Diamond-Gold Dumpling; the rules keep it in F.grant): when the move that granted it has
+// played, the SKILLS list opens for the family member who got it, holding only the Skills they may take, each marked FREE.
+// There is no cross and no way back out of that list: they pick one, it plays, and the turn order carries on where it was.
 // Tapping a family member's card or a monster while the cross or the Skill list is up opens that unit's full list (B3.ui 'info'):
 // every status with how long it has left and what it does, shields, and what lies on its side's floor (spec 2.8, the screen rule).
 // For an Elite or a Boss the list starts with its Composure pips and the act it is winding up; a Marked family member's list says who Marked them.
@@ -69,13 +72,28 @@ function b3Flow() {
     b3Open('cross');
   });
 }
+// The family member a granted action is waiting for, or null.
+const b3Granted=()=>B3.F&&B3.F.grant?b3Unit(B3.F,B3.F.grant.key):null;
+// A move has finished playing. If it granted someone a free Skill, they pick it now; otherwise the clock moves on.
+function b3AfterAct() {
+  if(!B3.active) return;
+  B3.actor=null;
+  if(b3Over()) { b3Finish(); return; }
+  const g=b3Granted();
+  if(g) {
+    B3.actor=g;
+    if(B3.cfg.auto) { const p=b3Auto(B3.F,g); if(p&&b3Commit(p.skill,p.target)) return; B3.F.grant=null; B3.actor=null; }
+    else { b3Sfx('select'); b3Open('skills',0); return; }
+  }
+  b3Flow();
+}
 // The player's pick goes to the rules; the whole result comes back as beats and is played.
 function b3Commit(skillId,optKey) {
   const u=B3.actor,r=b3Act(B3.F,u,skillId,optKey);
   if(!r.ok) { b3Sfx('nope'); b3Say(r.why); return false; }
   B3.ui='busy'; battle.state='busy'; B3.pending=null; B3.opts=[];
   b3Render();
-  b3Play(r.beats,()=>{ if(!B3.active) return; B3.actor=null; if(b3Over()) b3Finish(); else b3Flow(); });
+  b3Play(r.beats,b3AfterAct);
   return true;
 }
 function b3Finish() {
@@ -94,20 +112,23 @@ function b3Open(mode,sel) {
   b3Render();
 }
 // The SKILLS list: the Main Vibe's Skills, then the Pocket Vibe's (tagged POCKET), then Pick-Me-Up while someone is knocked out.
-const b3SkillRows=u=>b3Skills(B3.F,u).slice(1);
-// The Base Recovery of what the cursor is on, for the ghost on the turn bar.
+// While a granted action waits for this member the list is only what the grant allows (b3Skills leaves the Basic out then).
+const b3SkillRows=u=>b3Granted()===u?b3Skills(B3.F,u):b3Skills(B3.F,u).slice(1);
+// The Base Recovery of what the cursor is on, for the ghost on the turn bar (b3MoveRec: a Quirk can shorten some moves).
 function b3PreviewRecovery() {
   const u=B3.actor; if(!u||battle.state!=='command') return null;
-  if(B3.ui==='skills') { const S=b3SkillRows(u)[B3.sel]; return S?B3_RULES.recovery[S.slot]:B3_RULES.recovery.basic; }
-  if(B3.ui==='target'&&B3.pending) return B3_RULES.recovery[B3.pending.slot];
-  return B3_RULES.recovery.basic;
+  if(B3.ui==='skills') { const S=b3SkillRows(u)[B3.sel]; return S?b3MoveRec(B3.F,u,S):B3_RULES.recovery.basic; }
+  if(B3.ui==='target'&&B3.pending) return b3MoveRec(B3.F,u,B3.pending);
+  return b3MoveRec(B3.F,u,B3_SKILLS[u.basic]);
 }
 
 // ---------- The turn bar: the next 8 turns, a divider where a round ends, a ghost where the actor will land ----------
 function b3RenderBar(moved) {
   const box=$('b3-bar'); if(!box||!B3.F) return;
   let list;
-  if(B3.active&&battle.state==='command'&&B3.actor&&B3.ui!=='done') list=b3Forecast(B3.F,9,{actor:B3.actor,recovery:b3PreviewRecovery(),ghost:true}).map(e=>({k:e.u.key,now:e.now,div:e.div,ghost:e.ghost}));
+  // A free Skill does not move anyone: the bar is the plain forecast, with the family member who is picking shown first.
+  if(B3.active&&battle.state==='command'&&B3.actor&&B3.ui!=='done'&&b3Granted()===B3.actor) list=[{k:B3.actor.key,now:true,div:0,ghost:false},...b3Forecast(B3.F,8,{}).map(e=>({k:e.u.key,now:false,div:e.div,ghost:false}))];
+  else if(B3.active&&battle.state==='command'&&B3.actor&&B3.ui!=='done') list=b3Forecast(B3.F,9,{actor:B3.actor,recovery:b3PreviewRecovery(),ghost:true}).map(e=>({k:e.u.key,now:e.now,div:e.div,ghost:e.ghost}));
   else list=B3.view.bar||[];
   // Remember where each face was, so a face that changes place slides there (a push visibly moves the monster back).
   const was={}; box.querySelectorAll('.b2-tk[data-k]').forEach(el=>{ was[el.dataset.k]=[el.offsetLeft,el.offsetTop]; });
@@ -174,9 +195,9 @@ function b3RenderCmd() {
     return;
   }
   if(B3.ui==='skills') {
-    const rows=b3SkillRows(u);
-    box.innerHTML='<div class="b2-list">'+rows.map((S,i)=>{ const can=b3CanUse(B3.F,u,S),c=b3Cost(B3.F,u,S);
-      return '<button type="button" class="b2-btn'+(i===B3.sel?' sel':'')+(can.ok?'':' no')+'" data-i="'+i+'"><div class="b2-top"><span class="b2-sn">'+b2Esc(S.name)+'</span><i class="b2-cost">'+c+' PEP</i></div><em class="b2-els">'+b3FlavorChips(S)+(u.pocketSkills.includes(S.id)?'<span class="b2-el b3-pk" title="From the Pocket Vibe">POCKET</span>':'')+'</em></button>'; }).join('')+back+'</div>';
+    const rows=b3SkillRows(u),free=b3Granted()===u;
+    box.innerHTML='<div class="b2-list">'+(free?'<div class="b3-free">FREE SKILL FOR '+b2Esc(u.name.toUpperCase())+'</div>':'')+rows.map((S,i)=>{ const can=b3CanUse(B3.F,u,S),c=b3Cost(B3.F,u,S);
+      return '<button type="button" class="b2-btn'+(i===B3.sel?' sel':'')+(can.ok?'':' no')+'" data-i="'+i+'"><div class="b2-top"><span class="b2-sn">'+b2Esc(S.name)+'</span><i class="b2-cost">'+(free&&!c?'FREE':c+' PEP')+'</i></div><em class="b2-els">'+b3FlavorChips(S)+(u.pocketSkills.includes(S.id)?'<span class="b2-el b3-pk" title="From the Pocket Vibe">POCKET</span>':'')+'</em></button>'; }).join('')+(free?'':back)+'</div>';
   } else if(B3.ui==='target') {
     box.innerHTML='<div class="b2-list">'+B3.opts.map((o,i)=>{ const t1=o.units.length===1?o.units[0]:null,v=t1?B3.view.u[t1.key]:null;
       const sub=o.no?o.no:t1?(v.ko?'Knocked out':'HP '+v.hp+'/'+v.maxHp+(v.maxPips?' · '+v.pips+' of '+v.maxPips+' pips':'')+b3ViewIcons(t1.key).map(id=>' · '+B3_STATUS[id].name).join('')):o.units.length+' targets';
@@ -188,7 +209,8 @@ function b3Info() {
   const u=B3.actor; if(battle.state!=='command'||!u||B3.ui==='done') return;
   if(B3.ui==='cross') b3Say(u.name+'’s turn. ▲ BASIC is free and gives 2 Pep. ▶ SKILLS cost Pep. Tap anyone to see what is on them.');
   else if(B3.ui==='info') b3Say('What is on '+b3Unit(B3.F,B3.infoKey).name+'. Tap another family member or monster to see theirs.');
-  else if(B3.ui==='skills') { const S=b3SkillRows(u)[B3.sel]; if(S) { const can=b3CanUse(B3.F,u,S); b3Say(can.ok?S.desc:can.why); } }
+  else if(B3.ui==='skills') { const S=b3SkillRows(u)[B3.sel]; if(S) { const can=b3CanUse(B3.F,u,S),g=b3Granted()===u?b3Unit(B3.F,B3.F.grant.by):null;
+    b3Say((g?'Free from '+g.name+'. ':'')+(can.ok?S.desc:can.why)); } }
   else if(B3.ui==='target'&&B3.pending) { const o=B3.opts[B3.sel]; b3Say(B3.pending.name+': '+(o&&o.no?o.no:B3.pending.desc)); }
 }
 function b3Render() {
@@ -233,7 +255,7 @@ function b3Pick(i) {
 function b3Back() {
   if(battle.state!=='command'||B3.ui==='done') return;
   if(B3.ui==='info') { b3Sfx('move'); b3Open(B3.infoFrom==='skills'?'skills':'cross',B3.infoSel||0); }
-  else if(B3.ui==='skills') { b3Sfx('move'); b3Open('cross'); }
+  else if(B3.ui==='skills') { if(b3Granted()===B3.actor) { b3Sfx('nope'); b3Say('Pick a free Skill for '+B3.actor.name+'.'); return; } b3Sfx('move'); b3Open('cross'); }
   else if(B3.ui==='target') { b3Sfx('move'); const p=B3.prevUi==='skills'?'skills':'cross'; B3.pending=null; B3.opts=[]; b3Open(p,B3.prevSel||0); }
 }
 function b3Move(d) {

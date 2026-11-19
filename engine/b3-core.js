@@ -26,7 +26,8 @@ function b3LevelStats(level) {
 function b3BlankUnit(key,side,slot) {
   return {key,side,slot,st:{},wait:0,pri:0,pushes:0,pulls:0,placed:false,granted:0,pepRound:0,turns:0,ko:false,stripped:{},peeves:[],resists:[],
     shields:[],counters:{},counterInfo:{},crack:0,cracked:{},passives:[],used:{},
-    mods:[],          // mods the unit carries for the whole fight (its Main Vibe's Lean), same shape as a status's mods
+    mods:[],          // mods the unit carries for the whole fight (its Main Vibe's Lean, its Trait's and Quirks'), same shape as a status's mods
+    custom:{},        // the one-off rules its Quirks switch on, by name, with their numbers (engine/b3-custom.js)
     hitSince:false,   // took or blocked a hit since its last turn ended (Controller Toss)
     // Composure (spec 2.7): pips left and at the start; pipLock = cannot lose pips (from a Break until its next turn ends);
     // broken = Flustered and waiting for its next turn; flusterTurn = that turn is running; flusterMove = fall back when this turn ends.
@@ -45,9 +46,11 @@ function b3PartyUnit(F,id,level,slot) {
   if(cfg.plain) { const V=B3_VIBES[C.vibes[0]]; K={main:V.id,pocket:null,basic:V.basic,skills:V.skills.slice(0,2).filter(s=>B3_SKILLS[s]),pocketSkills:[],trait:null,quirks:[],lean:null,row:B3_RULES.rowByLean[V.lean]||'front',counters:[],rank:2}; }
   else K=b3Kit(id,b3FixLoadout(id,(cfg.loadouts&&cfg.loadouts[id])||b3NewLoadout(id,cfg.rank)));
   Object.assign(u,{id,name:C.name,level,row:(cfg.rows&&cfg.rows[id])||K.row,vibe:K.main,pocket:K.pocket,lean:K.lean,rank:K.rank,basic:K.basic,
-    skills:K.skills.slice(),pocketSkills:K.pocketSkills.slice(),quirks:K.quirks.slice(),pep:B3_RULES.pep.start});
+    skills:K.skills.slice(),pocketSkills:K.pocketSkills.slice(),trait:K.trait,quirks:K.quirks.slice(),pep:B3_RULES.pep.start});
   // Traits and Quirks listen on the hook bus (engine/b3-hooks.js), and so does the rule that builds a Portable Counter.
-  u.passives=cfg.plain?[]:b3KitPassives(K);
+  // A Trait or Quirk may also carry mods (some with a `when`), a counter of its own, and the name of a one-off rule.
+  if(!cfg.plain) { const KP=b3KitPassives(K); u.passives=KP.listeners; u.mods.push(...KP.mods); Object.assign(u.custom,KP.custom);
+    for(const Ct of KP.counters) u.counterInfo[Ct.id]={name:Ct.name,max:Ct.max}; }
   for(const Ct of K.counters) u.counterInfo[Ct.id]={name:Ct.name,max:Ct.max};
   const lean=(K.lean&&B3_RULES.leans[K.lean])||{};
   for(const k in lean) if(k!=='hp') u.mods.push({stat:k,kind:'lean',v:lean[k]});
@@ -106,6 +109,8 @@ const b3Other=side=>side==='party'?'foe':'party';
 function b3NewFight(cfg) {
   const seed=cfg.seed==null?Math.floor(Math.random()*2147483647):cfg.seed;
   const F={cfg,seed,rng:seed|0,clock:0,round:1,over:null,acting:null,priSeq:0,stamp:1,turnLog:[],hazards:[],reactions:[],reactSeq:0,opening:[],
+    ruckus:Math.max(0,Math.min(B3_RULES.ruckus.full,cfg.ruckus||0)),   // the Family Ruckus gauge (spec 2.10); cfg.ruckus is what the party walked in with
+    grant:null,                                                       // a granted action waiting to be taken (the `grant` op)
     mods:Object.assign({foeHp:1,taken:1,foeSpeed:1},cfg.mods||{})};
   F.party=cfg.party.slice(0,4).map((id,i)=>b3PartyUnit(F,id,(cfg.levels&&cfg.levels[id])||cfg.level||1,i));
   if(F.party.length&&!F.party.some(p=>p.row!=='back')) F.party[0].row='front';   // at least 1 stands in Front (spec 2.1)
@@ -137,25 +142,56 @@ function b3OverBeats(F,beats,g) {
 
 // ---------- Stat maths: same kind adds, different kinds multiply (spec 2.4) ----------
 // Every mod a unit carries for one stat, added up per kind: {kind: sum}.
-function b3Mods(u,stat) {
+// A mod may carry two more fields (a status's mods and a Trait's or Quirk's alike):
+//   when  conditions that must all hold for it to count (B3_MOD_WHEN). They are judged against `ctx`, which says what the
+//         number is being worked out for; with no ctx a mod that has a `when` does not count.
+//           ctx for a hit: {F, c (the action), a (attacker), t (target), fl (the flavor part landing)}
+//           ctx for the Recovery of the move a unit is using (stat 'moveRec'): {skill}
+//         flavor: the hit's flavor is this one.  notBasic: the hit does not come from the attacker's Basic (an answer counts).
+//         by:'otherAlly': the attacker is a family member other than the one who put the status on.
+//         steppingIn:X: the holder is taking this hit for someone at X of their Max HP or less.
+//         allySkill: the move is a Skill aimed at a family member.
+//   per   {counter, spend}: `v` is counted once for each point of that counter the holder has built. spend:true empties the
+//         counter when the action it counted in ends (engine/b3-resolve.js b3SpendCounters).
+const B3_MOD_WHEN=['flavor','notBasic','by','steppingIn','allySkill'];
+function b3ModWhen(u,m,ctx,putBy) {
+  const W=m.when,c=ctx.c;
+  for(const k in W) {
+    if(k==='flavor') { if(ctx.fl!==W.flavor) return false; }
+    else if(k==='notBasic') { if(!ctx.a||(c&&c.skill&&c.skill.slot==='basic')) return false; }
+    else if(k==='by') { if(!(W.by==='otherAlly'&&ctx.a&&ctx.a.side==='party'&&ctx.a.key!==putBy)) return false; }
+    else if(k==='steppingIn') { const I=c&&c.inter&&c.inter[u.key],p=I&&b3Unit(c.F,I.forKey); if(!p||!(p.hp<=p.maxHp*W.steppingIn)) return false; }
+    else if(k==='allySkill') { const S=ctx.skill; if(!S||S.slot==='basic'||!['ally','family','ko_ally','adjacent_allies'].includes(S.target)) return false; }
+    else throw new Error('Battle 3 mod condition not built yet: '+k);
+  }
+  return true;
+}
+function b3Mods(u,stat,ctx) {
   const out={};
-  for(const id in u.st) for(const m of B3_STATUS[id].mods) if(m.stat===stat) out[m.kind]=(out[m.kind]||0)+m.v;
-  for(const m of u.mods) if(m.stat===stat) out[m.kind]=(out[m.kind]||0)+m.v;
+  const add=(m,stId)=>{ if(m.stat!==stat) return; let v=m.v;
+    if(m.when) { if(!ctx||!b3ModWhen(u,m,ctx,stId?u.st[stId].src:null)) return; if(stId) v*=b3RelayMod(ctx.c,u,stId); }
+    if(m.per) { v*=u.counters[m.per.counter]||0; if(m.per.spend&&v&&ctx&&ctx.c) (ctx.c.spend=ctx.c.spend||{})[u.key+':'+m.per.counter]=true; }
+    out[m.kind]=(out[m.kind]||0)+v; };
+  for(const id in u.st) for(const m of B3_STATUS[id].mods) add(m,id);
+  for(const m of u.mods) add(m,null);
   return out;
 }
-const b3Sum=(u,stat)=>{ const M=b3Mods(u,stat); let s=0; for(const k in M) s+=M[k]; return s; };
-const b3Mult=(u,stat)=>{ const M=b3Mods(u,stat); let m=1; for(const k in M) m*=Math.max(0,1+M[k]); return m; };
+const b3Sum=(u,stat,ctx)=>{ const M=b3Mods(u,stat,ctx); let s=0; for(const k in M) s+=M[k]; return s; };
+const b3Mult=(u,stat,ctx)=>{ const M=b3Mods(u,stat,ctx); let m=1; for(const k in M) m*=Math.max(0,1+M[k]); return m; };
+// The Base Recovery of a move for the unit using it: the slot's number, times what its Quirks say about that kind of move
+// (stat 'moveRec': Ultra-Rare Limited Edition). Fatigue and the like change every Recovery and are applied in b3WaitFor.
+const b3MoveRec=(F,u,S)=>B3_RULES.recovery[S.slot]*b3Mult(u,'moveRec',{skill:S});
 // Attack, Defense or Speed with every mod applied. A crack is a battle-long cut of base Defense, 25% at most in total (spec 2.4).
 const b3Stat=(u,stat)=>u[stat]*(stat==='def'?1-u.crack:1)*b3Mult(u,stat);
 // Damage dealt. `extra` is {kind: amount} from the move itself. Bonuses are capped at +100% in total (spec 2.4); penalties are not.
-function b3OutMult(u,extra) {
-  const M=b3Mods(u,'out'); for(const k in (extra||{})) M[k]=(M[k]||0)+extra[k];
+function b3OutMult(u,extra,ctx) {
+  const M=b3Mods(u,'out',ctx); for(const k in (extra||{})) M[k]=(M[k]||0)+extra[k];
   let up=1,down=1; for(const k in M) { if(M[k]>=0) up*=1+M[k]; else down*=Math.max(0,1+M[k]); }
   return Math.min(1+B3_RULES.caps.outBonus,up)*down;
 }
 // Damage taken: penalties of the "takes +X%" kind add together; reductions add together up to the 60% cap.
 // `extra` is a reduction that belongs to this one hit (an intercept's "-35% damage").
-const b3TakenMult=(u,extra)=>(1+Math.max(0,b3Sum(u,'taken')))*(1-Math.min(B3_RULES.caps.reduction,Math.max(0,b3Sum(u,'reduce')+(extra||0))));
+const b3TakenMult=(u,extra,ctx)=>(1+Math.max(0,b3Sum(u,'taken',ctx)))*(1-Math.min(B3_RULES.caps.reduction,Math.max(0,b3Sum(u,'reduce',ctx)+(extra||0))));
 const b3Evasion=u=>Math.min(B3_RULES.caps.evasion,Math.max(0,b3Sum(u,'eva')));
 const b3MissChance=u=>Math.min(1,Math.max(0,-b3Sum(u,'acc')));
 const b3HasFlag=(u,flag)=>Object.keys(u.st).some(id=>B3_STATUS[id].flags.includes(flag));
@@ -196,7 +232,10 @@ function b3Carried(F,u) {
   // A family member's Vibes come next: the Main Vibe with its Rank and Lean, and the Pocket Vibe.
   if(u.side==='party'&&u.lean&&B3_VIBES[u.vibe]) { const V=B3_VIBES[u.vibe],P=u.pocket&&B3_VIBES[u.pocket],Ln=B3_LEANS[u.lean];
     rows.push({name:V.name,short:'RANK '+u.rank,color:'#c9e6a8',kind:'vibe',left:Ln.name+' Lean',
-      desc:'Main Vibe: '+Ln.desc+'.'+(P?' Pocket Vibe: '+P.name+(u.pocketSkills.length?' ('+u.pocketSkills.map(s=>B3_SKILLS[s].name).join(', ')+').':', which adds no Skill yet.'):'')}); }
+      desc:'Main Vibe: '+Ln.desc+'.'+(P?' Pocket Vibe: '+P.name+(u.pocketSkills.length?' ('+u.pocketSkills.map(s=>B3_SKILLS[s].name).join(', ')+').':', which adds no Skill yet.'):'')});
+    // The Trait and the equipped Quirks whose rules are written, so the player can read what is working for this family member.
+    const T=B3_TRAITS[u.trait]; if(T&&!T.soon) rows.push({name:T.name,short:'TRAIT',color:'#c9e6a8',kind:'trait',left:'',desc:T.desc});
+    for(const q of u.quirks) { const Q=B3_QUIRKS[q]; if(Q&&!Q.soon) rows.push({name:Q.name,short:'QUIRK',color:'#c9e6a8',kind:'quirk',left:'',desc:Q.desc}); } }
   const ids=Object.keys(u.st).sort((a,b)=>B3_STATUS[b].weight-B3_STATUS[a].weight||u.st[a].at-u.st[b].at);
   for(const id of ids) { const S=B3_STATUS[id],s=u.st[id];
     rows.push({name:S.name,short:S.short,color:S.color,kind:S.kind,left:s.unit==='round'?s.n+(s.n===1?' round':' rounds')+' left':s.unit==='begin'?'until its next turn':turns(s.n),desc:S.desc}); }
@@ -237,11 +276,18 @@ function b3Pep(F,u,n,source) {
   u.pep=Math.max(P.min,Math.min(P.max,u.pep+n));
   return u.pep-before;
 }
-function b3Cost(F,u,S) { return S.pep>0?Math.max(B3_RULES.pep.costFloor,S.pep):0; }
+function b3Cost(F,u,S) { if(F.grant&&F.grant.key===u.key&&F.grant.free) return 0; return S.pep>0?Math.max(B3_RULES.pep.costFloor,S.pep):0; }
 
 // ---------- What a unit can do ----------
 // The Basic, the Skills, and Pick-Me-Up while a family member is knocked out (spec 2.9).
-const b3Skills=(F,u)=>[u.basic,...u.skills,...(u.side==='party'&&F.party.some(p=>p.ko)?['pick_me_up']:[])].map(id=>B3_SKILLS[id]);
+// While a granted action waits for this unit (F.grant), the list is only what the grant allows.
+const b3Skills=(F,u)=>F.grant&&F.grant.key===u.key?b3GrantSkills(F,u,F.grant):[u.basic,...u.skills,...(u.side==='party'&&F.party.some(p=>p.ko)?['pick_me_up']:[])].map(id=>B3_SKILLS[id]);
+// The Skills a grant lets this unit take: its own Skills (and Pick-Me-Up) that cost G.maxPep or less and have someone to be
+// used on. Never the Basic and never a Grand Capstone.
+function b3GrantSkills(F,u,G) {
+  return [...u.skills,...(u.side==='party'&&F.party.some(p=>p.ko)?['pick_me_up']:[])].map(id=>B3_SKILLS[id])
+    .filter(S=>S.slot!=='cap'&&S.slot!=='basic'&&S.pep<=G.maxPep&&b3Options(F,u,S).some(o=>!o.no));
+}
 function b3CanUse(F,u,S) {
   if(!S) return {ok:false,why:'That move is not built yet.'};
   const c=b3Cost(F,u,S);
@@ -254,8 +300,10 @@ function b3Options(F,u,S) {
   const foes=b3Live(F,b3Other(u.side)),mates=b3Live(F,u.side);
   if(S.target==='foe') return foes.map(f=>({key:f.key,label:f.name,units:[f]}));
   if(S.target==='ally') {
-    const moves=S.effects.some(e=>e.op==='place');
-    return mates.filter(m=>m!==u).map(m=>({key:m.key,label:m.name,units:[m],ally:true,no:moves&&m.placed?m.name+' was already moved this round.':''}));
+    const moves=S.effects.some(e=>e.op==='place'),gr=S.effects.find(e=>e.op==='grant');
+    return mates.filter(m=>m!==u).map(m=>({key:m.key,label:m.name,units:[m],ally:true,no:moves&&m.placed?m.name+' was already moved this round.':
+      gr&&m.granted>=B3_RULES.grantedPerRound?m.name+' already had a free action this round.':
+      gr&&!b3GrantSkills(F,m,gr).length?m.name+' has no Skill that costs '+gr.maxPep+' Pep or less to use right now.':''}));
   }
   if(S.target==='family') return mates.map(m=>({key:m.key,label:m.name,units:[m],ally:true}));   // anyone in the family, the user included
   if(S.target==='self') return [{key:u.key,label:u.name,units:[u],ally:true}];
@@ -283,7 +331,13 @@ function b3AutoScore(F,u,S,O) {
   const R=B3_RULES,tier=typeof S.power==='number'?S.power:R.power[S.power]||0,cost=b3Cost(F,u,S),foes=b3Live(F,b3Other(u.side));
   const std=t=>b3Stat(u,'atk')*100/(100+b3Stat(t,'def')),has=op=>S.effects.find(e=>e.op===op);
   let sc=-1.5*cost+(S.slot==='basic'?3:0);
-  if(tier>0) {
+  const gr=has('grant');
+  if(gr) {
+    // A free Skill for someone else: worth the best thing they could do with it (at no cost to them), plus the Pep it hands out.
+    const t=O.units[0]; let best=-99;
+    for(const S2 of b3GrantSkills(F,t,gr)) for(const O2 of b3Options(F,t,S2)) if(!O2.no) best=Math.max(best,b3AutoScore(F,t,S2,O2)+(gr.free?1.5*b3Cost(F,t,S2):0));
+    sc+=best+3;
+  } else if(tier>0) {
     const per=t=>{ let d=std(t)*tier/S.flavor.length,sum=0;
       for(const fl of S.flavor) sum+=d*(t.peeves.includes(fl)?R.peeve:1)*(t.resists.includes(fl)?R.resist:1);
       return sum; };
@@ -296,7 +350,17 @@ function b3AutoScore(F,u,S,O) {
       if(t.maxPips&&!t.pipLock&&t.pips>0) { const det=S.flavor.map(fl=>b3FindDetonation(t,fl)).find(Boolean);
         const p=Math.min(R.composure.capPerAction,(S.flavor.some(fl=>t.peeves.includes(fl))?R.composure.peeve:0)+(det?det.pips:0)+(S.composure||0));
         sc+=p*3+(p>=t.pips?14:0); }
-    } else sc+=O.units.reduce((s,t)=>s+per(t),0)/O.units.length*(S.target==='all_foes'?O.units.length*R.aoeShare:1);
+    } else {
+      sc+=O.units.reduce((s,t)=>s+per(t),0)/O.units.length*(S.target==='all_foes'?O.units.length*R.aoeShare:1);
+      // A move on every monster: buffs it strips, a floor it clears, the pips it should take, and a taunt while the family is hurt.
+      for(const e of S.effects) if(e.op==='strip') {
+        if(e.kind==='hazard') sc+=F.hazards.filter(h=>h.side===u.side).length*8;
+        else for(const t of O.units) { const nb=Object.keys(t.st).filter(id=>B3_STATUS[id].kind===e.kind).length; sc+=(e.all?nb:Math.min(nb,e.n||1))*6; } }
+      if(S.target==='all_foes') for(const t of O.units) if(t.maxPips&&!t.pipLock&&t.pips>0) { const det=S.flavor.map(fl=>b3FindDetonation(t,fl)).find(Boolean);
+        const p=Math.min(R.composure.capPerAction,(S.flavor.some(fl=>t.peeves.includes(fl))?R.composure.peeve:0)+(det?det.pips:0)+(S.composure||0));
+        sc+=p*3+(p>=t.pips?14:0); }
+      if(has('taunt')&&!b3HasFlag(u,'taunt')) sc+=b3Live(F,u.side).reduce((s,m)=>s+(m===u?0:(1-m.hp/m.maxHp)*14+(foes.some(f=>f.mark===m.key)?10:0)),0);
+    }
   } else if(has('place')) sc+=4+O.units[0].wait/6;
   else if(has('revive')) sc+=60;
   else if(has('heal')) {
@@ -324,9 +388,14 @@ function b3AutoScore(F,u,S,O) {
 // ---------- Data check: every row points at things that exist (the simulator runs this first) ----------
 function b3CheckData() {
   const bad=[],flav=f=>(f||[]).every(x=>B3_FLAVORS[x]);
+  const mods=(where,list)=>{ for(const m of (list||[])) { for(const k in (m.when||{})) if(!B3_MOD_WHEN.includes(k)) bad.push(where+': mod condition "'+k+'" not built yet');
+    if(!m.stat||!m.kind||typeof m.v!=='number') bad.push(where+': a mod needs stat, kind and v'); } };
   const effects=(where,list)=>{ for(const e of (list||[])) {
     if(!B3_OP_LIST.includes(e.op)) bad.push(where+': unknown op '+e.op); else if(!B3_OPS[e.op]) bad.push(where+': op not built yet: '+e.op);
-    if((e.op==='status'||e.op==='prime'||e.op==='intercept')&&!B3_STATUS[e.id]) bad.push(where+': unknown status '+e.id);
+    if((e.op==='status'||e.op==='prime'||e.op==='intercept'||e.op==='taunt')&&!B3_STATUS[e.id]) bad.push(where+': unknown status '+e.id);
+    if(e.op==='taunt'&&B3_STATUS[e.id]&&!B3_STATUS[e.id].flags.includes('taunt')) bad.push(where+': status '+e.id+' has no taunt flag');
+    if(e.op==='grant'&&!(e.maxPep>0)) bad.push(where+': a grant needs maxPep');
+    if(e.op==='ruckus'&&typeof e.n!=='number') bad.push(where+': a ruckus effect needs n');
     if(e.op==='intercept'&&B3_STATUS[e.id]&&!B3_STATUS[e.id].intercept) bad.push(where+': status '+e.id+' has no intercept field');
     if(e.op==='hazard'&&!B3_HAZARDS[e.id]) bad.push(where+': unknown hazard '+e.id);
     if(e.op==='summon'&&!B3_FOES[e.id]) bad.push(where+': unknown foe to call '+e.id);
@@ -336,6 +405,7 @@ function b3CheckData() {
     if(!S.desc||!S.short||!S.color) bad.push('status '+id+': needs desc, short and color (the player reads them in the status list)');
     if(!['buff','debuff','prime','stance','mark'].includes(S.kind)) bad.push('status '+id+': unknown kind '+S.kind);
     for(const h in (S.on||{})) { if(!B3_HOOKS.includes(h)) bad.push('status '+id+': unknown hook '+h); effects('status '+id,S.on[h].effects); }
+    mods('status '+id,S.mods);
     if(S.tick&&!B3_FLAVORS[S.tick.flavor]) bad.push('status '+id+': unknown tick flavor'); }
   for(const id in B3_HAZARDS) { const H=B3_HAZARDS[id];
     if(H.id!==id||!H.desc||!H.short||!(H.uses>0)||!(H.rounds>0)) bad.push('hazard '+id+': needs id, desc, short, uses and rounds'); effects('hazard '+id,H.effects); }
@@ -360,8 +430,15 @@ function b3CheckData() {
   for(const [what,T] of [['trait',B3_TRAITS],['quirk',B3_QUIRKS]]) for(const id in T) { const P=T[id],w=what+' '+id;
     if(P.id!==id) bad.push(w+': id does not match its key'); if(!P.name||!P.desc) bad.push(w+': needs name and desc (the Vibes screen shows them)');
     if(!B3_VIBES[P.vibe]) bad.push(w+': unknown vibe');
-    if(!P.soon&&P.on&&!B3_HOOKS.includes(P.on)) bad.push(w+': unknown hook '+P.on);
-    if(!P.soon) effects(w,P.effects); }
+    if(P.soon) continue;
+    // A working row is one listener (`on`), several (`listen`), mods, a one-off rule (`custom`), or any mix of them.
+    const Ls=[...(P.on?[P]:[]),...(P.listen||[])];
+    for(const L of Ls) { if(!B3_HOOKS.includes(L.on)) bad.push(w+': unknown hook '+L.on); effects(w,L.effects); }
+    mods(w,P.mods);
+    for(const m of (P.mods||[])) if(m.per&&!(P.counter&&P.counter.id===m.per.counter)&&!(B3_VIBES[P.vibe]&&B3_VIBES[P.vibe].counter&&B3_VIBES[P.vibe].counter.id===m.per.counter)) bad.push(w+': a mod counts the counter '+m.per.counter+', which neither this row nor its Vibe builds');
+    if(P.counter&&!(P.counter.id&&P.counter.name&&P.counter.max>0)) bad.push(w+': its counter needs id, name and max');
+    if(P.custom&&!B3_CUSTOM[P.custom]) bad.push(w+': one-off rule "'+P.custom+'" is not in engine/b3-custom.js');
+    if(!Ls.length&&!(P.mods||[]).length&&!P.custom) bad.push(w+': not marked soon, but it has no listener, no mods and no one-off rule'); }
   for(const id in B3_CAST) { const C=B3_CAST[id];
     for(const v of C.vibes) if(!B3_VIBES[v]) bad.push('cast '+id+': unknown vibe '+v);
     for(const n of [1,2]) if(C.vibes.filter(v=>B3_VIBES[v]&&B3_VIBES[v].sig===n).length>1) bad.push('cast '+id+': two Vibes are marked sig '+n);

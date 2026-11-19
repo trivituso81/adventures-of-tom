@@ -1,6 +1,7 @@
 'use strict';
-// data/b3-kit-grace.js — Battle 3 kit: Grace (spec section 3.2). Built so far: Squishy Collector's Basic, Skill 1 and Skill 2;
-// Craft Artist's Basic and Skill 1. Trait and Quirk rows marked `soon:true` have a name and a sentence but no rule yet (stage 5).
+// data/b3-kit-grace.js — Battle 3 kit: Grace (spec section 3.2). Built so far: all of Squishy Collector (stage 5a wrote its Trait,
+// both Quirks and its Grand Capstone); Craft Artist's Basic and Skill 1. Trait and Quirk rows marked `soon:true` have a name
+// and a sentence but no rule yet (stage 5b).
 B3_CAST.grace={id:'grace',name:'Grace',vibes:['grace_squishy','grace_craft'],stat:{hp:1,atk:1,def:1,spd:1}};
 B3_VIBES.grace_squishy={id:'grace_squishy',owner:'grace',name:'Squishy Collector',sig:1,lean:'tempo',
   subtitles:['NeeDoh Molder','Dumpling Squeezer','Golden Squishy Keeper'],
@@ -18,12 +19,24 @@ B3_SKILLS.crunchy_sugar_cube_pop={id:'crunchy_sugar_cube_pop',vibe:'grace_squish
   target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'interrupt',to:'target'},{op:'push',n:30,to:'target'}],line:null,anim:{kind:'default',shape:'cast'},
   desc:'Light Racket hit. Cancels the attack a monster is winding up and pushes it 30 ticks back on the turn bar.'};
 
-B3_SOON.colossal_diamond_gold_dumpling='Colossal Diamond-Gold Dumpling';
-B3_TRAITS.sensory_satisfying={id:'sensory_satisfying',vibe:'grace_squishy',name:'Sensory Satisfying',soon:true,
-  desc:'The family member who acts right after Grace on the turn bar hits 15% harder.'};
-B3_QUIRKS.slow_rise_memory_foam={id:'slow_rise_memory_foam',vibe:'grace_squishy',name:'Slow-Rise Memory Foam',soon:true,
+// Colossal Diamond-Gold Dumpling (Grand Capstone): one family member takes a Skill of 4 Pep or less at once, for free, and
+// Grace and that member each gain 1 Pep (spec 3.2). It is their one granted action of the round (spec 2.2): someone who
+// already had one, or who has no such Skill to use, cannot be chosen. My call: "any skill" means a Skill, never the Basic.
+B3_SKILLS.colossal_diamond_gold_dumpling={id:'colossal_diamond_gold_dumpling',vibe:'grace_squishy',slot:'cap',name:'Colossal Diamond-Gold Dumpling',pep:6,flavor:['support'],power:0,hits:0,
+  target:'ally',tags:[],composure:0,effects:[{op:'pep',n:1,to:'self'},{op:'pep',n:1,to:'target'},{op:'grant',maxPep:4,free:true,to:'target'}],line:null,anim:{kind:'default',shape:'give'},
+  desc:'One family member uses a Skill of 4 Pep or less right now, for free, without losing their place on the turn bar. Grace and that family member each gain 1 Pep. Once a round for each person.'};
+// Sensory Satisfying: judged as Grace's turn ends. If the very next face on the turn bar is family, they get So Satisfying
+// for their next turn. My call: "skill potency" is damage dealt and heals and shields given.
+B3_TRAITS.sensory_satisfying={id:'sensory_satisfying',vibe:'grace_squishy',name:'Sensory Satisfying',
+  on:'turnEnd',carrier:'source',effects:[{op:'status',id:'so_satisfying',to:'nextIfAlly'}],
+  desc:'If a family member is next on the turn bar when Grace finishes her turn, their next turn hits 15% harder and heals 15% more.'};
+// Slow-Rise Memory Foam: any push, pull or pass Grace causes counts, a Hydro-Slip! she sets off included.
+B3_QUIRKS.slow_rise_memory_foam={id:'slow_rise_memory_foam',vibe:'grace_squishy',name:'Slow-Rise Memory Foam',
+  on:'barMoved',carrier:'source',effects:[{op:'status',id:'memory_foam',to:'self'}],
   desc:'When Grace moves anyone on the turn bar, she gets 15% Evasion until her next turn.'};
-B3_QUIRKS.ultra_rare_limited_edition={id:'ultra_rare_limited_edition',vibe:'grace_squishy',name:'Ultra-Rare Limited Edition',soon:true,
+// Ultra-Rare Limited Edition: a Skill aimed at a family member (NeeDoh Stretch Pass, the Dumpling, Pick-Me-Up), not a Basic.
+B3_QUIRKS.ultra_rare_limited_edition={id:'ultra_rare_limited_edition',vibe:'grace_squishy',name:'Ultra-Rare Limited Edition',
+  mods:[{stat:'moveRec',kind:'ultraRare',v:-.30,when:{allySkill:true}}],
   desc:'Grace waits 30% less after a Skill she uses on a family member.'};
 
 // ---- Craft Artist (second Sig Vibe) ----

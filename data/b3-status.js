@@ -8,6 +8,7 @@
 //           stats: spd, atk, def (the stat itself), out (damage dealt), taken (damage taken), reduce (damage reduction),
 //           crit (own Crit Rate), critTaken (Crit Rate of attacks against it), eva (Evasion), acc (chance its attacks miss,
 //           written as a negative accuracy), aggro (target weight), recovery (Recovery Ticks), healGiven (heals and shields given)
+//           A mod may carry `when` (it counts only on some hits) and `per` (it grows with a counter): engine/b3-core.js b3Mods.
 //   flags   blind (its next single-target attack misses, then the status is used up), skipTurn (loses its next turn, then the
 //           status is used up), taunt (enemy single-target attacks must aim at the carrier), untargetable, pushImmune
 //   tick    damage at the start of each of the carrier's turns
@@ -73,6 +74,27 @@ const B3_STATUS={
     short:'ATTACK UP',color:'#ffb38a',weight:4,desc:'20% more Attack.'},
   windexed:{id:'windexed',name:'Windex In The Eyes',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'acc',kind:'windex',v:-.15}],flags:[],
     short:'WINDEX',color:'#8fd0ff',weight:4,desc:'Each of its attacks has a 15% chance to miss.'},
+  // ---- Kit statuses: the Traits, Quirks and Capstones of the first Sig Vibes (stage 5a) ----
+  // Tarmac Porsche Transfer "locks aggro": a taunt on Tom for 2 turns (my call: the spec gives no length; 2 turns is the common one).
+  high_beams:{id:'high_beams',name:'High Beams',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[],flags:['taunt'],
+    short:'ALL EYES',color:'#ffd27a',weight:7,desc:'The Porsche\u2019s high beams are on Tom: any attack aimed at one family member has to aim at him.'},
+  // Sensory Satisfying: on whoever is next on the bar as Grace's turn ends, for their next turn.
+  so_satisfying:{id:'so_satisfying',name:'So Satisfying',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'out',kind:'satisfying',v:.15},{stat:'healGiven',kind:'satisfying',v:.15}],flags:[],
+    short:'SATISFYING',color:'#f5b8d0',weight:4,desc:'Acting right after Grace: this turn hits 15% harder and heals 15% more.'},
+  // Slow-Rise Memory Foam: until Grace's next turn begins.
+  memory_foam:{id:'memory_foam',name:'Memory Foam',kind:'buff',group:null,dur:{n:1,unit:'begin'},mods:[{stat:'eva',kind:'memoryFoam',v:.15}],flags:[],
+    short:'DODGY',color:'#9be39a',weight:4,desc:'Grace springs back into shape: she dodges 15% of attacks.'},
+  // "It's OUR Longboard Now": until Rose's next turn begins, so it shortens the wait she has just started.
+  our_longboard:{id:'our_longboard',name:'OUR Longboard',kind:'buff',group:null,dur:{n:1,unit:'begin'},mods:[{stat:'spd',kind:'longboard',v:.25}],flags:[],
+    short:'SPEED UP',color:'#9be39a',weight:4,desc:'Rose is on the longboard: 25% faster.'},
+  // Car-Crumb Vacuum: the whole family, 1 turn each.
+  crumb_free:{id:'crumb_free',name:'Not A Crumb',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'atk',kind:'crumbFree',v:.15}],flags:[],
+    short:'ATTACK UP',color:'#ffb38a',weight:4,desc:'Deedee got every crumb: 15% more Attack.'},
+  // Spit Shine: a rider on the monster. The mod counts only for a Clobber hit by a family member other than Deedee, and that
+  // hit uses the mark up (Rose's Twin-Lamb Relay holds it for her later hits at 40%: engine/b3-custom.js).
+  spit_shine:{id:'spit_shine',name:'Spit Shine',kind:'mark',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'taken',kind:'spitShine',v:.30,when:{flavor:'clobber',by:'otherAlly'}}],flags:[],
+    on:{afterHit:{carrier:'target',by:'otherAlly',flavor:'clobber',effects:[],consume:true}},
+    short:'SHINED',color:'#8fd0ff',weight:3,desc:'Polished up by Deedee: the next Clobber hit from someone else in the family does 30% more damage.'},
   // ---- Kit statuses: the second Sig Vibes (stage 4: their Basics and three Skill 1s) ----
   off_key:{id:'off_key',name:'Off Key',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'screech',v:-.20}],flags:[],
     short:'OFF KEY',color:'#d7a4f5',weight:4,desc:'Grace’s violin is still ringing in its ears: 20% less Attack.'},

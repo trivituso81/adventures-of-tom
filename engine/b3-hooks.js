@@ -17,14 +17,33 @@ const B3_HOOKS=['battleStart','roundStart','turnStart','actionDeclared','beforeH
 //            The holder is the attacker of the reaction and `to:'attacker'` aims at the unit that set it off.
 //            A reaction shares the `reacted` record of the action that set it off, so an "once per action" answer cannot be
 //            set off a second time by the answers to it (a ward against a counter act against a ward...).
+//   quiet    true: a reaction that is not a counterattack (the `counter` hook does not fire for it)
 //   effects  ops to run (engine/b3-ops.js)
 //   consume  (statuses) the status is used up
+//   show     (passives) true: the screen names the Trait or Quirk over its holder when it goes off
+// What the moment must look like (every one listed must hold; B3_LISTEN_IF is the list the data check knows):
+//   ids          the event's id is one of these (a Prime's or a status's id)
+//   flavor       the hit's flavor is this one
+//   multiHit     the hit belongs to a move that hits more than once (it counts once per hit, not per flavor part)
+//   landed       the action has landed at least this many hits
+//   targetPrime  the event's target carries this Prime, or this action set that Prime off on it
+// A Trait or Quirk row (data/b3-kit-*.js) is one listener (`on` and the fields above on the row itself) or several
+// (`listen:[{on, ...}, ...]`); engine/b3-progress.js b3KitPassives lays them out as the flat rows a unit carries in `passives`.
+// The events: afterHit {src, tgt, dmg, flavor, crit, part (which flavor part of a two-flavor hit), tags, c};
+// intercept {src: the attacker, tgt: the one who stepped in, for: the one they stepped in for, c}; counter {src: who answered,
+// tgt: who they answered, c: the answer's own small action}; the ops' events carry c too (engine/b3-ops.js).
+const B3_LISTEN_IF=['ids','flavor','multiHit','landed','targetPrime'];
 function b3ListenOk(F,u,L,ev,putBy,useKey) {
   if(L.carrier==='target'&&ev.tgt!==u) return false;
   if(L.carrier==='source'&&ev.src!==u) return false;
   if(L.by==='otherAlly'&&!(ev.src&&ev.src.side==='party'&&ev.src.key!==putBy)) return false;
   if(L.from==='foe'&&!(ev.src&&ev.src.side!==u.side)) return false;
   if(L.tags&&!(ev.tags&&L.tags.some(t=>ev.tags.includes(t)))) return false;
+  if(L.ids&&!L.ids.includes(ev.id)) return false;
+  if(L.flavor&&ev.flavor!==L.flavor) return false;
+  if(L.multiHit&&!(ev.c&&ev.c.skill&&(ev.c.skill.hits||1)>1&&!ev.part)) return false;
+  if(L.landed&&!(ev.c&&(ev.c.landed||0)>=L.landed)) return false;
+  if(L.targetPrime&&!(ev.tgt&&(ev.tgt.st[L.targetPrime]||(ev.c&&ev.c.detPrime&&ev.c.detPrime[ev.tgt.key]===L.targetPrime)))) return false;
   if(L.limit==='round'&&u.used[useKey]===F.round) return false;
   if(L.limit==='battle'&&u.used[useKey]) return false;
   if(L.limit==='action'&&ev.c&&ev.c.reacted&&ev.c.reacted[u.key+useKey]) return false;
@@ -33,10 +52,15 @@ function b3ListenOk(F,u,L,ev,putBy,useKey) {
 function b3Listen(F,u,L,ev,beats,useKey,statusId,name) {
   if(L.limit==='action') { if(ev.c) (ev.c.reacted=ev.c.reacted||{})[u.key+useKey]=true; } else if(L.limit) u.used[useKey]=F.round;
   if(L.react) { F.reactions.push({u,L,src:ev.src||null,status:statusId,name,root:ev.c&&ev.c.reacted}); return; }
+  if(!statusId&&L.show) beats.push({t:'passive',src:u.key,id:L.pid||L.id,name,g:ev.g});
+  // A status the hit uses up may be held for the rest of a multi-hit move (Twin-Lamb Relay, engine/b3-custom.js): its
+  // effects then run at a share of their strength on the later hits, and it comes off when the move ends.
+  const relay=statusId&&L.consume?b3RelayUse(F,ev,u,statusId):null;
   // A status's effects run with the event's source as the actor (Squished pays the attacker); a passive's run as its holder.
   // Composure they shave is written into the ledger of the action that set them off, inside its 3-pip cap (spec 2.7).
-  b3RunEffects(F,{F,actor:statusId?(ev.src||u):u,src:ev.src||null,tgt:ev.tgt||u,carrier:u,targets:[ev.tgt||u],hit:[],beats,g:ev.g,detonated:{},ledger:(ev.c&&ev.c.ledger)||{}},L.effects);
-  if(L.consume&&statusId&&b3EndStatus(F,u,statusId,'used')) beats.push({t:'statusEnd',tgt:u.key,id:statusId,g:ev.g});
+  b3RunEffects(F,{F,actor:statusId?(ev.src||u):u,src:ev.src||null,tgt:ev.tgt||u,carrier:u,targets:[ev.tgt||u],hit:[],beats,g:ev.g,detonated:{},
+    reacted:(ev.c&&ev.c.reacted)||{},ledger:(ev.c&&ev.c.ledger)||{},scale:relay?relay.scale:1},L.effects);
+  if(L.consume&&statusId&&!relay&&b3EndStatus(F,u,statusId,'used')) beats.push({t:'statusEnd',tgt:u.key,id:statusId,g:ev.g});
 }
 function b3Fire(F,hook,ev,beats) {
   for(const u of F.units) {
@@ -61,9 +85,12 @@ function b3RunReactions(F,beats) {
     beats.push({t:'react',src:u.key,tgt:a.key,id:R.status,name:R.name,g});
     const c={F,actor:u,src:a,tgt:a,carrier:u,targets:[a],hit:[],beats,g,detonated:{},reacted:R.root||{},tags:R.tags||['counter'],ledger:{}};
     b3RunEffects(F,c,R.L.effects);
+    b3SpendCounters(F,c);
     b3KoCheck(F,c);
+    // The `counter` hook fires before the answer's Composure is paid, so a pip a Quirk adds to a counterattack (Million-Miler
+    // Status) lands inside the answer's own cap.
+    if(!R.L.quiet) b3Fire(F,'counter',{src:u,tgt:a,g,c},beats);
     b3PayLedger(F,c);
-    b3Fire(F,'counter',{src:u,tgt:a,g},beats);
   }
   F.reactions.length=0;
 }
