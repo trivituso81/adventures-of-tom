@@ -19,6 +19,7 @@ on:
 
 permissions:
   contents: write
+  actions: write   # clipgen2: to start the publish workflow after a bake that was started by hand
 
 concurrency:
   group: art-bake
@@ -72,3 +73,10 @@ jobs:
             sleep 5
           done
           echo "push failed 3 times"; exit 1
+      # clipgen2: art-bake's own push does not start `publish`, and `publish` also waits for a workflow_run of this job, which GitHub does not
+      # send when the run itself was started with the Actions token (the clip-gen Action starts it that way). So a bake started by hand starts the publish.
+      - name: Start the publish (bake started by hand)
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api repos/${{ github.repository }}/actions/workflows/publish.yml/dispatches -f ref=main
