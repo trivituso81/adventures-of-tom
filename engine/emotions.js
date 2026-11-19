@@ -137,7 +137,7 @@ function emoApply() {
   const text=dialog.lines[dialog.index];
   const mood=(dialog.emo&&emoMoodOf(dialog.name,text))||emoNpcMoodOf(dialog.name,text);
   const id=String(DIALOG_PORTRAIT_IDS[String(dialog.name||'').trim().toLowerCase()]||'').replace(/^npc_/,'');   // townspeople's keys are npc_<id>; their faces and poses are filed under <id>
-  const had=EMO.mood; emoClear();
+  const had=EMO.mood; emoHoldClear(); emoClear();
   EMO.spk=id?emoActorFor(id,dialog.name,dialog.npc):null;   // the person speaking this line: listeners in a mood pose turn toward them (facing1, poseFacingWant in engine/story.js)
   if(dialog.emo) emoReact(id,text);
   const tk=id&&typeof EMOTION_FACES!=='undefined'&&EMOTION_FACES.includes(id)?talkFrameOf(id,talkTypeOf(String(dialog.name||'').trim(),text,mood)):null;
@@ -175,9 +175,30 @@ const LE_openDialog_emo=openDialog;
 openDialog=function(name,lines,npc) { dialog.emo=EMO.starting; return LE_openDialog_emo(name,lines,npc); };
 const LE_loadDialogLine_emo=loadDialogLine;
 loadDialogLine=function() { LE_loadDialogLine_emo(); emoApply(); };
+// Pose hold (cutpolish1): inside a scene the speaker keeps the mood or talking pose for up to 0.6 s of scene time after the box closes, so a person does not drop
+// to a plain stand between two lines. It ends when the next box opens, when a step moves or re-poses that person, at a fight, on SKIP and at scene end.
+const EMO_HOLD_SEC=.6;
+let emoHold=null;   // {a,P,t}
+function emoHoldClear() { if(emoHold) { if(emoHold.a.scenePose===emoHold.P) emoHold.a.scenePose=null; emoHold=null; } }
 const LE_advanceDialog_emo=advanceDialog;
-advanceDialog=function() { LE_advanceDialog_emo(); if(!dialog.active&&(EMO.mood||EMO.actor||EMO.listeners.length)) emoClear(); };
+advanceDialog=function() {
+  LE_advanceDialog_emo();
+  if(dialog.active||!(EMO.mood||EMO.actor||EMO.listeners.length)) return;
+  const a=EMO.actor,P=a&&a.scenePose&&a.scenePose.emo?a.scenePose:null;
+  emoClear();
+  if(P&&intro.active&&intro.phase==='scene'&&!battle.active&&!(typeof cut!=='undefined'&&(cut.skip||cut.ff))) { a.scenePose=P; emoHold={a,P,t:0}; }
+};
 setInterval(()=>{ if(!dialog.active&&(EMO.mood||EMO.actor||EMO.listeners.length||EMO.pending.length)) emoClear(); },100);   // a skipped or interrupted scene must leave no pose behind
 const LE_endIntro_emo=endIntro;
-endIntro=function() { emoClear(); return LE_endIntro_emo(); };
+endIntro=function() { emoClear(); emoHoldClear(); return LE_endIntro_emo(); };
+const LE_updateIntro_emo=updateIntro;
+updateIntro=function(dt) {
+  const r=LE_updateIntro_emo(dt);
+  if(emoHold) {
+    const h=emoHold;
+    if(dialog.active||battle.active||!intro.active||h.a.scenePose!==h.P||h.a.move||h.a.scr) { if(h.a.scenePose===h.P&&!dialog.active) h.a.scenePose=null; emoHold=null; }   // a step moved or re-posed them
+    else if((h.t+=dt)>=EMO_HOLD_SEC) emoHoldClear();
+  }
+  return r;
+};
 addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{EMO,emoMoodOf,emoCueReached,emoCueWeights}); });

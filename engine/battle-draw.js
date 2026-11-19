@@ -453,9 +453,9 @@ function occupied(a,x,y) {
 
 function canOccupy(map,x,y,who) {
   if(!walkable(map,x,y) ||
-     (!who.isPlayer&&map.npcNoGo.has(key(x,y)))) return false;
+     (!who.isPlayer&&!who.sceneWalk&&map.npcNoGo.has(key(x,y)))) return false;   // sceneWalk: a party member routed by a scene step ignores the townsfolk no-go list (cutpolish1)
 
-  if(who!==player&&map===currentMap&&occupied(player,x,y)) return false;
+  if(who!==player&&!who.sceneWalk&&map===currentMap&&occupied(player,x,y)) return false;
   if(!who.follower&&!who.isPlayer&&map===currentMap)
     for(const f of followers) if(occupied(f,x,y)) return false;
 
@@ -679,7 +679,7 @@ function switchMap(portal) {
     visited.add(house.id);
     showToast(house.shop?house.name+'\nBuy, sell, browse. Talk to '+(house.keeper||'Penny')+'.':(house.taxi?house.name+'\nOne driver. One cab. Big plans.':house.name+'\nOne resident. Four curious things.'),2.8);
     if(firstVisit&&souvenirs[house.id])
-      { const id=souvenirs[house.id],give=()=>{ if(intro.active||dialog.active||battle.active) { setTimeout(give,1500); return; } grantItem(id); }; setTimeout(give,3000); }   // waits until no scene or talk is on (roofnpc2: the pepper popped mid-greeting)
+      { const id=souvenirs[house.id],give=()=>{ if(intro.active||dialog.active||battle.active) { setTimeout(give,1500); return; } grantItem(id,true); }; setTimeout(give,3000); }   // waits until no scene or talk is on (roofnpc2: the pepper popped mid-greeting)
   } else if(portal.kind==='edge') {
     const to=worlds[portal.to]||town;
     currentMap=to;

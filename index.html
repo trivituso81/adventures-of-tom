@@ -1076,6 +1076,7 @@ html.cutscene #minimap-wrap{visibility:hidden}
 #party-banner .pb-note{font-size:clamp(10px,2.9vw,14px);line-height:1.3;opacity:.85}
 #party-banner .pb-note:empty{display:none}
 html.landscape #party-banner{top:16%;width:min(60%,520px)}
+html.cutscene:not(.talking) #action-wrap{visibility:hidden}   /* cutpolish1: no (A) button or HOLD + SLIDE caption between lines */
 html.cutscene #dpad .dir{visibility:hidden}   /* roofnpc2: the arrows stay hidden for a whole scene, so they no longer flash on between lines */
 html.landscape #cut-ctrl{top:62px}
 /* HUD: no minimap or door count; save button sits where rotate was. Save popup reuses the quit popup look. */

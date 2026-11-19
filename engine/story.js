@@ -271,6 +271,13 @@ function sceneActor(a) {
   return currentMap.npcs.find(n=>n.name===a||n.name.toLowerCase()===String(a).toLowerCase())||null;
 }
 const scenePos=p=>typeof p==='function'?p():p;
+// A scene walk for a party member (cutpolish1): the route ignores the townsfolk no-go tiles and Tom's reserved tile, which are for wandering townsfolk
+// (the roofnpc1 roof list and lane list had closed the band the girls must cross, so routeTo('grace',17,22) came back empty and they stood still).
+function sceneRoute(a,x,y) {
+  const n=sceneActor(a); if(!n) return [];
+  const had=n.sceneWalk; n.sceneWalk=true;
+  try { return findPath(currentMap,n,{x,y}).map(p=>[p.x,p.y]); } finally { n.sceneWalk=had; }
+}
 let sceneCam=null;   // {cam:[x,y]} holds the camera on a tile while a scene flings people about; {cam:null} lets it follow Tom again (also cleared when a scene ends)
 const lazy=fn=>({start(){ this.s=fn(); this.s.start(); },update(dt){ return this.s.update(dt); }});
 const SCENE_OPS={
@@ -1247,6 +1254,26 @@ function storySpawn(o) {
   return a;
 }
 function storyDespawn(name) { for(const m of Object.values(worlds)) m.npcs=m.npcs.filter(n=>!(n.scripted&&n.name===name)); }
+// End of a scene with no `intro.endTrail` (cutpolish1, audit 3b: both girls vanished onto Tom's tile after ch1Amy): when every follower stands on a walkable tile
+// of its own, no two on one tile, none on Tom's, none hidden and all within 3 tiles of Tom, they stay there. Returns an endTrail list (oldest first, ending on Tom's
+// tile, laid out for the party gap) or null to use placeFollowers as before.
+function followersWhereTheyStand() {
+  if(!followers.length||!currentMap) return null;
+  const seen=new Set([Math.round(player.x)+','+Math.round(player.y)]),pos=[];
+  for(const f of followers) {
+    if(f.hidden||f.seat) return null;
+    const p=f.move?{x:f.move.tx,y:f.move.ty}:{x:f.x,y:f.y};
+    if(p.x!==Math.round(p.x)||p.y!==Math.round(p.y)||!walkable(currentMap,p.x,p.y)) return null;
+    const k=p.x+','+p.y; if(seen.has(k)) return null; seen.add(k);
+    if(Math.max(Math.abs(p.x-player.x),Math.abs(p.y-player.y))>3) return null;
+    pos.push(p);
+  }
+  const gap=currentMap.outside?1:1.5,N=pos.length,L=Math.ceil(gap*N)+2,arr=new Array(L).fill(null);
+  arr[L-1]=[player.x,player.y];
+  pos.forEach((p,k)=>{ const at=L-1-gap*(k+1),lo=Math.floor(at),hi=Math.ceil(at); if(lo>=0) arr[lo]=[p.x,p.y]; if(hi<L-1) arr[hi]=[p.x,p.y]; });
+  for(let i=L-2;i>=0;i--) if(!arr[i]) arr[i]=arr[i+1];   // gaps take the nearest spot toward Tom
+  return arr;
+}
 const LE_endIntro_story=endIntro;
 endIntro=function() {
   sceneCam=null; sceneAuto=null; if(!introKeepZoom) sceneZoomManual=false; stageZone=null; intro.sceneCast=null;   // the camera eases back out to Tom (engine/overworld.js sceneAutoTick)
@@ -1254,8 +1281,10 @@ endIntro=function() {
   for(const n of intro.held||[]) { n.held=false; n.path=[]; n.move=null; n.idle=1+Math.random(); if(n.monster&&!n.scripted&&n.heldFrom&&!n.sunk) { n.x=n.heldFrom.x; n.y=n.heldFrom.y; } }
   intro.held=[];
   for(const n of currentMap.npcs) if(n.arriveFace) n.arriveFace=null;
-  const et=intro.endTrail; intro.endTrail=null;
+  let et=intro.endTrail; intro.endTrail=null;
+  const stood=et?null:followersWhereTheyStand();   // cutpolish1: read before the shared end-of-scene clears
   LE_endIntro_story();
+  if(!et&&stood) et=stood;
   // intro.endTrail (a scene sets it, roofnpc2): the tiles behind Tom, oldest first, ending on Tom's tile. The followers keep standing in that
   // line instead of all stacking on Tom's tile (Gemini audit: three people on one doormat tile when Deedee joined).
   if(et&&et.length>1) { trail.length=0; for(const t of et) trail.push({x:t[0],y:t[1]}); const gap=(currentMap&&!currentMap.outside)?1.5:1;

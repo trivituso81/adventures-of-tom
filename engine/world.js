@@ -335,4 +335,15 @@ function showToast(text,seconds=2.8,low=false) {
   $('toast').textContent=text; $('toast').classList.toggle('low',!!low);   // low: shown near the bottom (area names on arrival, so they never cover the painted arch sign; roofnpc2)
   toastUntil=performance.now()+seconds*1000;
 }
+// Queued toasts (cutpolish1): shown one after another, each for its full time (at least 2.5 s), and held back while a scene, a line or a fight is on.
+// showToast stays for menus and instant messages. Two popups used to share one slot, so the second replaced the first after 0.9 s (goal popup, pepper).
+const toastQueue=[];
+function queueToast(text,seconds=2.8,low=false) { toastQueue.push({text,seconds:Math.max(2.5,seconds),low}); }
+let toastBusyAt=0;   // the last time a scene, a line, a fight or a map change was on: a popup waits 0.8 s after that, so it never slips into the gap between two scenes
+setInterval(()=>{
+  const now=performance.now();
+  try { if(intro.active||dialog.active||battle.active||(typeof transition!=='undefined'&&transition)) toastBusyAt=now; } catch(e) { return; }   // the later scripts are not loaded yet
+  if(!toastQueue.length||now<toastUntil||now-toastBusyAt<800) return;
+  const q=toastQueue.shift(); showToast(q.text,q.seconds,q.low);
+},100);
 

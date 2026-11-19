@@ -64,7 +64,7 @@ SCENES.opening=()=>{
 };
 
 // A walk route along the map from where the actor stands now to (x,y) (for walks that start wherever Tom happens to be).
-const routeTo=(a,x,y)=>()=>{ const n=sceneActor(a); return n?findPath(currentMap,n,{x,y}).map(p=>[p.x,p.y]):[]; };
+const routeTo=(a,x,y)=>()=>sceneRoute(a,x,y);
 // ======================================================================================================
 // CHAPTER 1: The Soup Dumpling Protocol (the heading must keep the form `CHAPTER n: Title`: tools/voice-library/make-index.js files lines by it). Rebuilt 2026-11-17 from claude/story-ch01-draft2.md, locked by Tom; every line is word for word from that file).
 // Long Island only; no flights. Flags, in story order: opening-done, ch1-goal (scene 1, the Square), ch1-amy (scene 2, Rivituso Row),
@@ -108,7 +108,7 @@ SCENES.ch1Goal=[
   // Rivituso Row arch, so control comes back on the main path and not in the pocket by the Taxi Co. door (roofnpc1, Gemini audit 2026-11-18).
   ...CH1_DISMOUNT(),
   {call:()=>{ introKeepZoom=false; }}, {zoom:1,time:1.2},   // the one zoom out of the intro, after the last word
-  {call:()=>showToast("Goal: Deedee and Boppy's house. Head south through the Rivituso Row arch.",4.5)}   // the one popup objective of a new game (roofnpc1)
+  {call:()=>queueToast("Goal: Deedee and Boppy's house. Head south through the Rivituso Row arch.",4.5)}   // the one popup objective of a new game (roofnpc1)
 ];
 
 // 2. Rivituso Row, passing Amy's house. Amy watches from her window, unseen: her two texts are text boxes.
@@ -234,7 +234,7 @@ SCENES.ch1Theft=[
   {flag:'tombo:deedee1'},
   {toast:'New Tombo: Wine and Gossip (Tom + Deedee).',time:3},
   {toast:'Goal: follow the thief into Grump Hollow, north of the Square.',time:4.5},
-  {call:()=>showToast('Goal: follow the muddy trail to Grump Hollow, north of the Square.',4.5)}   // pops up once (roofnpc2, Gemini audit: players stalled at the front gate)
+  {call:()=>queueToast('Goal: follow the muddy trail to Grump Hollow, north of the Square.',4.5)}   // pops up once (roofnpc2, Gemini audit: players stalled at the front gate)
 ];
 
 // 4. The path into Grump Hollow: Rose asks the mud nicely. ONE fight, three Mudlings (the old three tutorial fights are gone; 'basics' teaches all of it).

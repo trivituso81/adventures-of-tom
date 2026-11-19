@@ -90,13 +90,16 @@ function cutWatchdog(dt) {
   bind($('cut-ff'),cutFF); bind($('cut-skip'),cutSkip);
 })();
 // FAST and SKIP come up a moment after a scene starts, so they never sit over the title page while it fades (roofnpc1, Gemini audit).
-let cutShownAt=0,cutLiveEnd=-1e9;
+let cutShownAt=0,cutLiveEnd=-1e9,cutClassUntil=0;
 function refreshCutUI() {
   const live=cutsceneOn(),now=performance.now();
   if(!live) { if(cutShownAt) cutLiveEnd=now; cutShownAt=0; } else if(!cutShownAt) cutShownAt=now-(now-cutLiveEnd<1500?1e4:0);   // scene straight after a scene: no flicker
-  const on=live&&now-cutShownAt>900&&!(typeof closeup!=='undefined'&&closeup.active);   // not over a close-up picture (roofnpc2)
+  const on=live&&now-cutShownAt>900&&!(typeof closeup!=='undefined'&&closeup.active)&&!intro.showcase&&!intro.card;   // not over a close-up picture (roofnpc2), the squishy showcase or a chapter card (cutpolish1)
   const w=$('cut-ctrl'); if(w.hidden===on) w.hidden=!on;
-  document.documentElement.classList.toggle('cutscene',live);
+  if(live) cutClassUntil=now+250;   // the cutscene class (arrows, minimap, A button hidden) lingers 250 ms so nothing blinks between two scenes
+  const root=document.documentElement;
+  root.classList.toggle('cutscene',live||now<cutClassUntil);
+  root.classList.toggle('talking',live&&dialog.active);   // the A button is shown only while a box is open (CONTINUE)
   $('cut-ff').classList.toggle('on',cut.ff);
   $('cut-skip').classList.toggle('on',cut.skip);
 }
