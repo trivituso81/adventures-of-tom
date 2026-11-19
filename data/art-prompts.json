@@ -26660,9 +26660,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE SHEET. Return exactly one image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The approved painting of The Big One, the giant pond fish boss of \"The Adventures of Tom\", a family role-playing game. Keep the same creature, shape, colors and painted finish.\n2) The approved painting of Grump Hollow's Mudling, for the handbrushed finish only.\n\nPAINT THIS SHEET\nThe same 6 poses as attachment 1, in the same 3 by 2 layout: top row poses 1 to 3, bottom row poses 4 to 6, each pose filling most of its cell, nothing overlapping.\nPoses 1 to 3: sitting half out of the water, grumpy, then proud, then roaring. Poses 4 to 6: sulking low in the shallows, startled with the pan flying off its head, laughing with its mouth wide open.\nChange from attachment 1: the fish is a BRIGHT GREEN, the size of a cab, and a silver twelve-cup muffin pan sits on its head like a crown in poses 1 to 4 and 6. A small gold coin glints in its lip. No fishing lure, no tin.\nPaint it like attachment 1: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-19",
+     "note": "gibberish - did you specify what should be written?",
+     "from": "v1",
+     "at": 1795127986893
+    }
+   ],
    "id": "ch1-grace-list",
    "tab": "Props",
    "title": "Chapter 1 close-up: Grace's numbered list on notebook paper, held in two small hands (one square painting)",
