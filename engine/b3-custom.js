@@ -4,7 +4,8 @@
 // A Trait or Quirk row switches one on with `custom:'<name>'` and keeps its numbers in the row's `n`; a unit carries them in
 // `custom` ({name: numbers}). B3_CUSTOM lists every one-off this file knows, so the data check can catch a misspelt name.
 const B3_CUSTOM={
-  twinLambRelay:'Rose, Sugar Rush, Quirk A: riders are held for the later hits of a multi-hit move, at a share of their strength'
+  twinLambRelay:'Rose, Sugar Rush, Quirk A: riders are held for the later hits of a multi-hit move, at a share of their strength',
+  doubleCoat:'Grace, Craft Artist, Quirk B: a Razzle move after a Racket move (or the other way round) takes a free Composure pip off'
 };
 
 // ---------- Twin-Lamb Relay (spec 3.3: "multi-hit skills trigger weapon/elemental enchantments on every hit at 40% power") ----------
@@ -40,4 +41,20 @@ function b3RelayEnd(F,c) {
   for(const k of Object.keys(c.relay||{})) { const i=k.indexOf(':'),t=b3Unit(F,k.slice(0,i)),id=k.slice(i+1);
     if(t&&b3EndStatus(F,t,id,'used')) c.beats.push({t:'statusEnd',tgt:t.key,id,g:'post'}); }
   c.relay=null;
+}
+
+// ---------- Double Coat (spec 3.2: "Razzle->Racket or Racket->Razzle sequences knock 1 free Composure pip") ----------
+// Grace remembers the flavor of her last move (`lastFlavor`, set on every party unit, read only here). When this move is
+// Razzle and the last was Racket, or this is Racket and the last was Razzle, every monster this move hit loses `pips` Composure
+// pip(s), free, inside the action's 3-pip cap. My calls: her Basic counts as a move; a move of two flavors, or of any other
+// flavor (Sizzle: Glue Trap), is neither and starts the count again; a Support move she makes (no flavor) also starts it again.
+// Called from b3Act after the move's effects, before the ledger is paid.
+function b3DoubleCoat(F,c) {
+  const a=c.actor,S=c.skill; if(!S||a.side!=='party') return;
+  const fl=S.flavor&&S.flavor.length===1?S.flavor[0]:null,n=a.custom&&a.custom.doubleCoat,last=a.lastFlavor;
+  if(n&&fl&&last&&last!==fl&&['razzle','racket'].includes(fl)&&['razzle','racket'].includes(last)&&c.hit.length) {
+    for(const t of c.hit) b3Pips(c,t,n.pips);
+    c.beats.push({t:'passive',src:a.key,id:'double_coat',name:B3_QUIRKS.double_coat.name,g:c.g});
+  }
+  a.lastFlavor=fl;
 }

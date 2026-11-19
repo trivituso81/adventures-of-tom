@@ -160,9 +160,9 @@ function b3RenderParty() {
     const cls='b2-pc'+(u===B3.actor&&battle.state==='command'?' act':'')+(v.ko?' ko':'')+(tgt.includes(u)||(B3.ui==='info'&&B3.infoKey===u.key)?' tgt':'');
     const pips=Array.from({length:B3_RULES.pep.max},(_,k)=>'<i'+(k<v.pep?' class="on"':'')+'></i>').join('');
     // A Mark is not a status, but the card says so first; it takes the third icon's place so a card never shows more than 3.
-    const mk=b3ViewMarked(u.key)&&!v.ko;
-    const st=(mk?'<span class="b2-st b3-mk" title="A monster\u2019s wound-up attack is aimed here">MARKED</span>':'')+
-      b3ViewIcons(u.key).slice(0,mk?2:3).map(id=>'<span class="b2-st" style="color:'+B3_STATUS[id].color+'" title="'+b2Esc(B3_STATUS[id].name)+'">'+B3_STATUS[id].short+'</span>').join('');
+    const mk=b3ViewMarked(u.key)&&!v.ko,nx=!mk&&b3ViewAimed(u.key)&&!v.ko;
+    const st=(mk?'<span class="b2-st b3-mk" title="A monster\u2019s wound-up attack is aimed here">MARKED</span>':nx?'<span class="b2-st b3-nx" title="A monster\u2019s next attack is aimed here (Cartridge Blow)">NEXT TARGET</span>':'')+
+      b3ViewIcons(u.key).slice(0,mk||nx?2:3).map(id=>'<span class="b2-st" style="color:'+B3_STATUS[id].color+'" title="'+b2Esc(B3_STATUS[id].name)+'">'+B3_STATUS[id].short+'</span>').join('');
     const img=b2Portrait(u.id);
     const ctr=v.ctr?'<b class="b3-ctr" title="'+b2Esc(Object.values(u.counterInfo)[0].name)+' '+v.ctr+'">'+v.ctr+'</b>':'';
     return '<div class="'+cls+'" data-i="'+i+'"><span class="b2-pt">'+(img?'<img alt="" src="'+img+'">':'<span class="b2-ph">'+u.name.charAt(0)+'</span>')+ctr+'</span>'+

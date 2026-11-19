@@ -32,7 +32,7 @@ module.exports=function(T) {
   // 82. All sixteen lines are written: nothing of the four first Sig Vibes is marked soon or is only a name
   for(const v of ['tom_flier','grace_squishy','rose_sugar','deedee_neat']) { const L=ladder(VIBES[v],5),un=L.filter(x=>!x.built||!x.open).map(x=>x.id);
     ok(L.length===7&&!un.length,v+' is complete at Rank 5: '+J(un)); ok(!VIBES[v].skills.some(s=>SOON[s]),v+': no Skill is still only a name'); }
-  ok(J(Object.keys(G('B3_CUSTOM')))==='["twinLambRelay"]'&&QUIRKS.twin_lamb_relay.custom==='twinLambRelay','the one line that needed its own function is Twin-Lamb Relay');
+  ok(J(Object.keys(G('B3_CUSTOM')))==='["twinLambRelay","doubleCoat"]'&&QUIRKS.twin_lamb_relay.custom==='twinLambRelay','the lines that needed their own function are Twin-Lamb Relay (5a) and Double Coat (5b)');
 
   // 83. Priority Boarding: Guard Stance from the start until Tom's second turn ends; 20% more off a hit taken for someone at half HP or less
   noCrit(()=>{ const {F,open,tom,grace,f0}=fight(1);
@@ -230,8 +230,10 @@ module.exports=function(T) {
     let err='',free=0,wins=0;
     for(const f of ['toad','log','grump']) for(let s=1;s<=30;s++) { try { const r=play({party:LAB,level:2,formation:f,seed:s,loadouts:book(5,q),mods:{foeHp:3}}); for(const k in r.moves) used[k]=(used[k]||0)+r.moves[k]; free+=r.free||0; if(r.result==='win') wins++; } catch(e) { err=err||(f+' seed '+s+': '+e.message); } }
     ok(!err,'90 Rank 5 fights with every Quirk on run clean: '+err); ok(wins===90,'and are won: '+wins);
-    for(const c of ['tarmac_porsche_transfer','colossal_diamond_gold_dumpling','double_lamby_return_cart_blitz','fifty_year_dust_tsunami']) ok(used[c]>0,'the simple player used '+c+': '+(used[c]||0));
-    ok(free>0,'and took free Skills: '+free); }
+    // Grace carries two Capstones from 5b on (the Craft Artist's Makeover as well); the simple player takes whichever scores higher.
+    for(const c of ['tarmac_porsche_transfer','double_lamby_return_cart_blitz','fifty_year_dust_tsunami']) ok(used[c]>0,'the simple player used '+c+': '+(used[c]||0));
+    ok((used.colossal_diamond_gold_dumpling||0)+(used.masterpiece_portrait_makeover||0)>0,'and one of Grace\u2019s Capstones: '+(used.colossal_diamond_gold_dumpling||0)+' Colossal, '+(used.masterpiece_portrait_makeover||0)+' Makeover');
+    ok(!used.colossal_diamond_gold_dumpling||free>0,'and took free Skills when it granted them: '+free); }
 
   // The test rows come out again, and the data check says what it said before this file ran.
   delete ST.t_aim; delete ST.t_buff; delete SK.t_clob_basic; delete HZ.t_goo;

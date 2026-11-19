@@ -32,7 +32,10 @@ function b3BlankUnit(key,side,slot) {
     // Composure (spec 2.7): pips left and at the start; pipLock = cannot lose pips (from a Break until its next turn ends);
     // broken = Flustered and waiting for its next turn; flusterTurn = that turn is running; flusterMove = fall back when this turn ends.
     pips:0,maxPips:0,pipLock:false,broken:false,flusterTurn:false,flusterMove:false,
-    mark:null};   // the key of the family member this foe has Marked for its follow-up act (bestiary 1.1)
+    mark:null,    // the key of the family member this foe has Marked for its follow-up act (bestiary 1.1)
+    aimLock:null, // {key, act}: the family member this foe must aim `act` at (Cartridge Blow showed it: engine/b3-custom.js)
+    intent:null,  // {act, name, kind}: what Cartridge Blow told the player about this foe's next act; void if the foe would now pick another
+    lastFlavor:null};   // the flavor of this unit's last move, when it had exactly one (Double Coat)
 }
 // A family member in a fight. What they bring comes from their loadout (engine/b3-progress.js): cfg.loadouts[id], or a fresh
 // one with every Vibe at cfg.rank (1 when left out). The Main Vibe's Lean is applied here: Max HP is raised at once, the rest
@@ -153,7 +156,16 @@ function b3OverBeats(F,beats,g) {
 //         allySkill: the move is a Skill aimed at a family member.
 //   per   {counter, spend}: `v` is counted once for each point of that counter the holder has built. spend:true empties the
 //         counter when the action it counted in ends (engine/b3-resolve.js b3SpendCounters).
-const B3_MOD_WHEN=['flavor','notBasic','by','steppingIn','allySkill'];
+//         peeveOrPrime: the target has this hit's flavor as a Pet Peeve, or carries any Prime (Gamer's Intuition).
+//         skillPep:X: (ctx.skill) the move is a Skill, not a Basic or a Grand Capstone, and costs X Pep or less (New Game Plus).
+const B3_MOD_WHEN=['flavor','notBasic','by','steppingIn','allySkill','peeveOrPrime','skillPep'];
+// A foe's Pet Peeves right now: its own, plus any a status forces on it for a while (Masterpiece Portrait Makeover).
+function b3Peeves(u) {
+  let out=u.peeves;
+  for(const id in u.st) { const p=B3_STATUS[id].peeve; if(p) out=out.concat(p.filter(f=>!out.includes(f))); }
+  return out;
+}
+const b3PrimeCount=u=>Object.keys(u.st).filter(id=>B3_STATUS[id].kind==='prime').length;
 function b3ModWhen(u,m,ctx,putBy) {
   const W=m.when,c=ctx.c;
   for(const k in W) {
@@ -162,6 +174,8 @@ function b3ModWhen(u,m,ctx,putBy) {
     else if(k==='by') { if(!(W.by==='otherAlly'&&ctx.a&&ctx.a.side==='party'&&ctx.a.key!==putBy)) return false; }
     else if(k==='steppingIn') { const I=c&&c.inter&&c.inter[u.key],p=I&&b3Unit(c.F,I.forKey); if(!p||!(p.hp<=p.maxHp*W.steppingIn)) return false; }
     else if(k==='allySkill') { const S=ctx.skill; if(!S||S.slot==='basic'||!['ally','family','ko_ally','adjacent_allies'].includes(S.target)) return false; }
+    else if(k==='peeveOrPrime') { const t=ctx.t; if(!t||!(b3Peeves(t).includes(ctx.fl)||b3PrimeCount(t)>0)) return false; }
+    else if(k==='skillPep') { const S=ctx.skill; if(!S||S.slot==='basic'||S.slot==='cap'||!(S.pep<=W.skillPep)) return false; }
     else throw new Error('Battle 3 mod condition not built yet: '+k);
   }
   return true;
@@ -205,7 +219,9 @@ const b3Adjacent=(F,u)=>b3Live(F,u.side).filter(o=>Math.abs(o.slot-u.slot)===1);
 function b3AddStatus(F,u,id,o) {
   const S=B3_STATUS[id]; if(!S) throw new Error('Battle 3 has no status called '+id);
   const had=u.st[id],src=o&&o.src;
-  u.st[id]={id,n:(o&&o.n)||S.dur.n,unit:S.dur.unit,src:src?src.key:null,atk:src?b3Stat(src,'atk'):0,at:had?had.at:F.stamp++,skip:F.acting===u,v:o&&o.v!=null?o.v:null};
+  // A Prime lasts longer when whoever puts it on carries a `primeTurns` mod (Permanent Marker).
+  const more=S.kind==='prime'&&src&&!(o&&o.n)?Math.max(0,Math.round(b3Sum(src,'primeTurns'))):0;
+  u.st[id]={id,n:((o&&o.n)||S.dur.n)+more,unit:S.dur.unit,src:src?src.key:null,atk:src?b3Stat(src,'atk'):0,at:had?had.at:F.stamp++,skip:F.acting===u,v:o&&o.v!=null?o.v:null};
   delete u.stripped[id];
   return !had;
 }
@@ -238,13 +254,13 @@ function b3Carried(F,u) {
     for(const q of u.quirks) { const Q=B3_QUIRKS[q]; if(Q&&!Q.soon) rows.push({name:Q.name,short:'QUIRK',color:'#c9e6a8',kind:'quirk',left:'',desc:Q.desc}); } }
   const ids=Object.keys(u.st).sort((a,b)=>B3_STATUS[b].weight-B3_STATUS[a].weight||u.st[a].at-u.st[b].at);
   for(const id of ids) { const S=B3_STATUS[id],s=u.st[id];
-    rows.push({name:S.name,short:S.short,color:S.color,kind:S.kind,left:s.unit==='round'?s.n+(s.n===1?' round':' rounds')+' left':s.unit==='begin'?'until its next turn':turns(s.n),desc:S.desc}); }
+    rows.push({name:S.name,short:S.short,color:S.color,kind:S.kind,left:s.unit==='round'?s.n+(s.n===1?' round':' rounds')+' left':s.unit==='begin'?'until its next turn':s.unit==='srcBegin'?'until '+((b3Unit(F,s.src)||{}).name||'their')+'\u2019s next turn':turns(s.n),desc:S.desc}); }
   for(const sh of u.shields) rows.push({name:'Shield',short:'SHIELD',color:'#9fd0ff',kind:'buff',left:turns(sh.n),desc:'Soaks the next '+sh.amt+' damage before HP.'});
   for(const k in u.counters) if(u.counters[k]) { const I=u.counterInfo[k];
     rows.push({name:I?I.name:k,short:String(u.counters[k]),color:'#fff1cb',kind:'counter',left:'',desc:'Built up: '+u.counters[k]+(I&&I.max?' of '+I.max:'')+'.'}); }
   if(u.crack) rows.push({name:'Cracked',short:'CRACKED',color:'#e6b08a',kind:'debuff',left:'this fight',desc:'Defense is cut by '+Math.round(u.crack*100)+'% for the rest of the fight.'});
   for(const hz of F.hazards) if(hz.side===u.side) { const H=B3_HAZARDS[hz.id];
-    rows.push({name:H.name,short:H.short,color:H.color,kind:'hazard',left:hz.uses+(hz.uses===1?' slip':' slips')+', '+hz.rounds+(hz.rounds===1?' round':' rounds')+' left',desc:H.desc}); }
+    rows.push({name:H.name,short:H.short,color:H.color,kind:'hazard',left:(hz.uses<90?hz.uses+(hz.uses===1?' slip':' slips')+', ':'')+hz.rounds+(hz.rounds===1?' round':' rounds')+' left',desc:H.desc}); }
   return rows;
 }
 
@@ -276,7 +292,8 @@ function b3Pep(F,u,n,source) {
   u.pep=Math.max(P.min,Math.min(P.max,u.pep+n));
   return u.pep-before;
 }
-function b3Cost(F,u,S) { if(F.grant&&F.grant.key===u.key&&F.grant.free) return 0; return S.pep>0?Math.max(B3_RULES.pep.costFloor,S.pep):0; }
+// A Skill never costs less than the floor (1). Mods of stat 'cost' (New Game Plus) change the number first; a Basic costs 0.
+function b3Cost(F,u,S) { if(F.grant&&F.grant.key===u.key&&F.grant.free) return 0; return S.pep>0?Math.max(B3_RULES.pep.costFloor,S.pep+b3Sum(u,'cost',{skill:S})):0; }
 
 // ---------- What a unit can do ----------
 // The Basic, the Skills, and Pick-Me-Up while a family member is knocked out (spec 2.9).
@@ -339,16 +356,19 @@ function b3AutoScore(F,u,S,O) {
     sc+=best+3;
   } else if(tier>0) {
     const per=t=>{ let d=std(t)*tier/S.flavor.length,sum=0;
-      for(const fl of S.flavor) sum+=d*(t.peeves.includes(fl)?R.peeve:1)*(t.resists.includes(fl)?R.resist:1);
+      for(const fl of S.flavor) sum+=d*(b3Peeves(t).includes(fl)?R.peeve:1)*(t.resists.includes(fl)?R.resist:1);
       return sum; };
     if(O.units.length===1) {
       const t=O.units[0],strip=has('strip'),nb=strip&&strip.all?Object.keys(t.st).filter(id=>B3_STATUS[id].kind===strip.kind).length:0;
       const bonus=has('damage')&&has('damage').bonus,d=per(t)*(1+(bonus&&bonus.per==='stripped'?nb*bonus.add:0));
       sc+=d+(d>=t.hp?20:0)+(1-t.hp/t.maxHp)*2+(S.flavor.some(fl=>b3FindDetonation(t,fl))?8:0)+nb*6;
       if(has('interrupt')&&t.charge) sc+=25;
+      // A shell that answers the monster's next attack with a hit of its own (Winged Shell Lock-On): worth most of that hit while it is not already on.
+      const sh=S.effects.find(e=>e.op==='status'&&B3_STATUS[e.id]&&B3_STATUS[e.id].on&&B3_STATUS[e.id].on.actionDeclared);
+      if(sh&&!t.st[sh.id]) sc+=std(t)*R.power.standard*.4;
       // Composure: each pip this move should knock off is worth a little, and the pip that Breaks is worth a lot.
       if(t.maxPips&&!t.pipLock&&t.pips>0) { const det=S.flavor.map(fl=>b3FindDetonation(t,fl)).find(Boolean);
-        const p=Math.min(R.composure.capPerAction,(S.flavor.some(fl=>t.peeves.includes(fl))?R.composure.peeve:0)+(det?det.pips:0)+(S.composure||0));
+        const p=Math.min(R.composure.capPerAction,(S.flavor.some(fl=>b3Peeves(t).includes(fl))?R.composure.peeve:0)+(det?det.pips:0)+(S.composure||0));
         sc+=p*3+(p>=t.pips?14:0); }
     } else {
       sc+=O.units.reduce((s,t)=>s+per(t),0)/O.units.length*(S.target==='all_foes'?O.units.length*R.aoeShare:1);
@@ -357,7 +377,7 @@ function b3AutoScore(F,u,S,O) {
         if(e.kind==='hazard') sc+=F.hazards.filter(h=>h.side===u.side).length*8;
         else for(const t of O.units) { const nb=Object.keys(t.st).filter(id=>B3_STATUS[id].kind===e.kind).length; sc+=(e.all?nb:Math.min(nb,e.n||1))*6; } }
       if(S.target==='all_foes') for(const t of O.units) if(t.maxPips&&!t.pipLock&&t.pips>0) { const det=S.flavor.map(fl=>b3FindDetonation(t,fl)).find(Boolean);
-        const p=Math.min(R.composure.capPerAction,(S.flavor.some(fl=>t.peeves.includes(fl))?R.composure.peeve:0)+(det?det.pips:0)+(S.composure||0));
+        const p=Math.min(R.composure.capPerAction,(S.flavor.some(fl=>b3Peeves(t).includes(fl))?R.composure.peeve:0)+(det?det.pips:0)+(S.composure||0));
         sc+=p*3+(p>=t.pips?14:0); }
       if(has('taunt')&&!b3HasFlag(u,'taunt')) sc+=b3Live(F,u.side).reduce((s,m)=>s+(m===u?0:(1-m.hp/m.maxHp)*14+(foes.some(f=>f.mark===m.key)?10:0)),0);
     }
@@ -371,8 +391,8 @@ function b3AutoScore(F,u,S,O) {
   }
   else if(has('hazard')) {
     // Worth laying when nothing is on the floor and a monster has an act it would trip on.
-    const H=B3_HAZARDS[has('hazard').id],n=foes.filter(f=>f.D&&f.D.acts.some(A=>A.power>0&&A.tags.some(t=>H.tags.includes(t)))).length;
-    sc+=F.hazards.some(h=>h.id===H.id)||!n?-99:std(foes[0])*R.power.light*Math.min(H.uses,n+1)+8;
+    const H=B3_HAZARDS[has('hazard').id],n=foes.filter(f=>f.D&&f.D.acts.some(A=>H.any?b3Listed(A)&&!A.then:A.power>0&&A.tags.some(t=>H.tags.includes(t)))).length;
+    sc+=F.hazards.some(h=>h.id===H.id)||!n?-99:std(foes[0])*R.power.light*Math.min(H.uses,H.any?n:n+1)+8;
   } else if(has('intercept')) {
     // Worth it by how hurt the family next to him is.
     // A Marked neighbour is about to take a wound-up hit: stepping in is worth that hit.
@@ -398,6 +418,8 @@ function b3CheckData() {
     if(e.op==='ruckus'&&typeof e.n!=='number') bad.push(where+': a ruckus effect needs n');
     if(e.op==='intercept'&&B3_STATUS[e.id]&&!B3_STATUS[e.id].intercept) bad.push(where+': status '+e.id+' has no intercept field');
     if(e.op==='hazard'&&!B3_HAZARDS[e.id]) bad.push(where+': unknown hazard '+e.id);
+    if(e.op==='splash'&&e.of&&e.of!=='dealt') bad.push(where+': splash "of" must be "dealt" (or left out), not '+e.of);
+    if(e.op==='damage'&&e.critPerPrime!=null&&typeof e.critPerPrime!=='number') bad.push(where+': critPerPrime must be a number');
     if(e.op==='summon'&&!B3_FOES[e.id]) bad.push(where+': unknown foe to call '+e.id);
     if(e.op==='damage'&&e.power!=null&&(!flav(e.flavor)||(typeof e.power!=='number'&&B3_RULES.power[e.power]==null))) bad.push(where+': a damage effect with its own power needs a flavor and a known tier'); } };
   for(const id in B3_STATUS) { const S=B3_STATUS[id];
@@ -406,9 +428,12 @@ function b3CheckData() {
     if(!['buff','debuff','prime','stance','mark'].includes(S.kind)) bad.push('status '+id+': unknown kind '+S.kind);
     for(const h in (S.on||{})) { if(!B3_HOOKS.includes(h)) bad.push('status '+id+': unknown hook '+h); effects('status '+id,S.on[h].effects); }
     mods('status '+id,S.mods);
-    if(S.tick&&!B3_FLAVORS[S.tick.flavor]) bad.push('status '+id+': unknown tick flavor'); }
+    if(S.tick&&!B3_FLAVORS[S.tick.flavor]) bad.push('status '+id+': unknown tick flavor');
+    if(!['turn','round','begin','srcBegin'].includes(S.dur.unit)) bad.push('status '+id+': unknown duration unit '+S.dur.unit);
+    if(S.peeve&&!flav(S.peeve)) bad.push('status '+id+': unknown peeve flavor'); }
   for(const id in B3_HAZARDS) { const H=B3_HAZARDS[id];
-    if(H.id!==id||!H.desc||!H.short||!(H.uses>0)||!(H.rounds>0)) bad.push('hazard '+id+': needs id, desc, short, uses and rounds'); effects('hazard '+id,H.effects); }
+    if(H.id!==id||!H.desc||!H.short||!(H.uses>0)||!(H.rounds>0)) bad.push('hazard '+id+': needs id, desc, short, uses and rounds');
+    if(!H.any&&!(H.tags||[]).length) bad.push('hazard '+id+': needs tags, or any:true'); effects('hazard '+id,H.effects); }
   for(const D of B3_DETONATIONS) { if(!B3_STATUS[D.prime]||B3_STATUS[D.prime].kind!=='prime') bad.push('detonation '+D.id+': '+D.prime+' is not a Prime'); if(!B3_FLAVORS[D.flavor]) bad.push('detonation '+D.id+': unknown flavor'); effects('detonation '+D.id,D.effects); }
   for(const k in B3_FLAVORS) { const p=B3_FLAVORS[k].prime; if(p&&!B3_STATUS[p]) bad.push('flavor '+k+': unknown Prime '+p); }
   for(const id in B3_VIBES) { const V=B3_VIBES[id],w='vibe '+id,slots=['s1','s2','cap'];

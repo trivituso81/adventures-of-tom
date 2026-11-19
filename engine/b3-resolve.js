@@ -42,11 +42,13 @@ function b3BeginTurn(F,u,beats) {
   const c={F,actor:u,src:null,targets:[u],hit:[],beats,g:'pre',detonated:{},ledger:{}};
   // What lasts "until its next turn begins" ends here, before anything else (Flustered: a burn this turn is back at normal damage).
   for(const id of Object.keys(u.st)) if(u.st[id].unit==='begin') { b3EndStatus(F,u,id,'time'); beats.push({t:'statusEnd',tgt:u.key,id,g:'pre'}); }
+  // What lasts until the next turn of whoever put it on (a Winged Shell) ends when that turn begins.
+  for(const v of F.units) for(const id of Object.keys(v.st)) if(v.st[id].unit==='srcBegin'&&v.st[id].src===u.key) { b3EndStatus(F,v,id,'time'); beats.push({t:'statusEnd',tgt:v.key,id,g:'pre'}); }
   // A foe that was Broken gets this turn whatever else is on it, with its pips full again; they stay locked until the turn ends (spec 2.7).
   if(u.broken) { u.broken=false; u.flusterTurn=true; u.pips=u.maxPips; beats.push({t:'pips',tgt:u.key,n:0,left:u.pips,max:u.maxPips,refill:true,g:'pre'}); }
   for(const id of Object.keys(u.st)) {
     const S=B3_STATUS[id],s=u.st[id]; if(!S.tick||!s) continue;
-    const fl=S.tick.flavor,pv=u.peeves.includes(fl),rs=u.resists.includes(fl);
+    const fl=S.tick.flavor,pv=b3Peeves(u).includes(fl),rs=u.resists.includes(fl);
     const dmg=Math.max(1,Math.round(s.atk*B3_RULES.power[S.tick.power]*100/(100+b3Stat(u,'def'))*(pv?B3_RULES.peeve:1)*(rs?B3_RULES.resist:1)*b3TakenMult(u)));
     b3Hurt(F,c,u,dmg,{src:s.src,flavor:fl,peeve:pv,resist:rs,tick:id});
   }
@@ -96,6 +98,8 @@ function b3EndTurn(F,u,recovery,beats) {
     u.hitSince=false;
   }
   F.acting=null;
+  if(u.side==='foe') { u.aimLock=null; u.intent=null; }   // what Cartridge Blow showed was for this turn
+  b3IntentRefresh(F);
   beats.push({t:'endTurn',who:u.key,bar:b3BarSnap(F,null,0),g:'end'});
   if(b3CheckOver(F)) b3OverBeats(F,beats,'end');
 }
@@ -116,7 +120,9 @@ function b3Hurt(F,c,t,dmg,info) {
 }
 function b3KoCheck(F,c) {
   for(const u of F.units) if(!u.ko&&u.hp<=0) {
-    u.ko=true; u.st={}; u.shields=[]; u.charge=null; u.mark=null; u.broken=false; u.flusterMove=false; u.wait=0;
+    u.ko=true; u.st={}; u.shields=[]; u.charge=null; u.mark=null; u.aimLock=null; u.intent=null; u.broken=false; u.flusterMove=false; u.wait=0;
+    // A status that waits for this unit's next turn will never see it end (a Winged Shell Tom put on a monster).
+    for(const v of F.units) for(const id of Object.keys(v.st)) if(v.st[id].unit==='srcBegin'&&v.st[id].src===u.key) { delete v.st[id]; c.beats.push({t:'statusEnd',tgt:v.key,id,g:c.g}); }
     c.beats.push({t:'ko',tgt:u.key,g:c.g});
     b3Fire(F,'ko',{src:c.actor,tgt:u,g:c.g},c.beats);
   }
@@ -185,6 +191,9 @@ function b3Cond(F,c,cond,t) {
   if(cond.if==='tookHit') return !!c.actor.hitSince;
   throw new Error('Battle 3 condition not built yet: '+cond.if);
 }
+// The chance a hit crits: the base rate, the attacker's own bonus, what the target gives away (Dazzled), and a Skill that crits more
+// often for every Prime on the target (`critPerPrime` on its damage effect: Konami Code).
+const b3CritChance=(a,t,e)=>B3_RULES.crit.rate+b3Sum(a,'crit')+b3Sum(t,'critTaken')+(e&&e.critPerPrime?e.critPerPrime*b3PrimeCount(t):0);
 // One hit on one target. `per` is the Skill Power of each flavor part of this hit.
 function b3Hit(F,c,t,per,flavors,e,single) {
   const a=c.actor,B=c.beats;
@@ -198,7 +207,7 @@ function b3Hit(F,c,t,per,flavors,e,single) {
   const ev=b3Evasion(t); if(ev>0&&b3Rand(F)<ev) { B.push({t:'miss',src:a.key,tgt:t.key,why:'dodge',g:c.g}); b3Fire(F,'dodge',{src:a,tgt:t,g:c.g},B); return; }
   c.landed=(c.landed||0)+1;   // hits this action has landed so far ("It's OUR Longboard Now")
   // One crit roll per hit: base rate, the attacker's own bonus, and what the target gives away (Dazzled).
-  const crit=b3Rand(F)<B3_RULES.crit.rate+b3Sum(a,'crit')+b3Sum(t,'critTaken');
+  const crit=b3Rand(F)<b3CritChance(a,t,e);
   if(crit) b3Fire(F,'crit',{src:a,tgt:t,g:c.g},B);
   // An intercepted hit lands that much weaker on the one who stepped in.
   const red=c.inter&&c.inter[t.key]?c.inter[t.key].reduce:0;
@@ -212,7 +221,7 @@ function b3Hit(F,c,t,per,flavors,e,single) {
     // `counter` reads one of the attacker's Portable Counters (so much per point built up).
     if(e.bonus) { if(e.bonus.counter) bonus.skill=e.bonus.add*(a.counters[e.bonus.counter]||0); else if(e.bonus.per) bonus.skill=e.bonus.add*(c[e.bonus.per]||0);
       else if(b3Cond(F,c,e.bonus,t)) bonus.skill=e.bonus.add*(e.bonus.grow?(c.hitNo||0)+1:1); }
-    const pv=t.peeves.includes(fl),rs=t.resists.includes(fl);
+    const pv=b3Peeves(t).includes(fl),rs=t.resists.includes(fl);
     // What this hit is, for the mods that only count on some hits (a Quirk's `when`, a rider like Spit Shine): b3Mods in engine/b3-core.js.
     const mx={F,c,a,t,fl};
     let dmg=b3Stat(a,'atk')*per*100/(100+b3Stat(t,'def'))*b3OutMult(a,bonus,mx)*(pv?B3_RULES.peeve:1)*(rs?B3_RULES.resist:1)*(crit?B3_RULES.crit.dmg:1)*b3TakenMult(t,red,mx);
@@ -304,6 +313,7 @@ function b3Act(F,u,skillId,optKey) {
   b3SpendCounters(F,c);  // counters a bonus cashed in (Upgrade Certificate) go back to 0
   // A Skill's own printed Composure number, on every monster it hit (or aimed at, when it deals no damage).
   if(S.composure) for(const t of (c.hit.length?c.hit:c.targets)) b3Pips(c,t,S.composure);
+  b3DoubleCoat(F,c);     // Grace's Razzle-then-Racket chain (engine/b3-custom.js)
   b3KoCheck(F,c);
   // Composure is paid before anything answers: a foe this action Broke has lost its counter (architecture 2.6, step 6).
   b3PayLedger(F,c);
@@ -311,6 +321,7 @@ function b3Act(F,u,skillId,optKey) {
   b3Fire(F,'actionEnd',{src:u,g:'post',c},beats);
   b3PayLedger(F,c);   // pips a Trait or Quirk added as the action ended
   b3KoCheck(F,c);
+  b3IntentRefresh(F); // a monster's shown aim is only kept while it still holds (engine/b3-foe.js)
   if(G) { beats.push({t:'grantEnd',who:u.key,bar:b3BarSnap(F,null,0),g:'end'}); if(b3CheckOver(F)) b3OverBeats(F,beats,'end'); }
   else b3EndTurn(F,u,rec,beats);
   return {ok:true,beats};

@@ -446,12 +446,12 @@ def stage4(pg,lab):
     c=v['cards']
     need(len(c)==2 and c[0]['role']=='MAIN VIBE' and c[0]['name']=='Frequent Flier' and '60 / 220 VP' in c[0]['vp'] and c[0]['rows']==7,f'Tom\'s Main Vibe card is wrong: {c[:1]}')
     need(c[0]['live']==['Priority Boarding','Lounge Pass Flex','Zone One Blockade','Suite Door Slide'],f"what is in use from the Main Vibe at Rank 2 (the Trait counts since stage 5a wrote it): {c[0]['live']}")
-    need(c[1]['role']=='POCKET VIBE' and c[1]['name']=='Gamer Geek' and c[1]['live']==['Controller Toss'],f'the Pocket Vibe adds only its unlocked Skills: {c[1:]}')
+    need(c[1]['role']=='POCKET VIBE' and c[1]['name']=='Gamer Geek' and c[1]['live']==['Controller Toss','Winged Shell Lock-On'],f'the Pocket Vibe adds only its unlocked Skills (both of Gamer Geek\u2019s since 5b): {c[1:]}')
     vib(pg,'row-tom_flier-suite_door_slide'); v=vstate(pg); need('Skill, 3 Pep' in v['say'] and 'Tom' in v['say'],f"tapping a Skill row should say what it does: {v['say']}")
     vib(pg,'row-tom_flier-upgrade_certificate'); v=vstate(pg); need('Unlocks at Rank 3 (220 Vibe Points)' in v['say'],f"a locked Quirk should say when it unlocks: {v['say']}")
     # Main and Pocket trade places
     vib(pg,'main-tom_gamer',350); v=vstate(pg); c=v['cards']; fr.append(shot(pg))
-    need(c[0]['role']=='MAIN VIBE' and c[0]['name']=='Gamer Geek' and c[0]['live']==['Cartridge Blow','Controller Toss'],f'MAKE MAIN on Gamer Geek: {c[:1]}')
+    need(c[0]['role']=='MAIN VIBE' and c[0]['name']=='Gamer Geek' and c[0]['live']==['Gamer\u2019s Intuition','Cartridge Blow','Controller Toss','Winged Shell Lock-On'],f'MAKE MAIN on Gamer Geek (its Trait counts since stage 5b): {c[:1]}')
     need(c[1]['role']=='POCKET VIBE' and c[1]['name']=='Frequent Flier' and c[1]['live']==['Zone One Blockade','Suite Door Slide'],f'Frequent Flier should now be the Pocket Vibe: {c[1:]}')
     kept=pg.evaluate("()=>JSON.parse(localStorage.getItem('aot-b3-lab')).book.tom")
     need(kept['main']=='tom_gamer' and kept['pocket']=='tom_flier',f"the Lab's change is kept on the device at once: {kept}")
@@ -499,7 +499,7 @@ def stage4(pg,lab):
     need(cross=='Cartridge Blow',f'with Gamer Geek as Main, BASIC should be Cartridge Blow: {cross}')
     pg.mouse.move(2,2); pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(250); ff.append(shot(pg))
     sk=pg.evaluate("()=>[...document.querySelectorAll('#b3-cmd .b2-btn[data-i]')].map(b=>b.querySelector('.b2-sn').textContent+(b.querySelector('.b3-pk')?' [POCKET]':''))")
-    need(sk==['Controller Toss','Zone One Blockade [POCKET]','Suite Door Slide [POCKET]'],f'the SKILLS list should be the Main Vibe\'s Skill, then the Pocket Vibe\'s two, tagged: {sk}')
+    need(sk==['Controller Toss','Winged Shell Lock-On','Zone One Blockade [POCKET]','Suite Door Slide [POCKET]'],f'the SKILLS list should be the Main Vibe\'s two Skills, then the Pocket Vibe\'s two, tagged: {sk}')
     pg.keyboard.press('Escape'); pg.wait_for_timeout(150); pg.click('#b3-party .b2-pc[data-i="1"]'); pg.wait_for_timeout(300); ff.append(shot(pg))
     inf=pg.evaluate("()=>document.querySelector('#b3-cmd .b3-info').textContent")
     need('Gamer Geek' in inf and 'RANK 2' in inf and 'Striker Lean' in inf and 'Frequent Flier' in inf,f'tapping Tom should show his Vibes: {inf[:200]}')
@@ -709,6 +709,75 @@ def stage5(pg,lab):
     sheet(fr,4,os.path.join(OUT,'b3-s5-land.png'))
     pg.evaluate("()=>{ toggleLayout(); b3LabReset(); B7.speed=1; }"); pg.wait_for_timeout(400)
 
+S5B_BOOK="""()=>{ const B=b3LabReset(5),Q={tom:['elixir_hoarder','new_game_plus'],grace:['permanent_marker','double_coat'],rose:['twin_lamb_relay','its_our_longboard_now'],deedee:['car_crumb_vacuum','spit_shine']};
+  for(const id of ['tom','grace']) b3SetMain(id,B[id],B[id].pocket);
+  for(const id in Q) Q[id].forEach((q,i)=>b3SetQuirk(id,B[id],i,q)); b3LabSave(); return Object.keys(Q).map(id=>B[id].main+':'+B[id].quirks.join('+')); }"""
+# Records every act a monster starts (who it aimed at), so a test can compare the aim with what Cartridge Blow showed.
+S5B_HOOK="""()=>{ window.__b5=[]; if(!window.__b5w) { window.__b5w=1; const os=b3Show; b3Show=function(b){ if(b.t==='act'&&b.foe) window.__b5.push({src:b.src,tgts:b.tgts,name:b.name}); return os.apply(this,arguments); }; } }"""
+def s5b(pg): return pg.evaluate("""()=>{ const F=B3.F,f=F.foes[0],I=f.intent,P={}; for(const p of F.party) P[p.id]=p;
+  return {intent:I&&{act:I.act,aim:I.aim,kind:I.kind,name:I.name},lock:f.aimLock&&f.aimLock.key,viewAim:B3.view.aim[f.key]||null,acts:(window.__b5||[]).slice(),foe:Object.keys(f.st),pips:f.pips,
+    tom:Object.keys(P.tom.st),grace:Object.keys(P.grace.st),haz:B3.view.haz.map(h=>h.id),hazText:F.hazards.map(h=>h.id),
+    chips:[...document.querySelectorAll('#b3-party .b2-pc')].map(e=>[...e.querySelectorAll('.b2-st')].map(x=>x.textContent)),
+    cards:[...document.querySelectorAll('#b3-party .b2-pc')].map(e=>!!e.querySelector('.b3-nx')),log:B3.log.slice(-60).join(' | ')}; }""")
+def stage5b(pg,lab,landscape=False):
+    S='stage 5b'+(' landscape' if landscape else '')+': '; caps=[]; idx=lab.index('new6')
+    rot=landscape and pg.evaluate("()=>layout.rotated")
+    R=lambda f: f.rotate(90,expand=True) if rot else f
+    def need(cond,what):
+        if not cond: fails.append(S+what)
+    pg.evaluate("()=>{ B7.speed=1; }")
+    q=pg.evaluate(S5B_BOOK); need(q[0].startswith('tom_gamer:elixir_hoarder+new_game_plus') and q[1].startswith('grace_craft:permanent_marker+double_coat'),f'the Lab book did not take the second Vibes and their Quirks: {q}')
+    start(pg,idx,{'seed':SEED},keep=True); wait_cmd(pg); pg.evaluate(POKE_ROWS); pg.evaluate(S5_PREP); pg.evaluate(S5B_HOOK); pg.wait_for_timeout(300)
+    if not turn_of(pg,'tom',S): return
+    caps.append(R(shot(pg)))
+    # The tap list names Gamer Geek's Trait and both Quirks
+    pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-cmd').innerText")
+    if not landscape: f=shot(pg); f.save(os.path.join(OUT,'b3-s5b-info-portrait.png')); caps.append(f)
+    need('Gamer\u2019s Intuition' in txt and 'Elixir Hoarder' in txt and 'New Game Plus' in txt and 'TRAIT' in txt,f"Tom's list should name his Trait and both Quirks: {txt[:300]}")
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
+    # Cartridge Blow: the hit, then who the boss will aim at, on the card and over the head
+    basic(pg); aim(pg,None); wait_cmd(pg); pg.wait_for_timeout(400); v=s5b(pg); caps.append(R(shot(pg)))
+    need(v['intent'] and v['intent']['aim'] and v['intent']['kind']=='strike' and v['lock']==v['intent']['aim'],f"Cartridge Blow should show and hold the boss's next aim: {v['intent']} {v['lock']}")
+    ai=['p0','p1','p2','p3'].index(v['intent']['aim']) if v['intent'] and v['intent']['aim'] else -1
+    need(v['viewAim']==(v['intent'] or {}).get('aim') and ai>=0 and v['cards'][ai] and sum(v['cards'])==1,f"exactly the aimed family member's card should say NEXT TARGET: {v['cards']} {v['viewAim']}")
+    need(ai>=0 and 'NEXT TARGET' in v['chips'][ai],f"the chip text: {v['chips']}")
+    if not landscape: R(shot(pg)).save(os.path.join(OUT,'b3-s5b-aim-portrait.png'))
+    shown=(v['intent'] or {}).get('aim'); n0=len(v['acts'])
+    for _ in range(8):
+        v=s5b(pg)
+        if len(v['acts'])>n0: break
+        pg.evaluate(S5_PREP); basic(pg); aim(pg,None); wait_cmd(pg); pg.wait_for_timeout(300)
+    v=s5b(pg); need(len(v['acts'])>n0 and v['acts'][n0]['tgts']==[shown],f"the boss should go exactly where Cartridge Blow said ({shown}): {v['acts'][n0:n0+1]}")
+    need(v['intent'] is None and v['viewAim'] is None and not any(v['cards']),f"the boss's turn spends what it showed, on the field and the cards: {v['intent']} {v['cards']}")
+    if landscape:
+        sheet(caps,3,os.path.join(OUT,'b3-s5b-land.png'),scale=.6); return
+    # Winged Shell Lock-On, then the boss attacks into it
+    if not turn_of(pg,'tom',S): return
+    n0=len(s5b(pg)['acts']); use(pg,'Winged Shell Lock-On'); wait_cmd(pg); pg.wait_for_timeout(300); v=s5b(pg); caps.append(shot(pg))
+    need('winged_shell' in v['foe'],f"the shell should be on the boss: {v['foe']}")
+    for _ in range(8):
+        v=s5b(pg)
+        if len(v['acts'])>n0: break
+        pg.evaluate(S5_PREP); basic(pg); aim(pg,None); wait_cmd(pg); pg.wait_for_timeout(300)
+    pg.wait_for_timeout(1200); v=s5b(pg); caps.append(shot(pg))
+    need('winged_shell' not in v['foe'] and 'Winged Shell!' in v['log'],f"the shell should have slammed the boss and been used up: {v['foe']} {v['log'][-300:]}")
+    # Grace: Bedazzle-Gun Glue Trap, then the boss gets stuck
+    if not turn_of(pg,'grace',S): return
+    n0=len(s5b(pg)['acts']); use(pg,'Bedazzle-Gun Glue Trap'); wait_cmd(pg); pg.wait_for_timeout(300); v=s5b(pg); f=shot(pg); caps.append(f); f.save(os.path.join(OUT,'b3-s5b-glue-portrait.png'))
+    need('glue_trap' in v['haz'] and 'glue_trap' in v['hazText'],f"the Glue Trap should be on the floor and on screen: {v['haz']}")
+    for _ in range(8):
+        v=s5b(pg)
+        if len(v['acts'])>n0: break
+        pg.evaluate(S5_PREP); basic(pg); aim(pg,None); wait_cmd(pg); pg.wait_for_timeout(300)
+    pg.wait_for_timeout(1200); v=s5b(pg); caps.append(shot(pg))
+    need('fatigue' in v['foe'] and 'gets stuck in the glue trap' in v['log'],f"the boss should be caught in the glue and Fatigued: {v['foe']} {v['log'][-300:]}")
+    # Makeover (Grace) and Konami Code (Tom)
+    if not turn_of(pg,'grace',S): return
+    use(pg,'Masterpiece Portrait Makeover'); wait_cmd(pg); pg.wait_for_timeout(300); v=s5b(pg); need('razzle_weak' in v['foe'],f"Makeover should leave Razzle Weakness on the boss: {v['foe']}"); caps.append(shot(pg))
+    if not turn_of(pg,'tom',S): return
+    p0=pg.evaluate("()=>B3.F.foes[0].pips"); use(pg,'Konami Code'); wait_cmd(pg); pg.wait_for_timeout(300); v=s5b(pg); caps.append(shot(pg))
+    need(v['pips']<=p0-2 or v['pips']==0,f"Konami Code should take 2 Composure pips off the boss: {p0} to {v['pips']}")
+    sheet(caps,4,os.path.join(OUT,'b3-s5b.png'),scale=.55)
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
@@ -716,7 +785,7 @@ with sync_playwright() as pw:
     pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start',timeout=180000); pg.wait_for_timeout(1500)
-    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5')] or ([] if only else lab)
+    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b')] or ([] if only else lab)
     # The way in: ADMIN > BATTLE LAB shows NEW BATTLE, which opens the list.
     pg.evaluate("()=>{ splashSetMode('lab'); }"); pg.wait_for_timeout(200)
     names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
@@ -776,6 +845,11 @@ with sync_playwright() as pw:
     # 6c. stage 5a: the Traits, Quirks and Capstones of the four first Sig Vibes, at Rank 5 on The Big One
     if 's5' in sys.argv or not only and len(want)==len(lab):
         print('stage 5a: Traits, Quirks, Capstones'); stage5(pg,lab)
+    # 6d. stage 5b: Gamer Geek and Craft Artist complete, at Rank 5 on The Big One (portrait, then a short pass in landscape)
+    if 's5b' in sys.argv or not only and len(want)==len(lab):
+        print('stage 5b: Gamer Geek and Craft Artist'); stage5b(pg,lab)
+        pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage5b(pg,lab,True)
+        pg.click('#b3-exit'); pg.wait_for_timeout(500); pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
     # 7. battle 2 still owns its screen
     pg.evaluate("()=>{ B7.speed=1; splash.active=false; document.getElementById('splash').hidden=true; window.__LE.b2Start({party:['tom','grace','rose'],level:12,foes:[['mudling','front']],bag:[]}); }")
     pg.wait_for_function("()=>window.__LE.battle.state==='command'&&window.__LE.B2.actor&&window.__LE.B2.actor.side==='party'",timeout=40000)

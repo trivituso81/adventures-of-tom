@@ -245,6 +245,8 @@ function check() {
   require('./b3-check-s4.js')({G,ok,near,play,noCrit});
   // Stage 5a's groups (82 on): the Traits, Quirks and Capstones of the four first Sig Vibes, and the general pieces they needed.
   require('./b3-check-s5.js')({G,ok,near,play,noCrit});
+  // Stage 5b's groups (101 on): the second Sig Vibes of Tom and Grace complete (Gamer Geek, Craft Artist).
+  require('./b3-check-s5b.js')({G,ok,near,play,noCrit});
   console.log('CHECKS:',checks);
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);

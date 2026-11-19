@@ -44,15 +44,20 @@ function b3PlayReset() { Object.assign(B3P,{t:0,q:[],body:{},foe:{},fa:{},pops:[
 
 // ---------- The view: what the screen shows right now ----------
 function b3ViewSync() {
-  const F=B3.F,V=B3.view||(B3.view={u:{},bar:[],charge:{},mark:{},haz:[]});
+  const F=B3.F,V=B3.view||(B3.view={u:{},bar:[],charge:{},mark:{},aim:{},haz:[]});
+  V.aim=V.aim||{};
   for(const u of F.units) V.u[u.key]=Object.assign(V.u[u.key]||{},{hp:u.hp,maxHp:u.maxHp,pep:u.pep,st:Object.keys(u.st),ko:u.ko,sh:b3ShieldTotal(u),pips:u.pips,maxPips:u.maxPips,ctr:b3CounterShown(u)});
   V.haz=F.hazards.map(h=>({id:h.id,side:h.side,uses:h.uses}));
+  // The aim Cartridge Blow showed (a monster's `intent`): kept while it holds, gone when the monster's turn spends it.
+  for(const f of F.foes) { if(f.intent&&f.intent.aim) V.aim[f.key]=f.intent.aim; else delete V.aim[f.key]; }
   for(const f of F.foes) { if(f.charge) V.charge[f.key]=f.charge.name; else delete V.charge[f.key]; if(f.mark) V.mark[f.key]=f.mark; else delete V.mark[f.key]; }
 }
 // The Portable Counter a portrait shows as a number (spec 2.8): the first one this unit is building, 0 when it has none.
 function b3CounterShown(u) { const k=Object.keys(u.counterInfo||{})[0]; return k?u.counters[k]||0:0; }
 // Is this family member Marked by a monster right now (in the view)?
 const b3ViewMarked=key=>Object.keys(B3.view.mark).some(f=>B3.view.mark[f]===key);
+// Is a monster about to aim its next attack here, as Cartridge Blow showed (in the view)?
+const b3ViewAimed=key=>Object.keys(B3.view.aim||{}).some(f=>B3.view.aim[f]===key);
 // The 3 icons for a unit in the view (spec 2.8): its Prime, its strongest debuff, its strongest buff.
 function b3ViewIcons(key) {
   const ids=(B3.view.u[key]||{}).st||[],pick=kinds=>ids.filter(id=>B3_STATUS[id]&&kinds.includes(B3_STATUS[id].kind)).sort((a,b)=>B3_STATUS[b].weight-B3_STATUS[a].weight)[0];
@@ -165,7 +170,14 @@ function b3Show(b) {
     b3LayoutAdd(b.tgt); V.bar=b.bar; b3RenderBar(b.tgt); b3Sfx('intro'); b3Say(b.name+' joins the fight!');
   }
   else if(b.t==='hazardOn') { V.haz=V.haz.filter(h=>!(h.id===b.id&&h.side===b.side)); V.haz.push({id:b.id,side:b.side,uses:b.uses}); b3Word(B3_HAZARDS[b.id].name.toUpperCase(),B3_HAZARDS[b.id].color); }
-  else if(b.t==='hazardTrip') { const h=V.haz.find(x=>x.id===b.id); if(h) h.uses=b.left; b3Pop(b.tgt,'SLIPPED!',B3_HAZARDS[b.id].color); b3Sfx('thud'); b3Say(b3Name(b.tgt)+' slips on the '+B3_HAZARDS[b.id].name.toLowerCase()+'.'); }
+  else if(b.t==='hazardTrip') { const h=V.haz.find(x=>x.id===b.id),H=B3_HAZARDS[b.id]; if(h) h.uses=b.left; b3Pop(b.tgt,H.pop||'SLIPPED!',H.color); b3Sfx('thud'); b3Say(b3Name(b.tgt)+' '+(H.verb||'slips on')+' the '+H.name.toLowerCase()+'.'); }
+  else if(b.t==='foresee') {
+    // Cartridge Blow: the monster's next act, and who it is aimed at when it is aimed at one family member.
+    const who=b3Name(b.foe),at=b.tgt?b3Name(b.tgt):'';
+    if(b.tgt) V.aim[b.foe]=b.tgt; else delete V.aim[b.foe];
+    b3Pop(b.foe,b.tgt?'NEXT: '+at.toUpperCase():'FORESEEN','#ffe27a',{sc:2}); b3Sfx('combo');
+    b3Say(!b.name?who+' has nothing planned.':b.kind==='strike'?who+' will use '+b.name+' on '+at+' next.':b.kind==='wind'?who+' is about to wind up '+b.name+'.':b.kind==='wide'?who+' will use '+b.name+' on the whole family next.':who+' will use '+b.name+' next.');
+  }
   else if(b.t==='hazardEnd') { V.haz=V.haz.filter(h=>!(h.id===b.id&&h.side===b.side)); if(b.why==='strip') b3Say('The '+B3_HAZARDS[b.id].name.toLowerCase()+' is scrubbed away.'); }
   else if(b.t==='crack') { b3Pop(b.tgt,'CRACKED','#e6b08a',{sc:2}); }
   // A Trait or Quirk went off (only the ones whose row asks to be named: engine/b3-hooks.js `show`).
@@ -190,9 +202,9 @@ function b3Show(b) {
     if(b.mark) { V.mark[b.src]=b.mark; b3Pop(b.mark,'MARKED','#ff8f80',{sc:2}); b3Say(b3Name(b.src)+' has Marked '+b3Name(b.mark)+'. '+b.name+' lands on '+b3Name(b.mark)+' on its next turn.'); }
     else b3Say(b3Name(b.src)+' is winding up '+b.name+'. It lands on its next turn.');
   }
-  else if(b.t==='act') { if(b.foe) { delete V.charge[b.src]; delete V.mark[b.src]; } }
+  else if(b.t==='act') { if(b.foe) { delete V.charge[b.src]; delete V.mark[b.src]; delete V.aim[b.src]; } }
   else if(b.t==='ko') {
-    vu.ko=true; vu.st=[]; delete V.charge[b.tgt]; delete V.mark[b.tgt];
+    vu.ko=true; vu.st=[]; delete V.charge[b.tgt]; delete V.mark[b.tgt]; delete V.aim[b.tgt];
     if(b.tgt[0]==='f') { B3P.fa[b.tgt].die=now; b3Sfx('grumpDie'); }
     else { B3P.body[b.tgt]={kind:'ko',t0:now,dur:1e9}; b3Sfx('thud'); b3Say(b3Name(b.tgt)+' is knocked out.'); }
   }
@@ -290,7 +302,7 @@ function b3Draw() {
     gfx.globalAlpha=.3+.08*Math.sin(t*3);
     if(foe) for(const f of L) { const P=B3P.foe[f.key]; if(P) ellipse(P.px,P.py+1,P.def.sprite[0].length*P.sc*.62,7,H.color); }
     else for(const u of F.party) { const hm=b3PartyHome(u); ellipse(hm.cx,hm.base,34,6,H.color); }
-    gfx.globalAlpha=1; b3Text(H.short+' x'+h.uses,foe?70:500,14,H.color,2); }
+    gfx.globalAlpha=1; b3Text(H.short+(h.uses<90?' x'+h.uses:''),foe?70:500,14,H.color,2); }
   // Enemies, back to front.
   for(const f of F.foes.filter(f=>B3P.foe[f.key]).sort((a,b)=>B3P.foe[a.key].py-B3P.foe[b.key].py)) b3DrawFoe(f,t,picked.includes(f.key));   // an add shows once its `summon` beat has played
   // Party, back to front (slot order runs up-screen to down-screen).
@@ -381,6 +393,8 @@ function b3DrawMember(u,t,picked) {
   const sy=y-10;
   // Marked by a monster's wound-up act: a red arrow and the word, until the act fires or is cancelled.
   if(b3ViewMarked(u.key)&&!picked) { const yy=sy-2-Math.round(Math.abs(Math.sin(t*6))*4); b3Arrow(cx,yy,'#ff8f80'); b3Text('MARKED',cx,yy-12,'#ff8f80',2); }
+  // The aim Cartridge Blow showed: a yellow arrow and the words, until that monster's turn.
+  else if(b3ViewAimed(u.key)&&!picked&&!(B3.view.u[u.key]||{}).ko) { const yy=sy-2-Math.round(Math.abs(Math.sin(t*6))*4); b3Arrow(cx,yy,'#ffe27a'); b3Text('NEXT TARGET',cx,yy-12,'#ffe27a',2); }
   if(picked) b3Arrow(cx,sy-2-Math.round(Math.abs(Math.sin(t*6))*5),'#9be39a');
   else if(B3.actor===u&&battle.state==='command'&&B3.ui!=='target'&&!b3ViewMarked(u.key)) b3Arrow(cx,sy-2-Math.round(Math.abs(Math.sin(t*5))*4),'#fff1cb');
 }

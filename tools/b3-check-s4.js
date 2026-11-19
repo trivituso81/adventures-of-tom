@@ -111,13 +111,13 @@ module.exports=function(T) {
 
   // 77. What a loadout gives: Skills by Rank, Main first then Pocket; the Basic and the Trait from the Main Vibe only
   { const L=newL('tom',1); ok(J(kit('tom',L).skills)===J(['zone_one_blockade','controller_toss'])&&kit('tom',L).basic==='lounge_pass_flex','Rank 1: Skill 1 of the Main Vibe, then Skill 1 of the Pocket Vibe: '+J(kit('tom',L).skills));
-    setRank('tom',L,2); ok(J(kit('tom',L).skills)===J(['zone_one_blockade','suite_door_slide','controller_toss']),'Rank 2 adds Skill 2 (a Skill with no row yet is left out): '+J(kit('tom',L).skills));
-    setMain('tom',L,'tom_gamer'); const K=kit('tom',L); ok(K.basic==='cartridge_blow'&&J(K.skills)===J(['controller_toss','zone_one_blockade','suite_door_slide'])&&K.lean==='striker'&&K.trait==='gamers_intuition','trading Main and Pocket changes the Basic, the order of the Skills, the Lean and the Trait: '+J(K));
-    L.vp.tom_flier=0; ok(J(kit('tom',L).skills)===J(['controller_toss','zone_one_blockade']),'each Vibe unlocks by its own Rank: '+J(kit('tom',L).skills));
-    setPocket('tom',L,'t_v3'); ok(J(kit('tom',L).skills)===J(['controller_toss','t_v3_s1','t_v3_s2']),'a third Vibe in the Pocket brings its own Skills: '+J(kit('tom',L).skills)); }
+    setRank('tom',L,2); ok(J(kit('tom',L).skills)===J(['zone_one_blockade','suite_door_slide','controller_toss','winged_shell_lock_on']),'Rank 2 adds Skill 2 (a Skill with no row yet is left out): '+J(kit('tom',L).skills));
+    setMain('tom',L,'tom_gamer'); const K=kit('tom',L); ok(K.basic==='cartridge_blow'&&J(K.skills)===J(['controller_toss','winged_shell_lock_on','zone_one_blockade','suite_door_slide'])&&K.lean==='striker'&&K.trait==='gamers_intuition','trading Main and Pocket changes the Basic, the order of the Skills, the Lean and the Trait: '+J(K));
+    L.vp.tom_flier=0; ok(J(kit('tom',L).skills)===J(['controller_toss','winged_shell_lock_on','zone_one_blockade']),'each Vibe unlocks by its own Rank: '+J(kit('tom',L).skills));
+    setPocket('tom',L,'t_v3'); ok(J(kit('tom',L).skills)===J(['controller_toss','winged_shell_lock_on','t_v3_s1','t_v3_s2']),'a third Vibe in the Pocket brings its own Skills: '+J(kit('tom',L).skills)); }
   { const B=book(2),F=NF({party:LAB,level:2,formation:'mudling',seed:5,loadouts:B}),t=F.party[1];
-    ok(J(skillsOf(F,t).map(S=>S.id))===J(['lounge_pass_flex','zone_one_blockade','suite_door_slide','controller_toss']),'in a fight the SKILLS list is the loadout\'s: '+J(skillsOf(F,t).map(S=>S.id)));
-    ok(t.vibe==='tom_flier'&&t.pocket==='tom_gamer'&&t.rank===2&&J(t.pocketSkills)==='["controller_toss"]','the unit knows its Main, Pocket and Rank');
+    ok(J(skillsOf(F,t).map(S=>S.id))===J(['lounge_pass_flex','zone_one_blockade','suite_door_slide','controller_toss','winged_shell_lock_on']),'in a fight the SKILLS list is the loadout\'s: '+J(skillsOf(F,t).map(S=>S.id)));
+    ok(t.vibe==='tom_flier'&&t.pocket==='tom_gamer'&&t.rank===2&&J(t.pocketSkills)==='["controller_toss","winged_shell_lock_on"]','the unit knows its Main, Pocket and Rank');
     const F1=NF({party:LAB,level:2,formation:'mudling',seed:5}); ok(J(F1.party[1].skills)===J(['zone_one_blockade','controller_toss']),'a fight given no loadouts uses fresh ones at Rank 1: '+J(F1.party[1].skills));
     const F3=NF({party:LAB,level:2,formation:'mudling',seed:5,rank:2}); ok(F3.party[1].skills.includes('suite_door_slide'),'cfg.rank sets the Rank of a fight given no loadouts'); }
   // The Trait comes with the Main Vibe only; a Quirk comes with its slot whatever Vibe it is from; one whose rule is not written is left off.
@@ -168,10 +168,10 @@ module.exports=function(T) {
   // 80. The second Sig Vibes' first moves
   // Cartridge Blow and Controller Toss (Tom, Gamer Geek)
   noCrit(()=>{ const {F,u,f0}=upTo({loadouts:book(2,['tom'])},'tom'); tough(F); for(const f of F.foes) f.st={};   // whatever the others' Basics left on the monsters
-    const b=act(F,u,'cartridge_blow','f0').beats,h=hits(b,'f0')[0]; ok(h&&h.flavor==='racket'&&h.dmg===Math.round(26*1.15*.5*100/112*1.5)&&u.pep===6,'Cartridge Blow: a light Racket hit and 2 Pep: '+(h&&h.dmg)+', Pep '+u.pep);
+    const b=act(F,u,'cartridge_blow','f0').beats,h=hits(b,'f0')[0]; ok(h&&h.flavor==='racket'&&h.dmg===Math.round(26*1.15*.5*100/112*1.5*1.2)&&u.pep===6,'Cartridge Blow: a light Racket hit (a Pet Peeve, +20% from Gamer\u2019s Intuition) and 2 Pep: '+(h&&h.dmg)+', Pep '+u.pep);
     F.acting=u; const d0=hits(act(F,u,'controller_toss','f0').beats,'f0')[0].dmg; ok(d0===Math.round(26*1.15*100/112)&&u.pep===4,'Controller Toss: a standard Clobber hit for 2 Pep: '+d0);
     ok(!u.hitSince,'nothing has hit Tom yet'); });
-  noCrit(()=>{ const {F,u,f0}=upTo({loadouts:book(2,['tom'])},'tom'); tough(F); u.hp=u.maxHp=5000;
+  noCrit(()=>{ const {F,u,f0}=upTo({loadouts:book(2,['tom'])},'tom'); tough(F); u.hp=u.maxHp=5000; for(const f of F.foes) f.st={};   // a Prime would add Gamer's Intuition
     const base=Math.round(26*1.15*100/112); add(F,u,'t_taunt',{});
     foeAct(F,f0,'wobble'); ok(u.hitSince,'a monster\'s hit on Tom is remembered');
     F.acting=u; const d1=hits(act(F,u,'controller_toss','f0').beats,'f0')[0].dmg; ok(d1===Math.round(26*1.15*100/112*1.4),'Controller Toss is 40% stronger after Tom took a hit: '+d1+' against '+base);
@@ -185,7 +185,9 @@ module.exports=function(T) {
     for(const f of F.foes) f.st={};   // whatever the others' Basics left on the monsters
     const b=act(F,u,'glitter_brush_flick','f0').beats,h=hits(b,'f0')[0]; ok(h&&h.flavor==='razzle'&&!!f0.st.dazzled,'Glitter-Brush Flick: a Razzle hit that leaves Dazzled');
     F.acting=u; u.pep=10; const b2=act(F,u,'open_string_violin_screech','*').beats,per=26*1.15*.7*100/112*1.5;
-    ok(hits(b2,'f0').length===1&&hits(b2,'f1').length===1&&hits(b2,'f1')[0].dmg===Math.round(per),'Violin Screech hits every monster at 70% of standard: '+hits(b2,'f1')[0].dmg+' against '+Math.round(per));
+    // Creative Mess (stage 5b): the Off-key on the first monster splashes onto the second before the second is hit, so its own hit is the one that is not a splash.
+    const main=id=>hits(b2,id).filter(x=>!x.splash);
+    ok(main('f0').length===1&&main('f1').length===1&&main('f1')[0].dmg===Math.round(per),'Violin Screech hits every monster at 70% of standard: '+main('f1')[0].dmg+' against '+Math.round(per));
     ok(b2.some(x=>x.t==='detonate'&&x.id==='sensory_overload'&&x.tgt==='f0')&&!b2.some(x=>x.t==='detonate'&&x.tgt==='f1'),'it sets off Dazzled on the one that was Dazzled, and only there');
     ok(!!f0.st.off_key&&!!f1.st.off_key&&near(stat(f1,'atk'),f1.atk*.8)&&u.pep===7+1,'each monster hit has 20% less Attack; 3 Pep spent, 1 back for the Detonation: Pep '+u.pep); });
   // Pocket Pretzel & Pat (Rose, Cozy Rosie)
@@ -220,7 +222,7 @@ module.exports=function(T) {
     if(T.lines) T.lines.push(...lines); }
   { const cfg={party:LAB,level:2,formation:'bigone',seed:77,loadouts:book(2)},a=play(cfg),b=play(Object.assign({},cfg,{loadouts:book(2)}));
     ok(a.order.join()===b.order.join()&&a.rounds===b.rounds&&a.hpLeft.join()===b.hpLeft.join(),'a seed replays exactly with loadouts');
-    ok(a.moves.controller_toss>0||a.moves.zone_one_blockade>0||a.moves.suite_door_slide>0,'Tom uses a Skill in the boss fight: '+J(a.moves)); }
+    ok(a.moves.controller_toss>0||a.moves.zone_one_blockade>0||a.moves.suite_door_slide>0||a.moves.winged_shell_lock_on>0,'Tom uses a Skill in the boss fight: '+J(a.moves)); }
   { const before=J(book(2)),B=book(2); play({party:LAB,level:2,formation:'mudling',seed:3,loadouts:B}); ok(J(B)===before,'a fight never changes the loadouts it was given'); }
 
   // Take the test Vibe out again.

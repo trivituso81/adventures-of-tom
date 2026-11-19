@@ -5,7 +5,7 @@
 // "not built yet", so the simulator names any kit line that is ahead of the engine.
 const B3_OP_LIST=['damage','heal','shield','status','prime','cleanse','strip','steal','invert','push','pull','swapBar','place','pep','ruckus',
   'composure','revive','counter','ward','intercept','mark','hazard','grant','aggro','taunt','pullForward','interrupt','detonateAll','splash',
-  'crack','later','summon','row'];
+  'crack','later','summon','row','foresee'];
 // c is the action in progress: {F, actor, src, skill, rec, targets (chosen), hit (units a damage op landed on), beats, g (which
 // part of the move the beats belong to), detonated, tgt (set while a Detonation's, a hook's or a hazard's effects run), partDmg,
 // tags (the act's tags), outExtra ({kind: amount} damage modifiers for this action only), stripped and cleansed (counts so far),
@@ -149,13 +149,18 @@ const B3_OPS={
     t.granted++; F.grant={key:t.key,by:c.actor.key,maxPep:e.maxPep,free:!!e.free};
     c.beats.push({t:'grant',src:c.actor.key,tgt:t.key,g:c.g});
   },
+  // foresee: each monster this move hit says who it will aim its next attack at, and keeps to that (engine/b3-foe.js b3Foresee).
+  foresee(F,c,e) { for(const t of b3Who(F,c,e.to)) if(b3Alive(t)&&t.side==='foe') { const I=b3Foresee(F,t); c.beats.push({t:'foresee',foe:t.key,tgt:I?I.aim:null,kind:I?I.kind:null,name:I?I.name:null,g:c.g}); } },
   // composure: a printed Composure number. It goes into the action's ledger, which is paid when the action ends (the 3-pip cap, the Break).
   composure(F,c,e) { for(const t of b3Who(F,c,e.to)) b3Pips(c,t,e.n); },
-  // splash: a share of the hit that set it off, as plain damage of one flavor (Short Circuit!).
+  // splash: a share of the hit that set it off, as plain damage of one flavor (Short Circuit!). With `of:'dealt'` the share is of
+  // what the whole action has taken off the monster it is about (Creative Mess); when that is nothing (a debuff from a move that
+  // deals no damage), it is a standard hit's worth of the actor's Attack.
   splash(F,c,e) {
+    const base=e.of==='dealt'?(c.dealt>0?c.dealt:b3Stat(c.actor,'atk')*B3_RULES.power.standard):(c.partDmg||0);
     for(const t of b3Who(F,c,e.to)) { if(!b3Alive(t)) continue;
-      const pv=t.peeves.includes(e.flavor),rs=t.resists.includes(e.flavor);
-      const dmg=Math.max(1,Math.round((c.partDmg||0)*e.share*(c.scale||1)*(pv?B3_RULES.peeve:1)*(rs?B3_RULES.resist:1)*b3TakenMult(t)));
+      const pv=b3Peeves(t).includes(e.flavor),rs=t.resists.includes(e.flavor);
+      const dmg=Math.max(1,Math.round(base*e.share*(c.scale||1)*(pv?B3_RULES.peeve:1)*(rs?B3_RULES.resist:1)*b3TakenMult(t)));
       b3Hurt(F,c,t,dmg,{src:c.actor.key,flavor:e.flavor,peeve:pv,resist:rs,splash:true});
       if(pv&&c.actor.side==='party') b3Pips(c,t,0,true); }
   }

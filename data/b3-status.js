@@ -3,7 +3,8 @@
 //   kind    buff, debuff, prime, stance or mark
 //   group   'mental' for the statuses a mental cleanse removes (spec 2.8), else null
 //   dur     {n, unit}: unit 'turn' counts the carrier's own turns (at the end of each), 'round' counts round dividers,
-//           'begin' ends when the carrier's next turn begins (Flustered)
+//           'begin' ends when the carrier's next turn begins (Flustered), 'srcBegin' ends when the next turn of whoever put it
+//           on begins (Winged Shell Lock-On: it sits on a monster and goes at Tom's next turn)
 //   mods    [{stat, kind, v}]: `kind` is the stacking bucket. Same kind adds, different kinds multiply (spec 2.4).
 //           stats: spd, atk, def (the stat itself), out (damage dealt), taken (damage taken), reduce (damage reduction),
 //           crit (own Crit Rate), critTaken (Crit Rate of attacks against it), eva (Evasion), acc (chance its attacks miss,
@@ -11,6 +12,7 @@
 //           A mod may carry `when` (it counts only on some hits) and `per` (it grows with a counter): engine/b3-core.js b3Mods.
 //   flags   blind (its next single-target attack misses, then the status is used up), skipTurn (loses its next turn, then the
 //           status is used up), taunt (enemy single-target attacks must aim at the carrier), untargetable, pushImmune
+//   peeve   flavors that count as the carrier's Pet Peeves while it is on (Masterpiece Portrait Makeover)
 //   tick    damage at the start of each of the carrier's turns
 //   regen   healing at the start of each of the carrier's turns, as a share of Max HP
 //   intercept {reduce}: single-target hits aimed at the carrier land on the unit that put this status on, that much weaker
@@ -102,6 +104,27 @@ const B3_STATUS={
     short:'PINCHED',color:'#f0c27b',weight:3,desc:'Attacks against it crit 15% more often.'},
   all_better:{id:'all_better',name:'All Better',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'allBetter',v:.20}],flags:[],
     short:'ALL BETTER',color:'#8fe3a6',weight:4,desc:'Deedee made it better: 20% more Attack.'},
+  // ---- Kit statuses: Gamer Geek and Craft Artist (stage 5b) ----
+  // Winged Shell Lock-On: a mark on the monster until Tom's next turn begins. If it attacks before then, Tom's own small answer
+  // lands on it: a free standard Razzle hit (the spec says "free Razzle explosion"; the tier is my call). `answer:'putter'` makes
+  // the reaction Tom's and `consume` uses the shell up, so a fast monster that acts twice is hit once. A wind-up turn is not an
+  // attack (it deals nothing), so the shell waits for the act that lands. Not a counterattack: `quiet`.
+  winged_shell:{id:'winged_shell',name:'Winged Shell',kind:'mark',group:null,dur:{n:1,unit:'srcBegin'},mods:[],flags:[],
+    on:{actionDeclared:{carrier:'source',attacks:true,answer:'putter',react:true,quiet:true,consume:true,
+      effects:[{op:'damage',flavor:['razzle'],power:'standard',to:'attacker'}]}},
+    short:'SHELL',color:'#7aa8ff',weight:7,
+    desc:'Tom\u2019s blue winged shell hovers over it until his next turn. If it attacks before then, the shell slams down on it in a free Razzle explosion.'},
+  // Masterpiece Portrait Makeover: Razzle is one of its Pet Peeves for 2 of its turns (a Razzle hit does 50% more and takes a pip).
+  razzle_weak:{id:'razzle_weak',name:'Razzle Weakness',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[],flags:[],peeve:['razzle'],
+    short:'RAZZLE WEAK',color:'#ffe27a',weight:7,
+    desc:'Grace\u2019s portrait has it dazzled: Razzle is one of its Pet Peeves for now, so Razzle hits do 50% more and knock a Composure pip off.'},
+  // Elixir Hoarder: put on at the start of Tom's turn, gone as his next turn begins, so it covers this turn's hit and the wait it sets.
+  elixir_buzz:{id:'elixir_buzz',name:'Elixir Buzz',kind:'buff',group:null,dur:{n:1,unit:'begin'},mods:[{stat:'spd',kind:'elixir',v:.15},{stat:'crit',kind:'elixir',v:.15}],flags:[],
+    short:'BUZZING',color:'#9be39a',weight:5,desc:'Tom is saving up and it shows: 15% faster and 15% more likely to crit this turn.'},
+  // New Game Plus: the next Skill of 4 Pep or less costs 2 less (never below 1, never a Grand Capstone). It is put on during or
+  // after Tom's turn and lasts until his next turn ends, which is the next Skill he can use.
+  new_game_plus:{id:'new_game_plus',name:'New Game Plus',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'cost',kind:'ngp',v:-2,when:{skillPep:4}}],flags:[],
+    short:'NEXT -2 PEP',color:'#8dc4e6',weight:5,desc:'Tom\u2019s next Skill that costs 4 Pep or less costs 2 less (1 Pep at the least).'},
   // ---- Enemy statuses: chapter 1 ----
   jitterflight:{id:'jitterflight',name:'Jitterflight',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'jitter',v:.20}],flags:[],
     short:'JITTER',color:'#d8e68a',weight:4,desc:'Dodges 20% of attacks. It can be stripped.'},
@@ -121,8 +144,15 @@ const B3_STATUS={
 //   effects ops on the unit it catches; the unit that laid the hazard is the attacker
 // Wet-Floor Hazard (spec 3.5): "next 2 physical foes slip (-25% dmg & Clobber fall)". My calls: "physical" means an act
 // tagged melee (bestiary 1.7 lists this Skill as an answer to melee), the fall is a light hit, and the slick dries after 3 rounds.
+//   any     true: it catches a monster that starts ANY act that is not a wind-up (not only acts with a tag and a power above 0)
 const B3_HAZARDS={
   wet_floor:{id:'wet_floor',name:'Wet Floor',side:'foe',uses:2,rounds:3,tags:['melee'],out:-.25,
     effects:[{op:'damage',flavor:['clobber'],power:'light',to:'target'}],short:'WET FLOOR',color:'#8fd0ff',
-    desc:'The next monsters to use a melee attack slip: a light Clobber fall, and that attack does 25% less damage.'}
+    desc:'The next monsters to use a melee attack slip: a light Clobber fall, and that attack does 25% less damage.'},
+  // Bedazzle-Gun Glue Trap (spec 3.2): "acting foes take Sizzle/Razzle chip + 20% Recovery Ticks" for 2 rounds. The chip is a light
+  // two-flavor hit (Sizzle then Razzle, half each) and Fatigue is the 20% longer wait. Every monster that acts is caught while it
+  // lasts (uses 99 is "no limit"); a wind-up turn is not an act, the act it fires is.
+  glue_trap:{id:'glue_trap',name:'Glue Trap',side:'foe',uses:99,rounds:2,any:true,tags:[],out:0,
+    effects:[{op:'damage',flavor:['sizzle','razzle'],power:'light',to:'target'},{op:'status',id:'fatigue',to:'target'}],short:'GLUE',color:'#ff9ad0',pop:'STUCK!',verb:'gets stuck in',
+    desc:'Hot glue, googly eyes and rhinestones cover the monsters\u2019 floor for 2 rounds. Every monster that acts takes a light Sizzle and Razzle hit and waits 20% longer after its move.'}
 };

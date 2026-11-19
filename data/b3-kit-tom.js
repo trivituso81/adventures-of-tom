@@ -1,7 +1,6 @@
 'use strict';
-// data/b3-kit-tom.js — Battle 3 kit: Tom (spec section 3.1). Built so far: all of Frequent Flier (stage 5a wrote its Trait, both
-// Quirks and its Grand Capstone); Gamer Geek's Basic and Skill 1. Every Trait and Quirk has its name and sentence for the Vibes
-// screen; `soon:true` marks one whose rule is not written yet (stage 5b writes Gamer Geek's and takes the flag off).
+// data/b3-kit-tom.js — Battle 3 kit: Tom (spec section 3.1). Built: all of Frequent Flier (stage 5a) and all of Gamer Geek
+// (stage 5b). Every Trait and Quirk has its name and sentence for the Vibes screen; `soon:true` marks one whose rule is not written.
 // A working Trait or Quirk row is one listener (`on` plus the listener fields of engine/b3-hooks.js and `effects`), several
 // (`listen:[...]`), `mods` (engine/b3-core.js b3Mods: a mod may carry `when` and `per`), a `counter` of its own, or any mix.
 // The Vibe row names every Skill, Trait and Quirk from the spec; a move exists in a fight once its own row is in B3_SKILLS.
@@ -59,19 +58,41 @@ B3_VIBES.tom_gamer={id:'tom_gamer',owner:'tom',name:'Gamer Geek',sig:2,lean:'str
   subtitles:['Button Smasher','Pro Controller Owner','Epic Completionist'],
   trait:'gamers_intuition',basic:'cartridge_blow',skills:['controller_toss','winged_shell_lock_on','konami_code'],
   quirks:['elixir_hoarder','new_game_plus'],counter:null};
-B3_SOON.winged_shell_lock_on='Winged Shell Lock-On';
-B3_SOON.konami_code='Konami Code';
-B3_TRAITS.gamers_intuition={id:'gamers_intuition',vibe:'tom_gamer',name:'Gamer’s Intuition',soon:true,
+// Gamer's Intuition: "Pet Peeves or Primed States" is one condition on a damage mod (`peeveOrPrime`, engine/b3-core.js): the
+// target has this flavor as a Pet Peeve, or carries any Prime when the hit lands (a hit that sets the Prime off counts: the Prime
+// is still on the monster while the damage is worked out). The Ruckus half is a listener on Detonations Tom sets off; the gauge's
+// own gains are stage 6, so until then only this +5 reaches it.
+B3_TRAITS.gamers_intuition={id:'gamers_intuition',vibe:'tom_gamer',name:'Gamer’s Intuition',
+  on:'detonation',carrier:'source',effects:[{op:'ruckus',n:5}],
+  mods:[{stat:'out',kind:'gamersIntuition',v:.20,when:{peeveOrPrime:true}}],
   desc:'Tom deals 20% more damage to a monster’s Pet Peeve and to a monster with a Prime on it. His Detonations fill the Family Ruckus gauge 5% more.'};
-B3_QUIRKS.elixir_hoarder={id:'elixir_hoarder',vibe:'tom_gamer',name:'Elixir Hoarder',soon:true,
+// Elixir Hoarder: judged as Tom's turn starts (his Pep is what he saved up). The buff ends as his next turn begins.
+B3_QUIRKS.elixir_hoarder={id:'elixir_hoarder',vibe:'tom_gamer',name:'Elixir Hoarder',
+  on:'turnStart',carrier:'source',pepAtLeast:6,show:true,effects:[{op:'status',id:'elixir_buzz',to:'self'}],
   desc:'When Tom starts his turn with 6 Pep or more, he gets 15% more Speed and crits 15% more often.'};
-B3_QUIRKS.new_game_plus={id:'new_game_plus',vibe:'tom_gamer',name:'New Game Plus',soon:true,
+// New Game Plus: one shared "once a round" (`limitKey`) for both triggers. The status it puts on lasts until the end of Tom's next
+// turn, so it covers the next Skill he can use; a Detonation or counter on that turn keeps it going. A counter is a counterattack
+// (Zone One Blockade's hip-check, a Winged Shell is not one); Million-Miler Status's step-in answer is not.
+B3_QUIRKS.new_game_plus={id:'new_game_plus',vibe:'tom_gamer',name:'New Game Plus',
+  listen:[{on:'detonation',carrier:'source',limit:'round',limitKey:'new_game_plus',effects:[{op:'status',id:'new_game_plus',to:'self'}]},
+    {on:'counter',carrier:'source',limit:'round',limitKey:'new_game_plus',effects:[{op:'status',id:'new_game_plus',to:'self'}]}],
   desc:'After Tom sets off a Detonation or counters, his next Skill costs 2 Pep less. Once a round, and only for Skills that cost 4 Pep or less.'};
-// Cartridge Blow: the light Racket hit is built. The spec's second half ("highlights enemy's next intended target") is one of the
-// lines that needs its own function (claude/battle-kit-ops.md line 9); it arrives with stage 5.
+// Cartridge Blow: the light Racket hit, then the `foresee` op (engine/b3-custom.js, claude/battle-kit-ops.md line 9) picks the
+// monster's next target early and holds it to that choice. The screen marks that family member NEXT TARGET.
 B3_SKILLS.cartridge_blow={id:'cartridge_blow',vibe:'tom_gamer',slot:'basic',name:'Cartridge Blow',pep:0,flavor:['racket'],power:'light',hits:1,
-  target:'foe',tags:[],composure:0,effects:[{op:'damage'}],line:null,anim:{kind:'default',shape:'cast'},
-  desc:'Light Racket hit.'};
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'foresee'}],line:null,anim:{kind:'default',shape:'cast'},
+  desc:'Light Racket hit. Shows who the monster will aim its next attack at, and it keeps to that.'};
 B3_SKILLS.controller_toss={id:'controller_toss',vibe:'tom_gamer',slot:'s1',name:'Controller Toss',pep:2,flavor:['clobber'],power:'standard',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage',bonus:{if:'tookHit',add:.40}}],line:null,anim:{kind:'default',shape:'throw'},
   desc:'Clobber hit. 40% stronger if Tom took or blocked a hit since his last turn.'};
+// Winged Shell Lock-On: the spec says "Smacks foe" (Clobber, 4 Pep) and a free Razzle explosion if it attacks. Both are standard
+// power (my call: the spec names no tier). The explosion is the shell's own status row (data/b3-status.js winged_shell).
+B3_SKILLS.winged_shell_lock_on={id:'winged_shell_lock_on',vibe:'tom_gamer',slot:'s2',name:'Winged Shell Lock-On',pep:4,flavor:['clobber'],power:'standard',hits:1,
+  target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'winged_shell',to:'target'}],line:null,anim:{kind:'default',shape:'throw'},
+  desc:'Clobber hit. A blue winged shell hovers over the monster until Tom’s next turn. If it attacks before then, the shell slams down in a free Razzle explosion.'};
+// Konami Code (Grand Capstone): 6 Pep, Razzle, heavy at the all-monsters share, 2 Composure pips, and each monster's crit chance
+// rises 15% for every Prime on it. "Tom glows rainbow-invincible" is the picture only (my call: nothing acts during his own
+// action, so a rule would change nothing; it is not a turn of untargetable).
+B3_SKILLS.konami_code={id:'konami_code',vibe:'tom_gamer',slot:'cap',name:'Konami Code',pep:6,flavor:['razzle'],power:'heavy',hits:1,
+  target:'all_foes',tags:[],composure:2,effects:[{op:'damage',critPerPrime:.15}],line:null,anim:{kind:'default',shape:'cast'},
+  desc:'Heavy Razzle hit on every monster, knocking 2 Composure pips off each. Each monster is 15% more likely to crit for every Prime on it.'};

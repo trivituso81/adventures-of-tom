@@ -28,7 +28,7 @@ function b3ActOk(F,e,A) {
   return true;
 }
 const b3Listed=A=>!A.after&&A.hits!=='attacker';
-function b3FoePick(F,e) {
+function b3FoePick(F,e,peek) {
   if(e.charge) return {act:e.charge,fire:true};
   const acts=e.D.acts;
   for(const A of acts) if(b3Listed(A)&&A.when&&A.when.once&&b3ActOk(F,e,A)) return {act:A,fire:false};
@@ -37,7 +37,8 @@ function b3FoePick(F,e) {
   for(let i=0;i<acts.length;i++) {
     const k=(e.actIx+i)%acts.length,A=acts[k];
     if(!b3Listed(A)||every(A)||(A.when&&A.when.once)||!b3ActOk(F,e,A)) continue;
-    e.actIx=(k+1)%acts.length; return {act:A,fire:false};
+    if(!peek) e.actIx=(k+1)%acts.length;
+    return {act:A,fire:false};
   }
   return null;
 }
@@ -89,7 +90,42 @@ function b3FoeTargets(F,e,A,given) {
     const start=Math.max(0,Math.min(row.length-want,ix-Math.floor(b3Rand(F)*want)));
     return {targets:row.slice(start,start+want)};
   }
-  return one(b3AggroPick(F,e,A));
+  const lk=e.aimLock&&e.aimLock.act===A.id?b3Unit(F,e.aimLock.key):null;
+  return one(lk&&b3LockOk(F,lk)?lk:b3AggroPick(F,e,A));
+}
+// ---------- Cartridge Blow: a monster's next aim, shown early and kept (Tom, Gamer Geek) ----------
+// The foe picks its next act as it would right now (b3FoePick with peek: nothing is used up). If that act aims at one family
+// member, the aim is picked now by the usual weights (the same roll the act would have made) and kept in `aimLock`, so the
+// act goes where the screen said. The lock only holds while it is true: the same act is still due, the target still stands, and
+// no taunt has taken the aim. Anything else voids it (b3IntentRefresh) and the foe aims by the usual weights.
+const b3AimsOne=A=>!A.hits||A.hits==='one';
+function b3LockOk(F,t) {
+  if(!b3Alive(t)||b3HasFlag(t,'untargetable')) return false;
+  const T=b3Live(F,t.side).filter(u=>b3HasFlag(u,'taunt'));
+  return !T.length||T.includes(t);
+}
+function b3Foresee(F,e) {
+  const P=b3FoePick(F,e,true); if(!P) { e.intent=null; e.aimLock=null; return null; }
+  const A=P.act,wind=A.tags.includes('charge_up')&&!P.fire&&!A.then;
+  const I={act:A.id,name:A.name,aim:null,kind:wind?'wind':A.power>0?'wide':'self'};
+  if(!wind&&A.power>0&&A.hits==='marked') { const m=e.mark&&b3Unit(F,e.mark); I.kind='strike'; I.aim=m&&b3Alive(m)?m.key:null; }
+  else if(!wind&&A.power>0&&A.hits==='fastest') {
+    const f=b3Live(F,b3Other(e.side)).filter(u=>!b3HasFlag(u,'untargetable')).sort((x,y)=>b3Stat(y,'spd')-b3Stat(x,'spd')||x.slot-y.slot)[0];
+    I.kind='strike'; I.aim=f?f.key:null; }
+  else if(!wind&&A.power>0&&b3AimsOne(A)) {
+    I.kind='strike';
+    const keep=e.aimLock&&e.aimLock.act===A.id?b3Unit(F,e.aimLock.key):null;
+    const t=keep&&b3LockOk(F,keep)?keep:b3AggroPick(F,e,A);
+    if(t) { e.aimLock={key:t.key,act:A.id}; I.aim=t.key; }
+  }
+  e.intent=I; return I;
+}
+// After any action: a shown aim stays only while the act is still the one due and the family member is still a fair target.
+function b3IntentRefresh(F) {
+  for(const e of F.foes) { if(!e.intent) continue;
+    const P=b3Alive(e)?b3FoePick(F,e,true):null,I=e.intent,t=I.aim&&b3Unit(F,I.aim);
+    const ok=P&&P.act.id===I.act&&(!I.aim||(t&&b3Alive(t)&&(P.act.hits==='marked'||P.act.hits==='fastest'||(e.aimLock&&e.aimLock.key===I.aim&&b3LockOk(F,t)))));
+    if(!ok) { e.intent=null; e.aimLock=null; } }
 }
 // A hazard on this unit's floor catches it as it starts an act with one of the hazard's tags (Wet-Floor Hazard and melee):
 // the hazard's effects land on it, and this act's damage takes the hazard's modifier. The fall is the hazard layer's own small
@@ -97,7 +133,7 @@ function b3FoeTargets(F,e,A,given) {
 function b3HazardTrip(F,e,A,c) {
   for(const hz of F.hazards.slice()) {
     const H=B3_HAZARDS[hz.id];
-    if(hz.side!==e.side||!b3Alive(e)||e.broken||!H.tags.some(t=>A.tags.includes(t))) continue;
+    if(hz.side!==e.side||!b3Alive(e)||e.broken||!(H.any?!A.then:(A.power>0&&H.tags.some(t=>A.tags.includes(t))))) continue;
     hz.uses--;
     c.beats.push({t:'hazardTrip',id:hz.id,tgt:e.key,left:hz.uses,g:'pre'});
     if(H.out) c.outExtra[hz.id]=H.out;
@@ -128,6 +164,7 @@ function b3ActUsed(F,e,A) {
 // One enemy turn. Returns its beats; the state is final when it returns.
 function b3FoeTurn(F,e) {
   const beats=[],P=b3FoePick(F,e);
+  // Whatever Cartridge Blow showed is judged as this turn begins: it is spent whether it held or not (b3EndTurn clears it).
   if(!P) { b3EndTurn(F,e,B3_RULES.forecast,beats); return beats; }
   const A=P.act;
   // A charged act is announced this turn and fires on the foe's next turn. (An act with `then` is itself the wind-up: it runs now.)
@@ -139,7 +176,7 @@ function b3FoeTurn(F,e) {
     return beats;
   }
   const c={F,actor:e,src:e,skill:null,rec:A.recovery,targets:[],hit:[],beats,g:'pre',detonated:{},reacted:{},tags:A.tags,outExtra:{},ledger:{}};
-  if(A.power>0) b3HazardTrip(F,e,A,c);
+  b3HazardTrip(F,e,A,c);
   // The fall knocked it out, or took its last pip: no act this turn. (A Break has already said which wound-up act was lost.)
   if(!b3Alive(e)||e.broken) {
     if(b3Alive(e)&&!P.fire) { b3LoseCharge(F,e,A); beats.push({t:'interrupt',src:null,tgt:e.key,id:A.id,name:A.name,why:'break',g:'pre'}); }
@@ -153,7 +190,7 @@ function b3FoeTurn(F,e) {
   const S={id:A.id,name:A.name,flavor:A.flavor,power:A.power,hits:1,target:T.single?'foe':A.hits==='self'?'self':'all_foes',effects:A.effects};
   c.skill=S; c.targets=targets;
   beats.push({t:'act',src:e.key,id:A.id,name:A.name,flavor:A.flavor,shape:A.tags.includes('melee')?'strike':A.power>0?'throw':'self',hits:1,tgts:targets.map(t=>t.key),foe:true,g:'pre'});
-  b3Fire(F,'actionDeclared',{src:e,g:'pre'},beats);
+  b3Fire(F,'actionDeclared',{src:e,g:'pre',c},beats);
   if(T.hidden) beats.push({t:'miss',src:e.key,tgt:targets[0].key,why:'hidden',g:'pre'});
   else {
     if(A.power>0&&targets.length) b3DamageOp(F,c,{});
