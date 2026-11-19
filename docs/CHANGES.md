@@ -1,3 +1,7 @@
+## boardclean1 (2026-11-19): Board cleanup: 13 out-of-date cards removed, stage 8 closed, chapter 1 checks folded into one
+
+- Tom (11-19 11:56 and 12:04): chapters 4 and beyond are getting a total rewrite, and chapter 2 cannot be played until its dialogue is confirmed and its voice clips are made. Removed from `data/board.json` (history keeps them): the chapter 2, 6 and 7 play checks, chapter 6 leftovers, chapter 8 art and build, Gate Zero and Young Boppy art, the REPORT tab check, the older phone checks, optional voice take sending, the Script Editor try-out, and the two chapter 1 checks that the single "Play chapter 1" card now covers (Gemini audit fixes, cutscene polish). The b3s8 card is Done (shipped as b3s8). Data only, no game files changed.
+
 ## cutpolish1 (2026-11-19): Cutscene lifecycle: the girls walk with Tom, popups queue, no (A) button between lines, speakers hold their pose
 
 - Plan: claude/cutscene-polish-plan.md phase 1 of 5 (no new art, no dialogue changes). Audit items fixed: 1a, 1b, 1e, 1f, 1g, 1h, 3b, 3i.
