@@ -28,7 +28,8 @@ jobs:
   bake:
     runs-on: ubuntu-latest
     # The job's own commit touches no art/raw file, so it cannot start this workflow again; [skip ci] is a second guard.
-    if: github.actor != 'github-actions[bot]'
+    # clipgen2: the clip-gen Action starts this job by hand (workflow_dispatch) after it pushed the approved clips with its own token
+    if: github.event_name == 'workflow_dispatch' || github.actor != 'github-actions[bot]'
     steps:
       - uses: actions/checkout@v4
         with:

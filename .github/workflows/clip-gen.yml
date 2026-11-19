@@ -1,0 +1,122 @@
+name: clip-gen
+
+# clipgen2. Makes the battle videos of a Clips group (default "Chapter 1") on xAI, finds each clip's marks from the video, approves it
+# the way the Art Library does, and starts the bake (tools/art-library/clipgen.py, clipmarks.py). MANUAL ONLY: run it from the Actions tab
+# (workflow_dispatch). It never runs on a push. Needs the repo secret XAI_API_KEY (the key is never printed).
+# What it commits to main: data/art-prompts.json and art/raw/clips/<id>-v<n>.mp4, one commit per approved clip. A push made with this
+# job's own token does not start other workflows, so the last step starts art-bake by hand (workflow_dispatch is allowed).
+# The branch `clipgen` (never main, never served) keeps the job's own state: request ids sent and not finished, videos that were paid
+# for and not approved (a video that hardly moves), the report. Each run restores it first, so nothing is paid for twice.
+# Run it again after clipch1fix: it makes again only the clips whose prompt was rewritten since their rejection.
+
+on:
+  workflow_dispatch:
+    inputs:
+      group:
+        description: 'Clips group to make (a group named Chapter <n>).'
+        required: false
+        default: 'Chapter 1'
+      ids:
+        description: 'Only these entry ids, comma separated (clip-rose-ko,clip-tom-loungepass). Empty: the whole group.'
+        required: false
+        default: ''
+      limit:
+        description: 'Most clips to make in this run (0 = all).'
+        required: false
+        default: '0'
+      cap:
+        description: 'Most dollars sent to xAI in this run. The run stops before passing it.'
+        required: false
+        default: '8'
+      dry_run:
+        description: 'true: list what would be made and the cost, call nothing, spend nothing.'
+        required: false
+        default: 'true'
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: clip-gen
+  cancel-in-progress: false
+
+jobs:
+  gen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    env:
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install the video tools (the runner has no ffmpeg)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          ffmpeg -version | head -1
+          command -v ffmpeg ffprobe
+          pip install requests numpy
+      - name: Restore what the clipgen branch already holds
+        run: |
+          mkdir -p "$RUNNER_TEMP/clipgen"
+          if git ls-remote --exit-code --heads origin clipgen >/dev/null 2>&1; then
+            git fetch --depth 1 origin clipgen
+            git archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/clipgen"
+          fi
+          ls -la "$RUNNER_TEMP/clipgen"
+          # the state file names videos by path: point them at this run's folder
+          if [ -f "$RUNNER_TEMP/clipgen/state.json" ]; then
+            python3 -I - "$RUNNER_TEMP/clipgen" <<'PY'
+          import json, os, sys
+          d = sys.argv[1]; f = os.path.join(d, 'state.json'); s = json.load(open(f))
+          for k, v in s.get('held', {}).items(): v['file'] = os.path.join(d, 'videos', os.path.basename(v['file']))
+          json.dump(s, open(f, 'w'), indent=1)
+          PY
+          fi
+      - name: Make the clips
+        env:
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          GROUP: ${{ inputs.group }}
+          IDS: ${{ inputs.ids }}
+          LIMIT: ${{ inputs.limit }}
+          CAP: ${{ inputs.cap }}
+          DRY: ${{ inputs.dry_run }}
+        run: |
+          set -o pipefail
+          ARGS=(--group "${GROUP:-Chapter 1}" --limit "${LIMIT:-0}" --cap "${CAP:-8}" --out "$RUNNER_TEMP/clipgen")
+          [ -n "$IDS" ] && ARGS+=(--ids "$IDS")
+          [ "$DRY" = "true" ] && ARGS+=(--dry-run)
+          if [ "$DRY" != "true" ] && [ -z "$XAI_API_KEY" ]; then echo "Repo secret XAI_API_KEY is empty or missing."; exit 2; fi
+          python3 -I tools/art-library/clipgen.py "${ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/run.log"
+          { echo '### clip-gen'; echo '```'; tail -60 "$RUNNER_TEMP/run.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Keep the job's state on the clipgen branch
+        if: ${{ inputs.dry_run != 'true' && always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd "$RUNNER_TEMP/clipgen"
+          if [ -z "$(ls -A)" ]; then echo "nothing to save"; exit 0; fi
+          git init -q -b clipgen
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "clipgen: state, held videos and report (run ${{ github.run_id }}) [skip ci]"
+          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" clipgen
+      - name: Start the bake
+        if: ${{ inputs.dry_run != 'true' && always() }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python3 -I tools/art-library/clipgen.py --dispatch-bake --out "$RUNNER_TEMP/clipgen"
+      - name: Keep a copy as a workflow artifact
+        if: ${{ inputs.dry_run != 'true' && always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: clip-gen-output
+          path: ${{ runner.temp }}/clipgen
+          retention-days: 30
