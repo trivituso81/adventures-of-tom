@@ -1,0 +1,340 @@
+{
+ "about": "Tom's chapter 1 battle clip review (CHAPTER 1 REVIEW, REDO notes saved in data/art-prompts.json rejects with from:'review', 2026-11-19). Each clip's notes word for word (repeats from pressing REDO twice dropped), and the faults each note names, sorted by hand (clipgate1). 'same comment as X' takes X's faults for that move. A later note on the same clip replaces an earlier one where he says so (grace-victory). Used by tools/clip-gate/replay.py.",
+ "faults": {
+  "size": "the body grows, shrinks or pulses",
+  "feet": "feet or a held prop sink into the ground",
+  "still": "nothing moves",
+  "blink": "no quick blink, or the blink is slow",
+  "pose_drift": "an idle drifts into a strange pose",
+  "hit_back": "a hit should stumble backwards",
+  "dodge_back": "a dodge must not go forward",
+  "ko_back": "a knock-out should fall backwards",
+  "hop": "hops before the fall",
+  "length": "should play longer (or faster)",
+  "face": "facial expression: grimace, dizzy",
+  "reads": "the pose does not read as the move (guard, cast, run, victory, give)",
+  "unclear": "he cannot tell what the move is",
+  "prop": "an object or body part is wrong: appears from nowhere, changes, wrong colour",
+  "physics": "small parts move wrong: pupils, droplets"
+ },
+ "measured": [
+  "size",
+  "feet",
+  "still",
+  "blink",
+  "pose_drift",
+  "hit_back",
+  "dodge_back",
+  "ko_back",
+  "hop"
+ ],
+ "checks": {
+  "size": [
+   "size"
+  ],
+  "feet": [
+   "feet",
+   "edge"
+  ],
+  "still": [
+   "still",
+   "blink_none"
+  ],
+  "blink": [
+   "blink_none",
+   "blink_slow",
+   "still"
+  ],
+  "pose_drift": [
+   "pose_drift",
+   "size",
+   "feet"
+  ],
+  "hit_back": [
+   "hit_no_stumble"
+  ],
+  "dodge_back": [
+   "dodge_forward"
+  ],
+  "ko_back": [
+   "ko_forward"
+  ],
+  "hop": [
+   "hop"
+  ]
+ },
+ "clips": {
+  "clip-rose-ko": {
+   "faults": [
+    "hop"
+   ]
+  },
+  "clip-grump-idle": {
+   "faults": [
+    "physics",
+    "blink"
+   ]
+  },
+  "clip-toad-idle": {
+   "faults": [
+    "blink",
+    "physics"
+   ]
+  },
+  "clip-log-idle": {
+   "faults": [
+    "still"
+   ]
+  },
+  "clip-tom-idle": {
+   "faults": [
+    "blink"
+   ]
+  },
+  "clip-tom-guard": {
+   "faults": [
+    "size",
+    "reads"
+   ]
+  },
+  "clip-tom-hit": {
+   "faults": [
+    "hit_back",
+    "face"
+   ]
+  },
+  "clip-tom-dodge": {
+   "faults": [
+    "size",
+    "dodge_back"
+   ]
+  },
+  "clip-tom-ko": {
+   "faults": [
+    "face"
+   ]
+  },
+  "clip-tom-run": {
+   "faults": [
+    "reads",
+    "unclear"
+   ]
+  },
+  "clip-tom-victory": {
+   "faults": [
+    "size",
+    "feet",
+    "reads"
+   ]
+  },
+  "clip-tom-give": {
+   "faults": [
+    "unclear",
+    "length",
+    "size"
+   ]
+  },
+  "clip-tom-cast": {
+   "faults": [
+    "length"
+   ]
+  },
+  "clip-tom-loungepass": {
+   "faults": [
+    "length",
+    "reads"
+   ]
+  },
+  "clip-tom-blockade": {
+   "faults": [
+    "unclear"
+   ]
+  },
+  "clip-grace-idle": {
+   "faults": [
+    "pose_drift",
+    "blink"
+   ]
+  },
+  "clip-grace-guard": {
+   "faults": [
+    "reads"
+   ]
+  },
+  "clip-grace-hit": {
+   "faults": [
+    "hit_back",
+    "face"
+   ]
+  },
+  "clip-grace-dodge": {
+   "faults": [
+    "dodge_back"
+   ]
+  },
+  "clip-grace-ko": {
+   "faults": [
+    "face"
+   ]
+  },
+  "clip-grace-run": {
+   "faults": [
+    "reads",
+    "unclear"
+   ],
+   "same_as": "clip-tom-run"
+  },
+  "clip-grace-victory": {
+   "faults": [
+    "size"
+   ],
+   "note": "his second note replaces the first: 'actually it looks fine just make sure body size is consisntet'"
+  },
+  "clip-grace-cast": {
+   "faults": [
+    "reads",
+    "length"
+   ],
+   "same_as": "clip-tom-cast"
+  },
+  "clip-grace-squeeze": {
+   "faults": [
+    "unclear"
+   ]
+  },
+  "clip-grace-cubepop": {
+   "faults": [
+    "feet",
+    "size"
+   ]
+  },
+  "clip-rose-idle": {
+   "faults": [
+    "blink"
+   ]
+  },
+  "clip-rose-guard": {
+   "faults": [
+    "reads"
+   ]
+  },
+  "clip-rose-hit": {
+   "faults": [
+    "face",
+    "hit_back"
+   ]
+  },
+  "clip-rose-dodge": {
+   "faults": [
+    "dodge_back"
+   ]
+  },
+  "clip-rose-run": {
+   "faults": [
+    "reads"
+   ]
+  },
+  "clip-rose-cast": {
+   "faults": [
+    "reads",
+    "length"
+   ],
+   "same_as": "clip-grace-cast"
+  },
+  "clip-rose-tackle": {
+   "faults": [
+    "unclear"
+   ]
+  },
+  "clip-rose-lava": {
+   "faults": [
+    "reads"
+   ]
+  },
+  "clip-rose-giddyup": {
+   "faults": [
+    "unclear",
+    "reads"
+   ]
+  },
+  "clip-deedee-idle": {
+   "faults": [
+    "blink"
+   ],
+   "same_as": "clip-tom-idle"
+  },
+  "clip-deedee-guard": {
+   "faults": [
+    "size",
+    "reads"
+   ],
+   "same_as": "clip-tom-guard"
+  },
+  "clip-deedee-hit": {
+   "faults": [
+    "hit_back",
+    "face"
+   ],
+   "same_as": "clip-tom-hit"
+  },
+  "clip-deedee-dodge": {
+   "faults": [
+    "size",
+    "dodge_back"
+   ],
+   "same_as": "clip-tom-dodge"
+  },
+  "clip-deedee-ko": {
+   "faults": [
+    "face",
+    "ko_back"
+   ]
+  },
+  "clip-deedee-run": {
+   "faults": [
+    "reads",
+    "unclear"
+   ],
+   "same_as": "clip-tom-run"
+  },
+  "clip-deedee-victory": {
+   "faults": [
+    "reads",
+    "prop"
+   ]
+  },
+  "clip-deedee-cast": {
+   "faults": [
+    "size",
+    "reads",
+    "length"
+   ],
+   "same_as": "clip-tom-cast"
+  },
+  "clip-deedee-wetfloor": {
+   "faults": [
+    "length",
+    "feet"
+   ]
+  },
+  "clip-deedee-scrub": {
+   "faults": [
+    "prop"
+   ]
+  }
+ },
+ "people_only": [
+  "blink",
+  "pose_drift",
+  "hit_back",
+  "dodge_back",
+  "ko_back",
+  "hop",
+  "size",
+  "feet"
+ ],
+ "people_only_why": "These checks find the face and the feet where every family start picture has them. On a monster the same fault is the vision check's (grump and toad blinks).",
+ "known_misses": {
+  "clip-tom-give size": "His note says his size pulses. Measured: the figure stays within 1% of the start picture's size in every picture the game shows, and the first and last pictures match the idle loop's size. The pulse is not in the video; the vision check's in-game frame grab (claude/clip-gate-plan.md) looks at the switch between the painted stance and the clip."
+ }
+}

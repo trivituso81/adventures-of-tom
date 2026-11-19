@@ -67,8 +67,8 @@
    "title": "Review the chapter 1 battle clips",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "up",
-   "next": "Wait for the publish after main 297bc74 (about 4 min), RELOAD on the title screen, then ADMIN > BATTLE LAB > CHAPTER 1 REVIEW and CHAPTER 1 REVIEW: THE BIG ONE. PLAY ALL, REDO with a note on what looks wrong. The automatic marks were only checked on stand-ins, so your review is the real test.",
+   "col": "done",
+   "next": "Done: you sent 44 of the 67 clips back with 45 notes. The clip gate (clipgate1) replayed against them.",
    "blocks": [
     "c-clipch1fix"
    ],
@@ -86,8 +86,13 @@
     {
      "d": "2026-11-19",
      "t": "Moved from tom/up to claude/up by Tom."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Review done: 44 clips sent back with notes. Closed by clipgate1."
     }
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "t-ch1play",
@@ -214,12 +219,66 @@
    "done": "2026-11-19"
   },
   {
+   "id": "c-clipgate2",
+   "title": "Clip quality gate, vision check (clipgate2)",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "up",
+   "next": "Build the vision check (claude/clip-gate-plan.md section 4), replay it on the 67 clips until measured plus vision flag all 44 of your rejects, then wire the gate into the clip-gen Action so a failing clip is held, not approved. Spends about $1 of xAI credit on looking only, no videos.",
+   "blocks": [
+    "c-clipch1fix"
+   ],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG8zkAesiDwcGiooGb",
+    "opening": "\"Read claude/animation-chapter-plan.md and the review notes saved in data/art-prompts.json\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Planned by clipgate1."
+    }
+   ],
+   "prompt": {
+    "what": "Builds the vision part of the clip gate, replays it against your chapter 1 notes, and wires the whole gate into the clip-gen Action.",
+    "before": [
+     "Nothing to do first. It spends about $1 of xAI credit (cap $2) on the vision check of the 67 existing clips; it makes no videos."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a tool build; the plan is written and the replay against your notes catches mistakes)",
+    "effort": "medium (the steps and the pass bar are written in the plan)",
+    "text": "Read claude/clip-gate-plan.md, then build clipgate2. Spend at most $2 of xAI credit, on the vision check only; make no videos. You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-clipgate1",
+   "title": "Clip quality gate, measured checks (clipgate1)",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "next": "Built: tools/clip-gate/ measures each clip as the game plays it and replays against your 45 notes. Flags 27 of your 44 rejects; the other 17 need the vision check.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "done": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG8zkAesiDwcGiooGb",
+    "opening": "\"Read claude/animation-chapter-plan.md and the review notes saved in data/art-prompts.json\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Tom: \"Build an automatic quality gate for battle clips before any re-make ... Do not generate or spend anything until the gate flags the clips he rejected.\" Measured part built and replayed; nothing spent."
+    }
+   ]
+  },
+  {
    "id": "c-clipch1fix",
    "title": "Fix chapter 1 clips from the review notes (clipch1fix)",
    "theme": "Battle Animations",
    "lane": "claude",
    "col": "wait",
-   "next": "Raise promptRev on each entry Tom redid, then run the clip-gen Action again for only those. Start: claude/animation-chapter-plan.md and claude/next-addendum-clipgen2.md.",
+   "next": "Waits for the clip gate (c-clipgate2). Then: bake fixes first (loop stretch with a blink, speed 1.0 for moves), then prompt edits from your notes by the smallest change, then re-make only what the gate says needs it. Plan: claude/clip-gate-plan.md section 5.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -231,17 +290,21 @@
     {
      "d": "2026-11-19",
      "t": "On the board from the first fill (board1)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "clipgate1 found many notes come from the bake settings or the prompt text; re-making first would repeat them. Now waits on the vision gate."
     }
    ],
-   "waiting_on": "tom",
+   "waiting_on": "claude",
    "prompt": {
-    "what": "Reads Tom's chapter 1 REDO notes, makes the smallest prompt edit per clip, regenerates only those.",
+    "what": "Fixes the chapter 1 clips from your notes: free bake fixes first, then prompt edits, then re-makes only where the gate says so.",
     "before": [
-     "Open ADMIN > BATTLE LAB > CHAPTER 1 REVIEW, PLAY ALL, and REDO with a note on every clip that looks wrong."
+     "Nothing to do first (the clip gate, c-clipgate2, must be finished)."
     ],
     "model": "Claude Opus 5.5 (row D: generator prompts judged by eye)",
-    "effort": "medium (each note is a small edit of a prompt that exists)",
-    "text": "Read claude/animation-chapter-plan.md and claude/next-addendum-clipgen2.md, then build clipch1fix. You have my full permission to access the repo."
+    "effort": "medium (each note is a small edit of a prompt or a bake setting that exists)",
+    "text": "Read claude/clip-gate-plan.md and claude/next-addendum-clipgen2.md, then build clipch1fix. You have my full permission to access the repo."
    }
   },
   {

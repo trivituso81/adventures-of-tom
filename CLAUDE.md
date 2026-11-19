@@ -60,6 +60,10 @@ ADMIN > ART LIBRARY > Clips: an entry with a `clip` field (`tools/art-library/cl
 
 **The videos made for him (clipgen2, 2026-11-19).** The `clip-gen` Action (`.github/workflows/clip-gen.yml`, `tools/art-library/clipgen.py`, `clipmarks.py`; manual only, repo secret `XAI_API_KEY`) makes every clip of a `Chapter <n>` group that is not approved, finds the marks (a Python port of `clipAutoMarks`), approves it the way the Library does, and starts art-bake. Start it with `gh api repos/trivituso81/adventures-of-tom/actions/workflows/clip-gen.yml/dispatches -f ref=main -f 'inputs[dry_run]=false' ...` (inputs `group`, `ids`, `limit`, `cap`, `dry_run`). After clipch1fix raises `promptRev` on an entry, run it again: it makes only those. Its state is on branch `clipgen` (never merge it). Test: `python3 tools/art-library/clipgen_test.py`. Detail: docs/CHANGES.md "clipgen2".
 
+## Clip quality gate (clipgate1, 2026-11-19)
+
+Tom (11-19): build a quality gate "before any re-make" and spend nothing until it flags the clips he rejected. `tools/clip-gate/gate.py` judges a battle clip the way the game plays it (baked stretch, speed, loops forward and back) with measured checks taken from his chapter 1 review notes; `replay.py` replays it against those notes (`review-ch1.json`); `gate_test.py` tests it on made-up videos. The look checks (faces, what a pose reads as, props) are a vision-model check still to build: plan and order in `claude/clip-gate-plan.md` in the Project. Before re-making any clip, run the gate on it; a re-make is spent only on faults the gate (measured plus vision) catches.
+
 ## Fix a miss with the smallest change (standing rule, Tom 2026-11-18)
 
 Tom (11-18 15:12), after Claude rewrote one video prompt three times and each rewrite missed a new way: "youre overcorrecting, swinging like a pendulum between extremes and it's really unimpressive and disspointing... this is costing me Fable credits and API credits from xai. i need you to correct this behavior going forwad immediately." This applies to every kind of work (prompts, dialogue, art, code), not only prompts:
