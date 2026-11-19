@@ -1,0 +1,106 @@
+name: clip-gate
+
+# clipgate2. Runs the clip gate's VISION check (tools/clip-gate/vision.py) on the videos already in art/raw/clips and keeps the answers on
+# the branch `clipgate` (never main, never served). It makes NO videos. The only spend is the vision model's chat calls, counted from the
+# usage xAI returns and stopped before the run passes `cap`. MANUAL ONLY (workflow_dispatch). Needs the repo secret XAI_API_KEY (never printed).
+# Answers already paid for are restored from the branch first, so a rerun pays only for what is missing; `fresh: true` starts over (use it after
+# the questions or the move cards changed).
+
+on:
+  workflow_dispatch:
+    inputs:
+      group:
+        description: 'Clips group to check (a group named Chapter <n>).'
+        required: false
+        default: 'Chapter 1'
+      ids:
+        description: 'Only these entry ids, comma separated. Empty: the whole group.'
+        required: false
+        default: ''
+      runs:
+        description: 'Times each clip is asked (the majority answer counts).'
+        required: false
+        default: '3'
+      cap:
+        description: 'Most dollars of vision calls in this run. The run stops before passing it.'
+        required: false
+        default: '1.8'
+      fresh:
+        description: 'true: ignore answers kept on the clipgate branch.'
+        required: false
+        default: 'false'
+      dry_run:
+        description: 'true: build the pictures and list the calls, call nothing, spend nothing.'
+        required: false
+        default: 'true'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: clip-gate
+  cancel-in-progress: false
+
+jobs:
+  vision:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install the tools (the runner has no ffmpeg)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          pip install requests numpy pillow opencv-python-headless
+      - name: Restore the answers already paid for
+        if: ${{ inputs.fresh != 'true' }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/gate"
+          if git ls-remote --exit-code --heads origin clipgate >/dev/null 2>&1; then
+            git fetch --depth 1 origin clipgate
+            git archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/gate"
+          fi
+          ls -la "$RUNNER_TEMP/gate"
+      - name: Ask the vision model
+        env:
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          GROUP: ${{ inputs.group }}
+          IDS: ${{ inputs.ids }}
+          RUNS: ${{ inputs.runs }}
+          CAP: ${{ inputs.cap }}
+          DRY: ${{ inputs.dry_run }}
+        run: |
+          set -o pipefail
+          mkdir -p "$RUNNER_TEMP/gate"
+          ARGS=(--group "${GROUP:-Chapter 1}" --runs "${RUNS:-3}" --cap "${CAP:-1.8}" --cache "$RUNNER_TEMP/cache" --out "$RUNNER_TEMP/gate/vision.json")
+          [ -n "$IDS" ] && ARGS+=(--ids "$IDS")
+          if [ "$DRY" = "true" ]; then ARGS+=(--dry-run --images "$RUNNER_TEMP/gate/images"); fi
+          if [ "$DRY" != "true" ] && [ -z "$XAI_API_KEY" ]; then echo "Repo secret XAI_API_KEY is empty or missing."; exit 2; fi
+          python3 -I tools/clip-gate/vision.py "${ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/gate/run.log"
+          { echo '### clip-gate vision'; echo '```'; tail -40 "$RUNNER_TEMP/gate/run.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Keep the answers on the clipgate branch
+        if: ${{ inputs.dry_run != 'true' && always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd "$RUNNER_TEMP/gate"
+          rm -rf images
+          [ -f vision.json ] || { echo "nothing to save"; exit 0; }
+          git init -q -b clipgate
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "clipgate: vision answers and measurements (run ${{ github.run_id }}) [skip ci]"
+          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" clipgate
+      - name: Keep a copy as a workflow artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: clip-gate-output
+          path: ${{ runner.temp }}/gate
+          retention-days: 30
