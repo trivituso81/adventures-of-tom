@@ -66,7 +66,7 @@
    "id": "t-ch1clips",
    "title": "Review the chapter 1 battle clips",
    "theme": "Battle Animations",
-   "lane": "tom",
+   "lane": "claude",
    "col": "up",
    "next": "Wait for the publish after main 297bc74 (about 4 min), RELOAD on the title screen, then ADMIN > BATTLE LAB > CHAPTER 1 REVIEW and CHAPTER 1 REVIEW: THE BIG ONE. PLAY ALL, REDO with a note on what looks wrong. The automatic marks were only checked on stand-ins, so your review is the real test.",
    "blocks": [
@@ -82,6 +82,10 @@
     {
      "d": "2026-11-19",
      "t": "clipgen2 made all 67 chapter 1 clips for $5.34; none needed you."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Moved from tom/up to claude/up by Tom."
     }
    ]
   },
