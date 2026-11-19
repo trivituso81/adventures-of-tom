@@ -1,0 +1,102 @@
+name: voice-gen
+
+# voicegen1. Makes one checked ElevenLabs take for each voice line that has no clip yet (tools/voice-learn/voicegen.py,
+# plan: tools/voice-learn/GENERATION_JOB_PLAN.md). MANUAL ONLY: run it from the Actions tab (workflow_dispatch). It never runs on a push.
+# Needs the repo secret ELEVENLABS_API_KEY. The key is never printed.
+# Output goes to the branch `generated` (never main, never served): export-NNN.json (the format
+# tools/voice-library/merge-local.js reads), report-*.json, needs-human.json and needs-human.txt. A normal session merges it.
+# Each run first restores what the branch holds, so lines already made are not made (or paid for) again.
+
+on:
+  workflow_dispatch:
+    inputs:
+      voices:
+        description: 'Voice ids, comma separated (tom,tnb,deedee). Empty: every voice.'
+        required: false
+        default: ''
+      limit:
+        description: 'Most lines to make in this run (0 = all). The first run is a small test.'
+        required: false
+        default: '5'
+      dry_run:
+        description: 'true: list the lines and the characters, call nothing, spend nothing.'
+        required: false
+        default: 'true'
+      retry_failed:
+        description: 'true: also try the lines that failed twice before.'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voice-gen
+  cancel-in-progress: false
+
+jobs:
+  gen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Restore what the generated branch already holds
+        run: |
+          mkdir -p "$RUNNER_TEMP/generated"
+          if git ls-remote --exit-code --heads origin generated >/dev/null 2>&1; then
+            git fetch --depth 1 origin generated
+            git archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/generated"
+          fi
+          ls -la "$RUNNER_TEMP/generated"
+      - name: Install the transcript check
+        if: ${{ inputs.dry_run != 'true' }}
+        run: |
+          pip install requests numpy soundfile sherpa-onnx
+          mkdir -p "$RUNNER_TEMP/vl/asr/tiny"
+          curl -fsSL -o "$RUNNER_TEMP/whisper.tar.bz2" https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-whisper-tiny.en.tar.bz2
+          tar -xjf "$RUNNER_TEMP/whisper.tar.bz2" -C "$RUNNER_TEMP/vl/asr/tiny"
+          ls "$RUNNER_TEMP/vl/asr/tiny/sherpa-onnx-whisper-tiny.en"
+          ffmpeg -version | head -1
+      - name: Make the takes
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          VL_WORK: ${{ runner.temp }}/vl
+          VOICES: ${{ inputs.voices }}
+          LIMIT: ${{ inputs.limit }}
+          DRY: ${{ inputs.dry_run }}
+          RETRY: ${{ inputs.retry_failed }}
+        run: |
+          set -o pipefail
+          ARGS="--out $RUNNER_TEMP/generated --limit ${LIMIT:-5}"
+          [ -n "$VOICES" ] && ARGS="$ARGS --voices $VOICES"
+          [ "$DRY" = "true" ] && ARGS="$ARGS --dry-run"
+          [ "$RETRY" = "true" ] && ARGS="$ARGS --retry-failed"
+          if [ "$DRY" != "true" ] && [ -z "$ELEVENLABS_API_KEY" ]; then echo "Repo secret ELEVENLABS_API_KEY is empty or missing."; exit 2; fi
+          python3 -I tools/voice-learn/lint_tags.py || echo "lint_tags lists scripts over the limit (voicegen skips them)"
+          python3 -I tools/voice-learn/voicegen.py $ARGS 2>&1 | tee "$RUNNER_TEMP/run.log"
+          { echo '### voice-gen'; echo '```'; tail -40 "$RUNNER_TEMP/run.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Save the output on the generated branch
+        if: ${{ inputs.dry_run != 'true' && always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd "$RUNNER_TEMP/generated"
+          if [ -z "$(ls -A)" ]; then echo "nothing to save"; exit 0; fi
+          git init -q -b generated
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "voicegen: takes, reports and needs-human list (run ${{ github.run_id }}) [skip ci]"
+          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" generated
+      - name: Keep a copy as a workflow artifact
+        if: ${{ inputs.dry_run != 'true' && always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: voice-gen-output
+          path: ${{ runner.temp }}/generated
+          retention-days: 30

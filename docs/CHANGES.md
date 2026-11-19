@@ -1,3 +1,12 @@
+## voicegen1 (2026-11-18): A manual GitHub Action that makes one checked voice take for each line with no clip (not run yet; nothing in the game changed)
+
+- Stage 3b of the voice learning plan (`claude/voice-generation-plan.md`, copy `tools/voice-learn/GENERATION_JOB_PLAN.md`). Tom added the repo secret `ELEVENLABS_API_KEY`. Nothing in the game changed: no script, clip, engine file or setting.
+- `.github/workflows/voice-gen.yml` (Actions tab > voice-gen > Run workflow; never runs on a push). Inputs: `voices` (empty = all), `limit` (default 5), `dry_run` (default true: lists lines and characters, calls nothing, spends nothing), `retry_failed`. Each run first restores what branch `generated` holds, so a line already made is not made again.
+- `tools/voice-learn/voicegen.py`: picks the 258 lines of `data/voice-index.json` with no clip (round robin across voices, so a limit of 5 tests 5 voices), skips scripts whose first tag is 100+ characters (`lint_tags.py`), sends each script unchanged with the voice settings of `dialog|<voice>` (the same body the Voice Library sends) and a random seed, checks the mp3 with `guard.check_audio`, regenerates once with a new seed when flagged, and puts a line flagged twice on `needs-human.json` and `needs-human.txt` with no clip. A run stops at 35,000 characters sent (`--max-chars`) and at the first 401.
+- Output on branch `generated` (never main, never served): `export-NNN.json` (20 clips each, the format `merge-local.js` reads), `report-<time>.json` (per line attempts, extra words, characters sent; run totals; the account's character count before and after, from `/v1/user/subscription` when the key can read it), `needs-human.*`. Merge it per "Phone clip exports" in claude/next.md with a comma list of the export files.
+- Not in the job: no levelling, no choosing between takes, no script changes, no change to a baked clip.
+- Test: `python3 -I tools/voice-learn/voicegen_test.py` (stand-in ElevenLabs server and a stand-in guard; 23 checks: dry run sends nothing, 5 voices at limit 5, request body, once and twice flagged, needs-human, second run skips done lines, retry, long first tag, max-chars, no key, key never printed).
+
 ## b3s5b (2026-11-18): New battle, stage 5b: Tom's Gamer Geek and Grace's Craft Artist are complete
 
 - Stage 5b of 23 of the new battle system ("Battle 3", `docs/BATTLE3.md`, plan `claude/battle-architecture.md` in the Project). Story fights still use the old battle and nothing in it changed. Stage 5c does the same for Rose's Cozy Rosie and Deedee's Registered Nut.

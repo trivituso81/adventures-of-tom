@@ -1,4 +1,4 @@
-# Plan: a job that makes one take for every unrecorded line (written voicelearn4, 2026-11-18; NOT built, NOT run)
+# Plan: a job that makes one take for every unrecorded line (written voicelearn4, 2026-11-18; BUILT in voicegen1 as .github/workflows/voice-gen.yml and tools/voice-learn/voicegen.py)
 
 Why: Tom will not record or tune the rest of the game. Voice lines with no clip are silent (or computer speech) until a take exists. This job makes the takes, checks them with `guard.py`, and hands them to a normal merge. It does not choose between takes (no picker exists) and makes one take per line.
 
