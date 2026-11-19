@@ -1,3 +1,6 @@
+## board-ready (2026-11-19): Board card added: green Ready badge on Claude cards that are unblocked
+
+- Tom (11-19 15:17) asked what happens after he marks a card Done, then said yes to a badge that shows which Claude card is ready to start. Added Claude card c-boardready (Tools, Up next) with its prompt. Data only; nothing built yet.
 ## ch1takes1 (2026-11-19): 31 phone voice takes merged (30 chapter 1 re-takes, 1 new Mr. Washington line); nothing heard on a phone
 
 - Tom sent `local-clips-pending_4_.json` (made 2026-11-19 23:08 UTC, 31 clips: Grace 16, Deedee 6, Tom 4, Boppy 2, Amy 1, Rose 1, Washington 1) with "You do all this". Merged with `merge-local.js` per claude/next-addendum-calib2.md and claude/next-addendum-pending1.md: 30 takes replaced existing clips in data/voice/dialog-ch1.js, 1 new clip added to data/voice/dialog-ch8.js (Washington "That'll be from her.", one of the two lines the voicegen2 job could not make).

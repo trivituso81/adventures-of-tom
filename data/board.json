@@ -681,6 +681,36 @@
     "effort": "medium (steps are known; effect sizes are settled by looking at frames)",
     "text": "Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 5 (cutpolish5). You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "c-boardready",
+   "title": "Board: green Ready badge on Claude cards that are unblocked",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "up",
+   "next": "In board.html, a Claude card that is not Done and has no open card blocking it (every card that lists it in Blocks is Done, or none does) shows a green \"Ready, copy prompt\" badge; tapping the badge copies its prompt. A Waiting card whose blockers are all Done also shows it. Add \"Ready for Claude: N\" to the top line, tap to filter. Test with tools/board_test.py at 390x844, 951x648 and 1440x900.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGSt2Hs2ZjStnBC8K1",
+    "opening": "\"i dont udnerstand what happens in the board after i move something to done\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Tom asked what happens after Done (nothing starts by itself; the unblocked Claude card waits for him to copy its prompt). Badge recommended, Tom: \"yes\"."
+    }
+   ],
+   "prompt": {
+    "what": "Adds a green Ready badge to every Claude card whose blockers are all Done, so after you tap Done you see which chat to start next.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (a small change to one page; the board test catches mistakes)",
+    "effort": "low (one rule and one badge on a page that exists)",
+    "text": "Read claude/next-addendum-board1.md, then build the board card c-boardready (green Ready badge). You have my full permission to access the repo."
+   }
   }
  ]
 }
