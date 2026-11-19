@@ -217,7 +217,11 @@ def bake_check(video_bytes):
     im = Image.open(os.path.join(T, 'art/clips/rose-boop.webp'))
     # marks .5 / 1.5 / 2.6 s at 30 a second, every 3rd: frames 15..78, 22 pictures, hit at frame 45 = picture 10
     ok(D['n'] == 22 and D['impact'] == 10 and D['owner'] == 'rose' and D['src'].startswith('art/clips/rose-boop.webp?v=') and abs(D['ms'][10] - 500) <= 1, f'bake: 22 pictures, hit on picture 10 at 500 ms (the picked 2x speed, from a pointer file) (n {D["n"]}, impact {D["impact"]}, ms {D["ms"][10]})')
-    ok(abs(D['h'] - 84) <= 2 and im.size == (D['cols'] * D['w'] * D['k'], -(-D['n'] // D['cols']) * D['h'] * D['k']), f'bake: the figure is {D["h"]} rows tall (her battle idle is 83) and the sheet fits its grid {im.size}')
+    fw, fh = D['w'] * D['k'], D['h'] * D['k']; R = D['rects']
+    inside = all(x >= 0 and y >= 0 and x + w <= im.size[0] and y + h <= im.size[1] and ox >= 0 and oy >= 0 and ox + w <= fw and oy + h <= fh for x, y, w, h, ox, oy in R)
+    apart = not any(a[0] < b[0] + b[2] and b[0] < a[0] + a[2] and a[1] < b[1] + b[3] and b[1] < a[1] + a[3] for i, a in enumerate(R) for b in R[i + 1:])
+    ok(abs(D['h'] - 84) <= 2 and len(R) == D['n'] and inside and apart and max(im.size) <= 2560 and im.size[0] * im.size[1] < .7 * D['n'] * fw * fh,
+       f'bake: the figure is {D["h"]} rows tall (her battle idle is 83); every picture is trimmed and packed without overlap, sheet {im.size} holds {round(100 * im.size[0] * im.size[1] / (D["n"] * fw * fh))}% of a grid of full frames (clippack1)')
     ok(D['reach'][0] > 30, f'bake: at the hit she reaches {D["reach"][0]} rows left of her middle (she slid left)')
     ok('data/clips/rose-boop.js' in open(os.path.join(T, 'index.html')).read(), 'bake: a new clip gets its script tag in index.html')
     bg = Image.new('RGBA', im.size, (96, 120, 96, 255)); bg.alpha_composite(im.convert('RGBA')); bg.convert('RGB').save(os.path.join(SHOTS, 'artclip-baked-sheet.png'))

@@ -3,8 +3,9 @@
 
   python3 tools/clip-bake/bake_clip.py <clip.mp4> <id> <owner> --first 27 --last 123 --step 3 --impact 75 --fig-rows 83 --speed 1.5
 
-Writes art/clips/<id>.webp (every kept frame, side by side in a grid, magenta removed) and data/clips/<id>.js
-(a bclipDefine call read by engine/clips.js). Frame numbers count the video's own frames from 0.
+Writes art/clips/<id>.webp (every kept frame, magenta removed, each trimmed to its own painted pixels and packed
+tightly: clippack1) and data/clips/<id>.js (a bclipDefine call read by engine/clips.js, with each frame's place in the
+picture). Frame numbers count the video's own frames from 0.
   --first/--last  the part of the video that is kept (drop the still frames before and after the move)
   --step          keep every Nth frame (video models repeat frames; 3 of 30 fps gives 10 pictures a second)
   --impact        the video frame where the hit lands (must be one of the kept frames); the game lands damage there
@@ -56,6 +57,23 @@ def key(a):
     rgb[..., 0] -= spill * .9; rgb[..., 2] -= spill * .9
     return np.dstack([np.clip(rgb, 0, 255), alpha * 255]).astype('uint8')
 
+def pack(sizes, pad=2, max_w=2560):
+    """Shelf-pack boxes (w, h), tallest first, at the sheet width that gives the smallest picture. Returns (W, H, [(x, y), ...]).
+    A clip frame is mostly empty (the room an outstretched arm needs in a few pictures), so packing the trimmed
+    pictures more than halves what the phone holds in memory for a clip (Rose's Boop: 26 MB as a grid, 11 MB packed)."""
+    order = sorted(range(len(sizes)), key=lambda i: (-sizes[i][1], -sizes[i][0], i))
+    best = None
+    for W in range(max(w for w, h in sizes) + pad, max_w + 1, 32):
+        x = y = shelf = 0; at = [None] * len(sizes)
+        for i in order:
+            w, h = sizes[i]
+            if x + w + pad > W: x = 0; y += shelf; shelf = 0
+            at[i] = (x, y); x += w + pad; shelf = max(shelf, h + pad)
+        H = y + shelf
+        score = (H > max_w, W * H)                # never taller than max_w if any width allows it (phones shrink very long pictures)
+        if best is None or score < best[0]: best = (score, (W, H, at))
+    return best[1]
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('clip'); ap.add_argument('id'); ap.add_argument('owner')
@@ -90,27 +108,33 @@ def main():
     H = int(np.ceil((feet - ys.min()) / px_per_row)) + 1
     fw, fh = W * A.k, H * A.k
     x0 = mid - W * px_per_row / 2; y0 = feet - H * px_per_row
-    n = len(keyed); cols = min(n, max(1, 2400 // fw)); rows = -(-n // cols)
-    sheet = Image.new('RGBA', (cols * fw, rows * fh), (0, 0, 0, 0))
-    feet_info = []
+    n = len(keyed)
+    cells, feet_info = [], []
     for i, k in enumerate(keyed):
         im = Image.fromarray(k, 'RGBA').transform((fw, fh), Image.AFFINE,
             (W * px_per_row / fw, 0, x0, 0, H * px_per_row / fh, y0), Image.BICUBIC)
-        sheet.paste(im, ((i % cols) * fw, (i // cols) * fh))
+        cells.append(im)
         al = np.asarray(im)[..., 3] > 100
         rr = np.where(al.any(1))[0]; low = rr.max() + 1 if len(rr) else fh     # the figure's own lowest rows (she may be in the air)
         band = al[max(0, low - max(3, round(fh * .07))):low]
         cs = np.where(band.any(0))[0]
         feet_info.append([0, W * .5] if not len(cs) else [float(round(((cs.min() + cs.max()) / 2 - fw / 2) / A.k, 1)), float(round((cs.max() - cs.min() + 1) / A.k, 1))])
     ii = picks.index(A.impact) if A.kind == 'strike' else 0
-    al = np.asarray(sheet.crop(((ii % cols) * fw, (ii // cols) * fh, (ii % cols) * fw + fw, (ii // cols) * fh + fh)))[..., 3] > 100
+    al = np.asarray(cells[ii])[..., 3] > 100
     cs = np.where(al.any(0))[0]; lx = cs.min(); ly = np.where(al[:, lx:lx + 3 * A.k].any(1))[0]
     reach = [float(round((fw / 2 - lx) / A.k, 1)), float(round((fh - (ly.min() + ly.max()) / 2) / A.k, 1))]   # the leading point (fist) at the hit: rows left of the middle, rows above the feet
+    # Each frame keeps only the box its painted pixels fill; rects says where that box is in the picture (x, y, w, h)
+    # and where it sits inside the full fw x fh frame (ox, oy). The game puts it back (paintedCanvas, engine/painted.js).
+    boxes = [c.getchannel('A').getbbox() or (0, 0, 1, 1) for c in cells]
+    sw, sh, at = pack([(b[2] - b[0], b[3] - b[1]) for b in boxes])
+    sheet = Image.new('RGBA', (sw, sh), (0, 0, 0, 0))
+    for c, b, (x, y) in zip(cells, boxes, at): sheet.paste(c.crop(b), (x, y))
+    rects = [[x, y, b[2] - b[0], b[3] - b[1], b[0], b[1]] for b, (x, y) in zip(boxes, at)]
     os.makedirs(f'{root}/art/clips', exist_ok=True); os.makedirs(f'{root}/data/clips', exist_ok=True)
     out = f'{root}/art/clips/{A.id}.webp'
     sheet.save(out, 'WEBP', quality=A.quality, method=6)
     ms = [round(sum(durs[:i])) for i in range(len(picks))]
-    D = dict(owner=A.owner, src=f'art/clips/{A.id}.webp?v={A.tag}', k=A.k, w=W, h=H, cols=cols, n=n, ms=ms,
+    D = dict(owner=A.owner, src=f'art/clips/{A.id}.webp?v={A.tag}', k=A.k, w=W, h=H, n=n, rects=rects, ms=ms,
              dur=round(sum(durs)), kind=A.kind, impact=ii, reach=reach, feet=feet_info)
     if A.kind != 'strike': del D['impact'], D['reach']
     # src carries its own cache tag: tools/tag_check.py reads it and bump_tags.py moves it when the picture changes
@@ -119,9 +143,11 @@ def main():
         f.write("'use strict';\n// data/clips/%s.js: GENERATED by tools/clip-bake/bake_clip.py; do not hand-edit. Read by engine/clips.js.\n" % A.id)
         f.write('// Source frames %d to %d of the video, every %d, %s, played at %sx.\n' % (A.first, A.last, A.step, 'impact at video frame %d' % A.impact if A.kind == 'strike' else 'kind ' + A.kind, A.speed) + ('// Pace changes (video frame:step:speed): %s\n' % A.pace if A.pace else ''))
         f.write('bclipDefine(%s,%s);\n' % (json.dumps(key_id), json.dumps(D, separators=(',', ':'))))
-    print(key_id, 'frames', n, 'frame px', fw, fh, 'rows', W, H, 'sheet', sheet.size, 'kb', os.path.getsize(out) // 1024, 'dur ms', D['dur'], 'kind', A.kind, 'impact ms', ms[ii], 'reach', reach)
-    if A.sheet:                                  # a contact sheet on grey, for looking at the cutout
-        bgc = Image.new('RGBA', sheet.size, (96, 120, 96, 255)); bgc.alpha_composite(sheet); bgc.convert('RGB').save(A.sheet)
+    print(key_id, 'frames', n, 'frame px', fw, fh, 'rows', W, H, 'sheet', sheet.size, 'in memory mb', round(sw * sh * 4 / 1e6, 1), '(as a grid %s)' % round(n * fw * fh * 4 / 1e6, 1), 'kb', os.path.getsize(out) // 1024, 'dur ms', D['dur'], 'kind', A.kind, 'impact ms', ms[ii], 'reach', reach)
+    if A.sheet:                                  # a contact sheet on grey, for looking at the cutout: every full frame in a grid
+        cols = min(n, max(1, 2400 // fw)); bgc = Image.new('RGBA', (cols * fw, -(-n // cols) * fh), (96, 120, 96, 255))
+        for i, c in enumerate(cells): bgc.alpha_composite(c, ((i % cols) * fw, (i // cols) * fh))
+        bgc.convert('RGB').save(A.sheet)
 
 if __name__ == '__main__':
     main()

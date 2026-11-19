@@ -1,3 +1,21 @@
+## clippack1 (2026-11-18): animation test: battle clips take less than half the phone memory they did; nothing looks different
+
+No-cost engine work on the three approved clips (no new video, no new prompt). Nothing Tom plays looks different: the same pictures, the same timing.
+
+| What | Before | Now |
+|---|---|---|
+| How a clip's pictures are stored | A grid of full frames, each as wide as the widest reach in the whole clip | Each picture trimmed to its own painted pixels, packed tightly; the game puts it back in place when it draws |
+| Rose's Boop in phone memory | 26.0 MB | 11.5 MB |
+| Rose's nap | 23.7 MB | 9.7 MB |
+| Mudling idle (it fills its frame, so little to trim) | 13.0 MB | 10.1 MB |
+| Download size | 781, 711 and 365 KB | 783, 715 and 373 KB (unchanged: empty space already cost almost nothing to download) |
+
+- tools/clip-bake/bake_clip.py: `pack()` (shelf packing, sheet never over 2560 px on a side); the data file carries `rects` (x, y, w, h in the picture, ox, oy inside the full frame) instead of `cols`. Every future clip the art-bake Action cuts is packed the same way. The `--sheet` contact sheet still shows full frames.
+- engine/clips.js `bclipDefine` reads `rects`; engine/painted.js `paintedCanvas` puts a trimmed picture back at its place in a full-size frame copy, so everything that measures or mirrors a frame sees what it saw before. Only clip atlases carry the extra fields. The grid layout is gone (Purge rule): no reader of `cols` is left.
+- The three clips were cut again from their approved videos with the same marks. Check before the change: the unchanged baker reproduced the repo's three clips exactly (data files byte for byte, pictures pixel for pixel). After: every data field except the layout is identical, every outline (alpha) is identical, colour differs only by the picture file being saved again (33 to 36 dB).
+- Why it matters for the big clip pass (fact, measured here): a clip is about 10 MB in memory packed. The architecture's loading rule (all clips of the 4 party members and their equipped moves, about 60) would be about 600 MB, which a phone cannot hold. Battle 3 stage 8 must load a move's clip when the move is picked and release it after, keeping only the idle loops loaded. Written into claude/animation-tool-test-pack1.md for that stage.
+- Tests: `tools/clip_test.py` (Boop in a Lab fight, portrait and landscape, hit on picture 17), `tools/clip_kinds_test.py`, `tools/art-library/clip_lib_test.py` (new check: trimmed, packed, no overlap; one cold-start miss on the first run of "the card offers GENERATE VIDEO", passed on the next two runs), `tools/smoke.py`.
+
 ## voicelearn2fix (2026-11-18): voicelearn2 write-up corrected: 49 takes (not 48) carry a first tag of 100+ characters, 32 (65%) fail
 
 - tools/voice-learn/README.md: the long-tag count was 31 of 48; it is 32 of 49 (all Deedee, one identical tag block); under 100 characters 9 of 871 fail. Nothing else changed; no game files.

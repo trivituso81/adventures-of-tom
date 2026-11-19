@@ -87,13 +87,14 @@ function paintedCanvas(rows,flash) {
   const key=(p.flip?'f':'n')+(flash?'F':'')+(t&&!flash?(t.rows.join(',')+t.color):'');
   const cache=rows._pc||(rows._pc=new Map()); A.users.add(rows);
   let c=cache.get(key); if(c) { const e=PAINTED_LRU.get(c); if(e) { PAINTED_LRU.delete(c); PAINTED_LRU.set(c,e); } return c; }
-  c=document.createElement('canvas'); c.width=R[2]; c.height=R[3];
+  const cw=R[6]||R[2],ch=R[7]||R[3];   // a trimmed frame (battle clips, engine/clips.js) is R[2] x R[3] in the atlas and sits at R[4],R[5] inside its full cw x ch frame
+  c=document.createElement('canvas'); c.width=cw; c.height=ch;
   const g=c.getContext('2d');
-  if(p.flip) { g.translate(R[2],0); g.scale(-1,1); }
-  g.drawImage(A.img,R[0],R[1],R[2],R[3],0,0,R[2],R[3]);
+  if(p.flip) { g.translate(cw,0); g.scale(-1,1); }
+  g.drawImage(A.img,R[0],R[1],R[2],R[3],R[4]||0,R[5]||0,R[2],R[3]);
   g.setTransform(1,0,0,1,0,0);
-  if(flash) { g.globalCompositeOperation='source-in'; g.fillStyle='#fff8e6'; g.fillRect(0,0,R[2],R[3]); g.globalCompositeOperation='source-over'; }
-  else if(t&&t.rows) paintedTintPixels(g,R[2],R[3],A.tintFrac?[A.tintFrac[0]*R[3]/A.k,A.tintFrac[1]*R[3]/A.k]:t.rows,A.k,t.color,A.tintMode,A.tintFn);
+  if(flash) { g.globalCompositeOperation='source-in'; g.fillStyle='#fff8e6'; g.fillRect(0,0,cw,ch); g.globalCompositeOperation='source-over'; }
+  else if(t&&t.rows) paintedTintPixels(g,cw,ch,A.tintFrac?[A.tintFrac[0]*ch/A.k,A.tintFrac[1]*ch/A.k]:t.rows,A.k,t.color,A.tintMode,A.tintFn);
   cache.set(key,c); paintedKeep(c,cache,key);
   return c;
 }

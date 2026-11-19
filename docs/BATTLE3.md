@@ -137,3 +137,16 @@ Calls made in stage 2 (all in data): Zone One Blockade's answer is a standard Cl
 Pace: `B3_TEMPO` in `engine/b3-play.js` stretches every default move animation (2 since `b3tempo1`: Tom found the first build about 2x too fast).
 
 Calls made in stage 1 (all in data, all changeable without engine edits): a multi-hit move's power is the whole move's power shared by its hits; an enemy's announce turn uses Base Recovery 80; "every 3rd turn" starts counting again after the act fires; a status put on yourself during your own turn does not count that turn; a turn's wait is set before its statuses count down, so a 2-turn Slow slows two Recoveries; Short Circuit!'s splash is 40% of the hit that set it off; NeeDoh Stretch Pass puts the ally at the very front of the bar; Buzz Cloud comes up only after Jitterflight was stripped, not when it runs out.
+
+## Clips: facts for stage 8 (from the animation test, build `clippack1`, 2026-11-18)
+
+Three approved clips exist and play only in battle 2's Battle Lab clip fights (`B2.labClip`): `rose_boop` (strike), `rose_sleep` (state: out of the fight), `mudling_idle` (loop). The animation thread adds no more battle 2 wiring; clips enter this system here, through `B3_BODY` and a move's `anim` (architecture 2.7).
+
+| Fact | Detail |
+|---|---|
+| What is reusable as it stands | `engine/clips.js`: `bclipDefine`, `BCLIPS`, `bclipFrameAt`, `bclipLoopFrame` (forward, then backward), `bclipReady`. A clip frame is an ordinary painted frame (`drawSprite` draws it at the owner's own scale), tagged `rows._clip`, with its feet in `rows._ft`. |
+| What is battle 2 only | `bclipWanted`, `bclipFor`, `bclipLabNap` and `RFX.ST.clip` all check `B2`. Battle 3 needs its own "which clips does this fight want" (the `paintedWanted` line for B3 in `engine/painted.js` is the place). |
+| Memory, measured | One clip is about 10 MB in phone memory (Boop 11.5, nap 9.7, Mudling idle 10.1) since frames are trimmed and packed. Loading every clip of 4 party members and their equipped moves (about 60) would be about 600 MB: a phone cannot hold that. Load a move's clip when the move is picked and release it after the action; keep only the idle loops loaded for the whole fight. |
+| Frame copies | `paintedCanvas` keeps a full-frame canvas copy of each drawn frame, capped at 24 million pixels in all (`PAINTED_PX_CAP`); one clip frame is about 160 thousand pixels, so about 4 clips fill the cap and older copies are remade when drawn again. |
+| A monster whose idle is a clip | Its hurt and attack pictures are still the painted frames, so the look switches for a moment (seen in battle 2's Lab). Either hold the clip's current picture with the engine's shake and flash, or give that monster an attack clip. Not decided. |
+

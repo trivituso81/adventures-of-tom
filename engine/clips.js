@@ -24,12 +24,14 @@
 //   state   a one-shot that ends in a held pose: a party member going out of the fight (asleep). drawBattle
 //           (engine/battle-draw.js) plays it once from the moment they go down and holds its last picture.
 // bclipFor(owner,kind) gives the loaded clip of that kind for a party member or monster id, or null.
+// Picture (clippack1): each frame is trimmed to its own painted pixels and the trimmed frames are packed tightly, so the
+// picture the phone holds in memory is under half the size of a grid of full frames. D.rects[i] says where frame i is.
 // Memory: a clip atlas is lazy (never loaded at boot). It loads when a fight that uses it starts (bclipWanted) and is
 // released with the other fight sheets (paintedTick).
 const BCLIPS={};
 function bclipDefine(id,D) {
   const fw=D.w*D.k,fh=D.h*D.k,rects={},blank='.'.repeat(D.w),frames=[];
-  for(let i=0;i<D.n;i++) rects[i]=[(i%D.cols)*fw,Math.floor(i/D.cols)*fh,fw,fh];
+  for(let i=0;i<D.n;i++) rects[i]=D.rects[i].concat(fw,fh);   // x,y,w,h in the picture; ox,oy inside the full fw x fh frame (paintedCanvas puts it back)
   paintedAtlas('clip_'+id,D.src,rects,D.k);
   for(let i=0;i<D.n;i++) { const rows=paintRows(Array(D.h).fill(blank),'clip_'+id,i,false);
     rows._clip=true; rows._ft={dx:D.feet[i][0],w:D.feet[i][1]};   // where the shadow goes (feetOf, engine/battle-draw.js): measured by the baker
