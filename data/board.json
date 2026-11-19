@@ -192,7 +192,7 @@
    "title": "Play-test the new BOARD",
    "theme": "Tools",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "next": "ADMIN > BOARD. Check: Tom's lane is first and open; the one-line summary at the top; tap a card; try Done and Move to on a card you do not mind moving (needs the GitHub token from ADMIN > ART LIBRARY > Setup). Report what is confusing.",
    "blocks": [],
    "changed": "2026-11-19",
@@ -205,8 +205,13 @@
     {
      "d": "2026-11-19",
      "t": "On the board from the first fill (board1)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Marked done by Tom."
     }
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "c-clipch1fix",
