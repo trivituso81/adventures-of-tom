@@ -1,0 +1,16 @@
+takes 922 clean 854 pure re-roll lines 179 takes 363 all clean lines 317
+w2v L6 PURE                        lines 179 chance 0.495 | C=0.003:0.453 C=0.03:0.475 C=0.3:0.493 | best 0.493 null-best mean 0.548 p 0.900
+w2v L6 ALLCLEAN                    lines 317 chance 0.449 | C=0.003:0.489 C=0.03:0.482 C=0.3:0.467 | best 0.489 null-best mean 0.478 p 0.275
+hub L6 PURE                        lines 179 chance 0.495 | C=0.003:0.482 C=0.03:0.499 C=0.3:0.503 | best 0.503 null-best mean 0.537 p 0.750
+hub L6 ALLCLEAN                    lines 317 chance 0.449 | C=0.003:0.464 C=0.03:0.476 C=0.3:0.483 | best 0.483 null-best mean 0.473 p 0.350
+emo L6 PURE                        lines 179 chance 0.495 | C=0.003:0.469 C=0.03:0.486 C=0.3:0.490 | best 0.490 null-best mean 0.544 p 0.950
+emo L6 ALLCLEAN                    lines 317 chance 0.449 | C=0.003:0.485 C=0.03:0.471 C=0.3:0.482 | best 0.485 null-best mean 0.478 p 0.350
+emo 4 logits PURE (secondary)      lines 179 chance 0.495 | C=0.003:0.539 C=0.03:0.539 C=0.3:0.534 | best 0.539 null-best mean 0.528 p 0.440
+observed best over 21 variants 0.603 w2v L2
+10 perms; null max mean 0.585 p so far 0.2
+20 perms; null max mean 0.59 p so far 0.35
+30 perms; null max mean 0.595 p so far 0.3333333333333333
+40 perms; null max mean 0.591 p so far 0.325
+50 perms; null max mean 0.592 p so far 0.36
+60 perms; null max mean 0.591 p so far 0.31666666666666665
+MAXNULL variants 21 observed 0.603 null max mean 0.591 95th 0.632 p 0.31666666666666665

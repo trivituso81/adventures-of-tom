@@ -1,3 +1,14 @@
+## voicelearn3 (2026-11-18): voice learning stage 2b: speech-model embeddings do not pick Tom's kept take either; the failure guard is the plan
+
+Stage 2b of claude/voice-learning-plan.md. Nothing in the game changed; tools and results only (tools/voice-learn/, README section "voicelearn3" has every number). huggingface.co was reachable, so the test ran as written.
+
+| Question | Answer |
+|---|---|
+| Does a learned speech representation (wav2vec2-base, HuBERT-base, an emotion-tuned wav2vec2; layer 6) pick the kept take on held-out lines? | No. Pure re-roll lines (179, chance 49.5%, looped takes removed): 49.3%, 50.3%, 49.0%. Bar was 60% with p below 0.05. FAIL. |
+| Did any layer reach 60%? | In an exploratory sweep two of 21 variants did (60.3% wav2vec2 layer 2, 58.7% HuBERT layer 10). Best of 21 on shuffled labels averages 59.1%; corrected p 0.32. Chance, not signal. |
+| What follows (the plan's rule)? | No picker is built. Stage 3 becomes the failure guard only (one take per line, transcribe, regenerate takes with 3+ extra words, lint first tags over 100 characters, level loudness). Tom is not asked to tune lines. |
+
+New: tools/voice-learn/embed.py, embtest.py, results/embtest_*.json and logs.
 ## clipko1 (2026-11-18): animation test: a Rose knocked-out video entry in the Art Library, to see if the video model accepts the words "knocked out"
 
 - New Library entry `clip-rose-ko` (Clips > Rose, clip id `rose-ko`): cheap model, 3 s, start picture `art/clips/start/rose.png`, kind `state` (START and END marks, last picture held), step 2, speed 1.5. About $0.07. No video made.

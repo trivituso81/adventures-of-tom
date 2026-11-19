@@ -50,3 +50,23 @@ Not applied to `voices[...].speed`: the speed comes from his script words, and o
 
 ## Files
 `decode.py`, `features.py`, `asr.py`, `asrfeat.py`, `analyze.py`, `analyze_clean.py`, `model.py`, `final.py`; `results/features.json` (measures per take id), `results/asr_tiny.json` (transcript per take id), `results/final.json`. Audio stays on branch `takes`.
+
+## voicelearn3 (stage 2b): the same test with learned speech embeddings
+Question: does a pre-trained speech model's view of the audio pick the kept take on held-out lines? Models (huggingface.co, now reachable): `facebook/wav2vec2-base`, `facebook/hubert-base-ls960`, `superb/wav2vec2-base-superb-er` (wav2vec2-base tuned for emotion). `embed.py` writes the mean of every layer over the speech frames of each take (energy mask, 16 kHz); `embtest.py` runs the test: line mean subtracted, standardised, logistic regression (C 0.003, 0.03, 0.3), 10-fold by line, permutation null (kept take shuffled within each line). Looped takes (3+ extra spoken words) removed first. Data: the same send (922 takes, 345 lines; no newer send had arrived). 854 takes clean; 179 pure re-roll lines (363 takes, chance 49.5%).
+
+Bar fixed before the run (plan page): 60% or more on the pure re-roll lines with p below 0.05. Primary tests were layer 6 of each of the three models (so p had to beat 0.05/3).
+
+| Primary test, pure re-roll lines | Best C | Hit rate | Corrected p |
+|---|---|---|---|
+| wav2vec2-base layer 6 | 0.3 | 49.3% | 0.90 |
+| HuBERT-base layer 6 | 0.3 | 50.3% | 0.75 |
+| Emotion model layer 6 | 0.3 | 49.0% | 0.95 |
+| Same three on all clean lines (317, chance 44.9%) | | 48.9%, 48.3%, 48.5% | 0.28, 0.35, 0.35 |
+
+RESULT: FAIL. No primary test is within 10 points of the bar.
+
+Exploratory sweep (not part of the bar, run after the primary failed): other layers and the emotion model's 4 class scores, pure re-rolls only. Two variants reached 60.3% (wav2vec2 layer 2) and 58.7% (HuBERT layer 10), each with its own p near 0; but the same layers in the other models are 55.0% and 56.4% (layer 2) and 46.6% and 42.5% (layer 10), and several layers sit well BELOW chance (HuBERT layer 12 44%, emotion layer 10 42%). Corrected for having looked at 21 variants (best of 21 against the best of 21 on shuffled labels, 60 shuffles): null best averages 59.1%, 95th percentile 63.2%, observed 60.3%, p 0.32. A 60% best-of-21 is what chance produces here. Not a signal.
+
+What this does not rule out: with 179 lines the standard error is about 3.7 points, so a picker at 55% could hide. And "kept" is the take he stopped on (341 of 345 lines), not necessarily the take he preferred. Nothing here says taste among clean takes does not exist; it says these tools, on this data, cannot find it.
+
+Files: `embed.py`, `embtest.py` (`sweep`, `maxnull` modes), `results/embtest_primary.json`, `results/embtest_sweep.json`, `results/embtest_sweep.log`, `results/embtest_maxnull.log`. Embeddings are rebuilt in about 20 minutes on 2 CPU cores (torch and transformers from PyPI, model files from huggingface.co); the pip torch wheel is large (about 3 GB with CUDA libraries).

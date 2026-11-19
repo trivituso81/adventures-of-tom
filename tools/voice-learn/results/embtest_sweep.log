@@ -1,0 +1,26 @@
+takes 922 clean 854 pure re-roll lines 179 takes 363 all clean lines 317
+w2v L6 PURE                        lines 179 chance 0.495 | C=0.003:0.453 C=0.03:0.475 C=0.3:0.493 | best 0.493 null-best mean 0.548 p 0.900
+w2v L6 ALLCLEAN                    lines 317 chance 0.449 | C=0.003:0.489 C=0.03:0.482 C=0.3:0.467 | best 0.489 null-best mean 0.478 p 0.275
+w2v L2 PURE (secondary)            lines 179 chance 0.495 | C=0.003:0.553 C=0.03:0.578 C=0.3:0.603 | best 0.603 null-best mean 0.532 p 0.000
+w2v L4 PURE (secondary)            lines 179 chance 0.495 | C=0.003:0.492 C=0.03:0.483 C=0.3:0.475 | best 0.492 null-best mean 0.530 p 0.880
+w2v L8 PURE (secondary)            lines 179 chance 0.495 | C=0.003:0.455 C=0.03:0.461 C=0.3:0.464 | best 0.464 null-best mean 0.525 p 1.000
+w2v L10 PURE (secondary)           lines 179 chance 0.495 | C=0.003:0.466 C=0.03:0.444 C=0.3:0.439 | best 0.466 null-best mean 0.521 p 0.960
+w2v L12 PURE (secondary)           lines 179 chance 0.495 | C=0.003:0.506 C=0.03:0.497 C=0.3:0.492 | best 0.506 null-best mean 0.535 p 0.840
+w2v mean L4-8 PURE (secondary)     lines 179 chance 0.495 | C=0.003:0.461 C=0.03:0.531 C=0.3:0.542 | best 0.542 null-best mean 0.538 p 0.440
+hub L6 PURE                        lines 179 chance 0.495 | C=0.003:0.482 C=0.03:0.499 C=0.3:0.503 | best 0.503 null-best mean 0.537 p 0.750
+hub L6 ALLCLEAN                    lines 317 chance 0.449 | C=0.003:0.464 C=0.03:0.476 C=0.3:0.483 | best 0.483 null-best mean 0.473 p 0.350
+hub L2 PURE (secondary)            lines 179 chance 0.495 | C=0.003:0.550 C=0.03:0.545 C=0.3:0.536 | best 0.550 null-best mean 0.526 p 0.240
+hub L4 PURE (secondary)            lines 179 chance 0.495 | C=0.003:0.511 C=0.03:0.511 C=0.3:0.506 | best 0.511 null-best mean 0.533 p 0.640
+hub L8 PURE (secondary)            lines 179 chance 0.495 | C=0.003:0.489 C=0.03:0.497 C=0.3:0.494 | best 0.497 null-best mean 0.533 p 0.920
+hub L10 PURE (secondary)           lines 179 chance 0.495 | C=0.003:0.559 C=0.03:0.570 C=0.3:0.587 | best 0.587 null-best mean 0.528 p 0.000
+hub L12 PURE (secondary)           lines 179 chance 0.495 | C=0.003:0.441 C=0.03:0.425 C=0.3:0.436 | best 0.441 null-best mean 0.526 p 0.960
+hub mean L4-8 PURE (secondary)     lines 179 chance 0.495 | C=0.003:0.522 C=0.03:0.522 C=0.3:0.494 | best 0.522 null-best mean 0.538 p 0.640
+emo L6 PURE                        lines 179 chance 0.495 | C=0.003:0.469 C=0.03:0.486 C=0.3:0.490 | best 0.490 null-best mean 0.544 p 0.950
+emo L6 ALLCLEAN                    lines 317 chance 0.449 | C=0.003:0.485 C=0.03:0.471 C=0.3:0.482 | best 0.485 null-best mean 0.478 p 0.350
+emo L2 PURE (secondary)            lines 179 chance 0.495 | C=0.003:0.531 C=0.03:0.564 C=0.3:0.564 | best 0.564 null-best mean 0.532 p 0.200
+emo L4 PURE (secondary)            lines 179 chance 0.495 | C=0.003:0.497 C=0.03:0.503 C=0.3:0.506 | best 0.506 null-best mean 0.526 p 0.720
+emo L8 PURE (secondary)            lines 179 chance 0.495 | C=0.003:0.458 C=0.03:0.464 C=0.3:0.469 | best 0.469 null-best mean 0.528 p 1.000
+emo L10 PURE (secondary)           lines 179 chance 0.495 | C=0.003:0.422 C=0.03:0.425 C=0.3:0.425 | best 0.425 null-best mean 0.532 p 1.000
+emo L12 PURE (secondary)           lines 179 chance 0.495 | C=0.003:0.475 C=0.03:0.492 C=0.3:0.478 | best 0.492 null-best mean 0.536 p 0.920
+emo mean L4-8 PURE (secondary)     lines 179 chance 0.495 | C=0.003:0.503 C=0.03:0.547 C=0.3:0.550 | best 0.550 null-best mean 0.531 p 0.360
+emo 4 logits PURE (secondary)      lines 179 chance 0.495 | C=0.003:0.539 C=0.03:0.539 C=0.3:0.534 | best 0.539 null-best mean 0.528 p 0.440
