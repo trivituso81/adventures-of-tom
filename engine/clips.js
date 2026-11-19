@@ -46,6 +46,9 @@ function bclipFrameAt(C,ms) { let i=0; while(i<C.n-1&&ms>=C.ms[i+1]) i++; return
 function bclipWanted() {
   const out=[]; if(typeof B2==='undefined'||!B2.active||!B2.labClip) return out;
   if(B2.labReview) { for(const id in BCLIPS) if(BCLIPS[id].kind==='loop'&&B2.foes.some(f=>f.id===BCLIPS[id].owner)) out.push(id); if(B2.clipShow) out.push(B2.clipShow.id); return out; }
+  // clipch1: a Lab fight that names its clips (L.clips, B2.labClips) loads only those: once chapter 1 is baked, Tom, Grace and Rose have about
+  // ten clips each, and loading every clip of everyone on the field would not fit in a phone's memory.
+  if(B2.labClips) { for(const id of B2.labClips) if(BCLIPS[id]) out.push(id); return out; }
   for(const id in BCLIPS) if(B2.party.some(u=>u.id===BCLIPS[id].owner)||B2.foes.some(f=>f.id===BCLIPS[id].owner)) out.push(id);
   return out;
 }

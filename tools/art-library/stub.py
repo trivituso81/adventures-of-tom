@@ -34,6 +34,7 @@ if os.path.exists(_seed):
             _ids, _g = os.environ['STUB_GROUP'].split('=', 1)
             for _e in _d['entries']:
                 if _e['id'] in _ids.split(','): _e['group'] = _g
+                elif _e.get('group') == _g: _e['group'] = _g + ' (not in this test)'   # clipch1: the real chapter's other entries stay out of the test's batch
         _raw = (json.dumps(_d, indent=1) + '\n').encode()
     _b = base64.b64encode(_raw).decode()
     FILES['data/art-prompts.json'] = {'sha': 'seed', 'content': '\n'.join(_b[i:i + 60] for i in range(0, len(_b), 60))}   # GitHub wraps base64 lines

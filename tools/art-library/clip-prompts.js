@@ -46,18 +46,112 @@ const BOOP_APPROVED = "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT
 // smallest change"). If the generator refuses or softens it, the one fallback try is the same text with ", knocked out" removed.
 const KO_TEST = BOOP_APPROVED.slice(0, BOOP_APPROVED.indexOf('MOTION:')) + "MOTION: KNOCKED OUT\nFrom her starting relaxed stance, she wobbles once, sits down hard on the same spot, and tips over onto her back with her arms out to the sides and her eyes closed, knocked out. Without getting up, she stays lying flat on her back and remains completely still in that pose for the rest of the clip.";
 const G15 = 'grok-imagine-video-1.5', LITE = G15 + '-lite', ROSE = 'art/clips/start/rose.png';
+// CHAPTER 1 (clipch1, 2026-11-18): every battle clip the chapter 1 story shows, as one batch (claude/animation-chapter-plan.md, pass 1 of
+// claude/battle-animation-list-ch1-v11.md section 6). Group "Chapter 1": the Library's GENERATE CHAPTER 1 makes them all, Tom watches them
+// once in Battle Lab > CHAPTER 1 REVIEW. Every person prompt is BOOP_APPROVED with only its MOTION part changed, plus two forced edits outside
+// it: "her" becomes "his" for Tom, and a clip that leaves the ground (a hop, a jump, running in place) says "on the exact same spot" instead
+// of "with her feet planted on the exact same spot". Every monster prompt is the Mudling idle's (LOOK_FOE + MOTION + END) with only the
+// MOTION changed, plus: a one-shot drops the word "looping", and a monster that falls or flops drops "never lifts off it, hops or slides".
+// MOTION wording follows the Boop: two sentences, the gesture named once with its count, ending in a pose that is held. No left or right
+// in the MOTION (the facing is set once in CAMERA AND BACKGROUND; "forward" is toward the foe). Props come out from behind the back and go
+// back there, so the clip starts and ends on the painted idle. Effects (spray, splash, rings) stay out: the engine draws them.
+// Kinds: an attack with an impact is a strike; a one-shot with no impact (hit, dodge, victory, give, cast, a wind-up, a monster's slip) is a
+// state: it ends in a held pose (the hit, dodge, give and cast clips end back in the starting stance, so the held picture is the idle).
+// Not made, on purpose: Get up (the list's first try is the KO clip played backwards: no standing start picture can begin lying down);
+// Rose on Tom's shoulders for "Giddyup, Tata!" (the painted tomride battle frames already in the game, data/tomride-hires.js); Skeeter Swarm
+// (nine small bodies, no one subject: it stays on its painted sheet, moved by the engine; it is not in the chapter 1 story).
+const C1 = 'Chapter 1', BOOP_HEAD = BOOP_APPROVED.slice(0, BOOP_APPROVED.indexOf('MOTION:'));
+const swap = (s, a, b) => { if (!s.includes(a)) throw new Error('clip-prompts: text to swap not found: ' + a); return s.replace(a, b); };
+// The person part of the prompt. he: Tom. off: the clip leaves the ground.
+const PHEAD = (he, off) => { let h = BOOP_HEAD; if (he) h = swap(swap(h, 'preserving her exact face', 'preserving his exact face'), 'with her feet planted', 'with his feet planted');
+  return off ? swap(h, 'facing left with ' + (he ? 'his' : 'her') + ' feet planted on the exact same spot', 'facing left on the exact same spot') : h; };
+const FOE_ONCE = swap(LOOK_FOE, 'A short looping animation', 'A short animation');
+const FOE_FREE = swap(FOE_ONCE, 'Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. ', 'It stays on the same line as in the attached picture. ');
+const BACK = (s, h) => `${s === 'he' ? 'He' : 'She'} returns to ${h} starting relaxed stance and remains completely still in that pose for the rest of the clip.`;
+// [owner, he?, figRows (make_start.py), victory MOTION, own move clips]
+const PEOPLE = [
+  ['tom', true, 99, 'MOTION: VICTORY\nFrom his starting relaxed stance, he gives a small satisfied smile and raises one thumbs up at chest height once. Without repeating the gesture, he holds that thumbs up with the same calm smile and remains completely still in that pose for the rest of the clip.', [
+    ['loungepass', 'Lounge Pass Flex (shows off his lounge pass)', 0, 'MOTION: LOUNGE PASS FLEX\nFrom his starting relaxed stance, he gives a smug little smile, brings a small lounge pass card out from behind his back, and holds it up forward at face height once, showing it off. Without repeating the gesture, he tucks the card behind his back again. ' + BACK('he', 'his')],
+    ['blockade', 'Zone One Blockade (hip check)', 0, 'MOTION: HIP CHECK\nFrom his starting relaxed stance, he shifts his weight and bumps one hip sharply forward once, as if knocking something out of his way. Without repeating the bump, ' + BACK('he', 'his').replace('He returns', 'he returns')]]],
+  ['grace', false, 90, 'MOTION: VICTORY\nFrom her starting relaxed stance, she grins and throws both arms straight up into a V once. Without repeating the gesture, she holds both arms raised high with a big bright smile and remains completely still in that pose for the rest of the clip.', [
+    ['squeeze', 'Soup-Dumpling Squeeze (squeezes a squishy)', 0, 'MOTION: SQUISHY SQUEEZE\nFrom her starting relaxed stance, she brings a small round dumpling-shaped squishy toy out from behind her back, holds it out forward in both hands at chest height, and squeezes it hard once with a delighted grin. Without repeating the squeeze, she tucks the toy behind her back again. ' + BACK('she', 'her')],
+    ['cubepop', 'Crunchy Sugar-Cube Pop (crushes a squishy cube)', 0, 'MOTION: SQUISHY CRUNCH\nFrom her starting relaxed stance, she brings a small clear cube-shaped squishy toy out from behind her back, holds it out forward in one hand at chest height, and crushes it in her fist once. Without repeating the crush, she tucks the toy behind her back again. ' + BACK('she', 'her')]]],
+  ['rose', false, 83, null, [
+    ['tackle', 'Lamb-Tuck Ankle Tackle (low pounce)', 0, 'MOTION: LOW POUNCE\nFrom her starting relaxed stance, she crouches and lunges forward low from the hips once, one arm tucked against her side and the other arm reaching out forward at ankle height. Without repeating the lunge, ' + BACK('she', 'her').replace('She returns', 'she returns')],
+    ['lava', 'The Floor Is Lava! (one hop)', 1, 'MOTION: ONE HOP\nFrom her starting relaxed stance, she bends her knees and hops straight up once with both arms out to the sides for balance, landing back on the exact same spot. Without hopping again, she settles into her starting relaxed stance and remains completely still in that pose for the rest of the clip.'],
+    ['giddyup', '"Giddyup, Tata!" Launch (cannonball jump)', 1, 'MOTION: CANNONBALL JUMP\nFrom her starting relaxed stance, she crouches and jumps straight up once, hugging her knees to her chest in a tight cannonball at the top of the jump, then lands back on the exact same spot. Without jumping again, she settles into her starting relaxed stance and remains completely still in that pose for the rest of the clip.']]],
+  ['deedee', false, 99.3, 'MOTION: VICTORY\nFrom her starting relaxed stance, she smiles warmly and claps her hands together once in front of her chest. Without repeating the clap, she holds her hands clasped at her chest with the same warm smile and remains completely still in that pose for the rest of the clip.', [
+    ['windex', 'Windex Spritz (spray bottle squirt)', 0, 'MOTION: SPRAY BOTTLE SQUIRT\nFrom her starting relaxed stance, she brings a blue spray bottle out from behind her back, aims it forward at face height in one hand, and squeezes the trigger once. Without repeating the squeeze, she tucks the bottle behind her back again. ' + BACK('she', 'her')],
+    ['wetfloor', 'Wet-Floor Hazard (mop swipe)', 0, 'MOTION: MOP SWIPE\nFrom her starting relaxed stance, she grips a short mop in both hands and swipes its head across the floor in front of her once, in one wide sweep. Without repeating the sweep, she tucks the mop behind her back. ' + BACK('she', 'her')],
+    ['scrub', '"Hand Me My Glasses" Scrub (glasses on, rolling-pin scrub)', 0, 'MOTION: GLASSES ON, ROLLING PIN SCRUB\nFrom her starting relaxed stance, she slides a pair of reading glasses onto her nose with one hand, then grips a wooden rolling pin in both hands and pushes it forward once at chest height in one firm scrubbing stroke. Without repeating the stroke, she tucks the rolling pin behind her back and remains completely still in her starting relaxed stance, glasses on, for the rest of the clip.']]],
+];
+const NAME = { tom: 'Tom', grace: 'Grace', rose: 'Rose', deedee: 'Deedee', mudling: 'Mudling', bigone: 'The Big One' };
+const clipOf = (o, key, rows, kind, foe) => {
+  const c = { id: o + '-' + key, owner: o, start: 'art/clips/start/' + o + '.png', model: LITE, res: '480p', dur: 3, figRows: rows };
+  if (kind === 'loop' || kind === 'calm') Object.assign(c, { step: 1, speed: .3, calm: .875, kind: 'loop' });   // the clipfoes1 idle numbers: the baker picks the calmest stretch
+  else if (kind === 'run') Object.assign(c, { step: 2, speed: 1, kind: 'loop' });                              // a running cycle: no calm stretch to pick
+  else Object.assign(c, { step: kind === 'strike' ? 3 : 2, speed: 1.5 }, kind === 'strike' ? {} : { kind: 'state' });   // the Boop's and the KO's numbers
+  if (foe) c.k = 8;
+  return c;
+};
+const entry = (o, key, label, rows, kind, prompt, foe) => ({ id: 'clip-' + o + '-' + key, tab: 'Clips', group: C1, title: NAME[o] + ': ' + label + ' video clip', ar: '4:3',
+  refs: ['art/clips/start/' + o + '.png'], clip: clipOf(o, key, rows, kind, foe), prompt });
+const CH1 = [];
+for (const [o, he, rows, victory, moves] of PEOPLE) {
+  const s = he ? 'he' : 'she', S = he ? 'He' : 'She', h = he ? 'his' : 'her', P = off => PHEAD(he, off);
+  CH1.push(
+    entry(o, 'idle', 'idle (waiting loop)', rows, 'calm', P(0) + `MOTION: IDLE BREATHING\nFrom ${h} starting relaxed stance, ${s} breathes slowly so ${h} chest and shoulders rise and settle a little, and blinks once. ${S} keeps ${h} arms and head where they are and stays in that same relaxed stance for the rest of the clip.`),
+    entry(o, 'guard', 'guard and brace (loop)', rows, 'calm', P(0) + `MOTION: GUARD AND BRACE\nFrom ${h} starting relaxed stance, ${s} bends ${h} knees slightly and raises both forearms in front of ${h} chest once, braced to block. Without lowering ${h} arms, ${s} holds that braced pose, breathing slowly, for the rest of the clip.`),
+    entry(o, 'hit', 'hit reaction', rows, 'state', P(0) + `MOTION: HIT REACTION\nFrom ${h} starting relaxed stance, ${s} flinches once, ${h} head and shoulders jolting backward and ${h} eyes squeezing shut for a moment. Without repeating the flinch, ` + BACK(s, h).replace(S + ' returns', s + ' returns')),
+    entry(o, 'dodge', 'dodge', rows, 'state', P(0) + `MOTION: DODGE\nFrom ${h} starting relaxed stance, ${s} leans ${h} upper body quickly backward and ducks ${h} head once, as if something just missed ${he ? 'him' : 'her'}. Without moving ${h} feet, ${s} straightens up into ${h} starting relaxed stance and remains completely still in that pose for the rest of the clip.`),
+  );
+  if (o !== 'rose')   // Rose's knock-out is clip-rose-ko (clipko1); the same MOTION for everyone
+    CH1.push(entry(o, 'ko', 'knocked out (held pose)', rows, 'state', P(0) + `MOTION: KNOCKED OUT\nFrom ${h} starting relaxed stance, ${s} wobbles once, sits down hard on the same spot, and tips over onto ${h} back with ${h} arms out to the sides and ${h} eyes closed, knocked out. Without getting up, ${s} stays lying flat on ${h} back and remains completely still in that pose for the rest of the clip.`));
+  CH1.push(
+    entry(o, 'run', 'running in place (loop)', rows, 'run', P(1) + `MOTION: RUNNING IN PLACE\nFrom ${h} starting relaxed stance, ${s} starts jogging in place, lifting ${h} knees and pumping ${h} arms in a steady rhythm without moving forward or backward. ${S} keeps jogging in place at the same steady pace for the rest of the clip.`),
+    entry(o, 'victory', 'victory', rows, 'state', victory ? P(0) + victory : P(1) + 'MOTION: VICTORY\nFrom her starting relaxed stance, she giggles and jumps straight up once with both arms raised high, landing back on the exact same spot. Without jumping again, she holds both arms raised high with a big silly grin and remains completely still in that pose for the rest of the clip.'),
+    entry(o, 'give', 'give (hands something to an ally)', rows, 'state', P(0) + `MOTION: HAND SOMETHING OVER\nFrom ${h} starting relaxed stance, ${s} reaches one open hand out forward at chest height, palm up, once, as if handing something to a friend. Without repeating the gesture, ${s} pulls ${h} arm back. ` + BACK(s, h)),
+    entry(o, 'cast', 'cast (big two-arm call)', rows, 'state', P(0) + `MOTION: BIG TWO-ARM CALL\nFrom ${h} starting relaxed stance, ${s} sweeps both arms up and out wide above ${h} shoulders once, palms open, as if calling something in. Without repeating the gesture, ${s} lowers ${h} arms. ` + BACK(s, h)),
+    ...moves.map(([key, label, off, motion]) => entry(o, key, label, rows, 'strike', P(off) + motion)),
+  );
+}
+// Monsters: the Mudling and The Big One (the two chapter 1 story fights). [key, label, kind, falls?, MOTION]
+const STILL = ' and stays completely still for the rest of the clip.', SETTLE = 'it settles back into the pose of the attached picture' + STILL;
+const FOES = [
+  ['mudling', 44.6, '', [
+    ['bump', 'Wobble (belly bump)', 'strike', 0, 'MOTION: WOBBLE BUMP\nThe creature leans its whole body forward and bumps forward once with its belly, wobbling like jelly, while its base stays put. Without repeating the bump, ' + SETTLE],
+    ['throw', 'Mud Flick and Mud Pie (throw)', 'strike', 0, 'MOTION: THROW\nThe creature swings one mud arm back and flings it forward once at head height, as if throwing a ball of mud, while its base stays put. Without repeating the throw, ' + SETTLE],
+    ['windup', 'Mud Pie wind-up (held pose)', 'state', 0, 'MOTION: WIND-UP\nThe creature squashes down low and wide, pulls both mud arms back behind it and narrows its eyes once, getting ready to throw something big. It holds that squashed, pulled-back pose' + STILL],
+    ['hit', 'hit reaction', 'state', 0, 'MOTION: HIT REACTION\nThe creature jolts backward once, its body squashing and jiggling like jelly and its eyes squeezing shut for a moment, while its base stays put. Without repeating the jolt, ' + SETTLE],
+    ['slip', 'slips on the wet floor', 'state', 1, 'MOTION: SLIP\nThe creature\'s base skids out from under it once, it tips backward with its mud arms flailing and plops down flat. Then it pulls itself back up into the pose of the attached picture' + STILL],
+    ['defeated', 'defeated (held pose)', 'state', 1, 'MOTION: DEFEATED\nThe creature wobbles once, closes its eyes and slumps down slowly into a low, flattened heap, its mud arms limp and its leaf sprout drooping. It stays in that slumped heap' + STILL]]],
+  ['bigone', 41.1, ' The muffin-tin crown stays on its head and the fishing lure and the coin stay in its hands.', [
+    ['glare', 'Big Glare (held stare, the wind-up of the bite)', 'state', 0, 'MOTION: BIG GLARE\nThe creature lowers its head, leans forward a little and narrows its big eyes into one hard stare.%P It holds that hard, leaning stare' + STILL],
+    ['tailslap', 'Tail Slap', 'strike', 0, 'MOTION: TAIL SLAP\nThe creature lifts its tail and slaps it down hard on the ground beside it once, while its feet stay put.%P Without repeating the slap, ' + SETTLE],
+    ['chomp', 'Swamp Chomp (snapping bite)', 'strike', 0, 'MOTION: SNAPPING BITE\nThe creature lunges its head and upper body forward and snaps its wide mouth shut once in one big bite, while its feet stay put.%P Without repeating the bite, ' + SETTLE],
+    ['flopwindup', 'Muddy Belly-Flop wind-up (held pose)', 'state', 0, 'MOTION: BELLY-FLOP WIND-UP\nThe creature rears up tall, puffs out its round belly and lifts both arms high once, getting ready to flop.%P It holds that tall, puffed-up pose' + STILL],
+    ['bellyflop', 'Muddy Belly-Flop', 'strike', 1, 'MOTION: BELLY-FLOP\nThe creature rears up and flops forward flat onto its round belly once.%P Then it pushes itself back up into the pose of the attached picture' + STILL],
+    ['polish', 'Crown Polish', 'state', 0, 'MOTION: CROWN POLISH\nThe creature raises the hand holding the coin and rubs the coin across its muffin-tin crown in two small circles, looking proud.%P Then it lowers that hand back to where it was in the attached picture' + STILL],
+    ['hit', 'hit reaction', 'state', 0, 'MOTION: HIT REACTION\nThe creature jolts backward once, its belly jiggling and its big eyes squeezing shut for a moment, while its feet stay put.%P Without repeating the jolt, ' + SETTLE],
+    ['slip', 'slips on the wet floor', 'state', 1, 'MOTION: SLIP\nThe creature\'s feet skid out from under it once, it tips backward with its arms flailing and sits down hard.%P Then it pushes itself back up into the pose of the attached picture' + STILL],
+    ['flustered', 'Flustered (slumped, held pose)', 'state', 1, 'MOTION: FLUSTERED\nThe creature sags once, its shoulders drooping and its big eyes going dizzy and half closed, and it slumps down into a tired, wobbly sit.%P It stays slumped like that' + STILL],
+    ['defeated', 'defeated (held pose)', 'state', 1, 'MOTION: DEFEATED\nThe creature wobbles once, closes its eyes and tips over slowly onto its back, its arms flopping out to the sides.%P It stays lying on its back' + STILL]]],
+];
+for (const [o, rows, parts, list] of FOES)
+  for (const [key, label, kind, falls, motion] of list)
+    CH1.push(entry(o, key, label, rows, kind, (falls ? FOE_FREE : FOE_ONCE) + motion.replace('%P', parts) + END(3), true));
 const entries = [
   { id: 'clip-rose-boop', tab: 'Clips', group: 'Rose', title: 'Rose: Boop (one sharp finger jab) video clip', ar: '4:3', refs: [ROSE],
     clip: { id: 'rose-boop', owner: 'rose', start: ROSE, model: LITE, res: '480p', dur: 3, figRows: 83, step: 3, speed: 1.5 },
     prompt: BOOP_APPROVED },
-  { id: 'clip-rose-ko', tab: 'Clips', group: 'Rose', title: 'Rose: knocked out (TEST: does the video model accept the words) video clip', ar: '4:3', refs: [ROSE],
+  { id: 'clip-rose-ko', tab: 'Clips', group: 'Chapter 1', title: 'Rose: knocked out (held pose) video clip', ar: '4:3', refs: [ROSE],
     clip: { id: 'rose-ko', owner: 'rose', start: ROSE, model: LITE, res: '480p', dur: 3, figRows: 83, step: 2, speed: 1.5, kind: 'state' },
     prompt: KO_TEST },
   { id: 'clip-rose-sleep', tab: 'Clips', group: 'Rose', title: 'Rose: gets sleepy and lies down (out of the fight) video clip', ar: '4:3', refs: [ROSE],
     clip: { id: 'rose-sleep', owner: 'rose', start: ROSE, model: G15, res: '480p', dur: 4, figRows: 83, step: 2, speed: 1.5, kind: 'state' },
     prompt: LOOK.replace('Feet stay on the same ground line. Walking away from or toward the camera is not allowed.', 'The character stays in the same place in the frame and ends resting on the same line where the feet stand in the attached picture. Walking away from or toward the camera is not allowed.') +
       'MOTION: TOO SLEEPY, LIES DOWN FOR A NAP\nStart in the relaxed stance of the attached picture. A big yawn with one hand over the mouth, eyelids drooping, a slow tired sway. By the middle of the clip the knees fold and the character sinks straight down in place and sits. Then the character tips gently over onto one side and lies all the way down on the ground line, curled up small like a sleeping child: knees tucked in, head resting on the hands, eyes closed, a small peaceful smile. The character MUST be lying down, fully on the side, well before the end; sitting or kneeling at the end is wrong. Soft and gentle, like a tired child at bedtime, never a hard fall. The hair, the hair bow and every accessory stay exactly as in the attached picture, the same shape, size and color. The curled-up body stays small and compact and stays in the middle of the frame. Hold the sleeping pose completely still for the last second of the clip.' + END(4) },
-  { id: 'clip-mudling-idle', tab: 'Clips', group: 'Monsters', title: 'Mudling: waiting in place (idle loop) video clip', ar: '4:3', refs: ['art/clips/start/mudling.png'],
+  { id: 'clip-mudling-idle', tab: 'Clips', group: 'Chapter 1', title: 'Mudling: waiting in place (idle loop) video clip', ar: '4:3', refs: ['art/clips/start/mudling.png'],
     clip: { id: 'mudling-idle', owner: 'mudling', start: 'art/clips/start/mudling.png', model: G15, res: '480p', dur: 3, figRows: 44.6, step: 1, speed: .3, pace: [[2.25, 1, 1]], kind: 'loop', k: 8 },
     prompt: LOOK_FOE + 'MOTION: IDLE LOOP\nThe creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One slow blink. The eyes glance to one side and back. The leaf sprout on its head sways gently and stays attached. The mud arms stay where they are; drips wobble a little but nothing falls off or lands on the ground. The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves.' + END(3) },
   // clipfoes1: idle loops for four more chapter 1 monsters. The MOTION text is the Mudling's, word for word, with only the two
@@ -68,9 +162,10 @@ const entries = [
     ['toad', 'Bog Toad', 39.2, 'The lily pad on its head sways gently and stays attached. The arms and legs stay where they are; water drops wobble a little but nothing falls off or lands on the ground.'],
     ['log', 'Log Lump', 34.9, 'The moss, the mushrooms and the leaf sprouts on top sway gently and stay attached. The branch stubs and the feet stay where they are; nothing falls off or lands on the ground.'],
     ['bigone', 'The Big One', 41.1, 'The muffin-tin crown stays on its head. The seaweed hair sways gently and stays attached. The fishing lure and the coin stay held where they are; drips wobble a little but nothing falls off or lands on the ground.'],
-  ].map(([o, name, rows, parts]) => ({ id: 'clip-' + o + '-idle', tab: 'Clips', group: 'Monsters', title: name + ': waiting in place (idle loop) video clip', ar: '4:3', refs: ['art/clips/start/' + o + '.png'],
+  ].map(([o, name, rows, parts]) => ({ id: 'clip-' + o + '-idle', tab: 'Clips', group: 'Chapter 1', title: name + ': waiting in place (idle loop) video clip', ar: '4:3', refs: ['art/clips/start/' + o + '.png'],
     clip: { id: o + '-idle', owner: o, start: 'art/clips/start/' + o + '.png', model: G15, res: '480p', dur: 3, figRows: rows, step: 1, speed: .3, calm: .875, kind: 'loop', k: 8 },
     prompt: LOOK_FOE + 'MOTION: IDLE LOOP\nThe creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One slow blink. The eyes glance to one side and back. ' + parts + ' The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves.' + END(3) })),
+  ...CH1,
 ];
 if (require.main === module) {
   const out = 'data/art-prompts.json', doc = JSON.parse(fs.readFileSync(out, 'utf8'));

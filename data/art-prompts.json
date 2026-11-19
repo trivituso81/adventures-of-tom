@@ -26703,8 +26703,8 @@
    "rejects": [],
    "id": "clip-rose-ko",
    "tab": "Clips",
-   "group": "Rose",
-   "title": "Rose: knocked out (TEST: does the video model accept the words) video clip",
+   "group": "Chapter 1",
+   "title": "Rose: knocked out (held pose) video clip",
    "ar": "4:3",
    "refs": [
     "art/clips/start/rose.png"
@@ -26779,7 +26779,7 @@
    "rejects": [],
    "id": "clip-mudling-idle",
    "tab": "Clips",
-   "group": "Monsters",
+   "group": "Chapter 1",
    "title": "Mudling: waiting in place (idle loop) video clip",
    "ar": "4:3",
    "refs": [
@@ -27093,7 +27093,7 @@
    "rejects": [],
    "id": "clip-grump-idle",
    "tab": "Clips",
-   "group": "Monsters",
+   "group": "Chapter 1",
    "title": "Pond Grump: waiting in place (idle loop) video clip",
    "ar": "4:3",
    "refs": [
@@ -27121,7 +27121,7 @@
    "rejects": [],
    "id": "clip-toad-idle",
    "tab": "Clips",
-   "group": "Monsters",
+   "group": "Chapter 1",
    "title": "Bog Toad: waiting in place (idle loop) video clip",
    "ar": "4:3",
    "refs": [
@@ -27149,7 +27149,7 @@
    "rejects": [],
    "id": "clip-log-idle",
    "tab": "Clips",
-   "group": "Monsters",
+   "group": "Chapter 1",
    "title": "Log Lump: waiting in place (idle loop) video clip",
    "ar": "4:3",
    "refs": [
@@ -27177,7 +27177,7 @@
    "rejects": [],
    "id": "clip-bigone-idle",
    "tab": "Clips",
-   "group": "Monsters",
+   "group": "Chapter 1",
    "title": "The Big One: waiting in place (idle loop) video clip",
    "ar": "4:3",
    "refs": [
@@ -27198,6 +27198,1601 @@
     "k": 8
    },
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short looping animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: IDLE LOOP\nThe creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One slow blink. The eyes glance to one side and back. The muffin-tin crown stays on its head. The seaweed hair sways gently and stays attached. The fishing lure and the coin stay held where they are; drips wobble a little but nothing falls off or lands on the ground. The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-tom-idle",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Tom: idle (waiting loop) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/tom.png"
+   ],
+   "clip": {
+    "id": "tom-idle",
+    "owner": "tom",
+    "start": "art/clips/start/tom.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99,
+    "step": 1,
+    "speed": 0.3,
+    "calm": 0.875,
+    "kind": "loop"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: IDLE BREATHING\nFrom his starting relaxed stance, he breathes slowly so his chest and shoulders rise and settle a little, and blinks once. He keeps his arms and head where they are and stays in that same relaxed stance for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-tom-guard",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Tom: guard and brace (loop) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/tom.png"
+   ],
+   "clip": {
+    "id": "tom-guard",
+    "owner": "tom",
+    "start": "art/clips/start/tom.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99,
+    "step": 1,
+    "speed": 0.3,
+    "calm": 0.875,
+    "kind": "loop"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: GUARD AND BRACE\nFrom his starting relaxed stance, he bends his knees slightly and raises both forearms in front of his chest once, braced to block. Without lowering his arms, he holds that braced pose, breathing slowly, for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-tom-hit",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Tom: hit reaction video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/tom.png"
+   ],
+   "clip": {
+    "id": "tom-hit",
+    "owner": "tom",
+    "start": "art/clips/start/tom.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HIT REACTION\nFrom his starting relaxed stance, he flinches once, his head and shoulders jolting backward and his eyes squeezing shut for a moment. Without repeating the flinch, he returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-tom-dodge",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Tom: dodge video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/tom.png"
+   ],
+   "clip": {
+    "id": "tom-dodge",
+    "owner": "tom",
+    "start": "art/clips/start/tom.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: DODGE\nFrom his starting relaxed stance, he leans his upper body quickly backward and ducks his head once, as if something just missed him. Without moving his feet, he straightens up into his starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-tom-ko",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Tom: knocked out (held pose) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/tom.png"
+   ],
+   "clip": {
+    "id": "tom-ko",
+    "owner": "tom",
+    "start": "art/clips/start/tom.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: KNOCKED OUT\nFrom his starting relaxed stance, he wobbles once, sits down hard on the same spot, and tips over onto his back with his arms out to the sides and his eyes closed, knocked out. Without getting up, he stays lying flat on his back and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-tom-run",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Tom: running in place (loop) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/tom.png"
+   ],
+   "clip": {
+    "id": "tom-run",
+    "owner": "tom",
+    "start": "art/clips/start/tom.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99,
+    "step": 2,
+    "speed": 1,
+    "kind": "loop"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: RUNNING IN PLACE\nFrom his starting relaxed stance, he starts jogging in place, lifting his knees and pumping his arms in a steady rhythm without moving forward or backward. He keeps jogging in place at the same steady pace for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-tom-victory",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Tom: victory video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/tom.png"
+   ],
+   "clip": {
+    "id": "tom-victory",
+    "owner": "tom",
+    "start": "art/clips/start/tom.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: VICTORY\nFrom his starting relaxed stance, he gives a small satisfied smile and raises one thumbs up at chest height once. Without repeating the gesture, he holds that thumbs up with the same calm smile and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-tom-give",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Tom: give (hands something to an ally) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/tom.png"
+   ],
+   "clip": {
+    "id": "tom-give",
+    "owner": "tom",
+    "start": "art/clips/start/tom.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HAND SOMETHING OVER\nFrom his starting relaxed stance, he reaches one open hand out forward at chest height, palm up, once, as if handing something to a friend. Without repeating the gesture, he pulls his arm back. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-tom-cast",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Tom: cast (big two-arm call) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/tom.png"
+   ],
+   "clip": {
+    "id": "tom-cast",
+    "owner": "tom",
+    "start": "art/clips/start/tom.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BIG TWO-ARM CALL\nFrom his starting relaxed stance, he sweeps both arms up and out wide above his shoulders once, palms open, as if calling something in. Without repeating the gesture, he lowers his arms. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-tom-loungepass",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Tom: Lounge Pass Flex (shows off his lounge pass) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/tom.png"
+   ],
+   "clip": {
+    "id": "tom-loungepass",
+    "owner": "tom",
+    "start": "art/clips/start/tom.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99,
+    "step": 3,
+    "speed": 1.5
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: LOUNGE PASS FLEX\nFrom his starting relaxed stance, he gives a smug little smile, brings a small lounge pass card out from behind his back, and holds it up forward at face height once, showing it off. Without repeating the gesture, he tucks the card behind his back again. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-tom-blockade",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Tom: Zone One Blockade (hip check) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/tom.png"
+   ],
+   "clip": {
+    "id": "tom-blockade",
+    "owner": "tom",
+    "start": "art/clips/start/tom.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99,
+    "step": 3,
+    "speed": 1.5
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HIP CHECK\nFrom his starting relaxed stance, he shifts his weight and bumps one hip sharply forward once, as if knocking something out of his way. Without repeating the bump, he returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-grace-idle",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Grace: idle (waiting loop) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/grace.png"
+   ],
+   "clip": {
+    "id": "grace-idle",
+    "owner": "grace",
+    "start": "art/clips/start/grace.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 90,
+    "step": 1,
+    "speed": 0.3,
+    "calm": 0.875,
+    "kind": "loop"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: IDLE BREATHING\nFrom her starting relaxed stance, she breathes slowly so her chest and shoulders rise and settle a little, and blinks once. She keeps her arms and head where they are and stays in that same relaxed stance for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-grace-guard",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Grace: guard and brace (loop) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/grace.png"
+   ],
+   "clip": {
+    "id": "grace-guard",
+    "owner": "grace",
+    "start": "art/clips/start/grace.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 90,
+    "step": 1,
+    "speed": 0.3,
+    "calm": 0.875,
+    "kind": "loop"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: GUARD AND BRACE\nFrom her starting relaxed stance, she bends her knees slightly and raises both forearms in front of her chest once, braced to block. Without lowering her arms, she holds that braced pose, breathing slowly, for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-grace-hit",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Grace: hit reaction video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/grace.png"
+   ],
+   "clip": {
+    "id": "grace-hit",
+    "owner": "grace",
+    "start": "art/clips/start/grace.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 90,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HIT REACTION\nFrom her starting relaxed stance, she flinches once, her head and shoulders jolting backward and her eyes squeezing shut for a moment. Without repeating the flinch, she returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-grace-dodge",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Grace: dodge video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/grace.png"
+   ],
+   "clip": {
+    "id": "grace-dodge",
+    "owner": "grace",
+    "start": "art/clips/start/grace.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 90,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: DODGE\nFrom her starting relaxed stance, she leans her upper body quickly backward and ducks her head once, as if something just missed her. Without moving her feet, she straightens up into her starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-grace-ko",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Grace: knocked out (held pose) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/grace.png"
+   ],
+   "clip": {
+    "id": "grace-ko",
+    "owner": "grace",
+    "start": "art/clips/start/grace.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 90,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: KNOCKED OUT\nFrom her starting relaxed stance, she wobbles once, sits down hard on the same spot, and tips over onto her back with her arms out to the sides and her eyes closed, knocked out. Without getting up, she stays lying flat on her back and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-grace-run",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Grace: running in place (loop) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/grace.png"
+   ],
+   "clip": {
+    "id": "grace-run",
+    "owner": "grace",
+    "start": "art/clips/start/grace.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 90,
+    "step": 2,
+    "speed": 1,
+    "kind": "loop"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: RUNNING IN PLACE\nFrom her starting relaxed stance, she starts jogging in place, lifting her knees and pumping her arms in a steady rhythm without moving forward or backward. She keeps jogging in place at the same steady pace for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-grace-victory",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Grace: victory video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/grace.png"
+   ],
+   "clip": {
+    "id": "grace-victory",
+    "owner": "grace",
+    "start": "art/clips/start/grace.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 90,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: VICTORY\nFrom her starting relaxed stance, she grins and throws both arms straight up into a V once. Without repeating the gesture, she holds both arms raised high with a big bright smile and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-grace-give",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Grace: give (hands something to an ally) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/grace.png"
+   ],
+   "clip": {
+    "id": "grace-give",
+    "owner": "grace",
+    "start": "art/clips/start/grace.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 90,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HAND SOMETHING OVER\nFrom her starting relaxed stance, she reaches one open hand out forward at chest height, palm up, once, as if handing something to a friend. Without repeating the gesture, she pulls her arm back. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-grace-cast",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Grace: cast (big two-arm call) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/grace.png"
+   ],
+   "clip": {
+    "id": "grace-cast",
+    "owner": "grace",
+    "start": "art/clips/start/grace.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 90,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BIG TWO-ARM CALL\nFrom her starting relaxed stance, she sweeps both arms up and out wide above her shoulders once, palms open, as if calling something in. Without repeating the gesture, she lowers her arms. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-grace-squeeze",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Grace: Soup-Dumpling Squeeze (squeezes a squishy) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/grace.png"
+   ],
+   "clip": {
+    "id": "grace-squeeze",
+    "owner": "grace",
+    "start": "art/clips/start/grace.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 90,
+    "step": 3,
+    "speed": 1.5
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SQUISHY SQUEEZE\nFrom her starting relaxed stance, she brings a small round dumpling-shaped squishy toy out from behind her back, holds it out forward in both hands at chest height, and squeezes it hard once with a delighted grin. Without repeating the squeeze, she tucks the toy behind her back again. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-grace-cubepop",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Grace: Crunchy Sugar-Cube Pop (crushes a squishy cube) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/grace.png"
+   ],
+   "clip": {
+    "id": "grace-cubepop",
+    "owner": "grace",
+    "start": "art/clips/start/grace.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 90,
+    "step": 3,
+    "speed": 1.5
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SQUISHY CRUNCH\nFrom her starting relaxed stance, she brings a small clear cube-shaped squishy toy out from behind her back, holds it out forward in one hand at chest height, and crushes it in her fist once. Without repeating the crush, she tucks the toy behind her back again. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-rose-idle",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Rose: idle (waiting loop) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/rose.png"
+   ],
+   "clip": {
+    "id": "rose-idle",
+    "owner": "rose",
+    "start": "art/clips/start/rose.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 83,
+    "step": 1,
+    "speed": 0.3,
+    "calm": 0.875,
+    "kind": "loop"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: IDLE BREATHING\nFrom her starting relaxed stance, she breathes slowly so her chest and shoulders rise and settle a little, and blinks once. She keeps her arms and head where they are and stays in that same relaxed stance for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-rose-guard",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Rose: guard and brace (loop) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/rose.png"
+   ],
+   "clip": {
+    "id": "rose-guard",
+    "owner": "rose",
+    "start": "art/clips/start/rose.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 83,
+    "step": 1,
+    "speed": 0.3,
+    "calm": 0.875,
+    "kind": "loop"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: GUARD AND BRACE\nFrom her starting relaxed stance, she bends her knees slightly and raises both forearms in front of her chest once, braced to block. Without lowering her arms, she holds that braced pose, breathing slowly, for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-rose-hit",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Rose: hit reaction video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/rose.png"
+   ],
+   "clip": {
+    "id": "rose-hit",
+    "owner": "rose",
+    "start": "art/clips/start/rose.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 83,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HIT REACTION\nFrom her starting relaxed stance, she flinches once, her head and shoulders jolting backward and her eyes squeezing shut for a moment. Without repeating the flinch, she returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-rose-dodge",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Rose: dodge video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/rose.png"
+   ],
+   "clip": {
+    "id": "rose-dodge",
+    "owner": "rose",
+    "start": "art/clips/start/rose.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 83,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: DODGE\nFrom her starting relaxed stance, she leans her upper body quickly backward and ducks her head once, as if something just missed her. Without moving her feet, she straightens up into her starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-rose-run",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Rose: running in place (loop) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/rose.png"
+   ],
+   "clip": {
+    "id": "rose-run",
+    "owner": "rose",
+    "start": "art/clips/start/rose.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 83,
+    "step": 2,
+    "speed": 1,
+    "kind": "loop"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: RUNNING IN PLACE\nFrom her starting relaxed stance, she starts jogging in place, lifting her knees and pumping her arms in a steady rhythm without moving forward or backward. She keeps jogging in place at the same steady pace for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-rose-victory",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Rose: victory video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/rose.png"
+   ],
+   "clip": {
+    "id": "rose-victory",
+    "owner": "rose",
+    "start": "art/clips/start/rose.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 83,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: VICTORY\nFrom her starting relaxed stance, she giggles and jumps straight up once with both arms raised high, landing back on the exact same spot. Without jumping again, she holds both arms raised high with a big silly grin and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-rose-give",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Rose: give (hands something to an ally) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/rose.png"
+   ],
+   "clip": {
+    "id": "rose-give",
+    "owner": "rose",
+    "start": "art/clips/start/rose.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 83,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HAND SOMETHING OVER\nFrom her starting relaxed stance, she reaches one open hand out forward at chest height, palm up, once, as if handing something to a friend. Without repeating the gesture, she pulls her arm back. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-rose-cast",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Rose: cast (big two-arm call) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/rose.png"
+   ],
+   "clip": {
+    "id": "rose-cast",
+    "owner": "rose",
+    "start": "art/clips/start/rose.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 83,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BIG TWO-ARM CALL\nFrom her starting relaxed stance, she sweeps both arms up and out wide above her shoulders once, palms open, as if calling something in. Without repeating the gesture, she lowers her arms. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-rose-tackle",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Rose: Lamb-Tuck Ankle Tackle (low pounce) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/rose.png"
+   ],
+   "clip": {
+    "id": "rose-tackle",
+    "owner": "rose",
+    "start": "art/clips/start/rose.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 83,
+    "step": 3,
+    "speed": 1.5
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: LOW POUNCE\nFrom her starting relaxed stance, she crouches and lunges forward low from the hips once, one arm tucked against her side and the other arm reaching out forward at ankle height. Without repeating the lunge, she returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-rose-lava",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Rose: The Floor Is Lava! (one hop) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/rose.png"
+   ],
+   "clip": {
+    "id": "rose-lava",
+    "owner": "rose",
+    "start": "art/clips/start/rose.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 83,
+    "step": 3,
+    "speed": 1.5
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: ONE HOP\nFrom her starting relaxed stance, she bends her knees and hops straight up once with both arms out to the sides for balance, landing back on the exact same spot. Without hopping again, she settles into her starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-rose-giddyup",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Rose: \"Giddyup, Tata!\" Launch (cannonball jump) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/rose.png"
+   ],
+   "clip": {
+    "id": "rose-giddyup",
+    "owner": "rose",
+    "start": "art/clips/start/rose.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 83,
+    "step": 3,
+    "speed": 1.5
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: CANNONBALL JUMP\nFrom her starting relaxed stance, she crouches and jumps straight up once, hugging her knees to her chest in a tight cannonball at the top of the jump, then lands back on the exact same spot. Without jumping again, she settles into her starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-deedee-idle",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Deedee: idle (waiting loop) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/deedee.png"
+   ],
+   "clip": {
+    "id": "deedee-idle",
+    "owner": "deedee",
+    "start": "art/clips/start/deedee.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99.3,
+    "step": 1,
+    "speed": 0.3,
+    "calm": 0.875,
+    "kind": "loop"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: IDLE BREATHING\nFrom her starting relaxed stance, she breathes slowly so her chest and shoulders rise and settle a little, and blinks once. She keeps her arms and head where they are and stays in that same relaxed stance for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-deedee-guard",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Deedee: guard and brace (loop) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/deedee.png"
+   ],
+   "clip": {
+    "id": "deedee-guard",
+    "owner": "deedee",
+    "start": "art/clips/start/deedee.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99.3,
+    "step": 1,
+    "speed": 0.3,
+    "calm": 0.875,
+    "kind": "loop"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: GUARD AND BRACE\nFrom her starting relaxed stance, she bends her knees slightly and raises both forearms in front of her chest once, braced to block. Without lowering her arms, she holds that braced pose, breathing slowly, for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-deedee-hit",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Deedee: hit reaction video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/deedee.png"
+   ],
+   "clip": {
+    "id": "deedee-hit",
+    "owner": "deedee",
+    "start": "art/clips/start/deedee.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99.3,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HIT REACTION\nFrom her starting relaxed stance, she flinches once, her head and shoulders jolting backward and her eyes squeezing shut for a moment. Without repeating the flinch, she returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-deedee-dodge",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Deedee: dodge video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/deedee.png"
+   ],
+   "clip": {
+    "id": "deedee-dodge",
+    "owner": "deedee",
+    "start": "art/clips/start/deedee.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99.3,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: DODGE\nFrom her starting relaxed stance, she leans her upper body quickly backward and ducks her head once, as if something just missed her. Without moving her feet, she straightens up into her starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-deedee-ko",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Deedee: knocked out (held pose) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/deedee.png"
+   ],
+   "clip": {
+    "id": "deedee-ko",
+    "owner": "deedee",
+    "start": "art/clips/start/deedee.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99.3,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: KNOCKED OUT\nFrom her starting relaxed stance, she wobbles once, sits down hard on the same spot, and tips over onto her back with her arms out to the sides and her eyes closed, knocked out. Without getting up, she stays lying flat on her back and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-deedee-run",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Deedee: running in place (loop) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/deedee.png"
+   ],
+   "clip": {
+    "id": "deedee-run",
+    "owner": "deedee",
+    "start": "art/clips/start/deedee.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99.3,
+    "step": 2,
+    "speed": 1,
+    "kind": "loop"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: RUNNING IN PLACE\nFrom her starting relaxed stance, she starts jogging in place, lifting her knees and pumping her arms in a steady rhythm without moving forward or backward. She keeps jogging in place at the same steady pace for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-deedee-victory",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Deedee: victory video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/deedee.png"
+   ],
+   "clip": {
+    "id": "deedee-victory",
+    "owner": "deedee",
+    "start": "art/clips/start/deedee.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99.3,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: VICTORY\nFrom her starting relaxed stance, she smiles warmly and claps her hands together once in front of her chest. Without repeating the clap, she holds her hands clasped at her chest with the same warm smile and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-deedee-give",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Deedee: give (hands something to an ally) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/deedee.png"
+   ],
+   "clip": {
+    "id": "deedee-give",
+    "owner": "deedee",
+    "start": "art/clips/start/deedee.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99.3,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HAND SOMETHING OVER\nFrom her starting relaxed stance, she reaches one open hand out forward at chest height, palm up, once, as if handing something to a friend. Without repeating the gesture, she pulls her arm back. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-deedee-cast",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Deedee: cast (big two-arm call) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/deedee.png"
+   ],
+   "clip": {
+    "id": "deedee-cast",
+    "owner": "deedee",
+    "start": "art/clips/start/deedee.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99.3,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state"
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: BIG TWO-ARM CALL\nFrom her starting relaxed stance, she sweeps both arms up and out wide above her shoulders once, palms open, as if calling something in. Without repeating the gesture, she lowers her arms. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-deedee-windex",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Deedee: Windex Spritz (spray bottle squirt) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/deedee.png"
+   ],
+   "clip": {
+    "id": "deedee-windex",
+    "owner": "deedee",
+    "start": "art/clips/start/deedee.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99.3,
+    "step": 3,
+    "speed": 1.5
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SPRAY BOTTLE SQUIRT\nFrom her starting relaxed stance, she brings a blue spray bottle out from behind her back, aims it forward at face height in one hand, and squeezes the trigger once. Without repeating the squeeze, she tucks the bottle behind her back again. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-deedee-wetfloor",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Deedee: Wet-Floor Hazard (mop swipe) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/deedee.png"
+   ],
+   "clip": {
+    "id": "deedee-wetfloor",
+    "owner": "deedee",
+    "start": "art/clips/start/deedee.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99.3,
+    "step": 3,
+    "speed": 1.5
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: MOP SWIPE\nFrom her starting relaxed stance, she grips a short mop in both hands and swipes its head across the floor in front of her once, in one wide sweep. Without repeating the sweep, she tucks the mop behind her back. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-deedee-scrub",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Deedee: \"Hand Me My Glasses\" Scrub (glasses on, rolling-pin scrub) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/deedee.png"
+   ],
+   "clip": {
+    "id": "deedee-scrub",
+    "owner": "deedee",
+    "start": "art/clips/start/deedee.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 99.3,
+    "step": 3,
+    "speed": 1.5
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: GLASSES ON, ROLLING PIN SCRUB\nFrom her starting relaxed stance, she slides a pair of reading glasses onto her nose with one hand, then grips a wooden rolling pin in both hands and pushes it forward once at chest height in one firm scrubbing stroke. Without repeating the stroke, she tucks the rolling pin behind her back and remains completely still in her starting relaxed stance, glasses on, for the rest of the clip."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-mudling-bump",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Mudling: Wobble (belly bump) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/mudling.png"
+   ],
+   "clip": {
+    "id": "mudling-bump",
+    "owner": "mudling",
+    "start": "art/clips/start/mudling.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 44.6,
+    "step": 3,
+    "speed": 1.5,
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: WOBBLE BUMP\nThe creature leans its whole body forward and bumps forward once with its belly, wobbling like jelly, while its base stays put. Without repeating the bump, it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-mudling-throw",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Mudling: Mud Flick and Mud Pie (throw) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/mudling.png"
+   ],
+   "clip": {
+    "id": "mudling-throw",
+    "owner": "mudling",
+    "start": "art/clips/start/mudling.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 44.6,
+    "step": 3,
+    "speed": 1.5,
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: THROW\nThe creature swings one mud arm back and flings it forward once at head height, as if throwing a ball of mud, while its base stays put. Without repeating the throw, it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-mudling-windup",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Mudling: Mud Pie wind-up (held pose) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/mudling.png"
+   ],
+   "clip": {
+    "id": "mudling-windup",
+    "owner": "mudling",
+    "start": "art/clips/start/mudling.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 44.6,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: WIND-UP\nThe creature squashes down low and wide, pulls both mud arms back behind it and narrows its eyes once, getting ready to throw something big. It holds that squashed, pulled-back pose and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-mudling-hit",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Mudling: hit reaction video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/mudling.png"
+   ],
+   "clip": {
+    "id": "mudling-hit",
+    "owner": "mudling",
+    "start": "art/clips/start/mudling.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 44.6,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: HIT REACTION\nThe creature jolts backward once, its body squashing and jiggling like jelly and its eyes squeezing shut for a moment, while its base stays put. Without repeating the jolt, it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-mudling-slip",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Mudling: slips on the wet floor video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/mudling.png"
+   ],
+   "clip": {
+    "id": "mudling-slip",
+    "owner": "mudling",
+    "start": "art/clips/start/mudling.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 44.6,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. It stays on the same line as in the attached picture. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: SLIP\nThe creature's base skids out from under it once, it tips backward with its mud arms flailing and plops down flat. Then it pulls itself back up into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-mudling-defeated",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "Mudling: defeated (held pose) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/mudling.png"
+   ],
+   "clip": {
+    "id": "mudling-defeated",
+    "owner": "mudling",
+    "start": "art/clips/start/mudling.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 44.6,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. It stays on the same line as in the attached picture. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: DEFEATED\nThe creature wobbles once, closes its eyes and slumps down slowly into a low, flattened heap, its mud arms limp and its leaf sprout drooping. It stays in that slumped heap and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-bigone-glare",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "The Big One: Big Glare (held stare, the wind-up of the bite) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/bigone.png"
+   ],
+   "clip": {
+    "id": "bigone-glare",
+    "owner": "bigone",
+    "start": "art/clips/start/bigone.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 41.1,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: BIG GLARE\nThe creature lowers its head, leans forward a little and narrows its big eyes into one hard stare. The muffin-tin crown stays on its head and the fishing lure and the coin stay in its hands. It holds that hard, leaning stare and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-bigone-tailslap",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "The Big One: Tail Slap video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/bigone.png"
+   ],
+   "clip": {
+    "id": "bigone-tailslap",
+    "owner": "bigone",
+    "start": "art/clips/start/bigone.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 41.1,
+    "step": 3,
+    "speed": 1.5,
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: TAIL SLAP\nThe creature lifts its tail and slaps it down hard on the ground beside it once, while its feet stay put. The muffin-tin crown stays on its head and the fishing lure and the coin stay in its hands. Without repeating the slap, it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-bigone-chomp",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "The Big One: Swamp Chomp (snapping bite) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/bigone.png"
+   ],
+   "clip": {
+    "id": "bigone-chomp",
+    "owner": "bigone",
+    "start": "art/clips/start/bigone.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 41.1,
+    "step": 3,
+    "speed": 1.5,
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: SNAPPING BITE\nThe creature lunges its head and upper body forward and snaps its wide mouth shut once in one big bite, while its feet stay put. The muffin-tin crown stays on its head and the fishing lure and the coin stay in its hands. Without repeating the bite, it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-bigone-flopwindup",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "The Big One: Muddy Belly-Flop wind-up (held pose) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/bigone.png"
+   ],
+   "clip": {
+    "id": "bigone-flopwindup",
+    "owner": "bigone",
+    "start": "art/clips/start/bigone.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 41.1,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: BELLY-FLOP WIND-UP\nThe creature rears up tall, puffs out its round belly and lifts both arms high once, getting ready to flop. The muffin-tin crown stays on its head and the fishing lure and the coin stay in its hands. It holds that tall, puffed-up pose and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-bigone-bellyflop",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "The Big One: Muddy Belly-Flop video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/bigone.png"
+   ],
+   "clip": {
+    "id": "bigone-bellyflop",
+    "owner": "bigone",
+    "start": "art/clips/start/bigone.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 41.1,
+    "step": 3,
+    "speed": 1.5,
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. It stays on the same line as in the attached picture. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: BELLY-FLOP\nThe creature rears up and flops forward flat onto its round belly once. The muffin-tin crown stays on its head and the fishing lure and the coin stay in its hands. Then it pushes itself back up into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-bigone-polish",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "The Big One: Crown Polish video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/bigone.png"
+   ],
+   "clip": {
+    "id": "bigone-polish",
+    "owner": "bigone",
+    "start": "art/clips/start/bigone.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 41.1,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: CROWN POLISH\nThe creature raises the hand holding the coin and rubs the coin across its muffin-tin crown in two small circles, looking proud. The muffin-tin crown stays on its head and the fishing lure and the coin stay in its hands. Then it lowers that hand back to where it was in the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-bigone-hit",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "The Big One: hit reaction video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/bigone.png"
+   ],
+   "clip": {
+    "id": "bigone-hit",
+    "owner": "bigone",
+    "start": "art/clips/start/bigone.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 41.1,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: HIT REACTION\nThe creature jolts backward once, its belly jiggling and its big eyes squeezing shut for a moment, while its feet stay put. The muffin-tin crown stays on its head and the fishing lure and the coin stay in its hands. Without repeating the jolt, it settles back into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-bigone-slip",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "The Big One: slips on the wet floor video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/bigone.png"
+   ],
+   "clip": {
+    "id": "bigone-slip",
+    "owner": "bigone",
+    "start": "art/clips/start/bigone.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 41.1,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. It stays on the same line as in the attached picture. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: SLIP\nThe creature's feet skid out from under it once, it tips backward with its arms flailing and sits down hard. The muffin-tin crown stays on its head and the fishing lure and the coin stay in its hands. Then it pushes itself back up into the pose of the attached picture and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-bigone-flustered",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "The Big One: Flustered (slumped, held pose) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/bigone.png"
+   ],
+   "clip": {
+    "id": "bigone-flustered",
+    "owner": "bigone",
+    "start": "art/clips/start/bigone.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 41.1,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. It stays on the same line as in the attached picture. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: FLUSTERED\nThe creature sags once, its shoulders drooping and its big eyes going dizzy and half closed, and it slumps down into a tired, wobbly sit. The muffin-tin crown stays on its head and the fishing lure and the coin stay in its hands. It stays slumped like that and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-bigone-defeated",
+   "tab": "Clips",
+   "group": "Chapter 1",
+   "title": "The Big One: defeated (held pose) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/bigone.png"
+   ],
+   "clip": {
+    "id": "bigone-defeated",
+    "owner": "bigone",
+    "start": "art/clips/start/bigone.png",
+    "model": "grok-imagine-video-1.5-lite",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 41.1,
+    "step": 2,
+    "speed": 1.5,
+    "kind": "state",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. It stays on the same line as in the attached picture. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: DEFEATED\nThe creature wobbles once, closes its eyes and tips over slowly onto its back, its arms flopping out to the sides. The muffin-tin crown stays on its head and the fishing lure and the coin stay in its hands. It stays lying on its back and stays completely still for the rest of the clip.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
   }
  ]
 }
