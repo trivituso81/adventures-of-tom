@@ -1,3 +1,11 @@
+## 2026-11-19 (455): Art Library bake, clip-rose-ko, clip-tom-loungepass, clip-mudling-bump (`artbake1487`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- clip-rose-ko: clip `rose-ko` cut from art/raw/clips/clip-rose-ko-v1.mp4 (24 pictures a second; video frames 0 to 60, every 2, state; 31 pictures kept; played at 1.5x). rose_ko frames 31 frame px 448 384 rows 112 96 sheet (2363, 1083) in memory mb 10.2 (as a grid 21.3) kb 595 dur ms 1722 kind state impact ms 0 reach [22.8, 18.5]
+- clip-tom-loungepass: clip `tom-loungepass` cut from art/raw/clips/clip-tom-loungepass-v1.mp4 (24 pictures a second; video frames 0 to 72, every 2, hit at frame 52; 37 pictures kept; played at 1.5x). tom_loungepass frames 37 frame px 448 424 rows 112 106 sheet (1604, 2433) in memory mb 15.6 (as a grid 28.1) kb 728 dur ms 2056 kind strike impact ms 1444 reach [34.8, 95.8]
+- clip-mudling-bump: clip `mudling-bump` cut from art/raw/clips/clip-mudling-bump-v1.mp4 (24 pictures a second; video frames 0 to 70, every 2, hit at frame 28; 36 pictures kept; played at 1.5x). mudling_bump frames 36 frame px 528 392 rows 66 49 sheet (2395, 2158) in memory mb 20.7 (as a grid 29.8) kb 699 dur ms 2000 kind strike impact ms 778 reach [19.4, 13.4]
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## clipgen2 (2026-11-19): A GitHub Action makes, marks and approves all of Chapter 1's battle videos (tool built; the real run is logged below)
 
 - Build 3 of `claude/animation-chapter-plan.md` (Project). Tom asked for the videos to be made for him, like the voice job: the `clip-gen` Action (`.github/workflows/clip-gen.yml`, manual only, repo secret `XAI_API_KEY`) does what GENERATE CHAPTER does in a browser, so he no longer keeps a page open. The button stays for later chapters and single redos.
