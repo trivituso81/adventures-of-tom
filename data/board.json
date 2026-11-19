@@ -91,7 +91,7 @@
    "theme": "Story and Dialogue",
    "lane": "tom",
    "col": "up",
-   "next": "Wait for the publish, RELOAD on the title, START NEW and play chapter 1 from the opening to the end (Boppy at the table, Aunt Ellie's door, the Mudlings, the BOO scene, the lap around the Square, the chapter card). Look for: Rose on your shoulders through Grace's list, both girls walking off with you at the Taxi Co. and into the kitchen, the movement tip then the Goal popup one after the other, no (A) button between lines, no townsfolk on roofs or walking in scenes, the party holding its spots in the kitchen. Report anything wrong with the REPORT tab.",
+   "next": "Wait for the publish, RELOAD on the title, START NEW and play chapter 1 from the opening to the end (Boppy at the table, Aunt Ellie's door, the Mudlings, the BOO scene, the lap around the Square, the chapter card). Look for: Rose on your shoulders through Grace's list, both girls walking off with you at the Taxi Co. and into the kitchen, the movement tip then the Goal popup one after the other, no (A) button between lines, no townsfolk on roofs or walking in scenes, the party holding its spots in the kitchen, and poses sharp from the first frame (no blur) with Tom, TNB, Justin, Boppy and Amy in their new sizes. Report anything wrong with the REPORT tab.",
    "blocks": [
     "c-ch2build"
    ],
@@ -109,6 +109,10 @@
     {
      "d": "2026-11-19",
      "t": "Folded in the Gemini audit check (roofnpc) and the cutscene polish check (cutpolish1): one chapter 1 play covers all three."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Added the cutpolish2 check (sharp poses, new pose sizes)."
     }
    ]
   },
@@ -352,8 +356,34 @@
    "title": "Cutscene polish phase 2: sheet preload, then sizes (cutpolish2)",
    "theme": "Story and Dialogue",
    "lane": "claude",
+   "col": "done",
+   "next": "Shipped: poses decoded and pinned before a scene (no blur, no mid-scene reloads), foot shadow from the standing frame, Pose Editor sizes applied to the 60 feelings and talking poses of Tom, TNB, Justin, Boppy and Amy.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEDL8uccYSyd3BRrGm",
+    "opening": "\"Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 2 (cutpolish2)\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Queued after cutpolish1."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Built cutpolish2. Kitchen run: sheets dropped mid-scene 3 to 0, blurry pose draws 12 to 0; cut_natural_test passes in portrait and landscape. Walking-pose sizes and Grace, Rose, Deedee not applied (see CHANGES)."
+    }
+   ],
+   "done": "2026-11-19"
+  },
+  {
+   "id": "c-cutpolish3",
+   "title": "Cutscene polish phase 3: carry Rose to the kitchen, facing, chapter 1 staging (cutpolish3)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
    "col": "up",
-   "next": "Phase 2 of 5 in claude/cutscene-polish-plan.md: decode sheets before a scene and keep them pinned (fixes blurry poses), foot shadow from the standing frame, then the Pose Editor apply step for Tom and Boppy (Grace, Rose and Deedee sizes wait on your lines).",
+   "next": "Phase 3 of 5 in claude/cutscene-polish-plan.md: Rose stays on Tom's shoulders from the Square to the kitchen door (story flag ride, rideSync), staging so speakers face left or right, TATA bubble and group hug, door frame walk, no hidden followers behind the half-wall.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -364,17 +394,17 @@
    "history": [
     {
      "d": "2026-11-19",
-     "t": "Queued after cutpolish1."
+     "t": "Queued after cutpolish2."
     }
    ],
    "prompt": {
-    "what": "Builds phase 2 of the cutscene polish: preload and pin the sheets a scene needs so poses are never blurry, then size poses by the Pose Editor lines.",
+    "what": "Builds phase 3 of the cutscene polish: carries Rose on Tom's shoulders to the kitchen and stages chapter 1 so speakers face left or right.",
     "before": [
      "Nothing to do first."
     ],
-    "model": "Claude Sonnet 5.5 (row B: the phase is written down in claude/cutscene-polish-plan.md and cut_natural_test.py catches mistakes)",
-    "effort": "medium (steps are known)",
-    "text": "Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 2 (cutpolish2). You have my full permission to access the repo."
+    "model": "Claude Sonnet 5.5 (row B: the phase is written down in claude/cutscene-polish-plan.md, and cut_natural_test.py and frames catch mistakes)",
+    "effort": "medium (steps are known; tile coordinates are settled by looking at frames)",
+    "text": "Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 3 (cutpolish3). You have my full permission to access the repo."
    }
   }
  ]
