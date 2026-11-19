@@ -27122,7 +27122,7 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -27136,7 +27136,15 @@
      }
     }
    ],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-19",
+     "note": "pupils sholdn't change direction. blinking motion should be much faster",
+     "from": "review",
+     "at": 1795125243003,
+     "rev": 0
+    }
+   ],
    "id": "clip-grump-idle",
    "tab": "Clips",
    "group": "Chapter 1",
