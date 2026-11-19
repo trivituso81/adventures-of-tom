@@ -91,7 +91,7 @@
    "theme": "Story and Dialogue",
    "lane": "tom",
    "col": "up",
-   "next": "Wait for the publish, RELOAD on the title, START NEW and play chapter 1 from the opening to the end (Boppy at the table, Aunt Ellie's door, the Mudlings, the BOO scene, the lap around the Square, the chapter card). Look for: Rose on your shoulders through Grace's list, both girls walking off with you at the Taxi Co. and into the kitchen, the movement tip then the Goal popup one after the other, no (A) button between lines, no townsfolk on roofs or walking in scenes, the party holding its spots in the kitchen, and poses sharp from the first frame (no blur) with Tom, TNB, Justin, Boppy and Amy in their new sizes. Report anything wrong with the REPORT tab.",
+   "next": "Wait for the publish, RELOAD on the title, START NEW and play chapter 1 from the opening to the end (Boppy at the table, Aunt Ellie's door, the Mudlings, the BOO scene, the lap around the Square, the chapter card). Look for: Rose on your shoulders through Grace's list, Rose staying on your shoulders from the Taxi Co. all the way into the kitchen, where you crouch and she hops down, Grace walking beside you,, the movement tip then the Goal popup one after the other, no (A) button between lines, no townsfolk on roofs or walking in scenes, the group hug swaying with hearts and Rose saying 'Tata, up!' on the ground, you walking over to the door frame before the close-up, the party holding its spots in the kitchen, and poses sharp from the first frame (no blur) with Tom, TNB, Justin, Boppy and Amy in their new sizes. Report anything wrong with the REPORT tab.",
    "blocks": [
     "c-ch2build"
    ],
@@ -113,6 +113,10 @@
     {
      "d": "2026-11-19",
      "t": "Added the cutpolish2 check (sharp poses, new pose sizes)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Added the cutpolish3 check (Rose carried to the kitchen, hug, door frame)."
     }
    ]
   },
@@ -382,8 +386,34 @@
    "title": "Cutscene polish phase 3: carry Rose to the kitchen, facing, chapter 1 staging (cutpolish3)",
    "theme": "Story and Dialogue",
    "lane": "claude",
+   "col": "done",
+   "next": "Shipped: Rose rides on Tom's shoulders from the Square to the kitchen and hops down there, the group hug sways with hearts, kitchen staging so speakers face left or right, Tom walks to the door frame, followers no longer vanish behind the half-wall.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDqMJnGYj1LrjZyoMp",
+    "opening": "\"Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 3 (cutpolish3)\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Queued after cutpolish2."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Built cutpolish3; tools/cut_natural_test.py passes in portrait and landscape (opening, Row, kitchen)."
+    }
+   ],
+   "done": "2026-11-19"
+  },
+  {
+   "id": "c-cutpolish4",
+   "title": "Cutscene polish phase 4: the heist (cutpolish4)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
    "col": "up",
-   "next": "Phase 3 of 5 in claude/cutscene-polish-plan.md: Rose stays on Tom's shoulders from the Square to the kitchen door (story flag ride, rideSync), staging so speakers face left or right, TATA bubble and group hug, door frame walk, no hidden followers behind the half-wall.",
+   "next": "Phase 4 of 5 in claude/cutscene-polish-plan.md: the Mudling comes in fast through the front door, the camera frames the island in portrait, Deedee and Boppy keep their shock, empty-counter patch after the theft, mud footprints and crumbs.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -394,17 +424,17 @@
    "history": [
     {
      "d": "2026-11-19",
-     "t": "Queued after cutpolish2."
+     "t": "Queued after cutpolish3."
     }
    ],
    "prompt": {
-    "what": "Builds phase 3 of the cutscene polish: carries Rose on Tom's shoulders to the kitchen and stages chapter 1 so speakers face left or right.",
+    "what": "Builds phase 4 of the cutscene polish: the kitchen heist (Mudling entrance, camera, knock spots, shocked parents, empty counter patch).",
     "before": [
      "Nothing to do first."
     ],
     "model": "Claude Sonnet 5.5 (row B: the phase is written down in claude/cutscene-polish-plan.md, and cut_natural_test.py and frames catch mistakes)",
-    "effort": "medium (steps are known; tile coordinates are settled by looking at frames)",
-    "text": "Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 3 (cutpolish3). You have my full permission to access the repo."
+    "effort": "medium (steps are known; knock tiles and the camera are settled by looking at frames)",
+    "text": "Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 4 (cutpolish4). You have my full permission to access the repo."
    }
   },
   {
