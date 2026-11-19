@@ -26681,9 +26681,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE PICTURE\nTwo small child hands hold up a sheet of lined notebook paper with a neat numbered list in pencil: the numbers 1 to 4 down the left, each followed by a short line of scribbled pencil writing that is not readable, number 3 crossed out and rewritten. A pencil is tucked behind a finger. The paper fills most of the picture. No faces. It is a close-up picture that fills the whole square.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Paint only the people and things named above. Faces look like the attached approved character paintings: oversized head, slim body.\n- No words, letters or numbers anywhere unless the description above says to paint them."
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-19",
+     "note": "doesnt look like Amy",
+     "from": "v1",
+     "at": 1795127999374
+    }
+   ],
    "id": "ch1-amy-window",
    "tab": "Props",
    "title": "Chapter 1: Amy at her house window holding an iced coffee, waving (one square painting)",
