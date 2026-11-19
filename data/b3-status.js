@@ -133,7 +133,22 @@ const B3_STATUS={
     short:'GUARD',color:'#e6c988',weight:5,desc:'Braced: takes 25% less damage. Panic Boil! or a Break ends it.'},
   // The Big One wears Deedee's muffin tin: +15% Attack and Mend 3%. It is one buff, so any buff strip knocks the whole crown off.
   muffin_crown:{id:'muffin_crown',name:'Muffin-Tin Crown',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'crown',v:.15}],flags:[],regen:.03,
-    short:'CROWN',color:'#f2d36b',weight:6,desc:'Wearing Deedee\u2019s muffin tin: 15% more Attack, and it heals a little at the start of each turn. Any buff strip knocks it off.'}
+    short:'CROWN',color:'#f2d36b',weight:6,desc:'Wearing Deedee\u2019s muffin tin: 15% more Attack, and it heals a little at the start of each turn. Any buff strip knocks it off.'},
+  // ---- Kit statuses: Cozy Rosie and Registered Nut (stage 5c) ----
+  // Tattered Lamby Boomerang: a picture that Lamby is out on the monster. The tackle itself is the `later` effect of the Skill; this
+  // mark ends when Rose's next turn begins (the same moment the tackle lands).
+  lamby_stuck:{id:'lamby_stuck',name:'Lamby Is Out',kind:'mark',group:null,dur:{n:1,unit:'srcBegin'},mods:[],flags:[],
+    short:'LAMBY OUT',color:'#d9b8f0',weight:3,desc:'Rose threw Lamby at it. When Rose\u2019s next turn begins, she tackles it to get him back.'},
+  // Kingdom of Ten-Thousand Blankets: the castle stands until Rose's next turn begins, when its warmth wave goes off (a `later` effect).
+  blanket_castle:{id:'blanket_castle',name:'Blanket Castle',kind:'buff',group:null,dur:{n:1,unit:'begin'},mods:[],flags:[],
+    short:'CASTLE',color:'#ffd27a',weight:5,desc:'A blanket castle guarded by two giant Lambies. When Rose\u2019s next turn begins, a wave of Sizzle warmth hits every monster.'},
+  // Sofa-Cushion Citadel: nothing on the family can be pushed back on the turn bar while the fort stands (the shield is its own thing).
+  pillow_fort:{id:'pillow_fort',name:'Pillow Fort',kind:'buff',group:null,dur:{n:3,unit:'turn'},mods:[],flags:['pushImmune'],
+    short:'FORT',color:'#c9d8f0',weight:6,desc:'Cushion fort with two Lambies on lookout: this family member cannot be pushed back on the turn bar.'},
+  // "Bring a Jacket!" Ward: 20% of Max HP back in all over 3 turns (7% a turn: my call, the spec says "20% HP regen (3t)"), and the
+  // first knock-out is held at 1 HP. The `survive` flag is used up the first time it saves someone; the regen goes on.
+  jacket:{id:'jacket',name:'Extra Jacket',kind:'buff',group:null,dur:{n:3,unit:'turn'},mods:[],flags:['survive'],regen:.07,
+    short:'JACKET',color:'#8fe3a6',weight:7,desc:'Deedee bundled them in an extra jacket: heals a little at the start of each turn, and the first hit that would knock them out leaves them on 1 HP.'}
 };
 
 // Hazards: things on the floor of one side for a while (the `hazard` op lays them, engine/b3-foe.js trips them).

@@ -20,6 +20,7 @@ function b3Who(F,c,to) {
   if(to==='attacker') return c.src?[c.src]:[];
   if(to==='adjacent') return c.tgt?b3Adjacent(F,c.tgt):[];
   if(to==='allies') return b3Live(F,c.actor.side);
+  if(to==='foes') return b3Live(F,b3Other(c.actor.side));
   // Whoever on the actor's side has the smallest share of their HP left, the actor included (the first in line on a tie).
   if(to==='lowestAlly') return b3Live(F,c.actor.side).sort((x,y)=>x.hp/x.maxHp-y.hp/y.maxHp||x.slot-y.slot).slice(0,1);
   // The next unit of the actor's own side due on the turn bar, not counting the actor.
@@ -33,6 +34,8 @@ function b3Who(F,c,to) {
 const b3Soaked=(c,t)=>!!(c.soak&&c.soak[t.key]>0&&!(c.lost&&c.lost[t.key]>0));
 function b3PutStatus(F,c,t,e) {
   const S=B3_STATUS[e.id];
+  // Warm Beats Cold: some units cannot be given some statuses at all.
+  if(t.immune&&t.immune.includes(e.id)) { c.beats.push({t:'immune',tgt:t.key,id:e.id,g:c.g}); return; }
   // A Stun on a Boss is a push instead of a lost turn (spec 2.8).
   if(S.flags.includes('skipTurn')&&t.D&&t.D.role==='boss') { B3_OPS.push(F,Object.assign({},c,{tgt:t}),{n:B3_RULES.stunBossTicks,to:'target'}); return; }
   b3AddStatus(F,t,e.id,{src:c.actor,n:e.n,v:e.v}); c.beats.push({t:'status',tgt:t.key,id:e.id,g:c.g});
@@ -78,8 +81,12 @@ const B3_OPS={
   // heal: pct is a share of the target's Max HP (a number, or a name from B3_RULES.heal). Heals and shields grow with the giver's healGiven.
   heal(F,c,e) {
     const pct=typeof e.pct==='number'?e.pct:B3_RULES.heal[e.pct];
-    for(const t of b3Who(F,c,e.to)) { const got=b3Heal(F,t,t.maxHp*pct*b3Mult(c.actor,'healGiven')*(c.scale||1)); if(!got) continue;
-      c.beats.push({t:'heal',tgt:t.key,n:got,hp:t.hp,g:c.g}); b3Fire(F,'healed',{src:c.actor,tgt:t,n:got,g:c.g,c},c.beats); }
+    // Forty Years a Nurse (a one-off of the Trait row, `custom:'cleanBill'`): a share of the healing that goes past full HP becomes a shield.
+    const cb=c.actor.custom&&c.actor.custom.cleanBill;
+    for(const t of b3Who(F,c,e.to)) { const want=Math.round(t.maxHp*pct*b3Mult(c.actor,'healGiven')*(c.scale||1)),alive=b3Alive(t),got=b3Heal(F,t,want);
+      if(got) { c.beats.push({t:'heal',tgt:t.key,n:got,hp:t.hp,g:c.g}); b3Fire(F,'healed',{src:c.actor,tgt:t,n:got,g:c.g,c},c.beats); }
+      if(cb&&alive&&want>got) { const sh=b3AddShield(F,t,Math.min((want-got)*cb.share,t.maxHp*cb.cap),{src:c.actor});
+        if(sh) c.beats.push({t:'shield',tgt:t.key,n:sh,sh:b3ShieldTotal(t),g:c.g}); } }
   },
   shield(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { const got=b3AddShield(F,t,t.maxHp*e.pct*b3Mult(c.actor,'healGiven')*(c.scale||1),{src:c.actor,n:e.turns});
@@ -87,6 +94,7 @@ const B3_OPS={
   },
   revive(F,c,e) {
     for(const t of b3Who(F,c,e.to)) { if(!b3Revive(F,t,e.hp)) continue;
+      c.revived=(c.revived||0)+1;
       c.beats.push({t:'revive',src:c.actor.key,tgt:t.key,hp:t.hp,pep:t.pep,bar:b3BarSnap(F,F.acting,c.rec),g:c.g}); b3Fire(F,'revive',{src:c.actor,tgt:t,g:c.g,c},c.beats); }
   },
   push(F,c,e) {
@@ -151,6 +159,10 @@ const B3_OPS={
   },
   // foresee: each monster this move hit says who it will aim its next attack at, and keeps to that (engine/b3-foe.js b3Foresee).
   foresee(F,c,e) { for(const t of b3Who(F,c,e.to)) if(b3Alive(t)&&t.side==='foe') { const I=b3Foresee(F,t); c.beats.push({t:'foresee',foe:t.key,tgt:I?I.aim:null,kind:I?I.kind:null,name:I?I.name:null,g:c.g}); } },
+  // later: effects that wait for the actor's next turn and run when it begins, before the actor picks a move (Tattered Lamby Boomerang's
+  // tackle, Kingdom of Ten-Thousand Blankets' wave). The monsters it was aimed at are remembered; if they are gone, a random live one
+  // takes their place. `who:'foes'` leaves the effects to aim at every monster alive at that time. engine/b3-resolve.js b3RunLater.
+  later(F,c,e) { F.later.push({key:c.actor.key,name:e.name,effects:e.effects,tgt:c.targets.map(t=>t.key),who:e.who||'target',skill:c.skill}); },
   // composure: a printed Composure number. It goes into the action's ledger, which is paid when the action ends (the 3-pip cap, the Break).
   composure(F,c,e) { for(const t of b3Who(F,c,e.to)) b3Pips(c,t,e.n); },
   // splash: a share of the hit that set it off, as plain damage of one flavor (Short Circuit!). With `of:'dealt'` the share is of
@@ -168,13 +180,14 @@ const B3_OPS={
 // An effect may carry `when`: it runs only if something earlier in the same action happened.
 //   cleansed  a cleanse in this action took at least one thing off
 //   stripped  a strip in this action took at least one buff or stance off
-const B3_EFFECT_WHEN=['cleansed','stripped'];
+//   revived   a revive in this action brought someone back;  notRevived  none did (To the Moon & Back heals the living instead)
+const B3_EFFECT_WHEN=['cleansed','stripped','revived','notRevived'];
 // c.scale below 1 (a rider held for the later hits of a multi-hit move, engine/b3-custom.js): only the ops whose size can be
 // cut run, at that share; an effect that cannot be split (1 Pep, a status) does not repeat.
 const B3_SCALABLE=['damage','splash','heal','shield'];
 function b3RunEffects(F,c,effects) {
   for(const e of (effects||[])) { const fn=B3_OPS[e.op]; if(!fn) throw new Error('Battle 3 op not built yet: '+e.op);
     if(c.scale!=null&&c.scale<1&&!B3_SCALABLE.includes(e.op)) continue;
-    if(e.when) { if(!B3_EFFECT_WHEN.includes(e.when)) throw new Error('Battle 3 effect condition not built yet: '+e.when); if(!(c[e.when]>0)) continue; }
+    if(e.when) { if(!B3_EFFECT_WHEN.includes(e.when)) throw new Error('Battle 3 effect condition not built yet: '+e.when); if(e.when==='notRevived'?c.revived>0:!(c[e.when]>0)) continue; }
     fn(F,c,e); }
 }

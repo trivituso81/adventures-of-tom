@@ -40,7 +40,9 @@ const B3_HOOKS=['battleStart','roundStart','turnStart','actionDeclared','beforeH
 // The events: afterHit {src, tgt, dmg, flavor, crit, part (which flavor part of a two-flavor hit), tags, c};
 // intercept {src: the attacker, tgt: the one who stepped in, for: the one they stepped in for, c}; counter {src: who answered,
 // tgt: who they answered, c: the answer's own small action}; the ops' events carry c too (engine/b3-ops.js).
-const B3_LISTEN_IF=['ids','flavor','multiHit','landed','targetPrime','pepAtLeast','kinds','tgtFoe','attacks'];
+//   every        the round number is a multiple of this (Well-Loved Original: every 2nd round)
+//   shieldBy     'holder': the shield that broke or ended was put on by the holder (Emergency Stuffy Swap)
+const B3_LISTEN_IF=['ids','flavor','multiHit','landed','targetPrime','pepAtLeast','kinds','tgtFoe','attacks','every','shieldBy'];
 function b3ListenOk(F,u,L,ev,putBy,useKey) {
   if(L.limitKey) useKey='lk:'+L.limitKey;
   if(L.carrier==='target'&&ev.tgt!==u) return false;
@@ -57,6 +59,8 @@ function b3ListenOk(F,u,L,ev,putBy,useKey) {
   if(L.kinds&&!(ev.id&&B3_STATUS[ev.id]&&L.kinds.includes(B3_STATUS[ev.id].kind))) return false;
   if(L.tgtFoe&&!(ev.tgt&&ev.tgt.side!==u.side)) return false;
   if(L.attacks&&!(ev.c&&ev.c.skill&&ev.c.skill.power)) return false;
+  if(L.every&&F.round%L.every) return false;
+  if(L.shieldBy==='holder'&&ev.by!==u.key) return false;
   if(L.limit==='round'&&u.used[useKey]===F.round) return false;
   if(L.limit==='battle'&&u.used[useKey]) return false;
   if(L.limit==='action'&&ev.c&&ev.c.reacted&&ev.c.reacted[u.key+useKey]) return false;

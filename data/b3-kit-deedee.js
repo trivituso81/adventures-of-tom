@@ -47,13 +47,18 @@ B3_VIBES.deedee_nurse={id:'deedee_nurse',owner:'deedee',name:'Registered Nut',si
   subtitles:['Band-Aid Dispenser','Forty-Year Floor Nurse','Matron of Moon & Back'],
   trait:'forty_years_a_nurse',basic:'little_pinch_syringe_poke',skills:['deedee_makes_it_better','bring_a_jacket_ward','to_the_moon_and_back'],
   quirks:['first_ring_pickup','warm_beats_cold'],counter:null};
-B3_SOON.bring_a_jacket_ward='"Bring a Jacket!" Ward';
-B3_SOON.to_the_moon_and_back='To the Moon & Back';
-B3_TRAITS.forty_years_a_nurse={id:'forty_years_a_nurse',vibe:'deedee_nurse',name:'Forty Years a Nurse',soon:true,
+// Forty Years a Nurse: the overheal rule lives in the heal op (engine/b3-ops.js), switched on by this row's `custom`. Of the healing
+// that goes past full HP, `share` becomes a shield, no more than `cap` of the target's Max HP at once. Heals only; a regen tick is not a heal.
+B3_TRAITS.forty_years_a_nurse={id:'forty_years_a_nurse',vibe:'deedee_nurse',name:'Forty Years a Nurse',
+  custom:'cleanBill',n:{share:.5,cap:.25},
   desc:'Half of any healing past full HP becomes a Clean Bill Shield, up to 25% of Max HP.'};
-B3_QUIRKS.first_ring_pickup={id:'first_ring_pickup',vibe:'deedee_nurse',name:'First-Ring Pickup',soon:true,
+// First-Ring Pickup: -1 Pep on a Skill aimed at one family member who is still up and under half HP; a cost never goes below 1 (b3Cost).
+B3_QUIRKS.first_ring_pickup={id:'first_ring_pickup',vibe:'deedee_nurse',name:'First-Ring Pickup',
+  mods:[{stat:'cost',kind:'firstRing',v:-1,when:{tgtBelow:.5}}],
   desc:'Skills Deedee uses on a family member under half HP cost 1 Pep less, never below 1.'};
-B3_QUIRKS.warm_beats_cold={id:'warm_beats_cold',vibe:'deedee_nurse',name:'"Warm Beats Cold"',soon:true,
+// Warm Beats Cold: Stun and Slow never land on her (engine/b3-ops.js b3PutStatus), and a cleanse of hers that took something off heals her.
+B3_QUIRKS.warm_beats_cold={id:'warm_beats_cold',vibe:'deedee_nurse',name:'"Warm Beats Cold"',
+  immune:['stun','slow'],on:'cleansed',carrier:'source',show:true,effects:[{op:'heal',pct:.10,to:'self'}],
   desc:'Deedee cannot be Stunned or Slowed. When she cleanses a family member, she heals 10% of her own HP.'};
 B3_SKILLS.little_pinch_syringe_poke={id:'little_pinch_syringe_poke',vibe:'deedee_nurse',slot:'basic',name:'"Little Pinch!" Syringe Poke',pep:0,flavor:['clobber'],power:'light',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'status',id:'pinched',to:'target'}],line:null,anim:{kind:'default',shape:'strike'},
@@ -63,3 +68,17 @@ B3_SKILLS.little_pinch_syringe_poke={id:'little_pinch_syringe_poke',vibe:'deedee
 B3_SKILLS.deedee_makes_it_better={id:'deedee_makes_it_better',vibe:'deedee_nurse',slot:'s1',name:'Deedee Makes It Better',pep:2,flavor:['support'],power:0,hits:0,
   target:'family',tags:[],composure:0,effects:[{op:'heal',pct:'standard'},{op:'cleanse'},{op:'status',id:'all_better',when:'cleansed'}],line:null,anim:{kind:'default',shape:'give'},
   desc:'Heals one family member for 20% of their HP and clears every debuff on them. If something was cleared, they get 20% more Attack for 2 turns.'};
+
+// "Bring a Jacket!" Ward: the pick and the family member with the smallest share of HP left (target kind ally_pair). The Extra Jacket status
+// regens 20% of Max HP over its 3 turns and holds the first knock-out at 1 HP (data/b3-status.js). 3-round cooldown.
+B3_SKILLS.bring_a_jacket_ward={id:'bring_a_jacket_ward',vibe:'deedee_nurse',slot:'s2',name:'"Bring a Jacket!" Ward',pep:4,flavor:['support'],power:0,hits:0,
+  target:'ally_pair',tags:[],composure:0,cooldown:3,
+  effects:[{op:'status',id:'jacket',to:'target'}],line:null,anim:{kind:'default',shape:'give'},
+  desc:'Deedee bundles two family members in extra jackets: the one you pick and whoever is hurt most. They heal a little each turn for 3 turns, and the first hit that would knock them out leaves them on 1 HP. Deedee needs 3 rounds before she can do it again.'};
+// To the Moon & Back (Grand Capstone): a knocked-out family member comes back at 80% HP, anyone else heals to full. Then a heavy Sizzle
+// wave at the all-monsters share hits every monster and shaves 2 Composure (the spec says "warm Sizzle shockwave shaving 2 Composure"; the tier is my call).
+B3_SKILLS.to_the_moon_and_back={id:'to_the_moon_and_back',vibe:'deedee_nurse',slot:'cap',name:'To the Moon & Back',pep:6,flavor:['sizzle'],power:0,hits:0,
+  target:'family_or_ko',tags:[],composure:2,
+  effects:[{op:'revive',hp:.80,to:'target'},{op:'heal',pct:1,to:'target',when:'notRevived'},{op:'damage',flavor:['sizzle'],power:'heavy',aoe:true,to:'foes'}],
+  line:null,anim:{kind:'default',shape:'give'},
+  desc:'A full moon rises. A knocked-out family member gets back up with 80% of their HP; anyone else heals all the way. Then a heavy wave of Sizzle warmth hits every monster and knocks 2 Composure off each.'};

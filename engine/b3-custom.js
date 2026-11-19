@@ -5,6 +5,7 @@
 // `custom` ({name: numbers}). B3_CUSTOM lists every one-off this file knows, so the data check can catch a misspelt name.
 const B3_CUSTOM={
   twinLambRelay:'Rose, Sugar Rush, Quirk A: riders are held for the later hits of a multi-hit move, at a share of their strength',
+  cleanBill:'Deedee, Registered Nut, Trait: half of any healing past full HP becomes a Clean Bill Shield (a share of the overheal, capped at a share of Max HP)',
   doubleCoat:'Grace, Craft Artist, Quirk B: a Razzle move after a Racket move (or the other way round) takes a free Composure pip off'
 };
 

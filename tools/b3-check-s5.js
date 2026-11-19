@@ -32,7 +32,7 @@ module.exports=function(T) {
   // 82. All sixteen lines are written: nothing of the four first Sig Vibes is marked soon or is only a name
   for(const v of ['tom_flier','grace_squishy','rose_sugar','deedee_neat']) { const L=ladder(VIBES[v],5),un=L.filter(x=>!x.built||!x.open).map(x=>x.id);
     ok(L.length===7&&!un.length,v+' is complete at Rank 5: '+J(un)); ok(!VIBES[v].skills.some(s=>SOON[s]),v+': no Skill is still only a name'); }
-  ok(J(Object.keys(G('B3_CUSTOM')))==='["twinLambRelay","doubleCoat"]'&&QUIRKS.twin_lamb_relay.custom==='twinLambRelay','the lines that needed their own function are Twin-Lamb Relay (5a) and Double Coat (5b)');
+  ok(J(Object.keys(G('B3_CUSTOM')))==='["twinLambRelay","cleanBill","doubleCoat"]'&&QUIRKS.twin_lamb_relay.custom==='twinLambRelay','the lines that needed their own function are Twin-Lamb Relay (5a), Double Coat (5b) and the Clean Bill Shield switch (5c, a one-line switch in the heal op, not a function)');
 
   // 83. Priority Boarding: Guard Stance from the start until Tom's second turn ends; 20% more off a hit taken for someone at half HP or less
   noCrit(()=>{ const {F,open,tom,grace,f0}=fight(1);
@@ -123,7 +123,7 @@ module.exports=function(T) {
     const b=act(F,grace,'colossal_diamond_gold_dumpling',rose.key).beats;
     ok(grace.pep===5&&rose.pep===5,'6 Pep, then 1 Pep each: Grace '+grace.pep+', Rose '+rose.pep); ok(has(b,'grant',x=>x.tgt===rose.key)&&F.grant&&F.grant.key===rose.key,'the door is open for Rose');
     ok(near(grace.wait,120*100/stat(grace,'spd')),'Grace waits a Capstone\'s Recovery');
-    ok(J(skillsOf(F,rose).map(S=>S.id))===J(['the_floor_is_lava','giddyup_tata_launch'])&&G('b3Cost')(F,rose,SK.giddyup_tata_launch)===0,'Rose may pick a Skill of 4 Pep or less, free: '+J(skillsOf(F,rose).map(S=>S.id)));
+    ok(J(skillsOf(F,rose).map(S=>S.id))===J(['the_floor_is_lava','giddyup_tata_launch','tattered_lamby_boomerang','sofa_cushion_citadel'])&&G('b3Cost')(F,rose,SK.giddyup_tata_launch)===0,'Rose may pick a Skill of 4 Pep or less, free: '+J(skillsOf(F,rose).map(S=>S.id)));
     ok(!act(F,rose,rose.basic,'f0').ok,'not her Basic'); ok(!!F.grant,'a refused pick leaves the door open');
     const r=act(F,rose,'giddyup_tata_launch','f0'); ok(r.ok&&has(r.beats,'act',x=>x.free)&&hits(r.beats,f0.key).length===2,'she uses "Giddyup, Tata!" Launch at once');
     ok(rose.pep===5&&near(rose.wait,w)&&rose.turns===turns,'it costs nothing, and her place on the bar and her turn count do not move: Pep '+rose.pep+', wait '+rose.wait);

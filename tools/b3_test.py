@@ -640,7 +640,7 @@ def stage5(pg,lab):
     v=s5(pg); f=shot(pg); f.save(os.path.join(OUT,'b3-s5-free-portrait.png')); caps.append(f)
     need(v['actor']=='rose' and v['grant']=='p2',f"the free Skill should be Rose's to pick: actor {v['actor']}, grant {v['grant']}")
     need(v['free']=='FREE SKILL FOR ROSE' and not v['back'],f"the list should be headed FREE SKILL FOR ROSE with no Back row: '{v['free']}', back {v['back']}")
-    need(v['rows']==['The Floor Is Lava!','"Giddyup, Tata!" Launch'] and all(c=='FREE' for c in v['costs']),f"Rose's free choices: {v['rows']} {v['costs']}")
+    need(v['rows']==['The Floor Is Lava!','"Giddyup, Tata!" Launch','Tattered Lamby Boomerang','Sofa-Cushion Citadel'] and all(c=='FREE' for c in v['costs']),f"Rose's free choices: {v['rows']} {v['costs']}")
     need(v['bar'][0]=='p2#1!' and not any(k.endswith('?') for k in v['bar']),f"the bar shows Rose picking, with no ghost (a free Skill moves nobody): {v['bar']}")
     need('Free from Grace' in v['msg'],f"the message line should say it is free: {v['msg']}")
     need('so_satisfying' in v['deedee'] and 'SATISFYING' in v['chips'][3],f"Sensory Satisfying: Deedee is next after Grace and should carry it: {v['deedee']} {v['chips'][3]}")
@@ -778,6 +778,41 @@ def stage5b(pg,lab,landscape=False):
     p0=pg.evaluate("()=>B3.F.foes[0].pips"); use(pg,'Konami Code'); wait_cmd(pg); pg.wait_for_timeout(300); v=s5b(pg); caps.append(shot(pg))
     need(v['pips']<=p0-2 or v['pips']==0,f"Konami Code should take 2 Composure pips off the boss: {p0} to {v['pips']}")
     sheet(caps,4,os.path.join(OUT,'b3-s5b.png'),scale=.55)
+S5C_BOOK="""()=>{ const B=b3LabReset(5),Q={rose:['mint_condition_backup','emergency_stuffy_swap'],deedee:['first_ring_pickup','warm_beats_cold']};
+  for(const id of ['rose','deedee']) b3SetMain(id,B[id],B[id].pocket);
+  for(const id in Q) Q[id].forEach((q,i)=>b3SetQuirk(id,B[id],i,q)); b3LabSave(); return Object.keys(Q).map(id=>B[id].main+':'+B[id].quirks.join('+')); }"""
+def s5c(pg): return pg.evaluate("""()=>{ const F=B3.F,P={}; for(const p of F.party) P[p.id]=p; const f=F.foes[0];
+  return {shield:F.party.map(p=>(p.shields||[]).reduce((a,x)=>a+x.amt,0)),fort:F.party.map(p=>!!p.st.pillow_fort),jacket:F.party.map(p=>!!p.st.jacket),
+    foe:Object.keys(f.st),later:F.later.length,rosePep:P.rose.pep,deedeePep:P.deedee.pep,log:B3.log.slice(-60).join(' | ')}; }""")
+def stage5c(pg,lab,landscape=False):
+    S='stage 5c'+(' landscape' if landscape else '')+': '; caps=[]; idx=lab.index('new6')
+    rot=landscape and pg.evaluate("()=>layout.rotated")
+    R=lambda f: f.rotate(90,expand=True) if rot else f
+    def need(cond,what):
+        if not cond: fails.append(S+what)
+    pg.evaluate("()=>{ B7.speed=1; }")
+    q=pg.evaluate(S5C_BOOK); need(q[0].startswith('rose_cozy:mint_condition_backup+emergency_stuffy_swap') and q[1].startswith('deedee_nurse:first_ring_pickup+warm_beats_cold'),f'the Lab book did not take the second Vibes and their Quirks: {q}')
+    start(pg,idx,{'seed':SEED},keep=True); wait_cmd(pg); pg.evaluate(POKE_ROWS); pg.evaluate(S5_PREP); pg.wait_for_timeout(300)
+    if not turn_of(pg,'rose',S): return
+    caps.append(R(shot(pg)))
+    pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-cmd').innerText")
+    need('Well-Loved Original' in txt and 'Mint-Condition Backup' in txt and 'Emergency Stuffy Swap' in txt,f"Rose's list should name her Trait and both Quirks: {txt[:300]}")
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
+    use(pg,'Sofa-Cushion Citadel'); wait_cmd(pg); pg.wait_for_timeout(500); v=s5c(pg); caps.append(R(shot(pg)))
+    if not landscape: R(shot(pg)).save(os.path.join(OUT,'b3-s5c-citadel-portrait.png'))
+    need(all(x>0 for x in v['shield']) and all(v['fort']),f"Citadel should put a shield and a pillow fort on all four: {v['shield']} {v['fort']}")
+    if not turn_of(pg,'deedee',S): return
+    use(pg,'"Bring a Jacket!" Ward'); wait_cmd(pg); pg.wait_for_timeout(500); v=s5c(pg); caps.append(R(shot(pg)))
+    need(sum(v['jacket'])==2,f"the Ward should put a jacket on exactly two family members: {v['jacket']}")
+    if not turn_of(pg,'rose',S): return
+    use(pg,'Tattered Lamby Boomerang'); wait_cmd(pg); pg.wait_for_timeout(500); v=s5c(pg); caps.append(R(shot(pg)))
+    need('lamby_stuck' in v['foe'] and v['later']>=1,f"the Boomerang should leave Lamby stuck on the boss with the tackle waiting: {v['foe']} {v['later']}")
+    for _ in range(6):
+        if 'Give Lamby Back!' in s5c(pg)['log']: break
+        pg.evaluate(S5_PREP); basic(pg); aim(pg,None); wait_cmd(pg); pg.wait_for_timeout(400)
+    pg.wait_for_timeout(600); v=s5c(pg); caps.append(R(shot(pg)))
+    need('Give Lamby Back!' in v['log'] and 'lamby_stuck' not in v['foe'],f"Rose's next turn should bring Lamby back and clear the mark: {v['foe']} {v['log'][-200:]}")
+    sheet(caps,3 if landscape else 3,os.path.join(OUT,'b3-s5c'+('-land' if landscape else '')+'.png'),scale=.55)
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
@@ -785,7 +820,7 @@ with sync_playwright() as pw:
     pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start',timeout=180000); pg.wait_for_timeout(1500)
-    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b')] or ([] if only else lab)
+    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c')] or ([] if only else lab)
     # The way in: ADMIN > BATTLE LAB shows NEW BATTLE, which opens the list.
     pg.evaluate("()=>{ splashSetMode('lab'); }"); pg.wait_for_timeout(200)
     names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
@@ -849,6 +884,11 @@ with sync_playwright() as pw:
     if 's5b' in sys.argv or not only and len(want)==len(lab):
         print('stage 5b: Gamer Geek and Craft Artist'); stage5b(pg,lab)
         pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage5b(pg,lab,True)
+        pg.click('#b3-exit'); pg.wait_for_timeout(500); pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
+    # 6e. stage 5c: Cozy Rosie and Registered Nut complete (portrait, then a pass in landscape)
+    if 's5c' in sys.argv or not only and len(want)==len(lab):
+        print('stage 5c: Cozy Rosie and Registered Nut'); stage5c(pg,lab)
+        pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage5c(pg,lab,True)
         pg.click('#b3-exit'); pg.wait_for_timeout(500); pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
     # 7. battle 2 still owns its screen
     pg.evaluate("()=>{ B7.speed=1; splash.active=false; document.getElementById('splash').hidden=true; window.__LE.b2Start({party:['tom','grace','rose'],level:12,foes:[['mudling','front']],bag:[]}); }")

@@ -58,6 +58,7 @@ function b3BeginTurn(F,u,beats) {
     const got=b3Heal(F,u,u.maxHp*(s.v==null?S.regen:s.v)); if(got) beats.push({t:'heal',tgt:u.key,n:got,hp:u.hp,id,g:'pre'});
   }
   b3Fire(F,'turnStart',{src:u,tgt:u,g:'pre'},beats);
+  b3RunLater(F,u,beats);
   if(b3Alive(u)&&b3HasFlag(u,'skipTurn')) {
     for(const id of Object.keys(u.st)) if(B3_STATUS[id].flags.includes('skipTurn')) { b3EndStatus(F,u,id,'used'); beats.push({t:'statusEnd',tgt:u.key,id,g:'pre'}); }
     if(u.flusterTurn) return true;   // "A foe always gets that turn": the Stun is spent and the turn is not lost
@@ -66,6 +67,24 @@ function b3BeginTurn(F,u,beats) {
     return false;
   }
   return b3Alive(u);
+}
+// What this unit left for its next turn (the `later` op) runs now, each as its own small action with its own group of beats and
+// its own Composure ledger. The monsters it was aimed at may be gone: a random live one takes their place.
+function b3RunLater(F,u,beats) {
+  const mine=F.later.filter(L=>L.key===u.key); if(!mine.length) return;
+  F.later=F.later.filter(L=>L.key!==u.key);
+  for(const L of mine) {
+    if(!b3Alive(u)) break;
+    const foes=b3Live(F,b3Other(u.side));
+    let tg=L.who==='foes'?foes:L.tgt.map(k=>b3Unit(F,k)).filter(b3Alive);
+    if(!tg.length&&foes.length&&L.who!=='foes') tg=[foes[Math.floor(b3Rand(F)*foes.length)]];
+    if(!tg.length) continue;
+    const g='l'+(F.reactSeq++);
+    beats.push({t:'react',src:u.key,tgt:tg[0].key,name:L.name,g});
+    const c={F,actor:u,src:null,skill:L.skill,tgt:null,targets:tg,hit:[],beats,g,detonated:{},reacted:{},tags:['later'],ledger:{}};
+    b3RunEffects(F,c,L.effects);
+    b3SpendCounters(F,c); b3KoCheck(F,c); b3PayLedger(F,c); b3RunReactions(F,beats);
+  }
 }
 // The next unit able to act, with the beats that led up to its turn. unit is null when the fight is over.
 function b3Next(F) {
@@ -111,11 +130,15 @@ function b3Hurt(F,c,t,dmg,info) {
   let left=dmg,soak=0; const broke=[];
   for(const sh of t.shields) { if(left<=0) break; const a=Math.min(sh.amt,left); sh.amt-=a; left-=a; soak+=a; if(sh.amt<=0) broke.push(sh); }
   if(broke.length) t.shields=t.shields.filter(sh=>sh.amt>0);
+  // A status with the `survive` flag (the Ward's jacket) keeps its carrier at 1 HP the first time a hit would knock them out, then is spent.
+  let held=null;
+  if(left>=t.hp&&t.hp>0) { held=Object.keys(t.st).find(i=>B3_STATUS[i].flags.includes('survive')&&!t.st[i].spent); if(held) { t.st[held].spent=true; left=t.hp-1; } }
   t.hp=Math.max(0,t.hp-left);
   if(soak) (c.soak=c.soak||{})[t.key]=(c.soak[t.key]||0)+soak;
   if(left) (c.lost=c.lost||{})[t.key]=(c.lost[t.key]||0)+left;
   if(!(info&&info.tick)) t.hitSince=true;
   c.beats.push(Object.assign({t:'hit',tgt:t.key,dmg,hp:t.hp,g:c.g},soak?{soak,sh:b3ShieldTotal(t)}:null,info));
+  if(held) c.beats.push({t:'survive',tgt:t.key,id:held,hp:t.hp,g:c.g});
   for(const sh of broke) { c.beats.push({t:'shieldBroken',tgt:t.key,g:c.g}); b3Fire(F,'shieldBroken',{src:c.actor,tgt:t,by:sh.src,g:c.g},c.beats); }
 }
 function b3KoCheck(F,c) {
@@ -263,10 +286,10 @@ function b3Interceptor(F,t) {
 // whoever `to` names and its beats stay in the part of the action it was set off in.
 function b3DamageOp(F,c,e) {
   const own=e.power!=null,S=own?{flavor:e.flavor,power:e.power,hits:e.hits||1,target:'foe'}:c.skill;
-  const a=c.actor,hits=Math.max(1,S.hits||1),all=S.target==='all_foes';
+  const a=c.actor,hits=Math.max(1,S.hits||1),all=own?!!e.aoe:S.target==='all_foes';
   const tier=typeof S.power==='number'?S.power:B3_RULES.power[S.power];
   const per=tier*(all&&a.side==='party'?B3_RULES.aoeShare:1)/hits/S.flavor.length*(c.scale||1);
-  if(own) { for(let h=0;h<hits;h++) for(const t of b3Who(F,c,e.to).filter(b3Alive)) b3Hit(F,c,t,per,S.flavor,e,true); return; }
+  if(own) { for(let h=0;h<hits;h++) for(const t of b3Who(F,c,e.to).filter(b3Alive)) b3Hit(F,c,t,per,S.flavor,e,!all); return; }
   c.didDamage=true;
   for(let h=0;h<hits;h++) {
     c.g=h; c.hitNo=h;
@@ -300,7 +323,8 @@ function b3Act(F,u,skillId,optKey) {
   if(!can.ok) return {ok:false,why:can.why};
   const O=b3Options(F,u,S).find(o=>o.key===optKey);
   if(!O||O.no) return {ok:false,why:(O&&O.no)||'Nobody to use that on right now.'};
-  const beats=[],rec=G?0:b3MoveRec(F,u,S),cost=b3Cost(F,u,S);
+  const beats=[],rec=G?0:b3MoveRec(F,u,S),cost=b3Cost(F,u,S,O);
+  if(S.cooldown) u.cd[S.id]=F.round+S.cooldown;
   F.grant=null;
   const c={F,actor:u,src:u,skill:S,rec,targets:O.units.slice(),hit:[],beats,g:'pre',detonated:{},reacted:{},tags:S.tags||[],ledger:{}};
   beats.push({t:'act',src:u.key,id:S.id,name:S.name,flavor:S.flavor,shape:(S.anim&&S.anim.shape)||'strike',hits:Math.max(1,S.hits||1),tgts:O.units.map(t=>t.key),free:!!G,g:'pre'});

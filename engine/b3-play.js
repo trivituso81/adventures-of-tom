@@ -138,6 +138,8 @@ function b3Show(b) {
   else if(b.t==='heal') { vu.hp=b.hp; b3Pop(b.tgt,'+'+b.n,'#8fe3a6'); b3Sfx('heal'); }
   else if(b.t==='shield') { vu.sh=b.sh; if(b.n) b3Pop(b.tgt,'SHIELD +'+b.n,'#9fd0ff',{sc:2}); }
   else if(b.t==='shieldBroken') { b3Pop(b.tgt,'SHIELD BROKE','#9fd0ff',{sc:2}); }
+  else if(b.t==='survive') { b3Pop(b.tgt,'HELD ON!','#ffe08a',{sc:2}); }
+  else if(b.t==='immune') { b3Pop(b.tgt,'NOT TODAY','#c8e6c9'); }
   else if(b.t==='shieldEnd') { vu.sh=b.sh; }
   else if(b.t==='soak') { b3Pop(b.tgt,'NO '+B3_STATUS[b.id].short,'#9fd0ff',{sc:2}); }
   else if(b.t==='revive') {

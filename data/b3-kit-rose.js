@@ -47,17 +47,45 @@ B3_VIBES.rose_cozy={id:'rose_cozy',owner:'rose',name:'Cozy Rosie',sig:2,lean:'su
   subtitles:['Blanket Burrito','Fort Architect','Keeper of the Two Lambies'],
   trait:'well_loved_original',basic:'pocket_pretzel_and_pat',skills:['tattered_lamby_boomerang','sofa_cushion_citadel','kingdom_of_ten_thousand_blankets'],
   quirks:['mint_condition_backup','emergency_stuffy_swap'],counter:null};
-B3_SOON.tattered_lamby_boomerang='Tattered Lamby Boomerang';
-B3_SOON.sofa_cushion_citadel='Sofa-Cushion Citadel';
-B3_SOON.kingdom_of_ten_thousand_blankets='Kingdom of Ten-Thousand Blankets';
-B3_TRAITS.well_loved_original={id:'well_loved_original',vibe:'rose_cozy',name:'Well-Loved Original',soon:true,
+// Well-Loved Original: Rose always holds tattered Lamby, so the Pep comes at the start of every 2nd round (rounds 2, 4, 6...).
+B3_TRAITS.well_loved_original={id:'well_loved_original',vibe:'rose_cozy',name:'Well-Loved Original',
+  on:'roundStart',every:2,show:true,effects:[{op:'pep',n:1,to:'self'}],
   desc:'Holding tattered Lamby gives Rose 1 Pep every 2 rounds.'};
-B3_QUIRKS.mint_condition_backup={id:'mint_condition_backup',vibe:'rose_cozy',name:'Mint-Condition Backup',soon:true,
+// Mint-Condition Backup: every shield Rose puts on carries the mod, so it counts for whoever holds one (Rose herself included).
+// "+20% Crit Resistance" is read as attacks against them crit 20 points less often (the same stat Dazzled and Little Pinch move).
+B3_QUIRKS.mint_condition_backup={id:'mint_condition_backup',vibe:'rose_cozy',name:'Mint-Condition Backup',
+  shieldMods:[{stat:'critTaken',kind:'mintBackup',v:-.20}],
   desc:'Family members holding one of Rose’s shields are crit 20% less often.'};
-B3_QUIRKS.emergency_stuffy_swap={id:'emergency_stuffy_swap',vibe:'rose_cozy',name:'Emergency Stuffy Swap',soon:true,
+// Emergency Stuffy Swap: the hit comes from the unit that broke the shield (a monster). A light Clobber bonk, once a round (my call: the spec gives no tier).
+B3_QUIRKS.emergency_stuffy_swap={id:'emergency_stuffy_swap',vibe:'rose_cozy',name:'Emergency Stuffy Swap',
+  on:'shieldBroken',from:'foe',shieldBy:'holder',limit:'round',react:true,show:true,
+  effects:[{op:'damage',flavor:['clobber'],power:'light',to:'attacker'}],
   desc:'When one of Rose’s shields breaks, Backup Lamby bonks the monster that broke it. Once a round.'};
 // Pocket Pretzel & Pat: the pretzel goes to whoever in the family has the smallest share of their HP left, Rose included
 // (my call: a six-year-old eats her own pretzel when she is the one who is hurt). A tiny heal is 5% of Max HP.
 B3_SKILLS.pocket_pretzel_and_pat={id:'pocket_pretzel_and_pat',vibe:'rose_cozy',slot:'basic',name:'Pocket Pretzel & Pat',pep:0,flavor:['clobber'],power:'light',hits:1,
   target:'foe',tags:[],composure:0,effects:[{op:'damage'},{op:'heal',pct:'tiny',to:'lowestAlly'}],line:null,anim:{kind:'default',shape:'strike'},
   desc:'Light Clobber bonk with Lamby. Then a pocket pretzel for whoever in the family is hurt the most: a tiny heal.'};
+
+// Tattered Lamby Boomerang: the throw is a light Clobber hit that leaves Lamby stuck on the monster. The spec's "free fast tackle" has no
+// time (kit-ops: "when does the free tackle happen"): my call is that it lands when Rose's next turn begins, before she picks a move
+// (`later`), as a standard Clobber hit in 2 pieces, with a self-shield of 10% of Max HP (the spec gives no size).
+B3_SKILLS.tattered_lamby_boomerang={id:'tattered_lamby_boomerang',vibe:'rose_cozy',slot:'s1',name:'Tattered Lamby Boomerang',pep:2,flavor:['clobber'],power:'light',hits:1,
+  target:'foe',tags:[],composure:0,
+  effects:[{op:'damage'},{op:'status',id:'lamby_stuck',to:'target'},
+    {op:'later',name:'Give Lamby Back!',effects:[{op:'damage',flavor:['clobber'],power:'standard',hits:2,to:'target'},{op:'shield',pct:.10,to:'self'}]}],
+  line:null,anim:{kind:'default',shape:'strike'},
+  desc:'Rose throws scruffy Lamby at a monster: a light Clobber hit. When her next turn begins she tackles it to get him back: two quick Clobber hits, and a small shield on her.'};
+// Sofa-Cushion Citadel: a 25% Max HP shield on every family member, and nobody can be pushed back for 3 turns. 3-round cooldown.
+B3_SKILLS.sofa_cushion_citadel={id:'sofa_cushion_citadel',vibe:'rose_cozy',slot:'s2',name:'Sofa-Cushion Citadel',pep:3,flavor:['support'],power:0,hits:0,
+  target:'self',tags:[],composure:0,cooldown:3,
+  effects:[{op:'shield',pct:.25,to:'allies'},{op:'status',id:'pillow_fort',to:'allies'}],line:null,anim:{kind:'default',shape:'give'},
+  desc:'Cushions and blankets make a fort: every family member gets a shield of 25% of their HP and cannot be pushed back on the turn bar for 3 turns. Rose needs 3 rounds before she can build it again.'};
+// Kingdom of Ten-Thousand Blankets (Grand Capstone): one family member heals 60% and is cleansed now; the Sizzle wave comes when Rose's next turn
+// begins (my calls: heavy Sizzle at the all-monsters share, the same as Fifty-Year Dust Tsunami).
+B3_SKILLS.kingdom_of_ten_thousand_blankets={id:'kingdom_of_ten_thousand_blankets',vibe:'rose_cozy',slot:'cap',name:'Kingdom of Ten-Thousand Blankets',pep:5,flavor:['sizzle'],power:0,hits:0,
+  target:'family',tags:[],composure:0,
+  effects:[{op:'heal',pct:.60,to:'target'},{op:'cleanse',to:'target'},{op:'status',id:'blanket_castle',to:'self'},
+    {op:'later',name:'Warmth Wave',who:'foes',effects:[{op:'damage',flavor:['sizzle'],power:'heavy',aoe:true,to:'foes'}]}],
+  line:null,anim:{kind:'default',shape:'give'},
+  desc:'A star-lit blanket castle: one family member heals 60% of their HP and every debuff on them clears. When Rose\u2019s next turn begins, a wave of Sizzle warmth hits every monster.'};

@@ -133,7 +133,7 @@ function b3Kit(id,L) {
 //   counters   counters a Quirk keeps for itself ({id, name, max}: Upgrade Certificate)
 //   custom     {<one-off rule name>: its numbers} (engine/b3-custom.js)
 function b3KitPassives(K) {
-  const out={listeners:[],mods:[],counters:[],custom:{}};
+  const out={listeners:[],mods:[],counters:[],custom:{},immune:[],shieldMods:[]};
   for(const P of [B3_TRAITS[K.trait],...K.quirks.map(q=>B3_QUIRKS[q])]) {
     if(!P||P.soon) continue;
     if(P.on) out.listeners.push(P);
@@ -141,6 +141,8 @@ function b3KitPassives(K) {
     for(const m of (P.mods||[])) out.mods.push(Object.assign({},m,{from:P.id}));
     if(P.counter) out.counters.push(P.counter);
     if(P.custom) out.custom[P.custom]=P.n||{};
+    if(P.immune) out.immune.push(...P.immune);
+    if(P.shieldMods) out.shieldMods.push(...P.shieldMods);
   }
   for(const C of K.counters) out.listeners.push(Object.assign({},C,{id:'counter:'+C.id,name:C.name,effects:[{op:'counter',id:C.id,n:C.n||1,max:C.max,to:'self'}]}));
   return out;
