@@ -30,7 +30,7 @@ Per voice on pure re-rolls (Deedee 32 lines, Tom 24): 39% and 37% against 49%: n
 | Threshold (1, 2, 3, 4, 6 extra words) | the pattern holds at all of them; threshold picked leave-one-line-out |
 | Hit rate if flagged takes are vetoed and the rest picked at random | 48.6% against 45.0% chance (permutation p below 0.001) |
 | Same, on pure re-rolls | no change (49.5%): only 2 of 180 pure re-roll lines have a looped take |
-| Cause | the first bracket tag. 100+ characters: 31 of 48 takes fail (65%), all Deedee's old long tag block. Under 60 characters: about 1%. |
+| Cause | the first bracket tag. 100+ characters: 49 takes, all Deedee, all the same tag block ("grounded and natural; warm and loving when the line calls for it, firm and commanding when it calls for that, ..."); 32 of them fail (65%). Under 100 characters: 871 takes, 9 fail (1%). The link is measured, the mechanism (the voice reads long tags aloud) is not tested. |
 | Exposure in the game now | `data/voice-index.json`: 1 script with a first tag over 100 characters (a Washington line that already has a clip); the 91 unrecorded Deedee lines have a median first tag of 39 characters |
 
 It is a failure filter, not a taste picker: among clean takes it adds nothing. 61% of the flagged takes are also 1.3x or more longer than their sibling takes (a real repeat in the audio); the rest are tag read aloud or an ASR repeat. A tighter detector would use both.

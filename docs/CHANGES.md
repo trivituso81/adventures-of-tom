@@ -1,3 +1,7 @@
+## voicelearn2fix (2026-11-18): voicelearn2 write-up corrected: 49 takes (not 48) carry a first tag of 100+ characters, 32 (65%) fail
+
+- tools/voice-learn/README.md: the long-tag count was 31 of 48; it is 32 of 49 (all Deedee, one identical tag block); under 100 characters 9 of 871 fail. Nothing else changed; no game files.
+
 ## voicelearn2 (2026-11-18): voice learning stage 2: no sound measure picks Tom's kept take on re-rolls; a transcript check catches looped and tag-read takes
 
 Stage 2 of claude/voice-learning-plan.md, run on his real send (branch `takes`: 922 takes, 345 lines). Nothing in the game changed; tools and results only (tools/voice-learn/, README there has every number).
