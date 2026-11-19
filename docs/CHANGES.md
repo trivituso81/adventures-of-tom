@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-## board2-start (2026-11-19): Audit fixes applied to the board (finished cards closed, blocked cards unblocked, 5 new cards); board2 build started
-
-- Ran claude/board-audit/apply_audit.py on the live board: kitchen picture, Narrator and ch1 art cards closed, cutpolish4b, b3s9 and ch2build unblocked, clipgate2 moved to In progress, the Image generator lane removed. Cards added: c-ch1art2, c-board2, c-board3, c-nextclean, t-projinstr, c-boardaudit. c-board2 is In progress with this conversation's link. No game code changed.
-
-=======
 ## clipgate2 (2026-11-19): The clip gate now has a vision check and is wired into the clip-gen Action; replayed on chapter 1, the pass bar was NOT met (stop-loss)
 
 - Tom (11-19 15:09): "Spend at most $2 of xAI credit, on the vision check only; make no videos." Spent $0.36 (153 calls, 3 runs over the 51 clips that have questions, model `grok-4.20-0309-non-reasoning`, 458,169 tokens in, 29,479 out). No video made.
@@ -14,7 +8,10 @@
 - Found: tom-give "his size pulses" is not in the game either. The in-game grab: stance 143 px, clip 141 px, stance after 142 px (under 2%). The grab does catch real changes: grace-give grows to 1.17x, tom-victory to 1.15x and pops back.
 - Not met, stop-loss (the 1-run and 3-run replays missed the same way, so no third variant of the questions): what went wrong and what to do is in `claude/clip-gate-plan.md` section 4.5.
 - Tests: `python3 -I tools/clip-gate/vision_test.py` (stand-in xAI server, FAILS: []), `grab_test.py` (FAILS: []), `gate_test.py` (FAILS: []), `replay.py` (exits 0). `tools/art-library/clipgen_test.py` fails one check, "an approval on a main that moved keeps the other session's change", with and without this build (pre-existing).
->>>>>>> f4d12f7 (clipgate2: vision check replayed, gate wired into clip-gen, in-game frame grab)
+## board2-start (2026-11-19): Audit fixes applied to the board (finished cards closed, blocked cards unblocked, 5 new cards); board2 build started
+
+- Ran claude/board-audit/apply_audit.py on the live board: kitchen picture, Narrator and ch1 art cards closed, cutpolish4b, b3s9 and ch2build unblocked, clipgate2 moved to In progress, the Image generator lane removed. Cards added: c-ch1art2, c-board2, c-board3, c-nextclean, t-projinstr, c-boardaudit. c-board2 is In progress with this conversation's link. No game code changed.
+
 ## board-ready (2026-11-19): Board card added: green Ready badge on Claude cards that are unblocked
 
 - Tom (11-19 15:17) asked what happens after he marks a card Done, then said yes to a badge that shows which Claude card is ready to start. Added Claude card c-boardready (Tools, Up next) with its prompt. Data only; nothing built yet.

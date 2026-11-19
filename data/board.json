@@ -232,11 +232,9 @@
    "title": "Clip quality gate, vision check (clipgate2)",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
-   "next": "Built so far (clipgate2a): the vision check and the clip-gate Action. Left: run the Action on the 67 clips (about $1 of xAI credit, cap $2), replay until it flags all 44 of your rejects, then wire the gate into clip-gen so a failing clip is held, not approved.",
-   "blocks": [
-    "c-clipch1fix"
-   ],
+   "col": "done",
+   "next": "Built and wired, pass bar not met. Spent $0.36 on looking (no videos). The gate flags 34 of your 44 rejects and 1 of the 23 approved clips (grace-give, which grows 1.17x). It checks guards, dodges, dizzy KOs, runs, victories, hits and faces well; it cannot judge your invented moves (give, cast, blockade, tackle, lava, giddyup, squeeze, wet floor, scrub, lounge pass), so your CHAPTER 1 REVIEW is the check for those. The clip-gen Action now holds a failing clip instead of approving it. Details: claude/clip-gate-plan.md section 4.5.",
+   "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
    "chat": {
@@ -251,6 +249,10 @@
     {
      "d": "2026-11-19",
      "t": "Board audit: part shipped as clipgate2a from the chat linked here; nothing spent yet. Moved to In progress."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: \"Read claude/clip-gate-plan.md, then build clipgate2. Spend at most $2 of xAI credit, on the vision check only; make no videos.\" Built vision check, replayed (3 runs), pass bar not met, stop-loss; gate wired into clip-gen; in-game frame grab built. Spent $0.36."
     }
    ],
    "prompt": {
@@ -261,7 +263,8 @@
     "model": "Claude Sonnet 5.5 (row C: a tool build; the plan is written and the replay against your notes catches mistakes)",
     "effort": "medium (the steps and the pass bar are written in the plan)",
     "text": "Read claude/clip-gate-plan.md, then build clipgate2. Spend at most $2 of xAI credit, on the vision check only; make no videos. You have my full permission to access the repo."
-   }
+   },
+   "done": "2026-11-19"
   },
   {
    "id": "c-clipgate1",
@@ -290,8 +293,8 @@
    "title": "Fix chapter 1 clips from the review notes (clipch1fix)",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "wait",
-   "next": "Waits for the clip gate (c-clipgate2). Then: bake fixes first (loop stretch with a blink, speed 1.0 for moves), then prompt edits from your notes by the smallest change, then re-make only what the gate says needs it. Plan: claude/clip-gate-plan.md section 5.",
+   "col": "up",
+   "next": "Ready (the gate is built; see c-clipgate2). Bake fixes first (loop stretch with a blink, speed 1.0 for moves except give), then prompt edits from your notes by the smallest change, then re-make only what the gate or your notes say needs it. The gate holds a clip that fails its measured checks or the guard, dodge, KO, run, victory, hit and same-face questions; for the invented moves your CHAPTER 1 REVIEW of the re-made clip is the check. Plan: claude/clip-gate-plan.md sections 3, 4.5 and 5.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -307,17 +310,20 @@
     {
      "d": "2026-11-19",
      "t": "clipgate1 found many notes come from the bake settings or the prompt text; re-making first would repeat them. Now waits on the vision gate."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "clipgate2 finished: the gate is usable (34 of 44 rejects flagged, 1 of 23 approved flagged); no longer waiting."
     }
    ],
-   "waiting_on": "claude",
    "prompt": {
     "what": "Fixes the chapter 1 clips from your notes: free bake fixes first, then prompt edits, then re-makes only where the gate says so.",
     "before": [
-     "Nothing to do first (the clip gate, c-clipgate2, must be finished)."
+     "Nothing to do first. The gate is built; the clip-gen Action runs it by itself (input gate, default true)."
     ],
     "model": "Claude Opus 5.5 (row D: generator prompts judged by eye)",
     "effort": "medium (each note is a small edit of a prompt or a bake setting that exists)",
-    "text": "Read claude/clip-gate-plan.md and claude/next-addendum-clipgen2.md, then build clipch1fix. You have my full permission to access the repo."
+    "text": "Read claude/clip-gate-plan.md (sections 3, 4.5 and 5) and claude/next-addendum-clipgen2.md, then build clipch1fix. You have my full permission to access the repo."
    }
   },
   {
