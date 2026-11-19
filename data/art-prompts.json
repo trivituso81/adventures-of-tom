@@ -27086,6 +27086,118 @@
    ],
    "group": "Party banners",
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one wide image, nothing else.\n\nWHAT THIS IS\nA party banner for \"The Adventures of Tom\", a family role-playing game. The person is the exact person in the attached picture: same face, hair, proportions, outfit and painted style.\n\nLAYOUT\nA wide horizontal banner. The person fills the right third, seen from the waist up, facing the viewer. The left two thirds is a plain painted ribbon of warm cream parchment with a thin gold edge, left empty for words the game adds. No words or letters anywhere.\n\nPOSE\nOne hand raised in a warm goodbye wave, a gentle smile.\n\nSTYLE\nHand-painted, visible brushwork, matte surfaces, rich warm colors, warm golden light from the upper left. No thick outlines. Not pixel art, not 16-bit, not photorealistic, not 3D."
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-grump-idle",
+   "tab": "Clips",
+   "group": "Monsters",
+   "title": "Pond Grump: waiting in place (idle loop) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/grump.png"
+   ],
+   "clip": {
+    "id": "grump-idle",
+    "owner": "grump",
+    "start": "art/clips/start/grump.png",
+    "model": "grok-imagine-video-1.5",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 36.3,
+    "step": 1,
+    "speed": 0.3,
+    "calm": 0.875,
+    "kind": "loop",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short looping animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: IDLE LOOP\nThe creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One slow blink. The eyes glance to one side and back. The moss and slime hanging from its body sway a little and stay attached. The frown stays. The arms and feet stay where they are; drips wobble a little but nothing falls off or lands on the ground. The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-toad-idle",
+   "tab": "Clips",
+   "group": "Monsters",
+   "title": "Bog Toad: waiting in place (idle loop) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/toad.png"
+   ],
+   "clip": {
+    "id": "toad-idle",
+    "owner": "toad",
+    "start": "art/clips/start/toad.png",
+    "model": "grok-imagine-video-1.5",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 39.2,
+    "step": 1,
+    "speed": 0.3,
+    "calm": 0.875,
+    "kind": "loop",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short looping animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: IDLE LOOP\nThe creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One slow blink. The eyes glance to one side and back. The lily pad on its head sways gently and stays attached. The arms and legs stay where they are; water drops wobble a little but nothing falls off or lands on the ground. The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-log-idle",
+   "tab": "Clips",
+   "group": "Monsters",
+   "title": "Log Lump: waiting in place (idle loop) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/log.png"
+   ],
+   "clip": {
+    "id": "log-idle",
+    "owner": "log",
+    "start": "art/clips/start/log.png",
+    "model": "grok-imagine-video-1.5",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 34.9,
+    "step": 1,
+    "speed": 0.3,
+    "calm": 0.875,
+    "kind": "loop",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short looping animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: IDLE LOOP\nThe creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One slow blink. The eyes glance to one side and back. The moss, the mushrooms and the leaf sprouts on top sway gently and stay attached. The branch stubs and the feet stay where they are; nothing falls off or lands on the ground. The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
+  },
+  {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "clip-bigone-idle",
+   "tab": "Clips",
+   "group": "Monsters",
+   "title": "The Big One: waiting in place (idle loop) video clip",
+   "ar": "4:3",
+   "refs": [
+    "art/clips/start/bigone.png"
+   ],
+   "clip": {
+    "id": "bigone-idle",
+    "owner": "bigone",
+    "start": "art/clips/start/bigone.png",
+    "model": "grok-imagine-video-1.5",
+    "res": "480p",
+    "dur": 3,
+    "figRows": 41.1,
+    "step": 1,
+    "speed": 0.3,
+    "calm": 0.875,
+    "kind": "loop",
+    "k": 8
+   },
+   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short looping animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: IDLE LOOP\nThe creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One slow blink. The eyes glance to one side and back. The muffin-tin crown stays on its head. The seaweed hair sways gently and stays attached. The fishing lure and the coin stay held where they are; drips wobble a little but nothing falls off or lands on the ground. The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves.\n\nLength about 3 seconds. Family friendly for ages 6 and up.\n"
   }
  ]
 }

@@ -1289,6 +1289,8 @@ const B2_TOMBOS=[
 const B2_LAB=[
   {ch:0,name:'CLIP TEST: ROSE',sub:'Animation test. Pick ATTACK, then Boop: Rose plays her video-made Boop. The Mudling moves on its own.',clip:true,party:['tom','grace','rose'],level:12,foes:[['irongill','front'],['mudling','front']]},
   {ch:0,name:'CLIP TEST: SLEEPY ROSE',sub:'Animation test. Just watch: after 3 seconds Rose yawns and lies down for a nap. The Mudling moves on its own.',clip:true,nap:'rose',party:['tom','grace','rose'],level:12,foes:[['mudling','front'],['mudling','front']]},
+  {ch:0,name:'CLIP TEST: MONSTERS',sub:'Animation test. Just watch: each monster whose idle video is approved moves on its own; the rest stay painted. Pond Grump, Bog Toad, Log Lump.',clip:true,party:['tom','grace','rose'],level:12,foes:[['grump','front'],['toad','front'],['log','front']]},
+  {ch:0,name:'CLIP TEST: THE BIG ONE',sub:'Animation test. Just watch: The Big One moves on its own once its idle video is approved.',clip:true,party:['tom','grace','rose'],level:12,foes:[['bigone','front']]},
   {ch:0,name:'JUSTIN’S TRYOUT',sub:'Test fight. Tom, Grace, Rose and Justin, every move unlocked.',party:['tom','grace','rose','justin'],level:12,foes:[['irongill','front']]},
   {ch:0,name:'SOLO',sub:'Test fight. Pick anyone, alone, every move unlocked. Nobody can be hurt. Leave with EXIT.',solo:true,party:['justin'],level:12,foes:[['irongill','front']]},
   {ch:0,name:'OLIVIA\u2019S TRYOUT',sub:'Test fight. Tom, Grace, Rose and Olivia, every move unlocked.',party:['tom','grace','rose','olivia'],level:12,foes:[['irongill','front']]},

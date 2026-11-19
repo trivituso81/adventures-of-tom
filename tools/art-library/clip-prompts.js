@@ -60,6 +60,17 @@ const entries = [
   { id: 'clip-mudling-idle', tab: 'Clips', group: 'Monsters', title: 'Mudling: waiting in place (idle loop) video clip', ar: '4:3', refs: ['art/clips/start/mudling.png'],
     clip: { id: 'mudling-idle', owner: 'mudling', start: 'art/clips/start/mudling.png', model: G15, res: '480p', dur: 3, figRows: 44.6, step: 1, speed: .3, pace: [[2.25, 1, 1]], kind: 'loop', k: 8 },
     prompt: LOOK_FOE + 'MOTION: IDLE LOOP\nThe creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One slow blink. The eyes glance to one side and back. The leaf sprout on its head sways gently and stays attached. The mud arms stay where they are; drips wobble a little but nothing falls off or lands on the ground. The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves.' + END(3) },
+  // clipfoes1: idle loops for four more chapter 1 monsters. The MOTION text is the Mudling's, word for word, with only the two
+  // sentences that name Mudling-only parts (leaf sprout, mud arms, drips) swapped for the parts this monster really has.
+  // The calm stretch is picked by the baker (clip.calm, seconds): no blink timing (pace) until Tom has seen what it finds.
+  ...[
+    ['grump', 'Pond Grump', 36.3, 'The moss and slime hanging from its body sway a little and stay attached. The frown stays. The arms and feet stay where they are; drips wobble a little but nothing falls off or lands on the ground.'],
+    ['toad', 'Bog Toad', 39.2, 'The lily pad on its head sways gently and stays attached. The arms and legs stay where they are; water drops wobble a little but nothing falls off or lands on the ground.'],
+    ['log', 'Log Lump', 34.9, 'The moss, the mushrooms and the leaf sprouts on top sway gently and stay attached. The branch stubs and the feet stay where they are; nothing falls off or lands on the ground.'],
+    ['bigone', 'The Big One', 41.1, 'The muffin-tin crown stays on its head. The seaweed hair sways gently and stays attached. The fishing lure and the coin stay held where they are; drips wobble a little but nothing falls off or lands on the ground.'],
+  ].map(([o, name, rows, parts]) => ({ id: 'clip-' + o + '-idle', tab: 'Clips', group: 'Monsters', title: name + ': waiting in place (idle loop) video clip', ar: '4:3', refs: ['art/clips/start/' + o + '.png'],
+    clip: { id: o + '-idle', owner: o, start: 'art/clips/start/' + o + '.png', model: G15, res: '480p', dur: 3, figRows: rows, step: 1, speed: .3, calm: .875, kind: 'loop', k: 8 },
+    prompt: LOOK_FOE + 'MOTION: IDLE LOOP\nThe creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One slow blink. The eyes glance to one side and back. ' + parts + ' The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves.' + END(3) })),
 ];
 if (require.main === module) {
   const out = 'data/art-prompts.json', doc = JSON.parse(fs.readFileSync(out, 'utf8'));

@@ -13,6 +13,9 @@ picture). Frame numbers count the video's own frames from 0.
   --pace          F:STEP:SPEED[,F:STEP:SPEED...]  from video frame F on, keep every STEP-th picture and play at SPEED
                   instead of --step and --speed. For a part that must run at its own pace: a blink that stays quick
                   inside a body sway that is slowed right down (clippace1).
+  --calm          SECONDS (kind loop only): inside --first..--last, keep only the stretch of about that many seconds in which the
+                  body moves least (picked from the frames themselves), so a monster's idle needs no hand-picked part (clipfoes1).
+                  --first and --last then give the room to search in; the game's pace and speed apply to the chosen stretch.
   --kind          strike (default): a one-shot move with an impact frame.
                   loop: an idle that repeats (a monster waiting). No impact. The game plays it forward, then backward
                         (engine/clips.js bclipLoopFrame), so the repeat has no jump: a video model is only given the
@@ -74,12 +77,26 @@ def pack(sizes, pad=2, max_w=2560):
         if best is None or score < best[0]: best = (score, (W, H, at))
     return best[1]
 
+def calm_window(files, first, last, fps, secs):
+    """The stretch of about `secs` seconds between video frames first and last with the least body motion: for every pair of
+    neighbouring frames the mean brightness change inside the figure (magenta removed, grown a little), then the window of
+    frames with the lowest mean. Returns (first, last) of that window."""
+    n = max(3, round(secs * fps)); idx = list(range(first, last + 1))
+    if len(idx) <= n: return first, last
+    g, m = [], []
+    for i in idx:
+        im = np.asarray(Image.open(files[i]).convert('RGB'))
+        a = ndi.binary_dilation(key(im)[..., 3] > 128, iterations=3)
+        g.append(np.asarray(Image.fromarray(im).convert('L'), float)[::2, ::2]); m.append(a[::2, ::2])
+    d = [float(np.abs(g[j + 1] - g[j])[m[j] | m[j + 1]].mean()) for j in range(len(idx) - 1)]
+    best = min(range(len(idx) - n + 1), key=lambda s: sum(d[s:s + n - 1]))
+    return idx[best], idx[best + n - 1]
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('clip'); ap.add_argument('id'); ap.add_argument('owner')
     ap.add_argument('--first', type=int, required=True); ap.add_argument('--last', type=int, required=True)
     ap.add_argument('--step', type=int, default=3); ap.add_argument('--impact', type=int, default=-1)
-    ap.add_argument('--kind', default='strike', choices=['strike', 'loop', 'state']); ap.add_argument('--pace', default='')
+    ap.add_argument('--kind', default='strike', choices=['strike', 'loop', 'state']); ap.add_argument('--pace', default=''); ap.add_argument('--calm', type=float, default=0)
     ap.add_argument('--fig-rows', type=float, required=True); ap.add_argument('--speed', type=float, default=1)
     ap.add_argument('--k', type=int, default=4); ap.add_argument('--fps', type=float, default=30)
     ap.add_argument('--tag', default='clip0'); ap.add_argument('--quality', type=int, default=86); ap.add_argument('--sheet', default='')
@@ -88,6 +105,9 @@ def main():
     tmp = tempfile.mkdtemp()
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', A.clip, f'{tmp}/r%04d.png'], check=True)
     files = sorted(glob.glob(f'{tmp}/r*.png'))
+    if A.calm:
+        if A.kind != 'loop': sys.exit('--calm is for kind loop only')
+        A.first, A.last = calm_window(files, A.first, A.last, A.fps, A.calm); print(f'calm stretch: video frames {A.first} to {A.last}')
     segs = [(A.first, A.step, A.speed)] + sorted((int(a), int(b), float(c)) for a, b, c in (x.split(':') for x in A.pace.split(',') if x))
     if any(not (A.first < f <= A.last) or st < 1 or sp <= 0 for f, st, sp in segs[1:]): sys.exit(f'--pace must start inside the clip, with a step of 1 or more and a speed above 0: {A.pace}')
     picks, durs = [], []                         # each kept picture and how long it stays up, by the pace of its own part

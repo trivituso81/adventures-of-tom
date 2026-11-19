@@ -94,7 +94,8 @@ def bake_clip(e, p):
     if len(kept) < 4: raise SystemExit(f'{e["id"]}: START and END are too close together ({len(kept)} pictures)')
     impact = min(kept[1:], key=lambda f: abs(f - m['hit'] * fps)) if kind == 'strike' else -1   # the kept picture nearest Tom's HIT mark (never the standing first one)
     r = sh(sys.executable, '-I', os.path.join('tools', 'clip-bake', 'bake_clip.py'), mp4, c['id'], c['owner'], '--first', str(first), '--last', str(kept[-1]),
-           '--step', str(step), '--impact', str(impact), '--fig-rows', str(c['figRows']), '--speed', str(speed), '--fps', str(fps), '--kind', kind, '--k', str(c.get('k', 4)), *(['--pace', pace] if pace else []))
+           '--step', str(step), '--impact', str(impact), '--fig-rows', str(c['figRows']), '--speed', str(speed), '--fps', str(fps), '--kind', kind, '--k', str(c.get('k', 4)), *(['--pace', pace] if pace else []),
+           *(['--calm', str(c['calm'])] if c.get('calm') and kind == 'loop' else []))   # clip.calm (seconds, clipfoes1): the baker picks the calmest stretch between START and END
     print(r.stdout[-1500:]); print(r.stderr[-1500:], file=sys.stderr)
     if r.returncode: raise SystemExit(f'art_bake: bake_clip.py failed for {e["id"]}')
     tagline = f'<script src="data/clips/{c["id"]}.js?v=clip0"></script>'       # bump_tags moves the tag
@@ -103,7 +104,7 @@ def bake_clip(e, p):
         tags = re.findall(r'<script src="data/clips/[^"]+"></script>\n', html)
         if not tags: raise SystemExit('art_bake: index.html has no data/clips script tag to put the new clip next to')
         html = html.replace(tags[-1], tags[-1] + tagline + '\n'); open(ix, 'w', encoding='utf-8').write(html)
-    return f'{e["id"]}: clip `{c["id"]}` cut from {p} ({fps:g} pictures a second; video frames {first} to {kept[-1]}, every {step}, {"hit at frame " + str(impact) if kind == "strike" else kind}; {len(kept)} pictures kept; played at {speed:g}x). {r.stdout.strip().splitlines()[-1] if r.stdout.strip() else ""}'
+    return f'{e["id"]}: clip `{c["id"]}` cut from {p} ({fps:g} pictures a second; video frames {first} to {kept[-1]}, every {step}, {"hit at frame " + str(impact) if kind == "strike" else kind}; {len(kept)} pictures kept; played at {speed:g}x). {r.stdout.strip().splitlines()[-1] if r.stdout.strip() else ""}' + (' Calm stretch: ' + next((l for l in r.stdout.splitlines() if l.startswith('calm stretch')), '?') if c.get('calm') and kind == 'loop' else '')
 
 def next_number():
     f = os.path.join(ROOT, 'docs', 'CHANGES.md')
