@@ -27390,8 +27390,20 @@
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: DODGE\nFrom his starting relaxed stance, he leans his upper body quickly backward and ducks his head once, as if something just missed him. Without moving his feet, he straightens up into his starting relaxed stance and remains completely still in that pose for the rest of the clip."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/clips/clip-tom-ko-v1.mp4",
+     "date": "2026-11-19",
+     "from": "clipgen",
+     "at": 1795104355117,
+     "marks": {
+      "first": 0,
+      "last": 3.0
+     }
+    }
+   ],
    "rejects": [],
    "id": "clip-tom-ko",
    "tab": "Clips",
