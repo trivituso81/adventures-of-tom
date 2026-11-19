@@ -208,7 +208,8 @@
    "speaker": "Deedee",
    "text": "There he is! Come here. Let me look at you. I missed that face. Now sit, you're having a muffin.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[bright, thrilled] There he is! Come here. Let me look at you. [warm, plain] I missed that FACE. [firm] Now sit, you're having a muffin."
+   "script": "[warm Long Island accent, bright, thrilled] There he is! Come here. Let me look at you. [warm Long Island accent, warm, plain] I missed that FACE. [warm Long Island accent, firm] Now sit, you're having a muffin.",
+   "takeId": "gen-c82ffe4f21"
   },
   {
    "voice": "tom",
@@ -222,21 +223,24 @@
    "speaker": "Deedee",
    "text": "Twelve of them, and all twelve are still there. I've been standing between that pan and your father since six this morning.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[proud] Twelve of them, and all twelve are still there. [dry, pointed] I've been standing between that pan and your FATHER since six this morning."
+   "script": "[warm Long Island accent, proud] Twelve of them, and all twelve are still there. [warm Long Island accent, dry, pointed] I've been standing between that pan and your FATHER since six this morning.",
+   "takeId": "gen-645917e004"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat...",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[goofy outrage] In my own KITCHEN! [chatty, building] Tom, back at Rikers I had a key to every door in the place, and here I can't get near a MUFFIN. [settling into a story, relaxed] You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat..."
+   "script": "[thick New York accent, goofy outrage] In my own KITCHEN! [thick New York accent, chatty, building] Tom, back at Rikers I had a key to every door in the place, and here I can't get near a MUFFIN. [thick New York accent, settling into a story, relaxed] You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat...",
+   "takeId": "gen-629660b679"
   },
   {
    "voice": "rose",
    "speaker": "Rose",
    "text": "AHHH! DEEDEE!",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[real scream] AHHH! DEEDEE!"
+   "script": "[real scream] AHHH! Deedee!",
+   "takeId": "gen-f2f80f4888"
   },
   {
    "voice": "tom",
@@ -257,42 +261,48 @@
    "speaker": "Deedee",
    "text": "That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[shocked, loud] That thing took my good twelve-cup PAN! [low, indignant] I don't even put that pan in the DISHWASHER."
+   "script": "[warm Long Island accent, shocked, loud] That thing took my good twelve-cup PAN! [warm Long Island accent, low, indignant] I don't even put that pan in the DISHWASHER.",
+   "takeId": "gen-7c9a9079af"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "...and I only caught him because the hat kept getting taller. Where'd the muffins go?",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[finishing his story, pleased, has noticed nothing] ...and I only caught him because the hat kept getting TALLER. [mild, puzzled] Where'd the muffins go?"
+   "script": "[thick New York accent, finishing his story, pleased, has noticed nothing] ...and I only caught him because the hat kept getting TALLER. [thick New York accent, mild, puzzled] Where'd the muffins go?",
+   "takeId": "gen-963a76a198"
   },
   {
    "voice": "deedee",
    "speaker": "Deedee",
    "text": "A ball of mud came through the door and took them. Pan and all.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[brisk, matter of fact] A ball of mud came through the door and took them. Pan and all."
+   "script": "[warm Long Island accent, brisk, matter of fact] A ball of mud came through the door and took them. Pan and all.",
+   "takeId": "gen-fd223e6f4e"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "The mud gets a muffin and I don't?",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[hurt, baffled, punchline] The MUD gets a muffin and I don't?"
+   "script": "[thick New York accent, hurt, baffled, punchline] The MUD gets a muffin and I don't?",
+   "takeId": "gen-9262db09e3"
   },
   {
    "voice": "deedee",
    "speaker": "Deedee",
    "text": "Girls, sneakers. Tom, hold the door. Hubby, you stay right there. When we get them back, the first one's yours.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[charge nurse, fast] Girls, sneakers. Tom, hold the door. Hubby, you stay right there. [softer, a promise] When we get them back, the first one's yours."
+   "script": "[warm Long Island accent, charge nurse, fast] Girls, sneakers. Tom, hold the door. Hubby, you stay right there. [warm Long Island accent, softer, a promise] When we get them back, the first one's yours.",
+   "takeId": "gen-9a8743e26a"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "The first one. Tom, you heard her.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[satisfied, pointing] The FIRST one. Tom, you heard her."
+   "script": "[thick New York accent, satisfied, pointing] The FIRST one. Tom, you heard her.",
+   "takeId": "gen-45fffeff6e"
   },
   {
    "voice": "rose",
@@ -327,14 +337,16 @@
    "speaker": "Deedee",
    "text": "Girls, behind me. You three have till I count to three. Then I'm getting the hose.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[clipped, in charge] Girls, behind me. [low, slow, almost polite] You three have till I count to three. Then I'm getting the HOSE."
+   "script": "[warm Long Island accent, clipped, in charge] Girls, behind me. [warm Long Island accent, low, slow, almost polite] You three have till I count to three. Then I'm getting the HOSE.",
+   "takeId": "gen-b4a5b179b1"
   },
   {
    "voice": "deedee",
    "speaker": "Deedee",
    "text": "Three.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[flat, immediate, punchline] Three."
+   "script": "[warm Long Island accent, flat, immediate, punchline] Three.",
+   "takeId": "gen-3ce27d26ff"
   },
   {
    "voice": "grace",
@@ -348,14 +360,16 @@
    "speaker": "Deedee",
    "text": "Then it has three of my muffins and my pan. Keep walking.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[grim, decided] Then it has three of my muffins and my pan. Keep walking."
+   "script": "[warm Long Island accent, grim, decided] Then it has three of my muffins and my pan. Keep walking.",
+   "takeId": "gen-aac661e422"
   },
   {
    "voice": "rose",
    "speaker": "Rose",
    "text": "The grass is Boppy color!",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[delighted discovery] The grass is BOPPY color!"
+   "script": "[delighted discovery] The grass is Boppy color!",
+   "takeId": "gen-b57137737d"
   },
   {
    "voice": "grace",
@@ -418,7 +432,8 @@
    "speaker": "Deedee",
    "text": "A flashbulb, from an old camera. It's burnt. Somebody set it off right here and left it by your grandfather's chair.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[plain, certain] A flashbulb, from an old camera. It's burnt. [annoyed] Somebody set it off right here and left it by your grandfather's chair."
+   "script": "[warm Long Island accent, plain, certain] A flashbulb, from an old camera. It's burnt. [warm Long Island accent, annoyed] Somebody set it off right here and left it by your grandfather's chair.",
+   "takeId": "gen-b3d0c580e0"
   },
   {
    "voice": "grace",
@@ -460,7 +475,8 @@
    "speaker": "Deedee",
    "text": "For once in his life he rounded down.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[dry, staring up at it, punchline] For once in his life he rounded DOWN."
+   "script": "[warm Long Island accent, dry, staring up at it, punchline] For once in his life he rounded DOWN.",
+   "takeId": "gen-5bea1e0070"
   },
   {
    "voice": "bigone",
@@ -474,7 +490,8 @@
    "speaker": "Deedee",
    "text": "And that's my good twelve-cup pan on your head. It's never been in pond water in its life.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[sharp, pointing] And that's my good twelve-cup pan on your head. [offended, fast] It's never been in POND water in its life."
+   "script": "[warm Long Island accent, sharp, pointing] And that's my good twelve-cup pan on your head. [warm Long Island accent, offended, fast] It's never been in POND water in its life.",
+   "takeId": "gen-cf373863e9"
   },
   {
    "voice": "bigone",
@@ -495,7 +512,8 @@
    "speaker": "Deedee",
    "text": "I worked the night shift, Tom. I've walked up to worse. Mister, take off my pan.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[unbothered, brisk] I worked the night shift, Tom. I've walked up to worse. [firm, to the fish] Mister, take off my pan."
+   "script": "[warm Long Island accent, unbothered, brisk] I worked the night shift, Tom. I've walked up to worse. [warm Long Island accent, firm, to the fish] Mister, take off my pan.",
+   "takeId": "gen-703a64415f"
   },
   {
    "voice": "rose",
@@ -558,7 +576,8 @@
    "speaker": "Deedee",
    "text": "He's been in the middle of that one for fifty-one years.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[dry, level, punchline] He's been in the middle of that one for FIFTY-ONE years."
+   "script": "[warm Long Island accent, dry, level, punchline] He's been in the middle of that one for FIFTY-ONE years.",
+   "takeId": "gen-13309801f9"
   },
   {
    "voice": "rose",
@@ -572,14 +591,16 @@
    "speaker": "Boppy",
    "text": "CAR size? Cozy Rosie, I told everybody a couch. Twenty years! I didn't want to brag!",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[sharp lift, stunned] CAR size? [warm, goofy, injured] Cozy Rosie, I told everybody a COUCH. Twenty years! [punchline, big] I didn't want to BRAG!"
+   "script": "[thick New York accent, sharp lift, stunned] CAR size? [thick New York accent, warm, goofy, injured] Cozy Rosie, I told everybody a COUCH. Twenty years! [thick New York accent, punchline, big] I didn't want to BRAG!",
+   "takeId": "gen-b8a1c27f7b"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "Now that's real gold. Same as these. Look.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[impressed, slow] Now that's real gold. [proud] Same as these. Look."
+   "script": "[thick New York accent, impressed, slow] Now that's real gold. [thick New York accent, proud] Same as these. Look.",
+   "takeId": "gen-33bc69bfa3"
   },
   {
    "voice": "rose",
@@ -593,7 +614,8 @@
    "speaker": "Boppy",
    "text": "Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[certain, chatty] Safest place there is. [plain, a rule] Gold is for keeping, Cozy Rosie. [conspiring] You put that where nobody's going to LOOK."
+   "script": "[thick New York accent, certain, chatty] Safest place there is. [thick New York accent, plain, a rule] Gold is for keeping, Cozy Rosie. [thick New York accent, conspiring] You put that where nobody's going to LOOK.",
+   "takeId": "gen-43f302e790"
   },
   {
    "voice": "rose",
@@ -607,7 +629,8 @@
    "speaker": "Boppy",
    "text": "Good girl. Now. Your grandmother promised me the first muffin. Who's got my muffin?",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[pleased] Good girl. [turning to business] Now. Your grandmother promised me the first muffin. [looking around] Who's got my muffin?"
+   "script": "[thick New York accent, pleased] Good girl. [thick New York accent, turning to business] Now. Your grandmother promised me the first muffin. [thick New York accent, looking around] Who's got my muffin?",
+   "takeId": "gen-3a229228d7"
   },
   {
    "voice": "grace",
@@ -621,21 +644,24 @@
    "speaker": "Boppy",
    "text": "The fish gets THREE?",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[hurt, baffled, louder than before, punchline] The FISH gets THREE?"
+   "script": "[thick New York accent, hurt, baffled, louder than before, punchline] The FISH gets THREE?",
+   "takeId": "gen-cc222ac75f"
   },
   {
    "voice": "deedee",
    "speaker": "Deedee",
    "text": "Twelve more. Forty minutes. The first one's still yours.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[brisk, not looking up] Twelve more. Forty minutes. [quieter, plain] The first one's still yours."
+   "script": "[warm Long Island accent, brisk, not looking up] Twelve more. Forty minutes. [warm Long Island accent, quieter, plain] The first one's still yours.",
+   "takeId": "gen-f0a50ab922"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
    "text": "Girls, you heard that. Forty minutes. Somebody watch the clock.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[gleeful, showman] Girls, you heard that. FORTY minutes. Somebody watch the clock."
+   "script": "[thick New York accent, gleeful, showman] Girls, you heard that. FORTY minutes. Somebody watch the clock.",
+   "takeId": "gen-61edff9392"
   },
   {
    "voice": "grace",
@@ -684,7 +710,8 @@
    "speaker": "TNB",
    "text": "hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[mellow, easy] hey babe. safe flight. [tossed off] the smog over 2nd ave turned purple this morning. [punchline, level, light touch] it'll probably blow over."
+   "script": "[mellow, easy] hey babe. safe flight. [mellow, laid-back, low-key, tossed off] the smog over 2nd ave turned purple this morning. [mellow, laid-back, low-key, punchline, level, light touch] it'll probably blow over.",
+   "takeId": "gen-b73415a331"
   }
  ]
 }

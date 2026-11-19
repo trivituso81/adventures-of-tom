@@ -1,3 +1,14 @@
+## voicegen2 (2026-11-18): 256 generated voice takes merged into the game (chapters 1, 2, 6 and 8); 2 lines stay silent
+
+Ran the `voice-gen` job for every line with no clip (limit 0, 253 lines tried after the 5 made in voicegen1c). Result: 251 clips made, 6 takes regenerated once (3+ extra words), 2 lines on needs-human (no clip made), 0 errors. 28,620 characters sent; the account went from 162,843 to 175,506 of 600,000 credits: **12,663 credits (about 0.44 per character sent)**, a little above the 11,000 estimate. All 256 `export-*.json` files (251 + the 5 from voicegen1c) merged per "Phone clip exports": dialog-ch1.js +73, dialog-ch2.js +6, dialog-ch6.js +3, dialog-ch8.js +174; 65 kept scripts written (the rest unchanged). The voice index now lists 2 dialogue lines with no clip (was 258).
+
+| Still silent (needs-human, failed the words check twice) | Voice |
+|---|---|
+| I've got it. Nobody get up. | michael |
+| That'll be from her. | washington |
+
+Not done: new clips are not loudness levelled (they sit at a different level from the same voice's older clips; levelling needs a per-voice playback gain, a separate build). `unused_voice.py` check 4 still lists the same 93 older lines as before this build; nothing new. Tom has not listened to these takes.
+
 ## voicegen1c (2026-11-18): Voice take job: first real result noted (5 lines made, 245 credits); notes only, no game change
 
 - The 5-line run after the voicegen1b fix (Actions run 44449938129): 5 clips on branch `generated` (tom, tnb, grace, bigone, bernadette), none flagged, none regenerated, 623 characters sent, the account's character count rose by 245 (162,540 to 162,785 of 600,000, tier `pro`): about 0.39 credits per character sent, from this one sample. The other 253 lines would be about 27,800 characters, roughly 11,000 credits (plan's upper bound 29,700). The takes were transcribed again here: right words, no loops. `merge-local.js` reads the export unchanged (tried into a scratch folder; nothing merged). Table in `tools/voice-learn/GENERATION_JOB_PLAN.md`.

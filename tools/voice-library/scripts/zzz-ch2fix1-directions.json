@@ -196,7 +196,8 @@
    "speaker": "TNB",
    "text": "Scarier than movie night. Remember? You threw the whole popcorn bowl.",
    "ctx": "chapter 2 (ch2fix1: TNB mellow)",
-   "script": "[low-key, amused] Scarier than movie night. [dry, teasing] Remember? You threw the whole popcorn bowl."
+   "script": "[mellow, laid-back, low-key, low-key, amused] Scarier than movie night. [mellow, laid-back, low-key, dry, teasing] Remember? You threw the whole popcorn bowl.",
+   "takeId": "gen-230ce25b15"
   },
   {
    "voice": "tnb",

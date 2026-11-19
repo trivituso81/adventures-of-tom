@@ -21,7 +21,8 @@
    "speaker": "TNB",
    "text": "Welcome home. Don't open the salad spinner. That's loaf thirty-one.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, warm] welcome home. [easy, matter-of-fact] don't open the salad spinner. [relaxed] that's loaf thirty-one."
+   "script": "[mellow, warm] welcome home. [mellow, laid-back, low-key, easy, matter-of-fact] don't open the salad spinner. [mellow, laid-back, low-key, relaxed] that's loaf thirty-one.",
+   "takeId": "gen-485e8d4883"
   },
   {
    "voice": "tom",
@@ -35,7 +36,8 @@
    "speaker": "TNB",
    "text": "Bready Mercury was climbing out of the crock at five this morning. I wasn't going to argue with him.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, easy] bready mercury was climbing out of the crock at five this morning. [shrugging, unbothered] i wasn't going to argue with him."
+   "script": "[mellow, easy] bready mercury was climbing out of the crock at five this morning. [mellow, laid-back, low-key, shrugging, unbothered] i wasn't going to argue with him.",
+   "takeId": "gen-a31402e64b"
   },
   {
    "voice": "tom",
@@ -49,7 +51,8 @@
    "speaker": "TNB",
    "text": "So we bring twenty-four and tell Bernadette it's a tasting menu.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, easy] so we bring twenty-four and tell bernadette [punchline, deadpan] it's a tasting menu."
+   "script": "[mellow, easy] so we bring twenty-four and tell bernadette [mellow, laid-back, low-key, punchline, deadpan] it's a tasting menu.",
+   "takeId": "gen-3ed6fcbcb6"
   },
   {
    "voice": "tom",
@@ -77,7 +80,8 @@
    "speaker": "TNB",
    "text": "I said, 'Great note, Bernadette.' Then she stood there waiting for me to move them, and I opened a soda.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, easy] i said, great note, bernadette. [lazy, amused] then she stood there waiting for me to move them, [unhurried, deadpan] and i opened a soda."
+   "script": "[mellow, easy] i said, great note, bernadette. [mellow, laid-back, low-key, lazy, amused] then she stood there waiting for me to move them, [mellow, laid-back, low-key, unhurried, deadpan] and i opened a soda.",
+   "takeId": "gen-498cf10aa3"
   },
   {
    "voice": "tom",
@@ -98,7 +102,8 @@
    "speaker": "TNB",
    "text": "I've seen this movie, you know. The lady who runs the potluck always has something in her basement.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, knowing] i've seen this movie, you know. [easy, lightly ominous] the lady who runs the potluck always has something in her basement."
+   "script": "[mellow, knowing] i've seen this movie, you know. [mellow, laid-back, low-key, easy, lightly ominous] the lady who runs the potluck always has something in her basement.",
+   "takeId": "gen-1deebda4a5"
   },
   {
    "voice": "tom",
@@ -112,14 +117,16 @@
    "speaker": "TNB",
    "text": "Two padlocks. On a shed.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, quietly thrilled] two padlocks. [slow, savoring] on a shed."
+   "script": "[mellow, quietly thrilled] two padlocks. [mellow, laid-back, low-key, slow, savoring] on a shed.",
+   "takeId": "gen-579ce705de"
   },
   {
    "voice": "washington",
    "speaker": "Mr. Washington",
    "text": "Tom! Get out here and look at my roses!",
    "ctx": "chapter 8 (new)",
-   "script": "[shouting from the street, indignant] Tom! [loud, aggrieved] Get out here and look at my ROSES!"
+   "script": "[older African American man, warm Louisiana drawl, shouting from the street, indignant] Tom! [older African American man, warm Louisiana drawl, loud, aggrieved] Get out here and look at my ROSES!",
+   "takeId": "gen-524b3e6718"
   },
   {
    "voice": "tom",
@@ -133,14 +140,16 @@
    "speaker": "Mr. Washington",
    "text": "And the red's gone out of everything around it. The roses, the lawn, my good hose. All grey.",
    "ctx": "chapter 8 (new)",
-   "script": "[bitter, aggrieved] And the red's gone out of everything around it. [pained, listing] The roses, the lawn, my good HOSE. [flat, hurt] All grey."
+   "script": "[older African American man, warm Louisiana drawl, bitter, aggrieved] And the red's gone out of everything around it. [older African American man, warm Louisiana drawl, pained, listing] The roses, the lawn, my good HOSE. [older African American man, warm Louisiana drawl, flat, hurt] All grey.",
+   "takeId": "gen-186bfefe3d"
   },
   {
    "voice": "washington",
    "speaker": "Mr. Washington",
    "text": "You're the one who's always on a plane, Tom. Did you bring this home with you?",
    "ctx": "chapter 8 (new)",
-   "script": "[suspicious, pointed] You're the one who's always on a plane, Tom. [narrowed, accusing] Did you bring this home with you?"
+   "script": "[older African American man, warm Louisiana drawl, suspicious, pointed] You're the one who's always on a plane, Tom. [older African American man, warm Louisiana drawl, narrowed, accusing] Did you bring this home with you?",
+   "takeId": "gen-1a32affb9a"
   },
   {
    "voice": "tom",
@@ -154,14 +163,16 @@
    "speaker": "Mr. Washington",
    "text": "Seven. And it never once came up at a block meeting.",
    "ctx": "chapter 8 (new)",
-   "script": "[dry, stunned] Seven. [wounded, pedantic] And it never once came up at a block meeting."
+   "script": "[older African American man, warm Louisiana drawl, dry, stunned] Seven. [older African American man, warm Louisiana drawl, wounded, pedantic] And it never once came up at a block meeting.",
+   "takeId": "gen-8576b1f6fa"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "I'm going to stand over here, on the part of the sidewalk that still has a color.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, polite] i'm going to stand over here, [calm, firm] on the part of the sidewalk that still has a color."
+   "script": "[mellow, polite] i'm going to stand over here, [mellow, laid-back, low-key, calm, firm] on the part of the sidewalk that still has a color.",
+   "takeId": "gen-820b3952cc"
   },
   {
    "voice": "tom",
@@ -175,7 +186,8 @@
    "speaker": "TNB",
    "text": "That's what I don't like about it. The dough rises. The dog jumps. That thing is just waiting.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, uneasy] that's what i don't like about it. [low, thoughtful] the dough rises. the dog jumps. [quiet, ominous] that thing is just waiting."
+   "script": "[mellow, uneasy] that's what i don't like about it. [mellow, laid-back, low-key, low, thoughtful] the dough rises. the dog jumps. [mellow, laid-back, low-key, quiet, ominous] that thing is just waiting.",
+   "takeId": "gen-8527be5e2d"
   },
   {
    "voice": "tom",
@@ -252,7 +264,8 @@
    "speaker": "Mr. Washington",
    "text": "The only thing at the end of the boulevard is the old Car Barn. My father drove the night streetcar out of it.",
    "ctx": "chapter 8 (new)",
-   "script": "[thoughtful, gruff] The only thing at the end of the boulevard is the old Car Barn. [quieter, proud] My father drove the night streetcar out of it."
+   "script": "[older African American man, warm Louisiana drawl, thoughtful, gruff] The only thing at the end of the boulevard is the old Car Barn. [older African American man, warm Louisiana drawl, quieter, proud] My father drove the night streetcar out of it.",
+   "takeId": "gen-f8838cc7e4"
   },
   {
    "voice": "bernadette",
@@ -315,7 +328,8 @@
    "speaker": "TNB",
    "text": "Is that the chart? It has a key. It's color coded. That's the wall the detective has right before they take his badge away.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, impressed] is that the chart? it has a key. it's color coded. [easy, delighted] that's the wall the detective has right before they take his badge away."
+   "script": "[mellow, impressed] is that the chart? it has a key. it's color coded. [mellow, laid-back, low-key, easy, delighted] that's the wall the detective has right before they take his badge away.",
+   "takeId": "gen-574079add8"
   },
   {
    "voice": "grace",
@@ -406,7 +420,8 @@
    "speaker": "TNB",
    "text": "I watch a lot of scary movies. That was good, though. Top ten.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, fair] i watch a lot of scary movies. [easy, generous] that was good, though. [warm, deadpan] top ten."
+   "script": "[mellow, fair] i watch a lot of scary movies. [mellow, laid-back, low-key, easy, generous] that was good, though. [mellow, laid-back, low-key, warm, deadpan] top ten.",
+   "takeId": "gen-7cd8b5fca2"
   },
   {
    "voice": "rose",
@@ -448,7 +463,8 @@
    "speaker": "TNB",
    "text": "Through the dog door. Nara's never once used the dog door.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, wondering] through the dog door. [dry, amazed] nara's never once used the dog door."
+   "script": "[mellow, wondering] through the dog door. [mellow, laid-back, low-key, dry, amazed] nara's never once used the dog door.",
+   "takeId": "gen-52a4ca4479"
   },
   {
    "voice": "tom",
@@ -462,7 +478,8 @@
    "speaker": "TNB",
    "text": "Then I guess we're following a flame down the street. Bring the dough. I'm not leaving loaf thirty-one alone with the dog.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, resigned] then i guess we're following a flame down the street. [easy, practical] bring the dough. [deadpan] i'm not leaving loaf thirty-one alone with the dog."
+   "script": "[mellow, resigned] then i guess we're following a flame down the street. [mellow, laid-back, low-key, easy, practical] bring the dough. [mellow, laid-back, low-key, deadpan] i'm not leaving loaf thirty-one alone with the dog.",
+   "takeId": "gen-326e768e29"
   },
   {
    "voice": "odette",
@@ -511,7 +528,8 @@
    "speaker": "TNB",
    "text": "It's grape. Do you want one?",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, helpful] it's grape. [easy, generous] do you want one?"
+   "script": "[mellow, helpful] it's grape. [mellow, laid-back, low-key, easy, generous] do you want one?",
+   "takeId": "gen-19b3864bbf"
   },
   {
    "voice": "carmen",
@@ -560,7 +578,8 @@
    "speaker": "TNB",
    "text": "Chained from the outside since 1963. You lock a building to keep people out. You chain it to keep something in.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, low] chained from the outside since nineteen sixty-three. [quiet, thoughtful] you lock a building to keep people out. [slow, ominous] you chain it to keep something in."
+   "script": "[mellow, low] chained from the outside since nineteen sixty-three. [mellow, laid-back, low-key, quiet, thoughtful] you lock a building to keep people out. [mellow, laid-back, low-key, slow, ominous] you chain it to keep something in.",
+   "takeId": "gen-a1e821263a"
   },
   {
    "voice": "tom",
@@ -574,7 +593,8 @@
    "speaker": "TNB",
    "text": "Oh, we're going in. I just want it on the record that I knew.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, cheerful] oh, we're going in. [easy, wry] i just want it on the record that i knew."
+   "script": "[mellow, cheerful] oh, we're going in. [mellow, laid-back, low-key, easy, wry] i just want it on the record that i knew.",
+   "takeId": "gen-74c116e4f7"
   },
   {
    "voice": "bernadette",
@@ -588,7 +608,8 @@
    "speaker": "TNB",
    "text": "Tom. That's a turntable. They used to spin a whole streetcar on that.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, hushed, thrilled] tom. that's a turntable. [reverent, quiet] they used to spin a whole streetcar on that."
+   "script": "[mellow, hushed, thrilled] tom. that's a turntable. [mellow, laid-back, low-key, reverent, quiet] they used to spin a whole streetcar on that.",
+   "takeId": "gen-cb7cefb5d7"
   },
   {
    "voice": "tom",
@@ -602,7 +623,8 @@
    "speaker": "TNB",
    "text": "I need about an hour. But go ahead.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, dreamy] i need about an hour. [easy, generous] but go ahead."
+   "script": "[mellow, dreamy] i need about an hour. [mellow, laid-back, low-key, easy, generous] but go ahead.",
+   "takeId": "gen-2a2a4d8d78"
   },
   {
    "voice": "log",
@@ -623,7 +645,8 @@
    "speaker": "TNB",
    "text": "It's a wet blanket. I'm not making a joke. Look at it.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, earnest] it's a wet blanket. [easy, deadpan] i'm not making a joke. [calm] look at it."
+   "script": "[mellow, earnest] it's a wet blanket. [mellow, laid-back, low-key, easy, deadpan] i'm not making a joke. [mellow, laid-back, low-key, calm] look at it.",
+   "takeId": "gen-c7eb5c79db"
   },
   {
    "voice": "log",
@@ -672,7 +695,8 @@
    "speaker": "TNB",
    "text": "Hi. We can hear you.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, polite] hi. [easy, amused] we can hear you."
+   "script": "[mellow, polite] hi. [mellow, laid-back, low-key, easy, amused] we can hear you.",
+   "takeId": "gen-63392fe946"
   },
   {
    "voice": "skeeter",
@@ -735,7 +759,8 @@
    "speaker": "TNB",
    "text": "You've got a flame in there. You could warm something up.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, helpful] you've got a flame in there. [easy, practical] you could warm something up."
+   "script": "[mellow, helpful] you've got a flame in there. [mellow, laid-back, low-key, easy, practical] you could warm something up.",
+   "takeId": "gen-6c07ef46b7"
   },
   {
    "voice": "toad",
@@ -763,14 +788,16 @@
    "speaker": "TNB",
    "text": "Three flames, one motor. On set I once fixed a zipper with a paper clip while the actor was still walking. This thing's holding still.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, focused] three flames, one motor. [easy, remembering] on set i once fixed a zipper with a paper clip while the actor was still walking. [confident, calm] this thing's holding still."
+   "script": "[mellow, focused] three flames, one motor. [mellow, laid-back, low-key, easy, remembering] on set i once fixed a zipper with a paper clip while the actor was still walking. [mellow, laid-back, low-key, confident, calm] this thing's holding still.",
+   "takeId": "gen-b42ce9833b"
   },
   {
    "voice": "tnb",
    "speaker": "TNB",
    "text": "It says Boiler Room. I'm just reading it out loud so we both know.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, wry] it says boiler room. [easy, deadpan] i'm just reading it out loud so we both know."
+   "script": "[mellow, wry] it says boiler room. [mellow, laid-back, low-key, easy, deadpan] i'm just reading it out loud so we both know.",
+   "takeId": "gen-3229089bda"
   },
   {
    "voice": "tom",
@@ -784,7 +811,8 @@
    "speaker": "TNB",
    "text": "No, you go. You're the one who's polite to things.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, amused] no, you go. [warm, teasing] you're the one who's polite to things."
+   "script": "[mellow, amused] no, you go. [mellow, laid-back, low-key, warm, teasing] you're the one who's polite to things.",
+   "takeId": "gen-5a9383757d"
   },
   {
    "voice": "bigone",
@@ -994,14 +1022,16 @@
    "speaker": "Mr. Washington",
    "text": "If this turns out to be a parking meter, I'm going to be upset.",
    "ctx": "chapter 8 (new)",
-   "script": "[gruff, suspicious] If this turns out to be a parking meter, [dry, warning] I'm going to be upset."
+   "script": "[older African American man, warm Louisiana drawl, gruff, suspicious] If this turns out to be a parking meter, [older African American man, warm Louisiana drawl, dry, warning] I'm going to be upset.",
+   "takeId": "gen-71e808c53f"
   },
   {
    "voice": "washington",
    "speaker": "Mr. Washington",
    "text": "'Trim to regulation height.' Bernadette, you taped a notice to my roses.",
    "ctx": "chapter 8 (new)",
-   "script": "[reading, flat] Trim to regulation height. [disbelieving, turning] Bernadette, you taped a notice to my ROSES."
+   "script": "[older African American man, warm Louisiana drawl, reading, flat] Trim to regulation height. [older African American man, warm Louisiana drawl, disbelieving, turning] Bernadette, you taped a notice to my ROSES.",
+   "takeId": "gen-6750a7b275"
   },
   {
    "voice": "bernadette",
@@ -1015,7 +1045,8 @@
    "speaker": "Mr. Washington",
    "text": "It was inside a block all day.",
    "ctx": "chapter 8 (new)",
-   "script": "[dry, incredulous] It was inside a block all DAY."
+   "script": "[older African American man, warm Louisiana drawl, dry, incredulous] It was inside a block all DAY.",
+   "takeId": "gen-d26440dad9"
   },
   {
    "voice": "bernadette",
@@ -1029,7 +1060,8 @@
    "speaker": "TNB",
    "text": "Okay. Now I'll stand on the lawn.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, relieved] okay. [easy, content] now i'll stand on the lawn."
+   "script": "[mellow, relieved] okay. [mellow, laid-back, low-key, easy, content] now i'll stand on the lawn.",
+   "takeId": "gen-3d41024e29"
   },
   {
    "voice": "bernadette",
@@ -1162,7 +1194,8 @@
    "speaker": "Mr. Washington",
    "text": "Hold on. This is the Car Barn loaf. My father brought one home every morning until they shut that place. Who baked this?",
    "ctx": "chapter 8 (new)",
-   "script": "[slow, stopped short] Hold on. [quiet, wondering] This is the Car Barn loaf. [soft, remembering] My father brought one home every morning until they shut that place. [gruff, asking] Who baked this?"
+   "script": "[older African American man, warm Louisiana drawl, slow, stopped short] Hold on. [older African American man, warm Louisiana drawl, quiet, wondering] This is the Car Barn loaf. [older African American man, warm Louisiana drawl, soft, remembering] My father brought one home every morning until they shut that place. [older African American man, warm Louisiana drawl, gruff, asking] Who baked this?",
+   "takeId": "gen-e2e1dda58a"
   },
   {
    "voice": "tom",
@@ -1176,7 +1209,8 @@
    "speaker": "Mr. Washington",
    "text": "Well, he took his time about it. You know, in 1979, when I bought that house...",
    "ctx": "chapter 8 (new)",
-   "script": "[gruff, softening] Well, he took his time about it. [settling in, storyteller] You know, in nineteen seventy-nine, when I bought that house..."
+   "script": "[older African American man, warm Louisiana drawl, gruff, softening] Well, he took his time about it. [older African American man, warm Louisiana drawl, settling in, storyteller] You know, in nineteen seventy-nine, when I bought that house...",
+   "takeId": "gen-19755da81b"
   },
   {
    "voice": "odette",
@@ -1190,7 +1224,8 @@
    "speaker": "Mr. Washington",
    "text": "I'm glad somebody on this street listens.",
    "ctx": "chapter 8 (new)",
-   "script": "[dry, satisfied] I'm glad somebody on this street LISTENS."
+   "script": "[older African American man, warm Louisiana drawl, dry, satisfied] I'm glad somebody on this street LISTENS.",
+   "takeId": "gen-92ad2d1e3b"
   },
   {
    "voice": "deedee",
@@ -1232,7 +1267,8 @@
    "speaker": "TNB",
    "text": "I figured. Take a loaf for your mom.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, easy] i figured. [warm] take a loaf for your mom."
+   "script": "[mellow, easy] i figured. [mellow, laid-back, low-key, warm] take a loaf for your mom.",
+   "takeId": "gen-390aab3337"
   },
   {
    "voice": "tom",
@@ -1246,7 +1282,8 @@
    "speaker": "TNB",
    "text": "We're fine. She thinks I moved the bowls.",
    "ctx": "chapter 8 (new)",
-   "script": "[mellow, content] we're fine. [easy, deadpan] she thinks i moved the bowls."
+   "script": "[mellow, content] we're fine. [mellow, laid-back, low-key, easy, deadpan] she thinks i moved the bowls.",
+   "takeId": "gen-b10ed503c1"
   }
  ]
 }
