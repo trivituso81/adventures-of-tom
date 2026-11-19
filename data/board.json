@@ -406,6 +406,60 @@
     "effort": "medium (steps are known; tile coordinates are settled by looking at frames)",
     "text": "Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 3 (cutpolish3). You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "t-milestonea",
+   "title": "Milestone A: play the new battle (stages 1 to 8)",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "next": "ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE, then THE BIG ONE (and NEW 1 with Rose Mode on in settings). About 30 minutes. Judge: the pace of the video attacks and the wait for a clip, how the crossing to the monster looks, whether the turn bar reads in portrait, and Rose Mode (picture menus, the starred move). Send your notes to the stage 9 session; they come first. Steps were in the b3s8 closing reply.",
+   "blocks": [
+    "c-b3s9"
+   ],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board refresh: stage 8 shipped, milestone A is your check (claude/battle-build.md)."
+    }
+   ]
+  },
+  {
+   "id": "c-b3s9",
+   "title": "New battle system, stage 9: first late joiners and the next kits",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "next": "Builds stage 9 as the architecture section 5 row 9 says. Read that row, claude/battle-kit-ops.md, docs/BATTLE3.md and docs/handoff/b3s8.md. Milestone A notes from Tom are handled first.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board refresh: next stage after b3s8."
+    }
+   ],
+   "prompt": {
+    "what": "Builds stage 9 of the new battle system (late joiners and the next characters' kits), after handling any milestone A notes.",
+    "before": [
+     "Play milestone A (card \"Milestone A: play the new battle\") and have notes ready, or say you have none."
+    ],
+    "model": "Claude Opus 5.5 (row D: 12 of the lines need their own function; Sonnet 5.5 if the session splits it like 5a to 5c)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/battle-build.md and build stage 9 of the new battle system. You have my full permission to access the repo."
+   }
   }
  ]
 }

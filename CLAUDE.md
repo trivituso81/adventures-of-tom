@@ -27,6 +27,16 @@ Tom: "I would love for your first statement to me to be what you actually did...
 
 Then only what he needs to judge the work (decisions I made, one line each). The two-line handoff and next prompt at the end of a session stay as before.
 
+## The board: check every request against it (standing rule, Tom 2026-11-19 12:42)
+
+Tom: "for any conversation i initiate, check against the board to see if it's an update or change to an existing item, or a new item needs to be added." `data/board.json` (ADMIN > BOARD) is the one list of open work. Rules in `claude/handoff-rules.md` section "The board"; facts in `claude/next-addendum-board1.md`. In short, at the START of every session, whatever Tom opens with, read the board and decide which of these his request is, and say it in the first line of your reply ("Board: updates card X", "Board: new card Y", "Board: no change"):
+
+- **Update or change to an existing card** (more work on it, feedback on it, it is finished, it is no longer wanted): change that card (move it, rewrite `next`, add a history line quoting his words, mark it Done or remove it).
+- **A new item** (work that will outlast this reply: a build, a fix, something Tom must do or decide, a wait on a service): add a card in the same push (lane, theme, next step, and for Claude work the full prompt with before-steps, model and effort).
+- **No change** (a question, a lookup, a one-off answer).
+
+A request that makes other cards obsolete retires them. Push the board change with the work (or alone, tag `board-<short>`), run `python3 tools/board_check.py`, and finish with "Theme: <theme>. Pending your action: yes/no."
+
 ## Hard rules
 
 1. **Everything is a classic script in one shared global scope.** No ES modules, no import/export, no bundler. Files load in the order of the `<script>` tags in `index.html`. A new file must be added to `index.html` at the right point. See `docs/ARCHITECTURE.md` for the load order and what each group depends on.

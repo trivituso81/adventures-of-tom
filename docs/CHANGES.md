@@ -1,3 +1,7 @@
+## boardrule1 (2026-11-19): Board refresh: milestone A and stage 9 added; every session now checks Tom's request against the board
+
+- Added Tom's "Milestone A: play the new battle" card (blocks stage 9) and Claude's stage 9 card (Waiting on Tom). New standing rule (Tom 11-19 12:42), in CLAUDE.md and claude/handoff-rules.md: at the start of every session the request is checked against `data/board.json` and the reply's first line says "Board: updates card X", "Board: new card Y" or "Board: no change". Data and docs only.
+
 ## cutpolish2 (2026-11-19): Cutscene poses are sharp from the first frame, foot shadows stop ballooning, Tom's Pose Editor sizes are applied to feelings and talking poses
 
 - Plan: claude/cutscene-polish-plan.md phase 2 of 5. Audit items fixed: 2a (blurry poses), 2b (size jumps, for the poses Tom lined). No dialogue changes.
