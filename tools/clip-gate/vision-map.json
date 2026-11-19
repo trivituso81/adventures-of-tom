@@ -1,0 +1,21 @@
+{
+ "about": "Which vision question answers each look fault Tom named in his chapter 1 review (clipgate2). Key: fault, then the move (or * for any move not listed); value: the question ids, any one answered no counts. Written from what each fault means, not from the clips' own notes. Used by tools/clip-gate/replay_vision.py.",
+ "look": {
+  "face": {"hit": ["h_grimace"], "ko": ["k_dizzy"]},
+  "reads": {"guard": ["g_cover"], "run": ["r_stride"], "victory": ["v_big"], "*": ["n_name", "n_nowave"]},
+  "unclear": {"run": ["r_stride"], "*": ["n_name", "n_nowave"]},
+  "prop": {"*": ["p_noobj", "p_parts", "p_same"]},
+  "physics": {"idle": ["m_pupils", "m_drops"]},
+  "blink": {"idle": ["m_blink_quick"]},
+  "still": {"idle": ["m_animated"]}
+ },
+ "crosscheck": {
+  "hit_back": {"*": ["h_stagger"]},
+  "dodge_back": {"*": ["d_back"]},
+  "ko_back": {"*": ["k_back"]},
+  "hop": {"*": ["k_nohop"]},
+  "pose_drift": {"*": ["i_relaxed"]},
+  "blink": {"people": ["i_blink"]}
+ },
+ "not_gated": {"length": "A bake setting (clip.speed) and a matter of taste: approved and rejected clips overlap at 1.4 to 2.1 s, so no honest measure separates them. Fixed in clipch1fix (moves at speed 1.0 except give)."}
+}
