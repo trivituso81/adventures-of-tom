@@ -39,11 +39,20 @@ const LOOK_FOE = 'IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exact
 // "youre overcorrecting, swinging like a pendulum between extremes". When a prompt misses, start from the closest version that
 // worked and change the one thing the note names (repo CLAUDE.md, "Fix a miss with the smallest change").
 const BOOP_APPROVED = "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SINGLE INDEX FINGER TAP\nFrom her starting relaxed stance, she smiles, rises onto her tiptoes, and smoothly extends one arm straight forward to the left at nose height, tapping the air once with a single extended index finger. Without repeating the gesture, she immediately pulls her arm back, settles onto flat feet with both hands resting on her hips, and remains completely still in that proud, smiling pose for the rest of the clip.";
+// KO: Rose knocked out (clipko1, 2026-11-18). A TEST, from claude/battle-animation-list-ch1-v11.md section 7 row 3: ONE clip, Rose
+// (a child is the likeliest to be refused, so a pass covers everyone). Tom 16:47: "sleeping is not KO its sleep status", so the nap
+// is not her KO. Tom 16:56: "i think we can try to override that rule" (the rule against knocked-out wording in character prompts):
+// this prompt says "knocked out" once. It is BOOP_APPROVED with only the MOTION part changed (repo CLAUDE.md, "Fix a miss with the
+// smallest change"). If the generator refuses or softens it, the one fallback try is the same text with ", knocked out" removed.
+const KO_TEST = BOOP_APPROVED.slice(0, BOOP_APPROVED.indexOf('MOTION:')) + "MOTION: KNOCKED OUT\nFrom her starting relaxed stance, she wobbles once, sits down hard on the same spot, and tips over onto her back with her arms out to the sides and her eyes closed, knocked out. Without getting up, she stays lying flat on her back and remains completely still in that pose for the rest of the clip.";
 const G15 = 'grok-imagine-video-1.5', LITE = G15 + '-lite', ROSE = 'art/clips/start/rose.png';
 const entries = [
   { id: 'clip-rose-boop', tab: 'Clips', group: 'Rose', title: 'Rose: Boop (one sharp finger jab) video clip', ar: '4:3', refs: [ROSE],
     clip: { id: 'rose-boop', owner: 'rose', start: ROSE, model: LITE, res: '480p', dur: 3, figRows: 83, step: 3, speed: 1.5 },
     prompt: BOOP_APPROVED },
+  { id: 'clip-rose-ko', tab: 'Clips', group: 'Rose', title: 'Rose: knocked out (TEST: does the video model accept the words) video clip', ar: '4:3', refs: [ROSE],
+    clip: { id: 'rose-ko', owner: 'rose', start: ROSE, model: LITE, res: '480p', dur: 3, figRows: 83, step: 2, speed: 1.5, kind: 'state' },
+    prompt: KO_TEST },
   { id: 'clip-rose-sleep', tab: 'Clips', group: 'Rose', title: 'Rose: gets sleepy and lies down (out of the fight) video clip', ar: '4:3', refs: [ROSE],
     clip: { id: 'rose-sleep', owner: 'rose', start: ROSE, model: G15, res: '480p', dur: 4, figRows: 83, step: 2, speed: 1.5, kind: 'state' },
     prompt: LOOK.replace('Feet stay on the same ground line. Walking away from or toward the camera is not allowed.', 'The character stays in the same place in the frame and ends resting on the same line where the feet stand in the attached picture. Walking away from or toward the camera is not allowed.') +

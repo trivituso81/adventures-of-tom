@@ -50,6 +50,8 @@ function bclipWanted() {
 function bclipLoopFrame(C,ms) { const t=ms%(2*C.dur); return bclipFrameAt(C,t>=C.dur?2*C.dur-t-1:t); }
 function bclipFor(owner,kind) {
   if(typeof B2==='undefined'||!B2.active||!B2.labClip) return null;
+  const ko=BCLIPS[owner+'_ko'];   // clipko1: a knocked-out clip beats any other state clip (the nap is a Sleep status, Tom 2026-11-18)
+  if(kind==='state'&&ko&&bclipReady(ko.id)) return ko;
   for(const id in BCLIPS) { const C=BCLIPS[id]; if(C.owner===owner&&C.kind===kind&&bclipReady(id)) return C; }
   return null;
 }

@@ -126,7 +126,7 @@ def study_run(br, video):
         pg.goto(URL); pg.evaluate("()=>{ localStorage.setItem('aot-art-key','test'); localStorage.setItem('aot-gh-token','test'); localStorage.removeItem('aot-art-spend'); localStorage.removeItem('aot-clip-pending'); }")
         pg.goto(URL); pg.wait_for_selector('[data-tab="Clips"]'); pg.click('[data-tab="Clips"]'); pg.evaluate("()=>{ UI.filter='all'; paintList(); }")
         ids = pg.evaluate("()=>DATA.entries.filter(e=>e.clip).map(e=>e.id+':'+e.clip.model+':'+e.clip.dur+':'+clipCost(e).toFixed(2))")
-        ok(ids == ['clip-rose-boop:grok-imagine-video-1.5-lite:3:0.07', 'clip-rose-sleep:grok-imagine-video-1.5:4:0.33', 'clip-mudling-idle:grok-imagine-video-1.5:3:0.25'], f'study: the three clip entries with their models, lengths and prices {ids}')
+        ok(ids == ['clip-rose-boop:grok-imagine-video-1.5-lite:3:0.07', 'clip-rose-ko:grok-imagine-video-1.5-lite:3:0.07', 'clip-rose-sleep:grok-imagine-video-1.5:4:0.33', 'clip-mudling-idle:grok-imagine-video-1.5:3:0.25'], f'study: the four clip entries with their models, lengths and prices {ids}')
         pg.evaluate("()=>{ ENTRY['clip-rose-boop'].clip.test=true; paintList(); }")   # no study entry is left: the Boop entry is flagged as one for this run
         if not pg.locator(f'[data-toggle="{SID}"]').count(): pg.click('[data-grp="Clips|Rose"]')
         if not pg.locator(f'.card[data-id="{SID}"]').count(): pg.click(f'[data-toggle="{SID}"]')

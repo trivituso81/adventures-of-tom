@@ -1,3 +1,11 @@
+## clipko1 (2026-11-18): animation test: a Rose knocked-out video entry in the Art Library, to see if the video model accepts the words "knocked out"
+
+- New Library entry `clip-rose-ko` (Clips > Rose, clip id `rose-ko`): cheap model, 3 s, start picture `art/clips/start/rose.png`, kind `state` (START and END marks, last picture held), step 2, speed 1.5. About $0.07. No video made.
+- Prompt `KO_TEST` in `tools/art-library/clip-prompts.js`: `BOOP_APPROVED` word for word with only the MOTION part changed (she wobbles once, sits down hard on the same spot, tips onto her back with arms out and eyes closed, knocked out, stays still). Kept: WHAT THIS IS, CAMERA AND BACKGROUND (facing left, feet on the same spot). 143 words. Source: claude/battle-animation-list-ch1-v11.md section 7 row 3; Tom 16:47 "sleeping is not KO its sleep status", Tom 16:56 "i think we can try to override that rule". If refused or softened, the one fallback try is the same text without ", knocked out".
+- `bclipFor` (`engine/clips.js`): when a `<owner>_ko` clip exists it is that person's out-of-the-fight clip, ahead of the nap. Until the KO is approved and baked, nothing changes (the nap still plays in CLIP TEST: SLEEPY ROSE).
+- `validate.js` warns `soft word: knocked` and `banned word: sprite` on the new entry: both deliberate (the test, and the approved Boop text).
+- Tests: clip_lib_test (now expects four clip entries), clip_test, clip_kinds_test, smoke.
+
 ## b3s4 (2026-11-18): New battle, stage 4: Vibes. A Main and a Pocket Vibe each, Ranks, Leans, rows, and a Vibes screen in the pause menu and the Battle Lab
 
 - Stage 4 of 23 of the new battle system ("Battle 3", `docs/BATTLE3.md`, plan `claude/battle-architecture.md` in the Project). Story fights still use the old battle and nothing in it changed.
