@@ -82,6 +82,10 @@ class AuthError(Exception):
     pass
 
 
+class CheckError(Exception):
+    pass
+
+
 def tts(session, key, vcfg, script, seed):
     """One text-to-speech request. Returns mp3 bytes. Same body as the Voice Library (voices.html tts)."""
     ids = [vcfg['voice_id']] + [x for x in (vcfg.get('fallback_ids') or []) if x and x != vcfg['voice_id']]
@@ -123,6 +127,16 @@ def usage(session, key):
     except Exception:
         pass
     return None
+
+
+def preflight(guard):
+    """Run the transcript check once on a 0.3 s tone BEFORE any paid request, so a missing ffmpeg or model
+    stops the run with nothing spent (voicegen1: the first real run had no ffmpeg on the runner and lost 5 paid takes)."""
+    import subprocess
+    r = subprocess.run(['ffmpeg', '-v', 'error', '-f', 'lavfi', '-i', 'sine=frequency=440:duration=0.3', '-f', 'mp3', 'pipe:1'], capture_output=True)
+    if r.returncode or not r.stdout:
+        raise RuntimeError('ffmpeg cannot make a test tone: ' + r.stderr.decode()[:160])
+    guard.check_audio(r.stdout, 'preflight test')
 
 
 def main():
@@ -195,6 +209,10 @@ def main():
     guard = None
     if not a.no_guard:
         import guard  # noqa: E402
+        try:
+            preflight(guard)
+        except Exception as e:
+            print('PREFLIGHT FAILED, nothing was sent to ElevenLabs:', str(e)[:300]); return 2
     session = requests.Session()
     before = usage(session, key)
     print('usage before:', before)
@@ -213,10 +231,20 @@ def main():
                 sent += len(it['s'])
                 v = {'extra': 0, 'missing': 0, 'wrong': 0, 'flag': False, 'said': ''}
                 if guard:
-                    v = guard.check_audio(mp3, it['s'])
+                    try:
+                        v = guard.check_audio(mp3, it['s'])
+                    except Exception as e:
+                        # a paid take must never be thrown away: keep the audio and stop the run (no more spending on a broken checker)
+                        ud = os.path.join(a.out, 'unchecked'); os.makedirs(ud, exist_ok=True)
+                        up = os.path.join(ud, hashlib.sha1((key_of(it) + str(seed)).encode()).hexdigest()[:10] + '.mp3')
+                        open(up, 'wb').write(mp3)
+                        row['unchecked'] = {'file': os.path.basename(up), 'error': str(e)[:200]}
+                        raise CheckError('the transcript check failed, take kept in unchecked/: ' + str(e)[:160])
                 row['attempts'].append({'seed': seed, 'voice_id': vid, 'bytes': len(mp3), 'extra': v['extra'], 'missing': v['missing'], 'wrong': v['wrong'], 'flag': v['flag'], 'said': v['said'] if v['flag'] else ''})
                 if not v['flag']:
                     good = (mp3, seed); break
+        except CheckError as e:
+            aborted = str(e); rep.append(row); break
         except AuthError as e:
             aborted = 'ElevenLabs refused the key or the quota is used up: ' + str(e)[:120]; rep.append(row); break
         except Exception as e:

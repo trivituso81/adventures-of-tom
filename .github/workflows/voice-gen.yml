@@ -56,12 +56,15 @@ jobs:
       - name: Install the transcript check
         if: ${{ inputs.dry_run != 'true' }}
         run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          ffmpeg -version | head -1
+          command -v ffmpeg
           pip install requests numpy soundfile sherpa-onnx
           mkdir -p "$RUNNER_TEMP/vl/asr/tiny"
           curl -fsSL -o "$RUNNER_TEMP/whisper.tar.bz2" https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-whisper-tiny.en.tar.bz2
           tar -xjf "$RUNNER_TEMP/whisper.tar.bz2" -C "$RUNNER_TEMP/vl/asr/tiny"
           ls "$RUNNER_TEMP/vl/asr/tiny/sherpa-onnx-whisper-tiny.en"
-          ffmpeg -version | head -1
       - name: Make the takes
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}

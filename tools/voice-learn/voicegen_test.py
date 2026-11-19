@@ -34,6 +34,10 @@ FAKE = os.path.join(work, 'fake'); os.makedirs(FAKE)
 open(os.path.join(FAKE, 'guard.py'), 'w').write('''
 import os, json
 def check_audio(raw, script, th=3):
+    if script == 'preflight test':
+        if os.environ.get('PREFLIGHT_FAIL'): raise RuntimeError('no ffmpeg')
+        return dict(extra=0, missing=0, wrong=0, flag=False, said='')
+    if os.environ.get('GUARD_FAIL'): raise RuntimeError('checker broke')
     flags = json.load(open(os.environ['FLAGS']))
     for pref, left in flags.items():
         if script.startswith(pref) and left[0] > 0:
@@ -126,5 +130,15 @@ check('--max-chars stops the run', len(CALLS) - n0 < 5 and 'max-chars' in o, (le
 e2 = dict(env); e2.pop('ELEVENLABS_API_KEY')
 r3 = subprocess.run([sys.executable, runner, '--out', tempfile.mkdtemp(), '--limit', '1'], capture_output=True, text=True, env=e2, cwd=ROOT)
 check('no key: exits 2, calls nothing', r3.returncode == 2 and 'not set' in r3.stdout)
+# 8 preflight failure: nothing sent. Guard failure after a paid take: audio kept, run stops.
+out3 = tempfile.mkdtemp(prefix='vg3-'); n0 = len(CALLS)
+r4 = subprocess.run([sys.executable, runner, '--out', out3, '--limit', '3'], capture_output=True, text=True, env=dict(env, FLAGS=os.path.join(work, 'flags.json'), PREFLIGHT_FAIL='1'), cwd=ROOT)
+check('preflight failure: exits 2 and sends nothing', r4.returncode == 2 and len(CALLS) == n0 and 'PREFLIGHT FAILED' in r4.stdout, r4.stdout[-300:])
+out4 = tempfile.mkdtemp(prefix='vg4-'); n0 = len(CALLS)
+r5 = subprocess.run([sys.executable, runner, '--out', out4, '--limit', '3'], capture_output=True, text=True, env=dict(env, FLAGS=os.path.join(work, 'flags.json'), GUARD_FAIL='1'), cwd=ROOT)
+um = os.path.join(out4, 'unchecked')
+check('checker failure: one paid take kept in unchecked/, run stops after it', len(CALLS) - n0 == 1 and os.path.isdir(um) and len(os.listdir(um)) == 1 and 'transcript check failed' in r5.stdout, (len(CALLS) - n0, r5.stdout[-300:]))
+rp4 = [f for f in os.listdir(out4) if f.startswith('report-')]
+check('checker failure: the report names the kept file and the characters sent', rp4 and json.load(open(os.path.join(out4, rp4[0])))['summary']['characters_sent'] > 0)
 print('\nFAILS:', fails)
 sys.exit(1 if fails else 0)

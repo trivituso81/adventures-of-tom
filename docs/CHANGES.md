@@ -1,3 +1,9 @@
+## voicegen1b (2026-11-18): Voice take job fixed after its first real run: ffmpeg installed on the runner, a preflight before any paid request, a paid take is never thrown away (tools only, no game change)
+
+- What happened. The first real 5-line run (Actions run 44449327362, main 176707d) sent 623 characters to ElevenLabs and made no clip: the GitHub runner has no `ffmpeg`, so the transcript check failed after each take was made, and the job threw each take away. My mistake in two places: the workflow's `ffmpeg -version | head -1` hid the failure, and the script treated a checker error as an ordinary line error. The account's character count read the same before and after (162,237 of 600,000, plan tier `pro`), so the 623 may show up late; the next run's "usage before" will say.
+- Fixes. The workflow installs ffmpeg (`apt-get install ffmpeg`, then `command -v ffmpeg`). `voicegen.py` runs the transcript check once on a test tone before any paid request and stops with exit code 2 and nothing sent if it cannot. If the check fails after a paid take, the mp3 is saved in `unchecked/` of the output, the report names it, and the run stops (no more spending on a broken checker).
+- Test. `voicegen_test.py` has 3 new checks (preflight failure sends nothing; a checker failure keeps one paid take in `unchecked/` and stops; the report counts the characters). Run end to end against the stand-in server with the real Whisper check as well.
+
 ## voicegen1 (2026-11-18): A manual GitHub Action that makes one checked voice take for each line with no clip (not run yet; nothing in the game changed)
 
 - Stage 3b of the voice learning plan (`claude/voice-generation-plan.md`, copy `tools/voice-learn/GENERATION_JOB_PLAN.md`). Tom added the repo secret `ELEVENLABS_API_KEY`. Nothing in the game changed: no script, clip, engine file or setting.
