@@ -26758,8 +26758,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or several states.\n\nATTACHED IMAGE\n1) The finished painting of the Square from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color.\n\nPAINT THIS ONE PICTURE\nA yellow taxi with the number 7 on its roof sign pulls away from the viewer down a sunny Long Island street, seen from behind. A man's arm and shaved head show in the back window, waving. Painted storefronts and trees line the street. It is a close-up picture that fills the whole square.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Paint only the people and things named above. Faces look like the attached approved character paintings: oversized head, slim body.\n- No words, letters or numbers anywhere unless the description above says to paint them."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/ch1-phone-on-seat-v1.png",
+     "date": "2026-11-19",
+     "from": "v1",
+     "at": 1795128073507
+    }
+   ],
    "rejects": [],
    "id": "ch1-phone-on-seat",
    "tab": "Props",
