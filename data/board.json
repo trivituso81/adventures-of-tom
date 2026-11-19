@@ -477,7 +477,7 @@
    "title": "Milestone A: play the new battle (stages 1 to 8)",
    "theme": "Battle System",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "next": "ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE, then THE BIG ONE (and NEW 1 with Rose Mode on in settings). About 30 minutes. Judge: the pace of the video attacks and the wait for a clip, how the crossing to the monster looks, whether the turn bar reads in portrait, and Rose Mode (picture menus, the starred move). Send your notes to the stage 9 session; they come first. Steps were in the b3s8 closing reply.",
    "blocks": [
     "c-b3s9"
@@ -492,8 +492,13 @@
     {
      "d": "2026-11-19",
      "t": "Added by board refresh: stage 8 shipped, milestone A is your check (claude/battle-build.md)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Marked done by Tom."
     }
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "c-b3s9",
