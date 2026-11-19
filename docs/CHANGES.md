@@ -7,6 +7,7 @@
 - Pose hold (1f): inside a scene a speaker keeps the mood or talking pose for up to 0.6 s of scene time after the box closes (engine/emotions.js `emoHold`); it ends when the next box opens, a step moves or re-poses that person, at a fight, on FAST or SKIP and at scene end.
 - End of scene (3b): with no `intro.endTrail`, followers that each stand on their own walkable tile within 3 tiles of Tom keep standing there (`followersWhereTheyStand`, engine/story.js); otherwise `placeFollowers` as before.
 - Test: `tools/cut_natural_test.py` (the audit harness plus checks: scene ends within 5 s of its last line, party walks move, no shared tile after a scene, no arrows or (A) button between lines, no FAST or SKIP over a modal, queued toasts at least 2.5 s and never during a scene). Run `python3 -I tools/cut_natural_test.py /tmp/cn open row theft`, and with `LAYOUT=landscape`.
+- Board: cards c-cutpolish1 (done), c-cutpolish2 (Claude, up next, with its prompt) and t-cutpolish1 (Tom: play the opening and the kitchen).
 - Not changed (phases 2 to 5): sheet preloading and sizes, carrying Rose to the kitchen, facing and staging, the heist, breathing and reactions.
 
 ## b3s8 (2026-11-19): New battle: video clips play in fights, with the Big One's attacks (Lab only)

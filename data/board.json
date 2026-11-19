@@ -585,6 +585,79 @@
     }
    ],
    "done": "2026-11-19"
+  },
+  {
+   "id": "c-cutpolish1",
+   "title": "Cutscene polish phase 1: scene lifecycle (cutpolish1)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "next": "Shipped: the girls walk with Tom, popups queue, no (A) button between lines, speakers hold their pose, followers stay where they stand.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEvTQahQ3J3gZ64XxC",
+    "opening": "\"Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 1 (cutpolish1)\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Built cutpolish1; tools/cut_natural_test.py passes in portrait and landscape."
+    }
+   ],
+   "done": "2026-11-19"
+  },
+  {
+   "id": "c-cutpolish2",
+   "title": "Cutscene polish phase 2: sheet preload, then sizes (cutpolish2)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Phase 2 of 5 in claude/cutscene-polish-plan.md: decode sheets before a scene and keep them pinned (fixes blurry poses), foot shadow from the standing frame, then the Pose Editor apply step for Tom and Boppy (Grace, Rose and Deedee sizes wait on your lines).",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Queued after cutpolish1."
+    }
+   ],
+   "prompt": {
+    "what": "Builds phase 2 of the cutscene polish: preload and pin the sheets a scene needs so poses are never blurry, then size poses by the Pose Editor lines.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the phase is written down in claude/cutscene-polish-plan.md and cut_natural_test.py catches mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 2 (cutpolish2). You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "t-cutpolish1",
+   "title": "Play the chapter 1 opening and the kitchen: check the cutscene fixes",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "up",
+   "next": "After the publish of cutpolish1, RELOAD on the title, START NEW and play to the kitchen. Expect: both girls walk off with you at the Taxi Co. and into the kitchen with you, the movement tip then the Goal popup show one after the other once the scene ends, no (A) button between lines. Report anything that looks wrong with the REPORT tab. Not blocking.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEvTQahQ3J3gZ64XxC",
+    "opening": "\"Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 1 (cutpolish1)\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by cutpolish1."
+    }
+   ]
   }
  ]
 }
