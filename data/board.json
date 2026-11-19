@@ -157,11 +157,11 @@
    "id": "t-narr",
    "title": "Record the Narrator and Washington lines",
    "theme": "Voice Clips",
-   "lane": "tom",
+   "lane": "claude",
    "col": "up",
    "next": "ADMIN > VOICE LIBRARY. Narr1: record the 57 Narrator lines with no clip (silent until then). Washvoice1: re-record Mr. Washington's 32 lines (Show > Old voice). One export can carry both; send it to the voice conversation. Do not delete takes.",
    "blocks": [],
-   "changed": "2026-11-14",
+   "changed": "2026-11-19",
    "created": "2026-11-14",
    "chat": {
     "url": "",
@@ -171,6 +171,10 @@
     {
      "d": "2026-11-14",
      "t": "On the board from the first fill (board1)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Moved from tom/up to claude/up by Tom."
     }
    ]
   },
