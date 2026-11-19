@@ -1,3 +1,7 @@
+## clipgen2b (2026-11-19): Chapter 1's 67 battle clips are made, approved and baked; a bake started by hand now starts the publish
+
+- The real run of clipgen2 (below, entry `clipgen2`): all 67 clips of group Chapter 1 approved and cut for $5.34 of xAI credit. This push also makes `art-bake` start `publish` at its end when it was started by hand, because GitHub sent no publish after the Action-started bake. This push itself publishes main with the clips.
+
 ## 2026-11-19 (456): Art Library bake, 63 entries (`artbake1488`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
