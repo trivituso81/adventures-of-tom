@@ -14,11 +14,14 @@
 
 // ---------- Start and end ----------
 // cfg: party (ids), level or levels, formation (a B3_FORMATIONS id) or foes, bg (a backdrop key), seed, lab (true in the
-// Battle Lab: EXIT shows), auto (true: the simple player picks every move, for tests), hpPct and mods (tests), onEnd(result).
+// Battle Lab: EXIT shows), auto (true: the simple player picks every move, for tests), hpPct and mods (tests), onEnd(result),
+// loadouts ({id: loadout}: each member's Vibes, Quirks, VP and row, engine/b3-progress.js) or rank (every Vibe at that Rank),
+// award(F) (called once on a win; returns the line the win screen adds, for example the Vibe Points earned).
 function b3Start(cfg) {
-  B3.cfg=cfg; B3.result=null; B3.actor=null; B3.pending=null; B3.opts=[]; B3.ui='busy'; B3.sel=0; B3.view=null; B3.log=[]; B3.turnOf=null;
+  B3.cfg=cfg; B3.awarded=false; B3.won=''; B3.result=null; B3.actor=null; B3.pending=null; B3.opts=[]; B3.ui='busy'; B3.sel=0; B3.view=null; B3.log=[]; B3.turnOf=null;
   const mods=Object.assign({foeHp:b7FoeHp(),taken:b7Taken(),foeSpeed:typeof b7FoeSpeed==='function'?b7FoeSpeed():1},cfg.mods||{});
-  B3.F=b3NewFight({party:cfg.party,level:cfg.level,levels:cfg.levels,formation:cfg.formation,foes:cfg.foes,seed:cfg.seed,hpPct:cfg.hpPct,rows:cfg.rows,mods});
+  B3.F=b3NewFight({party:cfg.party,level:cfg.level,levels:cfg.levels,formation:cfg.formation,foes:cfg.foes,seed:cfg.seed,hpPct:cfg.hpPct,rows:cfg.rows,
+    loadouts:cfg.loadouts,rank:cfg.rank,plain:cfg.plain,mods});
   b3PlayReset(); b3ViewSync(); b3LayoutFoes();
   B3.view.bar=b3BarSnap(B3.F,null,0);
   clearBattleQueue(); clearInput();
@@ -78,7 +81,9 @@ function b3Commit(skillId,optKey) {
 function b3Finish() {
   b3ViewSync(); B3.actor=null;
   const win=B3.F.over==='win';
-  if(win) { B3P.cheer=true; b3Sfx('win'); b3Word('YOU WIN!','#ffe27a'); b3Say('The family wins! Tap CONTINUE.'); }
+  // A win may pay something (Vibe Points in the Battle Lab): the line it returns is said on the win screen.
+  if(win) { if(B3.cfg.award&&!B3.awarded) { B3.awarded=true; B3.won=B3.cfg.award(B3.F)||''; }
+    B3P.cheer=true; b3Sfx('win'); b3Word('YOU WIN!','#ffe27a'); b3Say('The family wins! '+(B3.won?B3.won+' ':'')+'Tap CONTINUE.'); }
   else { b3Sfx('lose'); b3Word('KNOCKED OUT','#ff9a8a'); b3Say('Everyone is knocked out. Tap CONTINUE.'); }
   B3.ui='done'; battle.state='command'; b3Render();
 }
@@ -88,7 +93,7 @@ function b3Open(mode,sel) {
   B3.ui=mode; battle.state='command'; B3.sel=sel||0;
   b3Render();
 }
-// The SKILLS list: the Vibe's Skills, then Pick-Me-Up while someone is knocked out.
+// The SKILLS list: the Main Vibe's Skills, then the Pocket Vibe's (tagged POCKET), then Pick-Me-Up while someone is knocked out.
 const b3SkillRows=u=>b3Skills(B3.F,u).slice(1);
 // The Base Recovery of what the cursor is on, for the ghost on the turn bar.
 function b3PreviewRecovery() {
@@ -125,7 +130,7 @@ function b3RenderBar(moved) {
   });
 }
 
-// ---------- Party cards: face, HP, 10 Pep dots, at most 3 status icons ----------
+// ---------- Party cards: face, HP, 10 Pep dots, at most 3 status icons, BACK for the Back row, a Portable Counter's number ----------
 function b3RenderParty() {
   const box=$('b3-party'); if(!box||!B3.F||!B3.view) return;
   const tgt=B3.ui==='target'&&B3.opts[B3.sel]?B3.opts[B3.sel].units:[];
@@ -138,8 +143,9 @@ function b3RenderParty() {
     const st=(mk?'<span class="b2-st b3-mk" title="A monster\u2019s wound-up attack is aimed here">MARKED</span>':'')+
       b3ViewIcons(u.key).slice(0,mk?2:3).map(id=>'<span class="b2-st" style="color:'+B3_STATUS[id].color+'" title="'+b2Esc(B3_STATUS[id].name)+'">'+B3_STATUS[id].short+'</span>').join('');
     const img=b2Portrait(u.id);
-    return '<div class="'+cls+'" data-i="'+i+'"><span class="b2-pt">'+(img?'<img alt="" src="'+img+'">':'<span class="b2-ph">'+u.name.charAt(0)+'</span>')+'</span>'+
-      '<div><div class="b2-nm">'+b2Esc(u.name)+'<em>Lv'+u.level+'</em></div>'+(st?'<div class="b3-chips">'+st+'</div>':'')+
+    const ctr=v.ctr?'<b class="b3-ctr" title="'+b2Esc(Object.values(u.counterInfo)[0].name)+' '+v.ctr+'">'+v.ctr+'</b>':'';
+    return '<div class="'+cls+'" data-i="'+i+'"><span class="b2-pt">'+(img?'<img alt="" src="'+img+'">':'<span class="b2-ph">'+u.name.charAt(0)+'</span>')+ctr+'</span>'+
+      '<div><div class="b2-nm">'+b2Esc(u.name)+(u.row==='back'?'<i class="b3-rowtag" title="Back row">BACK</i>':'')+'<em>Lv'+u.level+'</em></div>'+(st?'<div class="b3-chips">'+st+'</div>':'')+
       '<div class="b2-bar"><i class="'+(r<=.25?'crit':r<=.5?'low':'')+'" style="width:'+Math.round(r*100)+'%"></i></div>'+
       '<div class="b2-sub"><span>'+(v.ko?'KNOCKED OUT':'HP '+Math.max(0,v.hp)+'/'+v.maxHp+(v.sh?'<b class="b3-shn" title="Shield '+v.sh+'">+'+v.sh+'</b>':''))+'</span><span class="b2-vp b3-pep" aria-label="Pep '+v.pep+' of 10" title="Pep '+v.pep+' of 10">'+pips+'</span></div></div></div>';
   }).join('');
@@ -149,7 +155,7 @@ function b3RenderParty() {
 function b3FlavorChips(S) { return S.flavor.map(f=>'<span class="b2-el" style="color:'+B3_FLAVORS[f].color+'">'+B3_FLAVORS[f].name.toUpperCase()+'</span>').join(''); }
 function b3RenderCmd() {
   const box=$('b3-cmd'),u=B3.actor; if(!box) return;
-  if(B3.ui==='done') { box.innerHTML='<div class="b2-list"><button type="button" class="b2-btn sel b3-go" data-done="1"><span>CONTINUE</span><em>'+(B3.F.over==='win'?'You won this fight.':'You lost this fight.')+'</em></button></div>'; return; }
+  if(B3.ui==='done') { box.innerHTML='<div class="b2-list"><button type="button" class="b2-btn sel b3-go" data-done="1"><span>CONTINUE</span><em>'+(B3.F.over==='win'?b2Esc(B3.won||'You won this fight.'):'You lost this fight.')+'</em></button></div>'; return; }
   const cmdOn=battle.state==='command'&&u;
   if(!cmdOn||B3.ui==='cross'||B3.ui==='busy') {
     const pu=u||B3.F.party.find(p=>p.key===B3.turnOf)||B3.F.party[0],off=cmdOn?'':' off',img=b2Portrait(pu.id),nS=b3SkillRows(pu).length;
@@ -170,7 +176,7 @@ function b3RenderCmd() {
   if(B3.ui==='skills') {
     const rows=b3SkillRows(u);
     box.innerHTML='<div class="b2-list">'+rows.map((S,i)=>{ const can=b3CanUse(B3.F,u,S),c=b3Cost(B3.F,u,S);
-      return '<button type="button" class="b2-btn'+(i===B3.sel?' sel':'')+(can.ok?'':' no')+'" data-i="'+i+'"><div class="b2-top"><span class="b2-sn">'+b2Esc(S.name)+'</span><i class="b2-cost">'+c+' PEP</i></div><em class="b2-els">'+b3FlavorChips(S)+'</em></button>'; }).join('')+back+'</div>';
+      return '<button type="button" class="b2-btn'+(i===B3.sel?' sel':'')+(can.ok?'':' no')+'" data-i="'+i+'"><div class="b2-top"><span class="b2-sn">'+b2Esc(S.name)+'</span><i class="b2-cost">'+c+' PEP</i></div><em class="b2-els">'+b3FlavorChips(S)+(u.pocketSkills.includes(S.id)?'<span class="b2-el b3-pk" title="From the Pocket Vibe">POCKET</span>':'')+'</em></button>'; }).join('')+back+'</div>';
   } else if(B3.ui==='target') {
     box.innerHTML='<div class="b2-list">'+B3.opts.map((o,i)=>{ const t1=o.units.length===1?o.units[0]:null,v=t1?B3.view.u[t1.key]:null;
       const sub=o.no?o.no:t1?(v.ko?'Knocked out':'HP '+v.hp+'/'+v.maxHp+(v.maxPips?' · '+v.pips+' of '+v.maxPips+' pips':'')+b3ViewIcons(t1.key).map(id=>' · '+B3_STATUS[id].name).join('')):o.units.length+' targets';

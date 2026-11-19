@@ -5,7 +5,8 @@
 'use strict';
 module.exports=function(T) {
   const {G,ok,near,play,noCrit}=T;
-  const [NF,next,act,foeTurn,U,RULES,SK,ST,FOES,add,endS,endTurn,beginTurn,opts,stat]=['b3NewFight','b3Next','b3Act','b3FoeTurn','b3Unit','B3_RULES','B3_SKILLS','B3_STATUS','B3_FOES','b3AddStatus','b3EndStatus','b3EndTurn','b3BeginTurn','b3Options','b3Stat'].map(G);
+  const [NF0,next,act,foeTurn,U,RULES,SK,ST,FOES,add,endS,endTurn,beginTurn,opts,stat]=['b3NewFight','b3Next','b3Act','b3FoeTurn','b3Unit','B3_RULES','B3_SKILLS','B3_STATUS','B3_FOES','b3AddStatus','b3EndStatus','b3EndTurn','b3BeginTurn','b3Options','b3Stat'].map(G);
+  const NF=cfg=>NF0(Object.assign({plain:true},cfg));   // the bare unit these groups were written against (cfg.plain, engine/b3-core.js)
   const LAB=['grace','tom','rose','deedee'];
   // A fight with nothing played yet. P is the family by id, f is the first monster. Everyone is too tough to fall unless a test says so.
   const fight=(cfg,keepHp)=>{ const F=NF(Object.assign({party:LAB,level:2,seed:5},cfg)),P={}; for(const p of F.party) P[p.id]=p;

@@ -45,10 +45,12 @@ function b3PlayReset() { Object.assign(B3P,{t:0,q:[],body:{},foe:{},fa:{},pops:[
 // ---------- The view: what the screen shows right now ----------
 function b3ViewSync() {
   const F=B3.F,V=B3.view||(B3.view={u:{},bar:[],charge:{},mark:{},haz:[]});
-  for(const u of F.units) V.u[u.key]=Object.assign(V.u[u.key]||{},{hp:u.hp,maxHp:u.maxHp,pep:u.pep,st:Object.keys(u.st),ko:u.ko,sh:b3ShieldTotal(u),pips:u.pips,maxPips:u.maxPips});
+  for(const u of F.units) V.u[u.key]=Object.assign(V.u[u.key]||{},{hp:u.hp,maxHp:u.maxHp,pep:u.pep,st:Object.keys(u.st),ko:u.ko,sh:b3ShieldTotal(u),pips:u.pips,maxPips:u.maxPips,ctr:b3CounterShown(u)});
   V.haz=F.hazards.map(h=>({id:h.id,side:h.side,uses:h.uses}));
   for(const f of F.foes) { if(f.charge) V.charge[f.key]=f.charge.name; else delete V.charge[f.key]; if(f.mark) V.mark[f.key]=f.mark; else delete V.mark[f.key]; }
 }
+// The Portable Counter a portrait shows as a number (spec 2.8): the first one this unit is building, 0 when it has none.
+function b3CounterShown(u) { const k=Object.keys(u.counterInfo||{})[0]; return k?u.counters[k]||0:0; }
 // Is this family member Marked by a monster right now (in the view)?
 const b3ViewMarked=key=>Object.keys(B3.view.mark).some(f=>B3.view.mark[f]===key);
 // The 3 icons for a unit in the view (spec 2.8): its Prime, its strongest debuff, its strongest buff.
@@ -58,7 +60,8 @@ function b3ViewIcons(key) {
 }
 
 // ---------- Where everyone stands (576 x 324) ----------
-function b3PartyHome(u) { const T=[null,BATTLE_POS1,BATTLE_POS2,BATTLE_POS3][B3.F.party.length]||BATTLE_POS4,p=T[u.slot]; return {cx:p.x*3,base:p.base*3}; }
+// Someone in the Back row stands a little further from the monsters.
+function b3PartyHome(u) { const T=[null,BATTLE_POS1,BATTLE_POS2,BATTLE_POS3][B3.F.party.length]||BATTLE_POS4,p=T[u.slot]; return {cx:p.x*3+(u.row==='back'?14:0),base:p.base*3}; }
 // Enemy slots: the front row stands around the old centre spot, the back row behind it further left. Slots stay put when someone falls.
 function b3LayoutFoes() {
   const F=B3.F,fr=F.foes.filter(f=>f.row!=='back'),bk=F.foes.filter(f=>f.row==='back'),n=F.foes.length,want=[0,96,80,68,60][n]||60;
@@ -173,6 +176,7 @@ function b3Show(b) {
   }
   else if(b.t==='push') { V.bar=b.bar; b3RenderBar(b.tgt); b3Pop(b.tgt,'PUSHED BACK','#ffb070',{sc:2}); }
   else if(b.t==='pull') { V.bar=b.bar; b3RenderBar(b.tgt); b3Pop(b.tgt,b.placed?'UP NEXT':'PULLED UP','#9be39a',{sc:2}); b3Sfx('jumpWhistle'); }
+  else if(b.t==='counter') { const cu=b3Unit(B3.F,b.tgt); if(cu&&Object.keys(cu.counterInfo||{})[0]===b.id) vu.ctr=b.v; }
   else if(b.t==='pep') { vu.pep=b.pep; if(b.g!=='pre') b3Pop(b.tgt,(b.n>0?'+':'')+b.n+' PEP',b.n>0?'#8dc4e6':'#ff9a8a',{sc:2}); }
   else if(b.t==='telegraph') {
     V.charge[b.src]=b.name; b3Pop(b.src,'!!','#ff8f80',{sc:4}); b3Sfx('charge');

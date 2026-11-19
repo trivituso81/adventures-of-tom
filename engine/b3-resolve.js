@@ -89,6 +89,7 @@ function b3EndTurn(F,u,recovery,beats) {
       if(sh.skip) { sh.skip=false; continue; }
       if(--sh.n<=0) { u.shields.splice(u.shields.indexOf(sh),1); beats.push({t:'shieldEnd',tgt:u.key,sh:b3ShieldTotal(u),g:'end'}); b3Fire(F,'shieldEnded',{src:u,tgt:u,by:sh.src,g:'end'},beats); } }
     b3Fire(F,'turnEnd',{src:u,tgt:u,g:'end'},beats);
+    u.hitSince=false;
   }
   F.acting=null;
   beats.push({t:'endTurn',who:u.key,bar:b3BarSnap(F,null,0),g:'end'});
@@ -105,6 +106,7 @@ function b3Hurt(F,c,t,dmg,info) {
   t.hp=Math.max(0,t.hp-left);
   if(soak) (c.soak=c.soak||{})[t.key]=(c.soak[t.key]||0)+soak;
   if(left) (c.lost=c.lost||{})[t.key]=(c.lost[t.key]||0)+left;
+  if(!(info&&info.tick)) t.hitSince=true;
   c.beats.push(Object.assign({t:'hit',tgt:t.key,dmg,hp:t.hp,g:c.g},soak?{soak,sh:b3ShieldTotal(t)}:null,info));
   for(const sh of broke) { c.beats.push({t:'shieldBroken',tgt:t.key,g:c.g}); b3Fire(F,'shieldBroken',{src:c.actor,tgt:t,by:sh.src,g:c.g},c.beats); }
 }
@@ -166,9 +168,13 @@ function b3FindDetonation(t,flavor) {
   for(const D of B3_DETONATIONS) if(D.flavor===flavor&&t.st[D.prime]&&(!best||t.st[D.prime].at<t.st[best.prime].at)) best=D;
   return best;
 }
-// A move's own condition for a bonus.
+// A move's own condition for a bonus (B3_CONDS is the list the data check knows).
+//   targetHas  the target carries one of `ids`
+//   tookHit    the attacker took or blocked a hit since its last turn ended (a burn tick is not a hit)
+const B3_CONDS=['targetHas','tookHit'];
 function b3Cond(F,c,cond,t) {
   if(cond.if==='targetHas') return cond.ids.some(id=>t.st[id]);
+  if(cond.if==='tookHit') return !!c.actor.hitSince;
   throw new Error('Battle 3 condition not built yet: '+cond.if);
 }
 // One hit on one target. `per` is the Skill Power of each flavor part of this hit.
@@ -194,7 +200,8 @@ function b3Hit(F,c,t,per,flavors,e,single) {
     const det=a.side==='party'&&t.side==='foe'&&!c.detonated[t.key]?b3FindDetonation(t,fl):null;
     // The move's own bonus: `per` counts something this action did (buffs stripped), `if` is a condition on the target.
     const bonus=Object.assign({},c.outExtra);
-    if(e.bonus) { if(e.bonus.per) bonus.skill=e.bonus.add*(c[e.bonus.per]||0); else if(b3Cond(F,c,e.bonus,t)) bonus.skill=e.bonus.add; }
+    // `counter` reads one of the attacker's Portable Counters (so much per point built up).
+    if(e.bonus) { if(e.bonus.counter) bonus.skill=e.bonus.add*(a.counters[e.bonus.counter]||0); else if(e.bonus.per) bonus.skill=e.bonus.add*(c[e.bonus.per]||0); else if(b3Cond(F,c,e.bonus,t)) bonus.skill=e.bonus.add; }
     const pv=t.peeves.includes(fl),rs=t.resists.includes(fl);
     let dmg=b3Stat(a,'atk')*per*100/(100+b3Stat(t,'def'))*b3OutMult(a,bonus)*(pv?B3_RULES.peeve:1)*(rs?B3_RULES.resist:1)*(crit?B3_RULES.crit.dmg:1)*b3TakenMult(t,red);
     if(single&&fl==='clobber'&&b3EffRow(F,t)==='back') dmg*=1-B3_RULES.backRowClobber;

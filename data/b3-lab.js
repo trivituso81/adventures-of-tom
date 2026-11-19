@@ -1,7 +1,10 @@
 'use strict';
 // data/b3-lab.js — Battle 3: the NEW BATTLE fights in the Battle Lab (ADMIN > BATTLE LAB > NEW BATTLE).
 // One row per fight: party (ids, in standing order: neighbours in this list are "adjacent"), level (the bestiary's player level
-// for that chapter), formation (a B3_FORMATIONS id), bg (a BG_FILES key in engine/battle-draw.js), rows (optional {id:'back'}).
+// for that chapter), formation (a B3_FORMATIONS id), bg (a BG_FILES key in engine/battle-draw.js), rows (optional {id:'back'}:
+// overrides the row chosen on the Vibes screen).
+// Who brings what (Main and Pocket Vibe, Quirks, Ranks, rows) is not here: it is the Lab's book of loadouts, set on NEW BATTLE >
+// VIBES AND RANKS and kept on the device (engine/b3-menu.js). It starts with every Vibe at Rank B3_RULES.labRank.
 // engine/b3-lab.js lists and starts them; tools/b3-sim.js plays them with no screen.
 // Tom stands second so that Suite Door Slide covers two family members (Grace and Rose).
 const B3_LAB=[

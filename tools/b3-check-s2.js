@@ -5,7 +5,8 @@
 'use strict';
 module.exports=function(T) {
   const {G,ok,near,play,noCrit}=T;
-  const [NF,next,act,foeTurn,U,RULES,SK,ST,FOES,TRAITS,add,endTurn,opts]=['b3NewFight','b3Next','b3Act','b3FoeTurn','b3Unit','B3_RULES','B3_SKILLS','B3_STATUS','B3_FOES','B3_TRAITS','b3AddStatus','b3EndTurn','b3Options'].map(G);
+  const [NF0,next,act,foeTurn,U,RULES,SK,ST,FOES,TRAITS,add,endTurn,opts]=['b3NewFight','b3Next','b3Act','b3FoeTurn','b3Unit','B3_RULES','B3_SKILLS','B3_STATUS','B3_FOES','B3_TRAITS','b3AddStatus','b3EndTurn','b3Options'].map(G);
+  const NF=cfg=>NF0(Object.assign({plain:true},cfg));   // the bare unit these groups were written against (cfg.plain, engine/b3-core.js)
   const BASE=['tom','grace','rose','deedee'],LAB=['grace','tom','rose','deedee'];
   // A fight where it is `who`'s turn. Everyone before them uses their Basic on the first monster; enemies take their turns.
   const upTo=(cfg,who)=>{ const F=NF(Object.assign({level:2,seed:5},cfg)); let N;
@@ -185,8 +186,8 @@ module.exports=function(T) {
     mine(F,u); act(F,u,'t_multi','f0'); G('b3RoundStart')(F,[]); mine(F,u); act(F,u,'t_multi','f0'); ok(u.pep===1,'a once-a-battle passive fires once: '+u.pep);
     u.passives=[{id:'t_back',name:'Test Answer',on:'afterHit',carrier:'target',from:'foe',react:true,limit:'action',effects:[{op:'damage',flavor:['racket'],power:'light',to:'attacker'}]}];
     add(F,u,'t_taunt',{}); const b=foeAct(F,f0,'wobble'),re=b.find(x=>x.t==='react'); ok(re&&re.name==='Test Answer'&&hits(b,'f0').length===1,'a passive can answer as a reaction'); });
-  { TRAITS.priority_boarding={id:'priority_boarding',on:'battleStart',effects:[{op:'status',id:'guard_stance',to:'self'}]};
-    const F=NF({party:BASE,level:2,formation:'mudling',seed:5}),N=next(F); delete TRAITS.priority_boarding;
+  { const kept=TRAITS.priority_boarding; TRAITS.priority_boarding={id:'priority_boarding',vibe:'tom_flier',name:'Priority Boarding',desc:'test',on:'battleStart',effects:[{op:'status',id:'guard_stance',to:'self'}]};
+    const F=NF0({party:BASE,level:2,formation:'mudling',seed:5}),N=next(F); TRAITS.priority_boarding=kept;   // a real loadout: a Trait comes with the Main Vibe
     ok(!!F.party[0].st.guard_stance&&N.beats.some(b=>b.t==='status'&&b.id==='guard_stance'&&b.tgt==='p0'),'a Trait row listening on battleStart runs, and its beats open the fight'); }
   { const {F,u}=upTo({party:BASE,formation:'mudling'},'tom'); for(let i=0;i<3;i++) { mine(F,u); act(F,u,'t_tally',u.key); } ok(u.counters.t_tally===2,'a counter stops at its max: '+u.counters.t_tally); }
   // 42. Pond Grump and Bog Toad act in printed order, winding up their heavy act

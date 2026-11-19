@@ -38,8 +38,15 @@ const B3_RULES={
   add:{hp:.5,room:{front:3,back:2}},
   // Family Ruckus (spec 2.10). Built in stage 6.
   ruckus:{mix:5,detonation:8,extraHit:1,brk:15,doubleTeam:50,full:100,doubleTeamPower:.5},
-  // Vibe Mastery (spec section 1). Built in stage 4.
+  // Vibe Mastery (spec section 1; engine/b3-progress.js). rankVp[k] is the VP that reaches Rank k+1; the last one is mastery.
   rankVp:[0,60,220,450,800],
+  // The Rank that unlocks each part of a Vibe. The Trait, the Basic and Skill 1 come at Rank 1.
+  rankUnlock:{trait:1,basic:1,s1:1,s2:2,quirkA:3,cap:4,quirkB:5},
+  subtitleRank:[1,3,5],                       // the Rank at which each of a Vibe's three Subtitles takes over
+  pocketVp:.5,                                // the equipped Pocket Vibe earns this share of a fight's VP (the Main Vibe earns all of it)
+  quirkSlots:2,
+  labRank:2,                                  // the Rank every Vibe starts at in the Battle Lab (the Rank chapter 1 reaches)
+  // Stat Leans (spec section 1): the Main Vibe's Lean only. Max HP is set when the fight begins; the others are mods of kind 'lean'.
   leans:{guard:{hp:.15,def:.15},striker:{atk:.15},tempo:{spd:.15},support:{healGiven:.15}},
   pickMeUp:{pep:4,hp:.25},
   lowHp:.25                                   // the low HP look (battle 2's rule, kept)
@@ -77,8 +84,18 @@ const B3_LEVELS=[
   [40,940,176,70,115],[42,995,190,73,116],[45,1050,205,76,117],[47,1100,220,79,118],[50,1150,235,82,120]
 ];
 
+// What the Vibes screen says about each Lean.
+const B3_LEANS={
+  guard:{id:'guard',name:'Guard',desc:'15% more Max HP and 15% more Defense'},
+  striker:{id:'striker',name:'Striker',desc:'15% more Attack'},
+  tempo:{id:'tempo',name:'Tempo',desc:'15% more Speed'},
+  support:{id:'support',name:'Support',desc:'heals and shields given are 15% bigger'}
+};
+
 // Filled by the kit files (data/b3-kit-*.js), the status file and the enemy files (data/b3-foes-*.js).
-const B3_CAST={},B3_VIBES={},B3_SKILLS={},B3_TRAITS={},B3_QUIRKS={},B3_FOES={},B3_FORMATIONS={};
+// B3_SOON holds the NAMES of Skills a Vibe row lists whose own rows are not written yet ({id: name}): the Vibes screen shows
+// them greyed. A Skill is in B3_SKILLS or in B3_SOON, never both: the kit stage that writes the row deletes the name here.
+const B3_CAST={},B3_VIBES={},B3_SKILLS={},B3_SOON={},B3_TRAITS={},B3_QUIRKS={},B3_FOES={},B3_FORMATIONS={};
 
 // Pick-Me-Up (spec 2.9): every family member has this command in every Vibe. It shows in SKILLS while someone is knocked out.
 B3_SKILLS.pick_me_up={id:'pick_me_up',vibe:null,common:true,slot:'s1',name:'Pick-Me-Up',pep:B3_RULES.pickMeUp.pep,flavor:['support'],power:0,hits:0,

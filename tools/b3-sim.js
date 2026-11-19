@@ -12,6 +12,8 @@
 //                1.6); without this option the simple player attacks whenever attacking scores higher, which is nearly always.
 // <fight> is a B3_LAB id (data/b3-lab.js) or a B3_FORMATIONS id (then --party=tom,grace,rose,deedee --level=2).
 //   --foehp=20 multiplies monster HP (with --hp it makes a fight the party loses, for the lose screen test).
+//   --rank=3: every Vibe at that Rank (left out: 2, the Rank the Battle Lab starts at). --swap=tom,rose (or --swap=all): those
+//   family members fight with their second Sig Vibe as Main and their first as Pocket.
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const ROOT=path.dirname(__dirname);
@@ -19,7 +21,7 @@ const DATA=['data/b3-rules.js','data/b3-status.js',
   ...fs.readdirSync(path.join(ROOT,'data')).filter(f=>/^b3-kit-.*\.js$/.test(f)).sort().map(f=>'data/'+f),
   ...fs.readdirSync(path.join(ROOT,'data')).filter(f=>/^b3-foes-.*\.js$/.test(f)).sort().map(f=>'data/'+f),
   'data/b3-lab.js'];
-const RULES=['engine/b3-core.js','engine/b3-timeline.js','engine/b3-hooks.js','engine/b3-ops.js','engine/b3-resolve.js','engine/b3-foe.js'];
+const RULES=['engine/b3-core.js','engine/b3-progress.js','engine/b3-timeline.js','engine/b3-hooks.js','engine/b3-ops.js','engine/b3-resolve.js','engine/b3-foe.js'];
 function load() {
   const ctx=vm.createContext({Math,JSON,Object,Array,String,Number,Error,console:{log(){},error(){}}});
   for(const f of [...DATA,...RULES]) vm.runInContext(fs.readFileSync(path.join(ROOT,f),'utf8'),ctx,{filename:f});
@@ -67,6 +69,10 @@ function play(cfg,log,opt) {
 function cfgFor(id) {
   const L=G('B3_LAB').find(x=>x.id===id);
   const cfg=L?{party:L.party.slice(),level:L.level,formation:L.formation,rows:L.rows}:{party:(flag('party')||'tom,grace,rose,deedee').split(','),level:Number(flag('level')||2),formation:id};
+  // Loadouts: every Vibe at --rank (the Lab's starting Rank when left out); --swap=tom,rose trades Main and Pocket for those members.
+  const rank=Number(flag('rank')||G('B3_RULES').labRank),swap=(flag('swap')||'').split(',').filter(Boolean);
+  cfg.loadouts={};
+  for(const m of cfg.party) { const Ld=G('b3NewLoadout')(m,rank); if(swap.includes(m)||swap.includes('all')) G('b3SetMain')(m,Ld,Ld.pocket); cfg.loadouts[m]=Ld; }
   if(flag('hp')) cfg.hpPct=Number(flag('hp'));
   if(flag('foehp')) cfg.mods={foeHp:Number(flag('foehp'))};
   return cfg;
@@ -75,7 +81,10 @@ function cfgFor(id) {
 // ---------- Rule tests ----------
 function check() {
   const fails=[],ok=(cond,what)=>{ if(!cond) fails.push(what); },near=(a,b,eps)=>Math.abs(a-b)<=(eps==null?1e-6:eps);
-  const [NF,next,act,foeTurn,U,RULES_,SK,ST,FOES]=['b3NewFight','b3Next','b3Act','b3FoeTurn','b3Unit','B3_RULES','B3_SKILLS','B3_STATUS','B3_FOES'].map(G);
+  const [next,act,foeTurn,U,RULES_,SK,ST,FOES]=['b3Next','b3Act','b3FoeTurn','b3Unit','B3_RULES','B3_SKILLS','B3_STATUS','B3_FOES'].map(G);
+  // The groups of stages 1 to 3 were written against the bare unit: first Vibe only, Skill 1 and Skill 2, no Lean, no Pocket Vibe,
+  // no Trait (cfg.plain in engine/b3-core.js). They keep it, so their numbers stay what they were. Stage 4's file tests real loadouts.
+  const NF=cfg=>G('b3NewFight')(Object.assign({plain:true},cfg)),playPlain=(cfg,log,opt)=>play(Object.assign({plain:true},cfg),log,opt);
   const base={party:['tom','grace','rose','deedee'],level:2};
   // 1. Data (before any test row is added)
   const bad=G('b3CheckData')(); ok(bad.length===0,'data check: '+bad.join('; '));
@@ -215,13 +224,15 @@ function check() {
   // 25. An op that is not built says so
   { const {F,u}=tom0(); let msg=''; try { act(F,u,'t_unbuilt',u.key); } catch(e) { msg=e.message; } ok(/not built yet: steal/.test(msg),'unbuilt op error: '+msg); }
   // 26. Win and lose
-  { const w=play({party:base.party,level:2,formation:'mudling',seed:1}); ok(w.result==='win','new1 can be won'); const l=play({party:base.party,level:2,formation:'mudling',seed:1,hpPct:.02,mods:{foeHp:20}}); ok(l.result==='lose'&&l.kos===4,'a party at 2% HP against 20x monsters loses: '+l.result); }
+  { const w=playPlain({party:base.party,level:2,formation:'mudling',seed:1}); ok(w.result==='win','new1 can be won'); const l=playPlain({party:base.party,level:2,formation:'mudling',seed:1,hpPct:.02,mods:{foeHp:20}}); ok(l.result==='lose'&&l.kos===4,'a party at 2% HP against 20x monsters loses: '+l.result); }
   // 27. Same seed, same fight
-  { const a=play({party:base.party,level:2,formation:'skeeter',seed:77}),b=play({party:base.party,level:2,formation:'skeeter',seed:77}); ok(a.order.join()===b.order.join()&&a.rounds===b.rounds,'a seed replays exactly'); }
+  { const a=playPlain({party:base.party,level:2,formation:'skeeter',seed:77}),b=playPlain({party:base.party,level:2,formation:'skeeter',seed:77}); ok(a.order.join()===b.order.join()&&a.rounds===b.rounds,'a seed replays exactly'); }
   // Stage 2's groups (28 on) live in their own file.
-  require('./b3-check-s2.js')({G,ok,near,play,noCrit});
+  require('./b3-check-s2.js')({G,ok,near,play:playPlain,noCrit});
   // Stage 3's groups (46 on): Composure, Break, Marks, the act runner, adds.
-  require('./b3-check-s3.js')({G,ok,near,play,noCrit});
+  require('./b3-check-s3.js')({G,ok,near,play:playPlain,noCrit});
+  // Stage 4's groups (67 on): Ranks, Vibe Points, overflow, loadouts, Leans, Portable Counters, the second Sig Vibes' first moves.
+  require('./b3-check-s4.js')({G,ok,near,play,noCrit});
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);
 }

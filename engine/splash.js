@@ -363,6 +363,7 @@ function splashPad(dir,dirEdge,A,B) {
 for(const ev of ['touchend','click']) window.addEventListener(ev,unlockAudio,{passive:true});
 window.addEventListener('keydown',e=>{
   if(!splash.active) return;
+  if(typeof B3V!=='undefined'&&B3V.open) return;   // the Vibes screen is open over the Battle Lab list: its own keys (engine/b3-menu.js)
   if(e.code==='KeyL') return; // rotate still works
   e.stopImmediatePropagation();
   unlockAudio();

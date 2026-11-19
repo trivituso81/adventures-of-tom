@@ -2,6 +2,7 @@
 # Usage (repo root):  python3 tools/b3_test.py            every fight in data/b3-lab.js
 #                     python3 tools/b3_test.py new1       one fight
 #                     python3 tools/b3_test.py s3         only the stage 3 section (The Big One: pips, Mark, Break, adds), about 5 min
+#                     python3 tools/b3_test.py s4         only the stage 4 section (the Vibes screen, the Lab's Ranks, the save fields), about 2 min
 # Env: CHROMIUM = chromium binary (optional), SEED = the fight's seed (default 7), OUT = folder for the sheets (default tools/shots).
 #
 # For each fight it checks, and prints FAILS: [] when all pass:
@@ -23,11 +24,18 @@
 #      hit takes one; Big Glare Marks Rose (the MARKED chip on her card, the arrow over her head, both lists); Tom's Suite Door
 #      Slide takes Swamp Chomp; Crunchy Sugar-Cube Pop cancels the next one; a Break cancels the third, shows BREAK!, tips the
 #      boss's face on the turn bar and empties its pips, and they come back as its next turn begins; two adds walk in.
+#   6b. Stage 4, once: NEW BATTLE > VIBES AND RANKS opens the Vibes screen (portrait); Main and Pocket trade places; the Rank picker;
+#      the two Quirk slots; rows (the last one in Front is refused); keys and gamepad; a Lab fight then uses those Vibes (BASIC, the
+#      SKILLS list with POCKET tags, the Lean, the rows) and a win pays Vibe Points, kept across a reload. Then the save: the new
+#      fields are written, the pause menu's VIBES command opens the same screen (portrait and landscape), a change lands in the
+#      autosave and in the Lab's book, save then load brings it back, and three old or broken saves load with fresh loadouts.
 #   7. A battle 2 fight still starts and shows its own screen afterwards.
 # Sheets: b3-<fight>-hand.png, b3-<fight>-slip.png and b3-<fight>-slip-bar.png (the Hydro-Slip! frames: the stage, and every turn bar
 # stacked and doubled), b3-<fight>-lose.png, b3-<fight>-land.png, b3-s2-moves.png (the stage during the stage 2 moves),
 # b3-s2-info.png (the status lists and Pick-Me-Up), b3-s2-land.png, b3-s3-mark.png (pips, the Mark, the bite taken and cancelled),
-# b3-s3-break.png (the Break frames), b3-s3-info.png (the lists and the adds), b3-s3-land.png.
+# b3-s3-break.png (the Break frames), b3-s3-info.png (the lists and the adds), b3-s3-land.png, b3-s4-lab.png (the Vibes screen from
+# the Lab), b3-s4-fight.png (the fight with changed Vibes), b3-s4-menu.png (the pause menu's door, with a landscape frame), and three
+# full-size frames: b3-s4-vibes-portrait.png, b3-s4-vibes-menu-landscape.png, b3-s4-menu-landscape.png, b3-s4-fight-skills.png.
 import threading, http.server, socketserver, functools, os, sys, json, subprocess, io
 from playwright.sync_api import sync_playwright
 from PIL import Image
@@ -54,7 +62,9 @@ def state(pg): return pg.evaluate("""()=>({ui:B3.ui,actor:B3.actor&&B3.actor.id,
   foes:B3.F.foes.map(f=>({key:f.key,id:f.id,alive:!f.ko&&f.hp>0,hp:f.hp,drenched:!!f.st.drenched})),
   bar:[...document.querySelectorAll('#b3-bar .b2-tk')].map(e=>e.dataset.k+(e.classList.contains('now')?'!':'')+(e.classList.contains('ghost')?'?':'')),
   placed:B3.F.party.map(p=>p.placed),turns:B3.F.turnLog.length})""")
-def start(pg,idx,opt): pg.evaluate("([i,o])=>{ splash.active=false; document.getElementById('splash').hidden=true; b3Lab(i,o); }",[idx,opt])
+# Every test fight starts from the Lab's fresh loadouts (every Vibe at Rank 2), so Vibe Points won by an earlier test fight never
+# change what the next one starts with. keep=True: use the Lab's book as it stands (the stage 4 section sets it up first).
+def start(pg,idx,opt,keep=False): pg.evaluate("([i,o,keep])=>{ if(!keep) b3LabReset(); splash.active=false; document.getElementById('splash').hidden=true; b3Lab(i,o); }",[idx,opt,keep])
 def tap_foe(pg,key):
     # the middle of that enemy, from canvas coordinates (576 x 324) to the page; works when the stage is turned a quarter turn too
     p=pg.evaluate("""(key)=>{ const b=b3FoeBox(key),cv=document.getElementById('battle-canvas'),r=cv.getBoundingClientRect(),u=b.x/576,v=(b.y-b.h/2)/324;
@@ -143,12 +153,15 @@ def basic(pg):
     pg.keyboard.press('ArrowUp'); pg.wait_for_timeout(200)
     if pg.evaluate("()=>B3.ui")=='target': pg.keyboard.press('Enter')
 def log(pg,n=30): return pg.evaluate("(n)=>B3.log.slice(-n).join(' | ')",n)
+# The stage 2 and stage 3 sections are scripted turn by turn against the bare units those stages built (cfg.plain: first Vibe only,
+# no Lean, so everyone has Speed 100 and the family acts Grace, Tom, Rose, Deedee). They test those stages' moves and screens, not
+# loadouts; the hand-played fights above and the stage 4 section use real loadouts.
 POKE_ROWS="""()=>{ B3_STATUS.t_taunt={id:'t_taunt',name:'Test taunt',kind:'buff',group:null,dur:{n:99,unit:'turn'},mods:[],flags:['taunt'],short:'TAUNT',color:'#fff',weight:0,desc:'Test: monsters aim here.'};
   for(const f of B3.F.foes) f.hp=f.maxHp=9999; b3ViewSync(); b3Render(); }"""
 def stage2_fight(pg,idx):
     """Portrait. The stage 2 moves through the real screen, with the monsters aimed by pokes. Returns nothing; writes sheets."""
     S='stage 2: '; fr=[]; info=[]
-    start(pg,idx,{'seed':SEED}); wait_cmd(pg); pg.wait_for_timeout(300); pg.evaluate(POKE_ROWS)
+    start(pg,idx,{'seed':SEED,'plain':True}); wait_cmd(pg); pg.wait_for_timeout(300); pg.evaluate(POKE_ROWS)
     if who(pg)!='grace': fails.append(S+f'expected Grace first, got {who(pg)}')
     basic(pg); wait_cmd(pg); pg.wait_for_timeout(150)
     # Tom: Zone One Blockade
@@ -227,7 +240,7 @@ def stage2_land(pg,idx):
     S='stage 2 landscape: '; fr=[]
     pg.evaluate("()=>{ B7.speed=1; toggleLayout(); }"); pg.wait_for_timeout(500); rot=pg.evaluate("()=>layout.rotated")
     R=lambda f: f.rotate(90,expand=True) if rot else f
-    start(pg,idx,{'seed':SEED}); wait_cmd(pg); pg.wait_for_timeout(300); pg.evaluate(POKE_ROWS)
+    start(pg,idx,{'seed':SEED,'plain':True}); wait_cmd(pg); pg.wait_for_timeout(300); pg.evaluate(POKE_ROWS)
     basic(pg); wait_cmd(pg); pg.wait_for_timeout(150)
     skill(pg,'Zone One Blockade'); fr.append(R(shot(pg))); pg.keyboard.press('Enter'); fr+=burst(pg,3,rot=rot); wait_cmd(pg)
     basic(pg); wait_cmd(pg); pg.wait_for_timeout(150)
@@ -265,7 +278,7 @@ def marked(pg): return pg.evaluate("()=>({mark:B3.view.mark.f0||null,charge:B3.v
 def stage3_fight(pg,idx):
     """Portrait, The Big One. Composure, the Mark and its three answers, a Break, and adds. Monsters are aimed by pokes."""
     S='stage 3: '; fr=[]; brk=[]; info=[]
-    start(pg,idx,{'seed':SEED}); wait_cmd(pg); pg.wait_for_timeout(300); pg.evaluate(POKE_ROWS); pg.evaluate(S3_HOOK)
+    start(pg,idx,{'seed':SEED,'plain':True}); wait_cmd(pg); pg.wait_for_timeout(300); pg.evaluate(POKE_ROWS); pg.evaluate(S3_HOOK)
     v=pg.evaluate("()=>[B3.view.u.f0.pips,B3.view.u.f0.maxPips,B3.view.u.f0.st.includes('muffin_crown')]")
     if v!=[6,6,True]: fails.append(S+f'The Big One should start with 6 of 6 pips and its crown: {v}')
     fr.append(shot(pg))
@@ -358,7 +371,7 @@ def stage3_land(pg,idx):
     S='stage 3 landscape: '; fr=[]
     pg.evaluate("()=>{ B7.speed=1; toggleLayout(); }"); pg.wait_for_timeout(500); rot=pg.evaluate("()=>layout.rotated")
     R=lambda f: f.rotate(90,expand=True) if rot else f
-    start(pg,idx,{'seed':SEED}); wait_cmd(pg); pg.wait_for_timeout(300); pg.evaluate(POKE_ROWS); pg.evaluate(S3_HOOK)
+    start(pg,idx,{'seed':SEED,'plain':True}); wait_cmd(pg); pg.wait_for_timeout(300); pg.evaluate(POKE_ROWS); pg.evaluate(S3_HOOK)
     fr.append(R(shot(pg)))
     glare_at_rose(pg,S,[],1); hold(pg,95); fr.append(R(shot(pg))); m=marked(pg)
     if not(m['mark']=='p2' and m['chip']): fails.append(S+f'Rose is not shown Marked: {m}')
@@ -394,6 +407,169 @@ def auto_fight(pg,idx,fid,opt,frames=None,every=450,poke=None):
     if frames is not None: frames.append(shot(pg))
     return pg.evaluate("()=>({over:B3.F.over,order:B3.F.turnLog,rounds:B3.F.clock/100,ends:window.__b3.ends,turns:window.__b3.turns})")
 
+# ---------- Stage 4: the Vibes screen, the Lab's Ranks, the save fields ----------
+def vib(pg,k,wait=230): pg.click(f'#b3-vibes [data-k="{k}"]'); pg.wait_for_timeout(wait)
+def vstate(pg): return pg.evaluate("""()=>({open:B3V.open,door:B3V.door,sel:B3V.sel,say:document.querySelector('#b3-vibes .b3v-say').textContent,head:document.querySelector('#b3-vibes .b3v-title span').textContent,
+  hidden:document.getElementById('b3-vibes').hidden,focus:document.activeElement&&document.activeElement.dataset?document.activeElement.dataset.k||null:null,
+  tabs:[...document.querySelectorAll('#b3-vibes .b3v-tab span')].map(e=>e.textContent),
+  cards:[...document.querySelectorAll('#b3-vibes .b3v-card')].map(c=>({role:c.querySelector('.b3v-role').textContent,name:c.querySelector('.b3v-ct b').textContent,vp:c.querySelector('.b3v-vp').textContent,
+    live:[...c.querySelectorAll('.b3v-row.live span')].map(e=>e.textContent),rows:c.querySelectorAll('.b3v-row').length})),
+  slots:[...document.querySelectorAll('#b3-vibes .b3v-slots')].map(r=>[...r.querySelectorAll('.b3v-slot')].map(b=>b.querySelector('b').textContent+(b.classList.contains('on')?'*':''))),
+  rank:[...document.querySelectorAll('#b3-vibes .b3v-rk.on')].map(e=>e.textContent),picks:[...document.querySelectorAll('#b3-vibes .b3v-q b')].map(e=>e.textContent)})""")
+def vbottom(pg): pg.evaluate("()=>{ document.querySelector('#b3-vibes .b3v-body').scrollTop=99999; }"); pg.wait_for_timeout(120)
+def stage4(pg,lab):
+    S='stage 4: '; fr=[]; ff=[]
+    def need(cond,what):
+        if not cond: fails.append(S+what)
+    # --- The Lab's door: NEW BATTLE > VIBES AND RANKS ---
+    pg.evaluate("()=>{ b3LabReset(); const el=document.getElementById('splash'); el.hidden=false; el.classList.remove('out'); splash.active=true; splashSetMode('lab3'); }"); pg.wait_for_timeout(300)
+    names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
+    need('VIBES AND RANKS' in names and names[-1]=='BACK',f'the NEW BATTLE list has no VIBES AND RANKS row: {names}')
+    box=pg.evaluate("()=>{ const b=[...document.querySelectorAll('#splash .sp-choice')].find(e=>e.textContent.includes('VIBES AND RANKS')),r=b.getBoundingClientRect(),c=document.querySelector('#splash .sp-choices').getBoundingClientRect(); return r.bottom<=c.bottom+1&&r.top>=c.top-1; }")
+    need(box,'VIBES AND RANKS is not fully on screen on the NEW BATTLE list')
+    fr.append(shot(pg))
+    pg.click('#splash .sp-choice:has-text("VIBES AND RANKS")'); pg.wait_for_timeout(450); v=vstate(pg); fr.append(shot(pg))
+    need(v['open'] and not v['hidden'] and v['door']=='lab',f'the Vibes screen did not open from the Lab: {v}')
+    need(v['tabs']==['TOM','GRACE','ROSE','DEEDEE'],f"the Lab's Vibes screen should list Tom, Grace, Rose and Deedee: {v['tabs']}")
+    need(v['rank']==['2'],f"the Lab starts with every Vibe at Rank 2: {v['rank']}")
+    c=v['cards']
+    need(len(c)==2 and c[0]['role']=='MAIN VIBE' and c[0]['name']=='Frequent Flier' and '60 / 220 VP' in c[0]['vp'] and c[0]['rows']==7,f'Tom\'s Main Vibe card is wrong: {c[:1]}')
+    need(c[0]['live']==['Lounge Pass Flex','Zone One Blockade','Suite Door Slide'],f"what is in use from the Main Vibe at Rank 2: {c[0]['live']}")
+    need(c[1]['role']=='POCKET VIBE' and c[1]['name']=='Gamer Geek' and c[1]['live']==['Controller Toss'],f'the Pocket Vibe adds only its unlocked Skills: {c[1:]}')
+    vib(pg,'row-tom_flier-suite_door_slide'); v=vstate(pg); need('Skill, 3 Pep' in v['say'] and 'Tom' in v['say'],f"tapping a Skill row should say what it does: {v['say']}")
+    vib(pg,'row-tom_flier-upgrade_certificate'); v=vstate(pg); need('Unlocks at Rank 3 (220 Vibe Points)' in v['say'],f"a locked Quirk should say when it unlocks: {v['say']}")
+    # Main and Pocket trade places
+    vib(pg,'main-tom_gamer',350); v=vstate(pg); c=v['cards']; fr.append(shot(pg))
+    need(c[0]['role']=='MAIN VIBE' and c[0]['name']=='Gamer Geek' and c[0]['live']==['Cartridge Blow','Controller Toss'],f'MAKE MAIN on Gamer Geek: {c[:1]}')
+    need(c[1]['role']=='POCKET VIBE' and c[1]['name']=='Frequent Flier' and c[1]['live']==['Zone One Blockade','Suite Door Slide'],f'Frequent Flier should now be the Pocket Vibe: {c[1:]}')
+    kept=pg.evaluate("()=>JSON.parse(localStorage.getItem('aot-b3-lab')).book.tom")
+    need(kept['main']=='tom_gamer' and kept['pocket']=='tom_flier',f"the Lab's change is kept on the device at once: {kept}")
+    # The Rank picker and the Quirk slots
+    vib(pg,'rank-5'); v=vstate(pg); need(v['rank']==['5'] and all('MASTERED' in x['vp'] for x in v['cards']),f"Rank 5 for every Vibe: {v['rank']} {[x['vp'] for x in v['cards']]}")
+    vbottom(pg); vib(pg,'quirk-0',350); v=vstate(pg); fr.append(shot(pg))
+    need(v['picks']==['Elixir Hoarder','New Game Plus','Upgrade Certificate','Million-Miler Status','EMPTY','BACK'] or sorted(v['picks'][:4])==sorted(['Elixir Hoarder','New Game Plus','Upgrade Certificate','Million-Miler Status']),f"the Quirk list at Rank 5 should hold Tom's four Quirks: {v['picks']}")
+    vib(pg,'pick-upgrade_certificate',350); vbottom(pg); v=vstate(pg); need(v['slots'][0]==['Upgrade Certificate*','Empty'],f"picking a Quirk fills the slot: {v['slots']}")
+    vib(pg,'quirk-1',300); vib(pg,'pick-upgrade_certificate',300); vbottom(pg); v=vstate(pg); need(v['slots'][0]==['Empty','Upgrade Certificate*'],f"the same Quirk in the other slot moves it: {v['slots']}")
+    vib(pg,'quirk-0',300); vib(pg,'pick-elixir_hoarder',300); vbottom(pg); v=vstate(pg); fr.append(shot(pg)); need(v['slots'][0]==['Elixir Hoarder*','Upgrade Certificate*'],f"two Quirks from two Vibes: {v['slots']}")
+    vib(pg,'quirk-0',300); pg.keyboard.press('Escape'); pg.wait_for_timeout(250); v=vstate(pg); need(v['open'] and not v['picks'],f'Esc in the Quirk list should go back to the Vibes, not close the screen: {v["open"]} {v["picks"]}')
+    pg.evaluate("()=>{ document.querySelector('#b3-vibes .b3v-body').scrollTop=0; }"); vib(pg,'rank-2'); vbottom(pg); v=vstate(pg); need(v['slots'][0]==['Empty','Empty'] and v['rank']==['2'],f"back at Rank 2 the Quirks come off: {v['slots']}")
+    vib(pg,'quirk-0'); v=vstate(pg); need('No Quirk is unlocked yet' in v['say'] and not v['picks'],f"an empty Quirk slot before Rank 3 should say why: {v['say']}")
+    # Rows: three to the Back, the fourth is refused
+    for i,who_ in ((1,'grace'),(2,'rose'),(3,'deedee')):
+        vib(pg,f'who-{i}'); vbottom(pg); vib(pg,'rowpick-back')
+    fr.append(shot(pg))
+    rows=pg.evaluate("()=>{ const B=b3LabBook(); return ['tom','grace','rose','deedee'].map(id=>b3RowOf(B[id])); }")
+    need(rows==['front','back','back','back'],f'three of them moved to the Back row: {rows}')
+    vib(pg,'who-0'); vbottom(pg); vib(pg,'rowpick-back'); v=vstate(pg); fr.append(shot(pg))
+    need('Someone has to stand in Front' in v['say'] and pg.evaluate("()=>b3RowOf(b3LabBook().tom)")=='front',f"the last one in Front cannot go to the Back: {v['say']}")
+    # Keys and gamepad
+    pg.mouse.move(2,2); pg.keyboard.press('KeyE'); pg.wait_for_timeout(200); v=vstate(pg); need(v['sel']==1 and v['focus']=='who-1',f"E should move to the next family member: {v['sel']} {v['focus']}")
+    seen=[]
+    for _ in range(4): pg.keyboard.press('ArrowDown'); pg.wait_for_timeout(110); seen.append(vstate(pg)['focus'])
+    need(len(set(seen))==4 and all(seen),f'the arrow keys should walk down the buttons: {seen}')
+    pg.keyboard.press('KeyQ'); pg.wait_for_timeout(200); need(vstate(pg)['sel']==0,'Q should move back to Tom')
+    for _ in range(12):
+        if vstate(pg)['focus']=='pocket-tom_gamer': break
+        pg.keyboard.press('ArrowDown'); pg.wait_for_timeout(90)
+    f0=vstate(pg)['focus']; pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(120); f1=vstate(pg)['focus']
+    pg.evaluate("()=>window.__LE.b3vPad('down',true,false,false)"); pg.wait_for_timeout(120); f2=vstate(pg)['focus']
+    need(f2 and f2!=f1,f'the gamepad should move the cursor too: {f0} {f1} {f2}')
+    fr.append(shot(pg))
+    pg.evaluate("()=>window.__LE.b3vPad(null,false,false,true)"); pg.wait_for_timeout(350)
+    back=pg.evaluate("()=>({open:B3V.open,hidden:document.getElementById('b3-vibes').hidden,mode:splash.mode,name:(splash.list[splash.sel]||{}).name})")
+    need(not back['open'] and back['hidden'] and back['mode']=='lab3' and back['name']=='VIBES AND RANKS',f'B should close the screen and land on VIBES AND RANKS: {back}')
+    # --- A Lab fight with these Vibes: Gamer Geek as Main, three in the Back row ---
+    idx=lab.index('new1'); pg.evaluate("()=>{ B7.speed=2; }"); start(pg,idx,{'seed':SEED},keep=True); wait_cmd(pg); pg.wait_for_timeout(300)
+    for _ in range(12):
+        if who(pg)=='tom': break
+        pg.evaluate("()=>{ const p=b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); }"); wait_cmd(pg); pg.wait_for_timeout(200)
+    need(who(pg)=='tom','never reached Tom\'s turn in the Lab fight')
+    cross=pg.evaluate("()=>document.querySelector('#b3-cmd .b2-x.up small').textContent"); ff.append(shot(pg))
+    need(cross=='Cartridge Blow',f'with Gamer Geek as Main, BASIC should be Cartridge Blow: {cross}')
+    pg.mouse.move(2,2); pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(250); ff.append(shot(pg))
+    sk=pg.evaluate("()=>[...document.querySelectorAll('#b3-cmd .b2-btn[data-i]')].map(b=>b.querySelector('.b2-sn').textContent+(b.querySelector('.b3-pk')?' [POCKET]':''))")
+    need(sk==['Controller Toss','Zone One Blockade [POCKET]','Suite Door Slide [POCKET]'],f'the SKILLS list should be the Main Vibe\'s Skill, then the Pocket Vibe\'s two, tagged: {sk}')
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(150); pg.click('#b3-party .b2-pc[data-i="1"]'); pg.wait_for_timeout(300); ff.append(shot(pg))
+    inf=pg.evaluate("()=>document.querySelector('#b3-cmd .b3-info').textContent")
+    need('Gamer Geek' in inf and 'RANK 2' in inf and 'Striker Lean' in inf and 'Frequent Flier' in inf,f'tapping Tom should show his Vibes: {inf[:200]}')
+    frows=pg.evaluate("()=>B3.F.party.map(p=>p.id+':'+p.row+':'+p.vibe)")
+    need(frows==['grace:back:grace_squishy','tom:front:tom_gamer','rose:back:rose_sugar','deedee:back:deedee_neat'],f'the fight should use the rows and Vibes set on the screen: {frows}')
+    stats=pg.evaluate("()=>{ const t=B3.F.party[1]; return {hp:t.maxHp,atk:Math.round(b3Stat(t,'atk')*10)/10}; }")
+    need(stats=={'hp':115,'atk':29.9},f'Tom with the Striker Lean: 115 HP and 29.9 Attack at level 2: {stats}')
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(150)
+    for _ in range(80):
+        if pg.evaluate("()=>B3.ui")=='done': break
+        pg.evaluate("()=>{ const p=b3Auto(B3.F,B3.actor); b3Commit(p.skill,p.target); }"); wait_cmd(pg,60000); pg.wait_for_timeout(120)
+    pg.wait_for_timeout(500); ff.append(shot(pg))
+    won=pg.evaluate("()=>({over:B3.F.over,btn:document.querySelector('#b3-cmd [data-done] em').textContent,msg:document.getElementById('b3-msg').textContent,vp:b3LabBook().tom.vp,g:b3LabBook().grace.vp})")
+    need(won['over']=='win' and '+10 Vibe Points' in won['btn'] and '+10 Vibe Points' in won['msg'],f'a Lab win should say the Vibe Points it paid: {won}')
+    need(won['vp']=={'tom_flier':65,'tom_gamer':70} and won['g']=={'grace_squishy':70,'grace_craft':65},f"10 VP to each Main Vibe and 5 to each Pocket Vibe: {won['vp']} {won['g']}")
+    pg.click('#b3-cmd [data-done]'); pg.wait_for_timeout(600)
+    # Kept on the device across a reload
+    pg.reload(); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start&&window.__LE.b3vOpen',timeout=180000); pg.wait_for_timeout(1200)
+    again=pg.evaluate("()=>{ const B=b3LabBook(); return {main:B.tom.main,vp:B.tom.vp.tom_gamer,rose:b3RowOf(B.rose)}; }")
+    need(again=={'main':'tom_gamer','vp':70,'rose':'back'},f"the Lab's Vibes should survive a reload: {again}")
+    pg.evaluate("()=>{ b3LabReset(); }")
+    # --- The save fields ---
+    pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; }"); pg.wait_for_timeout(200)
+    sv=pg.evaluate("()=>{ saveGame('7',true); const s=readSave('7'); return {tom:s.members.find(m=>m.id==='tom'),amy:s.members.find(m=>m.id==='amy'),n:s.members.filter(m=>m.vibes).map(m=>m.id)}; }")
+    need(sv['tom'].get('vibes')=={'main':'tom_flier','pocket':'tom_gamer','quirks':[None,None],'vp':{'tom_flier':0,'tom_gamer':0}} and sv['tom'].get('row') is None,f"a new game saves a fresh loadout per member: {sv['tom'].get('vibes')}")
+    need(sv['n']==['tom','grace','rose','deedee'] and 'vibes' not in sv['amy'],f"only family members with a kit get the fields for now: {sv['n']}")
+    need('stamps' in sv['tom'] and 'ranks' in sv['tom'] and 'loadouts' in sv['tom'],'the old save fields (stamps, ranks, loadouts) must stay')
+    # The pause menu's door
+    pg.evaluate("()=>{ openMenu(true); }"); pg.wait_for_timeout(350)
+    cmds=pg.evaluate("()=>[...document.querySelectorAll('#menu .mcmd')].map(b=>({t:b.textContent,vis:b.getBoundingClientRect().bottom<=document.querySelector('#menu .mcmds-win').getBoundingClientRect().bottom+1}))")
+    need(any(x['t']=='Vibes' for x in cmds) and all(x['vis'] for x in cmds),f'the pause menu should list Vibes with every command on screen: {cmds}')
+    mm=[shot(pg)]
+    pg.click('#menu [data-k="cmd-vibes"]'); pg.wait_for_timeout(450); v=vstate(pg); mm.append(shot(pg))
+    need(v['open'] and v['door']=='menu' and v['tabs']==['TOM','GRACE','ROSE'],f"the pause menu's Vibes screen should list the party: {v['tabs']} {v['open']}")
+    need('Story fights still use the old battle' in v['head'],f"the pause menu's screen should say where the Vibes are used: {v['head']}")
+    need(not v['rank'] and pg.evaluate("()=>!document.querySelector('#b3-vibes .b3v-rank')"),'the Rank picker belongs to the Lab only')
+    need(v['cards'][0]['live']==['Lounge Pass Flex','Zone One Blockade'] and '0 / 60 VP' in v['cards'][0]['vp'],f"a new game is Rank 1 with 0 VP: {v['cards'][0]}")
+    vib(pg,'main-tom_gamer',350); vib(pg,'who-1'); vbottom(pg); vib(pg,'rowpick-back'); mm.append(shot(pg))
+    pg.keyboard.press('KeyM'); pg.keyboard.press('ArrowLeft'); pg.wait_for_timeout(150)
+    need(pg.evaluate("()=>menuOpen&&B3V.open&&menuTab==='home'"),'keys must not reach the pause menu while the Vibes screen is open over it')
+    pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(600); rot=pg.evaluate("()=>layout.rotated"); f=shot(pg); land=f.rotate(90,expand=True) if rot else f
+    fits=pg.evaluate("()=>{ const p=document.querySelector('#b3-vibes .b3v-panel').getBoundingClientRect(),g=document.getElementById('stage').getBoundingClientRect(); return p.left>=g.left-1&&p.right<=g.right+1&&p.top>=g.top-1&&p.bottom<=g.bottom+1; }")
+    need(fits,'landscape: the Vibes panel does not fit inside the stage')
+    pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(450)
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(400); mm.append(shot(pg))
+    # The pause menu in landscape: its command list scrolls when the screen is short (it did before Vibes was added, on a phone
+    # 393 high). Every one of the nine commands must be reachable.
+    pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(600); f=shot(pg); land2=f.rotate(90,expand=True) if rot else f
+    cmds=pg.evaluate("()=>{ const w=document.querySelector('#menu .mcmds-win'); return [...document.querySelectorAll('#menu .mcmd')].map(b=>{ b.scrollIntoView({block:'nearest'}); const r=b.getBoundingClientRect(),W=w.getBoundingClientRect(); return {t:b.textContent,vis:r.left>=W.left-1&&r.right<=W.right+1&&r.top>=W.top-1&&r.bottom<=W.bottom+1}; }); }")
+    need(len(cmds)==9 and all(x['vis'] for x in cmds),f'landscape: a pause menu command cannot be reached: {cmds}')
+    pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(450)
+    after=pg.evaluate("""()=>{ const a=readSave('auto')||{members:[]},t=a.members.find(m=>m.id==='tom')||{},g=a.members.find(m=>m.id==='grace')||{};
+      return {open:B3V.open,menu:menuOpen,auto:(t.vibes||{}).main,grow:g.row,lab:b3LabBook().tom.main,labrow:b3RowOf(b3LabBook().grace),labvp:b3LabBook().tom.vp.tom_gamer,focus:document.activeElement&&document.activeElement.dataset?document.activeElement.dataset.k:null}; }""")
+    need(not after['open'] and after['menu'],f'Esc should close the Vibes screen and leave the pause menu open: {after}')
+    need(after['auto']=='tom_gamer' and after['grow']=='back',f"closing the screen should put the change in the autosave: {after}")
+    need(after['lab']=='tom_gamer' and after['labrow']=='back' and after['labvp']==60,f"what is set in the pause menu is what a Lab fight uses (Vibes and row, not Vibe Points): {after}")
+    need(after['focus']=='cmd-vibes',f"the cursor should be back on Vibes in the pause menu: {after['focus']}")
+    # Save, wipe, load
+    rt=pg.evaluate("""()=>{ saveGame('7',true); for(const m of ALL_MEMBERS()) m.vibes=null; const ok=loadGame('7'); const t=b3Member('tom').vibes,g=b3Member('grace').vibes;
+      return {ok,tom:t&&t.main,pocket:t&&t.pocket,grow:g&&g.row,vp:t&&t.vp}; }""")
+    need(rt=={'ok':True,'tom':'tom_gamer','pocket':'tom_flier','grow':'back','vp':{'tom_flier':0,'tom_gamer':0}},f'save then load should bring the Vibes back: {rt}')
+    # A save from before the fields existed (a battle 2 save), one with junk in them, and one from before members were saved at all
+    old=pg.evaluate("""()=>{ const put=(slot,s)=>{ const raw=JSON.stringify(s); SAVE_CACHE[slot]=raw; localStorage.setItem('aot-save-'+slot,raw); };
+      const a=readSave('7'); for(const m of a.members) { delete m.vibes; delete m.row; } put('8',a);
+      const b=readSave('7'); for(const m of b.members) { m.vibes={main:'nope',pocket:7,quirks:'x',vp:{tom_flier:'lots',grace_craft:99999}}; m.row='up'; } put('9',b);
+      const c=readSave('7'); delete c.members; put('10',c);
+      const out={};
+      for(const slot of ['8','9','10']) { const ok=loadGame(slot),t=b3Member('tom').vibes,g=b3Member('grace').vibes,d=b3Member('deedee').vibes;
+        out[slot]={ok,tom:t&&[t.main,t.pocket,t.vp.tom_flier,t.vp.tom_gamer,t.row].join(),grace:g&&[g.main,g.vp.grace_craft,g.row].join(),deedee:d&&d.main}; }
+      saveGame('8',true); const again=readSave('8').members.find(m=>m.id==='tom'); out.resaved=!!(again.vibes&&again.vibes.main==='tom_flier'&&'stamps' in again);
+      for(const slot of ['7','8','9','10']) { delete SAVE_CACHE[slot]; localStorage.removeItem('aot-save-'+slot); }
+      return out; }""")
+    need(old['8']=={'ok':True,'tom':'tom_flier,tom_gamer,0,0,','grace':'grace_squishy,0,','deedee':'deedee_neat'},f"a save from before the Vibe fields should load with fresh loadouts: {old['8']}")
+    need(old['9']=={'ok':True,'tom':'tom_flier,tom_gamer,0,0,','grace':'grace_squishy,800,','deedee':'deedee_neat'},f"junk in the fields should be repaired, not crash: {old['9']}")
+    need(old['10']['ok'] and old['10']['tom']=='tom_flier,tom_gamer,0,0,',f"a very old save with no member list should load with fresh loadouts: {old['10']}")
+    need(old['resaved'],'saving an old save again should add the Vibe fields and keep the old ones')
+    pg.evaluate("()=>{ if(menuOpen) closeMenu(); b3LabReset(); }"); pg.wait_for_timeout(200)
+    sheet(fr,4,os.path.join(OUT,'b3-s4-lab.png')); sheet(ff,4,os.path.join(OUT,'b3-s4-fight.png')); sheet(mm,4,os.path.join(OUT,'b3-s4-menu.png'))
+    # Full-size frames of the three views Tom will use most, to look at closely.
+    for name,im in (('b3-s4-vibes-portrait.png',fr[1]),('b3-s4-vibes-menu-landscape.png',land),('b3-s4-menu-landscape.png',land2),('b3-s4-fight-skills.png',ff[1])): im.save(os.path.join(OUT,name))
+
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
@@ -401,7 +577,7 @@ with sync_playwright() as pw:
     pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start',timeout=180000); pg.wait_for_timeout(1500)
-    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); want=[a for a in sys.argv[1:] if not a.startswith('-') and a!='s3'] or ([] if 's3' in sys.argv else lab)
+    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4')] or ([] if only else lab)
     # The way in: ADMIN > BATTLE LAB shows NEW BATTLE, which opens the list.
     pg.evaluate("()=>{ splashSetMode('lab'); }"); pg.wait_for_timeout(200)
     names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
@@ -433,12 +609,12 @@ with sync_playwright() as pw:
         if pg.evaluate("()=>splash.mode")!='lab3': fails.append(f'{fid}: CONTINUE after a loss did not go back to the list')
         # 4. landscape (the phone's own toggle: the stage turns a quarter turn)
         pg.evaluate("()=>{ B7.speed=1; toggleLayout(); }"); pg.wait_for_timeout(500)
-        fr=[]; start(pg,idx,{'seed':SEED}); wait_cmd(pg); pg.wait_for_timeout(400); fr.append(shot(pg))
+        fr=[]; start(pg,idx,{'seed':SEED}); wait_cmd(pg); pg.wait_for_timeout(400); fr.append(shot(pg)); first=state(pg)['actor']
         pg.keyboard.press('ArrowUp'); pg.wait_for_timeout(250); fr.append(shot(pg))
         key=[f['key'] for f in state(pg)['foes'] if f['alive']][0]
         if state(pg)['ui']=='target': tap_foe(pg,key)
         pg.wait_for_timeout(900); fr.append(shot(pg)); wait_cmd(pg); pg.wait_for_timeout(250)
-        if state(pg)['actor']!='tom': fails.append(f"{fid} landscape: tapping the enemy did not use Grace's Basic (now {state(pg)['actor']})")
+        if state(pg)['actor'] in(first,None) or pg.evaluate("()=>B3.F.turnLog.length")<2: fails.append(f"{fid} landscape: tapping the enemy did not use {first}'s Basic (now {state(pg)['actor']})")
         pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(250); fr.append(shot(pg)); pg.keyboard.press('Escape'); pg.wait_for_timeout(150)
         pg.click('#b3-exit'); pg.wait_for_timeout(500)
         if pg.evaluate("()=>splash.mode")!='lab3' or pg.evaluate("()=>B3.active"): fails.append(f'{fid} landscape: EXIT did not go back to the list')
@@ -455,6 +631,9 @@ with sync_playwright() as pw:
     if 'new6' in want or 's3' in sys.argv:
         print('stage 3 moves'); pg.evaluate("()=>{ B7.speed=1; }")
         stage3_fight(pg,lab.index('new6')); stage3_land(pg,lab.index('new6'))
+    # 6b. stage 4: the Vibes screen from both doors, the Lab's Ranks, a fight with changed Vibes, the save fields
+    if 's4' in sys.argv or not only and len(want)==len(lab):
+        print('stage 4: Vibes'); stage4(pg,lab)
     # 7. battle 2 still owns its screen
     pg.evaluate("()=>{ B7.speed=1; splash.active=false; document.getElementById('splash').hidden=true; window.__LE.b2Start({party:['tom','grace','rose'],level:12,foes:[['mudling','front']],bag:[]}); }")
     pg.wait_for_function("()=>window.__LE.battle.state==='command'&&window.__LE.B2.actor&&window.__LE.B2.actor.side==='party'",timeout=40000)

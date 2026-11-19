@@ -1,11 +1,12 @@
 'use strict';
-// engine/menu.js — The pause menu: PARTY, ITEMS, GEAR, STATUS, STAMPS, LOAD, OPTIONS (engine/feel.js), QUIT. (STATUS and STAMPS are drawn by engine/progress.js.)
+// engine/menu.js — The pause menu: PARTY, ITEMS, GEAR, STATUS, STAMPS, VIBES, LOAD, OPTIONS (engine/feel.js), QUIT. (STATUS and STAMPS are drawn by engine/progress.js.)
+// VIBES is not a tab: it opens the new battle system's Vibes screen over the menu (engine/b3-menu.js).
 // Section tabs and character tabs share one tab style. STATUS and GEAR are per character (character row shown);
 // ITEMS and SAVE are party-wide (character row hidden; items pick their target inline).
 // Controls: tap; or arrows/WASD move focus, Enter/A selects, Esc/B goes back, Q/E (L2/R2, R1) switch character.
 // Layout follows the Final Fantasy IV Pixel Remaster menu: command list on the left (with play time and coins
 // under it), the party roster on the right, the location line, then a hint bar with Rotate, Music, Sound, Close.
-const MENU_TABS=[{id:'home',label:'Party'},{id:'items',label:'Items'},{id:'gear',label:'Gear'},{id:'status',label:'Status'},{id:'stamps',label:'Stamps'},{id:'saves',label:'Load'},{id:'options',label:'Options'},{id:'quit',label:'Quit'}];
+const MENU_TABS=[{id:'home',label:'Party'},{id:'items',label:'Items'},{id:'gear',label:'Gear'},{id:'status',label:'Status'},{id:'stamps',label:'Stamps'},{id:'vibes',label:'Vibes'},{id:'saves',label:'Load'},{id:'options',label:'Options'},{id:'quit',label:'Quit'}];
 // Saving happens from the SAVE button on the map HUD (openSave), which shows just the save popup.
 const PER_CHAR_TABS=['status','gear','stamps'];
 // Character portraits (menu roster, dialogue box, battle panels, chapter select): head crops of each hero painting,
@@ -145,8 +146,8 @@ function renderMenu() {
   // Command list.
   const cmds=$('menu-cmds'); cmds.innerHTML='';
   for(const t of MENU_TABS) {
-    const b=btn('mcmd'+(t.id===menuTab?' active':''),'cmd-'+t.id,t.label,()=>{ if(t.id==='quit') openQuit(); else setMenuTab(t.id); });
-    if(t.id!=='quit') { b.setAttribute('role','tab'); b.setAttribute('aria-selected',t.id===menuTab); }
+    const b=btn('mcmd'+(t.id===menuTab?' active':''),'cmd-'+t.id,t.label,()=>{ if(t.id==='quit') openQuit(); else if(t.id==='vibes') b3vOpen('menu'); else setMenuTab(t.id); });
+    if(t.id!=='quit'&&t.id!=='vibes') { b.setAttribute('role','tab'); b.setAttribute('aria-selected',t.id===menuTab); }
     if(t.id==='stamps'&&party.some(b6Stampable)) b.appendChild(el('i','cmd-dot'));   // Stamp Points waiting
     cmds.appendChild(b);
   }

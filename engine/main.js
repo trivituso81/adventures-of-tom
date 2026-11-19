@@ -14,6 +14,7 @@ function pollGamepad() {
   const dirEdge=dir!==gp.dir; gp.dir=dir;
   const back=dir==='up'||dir==='left';
   if(L) toggleLayout();
+  if(typeof B3V!=='undefined'&&B3V.open) { input.padDir=null; b3vPad(dir,dirEdge,A,B,L2,R1||R2); return; }   // the Vibes screen: engine/b3-menu.js
   if(splash.active) { input.padDir=null; splashPad(dir,dirEdge,A,B); return; }
   if(battle.active) {
     input.padDir=null;

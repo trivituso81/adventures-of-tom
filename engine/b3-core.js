@@ -25,22 +25,35 @@ function b3LevelStats(level) {
 // ---------- Units ----------
 function b3BlankUnit(key,side,slot) {
   return {key,side,slot,st:{},wait:0,pri:0,pushes:0,pulls:0,placed:false,granted:0,pepRound:0,turns:0,ko:false,stripped:{},peeves:[],resists:[],
-    shields:[],counters:{},crack:0,cracked:{},passives:[],used:{},
+    shields:[],counters:{},counterInfo:{},crack:0,cracked:{},passives:[],used:{},
+    mods:[],          // mods the unit carries for the whole fight (its Main Vibe's Lean), same shape as a status's mods
+    hitSince:false,   // took or blocked a hit since its last turn ended (Controller Toss)
     // Composure (spec 2.7): pips left and at the start; pipLock = cannot lose pips (from a Break until its next turn ends);
     // broken = Flustered and waiting for its next turn; flusterTurn = that turn is running; flusterMove = fall back when this turn ends.
     pips:0,maxPips:0,pipLock:false,broken:false,flusterTurn:false,flusterMove:false,
     mark:null};   // the key of the family member this foe has Marked for its follow-up act (bestiary 1.1)
 }
+// A family member in a fight. What they bring comes from their loadout (engine/b3-progress.js): cfg.loadouts[id], or a fresh
+// one with every Vibe at cfg.rank (1 when left out). The Main Vibe's Lean is applied here: Max HP is raised at once, the rest
+// are mods of kind 'lean', so they multiply with every other kind of bonus (spec 2.4).
+// cfg.plain (rule tests of stages 1 to 3): the bare unit those tests were written against. First Vibe only, its Skill 1 and
+// Skill 2, no Pocket Vibe, no Lean, no Trait, no Quirks.
 function b3PartyUnit(F,id,level,slot) {
   const C=B3_CAST[id]; if(!C) throw new Error('Battle 3 has no kit yet for '+id);
-  const V=B3_VIBES[C.vibes[0]],S=b3LevelStats(level),u=b3BlankUnit('p'+slot,'party',slot);
-  Object.assign(u,{id,name:C.name,level,row:(F.cfg.rows&&F.cfg.rows[id])||B3_RULES.rowByLean[V.lean]||'front',vibe:V.id,basic:V.basic,
-    skills:V.skills.filter(s=>B3_SKILLS[s]),pep:B3_RULES.pep.start});
-  // Traits and Quirks listen on the hook bus (engine/b3-hooks.js). A row exists once its kit stage has written it (stage 5 on).
-  u.passives=[V.trait,...V.quirks].map(k=>B3_TRAITS[k]||B3_QUIRKS[k]).filter(Boolean);
-  for(const k of ['hp','atk','def','spd']) u[k]=Math.round(S[k]*(C.stat[k]||1));
+  const cfg=F.cfg,S=b3LevelStats(level),u=b3BlankUnit('p'+slot,'party',slot);
+  let K;
+  if(cfg.plain) { const V=B3_VIBES[C.vibes[0]]; K={main:V.id,pocket:null,basic:V.basic,skills:V.skills.slice(0,2).filter(s=>B3_SKILLS[s]),pocketSkills:[],trait:null,quirks:[],lean:null,row:B3_RULES.rowByLean[V.lean]||'front',counters:[],rank:2}; }
+  else K=b3Kit(id,b3FixLoadout(id,(cfg.loadouts&&cfg.loadouts[id])||b3NewLoadout(id,cfg.rank)));
+  Object.assign(u,{id,name:C.name,level,row:(cfg.rows&&cfg.rows[id])||K.row,vibe:K.main,pocket:K.pocket,lean:K.lean,rank:K.rank,basic:K.basic,
+    skills:K.skills.slice(),pocketSkills:K.pocketSkills.slice(),quirks:K.quirks.slice(),pep:B3_RULES.pep.start});
+  // Traits and Quirks listen on the hook bus (engine/b3-hooks.js), and so does the rule that builds a Portable Counter.
+  u.passives=cfg.plain?[]:b3KitPassives(K);
+  for(const Ct of K.counters) u.counterInfo[Ct.id]={name:Ct.name,max:Ct.max};
+  const lean=(K.lean&&B3_RULES.leans[K.lean])||{};
+  for(const k in lean) if(k!=='hp') u.mods.push({stat:k,kind:'lean',v:lean[k]});
+  for(const k of ['hp','atk','def','spd']) u[k]=Math.round(S[k]*(C.stat[k]||1)*(k==='hp'?1+(lean.hp||0):1));
   u.maxHp=u.hp;
-  if(F.cfg.hpPct!=null) u.hp=Math.max(1,Math.round(u.maxHp*F.cfg.hpPct));
+  if(cfg.hpPct!=null) u.hp=Math.max(1,Math.round(u.maxHp*cfg.hpPct));
   return u;
 }
 // o.add: a foe called in mid-fight (bestiary 1.1): half its entry's HP unless o.hp prints a number, and 0 pips.
@@ -86,8 +99,10 @@ const b3Other=side=>side==='party'?'foe':'party';
 // ---------- Start ----------
 // cfg: party (ids, 4 at most), level (number) or levels ({id:level}), formation (a B3_FORMATIONS id) or foes ([{id,row}]),
 //      seed (number; left out = a random one), mods ({foeHp, taken, foeSpeed}: the difficulty modes' multipliers),
-//      rows ({id:'front' or 'back'}: where a family member stands; left out = by their Vibe's Lean),
-//      hpPct (tests: the party starts at this share of its HP).
+//      loadouts ({id: loadout}: Main and Pocket Vibe, Quirks, VP and row per member, engine/b3-progress.js; a member left out
+//      gets a fresh loadout with every Vibe at `rank`, 1 when that is left out too),
+//      rows ({id:'front' or 'back'}: overrides where a family member stands; left out = their loadout's row, else by Lean),
+//      hpPct (tests: the party starts at this share of its HP), plain (tests: see b3PartyUnit).
 function b3NewFight(cfg) {
   const seed=cfg.seed==null?Math.floor(Math.random()*2147483647):cfg.seed;
   const F={cfg,seed,rng:seed|0,clock:0,round:1,over:null,acting:null,priSeq:0,stamp:1,turnLog:[],hazards:[],reactions:[],reactSeq:0,opening:[],
@@ -125,6 +140,7 @@ function b3OverBeats(F,beats,g) {
 function b3Mods(u,stat) {
   const out={};
   for(const id in u.st) for(const m of B3_STATUS[id].mods) if(m.stat===stat) out[m.kind]=(out[m.kind]||0)+m.v;
+  for(const m of u.mods) if(m.stat===stat) out[m.kind]=(out[m.kind]||0)+m.v;
   return out;
 }
 const b3Sum=(u,stat)=>{ const M=b3Mods(u,stat); let s=0; for(const k in M) s+=M[k]; return s; };
@@ -177,11 +193,16 @@ function b3Carried(F,u) {
       desc:'It lands on its next turn'+(m?', aimed at '+m.name:'')+'. A Break cancels it, and so does a Skill that interrupts.'}); }
   for(const f of F.foes) if(f.mark===u.key&&b3Alive(f)) rows.push({name:'Marked',short:'MARKED',color:'#ff8f80',kind:'marked',left:'next turn',
     desc:f.name+(f.charge?' will use '+f.charge.name+' on '+u.name:' is aiming at '+u.name)+' on its next turn. A Mark cannot be cleansed.'});
+  // A family member's Vibes come next: the Main Vibe with its Rank and Lean, and the Pocket Vibe.
+  if(u.side==='party'&&u.lean&&B3_VIBES[u.vibe]) { const V=B3_VIBES[u.vibe],P=u.pocket&&B3_VIBES[u.pocket],Ln=B3_LEANS[u.lean];
+    rows.push({name:V.name,short:'RANK '+u.rank,color:'#c9e6a8',kind:'vibe',left:Ln.name+' Lean',
+      desc:'Main Vibe: '+Ln.desc+'.'+(P?' Pocket Vibe: '+P.name+(u.pocketSkills.length?' ('+u.pocketSkills.map(s=>B3_SKILLS[s].name).join(', ')+').':', which adds no Skill yet.'):'')}); }
   const ids=Object.keys(u.st).sort((a,b)=>B3_STATUS[b].weight-B3_STATUS[a].weight||u.st[a].at-u.st[b].at);
   for(const id of ids) { const S=B3_STATUS[id],s=u.st[id];
     rows.push({name:S.name,short:S.short,color:S.color,kind:S.kind,left:s.unit==='round'?s.n+(s.n===1?' round':' rounds')+' left':s.unit==='begin'?'until its next turn':turns(s.n),desc:S.desc}); }
   for(const sh of u.shields) rows.push({name:'Shield',short:'SHIELD',color:'#9fd0ff',kind:'buff',left:turns(sh.n),desc:'Soaks the next '+sh.amt+' damage before HP.'});
-  for(const k in u.counters) if(u.counters[k]) rows.push({name:k,short:String(u.counters[k]),color:'#fff1cb',kind:'counter',left:'',desc:'Built up: '+u.counters[k]+'.'});
+  for(const k in u.counters) if(u.counters[k]) { const I=u.counterInfo[k];
+    rows.push({name:I?I.name:k,short:String(u.counters[k]),color:'#fff1cb',kind:'counter',left:'',desc:'Built up: '+u.counters[k]+(I&&I.max?' of '+I.max:'')+'.'}); }
   if(u.crack) rows.push({name:'Cracked',short:'CRACKED',color:'#e6b08a',kind:'debuff',left:'this fight',desc:'Defense is cut by '+Math.round(u.crack*100)+'% for the rest of the fight.'});
   for(const hz of F.hazards) if(hz.side===u.side) { const H=B3_HAZARDS[hz.id];
     rows.push({name:H.name,short:H.short,color:H.color,kind:'hazard',left:hz.uses+(hz.uses===1?' slip':' slips')+', '+hz.rounds+(hz.rounds===1?' round':' rounds')+' left',desc:H.desc}); }
@@ -236,6 +257,7 @@ function b3Options(F,u,S) {
     const moves=S.effects.some(e=>e.op==='place');
     return mates.filter(m=>m!==u).map(m=>({key:m.key,label:m.name,units:[m],ally:true,no:moves&&m.placed?m.name+' was already moved this round.':''}));
   }
+  if(S.target==='family') return mates.map(m=>({key:m.key,label:m.name,units:[m],ally:true}));   // anyone in the family, the user included
   if(S.target==='self') return [{key:u.key,label:u.name,units:[u],ally:true}];
   if(S.target==='ko_ally') return (u.side==='party'?F.party:F.foes).filter(m=>m.ko).map(m=>({key:m.key,label:m.name,units:[m],ally:true}));
   if(S.target==='adjacent_allies') { const adj=b3Adjacent(F,u); return adj.length?[{key:'*',label:adj.map(m=>m.name).join(' and '),units:adj,ally:true}]:[]; }
@@ -277,6 +299,12 @@ function b3AutoScore(F,u,S,O) {
     } else sc+=O.units.reduce((s,t)=>s+per(t),0)/O.units.length*(S.target==='all_foes'?O.units.length*R.aoeShare:1);
   } else if(has('place')) sc+=4+O.units[0].wait/6;
   else if(has('revive')) sc+=60;
+  else if(has('heal')) {
+    // A heal is worth the HP it really gives back, and more on someone close to falling; clearing debuffs is worth a little.
+    const t=O.units[0],h=has('heal'),pct=typeof h.pct==='number'?h.pct:R.heal[h.pct],got=Math.min(t.maxHp-t.hp,t.maxHp*pct);
+    const bad=has('cleanse')?Object.keys(t.st).filter(id=>['debuff','prime','mark'].includes(B3_STATUS[id].kind)).length:0;
+    sc+=got*.5+(t.hp/t.maxHp<.35?20:0)+bad*4-(got<=0&&!bad?99:0);
+  }
   else if(has('hazard')) {
     // Worth laying when nothing is on the floor and a monster has an act it would trip on.
     const H=B3_HAZARDS[has('hazard').id],n=foes.filter(f=>f.D&&f.D.acts.some(A=>A.power>0&&A.tags.some(t=>H.tags.includes(t)))).length;
@@ -313,12 +341,36 @@ function b3CheckData() {
     if(H.id!==id||!H.desc||!H.short||!(H.uses>0)||!(H.rounds>0)) bad.push('hazard '+id+': needs id, desc, short, uses and rounds'); effects('hazard '+id,H.effects); }
   for(const D of B3_DETONATIONS) { if(!B3_STATUS[D.prime]||B3_STATUS[D.prime].kind!=='prime') bad.push('detonation '+D.id+': '+D.prime+' is not a Prime'); if(!B3_FLAVORS[D.flavor]) bad.push('detonation '+D.id+': unknown flavor'); effects('detonation '+D.id,D.effects); }
   for(const k in B3_FLAVORS) { const p=B3_FLAVORS[k].prime; if(p&&!B3_STATUS[p]) bad.push('flavor '+k+': unknown Prime '+p); }
-  for(const id in B3_VIBES) { const V=B3_VIBES[id];
-    if(!B3_CAST[V.owner]) bad.push('vibe '+id+': unknown owner'); if(!B3_SKILLS[V.basic]) bad.push('vibe '+id+': its Basic '+V.basic+' has no row'); if(!B3_RULES.leans[V.lean]) bad.push('vibe '+id+': unknown Lean'); }
-  for(const id in B3_CAST) for(const v of B3_CAST[id].vibes) if(!B3_VIBES[v]) bad.push('cast '+id+': unknown vibe '+v);
+  for(const id in B3_VIBES) { const V=B3_VIBES[id],w='vibe '+id,slots=['s1','s2','cap'];
+    if(V.id!==id) bad.push(w+': id does not match its key');
+    if(!B3_CAST[V.owner]) bad.push(w+': unknown owner'); else if(!B3_CAST[V.owner].vibes.includes(id)) bad.push(w+': its owner\'s cast row does not list it');
+    if(!B3_SKILLS[V.basic]||B3_SKILLS[V.basic].slot!=='basic') bad.push(w+': its Basic '+V.basic+' has no Basic row');
+    if(!B3_RULES.leans[V.lean]||!B3_LEANS[V.lean]) bad.push(w+': unknown Lean');
+    if(!Array.isArray(V.subtitles)||V.subtitles.length!==B3_RULES.subtitleRank.length) bad.push(w+': needs '+B3_RULES.subtitleRank.length+' Subtitles');
+    if(!Array.isArray(V.skills)||V.skills.length!==3) bad.push(w+': needs Skill 1, Skill 2 and a Grand Capstone');
+    else V.skills.forEach((s,i)=>{ const S=B3_SKILLS[s];
+      if(!S&&!B3_SOON[s]) bad.push(w+': Skill '+s+' has neither a row nor a name in B3_SOON');
+      if(S&&(S.slot!==slots[i]||S.vibe!==id)) bad.push(w+': Skill '+s+' should be slot '+slots[i]+' of this Vibe'); });
+    const T=B3_TRAITS[V.trait]; if(!T||T.vibe!==id) bad.push(w+': its Trait '+V.trait+' has no row for this Vibe');
+    if(!Array.isArray(V.quirks)||V.quirks.length!==2) bad.push(w+': needs Quirk A and Quirk B');
+    else for(const q of V.quirks) if(!B3_QUIRKS[q]||B3_QUIRKS[q].vibe!==id) bad.push(w+': its Quirk '+q+' has no row for this Vibe');
+    if(V.counter) { const Ct=V.counter;
+      if(!Ct.id||!Ct.name||!(Ct.max>0)||!B3_HOOKS.includes(Ct.on)) bad.push(w+': a Portable Counter needs id, name, max and a known hook in `on`'); } }
+  for(const id in B3_SOON) if(B3_SKILLS[id]) bad.push('B3_SOON still names '+id+', which now has its own Skill row');
+  for(const [what,T] of [['trait',B3_TRAITS],['quirk',B3_QUIRKS]]) for(const id in T) { const P=T[id],w=what+' '+id;
+    if(P.id!==id) bad.push(w+': id does not match its key'); if(!P.name||!P.desc) bad.push(w+': needs name and desc (the Vibes screen shows them)');
+    if(!B3_VIBES[P.vibe]) bad.push(w+': unknown vibe');
+    if(!P.soon&&P.on&&!B3_HOOKS.includes(P.on)) bad.push(w+': unknown hook '+P.on);
+    if(!P.soon) effects(w,P.effects); }
+  for(const id in B3_CAST) { const C=B3_CAST[id];
+    for(const v of C.vibes) if(!B3_VIBES[v]) bad.push('cast '+id+': unknown vibe '+v);
+    for(const n of [1,2]) if(C.vibes.filter(v=>B3_VIBES[v]&&B3_VIBES[v].sig===n).length>1) bad.push('cast '+id+': two Vibes are marked sig '+n);
+    if(C.vibes.length&&!C.vibes.some(v=>B3_VIBES[v]&&B3_VIBES[v].sig===1)) bad.push('cast '+id+': no Vibe is marked sig 1 (the Main Vibe on joining)'); }
   for(const id in B3_SKILLS) { const S=B3_SKILLS[id],w='skill '+id;
     if(S.id!==id) bad.push(w+': id does not match its key'); if(!S.common&&!B3_VIBES[S.vibe]) bad.push(w+': unknown vibe');
-    if(!['foe','ally','self','random_foes','all_foes','ko_ally','adjacent_allies','field'].includes(S.target)) bad.push(w+': target kind "'+S.target+'" not built yet');
+    if(!['foe','ally','family','self','random_foes','all_foes','ko_ally','adjacent_allies','field'].includes(S.target)) bad.push(w+': target kind "'+S.target+'" not built yet');
+    if(S.counter&&!(B3_VIBES[S.vibe]&&B3_VIBES[S.vibe].counter&&B3_VIBES[S.vibe].counter.id===S.counter)) bad.push(w+': reads the counter '+S.counter+', which its Vibe does not build');
+    for(const e of S.effects) { const b=e.bonus; if(b&&b.if&&!B3_CONDS.includes(b.if)) bad.push(w+': condition "'+b.if+'" not built yet'); if(e.when&&!B3_EFFECT_WHEN.includes(e.when)) bad.push(w+': effect condition "'+e.when+'" not built yet'); }
     if(!S.desc) bad.push(w+': needs desc');
     if(B3_RULES.recovery[S.slot]==null) bad.push(w+': unknown slot '+S.slot); if(!flav(S.flavor)) bad.push(w+': unknown flavor');
     if(typeof S.power!=='number'&&B3_RULES.power[S.power]==null) bad.push(w+': unknown power '+S.power);

@@ -17,6 +17,8 @@ function b3Who(F,c,to) {
   if(to==='attacker') return c.src?[c.src]:[];
   if(to==='adjacent') return c.tgt?b3Adjacent(F,c.tgt):[];
   if(to==='allies') return b3Live(F,c.actor.side);
+  // Whoever on the actor's side has the smallest share of their HP left, the actor included (the first in line on a tie).
+  if(to==='lowestAlly') return b3Live(F,c.actor.side).sort((x,y)=>x.hp/x.maxHp-y.hp/y.maxHp||x.slot-y.slot).slice(0,1);
   // The next unit of the actor's own side due on the turn bar, not counting the actor.
   if(to==='nextAlly') return b3TurnOrder(F).filter(o=>o.side===c.actor.side&&o!==c.actor).slice(0,1);
   if(to==='target'||to==null) return c.tgt?[c.tgt]:(c.didDamage?c.hit.slice():c.targets.slice());
@@ -132,6 +134,12 @@ const B3_OPS={
       if(pv&&c.actor.side==='party') b3Pips(c,t,0,true); }
   }
 };
+// An effect may carry `when`: it runs only if something earlier in the same action happened.
+//   cleansed  a cleanse in this action took at least one thing off
+//   stripped  a strip in this action took at least one buff or stance off
+const B3_EFFECT_WHEN=['cleansed','stripped'];
 function b3RunEffects(F,c,effects) {
-  for(const e of (effects||[])) { const fn=B3_OPS[e.op]; if(!fn) throw new Error('Battle 3 op not built yet: '+e.op); fn(F,c,e); }
+  for(const e of (effects||[])) { const fn=B3_OPS[e.op]; if(!fn) throw new Error('Battle 3 op not built yet: '+e.op);
+    if(e.when) { if(!B3_EFFECT_WHEN.includes(e.when)) throw new Error('Battle 3 effect condition not built yet: '+e.when); if(!(c[e.when]>0)) continue; }
+    fn(F,c,e); }
 }

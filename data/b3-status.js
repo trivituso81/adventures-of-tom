@@ -73,6 +73,13 @@ const B3_STATUS={
     short:'ATTACK UP',color:'#ffb38a',weight:4,desc:'20% more Attack.'},
   windexed:{id:'windexed',name:'Windex In The Eyes',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'acc',kind:'windex',v:-.15}],flags:[],
     short:'WINDEX',color:'#8fd0ff',weight:4,desc:'Each of its attacks has a 15% chance to miss.'},
+  // ---- Kit statuses: the second Sig Vibes (stage 4: their Basics and three Skill 1s) ----
+  off_key:{id:'off_key',name:'Off Key',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'screech',v:-.20}],flags:[],
+    short:'OFF KEY',color:'#d7a4f5',weight:4,desc:'Grace’s violin is still ringing in its ears: 20% less Attack.'},
+  pinched:{id:'pinched',name:'Little Pinch',kind:'debuff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'critTaken',kind:'pinch',v:.15}],flags:[],
+    short:'PINCHED',color:'#f0c27b',weight:3,desc:'Attacks against it crit 15% more often.'},
+  all_better:{id:'all_better',name:'All Better',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'allBetter',v:.20}],flags:[],
+    short:'ALL BETTER',color:'#8fe3a6',weight:4,desc:'Deedee made it better: 20% more Attack.'},
   // ---- Enemy statuses: chapter 1 ----
   jitterflight:{id:'jitterflight',name:'Jitterflight',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'jitter',v:.20}],flags:[],
     short:'JITTER',color:'#d8e68a',weight:4,desc:'Dodges 20% of attacks. It can be stripped.'},
