@@ -192,7 +192,7 @@ function finishOpening() {
   player.facing='down';
   // Followers walk the trail of tiles Tom leaves: Grace first (a seated Rose is not in the line), then Rose.
   trail.length=0; if(!riding) trail.push({x:r.x,y:r.y}); trail.push({x:g.x,y:g.y},{x:player.x,y:player.y});
-  partyBanner('grace','join'); partyBanner('rose','join');   // one banner each, one after the other (partybanner1)
+  // The join banners wait until the end of ch1Goal (scene 1): Tom, 2026-11-19, "the girls joining the party banner shouldnt happen until all of scene 1 is complete".
   queueToast('Tap the map to walk, or use the D-pad. A / Enter says hello.',4);   // waits for ch1Goal to finish (cutpolish1; the 3.4 s timer was dropped while a line was open)
   saveGame('auto',true);
 }
@@ -222,14 +222,14 @@ function updateIntro(dt) {
 function drawIntroWorld(time) {
   const {g,r}=IA();
   if(intro.bubble) {
-    const sc=2,txt=intro.bubble.text,w=txt.length*4*sc+12;
+    const sc=1,txt=intro.bubble.text,w=txt.length*4*sc+8;   // small (Tom 2026-11-19: the big bubble overlapped the running girls)
     // Shouted from off to the left: pin it to the left edge of the screen until the girls are in view.
     const gx=g.hidden?-1e9:(position(g).x+.5)*T;
     // Eased toward its spot (roofnpc1, Gemini audit 2026-11-18: it jumped sideways when the girls came into view): it glides from the edge to them.
     const want=Math.max(camera.x+w/2+8,gx),b=intro.bubble; b.x=b.x===undefined?want:b.x+(want-b.x)*Math.min(1,(time-(b.tt||time))*7||0); b.tt=time;
-    const x=Math.round(b.x),y=Math.round((player.y+.9)*T-34+Math.sin(time*20)*1.5);   // cutpolish3: low, on the girls' approach rows (Grace on Tom's row, Rose one below), not above Tom's head
-    BUBBLE.draw('burst',x,y+7,w+48,44);
-    BUBBLE.text(txt,x,y+2,'#b4553f',sc);
+    const x=Math.round(b.x),y=Math.round((player.y+.9)*T-84+Math.sin(time*20)*1.5);   // cutpolish3: low, on the girls' approach rows (Grace on Tom's row, Rose one below), not above Tom's head
+    BUBBLE.draw('burst',x,y+4,w+28,26);
+    BUBBLE.text(txt,x,y+1,'#b4553f',sc);
   }
   for(const hh of intro.hearts) {
     gfx.globalAlpha=Math.max(0,1-hh.t/1.2);

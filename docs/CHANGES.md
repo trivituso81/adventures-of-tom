@@ -1,3 +1,10 @@
+## scene1fix1 (2026-11-19): The girls' party banners wait until all of scene 1 is done, and the TATA bubble is smaller and sits above the running girls
+
+- Tom (11-19 15:12): "the girls joining the party banner shouldnt happen until all of scene 1 is complete. in chapter 1 scene 1 the tata speech bubble while the girls running is too big and overlaps the girls".
+- `engine/intro.js` `finishOpening` no longer calls `partyBanner` for Grace and Rose; `SCENES.ch1Goal` (data/scenes.js) calls it as its second to last step, after the walk and zoom out, just before the Goal popup.
+- `drawIntroWorld` (engine/intro.js): the TATA!!! bubble is half the text size and 26 px tall (was 44), and drawn 84 px above the girls' feet row (was 34), so it clears Grace's head.
+- Tested: `python3 -I tools/cut_natural_test.py /tmp/cn open` FAILS: []; a capture of the bubble while the girls run (portrait) shows it above Grace with no overlap; the first banner fires with `intro.active` false, after ch1Goal's last line.
+
 ## clipgate2a (2026-11-19): The clip gate's vision check and the Action that runs it; nothing made, nothing spent yet
 
 - Tom (11-19 15:09): build clipgate2, spend at most $2 of xAI credit on the vision check only, make no videos.

@@ -113,6 +113,7 @@ SCENES.ch1Goal=[
   {all:[{walk:'tom',to:routeTo('tom',16,22),speed:.28},{walk:'grace',to:routeTo('grace',17,22),speed:.28}]},
   {face:'tom',dir:'down'}, {face:'grace',dir:'left'},
   {call:()=>{ introKeepZoom=false; }}, {zoom:1,time:1.2},   // the one zoom out of the intro, after the last word
+  {call:()=>{ partyBanner('grace','join'); partyBanner('rose','join'); }},   // one banner each, one after the other, only now that all of scene 1 is done (Tom 2026-11-19)
   {call:()=>queueToast("Goal: Deedee and Boppy's house. Head south through the Rivituso Row arch.",4.5)}   // the one popup objective of a new game (roofnpc1)
 ];
 
