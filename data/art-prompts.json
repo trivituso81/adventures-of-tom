@@ -29420,7 +29420,7 @@
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HAND SOMETHING OVER\nFrom her starting relaxed stance, she reaches one open hand out forward at chest height, palm up, once, as if handing something to a friend. Without repeating the gesture, she pulls her arm back. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -29434,7 +29434,15 @@
      }
     }
    ],
-   "rejects": [],
+   "rejects": [
+    {
+     "date": "2026-11-19",
+     "note": "she grows unnaturally, doesnt look like casting sam comment as tom",
+     "from": "review",
+     "at": 1795126766252,
+     "rev": 0
+    }
+   ],
    "id": "clip-deedee-cast",
    "tab": "Clips",
    "group": "Chapter 1",
