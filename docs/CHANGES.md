@@ -1,3 +1,7 @@
+## voicegen1c (2026-11-18): Voice take job: first real result noted (5 lines made, 245 credits); notes only, no game change
+
+- The 5-line run after the voicegen1b fix (Actions run 44449938129): 5 clips on branch `generated` (tom, tnb, grace, bigone, bernadette), none flagged, none regenerated, 623 characters sent, the account's character count rose by 245 (162,540 to 162,785 of 600,000, tier `pro`): about 0.39 credits per character sent, from this one sample. The other 253 lines would be about 27,800 characters, roughly 11,000 credits (plan's upper bound 29,700). The takes were transcribed again here: right words, no loops. `merge-local.js` reads the export unchanged (tried into a scratch folder; nothing merged). Table in `tools/voice-learn/GENERATION_JOB_PLAN.md`.
+
 ## voicegen1b (2026-11-18): Voice take job fixed after its first real run: ffmpeg installed on the runner, a preflight before any paid request, a paid take is never thrown away (tools only, no game change)
 
 - What happened. The first real 5-line run (Actions run 44449327362, main 176707d) sent 623 characters to ElevenLabs and made no clip: the GitHub runner has no `ffmpeg`, so the transcript check failed after each take was made, and the job threw each take away. My mistake in two places: the workflow's `ffmpeg -version | head -1` hid the failure, and the script treated a checker error as an ordinary line error. The account's character count read the same before and after (162,237 of 600,000, plan tier `pro`), so the 623 may show up late; the next run's "usage before" will say.

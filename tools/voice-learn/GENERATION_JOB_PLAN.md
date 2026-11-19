@@ -31,3 +31,15 @@ The scripts are Claude's untested drafts. On the 113 lines Tom tuned, 67% of the
 ## Before the job can run (Tom decides, after reading this)
 1. Open github.com/trivituso81/adventures-of-tom > Settings > Secrets and variables > Actions > New repository secret. Name `ELEVENLABS_API_KEY`, value his ElevenLabs API key, Add secret.
 2. Tell the next session "voice-gen is approved, run the 5-line test". That session builds the workflow (it does not exist yet), runs it with limit 5, and reports the credits it actually used before anything else runs.
+
+## Built and first run (voicegen1, voicegen1b, 2026-11-18; fact, not plan)
+| Fact | Result |
+|---|---|
+| What exists | `.github/workflows/voice-gen.yml` (Actions > voice-gen > Run workflow; manual only), `tools/voice-learn/voicegen.py`, `tools/voice-learn/voicegen_test.py` (26 checks on a stand-in ElevenLabs server). Output on branch `generated`: `export-NNN.json` (20 clips each, the format `merge-local.js` reads), `report-<time>.json`, `needs-human.json` and `.txt`. A run restores what the branch holds first, so a line already made is never made again. |
+| Dry run (run 44449086075) | 5 lines, 623 characters, nothing sent. Round robin over voices, so limit 5 = tom, tnb, grace, bigone, bernadette. |
+| Real run 1 (44449327362) | Made nothing. The GitHub runner has no ffmpeg; the transcript check failed after each paid take and the job threw the takes away (623 characters sent, 5 takes lost). My bug in two places. Fixed in voicegen1b: ffmpeg installed, a preflight test before any paid request, a paid take is kept in `unchecked/` if the check fails and the run stops. |
+| Real run 2 (44449938129) | 5 lines, 5 clips, 0 flagged, 0 regenerates, 623 characters sent (354 spoken). The account's character count went from 162,540 to 162,785 of 600,000 (plan tier `pro`): **245 credits for this run, about 0.39 per character sent (0.69 per spoken character)**, from one sample of 5 lines. The reading before run 1 was 162,237, so the first (failed) run read 303 and may include other use of the account in between; the clean figure is run 2. |
+| What it says for the other 253 lines | About 27,800 characters: roughly 11,000 credits at the sampled rate, about 11,500 with the regenerates of flagged takes (plan's 4.5%), about 2% of the 600,000. Upper bound at the plan's 1 credit per character: 29,700. One 5-line sample, so check the first big run's report. |
+| Words check | The 5 takes were transcribed again here with Whisper tiny: right words, no loops, no tag read aloud (extra spoken words 0 or 1; tiny's own mis-hearings such as "Scare here" for "Scarier" are not flagged). |
+| Merge check | `merge-local.js` reads `export-001.json` without change (5 clips added to dialog-ch2.js and dialog-ch8.js in a scratch folder; nothing merged into the game). |
+| Not done | The other 253 lines are not made; nothing is merged into the game; no loudness levelling. Voice files grow by about 123 KB of base64 per clip, so about 31 MB for the rest. |
