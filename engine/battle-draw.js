@@ -751,6 +751,7 @@ function updateTransition(dt) {
       tr.alpha=1;
     }
   } else {
+    if(tr.pinHold&&typeof paintedPinReady==='function'&&!paintedPinReady()&&(tr.held=(tr.held||0)+dt)<2.5) { tr.time=0; tr.alpha=1; return; }   // cutpolish2: fade in with the scene's poses already sharp
     tr.alpha=1-clamp(tr.time/.18,0,1);
     if(tr.time>=.18) transition=null;
   }

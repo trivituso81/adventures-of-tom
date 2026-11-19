@@ -25,5 +25,8 @@ For every pose Tom has checked (walking, feelings, talking; later sets the same)
 - Saved hero crops were deleted on Tom's order (`data/portrait-crops.json` is `{}`), so menu and battle portraits (`portraits/<id>.png`, from the hero paintings) are back to `bake_portraits.py` FACE framing. Hero paintings have no Pose Editor lines yet. RECOMMENDED NEXT (say it to Tom, do not build unasked): add each hero painting to the Pose Editor as a "Menu portrait" pose with the same two lines, cut `portraits/<id>.png` with `pose_faces`, then retire PORTRAIT CROPS (`portraits.html`, `data/portrait-crops*.json`).
 - Watch: Tom's own front standing pose has TOP at 0.6 px (set in his first save, before the pinch fix) while his other poses have TOP near 6 to 13 px. That makes his plain talk face bigger than his feelings faces AND makes his standing head, the measure for everyone, about 15 percent taller. Ask him to look at that one line.
 
+## Applied so far (cutpolish2, 2026-11-19)
+Feelings and talking poses Tom checked are applied by `bake_story_poses.py` (`warp_figure`, `apply_pose_lines`): head above his chin line at the page's h, body at f, 12 px blend, parity within 0.16 row of the page's `wholeRows` (60 poses: Tom, TNB, Justin, Boppy, Amy). `POSE_APPLY=0` turns it off. The page's "in the game now" (manifest.py) is not yet recomputed from the applied bake.
+
 ## Not built yet
-Applying the saved sizes in the bakes. Method notes: claude/pose-editor-poseedit2.md "NEXT: the apply build" (use this file's rule 2 and 3 for the body, per pose).
+Applying the saved sizes to the WALKING poses (needs walk_sheet_frames.py and a rebake of the walk sheets), and to Grace, Rose and Deedee (no lines saved). Old text: applying the saved sizes in the bakes. Method notes: claude/pose-editor-poseedit2.md "NEXT: the apply build" (use this file's rule 2 and 3 for the body, per pose).

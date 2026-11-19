@@ -26,7 +26,10 @@ HOOK = r"""()=>{ window.__walks=[]; const orig=S.walk;
     const rec={who:a?(a.isPlayer?'tom':(a.member&&a.member.id)||a.name||'?'):null,party:!!a&&(a.isPlayer||followers.includes(a)),n:(tiles||[]).length,from:null,to:null,done:false};
     st.start=function(){ if(a){ const p=position(a); rec.from=[p.x,p.y]; } window.__walks.push(rec); return s0(); };
     st.update=function(dt){ const r=u0(dt); if(r&&a&&!rec.done){ const p=position(a); rec.to=[p.x,p.y]; rec.done=true; } return r; };
-    return st; }; }"""
+    return st; };
+  // cutpolish2: count (a) story sheets released while a scene runs and (b) draws of a painted story pose that fell back to the small row-string copy (the blur).
+  window.__rel=[]; window.__blur=[]; const pr=paintedRelease; paintedRelease=function(a){ if(intro.active&&/Story$|^mudlingHeist$/.test(a.id)) window.__rel.push(a.id); return pr.apply(this,arguments); };
+  const pc=paintedCanvas; paintedCanvas=function(rows,flash){ const r=pc.apply(this,arguments); if(!r&&intro.active&&rows&&rows._paint){ const A=rows._paint.a,id=typeof A==='string'?A:(A&&A.id); if(/Story$|^mudlingHeist$/.test(id||'')) window.__blur.push(id+':'+rows._paint.f); } return r; }; }"""
 
 SNAP = r"""()=>{ const P=a=>{ const p=position(a); return [Math.round(p.x*100)/100,Math.round(p.y*100)/100]; };
   const g=followers.find(f=>f.member===grace), r=followers.find(f=>f.member===rose);
@@ -91,8 +94,9 @@ def run(pw, mode):
         last = key
         pg.wait_for_timeout(100)
     walks = pg.evaluate("()=>window.__walks")
+    pre = pg.evaluate("()=>({rel:window.__rel,blur:window.__blur})")
     br.close()
-    return log, walks, errs
+    return log, walks, errs, pre
 
 def analyse(mode, log, walks, errs):
     fails = []; facts = {}
@@ -148,7 +152,7 @@ def analyse(mode, log, walks, errs):
     if cur: runs.append(cur)
     facts['toasts'] = [(t[0], round(t[2] - t[1] + .1, 1)) for t in runs]
     for t in runs:
-        if t[0].startswith(('Goal', 'Tap the map', 'Got ')) and t[2] - t[1] + .1 < 2.5: fails.append(f'{mode}: queued toast "{t[0]}" shown {t[2]-t[1]+.1:.1f} s (limit 2.5)')
+        if t[0].startswith(('Goal', 'Tap the map', 'Got ')) and t[2] - t[1] + .1 < 2.4: fails.append(f'{mode}: queued toast "{t[0]}" shown {t[2]-t[1]+.1:.1f} s (limit 2.4: samples are 0.1 s apart)')
     # queued toasts must not appear during a scene
     if any(s['toast'] and s['t'] > boot and s['toast'].startswith(('Goal', 'Tap the map', 'Got ')) and s['ia'] for s in log): fails.append(f'{mode}: a queued toast showed during a scene')
     # pose hold (fact, not a failure): of the lines that closed while someone held a pose, how many kept it 0.3 s later
@@ -168,9 +172,12 @@ if __name__ == '__main__':
     allf = []; res = {}
     with sync_playwright() as pw:
         for m in MODES:
-            log, walks, errs = run(pw, m)
-            json.dump({'log': log, 'walks': walks, 'errs': errs}, open(os.path.join(OUT, f'{m}-{LAYOUT}.json'), 'w'))
+            log, walks, errs, pre = run(pw, m)
+            json.dump({'log': log, 'walks': walks, 'errs': errs, 'pre': pre}, open(os.path.join(OUT, f'{m}-{LAYOUT}.json'), 'w'))
             f, facts = analyse(m, log, walks, errs); allf += f; res[m] = facts
+            facts['story_sheets_released_in_scene'] = len(pre['rel']); facts['blurred_pose_draws'] = len(pre['blur'])
+            if pre['rel']: allf.append(f"{m}: story sheets released mid-scene {sorted(set(pre['rel']))}")
+            if pre['blur']: allf.append(f"{m}: painted pose drawn blurry (sheet not ready) {len(pre['blur'])} times, e.g. {sorted(set(pre['blur']))[:4]}")
             print(m, LAYOUT, 'frames', len(log), json.dumps(facts)[:900])
     json.dump({'fails': allf, 'facts': res}, open(os.path.join(OUT, f'result-{LAYOUT}.json'), 'w'), indent=1)
     print('FAILS:', allf)

@@ -97,7 +97,7 @@ function drawSheetActor(a,set) {
   const fr=bp?bp.rows:frames[fi],kd=bp?bp.k:k;
   const w=fr[0].length,h=fr.length,hk=h*kd,wk=w*kd;
   a._figH=hk; a._figW=wk;   // the drawn size, read by the amber figure (engine/ch12-render.js)
-  if(!a.noShadow) ellipse(cx,base+1+Math.round((a.lift||0)*k),Math.round(wk*.45),Math.round(4*k),'#2f493640');
+  if(!a.noShadow) ellipse(cx,base+1+Math.round((a.lift||0)*k),Math.round((bp?frames[0][0].length*k:wk)*.45),Math.round(4*k),'#2f493640');   // cutpolish2: the shadow is sized from the standing frame, so a wide pose (Tom pointing) no longer balloons it
   const m=a.isPlayer?(typeof playerMember==='function'?playerMember():hero):a.member;
   const noTint=painted||!!(bp&&bp.story);   // story poses are drawn as painted
   activeTint=noTint?null:(m?garmentTint(bp?'bt':'ow',m.id,memberTopColor(m)):null);

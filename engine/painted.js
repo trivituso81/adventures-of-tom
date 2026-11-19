@@ -30,7 +30,8 @@ function paintedAtlas(id,src,rects,k,tintFn) {
 function paintedLoad(a) {
   if(a.img||a.failed) return;
   const im=new Image(); a.img=im; a.ready=false;
-  im.onload=()=>{ if(a.img===im) a.ready=true; };
+  // cutpolish2: ready only after decode(), so the first draw is not a half-decoded, blurry or blank frame (a.ready was set on load before).
+  im.onload=()=>{ if(a.img!==im) return; if(typeof im.decode==='function') im.decode().then(()=>{ if(a.img===im) a.ready=true; },()=>{ if(a.img===im) a.ready=true; }); else a.ready=true; };
   im.onerror=()=>{ if(a.img===im) { a.failed=true; a.img=null; } };
   im.src=a.src;
 }
@@ -137,11 +138,18 @@ function paintedWanted() {
 // Loads what is wanted. Releases a lazy sheet only when it is not wanted, not in a fight, and not drawn for 20 seconds
 // (a cutscene can draw someone outside the party; that sheet then stays until the scene has moved on).
 const PAINTED_IDLE=20000;
+// Pins (cutpolish2): the sheets one scene needs (scenePreflight, engine/story.js) are loaded, decoded and never released until the scene ends or a fight starts.
+// Before this a sheet of someone outside the party (Deedee, Boppy) counted as idle since page load and was dropped and reloaded mid-scene (7 times in the kitchen).
+const PAINTED_PIN=new Set();
+function paintedPin(ids) { for(const id of ids) { const a=PAINTED[id]; if(!a) continue; PAINTED_PIN.add(id); a.used=performance.now(); if(a.lazy) paintedLoad(a); } }
+function paintedUnpin() { const now=performance.now(); for(const id of PAINTED_PIN) { const a=PAINTED[id]; if(a) a.used=now; } PAINTED_PIN.clear(); }
+function paintedPinReady() { for(const id of PAINTED_PIN) { const a=PAINTED[id]; if(a&&!a.ready&&!a.failed) return false; } return true; }
 function paintedTick() {
   const want=paintedWanted(),now=performance.now(),fight=typeof battle!=='undefined'&&battle.active;
+  if(fight&&PAINTED_PIN.size) paintedUnpin();
   for(const id in PAINTED) {
     const a=PAINTED[id]; if(!a.lazy) continue;
-    const need=paintedOwners(id).some(o=>want.has(o));
+    const need=PAINTED_PIN.has(id)||paintedOwners(id).some(o=>want.has(o));
     if(need) paintedLoad(a);
     else if(a.img&&(!fight||(/^clip_/.test(id)&&((typeof B2!=='undefined'&&B2.labReview)||(typeof B3!=='undefined'&&B3.active))))&&now-a.used>(fight?3000:PAINTED_IDLE)) paintedRelease(a);   // a chapter review (engine/clip-review.js) plays dozens of clips one after another: each is released 3 s after its last picture, even mid-fight
   }

@@ -1074,6 +1074,44 @@ function compileScene(list) {
     return SCENE_OPS[op](st);
   });
 }
+// Scene preflight (cutpolish2): every painted sheet a scene will draw is pinned (never released mid-scene) and decoded before its first line, so no pose shows as the
+// small blurry row-string copy. The lists come from the step list itself: speakers, {pose} owners, listeners named in docs/emotion-reactions.tsv for those speakers,
+// spawned monsters, the heist sheet and the party. Pins drop when the scene ends, at a fight and (safety) 6 s after a pin with no scene or map change running.
+function scenePreflightIds(list) {
+  const ids=new Set(),foes=new Set(),speakers=new Set(); let heist=false;
+  const pid=n=>{ n=String(n||'').trim(); if(!n) return null; const k=n.toLowerCase();
+    let id=(typeof DIALOG_PORTRAIT_IDS!=='undefined'&&DIALOG_PORTRAIT_IDS[k])||k; id=String(id).replace(/^npc_/,''); if(id==='player') id='tom'; return id; };
+  const walk=x=>{ if(!x||typeof x!=='object'||typeof x.start==='function') return; if(Array.isArray(x)) return x.forEach(walk);
+    if(typeof x.talk==='string') { speakers.add(x.talk.trim().toLowerCase()); const i=pid(x.talk); if(i) ids.add(i); }
+    if(typeof x.pose==='string') { const i=pid(x.pose); if(i) ids.add(i); }
+    if(typeof x.mid==='string') ids.add(x.mid);
+    if(x.spawn&&x.spawn.monster) foes.add('foe_'+x.spawn.monster);
+    for(const k of ['then','else','seq','all']) if(x[k]) walk(x[k]); };
+  walk(list);
+  try { heist=JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v).includes('"mh_'); } catch(e) {}
+  try { for(const m of party) if(m&&m.id) ids.add(m.id); } catch(e) {}
+  try { if(typeof EMOTION_REACTIONS!=='undefined') for(const key in EMOTION_REACTIONS) {
+    const a=key.indexOf('|'),b=key.lastIndexOf('|'); if(a<0||b<=a) continue;
+    if(!speakers.has(key.slice(0,a).trim().toLowerCase())||+key.slice(b+1)!==STORY.chapter) continue;
+    for(const r of EMOTION_REACTIONS[key]) ids.add(r[0]); } } catch(e) {}
+  return {ids,foes,heist};
+}
+function scenePreflightPin(list) {
+  const {ids,foes,heist}=scenePreflightIds(list),atl=new Set(foes);
+  for(const id of ids) { const S=typeof STORY_POSES!=='undefined'&&STORY_POSES[id]; if(S) for(const aid of S.atlases) atl.add(aid); }
+  if(heist&&typeof mhAtlas==='function'&&mhAtlas()) atl.add('mudlingHeist');
+  paintedPin(atl); scenePinAt=performance.now();
+  // dialogue faces, and the chapter 1 close-up pictures, are plain images: ask for them now so the browser has them when a line opens
+  try { for(const id of ids) { if(typeof EMOTION_FACES!=='undefined'&&EMOTION_FACES.includes(id)&&typeof emoPreload==='function') emoPreload(id);
+    if(typeof TALKPOSE_FACES!=='undefined'&&TALKPOSE_FACES.includes(id)&&!scenePicked.has(id)) { scenePicked.add(id); for(const t of TALK_LIST) new Image().src='portraits/talk/pose/'+id+'-'+t+'.webp?v='+TALKPOSE_V; } } } catch(e) {}
+  try { if(typeof CH1_REVEAL!=='undefined') { const j=JSON.stringify(list,(k,v)=>typeof v==='function'?undefined:v); for(const k in CH1_REVEAL) if(CH1_REVEAL[k]&&CH1_REVEAL[k].img&&j.includes('"ch1Reveal":"'+k+'"')) new Image().src=CH1_REVEAL[k].img+'?v='+CH1_REVEAL.v; } } catch(e) {}
+  return atl;
+}
+let scenePinAt=0; const scenePicked=new Set();
+SCENE_OPS.preload=o=>({t:0,start(){ this.t=0; },update(dt){ if(typeof cut!=='undefined'&&cut.skip) return true; return paintedPinReady()||(this.t+=dt)>=2.5; }});
+setInterval(()=>{ try { if(PAINTED_PIN.size&&!intro.active&&!(typeof transition!=='undefined'&&transition)&&performance.now()-scenePinAt>6000) paintedUnpin(); } catch(e) {} },1000);
+const LE_endIntro_pin=endIntro;
+endIntro=function() { paintedUnpin(); return LE_endIntro_pin(); };
 // Play a script: an array of steps, a SCENES id, or a function that returns steps (it runs when the scene starts).
 function playScene(script,opts={}) {
   const sid=typeof script==='string'?script:null;
@@ -1091,6 +1129,7 @@ function playScene(script,opts={}) {
       return first&&ob?[{around:{x:ob.x,y:ob.y,w:ob.w,h:ob.h},tom:[player.x,player.y],keepTom:true,auto:ob},h]:first&&near&&near.length?[{approach:near},h]:h; }); }
   stageZone=null; intro.sceneCast=null;
   if((sid||opts.stage)&&Array.isArray(list)) { intro.sceneCast=stageCast(list); list=[{clearout:true},...list]; }   // extras leave before anyone is placed (clearout1)
+  if(Array.isArray(list)) { try { scenePreflightPin(list); list=[{preload:true},...list]; } catch(e) { console.warn('preflight',e); } }   // cutpolish2
   intro.active=true; intro.phase='scene'; intro.cur=null; intro.fadeLock=false;
   intro.sid=sid;   // which SCENES id is playing (null for a wrapper script): REPORT records it (engine/report.js)
   intro.fade=opts.fade||0;
@@ -1205,6 +1244,7 @@ function storyArriveFace() {
   if(!t||typeof t.scene!=='string') return;
   let list=SCENES[t.scene]; if(typeof list==='function') { try { list=list(); } catch(e) { return; } }
   if(!Array.isArray(list)) return;
+  try { scenePreflightPin(list); if(typeof transition!=='undefined'&&transition) transition.pinHold=true; } catch(e) {}   // cutpolish2: the room fades in once the scene's sheets are decoded (2.5 s cap, updateTransition)
   const names=new Set(); for(const st of list) if(st&&typeof st.talk==='string') names.add(st.talk);
   for(const n of currentMap.npcs) {
     if(!names.has(n.name)||n.hidden||n.monster) continue;
@@ -1313,12 +1353,13 @@ function foePoseRows(a,d) {
   const key=a.monster+':'+nm; return FOE_POSE_ROWS[key]||(FOE_POSE_ROWS[key]=mirrorRows(r));
 }
 const MH_ROWS={};
+function mhAtlas() { const H=typeof MUDLING_HEIST!=='undefined'?MUDLING_HEIST:null; if(!H) return null; if(!MH_ROWS.atlas) MH_ROWS.atlas=paintedAtlas('mudlingHeist',H.src,H.rects,H.k); return MH_ROWS.atlas; }
 function mudlingHeistDraw(a,cx,base) {
   const P=a.scenePose,H=typeof MUDLING_HEIST!=='undefined'?MUDLING_HEIST:null; if(!P||!H||!P.f) return false;
   const f=Array.isArray(P.f)?P.f[Math.floor(elapsedTime*(P.fps||6))%P.f.length]:P.f; if(!H.rows[f]) return false;
-  if(!MH_ROWS.atlas) MH_ROWS.atlas=paintedAtlas('mudlingHeist',H.src,H.rects,H.k);
+  const atl=mhAtlas(); if(!atl) return false;
   const flip=P.dir==='right',key=f+(flip?'R':'L');
-  if(!MH_ROWS[key]) { const r=paintRows(H.rows[f].slice(),MH_ROWS.atlas,f,false); MH_ROWS[key]=flip?mirrorRows(r):r; }
+  if(!MH_ROWS[key]) { const r=paintRows(H.rows[f].slice(),atl,f,false); MH_ROWS[key]=flip?mirrorRows(r):r; }
   const rows=MH_ROWS[key],m=H.meta[f],s=a.mscale||1,w=rows[0].length,h=rows.length,ax=flip?w-m.ax:m.ax;
   const lift=(m.lift+(a.lift||0))*s;
   ellipse(cx,base+1,Math.round(w*s*.42*(1-Math.min(.35,lift/60))),5*s,'#2f493640');
