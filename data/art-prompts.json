@@ -26610,8 +26610,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's kitchen from \"The Adventures of Tom\", a family role-playing game.\n\nPAINT THIS ONE PICTURE\nThe exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: on the baking island, the three plates of muffins (the plate of five muffins with its lace doily, and the two small plates of four muffins) are gone, along with their shadows. The bare wooden counter top shows where they were, in the same wood grain and warm light as the rest of the counter. Keep the pie on its stand, the cake under its glass dome and its plate exactly as they are. Everything else in the picture stays exactly as painted: every pixel outside the island top stays the same.\n- Painted by hand in the style of the attached painting. No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the attached painting already has them."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/props/ch1-muffin-papers-v1.png",
+     "date": "2026-11-19",
+     "from": "v1",
+     "at": 1795127961066
+    }
+   ],
    "rejects": [],
    "id": "ch1-muffin-papers",
    "tab": "Props",
