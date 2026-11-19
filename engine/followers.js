@@ -21,13 +21,16 @@ function movePlayer(dir) {
   const gap=(currentMap&&!currentMap.outside)?1.5:1;
   // The trail is kept long enough for a straggling follower (f.lag, in tiles: Boppy catching his breath, data/scenes.js BOPPY_WIND).
   while(trail.length>followers.length*2+6) trail.shift();
-  followers.forEach((f,k)=>{
+  followers.forEach((f,i)=>{
+    if(f.seat) return;   // cutpolish3: Rose on Tom's shoulders takes no place in the line (engine/rose-ride.js)
+    const k=lineIndex(f);
     // f.lag is a fractional extra distance behind the trail; interpolation below turns it into a smooth drift, not a one-tile snap.
     const at=Math.max(0,trail.length-1-gap*(k+1)-(f.lag||0)),lo=Math.floor(at),a=trail[lo],b=trail[Math.ceil(at)];
     if(!a||!b) return;
     const fr=at-lo,t={x:a.x+(b.x-a.x)*fr,y:a.y+(b.y-a.y)*fr};
     if(f.move) { f.x=f.move.tx; f.y=f.move.ty; f.move=null; }
     if(f.x===t.x&&f.y===t.y) return;
+    if(hiddenSpot(f,t)) return;   // cutpolish3: a spot behind a painted cutout (the kitchen half-wall): keep the last visible spot
     f.facing=directionTo(t.x-f.x,t.y-f.y);
     f.move={fx:f.x,fy:f.y,tx:t.x,ty:t.y,elapsed:0,duration:player.duration*indoorSlow(),fresh:true};
   });
@@ -38,14 +41,27 @@ function movePlayer(dir) {
 function partyHalted() { return typeof BOPPY_WIND!=='undefined'&&BOPPY_WIND.halt; }
 // Start follower f (index k in `followers`) walking to its spot on the trail, which honors f.lag. Used for catch-up steps.
 function followerToSpot(f,k,duration) {
+  if(f.seat) return; k=lineIndex(f);
   const gap=(currentMap&&!currentMap.outside)?1.5:1;
   const at=Math.max(0,trail.length-1-gap*(k+1)-(f.lag||0)),lo=Math.floor(at),a=trail[lo],b=trail[Math.ceil(at)];
   if(!a||!b) return;
   const fr=at-lo,t={x:a.x+(b.x-a.x)*fr,y:a.y+(b.y-a.y)*fr};
   if(f.move) { f.x=f.move.tx; f.y=f.move.ty; f.move=null; }
   if(f.x===t.x&&f.y===t.y) return;
+  if(hiddenSpot(f,t)) return;
   f.facing=directionTo(t.x-f.x,t.y-f.y);
   f.move={fx:f.x,fy:f.y,tx:t.x,ty:t.y,elapsed:0,duration,fresh:true};
+}
+// Place in the walking line: followers without a seat on Tom, counted in order (a seated Rose is not in the line, so the follower after her closes up).
+function lineIndex(f) { let k=0; for(const o of followers) { if(o===f) return k; if(!o.seat) k++; } return k; }
+// True when the spot t sits behind a painted cutout (engine/story.js huddleHidden) and the follower's own tile does not: it stays on its last visible spot
+// (audit 3l: Rose walked behind the kitchen half-wall and vanished). The tile stays walkable for everyone else; a follower already hidden is let out.
+const _hiddenMemo={map:null,memo:null};
+function hiddenSpot(f,t) {
+  if(typeof huddleHidden!=='function'||!currentMap) return false;
+  if(_hiddenMemo.map!==currentMap) { _hiddenMemo.map=currentMap; _hiddenMemo.memo=new Map(); }
+  const m=_hiddenMemo.memo,tx=Math.round(t.x),ty=Math.round(t.y);
+  return huddleHidden(currentMap,tx,ty,m)&&!huddleHidden(currentMap,Math.round(f.x),Math.round(f.y),m);
 }
 
 // ---------- Recruiting ----------

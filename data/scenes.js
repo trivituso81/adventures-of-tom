@@ -32,11 +32,15 @@ SCENES.opening=()=>{
     {call:()=>{ intro.bubble=null; }}, {face:'grace',dir:'right'}, {face:'rose',dir:'up'},
     {step:hugStep()},
     {talk:'Grace',lines:["TATA! You're BACK!",'We waited for you for a hundred years.'],voice:[['grace','intro1'],['grace','intro2']]},
-    {talk:'Rose',lines:['A hundred MILLION years!','Tata, up! Up up up!'],voice:[['rose','intro1'],['rose','intro2']]},
-    {step:hugEndStep()},
+    {talk:'Rose',lines:['A hundred MILLION years!'],voice:[['rose','intro1']]},
+    {step:hugEndStep()},   // cutpolish3: the hug lets go between her two lines, so "Tata, up!" is Rose herself, on the ground, hopping
+    {all:[
+      {talk:'Rose',lines:['Tata, up! Up up up!'],voice:[['rose','intro2']]},
+      {seq:[{wait:.4},{hop:'rose',from:[dx-1,row+1],to:[dx-1,row+1],time:.22,arc:8,lift:[0,0]},{wait:.12},{hop:'rose',from:[dx-1,row+1],to:[dx-1,row+1],time:.22,arc:8,lift:[0,0]}]}
+    ]},
     {call:()=>{ const r=sceneActor('rose'); snd.whee(); snd.oof(.38); r.depthBias=-.05; r.facing='left'; }},
     {hop:'rose',from:[dx-1,row+1],to:[dx,row],time:.5,arc:22,lift:[0,SHOULDER]},
-    {call:()=>{ const r=sceneActor('rose'); r.x=dx; r.y=row; r.scr={x:dx,y:row}; r.lift=SHOULDER; r.noShadow=true; r.seat=true; sfx.giggle(); }},
+    {call:()=>{ const r=sceneActor('rose'); r.x=dx; r.y=row; r.scr={x:dx,y:row}; r.lift=SHOULDER; r.noShadow=true; r.seat=true; sfx.giggle(); }}, {flag:'ride'},   // she rides until ch1Theft (engine/rose-ride.js rideSync)
     // Tom carrying Rose, painted (data/story-poses.js, ride1): he kneels to take her, stands up with her, she cheers from the top.
     {pose:'tom',f:'tr_kneel'}, {wait:.5}, {pose:'tom',f:'tr_lift'}, {wait:.5}, {pose:'tom',f:'tr_cheer'},
     {trace:'rose-shoulders'}, {flag:'tombo:rose1'},   // Double-Decker Airplane unlocks here (chapter 1)
@@ -75,18 +79,17 @@ const routeTo=(a,x,y)=>()=>sceneRoute(a,x,y);
 // ======================================================================================================
 const CH1_TIN_LINE='Take the pan home to Rivituso Row.';
 
-// Rose hops down from Tom's shoulders and the party walks onto the plaza path (end of ch1Goal). Only when she is still up there (a save
-// loaded mid-scene or a skipped opening may have her on the ground already).
-const CH1_DISMOUNT=()=>{ const up=()=>{ const r=sceneActor('rose'); return !!(r&&r.seat); }; let at=null;
+// Rose hops down from Tom's shoulders (ch1Theft, once he is through the kitchen door): he crouches, she springs off, the `ride` flag is cleared. `land` is the
+// tile she lands on. Only when she is still up there (a save loaded mid-scene or a skipped opening may have her on the ground already).
+const CH1_DISMOUNT=land=>{ const up=()=>{ const r=sceneActor('rose'); return !!(r&&r.seat); }; let at=null;
   return [
     {if:up,then:[
-      {call:()=>{ const r=sceneActor('rose'); at=[player.x,player.y]; snd.whee(true); }}, {pose:'tom',f:'tr_hopoff'}, {wait:.4}, {pose:'tom'},
-      {call:()=>{ const r=sceneActor('rose'); r.noShadow=false; r.seat=false; r.depthBias=0; }},
-      {hop:'rose',from:()=>at,to:()=>[at[0]-1,at[1]+1],time:.25,arc:8,lift:[SHOULDER,0]},
-      {call:()=>{ const r=sceneActor('rose'); r.x=at[0]-1; r.y=at[1]+1; r.scr=null; r.lift=0; }}
+      {call:()=>{ at=[player.x,player.y]; }}, {pose:'tom',f:'tr_kneel'}, {wait:.22}, {pose:'tom',f:'tr_hopoff'}, {call:()=>snd.whee(true)}, {wait:.18},
+      {call:()=>{ const r=sceneActor('rose'); r.noShadow=false; r.seat=false; r.depthBias=0; }}, {flag:'ride',value:false},
+      {hop:'rose',from:()=>at,to:land,time:.3,arc:10,lift:[SHOULDER,0]},
+      {call:()=>{ const r=sceneActor('rose'); r.x=land[0]; r.y=land[1]; r.scr=null; r.lift=0; }}, {pose:'tom'}
     ]},
-    {all:[{walk:'tom',to:routeTo('tom',16,22),speed:.28},{walk:'grace',to:routeTo('grace',17,22),speed:.28},{walk:'rose',to:routeTo('rose',17,23),speed:.28}]},
-    {face:'tom',dir:'down'}, {face:'grace',dir:'left'}, {face:'rose',dir:'left'}
+    {flag:'ride',value:false}
   ];
 };
 // 1. The Square, right after the opening (the squishy beat stays exactly as built): Grace's list.
@@ -104,9 +107,11 @@ SCENES.ch1Goal=[
   {talk:'Grace',lines:["Number three. Rose licked a muffin."]},
   {toast:'New Tombos: Squishy Delivery (Grace) and Double-Decker Airplane (Rose). In battle, find them inside ▶︎ HEAL (Squishy Delivery) and ▲ ATTACK (Double-Decker Airplane).',time:4},
   {toast:"Goal: Deedee and Boppy's house. Rivituso Row, south of the Square.",time:4.5},
-  // Rose springs off his shoulders (painted) now that they are setting off, then the three walk out onto the open plaza path toward the
-  // Rivituso Row arch, so control comes back on the main path and not in the pocket by the Taxi Co. door (roofnpc1, Gemini audit 2026-11-18).
-  ...CH1_DISMOUNT(),
+  // Tom (with Rose still on his shoulders, cutpolish3) and Grace walk out onto the open plaza path toward the Rivituso Row arch, so control comes back
+  // on the main path and not in the pocket by the Taxi Co. door (roofnpc1, Gemini audit 2026-11-18). Rose rides along; she hops down in the kitchen.
+  {pose:'tom'},
+  {all:[{walk:'tom',to:routeTo('tom',16,22),speed:.28},{walk:'grace',to:routeTo('grace',17,22),speed:.28}]},
+  {face:'tom',dir:'down'}, {face:'grace',dir:'left'},
   {call:()=>{ introKeepZoom=false; }}, {zoom:1,time:1.2},   // the one zoom out of the intro, after the last word
   {call:()=>queueToast("Goal: Deedee and Boppy's house. Head south through the Rivituso Row arch.",4.5)}   // the one popup objective of a new game (roofnpc1)
 ];
@@ -128,7 +133,7 @@ SCENES.ch1Amy=[
 SCENES.ch1Ellie=[
   {flag:'ch1-ellie'},
   {walk:'tom',to:routeTo('tom',6,19),speed:.25}, {face:'tom',dir:'up'},
-  {place:'grace',at:[7,19],dir:'up'}, {place:'rose',at:[5,19],dir:'up'},
+  {place:'grace',at:[7,19],dir:'up'},   // Rose is still up on his shoulders (cutpolish3)
   {spawn:{name:'Aunt Ellie',look:'oolong',sheet:'ellie',kin:true,at:[7,18],dir:'down'}},
   {sfx:'doorIn'}, {wait:.4},
   {talk:'Aunt Ellie',lines:["Tom. They gave you a seat that turns into a bed, and you still got off that plane wrinkled."]},
@@ -152,28 +157,35 @@ SCENES.ch1Ellie=[
 SCENES.ch1Theft=[
   {flag:'ch1-theft'}, {noHuddle:true},   // staged by hand below: the party holds its spots by the island instead of hopping between speakers
   {call:()=>{ if(typeof storyPosesLoad==='function') { storyPosesLoad('deedee'); storyPosesLoad('boppy'); } }},
-  {place:'Deedee',at:[7,9],dir:'down'}, {place:'Boppy',at:[13,10],dir:'up'},   // Boppy sits at the dining table with an empty plate, his back to the door
+  {place:'Deedee',at:[7,9],dir:'right'}, {place:'Boppy',at:[13,10],dir:'up'},   // Boppy sits at the dining table with an empty plate, his back to the door; Deedee faces Tom (cutpolish3: people who talk stand side by side and face left or right, never the camera)
   {prop:'muffinpan',kind:'muffinpan',set:{map:'grands',x:3.1,y:7.1}},   // twelve muffins on the baking island (stand-in)
-  {all:[{walk:'tom',to:routeTo('tom',8,10),speed:.25},{walk:'grace',to:routeTo('grace',9,11),speed:.25},{walk:'rose',to:routeTo('rose',7,11),speed:.25}]},   // they walk in together (no snapping)
-  {face:'tom',dir:'up'}, {face:'grace',dir:'up'}, {face:'rose',dir:'up'},
+  {all:[{walk:'tom',to:routeTo('tom',9,9),speed:.25},{walk:'grace',to:routeTo('grace',10,10),speed:.25},
+    {if:()=>{ const r=sceneActor('rose'); return !(r&&r.seat); },then:[{walk:'rose',to:routeTo('rose',8,10),speed:.25}]}]},   // they walk in together (no snapping); Rose rides in on Tom's shoulders (a save without the ride flag walks her in)
+  {face:'tom',dir:'left'}, {face:'grace',dir:'left'},
+  ...CH1_DISMOUNT([8,10]),   // through the door, Rose hops down (cutpolish3: she was taken down in the Square before)
+  {face:'rose',dir:'left'},
   {talk:'Deedee',lines:["There he is! Come here. Let me look at you. I missed that face. Now sit, you're having a muffin."]},
   {talk:'Tom',lines:["Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since we flew over Kansas."]},
   {talk:'Deedee',lines:["Twelve of them, and all twelve are still there. I've been standing between that pan and your father since six this morning."]},
-  {face:'tom',dir:'right'}, {face:'grace',dir:'right'},
+  {face:'tom',dir:'right'}, {face:'grace',dir:'right'}, {face:'rose',dir:'right'},
   {talk:'Boppy',lines:["In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat..."]},
-  {face:'tom',dir:'right'}, {wait:.35}, {face:'tom',dir:'up'}, {wait:.45},   // Tom looks over at the door frame by the back hall before the close-up (roofnpc2: it cut in cold)
+  {walk:'tom',to:routeTo('tom',12,6),speed:.25}, {face:'tom',dir:'up'}, {wait:.35},   // Tom walks over to the door frame under the hall arch before the close-up (cutpolish3; roofnpc2: it cut in cold)
   {ch1Reveal:'doorframe'},   // Tom sets his bag down by the pantry door frame and looks at two new pencil marks (the close-up is the silent action)
   {wait:.8},
   {sfx:'bonk'}, {sfx:'doorIn'}, {call:()=>storyPosesLoad('deedee')},
   // It comes in through the front door (roofnpc2, Gemini audit: it popped up right behind Tom): fades in on the doorway and oozes up the hall.
-  {spawn:{name:'Big Mudling',monster:'mudling',mscale:1.34,at:[8,14],dir:'up',fade:0}},
-  // The painted heist frames (mh_*, data/mudling-heist.js) give the mud ball its acting. They already hold a pie tin: the twelve-cup pan is a stand-in until new art is approved.
-  {pose:'Big Mudling',f:['mh_ooze_a','mh_ooze_b'],fps:5,dir:'left'},
-  {fadeActor:'Big Mudling',to:1,time:.4},
-  {walk:'Big Mudling',to:[[8,13],[8,12],[8,11]],speed:.4,onStep:()=>sfx.splat()},
-  {pose:'Big Mudling',f:'mh_spot',dir:'left'},
-  {sfx:'look'}, {wait:.5},
-  {pose:'Big Mudling',f:'mh_windup',dir:'left'}, {wait:.3},
+  {all:[   // Tom turns from the door frame at the bang and walks back to the floor by the island while the mud ball oozes in (cutpolish3)
+    {seq:[
+      {spawn:{name:'Big Mudling',monster:'mudling',mscale:1.34,at:[8,14],dir:'up',fade:0}},
+      {pose:'Big Mudling',f:['mh_ooze_a','mh_ooze_b'],fps:5,dir:'left'},
+      {fadeActor:'Big Mudling',to:1,time:.4},
+      {walk:'Big Mudling',to:[[8,13],[8,12],[8,11]],speed:.4,onStep:()=>sfx.splat()},
+      {pose:'Big Mudling',f:'mh_spot',dir:'left'},
+      {sfx:'look'}, {wait:.5},
+      {pose:'Big Mudling',f:'mh_windup',dir:'left'}, {wait:.3},
+    ]},
+    {seq:[{wait:.3},{walk:'tom',to:routeTo('tom',9,9),speed:.2},{face:'tom',dir:'down'}]}
+  ]},
   {cam:[8,10]},
   {all:[
     {seq:[{pose:'Big Mudling',f:'mh_charge',dir:'left'},

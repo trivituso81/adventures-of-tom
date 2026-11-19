@@ -94,7 +94,7 @@ function restoreOption() {
 }
 function endIntro() {
   intro.active=false; intro.poseFocus=null; intro.phase=''; intro.steps=[]; intro.cur=null;
-  intro.bubble=null; intro.squishy=null; intro.showcase=null; intro.hearts=[];
+  intro.bubble=null; intro.squishy=null; intro.showcase=null; intro.hearts=[]; intro.hug=null;
   for(const k of intro.noGo) { if(typeof k==='string') town.npcNoGo.delete(k); else k.map.npcNoGo.delete(k.k); }
   intro.noGo=[]; intro.fadeLock=false; intro.card=null;
   player.hidden=false; player.scr=null; player.lift=0; player.scenePose=null;
@@ -138,7 +138,7 @@ function hugHearStep() {
 }
 function hugStep() {
   const SEQ=[['hg_run',0],['hg_crash',.28],['hg_group',.58]];
-  return {t:0,start(){ this.t=0; this.f=''; this.kissed=false; const {g,r}=IA(); g.hidden=true; r.hidden=true; g.scr=null; r.scr=null; g.lift=0; r.lift=0; },
+  return {t:0,start(){ this.t=0; this.f=''; this.kissed=false; intro.hug={t:0,beat:1.6}; const {g,r}=IA(); g.hidden=true; r.hidden=true; g.scr=null; r.scr=null; g.lift=0; r.lift=0; },
     update(dt){
       this.t+=dt; const t=this.t; let f='hg_run'; for(const [n,at] of SEQ) if(t>=at) f=n;
       if(f!==this.f) { this.f=f; player.scenePose={f}; if(f==='hg_crash') { snd.oof(0); snd.squeeze(.3); sfx.giggle(); } }
@@ -149,7 +149,7 @@ function hugStep() {
 }
 // After the greeting lines: the girls reappear at their tiles beside Tom and he stands up in his walking figure.
 function hugEndStep() {
-  return {start(){ const {g,r}=IA(); g.hidden=false; r.hidden=false; player.scenePose=null; },update(){ return true; }};
+  return {start(){ const {g,r}=IA(); g.hidden=false; r.hidden=false; player.scenePose=null; intro.hug=null; },update(){ return true; }};
 }
 
 // Tom stretches after six hours in the cab line: his eight painted stretch poses (data/story-poses.js, storypose1) in order, facing the camera.
@@ -182,16 +182,16 @@ function beginOpening() {
   playScene('opening',{fade:.7});
 }
 function finishOpening() {
-  const {g,r}=IA(),dx=player.x,row=player.y,riding=!!r.seat;   // riding: the chapter 1 opening ends with Rose still on Tom's shoulders (ch1Goal takes her down)
+  const {g,r}=IA(),dx=player.x,row=player.y,riding=!!r.seat;   // riding: the chapter 1 opening ends with Rose still on Tom's shoulders (flag `ride`, set by the opening; she hops down in ch1Theft)
   introKeepZoom=true; setTimeout(()=>{ if(introKeepZoom&&!intro.active&&!dialog.active) { introKeepZoom=false; sceneZoomManual=false; } },4000);   // ch1Goal follows at once; if it never starts, release the zoom
-  endIntro();
+  endIntro();   // rideSync (engine/story.js) seats Rose again from the flag
   g.x=dx-1; g.y=row; g.facing='right'; g.move=null;
-  r.x=dx-1; r.y=row+1; r.facing='up'; r.move=null;
-  if(riding) { r.x=dx; r.y=row; r.scr={x:dx,y:row}; r.lift=SHOULDER; r.seat=true; r.noShadow=true; r.depthBias=-.05; r.facing='left'; player.scenePose={f:'tr_sit'};
-    setTimeout(()=>{ if(!intro.active&&r.seat) { r.seat=false; r.noShadow=false; r.lift=0; r.scr=null; r.depthBias=0; r.y=row+1; r.x=dx-1; player.scenePose=null; } },4000); }   // ch1Goal never started: put her down
+  if(riding) { player.scenePose={f:'tr_sit'};
+    setTimeout(()=>{ if(!intro.active&&player.scenePose&&player.scenePose.f==='tr_sit') player.scenePose=null; },4000); }   // ch1Goal never started: let go of the pose
+  else { r.x=dx-1; r.y=row+1; r.facing='up'; r.move=null; }
   player.facing='down';
-  // Followers walk the trail of tiles Tom leaves: Grace first, then Rose.
-  trail.length=0; trail.push({x:r.x,y:r.y},{x:g.x,y:g.y},{x:player.x,y:player.y});
+  // Followers walk the trail of tiles Tom leaves: Grace first (a seated Rose is not in the line), then Rose.
+  trail.length=0; if(!riding) trail.push({x:r.x,y:r.y}); trail.push({x:g.x,y:g.y},{x:player.x,y:player.y});
   partyBanner('grace','join'); partyBanner('rose','join');   // one banner each, one after the other (partybanner1)
   queueToast('Tap the map to walk, or use the D-pad. A / Enter says hello.',4);   // waits for ch1Goal to finish (cutpolish1; the 3.4 s timer was dropped while a line was open)
   saveGame('auto',true);
@@ -204,6 +204,8 @@ function updateIntro(dt) {
   for(const hh of intro.hearts) hh.t+=dt;
   intro.hearts=intro.hearts.filter(hh=>hh.t<1.2);
   if(intro.bubble) intro.bubble.t+=dt;
+  // cutpolish3: the group hug is held under four lines; it sways slowly (town-render hugSway) and a heart floats up every 1.6 s.
+  if(intro.hug) { const h=intro.hug; h.t+=dt; if(h.t>=h.beat) { h.beat+=1.6; intro.hearts.push({x:player.x+.5+(Math.random()-.5)*.8,y:player.y-.6,t:0}); } }
   if(intro.squishy) intro.squishy.t+=dt;
   if(intro.showcase) intro.showcase.t+=dt;
   updateNPCs(dt);
@@ -225,7 +227,7 @@ function drawIntroWorld(time) {
     const gx=g.hidden?-1e9:(position(g).x+.5)*T;
     // Eased toward its spot (roofnpc1, Gemini audit 2026-11-18: it jumped sideways when the girls came into view): it glides from the edge to them.
     const want=Math.max(camera.x+w/2+8,gx),b=intro.bubble; b.x=b.x===undefined?want:b.x+(want-b.x)*Math.min(1,(time-(b.tt||time))*7||0); b.tt=time;
-    const x=Math.round(b.x),y=Math.round((player.y+.3)*T-40+Math.sin(time*20)*1.5);
+    const x=Math.round(b.x),y=Math.round((player.y+.9)*T-34+Math.sin(time*20)*1.5);   // cutpolish3: low, on the girls' approach rows (Grace on Tom's row, Rose one below), not above Tom's head
     BUBBLE.draw('burst',x,y+7,w+48,44);
     BUBBLE.text(txt,x,y+2,'#b4553f',sc);
   }

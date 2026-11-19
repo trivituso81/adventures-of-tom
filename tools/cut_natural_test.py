@@ -41,19 +41,19 @@ SNAP = r"""()=>{ const P=a=>{ const p=position(a); return [Math.round(p.x*100)/1
     line:dialog.active?(dialog.lines[dialog.index]||'').slice(0,34):null,done:dialog.active?dialog.shown>=dialog.chars.length:null,
     cut:vis('cut-ctrl'),cls:document.documentElement.classList.contains('cutscene'),talking:document.documentElement.classList.contains('talking'),
     dpad:dirVis,aw:vis('action-wrap'),toast:tt.classList.contains('visible')?tt.textContent.slice(0,40):null,
-    map:currentMap.id,tom:P(player),tp:pose(player),g:g?P(g):null,gp:pose(g),r:r?P(r):null,rp:pose(r),
+    map:currentMap.id,tom:P(player),tp:pose(player),g:g?P(g):null,gp:pose(g),r:r?P(r):null,rp:pose(r),rs:!!(r&&r.seat),rh:!!(r&&r.hidden),ride:!!STORY.flags.ride,
     close:typeof closeup!=='undefined'&&!!closeup.active,show:!!intro.showcase,card:!!intro.card,
     flags:Object.keys(STORY.flags).filter(k=>/^(opening|ch1)/.test(k)).join(',')};
 }"""
 
 SETUP = {
  'open': "()=>{ chapterJump(1); }",
- 'row': """()=>{ endIntro(); resetStory('full',1); b6Prep(1); for(const k of ['opening-done','ch1-goal','saw-squishy','tombo:rose1','tombo:grace1']) STORY.flags[k]=true;
+ 'row': """()=>{ endIntro(); resetStory('full',1); b6Prep(1); for(const k of ['opening-done','ch1-goal','saw-squishy','tombo:rose1','tombo:grace1','ride']) STORY.flags[k]=true;   // ride: Rose is on Tom's shoulders from the opening to the kitchen (cutpolish3)
   setChapter(1,{apply:false}); for(const f of followers) f.hidden=false; currentMap=town; let P=null,at=null;
   for(const [k,p] of town.portals) if(p.kind==='edge'&&p.to==='row') { P=p; at=k; }
   const xy=String(at).split(',').map(Number); player.x=xy[0]; player.y=xy[1]; player.facing='down'; player.hidden=false; player.move=null;
   placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; storyWorld(); beginTransition(P); }""",
- 'theft': """()=>{ endIntro(); resetStory('full',1); b6Prep(1); for(const k of ['opening-done','ch1-goal','ch1-amy','saw-squishy','tombo:rose1','tombo:grace1']) STORY.flags[k]=true;
+ 'theft': """()=>{ endIntro(); resetStory('full',1); b6Prep(1); for(const k of ['opening-done','ch1-goal','ch1-amy','saw-squishy','tombo:rose1','tombo:grace1','ride']) STORY.flags[k]=true;
   setChapter(1,{apply:false}); for(const f of followers) f.hidden=false; const h=houseById.grands; currentMap=worlds[h.area]||town; player.x=h.door.x; player.y=h.door.y+1; player.facing='up'; player.hidden=false; player.move=null;
   placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; storyWorld();
   const portal=currentMap.portals.get(key(h.door.x,h.door.y)); beginTransition(portal); }""",
@@ -128,9 +128,27 @@ def analyse(mode, log, walks, errs):
     endi = next((i for i, s in enumerate(log) if i and log[i - 1]['ia'] and not s['ia']), None)
     if endi is not None:
         s = log[min(endi + 5, len(log) - 1)]
-        tiles = [tuple(s[k]) for k in ('tom', 'g', 'r') if s[k] and not (k == 'g' and False)]
+        tiles = [tuple(s[k]) for k in ('tom', 'g', 'r') if s[k] and not (k == 'r' and s['rs'])]   # a seated Rose shares Tom's tile by design
         facts['tiles_just_after_scene'] = {k: s[k] for k in ('tom', 'g', 'r')}
         if len(set((round(a), round(b)) for a, b in tiles)) < len(tiles): fails.append(f"{mode}: party shares a tile just after the scene {facts['tiles_just_after_scene']}")
+    # cutpolish3: Rose rides from the opening to the kitchen. open and row: seated and the flag set at the end; theft: seated when the scene starts, on the
+    # ground with the flag cleared before the first line, never seated again after; she never stands on Tom's tile once down; never hidden.
+    if endi is not None:
+        e = log[min(endi + 5, len(log) - 1)]
+        if mode in ('open', 'row') and not (e['rs'] and e['ride']): fails.append(f"{mode}: Rose is not on Tom's shoulders after the scene (seat {e['rs']}, flag {e['ride']})")
+        if mode == 'theft' and (e['rs'] or e['ride']): fails.append(f"theft: Rose still riding after the scene (seat {e['rs']}, flag {e['ride']})")
+    if mode in ('open', 'row'):
+        walkers = [s for s in log if s['ia'] and s['ph'] == 'scene' and s['t'] > 3 and s['rs']]
+        off = [s for s in walkers if abs(s['r'][0] - s['tom'][0]) > 1.01 or abs(s['r'][1] - s['tom'][1]) > 1.01]
+        facts['rose_off_tom_while_seated_samples'] = len(off)
+        if off: fails.append(f"{mode}: seated Rose was away from Tom in {len(off)} samples, first {off[0]['r']} vs {off[0]['tom']}")
+    if mode == 'theft':
+        first = next((i for i, s in enumerate(log) if s['ia'] and s['da']), None)
+        if first is not None:
+            f0 = log[first]; facts['rose_at_first_line'] = (f0['rs'], f0['ride'], f0['r'], f0['tom'])
+            if f0['rs'] or f0['ride']: fails.append(f"theft: Rose still on Tom's shoulders at Deedee's first line {facts['rose_at_first_line']}")
+            if tuple(f0['r']) == tuple(f0['tom']): fails.append(f"theft: Rose on Tom's tile at the first line {facts['rose_at_first_line']}")
+        if any(s['rh'] and s['ia'] for s in log): fails.append('theft: Rose hidden during the scene')
     # 4. arrows during a scene; 5. FAST/SKIP over a modal; 6. (A) button between lines
     sc = [s for s in log if s['ia'] and s['ph'] == 'scene']
     if any(s['dpad'] for s in sc[3:]): fails.append(f'{mode}: arrows showed during a scene')

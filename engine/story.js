@@ -1301,7 +1301,8 @@ function followersWhereTheyStand() {
   if(!followers.length||!currentMap) return null;
   const seen=new Set([Math.round(player.x)+','+Math.round(player.y)]),pos=[];
   for(const f of followers) {
-    if(f.hidden||f.seat) return null;
+    if(f.hidden) return null;
+    if(f.seat) continue;   // cutpolish3: Rose on Tom's shoulders is not on a tile of her own
     const p=f.move?{x:f.move.tx,y:f.move.ty}:{x:f.x,y:f.y};
     if(p.x!==Math.round(p.x)||p.y!==Math.round(p.y)||!walkable(currentMap,p.x,p.y)) return null;
     const k=p.x+','+p.y; if(seen.has(k)) return null; seen.add(k);
@@ -1323,15 +1324,22 @@ endIntro=function() {
   for(const n of currentMap.npcs) if(n.arriveFace) n.arriveFace=null;
   let et=intro.endTrail; intro.endTrail=null;
   const stood=et?null:followersWhereTheyStand();   // cutpolish1: read before the shared end-of-scene clears
+  const carried=new Set(followers.filter(f=>f.seat));   // cutpolish3: whoever sits on Tom's shoulders is not in the line
   LE_endIntro_story();
   if(!et&&stood) et=stood;
   // intro.endTrail (a scene sets it, roofnpc2): the tiles behind Tom, oldest first, ending on Tom's tile. The followers keep standing in that
   // line instead of all stacking on Tom's tile (Gemini audit: three people on one doormat tile when Deedee joined).
   if(et&&et.length>1) { trail.length=0; for(const t of et) trail.push({x:t[0],y:t[1]}); const gap=(currentMap&&!currentMap.outside)?1.5:1;
-    followers.forEach((f,k)=>{ const at=Math.max(0,trail.length-1-gap*(k+1)),lo=Math.floor(at),a=trail[lo],b=trail[Math.ceil(at)],fr=at-lo;
+    let kk=0;
+    followers.forEach(f=>{ if(carried.has(f)) { f.x=player.x; f.y=player.y; f.move=null; f.lag=0; return; }
+      const k=kk++,at=Math.max(0,trail.length-1-gap*(k+1)),lo=Math.floor(at),a=trail[lo],b=trail[Math.ceil(at)],fr=at-lo;
       f.x=a.x+(b.x-a.x)*fr; f.y=a.y+(b.y-a.y)*fr; f.move=null; f.lag=0; f.facing=player.facing; }); }
   else placeFollowers();
+  rideSync();   // cutpolish3: the scene's end cleared every seat; the `ride` flag puts Rose back on Tom's shoulders
 };
+// cutpolish3: Rose's seat follows Tom every frame (and is put back after a fight or a load); a scene's own steps rule inside a scene.
+const LE_update_ride=update;
+update=function(dt) { rideTick(); return LE_update_ride(dt); };
 // Story monsters (scripted) never wander or engage; STORY_HOLD (data/scenes.js) can keep a whole map still.
 const LE_b7MonsterTick_story=b7MonsterTick;
 b7MonsterTick=function(n,dt) {

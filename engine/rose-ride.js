@@ -110,3 +110,24 @@ function drawOwRider(r,facing,cx,top,before,k=1) {
   roseRide(pose,layer,cx,top,k,flip);
   activeTint=keep;
 }
+
+// ---------- Carrying Rose (cutpolish3) ----------
+// Story flag `ride` (saved with the flags): Rose sits on Tom's shoulders. A scene sets it at the hop up (the opening) and clears it at the hop off
+// (ch1Theft). rideSync() makes her seat match the flag; it runs after every scene (endIntro clears the seat), after a map change, after a load and
+// after a fight (rideTick, every frame outside scenes and fights). While seated she shares Tom's tile and takes no place in the walking line.
+function roseFollower() { return followers.find(f=>f.member&&f.member.id==='rose')||null; }
+function rideSeat(r,on) {
+  if(on) { r.seat=true; r.noShadow=true; r.depthBias=-.05; r.lift=typeof SHOULDER==='number'?SHOULDER:28; r.move=null; r.path=[]; r.scr=null; r.x=player.x; r.y=player.y; }
+  else { r.seat=false; r.noShadow=false; r.depthBias=0; r.lift=0; r.scr=null; }
+}
+function rideSync() {
+  const r=roseFollower(); if(!r||typeof STORY==='undefined') return;
+  const want=!!(STORY.flags&&STORY.flags.ride)&&party.includes(r.member)&&!r.hidden;
+  if(want&&!r.seat) rideSeat(r,true); else if(!want&&r.seat) rideSeat(r,false);
+}
+function rideTick() {
+  const r=roseFollower(); if(!r||typeof battle!=='undefined'&&battle.active) return;
+  if(r.seat) { const tom=player.move?{x:player.move.tx,y:player.move.ty}:player; r.x=tom.x; r.y=tom.y; r.move=null; r.scr=null; }   // she is wherever Tom is going
+  if(typeof intro==='undefined'||intro.active) return;   // inside a scene the scene's own steps decide
+  rideSync();
+}

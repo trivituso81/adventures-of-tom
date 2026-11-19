@@ -1,6 +1,11 @@
 'use strict';
 // engine/town-render.js — Rendering the town, interiors, actors and HUD extras.
 const DRIVER_STEP=20;   // art px (before the figure's scale) Sal's picture slides away while he talks
+// cutpolish3: the held group hug (painted hg_group, scene pose on Tom) sways a little side to side (intro.hug.t starts when the hug does).
+function hugSway(a) {
+  if(a!==player||typeof intro==='undefined'||!intro.hug||!a.scenePose||a.scenePose.f!=='hg_group') return 0;
+  return Math.sin(intro.hug.t*2.2)*2.5*Math.min(1,Math.max(0,intro.hug.t-.6)/.5);
+}
 function kissLean(a) {
   // Sal (report r-20261114-103041-kyzo, Tom: "Tom is standing too close to Sal"): while Sal talks, his picture steps a little way away from the person he talks to.
   if(a.driver&&typeof dialog!=='undefined'&&dialog.active&&dialog.npc===a&&typeof player!=='undefined') return Math.sign(a.x-player.x||1)*DRIVER_STEP;
@@ -90,7 +95,7 @@ function drawSheetActor(a,set) {
   const painted=!!(rider&&OW.tomRide&&(typeof playerMember!=='function'||playerMember().id==='tom'));
   if(painted) set=OW.tomRide;
   const p=position(a),k=actorK(p.y+1)*(set.k||1)*owBoost(a,set);   // set.k: a painted set drawn a little bigger (Deedee, to Tom's height)   // k: bigger inside painted rooms (engine/plate.js)
-  const cx=Math.round((p.x+.5)*T)+Math.round(kissLean(a)*k),base=Math.round((p.y+1)*T-2)-Math.round((a.lift||0)*k);
+  const cx=Math.round((p.x+.5)*T)+Math.round((kissLean(a)+hugSway(a))*k),base=Math.round((p.y+1)*T-2)-Math.round((a.lift||0)*k);
   const frames=a.facing==='left'?set.left:(a.facing==='right'?set.side:set[a.facing]);
   const ph=walkPhase(a),fi=ph>=0?(set===OW.tom?OW_WALK_CYCLE_TOM:OW_WALK_CYCLE)[walkStepIdx(a,ph)%4]:0;   // stride A, stand, stride B, stand: each pose lasts one tile (half the old speed), all frames kept; walking speed unchanged
   const bp=a.scenePose&&typeof scenePoseDraw==='function'?scenePoseDraw(a,set,k):null;   // a battle pose borrowed for a cutscene (engine/story.js)
