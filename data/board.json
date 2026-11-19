@@ -91,7 +91,7 @@
    "theme": "Story and Dialogue",
    "lane": "tom",
    "col": "up",
-   "next": "Wait for the publish, RELOAD on the title, START NEW and play chapter 1 from the opening to the end (Boppy at the table, Aunt Ellie's door, the Mudlings, the BOO scene, the lap around the Square, the chapter card). Look for: Rose on your shoulders through Grace's list, Rose staying on your shoulders from the Taxi Co. all the way into the kitchen, where you crouch and she hops down, Grace walking beside you,, the movement tip then the Goal popup one after the other, no (A) button between lines, no townsfolk on roofs or walking in scenes, the group hug swaying with hearts and Rose saying 'Tata, up!' on the ground, you walking over to the door frame before the close-up, the party holding its spots in the kitchen, and poses sharp from the first frame (no blur) with Tom, TNB, Justin, Boppy and Amy in their new sizes. Report anything wrong with the REPORT tab.",
+   "next": "Wait for the publish, RELOAD on the title, START NEW and play chapter 1 from the opening to the end (Boppy at the table, Aunt Ellie's door, the Mudlings, the BOO scene, the lap around the Square, the chapter card). Look for: Rose on your shoulders through Grace's list, Rose staying on your shoulders from the Taxi Co. all the way into the kitchen, where you crouch and she hops down, Grace walking beside you,, the movement tip then the Goal popup one after the other, no (A) button between lines, no townsfolk on roofs or walking in scenes, the group hug swaying with hearts and Rose saying 'Tata, up!' on the ground, you walking over to the door frame before the close-up, the party holding its spots in the kitchen, and poses sharp from the first frame (no blur) with Tom, TNB, Justin, Boppy and Amy in their new sizes. Report anything wrong with the REPORT tab. Heist (cutpolish4): the Mudling bursts in through the front door, the island is on screen when it grabs the pan, you, Grace and Rose land on open floor, Deedee and Boppy stay shocked through the grab. The three muffin plates still sit on the island after the theft until the empty-counter picture is installed.",
    "blocks": [
     "c-ch2build"
    ],
@@ -117,6 +117,10 @@
     {
      "d": "2026-11-19",
      "t": "Added the cutpolish3 check (Rose carried to the kitchen, hug, door frame)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "cutpolish4 pushed: heist entrance, camera, knock spots, held shock."
     }
    ]
   },
@@ -412,19 +416,23 @@
    "title": "Cutscene polish phase 4: the heist (cutpolish4)",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "up",
-   "next": "Phase 4 of 5 in claude/cutscene-polish-plan.md: the Mudling comes in fast through the front door, the camera frames the island in portrait, Deedee and Boppy keep their shock, empty-counter patch after the theft, mud footprints and crumbs.",
+   "col": "done",
+   "next": "Shipped except the empty counter: the Mudling bursts in through the door, the camera shows the island in portrait, the knocked-down family lands on open floor, Deedee and Boppy keep their shock, mud prints and crumbs. The painted empty counter waits on your Art Library approval (card t-kitchenempty).",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
    "chat": {
     "url": "",
-    "opening": "unknown"
+    "opening": "\"Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 4 (cutpolish4)\""
    },
    "history": [
     {
      "d": "2026-11-19",
      "t": "Queued after cutpolish3."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Built cutpolish4; cut_natural_test passes in portrait and landscape. Two code attempts at the empty-counter patch came out smeared, so by the stop-loss rule it became an Art Library picture. No session link was readable in this chat, so chat.url is blank."
     }
    ],
    "prompt": {
@@ -435,7 +443,8 @@
     "model": "Claude Sonnet 5.5 (row B: the phase is written down in claude/cutscene-polish-plan.md, and cut_natural_test.py and frames catch mistakes)",
     "effort": "medium (steps are known; knock tiles and the camera are settled by looking at frames)",
     "text": "Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 4 (cutpolish4). You have my full permission to access the repo."
-   }
+   },
+   "done": "2026-11-19"
   },
   {
    "id": "t-milestonea",
@@ -489,6 +498,90 @@
     "model": "Claude Opus 5.5 (row D: 12 of the lines need their own function; Sonnet 5.5 if the session splits it like 5a to 5c)",
     "effort": "medium (steps are known)",
     "text": "Read claude/battle-build.md and build stage 9 of the new battle system. You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "t-kitchenempty",
+   "title": "Generate and approve the kitchen picture with the muffin plates gone",
+   "theme": "Areas",
+   "lane": "tom",
+   "col": "up",
+   "next": "ADMIN > ART LIBRARY, group \"Chapter 1\", entry ch1-kitchen-empty-island (Props tab): press Generate, look at the island (the three muffin plates must be gone, the pie and the cake under the dome kept, the rest of the kitchen unchanged), then Approve, or Reject with a note on what is wrong.",
+   "blocks": [
+    "c-cutpolish4b"
+   ],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "\"Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 4 (cutpolish4)\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by cutpolish4: the empty counter after the theft could not be made by code."
+    }
+   ]
+  },
+  {
+   "id": "c-cutpolish4b",
+   "title": "Install the empty counter after the theft (cutpolish4b)",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "next": "After you approve ch1-kitchen-empty-island: crop the island patch, draw it in both kitchen layers once the theft has happened, look at it in portrait and landscape.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "\"Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 4 (cutpolish4)\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Queued by cutpolish4; waits on t-kitchenempty."
+    }
+   ],
+   "prompt": {
+    "what": "Crops the empty-island patch from the approved kitchen picture and shows it in both kitchen layers after the theft (audit item 4e).",
+    "before": [
+     "ADMIN > ART LIBRARY, group Chapter 1, entry ch1-kitchen-empty-island: Generate, then Approve (card t-kitchenempty)."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the box, the layers and the flag are written down in claude/next-addendum-cutpolish4.md, frames catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/next-addendum-cutpolish4.md, then install the empty counter patch (cutpolish4b). You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-cutpolish5",
+   "title": "Cutscene polish phase 5: movement and listener reactions (cutpolish5)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Phase 5 of 5 in claude/cutscene-polish-plan.md: breathing and squash, listeners turn to the speaker, listener reaction effects (hop, pips), reaction rows for the rest of chapter 1, Boppy's stomach wince.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "\"Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 4 (cutpolish4)\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Queued after cutpolish4."
+    }
+   ],
+   "prompt": {
+    "what": "Builds phase 5 of the cutscene polish: idle breathing and pose squash, listeners turning to the speaker, the reaction effect column, reaction rows for chapter 1, code stand-ins for the pips and Boppy's stomach wince.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the phase is written down in claude/cutscene-polish-plan.md, and cut_natural_test.py and frames catch mistakes)",
+    "effort": "medium (steps are known; effect sizes are settled by looking at frames)",
+    "text": "Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 5 (cutpolish5). You have my full permission to access the repo."
    }
   }
  ]

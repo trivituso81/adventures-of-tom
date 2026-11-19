@@ -291,7 +291,9 @@ const SCENE_OPS={
   place:o=>S.call(()=>{ const a=sceneActor(o.place),[x,y]=scenePos(o.at); if(!a) return; storyHold(a); a.stagePlaced=true; a.x=x; a.y=y; a.move=null; a.scr=null; if(o.dir) a.facing=o.dir; }),
   hop:o=>lazy(()=>{ const l=o.lift||[0,0]; return S.hop(sceneActor(o.hop),scenePos(o.from),scenePos(o.to),o.time||.5,o.arc||16,l[0],l[1]); }),
   // Battle poses in a cutscene (Tom, Grace, Rose). {pose:'rose',f:'kneel',dir:'left'} holds a battle frame (hurtPose, kneel, ko, ...) until {pose:'rose',f:null}.
-  cam:o=>S.call(()=>{ sceneCam=o.cam||null; }),
+  cam:o=>(o.time&&o.cam)?({t:0,start(){ this.t=0; const f=(typeof sceneAutoCur!=='undefined'&&sceneAutoCur)||position(player); this.a=[f.x,f.y]; sceneCam=[f.x,f.y]; },
+    update(dt){ this.t+=dt; const u=Math.min(1,this.t/o.time),e=1-Math.pow(1-u,3); sceneCam=[this.a[0]+(o.cam[0]-this.a[0])*e,this.a[1]+(o.cam[1]-this.a[1])*e]; return u>=1; }})   // {cam:[x,y],time:.26}: a set-length pan, cubic ease out (cutpolish4)
+    :S.call(()=>{ sceneCam=o.cam||null; }),
   // {zoom:1.6,time:.8}: eases the outdoor camera in (above 1) or back out ({zoom:1}) while the scene plays; the camera stays on Tom or the {cam} tile.
   zoom:o=>({t:0,start(){ this.t=0; this.a=sceneZoom; sceneZoomManual=true; },
     update(dt){ this.t+=dt; const u=Math.min(1,this.t/(o.time||.8)); setSceneZoom(this.a+(o.zoom-this.a)*ease(u)); return u>=1; }}),

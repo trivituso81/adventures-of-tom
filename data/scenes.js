@@ -173,20 +173,21 @@ SCENES.ch1Theft=[
   {ch1Reveal:'doorframe'},   // Tom sets his bag down by the pantry door frame and looks at two new pencil marks (the close-up is the silent action)
   {wait:.8},
   {sfx:'bonk'}, {sfx:'doorIn'}, {call:()=>storyPosesLoad('deedee')},
+  {prop:'mudprints',kind:'mudprints',set:{map:'grands',x:8,y:11,t0:performance.now()}},   // three mud prints up the hall (8,11 to 8,13), they fade over 4 s (SPK.mudprints)
   // It comes in through the front door (roofnpc2, Gemini audit: it popped up right behind Tom): fades in on the doorway and oozes up the hall.
   {all:[   // Tom turns from the door frame at the bang and walks back to the floor by the island while the mud ball oozes in (cutpolish3)
     {seq:[
-      {spawn:{name:'Big Mudling',monster:'mudling',mscale:1.34,at:[8,14],dir:'up',fade:0}},
-      {pose:'Big Mudling',f:['mh_ooze_a','mh_ooze_b'],fps:5,dir:'left'},
-      {fadeActor:'Big Mudling',to:1,time:.4},
-      {walk:'Big Mudling',to:[[8,13],[8,12],[8,11]],speed:.4,onStep:()=>sfx.splat()},
+      {spawn:{name:'Big Mudling',monster:'mudling',mscale:1.34,at:[8,15],dir:'up',fade:0}},   // cutpolish4: it bursts in on the door tile on its charge frame with the bang, not an ooze up the hall
+      {pose:'Big Mudling',f:'mh_charge',dir:'left'},
+      {fadeActor:'Big Mudling',to:1,time:.15},
+      {walk:'Big Mudling',to:[[8,14],[8,13],[8,12],[8,11]],speed:.15,onStep:()=>sfx.splat()},
       {pose:'Big Mudling',f:'mh_spot',dir:'left'},
       {sfx:'look'}, {wait:.5},
       {pose:'Big Mudling',f:'mh_windup',dir:'left'}, {wait:.3},
     ]},
     {seq:[{wait:.3},{walk:'tom',to:routeTo('tom',9,9),speed:.2},{face:'tom',dir:'down'}]}
   ]},
-  {cam:[8,10]},
+  {cam:[6,9],time:.26},   // cutpolish4: a quick set-length pan so the island is on screen in portrait for the grab
   {all:[
     {seq:[{pose:'Big Mudling',f:'mh_charge',dir:'left'},
           {walk:'Big Mudling',to:[[8,10.1]],speed:.2},
@@ -196,18 +197,19 @@ SCENES.ch1Theft=[
           {pose:'Big Mudling',f:'mh_wobble',dir:'left'},
           {walk:'Big Mudling',to:[[6.3,8]],speed:.3,onStep:()=>sfx.splat()}]},
     {seq:[{wait:.12},{sfx:'whoosh'},{wait:.1},{sfx:'bonk'},{wait:.35},{sfx:'thud'}]},
-    {knock:'tom',to:[9.6,9],delay:.17,dir:'right'},
-    {knock:'grace',to:[10.5,10.4],delay:.22,dir:'right'},
-    {knock:'rose',to:[5.8,10.6],delay:.2,dir:'left'},
+    {knock:'tom',to:[8.6,8.6],delay:.17,dir:'right'},
+    {knock:'grace',to:[9.8,9.4],delay:.22,dir:'right'},
+    {knock:'rose',to:[7.2,9.6],delay:.2,dir:'left'},
     {seq:[{wait:.5},{face:'Deedee',dir:'down'},{hop:'Deedee',from:()=>[7,9],to:[8,7],time:.35,arc:14}]}
   ]},
   {place:'Deedee',at:[8,7],dir:'down'},
   {pose:'Deedee',f:'em_surprised',mid:'deedee',dir:'down'}, {pose:'Boppy',f:'em_surprised',mid:'boppy',dir:'down'},
   {wait:.3},
-  {pose:'Deedee'}, {pose:'Boppy'}, {face:'Deedee',dir:'left'}, {face:'Boppy',dir:'left'},
+  {face:'Deedee',dir:'left'}, {face:'Boppy',dir:'left'},   // cutpolish4: Deedee and Boppy keep their shock through the whole grab (it was cleared after .3 s)
   {pose:'Big Mudling',f:'mh_reach',dir:'left'}, {wait:.45},
-  {pose:'Big Mudling',f:'mh_grab',dir:'left'}, {sfx:'pickup'}, {prop:'muffinpan',hide:true}, {wait:.5},
-  {pose:'Big Mudling',f:'mh_hug',dir:'left'},
+  {pose:'Big Mudling',f:'mh_grab',dir:'left'}, {sfx:'pickup'}, {prop:'muffinpan',hide:true},
+  {prop:'crumbs',kind:'crumbs',set:{map:'grands',x:5.2,y:8.4}}, {wait:.5},   // a few crumbs where the muffins were
+  {pose:'Big Mudling',f:'mh_hug',dir:'left'}, {pose:'Deedee',f:'em_angry',mid:'deedee',dir:'left'},
   {pose:'Big Mudling',f:'mh_glance',dir:'left'}, {wait:.5},
   {all:[
     {seq:[{pose:'Big Mudling',f:['mh_scurry_a','mh_scurry_b'],fps:6,dir:'right'},
@@ -229,6 +231,7 @@ SCENES.ch1Theft=[
     {getup:'rose',to:[7,11],delay:.1,dir:'up'},   // Rose scrambles behind Tom
     {getup:'grace',to:[9,11],delay:.2,dir:'up'}
   ]},
+  {pose:'Deedee'}, {pose:'Boppy'},   // the shock ends when her line opens (cutpolish4)
   {talk:'Deedee',lines:["That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER."]},
   {face:'tom',dir:'right'},
   {talk:'Boppy',lines:["...and I only caught him because the hat kept getting taller. Where'd the muffins go?"]},

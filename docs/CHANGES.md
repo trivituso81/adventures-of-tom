@@ -1,3 +1,15 @@
+## cutpolish4 (2026-11-19): the kitchen heist, the Mudling bursts through the door, the camera finds the island, the parents keep their shock
+
+- Plan: claude/cutscene-polish-plan.md phase 4 of 5. Audit items: 4a and 1h (the Mudling arrives where the girls stood, fixed in phase 1, now it also enters faster), 4b (camera in portrait), 4c (knock-down cluster hidden), 4d (Deedee and Boppy drop their shock), 4e (muffins still on the island after the theft: NOT done, see below). No dialogue text changed.
+- Entrance (data/scenes.js ch1Theft): the Mudling is spawned on the door tile (8,15) on `mh_charge` and comes up the hall fast (0.15 s a tile, fade in 0.15 s) with the door bang, instead of fading in on (8,14) and oozing. The spot and wind-up beats stay.
+- Camera (engine/story.js `cam`): optional `time`, `{cam:[x,y],time:.26}` is a set-length pan (cubic ease out). Used as `{cam:[6,9],time:.26}` before the grab so the island is on screen in portrait (it was half off the left edge).
+- Knock targets on open floor: Tom (8.6,8.6), Grace (9.8,9.4), Rose (7.2,9.6) (Rose landed half behind the left fern at (5.8,10.6)). Looked at in portrait frames: all three visible, none behind scenery.
+- Shock: Deedee and Boppy keep `em_surprised` through the reach and the grab (it was cleared after 0.3 s); Deedee goes to `em_angry` on the hug frame; both clear when Deedee's "That thing took my good twelve-cup pan!" line opens.
+- Props (engine/scene-props.js): `mudprints` (three mud prints at (8,11) to (8,13), fade over 4 s on a real-time clock) and `crumbs` (three muffin crumbs by the island at the grab). Both are code-drawn and cleared with the scene's props.
+- NOT done: the empty-counter patch (item 4e) and the painted muffin pan. Two tries at making the patch by code (rows of wood grain stretched across, then OpenCV frequency inpainting) both came out smeared, so by the stop-loss rule no third. New Art Library entry `ch1-kitchen-empty-island` (group Chapter 1, draft): the whole kitchen picture with the three muffin plates removed from the island. When Tom approves it, a session crops the island patch from it (box x 192, y 556, w 222, h 94 on the 1254 px picture, keeping the cake plate rim) and draws it in both layers (`engine/plate.js` zone draw) while the story flag for the theft is set. `data/mudling-heist.js` is not rebaked (needs the approved muffin heist sheet).
+- Script index: docs/script-convos.tsv ch1Theft row 50 is now step 51.
+- Test: `python3 -I tools/cut_natural_test.py /tmp/cn open row theft`, portrait and `LAYOUT=landscape`.
+
 ## cutpolish3 (2026-11-19): Rose rides on Tom's shoulders from the Square to the kitchen, the hug sways, speakers face left or right, followers stop vanishing behind the half-wall
 
 - Plan: claude/cutscene-polish-plan.md phase 3 of 5. Audit items: 3a (two Roses on the Row), 3b already done in phase 1, 3d (Tom facing the camera for "Hi, Mom"), 3f (TATA bubble), 3g (frozen group hug), 3j (door frame walk), 3l (Rose behind the half-wall). No dialogue text changed.

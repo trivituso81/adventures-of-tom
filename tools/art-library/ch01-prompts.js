@@ -138,6 +138,16 @@ ${ART}
     prompt: single('A heavy, well-loved silver twelve-cup muffin pan in a 4 by 3 grid, seen from a slightly raised front angle. Every cup holds one golden apple muffin with a cinnamon-sugar topping and a paper liner. A little steam rises. The pan has a few old baked-on stains and a small worn dent on one corner, the look of a pan used for thirty years.') },
   { id: 'ch1-muffin-pan-empty', tab: 'Props', title: 'Chapter 1: the same twelve-cup muffin pan, empty, with a little pond mud on it (one object)', ar: '1:1', refs: ['art/grands.webp'], group: 'Chapter 1',
     prompt: single('The same heavy silver twelve-cup muffin pan in a 4 by 3 grid, seen from a slightly raised front angle, completely empty: twelve clean empty cups. A few smears of pond mud on the rim and a small green water weed stuck to one corner. The same worn dent on one corner and old baked-on stains.') },
+  { id: 'ch1-kitchen-empty-island', tab: 'Props', title: 'Chapter 1: the kitchen painting with the three muffin plates gone from the baking island (the empty counter after the theft)', ar: '1:1', refs: ['art/grands.webp'], group: 'Chapter 1',
+    prompt: `IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.
+
+ATTACHED IMAGE
+1) The attached picture is the finished painting of Deedee and Boppy's kitchen from "The Adventures of Tom", a family role-playing game.
+
+PAINT THIS ONE PICTURE
+The exact same painting, same size, same framing, same colors, same light, same brushwork, with ONE change: on the baking island, the three plates of muffins (the plate of five muffins with its lace doily, and the two small plates of four muffins) are gone, along with their shadows. The bare wooden counter top shows where they were, in the same wood grain and warm light as the rest of the counter. Keep the pie on its stand, the cake under its glass dome and its plate exactly as they are. Everything else in the picture stays exactly as painted: every pixel outside the island top stays the same.
+- Painted by hand in the style of the attached painting. No people, no hands, no faces.
+- No words, letters or numbers anywhere unless the attached painting already has them.` },
   { id: 'ch1-muffin-papers', tab: 'Props', title: 'Chapter 1: nine crumpled paper muffin liners scattered on muddy ground (one object group)', ar: '1:1', refs: ['art/hollow.webp'], group: 'Chapter 1',
     prompt: single('Nine crumpled paper muffin liners, cream and pale brown, scattered loosely in a small group, a few crumbs in them and a little mud on some. Exactly nine liners, easy to count, none overlapping.') },
   { id: 'ch1-mudling-muffins', tab: 'Enemies', title: 'Chapter 1: a Mudling holding muffins in both hands (one creature, large)', ar: '1:1', refs: ['art/raw/enemies/enemy-mudling-v2.png'], group: 'Chapter 1',

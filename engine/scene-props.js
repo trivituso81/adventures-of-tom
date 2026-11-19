@@ -111,6 +111,12 @@ SPK.muffinpan=(P)=>{
     if(!P.empty) { ctx.fillStyle='#c98a46'; ctx.beginPath(); ctx.arc(mx,my-2,w/14,Math.PI,0); ctx.fill(); ctx.fillStyle='#f1d9a8'; ctx.fillRect(mx-2,my-w/14-2,4,2); }
     else { ctx.fillStyle='#6f767b'; ctx.beginPath(); ctx.ellipse(mx,my,w/16,3,0,0,Math.PI*2); ctx.fill(); } }
 };
+// Mud prints up the hall (cutpolish4): three prints at x, y+1, y+2 (tile), fading over 4 s from t0 (performance.now() when the prop was set).
+SPK.mudprints=(P)=>{ const u=Math.min(1,(performance.now()-(P.t0||0))/4000),a=1-u; if(a<=0) return;
+  for(let i=0;i<3;i++) { const cx=(P.x+.5+(i%2?.14:-.14))*T,cy=(P.y+i+.82)*T; ctx.fillStyle='rgba(74,54,34,'+(a*.55).toFixed(3)+')'; ctx.beginPath(); ctx.ellipse(cx,cy,T*.2,T*.1,0,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='rgba(74,54,34,'+(a*.4).toFixed(3)+')'; ctx.beginPath(); ctx.ellipse(cx+T*.1,cy-T*.04,T*.06,T*.04,0,0,Math.PI*2); ctx.fill(); } };
+// Three muffin crumbs on the floor by the island where the Mudling grabbed the pan. Fields x,y (tile).
+SPK.crumbs=(P)=>{ for(const [dx,dy,r] of [[0,0,3],[.45,.22,2.4],[.8,-.05,2.8]]) { const x=(P.x+dx)*T,y=(P.y+dy)*T; ctx.fillStyle='#c98a46'; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#f1d9a8'; ctx.fillRect(x-1,y-r,2,1.5); } };
 // Nine muffin papers scattered in the reeds (STAND-IN). Fields x,y (tile).
 SPK.papers=(P)=>{
   const pts=[[.1,.5],[.4,.2],[.7,.6],[1.0,.3],[1.3,.7],[.2,.9],[.9,.95],[1.5,.4],[1.2,1.0]];
