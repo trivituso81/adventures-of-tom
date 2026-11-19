@@ -171,10 +171,22 @@ class Stop(Exception): pass   # the whole run stops (the key was refused)
 class Gone(Exception): pass   # this request is dead (failed, expired): the pending record is dropped
 
 
+def gate_check(e, vid, marks, key, vcap):
+    """The clip gate (tools/clip-gate/hold.py). A gate that cannot run holds nothing back but says so in the log."""
+    sys.path.insert(0, os.path.join(HERE, '..', 'clip-gate'))
+    try:
+        import hold
+        return hold.check(e, vid, marks, key=key, base=os.environ.get('XAI_BASE'), cap=vcap)
+    except Exception as x:
+        return {'hold': False, 'reasons': [], 'measured': [], 'vision': [], 'spent': 0.0, 'vision_ran': False, 'vision_error': 'gate could not run: %s' % str(x)[:200]}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--group', default='Chapter 1'); ap.add_argument('--limit', type=int, default=0); ap.add_argument('--cap', type=float, default=8.0)
     ap.add_argument('--par', type=int, default=3); ap.add_argument('--ids', default=''); ap.add_argument('--dry-run', action='store_true'); ap.add_argument('--dispatch-bake', action='store_true')
+    ap.add_argument('--gate', action='store_true', help='clipgate2: judge each video with tools/clip-gate (measured, then vision) before approving; a clip that fails is held, not approved')
+    ap.add_argument('--gate-vision-cap', type=float, default=.08, help='most dollars of vision calls per clip')
     ap.add_argument('--out', default=os.path.join(os.getcwd(), 'clipgen-out')); ap.add_argument('--repo', default=os.path.abspath(os.path.join(HERE, '..', '..')))
     a = ap.parse_args()
     if a.dispatch_bake: return dispatch_bake(a.out)
@@ -204,7 +216,7 @@ def main():
     say('%s: %d clips, %d to make now (%d redo), %d approved, %d blocked, %d redo waiting for a rewritten prompt. Estimate $%.2f of the $%.2f cap.' % (a.group, len(cl['all']), len(queue), len(cl['redo']), len(cl['approved']), len(cl['blocked']), len(cl['redoWait']), need, a.cap))
     for e, why in cl['blocked']: say('  blocked: %s: %s' % (e['id'], why))
     for e in queue: say('  %s%s  %s %s %ss $%.2f%s' % (e['id'], '' if e['id'] not in state['held'] else ' (video already held)', e['clip']['model'], e['clip']['res'], e['clip']['dur'], cost(e), ' (request pending)' if e['id'] in state['pending'] else ''))
-    report = {'group': a.group, 'cap': a.cap, 'dry_run': a.dry_run, 'queued': [e['id'] for e in queue], 'made': [], 'approved': [], 'still': [], 'failed': [], 'blocked': [{'id': e['id'], 'why': w} for e, w in cl['blocked']], 'redoWaiting': [e['id'] for e in cl['redoWait']], 'spent': 0.0, 'estimate': round(need, 2)}
+    report = {'group': a.group, 'cap': a.cap, 'dry_run': a.dry_run, 'queued': [e['id'] for e in queue], 'made': [], 'approved': [], 'still': [], 'held': [], 'failed': [], 'blocked': [{'id': e['id'], 'why': w} for e, w in cl['blocked']], 'redoWaiting': [e['id'] for e in cl['redoWait']], 'spent': 0.0, 'estimate': round(need, 2)}
     rf = os.path.join(a.out, 'clipgen-report.json')
     if a.dry_run or not queue:
         json.dump(report, open(rf, 'w'), indent=1); say('dry run' if a.dry_run else 'nothing to make'); return 0
@@ -261,6 +273,13 @@ def main():
             except Exception as x: raise RuntimeError('could not read the video to find its marks: %s' % str(x)[:200])
             if not marks:
                 report['still'].append(id_); say(id_, 'NEEDS YOU: the video hardly moves, so the marks cannot be found'); return
+            if a.gate:   # clipgate2: the measured gate, then the vision check; a clip that fails stays held (video kept on the clipgen branch), listed in the report
+                g = gate_check(e, vid, marks, key, a.gate_vision_cap)
+                with clock: spend['total'] += g.get('spent', 0.0)
+                if g['hold']:
+                    report['held'].append({'id': id_, 'reasons': g['reasons'][:8], 'measured': g['measured'], 'vision': g['vision']})
+                    say(id_, 'HELD by the gate (not approved; video kept):', ' | '.join(g['reasons'])[:400]); return
+                say(id_, 'gate ok' + ('' if g.get('vision_ran') else ' (measured part only%s)' % ('; vision: ' + g['vision_error'] if g.get('vision_error') else '')))
             with clock:   # one commit at a time: each one rewrites data/art-prompts.json
                 done = repo.approve([{'id': id_, 'video': vid, 'marks': marks, 'prompt': (e.get('prompt') or '').strip(), 'rev': rev}])
             if done:
@@ -278,7 +297,8 @@ def main():
         list(ex.map(work, queue))
     report['spent'] = round(spend['total'], 2)
     json.dump(report, open(rf, 'w'), indent=1)
-    say('DONE. approved %d, need you %d, failed %d, spent about $%.2f' % (len(report['approved']), len(report['still']), len(report['failed']), spend['total']))
+    say('DONE. approved %d, held by the gate %d, need you %d, failed %d, spent about $%.2f' % (len(report['approved']), len(report['held']), len(report['still']), len(report['failed']), spend['total']))
+    for h in report['held']: say('  held %s: %s' % (h['id'], ' | '.join(h['reasons'])[:300]))
     for f in report['failed']: say('  failed %s: %s' % (f['id'], f['why']))
     for i in report['still']: say('  needs you %s' % i)
     return 0

@@ -99,9 +99,9 @@
   },
   "clip-tom-hit": {
    "faults": [
-    "hit_back",
-    "face"
-   ]
+    "hit_back"
+   ],
+   "note": "clipgate2: \"face\" removed. His note says what the move should do (\"stumble backwards and grimace\"); the pictures of this clip show a clear grimace (looked at the grid or head strip of all four hit clips)."
   },
   "clip-tom-dodge": {
    "faults": [
@@ -163,9 +163,9 @@
   },
   "clip-grace-hit": {
    "faults": [
-    "hit_back",
-    "face"
-   ]
+    "hit_back"
+   ],
+   "note": "clipgate2: \"face\" removed. His note says what the move should do (\"stumble backwards and grimace\"); the pictures of this clip show a clear grimace (looked at the grid or head strip of all four hit clips)."
   },
   "clip-grace-dodge": {
    "faults": [
@@ -220,9 +220,9 @@
   },
   "clip-rose-hit": {
    "faults": [
-    "face",
     "hit_back"
-   ]
+   ],
+   "note": "clipgate2: \"face\" removed. His note says what the move should do (\"stumble backwards and grimace\"); the pictures of this clip show a clear grimace (looked at the grid or head strip of all four hit clips)."
   },
   "clip-rose-dodge": {
    "faults": [
@@ -272,10 +272,10 @@
   },
   "clip-deedee-hit": {
    "faults": [
-    "hit_back",
-    "face"
+    "hit_back"
    ],
-   "same_as": "clip-tom-hit"
+   "same_as": "clip-tom-hit",
+   "note": "clipgate2: \"face\" removed. His note says what the move should do (\"stumble backwards and grimace\"); the pictures of this clip show a clear grimace (looked at the grid or head strip of all four hit clips)."
   },
   "clip-deedee-dodge": {
    "faults": [

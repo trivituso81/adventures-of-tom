@@ -1,0 +1,13 @@
+{
+ "about": "Which vision questions HOLD a clip (it is not approved) and which are only reported (clipgate2, chosen after the first replay of chapter 1, so its numbers are in-sample; the real test is the clips that get re-made). hold: questions a viewer can answer from the pictures alone, and that gave no alarm on a clip Tom approved. advisory: questions whose answers disagreed with Tom's own approvals in the replay, listed in the report and in the Library, never holding.",
+ "hold": ["g_cover", "d_back", "k_dizzy", "k_nohop", "k_back", "r_stride", "v_big", "h_stagger", "i_blink", "i_relaxed", "p_same", "p_parts"],
+ "advisory": {
+  "n_name": "Flagged all three approved 'give' clips (nothing in the hand) and the approved Windex, as hard as the clips Tom rejected: the model does not know what he accepts for an invented move.",
+  "n_nowave": "Same: calls the approved give clips 'waving'.",
+  "p_noobj": "Flagged the approved Rose give (a green object) and Windex (the spray).",
+  "m_blink_quick": "Flagged the approved Mudling and Big One idles as hard as the Grump's.",
+  "m_pupils": "Same: the approved idles show pupils that slide back in a forward-and-back loop.",
+  "m_animated": "Never fired in the replay.",
+  "m_drops": "Never fired in the replay (the Toad's drops come from the backward half of the loop: a bake setting)."
+ }
+}

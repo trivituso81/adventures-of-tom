@@ -74,5 +74,41 @@ try:
     check('JSON in a code fence is read', rc == 0 and json.load(open(out3))['clips']['clip-tom-guard']['runs'][0]['answers'], log[-200:])
 finally:
     s.terminate()
+
+# the hold step the clip-gen Action uses (tools/clip-gate/hold.py): measured part on a real video judged as it will be baked, vision on top
+sys.path.insert(0, HERE)
+os.chdir(ROOT)
+import hold
+d = json.load(open('data/art-prompts.json'))
+def entry(i): return [x for x in d['entries'] if x['id'] == i][0]
+s = server({'STUB_NO': 'g_cover,n_name'})
+try:
+    e = entry('clip-tom-guard'); v = e['versions'][-1]
+    r = hold.check(e, v['file'].replace('.json', '.mp4'), v['marks'], key=None)
+    check('hold: no key runs the measured part only', r['vision_ran'] is False and r['hold'] and 'size' in r['measured'], r)
+    r = hold.check(e, v['file'].replace('.json', '.mp4'), v['marks'], key='testkey', base='http://127.0.0.1:' + PORT, runs=3)
+    check('hold: a question under hold that answers no holds the clip', 'g_cover' in r['vision'] and r['hold'] and r['vision_ran'], r)
+    check('hold: its spend is counted', abs(r['spent'] - .015) < 1e-6, r['spent'])
+    e = entry('clip-tom-give'); v = e['versions'][-1]
+    r = hold.check(e, v['file'].replace('.json', '.mp4'), v['marks'], key='testkey', base='http://127.0.0.1:' + PORT, runs=3)
+    check('hold: an advisory question that answers no does not hold', r['vision'] == [] and not r['hold'] and r['measured'] == [], r)
+    r = hold.check(e, v['file'].replace('.json', '.mp4'), v['marks'], key='wrong', base='http://127.0.0.1:' + PORT, runs=3)
+    check('hold: a refused key is reported and does not hold', 'vision_error' in r and not r['hold'], r)
+finally:
+    s.terminate()
+import gate
+for i in ('clip-tom-guard', 'clip-tom-give', 'clip-tom-idle'):
+    e = entry(i); v = e['versions'][-1]
+    h = gate.header_for(e, v['marks'], v['file'].replace('.json', '.mp4')); b = gate.baked_header(e['clip']['id'])
+    check('header_for matches the baked header of ' + i, all(h[k] == b[k] for k in ('first', 'last', 'step', 'speed', 'pace')), (h, b))
+
+# the hook in tools/art-library/clipgen.py (--gate): a held clip comes back with its reasons; a gate that cannot run holds nothing and says so
+sys.path.insert(0, os.path.join(ROOT, 'tools', 'art-library'))
+import clipgen
+e = entry('clip-tom-guard'); v = e['versions'][-1]
+r = clipgen.gate_check(e, v['file'].replace('.json', '.mp4'), v['marks'], None, .08)
+check('clipgen.gate_check holds a clip the measured gate flags', r['hold'] and 'size' in r['measured'], r)
+r = clipgen.gate_check(None, 'no-such.mp4', {}, None, .08)
+check('clipgen.gate_check never raises and holds nothing when the gate cannot run', not r['hold'] and 'gate could not run' in r.get('vision_error', ''), r)
 print('FAILS:', fails)
 sys.exit(1 if fails else 0)

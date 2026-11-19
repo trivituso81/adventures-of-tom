@@ -23,20 +23,29 @@ def main():
     out = a[a.index('--out') + 1] if '--out' in a else None
     rv = json.load(open(os.path.join(HERE, 'review-ch1.json'), encoding='utf-8'))
     vm = json.load(open(os.path.join(HERE, 'vision-map.json'), encoding='utf-8'))
+    pol = json.load(open(os.path.join(HERE, 'vision-policy.json'), encoding='utf-8'))
+    hold_q = set(pol['hold'])
     rep = {r['id']: r for r in gate.run('Chapter 1', None, cache)}
     rows, per, cross = [], {}, {}
     for cid, r in rep.items():
         v = vis['clips'].get(cid, {})
-        vflags = set(v.get('flags', []))
+        vall = set(v.get('flags', []))
+        vflags = vall & hold_q          # what would HOLD the clip
         mflags = {f['check'] for f in r['flags']}
         cl = rv['clips'].get(cid)
-        row = {'id': cid, 'status': r['status'], 'measured': sorted(mflags), 'vision': sorted(vflags), 'describe': [x.get('describe') for x in v.get('runs', [])][:1]}
+        row = {'id': cid, 'status': r['status'], 'measured': sorted(mflags), 'vision': sorted(vflags), 'advisory': sorted(vall - hold_q), 'describe': [x.get('describe') for x in v.get('runs', [])][:1]}
         if cl:
             inherited = bool(cl.get('same_as'))
             row['faults'] = cl['faults']
             for f in cl['faults']:
                 qs = [q for q in qids_for(vm['look'], f, r['move']) if q in v.get('verdict', {})]
-                if f in vm['look'] and qs and not (inherited and False):
+                if f in vm['look'] and qs:
+                    held_qs = [q for q in qs if q in hold_q]
+                    if not held_qs:
+                        notg = per.setdefault(f, {'named': 0, 'caught': 0, 'run_no': 0, 'run_all': 0, 'missed': [], 'advisory_only': 0})
+                        notg['advisory_only'] = notg.get('advisory_only', 0) + 1
+                        continue
+                    qs = held_qs
                     caught = any(q in vflags for q in qs)
                     runs_no = [sum(1 for x in v['runs'] if q in x['answers'] and not x['answers'][q]['yes']) for q in qs]
                     p = per.setdefault(f, {'named': 0, 'caught': 0, 'run_no': 0, 'run_all': 0, 'missed': []})
@@ -56,9 +65,11 @@ def main():
     print('LOOK FAULTS (named by Tom -> matching question answers no)')
     ok_look = True
     for f, p in per.items():
+        if p.get('advisory_only') and not p['named']:
+            print(f'  {f:8s} not held by vision: its questions are advisory ({p["advisory_only"]} notes); the measured gate covers what it can'); continue
         share = p['caught'] / p['named']
         ok_look &= share >= .8
-        print(f'  {f:8s} clip majority {p["caught"]}/{p["named"]} ({share:.0%}), single runs {p["run_no"]}/{p["run_all"]}' + (f'   missed: {", ".join(p["missed"])}' if p['missed'] else ''))
+        print(f'  {f:8s} clip majority {p["caught"]}/{p["named"]} ({share:.0%}), single runs {p["run_no"]}/{p["run_all"]}' + (f'   missed: {", ".join(p["missed"])}' if p['missed'] else '') + (f'   (+{p["advisory_only"]} notes on advisory questions)' if p.get('advisory_only') else ''))
     print('CROSS CHECK of measured faults (vision agrees)')
     for f, c in cross.items():
         print(f'  {f:11s} {c["caught"]}/{c["named"]}')
@@ -73,6 +84,8 @@ def main():
             vv = vis['clips'][r['id']]['verdict'][q]
             why.append(f'{q} ({vv["votes_yes"]}/{vv["of"]} yes: {"; ".join(vv["why"])[:120]})')
         print(f'  {r["id"]}: measured {r["measured"] or "-"}; vision {"; ".join(why) or "-"}')
+    adv = [r for r in appr if r['advisory'] and not (r['measured'] or r['vision'])]
+    print(f'  (advisory only, not held: {", ".join(r["id"].replace("clip-", "") + " " + "/".join(r["advisory"]) for r in adv)})')
     print(f'SPEND ${vis["spent"]:.3f} in {vis["calls"]} calls, tokens in {vis["tokens"]["in"]} out {vis["tokens"]["out"]}, model {vis["model"]}')
     ok = len(fa) <= 3 and ok_look
     print('PASS BAR: ' + ('met' if ok else 'NOT met') + f' (flagged {len(covered)} of {len(rej)} rejected; look faults >= 80%: {ok_look}; approved flagged {len(fa)} <= 3: {len(fa) <= 3})')

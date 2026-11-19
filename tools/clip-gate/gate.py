@@ -49,6 +49,31 @@ def baked_header(cid):
             'speed': float(m.group(5)), 'pace': pace}
 
 
+def header_for(e, marks, video, fps=None):
+    """What art_bake.bake_clip would give bake_clip.py for a clip that is not baked yet, in the shape baked_header returns:
+    marks (seconds) -> first and last video frame, step, speed (the review's SPEED pick wins), pace, and for a loop with clip.calm the
+    calmest stretch (bake_clip.calm_window). The clip-gen Action judges a video with this BEFORE it approves it."""
+    import glob, importlib.util, subprocess, tempfile
+    import measure as M
+    c = e['clip']; kind = c.get('kind', 'strike')
+    F, vfps = M.frames(video)
+    fps = fps or vfps
+    nfr = len(F)
+    sp = marks.get('speed') if isinstance(marks.get('speed'), (int, float)) and .25 <= marks['speed'] <= 8 else c.get('speed', 1)
+    step = max(1, round(c.get('step', 3) * fps / 30))
+    first = min(nfr - 1, round(marks['first'] * fps)); last = min(nfr - 1, round(marks['last'] * fps))
+    last = list(range(first, last + 1, step))[-1]
+    if c.get('calm') and kind == 'loop':
+        spec = importlib.util.spec_from_file_location('bake_clip_mod', os.path.join('tools', 'clip-bake', 'bake_clip.py'))
+        bc = importlib.util.module_from_spec(spec); spec.loader.exec_module(bc)
+        tmp = tempfile.mkdtemp()
+        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', video, tmp + '/r%04d.png'], check=True)
+        files = sorted(glob.glob(tmp + '/r*.png'))
+        first, last = bc.calm_window(files, first, last, fps, c['calm'])
+    pace = [(round(s * fps), max(1, round(st * fps / 30)), float(sv)) for s, st, sv in c.get('pace', [])]
+    return {'first': first, 'last': last, 'step': step, 'kind': kind, 'speed': float(sp), 'pace': pace}
+
+
 def played(hd, fps, kind):
     """[(video frame, game seconds it stays on screen)] in the order the game shows them (a loop: forward, then back)."""
     segs = [(hd['first'], hd['step'], hd['speed'])] + sorted(hd['pace'])

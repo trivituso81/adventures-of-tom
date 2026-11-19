@@ -28,6 +28,10 @@ on:
         description: 'Most dollars sent to xAI in this run. The run stops before passing it.'
         required: false
         default: '8'
+      gate:
+        description: 'true: judge each video with the clip gate (tools/clip-gate) before approving; a clip that fails is held on branch clipgen, not approved.'
+        required: false
+        default: 'true'
       dry_run:
         description: 'true: list what would be made and the cost, call nothing, spend nothing.'
         required: false
@@ -60,7 +64,7 @@ jobs:
           sudo apt-get install -y -qq ffmpeg
           ffmpeg -version | head -1
           command -v ffmpeg ffprobe
-          pip install requests numpy
+          pip install requests numpy pillow scipy opencv-python-headless
       - name: Restore what the clipgen branch already holds
         run: |
           mkdir -p "$RUNNER_TEMP/clipgen"
@@ -86,10 +90,12 @@ jobs:
           LIMIT: ${{ inputs.limit }}
           CAP: ${{ inputs.cap }}
           DRY: ${{ inputs.dry_run }}
+          GATE: ${{ inputs.gate }}
         run: |
           set -o pipefail
           ARGS=(--group "${GROUP:-Chapter 1}" --limit "${LIMIT:-0}" --cap "${CAP:-8}" --out "$RUNNER_TEMP/clipgen")
           [ -n "$IDS" ] && ARGS+=(--ids "$IDS")
+          [ "$GATE" = "true" ] && ARGS+=(--gate)
           [ "$DRY" = "true" ] && ARGS+=(--dry-run)
           if [ "$DRY" != "true" ] && [ -z "$XAI_API_KEY" ]; then echo "Repo secret XAI_API_KEY is empty or missing."; exit 2; fi
           python3 -I tools/art-library/clipgen.py "${ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/run.log"
