@@ -15605,7 +15605,7 @@
    "id": "c-fix-listen1-play",
    "tag": "fix-listen1-play",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Characters",
    "title": "Fix: Play chapter 1 and watch people listen",
@@ -15627,7 +15627,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukEUP25DYUQnZmk23ex",
     "opening": "Something is wrong on t-listen1-play"
    },
    "history": [
@@ -15645,6 +15645,10 @@
      "d": "2026-11-20",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-20T20:12:16.298Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -15658,7 +15662,7 @@
    },
    "after": "t-listen1-play",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-20T20:12:55+00:00"
   }
  ],
  "sessions": [
@@ -17697,8 +17701,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "c445968a2a125f8a34db4d80e83ce350f6b4eadf",
- "synced_at": "2026-11-20T20:09:01+00:00",
+ "synced": "8cd5826e7cb35803b2b4f1bfae130c00cc4edcf3",
+ "synced_at": "2026-11-20T20:12:56+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
