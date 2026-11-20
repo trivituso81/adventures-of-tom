@@ -1132,7 +1132,7 @@ const LE_ROOMS=[
       '################'],
     npcs:[
       {name:'Bun',x:9,y:6,look:'bun',lines:[
-        'Welcome! Our bread is emotionally available.',
+        'Welcome! Welcome! Our bread is emotionally available.',
         'The baguettes? A little crusty.',
         "Today's special is yesterday's tomorrow toast."]}],
     objects:[

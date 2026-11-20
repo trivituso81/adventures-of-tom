@@ -7997,9 +7997,9 @@ map	5	data/maps-le.js	map school, when {chapter:5,notFlag:ch5-done,flag:ch5-snac
 map	5	data/maps-le.js	map school, when {chapter:5,notFlag:ch5-done,flag:ch5-snack}	Mr. Halverson	Don't tell Gary. Gary eats the whole thing.	amy	happy
 map	5	data/maps-le.js	map school, when {chapter:5,notFlag:ch5-done,flag:ch5-snack}	Mr. Halverson	Don't tell Gary. Gary eats the whole thing.	grace	happy
 map	5	data/maps-le.js	map school, when {chapter:5,notFlag:ch5-done,flag:ch5-snack}	Mr. Halverson	Don't tell Gary. Gary eats the whole thing.	rose	happy
-map	1-10	data/maps-le.js	map bakery, base	Bun	Welcome! Our bread is emotionally available.	tom	unimpressed
-map	1-10	data/maps-le.js	map bakery, base	Bun	Welcome! Our bread is emotionally available.	grace	unimpressed
-map	1-10	data/maps-le.js	map bakery, base	Bun	Welcome! Our bread is emotionally available.	rose	happy
+map	1-10	data/maps-le.js	map bakery, base	Bun	Welcome! Welcome! Our bread is emotionally available.	tom	unimpressed
+map	1-10	data/maps-le.js	map bakery, base	Bun	Welcome! Welcome! Our bread is emotionally available.	grace	unimpressed
+map	1-10	data/maps-le.js	map bakery, base	Bun	Welcome! Welcome! Our bread is emotionally available.	rose	happy
 map	1-10	data/maps-le.js	map bakery, base	Bun	The baguettes? A little crusty.	tom	unimpressed
 map	1-10	data/maps-le.js	map bakery, base	Bun	The baguettes? A little crusty.	grace	unimpressed
 map	1-10	data/maps-le.js	map bakery, base	Bun	The baguettes? A little crusty.	rose	happy
@@ -9027,9 +9027,9 @@ recruit	1-10	engine/followers.js	recruit no	Deedee	All right, all right. The pie
 recruit	1-10	engine/followers.js	recruit swap	Deedee	Oh, honey. Somebody has to stay and mind the house. Who's it going to be?	tom	happy
 recruit	1-10	engine/followers.js	recruit swap	Deedee	Oh, honey. Somebody has to stay and mind the house. Who's it going to be?	grace	scared
 recruit	1-10	engine/followers.js	recruit swap	Deedee	Oh, honey. Somebody has to stay and mind the house. Who's it going to be?	rose	scared
-recruit	1-10	engine/followers.js	recruit chatter	Deedee	Are you warm enough? Nobody is warm enough.	tom	unimpressed
-recruit	1-10	engine/followers.js	recruit chatter	Deedee	Are you warm enough? Nobody is warm enough.	grace	unimpressed
-recruit	1-10	engine/followers.js	recruit chatter	Deedee	Are you warm enough? Nobody is warm enough.	rose	happy
+recruit	1-10	engine/followers.js	recruit chatter	Deedee	Are you warm enough? Nobody. Nobody is warm enough.	tom	unimpressed
+recruit	1-10	engine/followers.js	recruit chatter	Deedee	Are you warm enough? Nobody. Nobody is warm enough.	grace	unimpressed
+recruit	1-10	engine/followers.js	recruit chatter	Deedee	Are you warm enough? Nobody. Nobody is warm enough.	rose	happy
 recruit	1-10	engine/followers.js	recruit chatter	Deedee	Grace, Rose, to the moon and back. Say it. LOUDER.	tom	happy
 recruit	1-10	engine/followers.js	recruit chatter	Deedee	Grace, Rose, to the moon and back. Say it. LOUDER.	grace	loving
 recruit	1-10	engine/followers.js	recruit chatter	Deedee	Grace, Rose, to the moon and back. Say it. LOUDER.	rose	loving
@@ -9317,7 +9317,7 @@ cab	1-10	engine/travel.js	cab west	Sal	Airport. You've got the look of a man who
 cab	1-10	engine/travel.js	cab west	Sal	Girls, back to the house. Your grandmother has pie. That's not a rumor.	tom	happy
 cab	1-10	engine/travel.js	cab west	Sal	Girls, back to the house. Your grandmother has pie. That's not a rumor.	grace	happy
 cab	1-10	engine/travel.js	cab west	Sal	Girls, back to the house. Your grandmother has pie. That's not a rumor.	rose	happy
-cab	1-10	engine/travel.js	cab west alone	Sal	Los Angeles? You got it. Buckle up.	tom	happy
+cab	1-10	engine/travel.js	cab west alone	Sal	Los Angeles? Los Angeles? You got it. Buckle up.	tom	happy
 cab	1-10	engine/travel.js	cab west alone	Sal	Los Angeles again. Cab seven is ready.	tom	happy
 cab	1-10	engine/travel.js	cab west alone	Sal	LAX. Sit back. The radio is on something calm.	tom	happy
 cab	1-10	engine/travel.js	cab west alone	Sal	Off we go. Don't touch the visor. Everybody touches the visor.	tom	scared
@@ -9865,7 +9865,7 @@ table	1-10	engine/travel.js	TRAVEL_POOLS west.7.tom	Tom	Great. I just got outcom
 table	1-10	engine/travel.js	TRAVEL_POOLS west.7.tom	Tom	Great. I just got outcompeted by pie.	rose	happy
 table	1-10	engine/travel.js	TRAVEL_POOLS west.7.tom	Tom	Enjoy it, you two. Save me a slice.	grace	happy
 table	1-10	engine/travel.js	TRAVEL_POOLS west.7.tom	Tom	Enjoy it, you two. Save me a slice.	rose	happy
-table	1-10	engine/travel.js	TRAVEL_POOLS sal.0	Sal	Los Angeles? You got it. Buckle up.	tom	happy
+table	1-10	engine/travel.js	TRAVEL_POOLS sal.0	Sal	Los Angeles? Los Angeles? You got it. Buckle up.	tom	happy
 table	1-10	engine/travel.js	TRAVEL_POOLS sal.1	Sal	Los Angeles again. Cab seven is ready.	tom	happy
 table	1-10	engine/travel.js	TRAVEL_POOLS sal.2	Sal	LAX. Sit back. The radio is on something calm.	tom	happy
 table	1-10	engine/travel.js	TRAVEL_POOLS sal.3	Sal	Off we go. Don't touch the visor. Everybody touches the visor.	tom	scared

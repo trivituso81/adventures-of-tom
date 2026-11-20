@@ -6340,7 +6340,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "ch1retext1",
-   "next": "Checks every chapter 1 dialogue clip against its subtitle, merges your new export (3 Deedee takes), and rewords each subtitle to the words the kept take says.",
+   "next": "Shipped as ch1retext1: 11 subtitles reworded to the spoken words, 3 new Deedee takes merged. One line (Tom, \"Thank you for telling me, Rose\") needs a re-take.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -6352,9 +6352,13 @@
     {
      "d": "2026-11-19",
      "t": "Tom: \"for chapter 1, ive changed the dialogue in the voicelcips and rerecorded, but the old dialogue still apepars in the game. check for discrepancies and update\". New card; started in this conversation."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Sent local-clips-pending_5_.json (3 Deedee takes): merged. 11 subtitles now match the clips. Handed to Tom card t-ch1starving."
     }
    ],
-   "after": "nothing for Tom: end",
+   "after": "t-ch1starving",
    "prompt": {
     "what": "Rewords chapter 1 subtitles to the words Tom's kept voice takes say, and merges his newest takes.",
     "before": [
@@ -6531,6 +6535,29 @@
     }
    ],
    "waiting_on": "claude"
+  },
+  {
+   "id": "t-ch1starving",
+   "title": "Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\"",
+   "theme": "Voice Clips",
+   "lane": "tom",
+   "col": "up",
+   "ask": "voice",
+   "fyi": true,
+   "next": "ADMIN > VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. The script you kept ends \"I'm starving!\" but the clip stops after \"number two can't wait.\" Record it again so it says the last sentence, keep it, and Export pending clips. If you would rather drop \"I'm starving!\", delete it from the script and keep the take as it is.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGPg3Q41zGrRaPsq4n",
+    "opening": "\"for chapter 1, ive changed the dialogue in the voicelcips and rerecorded, but the old dialogue still apepars in the game. check for discrepancies and update\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Made by ch1retext1: the only chapter 1 line whose kept script has words the clip does not say."
+    }
+   ]
   }
  ],
  "sessions": [

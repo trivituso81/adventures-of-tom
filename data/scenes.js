@@ -135,7 +135,7 @@ SCENES.ch1Amy=[
   {propTo:'amywin',field:'u',to:0,time:.3}, {prop:'amywin',hide:true},
   {cam:null}, {face:'tom',dir:'right'},   // Amy is gone: Tom turns to Grace for the last two lines (facehold1)
   {talk:'Tom',lines:["Your mother says I'm slow."]},
-  {talk:'Grace',lines:["You are slow. I've been on number four since the mailbox."]},
+  {talk:'Grace',lines:["You are slow. I've been on number four since the taxi place."]},
   {call:()=>{ if(typeof storyPosesLoad==='function') { storyPosesLoad('deedee'); storyPosesLoad('boppy'); } }}   // Deedee's greeting poses are ready before the kitchen (roofnpc2); last, so the 20 s idle release (engine/painted.js) does not drop them during this scene (amywin1)
 ];
 
@@ -174,9 +174,9 @@ SCENES.ch1Theft=[
   {face:'tom',dir:'left'}, {face:'grace',dir:'left'},
   ...CH1_DISMOUNT([8,10]),   // through the door, Rose hops down (cutpolish3: she was taken down in the Square before)
   {face:'rose',dir:'left'},
-  {talk:'Deedee',lines:["There he is! Come here. Let me look at you. I missed that face. Now sit, you're having a muffin."]},
-  {talk:'Tom',lines:["Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since we flew over Kansas."]},
-  {talk:'Deedee',lines:["Twelve of them, and all twelve are still there. I've been standing between that pan and your father since six this morning."]},
+  {talk:'Deedee',lines:["My favorite son! I missed that face. Now sit, you're having a muffin."]},
+  {talk:'Tom',lines:["Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas."]},
+  {talk:'Deedee',lines:["I made twelve and they're all still there. I've been standing between that pan and your father since six this morning."]},
   {face:'tom',dir:'right'}, {face:'grace',dir:'right'}, {face:'rose',dir:'right'},
   {talk:'Boppy',lines:["In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat..."]},
   {wait:.8},   // a beat after Boppy's story, then the bang (ch1nodoor: the door frame height-marks look is cut)
@@ -242,11 +242,11 @@ SCENES.ch1Theft=[
   {pose:'Deedee'}, {pose:'Boppy'},   // the shock ends when her line opens (cutpolish4)
   {talk:'Deedee',lines:["That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER."]},
   {face:'tom',dir:'right'},
-  {talk:'Boppy',lines:["...and I only caught him because the hat kept getting taller. Where'd the muffins go?"]},
+  {talk:'Boppy',lines:["...and I only caught him because the hat kept getting taller. Wait, where'd the muffins go?"]},
   {talk:'Deedee',lines:["A ball of mud came through the door and took them. Pan and all."]},
   {talk:'Boppy',lines:["The mud gets a muffin and I don't?"]},
-  {talk:'Deedee',lines:["Girls, sneakers. Tom, hold the door. Hubby, you stay right there. When we get them back, the first one's yours."]},
-  {talk:'Boppy',lines:["The first one. Tom, you heard her."]},
+  {talk:'Deedee',lines:["Girls, sneakers. Tom, hold the door. Hubby, you stay right there."]},
+  {talk:'Boppy',lines:["Tom, you heard her."]},
   {join:'deedee'},   // Deedee, Tom and the girls run out the back door; Boppy sits back down with his empty plate
   // Deedee steps out of her kitchen spot into line; the girls line up beside Tom (roofnpc2: they used to stack on one tile).
   {place:'deedee',at:[7,9],dir:'down'},
@@ -835,18 +835,11 @@ const STORY_WORLD=[
     for(const n of currentMap.npcs) {
       n.trance=on&&CH2_TRANCE.includes(n.name);
       if(n.trance&&!n.held) { n.path=[]; n.idle=1; }
-      // r-20261114-104915-g4gl (Tom: "a special animation frame for every single NPC who's in this dazed state"): each entranced neighbour stands in a painted dazed pose
-      const zid=CH2_TRANCE_ID[n.name];
-      if(zid) {
-        if(n.trance) { if(!n.scenePose&&typeof STORY_POSES!=='undefined'&&STORY_POSES[zid]&&STORY_POSES[zid].dz_dazed) { if(typeof storyPosesLoad==='function') storyPosesLoad(zid); n.scenePose={f:'dz_dazed',mid:zid,dazed:true}; } }
-        else if(n.scenePose&&n.scenePose.dazed) n.scenePose=null;
-      }
     }
   }
 ];
 // Who the smog puts in a trance (they stand still with a purple swirl over their heads).
 const CH2_TRANCE=['Mr. Washington','Marisol','Larry','Miss Odette','Doña Carmen'];
-const CH2_TRANCE_ID={'Mr. Washington':'washington','Marisol':'marisol','Larry':'larry','Miss Odette':'odette','Doña Carmen':'carmen'};   // whose painted dazed pose (data/npc-poses.js <id>dz)
 // Grump Hollow's monsters hold still until the three tutorial fights are done.
 // HOLD_RULES: one function per chapter; any that returns true keeps that map monster still. Later chapters push onto it.
 const HOLD_RULES=[

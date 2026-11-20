@@ -1,0 +1,57 @@
+[
+ {
+  "voice": "grace",
+  "old": "You are slow. I've been on number four since the mailbox.",
+  "new": "You are slow. I've been on number four since the taxi place."
+ },
+ {
+  "voice": "boppy",
+  "old": "...and I only caught him because the hat kept getting taller. Where'd the muffins go?",
+  "new": "...and I only caught him because the hat kept getting taller. Wait, where'd the muffins go?"
+ },
+ {
+  "voice": "deedee",
+  "old": "There he is! Come here. Let me look at you. I missed that face. Now sit, you're having a muffin.",
+  "new": "My favorite son! I missed that face. Now sit, you're having a muffin."
+ },
+ {
+  "voice": "boppy",
+  "old": "The first one. Tom, you heard her.",
+  "new": "Tom, you heard her."
+ },
+ {
+  "voice": "deedee",
+  "old": "Girls, sneakers. Tom, hold the door. Hubby, you stay right there. When we get them back, the first one's yours.",
+  "new": "Girls, sneakers. Tom, hold the door. Hubby, you stay right there."
+ },
+ {
+  "voice": "tom",
+  "old": "Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since we flew over Kansas.",
+  "new": "Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas."
+ },
+ {
+  "voice": "deedee",
+  "old": "Twelve of them, and all twelve are still there. I've been standing between that pan and your father since six this morning.",
+  "new": "I made twelve and they're all still there. I've been standing between that pan and your father since six this morning."
+ },
+ {
+  "voice": "sal",
+  "old": "Los Angeles? You got it. Buckle up.",
+  "new": "Los Angeles? Los Angeles? You got it. Buckle up."
+ },
+ {
+  "voice": "bun",
+  "old": "Welcome! Our bread is emotionally available.",
+  "new": "Welcome! Welcome! Our bread is emotionally available."
+ },
+ {
+  "voice": "deedee",
+  "old": "Are you warm enough? Nobody is warm enough.",
+  "new": "Are you warm enough? Nobody. Nobody is warm enough."
+ },
+ {
+  "voice": "tom",
+  "old": "Then we had better hurry. Before somebody licks the rest.",
+  "new": "Then we better hurry. Before somebody licks the rest."
+ }
+]

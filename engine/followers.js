@@ -91,7 +91,7 @@ const RECRUIT_TALK={
        yes:'Wonderful! Everybody hold hands. Tom, you too. To the moon and back, here we come.',no:'All right, all right. The pies need me anyway. Come back for a cookie.',
        swap:'Oh, honey. Somebody has to stay and mind the house. Who\'s it going to be?',
        bye:'Deedee heads home to check on the pies. All four of them.',
-       lines:['Are you warm enough? Nobody is warm enough.','Grace, Rose, to the moon and back. Say it. LOUDER.','I packed cookies. They\'re in my purse. The purse is at home. We go back.','Pick up those feet. A brisk walk never hurt anybody.','Tom, you look pale. When did you last drink water? Nurse is asking.','When we get home I\'m making a big dinner. Nobody argue.']},
+       lines:['Are you warm enough? Nobody. Nobody is warm enough.','Grace, Rose, to the moon and back. Say it. LOUDER.','I packed cookies. They\'re in my purse. The purse is at home. We go back.','Pick up those feet. A brisk walk never hurt anybody.','Tom, you look pale. When did you last drink water? Nurse is asking.','When we get home I\'m making a big dinner. Nobody argue.']},
   boppy:{ask:'My stomach isn\'t right and the fish aren\'t biting. Want an old man along? Just don\'t walk too fast.',
        yes:'Good. Somebody grab my cap. And slow down. I was a champion, you know.',no:'Suit yourself. The recliner and I have an understanding.',
        swap:'Somebody has to sit this one out. My stomach volunteers, but the rest of me is coming.',

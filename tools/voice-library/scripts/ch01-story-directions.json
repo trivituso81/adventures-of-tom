@@ -99,7 +99,7 @@
   {
    "voice": "grace",
    "speaker": "Grace",
-   "text": "You are slow. I've been on number four since the mailbox.",
+   "text": "You are slow. I've been on number four since the taxi place.",
    "ctx": "chapter 1 (locked rebuild)",
    "script": "[quick, flat] You [emphasized]ARE slow. [flat, deadpan] I've been on number four since the taxi place!",
    "takeId": "tmwo5llcrcgzn"
@@ -209,7 +209,7 @@
   {
    "voice": "deedee",
    "speaker": "Deedee",
-   "text": "There he is! Come here. Let me look at you. I missed that face. Now sit, you're having a muffin.",
+   "text": "My favorite son! I missed that face. Now sit, you're having a muffin.",
    "ctx": "chapter 1 (locked rebuild)",
    "script": "[warm Long Island accent, bright, thrilled] My favorite son! [warm Long Island accent, warm, plain] I missed that FACE. [warm Long Island accent, firm] Now sit, you're having a muffin.",
    "takeId": "tmwo5mo07kihu"
@@ -217,7 +217,7 @@
   {
    "voice": "tom",
    "speaker": "Tom",
-   "text": "Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since we flew over Kansas.",
+   "text": "Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.",
    "ctx": "chapter 1 (locked rebuild)",
    "script": "[warm] Hi, Mom. I missed yours too. [sniffing, hopeful] Is that the cinnamon topping? [earnest confession] I've been thinking about that topping since I flew over KANSAS!",
    "takeId": "tmwo5n9pbpvz2"
@@ -225,10 +225,10 @@
   {
    "voice": "deedee",
    "speaker": "Deedee",
-   "text": "Twelve of them, and all twelve are still there. I've been standing between that pan and your father since six this morning.",
+   "text": "I made twelve and they're all still there. I've been standing between that pan and your father since six this morning.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[warm Long Island accent, proud] Twelve of them, and all twelve are still there. [warm Long Island accent, dry, pointed] I've been standing between that pan and your FATHER since six this morning.",
-   "takeId": "gen-645917e004"
+   "script": "[warm Long Island accent, proud] I made twelve [warm Long Island accent, smug] and they're all still there! [warm Long Island accent, dry, pointed] I've been standing between that pan and your [warm Long Island accent, emphasized]FATHER since six this morning!",
+   "takeId": "tmwoethoa8qqh"
   },
   {
    "voice": "boppy",
@@ -265,13 +265,13 @@
    "speaker": "Deedee",
    "text": "That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[warm Long Island accent, shocked, loud] That thing took my good twelve-cup PAN! [warm Long Island accent, low, indignant] I don't even put that pan in the DISHWASHER.",
-   "takeId": "gen-7c9a9079af"
+   "script": "[warm Long Island accent, shocked, loud] That thing took my good twelve-cup PAN! [warm Long Island accent, low, indignant] I don't even put that pan in the [warm Long Island accent, emphasized]DISHWASHER.",
+   "takeId": "tmwoeuv1gfddm"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
-   "text": "...and I only caught him because the hat kept getting taller. Where'd the muffins go?",
+   "text": "...and I only caught him because the hat kept getting taller. Wait, where'd the muffins go?",
    "ctx": "chapter 1 (locked rebuild)",
    "script": "[deep voice, thick New York accent, finishing his story, pleased, has noticed nothing] ...and I only caught him because the hat kept getting TALLER. [thick New York accent, mild, puzzled] Wait, where'd the muffins go?",
    "takeId": "tmwo5pb225sc9"
@@ -295,15 +295,15 @@
   {
    "voice": "deedee",
    "speaker": "Deedee",
-   "text": "Girls, sneakers. Tom, hold the door. Hubby, you stay right there. When we get them back, the first one's yours.",
+   "text": "Girls, sneakers. Tom, hold the door. Hubby, you stay right there.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[warm Long Island accent, charge nurse, fast] Girls, sneakers. Tom, hold the door. Hubby, you stay right there.",
-   "takeId": "tmwo5qklydgiv"
+   "script": "[warm Long Island accent, charge nurse, fast] Girls, sneakers. Tom, hold the door. [warm Long Island accent, aside]Hubby, you stay right there.",
+   "takeId": "tmwoevqa52ww3"
   },
   {
    "voice": "boppy",
    "speaker": "Boppy",
-   "text": "The first one. Tom, you heard her.",
+   "text": "Tom, you heard her.",
    "ctx": "chapter 1 (locked rebuild)",
    "script": "[deep voice, thick New York accent, deferring] Tom, you heard her.",
    "takeId": "tmwo5r7oola8x"

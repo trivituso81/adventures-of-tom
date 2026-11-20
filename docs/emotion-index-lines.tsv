@@ -27,7 +27,7 @@ chapter	file	line	character	mood	text
 1	data/scenes.js	107	Tom	unimpressed	I'm carrying a child and receiving a news report.
 1	data/scenes.js	109	Amy	proud	I carried both of them up that street with the groceries. Go see Mom. I'm coming over after my run.
 1	data/scenes.js	110	Tom	unimpressed	Your mother says I'm slow.
-1	data/scenes.js	111	Grace	unimpressed	You are slow. I've been on number four since the mailbox.
+1	data/scenes.js	111	Grace	unimpressed	You are slow. I've been on number four since the taxi place.
 1	data/scenes.js	121	Aunt Ellie	unimpressed	Tom. They gave you a seat that turns into a bed, and you still got off that plane wrinkled.
 1	data/scenes.js	122	Tom	happy	Hi, Aunt Ellie. It's a travel wrinkle. It's supposed to fall out by dinner.
 1	data/scenes.js	123	Aunt Ellie	unimpressed	Then I'll look at you again at dinner. Come in. Rose, darling, what is that on your hands?
@@ -41,19 +41,19 @@ chapter	file	line	character	mood	text
 1	data/scenes.js	131	Aunt Ellie	unimpressed	Then the curtains are three, Grace. Fix your list. I'm not coming in behind a licked muffin.
 1	data/scenes.js	133	Rose	happy	Aunt Ellie, did you miss Tata?
 1	data/scenes.js	134	Aunt Ellie	loving	Sure. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind.
-1	data/scenes.js	145	Deedee	loving	There he is! Come here. Let me look at you. I missed that face. Now sit, you're having a muffin.
-1	data/scenes.js	146	Tom	happy	Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since we flew over Kansas.
-1	data/scenes.js	147	Deedee	proud	Twelve of them, and all twelve are still there. I've been standing between that pan and your father since six this morning.
+1	data/scenes.js	145	Deedee	loving	My favorite son! I missed that face. Now sit, you're having a muffin.
+1	data/scenes.js	146	Tom	happy	Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.
+1	data/scenes.js	147	Deedee	proud	I made twelve and they're all still there. I've been standing between that pan and your father since six this morning.
 1	data/scenes.js	148	Boppy	angry	In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat...
 1	data/scenes.js	196	Rose	scared	AHHH! DEEDEE!
 1	data/scenes.js	197	Tom	surprised	GAH! I'm on the floor. Grace, is that your elbow or mine?
 1	data/scenes.js	198	Grace	scared	It's mine! Tata, get UP, it's getting away!
 1	data/scenes.js	199	Deedee	angry	That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER.
-1	data/scenes.js	200	Boppy	happy	...and I only caught him because the hat kept getting taller. Where'd the muffins go?
+1	data/scenes.js	200	Boppy	happy	...and I only caught him because the hat kept getting taller. Wait, where'd the muffins go?
 1	data/scenes.js	201	Deedee	none	A ball of mud came through the door and took them. Pan and all.
 1	data/scenes.js	202	Boppy	sad	The mud gets a muffin and I don't?
-1	data/scenes.js	203	Deedee	proud	Girls, sneakers. Tom, hold the door. Hubby, you stay right there. When we get them back, the first one's yours.
-1	data/scenes.js	204	Boppy	proud	The first one. Tom, you heard her.
+1	data/scenes.js	203	Deedee	proud	Girls, sneakers. Tom, hold the door. Hubby, you stay right there.
+1	data/scenes.js	204	Boppy	proud	Tom, you heard her.
 1	data/scenes.js	225	Rose	happy	Hello, mud! Can we please have Deedee's muffins back? Thank you!
 1	data/scenes.js	226	Mudling	none	No. Ours now.
 1	data/scenes.js	227	Rose	angry	But I said PLEASE!

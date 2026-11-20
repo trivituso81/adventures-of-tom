@@ -41,7 +41,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Rose | Happy | Come on, Tata! Let's go! |
 | Grace | Happy | Tata! Deedee made rhubarb crisp for you. It's cooling RIGHT NOW. |
 | Rose | Happy | I already licked the spoon. Don't tell. |
-| Tom | Unimpressed | Then we had better hurry. Before somebody licks the rest. |
+| Tom | Unimpressed | Then we better hurry. Before somebody licks the rest. |
 | Deedee | Loving | My favorite son! |
 | Deedee | Loving | And my girls! Come here, come here. |
 | Deedee | Loving | Tom, you must be starving! Sit. The crisp needs ten minutes on the counter. |

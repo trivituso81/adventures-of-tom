@@ -11,7 +11,7 @@ ch	scene	speaker	after	text
 1	ch1Amy	Tom	normal	I'm carrying a child and receiving a news report.
 1	ch1Amy	Amy	normal	I carried both of them up that street with the groceries. Go see Mom. I'm coming over after my run.
 1	ch1Amy	Tom	snap	Your mother says I'm slow.
-1	ch1Amy	Grace	normal	You are slow. I've been on number four since the mailbox.
+1	ch1Amy	Grace	normal	You are slow. I've been on number four since the taxi place.
 1	ch1Ellie	Aunt Ellie	normal	Tom. They gave you a seat that turns into a bed, and you still got off that plane wrinkled.
 1	ch1Ellie	Tom	normal	Hi, Aunt Ellie. It's a travel wrinkle. It's supposed to fall out by dinner.
 1	ch1Ellie	Aunt Ellie	snap	Then I'll look at you again at dinner. Come in. Rose, darling, what is that on your hands?
@@ -25,19 +25,19 @@ ch	scene	speaker	after	text
 1	ch1Ellie	Aunt Ellie	normal	Then the curtains are three, Grace. Fix your list. I'm not coming in behind a licked muffin.
 1	ch1Ellie	Rose	beat	Aunt Ellie, did you miss Tata?
 1	ch1Ellie	Aunt Ellie	normal	Sure. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind.
-1	ch1Theft	Deedee	normal	There he is! Come here. Let me look at you. I missed that face. Now sit, you're having a muffin.
-1	ch1Theft	Tom	normal	Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since we flew over Kansas.
-1	ch1Theft	Deedee	snap	Twelve of them, and all twelve are still there. I've been standing between that pan and your father since six this morning.
+1	ch1Theft	Deedee	normal	My favorite son! I missed that face. Now sit, you're having a muffin.
+1	ch1Theft	Tom	normal	Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.
+1	ch1Theft	Deedee	snap	I made twelve and they're all still there. I've been standing between that pan and your father since six this morning.
 1	ch1Theft	Boppy	snap	In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat...
 1	ch1Theft	Rose	snap	AHHH! DEEDEE!
 1	ch1Theft	Tom	snap	GAH! I'm on the floor. Grace, is that your elbow or mine?
 1	ch1Theft	Grace	snap	It's mine! Tata, get UP, it's getting away!
 1	ch1Theft	Deedee	beat	That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER.
-1	ch1Theft	Boppy	normal	...and I only caught him because the hat kept getting taller. Where'd the muffins go?
+1	ch1Theft	Boppy	normal	...and I only caught him because the hat kept getting taller. Wait, where'd the muffins go?
 1	ch1Theft	Deedee	beat	A ball of mud came through the door and took them. Pan and all.
 1	ch1Theft	Boppy	snap	The mud gets a muffin and I don't?
-1	ch1Theft	Deedee	normal	Girls, sneakers. Tom, hold the door. Hubby, you stay right there. When we get them back, the first one's yours.
-1	ch1Theft	Boppy	normal	The first one. Tom, you heard her.
+1	ch1Theft	Deedee	normal	Girls, sneakers. Tom, hold the door. Hubby, you stay right there.
+1	ch1Theft	Boppy	normal	Tom, you heard her.
 1	ch1Mudling	Rose	beat	Hello, mud! Can we please have Deedee's muffins back? Thank you!
 1	ch1Mudling	Mudling	snap	No. Ours now.
 1	ch1Mudling	Rose	snap	But I said PLEASE!

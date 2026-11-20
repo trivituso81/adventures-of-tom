@@ -88,7 +88,7 @@
 {
 "voice": "tom",
 "speaker": "Tom",
-"text": "Then we had better hurry. Before somebody licks the rest.",
+"text": "Then we better hurry. Before somebody licks the rest.",
 "ctx": "",
 "script": "[dry, calm] Then we had better hurry. [deadpan] Before somebody licks the rest."
 },
@@ -16451,7 +16451,7 @@
 {
 "voice": "bun",
 "speaker": "bun",
-"text": "Welcome! Our bread is emotionally available.",
+"text": "Welcome! Welcome! Our bread is emotionally available.",
 "ctx": "",
 "script": "[bubbly, bright] Welcome! [sincere, chirpy] Our bread is EMOTIONALLY available."
 },
@@ -23748,7 +23748,7 @@
 {
 "voice": "deedee",
 "speaker": "deedee",
-"text": "Are you warm enough? Nobody is warm enough.",
+"text": "Are you warm enough? Nobody. Nobody is warm enough.",
 "ctx": "",
 "script": "[warm, fussing] Are you warm enough? [insistent, sure] Nobody is warm enough."
 },
@@ -24728,7 +24728,7 @@
 {
 "voice": "sal",
 "speaker": "sal",
-"text": "Los Angeles? You got it. Buckle up.",
+"text": "Los Angeles? Los Angeles? You got it. Buckle up.",
 "ctx": "",
 "script": "[cheerful, hearty] Los Angeles? You got it. [brisk, chipper] Buckle up."
 },
