@@ -1,7 +1,8 @@
-# Build label and build history (buildlog1, redesigned in builds1: plan claude/builds-plan.md, checks B1 to B7 and B14).
+# Build label and build history (buildlog1, redesigned in builds1 and builds2: plan claude/builds-plan.md, checks B1 to B10 and B14).
 # The label is on the welcome screen and in the menu, a tap opens BUILDS: a status strip, a search box, the last 7 days grouped by day
 # (today open, housekeeping hidden), a marker where this phone is, tries of one card folded into one row, a detail sheet on a tap.
-# The test serves made-up builds and a made-up board (relative to today, so it does not depend on the day it runs).
+# The test serves made-up builds and a made-up board (relative to today, so it does not depend on the day it runs), and stands in for the
+# GitHub reads (pushed list, last publish run, board) so a status can be tried without the network.
 # Usage (repo root): python3 tools/buildlog_test.py [OUT]   (screenshots in OUT, default /tmp/bl). Exit 1 on a failure.
 import threading, http.server, socketserver, functools, os, sys, re, json, datetime
 from zoneinfo import ZoneInfo
@@ -46,9 +47,25 @@ BOARD={'cards':[
  {'id':'t-foo-play','title':'Play foo','lane':'tom','col':'up','ask':'play','next':'Open the foo screen and look at the gold marker line.'},
  {'id':'c-fix-foo-3','title':'Fix foo, try three','theme':'Tools','lane':'claude','col':'done','tag':'fix-foo-3','after':'nothing for Tom: end'},
 ]}
+PUBROW={'tag':'pub-new','at':at(0,11,59),'what':'A build that is pushed but not on the site yet','card':'c-pub','theme':'Tools'}
+HIST_PUSHED='// x\nconst BUILD_HISTORY=[\n'+',\n'.join(json.dumps(r) for r in [PUBROW]+ROWS)+'\n];\n'
+BOARD2={'cards':BOARD['cards']+[
+ {'id':'c-b%d'%i,'title':'Building card %d'%i,'theme':'Tools','lane':'claude','col':'prog','tag':'build%d'%i,'started_at':at(0,9,10+i)} for i in range(1,5)]+[
+ {'id':'c-q1','title':'Queued one','theme':'Areas','lane':'claude','col':'up','tag':'queue1'},
+ {'id':'c-q2','title':'Queued two','theme':'Areas','lane':'claude','col':'wait','tag':'queue2'},
+ {'id':'c-qb','title':'Parked card','lane':'claude','col':'up','tag':'parked','backlog':{'at':'2026-11-19'}},
+ {'id':'c-x','title':'Card that hands to the pictures test','theme':'Characters','lane':'claude','col':'done','tag':'fix-foo-3','after':'t-test2'},
+ {'id':'t-test2','title':'Look at the pictures','lane':'tom','col':'up','ask':'pictures','next':'Open the Art Library.'},
+ {'id':'t-decide','title':'Decide something','lane':'tom','col':'up','ask':'decide','next':'Pick one.'},
+]}
+GH={'pushed':(200,HIST),'runs':(200,json.dumps({'workflow_runs':[{'status':'completed','conclusion':'success','updated_at':at(0,11,0)}]})),'board':(200,json.dumps(BOARD))}
 def routes(pg):
     pg.route('**/data/build-history.js*',lambda r: r.fulfill(status=200,content_type='application/javascript',body=HIST))
     pg.route('**/data/board.json*',lambda r: r.fulfill(status=200,content_type='application/json',body=json.dumps(BOARD)))
+    pg.route('https://api.github.com/**',lambda r: r.fulfill(status=GH['pushed'][0],body=GH['pushed'][1]) if '/contents/data/build-history.js' in r.request.url else r.fulfill(status=GH['runs'][0],content_type='application/json',body=GH['runs'][1]) if '/actions/workflows/publish.yml/runs' in r.request.url else r.fulfill(status=GH['board'][0],body=GH['board'][1]) if '/contents/data/board.json' in r.request.url else r.fulfill(status=404,body='{}'))
+def reopen(pg,view=None):   # close and open BUILDS again so every read is made again
+    pg.evaluate("()=>{ buildHistoryClose(); BUILDLOG.checkedAt=0; buildHistoryOpen(); }"); pg.wait_for_timeout(700)
+    if view: pg.tap(f'.bl-views [data-view="{view}"]'); pg.wait_for_timeout(300)
 
 def small(pg):   # interactive things inside BUILDS that are shorter than 44 px (layout height, so the rotated landscape stage counts the same)
     return pg.evaluate("""()=>{ const out=[]; for(const e of document.querySelectorAll('#buildlog button,#buildlog [role=button],#buildlog a,#buildlog input')){
@@ -100,11 +117,12 @@ with sync_playwright() as pw:
         r0=pg.locator('.bl-row').first
         kids=r0.evaluate("e=>[...e.children].map(c=>c.className)")
         meta=r0.locator('.bl-meta').inner_text()
-        need(kids[0]=='bl-what' and kids[1]=='bl-meta', f'{layout} B3: the sentence comes first, then the small line ({kids})')
+        need(kids[0]=='bl-what' and kids[-1]=='bl-meta', f'{layout} B3: the sentence comes first, then (a status chip), then the small line ({kids})')
         need(re.fullmatch(r'gem-x · Story and Dialogue · 11:50 AM',meta) is not None, f'{layout} B3: small line is name, theme, time ({meta!r})')
         lines=r0.locator('.bl-what').evaluate("e=>Math.round(e.getBoundingClientRect().height/parseFloat(getComputedStyle(e).lineHeight))") if layout=='portrait' else 2
         need(lines<=2, f'{layout} B3: the sentence is cut after two lines ({lines} lines)')
-        need(pg.locator('.bl-chip').count()==0, f'{layout}: no status chips in this phase')
+        chips=pg.eval_on_selector_all('.bl-list .bl-row',"els=>els.map(e=>e.dataset.tag+':'+[...e.querySelectorAll('.bl-chip')].map(c=>c.innerText).join('+'))")
+        need(chips==['gem-x:LIVE, RELOAD','fix-foo-3:LIVE, RELOAD',MINE+':YOUR TEST','plainbuild:','fix-bar-3:'], f'{layout} B8: chips are LIVE, RELOAD above this phone, YOUR TEST on its build, none below ({chips})')
 
         # B4: the marker sits directly above this phone's build
         need(pg.evaluate("()=>{ const m=document.querySelectorAll('.bl-marker'); if(m.length!==1) return false; const n=m[0].nextElementSibling; return n.classList.contains('bl-row')&&n.classList.contains('mine'); }"), f'{layout} B4: one marker, directly above this phone\'s build')
@@ -125,11 +143,27 @@ with sync_playwright() as pw:
 
         # B6: housekeeping hidden by default, shown by the toggle
         need('board-a1' not in tags_in_list(pg) and 'artbake77' not in tags_in_list(pg), f'{layout} B6: housekeeping builds are hidden by default')
-        pg.tap('.bl-hk'); pg.wait_for_timeout(200)
-        need(tags_in_list(pg)[:3]==['board-a1','gem-x','artbake77'] and 'hidden' not in heads(pg)[0]['text'] and '10 builds' in heads(pg)[0]['text'], f'{layout} B6: the toggle shows them and the heading count follows ({heads(pg)[0]["text"]!r})')
+        pg.tap('.bl-fbtn'); pg.wait_for_timeout(300)
+        need(pg.locator('.bl-fwrap:visible').count()==1 and not small(pg), f'{layout} B6: Filters opens a sheet whose buttons are 44 px ({small(pg)})')
+        pg.screenshot(path=f'{OUT}/{layout}-5a-filters.png')
+        pg.tap('.bl-opt[data-k="house"]'); pg.wait_for_timeout(200)
+        pg.tap('.bl-fwrap [data-act="fclose"] >> nth=1'); pg.wait_for_timeout(200)
+        need(tags_in_list(pg)[:3]==['board-a1','gem-x','artbake77'] and 'hidden' not in heads(pg)[0]['text'] and '10 builds' in heads(pg)[0]['text'], f'{layout} B6: Show housekeeping shows them and the heading count follows ({heads(pg)[0]["text"]!r})')
+        need(pg.inner_text('.bl-fbtn')=='Filters 1' and 'Housekeeping shown' in pg.inner_text('.bl-fchips'), f'{layout} B6: the Filters button counts one and a chip says so ({pg.inner_text(".bl-fbtn")!r})')
         pg.screenshot(path=f'{OUT}/{layout}-5-housekeeping.png')
-        pg.tap('.bl-hk'); pg.wait_for_timeout(200)
-        need('board-a1' not in tags_in_list(pg), f'{layout} B6: the toggle hides them again')
+        pg.tap('.bl-fc[data-k="house"]'); pg.wait_for_timeout(200)
+        need('board-a1' not in tags_in_list(pg) and pg.inner_text('.bl-fbtn')=='Filters', f'{layout} B6: the chip removes the filter')
+        # Filters: theme and status
+        pg.tap('.bl-fbtn'); pg.tap('.bl-opt[data-k="theme"][data-v="Tools"]'); pg.wait_for_timeout(200)
+        pg.tap('.bl-fwrap [data-act="fclose"] >> nth=1'); pg.wait_for_timeout(200)
+        need(tags_in_list(pg)==['fix-foo-3',MINE], f'{layout} filters: Theme Tools keeps the Tools builds ({tags_in_list(pg)})')
+        pg.tap('.bl-fbtn'); pg.tap('.bl-opt[data-k="status"][data-v="test"]'); pg.wait_for_timeout(200)
+        pg.tap('.bl-fwrap [data-act="fclose"] >> nth=1'); pg.wait_for_timeout(200)
+        need(tags_in_list(pg)==[MINE] and pg.inner_text('.bl-fbtn')=='Filters 2', f'{layout} filters: Tools and Your test leave this phone\'s build ({tags_in_list(pg)})')
+        pg.screenshot(path=f'{OUT}/{layout}-5b-filtered.png')
+        need(not small(pg), f'{layout} B1: chips and buttons are 44 px with filters applied ({small(pg)})')
+        pg.tap('.bl-fc.clear'); pg.wait_for_timeout(200)
+        need(len(tags_in_list(pg))==5 and pg.inner_text('.bl-fbtn')=='Filters', f'{layout} filters: Clear all returns the list')
 
         # Search (over the loaded list, also builds older than 7 days)
         pg.fill('.bl-q','fix-bar'); pg.wait_for_timeout(200)
@@ -138,30 +172,30 @@ with sync_playwright() as pw:
         pg.fill('.bl-q','zebra'); pg.wait_for_timeout(200)
         need(tags_in_list(pg)==['old-1'], f'{layout}: search by a word of the sentence finds a build older than 7 days ({tags_in_list(pg)})')
         pg.fill('.bl-q','nothinglikethis'); pg.wait_for_timeout(200)
-        need('No builds match.' in pg.inner_text('.bl-list') and pg.locator('.bl-clear').count()==1, f'{layout}: an empty search says so and offers Clear search')
-        pg.tap('.bl-clear'); pg.wait_for_timeout(200)
+        need('No builds match.' in pg.inner_text('.bl-list') and pg.locator('.bl-list .bl-clear').count()==1, f'{layout}: an empty search says so and offers Clear search')
+        pg.tap('.bl-list .bl-clear'); pg.wait_for_timeout(200)
         need(pg.input_value('.bl-q')=='' and pg.locator('.bl-dayhead').count()==3, f'{layout}: Clear search returns to the days')
 
         # B7: a tap on a row opens the detail sheet, with the card link when the build has a card
         pg.tap('.bl-row[data-tag="gem-x"] .bl-what'); pg.wait_for_timeout(500)
-        sh=pg.inner_text('.bl-sheet')
-        need(pg.locator('.bl-sheet').count()==1 and 'Gem pillar ships with a long sentence that goes on and on so that it has to be cut after two lines of text on a phone screen' in sh, f'{layout} B7: a tap on a row opens the sheet with the full sentence')
+        sh=pg.inner_text('.bl-dwrap .bl-sheet')
+        need(pg.locator('.bl-dwrap .bl-sheet').count()==1 and 'Gem pillar ships with a long sentence that goes on and on so that it has to be cut after two lines of text on a phone screen' in sh, f'{layout} B7: a tap on a row opens the sheet with the full sentence')
         need('gem-x' in sh and 'Gem pillar card' in sh and 'Live. Reload to get it.' in sh and 'Story and Dialogue' in sh, f'{layout} B7: sheet shows build, card title, status, theme ({sh[:200]!r})')
         need(pg.get_attribute('.bl-open','href')=='board.html?card=c-gem', f'{layout} B7: Open the card on the board links to the card ({pg.get_attribute(".bl-open","href")})')
         need('DONE ONE' not in sh, f'{layout} B7: a finished Tom card is not shown as what to check')
         need(not small(pg), f'{layout} B1: sheet buttons are 44 px or more ({small(pg)})')
         pg.screenshot(path=f'{OUT}/{layout}-7-sheet.png')
-        pg.tap('.bl-sclose'); pg.wait_for_timeout(200)
+        pg.tap('.bl-dwrap .bl-sclose'); pg.wait_for_timeout(200)
         need(pg.locator('.bl-sheetwrap:visible').count()==0, f'{layout} B7: the close button closes the sheet')
         pg.tap(f'.bl-row[data-tag="{MINE}"] .bl-meta'); pg.wait_for_timeout(500)
-        sh=pg.inner_text('.bl-sheet')
+        sh=pg.inner_text('.bl-dwrap .bl-sheet')
         need('What to check' in sh.replace('WHAT TO CHECK','What to check') and 'Open the foo screen and look at the gold marker line.' in sh and 'On this phone. It is the build running now.' in sh, f'{layout} B7: this phone\'s build shows what to check and its status ({sh[:260]!r})')
         others=pg.eval_on_selector_all('.bl-other',"els=>els.map(e=>e.dataset.tag)")
         need(others==['fix-foo-3','fix-foo'], f'{layout} B7: other tries of the card, newest first ({others})')
         pg.screenshot(path=f'{OUT}/{layout}-8-sheet-mine.png')
         pg.tap('.bl-other >> nth=0'); pg.wait_for_timeout(300)
         need('Foo third try' in pg.inner_text('.bl-ssent'), f'{layout} B7: a tap on another try opens its sheet')
-        pg.evaluate("()=>document.querySelector('.bl-sheetwrap').dispatchEvent(new MouseEvent('click',{bubbles:true}))"); pg.wait_for_timeout(300)
+        pg.evaluate("()=>document.querySelector('.bl-dwrap').dispatchEvent(new MouseEvent('click',{bubbles:true}))"); pg.wait_for_timeout(300)
         need(pg.evaluate("()=>BUILDLOG.open&&!BUILDLOG.sheet"), f'{layout} B7: a tap outside the sheet closes it')
         pg.tap(f'.bl-row[data-tag="{MINE}"] .bl-meta'); pg.wait_for_timeout(300)
         pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
@@ -191,7 +225,56 @@ with sync_playwright() as pw:
         pg.keyboard.press('Escape'); pg.wait_for_timeout(300)
         need(pg.evaluate("()=>!BUILDLOG.open&&menuOpen"), f'{layout} B14: Escape closes the list and leaves the menu open')
 
-        # A phone that is on the newest build: no RELOAD, "The newest build."
+        # B8: a build that is pushed but not on the site yet is PUBLISHING; with GitHub unreachable nothing is guessed
+        GH['pushed']=(200,HIST_PUSHED); reopen(pg)
+        st=pg.inner_text('.bl-status')
+        need('4 newer builds are live. 1 more is publishing.' in st, f'{layout} B8: the strip counts the publishing build ({st!r})')
+        first=pg.eval_on_selector_all('.bl-list .bl-row',"els=>els.slice(0,2).map(e=>e.dataset.tag+':'+[...e.querySelectorAll('.bl-chip')].map(c=>c.innerText).join('+'))")
+        need(first==['pub-new:PUBLISHING','gem-x:LIVE, RELOAD'] and pg.locator('.bl-chip.pub').count()==1, f'{layout} B8: the pushed build is first with a PUBLISHING chip ({first})')
+        need(pg.evaluate("()=>{ const m=document.querySelector('.bl-marker'); return !!m&&m.nextElementSibling.classList.contains('mine'); }"), f'{layout} B8: the marker still sits above this phone\'s build')
+        pg.screenshot(path=f'{OUT}/{layout}-11-publishing.png')
+        pg.tap('.bl-row[data-tag="pub-new"] .bl-what'); pg.wait_for_timeout(300)
+        need('Publishing.' in pg.inner_text('.bl-dwrap .bl-sheet'), f'{layout} B8: the sheet says Publishing')
+        pg.tap('.bl-dwrap .bl-sclose'); pg.wait_for_timeout(200)
+        GH['pushed']=(500,'{}'); reopen(pg)
+        st=pg.inner_text('.bl-status')
+        need(pg.locator('.bl-chip.pub').count()==0 and 'Could not check GitHub.' in st and 'publishing' not in st, f'{layout} B8: GitHub unreachable shows no PUBLISHING chip and says so ({st!r})')
+        pg.screenshot(path=f'{OUT}/{layout}-12-nogithub.png')
+        # B9: the last publish run failed
+        GH['pushed']=(200,HIST); GH['runs']=(200,json.dumps({'workflow_runs':[{'status':'in_progress','conclusion':None,'updated_at':at(0,11,59)},{'status':'completed','conclusion':'failure','updated_at':at(0,11,58)},{'status':'completed','conclusion':'success','updated_at':at(0,11,0)}]})); reopen(pg)
+        st=pg.inner_text('.bl-status')
+        need('The last publish failed at 11:58 AM.' in st and 'Could not check' not in st, f'{layout} B9: a failed publish run is named with its time ({st!r})')
+        pg.screenshot(path=f'{OUT}/{layout}-13-failed.png')
+        GH['runs']=(200,json.dumps({'workflow_runs':[{'status':'completed','conclusion':'success','updated_at':at(0,11,0)}]}))
+        # B10: In the works, read from the board
+        GH['pushed']=(200,HIST_PUSHED); GH['board']=(200,json.dumps(BOARD2)); reopen(pg,'works')
+        gh=pg.eval_on_selector_all('.bl-gh',"els=>els.map(e=>e.innerText.replace(/\\s+/g,' ').trim())")
+        need(gh==['PUBLISHING NOW 1 ▾','BEING BUILT NOW 4 ▾','WAITING ON YOUR TEST 2 ▾','QUEUED 2 ▸'], f'{layout} B10: four groups with counts, Queued closed ({gh})')
+        need(pg.inner_text('.bl-views [data-view="works"]').replace('\n',' ')=='In the works 7', f'{layout} B10: the view button counts publishing, building and your test ({pg.inner_text(".bl-views [data-view=works]")!r})')
+        rows=pg.eval_on_selector_all('.bl-list .bl-row',"els=>els.map(e=>(e.getAttribute('href')||e.dataset.tag)+'|'+e.innerText.replace(/\\s+/g,' ').trim())")
+        need(len(rows)==1+3+2 and rows[0].startswith('pub-new|') and 'pushed' in rows[0] and 'usually live in 4 min' in rows[0], f'{layout} B10: publishing row, three building rows and "N more", two test rows ({len(rows)} rows)')
+        need(rows[1].startswith('board.html?card=c-b4|') and 'build4' in rows[1] and 'started 9:14 AM' in rows[1], f'{layout} B10: a building row names the card, build and start time ({rows[1]!r})')
+        need(any('more' in b for b in pg.eval_on_selector_all('.bl-more',"els=>els.map(e=>e.innerText)")), f'{layout} B10: more than three rows show N more')
+        tt=[r for r in rows if r.startswith('board.html?card=t-')]
+        need(len(tt)==2 and any('fix-foo-3 · reload first' in t for t in tt) and any(MINE+' · on this phone' in t for t in tt) and not any('t-decide' in t for t in tt), f'{layout} B10: test rows say reload first or on this phone, a decide card is left out ({tt})')
+        need(not small(pg), f'{layout} B1: In the works is 44 px or more ({small(pg)})')
+        pg.screenshot(path=f'{OUT}/{layout}-14-works.png')
+        pg.tap('.bl-more'); pg.wait_for_timeout(200)
+        need(pg.locator('.bl-row[href*="c-b1"]').count()==1, f'{layout} B10: N more opens the rest')
+        pg.tap('.bl-gh >> nth=3'); pg.wait_for_timeout(200)
+        qs=pg.eval_on_selector_all('.bl-row[href*="c-q"]',"els=>els.map(e=>e.innerText.replace(/\\s+/g,' ').trim())")
+        need(len(qs)==2 and 'parked' not in ' '.join(qs) and 'QUEUED' in qs[0], f'{layout} B10: Queued opens with two cards, the parked one is left out ({qs})')
+        pg.screenshot(path=f'{OUT}/{layout}-15-works-queued.png')
+        GH['board']=(500,'{}')
+        pg.route('**/data/board.json*',lambda r: r.fulfill(status=500,body='no'))
+        pg.evaluate("()=>{ BUILDLOG.board=null; }"); reopen(pg,'works')
+        need('Could not read the board.' in pg.inner_text('.bl-list') and pg.locator('.bl-list .bl-clear').count()==1, f'{layout} B10: an unreadable board says so with Try again')
+        pg.screenshot(path=f'{OUT}/{layout}-16-noboard.png')
+        pg.unroute('**/data/board.json*'); pg.route('**/data/board.json*',lambda r: r.fulfill(status=200,content_type='application/json',body=json.dumps(BOARD)))
+        GH['pushed']=(200,HIST); GH['board']=(200,json.dumps(BOARD)); reopen(pg)
+        pg.evaluate("()=>buildHistoryClose()")
+
+        # A phone that is on the newest build: no RELOAD, "The newest build." 
         pg.evaluate("()=>{ window.__real=BUILD_TAG; BUILD_TAG='board-a1'; buildHistoryOpen(); }"); pg.wait_for_timeout(500)
         st=pg.inner_text('.bl-status')
         need('The newest build.' in st and pg.locator('.bl-reload').count()==0, f'{layout}: the newest build says so and offers no RELOAD ({st!r})')

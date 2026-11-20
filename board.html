@@ -1082,7 +1082,7 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){menuOpen(false);if(sheetOpen()&&!/^(INPUT|TEXTAREA)$/.test(e.target.tagName))closeSheet();}if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('card')){e.preventDefault();openSheet(e.target.dataset.id);}});
 loadSince();
-load().then(loadArt).then(()=>{render();if(!SINCE)saveSnap();checkSync(true);}).catch(e=>{$('err').textContent=e.message;$('tabs').textContent='Could not load the board';});
+load().then(loadArt).then(()=>{render();if(!SINCE)saveSnap();checkSync(true);if(Q.get('card')&&cardById(Q.get('card')))openSheet(Q.get('card'));}).catch(e=>{$('err').textContent=e.message;$('tabs').textContent='Could not load the board';});
 $('q').addEventListener('input',e=>{query=e.target.value.trim();shipN=20;render();});
 window.addEventListener('resize',()=>{if(B)counts();});
 window.__board={get B(){return B;},render,reload,syncState,statusOf,attnWhy,sizeIdea,ideaTitle,routineIn};

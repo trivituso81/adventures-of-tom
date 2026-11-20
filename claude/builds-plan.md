@@ -215,3 +215,26 @@ What differs from the plan (decisions I made; phases 2 and 3 should read these):
 | 13 | Backfill "263 of 482 match a card" | 273 of 487 match (the plan's count used a stricter rule) | The rule is the board_check rule plus card id and word-boundary history match |
 
 Not verified: no one has looked at the screen on a phone (Tom tests once, after phase 3). `python3 tools/smoke.py` runs all its checks including `buildlog_test` and `build_history check`, but its `board_sync_test` already fails on main before this work (R5 "board_check accepts an unstick card": `t-stuck-x` must block an open Claude card or be fyi). I did not touch it.
+
+### Phase 2, builds2 (2026-11-20, card c-builds2)
+
+Built as the section 6 row says: 3.3 in full (pushed list, PUBLISHING, LIVE, RELOAD, YOUR TEST, publish failed), the status strip wording, 3.5 (In the works), and the Filters of 3.7 (Theme, Status, Show housekeeping). Checks B8 to B10 and the filter checks are in `tools/buildlog_test.py` (GitHub reads stubbed by route) and pass in portrait and landscape, with B1 (44 px) also checked with the filters sheet, chips and In the works. I looked at every picture of both layouts.
+
+What differs from the plan (phase 3 should read these):
+
+| # | Plan said | What I did | Why |
+|---|---|---|---|
+| 14 | Strip line 2 is one of four sentences | The failed-publish sentence is its own red third line, so the count of live and publishing builds stays visible. "Could not check GitHub." is also its own line | One line could not say both |
+| 15 | N newer and M publishing: "N newer builds are live. M more are publishing." | Same; with no newer live build and M publishing: "The newest live build. M builds are publishing." | Wording for the case the plan does not give |
+| 16 | Views Recent, In the works, Archive | Two buttons (Recent, In the works with its count). Phase 3 adds Archive to `buildViewsHtml` | As in phase 1 |
+| 17 | Filters shows applied filters as chips with an x under the search box, then Clear all | Same. Chips are 44 px tall pills. Show housekeeping counts as one filter ("Filters 1") and shows a chip. A Status filter on a build whose card is not on the board never matches Your test | Keeps B1 |
+| 18 | Search | Search still shows housekeeping builds (as in phase 1) and now also obeys Theme and Status | Filters apply to results |
+| 19 | RELOAD CHECK (pull down or the status strip tap) | The status strip tap re-reads everything (`data-act="check"`). No pull down | Pull down fights the list's own scroll on a phone |
+| 20 | Waiting on your test: "on this phone" or "reload first" | Also "still publishing", "build not named yet" and "build not found" when that is the case. The build is the newest shipped Claude card that hands to the Tom card (the rule of `buildOf` in board.html), else the card's `build` | Never guess |
+| 21 | Being built "started <time>" from the last move to In progress | `started_at` on the card, else the newest history line with an `at` that mentions "start"; no time shown when neither exists | Cards have no move log |
+| 22 | Board read from GitHub | Contents API with the raw media type (token when saved, else none), site copy as the fallback when GitHub fails | Same as board.html's fallback |
+| 23 | `board.html?card=<id>` | Added: `board.html` opens the card sheet after its first load when the parameter names a card | Section 8 item 8 of phase 1 |
+| 24 | Not in the plan | The details sheet is `.bl-dwrap` and the Filters sheet `.bl-fwrap` (both `.bl-sheetwrap`); Escape and a tap outside close the Filters sheet first | Two sheets on one screen |
+
+Not verified: no one has looked at the screen on a phone, and the GitHub reads were only tried against stubs (this environment has no GitHub token for the page); the first real PUBLISHING chip will show on the next push that has not reached the site yet.
+

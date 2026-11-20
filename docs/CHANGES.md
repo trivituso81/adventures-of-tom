@@ -1,3 +1,14 @@
+## builds2 (2026-11-20): the build history shows where each build is (publishing, live, your test), names a failed publish, and has an In the works view and Filters
+
+Phase 2 of 3 of `claude/builds-plan.md` (section 6): sections 3.3, 3.5 and the Filters of 3.7, checks B8 to B10. Tom tests once, after phase 3.
+
+- Statuses (`engine/build-history.js`): each row can carry PUBLISHING (pushed to main, not on the site yet), LIVE, RELOAD (on the site, newer than this phone) and YOUR TEST (an open Tom card with ask play, pictures, animations, voice or script hands to it). A build on this phone with no open test has no chip. Three reads, made when the screen opens and when the status strip is tapped (at most once in 20 seconds otherwise): the live list from the site, the same file on main and the last `publish.yml` runs through the GitHub contents API (the saved GitHub token is used when there is one), and the board (live file from GitHub, else the site copy).
+- Status strip: "N newer builds are live. M more are publishing."; "The last publish failed at <time>." in red when the newest finished publish run failed; "Could not check GitHub." (and no PUBLISHING chip) when GitHub cannot be read.
+- In the works (second view button, with a count): Publishing now, Being built now, Waiting on your test, Queued (closed), first 3 rows with "N more"; a card row opens `board.html?card=<id>` (board.html now opens that card when the parameter is there). "Could not read the board." with Try again when the board cannot be read.
+- Filters replaces the Housekeeping toggle: Theme, Status, Show housekeeping, applied filters as chips under the search box, Clear all.
+- Detail sheet statuses now include Publishing and Waiting on your test.
+- Tests: `python3 tools/buildlog_test.py` adds B8 to B10 and the filters (GitHub reads stubbed), portrait and landscape.
+
 ## builds1 (2026-11-20): the build history reads by day: sentence first, a marker for this phone, retries folded into one row, a details sheet on a tap
 
 Tom (11-20 10:18): "do a UX audit of the build history screen and create a plan to improve it to make it more usable." Phase 1 of 3 of `claude/builds-plan.md` (section 6). Tom tests once, after phase 3 (card t-buildstry).

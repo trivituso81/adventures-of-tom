@@ -15003,6 +15003,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built as builds2: statuses on every row (PUBLISHING, LIVE RELOAD, YOUR TEST), failed publish named, In the works view, Filters. B8 to B10 pass in portrait and landscape. Differences are in plan section 8."
     }
    ],
    "prompt": {
@@ -15040,6 +15044,10 @@
     {
      "d": "2026-11-20",
      "t": "Added from the build history UX audit (planning chat https://claude.ai/code/session_01RXeukFBZzto9KQ2tyVKzmS). Plan: claude/builds-plan.md."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Phase 2 (builds2) is built, so this card is set to start by itself (start: true). Read claude/builds-plan.md section 8 first: it lists what phases 1 and 2 changed from the plan."
     }
    ],
    "prompt": {
@@ -15051,7 +15059,8 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/builds-plan.md (all of it, with its Built section, and look at claude/builds-mock.png), then card c-builds3 in data/board.json with its history. Your first push is the commit board: start c-builds3. Build phase 3 (builds3) as the plan's section 6 row says: the split of section 4 and sections 3.7 and 3.8 with the docs, with checks B11 to B13. Push it as builds3. Fetch and rebase before every push. Keep everything the screen does today (check B14). Run python3 tools/buildlog_test.py and look at every picture in portrait and landscape before pushing. Write what you built, and anything that differs from the plan, into the plan's section 8. Then rewrite card t-buildstry's next step to match what you built. You have my full permission to access the repo."
    },
-   "after": "t-buildstry"
+   "after": "t-buildstry",
+   "start": true
   },
   {
    "id": "t-buildstry",
