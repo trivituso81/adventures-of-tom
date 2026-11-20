@@ -6713,7 +6713,7 @@
    "title": "Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end",
    "theme": "Voice Clips",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "voice",
    "next": "After build fix-ch1starving-3 is published: open ADMIN > VOICE LIBRARY with the button below (Open in the Voice Library: Tom's line), or search \"telling me, Rose\". Reload the page once. The script box now ends \"...number two can't wait. [hungry] I'm starving!\". Tap Takes and record, make takes until one says the whole line, keep it, then press Send my takes to Claude. That starts card Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub). Until then the game plays your old take.",
    "blocks": [
@@ -6769,6 +6769,10 @@
     {
      "d": "2026-11-20",
      "t": "Answer from \"Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! \": Keep it, I'll re-record"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: It still doesn't say I'm starving at the end and when I try to type it in and then re-record it, it deletes the words as soon as I tap out of the box Sent to Claude as card c-fix-ch1starving-4; this card waits on it and comes back to you when the fix ships."
     }
    ],
    "links": [
@@ -6779,7 +6783,8 @@
      ],
      "label": "Tom's line"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-fix-ch1starving",
@@ -8688,6 +8693,56 @@
     "text": "Read CLAUDE.md, docs/VOICE.md and docs/CHANGES.md sections fix-ch1starving-3 and takes1, then card c-ch1starving-sub in data/board.json with its history. Your first push is the commit board: start c-ch1starving-sub. In data/scenes.js (scene ch1, Tom's line \"Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait.\") append \" I'm starving!\" to the subtitle, move the line's script entry in tools/voice-library/scripts/ch01-story-directions.json and tools/voice-library/retake.json to the new text, then merge Tom's newest kept take of that line from branch takes under the new text (the take whose script ends \"[hungry] I'm starving!\"; check with the transcription method of ch1retext1 that the clip says it). Merge only that take unless others match their current subtitles. Run python3 tools/script-index/build.py, python3 tools/clip-audit/unused_voice.py (0 for all four), node tools/voice-library/make-index.js, smoke, and push as ch1starving-sub with after nothing for Tom: end. You have my full permission to access the repo."
    },
    "after": "nothing for Tom: end"
+  },
+  {
+   "id": "c-fix-ch1starving-4",
+   "tag": "fix-ch1starving-4",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Voice Clips",
+   "title": "Fix what you found on: Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end",
+   "next": "You reported a problem on Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: It still doesn't say I'm starving at the end and when I try to type it in and then re-record it, it deletes the words as soon as I tap out of the box",
+   "blocks": [
+    "t-ch1starving"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T08:44:20.065Z",
+     "card": "t-ch1starving",
+     "title": "Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end",
+     "ask": "voice",
+     "words": "It still doesn't say I'm starving at the end and when I try to type it in and then re-record it, it deletes the words as soon as I tap out of the box",
+     "shot": "",
+     "asked": "After build fix-ch1starving-3 is published: open ADMIN ) VOICE LIBRARY with the button below (Open in the Voice Library: Tom's line), or search \"telling me, Rose\". Reload the page once. The script box now ends \"...number two can't wait. [hungry] I'm starving!\". Tap Takes and record, make takes until one says the whole line, keep it, then press Send my takes to Claude. That starts card Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub). Until then the game plays your old take."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-ch1starving"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-ch1starving."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-ch1starving: It still doesn't say I'm starving at the end and when I try to type it in and then re-record it, it deletes the words as soon as I tap out of the box"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: voice are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch1starving-4 and t-ch1starving in data/board.json, history included. Your first push is the commit board: start c-fix-ch1starving-4.\n\nTom tested and found problems:\n1. Card t-ch1starving (Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end, ask voice). He was asked: After build fix-ch1starving-3 is published: open ADMIN ) VOICE LIBRARY with the button below (Open in the Voice Library: Tom's line), or search \"telling me, Rose\". Reload the page once. The script box now ends \"...number two can't wait. [hungry] I'm starving!\". Tap Takes and record, make takes until one says the whole line, keep it, then press Send my takes to Claude. That starts card Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub). Until then the game plays your old take. He wrote: It still doesn't say I'm starving at the end and when I try to type it in and then re-record it, it deletes the words as soon as I tap out of the box\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:44:20.065Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch1starving to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch1starving, and give the build fix-ch1starving-4 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-ch1starving"
   }
  ],
  "sessions": [
