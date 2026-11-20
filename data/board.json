@@ -15067,7 +15067,7 @@
    "id": "c-fix-effectslook-3",
    "tag": "fix-effectslook-3",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Look at the Effects page in Admin",
@@ -15089,7 +15089,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFmQjEQBPFWqM9vS6h",
     "opening": "Something is wrong on t-effectslook"
    },
    "history": [
@@ -15107,6 +15107,10 @@
      "d": "2026-11-20",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-20T18:53:25.033Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -15120,7 +15124,7 @@
    },
    "after": "t-effectslook",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-20T18:54:02+00:00"
   }
  ],
  "sessions": [
@@ -17081,8 +17085,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "bfd23692b6ff5422c446cbeeb9cd7a984736cf1f",
- "synced_at": "2026-11-20T18:40:28+00:00",
+ "synced": "ccecdf554e52b3c79df741f68b9fccfbba7708f6",
+ "synced_at": "2026-11-20T18:54:04+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
