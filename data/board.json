@@ -7276,7 +7276,7 @@
   {
    "id": "t-artgen1try",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "pictures",
    "title": "Try Generate all on the new Mudling sheet card",
@@ -7298,6 +7298,10 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: nothing was left for it to wait on."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
     }
    ],
    "links": [
@@ -7308,7 +7312,8 @@
      ],
      "label": "the Mudling sheet"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "b-board-artgen",
