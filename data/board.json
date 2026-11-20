@@ -15998,7 +15998,7 @@
    "title": "Type a test note in the REPORT box",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Open the game and press RELOAD on the welcome screen. Tap the pencil tab on the right edge, type a full sentence with W, A, S, D and spaces in it, and check every letter shows, the box stays active and nothing behind it moves. Press CANCEL (or SEND it as a real note).",
@@ -16009,8 +16009,14 @@
     {
      "d": "2026-11-20",
      "t": "Added with c-reporttype1 (build reporttype1)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-20T21:18:19.140Z"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "t-stuck-gem-pillar-rhubarb",
