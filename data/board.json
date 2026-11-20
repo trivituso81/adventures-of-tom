@@ -747,7 +747,7 @@
    "title": "Battle system stage 9c: Nara and Boppy kits, late joiners",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "b3s9c",
    "next": "After b3s9b (done). Builds Nara's (Attached Pup, Guard Dog) and Boppy's (The Dep, Pepper Boss) Sig Vibes (28 lines, 6 need their own function) and the late joiners' Vibe Point pool, and moves TNB onto that pool; Lab fights with the chapter 2 and 3 parties.",
    "blocks": [],
@@ -781,6 +781,10 @@
     {
      "d": "2026-11-20",
      "t": "Built: Nara and Boppy complete (28 lines, Lab fights NEW 8 and NEW 9), the late joiners' Vibe Point pool (TNB moved onto it). 55 new rule checks, screen test in portrait and landscape. Calls made are rows in claude/battle-build.md. Next: c-b3s10."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as b3s9c: New battle: Nara and Boppy join the Battle Lab with both of their Vibes, and late joiners start from a Vibe Point pool"
     }
    ],
    "prompt": {
@@ -792,7 +796,8 @@
     "effort": "high (6 of the 28 lines need a new function worked out from the spec)",
     "text": "Read claude/battle-build.md and claude/next-addendum-b3s9b.md, then build stage 9c (Nara and Boppy) of the new battle system. You have my full permission to access the repo."
    },
-   "after": "nothing for Tom: c-b3s10"
+   "after": "nothing for Tom: c-b3s10",
+   "done": "2026-11-20"
   },
   {
    "id": "c-b3s10",
@@ -9749,6 +9754,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCxabcwDEBWbVvd2mv",
+   "title": "Battle system stage 9c: Nara and Boppy kits, late joiners",
+   "first": "2026-11-20T01:13:56-08:00",
+   "last": "2026-11-20T01:52:59-08:00",
+   "tags": [
+    "b3s9c"
+   ],
+   "cards": [
+    "c-b3s9c"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukH4syNcCKR4tfmUd8W",
    "title": "Install the approved chapter 1 pictures (empty counter, muffin pan, empty pan, papers, phone on seat)",
    "first": "2026-11-20T01:49:21Z",
@@ -9830,16 +9847,6 @@
    "tags": [],
    "cards": [
     "c-heist1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCxabcwDEBWbVvd2mv",
-   "title": "Battle system stage 9c: Nara and Boppy kits, late joiners",
-   "first": "2026-11-20T01:13:56-08:00",
-   "last": "2026-11-20T01:13:56-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s9c"
    ]
   },
   {
@@ -10548,8 +10555,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "ba881579e9936433972fca48484b04b74ec3a7e2",
- "synced_at": "2026-11-20T09:40:27+00:00",
+ "synced": "a62faf6c7772b981bdd1d240c0599e221ab7522d",
+ "synced_at": "2026-11-20T09:53:45+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
