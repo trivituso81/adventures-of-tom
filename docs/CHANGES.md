@@ -1,3 +1,8 @@
+## starttest (2026-11-20): First conversation started by the START button: it could push to main, it could not read the Project's claude/ docs
+
+- Tom's card c-starttest. Check 1 (read claude/board3-plan.md and the Project instructions): failed, the repo has no claude/ folder; CLAUDE.md was loaded. Check 2 (first push reaches main unapproved): passed. Check 3 (board job reached the task): passed.
+- Fix named by the plan: new Claude card c-copydocs. No game change.
+
 ## 2026-11-20 (458): Art Library bake, 16 entries (`artbake1494`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).

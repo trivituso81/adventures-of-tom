@@ -1145,6 +1145,18 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Check 1 FAILED: this run could not read claude/board3-plan.md, claude/handoff-rules.md or the Project instructions. The repo has no claude/ folder and the run had no Project attached. What I could see: the repo, including CLAUDE.md (it was loaded) and tools/board_check.py and board_sync.py (which name the plan). What I could not see: any file under claude/. New card c-copydocs asks for the plan's fix (copy the docs a card needs into the repo)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Check 2 PASSED: the commit 'board: start c-starttest' was pushed straight to main (ef72ffe..7112f96) with no person approving it."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Check 3 PASSED: the board job reached the task; this conversation is the proof."
     }
    ]
   },
@@ -1301,6 +1313,34 @@
     "text": "Read claude/handoff-rules.md, then fix the follower lag in free walking (tag follow1): reproduce it first with a free-walk check in tools/cut_natural_test.py, confirm the cause (hiddenSpot in engine/followers.js, else followersWhereTheyStand), fix only that, test portrait and landscape. You have my full permission to access the repo."
    },
    "tag": "follow1"
+  },
+  {
+   "id": "c-copydocs",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Tools",
+   "tag": "copydocs",
+   "title": "Copy the Project docs a board card needs into the repo (copydocs)",
+   "next": "START runs cannot see the Project's claude/ files. Copy them into the repo so a started card can read them.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Makes the Project docs that board cards name (claude/*.md) readable from a conversation started by the START button.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5",
+    "effort": "medium (copying files and rewriting card prompts)",
+    "text": "Read CLAUDE.md. A run started by START (card c-starttest, 2026-11-20) could not read the Project docs claude/handoff-rules.md and claude/board3-plan.md: the repo has no claude/ folder. In an interactive session where the Project is attached, copy every claude/*.md file that CLAUDE.md or a card prompt names into a claude/ folder in this repo (handoff-rules.md, board2-plan.md, board3-plan.md, next-addendum-board1.md, next-addendum-board2.md, next-addendum-board3.md, battle-scope.md and the others named in CLAUDE.md), commit them as the Project's source of truth note says, and add one line to CLAUDE.md saying the repo copy is what a START run reads. If the Project is not attached, write on this card which files are missing and stop. Then push the build copydocs with a docs/CHANGES.md entry."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Created by c-starttest check 1 (claude/ docs not readable from a START run)."
+    }
+   ]
   }
  ],
  "sessions": [
