@@ -804,7 +804,7 @@
    "title": "Battle system stage 10: Amy, Justin and Olivia kits",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "b3s10",
    "next": "After b3s9c (done). Builds Amy's (Fitness Queen, Classroom Boss), Justin's (Basement Boss, Live Wire) and Olivia's (Rope Champ, Working Mom) Sig Vibes (about 42 lines, 2 need their own function) and a Lab fight with any party of 4.",
    "blocks": [],
@@ -812,12 +812,16 @@
    "created": "2026-11-20",
    "chat": {
     "url": "",
-    "opening": ""
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
      "d": "2026-11-20",
      "t": "Added by b3s9c: stage 10 follows stage 9."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation."
     }
    ],
    "prompt": {
