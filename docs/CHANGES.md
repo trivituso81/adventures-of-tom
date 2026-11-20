@@ -1,3 +1,12 @@
+## listen1 (2026-11-20): In chapter 1, people who are not talking now stand in the painted listening pose
+
+Card c-listen1-install. Tom approved all 7 pictures (tom, grace, rose, deedee, boppy, ellie, sal); none were rejected.
+
+- `talk_frames.py` cut the six listening frames into `art/talk/<id>.webp`; `bake_story_poses.py` rebaked the talking sets (`tomtalk`, `gracetalk`, `rosetalk`, `deedeetalk`, `boppytalk`, `ellietalk`) and added Sal's set `salls` (`art/story/salls.webp`, `art/chars/salls-story.webp`). The rest of the rebake was drift (palette rows of other sets) and was put back from `origin/main`.
+- Facing rows added to `docs/pose-facing.tsv` after looking at each frame: tom r, grace r, rose r, deedee f, boppy l, ellie r, sal r.
+- Test: `LATE=1 tools/reaction_test.py tools/listen_cases.json` then `listen_report.py --standin`: 133 listen, 23 think, 0 misses. Looked at late frames of `l1-theft` and `l1-mud-spot` in portrait and one landscape case.
+- Not done: Tom carrying Rose keeps the ride picture; monsters, Nara, Amy and TNB never listen; chapters 2 and later.
+
 ## builds3 (2026-11-20): old builds move to an archive by month, search covers every build, and the build history has its own page with a button in Admin
 
 Phase 3 of 3 of `claude/builds-plan.md` (section 6): the section 4 split, section 3.7 in full and section 3.8, checks B11 to B13. The redesign is done; Tom tries it once on card t-buildstry.

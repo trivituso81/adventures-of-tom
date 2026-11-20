@@ -15502,6 +15502,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Installed all 7 approved listening poses (none rejected), 0 misses on tools/listen_cases.json, build listen1. Hands to Tom card t-listen1-play."
     }
    ],
    "prompt": {
@@ -15513,7 +15517,8 @@
     "effort": "medium (the steps are known)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/next-addendum-listen1.md, then card c-listen1-install in data/board.json with its history and the notes on card t-listen1-pics. Your first push is the commit board: start c-listen1-install. Install only the listening pictures that are approved, exactly as the addendum's Install steps say: cut them, bake the story poses (put back the rebake drift), add their facing rows after looking at each frame, run tools/listen_cases.json through LATE=1 tools/reaction_test.py and tools/listen_report.py --standin until it reports 0 misses, look at the frames in portrait and landscape, then push build listen1 with a docs/CHANGES.md heading. Create the Tom card t-listen1-play (ask play: start chapter 1 from chapter select, watch the kitchen and the grey patch, people who are not talking should stand listening or thinking) and set this card's after to it. A picture that is rejected stays out; say which. Spend nothing on xAI. You have my full permission to access the repo."
    },
-   "started_at": "2026-11-20T19:40:07+00:00"
+   "started_at": "2026-11-20T19:40:07+00:00",
+   "after": "t-listen1-play"
   },
   {
    "id": "c-reports-5",
@@ -15560,6 +15565,25 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "started_at": "2026-11-20T19:42:40+00:00"
+  },
+  {
+   "id": "t-listen1-play",
+   "title": "Play chapter 1 and watch people listen",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1. Play the kitchen at Grandma's (the home scene at the start), then the Square sign and the grey patch. You should see everyone who is not talking stand listening (hands loosely together, face turned a little toward the speaker) or thinking (hand at the chin). Tom while he carries Rose keeps his ride picture. Press All good, or Something is wrong and say which scene and person.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by c-listen1-install (build listen1): the 6 listening poses and Sal's are in the game."
+    }
+   ]
   }
  ],
  "sessions": [

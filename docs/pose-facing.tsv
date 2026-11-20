@@ -609,3 +609,10 @@ olivia	tk_point	r
 olivia	tk_ask	f
 olivia	tk_answer	r
 olivia	tk_think	f
+tom	tk_listen	r
+grace	tk_listen	r
+rose	tk_listen	r
+deedee	tk_listen	f
+boppy	tk_listen	l
+ellie	tk_listen	r
+sal	tk_listen	r
