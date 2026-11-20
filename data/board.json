@@ -5936,7 +5936,7 @@
    "title": "Look at the SKILLS list text and icons on your phone",
    "theme": "Battle System",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "next": "After the publish of build fix-skilllist1look-2: RELOAD on the title, ADMIN > BATTLE LAB > NEW BATTLE, start any fight, open SKILLS. Names should now be a middle size (15px, between the first version and the thin rows), pictures a little bigger, and the Back row at the bottom of the list should be as tall and as large in text as the Skill rows above it, in portrait and landscape. Report with the REPORT tab if it is still too big, too small, or Back still does not match (fix-skilllist1look-2 is the build to name).",
@@ -5963,9 +5963,12 @@
     {
      "d": "2026-11-19",
      "t": "Tom: something is wrong: lol now its too small! you went too far, isnt there a middle ground? and the back button doesnt match Sent to Claude as card c-fix-skilllist1look-2; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked: Fix what you found on: Look at the SKILLS list text and icons on your phone, Fix what you found on: Look at the SKILLS list text and icons on your phone is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-fix-cutpolish4b-2",
@@ -6239,7 +6242,7 @@
    "id": "c-fix-skilllist1look-2",
    "tag": "fix-skilllist1look-2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Battle System",
    "title": "Fix what you found on: Look at the SKILLS list text and icons on your phone",
@@ -6288,6 +6291,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped fix-skilllist1look-2: middle sizes (name 15px, pictures 16px) and Back row matched to the Skill rows."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as fix-skilllist1look-2: SKILLS list rows and Back button at a middle size"
     }
    ],
    "prompt": {
@@ -6300,7 +6307,8 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-skilllist1look-2 and t-skilllist1look in data/board.json, history included. Your first push is the commit board: start c-fix-skilllist1look-2.\n\nTom tested and found problems:\n1. Card t-skilllist1look (Look at the SKILLS list text and icons on your phone, ask play). He was asked: After the publish of build fix-skilllist1look: RELOAD on the title, ADMIN ) BATTLE LAB ) NEW BATTLE, start any fight, open SKILLS. Rows should now be thin, with small names and small pictures, in portrait and landscape. Report with the REPORT tab if anything still looks too big (fix-skilllist1look is the build to name). He wrote: lol now its too small! you went too far, isnt there a middle ground? and the back button doesnt match\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T03:23:13.129Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-skilllist1look to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-skilllist1look, and give the build fix-skilllist1look-2 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-skilllist1look",
-   "auto": true
+   "auto": true,
+   "done": "2026-11-19"
   },
   {
    "id": "c-ch1retext1",
@@ -6363,8 +6371,10 @@
    "url": "https://claude.ai/code/session_01RXeukE1YEHdcXNecL1wDgq",
    "title": "Fix what you found on: Look at the SKILLS list text and icons on your phone",
    "first": "2026-11-20T03:24:10Z",
-   "last": "2026-11-20T03:24:10Z",
-   "tags": [],
+   "last": "2026-11-20T03:30:13Z",
+   "tags": [
+    "fix-skilllist1look-2"
+   ],
    "cards": [
     "c-fix-skilllist1look-2"
    ]
@@ -7018,8 +7028,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "eab3219d051722783e77e0dc4d4b06424d162d94",
- "synced_at": "2026-11-20T03:29:46+00:00",
+ "synced": "7ef9a58f421013bf3649af1fdf02b9b1cdfe4607",
+ "synced_at": "2026-11-20T03:31:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
