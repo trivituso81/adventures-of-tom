@@ -222,7 +222,7 @@ def chk(mut, want, label):
     open('/tmp/board_bad.json', 'w').write(json.dumps(d))
     r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '/tmp/board_bad.json'], capture_output=True, text=True)
     check(label, r.returncode == 1 and want in r.stdout, r.stdout[-200:])
-tom1 = lambda d: next(c for c in d['cards'] if c['lane'] == 'tom' and c['col'] != 'done')
+tom1 = lambda d: next(c for c in d['cards'] if c['lane'] == 'tom' and c['col'] in ('up', 'prog'))   # not a card waiting on its fix (board4 exempts those)
 chk(lambda d: tom1(d).pop('ask'), 'needs an ask', 'board_check refuses an open Tom card with no ask')
 chk(lambda d: tom1(d).update(ask='whatever'), 'needs an ask', 'board_check refuses an unknown ask')
 chk(lambda d: tom1(d).update(ask='decide'), 'decide card', 'board_check refuses a decide card with no choices')

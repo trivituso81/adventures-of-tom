@@ -66,7 +66,8 @@ E_STUCK = len([c for c in oc if (c['col'] == 'wait' and not WAITFIX(c)) or (c['c
 ORDER = ['play', 'pictures', 'animations', 'voice', 'script', 'decide', 'setup']
 PARTS = ', '.join('%d %s' % (n, k) for k in ORDER for n in [len([c for c in oc if c['lane'] == 'tom' and c['col'] in ('up', 'prog') and c.get('ask') == k])] if n)
 WANT = 'Your move: %d (%s). Ready to start: %d. Running: %d. Stuck: %d.' % (E_MINE, PARTS, E_READY, E_RUN, E_STUCK)
-HIST = lambda i: ' Board card %s. Read its history first: my notes and answers are there.' % i
+HIST = lambda i: ' Board card %s. Read its history first: my notes and answers are there.' % i + FIRST(i)
+FIRST = lambda i: ' Your first push is the commit board: start %s (it moves this card to In progress and links your conversation).' % i
 def files(): return json.load(urllib.request.urlopen('http://127.0.0.1:8092/files'))
 def stored():
     f = files()['data/board.json']['content']; return json.loads(base64.b64decode(f.replace('\n', '')).decode())
@@ -77,7 +78,7 @@ try:
     with sync_playwright() as p:
         br = p.chromium.launch(executable_path=os.environ.get('CHROMIUM') or None)
         errs = []
-        for (w, h, name) in [(390, 844, 'portrait'), (951, 648, 'landscape'), (1440, 900, 'desktop')]:
+        for (w, h, name) in [(951, 648, 'landscape'), (1440, 900, 'desktop'), (390, 844, 'portrait')]:   # portrait last: its checks save to the stub
             ctx = br.new_context(viewport={'width': w, 'height': h}); pg = ctx.new_page()
             pg.add_init_script(INIT)
             pg.on('pageerror', lambda e: errs.append(str(e)))
@@ -128,6 +129,10 @@ try:
                 want = [x for x in b['cards'] if x['id'] == first][0]['prompt']['text'] + HIST(first)
                 if pg.evaluate('window.__copied') != want: fails.append('Copy prompt did not copy that card\'s prompt plus the board card line: ' + str(pg.evaluate('window.__copied'))[-120:])
                 if pg.query_selector('#sheet').is_visible(): fails.append('Copy prompt opened the sheet')
+                pg.wait_for_timeout(500)
+                cc = card(first)
+                if cc['col'] != 'prog' or cc['chat'].get('url') or 'copied the prompt' not in cc['history'][-1]['t']: fails.append(f'board5: Copy prompt should move the card to In progress: {cc["col"]} {cc["chat"]}')
+                if not pg.query_selector(f'[data-sec=run] .card[data-id="{first}"]'): fails.append('board5: copied card not shown under RUNNING NOW')
                 for i in ('t-test1', 't-test2', 't-test3', 't-test8', 't-test9'):
                     ct = pg.inner_text(f'.card[data-id="{i}"]')
                     if 'All good' not in ct or 'Something is wrong' not in ct: fails.append(f'{i}: a test card lacks All good or Something is wrong on the card itself')
@@ -250,8 +255,6 @@ try:
         sh = pg.inner_text('#sheet')
         if 'Paste the prompt below' not in sh or 'Opus 5.5, effort medium' not in sh or 'comes back to you to check' not in sh: fails.append('sent screen (copy case) text: ' + sh[:200])
         pg.screenshot(path=f'{out}/board-wrong-sent.png')
-        pg.click('#sheet [data-act=copy]'); pg.wait_for_timeout(150)
-        if not (pg.evaluate('window.__copied') or '').startswith(pt): fails.append('sent screen Copy prompt did not copy the fix prompt')
         pg.click('#bclose')
         if pg.query_selector('[data-sec=mine] .card[data-id="t-test2"]') or pg.query_selector('[data-sec=stuck] .card[data-id="t-test2"]'): fails.append('a card waiting on its fix still shows in YOUR MOVE or STUCK')
         if 'When this ships, you check again: Test card two' not in pg.inner_text('[data-sec=ready] .card[data-id="c-fix-test2"]'): fails.append('fix card does not say which card comes back to Tom')
@@ -259,6 +262,9 @@ try:
         f = card('c-fix-test2')
         if len(f.get('reports', [])) != 2 or f.get('blocks') != ['t-test2', 't-test3'] or 'the hop is late' not in f['prompt']['text'] or any(x['id'] == 'c-fix-test3' for x in stored()['cards']): fails.append('second report in the same theme was not added to the fix card that was not started')
         if 'Added to the fix' not in pg.inner_text('#sheet'): fails.append('merge screen does not say it was added')
+        pg.click('#sheet [data-act=copy]'); pg.wait_for_timeout(600)
+        if not (pg.evaluate('window.__copied') or '').startswith(card('c-fix-test2')['prompt']['text']): fails.append('sent screen Copy prompt did not copy the fix prompt')
+        if card('c-fix-test2')['col'] != 'prog': fails.append('board5: copying the fix prompt should move the fix card to In progress')
         pg.click('#bclose')
         pg.click('.card[data-id="t-test9"] [data-act=wrong]'); pg.fill('#wtxt', 'the liners float'); pg.click('#wgo'); pg.wait_for_selector('#sheet h2:has-text("Sent to Claude.")', timeout=8000)
         f = card('c-fix-test9')
@@ -266,22 +272,23 @@ try:
         if 'kitchen' not in f['prompt']['text'] or '<' in json.dumps(f): fails.append('play fix prompt lacks what he was asked, or holds a "<"')
         if 'starts fixing this by itself' not in pg.inner_text('#sheet'): fails.append('auto-start screen text: ' + pg.inner_text('#sheet')[:160])
         pg.screenshot(path=f'{out}/board-wrong-auto.png'); pg.click('#bclose')
-        pg.evaluate("document.querySelector('[data-sec=ready]').open=true")
-        pg.click('.card[data-id="c-fix-test2"] .t'); pg.wait_for_selector('#bcopy'); pg.click('#bclose')
+        pg.click('#secView .card[data-id="c-fix-test2"] .t'); pg.wait_for_selector('#bcopy'); pg.click('#bclose')
         open('/tmp/board_after.json', 'w').write(json.dumps(stored()))
         r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '/tmp/board_after.json'], capture_output=True, text=True)
         if r.returncode: fails.append('board_check fails on the board the page wrote: ' + r.stdout[-300:])
         if len(stored()['cards']) != len(b['cards']) + 2: fails.append('cards lost on save')
         if stored().get('sessions') != b['sessions']: fails.append('sessions list changed by a phone save')
         nputs = sum(1 for l in json.load(urllib.request.urlopen('http://127.0.0.1:8092/log')) if l.get('github') == 'PUT')
-        if nputs != 12: fails.append(f'{nputs} PUTs, want 12')
+        if nputs != 14: fails.append(f'{nputs} PUTs, want 14')
         pg.screenshot(path=f'{out}/board-after.png'); ctx.close()
         # no token: the button says so, and the page reads the site copy
         ctx = br.new_context(viewport={'width': 390, 'height': 844}); pg = ctx.new_page()
         pg.goto('http://127.0.0.1:8091/board.html'); pg.wait_for_selector('.card >> visible=true')
         if pg.inner_text('#src') != 'site copy': fails.append('no-token page source ' + pg.inner_text('#src'))
         pg.click('[data-sec=mine] .card [data-act=wrong]'); pg.fill('#wtxt', 'x'); pg.click('#wgo'); pg.wait_for_timeout(300)
-        if 'No GitHub token' not in pg.inner_text('#serr'): fails.append('no-token message missing')
+        if 'no GitHub token' not in pg.inner_text('#serr') or not pg.is_visible('#tokbar'): fails.append('no-token message or token bar missing')
+        pg.click('#bclose'); pg.screenshot(path=f'{out}/board-notoken.png'); pg.fill('#tokin', 'test'); pg.click('#toksave'); pg.wait_for_timeout(800)
+        if pg.evaluate("localStorage.getItem('aot-gh-token')") != 'test' or pg.is_visible('#tokbar'): fails.append('board5: token box did not save the token or hide itself')
         ctx.close()
         real = [e for e in errs if 'Failed to load' not in e]
         if real: fails.append('page errors: ' + str(real[:3]))

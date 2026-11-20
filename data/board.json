@@ -5607,9 +5607,14 @@
     },
     {
      "d": "2026-11-19",
+<<<<<<< HEAD
      "t": "Started: the conversation claimed this card."
+=======
+     "t": "Built: token box, warning at the top of the form, first-push line on every copied prompt, Copy prompt moves the card to In progress. Hands to Tom: t-ch1art2 (send Something is wrong again once the token is in)."
+>>>>>>> 41d82fc (board5: the board says when a browser cannot save; Copy prompt moves a card to In progress)
     }
-   ]
+   ],
+   "after": "t-ch1art2"
   }
  ],
  "sessions": [

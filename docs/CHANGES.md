@@ -1,3 +1,9 @@
+## board5 (2026-11-19): the board says when a browser cannot save, and Copy prompt moves a card to In progress
+
+- Card c-board5. Tom (18:31): "ok i marked something is wrong but he card is still there - did anything happen?" Nothing reached the repo: the browser he used has no GitHub token (`aot-gh-token`), and the form showed only a small red line under the buttons. Now: a red box at the top of the board says "This browser can only look" with a field to paste the token once (saved in that browser, same key as the Art Library), and the Something is wrong form shows the warning at its top before he types.
+- Tom (18:31): "why is this card listed as up next when it's in progres?" (c-clipreset). Its prompt had no first-push line, so the pasted conversation never claimed the card. Now every copied prompt ends with "Your first push is the commit board: start <id>", and Copy prompt on a ready Claude card moves it to In progress at once (chat link cleared, so the 6 hour quiet flag counts from now; the first push links the real conversation). c-clipreset moved to In progress by hand.
+- Tests: board_test.py checks the token box (shows, saves, hides), the no-token warning, the first-push line on copied prompts, and Copy prompt moving a card (FAILS: []). Checked in Firefox too: with a token Something is wrong saves; without one it shows the warning and saves nothing.
+
 ## copydocs (2026-11-20): Board START runs can now read the plan notes: 18 Project docs copied into the repo
 
 - Card c-copydocs (made by c-starttest check 1: a START run has no Project attached and could not read claude/handoff-rules.md or claude/board3-plan.md).

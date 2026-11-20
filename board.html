@@ -114,6 +114,7 @@ textarea{font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px 
 <body>
 <header><a class="back" href="index.html" id="back">Back</a><h1>Board</h1><span class="hint" id="upd"></span><span class="hint" id="src"></span></header>
 <main>
+<div id="tokbar" style="display:none;background:#5a1d28;border:1px solid #b4414f;border-radius:14px;padding:12px 14px;margin:0 0 10px"><b>This browser can only look.</b> Buttons here do not save until you paste your GitHub token once (the same token the Art Library uses).<div style="display:flex;gap:8px;margin-top:8px"><input type="text" id="tokin" placeholder="Paste the GitHub token" autocomplete="off"><button class="gold" type="button" id="toksave">Save</button></div></div>
 <div class="cnt" id="sum"></div>
 <div class="chips" id="chips"></div>
 <div id="secView"></div>
@@ -148,7 +149,10 @@ const askName=k=>(ASKS.find(a=>a[0]===k)||[k,'OTHER'])[1];
 const REVIEW=['play','pictures','animations','voice','script'];   // board4: cards Tom tests or looks at get All good and Something is wrong
 const isReview=c=>!!c&&c.lane==='tom'&&c.col!=='done'&&REVIEW.includes(c.ask);
 const HIST=id=>' Board card '+id+'. Read its history first: my notes and answers are there.';
-const withId=c=>{const t=(c.prompt&&c.prompt.text)||'';return t.indexOf('Read its history first')>=0?t:t+HIST(c.id);};
+const FIRST=id=>' Your first push is the commit board: start '+id+' (it moves this card to In progress and links your conversation).';
+const withId=c=>{let t=(c.prompt&&c.prompt.text)||'';if(t.indexOf('Read its history first')<0)t+=HIST(c.id);if(t.indexOf('board: start '+c.id)<0)t+=FIRST(c.id);return t;};   // board5: a pasted prompt always claims its card
+const hasTok=()=>!!(lsGet(TOKEN)||Q.get('gh'));
+const NOTOK='This browser has no GitHub token, so it can look but cannot save. Paste the token in the box at the top of the board, then try again.';
 const PROJECT='https://claude.ai/project/01a14d08-5251-75c8-a191-5d11f4245788';
 let lastLoad=0;
 let toastT;function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(toastT);toastT=setTimeout(()=>t.style.display='none',3200);}
@@ -227,7 +231,8 @@ function sec(id,name,hint,list,fn,openIt,mine){
   if(id in secOpen) openIt=secOpen[id];
   return '<details class="sec'+(mine?' mine':'')+'" data-sec="'+id+'"'+(openIt?' open':'')+'><summary><span class="nm">'+name+'</span><span class="ct'+(mine&&list.length?' has':'')+'">'+list.length+'</span><span class="cv">'+esc(hint)+'</span></summary>'+body+'</details>';
 }
-function counts(){
+function tokbar(){$('tokbar').style.display=hasTok()?'none':'block';}
+function counts(){tokbar();
   const n={mine:secYour().length,ready:secReady().length,run:secRun().length,stuck:secStuck().length};
   const b=(k,l,w)=>'<button type="button" data-only="'+k+'" class="'+(only===k?'on ':'')+(w?'warn':'')+'">'+l+' <b>'+n[k]+'</b></button>';
   $('sum').innerHTML=b('mine','Your move',n.mine>0)+b('ready','Ready to start')+b('run','Running')+b('stuck','Stuck',n.stuck>0);
@@ -321,7 +326,7 @@ function showAct(html){$('act').innerHTML='<div class="btns" style="margin-top:1
 // ---- saving: read the latest file, change that card by id, write it back, so other sessions' edits are kept
 async function save(msg,fn){
   const tok=lsGet(TOKEN);
-  if(!tok&&!Q.get('gh')) throw new Error('No GitHub token on this phone. Open ADMIN > ART LIBRARY > Setup and paste it, then try again.');
+  if(!tok&&!Q.get('gh')) throw new Error(NOTOK);
   for(let tries=0;;tries++){
     const r=await fetch(URLF()+'?ref=main&t='+Date.now(),{cache:'no-store',headers:{Authorization:'Bearer '+(tok||'test'),Accept:'application/vnd.github+json'}});
     let doc,s=null;
@@ -389,7 +394,7 @@ async function putFile(path,b64,msg,branch){
 function wrongForm(id){
   const c=cardById(id);if(!c)return;cur=id;shotData='';
   $('sheet').innerHTML='<h2>Something is wrong</h2><p class="hint">'+esc(c.title)+'</p>'
-   +'<h4>What did you see?</h4><textarea id="wtxt" placeholder="What is wrong and where. Several problems are fine, one per line."></textarea>'
+   +(hasTok()?'':'<p class="err" style="font-size:15px">'+NOTOK+'</p>')+'<h4>What did you see?</h4><textarea id="wtxt" placeholder="What is wrong and where. Several problems are fine, one per line."></textarea>'
    +'<div class="shot"><button class="small" type="button" id="wpick">Add a screenshot</button><span class="hint" id="wprev">Optional</span><input type="file" accept="image/*" id="wshot" hidden></div>'
    +'<p class="hint">Filed a pencil tab report in the game while you played? This fix picks it up too.</p>'
    +'<div class="btns"><button class="bad" type="button" id="wgo">Send to Claude</button><button type="button" id="bclose">Cancel</button></div><p class="err" id="serr"></p>';
@@ -398,7 +403,7 @@ function wrongForm(id){
 async function sendWrong(id){
   const words=clean($('wtxt').value).replace(/\s*\n\s*/g,' / ');
   if(!words){$('serr').textContent='Say what you saw first.';return;}
-  if(!lsGet(TOKEN)&&!Q.get('gh')){$('serr').textContent='No GitHub token on this phone. Open ADMIN > ART LIBRARY > Setup and paste it, then try again.';return;}
+  if(!lsGet(TOKEN)&&!Q.get('gh')){$('serr').textContent=NOTOK;return;}
   const btn=$('wgo');btn.disabled=true;btn.textContent='Sending...';$('serr').textContent='';
   let shot='',shotErr='';
   if(shotData){shot='board-shots/'+id+'-'+Date.now().toString(36)+'.jpg';
@@ -446,6 +451,14 @@ document.addEventListener('change',async e=>{
   if(e.target.id!=='wshot'||!e.target.files||!e.target.files[0])return;
   try{shotData=await readShot(e.target.files[0]);$('wprev').innerHTML='<img alt="screenshot" src="'+shotData+'"> <span class="hint">Added</span>';}catch(err){shotData='';$('serr').textContent=err.message;}
 });
+// board5: Copy prompt on a Claude card that is ready means Tom is about to paste it: the card moves to In progress at once (chat link cleared,
+// so the quiet flag counts from now); the pasted session's first push, board: start <id>, links the real conversation.
+async function markCopied(id){
+  const c=cardById(id);if(!c||c.lane!=='claude'||c.col!=='up'||blockedBy(c).length)return;
+  if(!hasTok()){toast('Prompt copied. This browser cannot save, so the card moves when the conversation first pushes.');return;}
+  try{await save('board: copied '+id,d=>{const z=d.cards.find(q=>q.id===id);if(z&&z.col==='up'){z.col='prog';delete z.start;delete z.quiet;z.chat={url:'',opening:'pasted by Tom from the board'};touch(z,'Tom copied the prompt to paste it into a new conversation.');}return d;});render();toast('Prompt copied. Card moved to In progress.');}
+  catch(e){toast('Prompt copied, but the card did not move: '+e.message);}
+}
 function copyText(x){const ok=()=>toast('Prompt copied');
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(x).then(ok,()=>fall(x,ok));}else fall(x,ok);}
 function fall(x,ok){const ta=document.createElement('textarea');ta.value=x;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){toast('Select the text and copy it');}ta.remove();}
@@ -453,7 +466,7 @@ function fall(x,ok){const ta=document.createElement('textarea');ta.value=x;ta.st
 document.addEventListener('click',e=>{
   const t=e.target;
   const act=t.closest('[data-act]');
-  if(act&&act.dataset.act==='copy'){const c=cardById(act.dataset.id);if(c&&c.prompt)copyText(withId(c));e.stopPropagation();return;}
+  if(act&&act.dataset.act==='copy'){const c=cardById(act.dataset.id);if(c&&c.prompt){copyText(withId(c));markCopied(c.id);}e.stopPropagation();return;}
   if(act&&act.dataset.act==='start'){startCard(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='good'){allGood(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='wrong'){wrongForm(act.dataset.id);e.stopPropagation();return;}
@@ -465,7 +478,8 @@ document.addEventListener('click',e=>{
   const on=t.closest('[data-only]');if(on){only=only===on.dataset.only?'':on.dataset.only;render();return;}
   if(t.id==='dim'||t.id==='bclose'){closeSheet();return;}
   if(t.id==='bpaste'){const c=cardById(cur);if(c)copyText(c.paste);return;}
-  if(t.id==='bcopy'){const c=cardById(cur);copyText(c?withId(c):$('ptxt').textContent);return;}
+  if(t.id==='bcopy'){const c=cardById(cur);copyText(c?withId(c):$('ptxt').textContent);if(c)markCopied(c.id);return;}
+  if(t.id==='toksave'){const v=$('tokin').value.trim();if(!v){toast('Paste the token first');return;}try{localStorage.setItem(TOKEN,v);}catch(err){toast('This browser would not save it');return;}toast('Token saved');tokbar();reload();return;}
   const chb=t.closest('[data-choice]');
   if(chb){const id=cur,c=cardById(id);if(!c)return;
     if(chb.dataset.choice==='other'){showAct('<input type="text" id="ntxt" placeholder="Your answer"><button class="gold" id="bchgo" type="button">Save my answer</button>');return;}
