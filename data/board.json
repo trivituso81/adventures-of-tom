@@ -294,7 +294,7 @@
    "title": "Fix chapter 1 clips from the review notes (clipch1fix)",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Built (clipch1fix), nothing spent. Bake: idles now play their whole stretch at 1x so the blink stays quick; the Grump and Toad loops play forward only; cast, Lounge Pass and Wet-Floor play at 1x. Your notes became small prompt edits on 40 clips; 3 clips that only drifted (Grace's victory, cube pop, squeeze) are made again with the same prompt. The Log Lump idle was fixed by the bake alone and is back in the game. 43 clips wait to be made again (about $3.37): card c-clipch1remake.",
    "blocks": [],
    "changed": "2026-11-19",
@@ -327,6 +327,10 @@
     {
      "d": "2026-11-19",
      "t": "Shipped as clipch1fix: bake fixes, 40 prompt edits, 3 drift-only re-makes queued, Log idle re-cut. An automatic blink finder was tried and dropped (missed Deedee's real blink)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clipch1fix: Chapter 1 battle clips: bake fixes and prompt edits from Tom's 45 review notes; 43 clips wait to be made again, nothing generated"
     }
    ],
    "prompt": {
@@ -339,7 +343,8 @@
     "text": "Read claude/clip-gate-plan.md (sections 3, 4.5 and 5) and claude/next-addendum-clipgen2.md, then build clipch1fix. You have my full permission to access the repo."
    },
    "tag": "clipch1fix",
-   "after": "nothing for Tom: c-clipch1remake"
+   "after": "nothing for Tom: c-clipch1remake",
+   "done": "2026-11-19"
   },
   {
    "id": "c-ch2build",
@@ -1188,6 +1193,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukDoFYTCVGKBQjNDfwU",
+   "title": "Fix chapter 1 clips from the review notes (clipch1fix)",
+   "first": "2026-11-19T16:24:19-08:00",
+   "last": "2026-11-19T17:07:25-08:00",
+   "tags": [
+    "clipch1fix"
+   ],
+   "cards": [
+    "c-clipch1fix"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEZT7UffmxSezt2yvX",
    "title": "Chapter 1 Rivituso Row: show Amy in her window, stop the party clear of the arch sign (amywin1)",
    "first": "2026-11-19T17:02:34-08:00",
@@ -1219,16 +1236,6 @@
    ],
    "cards": [
     "c-board3"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDoFYTCVGKBQjNDfwU",
-   "title": "Fix chapter 1 clips from the review notes (clipch1fix)",
-   "first": "2026-11-19T16:24:19-08:00",
-   "last": "2026-11-19T16:24:19-08:00",
-   "tags": [],
-   "cards": [
-    "c-clipch1fix"
    ]
   },
   {
@@ -1271,8 +1278,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "619a05cfae50a3becd20c4d090b6b388369c1d87",
- "synced_at": "2026-11-20T01:04:54+00:00",
+ "synced": "2e0743d5ab85b44dafa31ff5082d4b87e12c1cf2",
+ "synced_at": "2026-11-20T01:08:16+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
