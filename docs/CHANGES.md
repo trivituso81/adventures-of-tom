@@ -1,3 +1,10 @@
+## voiceauto1 (2026-11-20): new game lines now reach the Voice Library by themselves
+
+- Tom: "the new lines in the came are not in the voice library for recording - can this be automated". Cause: `data/voice-index.json` (the Voice Library list) was rebuilt only when a session ran three scripts by hand, so the new chapter 1 opening lines (Sal's send-off, Tom's JFK thank-you) never showed under No clip yet.
+- New: `.github/workflows/voice-index.yml` runs `tools/voice-library/rebuild.py` (battle-scripts.py, harvest.py, make-index.js) after every push to main that touches `data/`, `engine/`, `index.html` or `tools/voice-library/` (not the board, the build history or the list files themselves), and commits the list when a line was added, removed or re-scripted. A new date stamp alone is not a change. Its own pushes use GITHUB_TOKEN, so they never start it again. It retries on a busy main by rebuilding on the newest copy.
+- This push also carries the first rebuild: added Sal "You got it, kid. Head outside...", Tom "Thanks for the JFK pickup, Sal." and Tom "Mom, wait. Bosses hit in a pattern..."; removed Michael "I've got it. Nobody get up." (no longer in the game).
+- Docs: docs/VOICE_LIBRARY.md, CLAUDE.md (No unused voice). Test: `python3 tools/voice-library/rebuild_test.py` (date-only change ignored, added, removed and re-scripted lines detected, workflow filter and commit list).
+
 ## takes-2026-11-20 (2026-11-20): merged the 2 new voice takes from branch takes
 
 - Card c-takes-987c82. Branch `takes` session 20261120T211742-sz1 held 8 takes, 2 kept and not in `data/merged-takes.json`: Tom "Oof, I'm finally here! At least the 6 hours went by fast on Delta One!" and Deedee "A flashbulb. It's burnt..." Both match the current script word for word.

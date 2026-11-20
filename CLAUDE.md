@@ -196,6 +196,7 @@ Tom has asked repeatedly: voice lines and clips the full game never plays must n
 - Before every push that touches `data/lines.js`, a move animation, a scene or any voice file, run `python3 tools/clip-audit/unused_voice.py`. It must report 0 for all four checks. Fix anything it finds (`node tools/clip-audit/purge_unused.js <spec> --apply`, remove the lines from `data/lines.js`, rebuild the index with `python3 tools/voice-library/battle-scripts.py && node tools/voice-library/make-index.js`, bump `?v=`).
 - Record what you removed in `docs/PURGED_VOICE.md` and `docs/CHANGES.md`. Git history keeps the audio, so deleting is safe. This is the one exception to hard rule 4: purging unused clips does not need a `voices.json`.
 - Lines that are live but have no clip yet are not dead. They are the bake list.
+- The Voice Library list rebuilds by itself (voiceauto1): the `voice-index` Action runs `tools/voice-library/rebuild.py` after every push that touches the game's words, so a new line shows under No clip yet within minutes. On a rebase conflict in `data/voice-index.json`, `harvest.json` or `battle-scripts.json`, take upstream; the Action rebuilds.
 
 ## ElevenLabs voice limit (standing fact, 2026-11-02)
 

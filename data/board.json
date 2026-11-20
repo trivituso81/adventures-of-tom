@@ -16376,7 +16376,7 @@
    "col": "prog",
    "theme": "Voice Clips",
    "title": "Put new game lines in the Voice Library automatically",
-   "next": "Claude builds a GitHub job that rebuilds the Voice Library list on every push, so new lines show under No clip yet by themselves.",
+   "next": "Built as voiceauto1: the voice-index job rebuilds the Voice Library list after every push that changes the game's words. Tom records the new lines on card t-voiceauto1rec.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -16397,8 +16397,13 @@
     {
      "d": "2026-11-20",
      "t": "Tom: \"the new lines in the came are not in the voice library for recording - can this be automated\". Cause: data/voice-index.json is rebuilt only when a session runs three scripts by hand; Sal's and Tom's new opening lines were missing."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped voiceauto1: .github/workflows/voice-index.yml runs tools/voice-library/rebuild.py on pushes to main and commits the list when a line was added, removed or re-scripted. First rebuild added Sal's opening line, Tom's JFK line and Tom's boss-pattern line, and dropped a Michael line the game no longer plays."
     }
-   ]
+   ],
+   "after": "t-voiceauto1rec"
   },
   {
    "id": "t-welcomepage-request",
@@ -16449,6 +16454,40 @@
     "text": "Read claude/handoff-rules.md. Tom handed you board card t-welcomepage-request with this note: i dont understand what i need to do. Work out what is needed, rewrite the card, and do it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "started_at": "2026-11-20T21:28:37+00:00"
+  },
+  {
+   "id": "t-voiceauto1rec",
+   "title": "Record the 3 new lines now in the Voice Library",
+   "theme": "Voice Clips",
+   "lane": "tom",
+   "col": "up",
+   "ask": "voice",
+   "fyi": true,
+   "next": "ADMIN > VOICE LIBRARY > Show > No clip yet. Make and keep a take for Sal's \"You got it, kid...\", Tom's \"Thanks for the JFK pickup, Sal.\" and Tom's \"Mom, wait. Bosses hit in a pattern...\", then press Send my takes to Claude. From now on new lines appear there by themselves a few minutes after they ship.",
+   "links": [
+    {
+     "to": "voice",
+     "ids": [
+      "d|tom|Thanks for the JFK pickup, Sal.",
+      "d|sal|You got it, kid. Head outside, I think there's a couple of pipsqueaks looking for you.",
+      "d|tom|Mom, wait. Bosses hit in a pattern. Watch what he does twice, then go."
+     ],
+     "label": "The 3 new lines"
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEAVEz7ZsgqjE7u2pm",
+    "opening": "\"the new lines in the came are not in the voice library for recording - can this be automated\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added with c-voiceauto1."
+    }
+   ]
   }
  ],
  "sessions": [
