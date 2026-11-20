@@ -8960,6 +8960,37 @@
     "text": "Read CLAUDE.md (Pose Editor, One head multiplier and Real heights sections), docs/POSE_EDITOR.md and claude/next-addendum-cutpolish2.md, then card c-posesizes in data/board.json. Your first push is the commit board: start c-posesizes. Tom saved lines for the walking stand frames of Tom, TNB, Justin, Amy and Boppy (data/pose-requests.json); applying them needs a walk bake. Before changing any bake, rebake once with no change and confirm it reproduces the repo files byte for byte. Show frames (stand next to steps, a head row) in portrait and landscape before pushing, then run `python3 tools/pose-editor/manifest.py` so the Pose Editor's 'in the game now' matches, and `python3 tools/pose_editor_test.py`. Grace, Rose and Deedee poses have no saved lines yet: do not size them, and list them on a Tom card (ask: setup) named in the card's `after`, telling him which poses to line in ADMIN > POSE EDITOR. You have my full permission to access the repo."
    },
    "after": "nothing for Tom: end"
+  },
+  {
+   "id": "c-itembanner1",
+   "title": "An ITEM GAINED banner whenever the party gets an item from a conversation or from beating someone (itembanner1)",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "up",
+   "tag": "itembanner1",
+   "next": "Not started. Builds a banner like the join and leave banner that shows every time the party gets an item by talking to a character or by defeating one (a fight win, or any other way of beating them): the item's picture and name, a short jingle, held until you tap or press A. It replaces the small 'Got ... It went in a pocket.' popup for those cases. No new pictures or recordings are needed from you.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukH7Bt1pVs2P9KoLzqc",
+    "opening": "\"I do think we need to add to our Kanban board a feature that basically anytime a item is retrieved through conversation with a character or through defeating a character...\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: \"anytime a item is retrieved through conversation with a character or through defeating a character by any means, basically similar to the banner that we get when people join and leave the party, we need a banner for like that item gained\". Checked the board: no card covers it (today an item only shows the small popup from grantItem in data/party.js). New card. Calls made for the build: same hold-until-dismissed behaviour as the party banner; several items from one source share one banner; uses the item pictures the game already has."
+    }
+   ],
+   "prompt": {
+    "what": "Builds the ITEM GAINED banner for items from conversations and from defeated characters, then tests it in portrait and landscape.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: every place that hands out an item must be found first, tests catch mistakes)",
+    "effort": "medium (a small piece, modelled on the existing party banner)",
+    "text": "Read CLAUDE.md, then build card c-itembanner1 (build itembanner1) from data/board.json: an ITEM GAINED banner in the style of the join and leave banner (engine/party-banner.js), shown every time the party gets an item from a conversation or scene with a character (grantItem in data/party.js, the give step in engine/story.js, NPC onClose gifts, data/ellie-quests.js, engine/nara.js) or from defeating a character by any means (fight rewards in the old battle and in Battle 3, and story defeats). It shows the item's existing picture and name with a short original jingle, holds the game until dismissed exactly like the party banner, queues behind party banners, and puts several items from one source on one banner. It replaces the 'Got ... It went in a pocket.' popup for these cases; keep the auto-gear note as the banner's second line. Shop purchases keep their current message. Reuse the party banner's code where possible. Add a test in portrait and landscape and a Tom play card as the after. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [

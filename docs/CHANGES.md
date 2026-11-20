@@ -1,3 +1,7 @@
+## board-itembanner (2026-11-20): board only: new card for an ITEM GAINED banner
+
+- Tom (11-20): "anytime a item is retrieved through conversation with a character or through defeating a character by any means, basically similar to the banner that we get when people join and leave the party, we need a banner for like that item gained". No card covered it. New card c-itembanner1 (Game Shell, Up next, build itembanner1, Sonnet 5.5 medium). No game code changed.
+
 ## fix-clipposes (2026-11-20): PAINTED STATES: CHAPTER 1 now shows each fighter on an open spot in front of the family, so no state is hidden behind someone
 
 - Card c-fix-clipposes, Tom on t-clipposes: "Some of these are missing from the screen, like I don't see them in the battle test".
