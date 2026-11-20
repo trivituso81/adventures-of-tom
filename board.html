@@ -157,13 +157,13 @@ textarea{font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px 
 #tabs button b{font-size:12px;border-radius:9px;padding:0 7px;background:var(--line);color:var(--text);min-width:20px;text-align:center;margin-top:2px}
 #tabs button.me b{background:var(--accent);color:var(--on-accent)}
 .view{display:none;min-width:0}
-#views[data-v=for] #vFor,#views[data-v=claude] #vClaude,#views[data-v=chats] #vChats,#views[data-v=shipped] #vShipped,#views[data-v=changed] .view{display:block}
+#views[data-v=for] #vFor,#views[data-v=claude] #vClaude,#views[data-v=chats] #vChats,#views[data-v=shipped] #vShipped,#views[data-v=backlog] #vBacklog,#views[data-v=changed] .view{display:block}
 .vt{font-size:20px;margin:4px 2px 8px;font-weight:800}
 #vChats,#vShipped{max-width:760px}
 .day{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:14px 2px 6px}
 button.more{width:100%;margin:6px 0 14px;background:var(--surface);border:1px solid var(--btn)}
 @media (min-width:860px){
-#tabs{position:static;border:0;padding:0 0 10px;background:none;max-width:560px}
+#tabs{position:static;border:0;padding:0 0 10px;background:none;max-width:700px}
 #tabs button{flex-direction:row;gap:8px;background:var(--surface);border:1px solid var(--line)}
 #tabs button b{margin-top:0}
 main{padding-bottom:40px}
@@ -182,7 +182,7 @@ main{padding-bottom:40px}
 <div id="tools"><input type="text" id="q" placeholder="Search cards" aria-label="Search cards" autocomplete="off"><button id="themeb" type="button" aria-expanded="false">Theme</button></div>
 <div id="themes"></div>
 <div id="tabs" role="tablist"></div>
-<div id="views" data-v="for"><section class="view" id="vFor"></section><section class="view" id="vClaude"></section><section class="view" id="vChats"></section><section class="view" id="vShipped"></section></div>
+<div id="views" data-v="for"><section class="view" id="vFor"></section><section class="view" id="vClaude"></section><section class="view" id="vChats"></section><section class="view" id="vShipped"></section><section class="view" id="vBacklog"></section></div>
 <p class="hint">The board follows the repo: a card moves when something happened (an approval, a shipped build, a finished blocker, a running job). A card is flagged Needs attention when it says it is finished but is still open, a run or START failed, or its conversation has been quiet for 6 hours (2 hours for a card the board started). Each flagged card gets one automatic move within the hour: a free fix, one rescue session, or a card for you under UNSTICK.</p>
 <p class="err" id="err"></p>
 </main>
@@ -447,14 +447,14 @@ function sec(id,name,hint,list,fn,openIt,mine,hot){
   if(id in secOpen) openIt=secOpen[id];
   return '<details class="sec'+(mine?' mine':'')+'" data-sec="'+id+'"'+(openIt?' open':'')+'><summary><span class="nm">'+name+'</span><span class="ct'+(mine&&list.length?' has':hot&&list.length?' hot':'')+'">'+list.length+'</span><span class="cv">'+esc(hint)+'</span></summary>'+body+'</details>';
 }
-const VIEWS=[['for','For you'],['claude','Claude'],['chats','Chats'],['shipped','Shipped']];
+const VIEWS=[['for','For you'],['claude','Claude'],['chats','Chats'],['shipped','Shipped'],['backlog','Backlog']];
 const wideNow=()=>window.matchMedia('(min-width:860px)').matches;
 const qmatch=c=>{if(!query)return true;const h=[c.title,c.next,c.tag,c.id,c.theme,(c.prompt&&c.prompt.what)||''].join(' ').toLowerCase();return query.toLowerCase().split(/\s+/).filter(Boolean).every(w=>h.indexOf(w)>=0);};
 const shippedAll=()=>B.cards.filter(c=>c.col==='done'&&!c.retired&&c.done&&themeOk(c)&&qmatch(c)).sort((a,b)=>String(b.done).localeCompare(String(a.done)));
 function counts(){tokbar();
   const f=k=>byStatus(k).filter(qmatch);
   const n={mine:f('mine').length,claude:f('ready').length+f('run').length+f('queued').length+f('attn').length,attn:f('attn').length};
-  const cnt={for:n.mine,claude:n.claude};
+  const cnt={for:n.mine,claude:n.claude,backlog:secBacklog().filter(qmatch).length};
   const on=k=>wideNow()&&(view==='for'||view==='claude')?(k==='for'||k==='claude'):view===k;
   $('tabs').innerHTML=VIEWS.map(v=>'<button type="button" role="tab" data-view="'+v[0]+'" aria-selected="'+(on(v[0])?'true':'false')+'" class="'+(on(v[0])?'on ':'')+(v[0]==='for'&&n.mine?'me':'')+'">'+v[1]+(v[0] in cnt?' <b>'+cnt[v[0]]+'</b>':'')+'</button>').join('');
   const parts=ASKS.map(a=>[secYour().filter(c=>c.ask===a[0]).length,a[0]]).concat([[secYour().filter(c=>!ASKS.some(a=>a[0]===c.ask)).length,'other']]).filter(x=>x[0]).map(x=>x[0]+' '+x[1]);
@@ -493,8 +493,9 @@ function renderSections(){
   shown.forEach(c=>{if(c.done!==last){last=c.done;sh+='<div class="day" data-day="'+esc(c.done)+'">'+esc(dayLabel(c.done))+'</div>';}sh+=cardHtml(c,'done');});
   if(!shown.length)sh+='<div class="none">Nothing here</div>';
   if(all.length>shown.length)sh+='<button type="button" class="more" id="shipmore">Show more ('+(all.length-shown.length)+' left)</button>';
-  sh+=sec('backlog','BACKLOG',BKL_HINT,secBacklog().filter(ok),c=>cardHtml(c,'backlog'),false);   // backlog1: always last, closed until Tom opens it
   $('vShipped').innerHTML=sh;
+  const bk=secBacklog().filter(ok);   // boardux3b (Tom 11-20): Backlog is its own tab next to Shipped
+  $('vBacklog').innerHTML='<h2 class="vt">Backlog</h2><p class="hint" style="margin:0 2px 8px">'+esc(BKL_HINT)+'</p>'+(bk.length?bk.map(c=>cardHtml(c,'backlog')).join(''):'<div class="none">Nothing here</div>');
   $('views').dataset.v=ch2?'changed':view;
 }
 function dayLabel(d){const n=dayNum(today())-dayNum(d);if(n<=0)return 'Today';if(n===1)return 'Yesterday';const p=String(d).split('-').map(Number);return new Date(p[0],p[1]-1,p[2]).toLocaleDateString([],{weekday:'long',month:'short',day:'numeric'});}

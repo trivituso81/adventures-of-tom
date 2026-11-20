@@ -99,12 +99,12 @@ try:
             pg.on('pageerror', lambda e: errs.append(str(e)))
             pg.goto(URL); pg.wait_for_selector('.card >> visible=true'); pg.wait_for_timeout(400)
             if pg.get_attribute('#tabs', 'data-text') != WANT: fails.append(f'{name}: top line {pg.get_attribute("#tabs", "data-text")!r}, want {WANT!r}')
-            if pg.eval_on_selector_all('#tabs button', 'e=>e.map(x=>x.dataset.view)') != ['for', 'claude', 'chats', 'shipped']: fails.append(f'{name}: want the four tabs For you, Claude, Chats, Shipped')
+            if pg.eval_on_selector_all('#tabs button', 'e=>e.map(x=>x.dataset.view)') != ['for', 'claude', 'chats', 'shipped', 'backlog']: fails.append(f'{name}: want the five tabs For you, Claude, Chats, Shipped, Backlog')
             if pg.evaluate('document.documentElement.scrollWidth') > w + 1: fails.append(f'{name}: page scrolls sideways')
             if pg.inner_text('#src') != 'live': fails.append(f'{name}: page did not read the stub')
             if w < 860:
                 order = pg.eval_on_selector_all('#views .sec', 'e=>e.map(x=>x.dataset.sec)')
-                if order != ['mine', 'back', 'ready', 'run', 'queued', 'attn', 'conv-running', 'conv-you', 'conv-fin', 'backlog']: fails.append(f'{name}: section order {order}')
+                if order != ['mine', 'back', 'ready', 'run', 'queued', 'attn', 'conv-running', 'conv-you', 'conv-fin']: fails.append(f'{name}: section order {order}')
                 cnt = pg.eval_on_selector_all('#views .sec', 'e=>Object.fromEntries(e.map(x=>[x.dataset.sec,x.querySelectorAll(".card,.conv").length]))')
                 for k, v in (('mine', E_MINE), ('back', E_BACK), ('ready', E_READY), ('run', E_RUN), ('queued', E_QUEUED), ('attn', E_ATTN)):
                     if cnt[k] != v: fails.append(f'{name}: section {k} has {cnt[k]} cards, want {v}')
@@ -205,7 +205,7 @@ try:
                 if pg.query_selector('#lanesView') or pg.query_selector('.lane'): fails.append(f'{name}: the lane grid is still on the page')
                 if pg.eval_on_selector('#views', 'e=>getComputedStyle(e).display') != 'grid': fails.append(f'{name}: For you and Claude should sit in two columns')
                 if pg.eval_on_selector('#vFor', 'e=>getComputedStyle(e).display') == 'none' or pg.eval_on_selector('#vClaude', 'e=>getComputedStyle(e).display') == 'none': fails.append(f'{name}: wide page lacks one of the two columns')
-                if pg.eval_on_selector_all('#tabs button', 'e=>e.map(x=>x.dataset.view)') != ['for', 'claude', 'chats', 'shipped']: fails.append(f'{name}: tab names differ from the phone')
+                if pg.eval_on_selector_all('#tabs button', 'e=>e.map(x=>x.dataset.view)') != ['for', 'claude', 'chats', 'shipped', 'backlog']: fails.append(f'{name}: tab names differ from the phone')
                 a1, a2 = pg.eval_on_selector('#vFor', 'e=>e.getBoundingClientRect().right'), pg.eval_on_selector('#vClaude', 'e=>e.getBoundingClientRect().left')
                 if a2 - a1 < 31: fails.append(f'{name}: the gutter between the columns is {a2 - a1} px (want 32)')
                 if not pg.query_selector('#vClaude [data-sec=ready] .card') or not pg.query_selector('#vFor [data-sec=mine] .card'): fails.append(f'{name}: columns hold the wrong cards')

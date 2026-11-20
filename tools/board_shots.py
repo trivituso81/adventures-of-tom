@@ -70,20 +70,20 @@ def main():
                 if w == 382:
                     pg.click('#menub'); pg.wait_for_timeout(150); pg.screenshot(path=f'{out}/shot-{w}x{h}-menu.png'); pg.click('#menub')
                 # boardux3: every view at every size (A1 per view), tab bar and column checks
-                for v in ('for', 'claude', 'chats', 'shipped'):
+                for v in ('for', 'claude', 'chats', 'shipped', 'backlog'):
                     pg.click(f'#tabs [data-view={v}]'); pg.wait_for_timeout(250)
                     if pg.evaluate('document.documentElement.scrollWidth') > w: fails.append(f'A1 {w}x{h}: the {v} view scrolls sideways')
                     pg.evaluate('window.scrollTo(0,0)'); pg.screenshot(path=f'{out}/shot-{w}x{h}-view-{v}.png')
                     if v == 'for':
                         tabs = pg.evaluate("[...document.querySelectorAll('#tabs button')].map(b=>b.dataset.view)")
-                        if tabs != ['for', 'claude', 'chats', 'shipped']: fails.append(f'{w}x{h}: tab names {tabs}')
+                        if tabs != ['for', 'claude', 'chats', 'shipped', 'backlog']: fails.append(f'{w}x{h}: tab names {tabs}')
                         if w < 860:
                             r = pg.eval_on_selector('#tabs', 'e=>{const r=e.getBoundingClientRect();return [r.bottom,innerHeight]}')
                             if abs(r[0] - r[1]) > 1: fails.append(f'{w}x{h}: the tab bar is not at the bottom edge {r}')
                         else:
                             if pg.evaluate("document.querySelectorAll('#views .view')[1]&&getComputedStyle(document.querySelector('#vClaude')).display")!='block': fails.append(f'{w}x{h}: wide page does not show For you and Claude together')
                 if w in (669, 951):   # A6: the same view names and the same card order at both sizes
-                    ORDERS[w] = pg.evaluate("[...document.querySelectorAll('#tabs button')].map(b=>b.dataset.view+':'+b.textContent).join()+'|'+['vFor','vClaude','vChats','vShipped'].map(v=>[...document.querySelectorAll('#'+v+' .card,#'+v+' .conv')].map(e=>e.dataset.id||e.textContent.slice(0,20)).join()).join('|')")
+                    ORDERS[w] = pg.evaluate("[...document.querySelectorAll('#tabs button')].map(b=>b.dataset.view+':'+b.textContent).join()+'|'+['vFor','vClaude','vChats','vShipped','vBacklog'].map(v=>[...document.querySelectorAll('#'+v+' .card,#'+v+' .conv')].map(e=>e.dataset.id||e.textContent.slice(0,20)).join()).join('|')")
                 if w == 951:   # A5: no card or button crosses the fold at x = 475
                     pg.click('#tabs [data-view=for]'); pg.wait_for_timeout(250)
                     x = pg.evaluate("[...document.querySelectorAll('#views .card,#views button,#views summary,#views input')].filter(e=>e.offsetParent&&(()=>{const r=e.getBoundingClientRect();return r.left<476&&r.right>474;})()).length")

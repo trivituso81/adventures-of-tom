@@ -1,3 +1,7 @@
+## backlogtab (2026-11-20): Backlog is its own tab next to Shipped on the board
+
+- Card c-backlogtab. Tom (11-20): "It should just be another tab next to shipped". The board has five tabs: For you, Claude, Chats, Shipped, Backlog (count on the tab). The BACKLOG section at the bottom of Shipped is gone; Add to <lane>'s to-do works as before. `board.html`, `tools/board_backlog_test.py`, `board_test.py`, `board_shots.py`, `board_ux1_test.py` (the Since line now allows the "rescued" part another build added).
+
 ## reports-2026-11-20 (2026-11-20): Grace's list shows after her third item, and the Amy scene zooms in on the party and her window
 
 - Card c-reports-2. r-20261120-000755-3h9p (Tom: "Grace's list shouldn't appear until she finishes the third item, like in the dialogue"): `ch1Reveal:'list'` in `SCENES.ch1Goal` moved from the start to right after "Number three. Rose licked a muffin." The note was cut off after "move it till"; read as "until the end of the list".

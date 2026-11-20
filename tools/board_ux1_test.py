@@ -163,7 +163,7 @@ with sync_playwright() as p:
     try:
         ctx, pg = page(br, rig, init=seed)
         t = pg.inner_text('#since')
-        if not t.startswith('Since ') or '1 shipped, 1 new for you, 1 started.' not in t: fails.append('since line: ' + repr(t))
+        if not t.startswith('Since ') or '1 shipped, 1 new for you, 1 started' not in t: fails.append('since line: ' + repr(t))
         dots = pg.eval_on_selector_all('.card .chg', 'e=>e.map(x=>x.closest(".card").dataset.id)')
         if tom_open not in dots or 'c-fixrun' not in dots or done_claude in dots and False: fails.append('dots missing on changed cards: ' + str(dots))
         pg.click('#since'); pg.wait_for_timeout(150)

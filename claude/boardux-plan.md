@@ -290,3 +290,5 @@ Differences from the plan, and why:
 4. **The Project copy of this file is not updated here** (a scheduled run has no Project access); copy this section there by hand when convenient.
 
 Test changes: board_test.py and board_backlog_test.py did not count parked cards as open before; they do now. board_test.py uses its own hand-back fixture card, because the live board's first Claude card in Up next changes every day. `tools/cardlinks_test.py` fails once in a while on "art unknown id shows no message" with or without this build (it did before it too).
+
+backlogtab (2026-11-20): Tom asked for Backlog as a fifth tab next to Shipped, so it is no longer the last section of Shipped (difference 1 above no longer applies).
