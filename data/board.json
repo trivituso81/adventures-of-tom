@@ -7599,7 +7599,8 @@
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-20"
+   "changed": "2026-11-20",
+   "quiet": true
   },
   {
    "id": "c-boardux1",
@@ -8127,7 +8128,8 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/next-addendum-ch10vance1.md and install the approved Gate Zero pictures (room-gatezero-noplane and room-gatezero-plane) per ROOM_PAINTINGS.md steps, test portrait and landscape with screenshots, push. You have my full permission to access the repo."
    },
-   "tag": "gatezero"
+   "tag": "gatezero",
+   "quiet": true
   },
   {
    "id": "t-gatezeroart",
@@ -8634,7 +8636,8 @@
     "model": "Claude Sonnet 5.5 (row C: small new build, no written steps)",
     "effort": "medium (two small pictures and four link lines)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-adminicons1 in data/board.json. Make a generic icon for admin.html and a different one for board.html (favicon 32 and 180 x 180 apple-touch-icon each), link them in each page head, push as adminicons1 (first push: board: start c-adminicons1). You have my full permission to access the repo."
-   }
+   },
+   "quiet": true
   },
   {
    "id": "c-fix-ch1starving-3",
@@ -10827,8 +10830,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "5983a7d0765416478180dfd7ea5217922bdf0844",
- "synced_at": "2026-11-20T12:53:44+00:00",
+ "synced": "6126d72826778b2cee2d89300437dfd8a457229d",
+ "synced_at": "2026-11-20T14:51:43+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
