@@ -10217,7 +10217,7 @@
    "id": "c-fix-gracevoice-distort",
    "tag": "fix-gracevoice-distort",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Voice Clips",
    "title": "Fix: Re-record Grace's distorted chapter 1 lines",
@@ -10240,7 +10240,7 @@
    ],
    "chat": {
     "url": "",
-    "opening": "Something is wrong on t-gracevoice-distort"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -10252,6 +10252,11 @@
      "d": "2026-11-20",
      "t": "Tom reported on t-gracevoice-distort: But why does this keep happening? It has nothing to do with 11 labs because when I initially record them, they sound completely fine and then I provide the Jason to you for upload and they seem to be fine in the game and then at later point they become distorted, so I refuse to record more. It's wasting my money",
      "at": "2026-11-20T15:33:51.342Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-20T15:34:01.330Z"
     }
    ],
    "prompt": {
