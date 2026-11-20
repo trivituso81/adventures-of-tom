@@ -14988,6 +14988,10 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Build history redesign 1: readable rows by day is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Redesign 1 shipped as builds1, so this card is set to start by itself (start: true), as the plan says. Read claude/builds-plan.md section 8 first: it lists what phase 1 changed from the plan."
     }
    ],
    "prompt": {
@@ -14999,7 +15003,8 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/builds-plan.md (all of it, with its Built section, and look at claude/builds-mock.png), then card c-builds2 in data/board.json with its history. Your first push is the commit board: start c-builds2. Build phase 2 (builds2) as the plan's section 6 row says: sections 3.3 and 3.5 and the Filters of section 3.7, with checks B8 to B10. Push it as builds2. Fetch and rebase before every push. Keep everything the screen does today (check B14). Run python3 tools/buildlog_test.py and look at every picture in portrait and landscape before pushing. Write what you built, and anything that differs from the plan, into the plan's section 8. In your last push set start: true on card c-builds3 so it starts by itself. Do not build phase 3 yourself. You have my full permission to access the repo."
    },
-   "after": "nothing for Tom: c-builds3"
+   "after": "nothing for Tom: c-builds3",
+   "start": true
   },
   {
    "id": "c-builds3",
