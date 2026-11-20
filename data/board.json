@@ -5624,7 +5624,7 @@
    "title": "Make the 21 pictures your reports asked for (Art Library, group Report fixes)",
    "theme": "Characters",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "pictures",
    "blocks": [
     "c-reports"
@@ -5661,12 +5661,17 @@
     {
      "d": "2026-11-19",
      "t": "Made by reports-2026-11-19b: your 7 art reports have Library entries (Report fixes group) but none has been generated yet."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: all good."
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFraGsc5W54HdP7UDp",
     "opening": "unknown"
-   }
+   },
+   "done": "2026-11-19"
   },
   {
    "id": "c-board5",
