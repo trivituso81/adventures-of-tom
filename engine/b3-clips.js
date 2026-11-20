@@ -78,7 +78,7 @@ function b3cMemberFrame(u,vu,t,B) {
   if(vu.ko) { const C=b3cGet(u.id,'ko',8000); if(!C) return null; return b3cOnce(C,B&&B.kind==='ko'?(t-B.t0)*1000:C.dur); }   // plays from the moment they went down, then holds its last picture
   if(B&&B.kind==='cs') { const C=BCLIPS[B.id]; b3cWant(B.id,3000); return C&&bclipReady(B.id)?b3cOnce(C,(t-B.t0)*1000):null; }
   if(B) return null;   // a painted pose or a path is playing
-  if(B3P.cheer) { const C=b3cGet(u.id,'victory',9000); if(!C) return null; if(B3P.cheerAt==null) B3P.cheerAt=t; return b3cOnce(C,(t-B3P.cheerAt)*1000); }
+  if(B3P.cheer||B3P.cheerKey===u.key) { const C=b3cGet(u.id,'victory',9000); if(!C) return null; if(B3P.cheerAt==null) B3P.cheerAt=t; return b3cOnce(C,(t-B3P.cheerAt)*1000); }
   const guard=b3cGuarding(u)?b3cGet(u.id,'guard'):null;
   if(guard) return bclipLoopFrame(guard,t*1000+u.slot*700);
   const I=b3cGet(u.id,'idle',9000);
