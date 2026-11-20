@@ -6608,8 +6608,21 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: nothing was left for it to wait on."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom approved generating 1 picture (about $0.06)."
     }
-   ]
+   ],
+   "gen": {
+    "want": true,
+    "at": "2026-11-20T08:37:14Z",
+    "ids": [
+     "ch1-mudling-heist2"
+    ],
+    "est": 0.06,
+    "mode": "review"
+   }
   },
   {
    "id": "c-heist1",
