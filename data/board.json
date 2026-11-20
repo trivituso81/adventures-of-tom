@@ -2153,7 +2153,7 @@
    "title": "Decide on the clip reset: painted poses for the family, or stop",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "decide",
    "next": "ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE > PROOF: GRACE'S GUARD. About 2 minutes. Two seconds in, Grace drops into her guard: forearms crossed over her body and face, the painting you already have, moved by the game. Use BASIC once and she sinks back into it; let a Mudling hit her and she takes it braced. Then tap one answer below. Your answer starts the card Build the painted battle poses for chapter 1 (clipposes) by itself. Cost of the plan: $0. Your part after the build: one look of about 10 minutes.",
    "choices": [
@@ -2173,8 +2173,14 @@
     {
      "d": "2026-11-19",
      "t": "Made by clipreset. The proof is Grace's guard only; nothing else was changed or made. The plan is claude/clip-reset-plan.md."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom chose: Go with this plan"
     }
-   ]
+   ],
+   "done": "2026-11-19",
+   "answer": "Go with this plan"
   },
   {
    "id": "c-clipposes",
