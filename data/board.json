@@ -1925,7 +1925,7 @@
    "title": "Look at the chapter 1 pictures in the game",
    "theme": "Areas",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "fyi": true,
    "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen: after the Mudling grabs the pan the three muffin plates on the island should be gone and the cake stand stay. Then the paper muffin liners in the Grump Hollow reeds, and the phone lighting up on the cab seat (press A to close). Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one). Claude fixes them and this card comes back to you to check.",
@@ -1944,8 +1944,13 @@
     {
      "d": "2026-11-19",
      "t": "Next step rewritten for the new buttons (board4): All good or Something is wrong right on this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: something is wrong: the muffins appear over the other pastries on the table. we dont need art that has all the pastries on the table. muffins should just be on the empty table (fine to leave the tart to the left of the muffins). / right now after the monster takes the muffins, the muffins are still there and the art changes. the art doesnt need to change, but the muffins should be gone. / i dont see the muffin wrappers on the marsh - maybe tney are not visible enough? the mudling holding the muffins looks terrible Sent to Claude as card c-fix-cutpolish4b; this card waits on it and comes back to you when the fix ships."
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "b-takes1",
@@ -5369,6 +5374,62 @@
     "url": "",
     "opening": "not started"
    }
+  },
+  {
+   "id": "c-fix-cutpolish4b",
+   "tag": "fix-cutpolish4b",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Areas",
+   "title": "Fix what you found on: Look at the chapter 1 pictures in the game",
+   "next": "You reported a problem on Look at the chapter 1 pictures in the game. Claude starts the fix by itself. Latest: the muffins appear over the other pastries on the table. we dont need art that has all the pastries on the table. muffins should just be on the empty table (fin",
+   "blocks": [
+    "t-cutpolish4b"
+   ],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "reports": [
+    {
+     "at": "2026-11-20T02:29:43.804Z",
+     "card": "t-cutpolish4b",
+     "title": "Look at the chapter 1 pictures in the game",
+     "ask": "play",
+     "words": "the muffins appear over the other pastries on the table. we dont need art that has all the pastries on the table. muffins should just be on the empty table (fine to leave the tart to the left of the muffins). / right now after the monster takes the muffins, the muffins are still there and the art changes. the art doesnt need to change, but the muffins should be gone. / i dont see the muffin wrappers on the marsh - maybe tney are not visible enough? the mudling holding the muffins looks terrible",
+     "shot": "board-shots/t-cutpolish4b-mwod2g2m.jpg",
+     "asked": "Chapter select ) Chapter 1, jump to the theft scene in Deedee's kitchen: after the Mudling grabs the pan the three muffin plates on the island should be gone and the cake stand stay. Then the paper muffin liners in the Grump Hollow reeds, and the phone lighting up on the cab seat (press A to close). Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one). Claude fixes them and this card comes back to you to check."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-cutpolish4b"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Made by Something is wrong on t-cutpolish4b."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom reported on t-cutpolish4b: the muffins appear over the other pastries on the table. we dont need art that has all the pastries on the table. muffins should just be on the empty table (fine to leave the tart to the left of the muffins). / right now after the monster takes the muffins, the muffins are still there and the art changes. the art doesnt need to change, but the muffins should be gone. / i dont see the muffin wrappers on the marsh - maybe tney are not visible enough? the mudling holding the muffins looks terrible Screenshot: board-shots/t-cutpolish4b-mwod2g2m.jpg on branch inbox."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself."
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Look at the chapter 1 pictures in the game.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-cutpolish4b and t-cutpolish4b in data/board.json, history included. Your first push is the commit board: start c-fix-cutpolish4b.\n\nTom tested and found problems:\n1. Card t-cutpolish4b (Look at the chapter 1 pictures in the game, ask play). He was asked: Chapter select ) Chapter 1, jump to the theft scene in Deedee's kitchen: after the Mudling grabs the pan the three muffin plates on the island should be gone and the cake stand stay. Then the paper muffin liners in the Grump Hollow reeds, and the phone lighting up on the cab seat (press A to close). Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one). Claude fixes them and this card comes back to you to check. He wrote: the muffins appear over the other pastries on the table. we dont need art that has all the pastries on the table. muffins should just be on the empty table (fine to leave the tart to the left of the muffins). / right now after the monster takes the muffins, the muffins are still there and the art changes. the art doesnt need to change, but the muffins should be gone. / i dont see the muffin wrappers on the marsh - maybe tney are not visible enough? the mudling holding the muffins looks terrible Screenshot: board-shots/t-cutpolish4b-mwod2g2m.jpg on branch inbox (git fetch --depth=1 origin inbox, then git show origin/inbox:board-shots/t-cutpolish4b-mwod2g2m.jpg into a file in /tmp, and look at it).\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T02:29:43.804Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-cutpolish4b to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-cutpolish4b, and give the build fix-cutpolish4b a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-cutpolish4b",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
