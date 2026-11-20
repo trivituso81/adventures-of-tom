@@ -172,3 +172,4 @@ Tom (11-19 22:21): "Can we also create a prompt to link to the corresponding art
 - A rejected entry is counted as Ready (made again) in the estimate. A Library prompt edited only on Tom's phone is not seen by the job (stated limit, shown nowhere on the card yet).
 - Not done on GitHub: the dry run of section 4.4 (dispatch needs the workflow on main first): see the card c-artgen1 history for whether it was run after the push.
 - Measured: nothing, no xAI call was made. The first paid run is Tom's tap on t-artgen1try.
+- Checkout: the workflow checks out only data, tools and .github (not art/raw as section 4.2 says). The first dry run sat in the checkout step for minutes because art/raw holds every approved picture; reference pictures are read with `git show HEAD:<path>`, which the job already does.

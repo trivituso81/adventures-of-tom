@@ -1,3 +1,7 @@
+## artgen1b (2026-11-20): art-gen no longer checks out art/raw (its checkout took minutes)
+
+- `.github/workflows/art-gen.yml` checks out only data, tools and .github; reference pictures are read from git on demand. Nothing else changed.
+
 ## artgen1 (2026-11-20): Generate all pictures from a board card, made on GitHub for you to review in the Art Library
 
 - Tom (11-19 22:16): "Make a way for me to approve the auto generation of images within the Kanban board for cards that require new image generation, all images required for a given card at once." Plan: `claude/artgen-plan.md` section 4.

@@ -4,7 +4,8 @@ name: art-gen
 # data/board.json with the commit message "board: generate <card id>"; this workflow runs on that push only (every other push skips it without
 # a checkout). It never approves anything: the pictures wait on branch `artgen` (never merged, never served) and the Art Library imports them
 # for Tom's APPROVE or REJECT. Needs the repo secret XAI_API_KEY (never printed). Sessions can run it by hand (workflow_dispatch, dry_run true
-# by default); the first paid run is Tom's tap. Plan: claude/artgen-plan.md.
+# by default); the first paid run is Tom's tap. art/raw is NOT checked out (it holds every approved picture); a reference picture is read with `git show HEAD:<path>`,
+# which fetches just that file. Plan: claude/artgen-plan.md.
 
 on:
   push:
@@ -52,7 +53,6 @@ jobs:
           sparse-checkout: |
             data
             tools
-            art/raw
             .github
       - uses: actions/setup-python@v5
         with:
