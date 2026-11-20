@@ -26796,6 +26796,21 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE PICTURE\nA smartphone lying face up on a worn taxi back seat, its screen lit and glowing with a new message that is not readable. A jacket sleeve rests beside it. A purple-grey haze shows through the window beyond. It is a close-up, straight-on picture that fills the whole square.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
   },
   {
+   "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch1-mudling-heist2",
+   "tab": "Enemies",
+   "title": "Chapter 1: the Mudling steals the muffin pan, sheet of 6 poses (3 x 2)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/enemies/enemy-mudling-v2.png",
+    "art/raw/props/ch1-muffin-pan-v1.png"
+   ],
+   "group": "Chapter 1",
+   "prompt": "IMAGE REQUEST: ONE SINGLE SHEET. Return exactly one image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The approved painting of the Mudling. Copy this creature as closely as possible: the same shape, colors, face with two eyes, leaf sprout and matte handbrushed finish.\n2) The approved painting of a twelve-cup muffin pan full of muffins. Copy it as closely as possible wherever the pan appears.\n\nPAINT THIS SHEET\nSix poses of the Mudling in a 3 by 2 layout on a flat magenta background (#FF00FF). Each pose fills most of its cell, nothing overlapping, the creature facing the same way as in attachment 1 in every pose.\nTop row: 1 curled into a tight round ball of mud, the leaf sprout sticking out of the top. 2 standing, head tipped back, looking up with wide eyes and an open mouth. 3 stretched tall and thin, both arms reaching straight up.\nBottom row: 4 standing proud, holding the muffin pan flat above its head with both arms, a big smug grin. 5 the same, pan above its head, sneaking, body leaning forward. 6 the same, pan above its head, sneaking, body leaning back."
+  },
+  {
    "status": "approved",
    "versions": [
     {
@@ -27423,7 +27438,7 @@
      "date": "2026-11-20",
      "note": "clipreset: never reviewed by Tom",
      "from": "clipposes",
-     "at": 1795145172947,
+     "at": 1795147430433,
      "rev": 1
     }
    ],
@@ -27484,7 +27499,7 @@
      "date": "2026-11-20",
      "note": "clipreset: never reviewed by Tom",
      "from": "clipposes",
-     "at": 1795145172947,
+     "at": 1795147430433,
      "rev": 1
     }
    ],
@@ -27546,7 +27561,7 @@
      "date": "2026-11-20",
      "note": "clipreset: never reviewed by Tom",
      "from": "clipposes",
-     "at": 1795145172947,
+     "at": 1795147430433,
      "rev": 1
     }
    ],
@@ -27607,7 +27622,7 @@
      "date": "2026-11-20",
      "note": "clipreset: never reviewed by Tom",
      "from": "clipposes",
-     "at": 1795145172947,
+     "at": 1795147430433,
      "rev": 1
     }
    ],
@@ -27716,7 +27731,7 @@
      "date": "2026-11-20",
      "note": "clipreset: never reviewed by Tom",
      "from": "clipposes",
-     "at": 1795145172947,
+     "at": 1795147430433,
      "rev": 1
     }
    ],
@@ -27790,7 +27805,7 @@
      "date": "2026-11-20",
      "note": "clipreset: never reviewed by Tom",
      "from": "clipposes",
-     "at": 1795145172947,
+     "at": 1795147430433,
      "rev": 1
     }
    ],
@@ -27870,7 +27885,7 @@
      "date": "2026-11-20",
      "note": "clipreset: never reviewed by Tom",
      "from": "clipposes",
-     "at": 1795145172947,
+     "at": 1795147430433,
      "rev": 1
     }
    ],
@@ -28017,7 +28032,7 @@
      "date": "2026-11-20",
      "note": "clipreset: never reviewed by Tom",
      "from": "clipposes",
-     "at": 1795145172947,
+     "at": 1795147430433,
      "rev": 1
     }
    ],
@@ -28079,7 +28094,7 @@
      "date": "2026-11-20",
      "note": "clipreset: never reviewed by Tom",
      "from": "clipposes",
-     "at": 1795145172947,
+     "at": 1795147430433,
      "rev": 1
     }
    ],
@@ -28152,7 +28167,7 @@
      "date": "2026-11-20",
      "note": "clipreset: never reviewed by Tom",
      "from": "clipposes",
-     "at": 1795145172947,
+     "at": 1795147430433,
      "rev": 1
     }
    ],
@@ -28213,7 +28228,7 @@
      "date": "2026-11-20",
      "note": "clipreset: never reviewed by Tom",
      "from": "clipposes",
-     "at": 1795145172947,
+     "at": 1795147430433,
      "rev": 1
     }
    ],
@@ -28322,7 +28337,7 @@
      "date": "2026-11-20",
      "note": "clipreset: never reviewed by Tom",
      "from": "clipposes",
-     "at": 1795145172947,
+     "at": 1795147430433,
      "rev": 1
     }
    ],
@@ -28429,7 +28444,7 @@
      "date": "2026-11-20",
      "note": "clipreset: never reviewed by Tom",
      "from": "clipposes",
-     "at": 1795145172947,
+     "at": 1795147430433,
      "rev": 1
     }
    ],
@@ -28502,7 +28517,7 @@
      "date": "2026-11-20",
      "note": "clipreset: never reviewed by Tom",
      "from": "clipposes",
-     "at": 1795145172947,
+     "at": 1795147430433,
      "rev": 1
     }
    ],

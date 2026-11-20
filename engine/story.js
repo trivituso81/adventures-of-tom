@@ -1071,7 +1071,7 @@ function stageScript(list,focus,mk) {   // mk(first,talkStep) builds the step to
 function compileScene(list) {
   return list.filter(Boolean).map(st=>{
     if(typeof st.start==='function'&&typeof st.update==='function') return st;
-    const op=Object.keys(SCENE_OPS).find(k=>k in st);
+    const op=('prop' in st&&SCENE_OPS.prop)?'prop':Object.keys(SCENE_OPS).find(k=>k in st);   // heistart: {prop,hide:true} hides the prop; 'hide' (an actor) used to win and did nothing
     if(!op) { console.warn('Unknown scene step',st); return S.wait(0); }
     return SCENE_OPS[op](st);
   });

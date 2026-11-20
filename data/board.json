@@ -5964,7 +5964,7 @@
    "title": "Look at the SKILLS list text and icons on your phone",
    "theme": "Battle System",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "After the publish of build fix-skilllist1look-2: RELOAD on the title, ADMIN > BATTLE LAB > NEW BATTLE, start any fight, open SKILLS. Names should now be a middle size (15px, between the first version and the thin rows), pictures a little bigger, and the Back row at the bottom of the list should be as tall and as large in text as the Skill rows above it, in portrait and landscape. Report with the REPORT tab if it is still too big, too small, or Back still does not match (fix-skilllist1look-2 is the build to name).",
@@ -5995,8 +5995,17 @@
     {
      "d": "2026-11-19",
      "t": "Unblocked: Fix what you found on: Look at the SKILLS list text and icons on your phone, Fix what you found on: Look at the SKILLS list text and icons on your phone is done."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: all good."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: all good."
     }
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "c-fix-cutpolish4b-2",
@@ -6252,19 +6261,24 @@
    "title": "Make the Square music on the newer model and listen",
    "theme": "Tools",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "After the publish of build music3 (about 4 minutes after this push): Title > ADMIN > MUSIC LIBRARY, search Square, open The Square card. If a Reset prompt button shows, tap it (the prompt then starts Warm small-town folk tune at 96 BPM). The Model box should say v2.5 (newest). Tap New take twice (about 700 to 850 credits, v2.5 price not measured), then tap Play and Loop test. Come back here: All good, or Something is wrong and write what you hear (one per line).",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-19",
    "history": [
     {
      "d": "2026-11-20",
      "t": "Made by music3."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: all good."
     }
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "c-fix-skilllist1look-2",
@@ -6379,7 +6393,7 @@
    "title": "Try the i icon and the tap-to-use on the Skills list",
    "theme": "Battle System",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "After the publish of build skillinfo1: RELOAD on the title, then ADMIN > BATTLE LAB > NEW BATTLE > any fight, tap SKILLS. Check: the round i at the left of each Skill name opens the card with BACK and USE; a tap anywhere else on a row uses the Skill, or asks who to aim at when it needs a target. Report with the REPORT tab if a tap goes the wrong way (skillinfo1 is the build to name).",
@@ -6394,8 +6408,17 @@
     {
      "d": "2026-11-19",
      "t": "Added by skillinfo1: your phone check of the i icon and tap-to-use; blocks nothing."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: all good."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: all good."
     }
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "c-heistplan",
@@ -6430,22 +6453,34 @@
    "title": "Fix the muffin pan that never leaves the counter, and add the new Mudling sheet to the Art Library (heistart)",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "heistart",
    "auto": true,
-   "next": "Tap START. It fixes the bug that keeps the muffin pan on the counter after the theft (and the empty pan in Grump Hollow), and adds one new picture to the Art Library: the Mudling of the fights in six poses, carrying the muffin pan. Your card Generate and approve the new Mudling sheet comes next.",
+   "next": "Done: the muffin pan now leaves the counter when the Mudling takes it (build heistart), and the Library has the entry ch1-mudling-heist2. Next: your card t-heistart, then card c-heist1 rebuilds the scene.",
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
    "chat": {
     "url": "",
-    "opening": ""
+    "opening": "pasted by Tom from the board"
    },
    "after": "t-heistart",
    "history": [
     {
      "d": "2026-11-19",
      "t": "Added by board-heist, part A of claude/heist-redo-plan.md."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom copied the prompt to paste it into a new conversation."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Pushed heistart: compileScene now runs a prop step before hide (4 steps fixed: ch1Theft, ch1AfterBoss, ch1Amy, ch6Call), test added in cut_natural_test.py (fails before, passes after), Library entry ch1-mudling-heist2 added as a draft. t-heistart already says where to press, no change."
     }
    ],
    "prompt": {
@@ -6543,13 +6578,13 @@
   },
   {
    "id": "t-ch1starving",
-   "title": "Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\"",
+   "title": "Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped)",
    "theme": "Voice Clips",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "voice",
    "fyi": true,
-   "next": "ADMIN > VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. The script you kept ends \"I'm starving!\" but the clip stops after \"number two can't wait.\" Record it again so it says the last sentence, keep it, and Export pending clips. If you would rather drop \"I'm starving!\", delete it from the script and keep the take as it is.",
+   "next": "ADMIN > VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. The script box should end \"Grace, I'm so sorry but number two can't wait.\" with no \"[hungry] I'm starving!\", and your other directions ([wary, disgusted, amused], [pause, very very deadpan], [very dismissive]) still there. Press play: the take you kept, unchanged. Nothing to record. Then All good.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -6561,8 +6596,107 @@
     {
      "d": "2026-11-19",
      "t": "Made by ch1retext1: the only chapter 1 line whose kept script has words the clip does not say."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: something is wrong: i want to drop it - that's why it's not there. you delete it Sent to Claude as card c-fix-ch1starving; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "fix-ch1starving: \"I'm starving!\" deleted from the line's script (the repo copy and the edit saved on your phone); the take you kept and the subtitle were already right and are unchanged."
     }
-   ]
+   ],
+   "waiting_on": "claude"
+  },
+  {
+   "id": "c-fix-ch1starving",
+   "tag": "fix-ch1starving",
+   "lane": "claude",
+   "col": "prog",
+   "fix": true,
+   "theme": "Voice Clips",
+   "title": "Fix what you found on: Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\"",
+   "next": "Shipped as fix-ch1starving: \"I'm starving!\" removed from the script; t-ch1starving goes back to Tom to look again.",
+   "blocks": [
+    "t-ch1starving"
+   ],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "reports": [
+    {
+     "at": "2026-11-20T03:51:06.694Z",
+     "card": "t-ch1starving",
+     "title": "Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\"",
+     "ask": "voice",
+     "words": "i want to drop it - that's why it's not there. you delete it",
+     "shot": "",
+     "asked": "ADMIN ) VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. The script you kept ends \"I'm starving!\" but the clip stops after \"number two can't wait.\" Record it again so it says the last sentence, keep it, and Export pending clips. If you would rather drop \"I'm starving!\", delete it from the script and keep the take as it is."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "pasted by Tom from the board"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Made by Something is wrong on t-ch1starving."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom reported on t-ch1starving: i want to drop it - that's why it's not there. you delete it"
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom copied the prompt to paste it into a new conversation."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "fix-ch1starving: game subtitle and clip already lacked the sentence; removed it from ch01-story-directions.json (kept take tmwo5jgy3mcb5's script) and from the Voice Library edit saved on Tom's device (voices.html SCRIPT_DROPS). No pencil report since 03:51Z."
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\".",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: voice are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch1starving and t-ch1starving in data/board.json, history included. Your first push is the commit board: start c-fix-ch1starving.\n\nTom tested and found problems:\n1. Card t-ch1starving (Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\", ask voice). He was asked: ADMIN ) VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. The script you kept ends \"I'm starving!\" but the clip stops after \"number two can't wait.\" Record it again so it says the last sentence, keep it, and Export pending clips. If you would rather drop \"I'm starving!\", delete it from the script and keep the take as it is. He wrote: i want to drop it - that's why it's not there. you delete it\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T03:51:06.694Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch1starving to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch1starving, and give the build fix-ch1starving a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-ch1starving"
+  },
+  {
+   "id": "c-bannerhold1",
+   "title": "A join or leave banner holds the game until you dismiss it",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "bannerhold1",
+   "next": "Building: while a party join or leave banner is up, nothing else can be done (no walking, no menu, no talking, scenes wait) until you tap, press A or Enter, or press a gamepad button. Several banners still show one at a time, each needs its own dismiss.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukH1kiCGvEazM1ZG22h",
+    "opening": "\"i cant find the change where we said nothing can be done when a character join/leave banner is displayed until the user dismisses it.\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Tom: nothing can be done when a character join/leave banner is displayed until the user dismisses it. Checked the board, docs/CHANGES.md, the Project notes and engine/party-banner.js: the rule was never built (banners were non-blocking and faded after 2.6 s). New card."
+    }
+   ],
+   "prompt": {
+    "what": "Makes a party join or leave banner hold the whole game until dismissed, then tests it in portrait and landscape.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the input paths must be found first, tests catch mistakes)",
+    "effort": "medium (one small engine change plus one test)",
+    "text": "Read claude/handoff-rules.md, then build bannerhold1: while a party join or leave banner (engine/party-banner.js) is on screen nothing else can be done until Tom dismisses it with a tap, A, Enter, Space or a gamepad button; the world and scenes wait; queued banners each need their own dismiss. Test portrait and landscape. You have my full permission to access the repo."
+   },
+   "after": "nothing for Tom: end"
   },
   {
    "id": "t-clipposes",

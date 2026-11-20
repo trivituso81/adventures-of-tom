@@ -153,6 +153,12 @@ try{ const s=JSON.parse(localStorage.getItem('aot-vl-filters')||'null'); if(s){ 
 function saveF(){ try{ localStorage.setItem('aot-vl-filters',JSON.stringify({who:[...F.who],type:[...F.type],ch:[...F.ch],show:F.show,ord:F.ord,q:F.q})); }catch(e){} }
 let SCRIPTS={}; try{ SCRIPTS=JSON.parse(localStorage.getItem('aot-vl-scripts')||'{}')||{}; }catch(e){}
 const saveScripts=()=>{ try{ localStorage.setItem('aot-vl-scripts',JSON.stringify(SCRIPTS)); }catch(e){} };
+// Sentences Tom dropped from a line after keeping a take that does not say them (fix-ch1starving): removed, with the [direction] just before
+// them, from this device's saved edit of that line; the rest of his edit stays. The repo script (scripts/*.json) already leaves them out.
+const SCRIPT_DROPS=[["d|tom|Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait.","I'm starving!"]];
+(()=>{ let n=0; for(const [k,drop] of SCRIPT_DROPS){ const s=SCRIPTS[k]; if(typeof s!=='string'||!s.includes(drop)) continue;
+  const t=s.replace(new RegExp('\\s*(\\[[^\\]]*\\]\\s*)?'+drop.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')),'').trim(); if(t) SCRIPTS[k]=t; else delete SCRIPTS[k]; n++; }
+  if(n) saveScripts(); })();
 
 // ---------- lines ----------
 // Stable key for a line (the index position can change between builds).

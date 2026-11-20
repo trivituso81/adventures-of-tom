@@ -53,8 +53,8 @@
    "speaker": "Tom",
    "text": "Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[deadpan, unbothered] Thank you for telling me, Rose... [extremeley deadpan] That one's yours. [dismissive] Grace, I'm so sorry but number two can't wait.",
-   "takeId": "tmwnrwuoc41ay"
+   "script": "[wary, disgusted, amused] Thank you for telling me, Rose... [pause, very very deadpan] That one's yours. [very dismissive] Grace, I'm so sorry but number two can't wait.",
+   "takeId": "tmwo5jgy3mcb5"
   },
   {
    "voice": "grace",
