@@ -53,26 +53,18 @@ chapter	where	speaker	listen	why	text
 1	ch1Mudling	Rose	listen		Hello, mud! Can we please have Deedee's muffins back? Thank you!
 1	ch1Mudling	Mudling	listen		No. Ours now.
 1	ch1Mudling	Rose	listen		But I said PLEASE!
-1	ch1Mudling	Tom	listen		She did. I was right here. It was an excellent please.
 1	ch1Mudling	Deedee	listen		Girls, behind me. You three have till I count to three. Then I'm getting the hose.
 1	ch1Mudling	Deedee	listen		Three.
 1	ch1Mudling	Deedee	listen		Up, up. Everybody up. Deedee will make it better.
 1	ch1Mudling	Deedee	listen		There. Good as new. Try not to do that again.
-1	ch1Mudling	Grace	think	Grace counts the papers: a deduction	Nine papers. There were twelve. So the one with the pan still has three.
 1	ch1Mudling	Deedee	listen		Then it has three of my muffins and my pan. Keep walking.
 1	ch1Spot	Rose	think	everyone looks at the grey patch	The grass is Boppy color!
 1	ch1Spot	Grace	think	examining the patch and the cube	It's grey, Rose. Just that one spot. And that orange cube has a dragonfly in it.
 1	ch1Spot	Rose	listen		He's stuck! Tata, get him out!
 1	ch1Spot	Tom	listen		Yes. Right away. Everybody give the dragonfly some room.
-1	ch1Spot	Tom	listen		It's the size of a plum. I carried a suitcase through two airports this morning.
-1	ch1Spot	Rose	listen		Your face is RED, Tata!
-1	ch1Spot	Grace	listen		Tata, stop. You're getting fingerprints on it. And look, it has a dent. Did you do that?
-1	ch1Spot	Tom	listen		Grace. I couldn't even make it wobble.
 1	ch1Spot	Grace	think	Grace asks about the bulb: everyone looks at it	Deedee, what's that?
 1	ch1Spot	Deedee	think	the flashbulb clue (report c5no scenario)	A flashbulb. It's burnt. Somebody set it off right here. Look in the glass. Little purple-black sparkles, like crushed-up stars. They change color when you tip it.
 1	ch1Spot	Grace	think	Grace lists the clues	Don't throw it out! It's a clue. I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it. I'm writing it in pencil.
-1	ch1Spot	Tom	listen		Why pencil?
-1	ch1Spot	Grace	think	nobody knows what it means yet	Because I don't know what any of it means yet.
 1	ch1Pond	Tom	none	Tom yelps at the boss	GAH! Grace, I'm holding your hand. That's for me, not for you.
 1	ch1Pond	Grace	none	first sight of the Big One	I know, Tata. You're squeezing. Is that the Big One? Boppy only said it was as big as the couch!
 1	ch1Pond	Deedee	listen		For once in his life he rounded down.
@@ -92,7 +84,6 @@ chapter	where	speaker	listen	why	text
 1	ch1AfterBoss	The Big One	listen		Good. He was in the middle of a story. The one about the race.
 1	ch1AfterBoss	Deedee	listen		He's been in the middle of that one for fifty-one years.
 1	ch1End	Rose	listen		Boppy! Your fish is REAL! He's CAR size and he gave me money!
-1	ch1End	Boppy	listen		CAR size? Cozy Rosie, I told everybody a couch. Twenty years! I didn't want to brag!
 1	ch1End	Boppy	think	Boppy shows his gold teeth	Now that's real gold. Same as these. Look.
 1	ch1End	Rose	listen		You've got money in your TEETH!
 1	ch1End	Boppy	listen		Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look.
@@ -101,11 +92,7 @@ chapter	where	speaker	listen	why	text
 1	ch1End	Grace	listen		The fish ate them, Boppy. The last three.
 1	ch1End	Boppy	listen		The fish gets THREE?
 1	ch1End	Deedee	listen		Twelve more. Forty minutes. The first one's still yours.
-1	ch1End	Boppy	listen		Girls, you heard that. Forty minutes. Somebody watch the clock.
 1	ch1Job	Grace	listen		Tata, you have a job. If you see anything grey in California, or an orange cube, you write it down and text me.
 1	ch1Job	Tom	listen		I have a job. Yes. Does the job come with a pencil?
 1	ch1Job	Grace	listen		That's my second best one. Don't lose it.
-1	ch1Job	Tom	listen		Second best. It's going in the pocket with the zipper.
-1	ch1Job	Rose	listen		One more ride, Tata! To the cab! Go the LONG way!
-1	ch1Job	Tom	listen		The long way. That's all the way around the Square. Twice.
 1	ch1Sunday	TNB	none	a phone text: nobody is speaking aloud	hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over.

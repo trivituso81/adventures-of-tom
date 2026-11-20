@@ -579,8 +579,6 @@ const NPC_EMOTION_MOODS={
 "sal|Los Angeles again? I'm starting to think you live there.": "unimpressed",
 "sal|The girls stay home. School tomorrow. Library books are due.": "unimpressed",
 "sol|Airport. No eating in my cab. I can smell the potluck on you. It smells amazing. Still no.": "unimpressed",
-"sal|Los Angeles? You got it. Flights leave whenever I get there.": "happy",
-"sal|One thing. The girls stay home. Amy's rule. No flying on a school night.": "unimpressed",
 "sal|Airport? Hop in. Cab seven has been waiting all day.": "happy",
 "sal|The girls stay put. Amy's orders. I follow Amy's orders. Everybody does.": "proud",
 "sal|LAX it is. Seat belts. Your niece is giving me the look.": "unimpressed",

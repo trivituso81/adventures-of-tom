@@ -312,8 +312,8 @@ SCENES.ch1Mudling=[
   {battle:'mudling',tut:'basics',count:3},
   ...CH1_AFTER(()=>flag('battle:mudling')!=='win',[
     {call:()=>{ sfx.splat(); }},   // the mud melts into the path
-    {prop:'papers',kind:'papers',set:{map:'hollow',x:9,y:16}},   // nine muffin papers left in the reeds (stand-in)
-    {talk:'Grace',lines:["Nine papers. There were twelve. So the one with the pan still has three."]},
+    {prop:'papers',kind:'papers',set:{map:'hollow',x:9,y:16}},   // nine muffin wrappers left in the reeds (r-20261120-140805-mhzt: wrappers, not papers)
+    {talk:'Grace',lines:["Nine wrappers. There were twelve. So the one with the pan still has three."]},
     {talk:'Deedee',lines:["Then it has three of my muffins and my pan. Keep walking."]},
     {flag:'ch1-tuts'},
     {toast:'Goal: head east, around the pond, to Boppy’s fishing spot. The Hollow’s monsters are awake now.',time:5}])
@@ -785,7 +785,7 @@ const STORY_PROPS={
     for(let r=0;r<2;r++) for(let c=0;c<4;c++) ellipse(cx-w*.6+c*(w*.4),yy+1+r*3,2,1,'#6f767b');
   },
   // The painted muffin pan held in front of a Mudling (fix-cutpolish4b: the code-drawn heap of four looked terrible).
-  muffins(cx,y,a) { PROPART.draw('ch1/pan_full',cx,y-2,{w:22}); }
+  muffins(cx,y,a) { PROPART.draw('ch1/pan_full',cx,y+9,{w:18}); }   // fix-reports5 (r-20261120-140511-a306: "apple muffins are covering the mud blob's face"): smaller and lower, held at its belly
 };
 
 // Story effects drawn on the map (engine/story.js, in map coordinates): chapter 2's purple smog, the trance swirls

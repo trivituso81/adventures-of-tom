@@ -57,23 +57,15 @@ chapter	file	line	character	mood	text
 1	data/scenes.js	225	Rose	happy	Hello, mud! Can we please have Deedee's muffins back? Thank you!
 1	data/scenes.js	226	Mudling	none	No. Ours now.
 1	data/scenes.js	227	Rose	angry	But I said PLEASE!
-1	data/scenes.js	228	Tom	unimpressed	She did. I was right here. It was an excellent please.
 1	data/scenes.js	229	Deedee	proud	Girls, behind me. You three have till I count to three. Then I'm getting the hose.
 1	data/scenes.js	231	Deedee	unimpressed	Three.
-1	data/scenes.js	237	Grace	none	Nine papers. There were twelve. So the one with the pan still has three.
 1	data/scenes.js	238	Deedee	unimpressed	Then it has three of my muffins and my pan. Keep walking.
 1	data/scenes.js	248	Rose	happy	The grass is Boppy color!
 1	data/scenes.js	249	Grace	none	It's grey, Rose. Just that one spot. And that orange cube has a dragonfly in it.
 1	data/scenes.js	250	Rose	scared	He's stuck! Tata, get him out!
 1	data/scenes.js	251	Tom	proud	Yes. Right away. Everybody give the dragonfly some room.
-1	data/scenes.js	253	Tom	none	It's the size of a plum. I carried a suitcase through two airports this morning.
-1	data/scenes.js	254	Rose	happy	Your face is RED, Tata!
-1	data/scenes.js	255	Grace	unimpressed	Tata, stop. You're getting fingerprints on it. And look, it has a dent. Did you do that?
-1	data/scenes.js	256	Tom	unimpressed	Grace. I couldn't even make it wobble.
 1	data/scenes.js	258	Grace	surprised	Deedee, what's that?
 1	data/scenes.js	260	Grace	surprised	Don't throw it out! It's a clue. I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it. I'm writing it in pencil.
-1	data/scenes.js	261	Tom	none	Why pencil?
-1	data/scenes.js	262	Grace	none	Because I don't know what any of it means yet.
 1	data/scenes.js	273	Tom	surprised	GAH! Grace, I'm holding your hand. That's for me, not for you.
 1	data/scenes.js	274	Grace	scared	I know, Tata. You're squeezing. Is that the Big One? Boppy only said it was as big as the couch!
 1	data/scenes.js	275	Deedee	unimpressed	For once in his life he rounded down.
@@ -92,7 +84,6 @@ chapter	file	line	character	mood	text
 1	data/scenes.js	307	The Big One	none	Good. He was in the middle of a story. The one about the race.
 1	data/scenes.js	308	Deedee	unimpressed	He's been in the middle of that one for fifty-one years.
 1	data/scenes.js	322	Rose	happy	Boppy! Your fish is REAL! He's CAR size and he gave me money!
-1	data/scenes.js	323	Boppy	surprised	CAR size? Cozy Rosie, I told everybody a couch. Twenty years! I didn't want to brag!
 1	data/scenes.js	324	Boppy	proud	Now that's real gold. Same as these. Look.
 1	data/scenes.js	326	Rose	surprised	You've got money in your TEETH!
 1	data/scenes.js	327	Boppy	proud	Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look.
@@ -101,13 +92,9 @@ chapter	file	line	character	mood	text
 1	data/scenes.js	330	Grace	none	The fish ate them, Boppy. The last three.
 1	data/scenes.js	331	Boppy	sad	The fish gets THREE?
 1	data/scenes.js	332	Deedee	none	Twelve more. Forty minutes. The first one's still yours.
-1	data/scenes.js	333	Boppy	happy	Girls, you heard that. Forty minutes. Somebody watch the clock.
 1	data/scenes.js	340	Grace	proud	Tata, you have a job. If you see anything grey in California, or an orange cube, you write it down and text me.
 1	data/scenes.js	341	Tom	proud	I have a job. Yes. Does the job come with a pencil?
 1	data/scenes.js	342	Grace	unimpressed	That's my second best one. Don't lose it.
-1	data/scenes.js	344	Tom	loving	Second best. It's going in the pocket with the zipper.
-1	data/scenes.js	345	Rose	happy	One more ride, Tata! To the cab! Go the LONG way!
-1	data/scenes.js	346	Tom	happy	The long way. That's all the way around the Square. Twice.
 1	data/scenes.js	362	TNB	none	hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over.
 2	data/scenes.js	278	Tom	none	TNB said he'd be home. Spring Street loft.
 2	data/scenes.js	287	TNB	happy	Well, well, well...

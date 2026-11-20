@@ -1,3 +1,14 @@
+## reports-2026-11-20c (2026-11-20): muffin tray off the Mudling's face, "Nine wrappers", and the voice and table purge for the Chapter 1 line cuts
+
+A second session worked card c-reports-5 at the same time as the one that shipped reports-2026-11-20b, and found b already pushed. It kept b's changes (including b's Sal flow: TO THE AIRPORT choice, then the cab scene) and added what b left out:
+- r-20261120-140511-a306 "apple muffins are covering the mud blob's face": the held pan (`STORY_PROPS.muffins`) is smaller and lower; looked at in a recorded frame of ch1Mudling.
+- r-20261120-140805-mhzt "should be nine muffin wrappers not papers": Grace says "Nine wrappers." The graphic and the trail are the open part (card c-hollowtrail1).
+- r-20261120-144650-ae66 (Grace "leaving AGAIN?" cut): already gone in b; marked done.
+- Voice: 19 baked clips for lines b removed or reworded were purged (`purge_unused.js`; `dialog-ch1.js`, `dialog-ch24.js`), including Sal's old "Los Angeles? You got it. Flights leave whenever I get there." and Rose's "...Go the LONG way!". Their rows are gone from the emotion, listen, talk, gap and conversation tables; `data/voice-index.json` rebuilt. Waiting for a recording: Tom "Alright, time for me to head back to LA...", Sal "Los Angeles? You got it.", Rose "One more ride, Tata! To the cab!", Grace "Nine wrappers...". The frozen demo shares `data/voice-clips.js`, so its matching Sal and Grace clips are silent.
+- Board: new cards t-reports5-play (Tom plays Chapter 1 to Sal's office), c-hollowtrail1 (wrapper trail, four Hollow variants, monster positions) and c-itembannerart1 (item banner pictures). Open reports: -140805-mhzt, -141016-j0za, -141209-58bx, -142626-w74f.
+- Not changed: Rose's facing. b sets her to face Tom for the whole opening of ch1Theft; in a recorded frame her listening pose shows her front on, not in profile toward Tom.
+- Tests: `python3 tools/smoke.py` (only failure: board_sync_test R5, failing on main before both builds), `convos.py report` (3 old stale rows), `unused_voice.py` (221, same as before).
+
 ## fix-keysecrets2-try-3 (2026-11-20): the Art Library page no longer serves a stale video script, and a stalled network ends in a plain line
 
 Card c-fix-keysecrets2-try-3. Tom (t-keysecrets2-try): "it hangs".

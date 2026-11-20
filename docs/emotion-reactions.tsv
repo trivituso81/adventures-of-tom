@@ -8751,12 +8751,6 @@ cab	8	engine/travel.js	cab flight to ch8	Sal	The girls stay home. School tomorro
 cab	9	engine/travel.js	cab flight to ch9	Sol	Airport. No eating in my cab. I can smell the potluck on you. It smells amazing. Still no.	tom	unimpressed
 cab	9	engine/travel.js	cab flight to ch9	Sol	Airport. No eating in my cab. I can smell the potluck on you. It smells amazing. Still no.	tnb	happy
 cab	9	engine/travel.js	cab flight to ch9	Sol	Airport. No eating in my cab. I can smell the potluck on you. It smells amazing. Still no.	nara	happy
-cab	1-10	engine/travel.js	cab west	Sal	Los Angeles? You got it. Flights leave whenever I get there.	tom	happy
-cab	1-10	engine/travel.js	cab west	Sal	Los Angeles? You got it. Flights leave whenever I get there.	grace	sad
-cab	1-10	engine/travel.js	cab west	Sal	Los Angeles? You got it. Flights leave whenever I get there.	rose	sad
-cab	1-10	engine/travel.js	cab west	Sal	One thing. The girls stay home. Amy's rule. No flying on a school night.	tom	unimpressed
-cab	1-10	engine/travel.js	cab west	Sal	One thing. The girls stay home. Amy's rule. No flying on a school night.	grace	angry
-cab	1-10	engine/travel.js	cab west	Sal	One thing. The girls stay home. Amy's rule. No flying on a school night.	rose	sad
 cab	1-10	engine/travel.js	cab west	Sal	Airport? Hop in. Cab seven has been waiting all day.	tom	happy
 cab	1-10	engine/travel.js	cab west	Sal	Airport? Hop in. Cab seven has been waiting all day.	grace	sad
 cab	1-10	engine/travel.js	cab west	Sal	Airport? Hop in. Cab seven has been waiting all day.	rose	sad
@@ -9216,20 +9210,6 @@ table	9	engine/travel.js	DEPARTURES 9.stay.nara.stay	Nara	Tom shakes it. "Deal. 
 table	9	engine/travel.js	DEPARTURES 9.stay.nara.stay	Nara	Tom shakes it. "Deal. Back soon."	tnb	happy
 table	9	engine/travel.js	DEPARTURES 9.stay.nara.stay	Nara	Nara lets out one very satisfied burp. Then she waddles home.	tom	loving
 table	9	engine/travel.js	DEPARTURES 9.stay.nara.stay	Nara	Nara lets out one very satisfied burp. Then she waddles home.	tnb	happy
-table	1-10	engine/travel.js	TRAVEL_POOLS west.0.driver	Sal	Los Angeles? You got it. Flights leave whenever I get there.	tom	happy
-table	1-10	engine/travel.js	TRAVEL_POOLS west.0.driver	Sal	Los Angeles? You got it. Flights leave whenever I get there.	grace	sad
-table	1-10	engine/travel.js	TRAVEL_POOLS west.0.driver	Sal	Los Angeles? You got it. Flights leave whenever I get there.	rose	sad
-table	1-10	engine/travel.js	TRAVEL_POOLS west.0.driver	Sal	One thing. The girls stay home. Amy's rule. No flying on a school night.	tom	unimpressed
-table	1-10	engine/travel.js	TRAVEL_POOLS west.0.driver	Sal	One thing. The girls stay home. Amy's rule. No flying on a school night.	grace	angry
-table	1-10	engine/travel.js	TRAVEL_POOLS west.0.driver	Sal	One thing. The girls stay home. Amy's rule. No flying on a school night.	rose	sad
-table	1-10	engine/travel.js	TRAVEL_POOLS west.0.grace	Grace	Tata, you're leaving AGAIN? You JUST got here!	tom	loving
-table	1-10	engine/travel.js	TRAVEL_POOLS west.0.grace	Grace	Tata, you're leaving AGAIN? You JUST got here!	rose	sad
-table	1-10	engine/travel.js	TRAVEL_POOLS west.0.rose	Rose	Bring me back a palm tree. A small one. For my room.	tom	happy
-table	1-10	engine/travel.js	TRAVEL_POOLS west.0.rose	Rose	Bring me back a palm tree. A small one. For my room.	grace	unimpressed
-table	1-10	engine/travel.js	TRAVEL_POOLS west.0.tom	Tom	I'll be back before you know it. Go home and listen to your mom.	grace	happy
-table	1-10	engine/travel.js	TRAVEL_POOLS west.0.tom	Tom	I'll be back before you know it. Go home and listen to your mom.	rose	happy
-table	1-10	engine/travel.js	TRAVEL_POOLS west.0.tom	Tom	Rose, I'll see what I can do about the palm tree.	grace	happy
-table	1-10	engine/travel.js	TRAVEL_POOLS west.0.tom	Tom	Rose, I'll see what I can do about the palm tree.	rose	happy
 table	1-10	engine/travel.js	TRAVEL_POOLS west.1.driver	Sal	Airport? Hop in. Cab seven has been waiting all day.	tom	happy
 table	1-10	engine/travel.js	TRAVEL_POOLS west.1.driver	Sal	Airport? Hop in. Cab seven has been waiting all day.	grace	sad
 table	1-10	engine/travel.js	TRAVEL_POOLS west.1.driver	Sal	Airport? Hop in. Cab seven has been waiting all day.	rose	sad

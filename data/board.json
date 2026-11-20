@@ -15660,8 +15660,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (6 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-140511-a306, r-20261120-140805-mhzt, r-20261120-141016-j0za, r-20261120-141209-58bx, r-20261120-142626-w74f, r-20261120-144650-ae66. First note: apple muffins are covering the mud blob's face",
+   "title": "Fix the report backlog (4 open)",
+   "next": "Parts b and c shipped. 4 reports stay open because they need new pictures: r-20261120-140805-mhzt (graphic), r-20261120-141016-j0za and r-20261120-141209-58bx (Grump Hollow muffin wrapper trail and monster positions) and r-20261120-142626-w74f (item banner art). They are on cards c-hollowtrail1 and c-itembannerart1; a backlog session should skip them.",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -15746,13 +15746,17 @@
     {
      "d": "2026-11-20",
      "t": "The backlog now holds 6 report(s)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Second session (reports-2026-11-20c): found the first session's build b had shipped the same fixes while it worked, kept b's Sal flow, added the muffin tray fix, Nine wrappers, the voice purge for 19 cut lines and the table cleanup, closed r-...-a306 and r-...-ae66, and handed the rest to t-reports5-play, c-hollowtrail1 and c-itembannerart1."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "started_at": "2026-11-20T22:52:33+00:00",
-   "after": "t-welcomepage-play"
+   "after": "t-reports5-play"
   },
   {
    "id": "t-listen1-play",
@@ -17139,6 +17143,92 @@
    "auto": true,
    "started_at": "2026-11-20T23:07:18+00:00",
    "done": "2026-11-20"
+  },
+  {
+   "id": "t-reports5-play",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Story and Dialogue",
+   "ask": "play",
+   "fyi": true,
+   "title": "Play Chapter 1 from the kitchen to Sal's taxi office",
+   "next": "Start Chapter 1 from the chapter list and play from Deedee's kitchen to Sal's taxi office. Look for: (1) Rose looks toward Tom while he says Hi, Mom; (2) the muffin tray sits on the Mudling's belly and Grace says Nine wrappers; (3) at the fishing spot there are no plum, red face, fingerprint, wobble or pencil lines; (4) at the end in the kitchen Tom says Alright, time for me to head back to LA. Let's head to Sal's!; (5) no lap around the Square: at Sal's taxi office pick TO THE AIRPORT, Sal says Los Angeles? You got it., then the phone on the seat. Use the pencil tab for anything wrong. The new lines play in a synthetic voice until recorded.",
+   "first": "Wait for build reports-2026-11-20c to reach your phone (reload once).",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "started by c-reports-5"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by c-reports-5: Tom's play check of the Chapter 1 report fixes."
+    }
+   ]
+  },
+  {
+   "id": "c-hollowtrail1",
+   "tag": "hollowtrail1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Areas",
+   "title": "Grump Hollow muffin wrapper trail",
+   "next": "Tom wants the nine muffin wrappers to lead the party through Grump Hollow in four stages (the Square, the upper left, the log in the screen centre, then the right), one area painting per stage, with each monster placed on the trail before the boss trigger. Reports r-20261120-140805-mhzt, r-20261120-141016-j0za, r-20261120-141209-58bx.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "Tom wants the nine muffin wrappers to lead the party through Grump Hollow in four stages (the Square, the upper left, the log in the screen centre, then the right), one area painting per stage, with each monster placed on the trail before the boss trigger.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5 (row D: picture prompts judged by taste)",
+    "effort": "high (a new area-variant design with nothing written to follow)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then read these three reports with python3 tools/reports.py list: r-20261120-140805-mhzt (\"should be nine muffin wrappers not papers. also this graphic looks terrible - im starting to think we should just rebake the entire area for each variation of muffin papers scattered\"), r-20261120-141016-j0za (\"the muffin wrappers should at first lead the party through the square, then the upper left corner of the screen, then towards the log who should by default be in the center of the screen, then finally to the right. i think we need a variation of the area art for each\") and r-20261120-141209-58bx (\"all of the positions of the monsters are wrong - we can have them near the boss area because it will create a conflict. the muffin wrapper trail should lead the party to each monster BEFORE they reach the boss trigger area\"). Plan and build it: Art Library entries for the Grump Hollow variants (docs/AREA_PAINTINGS.md and the area prompts in tools/art-library), the code that shows the right variant per story stage, and monster positions along the trail clear of the boss trigger. Remove the code-drawn wrapper prop (papers) and its art when the variants replace it. End with a Tom card that sends him to the Art Library to generate the variants, then mark the three reports done. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by c-reports-5: the reports named here need new pictures, so the backlog sessions left them open."
+    }
+   ]
+  },
+  {
+   "id": "c-itembannerart1",
+   "tag": "itembannerart1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Painted pictures for the item gained banners",
+   "next": "The item gained banner shows an emoji for each item; report r-20261120-142626-w74f says art is missing for all item banners. Build Art Library entries for a painted picture per item and use them in the banner.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "prompt": {
+    "what": "The item gained banner shows an emoji for each item; report r-20261120-142626-w74f says art is missing for all item banners.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5 (row D: picture prompts judged by taste)",
+    "effort": "medium (the banner exists; this adds pictures by a pattern)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then read report r-20261120-142626-w74f (\"missing art for all item banners\") with python3 tools/reports.py list. The item gained banner (itemBanner in engine/party-banner.js, test tools/itembanner_test.py) shows an emoji icon per item from the items table. Make one painted picture per item through the Art Library (prop art pattern in docs/PROP_ART.md, entries in tools/art-library), show it in the banner in place of the emoji, and keep the emoji only if an item has no picture yet. Remove anything the pictures replace. End with a Tom card that sends him to the Art Library to generate and approve them, then mark the report done. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by c-reports-5: the reports named here need new pictures, so the backlog sessions left them open."
+    }
+   ]
   }
  ],
  "sessions": [
