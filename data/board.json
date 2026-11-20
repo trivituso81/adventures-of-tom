@@ -7581,7 +7581,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDDTYqvsqg42v3dVXm",
+    "url": "https://claude.ai/code/session_01RXeukDDTYqvsqg42v3dVXm",
     "opening": "not started"
    },
    "history": [
@@ -7596,6 +7596,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -7715,13 +7719,13 @@
    "title": "Install the Gate Zero pictures (no plane, plane)",
    "theme": "Areas",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "next": "Not installed: the two pictures made do not match the plate. Waits on new pictures that keep the painting exactly and put the plane in the same place.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEmB3zyWbuyVCKQtLs",
+    "url": "https://claude.ai/code/session_01RXeukEmB3zyWbuyVCKQtLs",
     "opening": "not started"
    },
    "history": [
@@ -7740,6 +7744,10 @@
     {
      "d": "2026-11-20",
      "t": "Not shipped: the pictures made are 1248x832, not the plate size 1280x896, and the empty room moved the window frames and jet bridge, so the walk-behind pieces and masks would no longer line up. The plane alone is a different, realistic jet, in a different place and size than the plate plane, so it cannot slide out from the window. Also claude/next-addendum-ch10vance1.md is not in the repo. Nothing installed; art/gatezero.webp is unchanged."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -7751,8 +7759,7 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/next-addendum-ch10vance1.md and install the approved Gate Zero pictures (room-gatezero-noplane and room-gatezero-plane) per ROOM_PAINTINGS.md steps, test portrait and landscape with screenshots, push. You have my full permission to access the repo."
    },
-   "tag": "gatezero",
-   "waiting_on": "claude"
+   "tag": "gatezero"
   },
   {
    "id": "t-gatezeroart",
@@ -8452,6 +8459,26 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukEmB3zyWbuyVCKQtLs",
+   "title": "Install the Gate Zero pictures (no plane, plane)",
+   "first": "2026-11-20T08:32:57Z",
+   "last": "2026-11-20T08:34:05Z",
+   "tags": [],
+   "cards": [
+    "c-gatezero"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDDTYqvsqg42v3dVXm",
+   "title": "Chapter 6 leftovers: talk and emotion rows, landscape frames, Chairman finale",
+   "first": "2026-11-20T08:33:19Z",
+   "last": "2026-11-20T08:33:19Z",
+   "tags": [],
+   "cards": [
+    "c-ch6left"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFEAHCq9DEF8qGDvCv",
    "title": "Fix what you found on: Watch the chapter 1 scenes for breathing and reactions",
@@ -9369,8 +9396,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "b5fee7f4032c7953d295f48a189647198978dad8",
- "synced_at": "2026-11-20T08:32:35+00:00",
+ "synced": "c1c5078d3cb4655df0a395bc720493a8c7a9d331",
+ "synced_at": "2026-11-20T08:34:08+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
