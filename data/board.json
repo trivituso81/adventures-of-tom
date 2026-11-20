@@ -6711,7 +6711,7 @@
    "title": "Rebuild the muffin theft scene in Deedee's kitchen",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "heist1",
    "next": "Shipped as heist1. The theft is rebuilt with your approved Mudling sheet: it rolls in, bowls the three of you over, faces Deedee, lifts the pan over its head and sneaks out behind Boppy, who turns around only on \"Wait, where'd the muffins go?\". Next: card t-heist1play (watch it), and card t-heist1voice (takes for the 4 new lines).",
    "blocks": [],
@@ -6745,6 +6745,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped as heist1: new 6-frame Mudling baked, middle of ch1Theft rebuilt to plan sections 3 and 4, 3 new lines, Grace's line changed, Tom's floor line cut, old heist sheet and old Library entry ch1-mudling-heist purged. Kept lines keep their live wording (ch1retext1 changed some after the plan was written)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as heist1: The muffin theft is rebuilt: the Mudling of the fights rolls in, bowls the three of you over, lifts the pan over its head and sneaks out behind Boppy, who never turns around"
     }
    ],
    "prompt": {
@@ -6757,7 +6761,8 @@
     "effort": "medium (one scene; the script, the beats and the steps are written in the plan)",
     "text": "Read CLAUDE.md and claude/heist-redo-plan.md, then cards c-heist1 and t-heistart in data/board.json, history and note included. Build part B (section 7) and push it as heist1. Your first push is the commit board: start c-heist1. Lines go in word for word from section 3, changed only where my note on t-heistart says so. Look at every beat in portrait and landscape before pushing. You have my full permission to access the repo."
    },
-   "after": "t-heist1play"
+   "after": "t-heist1play",
+   "done": "2026-11-20"
   },
   {
    "id": "t-reportcheck",
@@ -7543,8 +7548,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (8 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100555-mxvd, r-20261120-000755-3h9p, r-20261120-000831-h5tq, r-20261120-000848-fl38, r-20261120-000910-g9n1, r-20261120-000931-2yx8 and 2 more. First note: We need new frames for this art because it doesn't match the style of the game for the monster, I me",
+   "title": "Fix the report backlog (7 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-000755-3h9p, r-20261120-000831-h5tq, r-20261120-000848-fl38, r-20261120-000910-g9n1, r-20261120-000931-2yx8, r-20261120-001019-feou and 1 more. First note: Grace's list shouldn't appear until she finishes the third item, like in the dialogue, so remove it ",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -7586,6 +7591,10 @@
     {
      "d": "2026-11-20",
      "t": "The backlog now holds 8 report(s)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "The backlog now holds 7 report(s)."
     }
    ],
    "blocks": [],
@@ -9541,8 +9550,7 @@
   {
    "id": "t-heist1play",
    "lane": "tom",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Story and Dialogue",
    "ask": "play",
    "fyi": true,
@@ -9560,6 +9568,10 @@
     {
      "d": "2026-11-20",
      "t": "Added by c-heist1: Tom's play check of the rebuilt theft (plan section 7 step 6)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: nothing was left for it to wait on."
     }
    ]
   },
@@ -9920,6 +9932,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCrBsMaC1DBnh8HB8R",
+   "title": "Rebuild the muffin theft scene in Deedee's kitchen",
+   "first": "2026-11-20T01:17:42-08:00",
+   "last": "2026-11-20T02:01:46-08:00",
+   "tags": [
+    "heist1"
+   ],
+   "cards": [
+    "c-heist1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCqNGVM6VpAdv1kfVV",
    "title": "Casa Alvarez: place the six walkers and check the 18 pages",
    "first": "2026-11-20T01:09:04-08:00",
@@ -10029,16 +10053,6 @@
    "cards": [
     "c-starttest",
     "c-copydocs"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCrBsMaC1DBnh8HB8R",
-   "title": "Rebuild the muffin theft scene in Deedee's kitchen",
-   "first": "2026-11-20T01:17:42-08:00",
-   "last": "2026-11-20T01:17:42-08:00",
-   "tags": [],
-   "cards": [
-    "c-heist1"
    ]
   },
   {
@@ -10737,8 +10751,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "8ec0dbf7ab890d75d1a38d4304799e78ee057bab",
- "synced_at": "2026-11-20T09:59:52+00:00",
+ "synced": "bacab831c779a1f14e733b38e91b8830079e56e4",
+ "synced_at": "2026-11-20T10:02:30+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
