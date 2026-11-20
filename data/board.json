@@ -9788,7 +9788,7 @@
    "id": "c-fix-clipposes-2",
    "tag": "fix-clipposes-2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix: Watch the family's painted battle poses",
@@ -9811,7 +9811,7 @@
    ],
    "chat": {
     "url": "",
-    "opening": "Something is wrong on t-clipposes"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -9821,6 +9821,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom reported on t-clipposes: The animation happens way too fast before I can process it and see what's wrong. After each move auto plays, an interstitial asking for feedback that can go directly to Claude should be displayed where optional feedback can be entered and the user must hit reject or approve before the next animation is played"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation."
     }
    ],
    "prompt": {
