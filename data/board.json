@@ -15812,6 +15812,10 @@
     {
      "d": "2026-11-20",
      "t": "wanproofb: start picture made (15 cents), facing came back right, mirrored (the one retry), all checks pass. Next: the guard video."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as wanproofb: Part 2 of the Grace guard video proof: her large left-facing start picture, made on fal and checked. 15 cents spent"
     }
    ],
    "prompt": {
@@ -16490,6 +16494,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
+   "title": "Build the Grace guard video proof",
+   "first": "2026-11-20T12:41:05-08:00",
+   "last": "2026-11-20T13:03:08-08:00",
+   "tags": [
+    "wanproofa",
+    "wanproofb"
+   ],
+   "cards": [
+    "c-wanproof"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDvGy4r9exekLEpXXy",
    "title": "Art Library makes pictures through repo secrets",
    "first": "2026-11-20T13:01:46-08:00",
@@ -16519,18 +16536,6 @@
    "tags": [],
    "cards": [
     "c-reporttype1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
-   "title": "Build the Grace guard video proof",
-   "first": "2026-11-20T12:41:05-08:00",
-   "last": "2026-11-20T12:48:14-08:00",
-   "tags": [
-    "wanproofa"
-   ],
-   "cards": [
-    "c-wanproof"
    ]
   },
   {
@@ -18062,8 +18067,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "a1d67b6efdf96b03915527ca515b0dadf5a61eaa",
- "synced_at": "2026-11-20T21:02:32+00:00",
+ "synced": "311372eb7c25e1387f8fe1a69196a62aeab4895f",
+ "synced_at": "2026-11-20T21:04:00+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
