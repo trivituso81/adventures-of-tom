@@ -8690,8 +8690,7 @@
    "title": "Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub)",
    "theme": "Voice Clips",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "prog",
    "tag": "ch1starving-sub",
    "auto": true,
    "next": "Waits on your new take of Tom's line (card t-ch1starving). Then it adds \"I'm starving!\" to the end of the line in the game (subtitle) and merges your take, so the game shows and plays the whole line.",
@@ -8699,13 +8698,25 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukER5KXdV8sp6XLkaer",
     "opening": "not started"
    },
    "history": [
     {
      "d": "2026-11-20",
      "t": "Added by fix-ch1starving-3. Tom (11-20): \"Keep it, I'll re-record\". The takes merge leaves out a take whose words differ from the subtitle, so the subtitle must change in the same push as the merge."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom answered, so this card starts by itself."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -9784,8 +9795,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "29ade7d6dd084dd5843238095d501e0db1d6fb73",
- "synced_at": "2026-11-20T08:47:02+00:00",
+ "synced": "c07e6e03b80438f291f4a057b9b6d8d6ec0ad2b1",
+ "synced_at": "2026-11-20T08:49:38+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
