@@ -1,3 +1,13 @@
+## gem-canon03 (2026-11-20): board only: the turtle Big One card is retired because it goes against Tom's chapter 1 canon
+
+- Gemini chapter 1 report CANON-03 asked to turn The Big One into a snapping-turtle bog monster with a muffin-tin crown, cut Boppy's Lost Lure and the folding chair at the pond, and have Boppy fish from a boat on the Long Island Sound.
+- Checked on current main: the fish, the lure drop (`data/monsters.js`, `data/party.js`), the folding chair line and the twenty years lines (`data/scenes.js`) are all there.
+- Not done, because the target contradicts Tom's own decisions: on 2026-11-16 he said the Gemini turtle "was not his decision (the Big One stays Boppy's fish)" and that Boppy fishes but is not a boat fisherman; the locked chapter 1 script (`claude/story-ch01.md`, Project) says "Not a turtle" and puts the cube beside Boppy's folding chair. The twenty years lines fit the flash (a normal-size fish until that morning).
+- Card `c-gem-canon03` moved to Done with the reason. Card `c-gem-canon07` got a note that its door frame marks (cut 2026-11-19, ch1nodoor) and boat promise items also go against Tom's decisions.
+- Nothing in the game changed. No art card made.
+
+## gem-polish06 (2026-11-20): Tom gives Deedee real boss advice before the Big One
+
 ## gem-canon04 (2026-11-20): Nobody says "camera" at the flashbulb in chapter 1; the bulb has purple-black sparkles inside
 
 - Gemini chapter 1 report CANON-04 (claude/ch1-gemini-tracker.md, card c-gem-canon04). Still on main before this build: Deedee said "A flashbulb, from an old camera... left it by your grandfather's chair." Canon: nobody says camera until Julian's camera in chapter 10.
