@@ -13,6 +13,12 @@
      "note": "",
      "at": "2026-11-20T16:05:02.283Z",
      "build": "fix-gracevoice-distort"
+    },
+    "tom.braced": {
+     "v": "approve",
+     "note": "",
+     "at": "2026-11-20T16:05:24.168Z",
+     "build": "fix-gracevoice-distort"
     }
    },
    "expect": [
@@ -53,7 +59,7 @@
     "deedee.victory",
     "deedee.run"
    ],
-   "updated": "2026-11-20T16:05:02.830Z"
+   "updated": "2026-11-20T16:05:24.433Z"
   }
  },
  "about": "Answers from ADMIN > BATTLE LAB > NEW BATTLE > PAINTED STATES (engine/pose-review.js). Key: fighter.state. v approve or reject."
