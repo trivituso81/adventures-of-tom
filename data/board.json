@@ -11934,7 +11934,7 @@
    "title": "Give Boppy a kitchen portrait without fishing gear",
    "theme": "Characters",
    "lane": "claude",
-   "col": "up",
+   "col": "done",
    "next": "Waits on your answer on card t-gem-polish03 (keep Boppy's rod and creel indoors, or give him an indoor outfit). Then: keep closes this card with no change; indoor outfit writes 3 new pictures for you to generate and approve.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -11968,6 +11968,11 @@
     {
      "d": "2026-11-20",
      "t": "Answer from \"Decide: Boppy's fishing rod indoors, keep it or not\": Keep the rod and creel: they are his look"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: no longer relevant - boppy has his fishing pole at all times",
+     "at": "2026-11-20T17:04:38.680Z"
     }
    ],
    "tag": "gem-polish03",
@@ -11980,7 +11985,9 @@
     "effort": "medium (three prompts edited from approved Boppy entries, steps known)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-polish03 and card t-gem-polish03 in data/board.json, history and Tom's answer included. Your first push is the commit board: start c-gem-polish03.\n\nThe question was POLISH-03 from the Gemini chapter 1 report (claude/ch1-gemini-tracker.md): Boppy's kitchen dialogue face shows his fishing rod and creel. The rod and creel are painted into every approved Boppy sheet (Art Library entries boppy-hero, boppy-walking-sheet, boppy-emotions, boppy-talk), so a crop cannot remove them.\n\nIf Tom chose to keep the rod and creel: move c-gem-polish03 to Done with a history line quoting his answer, push the board change alone with build tag board-gempolish03, and stop.\n\nIf Tom chose an indoor outfit: add three Art Library entries in the Characters tab, boppy-walking-sheet-indoor, boppy-emotions-indoor and boppy-talk-indoor. Build each from the approved entry it copies (same prompt, same layout, same references, that approved sheet attached as the reference), changing only the outfit: no fishing rod, no creel basket, no strap across the chest, hands and arms where the rod and strap were left natural. Keep the cap, vest, shirt, jeans and shoes. Follow the image prompt rules in CLAUDE.md (each thing said once, the smallest change from the version that worked) and docs/CHARACTER_PIPELINE.md. Do not run the generator. Add a Tom card with ask pictures and done_when art_approved for the three ids, blocking a new Claude card that installs them as an indoor outfit (walking, mood and talk faces swapped in every indoor room, Pose Editor manifest rebuilt, faces rebaked, the dialogue-face rule kept). Write a docs/CHANGES.md entry headed ## gem-polish03, bump the tags with bump_tags.py, run python3 tools/smoke.py and python3 tools/board_check.py, push to main.\n\nYou have my full permission to access the repo."
    },
-   "after": "t-gem-polish03"
+   "after": "t-gem-polish03",
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "c-gem-polish04",
