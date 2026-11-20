@@ -8287,6 +8287,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom answered in chat (boardwait1 session), after two fixes went the wrong way: \"Keep it, I'll re-record\". So: put \"[hungry] I'm starving!\" back in the script, list the line to record again, keep the old take playing until the new one is merged, then the subtitle gains \"I'm starving!\"."
     }
    ],
    "prompt": {
@@ -8298,7 +8302,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch1starving-3 and t-ch1starving in data/board.json, history included. Your first push is the commit board: start c-fix-ch1starving-3.\n\nTom tested and found problems:\n1. Card t-ch1starving (Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped), ask voice). He was asked: ADMIN ) VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. Reload the page first (pull down or close and reopen it). The script box must end \"Grace, I'm so sorry but number two can't wait.\" with no \"[hungry] I'm starving!\", and your other directions ([wary, disgusted, amused], [pause, very very deadpan], [very dismissive]) must still be there. If you still see \"I'm starving!\", press Something is wrong and say where (the box, the subtitle in the game, or the voice). If you meant to keep \"I'm starving!\" in the script, say so in the note. Press play: the take you kept, unchanged. Nothing to record. Then All good. He wrote: I'm starving. should not have been dropped\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:16:40.684Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch1starving to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch1starving, and give the build fix-ch1starving-3 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
-   "after": "t-ch1starving"
+   "after": "t-ch1starving",
+   "answer": "Keep it, I'll re-record"
   },
   {
    "id": "c-fix-oldchecks-voice",
