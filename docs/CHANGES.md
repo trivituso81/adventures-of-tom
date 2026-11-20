@@ -1,3 +1,7 @@
+## projclean1c (2026-11-20): progress written on card c-projclean, tools/claude_index.py added
+
+Card c-projclean, part 3. tools/claude_index.py writes claude/INDEX.md (step 6 of the card; run at the end of the clean-up). 174 Project docs are deleted from the Project after they were confirmed on origin/main; about 490 remain for the next run. Nothing in the game changes.
+
 ## projclean1b (2026-11-20): 74 more Project docs copied into claude/, word for word
 
 Card c-projclean, part 2: Project docs 126 to 205 (newest first). Left in the Project because they hold Tom's full street address: story-ch08.md, story-ch08-rejected.md, story-ch08-brief.md, story-ch06.md, bernadette-rewrite.md, comedy-bible.md. report-audit.md not copied yet (a tool refused its name). Nothing in the game changes.

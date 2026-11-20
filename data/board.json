@@ -13134,7 +13134,7 @@
    "theme": "Project Ops",
    "tag": "projclean1",
    "title": "Move the Project docs into the repo (Project is 97% full)",
-   "next": "Waits on Tom card t-projclean-run. Runs only in a conversation inside the Project (needs project_read and project_delete); START has no Project, and the first try was stopped twice by a safety classifier while forks copied docs.",
+   "next": "Part done 2026-11-20 (projclean1a, 1b): 205 of 665 Project docs copied to the repo; 174 confirmed on origin/main and deleted from the Project. About 490 docs are left in the Project. The next run continues from the oldest remaining doc (the prompt is safe to run again: it skips what is already in claude/). Left in the Project on purpose (they spell out Tom's full street address): story-ch08.md, story-ch08-rejected.md, story-ch08-brief.md, story-ch06.md, bernadette-rewrite.md, comedy-bible.md. Copied but not yet deleted, waiting on a full compare against the Project text: bestiary-v10.1.md, story-next.md, story-ch02-draft4.md, story-line-rules.md, story-engine-capabilities.md, animation-chapter-plan.md, animation-tool-test-pack1.md, battle-build.md, next-addendum-ch1rebuild1.md, pose-editor-plan.md, pose-editor-poseedit2.md, anim-test v2/v3 clip prompts. report-audit.md not copied (the Write tool refused its name: copy it with Bash). tools/claude_index.py is in the repo for step 6. Steps 7 to 9 not done yet. Runs only in a conversation inside the Project: open a new conversation in the Little Elsewhere Project and paste this card's prompt, Sonnet 5.5, effort medium.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -13185,6 +13185,10 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as projclean1b: 74 more Project docs copied into claude/, word for word"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "projclean1a and 1b shipped from a conversation inside the Project: 205 docs copied, 174 deleted from the Project. Stopped at a safe point because the conversation got long; card stays In progress."
     }
    ],
    "chat": {
@@ -14075,7 +14079,7 @@
    "lane": "claude",
    "col": "prog",
    "ask": "setup",
-   "next": "Claude cannot do this from START: this run has no Project tools (project_info, project_read, project_delete), the same block as before. Only a conversation opened inside the Little Elsewhere Project has them. Open a new conversation inside that Project, paste the prompt from card c-projclean (it is safe to run again), and approve push access if asked.",
+   "next": "Open a new conversation inside the Little Elsewhere Project, paste the prompt from card c-projclean (Sonnet 5.5, effort medium) and approve push access if asked. It picks up where the last run stopped (about 490 docs left).",
    "blocks": [
     "c-projclean"
    ],
@@ -14111,6 +14115,10 @@
     {
      "d": "2026-11-20",
      "t": "Started inside the Little Elsewhere Project with push access (Tom approved). Running the clean-up here."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "First run inside the Project moved 174 docs. The rest needs one or two more runs from the same prompt."
     }
    ],
    "chat": {
