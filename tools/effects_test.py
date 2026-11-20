@@ -19,11 +19,7 @@ with sync_playwright() as p:
         pg = b.new_page(viewport=vp); errs = []
         pg.on('pageerror', lambda e: errs.append(str(e)))
         pg.goto('http://127.0.0.1:%d/effects.html' % port); pg.wait_for_timeout(1500)
-<<<<<<< HEAD
-        ok(pg.locator('#list .card').count() == 14, name + ': 14 effects listed')
-=======
-        ok(pg.locator('#list .card').count() == 16, name + ': 16 effects listed (listen1 added the listening and thinking pose)')
->>>>>>> bb5c8a0 (idea-implementlisteni: listener poses (wip))
+        ok(pg.locator('#list .card').count() == 15, name + ': 15 effects listed (listen1 added the listening and thinking pose)')
         ok(pg.evaluate('document.documentElement.scrollWidth<=innerWidth+1'), name + ': no sideways scroll')
         ok(pg.evaluate('lifeSquashScale(.33)<.95&&lifeSquashScale(1)===1&&lifeHopLift(.15)>7.9'), name + ': shared curves')
         ok(pg.evaluate('document.getElementById("stage").getContext("2d").getImageData(0,0,340,300).data.some((v,i)=>i%4==3&&v>0)'), name + ': figure drawn')
