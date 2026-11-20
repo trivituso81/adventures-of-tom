@@ -17268,29 +17268,6 @@
    ],
    "created": "2026-11-20",
    "changed": "2026-11-20"
-  },
-  {
-   "id": "svc-clip-gen",
-   "service": "clip-gen",
-   "lane": "xai",
-   "col": "prog",
-   "theme": "Tools",
-   "title": "clip-gen is running",
-   "next": "clip-gen is running",
-   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44838266001",
-   "chat": {
-    "url": "",
-    "opening": "service run"
-   },
-   "history": [
-    {
-     "d": "2026-11-20",
-     "t": "clip-gen started."
-    }
-   ],
-   "blocks": [],
-   "created": "2026-11-20",
-   "changed": "2026-11-20"
   }
  ],
  "sessions": [
