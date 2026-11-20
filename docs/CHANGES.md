@@ -1,3 +1,7 @@
+## board-b3s9a (2026-11-19): board only: the stage 9b and 9c prompts read claude/next-addendum-b3s9a.md
+
+- Cards c-b3s9b and c-b3s9c: prompt text now names the addendum that holds the stage 9 split and the skill card facts.
+
 ## board-clipresetb (2026-11-19): board only: the c-clipreset prompt cut to the task
 
 - Tom (11-19 18:13) objected that it repeated the Project instructions. No game change.
