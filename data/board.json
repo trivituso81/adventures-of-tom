@@ -6798,7 +6798,7 @@
    "title": "Watch the painted poses for the family (PAINTED STATES: CHAPTER 1)",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "animations",
    "next": "ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE > PAINTED STATES: CHAPTER 1. Watch once, about 1 minute: Tom, Grace, Rose and Deedee in turn each show idle, guard, braced hit, hit, dodge, knocked out, get up, victory and a run, with the state's name on screen. Then press Something is wrong on this card and write what looks wrong by fighter and state (head too big or small, wrong speed or distance), or All good. It blocks the card Apply your notes on the painted poses (clipposesfix).",
    "blocks": [
@@ -6810,8 +6810,13 @@
     {
      "d": "2026-11-20",
      "t": "Made by clipposes. The Lab row plays every painted state on every fighter. Battle animations are judged here only, never in a battle system session."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: Some of these are missing from the screen, like I don't see them in the battle test Sent to Claude as card c-fix-clipposes; this card waits on it and comes back to you when the fix ships."
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-clipposesfix",
@@ -8352,6 +8357,56 @@
     "effort": "medium (small fix in one file)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-boardwait1 in data/board.json. Your first push is the commit board: start c-boardwait1. Fix tools/board_sync.py so a Tom card in Waiting that no card blocks moves to Up next, add a test to tools/board_sync_test.py, clean up the stuck cards, and push as boardwait1. You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "c-fix-clipposes",
+   "tag": "fix-clipposes",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Battle Animations",
+   "title": "Fix what you found on: Watch the painted poses for the family (PAINTED STATES: CHAPTER 1)",
+   "next": "You reported a problem on Watch the painted poses for the family (PAINTED STATES: CHAPTER 1). Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: Some of these are missing from the screen, like I don't see them in the battle test",
+   "blocks": [
+    "t-clipposes"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T08:26:38.640Z",
+     "card": "t-clipposes",
+     "title": "Watch the painted poses for the family (PAINTED STATES: CHAPTER 1)",
+     "ask": "animations",
+     "words": "Some of these are missing from the screen, like I don't see them in the battle test",
+     "shot": "",
+     "asked": "ADMIN ) BATTLE LAB ) pick a difficulty ) NEW BATTLE ) PAINTED STATES: CHAPTER 1. Watch once, about 1 minute: Tom, Grace, Rose and Deedee in turn each show idle, guard, braced hit, hit, dodge, knocked out, get up, victory and a run, with the state's name on screen. Then press Something is wrong on this card and write what looks wrong by fighter and state (head too big or small, wrong speed or distance), or All good. It blocks the card Apply your notes on the painted poses (clipposesfix)."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-clipposes"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-clipposes."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-clipposes: Some of these are missing from the screen, like I don't see them in the battle test"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Watch the painted poses for the family (PAINTED STATES: CHAPTER 1).",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: animations are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-clipposes and t-clipposes in data/board.json, history included. Your first push is the commit board: start c-fix-clipposes.\n\nTom tested and found problems:\n1. Card t-clipposes (Watch the painted poses for the family (PAINTED STATES: CHAPTER 1), ask animations). He was asked: ADMIN ) BATTLE LAB ) pick a difficulty ) NEW BATTLE ) PAINTED STATES: CHAPTER 1. Watch once, about 1 minute: Tom, Grace, Rose and Deedee in turn each show idle, guard, braced hit, hit, dodge, knocked out, get up, victory and a run, with the state's name on screen. Then press Something is wrong on this card and write what looks wrong by fighter and state (head too big or small, wrong speed or distance), or All good. It blocks the card Apply your notes on the painted poses (clipposesfix). He wrote: Some of these are missing from the screen, like I don't see them in the battle test\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:26:38.640Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-clipposes to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-clipposes, and give the build fix-clipposes a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-clipposes"
   }
  ],
  "sessions": [
