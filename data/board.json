@@ -14135,7 +14135,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFEfHJ4Qb2GBqAXJFo",
+    "url": "https://claude.ai/code/session_01RXeukFovXouovpUQ7r3YLo",
     "opening": "Something is wrong on t-heist1play"
    },
    "history": [
@@ -14166,6 +14166,10 @@
     {
      "d": "2026-11-20",
      "t": "Reopened by the session that took Tom's own request (the Project plan claude/heist-fix5-plan.md, written from his 09:46 recording). The earlier auto run retired this card because the board report held no fault in words; the fault is in the recording and the plan lists it in eight rows."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -14912,6 +14916,16 @@
    "tags": [],
    "cards": [
     "c-gatezero"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFovXouovpUQ7r3YLo",
+   "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
+   "first": "2026-11-20T10:02:24-08:00",
+   "last": "2026-11-20T10:03:15-08:00",
+   "tags": [],
+   "cards": [
+    "c-fix-heist1play-5"
    ]
   },
   {
@@ -16346,8 +16360,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "bdc9a7d5b7aab15bbf6bc420a385a05d347488c3",
- "synced_at": "2026-11-20T18:02:05+00:00",
+ "synced": "43e3703448cf232702d0c3ee004afa1cb8e8eb27",
+ "synced_at": "2026-11-20T18:03:30+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
