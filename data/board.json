@@ -9816,7 +9816,7 @@
   {
    "id": "t-heist1play",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Story and Dialogue",
    "ask": "play",
    "fyi": true,
@@ -9873,9 +9873,12 @@
     {
      "d": "2026-11-20",
      "t": "fix-heist1play-4 shipped: held pan scaled to match the counter pan, hop down lands clear of the stool. Back to Tom to check both."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "t-heist1voice",
@@ -13070,7 +13073,7 @@
    "id": "c-fix-heist1play-4",
    "tag": "fix-heist1play-4",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
@@ -13122,6 +13125,10 @@
     {
      "d": "2026-11-20",
      "t": "Fixed the pan size and the hop landing; built fix-heist1play-4. Next: Tom checks on t-heist1play."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-heist1play-4: The mud blob's held pan matches the counter pan, and it lands clear of the stool when it hops down"
     }
    ],
    "prompt": {
@@ -13135,7 +13142,8 @@
    },
    "after": "t-heist1play",
    "auto": true,
-   "started_at": "2026-11-20T17:20:04+00:00"
+   "started_at": "2026-11-20T17:20:04+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "t-effectslook",
@@ -13328,8 +13336,10 @@
    "url": "https://claude.ai/code/session_01RXeukDQX4RSnRr3Nh858L3",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
    "first": "2026-11-20T17:20:45Z",
-   "last": "2026-11-20T17:20:45Z",
-   "tags": [],
+   "last": "2026-11-20T17:28:08Z",
+   "tags": [
+    "fix-heist1play-4"
+   ],
    "cards": [
     "c-fix-heist1play-4"
    ]
@@ -14978,8 +14988,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "d79e3c2b97da86a162f2c0dcbb6bb5a2cf044e37",
- "synced_at": "2026-11-20T17:27:24+00:00",
+ "synced": "4b2461627232376d27b51a3cbefc2662ba53194a",
+ "synced_at": "2026-11-20T17:28:53+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
