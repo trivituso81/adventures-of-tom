@@ -1076,6 +1076,10 @@
     {
      "d": "2026-11-19",
      "t": "Card text split into a short summary plus numbered steps, because the board showed one run-on paragraph. Tom: \"your foramtting doesnt carry over to the card\"."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: \"what is the fire URL? i see nothing to copy\". Step now says where the plus sign is and what the Fire URL and token look like, with a fallback after Create."
     }
    ],
    "steps": [
@@ -1083,8 +1087,8 @@
     "Name: type Board START.",
     "Prompt box: tap Copy this text (below the steps) and paste it into the big prompt box.",
     "Model picker at the bottom right of the prompt box: Sonnet 5.5 and Medium are already right. Leave it.",
-    "Trigger row: it starts as Schedule, Daily, 09:59. Change it so the only trigger is API (open the Schedule dropdown and pick API, or tap + and pick API, then remove Schedule). Do not leave the daily schedule on: it would start a run every morning with no card.",
-    "In the API panel, copy the Fire URL. Tap Generate token and copy the token right away: it is shown only once.",
+    "Trigger row: look at the far right end of that row, where there is a plus sign (+). Tap it and pick API from the little menu. A new box appears in that row. If the Schedule, Daily, 09:59 part can be removed, remove it, so API is the only trigger. Do not leave the daily schedule on: it would start a run every morning with no card.",
+    "In that API box, the Fire URL is a long web address starting with https://api.anthropic.com. Tap the copy icon next to it, or select it and copy it, and paste it somewhere you can find it (Notes works). Then tap Generate token. A box titled Token generated appears: copy the token into Notes too, now, because it is shown only once. If no API box appears before you create the task, skip ahead: tap Create, then open the new task from the list, tap the menu next to its name, choose Edit, and do this same plus sign and API step there.",
     "Advanced settings: Repository should say trivituso81/adventures-of-tom and Cloud environment Default is fine. If there is a switch that lets runs push to branches other than claude/, turn it on.",
     "Tap Create.",
     "On github.com open the repo, then Settings > Secrets and variables > Actions > New repository secret. Add CLAUDE_TASK_SONNET_MEDIUM_URL (the Fire URL) and CLAUDE_TASK_SONNET_MEDIUM_TOKEN (the token).",
