@@ -7297,8 +7297,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (1 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100555-mxvd. First note: We need new frames for this art because it doesn't match the style of the game for the monster, I me",
+   "title": "Fix the report backlog (3 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100555-mxvd, r-20261120-000755-3h9p, r-20261120-000831-h5tq. First note: We need new frames for this art because it doesn't match the style of the game for the monster, I me",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -7332,11 +7332,15 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "The backlog now holds 3 report(s)."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-19"
+   "changed": "2026-11-20"
   },
   {
    "id": "c-boardux1",
@@ -7900,7 +7904,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukELyGq8ErEuz6apg1x",
+    "url": "https://claude.ai/code/session_01RXeukELyGq8ErEuz6apg1x",
     "opening": "Something is wrong on t-oldchecks"
    },
    "history": [
@@ -7919,6 +7923,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -7966,6 +7974,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukELyGq8ErEuz6apg1x",
+   "title": "Fix what you found on: Older phone checks, when you next play (none block anything)",
+   "first": "2026-11-20T08:07:54Z",
+   "last": "2026-11-20T08:07:54Z",
+   "tags": [],
+   "cards": [
+    "c-fix-oldchecks"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukEz9uEZbuikuqZGDHC",
    "title": "Open the right Art, Voice or Music Library entry straight from a card (cardlinks1)",
@@ -8216,6 +8234,16 @@
    "cards": [
     "c-starttest",
     "c-copydocs"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGsiGYgETpYemWpMgR",
+   "title": "Give BOARD and ADMIN their own favicon and Home Screen icon (adminicons1)",
+   "first": "2026-11-20T00:08:07-08:00",
+   "last": "2026-11-20T00:08:07-08:00",
+   "tags": [],
+   "cards": [
+    "c-adminicons1"
    ]
   },
   {
@@ -8802,7 +8830,9 @@
    "r-20261114-101538-nre4",
    "r-20261114-104915-g4gl",
    "r-20261114-162358-jykk",
-   "r-20261114-182326-95v4"
+   "r-20261114-182326-95v4",
+   "r-20261120-000755-3h9p",
+   "r-20261120-000831-h5tq"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -8822,8 +8852,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "fffe1900312919319549d735462fecc608ad5235",
- "synced_at": "2026-11-20T08:07:23+00:00",
+ "synced": "6a89e7ba82b19d47546bef907ec5de3fa82d3465",
+ "synced_at": "2026-11-20T08:09:00+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
