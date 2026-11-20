@@ -27243,7 +27243,7 @@
    "promptRev": 1
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -27275,6 +27275,13 @@
      "from": "review",
      "at": 1795125271633,
      "rev": 0
+    },
+    {
+     "date": "2026-11-20",
+     "note": "Flashing",
+     "from": "review",
+     "at": 1795161441387,
+     "rev": 1
     }
    ],
    "id": "clip-toad-idle",
