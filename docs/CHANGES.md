@@ -1,3 +1,8 @@
+## adminicons1 (2026-11-20): ADMIN and BOARD each have their own tab icon and Home Screen icon
+
+- Card c-adminicons1. Tom: "The board and admin urls need their own unique favicon and iPhone Home Screen images. There can be generic". ADMIN is a gold gear, BOARD is three gold, green and blue columns of cards, both on the game's dark purple. Files `icon-admin-180.png`, `icon-admin-32.png`, `icon-board-180.png`, `icon-board-32.png`, linked in each page head (`apple-touch-icon` and `icon`). The game and the other pages keep `icon-v10.png`.
+- Not done: an already installed Home Screen app keeps its old icon until it is removed and added again.
+
 ## attn1 (2026-11-20): Needs attention fixes itself or comes back to you
 
 - Card c-attn1, plan claude/attn-plan.md. Board-sync rule R11 (the plan calls it R10): every flagged card gets one automatic move within the hour. Free: waits on a finished card goes to Up next (started if `auto`), a Shipped note whose heading is in this file closes the card, START failed is tried once more then becomes the For you card Start this by hand, a failed service run is re-run once, out of credit becomes a For you card. Rescue: quiet (2 hours for cards started by START, 6 otherwise), ended without shipping, a second service failure, or a Shipped note with no heading fire one Board START session (Sonnet 5.5, medium). Limits: 1 rescue per card, 4 a day oldest first, none with an open blocker, a backlog card or Tom's note under 6 hours old. A second stall makes one For you card Stuck twice (ask unstick: Start again, Not needed).
