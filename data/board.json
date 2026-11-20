@@ -16216,8 +16216,14 @@
     {
      "d": "2026-11-20",
      "t": "Created by c-keysecrets1 (plan: claude/keysecrets-plan.md)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped START.",
+     "at": "2026-11-20T21:22:42.146Z"
     }
-   ]
+   ],
+   "start": true
   },
   {
    "id": "c-keysecrets4",
