@@ -16515,7 +16515,7 @@
    "title": "Record the 3 new lines now in the Voice Library",
    "theme": "Voice Clips",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "voice",
    "fyi": true,
    "next": "ADMIN > VOICE LIBRARY > Show > No clip yet. Make and keep a take for Sal's \"You got it, kid...\", Tom's \"Thanks for the JFK pickup, Sal.\" and Tom's \"Mom, wait. Bosses hit in a pattern...\", then press Send my takes to Claude. From now on new lines appear there by themselves a few minutes after they ship.",
@@ -16541,8 +16541,14 @@
     {
      "d": "2026-11-20",
      "t": "Added with c-voiceauto1."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-20T21:42:18.656Z"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "c-idea-skippingscene",
