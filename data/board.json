@@ -15822,7 +15822,7 @@
    "id": "c-permwording1",
    "tag": "permwording1",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Project Ops",
    "title": "Make card prompts use the wording the repo check accepts",
    "next": "Build: every prompt the board writes ends with one exact sentence that the repo permission check accepts, so Tom never has to retype it. Copy the prompt on this card into a new conversation in the Project on Claude Sonnet 5.5, effort medium.",
@@ -15830,7 +15830,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukFtsSRVAYExWvAe8An",
+    "url": "https://claude.ai/code/cse_01RXeukE1egNAF5Bcb9RuE5E",
     "opening": "\"why do i have to say full repo access granted every time i make a prompt\""
    },
    "history": [
@@ -15842,6 +15842,10 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-20T20:51:33.770Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -15854,7 +15858,7 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-permwording1 in data/board.json, history included. Your first push is the commit board: start c-permwording1.\n\nWhy: on 2026-11-20 the permission check (the Claude Code auto mode classifier) refused add_repo when Tom's message said \"full repo access granted\" and allowed it on the first try when his message said \"Attach trivituso81/adventures-of-tom with push access.\" The classifier lets an action through only when the user's message names that exact action; a general sentence does not count. Every prompt the board writes ends with the general sentence \" You have my full permission to access the repo.\" (const PERM in board.html and board_sync.py), so it can be refused.\n\nWhat to build: replace that sentence everywhere the board or a doc writes it with the exact-action sentence \"Attach trivituso81/adventures-of-tom with push access (add_repo).\": const PERM in board.html and tools/board_sync.py; the tests that assert the old sentence (tools/board_test.py, tools/board_newcard_test.py); claude/handoff-rules.md and the repo CLAUDE.md (one line saying why); the prompt text of every open Claude card in data/board.json. Do not touch Done cards or fixtures. Keep the change to the sentence only. Run python3 tools/board_test.py /tmp/board, python3 tools/board_newcard_test.py, python3 tools/board_sync_test.py and python3 tools/board_check.py, then push per claude/next.md. Tell Tom the first line of every prompt he pastes now ends with the new sentence. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "after": "nothing for Tom: end",
-   "start": true
+   "started_at": "2026-11-20T20:52:23+00:00"
   }
  ],
  "sessions": [
@@ -17937,8 +17941,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "d04d27b980eb48ff55d7da07584184931165a0bc",
- "synced_at": "2026-11-20T20:48:51+00:00",
+ "synced": "005bfc56de73f2be6b2dcb5c1c7706cd101dbedd",
+ "synced_at": "2026-11-20T20:52:24+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
