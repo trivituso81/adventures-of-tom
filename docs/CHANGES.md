@@ -1,3 +1,10 @@
+## fix-battlelabpagetry (2026-11-20): The Battle Lab page 404 was the site not yet updated; no code change
+
+Tom (11-20, t-battlelabpagetry): "still getting 404".
+
+- Cause (fact): `battle-lab.html` is on `main` (shipped in `battlelabpage`). Tom tapped at 17:53:15 UTC; the publish run for that build finished at 17:53:56 UTC, so the live site did not have the page yet. Later publishes have all succeeded.
+- No code change. Next step on his card: open the same address again now.
+
 ## battlelabpage (2026-11-20): The Battle Lab has its own page and address
 
 Tom (11-20): "create a dedicated page with it's own URL for the Battle Lab".

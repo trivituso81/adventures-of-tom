@@ -13925,7 +13925,7 @@
    "lane": "tom",
    "ask": "play",
    "fyi": true,
-   "next": "On your iPhone open https://trivituso81.github.io/adventures-of-tom/battle-lab.html in Safari, tap Share, Add to Home Screen. Open it from the home screen: it should go straight to the difficulty choice, then the Battle Lab fights. All good, or Something is wrong.",
+   "next": "Your 404 came about 40 seconds before the site finished updating, so the page did not exist yet. Open https://trivituso81.github.io/adventures-of-tom/battle-lab.html in Safari again. You should see 'Battle Lab' for a moment, then the difficulty choice. If it still says 404, tap Something is wrong again. If it opens, tap Share, Add to Home Screen and open it from there. All good, or Something is wrong.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -13942,6 +13942,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: still getting 404 Sent to Claude as card c-fix-battlelabpagetry; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T17:53:15.731Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Claude fix c-fix-battlelabpagetry: the 404 was before the site finished publishing (page on main, publish finished 40 seconds after your tap). No code change; please try again."
     }
    ],
    "col": "wait",
