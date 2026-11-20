@@ -239,6 +239,7 @@ function splashSetMode(mode,sel=0) {
   const hn=M.head||0;   // the first hn choices sit in a top bar above the list (the chapter list: BACK and the difficulty toggles)
   box.classList.toggle('grid',!M.layout&&list.length-hn>3);
   box.classList.toggle('launch',M.layout==='launch');
+  $('splash-panel').classList.toggle('launch',M.layout==='launch');   // welcomefit1: the frame shrinks to the buttons
   const btn=(c,i)=>'<button class="sp-choice'+(c.cls?' '+c.cls:'')+'" data-i="'+i+'"'+(c.diff?' data-diff="'+c.diff+'"':'')+(c.label?' aria-label="'+c.label+'" title="'+c.label+'"':'')+' type="button"'+(c.cls==='locked'?' aria-disabled="true"':'')+'><span class="sp-name">'+c.name+(c.title?'<span class="sp-ttl">'+c.title+'</span>':'')+'</span>'+(c.cast&&c.cast.length?'<span class="sp-cast">'+c.cast.map(id=>'<img src="'+(PORTRAITS[id]||'portraits/'+id+'.png')+'" alt="'+id+'" title="'+id+'" decoding="sync">').join('')+'</span>':'')+(c.sub?'<span class="sp-sub">'+c.sub+'</span>':'')+'</button>';
   let head=el.querySelector('.sp-head');
   if(!head) { head=document.createElement('div'); head.className='sp-head'; box.parentNode.insertBefore(head,box); splashWire(head); }

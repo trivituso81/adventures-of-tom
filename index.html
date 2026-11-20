@@ -541,6 +541,9 @@ html.landscape #splash .sp-text{margin-bottom:6px;font-size:12px;line-height:1.3
 html.landscape #splash .sp-main .sp-choice{padding:7px 20px}
 html.landscape #splash .sp-tools .sp-choice{width:34px;height:34px}
 html.landscape #splash .sp-tools .sp-ico{width:17px;height:17px}
+/* welcomefit1 (Tom report r-20261120-130739-tr1a): on the welcome page the frame is only as wide as NEW GAME, LOAD and the two icon buttons, centred */
+#splash #splash-panel.launch,html.landscape #splash #splash-panel.launch{left:50%;right:auto;width:max-content;max-width:92%;transform:translateX(-50%);padding-left:16px;padding-right:16px}
+#splash #splash-panel.launch .sp-choices.launch{justify-content:center;gap:14px}
 /* idea-welcomepage: the chapter list's top bar, BACK on the left and the Easy, Medium, Hard toggles beside it (it stays put while the chapters scroll). */
 #splash .sp-head{display:flex;flex:none;gap:6px;margin:0 0 8px}
 #splash .sp-head[hidden]{display:none}
@@ -1998,7 +2001,7 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/ch18-render.js"></script>
 <script src="engine/ch19-render.js"></script>
 <script src="engine/ch20-render.js"></script>
-<script src="engine/splash.js?v=builds1"></script>
+<script src="engine/splash.js?v=reports-2026-11-20a"></script>
 <script src="engine/splash-edit.js?v=adminhub1"></script>
 <!-- Battle 3: the v11 battle system, loaded beside battle 2 (docs/BATTLE3.md). Data, then the rules (no drawing), then the screen. -->
 <script src="data/b3-rules.js?v=b3s4"></script>
@@ -2058,13 +2061,13 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/emotions.js?v=idea-implementlisteni"></script>
 <script src="engine/script-edits.js?v=scripted2"></script><!-- Script Editor overlay: Tom's line edits applied before a scene plays (script.html) --><!-- mood faces and poses in story dialogue (batch 0: chapter 1) -->
 <script src="engine/tapwalk.js?v=bossbig1"></script><!-- tap to walk -->
-<script src="data/build-history.js?v=fix-keysecrets2-try"></script><!-- build names and times (tools/build_history.py) -->
+<script src="data/build-history.js?v=reports-2026-11-20a"></script><!-- build names and times (tools/build_history.py) -->
 <script src="engine/build-history.js?v=builds3"></script><!-- build label on the welcome screen and menu, tap for the build history -->
 <script src="engine/amber-spots.js?v=gem-canon08"></script><!-- orange blocks left behind are solid and answer A (amberspot1) -->
 <script src="engine/block-break.js?v=ch7t1"></script><!-- breaking an orange block: coin, cracks, colour ring, shrink-back, encounters off (ch6build stage 2) -->
 <script src="engine/scene-props.js?v=fix-heist1play-4"></script><!-- drawn stand-in props a scene can put on a map: the chart, Rose rolled up, the gold ball, bulbs (ch7build stage 2) -->
 <script src="engine/video-call.js?v=ch6s4"></script><!-- the video call at the end of chapter 6: Long Island seen from Tom's porch (ch6build stage 4) -->
-<script src="engine/main.js?v=fix-keysecrets2-try"></script>
+<script src="engine/main.js?v=reports-2026-11-20a"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js?v=adminvol1"></script>

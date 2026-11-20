@@ -55,7 +55,7 @@ jobs:
           RUN_URL: ${{ github.event.workflow_run.html_url }}
         run: |
           if [ "$ACTION" = "requested" ]; then ev=start; detail="$NAME is running"
-          elif [ "$CONCLUSION" = "success" ]; then ev=end; detail=""
+          elif [ "$CONCLUSION" = "success" ] || [ "$CONCLUSION" = "skipped" ]; then ev=end; detail=""   # skipped: an if: kept every job from running, not a failure
           else ev=fail; detail="finished as $CONCLUSION"; fi
           human=""
           if [ "$NAME" = "voice-gen" ] && [ "$ev" = "end" ]; then

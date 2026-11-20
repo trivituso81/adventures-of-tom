@@ -14269,12 +14269,12 @@
   {
    "id": "t-welcomepage-play",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Game Shell",
    "ask": "play",
    "fyi": true,
    "title": "Check the new welcome buttons and chapter list top bar",
-   "next": "Open the game from your home screen. If you still see the old buttons, close the app and open it again once. On the welcome page check: 1) NEW GAME and LOAD are only as wide as their words and the same width as each other; 2) RELOAD and ADMIN are small icons at the right. Tap NEW GAME and check: 3) BACK with an arrow is top left, with EASY, MEDIUM, HARD to its right and a few words under each, all inside the frame; the lit one is your difficulty; 4) tap HARD, then MEDIUM, and the lit one follows; 5) tap a chapter and it starts at once: no difficulty page and no Start New warning, even though you have a save. Turn the game to landscape and look at both screens again. All good if it looks and works like that; if a button is cut off or hard to tap, press Something is wrong and say which one.",
+   "next": "Open the game from your home screen (close and reopen it once if you see the old look). On the welcome page the Choose how to play frame is only as wide as NEW GAME, LOAD and the two round icon buttons, and sits in the middle of the screen, in portrait and landscape. Then tap NEW GAME and check the chapter list top bar.",
    "first": "Wait for The welcome page buttons and chapter list difficulty bar to ship (builds idea-welcomepage and idea-welcomepage2).",
    "blocks": [],
    "created": "2026-11-20",
@@ -14298,9 +14298,12 @@
      "d": "2026-11-20",
      "t": "Updated by c-idea-welcomepage (build idea-welcomepage2): a chapter now also starts with no Start New warning.",
      "at": "2026-11-20T17:54:36.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Back to Tom: welcomefit1 built his report r-20261120-130739-tr1a."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-battlelabpage",
@@ -14499,7 +14502,7 @@
    "id": "c-fix-welcomepage-play",
    "tag": "fix-welcomepage-play",
    "lane": "claude",
-   "col": "wait",
+   "col": "done",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Check the new welcome buttons and chapter list top",
@@ -14556,6 +14559,10 @@
     {
      "d": "2026-11-20",
      "t": "Queued behind Tom card t-welcomepage-request: the request Tom added lives in another conversation that a fix session cannot read."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Retired: Tom's welcome page request came in as pencil report r-20261120-130739-tr1a (\"the choose how to play frame width should be shrunken so that it fits only new game load and the two icon buttons. it should remain centered.\"), built as welcomefit1 under c-reports-5."
     }
    ],
    "prompt": {
@@ -14570,7 +14577,7 @@
    "after": "t-welcomepage-play",
    "auto": true,
    "started_at": "2026-11-20T17:53:24+00:00",
-   "waiting_on": "tom"
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-battlelabpagetry",
@@ -15645,10 +15652,15 @@
    "id": "c-reports-5",
    "tag": "reports-2026-11-20",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "theme": "Game Shell",
+<<<<<<< HEAD
    "title": "Fix the report backlog (1 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-113001-w756. First note: rose facing the wrong way",
+=======
+   "title": "Fix the report backlog (2 open)",
+   "next": "welcomefit1 fixed report r-20261120-130739-tr1a. Report r-20261120-113001-w756 (\"rose facing the wrong way\", chapter 1, kitchen at the grands house) waits on Tom card t-rose-facing.",
+>>>>>>> 58bf153 (reports-2026-11-20a: welcome frame fits its buttons (report tr1a); skipped runs are not failures; Rose facing to Tom)
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -15687,14 +15699,19 @@
     },
     {
      "d": "2026-11-20",
+<<<<<<< HEAD
      "t": "The backlog now holds 1 report(s)."
+=======
+     "t": "Shipped welcomefit1 (report tr1a). Queued behind Tom card t-rose-facing for the Rose report."
+>>>>>>> 58bf153 (reports-2026-11-20a: welcome frame fits its buttons (report tr1a); skipped runs are not failures; Rose facing to Tom)
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "started_at": "2026-11-20T19:42:40+00:00",
-   "quiet": true
+   "waiting_on": "tom",
+   "after": "t-welcomepage-play"
   },
   {
    "id": "t-listen1-play",
@@ -16475,7 +16492,7 @@
    "title": "Type the welcome page change you want",
    "theme": "Game Shell",
    "lane": "claude",
-   "col": "wait",
+   "col": "done",
    "ask": "setup",
    "next": "Tap + New card on the board. Type the change you want to the welcome page in one or two sentences (which screen, which button, what it should do). Claude builds it from that card. Nothing else is needed.",
    "blocks": [
@@ -16510,6 +16527,10 @@
      "d": "2026-11-20",
      "t": "ended without shipping: the request Tom wrote in the other conversation cannot be read from a card session, and his note \"i dont understand what i need to do\" has no change in it. Nothing was changed. Rewrote next: Tom types the change into + New card.",
      "at": "2026-11-20T21:35:00.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Retired: Tom's welcome page request came in as pencil report r-20261120-130739-tr1a (\"the choose how to play frame width should be shrunken so that it fits only new game load and the two icon buttons. it should remain centered.\"), built as welcomefit1 under c-reports-5."
     }
    ],
    "tag": "t-welcomepage-request",
@@ -16524,7 +16545,7 @@
     "text": "Read claude/handoff-rules.md. Tom handed you board card t-welcomepage-request with this note: i dont understand what i need to do. Work out what is needed, rewrite the card, and do it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "started_at": "2026-11-20T21:28:37+00:00",
-   "waiting_on": "tom"
+   "done": "2026-11-20"
   },
   {
    "id": "t-voiceauto1rec",
@@ -16859,8 +16880,44 @@
    },
    "after": "t-keysecrets2-try",
    "auto": true,
+<<<<<<< HEAD
    "started_at": "2026-11-20T21:57:29+00:00",
    "done": "2026-11-20"
+=======
+   "started_at": "2026-11-20T21:57:29+00:00"
+  },
+  {
+   "id": "t-rose-facing",
+   "title": "Which way should Rose face in the kitchen?",
+   "theme": "Game Shell",
+   "lane": "tom",
+   "col": "up",
+   "ask": "decide",
+   "next": "Your report \"rose facing the wrong way\" (chapter 1, the grands kitchen, Tom says \"Hi, Mom! Is that the cinnamon topping?\"): right now Rose faces left, toward Deedee. Pick which way she should face. This unblocks the card Fix the report backlog (2 open) (c-reports-5).",
+   "choices": [
+    "Toward Tom, who is talking (Recommended)",
+    "Toward the camera, at the player"
+   ],
+   "leads": [
+    "Rose turns right to look at Tom while he talks; she still faces Deedee before and after.",
+    "Rose faces front for this whole beat."
+   ],
+   "blocks": [
+    "c-reports-5"
+   ],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Needs attention sweep"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from report r-20261120-113001-w756: the note alone does not say which way is right."
+    }
+   ]
+>>>>>>> 58bf153 (reports-2026-11-20a: welcome frame fits its buttons (report tr1a); skipped runs are not failures; Rose facing to Tom)
   }
  ],
  "sessions": [
