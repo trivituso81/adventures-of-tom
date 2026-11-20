@@ -7098,9 +7098,9 @@
    "title": "Watch the family's painted battle poses",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "wait",
+   "col": "done",
    "ask": "animations",
-   "next": "ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE > PAINTED STATES: CHAPTER 1. Now each state plays once, then the run stops on a panel: the fighter and state (for example TOM: KNOCKED OUT, 6 of 36), WATCH AGAIN, an optional note, REJECT and APPROVE. Nothing plays until you answer. It always runs at 1x, and Tom no longer shows his guard pose during IDLE, HIT and DODGE. Answer all 36 (STOP leaves; your answers so far are kept, and running it again lets you finish). Each answer and note is saved for Claude as you go, so you do not need All good or Something is wrong here: this card closes by itself when every state has an answer, and your rejections go to the card Apply your notes on the painted poses. If the panel's last line says No GitHub token on this phone, follow that line once, then run it again.",
+   "next": "Not needed any more: the painted poses are not being reviewed or fixed. Battle animation goes back to video; the plan is claude/video-battle-plan.md and your next step is the card Approve the WAN proof.",
    "blocks": [
     "c-clipposesfix"
    ],
@@ -7143,22 +7143,25 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: These need to be video animations, not frames. Why did we take a step backwards in the quality by reverting to our old method after we did all of that work to figure out a way to animate the images Sent to Claude as card c-fix-clipposes-3; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T16:07:08.269Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Retired by wanplan. Tom (11-20 12:11): \"NO PAINTED POSES IN BATTLE. No hand-painted or image-generated still frames, poses or sprite sheets for any party member or monster in any battle state.\" Not needed any more: the painted poses are not being reviewed or fixed. Battle animation goes back to video; the plan is claude/video-battle-plan.md and your next step is the card Approve the WAN proof."
     }
    ],
    "done_when": {
     "poses_reviewed": "ch1"
    },
-   "waiting_on": "claude"
+   "done": "2026-11-20"
   },
   {
    "id": "c-clipposesfix",
    "title": "Apply your notes on the painted poses",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "done",
    "tag": "clipposesfix",
-   "next": "Waits on your look at card t-clipposes. Then applies your notes by the smallest change (a size number or a motion number per state) and hands the row back to you.",
+   "next": "Not needed any more: no painted pose is tuned. Replaced by the video route (claude/video-battle-plan.md, card c-wanproof).",
    "blocks": [],
    "after": "nothing for Tom: end",
    "changed": "2026-11-20",
@@ -7175,6 +7178,10 @@
     {
      "d": "2026-11-20",
      "t": "fix-clipposes-2: your answers now arrive in data/pose-review.json; the board copies your rejections and notes here when you finish."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Retired by wanplan. Tom (11-20 12:11): \"NO PAINTED POSES IN BATTLE. No hand-painted or image-generated still frames, poses or sprite sheets for any party member or monster in any battle state.\" Not needed any more: no painted pose is tuned. Replaced by the video route (claude/video-battle-plan.md, card c-wanproof)."
     }
    ],
    "prompt": {
@@ -7185,7 +7192,8 @@
     "model": "Claude Sonnet 5.5 (row B: the numbers are named in docs/BATTLE3.md \"Painted body states\" and tools/paint_state_test.py catches mistakes)",
     "effort": "medium (small edits of known numbers)",
     "text": "Read claude/handoff-rules.md, then the notes and answer on board card t-clipposes, Tom's answers in data/pose-review.json (run ch1: one APPROVE or REJECT with an optional note per fighter.state) and docs/BATTLE3.md section Painted body states. Fix each rejected state by the smallest change: one number per try, keep everything the note did not name, never warp a picture, generate nothing. A rejection with no note: ask Tom one short question on his card. Run python3 -I tools/paint_state_test.py and python3 tools/b3_test.py s8. Build tag clipposesfix. You have my full permission to access the repo."
-   }
+   },
+   "done": "2026-11-20"
   },
   {
    "id": "c-bannerhold1",
@@ -12668,11 +12676,11 @@
    "id": "c-fix-clipposes-3",
    "tag": "fix-clipposes-3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix: Watch the family's painted battle poses",
-   "next": "You reported a problem on Watch the family's painted battle poses. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: These need to be video animations, not frames. Why did we take a step backwards in the quality by reverting to our old method after we did all of that work to f",
+   "next": "Answered by the card Battle video route (wanplan): your report \"These need to be video animations, not frames\" became the standing rule, and the way back to video is claude/video-battle-plan.md. Nothing painted is fixed. If this card's own conversation is still open it should stop.",
    "blocks": [
     "t-clipposes"
    ],
@@ -12712,6 +12720,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Opus 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Retired by wanplan. Tom (11-20 12:11): \"NO PAINTED POSES IN BATTLE. No hand-painted or image-generated still frames, poses or sprite sheets for any party member or monster in any battle state.\" Answered by the card Battle video route (wanplan): your report \"These need to be video animations, not frames\" became the standing rule, and the way back to video is claude/video-battle-plan.md. Nothing painted is fixed. If this card's own conversation is still open it should stop."
     }
    ],
    "prompt": {
@@ -12725,7 +12737,7 @@
    },
    "after": "t-clipposes",
    "started_at": "2026-11-20T18:00:30+00:00",
-   "quiet": true
+   "done": "2026-11-20"
   },
   {
    "id": "t-gem-bug01play",
@@ -15677,7 +15689,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "wanplan",
-   "next": "In progress in the chat that opened with the rule NO PAINTED POSES IN BATTLE. It records the rule, finds out why the WAN video route was dropped, compares the ways to run WAN by API against xAI, and writes the proof plan for Grace's guard. It spends nothing and stops for your approval.",
+   "next": "Done, $0 spent, no game change. The rule NO PAINTED POSES IN BATTLE is in CLAUDE.md and claude/canon-addendum.md. Finding: WAN was dropped because it could only be run by hand in Sorceress at 70 cents a clip, not for quality; the family batch you rejected was made on the cheapest Grok model from a small battle-sheet drawing. Recommendation: Wan 3.0 through fal.ai for the family (50 cents a clip), xAI Grok lite stays for monsters. The proof plan for Grace's guard (54 cents expected, $2 cap) is claude/video-battle-plan.md section 4. Your card: Approve the WAN proof.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -15693,6 +15705,18 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Why WAN was dropped (claude/animation-tool-test-exam.md, \"THE CALL\"): \"Grok lite first, Grok full second, Wan 3.0 third (not on the xAI API: Sorceress by hand)\". No direct Wan API price was found on 11-17; one exists now. Wan passed on Rose (Tom: \"the animation looks fantastic\") and was never tried again."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Prices read 11-20 for a 5 second 720p clip: Wan 3.0 on fal.ai $0.50, Alibaba Model Studio $0.41 to $0.50, Replicate $0.50, xAI Grok 1.5 $0.70, Grok lite $0.15, Sorceress by hand $0.70. Recommended mix for chapter 1: about $59; whole game about $246 (estimates, 1.5 tries a clip)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Retired t-clipposes, c-clipposesfix and c-fix-clipposes-3 (painted pose review and fixes). Made t-wanproof-setup and c-wanproof. Nothing generated, no painted state removed yet: each goes when its video exists."
     }
    ],
    "prompt": {
@@ -15703,6 +15727,64 @@
     "model": "Claude Fable 5.2 (row E, condition 3: the conversation Tom opened runs on it)",
     "effort": "medium (research and a written plan, no build)",
     "text": "Read claude/handoff-rules.md and card c-wanplan in data/board.json with its history. Record the rule NO PAINTED POSES IN BATTLE in claude/canon-addendum.md and CLAUDE.md, find out from the board and the claude/ docs why the WAN video route was dropped, compare the API routes for WAN against xAI, and write the proof plan for Grace's guard into claude/video-battle-plan.md. Spend nothing and stop for Tom's approval. Your first push is the commit board: start c-wanplan. You have my full permission to access the repo."
+   },
+   "after": "t-wanproof-setup"
+  },
+  {
+   "id": "t-wanproof-setup",
+   "title": "Approve the WAN proof: make a fal.ai key (5 minutes)",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "setup",
+   "next": "Doing this card is your approval of the Grace guard video proof: 54 cents expected, never more than $2. 1. On fal.ai, sign in and add $10 of prepaid credit (the spend can never pass what you load). 2. On fal.ai, create an API key and copy it. 3. On GitHub, open the repo trivituso81/adventures-of-tom, then Settings, Secrets and variables, Actions, New repository secret. Name it FAL_KEY, paste the key, Add secret. 4. Tap I did this. Then the card Build the Grace guard video proof is ready: open it, Copy prompt, paste into a new conversation in the Project on Claude Opus 5.5, effort high. If you do not approve, tap Not needed and say why in the note. The plan, the prompt and the prices: claude/video-battle-plan.md.",
+   "blocks": [
+    "c-wanproof"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEkFzpnNXMhJNExAwp",
+    "opening": "\"I'm extremely unhappy with the painted battle poses for the family\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by wanplan. Tom (11-20 12:11): \"Do not spend money yet. Write the exact plan for a proof clip of Grace's guard (prompt, settings, cost) and how it gets into Battle Lab in portrait and landscape, then stop for my approval.\" The plan is claude/video-battle-plan.md section 4. Nothing is generated until this card is done."
+    }
+   ]
+  },
+  {
+   "id": "c-wanproof",
+   "title": "Build the Grace guard video proof",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "tag": "wanproof",
+   "next": "Waits on your approval (card Approve the WAN proof). Then it makes Grace's large start picture and one 5 second Wan 3.0 guard video through fal.ai, checks every picture of it against the written list before you see anything, and puts it in ADMIN > BATTLE LAB > NEW BATTLE as PROOF: GRACE'S GUARD (VIDEO), tested in portrait and landscape. 54 cents expected, $2 at most.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by wanplan. Steps, the exact prompt, settings, cost and checks: claude/video-battle-plan.md section 4. Model that made the clips Tom liked on 11-17: Wan 3.0."
+    }
+   ],
+   "prompt": {
+    "what": "Builds the proof of Grace's guard as a Wan 3.0 video made through fal.ai, checks it before you see it, and puts it in the Battle Lab in portrait and landscape. Spends 54 cents expected, $2 at most, on fal only.",
+    "before": [
+     "Finish the card Approve the WAN proof: a fal.ai key with $10 of prepaid credit, saved as the GitHub repo secret FAL_KEY, then I did this.",
+     "Open a NEW conversation in the Little Elsewhere Project, choose Claude Opus 5.5 and set effort to high, then paste the prompt."
+    ],
+    "model": "Claude Opus 5.5 (row D: a video you judge by taste, and a miss costs you a review and generation money)",
+    "effort": "high (a new generator Action and a new clip playback are built in one session with no code to follow)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md, then card c-wanproof in data/board.json with its history and the note on card t-wanproof-setup. Your first push is the commit board: start c-wanproof. Build the proof exactly as section 4 of the plan says: the wan-gen Action with its stand-in test and one dry run first, then the start picture and its checks, then the guard video with the prompt in 4.3 word for word, the checks in 4.4 before Tom sees anything, the bake, the playback, the Lab row PROOF: GRACE'S GUARD (VIDEO), and the game checks in portrait and landscape. Spend at most $2.00 on fal and nothing on xAI. A check that fails gets one retry with one change; a second miss the same way is the stop-loss: tell Tom in plain words and hand him no clip. Do not make any other clip and do not remove any painted state. Build tag wanproof. End with a Tom card (ask animations) for the Lab row. You have my full permission to access the repo."
    }
   }
  ],
