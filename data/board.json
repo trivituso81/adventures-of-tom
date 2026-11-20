@@ -12136,8 +12136,8 @@
    "title": "Chapter 1 fights: HP only, no Warmth bar",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
-   "next": "Claude checks which battle-system stage covers this item and records it when its prompt is started.",
+   "col": "done",
+   "next": "Done by being covered: stage 15 of the new battle system (the chapter 1 switch) puts chapter 1 on Battle 3, which wins by HP only and has no Warmth bar or WARMTH command. Stage 23 deletes Kindness in battle.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -12158,6 +12158,10 @@
     {
      "d": "2026-11-20",
      "t": "Session started: Tom asked whether this prompt still fits the new battle system."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Checked on main a105cb2: chapter 1 still runs battle 2, which still shows the Warmth bar and the WARMTH command. Not changed there: battle 2 is replaced, not fixed. Battle 3 (v11) already wins by HP only, kindness plays after 0 HP. Covered by stage 15 (chapter 1 switch) and stage 23 (purge of Kindness in battle) of the architecture; stage 15 has no board card yet, so the report is written into claude/battle-build.md Owed for stage 15 (repo and Project). Retired."
     }
    ],
    "tag": "gem-pillar-hp",
@@ -12169,7 +12173,8 @@
     "model": "Claude Sonnet 5.5 (row C: the build plan is read against the report, nothing is built)",
     "effort": "medium (reading the build plan against the report)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-pillar-hp in data/board.json, history included. Your first push is the commit board: start c-gem-pillar-hp.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is the \"Win Condition & Enemy Bars\" row of the battle table (1.2). What the tester saw: Observed in the live build: Dual `HP` + pink `WARMTH` bar (`0/90` on Mudling, `0/350` on The Big One) with `◀ WARMTH` menu command (`\"make it laugh\"`, `\"Cheer it up with RASPBERRY, Peekaboo, Rhubarb Crisp, MOON & BACK\"`). Locked target: Pure v10 HP depletion only. Zero `Warmth` bars, zero `likes` lists, zero non-violent praise/kindness buttons (empathy beats play in post-0-HP cutscenes).\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-pillar-hp, push to main, and write the result and the next step onto the card.\n\nThe tester compared the build to Battle Spec v10; the current rules are v11 (docs/BATTLE3.md, claude/battle-build.md). Where they differ, v11 and the build plan win. Chapter 1 still runs the old B2 engine; the new engine (Battle 3) is built stage by stage and is not switched on for the story yet. Do NOT build the new engine here. Find out which stage of claude/battle-build.md switches chapter 1 over for this item. If a stage already covers it, add Tom's report to that stage's card and retire this card with a history line naming that card. If none covers it, write what is missing into claude/battle-build.md in the repo and in the Project, and say so on the card. Battle animations are out of scope (CLAUDE.md).\n\nYou have my full permission to access the repo."
-   }
+   },
+   "done": "2026-11-20"
   },
   {
    "id": "c-gem-pillar-rhubarb",
