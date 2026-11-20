@@ -2,7 +2,7 @@
 // data/bonus-nine-scoops.js — BONUS CHAPTER: Nine Scoops (claude/bonus-chapter-nine-scoops.md). Grace's ninth birthday on
 // Long Island, with Tom, Grace and Rose only. Standalone: BONUS on the title screen starts it with no Part 1 or Part 2 save
 // (chapter 21, flag `bonus`; everyone at level 5; nothing carries in or out).
-//   1. Chapter 21, the title screen start (confirmBonus, beginBonus)
+//   1. Chapter 21, the title screen start (beginBonus)
 //   2. Pixel art: the three squishies (duck, Moo-rielle, dice), the gift, the Instax, a photo, a scoop; four monsters
 //   3. Monsters: Sprinkle Gremlin, Slushie Slug, Cone Head and Brain Freeze (two-phase boss; phase 1 ends in the ICE SHELL)
 //   4. Items, props (overworld and battle), sound effects
@@ -40,13 +40,6 @@ function beginBonus() {
   intro.phase='scene';
   playScene(()=>[{card:NS,time:3.2},...SCENES.nsOpening()],{fade:.7});
 }
-window.confirmBonus=function() {
-  if(!readSave('auto')) { beginBonus(); return; }
-  titleAsk('Nine Scoops','The bonus chapter replaces the autosave once it begins. Slots 1 to 3 are kept.',[
-    {label:'START',fn:beginBonus},
-    {label:'BACK',fn:titleMenu}
-  ]);
-};
 
 // ---------- 2. Pixel art ----------
 // The four monsters are traced from Tom's Nine Scoops bestiary sheet (Oct 27 2026): 54 to 80 px, 18 colours each, boss 26.

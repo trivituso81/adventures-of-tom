@@ -45,15 +45,8 @@ function startTitle(next) {
 function titleMenu() {
   if(typeof splashReturn==='function'&&splashReturn()) return;
   openChoice('The Adventures of Tom','Start a new adventure, or load a saved one?',[
-    {label:'START NEW',fn:confirmNew},
-    {label:'LOAD',fn:loadMenu}
-  ]);
-}
-function confirmNew() {
-  if(!readSave('auto')) { beginOpening(); return; }
-  titleAsk('Start New','A new game replaces the autosave once it begins. Your numbered slots are kept.',[
     {label:'START NEW',fn:beginOpening},
-    {label:'BACK',fn:titleMenu}
+    {label:'LOAD',fn:loadMenu}
   ]);
 }
 // Load page: this device's saves, then saves from the player's other devices (engine/save-sync.js syncOthers). Opening it reads the

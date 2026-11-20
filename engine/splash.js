@@ -76,7 +76,8 @@ function openAdminPage() {
 //   admin:  DEMO / BATTLE LAB / BACK.          lab: the Battle Lab fights.
 // Chapter 1 is a true new game; later chapters fast-forward the story (engine/chapter-select.js). Part 2 chapter 11
 // continues from the newest Part 1 clear data when there is one, or test-jumps there when there is none. A chapter starts
-// as soon as it is tapped, on the difficulty picked in the top bar (idea-welcomepage: no difficulty page in between).
+// as soon as it is tapped, on the difficulty picked in the top bar (idea-welcomepage: no difficulty page in between;
+// idea-welcomepage2: no Start New warning either, even when an autosave exists: the new game replaces the autosave).
 const SPLASH_PARENT={new:'launch',admin:'launch',lab:'admin',solo:'lab'};
 // RELOAD (welcome page, left of ADMIN): a hard reload for the iPhone home-screen app, which has no refresh button and can
 // hold on to old files. It re-downloads the page and every script (skipping the big baked voice files, which rarely change),
@@ -115,15 +116,15 @@ function splashChapterChoices(from,to) {
     const built=splashBuilt(n);
     if(!built) { out.push({name:'CH '+n,title:c.title,sub:'Still being built.',cls:'locked',why:'Chapter '+n+' is still being built.'}); continue; }
     let act,sub='';
-    if(n===1) act=()=>splashGo(confirmNew);
+    if(n===1) act=()=>splashGo(beginOpening);
     else if(n===PARTS[2].from) {
       const clr=partClearSlots();
       sub=clr.length?'From your Part 1 clear data.':'Test: as if Part 1 were done.';
       // Continuing from clear data keeps the difficulty already saved there; a test jump uses the one picked in the top bar.
-      act=clr.length?()=>splashGo(()=>confirmPart2(splashNewestClear(clr))):()=>splashGo(()=>confirmChapter(n));
+      act=clr.length?()=>splashGo(()=>beginPart2(splashNewestClear(clr))):()=>splashGo(()=>chapterJump(n));
     } else {
       sub=(chselRegion(n)==='la'?'LA':'Home')+' · Lv '+CHSEL_LEVEL[n];
-      act=()=>splashGo(()=>confirmChapter(n));
+      act=()=>splashGo(()=>chapterJump(n));
     }
     out.push({name:'CH '+n,title:c.title,cast:splashChapterCast(n),sub,act});
   }
@@ -163,7 +164,7 @@ const SPLASH_MODES={
   new:{tab:'Pick a chapter',cue:'A / Enter to start. B / Esc to go back',head:SPLASH_HEAD,choices:()=>{
     const list=splashChapterChoices(PARTS[1].from,PARTS[2].to);
     list.push({name:'BONUS',title:'Nine Scoops',cast:['tom','grace','rose'],sub:'Grace’s 9th birthday.',
-      act:()=>splashGo(typeof confirmBonus==='function'?confirmBonus:confirmNew)});
+      act:()=>splashGo(typeof beginBonus==='function'?beginBonus:beginOpening)});
     return [...splashHeadChoices(),...list]; }},
   // The Battle Lab's difficulty page (the chapter list has its own toggles in its top bar): Rose is Easy, Grace is Medium, Tom is Hard.
   diff:{tab:'Choose your difficulty',cue:'A / Enter to pick. B / Esc to go back',

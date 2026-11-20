@@ -1,3 +1,11 @@
+## idea-welcomepage2 (2026-11-20): Picking a chapter starts it at once, with no Start New warning
+
+Tom (11-20, on card c-idea-welcomepage): "also remove the Start New step - when the user selected a chapter, it should just start without any other confirmation needed".
+
+- Chapter 1, chapters 2 to 20, chapter 11 from your Part 1 clear data, and BONUS (Nine Scoops) now start the moment they are tapped in the NEW GAME chapter list. Before, a phone with an autosave first showed a warning page ("A new game replaces the autosave once it begins") with START and BACK. Now the new game replaces the autosave without asking; your numbered slots are still kept, as the warning said.
+- Purged, with no references left outside the frozen demo: `confirmNew` (`engine/intro.js`), `confirmChapter` (`engine/chapter-select.js`), `confirmPart2` (`engine/story.js`) and `confirmBonus` (`data/bonus-nine-scoops.js`). The chapter list calls `beginOpening`, `chapterJump`, `beginPart2` and `beginBonus` directly. The old title menu's START NEW button (`titleMenu`, used only if the welcome screen is missing) now calls `beginOpening`.
+- Not changed: LOAD still has its own START NEW button when there are no saves (it never had a warning), and the Battle Lab keeps its difficulty page.
+- Test: `python3 tools/welcome_buttons_test.py` now saves an autosave first and checks that chapter 1, chapter 2, chapter 11 and BONUS start at once with no warning page, and looked at the chapter 2 title card in portrait.
 ## fix-effectslook (2026-11-20): The Effects page preview shows the full-body person on a map ground, not the dialogue face
 
 Tom (t-effectslook): "the Preview is showing the characters portrait which is irrelevant (or does the portrait change? i dont think is hould) i want to see a preview of the full body character and how the effect looks in game in the overworld". `effects.html` now draws the painted full-body frame the game uses (`STORY_POSES_SRC` sets `<id>emo` and `<id>talk`, cut from the atlas) on a grass and path ground; picking a feeling or talking pose changes the whole body. Squash, hop, pip and wince play on that body. Overworld effects are unchanged and nothing breathes. The page is untagged. Not done: the preview is not a live map with a walking figure, and the pose mirroring to face the listener is not shown.

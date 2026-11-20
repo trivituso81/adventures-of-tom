@@ -1574,13 +1574,6 @@ function partClearSummary(sv) {
   const lead=(sv.party||[])[0]||{},d=new Date(sv.when),h=Math.floor((sv.time||0)/3600),m=Math.floor((sv.time||0)%3600/60);
   return 'Lv '+(lead.level||1)+' \u00b7 '+(sv.coins||0)+' coins \u00b7 '+h+'h '+String(m).padStart(2,'0')+'m \u00b7 '+d.toLocaleDateString();
 }
-function confirmPart2(slot) {
-  if(!readSave('auto')) { beginPart2(slot); return; }
-  titleAsk('Part 2','Part 2 starts from this clear data. It replaces the autosave once it begins. Your numbered slots and the clear data are kept.',[
-    {label:'START PART 2',fn:()=>beginPart2(slot)},
-    {label:'BACK',fn:titleMenu}
-  ]);
-}
 function beginPart2(slot) {
   endIntro();
   if(!loadGame(slot)) { titleMenu(); return; }

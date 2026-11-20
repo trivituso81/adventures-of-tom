@@ -232,13 +232,5 @@ function b6Prep(L) {
   }
   if(typeof b6Badge==='function') b6Badge();
 }
-function confirmChapter(n) {
-  if(!readSave('auto')) { chapterJump(n); return; }
-  titleAsk('Chapter '+n,'Test jump to chapter '+n+'. It replaces the autosave once it begins. Your numbered slots are kept.',[
-    {label:'START CHAPTER '+n,fn:()=>chapterJump(n)},
-    {label:'BACK',fn:titleMenu}
-  ]);
-}
-
-// The title screen's chapter lists (START NEW > PART 1 / PART 2) live in engine/splash.js and call confirmChapter.
+// The title screen's chapter list (NEW GAME) lives in engine/splash.js and calls chapterJump with no warning page.
 addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{chapterJump,chselStateBefore}); });

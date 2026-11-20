@@ -13464,7 +13464,7 @@
    "col": "prog",
    "theme": "Tools",
    "title": "Welcome page buttons and chapter list difficulty bar",
-   "next": "Remove the Start New confirmation: tapping a chapter (or BONUS) in the chapter list starts it at once, with no warning page, for every chapter. Then play-check card t-welcomepage-play gets the new check.",
+   "next": "The chapter list now starts any chapter or BONUS the moment it is tapped, with no Start New warning even when an autosave exists, and the welcome page and top bar changes from the first build stay. Pushed as build idea-welcomepage2; Tom plays it next (card t-welcomepage-play).",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -13517,6 +13517,11 @@
      "d": "2026-11-20",
      "t": "Tom, after the first build shipped: \"also remove the Start New step - when the user selected a chapter, it should just start without any other confirmation needed\". Reopened this card for a second build, idea-welcomepage2.",
      "at": "2026-11-20T17:51:00.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Removed the Start New warning (confirmNew, confirmChapter, confirmPart2, confirmBonus purged); tested with an autosave present for chapter 1, 2, 11 and BONUS (tools/welcome_buttons_test.py). Pushed as build idea-welcomepage2. Hands to Tom card t-welcomepage-play.",
+     "at": "2026-11-20T17:54:36.000Z"
     }
    ],
    "prompt": {
@@ -13953,8 +13958,8 @@
    "ask": "play",
    "fyi": true,
    "title": "Check the new welcome buttons and chapter list top bar",
-   "next": "Open the game from your home screen. If you still see the old buttons, close the app and open it again once. On the welcome page check: 1) NEW GAME and LOAD are only as wide as their words and the same width as each other; 2) RELOAD and ADMIN are small icons at the right. Tap NEW GAME and check: 3) BACK with an arrow is top left, with EASY, MEDIUM, HARD to its right and a few words under each, all inside the frame; the lit one is your difficulty; 4) tap HARD, then MEDIUM, and the lit one follows; 5) tap a chapter and it starts with no difficulty page. Turn the game to landscape and look at both screens again. All good if it looks and works like that; if a button is cut off or hard to tap, press Something is wrong and say which one.",
-   "first": "Wait for The welcome page buttons and chapter list difficulty bar to ship (build idea-welcomepage).",
+   "next": "Open the game from your home screen. If you still see the old buttons, close the app and open it again once. On the welcome page check: 1) NEW GAME and LOAD are only as wide as their words and the same width as each other; 2) RELOAD and ADMIN are small icons at the right. Tap NEW GAME and check: 3) BACK with an arrow is top left, with EASY, MEDIUM, HARD to its right and a few words under each, all inside the frame; the lit one is your difficulty; 4) tap HARD, then MEDIUM, and the lit one follows; 5) tap a chapter and it starts at once: no difficulty page and no Start New warning, even though you have a save. Turn the game to landscape and look at both screens again. All good if it looks and works like that; if a button is cut off or hard to tap, press Something is wrong and say which one.",
+   "first": "Wait for The welcome page buttons and chapter list difficulty bar to ship (builds idea-welcomepage and idea-welcomepage2).",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -13972,6 +13977,11 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: i added a request to this thread directly in claude Sent to Claude as card c-fix-welcomepage-play; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T17:52:58.235Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Updated by c-idea-welcomepage (build idea-welcomepage2): a chapter now also starts with no Start New warning.",
+     "at": "2026-11-20T17:54:36.000Z"
     }
    ],
    "waiting_on": "claude"
