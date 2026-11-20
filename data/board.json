@@ -10547,7 +10547,7 @@
    "id": "c-idea-removeall",
    "tag": "idea-removeall",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Remove the small popups at the top of the screen",
    "next": "Built: showToast and queueToast show nothing now.",
@@ -10588,6 +10588,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as idea-removeall: the small popups at the top of the screen are gone"
     }
    ],
    "prompt": {
@@ -10601,16 +10605,19 @@
    },
    "auto": true,
    "started_at": "2026-11-20T15:51:14+00:00",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-20"
   }
  ],
  "sessions": [
   {
    "url": "https://claude.ai/code/session_01RXeukD6ycpauP8Kp48v8ey",
-   "title": "Remove all the toasts that appear at the top of the screen",
+   "title": "Remove the small popups at the top of the screen",
    "first": "2026-11-20T15:52:11Z",
-   "last": "2026-11-20T15:52:11Z",
-   "tags": [],
+   "last": "2026-11-20T15:54:20Z",
+   "tags": [
+    "idea-removeall"
+   ],
    "cards": [
     "c-idea-removeall"
    ]
@@ -11891,8 +11898,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "7db36b89f5f0ad101a6da44177552d5559e6d8c0",
- "synced_at": "2026-11-20T15:52:54+00:00",
+ "synced": "62db83dc14e245bdffb0bf1f181f930423cb4515",
+ "synced_at": "2026-11-20T15:55:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
