@@ -15295,8 +15295,28 @@
      "d": "2026-11-20",
      "t": "Added by idea-implementlisteni (card c-idea-implementlisteni). Tom: \"implement listening/thinking poses (should be generated and approved in art library) for all chapter 1 talking interactions, including cut scenes.\"",
      "at": "2026-11-20T20:10:00.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom approved generating 7 pictures (about $0.42).",
+     "at": "2026-11-20T19:22:45.627Z"
     }
-   ]
+   ],
+   "gen": {
+    "want": true,
+    "at": "2026-11-20T19:22:45Z",
+    "ids": [
+     "tom-listen",
+     "grace-listen",
+     "rose-listen",
+     "deedee-listen",
+     "boppy-listen",
+     "ellie-listen",
+     "sal-listen"
+    ],
+    "est": 0.42,
+    "mode": "review"
+   }
   },
   {
    "id": "c-listen1-install",
