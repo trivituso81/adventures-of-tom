@@ -29,3 +29,5 @@ Added 2026-11-20 by ch2build (written in both places): ch02-teardown.md.
 Added 2026-11-20 by board-gemcards (written in both places): ch1-gemini-tracker.md (Gemini's chapter 1 test report; the c-gem-* cards name it).
 
 Added 2026-11-20 by idea-implementlisteni (written in both places): next-addendum-listen1.md (install steps for card c-listen1-install).
+
+Added 2026-11-20 by wanplan (written in both places): video-battle-plan.md (battle animation by video: why WAN was dropped, API routes, the Grace guard proof plan); canon-addendum.md (copied from the Project with the new section Battle animation, because CLAUDE.md now names it); clip-reset-plan.md marked superseded.

@@ -372,6 +372,8 @@ Files: `data/b3-clips.js` (`B3_BODY_CLIPS`: owner then state to clip id), `engin
 
 ### Painted body states (clipposes, 2026-11-19; the clip reset, `claude/clip-reset-plan.md`)
 
+SUPERSEDED BY RULE (Tom, 2026-11-20): NO PAINTED POSES IN BATTLE (CLAUDE.md). This section describes what the Lab still shows until each state's video exists; do not add to it or tune it. Plan: `claude/video-battle-plan.md`.
+
 `B3_BODY_PAINT[owner][state]` in `data/b3-clips.js` for Tom, Grace, Rose and Deedee: a state drawn from a painted battle frame (`f`, and `f2` for a second picture) at its own size `s` about the feet, with `h` its measured height share. No video, nothing generated. Code: `B3_PAINT`, `b3PaintState`, `b3KoDraw`, `b3GetUp`, `b3GuardDraw` and the draw lines in `b3DrawMember` (`engine/b3-play.js`). +x is away from the monsters.
 
 | State | Pictures | Motion |

@@ -1,3 +1,11 @@
+## wanplan (2026-11-20): Rule: no painted poses in battle; plan to bring back video (WAN by API) with a proof of Grace's guard. No game change, nothing spent
+
+- Tom (11-20 12:11): "I'm extremely unhappy with the painted battle poses for the family (card t-clipreset / c-clipposes). I was happy with the earlier WAN video clips (made through Sorceress); the problem is painted still poses." Standing rule recorded in CLAUDE.md ("No painted poses in battle") and claude/canon-addendum.md ("Battle animation"): no painted or image-generated still frames, poses or sprite sheets for anyone in any battle state; battle animation is video from a video model, idle breathing included; overworld and story scenes never get breathing.
+- New `claude/video-battle-plan.md` (also in the Project): why the WAN route was dropped (it was only reachable by hand in Sorceress and cost 70 cents against 7 on Grok lite; it was never rejected on quality for people), the routes compared (fal.ai, Alibaba Model Studio, Replicate, xAI, Sorceress), the recommendation (Wan 3.0 at 720p through fal.ai for the family, xAI Grok lite stays for monsters), and the exact proof plan for Grace's guard (prompt, settings, 54 cents expected, $2 cap, checks before Tom sees it, the Lab row in portrait and landscape).
+- `claude/clip-reset-plan.md` and docs/BATTLE3.md "Painted body states" marked superseded. `claude/canon-addendum.md` copied into the repo's claude/ folder.
+- Board: retired t-clipposes, c-clipposesfix and c-fix-clipposes-3 (painted pose review and fixes). New Tom card t-wanproof-setup (his approval: a fal.ai key saved as the repo secret FAL_KEY) blocks the new Claude card c-wanproof.
+- Not done: nothing generated, no painted state removed, no engine or data file changed.
+
 ## listen1 (2026-11-20): In chapter 1, people who are not talking now stand in the painted listening pose
 
 Card c-listen1-install. Tom approved all 7 pictures (tom, grace, rose, deedee, boppy, ellie, sal); none were rejected.

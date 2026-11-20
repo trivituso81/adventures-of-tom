@@ -1,5 +1,7 @@
 # Clip reset (clipreset, 2026-11-19). This file wins over claude/clip-gate-plan.md and claude/animation-chapter-plan.md for the family's battle clips
 
+SUPERSEDED (wanplan, 2026-11-20): Tom rejected painted still poses for battle. Standing rule NO PAINTED POSES IN BATTLE (repo CLAUDE.md; claude/canon-addendum.md "Battle animation"). Do not build, tune or review a painted battle state from this file. The route now is video by API: claude/video-battle-plan.md, which wins over this file. Section 1 (the reflection and its costs) stays true as history.
+
 Tom (11-19 18:10): "i just looked at Grace's guard animation and i am done. its awful. she puts her hands into a praying motion. how did this pass your test? this process is painfully slow. we need a massive reflection - we have wasted half a day and my money on an approach that is not working"
 
 STATUS: proof built and pushed as clipreset (Grace's guard only). Tom decides on board card t-clipreset. The build after his answer is card c-clipposes (section 5).
