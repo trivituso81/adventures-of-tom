@@ -10022,6 +10022,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGEc6cowbEAQDgvRV8",
+   "title": "Needs attention fixes itself or comes back to you",
+   "first": "2026-11-20T07:15:48-08:00",
+   "last": "2026-11-20T07:15:48-08:00",
+   "tags": [],
+   "cards": [
+    "c-attn1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCrBsMaC1DBnh8HB8R",
    "title": "Rebuild the muffin theft scene in Deedee's kitchen",
    "first": "2026-11-20T01:17:42-08:00",
@@ -10987,8 +10997,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "905bc37ee01dc9855e9944bb5964657bf92119f8",
- "synced_at": "2026-11-20T15:01:00+00:00",
+ "synced": "c80469327e7449cbea1a84fbc0557b6374dea39e",
+ "synced_at": "2026-11-20T15:16:36+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
