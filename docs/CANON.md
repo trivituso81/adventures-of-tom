@@ -137,3 +137,5 @@ Other canon: Michael is about 10% taller than the other adults; Justin (6'5" in 
 7. (2026-11-12) The coins came out of the Gate Zero clock; putting them back gives the time back.
 8. (2026-11-12) Chapter 11: TNB got his own gold boarding pass; Vance slips away during the FINAL CALL fight.
 9. (2026-11-12) The Unread was checked out in 1952 by a man in a long coat who never read it. His age is left unexplained on purpose.
+
+- Sal (the cabbie) always has a heavy Long Island accent on every line (Tom, 2026-11-20).

@@ -12675,7 +12675,7 @@
    "ask": "play",
    "fyi": true,
    "first": "Build gem-canon01 shows on the title screen.",
-   "next": "RELOAD, then CHAPTERS > Chapter 1. Check: Tom first says \"Thanks for the JFK pickup, Sal.\" in the taxi office, then stretches, says his Delta One line, Sal says \"OK Mr. Fancy Pants...\", Tom walks out the door, and outside the girls shout TATA, he crouches and they hug. The new line and Sal's line are read by the computer voice until recorded.",
+   "next": "RELOAD, then CHAPTERS > Chapter 1. Check: in the taxi office Tom stretches, says his Delta One line, THEN says \"Thanks for the JFK pickup, Sal.\", and Sal answers \"You got it, kid. Head outside, I think there's a couple of pipsqueaks looking for you.\" Tom walks out and the girls shout TATA. Both new lines are read by the computer voice until recorded, so Sal will not have his Long Island accent until his line is baked.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -12701,6 +12701,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: i left several feedback items on this scene using the Report feature Sent to Claude as card c-fix-gem-canon01play-2; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T17:30:46.885Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fix fix-gem-canon01play-2 handled 3 pencil reports: thank-you line moved after the Delta One line, Sal says \"You got it, kid...\", Sal accent noted in canon and voice description."
     }
    ],
    "waiting_on": "claude"

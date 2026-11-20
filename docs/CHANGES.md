@@ -8,6 +8,14 @@ Tom (11-20): "Add START for more card sizes."
 - New Tom card `t-startmore-setup` (ask setup) with the steps and paste text for the two tasks and four secrets; it blocks `c-startmore-test`, which starts by itself afterwards and starts one tiny card on each new task.
 - Tests: `board_sync_test.py` (16 new startmore checks), `board_test.py` (routineIn matrix), `board_newcard_test.py` (Sonnet high and Opus medium offer START and no auto box; Fable offers Copy prompt only). Not changed and failing before this build: `board_sync_test.py` check "R5: replaying today fires c-reports-2, c-gatezero and c-adminicons1", which replays the live board against a snapshot from 11-20 15:10.
 
+## fix-gem-canon01play-2 (2026-11-20): In the taxi office, Tom's thank-you comes after his Delta One line and Sal says "You got it, kid."
+
+- Tom's report on t-gem-canon01play: "i left several feedback items on this scene using the Report feature". The three pencil reports on the taxi scene (r-20261120-092904-zi93, r-20261120-092931-xkjg, r-20261120-093004-0rco):
+  - "put the thank you line to SAl directly after this line" (the Delta One line): `SCENES.opening` now runs stretch, "Oof, I'm finally here!...", "Thanks for the JFK pickup, Sal.", Sal. It no longer comes first.
+  - "change this to \"You got it, kid. Head outside, I think there's a couple of pipsqueeks looking for you\"": Sal now says "You got it, kid. Head outside, I think there's a couple of pipsqueaks looking for you." (spelled pipsqueaks, full stop added). Still no clip: speech synthesis until baked.
+  - "Sal should ALWAYS have a heavy long island accent": his voice description in `data/dialog-cast.js` now says heavy, thick, on every line, and `docs/CANON.md` records it. Fact: the accent comes from the recorded voice, so unrecorded lines (speech synthesis) cannot show it until Sal's lines are baked.
+- Not touched: the three other open reports (Rose shown twice, Hi Mom line, feelings frames) are on scene ch1Theft, not this card. `data/script-index.json` rebuilt. Not run: voice bake.
+
 ## fix-heist1play-4 (2026-11-20): The mud blob's held pan matches the counter pan, and it lands clear of the stool when it hops down
 
 Tom (11-20, card t-heist1play): "when the mud blob is holding the apple muffins, it appears in his hands much larger than it was on the counter. / when he hops off the counter, something bizarre happens in the animation - check this".

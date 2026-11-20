@@ -19,11 +19,11 @@ SCENES.opening=()=>{
     {call:toRoom}, {show:'tom'}, {cam:[8.5,6.6]},   // frame Tom and Sal together (landscape shows about six rows)
     {wait:.7},
     {face:'tom',dir:'up'},
-    {talk:'Tom',lines:["Thanks for the JFK pickup, Sal."]},   // fix-gem-canon01play (Tom 2026-11-20): first words, before the stretch
     {step:stretchStep()},
     {face:'tom',dir:'up'},
     {talk:'Tom',lines:["Oof, I'm finally here! At least the 6 hours went by fast on Delta One!"],voice:[['tom','intro1']]},
-    {talk:'Sal',lines:["OK Mr. Fancy Pants. Head outside, I think there's a couple of pipsqueaks looking for you."]},
+    {talk:'Tom',lines:["Thanks for the JFK pickup, Sal."]},   // fix-gem-canon01play-2 (Tom 2026-11-20): right after the Delta One line
+    {talk:'Sal',lines:["You got it, kid. Head outside, I think there's a couple of pipsqueaks looking for you."]},
     {cam:null}, {walk:'tom',to:[[8,10],[8,11],[8,12],[8,13],[8,14],[8,15]],speed:.26},
     {call:()=>sfx.doorOut()},
     {fade:'out',time:.45},

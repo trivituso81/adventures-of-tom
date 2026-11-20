@@ -255,7 +255,7 @@ const DIALOG_CAST={
       desc:'A woman in her forties with a fast-talking, bright, enthusiastic American saleswoman voice. Quick patter, playful, warm and a little pushy, every line a pitch. Clean studio recording.',
       sample:'Welcome to Penny’s Pockets! I sell things for pockets. Also things for people. Gear for the whole family, snacks for fights, and a few things that go pop. Gently. Got something to sell? I buy almost anything. Not Steve. Never Steve.'},
     sal:{name:'Sal',type:'Townsfolk: Long Island cabbie',stability:.5,
-      desc:'A man in his fifties with a thick Long Island New York accent, a slightly nasal, raspy, fast and friendly voice. Chatty taxi driver, warm and a little dramatic, proud of his one cab. Clean studio recording.',
+      desc:'A man in his fifties with a heavy, thick Long Island New York accent (always, on every line), a slightly nasal, raspy, fast and friendly voice. Chatty taxi driver, warm and a little dramatic, proud of his one cab. Clean studio recording.',
       sample:'Long Island Taxi. We go anywhere in town. Town is small, so mostly here. I have one cab. It is cab seven. Cabs one through six are a dream I am working on. Where to? Around town, or the airport? I have waited years for somebody to say airport.'},
     justin:{name:'Justin',type:'Family friend: handy dad',stability:.5,
       desc:'A man in his early forties with an easygoing, friendly voice and a Long Island New York accent. Goofy proud dad, handyman, sports fan, relaxed and warm, quick to laugh. Clean studio recording.',
