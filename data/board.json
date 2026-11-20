@@ -9727,7 +9727,7 @@
   {
    "id": "t-heist1play",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "theme": "Story and Dialogue",
    "ask": "play",
    "fyi": true,
@@ -9766,8 +9766,14 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: Almost perfect - but the blob overlaps too much with art that doesn't make sense for example the counter. Can he hop on the counter to grab the muffins then hop back down and run away? Also Deedee should get knocked backwards by him with the respective emotion but she should not fall down Sent to Claude as card c-fix-heist1play-3; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-20T15:59:44.972Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "t-heist1voice",
@@ -10651,6 +10657,65 @@
     "effort": "medium (run a known tool, verify, push)",
     "text": "Read CLAUDE.md, docs/CHANGES.md section fix-gracevoice-distort, and board cards c-gracevoice-rest and t-gracevoice-distort, history included. Your first push is the commit board: start c-gracevoice-rest. Fetch branch takes (git fetch origin +refs/heads/takes:refs/remotes/origin/takes) and run python3 tools/voice-library/unshrink_grace.py, then --apply: it replaces only game clips that are byte for byte the old Grace filter applied to one of Tom's takes. Never re-filter, guess or hand-edit a clip. Run python3 tools/grace_voice_test.py, python3 tools/clip-audit/unused_voice.py and python3 tools/smoke.py, and decode a few rebuilt clips in the game to check their length matches the take. If every Grace line is rebuilt, empty the prefixes list in data/takes-wanted.json. List in the CHANGES entry the Grace lines the tool still flags with no take (its pitch list over-counts: a deadpan take can sit low, so name them as to check, not as broken). Build tag gracevoice-rest. You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "c-fix-heist1play-3",
+   "tag": "fix-heist1play-3",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Story and Dialogue",
+   "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
+   "next": "You reported a problem on Watch the new muffin theft in Deedee's kitchen. Claude starts the fix by itself. Latest: Almost perfect - but the blob overlaps too much with art that doesn't make sense for example the counter. Can he hop on the counter to grab the muffins then hop",
+   "blocks": [
+    "t-heist1play"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T15:59:44.394Z",
+     "card": "t-heist1play",
+     "title": "Watch the new muffin theft in Deedee's kitchen",
+     "ask": "play",
+     "words": "Almost perfect - but the blob overlaps too much with art that doesn't make sense for example the counter. Can he hop on the counter to grab the muffins then hop back down and run away? Also Deedee should get knocked backwards by him with the respective emotion but she should not fall down",
+     "shot": "",
+     "asked": "Chapter select ) Chapter 1, jump to the theft scene in Deedee's kitchen, and watch it in portrait, then once in landscape. You should see: 1) the Mudling walks in up the hall (no rolling ball) and everyone jumps, Rose screams; 2) it walks through Rose, Tom and Grace and all three end up flat on the floor while Deedee says \"Excuse me! I just washed that floor.\" (no floor lines from Grace or Tom); 3) it lifts the pan and runs straight out the door while the three get up; 4) Boppy's steaming-hat line plays while it runs, and he turns only on \"Wait,\". All good if it plays like that; Something is wrong with what you saw."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-heist1play"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-heist1play.",
+     "at": "2026-11-20T15:59:44.972Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-heist1play: Almost perfect - but the blob overlaps too much with art that doesn't make sense for example the counter. Can he hop on the counter to grab the muffins then hop back down and run away? Also Deedee should get knocked backwards by him with the respective emotion but she should not fall down",
+     "at": "2026-11-20T15:59:44.972Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-20T15:59:44.972Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Watch the new muffin theft in Deedee's kitchen.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-heist1play-3 and t-heist1play in data/board.json, history included. Your first push is the commit board: start c-fix-heist1play-3.\n\nTom tested and found problems:\n1. Card t-heist1play (Watch the new muffin theft in Deedee's kitchen, ask play). He was asked: Chapter select ) Chapter 1, jump to the theft scene in Deedee's kitchen, and watch it in portrait, then once in landscape. You should see: 1) the Mudling walks in up the hall (no rolling ball) and everyone jumps, Rose screams; 2) it walks through Rose, Tom and Grace and all three end up flat on the floor while Deedee says \"Excuse me! I just washed that floor.\" (no floor lines from Grace or Tom); 3) it lifts the pan and runs straight out the door while the three get up; 4) Boppy's steaming-hat line plays while it runs, and he turns only on \"Wait,\". All good if it plays like that; Something is wrong with what you saw. He wrote: Almost perfect - but the blob overlaps too much with art that doesn't make sense for example the counter. Can he hop on the counter to grab the muffins then hop back down and run away? Also Deedee should get knocked backwards by him with the respective emotion but she should not fall down\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T15:59:44.394Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-heist1play to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-heist1play, and give the build fix-heist1play-3 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-heist1play",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
