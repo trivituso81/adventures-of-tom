@@ -12790,9 +12790,9 @@
    "title": "Battle system stage 12: bestiary chapters 5 to 7 and bosses",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "tag": "b3s12",
-   "next": "After b3s11 (done). Builds the chapter 5 to 7 monsters, formations and bosses from claude/bestiary-v11.md and a Lab fight for each formation and boss.",
+   "next": "After b3s11 (done). Rescue found the first session (started 17:59) pushed nothing: no half-done work. Builds the chapter 5 to 7 monsters, formations and bosses from claude/bestiary-v11.md and a Lab fight for each formation and boss, in parts (push each chapter as `b3s12a`, `b3s12b`, then `b3s12`).",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -12813,6 +12813,11 @@
     {
      "d": "2026-11-20",
      "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Rescue (START NEXT): the first conversation stopped before its first push, no work to finish. Prompt now says to push by chapter so a stall loses at most one chapter. Back in Up next.",
+     "at": "2026-11-20T21:19:55Z"
     }
    ],
    "prompt": {
@@ -12822,10 +12827,9 @@
     ],
     "model": "Claude Sonnet 5.5 (row C: a build whose boss mechanics are designed in the session)",
     "effort": "high (three bosses with their own rules and nothing written to follow for those)",
-    "text": "Read claude/battle-build.md and claude/next-addendum-b3s11.md, then build stage 12 (bestiary chapters 5 to 7 with their bosses) of the new battle system. Attach trivituso81/adventures-of-tom with push access (add_repo). Board card c-b3s12. Read its history first: my notes and answers are there. Your first push is the commit board: start c-b3s12 (it moves this card to In progress and links your conversation)."
+    "text": "Read claude/battle-build.md and claude/next-addendum-b3s11.md, then build stage 12 (bestiary chapters 5 to 7 with their bosses) of the new battle system. Attach trivituso81/adventures-of-tom with push access (add_repo). Board card c-b3s12. Read its history first: my notes and answers are there. Stage 11 (docs/CHANGES.md b3s11, claude/next-addendum-b3s11.md) is the pattern: copy its file layout (data/b3-foes-chNN.js, tools/b3-check-sNN.js, Lab fights NEW 28 on). The previous session ended with nothing pushed, so work in parts: after chapter 5's monsters, formations, boss and Lab fights pass `node tools/b3-sim.js check`, push it as part b3s12a, then chapter 6 as b3s12b, then chapter 7 as the final `b3s12`. Your first push is the commit board: start c-b3s12 (it moves this card to In progress and links your conversation)."
    },
    "after": "nothing for Tom: end",
-   "started_at": "2026-11-20T21:18:55+00:00",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukFxcAPTykx1Dr76QGY",
     "opening": "started by START"
