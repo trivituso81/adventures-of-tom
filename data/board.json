@@ -15907,6 +15907,37 @@
      "t": "Tom: \"when i try to type in the report tool, its acting like hotkeys and taking the focus out of the report text box and making changes to the scren, leaving the tool unsuable to me.\""
     }
    ]
+  },
+  {
+   "id": "c-keysecrets1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "tag": "keysecrets1",
+   "title": "Art Library makes pictures through repo secrets",
+   "next": "In this session: Art Library GENERATE (one picture, one video, a chapter of videos) starts the art-gen and clip-gen Actions instead of calling xAI from the phone, and the xAI key and Relay boxes go away. Then three more cards do the same for the Voice Library and Script Editor, the Music Library, and the recast pages.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "\"now that we are storing api keys as secrets on the repo, can remove the ability to set API keys in the various admin UI screens?\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: \"now that we are storing api keys as secrets on the repo, can remove the ability to set API keys in the various admin UI screens? i grant you full access to the repo\". Asked once what happens to one-at-a-time buttons; Tom chose: remove key fields and route the buttons to Actions. The GitHub token box stays: the browser needs it to save approvals and cannot read a repo secret."
+    }
+   ],
+   "prompt": {
+    "what": "Removes the xAI key box from the Art Library and makes GENERATE start the art-gen and clip-gen Actions, which use the repo secret XAI_API_KEY.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the design is written on this card)",
+    "effort": "high (touches the Library page, two Actions and their tests)",
+    "text": "Read claude/handoff-rules.md and the card c-keysecrets1 in data/board.json. Art Library GENERATE (one picture, one video, a chapter of videos) must start the art-gen and clip-gen Actions by committing a request file instead of calling xAI from the phone; remove the xAI key and Relay boxes from art.html; keep the GitHub token box. Entries that need Tom's own photo stay unsupported and say so. Test with the stand-in tests, never run the Actions for real. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [
