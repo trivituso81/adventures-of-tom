@@ -29109,7 +29109,7 @@
    "promptRev": 1
   },
   {
-   "status": "draft",
+   "status": "approved",
    "versions": [
     {
      "n": 0,
@@ -29121,6 +29121,18 @@
       "first": 0,
       "hit": 1,
       "last": 2.1
+     }
+    },
+    {
+     "n": 1,
+     "file": "art/raw/clips/clip-rose-lava-v2.mp4",
+     "date": "2026-11-20",
+     "from": "clipgen",
+     "at": 1795137650479,
+     "marks": {
+      "first": 0,
+      "hit": 0.567,
+      "last": 2.7
      }
     }
    ],
