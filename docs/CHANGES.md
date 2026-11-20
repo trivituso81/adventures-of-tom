@@ -1,3 +1,9 @@
+## cutpolish4b (2026-11-20): the empty kitchen counter after the muffin heist, the painted muffin pan, muffin papers and the phone on the cab seat
+
+- Card c-cutpolish4b. Installed the approved Chapter 1 Library pictures. Empty counter: `tools/make_grands_empty.py` cuts the table top (cake stand included, muffins gone) from `ch1-kitchen-empty-island` into `art/grands-empty.webp` (over the painting) and `art/grands-empty-fg.webp` (over the foreground cutout, so people behind the island still hide correctly). `engine/plate.js` `grandsEmptyDraw` draws them while flag `muffins-gone` is set (set at the grab in ch1Theft) and until Grace's job scene (`ch1-job`). The cake stand is the painted new one, a little taller than the old one; the pie and the rest of the room are untouched.
+- Muffin pan (full and empty) and the nine muffin papers are now the painted pictures (`art/props/ch1/*.webp`, baked by `tools/art-library/bake_closeup_ch1.py`); the code-drawn stand-ins in `engine/scene-props.js` are removed.
+- The phone lighting up on the cab seat is a new close-up (`{ch1Reveal:'phone'}` in ch1Sunday, `art/closeup/ch1-phone.webp`, press A to close it), shown before TNB's text.
+- Looked at in portrait and landscape: before, after and Tom standing behind the island. Not looked at: the full heist scene played end to end, the papers in the reeds.
 ## follow1 (2026-11-19): Grace and Rose stay one tile behind Tom in free walking again (no more lag and catch-up in chapter 1)
 
 - Tom (11-19): the party followers lag behind Tom during free walking in chapter 1 and then catch up.

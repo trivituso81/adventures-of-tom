@@ -705,7 +705,7 @@
    "theme": "Areas",
    "lane": "claude",
    "col": "prog",
-   "next": "The empty counter first: crop the island patch from ch1-kitchen-empty-island and draw it in both kitchen layers once the theft has happened. Then swap the code stand-ins for the other pictures you approved (muffin pan, empty pan, muffin papers, phone on seat). Look at each in portrait and landscape.",
+   "next": "Shipped as cutpolish4b: empty counter, painted pan, papers and the phone close-up. Waits on your look (card t-cutpolish4b).",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -729,6 +729,10 @@
     {
      "d": "2026-11-19",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built: empty counter patch in both kitchen layers, painted pan and papers, phone close-up. Looked at in portrait and landscape."
     }
    ],
    "prompt": {
@@ -740,7 +744,8 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/next-addendum-cutpolish4.md and claude/next-addendum-ch1rebuild1.md, then install the empty counter patch (cutpolish4b) and every other approved stand-in picture in Art Library group Chapter 1. You have my full permission to access the repo."
    },
-   "tag": "cutpolish4b"
+   "tag": "cutpolish4b",
+   "after": "t-cutpolish4b"
   },
   {
    "id": "c-cutpolish5",
@@ -1693,6 +1698,25 @@
     {
      "d": "2026-11-19",
      "t": "Added by follow1: your phone check of the follower fix; blocks nothing."
+    }
+   ]
+  },
+  {
+   "id": "t-cutpolish4b",
+   "title": "Look at the chapter 1 pictures in the game",
+   "theme": "Areas",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen: after the Mudling grabs the pan the three muffin plates on the island should be gone and the cake stand stay. Then the paper muffin liners in the Grump Hollow reeds, and the phone lighting up on the cab seat (press A to close). For anything off, write what you saw in a report (pencil tab).",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by cutpolish4b."
     }
    ]
   }
