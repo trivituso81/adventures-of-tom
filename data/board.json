@@ -7990,7 +7990,7 @@
    "title": "Watch the chapter 1 scenes for breathing and reactions",
    "theme": "Story and Dialogue",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Play chapter 1 from the start (the opening, then the walk to Aunt Ellie, then the kitchen). People standing in a scene should now stand still with no breathing at all (breathing is battle only). Everything else is as before: a small dip when a pose changes, turning to whoever speaks, a hop or a ! ? ... or sweat drop on cue words, and Boppy's sweat drop on 'Gently. The stomach.' Tap All good, or Something is wrong with what you saw.",
@@ -8013,8 +8013,13 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix what you found on: Watch the chapter 1 scenes for breathing and reactions is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "t-cardlinks1try",
