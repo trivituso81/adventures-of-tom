@@ -7692,13 +7692,13 @@
    "title": "Clear the known-wrong list from the old next.md",
    "theme": "Project Ops",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Ready to start. Works through the list of known problems on main that used to sit in claude/next.md; each one is fixed, turned into its own card, or dropped with a reason.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGkdrucLafW1KJARZu",
     "opening": "not started"
    },
    "history": [
@@ -7709,6 +7709,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -7720,8 +7724,7 @@
     "effort": "medium (steps are known)",
     "text": "Go through this list of known problems on main, which was cut out of claude/next.md. For each item fix it, or add a board card for it, or drop it with a one-line reason, then write the result in docs/CHANGES.md. List: the muffin plates stay on the island after the theft (waits on the Art Library entry ch1-kitchen-empty-island) and the muffin pan is a code stand-in; Flight Zero stays painted in the Gate Zero window; Gridlock Prime staging; Gus and Bean show the old glass block; tools/art-library/validate.js fails on clip-rose-strike: bad tab Clips; tools/clip_kinds_test.py (sleep clip ran 0 to 30, wanted 0 to 38) and tools/clip_review_test.py (before any PLAY only the Mudling idle loop is loaded) fail; unused_voice.py check 4 lists 93 lines other sessions replaced; reaction-index.py --check fails on 60 rows (Vance and others); emotion-apply.py fails on 56 pre-existing rows; npc-emotion-check.py fails on 223 rows (lines moved in engine/travel.js and others); in ch1Amy Tom's head sits under the painted Long Island Square arch sign; in the reaction_test case for ch1Ellie Tom and Grace stand up the path away from Aunt Ellie's door; in the kitchen Tom's mood and talking paintings read front-facing when he faces left (art, no side-view mood sheet: claude/next-addendum-cutpolish3.md); size jumps between WALKING poses and the others of Tom, TNB, Justin, Amy and Boppy (Tom saved lines for the walking stand frames, applying them needs a walk bake: claude/next-addendum-cutpolish2.md), and Grace, Rose, Deedee poses are unsized until Tom saves lines; the Pose Editor page's 'in the game now' still shows pre-apply sizes for the 60 applied poses (python3 tools/pose-editor/manifest.py); a Justin line in tools/voice-library/scripts/justin-dialogue.json has a 110-character first tag (shorten before it is made); the simple player rarely picks the second Sig Vibes' shield and ally-buff Skills in short fights; the Ruckus gauge is not in the save file yet (battle stage 15). Do not ask me to review any battle animation. You have my full permission to access the repo."
    },
-   "tag": "knownwrong",
-   "start": true
+   "tag": "knownwrong"
   },
   {
    "id": "c-gatezero",
@@ -9405,8 +9408,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "c1c5078d3cb4655df0a395bc720493a8c7a9d331",
- "synced_at": "2026-11-20T08:34:08+00:00",
+ "synced": "24bbdd1314f1782b1a1bc9c2b60f4157a2ff52c0",
+ "synced_at": "2026-11-20T08:35:58+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
