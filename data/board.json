@@ -1748,6 +1748,29 @@
      "t": "Made by cutpolish4b."
     }
    ]
+  },
+  {
+   "id": "b-takes1",
+   "tag": "takes1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "merged the 2 voice takes from branch takes that match the current script",
+   "next": "Done: merged the 2 voice takes from branch takes that match the current script",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDSFVbmbuiGhUt1pZJ",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as takes1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
   }
  ],
  "sessions": [
@@ -1755,8 +1778,10 @@
    "url": "https://claude.ai/code/session_01RXeukDSFVbmbuiGhUt1pZJ",
    "title": "Merge 13 new voice takes",
    "first": "2026-11-20T01:51:14Z",
-   "last": "2026-11-20T01:51:14Z",
-   "tags": [],
+   "last": "2026-11-20T01:55:05Z",
+   "tags": [
+    "takes1"
+   ],
    "cards": [
     "c-takes-2337ed"
    ]
@@ -1948,8 +1973,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "cafd6132023f87acfda4a90ec400cf9dd45c64b8",
- "synced_at": "2026-11-20T01:54:12+00:00",
+ "synced": "e2095eaca1efee51d8223f53bfe28a1e45caf2b2",
+ "synced_at": "2026-11-20T01:56:01+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
