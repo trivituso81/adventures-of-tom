@@ -2029,20 +2029,32 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+   "title": "Chapter 1 scene 1: SKIP skips the whole scene, not just the opening half (skipchain1)",
+   "first": "2026-11-19T18:15:20-08:00",
+   "last": "2026-11-19T18:15:20-08:00",
+   "tags": [],
+   "cards": [
+    "c-skipchain1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukH7oLv95YtuWW62q7o",
    "title": "Make the 43 fixed chapter 1 clips again (clipch1remake)",
    "first": "2026-11-19T17:14:03-08:00",
-   "last": "2026-11-19T18:11:59-08:00",
+   "last": "2026-11-19T18:14:38-08:00",
    "tags": [
     "clipch1remake",
     "clipch1remakea",
     "board-ch1review",
-    "board-clipreset"
+    "board-clipreset",
+    "board-clipresetb"
    ],
    "cards": [
     "c-clipch1remake",
     "t-ch1review",
-    "c-clipreset"
+    "c-clipreset",
+    "b-board-clipreset"
    ]
   },
   {
@@ -2182,8 +2194,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "8aa95436aebc15dbd034a548461796954f79580e",
- "synced_at": "2026-11-20T02:12:51+00:00",
+ "synced": "2fa8d8132196e42104585f4854384d1339a9a53d",
+ "synced_at": "2026-11-20T02:15:27+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
