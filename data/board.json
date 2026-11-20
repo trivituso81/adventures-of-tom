@@ -1241,7 +1241,7 @@
    "id": "c-reports",
    "tag": "reports-2026-11-19c",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Fix the report backlog (7 open)",
    "next": "Done: 6 of the 7 art reports are in the game (build reports-2026-11-19c): 1a2w Boppy's mustache, 7v5z Deedee glasses on her head, c5no the new thinking talking pose (10 people, 19 lines tagged), nre4 the fishing spot as one picture, g4gl dazed frames for the 5 smog neighbours, jykk Deedee and Rose holding the bulb. Not done: mxvd (the mud blob): the scene it came from was rewritten and the new Mudling sheet is carried by cards c-heistart and c-heist1, which close it.",
@@ -1318,12 +1318,17 @@
     {
      "d": "2026-11-19",
      "t": "Installed the approved Report fixes pictures as build reports-2026-11-19c; closed 7v5z, 1a2w, c5no, nre4, g4gl, jykk. mxvd stays open: its scene was rewritten and cards c-heistart and c-heist1 replace its picture (ch1-mudling-heist2). Chapters 2, 4, 5, 6, 7 have no Library bulb picture yet, so jykk covers chapters 1 and 3 only."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as reports-2026-11-19c: Seven art reports: Boppy's mustache, glasses on Deedee's head, the fishing spot as one picture, a fifth \"thinking\" talking pose, bulb frames, dazed NPC frames"
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
-   "after": "t-reportcheck"
+   "after": "t-reportcheck",
+   "done": "2026-11-19"
   },
   {
    "id": "t-startsetup",
@@ -2251,7 +2256,7 @@
    "title": "Build the painted battle poses for chapter 1 (clipposes)",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "clipposes",
    "auto": true,
    "next": "Built (clipposes), nothing spent. Tom, Grace, Rose and Deedee now have painted idle fidget, guard, hit, dodge, knocked out and get up, victory (Rose keeps her video) and run, moved by the game. Their videos and the nine own-move and cast videos were removed (82 baked files); those moves play the default animation. Measured test and the rewritten stage 8 test pass. Tom looks once: card t-clipposes.",
@@ -2290,6 +2295,10 @@
     {
      "d": "2026-11-20",
      "t": "Built clipposes: painted states for the four fighters, family videos purged, Lab row PAINTED STATES: CHAPTER 1. paint_state_test and b3_test s8 pass. Clip-gate gate_test not run here (no cv2). Tom card t-clipposes made."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clipposes: The family's battle body states are painted poses moved by the game; their videos are removed"
     }
    ],
    "prompt": {
@@ -2301,7 +2310,8 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/handoff-rules.md and claude/clip-reset-plan.md, then the answer and note on board card t-clipreset. Do section 5 of that plan for the answer Tom chose. Build tag clipposes. Generate nothing and spend nothing. Fix a miss with the smallest change, and apply the plan's stop-loss line. You have my full permission to access the repo."
    },
-   "after": "t-clipposes"
+   "after": "t-clipposes",
+   "done": "2026-11-19"
   },
   {
    "id": "b-board-clipreset",
@@ -6370,7 +6380,7 @@
    "title": "Chapter 1 subtitles match your rerecorded voice clips",
    "theme": "Voice Clips",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "ch1retext1",
    "next": "Shipped as ch1retext1: 11 subtitles reworded to the spoken words, 3 new Deedee takes merged. One line (Tom, \"Thank you for telling me, Rose\") needs a re-take.",
    "blocks": [],
@@ -6388,6 +6398,10 @@
     {
      "d": "2026-11-19",
      "t": "Sent local-clips-pending_5_.json (3 Deedee takes): merged. 11 subtitles now match the clips. Handed to Tom card t-ch1starving."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch1retext1: Chapter 1 subtitles now say what Tom's rerecorded voice clips say, and his 3 newest Deedee takes are in the game"
     }
    ],
    "after": "t-ch1starving",
@@ -6399,7 +6413,8 @@
     "model": "Claude Sonnet 5.5 (row B: steps written in tools/voice-library/retext-lines.py and docs/CHANGES.md calib3)",
     "effort": "medium (steps are known)",
     "text": "Read claude/handoff-rules.md and docs/CHANGES.md section calib3, then check every chapter 1 dialogue clip against its subtitle and reword the subtitles to what the kept takes say. You have my full permission to access the repo."
-   }
+   },
+   "done": "2026-11-19"
   },
   {
    "id": "t-skillinfo1play",
@@ -6466,7 +6481,7 @@
    "title": "Fix the muffin pan that never leaves the counter, and add the new Mudling sheet to the Art Library (heistart)",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "heistart",
    "auto": true,
    "next": "Done: the muffin pan now leaves the counter when the Mudling takes it (build heistart), and the Library has the entry ch1-mudling-heist2. Next: your card t-heistart, then card c-heist1 rebuilds the scene.",
@@ -6474,7 +6489,7 @@
    "created": "2026-11-19",
    "changed": "2026-11-19",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDt5GX171U9RkvJskx",
     "opening": "pasted by Tom from the board"
    },
    "after": "t-heistart",
@@ -6494,6 +6509,18 @@
     {
      "d": "2026-11-20",
      "t": "Pushed heistart: compileScene now runs a prop step before hide (4 steps fixed: ch1Theft, ch1AfterBoss, ch1Amy, ch6Call), test added in cut_natural_test.py (fails before, passes after), Library entry ch1-mudling-heist2 added as a draft. t-heistart already says where to press, no change."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as heistart: The muffin pan now leaves the counter when the Mudling takes it, and the new Mudling sheet for the theft is in the Art Library, ready to generate"
     }
    ],
    "prompt": {
@@ -6504,7 +6531,8 @@
     "model": "Claude Sonnet 5.5 (row B: the cause, the fix and the entry's prompt are written in claude/heist-redo-plan.md, a test and frames catch mistakes)",
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md and claude/heist-redo-plan.md, then build part A (section 6) and push it as heistart. Your first push is the commit board: start c-heistart. Change nothing else in the scene. Keep card t-heistart as the after of c-heistart and rewrite its next if the entry's place in the Art Library differs. You have my full permission to access the repo."
-   }
+   },
+   "done": "2026-11-19"
   },
   {
    "id": "t-heistart",
@@ -6598,7 +6626,7 @@
    "title": "Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped)",
    "theme": "Voice Clips",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "voice",
    "fyi": true,
    "next": "ADMIN > VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. The script box should end \"Grace, I'm so sorry but number two can't wait.\" with no \"[hungry] I'm starving!\", and your other directions ([wary, disgusted, amused], [pause, very very deadpan], [very dismissive]) still there. Press play: the take you kept, unchanged. Nothing to record. Then All good.",
@@ -6621,15 +6649,18 @@
     {
      "d": "2026-11-19",
      "t": "fix-ch1starving: \"I'm starving!\" deleted from the line's script (the repo copy and the edit saved on your phone); the take you kept and the subtitle were already right and are unchanged."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked: Fix what you found on: Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\" is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-fix-ch1starving",
    "tag": "fix-ch1starving",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Voice Clips",
    "title": "Fix what you found on: Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\"",
@@ -6651,7 +6682,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukH2z7yRF86pqAvAyPD",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -6670,6 +6701,14 @@
     {
      "d": "2026-11-19",
      "t": "fix-ch1starving: game subtitle and clip already lacked the sentence; removed it from ch01-story-directions.json (kept take tmwo5jgy3mcb5's script) and from the Voice Library edit saved on Tom's device (voices.html SCRIPT_DROPS). No pencil report since 03:51Z."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as fix-ch1starving: Tom's \"Thank you for telling me, Rose\" line no longer carries \"I'm starving!\" in its script"
     }
    ],
    "prompt": {
@@ -6681,7 +6720,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch1starving and t-ch1starving in data/board.json, history included. Your first push is the commit board: start c-fix-ch1starving.\n\nTom tested and found problems:\n1. Card t-ch1starving (Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\", ask voice). He was asked: ADMIN ) VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. The script you kept ends \"I'm starving!\" but the clip stops after \"number two can't wait.\" Record it again so it says the last sentence, keep it, and Export pending clips. If you would rather drop \"I'm starving!\", delete it from the script and keep the take as it is. He wrote: i want to drop it - that's why it's not there. you delete it\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T03:51:06.694Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch1starving to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch1starving, and give the build fix-ch1starving a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
-   "after": "t-ch1starving"
+   "after": "t-ch1starving",
+   "done": "2026-11-19"
   },
   {
    "id": "t-clipposes",
@@ -6737,7 +6777,7 @@
    "title": "A join or leave banner holds the game until you dismiss it",
    "theme": "Game Shell",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "bannerhold1",
    "next": "Built bannerhold1: a join or leave banner now holds the game (no walking, menu, taps or scenes) until you tap, press A or Enter, or press a gamepad button; each banner in a group needs its own dismiss.",
    "blocks": [],
@@ -6755,6 +6795,10 @@
     {
      "d": "2026-11-19",
      "t": "Built bannerhold1 and tested it in portrait and landscape (banner_hold_test.py, 22 checks pass)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as bannerhold1: A join or leave banner holds the game until you dismiss it"
     }
    ],
    "prompt": {
@@ -6766,7 +6810,8 @@
     "effort": "medium (one small engine change plus one test)",
     "text": "Read claude/handoff-rules.md, then build bannerhold1: while a party join or leave banner (engine/party-banner.js) is on screen nothing else can be done until Tom dismisses it with a tap, A, Enter, Space or a gamepad button; the world and scenes wait; queued banners each need their own dismiss. Test portrait and landscape. You have my full permission to access the repo."
    },
-   "after": "t-bannerhold1play"
+   "after": "t-bannerhold1play",
+   "done": "2026-11-19"
   },
   {
    "id": "t-bannerhold1play",
@@ -6796,7 +6841,7 @@
    "title": "Generate all of a card's pictures with one approval on the board (artgen1)",
    "theme": "Tools",
    "lane": "claude",
-   "col": "up",
+   "col": "done",
    "tag": "artgen1",
    "auto": true,
    "next": "Built (artgen1): Generate all pictures button on picture cards, the art-gen Action, the Art Library import. Dry run only, nothing spent on xAI. Your card to try it is t-artgen1try.",
@@ -6805,9 +6850,9 @@
     "c-cardlinks1"
    ],
    "created": "2026-11-19",
-   "changed": "2026-11-20",
+   "changed": "2026-11-19",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukH73wsvXxaCC7pr8XL",
     "opening": "not started"
    },
    "history": [
@@ -6830,6 +6875,14 @@
     {
      "d": "2026-11-20",
      "t": "GitHub dry run of art-gen on card t-heistart succeeded: 1 picture (ch1-mudling-heist2, 2 references), estimate $0.06, nothing sent. The first two runs were cancelled while the checkout was still slow; artgen1c narrowed the checkout (10 second run)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as artgen1: Generate all pictures from a board card, made on GitHub for you to review in the Art Library"
     }
    ],
    "prompt": {
@@ -6841,8 +6894,8 @@
     "effort": "medium (the steps are written; clipgen.py is the model to follow)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/artgen-plan.md (sections 1 to 3 and section 4), then card c-artgen1 in data/board.json with its history and the notes of the Tom cards that blocked it. Build artgen1 exactly as the plan says and push it as artgen1. Your first push is the commit board: start c-artgen1. Spend nothing on xAI: only the dry run in section 4.4. Write what you built and anything that differs from the plan into the plan's Built section. Do not start the next phase. You have my full permission to access the repo."
    },
-   "start": true,
-   "after": "t-artgen1try"
+   "after": "t-artgen1try",
+   "done": "2026-11-19"
   },
   {
    "id": "c-artgen2",
@@ -6917,7 +6970,7 @@
    "title": "Open the right Art, Voice or Music Library entry straight from a card (cardlinks1)",
    "theme": "Tools",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "tag": "cardlinks1",
    "auto": true,
    "next": "Waits on Generate all (artgen1), because both change the board page. Then every card that sends you to a Library gets a button that opens that exact entry, and the three Library pages learn to open an entry from a link.",
@@ -6932,6 +6985,10 @@
     {
      "d": "2026-11-19",
      "t": "Added by board-artgen (planning chat https://claude.ai/code/session_01RXeukGiMh61Wcr1Q4VNn3N). Tom: \"Can we also create a prompt to link to the corresponding art library voice library music library directly from the kanban card\" Plan: claude/artgen-plan.md."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked: Generate all of a card's pictures with one approval on the board (artgen1) is done."
     }
    ],
    "prompt": {
@@ -6942,23 +6999,22 @@
     "model": "Claude Sonnet 5.5 (row B: every step, file and test is written in claude/artgen-plan.md, and tests catch mistakes)",
     "effort": "medium (one small feature on four pages, written in the plan)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/artgen-plan.md (sections 1 to 3 and section 7), then card c-cardlinks1 in data/board.json with its history and the notes of the Tom cards that blocked it. Build cardlinks1 exactly as the plan says and push it as cardlinks1. Your first push is the commit board: start c-cardlinks1. Spend nothing on xAI or ElevenLabs. Write what you built and anything that differs from the plan into the plan's Built section. Do not start the next phase. You have my full permission to access the repo."
-   },
-   "waiting_on": "claude"
+   }
   },
   {
    "id": "c-adminhub1",
    "title": "One address for all admin tools, and the board's own home screen icon (adminhub1)",
    "theme": "Tools",
    "lane": "claude",
-   "col": "up",
+   "col": "done",
    "tag": "adminhub1",
    "auto": true,
    "next": "Built and pushed as adminhub1. Tom checks it on his phone (card t-adminhub1try).",
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-20",
+   "changed": "2026-11-19",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukH4WQa9dgNTeFoHakp",
     "opening": "not started"
    },
    "history": [
@@ -6973,6 +7029,14 @@
     {
      "d": "2026-11-20",
      "t": "Built adminhub1: admin.html, ?go= links, game ADMIN list reordered, board.html icon and Admin link. Tests: tools/admin_hub_test.py."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as adminhub1: one admin page with its own address, `?go=` links into the game, a home screen icon for the board"
     }
    ],
    "prompt": {
@@ -6984,14 +7048,14 @@
     "effort": "medium (one new page and one small change in the game, steps are known)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/adminhub-plan.md, then card c-adminhub1 in data/board.json. Build adminhub1 exactly as the plan says and push it as adminhub1. Your first push is the commit board: start c-adminhub1. Write what you built and anything that differs from the plan into the plan's Built section. You have my full permission to access the repo."
    },
-   "start": true,
-   "after": "t-adminhub1try"
+   "after": "t-adminhub1try",
+   "done": "2026-11-19"
   },
   {
    "id": "c-syncfix1",
    "tag": "syncfix1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Fix board-sync: duplicate c-reports card stops every run (syncfix1)",
    "next": "Shipped as syncfix1: r7_inbox now picks a unique id for a new report backlog card; test added; c-takes-2337ed retired; c-cutpolish5 and c-nextclean back in Up next.",
@@ -7005,19 +7069,28 @@
     "text": "Read claude/handoff-rules.md and claude/boardsync-fix-handoff.md, then apply the fix and push as syncfix1. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukF45YmxpikFxJCJ4Zj",
     "opening": "\"Read claude/handoff-rules.md and claude/boardsync-fix-handoff.md. The board-sync job has failed every run since 19:45 PT\""
    },
    "history": [
     {
      "d": "2026-11-19",
      "t": "Added by the session that fixes it."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as syncfix1: The board-sync job no longer stops on a duplicate report card"
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-19"
   },
   {
    "id": "t-adminhub1try",
@@ -7066,9 +7139,137 @@
      "t": "Added by c-artgen1 (artgen1 shipped). It waits until the Mudling sheet card (t-heistart) is open for you, because that card waits on its Claude card first."
     }
    ]
+  },
+  {
+   "id": "b-board-artgen",
+   "tag": "board-artgen",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Tools",
+   "title": "board only: the plan for generating a card's pictures with one approval, QA, auto-approve and Library links",
+   "next": "Done: board only: the plan for generating a card's pictures with one approval, QA, auto-approve and Library links",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGiMh61Wcr1Q4VNn3N",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as board-artgen. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-board-adminhub",
+   "tag": "board-adminhub",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Tools",
+   "title": "board only: the plan for one admin page with its own address",
+   "next": "Done: board only: the plan for one admin page with its own address",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGiMh61Wcr1Q4VNn3N",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as board-adminhub. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "c-reports-2",
+   "tag": "reports-2026-11-19",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix the report backlog (1 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100555-mxvd. First note: We need new frames for this art because it doesn't match the style of the game for the monster, I me",
+   "prompt": {
+    "what": "Works through the reports you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-sync: 1 report(s) on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukH73wsvXxaCC7pr8XL",
+   "title": "Generate all of a card's pictures with one approval on the board (artgen1)",
+   "first": "2026-11-20T06:41:54Z",
+   "last": "2026-11-20T07:00:08Z",
+   "tags": [
+    "artgen1",
+    "artgen1b",
+    "artgen1c",
+    "board-artgen1"
+   ],
+   "cards": [
+    "c-artgen1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukH4WQa9dgNTeFoHakp",
+   "title": "One address for all admin tools, and the board's own home screen icon (adminhub1)",
+   "first": "2026-11-20T06:45:34Z",
+   "last": "2026-11-20T06:53:23Z",
+   "tags": [
+    "adminhub1"
+   ],
+   "cards": [
+    "c-adminhub1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFGdMPdkaDVu3sGCnn",
+   "title": "Build the painted battle poses for chapter 1 (clipposes)",
+   "first": "2026-11-20T02:58:16Z",
+   "last": "2026-11-20T04:04:33Z",
+   "tags": [
+    "clipposes"
+   ],
+   "cards": [
+    "c-clipposes"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGJymWuDuyyJixkUSr",
+   "title": "Fix the muffin pan that never leaves the counter, and add the new Mudling sheet to the Art Library (heistart)",
+   "first": "2026-11-20T03:53:06Z",
+   "last": "2026-11-20T04:02:42Z",
+   "tags": [
+    "heistart"
+   ],
+   "cards": [
+    "c-heistart"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukE1YEHdcXNecL1wDgq",
    "title": "Fix what you found on: Look at the SKILLS list text and icons on your phone",
@@ -7115,16 +7316,6 @@
    ],
    "cards": [
     "c-fix-cutpolish4b-2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFGdMPdkaDVu3sGCnn",
-   "title": "Build the painted battle poses for chapter 1 (clipposes)",
-   "first": "2026-11-20T02:58:16Z",
-   "last": "2026-11-20T02:58:16Z",
-   "tags": [],
-   "cards": [
-    "c-clipposes"
    ]
   },
   {
@@ -7233,6 +7424,94 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukF45YmxpikFxJCJ4Zj",
+   "title": "Fix board-sync: duplicate c-reports card stops every run (syncfix1)",
+   "first": "2026-11-19T22:51:53-08:00",
+   "last": "2026-11-19T23:03:25-08:00",
+   "tags": [
+    "syncfix1"
+   ],
+   "cards": [
+    "c-syncfix1",
+    "c-cutpolish5",
+    "c-nextclean",
+    "c-reports",
+    "c-takes-2337ed"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGiMh61Wcr1Q4VNn3N",
+   "title": "board only: the plan for generating a card's pictures with one approval, QA, auto-approve and Library links",
+   "first": "2026-11-19T22:26:53-08:00",
+   "last": "2026-11-19T22:41:23-08:00",
+   "tags": [
+    "board-artgen",
+    "board-adminhub"
+   ],
+   "cards": [
+    "b-board-artgen",
+    "b-board-adminhub"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukH1kiCGvEazM1ZG22h",
+   "title": "A join or leave banner holds the game until you dismiss it",
+   "first": "2026-11-19T19:53:26-08:00",
+   "last": "2026-11-19T20:06:48-08:00",
+   "tags": [
+    "bannerhold1"
+   ],
+   "cards": [
+    "c-bannerhold1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukH2z7yRF86pqAvAyPD",
+   "title": "Fix what you found on: Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\"",
+   "first": "2026-11-19T19:53:38-08:00",
+   "last": "2026-11-19T20:00:05-08:00",
+   "tags": [
+    "fix-ch1starving"
+   ],
+   "cards": [
+    "c-fix-ch1starving"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDt5GX171U9RkvJskx",
+   "title": "Fix the muffin pan that never leaves the counter, and add the new Mudling sheet to the Art Library (heistart)",
+   "first": "2026-11-19T19:59:41-08:00",
+   "last": "2026-11-19T19:59:41-08:00",
+   "tags": [],
+   "cards": [
+    "c-heistart"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGPg3Q41zGrRaPsq4n",
+   "title": "Chapter 1 subtitles match your rerecorded voice clips",
+   "first": "2026-11-19T19:25:51-08:00",
+   "last": "2026-11-19T19:48:22-08:00",
+   "tags": [
+    "ch1retext1"
+   ],
+   "cards": [
+    "c-ch1retext1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEEGSUH9LzPgNRP4w3",
+   "title": "Fix the report backlog (7 open)",
+   "first": "2026-11-19T18:55:42-08:00",
+   "last": "2026-11-19T19:46:57-08:00",
+   "tags": [
+    "reports-2026-11-19c"
+   ],
+   "cards": [
+    "c-reports"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFDnD4JZi9AK4diAco",
    "title": "New battle system, stage 9b: TNB's kit (Ceramicist and Longboarder)",
    "first": "2026-11-19T18:23:30-08:00",
@@ -7269,16 +7548,6 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukGPg3Q41zGrRaPsq4n",
-   "title": "Chapter 1 subtitles match your rerecorded voice clips",
-   "first": "2026-11-19T19:25:51-08:00",
-   "last": "2026-11-19T19:25:51-08:00",
-   "tags": [],
-   "cards": [
-    "c-ch1retext1"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukDHfZ7opAxzYTUs3JC",
    "title": "Newer ElevenLabs music model for the Music Library (Square track)",
    "first": "2026-11-19T19:17:08-08:00",
@@ -7312,16 +7581,6 @@
    ],
    "cards": [
     "c-fix-ch1art2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEEGSUH9LzPgNRP4w3",
-   "title": "Fix the report backlog (7 open)",
-   "first": "2026-11-19T18:55:42-08:00",
-   "last": "2026-11-19T18:55:42-08:00",
-   "tags": [],
-   "cards": [
-    "c-reports"
    ]
   },
   {
@@ -7744,8 +8003,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "2ddc1aabf80468c3cad4824eafe04340ae03b1a6",
- "synced_at": "2026-11-20T03:45:13+00:00",
+ "synced": "3ca2b0531c6c9e0a248277bbe9baa884892148eb",
+ "synced_at": "2026-11-20T07:04:22+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
