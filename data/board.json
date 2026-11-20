@@ -7573,7 +7573,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGGUD269u96cXEAiKs",
+    "url": "https://claude.ai/code/cse_01RXeukDTjJ4EF5ZqM4W3ovf",
     "opening": "not started"
    },
    "history": [
@@ -7608,12 +7608,23 @@
     {
      "d": "2026-11-20",
      "t": "The backlog now holds 7 report(s)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-20",
-   "quiet": true
+   "rescue": {
+    "at": "2026-11-20T15:26:24+00:00",
+    "n": 1,
+    "why": "Quiet: the conversation may have stopped",
+    "url": "https://claude.ai/code/cse_01RXeukDTjJ4EF5ZqM4W3ovf",
+    "prev": "https://claude.ai/code/session_01RXeukGGUD269u96cXEAiKs"
+   },
+   "started_at": "2026-11-20T15:26:24+00:00"
   },
   {
    "id": "c-boardux1",
@@ -8107,7 +8118,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukEmB3zyWbuyVCKQtLs",
+    "url": "https://claude.ai/code/cse_01RXeukFJM32kdS8NhdQvMYp",
     "opening": "not started"
    },
    "history": [
@@ -8130,6 +8141,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
     }
    ],
    "prompt": {
@@ -8142,7 +8157,14 @@
     "text": "Read claude/next-addendum-ch10vance1.md and install the approved Gate Zero pictures (room-gatezero-noplane and room-gatezero-plane) per ROOM_PAINTINGS.md steps, test portrait and landscape with screenshots, push. You have my full permission to access the repo."
    },
    "tag": "gatezero",
-   "quiet": true
+   "rescue": {
+    "at": "2026-11-20T15:26:24+00:00",
+    "n": 1,
+    "why": "Quiet: the conversation may have stopped",
+    "url": "https://claude.ai/code/cse_01RXeukFJM32kdS8NhdQvMYp",
+    "prev": "https://claude.ai/code/session_01RXeukEmB3zyWbuyVCKQtLs"
+   },
+   "started_at": "2026-11-20T15:26:24+00:00"
   },
   {
    "id": "t-gatezeroart",
@@ -8628,7 +8650,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGsiGYgETpYemWpMgR",
+    "url": "https://claude.ai/code/cse_01RXeukGcYhoWvxrUB3VsP1V",
     "opening": "\"The board and admin urls need their own unique favicon and iPhone Home Screen images. There can be generic\""
    },
    "history": [
@@ -8639,6 +8661,10 @@
     {
      "d": "2026-11-20",
      "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
     }
    ],
    "prompt": {
@@ -8650,7 +8676,14 @@
     "effort": "medium (two small pictures and four link lines)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-adminicons1 in data/board.json. Make a generic icon for admin.html and a different one for board.html (favicon 32 and 180 x 180 apple-touch-icon each), link them in each page head, push as adminicons1 (first push: board: start c-adminicons1). You have my full permission to access the repo."
    },
-   "quiet": true
+   "rescue": {
+    "at": "2026-11-20T15:26:24+00:00",
+    "n": 1,
+    "why": "Quiet: the conversation may have stopped",
+    "url": "https://claude.ai/code/cse_01RXeukGcYhoWvxrUB3VsP1V",
+    "prev": "https://claude.ai/code/session_01RXeukGsiGYgETpYemWpMgR"
+   },
+   "started_at": "2026-11-20T15:26:24+00:00"
   },
   {
    "id": "c-fix-ch1starving-3",
@@ -9810,7 +9843,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGAnQQBsSYhUU2HnGe",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -9825,6 +9858,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -9842,7 +9879,7 @@
    "id": "c-attn1",
    "tag": "attn1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Project Ops",
    "title": "Needs attention fixes itself or comes back to you",
    "next": "Building the automatic rescue from claude/attn-plan.md: rule R10 in tools/board_sync.py, tests, the board page changes, the handoff rules.",
@@ -9864,11 +9901,16 @@
     {
      "d": "2026-11-20",
      "t": "Added by this chat. Tom: \"Propose an automated solution for the Needs Attention section on the board how can we can them back to me or fix them without them sitting idle\""
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as attn1: Needs attention fixes itself or comes back to you"
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20"
+   "changed": "2026-11-20",
+   "done": "2026-11-20"
   },
   {
    "id": "c-newcard",
@@ -10158,6 +10200,28 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGAnQQBsSYhUU2HnGe",
+   "title": "Fix: Watch the family's painted battle poses",
+   "first": "2026-11-20T07:26:07-08:00",
+   "last": "2026-11-20T07:26:07-08:00",
+   "tags": [],
+   "cards": [
+    "c-fix-clipposes-2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGEc6cowbEAQDgvRV8",
+   "title": "Needs attention fixes itself or comes back to you",
+   "first": "2026-11-20T07:15:48-08:00",
+   "last": "2026-11-20T07:25:33-08:00",
+   "tags": [
+    "attn1"
+   ],
+   "cards": [
+    "c-attn1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDP7ETKd971CZ852fW",
    "title": "New card button: type an idea, get a sized Claude prompt",
    "first": "2026-11-20T07:17:41-08:00",
@@ -10165,16 +10229,6 @@
    "tags": [],
    "cards": [
     "c-newcard"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGEc6cowbEAQDgvRV8",
-   "title": "Needs attention fixes itself or comes back to you",
-   "first": "2026-11-20T07:15:48-08:00",
-   "last": "2026-11-20T07:15:48-08:00",
-   "tags": [],
-   "cards": [
-    "c-attn1"
    ]
   },
   {
@@ -11143,8 +11197,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "fb23b89509ba92f8236817e316c085f3adea6277",
- "synced_at": "2026-11-20T15:24:42+00:00",
+ "synced": "7cb4237b46fb22ede3eeeeb199b67a0ba3c5fe5d",
+ "synced_at": "2026-11-20T15:26:24+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
