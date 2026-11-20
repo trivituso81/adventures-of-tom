@@ -11472,7 +11472,7 @@
    "created": "2026-11-20",
    "chat": {
     "url": "",
-    "opening": "pasted by Tom from the board"
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-canon03\""
    },
    "history": [
     {
@@ -11483,6 +11483,10 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-20T16:44:57.581Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Session started: checking current main for the fish Big One, the lure and the folding chair."
     }
    ],
    "tag": "gem-canon03",
