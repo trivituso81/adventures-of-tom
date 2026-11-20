@@ -10067,13 +10067,17 @@
    "next": "Tom (2026-11-20): \"It should just be another tab next to shipped\". Building a fifth tab, Backlog, in the board.",
    "blocks": [],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDEhxpGxy5knknCF2p",
     "opening": "started by Tom in a chat"
    },
    "history": [
     {
      "d": "2026-11-20",
      "t": "Tom asked how to reach the backlog on mobile, then: \"It should just be another tab next to shipped\". Started in that chat."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "after": "nothing for Tom: end",
@@ -10089,6 +10093,21 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDEhxpGxy5knknCF2p",
+   "title": "Board redesign 3: four views, search and the wide layout",
+   "first": "2026-11-20T09:12:57Z",
+   "last": "2026-11-20T15:29:22Z",
+   "tags": [
+    "boardux3",
+    "itembanner1"
+   ],
+   "cards": [
+    "c-boardux3",
+    "c-itembanner1",
+    "c-backlogtab"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGcYhoWvxrUB3VsP1V",
    "title": "Own favicon and Home Screen icon for BOARD and ADMIN",
@@ -10129,20 +10148,6 @@
    "tags": [],
    "cards": [
     "c-fix-heist1play"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDEhxpGxy5knknCF2p",
-   "title": "Board redesign 3: four views, search and the wide layout",
-   "first": "2026-11-20T09:12:57Z",
-   "last": "2026-11-20T09:34:02Z",
-   "tags": [
-    "boardux3",
-    "itembanner1"
-   ],
-   "cards": [
-    "c-boardux3",
-    "c-itembanner1"
    ]
   },
   {
@@ -11287,8 +11292,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "449b9b85fd71aa044e6733f041ad5303c0d36a8d",
- "synced_at": "2026-11-20T15:28:07+00:00",
+ "synced": "00b5a41ed9f1b673c3017e1864419a1925f971a7",
+ "synced_at": "2026-11-20T15:30:28+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
