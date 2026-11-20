@@ -1,4 +1,4 @@
-# cutpolish5 test: breathing, squash, hop, pips, the wince, the listener turn and the fx column (engine/emotions.js actorLife, emoTurnListeners).
+# cutpolish5 test (no breathing: fix-cutpolish5): squash, hop, pips, the wince, the listener turn and the fx column (engine/emotions.js actorLife, emoTurnListeners).
 # Usage (repo root, CHROMIUM and PLAYWRIGHT_BROWSERS_PATH set): python3 -I tools/cut_life_test.py   Prints FAILS: [] when every check passes.
 import threading, http.server, socketserver, functools, os, json
 from playwright.sync_api import sync_playwright
@@ -11,8 +11,7 @@ threading.Thread(target=srv.serve_forever, daemon=True).start()
 JS = r"""()=>{ const out={}; splash.active=false; document.getElementById('splash').hidden=true; endIntro();
   const a={name:'x',member:{id:'grace'}},mon={monster:'mudling'},now=lifeNow;
   out.offScene=actorLife(a,'stand'); intro.active=true;
-  let lo=9,hi=0; const real=lifeNow; for(let t=0;t<64;t++){ window.lifeNow=()=>t*.1; const r=actorLife(a,'stand'); lo=Math.min(lo,r.s); hi=Math.max(hi,r.s); }
-  out.breath=[lo,hi];
+  const real=lifeNow; window.lifeNow=()=>1.6; out.still=actorLife(a,'stand').s; window.lifeNow=()=>3.3; out.still2=actorLife(a,'stand').s; out.noBreathFn=typeof lifeOff;
   window.lifeNow=()=>100; actorLife(a,'stand'); a._sqT=undefined; actorLife(a,'em_happy'); window.lifeNow=()=>100.05; out.squash=actorLife(a,'em_happy').s;   // pose change at t=100
   window.lifeNow=()=>200; emoFx(a,'hop'); window.lifeNow=()=>200.15; out.hop=actorLife(a,'em_happy').lift; window.lifeNow=()=>200.5; out.hopEnd=actorLife(a,'em_happy').lift; out.hopCleared=!a._fx;
   window.lifeNow=()=>300; emoFx(a,'!'); window.lifeNow=()=>300.5; out.pip=actorLife(a,'em_happy').pip;
@@ -32,7 +31,7 @@ with sync_playwright() as p:
     o = pg.evaluate(JS); b.close()
 print(json.dumps(o)[:900])
 if o['offScene'] is not None: fails.append('life outside a scene')
-if not (o['breath'][0] >= 1 and abs(o['breath'][1] - 1.0175) < .002): fails.append('breath range %r' % o['breath'])
+if o['still'] != 1 or o['still2'] != 1 or o['noBreathFn'] != 'undefined': fails.append('overworld people must not breathe %r' % o)
 if not (o['squash'] < 1 and o['squash'] > .93): fails.append('squash %r' % o['squash'])
 if not (o['hop'] > 6 and o['hopEnd'] < 1 and o['hopCleared']): fails.append('hop %r %r' % (o['hop'], o['hopEnd']))
 if o['pip'] != '!': fails.append('pip')

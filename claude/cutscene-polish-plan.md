@@ -41,7 +41,7 @@ The video this audit came from is older than main. It shows Rose's cut line "Com
 | 4d | Deedee and Boppy drop their shock | CONFIRMED | `em_surprised` is cleared after 0.3 s (data/scenes.js about 194 to 197). Deedee stands smiling through "AHHH! DEEDEE!". |
 | 4e | Muffins still on the island after the theft | CONFIRMED | Painted in. See section 2. |
 | 4f | Standing up before the floor lines | FIXED (roofnpc2) | All three stay down through the three lines. |
-| 5 | Listener reactions on cue words | BUILT, thin in chapter 1 | The whole chain exists. Rows in chapter 1: opening 15, ch1Theft 4, ch1Pond 6, ch1Goal 0, ch1Amy 0, ch1Ellie 0. Breathing, squash, talk bob, hops and pips do not exist. |
+| 5 | Listener reactions on cue words | BUILT, thin in chapter 1 | The whole chain exists. Rows in chapter 1: opening 15, ch1Theft 4, ch1Pond 6, ch1Goal 0, ch1Amy 0, ch1Ellie 0. Squash, talk bob, hops and pips are built (cutpolish5). Breathing is never built for the overworld (Tom 2026-11-20: breathing is battle only). |
 
 Three collisions with standing rules, and the call made for each:
 
@@ -196,7 +196,7 @@ Edge cases. SKIP mid-heist: prop hide, despawn and flags are plain steps and all
 
 | File | Change |
 |---|---|
-| engine/town-render.js 86 to 110 | Around the feet: breathing (1.75 percent taller and back over 3.2 s, each person offset); a 120 ms squash and settle (0.94, 1.04, 1.0) when a pose changes or a person starts a line; a 1 px bob on the typing tick while that person's line types. Not for a seated, knocked-down or amber person, not for monsters, off during SKIP. |
+| engine/town-render.js 86 to 110 | Around the feet: NO breathing (Tom 2026-11-20, battle only); a 120 ms squash and settle (0.94, 1.04, 1.0) when a pose changes or a person starts a line; a 1 px bob on the typing tick while that person's line types. Not for a seated, knocked-down or amber person, not for monsters, off during SKIP. |
 | engine/emotions.js 135 to 166 | When a line opens, everyone in the scene without a pose turns toward the speaker after 80 to 180 ms, unless the scene set their facing. |
 | docs/emotion-reactions.tsv, tools/reaction-apply.py, tools/script-index/apply.py, script.html 197 to 298, engine/emotions.js 92 to 114, engine/intro.js 220 | New optional column `fx` (hop, !, ?, ..., sweat). `emoPose` also plays an 8 px hop and floats the pip over the head. A row may name the speaker, which changes the speaker's own pose on a cue word (this is how Boppy's wince holds through "Gently. The stomach."). |
 | docs/emotion-reactions.tsv | Rows for ch1Goal, ch1Amy, ch1Ellie and the rest of ch1Theft. |

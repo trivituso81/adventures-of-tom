@@ -220,11 +220,10 @@ updateIntro=function(dt) {
 addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{EMO,emoMoodOf,emoCueReached,emoCueWeights}); });
 
 // Life in a scene (cutpolish5, plan claude/cutscene-polish-plan.md phase 5). Only while a scene runs, only for people (never monsters, riders, knocked-down or
-// amber figures), and off during SKIP. actorLife(a,posKey) gives drawSheetActor a scale (breathing: 1.75 percent taller and back over 3.2 s, each person offset;
+// amber figures), and off during SKIP. actorLife(a,posKey) gives drawSheetActor a scale (NO breathing: Tom 2026-11-20, people in the overworld never breathe, breathing is for battle only;
 // a 120 ms squash and settle 0.94, 1.04, 1.0 when the pose changes or a line starts; a 'wince' fx holds 0.95), a lift in pixels (an 8 px hop; a 1 px bob on the
 // typing tick while that person's line types) and the pip to float over the head. The scale is uniform about the feet (the sprite drawer has no stretch).
-const LIFE_BREATH=.0175, LIFE_PERIOD=3.2, LIFE_SQ=.12, LIFE_HOP_PX=8, LIFE_HOP_SEC=.3, LIFE_PIP_SEC=1.3, LIFE_WINCE_SEC=2.6;
-function lifeOff(a) { const s=String((a.member&&a.member.id)||a.name||(a.isPlayer?'tom':'x')); let h=0; for(let i=0;i<s.length;i++) h=(h*31+s.charCodeAt(i))%997; return h/997*LIFE_PERIOD; }
+const LIFE_SQ=.12, LIFE_HOP_PX=8, LIFE_HOP_SEC=.3, LIFE_PIP_SEC=1.3, LIFE_WINCE_SEC=2.6;
 function lifeNow() { return (typeof performance!=='undefined'?performance.now():Date.now())/1000; }
 function lifeOn(a) { return !!(a&&!a.monster&&!a.seat&&!a.amber&&typeof intro!=='undefined'&&(intro.active||(a._fx&&a._fx.kind==='wince'))&&!(typeof battle!=='undefined'&&battle.active)&&!(typeof cut!=='undefined'&&(cut.skip||cut.ff))); }
 function emoFx(a,kind) { if(a&&kind) a._fx={kind,t0:lifeNow()}; }
@@ -232,7 +231,7 @@ function actorLife(a,posKey) {
   if(!lifeOn(a)) { if(a) a._fx=null; return null; }
   const now=lifeNow();
   if(a._lifeKey!==posKey) { if(a._lifeKey!==undefined) a._sqT=now; a._lifeKey=posKey; }
-  let s=1+LIFE_BREATH*(.5-.5*Math.cos(2*Math.PI*(now+lifeOff(a))/LIFE_PERIOD)),lift=0,pip=null,pt=0;
+  let s=1,lift=0,pip=null,pt=0;
   if(a._sqT!==undefined) { const e=(now-a._sqT)/LIFE_SQ;
     if(e<1) s*=e<.33?1-.06*(e/.33):(e<.66?.94+.10*((e-.33)/.33):1.04-.04*((e-.66)/.34)); else a._sqT=undefined; }
   if(EMO.spk===a&&dialog.active&&dialog.chars&&dialog.shown<dialog.chars.length) lift+=Math.floor(dialog.shown)%2;

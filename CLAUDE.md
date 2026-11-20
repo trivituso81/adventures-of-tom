@@ -49,6 +49,10 @@ Tom: "for any conversation i initiate, check against the board to see if it's an
 
 A request that makes other cards obsolete retires them. Push the board change with the work (or alone, tag `board-<short>`), run `python3 tools/board_check.py`, and finish with "Theme: <theme>. Pending your action: yes/no."
 
+## No breathing in the overworld or scenes (standing rule, Tom 2026-11-20)
+
+Tom (11-20, t-cutpolish5): "Undo this change, and remember forever that we don't make characters in the overworld breathing that breathing animation is only while in battle." People in the overworld and in story scenes never get a breathing (idle size pulse) animation, however a plan or card words it. Battle idle breathing (`battle2-ui.js`, `b3-play.js`) stays. `actorLife` (`engine/emotions.js`) has no breath; `tools/cut_life_test.py` fails if one comes back. Squash on a pose change, listener turns, hops and pips were not named and stay.
+
 ## Battle animations are out of scope for the battle system (standing rule, Tom 2026-11-19 17:01)
 
 Tom: reviewing battle animations is not part of the battle system; he handles it as a separate task, because the mechanics and the animations have no direct dependency (Battle 3 resolves the whole result first and plays it as beats; a clip only calls `reveal(share)` and the rules never wait on it). For every battle system session (stages 9 to 23, balance, story switches): never ask Tom to review, judge or approve a battle animation or clip, not at a milestone, in a closing reply or on a card; never wait on an animation to finish a stage (a move uses `anim:{kind:'default'}` until an animation task changes its row); do not build, wire, tune or fix clips or animation timing as part of a stage, only keep the seam working (the `anim` and `wind` fields default sensibly, a hit lands with or without its clip). Tom judges mechanics only at Milestones A to D: fun, pace, readable screen and turn bar, fight length, kits that feel like the family. An animation note arriving in a battle session becomes a card in the Battle Animations theme and is not acted on there. Details: `claude/battle-scope.md` in the Project.

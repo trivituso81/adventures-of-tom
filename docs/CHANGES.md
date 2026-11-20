@@ -17,6 +17,11 @@
 - art.html `?open=<ids>` opens the tab, group and row and scrolls to it (several ids: all open, scrolled to the first); `?review=` uses the same id check. voices.html `?line=<key>` and `?chapter=<n>&show=<filter>`; music.html `?track=<id>`. An unknown id says so in one line.
 - tools/board_check.py: link rules, and an open Tom card that names a Library must link it. claude/handoff-rules.md and CLAUDE.md name the field. Backfilled t-artgen1try, t-ch1starving and t-oldchecks. Test: tools/cardlinks_test.py. Plan notes: claude/artgen-plan.md "cardlinks1". No xAI or ElevenLabs call.
 
+## fix-cutpolish5 (2026-11-20): People in the overworld and in scenes no longer breathe (breathing is battle only)
+
+- Tom (t-cutpolish5, play): "Undo this change, and remember forever that we don't make characters in the overworld breathing that breathing animation is only while in battle".
+- Kept: squash on a pose change, typing bob, listeners turning, hops, pips, the Boppy wince, the 31 reaction rows. Changed: removed the breathing scale, `LIFE_BREATH`, `LIFE_PERIOD` and `lifeOff` from `engine/emotions.js` (grep: zero references). Battle idle breathing is untouched.
+- Standing rule added to CLAUDE.md. `tools/cut_life_test.py` now checks the scale stays 1.0 at rest and fails if breathing returns. No pencil report was open about this.
 ## cutpolish5 (2026-11-20): Cutscene people breathe, squash into a new pose and bob while talking, listeners turn to the speaker, reaction pips and hops, chapter 1 reaction rows
 
 - Plan: `claude/cutscene-polish-plan.md` phase 5. No dialogue text changed. Only while a scene runs, never for monsters, riders, knocked-down figures or amber figures, off during SKIP and FAST (`actorLife`, `engine/emotions.js`, drawn in `drawSheetActor`, `engine/town-render.js`).

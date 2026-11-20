@@ -7984,7 +7984,7 @@
    "col": "wait",
    "ask": "play",
    "fyi": true,
-   "next": "Play chapter 1 from the start (the opening, then the walk to Aunt Ellie, then the kitchen). Watch people standing in a scene: they should breathe a little, dip when a pose changes, turn to whoever speaks, and hop or show a ! ? ... or sweat drop on cue words. Boppy winces (a sweat drop) on 'Gently. The stomach.' when you talk to him. Tap All good, or Something is wrong with what you saw.",
+   "next": "Play chapter 1 from the start (the opening, then the walk to Aunt Ellie, then the kitchen). People standing in a scene should now stand still with no breathing at all (breathing is battle only). Everything else is as before: a small dip when a pose changes, turning to whoever speaks, a hop or a ! ? ... or sweat drop on cue words, and Boppy's sweat drop on 'Gently. The stomach.' Tap All good, or Something is wrong with what you saw.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -7996,6 +7996,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom: something is wrong: Undo this change, and remember forever that we don't make characters in the overworld breathing that breathing animation is only while in battle Sent to Claude as card c-fix-cutpolish5; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "fix-cutpolish5: removed overworld breathing, rule added to CLAUDE.md; squash, turns, hops and pips kept."
     }
    ],
    "waiting_on": "claude"
