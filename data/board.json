@@ -424,7 +424,7 @@
    "col": "up",
    "next": "Take art/raw out of the published site to cut a publish from about 4 min to about 1.5 min. Plan in claude/next-addendum-pubfast1.md.",
    "blocks": [],
-   "changed": "2026-11-18",
+   "changed": "2026-11-19",
    "created": "2026-11-18",
    "chat": {
     "url": "",
@@ -434,6 +434,10 @@
     {
      "d": "2026-11-18",
      "t": "On the board from the first fill (board1)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom tapped START."
     }
    ],
    "prompt": {
@@ -445,7 +449,8 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/next-addendum-pubfast1.md and build pubfast2. You have my full permission to access the repo."
    },
-   "tag": "pubfast2"
+   "tag": "pubfast2",
+   "start": true
   },
   {
    "id": "c-board1",
