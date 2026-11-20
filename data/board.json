@@ -10756,7 +10756,7 @@
    "id": "c-boardbar1",
    "tag": "boardbar1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Board: empty bar at the top in landscape on the Duo",
    "next": "Built boardbar1: in landscape the Board adds no top padding. Not tested on a phone.",
@@ -10776,6 +10776,10 @@
     {
      "d": "2026-11-20",
      "t": "Pushed boardbar1. Cause (not measured on a phone): body padding-top env(safe-area-inset-top) showed as an empty band in landscape. Removed it in landscape."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as boardbar1: Board has no empty bar above the header in landscape"
     }
    ],
    "prompt": {
@@ -10786,7 +10790,8 @@
     "model": "Claude Sonnet 5.5 (row C: a fix, cause found in board.html)",
     "effort": "medium (one small CSS change)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-boardbar1 in data/board.json. Your first push is the commit board: start c-boardbar1. In board.html the body adds padding-top env(safe-area-inset-top), which shows as an empty band above the header in landscape on the iPhone Duo. Remove that top padding in landscape and keep the menu position in step, test portrait and landscape, push. You have my full permission to access the repo."
-   }
+   },
+   "done": "2026-11-20"
   },
   {
    "id": "c-gem-bug01",
@@ -12112,6 +12117,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFEKCHz2sXbR5Y4xGu",
+   "title": "Board: empty bar at the top in landscape on the Duo",
+   "first": "2026-11-20T08:02:11-08:00",
+   "last": "2026-11-20T08:04:21-08:00",
+   "tags": [
+    "boardbar1"
+   ],
+   "cards": [
+    "c-boardbar1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCr6vD52TNPJtftHUH",
    "title": "board only: one card for every issue in Gemini's chapter 1 test report",
    "first": "2026-11-20T08:02:53-08:00",
@@ -12120,16 +12137,6 @@
     "board-gemcards"
    ],
    "cards": []
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFEKCHz2sXbR5Y4xGu",
-   "title": "Board: empty bar at the top in landscape on the Duo",
-   "first": "2026-11-20T08:02:11-08:00",
-   "last": "2026-11-20T08:02:11-08:00",
-   "tags": [],
-   "cards": [
-    "c-boardbar1"
-   ]
   },
   {
    "url": "https://claude.ai/code/session_01RXeukGAnQQBsSYhUU2HnGe",
@@ -13206,8 +13213,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "ff4858f2d742766d096a21163d7eb07ea4ae05d4",
- "synced_at": "2026-11-20T16:03:06+00:00",
+ "synced": "3df56f05b49fea7b18fd099eeea486979cedc838",
+ "synced_at": "2026-11-20T16:05:23+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
