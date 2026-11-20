@@ -13884,6 +13884,11 @@
      "d": "2026-11-20",
      "t": "Tom handed this to Claude: I dont want to do this - Claude should",
      "at": "2026-11-20T17:56:38.783Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped START.",
+     "at": "2026-11-20T18:01:24.105Z"
     }
    ],
    "chat": {
@@ -13900,7 +13905,8 @@
     "model": "Claude Sonnet 5.5 (row C: the steps are not written yet)",
     "effort": "medium (a handed-over card is usually one piece of work)",
     "text": "Read claude/handoff-rules.md. Tom handed you board card t-projclean-run with this note: I dont want to do this - Claude should. Work out what is needed, rewrite the card, and do it. You have my full permission to access the repo."
-   }
+   },
+   "start": true
   },
   {
    "id": "c-idea-searchthrough",
