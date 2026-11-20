@@ -15808,6 +15808,38 @@
     "effort": "high (a new generator Action and a new clip playback are built in one session with no code to follow)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md, then card c-wanproof in data/board.json with its history and the note on card t-wanproof-setup. Your first push is the commit board: start c-wanproof. Build the proof exactly as section 4 of the plan says: the wan-gen Action with its stand-in test and one dry run first, then the start picture and its checks, then the guard video with the prompt in 4.3 word for word, the checks in 4.4 before Tom sees anything, the bake, the playback, the Lab row PROOF: GRACE'S GUARD (VIDEO), and the game checks in portrait and landscape. Spend at most $2.00 on fal and nothing on xAI. A check that fails gets one retry with one change; a second miss the same way is the stop-loss: tell Tom in plain words and hand him no clip. Do not make any other clip and do not remove any painted state. Build tag wanproof. End with a Tom card (ask animations) for the Lab row. You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "c-permwording1",
+   "tag": "permwording1",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Project Ops",
+   "title": "Make card prompts use the wording the repo check accepts",
+   "next": "Build: every prompt the board writes ends with one exact sentence that the repo permission check accepts, so Tom never has to retype it. Copy the prompt on this card into a new conversation in the Project on Claude Sonnet 5.5, effort medium.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFtsSRVAYExWvAe8An",
+    "opening": "\"why do i have to say full repo access granted every time i make a prompt\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom asked why he has to say \"full repo access granted\" in every prompt. Finding: the permission check refused his general sentence and accepted \"Attach trivituso81/adventures-of-tom with push access.\" on the first try; the board's own prompts end with the general sentence. This card fixes the wording."
+    }
+   ],
+   "prompt": {
+    "what": "Changes the sentence every board prompt ends with, so the repo permission check accepts it and you never retype it.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: one sentence changed in known places, and the tests catch misses)",
+    "effort": "medium (a search and replace across the board, its tests and the open cards)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-permwording1 in data/board.json, history included. Your first push is the commit board: start c-permwording1.\n\nWhy: on 2026-11-20 the permission check (the Claude Code auto mode classifier) refused add_repo when Tom's message said \"full repo access granted\" and allowed it on the first try when his message said \"Attach trivituso81/adventures-of-tom with push access.\" The classifier lets an action through only when the user's message names that exact action; a general sentence does not count. Every prompt the board writes ends with the general sentence \" You have my full permission to access the repo.\" (const PERM in board.html and board_sync.py), so it can be refused.\n\nWhat to build: replace that sentence everywhere the board or a doc writes it with the exact-action sentence \"Attach trivituso81/adventures-of-tom with push access (add_repo).\": const PERM in board.html and tools/board_sync.py; the tests that assert the old sentence (tools/board_test.py, tools/board_newcard_test.py); claude/handoff-rules.md and the repo CLAUDE.md (one line saying why); the prompt text of every open Claude card in data/board.json. Do not touch Done cards or fixtures. Keep the change to the sentence only. Run python3 tools/board_test.py /tmp/board, python3 tools/board_newcard_test.py, python3 tools/board_sync_test.py and python3 tools/board_check.py, then push per claude/next.md. Tell Tom the first line of every prompt he pastes now ends with the new sentence. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "nothing for Tom: end"
   }
  ],
  "sessions": [
