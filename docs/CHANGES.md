@@ -1,3 +1,12 @@
+## buildname1 (2026-11-20): Play and report cards on the board name the build they are in
+
+Tom (11-20): "in card previews on the board and in the details modal at the bottom of the screen, for items that require PLay and report, include the Build name the change is included in."
+
+- `board.html` (`buildOf`, `buildHtml`): a card in For you with the ask Play and report shows a line `Build <name>` under its instruction on the card preview, and the same line sits at the bottom of the details sheet, in the fixed bar just above All good and Something is wrong, so it stays on screen while the body scrolls.
+- Which build (fact): the tag of the Claude card whose `after` is this card. When a fix has shipped for it, the newest shipped one wins (a card tested again after `fix-heist1play-5` says `fix-heist1play-5`). A build still being made shows `(not shipped yet)`. A card with no Claude card pointing at it can carry its own `build` field. A card waiting on a fix shows no build (nothing to test yet).
+- Other asks (pictures, animations, voice, script, decide, setup) show none. Sessions change nothing: the page works the name out from `after`, which every shipped card already has.
+- Tests: new `python3 tools/board_build_test.py` (fixtures for shipped plus fix, not shipped, explicit `build`, waiting, no build, another ask; portrait and landscape screenshots; the line is above the buttons and on screen); `python3 tools/board_test.py /tmp/board` still passes.
+
 ## idea-welcomepage2 (2026-11-20): Picking a chapter starts it at once, with no Start New warning
 
 Tom (11-20, on card c-idea-welcomepage): "also remove the Start New step - when the user selected a chapter, it should just start without any other confirmation needed".

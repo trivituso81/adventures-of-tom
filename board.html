@@ -63,6 +63,9 @@ code.path{font:13px/1.35 ui-monospace,Menlo,monospace;background:var(--well);bor
 .card .state{font-size:13px;color:var(--muted);margin-top:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card .state a{font-weight:700}
 .card .state.quiet{color:var(--prob-text);font-weight:600}
+.bld{font-size:13px;color:var(--muted);margin-top:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bld code{font:13px/1.35 ui-monospace,Menlo,monospace;background:var(--well);border:1px solid var(--btn);border-radius:6px;padding:0 5px;color:var(--text)}
+.sh-bar .bld{margin:0 0 8px}
 .acts{display:flex;align-items:center;gap:6px 10px;margin-top:10px;flex-wrap:wrap}
 .acts .rvrow{display:flex;align-items:center;gap:10px;flex-wrap:nowrap;width:100%}
 .acts .mdl{font-size:13px;color:var(--muted);white-space:nowrap}
@@ -409,6 +412,19 @@ const dispTitle=c=>{let t=String(c.title||'');if(c.tag)t=t.replace(new RegExp('\
 const PW="[A-Z0-9][A-Z0-9'&-]*(?![A-Za-z])",PCAPS=PW+'(?: '+PW+')*';
 const PATHRE=new RegExp('\\b'+PCAPS+'(?: > (?:'+PCAPS+'|[a-z][a-z ]{0,30}?(?= > )|[A-Z][a-z]+ \\d+))+','g');   // ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE, CHAPTERS > Chapter 6
 const withPaths=s=>{const t=String(s||'');let h='',i=0;t.replace(PATHRE,(m,at)=>{h+=esc(t.slice(i,at))+'<code class="path">'+esc(m)+'</code>';i=at+m.length;return m;});return h+esc(t.slice(i));};
+// ---- buildname1: a card that asks Tom to play and report names the build its change is in. The build is the tag of the Claude card whose `after` is this
+// card (the newest one that shipped; a fix card's tag wins over the first build once it ships), else the card's own `build`. A card still waiting on a fix
+// has no build to test, so none is shown.
+function buildOf(c){
+  if(!c||c.lane!=='tom'||c.ask!=='play'||c.col==='done'||c.col==='wait')return null;
+  const mk=B.cards.filter(x=>x.after===c.id&&x.tag&&x.lane==='claude');
+  const sh=mk.filter(x=>x.col==='done').sort((a,b)=>String(a.done||'').localeCompare(String(b.done||'')));
+  if(sh.length)return {tag:sh[sh.length-1].tag,shipped:true};
+  if(c.build)return {tag:c.build,shipped:true};
+  if(mk.length)return {tag:mk[mk.length-1].tag,shipped:false};
+  return null;
+}
+const buildHtml=c=>{const b=buildOf(c);return b?'<div class="bld">Build <code>'+esc(b.tag)+'</code>'+(b.shipped?'':' (not shipped yet)')+'</div>':'';};
 const kickHtml=c=>'<div class="kick"><i style="background:'+(THEME_COL[c.theme]||'#ccc')+'"></i><span class="th">'+esc(c.theme)+'</span>'+(c.lane==='tom'&&c.ask&&c.col!=='done'?'<span class="ak">'+esc(askName(c.ask))+'</span>':'')+'</div>';
 const doText=c=>c.lane==='tom'?c.next:((c.prompt&&c.prompt.what&&c.col!=='done')?c.prompt.what:c.next);
 const days=n=>n+' day'+(n===1?'':'s');
@@ -445,7 +461,7 @@ function cardHtml(c,ctx){
   const first=c.lane==='tom'&&c.first&&c.col!=='done'?'<div class="first">First: '+withPaths(c.first)+'</div>':'';
   const tom=c.lane==='tom';
   return '<div class="card" role="button" tabindex="0" data-id="'+esc(c.id)+'">'+kickHtml(c)+'<div class="t">'+esc(dispTitle(c))+dot+'</div>'+first
-    +'<div class="do'+(tom?'':' two')+'">'+(tom?withPaths(doText(c)):esc(doText(c)))+'</div>'+(tom?linksHtml(c):'')+stateLine(c,ctx)+actsHtml(c,ctx)+'</div>';
+    +'<div class="do'+(tom?'':' two')+'">'+(tom?withPaths(doText(c)):esc(doText(c)))+'</div>'+(tom?linksHtml(c):'')+buildHtml(c)+stateLine(c,ctx)+actsHtml(c,ctx)+'</div>';
 }
 // On a card in the list: All good is an outline button (it is undone for 8 seconds), Something is wrong a text button, one row that never wraps.
 const rvBtns=id=>'<div class="rvrow"><button class="ob" type="button" data-act="good" data-id="'+esc(id)+'">All good</button><button class="tb bad" type="button" data-act="wrong" data-id="'+esc(id)+'">Something is wrong</button></div>';
@@ -669,7 +685,7 @@ function openSheet(id){
     else main='<button class="'+(c.col==='up'?'gold':'ob')+'" id="bcopy" type="button">Copy prompt</button><span class="hint">'+esc(modelShort(c))+'</span>';
   }else if(p&&!c.service&&open_) main='<button class="ob" id="bcopy" type="button">Copy prompt</button>';
   const more=(open_&&!bk?'<button id="bback" type="button">Send to backlog</button>':'')+(open_?'<button id="bnot" type="button">Not needed</button>':'')+'<button id="bnote" type="button">Note</button>';
-  bar+='<div class="more" id="moreRow" hidden>'+more+'</div><div class="barrow">'+main+'<span class="sp"></span><button class="ob small" id="bmore" type="button" aria-expanded="false">More</button></div>';
+  bar+=buildHtml(c)+'<div class="more" id="moreRow" hidden>'+more+'</div><div class="barrow">'+main+'<span class="sp"></span><button class="ob small" id="bmore" type="button" aria-expanded="false">More</button></div>';
   setSheet(shell(kickHtml(c)+'<h2>'+esc(dispTitle(c))+'</h2>',body,bar),'card');
 }
 function toggleMore(v){moreOpen=v==null?!moreOpen:v;const r=$('moreRow'),b=$('bmore');if(r)r.hidden=!moreOpen;if(b){b.setAttribute('aria-expanded',moreOpen?'true':'false');b.textContent=moreOpen?'Less':'More';}}

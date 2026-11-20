@@ -14382,7 +14382,7 @@
    "col": "prog",
    "theme": "Tools",
    "title": "Show the build name on Play and report cards",
-   "next": "In progress: card previews and the details sheet show which build the change is in, for cards that ask Tom to play and report.",
+   "next": "Built as buildname1: a Build line on every Play and report card (preview and the bottom of the details sheet). Tom checks it on card t-buildnametry.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -14403,6 +14403,34 @@
     {
      "d": "2026-11-20",
      "t": "Tom: \"in card previews on the board and in the details modal at the bottom of the screen, for items that require PLay and report, include the Build name the change is included in.\""
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built: board.html buildOf and buildHtml, the build is the tag of the Claude card whose `after` is the card (newest shipped wins, not shipped yet is marked, or the card's own `build`), test tools/board_build_test.py. Hands to Tom: t-buildnametry."
+    }
+   ],
+   "after": "t-buildnametry"
+  },
+  {
+   "id": "t-buildnametry",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Tools",
+   "ask": "play",
+   "fyi": true,
+   "title": "Look for the Build line on a Play and report card",
+   "next": "ADMIN > BOARD, tap For you. Find any card labelled PLAY AND REPORT. Under its instruction you should see a small line that starts with Build and a name in a box (for a build still being made it adds, not shipped yet). Tap the card. At the very bottom of the sheet, just above All good, you should see the same Build line. Cards with another label (REVIEW PICTURES, DECIDE and so on) should have none. Then press All good, or Something is wrong and say what is missing or in the wrong place.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFTWCwqvD635XFuE71",
+    "opening": "made by buildname1"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by build buildname1 (card c-buildname)."
     }
    ]
   },
