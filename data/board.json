@@ -9733,6 +9733,10 @@
     {
      "d": "2026-11-20",
      "t": "Added by stagefollow: a general rule change (walk Tom closer to any far boss) was tried and reverted because it stacked the party in ch13 and moved Tom under the ch08 boss."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom sent this to the backlog."
     }
    ],
    "prompt": {
@@ -9744,7 +9748,11 @@
     "effort": "medium (steps are known)",
     "text": "Read docs/CHANGES.md section stagefollow (how ch12Prime walks the family to CH12_PRIME_MARKS in data/scenes-ch12.js). Do the same for ch13Worm and ch13After in data/scenes-ch13.js: marks near the Drill Worm's left side, one column each, then run tools/reaction_test.py on both scenes in portrait, landscape and Duo (\"vp\":[951,648]) and look at every frame. Fix, test, push. You have my full permission to access the repo."
    },
-   "tag": "wormstage"
+   "tag": "wormstage",
+   "backlog": {
+    "at": "2026-11-20",
+    "from": "up"
+   }
   }
  ],
  "sessions": [
