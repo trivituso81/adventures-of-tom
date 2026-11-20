@@ -16422,6 +16422,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDPY2qNnB59RAn67mF",
+   "title": "Fix typing in the REPORT box (keys act like game hotkeys)",
+   "first": "2026-11-20T12:54:42-08:00",
+   "last": "2026-11-20T12:54:42-08:00",
+   "tags": [],
+   "cards": [
+    "c-reporttype1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
    "title": "Build the Grace guard video proof",
    "first": "2026-11-20T12:41:05-08:00",
@@ -17972,8 +17982,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "005bfc56de73f2be6b2dcb5c1c7706cd101dbedd",
- "synced_at": "2026-11-20T20:52:24+00:00",
+ "synced": "599f57348cf29e6b4faa6722bf48feaa15bb0b57",
+ "synced_at": "2026-11-20T20:55:17+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
