@@ -2166,7 +2166,7 @@
    "title": "Press SKIP in the opening of a new game and check scene 1 skips whole",
    "theme": "Story and Dialogue",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "After the publish of build skipchain1: RELOAD on the title, START NEW, and press SKIP » at the top right during the opening. It should run through Grace's list and the walk out, ending with you in control on the Square and the two Goal popups, with no second scene starting by itself. Report with the REPORT tab if it stops halfway (skipchain1 is the build to name).",
@@ -2181,8 +2181,13 @@
     {
      "d": "2026-11-19",
      "t": "Added by skipchain1: your phone check of the SKIP fix; blocks nothing."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: all good."
     }
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "b-board2-start",
