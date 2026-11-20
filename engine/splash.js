@@ -45,15 +45,18 @@ function startSplash() {
   try{ const go=new URLSearchParams(location.search).get('go'); if(go) { history.replaceState(null,'',location.pathname); splashGoTool(go); } }catch(e){}
   if(!splash.wired) {
     splash.wired=true;
-    const box=el.querySelector('.sp-choices');
-    box.addEventListener('click',e=>{ const b=e.target.closest('.sp-choice'); if(!b) return; unlockAudio(); splashPick(Number(b.dataset.i)); });
-    box.addEventListener('pointerover',e=>{ const b=e.target.closest('.sp-choice'); if(b&&splash.active&&splash.sel!==Number(b.dataset.i)) { splash.sel=Number(b.dataset.i); splashMark(); } });
+    splashWire(el.querySelector('.sp-choices'));
     const rot=$('splash-rotate'); if(rot) rot.addEventListener('click',()=>{ unlockAudio(); toggleLayout(); });
   }
   splash.last=performance.now();
   requestAnimationFrame(splashFrame);
 }
 
+// Tap and hover handling for a row of .sp-choice buttons (the list, and the chapter list's top bar).
+function splashWire(box) {
+  box.addEventListener('click',e=>{ const b=e.target.closest('.sp-choice'); if(!b) return; unlockAudio(); splashPick(Number(b.dataset.i)); });
+  box.addEventListener('pointerover',e=>{ const b=e.target.closest('.sp-choice'); if(b&&splash.active&&splash.sel!==Number(b.dataset.i)) { splash.sel=Number(b.dataset.i); splashMark(); } });
+}
 function splashGoTool(name) {
   const tools={
     'welcome-layout':()=>splashEditOpen(),
@@ -69,15 +72,19 @@ function openAdminPage() {
 }
 // Panel menus. Each choice carries its own action (act) or a locked reason (why).
 //   launch: START NEW / LOAD, plus a small ADMIN button.
-//   new:    chapters 1 to 20, BONUS (Nine Scoops), BACK, all in one list.
+//   new:    a top bar (BACK, then the EASY / MEDIUM / HARD toggles), then chapters 1 to 20 and BONUS (Nine Scoops) in one list.
 //   admin:  DEMO / BATTLE LAB / BACK.          lab: the Battle Lab fights.
 // Chapter 1 is a true new game; later chapters fast-forward the story (engine/chapter-select.js). Part 2 chapter 11
-// continues from the newest Part 1 clear data when there is one, or test-jumps there when there is none.
+// continues from the newest Part 1 clear data when there is one, or test-jumps there when there is none. A chapter starts
+// as soon as it is tapped, on the difficulty picked in the top bar (idea-welcomepage: no difficulty page in between).
 const SPLASH_PARENT={new:'launch',admin:'launch',lab:'admin',solo:'lab'};
 // RELOAD (welcome page, left of ADMIN): a hard reload for the iPhone home-screen app, which has no refresh button and can
 // hold on to old files. It re-downloads the page and every script (skipping the big baked voice files, which rarely change),
 // then reloads on a fresh address. Saves live in localStorage for this site, so they are kept.
 const SPLASH_RELOAD_ICON='<svg class="sp-ico" viewBox="0 0 16 16" width="11" height="11" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13.2 8A5.2 5.2 0 1 1 11.7 4.3"/><path d="M13.4 1.8v3.5h-3.5"/></svg>';
+// BACK (chapter list top bar) and ADMIN (welcome page) icons.
+const SPLASH_BACK_ICON='<svg class="sp-ico" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 2.5 5 8l5.5 5.5"/></svg>';
+const SPLASH_ADMIN_ICON='<svg class="sp-ico" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="2.1"/><circle cx="8" cy="8" r="4.7"/><path d="M8 1v2.2M8 12.8V15M1 8h2.2M12.8 8H15M3.05 3.05l1.5 1.5M11.45 11.45l1.5 1.5M12.95 3.05l-1.5 1.5M4.55 11.45l-1.5 1.5" stroke-width="2.4"/></svg>';
 function splashReload() {
   if(splash.reloading) return;
   splash.reloading=true; sfx.select();
@@ -108,27 +115,36 @@ function splashChapterChoices(from,to) {
     const built=splashBuilt(n);
     if(!built) { out.push({name:'CH '+n,title:c.title,sub:'Still being built.',cls:'locked',why:'Chapter '+n+' is still being built.'}); continue; }
     let act,sub='';
-    if(n===1) act=()=>splashDifficulty(()=>splashGo(confirmNew));
+    if(n===1) act=()=>splashGo(confirmNew);
     else if(n===PARTS[2].from) {
       const clr=partClearSlots();
       sub=clr.length?'From your Part 1 clear data.':'Test: as if Part 1 were done.';
-      // Continuing from clear data keeps the difficulty already saved there; a test jump asks.
-      act=clr.length?()=>splashGo(()=>confirmPart2(splashNewestClear(clr))):()=>splashDifficulty(()=>splashGo(()=>confirmChapter(n)));
+      // Continuing from clear data keeps the difficulty already saved there; a test jump uses the one picked in the top bar.
+      act=clr.length?()=>splashGo(()=>confirmPart2(splashNewestClear(clr))):()=>splashGo(()=>confirmChapter(n));
     } else {
       sub=(chselRegion(n)==='la'?'LA':'Home')+' · Lv '+CHSEL_LEVEL[n];
-      act=()=>splashDifficulty(()=>splashGo(()=>confirmChapter(n)));
+      act=()=>splashGo(()=>confirmChapter(n));
     }
     out.push({name:'CH '+n,title:c.title,cast:splashChapterCast(n),sub,act});
   }
-  out.push({name:'BACK',sub:'',cls:'back',act:splashBack});
   return out;
 }
 const splashNewestClear=slots=>slots.slice().sort((a,b)=>(readSave(b).when||0)-(readSave(a).when||0))[0];
-// Difficulty picker: portrait, label and the B7_DIFF mode it sets (engine/feel.js).
+// Difficulty: portrait, label and the B7_DIFF mode it sets (engine/feel.js). `short` is the very brief line under each toggle
+// in the chapter list's top bar; the longer `blurb` is for the Battle Lab's difficulty page.
 const SPLASH_DIFF=[
-  {id:'rose',name:'EASY',who:'rose',blurb:'Softer monsters, a hint each turn.'},
-  {id:'grace',name:'MEDIUM',who:'grace',blurb:'The game as designed.'},
-  {id:'director',name:'HARD',who:'tom',blurb:'Tougher, faster monsters.'}];
+  {id:'rose',name:'EASY',who:'rose',short:'Softer monsters',blurb:'Softer monsters, a hint each turn.'},
+  {id:'grace',name:'MEDIUM',who:'grace',short:'As designed',blurb:'The game as designed.'},
+  {id:'director',name:'HARD',who:'tom',short:'Tougher monsters',blurb:'Tougher, faster monsters.'}];
+// The chapter list's top bar: BACK, then the three difficulty toggles (the picked one is lit, and it is saved at once).
+const SPLASH_HEAD=4;
+function splashSetDiff(id) {
+  sfx.select(); b7SetDiff(id);
+  document.querySelectorAll('#splash .sp-head .sp-choice.tog').forEach(b=>b.classList.toggle('on',b.dataset.diff===id));
+}
+const splashHeadChoices=()=>[
+  {name:SPLASH_BACK_ICON+'BACK',cls:'back',act:splashBack},
+  ...SPLASH_DIFF.map(d=>({name:d.name,sub:d.short,cls:'tog'+(B7.diff===d.id?' on':''),diff:d.id,act:()=>splashSetDiff(d.id)}))];
 function splashDifficulty(next) {
   splash.diffNext=next; splash.diffFrom=splash.mode; splash.diffSel=splash.sel;
   SPLASH_PARENT.diff=splash.mode;
@@ -140,16 +156,16 @@ const SPLASH_MODES={
     return [
       {name:'NEW GAME',to:'new'},
       {name:'LOAD',act:()=>splashGo(loadMenu)},
-      {name:SPLASH_RELOAD_ICON+'RELOAD',cls:'admin reload',act:splashReload},
-      {name:'ADMIN',cls:'admin',to:'admin'}]; }},
+      {name:SPLASH_RELOAD_ICON,label:'Reload',cls:'admin reload',act:splashReload},
+      {name:SPLASH_ADMIN_ICON,label:'Admin',cls:'admin',to:'admin'}]; }},
   // NEW GAME goes straight to one list: chapters 1 to 20, then the bonus chapter (no Part picker in between).
   // The bonus (data/bonus-nine-scoops.js) is standalone, no Part 1 or Part 2 save needed.
-  new:{tab:'Pick a chapter',cue:'A / Enter to start. B / Esc to go back',choices:()=>{
-    const list=splashChapterChoices(PARTS[1].from,PARTS[2].to),back=list.pop();
+  new:{tab:'Pick a chapter',cue:'A / Enter to start. B / Esc to go back',head:SPLASH_HEAD,choices:()=>{
+    const list=splashChapterChoices(PARTS[1].from,PARTS[2].to);
     list.push({name:'BONUS',title:'Nine Scoops',cast:['tom','grace','rose'],sub:'Grace’s 9th birthday.',
-      act:()=>splashDifficulty(()=>splashGo(typeof confirmBonus==='function'?confirmBonus:confirmNew))},back);
-    return list; }},
-  // Shown after a new game is picked and before its warning or opening: Rose is Easy, Grace is Medium, Tom is Hard.
+      act:()=>splashGo(typeof confirmBonus==='function'?confirmBonus:confirmNew)});
+    return [...splashHeadChoices(),...list]; }},
+  // The Battle Lab's difficulty page (the chapter list has its own toggles in its top bar): Rose is Easy, Grace is Medium, Tom is Hard.
   diff:{tab:'Choose your difficulty',cue:'A / Enter to pick. B / Esc to go back',
     text:'How tough should the monsters be? You can change this any time in Options.',
     choices:()=>[
@@ -211,10 +227,18 @@ function splashSetMode(mode,sel=0) {
   const tx=el.querySelector('.sp-text'); if(tx) { tx.textContent=M.text||''; tx.hidden=!M.text; }
   const list=M.choices(); splash.list=list;
   splash.sel=Math.max(0,Math.min(list.length-1,sel));
-  box.classList.toggle('grid',!M.layout&&list.length>3);
+  const hn=M.head||0;   // the first hn choices sit in a top bar above the list (the chapter list: BACK and the difficulty toggles)
+  box.classList.toggle('grid',!M.layout&&list.length-hn>3);
   box.classList.toggle('launch',M.layout==='launch');
-  box.innerHTML=list.map((c,i)=>
-    '<button class="sp-choice'+(c.cls?' '+c.cls:'')+'" data-i="'+i+'" type="button"'+(c.cls==='locked'?' aria-disabled="true"':'')+'><span class="sp-name">'+c.name+(c.title?'<span class="sp-ttl">'+c.title+'</span>':'')+'</span>'+(c.cast&&c.cast.length?'<span class="sp-cast">'+c.cast.map(id=>'<img src="'+(PORTRAITS[id]||'portraits/'+id+'.png')+'" alt="'+id+'" title="'+id+'" decoding="sync">').join('')+'</span>':'')+(c.sub?'<span class="sp-sub">'+c.sub+'</span>':'')+'</button>').join('');
+  const btn=(c,i)=>'<button class="sp-choice'+(c.cls?' '+c.cls:'')+'" data-i="'+i+'"'+(c.diff?' data-diff="'+c.diff+'"':'')+(c.label?' aria-label="'+c.label+'" title="'+c.label+'"':'')+' type="button"'+(c.cls==='locked'?' aria-disabled="true"':'')+'><span class="sp-name">'+c.name+(c.title?'<span class="sp-ttl">'+c.title+'</span>':'')+'</span>'+(c.cast&&c.cast.length?'<span class="sp-cast">'+c.cast.map(id=>'<img src="'+(PORTRAITS[id]||'portraits/'+id+'.png')+'" alt="'+id+'" title="'+id+'" decoding="sync">').join('')+'</span>':'')+(c.sub?'<span class="sp-sub">'+c.sub+'</span>':'')+'</button>';
+  let head=el.querySelector('.sp-head');
+  if(!head) { head=document.createElement('div'); head.className='sp-head'; box.parentNode.insertBefore(head,box); splashWire(head); }
+  head.hidden=!hn; head.innerHTML=list.slice(0,hn).map((c,i)=>btn(c,i)).join('');
+  if(M.layout==='launch') {
+    // NEW GAME and LOAD fit their text (both as wide as the wider one); the icon-only buttons (cls admin) sit on the right.
+    const part=tools=>list.map((c,i)=>(/\badmin\b/.test(c.cls||''))===tools?btn(c,i):'').join('');
+    box.innerHTML='<div class="sp-main">'+part(false)+'</div><div class="sp-tools">'+part(true)+'</div>';
+  } else box.innerHTML=list.map((c,i)=>i<hn?'':btn(c,i)).join('');
   splashMark();
 }
 function splashMark() {
@@ -228,7 +252,23 @@ function splashMark() {
 }
 // In a 2-column grid, up and down move a whole row (dir is the pressed direction; d is -1 or 1).
 function splashMove(d,dir) {
-  const n=(splash.list||[]).length||2;
+  const n=(splash.list||[]).length||2,hn=(SPLASH_MODES[splash.mode]||{}).head||0;
+  if(hn) {
+    // Top bar (indexes 0..hn-1): left and right step along it, down drops to the first chapter, up wraps to the last chapter.
+    // Chapters (a 2-column grid): left and right step through them, up from the first row climbs to BACK (left column) or the
+    // lit difficulty (right column), down from the last row wraps to the first chapter.
+    const g=n-hn,s=splash.sel;
+    if(s<hn) {
+      if(dir==='left'||dir==='right') splash.sel=(s+d+hn)%hn;
+      else splash.sel=dir==='down'?hn:hn+g-1;
+    } else {
+      const gi=s-hn;
+      if(dir==='left'||dir==='right') splash.sel=hn+(gi+d+g)%g;
+      else if(dir==='up'&&gi<2) splash.sel=gi===0?0:1+Math.max(0,SPLASH_DIFF.findIndex(x=>x.id===B7.diff));
+      else { let t=gi+d*2; if(t>=g) t=0; splash.sel=hn+t; }
+    }
+    sfx.move(); splashMark(); return;
+  }
   const grid=document.querySelector('#splash .sp-choices.grid')&&(dir==='up'||dir==='down');
   if(grid) { let s=splash.sel+d*2; if(s<0) s=n-1; else if(s>=n) s=0; splash.sel=s; }
   else splash.sel=(splash.sel+d+n)%n;
