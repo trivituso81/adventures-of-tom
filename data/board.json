@@ -865,7 +865,7 @@
    "changed": "2026-11-19",
    "created": "2026-11-19",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGvLGXY41TvdXeV1zA",
+    "url": "https://claude.ai/code/session_01RXeukGvLGXY41TvdXeV1zA",
     "opening": "\"Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 4 (cutpolish4)\""
    },
    "history": [
@@ -900,6 +900,10 @@
     {
      "d": "2026-11-19",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -1153,7 +1157,7 @@
     "text": "Read claude/board2-plan.md section 6, claude/project-cleanup-plan.md and claude/handoff-rules.md, then make the board the only list of open work and cut claude/next.md down. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFH1RcLVuFKu9uEo1Q",
+    "url": "https://claude.ai/code/session_01RXeukFH1RcLVuFKu9uEo1Q",
     "opening": "not started"
    },
    "history": [
@@ -1188,6 +1192,10 @@
     {
      "d": "2026-11-19",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "blocks": [],
@@ -6999,7 +7007,7 @@
    "created": "2026-11-19",
    "changed": "2026-11-19",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEz9uEZbuikuqZGDHC",
+    "url": "https://claude.ai/code/session_01RXeukEz9uEZbuikuqZGDHC",
     "opening": "not started"
    },
    "history": [
@@ -7018,6 +7026,10 @@
     {
      "d": "2026-11-19",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -7228,10 +7240,10 @@
    "id": "c-reports-2",
    "tag": "reports-2026-11-19",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
-   "next": "Nothing to fix in code. Report r-20261114-100555-mxvd (mud blob art does not match) is already covered: the new Mudling sheet is made in the Art Library (card t-heistart), then c-heist1 rebuilds the scene with it. The report stays open on branch inbox until that ships.",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100555-mxvd. First note: We need new frames for this art because it doesn't match the style of the game for the monster, I me",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -7242,7 +7254,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGGUD269u96cXEAiKs",
+    "url": "https://claude.ai/code/session_01RXeukGGUD269u96cXEAiKs",
     "opening": "not started"
    },
    "history": [
@@ -7261,12 +7273,15 @@
     {
      "d": "2026-11-20",
      "t": "Session read the one report (mud blob in the Theft scene does not match the game's style). No code fix: new frames come from the Art Library, already queued on t-heistart and c-heist1. Report left open on purpose; close it with python3 tools/reports.py done r-20261114-100555-mxvd when c-heist1 ships."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-20",
-   "waiting_on": "tom"
+   "changed": "2026-11-19"
   },
   {
    "id": "c-boardux1",
@@ -7458,6 +7473,48 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukGGUD269u96cXEAiKs",
+   "title": "Fix the report backlog (1 open)",
+   "first": "2026-11-20T07:45:26Z",
+   "last": "2026-11-20T07:45:42Z",
+   "tags": [
+    "board-reports2"
+   ],
+   "cards": [
+    "c-reports-2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFH1RcLVuFKu9uEo1Q",
+   "title": "Make the board the only list of open work (cut claude/next.md down)",
+   "first": "2026-11-20T07:45:10Z",
+   "last": "2026-11-20T07:45:10Z",
+   "tags": [],
+   "cards": [
+    "c-nextclean"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGvLGXY41TvdXeV1zA",
+   "title": "Cutscene polish phase 5: movement and listener reactions (cutpolish5)",
+   "first": "2026-11-20T07:44:59Z",
+   "last": "2026-11-20T07:44:59Z",
+   "tags": [],
+   "cards": [
+    "c-cutpolish5"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEz9uEZbuikuqZGDHC",
+   "title": "Open the right Art, Voice or Music Library entry straight from a card (cardlinks1)",
+   "first": "2026-11-20T07:44:52Z",
+   "last": "2026-11-20T07:44:52Z",
+   "tags": [],
+   "cards": [
+    "c-cardlinks1"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukH73wsvXxaCC7pr8XL",
    "title": "Generate all of a card's pictures with one approval on the board (artgen1)",
@@ -8262,8 +8319,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "36d63a3dafbc681f15c11eb13cf2d158fa8cb1c6",
- "synced_at": "2026-11-20T07:44:25+00:00",
+ "synced": "38732ceb4f02426c92cd904905efb4f11dc81bff",
+ "synced_at": "2026-11-20T07:46:01+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
