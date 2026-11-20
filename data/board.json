@@ -11635,7 +11635,7 @@
    "title": "Restore the missing grands clues: marks, washer, Gas-X",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Claude brings the build to the locked canon for CANON-07 when its prompt is started.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -11653,6 +11653,11 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-20T16:53:17.676Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: gemini is working off an old version of the script",
+     "at": "2026-11-20T16:54:48.964Z"
     }
    ],
    "tag": "gem-canon07",
@@ -11664,7 +11669,9 @@
     "model": "Claude Opus 5.5 (row D: story and dialogue Tom judges by taste)",
     "effort": "medium (six small additions to two scenes)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-canon07 in data/board.json, history included. Your first push is the commit board: start c-gem-canon07.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is CANON-07. What the tester saw: Priority High. Where: `grands` Pre-Heist & Post-Boss Scenes. Current build: Pre-heist `grands` omits Grace's height marks, Boppy's bent washer, Boppy's `Gas-X` stomach reason for staying behind, and Boppy recognizing the `Grump Hollow` bog smell. Post-boss `grands` omits Deedee's burnt-bulb utility drawer and Boppy's boat promise. Locked target: Restore: (1) Grace's two doorframe height marks; (2) Boppy's cheap modern washer bending in his fingers; (3) one clean `Gas-X` check explaining why Boppy rests at home; (4) Boppy recognizing the `Grump Hollow` bog smell behind `The Square`; and post-boss (5) Deedee starting her drawer of burnt bulbs + (6) Boppy promising to take Tom and the girls out on his Sound boat next visit.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-canon07, push to main, and write the result and the next step onto the card.\n\nThe heist scenes were redone (claude/heist-redo-plan.md). Check which of the six are already in. Keep Boppy a man who complains of aches; the Gas-X line must be one clean check, not a joke chain.\n\nYou have my full permission to access the repo."
-   }
+   },
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "c-gem-canon08",
