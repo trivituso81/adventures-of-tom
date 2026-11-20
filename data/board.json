@@ -6612,6 +6612,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom approved generating 1 picture (about $0.06)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Pictures job: made 1 picture. Spent about $0.06."
     }
    ],
    "gen": {
@@ -6623,10 +6627,16 @@
     "est": 0.06,
     "mode": "review",
     "run": {
-     "state": "running",
-     "at": "2026-11-20T08:37:28Z",
+     "state": "done",
+     "at": "2026-11-20T08:37:52Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44704010652",
-     "n": 1
+     "made": [
+      "ch1-mudling-heist2"
+     ],
+     "already": [],
+     "skipped": [],
+     "failed": [],
+     "spent": 0.06
     }
    }
   },
