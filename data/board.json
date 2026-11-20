@@ -5556,6 +5556,10 @@
     {
      "d": "2026-11-19",
      "t": "Unblocked: Chapter 1 pictures: six were not needed, only Grace's list is left is done."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom tapped START."
     }
    ],
    "blocks": [],
@@ -5564,7 +5568,8 @@
    "chat": {
     "url": "",
     "opening": "not started"
-   }
+   },
+   "start": true
   },
   {
    "id": "c-fix-cutpolish4b",
