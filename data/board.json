@@ -15515,7 +15515,7 @@
    "id": "c-reports-5",
    "tag": "reports-2026-11-20",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-113001-w756. First note: rose facing the wrong way",
@@ -15529,7 +15529,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFNkCr1k6xT3RqhfT1",
     "opening": "not started"
    },
    "history": [
@@ -15541,12 +15541,16 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-20T19:42:03.388Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
-   "start": true
+   "started_at": "2026-11-20T19:42:40+00:00"
   }
  ],
  "sessions": [
@@ -17573,8 +17577,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "f0bf42ae43728f7bf116ef3961245eabd6114207",
- "synced_at": "2026-11-20T19:41:20+00:00",
+ "synced": "2ca0a60cce5e2bbccdb09cb909323d5b647927d1",
+ "synced_at": "2026-11-20T19:42:41+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
