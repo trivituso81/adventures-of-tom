@@ -168,7 +168,7 @@ SCENES.ch1Theft=[
   {flag:'ch1-theft'}, {noHuddle:true},   // staged by hand below: the party holds its spots by the island instead of hopping between speakers
   {call:()=>{ if(typeof storyPosesLoad==='function') { storyPosesLoad('deedee'); storyPosesLoad('boppy'); } }},
   {place:'Deedee',at:[7,9],dir:'right'}, {place:'Boppy',at:[13,10],dir:'up'},   // Boppy sits at the dining table with an empty plate, his back to the door; Deedee faces Tom (cutpolish3: people who talk stand side by side and face left or right, never the camera)
-  {prop:'muffinpan',kind:'muffinpan',set:{map:'grands',x:3.1,y:7.1}},   // twelve muffins on the baking island (stand-in)
+  {prop:'muffinpan',kind:'muffinpan',set:{map:'grands',x:3.9,y:7.1}},   // twelve muffins on the baking island (stand-in)
   {all:[{walk:'tom',to:routeTo('tom',9,9),speed:.25},{walk:'grace',to:routeTo('grace',10,10),speed:.25},
     {if:()=>{ const r=sceneActor('rose'); return !(r&&r.seat); },then:[{walk:'rose',to:routeTo('rose',8,10),speed:.25}]}]},   // they walk in together (no snapping); Rose rides in on Tom's shoulders (a save without the ride flag walks her in)
   {face:'tom',dir:'left'}, {face:'grace',dir:'left'},
@@ -855,10 +855,8 @@ const STORY_PROPS={
     ellipse(cx,yy+4,w+1,5,'#2b2a26'); ellipse(cx,yy+3,w,4,'#9aa1a6'); ellipse(cx,yy+2,w-1,3,'#c9cfd3');
     for(let r=0;r<2;r++) for(let c=0;c<4;c++) ellipse(cx-w*.6+c*(w*.4),yy+1+r*3,2,1,'#6f767b');
   },
-  // Muffins held in both hands by a Mudling (twelve is too many to draw: a heap of four).
-  muffins(cx,y,a) {
-    for(const [dx,dy] of [[-5,2],[0,-1],[5,2],[0,4]]) { ellipse(cx+dx,y+dy+2,4,2,'#7a4a24'); ellipse(cx+dx,y+dy,4,3,'#c98a46'); rect(cx+dx-2,y+dy-3,4,1,'#f1d9a8'); }
-  }
+  // The painted muffin pan held in front of a Mudling (fix-cutpolish4b: the code-drawn heap of four looked terrible).
+  muffins(cx,y,a) { PROPART.draw('ch1/pan_full',cx,y-2,{w:22}); }
 };
 
 // Story effects drawn on the map (engine/story.js, in map coordinates): chapter 2's purple smog, the trance swirls

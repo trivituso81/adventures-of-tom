@@ -276,7 +276,7 @@ PLATE_BEHIND.jpark=[{pts:[[113,260],[113,273],[117,279],[130,278],[139,284],[140
 // draws the table top without its muffins over both layers: art/grands-empty.webp over the painting, art/grands-empty-fg.webp over the foreground cutout.
 // The box is in pixels of the 1254 px kitchen picture.
 const GRANDS_EMPTY={box:[187,518,445,662],img:null,fgImg:null,V:'cutpolish4b'};
-function grandsEmpty(map) { return !!(map&&map.id==='grands'&&typeof STORY!=='undefined'&&STORY.flags['muffins-gone']&&!STORY.flags['ch1-job']); }
+function grandsEmpty(map) { return !!(map&&map.id==='grands'); }   // fix-cutpolish4b: the island is always drawn bare (Tom 11-20: the muffins are the pan prop, the painting needs no pastries)
 function grandsEmptyDraw(map,fgLayer) {
   if(!grandsEmpty(map)) return;
   const k=fgLayer?'fgImg':'img',G=GRANDS_EMPTY;

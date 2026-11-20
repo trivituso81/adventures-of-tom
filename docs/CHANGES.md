@@ -1,3 +1,8 @@
+## fix-cutpolish4b (2026-11-20): kitchen island bare from the start, muffin pan clear of the pastries, painted pan in the Mudling's hands, bigger muffin papers
+
+- Tom (t-cutpolish4b): "the muffins appear over the other pastries on the table. we dont need art that has all the pastries on the table. muffins should just be on the empty table (fine to leave the tart to the left of the muffins). / right now after the monster takes the muffins, the muffins are still there and the art changes. the art doesnt need to change, but the muffins should be gone. / i dont see the muffin wrappers on the marsh - maybe tney are not visible enough? the mudling holding the muffins looks terrible"
+- `engine/plate.js` `grandsEmpty`: the bare island patch is drawn in the kitchen at all times (was only between the grab and ch1-job), so the pan no longer sits on top of painted plates and nothing changes at the grab. `data/scenes.js` ch1Theft: the pan prop moved right (x 3.1 to 3.9) so it clears the cake stand; the grab already hides it.
+- `STORY_PROPS.muffins` (data/scenes.js): the Mudling holds the painted `ch1/pan_full` (the code-drawn heap of four is gone). `SPK.papers`: 1.7 to 2.6 tiles wide.
 ## reports-2026-11-19b (2026-11-19): Old Iron-Gill's swim away from the pier now stays on open water too
 
 - Follow-up to reports-2026-11-19a, same report r-20261114-182326-95v4 (Tom: "you can't be overlapping with the pier at all").

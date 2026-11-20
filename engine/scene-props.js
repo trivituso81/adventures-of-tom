@@ -116,7 +116,7 @@ SPK.mudprints=(P)=>{ const u=Math.min(1,(performance.now()-(P.t0||0))/4000),a=1-
 // Three muffin crumbs on the floor by the island where the Mudling grabbed the pan. Fields x,y (tile).
 SPK.crumbs=(P)=>{ for(const [dx,dy,r] of [[0,0,3],[.45,.22,2.4],[.8,-.05,2.8]]) { const x=(P.x+dx)*T,y=(P.y+dy)*T; ctx.fillStyle='#c98a46'; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#f1d9a8'; ctx.fillRect(x-1,y-r,2,1.5); } };
 // The painted nine muffin papers (cutpolish4b, art/props/ch1/papers.webp, entry ch1-muffin-papers) scattered in the reeds. Fields x,y (tile).
-SPK.papers=(P)=>{ PROPART.draw('ch1/papers',(P.x+.75)*T,(P.y+.55)*T,{w:T*1.7}); };
+SPK.papers=(P)=>{ PROPART.draw('ch1/papers',(P.x+.75)*T,(P.y+.55)*T,{w:T*2.6}); };
 
 // A painted picture: art/props/<art>.webp drawn with its feet at tile (x,y) and w tiles wide (the ears-row picture over the three of them). Fields art, x, y, w.
 SPK.img=(P)=>{ PROPART.draw(P.art,P.x*T,P.y*T-(P.w*T*(PROPART.ready(P.art)?PROPART.get(P.art).naturalHeight/PROPART.get(P.art).naturalWidth:1))/2,{w:P.w*T}); };

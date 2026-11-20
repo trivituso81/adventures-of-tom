@@ -1940,7 +1940,7 @@
    "col": "wait",
    "ask": "play",
    "fyi": true,
-   "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen: after the Mudling grabs the pan the three muffin plates on the island should be gone and the cake stand stay. Then the paper muffin liners in the Grump Hollow reeds, and the phone lighting up on the cab seat (press A to close). Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one). Claude fixes them and this card comes back to you to check.",
+   "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen. Look at the island: the table is bare except the tart and the cake stand, and the muffin pan sits on it clear of the other pastries. After the Mudling grabs the pan the pan is gone and the table stays as it was. The Mudling now carries the painted pan, not the little heap. Then the paper muffin liners at the entrance of Grump Hollow (they are bigger now). Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one). Claude fixes them and this card comes back to you to check.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-20",
@@ -1960,6 +1960,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom: something is wrong: the muffins appear over the other pastries on the table. we dont need art that has all the pastries on the table. muffins should just be on the empty table (fine to leave the tart to the left of the muffins). / right now after the monster takes the muffins, the muffins are still there and the art changes. the art doesnt need to change, but the muffins should be gone. / i dont see the muffin wrappers on the marsh - maybe tney are not visible enough? the mudling holding the muffins looks terrible Sent to Claude as card c-fix-cutpolish4b; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fix fix-cutpolish4b shipped: the kitchen island is always drawn bare, the muffin pan sits clear of the pastries and vanishes at the grab with no art change, the Mudling carries the painted pan, the muffin papers are 50% larger."
     }
    ],
    "waiting_on": "claude"
@@ -5453,6 +5457,10 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fixed all three of Tom's points; build fix-cutpolish4b."
     }
    ],
    "prompt": {
