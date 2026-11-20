@@ -10749,7 +10749,7 @@
    "title": "Rebuild Grace's other slowed lines from your takes",
    "theme": "Voice Clips",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "gracevoice-rest",
    "next": "Shipped (gracevoice-rest). Nothing for Tom. If a Grace line still sounds slow, send its report from the pencil tab and Claude will look at that line.",
    "blocks": [],
@@ -10785,6 +10785,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped in gracevoice-rest: 126 Grace story clips rebuilt from Tom's kept takes (byte-exact match only, nothing spent). 93 Grace clips still flagged with no take; the pitch list over-counts, so they are lines to check, not known broken. Details in docs/CHANGES.md."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gracevoice-rest: Grace's other slowed story lines are back at her real speed, from the takes Tom kept"
     }
    ],
    "prompt": {
@@ -10800,7 +10804,8 @@
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDNJ7iWP5DDvKaTnnD",
     "opening": "started by START"
-   }
+   },
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-heist1play-3",
@@ -13040,6 +13045,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukDNJ7iWP5DDvKaTnnD",
+   "title": "Rebuild Grace's other slowed lines from your takes",
+   "first": "2026-11-20T17:07:12Z",
+   "last": "2026-11-20T17:17:26Z",
+   "tags": [
+    "gracevoice-rest"
+   ],
+   "cards": [
+    "c-gracevoice-rest"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEr3zRmZS5WgoQeWYc",
    "title": "Fix: Play the new chapter 1 opening in the taxi office",
    "first": "2026-11-20T17:10:49Z",
@@ -13059,16 +13076,6 @@
    "tags": [],
    "cards": [
     "c-idea-reviewwhatever"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDNJ7iWP5DDvKaTnnD",
-   "title": "Rebuild Grace's other slowed lines from your takes",
-   "first": "2026-11-20T17:07:12Z",
-   "last": "2026-11-20T17:07:12Z",
-   "tags": [],
-   "cards": [
-    "c-gracevoice-rest"
    ]
   },
   {
@@ -14657,8 +14664,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "d4cd2fb6852ef9f86e9bd5c362adc1bd91f7145c",
- "synced_at": "2026-11-20T17:17:03+00:00",
+ "synced": "061b56766de0c5f583cbc4f924fb5e89bd762838",
+ "synced_at": "2026-11-20T17:18:33+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
