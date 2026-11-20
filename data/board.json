@@ -8126,7 +8126,7 @@
    "title": "Orange blocks: replay the family lines",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. In the game, press A on an orange block that was left behind. You should see the family's lines replay.",
@@ -8145,8 +8145,13 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: nothing was left for it to wait on."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "t-oldchecks-pencil",
