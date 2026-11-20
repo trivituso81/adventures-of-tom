@@ -7948,7 +7948,7 @@
    "title": "Casa Alvarez: place the six walkers and check the 18 pages",
    "theme": "Areas",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped (alvareza, alvarez). Tom plays Casa Alvarez on his phone: card t-alvarezplay.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -7985,6 +7985,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped as alvarez: twelve self-staged scenes checked; ch2End (TNB and Nara left at the arch) and ch5Pruitt (Clara's dad on Amy, Grace and Pruitt) fixed; the other ten left alone. Tom card t-alvarezplay added."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as alvarez: Two more scenes keep the family together: the block party at Old Oak Park and Clara's dad at the school"
     }
    ],
    "prompt": {
@@ -7997,7 +8001,8 @@
     "text": "Read claude/next-addendum-near1.md. Casa Alvarez (ch12Alvarez): hand-place the six walkers in the living room, look at all 18 pages in portrait and landscape, push; then check the twelve self-staged scenes listed there. You have my full permission to access the repo."
    },
    "tag": "alvarez",
-   "after": "t-alvarezplay"
+   "after": "t-alvarezplay",
+   "done": "2026-11-20"
   },
   {
    "id": "c-knownwrong",
@@ -9832,6 +9837,20 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCqNGVM6VpAdv1kfVV",
+   "title": "Casa Alvarez: place the six walkers and check the 18 pages",
+   "first": "2026-11-20T01:09:04-08:00",
+   "last": "2026-11-20T01:59:00-08:00",
+   "tags": [
+    "alvareza",
+    "alvarez"
+   ],
+   "cards": [
+    "c-alvarez",
+    "t-alvarezplay"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDSFVbmbuiGhUt1pZJ",
    "title": "Merge 13 new voice takes",
    "first": "2026-11-20T01:51:14Z",
@@ -9914,18 +9933,6 @@
    "cards": [
     "c-ch1leftovers",
     "c-amber14"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCqNGVM6VpAdv1kfVV",
-   "title": "Casa Alvarez: place the six walkers and check the 18 pages",
-   "first": "2026-11-20T01:09:04-08:00",
-   "last": "2026-11-20T01:31:18-08:00",
-   "tags": [
-    "alvareza"
-   ],
-   "cards": [
-    "c-alvarez"
    ]
   },
   {
@@ -10647,8 +10654,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "ee30e047be1d06fc1675acfe1b61d4941f4c8084",
- "synced_at": "2026-11-20T09:55:23+00:00",
+ "synced": "8ec0dbf7ab890d75d1a38d4304799e78ee057bab",
+ "synced_at": "2026-11-20T09:59:52+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
