@@ -3,23 +3,34 @@
 // A scene is an array of steps, or a function returning one (it runs when the scene starts, so it can use where things are).
 const SCENES={};
 
-// The opening (START NEW): Tom steps out of Long Island Taxi Co. alone, Grace and Rose shout TATA!!! and run in from the west,
+// The opening (START NEW): Tom stretches inside Long Island Taxi Co., Sal sends him out, he steps out alone, Grace and Rose shout TATA!!! and run in from the west,
 // jump on him for a hug, Rose climbs onto his shoulders, Grace shows off her squishy (painted poses), then both join the party.
 SCENES.opening=()=>{
   const h=houseById.taxi,dx=h.door.x,dy=h.door.y,row=dy+1,gStart=10,rStart=9;
   const gTiles=[],rTiles=[];
   for(let x=gStart+1;x<=dx-1;x++) gTiles.push([x,row]);
   for(let x=rStart+1;x<=dx-1;x++) rTiles.push([x,row+1]);
+  // gem-canon01 (Tom 2026-11-20): the stretch and his first line happen inside the taxi office, Sal sends him out, then the greeting outside.
+  const toRoom=()=>{ currentMap=worlds.taxi; player.x=8; player.y=9; player.facing='down'; player.move=null; player.hidden=false;
+    placeFollowers(); for(const f of followers) f.hidden=true; refreshAreaUI(); resize(); camera.snap=true; };
+  const toSquare=()=>{ currentMap=worlds[h.area]||town; player.x=dx; player.y=dy; player.facing='down'; player.move=null;
+    placeFollowers(); for(const f of followers) f.hidden=true; refreshAreaUI(); resize(); camera.snap=true; };
   return [
-    {noGo:[9,dy+1,27,dy+3]},                       // keep villagers from wandering through the scene
-    {zoom:2,time:.9},                                // camera pushes in right after the title card, before Tom steps out; back out at the end
+    {call:toRoom}, {show:'tom'}, {cam:[8.5,6.6]},   // frame Tom and Sal together (landscape shows about six rows)
     {wait:.7},
-    {call:()=>sfx.doorOut()}, {show:'tom'}, {place:'tom',at:[dx,dy],dir:'down'},
-    {wait:.35},
+    {step:stretchStep()},
+    {face:'tom',dir:'up'},
+    {talk:'Tom',lines:["Oof, I'm finally here! At least the 6 hours went by fast on Delta One! ;)"],voice:[['tom','intro1']]},
+    {talk:'Sal',lines:["OK Mr. Fancy Pants. Head outside, I think there's a couple of pipsqueaks looking for you."]},
+    {cam:null}, {walk:'tom',to:[[8,10],[8,11],[8,12],[8,13],[8,14],[8,15]],speed:.26},
+    {call:()=>sfx.doorOut()},
+    {fade:'out',time:.45},
+    {call:toSquare},
+    {noGo:[9,dy+1,27,dy+3]},                       // keep villagers from wandering through the scene
+    {fade:'in',time:.45},
+    {zoom:2,time:.9},                                // camera pushes in as Tom steps out; back out at the end
     {walk:'tom',to:[[dx,row]],speed:.3},
     {wait:.3},
-    {step:stretchStep()},
-    {talk:'Tom',lines:["Oof, I'm finally here! At least the 6 hours went by fast on Delta One! ;)"],voice:[['tom','intro1']]},
     {call:()=>{ intro.bubble={text:'TATA!!!',t:0}; snd.gasp(); }}, {say:['grace','introshout']}, {say:['rose','introshout',.5]},
     {step:hugHearStep()},                            // painted: Tom hears them, lights up, crouches with his arms open (data/story-poses.js "hug")
     {face:'tom',dir:'left'},
