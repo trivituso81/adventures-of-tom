@@ -95,7 +95,7 @@ const CH1_DISMOUNT=land=>{ const up=()=>{ const r=sceneActor('rose'); return !!(
 // 1. The Square, right after the opening (the squishy beat stays exactly as built): Grace's list.
 SCENES.ch1Goal=[
   {flag:'ch1-goal'},
-  {wait:.6}, {ch1Reveal:'list'},   // Grace unfolds a piece of notebook paper: the list close-up (ch1art3), A to continue
+  {wait:.6},
   {talk:'Grace',lines:["Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One again."]},
   {talk:'Rose',lines:["It's bigger than a BUS! It ate a boat!"]},
   {talk:'Grace',lines:["It did not eat a boat. Nobody's ever seen it but Boppy, and he's been saying it for twenty years."]},
@@ -105,6 +105,7 @@ SCENES.ch1Goal=[
   {talk:'Tom',lines:["Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait. I'm starving!"]},
   {face:'tom',dir:'down'}, {wait:.25},   // Rose, still on his shoulders, turns Tom by the ears toward Rivituso Row (no ear frame yet); a short beat so the box does not sit closed
   {talk:'Grace',lines:["Number three. Rose licked a muffin."]},
+  {ch1Reveal:'list'},   // Grace holds up the finished list: the close-up (ch1art3), A to continue. Only after her third item (Tom report r-20261120-000755-3h9p)
   {toast:'New Tombos: Squishy Delivery (Grace) and Double-Decker Airplane (Rose). In battle, find them inside ▶︎ HEAL (Squishy Delivery) and ▲ ATTACK (Double-Decker Airplane).',time:4},
   {toast:"Goal: Deedee and Boppy's house. Rivituso Row, south of the Square.",time:4.5},
   // Tom (with Rose still on his shoulders, cutpolish3) and Grace walk out onto the open plaza path toward the Rivituso Row arch, so control comes back
@@ -126,14 +127,14 @@ SCENES.ch1Amy=[
   {flag:'ch1-amy'},
   {all:[{walk:'tom',to:routeTo('tom',8,8),speed:.28},{walk:'grace',to:routeTo('grace',9,8),speed:.28}]},   // Rose rides along on Tom's shoulders
   {face:'tom',dir:'left'}, {face:'grace',dir:'left'},
-  {cam:[7.2,4.7],time:.6},
+  {cam:[7.2,4.7],time:.6}, {zoom:1.45,time:.6},   // push in on the party and Amy's window together (Tom report r-20261120-001019-feou)
   {prop:'amywin',kind:'windowfig',set:Object.assign({map:'row',u:0},CH1_AMY_WIN)},
   {propTo:'amywin',field:'u',to:1,time:.35},
   {talk:'Amy',lines:["Brother! I'm watching you from the window. I've seen people move faster walking on the sand at Robert Moses."]},
   {talk:'Tom',lines:["I'm carrying a child and receiving a news report."]},
   {talk:'Amy',lines:["I carried both of them up that street with the groceries. Go see Mom. I'm coming over after my run."]},
   {propTo:'amywin',field:'u',to:0,time:.3}, {prop:'amywin',hide:true},
-  {cam:null}, {face:'tom',dir:'right'},   // Amy is gone: Tom turns to Grace for the last two lines (facehold1)
+  {zoom:1,time:.5}, {cam:null}, {face:'tom',dir:'right'},   // Amy is gone: Tom turns to Grace for the last two lines (facehold1)
   {talk:'Tom',lines:["Your mother says I'm slow."]},
   {talk:'Grace',lines:["You are slow. I've been on number four since the taxi place."]},
   {call:()=>{ if(typeof storyPosesLoad==='function') { storyPosesLoad('deedee'); storyPosesLoad('boppy'); } }}   // Deedee's greeting poses are ready before the kitchen (roofnpc2); last, so the 20 s idle release (engine/painted.js) does not drop them during this scene (amywin1)
