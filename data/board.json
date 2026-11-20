@@ -8272,7 +8272,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGqkSQR8RWqB1nkDck",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -8291,6 +8291,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom answered in chat (boardwait1 session), after two fixes went the wrong way: \"Keep it, I'll re-record\". So: put \"[hungry] I'm starving!\" back in the script, list the line to record again, keep the old take playing until the new one is merged, then the subtitle gains \"I'm starving!\"."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -8433,7 +8437,7 @@
    "title": "Unstick your cards that sat in Waiting with nothing left to wait on (boardwait1)",
    "theme": "Tools",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "boardwait1",
    "next": "Built (boardwait1): the board-sync job now opens a Tom card that sits in Waiting with nothing blocking it. 8 stuck cards opened, 3 retired (chapter 2 and later, per Tom), t-boarduxtry now names its real blocker (c-boardux3).",
    "blocks": [],
@@ -8455,6 +8459,10 @@
     {
      "d": "2026-11-20",
      "t": "Cause: a Tom card leaves Waiting only when a card that lists it in blocks is Done. Cards made \"after\" a build (t-heistart, t-reportcheck, t-cardlinks1try, t-artgen1try) and the six old-checks cards were never listed by anyone, so they sat in Waiting labelled waiting on Claude forever. Fixed in tools/board_sync.py (R1) with a test."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as boardwait1: Your cards no longer sit in Waiting when nothing is left to wait on"
     }
    ],
    "prompt": {
@@ -8466,7 +8474,8 @@
     "effort": "medium (small fix in one file)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-boardwait1 in data/board.json. Your first push is the commit board: start c-boardwait1. Fix tools/board_sync.py so a Tom card in Waiting that no card blocks moves to Up next, add a test to tools/board_sync_test.py, clean up the stuck cards, and push as boardwait1. You have my full permission to access the repo."
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-clipposes",
@@ -8494,7 +8503,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukFiXq97j4v19xAg1P9",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -8509,6 +8518,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -8524,6 +8537,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukGkSQR8RWqB1nkDck",
+   "title": "Clear the known-wrong list from the old next.md",
+   "first": "2026-11-20T08:36:39Z",
+   "last": "2026-11-20T08:36:39Z",
+   "tags": [],
+   "cards": [
+    "c-knownwrong"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukEmB3zyWbuyVCKQtLs",
    "title": "Install the Gate Zero pictures (no plane, plane)",
@@ -8821,13 +8844,26 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFiXq97j4v19xAg1P9",
+   "title": "Fix what you found on: Watch the painted poses for the family (PAINTED STATES: CHAPTER 1)",
+   "first": "2026-11-20T00:36:32-08:00",
+   "last": "2026-11-20T00:36:32-08:00",
+   "tags": [],
+   "cards": [
+    "c-fix-clipposes"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGqkSQR8RWqB1nkDck",
    "title": "Unstick your cards that sat in Waiting with nothing left to wait on (boardwait1)",
    "first": "2026-11-20T00:26:34-08:00",
-   "last": "2026-11-20T00:26:34-08:00",
-   "tags": [],
+   "last": "2026-11-20T00:36:09-08:00",
+   "tags": [
+    "boardwait1"
+   ],
    "cards": [
-    "c-boardwait1"
+    "c-boardwait1",
+    "c-fix-ch1starving-3"
    ]
   },
   {
@@ -9461,8 +9497,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "24bbdd1314f1782b1a1bc9c2b60f4157a2ff52c0",
- "synced_at": "2026-11-20T08:35:58+00:00",
+ "synced": "dddf9766c297ca90825dfc8989e150e7f921caa2",
+ "synced_at": "2026-11-20T08:36:47+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
