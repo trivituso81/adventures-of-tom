@@ -7588,6 +7588,10 @@
     {
      "d": "2026-11-20",
      "t": "Moved off claude/next.md onto the board by c-nextclean."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped START."
     }
    ],
    "prompt": {
@@ -7599,7 +7603,8 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/next-addendum-ch6stage4done.md and claude/story-ch06.md. Fix the chapter 6 leftovers (talk and emotion rows for new lines, landscape frames of ch6Park and ch6Kitchen, the Chairman finale at the picnic table), test, push, then tell me what to play. You have my full permission to access the repo."
    },
-   "tag": "ch6left"
+   "tag": "ch6left",
+   "start": true
   },
   {
    "id": "c-stagefollow",
