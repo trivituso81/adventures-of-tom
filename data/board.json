@@ -15076,7 +15076,7 @@
    "id": "c-builds3",
    "tag": "builds3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "auto": true,
    "theme": "Tools",
    "title": "Build history redesign 3: archive, search and its own page",
@@ -15110,6 +15110,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as builds3: old builds move to an archive by month, search covers every build, and the build history has its own page with a button in Admin"
     }
    ],
    "prompt": {
@@ -15122,13 +15126,13 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/builds-plan.md (all of it, with its Built section, and look at claude/builds-mock.png), then card c-builds3 in data/board.json with its history. Your first push is the commit board: start c-builds3. Build phase 3 (builds3) as the plan's section 6 row says: the split of section 4 and sections 3.7 and 3.8 with the docs, with checks B11 to B13. Push it as builds3. Fetch and rebase before every push. Keep everything the screen does today (check B14). Run python3 tools/buildlog_test.py and look at every picture in portrait and landscape before pushing. Write what you built, and anything that differs from the plan, into the plan's section 8. Then rewrite card t-buildstry's next step to match what you built. You have my full permission to access the repo."
    },
    "after": "t-buildstry",
-   "started_at": "2026-11-20T19:12:46+00:00"
+   "started_at": "2026-11-20T19:12:46+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "t-buildstry",
    "lane": "tom",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "theme": "Tools",
@@ -15146,6 +15150,10 @@
     {
      "d": "2026-11-20",
      "t": "builds3 built: Archive by month, search over every build, its own page builds.html with an Admin button. What to try is in next."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Build history redesign 3: archive, search and its own page is done."
     }
    ]
   },
@@ -15459,6 +15467,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukFPqwb1ZYQTWSoJnuP",
+   "title": "Build history redesign 3: archive, search and its own page",
+   "first": "2026-11-20T19:13:47Z",
+   "last": "2026-11-20T19:29:01Z",
+   "tags": [
+    "builds3"
+   ],
+   "cards": [
+    "c-builds3"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFugoiMUKnQaUUEhir",
    "title": "Purge Rhubarb Crisp from the game everywhere",
    "first": "2026-11-20T19:13:55Z",
@@ -15467,16 +15487,6 @@
    "cards": [
     "c-gem-pillar-rhubarb",
     "t-rhubarb-scope"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFPqwb1ZYQTWSoJnuP",
-   "title": "Build history redesign 3: archive, search and its own page",
-   "first": "2026-11-20T19:13:47Z",
-   "last": "2026-11-20T19:13:47Z",
-   "tags": [],
-   "cards": [
-    "c-builds3"
    ]
   },
   {
@@ -17468,8 +17478,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "55603b5a409d9e77ca9f09a107528dec3123d024",
- "synced_at": "2026-11-20T19:20:51+00:00",
+ "synced": "2705a5b21011fb0f54a39a76b5b24ae33d24c6b4",
+ "synced_at": "2026-11-20T19:29:43+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
