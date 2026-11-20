@@ -12273,8 +12273,8 @@
    "title": "Chapter 1 fights: Pep (starts at 4) replaces VP",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
-   "next": "Claude checks which battle-system stage covers this item and records it when its prompt is started.",
+   "col": "done",
+   "next": "Not needed: covered by the v11 battle system (Battle 3). Pep 0 to 10, start 4, +2 on a Basic, refund cap 3 a round is already the v11 rule and is built in Battle 3 (data/b3-rules.js, stage 1). The VP meter the tester saw is battle 2, which is replaced, not fixed. Chapter 1 story fights move to Battle 3 at stage 15.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -12286,6 +12286,11 @@
     {
      "d": "2026-11-20",
      "t": "Made from Gemini's chapter 1 test report, the \"Action Economy\" row of the battle table (1.2) (claude/ch1-gemini-tracker.md). "
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: Gemini tested battle 2 against the old v10 spec; the locked v11 system already has this. Pep 0 to 10, start 4, +2 on a Basic, refund cap 3 a round is already the v11 rule and is built in Battle 3 (data/b3-rules.js, stage 1). The VP meter the tester saw is battle 2, which is replaced, not fixed. Chapter 1 story fights move to Battle 3 at stage 15. Tom asked: \"go through all of the Battle cards created from Gemini feedback and determine if they are still relevant\".",
+     "at": "2026-11-20T17:15:42.000Z"
     }
    ],
    "tag": "gem-pillar-pep",
@@ -12297,15 +12302,17 @@
     "model": "Claude Sonnet 5.5 (row C: the build plan is read against the report, nothing is built)",
     "effort": "medium (reading the build plan against the report)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-pillar-pep in data/board.json, history included. Your first push is the commit board: start c-gem-pillar-pep.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is the \"Action Economy\" row of the battle table (1.2). What the tester saw: Observed in the live build: 10-segment `VP` meter starting at `5/10` (`+1 VP` on Basic `ATTACK`). Locked target: 0–10 `Pep` starting at `4 Pep` (`+2 Pep` on 0-cost Basic Action; +3/round non-Basic refund cap).\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-pillar-pep, push to main, and write the result and the next step onto the card.\n\nThe tester compared the build to Battle Spec v10; the current rules are v11 (docs/BATTLE3.md, claude/battle-build.md). Where they differ, v11 and the build plan win. Chapter 1 still runs the old B2 engine; the new engine (Battle 3) is built stage by stage and is not switched on for the story yet. Do NOT build the new engine here. Find out which stage of claude/battle-build.md switches chapter 1 over for this item. If a stage already covers it, add Tom's report to that stage's card and retire this card with a history line naming that card. If none covers it, write what is missing into claude/battle-build.md in the repo and in the Project, and say so on the card. Battle animations are out of scope (CLAUDE.md).\n\nYou have my full permission to access the repo."
-   }
+   },
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "c-gem-pillar-flavors",
    "title": "Chapter 1 fights: Flavors, Primes, Detonations, Composure",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
-   "next": "Claude checks which battle-system stage covers this item and records it when its prompt is started.",
+   "col": "done",
+   "next": "Not needed: covered by the v11 battle system (Battle 3). The 5 Flavors plus Support, the 3 Primes, the Detonations and Composure pips with Flustered are v11 rules already built in Battle 3 (stages 1 and 3). Sparkle, Chatter and STAGGER are battle 2, which is replaced, not fixed. Where the tester's v10 numbers differ (pip counts), v11 wins. Chapter 1 story fights move to Battle 3 at stage 15.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -12317,6 +12324,11 @@
     {
      "d": "2026-11-20",
      "t": "Made from Gemini's chapter 1 test report, the \"Elements, Primes & Break\" row of the battle table (1.2) (claude/ch1-gemini-tracker.md). "
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: Gemini tested battle 2 against the old v10 spec; the locked v11 system already has this. The 5 Flavors plus Support, the 3 Primes, the Detonations and Composure pips with Flustered are v11 rules already built in Battle 3 (stages 1 and 3). Sparkle, Chatter and STAGGER are battle 2, which is replaced, not fixed. Where the tester's v10 numbers differ (pip counts), v11 wins. Chapter 1 story fights move to Battle 3 at stage 15. Tom asked: \"go through all of the Battle cards created from Gemini feedback and determine if they are still relevant\".",
+     "at": "2026-11-20T17:15:42.000Z"
     }
    ],
    "tag": "gem-pillar-flavors",
@@ -12328,15 +12340,17 @@
     "model": "Claude Sonnet 5.5 (row C: the build plan is read against the report, nothing is built)",
     "effort": "medium (reading the build plan against the report)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-pillar-flavors in data/board.json, history included. Your first push is the commit board: start c-gem-pillar-flavors.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is the \"Elements, Primes & Break\" row of the battle table (1.2). What the tester saw: Observed in the live build: Legacy `Sparkle` / `Chatter` 2-hit guard break (`STAGGER STUN`), `GOOFED` turn-loss. Locked target: 5 Flavors (`Clobber`, `Sizzle`, `Drench`, `Razzle`, `Racket` + `Support`), 3 Primes (`Toasty`, `Drenched`, `Dazzled`), 6 Detonations, and 4–8 Composure pips (`0 pips = Flustered`).\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-pillar-flavors, push to main, and write the result and the next step onto the card.\n\nThe tester compared the build to Battle Spec v10; the current rules are v11 (docs/BATTLE3.md, claude/battle-build.md). Where they differ, v11 and the build plan win. Chapter 1 still runs the old B2 engine; the new engine (Battle 3) is built stage by stage and is not switched on for the story yet. Do NOT build the new engine here. Find out which stage of claude/battle-build.md switches chapter 1 over for this item. If a stage already covers it, add Tom's report to that stage's card and retire this card with a history line naming that card. If none covers it, write what is missing into claude/battle-build.md in the repo and in the Project, and say so on the card. Battle animations are out of scope (CLAUDE.md).\n\nYou have my full permission to access the repo."
-   }
+   },
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "c-gem-pillar-ruckus",
    "title": "Chapter 1 fights: Family Ruckus replaces the HEART meter",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
-   "next": "Claude checks which battle-system stage covers this item and records it when its prompt is started.",
+   "col": "done",
+   "next": "Not needed: covered by the v11 battle system (Battle 3). The Family Ruckus gauge with Double Team at 50 and Full Family Ruckus at 100 is built in Battle 3 (stage 6); who can pair follows the v11 rule, not the tester's v10 one. The HEART meter is battle 2 and is deleted at stage 23; the old Tombos go to the Move Lab at Milestone C (stage 16). Chapter 1 story fights move to Battle 3 at stage 15.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -12348,6 +12362,11 @@
     {
      "d": "2026-11-20",
      "t": "Made from Gemini's chapter 1 test report, the \"Party Meter & Combos\" row of the battle table (1.2) (claude/ch1-gemini-tracker.md). "
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: Gemini tested battle 2 against the old v10 spec; the locked v11 system already has this. The Family Ruckus gauge with Double Team at 50 and Full Family Ruckus at 100 is built in Battle 3 (stage 6); who can pair follows the v11 rule, not the tester's v10 one. The HEART meter is battle 2 and is deleted at stage 23; the old Tombos go to the Move Lab at Milestone C (stage 16). Chapter 1 story fights move to Battle 3 at stage 15. Tom asked: \"go through all of the Battle cards created from Gemini feedback and determine if they are still relevant\".",
+     "at": "2026-11-20T17:15:42.000Z"
     }
    ],
    "tag": "gem-pillar-ruckus",
@@ -12359,15 +12378,17 @@
     "model": "Claude Sonnet 5.5 (row C: the build plan is read against the report, nothing is built)",
     "effort": "medium (reading the build plan against the report)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-pillar-ruckus in data/board.json, history included. Your first push is the commit board: start c-gem-pillar-ruckus.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is the \"Party Meter & Combos\" row of the battle table (1.2). What the tester saw: Observed in the live build: `HEART` meter (`0–100%`, 4 pink hearts) firing `25% HEART` pair `TOMBO!` moves (`Squishy Delivery`, `Double-Decker Airplane`). Locked target: `Family Ruckus` (0–100%) firing `50% Double Team` and `100% Full Family Ruckus` for any adjacent timeline ally pair.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-pillar-ruckus, push to main, and write the result and the next step onto the card.\n\nThe tester compared the build to Battle Spec v10; the current rules are v11 (docs/BATTLE3.md, claude/battle-build.md). Where they differ, v11 and the build plan win. Chapter 1 still runs the old B2 engine; the new engine (Battle 3) is built stage by stage and is not switched on for the story yet. Do NOT build the new engine here. Find out which stage of claude/battle-build.md switches chapter 1 over for this item. If a stage already covers it, add Tom's report to that stage's card and retire this card with a history line naming that card. If none covers it, write what is missing into claude/battle-build.md in the repo and in the Project, and say so on the card. Battle animations are out of scope (CLAUDE.md).\n\nYou have my full permission to access the repo."
-   }
+   },
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "c-gem-pillar-levels",
    "title": "Chapter 1 levels: Character Level plus Vibe Mastery",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
-   "next": "Claude checks which battle-system stage covers this item and records it when its prompt is started.",
+   "col": "done",
+   "next": "Not needed: covered by the v11 battle system (Battle 3). Character Level 1 to 50 plus Vibe Mastery (Ranks 1 to 5, Pocket Vibe earns half the VP) is built in Battle 3 (stage 4). Story fights paying VP, the victory card and save migration are already owed to stage 15; the third Vibe per character is stages 19 to 21. Stamp Points are battle 2, which is replaced, not fixed.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -12379,6 +12400,11 @@
     {
      "d": "2026-11-20",
      "t": "Made from Gemini's chapter 1 test report, the \"Level-Up & Vibe Progression\" row of the battle table (1.2) (claude/ch1-gemini-tracker.md). "
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: Gemini tested battle 2 against the old v10 spec; the locked v11 system already has this. Character Level 1 to 50 plus Vibe Mastery (Ranks 1 to 5, Pocket Vibe earns half the VP) is built in Battle 3 (stage 4). Story fights paying VP, the victory card and save migration are already owed to stage 15; the third Vibe per character is stages 19 to 21. Stamp Points are battle 2, which is replaced, not fixed. Tom asked: \"go through all of the Battle cards created from Gemini feedback and determine if they are still relevant\".",
+     "at": "2026-11-20T17:15:42.000Z"
     }
    ],
    "tag": "gem-pillar-levels",
@@ -12390,15 +12416,17 @@
     "model": "Claude Sonnet 5.5 (row C: the build plan is read against the report, nothing is built)",
     "effort": "medium (reading the build plan against the report)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-pillar-levels in data/board.json, history included. Your first push is the commit board: start c-gem-pillar-levels.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is the \"Level-Up & Vibe Progression\" row of the battle table (1.2). What the tester saw: Observed in the live build: Victory awards `+XP` (`Lv 2`) + `+1 Stamp Point` + `Pocket Coins`. Locked target: Dual-track Character Level (`Lv 1–50` via XP) + Vibe Mastery (`Rank 1–5 ★` via `VP`, ~90 Main VP / 45 Pocket VP per chapter) across 3 equippable Vibes per character.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-pillar-levels, push to main, and write the result and the next step onto the card.\n\nThe tester compared the build to Battle Spec v10; the current rules are v11 (docs/BATTLE3.md, claude/battle-build.md). Where they differ, v11 and the build plan win. Chapter 1 still runs the old B2 engine; the new engine (Battle 3) is built stage by stage and is not switched on for the story yet. Do NOT build the new engine here. Find out which stage of claude/battle-build.md switches chapter 1 over for this item. If a stage already covers it, add Tom's report to that stage's card and retire this card with a history line naming that card. If none covers it, write what is missing into claude/battle-build.md in the repo and in the Project, and say so on the card. Battle animations are out of scope (CLAUDE.md).\n\nYou have my full permission to access the repo."
-   }
+   },
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "c-gem-pillar-kits",
    "title": "Chapter 1 kits: full Signature Loadouts, Rose standing",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
-   "next": "Claude checks which battle-system stage covers this item and records it when its prompt is started.",
+   "col": "done",
+   "next": "Not needed: covered by the v11 battle system (Battle 3). All eight Sig Vibes for Tom, Grace, Rose and Deedee are built in Battle 3 (stages 5a to 5c), Front and Back rows in stage 2, and Rose is her own unit in the party. The kits the tester saw are battle 2, which is replaced, not fixed. Chapter 1 story fights move to Battle 3 at stage 15.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -12410,6 +12438,11 @@
     {
      "d": "2026-11-20",
      "t": "Made from Gemini's chapter 1 test report, the \"Character Kits\" row of the battle table (1.2) (claude/ch1-gemini-tracker.md). "
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Not needed: Gemini tested battle 2 against the old v10 spec; the locked v11 system already has this. All eight Sig Vibes for Tom, Grace, Rose and Deedee are built in Battle 3 (stages 5a to 5c), Front and Back rows in stage 2, and Rose is her own unit in the party. The kits the tester saw are battle 2, which is replaced, not fixed. Chapter 1 story fights move to Battle 3 at stage 15. Tom asked: \"go through all of the Battle cards created from Gemini feedback and determine if they are still relevant\".",
+     "at": "2026-11-20T17:15:42.000Z"
     }
    ],
    "tag": "gem-pillar-kits",
@@ -12421,7 +12454,9 @@
     "model": "Claude Sonnet 5.5 (row C: the build plan is read against the report, nothing is built)",
     "effort": "medium (reading the build plan against the report)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-pillar-kits in data/board.json, history included. Your first push is the commit board: start c-gem-pillar-kits.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is the \"Character Kits\" row of the battle table (1.2). What the tester saw: Observed in the live build: Tom `Disconnected Controller`, Grace `Cartwheel` / `Dance` (`TRENDING X1.2`), Rose `Boop` / `Raspberry` (on Tom's shoulders), Deedee `Dish-Towel Flick` / `Moon & Back` (`TAP!` timed hit). Locked target: Full v10 Signature Loadouts (`Frequent Flier` + `Gamer Geek`, `Squishy Collector` + `Craft Artist`, `Sugar Rush` + `Cozy Rosie`, `Neat Freak` + `Registered Nut`), Front/Back rows, and Rose standing independently in slot 3/4.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-pillar-kits, push to main, and write the result and the next step onto the card.\n\nThe tester compared the build to Battle Spec v10; the current rules are v11 (docs/BATTLE3.md, claude/battle-build.md). Where they differ, v11 and the build plan win. Chapter 1 still runs the old B2 engine; the new engine (Battle 3) is built stage by stage and is not switched on for the story yet. Do NOT build the new engine here. Find out which stage of claude/battle-build.md switches chapter 1 over for this item. If a stage already covers it, add Tom's report to that stage's card and retire this card with a history line naming that card. If none covers it, write what is missing into claude/battle-build.md in the repo and in the Project, and say so on the card. Battle animations are out of scope (CLAUDE.md).\n\nYou have my full permission to access the repo."
-   }
+   },
+   "done": "2026-11-20",
+   "retired": true
   },
   {
    "id": "t-gem-polish06",
