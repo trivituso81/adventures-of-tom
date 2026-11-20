@@ -39,12 +39,6 @@ const LOOK_FOE = 'IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exact
 // "youre overcorrecting, swinging like a pendulum between extremes". When a prompt misses, start from the closest version that
 // worked and change the one thing the note names (repo CLAUDE.md, "Fix a miss with the smallest change").
 const BOOP_APPROVED = "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SINGLE INDEX FINGER TAP\nFrom her starting relaxed stance, she smiles, rises onto her tiptoes, and smoothly extends one arm straight forward to the left at nose height, tapping the air once with a single extended index finger. Without repeating the gesture, she immediately pulls her arm back, settles onto flat feet with both hands resting on her hips, and remains completely still in that proud, smiling pose for the rest of the clip.";
-// KO: Rose knocked out (clipko1, 2026-11-18). A TEST, from claude/battle-animation-list-ch1-v11.md section 7 row 3: ONE clip, Rose
-// (a child is the likeliest to be refused, so a pass covers everyone). Tom 16:47: "sleeping is not KO its sleep status", so the nap
-// is not her KO. Tom 16:56: "i think we can try to override that rule" (the rule against knocked-out wording in character prompts):
-// this prompt says "knocked out" once. It is BOOP_APPROVED with only the MOTION part changed (repo CLAUDE.md, "Fix a miss with the
-// smallest change"). If the generator refuses or softens it, the one fallback try is the same text with ", knocked out" removed.
-const KO_TEST = BOOP_APPROVED.slice(0, BOOP_APPROVED.indexOf('MOTION:')) + "MOTION: KNOCKED OUT\nFrom her starting relaxed stance, she sways once with her feet flat on the ground, sits down hard on the same spot, and tips over onto her back with her arms out to the sides and her eyes closed, knocked out. Without getting up, she stays lying flat on her back and remains completely still in that pose for the rest of the clip.";
 const G15 = 'grok-imagine-video-1.5', LITE = G15 + '-lite', ROSE = 'art/clips/start/rose.png';
 // CHAPTER 1 (clipch1, 2026-11-18): every battle clip the chapter 1 story shows, as one batch (claude/animation-chapter-plan.md, pass 1 of
 // claude/battle-animation-list-ch1-v11.md section 6). Group "Chapter 1": the Library's GENERATE CHAPTER 1 makes them all, Tom watches them
@@ -68,19 +62,19 @@ const PHEAD = (he, off) => { let h = BOOP_HEAD; if (he) h = swap(swap(h, 'preser
 const FOE_ONCE = swap(LOOK_FOE, 'A short looping animation', 'A short animation');
 const FOE_FREE = swap(FOE_ONCE, 'Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. ', 'It stays on the same line as in the attached picture. ');
 const BACK = (s, h) => `${s === 'he' ? 'He' : 'She'} returns to ${h} starting relaxed stance and remains completely still in that pose for the rest of the clip.`;
-// [owner, he?, figRows (make_start.py), victory MOTION, own move clips]
+// [owner, he?, figRows (make_start.py), own move clips]
 const PEOPLE = [
-  ['tom', true, 99, 'MOTION: VICTORY\nFrom his starting relaxed stance, he grins and pumps one fist up high above his head once. Without repeating the gesture, he holds that raised fist with the same grin and remains completely still in that pose for the rest of the clip.', [
+  ['tom', true, 99, [
     ['loungepass', 'Lounge Pass Flex (shows off his lounge pass)', 0, 'MOTION: LOUNGE PASS FLEX\nFrom his starting relaxed stance, he gives a smug little smile, brings a small lounge pass card out from behind his back, and presents it forward at face height once with a little flourish, holding it there like a VIP badge for a moment. Without repeating the gesture, he tucks the card behind his back again. ' + BACK('he', 'his')],
     ['blockade', 'Zone One Blockade (hip check)', 0, 'MOTION: HIP CHECK\nFrom his starting relaxed stance, he spreads both arms out wide to block the way and bumps one hip sharply forward once, as if guarding his place at the front of a boarding line. Without repeating the bump, ' + BACK('he', 'his').replace('He returns', 'he returns')]]],
-  ['grace', false, 90, 'MOTION: VICTORY\nFrom her starting relaxed stance, she grins and throws both arms straight up into a V once. Without repeating the gesture, she holds both arms raised high with a big bright smile and remains completely still in that pose for the rest of the clip.', [
+  ['grace', false, 90, [
     ['squeeze', 'Soup-Dumpling Squeeze (squeezes a squishy)', 0, 'MOTION: SQUISHY SQUEEZE\nFrom her starting relaxed stance, she brings a small round dumpling-shaped squishy toy out from behind her back, holds it out forward in both hands at chest height, and squeezes it hard once with a delighted grin. Without repeating the squeeze, she tucks the toy behind her back again. ' + BACK('she', 'her')],
     ['cubepop', 'Crunchy Sugar-Cube Pop (crushes a squishy cube)', 0, 'MOTION: SQUISHY CRUNCH\nFrom her starting relaxed stance, she brings a small clear cube-shaped squishy toy out from behind her back, holds it out forward in one hand at chest height, and crushes it in her fist once. Without repeating the crush, she tucks the toy behind her back again. ' + BACK('she', 'her')]]],
-  ['rose', false, 83, null, [
+  ['rose', false, 83, [
     ['tackle', 'Lamb-Tuck Ankle Tackle (low pounce)', 0, 'MOTION: LOW POUNCE\nFrom her starting relaxed stance, she brings a small white plush lamb out from behind her back, tucks it under one arm, and lunges forward low from the hips once, the other arm reaching out forward at ankle height to grab. Without repeating the lunge, she tucks the lamb behind her back again. ' + BACK('she', 'her')],
     ['lava', 'The Floor Is Lava! (one hop)', 1, 'MOTION: HOT FLOOR HOPS\nFrom her starting relaxed stance, she gasps and hops quickly from one foot to the other three times with her arms flapping, as if the floor is too hot to touch, staying on the exact same spot. Without hopping again, she settles into her starting relaxed stance and remains completely still in that pose for the rest of the clip.'],
     ['giddyup', '"Giddyup, Tata!" Launch (cannonball jump)', 1, 'MOTION: CANNONBALL JUMP\nFrom her starting relaxed stance, she twirls one hand above her head like a cowgirl shouting giddyup, then crouches and jumps straight up once, hugging her knees to her chest in a tight cannonball at the top of the jump, then lands back on the exact same spot. Without jumping again, she settles into her starting relaxed stance and remains completely still in that pose for the rest of the clip.']]],
-  ['deedee', false, 99.3, 'MOTION: VICTORY\nFrom her starting relaxed stance, she beams and claps her hands together quickly three times up at face height. Without clapping again, she holds her hands clasped at face height with the same big smile and remains completely still in that pose for the rest of the clip.', [
+  ['deedee', false, 99.3, [
     ['windex', 'Windex Spritz (spray bottle squirt)', 0, 'MOTION: SPRAY BOTTLE SQUIRT\nFrom her starting relaxed stance, she brings a blue spray bottle out from behind her back, aims it forward at face height in one hand, and squeezes the trigger once. Without repeating the squeeze, she tucks the bottle behind her back again. ' + BACK('she', 'her')],
     ['wetfloor', 'Wet-Floor Hazard (mop swipe)', 0, 'MOTION: MOP SWIPE\nFrom her starting relaxed stance, she grips a short mop in both hands and swipes its head across the floor just in front of her feet once, in one wide sweep. Without repeating the sweep, she tucks the mop behind her back. ' + BACK('she', 'her')],
     ['scrub', '"Hand Me My Glasses" Scrub (glasses on, brush scrub)', 0, 'MOTION: GLASSES ON, BRUSH SCRUB\nFrom her starting relaxed stance, she slides a pair of small thin-framed reading glasses onto her nose with one hand, then grips a scrub brush in one hand and scrubs it forward once at chest height in one firm stroke. Without repeating the stroke, she tucks the brush behind her back and remains completely still in her starting relaxed stance, glasses on, for the rest of the clip.']]],
@@ -100,19 +94,10 @@ const AT_1X = ['cast', 'loungepass', 'wetfloor'];
 const entry = (o, key, label, rows, kind, prompt, foe) => ({ id: 'clip-' + o + '-' + key, tab: 'Clips', group: C1, title: NAME[o] + ': ' + label + ' video clip', ar: '4:3',
   refs: ['art/clips/start/' + o + '.png'], clip: Object.assign(clipOf(o, key, rows, kind, foe), !foe && AT_1X.includes(key) ? { speed: 1 } : {}), prompt });
 const CH1 = [];
-for (const [o, he, rows, victory, moves] of PEOPLE) {
+for (const [o, he, rows, moves] of PEOPLE) {
   const s = he ? 'he' : 'she', S = he ? 'He' : 'She', h = he ? 'his' : 'her', P = off => PHEAD(he, off);
   CH1.push(
-    entry(o, 'idle', 'idle (waiting loop)', rows, 'idle', P(0) + `MOTION: IDLE BREATHING\nFrom ${h} starting relaxed stance, ${s} breathes slowly so ${h} chest and shoulders rise and settle a little, and blinks once, quickly. ${S} keeps ${h} arms and head where they are and stays in that same relaxed stance for the rest of the clip.`),
-    entry(o, 'guard', 'guard and brace (loop)', rows, 'calm', P(0) + `MOTION: GUARD AND BRACE\nFrom ${h} starting relaxed stance, ${s} bends ${h} knees slightly and raises both forearms up in front of ${h} face and chest once, elbows tucked in to cover ${h} body. Without lowering ${h} arms, ${s} holds that braced pose, breathing slowly, for the rest of the clip.`),
-    entry(o, 'hit', 'hit reaction', rows, 'state', P(1) + `MOTION: HIT REACTION\nFrom ${h} starting relaxed stance, ${s} grimaces and stumbles half a step backward once, ${h} head and shoulders jolting back. Without repeating the stumble, ${s} steps back to the same spot. ` + BACK(s, h)),
-    entry(o, 'dodge', 'dodge', rows, 'state', P(0) + `MOTION: DODGE\nFrom ${h} starting relaxed stance, ${s} leans ${h} upper body quickly backward once, away from the way ${s} faces, as if something just missed ${he ? 'him' : 'her'}. Without moving ${h} feet, ${s} straightens up into ${h} starting relaxed stance and remains completely still in that pose for the rest of the clip.`),
-  );
-  if (o !== 'rose')   // Rose's knock-out is clip-rose-ko (clipko1); the same MOTION for everyone
-    CH1.push(entry(o, 'ko', 'knocked out (held pose)', rows, 'state', P(0) + `MOTION: KNOCKED OUT\nFrom ${h} starting relaxed stance, ${s} gets a dizzy, dazed look, wobbles once, sits down hard on the same spot, and tips over backward onto ${h} back with ${h} arms out to the sides and ${h} eyes closed, knocked out. Without getting up, ${s} stays lying flat on ${h} back and remains completely still in that pose for the rest of the clip.`));
-  CH1.push(
-    entry(o, 'run', 'running in place (loop)', rows, 'run', P(1) + `MOTION: RUNNING IN PLACE\nFrom ${h} starting relaxed stance, ${s} starts running in place, ${h} feet staying low and ${h} arms pumping in a steady rhythm without moving forward or backward. ${S} keeps running in place at the same steady pace for the rest of the clip.`),
-    entry(o, 'victory', 'victory', rows, 'state', victory ? P(0) + victory : P(1) + 'MOTION: VICTORY\nFrom her starting relaxed stance, she giggles and jumps straight up once with both arms raised high, landing back on the exact same spot. Without jumping again, she holds both arms raised high with a big silly grin and remains completely still in that pose for the rest of the clip.'),
+    ...(o === 'rose' ? [entry(o, 'victory', 'victory', rows, 'state', P(1) + 'MOTION: VICTORY\nFrom her starting relaxed stance, she giggles and jumps straight up once with both arms raised high, landing back on the exact same spot. Without jumping again, she holds both arms raised high with a big silly grin and remains completely still in that pose for the rest of the clip.')] : []),
     entry(o, 'give', 'give (hands something to an ally)', rows, 'state', P(0) + (he   // clipch1fix, Tom's note "give what? an item?": his hand holds a small item (Grace's, Rose's and Deedee's empty-hand gives were approved)
       ? 'MOTION: HAND SOMETHING OVER\nFrom his starting relaxed stance, he brings a small wrapped snack out from behind his back and holds it out forward at chest height once, as if handing it to a friend. Without repeating the gesture, he tucks it behind his back again. '
       : `MOTION: HAND SOMETHING OVER\nFrom ${h} starting relaxed stance, ${s} reaches one open hand out forward at chest height, palm up, once, as if handing something to a friend. Without repeating the gesture, ${s} pulls ${h} arm back. `) + BACK(s, h)),
@@ -149,9 +134,6 @@ const entries = [
   { id: 'clip-rose-boop', tab: 'Clips', group: 'Rose', title: 'Rose: Boop (one sharp finger jab) video clip', ar: '4:3', refs: [ROSE],
     clip: { id: 'rose-boop', owner: 'rose', start: ROSE, model: LITE, res: '480p', dur: 3, figRows: 83, step: 3, speed: 1.5 },
     prompt: BOOP_APPROVED },
-  { id: 'clip-rose-ko', tab: 'Clips', group: 'Chapter 1', title: 'Rose: knocked out (held pose) video clip', ar: '4:3', refs: [ROSE],
-    clip: { id: 'rose-ko', owner: 'rose', start: ROSE, model: LITE, res: '480p', dur: 3, figRows: 83, step: 2, speed: 1.5, kind: 'state' },
-    prompt: KO_TEST },
   { id: 'clip-rose-sleep', tab: 'Clips', group: 'Rose', title: 'Rose: gets sleepy and lies down (out of the fight) video clip', ar: '4:3', refs: [ROSE],
     clip: { id: 'rose-sleep', owner: 'rose', start: ROSE, model: G15, res: '480p', dur: 4, figRows: 83, step: 2, speed: 1.5, kind: 'state' },
     prompt: LOOK.replace('Feet stay on the same ground line. Walking away from or toward the camera is not allowed.', 'The character stays in the same place in the frame and ends resting on the same line where the feet stand in the attached picture. Walking away from or toward the camera is not allowed.') +
@@ -181,7 +163,7 @@ const entries = [
 // REMAKE (clipch1fix): rejected clips whose fault was the generator drifting (size, feet, a zoom), not the prompt (claude/clip-gate-plan.md
 // section 2). Their prompt stays word for word, but they are made again: the run below raises promptRev once above the last rejection's rev,
 // which is what the clip-gen Action and GENERATE CHAPTER wait for. Once remade, the id may stay listed: nothing happens until a new rejection.
-const REMAKE = ['clip-grace-victory', 'clip-grace-cubepop', 'clip-grace-squeeze'];
+const REMAKE = [];
 if (require.main === module) {
   const out = 'data/art-prompts.json', doc = JSON.parse(fs.readFileSync(out, 'utf8'));
   for (const e of entries) {

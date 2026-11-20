@@ -33,7 +33,7 @@ def make_videos(moving, still):
         subprocess.run(['ffmpeg', '-v', 'error', '-y', '-framerate', '30', '-i', f'{d}/f%03d.png', '-c:v', 'libvpx-vp9', '-b:v', '1M', '-pix_fmt', 'yuv420p', '-f', 'webm', path], check=True)
         shutil.rmtree(d)
 
-IDS = ['clip-rose-boop', 'clip-rose-ko', 'clip-mudling-idle', 'clip-grump-idle', 'clip-rose-sleep']   # strike, state, loop, loop, state (the last one gets the video that never moves)
+IDS = ['clip-rose-boop', 'clip-tom-cast', 'clip-mudling-idle', 'clip-grump-idle', 'clip-rose-sleep']   # strike, state, loop, loop, state (the last one gets the video that never moves)
 URL = 'http://localhost:8813/art.html?xai=http://127.0.0.1:8814&gh=http://127.0.0.1:8814'
 def log(pg): return json.loads(pg.request.get('http://127.0.0.1:8814/log').text())
 def files(pg): return json.loads(pg.request.get('http://127.0.0.1:8814/files').text())
@@ -76,8 +76,8 @@ def library_run(br, name, vp, moving, still):
         def marks(i): return (E[i].get('versions') or [{}])[-1].get('marks') or {}
         m = marks('clip-rose-boop')
         ok(E['clip-rose-boop']['status'] == 'approved' and m.get('first') == 0 and 1.4 <= m.get('hit', 0) <= 1.62 and 2.4 <= m.get('last', 0) <= 2.65, f'{name}: strike marks found from the video: START 0, HIT near the farthest reach (1.5 s), END after the movement {m}')
-        m = marks('clip-rose-ko')
-        ok(E['clip-rose-ko']['status'] == 'approved' and m.get('first') == 0 and 'hit' not in m and 2.4 <= m.get('last', 0) <= 2.65, f'{name}: state marks: START 0, END after the last movement, no HIT {m}')
+        m = marks('clip-tom-cast')
+        ok(E['clip-tom-cast']['status'] == 'approved' and m.get('first') == 0 and 'hit' not in m and 2.4 <= m.get('last', 0) <= 2.65, f'{name}: state marks: START 0, END after the last movement, no HIT {m}')
         for i in ('clip-mudling-idle', 'clip-grump-idle'):
             m = marks(i); ok(E[i]['status'] == 'approved' and m.get('first') == 0 and 2.9 <= m.get('last', 0) <= 3.0 and 'hit' not in m, f'{name}: loop marks for {i}: the first and the last picture {m}')
         ok(E['clip-rose-sleep']['status'] != 'approved' and not E['clip-rose-sleep'].get('versions') and not marks('clip-rose-sleep'), f'{name}: the video that never moves is not approved')

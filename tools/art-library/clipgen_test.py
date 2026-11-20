@@ -87,14 +87,14 @@ def seed_repo():
     os.makedirs(work + '/data'); os.makedirs(work + '/art/clips'); os.makedirs(work + '/art/raw/clips')
     shutil.copytree(ROOT + '/art/clips/start', work + '/art/clips/start')
     doc = json.load(open(ROOT + '/data/art-prompts.json', encoding='utf-8'))
-    pick = {'clip-tom-loungepass': 'strike', 'clip-rose-ko': 'state', 'clip-grump-idle': 'loop', 'clip-tom-hit': 'state', 'clip-mudling-bump': 'strike', 'clip-mudling-throw': 'strike', 'clip-grace-idle': 'loop'}
+    pick = {'clip-tom-loungepass': 'strike', 'clip-tom-cast': 'state', 'clip-grump-idle': 'loop', 'clip-tom-give': 'state', 'clip-mudling-bump': 'strike', 'clip-mudling-throw': 'strike', 'clip-grace-idle': 'loop'}
     keep = []
     for e in doc['entries']:
         if e['id'] in pick:
             e['group'] = 'Chapter 9'; e['status'] = 'draft'; e['versions'] = []; e['rejects'] = []; keep.append(e)
         elif e.get('clip'): e['group'] = 'Chapter 9 (not in this test)'
     E = {e['id']: e for e in keep}
-    E['clip-tom-hit']['prompt'] += ' STILL'                                                        # the stand-in server answers this one with a video that never moves
+    E['clip-tom-give']['prompt'] += ' STILL'                                                        # the stand-in server answers this one with a video that never moves
     E['clip-mudling-bump'].update(status='rejected', rejects=[{'date': '2026-11-19', 'note': 'x', 'from': 'v1', 'at': 1, 'rev': 0}], promptRev=0)   # waits for a rewritten prompt
     E['clip-mudling-throw'].update(status='rejected', rejects=[{'date': '2026-11-19', 'note': 'x', 'from': 'v1', 'at': 1, 'rev': 0}], promptRev=1)  # rewritten: made again
     E['clip-grace-idle']['clip']['start'] = 'art/clips/start/nobody.png'                           # blocked: no start picture
@@ -147,20 +147,20 @@ def generation():
         ok(max([x['inflight'] for x in sends] + [0]) <= 2, 'never more than 3 at once (inflight before each send: %s)' % [x['inflight'] for x in sends])
         ok(all(x['duration'] == 3 and x['resolution'] == '480p' and x['model'].startswith('grok-imagine-video-1.5') for x in sends), 'request shape: model, 3 s, 480p, picture as a data address')
         doc, raw = remote_doc(remote); E = {e['id']: e for e in doc['entries']}
-        for i in ('clip-tom-loungepass', 'clip-rose-ko', 'clip-grump-idle', 'clip-mudling-throw'):
+        for i in ('clip-tom-loungepass', 'clip-tom-cast', 'clip-grump-idle', 'clip-mudling-throw'):
             e = E[i]; v = (e.get('versions') or [{}])[-1]
             ok(e.get('status') == 'approved' and v.get('file', '').startswith('art/raw/clips/%s-v' % i) and v['file'].endswith('.mp4') and v.get('marks'), '%s approved with marks %s' % (i, v.get('marks')))
             show = sh('git', '--git-dir', remote, 'cat-file', '-e', 'main:' + v['file']); ok(show.returncode == 0, '%s: the video file is on main' % i)
             ok(set(v) >= {'n', 'file', 'date', 'from', 'at', 'marks'} and v['n'] == int(v['file'].rsplit('-v', 1)[1][:-4]) - 1, '%s: version record has n, file, date, from, at, marks (n one below the file number)' % i)
         mk = lambda i: E[i]['versions'][-1]['marks']
         ok(set(mk('clip-tom-loungepass')) == {'first', 'hit', 'last'} and 1.2 < mk('clip-tom-loungepass')['hit'] < 1.8, 'a strike has first, hit and last, the hit near the limb\'s full reach')
-        ok(set(mk('clip-rose-ko')) == {'first', 'last'} and set(mk('clip-grump-idle')) == {'first', 'last'}, 'a state and a loop have first and last only')
-        ok(E['clip-tom-hit'].get('status') == 'draft' and not E['clip-tom-hit'].get('versions'), 'the video that never moves is NOT approved')
+        ok(set(mk('clip-tom-cast')) == {'first', 'last'} and set(mk('clip-grump-idle')) == {'first', 'last'}, 'a state and a loop have first and last only')
+        ok(E['clip-tom-give'].get('status') == 'draft' and not E['clip-tom-give'].get('versions'), 'the video that never moves is NOT approved')
         rep = json.load(open(out + '/clipgen-report.json'))
-        ok(rep['still'] == ['clip-tom-hit'] and os.path.exists(out + '/videos/clip-tom-hit-rev0.mp4'), 'it is listed for Tom and the paid video is kept')
+        ok(rep['still'] == ['clip-tom-give'] and os.path.exists(out + '/videos/clip-tom-give-rev0.mp4'), 'it is listed for Tom and the paid video is kept')
         ok([b['id'] for b in rep['blocked']] == ['clip-grace-idle'] and rep['redoWaiting'] == ['clip-mudling-bump'], 'blocked and waiting clips are listed, not made')
         ok(E['clip-mudling-bump']['status'] == 'rejected' and E['clip-grace-idle']['status'] == 'draft', 'those two are untouched on main')
-        ok(sorted(rep['approved']) == ['clip-grump-idle', 'clip-mudling-throw', 'clip-rose-ko', 'clip-tom-loungepass'] and abs(rep['spent'] - (.07 * 4 + .25)) < .005, 'report: 4 approved, spent about $%.2f' % rep['spent'])
+        ok(sorted(rep['approved']) == ['clip-grump-idle', 'clip-mudling-throw', 'clip-tom-cast', 'clip-tom-loungepass'] and abs(rep['spent'] - (.07 * 4 + .25)) < .005, 'report: 4 approved, spent about $%.2f' % rep['spent'])
         ok(raw == json.dumps(doc, indent=1, ensure_ascii=False) + '\n', 'data/art-prompts.json keeps its format (indent 1, ensure_ascii False, newline)')
         n = int(sh('git', '--git-dir', remote, 'rev-list', '--count', 'main').stdout) - 1
         ok(n == 4, 'one commit per approved clip: %d' % n)
@@ -170,8 +170,8 @@ def generation():
         ok(len(sends2) == before, 'a second run sends nothing new (the held video is used again): %d' % len(sends2))
         ok('hardly moves' in r.stdout, 'the video that never moves is still listed')
         # a request sent and not finished is picked up again with no new request
-        st = json.load(open(out + '/state.json')); st['held'].pop('clip-tom-hit'); st['pending']['clip-tom-hit'] = {'rid': 'req1', 'rev': 0, 'cost': .07, 't': time.time()}
-        json.dump(st, open(out + '/state.json', 'w')); os.remove(out + '/videos/clip-tom-hit-rev0.mp4')
+        st = json.load(open(out + '/state.json')); st['held'].pop('clip-tom-give'); st['pending']['clip-tom-give'] = {'rid': 'req1', 'rev': 0, 'cost': .07, 't': time.time()}
+        json.dump(st, open(out + '/state.json', 'w')); os.remove(out + '/videos/clip-tom-give-rev0.mp4')
         r = run_gen(work, out, port); sends3 = [x for x in stub_log(port) if x.get('xai') == '/v1/videos/generations']
         ok(len(sends3) == before and 'video in' in r.stdout, 'a pending request is fetched again with no new request or charge')
         # a clean run on a fresh state after Tom\'s redo: the entry goes to the queue only when its prompt was rewritten

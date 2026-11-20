@@ -87,7 +87,8 @@ with sync_playwright() as pw:
                 if t in snaps: snap()
             return out
         pg.evaluate("()=>{ B3_PAINT.fidget.on=false; }")   # the natural fidget is off while measuring; the fidget test starts one by hand
-        step(.2); S0=M(); snap(); step(.4); S1=M(); cen=lambda m:(m['l']+m['r'])/2
+        pg.evaluate("()=>{ const F=B3.F,g=F.party[0]; if(g.st.guard_stance) { b3EndStatus(F,g,'guard_stance'); b3ViewSync(); b3Render(); } }")   # Tom starts the fight in Guard Stance (his passive)
+        step(3); S0=M(); snap(); step(.4); S1=M(); cen=lambda m:(m['l']+m['r'])/2
         need(abs(S0['bot']-S1['bot'])<=2,f"{WHO}: the standing figure's feet move on their own: {S0} {S1}")
         feet=lambda ms,what,tol=2: need(all(abs(m['bot']-S0['bot'])<=tol for m in ms),f"{WHO} {what}: feet leave the ground line (standing {S0['bot']}, saw {[m['bot'] for m in ms]})")
         back=lambda m,what: need(abs(m['h']-S0['h'])<=3 and abs(m['bot']-S0['bot'])<=2 and abs(cen(m)-cen(S0))<=3,f"{WHO} {what}: not the standing figure again: {m} {S0}")

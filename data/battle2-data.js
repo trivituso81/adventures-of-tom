@@ -1289,7 +1289,7 @@ const B2_TOMBOS=[
 const B2_LAB=[
   {ch:0,name:'CHAPTER 1 REVIEW',sub:'Watch chapter 1\'s battle clips in a real fight: tap PLAY on a clip (or PLAY ALL) and send REDO with a note on what looks wrong. Mudling, Pond Grump, Bog Toad and Log Lump wait on the field.',clip:true,review:'Chapter 1',party:['tom','grace','rose','deedee'],level:12,foes:[['mudling','front'],['grump','front'],['toad','front'],['log','front']]},
   {ch:0,name:'CHAPTER 1 REVIEW: THE BIG ONE',sub:'The same review with The Big One on the field: its idle and its attack clips.',clip:true,review:'Chapter 1',party:['tom','grace','rose','deedee'],level:12,foes:[['bigone','front']]},
-  {ch:0,name:'CLIP TEST: ROSE',sub:'Animation test. Pick ATTACK, then Boop: Rose plays her video-made Boop. The Mudling moves on its own.',clip:true,clips:['rose_boop','rose_ko','rose_sleep','mudling_idle'],party:['tom','grace','rose'],level:12,foes:[['irongill','front'],['mudling','front']]},
+  {ch:0,name:'CLIP TEST: ROSE',sub:'Animation test. Pick ATTACK, then Boop: Rose plays her video-made Boop. The Mudling moves on its own.',clip:true,clips:['rose_boop','rose_sleep','mudling_idle'],party:['tom','grace','rose'],level:12,foes:[['irongill','front'],['mudling','front']]},
   {ch:0,name:'JUSTIN’S TRYOUT',sub:'Test fight. Tom, Grace, Rose and Justin, every move unlocked.',party:['tom','grace','rose','justin'],level:12,foes:[['irongill','front']]},
   {ch:0,name:'SOLO',sub:'Test fight. Pick anyone, alone, every move unlocked. Nobody can be hurt. Leave with EXIT.',solo:true,party:['justin'],level:12,foes:[['irongill','front']]},
   {ch:0,name:'OLIVIA\u2019S TRYOUT',sub:'Test fight. Tom, Grace, Rose and Olivia, every move unlocked.',party:['tom','grace','rose','olivia'],level:12,foes:[['irongill','front']]},

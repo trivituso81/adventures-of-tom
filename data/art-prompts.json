@@ -3836,7 +3836,7 @@
    "refs": [
     "art/raw/characters/tom-ab-flashcard-flurry-v2.png"
    ],
-   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Flashcard Flurry.\n\nItems:\n1. The deck of white flashcards from the picture, squared.\n2. One blank flashcard from the deck.\n3. One flashcard tilted, spinning through the air, a small motion trail.\n4. One flashcard with the kanji 日 in bold black brush strokes.\n5. One flashcard with the kanji 月 in bold black brush strokes.\n6. One flashcard with the kanji 火 in bold black brush strokes.\n7. One flashcard with the kanji 水 in bold black brush strokes.\n8. One flashcard with the kanji 木 in bold black brush strokes.\n9. One flashcard with the kanji 山 in bold black brush strokes.\n10. A shiny gold star sticker.\n11. A square tile with a big question mark.\n12. A small white impact pop."
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Flashcard Flurry.\n\nItems:\n1. The deck of white flashcards from the picture, squared.\n2. One blank flashcard from the deck.\n3. One flashcard tilted, spinning through the air, a small motion trail.\n4. One flashcard with the kanji \u65e5 in bold black brush strokes.\n5. One flashcard with the kanji \u6708 in bold black brush strokes.\n6. One flashcard with the kanji \u706b in bold black brush strokes.\n7. One flashcard with the kanji \u6c34 in bold black brush strokes.\n8. One flashcard with the kanji \u6728 in bold black brush strokes.\n9. One flashcard with the kanji \u5c71 in bold black brush strokes.\n10. A shiny gold star sticker.\n11. A square tile with a big question mark.\n12. A small white impact pop."
   },
   {
    "status": "approved",
@@ -3909,7 +3909,7 @@
    "refs": [
     "art/raw/characters/tom-ab-kanji-strike-v2.png"
    ],
-   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Kanji Strike.\n\nItems:\n1. The giant calligraphy brush from the picture (tall).\n2. A big kanji 火 written in thick black brush ink, glowing warm orange at the edges, filling the cell.\n3. The first stroke of 火 alone, in the same glowing ink.\n4. The second stroke of 火 alone, in the same glowing ink.\n5. The third stroke of 火 alone, in the same glowing ink.\n6. The fourth stroke of 火 alone, in the same glowing ink.\n7. A splash of black ink drops flying off a brush.\n8. A big burst of orange and yellow flames.\n9. One small flame.\n10. A ring of glowing embers."
+   "prompt": "Paint the objects and effects for one battle move as one sheet.\n\nThe attached picture is the character's sheet for this move. Copy every object he holds in it exactly: the same shape, colors, details, size compared to his hands, painting style and light. Paint every new object and effect in that same painted style.\n\nOne image, a grid of 4 columns by 3 rows of equal square cells, on a flat solid magenta #FF00FF background. One item per cell, in the order of the list, filled row by row. Each item is centered, fills about 75 percent of its cell, and has clear magenta all around it; nothing touches a cell edge. Wide items fill the cell width, tall items fill the cell height. Cells with no item stay plain magenta.\n\nNo person, no hands, no body parts. No numbers, labels or captions. No words except lettering an item asks for.\n\nWarm golden light from the upper left, soft painted shading, crisp clean edges, no thick black outlines, no cast shadow, no floor. Painted and realistic, not pixel art. Effects (splashes, glows, sparkles, smoke, ink, light) are painted as solid shapes with crisp edges, never faint haze, and never use magenta or pink.\n\nThe move: Kanji Strike.\n\nItems:\n1. The giant calligraphy brush from the picture (tall).\n2. A big kanji \u706b written in thick black brush ink, glowing warm orange at the edges, filling the cell.\n3. The first stroke of \u706b alone, in the same glowing ink.\n4. The second stroke of \u706b alone, in the same glowing ink.\n5. The third stroke of \u706b alone, in the same glowing ink.\n6. The fourth stroke of \u706b alone, in the same glowing ink.\n7. A splash of black ink drops flying off a brush.\n8. A big burst of orange and yellow flames.\n9. One small flame.\n10. A ring of glowing embers."
   },
   {
    "status": "approved",
@@ -10796,7 +10796,7 @@
    "id": "npc-photo-carmen",
    "tab": "NPCs",
    "group": "Los Angeles people",
-   "title": "Doña Carmen: hero picture, Final Fantasy IX style, 5'3\" (references: 5 main heroes)",
+   "title": "Do\u00f1a Carmen: hero picture, Final Fantasy IX style, 5'3\" (references: 5 main heroes)",
    "ar": "2:3",
    "refs": [
     "art/raw/characters/tom-hero-v1.png",
@@ -10805,7 +10805,7 @@
     "art/raw/characters/deedee-hero-v1.png",
     "art/raw/characters/boppy-hero-ref-v1.png"
    ],
-   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Doña Carmen, 58, woman, 5'3\" tall, olive tan skin, black hair, hair style shoulder-length curls, clothing royal blue top, navy trousers, an apron over her clothes, personality big-hearted and welcoming, the owner of Pupuseria La Ceiba."
+   "prompt": "Paint the person in the below description  as a new game character in the style of the hand-drawn character concept art of Final Fantasy IX: large head, small slender body, sturdy shoes, large gentle eyes, whimsical fairy-tale charm, but still matching the age of the character. try to find the key physical attributes of the face from the original photo and translate it to the art style.\nFinish: illustrated painting with dark contour lines, chunky brushed shading in a few clear tones, rich warm colors, warm golden light from above.\nProportions: about 4 heads tall, simplified expressive face.\nPose: full body from hair to shoes, standing ready, facing the viewer, arms loose, both feet on the ground.\nPlain pale cream background with a small soft shadow under the feet. Tall picture, 2:3.\n\nThe attached pictures are main characters of this game. Paint this new character by the same hand: sketchy pencil and ink lines, hatching, mottled colored-pencil shading, visible paper grain, same proportions and head size. Not clean digital art. Do not copy their faces, hair or clothes. Paint only the new character, alone.\n\ncharacter details: Do\u00f1a Carmen, 58, woman, 5'3\" tall, olive tan skin, black hair, hair style shoulder-length curls, clothing royal blue top, navy trousers, an apron over her clothes, personality big-hearted and welcoming, the owner of Pupuseria La Ceiba."
   },
   {
    "status": "approved",
@@ -12203,7 +12203,7 @@
    "rejects": [],
    "id": "enemy-directorscut",
    "tab": "Enemies",
-   "title": "The Director’s Cut: boss sheet, 6 frames facing right",
+   "title": "The Director\u2019s Cut: boss sheet, 6 frames facing right",
    "ar": "3:2",
    "refs": [
     "art/raw/enemies/enemy-mudling-v2.png",
@@ -13453,7 +13453,7 @@
    "rejects": [],
    "id": "enemy-twinlens",
    "tab": "Enemies",
-   "title": "The Archivist’s Twin Lenses: boss sheet, 6 frames facing right",
+   "title": "The Archivist\u2019s Twin Lenses: boss sheet, 6 frames facing right",
    "ar": "3:2",
    "refs": [
     "art/raw/enemies/enemy-mudling-v2.png",
@@ -14296,7 +14296,7 @@
     "art/hollow.webp",
     "art/grands.webp"
    ],
-   "prompt": "Create the actual environment painting for Area 03, Grump Hollow, from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update.\n\nATTACHED IMAGES (in this order)\n1) the current painting of this area: use it for LAYOUT AND DETAILS. Keep the same layout: every path, building, prop, exit and open space stays in the same place and the same size, and each building keeps its shape, roof and theme. Paint every detail described below cleanly and correctly on top of that layout. Do not copy its rendering.\n2) the finished painting of Deedee and Boppy's house, the grandparents' home in this game. It is the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame environmental painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page. Landscape canvas, 1536 x 1408 pixels (12:11). If your tool cannot produce that exact size, use the closest landscape aspect at the highest resolution.\n\nSTYLE AND CAMERA\nA hand-painted, hand-brushed painting of a shady woodland hollow, in exactly the style of attachment 2, the painting of Deedee and Boppy's house. Visible brushwork everywhere: broad strokes for the large forms, short flicks for foliage, roof tiles, brick, wood and stone, thick ridges of paint where the light hits. Rich, warm, deep color built in layers, so warm and cool tones show through each other. Every surface is matte, like oil paint or gouache on canvas, with a fine canvas grain over the whole picture and soft painted light and shadow. Edges are painted with a small brush, slightly irregular and hand-made. NOT glossy, NOT airbrushed, NOT a digital render, NOT plastic, NOT a 3D look, NOT pixel art. No visible pixels, no thick black outlines, no photorealism, no top-down floor plan.\nFixed elevated three-quarter camera looking down at about 35 degrees, showing the trail, clearing, pond and trees together. Same camera across the whole uninterrupted scene.\n\nSCALE\nA whole game map seen from high up, like a drone shot of the entire hollow, with a wide margin of forest on every side. Do not zoom in on a corner. Do not crop any landmark at an edge.\n\nA grown-up person on a path is about one fifteenth of the picture height.\nThe stone path is about two people wide.\nThe exit board is about one seventh of the picture width.\nThe muddy clearing is wide and open, about one third of the picture width.\nThe pond fills the upper right and top center, about four tenths of the picture width.\n\nSETTING\nA soggy, slightly spooky but friendly woodland hollow at the edge of a small Long Island town, on a warm afternoon. Soft even daylight through the leafy canopy, with gentle shadows falling straight down under the trees. A big murky green pond with lily pads and cattails, mossy logs, old stumps, mud puddles, ferns, mushrooms and mossy boulders. Cozy and mischievous, never scary.\n\nLAYOUT (this is a walkable game map)\n\nENTRANCE: a stone path with worn steps enters from the BOTTOM edge, a little left of center, between two low wooden fence sections about one person tall.\nThe stone path climbs straight up into a WIDE OPEN MUDDY CLEARING in the middle of the picture.\nFrom the clearing, a branch runs LEFT to a soggy bench nook on the left side, and another branch runs RIGHT to Boppy’s fishing spot on the pond shore.\nTHE POND: no path goes into the water. Its lower and left shores are walkable mud.\nThe left, top and right edges are a solid wall of dense forest: thick trees, boulders, brambles and undergrowth, with no break, no opening and no path reaching any edge except the bottom.\nLogs, stumps, rocks, ferns and cattails sit beside the paths, never across them.\n\nLANDMARKS AND PROPS\n\nSoggy bench nook (left side): an old wooden bench sinking a little into the mud, puddles around its feet, moss on the slats.\nBoppy’s fishing spot (right side, pond shore): a small weathered wooden bench with a thermos, a metal bucket and a fishing rod leaning on it, facing the water.\nAround the pond: lily pads, cattails, a half-sunken mossy log, ripples, a few water lilies.\nMossy boulders, old stumps, clumps of mushrooms, ferns, wildflowers.\n\nTHE EXIT BOARD (the only sign in the image)\nOne exit board, hung high between two tall stout wooden posts on either side of the stone path, like a gate header. Board center about four fifths of the way down the picture, about 340 x 108 px at full size, with a thin carved wooden frame. Face deep forest green (about \n#2F4A35) with a thin gold inner line. Lettering cream-gold (about \n#F2E6B8) with a thin dark green outline, hand-painted signwriter capitals, bold and slightly rounded. Two centered lines, ALL CAPITALS, same letter height, spelled exactly letter by letter:\nTHE SQUARE / SHOPS\nNothing else on the board: no arrows, numbers, icons or flourishes. The stone path and steps stay open and clear under the board, continuing to the bottom edge.\n\nLAYERING\nMud, grass and stone path continue unbroken under and behind every tree, post, bench and boulder. Every tall object has a clear visible base with ground showing behind it. Clearly separated, small-brush painted silhouettes on tree canopies, the board and posts. Nothing floats.\n\nCOLORS\nSoft golden light \n#FFE1A0, warm brown mud and trail \n#A47B52, mossy green \n#608775, murky pond green \n#4E7A5E, light green grass \n#B4C395, warm shadows \n#716351. Clear darker contact shadow under trees and props.\n\nSTRICT EXCLUSIONS\nNo people, animals, monsters, frogs or fish. No chests, items, keys, coins, switches or collectibles. No words, numbers or logos other than the exit board. No buildings, bridges, boats, gates or locks. No light beams, sun shafts or glowing gaps anywhere. No grid, colored tiles, diamonds, numbered markers, map or diagram look. No title card, frame, contact sheet or palette chart.\n\nDeliver the single environment painting itself. Do not replace the painting with a description of it.\n\nTwo things to check on the result: the top-left corner should be solid forest, and the bottom stone path should be the only opening. If either fails, send me the image and I’ll look at what the generator did before changing anything else.",
+   "prompt": "Create the actual environment painting for Area 03, Grump Hollow, from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update.\n\nATTACHED IMAGES (in this order)\n1) the current painting of this area: use it for LAYOUT AND DETAILS. Keep the same layout: every path, building, prop, exit and open space stays in the same place and the same size, and each building keeps its shape, roof and theme. Paint every detail described below cleanly and correctly on top of that layout. Do not copy its rendering.\n2) the finished painting of Deedee and Boppy's house, the grandparents' home in this game. It is the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame environmental painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page. Landscape canvas, 1536 x 1408 pixels (12:11). If your tool cannot produce that exact size, use the closest landscape aspect at the highest resolution.\n\nSTYLE AND CAMERA\nA hand-painted, hand-brushed painting of a shady woodland hollow, in exactly the style of attachment 2, the painting of Deedee and Boppy's house. Visible brushwork everywhere: broad strokes for the large forms, short flicks for foliage, roof tiles, brick, wood and stone, thick ridges of paint where the light hits. Rich, warm, deep color built in layers, so warm and cool tones show through each other. Every surface is matte, like oil paint or gouache on canvas, with a fine canvas grain over the whole picture and soft painted light and shadow. Edges are painted with a small brush, slightly irregular and hand-made. NOT glossy, NOT airbrushed, NOT a digital render, NOT plastic, NOT a 3D look, NOT pixel art. No visible pixels, no thick black outlines, no photorealism, no top-down floor plan.\nFixed elevated three-quarter camera looking down at about 35 degrees, showing the trail, clearing, pond and trees together. Same camera across the whole uninterrupted scene.\n\nSCALE\nA whole game map seen from high up, like a drone shot of the entire hollow, with a wide margin of forest on every side. Do not zoom in on a corner. Do not crop any landmark at an edge.\n\nA grown-up person on a path is about one fifteenth of the picture height.\nThe stone path is about two people wide.\nThe exit board is about one seventh of the picture width.\nThe muddy clearing is wide and open, about one third of the picture width.\nThe pond fills the upper right and top center, about four tenths of the picture width.\n\nSETTING\nA soggy, slightly spooky but friendly woodland hollow at the edge of a small Long Island town, on a warm afternoon. Soft even daylight through the leafy canopy, with gentle shadows falling straight down under the trees. A big murky green pond with lily pads and cattails, mossy logs, old stumps, mud puddles, ferns, mushrooms and mossy boulders. Cozy and mischievous, never scary.\n\nLAYOUT (this is a walkable game map)\n\nENTRANCE: a stone path with worn steps enters from the BOTTOM edge, a little left of center, between two low wooden fence sections about one person tall.\nThe stone path climbs straight up into a WIDE OPEN MUDDY CLEARING in the middle of the picture.\nFrom the clearing, a branch runs LEFT to a soggy bench nook on the left side, and another branch runs RIGHT to Boppy\u2019s fishing spot on the pond shore.\nTHE POND: no path goes into the water. Its lower and left shores are walkable mud.\nThe left, top and right edges are a solid wall of dense forest: thick trees, boulders, brambles and undergrowth, with no break, no opening and no path reaching any edge except the bottom.\nLogs, stumps, rocks, ferns and cattails sit beside the paths, never across them.\n\nLANDMARKS AND PROPS\n\nSoggy bench nook (left side): an old wooden bench sinking a little into the mud, puddles around its feet, moss on the slats.\nBoppy\u2019s fishing spot (right side, pond shore): a small weathered wooden bench with a thermos, a metal bucket and a fishing rod leaning on it, facing the water.\nAround the pond: lily pads, cattails, a half-sunken mossy log, ripples, a few water lilies.\nMossy boulders, old stumps, clumps of mushrooms, ferns, wildflowers.\n\nTHE EXIT BOARD (the only sign in the image)\nOne exit board, hung high between two tall stout wooden posts on either side of the stone path, like a gate header. Board center about four fifths of the way down the picture, about 340 x 108 px at full size, with a thin carved wooden frame. Face deep forest green (about \n#2F4A35) with a thin gold inner line. Lettering cream-gold (about \n#F2E6B8) with a thin dark green outline, hand-painted signwriter capitals, bold and slightly rounded. Two centered lines, ALL CAPITALS, same letter height, spelled exactly letter by letter:\nTHE SQUARE / SHOPS\nNothing else on the board: no arrows, numbers, icons or flourishes. The stone path and steps stay open and clear under the board, continuing to the bottom edge.\n\nLAYERING\nMud, grass and stone path continue unbroken under and behind every tree, post, bench and boulder. Every tall object has a clear visible base with ground showing behind it. Clearly separated, small-brush painted silhouettes on tree canopies, the board and posts. Nothing floats.\n\nCOLORS\nSoft golden light \n#FFE1A0, warm brown mud and trail \n#A47B52, mossy green \n#608775, murky pond green \n#4E7A5E, light green grass \n#B4C395, warm shadows \n#716351. Clear darker contact shadow under trees and props.\n\nSTRICT EXCLUSIONS\nNo people, animals, monsters, frogs or fish. No chests, items, keys, coins, switches or collectibles. No words, numbers or logos other than the exit board. No buildings, bridges, boats, gates or locks. No light beams, sun shafts or glowing gaps anywhere. No grid, colored tiles, diamonds, numbered markers, map or diagram look. No title card, frame, contact sheet or palette chart.\n\nDeliver the single environment painting itself. Do not replace the painting with a description of it.\n\nTwo things to check on the result: the top-left corner should be solid forest, and the bottom stone path should be the only opening. If either fails, send me the image and I\u2019ll look at what the generator did before changing anything else.",
    "group": "Grump Hollow"
   },
   {
@@ -20084,7 +20084,7 @@
    "rejects": [],
    "id": "npc-walk-carmen",
    "tab": "NPCs",
-   "title": "Doña Carmen: walk sheet (hero attached)",
+   "title": "Do\u00f1a Carmen: walk sheet (hero attached)",
    "ar": "1:1",
    "refs": [
     "art/raw/npcs/npc-photo-carmen-v2.png"
@@ -21361,7 +21361,7 @@
    "rejects": [],
    "id": "npc-emotions-carmen",
    "tab": "NPCs",
-   "title": "Doña Carmen: emotion sheet, 8 feelings, full body (happy, loving, sad, angry, scared, surprised, proud, unimpressed) - WAIT: hero not approved yet, approve the hero first",
+   "title": "Do\u00f1a Carmen: emotion sheet, 8 feelings, full body (happy, loving, sad, angry, scared, surprised, proud, unimpressed) - WAIT: hero not approved yet, approve the hero first",
    "ar": "2:1",
    "refs": [],
    "prompt": "Draw the character in the attached picture as an emotion sheet: the same person showing eight different feelings.\n\nTHE REFERENCE WINS\nThe attached picture is the character. It is the only source for how they look and how they are painted. Every figure must look like it was cut from that same painting: the same face, age, body, hair, hat, glasses, clothes, shoes and colors, the same head size compared to the body, and the same painting technique. Only the pose and the facial expression change.\n\nHEAD AND BODY PROPORTION (check it first)\n- Measure the attached picture: count how many head heights (top of the hair or hat to the bottom of the chin) fit into the full figure, from the top of the head to the soles of the shoes. Every figure on this sheet must have exactly the same count as the picture.\n- Do not enlarge the head to make the face easier to read, and do not shorten the body or legs. A laughing, shocked or frowning face stays inside the same head size.\n- Keep the same shoulder width, arm length, leg length, hand size and shoe size as the picture.\n- When a pose leans or bends, the head stays the same size. Only the body moves.\n\nPAINTING TECHNIQUE (match the picture's surface)\n- Copy how the picture is painted: the same kind of line work around the shapes, the same shading and hatching, the same texture and paper grain, the same level of detail.\n- Do not make it smoother, glossier, cleaner or more digital than the picture. Not a 3D render, not flat cartoon fill, not pixel art, not anime.\n- Warm daylight from the upper left, as in the picture.\n\nCOLORS\n- Copy every color from the picture exactly: skin, hair, eyes, each piece of clothing, prints, logos and shoes. Same hue, same brightness, same saturation. Do not warm, brighten or saturate anything.\n- The background of the picture is not part of the character. Here the background is magenta, but the magenta is only a backdrop for cutting out: it must not tint, glow on or reflect onto the character.\n\nTHE SHEET\nOne image, a grid of 4 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One full-body figure per cell, from the top of the hair or hat to the soles of the shoes, standing, facing the viewer in the same slight three-quarter view as the picture. The same figure height in every cell, feet on the same ground line, each figure well inside its cell with clear magenta on all four sides. Empty hands: if the picture holds an object, leave the object out and keep the hands free. Keep hats, glasses and clothes exactly as in the picture. No shadow on the ground. No grid lines, numbers, text, symbols, tears, sweat drops, hearts or effects. Each feeling must read from the whole body and from the face, clear enough to read at a small size.\n\nRow 1:\n1. Happy. Up on the toes, knees loose, a little bounce. Both hands clasped at chest height. Eyes crinkled, cheeks raised, a big open-mouth smile.\n2. Loving. Feet together, head tilted to one side. Both hands pressed flat over the heart. Soft half-closed eyes, a warm closed-mouth smile.\n3. Sad. Slumped, shoulders dropped, head lowered, feet together with the toes turned in. Hands holding each other in front of the waist. Eyebrows pulled up in the middle, the corners of the mouth turned down.\n4. Angry. Feet planted wide, leaning forward, arms crossed tight over the chest. Chin down, eyebrows pulled down hard, eyes narrowed, a tight frown.\n\nRow 2:\n5. Scared. Knees bent, leaning back, shoulders hunched up. Both fists held up under the chin. Eyes wide open, eyebrows raised and pulled together, mouth open and stretched wide.\n6. Surprised. One foot stepped back, upper body pulled back. Both hands open beside the face, palms forward. Eyebrows raised high, eyes wide and round, mouth open in a tall O.\n7. Proud. Feet apart, chest out, shoulders back, chin raised. Both fists on the hips. A confident closed-mouth one-sided smile.\n8. Unimpressed. Weight on one leg, the other knee relaxed. One hand on the hip, the other arm hanging loose. Head tilted, eyelids half lowered, one eyebrow raised, mouth a flat line pulled to one side.\n\nBefore finishing, compare every figure with the picture: the head count, the colors, the line work and the surface texture. Redraw any figure whose head is larger, whose colors are brighter or warmer, or whose surface is smoother than the picture.",
@@ -21962,13 +21962,13 @@
    "id": "ending-directorscut",
    "tab": "Enemies",
    "group": "Boss endings",
-   "title": "The Director’s Cut: ending sheet, 6 frames facing right (after the fight)",
+   "title": "The Director\u2019s Cut: ending sheet, 6 frames facing right (after the fight)",
    "ar": "3:2",
    "refs": [
     "art/raw/enemies/enemy-mudling-v2.png",
     "art/raw/enemies/enemy-directorscut-v4.png"
    ],
-   "prompt": "Paint a new sheet of The Director’s Cut, the creature in attachment 2, as a handbrushed painting. Attachment 2 is the current painting of it in the game: paint the same creature, with the same shape, colors, materials and details, at the same size in each cell, in the same view, facing right. Do not repeat the poses of attachment 2. Paint 6 NEW poses in a 3 by 2 layout, one pose alone in each cell with clear magenta all around it and nothing crossing into another cell. These poses show the moment after the fight, when the anger has gone out: the mood is gentle, warm and a little funny, never fierce. Top row: 1 the same upright pose as the first pose of attachment 2, at exactly the same size, but calm: the golden megaphone tipped slightly down on its wooden tripod, the eyes soft, the mouth closed in a small smile, the white gloves folded together. 2 moved: one glove pressed to the side of the horn like a hand on a heart, the eyes wide and shining, the mouth wobbling. 3 a deep theatrical bow: the horn tipped far forward on the tripod, the eyes closed, one arm swept out wide to the side. Bottom row: 4 calling it a wrap: standing tall, one glove cupped beside the horn and the other raised high, the eyes closed in a happy shout, no sound lines. 5 hopping away: the three tripod legs folded together like one leg, the whole thing in mid hop off the ground, tilted forward, the arms swinging. 6 rolling away: the megaphone lying on its side off the tripod and rolling like a wheel, the eyes dizzy and pleased, the folded tripod tucked under one arm. Paint only what each pose names: no glows, speed lines, sparkles or splashes unless a pose asks for them, and no letters, numbers or words anywhere. Paint and finish it like attachment 1: matte, thick visible brush strokes on the figure, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
+   "prompt": "Paint a new sheet of The Director\u2019s Cut, the creature in attachment 2, as a handbrushed painting. Attachment 2 is the current painting of it in the game: paint the same creature, with the same shape, colors, materials and details, at the same size in each cell, in the same view, facing right. Do not repeat the poses of attachment 2. Paint 6 NEW poses in a 3 by 2 layout, one pose alone in each cell with clear magenta all around it and nothing crossing into another cell. These poses show the moment after the fight, when the anger has gone out: the mood is gentle, warm and a little funny, never fierce. Top row: 1 the same upright pose as the first pose of attachment 2, at exactly the same size, but calm: the golden megaphone tipped slightly down on its wooden tripod, the eyes soft, the mouth closed in a small smile, the white gloves folded together. 2 moved: one glove pressed to the side of the horn like a hand on a heart, the eyes wide and shining, the mouth wobbling. 3 a deep theatrical bow: the horn tipped far forward on the tripod, the eyes closed, one arm swept out wide to the side. Bottom row: 4 calling it a wrap: standing tall, one glove cupped beside the horn and the other raised high, the eyes closed in a happy shout, no sound lines. 5 hopping away: the three tripod legs folded together like one leg, the whole thing in mid hop off the ground, tilted forward, the arms swinging. 6 rolling away: the megaphone lying on its side off the tripod and rolling like a wheel, the eyes dizzy and pleased, the folded tripod tucked under one arm. Paint only what each pose names: no glows, speed lines, sparkles or splashes unless a pose asks for them, and no letters, numbers or words anywhere. Paint and finish it like attachment 1: matte, thick visible brush strokes on the figure, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
    "status": "approved",
@@ -22270,13 +22270,13 @@
    "id": "ending-twinlens",
    "tab": "Enemies",
    "group": "Boss endings",
-   "title": "The Archivist’s Twin Lenses: ending sheet, 6 frames facing right (after the fight)",
+   "title": "The Archivist\u2019s Twin Lenses: ending sheet, 6 frames facing right (after the fight)",
    "ar": "3:2",
    "refs": [
     "art/raw/enemies/enemy-mudling-v2.png",
     "art/raw/enemies/enemy-twinlens-v1.png"
    ],
-   "prompt": "Paint a new sheet of the Archivist’s Twin Lenses, the creature in attachment 2, as a handbrushed painting. Attachment 2 is the current painting of it in the game: paint the same creature, with the same shape, colors, materials and details, at the same size in each cell, in the same view, facing right. Do not repeat the poses of attachment 2. Paint 6 NEW poses in a 3 by 2 layout, one pose alone in each cell with clear magenta all around it and nothing crossing into another cell. These poses show the moment after the fight, when the anger has gone out: the mood is gentle, warm and a little funny, never fierce. The two round lenses are its eyes, one blue and one amber, and thin brass shutters work as its eyelids. No beams come out of them. Top row: 1 the same upright pose as the first pose of attachment 2, at exactly the same size, but calm: both lenses half covered by their brass shutters like heavy eyelids, the little red jewel between them dim. 2 the crack: one clean crack right across the amber lens with soft gold light leaking through it, the blue lens wide open in surprise. 3 going dark: the shutter of the blue lens closing, the cracked amber lens dim. Bottom row: 4 looking down: both lenses tilted down toward the floor, humble, the shutters low. 5 looking up: both lenses tilted upward with the shutters open and soft, a small warm glow in the red jewel. 6 asleep: both shutters fully closed like sleeping eyes, the antenna drooping, the jewel dark. Paint only what each pose names: no glows, speed lines, sparkles or splashes unless a pose asks for them, and no letters, numbers or words anywhere. Paint and finish it like attachment 1: matte, thick visible brush strokes on the figure, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
+   "prompt": "Paint a new sheet of the Archivist\u2019s Twin Lenses, the creature in attachment 2, as a handbrushed painting. Attachment 2 is the current painting of it in the game: paint the same creature, with the same shape, colors, materials and details, at the same size in each cell, in the same view, facing right. Do not repeat the poses of attachment 2. Paint 6 NEW poses in a 3 by 2 layout, one pose alone in each cell with clear magenta all around it and nothing crossing into another cell. These poses show the moment after the fight, when the anger has gone out: the mood is gentle, warm and a little funny, never fierce. The two round lenses are its eyes, one blue and one amber, and thin brass shutters work as its eyelids. No beams come out of them. Top row: 1 the same upright pose as the first pose of attachment 2, at exactly the same size, but calm: both lenses half covered by their brass shutters like heavy eyelids, the little red jewel between them dim. 2 the crack: one clean crack right across the amber lens with soft gold light leaking through it, the blue lens wide open in surprise. 3 going dark: the shutter of the blue lens closing, the cracked amber lens dim. Bottom row: 4 looking down: both lenses tilted down toward the floor, humble, the shutters low. 5 looking up: both lenses tilted upward with the shutters open and soft, a small warm glow in the red jewel. 6 asleep: both shutters fully closed like sleeping eyes, the antenna drooping, the jewel dark. Paint only what each pose names: no glows, speed lines, sparkles or splashes unless a pose asks for them, and no letters, numbers or words anywhere. Paint and finish it like attachment 1: matte, thick visible brush strokes on the figure, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
    "status": "approved",
@@ -22654,7 +22654,7 @@
    "id": "amber-carmen",
    "tab": "NPCs",
    "group": "Chapter 12 amber",
-   "title": "Doña Carmen: frozen in an amber block, in the moment they froze (chapter 12, hero attached)",
+   "title": "Do\u00f1a Carmen: frozen in an amber block, in the moment they froze (chapter 12, hero attached)",
    "ar": "2:3",
    "refs": [
     "art/raw/npcs/npc-photo-carmen-v2.png"
@@ -22822,7 +22822,7 @@
    "id": "amber-carmen-crack",
    "tab": "NPCs",
    "group": "Chapter 12 amber",
-   "title": "Doña Carmen: the amber cracking, same figure (chapter 12, second state, needs amber-carmen approved first)",
+   "title": "Do\u00f1a Carmen: the amber cracking, same figure (chapter 12, second state, needs amber-carmen approved first)",
    "ar": "2:3",
    "refs": [
     "art/raw/npcs/npc-photo-carmen-v2.png",
@@ -22845,7 +22845,7 @@
    "id": "amber-carmen-break",
    "tab": "NPCs",
    "group": "Chapter 12 amber",
-   "title": "Doña Carmen: the amber breaking away in flakes, same figure (chapter 12, third state, needs amber-carmen approved first)",
+   "title": "Do\u00f1a Carmen: the amber breaking away in flakes, same figure (chapter 12, third state, needs amber-carmen approved first)",
    "ar": "2:3",
    "refs": [
     "art/raw/npcs/npc-photo-carmen-v2.png",
@@ -23379,14 +23379,14 @@
    "rejects": [],
    "id": "ch2-carmen-towel",
    "tab": "NPCs",
-   "title": "Chapter 2: Doña Carmen with a folded kitchen towel raised in one hand like a paddle, stern (one pose)",
+   "title": "Chapter 2: Do\u00f1a Carmen with a folded kitchen towel raised in one hand like a paddle, stern (one pose)",
    "ar": "2:3",
    "refs": [
     "art/raw/npcs/npc-photo-carmen-v2.png",
     "art/raw/npcs/npc-walk-carmen-v1.png"
    ],
    "group": "Chapter 2",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\nPicture 1 is the finished painting of Doña Carmen. Picture 2 is her walking sheet.\n\nPAINT THIS ONE POSE\nDoña Carmen, standing and facing the viewer, one hand on her hip, the other raised with a folded striped kitchen towel held like a paddle, ready to swat. A stern face, one eyebrow up, with the smallest hint of a smile at the corner of her mouth. In her other hand, a plate of golden pupusas.\nStanding on a plain flat magenta #FF00FF background, nothing else in the picture, no text, no shadow on the ground.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Copy Doña Carmen from the attached pictures as exactly as possible: the same face, age, body, head size compared to the body, hair, clothes, colors, painting style and level of detail.\n- Keep her height, figure size and head size as in the walking sheet."
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\nPicture 1 is the finished painting of Do\u00f1a Carmen. Picture 2 is her walking sheet.\n\nPAINT THIS ONE POSE\nDo\u00f1a Carmen, standing and facing the viewer, one hand on her hip, the other raised with a folded striped kitchen towel held like a paddle, ready to swat. A stern face, one eyebrow up, with the smallest hint of a smile at the corner of her mouth. In her other hand, a plate of golden pupusas.\nStanding on a plain flat magenta #FF00FF background, nothing else in the picture, no text, no shadow on the ground.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Copy Do\u00f1a Carmen from the attached pictures as exactly as possible: the same face, age, body, head size compared to the body, hair, clothes, colors, painting style and level of detail.\n- Keep her height, figure size and head size as in the walking sheet."
   },
   {
    "status": "draft",
@@ -23739,14 +23739,14 @@
    "rejects": [],
    "id": "ch4-directorscut-coin",
    "tab": "Enemies",
-   "title": "The Director’s Cut with the gold coin pinned to its beret: sheet, 6 frames facing right (chapter 4)",
+   "title": "The Director\u2019s Cut with the gold coin pinned to its beret: sheet, 6 frames facing right (chapter 4)",
    "ar": "3:2",
    "refs": [
     "art/raw/enemies/enemy-directorscut-v4.png",
     "art/raw/enemies/enemy-mudling-v2.png"
    ],
    "group": "Chapter 4",
-   "prompt": "IMAGE REQUEST: ONE SINGLE SHEET. Return exactly one image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The approved painting of The Director’s Cut, the giant red megaphone in a beret that is the boss of Studio Backlot, a boss of \"The Adventures of Tom\", a family role-playing game. Keep the same creature, shape, colors and painted finish.\n2) The approved painting of Grump Hollow's Mudling, for the handbrushed finish only.\n\nPAINT THIS SHEET\nThe same 6 poses as attachment 1, in the same 3 by 2 layout: top row poses 1 to 3, bottom row poses 4 to 6, each pose filling most of its cell, nothing overlapping, the creature facing right in every pose.\nThe same creature and poses, but in EVERY pose one small gold coin with a cowboy hat stamp is pinned to the front of its beret, small and clearly visible, in the same place in every pose, shining like an award. In pose 6, the last pose, the coin is loose and tipping off the beret. No other changes.\nPaint it like attachment 1: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
+   "prompt": "IMAGE REQUEST: ONE SINGLE SHEET. Return exactly one image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The approved painting of The Director\u2019s Cut, the giant red megaphone in a beret that is the boss of Studio Backlot, a boss of \"The Adventures of Tom\", a family role-playing game. Keep the same creature, shape, colors and painted finish.\n2) The approved painting of Grump Hollow's Mudling, for the handbrushed finish only.\n\nPAINT THIS SHEET\nThe same 6 poses as attachment 1, in the same 3 by 2 layout: top row poses 1 to 3, bottom row poses 4 to 6, each pose filling most of its cell, nothing overlapping, the creature facing right in every pose.\nThe same creature and poses, but in EVERY pose one small gold coin with a cowboy hat stamp is pinned to the front of its beret, small and clearly visible, in the same place in every pose, shining like an award. In pose 6, the last pose, the coin is loose and tipping off the beret. No other changes.\nPaint it like attachment 1: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
    "status": "approved",
@@ -23769,7 +23769,7 @@
     "art/raw/enemies/enemy-mudling-v2.png"
    ],
    "group": "Chapter 4",
-   "prompt": "IMAGE REQUEST: ONE SINGLE SHEET. Return exactly one image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The approved painting of The Director’s Cut, the giant red megaphone in a beret that is the boss of Studio Backlot, a boss of \"The Adventures of Tom\", a family role-playing game. Keep the same creature, shape, colors and painted finish.\n2) The approved painting of Grump Hollow's Mudling, for the handbrushed finish only.\n\nPAINT THIS SHEET\nThe same 6 poses as attachment 1, in the same 3 by 2 layout: top row poses 1 to 3, bottom row poses 4 to 6, each pose filling most of its cell, nothing overlapping, the creature facing right in every pose.\nTHE NEW SHEET IS A NORMAL-SIZED MEGAPHONE, not a giant: in every pose it is about as long as a grown person's forearm, an ordinary red hand megaphone with a small beret, resting or tilting on a shelf, with no face, no glowing, no coin. Six simple resting poses: 1 upright, 2 tilting left, 3 tilting right, 4 lying on its side, 5 upright with the beret slipping, 6 leaning on a wall.\nPaint it like attachment 1: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
+   "prompt": "IMAGE REQUEST: ONE SINGLE SHEET. Return exactly one image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The approved painting of The Director\u2019s Cut, the giant red megaphone in a beret that is the boss of Studio Backlot, a boss of \"The Adventures of Tom\", a family role-playing game. Keep the same creature, shape, colors and painted finish.\n2) The approved painting of Grump Hollow's Mudling, for the handbrushed finish only.\n\nPAINT THIS SHEET\nThe same 6 poses as attachment 1, in the same 3 by 2 layout: top row poses 1 to 3, bottom row poses 4 to 6, each pose filling most of its cell, nothing overlapping, the creature facing right in every pose.\nTHE NEW SHEET IS A NORMAL-SIZED MEGAPHONE, not a giant: in every pose it is about as long as a grown person's forearm, an ordinary red hand megaphone with a small beret, resting or tilting on a shelf, with no face, no glowing, no coin. Six simple resting poses: 1 upright, 2 tilting left, 3 tilting right, 4 lying on its side, 5 upright with the beret slipping, 6 leaning on a wall.\nPaint it like attachment 1: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
   },
   {
    "status": "approved",
@@ -25918,8 +25918,8 @@
    "refs": [
     "art/raw/npcs/npc-photo-carmen-v2.png"
    ],
-   "title": "Chapter 2: Doña Carmen in the smog's daze (one full-body pose: glassy eyes, dreamy smile)",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved painting of Doña Carmen, a neighbour in \"The Adventures of Tom\", a family role-playing game. This is exactly how Doña Carmen looks.\n\nPAINT THIS ONE POSE\nDoña Carmen, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Doña Carmen is in a trance: the eyes are glassy, half closed and unfocused, looking at nothing far away, the eyebrows slightly raised, a slack, dreamy little smile, the head tilted a little to one side, the shoulders loose. Arms hang relaxed; she holds a griddle spatula loosely at her side. Calm and a little funny, never scary.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
+   "title": "Chapter 2: Do\u00f1a Carmen in the smog's daze (one full-body pose: glassy eyes, dreamy smile)",
+   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved painting of Do\u00f1a Carmen, a neighbour in \"The Adventures of Tom\", a family role-playing game. This is exactly how Do\u00f1a Carmen looks.\n\nPAINT THIS ONE POSE\nDo\u00f1a Carmen, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Do\u00f1a Carmen is in a trance: the eyes are glassy, half closed and unfocused, looking at nothing far away, the eyebrows slightly raised, a slack, dreamy little smile, the head tilted a little to one side, the shoulders loose. Arms hang relaxed; she holds a griddle spatula loosely at her side. Calm and a little funny, never scary.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
   },
   {
    "status": "approved",
@@ -26538,7 +26538,7 @@
    "rejects": [],
    "id": "ch8-cooks-poses",
    "tab": "Characters",
-   "title": "Chapter 8: Miss Odette and Doña Carmen on the sidewalk holding spoons (6 frames: Odette 3, Carmen 3)",
+   "title": "Chapter 8: Miss Odette and Do\u00f1a Carmen on the sidewalk holding spoons (6 frames: Odette 3, Carmen 3)",
    "ar": "3:2",
    "refs": [
     "art/raw/npcs/npc-photo-odette-v2.png",
@@ -26547,7 +26547,7 @@
     "art/raw/npcs/npc-walk-carmen-v1.png"
    ],
    "group": "Chapter 8",
-   "prompt": "Draw Miss Odette (the first three frames) and Doña Carmen (the last three frames) in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of Miss Odette. Picture 2 is her walking sheet. Picture 3 is the finished painting of Doña Carmen. Picture 4 is her walking sheet.\n\nCopy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as the walking sheet. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\n\nRow 1, Miss Odette, always Odette's own face, age, body, hair and clothes:\n1. Standing, facing the viewer, holding a big wooden spoon up in one hand like a scepter and the other hand on her hip, her mouth open scolding, a stern, warm, no-nonsense face.\n2. Standing in profile, facing right, pointing the wooden spoon forward at someone at the edge of her cell (nobody drawn), her eyebrow high, a doubtful look.\n3. Standing, facing the viewer, one hand holding the wooden spoon against her cheek, her eyes rolled up and her mouth a thin line, deeply unimpressed.\nRow 2, Doña Carmen, always Carmen's own face, age, body, hair and clothes:\n4. Standing, facing the viewer, holding a metal spatula up in one hand and her other fist on her hip, her chin up, a fierce, proud, offended face.\n5. Standing in profile, facing right, her spatula held across her chest with both hands and her head tipped back, one eyebrow high, a skeptical look.\n6. Standing, facing the viewer, one hand held out palm up and open, the spatula in the other, her face twisted in a mock-tragic grimace, as if mourning something cold.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
+   "prompt": "Draw Miss Odette (the first three frames) and Do\u00f1a Carmen (the last three frames) in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of Miss Odette. Picture 2 is her walking sheet. Picture 3 is the finished painting of Do\u00f1a Carmen. Picture 4 is her walking sheet.\n\nCopy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as the walking sheet. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\n\nRow 1, Miss Odette, always Odette's own face, age, body, hair and clothes:\n1. Standing, facing the viewer, holding a big wooden spoon up in one hand like a scepter and the other hand on her hip, her mouth open scolding, a stern, warm, no-nonsense face.\n2. Standing in profile, facing right, pointing the wooden spoon forward at someone at the edge of her cell (nobody drawn), her eyebrow high, a doubtful look.\n3. Standing, facing the viewer, one hand holding the wooden spoon against her cheek, her eyes rolled up and her mouth a thin line, deeply unimpressed.\nRow 2, Do\u00f1a Carmen, always Carmen's own face, age, body, hair and clothes:\n4. Standing, facing the viewer, holding a metal spatula up in one hand and her other fist on her hip, her chin up, a fierce, proud, offended face.\n5. Standing in profile, facing right, her spatula held across her chest with both hands and her head tipped back, one eyebrow high, a skeptical look.\n6. Standing, facing the viewer, one hand held out palm up and open, the spatula in the other, her face twisted in a mock-tragic grimace, as if mourning something cold.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
   },
   {
    "status": "draft",
@@ -26908,53 +26908,6 @@
    ],
    "group": "Chapter 1",
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet, a diagram or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE PICTURE\nA smartphone lying face up on a worn taxi back seat, its screen lit and glowing with a new message that is not readable. A jacket sleeve rests beside it. A purple-grey haze shows through the window beyond. It is a close-up, straight-on picture that fills the whole square.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-rose-ko-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795103923963,
-     "marks": {
-      "first": 0,
-      "last": 2.533
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "she jumps up and down before falling over",
-     "from": "review",
-     "at": 1795124830393,
-     "rev": 0
-    }
-   ],
-   "id": "clip-rose-ko",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Rose: knocked out (held pose) video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/rose.png"
-   ],
-   "clip": {
-    "id": "rose-ko",
-    "owner": "rose",
-    "start": "art/clips/start/rose.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 83,
-    "step": 2,
-    "speed": 1.5,
-    "kind": "state"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: KNOCKED OUT\nFrom her starting relaxed stance, she sways once with her feet flat on the ground, sits down hard on the same spot, and tips over onto her back with her arms out to the sides and her eyes closed, knocked out. Without getting up, she stays lying flat on her back and remains completely still in that pose for the rest of the clip.",
-   "promptRev": 1
   },
   {
    "status": "approved",
@@ -27540,362 +27493,7 @@
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP. Return exactly one video, nothing else.\n\nWHAT THIS IS\nA short looping animation of the creature in the attached picture, for a family role-playing game. The attached picture is the first frame. Animate EXACTLY this creature: the same body shape, face, eyes, colors, textures, markings and proportions, and the same hand-painted style. Do not redesign, restyle, simplify or change anything about the creature.\n\nLOOK (must hold in every moment of the clip)\n- The exact hand-painted style of the attached picture, with smooth soft shading, in every moment. No heavy dark outlines. Not 3D, not anime, not a flat cartoon, not a photo.\n- The creature stays the same size for the whole clip. It keeps the same number of eyes, limbs and other parts as in the picture. Nothing grows, shrinks, splits or morphs into something else.\n\nCAMERA AND BACKGROUND (strict)\n- Locked camera. No zoom, no pan, no tilt, no cuts, no shake.\n- The creature stays in the same place in the frame. Its base stays pressed on the same line as in the attached picture and never lifts off it, hops or slides. The whole creature stays well inside the frame at all times.\n- The creature keeps the same facing and viewing angle as the attached picture for the whole clip (turned to the right).\n- The background stays exactly the flat solid pure magenta of the attached picture the whole time, with no change of color, no gradient, no cut and no fade. No magenta glow, halo or tint on the creature. No ground, no cast shadow, no floor shadow, no puddle, no dust, no sparkles, no motion lines, no effects of any kind, no text, no extra creatures or objects.\n- Silent. No voice, no music, no sound effects.\n\nMOTION: IDLE LOOP\nThe creature waits in place, alive and curious. Slow breathing: the top of the body swells and settles a little while the base stays put. One slow blink. The eyes glance to one side and back. The muffin-tin crown stays on its head. The seaweed hair sways gently and stays attached. The fishing lure and the coin stay held where they are; drips wobble a little but nothing falls off or lands on the ground. The mouth stays as it is in the attached picture. Keep every motion very small, slow and calm: the creature barely moves.\n\nLength about 3 seconds. Family friendly for ages 6 and up."
   },
   {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-tom-idle-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104329608,
-     "marks": {
-      "first": 0,
-      "last": 3
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "needs periodic fast blink",
-     "from": "review",
-     "at": 1795125324760,
-     "rev": 0
-    }
-   ],
-   "id": "clip-tom-idle",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Tom: idle (waiting loop) video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/tom.png"
-   ],
-   "clip": {
-    "id": "tom-idle",
-    "owner": "tom",
-    "start": "art/clips/start/tom.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 99,
-    "step": 2,
-    "speed": 1,
-    "kind": "loop"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: IDLE BREATHING\nFrom his starting relaxed stance, he breathes slowly so his chest and shoulders rise and settle a little, and blinks once, quickly. He keeps his arms and head where they are and stays in that same relaxed stance for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-tom-guard-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104333963,
-     "marks": {
-      "first": 0,
-      "last": 3
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "his body size pulses unnnaturally. he's not blocking or covering his body, it looks unnatural",
-     "from": "review",
-     "at": 1795125371628,
-     "rev": 0
-    }
-   ],
-   "id": "clip-tom-guard",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Tom: guard and brace (loop) video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/tom.png"
-   ],
-   "clip": {
-    "id": "tom-guard",
-    "owner": "tom",
-    "start": "art/clips/start/tom.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 99,
-    "step": 1,
-    "speed": 0.3,
-    "calm": 0.875,
-    "kind": "loop"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: GUARD AND BRACE\nFrom his starting relaxed stance, he bends his knees slightly and raises both forearms up in front of his face and chest once, elbows tucked in to cover his body. Without lowering his arms, he holds that braced pose, breathing slowly, for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-tom-hit-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104357311,
-     "marks": {
-      "first": 0,
-      "last": 2.367
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "he should stumble backwards and grimace",
-     "from": "review",
-     "at": 1795125396246,
-     "rev": 0
-    }
-   ],
-   "id": "clip-tom-hit",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Tom: hit reaction video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/tom.png"
-   ],
-   "clip": {
-    "id": "tom-hit",
-    "owner": "tom",
-    "start": "art/clips/start/tom.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 99,
-    "step": 2,
-    "speed": 1.5,
-    "kind": "state"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HIT REACTION\nFrom his starting relaxed stance, he grimaces and stumbles half a step backward once, his head and shoulders jolting back. Without repeating the stumble, he steps back to the same spot. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-tom-dodge-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104359638,
-     "marks": {
-      "first": 0,
-      "last": 2.7
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "his size changes unnaturaly. doesnt look dodging - his leg sweeps forward",
-     "from": "review",
-     "at": 1795125445395,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "his size changes unnaturaly. doesnt look dodging - his leg sweeps forward",
-     "from": "review",
-     "at": 1795125450523,
-     "rev": 0
-    }
-   ],
-   "id": "clip-tom-dodge",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Tom: dodge video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/tom.png"
-   ],
-   "clip": {
-    "id": "tom-dodge",
-    "owner": "tom",
-    "start": "art/clips/start/tom.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 99,
-    "step": 2,
-    "speed": 1.5,
-    "kind": "state"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: DODGE\nFrom his starting relaxed stance, he leans his upper body quickly backward once, away from the way he faces, as if something just missed him. Without moving his feet, he straightens up into his starting relaxed stance and remains completely still in that pose for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-tom-ko-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104355117,
-     "marks": {
-      "first": 0,
-      "last": 3
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "should have a dizzy expression on his face before he falls",
-     "from": "review",
-     "at": 1795125475441,
-     "rev": 0
-    }
-   ],
-   "id": "clip-tom-ko",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Tom: knocked out (held pose) video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/tom.png"
-   ],
-   "clip": {
-    "id": "tom-ko",
-    "owner": "tom",
-    "start": "art/clips/start/tom.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 99,
-    "step": 2,
-    "speed": 1.5,
-    "kind": "state"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: KNOCKED OUT\nFrom his starting relaxed stance, he gets a dizzy, dazed look, wobbles once, sits down hard on the same spot, and tips over backward onto his back with his arms out to the sides and his eyes closed, knocked out. Without getting up, he stays lying flat on his back and remains completely still in that pose for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "approved",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-tom-run-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104380522,
-     "marks": {
-      "first": 0,
-      "last": 3
-     }
-    },
-    {
-     "n": 1,
-     "file": "art/raw/clips/clip-tom-run-v2.mp4",
-     "date": "2026-11-20",
-     "from": "clipgen",
-     "at": 1795137428335,
-     "marks": {
-      "first": 0,
-      "last": 3
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "what is this for? doesnt look like running, looks like he's doing \"high knees\" warmup exercise.",
-     "from": "review",
-     "at": 1795125509902,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "what is this for? doesnt look like running, looks like he's doing \"high knees\" warmup exercise.",
-     "from": "review",
-     "at": 1795125515780,
-     "rev": 0
-    }
-   ],
-   "id": "clip-tom-run",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Tom: running in place (loop) video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/tom.png"
-   ],
-   "clip": {
-    "id": "tom-run",
-    "owner": "tom",
-    "start": "art/clips/start/tom.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 99,
-    "step": 2,
-    "speed": 1,
-    "kind": "loop"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: RUNNING IN PLACE\nFrom his starting relaxed stance, he starts running in place, his feet staying low and his arms pumping in a steady rhythm without moving forward or backward. He keeps running in place at the same steady pace for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-tom-victory-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104385359,
-     "marks": {
-      "first": 0,
-      "last": 3
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "his body grows, his feet disappear into the ground. not emphatic enough.",
-     "from": "review",
-     "at": 1795125539584,
-     "rev": 0
-    }
-   ],
-   "id": "clip-tom-victory",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Tom: victory video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/tom.png"
-   ],
-   "clip": {
-    "id": "tom-victory",
-    "owner": "tom",
-    "start": "art/clips/start/tom.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 99,
-    "step": 2,
-    "speed": 1.5,
-    "kind": "state"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: VICTORY\nFrom his starting relaxed stance, he grins and pumps one fist up high above his head once. Without repeating the gesture, he holds that raised fist with the same grin and remains completely still in that pose for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -27934,6 +27532,13 @@
      "from": "review",
      "at": 1795125578610,
      "rev": 0
+    },
+    {
+     "date": "2026-11-20",
+     "note": "clipreset: never reviewed by Tom",
+     "from": "clipposes",
+     "at": 1795145172947,
+     "rev": 1
     }
    ],
    "id": "clip-tom-give",
@@ -27960,7 +27565,7 @@
    "promptRev": 1
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -27988,6 +27593,13 @@
      "from": "review",
      "at": 1795125601693,
      "rev": 0
+    },
+    {
+     "date": "2026-11-20",
+     "note": "clipreset: never reviewed by Tom",
+     "from": "clipposes",
+     "at": 1795145172947,
+     "rev": 1
     }
    ],
    "id": "clip-tom-cast",
@@ -28014,7 +27626,7 @@
    "promptRev": 1
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -28043,6 +27655,13 @@
      "from": "review",
      "at": 1795125634587,
      "rev": 0
+    },
+    {
+     "date": "2026-11-20",
+     "note": "clipreset: never reviewed by Tom",
+     "from": "clipposes",
+     "at": 1795145172947,
+     "rev": 1
     }
    ],
    "id": "clip-tom-loungepass",
@@ -28068,7 +27687,7 @@
    "promptRev": 1
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -28097,6 +27716,13 @@
      "from": "review",
      "at": 1795125715684,
      "rev": 0
+    },
+    {
+     "date": "2026-11-20",
+     "note": "clipreset: never reviewed by Tom",
+     "from": "clipposes",
+     "at": 1795145172947,
+     "rev": 1
     }
    ],
    "id": "clip-tom-blockade",
@@ -28119,411 +27745,6 @@
     "speed": 1.5
    },
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HIP CHECK\nFrom his starting relaxed stance, he spreads both arms out wide to block the way and bumps one hip sharply forward once, as if guarding his place at the front of a boarding line. Without repeating the bump, he returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-grace-idle-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104408806,
-     "marks": {
-      "first": 0,
-      "last": 3
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "she leans back in a strange position. she should ocassionally quckly blink and slowly breathe.",
-     "from": "review",
-     "at": 1795125764045,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "she leans back in a strange position. she should ocassionally quckly blink and slowly breathe.",
-     "from": "review",
-     "at": 1795125769333,
-     "rev": 0
-    }
-   ],
-   "id": "clip-grace-idle",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Grace: idle (waiting loop) video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/grace.png"
-   ],
-   "clip": {
-    "id": "grace-idle",
-    "owner": "grace",
-    "start": "art/clips/start/grace.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 90,
-    "step": 2,
-    "speed": 1,
-    "kind": "loop"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: IDLE BREATHING\nFrom her starting relaxed stance, she breathes slowly so her chest and shoulders rise and settle a little, and blinks once, quickly. She keeps her arms and head where they are and stays in that same relaxed stance for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "approved",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-grace-guard-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104437365,
-     "marks": {
-      "first": 0,
-      "last": 3
-     }
-    },
-    {
-     "n": 1,
-     "file": "art/raw/clips/clip-grace-guard-v2.mp4",
-     "date": "2026-11-20",
-     "from": "clipgen",
-     "at": 1795137501489,
-     "marks": {
-      "first": 0,
-      "last": 3
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "it looks like a pushing motion and not guarding her body and face",
-     "from": "review",
-     "at": 1795125804112,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "it looks like a pushing motion and not guarding her body and face",
-     "from": "review",
-     "at": 1795125809648,
-     "rev": 0
-    }
-   ],
-   "id": "clip-grace-guard",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Grace: guard and brace (loop) video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/grace.png"
-   ],
-   "clip": {
-    "id": "grace-guard",
-    "owner": "grace",
-    "start": "art/clips/start/grace.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 90,
-    "step": 1,
-    "speed": 0.3,
-    "calm": 0.875,
-    "kind": "loop"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: GUARD AND BRACE\nFrom her starting relaxed stance, she bends her knees slightly and raises both forearms up in front of her face and chest once, elbows tucked in to cover her body. Without lowering her arms, she holds that braced pose, breathing slowly, for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-grace-hit-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104442103,
-     "marks": {
-      "first": 0,
-      "last": 2
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "should stumble backwards and grimace",
-     "from": "review",
-     "at": 1795125850219,
-     "rev": 0
-    }
-   ],
-   "id": "clip-grace-hit",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Grace: hit reaction video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/grace.png"
-   ],
-   "clip": {
-    "id": "grace-hit",
-    "owner": "grace",
-    "start": "art/clips/start/grace.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 90,
-    "step": 2,
-    "speed": 1.5,
-    "kind": "state"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HIT REACTION\nFrom her starting relaxed stance, she grimaces and stumbles half a step backward once, her head and shoulders jolting back. Without repeating the stumble, she steps back to the same spot. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-grace-dodge-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104439612,
-     "marks": {
-      "first": 0,
-      "last": 2.6
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "she shouldn't lean forward when dodging",
-     "from": "review",
-     "at": 1795125824410,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "she shouldn't lean forward when dodging",
-     "from": "review",
-     "at": 1795125829003,
-     "rev": 0
-    }
-   ],
-   "id": "clip-grace-dodge",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Grace: dodge video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/grace.png"
-   ],
-   "clip": {
-    "id": "grace-dodge",
-    "owner": "grace",
-    "start": "art/clips/start/grace.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 90,
-    "step": 2,
-    "speed": 1.5,
-    "kind": "state"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: DODGE\nFrom her starting relaxed stance, she leans her upper body quickly backward once, away from the way she faces, as if something just missed her. Without moving her feet, she straightens up into her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-grace-ko-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104465760,
-     "marks": {
-      "first": 0,
-      "last": 2.5
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "she should look dizzy before falling over",
-     "from": "review",
-     "at": 1795125884534,
-     "rev": 0
-    }
-   ],
-   "id": "clip-grace-ko",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Grace: knocked out (held pose) video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/grace.png"
-   ],
-   "clip": {
-    "id": "grace-ko",
-    "owner": "grace",
-    "start": "art/clips/start/grace.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 90,
-    "step": 2,
-    "speed": 1.5,
-    "kind": "state"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: KNOCKED OUT\nFrom her starting relaxed stance, she gets a dizzy, dazed look, wobbles once, sits down hard on the same spot, and tips over backward onto her back with her arms out to the sides and her eyes closed, knocked out. Without getting up, she stays lying flat on her back and remains completely still in that pose for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "approved",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-grace-run-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104463343,
-     "marks": {
-      "first": 0,
-      "last": 3
-     }
-    },
-    {
-     "n": 1,
-     "file": "art/raw/clips/clip-grace-run-v2.mp4",
-     "date": "2026-11-20",
-     "from": "clipgen",
-     "at": 1795137543450,
-     "marks": {
-      "first": 0,
-      "last": 3
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "same comment as Tom",
-     "from": "review",
-     "at": 1795125907163,
-     "rev": 0
-    }
-   ],
-   "id": "clip-grace-run",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Grace: running in place (loop) video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/grace.png"
-   ],
-   "clip": {
-    "id": "grace-run",
-    "owner": "grace",
-    "start": "art/clips/start/grace.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 90,
-    "step": 2,
-    "speed": 1,
-    "kind": "loop"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: RUNNING IN PLACE\nFrom her starting relaxed stance, she starts running in place, her feet staying low and her arms pumping in a steady rhythm without moving forward or backward. She keeps running in place at the same steady pace for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "approved",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-grace-victory-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104467904,
-     "marks": {
-      "first": 0,
-      "last": 1.5
-     }
-    },
-    {
-     "n": 1,
-     "file": "art/raw/clips/clip-grace-victory-v2.mp4",
-     "date": "2026-11-20",
-     "from": "clipgen",
-     "at": 1795137547590,
-     "marks": {
-      "first": 0,
-      "last": 2
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "her face and skin color change",
-     "from": "review",
-     "at": 1795125927280,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "her face and skin color change",
-     "from": "review",
-     "at": 1795125931894,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "actually it looks fine just make sure body size is consisntet",
-     "from": "review",
-     "at": 1795125954110,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "actually it looks fine just make sure body size is consisntet",
-     "from": "review",
-     "at": 1795125959108,
-     "rev": 0
-    }
-   ],
-   "id": "clip-grace-victory",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Grace: victory video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/grace.png"
-   ],
-   "clip": {
-    "id": "grace-victory",
-    "owner": "grace",
-    "start": "art/clips/start/grace.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 90,
-    "step": 2,
-    "speed": 1.5,
-    "kind": "state"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: VICTORY\nFrom her starting relaxed stance, she grins and throws both arms straight up into a V once. Without repeating the gesture, she holds both arms raised high with a big bright smile and remains completely still in that pose for the rest of the clip.",
    "promptRev": 1
   },
   {
@@ -28565,7 +27786,7 @@
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HAND SOMETHING OVER\nFrom her starting relaxed stance, she reaches one open hand out forward at chest height, palm up, once, as if handing something to a friend. Without repeating the gesture, she pulls her arm back. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -28604,6 +27825,13 @@
      "from": "review",
      "at": 1795125991737,
      "rev": 0
+    },
+    {
+     "date": "2026-11-20",
+     "note": "clipreset: never reviewed by Tom",
+     "from": "clipposes",
+     "at": 1795145172947,
+     "rev": 1
     }
    ],
    "id": "clip-grace-cast",
@@ -28630,7 +27858,7 @@
    "promptRev": 1
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -28671,6 +27899,13 @@
      "from": "review",
      "at": 1795126007852,
      "rev": 0
+    },
+    {
+     "date": "2026-11-20",
+     "note": "clipreset: never reviewed by Tom",
+     "from": "clipposes",
+     "at": 1795145172947,
+     "rev": 1
     }
    ],
    "id": "clip-grace-squeeze",
@@ -28696,7 +27931,7 @@
    "promptRev": 1
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -28744,6 +27979,13 @@
      "from": "review",
      "at": 1795126036269,
      "rev": 0
+    },
+    {
+     "date": "2026-11-20",
+     "note": "clipreset: never reviewed by Tom",
+     "from": "clipposes",
+     "at": 1795145172947,
+     "rev": 1
     }
    ],
    "id": "clip-grace-cubepop",
@@ -28766,281 +28008,6 @@
     "speed": 1.5
    },
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SQUISHY CRUNCH\nFrom her starting relaxed stance, she brings a small clear cube-shaped squishy toy out from behind her back, holds it out forward in one hand at chest height, and crushes it in her fist once. Without repeating the crush, she tucks the toy behind her back again. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-rose-idle-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104507461,
-     "marks": {
-      "first": 0,
-      "last": 3
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "should be breathing lightly and blinking ocassionally quickly",
-     "from": "review",
-     "at": 1795126308127,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "should be breathing lightly and blinking ocassionally quickly",
-     "from": "review",
-     "at": 1795126314535,
-     "rev": 0
-    }
-   ],
-   "id": "clip-rose-idle",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Rose: idle (waiting loop) video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/rose.png"
-   ],
-   "clip": {
-    "id": "rose-idle",
-    "owner": "rose",
-    "start": "art/clips/start/rose.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 83,
-    "step": 2,
-    "speed": 1,
-    "kind": "loop"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: IDLE BREATHING\nFrom her starting relaxed stance, she breathes slowly so her chest and shoulders rise and settle a little, and blinks once, quickly. She keeps her arms and head where they are and stays in that same relaxed stance for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-rose-guard-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104512183,
-     "marks": {
-      "first": 0,
-      "last": 3
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "she's not guarding her body or face, her hands are held in a unnatural postion",
-     "from": "review",
-     "at": 1795126352997,
-     "rev": 0
-    }
-   ],
-   "id": "clip-rose-guard",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Rose: guard and brace (loop) video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/rose.png"
-   ],
-   "clip": {
-    "id": "rose-guard",
-    "owner": "rose",
-    "start": "art/clips/start/rose.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 83,
-    "step": 1,
-    "speed": 0.3,
-    "calm": 0.875,
-    "kind": "loop"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: GUARD AND BRACE\nFrom her starting relaxed stance, she bends her knees slightly and raises both forearms up in front of her face and chest once, elbows tucked in to cover her body. Without lowering her arms, she holds that braced pose, breathing slowly, for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-rose-hit-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104531171,
-     "marks": {
-      "first": 0,
-      "last": 2.167
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "should grimace and stagger backwards",
-     "from": "review",
-     "at": 1795126372263,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "should grimace and stagger backwards",
-     "from": "review",
-     "at": 1795126377775,
-     "rev": 0
-    }
-   ],
-   "id": "clip-rose-hit",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Rose: hit reaction video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/rose.png"
-   ],
-   "clip": {
-    "id": "rose-hit",
-    "owner": "rose",
-    "start": "art/clips/start/rose.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 83,
-    "step": 2,
-    "speed": 1.5,
-    "kind": "state"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HIT REACTION\nFrom her starting relaxed stance, she grimaces and stumbles half a step backward once, her head and shoulders jolting back. Without repeating the stumble, she steps back to the same spot. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-rose-dodge-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104533546,
-     "marks": {
-      "first": 0,
-      "last": 2.533
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "leads forwards instead of backwards or to the sides",
-     "from": "review",
-     "at": 1795126397107,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "leads forwards instead of backwards or to the sides",
-     "from": "review",
-     "at": 1795126401930,
-     "rev": 0
-    }
-   ],
-   "id": "clip-rose-dodge",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Rose: dodge video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/rose.png"
-   ],
-   "clip": {
-    "id": "rose-dodge",
-    "owner": "rose",
-    "start": "art/clips/start/rose.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 83,
-    "step": 2,
-    "speed": 1.5,
-    "kind": "state"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: DODGE\nFrom her starting relaxed stance, she leans her upper body quickly backward once, away from the way she faces, as if something just missed her. Without moving her feet, she straightens up into her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "approved",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-rose-run-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104536048,
-     "marks": {
-      "first": 0,
-      "last": 3
-     }
-    },
-    {
-     "n": 1,
-     "file": "art/raw/clips/clip-rose-run-v2.mp4",
-     "date": "2026-11-20",
-     "from": "clipgen",
-     "at": 1795137623878,
-     "marks": {
-      "first": 0,
-      "last": 3
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "looks like skipping",
-     "from": "review",
-     "at": 1795126416564,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "looks like skipping",
-     "from": "review",
-     "at": 1795126421801,
-     "rev": 0
-    }
-   ],
-   "id": "clip-rose-run",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Rose: running in place (loop) video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/rose.png"
-   ],
-   "clip": {
-    "id": "rose-run",
-    "owner": "rose",
-    "start": "art/clips/start/rose.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 83,
-    "step": 2,
-    "speed": 1,
-    "kind": "loop"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: RUNNING IN PLACE\nFrom her starting relaxed stance, she starts running in place, her feet staying low and her arms pumping in a steady rhythm without moving forward or backward. She keeps running in place at the same steady pace for the rest of the clip.",
    "promptRev": 1
   },
   {
@@ -29120,7 +28087,7 @@
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HAND SOMETHING OVER\nFrom her starting relaxed stance, she reaches one open hand out forward at chest height, palm up, once, as if handing something to a friend. Without repeating the gesture, she pulls her arm back. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -29159,6 +28126,13 @@
      "from": "review",
      "at": 1795126455151,
      "rev": 0
+    },
+    {
+     "date": "2026-11-20",
+     "note": "clipreset: never reviewed by Tom",
+     "from": "clipposes",
+     "at": 1795145172947,
+     "rev": 1
     }
    ],
    "id": "clip-rose-cast",
@@ -29185,7 +28159,7 @@
    "promptRev": 1
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -29214,6 +28188,13 @@
      "from": "review",
      "at": 1795126508064,
      "rev": 0
+    },
+    {
+     "date": "2026-11-20",
+     "note": "clipreset: never reviewed by Tom",
+     "from": "clipposes",
+     "at": 1795145172947,
+     "rev": 1
     }
    ],
    "id": "clip-rose-tackle",
@@ -29239,7 +28220,7 @@
    "promptRev": 1
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -29280,6 +28261,13 @@
      "from": "review",
      "at": 1795126527035,
      "rev": 0
+    },
+    {
+     "date": "2026-11-20",
+     "note": "clipreset: never reviewed by Tom",
+     "from": "clipposes",
+     "at": 1795145172947,
+     "rev": 1
     }
    ],
    "id": "clip-rose-lava",
@@ -29305,7 +28293,7 @@
    "promptRev": 1
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -29334,6 +28322,13 @@
      "from": "review",
      "at": 1795126550817,
      "rev": 0
+    },
+    {
+     "date": "2026-11-20",
+     "note": "clipreset: never reviewed by Tom",
+     "from": "clipposes",
+     "at": 1795145172947,
+     "rev": 1
     }
    ],
    "id": "clip-rose-giddyup",
@@ -29356,431 +28351,6 @@
     "speed": 1.5
    },
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: CANNONBALL JUMP\nFrom her starting relaxed stance, she twirls one hand above her head like a cowgirl shouting giddyup, then crouches and jumps straight up once, hugging her knees to her chest in a tight cannonball at the top of the jump, then lands back on the exact same spot. Without jumping again, she settles into her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-deedee-idle-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104608766,
-     "marks": {
-      "first": 0,
-      "last": 3
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "same comment as Tom",
-     "from": "review",
-     "at": 1795126569671,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "same comment as Tom",
-     "from": "review",
-     "at": 1795126574616,
-     "rev": 0
-    }
-   ],
-   "id": "clip-deedee-idle",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Deedee: idle (waiting loop) video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/deedee.png"
-   ],
-   "clip": {
-    "id": "deedee-idle",
-    "owner": "deedee",
-    "start": "art/clips/start/deedee.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 99.3,
-    "step": 2,
-    "speed": 1,
-    "kind": "loop"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: IDLE BREATHING\nFrom her starting relaxed stance, she breathes slowly so her chest and shoulders rise and settle a little, and blinks once, quickly. She keeps her arms and head where they are and stays in that same relaxed stance for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-deedee-guard-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104613670,
-     "marks": {
-      "first": 0,
-      "last": 3
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "same comment as Tom",
-     "from": "review",
-     "at": 1795126588367,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "same comment as Tom",
-     "from": "review",
-     "at": 1795126592957,
-     "rev": 0
-    }
-   ],
-   "id": "clip-deedee-guard",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Deedee: guard and brace (loop) video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/deedee.png"
-   ],
-   "clip": {
-    "id": "deedee-guard",
-    "owner": "deedee",
-    "start": "art/clips/start/deedee.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 99.3,
-    "step": 1,
-    "speed": 0.3,
-    "calm": 0.875,
-    "kind": "loop"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: GUARD AND BRACE\nFrom her starting relaxed stance, she bends her knees slightly and raises both forearms up in front of her face and chest once, elbows tucked in to cover her body. Without lowering her arms, she holds that braced pose, breathing slowly, for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-deedee-hit-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104611173,
-     "marks": {
-      "first": 0,
-      "last": 2.367
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "same comment as Tom",
-     "from": "review",
-     "at": 1795126602873,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "same comment as Tom",
-     "from": "review",
-     "at": 1795126608074,
-     "rev": 0
-    }
-   ],
-   "id": "clip-deedee-hit",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Deedee: hit reaction video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/deedee.png"
-   ],
-   "clip": {
-    "id": "deedee-hit",
-    "owner": "deedee",
-    "start": "art/clips/start/deedee.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 99.3,
-    "step": 2,
-    "speed": 1.5,
-    "kind": "state"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HIT REACTION\nFrom her starting relaxed stance, she grimaces and stumbles half a step backward once, her head and shoulders jolting back. Without repeating the stumble, she steps back to the same spot. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-deedee-dodge-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104636972,
-     "marks": {
-      "first": 0,
-      "last": 2.667
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "same comment as all else",
-     "from": "review",
-     "at": 1795126617569,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "same comment as all else",
-     "from": "review",
-     "at": 1795126622315,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "same comment as all else",
-     "from": "review",
-     "at": 1795126628841,
-     "rev": 0
-    }
-   ],
-   "id": "clip-deedee-dodge",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Deedee: dodge video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/deedee.png"
-   ],
-   "clip": {
-    "id": "deedee-dodge",
-    "owner": "deedee",
-    "start": "art/clips/start/deedee.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 99.3,
-    "step": 2,
-    "speed": 1.5,
-    "kind": "state"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: DODGE\nFrom her starting relaxed stance, she leans her upper body quickly backward once, away from the way she faces, as if something just missed her. Without moving her feet, she straightens up into her starting relaxed stance and remains completely still in that pose for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-deedee-ko-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104639401,
-     "marks": {
-      "first": 0,
-      "last": 2.467
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "should look dizzy then fall backwards. her laying down is facing the wrong way",
-     "from": "review",
-     "at": 1795126647439,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "should look dizzy then fall backwards. her laying down is facing the wrong way",
-     "from": "review",
-     "at": 1795126652962,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "should look dizzy then fall backwards. her laying down is facing the wrong way",
-     "from": "review",
-     "at": 1795126658738,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "should look dizzy then fall backwards. her laying down is facing the wrong way",
-     "from": "review",
-     "at": 1795126666647,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "should look dizzy then fall backwards. her laying down is facing the wrong way",
-     "from": "review",
-     "at": 1795126676020,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "should look dizzy then fall backwards. her laying down is facing the wrong way",
-     "from": "review",
-     "at": 1795126686891,
-     "rev": 0
-    }
-   ],
-   "id": "clip-deedee-ko",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Deedee: knocked out (held pose) video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/deedee.png"
-   ],
-   "clip": {
-    "id": "deedee-ko",
-    "owner": "deedee",
-    "start": "art/clips/start/deedee.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 99.3,
-    "step": 2,
-    "speed": 1.5,
-    "kind": "state"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: KNOCKED OUT\nFrom her starting relaxed stance, she gets a dizzy, dazed look, wobbles once, sits down hard on the same spot, and tips over backward onto her back with her arms out to the sides and her eyes closed, knocked out. Without getting up, she stays lying flat on her back and remains completely still in that pose for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "approved",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-deedee-run-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104634658,
-     "marks": {
-      "first": 0,
-      "last": 3
-     }
-    },
-    {
-     "n": 1,
-     "file": "art/raw/clips/clip-deedee-run-v2.mp4",
-     "date": "2026-11-20",
-     "from": "clipgen",
-     "at": 1795137726293,
-     "marks": {
-      "first": 0,
-      "last": 3
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "same comment as Tom",
-     "from": "review",
-     "at": 1795126704147,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "same comment as Tom",
-     "from": "review",
-     "at": 1795126708869,
-     "rev": 0
-    }
-   ],
-   "id": "clip-deedee-run",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Deedee: running in place (loop) video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/deedee.png"
-   ],
-   "clip": {
-    "id": "deedee-run",
-    "owner": "deedee",
-    "start": "art/clips/start/deedee.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 99.3,
-    "step": 2,
-    "speed": 1,
-    "kind": "loop"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: RUNNING IN PLACE\nFrom her starting relaxed stance, she starts running in place, her feet staying low and her arms pumping in a steady rhythm without moving forward or backward. She keeps running in place at the same steady pace for the rest of the clip.",
-   "promptRev": 1
-  },
-  {
-   "status": "draft",
-   "versions": [
-    {
-     "n": 0,
-     "file": "art/raw/clips/clip-deedee-victory-v1.mp4",
-     "date": "2026-11-19",
-     "from": "clipgen",
-     "at": 1795104666646,
-     "marks": {
-      "first": 0,
-      "last": 2.6
-     }
-    }
-   ],
-   "rejects": [
-    {
-     "date": "2026-11-19",
-     "note": "she just midly claps, does look celebratory enough. her palms look yellow?",
-     "from": "review",
-     "at": 1795126734502,
-     "rev": 0
-    },
-    {
-     "date": "2026-11-19",
-     "note": "she just midly claps, does look celebratory enough. her palms look yellow?",
-     "from": "review",
-     "at": 1795126739029,
-     "rev": 0
-    }
-   ],
-   "id": "clip-deedee-victory",
-   "tab": "Clips",
-   "group": "Chapter 1",
-   "title": "Deedee: victory video clip",
-   "ar": "4:3",
-   "refs": [
-    "art/clips/start/deedee.png"
-   ],
-   "clip": {
-    "id": "deedee-victory",
-    "owner": "deedee",
-    "start": "art/clips/start/deedee.png",
-    "model": "grok-imagine-video-1.5-lite",
-    "res": "480p",
-    "dur": 3,
-    "figRows": 99.3,
-    "step": 2,
-    "speed": 1.5,
-    "kind": "state"
-   },
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: VICTORY\nFrom her starting relaxed stance, she beams and claps her hands together quickly three times up at face height. Without clapping again, she holds her hands clasped at face height with the same big smile and remains completely still in that pose for the rest of the clip.",
    "promptRev": 1
   },
   {
@@ -29822,7 +28392,7 @@
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HAND SOMETHING OVER\nFrom her starting relaxed stance, she reaches one open hand out forward at chest height, palm up, once, as if handing something to a friend. Without repeating the gesture, she pulls her arm back. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -29861,6 +28431,13 @@
      "from": "review",
      "at": 1795126771804,
      "rev": 0
+    },
+    {
+     "date": "2026-11-20",
+     "note": "clipreset: never reviewed by Tom",
+     "from": "clipposes",
+     "at": 1795145172947,
+     "rev": 1
     }
    ],
    "id": "clip-deedee-cast",
@@ -29925,7 +28502,7 @@
    "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving her exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with her feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: SPRAY BOTTLE SQUIRT\nFrom her starting relaxed stance, she brings a blue spray bottle out from behind her back, aims it forward at face height in one hand, and squeezes the trigger once. Without repeating the squeeze, she tucks the bottle behind her back again. She returns to her starting relaxed stance and remains completely still in that pose for the rest of the clip."
   },
   {
-   "status": "draft",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -29961,6 +28538,13 @@
      "from": "review",
      "at": 1795126807551,
      "rev": 0
+    },
+    {
+     "date": "2026-11-20",
+     "note": "clipreset: never reviewed by Tom",
+     "from": "clipposes",
+     "at": 1795145172947,
+     "rev": 1
     }
    ],
    "id": "clip-deedee-wetfloor",
@@ -29986,7 +28570,7 @@
    "promptRev": 1
   },
   {
-   "status": "approved",
+   "status": "rejected",
    "versions": [
     {
      "n": 0,
@@ -30027,6 +28611,13 @@
      "from": "review",
      "at": 1795126842266,
      "rev": 0
+    },
+    {
+     "date": "2026-11-20",
+     "note": "clipreset: never reviewed by Tom",
+     "from": "clipposes",
+     "at": 1795145172947,
+     "rev": 1
     }
    ],
    "id": "clip-deedee-scrub",

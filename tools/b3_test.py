@@ -1037,7 +1037,7 @@ S8_TRACE="""()=>{ if(window.__c8) { window.__c8.hits=[]; window.__c8.moves=[]; r
       window.__c8.hits.push({t:B3P.t,tgt:b.tgt,cur}); } return os.apply(this,arguments); };
   b3PlayMove=function(beats,done,mid,waited){ const h=beats[0]; if(h.t==='act'&&!waited) window.__c8.moves.push({src:h.src,id:h.id,clip:h.anim&&h.anim.clip||null,ready:h.anim?b3cReady(h.anim.clip):null,foe:!!h.foe}); return om.apply(this,arguments); }; }"""
 def s8(pg): return pg.evaluate("""()=>({ui:B3.ui,actor:B3.actor&&B3.actor.id,over:B3.F.over,loaded:b3cLoaded(),peak:B3C.peak,
-  idle:B3.F.units.map(u=>{ const id=b3cOf(u.id,'idle'); return id+':'+b3cReady(id); }),moves:window.__c8?window.__c8.moves.length:0})""")
+  idle:B3.F.foes.map(u=>{ const id=b3cOf(u.id,'idle'); return id+':'+b3cReady(id); }),moves:window.__c8?window.__c8.moves.length:0})""")
 def shoot_move(pg,frames,n=10,gap=170):
     for k in range(n): pg.wait_for_timeout(gap); frames.append(shot(pg))
 def stage8(pg,lab,landscape=False):
@@ -1049,11 +1049,11 @@ def stage8(pg,lab,landscape=False):
     pg.evaluate("()=>{ B7.speed=1; b7SetDiff('grace'); }")
     start(pg,idx,{'seed':SEED}); wait_cmd(pg); pg.evaluate(POKE_ROWS); pg.evaluate(S5_PREP); pg.evaluate(S8_TRACE); pg.wait_for_timeout(900 if not landscape else 4500)
     v=s8(pg); caps.append(R(shot(pg)))
-    need(all(x.endswith(':true') for x in v['idle']),f"every fighter's idle loop is loaded when the fight opens: {v['idle']}")
+    need(all(x.endswith(':true') for x in v['idle']),f"every monster's idle loop is loaded when the fight opens (the family stand in painted poses): {v['idle']}")
     need(v['loaded']<=10,f"no more than the idle loops plus a few leftovers are loaded at the start (about 10 MB each): {v['loaded']}")
     # the idle loop is what is drawn: the same picture changes over a second
-    a=pg.evaluate("()=>{ const u=B3.F.party[1],vu=B3.view.u[u.key]; const f1=b3cMemberFrame(u,vu,B3P.t,null),f2=b3cMemberFrame(u,vu,B3P.t+1.1,null); return {c1:!!f1&&!!f1._clip,differ:f1!==f2}; }")
-    need(a['c1'] and a['differ'],f'a family member is drawn from the idle clip and it moves: {a}')
+    a=pg.evaluate("()=>{ const u=B3.F.party[1],vu=B3.view.u[u.key]; const f1=b3cMemberFrame(u,vu,B3P.t,null),f2=b3cMemberFrame(u,vu,B3P.t+1.1,null); return {c1:!f1&&!f2,paint:!!b3PaintState(u,'idle')&&b3cOf(u.id,'idle')===null}; }")
+    need(a['c1'] and a['paint'],f'a family member stands in a painted pose, not an idle clip (clipposes): {a}')
     # 1. each family member's Basic lands on its clip's impact frame
     for member in ['tom','grace','rose','deedee']:
         if not turn_of(pg,member,S): continue
@@ -1064,7 +1064,9 @@ def stage8(pg,lab,landscape=False):
         H=pg.evaluate("(n)=>window.__c8.hits.slice(n)",n0)
         key=pg.evaluate('(m)=>B3.F.party.find(u=>u.id===m).key',member)
         first=[h for h in H if any(c['who']==key and c['imp'] is not None for c in h['cur'])]
-        need(len(first)>=1,f'{member}: the Basic should be played by its clip and show a hit: {H[:2]}')
+        need(len(H)>=1,f'{member}: the Basic should land a hit: {H[:2]}')
+        if member!='deedee': need(not first,f'{member}: the Basic is the default animation, not a clip (only Deedee has one): {H[:2]}')   # clipposes
+        else: need(len(first)>=1,f'{member}: the Basic should be played by its clip and show a hit: {H[:2]}')
         if first:
             c=[c for c in first[0]['cur'] if c['who']==key][0]; d=first[0]['t']-(c['t0']+c['T0'])-c['imp']
             need(-.02<=d<=.14,f"{member}: the hit should show on the clip's impact frame (off by {d:.3f} s, clip {c['id']})")
@@ -1086,22 +1088,16 @@ def stage8(pg,lab,landscape=False):
     need({'big_glare','swamp_chomp'}<=seen,f'the Big One used Big Glare and Swamp Chomp: {sorted(seen)}')
     print('   Big One acts seen:',sorted(seen))
     caps+=bfr[:6]
-    # 3. body states drawn from clips: a family member hit by a monster, a monster hit, the guard loop, a knock-out, the victory
-    st=pg.evaluate("""()=>{ const out={}; const u=B3.F.party[0],vu=B3.view.u[u.key];
-      b3cWant(b3cOf(u.id,'hit'),9000); b3cWant(b3cOf(B3.F.party[2].id,'ko'),9000); b3cWant(b3cOf(B3.F.party[1].id,'guard'),9000); return out; }""")
-    pg.wait_for_timeout(1800)
-    st=pg.evaluate("()=>{ const u=B3.F.party[0]; b3cBodyClip(u.key,'hit'); return {hitBody:B3P.body[u.key]&&B3P.body[u.key].kind}; }")
+    # 3. body states: the family are painted poses (tools/paint_state_test.py measures them); a monster hit and a Flustered monster are clips
+    pg.wait_for_timeout(600)
     st2=pg.evaluate("""()=>{ const out={}; const u=B3.F.party[0],vu=B3.view.u[u.key]; delete B3P.body[u.key];
-      // the guard loop is a clip for Tom; Grace's guard is a painted pose since clipreset (tools/paint_state_test.py measures it)
-      const g=B3.F.party[1],vg=B3.view.u[g.key],gc=b3cOf(g.id,'guard'); vg.sh=30; out.guard=!!gc&&bclipReady(gc)&&!!b3cMemberFrame(g,vg,B3P.t,null)&&b3cGuarding(g); vg.sh=0;
-      out.paint=b3cOf(u.id,'guard')===null&&!!b3PaintState(u,'guard');
+      out.paint=B3.F.party.every(m=>['guard','hit','dodge','ko','run','idle'].every(s=>b3cOf(m.id,s)===null&&!!b3PaintState(m,s)));
+      out.vic=B3.F.party.every(m=>m.id==='rose'?!!b3cOf(m.id,'victory'):(b3cOf(m.id,'victory')===null&&!!b3PaintState(m,'victory')));
       const f=B3.F.foes[0],A=B3P.fa[f.key]; A.cl=null; b3cFoeClip(f.key,'hit'); out.foeHit=!!A.cl;
-      const w=B3.F.party[2],vw=B3.view.u[w.key]; vw.ko=true; out.ko=!!b3cMemberFrame(w,vw,B3P.t,{kind:'ko',t0:B3P.t-5}); vw.ko=false;
       vu.st.push('flustered'); A.flusT=B3P.t-1; out.flus=!!b3cFoeFrame(f,A,vu.st?B3.view.u[f.key]:null,B3P.t); return out; }""")
-    print('   states',st,st2)
-    need(st['hitBody']=='cs',f"a hit on a family member plays the hit clip: {st}")
-    need(st2['guard'] and st2['foeHit'] and st2['ko'],f'guard loop, a monster hit clip and a knock-out clip are available and drawn: {st2}')
-    need(st2['paint'],f"Grace's guard is a painted pose with no clip row: {st2}")
+    print('   states',st2)
+    need(st2['paint'] and st2['vic'],f'the four fighters have painted idle, guard, hit, dodge, ko and run (and victory, Rose keeps her clip): {st2}')
+    need(st2['foeHit'],f'a monster hit clip is available and drawn: {st2}')
     # Flustered: the held picture, then restore
     pg.evaluate("()=>{ const f=B3.F.foes[0],vf=B3.view.u[f.key]; if(!vf.st.includes('flustered')) vf.st.push('flustered'); B3P.fa[f.key].flusT=B3P.t-.2; }"); pg.wait_for_timeout(1700); caps.append(R(shot(pg)))
     pg.evaluate("()=>{ const f=B3.F.foes[0],vf=B3.view.u[f.key]; vf.st=vf.st.filter(x=>x!=='flustered'); }")
@@ -1117,7 +1113,7 @@ def stage8(pg,lab,landscape=False):
     done=pg.evaluate("""()=>({over:B3.F.over,vic:B3.F.party.map(u=>{ const f=b3cMemberFrame(u,B3.view.u[u.key],B3P.t,B3P.body[u.key]); return !!f&&!!f._clip; }),die:!!(B3P.fa.f0&&B3P.fa.f0.die!=null),loaded:b3cLoaded(),peak:B3C.peak})""")
     print('   end',done)
     need(done['over']=='win','the boss fight was won')
-    need(all(done['vic']),f"the family cheers from victory clips: {done['vic']}")
+    need(done['vic']==[False,False,True,False],f"the family cheers: Rose from her victory clip, the others from painted poses: {done['vic']}")
     need(done['peak']<=16,f"no more than 16 clip pictures (about 160 MB) were ever held at once: peak {done['peak']}")
     sheet(caps[:24],4,os.path.join(OUT,'b3-s8'+('-land' if landscape else '')+'.png'),scale=.5)
     f=shot(pg); f.save(os.path.join(OUT,'b3-s8-end-'+('landscape' if landscape else 'portrait')+'.png'))
@@ -1125,13 +1121,13 @@ def stage8(pg,lab,landscape=False):
     # 5. a clip that cannot load: the move waits 2.5 s, then plays its default animation and the hit still lands
     if not landscape:
         pg.evaluate("()=>{ b3LabReset(); }"); start(pg,lab.index('new1'),{'seed':SEED}); wait_cmd(pg); pg.evaluate(S8_TRACE)
-        pg.evaluate("()=>{ const a=PAINTED.clip_rose_tackle; paintedRelease(a); a.src='art/clips/does-not-exist.webp'; a.failed=false; B3C.need.delete('rose_tackle'); }")
-        if turn_of(pg,'rose',S):
+        pg.evaluate("()=>{ const a=PAINTED.clip_deedee_windex; window.__wsrc=a.src; paintedRelease(a); a.src='art/clips/does-not-exist.webp'; a.failed=false; B3C.need.delete('deedee_windex'); }")
+        if turn_of(pg,'deedee',S):
             n0=pg.evaluate("()=>window.__c8.hits.length"); basic(pg); aim(pg,None); pg.wait_for_timeout(300)
             wait_cmd(pg,60000); H=pg.evaluate("(n)=>window.__c8.hits.slice(n)",n0); body=pg.evaluate("()=>window.__c8.moves.slice(-3).map(m=>m.id+':'+m.ready)")
             need(len(H)>=1,f'a move whose clip cannot load still lands its hit after the wait: {H} {body}')
-            need(not any(c['id']=='rose_tackle' for h in H for c in h['cur']),'that move was played by the default animation, not the missing clip')
-        pg.evaluate("()=>{ const a=PAINTED.clip_rose_tackle; a.src='art/clips/rose-tackle.webp?v=clip0'; a.failed=false; }")
+            need(not any(c['id']=='deedee_windex' for h in H for c in h['cur']),'that move was played by the default animation, not the missing clip')
+        pg.evaluate("()=>{ const a=PAINTED.clip_deedee_windex; a.src=window.__wsrc; a.failed=false; }")
         pg.click('#b3-exit'); pg.wait_for_timeout(500)
 with sync_playwright() as pw:
     kw={'args':['--headless=new','--no-proxy-server']}
