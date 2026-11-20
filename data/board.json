@@ -925,7 +925,7 @@
   {
    "id": "c-ch1art2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Areas",
    "title": "Fix the four chapter 1 pictures you rejected, from your notes",
    "next": "Shipped as ch1art2: Grace's list, Amy's window, Aunt Ellie's door and the cab pulling away have fixed prompts and are back to draft; Rose on shoulders got the same fix (it attached Boppy's picture). Your turn: card t-ch1art2.",
@@ -954,13 +954,18 @@
     {
      "d": "2026-11-19",
      "t": "Fixed from Tom's notes: the list now names its three lines word for word; Amy, Aunt Ellie and Sal are attached as pictures (none was before). Rose on shoulders fixed the same way. Undecided before this: Mudling with muffins, green Big One with pan, Rose on shoulders."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch1art2: four rejected chapter 1 pictures (and Rose on shoulders) get fixed prompts and go back to To do"
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
    "tag": "ch1art2",
-   "after": "t-ch1art2"
+   "after": "t-ch1art2",
+   "done": "2026-11-19"
   },
   {
    "id": "c-boardaudit",
@@ -1207,8 +1212,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (8 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100352-7v5z, r-20261114-100555-mxvd, r-20261114-100734-1a2w, r-20261114-101501-c5no, r-20261114-101538-nre4, r-20261114-104915-g4gl and 2 more. First note: For this line in particular, we need to create a special frame that can be used in both the dialog a",
+   "title": "Fix the report backlog (7 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100352-7v5z, r-20261114-100555-mxvd, r-20261114-100734-1a2w, r-20261114-101501-c5no, r-20261114-101538-nre4, r-20261114-104915-g4gl and 1 more. First note: For this line in particular, we need to create a special frame that can be used in both the dialog a",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -1242,6 +1247,10 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "The backlog now holds 7 report(s)."
     }
    ],
    "blocks": [],
@@ -5446,6 +5455,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEuuRRV3wp1jnp5CTq",
+   "title": "Fix the four chapter 1 pictures you rejected, from your notes",
+   "first": "2026-11-19T18:17:38-08:00",
+   "last": "2026-11-19T18:26:18-08:00",
+   "tags": [
+    "ch1art2"
+   ],
+   "cards": [
+    "c-ch1art2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
    "title": "Chapter 1 scene 1: SKIP skips the whole scene, not just the opening half (skipchain1)",
    "first": "2026-11-19T18:15:20-08:00",
@@ -5704,16 +5725,6 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukEuuRRV3wp1jnp5CTq",
-   "title": "Fix the four chapter 1 pictures you rejected, from your notes",
-   "first": "2026-11-19T18:17:38-08:00",
-   "last": "2026-11-19T18:17:38-08:00",
-   "tags": [],
-   "cards": [
-    "c-ch1art2"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukH7oLv95YtuWW62q7o",
    "title": "Make the 43 fixed chapter 1 clips again (clipch1remake)",
    "first": "2026-11-19T17:14:03-08:00",
@@ -5849,8 +5860,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "0940a2cccb6357c3b4e1bdc09a4ad2c48d1513ed",
- "synced_at": "2026-11-20T02:25:23+00:00",
+ "synced": "0c57d5a818789741963e98fa7a16d75164606b1f",
+ "synced_at": "2026-11-20T02:27:11+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
