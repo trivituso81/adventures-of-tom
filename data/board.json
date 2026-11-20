@@ -7641,7 +7641,7 @@
    "title": "Generate and approve the Gate Zero room pictures",
    "theme": "Areas",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "pictures",
    "next": "ADMIN > ART LIBRARY, Rooms tab, group Airport: find room-gatezero-noplane and room-gatezero-plane, press GENERATE on each (or tap Generate all on this card), then APPROVE or REJECT with a note. You should see an airport gate room, one with no plane in the window and one with the plane. Approving starts card Install the Gate Zero pictures (gatezero).",
    "blocks": [
@@ -7653,7 +7653,7 @@
      "room-gatezero-plane"
     ]
    },
-   "changed": "2026-11-20",
+   "changed": "2026-11-19",
    "created": "2026-11-20",
    "chat": {
     "url": "",
@@ -7671,6 +7671,10 @@
     {
      "d": "2026-11-20",
      "t": "Pictures job: made 2 pictures. Spent about $0.10."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: all good."
     }
    ],
    "gen": {
@@ -7695,7 +7699,8 @@
      "failed": [],
      "spent": 0.1
     }
-   }
+   },
+   "done": "2026-11-19"
   },
   {
    "id": "t-oldchecks",
