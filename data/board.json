@@ -7791,7 +7791,7 @@
    "title": "Voices: record the old voice gaps",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "voice",
    "fyi": true,
    "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. Open Voice Library, set Show to No clip yet and Old voice. Record Mr. Washington's lines and the Narrator lines (silent until then), then press Send my takes to Claude.",
@@ -7810,6 +7810,10 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix what you found on: Older phone checks, when you next play (none block anything) is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: I don't wanna deal with any bugs past chapter 1 right now Sent to Claude as card c-fix-oldchecks-voice; this card waits on it and comes back to you when the fix ships."
     }
    ],
    "links": [
@@ -7820,7 +7824,8 @@
      },
      "label": "No clip yet"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "t-oldchecks-chapters",
@@ -8178,6 +8183,56 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch1starving-3 and t-ch1starving in data/board.json, history included. Your first push is the commit board: start c-fix-ch1starving-3.\n\nTom tested and found problems:\n1. Card t-ch1starving (Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped), ask voice). He was asked: ADMIN ) VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. Reload the page first (pull down or close and reopen it). The script box must end \"Grace, I'm so sorry but number two can't wait.\" with no \"[hungry] I'm starving!\", and your other directions ([wary, disgusted, amused], [pause, very very deadpan], [very dismissive]) must still be there. If you still see \"I'm starving!\", press Something is wrong and say where (the box, the subtitle in the game, or the voice). If you meant to keep \"I'm starving!\" in the script, say so in the note. Press play: the take you kept, unchanged. Nothing to record. Then All good. He wrote: I'm starving. should not have been dropped\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:16:40.684Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch1starving to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch1starving, and give the build fix-ch1starving-3 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-ch1starving"
+  },
+  {
+   "id": "c-fix-oldchecks-voice",
+   "tag": "fix-oldchecks-voice",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Game Shell",
+   "title": "Fix what you found on: Voices: record the old voice gaps",
+   "next": "You reported a problem on Voices: record the old voice gaps. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: I don't wanna deal with any bugs past chapter 1 right now",
+   "blocks": [
+    "t-oldchecks-voice"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T08:18:09.380Z",
+     "card": "t-oldchecks-voice",
+     "title": "Voices: record the old voice gaps",
+     "ask": "voice",
+     "words": "I don't wanna deal with any bugs past chapter 1 right now",
+     "shot": "",
+     "asked": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. Open Voice Library, set Show to No clip yet and Old voice. Record Mr. Washington's lines and the Narrator lines (silent until then), then press Send my takes to Claude."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-oldchecks-voice"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-oldchecks-voice."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-oldchecks-voice: I don't wanna deal with any bugs past chapter 1 right now"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Voices: record the old voice gaps.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: voice are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-oldchecks-voice and t-oldchecks-voice in data/board.json, history included. Your first push is the commit board: start c-fix-oldchecks-voice.\n\nTom tested and found problems:\n1. Card t-oldchecks-voice (Voices: record the old voice gaps, ask voice). He was asked: Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. Open Voice Library, set Show to No clip yet and Old voice. Record Mr. Washington's lines and the Narrator lines (silent until then), then press Send my takes to Claude. He wrote: I don't wanna deal with any bugs past chapter 1 right now\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:18:09.380Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-oldchecks-voice to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-oldchecks-voice, and give the build fix-oldchecks-voice a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-oldchecks-voice"
   }
  ],
  "sessions": [
