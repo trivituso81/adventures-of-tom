@@ -7029,7 +7029,7 @@
    "title": "QA for generated pictures, with the results on the card (artgen2)",
    "theme": "Tools",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "tag": "artgen2",
    "auto": true,
    "next": "Waits on Generate all (artgen1) and your try of it. Then it adds a QA check of every generated picture against its prompt (a score and what failed, on the board card and in the Art Library review) and starts the record of QA against your own decisions. Nothing is auto-approved in this build.",
@@ -7037,15 +7037,27 @@
     "c-artgen3"
    ],
    "created": "2026-11-19",
-   "changed": "2026-11-19",
+   "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDZUaRAm9k2zMUUbic",
     "opening": "not started"
    },
    "history": [
     {
      "d": "2026-11-19",
      "t": "Added by board-artgen (planning chat https://claude.ai/code/session_01RXeukGiMh61Wcr1Q4VNn3N). Tom: \"Then a way to imitate a qa of images to ensure they meet the prompt criteria and see the results.\" Plan: claude/artgen-plan.md."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Generate all of a card's pictures with one approval on the board (artgen1), Try Generate all on the new Mudling sheet card is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom answered, so this card starts by itself."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -7056,8 +7068,7 @@
     "model": "Claude Sonnet 5.5 (row B: every step, file and test is written in claude/artgen-plan.md, and tests catch mistakes)",
     "effort": "medium (the questions, files and tests are written in the plan)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/artgen-plan.md (sections 1 to 3 and section 5), then card c-artgen2 in data/board.json with its history and the notes of the Tom cards that blocked it. Build artgen2 exactly as the plan says and push it as artgen2. Your first push is the commit board: start c-artgen2. The replay in section 5.3 is the only paid step: keep its cap at $1.50. Write what you built and anything that differs from the plan into the plan's Built section. Do not start the next phase. You have my full permission to access the repo."
-   },
-   "waiting_on": "claude"
+   }
   },
   {
    "id": "c-artgen3",
@@ -9598,8 +9609,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "a04249fd9e52161216afbb5b0b0ecb74ff749f27",
- "synced_at": "2026-11-20T08:40:05+00:00",
+ "synced": "779f155be5b996259f5a25a479152c08b3cfc839",
+ "synced_at": "2026-11-20T08:41:34+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
