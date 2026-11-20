@@ -10858,13 +10858,13 @@
    "title": "Fix: losing to The Big One leaves the party stuck",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Claude fixes this (BUG-01, severity P0 Critical (Softlock)) when its prompt is started.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukEk93mJfgwTJ2d8xWD",
     "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
    },
    "history": [
@@ -10876,6 +10876,10 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-20T16:17:22.703Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "tag": "gem-bug01",
@@ -10888,20 +10892,20 @@
     "effort": "medium (the tester named three possible fixes)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug01 in data/board.json, history included. Your first push is the commit board: start c-gem-bug01.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-01. What the tester saw: Severity P0 Critical (Softlock). Where: Grump Hollow (`The Big One` Wipe Recovery). Losing to `The Big One` plays Deedee's recovery scene (`\"Up, up. Everybody up... Then we try again.\"`) and places the party back on the shoreline in a permanent softlock: the one-time right-shore flashbulb cutscene flag is already consumed (leaving only the 4-line repeatable `Inspect orange block`), while `The Big One` sits on unwalkable water tiles out of `A`-button range (`\"Face a neighbor or an object, then press A.\"`).\n\nThe tester suggested (a suggestion, not an order): Either reset the pre-boss trigger zone on wipe, add a shoreline `A`-button re-challenge trigger tile facing `The Big One`, or offer an immediate `\"Retry Boss Battle\"` prompt on defeat.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug01, push to main, and write the result and the next step onto the card.\n\nP0: the player cannot continue. Pick the retry prompt on defeat if it fits the battle code; otherwise reset the pre-boss trigger. Test losing the fight on purpose, then winning the retry.\n\nYou have my full permission to access the repo."
    },
-   "start": true
+   "started_at": "2026-11-20T16:18:35+00:00"
   },
   {
    "id": "c-gem-bug02",
    "title": "Fix: AUTO resets to ON and a tap skips unfinished text",
    "theme": "Game Shell",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Claude fixes this (BUG-02, severity High) when its prompt is started.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukEGWt235mq62dLSfWX",
     "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
    },
    "history": [
@@ -10913,6 +10917,10 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-20T16:17:33.953Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "tag": "gem-bug02",
@@ -10925,7 +10933,7 @@
     "effort": "medium (two small input fixes in the dialogue box)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug02 in data/board.json, history included. Your first push is the commit board: start c-gem-bug02.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-02. What the tester saw: Severity High. Where: Global Cutscene Dialogue (`AUTO ON` / Click-While-Typing). (1) Clicking `AUTO OFF` does not persist,every new dialogue step resets `AUTO` back to `ON`, auto-advancing short lines (`Rose`: `\"Under L...\"`, `Boppy`: `\"The fis...\"`) before they can be read. (2) Clicking a `1/1` box while text is still typing closes/skips the box instead of completing the text first.\n\nThe tester suggested (a suggestion, not an order): Persist the player's `AUTO ON`/`OFF` choice across the entire session, and enforce two-tap behavior on all boxes (Tap 1 finishes typewriter text; Tap 2 advances/closes).\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug02, push to main, and write the result and the next step onto the card.\n\nRead engine/dialog-auto.js and the dialogue box code first.\n\nYou have my full permission to access the repo."
    },
-   "start": true
+   "started_at": "2026-11-20T16:18:35+00:00"
   },
   {
    "id": "c-gem-bug03",
@@ -13376,8 +13384,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "4e7e90b01ab44776ab5f03949740051ed1b899cc",
- "synced_at": "2026-11-20T16:09:57+00:00",
+ "synced": "8b11e4e4e33e5d837375f6e535fcd42c6eeb1016",
+ "synced_at": "2026-11-20T16:18:35+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
