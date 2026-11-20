@@ -7222,22 +7222,26 @@
    "title": "Board redesign 1: an honest header and status",
    "theme": "Tools",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "boardux1",
    "next": "Rebuilds the top of the board: a header that fits a phone, a light that says when the board's data is behind, new status words (a normal queue is no longer shown as Stuck in red), and a line saying what changed since you last looked. Cards and layout come in redesign 2 and 3. You test once, after redesign 3.",
    "blocks": [
     "c-boardux2"
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-19",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc",
     "opening": "not started"
    },
    "history": [
     {
      "d": "2026-11-20",
      "t": "Added from the board design assessment (planning chat https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc). Tom: \"Do a UX and visual design assessment of the kanban page as if it were a standalone kanban app dedicated to this project then create instructions and cards to execute\" Plan: claude/boardux-plan.md."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -7547,6 +7551,16 @@
    "cards": [
     "c-starttest",
     "c-copydocs"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc",
+   "title": "Board redesign 1: an honest header and status",
+   "first": "2026-11-19T23:36:20-08:00",
+   "last": "2026-11-19T23:36:20-08:00",
+   "tags": [],
+   "cards": [
+    "c-boardux1"
    ]
   },
   {
@@ -8129,8 +8143,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "3ca2b0531c6c9e0a248277bbe9baa884892148eb",
- "synced_at": "2026-11-20T07:04:22+00:00",
+ "synced": "aad0043d77002caaa0bae8eb72bf989357d63695",
+ "synced_at": "2026-11-20T07:37:21+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
