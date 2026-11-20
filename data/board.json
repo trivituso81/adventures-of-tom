@@ -442,6 +442,10 @@
     {
      "d": "2026-11-19",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Session started by START; building pubfast2 (the plan doc in the Project was not readable, so the plan was rebuilt from docs/WORKFLOW.md)."
     }
    ],
    "prompt": {
