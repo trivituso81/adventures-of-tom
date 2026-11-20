@@ -15654,8 +15654,8 @@
    "lane": "claude",
    "col": "wait",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (1 open)",
-   "next": "welcomefit1 fixed report r-20261120-130739-tr1a. Report r-20261120-113001-w756 (\"rose facing the wrong way\", chapter 1, kitchen at the grands house) waits on Tom card t-rose-facing.",
+   "title": "Fix the report backlog (2 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-113001-w756, r-20261120-140459-spj4. First note: rose facing the wrong way",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -15699,6 +15699,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped welcomefit1 (report tr1a). Queued behind Tom card t-rose-facing for the Rose report."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "The backlog now holds 2 report(s)."
     }
    ],
    "blocks": [],
@@ -17534,6 +17538,29 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGZvj5YBSMvPY8Zknj",
+   "title": "Move the Project docs into the repo (Project is 97% full)",
+   "first": "2026-11-20T12:24:26-08:00",
+   "last": "2026-11-20T14:03:45-08:00",
+   "tags": [
+    "projclean1a",
+    "projclean1b",
+    "projclean1c",
+    "reports-2026-11-20a"
+   ],
+   "cards": [
+    "c-projclean",
+    "c-fix-heist1voice",
+    "c-idea-searchthrough",
+    "c-startmore-opus",
+    "c-startmore-sonnet",
+    "c-reports-2",
+    "c-reports-3",
+    "c-reports-4",
+    "c-reports-5"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
    "title": "Build the Grace guard video proof",
    "first": "2026-11-20T12:41:05-08:00",
@@ -17569,24 +17596,6 @@
    "cards": [
     "c-gem-canon01",
     "c-voiceauto1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGZvj5YBSMvPY8Zknj",
-   "title": "Move the Project docs into the repo (Project is 97% full)",
-   "first": "2026-11-20T12:24:26-08:00",
-   "last": "2026-11-20T13:29:29-08:00",
-   "tags": [
-    "projclean1a",
-    "projclean1b",
-    "projclean1c"
-   ],
-   "cards": [
-    "c-projclean",
-    "c-fix-heist1voice",
-    "c-idea-searchthrough",
-    "c-startmore-opus",
-    "c-startmore-sonnet"
    ]
   },
   {
@@ -19109,7 +19118,8 @@
    "r-20261120-092931-xkjg",
    "r-20261120-093004-0rco",
    "r-20261120-113001-w756",
-   "r-20261120-130739-tr1a"
+   "r-20261120-130739-tr1a",
+   "r-20261120-140459-spj4"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -19135,8 +19145,8 @@
    "takes/20261120T213706-d43/state.json"
   ]
  },
- "synced": "26d6a051f5cdb69762e68472a4c84934b72ff342",
- "synced_at": "2026-11-20T22:02:30+00:00",
+ "synced": "3412eed7492a1e7d0bba3130788c972ab66c67b1",
+ "synced_at": "2026-11-20T22:05:13+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
