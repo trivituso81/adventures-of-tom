@@ -1474,12 +1474,10 @@
    "title": "Review the 16 remade chapter 1 clips",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "animations",
-   "next": "Open ADMIN > BATTLE LAB > CHAPTER 1 REVIEW (after RELOAD on the title screen). The 16 clips that were made again are at the top of the list with a NEW tag: press PLAY NEW to watch only those, and press REDO with a note on any that look wrong. The clips without a NEW tag are the old ones you already rejected (27 of them wait for the next Claude card). The Grump and Toad idles are in this same first fight (Mudling, Pond Grump, Bog Toad and Log Lump wait on the field together); CHAPTER 1 REVIEW: THE BIG ONE has only The Big One and none of the 16. The 16: Tom give, run; Grace cast, cube pop, guard, run, squeeze, victory; Rose cast, Floor Is Lava, run; Deedee cast, run, scrub; Grump idle; Toad idle. This card unblocks card c-clipch1held (Claude makes the 27 held clips again with your notes).",
-   "blocks": [
-    "c-clipch1held"
-   ],
+   "next": "Retired (11-19 18:10): Tom said \"i am done\" after seeing Grace's guard (praying hands). Replaced by c-clipreset.",
+   "blocks": [],
    "done_when": {
     "clips_reviewed": "Chapter 1"
    },
@@ -1501,18 +1499,22 @@
     {
      "d": "2026-11-19",
      "t": "Tom (18:06): \"i dont understand what Waiting in place is for\". Corrected the card (board-ch1review): the Grump and Toad idles are in the first CHAPTER 1 REVIEW fight, not THE BIG ONE. \"Waiting in place\" is the idle loop."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Retired: Tom said \"i am done\" after seeing Grace's guard (praying hands). Replaced by c-clipreset."
     }
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "c-clipch1held",
    "title": "Make the 27 held chapter 1 clips again (clipch1held)",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "done",
    "tag": "clipch1held",
-   "next": "Waits for your review card t-ch1review. Then: for each of the 27 clips the gate held (its reason is in the Action log), makes the smallest prompt or bake change the reason names, runs clip-gen again for those clips, and gives you a review card for what passes.",
+   "next": "Retired (11-19 18:10): it would spend up to $3 more on the same approach. Replaced by c-clipreset.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -1524,6 +1526,10 @@
     {
      "d": "2026-11-19",
      "t": "Made by clipch1remake: the gate held 27 of the 43 new videos, so they are not approved and the old clips stay in the game. Held: clip-rose-ko, clip-tom-guard, clip-tom-idle, clip-tom-hit, clip-tom-dodge, clip-tom-ko, clip-tom-victory, clip-tom-cast, clip-tom-loungepass, clip-grace-idle, clip-tom-blockade, clip-grace-hit, clip-grace-dodge, clip-grace-ko, clip-rose-idle, clip-rose-guard, clip-rose-hit, clip-rose-dodge, clip-rose-tackle, clip-rose-giddyup, clip-deedee-idle, clip-deedee-guard, clip-deedee-hit, clip-deedee-dodge, clip-deedee-ko, clip-deedee-victory, clip-deedee-wetfloor."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Retired by Tom's 11-19 18:10 verdict: it would spend up to $3 more on the same approach. Replaced by c-clipreset."
     }
    ],
    "prompt": {
@@ -1534,7 +1540,8 @@
     "model": "Claude Opus 5.5 (row D: video prompts judged by eye; a miss costs generation money)",
     "effort": "medium (each clip is a small edit of a prompt that exists)",
     "text": "Read claude/next-addendum-clipch1fix.md, claude/next-addendum-clipgen2.md and the card c-clipch1remake history on the board. The gate held 27 Chapter 1 clips in clip-gen run 44652080732 (reasons are in its log, videos on branch clipgen). Group the 27 by reason. Some reasons are generator drift (size, feet, forward dodge) and some are the prompt (hit does not stumble, KO does not look dizzy, guard does not raise forearms, idle blink too slow). Fix each with the smallest change to its MOTION in tools/art-library/clip-prompts.js, name what you kept and what you changed, stop if the same fault comes back twice (stop-loss rule), run node tools/art-library/clip-prompts.js, run the clip-gen Action for Chapter 1 with dry_run=false and cap 3, wait for it and the art-bake, look at the baked frames, and put a CHAPTER 1 REVIEW card for the remade clips on the board. Build tag clipch1held. You have my full permission to access the repo."
-   }
+   },
+   "done": "2026-11-19"
   },
   {
    "id": "c-ch1nodoor",
@@ -1860,6 +1867,37 @@
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19"
+  },
+  {
+   "id": "c-clipreset",
+   "title": "Reset the chapter 1 clip approach: reflection, one plan, one-clip proof (clipreset)",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "up",
+   "tag": "clipreset",
+   "next": "Ready. A fresh Fable 5.2 thread (high effort) writes the reflection, checks whether guard, hit, dodge, KO, victory, run and idle can come from the painted battle sheets and the engine instead of new videos, makes one plan, proves it on Grace's guard for at most $0.30, and gives you one decide card. It spends nothing else.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Tom (18:10): \"i just looked at Grace's guard animation and i am done. its awful. she puts her hands into a praying motion. how did this pass your test? this process is painfully slow. we need a massive reflection - we have wasted half a day and my money on an approach that is not working and i want a solution from you NOW\". Made by the board-clipreset push. Retired c-clipch1held (it would spend more on the same approach) and t-ch1review (Tom's review of the 16 is replaced by this reset)."
+    }
+   ],
+   "prompt": {
+    "what": "Reflects on why the chapter 1 clip process failed, checks whether the generic battle states can come from the painted battle sheets instead of new videos, makes one plan, proves it on Grace's guard for at most $0.30, and gives Tom one decide card. Spends nothing else.",
+    "before": [
+     "Nothing to do first. Open a NEW conversation in the Little Elsewhere Project, choose Claude Fable 5.2 and set effort to high, then paste the prompt. Pressing START on this card also counts as your OK for up to $0.30 of xAI credit."
+    ],
+    "model": "Claude Fable 5.2 (row E, condition 1: the same task failed on Opus 5.5 on quality and judgement; condition 3: Tom asked to escalate)",
+    "effort": "high (a process has to be redesigned with nothing written to follow)",
+    "text": "Read claude/clip-gate-plan.md, claude/animation-chapter-plan.md, claude/next-addendum-clipch1fix.md and claude/next-addendum-clipgen2.md, and the history of the board cards c-clipreset, c-clipch1remake and c-clipch1fix. Generate nothing and spend no xAI credit in this session. Tom's verdict (11-19 18:10) on the chapter 1 battle clips: \"i just looked at Grace's guard animation and i am done. its awful. she puts her hands into a praying motion. how did this pass your test? this process is painfully slow. we need a massive reflection - we have wasted half a day and my money on an approach that is not working\". Facts you can check in the repo: Tom rejected 44 of the first 67 clips; the gate flagged 34 of those 44 and 1 of 23 approved, but its pass bar was not met and the plan said stop-loss; clipch1remake then spent $3.66 more (clipgen2 spent $5.34 before it) and the gate approved Grace's guard, which shows praying hands, and held 27 clips. Do five things. 1) Write a plain reflection, a short table: what was tried, what each cost in dollars and in Tom's time, what the evidence says went wrong, and which of my own steps were mistakes (for example, a gate with a vision question that cannot tell a shield from praying hands, and approving by contact sheet). 2) Look in the repo at the painted battle sheets and the engine's own battle poses and animation primitives, and answer one question with evidence: can the generic states (idle, guard, hit, dodge, KO, victory, run) come from those instead of a new video each, and which clips truly need video (the invented moves)? 3) Make the call and write ONE plan for chapter 1: the method, the dollar cost, how many minutes Tom spends, and what is verified by a measured check versus by Tom. 4) Prove it on ONE clip, Grace's guard, spending at most $0.30, and show Tom the result before anything else is made. 5) Put on the board one Tom card with ask decide: choices \"Go with this plan (Recommended)\" and \"Stop making battle clips for chapter 1 and keep the old ones\", one leads line each, blocking one new Claude card that holds the full build prompt. Apply the stop-loss rule: if the one-clip proof misses, stop and say so. No em dashes. Build tag clipreset. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [

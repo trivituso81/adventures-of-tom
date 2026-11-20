@@ -1,3 +1,7 @@
+## board-clipreset (2026-11-19): board only: stop the clip remake plan, add the clip reset card
+
+- Tom (11-19 18:10) rejected the approach after Grace's guard came out with praying hands. Cards c-clipch1held and t-ch1review retired; new Claude card c-clipreset (Fable 5.2, high) holds the escalation prompt. No game change.
+
 ## board-ch1review (2026-11-19): board card t-ch1review said the Grump and Toad idles were in THE BIG ONE fight; they are in the first CHAPTER 1 REVIEW fight
 
 - Tom (11-19 18:06): "i dont understand what Waiting in place is for". Card text only; no game change.
