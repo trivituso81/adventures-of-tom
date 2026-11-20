@@ -30,7 +30,7 @@ import csv, os, re, sys, collections
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'docs/emotion-index-lines.tsv')
 OUT = os.path.join(ROOT, 'docs/talk-lines.tsv')
-TYPES = ['tell', 'point', 'ask', 'answer']
+TYPES = ['tell', 'point', 'ask', 'answer', 'think']
 COLS = ['chapter', 'file', 'line', 'character', 'mood', 'talk', 'text']
 NO_TALK = {'Nara'}
 STRONG = {'sad', 'angry', 'scared'}

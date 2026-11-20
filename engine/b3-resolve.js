@@ -25,7 +25,9 @@
 //   intercept {src, tgt}              src takes the hit that was aimed at tgt
 //   react {src, tgt, id, name}        a reaction begins (a ward's answer); its beats share its `g` ('r0', 'r1'...)
 //   interrupt {src, tgt, name, why}   a wound-up act is cancelled (why 'break': a Break took it; src is null when no Skill did it)
-//   hazardOn {id, side, uses, rounds}  hazardTrip {id, tgt, left}  hazardEnd {id, side}
+//   hazardOn {id, side, uses, rounds}  hazardTrip {id, tgt, left}  hazardEnd {id, side, why}  (why: 'strip', 'burst' for a vessel, 'ko')
+//   vesselSoak {id, src, tgts, left}  a vessel on the family's floor soaked the monster src's whole act (TNB's Grand Amphora)
+//   vitrify {tgt}  a clay shield was fired into Fired Glaze;  rebalance {src, tgt, n, hpSrc, hp}  src gave n HP to tgt (Waymo Tailgate Rescue)
 //   counter {tgt, id, v}  crack {tgt, v}
 //   passive {src, id, name}           a Trait or Quirk went off (only the ones whose row says show:true)
 //   grant {src, tgt}                  tgt may take one Skill at once, out of turn; grantEnd {who, bar} closes that free action
@@ -128,7 +130,9 @@ function b3EndTurn(F,u,recovery,beats) {
 // soaked, so a status riding on a fully soaked enemy hit can be stopped (engine/b3-ops.js b3Soaked).
 function b3Hurt(F,c,t,dmg,info) {
   let left=dmg,soak=0; const broke=[];
-  for(const sh of t.shields) { if(left<=0) break; const a=Math.min(sh.amt,left); sh.amt-=a; left-=a; soak+=a; if(sh.amt<=0) broke.push(sh); }
+  b3ClaySizzle(F,c,t,info);   // a Sizzle hit fires a stone clay shield first
+  const glazed=[];
+  for(const sh of t.shields) { if(left<=0) break; const pw=b3ShieldPower(sh,info),a=Math.min(sh.amt*pw,left); sh.amt-=a/pw; left-=a; soak+=a; if(sh.glaze) glazed.push([sh,a]); if(sh.amt<=1e-9) { sh.amt=0; broke.push(sh); } }
   if(broke.length) t.shields=t.shields.filter(sh=>sh.amt>0);
   // A status with the `survive` flag (the Ward's jacket) keeps its carrier at 1 HP the first time a hit would knock them out, then is spent.
   let held=null;
@@ -139,10 +143,12 @@ function b3Hurt(F,c,t,dmg,info) {
   if(!(info&&info.tick)) t.hitSince=true;
   c.beats.push(Object.assign({t:'hit',tgt:t.key,dmg,hp:t.hp,g:c.g},soak?{soak,sh:b3ShieldTotal(t)}:null,info));
   if(held) c.beats.push({t:'survive',tgt:t.key,id:held,hp:t.hp,g:c.g});
-  for(const sh of broke) { c.beats.push({t:'shieldBroken',tgt:t.key,g:c.g}); b3Fire(F,'shieldBroken',{src:c.actor,tgt:t,by:sh.src,g:c.g},c.beats); }
+  for(const [sh,a] of glazed) b3GlazeReflect(F,c,t,sh,a,info);   // Fired Glaze throws back what it soaked
+  for(const sh of broke) { c.beats.push({t:'shieldBroken',tgt:t.key,g:c.g}); b3Fire(F,'shieldBroken',{src:c.actor,tgt:t,by:sh.src,g:c.g,c},c.beats); }
 }
 function b3KoCheck(F,c) {
   for(const u of F.units) if(!u.ko&&u.hp<=0) {
+    b3VesselOwnerKo(F,c,u);
     u.ko=true; u.st={}; u.shields=[]; u.charge=null; u.mark=null; u.aimLock=null; u.intent=null; u.broken=false; u.flusterMove=false; u.wait=0;
     // A status that waits for this unit's next turn will never see it end (a Winged Shell Tom put on a monster).
     for(const v of F.units) for(const id of Object.keys(v.st)) if(v.st[id].unit==='srcBegin'&&v.st[id].src===u.key) { delete v.st[id]; c.beats.push({t:'statusEnd',tgt:v.key,id,g:c.g}); }
@@ -200,10 +206,12 @@ function b3Break(F,c,t) {
 }
 
 // The Detonation a hit of this flavor would set off on this unit: the row for its oldest matching Prime (spec 2.5).
-function b3FindDetonation(t,flavor) {
-  let best=null;
-  for(const D of B3_DETONATIONS) if(D.flavor===flavor&&t.st[D.prime]&&(!best||t.st[D.prime].at<t.st[best.prime].at)) best=D;
-  return best;
+// An attacker whose status has the `razzleDet` flag (TNB's Gold Seam) also sets off the Razzle Detonation with a hit of any flavor.
+function b3FindDetonation(t,flavor,a) {
+  const find=fl=>{ let best=null;
+    for(const D of B3_DETONATIONS) if(D.flavor===fl&&t.st[D.prime]&&(!best||t.st[D.prime].at<t.st[best.prime].at)) best=D;
+    return best; };
+  return find(flavor)||(a&&flavor!=='razzle'&&b3HasFlag(a,'razzleDet')?find('razzle'):null);
 }
 // A move's own condition for a bonus (B3_CONDS is the list the data check knows).
 //   targetHas  the target carries one of `ids`
@@ -241,7 +249,7 @@ function b3Hit(F,c,t,per,flavors,e,single) {
     const fl=flavors[fi];
     if(t.hp<=0) break;
     // Detonation check, before this flavor part lands: once per target per action, on the oldest matching Prime. Enemies never Detonate.
-    const det=a.side==='party'&&t.side==='foe'&&!c.detonated[t.key]?b3FindDetonation(t,fl):null;
+    const det=a.side==='party'&&t.side==='foe'&&!c.detonated[t.key]?b3FindDetonation(t,fl,a):null;
     // The move's own bonus: `per` counts something this action did (buffs stripped), `if` is a condition on the target.
     const bonus=Object.assign({},c.outExtra);
     // `counter` reads one of the attacker's Portable Counters (so much per point built up).
@@ -296,6 +304,7 @@ function b3DamageOp(F,c,e) {
   const per=tier*(all&&a.side==='party'?B3_RULES.aoeShare:1)/hits/S.flavor.length*(c.scale||1);
   if(own) { for(let h=0;h<hits;h++) for(const t of b3Who(F,c,e.to).filter(b3Alive)) b3Hit(F,c,t,per,S.flavor,e,!all); return; }
   c.didDamage=true;
+  if(a.side==='foe'&&b3VesselTake(F,c)) { c.g='post'; return; }   // a vessel on the family's floor soaked the whole act
   for(let h=0;h<hits;h++) {
     c.g=h+(c.gOff||0); c.hitNo=h;
     let tg;

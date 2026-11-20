@@ -1,5 +1,5 @@
 {
- "made": "2026-11-14",
+ "made": "2026-11-20",
  "suffix": {
   "loop": "Instrumental only, no vocals. Composed to loop: steady energy from start to finish, no fade-out and no big final ending. Rich, detailed, modern production. Family-friendly adventure game score.",
   "jingle": "Instrumental only, no vocals. A short musical sting that starts immediately and ends cleanly on its final note. Rich, detailed, modern production. Family-friendly adventure game score."
@@ -91,7 +91,7 @@
    "use": "Area",
    "len": 60,
    "where": "The Square and the shops",
-   "prompt": "Sunny small-town Long Island square on a warm afternoon at 104 beats per minute. Fingerpicked acoustic guitar, a breezy flute melody, light upright bass, brushed drums with a gentle shuffle, glockenspiel sparkles and a soft accordion. Cozy, nostalgic, friendly, a hint of salt air. A memorable tune you could hum, that develops across sections instead of repeating.",
+   "prompt": "Warm small-town folk tune at 96 BPM in G major, recorded live in one room by a small band with close microphones and a natural room sound. Fingerpicked nylon string guitar and a mellow clarinet play the same easy, hummable eight bar melody together, the clarinet sitting just above the guitar. Upright bass walks gently underneath and a soft brushed snare keeps a relaxed shuffle. The chords move every bar or two through G, E minor, C and D so the harmony keeps changing. Just these four instruments, full and warm, friendly and unhurried, a sunny afternoon feeling. The same melody comes back at the end and nothing new joins in. No piano, no flute, no glockenspiel, no accordion, no synthesizers, no electronic sounds.",
    "auto": false,
    "sec": 58.33,
    "bytes": 700335

@@ -95,7 +95,7 @@ const CH1_DISMOUNT=land=>{ const up=()=>{ const r=sceneActor('rose'); return !!(
 // 1. The Square, right after the opening (the squishy beat stays exactly as built): Grace's list.
 SCENES.ch1Goal=[
   {flag:'ch1-goal'},
-  {wait:.6},   // Grace unfolds a piece of notebook paper (no frame for it yet: Art Library list)
+  {wait:.6}, {ch1Reveal:'list'},   // Grace unfolds a piece of notebook paper: the list close-up (ch1art3), A to continue
   {talk:'Grace',lines:["Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One again."]},
   {talk:'Rose',lines:["It's bigger than a BUS! It ate a boat!"]},
   {talk:'Grace',lines:["It did not eat a boat. Nobody's ever seen it but Boppy, and he's been saying it for twenty years."]},
@@ -135,7 +135,7 @@ SCENES.ch1Amy=[
   {propTo:'amywin',field:'u',to:0,time:.3}, {prop:'amywin',hide:true},
   {cam:null}, {face:'tom',dir:'right'},   // Amy is gone: Tom turns to Grace for the last two lines (facehold1)
   {talk:'Tom',lines:["Your mother says I'm slow."]},
-  {talk:'Grace',lines:["You are slow. I've been on number four since the mailbox."]},
+  {talk:'Grace',lines:["You are slow. I've been on number four since the taxi place."]},
   {call:()=>{ if(typeof storyPosesLoad==='function') { storyPosesLoad('deedee'); storyPosesLoad('boppy'); } }}   // Deedee's greeting poses are ready before the kitchen (roofnpc2); last, so the 20 s idle release (engine/painted.js) does not drop them during this scene (amywin1)
 ];
 
@@ -168,15 +168,15 @@ SCENES.ch1Theft=[
   {flag:'ch1-theft'}, {noHuddle:true},   // staged by hand below: the party holds its spots by the island instead of hopping between speakers
   {call:()=>{ if(typeof storyPosesLoad==='function') { storyPosesLoad('deedee'); storyPosesLoad('boppy'); } }},
   {place:'Deedee',at:[7,9],dir:'right'}, {place:'Boppy',at:[13,10],dir:'up'},   // Boppy sits at the dining table with an empty plate, his back to the door; Deedee faces Tom (cutpolish3: people who talk stand side by side and face left or right, never the camera)
-  {prop:'muffinpan',kind:'muffinpan',set:{map:'grands',x:3.9,y:7.1}},   // twelve muffins on the baking island (stand-in)
+  {prop:'muffinpan',kind:'muffinpan',set:{map:'grands',x:4.3,y:7.25}},   // twelve muffins on the baking island (stand-in)
   {all:[{walk:'tom',to:routeTo('tom',9,9),speed:.25},{walk:'grace',to:routeTo('grace',10,10),speed:.25},
     {if:()=>{ const r=sceneActor('rose'); return !(r&&r.seat); },then:[{walk:'rose',to:routeTo('rose',8,10),speed:.25}]}]},   // they walk in together (no snapping); Rose rides in on Tom's shoulders (a save without the ride flag walks her in)
   {face:'tom',dir:'left'}, {face:'grace',dir:'left'},
   ...CH1_DISMOUNT([8,10]),   // through the door, Rose hops down (cutpolish3: she was taken down in the Square before)
   {face:'rose',dir:'left'},
-  {talk:'Deedee',lines:["There he is! Come here. Let me look at you. I missed that face. Now sit, you're having a muffin."]},
-  {talk:'Tom',lines:["Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since we flew over Kansas."]},
-  {talk:'Deedee',lines:["Twelve of them, and all twelve are still there. I've been standing between that pan and your father since six this morning."]},
+  {talk:'Deedee',lines:["My favorite son! I missed that face. Now sit, you're having a muffin."]},
+  {talk:'Tom',lines:["Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas."]},
+  {talk:'Deedee',lines:["I made twelve and they're all still there. I've been standing between that pan and your father since six this morning."]},
   {face:'tom',dir:'right'}, {face:'grace',dir:'right'}, {face:'rose',dir:'right'},
   {talk:'Boppy',lines:["In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat..."]},
   {wait:.8},   // a beat after Boppy's story, then the bang (ch1nodoor: the door frame height-marks look is cut)
@@ -242,11 +242,11 @@ SCENES.ch1Theft=[
   {pose:'Deedee'}, {pose:'Boppy'},   // the shock ends when her line opens (cutpolish4)
   {talk:'Deedee',lines:["That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER."]},
   {face:'tom',dir:'right'},
-  {talk:'Boppy',lines:["...and I only caught him because the hat kept getting taller. Where'd the muffins go?"]},
+  {talk:'Boppy',lines:["...and I only caught him because the hat kept getting taller. Wait, where'd the muffins go?"]},
   {talk:'Deedee',lines:["A ball of mud came through the door and took them. Pan and all."]},
   {talk:'Boppy',lines:["The mud gets a muffin and I don't?"]},
-  {talk:'Deedee',lines:["Girls, sneakers. Tom, hold the door. Hubby, you stay right there. When we get them back, the first one's yours."]},
-  {talk:'Boppy',lines:["The first one. Tom, you heard her."]},
+  {talk:'Deedee',lines:["Girls, sneakers. Tom, hold the door. Hubby, you stay right there."]},
+  {talk:'Boppy',lines:["Tom, you heard her."]},
   {join:'deedee'},   // Deedee, Tom and the girls run out the back door; Boppy sits back down with his empty plate
   // Deedee steps out of her kitchen spot into line; the girls line up beside Tom (roofnpc2: they used to stack on one tile).
   {place:'deedee',at:[7,9],dir:'down'},

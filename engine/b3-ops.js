@@ -5,7 +5,7 @@
 // "not built yet", so the simulator names any kit line that is ahead of the engine.
 const B3_OP_LIST=['damage','heal','shield','status','prime','cleanse','strip','steal','invert','push','pull','swapBar','place','pep','ruckus',
   'composure','revive','counter','ward','intercept','mark','hazard','grant','aggro','taunt','pullForward','interrupt','detonateAll','splash',
-  'crack','later','summon','row','foresee'];
+  'crack','later','summon','row','foresee','vitrify','double','rebalance'];
 // c is the action in progress: {F, actor, src, skill, rec, targets (chosen), hit (units a damage op landed on), beats, g (which
 // part of the move the beats belong to), detonated, tgt (set while a Detonation's, a hook's or a hazard's effects run), partDmg,
 // tags (the act's tags), outExtra ({kind: amount} damage modifiers for this action only), stripped and cleansed (counts so far),
@@ -27,6 +27,8 @@ function b3Who(F,c,to) {
   if(to==='nextAlly') return b3TurnOrder(F).filter(o=>o.side===c.actor.side&&o!==c.actor).slice(0,1);
   // Whoever is due next on the turn bar, but only if that is someone else on the actor's side (Sensory Satisfying).
   if(to==='nextIfAlly') { const n=b3TurnOrder(F)[0]; return n&&n!==c.actor&&n.side===c.actor.side?[n]:[]; }
+  // The slowest other family member (the lowest Speed, the first in line on a tie): TAP-Card Transfer.
+  if(to==='slowestAlly') return b3Live(F,c.actor.side).filter(o=>o!==c.actor).sort((x,y)=>b3Stat(x,'spd')-b3Stat(y,'spd')||x.slot-y.slot).slice(0,1);
   if(to==='target'||to==null) return c.tgt?[c.tgt]:(c.didDamage?c.hit.slice():c.targets.slice());
   throw new Error('Battle 3 effect target not built yet: '+to);
 }
@@ -38,7 +40,12 @@ function b3PutStatus(F,c,t,e) {
   if(t.immune&&t.immune.includes(e.id)) { c.beats.push({t:'immune',tgt:t.key,id:e.id,g:c.g}); return; }
   // A Stun on a Boss is a push instead of a lost turn (spec 2.8).
   if(S.flags.includes('skipTurn')&&t.D&&t.D.role==='boss') { B3_OPS.push(F,Object.assign({},c,{tgt:t}),{n:B3_RULES.stunBossTicks,to:'target'}); return; }
+  // Fresh Ride: a family member who wears it is not given the next debuff the other side aims at them; the lock is used up.
+  if(S.kind==='debuff'&&c.actor.side!==t.side) { const fr=Object.keys(t.st).find(i=>B3_STATUS[i].flags.includes('blockDebuff'));
+    if(fr) { b3EndStatus(F,t,fr,'used'); c.beats.push({t:'soak',tgt:t.key,id:e.id,g:c.g},{t:'statusEnd',tgt:t.key,id:fr,g:c.g}); return; } }
   b3AddStatus(F,t,e.id,{src:c.actor,n:e.n,v:e.v}); c.beats.push({t:'status',tgt:t.key,id:e.id,g:c.g});
+  // TAP-Card Transfer: a buff TNB puts on lasts longer.
+  const tc=c.actor.custom&&c.actor.custom.tapCard; if(tc&&S.kind==='buff'&&t.side===c.actor.side&&S.dur.unit==='turn') t.st[e.id].n+=tc.extend;
   b3Fire(F,S.kind==='prime'?'primeApplied':'statusApplied',{src:c.actor,tgt:t,id:e.id,g:c.g,c},c.beats);
 }
 const B3_OPS={
@@ -57,7 +64,8 @@ const B3_OPS={
   // The number removed is kept in c.stripped for a damage bonus that counts it.
   strip(F,c,e) {
     if(e.kind==='hazard') {
-      for(const hz of F.hazards.filter(h=>h.side===c.actor.side)) { F.hazards.splice(F.hazards.indexOf(hz),1); c.stripped=(c.stripped||0)+1;
+      // (Only what the other side laid: a vessel of the family's own, TNB's Grand Amphora, stays.)
+      for(const hz of F.hazards.filter(h=>{ const o=b3Unit(F,h.src); return h.side===c.actor.side&&(!o||o.side!==c.actor.side); })) { F.hazards.splice(F.hazards.indexOf(hz),1); c.stripped=(c.stripped||0)+1;
         c.beats.push({t:'hazardEnd',id:hz.id,side:hz.side,why:'strip',g:c.g}); b3Fire(F,'buffStripped',{src:c.actor,tgt:null,id:hz.id,hazard:true,g:c.g,c},c.beats); }
       return;
     }
@@ -89,7 +97,7 @@ const B3_OPS={
         if(sh) c.beats.push({t:'shield',tgt:t.key,n:sh,sh:b3ShieldTotal(t),g:c.g}); } }
   },
   shield(F,c,e) {
-    for(const t of b3Who(F,c,e.to)) { const got=b3AddShield(F,t,t.maxHp*e.pct*b3Mult(c.actor,'healGiven')*(c.scale||1),{src:c.actor,n:e.turns});
+    for(const t of b3Who(F,c,e.to)) { const got=b3AddShield(F,t,t.maxHp*e.pct*b3Mult(c.actor,'healGiven')*(c.scale||1),{src:c.actor,n:e.turns,clay:e.clay});
       c.beats.push({t:'shield',tgt:t.key,n:got,sh:b3ShieldTotal(t),g:c.g}); }
   },
   revive(F,c,e) {
@@ -144,6 +152,12 @@ const B3_OPS={
   },
   // taunt: a status that carries the `taunt` flag: every single-target enemy attack must aim at its carrier (spec 2.8 "locks aggro").
   taunt(F,c,e) { for(const t of b3Who(F,c,e.to||'self')) if(b3Alive(t)) b3PutStatus(F,c,t,e); },
+  // vitrify: every clay shield on the chosen units is fired into Fired Glaze (engine/b3-custom.js).
+  vitrify(F,c,e) { for(const t of b3Who(F,c,e.to)) for(const sh of t.shields) b3Vitrify(F,t,sh,c); },
+  // double: the chosen units' carried status e.id is doubled and lasts at least e.n turns (Baxter Hill Longboard Express).
+  double(F,c,e) { b3DoubleBuff(F,c,e); },
+  // rebalance: a family member shares HP with the one who has the most (Waymo Tailgate Rescue).
+  rebalance(F,c,e) { b3Rebalance(F,c,e); },
   // ruckus: adds to the Family Ruckus gauge (0 to 100, shared by the party). The gauge's own gains and the two spends are in
   // engine/b3-ruckus.js; this is how a Trait, Quirk or Skill that prints its own gain adds to them.
   ruckus(F,c,e) { b3RuckusAdd(F,c.beats,c.g,e.n,c.actor&&c.actor.key,'trait'); },

@@ -940,9 +940,31 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-pv{font-size:14px;padding:5
 /* skilllist1 (Tom 2026-11-19: the name "just a touch too big", "the icons can also be smaller"): in the SKILLS list the name is .86 of the row's size
    (an inner <b>, because the layout rules size every span in a button), the flavor and Pocket pictures 1em instead of 1.35em, the Pep number 1.15em. */
 .b3-sk .b3-snt{font-size:.86em;font-weight:inherit;line-height:1.15}.b3-sk .b3-ico{gap:1px}.b3-sk .b3-ico .bi{width:1em;height:1em}.b3-sk .b3-cost b{font-size:1.15em}
+/* fix-skilllist1look-2 (Tom 2026-11-20: "now its too small! you went too far, isnt there a middle ground?"): fixed sizes halfway between skilllist1 and the thin rows.
+   Name 15px, pictures 16px, Pep pill 14px number over a 8px PEP, row padding 6px 9px. */
+#battle.v2 .b2-btn.b3-sk{padding:6px 9px;gap:6px;min-height:0}
+#battle.v2 .b3-sk .b2-sn,#battle.v2 .b3-sk .b3-snt{font-size:15px;line-height:1.15;letter-spacing:0}
+#battle.v2 .b3-sk .b3-ico .bi{width:16px;height:16px}
+#battle.v2 .b3-sk .b3-cost{font-size:14px;padding:0 7px;gap:2px;border-width:1px}
+#battle.v2 .b3-sk .b3-cost b{font-size:16px}#battle.v2 .b3-sk .b3-cost small{font-size:8px;letter-spacing:.3px}
+html.duo #battle.v2 .b3-sk .b2-sn,html.duo #battle.v2 .b3-sk .b3-snt{font-size:12px}html.duo #battle.v2 .b3-sk .b3-ico .bi{width:13px;height:13px}html.duo #battle.v2 .b3-sk .b3-cost{font-size:11px}html.duo #battle.v2 .b3-sk .b3-cost b{font-size:12px}
+/* fix-skilllist1look-2 (Tom: "the back button doesnt match"): the Back row under the SKILLS list is the same size as a Skill row, text 15px, B / Esc hint 11px. */
+#battle.v2 .b2-list:has(.b3-sk) .b2-back{padding:6px 9px;min-height:0}
+#battle.v2 .b2-list:has(.b3-sk) .b2-back span{font-size:15px;font-weight:700;letter-spacing:0}
+#battle.v2 .b2-list:has(.b3-sk) .b2-back em{font-size:11px}
 .b3-cost{display:flex;align-items:baseline;gap:.15em;flex:none;margin-left:auto;background:#1d5a88;border:1px solid #8dc4e6;border-radius:999px;padding:.05em .55em;color:#fff;line-height:1.15;white-space:nowrap}
 .b3-cost b{font-size:1.3em;font-weight:900}.b3-cost small{font-size:.62em;font-weight:900;letter-spacing:.5px;color:#cfe8f7}
 .b3-cost.free{background:#2c6a3b;border-color:#8fe3a6}.b2-btn.no .b3-cost{opacity:.5}
+/* skillinfo1: the i at the left of a Skill row. The circle is in the row's flow; its ::after is an invisible tap strip over the whole left of the row (the row is position:relative) */
+.b2-btn.b3-sk{position:relative}
+.b3-ii{flex:none;display:flex;align-items:center;justify-content:center;width:2.1em;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.b3-ii::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3.3em}
+.b3-ii i{display:flex;align-items:center;justify-content:center;width:1.7em;height:1.7em;border-radius:50%;border:2px solid #8dc4e6;background:#1d3a5a;color:#cfe8f7;font:italic 900 1.05em Georgia,'Times New Roman',serif;line-height:1;pointer-events:none}
+.b3-sk:has(.b3-ii:active) .b3-ii i{background:#2d5f8f}
+.b2-btn.no .b3-ii i{opacity:.8}
+.bp-grid .bp-btn{position:relative}.b3p-i{position:absolute;left:0;top:0;z-index:2;width:44px;height:44px;display:flex;align-items:flex-start;justify-content:flex-start;padding:3px;cursor:pointer}
+.b3p-i i{display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;border:2px solid #8dc4e6;background:#1d3a5a;color:#cfe8f7;font:italic 900 15px Georgia,'Times New Roman',serif;line-height:1;pointer-events:none}
+html.landscape .b3p-i{width:36px;height:36px}html.landscape .b3p-i i{width:20px;height:20px;font-size:12px}
 .b3-det{--f:15px}.b3-det>*{grid-column:1/-1}
 .b3-det-h{display:flex;align-items:center;gap:8px;font-size:var(--f)}.b3-det-h .b2-sn{font-size:calc(var(--f)*1.15);font-weight:900;flex:1 1 auto;min-width:0;color:#ffe9a8;line-height:1.15}
 .b3-det .b3-cost{font-size:calc(var(--f)*1.1)}
@@ -1606,7 +1628,7 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="data/ch18-monsters.js"></script>
 <script src="data/ch19-monsters.js"></script>
 <script src="data/ch20-monsters.js"></script>
-<script src="data/maps-le.js?v=roofnpc2"></script>
+<script src="data/maps-le.js?v=ch1retext1"></script>
 <script src="data/maps-p2.js?v=walkmap20"></script>
 <script src="data/maps-ch13.js?v=dtla12"></script>
 <script src="data/maps-ch17.js?v=dtla12"></script>
@@ -1621,7 +1643,7 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="data/talk-faces.js?v=talk1"></script>
 <script src="data/talkpose-faces.js?v=ch2fix1b"></script>
 <script src="engine/menu.js?v=b3s4"></script>
-<script src="engine/followers.js?v=follow1"></script>
+<script src="engine/followers.js?v=ch1retext1"></script>
 <script src="data/party-banners.js?v=partybanner1"></script>
 <script src="engine/party-banner.js?v=partybanner1"></script>
 <script src="engine/shop.js?v=ch1fix1"></script>
@@ -1646,7 +1668,7 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/battle-draw.js?v=cutpolish2"></script>
 <script src="engine/recruit-fx.js"></script>
 <script src="engine/stage.js"></script>
-<script src="engine/prop-art.js?v=cutpolish4b"></script>
+<script src="engine/prop-art.js?v=reports-2026-11-19c"></script>
 <script src="data/grace-wheel.js"></script>
 <script src="engine/recruit-moves.js"></script>
 <script src="engine/tom-moves.js?v=bubble4"></script>
@@ -1684,7 +1706,7 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/tiles.js?v=tom4"></script>
 <script src="data/villagers.js"></script>
 <script src="data/recruit-rig.js"></script>
-<script src="engine/painted.js?v=cutpolish2"></script>
+<script src="engine/painted.js?v=reports-2026-11-19c"></script>
 <script src="engine/clips.js?v=clipch1fix"></script>
 <script src="engine/clip-review.js?v=clipch1remakea"></script>
 <script src="data/clips/mudling-idle.js?v=clippack1"></script>
@@ -1719,9 +1741,9 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/tombo-frames.js"></script>
 <script src="data/tom-hires.js?v=tomboppy1"></script>
 <script src="data/tom-hires-use.js?v=ab1"></script>
-<script src="data/story-poses.js?v=cutpolish2"></script>
-<script src="data/npc-poses.js?v=chinfix1"></script>
-<script src="data/pose-facing.js?v=ch2fix1b"></script><!-- which way each painted mood or talking pose leans (facing1, docs/pose-facing.tsv) -->
+<script src="data/story-poses.js?v=reports-2026-11-19c"></script>
+<script src="data/npc-poses.js?v=reports-2026-11-19c"></script>
+<script src="data/pose-facing.js?v=reports-2026-11-19c"></script><!-- which way each painted mood or talking pose leans (facing1, docs/pose-facing.tsv) -->
 <script src="data/story-poses-use.js?v=emo7"></script>
 <script src="data/grace-hires.js?v=heads3"></script>
 <script src="data/grace-ab.js?v=gab1"></script>
@@ -1906,24 +1928,24 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/club-render.js"></script>
 <script src="engine/terminal-render.js"></script>
 <script src="engine/infinity-render.js"></script>
-<script src="engine/plate.js?v=fix-cutpolish4b"></script>
+<script src="engine/plate.js?v=reports-2026-11-19c"></script>
 <script src="data/airport-behind.js?v=airport1"></script>
 <script src="engine/draw.js?v=cutpolish4b"></script>
 <script src="engine/intro.js?v=scene1fix1"></script>
 <script src="data/flight-art.js?v=flight14"></script>
 <script src="engine/flight-art.js?v=flight11"></script>
-<script src="engine/travel.js?v=partybanner1"></script>
+<script src="engine/travel.js?v=ch1retext1"></script>
 <script src="engine/nara.js?v=bubble4"></script>
 <script src="engine/story.js?v=skipchain1"></script>
 <script src="engine/boss-finale.js?v=ch1rebuild1"></script>
 <script src="engine/bench.js"></script>
 <script src="engine/tom-gone.js"></script>
 <script src="engine/benchcall.js"></script>
-<script src="data/scenes.js?v=fix-cutpolish4b"></script>
+<script src="data/scenes.js?v=ch1retext1"></script>
 <script src="engine/closeup.js?v=ch1nodoor"></script>
 <script src="data/closeup-ch10.js?v=closeup2"></script>
 <script src="data/closeup-coinfinds.js?v=coinfinds1"></script>
-<script src="data/closeup-ch1.js?v=ch1nodoor"></script>
+<script src="data/closeup-ch1.js?v=ch1art3"></script>
 <script src="data/closeup-ch2.js?v=ch2a"></script>
 <script src="data/closeup-ch3.js?v=ch3a"></script>
 <script src="data/closeup-ch13.js?v=closeup3"></script>
@@ -1968,28 +1990,29 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/splash-edit.js?v=wlayout2"></script>
 <!-- Battle 3: the v11 battle system, loaded beside battle 2 (docs/BATTLE3.md). Data, then the rules (no drawing), then the screen. -->
 <script src="data/b3-rules.js?v=b3s4"></script>
-<script src="data/b3-status.js?v=b3s5c"></script>
+<script src="data/b3-status.js?v=b3s9b"></script>
 <script src="data/b3-kit-tom.js?v=clipposes"></script>
 <script src="data/b3-kit-grace.js?v=clipposes"></script>
 <script src="data/b3-kit-rose.js?v=clipposes"></script>
 <script src="data/b3-kit-deedee.js?v=clipposes"></script>
+<script src="data/b3-kit-tnb.js?v=b3s9b"></script>
 <script src="data/b3-foes-ch01.js?v=b3s8"></script>
 <script src="data/b3-clips.js?v=clipposes"></script>
-<script src="data/b3-lab.js?v=b3s4"></script>
-<script src="engine/b3-core.js?v=b3s7"></script>
-<script src="engine/b3-progress.js?v=b3s7"></script>
-<script src="engine/b3-timeline.js?v=b3s3"></script>
-<script src="engine/b3-hooks.js?v=b3s5c"></script>
-<script src="engine/b3-ops.js?v=b3s6"></script>
-<script src="engine/b3-custom.js?v=b3s5c"></script>
-<script src="engine/b3-resolve.js?v=b3s8"></script>
+<script src="data/b3-lab.js?v=b3s9b"></script>
+<script src="engine/b3-core.js?v=b3s9b"></script>
+<script src="engine/b3-progress.js?v=b3s9b"></script>
+<script src="engine/b3-timeline.js?v=b3s9b"></script>
+<script src="engine/b3-hooks.js?v=b3s9b"></script>
+<script src="engine/b3-ops.js?v=b3s9b"></script>
+<script src="engine/b3-custom.js?v=b3s9b"></script>
+<script src="engine/b3-resolve.js?v=b3s9b"></script>
 <script src="engine/b3-ruckus.js?v=b3s6"></script>
-<script src="engine/b3-preview.js?v=b3s7"></script>
+<script src="engine/b3-preview.js?v=b3s9b"></script>
 <script src="engine/b3-foe.js?v=b3s8"></script>
 <script src="engine/b3-clips.js?v=clipposes"></script>
-<script src="engine/b3-play.js?v=clipreset"></script>
-<script src="engine/b3-ui.js?v=skilllist1"></script>
-<script src="engine/b3-pictures.js?v=b3s9a"></script>
+<script src="engine/b3-play.js?v=clipposes"></script>
+<script src="engine/b3-ui.js?v=skillinfo1"></script>
+<script src="engine/b3-pictures.js?v=skillinfo1"></script>
 <script src="engine/b3-lab.js?v=clipposes"></script>
 <script src="engine/b3-menu.js?v=b3s7"></script>
 <script src="engine/save-backup.js?v=slotless1"></script>
@@ -2001,23 +2024,24 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="data/dialog-cast.js?v=calib3"></script>
 <script src="engine/dialog-voice.js?v=reacttime1"></script>
 <script src="engine/local-clips.js?v=nobake1"></script>
-<script src="data/line-gaps.js?v=linegap1"></script><!-- hold after a story line (docs/line-gaps.tsv, tools/gap-apply.py) -->
+<script src="data/line-gaps.js?v=ch1retext1"></script><!-- hold after a story line (docs/line-gaps.tsv, tools/gap-apply.py) -->
 <script src="engine/dialog-auto.js?v=linegap1"></script>
 <script src="data/emotion-faces.js?v=vance1"></script>
-<script src="data/emotion-moods.js?v=roselets1"></script>
-<script src="data/npc-emotion-moods.js?v=calib3"></script>
+<script src="data/emotion-moods.js?v=ch1retext1"></script>
+<script src="data/npc-emotion-moods.js?v=ch1retext1"></script>
 <script src="data/emotion-reactions.js?v=roselets1"></script>
-<script src="data/talk-types.js?v=calib3"></script><!-- talking pose per plain cast line (talk1, docs/TALK_POSES.md) -->
-<script src="engine/emotions.js?v=cutpolish1"></script>
+<script src="data/line-poses.js?v=reports3"></script><!-- lines with their own painted pose and face (c-reports) -->
+<script src="data/talk-types.js?v=ch1retext1"></script><!-- talking pose per plain cast line (talk1, docs/TALK_POSES.md) -->
+<script src="engine/emotions.js?v=reports-2026-11-19c"></script>
 <script src="engine/script-edits.js?v=scripted2"></script><!-- Script Editor overlay: Tom's line edits applied before a scene plays (script.html) --><!-- mood faces and poses in story dialogue (batch 0: chapter 1) -->
 <script src="engine/tapwalk.js?v=bossbig1"></script><!-- tap to walk -->
-<script src="data/build-history.js?v=skilllist1"></script><!-- build names and times (tools/build_history.py) -->
+<script src="data/build-history.js?v=clipposes"></script><!-- build names and times (tools/build_history.py) -->
 <script src="engine/build-history.js?v=buildlog1"></script><!-- build label on the welcome screen and menu, tap for the build history -->
 <script src="engine/amber-spots.js?v=ch1rebuild1"></script><!-- orange blocks left behind are solid and answer A (amberspot1) -->
 <script src="engine/block-break.js?v=ch7t1"></script><!-- breaking an orange block: coin, cracks, colour ring, shrink-back, encounters off (ch6build stage 2) -->
 <script src="engine/scene-props.js?v=fix-cutpolish4b"></script><!-- drawn stand-in props a scene can put on a map: the chart, Rose rolled up, the gold ball, bulbs (ch7build stage 2) -->
 <script src="engine/video-call.js?v=ch6s4"></script><!-- the video call at the end of chapter 6: Long Island seen from Tom's porch (ch6build stage 4) -->
-<script src="engine/main.js?v=skilllist1"></script>
+<script src="engine/main.js?v=clipposes"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js?v=adminvol1"></script>

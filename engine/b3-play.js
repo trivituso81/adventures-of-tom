@@ -183,7 +183,11 @@ function b3Show(b) {
     b3Pop(b.foe,b.tgt?'NEXT: '+at.toUpperCase():'FORESEEN','#ffe27a',{sc:2}); b3Sfx('combo');
     b3Say(!b.name?who+' has nothing planned.':b.kind==='strike'?who+' will use '+b.name+' on '+at+' next.':b.kind==='wind'?who+' is about to wind up '+b.name+'.':b.kind==='wide'?who+' will use '+b.name+' on the whole family next.':who+' will use '+b.name+' next.');
   }
-  else if(b.t==='hazardEnd') { V.haz=V.haz.filter(h=>!(h.id===b.id&&h.side===b.side)); if(b.why==='strip') b3Say('The '+B3_HAZARDS[b.id].name.toLowerCase()+' is scrubbed away.'); }
+  else if(b.t==='hazardEnd') { V.haz=V.haz.filter(h=>!(h.id===b.id&&h.side===b.side)); if(b.why==='strip') b3Say('The '+B3_HAZARDS[b.id].name.toLowerCase()+' is scrubbed away.'); else if(b.why==='burst') { b3Word(B3_HAZARDS[b.id].name.toUpperCase()+' BREAKS!',B3_HAZARDS[b.id].color); b3Sfx('combo'); } else if(b.why==='ko') b3Say('The '+B3_HAZARDS[b.id].name.toLowerCase()+' goes with its maker.'); }
+  // TNB (stage 9b): the Grand Amphora takes a monster's attack whole; a clay shield is fired into Fired Glaze; Waymo Tailgate Rescue shares HP.
+  else if(b.t==='vesselSoak') { const h=V.haz.find(x=>x.id===b.id); if(h) h.uses=b.left; for(const k of b.tgts) b3Pop(k,'AMPHORA TOOK IT','#ffcf9a',{sc:2}); b3Sfx('thud'); b3Say('The '+B3_HAZARDS[b.id].name+' soaks '+b3Name(b.src)+'’s attack whole.'+(b.left?' '+b.left+' '+(b.left===1?'hit':'hits')+' left.':'')); }
+  else if(b.t==='vitrify') { b3Pop(b.tgt,'FIRED GLAZE','#ffb38a',{sc:2}); b3Sfx('combo'); b3Say(b3Name(b.tgt)+'’s clay shield is fired into Fired Glaze.'); }
+  else if(b.t==='rebalance') { V.u[b.src].hp=b.hpSrc; vu.hp=b.hp; b3Pop(b.src,'-'+b.n,'#8fe3a6'); b3Pop(b.tgt,'+'+b.n,'#8fe3a6'); b3Sfx('heal'); b3Say(b3Name(b.src)+' shares '+b.n+' HP with '+b3Name(b.tgt)+'.'); }
   else if(b.t==='crack') { b3Pop(b.tgt,'CRACKED','#e6b08a',{sc:2}); }
   // A Trait or Quirk went off (only the ones whose row asks to be named: engine/b3-hooks.js `show`).
   else if(b.t==='passive') { b3Pop(b.src,b.name.toUpperCase(),'#c9e6a8',{sc:2}); b3Say(b3Name(b.src)+': '+b.name+'.'); }

@@ -77,12 +77,34 @@ def head_grow(cid, figs):
     return max(fct, T * (1 - s) / (s * (1 - T))), s
 
 
+def think_figure(cid, figs):
+    """The fifth talking pose, `think` (c-reports 2026-11-19, report r-20261114-101501-c5no): the approved single picture `<id>-think`, scaled to the height of the two standing
+    talking figures (a hand rests at the chin, so the chin reading cannot size it), cleaned like a sheet cell. None when the person has no think picture."""
+    if not glob.glob(os.path.join(RAW, f'{cid}-think-v*.png')): return None
+    f = EF.single_figure(cid + '-think'); h = float(np.median([figs[0].height, figs[1].height]))
+    # The think pictures are painted with a smaller head share than the talking sheets, so a pure height match makes the head 3 to 18 percent small (width of the hair at the
+    # top of the head, median of the two standing figures). Size = the geometric mean of the height match and the head match: heads close to the other four poses, bodies within
+    # 9 percent of the standing height.
+    sh = h / f.height; sw = float(np.median([_head_width(figs[0]), _head_width(figs[1])])) / _head_width(f)
+    return EF.scale_figure(f, float(np.sqrt(sh * sw)))
+
+
+def _head_width(f):
+    al = np.array(f)[:, :, 3] > 40; rows = np.where(al.any(1))[0]; top = rows.min(); H = rows.max() - top; ws = []
+    for y in range(int(top + .07 * H), int(top + .20 * H)):
+        d = np.diff(np.concatenate([[0], al[y].astype(int), [0]])); st, en = np.where(d == 1)[0], np.where(d == -1)[0]
+        if len(st): ws.append((en - st).max())
+    return float(np.median(ws))
+
+
 def bake(cid):
     figs = cut(cid); fct, sh = head_grow(cid, figs)
+    th = think_figure(cid, figs)
+    if th is not None: figs = figs + [th]
     if fct != 1.0:
         figs = [EF.grow_frame_head(f, fct, int(round(sh * f.height))) for f in figs]
     fw = max(f.width for f in figs) + 4; fh = max(f.height for f in figs) + 2
-    atlas = Image.new('RGBA', (fw * 4, fh), (0, 0, 0, 0))
+    atlas = Image.new('RGBA', (fw * len(figs), fh), (0, 0, 0, 0))
     for i, f in enumerate(figs): atlas.alpha_composite(f, (i * fw + (fw - f.width) // 2, fh - f.height))
     os.makedirs(OUT, exist_ok=True)
     atlas.save(os.path.join(OUT, f'{cid}.webp'), 'WEBP', quality=92, method=6)

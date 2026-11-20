@@ -28,7 +28,8 @@ function b3RoundStart(F,beats) {
     for(const id of Object.keys(u.st)) { const s=u.st[id]; if(s.unit==='round'&&--s.n<=0) { b3EndStatus(F,u,id,'time'); beats.push({t:'statusEnd',tgt:u.key,id}); } }
   }
   // Hazards dry up after their rounds.
-  for(const hz of F.hazards.slice()) if(--hz.rounds<=0) { F.hazards.splice(F.hazards.indexOf(hz),1); beats.push({t:'hazardEnd',id:hz.id,side:hz.side}); }
+  // (A vessel, TNB's Grand Amphora, breaks when its rounds run out: engine/b3-custom.js b3VesselExpire.)
+  for(const hz of F.hazards.slice()) if(--hz.rounds<=0) { F.hazards.splice(F.hazards.indexOf(hz),1); beats.push({t:'hazardEnd',id:hz.id,side:hz.side}); if(B3_HAZARDS[hz.id].vessel) b3VesselExpire(F,hz,beats); }
   b3Fire(F,'roundStart',{},beats);
 }
 // Move the clock to the next turn and say whose it is. Round dividers crossed on the way are started first.

@@ -18,6 +18,7 @@ main{max-width:760px;margin:0 auto;padding:12px 16px 140px}
 label{display:block;font-size:13px;color:#b9b3e6;margin:8px 0 6px}
 input[type=password],input[type=text],input[type=search],input[type=number],textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #3a3566;background:#0f0d24;color:#fff;font:inherit;font-size:16px}
 input[type=number]{width:84px;padding:8px}
+select{padding:8px;border-radius:10px;border:1px solid #3a3566;background:#0f0d24;color:#fff;font:inherit;font-size:15px;max-width:100%}
 input[type=checkbox]{width:24px;height:24px;flex:none}
 textarea{min-height:104px;resize:vertical;line-height:1.35;font-size:14px}
 button{font:inherit;border:0;border-radius:12px;padding:10px 14px;min-height:44px;background:#3a3566;color:#fff;font-weight:600;cursor:pointer}
@@ -89,18 +90,22 @@ header{padding:10px 28px}
 // Test override: ?el=<base url> points ElevenLabs calls at tools/music-library/stub.py.
 const $=id=>document.getElementById(id);
 const Q=new URLSearchParams(location.search);
-const KEYNAME='aot-el-key', MODEL='music_v1', CREDITS=[11,14];
+const KEYNAME='aot-el-key', CREDITS=[11,14];
+// Models (ElevenLabs docs, 2026-11-19): music_v1 is deprecated and ElevenLabs removes it on 2027-01-31; music_v2_5 is the newest and the default here. The choice is per track and is stored on every take.
+const MODELS=[['music_v2_5','v2.5 (newest)'],['music_v2','v2'],['music_v1','v1 (old, ends 2027-01-31)']], DEFMODEL='music_v2_5';
 const LS={get(k){try{return localStorage.getItem(k)||'';}catch(e){return '';}},set(k,v){try{localStorage.setItem(k,v);return true;}catch(e){return false;}},del(k){try{localStorage.removeItem(k);}catch(e){}}};
 const EL=()=>(Q.get('el')||'https://api.elevenlabs.io').replace(/\/+$/,'');
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const toast=m=>{const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display='none',3500);};
 let IDX=null, TAKES={}, USE={}, DB=null, PL=null, AC=null, RUN=null, STOP=false, ARMED=null;
 const SEL=new Set(), OPEN=new Set(), BUSY={}, MSG={};
-let PROMPTS={}, LENS={};
+let PROMPTS={}, LENS={}, MODS={};
 try{PROMPTS=JSON.parse(LS.get('aot-ml-prompts')||'{}')||{};}catch(e){}
 try{LENS=JSON.parse(LS.get('aot-ml-lens')||'{}')||{};}catch(e){}
+try{MODS=JSON.parse(LS.get('aot-ml-models')||'{}')||{};}catch(e){}
 const savePrompts=()=>LS.set('aot-ml-prompts',JSON.stringify(PROMPTS));
 const saveLens=()=>LS.set('aot-ml-lens',JSON.stringify(LENS));
+const saveMods=()=>LS.set('aot-ml-models',JSON.stringify(MODS));
 // Filters: an empty Set means every value. Groups combine with AND, chips inside a group with OR.
 const F={group:new Set(),kind:new Set(),use:new Set(),show:'all',q:''};
 try{const s=JSON.parse(LS.get('aot-ml-filters')||'null');if(s){F.group=new Set(s.group||[]);F.kind=new Set(s.kind||[]);F.use=new Set(s.use||[]);F.show=s.show||'all';}}catch(e){}
@@ -108,6 +113,7 @@ const saveF=()=>LS.set('aot-ml-filters',JSON.stringify({group:[...F.group],kind:
 const T=id=>IDX.tracks.find(t=>t.id===id);
 const promptOf=t=>PROMPTS[t.id]!==undefined?PROMPTS[t.id]:t.prompt;
 const lenOf=t=>LENS[t.id]!==undefined?LENS[t.id]:t.len;
+const modelOf=t=>MODELS.some(m=>m[0]===MODS[t.id])?MODS[t.id]:DEFMODEL;
 const takesOf=id=>TAKES[id]||[];
 const useTake=id=>USE[id]?takesOf(id).find(x=>x.key===USE[id]):null;
 
@@ -184,7 +190,7 @@ const fmt=n=>n==null?'?':(Math.round(n*10)/10).toFixed(1);
 const cr=len=>{const a=Math.round(len*CREDITS[0]/10)*10,b=Math.round(len*CREDITS[1]/10)*10;return a+' to '+b;};
 function takeHtml(t,x){
   const live=USE[t.id]===x.key;
-  return '<div class="take"><span class="t">v'+x.n+', '+esc((x.date||'').slice(0,10))+', asked '+x.len+' s, got '+fmt(x.dur)+' s'+(x.short?' <span class="err" style="display:inline">(came back short)</span>':'')+'</span>'+
+  return '<div class="take"><span class="t">v'+x.n+', '+esc((x.date||'').slice(0,10))+', '+esc(x.model||'music_v1')+', asked '+x.len+' s, got '+fmt(x.dur)+' s'+(x.short?' <span class="err" style="display:inline">(came back short)</span>':'')+'</span>'+
     '<button class="small" data-pid="'+esc(x.key)+'" data-lab="&#9654; Play" data-tplay="'+esc(x.key)+'">&#9654; Play</button>'+
     (live?'<span class="pill live">In the game</span>':'<button class="small good" data-tuse="'+esc(x.key)+'">Use</button>')+
     '<button class="small bad" data-tdel="'+esc(x.key)+'">Delete</button></div>';
@@ -198,6 +204,7 @@ function cardHtml(t){
    '<div class="row" style="margin-top:6px"><span class="pill'+(ut?' live':'')+'">'+(ut?'Phone take v'+ut.n+' plays in the game':'Built-in plays ('+fmt(t.sec)+' s, '+Math.round(t.bytes/1024)+' KB)')+'</span>'+(t.auto&&PROMPTS[t.id]===undefined?'<span class="pill warn">auto prompt, written from the track\'s job</span>':'')+(edited?'<button class="small" data-reset="'+id+'">Reset prompt</button>':'')+'</div>'+
    '<label>Prompt (ElevenLabs reads this; edits save as you type)</label><textarea data-prompt="'+id+'">'+esc(promptOf(t))+'</textarea>'+
    '<div class="suffix">Added when sent: '+esc(IDX.suffix[t.kind])+'</div>'+
+   '<div class="row" style="margin-top:8px"><label style="margin:0">Model</label><select data-model="'+id+'"'+(busy?' disabled':'')+'>'+MODELS.map(m=>'<option value="'+m[0]+'"'+(modelOf(t)===m[0]?' selected':'')+'>'+m[1]+'</option>').join('')+'</select></div>'+
    '<div class="row" style="margin-top:8px"><label style="margin:0">Length (s)</label><input type="number" data-len="'+id+'" value="'+lenOf(t)+'" min="3" max="120" step="1" inputmode="numeric">'+
    '<button class="small" data-pid="'+id+'|now" data-lab="&#9654; Play" data-play="'+id+'">&#9654; Play</button>'+
    (t.kind==='loop'?'<button class="small" data-pid="'+id+'|loop" data-lab="&#9654; Loop test" data-loop="'+id+'">&#9654; Loop test</button>':'')+
@@ -227,6 +234,7 @@ $('list').addEventListener('input',e=>{
   const l=e.target.dataset.len;if(l){const n=parseFloat(e.target.value);if(n>0){LENS[l]=n;saveLens();}}
 });
 $('list').addEventListener('change',e=>{
+  const mo=e.target.dataset.model;if(mo&&MODELS.some(m=>m[0]===e.target.value)){MODS[mo]=e.target.value;saveMods();}
   const s=e.target.dataset.sel;if(s){if(e.target.checked)SEL.add(s);else SEL.delete(s);paintFilters();paintBar();}
 });
 $('list').addEventListener('click',async e=>{
@@ -302,15 +310,15 @@ async function makeTake(id){
   const text=promptOf(t).trim();if(!text)throw new Error('The prompt is empty.');
   const len=lenOf(t),lim=t.kind==='loop'?[15,120]:[3,15];
   if(!(len>=lim[0]&&len<=lim[1]))throw new Error('Length must be '+lim[0]+' to '+lim[1]+' seconds for a '+(t.kind==='loop'?'loop':'jingle')+'.');
-  const prompt=text+' '+IDX.suffix[t.kind];
+  const prompt=text+' '+IDX.suffix[t.kind],model=modelOf(t);
   let r;
-  try{r=await fetch(EL()+'/v1/music?output_format=mp3_44100_128',{method:'POST',headers:{'xi-api-key':key,'Content-Type':'application/json',Accept:'audio/mpeg'},body:JSON.stringify({prompt,music_length_ms:Math.round(len*1000),model_id:MODEL,force_instrumental:true})});}
+  try{r=await fetch(EL()+'/v1/music?output_format='+(model==='music_v1'?'mp3_44100_128':'auto'),{method:'POST',headers:{'xi-api-key':key,'Content-Type':'application/json',Accept:'audio/mpeg'},body:JSON.stringify({prompt,music_length_ms:Math.round(len*1000),model_id:model,force_instrumental:true})});}
   catch(e){throw new Error('The browser could not reach ElevenLabs. Check the network and try again.');}
   if(!r.ok)throw await apiErr(r);
   const ab=await r.arrayBuffer();
   if(ab.byteLength<2000)throw new Error('ElevenLabs sent back almost nothing ('+ab.byteLength+' bytes).');
   const blob=new Blob([ab],{type:'audio/mpeg'}),dur=await metaDur(blob),n=(takesOf(id)[0]?takesOf(id)[0].n:0)+1;
-  const row={key:id+'|'+n,trackId:id,n,mp3:blob,prompt,len,model:MODEL,dur,date:new Date().toISOString(),short:!!(dur&&dur<len*.85)};
+  const row={key:id+'|'+n,trackId:id,n,mp3:blob,prompt,len,model,dur,date:new Date().toISOString(),short:!!(dur&&dur<len*.85)};
   if(!DB)throw new Error('This browser would not keep the take.');
   await tx('takes','readwrite',s=>s.put(row));
   (TAKES[id]=TAKES[id]||[]).unshift(row);
@@ -373,7 +381,7 @@ $('exp').onclick=async()=>{
   catch(e){$('list').innerHTML='<div class="card err">The track list would not load. Go back and open the Music Library again.</div>';return;}
   try{DB=await idb();await loadDb();}catch(e){DB=null;toast('This browser would not keep takes. You can still listen.');}
   $('q').value=F.q;
-  $('howto').textContent='Every track the game plays is one card. Play hears what the game plays now on this device (your take if you picked one, else the built-in track). Loop test plays the end of a loop crossfading into its start, the way the game loops it. Edit the prompt right in the card; New take sends it to ElevenLabs (the fixed loop or jingle wording shown in grey is added) and the new take plays in the game on this device at once. Takes lists every take: Use switches, Built into the game goes back. Tick cards (or Select all shown) and Remake does many at once, two at a time. Credits are about '+CREDITS[0]+' to '+CREDITS[1]+' per second of music, so a 60 s loop is roughly '+cr(60)+'; every make asks you to tap twice. A phone take plays raw (no loudness match, no trimming), so it can sound louder or softer than the built-in tracks until Claude merges it. Export music takes shares one file with the take marked In the game for each track; send it to Claude to make takes permanent. Show: "Re-made" means the track has at least one take here; "Built-in track plays" means no take is in the game. List made '+IDX.made+'.';
+  $('howto').textContent='Every track the game plays is one card. Play hears what the game plays now on this device (your take if you picked one, else the built-in track). Loop test plays the end of a loop crossfading into its start, the way the game loops it. Edit the prompt right in the card; New take sends it to ElevenLabs (the fixed loop or jingle wording shown in grey is added) and the new take plays in the game on this device at once. Takes lists every take: Use switches, Built into the game goes back. Tick cards (or Select all shown) and Remake does many at once, two at a time. Credits are about '+CREDITS[0]+' to '+CREDITS[1]+' per second of music, so a 60 s loop is roughly '+cr(60)+'; every make asks you to tap twice. A phone take plays raw (no loudness match, no trimming), so it can sound louder or softer than the built-in tracks until Claude merges it. Export music takes shares one file with the take marked In the game for each track; send it to Claude to make takes permanent. Show: "Re-made" means the track has at least one take here; "Built-in track plays" means no take is in the game. Model: each card has its own model choice, newest (v2.5) first; v1 is ElevenLabs\' old model and is removed on 31 Jan 2027, so it stays only to compare. The credit estimate was measured on v1; v2 prices are not measured. List made '+IDX.made+'.';
   paintFilters();paintList();paintBar();
 })();
 </script>

@@ -142,8 +142,9 @@ function b3Kit(id,L) {
 //   mods       the rows' own mods (engine/b3-core.js b3Mods: they may carry `when` and `per`)
 //   counters   counters a Quirk keeps for itself ({id, name, max}: Upgrade Certificate)
 //   custom     {<one-off rule name>: its numbers} (engine/b3-custom.js)
+//   allyMods   mods the Quirk gives every family member as the fight begins (Coaster Policy: engine/b3-core.js b3NewFight)
 function b3KitPassives(K) {
-  const out={listeners:[],mods:[],counters:[],custom:{},immune:[],shieldMods:[]};
+  const out={listeners:[],mods:[],counters:[],custom:{},immune:[],shieldMods:[],allyMods:[]};
   for(const P of [B3_TRAITS[K.trait],...K.quirks.map(q=>B3_QUIRKS[q])]) {
     if(!P||P.soon) continue;
     if(P.on) out.listeners.push(P);
@@ -153,6 +154,7 @@ function b3KitPassives(K) {
     if(P.custom) out.custom[P.custom]=P.n||{};
     if(P.immune) out.immune.push(...P.immune);
     if(P.shieldMods) out.shieldMods.push(...P.shieldMods);
+    if(P.allyMods) out.allyMods.push(...P.allyMods.map(m=>Object.assign({},m,{from:P.id})));
   }
   for(const C of K.counters) out.listeners.push(Object.assign({},C,{id:'counter:'+C.id,name:C.name,effects:[{op:'counter',id:C.id,n:C.n||1,max:C.max,to:'self'}]}));
   return out;

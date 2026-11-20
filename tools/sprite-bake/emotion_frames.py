@@ -13,6 +13,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 RAW = os.path.join(ROOT, 'art/raw/characters'); OUT = os.path.join(ROOT, 'art/emotions'); NPC_RAW = os.path.join(ROOT, 'art/raw/npcs')   # townsfolk sheets: npc-emotions-<id>-vN.png (Tom 2026-11-10)
 MOODS = ['happy', 'loving', 'sad', 'angry', 'scared', 'surprised', 'proud', 'unimpressed']
 TAG = 'headchin1'
+UPRIGHT = (0, 1, 5, 6, 7)   # happy, loving, surprised, proud, unimpressed
 NO_MOOD = {'vance'}   # vance1 (Tom 2026-11-12): Julian's only sheet is the old sketch style; he has no painted mood art, so no mood poses or faces until the Art Library has one (his talk face and walk are painted)
 
 def src_path(cid):
@@ -21,6 +22,47 @@ def src_path(cid):
                 key=lambda p: int(re.search(r'-v(\d+)\.png$', p).group(1)))
     return vs[-1]
 
+# reports 2026-11-19 (card c-reports): one approved single-figure picture of the Art Library replaces one cell of a person's mood sheet. {person: {cell index: entry id}}.
+# r-20261114-100734-1a2w: Boppy's unimpressed frame (cell 7 of boppy-emotions-v6) lost his mustache; `boppy-em-unimpressed` is painted with it.
+REPLACE = {'boppy': {7: 'boppy-em-unimpressed'}}
+
+def sheet_label(cid, i):
+    """The picture file cell i of this person's mood strip comes from: the sheet, or the single figure that replaces that cell (the Pose Editor ties his lines to it)."""
+    sid = REPLACE.get(cid, {}).get(i)
+    if sid is None: return os.path.basename(src_path(cid))
+    vs = sorted(glob.glob(os.path.join(RAW, f'{sid}-v*.png')), key=lambda p: int(re.search(r'-v(\d+)\.png$', p).group(1)))
+    return os.path.basename(vs[-1])
+
+def single_figure(sid):
+    """The newest approved single picture art/raw/characters/<sid>-v<N>.png, keyed and cleaned like a sheet cell."""
+    vs = sorted(glob.glob(os.path.join(RAW, f'{sid}-v*.png')), key=lambda p: int(re.search(r'-v(\d+)\.png$', p).group(1)))
+    a = np.array(Image.open(vs[-1]).convert('RGB'))
+    ring = np.concatenate([a[0], a[-1], a[:, 0], a[:, -1]]).astype(float); bgc = np.median(ring, axis=0)
+    if np.abs(bgc - np.array([255., 0., 255.])).max() > 40:   # the generator sometimes paints the key colour crimson (187,17,88) instead of #FF00FF: make the border-connected background pure magenta so the keyer sees it
+        near = np.sqrt(((a.astype(float) - bgc) ** 2).sum(2)) < 70
+        lab, n = ndi.label(near); edge = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))) - {0}
+        a = a.copy(); a[np.isin(lab, list(edge))] = (255, 0, 255)
+    return clean_cell(_key(a))
+
+def scale_figure(img, f):
+    """Resize a figure with premultiplied alpha so the painted edge stays clean."""
+    w, h = max(1, round(img.width * f)), max(1, round(img.height * f))
+    a = np.array(img).astype(float); al = a[:, :, 3:4] / 255.0
+    pm = Image.fromarray((a[:, :, :3] * al).clip(0, 255).astype(np.uint8), 'RGB').resize((w, h), Image.LANCZOS)
+    ar = Image.fromarray(a[:, :, 3].astype(np.uint8), 'L').resize((w, h), Image.LANCZOS)
+    pa, aa = np.array(pm).astype(float), np.array(ar).astype(float) / 255.0
+    rgb = np.where(aa[:, :, None] > 0.02, pa / np.maximum(aa[:, :, None], 0.02), 0)
+    return Image.fromarray(np.dstack([np.clip(rgb, 0, 255), aa * 255]).astype(np.uint8), 'RGBA')
+
+def fit_head(cid, new, refs, bi=0):
+    """Scale a single painted figure so its head is the size of the head of the reference figures (median chin row in pixels), so it sits in their strip at one scale.
+    refs = the figures whose heads set the size; bi = index into MOODS for the face-box geometry of `new`."""
+    import emotion_chin as EC
+    bx = EC._boxes(cid, refs + [refs[-1]] * (8 - len(refs))); raw = [EC._read(f, b) for f, b in zip(refs, bx)]
+    tgt = float(np.median([r for r in raw if r]))
+    got = EC._read(new, EC._boxes(cid, [new] * 8)[bi])
+    return scale_figure(new, tgt / got)
+
 def cut(cid):
     rgba = _key(np.array(Image.open(src_path(cid)).convert('RGB')))
     H, W = rgba.shape[:2]; figs = []
@@ -28,6 +70,8 @@ def cut(cid):
         r, c = divmod(i, 4)
         y0, y1, x0, x1 = r * H // 2, (r + 1) * H // 2, c * W // 4, (c + 1) * W // 4
         figs.append(clean_cell(rgba[y0:y1, x0:x1].copy()))
+    for i, sid in REPLACE.get(cid, {}).items():
+        figs[i] = fit_head(cid, single_figure(sid), [figs[j] for j in UPRIGHT if j not in REPLACE[cid]], i)
     return figs
 
 def clean_cell(cell):
@@ -59,7 +103,6 @@ def head_factor(cid):
     try: return float(json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'head_tweak.json'))).get(cid, 1.0))
     except OSError: return 1.0
 
-UPRIGHT = (0, 1, 5, 6, 7)   # happy, loving, surprised, proud, unimpressed
 
 def grow_frame_head(f, fct, chin):
     """One mood figure with its head (everything above row `chin`, measured from the figure's top) enlarged by fct about the chin."""

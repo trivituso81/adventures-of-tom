@@ -193,7 +193,7 @@ const TRAVEL_POOLS={
      tom:["Great. I just got outcompeted by pie.","Enjoy it, you two. Save me a slice."]}
   ],
   // Westbound with the girls already away: Sal's one line.
-  sal:[["Los Angeles? You got it. Buckle up."],["Los Angeles again. Cab seven is ready."],["LAX. Sit back. The radio is on something calm."],
+  sal:[["Los Angeles? Los Angeles? You got it. Buckle up."],["Los Angeles again. Cab seven is ready."],["LAX. Sit back. The radio is on something calm."],
        ["Off we go. Don't touch the visor. Everybody touches the visor."],["Airport run. I'll have you there before your coffee gets cold."]],
   // Eastbound: Sol's one line.
   sol:[["Airport. Love it. We'll be there in twenty minutes. Or two hours. Nobody knows."],

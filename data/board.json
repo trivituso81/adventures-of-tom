@@ -690,7 +690,7 @@
    "title": "New battle system, stage 9b: TNB's kit (Ceramicist and Longboarder)",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "b3s9b",
    "next": "Builds TNB's two Sig Vibes in Battle 3: 2 Basics, 4 Skills, 2 Capstones, 2 Traits, 4 Quirks (14 lines, 6 need their own function), a Lab fight with TNB in the party, simulator and screen tests.",
    "blocks": [],
@@ -712,6 +712,14 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Built: TNB complete (Ceramicist and Longboarder, 14 lines, Lab fight NEW 7). 115 new rule checks, screen test in portrait and landscape. Calls made are listed in docs/BATTLE3.md \"What stage 9b holds\". Next: c-b3s9c."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as b3s9b: New battle: TNB joins the Battle Lab with both of his Vibes, Ceramicist and Longboarder"
     }
    ],
    "prompt": {
@@ -722,7 +730,9 @@
     "model": "Claude Sonnet 5.5 (row C: a build whose six custom functions are designed in the session)",
     "effort": "high (6 of the 14 lines need a new function worked out from the spec)",
     "text": "Read claude/battle-build.md and claude/next-addendum-b3s9a.md, then build stage 9b (TNB) of the new battle system. You have my full permission to access the repo."
-   }
+   },
+   "after": "nothing for Tom: c-b3s9c",
+   "done": "2026-11-19"
   },
   {
    "id": "c-b3s9c",
@@ -731,7 +741,7 @@
    "lane": "claude",
    "col": "up",
    "tag": "b3s9c",
-   "next": "After b3s9b. Builds Nara's (Attached Pup, Guard Dog) and Boppy's (The Dep, Pepper Boss) Sig Vibes (28 lines, 6 need their own function) and the late joiners' Vibe Point pool; Lab fights with the chapter 2 and 3 parties.",
+   "next": "After b3s9b (done). Builds Nara's (Attached Pup, Guard Dog) and Boppy's (The Dep, Pepper Boss) Sig Vibes (28 lines, 6 need their own function) and the late joiners' Vibe Point pool, and moves TNB onto that pool; Lab fights with the chapter 2 and 3 parties.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -743,6 +753,10 @@
     {
      "d": "2026-11-19",
      "t": "Added by b3s9a: stage 9 split."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "b3s9b shipped: prompt now reads next-addendum-b3s9b.md; TNB moves onto the late joiners' pool here."
     }
    ],
    "prompt": {
@@ -752,7 +766,7 @@
     ],
     "model": "Claude Sonnet 5.5 (row C: a build whose six custom functions are designed in the session)",
     "effort": "high (6 of the 28 lines need a new function worked out from the spec)",
-    "text": "Read claude/battle-build.md and claude/next-addendum-b3s9a.md, then build stage 9c (Nara and Boppy) of the new battle system. You have my full permission to access the repo."
+    "text": "Read claude/battle-build.md and claude/next-addendum-b3s9b.md, then build stage 9c (Nara and Boppy) of the new battle system. You have my full permission to access the repo."
    }
   },
   {
@@ -1163,8 +1177,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Voice Clips",
-   "count": 13,
-   "title": "Merge 13 new voice takes",
+   "count": 15,
+   "title": "Merge 15 new voice takes",
    "next": "Shipped as takes1: 2 takes merged, 26 old-wording takes left out.",
    "prompt": {
     "what": "Merges the voice takes you recorded on your phone.",
@@ -1199,21 +1213,25 @@
     {
      "d": "2026-11-20",
      "t": "Merged 2 of 28 unmerged kept takes (Tom, ch1 \"Twenty years, one witness\" and \"Thank you for telling me, Rose\"). 26 skipped: their words no longer match the game (Tommy now Tom, or cut lines)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "2 more take file(s) arrived."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-20",
+   "changed": "2026-11-19",
    "after": "nothing for Tom: end"
   },
   {
    "id": "c-reports",
-   "tag": "reports-2026-11-19",
+   "tag": "reports-2026-11-19c",
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (7 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100352-7v5z, r-20261114-100555-mxvd, r-20261114-100734-1a2w, r-20261114-101501-c5no, r-20261114-101538-nre4, r-20261114-104915-g4gl and 1 more. First note: For this line in particular, we need to create a special frame that can be used in both the dialog a",
+   "next": "Done: 6 of the 7 art reports are in the game (build reports-2026-11-19c): 1a2w Boppy's mustache, 7v5z Deedee glasses on her head, c5no the new thinking talking pose (10 people, 19 lines tagged), nre4 the fishing spot as one picture, g4gl dazed frames for the 5 smog neighbours, jykk Deedee and Rose holding the bulb. Not done: mxvd (the mud blob): the scene it came from was rewritten and the new Mudling sheet is carried by cards c-heistart and c-heist1, which close it.",
    "prompt": {
     "what": "Puts the approved Report fixes pictures into the game and closes the 7 art reports.",
     "before": [
@@ -1283,12 +1301,16 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Installed the approved Report fixes pictures as build reports-2026-11-19c; closed 7v5z, 1a2w, c5no, nre4, g4gl, jykk. mxvd stays open: its scene was rewritten and cards c-heistart and c-heist1 replace its picture (ch1-mudling-heist2). Chapters 2, 4, 5, 6, 7 have no Library bulb picture yet, so jykk covers chapters 1 and 3 only."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
-   "after": "t-reportart"
+   "after": "t-reportcheck"
   },
   {
    "id": "t-startsetup",
@@ -1958,10 +1980,10 @@
    "title": "Look at the chapter 1 pictures in the game",
    "theme": "Areas",
    "lane": "tom",
-   "col": "wait",
+   "col": "done",
    "ask": "play",
    "fyi": true,
-   "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen. Look at the island: the table is bare except the tart and the cake stand, and the muffin pan sits on it clear of the other pastries. After the Mudling grabs the pan the pan is gone and the table stays as it was. The Mudling now carries the painted pan, not the little heap. Then the paper muffin liners at the entrance of Grump Hollow (they are bigger now). Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one). Claude fixes them and this card comes back to you to check.",
+   "next": "Retired: your 19:28 recording showed the pan still on the counter after three fixes. The cause was a code bug, not the pan's position. Replaced by cards c-heistart, t-heistart and c-heist1.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-20",
@@ -1993,9 +2015,33 @@
     {
      "d": "2026-11-19",
      "t": "Tom: something is wrong: muffins overlay the background art Sent to Claude as card c-fix-cutpolish4b-2; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fix fix-cutpolish4b-2 shipped: the pan moved right on the table so it no longer covers the cake stand."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked: Fix what you found on: Look at the chapter 1 pictures in the game, Fix what you found on: Look at the chapter 1 pictures in the game is done."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: something is wrong: muffins overlap art Sent to Claude as card c-fix-cutpolish4b-3; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: muffins overlap art. Fix fix-cutpolish4b-3 (card c-fix-cutpolish4b-3): rendered the island at the real zoom, the pan still touched the cake stand base and stood above the table's back edge; moved it to sit fully on the wood."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked: Fix what you found on: Look at the chapter 1 pictures in the game, Fix what you found on: Look at the chapter 1 pictures in the game, Fix what you found on: Look at the chapter 1 pictures in the game is done."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Retired by board-heist. Tom (19:28): \"the muffins are displayed on the counter after he takes them\". The scene is being redone: cards c-heistart, t-heistart, c-heist1."
     }
    ],
-   "waiting_on": "claude"
+   "done": "2026-11-19"
   },
   {
    "id": "b-takes1",
@@ -2200,7 +2246,7 @@
    "changed": "2026-11-19",
    "created": "2026-11-19",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFGdMPdkaDVu3sGCnn",
+    "url": "https://claude.ai/code/session_01RXeukFGdMPdkaDVu3sGCnn",
     "opening": "not started"
    },
    "history": [
@@ -2223,6 +2269,10 @@
     {
      "d": "2026-11-19",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     },
     {
      "d": "2026-11-20",
@@ -5486,25 +5536,14 @@
   {
    "id": "t-ch1art2",
    "lane": "tom",
-   "col": "wait",
+   "col": "done",
    "theme": "Areas",
    "ask": "pictures",
-   "title": "Make the seven chapter 1 pictures",
-   "next": "ADMIN > ART LIBRARY, group Chapter 1 (Props, Characters and Enemies tabs). For each of ch1-grace-list, ch1-amy-window, ch1-ellie-door, ch1-cab-pulls-away, ch1-rose-shoulders, ch1-mudling-muffins and ch1-bigone-green-pan: press GENERATE, then APPROVE, or REJECT with a note. When all seven are approved, card c-ch1art3 (Claude installs them in the game) can start.",
+   "title": "Chapter 1 pictures: six were not needed, only Grace's list is left",
+   "next": "ADMIN > ART LIBRARY, Props tab, group Chapter 1: it now reads 10 of 10 approved. The six pictures you questioned are gone (Amy's window, Aunt Ellie's door, the cab pulling away, Rose on shoulders, Mudling with muffins, green Big One). Nothing to generate. Read the last line of this card's history for why, then tap All good: card c-ch1art3 then installs Grace's list (already approved) in the game.",
    "blocks": [
     "c-ch1art3"
    ],
-   "done_when": {
-    "art_approved": [
-     "ch1-grace-list",
-     "ch1-amy-window",
-     "ch1-ellie-door",
-     "ch1-cab-pulls-away",
-     "ch1-rose-shoulders",
-     "ch1-mudling-muffins",
-     "ch1-bigone-green-pan"
-    ]
-   },
    "history": [
     {
      "d": "2026-11-19",
@@ -5517,43 +5556,88 @@
     {
      "d": "2026-11-19",
      "t": "Tom: something is wrong: i dont understand why we need this art. like it doesnt make sense based on how the game works (except grace's list). explain Sent to Claude as card c-fix-ch1art2; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Why those pictures were asked for, and why you are right (fix-ch1art2): the chapter 1 teardown made one Library entry per story beat without checking what the game shows there. Amy already leans out of the real window in the street painting with her own figure and face. Aunt Ellie already stands at her own door as a person with her own face. The cab leaving is a fade to black, then the phone on the seat (installed). Tom with Rose on his shoulders is already three painted sheets, and one standing picture cannot become a frame of a sheet. The Mudling already holds the painted muffin pan. The green Big One would bake the pan in and recolour the fish its 11 approved clips were made from, but the pan comes off during the scene and in battle by code. All six are removed from the Library. Grace's list stays: nothing draws it today."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked: Fix what you found on: Make the seven chapter 1 pictures is done."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: all good."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: all good."
     }
    ],
    "created": "2026-11-19",
    "changed": "2026-11-19",
-   "waiting_on": "claude"
+   "done": "2026-11-19"
   },
   {
    "id": "c-ch1art3",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "done",
    "theme": "Areas",
    "tag": "ch1art3",
-   "title": "Install the seven approved chapter 1 pictures in place of the code stand-ins",
-   "next": "Waits on card t-ch1art2 (your approvals). Then replace each chapter 1 stand-in with its approved picture, the way cutpolish4b did, test the scenes in portrait and landscape, push.",
+   "title": "Install Grace's approved list picture in the game (chapter 1 opening scene)",
+   "next": "Shipped as ch1art3: Grace's list shows as a close-up in the first Square scene when she unfolds her paper. Nothing for you: you will see it the next time you play the opening.",
    "prompt": {
-    "what": "Puts the seven approved chapter 1 pictures (Grace's list, Amy's window, Aunt Ellie's door, the cab, Rose on shoulders, Mudling with muffins, green Big One with pan) into the game in place of the code stand-ins.",
+    "what": "Puts Grace's approved list picture into the game: the close-up that shows when Grace unfolds her notebook paper in the first Square scene.",
     "before": [
-     "Card t-ch1art2 is done: all seven entries are approved in ADMIN > ART LIBRARY, group Chapter 1."
+     "Card t-ch1art2 is done (you tapped All good). Grace's list, ch1-grace-list, is already approved in ADMIN > ART LIBRARY, group Chapter 1."
     ],
-    "model": "Claude Sonnet 5.5 (row C: no written install steps for these seven, the session works them out from cutpolish4b)",
-    "effort": "medium (each install is small and follows the cutpolish4b pattern)",
-    "text": "Install the seven approved chapter 1 pictures from ADMIN > ART LIBRARY group Chapter 1 (ch1-grace-list, ch1-amy-window, ch1-ellie-door, ch1-cab-pulls-away, ch1-rose-shoulders, ch1-mudling-muffins, ch1-bigone-green-pan) in place of their code stand-ins, the way cutpolish4b installed the muffin pan and the phone close-up. Board card c-ch1art3. You have my full permission to access the repo."
+    "model": "Claude Sonnet 5.5 (row C: one picture, the install pattern is in the repo)",
+    "effort": "medium (one close-up, follows the phone-on-seat install)",
+    "text": "Read CLAUDE.md. Install the approved Art Library picture ch1-grace-list as a chapter 1 close-up. The pattern is the phone on the seat from cutpolish4b: data/closeup-ch1.js (CH1_REVEAL entry and the ch1Reveal step), tools/art-library/bake_closeup_ch1.py (bakes art/closeup/ch1-*.webp from the approved entry), docs/CHANGES.md fix-cutpolish4b. In SCENES.ch1Goal in data/scenes.js, where the comment says Grace unfolds a piece of notebook paper, add a {ch1Reveal:'list'} step so the list shows, then the scene carries on. No dialogue text changes. Look at the frames in portrait and landscape. Board card c-ch1art3. You have my full permission to access the repo."
    },
    "history": [
     {
      "d": "2026-11-19",
      "t": "Made by ch1art2."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Narrowed to Grace's list only by fix-ch1art2: the other six pictures were removed from the Art Library because the game has no place to show them."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked: Chapter 1 pictures: six were not needed, only Grace's list is left is done."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch1art3: Grace's list close-up added to ch1Goal ({ch1Reveal:'list'}), looked at in portrait and landscape."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch1art3: Grace's list shows as a close-up when she unfolds her paper in the first Square scene"
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDngKRyJBZ723rMGSb",
     "opening": "not started"
-   }
+   },
+   "after": "nothing for Tom: end",
+   "done": "2026-11-19"
   },
   {
    "id": "c-fix-cutpolish4b",
@@ -5632,8 +5716,8 @@
    "title": "Skills list: an i icon opens the skill card, tapping the row uses the skill (skillinfo1)",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
-   "next": "Add an i icon left of each skill name in the SKILLS list (words and Rose Mode pictures). The i opens the skill card with BACK and USE. A tap anywhere else on the row uses the skill, or goes to the target list when it needs a target. Update tools/b3_test.py, test portrait and landscape, push.",
+   "col": "done",
+   "next": "Shipped as skillinfo1: an i icon left of each Skill name opens the skill card (BACK and USE); a tap anywhere else on the row uses the Skill or opens the target list. Rose Mode tiles have a small i in the corner. Stage 9 kits continue on c-b3s9b (TNB) and c-b3s9c (Nara, Boppy, late joiners).",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -5645,6 +5729,14 @@
     {
      "d": "2026-11-19",
      "t": "New card, follow-up to b3s9a. Tom: \"we need an information \"i\" icon to the left of each ability name, which should bring the user to the more details screen with the BACK and USE buttons. otherwise if the user taps anywhere on the ability outside of the abilitiy box, it should just execute tha bility or require the character to choose a target as applicable\""
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Built skillinfo1: i icon on every Skill row (words and Rose Mode), row tap uses the Skill or opens the target list, I key and pad Y open the card, Enter and A use. b3_test s9ui passes in portrait and landscape; your phone check is on t-skillinfo1play."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as skillinfo1: New battle: an i icon on each Skill row opens its card, a tap anywhere else on the row uses the Skill"
     }
    ],
    "tag": "skillinfo1",
@@ -5656,7 +5748,9 @@
     "model": "Claude Sonnet 5.5 (row C: a small UI change across two list renderers and the click handler, with tests to update)",
     "effort": "medium (small piece, steps known)",
     "text": "Read claude/handoff-rules.md and docs/CHANGES.md b3s9a, then finish the card c-skillinfo1 if it is not shipped (tag skillinfo1): an i icon left of each skill name opens the skill card (BACK and USE), a tap anywhere else on the row uses the skill or opens the target list. You have my full permission to access the repo."
-   }
+   },
+   "after": "t-skillinfo1play",
+   "done": "2026-11-19"
   },
   {
    "id": "t-reportart",
@@ -5765,7 +5859,7 @@
    "id": "c-fix-ch1art2",
    "tag": "fix-ch1art2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Areas",
    "title": "Fix what you found on: Make the seven chapter 1 pictures",
@@ -5802,6 +5896,14 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fixed: explained on card t-ch1art2 and removed the six unneeded entries from the Art Library (Amy's window, Aunt Ellie's door, the cab, Rose on shoulders, Mudling with muffins, green Big One); Grace's list stays. No pencil report was filed since 2026-11-20T02:43:56Z, so none was marked done. Shipping as fix-ch1art2."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as fix-ch1art2: six chapter 1 picture requests removed from the Art Library; only Grace's list is left"
     }
    ],
    "prompt": {
@@ -5813,7 +5915,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch1art2 and t-ch1art2 in data/board.json, history included. Your first push is the commit board: start c-fix-ch1art2.\n\nTom tested and found problems:\n1. Card t-ch1art2 (Make the seven chapter 1 pictures, ask pictures). He was asked: ADMIN ) ART LIBRARY, group Chapter 1 (Props, Characters and Enemies tabs). For each of ch1-grace-list, ch1-amy-window, ch1-ellie-door, ch1-cab-pulls-away, ch1-rose-shoulders, ch1-mudling-muffins and ch1-bigone-green-pan: press GENERATE, then APPROVE, or REJECT with a note. When all seven are approved, card c-ch1art3 (Claude installs them in the game) can start. He wrote: i dont understand why we need this art. like it doesnt make sense based on how the game works (except grace's list). explain\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T02:43:56.264Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch1art2 to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch1art2, and give the build fix-ch1art2 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
-   "after": "t-ch1art2"
+   "after": "t-ch1art2",
+   "done": "2026-11-19"
   },
   {
    "id": "c-skilllist1",
@@ -5864,7 +5967,7 @@
    "col": "up",
    "ask": "play",
    "fyi": true,
-   "next": "After the publish of build skilllist1: RELOAD on the title, ADMIN > BATTLE LAB > NEW BATTLE, start any fight, open SKILLS. The skill names and the pictures should be a little smaller and a long name like Kingdom of Ten-Thousand Blankets should fit in two lines. Report with the REPORT tab if anything still looks too big (skilllist1 is the build to name).",
+   "next": "After the publish of build fix-skilllist1look-2: RELOAD on the title, ADMIN > BATTLE LAB > NEW BATTLE, start any fight, open SKILLS. Names should now be a middle size (15px, between the first version and the thin rows), pictures a little bigger, and the Back row at the bottom of the list should be as tall and as large in text as the Skill rows above it, in portrait and landscape. Report with the REPORT tab if it is still too big, too small, or Back still does not match (fix-skilllist1look-2 is the build to name).",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -5876,6 +5979,22 @@
     {
      "d": "2026-11-19",
      "t": "Added by skilllist1: your look at the smaller SKILLS list; blocks nothing."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: something is wrong: still looks way too big, all the fonts and icons. kind of needs a redesign Sent to Claude as card c-fix-skilllist1look; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked: Fix what you found on: Look at the SKILLS list text and icons on your phone is done."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: something is wrong: lol now its too small! you went too far, isnt there a middle ground? and the back button doesnt match Sent to Claude as card c-fix-skilllist1look-2; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked: Fix what you found on: Look at the SKILLS list text and icons on your phone, Fix what you found on: Look at the SKILLS list text and icons on your phone is done."
     }
    ]
   },
@@ -5883,7 +6002,7 @@
    "id": "c-fix-cutpolish4b-2",
    "tag": "fix-cutpolish4b-2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Areas",
    "title": "Fix what you found on: Look at the chapter 1 pictures in the game",
@@ -5905,7 +6024,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGN82mV68qXVnCgA97",
+    "url": "https://claude.ai/code/session_01RXeukGN82mV68qXVnCgA97",
     "opening": "Something is wrong on t-cutpolish4b"
    },
    "history": [
@@ -5924,6 +6043,14 @@
     {
      "d": "2026-11-19",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as fix-cutpolish4b-2: the muffin pan now sits fully on the bare table, clear of the cake stand"
     }
    ],
    "prompt": {
@@ -5936,7 +6063,506 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-cutpolish4b-2 and t-cutpolish4b in data/board.json, history included. Your first push is the commit board: start c-fix-cutpolish4b-2.\n\nTom tested and found problems:\n1. Card t-cutpolish4b (Look at the chapter 1 pictures in the game, ask play). He was asked: Chapter select ) Chapter 1, jump to the theft scene in Deedee's kitchen. Look at the island: the table is bare except the tart and the cake stand, and the muffin pan sits on it clear of the other pastries. After the Mudling grabs the pan the pan is gone and the table stays as it was. The Mudling now carries the painted pan, not the little heap. Then the paper muffin liners at the entrance of Grump Hollow (they are bigger now). Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one). Claude fixes them and this card comes back to you to check. He wrote: muffins overlay the background art Screenshot: board-shots/t-cutpolish4b-mwoe2bqk.jpg on branch inbox (git fetch --depth=1 origin inbox, then git show origin/inbox:board-shots/t-cutpolish4b-mwoe2bqk.jpg into a file in /tmp, and look at it).\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T02:57:37.579Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-cutpolish4b to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-cutpolish4b, and give the build fix-cutpolish4b-2 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-cutpolish4b",
-   "auto": true
+   "auto": true,
+   "done": "2026-11-19"
+  },
+  {
+   "id": "c-fix-skilllist1look",
+   "tag": "fix-skilllist1look",
+   "lane": "claude",
+   "col": "done",
+   "fix": true,
+   "theme": "Battle System",
+   "title": "Fix what you found on: Look at the SKILLS list text and icons on your phone",
+   "next": "You reported a problem on Look at the SKILLS list text and icons on your phone. Claude starts the fix by itself. Latest: still looks way too big, all the fonts and icons. kind of needs a redesign",
+   "blocks": [
+    "t-skilllist1look"
+   ],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "reports": [
+    {
+     "at": "2026-11-20T03:00:48.054Z",
+     "card": "t-skilllist1look",
+     "title": "Look at the SKILLS list text and icons on your phone",
+     "ask": "play",
+     "words": "still looks way too big, all the fonts and icons. kind of needs a redesign",
+     "shot": "",
+     "asked": "After the publish of build skilllist1: RELOAD on the title, ADMIN ) BATTLE LAB ) NEW BATTLE, start any fight, open SKILLS. The skill names and the pictures should be a little smaller and a long name like Kingdom of Ten-Thousand Blankets should fit in two lines. Report with the REPORT tab if anything still looks too big (skilllist1 is the build to name)."
+    }
+   ],
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEpZhMxX5JzsA9YpoM",
+    "opening": "Something is wrong on t-skilllist1look"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Made by Something is wrong on t-skilllist1look."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom reported on t-skilllist1look: still looks way too big, all the fonts and icons. kind of needs a redesign"
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built fix-skilllist1look: SKILLS rows redesigned with fixed small sizes (name 12px, pictures 13px, Pep 13px); the phone-landscape 21px text rule no longer sets them. b3_test s9ui passes."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as fix-skilllist1look: SKILLS list redesigned as thin rows with small fixed text and pictures"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Look at the SKILLS list text and icons on your phone.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-skilllist1look and t-skilllist1look in data/board.json, history included. Your first push is the commit board: start c-fix-skilllist1look.\n\nTom tested and found problems:\n1. Card t-skilllist1look (Look at the SKILLS list text and icons on your phone, ask play). He was asked: After the publish of build skilllist1: RELOAD on the title, ADMIN ) BATTLE LAB ) NEW BATTLE, start any fight, open SKILLS. The skill names and the pictures should be a little smaller and a long name like Kingdom of Ten-Thousand Blankets should fit in two lines. Report with the REPORT tab if anything still looks too big (skilllist1 is the build to name). He wrote: still looks way too big, all the fonts and icons. kind of needs a redesign\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T03:00:48.054Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-skilllist1look to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-skilllist1look, and give the build fix-skilllist1look a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-skilllist1look",
+   "auto": true,
+   "done": "2026-11-19"
+  },
+  {
+   "id": "c-fix-cutpolish4b-3",
+   "tag": "fix-cutpolish4b-3",
+   "lane": "claude",
+   "col": "done",
+   "fix": true,
+   "theme": "Areas",
+   "title": "Fix what you found on: Look at the chapter 1 pictures in the game",
+   "next": "You reported a problem on Look at the chapter 1 pictures in the game. Claude starts the fix by itself. Latest: muffins overlap art",
+   "blocks": [
+    "t-cutpolish4b"
+   ],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "reports": [
+    {
+     "at": "2026-11-20T03:15:17.642Z",
+     "card": "t-cutpolish4b",
+     "title": "Look at the chapter 1 pictures in the game",
+     "ask": "play",
+     "words": "muffins overlap art",
+     "shot": "board-shots/t-cutpolish4b-mwoep1pq.jpg",
+     "asked": "Chapter select ) Chapter 1, jump to the theft scene in Deedee's kitchen. Look at the island: the muffin pan now sits on the bare table to the right of the cake stand and the tart, not over them. After the Mudling grabs the pan it is gone and the table stays as it was. Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one)."
+    }
+   ],
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGvcdtn5b951ZTb9pW",
+    "opening": "Something is wrong on t-cutpolish4b"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Made by Something is wrong on t-cutpolish4b."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom reported on t-cutpolish4b: muffins overlap art Screenshot: board-shots/t-cutpolish4b-mwoep1pq.jpg on branch inbox."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as fix-cutpolish4b-3: the muffin pan sits fully inside the table top, clear of the cake stand"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Look at the chapter 1 pictures in the game.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-cutpolish4b-3 and t-cutpolish4b in data/board.json, history included. Your first push is the commit board: start c-fix-cutpolish4b-3.\n\nTom tested and found problems:\n1. Card t-cutpolish4b (Look at the chapter 1 pictures in the game, ask play). He was asked: Chapter select ) Chapter 1, jump to the theft scene in Deedee's kitchen. Look at the island: the muffin pan now sits on the bare table to the right of the cake stand and the tart, not over them. After the Mudling grabs the pan it is gone and the table stays as it was. Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one). He wrote: muffins overlap art Screenshot: board-shots/t-cutpolish4b-mwoep1pq.jpg on branch inbox (git fetch --depth=1 origin inbox, then git show origin/inbox:board-shots/t-cutpolish4b-mwoep1pq.jpg into a file in /tmp, and look at it).\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T03:15:17.642Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-cutpolish4b to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-cutpolish4b, and give the build fix-cutpolish4b-3 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-cutpolish4b",
+   "auto": true,
+   "done": "2026-11-19"
+  },
+  {
+   "id": "c-music3",
+   "tag": "music3",
+   "title": "Newer ElevenLabs music model for the Music Library (Square track)",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "next": "Built: every Music Library card has a Model dropdown (v2.5 default, v2, v1). Your Square test on v2.5 is the next step (card t-music3town).",
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDHfZ7opAxzYTUs3JC",
+    "opening": "\"Read claude/next-addendum-squaremusic.md in the Project and follow its\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Tom: Square music (track town) was too busy; two rewrites on music_v1 missed (stop-loss). Card made by the session that follows the addendum."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Checked the ElevenLabs docs: music_v2 and music_v2_5 exist, music_v1 is removed 2027-01-31. Shipped as music3; Square prompt rewritten for v2.5 in tracks.json."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as music3: Music Library can make takes on the newer ElevenLabs models; a new Square prompt to try on v2.5"
+    }
+   ],
+   "prompt": {
+    "what": "Adds a model choice per take to the Music Library, then writes one prompt for the Square (track id town) to try on the newer model.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small tool change, tests catch mistakes)",
+    "effort": "medium (the steps are written in the addendum)",
+    "text": "Read claude/next-addendum-squaremusic.md in the Project and follow its \"What the next session should do differently\" list. Check the current ElevenLabs Music API docs for model ids. If one newer than music_v1 exists, add a model choice per take to the Music Library (music.html), keep music_v1 selectable, update the test stub, run the tests and push. Then give me one prompt for the Square (track id town) to try on the newer model. You have my full permission to access the repo."
+   },
+   "after": "t-music3town",
+   "done": "2026-11-19"
+  },
+  {
+   "id": "t-music3town",
+   "title": "Make the Square music on the newer model and listen",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "After the publish of build music3 (about 4 minutes after this push): Title > ADMIN > MUSIC LIBRARY, search Square, open The Square card. If a Reset prompt button shows, tap it (the prompt then starts Warm small-town folk tune at 96 BPM). The Model box should say v2.5 (newest). Tap New take twice (about 700 to 850 credits, v2.5 price not measured), then tap Play and Loop test. Come back here: All good, or Something is wrong and write what you hear (one per line).",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by music3."
+    }
+   ]
+  },
+  {
+   "id": "c-fix-skilllist1look-2",
+   "tag": "fix-skilllist1look-2",
+   "lane": "claude",
+   "col": "done",
+   "fix": true,
+   "theme": "Battle System",
+   "title": "Fix what you found on: Look at the SKILLS list text and icons on your phone",
+   "next": "You reported a problem on Look at the SKILLS list text and icons on your phone. Claude starts the fix by itself. Latest: lol now its too small! you went too far, isnt there a middle ground? and the back button doesnt match",
+   "blocks": [
+    "t-skilllist1look"
+   ],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "reports": [
+    {
+     "at": "2026-11-20T03:23:13.129Z",
+     "card": "t-skilllist1look",
+     "title": "Look at the SKILLS list text and icons on your phone",
+     "ask": "play",
+     "words": "lol now its too small! you went too far, isnt there a middle ground? and the back button doesnt match",
+     "shot": "",
+     "asked": "After the publish of build fix-skilllist1look: RELOAD on the title, ADMIN ) BATTLE LAB ) NEW BATTLE, start any fight, open SKILLS. Rows should now be thin, with small names and small pictures, in portrait and landscape. Report with the REPORT tab if anything still looks too big (fix-skilllist1look is the build to name)."
+    }
+   ],
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukE1YEHdcXNecL1wDgq",
+    "opening": "Something is wrong on t-skilllist1look"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Made by Something is wrong on t-skilllist1look."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom reported on t-skilllist1look: lol now its too small! you went too far, isnt there a middle ground? and the back button doesnt match"
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped fix-skilllist1look-2: middle sizes (name 15px, pictures 16px) and Back row matched to the Skill rows."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as fix-skilllist1look-2: SKILLS list rows and Back button at a middle size"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Look at the SKILLS list text and icons on your phone.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-skilllist1look-2 and t-skilllist1look in data/board.json, history included. Your first push is the commit board: start c-fix-skilllist1look-2.\n\nTom tested and found problems:\n1. Card t-skilllist1look (Look at the SKILLS list text and icons on your phone, ask play). He was asked: After the publish of build fix-skilllist1look: RELOAD on the title, ADMIN ) BATTLE LAB ) NEW BATTLE, start any fight, open SKILLS. Rows should now be thin, with small names and small pictures, in portrait and landscape. Report with the REPORT tab if anything still looks too big (fix-skilllist1look is the build to name). He wrote: lol now its too small! you went too far, isnt there a middle ground? and the back button doesnt match\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T03:23:13.129Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-skilllist1look to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-skilllist1look, and give the build fix-skilllist1look-2 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-skilllist1look",
+   "auto": true,
+   "done": "2026-11-19"
+  },
+  {
+   "id": "c-ch1retext1",
+   "title": "Chapter 1 subtitles match your rerecorded voice clips",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "ch1retext1",
+   "next": "Shipped as ch1retext1: 11 subtitles reworded to the spoken words, 3 new Deedee takes merged. One line (Tom, \"Thank you for telling me, Rose\") needs a re-take.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGPg3Q41zGrRaPsq4n",
+    "opening": "\"for chapter 1, ive changed the dialogue in the voicelcips and rerecorded, but the old dialogue still apepars in the game. check for discrepancies and update\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Tom: \"for chapter 1, ive changed the dialogue in the voicelcips and rerecorded, but the old dialogue still apepars in the game. check for discrepancies and update\". New card; started in this conversation."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Sent local-clips-pending_5_.json (3 Deedee takes): merged. 11 subtitles now match the clips. Handed to Tom card t-ch1starving."
+    }
+   ],
+   "after": "t-ch1starving",
+   "prompt": {
+    "what": "Rewords chapter 1 subtitles to the words Tom's kept voice takes say, and merges his newest takes.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: steps written in tools/voice-library/retext-lines.py and docs/CHANGES.md calib3)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/CHANGES.md section calib3, then check every chapter 1 dialogue clip against its subtitle and reword the subtitles to what the kept takes say. You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "t-skillinfo1play",
+   "title": "Try the i icon and the tap-to-use on the Skills list",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "After the publish of build skillinfo1: RELOAD on the title, then ADMIN > BATTLE LAB > NEW BATTLE > any fight, tap SKILLS. Check: the round i at the left of each Skill name opens the card with BACK and USE; a tap anywhere else on a row uses the Skill, or asks who to aim at when it needs a target. Report with the REPORT tab if a tap goes the wrong way (skillinfo1 is the build to name).",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "\"we need an information \"i\" icon to the left of each ability name\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by skillinfo1: your phone check of the i icon and tap-to-use; blocks nothing."
+    }
+   ]
+  },
+  {
+   "id": "c-heistplan",
+   "title": "Plan the redo of the muffin theft scene in Deedee's kitchen (board-heist)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "tag": "board-heist",
+   "next": "Done: found the cause of all four problems and wrote the redo plan (claude/heist-redo-plan.md in the repo). Nothing in the game changed. Next: card Fix the muffin pan that never leaves the counter, and add the new Mudling sheet to the Art Library (heistart).",
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGDLBuSCmXaKfjjVof",
+    "opening": "\"im struggling with this scene - the monster animation looks out of place\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Tom (19:28, with a screen recording): \"im struggling with this scene - the monster animation looks out of place (differnet art style), he is holding a crisp instead of the muffins, the muffins are displayed on the counter after he takes them, and the dialogue of them falling is strange and doesnt feel natural (eg, why are they talking so much on the floor). we need a complete redo of this scene so that it hilarious!\""
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Found: (1) the kitchen uses an old glossy cartoon Mudling sheet, not the matte Mudling of the fights; (2) the crisp is painted into that old sheet; (3) the pan stays because the scene step that hides it never runs (a code bug: the step is read as hide an actor), which is why three fixes that moved the pan changed nothing; (4) the floor lines play after the thief has left, with everyone lying down, and Boppy and Deedee are staged against the joke. Plan: keep the opening and closing lines, redo the theft as action with 3 new lines, 1 changed, 1 cut."
+    }
+   ],
+   "after": "nothing for Tom: c-heistart",
+   "done": "2026-11-19"
+  },
+  {
+   "id": "c-heistart",
+   "title": "Fix the muffin pan that never leaves the counter, and add the new Mudling sheet to the Art Library (heistart)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "tag": "heistart",
+   "auto": true,
+   "next": "Tap START. It fixes the bug that keeps the muffin pan on the counter after the theft (and the empty pan in Grump Hollow), and adds one new picture to the Art Library: the Mudling of the fights in six poses, carrying the muffin pan. Your card Generate and approve the new Mudling sheet comes next.",
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": ""
+   },
+   "after": "t-heistart",
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-heist, part A of claude/heist-redo-plan.md."
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the scene step that should hide the muffin pan and never ran, and adds the Art Library entry ch1-mudling-heist2 (the new Mudling sheet for the kitchen theft).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the cause, the fix and the entry's prompt are written in claude/heist-redo-plan.md, a test and frames catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md and claude/heist-redo-plan.md, then build part A (section 6) and push it as heistart. Your first push is the commit board: start c-heistart. Change nothing else in the scene. Keep card t-heistart as the after of c-heistart and rewrite its next if the entry's place in the Art Library differs. You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "t-heistart",
+   "title": "Generate and approve the new Mudling sheet (six poses with the muffin pan)",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "wait",
+   "waiting_on": "claude",
+   "ask": "pictures",
+   "next": "After card c-heistart ships: ADMIN > ART LIBRARY, Enemies tab, group Chapter 1, entry ch1-mudling-heist2. Press GENERATE. You should see six Mudlings on magenta that look like the Mudling of the fights (matte, brushed): a ball, looking up, reaching up, then three holding the muffin pan over its head. APPROVE, or REJECT with a note. Approving starts card Rebuild the muffin theft scene (heist1) for you to paste.",
+   "blocks": [
+    "c-heist1"
+   ],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "done_when": {
+    "art_approved": [
+     "ch1-mudling-heist2"
+    ]
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-heist. Waits on c-heistart, which adds the entry."
+    }
+   ]
+  },
+  {
+   "id": "c-heist1",
+   "title": "Rebuild the muffin theft scene in Deedee's kitchen (heist1)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "tag": "heist1",
+   "next": "Waits on your approval of the new Mudling sheet (card t-heistart). Then it rebuilds the theft: the Mudling of the fights rolls in, bowls the three of you over, faces Deedee, lifts the pan over its head and sneaks out behind Boppy, who never turns around. 3 new lines, 1 changed, 1 cut. Script and staging: claude/heist-redo-plan.md.",
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": ""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-heist, part B of claude/heist-redo-plan.md. Tom (19:28): \"we need a complete redo of this scene so that it hilarious!\""
+    }
+   ],
+   "prompt": {
+    "what": "Rebuilds the middle of the kitchen theft scene with the approved Mudling sheet, the new staging and the script in the plan. Ends with a card for you to watch the scene.",
+    "before": [
+     "Approve the picture on card Generate and approve the new Mudling sheet (ADMIN > ART LIBRARY, Enemies tab, group Chapter 1, entry ch1-mudling-heist2).",
+     "If you want any of the three new lines changed, write it in the note on that card before you approve."
+    ],
+    "model": "Claude Opus 5.5 (row D: you judge this scene by taste, and a miss costs you another review)",
+    "effort": "medium (one scene; the script, the beats and the steps are written in the plan)",
+    "text": "Read CLAUDE.md and claude/heist-redo-plan.md, then cards c-heist1 and t-heistart in data/board.json, history and note included. Build part B (section 7) and push it as heist1. Your first push is the commit board: start c-heist1. Lines go in word for word from section 3, changed only where my note on t-heistart says so. Look at every beat in portrait and landscape before pushing. You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "t-reportcheck",
+   "title": "Look at the six fixed report pictures on your phone",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "wait",
+   "ask": "play",
+   "fyi": true,
+   "next": "After the publish of build reports-2026-11-19c: RELOAD on the title, then load a chapter 1 save. 1) Grump Hollow, the fishing spot at the pond: the grey grass, orange block and burnt bulb should be ONE picture, not three overlapping ones. 2) Deedee's house, press A on Deedee for her glasses chat: she should stand with the glasses on her head and the dialogue face should show them too. 3) Play on into chapter 2 and walk Old Oak Park while the smog is on: Mr. Washington, Marisol and Larry should stand dazed. Report with the REPORT tab if any of these look wrong (reports-2026-11-19c is the build to name).",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "\"Seven art reports are open (7v5z, mxvd, 1a2w, c5no, nre4, g4gl, jykk).\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by reports-2026-11-19c: your phone check of the six installed report pictures; blocks nothing."
+    }
+   ],
+   "waiting_on": "claude"
+  },
+  {
+   "id": "t-ch1starving",
+   "title": "Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\"",
+   "theme": "Voice Clips",
+   "lane": "tom",
+   "col": "up",
+   "ask": "voice",
+   "fyi": true,
+   "next": "ADMIN > VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. The script you kept ends \"I'm starving!\" but the clip stops after \"number two can't wait.\" Record it again so it says the last sentence, keep it, and Export pending clips. If you would rather drop \"I'm starving!\", delete it from the script and keep the take as it is.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGPg3Q41zGrRaPsq4n",
+    "opening": "\"for chapter 1, ive changed the dialogue in the voicelcips and rerecorded, but the old dialogue still apepars in the game. check for discrepancies and update\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Made by ch1retext1: the only chapter 1 line whose kept script has words the clip does not say."
+    }
+   ]
   },
   {
    "id": "t-clipposes",
@@ -5945,7 +6571,7 @@
    "lane": "tom",
    "col": "up",
    "ask": "animations",
-   "next": "ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE > PAINTED STATES: CHAPTER 1. Watch once, about 1 minute: Tom, Grace, Rose and Deedee in turn each show idle, guard, braced hit, hit, dodge, knocked out, get up, victory and a run, with the state's name on screen. Then press Something is wrong on this card and write what looks wrong by fighter and state (head too big or small, wrong speed or distance), or All good. It blocks the card Apply notes on the painted poses (clipposesfix).",
+   "next": "ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE > PAINTED STATES: CHAPTER 1. Watch once, about 1 minute: Tom, Grace, Rose and Deedee in turn each show idle, guard, braced hit, hit, dodge, knocked out, get up, victory and a run, with the state's name on screen. Then press Something is wrong on this card and write what looks wrong by fighter and state (head too big or small, wrong speed or distance), or All good. It blocks the card Apply your notes on the painted poses (clipposesfix).",
    "blocks": [
     "c-clipposesfix"
    ],
@@ -5989,6 +6615,64 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukE1YEHdcXNecL1wDgq",
+   "title": "Fix what you found on: Look at the SKILLS list text and icons on your phone",
+   "first": "2026-11-20T03:24:10Z",
+   "last": "2026-11-20T03:30:13Z",
+   "tags": [
+    "fix-skilllist1look-2"
+   ],
+   "cards": [
+    "c-fix-skilllist1look-2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGvcdtn5b951ZTb9pW",
+   "title": "Fix what you found on: Look at the chapter 1 pictures in the game",
+   "first": "2026-11-20T03:16:26Z",
+   "last": "2026-11-20T03:19:34Z",
+   "tags": [
+    "fix-cutpolish4b-3"
+   ],
+   "cards": [
+    "c-fix-cutpolish4b-3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEpZhMxX5JzsA9YpoM",
+   "title": "Fix what you found on: Look at the SKILLS list text and icons on your phone",
+   "first": "2026-11-20T03:02:25Z",
+   "last": "2026-11-20T03:06:59Z",
+   "tags": [
+    "fix-skilllist1look"
+   ],
+   "cards": [
+    "c-fix-skilllist1look"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGN82mV68qXVnCgA97",
+   "title": "Fix what you found on: Look at the chapter 1 pictures in the game",
+   "first": "2026-11-20T02:59:02Z",
+   "last": "2026-11-20T03:04:33Z",
+   "tags": [
+    "fix-cutpolish4b-2"
+   ],
+   "cards": [
+    "c-fix-cutpolish4b-2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFGdMPdkaDVu3sGCnn",
+   "title": "Build the painted battle poses for chapter 1 (clipposes)",
+   "first": "2026-11-20T02:58:16Z",
+   "last": "2026-11-20T02:58:16Z",
+   "tags": [],
+   "cards": [
+    "c-clipposes"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGwuHP7eMa98YuUjg7",
    "title": "Fix what you found on: Look at the chapter 1 pictures in the game",
@@ -6095,6 +6779,88 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFDnD4JZi9AK4diAco",
+   "title": "New battle system, stage 9b: TNB's kit (Ceramicist and Longboarder)",
+   "first": "2026-11-19T18:23:30-08:00",
+   "last": "2026-11-19T19:44:24-08:00",
+   "tags": [
+    "b3s9b"
+   ],
+   "cards": [
+    "c-b3s9b"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGDLBuSCmXaKfjjVof",
+   "title": "Plan the redo of the muffin theft scene in Deedee's kitchen (board-heist)",
+   "first": "2026-11-19T19:34:17-08:00",
+   "last": "2026-11-19T19:37:22-08:00",
+   "tags": [
+    "board-heist"
+   ],
+   "cards": [
+    "c-heistplan"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFjXctvj2WWfPf3LUf",
+   "title": "Skills list: an i icon opens the skill card, tapping the row uses the skill (skillinfo1)",
+   "first": "2026-11-19T18:30:16-08:00",
+   "last": "2026-11-19T19:28:55-08:00",
+   "tags": [
+    "skillinfo1"
+   ],
+   "cards": [
+    "c-skillinfo1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGPg3Q41zGrRaPsq4n",
+   "title": "Chapter 1 subtitles match your rerecorded voice clips",
+   "first": "2026-11-19T19:25:51-08:00",
+   "last": "2026-11-19T19:25:51-08:00",
+   "tags": [],
+   "cards": [
+    "c-ch1retext1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDHfZ7opAxzYTUs3JC",
+   "title": "Newer ElevenLabs music model for the Music Library (Square track)",
+   "first": "2026-11-19T19:17:08-08:00",
+   "last": "2026-11-19T19:22:55-08:00",
+   "tags": [
+    "music3"
+   ],
+   "cards": [
+    "c-music3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDngKRyJBZ723rMGSb",
+   "title": "Install Grace's approved list picture in the game (chapter 1 opening scene)",
+   "first": "2026-11-19T19:05:07-08:00",
+   "last": "2026-11-19T19:12:11-08:00",
+   "tags": [
+    "ch1art3"
+   ],
+   "cards": [
+    "c-ch1art3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFjCmABxbJpuMFmDbh",
+   "title": "Fix what you found on: Make the seven chapter 1 pictures",
+   "first": "2026-11-19T18:47:21-08:00",
+   "last": "2026-11-19T19:00:38-08:00",
+   "tags": [
+    "fix-ch1art2"
+   ],
+   "cards": [
+    "c-fix-ch1art2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEEGSUH9LzPgNRP4w3",
    "title": "Fix the report backlog (7 open)",
    "first": "2026-11-19T18:55:42-08:00",
@@ -6128,16 +6894,6 @@
    ],
    "cards": [
     "c-clipreset"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFjCmABxbJpuMFmDbh",
-   "title": "Fix what you found on: Make the seven chapter 1 pictures",
-   "first": "2026-11-19T18:47:21-08:00",
-   "last": "2026-11-19T18:47:21-08:00",
-   "tags": [],
-   "cards": [
-    "c-fix-ch1art2"
    ]
   },
   {
@@ -6178,16 +6934,6 @@
    "cards": [
     "c-reports",
     "t-reportart"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFjXctvj2WWfPf3LUf",
-   "title": "Skills list: an i icon opens the skill card, tapping the row uses the skill (skillinfo1)",
-   "first": "2026-11-19T18:30:16-08:00",
-   "last": "2026-11-19T18:30:16-08:00",
-   "tags": [],
-   "cards": [
-    "c-skillinfo1"
    ]
   },
   {
@@ -6405,16 +7151,6 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukFDnD4JZi9AK4diAco",
-   "title": "New battle system, stage 9b: TNB's kit (Ceramicist and Longboarder)",
-   "first": "2026-11-19T18:23:30-08:00",
-   "last": "2026-11-19T18:23:30-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s9b"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukGt8KJKK4iu2gwLNP2",
    "title": "New battle system, stage 9a: the skill card (your testing notes)",
    "first": "2026-11-19T17:00:46-08:00",
@@ -6549,11 +7285,13 @@
    "takes/20261119T163929-ott/part-001.json",
    "takes/20261119T163929-ott/state.json",
    "takes/20261119T230940-0ap/part-001.json",
-   "takes/20261119T230940-0ap/state.json"
+   "takes/20261119T230940-0ap/state.json",
+   "takes/20261120T032059-yoq/part-001.json",
+   "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "9d440d8a7a0662ec7bb3137c411ebd3f83186804",
- "synced_at": "2026-11-20T02:57:58+00:00",
+ "synced": "2ddc1aabf80468c3cad4824eafe04340ae03b1a6",
+ "synced_at": "2026-11-20T03:45:13+00:00",
  "routines": [
   {
    "id": "sonnet-medium",

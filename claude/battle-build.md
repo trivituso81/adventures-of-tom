@@ -46,7 +46,21 @@ Rules for every stage's session:
 | 6 | Family Ruckus: gauge gains (Mix +5, Detonation +8, extra hit +1, Break +15), the RUCKUS button as the gauge, Double Team (50), Full Family Ruckus (100), the pair played as one action with two moves, the gauge kept between Lab fights, a simple-player rule | Pushed 2026-11-19 | `b3s6`, main 75e657c | Any Lab fight: RUCKUS fills in gold as the family hits, lights at 50, and opens a list with DOUBLE TEAM and FULL FAMILY RUCKUS naming the partner. Both play as two moves back to back. |
 | 7 | Preview and Rose Mode: `engine/b3-preview.js` (a move played on a copy of the fight: exact numbers, never a crit or a miss), tap to preview (first touch arms a row, second confirms; mouse hover previews, keys move the cursor), the info list on gamepad Y, the recommended move (`b3Recommend`: a glowing button with a star, the cursor starts on it, a short reason), `engine/b3-pictures.js` (picture menus for the cross, SKILLS, RUCKUS, targets, info and the preview box; the Vibes screen as pictures), Rose Mode's automatic loadouts (`b3RoseLoadout`) | Pushed 2026-11-19 | `b3s7`, main aefd6b6 | Nothing is asked. If he plays anyway: switch to Rose Mode in settings, then any Lab fight shows picture menus and one starred move; a first tap on a Skill row previews it, a second tap uses it. |
 | 8 | Clips in Battle 3: `data/b3-clips.js` (body-state clips per owner), `engine/b3-clips.js` (load on demand, release, frames), clip moves (`anim:{kind:'clip',clip}` on a move row or foe act, hit on the clip's impact frame), The Big One's glare, tail slap, chomp, belly flop and polish as clips, wind-up held picture (`wind`), hit, dodge, KO, guard, flustered and victory clips, fallback to the default animation. Milestone A follows. | Pushed 2026-11-19 | `b3s8`, main 0fe7510 | MILESTONE A: see Tom's steps in the closing reply of the b3s8 session (about 30 minutes: NEW BATTLE > NEW 6: THE BIG ONE and NEW 1, then a Rose Mode fight; judge fun, turn bar, pace, family feel). |
-| 9 to 23 | See architecture section 5 | Not started | | |
+| 9a | Tom's notes on the SKILLS list: a tap on a Skill opens its card (hides the other Skills, shows everything about it, BACK and USE); flavor pictures and a big Pep pill in the list | Pushed 2026-11-19 | `b3s9a`, main 95cb1d9 | Nothing is asked. |
+| 9b | TNB complete: Ceramicist and Longboarder (2 Traits, 2 Basics, 4 Skills, 2 Capstones, 4 Quirks). New seams: clay shields and Fired Glaze, the Grand Amphora vessel, `allyMods`, the `basic` and `shielded` conditions, a Skill's own `rec`, `tgtAlly`, the `razzleDet` and `blockDebuff` flags, `slowestAlly`, the `vitrify`, `double` and `rebalance` ops. Lab fight NEW 7 (TNB in Deedee's place). | Pushed 2026-11-19 | `b3s9b` | Nothing is asked. If he plays anyway: NEW BATTLE > NEW 7: TNB JOINS; VIBES AND RANKS to make Longboarder TNB's Main. |
+| 9c | Nara (Attached Pup, Guard Dog) and Boppy (The Dep, Pepper Boss) Sig Vibes (28 lines), the late joiners' Vibe Point pool, TNB moved onto that pool, Lab fights with the chapter 2 and 3 parties | Not started (card c-b3s9c) | `b3s9c` | |
+| 10 to 23 | See architecture section 5 | Not started | | |
+
+## Stage 9b results (facts)
+
+| Check | Result |
+|---|---|
+| `node tools/b3-sim.js check` | CHECKS: 1123, FAILS: []. 115 more than stage 8, in `tools/b3-check-s9b.js`: both Vibes complete, each of the 14 lines by its numbers (clay shield size, Clobber soak 1.2x, Sizzle fires it, 30% reflect, Kiln Firing glazes with the Trait off too, Coaster Policy 15%, Kintsugi once per action and the Razzle Detonation, the vase soaks two whole acts then bursts, bursts after 4 rounds, goes with a knocked-out maker, a family strip leaves it, Carving Momentum, Fresh Ride blocks one debuff, Waymo revive or HP share, TAP-Card extra turn and the 15-tick pull once a round, Baxter Hill doubling, No Car No Tickets), previews on the new moves, the simple player's score for the vase, six whole fights. `tools/b3-check-s5.js` now expects the five one-off switches. |
+| Simulator | `new7` (TNB in Deedee's place), 200 fights each with Ceramicist as Main and with `--swap=tnb`: 200 won, 0 errors, 2.4 to 2.7 rounds. With `--rec`: 100 of 100 won, 0 errors, Center the Bowl, Kiln Firing, Waymo and E-Bike all used. The simple player never casts the two Capstones at chapter 1 length (fights end first); they are covered by the rule tests. |
+| `python3 tools/b3_test.py s9b s9ui` | FAILS: [] on the build rebased onto the SKILLS-list redesign (portrait then landscape): TNB stands third, his list names Trait and Quirks, Center the Bowl, Kiln Firing, the Amphora (soaks a monster's act whole in the log), E-Bike, Waymo (shares HP) and Baxter Hill all play through the real menus. Frames looked at: `tools/shots/b3-s9b.png`, `b3-s9b-land.png`, `b3-s9b-bowl-portrait.png`, `b3-s9b-amphora-portrait.png`. A first run found the vase's beats were in a group the screen never shows (an act with no hits); moved to `post`. |
+| `unused_voice.py` | Check 4 still lists the same 93 dialogue clips as clean `origin/main`. No line or clip added. |
+| Found on the way | `docs/CHANGES.md` had been truncated by skipchain1 and was already restored on main (4f4b8eb). |
+| Tom's phone | Not played, not asked for. |
 
 ## Stage 8 results (facts)
 
@@ -95,6 +109,16 @@ All are numbers or rows in data, or one line of rules, so each changes without a
 
 | Stage | Call | The other option |
 |---|---|---|
+| 9b | Center the Bowl can be aimed at TNB himself. | Allies other than TNB only. |
+| 9b | Kiln Firing and the Waymo flash are standard, Baxter Hill's wave is heavy, at the all-monsters share (the spec prints no tier for the first two). | Light or heavy for the first two. |
+| 9b | Kiln Glow, Fresh Ride and the e-bike last the common 2 turns. | 1 or 3 turns. |
+| 9b | The Grand Amphora counts a monster's whole act as one hit however many it strikes or aims at, bursts when the last hit is soaked or the 4th round ends, and goes away without bursting if TNB is knocked out. | Each strike soaked one by one; it bursts when TNB falls. |
+| 9b | Coaster Policy is +15% on every hit of any flavor for any family member holding any shield, counted as its own damage bonus kind. | Only TNB's hits; added to other bonuses. |
+| 9b | Kintsugi Gold Seam heals once per action per member and lets a hit of a flavor with no Detonation of its own on that Prime (Racket or Drench on a Drenched monster) set off Short Circuit!. | Heals every hit; only Razzle hits set it off. |
+| 9b | Longboard Push & Carve prints its Base Recovery as 72 (the spec's "-10%"); Carving Momentum takes another 10% off a Basic. | Recovery 80 and one 10% cut. |
+| 9b | TAP-Card Transfer: the slowest ally is the lowest Speed stat, pulled 15 ticks up once a round at the start of TNB's turn; the extra turn applies to every buff TNB puts on, his own included. | Slowest by the turn bar; his own buffs excluded. |
+| 9b | Baxter Hill doubles the E-Bike (a second doubling changes nothing) and sets it to at least 2 turns. | Doubles again each time. |
+| 9b | "Scanning stats" on the Longboarder Basic is a picture only until Olivia's Scan (stage 10). | A rule now. |
 | 8 | A move plays from its clip when the clip is loaded; it waits up to 2.5 s (`B3C.waitMax`) for the clip and then plays the default animation. | Never wait (default at once); or wait longer. |
 | 8 | The hit shows on the clip's own impact frame (a state clip with no impact lands at half its length, `at` changes it). Several hits are 0.35 s apart. | Hits spread evenly across the clip. |
 | 8 | Clips are not slowed by `B3_TEMPO` (a clip is already a fixed length video). | Stretch clips by the same tempo. |
@@ -221,19 +245,19 @@ All are numbers or rows in data, or one line of rules, so each changes without a
 | Tom's Cake and TNB's Kintsugi enchantments (Twin-Lamb Relay waits on them) | The stages that build those characters |
 | Done 2026-11-18: the 210 kit lines sorted (`claude/battle-kit-ops.md`): 152 plain data, 33 data after one of 11 small general additions, 25 need their own function (12 of those in stage 9, 6 of them TNB's) | |
 
-## Next conversation (stage 9)
+## Next conversation (stage 9c)
 
-Follows `claude/handoff-rules.md` (re-read right before writing the next version). Stage 9 is read from the architecture's section 5 row 9 (the stage 8 session did not open it): the session reads that row first, then `claude/battle-kit-ops.md` (12 of the 25 function-needing lines are in stage 9, 6 of them TNB's), `docs/BATTLE3.md` and `docs/handoff/b3s8.md`. Tom's milestone A test comes first: if he sends notes from it, they are handled before stage 9 (the opening prompt below still works; notes go after it).
+Follows `claude/handoff-rules.md` (re-read right before writing the next version). Facts for 9b are in `claude/next-addendum-b3s9b.md`; where it and this file differ, it wins until 9c folds it in.
 
 | # | Item | |
 |---|---|---|
-| 1 | What it will do | Builds stage 9 as the architecture's section 5 row 9 says (the first late joiners and the next characters' kits). |
-| 2 | Before you paste | Milestone A is Tom's own check (steps in the closing reply of the b3s8 session). Paste this after it, with his notes, or without notes if he has none. |
-| 3 | Model | Claude Opus 5.5 (12 of the lines need their own function; row D of the handoff rules); Claude Sonnet 5.5 if the session splits it into smaller pieces like 5a to 5c. |
-| 4 | Effort level | Medium. |
-| 5 | Prompt | `Read claude/battle-build.md and build stage 9 of the new battle system. You have my full permission to access the repo.` |
+| 1 | What it will do | Builds stage 9c: Nara (Attached Pup, Guard Dog) and Boppy (The Dep, Pepper Boss) Sig Vibes (28 lines, 6 need a function), the late joiners' Vibe Point pool (TNB moves onto it too), Lab fights with the chapter 2 and 3 parties. Its `## b3s9c` heading ends stage 9. |
+| 2 | Before you paste | Nothing to do first. Milestone B is after stage 15. |
+| 3 | Model | Claude Sonnet 5.5 (row C: custom functions are designed in the session). |
+| 4 | Effort level | High (6 of the 28 lines need a new function worked out from the spec). |
+| 5 | Prompt | `Read claude/battle-build.md and claude/next-addendum-b3s9b.md, then build stage 9c (Nara and Boppy) of the new battle system. You have my full permission to access the repo.` |
 
-If a session fails stage 9 (the stop-loss rule: the same thing twice), the handoff rules' step 4 applies: raise the effort one step first when it looks like too little thought; the model up one step to Claude Opus 5.5 when it is about quality.
+If a session fails stage 9c the same way twice (stop-loss), handoff rules step 4: effort up one step first, then Claude Opus 5.5.
 
 Facts the next session needs (more in `docs/handoff/b3s8.md`):
 

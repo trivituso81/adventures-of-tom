@@ -258,6 +258,8 @@ function check() {
   require('./b3-check-s6.js')({G,ok,near,play,noCrit});
   // Stage 7's groups (135 on): the preview on a copy of the fight, and the recommended move.
   require('./b3-check-s7.js')({G,ok,near,play,noCrit});
+  // Stage 9b's groups: TNB complete (Ceramicist and Longboarder).
+  require('./b3-check-s9b.js')({G,ok,near,play,noCrit});
   console.log('CHECKS:',checks);
   console.log('FAILS:',JSON.stringify(fails,null,1));
   process.exit(fails.length?1:0);

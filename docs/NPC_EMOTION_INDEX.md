@@ -150,7 +150,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
-| 1-10 | map bakery, base | Happy | Welcome! Our bread is emotionally available. |
+| 1-10 | map bakery, base | Happy | Welcome! Welcome! Our bread is emotionally available. |
 | 1-10 | map bakery, base | Unimpressed | The baguettes? A little crusty. |
 | 1-10 | map bakery, base | Proud | Today's special is yesterday's tomorrow toast. |
 
@@ -259,7 +259,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 1-10 | cab west | Unimpressed | The girls head home. Straight home. Do not follow the cab. |
 | 1-10 | cab west | Unimpressed | Airport. You've got the look of a man who packed light. |
 | 1-10 | cab west | Happy | Girls, back to the house. Your grandmother has pie. That's not a rumor. |
-| 1-10 | cab west alone | Happy | Los Angeles? You got it. Buckle up. |
+| 1-10 | cab west alone | Happy | Los Angeles? Los Angeles? You got it. Buckle up. |
 | 1-10 | cab west alone | Happy | Los Angeles again. Cab seven is ready. |
 | 1-10 | cab west alone | Happy | LAX. Sit back. The radio is on something calm. |
 | 1-10 | cab west alone | Unimpressed | Off we go. Don't touch the visor. Everybody touches the visor. |
@@ -355,7 +355,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 1-10 | recruit yes | Loving | Wonderful! Everybody hold hands. Tom, you too. To the moon and back, here we come. |
 | 1-10 | recruit no | Happy | All right, all right. The pies need me anyway. Come back for a cookie. |
 | 1-10 | recruit swap | Loving | Oh, honey. Somebody has to stay and mind the house. Who's it going to be? |
-| 1-10 | recruit chatter | Loving | Are you warm enough? Nobody is warm enough. |
+| 1-10 | recruit chatter | Loving | Are you warm enough? Nobody. Nobody is warm enough. |
 | 1-10 | recruit chatter | Loving | Grace, Rose, to the moon and back. Say it. LOUDER. |
 | 1-10 | recruit chatter | Happy | I packed cookies. They're in my purse. The purse is at home. We go back. |
 | 1-10 | recruit chatter | Proud | Pick up those feet. A brisk walk never hurt anybody. |

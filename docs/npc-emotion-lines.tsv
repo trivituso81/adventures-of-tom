@@ -51,7 +51,7 @@ chapters	file	line	character	where	mood	text
 5-10	data/maps-le.js	548	Mr. Halverson	map school, when {from:5,flag:ch5-done}	happy	Conference night is over. I survived. I'm going to sit on this couch until Field Day.
 5	data/maps-le.js	549	Mr. Halverson	map school, when {chapter:5,notFlag:ch5-done,flag:ch5-snack}	happy	Deedee’s plate? Oh, everybody waits for Deedee’s plate. She brings one every conference night.
 5	data/maps-le.js	549	Mr. Halverson	map school, when {chapter:5,notFlag:ch5-done,flag:ch5-snack}	unimpressed	Don't tell Gary. Gary eats the whole thing.
-1-10	data/maps-le.js	1128	Bun	map bakery, base	happy	Welcome! Our bread is emotionally available.
+1-10	data/maps-le.js	1128	Bun	map bakery, base	happy	Welcome! Welcome! Our bread is emotionally available.
 1-10	data/maps-le.js	1129	Bun	map bakery, base	unimpressed	The baguettes? A little crusty.
 1-10	data/maps-le.js	1130	Bun	map bakery, base	proud	Today's special is yesterday's tomorrow toast.
 1-10	data/maps-le.js	1163	Page	map library, base	unimpressed	Please whisper. The dictionaries are sleeping.
@@ -480,7 +480,7 @@ chapters	file	line	character	where	mood	text
 1-10	engine/followers.js	72	Deedee	recruit yes	loving	Wonderful! Everybody hold hands. Tom, you too. To the moon and back, here we come.
 1-10	engine/followers.js	72	Deedee	recruit no	happy	All right, all right. The pies need me anyway. Come back for a cookie.
 1-10	engine/followers.js	73	Deedee	recruit swap	loving	Oh, honey. Somebody has to stay and mind the house. Who's it going to be?
-1-10	engine/followers.js	75	Deedee	recruit chatter	loving	Are you warm enough? Nobody is warm enough.
+1-10	engine/followers.js	75	Deedee	recruit chatter	loving	Are you warm enough? Nobody. Nobody is warm enough.
 1-10	engine/followers.js	75	Deedee	recruit chatter	loving	Grace, Rose, to the moon and back. Say it. LOUDER.
 1-10	engine/followers.js	75	Deedee	recruit chatter	happy	I packed cookies. They're in my purse. The purse is at home. We go back.
 1-10	engine/followers.js	75	Deedee	recruit chatter	proud	Pick up those feet. A brisk walk never hurt anybody.
@@ -592,7 +592,7 @@ chapters	file	line	character	where	mood	text
 1-10	engine/travel.js	185	Sal	cab west	unimpressed	The girls head home. Straight home. Do not follow the cab.
 1-10	engine/travel.js	189	Sal	cab west	unimpressed	Airport. You've got the look of a man who packed light.
 1-10	engine/travel.js	189	Sal	cab west	happy	Girls, back to the house. Your grandmother has pie. That's not a rumor.
-1-10	engine/travel.js	195	Sal	cab west alone	happy	Los Angeles? You got it. Buckle up.
+1-10	engine/travel.js	195	Sal	cab west alone	happy	Los Angeles? Los Angeles? You got it. Buckle up.
 1-10	engine/travel.js	195	Sal	cab west alone	happy	Los Angeles again. Cab seven is ready.
 1-10	engine/travel.js	195	Sal	cab west alone	happy	LAX. Sit back. The radio is on something calm.
 1-10	engine/travel.js	196	Sal	cab west alone	unimpressed	Off we go. Don't touch the visor. Everybody touches the visor.

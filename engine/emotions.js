@@ -23,7 +23,7 @@ function emoPreload(id) {
   for(const m of EMOTIONS_LIST) new Image().src='portraits/emo/'+id+'-'+m+'.webp?v='+EMO_V;
 }
 const TALKPOSE_V='tpface1';
-const EMOTIONS_LIST=["happy","loving","sad","angry","scared","surprised","proud","unimpressed"],EMO_V='posefaces2';
+const EMOTIONS_LIST=["happy","loving","sad","angry","scared","surprised","proud","unimpressed"],EMO_V='reports-2026-11-19c';
 function emoActorFor(id,name,npc) {
   const pm=typeof playerMember==='function'?playerMember():null;
   if(pm&&pm.id===id) return typeof roseRider==='function'&&roseRider()?null:player;   // Tom carrying Rose keeps the ride picture
@@ -118,7 +118,7 @@ function emoReact(speakerId,text) {
 // read better as plain talk; it wins over the mood. A line with no entry and no mood gets talkRule (the same rule as tools/talk-index.py).
 // A person with no baked talking sheet keeps exactly the old behaviour (mood pose, or the plain stance), so nothing changes until a sheet is installed.
 // The dialogue face on a talk line is cropped from that talking pose (portraits/talk/pose, tools/sprite-bake/bake_talkpose_faces.py); a person without one keeps the plain talk face.
-const TALK_LIST=['tell','point','ask','answer'];
+const TALK_LIST=['tell','point','ask','answer','think'];
 const TALK_ORDER=/^(look|over there|up there|down there|this way|that way|come on|let's|follow|stay|go |go,|grab|hurry|up,|up!|up\.|everybody|everyone|nobody|over here|back to one|hold |get |in there|out there|put |give |take |be |don't |do not |no touching|hands |phone down|quiet|keep |watch |use |bring |move|walk |sit|stand|cut\.|copy|halt|eat|wait here|then nobody|then we|here's the plan|rose\. |grace\. |girls\. )|\b(look[,:.!]|look at|over there|up there|down there|in there|this way|that way|over here|right there|on the left|on the right|follow me|stay close|stay behind|let's go|come on|no touching|behind me|with me\.|everybody to|hands to yourselves|nobody touches|nobody goes)\b/;
 function talkRule(text) {
   const s=String(text||'').trim().replace(/\u2019/g,"'"),low=s.toLowerCase(),words=(s.match(/[A-Za-z']+/g)||[]).length;
@@ -140,6 +140,15 @@ function emoApply() {
   const had=EMO.mood; emoHoldClear(); emoClear();
   EMO.spk=id?emoActorFor(id,dialog.name,dialog.npc):null;   // the person speaking this line: listeners in a mood pose turn toward them (facing1, poseFacingWant in engine/story.js)
   if(dialog.emo) emoReact(id,text);
+  const lp=id&&typeof LINE_POSES!=='undefined'&&LINE_POSES[String(dialog.name||'').trim()+'|'+text];   // c-reports: one line, one painted pose and its own face (data/line-poses.js)
+  if(lp&&typeof STORY_POSES!=='undefined'&&STORY_POSES[lp.id]&&STORY_POSES[lp.id][lp.f]) {
+    const box=$('dialog-portrait'),img=box&&box.querySelector('img');
+    if(img) { img.src='portraits/talk/pose/'+lp.id+'-'+lp.face+'.webp?v='+TALKPOSE_V; img.alt=''; box.hidden=false; $('dialog').classList.add('has-portrait'); fitDialogPortrait(); EMO.mood=lp.f; }
+    EMO.talk=lp.f; EMO.id=id;
+    const a=emoActorFor(id,dialog.name,dialog.npc);
+    if(a&&!a.scenePose) { if(typeof storyPosesLoad==='function') storyPosesLoad(lp.id); a.scenePose={f:lp.f,mid:lp.id,emo:true}; EMO.actor=a; }
+    return;
+  }
   const tk=id&&typeof EMOTION_FACES!=='undefined'&&EMOTION_FACES.includes(id)?talkFrameOf(id,talkTypeOf(String(dialog.name||'').trim(),text,mood)):null;
   if(tk) {   // a plain line (or a borderline mood line) of a person whose talking sheet is baked: talk pose, and the dialogue face cropped from that same pose
     // (Tom 2026-11-14, r-20261114-100449-r0ib: "Talking frames should also always update the portrait image in the dialog box", cropped like the mood faces)

@@ -11,7 +11,7 @@ fails=[]
 def ok(c,m):
     print(('PASS ' if c else 'FAIL ')+m)
     if not c: fails.append(m)
-LINE="You are slow. I've been on number four since the mailbox."
+LINE="You are slow. I've been on number four since the taxi place."
 async def main():
     async with async_playwright() as p:
         b=await p.chromium.launch(executable_path=os.environ.get('CHROMIUM') or None,args=['--headless=new','--autoplay-policy=no-user-gesture-required'])
@@ -46,7 +46,7 @@ async def main():
         ok(dl2.suggested_filename=='take-history.json' and j2['kind']=='take-history' and len(j2['trail'])==3,'Export take history: '+dl2.suggested_filename)
         ok(os.path.getsize(await dl2.path())<5000,'history file is small (words only)')
         # the line before, on the row
-        await page.fill('#q','four since the mailbox'); await page.wait_for_timeout(700)
+        await page.fill('#q','four since the taxi place'); await page.wait_for_timeout(700)
         row=await page.evaluate("()=>{ const r=document.querySelector('#list .row'); const p=r&&r.querySelector('.prevline'); return {n:document.querySelectorAll('#list .row').length,prev:p?p.innerText:'',btn:!!(p&&p.querySelector('[data-act=playprev]')),both:!!(r&&r.querySelector('[data-act=playboth]'))}; }")
         ok(row['n']==1 and 'Tom' in row['prev'] and "Your mother says I'm slow." in row['prev'],'row shows the line before (%d rows): '%row['n']+row['prev'][:80].replace(chr(10),' '))
         ok(row['btn'] and row['both'],'play buttons for the line before and for both')

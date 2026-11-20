@@ -85,7 +85,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 |---|---|---|
 | Grace | Tata! Deedee made rhubarb crisp for you. It's cooling RIGHT NOW. | Tom happy, Rose happy |
 | Rose | I already licked the spoon. Don't tell. | Tom unimpressed, Grace unimpressed |
-| Tom | Then we had better hurry. Before somebody licks the rest. | Grace happy, Rose happy |
+| Tom | Then we better hurry. Before somebody licks the rest. | Grace happy, Rose happy |
 
 ## scene: ch1Theft (chapter 1)
 
@@ -3634,7 +3634,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Bun | Welcome! Our bread is emotionally available. | Tom unimpressed, Grace unimpressed, Rose happy |
+| Bun | Welcome! Welcome! Our bread is emotionally available. | Tom unimpressed, Grace unimpressed, Rose happy |
 | Bun | The baguettes? A little crusty. | Tom unimpressed, Grace unimpressed, Rose happy |
 | Bun | Today's special is yesterday's tomorrow toast. | Tom unimpressed, Grace surprised, Rose surprised |
 
@@ -4554,7 +4554,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Deedee | Are you warm enough? Nobody is warm enough. | Tom unimpressed, Grace unimpressed, Rose happy |
+| Deedee | Are you warm enough? Nobody. Nobody is warm enough. | Tom unimpressed, Grace unimpressed, Rose happy |
 | Deedee | Grace, Rose, to the moon and back. Say it. LOUDER. | Tom happy, Grace loving, Rose loving |
 | Deedee | I packed cookies. They're in my purse. The purse is at home. We go back. | Tom unimpressed, Grace happy, Rose happy |
 | Deedee | Pick up those feet. A brisk walk never hurt anybody. | Tom unimpressed, Grace unimpressed, Rose happy |
@@ -4887,7 +4887,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Sal | Los Angeles? You got it. Buckle up. | Tom happy |
+| Sal | Los Angeles? Los Angeles? You got it. Buckle up. | Tom happy |
 | Sal | Los Angeles again. Cab seven is ready. | Tom happy |
 | Sal | LAX. Sit back. The radio is on something calm. | Tom happy |
 | Sal | Off we go. Don't touch the visor. Everybody touches the visor. | Tom scared |
@@ -5454,7 +5454,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Sal | Los Angeles? You got it. Buckle up. | Tom happy |
+| Sal | Los Angeles? Los Angeles? You got it. Buckle up. | Tom happy |
 
 ## table: TRAVEL_POOLS sal.1 (chapter 1-10)
 

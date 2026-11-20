@@ -80,3 +80,17 @@ Not verified (say so plainly): the phone; the live ElevenLabs Music call (the re
 Track `admin` ("Admin Calm", group Admin, use Admin, loop, 87 s, 39th track) plays on every admin screen. In the game, `mcAdminScreen()` in engine/music-clips.js picks it for the ADMIN list, the Battle Lab list and its sub pages, and the Welcome layout editor. On the separate pages (voices, art, music, areas, portraits, heads) engine/admin-music.js plays it (a take Tom marks In the game on the phone replaces the built-in mp3 there too). The built-in mp3 is Tom's ElevenLabs take of 2026-11-14 15:02, merged with merge-local.py (loudness -20 LUFS, fade-out cut at 87.4 s). Test: `python3 tools/admin_music_test.py`.
 
 Level (`adminmusic3`): the admin track plays at half level (`MC_LEVEL.admin` in engine/music-clips.js; `LEVEL` in engine/admin-music.js). Changing tracks to or from it fades the other track out in 0.4 s.
+
+## 8. Model choice per track (`music3`, 2026-11-20)
+
+ElevenLabs docs read on 2026-11-20: the Music API takes `model_id` music_v1, music_v2 or music_v2_5; `music_v1` is deprecated and removed on 2027-01-31 ("migrate to music_v2_5"); music_v2 and v2.5 default to a 48 kHz 192 kbps mp3 (`output_format=auto`), v1 to 44.1 kHz 128 kbps; plain `prompt`, `music_length_ms` and `force_instrumental` work on all three (compose reference).
+
+| Piece | How |
+|---|---|
+| Choice | A Model dropdown on every card (v2.5 newest, v2, v1 old); the default is music_v2_5; stored per track on this phone (`aot-ml-models`); Remake N uses each card's own choice |
+| Request | v1 sends `output_format=mp3_44100_128` as before; v2 and v2.5 send `output_format=auto` |
+| Takes | Each take stores its model; the Takes list shows it; Export carries it |
+| Stub and test | `stub.py` answers 400 for an unknown model or an output_format that does not suit the model and logs both; `test.py` checks the default, a v1 take, a v2 take in a bulk remake, the Takes list and the export (44 checks) |
+
+Not verified: a live call on any v2 model with Tom's key (the sandbox has none); the credit price of v2 and v2.5 (the page's estimate of 11 to 14 per second was measured on v1).
+

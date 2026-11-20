@@ -66,13 +66,18 @@ async def main():
             await pg.wait_for_selector('.card[data-id="town"] .pill.live:has-text("Phone take v1")', timeout=30000)
             ok(True, 'take v1 made and in the game')
             L = log()
-            ok(len(L) == 1 and L[0]['ms'] == 60000 and L[0]['instrumental'] is True and L[0]['model'] == 'music_v1', 'stub got length 60000 ms, instrumental, model music_v1')
+            ok(len(L) == 1 and L[0]['ms'] == 60000 and L[0]['instrumental'] is True and L[0]['model'] == 'music_v2_5' and L[0]['format'] == 'auto', 'stub got length 60000 ms, instrumental, the default model music_v2_5 with output_format auto')
             ok(L[0]['prompt'].startswith('A tiny test tune') and L[0]['tail'].endswith('Family-friendly adventure game score.'), 'stub got the edited prompt plus the loop wording')
             ok('came back shorter' in await pg.inner_text('#m-town'), 'a loop that comes back short is flagged')
-            # second take, switching
+            # second take, on the old model chosen from the card (music_v1 stays selectable)
+            ok(await pg.locator('[data-model="town"] option').count() == 3 and await pg.input_value('[data-model="town"]') == 'music_v2_5', 'the card offers 3 models and defaults to music_v2_5')
+            await pg.select_option('[data-model="town"]', 'music_v1')
             await pg.click('[data-make="town"]'); await pg.click('[data-make="town"]')
             await pg.wait_for_selector('.card[data-id="town"] .pill.live:has-text("Phone take v2")', timeout=30000)
+            L = log()
+            ok(len(L) == 2 and L[1]['model'] == 'music_v1' and L[1]['format'] == 'mp3_44100_128', 'the second take went out as music_v1 with the old output format')
             await pg.click('[data-tks="town"]')
+            ok('music_v1' in await pg.locator('.card[data-id="town"] .take').first.inner_text() and 'music_v2_5' in await pg.locator('.card[data-id="town"] .take').nth(1).inner_text(), 'the Takes list names the model of each take')
             ok(await pg.locator('.card[data-id="town"] .take').count() == 3, 'Takes list shows v2, v1 and the built-in track')
             await pg.click('[data-tuse$="town|1"]')
             await pg.wait_for_selector('.card[data-id="town"] .pill.live:has-text("Phone take v1")')
@@ -94,6 +99,7 @@ async def main():
             ok(True, 'Loop test starts and stops')
             ok(await pg.locator('[data-loop="victory"]').count() == 0, 'jingles have no Loop test')
             # many at once
+            await pg.select_option('[data-model="pier"]', 'music_v2')
             await pg.check('[data-sel="row"]'); await pg.check('[data-sel="pier"]')
             ok('2 selected' in await pg.inner_text('#bar'), 'bar shows 2 selected')
             await pg.click('#remake'); ok('TAP AGAIN' in await pg.inner_text('#remake') and 'credits' in await pg.inner_text('#remake'), 'Remake 2 shows the credit estimate first')
@@ -101,6 +107,7 @@ async def main():
             await pg.wait_for_function('document.querySelector(".card[data-id=row] .pill.live")&&document.querySelector(".card[data-id=row] .pill.live").textContent.includes("Phone take")&&document.querySelector(".card[data-id=pier] .pill.live")&&document.querySelector(".card[data-id=pier] .pill.live").textContent.includes("Phone take")', timeout=45000)
             await pg.wait_for_selector('#bar[hidden]', state='attached', timeout=15000)
             ok(len(log()) == 4, 'many at once made two more takes (4 calls in all)')
+            ok(sorted(x['model'] for x in log()[2:]) == ['music_v2', 'music_v2_5'], 'each remade card used its own model (row default v2.5, pier v2)')
             # show filters
             await pg.click('#fShow .chip[data-v="phone"]'); ok(await pg.locator('.card[data-id]').count() == 3, 'Re-made on this phone lists the 3 tracks with takes')
             await pg.click('#fShow .chip[data-v="none"]'); ok(await pg.locator('.card[data-id]').count() == 36, 'No take on this phone lists the other 36')
@@ -112,7 +119,7 @@ async def main():
             async with pg.expect_download() as dl: await pg.click('#exp')
             d = await dl.value; path = await d.path(); ex = json.load(open(path))
             ok(d.suggested_filename == 'local-music-export.json' and sorted(t['id'] for t in ex['tracks']) == ['pier', 'row', 'town'], 'export file holds the 3 Used takes')
-            ok(all(len(base64.b64decode(t['mp3'])) == stub_bytes and t['model'] == 'music_v1' and t['prompt'] and t['len'] for t in ex['tracks']), 'each exported take has its mp3, prompt, length and model')
+            ok(all(len(base64.b64decode(t['mp3'])) == stub_bytes and t['prompt'] and t['len'] for t in ex['tracks']) and {t['id']: t['model'] for t in ex['tracks']} == {'town': 'music_v1', 'row': 'music_v2_5', 'pier': 'music_v2'}, 'each exported take has its mp3, prompt, length and model')
             ok(not errs, 'no page errors in portrait: %s' % errs)
             # the game picks the Used take
             g = await ctx.new_page(); gerrs = []

@@ -8,6 +8,113 @@
 - Tests: `python3 -I tools/paint_state_test.py` now checks all four fighters (feet, size, slide distances, ko, get up, victory, run, the Lab row in both layouts): FAILS: []. `python3 tools/b3_test.py s8` rewritten for painted states: FAILS: []. Clip tests retargeted to the entries that remain (clip_lib_test, clipgen_test, clip_batch_test).
 - Not run here: tools/clip-gate/gate_test.py (the sandbox has no cv2). The gate still serves monster videos only.
 - Board: c-clipposes shipped; new Tom card t-clipposes (animations: watch the Lab row once) blocks new Claude card c-clipposesfix.
+## ch1retext1 (2026-11-19): Chapter 1 subtitles now say what Tom's rerecorded voice clips say, and his 3 newest Deedee takes are in the game
+
+- Card c-ch1retext1. Tom (11-19 19:06): "for chapter 1, ive changed the dialogue in the voicelcips and rerecorded, but the old dialogue still apepars in the game. check for discrepancies and update". Then he sent `local-clips-pending_5_.json` (made 11-20 03:21 UTC, 3 Deedee takes).
+- Method (clipfix1 and calib3): every one of the 246 chapter 1 dialogue clips was transcribed with two models (whisper base.en and small.en) and compared with its subtitle, and with the script of the take Tom kept (`data/voice-index.json`). A difference counts only where both models agree and, for Tom's edits, the kept script says the same.
+- Reworded to the spoken words (`retext-lines.py`, list in `tools/voice-library/retext-ch1retext1.json`, 11 lines): Grace "...since the taxi place." (was "mailbox"); Boppy "...Wait, where'd the muffins go?"; Deedee "My favorite son! I missed that face. Now sit, you're having a muffin."; Boppy "Tom, you heard her."; Deedee "Girls, sneakers. Tom, hold the door. Hubby, you stay right there."; Tom "...since I flew over Kansas."; Deedee "I made twelve and they're all still there. I've been standing between that pan and your father since six this morning." Four lines where the first generated take says slightly different words from the script and nobody edited them: Sal "Los Angeles? Los Angeles? You got it. Buckle up." (also in `engine/travel.js`), Bun "Welcome! Welcome! ...", Deedee "Are you warm enough? Nobody. Nobody is warm enough." (also in `engine/followers.js`), Tom "Then we better hurry. ..."
+- Merged his 3 new takes (all Deedee, replacing the older clips; `merge-local.js` with a retext map): the sneakers line, the twelve-cup pan line (same words) and the twelve muffins line. Kept scripts written to `ch01-story-directions.json`. `data/merged-takes.json` updated so Pending upload clears on his phone.
+- Not changed: Tom "Thank you for telling me, Rose..." (kept script ends "I'm starving!", the clip stops at "can't wait", so its audio has no such words; it needs a re-take or the script trimmed). `script-review.json` has no Locked conversation. Names (Tata, Boppy, Deedee) and numbers heard differently by the recognizer were ignored.
+- Tests: `unused_voice.py` 1, 2, 3, 5 clean, check 4 still 93; smoke and `trail_test.py` below.
+
+## reports-2026-11-19c (2026-11-19): Seven art reports: Boppy's mustache, glasses on Deedee's head, the fishing spot as one picture, a fifth "thinking" talking pose, bulb frames, dazed NPC frames
+
+Card c-reports, Tom's seven open art reports installed from the approved entries of the Report fixes group (`tools/art-library/ch2fix-prompts.js`). Six are fixed; mxvd is not (no picture approved yet, see below).
+
+| Report | Tom's note | What changed |
+|---|---|---|
+| 1a2w | "In this pose for Bapi, his mustache is missing" | Boppy's Unimpressed mood frame is the approved `boppy-em-unimpressed` picture (`emotion_frames.py` `REPLACE`, scaled so its chin row is the median of his other frames, then the HEAD SIZES factor like every frame). His Unimpressed face is re-cut. His Pose Editor lines for the old frame no longer apply (they are tied to the sheet name, `EF.sheet_label`), so a line he had set on it is gone: reset it in ADMIN > POSE EDITOR if he wants one. |
+| 7v5z | "For this line in particular, we need to create a special frame ... DD has glasses on her head" | Frame `c1d_glasses` (Deedee, glasses on her head) plus its dialogue face `portraits/talk/pose/deedee-glasses.webp`. The scene line in the report (ch1Theft) has since been rewritten out, so it plays on the line that is still in the game: Deedee's press-A chat in her house, "Have you seen my reading glasses?" (`data/line-poses.js`, `engine/emotions.js` `emoApply`). |
+| c5no | "We need poses ... when the character is thinking or examining something that another character is talking about ... find all the other scenarios like it, tag it, and then create the art" | A fifth talking pose, `think`, for all 10 talking cast (`talk_frames.py` `think_figure`, art/talk/<id>.webp now 5 frames, faces `portraits/talk/pose/<id>-think.webp`, `TALK_LIST` in `engine/emotions.js`). 19 lines in `docs/talk-lines.tsv` that react to something another character is looking at or studying are tagged `think` by hand and `python3 tools/talk-apply.py` rebuilt `data/talk-types.js`. |
+| nre4 | "we need to create one image together because right now they all look very strange, like kind of overlap each other" | Boppy's fishing spot is one picture, `hollow/ch1_spot` (grey grass, orange block and burnt bulb painted together), and `hollow/ch1_spot_nobulb` (same picture with the bulb cleared, drawn once Deedee has taken it, flag `ch1-bulb`). Placed so the block sits where `engine/block-break.js` has it. The separate grey patch picture is purged (`ch1_patch`); the block and bulb pictures stay for the break and the Sundial. |
+| g4gl | "a special animation frame for every single NPC who's in this ... dazed state" | Frame `dz_dazed` for Washington, Odette, Carmen, Marisol and Larry (sets `<id>dz` in `data/npc-poses.js`); the chapter 2 trance rule in `data/scenes.js` (`CH2_TRANCE_ID`) draws it while they are dazed and puts the normal frame back when they snap out. |
+| jykk | "images of whenever a person finds a flashbulb ... a dedicated art frame generated for them that's them holding the lightbulb" | Frames `c1d_bulb` (Deedee, chapter 1) and `c3r_bulb` (Rose, chapter 3, the sundial rock) plus faces `deedee-bulb` and `rose-bulb`, each on the line where that person holds it up (`data/line-poses.js`). Chapters 2, 4, 5, 6 and 7 have no Library picture yet. |
+
+- Not fixed, mxvd ("it doesn't match the style of the game for the monster, I mean for the mud blob"): its entry has no approved picture and the ch1Theft line it came from is no longer in the scene, so nothing was installed.
+- Sizing: every new single figure is keyed from the generator's background (it sometimes paints crimson instead of magenta, `single_figure` flattens it first), its head scaled to that person's own mood figures and grown by the HEAD SIZES factor (`tools/sprite-bake/report_singles.py`), then drawn at the mood scale (`bake_story_poses.py` `REPORT_STRIPS`, `DAZED_NPCS`). Faces: `bake_report_faces.py` (Rose's head rows set by eye, the bulb is held above her head).
+- Rebake drift: a full `bake_story_poses.py` run changes palette rows of nine NPC sets and the `pipemo` atlas with no art change; those were put back from the last build so the diff holds only this work. Same for the 7 other Boppy mood faces and the 40 existing talking faces.
+- Tests: `python3 tools/smoke.py`, `python3 tools/pose_editor_test.py`, the reaction tests and the spot screenshots (portrait and landscape) are in the push notes below.
+## b3s9b (2026-11-19): New battle: TNB joins the Battle Lab with both of his Vibes, Ceramicist and Longboarder
+
+- Tom (11-19): "build stage 9b (TNB) of the new battle system." TNB's two Sig Vibes are built: 2 Traits, 2 Basics, 4 Skills, 2 Capstones and 4 Quirks (14 lines), `data/b3-kit-tnb.js`. Every Skill has a full plain sentence for its card.
+- Ceramicist: Wheel-Thrown Lump (light Clobber, monster 10% slower), Center the Bowl (clay shield of 30% HP, clears Toasty and Bleed), Three-AM Kiln Firing (Sizzle wave, fires every clay shield into Fired Glaze, +15% Attack for the family), Grand Amphora Masterpiece (a vase soaks the next 2 monster attacks whole, then bursts for a heavy Clobber and Razzle wave and 2 Composure pips). Trait Wet Clay to Stoneware, Quirks Coaster Policy and Kintsugi Gold Seam.
+- Longboarder: Longboard Push & Carve, E-Bike Tag-Along (clears debuffs, Fresh Ride, +15% Speed, Attack, Defense), Waymo Tailgate Rescue (Razzle flash, Blind, revives a knocked-out member at 40% or shares HP), Baxter Hill Longboard Express (heavy Razzle wave, doubles every E-Bike, +20% Ruckus). Trait Carving Momentum, Quirks TAP-Card Transfer and No Car, No Tickets.
+- New rule seams (docs/BATTLE3.md "What stage 9b holds"): clay shields and Fired Glaze, the vessel hazard, `allyMods`, the `basic` and `shielded` mod conditions, a Skill's own `rec`, the `tgtAlly` listener field, the status flags `razzleDet` and `blockDebuff`, target `slowestAlly`, a doubled buff, ops `vitrify`, `double`, `rebalance`. The `shieldBroken` event now carries its action, and a family strip no longer clears the family's own vase.
+- Lab: NEW 7 puts TNB in Deedee's place (Grace, Tom, TNB, Rose) against Log Lump. His Vibe Points use the normal start until stage 9c.
+- No picture or clip work: every new Skill uses the default animation.
+- Tests: `node tools/b3-sim.js check` (1123 checks, 115 new in `tools/b3-check-s9b.js`, FAILS: []), `python3 tools/b3_test.py s9b` (portrait and landscape; frames `tools/shots/b3-s9b*.png`). Handoff: docs/handoff/b3s9b.md.
+
+## skillinfo1 (2026-11-19): New battle: an i icon on each Skill row opens its card, a tap anywhere else on the row uses the Skill
+
+- Tom (11-19): "we need an information "i" icon to the left of each ability name, which should bring the user to the more details screen with the BACK and USE buttons. otherwise if the user taps anywhere on the ability outside of the abilitiy box, it should just execute tha bility or require the character to choose a target as applicable".
+- SKILLS list (`engine/b3-ui.js`): a round i sits left of every Skill name. A tap on it opens the b3s9a skill card (BACK and USE). A tap anywhere else on the row uses the Skill at once, or opens the target list when it needs a target (Back from there returns to the list). The i is a span inside the row's button with an invisible tap strip down the whole left of the row (`.b3-ii::after`, `index.html`), so a thumb that lands near it still opens the card. A Skill that cannot be used still says why when tapped (the nope sound and the message line); its card also shows why.
+- Keys and pad: Enter and A on a row now use the Skill (they opened the card in b3s9a); I (and the pad's Y) with the cursor on a row opens its card. The party-card tap that opens a family member's list is unchanged.
+- Rose Mode picture tiles carry a small i in the top left corner (`engine/b3-pictures.js`, `.b3p-i`) with the same two behaviours.
+- Tests: `tools/b3_test.py s9ui` now checks the i is left of every name with a tap strip as tall as the row, the i opens the card and uses nothing, USE and BACK from the card, a row tap (name and Pep pill) opens the target list or plays, Back from it returns to the list; `s7` (Rose Mode) checks every tile has its i; the skill helpers open the card with I.
+
+## board-heist (2026-11-19): board only: why the muffin theft scene misses, and the plan to redo it
+
+- Tom (11-19 19:28, with a screen recording of the kitchen theft): "the monster animation looks out of place (differnet art style), he is holding a crisp instead of the muffins, the muffins are displayed on the counter after he takes them, and the dialogue of them falling is strange and doesnt feel natural (eg, why are they talking so much on the floor). we need a complete redo of this scene so that it hilarious!"
+- Causes, checked in the repo: the kitchen draws the old glossy heist sheet (`art/foes/mudling-heist.webp`), not the matte Mudling of the fights; the crisp is painted into that sheet; `{prop:'muffinpan',hide:true}` never hides the pan because `compileScene` reads the step as `hide` (an actor), so fix-cutpolish4b, -2 and -3 moved a pan that was never the problem; the floor lines play after the thief has left with everyone lying down, and Boppy and Deedee are staged against the scene's joke.
+- Plan: `claude/heist-redo-plan.md` (also in the Project). Cards: c-heistart (the bug and the Library entry, START), t-heistart (Tom generates and approves the sheet), c-heist1 (the scene rebuild, Opus 5.5 medium). t-cutpolish4b retired. No game change.
+
+## music3 (2026-11-20): Music Library can make takes on the newer ElevenLabs models; a new Square prompt to try on v2.5
+
+- Card c-music3. Followed `claude/next-addendum-squaremusic.md` (stop-loss after two Square rewrites on music_v1 missed: the cause was the old model, not the wording).
+- Fact (ElevenLabs docs, read 2026-11-20): `music_v2` and `music_v2_5` exist; `music_v1` is deprecated and ElevenLabs removes it on 2027-01-31.
+- `music.html`: a Model dropdown on every card (default music_v2_5, music_v2, music_v1 still selectable); v2 models send `output_format=auto`, v1 keeps `mp3_44100_128`; each take stores and shows its model; Remake N uses each card's own choice; the how-to line says v1 is ending and that v2 credit prices are not measured.
+- `tools/music-library/stub.py` and `test.py` updated (unknown model or wrong output_format is a 400; 44 checks, all pass). smoke passes.
+- `tools/music-library/tracks.json` and `data/music-index.json`: the Square (`town`) prompt rewritten for v2.5: 96 BPM, G major, nylon guitar and clarinet playing the same melody together, walking upright bass, brushed snare, four instruments only, live band room sound, exclusions named (no piano, flute, glockenspiel, accordion, synths). The old prompt (104 BPM, flute, glockenspiel, accordion, "develops across sections") is in git history; the built-in `music/town.mp3` is unchanged.
+- Looked at: the card in portrait (dropdown, take row with model). Not done: a live ElevenLabs call (no key here), so v2.5 on Tom's key and the Square take are unheard.
+
+## ch1art3 (2026-11-20): Grace's list shows as a close-up when she unfolds her paper in the first Square scene
+
+- Card c-ch1art3. Installed the approved Library picture `ch1-grace-list` the way the phone on the seat was installed (fix-cutpolish4b): `tools/art-library/bake_closeup_ch1.py` bakes `art/closeup/ch1-list.webp` (the full square painting), `data/closeup-ch1.js` has the `list` entry (label GRACE'S LIST, still) and `CH1_REVEAL.v` is now `ch1d`.
+- `data/scenes.js` ch1Goal: `{ch1Reveal:'list'}` after the opening beat, where Grace unfolds the notebook paper; A closes it and her first line follows. No dialogue text changed, so no voice clip is silenced.
+- Looked at in portrait and landscape: the close-up and the first dialogue line after pressing A. Not looked at: the whole opening played end to end.
+
+## fix-cutpolish4b-3 (2026-11-20): the muffin pan sits fully inside the table top, clear of the cake stand
+
+- Tom (t-cutpolish4b, third report): "muffins overlap art". Rendered the kitchen island at the real zoom: the pan was still touching the cake stand's base and its back row stood above the table's far edge.
+- `data/scenes.js` ch1Theft: pan prop moved from x 4.4, y 7 to x 4.3, y 7.25. Kept: the pan art, size, the prop, the hide after the grab. Looked at a frame: pan between the stand and the table's right edge, fully on the wood. Nothing else changed.
+
+## fix-cutpolish4b-2 (2026-11-20): the muffin pan now sits fully on the bare table, clear of the cake stand
+
+- Tom (t-cutpolish4b, second report): "muffins overlay the background art". His screenshot showed the pan still covering the glass cake stand.
+- `data/scenes.js` ch1Theft: the pan prop moved from x 3.9 to 4.4 and y 7.1 to 7, so it sits on the bare table to the right of the cake stand and the tart. Checked in a frame in portrait (landscape is the same stage rotated). Nothing else changed.
+
+## fix-ch1art2 (2026-11-20): six chapter 1 picture requests removed from the Art Library; only Grace's list is left
+
+- Card c-fix-ch1art2. Tom (t-ch1art2, Make the seven chapter 1 pictures): "i dont understand why we need this art. like it doesnt make sense based on how the game works (except grace's list). explain". He is right about six of the seven. They came from the chapter 1 teardown (ch1rebuild1), which made one Library entry per story beat without checking what the game shows at that beat.
+- What the game does at each beat, checked by playing the scene in portrait and landscape (`tools/scene_frames.py`, ch1Amy, ch1Ellie, ch1Pond):
+
+| Entry removed | What the game already does | Why a picture has no place |
+|---|---|---|
+| ch1-amy-window | Amy leans out of the real dormer window in the Row painting, with her own street figure and her talking face (amywin1, Tom 11-19) | No scene step shows a window close-up |
+| ch1-ellie-door | Aunt Ellie is spawned at her own door on the Row as a person with her own sheet and talking face | No scene step shows a door close-up |
+| ch1-cab-pulls-away | ch1Sunday fades to black as the cab leaves, then shows the phone on the seat (installed) | No step shows the cab |
+| ch1-rose-shoulders | Tom with Rose on his shoulders is already three painted sheets (walk, scene poses `tr_*`, battle) | One standing picture cannot become a frame of a sheet; the ear-turn in ch1Goal is a 0.25 s beat |
+| ch1-mudling-muffins | The Mudling already holds the painted `ch1/pan_full` (fix-cutpolish4b) | No screen shows a large Mudling |
+| ch1-bigone-green-pan | The pan is a prop the code puts on and takes off: it flies off in ch1Pond and when Rose's Raspberry hits in battle | A sheet with the pan baked in cannot come off; recolouring the fish green would also break the 11 approved Big One clips, which were made from the blue sheet |
+
+- Removed from `tools/art-library/ch01-prompts.js` and `data/art-prompts.json` (126 lines, no other change). Chapter 1 Props in the Library now reads 10 of 10 approved (checked in portrait and landscape). `ch1-grace-list` stays: it is approved, and ch1Goal still has Grace unfolding paper with nothing drawn. Installing it is card c-ch1art3, now rewritten to that one picture.
+- Seen, not changed: in ch1Pond the Big One shows its baked tin cap under a small code-drawn silver pan (a double hat); battle draws a code helmet the same way (`engine/battle2-ui.js` pietin). A fix would be the painted `ch1/pan_empty` on the head, no new art. Not done: Tom did not ask for it.
+- In-game pencil reports filed since 2026-11-20T02:43:56Z: none (the 7 open reports on branch inbox are all from 11-14 and none is about these pictures), so none marked done.
+- No game file changed (only the build stamp). Tests: `python3 tools/smoke.py` FAILS: [], board_check.py --push, board_sync_test.py, board_test.py, buildlog_test.py all pass; zero references to the six ids remain in the Library files; the Library page checked in portrait and landscape.
+
+## fix-skilllist1look-2 (2026-11-20): SKILLS list rows and Back button at a middle size
+
+- Tom (11-20 on card t-skilllist1look): "lol now its too small! you went too far, isnt there a middle ground? and the back button doesnt match".
+- Kept: the thin fixed-size row design of fix-skilllist1look. Changed: sizes only, halfway between skilllist1 and the thin rows: name 15px (was 12), pictures 16px (was 13), Pep number 16px over an 8px PEP, row padding 6px 9px (Duo panel: 12px, 13px). The Back row under the list now matches a Skill row: same padding, 15px text, 11px B / Esc hint (it was a smaller, tighter button than the rows).
+- Looked at: portrait and landscape frames from `python3 tools/b3_test.py s9ui` (FAILS: []).
+- In-game pencil reports about the SKILLS list since 2026-11-20T03:23:13Z: none, so none marked done.
+
+## fix-skilllist1look (2026-11-20): SKILLS list redesigned as thin rows with small fixed text and pictures
+
+- Tom (11-20 on card t-skilllist1look): "still looks way too big, all the fonts and icons. kind of needs a redesign".
+- Cause: skilllist1 only scaled the name by .86 and the pictures by 1em of the button's text size, and on a phone held sideways that size is 21px, so everything stayed big. Now the SKILLS rows (index.html, `.b3-sk` block) use fixed sizes in both layouts: name 12px, flavor and Pocket pictures 13px, Pep number 13px over a 7px PEP, row padding 4px 8px (Duo panel: 10px, 11px pictures). The skill card, the Back button and every other list are unchanged.
+- Looked at: portrait and landscape frames from `python3 tools/b3_test.py s9ui` (passes, FAILS: []). Rows are about half as tall as before; in landscape long names wrap to 2 lines.
+- In-game pencil reports about the SKILLS list since 2026-11-20T03:00:48Z: none, so none marked done.
 
 ## skilllist1 (2026-11-19): SKILLS list names and pictures a little smaller
 

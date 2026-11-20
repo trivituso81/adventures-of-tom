@@ -61,6 +61,7 @@ function b3pSkills(u) {
   return '<div class="b2-grid bp-grid">'+rows.map((S,i)=>{
     const can=b3CanUse(B3.F,u,S),c=b3Cost(B3.F,u,S),ef=b3pEffect(S),r=rc&&rc.skill===S.id;
     return '<button type="button" class="b2-btn bp-btn'+(S.slot==='basic'?' b2-basic':'')+(i===B3.sel?' sel':'')+(can.ok?'':' no')+(r?' rec':'')+'" data-i="'+i+'">'+
+      '<span class="b3p-i" data-info="1" role="button" aria-label="Details"><i>i</i></span>'+
       '<span class="bp-ic">'+b3pFlavors(S,96)+(ef?'<span class="b3p-ef" style="width:30px;height:30px">'+bpIcon(ef,30)+'</span>':'')+(r?b3pStar(26):'')+(can.ok?'':'<span class="bp-lock">'+bpIcon('m_lock',24)+'</span>')+'</span>'+
       '<span class="bp-cost">'+b3pDrops(free?0:c,13)+'</span><span class="bp-w">'+b2Esc(bpWord(S.name))+'</span></button>'; }).join('')+(free?'':bpBack())+'</div>';
 }
