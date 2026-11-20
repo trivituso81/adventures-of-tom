@@ -12367,7 +12367,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukCYMKUG2mJbWxJECYC",
+    "url": "https://claude.ai/code/session_01RXeukCYMKUG2mJbWxJECYC",
     "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
    },
    "history": [
@@ -12416,6 +12416,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "tag": "gem-pillar-rhubarb",
@@ -16166,7 +16170,7 @@
   {
    "id": "c-keysecrets2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Tools",
    "tag": "keysecrets2",
    "title": "Art Library videos through repo secrets",
@@ -16175,7 +16179,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGhbJajd4cUkbJiFVv",
     "opening": "not started"
    },
    "prompt": {
@@ -16196,14 +16200,18 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-20T21:22:55.064Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
-   "start": true
+   "started_at": "2026-11-20T21:23:32+00:00"
   },
   {
    "id": "c-keysecrets3",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Tools",
    "tag": "keysecrets3",
    "title": "Voice and Script takes through repo secrets",
@@ -16212,7 +16220,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukG6s15YdeBxdeMM7bk",
     "opening": "not started"
    },
    "prompt": {
@@ -16233,14 +16241,18 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-20T21:22:42.146Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort high."
     }
    ],
-   "start": true
+   "started_at": "2026-11-20T21:23:32+00:00"
   },
   {
    "id": "c-keysecrets4",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Tools",
    "tag": "keysecrets4",
    "title": "Music makes through repo secrets",
@@ -16249,7 +16261,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukCe4s7AKboq4xirQLv",
     "opening": "not started"
    },
    "prompt": {
@@ -16270,14 +16282,18 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-20T21:22:47.485Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
-   "start": true
+   "started_at": "2026-11-20T21:23:32+00:00"
   },
   {
    "id": "c-keysecrets5",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Tools",
    "tag": "keysecrets5",
    "title": "Recast and baker pages: key boxes",
@@ -16286,7 +16302,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDJbNJJjjxvpDs5pHU",
     "opening": "not started"
    },
    "prompt": {
@@ -16307,9 +16323,13 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-20T21:23:02.219Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort high."
     }
    ],
-   "start": true
+   "started_at": "2026-11-20T21:23:32+00:00"
   },
   {
    "id": "c-voiceauto1",
@@ -16344,6 +16364,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukCYMKUG2mJbWxJECYC",
+   "title": "Purge Rhubarb Crisp from the game everywhere",
+   "first": "2026-11-20T21:22:44Z",
+   "last": "2026-11-20T21:22:44Z",
+   "tags": [],
+   "cards": [
+    "c-gem-pillar-rhubarb"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFxcAPTykx1Dr76QGY",
    "title": "Battle system stage 12: bestiary chapters 5 to 7 and bosses",
@@ -16895,6 +16925,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEAVEz7ZsgqjE7u2pm",
+   "title": "Open chapter 1 inside the taxi office with Sal",
+   "first": "2026-11-20T08:48:07-08:00",
+   "last": "2026-11-20T13:22:58-08:00",
+   "tags": [
+    "gem-canon01"
+   ],
+   "cards": [
+    "c-gem-canon01",
+    "c-voiceauto1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDvGy4r9exekLEpXXy",
    "title": "Art Library makes pictures through repo secrets",
    "first": "2026-11-20T13:01:46-08:00",
@@ -17270,18 +17313,6 @@
    "cards": [
     "c-gem-polish03",
     "t-gem-polish03"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEAVEz7ZsgqjE7u2pm",
-   "title": "Open chapter 1 inside the taxi office with Sal",
-   "first": "2026-11-20T08:48:07-08:00",
-   "last": "2026-11-20T08:59:32-08:00",
-   "tags": [
-    "gem-canon01"
-   ],
-   "cards": [
-    "c-gem-canon01"
    ]
   },
   {
@@ -18478,8 +18509,8 @@
    "takes/20261120T211742-sz1/state.json"
   ]
  },
- "synced": "4ae32469ff20b568f77710711fd4b8dfc1bbdfff",
- "synced_at": "2026-11-20T21:20:13+00:00",
+ "synced": "0ef0c758ce50102f847003290fa5ed0e650b6bea",
+ "synced_at": "2026-11-20T21:23:36+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
