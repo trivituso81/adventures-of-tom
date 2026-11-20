@@ -1051,7 +1051,7 @@
    "theme": "Voice Clips",
    "count": 13,
    "title": "Merge 13 new voice takes",
-   "next": "New voice takes were saved on branch takes. Merge them into the game.",
+   "next": "Shipped as takes1: 2 takes merged, 26 old-wording takes left out.",
    "prompt": {
     "what": "Merges the voice takes you recorded on your phone.",
     "before": [
@@ -1081,11 +1081,16 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Merged 2 of 28 unmerged kept takes (Tom, ch1 \"Twenty years, one witness\" and \"Thank you for telling me, Rose\"). 26 skipped: their words no longer match the game (Tommy now Tom, or cut lines)."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-19"
+   "changed": "2026-11-20",
+   "after": "nothing for Tom: end"
   },
   {
    "id": "c-reports",

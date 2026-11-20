@@ -1,3 +1,10 @@
+## takes1 (2026-11-20): merged the 2 voice takes from branch takes that match the current script
+
+- Card c-takes-2337ed. Branch `takes` holds 3 sessions of takes (13 files). 28 kept takes were not in `data/merged-takes.json`.
+- Merged 2 into the game (`merge-local.js`, `data/voice/dialog-ch1.js`, kept scripts in `ch01-story-directions.json`): Tom's "Twenty years, one witness..." and "Thank you for telling me, Rose..." (both replaced the older clip).
+- NOT merged, 26 kept takes: their words no longer match any line in the game (for example Deedee's "Tommy, ..." lines now read "Tom, ..."; others are lines that were cut). Playing them would say the old words. Not recorded in the merged list, so they still show as not in game.
+- `unused_voice.py`: checks 1, 2, 3 and 5 clean; check 4 reports 93 dialogue clips not in harvest, the same 93 as before this change (not touched here).
+
 ## clipch1remakea (2026-11-19): CHAPTER 1 REVIEW marks the 16 remade clips NEW and plays only those with PLAY NEW
 
 - Tom (11-19 17:45): "the animations looked the same as when i rejected them", "unless i dont know whihc 16 to look at?". The review lists all 67 clips and nothing showed which were remade; the 27 held clips are still the old rejected ones.
