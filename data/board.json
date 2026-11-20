@@ -6710,14 +6710,15 @@
   },
   {
    "id": "t-ch1starving",
-   "title": "Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped)",
+   "title": "Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end",
    "theme": "Voice Clips",
    "lane": "tom",
    "col": "wait",
    "ask": "voice",
-   "fyi": true,
-   "next": "ADMIN > VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. Reload the page first (pull down or close and reopen it). The script box must end \"Grace, I'm so sorry but number two can't wait.\" with no \"[hungry] I'm starving!\", and your other directions ([wary, disgusted, amused], [pause, very very deadpan], [very dismissive]) must still be there. If you still see \"I'm starving!\", press Something is wrong and say where (the box, the subtitle in the game, or the voice). If you meant to keep \"I'm starving!\" in the script, say so in the note. Press play: the take you kept, unchanged. Nothing to record. Then All good.",
-   "blocks": [],
+   "next": "After build fix-ch1starving-3 is published: open ADMIN > VOICE LIBRARY with the button below (Open in the Voice Library: Tom's line), or search \"telling me, Rose\". Reload the page once. The script box now ends \"...number two can't wait. [hungry] I'm starving!\". Tap Takes and record, make takes until one says the whole line, keep it, then press Send my takes to Claude. That starts card Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub). Until then the game plays your old take.",
+   "blocks": [
+    "c-ch1starving-sub"
+   ],
    "changed": "2026-11-20",
    "created": "2026-11-19",
    "chat": {
@@ -6756,6 +6757,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom: something is wrong: I'm starving. should not have been dropped Sent to Claude as card c-fix-ch1starving-3; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "fix-ch1starving-3: \"[hungry] I'm starving!\" is back in the script (repo copy and Voice Library), the line is listed under Show > New direction, the old take keeps playing. Tom chose: \"Keep it, I'll re-record\"."
     }
    ],
    "links": [
@@ -8334,7 +8339,7 @@
    "fix": true,
    "theme": "Voice Clips",
    "title": "Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! ",
-   "next": "You reported a problem on Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped). Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: I'm starving. should not have been dropped",
+   "next": "Shipped as fix-ch1starving-3: \"I'm starving!\" restored in the script; the stripping code from the two earlier fixes is removed. Tom re-records (t-ch1starving), then c-ch1starving-sub changes the subtitle and merges the take.",
    "blocks": [
     "t-ch1starving"
    ],
@@ -8633,6 +8638,40 @@
      "t": "Added with c-ch6left."
     }
    ]
+  },
+  {
+   "id": "c-ch1starving-sub",
+   "title": "Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub)",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "tag": "ch1starving-sub",
+   "auto": true,
+   "next": "Waits on your new take of Tom's line (card t-ch1starving). Then it adds \"I'm starving!\" to the end of the line in the game (subtitle) and merges your take, so the game shows and plays the whole line.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by fix-ch1starving-3. Tom (11-20): \"Keep it, I'll re-record\". The takes merge leaves out a take whose words differ from the subtitle, so the subtitle must change in the same push as the merge."
+    }
+   ],
+   "prompt": {
+    "what": "Adds \"I'm starving!\" to Tom's line in the game and merges your new take of it.",
+    "before": [
+     "Make and keep the new take in the Voice Library, then press Send my takes to Claude (card t-ch1starving)."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: written steps, tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md, docs/VOICE.md and docs/CHANGES.md sections fix-ch1starving-3 and takes1, then card c-ch1starving-sub in data/board.json with its history. Your first push is the commit board: start c-ch1starving-sub. In data/scenes.js (scene ch1, Tom's line \"Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait.\") append \" I'm starving!\" to the subtitle, move the line's script entry in tools/voice-library/scripts/ch01-story-directions.json and tools/voice-library/retake.json to the new text, then merge Tom's newest kept take of that line from branch takes under the new text (the take whose script ends \"[hungry] I'm starving!\"; check with the transcription method of ch1retext1 that the clip says it). Merge only that take unless others match their current subtitles. Run python3 tools/script-index/build.py, python3 tools/clip-audit/unused_voice.py (0 for all four), node tools/voice-library/make-index.js, smoke, and push as ch1starving-sub with after nothing for Tom: end. You have my full permission to access the repo."
+   },
+   "after": "nothing for Tom: end"
   }
  ],
  "sessions": [

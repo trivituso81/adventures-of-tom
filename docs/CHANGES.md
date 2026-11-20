@@ -1,3 +1,10 @@
+## fix-ch1starving-3 (2026-11-20): "I'm starving!" is back at the end of Tom's "Thank you for telling me, Rose" script, ready for you to re-record
+
+- Card c-fix-ch1starving-3, for t-ch1starving. Tom (11-20): "I'm starving. should not have been dropped". Two earlier fixes (fix-ch1starving, fix-ch1starving-2) read his notes the opposite way, so before a third try I asked in chat; Tom: "Keep it, I'll re-record".
+- Undone: the `SCRIPT_DROPS` / `dropOf` code in `voices.html` that stripped the sentence from his saved edit, history direction, take scripts and exports (removed whole, no references left). Restored: `tools/voice-library/scripts/ch01-story-directions.json` script now ends "[hungry] I'm starving!"; `data/voice-index.json` rebuilt (only this line changed: `s`, and `rt`). On first load the Voice Library drops, once, a saved edit or stored history direction of this line that lacks the sentence (those were the copies the earlier builds stripped), so the box shows the repo script; an edit of his own that has the sentence is kept.
+- The line is added to `tools/voice-library/retake.json`, so it shows under Show > New direction until his new take is merged. Kept: the subtitle in `data/scenes.js` and the old clip, so the game still plays the old take. The subtitle changes in card c-ch1starving-sub, in the same push as the merge of his new take (the merge leaves out a take whose words differ from the subtitle).
+- Test: `tools/voice-library/starving_test.py` now checks the opposite of before (4 saved states x portrait and landscape, 16 checks, all pass); `trail_test.py` and `pending_test.py` pass. Pencil reports: none about this line.
+
 ## ch6left (2026-11-20): Chapter 6 leftovers checked: kitchen and park in landscape, Chairman hop-off; nothing needed fixing
 
 - Card c-ch6left. Played ch6Kitchen (8 pages) and ch6Park (38 pages) in landscape with `tools/reaction_test.py` and the Chairman hop-off with `tools/boss_stage_test.py` (case ch06, frames looked at): no page errors, people stand at the island and picnic tables, the Chairman hops off the throne and is not in the scene afterward.
