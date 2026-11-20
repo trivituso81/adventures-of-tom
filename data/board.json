@@ -14210,10 +14210,13 @@
     {
      "d": "2026-11-20",
      "t": "Claude fix c-fix-battlelabpagetry-3: own crossed swords icon; fights now in collapsed categories and subcategories that open and close on a tap."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Open the Battle Lab page on your home screen, Fix: Open the Battle Lab page on your home screen, Fix: Open the Battle Lab page on your home screen is done."
     }
    ],
-   "col": "wait",
-   "waiting_on": "claude"
+   "col": "up"
   },
   {
    "id": "c-fix-heist1play-5",
@@ -14757,7 +14760,7 @@
    "id": "c-fix-battlelabpagetry-3",
    "tag": "fix-battlelabpagetry-3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Open the Battle Lab page on your home screen",
@@ -14809,6 +14812,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped as fix-battlelabpagetry-3: icon and collapsed groups."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-battlelabpagetry-3: The Battle Lab page has its own icon and its fights sit in collapsed categories and subcategories"
     }
    ],
    "prompt": {
@@ -14822,7 +14829,8 @@
    },
    "after": "t-battlelabpagetry",
    "auto": true,
-   "started_at": "2026-11-20T18:12:44+00:00"
+   "started_at": "2026-11-20T18:12:44+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "t-reports4play",
@@ -14849,8 +14857,10 @@
    "url": "https://claude.ai/code/session_01RXeukCZmu9BDyRxwTXwtHu",
    "title": "Fix: Open the Battle Lab page on your home screen",
    "first": "2026-11-20T18:17:47Z",
-   "last": "2026-11-20T18:17:47Z",
-   "tags": [],
+   "last": "2026-11-20T18:20:47Z",
+   "tags": [
+    "fix-battlelabpagetry-3"
+   ],
    "cards": [
     "c-fix-battlelabpagetry-3"
    ]
@@ -16774,8 +16784,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "c8b4b789f0ebc0637068468de911a9e364c56f3b",
- "synced_at": "2026-11-20T18:18:24+00:00",
+ "synced": "0e01c8301740b93cda4c3d763d10b0e39489176f",
+ "synced_at": "2026-11-20T18:21:35+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
