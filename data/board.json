@@ -9993,7 +9993,7 @@
    "id": "c-newcard",
    "tag": "newcard1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "New card button: type an idea, get a sized Claude prompt",
    "next": "Built as newcard1: + New card on the board (beside Search and Theme). Tom tests it on card t-newcard.",
@@ -10025,9 +10025,14 @@
     {
      "d": "2026-11-20",
      "t": "Found, not fixed here: tools/board_test.py fails with and without this build (Queued 4 and Needs attention 4, expects 3 and 5 on the live cards)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as newcard1: + New card on the board: type an idea, the board sizes it and writes the Claude prompt"
     }
    ],
-   "after": "t-newcard"
+   "after": "t-newcard",
+   "done": "2026-11-20"
   },
   {
    "id": "t-newcard",
@@ -10042,7 +10047,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDP7ETKd971CZ852fW",
     "opening": "made by newcard1"
    },
    "history": [
@@ -10743,6 +10748,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDP7ETKd971CZ852fW",
+   "title": "New card button: type an idea, get a sized Claude prompt",
+   "first": "2026-11-20T07:17:41-08:00",
+   "last": "2026-11-20T07:38:34-08:00",
+   "tags": [
+    "newcard1"
+   ],
+   "cards": [
+    "c-newcard",
+    "t-newcard"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDjPNPc4SnooT9qQmT",
    "title": "Fix: Re-record Grace's distorted chapter 1 lines",
    "first": "2026-11-20T07:38:20-08:00",
@@ -10782,16 +10800,6 @@
    ],
    "cards": [
     "c-attn1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDP7ETKd971CZ852fW",
-   "title": "New card button: type an idea, get a sized Claude prompt",
-   "first": "2026-11-20T07:17:41-08:00",
-   "last": "2026-11-20T07:17:41-08:00",
-   "tags": [],
-   "cards": [
-    "c-newcard"
    ]
   },
   {
@@ -11760,8 +11768,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "a1a4963a4619492266481404efa0be4c28564def",
- "synced_at": "2026-11-20T15:38:28+00:00",
+ "synced": "7336d584e18c32b0997872b7a196c205d01411c7",
+ "synced_at": "2026-11-20T15:39:42+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
