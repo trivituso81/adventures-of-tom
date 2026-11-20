@@ -7573,7 +7573,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDTjJ4EF5ZqM4W3ovf",
+    "url": "https://claude.ai/code/session_01RXeukDTjJ4EF5ZqM4W3ovf",
     "opening": "not started"
    },
    "history": [
@@ -7612,6 +7612,10 @@
     {
      "d": "2026-11-20",
      "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "blocks": [],
@@ -8118,7 +8122,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFJM32kdS8NhdQvMYp",
+    "url": "https://claude.ai/code/session_01RXeukFJM32kdS8NhdQvMYp",
     "opening": "not started"
    },
    "history": [
@@ -8149,6 +8153,10 @@
     {
      "d": "2026-11-20",
      "t": "Rescue ended without shipping: the pictures in art/raw/rooms (noplane-v1, plane-v1) are the same files the first session rejected (1248x832, not the plate size 1280x896; the empty room moved the window frames and jet bridge; the plane is a different jet and size). Nothing new to install. Waits on new pictures that keep the painting exactly and put the plane in the same place."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -8647,14 +8655,14 @@
    "title": "Own favicon and Home Screen icon for BOARD and ADMIN",
    "theme": "Tools",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "adminicons1",
    "next": "In progress: drawing a generic icon for ADMIN and a different one for BOARD (browser tab icon plus iPhone Home Screen icon), then linking them in admin.html and board.html.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGcYhoWvxrUB3VsP1V",
+    "url": "https://claude.ai/code/session_01RXeukGcYhoWvxrUB3VsP1V",
     "opening": "\"The board and admin urls need their own unique favicon and iPhone Home Screen images. There can be generic\""
    },
    "history": [
@@ -8673,6 +8681,14 @@
     {
      "d": "2026-11-20",
      "t": "Session started on the rescue run; building the two icon sets."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as adminicons1: ADMIN and BOARD each have their own tab icon and Home Screen icon"
     }
    ],
    "prompt": {
@@ -8692,7 +8708,8 @@
     "prev": "https://claude.ai/code/session_01RXeukGsiGYgETpYemWpMgR"
    },
    "started_at": "2026-11-20T15:26:24+00:00",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-ch1starving-3",
@@ -10041,6 +10058,38 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGcYhoWvxrUB3VsP1V",
+   "title": "Own favicon and Home Screen icon for BOARD and ADMIN",
+   "first": "2026-11-20T15:27:27Z",
+   "last": "2026-11-20T15:28:03Z",
+   "tags": [
+    "adminicons1"
+   ],
+   "cards": [
+    "c-adminicons1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDTjJ4EF5ZqM4W3ovf",
+   "title": "Fix the report backlog (7 open)",
+   "first": "2026-11-20T15:27:30Z",
+   "last": "2026-11-20T15:27:30Z",
+   "tags": [],
+   "cards": [
+    "c-reports-2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFJM32kdS8NhdQvMYp",
+   "title": "Install the Gate Zero pictures (no plane, plane)",
+   "first": "2026-11-20T15:27:09Z",
+   "last": "2026-11-20T15:27:20Z",
+   "tags": [],
+   "cards": [
+    "c-gatezero"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEYAxmwWRNTjwsrEmZ",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
    "first": "2026-11-20T15:23:59Z",
@@ -11206,8 +11255,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "7cb4237b46fb22ede3eeeeb199b67a0ba3c5fe5d",
- "synced_at": "2026-11-20T15:26:24+00:00",
+ "synced": "449b9b85fd71aa044e6733f041ad5303c0d36a8d",
+ "synced_at": "2026-11-20T15:28:07+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
