@@ -48,6 +48,10 @@ Tom (11-20, t-gatezero-decide): "Keep the current painting and have Claude remov
 
 Tom (11-20, on t-battlelabpagetry): "battle lab should have its own unique favicon. now that all buttons are exposed as one click, the page needs better categories and subcategories, with expand collapse behavior for both. all should be collapsed by default". Fact: the icon was a gold star on navy, close to Admin's gold gear on navy. It is now crossed swords on dark red (`icon-battlelab-180.png`, `icon-battlelab-32.png`, tag `?v=battlelab3`). `battle-lab.html` now shows three categories (New battle system, Tests and reviews, Boss fights), each with subcategories (chapters 1 to 4, chapter 1 review, clip tests, tryouts, boss fights in fives); every one is closed on load and opens and closes on a tap, with a count on each. Still one tap to start a fight once its group is open. Test: `tools/admin_hub_test.py` (closed by default, open and close, icon differs from Admin's).
 
+## fix-effectslook-3 (2026-11-20): The talking bob no longer shakes the speaker
+
+Tom (t-effectslook): "for example when Deedee greets tom and says my favorite son, she vibrates violently". Fact: the 1 px talking bob flipped on every typed letter, and letters type every 0.024 s, so the speaker moved up and down about 40 times a second. It is now time based, two lifts a second (`lifeBobLift`, engine/life-math.js, used by `actorLife`). Squash, hop and pips were not the cause and are unchanged. The Effects page text for Talking bob is updated. No in-game pencil reports were open.
+
 ## fix-effectslook-2 (2026-11-20): Wince is removed everywhere; the speed difference needs one example
 
 Tom (t-effectslook): "looks good. but now remove the Wince effect completely - all characters and all feelings. these effects appear to be noticebly slower (in a good way) than in the game. in the game, the are happening at like 10x speed"

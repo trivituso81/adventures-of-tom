@@ -13398,7 +13398,7 @@
    "col": "wait",
    "ask": "play",
    "fyi": true,
-   "next": "Open https://trivituso81.github.io/adventures-of-tom/admin.html, tap Effects (under Characters). Wince is gone from the list (14 effects now) and the four sweat-drop rows in chapter 1 are gone too. Tap Squash, Hop, Pip !, Pip ? and Pip ...: they should still work on the full-body person. Then tell me: in the game, which effect looks 10x too fast, and in which scene? The page and the game use the same timings, so I need one example to find the difference.",
+   "next": "Open https://trivituso81.github.io/adventures-of-tom/index.html, play to a scene where Deedee says \"my favorite son\" to Tom. While she talks she should no longer shake: she lifts 1 pixel twice a second. If another effect still looks too fast, tell me which one and in which scene.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -13437,6 +13437,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: for example when Deedee greets tom and says my favorite son, she vibrates violently Sent to Claude as card c-fix-effectslook-3; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T18:53:25.033Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "fix-effectslook-3 shipped: the talking bob flipped 40 times a second (once per typed letter); now two lifts a second."
     }
    ],
    "waiting_on": "claude"
