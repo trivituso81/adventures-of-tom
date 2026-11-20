@@ -289,7 +289,7 @@ let plateTime=0;   // last frame time, so the island zone can redraw Bready Merc
 function plateWalkBehind(map,plate,time=0) {
   const zones0=map&&PLATE_BEHIND[map.id]; if(!zones0||!plate||!plate.img) return;
   const zones=zones0.some(z=>z.off)?zones0.filter(z=>!(z.off&&z.off())):zones0;   // a zone with `off` is switched off while it returns true (the Stacks cart, engine/block-break.js)
-  const s=T/64, list=[...map.npcs,...followers,player].filter(a=>!a.hidden);   // hidden actors (story monsters tucked away) never pull a slice over
+  const s=T/64, list=[...map.npcs,...followers,player].filter(a=>!a.hidden&&!a.plateTop);   // hidden actors (story monsters tucked away) never pull a slice over; plateTop (fix-heist1play-5: the Mudling standing ON the baking island) is drawn over every cutout
   let ctxDone=false, jarOver=false; const redraw=[], redrawn=[];
   // Height of a standing actor in art px at a floor y. Painted rooms are drawn in perspective: a 5'11 Tom is about 400 art px tall by the front
   // half wall, so the old flat 130 let anyone standing a few rows in front of a counter keep their head under the redrawn counter (Tom 2026-11-09:

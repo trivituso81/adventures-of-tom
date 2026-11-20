@@ -289,7 +289,11 @@ const SCENE_OPS={
   walk:o=>lazy(()=>{ const a=sceneActor(o.walk); storyHold(a); if(a) { a.stagePlaced=true; a.stageFaced=false; } return S.walk(a,scenePos(o.to),o.speed||.3,o.onStep); }),
   face:o=>S.call(()=>{ const a=sceneActor(o.face); if(a) { a.facing=o.dir; a.stageFaced=true; } }),
   place:o=>S.call(()=>{ const a=sceneActor(o.place),[x,y]=scenePos(o.at); if(!a) return; storyHold(a); a.stagePlaced=true; a.x=x; a.y=y; a.move=null; a.scr=null; if(o.dir) a.facing=o.dir; }),
-  hop:o=>lazy(()=>{ const l=o.lift||[0,0]; return S.hop(sceneActor(o.hop),scenePos(o.from),scenePos(o.to),o.time||.5,o.arc||16,l[0],l[1]); }),
+  // settle:true (fix-heist1play-5): when the hop ends the actor is put on its landing tile for good (scr cleared, lift set). Without it `scr` stays, and a later {walk} moved the
+  // actor invisibly: position() answers scr first. That is why the Mudling ran on the spot at the end of the kitchen theft (Tom's recording 0:17.6).
+  hop:o=>lazy(()=>{ const l=o.lift||[0,0],a=sceneActor(o.hop),to=scenePos(o.to),h=S.hop(a,scenePos(o.from),to,o.time||.5,o.arc||16,l[0],l[1]);
+    if(!o.settle) return h;
+    return S.seq(h,S.call(()=>{ if(!a) return; a.x=to[0]; a.y=to[1]; a.scr=null; a.move=null; a.lift=l[1]; })); }),
   // Battle poses in a cutscene (Tom, Grace, Rose). {pose:'rose',f:'kneel',dir:'left'} holds a battle frame (hurtPose, kneel, ko, ...) until {pose:'rose',f:null}.
   cam:o=>(o.time&&o.cam)?({t:0,start(){ this.t=0; const f=(typeof sceneAutoCur!=='undefined'&&sceneAutoCur)||position(player); this.a=[f.x,f.y]; sceneCam=[f.x,f.y]; },
     update(dt){ this.t+=dt; const u=Math.min(1,this.t/o.time),e=1-Math.pow(1-u,3); sceneCam=[this.a[0]+(o.cam[0]-this.a[0])*e,this.a[1]+(o.cam[1]-this.a[1])*e]; return u>=1; }})   // {cam:[x,y],time:.26}: a set-length pan, cubic ease out (cutpolish4)
@@ -353,6 +357,47 @@ const SCENE_OPS={
   seq:o=>S.seq(...compileScene(o.seq)),
   if:o=>lazy(()=>{ const ok=typeof o.if==='function'?o.if():!!flag(o.if); return S.seq(...compileScene((ok?o.then:o.else)||[])); })
 };
+// {hopwalk:'Big Mudling',to:[[x,y],..],per:.2,reach:.75,arc:7,sq:.07,snd:'splat',hits:[{who:'rose',r:1.5,run:[steps]}]} (fix-heist1play-5): travels in short hops, one hop
+// per `reach` tiles (`per` seconds per tile in the air), squashing on each landing (a.squash 1 to 0 over `sq` s, drawn by mudlingHeistDraw) and playing `snd` on each landing.
+// The painted frame faces the way it travels (scenePose.dir) unless face:false. hits: when the hopper comes within r tiles of `who` the steps in `run` start (a knock on
+// contact instead of on a timer); the step ends when the last hop and every started run is done. No new art: the same frame, moved and squashed.
+SCENE_OPS.hopwalk=o=>lazy(()=>{
+  const a=sceneActor(o.hopwalk),pts=scenePos(o.to),per=o.per||.2,reach=o.reach||.75,arc=o.arc==null?7:o.arc,sq=o.sq==null?.07:o.sq,minDur=o.min||.12;
+  const hops=[]; let cur=null;
+  const hits=(o.hits||[]).map(h=>({who:h.who,r:h.r||1.5,run:h.run,fired:false,s:null,done:false}));
+  return {t:0,i:0,mode:'air',start(){
+      const p=position(a); cur=[p.x,p.y]; storyHold(a); a.move=null; a.scr={x:cur[0],y:cur[1]}; a.squash=0;
+      for(const q of pts) { const dx=q[0]-cur[0],dy=q[1]-cur[1],d=Math.hypot(dx,dy),n=Math.max(1,Math.round(d/reach));
+        for(let k=1;k<=n;k++) hops.push({f:[cur[0]+dx*(k-1)/n,cur[1]+dy*(k-1)/n],t:[cur[0]+dx*k/n,cur[1]+dy*k/n],dur:Math.max(minDur,d/n*per)});
+        cur=q; }
+      this.t=0; this.i=0; this.mode='air'; },
+    update(dt){
+      for(const h of hits) if(h.s&&!h.done) h.done=h.s.update(dt);
+      if(this.i<hops.length) {
+        const h=hops[this.i];
+        if(this.mode==='air') {
+          this.t+=dt; const u=Math.min(1,this.t/h.dur);
+          a.scr={x:h.f[0]+(h.t[0]-h.f[0])*u,y:h.f[1]+(h.t[1]-h.f[1])*u}; a.lift=Math.sin(Math.PI*u)*arc; a.squash=-.18*Math.sin(Math.PI*u);
+          const P=a.scenePose,dx=h.t[0]-h.f[0]; if(o.face!==false&&P&&Math.abs(dx)>.02) P.dir=dx<0?'left':'right';
+          if(u>=1) { this.mode='land'; this.t=0; a.lift=0; a.squash=1; if(o.snd&&typeof sfx!=='undefined'&&sfx[o.snd]) sfx[o.snd](); }
+        } else {
+          this.t+=dt; a.squash=Math.max(0,1-this.t/sq);
+          if(this.t>=sq) { a.squash=0; this.i++; this.t=0; this.mode='air'; }
+        }
+        const p=position(a);
+        for(const h of hits) if(!h.fired) { const w=sceneActor(h.who); if(!w) continue; const q=position(w);
+          if(Math.hypot(p.x-q.x,p.y-q.y)<h.r) { h.fired=true; h.s=S.seq(...compileScene(h.run)); h.s.start(); } }
+        return false;
+      }
+      for(const h of hits) if(!h.fired) { h.fired=true; h.s=S.seq(...compileScene(h.run)); h.s.start(); }   // a hit it never came near still runs, at the end
+      if(hits.some(h=>!h.done)) return false;
+      const last=hops.length?hops[hops.length-1].t:cur; a.x=last[0]; a.y=last[1]; a.scr=null; a.move=null; a.lift=0; a.squash=0; return true; }};
+});
+// {lookat:['tom','rose'],at:'Big Mudling',time:3} (fix-heist1play-5): for `time` seconds the people lying (ko) or kneeling on the floor turn to face `at`, so they follow it with their eyes.
+SCENE_OPS.lookat=o=>({t:0,start(){ this.t=0; },
+  update(dt){ this.t+=dt; const tg=sceneActor(o.at); if(tg) for(const n of [].concat(o.lookat)) { const a=sceneActor(n); if(!a||!a.scenePose||!/^(ko|kneel)$/.test(a.scenePose.f||'')) continue;
+      a.scenePose.dir=position(tg).x<position(a).x?'left':'right'; }
+    return this.t>=(o.time||1); }});
 // A battle pose borrowed for a cutscene: a.scenePose={f:'hurtPose'|'kneel'|'ko'|...,dir:'left'|'right'}, or a painted story pose f:'st_reach' etc. (STORY_POSES) (set by the pose, knock and getup steps above).
 // Called by drawSheetActor (engine/town-render.js) with the overworld set and its scale k. Returns {rows,k,pal}, or null to draw the normal overworld frame.
 // Battle frames are about twice the overworld figure's height in rows, so they are drawn at k * (overworld rows / battle idle rows) to match Tom's size.
@@ -1378,6 +1423,7 @@ function mudlingHeistDraw(a,cx,base) {
   ellipse(cx,base+1,Math.round(w*s*.42*(1-Math.min(.35,lift/60))),5*s,'#2f493640');
   const x0=cx-Math.round(ax*s),y0=Math.round(base-h*s-lift);
   if(P.spin) { const py=y0+(m.cy||h/2)*s; gfx.save(); gfx.translate(cx,py); gfx.rotate(elapsedTime*P.spin*Math.PI*2); gfx.translate(-cx,-py); drawSprite(rows,H.pal,x0,y0,s); gfx.restore(); }
+  else if(a.squash) { const q=a.squash,gy=base-lift; gfx.save(); gfx.translate(cx,gy); gfx.scale(1+.26*q,1-.3*q); gfx.translate(-cx,-gy); drawSprite(rows,H.pal,x0,y0,s); gfx.restore(); }   // fix-heist1play-5: squash on landing (q 1), stretch in the air (q below 0), about the feet
   else drawSprite(rows,H.pal,x0,y0,s);
   return true;
 }

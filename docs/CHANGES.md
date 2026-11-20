@@ -1,3 +1,21 @@
+## fix-heist1play-5 (2026-11-20): The mud blob's whole path in the muffin theft is rebuilt: hops, stop-off, knock-downs on contact, counter, hop down, a real run out the door
+
+Tom (11-20 09:46 recording): "there are still several issues with the mudblob animation". Plan: `claude/heist-fix5-plan.md`, eight rows, all done in `SCENES.ch1Theft`:
+
+- Row 1: the blob hops (a `hopwalk` step: short hops with a landing squash and a small arc) instead of sliding on one frozen frame.
+- Row 2: it stops at [8,12.2], clear of Rose; the scream no longer holds the scene (the charge starts about half a second into it); it looks left and right while it stands.
+- Row 3: it charges through Rose, Grace, Tom and Deedee in order; each is knocked down on contact (hit steps in `hopwalk`, not timers), landing on open floor (none behind the plant or over the sofa); Deedee is shoved on contact and stays on her feet; the charge is about twice as long.
+- Row 4: it waits at [6.8,10], on open floor clear of the stool.
+- Row 5: it hops onto the counter drawn in front of the island layer (`plateTop` in `engine/plate.js`); the pan leaves the counter on the exact frame it appears overhead (frame 80 of the recording).
+- Row 6: it hops down to open floor covering nobody.
+- Row 7: it really runs out across the floor, down the hall and out the door in view, then `doorOut` (a `hop` with `settle:true` clears the stale `scr` that froze the old exit).
+- Row 8: Tom, Rose and Grace stay on the floor and turn to follow it (`lookat` step), get up after it is through the door; Deedee ends on a clear spot beside Tom.
+- Kept: the pan size in its hands, the knocked-down poses, Deedee's lines, Boppy's story running over the exit, mud prints and crumbs, `CH1_MUD` 1.1.
+- Deviation from the plan: row 3 suggested the `mh_sneak` frames for the charge; they hold the pan overhead, so the charge uses `mh_look`.
+- Not changed: Rose's pink and yellow dress inconsistency (noted on the card).
+- New `tools/scene_record.py`: records a scene on a virtual clock (portrait or landscape, `LAND=1`), 10 frames a second from the bang to the despawn, with actor positions logged. Checked every frame in both layouts against the plan's fail list: no cut by furniture, nobody covered, no stand over 1 s with nothing changing, never missing.
+- Tests: `tools/cut_life_test.py` passed. `tools/script_convo_test.py` and the `board_sync_test` R5 check fail the same way on `main` without this change.
+
 ## board-builds (2026-11-20): board only: UX audit of the build history screen, a redesign plan and its four cards
 
 Tom (11-20 10:18): "do a UX audit of the build history screen and create a plan to improve it to make it more usable. think about me as a user looking to see which builds have been done recently, which are currently pending and any subset of deployment status, with older builds archived and easily searchable/finable etc"

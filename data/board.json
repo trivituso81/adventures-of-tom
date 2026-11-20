@@ -9853,7 +9853,7 @@
    "ask": "play",
    "fyi": true,
    "title": "Watch the new muffin theft in Deedee's kitchen",
-   "next": "Open Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen, and watch it in portrait, then once in landscape. Look again at 1) the pan in the mud blob's hands is now about the same size as the pan was on the counter; 2) when the mud blob hops off the island with the pan it lands to the right of the stool and nothing cuts it off. All good if it plays like that; if the hop still looks wrong, press Something is wrong and say what you see.",
+   "next": "Open Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen, watch it in portrait, then once in landscape. Look at 1) the mud blob hops (it does not slide); 2) it stops in front of Rose, looks left and right, then charges and knocks down Rose, Grace, Tom and Deedee one by one as it reaches each, Deedee staying on her feet; 3) it waits on open floor, hops onto the counter in front of the island and the pan leaves the counter the moment it is overhead; 4) it hops down, then runs out the hall and door in view while the others lie there and turn to follow it, then get up. All good if it plays like that; if not, press Something is wrong and say what you see. Known and left alone: Rose's dress is pink in some scenes and yellow in others.",
    "first": "Wait for Rebuild the muffin theft scene to ship (build heist1).",
    "blocks": [],
    "created": "2026-11-20",
@@ -9922,6 +9922,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom (09:46 recording, reviewed frame by frame): \"there are still several issues with the mudblob animation\". Plan: claude/heist-fix5-plan.md, eight rows. Fixed by card c-fix-heist1play-5 (build fix-heist1play-5); this card waits on it and comes back to you when it ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Ready to watch again: build fix-heist1play-5 shipped the rebuilt mud blob path (eight rows)."
     }
    ],
    "waiting_on": "claude"
@@ -14235,7 +14239,7 @@
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
-   "next": "Rebuilding the whole path of the mud blob in the muffin theft (eight rows of claude/heist-fix5-plan.md in the Project): short hops, stop clear of Rose, a path that knocks people down on contact, wait clear of the stool, up on the counter in front, down onto open floor, a real run out the door, and the others stay down until it is gone. Every frame from the bang to the despawn gets looked at in portrait and landscape before it ships.",
+   "next": "Shipped as build fix-heist1play-5: all eight rows of claude/heist-fix5-plan.md. Every frame from the bang to the despawn was recorded at 10 per second in portrait and landscape and checked against the fail list (no cut by furniture, nobody covered, no stand over 1 s with nothing changing, never missing).",
    "blocks": [
     "t-heist1play"
    ],
@@ -14288,6 +14292,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped fix-heist1play-5. Rose pink/yellow dress inconsistency left alone as asked (a separate fix). The plan suggested mh_sneak frames for the charge but they hold the pan overhead, so the charge uses mh_look. Tests: cut_life_test passed; script_convo_test and board_sync_test R5 fail the same on main without this change (not caused by it)."
     }
    ],
    "prompt": {

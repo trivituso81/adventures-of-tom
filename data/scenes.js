@@ -202,53 +202,69 @@ SCENES.ch1Theft=[
   // lifts the whole pan over its head and sneaks out the long way, right behind Boppy's chair, while his story goes on.
   // fix-heist1play (Tom 11-20: "Looks very sloppy"): it walks in like the old scene (no rolling ball, no bowling over, nobody on the floor), everyone is startled
   // and Rose screams, it goes straight to the island, lifts the pan and runs straight out the door (no detour behind Boppy), his story goes on over its exit.
-  // Beat 1, the bang: the party jumps and turns, Deedee is shocked, it walks up the hall.
+  // fix-heist1play-5 (Tom's 11-20 09:46 recording, plan claude/heist-fix5-plan.md, eight rows): the Mudling's whole path. Every move is hops with a squash on each landing
+  // (hopwalk). It stops clear of Rose, charges THROUGH the people in order (Rose, Grace, Tom, Deedee), each knocked when it reaches them (a contact trigger, not a timer),
+  // waits on open floor clear of the stool, hops up onto the island and is drawn in front of it (plateTop), hops down onto open floor and runs out the door in view
+  // while the three stay on the floor watching it; they get up once it is gone. Tiles were chosen by looking at frames (tools/scene_record.py), not by the numbers.
+  // Beat 1, the bang: the party jumps and turns, Deedee is shocked, it hops up the hall.
   {sfx:'bonk'}, {sfx:'doorIn'}, {call:()=>{ storyPosesLoad('deedee'); const b=sceneActor('Boppy'); if(b) b.storyBack=true; }},   // storyBack: no mood, talk or reaction pose turns him (engine/emotions.js)
   {prop:'mudprints',kind:'mudprints',set:{map:'grands',x:8,y:11,t0:performance.now()}},   // three mud prints up the hall (8,11 to 8,13), they fade over 4 s (SPK.mudprints)
+  // Beat 2, the charge: it stops at (8,12.2), clear of Rose, looks left and right while she screams, and 0.5 s into the scream it charges through the four of them.
   {all:[
     {seq:[
       {spawn:{name:'Big Mudling',monster:'mudling',mscale:CH1_MUD,at:[8,15],dir:'up',fade:0}},
       {pose:'Big Mudling',f:'mh_look',dir:'left'},
       {fadeActor:'Big Mudling',to:1,time:.12},
-      {walk:'Big Mudling',to:[[8,14],[8,13],[8,12],[8,11.4]],speed:.22,onStep:()=>sfx.splat()}]},
+      {hopwalk:'Big Mudling',to:[[8,12.2]],snd:'splat'},
+      {pose:'Big Mudling',f:'mh_look',dir:'right'}, {wait:.25}, {pose:'Big Mudling',f:'mh_look',dir:'left'}, {wait:.25}, {pose:'Big Mudling',f:'mh_look',dir:'right'}, {wait:.05},
+      {all:[{cam:[7.4,8.7],time:.5},   // landscape shows only seven rows: the camera comes up so Deedee's head and the whole lane are in frame
+        {hopwalk:'Big Mudling',to:[[8,10.7],[9.9,10.5],[9.2,10.2],[7.4,10.3],[6.8,10]],per:.2,reach:.75,arc:7,snd:'splat',hits:[
+          {who:'rose',r:1.7,run:[{knock:'rose',to:[8,8.5],fly:.5,arc:26}]},
+          {who:'grace',r:1.7,run:[{knock:'grace',to:[10.6,8.6],fly:.5,arc:24}]},
+          {who:'tom',r:1.3,run:[{knock:'tom',to:[9.3,8.2],fly:.5,arc:26}]},
+          {who:'Deedee',r:1.7,run:[{pose:'Deedee',f:'em_surprised',mid:'deedee',dir:'down'},
+            {hop:'Deedee',from:()=>{ const q=position(sceneActor('Deedee')); return [q.x,q.y]; },to:[6.9,8],time:.4,arc:8,settle:true}]}   // shoved straight back from where it hit her, shocked, still on her feet (Tom 11-20)
+        ]}]}]},
     {seq:[{face:'tom',dir:'down'},{face:'rose',dir:'down'},{face:'grace',dir:'down'},{face:'Deedee',dir:'down'},
           {pose:'Deedee',f:'em_surprised',mid:'deedee',dir:'down'}]},
     {seq:[{wait:.15},{hop:'rose',from:()=>[8,10],to:[8,10],time:.3,arc:12},{hop:'grace',from:()=>[10,10],to:[10,10],time:.3,arc:10}]},
-    {seq:[{wait:.2},{talk:'Rose',lines:["AHHH! DEEDEE!"]}]},   // Rose screams as it comes in
-    {cam:[6.5,9.6],time:.6}
+    {seq:[{wait:.95},{talk:'Rose',lines:["AHHH! DEEDEE!"]}]},   // Rose screams as it arrives; the charge starts about half a second into it and does not wait for her voice clip
+    {cam:[7.4,9.6],time:.6}
   ]},
-  // Beat 2, the stand-off: it walks up to the island and looks up at the pan, then at Deedee. She stands her ground, angry.
+  // Beat 3, the stand-off: it is on open floor beside the island, clear of the stool, and looks around (a small hop on each turn) while Deedee says her line.
+  {face:'Deedee',dir:'left'}, {pose:'Deedee',f:'em_angry',mid:'deedee',dir:'left'},
   {all:[
-    {walk:'Big Mudling',to:[[8.4,9.9],[7.4,10.4],[5.7,8.9]],speed:.2,onStep:()=>sfx.splat()},
-    {seq:[{wait:.2},{sfx:'bonk'},{wait:.25},{sfx:'bonk'},{wait:.25},{sfx:'bonk'},{wait:.2},{sfx:'thud'}]},
-    {knock:'rose',to:[8.6,10.9],delay:.2,dir:'right'},
-    {knock:'tom',to:[9.9,8.5],delay:.45,dir:'right'},
-    {knock:'grace',to:[11,10.7],delay:.7,dir:'right'},
-    {seq:[{wait:.95},{pose:'Deedee',f:'em_surprised',mid:'deedee',dir:'down'},{hop:'Deedee',from:()=>[7,9],to:[7.6,8.1],time:.35,arc:8}]}   // fix-heist1play-3 (Tom: "Deedee should get knocked backwards by him with the respective emotion but she should not fall down"): shoved back a step, shocked, stays on her feet
-  ]},   // fix-heist1play-2 (Tom: "Why does no one end up on the floor? It was hilarious"): it walks through the three and knocks them flat again
-  {pose:'Big Mudling',f:'mh_look',dir:'left'}, {sfx:'look'}, {wait:.5},
-  {pose:'Big Mudling',f:'mh_look',dir:'right'}, {face:'Deedee',dir:'left'}, {pose:'Deedee',f:'em_angry',mid:'deedee',dir:'left'},
-  {wait:.4},
-  {talk:'Deedee',lines:["Excuse me! I just washed that floor."]},
-  // Beat 3, the lift: up against the island, it stretches, and the pan leaves the counter on the frame it is over its head.
-  {pose:'Big Mudling',f:'mh_reach',dir:'left'}, {wait:.2},   // fix-heist1play-3 (Tom: "he overlaps the counter ... hop on the counter to grab the muffins then hop back down"): it hops up onto the island instead of standing inside it
-  {hop:'Big Mudling',from:()=>[5.7,8.9],to:[4.7,7.5],time:.4,arc:12,lift:[0,20]},
+    {talk:'Deedee',lines:["Excuse me! I just washed that floor."]},
+    {seq:[{pose:'Big Mudling',f:'mh_look',dir:'right'}, {sfx:'look'}, {wait:.4},
+          {hopwalk:'Big Mudling',to:[[6.8,10]],arc:3,min:.16,sq:.06}, {pose:'Big Mudling',f:'mh_look',dir:'left'}, {wait:.5},
+          {hopwalk:'Big Mudling',to:[[6.8,10]],arc:3,min:.16,sq:.06}, {pose:'Big Mudling',f:'mh_look',dir:'right'}, {wait:.45},
+          {hopwalk:'Big Mudling',to:[[6.8,10]],arc:3,min:.16,sq:.06}, {pose:'Big Mudling',f:'mh_look',dir:'left'}, {wait:.5}]}
+  ]},
+  // Beat 4, the lift: it hops up onto the island beside the pan (drawn in front of the painted counter, plateTop) and the pan leaves the counter on the frame it is overhead.
+  {pose:'Big Mudling',f:'mh_reach',dir:'left'}, {wait:.2},
+  {call:()=>{ const m=sceneActor('Big Mudling'); if(m) m.plateTop=true; }},
+  {all:[{cam:[7.4,8.3],time:.5},   // the island is the top of the picture: the camera comes up so its head is not cut by the screen edge in landscape
+        {hop:'Big Mudling',from:()=>[6.8,10],to:[4.7,7.5],time:.5,arc:16,lift:[0,20],settle:true}]},
   {pose:'Big Mudling',f:'mh_reach',dir:'left'}, {wait:.45},
   {pose:'Big Mudling',f:'mh_hold',dir:'right'}, {sfx:'pickup'}, {prop:'muffinpan',hide:true}, {flag:'muffins-gone'},   // the painted island loses its muffins too (engine/plate.js grandsEmpty)
   {prop:'crumbs',kind:'crumbs',set:{map:'grands',x:5.2,y:8.4}}, {wait:.6},   // a few crumbs where the muffins were
-  // Beat 4, the escape: straight to the door while everyone watches it go, Boppy's story goes on behind it.
-  {hop:'Big Mudling',from:()=>[4.7,7.5],to:[6.6,8.6],time:.45,arc:10,lift:[20,0]},   // fix-heist1play-4 (Tom: "when he hops off the counter, something bizarre happens"): it landed behind the stool and the island front and was cut off there; it now lands clear of both, to the right
+  // Beat 5, the escape: down onto open floor (still drawn in front of the island until it lands), then really running out through the door, in view, while the three on the
+  // floor watch it go. They get up only after it is through the door; Deedee walks back to her spot beside Tom.
+  {hop:'Big Mudling',from:()=>[4.7,7.5],to:[6.9,10],time:.5,arc:12,lift:[20,0],settle:true},
+  {call:()=>{ const m=sceneActor('Big Mudling'); if(m) m.plateTop=false; }},
   {all:[
     {seq:[{pose:'Big Mudling',f:['mh_sneak_a','mh_sneak_b'],fps:8,dir:'right'},
-          {walk:'Big Mudling',to:[[7.2,10.8],[8,11.8]],speed:.4},
-          {pose:'Big Mudling',f:['mh_sneak_a','mh_sneak_b'],fps:8,dir:'left'},
-          {walk:'Big Mudling',to:[[8,13.2],[8,14.6]],speed:.3,onStep:()=>sfx.splat()},
-          {sfx:'doorOut'},{despawn:'Big Mudling'}]},
-    {seq:[{wait:.6},{face:'Deedee',dir:'down'},{cam:[8,10.2],time:.8}]},
-    {getup:'tom',to:[9,9],delay:.25,dir:'down'},
-    {getup:'rose',to:[8,9],delay:.4,dir:'down'},
-    {getup:'grace',to:[10,10],delay:.55,dir:'down'},
-    {seq:[{wait:.4},{talk:'Boppy',lines:["...so I say to him, \"Nice hat.\" He says, \"Thank you.\" And the hat is steaming."]}]}
+          {hopwalk:'Big Mudling',to:[[7.6,11.2],[8,12.4],[8,13.8],[8,15.4]],per:.2,reach:.8,arc:6,snd:'splat'},
+          {sfx:'doorOut'},{despawn:'Big Mudling'}, {wait:.3},
+          {all:[
+            {getup:'tom',to:[9,9],dir:'down'},
+            {getup:'rose',to:[8,10],delay:.15,dir:'down'},
+            {getup:'grace',to:[10,10],delay:.3,dir:'down'},
+            {seq:[{pose:'Deedee'},{walk:'Deedee',to:[[7,9]],speed:.3},{face:'Deedee',dir:'down'}]}
+          ]}]},
+    {seq:[{wait:.3},{face:'Deedee',dir:'down'},{cam:[8,10.8],time:.9}]},
+    {lookat:['tom','rose','grace'],at:'Big Mudling',time:3},
+    {seq:[{wait:1.5},{talk:'Boppy',lines:["...so I say to him, \"Nice hat.\" He says, \"Thank you.\" And the hat is steaming."]}]}
   ]},
   {cam:null},
   {pose:'Deedee'},   // her shock ends when her pan line opens (cutpolish4)
