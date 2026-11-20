@@ -6999,6 +6999,10 @@
     {
      "d": "2026-11-19",
      "t": "Unblocked: Generate all of a card's pictures with one approval on the board (artgen1) is done."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom tapped START."
     }
    ],
    "prompt": {
@@ -7009,7 +7013,8 @@
     "model": "Claude Sonnet 5.5 (row B: every step, file and test is written in claude/artgen-plan.md, and tests catch mistakes)",
     "effort": "medium (one small feature on four pages, written in the plan)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/artgen-plan.md (sections 1 to 3 and section 7), then card c-cardlinks1 in data/board.json with its history and the notes of the Tom cards that blocked it. Build cardlinks1 exactly as the plan says and push it as cardlinks1. Your first push is the commit board: start c-cardlinks1. Spend nothing on xAI or ElevenLabs. Write what you built and anything that differs from the plan into the plan's Built section. Do not start the next phase. You have my full permission to access the repo."
-   }
+   },
+   "start": true
   },
   {
    "id": "c-adminhub1",
