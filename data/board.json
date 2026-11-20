@@ -15520,7 +15520,7 @@
    "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-113001-w756. First note: rose facing the wrong way",
+   "next": "Report r-20261120-113001-w756 waits on Tom: which way should Rose face in the Deedee kitchen scene (ch1Theft) while Tom says Hi, Mom? Right now she faces left toward Deedee.",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -15547,6 +15547,11 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Session ended without shipping: report r-20261120-113001-w756 (\"rose facing the wrong way\", ch1Theft, Tom at the grands house) cannot be fixed from the note. In the frame Rose stands at (8,10) facing left, toward Deedee at (7,9), which is what the scene sets (data/scenes.js ch1Theft: face rose left); Tom and Grace use front talk poses. Needs Tom to say which way she should face (toward Tom/right, or the camera). Report left open on inbox.",
+     "at": "2026-11-20T20:10:00Z"
     }
    ],
    "blocks": [],
