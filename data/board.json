@@ -16290,7 +16290,7 @@
   {
    "id": "c-keysecrets4",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "tag": "keysecrets4",
    "title": "Music makes through repo secrets",
@@ -16336,10 +16336,15 @@
     {
      "d": "2026-11-20",
      "t": "Built keysecrets4: music.html asks data/music-requests.json, music-gen Action + musicgen.py, branch musicgen. Test music-library/test.py 0 fails. Action not run for real."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as keysecrets4: Music Library makes takes on GitHub with the repo secret; the ElevenLabs key box is gone"
     }
    ],
    "started_at": "2026-11-20T21:23:32+00:00",
-   "after": "nothing for Tom: c-keysecrets5"
+   "after": "nothing for Tom: c-keysecrets5",
+   "done": "2026-11-20"
   },
   {
    "id": "c-keysecrets5",
@@ -16565,6 +16570,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukCe4s7AKboq4xirQLv",
+   "title": "Music makes through repo secrets",
+   "first": "2026-11-20T21:29:43Z",
+   "last": "2026-11-20T21:33:16Z",
+   "tags": [
+    "keysecrets4"
+   ],
+   "cards": [
+    "c-keysecrets4"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCfB6Lgq1Cpqbxxyo9",
    "title": "Type the welcome page change you want",
    "first": "2026-11-20T21:31:38Z",
@@ -16572,16 +16589,6 @@
    "tags": [],
    "cards": [
     "t-welcomepage-request"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCe4s7AKboq4xirQLv",
-   "title": "Music makes through repo secrets",
-   "first": "2026-11-20T21:29:43Z",
-   "last": "2026-11-20T21:29:43Z",
-   "tags": [],
-   "cards": [
-    "c-keysecrets4"
    ]
   },
   {
@@ -18756,8 +18763,8 @@
    "takes/20261120T211742-sz1/state.json"
   ]
  },
- "synced": "ff3a033d16c8bf808e3982770eeaa403b4539238",
- "synced_at": "2026-11-20T21:32:11+00:00",
+ "synced": "5aada26480aaa7340afa06e2ccca0c80fa7c852a",
+ "synced_at": "2026-11-20T21:34:11+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
