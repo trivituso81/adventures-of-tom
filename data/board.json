@@ -13849,7 +13849,7 @@
   {
    "id": "t-welcomepage-play",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "theme": "Game Shell",
    "ask": "play",
    "fyi": true,
@@ -13868,8 +13868,14 @@
      "d": "2026-11-20",
      "t": "Added by c-idea-welcomepage: Tom's play check of the new welcome buttons and chapter list top bar.",
      "at": "2026-11-20T17:46:32.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: i added a request to this thread directly in claude Sent to Claude as card c-fix-welcomepage-play; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-20T17:52:58.235Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-battlelabpage",
@@ -13992,6 +13998,65 @@
    "after": "t-heist1play",
    "auto": true,
    "started_at": "2026-11-20T17:51:46+00:00"
+  },
+  {
+   "id": "c-fix-welcomepage-play",
+   "tag": "fix-welcomepage-play",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Game Shell",
+   "title": "Fix: Check the new welcome buttons and chapter list top",
+   "next": "You reported a problem on Check the new welcome buttons and chapter list top bar. Claude starts the fix by itself. Latest: i added a request to this thread directly in claude",
+   "blocks": [
+    "t-welcomepage-play"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T17:52:57.433Z",
+     "card": "t-welcomepage-play",
+     "title": "Check the new welcome buttons and chapter list top bar",
+     "ask": "play",
+     "words": "i added a request to this thread directly in claude",
+     "shot": "",
+     "asked": "Open the game from your home screen. If you still see the old buttons, close the app and open it again once. On the welcome page check: 1) NEW GAME and LOAD are only as wide as their words and the same width as each other; 2) RELOAD and ADMIN are small icons at the right. Tap NEW GAME and check: 3) BACK with an arrow is top left, with EASY, MEDIUM, HARD to its right and a few words under each, all inside the frame; the lit one is your difficulty; 4) tap HARD, then MEDIUM, and the lit one follows; 5) tap a chapter and it starts with no difficulty page. Turn the game to landscape and look at both screens again. All good if it looks and works like that; if a button is cut off or hard to tap, press Something is wrong and say which one."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-welcomepage-play"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-welcomepage-play.",
+     "at": "2026-11-20T17:52:58.235Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-welcomepage-play: i added a request to this thread directly in claude",
+     "at": "2026-11-20T17:52:58.235Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-20T17:52:58.235Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Check the new welcome buttons and chapter list top bar.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-welcomepage-play and t-welcomepage-play in data/board.json, history included. Your first push is the commit board: start c-fix-welcomepage-play.\n\nTom tested and found problems:\n1. Card t-welcomepage-play (Check the new welcome buttons and chapter list top bar, ask play). He was asked: Open the game from your home screen. If you still see the old buttons, close the app and open it again once. On the welcome page check: 1) NEW GAME and LOAD are only as wide as their words and the same width as each other; 2) RELOAD and ADMIN are small icons at the right. Tap NEW GAME and check: 3) BACK with an arrow is top left, with EASY, MEDIUM, HARD to its right and a few words under each, all inside the frame; the lit one is your difficulty; 4) tap HARD, then MEDIUM, and the lit one follows; 5) tap a chapter and it starts with no difficulty page. Turn the game to landscape and look at both screens again. All good if it looks and works like that; if a button is cut off or hard to tap, press Something is wrong and say which one. He wrote: i added a request to this thread directly in claude\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T17:52:57.433Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-welcomepage-play to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-welcomepage-play, and give the build fix-welcomepage-play a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-welcomepage-play",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
