@@ -1,3 +1,10 @@
+## reports-2026-11-19b (2026-11-19): Old Iron-Gill's swim away from the pier now stays on open water too
+
+- Follow-up to reports-2026-11-19a, same report r-20261114-182326-95v4 (Tom: "you can't be overlapping with the pier at all").
+- Build a put him at tile (18,13), which left about a third of a tile between his puddle and the pier's last post, and he still swam away along row 14, straight through the pier front.
+- Now he comes in from tile (23,13) and stops at (19,13), about a tile of open water from the post (his right fin and some of the right fence are cut off at the screen edge, as Tom allowed). He leaves by swimming south to row 19 and then west under the pier, so he never covers the boards. No lines, voice or timings changed.
+- Test: `FIN=1 python3 -I tools/reaction_test.py` with a ch3Pier case (map pier, start 10,10, party tom grace rose boppy): frames of the arrival, the talking pages and the swim away, rotated landscape; no overlap.
+
 ## reports-2026-11-19a (2026-11-20): Cattail Pier: Old Iron-Gill now surfaces on the water, clear of the pier
 
 - Report r-20261114-182326-95v4 (bug), Tom: "Iron Gil is overlapping the pier. He needs to be purely on the water all the way to the right, and if some of the right side fence is cut off, then so be it, but you can't be overlapping with the pier at all".

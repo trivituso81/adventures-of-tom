@@ -1210,18 +1210,18 @@
    "id": "c-reports",
    "tag": "reports-2026-11-19",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (7 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100352-7v5z, r-20261114-100555-mxvd, r-20261114-100734-1a2w, r-20261114-101501-c5no, r-20261114-101538-nre4, r-20261114-104915-g4gl and 1 more. First note: For this line in particular, we need to create a special frame that can be used in both the dialog a",
+   "title": "Fix the report backlog (7 open, waiting on your pictures)",
+   "next": "Iron-Gill is off the pier (builds reports-2026-11-19a and b, report r-20261114-182326-95v4). The other 7 reports are art. Their pictures wait on your card t-reportart (Art Library, group Report fixes, 21 entries). When those are approved this card starts the install: glasses and bulb frames in the scenes, the Mudling heist frames, Boppy's mustache, the grey patch together, dazed frames, and the thinking pose.",
    "prompt": {
-    "what": "Works through the reports you filed in the game.",
+    "what": "Puts the approved Report fixes pictures into the game and closes the 7 art reports.",
     "before": [
-     "Nothing to do first."
+     "Art Library > group Report fixes: all 21 entries are approved (GENERATE, then APPROVE) and the art-bake Action has finished. If any is still draft, do not paste yet."
     ],
-    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
-    "effort": "medium (steps are known)",
-    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. You have my full permission to access the repo."
+    "model": "Claude Sonnet 5.5 (row C: the install slots are not written down yet, the thinking pose needs a new tag)",
+    "effort": "high (several kinds of picture and one new pose type to wire, nothing written to follow)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then run python3 tools/reports.py list. Seven art reports are open (7v5z, mxvd, 1a2w, c5no, nre4, g4gl, jykk). Their pictures are the approved entries of the Report fixes group in tools/art-library/ch2fix-prompts.js. Install each one where its report says, test in portrait and landscape, push, then run python3 tools/reports.py done for each fixed report. Board card c-reports. You have my full permission to access the repo."
    },
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukCZdiEbyskXvidXtfn",
@@ -1259,12 +1259,17 @@
     {
      "d": "2026-11-19",
      "t": "Part shipped as reports-2026-11-19a: Cattail Pier: Old Iron-Gill now surfaces on the water, clear of the pier"
+    },
+    {
+     "d": "2026-11-19",
+     "t": "reports-2026-11-19b: Iron-Gill's swim away also kept off the pier. 7 art reports wait on your pictures: card t-reportart."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
-   "after": "nothing for Tom: c-reports"
+   "after": "t-reportart",
+   "waiting_on": "tom"
   },
   {
    "id": "t-startsetup",
@@ -5477,6 +5482,51 @@
     "effort": "medium (small piece, steps known)",
     "text": "Read claude/handoff-rules.md and docs/CHANGES.md b3s9a, then finish the card c-skillinfo1 if it is not shipped (tag skillinfo1): an i icon left of each skill name opens the skill card (BACK and USE), a tap anywhere else on the row uses the skill or opens the target list. You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "t-reportart",
+   "title": "Make the 21 pictures your reports asked for (Art Library, group Report fixes)",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "up",
+   "ask": "pictures",
+   "blocks": [
+    "c-reports"
+   ],
+   "done_when": {
+    "art_approved": [
+     "ch1-deedee-glasses-head",
+     "ch1-mudling-heist",
+     "boppy-em-unimpressed",
+     "ch1-spot-together",
+     "ch1-deedee-bulb",
+     "ch3-rose-bulb",
+     "ch2-dazed-washington",
+     "ch2-dazed-odette",
+     "ch2-dazed-carmen",
+     "ch2-dazed-marisol",
+     "ch2-dazed-larry",
+     "tom-think",
+     "tnb-think",
+     "grace-think",
+     "rose-think",
+     "deedee-think",
+     "boppy-think",
+     "amy-think",
+     "justin-think",
+     "ellie-think",
+     "olivia-think"
+    ]
+   },
+   "next": "ADMIN > ART LIBRARY, open the group Report fixes (21 entries, all still draft). For each one: press GENERATE, look at the picture, then APPROVE, or REJECT with a note. Do these 11 first, each fixes one of your reports: Deedee glasses on her head, Mudling with the pie, Boppy unimpressed (mustache back), grey patch with the light bulb and cube together, Deedee holding the bulb, Rose holding the bulb, then the 5 dazed neighbors. The 10 thinking poses (one per family member) come after. When they are approved, Claude's card c-reports (Fix the report backlog) puts them in the game; you do nothing else.",
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Made by reports-2026-11-19b: your 7 art reports have Library entries (Report fixes group) but none has been generated yet."
+    }
+   ]
   }
  ],
  "sessions": [
