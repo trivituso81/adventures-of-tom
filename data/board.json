@@ -1094,7 +1094,7 @@
    "title": "Chapter 1 Rivituso Row: show Amy in her window, stop the party clear of the arch sign (amywin1)",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Built and tested (portrait and landscape): the party walks off the steps to the path by the GREGORI house, Amy rises into the dormer window over her door for her two lines. Push is waiting on repo push access for this conversation.",
    "blocks": [],
    "changed": "2026-11-19",
@@ -1107,6 +1107,10 @@
     {
      "d": "2026-11-19",
      "t": "New card. Tom: \"Amy can't be seen - shouldn't her head be peering out of a window? Why did the party stop when hidden by a sign\". Cause: the scene fires on arrival, on the steps under the arch."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as amywin1: Chapter 1, Rivituso Row: Amy leans out of her upstairs window, and the party walks off the steps before she talks"
     }
    ],
    "prompt": {
@@ -1119,7 +1123,8 @@
     "text": "Read claude/handoff-rules.md and claude/amywin1-handoff.md, then apply claude/amywin1.patch to main, rerun its tests and push build amywin1 (skip if docs/CHANGES.md on main already has ## amywin1). You have my full permission to access the repo."
    },
    "tag": "amywin1",
-   "after": "t-amywin1"
+   "after": "t-amywin1",
+   "done": "2026-11-19"
   },
   {
    "id": "t-amywin1",
@@ -1146,6 +1151,18 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukEZT7UffmxSezt2yvX",
+   "title": "Chapter 1 Rivituso Row: show Amy in her window, stop the party clear of the arch sign (amywin1)",
+   "first": "2026-11-19T17:02:34-08:00",
+   "last": "2026-11-19T17:02:34-08:00",
+   "tags": [
+    "amywin1"
+   ],
+   "cards": [
+    "c-amywin1"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGt8KJKK4iu2gwLNP2",
    "title": "New battle system, stage 9: first late joiners and the next kits",
@@ -1218,8 +1235,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "56ebb390175ad3b4dd1053b51d2fc300784c7e0a",
- "synced_at": "2026-11-20T01:01:33+00:00",
+ "synced": "619a05cfae50a3becd20c4d090b6b388369c1d87",
+ "synced_at": "2026-11-20T01:04:54+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
