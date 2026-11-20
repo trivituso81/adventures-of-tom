@@ -9687,9 +9687,17 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: nothing was left for it to wait on."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom sent this to the backlog."
     }
    ],
-   "first": "After the publish of build stagefollow, press RELOAD on the title."
+   "first": "After the publish of build stagefollow, press RELOAD on the title.",
+   "backlog": {
+    "at": "2026-11-20",
+    "from": "up"
+   }
   },
   {
    "id": "c-wormstage",
