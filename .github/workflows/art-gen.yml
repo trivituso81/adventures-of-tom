@@ -7,10 +7,13 @@ name: art-gen
 # by default); the first paid run is Tom's tap. art/raw is NOT checked out (it holds every approved picture); a reference picture is read with `git show HEAD:<path>`,
 # which fetches just that file. Plan: claude/artgen-plan.md.
 
+# keysecrets1: the Art Library's GENERATE button commits data/art-requests.json with the message "art: generate <id>"; that push runs this
+# workflow with --requests (the same job, one picture per press, no board card). The key stays the repo secret XAI_API_KEY.
+
 on:
   push:
     branches: [main]
-    paths: ['data/board.json']
+    paths: ['data/board.json', 'data/art-requests.json']
   workflow_dispatch:
     inputs:
       card:
@@ -29,6 +32,10 @@ on:
         description: 'artgen2: a number N above 0 judges the N newest approved pictures with the QA (no pictures made; costs real xAI money up to cap, default 1.5) and prints how often each question says no.'
         required: false
         default: '0'
+      requests:
+        description: 'keysecrets1: true = work through data/art-requests.json (what GENERATE in the Art Library asked for) instead of a card.'
+        required: false
+        default: 'false'
       dry_run:
         description: 'true: list what would be made and the cost, call nothing, spend nothing.'
         required: false
@@ -44,7 +51,7 @@ concurrency:
 
 jobs:
   gen:
-    if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'board: generate ')"
+    if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'board: generate ') || startsWith(github.event.head_commit.message, 'art: generate ')"
     runs-on: ubuntu-latest
     timeout-minutes: 120
     env:
@@ -58,6 +65,7 @@ jobs:
           sparse-checkout: |
             /data/art-prompts.json
             /data/board.json
+            /data/art-requests.json
             /tools/art-library/
             /tools/clip-gate/vision.py
             /.github/
@@ -100,13 +108,17 @@ jobs:
           CAP: ${{ inputs.cap }}
           DRY: ${{ inputs.dry_run }}
           EVENT: ${{ github.event_name }}
+          REQ: ${{ inputs.requests }}
+          MSG: ${{ github.event.head_commit.message }}
         run: |
           set -o pipefail
           ARGS=(--out "$RUNNER_TEMP/artgen")
           if [ "$EVENT" = "workflow_dispatch" ]; then
-            ARGS+=(--card "$CARD" --cap "${CAP:-0}")
+            if [ "$REQ" = "true" ]; then ARGS+=(--requests --cap "${CAP:-0}"); else ARGS+=(--card "$CARD" --cap "${CAP:-0}"); fi
             [ -n "$IDS" ] && ARGS+=(--ids "$IDS")
             [ "$DRY" = "true" ] && ARGS+=(--dry-run)
+          elif [[ "$MSG" == "art: generate "* ]]; then
+            ARGS+=(--requests)
           fi
           python3 -I tools/art-library/artgen.py "${ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/run.log"
           { echo '### art-gen'; echo '```'; tail -60 "$RUNNER_TEMP/run.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"

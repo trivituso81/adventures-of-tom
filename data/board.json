@@ -15980,7 +15980,7 @@
    "theme": "Tools",
    "tag": "keysecrets1",
    "title": "Art Library makes pictures through repo secrets",
-   "next": "In this session: Art Library GENERATE (one picture, one video, a chapter of videos) starts the art-gen and clip-gen Actions instead of calling xAI from the phone, and the xAI key and Relay boxes go away. Then three more cards do the same for the Voice Library and Script Editor, the Music Library, and the recast pages.",
+   "next": "GENERATE for pictures now asks the art-gen Action by committing data/art-requests.json, and the picture arrives by itself. The xAI key box stays for videos only until the next card moves videos too. Next for you: press GENERATE once on one picture (card Try GENERATE on one picture).",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -15996,6 +15996,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built: art-gen has a request mode (data/art-requests.json, commit message 'art: generate <id>'); the Library polls branch artgen and imports the picture; a failed run shows its reason on the entry. Photo-based entries are refused with the reason (14, all approved). Tests: artgen_test (request mode added), keysecrets_test, review_test, artgen_lib_test pass; test.py and clip_batch_test fail the same way without this change."
     }
    ],
    "prompt": {
@@ -16005,8 +16009,9 @@
     ],
     "model": "Claude Sonnet 5.5 (row B: the design is written on this card)",
     "effort": "high (touches the Library page, two Actions and their tests)",
-    "text": "Read claude/handoff-rules.md and the card c-keysecrets1 in data/board.json. Art Library GENERATE (one picture, one video, a chapter of videos) must start the art-gen and clip-gen Actions by committing a request file instead of calling xAI from the phone; remove the xAI key and Relay boxes from art.html; keep the GitHub token box. Entries that need Tom's own photo stay unsupported and say so. Test with the stand-in tests, never run the Actions for real. You have my full permission to access the repo."
-   }
+    "text": "Read claude/handoff-rules.md and the card c-keysecrets1 in data/board.json. Art Library GENERATE (one picture, one video, a chapter of videos) must start the art-gen and clip-gen Actions by committing a request file instead of calling xAI from the phone; remove the xAI key and Relay boxes from art.html; keep the GitHub token box. Entries that need Tom's own photo stay unsupported and say so. Test with the stand-in tests, never run the Actions for real. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-keysecrets1-try"
   },
   {
    "id": "t-reporttype1play",
@@ -16104,6 +16109,164 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "start": true
+  },
+  {
+   "id": "t-keysecrets1-try",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Tools",
+   "ask": "play",
+   "title": "Try GENERATE on one picture",
+   "next": "ADMIN > ART LIBRARY: tap Open in the Art Library below, then press GENERATE on that entry (about $0.05). Wait about 2 minutes, with the page open or closed: the message under the button goes from Asked to Done and the picture appears under the entry, waiting for APPROVE or REJECT. All good if it appears. Something is wrong if the message says it was not made, or nothing arrives after 5 minutes. All good starts the card Art Library videos through repo secrets.",
+   "blocks": [
+    "c-keysecrets2"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "started by c-keysecrets1"
+   },
+   "links": [
+    {
+     "to": "art",
+     "ids": [
+      "ch2-bigshake-normal"
+     ],
+     "label": "the picture to generate"
+    }
+   ],
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Created by c-keysecrets1 when it shipped."
+    }
+   ],
+   "first": "Wait for the build keysecrets1 to be published."
+  },
+  {
+   "id": "c-keysecrets2",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Tools",
+   "tag": "keysecrets2",
+   "title": "Art Library videos through repo secrets",
+   "next": "Starts after you try GENERATE on one picture. GENERATE VIDEO and GENERATE CHAPTER start the clip-gen Action by request file; the xAI key and Relay boxes are removed.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Moves the Art Library's video buttons to the clip-gen Action and removes the xAI key and Relay boxes.",
+    "before": [
+     "Nothing to do first (the card Try GENERATE on one picture unblocks this)."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a feature across two files; the request pattern is written in claude/keysecrets-plan.md)",
+    "effort": "medium (the pattern is already built for pictures)",
+    "text": "Read claude/keysecrets-plan.md, CLAUDE.md and the card c-keysecrets1 in data/board.json. Do the same for videos that keysecrets1 did for pictures: GENERATE VIDEO and GENERATE CHAPTER in engine/art-clips.js commit a request that starts the clip-gen Action (tools/art-library/clipgen.py gets a --requests mode like artgen.py, the workflow runs on the commit, the page watches for the result); then remove the xAI key and Relay boxes, XAI_BASE, the browser video code and its stand-in tests, and update the tests (clip_lib_test.py, clip_batch_test.py; note clip_batch_test already has five failing checks without any change). Never run the Actions for real. Purge what the browser path left behind and grep for zero references to aot-art-key and aot-art-relay. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Created by c-keysecrets1 (plan: claude/keysecrets-plan.md)."
+    }
+   ]
+  },
+  {
+   "id": "c-keysecrets3",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Tools",
+   "tag": "keysecrets3",
+   "title": "Voice and Script takes through repo secrets",
+   "next": "Builds an ElevenLabs take Action; Voice Library and Script Editor takes use it; the ElevenLabs key box goes.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Adds an Action that makes ElevenLabs takes from a request file and moves the Voice Library and Script Editor buttons to it.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a new Action and page change, designed in the session)",
+    "effort": "high (a new Action with nothing written to copy except the pictures pattern)",
+    "text": "Read claude/keysecrets-plan.md, CLAUDE.md, voices.html, engine/script-voice.js and .github/workflows/voice-gen.yml. Voice Library takes (text to speech, speech to speech, sound effects, bulk) and Script Editor takes call ElevenLabs from the phone with the key in localStorage aot-el-key. Build an Action (secret ELEVENLABS_API_KEY, request file committed by the page, results on a branch the page polls, the same pattern as art-gen in the plan) that makes those takes, move every button to it, show failures on the line, and then remove the key boxes and aot-el-key. Takes of a line must keep the settings the page sends today. Never run the Action for real; test with the stand-in server. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Created by c-keysecrets1 (plan: claude/keysecrets-plan.md)."
+    }
+   ]
+  },
+  {
+   "id": "c-keysecrets4",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Tools",
+   "tag": "keysecrets4",
+   "title": "Music makes through repo secrets",
+   "next": "Music Library MAKE starts a music Action; the key box goes.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Moves the Music Library's make buttons to an Action that uses the ELEVENLABS_API_KEY secret.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the same pattern as the voice takes card)",
+    "effort": "medium (the pattern is built by then)",
+    "text": "Read claude/keysecrets-plan.md, music.html and the Action built by card c-keysecrets3. Move the Music Library's make buttons to an Action that reads a request file and keeps the audio on a branch the page polls; remove the ElevenLabs key box from music.html. Never run the Action for real. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Created by c-keysecrets1 (plan: claude/keysecrets-plan.md)."
+    }
+   ]
+  },
+  {
+   "id": "c-keysecrets5",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Tools",
+   "tag": "keysecrets5",
+   "title": "Recast and baker pages: key boxes",
+   "next": "Decides what to do with the voice recast pages and the baker templates that still ask for a key.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "prompt": {
+    "what": "Settles the last pages that ask for an API key (recast-deedee.html, recast-justin.html, the baker templates under tools/).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a design call comes first)",
+    "effort": "high (the pages do interactive voice design that an Action cannot show)",
+    "text": "Read claude/keysecrets-plan.md. List every page that still asks for an API key (grep aot-baker-key and aot-el-key). For each, say in the card history whether it is still used (check docs/CHANGES.md for its last use); retire the pages nobody uses (purge rule in CLAUDE.md) and, for any that is still needed, move it to an Action the way the plan describes or write on the card exactly why it cannot and what Tom would have to decide. Do not leave a key box without a reason written on the card. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Created by c-keysecrets1 (plan: claude/keysecrets-plan.md)."
+    }
+   ]
   }
  ],
  "sessions": [

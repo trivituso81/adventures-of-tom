@@ -44,6 +44,7 @@ class Repo:
         self.root, self.remote = root, remote
         self.data = os.path.join(root, 'data', 'art-prompts.json')
         self.board = os.path.join(root, 'data', 'board.json')
+        self.requests = os.path.join(root, 'data', 'art-requests.json')
 
     def git(self, *a, check=True, env=None, text=True):
         p = subprocess.run(['git', '-C', self.root] + list(a), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=text, env=env)
@@ -72,18 +73,27 @@ class Repo:
         self.git('checkout', '-q', '-B', 'main', 'FETCH_HEAD')
         self.git('reset', '-q', '--hard', 'FETCH_HEAD')
 
-    def update_board(self, msg, fn):
-        """Re-read the newest main, let fn(board) change it, commit and push (retried against a main that moved)."""
+    def load_requests(self):
+        """data/art-requests.json (keysecrets1): what the Art Library asked for with GENERATE. A missing file is an empty queue."""
+        try: return json.load(open(self.requests, encoding='utf-8'))
+        except Exception: return {'requests': []}
+
+    def update_file(self, rel, msg, load, fn):
+        """Re-read the newest main, let fn(doc) change what load() read, commit and push (retried against a main that moved)."""
         for attempt in range(8):
             self.sync()
-            b = self.load_board(); fn(b)
-            open(self.board, 'w', encoding='utf-8').write(jdump(b))
-            self.git('add', 'data/board.json')
+            b = load(); fn(b)
+            open(os.path.join(self.root, rel), 'w', encoding='utf-8').write(jdump(b))
+            self.git('add', rel)
             self.git('-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com', 'commit', '-q', '-m', msg)
             p = self.git('push', self.remote, 'HEAD:main', check=False)
             if p.returncode == 0: return b
             say('push refused, trying again (%d)' % (attempt + 1)); time.sleep(3 + attempt * 2)
-        raise RuntimeError('could not push the board change 8 times')
+        raise RuntimeError('could not push the change to %s 8 times' % rel)
+
+    def update_board(self, msg, fn):
+        """Re-read the newest main, let fn(board) change it, commit and push (retried against a main that moved)."""
+        return self.update_file('data/board.json', msg, self.load_board, fn)
 
     # ---- branch artgen: the output folder, saved without touching the working copy
     def branch_restore(self, out):
@@ -131,9 +141,10 @@ def last_decision(e):
     return max([0] + [int(x.get('at') or 0) for x in (e.get('versions') or []) + (e.get('rejects') or [])])
 
 
-def classify(doc, ids, has, results):
+def classify(doc, ids, has, results, force=()):
     """One row per id: {id, state, why}. state: approved, clip, own, waiting, made, missing, toomany, make.
-    results: the index's records. 'made' = a result for the same id and the same prompt text is waiting and no decision is newer."""
+    results: the index's records. 'made' = a result for the same id and the same prompt text is waiting and no decision is newer.
+    force: ids Tom pressed GENERATE on (keysecrets1): another variant is wanted, so they are never 'made'."""
     by = {e['id']: e for e in doc['entries']}
     out = []
     for i in ids:
@@ -154,7 +165,7 @@ def classify(doc, ids, has, results):
         if why: out.append({'id': i, 'state': 'waiting', 'why': why}); continue
         pr = (e.get('prompt') or '').strip()
         at = last_decision(e)
-        if any(r['id'] == i and r.get('prompt', '').strip() == pr and (r.get('t') or 0) > at for r in results):
+        if i not in force and any(r['id'] == i and r.get('prompt', '').strip() == pr and (r.get('t') or 0) > at for r in results):
             out.append({'id': i, 'state': 'made', 'why': 'already made and waiting for your review'}); continue
         if not pr: out.append({'id': i, 'state': 'missing', 'why': 'the prompt is empty'}); continue
         out.append({'id': i, 'state': 'make', 'why': ''})
@@ -241,7 +252,7 @@ def money(x):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--card', default=''); ap.add_argument('--ids', default=''); ap.add_argument('--cap', type=float, default=0.0)
-    ap.add_argument('--par', type=int, default=3); ap.add_argument('--no-qa', action='store_true'); ap.add_argument('--dry-run', action='store_true'); ap.add_argument('--save-only', action='store_true')
+    ap.add_argument('--par', type=int, default=3); ap.add_argument('--no-qa', action='store_true'); ap.add_argument('--dry-run', action='store_true'); ap.add_argument('--save-only', action='store_true'); ap.add_argument('--requests', action='store_true')
     ap.add_argument('--out', default=os.path.join(os.getcwd(), 'artgen-out')); ap.add_argument('--repo', default=os.path.abspath(os.path.join(HERE, '..', '..')))
     a = ap.parse_args()
     repo = Repo(a.repo, os.environ.get('ARTGEN_REMOTE', 'origin'))
@@ -252,6 +263,7 @@ def main():
     if not a.dry_run:
         if repo.git('status', '--porcelain', check=False).stdout.strip() and not os.environ.get('CI'): raise SystemExit('The repo working copy is not clean; artgen resets it to main, so it will not run here.')
         repo.sync()
+    if a.requests: return do_requests(a, repo)
     board = repo.load_board()
     cards = [c for c in board['cards'] if (c['id'] == a.card if a.card else (c.get('gen') or {}).get('want'))]
     if a.card and not cards: raise SystemExit('no card %s on the board' % a.card)
@@ -267,26 +279,63 @@ def main():
     return 0 if all(r.get('state') != 'failed' for r in reports) else 1
 
 
-def do_card(a, repo, cid, override, results, key):
-    doc = repo.entries(); board = repo.load_board(); card = next(c for c in board['cards'] if c['id'] == cid)
-    ids = card_ids(card, override)
-    cl = classify(doc, ids, repo.has, results)
+def apply_requests(doc, reqs):
+    """keysecrets1: a request carries the prompt text and the ticked reference pictures as they were on Tom's screen; they replace the entry's own
+    for this run only (nothing is written back). The later request for one id wins. Returns the ids in the order asked."""
+    by = {e['id']: e for e in doc['entries']}; ids = []
+    for r in reqs:
+        i = r.get('id')
+        if i in ids: ids.remove(i)
+        ids.append(i)
+        e = by.get(i)
+        if not e: continue
+        if (r.get('prompt') or '').strip(): e['prompt'] = r['prompt']
+        if isinstance(r.get('refs'), list): e['refs'] = [x for x in r['refs'] if isinstance(x, str)]
+    return ids
+
+
+def do_requests(a, repo):
+    reqs = [r for r in (repo.load_requests().get('requests') or []) if isinstance(r, dict) and r.get('id')]
+    if not reqs: say('no request waiting: nothing to do'); return 0
+    if not a.dry_run: repo.branch_restore(a.out)
+    results = load_index(a.out)
+    rep = do_card(a, repo, None, [], results, os.environ.get('XAI_API_KEY', ''), reqs)
+    rep['at'] = now_iso(); rep['asked'] = [r['id'] for r in reqs]   # the Art Library reads this to tell Tom what happened to each press
+    json.dump(rep, open(os.path.join(a.out, 'artgen-report.json'), 'w'), indent=1)
+    if not a.dry_run:   # the page reads this file from branch artgen to tell Tom why a press made nothing
+        try: repo.branch_save(a.out)
+        except Exception as x: say('warning: ' + str(x))
+    return 0 if rep.get('state') != 'failed' else 1
+
+
+def do_card(a, repo, cid, override, results, key, reqs=None):
+    doc = repo.entries()
+    if reqs is None:
+        board = repo.load_board(); card = next(c for c in board['cards'] if c['id'] == cid)
+        ids = card_ids(card, override)
+    else:
+        ids = apply_requests(doc, reqs)
+    cl = classify(doc, ids, repo.has, results, force=ids if reqs is not None else ())
     by = {e['id']: e for e in doc['entries']}
     make = [by[r['id']] for r in cl if r['state'] == 'make']
     est = sum(cost_of(e) for e in make)
     cap = a.cap or max(1.0, 2 * est)
-    say('card %s: %d pictures asked, %d to make. Estimate %s of the %s cap.' % (cid, len(ids), len(make), money(est), money(cap)))
+    say('%s: %d pictures asked, %d to make. Estimate %s of the %s cap.' % ('card ' + cid if cid else 'requests', len(ids), len(make), money(est), money(cap)))
     for r in cl:
         if r['state'] != 'make': say('  %s: %s (%s)' % (r['id'], r['state'], r['why']))
     for e in make: say('  %s  %d references  %s' % (e['id'], len(e.get('refs') or []), money(cost_of(e))))
     skipped = [{'id': r['id'], 'why': r['why']} for r in cl if r['state'] != 'make' and r['state'] != 'made']
     already = [r['id'] for r in cl if r['state'] == 'made']
-    rep = {'card': cid, 'state': 'done', 'estimate': round(est, 2), 'cap': cap, 'dry_run': a.dry_run, 'made': [], 'already': already, 'skipped': skipped, 'failed': [], 'spent': 0.0}
+    rep = {'card': cid or '(requests)', 'state': 'done', 'estimate': round(est, 2), 'cap': cap, 'dry_run': a.dry_run, 'made': [], 'already': already, 'skipped': skipped, 'failed': [], 'spent': 0.0}
     if a.dry_run: say('dry run: nothing sent'); return rep
     url = run_url()
     def mark_running(b):
         c = next(x for x in b['cards'] if x['id'] == cid); g = c.setdefault('gen', {}); g['want'] = False; g['run'] = {'state': 'running', 'at': now_iso(), 'run': url, 'n': len(make)}
-    repo.update_board('board: art-gen running %s' % cid, mark_running)
+    if cid: repo.update_board('board: art-gen running %s' % cid, mark_running)
+    else:
+        taken = {r.get('at') for r in reqs}   # keysecrets1: the queue is emptied BEFORE anything is paid, so a second run cannot pay twice
+        def clear(d): d['requests'] = [r for r in (d.get('requests') or []) if r.get('at') not in taken]
+        repo.update_file('data/art-requests.json', 'art: requests taken [skip ci]', repo.load_requests, clear)
     spend, lock, stop = {'total': 0.0}, threading.Lock(), threading.Event()
     def finish():
         rep['spent'] = round(spend['total'], 2)
@@ -305,7 +354,7 @@ def do_card(a, repo, cid, override, results, key):
             qs = [v for v in (rep.get('qa') or {}).values() if 'yes' in v]
             if qs: bits.append('QA: ' + ', '.join('%d of %d' % (v['yes'], v['of']) for v in qs))
             touch(c, 'Pictures job: %s. Spent about %s.' % (', '.join(bits) or 'nothing to make', money(rep['spent'])))
-        repo.update_board('board: art-gen %s %s' % (rep['state'], cid), fin)
+        if cid: repo.update_board('board: art-gen %s %s' % (rep['state'], cid), fin)
         try: repo.branch_save(a.out)
         except Exception as x: say('warning: ' + str(x))
         say('DONE. made %d, skipped %d, failed %d, spent about %s' % (len(rep['made']), len(skipped), len(rep['failed']), money(spend['total'])))
@@ -358,7 +407,7 @@ def do_card(a, repo, cid, override, results, key):
             rel = 'results/%s/%s%s.png' % (i, stamp, '' if not n else '-%d' % n)
             open(os.path.join(a.out, rel), 'wb').write(png)   # paid for and kept
             with lock:
-                results.append({'key': '%s@%s' % (i, stamp + ('' if not n else '-%d' % n)), 'id': i, 'file': rel, 't': int(time.time() * 1000), 'prompt': (e.get('prompt') or '').strip(), 'refs': refs, 'card': cid, 'cost': round(c, 2)})
+                results.append({'key': '%s@%s' % (i, stamp + ('' if not n else '-%d' % n)), 'id': i, 'file': rel, 't': int(time.time() * 1000), 'prompt': (e.get('prompt') or '').strip(), 'refs': refs, 'card': cid or '', 'cost': round(c, 2)})
                 save_index(a.out, results)
                 rep['made'].append(i)
                 try: repo.branch_save(a.out)

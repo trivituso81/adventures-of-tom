@@ -146,9 +146,9 @@ header{padding:10px 28px}
 <script src="engine/art-clips.js?v=pubfast2"></script>
 <script>
 // Art Library (Phase B). Prompts come from data/art-prompts.json (Claude writes them with tools/art-library/make-prompts.js).
-// GENERATE calls the xAI image API from this device with the key pasted below (localStorage 'aot-art-key', never in the repo, never logged).
-// If the browser cannot reach api.x.ai (CORS), paste a relay URL (a small Cloudflare Worker that holds the key); it is used instead.
-// Test overrides: ?xai=<base url>  ?gh=<base url> (point at tools/art-library/stub.py).
+// GENERATE (keysecrets1) does not call xAI from this device: it commits data/art-requests.json ("art: generate <id>") and the art-gen Action makes the picture
+// with the repo secret XAI_API_KEY, then keeps it on branch artgen; pollPending imports it. Videos (engine/art-clips.js) still use the key pasted below until keysecrets2.
+// Test overrides: ?xai=<base url>  ?gh=<base url>  ?artgen=<base url> (point at tools/art-library/stub.py).
 const $=id=>document.getElementById(id);
 const Q=new URLSearchParams(location.search);
 const MODEL='grok-imagine-image-2.0', KEEP=5;
@@ -183,7 +183,7 @@ async function addResult(id,blob,prompt,refs,extra){   // extra (artgen1): {t, s
 function paintKeys(){
   const k=!!LS.get('aot-art-key'), g=!!LS.get('aot-gh-token'), r=LS.get('aot-art-relay');
   $('keys').innerHTML='<div class="row"><b style="flex:1">Keys on this device</b></div>'+
-  '<label>xAI image key <span class="'+(k?'ok':'err')+'">'+(k?'key set':'no key')+'</span></label>'+
+  '<label>xAI key, for videos only (pictures use the key kept on GitHub) <span class="'+(k?'ok':'hint')+'">'+(k?'key set':'not set')+'</span></label>'+
   '<div class="row"><input type="password" id="kx" placeholder="paste the xAI key" autocomplete="off" style="flex:1"><button class="small" id="sx">Save</button>'+(k?'<button class="small" id="dx">Remove</button>':'')+'</div>'+
   '<label>GitHub token (repo access only) <span class="'+(g?'ok':'err')+'">'+(g?'token set':'no token')+'</span></label>'+
   '<div class="row"><input type="password" id="kg" placeholder="paste the GitHub token" autocomplete="off" style="flex:1"><button class="small" id="sg">Save</button>'+(g?'<button class="small" id="dg">Remove</button>':'')+'</div>'+
@@ -197,7 +197,7 @@ $('keys').addEventListener('click',e=>{
   const del={dx:'aot-art-key',dg:'aot-gh-token',dr:'aot-art-relay'}[id]; if(del){ LS.del(del); paintKeys(); }
 });
 // --- setup fold: keys and spend sit under one row that starts closed once both keys are saved
-function setupSum(){ const k=!!LS.get('aot-art-key'), g=!!LS.get('aot-gh-token'), o=spendGet(); $('setupsum').textContent=(k&&g?'keys set':(k?'GitHub token missing':g?'xAI key missing':'keys missing'))+', about $'+o.total.toFixed(2)+' spent'+(typeof DATA!=='undefined'&&DATA&&DATA.live?', prompts live from GitHub':''); }
+function setupSum(){ const g=!!LS.get('aot-gh-token'), o=spendGet(); $('setupsum').textContent=(g?'GitHub token set':'GitHub token missing')+', about $'+o.total.toFixed(2)+' spent'+(typeof DATA!=='undefined'&&DATA&&DATA.live?', prompts live from GitHub':''); }
 function setupOpen(open){ $('setupbody').hidden=!open; $('setuptog').textContent=open?'Close':'Open'; setupSum(); }
 $('artgenchk').onclick=async()=>{ const b=$('artgenchk'); b.disabled=true; try{ await artgenImport(true); }finally{ b.disabled=false; } };
 $('setuptog').onclick=()=>setupOpen($('setupbody').hidden);
@@ -378,39 +378,61 @@ async function uploadOwn(id,file){
   }catch(err){ setMsg(id,'Could not read that picture ('+String(err.message||err)+'). Try a PNG or JPG.',true); }
 }
 async function generate(id,btn){
-  const e=DATA.entries.find(x=>x.id===id), key=LS.get('aot-art-key');
+  const e=DATA.entries.find(x=>x.id===id);
   if(e&&e.clip) return clipGenerate(id,btn);
-  if(!key) return setMsg(id,'Paste the xAI key at the top first.',true);
+  if(!LS.get('aot-gh-token')) return setMsg(id,'Open Setup at the top and paste the GitHub token first: pictures are made on GitHub, and the token is how this page asks.',true);
   const blk=blockInfo(e); if(blk) return setMsg(id,blk.why,true);
   const prompt=(promptOf(e)||'').trim(); if(!prompt) return setMsg(id,'The prompt is empty.',true);
-  const refPaths=(e.refs||[]).filter((p,i)=>USE[id+'|'+i]!==false).map(rp);
-  const ownS=ownSpecs(e), ownR=ownS.map(o=>OWN[o.slot]||null); const miss=ownS.find((o,i)=>!ownR[i]); if(miss) return setMsg(id,'Add the picture first: '+miss.label+'.',true);
-  const nRef=refPaths.length+ownS.length;
+  if(ownSpecs(e).length) return setMsg(id,'This one is made from your own photo, and a photo that stays on your phone cannot be sent to GitHub. Use "Use my own picture" to add the finished picture instead.',true);
+  const refs=(e.refs||[]).filter((p,i)=>USE[id+'|'+i]!==false), nRef=refs.length;
   if(nRef>5) return setMsg(id,'At most 5 reference pictures. Untick '+(nRef-5)+'.',true);
   { const o=spendGet(); if(o.total+SPEND_PER+SPEND_REF*nRef>o.cap) return setMsg(id,'Spend cap reached ($'+o.cap.toFixed(0)+'). Press +$10 at the top to allow more.',true); }
-  btn.disabled=true; setMsg(id,'Working... this takes up to a minute.');
+  btn.disabled=true; setMsg(id,'Sending the request to GitHub...');
   try{
-    const body={model:MODEL,prompt,n:1,aspect_ratio:e.ar||'3:4',resolution:e.res||'1k',response_format:'b64_json'};
-    let path='/v1/images/generations';
-    if(nRef){
-      path='/v1/images/edits';
-      body.images=[]; for(const p of refPaths){ let r=await fetch(rawU(p),{cache:'no-store'}), bl=null; if(r.ok) bl=await r.blob(); else if(LS.get('aot-gh-token')){ try{ bl=await ghFile(p); }catch(x){} } if(!bl) throw new Error('Could not load reference '+p+(p.indexOf('art/raw/')===0?'. That picture does not exist yet: approve the earlier step first.':'')); body.images.push({type:'image_url',url:await blobToDataUri(bl)}); }
-      for(let i=0;i<ownS.length;i++) body.images.splice(Math.min(ownS[i].at||0,body.images.length),0,{type:'image_url',url:await blobToDataUri(ownR[i].blob)});
-    }
-    let r; try{ r=await fetch(XAI_BASE()+path,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+key},body:JSON.stringify(body)}); }
-    catch(err){ throw new Error('The browser could not reach the image service. Either the network is down or the service blocks browsers; if it is the second, a relay address is needed (the Relay field at the top).'); }
-    const txt=await r.text(); let j=null; try{j=JSON.parse(txt);}catch(x){}
-    if(!r.ok) throw new Error('The image service said '+r.status+': '+txt.replace(key,'[key]').slice(0,300));
-    const d=j&&j.data&&j.data[0]; if(!d) throw new Error('The image service sent no picture: '+txt.slice(0,200));
-    let blob;
-    if(d.b64_json){ const bin=atob(d.b64_json), u=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i); blob=new Blob([u],{type:d.mime_type||'image/png'}); }
-    else if(d.url){ const ir=await fetch(d.url); if(!ir.ok) throw new Error('Could not download the picture.'); blob=await ir.blob(); }
-    else throw new Error('The image service sent an unknown picture format.');
+    const at=Date.now();
+    await commitRequest({id,prompt,refs,at});
     { const o=spendGet(); o.total+=SPEND_PER+SPEND_REF*nRef; o.count+=1; LS.set('aot-art-spend',JSON.stringify(o)); spendPaint(); }
-    const sentRefs=refPaths.slice(); ownS.forEach(o=>sentRefs.splice(Math.min(o.at||0,sentRefs.length),0,'(own picture: '+o.slot+')'));
-    const n=await addResult(id,blob,prompt,sentRefs); RES[id]=await results(id);
-    e.status='generated'; MSG[id]={text:'Done: v'+n+'.',err:false}; refreshItem(id);
+    pendSet(pendGet().filter(p=>p.id!==id).concat([{id,at}]));
+    setMsg(id,'Asked. GitHub makes the picture (about 2 minutes); it shows up here by itself, you can close the page.');
+    if(!POLL) POLL=setTimeout(pollPending,POLL_MS);
   }catch(err){ setMsg(id,String(err.message||err),true); btn.disabled=false; }
+}
+// --- keysecrets1: asking the art-gen Action. The request (prompt text and ticked references as on this screen) is one entry of data/art-requests.json on main.
+const REQ_PATH='data/art-requests.json', PEND_KEY='aot-art-pending';
+async function commitRequest(req){
+  let last='';
+  for(let i=0;i<6;i++){
+    if(i) await new Promise(res=>setTimeout(res,1500*i));
+    const g=await gh('GET',REQ_PATH); let doc={requests:[]}, sha;
+    if(g.ok){ try{ doc=JSON.parse(b64ToText(g.json.content||'')||'{"requests":[]}'); }catch(x){ doc={requests:[]}; } sha=g.json.sha; }
+    else if(g.status!==404) throw ghFail(g,'reading the request list');
+    doc.requests=(doc.requests||[]).filter(r=>r.id!==req.id).concat([req]);
+    const body={message:'art: generate '+req.id,content:textToB64(JSON.stringify(doc,null,1)+'\n'),branch:GH_BRANCH}; if(sha) body.sha=sha;
+    const w=await gh('PUT',REQ_PATH,body);
+    if(w.ok) return; if(w.status!==409&&w.status!==422) throw ghFail(w,'sending the request'); last=w.status+': '+w.text;
+  }
+  throw new Error('The request list kept changing under us. Try again in a minute. (GitHub said '+last.slice(0,160)+')');
+}
+const pendGet=()=>{ try{ return (JSON.parse(LS.get(PEND_KEY)||'[]')||[]).filter(p=>p&&p.id&&Date.now()-p.at<40*60000); }catch(x){ return []; } };
+const pendSet=a=>LS.set(PEND_KEY,JSON.stringify(a));
+const POLL_MS=(+Q.get('poll')>0?+Q.get('poll'):20)*1000;   // test override ?poll=<seconds>
+let POLL=0;
+async function artgenReport(){ try{ const r=await fetch(ARTGEN_BASE()+'artgen-report.json?t='+Date.now(),{cache:'no-store'}); return r.ok?await r.json():null; }catch(x){ return null; } }
+// Every 20 s while a request is waiting: import what the Action made, and say why when it made nothing (key missing, spend cap, a reference not approved).
+async function pollPending(){
+  POLL=0; const P=pendGet(); if(!P.length) return;
+  await artgenImport(false);
+  const rep=await artgenReport(), repAt=rep&&rep.at?Date.parse(rep.at):0, left=[];
+  for(const p of P){
+    const got=(RES[p.id]||[]).find(r=>r.srv&&(r.t||0)>=p.at-120000);
+    if(got){ MSG[p.id]={text:'Done: v'+got.n+'. Tap it to approve or reject.',err:false}; refreshItem(p.id); continue; }
+    if(rep&&repAt>=p.at-120000&&(rep.asked||[]).includes(p.id)){
+      const f=(rep.failed||[]).find(x=>x.id===p.id||x.id==='*')||(rep.skipped||[]).find(x=>x.id===p.id);
+      if(f){ MSG[p.id]={text:'The picture was not made: '+f.why,err:true}; refreshItem(p.id); continue; }
+    }
+    left.push(p);
+  }
+  pendSet(left); if(left.length) POLL=setTimeout(pollPending,POLL_MS);
 }
 // --- GitHub: APPROVE commits the picture and the prompt, REJECT commits your note (needs the GitHub token at the top)
 const GH_OWNER='trivituso81', GH_REPO='adventures-of-tom', GH_BRANCH='main', JSON_PATH='data/art-prompts.json';
@@ -679,7 +701,8 @@ addEventListener('message',e=>{ if(e.data==='aot-flight-preview-close'&&$('fpov'
   await artgenImport(false);
   const first=TABS.find(t=>DATA.entries.some(e=>e.tab===t)); if(first&&(!TABS.includes(UI.tab)||!DATA.entries.some(e=>e.tab===UI.tab))) UI.tab=first;
   if(!FILTERS.some(f=>f[0]===UI.filter)) UI.filter='todo';
-  setupOpen(!(LS.get('aot-art-key')&&LS.get('aot-gh-token')));   // fold the keys and spend cards once both keys are saved
+  setupOpen(!LS.get('aot-gh-token'));   // fold the setup and spend cards once the GitHub token is saved (pictures need nothing else; the xAI key is for videos only)
+  { const P=pendGet(); for(const p of P) if(!MSG[p.id]) MSG[p.id]={text:'Asked earlier. Waiting for GitHub to make it...',err:false}; if(P.length&&!POLL) POLL=setTimeout(pollPending,2000); }
   paintList(); scrollTo(0,UI.sy[UI.tab]||0);
   { const rv=(Q.get('review')||'').split(',').map(x=>x.trim()).filter(Boolean); if(rv.length) reviewIds(rv); const op=(Q.get('open')||'').split(',').map(x=>x.trim()).filter(Boolean); if(op.length) openIds(op); }
 })();

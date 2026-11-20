@@ -21,7 +21,9 @@ async def fresh(b, vp):
 async def make_results(pg, ids, n):
     for id in ids:
         for _ in range(n):
-            await pg.evaluate('(id)=>generate(id,{disabled:false})', id)
+            # keysecrets1: GENERATE now asks an Action, so a result that is waiting for review is put in the page's store the way an imported one is
+            await pg.evaluate("""async(id)=>{ const c=document.createElement('canvas'); c.width=96; c.height=128; const x=c.getContext('2d'); x.fillStyle='#c85a5a'; x.fillRect(0,0,96,128);
+              const b=await new Promise(r=>c.toBlob(r,'image/png')); await addResult(id,b,promptOf(ENTRY[id]),[]); RES[id]=await results(id); ENTRY[id].status='generated'; computeStates(); paintList(true); }""", id)
     await pg.wait_for_function('(a)=>a[0].every(id=>(RES[id]||[]).length>=a[1])', arg=[ids, n])
 async def main():
     web = subprocess.Popen([sys.executable, '-m', 'http.server', '8821'], cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
