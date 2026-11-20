@@ -5675,6 +5675,61 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch1art2 and t-ch1art2 in data/board.json, history included. Your first push is the commit board: start c-fix-ch1art2.\n\nTom tested and found problems:\n1. Card t-ch1art2 (Make the seven chapter 1 pictures, ask pictures). He was asked: ADMIN ) ART LIBRARY, group Chapter 1 (Props, Characters and Enemies tabs). For each of ch1-grace-list, ch1-amy-window, ch1-ellie-door, ch1-cab-pulls-away, ch1-rose-shoulders, ch1-mudling-muffins and ch1-bigone-green-pan: press GENERATE, then APPROVE, or REJECT with a note. When all seven are approved, card c-ch1art3 (Claude installs them in the game) can start. He wrote: i dont understand why we need this art. like it doesnt make sense based on how the game works (except grace's list). explain\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T02:43:56.264Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch1art2 to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch1art2, and give the build fix-ch1art2 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-ch1art2"
+  },
+  {
+   "id": "c-skilllist1",
+   "title": "SKILLS list: name text and flavor icons a touch smaller, and a check that the most icons a row can hold fit (skilllist1)",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "prog",
+   "next": "Name 14% smaller, flavor and Pocket pictures 25% smaller, Pep number 12% smaller, in the SKILLS list only (words mode). Worst case (2 flavors + Pocket on the longest names) checked at desktop, phone portrait, phone landscape and Duo open: no overflow. Then update tools/b3_test.py (name size is measured on the new inner element), run s9ui, push.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "\"the font in the battle ability list is just a touch too big. will it accommodate the max number of icons?\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "New card, small follow-up to b3s9a and the open skillinfo1 card (same SKILLS list). Tom: \"the font in the battle ability list is just a touch too big. will it accommodate the max number of icons? also give me a list of every icon, what it represents, and what that effect actually means/does\" then \"The icons can also be smaller\""
+    }
+   ],
+   "prompt": {
+    "what": "Shrinks the SKILLS list name text and icons a little and proves the largest icon row fits.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: two CSS sizes and one test line)",
+    "effort": "low (one known edit)",
+    "text": "Read claude/handoff-rules.md, then finish card c-skilllist1 (tag skilllist1) if it is not shipped: in the SKILLS list the name is .86 of the row size and the flavor and Pocket pictures 1em (index.html, .b3-snt), check the worst case row in portrait, landscape and Duo, run python3 tools/b3_test.py s9ui, push. You have my full permission to access the repo."
+   },
+   "tag": "skilllist1",
+   "after": "t-skilllist1look"
+  },
+  {
+   "id": "t-skilllist1look",
+   "title": "Look at the SKILLS list text and icons on your phone",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "After the publish of build skilllist1: RELOAD on the title, ADMIN > BATTLE LAB > NEW BATTLE, start any fight, open SKILLS. The skill names and the pictures should be a little smaller and a long name like Kingdom of Ten-Thousand Blankets should fit in two lines. Report with the REPORT tab if anything still looks too big (skilllist1 is the build to name).",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "\"the font in the battle ability list is just a touch too big.\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by skilllist1: your look at the smaller SKILLS list; blocks nothing."
+    }
+   ]
   }
  ],
  "sessions": [
