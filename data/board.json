@@ -893,7 +893,7 @@
    "title": "Battle system stage 11: bestiary chapters 2 to 4 and bosses",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "b3s11",
    "next": "Built. Chapters 2 to 4: 15 monsters, The Big Shake, Old Iron-Gill, The Director's Cut, 17 formations, Lab fights NEW 11 to NEW 27. Next: c-b3s12.",
    "blocks": [],
@@ -920,6 +920,10 @@
     {
      "d": "2026-11-20",
      "t": "Built: chapter 2 to 4 monsters, their formations and the three bosses (chapter 2's five regular stat blocks now explicit), Lab fights NEW 11 to NEW 27. 195 new rule checks (1549 in all), every new fight simulated 100 times and won, screen test in portrait and landscape with frames looked at. Bosses run 4.1 to 4.7 rounds with the plain player (target 5 to 7, left for stage 14). Calls made are rows in claude/battle-build.md. Next: c-b3s12."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as b3s11: New battle: the chapter 2, 3 and 4 monsters and their three bosses join the Battle Lab"
     }
    ],
    "prompt": {
@@ -935,7 +939,8 @@
     "url": "https://claude.ai/code/session_01RXeukGiZMGgywgmyzdrk4X",
     "opening": "pasted by Tom from the board"
    },
-   "after": "nothing for Tom: c-b3s12"
+   "after": "nothing for Tom: c-b3s12",
+   "done": "2026-11-20"
   },
   {
    "id": "t-kitchenempty",
@@ -12668,6 +12673,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGiZMGgywgmyzdrk4X",
+   "title": "Battle system stage 11: bestiary chapters 2 to 4 and bosses",
+   "first": "2026-11-20T08:19:40-08:00",
+   "last": "2026-11-20T08:56:11-08:00",
+   "tags": [
+    "b3s11"
+   ],
+   "cards": [
+    "c-b3s11"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFnTDuB6oorps32eRD",
    "title": "Apply your decision on Tom's boss line",
    "first": "2026-11-20T08:42:39-08:00",
@@ -12741,16 +12758,6 @@
    ],
    "cards": [
     "c-fix-cutpolish5"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGiZMGgywgmyzdrk4X",
-   "title": "Battle system stage 11: bestiary chapters 2 to 4 and bosses",
-   "first": "2026-11-20T08:19:40-08:00",
-   "last": "2026-11-20T08:19:40-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s11"
    ]
   },
   {
@@ -13875,8 +13882,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "97f06298bcb20672e5fe69204f70bd470811527c",
- "synced_at": "2026-11-20T16:52:51+00:00",
+ "synced": "035675bdb6be1dd8a21080984f70356886a3aae0",
+ "synced_at": "2026-11-20T16:57:24+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
