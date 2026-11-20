@@ -95,7 +95,7 @@ def bake_clip(e, p):
     impact = min(kept[1:], key=lambda f: abs(f - m['hit'] * fps)) if kind == 'strike' else -1   # the kept picture nearest Tom's HIT mark (never the standing first one)
     r = sh(sys.executable, '-I', os.path.join('tools', 'clip-bake', 'bake_clip.py'), mp4, c['id'], c['owner'], '--first', str(first), '--last', str(kept[-1]),
            '--step', str(step), '--impact', str(impact), '--fig-rows', str(c['figRows']), '--speed', str(speed), '--fps', str(fps), '--kind', kind, '--k', str(c.get('k', 4)), *(['--pace', pace] if pace else []),
-           *(['--calm', str(c['calm'])] if c.get('calm') and kind == 'loop' else []), '--stamp', clip_stamp(e))   # clip.calm (seconds, clipfoes1): the baker picks the calmest stretch between START and END
+           *(['--calm', str(c['calm'])] if c.get('calm') and kind == 'loop' else []), *(['--wrap'] if c.get('wrap') and kind == 'loop' else []), '--stamp', clip_stamp(e))   # clip.wrap (clipch1fix): the game plays the loop forward only   # clip.calm (seconds, clipfoes1): the baker picks the calmest stretch between START and END
     print(r.stdout[-1500:]); print(r.stderr[-1500:], file=sys.stderr)
     if r.returncode: raise SystemExit(f'art_bake: bake_clip.py failed for {e["id"]}')
     tagline = f'<script src="data/clips/{c["id"]}.js?v=clip0"></script>'       # bump_tags moves the tag

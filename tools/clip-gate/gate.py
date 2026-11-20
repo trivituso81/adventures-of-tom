@@ -46,7 +46,7 @@ def baked_header(cid):
             a, b, c = x.strip().split(':')
             pace.append((int(a), int(b), float(c)))
     return {'first': int(m.group(1)), 'last': int(m.group(2)), 'step': int(m.group(3)), 'kind': m.group(4),
-            'speed': float(m.group(5)), 'pace': pace}
+            'speed': float(m.group(5)), 'pace': pace, 'wrap': '// Loop plays forward only.' in s}
 
 
 def header_for(e, marks, video, fps=None):
@@ -64,18 +64,30 @@ def header_for(e, marks, video, fps=None):
     first = min(nfr - 1, round(marks['first'] * fps)); last = min(nfr - 1, round(marks['last'] * fps))
     last = list(range(first, last + 1, step))[-1]
     if c.get('calm') and kind == 'loop':
+        bc, files = _baker_frames(video)
+        first, last = bc.calm_window(files, first, last, fps, c['calm'])
+    if c.get('wrap') and kind == 'loop':
+        bc, files = _baker_frames(video)
+        last = bc.wrap_end(files, first, last)
+    pace = [(round(s * fps), max(1, round(st * fps / 30)), float(sv)) for s, st, sv in c.get('pace', [])]
+    return {'first': first, 'last': last, 'step': step, 'kind': kind, 'speed': float(sp), 'pace': pace, 'wrap': bool(c.get('wrap')) and kind == 'loop'}
+
+
+_BAKER = {}
+def _baker_frames(video):
+    """tools/clip-bake/bake_clip.py as a module and the video's pictures as files (once per video)."""
+    import glob, importlib.util, subprocess, tempfile
+    if video not in _BAKER:
         spec = importlib.util.spec_from_file_location('bake_clip_mod', os.path.join('tools', 'clip-bake', 'bake_clip.py'))
         bc = importlib.util.module_from_spec(spec); spec.loader.exec_module(bc)
         tmp = tempfile.mkdtemp()
         subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', video, tmp + '/r%04d.png'], check=True)
-        files = sorted(glob.glob(tmp + '/r*.png'))
-        first, last = bc.calm_window(files, first, last, fps, c['calm'])
-    pace = [(round(s * fps), max(1, round(st * fps / 30)), float(sv)) for s, st, sv in c.get('pace', [])]
-    return {'first': first, 'last': last, 'step': step, 'kind': kind, 'speed': float(sp), 'pace': pace}
+        _BAKER[video] = (bc, sorted(glob.glob(tmp + '/r*.png')))
+    return _BAKER[video]
 
 
 def played(hd, fps, kind):
-    """[(video frame, game seconds it stays on screen)] in the order the game shows them (a loop: forward, then back)."""
+    """[(video frame, game seconds it stays on screen)] in the order the game shows them (a loop: forward, then back; a wrap loop: forward only)."""
     segs = [(hd['first'], hd['step'], hd['speed'])] + sorted(hd['pace'])
     out = []
     for j, (f0, st, sp) in enumerate(segs):
@@ -83,7 +95,7 @@ def played(hd, fps, kind):
         for f in range(f0, f1, st):
             if f <= hd['last']:
                 out.append((f, st / (fps * sp)))
-    if kind == 'loop':
+    if kind == 'loop' and not hd.get('wrap'):
         out = out + out[-2:0:-1]
     return out
 

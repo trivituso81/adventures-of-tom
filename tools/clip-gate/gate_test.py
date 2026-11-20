@@ -78,6 +78,8 @@ CASES = [
      lambda i: person(i, dx=-min(i, 20) * 2.0), {'dodge_forward'}),
     ('feet sink', 'tom', 'give', 'state', {'first': 0, 'last': 72, 'step': 2, 'speed': 1.5, 'pace': []},
      lambda i: person(i, drop=min(i, 30) * 1.0), {'feet'}),
+    ('idle by the clipch1fix rule: whole stretch at 1x, every 2nd picture', 'deedee', 'idle', 'loop', {'first': 0, 'last': 72, 'step': 2, 'speed': 1.0, 'pace': []},
+     lambda i: person(i, eyes=blink(i, 30)), set()),
     ('monster idle never judged on eyes', 'grump', 'idle', 'loop', {'first': 40, 'last': 72, 'step': 1, 'speed': 0.3, 'pace': []},
      lambda i: person(i, eyes=blink(i, 52)), set()),
 ]
@@ -99,6 +101,23 @@ def main():
             print(('ok   ' if ok else 'FAIL ') + f'{name}: got {sorted(got)}, want {sorted(want)}')
             if not ok:
                 fails.append(name)
+    # clipch1fix: a wrap loop plays forward only; a plain loop forward then back
+    hd = {'first': 0, 'last': 9, 'step': 1, 'speed': 1.0, 'pace': []}
+    fw = [f for f, _ in gate.played(dict(hd, wrap=True), 24, 'loop')]; fb = [f for f, _ in gate.played(hd, 24, 'loop')]
+    ok = fw == list(range(10)) and fb == list(range(10)) + list(range(8, 0, -1))
+    print(('ok   ' if ok else 'FAIL ') + f'wrap loop plays forward only: {fw}; plain loop: {fb}')
+    if not ok: fails.append('wrap played')
+    # clipch1fix: the baker's END for a wrap loop is the picture of the last 40% nearest the first one
+    import importlib.util, glob
+    spec = importlib.util.spec_from_file_location('bake_clip_mod', os.path.join(HERE, '..', 'clip-bake', 'bake_clip.py'))
+    bc = importlib.util.module_from_spec(spec); spec.loader.exec_module(bc)
+    with tempfile.TemporaryDirectory() as td:
+        pics = [person(i, dx=(0 if i in (0, 60) else 25)) for i in range(N)]   # only picture 60 matches the start picture
+        for i, im in enumerate(pics): cv2.imwrite(os.path.join(td, 'r%04d.png' % i), cv2.cvtColor(im, cv2.COLOR_RGB2BGR))
+        got = bc.wrap_end(sorted(glob.glob(td + '/r*.png')), 0, N - 1)
+    ok = got == 60
+    print(('ok   ' if ok else 'FAIL ') + f'wrap loop END nearest the start picture: {got}, want 60')
+    if not ok: fails.append('wrap end')
     print('FAILS:', fails)
     sys.exit(1 if fails else 0)
 

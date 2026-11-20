@@ -97,10 +97,10 @@ try:
 finally:
     s.terminate()
 import gate
-for i in ('clip-tom-guard', 'clip-tom-give', 'clip-tom-idle'):
+for i in ('clip-tom-guard', 'clip-tom-give', 'clip-bigone-idle', 'clip-log-idle'):   # a calm loop, and (clipch1fix) a whole-stretch loop cut again by art_bake
     e = entry(i); v = e['versions'][-1]
     h = gate.header_for(e, v['marks'], v['file'].replace('.json', '.mp4')); b = gate.baked_header(e['clip']['id'])
-    check('header_for matches the baked header of ' + i, all(h[k] == b[k] for k in ('first', 'last', 'step', 'speed', 'pace')), (h, b))
+    check('header_for matches the baked header of ' + i, all(h[k] == b[k] for k in ('first', 'last', 'step', 'speed', 'pace', 'wrap')), (h, b))
 
 # the hook in tools/art-library/clipgen.py (--gate): a held clip comes back with its reasons; a gate that cannot run holds nothing and says so
 sys.path.insert(0, os.path.join(ROOT, 'tools', 'art-library'))

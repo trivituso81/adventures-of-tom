@@ -18,6 +18,9 @@ picture). Frame numbers count the video's own frames from 0.
   --calm          SECONDS (kind loop only): inside --first..--last, keep only the stretch of about that many seconds in which the
                   body moves least (picked from the frames themselves), so a monster's idle needs no hand-picked part (clipfoes1).
                   --first and --last then give the room to search in; the game's pace and speed apply to the chosen stretch.
+  --wrap          (kind loop only, clipch1fix) the game plays the loop forward only instead of forward then backward: for a loop in
+                  which something falls or turns (drops, pupils), which would go back up or turn back in the backward half. END becomes
+                  the picture of the last 40% nearest the first one, so the jump back to the start is small.
   --kind          strike (default): a one-shot move with an impact frame.
                   loop: an idle that repeats (a monster waiting). No impact. The game plays it forward, then backward
                         (engine/clips.js bclipLoopFrame), so the repeat has no jump: a video model is only given the
@@ -93,12 +96,23 @@ def calm_window(files, first, last, fps, secs):
     d = [float(np.abs(g[j + 1] - g[j])[m[j] | m[j + 1]].mean()) for j in range(len(idx) - 1)]
     best = min(range(len(idx) - n + 1), key=lambda s: sum(d[s:s + n - 1]))
     return idx[best], idx[best + n - 1]
+def wrap_end(files, first, last):
+    """clipch1fix: END of a loop the game plays forward only (--wrap): of the last 40% of first..last, the picture nearest the first one
+    (mean brightness change inside the figure), so the jump back to the start is as small as the video allows."""
+    g0 = np.asarray(Image.open(files[first]).convert('L'), float); m0 = key(np.asarray(Image.open(files[first]).convert('RGB')))[..., 3] > 128
+    def far(i):
+        im = np.asarray(Image.open(files[i]).convert('RGB'))
+        m = ndi.binary_dilation(key(im)[..., 3] > 128, iterations=3) | m0
+        return float(np.abs(np.asarray(Image.fromarray(im).convert('L'), float) - g0)[m].mean())
+    span = range(first + max(3, int((last - first) * .6)), last + 1)
+    return min(span, key=lambda i: (far(i), -i)) if len(span) else last
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('clip'); ap.add_argument('id'); ap.add_argument('owner')
     ap.add_argument('--first', type=int, required=True); ap.add_argument('--last', type=int, required=True)
     ap.add_argument('--step', type=int, default=3); ap.add_argument('--impact', type=int, default=-1)
     ap.add_argument('--kind', default='strike', choices=['strike', 'loop', 'state']); ap.add_argument('--pace', default=''); ap.add_argument('--calm', type=float, default=0)
+    ap.add_argument('--wrap', action='store_true')
     ap.add_argument('--fig-rows', type=float, required=True); ap.add_argument('--speed', type=float, default=1)
     ap.add_argument('--k', type=int, default=4); ap.add_argument('--fps', type=float, default=30)
     ap.add_argument('--stamp', default=''); ap.add_argument('--tag', default='clip0'); ap.add_argument('--quality', type=int, default=86); ap.add_argument('--sheet', default='')
@@ -107,9 +121,12 @@ def main():
     tmp = tempfile.mkdtemp()
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', A.clip, f'{tmp}/r%04d.png'], check=True)
     files = sorted(glob.glob(f'{tmp}/r*.png'))
+    if A.wrap and A.kind != 'loop': sys.exit('--wrap is for kind loop only')
     if A.calm:
         if A.kind != 'loop': sys.exit('--calm is for kind loop only')
         A.first, A.last = calm_window(files, A.first, A.last, A.fps, A.calm); print(f'calm stretch: video frames {A.first} to {A.last}')
+    if A.wrap:
+        A.last = wrap_end(files, A.first, A.last); print(f'forward-only loop ends at video frame {A.last} (nearest the start picture)')
     segs = [(A.first, A.step, A.speed)] + sorted((int(a), int(b), float(c)) for a, b, c in (x.split(':') for x in A.pace.split(',') if x))
     if any(not (A.first < f <= A.last) or st < 1 or sp <= 0 for f, st, sp in segs[1:]): sys.exit(f'--pace must start inside the clip, with a step of 1 or more and a speed above 0: {A.pace}')
     picks, durs = [], []                         # each kept picture and how long it stays up, by the pace of its own part
@@ -159,11 +176,12 @@ def main():
     D = dict(owner=A.owner, src=f'art/clips/{A.id}.webp?v={A.tag}', k=A.k, w=W, h=H, n=n, rects=rects, ms=ms,
              dur=round(sum(durs)), kind=A.kind, impact=ii, reach=reach, feet=feet_info)
     if A.kind != 'strike': del D['impact'], D['reach']
+    if A.wrap: D['wrap'] = 1                     # the game plays this loop forward only (engine/clips.js bclipLoopFrame): something falls or turns in it
     # src carries its own cache tag: tools/tag_check.py reads it and bump_tags.py moves it when the picture changes
     key_id = A.id.replace('-', '_')
     with open(f'{root}/data/clips/{A.id}.js', 'w') as f:
         f.write("'use strict';\n// data/clips/%s.js: GENERATED by tools/clip-bake/bake_clip.py; do not hand-edit. Read by engine/clips.js.\n" % A.id)
-        f.write('// Source frames %d to %d of the video, every %d, %s, played at %sx.\n' % (A.first, A.last, A.step, 'impact at video frame %d' % A.impact if A.kind == 'strike' else 'kind ' + A.kind, A.speed) + ('// Pace changes (video frame:step:speed): %s\n' % A.pace if A.pace else '') + ('// Baked from: %s\n' % A.stamp.replace('\n', ' ') if A.stamp else ''))
+        f.write('// Source frames %d to %d of the video, every %d, %s, played at %sx.\n' % (A.first, A.last, A.step, 'impact at video frame %d' % A.impact if A.kind == 'strike' else 'kind ' + A.kind, A.speed) + ('// Pace changes (video frame:step:speed): %s\n' % A.pace if A.pace else '') + ('// Loop plays forward only.\n' if A.wrap else '') + ('// Baked from: %s\n' % A.stamp.replace('\n', ' ') if A.stamp else ''))
         f.write('bclipDefine(%s,%s);\n' % (json.dumps(key_id), json.dumps(D, separators=(',', ':'))))
     print(key_id, 'frames', n, 'frame px', fw, fh, 'rows', W, H, 'sheet', sheet.size, 'in memory mb', round(sw * sh * 4 / 1e6, 1), '(as a grid %s)' % round(n * fw * fh * 4 / 1e6, 1), 'kb', os.path.getsize(out) // 1024, 'dur ms', D['dur'], 'kind', A.kind, 'impact ms', ms[ii], 'reach', reach)
     if A.sheet:                                  # a contact sheet on grey, for looking at the cutout: every full frame in a grid

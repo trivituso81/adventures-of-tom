@@ -17,7 +17,7 @@
 //   C.reach   {dx,up}: the leading point (fist) on the impact frame, battle px left of her middle and above her feet
 // Kinds (D.kind, set by the baker; clipkinds1):
 //   strike  (default) a one-shot move with an impact frame, played by a move through ST.clip.
-//   loop    an idle that repeats: a monster waiting. b2FoeFrame (engine/battle2-ui.js) draws it instead of the painted
+//   loop    an idle that repeats: a monster waiting (D.wrap: forward only, see bclipLoopFrame). b2FoeFrame (engine/battle2-ui.js) draws it instead of the painted
 //           stance whenever the monster is not winding up, attacking or being hit. It plays forward, then backward
 //           (bclipLoopFrame), so the repeat has no jump: a video's last picture never matches its first (the video
 //           model is only given the first picture).
@@ -53,8 +53,10 @@ function bclipWanted() {
   for(const id in BCLIPS) if(B2.party.some(u=>u.id===BCLIPS[id].owner)||B2.foes.some(f=>f.id===BCLIPS[id].owner)) out.push(id);
   return out;
 }
-// A loop clip at ms: forward to its last picture, then backward to its first, over and over.
-function bclipLoopFrame(C,ms) { const t=ms%(2*C.dur); return bclipFrameAt(C,t>=C.dur?2*C.dur-t-1:t); }
+// A loop clip at ms: forward to its last picture, then backward to its first, over and over. A wrap loop (D.wrap, clipch1fix: something in it
+// falls or turns, which the backward half would send back up or turn back) plays forward only; the baker ends it on the picture nearest the first.
+function bclipLoopLen(C) { return C.wrap?C.dur:2*C.dur; }
+function bclipLoopFrame(C,ms) { if(C.wrap) return bclipFrameAt(C,ms%C.dur); const t=ms%(2*C.dur); return bclipFrameAt(C,t>=C.dur?2*C.dur-t-1:t); }
 function bclipFor(owner,kind) {
   if(typeof B2==='undefined'||!B2.active||!B2.labClip) return null;
   const ko=BCLIPS[owner+'_ko'];   // clipko1: a knocked-out clip beats any other state clip (a nap is a Sleep status, not a knock-out: Tom 2026-11-18)
@@ -70,7 +72,7 @@ function bclipShowFrame(owner,t) {
   const S=typeof B2!=='undefined'&&B2.active&&B2.labReview&&B2.clipShow; if(!S||S.owner!==owner) return null;
   const C=BCLIPS[S.id]; if(!C||!bclipReady(S.id)) return null;
   if(S.t0==null) S.t0=t;   // the clock starts when the first picture can be drawn
-  const ms=(t-S.t0)*1000, len=C.kind==='loop'?2*C.dur:C.dur+(C.kind==='state'?1500:500);
+  const ms=(t-S.t0)*1000, len=C.kind==='loop'?bclipLoopLen(C):C.dur+(C.kind==='state'?1500:500);
   if(ms>=len) { if(!S.over) { S.over=true; const f=S.onEnd; setTimeout(()=>{ if(B2.clipShow===S) B2.clipShow=null; if(f) f(S.id); },0); } return C.kind==='loop'?bclipLoopFrame(C,0):bclipFrameAt(C,C.dur); }
   return C.kind==='loop'?bclipLoopFrame(C,ms):bclipFrameAt(C,Math.min(ms,C.dur));
 }

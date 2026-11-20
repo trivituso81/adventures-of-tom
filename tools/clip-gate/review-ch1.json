@@ -84,7 +84,8 @@
   "clip-log-idle": {
    "faults": [
     "still"
-   ]
+   ],
+   "note": "clipch1fix: fixed by the bake alone (the whole stretch at 1x instead of the calmest 0.875 s at 0.3x); the same video was cut again and passes, so replay.py lists it under MISSED by design."
   },
   "clip-tom-idle": {
    "faults": [
