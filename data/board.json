@@ -9828,6 +9828,38 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-clipposes-2 and t-clipposes in data/board.json, history included. Your first push is the commit board: start c-fix-clipposes-2.\n\nTom tested and found problems:\n1. Card t-clipposes (Watch the family's painted battle poses, ask animations). He was asked: ADMIN ) BATTLE LAB ) pick a difficulty ) NEW BATTLE ) PAINTED STATES: CHAPTER 1, about 70 seconds. Now each fighter walks out to an open spot between the Mudling and the family, shows idle, guard, braced hit, hit, dodge, knocked out, get up, victory and a run there with the state's name on screen, then walks home. Check that you can see every state of Tom, Grace, Rose and Deedee in full, nobody standing in front of them, in portrait and in landscape. Then press All good, or Something is wrong and write what looks wrong by fighter and state (head too big or small, wrong speed or distance). It blocks the card Apply your notes on the painted poses. He wrote: The animation happens way too fast before I can process it and see what's wrong. After each move auto plays, an interstitial asking for feedback that can go directly to Claude should be displayed where optional feedback can be entered and the user must hit reject or approve before the next animation is played\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T15:05:37.482Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-clipposes to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-clipposes, and give the build fix-clipposes-2 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-clipposes"
+  },
+  {
+   "id": "c-attn1",
+   "tag": "attn1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Project Ops",
+   "title": "Needs attention fixes itself or comes back to you",
+   "next": "Building the automatic rescue from claude/attn-plan.md: rule R10 in tools/board_sync.py, tests, the board page changes, the handoff rules.",
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Builds the automatic rescue for Needs attention cards.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the rules are written in claude/attn-plan.md, tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and claude/attn-plan.md, then build attn1 exactly as the plan says (sections 3 to 7), run acceptance checks R1 to R6 and push. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGEc6cowbEAQDgvRV8",
+    "opening": "\"Read claude/handoff-rules.md and the Project file claude/attn-plan.md. Build attn1 exactly as the plan says\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by this chat. Tom: \"Propose an automated solution for the Needs Attention section on the board how can we can them back to me or fix them without them sitting idle\""
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
