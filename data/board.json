@@ -10217,7 +10217,7 @@
    "title": "Listen to Grace's fixed chapter 1 lines (no re-recording)",
    "theme": "Voice Clips",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "voice",
    "fyi": false,
    "next": "Nothing to record. First, in ADMIN > VOICE LIBRARY, tap Send my takes to Claude once (near the bottom; it now also sends every Grace story take on this phone, at no ElevenLabs cost). Then open each of Grace's 5 chapter 1 lines with the buttons below, tap the line, and press the play button beside Built into the game: it should sound like the take you kept, at her normal speed and pitch (\"Tata, don't walk yet...\" is now 8.7 seconds, it was 12). Then press All good, or Something is wrong and say which line. It blocks the card Rebuild Grace's other slowed lines (c-gracevoice-rest).",
@@ -10260,9 +10260,12 @@
     {
      "d": "2026-11-20",
      "t": "Needs Tom for the rest: other Grace story lines merged with the same filter can only be rebuilt from their original takes, which are on his phone (only lines tried more than once were ever uploaded). The one thing needed: tap Send my takes to Claude once."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Re-record Grace's distorted chapter 1 lines is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-reports-3",
@@ -10378,7 +10381,7 @@
    "id": "c-fix-gracevoice-distort",
    "tag": "fix-gracevoice-distort",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Voice Clips",
    "title": "Fix: Re-record Grace's distorted chapter 1 lines",
@@ -10426,6 +10429,10 @@
     {
      "d": "2026-11-20",
      "t": "Cause found and fixed: the Grace shrink filter in merge-local.js and clip-audit/merge.py (asetrate=32000*1.18) assumed 32 kHz takes; ElevenLabs sends 44.1 kHz, so every merged Grace story clip came out 38 percent slower and about 5 semitones lower (reproduced byte for byte from his kept take). The phone plays its own raw copy first (engine/local-clips.js), which is why lines sounded fine and changed later. Removed the filter, rebuilt 14 clips from branch takes (tools/voice-library/unshrink_grace.py), Send my takes now also sends every Grace story take (data/takes-wanted.json), new test tools/grace_voice_test.py. No pencil report was filed after 15:33:50; the 5 original reports are closed."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-gracevoice-distort: Grace's lines play at her real speed and pitch again; the merge step that slowed her is gone"
     }
    ],
    "prompt": {
@@ -10437,7 +10444,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-gracevoice-distort and t-gracevoice-distort in data/board.json, history included. Your first push is the commit board: start c-fix-gracevoice-distort.\n\nTom tested and found problems:\n1. Card t-gracevoice-distort (Re-record Grace's distorted chapter 1 lines, ask voice). He was asked: ADMIN ) VOICE LIBRARY, Chapter 1, open each of Grace's 5 lines with the buttons below (they play distorted in the game). Tap Takes, record until one is clean, keep it, press Send my takes to Claude. Your pencil report on 'Grace's chapter 1 voices almost have...' was cut off after those words: if more is wrong than distortion, say so in the note when you send. He wrote: But why does this keep happening? It has nothing to do with 11 labs because when I initially record them, they sound completely fine and then I provide the Jason to you for upload and they seem to be fine in the game and then at later point they become distorted, so I refuse to record more. It's wasting my money\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T15:33:50.599Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-gracevoice-distort to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-gracevoice-distort, and give the build fix-gracevoice-distort a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
-   "after": "t-gracevoice-distort"
+   "after": "t-gracevoice-distort",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-heist1play-2",
@@ -10662,7 +10670,7 @@
    "id": "c-fix-heist1play-3",
    "tag": "fix-heist1play-3",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
@@ -10684,7 +10692,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukCrr4d842SgVQHPHvS",
     "opening": "Something is wrong on t-heist1play"
    },
    "history": [
@@ -10702,6 +10710,10 @@
      "d": "2026-11-20",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-20T15:59:44.972Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -10715,7 +10727,7 @@
    },
    "after": "t-heist1play",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-20T16:00:01+00:00"
   }
  ],
  "sessions": [
@@ -10937,6 +10949,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDjPNPc4SnooT9qQmT",
+   "title": "Fix: Re-record Grace's distorted chapter 1 lines",
+   "first": "2026-11-20T07:38:20-08:00",
+   "last": "2026-11-20T07:59:00-08:00",
+   "tags": [
+    "fix-gracevoice-distort"
+   ],
+   "cards": [
+    "c-fix-gracevoice-distort"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEz9uEZbuikuqZGDHC",
    "title": "Open the right Art, Voice or Music Library entry straight from a card (cardlinks1)",
    "first": "2026-11-20T07:44:52Z",
@@ -11007,16 +11031,6 @@
    "cards": [
     "c-newcard",
     "t-newcard"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDjPNPc4SnooT9qQmT",
-   "title": "Fix: Re-record Grace's distorted chapter 1 lines",
-   "first": "2026-11-20T07:38:20-08:00",
-   "last": "2026-11-20T07:38:20-08:00",
-   "tags": [],
-   "cards": [
-    "c-fix-gracevoice-distort"
    ]
   },
   {
@@ -12007,8 +12021,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "62db83dc14e245bdffb0bf1f181f930423cb4515",
- "synced_at": "2026-11-20T15:55:03+00:00",
+ "synced": "a8fa5ae9a22c14bde20c0e4188992ac59ac2e1bc",
+ "synced_at": "2026-11-20T16:00:02+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
