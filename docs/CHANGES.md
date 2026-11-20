@@ -1,3 +1,8 @@
+## board-adminhub (2026-11-19): board only: the plan for one admin page with its own address
+
+- Tom (11-19 22:39): "creating unique URLs for the following: a landing page for the kanban board; a landing page for admin with only: voice library script editor, art library, music library, area builder, portrait crops head sizes pose editor welcome layout report tab on; labs: battle lab, block break lab. For the admin page, group and reorganize the links based on functionality ... a unique url containing link/buttons for all admin functionality except the demo".
+- Plan: `claude/adminhub-plan.md` (also in the Project). Card c-adminhub1 (Sonnet 5.5 medium, START): admin.html with grouped buttons, `index.html?go=` for the three tools that live in the game, a home screen icon for board.html. Nothing built, no game change.
+
 ## board-artgen (2026-11-19): board only: the plan for generating a card's pictures with one approval, QA, auto-approve and Library links
 
 - Tom (11-19 22:16 to 22:21): "Make a way for me to approve the auto generation of images within the Kanban board for cards that require new image generation, all images required for a given card at once." "Then a way to imitate a qa of images to ensure they meet the prompt criteria and see the results. If hitting a certain qa threshold we can auto approve." "Create these instructions and choose to design another prompt for a lesser model to execute your vision." "Can we also create a prompt to link to the corresponding art library voice library music library directly from the kanban card".

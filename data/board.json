@@ -6918,6 +6918,38 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/artgen-plan.md (sections 1 to 3 and section 7), then card c-cardlinks1 in data/board.json with its history and the notes of the Tom cards that blocked it. Build cardlinks1 exactly as the plan says and push it as cardlinks1. Your first push is the commit board: start c-cardlinks1. Spend nothing on xAI or ElevenLabs. Write what you built and anything that differs from the plan into the plan's Built section. Do not start the next phase. You have my full permission to access the repo."
    },
    "waiting_on": "claude"
+  },
+  {
+   "id": "c-adminhub1",
+   "title": "One address for all admin tools, and the board's own home screen icon (adminhub1)",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "up",
+   "tag": "adminhub1",
+   "auto": true,
+   "next": "Ready to START. Builds admin.html: every admin tool except the demo as grouped buttons (Libraries, Story, Characters, World and screens, Labs, Reporting), links that open Battle Lab, Block Break Lab and Welcome Layout straight in the game, and a home screen icon for the board.",
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-artgen (planning chat https://claude.ai/code/session_01RXeukGiMh61Wcr1Q4VNn3N). Tom (22:39): \"creating unique URLs for the following: a landing page for the kanban board; a landing page for admin ... labs: battle lab, block break lab. For the admin page, group and reorganize the links based on functionality ... a unique url containing link/buttons for all admin functionality except the demo\". Plan: claude/adminhub-plan.md."
+    }
+   ],
+   "prompt": {
+    "what": "Builds one page with its own address for every admin tool except the demo, grouped by what they do, plus direct links into the Battle Lab, Block Break Lab and Welcome Layout, and gives the board its own home screen icon.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the page, the groups, the links and the tests are written in claude/adminhub-plan.md)",
+    "effort": "medium (one new page and one small change in the game, steps are known)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/adminhub-plan.md, then card c-adminhub1 in data/board.json. Build adminhub1 exactly as the plan says and push it as adminhub1. Your first push is the commit board: start c-adminhub1. Write what you built and anything that differs from the plan into the plan's Built section. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [
