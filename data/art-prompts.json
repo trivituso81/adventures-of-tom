@@ -25785,8 +25785,16 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGES\n1) The finished painting of Grump Hollow from \"The Adventures of Tom\", a family role-playing game, for the view, light and brushwork only.\n2) The approved grey grass patch. 3) The approved orange block with a dragonfly inside. 4) The approved burnt-out flashbulb.\n\nPAINT THIS ONE OBJECT\nThe grey grass patch of attachment 2, seen from the same high, angled view as attachment 1, so it lies flat on the ground and is about twice as wide as it is tall. Sitting IN the grass, a little left of the middle, is the orange block of attachment 3, the size of a plum, with the dragonfly inside and a small round dent facing the viewer; its bottom sinks into the grass so it clearly rests on the ground. Lying on its side in the grass to the right of the block, small, is the burnt-out flashbulb of attachment 4. All three are painted together as one picture with one light, so nothing looks pasted on: the block and the bulb cast soft grey shadows on the grass to the lower right. Only the grass and its earth are drained of colour; the block stays orange and the bulb keeps its dark metal base.\n- Exactly ONE patch, alone, centered, large: it fills about 80 percent of the width of the picture. Nothing else: no pond, no path, no trees.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No people, no words, letters or numbers.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/characters/boppy-em-unimpressed-v1.png",
+     "date": "2026-11-20",
+     "from": "v1",
+     "at": 1795142924336
+    }
+   ],
    "rejects": [],
    "id": "boppy-em-unimpressed",
    "tab": "Characters",
