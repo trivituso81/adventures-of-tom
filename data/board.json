@@ -355,7 +355,7 @@
    "title": "Build chapter 2 to the locked script",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Built and tested to the locked script (build ch2build): all 93 lines word for word, nine scenes, portrait and landscape runs pass. Waiting on Tom's phone play (card t-ch2play). Chapter 3 is not started.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -433,6 +433,10 @@
     {
      "d": "2026-11-20",
      "t": "Built chapter 2 to the locked script (ch2build): nine scenes, 93 lines word for word, Tom's two teardown questions got no answer so the teardown defaults were built (see docs/CHANGES.md ch2build). Not done: code-drawn props, Nara action frames, listener reactions, two script-editor test fixtures."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as ch2build: Chapter 2 now plays the locked script: nine scenes, 93 lines word for word"
     }
    ],
    "prompt": {
@@ -446,7 +450,8 @@
    },
    "tag": "ch2build",
    "started_at": "2026-11-20T17:43:02+00:00",
-   "after": "t-ch2play"
+   "after": "t-ch2play",
+   "done": "2026-11-20"
   },
   {
    "id": "c-b3s8",
@@ -12997,69 +13002,73 @@
    "after": "t-effectslook",
    "done": "2026-11-20"
   },
-{
-    "id": "c-idea-skippingcut",
-    "tag": "idea-skippingcut",
-    "lane": "claude",
-    "col": "up",
-    "theme": "Story and Dialogue",
-    "title": "Skip interstitials in cut scenes; never skip joins/leaves",
-    "next": "Build: when SKIP passes a cut scene, skip its interstitials too (Grace's list). Party joins and leaves are never skipped. Copy the prompt on this card into a new conversation in the Project on Claude Sonnet 5.5, effort medium.",
-    "blocks": [],
-    "created": "2026-11-20",
-    "changed": "2026-11-20",
-    "idea": {
-      "at": "2026-11-20T17:12:08.552Z",
-      "words": "When skipping cut scenes, any interstitials (eg, Grace's list) should also be skipped. party members joiing and leaving should NEVER be skipped",
-      "shot": "",
-      "row": "C",
-      "rule": "Claude Sonnet 5.5, medium (row C)"
+  {
+   "id": "c-idea-skippingcut",
+   "tag": "idea-skippingcut",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Story and Dialogue",
+   "title": "Skip interstitials in cut scenes; never skip joins/leaves",
+   "next": "Build: when SKIP passes a cut scene, skip its interstitials too (Grace's list). Party joins and leaves are never skipped. Copy the prompt on this card into a new conversation in the Project on Claude Sonnet 5.5, effort medium.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "idea": {
+    "at": "2026-11-20T17:12:08.552Z",
+    "words": "When skipping cut scenes, any interstitials (eg, Grace's list) should also be skipped. party members joiing and leaving should NEVER be skipped",
+    "shot": "",
+    "row": "C",
+    "rule": "Claude Sonnet 5.5, medium (row C)"
+   },
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGFuxviBJAbRcQVyZy",
+    "opening": "pasted by Tom from the board"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom made this card on the board: When skipping cut scenes, any interstitials (eg, Grace's list) should also be skipped. party members joiing and leaving should NEVER be skipped",
+     "at": "2026-11-20T17:12:08.552Z"
     },
-    "chat": {
-      "url": "",
-      "opening": "pasted by Tom from the board"
+    {
+     "d": "2026-11-20",
+     "t": "Sized by the board: Claude Haiku 5.5 (row A: a question, nothing changes), effort low (a lookup).",
+     "at": "2026-11-20T17:12:08.552Z"
     },
-    "history": [
-      {
-        "d": "2026-11-20",
-        "t": "Tom made this card on the board: When skipping cut scenes, any interstitials (eg, Grace's list) should also be skipped. party members joiing and leaving should NEVER be skipped",
-        "at": "2026-11-20T17:12:08.552Z"
-      },
-      {
-        "d": "2026-11-20",
-        "t": "Sized by the board: Claude Haiku 5.5 (row A: a question, nothing changes), effort low (a lookup).",
-        "at": "2026-11-20T17:12:08.552Z"
-      },
-      {
-        "d": "2026-11-20",
-        "t": "Tom copied the prompt to paste it into a new conversation.",
-        "at": "2026-11-20T18:00:05.970Z"
-      },
-      {
-        "d": "2026-11-20",
-        "t": "Checked the open cards: none covers this. c-skipchain1 (done 2026-11-19) made SKIP skip all of chapter 1 scene 1; this idea extends it to other cut scenes.",
-        "at": "2026-11-20T18:30:00.000Z"
-      },
-      {
-        "d": "2026-11-20",
-        "t": "Re-sized from Tom's words: this asks for a change in the game, so it is not row A. Real work: row C, Sonnet 5.5, effort medium (no steps are written; one behaviour in SKIP). The prompt on this card was rewritten.",
-        "at": "2026-11-20T18:30:00.000Z"
-      },
-      {
-        "d": "2026-11-20",
-        "t": "Session ended without shipping: the card's own rule says to stop before building when the size is wrong, so nothing in the game changed. Waits on: Tom pressing Copy prompt on this card and pasting it into a new Sonnet 5.5 medium conversation.",
-        "at": "2026-11-20T18:30:00.000Z"
-      }
-    ],
-    "prompt": {
-      "what": "Builds your idea: when SKIP passes a cut scene, its interstitials (such as Grace's list) are skipped too; party joins and leaves never are.",
-      "before": [
-        "Nothing to do first. Your words are on the card."
-      ],
-      "model": "Claude Sonnet 5.5 (row C: the steps are not written yet, the session must find where the beats are)",
-      "effort": "medium (one behaviour in SKIP, built on the finished skipchain1 change)",
-      "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-skippingcut in data/board.json, history included. Your first push is the commit board: start c-idea-skippingcut.\n\nTom's words (card history): \"When skipping cut scenes, any interstitials (eg, Grace's list) should also be skipped. party members joiing and leaving should NEVER be skipped\".\n\nWhat to build: when the player presses SKIP in a cut scene, skip its interstitials (for example Grace's list). Party members joining and leaving always play in full. Start from the done card c-skipchain1 (docs/CHANGES.md, 'skipchain1'), which made SKIP skip all of chapter 1 scene 1; extend that behaviour to the other cut scenes. Find the skip code, mark the interstitial beats in data/scenes.js using the steps documented at SCENE_OPS in engine/story.js, and leave every spoken line text unchanged (CLAUDE.md rule 5).\n\nTests: run python3 tools/smoke.py, look at the screenshots in tools/shots/ in portrait and landscape, and add a docs/CHANGES.md entry. Follow the build tag and tag bump steps in CLAUDE.md. Write the result and the next step onto this card, then push to main.\n\nYou have my full permission to access the repo."
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-20T18:00:05.970Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Checked the open cards: none covers this. c-skipchain1 (done 2026-11-19) made SKIP skip all of chapter 1 scene 1; this idea extends it to other cut scenes.",
+     "at": "2026-11-20T18:30:00.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Re-sized from Tom's words: this asks for a change in the game, so it is not row A. Real work: row C, Sonnet 5.5, effort medium (no steps are written; one behaviour in SKIP). The prompt on this card was rewritten.",
+     "at": "2026-11-20T18:30:00.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Session ended without shipping: the card's own rule says to stop before building when the size is wrong, so nothing in the game changed. Waits on: Tom pressing Copy prompt on this card and pasting it into a new Sonnet 5.5 medium conversation.",
+     "at": "2026-11-20T18:30:00.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
+   ],
+   "prompt": {
+    "what": "Builds your idea: when SKIP passes a cut scene, its interstitials (such as Grace's list) are skipped too; party joins and leaves never are.",
+    "before": [
+     "Nothing to do first. Your words are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the steps are not written yet, the session must find where the beats are)",
+    "effort": "medium (one behaviour in SKIP, built on the finished skipchain1 change)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-skippingcut in data/board.json, history included. Your first push is the commit board: start c-idea-skippingcut.\n\nTom's words (card history): \"When skipping cut scenes, any interstitials (eg, Grace's list) should also be skipped. party members joiing and leaving should NEVER be skipped\".\n\nWhat to build: when the player presses SKIP in a cut scene, skip its interstitials (for example Grace's list). Party members joining and leaving always play in full. Start from the done card c-skipchain1 (docs/CHANGES.md, 'skipchain1'), which made SKIP skip all of chapter 1 scene 1; extend that behaviour to the other cut scenes. Find the skip code, mark the interstitial beats in data/scenes.js using the steps documented at SCENE_OPS in engine/story.js, and leave every spoken line text unchanged (CLAUDE.md rule 5).\n\nTests: run python3 tools/smoke.py, look at the screenshots in tools/shots/ in portrait and landscape, and add a docs/CHANGES.md entry. Follow the build tag and tag bump steps in CLAUDE.md. Write the result and the next step onto this card, then push to main.\n\nYou have my full permission to access the repo."
+   }
   },
   {
    "id": "c-projclean",
@@ -13163,7 +13172,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEEY5DfFUdRMybmFjx",
+    "url": "https://claude.ai/code/session_01RXeukEEY5DfFUdRMybmFjx",
     "opening": "not started"
    },
    "history": [
@@ -13199,6 +13208,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "blocks": [],
@@ -13225,7 +13238,7 @@
     "rule": "Claude Sonnet 5.5, medium"
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEDvcHmfTiPvEWMzm2",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-implementlisteni\""
    },
    "history": [
@@ -13258,6 +13271,10 @@
      "d": "2026-11-20",
      "t": "Session started (Opus 5.5, high). Sizing confirmed: row D (generator prompts, art judged by taste), high (new pose system, no written steps). No open card covers this.",
      "at": "2026-11-20T18:05:00.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -13961,10 +13978,14 @@
     {
      "d": "2026-11-20",
      "t": "ended without shipping: START run has no Project tools, so the clean-up cannot run here. Nothing deleted from the Project."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGRvj5YBSMvPY8Zknj",
+    "url": "https://claude.ai/code/session_01RXeukGRvj5YBSMvPY8Zknj",
     "opening": "unknown"
    },
    "tag": "t-projclean-run",
@@ -14598,6 +14619,50 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukFZ26fDR3jSE8m4NVH",
+   "title": "Build chapter 2 to the locked script",
+   "first": "2026-11-20T17:45:06Z",
+   "last": "2026-11-20T18:05:27Z",
+   "tags": [
+    "ch2build"
+   ],
+   "cards": [
+    "c-ch2build"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGRvj5YBSMvPY8Zknj",
+   "title": "Run the Project clean-up inside the Project",
+   "first": "2026-11-20T18:04:42Z",
+   "last": "2026-11-20T18:05:09Z",
+   "tags": [],
+   "cards": [
+    "t-projclean-run"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEEY5DfFUdRMybmFjx",
+   "title": "Fix the report backlog (3 open)",
+   "first": "2026-11-20T18:04:32Z",
+   "last": "2026-11-20T18:04:32Z",
+   "tags": [],
+   "cards": [
+    "c-reports-4"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukHDKjTb9tfnY6bJ9uX",
+   "title": "Merge 2 new voice takes",
+   "first": "2026-11-20T18:04:14Z",
+   "last": "2026-11-20T18:04:22Z",
+   "tags": [
+    "board-takes"
+   ],
+   "cards": [
+    "c-takes-56fb01"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEeg94gABBmqmKonrd",
    "title": "Fix: Look at the Effects page in Admin",
    "first": "2026-11-20T17:55:59Z",
@@ -14650,16 +14715,6 @@
    "cards": [
     "c-projclean",
     "t-projclean-run"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFZ26fDR3jSE8m4NVH",
-   "title": "Build chapter 2 to the locked script",
-   "first": "2026-11-20T17:45:06Z",
-   "last": "2026-11-20T17:45:06Z",
-   "tags": [],
-   "cards": [
-    "c-ch2build"
    ]
   },
   {
@@ -14980,6 +15035,36 @@
    "tags": [],
    "cards": [
     "c-gatezero"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGvjLsGEhjAju5h9Va",
+   "title": "Fix Grace's muffin-heist line so it names the muffins",
+   "first": "2026-11-20T10:04:38-08:00",
+   "last": "2026-11-20T10:04:38-08:00",
+   "tags": [],
+   "cards": [
+    "c-gem-polish04"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGFuxviBJAbRcQVyZy",
+   "title": "Skip interstitials in cut scenes; never skip joins/leaves",
+   "first": "2026-11-20T10:04:29-08:00",
+   "last": "2026-11-20T10:04:29-08:00",
+   "tags": [],
+   "cards": [
+    "c-idea-skippingcut"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEDvcHmfTiPvEWMzm2",
+   "title": "Listening and thinking poses for chapter 1 conversations",
+   "first": "2026-11-20T10:04:02-08:00",
+   "last": "2026-11-20T10:04:02-08:00",
+   "tags": [],
+   "cards": [
+    "c-idea-implementlisteni"
    ]
   },
   {
@@ -16424,8 +16509,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "43e3703448cf232702d0c3ee004afa1cb8e8eb27",
- "synced_at": "2026-11-20T18:03:30+00:00",
+ "synced": "8329d83bf662d47aeac21f42bbd14c059b2ecb74",
+ "synced_at": "2026-11-20T18:06:46+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
