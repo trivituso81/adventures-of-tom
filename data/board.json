@@ -11550,7 +11550,7 @@
    "title": "Remove 'camera' and the chair from the flashbulb scene",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped in gem-canon04. Deedee no longer says \"camera\" or \"your grandfather's chair\" at the fishing spot; she points out purple-black sparkles inside the bulb that change color. Her new line plays through speech synthesis until it is recorded (Voice Library, chapter 1, Deedee).",
    "blocks": [],
    "changed": "2026-11-20",
@@ -11580,6 +11580,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped gem-canon04: one Deedee line in ch1Spot reworded (kept flashbulb, burnt, set it off right here; dropped camera and the chair; added purple-black sparkles like crushed-up stars that change color). No other dialogue in any chapter says camera. Old baked clip purged; checked in portrait and landscape."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-canon04: Nobody says \"camera\" at the flashbulb in chapter 1; the bulb has purple-black sparkles inside"
     }
    ],
    "tag": "gem-canon04",
@@ -11592,7 +11596,8 @@
     "effort": "medium (one scene rewritten to a clear target)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-canon04 in data/board.json, history included. Your first push is the commit board: start c-gem-canon04.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is CANON-04. What the tester saw: Priority Critical. Where: `Grump Hollow` Flashbulb Cutscene. Current build: Deedee immediately says: `\"A flashbulb, from an old camera. It's burnt. Somebody set it off right here and left it by your grandfather's chair.\"` Locked target: Do NOT reveal `\"camera\"` in Ch. 1! (Even in Ch. 9 nobody says `\"camera\"` yet; Julian's camera is first spotted in Ch. 10.) Have them find Burnt Bulb #1 with iridescent violet-black star-glass flecks inside (seeding Ch. 2's purple smog & the Meteor Entity) without deducing an old camera yet, and remove the `\"grandfather's chair\"` pond reference.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-canon04, push to main, and write the result and the next step onto the card.\n\nBurnt Bulb #1 has iridescent violet-black star-glass flecks inside and nobody says camera in chapter 1 (Julian's camera first appears in chapter 10; read the story docs before keeping or changing any later reference).\n\nYou have my full permission to access the repo."
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-20"
   },
   {
    "id": "c-gem-canon05",
@@ -11919,7 +11924,7 @@
    "title": "Give Boppy a kitchen portrait without fishing gear",
    "theme": "Characters",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "next": "Waits on your answer on card t-gem-polish03 (keep Boppy's rod and creel indoors, or give him an indoor outfit). Then: keep closes this card with no change; indoor outfit writes 3 new pictures for you to generate and approve.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -11945,6 +11950,14 @@
     {
      "d": "2026-11-20",
      "t": "Checked on current main: still happens. The rod and creel are painted into every approved Boppy sheet (hero v2, walking sheet v4, overworld sprite, emotion sheet, talking sheet), so all 9 of his dialogue faces show them and his kitchen sprite carries them too; a crop cannot fix it. A second outfit is expensive (3 pictures, an outfit switch, Pose Editor lines reset), so this session asked Tom on card t-gem-polish03 and queued this card behind it. Nothing in the game was changed."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Decide: Boppy's fishing rod indoors, keep it or not is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Answer from \"Decide: Boppy's fishing rod indoors, keep it or not\": Keep the rod and creel: they are his look"
     }
    ],
    "tag": "gem-polish03",
@@ -11957,7 +11970,6 @@
     "effort": "medium (three prompts edited from approved Boppy entries, steps known)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-polish03 and card t-gem-polish03 in data/board.json, history and Tom's answer included. Your first push is the commit board: start c-gem-polish03.\n\nThe question was POLISH-03 from the Gemini chapter 1 report (claude/ch1-gemini-tracker.md): Boppy's kitchen dialogue face shows his fishing rod and creel. The rod and creel are painted into every approved Boppy sheet (Art Library entries boppy-hero, boppy-walking-sheet, boppy-emotions, boppy-talk), so a crop cannot remove them.\n\nIf Tom chose to keep the rod and creel: move c-gem-polish03 to Done with a history line quoting his answer, push the board change alone with build tag board-gempolish03, and stop.\n\nIf Tom chose an indoor outfit: add three Art Library entries in the Characters tab, boppy-walking-sheet-indoor, boppy-emotions-indoor and boppy-talk-indoor. Build each from the approved entry it copies (same prompt, same layout, same references, that approved sheet attached as the reference), changing only the outfit: no fishing rod, no creel basket, no strap across the chest, hands and arms where the rod and strap were left natural. Keep the cap, vest, shirt, jeans and shoes. Follow the image prompt rules in CLAUDE.md (each thing said once, the smallest change from the version that worked) and docs/CHARACTER_PIPELINE.md. Do not run the generator. Add a Tom card with ask pictures and done_when art_approved for the three ids, blocking a new Claude card that installs them as an indoor outfit (walking, mood and talk faces swapped in every indoor room, Pose Editor manifest rebuilt, faces rebaked, the dialogue-face rule kept). Write a docs/CHANGES.md entry headed ## gem-polish03, bump the tags with bump_tags.py, run python3 tools/smoke.py and python3 tools/board_check.py, push to main.\n\nYou have my full permission to access the repo."
    },
-   "waiting_on": "tom",
    "after": "t-gem-polish03"
   },
   {
@@ -12798,6 +12810,32 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGW1oQkmK4qtXQ5qMm",
+   "title": "Rebuild The Big One as a bog turtle; cut the lure and chair",
+   "first": "2026-11-20T08:48:36-08:00",
+   "last": "2026-11-20T09:02:41-08:00",
+   "tags": [
+    "gem-canon03",
+    "gem-polish06"
+   ],
+   "cards": [
+    "c-gem-canon03",
+    "c-gem-polish06"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukHBKgCAx89hToJ6Gqp",
+   "title": "Remove 'camera' and the chair from the flashbulb scene",
+   "first": "2026-11-20T08:48:49-08:00",
+   "last": "2026-11-20T09:02:26-08:00",
+   "tags": [
+    "gem-canon04"
+   ],
+   "cards": [
+    "c-gem-canon04"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGYTdzfxUrLfVzoEGr",
    "title": "Give Boppy a kitchen portrait without fishing gear",
    "first": "2026-11-20T08:58:50-08:00",
@@ -12884,26 +12922,6 @@
    ],
    "cards": [
     "c-gem-polish06"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukHBKgCAx89hToJ6Gqp",
-   "title": "Remove 'camera' and the chair from the flashbulb scene",
-   "first": "2026-11-20T08:48:49-08:00",
-   "last": "2026-11-20T08:48:49-08:00",
-   "tags": [],
-   "cards": [
-    "c-gem-canon04"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGW1oQkmK4qtXQ5qMm",
-   "title": "Rebuild The Big One as a bog turtle; cut the lure and chair",
-   "first": "2026-11-20T08:48:36-08:00",
-   "last": "2026-11-20T08:48:36-08:00",
-   "tags": [],
-   "cards": [
-    "c-gem-canon03"
    ]
   },
   {
@@ -14062,8 +14080,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "ed2bcf73933caebdad2537b306fbd3623fb1bffd",
- "synced_at": "2026-11-20T17:01:48+00:00",
+ "synced": "55107b14650e42e88d35a95219dc297cdbec57c0",
+ "synced_at": "2026-11-20T17:03:24+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
