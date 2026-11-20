@@ -13932,9 +13932,15 @@
     {
      "d": "2026-11-20",
      "t": "Added by battlelabpage: your phone check of the Battle Lab page; blocks nothing."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: still getting 404 Sent to Claude as card c-fix-battlelabpagetry; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-20T17:53:15.731Z"
     }
    ],
-   "col": "up"
+   "col": "wait",
+   "waiting_on": "claude"
   },
   {
    "id": "c-fix-heist1play-5",
@@ -14055,6 +14061,65 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-welcomepage-play and t-welcomepage-play in data/board.json, history included. Your first push is the commit board: start c-fix-welcomepage-play.\n\nTom tested and found problems:\n1. Card t-welcomepage-play (Check the new welcome buttons and chapter list top bar, ask play). He was asked: Open the game from your home screen. If you still see the old buttons, close the app and open it again once. On the welcome page check: 1) NEW GAME and LOAD are only as wide as their words and the same width as each other; 2) RELOAD and ADMIN are small icons at the right. Tap NEW GAME and check: 3) BACK with an arrow is top left, with EASY, MEDIUM, HARD to its right and a few words under each, all inside the frame; the lit one is your difficulty; 4) tap HARD, then MEDIUM, and the lit one follows; 5) tap a chapter and it starts with no difficulty page. Turn the game to landscape and look at both screens again. All good if it looks and works like that; if a button is cut off or hard to tap, press Something is wrong and say which one. He wrote: i added a request to this thread directly in claude\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T17:52:57.433Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-welcomepage-play to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-welcomepage-play, and give the build fix-welcomepage-play a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-welcomepage-play",
+   "auto": true,
+   "start": true
+  },
+  {
+   "id": "c-fix-battlelabpagetry",
+   "tag": "fix-battlelabpagetry",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Tools",
+   "title": "Fix: Open the Battle Lab page on your home screen",
+   "next": "You reported a problem on Open the Battle Lab page on your home screen. Claude starts the fix by itself. Latest: still getting 404",
+   "blocks": [
+    "t-battlelabpagetry"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T17:53:15.417Z",
+     "card": "t-battlelabpagetry",
+     "title": "Open the Battle Lab page on your home screen",
+     "ask": "play",
+     "words": "still getting 404",
+     "shot": "",
+     "asked": "On your iPhone open https://trivituso81.github.io/adventures-of-tom/battle-lab.html in Safari, tap Share, Add to Home Screen. Open it from the home screen: it should go straight to the difficulty choice, then the Battle Lab fights. All good, or Something is wrong."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-battlelabpagetry"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-battlelabpagetry.",
+     "at": "2026-11-20T17:53:15.731Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-battlelabpagetry: still getting 404",
+     "at": "2026-11-20T17:53:15.731Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-20T17:53:15.731Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Open the Battle Lab page on your home screen.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-battlelabpagetry and t-battlelabpagetry in data/board.json, history included. Your first push is the commit board: start c-fix-battlelabpagetry.\n\nTom tested and found problems:\n1. Card t-battlelabpagetry (Open the Battle Lab page on your home screen, ask play). He was asked: On your iPhone open https://trivituso81.github.io/adventures-of-tom/battle-lab.html in Safari, tap Share, Add to Home Screen. Open it from the home screen: it should go straight to the difficulty choice, then the Battle Lab fights. All good, or Something is wrong. He wrote: still getting 404\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T17:53:15.417Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-battlelabpagetry to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-battlelabpagetry, and give the build fix-battlelabpagetry a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-battlelabpagetry",
    "auto": true,
    "start": true
   }
