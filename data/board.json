@@ -12988,8 +12988,8 @@
    "lane": "claude",
    "col": "up",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (4 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-091238-jecm, r-20261120-091310-jqps, r-20261120-091936-yxqb, r-20261120-092904-zi93. First note: when Rose jumps off Tom's shoulders, there is a moment when Rose is displayed twice",
+   "title": "Fix the report backlog (6 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-091238-jecm, r-20261120-091310-jqps, r-20261120-091936-yxqb, r-20261120-092904-zi93, r-20261120-092931-xkjg, r-20261120-093004-0rco. First note: when Rose jumps off Tom's shoulders, there is a moment when Rose is displayed twice",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -13019,6 +13019,10 @@
     {
      "d": "2026-11-20",
      "t": "The backlog now holds 4 report(s)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "The backlog now holds 6 report(s)."
     }
    ],
    "blocks": [],
@@ -13179,7 +13183,7 @@
    "title": "Add START for Opus medium and Sonnet high cards",
    "theme": "Tools",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "startmore",
    "next": "START now covers Opus 5.5 medium and Sonnet 5.5 high, a low effort card goes to its model's medium task, auto stays Sonnet 5.5 medium only, Fable never starts. Tom card t-startmore-setup has the steps for the two tasks and four secrets.",
    "blocks": [],
@@ -13201,6 +13205,10 @@
     {
      "d": "2026-11-20",
      "t": "Built startmore: two routines in data/board.json, four secrets in board-sync.yml, routineIn in board.html and routine_for in board_sync.py, Tom card t-startmore-setup and its test card c-startmore-test. Tests updated and run."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as startmore: START now also runs Opus 5.5 medium and Sonnet 5.5 high cards"
     }
    ],
    "prompt": {
@@ -13212,7 +13220,8 @@
     "effort": "medium (the change is specified)",
     "text": "Read CLAUDE.md. Add two entries to routines in data/board.json: Opus 5.5 medium (env OPUS_MEDIUM) and Sonnet 5.5 high (env SONNET_HIGH). Pass their URL and TOKEN secrets through .github/workflows/board-sync.yml. Make routineFor in board.html and the matching code in tools/board_sync.py send a low-effort card to its model's medium task. Keep auto: true limited to Sonnet 5.5 medium. Fable never starts automatically. Create one Tom card (ask: setup) with the exact steps and paste text to create the two tasks and four secrets, modeled on t-startsetup, blocking this card's test. Update tools/board_newcard_test.py, board_test.py and board_sync_test.py, run them, push. You have my full permission to access the repo."
    },
-   "after": "t-startmore-setup"
+   "after": "t-startmore-setup",
+   "done": "2026-11-20"
   },
   {
    "id": "c-idea-checkart",
@@ -13315,7 +13324,7 @@
     "rule": "Claude Sonnet 5.5, high"
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukFk9aCyXxGuLYrXm1L",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -13333,6 +13342,10 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-20T17:28:18.972Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -13420,7 +13433,7 @@
    "id": "c-fix-gem-canon01play-2",
    "tag": "fix-gem-canon01play-2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Play the new chapter 1 opening in the taxi office",
@@ -13442,7 +13455,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDtpA6B8jjsrewNUSg",
     "opening": "Something is wrong on t-gem-canon01play"
    },
    "history": [
@@ -13460,6 +13473,10 @@
      "d": "2026-11-20",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-20T17:30:46.885Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -13473,7 +13490,7 @@
    },
    "after": "t-gem-canon01play",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-20T17:30:58+00:00"
   }
  ],
  "sessions": [
@@ -13761,6 +13778,29 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDt5GX171U9RkvJskx",
+   "title": "Fix the muffin pan that never leaves the counter, and add the new Mudling sheet to the Art Library (heistart)",
+   "first": "2026-11-19T19:59:41-08:00",
+   "last": "2026-11-20T09:30:42-08:00",
+   "tags": [
+    "startmore"
+   ],
+   "cards": [
+    "c-heistart",
+    "c-startmore"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFk9aCyXxGuLYrXm1L",
+   "title": "On the welcome page, shrink the width of new game and load",
+   "first": "2026-11-20T09:30:02-08:00",
+   "last": "2026-11-20T09:30:02-08:00",
+   "tags": [],
+   "cards": [
+    "c-idea-welcomepage"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukHF7db4ogWADdo3sy3",
    "title": "Check the art library for all items in \"to do\" \"in game but",
    "first": "2026-11-20T09:26:13-08:00",
@@ -13768,17 +13808,6 @@
    "tags": [],
    "cards": [
     "c-idea-checkart"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDt5GX171U9RkvJskx",
-   "title": "Fix the muffin pan that never leaves the counter, and add the new Mudling sheet to the Art Library (heistart)",
-   "first": "2026-11-19T19:59:41-08:00",
-   "last": "2026-11-20T09:21:34-08:00",
-   "tags": [],
-   "cards": [
-    "c-heistart",
-    "c-startmore"
    ]
   },
   {
@@ -15112,7 +15141,9 @@
    "r-20261120-091238-jecm",
    "r-20261120-091310-jqps",
    "r-20261120-091936-yxqb",
-   "r-20261120-092904-zi93"
+   "r-20261120-092904-zi93",
+   "r-20261120-092931-xkjg",
+   "r-20261120-093004-0rco"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -15134,8 +15165,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "30ebfae7391b78fe7ce375a9f86977e9709fe40f",
- "synced_at": "2026-11-20T17:29:42+00:00",
+ "synced": "1c86e53f7fe6ea9cf6e0bdacd95b9e99675e8c3e",
+ "synced_at": "2026-11-20T17:31:00+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
