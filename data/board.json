@@ -1734,11 +1734,16 @@
     {
      "d": "2026-11-19",
      "t": "Added by board-sync: Tom finished \"Switch GitHub Pages to publish from Actions (one setting)\" with a note and the card blocks nothing."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom tapped START."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-19"
+   "changed": "2026-11-19",
+   "start": true
   },
   {
    "id": "t-follow1play",
