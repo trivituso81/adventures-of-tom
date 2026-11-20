@@ -1163,8 +1163,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Voice Clips",
-   "count": 13,
-   "title": "Merge 13 new voice takes",
+   "count": 15,
+   "title": "Merge 15 new voice takes",
    "next": "Shipped as takes1: 2 takes merged, 26 old-wording takes left out.",
    "prompt": {
     "what": "Merges the voice takes you recorded on your phone.",
@@ -1199,11 +1199,15 @@
     {
      "d": "2026-11-20",
      "t": "Merged 2 of 28 unmerged kept takes (Tom, ch1 \"Twenty years, one witness\" and \"Thank you for telling me, Rose\"). 26 skipped: their words no longer match the game (Tommy now Tom, or cut lines)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "2 more take file(s) arrived."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-20",
+   "changed": "2026-11-19",
    "after": "nothing for Tom: end"
   },
   {
@@ -6167,11 +6171,11 @@
    "title": "Newer ElevenLabs music model for the Music Library (Square track)",
    "theme": "Tools",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Built: every Music Library card has a Model dropdown (v2.5 default, v2, v1). Your Square test on v2.5 is the next step (card t-music3town).",
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-20",
+   "changed": "2026-11-19",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDHfZ7opAxzYTUs3JC",
     "opening": "\"Read claude/next-addendum-squaremusic.md in the Project and follow its\""
@@ -6184,6 +6188,10 @@
     {
      "d": "2026-11-20",
      "t": "Checked the ElevenLabs docs: music_v2 and music_v2_5 exist, music_v1 is removed 2027-01-31. Shipped as music3; Square prompt rewritten for v2.5 in tracks.json."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as music3: Music Library can make takes on the newer ElevenLabs models; a new Square prompt to try on v2.5"
     }
    ],
    "prompt": {
@@ -6195,7 +6203,8 @@
     "effort": "medium (the steps are written in the addendum)",
     "text": "Read claude/next-addendum-squaremusic.md in the Project and follow its \"What the next session should do differently\" list. Check the current ElevenLabs Music API docs for model ids. If one newer than music_v1 exists, add a model choice per take to the Music Library (music.html), keep music_v1 selectable, update the test stub, run the tests and push. Then give me one prompt for the Square (track id town) to try on the newer model. You have my full permission to access the repo."
    },
-   "after": "t-music3town"
+   "after": "t-music3town",
+   "done": "2026-11-19"
   },
   {
    "id": "t-music3town",
@@ -6220,7 +6229,7 @@
    "id": "c-fix-skilllist1look-2",
    "tag": "fix-skilllist1look-2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Battle System",
    "title": "Fix what you found on: Look at the SKILLS list text and icons on your phone",
@@ -6242,7 +6251,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukE1YEHdcXNecL1wDgq",
     "opening": "Something is wrong on t-skilllist1look"
    },
    "history": [
@@ -6257,6 +6266,10 @@
     {
      "d": "2026-11-19",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -6269,8 +6282,7 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-skilllist1look-2 and t-skilllist1look in data/board.json, history included. Your first push is the commit board: start c-fix-skilllist1look-2.\n\nTom tested and found problems:\n1. Card t-skilllist1look (Look at the SKILLS list text and icons on your phone, ask play). He was asked: After the publish of build fix-skilllist1look: RELOAD on the title, ADMIN ) BATTLE LAB ) NEW BATTLE, start any fight, open SKILLS. Rows should now be thin, with small names and small pictures, in portrait and landscape. Report with the REPORT tab if anything still looks too big (fix-skilllist1look is the build to name). He wrote: lol now its too small! you went too far, isnt there a middle ground? and the back button doesnt match\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T03:23:13.129Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-skilllist1look to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-skilllist1look, and give the build fix-skilllist1look-2 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-skilllist1look",
-   "auto": true,
-   "start": true
+   "auto": true
   }
  ],
  "sessions": [
@@ -6429,8 +6441,10 @@
    "url": "https://claude.ai/code/session_01RXeukDHfZ7opAxzYTUs3JC",
    "title": "Newer ElevenLabs music model for the Music Library (Square track)",
    "first": "2026-11-19T19:17:08-08:00",
-   "last": "2026-11-19T19:17:08-08:00",
-   "tags": [],
+   "last": "2026-11-19T19:22:55-08:00",
+   "tags": [
+    "music3"
+   ],
    "cards": [
     "c-music3"
    ]
@@ -6904,11 +6918,13 @@
    "takes/20261119T163929-ott/part-001.json",
    "takes/20261119T163929-ott/state.json",
    "takes/20261119T230940-0ap/part-001.json",
-   "takes/20261119T230940-0ap/state.json"
+   "takes/20261119T230940-0ap/state.json",
+   "takes/20261120T032059-yoq/part-001.json",
+   "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "6bee62dc0c303713b307dc98a72d39ab374517ca",
- "synced_at": "2026-11-20T03:20:02+00:00",
+ "synced": "db7abf4b4911219792a30fad5d7f64368aee1c4f",
+ "synced_at": "2026-11-20T03:23:45+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
