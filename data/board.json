@@ -1172,12 +1172,17 @@
     {
      "d": "2026-11-19",
      "t": "Moved back to Up next (syncfix1): the first START stopped because claude/next.md was not in the repo. It is now (copydocs)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom tapped START."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
-   "tag": "nextclean"
+   "tag": "nextclean",
+   "start": true
   },
   {
    "id": "c-takes-2337ed",
