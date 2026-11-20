@@ -1,3 +1,13 @@
+## fix-clipposes (2026-11-20): PAINTED STATES: CHAPTER 1 now shows each fighter on an open spot in front of the family, so no state is hidden behind someone
+
+- Card c-fix-clipposes, Tom on t-clipposes: "Some of these are missing from the screen, like I don't see them in the battle test".
+- Cause (reproduced in portrait and landscape): all 36 state names fired and every pose was drawn, but the four fighters stand in a tight overlapping group, so the fighter showing a state was often behind another one (Rose's guard, braced hit, knocked out and get up behind Deedee; Tom's behind Grace and Rose; Grace's partly behind Tom).
+- Fix, Lab demo only: each fighter walks out (the run pictures, .7 s) to `B3_LAB_STAGE` (battle x 318, ground 300, between the Mudling and the family), shows every state there drawn on top of everyone, and walks home. `B3P.stage` makes `b3PartyHome` return that spot for that one fighter, so hit, dodge, knocked out, get up and run move from it exactly as in a fight; the draw loop draws that fighter last. The demo's run is 80 battle pixels (was 110) so it stops short of the Mudling from the new spot. Nothing changes in a real fight (`B3P.stage` is null outside the demo and is cleared by `b3PlayReset`). The demo is about 70 seconds (was 60).
+- Kept: every pose, size, timing and distance of the states themselves.
+- Tests: `tools/paint_state_test.py` has a new check that every state is shown on the open spot (fails on the old code, passes now): FAILS: []. `python3 tools/b3_test.py s8`: FAILS: []. Frames looked at: every state of all four in portrait, and in landscape.
+- Pencil reports: none filed since 08:26 UTC about this (the 8 open ones are other chapter 1 matters).
+- Board: t-clipposes goes back to Tom with what to look at again; after stays t-clipposes.
+
 ## knownwrong (2026-11-20): The old known-wrong list is cleared: checks fixed, stale rows parked, the rest on cards
 
 - Card c-knownwrong (the list cut out of claude/next.md). Each item below is fixed, on a card, or dropped with a reason.

@@ -23,13 +23,18 @@ function b3LabGo(i,opt) {
 // PAINTED STATES: CHAPTER 1 (clipposes, 2026-11-19): the four fighters against one Mudling. In turn each fighter shows every painted body state
 // (B3_BODY_PAINT in data/b3-clips.js) with its name on screen: idle fidget, guard, a braced hit, hit, dodge, knocked out and get up, victory, a run across.
 // Then the fight ends and the list comes back. The states are driven straight onto the screen; nobody takes a turn.
+const B3_LAB_STAGE={cx:318,base:300};   // battle pixels: between the Mudling and the family, clear of both, inside the phone's view
 function b3LabPaintedStates() {
   b3LabGo(0,{formation:null,foes:[{id:'mudling',row:'front'}],seed:7}); const F=B3.F,t0=performance.now(),steps=[];
   const alive=()=>B3.active&&B3.F===F,P=B3P,fighters=()=>F.party.filter(u=>BATTLE_SPRITES[u.id]);
   for(const id of ['tom','grace','rose','deedee']) {
     const nm=id.toUpperCase(),U=()=>F.party.find(u=>u.id===id),has=s=>!!b3PaintState(U(),s),word=x=>b3Word(nm+': '+x,'#fff1cb');
     const hit=()=>{ const k=U().key; P.body[k]={kind:'hit',t0:P.t,dur:B3_PAINT.hit.dur}; };
+    // fix-clipposes: the fighter walks out to a clear spot in front of the family (STAGE), shows every state there, drawn on top, and walks home.
+    const walk=(x0,x1,y0,y1)=>{ const k=U().key; P.body[k]={kind:'path',t0:P.t,dur:.7,keys:[{t:0,x:x0,y:y0,f:B3_BODY.dash},{t:.7,x:x1,y:y1,f:B3_BODY.dash}]}; };
     steps.push(
+      [()=>{ const u=U(),h=b3PartyHome(u); walk(h.cx,B3_LAB_STAGE.cx,h.base,B3_LAB_STAGE.base); },.75],
+      [()=>{ const k=U().key; delete P.body[k]; P.stage={key:k,cx:B3_LAB_STAGE.cx,base:B3_LAB_STAGE.base}; },.05],
       [()=>{ word('IDLE'); P.fidAt[U().key]=P.t+.4; },1.6],
       [()=>{ if(!has('guard')) return; word('GUARD'); b3AddStatus(F,U(),'guard_stance',{n:3}); b3ViewSync(); b3Render(); },1.5],
       [()=>{ if(!has('guard')) return; word('BRACED HIT'); P.body[U().key]={kind:'hit',guard:true,t0:P.t,dur:.4}; },1.1],
@@ -40,12 +45,14 @@ function b3LabPaintedStates() {
       [()=>{ word('GET UP'); const k=U().key; B3.view.u[k].ko=false; delete P.body[k]; b3GetUp(k,P.t); },1.3],
       [()=>{ word('VICTORY'); P.cheerKey=U().key; P.cheerAt=null; },1.8],
       [()=>{ P.cheerKey=null; word('RUN'); const u=U(),h=b3PartyHome(u),f=B3_BODY.dash,k=u.key;
-        P.body[k]={kind:'path',t0:P.t,dur:1.4,keys:[{t:0,x:h.cx,y:h.base,f},{t:.6,x:h.cx-110,y:h.base,f},{t:.75,x:h.cx-110,y:h.base,f},{t:1.4,x:h.cx,y:h.base,f}]}; },1.8]);
+        P.body[k]={kind:'path',t0:P.t,dur:1.4,keys:[{t:0,x:h.cx,y:h.base,f},{t:.6,x:h.cx-80,y:h.base,f},{t:.75,x:h.cx-80,y:h.base,f},{t:1.4,x:h.cx,y:h.base,f}]}; },1.8],
+      [()=>{ const k=U().key; delete P.body[k]; P.stage=null; const h=b3PartyHome(U()); walk(B3_LAB_STAGE.cx,h.cx,B3_LAB_STAGE.base,h.base); },.8],
+      [()=>{ delete P.body[U().key]; },.05]);
   }
   let i=0;
   const go=()=>{ if(!alive()) return;
     if(battle.state!=='command'||performance.now()-t0<2200) { setTimeout(go,150); return; }
-    if(i>=steps.length) { b3Exit(); return; }
+    if(i>=steps.length) { P.stage=null; b3Exit(); return; }
     const [fn,sec]=steps[i++]; fn(); setTimeout(go,sec*1000); };
   setTimeout(go,150);
 }

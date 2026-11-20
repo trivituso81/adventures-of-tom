@@ -10,7 +10,7 @@
 #   3. size: the pose is as tall as the table says (h x s of the standing figure) and the held guard does not pulse (breath only)
 #   4. hit and dodge move away from the monsters by the set distance (10 and 14 battle pixels) and come back to the spot
 #   5. ko is hurt, kneel, knocked out; get up plays it back; after every state the fighter is exactly the standing figure again
-#   6. the Lab row PAINTED STATES: CHAPTER 1 plays every state on every fighter, then returns to the list, portrait and landscape (pictures to look at)
+#   6. the Lab row PAINTED STATES: CHAPTER 1 plays every state on every fighter, each on a clear spot in front of the family (fix-clipposes), then returns to the list, portrait and landscape (pictures to look at)
 # Pictures: paintstate-<who>-strip.png (a row of the states), paintstate-portrait.png, paintstate-landscape.png.
 import threading, http.server, socketserver, functools, os, sys, io, json
 from playwright.sync_api import sync_playwright
@@ -151,7 +151,7 @@ with sync_playwright() as pw:
     NAME='PAINTED STATES: CHAPTER 1'
     for land in (False,True):
         if land: pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(600)
-        pg.evaluate("()=>{ window.__words=[]; if(!window.__bw){ window.__bw=b3Word; b3Word=function(t,c){ window.__words.push(t); return window.__bw(t,c); }; } }")
+        pg.evaluate("()=>{ window.__words=[]; if(!window.__bw){ window.__bw=b3Word; b3Word=function(t,c){ window.__words.push(t); (window.__onstage=window.__onstage||[]).push([t,B3P.stage&&B3.F.party.find(u=>u.key===B3P.stage.key).id]); return window.__bw(t,c); }; } }")
         pg.evaluate("()=>{ splash.active=true; document.getElementById('splash').hidden=false; document.getElementById('splash').classList.remove('out'); splashSetMode('lab3'); }"); pg.wait_for_timeout(400)
         names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
         need(NAME in names and names[-1]=='BACK' and names[0].startswith('NEW 1') and not any('PROOF' in n for n in names),f'the NEW BATTLE list is wrong: {names}')
@@ -165,6 +165,9 @@ with sync_playwright() as pw:
             try: pg.wait_for_function("()=>!B3.active&&splash.mode==='lab3'",timeout=120000)
             except Exception: fails.append('the PAINTED STATES row did not finish and return to the list')
             w=pg.evaluate("()=>window.__words"); need(len(w)>=36,f'the demo showed too few state names: {len(w)} {w[:12]}')
+            # fix-clipposes (Tom: "Some of these are missing from the screen"): each state is shown on the clear spot in front of the family, drawn on top
+            st=pg.evaluate("()=>window.__onstage||[]"); off=[x for x in st if ':' in x[0] and x[0].split(':')[0].lower()!=(x[1] or '')]
+            need(not off,f'a state was shown off the clear spot (hidden behind the family): {off[:6]}')
             for who in ('TOM','GRACE','ROSE','DEEDEE'):
                 need(all(any(x==who+': '+n for x in w) for n in ('IDLE','GUARD','BRACED HIT','HIT','DODGE','KNOCKED OUT','GET UP','RUN')),f'the demo missed a state of {who}: {w}')
         else:

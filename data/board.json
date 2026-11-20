@@ -6876,7 +6876,7 @@
    "lane": "tom",
    "col": "wait",
    "ask": "animations",
-   "next": "ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE > PAINTED STATES: CHAPTER 1. Watch once, about 1 minute: Tom, Grace, Rose and Deedee in turn each show idle, guard, braced hit, hit, dodge, knocked out, get up, victory and a run, with the state's name on screen. Then press Something is wrong on this card and write what looks wrong by fighter and state (head too big or small, wrong speed or distance), or All good. It blocks the card Apply your notes on the painted poses (clipposesfix).",
+   "next": "ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE > PAINTED STATES: CHAPTER 1, about 70 seconds. Now each fighter walks out to an open spot between the Mudling and the family, shows idle, guard, braced hit, hit, dodge, knocked out, get up, victory and a run there with the state's name on screen, then walks home. Check that you can see every state of Tom, Grace, Rose and Deedee in full, nobody standing in front of them, in portrait and in landscape. Then press All good, or Something is wrong and write what looks wrong by fighter and state (head too big or small, wrong speed or distance). It blocks the card Apply your notes on the painted poses (clipposesfix).",
    "blocks": [
     "c-clipposesfix"
    ],
@@ -6890,6 +6890,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom: something is wrong: Some of these are missing from the screen, like I don't see them in the battle test Sent to Claude as card c-fix-clipposes; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "fix-clipposes: reproduced. All 36 states played, but the four stood in a tight overlapping group, so Rose's guard, knocked out and get up were behind Deedee and Tom's were behind Grace and Rose. Each fighter now steps out to an open spot and is drawn in front."
     }
    ],
    "waiting_on": "claude"
@@ -8668,6 +8672,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-clipposes: the fighter showing states stands on an open spot in front of the family, drawn on top; the demo's run is 80 battle pixels (was 110) so it stops short of the Mudling. No pencil report since 08:26 UTC was about this."
     }
    ],
    "prompt": {

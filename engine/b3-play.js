@@ -19,7 +19,7 @@
 // Every kind ends by calling reveal(), which shows the next hit's beats.
 
 const B3={active:false,F:null,cfg:null,view:null,ui:'busy',sel:0,opts:[],pending:null,actor:null,result:null,artWait:false,log:[]};
-const B3P={t:0,q:[],body:{},gd:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false,cheerAt:null,cheerKey:null,fidAt:{}};
+const B3P={t:0,q:[],body:{},gd:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false,cheerAt:null,cheerKey:null,fidAt:{},stage:null};
 // How an enemy stands that is not in its art: flyers hover this many pixels off the ground.
 const B3_FOE_LOOK={skeeter:{hover:14}};
 // How long the default move animations take, as a multiple of the first build's pace. Tom, 2026-11-18: they were about 2x too fast.
@@ -41,7 +41,7 @@ function b3Update(dt) {
   B3P.pops=B3P.pops.filter(p=>B3P.t-p.t0<p.dur); B3P.words=B3P.words.filter(w=>B3P.t-w.t0<w.dur); B3P.fx=B3P.fx.filter(f=>B3P.t-f.t0<f.dur);
   if(B3P.flash&&B3P.t-B3P.flash.t0>=B3P.flash.dur) B3P.flash=null;
 }
-function b3PlayReset() { Object.assign(B3P,{t:0,q:[],body:{},gd:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false,cheerAt:null,cheerKey:null,fidAt:{}}); }
+function b3PlayReset() { Object.assign(B3P,{t:0,q:[],body:{},gd:{},foe:{},fa:{},pops:[],words:[],fx:[],flash:null,cheer:false,cheerAt:null,cheerKey:null,fidAt:{},stage:null}); }
 
 // ---------- The view: what the screen shows right now ----------
 function b3ViewSync() {
@@ -68,7 +68,8 @@ function b3ViewIcons(key) {
 
 // ---------- Where everyone stands (576 x 324) ----------
 // Someone in the Back row stands a little further from the monsters.
-function b3PartyHome(u) { const T=[null,BATTLE_POS1,BATTLE_POS2,BATTLE_POS3][B3.F.party.length]||BATTLE_POS4,p=T[u.slot]; return {cx:p.x*3+(u.row==='back'?14:0),base:p.base*3}; }
+// B3P.stage {key,cx,base}: the Lab's painted-state demo stands one fighter on a clear spot in front of the family (fix-clipposes).
+function b3PartyHome(u) { const S=B3P.stage; if(S&&S.key===u.key) return {cx:S.cx,base:S.base}; const T=[null,BATTLE_POS1,BATTLE_POS2,BATTLE_POS3][B3.F.party.length]||BATTLE_POS4,p=T[u.slot]; return {cx:p.x*3+(u.row==='back'?14:0),base:p.base*3}; }
 // Enemy slots: the front row stands around the old centre spot, the back row behind it further left. Slots stay put when someone falls.
 function b3LayoutFoes() {
   const F=B3.F,fr=F.foes.filter(f=>f.row!=='back'),bk=F.foes.filter(f=>f.row==='back'),n=F.foes.length,want=[0,96,80,68,60][n]||60;
@@ -341,7 +342,8 @@ function b3Draw() {
   // Enemies, back to front.
   for(const f of F.foes.filter(f=>B3P.foe[f.key]).sort((a,b)=>B3P.foe[a.key].py-B3P.foe[b.key].py)) b3DrawFoe(f,t,picked.includes(f.key));   // an add shows once its `summon` beat has played
   // Party, back to front (slot order runs up-screen to down-screen).
-  for(const u of F.party) b3DrawMember(u,t,picked.includes(u.key));
+  for(const u of F.party) if(!B3P.stage||B3P.stage.key!==u.key) b3DrawMember(u,t,picked.includes(u.key));
+  { const S=B3P.stage&&F.party.find(u=>u.key===B3P.stage.key); if(S) b3DrawMember(S,t,picked.includes(S.key)); }   // the demo's fighter is drawn last, on top
   // Things in flight and bursts.
   for(const e of B3P.fx) {
     const q=(t-e.t0)/e.dur; if(q<0) continue;
