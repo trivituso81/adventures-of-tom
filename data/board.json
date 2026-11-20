@@ -13855,6 +13855,61 @@
      "at": "2026-11-20T17:46:32.000Z"
     }
    ]
+  },
+  {
+   "id": "c-battlelabpage",
+   "title": "Battle Lab page with its own address",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "battlelabpage",
+   "next": "Building battle-lab.html: its own address that opens the Battle Lab straight away, with its own home screen icon and name. Then the admin page links to it.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFqBS2BeSqBbkNRBQ1",
+    "opening": "\"create a dedicated page with it's own URL for the Battle Lab\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom (09:40): \"create a dedicated page with it's own URL for the Battle Lab\". Then, after a 404 on the proposed address: \"you have my full approval to access and update the repo\". New card; related to adminhub1, which only gave the Battle Lab the address index.html?go=battle-lab."
+    }
+   ],
+   "prompt": {
+    "what": "Builds battle-lab.html, a page with its own address that opens the Battle Lab straight away, with its own home screen icon and name.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: one small page, built like admin.html)",
+    "effort": "medium (one new page, steps are known)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md, then card c-battlelabpage in data/board.json. Build battlelabpage as the card says and push it as battlelabpage. Your first push is the commit board: start c-battlelabpage. You have my full permission to access the repo."
+   },
+   "after": "t-battlelabpagetry"
+  },
+  {
+   "id": "t-battlelabpagetry",
+   "title": "Open the Battle Lab page on your home screen",
+   "theme": "Tools",
+   "lane": "tom",
+   "ask": "play",
+   "fyi": true,
+   "next": "On your iPhone open https://trivituso81.github.io/adventures-of-tom/battle-lab.html in Safari, tap Share, Add to Home Screen. Open it from the home screen: it should go straight to the difficulty choice, then the Battle Lab fights. All good, or Something is wrong.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": ""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by battlelabpage: your phone check of the Battle Lab page; blocks nothing."
+    }
+   ],
+   "col": "up"
   }
  ],
  "sessions": [
