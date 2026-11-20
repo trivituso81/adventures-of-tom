@@ -5861,7 +5861,7 @@
    "title": "Look at the SKILLS list text and icons on your phone",
    "theme": "Battle System",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "fyi": true,
    "next": "After the publish of build skilllist1: RELOAD on the title, ADMIN > BATTLE LAB > NEW BATTLE, start any fight, open SKILLS. The skill names and the pictures should be a little smaller and a long name like Kingdom of Ten-Thousand Blankets should fit in two lines. Report with the REPORT tab if anything still looks too big (skilllist1 is the build to name).",
@@ -5876,8 +5876,13 @@
     {
      "d": "2026-11-19",
      "t": "Added by skilllist1: your look at the smaller SKILLS list; blocks nothing."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: something is wrong: still looks way too big, all the fonts and icons. kind of needs a redesign Sent to Claude as card c-fix-skilllist1look; this card waits on it and comes back to you when the fix ships."
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-fix-cutpolish4b-2",
@@ -5941,6 +5946,62 @@
    },
    "after": "t-cutpolish4b",
    "auto": true
+  },
+  {
+   "id": "c-fix-skilllist1look",
+   "tag": "fix-skilllist1look",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Battle System",
+   "title": "Fix what you found on: Look at the SKILLS list text and icons on your phone",
+   "next": "You reported a problem on Look at the SKILLS list text and icons on your phone. Claude starts the fix by itself. Latest: still looks way too big, all the fonts and icons. kind of needs a redesign",
+   "blocks": [
+    "t-skilllist1look"
+   ],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "reports": [
+    {
+     "at": "2026-11-20T03:00:48.054Z",
+     "card": "t-skilllist1look",
+     "title": "Look at the SKILLS list text and icons on your phone",
+     "ask": "play",
+     "words": "still looks way too big, all the fonts and icons. kind of needs a redesign",
+     "shot": "",
+     "asked": "After the publish of build skilllist1: RELOAD on the title, ADMIN ) BATTLE LAB ) NEW BATTLE, start any fight, open SKILLS. The skill names and the pictures should be a little smaller and a long name like Kingdom of Ten-Thousand Blankets should fit in two lines. Report with the REPORT tab if anything still looks too big (skilllist1 is the build to name)."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-skilllist1look"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Made by Something is wrong on t-skilllist1look."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom reported on t-skilllist1look: still looks way too big, all the fonts and icons. kind of needs a redesign"
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself."
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Look at the SKILLS list text and icons on your phone.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-skilllist1look and t-skilllist1look in data/board.json, history included. Your first push is the commit board: start c-fix-skilllist1look.\n\nTom tested and found problems:\n1. Card t-skilllist1look (Look at the SKILLS list text and icons on your phone, ask play). He was asked: After the publish of build skilllist1: RELOAD on the title, ADMIN ) BATTLE LAB ) NEW BATTLE, start any fight, open SKILLS. The skill names and the pictures should be a little smaller and a long name like Kingdom of Ten-Thousand Blankets should fit in two lines. Report with the REPORT tab if anything still looks too big (skilllist1 is the build to name). He wrote: still looks way too big, all the fonts and icons. kind of needs a redesign\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T03:00:48.054Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-skilllist1look to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-skilllist1look, and give the build fix-skilllist1look a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-skilllist1look",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
