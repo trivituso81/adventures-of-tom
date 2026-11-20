@@ -10319,7 +10319,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukH9jBnr6vzSqhxpgoT",
+    "url": "https://claude.ai/code/session_01RXeukDjPNPc4SnooT9qQmT",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -10337,6 +10337,10 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-20T15:34:01.330Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -10354,7 +10358,7 @@
    "id": "c-fix-heist1play-2",
    "tag": "fix-heist1play-2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
@@ -10376,7 +10380,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukEx1ffiitR5B5otnwt",
     "opening": "Something is wrong on t-heist1play"
    },
    "history": [
@@ -10394,6 +10398,10 @@
      "d": "2026-11-20",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-20T15:37:16.558Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -10407,7 +10415,7 @@
    },
    "after": "t-heist1play",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-20T15:38:28+00:00"
   },
   {
    "id": "c-fix-heist1voice",
@@ -10700,6 +10708,16 @@
    ],
    "cards": [
     "c-reports-2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDjPNPc4SnooT9qQmT",
+   "title": "Fix: Re-record Grace's distorted chapter 1 lines",
+   "first": "2026-11-20T07:38:20-08:00",
+   "last": "2026-11-20T07:38:20-08:00",
+   "tags": [],
+   "cards": [
+    "c-fix-gracevoice-distort"
    ]
   },
   {
@@ -11710,8 +11728,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "92099a362a25ad67de906f08fe0a9b73af84ab55",
- "synced_at": "2026-11-20T15:37:06+00:00",
+ "synced": "a1a4963a4619492266481404efa0be4c28564def",
+ "synced_at": "2026-11-20T15:38:28+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
