@@ -16404,10 +16404,10 @@
    "id": "t-welcomepage-request",
    "title": "Paste the welcome page request into the card",
    "theme": "Game Shell",
-   "lane": "tom",
+   "lane": "claude",
    "col": "up",
    "ask": "setup",
-   "next": "Open ADMIN > BOARD, open this card, type or paste the request you added in the other conversation about the welcome buttons and chapter list top bar into the note, then tap I did this. That unblocks the card Fix: Check the new welcome buttons and chapter list top bar.",
+   "next": "Handed to Claude by Tom: i dont understand what i need to do",
    "blocks": [
     "c-fix-welcomepage-play"
    ],
@@ -16421,8 +16421,24 @@
     {
      "d": "2026-11-20",
      "t": "Made by the Needs attention sweep: the fix needs the request text."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom handed this to Claude: i dont understand what i need to do",
+     "at": "2026-11-20T21:27:59.078Z"
     }
-   ]
+   ],
+   "tag": "t-welcomepage-request",
+   "note": "i dont understand what i need to do",
+   "prompt": {
+    "what": "Works out what Tom wants from his note, rewrites this card, and does the work.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the steps are not written yet)",
+    "effort": "medium (a handed-over card is usually one piece of work)",
+    "text": "Read claude/handoff-rules.md. Tom handed you board card t-welcomepage-request with this note: i dont understand what i need to do. Work out what is needed, rewrite the card, and do it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
