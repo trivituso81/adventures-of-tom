@@ -14163,7 +14163,7 @@
    "lane": "tom",
    "ask": "play",
    "fyi": true,
-   "next": "Open https://trivituso81.github.io/adventures-of-tom/battle-lab.html in Safari (wait a minute after this push). You should see the Battle Lab with EASY, MEDIUM, HARD at the top (HARD lit) and every fight below as one button. Tap any fight once: it should start straight away on HARD. If you add it to the home screen, use Share > Add to Home Screen from that page. All good, or Something is wrong.",
+   "next": "Open https://trivituso81.github.io/adventures-of-tom/battle-lab.html in Safari (wait a minute after this push). You should see the tab icon as crossed swords on dark red, then EASY, MEDIUM, HARD (HARD lit) and three closed groups: New battle system, Tests and reviews, Boss fights. Tap one group to open it, tap a chapter inside it to open that, then tap a fight once: it starts straight away on HARD. All good, or Something is wrong.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -14206,6 +14206,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: battle lab should have its own unique favicon. now that all buttons are exposed as one click, the page needs better categories and subcategories, with expand collapse behavior for both. all should be collapsed by default Sent to Claude as card c-fix-battlelabpagetry-3; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T18:12:05.961Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Claude fix c-fix-battlelabpagetry-3: own crossed swords icon; fights now in collapsed categories and subcategories that open and close on a tap."
     }
    ],
    "col": "wait",
@@ -14801,6 +14805,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-battlelabpagetry-3: icon and collapsed groups."
     }
    ],
    "prompt": {

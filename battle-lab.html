@@ -6,8 +6,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="AoT Battle Lab">
 <meta name="theme-color" content="#14122b">
-<link rel="apple-touch-icon" sizes="180x180" href="icon-battlelab-180.png?v=battlelabpage">
-<link rel="icon" type="image/png" sizes="32x32" href="icon-battlelab-32.png?v=battlelabpage">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-battlelab-180.png?v=battlelab3">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-battlelab-32.png?v=battlelab3">
 <title>Battle Lab: The Adventures of Tom</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -22,7 +22,16 @@ a.back{color:#ffd34d;text-decoration:none;font-weight:600;padding:10px 4px}
 .tog button b{display:block;font-size:15px}.tog button span{display:block;font-size:11px;color:#b9b3e6}
 .tog button.on{background:#ffd34d;color:#241b00;border-color:#ffd34d}.tog button.on span{color:#4a3a00}
 main{max-width:900px;margin:0 auto;padding:12px 16px 60px}
-h2{font-size:13px;color:#b9b3e6;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin:18px 4px 8px}
+details{margin:0 0 10px}
+summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;min-height:48px;border-radius:12px;padding:10px 14px;font-weight:600;-webkit-user-select:none;user-select:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"\25B8";color:#ffd34d;transition:transform .15s}
+details[open]>summary::before{transform:rotate(90deg)}
+summary i{margin-left:auto;font-style:normal;font-size:12px;color:#b9b3e6;font-weight:400}
+.cat>summary{background:#2c2852;border:1px solid #4a4486;font-size:16px;text-transform:uppercase;letter-spacing:.04em}
+.subs{padding:10px 0 2px 12px;border-left:2px solid #3a3566;margin:8px 0 0 10px}
+.sub>summary{background:#1d1a40;border:1px solid #3a3566;font-size:15px}
+.sub>.grid{padding-top:10px}
 .grid{display:grid;grid-template-columns:1fr;gap:10px}
 @media(min-width:700px){.grid{grid-template-columns:1fr 1fr}}
 .btn{display:block;width:100%;text-align:left;text-decoration:none;color:#fff;font:inherit;border:1px solid #3a3566;border-radius:14px;padding:12px 14px;min-height:56px;background:#242050;cursor:pointer}
@@ -39,7 +48,7 @@ h2{font-size:13px;color:#b9b3e6;font-weight:600;text-transform:uppercase;letter-
 <script>
 // battle-lab.html (battlelab2): the Battle Lab's own address and page. Like admin.html it loads no game code: the difficulty toggles sit at
 // the top, every fight is one link, and a tap opens index.html straight into that fight (splashGoTool in engine/splash.js).
-// The fight names come from data/battle-lab-index.json (node tools/battle_lab_index.js). Default difficulty is HARD.
+// Fights sit in collapsed categories and subcategories. The fight names come from data/battle-lab-index.json (node tools/battle_lab_index.js). Default difficulty is HARD.
 var DIFFS=[['rose','EASY','Softer monsters'],['grace','MEDIUM','As designed'],['director','HARD','Tougher monsters']],KEY='aot-diff';
 function get(){try{var d=localStorage.getItem(KEY);return DIFFS.some(function(x){return x[0]===d;})?d:null;}catch(e){return null;}}
 var PICK=null;
@@ -59,15 +68,34 @@ function link(name,sub,q,id){
  a.onclick=function(){save(diff());};   // the pick is written even when it is only the default, so the game starts on what the page shows
  return a;
 }
-function group(m,title,items){m.appendChild(el('h2',null,title));var g=el('div','grid');items.forEach(function(a){g.appendChild(a);});m.appendChild(g);}
+// Categories and subcategories (battlelab3): both levels are <details> that open and close on a tap, and every one starts closed.
+function sub(title,items){
+ var d=el('details','sub');d.appendChild(el('summary',null,esc(title)+' <i>'+items.length+'</i>'));
+ var g=el('div','grid');items.forEach(function(a){g.appendChild(a);});d.appendChild(g);return d;
+}
+function cat(m,title,subs){
+ subs=subs.filter(function(s){return s[1].length;});
+ var n=subs.reduce(function(t,s){return t+s[1].length;},0);
+ var d=el('details','cat');d.appendChild(el('summary',null,esc(title)+' <i>'+n+'</i>'));
+ var w=el('div','subs');subs.forEach(function(s){w.appendChild(sub(s[0],s[1]));});d.appendChild(w);m.appendChild(d);
+}
 function build(d){
  var m=document.getElementById('main');m.innerHTML='';
- var states=d.b3.length?[link('PAINTED STATES: CHAPTER 1','Each fighter shows every body state, then you approve or reject it.','states','f-states')]:[];
- group(m,'New battle system',d.b3.map(function(L){return link(L.name,L.sub,'new&i='+L.i,'f-new'+L.i);}).concat(states));
- var test=[],boss=[];
- d.b2.forEach(function(L){(L.ch===0?test:boss).push(link(L.name,L.sub,'lab&i='+L.i,'f-lab'+L.i));});
- group(m,'Tests and reviews',test);
- group(m,'Boss fights, chapters 1 to 20',boss);
+ var byCh={},other=[];
+ d.b3.forEach(function(L){var x=/^Chapter (\d+)/.exec(L.sub),a=link(L.name,L.sub,'new&i='+L.i,'f-new'+L.i);
+  if(x){(byCh[x[1]]=byCh[x[1]]||[]).push(a);}else{other.push(a);}});
+ if(d.b3.length)other.push(link('PAINTED STATES: CHAPTER 1','Each fighter shows every body state, then you approve or reject it.','states','f-states'));
+ var nb=Object.keys(byCh).sort(function(a,b){return a-b;}).map(function(c){return ['Chapter '+c,byCh[c]];});
+ nb.push(['Other fights and states',other]);
+ cat(m,'New battle system',nb);
+ var rev=[],clip=[],tri=[],boss={};
+ d.b2.forEach(function(L){
+  var a=link(L.name,L.sub,'lab&i='+L.i,'f-lab'+L.i);
+  if(L.ch===0){(/^CHAPTER/.test(L.name)?rev:/^CLIP/.test(L.name)?clip:tri).push(a);}
+  else{var k=Math.floor((L.ch-1)/5);(boss[k]=boss[k]||[]).push(a);}
+ });
+ cat(m,'Tests and reviews',[['Chapter 1 review',rev],['Clip tests',clip],['Tryouts and solo',tri]]);
+ cat(m,'Boss fights, chapters 1 to 20',Object.keys(boss).sort().map(function(k){return ['Chapters '+(k*5+1)+' to '+(k*5+5),boss[k]];}));
 }
 toggles();
 fetch('data/battle-lab-index.json?t='+Date.now()).then(function(r){return r.json();}).then(build)
