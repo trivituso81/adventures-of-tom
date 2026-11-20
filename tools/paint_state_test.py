@@ -11,7 +11,9 @@
 #   4. hit and dodge move away from the monsters by the set distance (10 and 14 battle pixels) and come back to the spot
 #   5. ko is hurt, kneel, knocked out; get up plays it back; after every state the fighter is exactly the standing figure again
 #   6. the Lab row PAINTED STATES: CHAPTER 1 plays every state on every fighter, each on a clear spot in front of the family (fix-clipposes), then returns to the list, portrait and landscape (pictures to look at)
-# Pictures: paintstate-<who>-strip.png (a row of the states), paintstate-portrait.png, paintstate-landscape.png.
+#   7. fix-clipposes-2: after each state the run holds on the review panel until APPROVE or REJECT, WATCH AGAIN plays the state once more,
+#      the run plays at 1x even when the battle speed is 2x, and each answer and note is sent to data/pose-review.json (GitHub is faked here)
+# Pictures: paintstate-<who>-strip.png (a row of the states), paintstate-portrait.png, paintstate-landscape.png (the review panel up).
 import threading, http.server, socketserver, functools, os, sys, io, json
 from playwright.sync_api import sync_playwright
 from PIL import Image
@@ -149,6 +151,17 @@ with sync_playwright() as pw:
         pg.evaluate("()=>{ window.__slow=1; }"); pg.click('#b3-exit'); pg.wait_for_timeout(700)
     # 6. the Lab row, portrait then landscape
     NAME='PAINTED STATES: CHAPTER 1'
+    store={'doc':None,'sha':0}
+    def gh(route):
+        r=route.request
+        if r.method=='GET':
+            if store['doc'] is None: return route.fulfill(status=404,body='{}')
+            import base64; return route.fulfill(status=200,content_type='application/json',body=json.dumps({'sha':str(store['sha']),'content':base64.b64encode(store['doc'].encode()).decode()}))
+        import base64; b=json.loads(r.post_data); store['doc']=base64.b64decode(b['content']).decode(); store['sha']+=1
+        pg.evaluate("(d)=>{ (window.__puts=window.__puts||[]).push(JSON.parse(d)); }",store['doc'])
+        return route.fulfill(status=201,content_type='application/json',body='{}')
+    pg.route('https://api.github.com/repos/trivituso81/adventures-of-tom/contents/data/pose-review.json*',gh)
+    pg.evaluate("()=>{ window.__puts=[]; localStorage.setItem('aot-gh-token','test'); localStorage.removeItem('aot-pose-review'); B7.speed=2; }")
     for land in (False,True):
         if land: pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(600)
         pg.evaluate("()=>{ window.__words=[]; if(!window.__bw){ window.__bw=b3Word; b3Word=function(t,c){ window.__words.push(t); (window.__onstage=window.__onstage||[]).push([t,B3P.stage&&B3.F.party.find(u=>u.key===B3P.stage.key).id]); return window.__bw(t,c); }; } }")
@@ -159,20 +172,45 @@ with sync_playwright() as pw:
         pg.evaluate("(i)=>document.querySelectorAll('#splash .sp-choice')[i].click()",names.index(NAME))
         try: pg.wait_for_function("()=>B3.active&&B3.F&&B3.F.party.length===4&&B3.F.foes.length===1&&window.__words.length>=1",timeout=40000)
         except Exception: fails.append('the PAINTED STATES row did not start the four fighters against one Mudling'+(' (landscape)' if land else ''))
-        pg.wait_for_timeout(7000 if land else 4500); f=shot(pg); rot=land and pg.evaluate("()=>layout.rotated")
+        # 7. the run holds on the review panel after the first state
+        try: pg.wait_for_function("()=>{ const e=document.getElementById('prv'); return e&&!e.hidden&&__LE.PRV.cur; }",timeout=40000)
+        except Exception: fails.append('the review panel did not come up after the first state'+(' (landscape)' if land else ''))
+        need(pg.evaluate("()=>B7.speed")==1,'the review run is not at 1x')
+        need(not pg.evaluate("()=>B3.F.party.find(u=>u.id==='tom').st.guard_stance"),'Tom still carries his starting guard during IDLE')
+        n0=len(pg.evaluate("()=>window.__words")); pg.wait_for_timeout(3500)
+        need(len(pg.evaluate("()=>window.__words"))==n0,'the next state played before an answer'+(' (landscape)' if land else ''))
+        f=shot(pg); rot=land and pg.evaluate("()=>layout.rotated")
         (f.rotate(90,expand=True) if rot else f).save(os.path.join(OUT,'paintstate-'+('landscape' if land else 'portrait')+'.png'))
+        # the fighter on the stage spot is not under the panel
+        box=pg.evaluate("""()=>{ const c=document.getElementById('battle-canvas'),R=c.getBoundingClientRect(),k=c.width/576,sy=R.height/c.height;
+          const p=document.getElementById('prv').getBoundingClientRect(); return {feet:R.top+300*k*sy,p:[p.left,p.top,p.right,p.bottom]}; }""")
+        if not land: need(box['feet']<=box['p'][1]+2,f'the review panel covers the fighter in portrait: {box}')
+        pg.click('#prv [data-prv="again"]'); pg.wait_for_timeout(300)
+        need(len(pg.evaluate("()=>window.__words"))==n0+1,'WATCH AGAIN did not play the state again'+(' (landscape)' if land else ''))
+        pg.wait_for_function("()=>!document.querySelector('#prv [data-prv=\"ok\"]').disabled",timeout=8000)
         if not land:
-            try: pg.wait_for_function("()=>!B3.active&&splash.mode==='lab3'",timeout=120000)
+            pg.fill('#prv .prv-note','head a bit small'); pg.click('#prv [data-prv="no"]')
+            pg.wait_for_function("()=>window.__puts.length>=1",timeout=15000)
+            put=pg.evaluate("()=>window.__puts[0]")
+            need(put.get('runs',{}).get('ch1',{}).get('answers',{}).get('tom.idle',{}).get('v')=='reject' and put['runs']['ch1']['answers']['tom.idle'].get('note')=='head a bit small' and len(put['runs']['ch1'].get('expect',[]))>=32,
+                 f'the answer was not sent to data/pose-review.json: {json.dumps(put)[:300]}')
+            pg.evaluate("()=>{ __LE.PRV.auto='approve'; if(__LE.PRV.cur) __LE.prvAnswer('approve',''); }")
+            try: pg.wait_for_function("()=>!B3.active&&splash.mode==='lab3'",timeout=150000)
             except Exception: fails.append('the PAINTED STATES row did not finish and return to the list')
-            w=pg.evaluate("()=>window.__words"); need(len(w)>=36,f'the demo showed too few state names: {len(w)} {w[:12]}')
+            w=pg.evaluate("()=>window.__words"); need(len(w)>=37,f'the demo showed too few state names: {len(w)} {w[:12]}')
             # fix-clipposes (Tom: "Some of these are missing from the screen"): each state is shown on the clear spot in front of the family, drawn on top
             st=pg.evaluate("()=>window.__onstage||[]"); off=[x for x in st if ':' in x[0] and x[0].split(':')[0].lower()!=(x[1] or '')]
             need(not off,f'a state was shown off the clear spot (hidden behind the family): {off[:6]}')
             for who in ('TOM','GRACE','ROSE','DEEDEE'):
                 need(all(any(x==who+': '+n for x in w) for n in ('IDLE','GUARD','BRACED HIT','HIT','DODGE','KNOCKED OUT','GET UP','RUN')),f'the demo missed a state of {who}: {w}')
+            need(pg.evaluate("()=>B7.speed")==2,'the battle speed was not put back after the review run')
+            pg.wait_for_timeout(1500); last=pg.evaluate("()=>window.__puts[window.__puts.length-1]")
+            need(len(last['runs']['ch1']['answers'])==len(last['runs']['ch1']['expect']),'not every answer reached data/pose-review.json')
+            pg.evaluate("()=>{ __LE.PRV.auto=null; }")
         else:
-            pg.click('#b3-exit'); pg.wait_for_timeout(700)
-            need(pg.evaluate("()=>splash.mode")=='lab3' and not pg.evaluate("()=>B3.active"),'EXIT from the demo did not go back to the list (landscape)')
+            pg.click('#prv [data-prv="stop"]'); pg.wait_for_timeout(900)
+            need(pg.evaluate("()=>splash.mode")=='lab3' and not pg.evaluate("()=>B3.active"),'STOP on the review panel did not go back to the list (landscape)')
+            need(not pg.evaluate("()=>document.getElementById('prv')"),'the review panel stayed after STOP (landscape)')
     errs=[e for e in errs if 'AudioContext' not in e and 'autoplay' not in e.lower()]
     need(not errs,f'page errors: {errs[:3]}')
     br.close()

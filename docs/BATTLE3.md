@@ -359,7 +359,7 @@ Files: `data/b3-clips.js` (`B3_BODY_CLIPS`: owner then state to clip id), `engin
 | victory | celeb and leap | swap every .28 s, 16 high hop (Rose keeps her video) |
 | run | run pair, runFlip on the way home | swap every .11 s in place of the leap picture |
 
-Rules: a pose is never warped; only `s` (so the head matches the standing head) and `h` live in the table. Head rows: `tools/shots/paintstate-headrows.png`. Test: `python3 -I tools/paint_state_test.py` (feet on the ground line, size, slide distances, ko and get up, victory, run, then the Lab row, both layouts). Lab: NEW BATTLE > PAINTED STATES: CHAPTER 1 (`b3LabPaintedStates`, `engine/b3-lab.js`) plays every state on every fighter in turn.
+Rules: a pose is never warped; only `s` (so the head matches the standing head) and `h` live in the table. Head rows: `tools/shots/paintstate-headrows.png`. Test: `python3 -I tools/paint_state_test.py` (feet on the ground line, size, slide distances, ko and get up, victory, run, then the Lab row, both layouts). Lab: NEW BATTLE > PAINTED STATES: CHAPTER 1 (`b3LabPaintedStates`, `engine/b3-lab.js`) plays every state on every fighter in turn. fix-clipposes-2: after each state the run holds on a review panel (`engine/pose-review.js`: WATCH AGAIN, optional note, REJECT, APPROVE, STOP) at 1x; each answer is saved to `data/pose-review.json` on main (`runs.ch1.expect` and `answers` keyed `fighter.state`), and the board rule `done_when.poses_reviewed` closes Tom's card when every state is answered and hands his rejections and notes to the card that applies them.
 
 ## Clips: facts from the animation test (build `clippack1`, 2026-11-18)
 

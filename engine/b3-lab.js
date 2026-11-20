@@ -23,37 +23,57 @@ function b3LabGo(i,opt) {
 // PAINTED STATES: CHAPTER 1 (clipposes, 2026-11-19): the four fighters against one Mudling. In turn each fighter shows every painted body state
 // (B3_BODY_PAINT in data/b3-clips.js) with its name on screen: idle fidget, guard, a braced hit, hit, dodge, knocked out and get up, victory, a run across.
 // Then the fight ends and the list comes back. The states are driven straight onto the screen; nobody takes a turn.
+// fix-clipposes: the fighter walks out to a clear spot in front of the family (STAGE), shows every state there, drawn on top, and walks home.
+// fix-clipposes-2 (Tom: "way too fast"): after each state the run holds on the review panel (engine/pose-review.js): WATCH AGAIN, an optional
+// note, REJECT or APPROVE; nothing else plays until he answers. The run is played at 1x whatever the battle speed (2x also sped these poses up).
 const B3_LAB_STAGE={cx:318,base:300};   // battle pixels: between the Mudling and the family, clear of both, inside the phone's view
-function b3LabPaintedStates() {
-  b3LabGo(0,{formation:null,foes:[{id:'mudling',row:'front'}],seed:7}); const F=B3.F,t0=performance.now(),steps=[];
-  const alive=()=>B3.active&&B3.F===F,P=B3P,fighters=()=>F.party.filter(u=>BATTLE_SPRITES[u.id]);
+function b3LabPaintedStates(opt) {
+  b3LabGo(0,{formation:null,foes:[{id:'mudling',row:'front'}],seed:7}); const F=B3.F,t0=performance.now(),steps=[],expect=[];
+  const alive=()=>B3.active&&B3.F===F,P=B3P,speed0=B7.speed; B7.speed=1;
+  const later=(fn,sec)=>setTimeout(()=>{ if(alive()) fn(); },sec*1000);
   for(const id of ['tom','grace','rose','deedee']) {
-    const nm=id.toUpperCase(),U=()=>F.party.find(u=>u.id===id),has=s=>!!b3PaintState(U(),s),word=x=>b3Word(nm+': '+x,'#fff1cb');
-    const hit=()=>{ const k=U().key; P.body[k]={kind:'hit',t0:P.t,dur:B3_PAINT.hit.dur}; };
-    // fix-clipposes: the fighter walks out to a clear spot in front of the family (STAGE), shows every state there, drawn on top, and walks home.
-    const walk=(x0,x1,y0,y1)=>{ const k=U().key; P.body[k]={kind:'path',t0:P.t,dur:.7,keys:[{t:0,x:x0,y:y0,f:B3_BODY.dash},{t:.7,x:x1,y:y1,f:B3_BODY.dash}]}; };
-    steps.push(
-      [()=>{ const u=U(),h=b3PartyHome(u); walk(h.cx,B3_LAB_STAGE.cx,h.base,B3_LAB_STAGE.base); },.75],
-      [()=>{ const k=U().key; delete P.body[k]; P.stage={key:k,cx:B3_LAB_STAGE.cx,base:B3_LAB_STAGE.base}; },.05],
-      [()=>{ word('IDLE'); P.fidAt[U().key]=P.t+.4; },1.6],
-      [()=>{ if(!has('guard')) return; word('GUARD'); b3AddStatus(F,U(),'guard_stance',{n:3}); b3ViewSync(); b3Render(); },1.5],
-      [()=>{ if(!has('guard')) return; word('BRACED HIT'); P.body[U().key]={kind:'hit',guard:true,t0:P.t,dur:.4}; },1.1],
-      [()=>{ if(!has('guard')) return; b3EndStatus(F,U(),'guard_stance'); b3ViewSync(); b3Render(); },.9],
-      [()=>{ word('HIT'); hit(); },1.0],
-      [()=>{ word('DODGE'); P.body[U().key]={kind:'dodge',t0:P.t,dur:B3_PAINT.dodge.dur}; },.9],
-      [()=>{ word('KNOCKED OUT'); const k=U().key; B3.view.u[k].ko=true; P.body[k]={kind:'ko',t0:P.t,dur:1e9}; },2.2],
-      [()=>{ word('GET UP'); const k=U().key; B3.view.u[k].ko=false; delete P.body[k]; b3GetUp(k,P.t); },1.3],
-      [()=>{ word('VICTORY'); P.cheerKey=U().key; P.cheerAt=null; },1.8],
-      [()=>{ P.cheerKey=null; word('RUN'); const u=U(),h=b3PartyHome(u),f=B3_BODY.dash,k=u.key;
-        P.body[k]={kind:'path',t0:P.t,dur:1.4,keys:[{t:0,x:h.cx,y:h.base,f},{t:.6,x:h.cx-80,y:h.base,f},{t:.75,x:h.cx-80,y:h.base,f},{t:1.4,x:h.cx,y:h.base,f}]}; },1.8],
-      [()=>{ const k=U().key; delete P.body[k]; P.stage=null; const h=b3PartyHome(U()); walk(B3_LAB_STAGE.cx,h.cx,B3_LAB_STAGE.base,h.base); },.8],
-      [()=>{ delete P.body[U().key]; },.05]);
+    const nm=id.toUpperCase(),U=()=>F.party.find(u=>u.id===id),key=()=>U().key,word=x=>b3Word(nm+': '+x,'#fff1cb');
+    const walk=(x0,x1,y0,y1)=>{ P.body[key()]={kind:'path',t0:P.t,dur:.7,keys:[{t:0,x:x0,y:y0,f:B3_BODY.dash},{t:.7,x:x1,y:y1,f:B3_BODY.dash}]}; };
+    const guardOn=()=>{ if(!U().st.guard_stance) { b3AddStatus(F,U(),'guard_stance',{n:3}); b3ViewSync(); b3Render(); } };
+    const guardOff=()=>{ if(U().st.guard_stance) { b3EndStatus(F,U(),'guard_stance'); b3ViewSync(); b3Render(); } };
+    const koOn=(held)=>{ const k=key(); B3.view.u[k].ko=true; P.body[k]={kind:'ko',t0:held?P.t-30:P.t,dur:1e9}; };
+    // A state: play() shows it, sec later end() puts the fighter back (KO stays down while he answers). WATCH AGAIN plays it once more.
+    const S=[
+      {k:'idle',label:'IDLE',sec:1.6,play:()=>{ P.fidAt[key()]=P.t+.4; }},
+      {k:'guard',label:'GUARD',sec:1.5,guard:1,play:()=>{ guardOff(); later(guardOn,.15); }},
+      {k:'braced',label:'BRACED HIT',sec:1.2,guard:1,play:()=>{ guardOn(); P.body[key()]={kind:'hit',guard:true,t0:P.t,dur:.4}; },end:guardOff},
+      {k:'hit',label:'HIT',sec:1.0,play:()=>{ P.body[key()]={kind:'hit',t0:P.t,dur:B3_PAINT.hit.dur}; }},
+      {k:'dodge',label:'DODGE',sec:.9,play:()=>{ P.body[key()]={kind:'dodge',t0:P.t,dur:B3_PAINT.dodge.dur}; }},
+      {k:'ko',label:'KNOCKED OUT',sec:2.2,play:()=>{ delete P.body[key()]; B3.view.u[key()].ko=false; koOn(false); }},
+      {k:'getup',label:'GET UP',sec:1.3,play:()=>{ const go=()=>{ const k=key(); B3.view.u[k].ko=false; delete P.body[k]; b3GetUp(k,P.t); };
+        if(B3.view.u[key()].ko) go(); else { koOn(true); later(go,.5); } },again:1.8},
+      {k:'victory',label:'VICTORY',sec:1.8,play:()=>{ P.cheerKey=key(); P.cheerAt=null; },end:()=>{ P.cheerKey=null; }},
+      {k:'run',label:'RUN',sec:1.8,play:()=>{ const u=U(),h=b3PartyHome(u),f=B3_BODY.dash;
+        P.body[u.key]={kind:'path',t0:P.t,dur:1.4,keys:[{t:0,x:h.cx,y:h.base,f},{t:.6,x:h.cx-80,y:h.base,f},{t:.75,x:h.cx-80,y:h.base,f},{t:1.4,x:h.cx,y:h.base,f}]}; }}];
+    // Tom starts every fight in guard (his kit's battleStart), which would draw IDLE, HIT and DODGE from the guard pose: drop it first.
+    steps.push({fn:()=>{ guardOff(); const h=b3PartyHome(U()); walk(h.cx,B3_LAB_STAGE.cx,h.base,B3_LAB_STAGE.base); },sec:.75},
+      {fn:()=>{ delete P.body[key()]; P.stage={key:key(),cx:B3_LAB_STAGE.cx,base:B3_LAB_STAGE.base}; },sec:.05});
+    for(const st of S) {
+      if(st.guard&&!b3PaintState(U(),'guard')) continue;
+      const rk=id+'.'+st.k; expect.push(rk);
+      const show=()=>{ word(st.label); st.play(); };
+      steps.push({fn:show,sec:st.sec,end:st.end,review:{key:rk,who:nm,label:st.label,again:cb=>{ show(); later(()=>{ if(st.end) st.end(); cb(); },st.again||st.sec); }}});
+    }
+    steps.push({fn:()=>{ delete P.body[key()]; P.stage=null; const h=b3PartyHome(U()); walk(B3_LAB_STAGE.cx,h.cx,B3_LAB_STAGE.base,h.base); },sec:.8},
+      {fn:()=>{ delete P.body[key()]; },sec:.05});
   }
-  let i=0;
-  const go=()=>{ if(!alive()) return;
+  prvStart('ch1',expect); if(opt&&opt.auto) PRV.auto=opt.auto; else PRV.auto=null;
+  const counts={ok:0,no:0}; let i=0,n=0;
+  let over=false; const quit=()=>{ if(over) return; over=true; clearInterval(watch); prvClose(); B7.speed=speed0; };
+  const watch=setInterval(()=>{ if(!alive()) quit(); },250);   // EXIT or STOP while the panel waits: close it and put the speed back
+  const go=()=>{ if(!alive()) { quit(); return; }
     if(battle.state!=='command'||performance.now()-t0<2200) { setTimeout(go,150); return; }
-    if(i>=steps.length) { P.stage=null; b3Exit(); return; }
-    const [fn,sec]=steps[i++]; fn(); setTimeout(go,sec*1000); };
+    if(i>=steps.length) { P.stage=null; prvEnd(counts,()=>{ quit(); if(alive()) b3Exit(); }); return; }
+    const s=steps[i++]; s.fn();
+    setTimeout(()=>{ if(!alive()) { quit(); return; } if(s.end) s.end();
+      if(!s.review) { go(); return; }
+      prvAsk(Object.assign({n:++n,of:expect.length},s.review),v=>{ counts[v==='approve'?'ok':'no']++; if(alive()) go(); else quit(); });
+    },s.sec*1000); };
   setTimeout(go,150);
 }
 // Back on the NEW BATTLE list after a fight (win, lose or EXIT).
@@ -67,7 +87,7 @@ SPLASH_MODES.lab3={tab:'Battle Lab: new battle',cue:'A / Enter to fight. B / Esc
   text:'The new battle system, one stage at a time. New: Vibes. Everyone has a Main and a Pocket Vibe. Change them under VIBES AND RANKS.',
   choices:()=>{ const r=b3LabRank();
     return [...B3_LAB.map((L,i)=>({name:L.name,sub:L.sub,cast:L.party,act:()=>b3LabGo(i)})),
-      {name:'PAINTED STATES: CHAPTER 1',sub:'The family against one Mudling. Each fighter in turn shows idle, guard, braced hit, hit, dodge, knocked out and get up, victory and a run. About 1 minute. Painted poses moved by the game, no video.',cast:['tom','grace','rose','deedee'],act:b3LabPaintedStates},
+      {name:'PAINTED STATES: CHAPTER 1',sub:'The family against one Mudling. Each fighter in turn shows idle, guard, braced hit, hit, dodge, knocked out and get up, victory and a run. After each one it waits: watch again, add a note, then APPROVE or REJECT. Your answers go to Claude.',cast:['tom','grace','rose','deedee'],act:()=>b3LabPaintedStates()},
       {name:'VIBES AND RANKS',sub:'Main and Pocket Vibe, Quirks and rows for these fights. '+(r?'Every Vibe is Rank '+r+'.':'The Vibes are at different Ranks.'),cls:'nav',vibes:true,act:()=>b3vOpen('lab')},
       {name:'BACK',sub:'',cls:'back',act:splashBack}]; }};
 SPLASH_PARENT.lab3='lab';

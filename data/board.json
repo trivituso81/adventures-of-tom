@@ -7016,7 +7016,7 @@
    "lane": "tom",
    "col": "wait",
    "ask": "animations",
-   "next": "ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE > PAINTED STATES: CHAPTER 1, about 70 seconds. Now each fighter walks out to an open spot between the Mudling and the family, shows idle, guard, braced hit, hit, dodge, knocked out, get up, victory and a run there with the state's name on screen, then walks home. Check that you can see every state of Tom, Grace, Rose and Deedee in full, nobody standing in front of them, in portrait and in landscape. Then press All good, or Something is wrong and write what looks wrong by fighter and state (head too big or small, wrong speed or distance). It blocks the card Apply your notes on the painted poses.",
+   "next": "ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE > PAINTED STATES: CHAPTER 1. Now each state plays once, then the run stops on a panel: the fighter and state (for example TOM: KNOCKED OUT, 6 of 36), WATCH AGAIN, an optional note, REJECT and APPROVE. Nothing plays until you answer. It always runs at 1x, and Tom no longer shows his guard pose during IDLE, HIT and DODGE. Answer all 36 (STOP leaves; your answers so far are kept, and running it again lets you finish). Each answer and note is saved for Claude as you go, so you do not need All good or Something is wrong here: this card closes by itself when every state has an answer, and your rejections go to the card Apply your notes on the painted poses. If the panel's last line says No GitHub token on this phone, follow that line once, then run it again.",
    "blocks": [
     "c-clipposesfix"
    ],
@@ -7046,9 +7046,16 @@
     {
      "d": "2026-11-20",
      "t": "Tom: something is wrong: The animation happens way too fast before I can process it and see what's wrong. After each move auto plays, an interstitial asking for feedback that can go directly to Claude should be displayed where optional feedback can be entered and the user must hit reject or approve before the next animation is played Sent to Claude as card c-fix-clipposes-2; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "fix-clipposes-2: reproduced. Each state played on a timer of 0.9 to 2.2 seconds with no pause, and the battle speed 2x (if on) doubled the poses. Now the run stops after every state on a review panel (WATCH AGAIN, note, REJECT, APPROVE) at 1x, answers save to data/pose-review.json, and the card closes when all 36 are answered. Also fixed: Tom starts fights in guard, so his IDLE, HIT and DODGE had shown the guard pose."
     }
    ],
-   "waiting_on": "claude"
+   "waiting_on": "claude",
+   "done_when": {
+    "poses_reviewed": "ch1"
+   }
   },
   {
    "id": "c-clipposesfix",
@@ -7071,16 +7078,20 @@
     {
      "d": "2026-11-20",
      "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "fix-clipposes-2: your answers now arrive in data/pose-review.json; the board copies your rejections and notes here when you finish."
     }
    ],
    "prompt": {
-    "what": "Reads your notes on card t-clipposes and fixes the painted poses by the smallest change: only the size number s or h in B3_BODY_PAINT (data/b3-clips.js) or a number in B3_PAINT (engine/b3-play.js) the note names. Spends nothing.",
+    "what": "Reads your answers from the PAINTED STATES review (data/pose-review.json) and fixes each rejected pose by the smallest change: only the size number s or h in B3_BODY_PAINT (data/b3-clips.js) or a number in B3_PAINT (engine/b3-play.js) the note names. Spends nothing.",
     "before": [
      "Nothing to do first. Your answer on the card Watch the painted poses for the family starts this by itself. To start it by hand: a NEW conversation in the Little Elsewhere Project, Claude Sonnet 5.5, effort medium, paste the prompt."
     ],
     "model": "Claude Sonnet 5.5 (row B: the numbers are named in docs/BATTLE3.md \"Painted body states\" and tools/paint_state_test.py catches mistakes)",
     "effort": "medium (small edits of known numbers)",
-    "text": "Read claude/handoff-rules.md, then the notes and answer on board card t-clipposes and docs/BATTLE3.md section Painted body states. Fix each note by the smallest change: one number per try, keep everything the note did not name, never warp a picture, generate nothing. Run python3 -I tools/paint_state_test.py and python3 tools/b3_test.py s8. Build tag clipposesfix. You have my full permission to access the repo."
+    "text": "Read claude/handoff-rules.md, then the notes and answer on board card t-clipposes, Tom's answers in data/pose-review.json (run ch1: one APPROVE or REJECT with an optional note per fighter.state) and docs/BATTLE3.md section Painted body states. Fix each rejected state by the smallest change: one number per try, keep everything the note did not name, never warp a picture, generate nothing. A rejection with no note: ask Tom one short question on his card. Run python3 -I tools/paint_state_test.py and python3 tools/b3_test.py s8. Build tag clipposesfix. You have my full permission to access the repo."
    }
   },
   {
@@ -9952,6 +9963,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "fix-clipposes-2 built: review panel after every painted state, 1x, answers to data/pose-review.json, board rule poses_reviewed closes t-clipposes. No pencil report filed since 15:05 UTC about this."
     }
    ],
    "prompt": {
