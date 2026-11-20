@@ -95,7 +95,7 @@ const CH1_DISMOUNT=land=>{ const up=()=>{ const r=sceneActor('rose'); return !!(
 // 1. The Square, right after the opening (the squishy beat stays exactly as built): Grace's list.
 SCENES.ch1Goal=[
   {flag:'ch1-goal'},
-  {wait:.6},   // Grace unfolds a piece of notebook paper (no frame for it yet: Art Library list)
+  {wait:.6}, {ch1Reveal:'list'},   // Grace unfolds a piece of notebook paper: the list close-up (ch1art3), A to continue
   {talk:'Grace',lines:["Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One again."]},
   {talk:'Rose',lines:["It's bigger than a BUS! It ate a boat!"]},
   {talk:'Grace',lines:["It did not eat a boat. Nobody's ever seen it but Boppy, and he's been saying it for twenty years."]},

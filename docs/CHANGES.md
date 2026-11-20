@@ -1,3 +1,9 @@
+## ch1art3 (2026-11-20): Grace's list shows as a close-up when she unfolds her paper in the first Square scene
+
+- Card c-ch1art3. Installed the approved Library picture `ch1-grace-list` the way the phone on the seat was installed (fix-cutpolish4b): `tools/art-library/bake_closeup_ch1.py` bakes `art/closeup/ch1-list.webp` (the full square painting), `data/closeup-ch1.js` has the `list` entry (label GRACE'S LIST, still) and `CH1_REVEAL.v` is now `ch1d`.
+- `data/scenes.js` ch1Goal: `{ch1Reveal:'list'}` after the opening beat, where Grace unfolds the notebook paper; A closes it and her first line follows. No dialogue text changed, so no voice clip is silenced.
+- Looked at in portrait and landscape: the close-up and the first dialogue line after pressing A. Not looked at: the whole opening played end to end.
+
 ## fix-cutpolish4b-2 (2026-11-20): the muffin pan now sits fully on the bare table, clear of the cake stand
 
 - Tom (t-cutpolish4b, second report): "muffins overlay the background art". His screenshot showed the pan still covering the glass cake stand.

@@ -5541,7 +5541,7 @@
    "theme": "Areas",
    "tag": "ch1art3",
    "title": "Install Grace's approved list picture in the game (chapter 1 opening scene)",
-   "next": "Waits on card t-ch1art2 (your All good). Then show ch1-grace-list as a close-up in the Square scene where Grace unfolds her list, the way the phone on the seat was installed, test portrait and landscape, push.",
+   "next": "Shipped as ch1art3: Grace's list shows as a close-up in the first Square scene when she unfolds her paper. Nothing for you: you will see it the next time you play the opening.",
    "prompt": {
     "what": "Puts Grace's approved list picture into the game: the close-up that shows when Grace unfolds her notebook paper in the first Square scene.",
     "before": [
@@ -5575,6 +5575,10 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch1art3: Grace's list close-up added to ch1Goal ({ch1Reveal:'list'}), looked at in portrait and landscape."
     }
    ],
    "blocks": [],
@@ -5583,7 +5587,8 @@
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukDngKRyJBZ723rMGSb",
     "opening": "not started"
-   }
+   },
+   "after": "nothing for Tom: end"
   },
   {
    "id": "c-fix-cutpolish4b",
