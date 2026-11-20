@@ -6388,7 +6388,7 @@
    "title": "Try the i icon and the tap-to-use on the Skills list",
    "theme": "Battle System",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "After the publish of build skillinfo1: RELOAD on the title, then ADMIN > BATTLE LAB > NEW BATTLE > any fight, tap SKILLS. Check: the round i at the left of each Skill name opens the card with BACK and USE; a tap anywhere else on a row uses the Skill, or asks who to aim at when it needs a target. Report with the REPORT tab if a tap goes the wrong way (skillinfo1 is the build to name).",
@@ -6403,8 +6403,13 @@
     {
      "d": "2026-11-19",
      "t": "Added by skillinfo1: your phone check of the i icon and tap-to-use; blocks nothing."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: all good."
     }
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "c-heistplan",
