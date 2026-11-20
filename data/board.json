@@ -9747,7 +9747,7 @@
   {
    "id": "t-heist1play",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Story and Dialogue",
    "ask": "play",
    "fyi": true,
@@ -9791,9 +9791,12 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: Almost perfect - but the blob overlaps too much with art that doesn't make sense for example the counter. Can he hop on the counter to grab the muffins then hop back down and run away? Also Deedee should get knocked backwards by him with the respective emotion but she should not fall down Sent to Claude as card c-fix-heist1play-3; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T15:59:44.972Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "t-heist1voice",
@@ -10699,7 +10702,7 @@
    "id": "c-fix-heist1play-3",
    "tag": "fix-heist1play-3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
@@ -10743,6 +10746,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-heist1play-3: the mud blob hops up onto the kitchen counter for the muffins and hops back down, and Deedee gets shoved back a step, shocked, without falling"
     }
    ],
    "prompt": {
@@ -10756,7 +10763,8 @@
    },
    "after": "t-heist1play",
    "auto": true,
-   "started_at": "2026-11-20T16:00:01+00:00"
+   "started_at": "2026-11-20T16:00:01+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "c-boardbar1",
@@ -11957,6 +11965,18 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukCrr4d842SgVQHPHvS",
+   "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
+   "first": "2026-11-20T16:07:16Z",
+   "last": "2026-11-20T16:07:16Z",
+   "tags": [
+    "fix-heist1play-3"
+   ],
+   "cards": [
+    "c-fix-heist1play-3"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukD6ycpauP8Kp48v8ey",
    "title": "Remove the small popups at the top of the screen",
@@ -13271,8 +13291,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "3df56f05b49fea7b18fd099eeea486979cedc838",
- "synced_at": "2026-11-20T16:05:23+00:00",
+ "synced": "a2e04330e9389d69926939356b32fa89153e64f5",
+ "synced_at": "2026-11-20T16:08:33+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
