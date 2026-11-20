@@ -9700,7 +9700,7 @@
   {
    "id": "t-heist1play",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Story and Dialogue",
    "ask": "play",
    "fyi": true,
@@ -9726,9 +9726,12 @@
     {
      "d": "2026-11-20",
      "t": "Tom: something is wrong: Looks very sloppy. I won't give specific feedback it's too much work because of how bad it is. Why does the mud blob? roll now the animation before where he came in and walked normally he was much more natural and then I don't understand after he takes the muffin tin why he goes to Bobby and then exits and then the dialog between I think it's Tom and I can't remember if it's Grace or Rose on the floor isn't funny and then Tom is really rude and why isn't anyone surprised or shocked like why aren't the girls screaming or Rose at least should be screaming and the whole thing is totally botched. I took a video, but I have no way to attach it to this ticket Sent to Claude as card c-fix-heist1play; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Watch the new muffin theft in Deedee's kitchen is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "t-heist1voice",
@@ -9986,7 +9989,7 @@
    "id": "c-fix-heist1play",
    "tag": "fix-heist1play",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
@@ -10035,6 +10038,10 @@
     {
      "d": "2026-11-20",
      "t": "Fixed in build fix-heist1play: Mudling walks in and straight out, everyone startled, Rose screams, floor lines cut. Tom's card t-heist1play shows what to look at again."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-heist1play: The muffin theft is plainer: the Mudling walks in and straight out, everyone is startled and Rose screams, nobody is on the floor"
     }
    ],
    "prompt": {
@@ -10047,7 +10054,8 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-heist1play and t-heist1play in data/board.json, history included. Your first push is the commit board: start c-fix-heist1play.\n\nTom tested and found problems:\n1. Card t-heist1play (Watch the new muffin theft in Deedee's kitchen, ask play). He was asked: Chapter select ) Chapter 1, jump to the theft scene in Deedee's kitchen (Deedee and Boppy's House), and watch it in portrait, then once in landscape. You should see: 1) the Mudling looks like the Mudling of the fights (matte, brushed); 2) the muffins are in its hands from the lift to the door; 3) the island is bare from the lift on; 4) Boppy keeps his back to the theft until \"Wait, where'd the muffins go?\"; 5) nobody is lying down during a line except Rose's scream; 6) the Mudling is up against the island when it lifts the pan. The 4 new lines are read by the stand-in voice until you record them (card t-heist1voice). All good if it plays like that; Something is wrong with what you saw. He wrote: Looks very sloppy. I won't give specific feedback it's too much work because of how bad it is. Why does the mud blob? roll now the animation before where he came in and walked normally he was much more natural and then I don't understand after he takes the muffin tin why he goes to Bobby and then exits and then the dialog between I think it's Tom and I can't remember if it's Grace or Rose on the floor isn't funny and then Tom is really rude and why isn't anyone surprised or shocked like why aren't the girls screaming or Rose at least should be screaming and the whole thing is totally botched. I took a video, but I have no way to attach it to this ticket\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T15:22:28.122Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-heist1play to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-heist1play, and give the build fix-heist1play a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-heist1play",
-   "auto": true
+   "auto": true,
+   "done": "2026-11-20"
   },
   {
    "id": "t-attn-start",
@@ -10078,7 +10086,7 @@
    "created": "2026-11-20",
    "id": "c-backlogtab",
    "tag": "backlogtab",
-   "col": "prog",
+   "col": "done",
    "title": "Backlog as its own tab next to Shipped",
    "changed": "2026-11-20",
    "next": "Tom (2026-11-20): \"It should just be another tab next to shipped\". Building a fifth tab, Backlog, in the board.",
@@ -10095,6 +10103,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as backlogtab: Backlog is its own tab next to Shipped on the board"
     }
    ],
    "after": "nothing for Tom: end",
@@ -10106,7 +10118,8 @@
     "model": "Claude Sonnet 5.5 (row B: small change)",
     "effort": "medium (steps are known)",
     "text": "Make Backlog a fifth tab next to Shipped in board.html and update the board tests."
-   }
+   },
+   "done": "2026-11-20"
   },
   {
    "id": "t-gracevoice-distort",
@@ -10193,13 +10206,17 @@
    "next": "Tom (2026-11-20): \"when tapping any button or any link, there needs to be some feedback to the user that the tap happened, even if it's not ready to finish processing the tap yet\". Building: an instant press look on every button, link, card and tab, and a spinner that locks a button while its save runs.",
    "blocks": [],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDiLsBePKA6YtUJVFo",
     "opening": "\"In the board, when tapping any button or any link, there needs to be some feedback\""
    },
    "history": [
     {
      "d": "2026-11-20",
      "t": "Tom asked for feedback on every tap in the board, even before the tap finishes processing. Started in that chat."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "after": "nothing for Tom: end",
@@ -10273,6 +10290,34 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEYAxmwWRNTjwsrEmZ",
+   "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
+   "first": "2026-11-20T15:23:59Z",
+   "last": "2026-11-20T15:33:33Z",
+   "tags": [
+    "fix-heist1play"
+   ],
+   "cards": [
+    "c-fix-heist1play"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDEhxpGxy5knknCF2p",
+   "title": "Board redesign 3: four views, search and the wide layout",
+   "first": "2026-11-20T09:12:57Z",
+   "last": "2026-11-20T15:33:01Z",
+   "tags": [
+    "boardux3",
+    "itembanner1",
+    "backlogtab"
+   ],
+   "cards": [
+    "c-boardux3",
+    "c-itembanner1",
+    "c-backlogtab"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDTjJ4EF5ZqM4W3ovf",
    "title": "Fix the report backlog (7 open)",
    "first": "2026-11-20T15:27:30Z",
@@ -10295,21 +10340,6 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukDEhxpGxy5knknCF2p",
-   "title": "Board redesign 3: four views, search and the wide layout",
-   "first": "2026-11-20T09:12:57Z",
-   "last": "2026-11-20T15:29:22Z",
-   "tags": [
-    "boardux3",
-    "itembanner1"
-   ],
-   "cards": [
-    "c-boardux3",
-    "c-itembanner1",
-    "c-backlogtab"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukGcYhoWvxrUB3VsP1V",
    "title": "Own favicon and Home Screen icon for BOARD and ADMIN",
    "first": "2026-11-20T15:27:27Z",
@@ -10329,16 +10359,6 @@
    "tags": [],
    "cards": [
     "c-gatezero"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEYAxmwWRNTjwsrEmZ",
-   "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
-   "first": "2026-11-20T15:23:59Z",
-   "last": "2026-11-20T15:23:59Z",
-   "tags": [],
-   "cards": [
-    "c-fix-heist1play"
    ]
   },
   {
@@ -10483,6 +10503,16 @@
    ],
    "cards": [
     "c-reports-2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDiLsBePKA6YtUJVFo",
+   "title": "Every board button and link shows your tap right away",
+   "first": "2026-11-20T07:32:51-08:00",
+   "last": "2026-11-20T07:32:51-08:00",
+   "tags": [],
+   "cards": [
+    "c-tapfb1"
    ]
   },
   {
@@ -11483,8 +11513,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "50e9443879ee68327984e65ff329ff90a083ec2c",
- "synced_at": "2026-11-20T15:32:36+00:00",
+ "synced": "3049f4085f9b67802722364aa85d903a193dd1ea",
+ "synced_at": "2026-11-20T15:34:14+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
