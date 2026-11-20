@@ -7769,7 +7769,7 @@
    "title": "Older phone checks, when you next play (none block anything)",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "fyi": true,
    "next": "Only when you feel like it, and report with the REPORT tab if something looks wrong. 1) Voices: Voice Library, Show > No clip yet and Old voice: record Mr. Washington's lines and the Narrator lines (silent until then); send takes with Send my takes to Claude. 2) Chapters 2, 6 and 7: play from Chapter Select; chapter 7 and chapter 8 art is in the Art Library groups Chapter 7 and Chapter 8 (GENERATE then APPROVE). 3) Script Editor: conversations, Workshop and Paste back. 4) Orange blocks: press A on one left behind, the family's lines replay. 5) Pencil tab: tap it, type a note, tap the picture to drop a pin, SEND; expect Report sent. 6) Art still to make: Young Boppy Van Cortlandt '70 in the Art Library.",
@@ -7784,6 +7784,10 @@
     {
      "d": "2026-11-20",
      "t": "Collected from the Waiting on Tom list in claude/next.md by c-nextclean."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: Break this out into one card per item that you've listed in Sent to Claude as card c-fix-oldchecks; this card waits on it and comes back to you when the fix ships."
     }
    ],
    "links": [
@@ -7808,7 +7812,8 @@
      ],
      "label": "chapter 7 and 8 art to make"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "t-cutpolish5",
@@ -7868,6 +7873,62 @@
     }
    ],
    "next": "After the publish of build cardlinks1: ADMIN > BOARD, open the card Try Generate all on the new Mudling sheet card and tap Open in the Art Library: the Mudling sheet. The Art Library should open on that exact entry, its group and row open. Then open the card Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped) and tap Open in the Voice Library: it should open on Tom's line with its takes shown. All good or Something is wrong."
+  },
+  {
+   "id": "c-fix-oldchecks",
+   "tag": "fix-oldchecks",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Game Shell",
+   "title": "Fix what you found on: Older phone checks, when you next play (none block anything)",
+   "next": "You reported a problem on Older phone checks, when you next play (none block anything). Claude starts the fix by itself. Latest: Break this out into one card per item that you've listed in",
+   "blocks": [
+    "t-oldchecks"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T08:06:38.703Z",
+     "card": "t-oldchecks",
+     "title": "Older phone checks, when you next play (none block anything)",
+     "ask": "play",
+     "words": "Break this out into one card per item that you've listed in",
+     "shot": "",
+     "asked": "Only when you feel like it, and report with the REPORT tab if something looks wrong. 1) Voices: Voice Library, Show ) No clip yet and Old voice: record Mr. Washington's lines and the Narrator lines (silent until then); send takes with Send my takes to Claude. 2) Chapters 2, 6 and 7: play from Chapter Select; chapter 7 and chapter 8 art is in the Art Library groups Chapter 7 and Chapter 8 (GENERATE then APPROVE). 3) Script Editor: conversations, Workshop and Paste back. 4) Orange blocks: press A on one left behind, the family's lines replay. 5) Pencil tab: tap it, type a note, tap the picture to drop a pin, SEND; expect Report sent. 6) Art still to make: Young Boppy Van Cortlandt '70 in the Art Library."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-oldchecks"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-oldchecks."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-oldchecks: Break this out into one card per item that you've listed in"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself."
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Older phone checks, when you next play (none block anything).",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-oldchecks and t-oldchecks in data/board.json, history included. Your first push is the commit board: start c-fix-oldchecks.\n\nTom tested and found problems:\n1. Card t-oldchecks (Older phone checks, when you next play (none block anything), ask play). He was asked: Only when you feel like it, and report with the REPORT tab if something looks wrong. 1) Voices: Voice Library, Show ) No clip yet and Old voice: record Mr. Washington's lines and the Narrator lines (silent until then); send takes with Send my takes to Claude. 2) Chapters 2, 6 and 7: play from Chapter Select; chapter 7 and chapter 8 art is in the Art Library groups Chapter 7 and Chapter 8 (GENERATE then APPROVE). 3) Script Editor: conversations, Workshop and Paste back. 4) Orange blocks: press A on one left behind, the family's lines replay. 5) Pencil tab: tap it, type a note, tap the picture to drop a pin, SEND; expect Report sent. 6) Art still to make: Young Boppy Van Cortlandt '70 in the Art Library. He wrote: Break this out into one card per item that you've listed in\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:06:38.703Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-oldchecks to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-oldchecks, and give the build fix-oldchecks a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-oldchecks",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
