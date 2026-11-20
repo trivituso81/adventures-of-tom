@@ -2195,7 +2195,7 @@
    "col": "prog",
    "tag": "clipposes",
    "auto": true,
-   "next": "Waits on your answer on the card Decide on the clip reset (t-clipreset). Go: builds the seven painted states for the four fighters, with measured checks, and hands you one Lab row to watch. Stop: puts Grace's old guard video back and ends the thread.",
+   "next": "Built (clipposes), nothing spent. Tom, Grace, Rose and Deedee now have painted idle fidget, guard, hit, dodge, knocked out and get up, victory (Rose keeps her video) and run, moved by the game. Their videos and the nine own-move and cast videos were removed (82 baked files); those moves play the default animation. Measured test and the rewritten stage 8 test pass. Tom looks once: card t-clipposes.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -2223,6 +2223,10 @@
     {
      "d": "2026-11-19",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built clipposes: painted states for the four fighters, family videos purged, Lab row PAINTED STATES: CHAPTER 1. paint_state_test and b3_test s8 pass. Clip-gate gate_test not run here (no cv2). Tom card t-clipposes made."
     }
    ],
    "prompt": {
@@ -2233,7 +2237,8 @@
     "model": "Claude Sonnet 5.5 (row B: the steps and the motion numbers are written in claude/clip-reset-plan.md section 5, and tools/paint_state_test.py catches mistakes)",
     "effort": "medium (steps are known)",
     "text": "Read claude/handoff-rules.md and claude/clip-reset-plan.md, then the answer and note on board card t-clipreset. Do section 5 of that plan for the answer Tom chose. Build tag clipposes. Generate nothing and spend nothing. Fix a miss with the smallest change, and apply the plan's stop-loss line. You have my full permission to access the repo."
-   }
+   },
+   "after": "t-clipposes"
   },
   {
    "id": "b-board-clipreset",
@@ -5932,6 +5937,55 @@
    },
    "after": "t-cutpolish4b",
    "auto": true
+  },
+  {
+   "id": "t-clipposes",
+   "title": "Watch the painted poses for the family (PAINTED STATES: CHAPTER 1)",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "animations",
+   "next": "ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE > PAINTED STATES: CHAPTER 1. Watch once, about 1 minute: Tom, Grace, Rose and Deedee in turn each show idle, guard, braced hit, hit, dodge, knocked out, get up, victory and a run, with the state's name on screen. Then press Something is wrong on this card and write what looks wrong by fighter and state (head too big or small, wrong speed or distance), or All good. It blocks the card Apply notes on the painted poses (clipposesfix).",
+   "blocks": [
+    "c-clipposesfix"
+   ],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by clipposes. The Lab row plays every painted state on every fighter. Battle animations are judged here only, never in a battle system session."
+    }
+   ]
+  },
+  {
+   "id": "c-clipposesfix",
+   "title": "Apply your notes on the painted poses (clipposesfix)",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "tag": "clipposesfix",
+   "next": "Waits on your look at card t-clipposes. Then applies your notes by the smallest change (a size number or a motion number per state) and hands the row back to you.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by clipposes."
+    }
+   ],
+   "prompt": {
+    "what": "Reads your notes on card t-clipposes and fixes the painted poses by the smallest change: only the size number s or h in B3_BODY_PAINT (data/b3-clips.js) or a number in B3_PAINT (engine/b3-play.js) the note names. Spends nothing.",
+    "before": [
+     "Nothing to do first. Your answer on the card Watch the painted poses for the family starts this by itself. To start it by hand: a NEW conversation in the Little Elsewhere Project, Claude Sonnet 5.5, effort medium, paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the numbers are named in docs/BATTLE3.md \"Painted body states\" and tools/paint_state_test.py catches mistakes)",
+    "effort": "medium (small edits of known numbers)",
+    "text": "Read claude/handoff-rules.md, then the notes and answer on board card t-clipposes and docs/BATTLE3.md section Painted body states. Fix each note by the smallest change: one number per try, keep everything the note did not name, never warp a picture, generate nothing. Run python3 -I tools/paint_state_test.py and python3 tools/b3_test.py s8. Build tag clipposesfix. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [
