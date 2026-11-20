@@ -12922,6 +12922,57 @@
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20"
+  },
+  {
+   "id": "c-idea-implementlisteni",
+   "tag": "idea-implementlisteni",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Tools",
+   "title": "Implement listening/thinking poses (should be generated and",
+   "next": "Your idea: implement listening/thinking poses (should be generated and approved in art library) for all chapter 1 talking interactions, including cut scenes. Claude starts it by itself.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "idea": {
+    "at": "2026-11-20T17:14:36.144Z",
+    "words": "implement listening/thinking poses (should be generated and approved in art library) for all chapter 1 talking interactions, including cut scenes.",
+    "shot": "",
+    "row": "C",
+    "rule": "Claude Sonnet 5.5, medium"
+   },
+   "chat": {
+    "url": "",
+    "opening": "New card by Tom on the board"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom made this card on the board: implement listening/thinking poses (should be generated and approved in art library) for all chapter 1 talking interactions, including cut scenes.",
+     "at": "2026-11-20T17:14:36.144Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Sized by the board: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort medium (a small piece).",
+     "at": "2026-11-20T17:14:36.144Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: START can run this size, so it starts by itself.",
+     "at": "2026-11-20T17:14:36.144Z"
+    }
+   ],
+   "prompt": {
+    "what": "Works on your idea: Implement listening/thinking poses (should be generated and.",
+    "before": [
+     "Nothing to do first. Your words are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build, the steps are not written yet)",
+    "effort": "medium (a small piece)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-implementlisteni in data/board.json, history included. Your first push is the commit board: start c-idea-implementlisteni.\n\nTom made this card himself with New card on the board. His words: \"implement listening/thinking poses (should be generated and approved in art library) for all chapter 1 talking interactions, including cut scenes.\"\n\nThe board sized this from his words alone: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort medium (a small piece). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nDesign it yourself and make the calls: Tom does not pick between options. Ask one short question only if a choice cannot be undone or is expensive to redo. Build it, test it, look at the frames in portrait and landscape, and push build idea-implementlisteni with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). You have my full permission to access the repo."
+   },
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
