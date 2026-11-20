@@ -10054,6 +10054,38 @@
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20"
+  },
+  {
+   "theme": "Tools",
+   "lane": "claude",
+   "created": "2026-11-20",
+   "id": "c-backlogtab",
+   "tag": "backlogtab",
+   "col": "prog",
+   "title": "Backlog as its own tab next to Shipped",
+   "changed": "2026-11-20",
+   "next": "Tom (2026-11-20): \"It should just be another tab next to shipped\". Building a fifth tab, Backlog, in the board.",
+   "blocks": [],
+   "chat": {
+    "url": "",
+    "opening": "started by Tom in a chat"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom asked how to reach the backlog on mobile, then: \"It should just be another tab next to shipped\". Started in that chat."
+    }
+   ],
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Makes Backlog its own tab next to Shipped on the board.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: small change)",
+    "effort": "medium (steps are known)",
+    "text": "Make Backlog a fifth tab next to Shipped in board.html and update the board tests."
+   }
   }
  ],
  "sessions": [
