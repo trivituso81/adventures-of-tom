@@ -1,3 +1,7 @@
+## board2b (2026-11-19): Reports become one backlog card, not one card per report
+
+- The first board-sync run made 9 cards for the 9 old reports on branch inbox. board_sync.py rule R7 now keeps ONE card, c-reports ("Fix the report backlog (N open)"), that lists the open reports and closes when the inbox is empty. The 9 per-report cards were removed from the board file. board_sync_test.py updated.
+
 ## board2 (2026-11-19): The board keeps itself current: a GitHub job moves cards, every conversation is listed, new buttons
 
 - Tom (11-19 15:31): "I want to create a seamless flow where cards are on the board and moved automatically and there are easy ways for me to initiate next steps with you. The issue is I'm losing track of all the conversations we have going in parallel". Built from claude/board2-plan.md (audit data fixes were applied first, build board2-start).

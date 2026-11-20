@@ -190,22 +190,26 @@ def standing_prompt(what, text, tag):
 def r7_inbox(B, reports, takes):
     seen = B.b['seen']
     if reports is not None:
-        cur = {r['id'] for r in reports}
-        for r in reports:
-            if r['id'] in seen['reports']: continue
-            seen['reports'].append(r['id'])
-            words = plain(r.get('note', '')).split()[:8]
-            title = 'Fix report %s: %s' % (r['id'], ' '.join(words) or '(picture only)')
-            B.add({'id': 'c-rep-' + r['id'], 'tag': 'rep-' + r['id'], 'lane': 'claude', 'col': 'up', 'theme': 'Game Shell', 'title': title,
-                   'next': 'Fix the backlog entry %s from the REPORT tab (kind %s). Note: %s' % (r['id'], r.get('kind', 'unknown'), plain(r.get('note', ''))[:300] or 'none'),
-                   'prompt': standing_prompt('Fixes the report you filed in the game.',
-                                             'Read claude/handoff-rules.md and docs/REPORTS.md, then fix report %s from the backlog.' % r['id'], 'rep-' + r['id']),
-                   'chat': {'url': '', 'opening': 'not started'}, 'history': [{'d': B.today, 't': 'Added by board-sync: new report on branch inbox.'}]})
-            B.say('card for report %s' % r['id'])
-        for c in B.cards:
-            if c['id'].startswith('c-rep-') and c['col'] != 'done' and c['id'][6:] not in cur:
-                c['col'] = 'done'; c['done'] = B.today; c.pop('waiting_on', None)
-                B.hist(c, 'Done by the board: the report is no longer in the backlog.'); B.say('done %s' % c['id'])
+        # One card for the whole backlog (not one per report): its text lists the open reports; it closes when the inbox is empty.
+        ids = [r['id'] for r in reports]
+        card = next((c for c in B.cards if c['id'] == 'c-reports' and c['col'] != 'done'), None)
+        seen['reports'] = sorted(set(seen['reports']) | set(ids))
+        if ids:
+            first = plain(reports[0].get('note', ''))[:100] or '(picture only)'
+            title = 'Fix the report backlog (%d open)' % len(ids)
+            nxt = 'Reports from the in-game REPORT tab wait on branch inbox: %s. First note: %s' % (', '.join(ids[:6]) + (' and %d more' % (len(ids) - 6) if len(ids) > 6 else ''), first)
+            if card:
+                if card['title'] != title: B.hist(card, 'The backlog now holds %d report(s).' % len(ids)); B.say('report backlog is %d' % len(ids))
+                card['title'], card['next'] = title, nxt
+            else:
+                B.add({'id': 'c-reports', 'tag': 'reports-' + B.today, 'lane': 'claude', 'col': 'up', 'theme': 'Game Shell', 'title': title, 'next': nxt,
+                       'prompt': standing_prompt('Works through the reports you filed in the game.',
+                                                 'Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog.', 'reports'),
+                       'chat': {'url': '', 'opening': 'not started'}, 'history': [{'d': B.today, 't': 'Added by board-sync: %d report(s) on branch inbox.' % len(ids)}]})
+                B.say('card for the report backlog (%d)' % len(ids))
+        elif card:
+            card['col'] = 'done'; card['done'] = B.today
+            B.hist(card, 'Done by the board: the backlog is empty.'); B.say('done c-reports')
     if takes is not None:
         new = [t for t in takes if t not in seen['takes']]
         if new:

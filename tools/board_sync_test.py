@@ -105,13 +105,13 @@ check('R6: needs-human adds a Tom card', (card(b, 't-svc-voice-gen') or {}).get(
 b = {'cards': [dict(id='c-q', tag='q', lane='claude', col='prog', theme='Tools', title='Q', next='n', changed='2026-11-17', blocks=[], chat={'url': 'https://claude.ai/code/session_Q', 'opening': 'x'})],
      'lanes': [], 'sessions': [{'url': 'https://claude.ai/code/session_Q', 'title': 'Q', 'first': '2026-11-17T09:00:00-08:00', 'last': '2026-11-17T09:30:00-08:00', 'tags': [], 'cards': ['c-q']}]}
 bs.sync(b, [], None, [{'id': 'r-1', 'note': 'The door <sticks> in the kitchen and I can not leave', 'kind': 'BUG'}], ['takes/a.json', 'takes/b.json'], NOW)
-r = card(b, 'c-rep-r-1')
-check('R7: a new report becomes a Claude card in Up next', r and r['col'] == 'up' and r['lane'] == 'claude')
+r = card(b, 'c-reports')
+check('R7: reports become ONE Claude card in Up next', r and r['col'] == 'up' and r['lane'] == 'claude' and '(1 open)' in r['title'], r)
 check('R7: the card text has no "<" blank', '<' not in json.dumps(r))
 check('R7: new take files become one card', len([c for c in b['cards'] if c['id'].startswith('c-takes-')]) == 1)
 check('R8: an In progress card quiet for over 24 hours is flagged', card(b, 'c-q').get('quiet') is True)
 bs.sync(b, [], None, [], ['takes/a.json', 'takes/b.json'], NOW)
-check('R7: a report gone from the inbox closes its card', card(b, 'c-rep-r-1')['col'] == 'done')
+check('R7: an empty inbox closes the backlog card', card(b, 'c-reports')['col'] == 'done')
 
 # --- the check script accepts the real board and refuses a blank in a prompt
 r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py')], capture_output=True, text=True)
