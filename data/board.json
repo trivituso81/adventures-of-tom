@@ -10531,6 +10531,57 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-heist1voice and t-heist1voice in data/board.json, history included. Your first push is the commit board: start c-fix-heist1voice.\n\nTom tested and found problems:\n1. Card t-heist1voice (Make takes for the 2 new lines of the muffin theft, ask voice). He was asked: ADMIN ) VOICE LIBRARY: open each line with the buttons below (Deedee 1, Boppy 1; the scripts with their tags are already in the script box). Make takes, keep one per line, then press Send my takes to Claude. That makes a merge card for Claude by itself. Until then the game reads these 2 lines with the stand-in voice. He wrote: I don't need to see this card until the muffin theft is actually good\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T15:37:43.898Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-heist1voice to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-heist1voice, and give the build fix-heist1voice a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-heist1voice"
+  },
+  {
+   "id": "c-idea-removeall",
+   "tag": "idea-removeall",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Remove all the toasts that appear at the top of the screen",
+   "next": "Your idea: Remove all the toasts that appear at the top of the screen in small frames with small font. They are unneeded Claude starts it by itself.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "idea": {
+    "at": "2026-11-20T15:50:34.613Z",
+    "words": "Remove all the toasts that appear at the top of the screen in small frames with small font. They are unneeded",
+    "shot": "",
+    "row": "C",
+    "rule": "Claude Sonnet 5.5, medium"
+   },
+   "chat": {
+    "url": "",
+    "opening": "New card by Tom on the board"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom made this card on the board: Remove all the toasts that appear at the top of the screen in small frames with small font. They are unneeded",
+     "at": "2026-11-20T15:50:34.613Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Sized by the board: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort medium (a small piece).",
+     "at": "2026-11-20T15:50:34.613Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: START can run this size, so it starts by itself.",
+     "at": "2026-11-20T15:50:34.613Z"
+    }
+   ],
+   "prompt": {
+    "what": "Works on your idea: Remove all the toasts that appear at the top of the screen.",
+    "before": [
+     "Nothing to do first. Your words are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build, the steps are not written yet)",
+    "effort": "medium (a small piece)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-removeall in data/board.json, history included. Your first push is the commit board: start c-idea-removeall.\n\nTom made this card himself with New card on the board. His words: \"Remove all the toasts that appear at the top of the screen in small frames with small font. They are unneeded\"\n\nThe board sized this from his words alone: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort medium (a small piece). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nDesign it yourself and make the calls: Tom does not pick between options. Ask one short question only if a choice cannot be undone or is expensive to redo. Build it, test it, look at the frames in portrait and landscape, and push build idea-removeall with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). You have my full permission to access the repo."
+   },
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
