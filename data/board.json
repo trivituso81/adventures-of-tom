@@ -9539,8 +9539,16 @@
     {
      "d": "2026-11-20",
      "t": "Made by posesizes: these poses have no saved lines, so they stay at the old sizes until you set them."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom sent this to the backlog."
     }
-   ]
+   ],
+   "backlog": {
+    "at": "2026-11-20",
+    "from": "up"
+   }
   },
   {
    "id": "c-poselines2",
