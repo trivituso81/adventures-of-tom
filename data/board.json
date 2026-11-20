@@ -10208,14 +10208,16 @@
   },
   {
    "id": "t-gracevoice-distort",
-   "title": "Re-record Grace's distorted chapter 1 lines",
+   "title": "Listen to Grace's fixed chapter 1 lines (no re-recording)",
    "theme": "Voice Clips",
    "lane": "tom",
    "col": "wait",
    "ask": "voice",
-   "fyi": true,
-   "next": "ADMIN > VOICE LIBRARY, Chapter 1, open each of Grace's 5 lines with the buttons below (they play distorted in the game). Tap Takes, record until one is clean, keep it, press Send my takes to Claude. Your pencil report on 'Grace's chapter 1 voices almost have...' was cut off after those words: if more is wrong than distortion, say so in the note when you send.",
-   "blocks": [],
+   "fyi": false,
+   "next": "Nothing to record. First, in ADMIN > VOICE LIBRARY, tap Send my takes to Claude once (near the bottom; it now also sends every Grace story take on this phone, at no ElevenLabs cost). Then open each of Grace's 5 chapter 1 lines with the buttons below, tap the line, and press the play button beside Built into the game: it should sound like the take you kept, at her normal speed and pitch (\"Tata, don't walk yet...\" is now 8.7 seconds, it was 12). Then press All good, or Something is wrong and say which line. It blocks the card Rebuild Grace's other slowed lines (c-gracevoice-rest).",
+   "blocks": [
+    "c-gracevoice-rest"
+   ],
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
@@ -10244,6 +10246,14 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: But why does this keep happening? It has nothing to do with 11 labs because when I initially record them, they sound completely fine and then I provide the Jason to you for upload and they seem to be fine in the game and then at later point they become distorted, so I refuse to record more. It's wasting my money Sent to Claude as card c-fix-gracevoice-distort; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T15:33:51.342Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fixed in fix-gracevoice-distort, and Tom was right: ElevenLabs was never the problem. Claude's merge step ran every Grace story take through an old filter built for 32 kHz audio; on 44.1 kHz takes it slowed her 38 percent and dropped her about 5 semitones. The phone plays the raw take, so a line sounded fine until the phone copy stopped matching, then the slowed copy played. Filter removed; these 5 lines rebuilt from the takes he kept (byte for byte, no new recording)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Needs Tom for the rest: other Grace story lines merged with the same filter can only be rebuilt from their original takes, which are on his phone (only lines tried more than once were ever uploaded). The one thing needed: tap Send my takes to Claude once."
     }
    ],
    "waiting_on": "claude"
@@ -10366,7 +10376,7 @@
    "fix": true,
    "theme": "Voice Clips",
    "title": "Fix: Re-record Grace's distorted chapter 1 lines",
-   "next": "You reported a problem on Re-record Grace's distorted chapter 1 lines. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: But why does this keep happening? It has nothing to do with 11 labs because when I initially record them, they sound completely fine and then I provide the Jaso",
+   "next": "Shipped as fix-gracevoice-distort: the merge filter that slowed Grace is gone, 14 of her lines (all 5 reported) are rebuilt from the takes Tom kept. Her other slowed lines wait on card c-gracevoice-rest.",
    "blocks": [
     "t-gracevoice-distort"
    ],
@@ -10406,6 +10416,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Cause found and fixed: the Grace shrink filter in merge-local.js and clip-audit/merge.py (asetrate=32000*1.18) assumed 32 kHz takes; ElevenLabs sends 44.1 kHz, so every merged Grace story clip came out 38 percent slower and about 5 semitones lower (reproduced byte for byte from his kept take). The phone plays its own raw copy first (engine/local-clips.js), which is why lines sounded fine and changed later. Removed the filter, rebuilt 14 clips from branch takes (tools/voice-library/unshrink_grace.py), Send my takes now also sends every Grace story take (data/takes-wanted.json), new test tools/grace_voice_test.py. No pencil report was filed after 15:33:50; the 5 original reports are closed."
     }
    ],
    "prompt": {
@@ -10607,6 +10621,36 @@
    "started_at": "2026-11-20T15:51:14+00:00",
    "after": "nothing for Tom: end",
    "done": "2026-11-20"
+  },
+  {
+   "id": "c-gracevoice-rest",
+   "title": "Rebuild Grace's other slowed lines from your takes",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "tag": "gracevoice-rest",
+   "next": "Waits on card t-gracevoice-distort (you tap Send my takes to Claude, then All good). Then rebuilds every Grace story clip the old filter slowed from the take you kept, by exact match only, and says which lines still have no take.",
+   "blocks": [],
+   "after": "nothing for Tom: end",
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "auto": true,
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by fix-gracevoice-distort."
+    }
+   ],
+   "prompt": {
+    "what": "Puts Grace's remaining story lines back to the takes you heard, using the takes your phone sent. Spends nothing.",
+    "before": [
+     "Nothing to do first. Your All good on Listen to Grace's fixed chapter 1 lines starts this by itself. To start it by hand: a NEW conversation in the Little Elsewhere Project, Claude Sonnet 5.5, effort medium, paste the prompt."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: one tool run by exact match, checked by a test)",
+    "effort": "medium (run a known tool, verify, push)",
+    "text": "Read CLAUDE.md, docs/CHANGES.md section fix-gracevoice-distort, and board cards c-gracevoice-rest and t-gracevoice-distort, history included. Your first push is the commit board: start c-gracevoice-rest. Fetch branch takes (git fetch origin +refs/heads/takes:refs/remotes/origin/takes) and run python3 tools/voice-library/unshrink_grace.py, then --apply: it replaces only game clips that are byte for byte the old Grace filter applied to one of Tom's takes. Never re-filter, guess or hand-edit a clip. Run python3 tools/grace_voice_test.py, python3 tools/clip-audit/unused_voice.py and python3 tools/smoke.py, and decode a few rebuilt clips in the game to check their length matches the take. If every Grace line is rebuilt, empty the prefixes list in data/takes-wanted.json. List in the CHANGES entry the Grace lines the tool still flags with no take (its pitch list over-counts: a deadpan take can sit low, so name them as to check, not as broken). Build tag gracevoice-rest. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [

@@ -128,7 +128,7 @@ header{padding:10px 28px}
       <button class="small" id="exptrail">Export take history</button>
       <button class="small danger" id="clr">Remove all phone clips</button>
     </div>
-    <p class="hint">Phone clips are kept in this app only. Clearing the app's website data removes them. Export pending clips sends only what you recorded since your last upload, so Claude can build it into the game for good. Send my takes to Claude uploads every take of every line you tried more than once, the ones you kept and the ones you threw away, with their audio, straight to the game's repository: no file to export or attach. It also sends by itself a couple of minutes after you finish making takes (it needs the GitHub token set in ADMIN &gt; ART LIBRARY &gt; Setup). Export take history sends the words of every take saved here (the directions you tried, kept or not), with no audio, so Claude can learn from the ones you threw away.</p>
+    <p class="hint">Phone clips are kept in this app only. Clearing the app's website data removes them. Export pending clips sends only what you recorded since your last upload, so Claude can build it into the game for good. Send my takes to Claude uploads every take of every line you tried more than once, the ones you kept and the ones you threw away, with their audio, straight to the game's repository: no file to export or attach. Right now it also sends every Grace story take, even lines tried once, so Claude can rebuild her game clips from what you heard. It also sends by itself a couple of minutes after you finish making takes (it needs the GitHub token set in ADMIN &gt; ART LIBRARY &gt; Setup). Export take history sends the words of every take saved here (the directions you tried, kept or not), with no audio, so Claude can learn from the ones you threw away.</p>
   </div>
 </main>
 <div class="bar" id="bar" hidden></div>
@@ -281,9 +281,14 @@ const TK_REPO='trivituso81/adventures-of-tom', TK_BRANCH='takes', TK_PART=13*102
 let TSENT=new Set(); try{ TSENT=new Set(JSON.parse(localStorage.getItem('aot-vl-takes-sent')||'[]')); }catch(e){}
 const saveTSent=()=>{ try{ localStorage.setItem('aot-vl-takes-sent',JSON.stringify([...TSENT])); }catch(e){} };
 let TSENDING=false, TAUTO=null;
-function takesToSend(){   // slim take rows of lines with more than one take, not yet sent
+// WANT (fix-gracevoice-distort): line-key prefixes Claude asked for in data/takes-wanted.json. Every take of those lines goes too, even a
+// line tried once, so Claude can rebuild game clips from the audio Tom heard. Retired by emptying the file's list.
+let WANT=[];
+async function loadWanted(){ try{ const r=await fetch('data/takes-wanted.json?'+Date.now(),{cache:'no-store'}); if(r.ok){ const j=await r.json(); WANT=(j.prefixes||[]).filter(x=>typeof x==='string'&&x); paintSendTakes(); } }catch(e){} }
+const wanted=line=>WANT.some(p=>String(line).startsWith(p));
+function takesToSend(){   // slim take rows of lines with more than one take (or wanted lines), not yet sent
   const by=new Map(); for(const t of TAKES.values()){ if(!by.has(t.line)) by.set(t.line,[]); by.get(t.line).push(t); }
-  const out=[]; for(const [,a] of by) if(a.length>1) for(const t of a) if(!TSENT.has(t.id)) out.push(t);
+  const out=[]; for(const [k,a] of by) if(a.length>1||wanted(k)) for(const t of a) if(!TSENT.has(t.id)) out.push(t);
   return out.sort((a,b)=>a.t-b.t);
 }
 const tkBase=()=>(new URLSearchParams(location.search).get('gh')||'https://api.github.com').replace(/\/+$/,'');
@@ -866,7 +871,7 @@ async function loadPhone(force){
   await purgeRetired();
   try{ localStorage.removeItem('aot-vl-boot'); }catch(e){}
   renderAll(); paintSendTakes();
-  loadMerged().then(hashPhone);
+  loadMerged().then(hashPhone); loadWanted();
 }
 window.__VL={get IDX(){return IDX;},F,SEL,LOCAL,TAKES,lk,visible,newTake,useBuiltIn,builtIn,itemByKey,trailRows,addTake,delTake,sendTakes,takesToSend};
 </script>

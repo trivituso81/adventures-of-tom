@@ -2,7 +2,7 @@
 // Merges a Voice Library export ({clips:[{kind,voice,lineKind,text,mp3,script,takeId,t}]}) into the game. Writes only changed files under <outdir>.
 // Several exports: give them comma separated, oldest first; where two hold the same line the newest take (t) wins.
 // Battle: a new clip replaces every clip with the same text (any kind), then is added under its lineKind, into data/voice/<id>.js (Nara's stay in voice-clips.js).
-// Dialogue: key 'voice|text' goes to the dialog-chN.js that already holds it, else to its own chapter's file (chapters 1 to 10, from data/voice-index.json), else dialog-ch29.js (ch28 is near GitHub's 100 MB limit). Audio: silence trim, speaker/voice fx, Grace shrink, mono 32 kHz 48 kbps.
+// Dialogue: key 'voice|text' goes to the dialog-chN.js that already holds it, else to its own chapter's file (chapters 1 to 10, from data/voice-index.json), else dialog-ch29.js (ch28 is near GitHub's 100 MB limit). Audio: silence trim, speaker/voice fx, mono 32 kHz 48 kbps. Grace gets no filter: her takes go in as Tom heard them (fix-gracevoice-distort).
 // Boppy battle clips are deepened (rubberband pitch 0.9, 128k 44100). If one text appears twice under the same line kind in the export, the newest (t) wins; the same text under two kinds keeps both. Needs ffmpeg with rubberband.
 // --retext (calib2): Tom rewords lines while he tunes takes, so the export's text is the OLD screen text. The map {"voice|old text":"new screen text"}
 // re-keys those dialogue clips to the new words (the scene, tsv and script files must already hold the new text).
@@ -23,7 +23,6 @@ for(const ch of FAM){ if(files.includes(ch+'.js')) run(DATA+'/voice/'+ch+'.js');
 const FX=Object.fromEntries([...fs.readFileSync(__dirname+'/../clip-audit/voice-merge-dialog.js','utf8').matchAll(/(\w+):'([^']*)'/g)].map(m=>[m[1],m[2]]));
 const CAST=ctx.DIALOG_CAST||{};const SFX=CAST.speakerFx||{};
 const TRIM='silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.05,areverse,silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.12,areverse';
-const GRACE='asetrate=32000*1.18,aresample=32000,rubberband=pitch='+(1/1.18)+':tempo='+(1/1.18)+':formant=preserved,rubberband=pitch=1.06';
 const tmp=fs.mkdtempSync('/tmp/ml-');
 const ff=(b64,af,sr,br)=>{fs.writeFileSync(tmp+'/i.mp3',Buffer.from(b64,'base64'));
   cp.execFileSync('ffmpeg',['-hide_banner','-loglevel','error','-y','-i',tmp+'/i.mp3','-af',af,'-ac','1','-ar',sr,'-c:a','libmp3lame','-b:a',br,tmp+'/o.mp3']);
@@ -64,7 +63,7 @@ const chOf={};try{for(const it of JSON.parse(fs.readFileSync(DATA+'/voice-index.
 const dst={},dt=new Set();
 for(const c of clips.filter(c=>c.kind==='dialog')){
   const k=c.voice+'|'+c.text,f=home[k]||chOf[k]||'dialog-ch29.js';const sp=(CAST.voices||{}).hasOwnProperty(c.voice)?c.voice:c.voice;
-  const chain=[TRIM];const fx=fxFor(c.voice,c.speaker);if(fx)chain.push(fx);if(c.voice==='grace')chain.push(GRACE);
+  const chain=[TRIM];const fx=fxFor(c.voice,c.speaker);if(fx)chain.push(fx);
   let out;try{out=ff(c.mp3,chain.join(','),'32000','48k');}catch(e){console.log('WARNING fx failed',k);out=ff(c.mp3,TRIM,'32000','48k');}
   const had=k in D[f].clips;D[f].clips[k]=out;dt.add(f);const s=f+(had?' replaced':' added');dst[s]=(dst[s]||0)+1;
 }

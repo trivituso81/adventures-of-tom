@@ -152,8 +152,8 @@ for(const id in ACCENT) for(const k of ['battle|'+id,'dialog|'+id]) if(voices[k]
 // "mellow, laid-back, low-key" goes into every bracket of every TNB script (ACCENT above), and a steadier voice setting keeps takes from getting effusive.
 for(const k of ['dialog|tnb','battle|tnb']) if(voices[k]&&voices[k].stability<.6) voices[k].stability=.6;
 const vname=id=>id[0]==='?'?id.slice(1):(NAMES[id]||(CAST.voices[id]&&CAST.voices[id].name)||id);
-// Merge effects: battle clips only deepen Boppy (tools/battle-baker/merge.js); dialogue adds speaker or voice fx, Boppy, Grace shrink (tools/clip-audit/merge.py).
-const fxOf=(voice,speaker,battle)=>battle?voice==='boppy':!!((speaker&&CAST.speakerFx&&CAST.speakerFx[speaker])||voice==='boppy'||voice==='grace'||(CAST.voices[voice]&&CAST.voices[voice].fx));
+// Merge effects: battle clips only deepen Boppy (tools/battle-baker/merge.js); dialogue adds speaker or voice fx, Boppy (tools/clip-audit/merge.py); Grace gets none.
+const fxOf=(voice,speaker,battle)=>battle?voice==='boppy':!!((speaker&&CAST.speakerFx&&CAST.speakerFx[speaker])||voice==='boppy'||(CAST.voices[voice]&&CAST.voices[voice].fx));
 
 // ---------- items ----------
 const files=[], fidx=f=>{ let i=files.indexOf(f); if(i<0){ files.push(f); i=files.length-1; } return i; };

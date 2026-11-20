@@ -1,0 +1,4 @@
+{
+ "note": "Line keys whose takes Send my takes to Claude (voices.html) uploads to branch takes even when the line was tried once. fix-gracevoice-distort: every Grace dialogue take, so tools/voice-library/unshrink_grace.py can rebuild the clips the old Grace filter slowed. Empty the list once those are rebuilt.",
+ "prefixes": ["d|grace|"]
+}
