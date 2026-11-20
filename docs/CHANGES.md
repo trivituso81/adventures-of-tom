@@ -1,3 +1,9 @@
+## takes-2026-11-20 (2026-11-20): merged the 2 new voice takes from branch takes
+
+- Card c-takes-987c82. Branch `takes` session 20261120T211742-sz1 held 8 takes, 2 kept and not in `data/merged-takes.json`: Tom "Oof, I'm finally here! At least the 6 hours went by fast on Delta One!" and Deedee "A flashbulb. It's burnt..." Both match the current script word for word.
+- Merged with `merge-local.js` (both were new, added to `data/voice/dialog-ch1.js`); kept scripts written to `ch01-story-directions.json` and `zzzz-kept-takes.json`; voice index rebuilt; `merged-takes.json` updated so Pending upload clears on his phone. Not listened to on a phone.
+- `unused_voice.py`: all 5 checks 0. Smoke not run (no Python browser tests could be run here beyond that audit).
+
 ## keysecrets1 (2026-11-20): Art Library GENERATE for pictures no longer calls xAI from the phone; GitHub makes the picture with the repo secret
 
 Card c-keysecrets1. Tom: "now that we are storing api keys as secrets on the repo, can remove the ability to set API keys in the various admin UI screens?" Asked once what happens to the one-at-a-time buttons; he chose to route them to Actions. This is stage 1 of 5 (plan and stages: `claude/keysecrets-plan.md`).

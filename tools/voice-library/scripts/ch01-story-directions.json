@@ -436,7 +436,8 @@
    "speaker": "Deedee",
    "text": "A flashbulb. It's burnt. Somebody set it off right here. Look in the glass. Little purple-black sparkles, like crushed-up stars. They change color when you tip it.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[warm Long Island accent, plain, certain] A flashbulb. It's burnt. [warm Long Island accent, annoyed] Somebody set it off right here. [warm Long Island accent, softer, curious] Look in the glass. Little purple-black sparkles, like crushed-up stars. [quiet, a little amazed] They change color when you tip it."
+   "script": "[warm Long Island accent, plain, certain] A flashbulb! [warm Long Island accent, curious] It's burnt. [warm Long Island accent, realizing] Somebody set it off right here. [warm Long Island accent, softer, excited, quick] Look in the glass! Little purple-black sparkles, like crushed-up stars. [warm Long Island accent, discovering] They change color when you tip it.",
+   "takeId": "tmwphahp7ihus"
   },
   {
    "voice": "grace",
