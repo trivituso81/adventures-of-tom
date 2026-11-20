@@ -5,6 +5,13 @@
 - Voice: no re-bake needed. The baked Tom clip reads "six hours ... Delta One!" and never matched this line's text (it has "6" and the smiley), so the line was already on speech synthesis. No clip added or removed.
 - Tests: smoke and the script index rebuild ran; the board_sync_test R5 failure is on main already and is not from this change.
 
+## board-projclean (2026-11-20): board only: a card that moves the Project's notes into the repo, because the Project is 97% full
+
+Tom (11-20): "the context folder is getting full. create a prompt to help me clean it up, by moving what we dont need there into the repo, or whatever architectural remedy you recommend as best."
+
+- Added card `c-projclean` (Claude, Up next, Project Ops, tag `projclean1`, Sonnet 5.5 medium, not auto: it needs the Project attached). It moves about 660 Project docs to `claude/` in the repo at the same paths, deletes each from the Project only after it is on origin/main, keeps 4 mirrors in the Project (handoff-rules, next, canon-addendum, build-plan), writes `claude/INDEX.md`, stops publishing `claude/` on the site, and writes the never-create-a-Project-doc rule into CLAUDE.md, claude/README.md and handoff-rules.
+- Fact: the Project was at 1,941,747 of 2,000,000 bytes. The 11-14 cleanup rule (notes go in the repo) was not followed afterwards, which is why it refilled in 6 days.
+
 ## gem-polish02 (2026-11-20): Rose's Raspberry battle text says "center stage"
 
 - Gemini chapter 1 report POLISH-02 (claude/ch1-gemini-tracker.md). Still on main at `engine/rose-moves.js` line 1113: "Rose walks to centre stage..." now reads "Rose walks to center stage...".
