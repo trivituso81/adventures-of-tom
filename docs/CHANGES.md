@@ -1,3 +1,9 @@
+## 2026-11-20 (460): Art Library bake, clip-toad-idle (`artbake1534`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- clip-toad-idle: clip `toad-idle` cut from art/raw/clips/clip-toad-idle-v3.mp4 (24 pictures a second; video frames 0 to 72, every 2, loop; 37 pictures kept; played at 1x). toad_idle frames 24 frame px 384 352 rows 48 44 sheet (2146, 1298) in memory mb 11.1 (as a grid 13.0) kb 626 dur ms 2000 kind loop impact ms 0 reach [22.0, 3.9]
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## keysecrets2 (2026-11-20): Art Library videos are made by GitHub with the repo secret; the xAI key box and the Relay box are gone
 
 Card c-keysecrets2, stage 2 of 5 (plan and stages: `claude/keysecrets-plan.md`). Tom: "now that we are storing api keys as secrets on the repo, can remove the ability to set API keys in the various admin UI screens?"
