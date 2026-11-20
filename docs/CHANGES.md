@@ -1,3 +1,10 @@
+## fix-keysecrets2-try-4 (2026-11-20): the page reads the video job's report through the GitHub API, not the 5 minute cached copy
+
+Card c-fix-keysecrets2-try-4. Tom (t-keysecrets2-try): "i followed your instructions and its been hanging for 45 minutes".
+- Fact: the job finished fast again. Request `clip: generate clip-toad-idle` 23:38 UTC, video made and approved 23:39:59, report on branch `clipgen` names `clip-toad-idle` under `approved`. So the page was the part that did not show it.
+- Likely cause (not reproduced; no Safari here): the page read the report from raw.githubusercontent.com, which a phone or GitHub may keep for 5 minutes (`cache-control: max-age=300`) and which this app cannot bust with a query. Fix: `clipPoll` now reads `clipgen-report.json` from the GitHub API with the token (never cached), raw only as the fallback. The waiting line now also says the time of the last report it read and which way it read it, so a report from Tom shows what the phone saw.
+- Tag `art-clips.js?v=fix-keysecrets2-try-4` in art.html (the service worker keeps `?v=` files cache-first, so it must move). `keysecrets2_test.py` passes (it uses the stand-in server, so the API path is covered only by the fallback; the real API call is untested).
+
 ## 2026-11-20 (462): Art Library bake, clip-toad-idle (`artbake1536`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).

@@ -79,12 +79,15 @@ async function clipGenerate(id,btn){
 // Every POLL_MS while a press is waiting: read the job's report and say what happened to each clip that was asked for.
 async function clipPoll(){
   CLIP_POLL=0; const P=clipAskedGet(); if(!P.length) return;
-  let rep=null; try{ const r=await fetch(clipGenBase()+'clipgen-report.json?t='+Date.now(),{cache:'no-store'}); if(r.ok) rep=await r.json(); }catch(x){}
+  // The report is read through the GitHub API with the token first (never cached, fresh within seconds); raw.githubusercontent.com keeps a file up to 5 minutes and is only the fallback
+  let rep=null, src='';
+  if(!Q.get('clipgen')&&LS.get('aot-gh-token')){ try{ const ab=new AbortController(), tm=setTimeout(()=>ab.abort(),20000); const r=await fetch(GH_BASE()+'/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/clipgen-report.json?ref=clipgen&t='+Date.now(),{cache:'no-store',signal:ab.signal,headers:{Authorization:'Bearer '+LS.get('aot-gh-token'),Accept:'application/vnd.github.raw+json','X-GitHub-Api-Version':'2022-11-28'}}); clearTimeout(tm); if(r.ok){ rep=await r.json(); src='api'; } }catch(x){} }
+  if(!rep){ try{ const r=await fetch(clipGenBase()+'clipgen-report.json?t='+Date.now(),{cache:'no-store'}); if(r.ok){ rep=await r.json(); src='raw'; } }catch(x){} }
   const repAt=clipTs(rep&&rep.at), left=[];
   for(const p of P){
     // repAt is NaN when the phone cannot read the report's time: then the report counts when it names this clip (the job replaces the file on every run)
     const mine=rep&&rep.mode==='requests'&&(repAt!==repAt||repAt>=p.at-120000)&&(p.ids||[]).some(i=>(rep.asked||[]).includes(i));
-    if(!mine){ left.push(p); const mins=Math.max(0,Math.round((Date.now()-p.at)/60000)); for(const id of p.ids||[]) if(ENTRY[id]&&MSG[id]&&!MSG[id].err){ MSG[id]={text:'Asked '+mins+' min ago. GitHub is still making the video'+(rep?'':' (this phone could not read the job report just now; it tries again)')+'; this line updates by itself (checked '+new Date().toLocaleTimeString()+').',err:false}; refreshItem(id); } continue; }
+    if(!mine){ left.push(p); const mins=Math.max(0,Math.round((Date.now()-p.at)/60000)); for(const id of p.ids||[]) if(ENTRY[id]&&MSG[id]&&!MSG[id].err){ MSG[id]={text:'Asked '+mins+' min ago. GitHub is still making the video'+(rep?' (last job report on GitHub: '+(isNaN(repAt)?'time unreadable':new Date(repAt).toLocaleTimeString())+', read by '+src+')':' (this phone could not read the job report just now; it tries again)')+'; this line updates by itself (checked '+new Date().toLocaleTimeString()+').',err:false}; refreshItem(id); } continue; }
     const why=(rep.failed||[]).find(x=>x.id==='*');
     for(const id of p.ids||[]){
       const f=(rep.failed||[]).find(x=>x.id===id)||why, h=(rep.held||[]).find(x=>x.id===id), b=(rep.blocked||[]).find(x=>x.id===id), s=(rep.skipped||[]).find(x=>x.id===id);

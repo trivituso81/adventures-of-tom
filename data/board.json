@@ -16850,7 +16850,7 @@
    "ask": "play",
    "fyi": true,
    "title": "Try GENERATE VIDEO on one clip",
-   "next": "ADMIN > ART LIBRARY: first close the Art Library and open it again from the home-screen app (it now loads a new script, build fix-keysecrets2-try-3). Tap Open in the Art Library below, find clip-toad-idle under Clips > Chapter 1 and press GENERATE VIDEO (about $0.25). You should see 'Asked N min ago. GitHub is still making the video' updating every 20 seconds, then 'Made and approved' after about 3 to 6 minutes. All good if that line moves to 'Made and approved'. Something is wrong if it shows an error, or says the phone could not read the job report for more than 10 minutes.",
+   "next": "ADMIN > ART LIBRARY: close the Art Library and open it again from the home-screen app (it loads build fix-keysecrets2-try-4). Tap Open in the Art Library below, find clip-toad-idle under Clips > Chapter 1 and press GENERATE VIDEO (about $0.25). The line under the button should read 'Asked N min ago... (last job report on GitHub: HH:MM, read by api)' and change to 'Made and approved' within 3 to 6 minutes. All good if it reaches 'Made and approved'. Something is wrong if it does not after 10 minutes: write in the report what the line says, including the HH:MM and 'read by' words.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -16912,6 +16912,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: i followed your instructions and its been hanging for 45 minutes Sent to Claude as card c-fix-keysecrets2-try-4; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T23:51:03.615Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fix fix-keysecrets2-try-4 shipped: the page reads the job report through the GitHub API instead of the 5 minute cached copy. Back to Tom."
     }
    ],
    "after": null,
@@ -17364,6 +17368,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-keysecrets2-try-4 (see docs/CHANGES.md). Cause not reproduced on a phone; the job side finished in 2 minutes."
     }
    ],
    "prompt": {
