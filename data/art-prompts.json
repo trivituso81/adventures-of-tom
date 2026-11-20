@@ -27653,7 +27653,7 @@
    "promptRev": 1
   },
   {
-   "status": "draft",
+   "status": "approved",
    "versions": [
     {
      "n": 0,
@@ -27664,6 +27664,17 @@
      "marks": {
       "first": 0,
       "last": 3
+     }
+    },
+    {
+     "n": 1,
+     "file": "art/raw/clips/clip-tom-run-v2.mp4",
+     "date": "2026-11-20",
+     "from": "clipgen",
+     "at": 1795137428335,
+     "marks": {
+      "first": 0,
+      "last": 3.0
      }
     }
    ],
