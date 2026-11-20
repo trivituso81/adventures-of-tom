@@ -15300,6 +15300,10 @@
      "d": "2026-11-20",
      "t": "Tom approved generating 7 pictures (about $0.42).",
      "at": "2026-11-20T19:22:45.627Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Pictures job: made 7 pictures, QA: 17 of 18, 15 of 17, 17 of 17, 17 of 17, 18 of 18, 18 of 18, 15 of 17. Spent about $0.52."
     }
    ],
    "gen": {
@@ -15317,10 +15321,94 @@
     "est": 0.42,
     "mode": "review",
     "run": {
-     "state": "running",
-     "at": "2026-11-20T19:23:12Z",
+     "state": "done",
+     "at": "2026-11-20T19:25:20Z",
      "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44801568695",
-     "n": 7
+     "made": [
+      "rose-listen",
+      "grace-listen",
+      "tom-listen",
+      "deedee-listen",
+      "ellie-listen",
+      "boppy-listen",
+      "sal-listen"
+     ],
+     "already": [],
+     "skipped": [],
+     "failed": [],
+     "spent": 0.52,
+     "qa": {
+      "rose-listen": {
+       "file": "results/rose-listen/20261120T192337.png",
+       "yes": 17,
+       "of": 18,
+       "failed": [
+        {
+         "id": "p6",
+         "q": "Is the head tipped slightly forward?",
+         "why": "Head is not tipped slightly forward."
+        }
+       ]
+      },
+      "grace-listen": {
+       "file": "results/grace-listen/20261120T192338.png",
+       "yes": 15,
+       "of": 17,
+       "failed": [
+        {
+         "id": "p2",
+         "q": "Is Grace standing and facing the viewer at a slight three-quarter angle turned toward the left?",
+         "why": "Pose is front-facing, not three-quarter turned left"
+        },
+        {
+         "id": "p3",
+         "q": "Is Grace's head tipped slightly forward with her eyes looking toward the left?",
+         "why": "Head not tipped forward, eyes look forward"
+        }
+       ]
+      },
+      "tom-listen": {
+       "file": "results/tom-listen/20261120T192340.png",
+       "yes": 17,
+       "of": 17,
+       "failed": []
+      },
+      "deedee-listen": {
+       "file": "results/deedee-listen/20261120T192418.png",
+       "yes": 17,
+       "of": 17,
+       "failed": []
+      },
+      "boppy-listen": {
+       "file": "results/boppy-listen/20261120T192420.png",
+       "yes": 18,
+       "of": 18,
+       "failed": []
+      },
+      "ellie-listen": {
+       "file": "results/ellie-listen/20261120T192419.png",
+       "yes": 18,
+       "of": 18,
+       "failed": []
+      },
+      "sal-listen": {
+       "file": "results/sal-listen/20261120T192506.png",
+       "yes": 15,
+       "of": 17,
+       "failed": [
+        {
+         "id": "f_text",
+         "q": "Is the picture free of letters, words, numbers, watermarks and signatures that the prompt does not ask for?",
+         "why": "Watch on left wrist shows numbers and letters."
+        },
+        {
+         "id": "p5",
+         "q": "Is Sal's head tipped slightly forward?",
+         "why": "Head is upright, not tipped slightly forward."
+        }
+       ]
+      }
+     }
     }
    }
   },
