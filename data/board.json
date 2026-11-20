@@ -12748,7 +12748,7 @@
     "rule": "Claude Sonnet 5.5, medium"
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGidKHGEzvhoUBytRY",
+    "url": "https://claude.ai/code/session_01RXeukGidKHGEzvhoUBytRY",
     "opening": "New card by Tom on the board"
    },
    "history": [
@@ -12770,6 +12770,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -12860,9 +12864,73 @@
     "url": "https://claude.ai/code/session_01RXeukDB9uAZGfgJ43hZuux",
     "opening": "\"the context folder is getting full\""
    }
+  },
+  {
+   "id": "b-board-projclean",
+   "tag": "board-projclean",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-20",
+   "theme": "Tools",
+   "title": "board only: a card that moves the Project's notes into the repo, because the Project is 97% full",
+   "next": "Done: board only: a card that moves the Project's notes into the repo, because the Project is 97% full",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDB9uAZGfgJ43hZuux",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as board-projclean. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
+  },
+  {
+   "id": "c-reports-4",
+   "tag": "reports-2026-11-20",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix the report backlog (1 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-091238-jecm. First note: when Rose jumps off Tom's shoulders, there is a moment when Rose is displayed twice",
+   "prompt": {
+    "what": "Works through the reports you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by board-sync: 1 report(s) on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukGidKHGEzvhoUBytRY",
+   "title": "Effects Lab: every effect on people in the overworld, what triggers it, and a preview in Admin",
+   "first": "2026-11-20T17:13:10Z",
+   "last": "2026-11-20T17:13:10Z",
+   "tags": [],
+   "cards": [
+    "c-idea-reviewwhatever"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukEr3zRmZS5WgoQeWYc",
    "title": "Fix: Play the new chapter 1 opening in the taxi office",
@@ -13118,6 +13186,18 @@
    ],
    "cards": [
     "c-itembanner1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDB9uAZGfgJ43hZuux",
+   "title": "Move the Project docs into the repo (Project is 97% full)",
+   "first": "2026-11-20T09:12:52-08:00",
+   "last": "2026-11-20T09:12:52-08:00",
+   "tags": [
+    "board-projclean"
+   ],
+   "cards": [
+    "c-projclean"
    ]
   },
   {
@@ -14413,7 +14493,8 @@
    "r-20261120-000910-g9n1",
    "r-20261120-000931-2yx8",
    "r-20261120-001019-feou",
-   "r-20261120-001100-lta1"
+   "r-20261120-001100-lta1",
+   "r-20261120-091238-jecm"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -14435,8 +14516,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "97fb9464f13ceeb392661b0daa0d89208da8034d",
- "synced_at": "2026-11-20T17:12:12+00:00",
+ "synced": "1a61f191ba678634b8a99e58f5aae07bb3a7495f",
+ "synced_at": "2026-11-20T17:13:13+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
