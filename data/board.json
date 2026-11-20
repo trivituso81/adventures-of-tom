@@ -7715,8 +7715,8 @@
    "title": "Install the Gate Zero pictures (no plane, plane)",
    "theme": "Areas",
    "lane": "claude",
-   "col": "prog",
-   "next": "Waits on your card Generate and approve the Gate Zero room pictures. Then installs them per claude/next-addendum-ch10vance1.md.",
+   "col": "wait",
+   "next": "Not installed: the two pictures made do not match the plate. Waits on new pictures that keep the painting exactly and put the plane in the same place.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -7736,6 +7736,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Not shipped: the pictures made are 1248x832, not the plate size 1280x896, and the empty room moved the window frames and jet bridge, so the walk-behind pieces and masks would no longer line up. The plane alone is a different, realistic jet, in a different place and size than the plate plane, so it cannot slide out from the window. Also claude/next-addendum-ch10vance1.md is not in the repo. Nothing installed; art/gatezero.webp is unchanged."
     }
    ],
    "prompt": {
@@ -7747,7 +7751,8 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/next-addendum-ch10vance1.md and install the approved Gate Zero pictures (room-gatezero-noplane and room-gatezero-plane) per ROOM_PAINTINGS.md steps, test portrait and landscape with screenshots, push. You have my full permission to access the repo."
    },
-   "tag": "gatezero"
+   "tag": "gatezero",
+   "waiting_on": "claude"
   },
   {
    "id": "t-gatezeroart",
