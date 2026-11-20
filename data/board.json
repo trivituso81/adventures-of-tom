@@ -637,7 +637,7 @@
    "title": "New battle system, stage 9a: the skill card (your testing notes)",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as b3s9a: tapping a Skill opens a card with everything about it, then BACK and USE; the list shows the flavor as a picture and the Pep cost in a big pill. Stage 9 kits continue on c-b3s9b (TNB) and c-b3s9c (Nara, Boppy, late joiners).",
    "blocks": [],
    "changed": "2026-11-19",
@@ -666,6 +666,10 @@
     {
      "d": "2026-11-19",
      "t": "b3s9a: skill card built from Tom's notes, tested portrait and landscape (b3_test whole file passes). Stage 9 split: TNB has 6 of the 12 lines that need their own function (claude/battle-kit-ops.md recommends his own conversation)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as b3s9a: New battle: tapping a Skill opens a card with everything about it, then BACK and USE"
     }
    ],
    "prompt": {
@@ -678,7 +682,8 @@
     "text": "Read claude/battle-build.md and build stage 9 of the new battle system. You have my full permission to access the repo."
    },
    "tag": "b3s9a",
-   "after": "nothing for Tom: c-b3s9b"
+   "after": "nothing for Tom: c-b3s9b",
+   "done": "2026-11-19"
   },
   {
    "id": "c-b3s9b",
@@ -1187,7 +1192,7 @@
    "id": "c-reports",
    "tag": "reports-2026-11-19",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (8 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100352-7v5z, r-20261114-100555-mxvd, r-20261114-100734-1a2w, r-20261114-101501-c5no, r-20261114-101538-nre4, r-20261114-104915-g4gl and 2 more. First note: For this line in particular, we need to create a special frame that can be used in both the dialog a",
@@ -1201,7 +1206,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukCZdiEbyskXvidXtfn",
     "opening": "not started"
    },
    "history": [
@@ -1212,12 +1217,15 @@
     {
      "d": "2026-11-19",
      "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-19",
-   "start": true
+   "changed": "2026-11-19"
   },
   {
    "id": "t-startsetup",
@@ -1923,7 +1931,7 @@
    "id": "c-board4",
    "tag": "board4",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Something is wrong button on test cards (board4)",
    "next": "Shipped as board4: test cards have All good and Something is wrong; a problem becomes a Claude fix card and the tested card waits on it, then comes back to you.",
@@ -1955,9 +1963,14 @@
     {
      "d": "2026-11-19",
      "t": "Built: All good and Something is wrong on play, pictures, animations, voice and script cards; fix cards (Sonnet 5.5 medium auto-start for play, Opus 5.5 medium copy prompt for the rest); tested card waits on the fix and comes back when it ships. Hands to Tom: t-cutpolish4b, report the chapter 1 issues with the new button."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as board4: test cards get All good and Something is wrong; a problem becomes a Claude fix card and the card waits on it"
     }
    ],
-   "after": "t-cutpolish4b"
+   "after": "t-cutpolish4b",
+   "done": "2026-11-19"
   },
   {
    "id": "b-board-ch1review",
@@ -2178,15 +2191,29 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukGt8KJKK4iu2gwLNP2",
-   "title": "New battle system, stage 9: first late joiners and the next kits",
-   "first": "2026-11-19T17:00:46-08:00",
-   "last": "2026-11-19T18:18:21-08:00",
+   "url": "https://claude.ai/code/session_01RXeukGuQDu3jxcpsGVH4gP",
+   "title": "Something is wrong button on test cards (board4)",
+   "first": "2026-11-19T18:07:19-08:00",
+   "last": "2026-11-19T18:20:23-08:00",
    "tags": [
-    "board-b3s9a"
+    "board4"
    ],
    "cards": [
-    "c-b3s9"
+    "c-board4"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGt8KJKK4iu2gwLNP2",
+   "title": "New battle system, stage 9a: the skill card (your testing notes)",
+   "first": "2026-11-19T17:00:46-08:00",
+   "last": "2026-11-19T18:19:43-08:00",
+   "tags": [
+    "board-b3s9a",
+    "b3s9a"
+   ],
+   "cards": [
+    "c-b3s9",
+    "b-board-b3s9a"
    ]
   },
   {
@@ -2226,16 +2253,6 @@
     "t-ch1review",
     "c-clipreset",
     "b-board-clipreset"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGuQDu3jxcpsGVH4gP",
-   "title": "Something is wrong button on test cards (board4)",
-   "first": "2026-11-19T18:07:19-08:00",
-   "last": "2026-11-19T18:07:19-08:00",
-   "tags": [],
-   "cards": [
-    "c-board4"
    ]
   },
   {
@@ -2355,8 +2372,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "7290c7ab17024ee3795c2d260c504ca3c7ca44c3",
- "synced_at": "2026-11-20T02:18:47+00:00",
+ "synced": "5b605c3d5f31d6dab4907ef210a4ad993da8bc56",
+ "synced_at": "2026-11-20T02:20:28+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
