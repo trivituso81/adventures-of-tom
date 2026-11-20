@@ -43,8 +43,11 @@ const LE_drawIntroScreen_ch16=drawIntroScreen;
 drawIntroScreen=function(time) { LE_drawIntroScreen_ch16(time); ch16DrawFx(time); };
 
 // ---------- Staging ----------
-// [x, y, facing] in the Square: the plaza around the fountain. The camera stands on the sidewalk at (10,8), Marlowe at (12,8), the library door's approach tile (11,8) stays free; the family faces up.
-const CH16_SPOTS={tom:[13,18,'up'],grace:[12,17,'up'],rose:[13,17,'up'],amy:[12,18,'up'],tnb:[14,17,'up'],nara:[14,18,'up']};
+// [x, y, facing] in the Square (stagefollow, 2026-11-20): the open plaza right of the fountain, under Penny's Pockets. The old marks (12 to 14, 15 to 18)
+// were from before the Square v3 painting: there they fall in the narrow lane beside Kettle Cottage, behind its hanging sign, and the boss staging
+// scattered the family across the map. Now Marlowe and the camera stand on row 9, the little ones in front on row 11, the tall ones behind on row 13,
+// one column each (nobody hides anybody), all facing up at the camera. The statue (row 10) stays in the open plaza for the rest of the game.
+const CH16_SPOTS={tom:[24,13,'up'],grace:[23,11,'up'],rose:[25,11,'up'],amy:[22,13,'up'],tnb:[26,13,'up'],nara:[28,11,'up']};
 const ch16Marlowe=()=>{ const t=worlds.town; return t&&t.npcs.find(n=>n.name==='Marlowe'&&n.scripted); };
 function ch16Add(kind,x,y,w,name,text) {
   const t=worlds.town; if(!t||t.objects.some(o=>o.ch16===kind)) return;
@@ -68,9 +71,9 @@ function ch16Stage() {
   for(const m of extras()) if(m!==amy) recruitLeave(m,true);
   forceJoin(amy,true);
   for(const id of ['tnb','nara']) { const m=MEMBERS()[id]; if(m&&typeof benchAdd==='function') benchAdd(m); }
-  const [tx,ty,td]=CH16_SPOTS.tom; player.x=tx; player.y=ty; player.facing=td;
+  const [tx,ty,td]=CH16_SPOTS.tom; player.x=tx; player.y=ty; player.facing=td; player.stagePlaced=true;   // stagePlaced: the boss staging keeps these marks
   placeFollowers();
-  for(const id of Object.keys(CH16_SPOTS)) { if(id==='tom') continue; const f=followers.find(f=>f.member&&f.member.id===id); if(f) { const [x,y,d]=CH16_SPOTS[id]; Object.assign(f,{x,y,facing:d,move:null,path:[]}); } }
+  for(const id of Object.keys(CH16_SPOTS)) { if(id==='tom') continue; const f=followers.find(f=>f.member&&f.member.id===id); if(f) { const [x,y,d]=CH16_SPOTS[id]; Object.assign(f,{x,y,facing:d,move:null,path:[],stagePlaced:true}); } }
   refreshAreaUI(); resize(); camera.snap=true; storyWorld();
 }
 // A straight run of tiles (inclusive of the end, exclusive of the start) so actors walk tile by tile.
@@ -94,11 +97,11 @@ SCENES.ch16Open=()=>[
   {fade:'out',time:.8},
   {card:16,time:3.2},
   {call:()=>{ setFlag('ch16-open','pending'); ch16Stage(); }},
-  {noGo:[7,8,13,12]},
-  {spawn:{name:'Deedee',look:'pip',at:[9,10],dir:'up'}},
-  {spawn:{name:'Boppy',look:'gus',at:[12,10],dir:'up'}},
+  {noGo:[21,8,28,13]},
+  {spawn:{name:'Deedee',look:'pip',at:[22,10],dir:'up'}},
+  {spawn:{name:'Boppy',look:'gus',at:[27,11],dir:'up'}},
   {call:()=>{ const t=worlds.town; for(const [n,sheet] of [['Deedee','deedee'],['Boppy','boppy']]) { const a=t.npcs.find(x=>x.name===n&&x.scripted); if(a) a.sheet=sheet; } }},
-  {spawn:{name:'Marlowe',look:'marlowe',at:[12,8],dir:'down'}},
+  {spawn:{name:'Marlowe',look:'marlowe',at:[26,9],dir:'down'}},
   {fade:'in',time:.8},
   {talk:'Tom',lines:['The Square, the morning after the dinner. Six of us, two grandparents, and one very big camera on a tripod.']},
   {talk:'Grace',lines:['I wore the good scrunchie. I want that on the record.']},
@@ -136,8 +139,8 @@ SCENES.ch16Open=()=>[
   {talk:'Deedee',lines:['Robert.']},
   {talk:'Boppy',lines:['I know.']},
   {all:[
-    {walk:'Deedee',to:[[12,16],[12,15]],speed:.24},
-    {walk:'Boppy',to:[[14,16],[13,15]],speed:.22}]},
+    {walk:'Deedee',to:[[23,10],[24,10]],speed:.24},
+    {walk:'Boppy',to:[[27,10],[26,10],[25,10]],speed:.22}]},
   {face:'Deedee',dir:'up'},{face:'Boppy',dir:'up'},
   {talk:'Deedee',lines:['Girls, close your eyes. Boppy and I are stepping in front of you. To the moon and back.']},
   {talk:'Boppy',lines:['Nobody gets past us.']},
@@ -168,8 +171,8 @@ SCENES.ch16Open=()=>[
   {talk:'Rose',lines:['But Boppy...']},
   {talk:'Grace',lines:['I KNOW. RUN.']},
   {all:[
-    {walk:'grace',to:()=>ch16Run([[12,17],[13,22],[20,22]]),speed:.16},
-    {walk:'rose',to:()=>ch16Run([[13,17],[13,22],[20,22]]),speed:.16}]},
+    {walk:'grace',to:()=>ch16Run([[23,11],[22,11],[22,21],[25,21]]),speed:.16},
+    {walk:'rose',to:()=>ch16Run([[25,11],[25,12],[22,12],[22,21],[24,21]]),speed:.16}]},
   {party:null},
   {call:()=>{ for(const id of ['tnb','nara']) { const m=MEMBERS()[id]; if(m&&typeof onBench==='function'&&onBench(m)) benchToParty(m); } placeFollowers(); }},
   {talk:'Amy',lines:['Tom. Whatever Marlowe just turned into, it’s standing between the girls and the road.']},
@@ -219,7 +222,7 @@ SCENES.ch16After=()=>[
   {pose:'Marlowe',foe:'kneel',end:'marlowe16'},
   {talk:'Marlowe',lines:['I didn’t want it like this.']},
   {talk:'Tom',lines:['Nobody does. That is what he counts on.']},
-  {walk:'tom',to:[[13,18]],speed:.4},{face:'tom',dir:'up'},
+  {walk:'tom',to:()=>routeTo('tom',24,11),speed:.4},{face:'tom',dir:'up'},
   {wait:1.2},
   {talk:'Tom',lines:['Mom. Dad.']},
   {talk:'Tom',lines:['It’s warm. Amy. It’s still a little warm.']},
@@ -278,9 +281,14 @@ let CH16_STASH=[];
 STORY_WORLD.push(()=>{
   if(STORY.mode!=='full') return;
   const stone=STORY.chapter>=16&&flag('ch16-stone');
-  if(stone) ch16Add('statue',12,15,2,'Deedee and Boppy','Two stone figures, arms locked in front of the girls. Their joined hands are still a little warm.'); else ch16Remove('statue');
+  if(stone) ch16Add('statue',24,10,2,'Deedee and Boppy','Two stone figures, arms locked in front of the girls. Their joined hands are still a little warm.'); else ch16Remove('statue');
   const live=STORY.chapter===16&&flag('ch16-open')&&!flag('ch16-after');
-  if(live) ch16Add('tripod',14,15,1,'The camera','A very big camera on a tripod. The lens glows like a low sun.'); else ch16Remove('tripod');
+  if(live) ch16Add('tripod',24,9,1,'The camera','A very big camera on a tripod. The lens glows like a low sun.'); else ch16Remove('tripod');
+  // stagefollow: Dot stands on (22,12), inside the family's spot for the photograph; while chapter 16 plays in the Square she watches from the fountain.
+  const t=worlds.town,dot=t&&t.npcs.find(n=>n.name==='Dot'&&!n.scripted);
+  if(dot) { const away=STORY.chapter===16&&!!flag('ch16-open');
+    if(away&&!dot.ch16Home) { dot.ch16Home=[dot.x,dot.y]; dot.x=18; dot.y=9; dot.move=null; }
+    else if(!away&&dot.ch16Home) { [dot.x,dot.y]=dot.ch16Home; dot.ch16Home=null; dot.move=null; } }
   const g=worlds.grands; if(!g) return;
   if(stone) { for(const n of g.npcs.filter(n=>!n.scripted&&(n.name==='Deedee'||n.name==='Boppy'))) { CH16_STASH.push({n,map:g}); g.npcs.splice(g.npcs.indexOf(n),1); } }
   else if(CH16_STASH.length) { for(const s of CH16_STASH) s.map.npcs.push(s.n); CH16_STASH=[]; }

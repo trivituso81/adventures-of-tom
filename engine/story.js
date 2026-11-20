@@ -616,7 +616,7 @@ function huddleFails(g,clr,memo) {
   const here=clr.at(Math.round(cx),Math.round(cy));
   let best=0; for(let y=Math.round(cy)-5;y<=Math.round(cy)+5;y++) for(let x=Math.round(cx)-5;x<=Math.round(cx)+5;x++) best=Math.max(best,clr.at(x,y));
   if(P.some((p,i)=>g.roster.includes(all[i])&&huddleBadTile(map,p.x,p.y,memo))) out.add('place');
-  else if(best>=2&&here<=.5*best&&here<=1) out.add('place');
+  else if(best>=2&&here<=.5*best&&here<=1&&!g.roster.every(a=>a.stagePlaced)) out.add('place');   // stagefollow: a group the scene placed itself, every one on a good tile, keeps its marks even when its middle falls on a lamp post (ch12AtWashington)
   if(g.roster.some(a=>!huddleKept(g,a))&&!hudTight(P,j=>j<g.roster.length&&(j===0||!huddleKept(g,all[j])))) out.add('spread');   // roster comes first in `all`, Tom is index 0
   all.forEach((a,i)=>{ if(!huddleTurns(g,a)) return; const v=HUD_DIRV[a.facing]; if(!v) return;
     const o=P.filter((_,j)=>j!==i),mx=o.reduce((s,p)=>s+p.x,0)/o.length-P[i].x,my=o.reduce((s,p)=>s+p.y,0)/o.length-P[i].y;

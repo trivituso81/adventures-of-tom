@@ -133,9 +133,12 @@ SCENES.ch12Loft=[
 // him for the touch line, everyone else spread along the walk. Positions come from his NPC so a moved map cannot strand the scene.
 function ch12AtWashington() {
   const w=worlds.jpark&&worlds.jpark.npcs.find(n=>n.name==='Mr. Washington'); if(!w) return;
-  sceneCam=[w.x,w.y+1];
-  const put=(id,dx,dy,dir)=>{ if(id!=='tom'&&!party.some(m=>m===id||(m&&m.id===id))) return; const a=sceneActor(id); if(!a) return; storyHold(a); a.stagePlaced=true; a.x=w.x+dx; a.y=w.y+dy; a.move=null; a.scr=null; a.facing=dir; };
-  put('tom',0,2,'up'); put('tnb',-1,1,'right'); put('grace',1,2,'up'); put('rose',-1,2,'up'); put('amy',2,2,'up'); put('nara',-2,2,'up');
+  // stagefollow: Mr. Washington stands one row above the street's bottom edge (8,19), so the old marks two rows below him were off the walkable map
+  // and the party snapped back up the street, out of the picture. Now: TNB beside him (his hand on the warm amber), the rest in a staggered line to his right,
+  // nobody in front of him; benched walkers (Amy and TNB in chapter 12) are placed too. The view centres on the group.
+  sceneCam=[w.x+3,w.y];
+  const put=(id,dx,dy,dir)=>{ const a=sceneActor(id); if(!a||a.hidden||(id!=='tom'&&!a.member)) return; storyHold(a); a.stagePlaced=true; a.x=w.x+dx; a.y=w.y+dy; a.move=null; a.scr=null; a.facing=dir; };
+  put('tom',2,0,'left'); put('tnb',-1,0,'right'); put('grace',4,0,'left'); put('rose',5,-1,'left'); put('amy',6,0,'left'); put('nara',7,-1,'left');
 }
 
 SCENES.ch12Marlowe=[
@@ -160,7 +163,7 @@ SCENES.ch12Marlowe=[
   {despawn:'Marlowe'},
   {flag:'ch12-marlowe'}, {call:()=>storyWorld()},
   {talk:'Tom',lines:['He’s draining the color out of the whole block. And he did something worse. Look at Mr. Washington. He’s not moving.']},
-  {call:()=>ch12AtWashington()}, {zoom:1.7,time:.8},
+  {call:()=>ch12AtWashington()}, {zoom:1.2,time:.8},
   {talk:'Rose',lines:['He’s inside something. It’s see-through and yellow, like the honey bear.']},
   {talk:'Grace',lines:['It’s the same color the Long Island gate turned, Tata. That’s amber. It’s what the bugs are stuck in, in my rock book.']},
   {talk:'TNB',lines:['It’s hard like glass, but it’s warm. Babe, it’s as warm as a mug right out of the kiln.']},
@@ -252,8 +255,15 @@ SCENES.ch12Alvarez=[
   {flag:'ch12-alvarez'}, {call:()=>storyWorld()}
 ];
 
-SCENES.ch12Prime=[
+// stagefollow (bossbig1 leftover): Gridlock Prime is drawn twice Tom's height and fills the one-screen street, so there is no room on its left.
+// Before Marlowe calls it, the family walks to marks below where it will stand (14,10): one column each, so nobody stands behind anybody or on
+// the bus, and a scene walk marks them placed, so the boss staging keeps them in this scene and the next.
+const CH12_PRIME_MARKS={tom:[13,14],grace:[12,14],rose:[11,14],nara:[14,14],amy:[16,13],tnb:[17,13]};   // Larry stands frozen in amber at (15,14): nobody in front of him or behind him
+const ch12PrimeWalks=()=>Object.entries(CH12_PRIME_MARKS).filter(([id])=>id==='tom'||followers.some(f=>!f.hidden&&f.member&&f.member.id===id))
+  .map(([id,[x,y]])=>({walk:id,to:routeTo(id,x,y),speed:.22}));
+SCENES.ch12Prime=()=>[
   {flag:'ch12-prime',value:'pending'},
+  {all:ch12PrimeWalks()}, {face:'tom',dir:'up'},
   {spawn:{name:'Marlowe',look:'marlowe',at:[14,5],dir:'down'}},
   {walk:'Marlowe',to:[[14,6],[14,7],[14,8]],speed:.3}, {face:'Marlowe',dir:'down'},
   {talk:'Marlowe',lines:['Look at that. You put the neighbors back. Very warm. Very busy. Very much not what I asked for.']},
@@ -279,6 +289,7 @@ SCENES.ch12Prime=[
 
 SCENES.ch12After=()=>[
   {flag:'ch12-after',value:'pending'},
+  {all:ch12PrimeWalks()}, {face:'tom',dir:'up'},   // stagefollow: back on the marks below the bus (a retry may have started anywhere); the boss staging keeps them
   {call:()=>sfx.levelChime&&sfx.levelChime()},
   ...(flag('kind:gridlockprime')?[
     {talk:'Gridlock Prime',lines:['...Green. It’s green. Somebody turned me green.','Nobody ever let me go first. I’m always the one who holds everybody.']},

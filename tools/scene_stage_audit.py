@@ -20,6 +20,9 @@ PARTY={1:['tom','grace','rose','deedee'],2:['tom','tnb','nara'],3:['tom','grace'
  11:['tom','grace','rose','amy'],12:['tom','grace','rose','amy'],13:['tom','amy','tnb','nara'],14:['tom','amy','grace','rose'],
  15:['tom','grace','rose','amy'],16:['tom','grace','rose','amy'],17:['tom','grace','rose','amy'],18:['tom','grace','rose','amy'],
  19:['tom','grace','rose','amy'],20:['tom','grace','rose','amy'],21:['tom','grace','rose']}
+# stagefollow: Part 2 walkers who sit out fights but walk along (near1 bench); anyone already in the party or recruited by the scene is skipped.
+BENCH={c:['amy','tnb'] for c in range(11,21)}
+# LAYOUT=landscape and VP=WxH (phone viewport, default 430x860) run the audit on another screen; the offscreen column is then measured on that screen.
 
 SETUP=r"""(C)=>{ const L=window.__LE; splash.active=false; document.getElementById('splash').hidden=true; endIntro();
   window.__bcErr=[];
@@ -232,14 +235,16 @@ def audit_one(br,port,out,T,summary):
         if True:
             ch=T['when'].get('chapter',1); ch=ch[-1] if isinstance(ch,list) else ch
             pre=re.match(r'^([a-z]+\d*)[A-Z]',T['scene']); pre=pre.group(1) if pre else 'ch'+str(ch)
-            pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
+            vw,vh=map(int,os.environ.get('VP','430x860').split('x'))
+            pg=br.new_page(viewport={'width':vw,'height':vh}); errs=[]
             pg.on('pageerror',lambda e: errs.append(str(e)))
             pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.playScene&&window.__LE.chapterJump',timeout=180000); pg.wait_for_timeout(600)
             joins=pg.evaluate(JOINS,T['scene'])
             party=[m for m in PARTY.get(ch,PARTY[1]) if m not in joins]
             start=pg.evaluate(START,T)
-            C={'ch':ch,'map':T['map'],'scene':T['scene'],'prefix':pre,'when':T['when'],'party':party,'flagOwn':T['id'],
-               'start':[start[0],start[1],'down'] if start else None,'layout':'portrait'}
+            bench=[m for m in BENCH.get(ch,[]) if m not in party and m not in joins]
+            C={'ch':ch,'map':T['map'],'scene':T['scene'],'prefix':pre,'when':T['when'],'party':party,'bench':bench,'flagOwn':T['id'],
+               'start':[start[0],start[1],'down'] if start else None,'layout':os.environ.get('LAYOUT','portrait')}
             info=pg.evaluate(SETUP,C)
             if info.get('err'): print(T['id'],info); pg.close(); return
             grid=pg.evaluate(GRID); snaps=[]; shots=[]; last=None; t=0; dw=0

@@ -47,12 +47,15 @@ SETUP=r"""(C)=>{ const L=window.__LE; splash.active=false; document.getElementBy
   return {party:party.map(p=>p.id),map:currentMap.id};
 }"""
 SNAP=r"""(boss)=>{ const P=a=>{ const p=position(a); return [Math.round(p.x*100)/100,Math.round(p.y*100)/100]; };
+  // stagefollow: the side a person is actually drawn facing ('l','r','u','d','f' for a front painting), mood and talking paintings included
+  const DR=a=>{ const P_=a.scenePose; if(P_&&P_.emo&&typeof POSE_FACING!=='undefined') { const mid=P_.mid||(a.isPlayer?(typeof playerMember==='function'?playerMember():hero).id:a.member&&a.member.id),lean=POSE_FACING[mid+'|'+P_.f]; if(!lean) return 'f'; return poseFacingWant(a)||lean; }
+    return ({left:'l',right:'r',up:'u',down:'d'})[a.facing]||'?'; };
   const ids=[{id:(typeof playerMember==='function'?playerMember():hero).id,a:player},...followers.filter(f=>!f.hidden&&(party.includes(f.member)||(typeof onBench==='function'&&onBench(f.member)))).map(f=>({id:f.member.id,a:f}))];
   const b=boss?(sceneActor(boss)||currentMap.npcs.find(n=>n.monster===boss)||null):null;
   return {who:dialog.name, idx:dialog.index, line:(dialog.pages&&dialog.pages[dialog.index])||'', map:currentMap.id, outside:!!currentMap.outside,
-    party:ids.map(o=>({id:o.id,pos:P(o.a),facing:o.a.facing,pose:o.a.scenePose?String(o.a.scenePose.f):null,hidden:!!o.a.hidden,hid:!!(typeof huddleHidden==='function'&&huddleHidden(currentMap,Math.round(P(o.a)[0]),Math.round(P(o.a)[1]),new Map()))})),
-    cam:(typeof camera!=='undefined'?[camera.x,camera.y,camera.zoom||camera.scale||null]:null),ppos:P(player),dock:(document.getElementById('dialog').getBoundingClientRect().top),npcs:currentMap.npcs.filter(n=>n.scenePose&&n.scenePose.emo).map(n=>[n.name,n.scenePose.f]),
-    boss:b&&!b.hidden?{pos:P(b),name:b.name,mfl:b._bossFaceLeft,fac:b.facing}:null};
+    party:ids.map(o=>({id:o.id,pos:P(o.a),facing:o.a.facing,pose:o.a.scenePose?String(o.a.scenePose.f):null,draw:DR(o.a),hidden:!!o.a.hidden,hid:!!(typeof huddleHidden==='function'&&huddleHidden(currentMap,Math.round(P(o.a)[0]),Math.round(P(o.a)[1]),new Map()))})),
+    cam:(typeof camera!=='undefined'?[camera.x,camera.y,camera.zoom||camera.scale||null]:null),ppos:P(player),dock:(document.getElementById('dialog').getBoundingClientRect().top),npcs:currentMap.npcs.filter(n=>n.scenePose&&n.scenePose.emo).map(n=>[n.name,n.scenePose.f,DR(n),P(n)]),
+    spk:(typeof EMO!=='undefined'&&EMO.spk&&!EMO.spk.hidden)?P(EMO.spk):null,boss:b&&!b.hidden?{pos:P(b),name:b.name,mfl:b._bossFaceLeft,fac:b.facing}:null};
 }"""
 OBJ=r"""(sel)=>{ const m=currentMap,o=m.objects.find(o=>o[sel]||o.name===sel||o.kind===sel); if(!o) return null;
   const c=[]; for(let x=o.x;x<o.x+o.w;x++) { c.push([x,o.y+o.h,'up']); c.push([x,o.y-1,'down']); } for(let y=o.y;y<o.y+o.h;y++) { c.push([o.x-1,y,'right']); c.push([o.x+o.w,y,'left']); }
@@ -76,7 +79,7 @@ with sync_playwright() as pw:
     if os.environ.get('CHROMIUM'): kw['executable_path']=os.environ['CHROMIUM']
     br=pw.chromium.launch(**kw)
     for C in cases:
-        pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
+        vw,vh=C.get('vp',[430,860]); pg=br.new_page(viewport={'width':vw,'height':vh}); errs=[]   # stagefollow: "vp":[951,648] runs a case on the Duo screen
         pg.on('pageerror',lambda e: errs.append(str(e)))
         pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.playScene&&window.__LE.chapterJump',timeout=180000); pg.wait_for_timeout(800)
         info=pg.evaluate(SETUP,C)
@@ -109,7 +112,7 @@ with sync_playwright() as pw:
                     if st['typed']:
                         dw+=1
                         if dw==1 and os.environ.get('LATE'):   # LATE=1: also a frame once the page is fully typed (listener reactions and their facing have fired; facing1)
-                            pg.wait_for_timeout(400); pg.evaluate("()=>{document.getElementById('dialog').style.opacity='.25'}"); pg.screenshot(path=os.path.join(OUT,f"{C['name']}-{len(shots)-1:02d}-late.png")); pg.evaluate("()=>{document.getElementById('dialog').style.opacity=''}")
+                            pg.wait_for_timeout(400); snaps[-1]['late']=pg.evaluate(SNAP,C.get('boss')); pg.evaluate("()=>{document.getElementById('dialog').style.opacity='.25'}"); pg.screenshot(path=os.path.join(OUT,f"{C['name']}-{len(shots)-1:02d}-late.png")); pg.evaluate("()=>{document.getElementById('dialog').style.opacity=''}")
                         if dw>=2: dw=0; pg.evaluate("()=>{ if(dialog.choices&&dialog.choices.length) pickChoice(0); else advanceDialog(); }")
                 elif not st['a'] and not st['battle']:
                     break

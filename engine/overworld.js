@@ -370,14 +370,22 @@ function sceneAutoTick(dt) {
   if(sceneAuto) {
     const {aw,ah,base}=sceneRoomTiles(),fig=sceneAuto.fig||2.4,cols=sceneAuto.cols||1;
     const near=(a,b)=>Math.hypot(a.x-pp.x,a.y-pp.y)-Math.hypot(b.x-pp.x,b.y-pp.y),here=a=>!a.hidden&&(a===player||followers.includes(a)||currentMap.npcs.includes(a));
-    const A=[...sceneAuto.first.filter(here).map(a=>position(a)).sort(near),...sceneAuto.actors.filter(a=>here(a)&&!sceneAuto.first.includes(a)).map(a=>position(a)).sort(near)];   // the people Tom is talking to first, then the party
-    let x0=pp.x,x1=pp.x,y0=pp.y,y1=pp.y,lost=false; const nf=sceneAuto.first.filter(here).length;
-    for(const [i,p] of A.entries()) { const nx0=Math.min(x0,p.x),nx1=Math.max(x1,p.x),ny0=Math.min(y0,p.y),ny1=Math.max(y1,p.y);
-      if(nx1-nx0+2*cols>aw||ny1-ny0+fig+.8>ah) { if(i<nf) lost=true; continue; }   // would not fit even at the normal fit: leave them out
-      x0=nx0; x1=nx1; y0=ny0; y1=ny1; }
-    tgt={x:(x0+x1)/2,y:(y0+y1)/2-(fig-.9)/2};   // figures stand fig tiles (2.4 outdoors) above their feet, so the middle of the picture sits above the middle row
-    tz=clamp(Math.min(aw/(x1-x0+2*cols),ah/(y1-y0+fig+.8)),1,Math.max(1,currentMap.outside?Math.min(SCENE_ZOOM_MAX,SCENE_SCALE_MAX/base):Math.min(2.4,SCENE_ZOOM_MAX_ROOM*Math.max(1,4.4/fig))));   // rooms that draw people small (Tom's house) zoom further
-    sceneAutoBox={y0,y1,fig};
+    // stagefollow (bossbig1 leftover): a monster is framed by its drawn picture (stageBox: a boss is drawn twice Tom's height), not by a
+    // person's height at its feet, so in portrait the boss stays in view during the dialogue instead of standing off the top of the screen.
+    // A boss too wide for the screen falls back to its height only, then to its feet (the old framing), so the party is never dropped for it.
+    const ext=a=>{ const p=position(a),b=a.monster&&typeof stageBox==='function'?stageBox(a):null,pt={x:p.x,y:p.y,l:p.x,r:p.x,t:p.y-fig};
+      if(!b) return pt; const t=p.y-Math.max(fig,b.ht);
+      return {...pt,t,alt:[{...pt,t},pt],l:p.x+.5-Math.max(.5,b.hw),r:p.x-.5+Math.max(.5,b.hw)}; };
+    const A=[...sceneAuto.first.filter(here).map(ext).sort(near),...sceneAuto.actors.filter(a=>here(a)&&!sceneAuto.first.includes(a)).map(ext).sort(near)];   // the people Tom is talking to first, then the party
+    let x0=pp.x,x1=pp.x,y0=pp.y,y1=pp.y,top=pp.y-fig,lost=false; const nf=sceneAuto.first.filter(here).length;
+    for(const [i,p0] of A.entries()) { let ok=false;
+      for(const p of [p0,...(p0.alt||[])]) { const nx0=Math.min(x0,p.l),nx1=Math.max(x1,p.r),ny0=Math.min(y0,p.y),ny1=Math.max(y1,p.y),nt=Math.min(top,p.t);
+        if(nx1-nx0+2*cols>aw||ny1-nt+.8>ah) continue;
+        x0=nx0; x1=nx1; y0=ny0; y1=ny1; top=nt; ok=true; break; }
+      if(!ok&&i<nf) lost=true; }   // would not fit even at the normal fit: leave them out
+    tgt={x:(x0+x1)/2,y:(top+y1+.9)/2};   // figures stand fig tiles (2.4 outdoors) above their feet, so the middle of the picture sits above the middle row
+    tz=clamp(Math.min(aw/(x1-x0+2*cols),ah/(y1-top+.8)),1,Math.max(1,currentMap.outside?Math.min(SCENE_ZOOM_MAX,SCENE_SCALE_MAX/base):Math.min(2.4,SCENE_ZOOM_MAX_ROOM*Math.max(1,4.4/fig))));   // rooms that draw people small (Tom's house) zoom further
+    sceneAutoBox={y0,y1,fig:y0-top};
     if(typeof sceneCam!=='undefined'&&sceneCam) tz=1;
     if(lost) { tz=1; tgt=null; }   // someone Tom is talking to is too far away to frame (a boss across the room): the normal view on Tom, as before
   }

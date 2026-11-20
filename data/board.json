@@ -7920,7 +7920,7 @@
    "theme": "Story and Dialogue",
    "lane": "claude",
    "col": "prog",
-   "next": "Ready to start. Looks at frames of scenes that were never checked after facing1, cutfront1, close1, cutstage1 and bossbig1 and fixes any person who looks wrong.",
+   "next": "Shipped stagefollow: chapter 16 opening restaged in the open Square, Gridlock Prime family below the bus, Mr. Washington scene fixed, bosses kept in the picture in portrait. Left over: ch13 Drill Worm framing (card c-wormstage).",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -7944,6 +7944,10 @@
     {
      "d": "2026-11-20",
      "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped stagefollow. Facing checks found nothing to fix; monster line-ups were fine from a real approach tile. Fixed ch12Marlowe (Washington), ch16Open/Fight/After (Square marks), ch12Prime/After (Gridlock Prime marks), boss framing in portrait. ch13 Drill Worm left over as c-wormstage."
     }
    ],
    "prompt": {
@@ -7955,7 +7959,8 @@
     "effort": "medium (each fix is small)",
     "text": "Read claude/next-addendum-close1.md, claude/next-addendum-cutstage1.md, claude/next-addendum-cutfront1.md and claude/next-addendum-bossbig1.md (the ones that exist in the repo claude/ folder; if one is missing, use docs/CHANGES.md for that build). Then do these checks and fix what looks wrong: (1) LATE=1 reaction_test frames of ch12Carmen (bench amy tnb), ch12Marlowe and one townsfolk mood chat in portrait and landscape; anyone facing away from the speaker: fix that row in docs/pose-facing.tsv or poseFacingWant. (2) Landscape frames of a room with a counter or wall (ch9Club), and the audit's cover and offscreen columns on a few outdoor scenes with tall painted objects; a person who looks wrong: check that zone's base in PLATE_BEHIND. (3) Full scene scan on main with fresh OUT dirs (bench for chapters 11 to 20), read cover, spread, offscreen; landscape and Duo frames of five scenes; ordinary monster line-ups by moving Tom to the monster's left or most open side (two earlier attempts failed: reproduce from a real approach tile first). (4) bossbig1 leftovers: ch12 Gridlock Prime (Rose beside or behind Grace or Tom on 9 pages), boss in view in portrait (camera framing should include the boss box), landscape frames of five more bosses. Look at every frame, fix, test, push. You have my full permission to access the repo."
    },
-   "tag": "stagefollow"
+   "tag": "stagefollow",
+   "after": "t-stagefollowplay"
   },
   {
    "id": "c-alvarez",
@@ -9627,6 +9632,62 @@
      "t": "Added by c-heist1: the 3 new lines and Grace's changed line have no clip yet (Tom's floor line and Grace's old wording were purged)."
     }
    ]
+  },
+  {
+   "id": "t-stagefollowplay",
+   "title": "Play the chapter 16 opening and the Gridlock Prime fight",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "wait",
+   "ask": "play",
+   "fyi": true,
+   "next": "1) Chapter Select > Chapter 16: the family stands together in the Square under Penny's Pockets, little ones in front, facing Marlowe and the camera; nobody is hidden behind Kettle Cottage. 2) Chapter Select > Chapter 12, walk to Old Oak Park until Marlowe stops you: after Mr. Washington is found in amber you should see TNB beside him and the rest of the family to his right. 3) Same chapter, the Gridlock Prime scene: the bus is in view and the family stands below it, one person per column, through the fight and after. Use the REPORT tab if any of these look wrong.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "\"Read claude/next-addendum-close1.md, claude/next-addendum-cutstage1.md...\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by stagefollow: your phone check of the restaged scenes; blocks nothing."
+    }
+   ],
+   "waiting_on": "claude",
+   "first": "After the publish of build stagefollow, press RELOAD on the title."
+  },
+  {
+   "id": "c-wormstage",
+   "title": "Stage the Drill Worm scenes so boss and party fit on screen",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "ch13Worm and ch13After start at the cave mouth, nine tiles from the Drill Worm, so in portrait the boss sits at the right edge and the party is off screen. Walk the party to marks near its left side before the first line, the way ch12Prime does it (CH12_PRIME_MARKS).",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by stagefollow: a general rule change (walk Tom closer to any far boss) was tried and reverted because it stacked the party in ch13 and moved Tom under the ch08 boss."
+    }
+   ],
+   "prompt": {
+    "what": "Adds a walk-in to marks beside the Drill Worm in ch13Worm and ch13After, then checks both scenes in portrait, landscape and Duo.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the same method as ch12Prime, written in docs/CHANGES.md stagefollow)",
+    "effort": "medium (steps are known)",
+    "text": "Read docs/CHANGES.md section stagefollow (how ch12Prime walks the family to CH12_PRIME_MARKS in data/scenes-ch12.js). Do the same for ch13Worm and ch13After in data/scenes-ch13.js: marks near the Drill Worm's left side, one column each, then run tools/reaction_test.py on both scenes in portrait, landscape and Duo (\"vp\":[951,648]) and look at every frame. Fix, test, push. You have my full permission to access the repo."
+   },
+   "tag": "wormstage"
   }
  ],
  "sessions": [
