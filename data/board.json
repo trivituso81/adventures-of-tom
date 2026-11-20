@@ -13197,8 +13197,8 @@
     "rule": "Claude Sonnet 5.5, high"
    },
    "chat": {
-    "url": "",
-    "opening": "pasted by Tom from the board"
+    "url": "https://claude.ai/code/session_01RXeukHF7db4ogWADdo3sy3",
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-checkart\""
    },
    "history": [
     {
@@ -13215,6 +13215,11 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-20T17:23:42.201Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Session started on this card; no open card covers it (t-artgen2look and c-fix-artgen2look are about QA results, not clean-up).",
+     "at": "2026-11-20T17:26:07.000Z"
     }
    ],
    "prompt": {
