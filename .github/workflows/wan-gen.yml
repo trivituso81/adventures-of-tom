@@ -1,0 +1,79 @@
+name: wan-gen
+
+# wanproof (claude/video-battle-plan.md section 4). Makes ONE picture or ONE video on fal.ai (tools/art-library/wangen.py): `start` is
+# Grace's large left-facing start picture (Nano Banana 2.1), `video` is her guard video (Wan 3.0). What is sent is written in
+# tools/art-library/wangen-jobs.json. MANUAL ONLY (workflow_dispatch); it never runs on a push. Needs the repo secret FAL_KEY (never printed).
+# It changes nothing on main. Results, the fal answers and the money ledger go to branch `wangen` (never merged, never served); each run
+# restores that branch first, so the $ cap counts every call ever made and a finished or pending call is never paid for twice.
+# A Claude session checks the result and commits what passes to main itself.
+
+on:
+  workflow_dispatch:
+    inputs:
+      what:
+        description: 'start (the start picture) or video (the guard video).'
+        required: true
+        default: 'start'
+      cap:
+        description: 'Most dollars ever sent to fal by this Action (the ledger on branch wangen counts every run). A call that would pass it is refused.'
+        required: false
+        default: '2'
+      dry_run:
+        description: 'true: show the request and the cost, check the key (free), send nothing, spend nothing.'
+        required: false
+        default: 'true'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wan-gen
+  cancel-in-progress: false
+
+jobs:
+  gen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests pillow numpy
+      - name: Restore what the wangen branch already holds
+        run: |
+          mkdir -p "$RUNNER_TEMP/wangen"
+          if git ls-remote --exit-code --heads origin wangen >/dev/null 2>&1; then
+            git fetch --depth 1 origin wangen
+            git archive FETCH_HEAD | tar -x -C "$RUNNER_TEMP/wangen"
+          fi
+          ls -la "$RUNNER_TEMP/wangen"
+      - name: Make it
+        env:
+          FAL_KEY: ${{ secrets.FAL_KEY }}
+          WHAT: ${{ inputs.what }}
+          CAP: ${{ inputs.cap }}
+          DRY: ${{ inputs.dry_run }}
+        run: |
+          set -o pipefail
+          ARGS=(--what "$WHAT" --cap "${CAP:-2}" --out "$RUNNER_TEMP/wangen")
+          [ "$DRY" = "true" ] && ARGS+=(--dry-run)
+          if [ "$DRY" != "true" ] && [ -z "$FAL_KEY" ]; then echo "Repo secret FAL_KEY is empty or missing."; exit 2; fi
+          python3 -I tools/art-library/wangen.py "${ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/run.log"
+          { echo '### wan-gen'; echo '```'; tail -40 "$RUNNER_TEMP/run.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Keep the results and the ledger on the wangen branch
+        if: ${{ inputs.dry_run != 'true' && always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd "$RUNNER_TEMP/wangen"
+          cp "$RUNNER_TEMP/run.log" "run-${{ github.run_id }}.log" 2>/dev/null || true
+          if [ -z "$(ls -A)" ]; then echo "nothing to save"; exit 0; fi
+          git init -q -b wangen
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "wangen: results and ledger (run ${{ github.run_id }}) [skip ci]"
+          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" wangen

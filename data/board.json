@@ -15796,6 +15796,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "wanproofa: the wan-gen Action (tools/art-library/wangen.py, stand-in test wangen_test.py ALL PASS). Next: one dry run, then the start picture."
     }
    ],
    "prompt": {
@@ -15807,7 +15811,8 @@
     "model": "Claude Opus 5.5 (row D: a video you judge by taste, and a miss costs you a review and generation money)",
     "effort": "high (a new generator Action and a new clip playback are built in one session with no code to follow)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md, then card c-wanproof in data/board.json with its history and the note on card t-wanproof-setup. Your first push is the commit board: start c-wanproof. Build the proof exactly as section 4 of the plan says: the wan-gen Action with its stand-in test and one dry run first, then the start picture and its checks, then the guard video with the prompt in 4.3 word for word, the checks in 4.4 before Tom sees anything, the bake, the playback, the Lab row PROOF: GRACE'S GUARD (VIDEO), and the game checks in portrait and landscape. Spend at most $2.00 on fal and nothing on xAI. A check that fails gets one retry with one change; a second miss the same way is the stop-loss: tell Tom in plain words and hand him no clip. Do not make any other clip and do not remove any painted state. Build tag wanproof. End with a Tom card (ask animations) for the Lab row. You have my full permission to access the repo."
-   }
+   },
+   "after": "nothing for Tom: c-wanproof"
   },
   {
    "id": "c-permwording1",

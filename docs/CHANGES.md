@@ -1,3 +1,13 @@
+## wanproofa (2026-11-20): Part 1 of the Grace guard video proof: the wan-gen Action that makes one picture or one video on fal.ai. Nothing spent yet
+
+Card c-wanproof, plan `claude/video-battle-plan.md` section 4.5 ("The Action").
+
+- New `.github/workflows/wan-gen.yml` (manual start only; inputs `what` start or video, `cap` default 2, `dry_run` default true; repo secret FAL_KEY, never printed) and `tools/art-library/wangen.py`. What it sends is written in `tools/art-library/wangen-jobs.json` (endpoint, prompt file, pictures, settings, `rev`); a retry is one change there with `rev` raised. Prompts used word for word: `tools/art-library/prompts/hero-leftfacing-magenta-v1.txt` (copy of the Project file `claude/anim-test/hero-leftfacing-magenta-v1.txt`) and `tools/art-library/prompts/wan-grace-guard-v1.txt` (plan 4.3).
+- Money: the ledger on branch `wangen` (never merged) adds up every call ever sent; a call that would pass the cap is refused before it is sent; a finished rev is never sent again; a request that was sent and not finished is picked up by the next run with no second charge. The dry run reads fal's live price, which also checks the key, for free.
+- The video gets the start picture placed on an exact 720 x 1280 magenta frame (sides cut evenly when the figure keeps a margin, else padded), the same frame as first and last picture. The frame sent is saved next to the video.
+- Test: `python3 tools/art-library/wangen_test.py` (stand-in fal server, checks W1 to W8): ALL PASS.
+- Not done in this part: no call made, no game file changed.
+
 ## wanplan (2026-11-20): Rule: no painted poses in battle; plan to bring back video (WAN by API) with a proof of Grace's guard. No game change, nothing spent
 
 - Tom (11-20 12:11): "I'm extremely unhappy with the painted battle poses for the family (card t-clipreset / c-clipposes). I was happy with the earlier WAN video clips (made through Sorceress); the problem is painted still poses." Standing rule recorded in CLAUDE.md ("No painted poses in battle") and claude/canon-addendum.md ("Battle animation"): no painted or image-generated still frames, poses or sprite sheets for anyone in any battle state; battle animation is video from a video model, idle breathing included; overworld and story scenes never get breathing.
