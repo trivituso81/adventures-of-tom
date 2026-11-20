@@ -7216,6 +7216,132 @@
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19"
+  },
+  {
+   "id": "c-boardux1",
+   "title": "Board redesign 1: an honest header and status",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "up",
+   "tag": "boardux1",
+   "next": "Rebuilds the top of the board: a header that fits a phone, a light that says when the board's data is behind, new status words (a normal queue is no longer shown as Stuck in red), and a line saying what changed since you last looked. Cards and layout come in redesign 2 and 3. You test once, after redesign 3.",
+   "blocks": [
+    "c-boardux2"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added from the board design assessment (planning chat https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc). Tom: \"Do a UX and visual design assessment of the kanban page as if it were a standalone kanban app dedicated to this project then create instructions and cards to execute\" Plan: claude/boardux-plan.md."
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the board's header and status so it fits your phone and tells the truth about what is running, queued or late. It also files the four redesign cards and copies the plan into the repo.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the rules, colours and checks are written in claude/boardux-plan.md, and tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and the Project docs claude/boardux-plan.md and claude/boardux-cards.json. Your first push is the commit board: start c-boardux1. In that same push add the four cards from claude/boardux-cards.json to data/board.json (re-read the board first and merge; skip any already there) and copy the plan into the repo as claude/boardux-plan.md. Then build phase 1 (boardux1) as plan sections 3.2, 3.3 (not search or themes), 3.6 and 5 say, with checks A1, A2, A7, A8, A9 and A13, and push it as boardux1. Fetch and rebase before every push, because other sessions change board.html. Keep every feature the page has today (check A13). Run tools/board_shots.py and look at every picture before pushing. Write what you built, and anything that differs from the plan, into the plan's Built section (in the repo and in the Project copy). Do not start the next phase. You have my full permission to access the repo."
+   },
+   "after": "nothing for Tom: c-boardux2"
+  },
+  {
+   "id": "c-boardux2",
+   "title": "Board redesign 2: cards and the card panel",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "tag": "boardux2",
+   "next": "Waits on Board redesign 1 (c-boardux1). Then it redraws every card (short title, the instruction readable without opening it, one status line, one main button, undo on All good) and the panel that opens on a tap (main action always in view), and shortens the titles of the open cards.",
+   "blocks": [
+    "c-boardux3"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added from the board design assessment (planning chat https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc). Plan: claude/boardux-plan.md."
+    }
+   ],
+   "prompt": {
+    "what": "Redraws the board's cards and the panel that opens when you tap one, so the next action is readable and reachable without scrolling, and shortens the open cards' titles.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5 (row D: how a card reads is judged by taste, and a miss costs you review time)",
+    "effort": "medium (the design is written in the plan)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/boardux-plan.md (all of it, with its Built section), then card c-boardux2 in data/board.json with its history. Your first push is the commit board: start c-boardux2. Build phase 2 (boardux2) as plan sections 3.4, 3.5, 3.7 and 5 say, with checks A10, A11 and A13, and push it as boardux2. Fetch and rebase before every push, because other sessions change board.html. Keep every feature the page has today (check A13). Run tools/board_shots.py and look at every picture before pushing. Write what you built, and anything that differs from the plan, into the plan's Built section (in the repo and in the Project copy). Do not start the next phase. You have my full permission to access the repo."
+   },
+   "after": "nothing for Tom: c-boardux3"
+  },
+  {
+   "id": "c-boardux3",
+   "title": "Board redesign 3: four views, search and the wide layout",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "tag": "boardux3",
+   "next": "Waits on Board redesign 2 (c-boardux2). Then the board becomes four views with the same names at every screen size (For you, Claude, Chats, Shipped), with a tab bar on the phone, two columns clear of the fold on the open Duo, search, and Shipped grouped by day. After it ships you try the whole redesign once (card t-boarduxtry).",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added from the board design assessment (planning chat https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc). Plan: claude/boardux-plan.md."
+    }
+   ],
+   "prompt": {
+    "what": "Gives the board four views that are the same at every screen size, a tab bar, search, and a Shipped list by day, then hands the finished redesign to you to try.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the layout, rules and checks are written in claude/boardux-plan.md, and tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/boardux-plan.md (all of it, with its Built section), then card c-boardux3 in data/board.json with its history. Your first push is the commit board: start c-boardux3. Build phase 3 (boardux3) as plan sections 3.1, 3.3 (search and themes) and 5 say, with checks A1 to A6, A12 and A13, and push it as boardux3. Then rewrite card t-boarduxtry's next step to match what you built. Fetch and rebase before every push, because other sessions change board.html. Keep every feature the page has today (check A13). Run tools/board_shots.py and look at every picture before pushing. Write what you built, and anything that differs from the plan, into the plan's Built section (in the repo and in the Project copy). You have my full permission to access the repo."
+   },
+   "after": "t-boarduxtry"
+  },
+  {
+   "id": "t-boarduxtry",
+   "lane": "tom",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Tools",
+   "ask": "play",
+   "fyi": true,
+   "title": "Try the redesigned board on your phone",
+   "next": "After Board redesign 3 ships (build boardux3): open the board from your home screen with the Duo folded. 1) The header is one row and nothing slides sideways. 2) For you shows your cards first, and you can read what to do without opening one. 3) Tap a card: the main button is in view without scrolling. 4) Tap All good on a card you have finished, then Undo. 5) Search for \"muffin\". 6) Unfold the Duo and turn it sideways: the same four views, two columns, nothing across the fold. All good if it works; Something is wrong with what you saw.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "started by c-boardux3"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added from the board design assessment (planning chat https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc). One test after all three redesign builds (Tom, 2026-11-18: build to a milestone before he tests)."
+    }
+   ]
   }
  ],
  "sessions": [
