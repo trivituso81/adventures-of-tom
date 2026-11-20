@@ -811,8 +811,8 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "",
-    "opening": "pasted by Tom from the board"
+    "url": "https://claude.ai/code/session_01RXeukCrBsMaC1DBnh8HB8R",
+    "opening": "\"Read claude/battle-build.md and claude/next-addendum-b3s9c.md, then build stage 10 (Amy, Justin and Olivia) of the new battle system.\""
    },
    "history": [
     {
@@ -822,6 +822,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started. No note or answer from Tom on this card, so the build follows battle-build.md and the b3s9c addendum as written."
     }
    ],
    "prompt": {
