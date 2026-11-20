@@ -1,3 +1,8 @@
+## clipch1remakea (2026-11-19): CHAPTER 1 REVIEW marks the 16 remade clips NEW and plays only those with PLAY NEW
+
+- Tom (11-19 17:45): "the animations looked the same as when i rejected them", "unless i dont know whihc 16 to look at?". The review lists all 67 clips and nothing showed which were remade; the 27 held clips are still the old rejected ones.
+- engine/clip-review.js: a clip whose latest version is a second or later one made by clipgen and approved gets a NEW chip, the NEW clips sort to the top, and PLAY NEW queues only them. 16 clips are NEW in data/art-prompts.json (list in the t-ch1review card).
+
 ## cutpolish4b (2026-11-20): the empty kitchen counter after the muffin heist, the painted muffin pan, muffin papers and the phone on the cab seat
 
 - Card c-cutpolish4b. Installed the approved Chapter 1 Library pictures. Empty counter: `tools/make_grands_empty.py` cuts the table top (cake stand included, muffins gone) from `ch1-kitchen-empty-island` into `art/grands-empty.webp` (over the painting) and `art/grands-empty-fg.webp` (over the foreground cutout, so people behind the island still hide correctly). `engine/plate.js` `grandsEmptyDraw` draws them while flag `muffins-gone` is set (set at the grab in ch1Theft) and until Grace's job scene (`ch1-job`). The cake stand is the painted new one, a little taller than the old one; the pie and the rest of the room are untouched.

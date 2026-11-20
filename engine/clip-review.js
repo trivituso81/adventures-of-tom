@@ -18,6 +18,8 @@ async function crvEntries(group){
   const r=await fetch('data/art-prompts.json',{cache:'no-store'}); if(!r.ok) throw new Error('Could not read the clip list ('+r.status+').');
   return (await r.json()).entries.filter(e=>e.tab==='Clips'&&e.group===group&&e.clip&&!e.clip.test);
 }
+// A clip made again by the clip-gen Action (second version or later, from 'clipgen') is NEW: it is what Tom has not reviewed yet.
+function crvIsNew(e){ const v=(e.versions||[]); const l=v[v.length-1]; return !!l&&l.from==='clipgen'&&l.n>=1&&e.status==='approved'; }
 // What a row says about its clip, in the order it matters.
 function crvState(e){
   const key=crvKey(e);
@@ -29,7 +31,7 @@ function crvState(e){
 }
 function crvRowHtml(e){
   const [txt,cls]=crvState(e), key=crvKey(e), can=!!BCLIPS[key]&&crvOnField(e.clip.owner), id=crvEsc(e.id);
-  return '<div class="crv-row'+(CRV.cur===e.id?' playing':'')+'" data-id="'+id+'"><div class="crv-line"><span class="crv-name">'+crvEsc(crvLabel(e))+'</span><span class="crv-chip '+cls+'">'+crvEsc(txt)+'</span>'+
+  return '<div class="crv-row'+(CRV.cur===e.id?' playing':'')+'" data-id="'+id+'"><div class="crv-line"><span class="crv-name">'+crvEsc(crvLabel(e))+'</span>'+(crvIsNew(e)?'<span class="crv-chip warn">NEW</span>':'')+'<span class="crv-chip '+cls+'">'+crvEsc(txt)+'</span>'+
     '<button type="button" data-crv="play"'+(can?'':' disabled')+'>'+(CRV.cur===e.id?'PLAYING':'PLAY')+'</button><button type="button" data-crv="redo"'+((e.versions||[]).length||BCLIPS[key]?'':' disabled')+'>REDO</button></div>'+
     (CRV.redo===e.id?'<div class="crv-note"><input type="text" maxlength="400" placeholder="What looks wrong?" aria-label="Note for Claude" autocomplete="off"><button type="button" data-crv="send">SEND</button><button type="button" data-crv="cancel">CANCEL</button></div>':'')+'</div>';
 }
@@ -39,6 +41,7 @@ function crvPaint(){
   list.innerHTML=CRV.rows.length?CRV.rows.map(crvRowHtml).join(''):'<div class="crv-empty">'+crvEsc(CRV.say||'No clips in this chapter yet.')+'</div>';
   list.scrollTop=keep; const inp=el.querySelector('.crv-note input'); if(inp&&had){ inp.value=val; }
   el.classList.toggle('fold',CRV.fold); el.querySelector('[data-crv="fold"]').textContent=CRV.fold?'SHOW':'HIDE';
+  el.querySelector('[data-crv="new"]').disabled=!CRV.rows.some(e=>crvIsNew(e)&&BCLIPS[crvKey(e)]&&crvOnField(e.clip.owner));
   el.querySelector('[data-crv="all"]').disabled=!CRV.rows.some(e=>BCLIPS[crvKey(e)]&&crvOnField(e.clip.owner));
   el.querySelector('.crv-msg').textContent=CRV.say;
 }
@@ -94,11 +97,12 @@ function crvOpen(group,name){
   crvClose(); CRV.on=true; CRV.group=group; CRV.name=name||group+' REVIEW'; CRV.rows=[]; CRV.sent={}; CRV.cur=''; CRV.queue=[]; CRV.all=false; CRV.redo=''; CRV.fold=false; CRV.fbefore=null; CRV.total=0; CRV.say='Loading the clip list...';
   const host=document.getElementById('battle')||document.getElementById('game'); if(!host) return;
   const el=document.createElement('div'); el.id='crv'; el.className='crv';
-  el.innerHTML='<div class="crv-top"><b>'+crvEsc(CRV.name)+'</b><button type="button" data-crv="all">PLAY ALL</button><button type="button" data-crv="stop">STOP</button><button type="button" data-crv="fold">HIDE</button></div><div class="crv-msg" role="status"></div><div class="crv-list"></div>';
+  el.innerHTML='<div class="crv-top"><b>'+crvEsc(CRV.name)+'</b><button type="button" data-crv="new">PLAY NEW</button><button type="button" data-crv="all">PLAY ALL</button><button type="button" data-crv="stop">STOP</button><button type="button" data-crv="fold">HIDE</button></div><div class="crv-msg" role="status"></div><div class="crv-list"></div>';
   for(const t of ['pointerdown','pointerup','click','touchstart','keydown','keyup','keypress']) el.addEventListener(t,ev=>ev.stopPropagation());
   el.addEventListener('click',ev=>{
     const b=ev.target.closest('[data-crv]'); if(!b||b.disabled) return; const a=b.dataset.crv, row=b.closest('.crv-row'), e=row?CRV.rows.find(r=>r.id===row.dataset.id):null;
     if(a==='play'&&e){ CRV.all=false; CRV.queue=[]; crvPlay(e,false); }
+    else if(a==='new'){ CRV.queue=CRV.rows.filter(r=>crvIsNew(r)&&BCLIPS[crvKey(r)]&&crvOnField(r.clip.owner)); CRV.total=CRV.queue.length; CRV.all=true; crvNext(); }
     else if(a==='all'){ CRV.queue=CRV.rows.filter(r=>BCLIPS[crvKey(r)]&&crvOnField(r.clip.owner)); CRV.total=CRV.queue.length; CRV.all=true; crvNext(); }
     else if(a==='stop') crvStop();
     else if(a==='fold'){ CRV.fold=!CRV.fold; CRV.fbefore=null; crvPaint(); }
@@ -107,7 +111,7 @@ function crvOpen(group,name){
     else if(a==='send'&&e){ const i=row.querySelector('.crv-note input'); crvSend(e.id,i?i.value:''); }
   });
   host.appendChild(el); crvPaint();
-  crvEntries(group).then(rows=>{ if(!CRV.on) return; CRV.rows=rows; CRV.say=rows.length?'Tap PLAY on a clip, or PLAY ALL. REDO sends a clip back with a note.':'No clips in "'+group+'" yet. Make them in ADMIN > ART LIBRARY > Clips > '+group+' > GENERATE CHAPTER.'; crvPaint(); })
+  crvEntries(group).then(rows=>{ if(!CRV.on) return; CRV.rows=rows.slice().sort((a,b)=>(crvIsNew(b)?1:0)-(crvIsNew(a)?1:0)); CRV.say=rows.length?(CRV.rows.some(crvIsNew)?'Clips marked NEW were made again and are at the top: PLAY NEW. The rest are the old clips. ':'')+'Tap PLAY on a clip, or PLAY ALL. REDO sends a clip back with a note.':'No clips in "'+group+'" yet. Make them in ADMIN > ART LIBRARY > Clips > '+group+' > GENERATE CHAPTER.'; crvPaint(); })
     .catch(err=>{ CRV.say=String(err.message||err); crvPaint(); });
 }
 function crvClose(){ CRV.on=false; CRV.all=false; CRV.queue=[]; const el=document.getElementById('crv'); if(el) el.remove(); }
