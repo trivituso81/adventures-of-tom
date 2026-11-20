@@ -13277,7 +13277,7 @@
    "id": "c-idea-welcomepage",
    "tag": "idea-welcomepage",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Tools",
    "title": "On the welcome page, shrink the width of new game and load",
    "next": "Your idea: on the welcome page, shrink the width of new game and load so that the buttons fit the amount of text, setting a min width based on the widest button. change reload and admin to icon only buttons. / w... Copy the prompt into a new conversation in the Project on Sonnet 5.5, effort high.",
@@ -13293,7 +13293,7 @@
    },
    "chat": {
     "url": "",
-    "opening": "New card by Tom on the board"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -13305,6 +13305,11 @@
      "d": "2026-11-20",
      "t": "Sized by the board: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort high (something new designed and built in one session).",
      "at": "2026-11-20T17:28:14.971Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-20T17:28:18.972Z"
     }
    ],
    "prompt": {
