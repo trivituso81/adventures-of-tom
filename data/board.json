@@ -7356,7 +7356,7 @@
    "id": "c-fix-ch1starving-2",
    "tag": "fix-ch1starving-2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Voice Clips",
    "title": "Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! ",
@@ -7379,7 +7379,7 @@
    ],
    "chat": {
     "url": "",
-    "opening": "Something is wrong on t-ch1starving"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -7389,6 +7389,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom reported on t-ch1starving: That's not what I wanted. I don't want. I'm starving to be dropped"
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom copied the prompt to paste it into a new conversation."
     }
    ],
    "prompt": {
