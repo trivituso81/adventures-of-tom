@@ -12882,7 +12882,7 @@
   {
    "id": "c-projclean",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Project Ops",
    "tag": "projclean1",
    "title": "Move the Project docs into the repo (Project is 97% full)",
@@ -12905,10 +12905,14 @@
     {
      "d": "2026-11-20",
      "t": "Created from Tom's request: \"the context folder is getting full. create a prompt to help me clean it up, by moving what we dont need there into the repo, or whatever architectural remedy you recommend as best.\" Project at 1,941,747 of 2,000,000 bytes, 663 docs. The 11-14 rule (handoff notes go in the repo, not the Project) was not followed, so this time the Project keeps only 4 mirrors and every rule file says so."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukDB9uAZGfgJ43hZuux",
+    "url": "https://claude.ai/code/session_01RXeukDcB3ZSezrrTtg1qT3",
     "opening": "\"the context folder is getting full\""
    }
   },
@@ -13285,6 +13289,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDcB3ZSezrrTtg1qT3",
+   "title": "Move the Project docs into the repo (Project is 97% full)",
+   "first": "2026-11-20T09:16:55-08:00",
+   "last": "2026-11-20T09:16:55-08:00",
+   "tags": [],
+   "cards": [
+    "c-projclean"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukH6yUh6dbf3JPguMqy",
    "title": "An ITEM GAINED banner for items from talks and wins",
    "first": "2026-11-20T09:11:42Z",
@@ -13295,6 +13309,16 @@
    "cards": [
     "c-itembanner1"
    ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEiW53jyXT7a9LDnUd",
+   "title": "board-gempillar2: retire 5 Gemini battle cards covered by Battle 3 v11",
+   "first": "2026-11-20T09:15:42-08:00",
+   "last": "2026-11-20T09:15:42-08:00",
+   "tags": [
+    "board-gempillar2"
+   ],
+   "cards": []
   },
   {
    "url": "https://claude.ai/code/session_01RXeukDB9uAZGfgJ43hZuux",
@@ -14625,8 +14649,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "6d8c8a0eeb76c6c061154accf1d1af1156af3e39",
- "synced_at": "2026-11-20T17:15:30+00:00",
+ "synced": "d4cd2fb6852ef9f86e9bd5c362adc1bd91f7145c",
+ "synced_at": "2026-11-20T17:17:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
