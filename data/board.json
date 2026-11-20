@@ -10053,6 +10053,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDP7ETKd971CZ852fW",
+   "title": "New card button: type an idea, get a sized Claude prompt",
+   "first": "2026-11-20T07:17:41-08:00",
+   "last": "2026-11-20T07:17:41-08:00",
+   "tags": [],
+   "cards": [
+    "c-newcard"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGEc6cowbEAQDgvRV8",
    "title": "Needs attention fixes itself or comes back to you",
    "first": "2026-11-20T07:15:48-08:00",
@@ -11028,8 +11038,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "c80469327e7449cbea1a84fbc0557b6374dea39e",
- "synced_at": "2026-11-20T15:16:36+00:00",
+ "synced": "666c6b78a22fd598620b31026bc418a0861a1158",
+ "synced_at": "2026-11-20T15:18:20+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
