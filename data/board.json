@@ -2192,8 +2192,7 @@
    "title": "Build the painted battle poses for chapter 1 (clipposes)",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "prog",
    "tag": "clipposes",
    "auto": true,
    "next": "Waits on your answer on the card Decide on the clip reset (t-clipreset). Go: builds the seven painted states for the four fighters, with measured checks, and hands you one Lab row to watch. Stop: puts Grace's old guard video back and ends the thread.",
@@ -2201,13 +2200,29 @@
    "changed": "2026-11-19",
    "created": "2026-11-19",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFGdMPdkaDVu3sGCnn",
     "opening": "not started"
    },
    "history": [
     {
      "d": "2026-11-19",
      "t": "Made by clipreset. Steps, motion numbers, the purge list and the Stop branch are in claude/clip-reset-plan.md section 5."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked: Decide on the clip reset: painted poses for the family, or stop is done."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Answer from \"Decide on the clip reset: painted poses for the family, or stop\": Go with this plan"
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Auto-start: Tom answered, so this card starts by itself."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -5863,7 +5878,7 @@
    "id": "c-fix-cutpolish4b-2",
    "tag": "fix-cutpolish4b-2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Areas",
    "title": "Fix what you found on: Look at the chapter 1 pictures in the game",
@@ -5885,7 +5900,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGN82mV68qXVnCgA97",
     "opening": "Something is wrong on t-cutpolish4b"
    },
    "history": [
@@ -5900,6 +5915,10 @@
     {
      "d": "2026-11-19",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -5912,8 +5931,7 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-cutpolish4b-2 and t-cutpolish4b in data/board.json, history included. Your first push is the commit board: start c-fix-cutpolish4b-2.\n\nTom tested and found problems:\n1. Card t-cutpolish4b (Look at the chapter 1 pictures in the game, ask play). He was asked: Chapter select ) Chapter 1, jump to the theft scene in Deedee's kitchen. Look at the island: the table is bare except the tart and the cake stand, and the muffin pan sits on it clear of the other pastries. After the Mudling grabs the pan the pan is gone and the table stays as it was. The Mudling now carries the painted pan, not the little heap. Then the paper muffin liners at the entrance of Grump Hollow (they are bigger now). Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one). Claude fixes them and this card comes back to you to check. He wrote: muffins overlay the background art Screenshot: board-shots/t-cutpolish4b-mwoe2bqk.jpg on branch inbox (git fetch --depth=1 origin inbox, then git show origin/inbox:board-shots/t-cutpolish4b-mwoe2bqk.jpg into a file in /tmp, and look at it).\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T02:57:37.579Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-cutpolish4b to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-cutpolish4b, and give the build fix-cutpolish4b-2 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-cutpolish4b",
-   "auto": true,
-   "start": true
+   "auto": true
   }
  ],
  "sessions": [
@@ -6480,8 +6498,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "91ec37d60ac91316159a6c39be36a15947c2ab5f",
- "synced_at": "2026-11-20T02:56:06+00:00",
+ "synced": "9d440d8a7a0662ec7bb3137c411ebd3f83186804",
+ "synced_at": "2026-11-20T02:57:58+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
