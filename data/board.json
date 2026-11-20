@@ -7106,7 +7106,7 @@
    "title": "QA for generated pictures, with the results on the card",
    "theme": "Tools",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "artgen2",
    "auto": true,
    "next": "Built and shipped as artgen2: every generated picture is checked against its prompt (score and failed lines on the board card and in the Art Library review); nothing is auto-approved. Replay on 40 pictures you approved: 25 of 40 passed clean, $0.55. Waiting on your look at a real run (card Look at the QA results).",
@@ -7151,6 +7151,10 @@
     {
      "d": "2026-11-20",
      "t": "Replay on 40 approved pictures, $0.55 spent: said no to f_same 8 of 40 (20%, moved to advisory), f_text 4 (10%), f_paint 3 (8%), f_crop 1, f_one, f_bg, f_count, f_anat 0; 25 of 40 at score 0.9 or more with every fixed question yes."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as artgen2: QA for generated pictures is finished: measured on 40 pictures you approved, f_same made advisory"
     }
    ],
    "prompt": {
@@ -7162,7 +7166,8 @@
     "effort": "medium (the questions, files and tests are written in the plan)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/artgen-plan.md (sections 1 to 3 and section 5), then card c-artgen2 in data/board.json with its history and the notes of the Tom cards that blocked it. Build artgen2 exactly as the plan says and push it as artgen2. Your first push is the commit board: start c-artgen2. The replay in section 5.3 is the only paid step: keep its cap at $1.50. Write what you built and anything that differs from the plan into the plan's Built section. Do not start the next phase. You have my full permission to access the repo."
    },
-   "after": "t-artgen2look"
+   "after": "t-artgen2look",
+   "done": "2026-11-20"
   },
   {
    "id": "c-artgen3",
@@ -7645,7 +7650,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDEhxpGxy5knknCF2p",
+    "url": "https://claude.ai/code/session_01RXeukDEhxpGxy5knknCF2p",
     "opening": "not started"
    },
    "history": [
@@ -7668,6 +7673,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -9074,7 +9083,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukE8mJ9n4LpdvqgpDKT",
     "opening": "\"Read CLAUDE.md (Pose Editor, One head multiplier and Real heights sections)\""
    },
    "history": [
@@ -9093,6 +9102,10 @@
     {
      "d": "2026-11-20",
      "t": "Session started: walk stand apply build (read POSE_EDITOR.md, cutpolish2 addendum)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -9190,7 +9203,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDZUaRAm9k2zMUUbic",
     "opening": "started by c-artgen2"
    },
    "history": [
@@ -9211,6 +9224,30 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDEhxpGxy5knknCF2p",
+   "title": "Board redesign 3: four views, search and the wide layout",
+   "first": "2026-11-20T09:12:57Z",
+   "last": "2026-11-20T09:12:57Z",
+   "tags": [],
+   "cards": [
+    "c-boardux3"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDZUaRAm9k2zMUUbic",
+   "title": "QA for generated pictures, with the results on the card",
+   "first": "2026-11-20T08:42:04Z",
+   "last": "2026-11-20T09:12:11Z",
+   "tags": [
+    "artgen2a",
+    "artgen2"
+   ],
+   "cards": [
+    "c-artgen2",
+    "t-artgen2look"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukH6yUh6dbf3JPguMqy",
    "title": "An ITEM GAINED banner for items from talks and wins",
@@ -9243,18 +9280,6 @@
    ],
    "cards": [
     "c-knownwrong"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDZUaRAm9k2zMUUbic",
-   "title": "QA for generated pictures, with the results on the card (artgen2)",
-   "first": "2026-11-20T08:42:04Z",
-   "last": "2026-11-20T08:57:25Z",
-   "tags": [
-    "artgen2a"
-   ],
-   "cards": [
-    "c-artgen2"
    ]
   },
   {
@@ -9553,6 +9578,16 @@
    "cards": [
     "c-starttest",
     "c-copydocs"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukE8mJ9n4LpdvqgpDKT",
+   "title": "Pose sizes: walk stand frames, Grace, Rose, Deedee poses",
+   "first": "2026-11-20T01:12:39-08:00",
+   "last": "2026-11-20T01:12:39-08:00",
+   "tags": [],
+   "cards": [
+    "c-posesizes"
    ]
   },
   {
@@ -10261,8 +10296,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "7f732cd0fc0b7dab534971224bc5cbd613912a21",
- "synced_at": "2026-11-20T09:12:09+00:00",
+ "synced": "73b17720a43c9bdae8f3b4617bd9579959d4ac81",
+ "synced_at": "2026-11-20T09:13:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
