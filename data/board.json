@@ -6569,13 +6569,13 @@
   },
   {
    "id": "t-ch1starving",
-   "title": "Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\"",
+   "title": "Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped)",
    "theme": "Voice Clips",
    "lane": "tom",
    "col": "wait",
    "ask": "voice",
    "fyi": true,
-   "next": "ADMIN > VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. The script you kept ends \"I'm starving!\" but the clip stops after \"number two can't wait.\" Record it again so it says the last sentence, keep it, and Export pending clips. If you would rather drop \"I'm starving!\", delete it from the script and keep the take as it is.",
+   "next": "ADMIN > VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. The script box should end \"Grace, I'm so sorry but number two can't wait.\" with no \"[hungry] I'm starving!\", and your other directions ([wary, disgusted, amused], [pause, very very deadpan], [very dismissive]) still there. Press play: the take you kept, unchanged. Nothing to record. Then All good.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -6591,6 +6591,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom: something is wrong: i want to drop it - that's why it's not there. you delete it Sent to Claude as card c-fix-ch1starving; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "fix-ch1starving: \"I'm starving!\" deleted from the line's script (the repo copy and the edit saved on your phone); the take you kept and the subtitle were already right and are unchanged."
     }
    ],
    "waiting_on": "claude"
@@ -6603,7 +6607,7 @@
    "fix": true,
    "theme": "Voice Clips",
    "title": "Fix what you found on: Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\"",
-   "next": "You reported a problem on Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\". Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: i want to drop it - that's why it's not there. you delete it",
+   "next": "Shipped as fix-ch1starving: \"I'm starving!\" removed from the script; t-ch1starving goes back to Tom to look again.",
    "blocks": [
     "t-ch1starving"
    ],
@@ -6636,6 +6640,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom copied the prompt to paste it into a new conversation."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "fix-ch1starving: game subtitle and clip already lacked the sentence; removed it from ch01-story-directions.json (kept take tmwo5jgy3mcb5's script) and from the Voice Library edit saved on Tom's device (voices.html SCRIPT_DROPS). No pencil report since 03:51Z."
     }
    ],
    "prompt": {

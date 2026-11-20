@@ -1,3 +1,12 @@
+## fix-ch1starving (2026-11-19): Tom's "Thank you for telling me, Rose" line no longer carries "I'm starving!" in its script
+
+- Card c-fix-ch1starving, for t-ch1starving. Tom (11-19): "i want to drop it - that's why it's not there. you delete it".
+- Found: the game already shows and plays the line without "I'm starving!" (subtitle in `data/scenes.js` ends "number two can't wait.", and the clip in `data/voice/dialog-ch1.js` is his kept take `tmwo5jgy3mcb5`, already merged). The sentence lived only in the edit saved in the Voice Library on his phone; the repo still held the script of his older take `tmwnrwuoc41ay`.
+- Changed: `tools/voice-library/scripts/ch01-story-directions.json` now holds the script of the take he kept, with "[hungry] I'm starving!" removed (takeId `tmwo5jgy3mcb5`); `data/voice-index.json` rebuilt (only this line changed). `voices.html` `SCRIPT_DROPS`: on load, the Voice Library removes "I'm starving!" and the [direction] just before it from the edit saved on his device for this line, and keeps the rest of his edit. Clip and subtitle unchanged.
+- Kept: the clip, the subtitle, his other direction words ([wary, disgusted, amused], [pause, very very deadpan], [very dismissive]).
+- Pencil reports: none filed since 2026-11-20T03:51Z (only mxvd, unrelated art, stays open).
+- Tests: Voice Library opened with his take script seeded as the saved edit, searched "telling me, Rose", portrait and landscape: the box ends "number two can't wait.", another saved edit untouched. `unused_voice.py` and smoke below.
+
 ## ch1retext1 (2026-11-19): Chapter 1 subtitles now say what Tom's rerecorded voice clips say, and his 3 newest Deedee takes are in the game
 
 - Card c-ch1retext1. Tom (11-19 19:06): "for chapter 1, ive changed the dialogue in the voicelcips and rerecorded, but the old dialogue still apepars in the game. check for discrepancies and update". Then he sent `local-clips-pending_5_.json` (made 11-20 03:21 UTC, 3 Deedee takes).
