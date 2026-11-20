@@ -6974,7 +6974,7 @@
    "title": "Watch the family's painted battle poses",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "animations",
    "next": "ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE > PAINTED STATES: CHAPTER 1, about 70 seconds. Now each fighter walks out to an open spot between the Mudling and the family, shows idle, guard, braced hit, hit, dodge, knocked out, get up, victory and a run there with the state's name on screen, then walks home. Check that you can see every state of Tom, Grace, Rose and Deedee in full, nobody standing in front of them, in portrait and in landscape. Then press All good, or Something is wrong and write what looks wrong by fighter and state (head too big or small, wrong speed or distance). It blocks the card Apply your notes on the painted poses.",
    "blocks": [
@@ -7002,8 +7002,13 @@
     {
      "d": "2026-11-20",
      "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: The animation happens way too fast before I can process it and see what's wrong. After each move auto plays, an interstitial asking for feedback that can go directly to Claude should be displayed where optional feedback can be entered and the user must hit reject or approve before the next animation is played Sent to Claude as card c-fix-clipposes-2; this card waits on it and comes back to you when the fix ships."
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-clipposesfix",
@@ -9765,6 +9770,56 @@
     "at": "2026-11-20",
     "from": "up"
    }
+  },
+  {
+   "id": "c-fix-clipposes-2",
+   "tag": "fix-clipposes-2",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Battle Animations",
+   "title": "Fix: Watch the family's painted battle poses",
+   "next": "You reported a problem on Watch the family's painted battle poses. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: The animation happens way too fast before I can process it and see what's wrong. After each move auto plays, an interstitial asking for feedback that can go dir",
+   "blocks": [
+    "t-clipposes"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T15:05:37.482Z",
+     "card": "t-clipposes",
+     "title": "Watch the family's painted battle poses",
+     "ask": "animations",
+     "words": "The animation happens way too fast before I can process it and see what's wrong. After each move auto plays, an interstitial asking for feedback that can go directly to Claude should be displayed where optional feedback can be entered and the user must hit reject or approve before the next animation is played",
+     "shot": "",
+     "asked": "ADMIN ) BATTLE LAB ) pick a difficulty ) NEW BATTLE ) PAINTED STATES: CHAPTER 1, about 70 seconds. Now each fighter walks out to an open spot between the Mudling and the family, shows idle, guard, braced hit, hit, dodge, knocked out, get up, victory and a run there with the state's name on screen, then walks home. Check that you can see every state of Tom, Grace, Rose and Deedee in full, nobody standing in front of them, in portrait and in landscape. Then press All good, or Something is wrong and write what looks wrong by fighter and state (head too big or small, wrong speed or distance). It blocks the card Apply your notes on the painted poses."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-clipposes"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-clipposes."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-clipposes: The animation happens way too fast before I can process it and see what's wrong. After each move auto plays, an interstitial asking for feedback that can go directly to Claude should be displayed where optional feedback can be entered and the user must hit reject or approve before the next animation is played"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Watch the family's painted battle poses.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: animations are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-clipposes-2 and t-clipposes in data/board.json, history included. Your first push is the commit board: start c-fix-clipposes-2.\n\nTom tested and found problems:\n1. Card t-clipposes (Watch the family's painted battle poses, ask animations). He was asked: ADMIN ) BATTLE LAB ) pick a difficulty ) NEW BATTLE ) PAINTED STATES: CHAPTER 1, about 70 seconds. Now each fighter walks out to an open spot between the Mudling and the family, shows idle, guard, braced hit, hit, dodge, knocked out, get up, victory and a run there with the state's name on screen, then walks home. Check that you can see every state of Tom, Grace, Rose and Deedee in full, nobody standing in front of them, in portrait and in landscape. Then press All good, or Something is wrong and write what looks wrong by fighter and state (head too big or small, wrong speed or distance). It blocks the card Apply your notes on the painted poses. He wrote: The animation happens way too fast before I can process it and see what's wrong. After each move auto plays, an interstitial asking for feedback that can go directly to Claude should be displayed where optional feedback can be entered and the user must hit reject or approve before the next animation is played\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T15:05:37.482Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-clipposes to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-clipposes, and give the build fix-clipposes-2 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-clipposes"
   }
  ],
  "sessions": [
