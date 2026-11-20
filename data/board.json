@@ -16614,7 +16614,7 @@
    "title": "Watch Grace's guard video once (1 minute)",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "animations",
    "next": "Open ADMIN > BATTLE LAB > NEW BATTLE and tap PROOF: GRACE'S GUARD (VIDEO). Grace stands alone against one Mudling. Three times she raises her guard (forearms crossed in front of her face), takes a hit that nudges her back, and lowers it again; then the list comes back (about 30 seconds). Her standing picture is the video's first picture, so nothing switches. Then tap All good, or Something is wrong and say what you saw. All good unblocks the card Grace's idle, hit and one own move as Wan videos.",
    "blocks": [
@@ -16630,8 +16630,14 @@
     {
      "d": "2026-11-20",
      "t": "Made by wanproof. One Wan 3.0 guard video (50 cents) and its start picture (15 cents) passed every check in claude/video-battle-plan.md 4.4 before you see it. The painted guard still shows in every other fight until the purge."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: i cant find this within the new battle lab UI Sent to Claude as card c-fix-wanproof-watch; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-20T21:49:57.233Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-wanidle",
@@ -16665,6 +16671,58 @@
     "effort": "medium (the Action, the bake, the guard playback and the checks exist; three new MOTION parts and the idle and hit playback follow them)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.7 Built and section 5), then card c-wanidle in data/board.json with its history and the answer on card t-wanproof-watch. Your first push is the commit board: start c-wanidle. Make Grace's idle with breathing, hit and one own move with a held prop as Wan 3.0 videos with the wan-gen Action, from art/clips/start/grace-hero.png, each prompt BOOP_APPROVED with only the MOTION part changed (the guard prompt in tools/art-library/prompts/wan-grace-guard-v1.txt is the model). Run each through the checks in section 4.4 before Tom sees anything; a miss gets one retry with one change, a second miss the same way is the stop-loss. Spend at most $3.00 on fal and nothing on xAI. Bake them, play them in the Lab row PROOF: GRACE'S GUARD (VIDEO) only, test portrait and landscape (tools/wanproof_test.py extended), and do not remove any painted state yet. Build tag wanidle. End with a Tom card (ask animations). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    }
+  },
+  {
+   "id": "c-fix-wanproof-watch",
+   "tag": "fix-wanproof-watch",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Battle Animations",
+   "title": "Fix: Watch Grace's guard video once (1 minute)",
+   "next": "You reported a problem on Watch Grace's guard video once (1 minute). Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: i cant find this within the new battle lab UI",
+   "blocks": [
+    "t-wanproof-watch"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T21:49:55.972Z",
+     "card": "t-wanproof-watch",
+     "title": "Watch Grace's guard video once (1 minute)",
+     "ask": "animations",
+     "words": "i cant find this within the new battle lab UI",
+     "shot": "",
+     "asked": "Open ADMIN ) BATTLE LAB ) NEW BATTLE and tap PROOF: GRACE'S GUARD (VIDEO). Grace stands alone against one Mudling. Three times she raises her guard (forearms crossed in front of her face), takes a hit that nudges her back, and lowers it again; then the list comes back (about 30 seconds). Her standing picture is the video's first picture, so nothing switches. Then tap All good, or Something is wrong and say what you saw. All good unblocks the card Grace's idle, hit and one own move as Wan videos."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-wanproof-watch"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-wanproof-watch.",
+     "at": "2026-11-20T21:49:57.233Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-wanproof-watch: i cant find this within the new battle lab UI",
+     "at": "2026-11-20T21:49:57.233Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Watch Grace's guard video once (1 minute).",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: animations are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-wanproof-watch and t-wanproof-watch in data/board.json, history included. Your first push is the commit board: start c-fix-wanproof-watch.\n\nTom tested and found problems:\n1. Card t-wanproof-watch (Watch Grace's guard video once (1 minute), ask animations). He was asked: Open ADMIN ) BATTLE LAB ) NEW BATTLE and tap PROOF: GRACE'S GUARD (VIDEO). Grace stands alone against one Mudling. Three times she raises her guard (forearms crossed in front of her face), takes a hit that nudges her back, and lowers it again; then the list comes back (about 30 seconds). Her standing picture is the video's first picture, so nothing switches. Then tap All good, or Something is wrong and say what you saw. All good unblocks the card Grace's idle, hit and one own move as Wan videos. He wrote: i cant find this within the new battle lab UI\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T21:49:55.972Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-wanproof-watch to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-wanproof-watch, and give the build fix-wanproof-watch a docs/CHANGES.md heading; the entry quotes his words. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "after": "t-wanproof-watch"
   }
  ],
  "sessions": [
