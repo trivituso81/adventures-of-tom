@@ -1,3 +1,7 @@
+## board-convclosed (2026-11-19): The Conversations list on the board is closed by default, and a section you open or close stays that way when the page reloads
+
+- board.html: CONVERSATIONS starts collapsed on the phone and wide layouts; the 60 second reload no longer resets sections you opened. tools/board_test.py checks it.
+
 ## clipch1remake (2026-11-19): Chapter 1 clips made again: 16 passed the gate and are in the game, 27 were held
 
 - Tom (11-19): "run the clip-gen Action for group Chapter 1 with dry_run=false and cap 5". The Action (run 44652080732, 9 minutes) made the 43 clips clipch1fix sent back to To do: 43 made, 0 failed, $3.66 of xAI credit (estimate $3.37).

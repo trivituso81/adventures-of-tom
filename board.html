@@ -206,8 +206,11 @@ function convHtml(s){
   const [k,l]=convState(s),cs=(s.cards||[]).map(cardById).filter(Boolean);
   return '<div class="conv"><div class="t">'+esc(s.title||'Conversation')+'</div><div class="m"><span class="st '+k+'">'+l+'</span><span>last push '+esc(ago(s.last))+'</span>'+((s.tags||[]).slice(0,3).map(t=>'<span class="age">'+esc(t)+'</span>').join(''))+'<a href="'+esc(s.url)+'" target="_blank" rel="noopener">Open chat</a></div>'+(cs.length?'<div class="m">Cards: '+esc(cs.map(c=>c.title).join('; ').slice(0,160))+'</div>':'')+'</div>';
 }
+const secOpen={};   // what Tom opened or closed survives the 60 second reload
+document.addEventListener('toggle',e=>{const d=e.target;if(d&&d.dataset&&d.dataset.sec)secOpen[d.dataset.sec]=d.open;},true);
 function sec(id,name,hint,list,fn,openIt,mine){
   const body=list.length?list.map(fn).join(''):'<div class="none">Nothing here</div>';
+  if(id in secOpen) openIt=secOpen[id];
   return '<details class="sec'+(mine?' mine':'')+'" data-sec="'+id+'"'+(openIt?' open':'')+'><summary><span class="nm">'+name+'</span><span class="ct'+(mine&&list.length?' has':'')+'">'+list.length+'</span><span class="cv">'+esc(hint)+'</span></summary>'+body+'</details>';
 }
 function counts(){
@@ -234,7 +237,7 @@ function renderSections(){
   if(show('ready')) h+=sec('ready','READY TO START','Claude can start these',secReady(),c=>cardHtml(c,'ready'),true);
   if(show('run')) h+=sec('run','RUNNING NOW','in progress',secRun(),c=>cardHtml(c,'run'),true);
   if(show('stuck')) h+=sec('stuck','STUCK','waiting, or quiet for a day',secStuck(),c=>cardHtml(c,'stuck'),true);
-  if(!only) h+=sec('conv','CONVERSATIONS','last 3 days, newest push first',cv,convHtml,true);
+  if(!only) h+=sec('conv','CONVERSATIONS','last 3 days, newest push first',cv,convHtml,false);
   if(!only) h+=sec('done','DONE','closed in the last 3 days',secDone(),c=>cardHtml(c,'done'),false);
   if(!only&&!(B.sessions||[]).length) h=h.replace('<div class="none">Nothing here</div></details><details class="sec" data-sec="done"','<div class="none">None recorded yet: the sync job fills this after the next push.</div></details><details class="sec" data-sec="done"');
   $('secView').innerHTML=h;
@@ -242,7 +245,7 @@ function renderSections(){
 function renderLanes(){
   const vis=c=>themeOk(c)&&(c.col!=='done'||(!c.retired&&c.done&&dayNum(today())-dayNum(c.done)<=3));
   const cvh=recentConvs();
-  let h=sec('conv','CONVERSATIONS','last 3 days, newest push first',cvh,convHtml,true);
+  let h=sec('conv','CONVERSATIONS','last 3 days, newest push first',cvh,convHtml,false);
   h+=B.lanes.map(l=>{
     const inLane=B.cards.filter(c=>c.lane===l.id&&vis(c));
     if(!inLane.length&&l.id!=='tom'&&l.id!=='claude') return '';   // service lanes show only when they hold a card
