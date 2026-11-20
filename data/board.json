@@ -11789,7 +11789,7 @@
    "title": "Fix the speaker name on Rose's first orange-block line",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as gem-canon08: pressing A on Boppy's orange block before the cutscene now shows Rose (happy) saying \"The grass is Boppy color!\" instead of a box headed Orange block. Nothing for Tom to do; look at it only if you happen to play there.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -11815,6 +11815,10 @@
     {
      "d": "2026-11-20",
      "t": "Checked on current main: the cutscene already said Rose; the wrong Orange block name came from pressing A on the block before the scene had played. Fixed in engine/amber-spots.js (first line plays as its speaker). Tested portrait and landscape (tools/gem_canon08_test.py). Built as gem-canon08; nothing for Tom."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-canon08: Pressing A on Boppy's orange block before the family has seen it now shows Rose, not \"Orange block\""
     }
    ],
    "tag": "gem-canon08",
@@ -11827,7 +11831,8 @@
     "effort": "low (one known edit, change the speaker id to Rose (happy))",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-canon08 in data/board.json, history included. Your first push is the commit board: start c-gem-canon08.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is CANON-08. What the tester saw: Priority Medium. Where: `Grump Hollow` Initial Orange-Cube Line. Current build: On the first-time right-shore cutscene, `\"The grass is Boppy color!\"` displays speaker name `Orange block` (no portrait) instead of `Rose`. Locked target: Change speaker ID from `'Orange block'` to `'Rose'` (`happy` mood) on the first-time cutscene step to match the repeatable inspection.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-canon08, push to main, and write the result and the next step onto the card.\n\nYou have my full permission to access the repo."
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-20"
   },
   {
    "id": "c-gem-canon09",
@@ -13852,6 +13857,31 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFp1EkhZXT6PoKYqzZ",
+   "title": "Fix the speaker name on Rose's first orange-block line",
+   "first": "2026-11-20T08:57:56-08:00",
+   "last": "2026-11-20T09:38:08-08:00",
+   "tags": [
+    "gem-canon08"
+   ],
+   "cards": [
+    "c-gem-canon08"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDcB3ZSezrrTtg1qT3",
+   "title": "Move the Project docs into the repo (Project is 97% full)",
+   "first": "2026-11-20T09:16:55-08:00",
+   "last": "2026-11-20T09:37:20-08:00",
+   "tags": [
+    "board-projclean"
+   ],
+   "cards": [
+    "c-projclean",
+    "b-board-projclean"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDt5GX171U9RkvJskx",
    "title": "Fix the muffin pan that never leaves the counter, and add the new Mudling sheet to the Art Library (heistart)",
    "first": "2026-11-19T19:59:41-08:00",
@@ -13882,16 +13912,6 @@
    "tags": [],
    "cards": [
     "c-idea-checkart"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDcB3ZSezrrTtg1qT3",
-   "title": "Move the Project docs into the repo (Project is 97% full)",
-   "first": "2026-11-20T09:16:55-08:00",
-   "last": "2026-11-20T09:16:55-08:00",
-   "tags": [],
-   "cards": [
-    "c-projclean"
    ]
   },
   {
@@ -14049,16 +14069,6 @@
    ],
    "cards": [
     "c-knownwrong"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFp1EkhZXT6PoKYqzZ",
-   "title": "Fix the speaker name on Rose's first orange-block line",
-   "first": "2026-11-20T08:57:56-08:00",
-   "last": "2026-11-20T08:57:56-08:00",
-   "tags": [],
-   "cards": [
-    "c-gem-canon08"
    ]
   },
   {
@@ -15239,8 +15249,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "bac7c06a44fab0238b6dc523ff5e2d8d37a4973e",
- "synced_at": "2026-11-20T17:36:25+00:00",
+ "synced": "ef6753f02ca9d434b5d61153270872028f80f37c",
+ "synced_at": "2026-11-20T17:38:12+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
