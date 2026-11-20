@@ -15654,13 +15654,8 @@
    "lane": "claude",
    "col": "wait",
    "theme": "Game Shell",
-<<<<<<< HEAD
    "title": "Fix the report backlog (1 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-113001-w756. First note: rose facing the wrong way",
-=======
-   "title": "Fix the report backlog (2 open)",
    "next": "welcomefit1 fixed report r-20261120-130739-tr1a. Report r-20261120-113001-w756 (\"rose facing the wrong way\", chapter 1, kitchen at the grands house) waits on Tom card t-rose-facing.",
->>>>>>> 58bf153 (reports-2026-11-20a: welcome frame fits its buttons (report tr1a); skipped runs are not failures; Rose facing to Tom)
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -15699,11 +15694,11 @@
     },
     {
      "d": "2026-11-20",
-<<<<<<< HEAD
      "t": "The backlog now holds 1 report(s)."
-=======
+    },
+    {
+     "d": "2026-11-20",
      "t": "Shipped welcomefit1 (report tr1a). Queued behind Tom card t-rose-facing for the Rose report."
->>>>>>> 58bf153 (reports-2026-11-20a: welcome frame fits its buttons (report tr1a); skipped runs are not failures; Rose facing to Tom)
     }
    ],
    "blocks": [],
@@ -16880,11 +16875,8 @@
    },
    "after": "t-keysecrets2-try",
    "auto": true,
-<<<<<<< HEAD
    "started_at": "2026-11-20T21:57:29+00:00",
    "done": "2026-11-20"
-=======
-   "started_at": "2026-11-20T21:57:29+00:00"
   },
   {
    "id": "t-rose-facing",
@@ -16917,7 +16909,6 @@
      "t": "Made from report r-20261120-113001-w756: the note alone does not say which way is right."
     }
    ]
->>>>>>> 58bf153 (reports-2026-11-20a: welcome frame fits its buttons (report tr1a); skipped runs are not failures; Rose facing to Tom)
   }
  ],
  "sessions": [
