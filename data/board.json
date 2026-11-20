@@ -8209,6 +8209,10 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: nothing was left for it to wait on."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom sent this to the backlog."
     }
    ],
    "links": [
@@ -8219,7 +8223,11 @@
      ],
      "label": "Young Boppy Van Cortlandt '70"
     }
-   ]
+   ],
+   "backlog": {
+    "at": "2026-11-20",
+    "from": "up"
+   }
   },
   {
    "id": "t-cutpolish5",
