@@ -4,7 +4,7 @@ This file wins over claude/clip-reset-plan.md, claude/clip-gate-plan.md and clau
 
 Tom (11-20 12:11): "I'm extremely unhappy with the painted battle poses for the family (card t-clipreset / c-clipposes). I was happy with the earlier WAN video clips (made through Sorceress); the problem is painted still poses."
 
-STATUS: plan only. Nothing generated, nothing spent, no game file changed. Waiting on Tom: card t-wanproof-setup (his approval). The build after it: card c-wanproof (section 4).
+STATUS (wanproof, 2026-11-20): the proof in section 4 is BUILT. Spent $0.65 of the $2.00 cap on fal (start picture $0.15, one guard video $0.50; booked at the estimates). Every check in 4.4 passed on the first video. Waiting on Tom: card t-wanproof-watch (watch ADMIN > BATTLE LAB > NEW BATTLE > PROOF: GRACE'S GUARD (VIDEO) once). Built notes: section 4.7.
 
 ## 1. The rule (Tom's words, also in CLAUDE.md and claude/canon-addendum.md)
 
@@ -151,6 +151,18 @@ A miss: one retry with one change, named by the fault. A second miss the same wa
 | The Lab row | ADMIN > BATTLE LAB > NEW BATTLE > PROOF: GRACE'S GUARD (VIDEO). Grace alone against one Mudling. In this row only, her standing picture is the first picture of the same video, so the eye never sees a switch between two different drawings. It loads this one clip |
 | Checks in the real game | A test that runs the row in portrait and in landscape and fails on: the clip not loaded, feet off the standing ground row at stance, hold or return, standing height off her battle size by more than 1 pixel, a jump of more than 2 pixels where the rise starts or the lowering ends. Screenshots `tools/shots/wanproof-portrait-*.png` and `wanproof-landscape-*.png`, looked at. Then `python3 tools/b3_test.py s8` and `python3 tools/smoke.py` |
 | Tom's part | One card, ask animations: watch the row once (about 1 minute), All good or Something is wrong |
+
+### 4.7 Built (wanproof, 2026-11-20)
+| Step | What happened |
+|---|---|
+| Action | `.github/workflows/wan-gen.yml`, `tools/art-library/wangen.py`, jobs in `tools/art-library/wangen-jobs.json` (a retry is one change there with `rev` raised), prompts in `tools/art-library/prompts/`. Ledger on branch `wangen` counts every call against the cap. `wangen_test.py` (stand-in fal) ALL PASS; dry runs 44814650701 (start) and the video dry run checked the key and the request for free |
+| Start picture | Run 44814828750, Nano Banana 2.1 edit, 848 x 1264. Checks: identity, head share .265 against the hero's .266, framing, flat background passed; FACING FAILED (it kept the hero's turn to the right). The one retry, one change: mirrored left to right (free). Then all passed. Art Library `clipstart-grace`, file `art/clips/start/grace-hero.png`. Mirroring moved the star pouch and the bracelets to her other side (her battle sheet already has the pouch on that side) |
+| Video | Run 44817158346, Wan 3.0, 720 x 1280, 30 a second, 150 pictures; the start picture placed on a 720 x 1280 magenta frame (width filled, padded top and bottom), first and last frame. Source `art/raw/clips/clip-grace-guard-v1.mp4` |
+| 4.4 checks | 1 guard: forearms crossed in an X in front of the lower face, fists closed, knees bent (pass). 2 same girl: face, hair, outfit, style; colours within 3 of 255 of the start picture (pass). 3 standing height first 1,035 px, last 1,035 px; feet on row 1,153 to 1,154 in all 150 pictures; head the same size in the hold (pass). 4 background flat (std about 2), no halo on the cutout, never touches an edge (pass). 5 last against first 1.03 of 255 (pass) |
+| Bake | `bake_clip.py` new kind `guard` (`--rise-end`, `--lower-start`, written as `rise` and `lower`). Video pictures 22 to 118, every 2nd: 49 pictures, 3.27 s at 1x; hold from picture 50, lowering from 90. `data/clips/grace-guard.js`, `art/clips/grace-guard.webp` (1.1 MB, 12.4 MB in phone memory), figure 90 rows like her other clips |
+| Engine | `engine/b3-clips.js`: `B3C.over` (one fight's own clip table), `b3cGuardClip`, `b3cGuardFrame` (rise once, hold forward and back, lowering once, then the first picture). The painted guard, the painted fidget and the code breath step aside in that fight only (`b3PaintState`). `B3_BODY_PAINT` and `B3_BODY_CLIPS` are unchanged, so every other fight still shows the painted guard (removed later by the purge in section 5) |
+| Lab row | `b3LabGuardProof` in `engine/b3-lab.js`: Grace alone against one Mudling, STANDING, then GUARD, BRACED HIT, GUARD DOWN three times, then the list |
+| Game checks | `tools/wanproof_test.py` P1 to P6, portrait and landscape: standing 126.5 battle px against her painted 126.5; feet within 1 px through rise, hold, braced hit and lowering; no jump over 2 px where the rise starts or the lowering ends; braced hit nudges 4.8 px. FAILS: []. Also `b3_test.py s8`, `paint_state_test.py`, `clip_test.py`, `clip_kinds_test.py`, smoke |
 
 ### 4.6 What the proof does not do
 It makes no idle video (her breathing loop is the first clip of the build after the proof), touches no other fighter, removes no painted pose, and changes no real fight.

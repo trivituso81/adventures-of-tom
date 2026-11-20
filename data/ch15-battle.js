@@ -10,7 +10,7 @@ const B2_HUSH_LINES={
   grace:['Okay, so it’s a very small quiet car, and it’s my grandparents’ house, and you’re invited to dinner. Subscribe to dinner!','You can sit next to me. I’ll only tell you to be quiet during my videos. That’s a rule for everybody.'],
   rose:['You can sit by Nara! Nara loves everybody! Nara already loves you!','I made you a name tag. It says HUSH. I spelled the H very carefully.'],
   amy:['Dinner is at six. You’re not late. Late is when you don’t come. Sit.','I have taught a room of thirty kids with a recorder each. You are not the loudest thing I have handled. Sit.'],
-  deedee:['Sit, sit, you’re too thin. Even a train. Who wants rhubarb crisp? Everyone. Even the train.','Oh, honey. Nobody ever saved you a seat? Here. Right here next to me.'],
+  deedee:['Sit, sit, you’re too thin. Even a train. Who wants apple muffins? Everyone. Even the train.','Oh, honey. Nobody ever saved you a seat? Here. Right here next to me.'],
   boppy:['Sit down. Take the weight off. My back understands better than anybody.','Pull up a chair. I’ll tell you about my stomach. It’s loud, but you’ll live.'],
   tnb:['I set you a place. Fork on the left. I’m a server. It’s how I say hello.','Hey. I have a thermos. It’s very quiet cocoa. Sit with us a minute.'],
   nara:['Nara trots to the end of the table and sits down in the ninth chair herself. Come on. Obviously.'],

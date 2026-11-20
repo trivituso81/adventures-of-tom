@@ -1,15 +1,42 @@
 #!/usr/bin/env python3
 """Headless test for music.html (Music Library) against the fake ElevenLabs stub. No real keys.
 Run from the repo root:  python3 tools/music-library/test.py   (starts its own servers; screens go to tools/shots/music-*.png)
-Checks: the index loads and every chip row adds up to 39, search and filters, the key card never shows the key, a wrong key and a missing key explain
-themselves, a make needs two taps (credit estimate shown), the request the stub saw (prompt plus the loop wording, length, instrumental), the take is
-kept and Used, a second take and Use / Built into the game / Delete switching, many at once (two at a time), Export music takes, and that the real game
+keysecrets4: takes are made by the music-gen Action, not by the page. The test plays GitHub with tools/art-library/stub.py, plays the Action by running the
+real tools/music-library/musicgen.py against a local bare git remote (ElevenLabs is stub.py), and serves branch `musicgen` from a folder.
+Checks: the index loads and every chip row adds up to 39, search and filters, the page holds no ElevenLabs key and sends nothing to ElevenLabs, a missing GitHub
+token explains itself, a make needs two taps (credit estimate shown) and commits data/music-requests.json ("music: make <id>"), the Action's refusal (a wrong
+key) is shown on the card, the request the stub saw (prompt plus the loop wording, length, instrumental), the take is kept and Used, a second take and Use / Built into the game / Delete switching, many at once (two at a time), Export music takes, and that the real game
 (index.html) picks the Used take through mcFetch while every other track still comes from music/. Both orientations are looked at."""
-import os, sys, subprocess, time, json, asyncio, base64
+import os, sys, subprocess, time, json, asyncio, base64, tempfile, functools, http.server, socketserver, threading, shutil, urllib.request
 from playwright.async_api import async_playwright
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
 SHOTS = os.path.join(ROOT, 'tools', 'shots'); os.makedirs(SHOTS, exist_ok=True)
-WEB, STUB = 8821, 8822
+WEB, STUB, GHS, BRS = 8821, 8822, 8823, 8824
+TMP = tempfile.mkdtemp(prefix='musictest-'); SERVED = TMP + '/served'; os.makedirs(SERVED)
+REMOTE, WORK = TMP + '/remote.git', TMP + '/work'
+SEEN = set()
+def sh(*a, cwd=None, env=None): return subprocess.run(a, cwd=cwd, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+class Cors(http.server.SimpleHTTPRequestHandler):
+    def end_headers(self): self.send_header('Access-Control-Allow-Origin', '*'); self.send_header('Cache-Control', 'no-store'); super().end_headers()
+    def log_message(self, *a): pass
+def gh_log(): return json.load(urllib.request.urlopen('http://127.0.0.1:%d/log' % GHS))
+def setup_remote():
+    sh('git', 'init', '-q', '--bare', '-b', 'main', REMOTE); os.makedirs(WORK + '/data')
+    open(WORK + '/data/seed.txt', 'w').write('x'); sh('git', 'init', '-q', '-b', 'main', cwd=WORK); sh('git', 'remote', 'add', 'origin', REMOTE, cwd=WORK)
+    g = ('git', '-c', 'user.name=t', '-c', 'user.email=t@t'); sh(*g, 'add', '-A', cwd=WORK); sh(*g, 'commit', '-q', '-m', 'seed', cwd=WORK); assert sh('git', 'push', '-q', 'origin', 'main', cwd=WORK).returncode == 0
+def act(key='test'):
+    """The Action: take the queue the page committed to GitHub (the stub), run musicgen.py for real, and serve what branch musicgen then holds."""
+    f = json.load(urllib.request.urlopen('http://127.0.0.1:%d/files' % GHS)).get('data/music-requests.json')
+    doc = json.loads(base64.b64decode(f['content'])); doc['requests'] = [r for r in doc['requests'] if r['at'] not in SEEN]; SEEN.update(r['at'] for r in doc['requests'])
+    sh('git', 'fetch', '-q', 'origin', 'main', cwd=WORK); sh('git', 'reset', '-q', '--hard', 'origin/main', cwd=WORK)
+    open(WORK + '/data/music-requests.json', 'w').write(json.dumps(doc, indent=1) + '\n')
+    g = ('git', '-c', 'user.name=t', '-c', 'user.email=t@t'); sh(*g, 'add', '-A', cwd=WORK); sh(*g, 'commit', '-q', '-m', 'music: make test', cwd=WORK); sh('git', 'push', '-q', 'origin', 'main', cwd=WORK)
+    env = dict(os.environ, ELEVENLABS_API_KEY=key, ELEVENLABS_BASE='http://127.0.0.1:%d' % STUB, ARTGEN_REMOTE='origin', CI='1')
+    out = TMP + '/out%d' % int(time.time() * 1000)
+    r = sh(sys.executable, '-I', ROOT + '/tools/music-library/musicgen.py', '--repo', WORK, '--out', out, env=env); print(r.stdout)
+    for x in os.listdir(SERVED): shutil.rmtree(SERVED + '/' + x, ignore_errors=True) if os.path.isdir(SERVED + '/' + x) else os.remove(SERVED + '/' + x)
+    sh('git', '--git-dir', REMOTE, 'archive', 'musicgen', '-o', TMP + '/b.tar'); sh('tar', '-xf', TMP + '/b.tar', '-C', SERVED)
+    return r
 fails = []
 def ok(c, m):
     print(('PASS ' if c else 'FAIL ') + m)
@@ -20,8 +47,10 @@ def log():
 async def main():
     web = subprocess.Popen([sys.executable, '-m', 'http.server', str(WEB)], cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     stub = subprocess.Popen([sys.executable, os.path.join(ROOT, 'tools', 'music-library', 'stub.py'), str(STUB)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    time.sleep(3)
-    URL = 'http://localhost:%d/music.html?el=http://127.0.0.1:%d' % (WEB, STUB)
+    ghs = subprocess.Popen([sys.executable, os.path.join(ROOT, 'tools', 'art-library', 'stub.py'), str(GHS)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    srv = socketserver.TCPServer(('127.0.0.1', BRS), functools.partial(Cors, directory=SERVED)); threading.Thread(target=srv.serve_forever, daemon=True).start()
+    setup_remote(); time.sleep(3)
+    URL = 'http://localhost:%d/music.html?gh=http://127.0.0.1:%d&musicgen=http://127.0.0.1:%d&poll=1' % (WEB, GHS, BRS)
     try:
         import urllib.request
         stub_bytes = json.load(urllib.request.urlopen('http://127.0.0.1:%d/size' % STUB))['bytes']
@@ -35,7 +64,7 @@ async def main():
             for g in ('fGroup', 'fKind', 'fUse'):
                 counts = await pg.eval_on_selector_all('#%s .chip:not(:first-of-type)' % g, 'els=>els.map(e=>+e.querySelector(".n").textContent)')
                 ok(sum(counts) == 39, '%s chip counts add up to 39 (%s)' % (g, counts))
-            ok('no key' in await pg.inner_text('#keys'), 'starts with no key')
+            kt = await pg.inner_text('#keys'); ok('no token' in kt and 'paste the ElevenLabs' not in kt, 'starts with no GitHub token and no ElevenLabs key box')
             # filters and search
             await pg.click('#fGroup .chip[data-v="Core"]')
             ok(await pg.locator('.card[data-id]').count() == 6, 'Core shows 6 tracks')
@@ -47,24 +76,31 @@ async def main():
             ok(await pg.locator('.card[data-id]').count() == 6, 'Boss room shows 6 tracks')
             await pg.click('#fUse .chip[data-v="*"]')
             ok(await pg.locator('.card[data-id]').count() == 39, 'clearing the chips brings all 39 back')
-            # key handling
+            # token handling
             await pg.click('[data-make="town"]'); await pg.click('[data-make="town"]')
-            await pg.wait_for_selector('#m-town.err:has-text("Paste the ElevenLabs key")')
-            ok(True, 'make without a key explains itself')
-            await pg.fill('#kx', 'xk-fixture-7731'); await pg.click('#sx')
-            ok('key set' in await pg.inner_text('#keys') and 'xk-fixture-7731' not in await pg.content(), 'key saved, page shows only "key set"')
-            await pg.click('[data-make="town"]'); await pg.click('[data-make="town"]')
-            await pg.wait_for_selector('#m-town.err:has-text("401")')
-            ok(True, 'wrong key shows the 401 message')
-            # edit the prompt, then make a take
+            await pg.wait_for_selector('#m-town.err:has-text("Paste the GitHub token")')
+            ok(True, 'make without a GitHub token explains itself')
+            await pg.fill('#kx', 'test'); await pg.click('#sx')
+            ok('token set' in await pg.inner_text('#keys'), 'token saved')
+            # a make asks GitHub; a wrong ElevenLabs key shows the Action's refusal
             await pg.fill('[data-prompt="town"]', 'A tiny test tune on a ukulele.')
             await pg.fill('[data-len="town"]', '60')
-            await pg.fill('#kx', 'test'); await pg.click('#sx')
             await pg.click('[data-make="town"]')
             ok('TAP AGAIN' in await pg.inner_text('[data-make="town"]') and 'credits' in await pg.inner_text('[data-make="town"]'), 'first tap shows the credit estimate and waits')
             await pg.click('[data-make="town"]')
+            await pg.wait_for_selector('#m-town:has-text("Asked")')
+            put = [x for x in gh_log() if x.get('path') == 'data/music-requests.json']
+            ok(len(put) == 1 and put[0]['msg'] == 'music: make town' and put[0]['branch'] == 'main', 'one commit "music: make town" on main')
+            ok(log() == [], 'the page sent nothing to ElevenLabs')
+            r = act(key='wrong')
+            await pg.wait_for_selector('#m-town.err:has-text("not made")', timeout=30000)
+            ok('401' in await pg.inner_text('#m-town') and 'xk-' not in await pg.content(), 'the Action ran with a refused key and the card says so (401)')
+            ok(len(await pg.locator('.card[data-id="town"] .take').all()) == 0 and await pg.locator('[data-make="town"]').is_enabled(), 'no take kept, MAKE is usable again')
+            await pg.click('[data-make="town"]'); await pg.click('[data-make="town"]')
+            await pg.wait_for_selector('#m-town:has-text("Asked")')
+            act(key='test')
             await pg.wait_for_selector('.card[data-id="town"] .pill.live:has-text("Phone take v1")', timeout=30000)
-            ok(True, 'take v1 made and in the game')
+            ok(True, 'take v1 made on GitHub, kept here and in the game')
             L = log()
             ok(len(L) == 1 and L[0]['ms'] == 60000 and L[0]['instrumental'] is True and L[0]['model'] == 'music_v2_5' and L[0]['format'] == 'auto', 'stub got length 60000 ms, instrumental, the default model music_v2_5 with output_format auto')
             ok(L[0]['prompt'].startswith('A tiny test tune') and L[0]['tail'].endswith('Family-friendly adventure game score.'), 'stub got the edited prompt plus the loop wording')
@@ -73,6 +109,8 @@ async def main():
             ok(await pg.locator('[data-model="town"] option').count() == 3 and await pg.input_value('[data-model="town"]') == 'music_v2_5', 'the card offers 3 models and defaults to music_v2_5')
             await pg.select_option('[data-model="town"]', 'music_v1')
             await pg.click('[data-make="town"]'); await pg.click('[data-make="town"]')
+            await pg.wait_for_selector('#m-town:has-text("Asked")')
+            act()
             await pg.wait_for_selector('.card[data-id="town"] .pill.live:has-text("Phone take v2")', timeout=30000)
             L = log()
             ok(len(L) == 2 and L[1]['model'] == 'music_v1' and L[1]['format'] == 'mp3_44100_128', 'the second take went out as music_v1 with the old output format')
@@ -104,6 +142,10 @@ async def main():
             ok('2 selected' in await pg.inner_text('#bar'), 'bar shows 2 selected')
             await pg.click('#remake'); ok('TAP AGAIN' in await pg.inner_text('#remake') and 'credits' in await pg.inner_text('#remake'), 'Remake 2 shows the credit estimate first')
             await pg.click('#remake')
+            await pg.wait_for_selector('#m-row:has-text("Asked")')
+            puts = [x for x in gh_log() if x.get('path') == 'data/music-requests.json']
+            ok(len(puts) == 4 and puts[-1]['msg'] == 'music: make row, pier', 'many at once is ONE commit "music: make row, pier"')
+            act()
             await pg.wait_for_function('document.querySelector(".card[data-id=row] .pill.live")&&document.querySelector(".card[data-id=row] .pill.live").textContent.includes("Phone take")&&document.querySelector(".card[data-id=pier] .pill.live")&&document.querySelector(".card[data-id=pier] .pill.live").textContent.includes("Phone take")', timeout=45000)
             await pg.wait_for_selector('#bar[hidden]', state='attached', timeout=15000)
             ok(len(log()) == 4, 'many at once made two more takes (4 calls in all)')
@@ -149,7 +191,7 @@ async def main():
             ok(not e2, 'no page errors in landscape: %s' % e2)
             await b.close()
     finally:
-        web.terminate(); stub.terminate()
+        web.terminate(); stub.terminate(); ghs.terminate(); srv.shutdown()
     print('FAILS:', fails)
     sys.exit(1 if fails else 0)
 asyncio.run(main())

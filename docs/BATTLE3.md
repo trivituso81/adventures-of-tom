@@ -370,6 +370,10 @@ Files: `data/b3-clips.js` (`B3_BODY_CLIPS`: owner then state to clip id), `engin
 | Clips wired | Deedee: Windex Spritz (her Basic). Mudling: bump, throw. The Big One: glare, tail slap, chomp, belly flop, polish. (Tom's Lounge Pass and Blockade, Grace's Squeeze and Cube Pop, Rose's Tackle, Lava and Giddyup, Deedee's Wet-Floor and Scrub, and every family cast, play the default animation since clipposes; their Library entries are rejected, "never reviewed by Tom".) |
 | Tests | `python3 tools/b3_test.py s8` (portrait and landscape: monster idle loops, the Basic of each member (Deedee's by clip), the Big One's acts, painted states present, flustered, victory, load fallback). |
 
+### Guard video, kind guard (wanproof, 2026-11-20)
+
+A clip of kind `guard` (`bake_clip.py --kind guard --rise-end F --lower-start F`, fields `rise` and `lower`) is a guard made by a video model: `b3cGuardFrame` (engine/b3-clips.js) shows its first picture as the standing figure, plays the rise once when the guard goes up, loops the held stretch (pictures `rise` to `lower`-1) forward and back while `b3cGuarding` is true, takes a braced hit in the hold (the engine's 7 px nudge), and plays the lowering once when it comes down. Only in a fight that carries its own table, `B3C.over={F,map:{owner:{guard:id}}}`; there `b3PaintState` returns null for that owner's guard and idle (no painted guard, no fidget, no code breath). The one clip so far is Grace's Wan 3.0 guard `grace_guard`, in the Lab row PROOF: GRACE'S GUARD (VIDEO) (`b3LabGuardProof`). Test: `python3 -I tools/wanproof_test.py`. Plan: `claude/video-battle-plan.md` section 4.
+
 ### Painted body states (clipposes, 2026-11-19; the clip reset, `claude/clip-reset-plan.md`)
 
 SUPERSEDED BY RULE (Tom, 2026-11-20): NO PAINTED POSES IN BATTLE (CLAUDE.md). This section describes what the Lab still shows until each state's video exists; do not add to it or tune it. Plan: `claude/video-battle-plan.md`.

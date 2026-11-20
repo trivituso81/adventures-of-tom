@@ -93,7 +93,7 @@ b7DrawMapFx=function(time) {
 };
 
 // ---------- Battle: the Resentment Barrier ring, and the four Relay set pieces ----------
-// B2.relayFx={kind,t0} (seconds, set by data/ch20-battle.js): 'distance' a flaming kiln-pot off a longboard, 'aging' a pepper-rhubarb pie behind a recliner,
+// B2.relayFx={kind,t0} (seconds, set by data/ch20-battle.js): 'distance' a flaming kiln-pot off a longboard, 'aging' a pepper-apple muffin behind a recliner,
 // 'exhaustion' a tornado of pep with two girls on top, 'fear' a golden boule and a dog.
 const CE_BAR_COL={distance:'#6ab0ff',aging:'#c8a0ff',exhaustion:'#ff9a6a',fear:'#7a8ad0'};
 const CE_BAR_NAME={distance:'DISTANCE',aging:'AGING',exhaustion:'EXHAUSTION',fear:'FEAR'};

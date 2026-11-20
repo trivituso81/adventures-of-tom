@@ -14,10 +14,10 @@ Title screen > ADMIN > MUSIC LIBRARY opens `music.html` inside the app (fifth en
 | Hear it | Play on any row plays what the game plays now (his phone take if he picked one, else the built-in mp3). Loop test plays the last 10 s crossfading into the first 10 s, the way the game loops it. |
 | Re-make | Every row IS a text box holding the prompt ElevenLabs reads; the fixed style suffix (loop or jingle wording) shows greyed below it and is added at send time. Length in seconds is a small field (loops 60, 75 or 90; jingles 4 to 12). Takes and make opens New take. |
 | Choose | The newest take plays in the game on this phone at once. Use on any older take, or on Built into the game, switches. Takes are never lost unless he deletes one. |
-| Many at once | Checkbox per row, Select all N shown, bottom bar N selected, Clear, Remake N (two at a time, Stop works). Before any remake the page shows the credit estimate (about 11 to 14 ElevenLabs credits per second of music, so a 60 s loop is roughly 700 to 850) and asks once. |
+| Many at once | Checkbox per row, Select all N shown, bottom bar N selected, Clear, Remake N (one request; GitHub makes two at a time). Before any remake the page shows the credit estimate (about 11 to 14 ElevenLabs credits per second of music, so a 60 s loop is roughly 700 to 850) and asks once. |
 | Keep for good | Export music takes shares `local-music-export.json` (`{tracks:[{id,mp3,prompt,len,model,dur}]}`). Claude merges it (section 4). |
 
-Rules carried over: the key (localStorage `aot-el-key`, the same one the Voice Library uses) is never in the repo or a log; the page shows "key set" or "no key". The track id and where it plays cannot be edited on the page (ids are wired into `MC_TRACKS` and the map tables).
+keysecrets4: the page holds no ElevenLabs key. New take and Remake commit `data/music-requests.json`; the `music-gen` Action (`tools/music-library/musicgen.py`, repo secret `ELEVENLABS_API_KEY`) makes the take and keeps it on branch `musicgen`; the page polls it and keeps the take in the browser. The page shows "token set" or "no token" for the GitHub token it needs to ask. The track id and where it plays cannot be edited on the page (ids are wired into `MC_TRACKS` and the map tables).
 
 ## 2. The tracks (38 today, music/<id>.mp3)
 

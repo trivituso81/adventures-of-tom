@@ -39,7 +39,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Grace | Proud | It's limited edition. There are only two in the whole world. You can squeeze it! |
 | Tom | Happy | That's the shiniest dumpling I've ever seen. And I've seen a LOT of dumplings. |
 | Rose | Happy | Come on, Tata! Let's go! |
-| Grace | Happy | Tata! Deedee made rhubarb crisp for you. It's cooling RIGHT NOW. |
+| Grace | Happy | Tata! Deedee made apple muffins for you. It's cooling RIGHT NOW. |
 | Rose | Happy | I already licked the spoon. Don't tell. |
 | Tom | Unimpressed | Then we better hurry. Before somebody licks the rest. |
 | Deedee | Loving | My favorite son! |
@@ -49,7 +49,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Grace | Unimpressed | Deedee. They're on your head. |
 | Deedee | Happy | So they are. Not one word to Boppy. |
 | Tom | Loving | I brought you a sourdough loaf. Baked it yesterday. It flew here on my lap. |
-| Deedee | Happy | Your bread and my rhubarb crisp. Now THAT is a meal. |
+| Deedee | Happy | Your bread and my apple muffins. Now THAT is a meal. |
 | Deedee | Happy | A sliver for me. Just a sliver. Sourdough gives me gas. |
 | Tom | Unimpressed | Mom, EVERYTHING gives you gas. |
 | Deedee | Loving | And I eat it anyway. That's love, Tom. |
@@ -242,7 +242,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Rose | Happy | Apron pocket, Deedee! |
 | Deedee | Loving | Thank you, Rosie. Now. Let me look at him. |
 | Boppy | Happy | ...Almost isn't eating. Almost is fine. |
-| Deedee | Loving | Sit down, you. I made rhubarb crisp. Everybody sit. And eat SLOWLY. |
+| Deedee | Loving | Sit down, you. I made apple muffins. Everybody sit. And eat SLOWLY. |
 | Boppy | Happy | Slowly. Finally. Somebody in this family gets it. |
 | Tom | Happy | Best fishing trip ever. Nobody fell in. Mostly. |
 | Deedee | Loving | I love you all to the moon and back. Now eat. |
@@ -342,7 +342,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Grace | Proud | The footprints go into all three. Then out again. Then east, to the Cafetorium. |
 | Amy | Loving | Girls. That's excellent detective work. Gold stars. Both of you. |
 | Grace | Happy | FOR EVERYONE, LOVE DEEDEE. That's Deedee’s handwriting! Everyone means us! |
-| Rose | Surprised | Rhubarb crisp! Deedee brings the teachers CRISP? |
+| Rose | Surprised | Apple muffins! Deedee brings the teachers CRISP? |
 | Amy | Loving | She never told me that. Of course she never told me that. |
 | Tom | Loving | To the moon and back. And apparently to the staff room. |
 | Amy | Proud | I've never been late in my life. Not once. Not even when I was born. I was early. |
@@ -1177,9 +1177,9 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Rose | Happy | I wasn’t going to touch it. I was going to boop it. |
 | Amy | Unimpressed | Rose. |
 | Rose | Happy | A very small boop. |
-| Deedee | Loving | Rhubarb crisp, nine minutes. Rhubarb crisp, nine minutes. Hello, sweetie. Rhubarb crisp, nine minutes. |
+| Deedee | Loving | Apple muffins, nine minutes. Apple muffins, nine minutes. Hello, sweetie. Apple muffins, nine minutes. |
 | Amy | Scared | Mom. It’s Amy. Mom, look at me. |
-| Deedee | Loving | Hello, Amy. Rhubarb crisp, nine minutes. Do you want a bite? Rhubarb crisp. Nine minutes. |
+| Deedee | Loving | Hello, Amy. Apple muffins, nine minutes. Do you want a bite? Apple muffins. Nine minutes. |
 | Tom | Sad | She’s looping. Look at the tray. It’s the same crisp. Every time. It’s fresh, it’s perfect, and nobody ever eats it. |
 | Tom | Sad | Amber is warmth that got stuck. She’s been giving it to nobody for hours. It needs somewhere to go. |
 | Rose | Surprised | Maybe nobody ate it. |
@@ -1311,7 +1311,7 @@ Fact: every spoken line by a cast member with an emotion sheet, in story order, 
 | Boppy | Angry | Why am I scooting? |
 | Deedee | Unimpressed | Because you’re the widest. |
 | Boppy | Angry | My BACK is the widest. |
-| Deedee | Loving | Rhubarb crisp. Nine minutes. Eat. |
+| Deedee | Loving | Apple muffins. Nine minutes. Eat. |
 | Deedee | Loving | Everybody eats. |
 | Amy | Happy | That’s the point of the loud. |
 | Amy | Unimpressed | That’s not a photograph. That’s a trap. |

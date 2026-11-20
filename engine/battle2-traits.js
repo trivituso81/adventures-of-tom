@@ -10,7 +10,7 @@
 //          3 turns. Tom takes single hits aimed at her (40% softer) and her skills hit a second time at 40%.
 //   Amy    Pace Setter: every turn she acts without being knocked out adds a Cadence stack: +5% PEP for the whole
 //          party, up to +25%. A knockout resets it.
-//   Deedee Warm Crust Tokens: Rhubarb Crisp (1), Sunday Dinner (3) and Sourdough & Rhubarb (2) put crusts on the
+//   Deedee Warm Crust Tokens: Apple Muffins (1), Sunday Dinner (3) and Sourdough & Apple (2) put crusts on the
 //          shared tray (max 3). Anyone can eat one from the ▼ Bag as a free action, once per turn: heal 20%
 //          (Nara loves homemade food: 40% and POW +30%).
 //   Boppy  Heartburn: +1 pip when he is hit while guarding, or eats a pepper (Pepper Breath, Hot Pepper). At 3 pips

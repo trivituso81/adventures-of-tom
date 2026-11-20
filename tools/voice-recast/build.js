@@ -52,7 +52,7 @@ const DEEDEE_DLG=[ // [regex on the line, direction]; first match wins; default 
  [/^Tommy! There you are/,'[excited, flustered, bright]'],[/^Did he\.$/,'[knowing, amused]'],[/^Nobody believes/,'[fond, teasing]'],[/pretend not to be/,'[warm, knowing, fond of Ellie]'],
  [/^Honey, show her/,'[gentle, warm]'],[/^Admit three/,'[thrilled, counting it out]'],[/wearing the tie/,'[sweet, gently insistent]'],[/hedge/,'[concerned, then laughing at herself]'],
  [/purple velvet|Purple velvet/,'[recognizing it, hushed, certain]'],[/Ellie\. There was a BALL/,'[bursting to tell her, bright, warm]'],[/envelope/,'[surprised, flustered, laughing at herself]'],
- [/Everybody sit\. Everybody/,'[hostess running the table, fond, fast, laughing]'],[/Rhubarb crisp in the oven/,'[cheerful, running the house with love]'],[/Say it back/,'[loving, then playful, coaxing]'],
+ [/Everybody sit\. Everybody/,'[hostess running the table, fond, fast, laughing]'],[/Apple muffins in the oven/,'[cheerful, running the house with love]'],[/Say it back/,'[loving, then playful, coaxing]'],
  [/bruise/,'[doting, sharp-eyed, teasing]'],[/Nurse's orders/,'[cheeky, warm]'],[/corner/,'[playfully firm, then giving in with a smile]'],[/Sunday dinner is at five/,'[cheerful, house rule, smiling]'],
  [/Shoes OFF/,'[playful, house-proud, not angry]'],[/Boppy says he/,'[dry, fond, a wife\'s report]'],[/frost something/,'[inviting, bright]']
 ];
@@ -61,7 +61,7 @@ const ELLIE_DLG=[
  [/good heart/,'[stern, fond, looking him over]'],[/good scarf/,'[dry, matter-of-fact]'],[/too much/,'[wry, grand, unbothered]'],[/staying with me/,'[amused, conspiratorial]'],
  [/Moon Club\. I haven't/,'[quiet, distant, wistful]'],[/Was there a ball/,'[curious, imperious, leaning in]'],[/last dance\. I was in a hurry/,'[dry, remembering, wry]'],[/fit me since 1972/,'[grand, generous, dry]'],
  [/Sit\. Tell me about the airport/,'[imperious, commanding, delighted]'],[/winning\. I'm also cheating/,'[smug, amused]'],[/Keep it warm for me/,'[dry, wry, fond]'],[/Stand up straight/,'[approving, dry]'],
- [/rhubarb crisp/,'[dry, amused]'],[/Paris eleven times/,'[grand, languid, deadpan]'],[/Deedee has an aunt/,'[imperious, dry]'],[/everyone else is a little dull/,'[sly, grand]'],
+ [/apple muffins/,'[dry, amused]'],[/Paris eleven times/,'[grand, languid, deadpan]'],[/Deedee has an aunt/,'[imperious, dry]'],[/everyone else is a little dull/,'[sly, grand]'],
  [/everything\. The last dance/,'[wistful, grand, remembering]'],[/Purple velvet\. I was/,'[offhand, quiet]'],[/Ticket seven\.$/,'[softly, moved, surprised]'],[/^Go\. Dance/,'[grand, generous, warm]'],[/never went back for it/,'[quiet, wistful, dry]']
 ];
 function cueFor(voice,kind,text){

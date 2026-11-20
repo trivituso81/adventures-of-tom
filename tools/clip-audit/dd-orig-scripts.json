@@ -20,7 +20,7 @@
   "source": "claude/voice-baker-scripts-deedee.json"
  },
  "b5": {
-  "script": "[cheerful offer] Who wants rhubarb crisp? [matter-of-fact, firm] Everyone wants rhubarb crisp.",
+  "script": "[cheerful offer] Who wants apple muffins? [matter-of-fact, firm] Everyone wants apple muffins.",
   "source": "claude/voice-baker-scripts-deedee.json"
  },
  "b6": {
@@ -44,7 +44,7 @@
   "source": "claude/voice-baker-scripts-deedee.json"
  },
  "b11": {
-  "script": "[proud, warning, warm] Fresh rhubarb crisp! Careful, it's HOT!",
+  "script": "[proud, warning, warm] Fresh apple muffins! Careful, it's HOT!",
   "source": "claude/voice-baker-scripts-deedee.json"
  },
  "b12": {
@@ -164,7 +164,7 @@
   "source": "claude/voice-baker-scripts-deedee.json"
  },
  "b41": {
-  "script": "[cheering, generous, bright] Rhubarb crisp for everyone! You earned it!",
+  "script": "[cheering, generous, bright] Apple muffins for everyone! You earned it!",
   "source": "claude/voice-baker-scripts-deedee.json"
  },
  "b42": {
@@ -176,7 +176,7 @@
   "source": "claude/voice-baker-scripts-deedee.json"
  },
  "d44": {
-  "script": "[pleased, proud of both of them] Your bread and my rhubarb crisp. Now THAT is a meal.",
+  "script": "[pleased, proud of both of them] Your bread and my apple muffins. Now THAT is a meal.",
   "source": "claude/dialogue-scripts-deedee.json"
  },
  "d45": {
@@ -212,7 +212,7 @@
   "source": "claude/dialogue-scripts-deedee.json"
  },
  "d53": {
-  "script": "[brisk, cheerful, running the house] Rhubarb crisp in the oven, dinner on the stove, floors just mopped. [firm] Shoes off. [bright] Who wants a cookie?",
+  "script": "[brisk, cheerful, running the house] Apple muffins in the oven, dinner on the stove, floors just mopped. [firm] Shoes off. [bright] Who wants a cookie?",
   "source": "claude/dialogue-scripts-deedee.json"
  },
  "d54": {
@@ -408,7 +408,7 @@
   "source": "claude/dialogue-scripts-deedee.json"
  },
  "d133": {
-  "script": "[firm, then giving in with a smile] Rhubarb crisp is cooling on the counter. Do not touch it. [relenting] Okay, one corner.",
+  "script": "[firm, then giving in with a smile] Apple muffins is cooling on the counter. Do not touch it. [relenting] Okay, one corner.",
   "source": "claude/dialogue-scripts-deedee.json"
  },
  "d134": {
@@ -436,7 +436,7 @@
   "source": "claude/dialogue-scripts-deedee.json"
  },
  "d140": {
-  "script": "[fond, firm, in charge of the table] Sit down, you. I made rhubarb crisp. Everybody sit. [pointed, to Boppy] And eat SLOWLY.",
+  "script": "[fond, firm, in charge of the table] Sit down, you. I made apple muffins. Everybody sit. [pointed, to Boppy] And eat SLOWLY.",
   "source": "claude/dialogue-scripts-deedee.json"
  },
  "d141": {

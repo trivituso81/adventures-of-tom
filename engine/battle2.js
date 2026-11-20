@@ -1430,7 +1430,7 @@ function b2Win() {
   enqueue(...steps);
 }
 function b2Lose() {
-  if(b7Pie()) return;   // Rose Mode: Deedee's emergency Rhubarb Pie, once a fight (engine/feel.js)
+  if(b7Pie()) return;   // Rose Mode: Deedee's emergency Apple Muffin, once a fight (engine/feel.js)
   battle.state='busy'; B2.ui='busy'; b2Render();
   sfx.lose();
   enqueue(()=>b2Msg('Everything goes a bit puddle-shaped.'),1800,()=>{

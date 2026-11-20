@@ -87,18 +87,23 @@ header{padding:10px 28px}
 // Music Library. Every track the game plays is one card: hear it, edit its prompt, make a new take with ElevenLabs Music, pick which take
 // the game plays on this device. Takes live in this browser's IndexedDB 'aot-music-library' (engine/local-music.js reads the same store at
 // startup, so the take marked Use plays in the game at once). The list comes from data/music-index.json (tools/music-library/make-index.js).
-// The key is the same one the Voice Library uses (localStorage 'aot-el-key'); it is never written into the page or logged.
-// Test override: ?el=<base url> points ElevenLabs calls at tools/music-library/stub.py.
+// keysecrets4: no ElevenLabs key lives on this page. MAKE commits data/music-requests.json ("music: make <id>"); the music-gen Action makes the take with the
+// repo secret ELEVENLABS_API_KEY and keeps it on branch musicgen; pollPending imports it into this browser's takes. The page needs only the GitHub token
+// (the one the Art Library holds, localStorage 'aot-gh-token').
+// Test overrides: ?gh=<base url> (GitHub API) and ?musicgen=<base url> (branch musicgen files), ?poll=<seconds>.
 const $=id=>document.getElementById(id);
 const Q=new URLSearchParams(location.search);
-const KEYNAME='aot-el-key', CREDITS=[11,14];
+const KEYNAME='aot-gh-token', PEND_KEY='aot-music-pending', REQ_PATH='data/music-requests.json', CREDITS=[11,14];
+const GH_OWNER='trivituso81', GH_REPO='adventures-of-tom', GH_BRANCH='main';
 // Models (ElevenLabs docs, 2026-11-19): music_v1 is deprecated and ElevenLabs removes it on 2027-01-31; music_v2_5 is the newest and the default here. The choice is per track and is stored on every take.
 const MODELS=[['music_v2_5','v2.5 (newest)'],['music_v2','v2'],['music_v1','v1 (old, ends 2027-01-31)']], DEFMODEL='music_v2_5';
 const LS={get(k){try{return localStorage.getItem(k)||'';}catch(e){return '';}},set(k,v){try{localStorage.setItem(k,v);return true;}catch(e){return false;}},del(k){try{localStorage.removeItem(k);}catch(e){}}};
-const EL=()=>(Q.get('el')||'https://api.elevenlabs.io').replace(/\/+$/,'');
+const GH_BASE=()=>(Q.get('gh')||'https://api.github.com').replace(/\/+$/,'');
+const MG_BASE=()=>(Q.get('musicgen')||'https://raw.githubusercontent.com/'+GH_OWNER+'/'+GH_REPO+'/musicgen').replace(/\/+$/,'')+'/';
+const POLL_MS=(+Q.get('poll')>0?+Q.get('poll'):20)*1000;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const toast=m=>{const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display='none',3500);};
-let IDX=null, TAKES={}, USE={}, DB=null, PL=null, AC=null, RUN=null, STOP=false, ARMED=null;
+let IDX=null, TAKES={}, USE={}, DB=null, PL=null, AC=null, ARMED=null;
 const SEL=new Set(), OPEN=new Set(), BUSY={}, MSG={};
 let PROMPTS={}, LENS={}, MODS={};
 try{PROMPTS=JSON.parse(LS.get('aot-ml-prompts')||'{}')||{};}catch(e){}
@@ -136,14 +141,13 @@ async function setUse(id,key){
 // ---------- key card ----------
 function paintKeys(){
   const k=!!LS.get(KEYNAME);
-  $('keys').innerHTML='<label style="margin-top:0">ElevenLabs key (the same one the Voice Library uses) <span class="'+(k?'ok':'err')+'">'+(k?'key set':'no key')+'</span></label>'+
-  '<div class="row"><input type="password" id="kx" placeholder="paste the ElevenLabs key" autocomplete="off" style="flex:1"><button class="small" id="sx">Save</button>'+(k?'<button class="small" id="dx">Remove</button>':'')+'</div>'+
-  '<div class="hint" style="margin-top:6px">The key needs the Music permission. Listening and picking takes needs no key.</div>';
+  $('keys').innerHTML='<label style="margin-top:0">GitHub token (the same one the Art Library uses) <span class="'+(k?'ok':'err')+'">'+(k?'token set':'no token')+'</span></label>'+
+  (k?'':'<div class="row"><input type="password" id="kx" placeholder="paste the GitHub token" autocomplete="off" style="flex:1"><button class="small" id="sx">Save</button></div>')+
+  '<div class="hint" style="margin-top:6px">New takes are made on GitHub with the saved ElevenLabs key, so this page needs no ElevenLabs key. Listening and picking takes needs no token.</div>';
 }
 $('keys').addEventListener('click',e=>{
   if(e.target.id==='sx'){const v=($('kx').value||'').trim();if(!v)return toast('Paste it first.');if(!LS.set(KEYNAME,v))return toast('This browser would not save it.');paintKeys();}
-  else if(e.target.id==='dx'){LS.del(KEYNAME);paintKeys();}
-});
+  });
 
 // ---------- filters ----------
 function matches(t,skip){
@@ -298,69 +302,103 @@ async function play(id,mode,key){
   }catch(e){if(PL===mine){PL=null;paintPlay();}toast(e.message||'Could not play that.');}
 }
 
-// ---------- ElevenLabs Music ----------
-async function apiErr(r){
-  let t='';try{t=await r.text();const j=JSON.parse(t);const d=j.detail;if(d&&typeof d==='object'&&!Array.isArray(d))t=d.message||d.status||JSON.stringify(d);else if(Array.isArray(d))t=d.map(x=>x.msg).join('; ');else if(d)t=String(d);}catch(e){}
-  const c=r.status,hint=c===401?' (the key was not accepted)':c===403?' (the key may lack the Music permission, or the plan does not include Music)':c===402||c===429?' (check the ElevenLabs credits and plan)':c===422?' (the prompt was refused, try other words)':'';
-  return new Error('ElevenLabs '+c+hint+': '+String(t).replace(LS.get(KEYNAME)||'\u0000','[key]').slice(0,160));
-}
+// ---------- ElevenLabs Music, made on GitHub (music-gen Action) ----------
 function metaDur(blob){return new Promise(res=>{const a=new Audio(),u=URL.createObjectURL(blob),done=v=>{URL.revokeObjectURL(u);res(v);};a.preload='metadata';a.onloadedmetadata=()=>done(isFinite(a.duration)?Math.round(a.duration*10)/10:null);a.onerror=()=>done(null);setTimeout(()=>done(null),5000);a.src=u;});}
-async function makeTake(id){
-  const t=T(id),key=LS.get(KEYNAME);
-  if(!key)throw new Error('Paste the ElevenLabs key at the top first.');
-  const text=promptOf(t).trim();if(!text)throw new Error('The prompt is empty.');
+const textToB64=s=>{const u=new TextEncoder().encode(s);let b='';for(let i=0;i<u.length;i+=0x8000)b+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(b);};
+const b64ToText=c=>{const bin=atob(String(c).replace(/\s/g,'')),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new TextDecoder().decode(u);};
+async function gh(method,path,body){
+  const tok=LS.get(KEYNAME);if(!tok)throw new Error('Paste the GitHub token at the top first: takes are made on GitHub, and the token is how this page asks.');
+  let r;try{r=await fetch(GH_BASE()+'/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+path+(method==='GET'?'?ref='+GH_BRANCH+'&t='+Date.now():''),{method,cache:'no-store',headers:Object.assign({Authorization:'Bearer '+tok,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},body?{'Content-Type':'application/json'}:{}),body:body?JSON.stringify(body):undefined});}
+  catch(e){throw new Error('The browser could not reach GitHub. Check the network and try again.');}
+  const txt=await r.text();let j=null;try{j=JSON.parse(txt);}catch(e){}
+  return {status:r.status,ok:r.ok,json:j,text:txt.split(tok).join('[token]').slice(0,200)};
+}
+const ghFail=(g,what)=>new Error(g.status===401||g.status===403?'GitHub refused the token while '+what+' ('+g.status+'). Check the token has write access to the repository.':'GitHub said '+g.status+' while '+what+': '+g.text);
+const pendGet=()=>{try{return(JSON.parse(LS.get(PEND_KEY)||'[]')||[]).filter(p=>p&&p.id&&Date.now()-p.at<40*60000);}catch(e){return [];}};
+const pendSet=a=>LS.set(PEND_KEY,JSON.stringify(a));
+let POLL=0;
+// One commit asks for every id in the list (a repeat of an id replaces its older request).
+async function commitRequests(reqs){
+  let last='';
+  for(let i=0;i<6;i++){
+    if(i)await new Promise(res=>setTimeout(res,1500*i));
+    const g=await gh('GET',REQ_PATH);let doc={requests:[]},sha;
+    if(g.ok){try{doc=JSON.parse(b64ToText(g.json.content||'')||'{"requests":[]}');}catch(e){doc={requests:[]};}sha=g.json.sha;}
+    else if(g.status!==404)throw ghFail(g,'reading the request list');
+    const ids=new Set(reqs.map(r=>r.id));
+    doc.requests=(doc.requests||[]).filter(r=>!ids.has(r.id)).concat(reqs);
+    const body={message:'music: make '+reqs.map(r=>r.id).join(', ').slice(0,100),content:textToB64(JSON.stringify(doc,null,1)+'\n'),branch:GH_BRANCH};if(sha)body.sha=sha;
+    const w=await gh('PUT',REQ_PATH,body);
+    if(w.ok)return;if(w.status!==409&&w.status!==422)throw ghFail(w,'sending the request');last=w.status+': '+w.text;
+  }
+  throw new Error('The request list kept changing under us. Try again in a minute. (GitHub said '+last.slice(0,120)+')');
+}
+function buildRequest(id){
+  const t=T(id),text=promptOf(t).trim();
+  if(!text)throw new Error('The prompt is empty.');
   const len=lenOf(t),lim=t.kind==='loop'?[15,120]:[3,15];
   if(!(len>=lim[0]&&len<=lim[1]))throw new Error('Length must be '+lim[0]+' to '+lim[1]+' seconds for a '+(t.kind==='loop'?'loop':'jingle')+'.');
-  const prompt=text+' '+IDX.suffix[t.kind],model=modelOf(t);
-  let r;
-  try{r=await fetch(EL()+'/v1/music?output_format='+(model==='music_v1'?'mp3_44100_128':'auto'),{method:'POST',headers:{'xi-api-key':key,'Content-Type':'application/json',Accept:'audio/mpeg'},body:JSON.stringify({prompt,music_length_ms:Math.round(len*1000),model_id:model,force_instrumental:true})});}
-  catch(e){throw new Error('The browser could not reach ElevenLabs. Check the network and try again.');}
-  if(!r.ok)throw await apiErr(r);
-  const ab=await r.arrayBuffer();
-  if(ab.byteLength<2000)throw new Error('ElevenLabs sent back almost nothing ('+ab.byteLength+' bytes).');
-  const blob=new Blob([ab],{type:'audio/mpeg'}),dur=await metaDur(blob),n=(takesOf(id)[0]?takesOf(id)[0].n:0)+1;
-  const row={key:id+'|'+n,trackId:id,n,mp3:blob,prompt,len,model,dur,date:new Date().toISOString(),short:!!(dur&&dur<len*.85)};
-  if(!DB)throw new Error('This browser would not keep the take.');
-  await tx('takes','readwrite',s=>s.put(row));
-  (TAKES[id]=TAKES[id]||[]).unshift(row);
-  await setUse(id,row.key);
-  return row;
+  return {id,prompt:text+' '+IDX.suffix[t.kind],len,model:modelOf(t),at:Date.now()};
+}
+async function ask(ids){
+  if(!LS.get(KEYNAME))throw new Error('Paste the GitHub token at the top first: takes are made on GitHub, and the token is how this page asks.');
+  const reqs=[],at=Date.now();
+  ids.forEach((id,i)=>{const r=buildRequest(id);r.at=at+i;reqs.push(r);});
+  await commitRequests(reqs);
+  pendSet(pendGet().filter(p=>!ids.includes(p.id)).concat(reqs.map(r=>({id:r.id,at:r.at,len:r.len,model:r.model,prompt:r.prompt}))));
+  if(!POLL)POLL=setTimeout(pollPending,POLL_MS);
+}
+async function jsonAt(file){try{const r=await fetch(MG_BASE()+file+'?t='+Date.now(),{cache:'no-store'});return r.ok?await r.json():null;}catch(e){return null;}}
+// Every 20 s while a request waits: keep what the Action made as the track's next take (and Use it), or say why it made nothing.
+async function pollPending(){
+  POLL=0;const P=pendGet();if(!P.length)return;
+  const idx=await jsonAt('index.json'),rep=await jsonAt('musicgen-report.json'),repAt=rep&&rep.at?Date.parse(rep.at):0,left=[];
+  for(const p of P){
+    const got=idx&&(idx.takes||[]).find(x=>x.id===p.id&&x.at===p.at);
+    if(got){
+      try{
+        const r=await fetch(MG_BASE()+got.file,{cache:'no-store'});if(!r.ok)throw new Error('the take file answered '+r.status);
+        const ab=await r.arrayBuffer(),blob=new Blob([ab],{type:'audio/mpeg'}),dur=await metaDur(blob),n=(takesOf(p.id)[0]?takesOf(p.id)[0].n:0)+1;
+        const row={key:p.id+'|'+n,trackId:p.id,n,mp3:blob,prompt:got.prompt,len:got.len,model:got.model,dur,date:new Date().toISOString(),short:!!(dur&&dur<got.len*.85),srvAt:p.at};
+        if(!DB)throw new Error('This browser would not keep the take.');
+        await tx('takes','readwrite',s=>s.put(row));(TAKES[p.id]=TAKES[p.id]||[]).unshift(row);await setUse(p.id,row.key);
+        MSG[p.id]={text:'Done: v'+row.n+' ('+fmt(row.dur)+' s)'+(row.short?'. It came back shorter than the '+row.len+' s asked for; it is kept, so listen before you trust it as a loop.':'. The game plays it on this device now.'),err:false};
+      }catch(e){MSG[p.id]={text:'The take was made but this page could not keep it: '+String(e.message||e),err:true};}
+      BUSY[p.id]=false;refreshCard(p.id);continue;
+    }
+    if(rep&&repAt>=p.at-120000&&(rep.asked||[]).includes(p.id)){
+      const f=(rep.failed||[]).find(x=>x.id===p.id||x.id==='*');
+      if(f){MSG[p.id]={text:'The take was not made: '+f.why,err:true};BUSY[p.id]=false;refreshCard(p.id);continue;}
+    }
+    left.push(p);
+  }
+  pendSet(left);if(left.length)POLL=setTimeout(pollPending,POLL_MS);
 }
 async function runOne(id){
-  ctx();BUSY[id]=true;setMsg(id,'Making the take... about a minute.');refreshCard(id);
-  try{const row=await makeTake(id);MSG[id]={text:'Done: v'+row.n+' ('+fmt(row.dur)+' s)'+(row.short?'. It came back shorter than the '+row.len+' s asked for; it is kept, so listen before you trust it as a loop.':'. The game plays it on this device now.'),err:false};}
-  catch(e){MSG[id]={text:String(e.message||e),err:true};}
-  BUSY[id]=false;refreshCard(id);
+  ctx();BUSY[id]=true;setMsg(id,'Asking GitHub...');refreshCard(id);
+  try{await ask([id]);setMsg(id,'Asked. GitHub makes the take (about a minute); it shows up here by itself and you can close the page.',false);}
+  catch(e){BUSY[id]=false;MSG[id]={text:String(e.message||e),err:true};}
+  refreshCard(id);
 }
 
 // ---------- many at once ----------
 function paintBar(){
   const b=$('bar'),n=SEL.size;
-  if(!n&&!RUN){b.hidden=true;return;}
+  if(!n){b.hidden=true;return;}
   b.hidden=false;
-  if(RUN){b.innerHTML='<span class="grow">Making '+RUN.done+' of '+RUN.total+'...</span><button class="bad" id="stop">Stop</button>';return;}
   const secs=[...SEL].reduce((a,id)=>a+(T(id)?lenOf(T(id)):0),0);
   b.innerHTML='<span class="grow">'+n+' selected</span><button class="small" id="bclear">Clear</button><button class="gold" id="remake">'+(ARMED==='bulk'?'TAP AGAIN: about '+cr(secs)+' credits':'Remake '+n)+'</button>';
 }
 $('bar').addEventListener('click',e=>{
   if(e.target.id==='bclear'){SEL.clear();paintFilters();paintList();paintBar();}
-  else if(e.target.id==='stop'){STOP=true;e.target.disabled=true;e.target.textContent='Stopping...';}
   else if(e.target.id==='remake')armed('bulk',paintBar,bulk);
 });
 async function bulk(){
   const ids=[...SEL].filter(T);if(!ids.length)return;
-  ctx();STOP=false;RUN={total:ids.length,done:0};paintBar();
-  let i=0;
-  const worker=async()=>{
-    while(!STOP&&i<ids.length){
-      const id=ids[i++];BUSY[id]=true;setMsg(id,'Making the take... about a minute.');refreshCard(id);
-      try{const row=await makeTake(id);SEL.delete(id);MSG[id]={text:'Done: v'+row.n+' ('+fmt(row.dur)+' s)'+(row.short?'. Came back shorter than asked.':'.'),err:false};}
-      catch(e){MSG[id]={text:String(e.message||e),err:true};}
-      BUSY[id]=false;RUN.done++;refreshCard(id);paintBar();
-    }
-  };
-  await Promise.all([worker(),worker()]);
-  RUN=null;paintFilters();paintBar();
+  ctx();ids.forEach(id=>{BUSY[id]=true;setMsg(id,'Asking GitHub...');refreshCard(id);});
+  try{await ask(ids);ids.forEach(id=>{SEL.delete(id);setMsg(id,'Asked. GitHub makes the take (about a minute); it shows up here by itself.',false);});}
+  catch(e){ids.forEach(id=>{BUSY[id]=false;MSG[id]={text:String(e.message||e),err:true};});toast(String(e.message||e));}
+  ids.forEach(refreshCard);paintFilters();paintBar();
 }
 
 // ---------- export ----------
@@ -382,13 +420,14 @@ $('exp').onclick=async()=>{
   catch(e){$('list').innerHTML='<div class="card err">The track list would not load. Go back and open the Music Library again.</div>';return;}
   try{DB=await idb();await loadDb();}catch(e){DB=null;toast('This browser would not keep takes. You can still listen.');}
   $('q').value=F.q;
-  $('howto').textContent='Every track the game plays is one card. Play hears what the game plays now on this device (your take if you picked one, else the built-in track). Loop test plays the end of a loop crossfading into its start, the way the game loops it. Edit the prompt right in the card; New take sends it to ElevenLabs (the fixed loop or jingle wording shown in grey is added) and the new take plays in the game on this device at once. Takes lists every take: Use switches, Built into the game goes back. Tick cards (or Select all shown) and Remake does many at once, two at a time. Credits are about '+CREDITS[0]+' to '+CREDITS[1]+' per second of music, so a 60 s loop is roughly '+cr(60)+'; every make asks you to tap twice. A phone take plays raw (no loudness match, no trimming), so it can sound louder or softer than the built-in tracks until Claude merges it. Export music takes shares one file with the take marked In the game for each track; send it to Claude to make takes permanent. Show: "Re-made" means the track has at least one take here; "Built-in track plays" means no take is in the game. Model: each card has its own model choice, newest (v2.5) first; v1 is ElevenLabs\' old model and is removed on 31 Jan 2027, so it stays only to compare. The credit estimate was measured on v1; v2 prices are not measured. List made '+IDX.made+'.';
+  $('howto').textContent='Every track the game plays is one card. Play hears what the game plays now on this device (your take if you picked one, else the built-in track). Loop test plays the end of a loop crossfading into its start, the way the game loops it. Edit the prompt right in the card; New take asks GitHub to make it with ElevenLabs (the fixed loop or jingle wording shown in grey is added; about a minute, you can close the page) and the new take plays in the game on this device once it arrives. Takes lists every take: Use switches, Built into the game goes back. Tick cards (or Select all shown) and Remake asks for many at once, two at a time on GitHub. Credits are about '+CREDITS[0]+' to '+CREDITS[1]+' per second of music, so a 60 s loop is roughly '+cr(60)+'; every make asks you to tap twice. A phone take plays raw (no loudness match, no trimming), so it can sound louder or softer than the built-in tracks until Claude merges it. Export music takes shares one file with the take marked In the game for each track; send it to Claude to make takes permanent. Show: "Re-made" means the track has at least one take here; "Built-in track plays" means no take is in the game. Model: each card has its own model choice, newest (v2.5) first; v1 is ElevenLabs\' old model and is removed on 31 Jan 2027, so it stays only to compare. The credit estimate was measured on v1; v2 prices are not measured. List made '+IDX.made+'.';
   // cardlinks1: ?track=<id> shows every track, opens that one's takes and scrolls to it; an unknown id says so in one line.
   const tr=Q.get('track');
   if(tr){
     if(!T(tr)) toast('This link names a track the Music Library does not have: '+tr+'.');
     else{ F.group.clear();F.kind.clear();F.use.clear();F.show='all';F.q='';$('q').value='';OPEN.add(tr); }
   }
+  { const P=pendGet();for(const p of P)if(T(p.id)){BUSY[p.id]=true;MSG[p.id]={text:'Asked earlier. Waiting for GitHub to make it...',err:false};}if(P.length&&!POLL)POLL=setTimeout(pollPending,2000); }
   paintFilters();paintList();paintBar();
   if(tr&&T(tr)){const el=document.querySelector('.card[data-id="'+CSS.escape(tr)+'"]');if(el){el.scrollIntoView({block:'start'});el.classList.add('linked');}}
 })();

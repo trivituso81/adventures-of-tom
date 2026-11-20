@@ -7,11 +7,16 @@
 // loops loaded for the whole fight (b3cWanted). Every other clip is asked for the moment it is about to be needed (b3cWant) and is
 // released a few seconds after its last picture (engine/painted.js paintedTick). A move waits up to 2.5 s for its clip, then plays its
 // default animation instead; a body state with no loaded clip shows the painted frame.
-const B3C={need:new Map(),peak:0,waitMax:2.5};
+const B3C={need:new Map(),peak:0,waitMax:2.5,over:null,gs:{}};
 const B3C_KEEP=4500;   // ms a clip stays wanted after it was last asked for
 
+// wanproof: a fight may carry its own clips on top of B3_BODY_CLIPS (B3C.over={F, map:{owner:{state:id}}}, set by the Lab row
+// PROOF: GRACE'S GUARD (VIDEO), engine/b3-lab.js). Only for that one fight: B3_BODY_CLIPS and the painted states stay as they are.
+function b3cOver(owner) { const O=B3C.over; return O&&typeof B3!=='undefined'&&B3.active&&B3.F===O.F?O.map[owner]||null:null; }
 // The clip id for an owner (a family member's or a monster's id) in a state, or null.
-function b3cOf(owner,state) { const T=B3_BODY_CLIPS[owner],id=T&&T[state]; return id&&BCLIPS[id]?id:null; }
+function b3cOf(owner,state) { const V=b3cOver(owner),T=B3_BODY_CLIPS[owner],id=(V&&V[state])||(T&&T[state]); return id&&BCLIPS[id]?id:null; }
+// A guard clip (kind guard, wanproof) shown as the owner's guard AND as their standing picture: this fight only (b3cOver).
+function b3cGuardClip(u) { const V=b3cOver(u.id),id=V&&V.guard,C=id&&BCLIPS[id]; return C&&C.kind==='guard'?C:null; }
 const b3cReady=id=>!!id&&!!BCLIPS[id]&&bclipReady(id);
 // Ask for a clip to be loaded (and kept for a few seconds). True when the clip exists at all.
 function b3cWant(id,ms) { if(!id||!BCLIPS[id]) return false; B3C.need.set(id,performance.now()+(ms||B3C_KEEP)); return true; }
@@ -20,7 +25,7 @@ function b3cGet(owner,state,ms) { const id=b3cOf(owner,state); if(!id) return nu
 // What the fight wants loaded right now (engine/clips.js bclipWanted): every fighter's idle loop, plus what was asked for lately.
 function b3cWanted() {
   const out=[]; if(!B3.active||!B3.F) return out;
-  for(const u of B3.F.units) { const id=b3cOf(u.id,'idle'); if(id&&!out.includes(id)) out.push(id); }
+  for(const u of B3.F.units) { for(const st of ['idle','guard']) { const id=st==='idle'||b3cOver(u.id)?b3cOf(u.id,st):null; if(id&&!out.includes(id)) out.push(id); } }
   const now=performance.now();
   for(const [id,until] of B3C.need) { if(until<now) B3C.need.delete(id); else if(!out.includes(id)) out.push(id); }
   return out;
@@ -73,8 +78,25 @@ function b3cGuarding(u) {
   const vu=B3.view.u[u.key]; if(!vu) return false;
   return vu.sh>0||vu.st.some(id=>B3_STATUS[id]&&B3_STATUS[id].kind==='stance')||b3ViewMarked(u.key);
 }
+// A guard clip's picture right now (kind guard): standing on its first picture; when the guard goes up, the rise plays once, then the
+// held stretch (pictures rise..lower-1) loops forward and back; when it comes down, the lowering plays once and the first picture is
+// held again. Going up in the middle of a lowering (or down in the middle of a rise) starts from the picture of the same height.
+function b3cGuardFrame(C,key,on,t) {
+  const G=B3C.gs[key]||(B3C.gs[key]={on:false,t0:-99,from:0}),up=C.ms[C.rise],dn=C.ms[C.lower];
+  if(on!==G.on) { const was=b3cGuardMs(C,G,t); G.on=on; G.t0=t;
+    G.from=on?(was>=dn&&was<C.dur?Math.max(0,up*(1-(was-dn)/Math.max(1,C.dur-dn))):0):(was<up?dn+(C.dur-dn)*(1-was/Math.max(1,up)):dn); }
+  return bclipFrameAt(C,b3cGuardMs(C,G,t));
+}
+function b3cGuardMs(C,G,t) {
+  const e=(t-G.t0)*1000,up=C.ms[C.rise],dn=C.ms[C.lower];
+  if(G.on) { const r=G.from+e; if(r<up) return r; const len=dn-up,q=(r-up)%(2*len); return up+(q<len?q:2*len-q-1); }
+  if(G.t0<-90) return 0;
+  const r=G.from+e; return r<C.dur?r:0;
+}
 // The picture of a family member's clip right now, or null (draw the painted frame). e0 is the time the body started this state.
 function b3cMemberFrame(u,vu,t,B) {
+  const GC=!vu.ko&&b3cGuardClip(u);
+  if(GC&&(!B||(B.kind==='hit'&&B.guard))) { b3cWant(GC.id,9000); return bclipReady(GC.id)?b3cGuardFrame(GC,u.key,b3cGuarding(u),t):null; }
   if(vu.ko) { const C=b3cGet(u.id,'ko',8000); if(!C) return null; return b3cOnce(C,B&&B.kind==='ko'?(t-B.t0)*1000:C.dur); }   // plays from the moment they went down, then holds its last picture
   if(B&&B.kind==='cs') { const C=BCLIPS[B.id]; b3cWant(B.id,3000); return C&&bclipReady(B.id)?b3cOnce(C,(t-B.t0)*1000):null; }
   if(B) return null;   // a painted pose or a path is playing

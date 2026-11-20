@@ -167,7 +167,7 @@ with sync_playwright() as pw:
         pg.evaluate("()=>{ window.__words=[]; if(!window.__bw){ window.__bw=b3Word; b3Word=function(t,c){ window.__words.push(t); (window.__onstage=window.__onstage||[]).push([t,B3P.stage&&B3.F.party.find(u=>u.key===B3P.stage.key).id]); return window.__bw(t,c); }; } }")
         pg.evaluate("()=>{ splash.active=true; document.getElementById('splash').hidden=false; document.getElementById('splash').classList.remove('out'); splashSetMode('lab3'); }"); pg.wait_for_timeout(400)
         names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
-        need(NAME in names and names[-1]=='BACK' and names[0].startswith('NEW 1') and not any('PROOF' in n for n in names),f'the NEW BATTLE list is wrong: {names}')
+        need(NAME in names and names[-1]=='BACK' and names[0].startswith('NEW 1') and not any('PROOF' in n and n!="PROOF: GRACE'S GUARD (VIDEO)" for n in names),f'the NEW BATTLE list is wrong: {names}')
         if NAME not in names: continue
         pg.evaluate("(i)=>document.querySelectorAll('#splash .sp-choice')[i].click()",names.index(NAME))
         try: pg.wait_for_function("()=>B3.active&&B3.F&&B3.F.party.length===4&&B3.F.foes.length===1&&window.__words.length>=1",timeout=40000)

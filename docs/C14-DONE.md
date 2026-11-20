@@ -3,7 +3,7 @@
 Status: built end to end, tested (smoke, ch11, ch11b, ch12, ch13, ch14), not yet baked for voice.
 
 ## Flow
-ch13-done on Rivituso Row > ch14Open (card 14; TNB and Nara go to hold the breach against Auditors; Grace and Rose arrive from Sol's handcar and rejoin) > Deedee on the porch (amber to the waist, looping a rhubarb crisp) > ch14Deedee (Rose eats the crisp, the loop breaks, Deedee tells them how to reach Boppy) > ch14Gate (talk to armored Boppy) > Warden Boppy (non-violent) > ch14After (the plate melts, "I just didn't want to get too old to keep you all safe.", Deedee "You big nut, we keep each other safe.", Tombo Nobody Gets Past Us unlocks, Boppy and Deedee go back inside) > ch14-done.
+ch13-done on Rivituso Row > ch14Open (card 14; TNB and Nara go to hold the breach against Auditors; Grace and Rose arrive from Sol's handcar and rejoin) > Deedee on the porch (amber to the waist, looping a plate of apple muffins) > ch14Deedee (Rose eats the crisp, the loop breaks, Deedee tells them how to reach Boppy) > ch14Gate (talk to armored Boppy) > Warden Boppy (non-violent) > ch14After (the plate melts, "I just didn't want to get too old to keep you all safe.", Deedee "You big nut, we keep each other safe.", Tombo Nobody Gets Past Us unlocks, Boppy and Deedee go back inside) > ch14-done.
 
 ## Flags
 ch14-open, ch14-deedee, ch14-gate, battle:warden, ch14-after, ch14-done, tombo:boppy2.

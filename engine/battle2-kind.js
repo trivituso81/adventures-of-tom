@@ -565,10 +565,10 @@ B2_TOMBO_ANIM.deedee1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [P.b2,()=>{ say('tom','tombodeedee'); S('pickup'); setMessage('Tom has notes.'); }],
     [P.blush,()=>{ setMessage('The monster heard EVERY word. It turns red and shrinks.'); S('whine'); }],
     [P.shrink,()=>{ S('slideWhistle'); word('BLUSH',GR.x,GR.top-30,PINK,3,1.1); }],
-    [P.crisp,()=>{ setMessage('Deedee brings out the rhubarb crisp. For everyone.'); S('whoosh'); const h=handPt(BATTLE_SPRITES[pt.id],sD.f||BATTLE_SPRITES[pt.id].idle,sD.x,sD.b,sD.dir);
+    [P.crisp,()=>{ setMessage('Deedee brings out the apple muffins. For everyone.'); S('whoosh'); const h=handPt(BATTLE_SPRITES[pt.id],sD.f||BATTLE_SPRITES[pt.id].idle,sD.x,sD.b,sD.dir);
       b2LiveParty().forEach((p,k)=>{ if(p===pt) return; let x1,y1; if(p===tom) { x1=sT.x+20; y1=sT.b-60; } else { const q=ST.unit(p); x1=q.x-10; y1=q.mid-12; }
         battle.props.push({kind:'dcrisp',x0:h.x,y0:h.y-10,x1,y1,arc:56,spin:false,t:-k*.1,dur:.55}); }); }],
-    [P.heal,()=>{ E2.apply(); for(const p of b2LiveParty()) glowOn(p); S('heal'); word('RHUBARB CRISP!',PX,F-140,GOLD,3,1.2); }],
+    [P.heal,()=>{ E2.apply(); for(const p of b2LiveParty()) glowOn(p); S('heal'); word('APPLE MUFFINS!',PX,F-140,GOLD,3,1.2); }],
     ['hf',P.heal],
     [P.grow,()=>{ S('boing'); }],
     [P.end,'end',()=>{ for(const f of list) { f.fsc=0; f.oy=0; } return 'Wine, gossip and warm crisp. Everyone feels much better.'; }]]);
@@ -1352,7 +1352,7 @@ B2_TOMBO_ANIM.deedee2=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
   ];
   order.forEach((o,i)=>steps.push([o.t+150,()=>pop(o,i)]));
   steps.push(['hf',order.length?order[0].t+150:P.yank+200]);
-  steps.push([P.end,'end',()=>{ for(const o of order) { o.f.oy=0; o.f.ox=0; o.f.spin=0; } return (E2.result||'')+' Rhubarb crust for everybody. Tom did most of the pulling, he says.'; }]);
+  steps.push([P.end,'end',()=>{ for(const o of order) { o.f.oy=0; o.f.ox=0; o.f.spin=0; } return (E2.result||'')+' Apple muffins for everybody. Tom did most of the pulling, he says.'; }]);
   ST.play(E2,steps);
 };
 
@@ -4653,7 +4653,7 @@ B2_TOMBO_ANIM.amy3_dc=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
 
 // ---------- Feast on Jefferson Park (Tom + Deedee, Director's Cut of tier 3) ----------
 // Block party on Jefferson Park at dusk. String lights blink on across the sky, a long party table drops in, and the
-// neighbors' dishes fly in one after another (sourdough, gumbo, pupusas, rhubarb crisp). Tom sets each one down neatly;
+// neighbors' dishes fly in one after another (sourdough, gumbo, pupusas, apple muffins). Tom sets each one down neatly;
 // Deedee immediately moves every dish somewhere else, then wipes the table so hard the plates jump. Tom tells her to sit;
 // she sits for exactly one beat, pops up and straightens the gumbo again. Then the smell of the feast rolls left over every
 // monster (they warm right up, hearts). Effects (no damage): fallen friends up at 35%, party heals 60% and loses its
@@ -5824,7 +5824,7 @@ B2_TOMBO_ANIM.deedee1=E2=>{ const {tom,pt,fxT,fxP}=E2; B2.aim=null;
     [P.gasp,()=>{ S('stun'); word('DID YOU SEE WHAT IT WAS WEARING?',tx,Math.max(40,by-TH-74),PINK,2,1.4); setMessage('A gasp. A hand on the chest.'); }],
     ['hf',P.shrink],
     [P.shrink,()=>{ S('nope'); for(const f of list) { shrinkFoe(f,.72); ST.jolt(f,.3); } word('SO EMBARRASSED',GR.x,Math.max(50,GR.top-60),CREAM,3,1.1); setMessage('Every monster shrinks a little with embarrassment.'); say('tom','tombodeedee'); }],
-    [P.crisp,()=>{ S('ding'); setMessage('Deedee brings out the rhubarb crisp. From nowhere. Still warm.'); }],
+    [P.crisp,()=>{ S('ding'); setMessage('Deedee brings out the apple muffins. From nowhere. Still warm.'); }],
     [P.apply,()=>{ E2.apply(); for(const p of b2LiveParty()) glowOn(p); S('heal'); word('WARM CRISP',lx,Math.max(50,by-DH-60),GOLD,3,1.2); }],
     [P.end,'end',()=>{ for(const f of list) unshrink(f); return 'Wine, gossip and warm crisp. Everyone feels much better.'; }]];
   ST.play(E2,steps); };

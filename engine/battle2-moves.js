@@ -125,8 +125,8 @@ B2_SUPPORT.marathon=E2=>support(E2,{color:'#9be39a',word:'PACE',pose:fx=>{ fx.co
 B2_SUPPORT.nurse=E2=>support(E2,{color:'#9be39a',word:'CHECK-UP',pose:fx=>{ fx.hug=1.2; },
   start:E2=>{ const h=home(E2.m),t=home(E2.targets[0]||E2.m); toss('dheart',h.x-10,h.base-90,t.x,t.base-70,0,.5,50,{spin:false,r:9}); },
   line:'Deep breath. Say ahh. All better.'});
-// Deedee: Rhubarb Crisp. A steaming slice for one.
-B2_SUPPORT.crisp=E2=>support(E2,{color:'#ff9a4a',word:'RHUBARB CRISP',sc:2,pose:fx=>{ fx.cheer=1; },
+// Deedee: Apple Muffins. A steaming slice for one.
+B2_SUPPORT.crisp=E2=>support(E2,{color:'#ff9a4a',word:'APPLE MUFFINS',sc:2,pose:fx=>{ fx.cheer=1; },
   start:E2=>{ const h=home(E2.m),t=home(E2.targets[0]||E2.m); toss('dcrisp',h.x-10,h.base-80,t.x,t.base-70,.1,.55,50,{spin:false}); sfx.whoosh(); },
   line:'Still warm. Seconds are available.'});
 // Deedee: Sunday Dinner. Everyone gets a plate.

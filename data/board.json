@@ -12361,8 +12361,8 @@
    "title": "Purge Rhubarb Crisp from the game everywhere",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
-   "next": "Waiting on Tom: answer the card Decide how far to cut Rhubarb Crisp. Then run the prompt as written, scoped to his answer.",
+   "col": "done",
+   "next": "Shipped as gem-pillar-rhubarb. Lines reworded and waiting for a recording: Deedee's greet, crisp and win battle lines, her kitchen and chapter 14 and 15 lines, Rose's school line, Tom's chapter 14 line, Aunt Ellie's line, the chapter 20 narrator line.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -12420,6 +12420,14 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped gem-pillar-rhubarb: Rhubarb Crisp and Rhubarb Pie are now apple muffins everywhere shown; baked clips with the old words purged and their lines wait on the bake list. Pick the Rhubarb Tombo and the garden door kept (the plant)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-pillar-rhubarb: Rhubarb Crisp is gone from the whole game; Deedee's dish is apple muffins"
     }
    ],
    "tag": "gem-pillar-rhubarb",
@@ -12433,7 +12441,8 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-pillar-rhubarb in data/board.json, history included. Your first push is the commit board: start c-gem-pillar-rhubarb.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is the \"Cut-Lore Leak in Tooltips\" row of the battle table (1.2). What the tester saw: Observed in the live build: `Inspect` on `Mudling`, `Log Lump`, and `The Big One` explicitly lists `Rhubarb Crisp`! Locked target: Purge `Rhubarb Crisp` everywhere (Deedee's signature bake is warm apple muffins).\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-pillar-rhubarb, push to main, and write the result and the next step onto the card.\n\nRhubarb Crisp is cut lore: Deedee's signature bake is warm apple muffins. Grep the whole repo (data, engine, docs, scenes, inspect text, voice index) for Rhubarb, replace or delete each use, purge anything it leaves behind, and run python3 tools/clip-audit/unused_voice.py (CLAUDE.md No unused voice, Purge replaced files). Do not hand-edit baked voice data: if a baked clip says it, report it on the card. Legacy battle files (engine/battle2-*.js) may be removed by the new engine later; fix them anyway if they still ship.\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "started_at": "2026-11-20T21:18:55+00:00",
-   "after": "t-rhubarb-scope"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-20"
   },
   {
    "id": "c-gem-pillar-pep",
@@ -13150,6 +13159,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom made a second card with the same words (c-idea-skippingscene): \"when skipping a scene, any interstitials that are not item retrieval or party members joining/leaving (eg displaying grace's list in scene 1) should be skipped as well\". Merged here; that card is retired to Done."
     }
    ],
    "prompt": {
@@ -14016,6 +14029,14 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Opus 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Restarted from the Needs attention sweep (Tom: act on the cards). The first START conversation never checked in and the day's 4 rescues were used."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Opus 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -14027,12 +14048,11 @@
     "effort": "medium",
     "text": "Read CLAUDE.md. You were started by START to prove this task works. Add one history line to your card saying which model and effort you are running on, move the card to Done, and push the build (its tag) with a docs/CHANGES.md entry. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-20T17:43:02+00:00",
+   "started_at": "2026-11-20T21:26:58+00:00",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukD7bLW4PRyJD2QqaXo",
+    "url": "https://claude.ai/code/cse_01RXeukFHVwjKQBeCwxKQYQg",
     "opening": "started by START"
-   },
-   "quiet": true
+   }
   },
   {
    "id": "c-startmore-sonnet",
@@ -14054,6 +14074,14 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort high."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Restarted from the Needs attention sweep (Tom: act on the cards). The first START conversation never checked in and the day's 4 rescues were used."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort high."
     }
    ],
    "prompt": {
@@ -14065,12 +14093,11 @@
     "effort": "high",
     "text": "Read CLAUDE.md. You were started by START to prove this task works. Add one history line to your card saying which model and effort you are running on, move the card to Done, and push the build (its tag) with a docs/CHANGES.md entry. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-20T17:43:02+00:00",
+   "started_at": "2026-11-20T21:26:58+00:00",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukD59Es2YREGQE1ccjc",
+    "url": "https://claude.ai/code/cse_01RXeukH1HRtSTSFx8aZvjz1",
     "opening": "started by START"
-   },
-   "quiet": true
+   }
   },
   {
    "id": "t-gatezero-decide",
@@ -14196,7 +14223,7 @@
     "rule": "Claude Sonnet 5.5, high"
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukHESwsWdCsmiAKFcmE",
+    "url": "https://claude.ai/code/cse_01RXeukDmbpsMacaXDkG1DFx",
     "opening": "New card by Tom on the board"
    },
    "history": [
@@ -14218,6 +14245,14 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort high."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Restarted from the Needs attention sweep (Tom: act on the cards). The first START conversation never checked in and the day's 4 rescues were used."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort high."
     }
    ],
    "prompt": {
@@ -14229,8 +14264,7 @@
     "effort": "high (something new designed and built in one session)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-searchthrough in data/board.json, history included. Your first push is the commit board: start c-idea-searchthrough.\n\nTom made this card himself with New card on the board. His words: \"search through all instances in the overworld maps (not dungeons or building interiors) for blocked entrances like this and propose a more elegant solution. for example in this case, i propose a separate layer for door art and separate art for unlocked and locked doors, that get autogenerated in the art library. and they should never overlap the character.\" His screenshot: board-shots/new-mwp9s356.jpg on branch inbox (git fetch --depth=1 origin inbox, then git show origin/inbox:board-shots/new-mwp9s356.jpg into a file in /tmp, and look at it).\n\nThe board sized this from his words alone: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort high (something new designed and built in one session). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nDesign it yourself and make the calls: Tom does not pick between options. Ask one short question only if a choice cannot be undone or is expensive to redo. Build it, test it, look at the frames in portrait and landscape, and push build idea-searchthrough with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "started_at": "2026-11-20T17:46:07+00:00",
-   "quiet": true
+   "started_at": "2026-11-20T21:26:58+00:00"
   },
   {
    "id": "t-welcomepage-play",
@@ -14465,7 +14499,7 @@
    "id": "c-fix-welcomepage-play",
    "tag": "fix-welcomepage-play",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix: Check the new welcome buttons and chapter list top",
@@ -14518,6 +14552,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Queued behind Tom card t-welcomepage-request: the request Tom added lives in another conversation that a fix session cannot read."
     }
    ],
    "prompt": {
@@ -14532,7 +14570,7 @@
    "after": "t-welcomepage-play",
    "auto": true,
    "started_at": "2026-11-20T17:53:24+00:00",
-   "quiet": true
+   "waiting_on": "tom"
   },
   {
    "id": "c-fix-battlelabpagetry",
@@ -15651,7 +15689,8 @@
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
-   "started_at": "2026-11-20T19:42:40+00:00"
+   "started_at": "2026-11-20T19:42:40+00:00",
+   "quiet": true
   },
   {
    "id": "t-listen1-play",
@@ -15829,7 +15868,7 @@
    "title": "Build the Grace guard video proof",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "wanproof",
    "next": "Waits on your approval (card Approve the WAN proof). Then it makes Grace's large start picture and one 5 second Wan 3.0 guard video through fal.ai, checks every picture of it against the written list before you see anything, and puts it in ADMIN > BATTLE LAB > NEW BATTLE as PROOF: GRACE'S GUARD (VIDEO), tested in portrait and landscape. 54 cents expected, $2 at most.",
    "blocks": [],
@@ -15871,6 +15910,14 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as wanproofb: Part 2 of the Grace guard video proof: her large left-facing start picture, made on fal and checked. 15 cents spent"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as wanproof: the Wan 3.0 guard video passed every check in plan 4.4 on the first try; Lab row PROOF: GRACE'S GUARD (VIDEO), wanproof_test portrait and landscape FAILS: []. Spent $0.65 of $2.00 on fal, nothing on xAI. Next: Tom watches it (t-wanproof-watch), then c-wanidle."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as wanproof: Grace's guard is now a real video (Wan 3.0, made through fal.ai), shown in Battle Lab ) NEW BATTLE ) PROOF: GRACE'S GUARD (VIDEO). 65 cents spent"
     }
    ],
    "prompt": {
@@ -15883,7 +15930,8 @@
     "effort": "high (a new generator Action and a new clip playback are built in one session with no code to follow)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md, then card c-wanproof in data/board.json with its history and the note on card t-wanproof-setup. Your first push is the commit board: start c-wanproof. Build the proof exactly as section 4 of the plan says: the wan-gen Action with its stand-in test and one dry run first, then the start picture and its checks, then the guard video with the prompt in 4.3 word for word, the checks in 4.4 before Tom sees anything, the bake, the playback, the Lab row PROOF: GRACE'S GUARD (VIDEO), and the game checks in portrait and landscape. Spend at most $2.00 on fal and nothing on xAI. A check that fails gets one retry with one change; a second miss the same way is the stop-loss: tell Tom in plain words and hand him no clip. Do not make any other clip and do not remove any painted state. Build tag wanproof. End with a Tom card (ask animations) for the Lab row. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "nothing for Tom: c-wanproof"
+   "after": "t-wanproof-watch",
+   "done": "2026-11-20"
   },
   {
    "id": "c-permwording1",
@@ -16091,8 +16139,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Voice Clips",
-   "count": 2,
-   "title": "Merge 2 new voice takes",
+   "count": 4,
+   "title": "Merge 4 new voice takes",
    "next": "Merged 2 takes (Tom Delta One line, Deedee flashbulb line) into dialog-ch1.js. Shipped as takes-2026-11-20.",
    "prompt": {
     "what": "Merges the voice takes you recorded on your phone.",
@@ -16104,7 +16152,7 @@
     "text": "Read claude/handoff-rules.md and docs/VOICE.md, then merge the new voice takes from branch takes. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukCdmkaZuGaBZcvcTNq",
+    "url": "https://claude.ai/code/session_01RXeukCdmkaZuGaBZcvcTNq",
     "opening": "not started"
    },
    "history": [
@@ -16124,6 +16172,14 @@
     {
      "d": "2026-11-20",
      "t": "Merged the 2 kept takes from branch takes (session 20261120T211742-sz1). Both new lines in dialog-ch1.js; audit clean."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "2 more take file(s) arrived."
     }
    ],
    "blocks": [],
@@ -16184,7 +16240,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGhbJajd4cUkbJiFVv",
+    "url": "https://claude.ai/code/session_01RXeukGhbJajd4cUkbJiFVv",
     "opening": "not started"
    },
    "prompt": {
@@ -16209,6 +16265,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     },
     {
      "d": "2026-11-20",
@@ -16263,16 +16323,16 @@
   {
    "id": "c-keysecrets4",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "tag": "keysecrets4",
    "title": "Music makes through repo secrets",
-   "next": "Music Library MAKE starts a music Action; the key box goes.",
+   "next": "Shipped as keysecrets4: Music Library MAKE asks the music-gen Action; the key box is gone. Needs repo secret ELEVENLABS_API_KEY for a real run.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukCe4s7AKboq4xirQLv",
+    "url": "https://claude.ai/code/session_01RXeukCe4s7AKboq4xirQLv",
     "opening": "not started"
    },
    "prompt": {
@@ -16297,9 +16357,27 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Session started on this card (first push)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built keysecrets4: music.html asks data/music-requests.json, music-gen Action + musicgen.py, branch musicgen. Test music-library/test.py 0 fails. Action not run for real."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as keysecrets4: Music Library makes takes on GitHub with the repo secret; the ElevenLabs key box is gone"
     }
    ],
-   "started_at": "2026-11-20T21:23:32+00:00"
+   "started_at": "2026-11-20T21:23:32+00:00",
+   "after": "nothing for Tom: c-keysecrets5",
+   "done": "2026-11-20"
   },
   {
    "id": "c-keysecrets5",
@@ -16346,10 +16424,10 @@
    "id": "c-voiceauto1",
    "tag": "voiceauto1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Voice Clips",
    "title": "Put new game lines in the Voice Library automatically",
-   "next": "Claude builds a GitHub job that rebuilds the Voice Library list on every push, so new lines show under No clip yet by themselves.",
+   "next": "Built as voiceauto1: the voice-index job rebuilds the Voice Library list after every push that changes the game's words. Tom records the new lines on card t-voiceauto1rec.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -16370,8 +16448,229 @@
     {
      "d": "2026-11-20",
      "t": "Tom: \"the new lines in the came are not in the voice library for recording - can this be automated\". Cause: data/voice-index.json is rebuilt only when a session runs three scripts by hand; Sal's and Tom's new opening lines were missing."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped voiceauto1: .github/workflows/voice-index.yml runs tools/voice-library/rebuild.py on pushes to main and commits the list when a line was added, removed or re-scripted. First rebuild added Sal's opening line, Tom's JFK line and Tom's boss-pattern line, and dropped a Michael line the game no longer plays."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as voiceauto1: new game lines now reach the Voice Library by themselves"
+    }
+   ],
+   "after": "t-voiceauto1rec",
+   "done": "2026-11-20"
+  },
+  {
+   "id": "t-welcomepage-request",
+   "title": "Type the welcome page change you want",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "wait",
+   "ask": "setup",
+   "next": "Tap + New card on the board. Type the change you want to the welcome page in one or two sentences (which screen, which button, what it should do). Claude builds it from that card. Nothing else is needed.",
+   "blocks": [
+    "c-fix-welcomepage-play"
+   ],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/cse_01RXeukCfB6Lgq1Cpqbxxyo9",
+    "opening": "Needs attention sweep"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by the Needs attention sweep: the fix needs the request text."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom handed this to Claude: i dont understand what i need to do",
+     "at": "2026-11-20T21:27:59.078Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped START.",
+     "at": "2026-11-20T21:28:05.075Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "ended without shipping: the request Tom wrote in the other conversation cannot be read from a card session, and his note \"i dont understand what i need to do\" has no change in it. Nothing was changed. Rewrote next: Tom types the change into + New card.",
+     "at": "2026-11-20T21:35:00.000Z"
+    }
+   ],
+   "tag": "t-welcomepage-request",
+   "note": "i dont understand what i need to do",
+   "prompt": {
+    "what": "Works out what Tom wants from his note, rewrites this card, and does the work.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the steps are not written yet)",
+    "effort": "medium (a handed-over card is usually one piece of work)",
+    "text": "Read claude/handoff-rules.md. Tom handed you board card t-welcomepage-request with this note: i dont understand what i need to do. Work out what is needed, rewrite the card, and do it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "started_at": "2026-11-20T21:28:37+00:00",
+   "waiting_on": "tom"
+  },
+  {
+   "id": "t-voiceauto1rec",
+   "title": "Record the 3 new lines now in the Voice Library",
+   "theme": "Voice Clips",
+   "lane": "tom",
+   "col": "done",
+   "ask": "voice",
+   "fyi": true,
+   "next": "ADMIN > VOICE LIBRARY > Show > No clip yet. Make and keep a take for Sal's \"You got it, kid...\", Tom's \"Thanks for the JFK pickup, Sal.\" and Tom's \"Mom, wait. Bosses hit in a pattern...\", then press Send my takes to Claude. From now on new lines appear there by themselves a few minutes after they ship.",
+   "links": [
+    {
+     "to": "voice",
+     "ids": [
+      "d|tom|Thanks for the JFK pickup, Sal.",
+      "d|sal|You got it, kid. Head outside, I think there's a couple of pipsqueaks looking for you.",
+      "d|tom|Mom, wait. Bosses hit in a pattern. Watch what he does twice, then go."
+     ],
+     "label": "The 3 new lines"
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEAVEz7ZsgqjE7u2pm",
+    "opening": "\"the new lines in the came are not in the voice library for recording - can this be automated\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added with c-voiceauto1."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-20T21:42:18.656Z"
+    }
+   ],
+   "done": "2026-11-20"
+  },
+  {
+   "id": "c-idea-skippingscene",
+   "tag": "idea-skippingscene",
+   "lane": "claude",
+   "col": "done",
+   "theme": "Story and Dialogue",
+   "title": "When skipping a scene, any interstitials that are not item",
+   "next": "Retired (duplicate): covered by c-idea-skippingcut. The SKIP rule for Grace's list in chapter 1 scene 1 already shipped in c-skipchain1.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "idea": {
+    "at": "2026-11-20T21:30:54.535Z",
+    "words": "when skipping a scene, any interstitials that are not item retrieval or party members joining/leaving (eg displaying grace's list in scene 1) should be skipped as well",
+    "shot": "",
+    "row": "A",
+    "rule": "Claude Haiku 5.5, low"
+   },
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGs4KxT1N7oixmRdtw",
+    "opening": "pasted by Tom from the board"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom made this card on the board: when skipping a scene, any interstitials that are not item retrieval or party members joining/leaving (eg displaying grace's list in scene 1) should be skipped as well",
+     "at": "2026-11-20T21:30:54.535Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Sized by the board: Claude Haiku 5.5 (row A: a question, nothing changes), effort low (a lookup).",
+     "at": "2026-11-20T21:30:54.535Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-20T21:31:01.076Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Answer: yes, this is the rule to build. Grace's list in chapter 1 scene 1 is already skipped (c-skipchain1, shipped). For other cut scenes, the board records that interstitials still play on SKIP; the build is c-idea-skippingcut (Sonnet 5.5, medium), which never skips party joins or leaves. Nothing changed in the game."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Retired to Done: duplicate of c-idea-skippingcut, which holds Tom's words and the build."
+    }
+   ],
+   "prompt": {
+    "what": "Answers your question: When skipping a scene, any interstitials that are not item.",
+    "before": [
+     "Nothing to do first. Your words are on the card."
+    ],
+    "model": "Claude Haiku 5.5 (row A: a question, nothing changes)",
+    "effort": "low (a lookup)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-skippingscene in data/board.json, history included. Your first push is the commit board: start c-idea-skippingscene.\n\nTom made this card himself with New card on the board. His words: \"when skipping a scene, any interstitials that are not item retrieval or party members joining/leaving (eg displaying grace's list in scene 1) should be skipped as well\"\n\nThe board sized this from his words alone: Claude Haiku 5.5 (row A: a question, nothing changes), effort low (a lookup). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nThis is a question. Answer it in the chat in a few plain sentences, change nothing in the game, write the answer as a history line on this card and move it to Done. Push only the board change. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "done": "2026-11-20"
+  },
+  {
+   "id": "t-wanproof-watch",
+   "title": "Watch Grace's guard video once (1 minute)",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "animations",
+   "next": "Open ADMIN > BATTLE LAB > NEW BATTLE and tap PROOF: GRACE'S GUARD (VIDEO). Grace stands alone against one Mudling. Three times she raises her guard (forearms crossed in front of her face), takes a hit that nudges her back, and lowers it again; then the list comes back (about 30 seconds). Her standing picture is the video's first picture, so nothing switches. Then tap All good, or Something is wrong and say what you saw. All good unblocks the card Grace's idle, hit and one own move as Wan videos.",
+   "blocks": [
+    "c-wanidle"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
+    "opening": "\"Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by wanproof. One Wan 3.0 guard video (50 cents) and its start picture (15 cents) passed every check in claude/video-battle-plan.md 4.4 before you see it. The painted guard still shows in every other fight until the purge."
     }
    ]
+  },
+  {
+   "id": "c-wanidle",
+   "title": "Grace's idle, hit and one own move as Wan videos",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "tag": "wanidle",
+   "next": "Waits on your verdict on the guard proof (card Watch Grace's guard video once). Then it makes three more Wan 3.0 videos of Grace from the same start picture (idle with breathing, hit, one own move with a held prop), checks each against the list before you see it, and shows them in the proof row. About $1.50.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by wanproof: claude/video-battle-plan.md section 5 step 1. Nothing in section 5 is approved until the guard proof is All good."
+    }
+   ],
+   "prompt": {
+    "what": "Makes Grace's idle (with the breathing in it), hit and one own move with a held prop as Wan 3.0 videos through the wan-gen Action, checks each before you see it, and plays them in the Lab proof row. About $1.50 on fal.",
+    "before": [
+     "Watch the guard proof (card Watch Grace's guard video once) and tap All good.",
+     "Open a NEW conversation in the Little Elsewhere Project, choose Claude Opus 5.5 and set effort to medium, then paste the prompt."
+    ],
+    "model": "Claude Opus 5.5 (row D: video prompts you judge by taste, and a miss costs generation money)",
+    "effort": "medium (the Action, the bake, the guard playback and the checks exist; three new MOTION parts and the idle and hit playback follow them)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.7 Built and section 5), then card c-wanidle in data/board.json with its history and the answer on card t-wanproof-watch. Your first push is the commit board: start c-wanidle. Make Grace's idle with breathing, hit and one own move with a held prop as Wan 3.0 videos with the wan-gen Action, from art/clips/start/grace-hero.png, each prompt BOOP_APPROVED with only the MOTION part changed (the guard prompt in tools/art-library/prompts/wan-grace-guard-v1.txt is the model). Run each through the checks in section 4.4 before Tom sees anything; a miss gets one retry with one change, a second miss the same way is the stop-loss. Spend at most $3.00 on fal and nothing on xAI. Bake them, play them in the Lab row PROOF: GRACE'S GUARD (VIDEO) only, test portrait and landscape (tools/wanproof_test.py extended), and do not remove any painted state yet. Build tag wanidle. End with a Tom card (ask animations). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   },
   {
    "id": "t-keysecrets2-try",
@@ -16412,10 +16711,57 @@
    "url": "https://claude.ai/code/session_01RXeukCYMKUG2mJbWxJECYC",
    "title": "Purge Rhubarb Crisp from the game everywhere",
    "first": "2026-11-20T21:22:44Z",
-   "last": "2026-11-20T21:22:44Z",
-   "tags": [],
+   "last": "2026-11-20T21:35:44Z",
+   "tags": [
+    "gem-pillar-rhubarb"
+   ],
    "cards": [
     "c-gem-pillar-rhubarb"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCe4s7AKboq4xirQLv",
+   "title": "Music makes through repo secrets",
+   "first": "2026-11-20T21:29:43Z",
+   "last": "2026-11-20T21:33:16Z",
+   "tags": [
+    "keysecrets4"
+   ],
+   "cards": [
+    "c-keysecrets4"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCfB6Lgq1Cpqbxxyo9",
+   "title": "Type the welcome page change you want",
+   "first": "2026-11-20T21:31:38Z",
+   "last": "2026-11-20T21:31:38Z",
+   "tags": [],
+   "cards": [
+    "t-welcomepage-request"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGhbJajd4cUkbJiFVv",
+   "title": "Art Library videos through repo secrets",
+   "first": "2026-11-20T21:26:18Z",
+   "last": "2026-11-20T21:26:18Z",
+   "tags": [],
+   "cards": [
+    "c-keysecrets2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCdmkaZuGaBZcvcTNq",
+   "title": "Merge 2 new voice takes",
+   "first": "2026-11-20T21:25:47Z",
+   "last": "2026-11-20T21:26:12Z",
+   "tags": [
+    "takes-2026-11-20"
+   ],
+   "cards": [
+    "c-takes-987c82",
+    "c-takes-56fb01"
    ]
   },
   {
@@ -16969,16 +17315,59 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
+   "title": "Build the Grace guard video proof",
+   "first": "2026-11-20T12:41:05-08:00",
+   "last": "2026-11-20T13:36:44-08:00",
+   "tags": [
+    "wanproofa",
+    "wanproofb",
+    "wanproof"
+   ],
+   "cards": [
+    "c-wanproof"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGs4KxT1N7oixmRdtw",
+   "title": "When skipping a scene, any interstitials that are not item",
+   "first": "2026-11-20T13:34:18-08:00",
+   "last": "2026-11-20T13:34:18-08:00",
+   "tags": [],
+   "cards": [
+    "c-idea-skippingscene"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEAVEz7ZsgqjE7u2pm",
    "title": "Open chapter 1 inside the taxi office with Sal",
    "first": "2026-11-20T08:48:07-08:00",
-   "last": "2026-11-20T13:22:58-08:00",
+   "last": "2026-11-20T13:29:35-08:00",
    "tags": [
-    "gem-canon01"
+    "gem-canon01",
+    "voiceauto1"
    ],
    "cards": [
     "c-gem-canon01",
     "c-voiceauto1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGZvj5YBSMvPY8Zknj",
+   "title": "Move the Project docs into the repo (Project is 97% full)",
+   "first": "2026-11-20T12:24:26-08:00",
+   "last": "2026-11-20T13:29:29-08:00",
+   "tags": [
+    "projclean1a",
+    "projclean1b",
+    "projclean1c"
+   ],
+   "cards": [
+    "c-projclean",
+    "c-fix-heist1voice",
+    "c-idea-searchthrough",
+    "c-startmore-opus",
+    "c-startmore-sonnet"
    ]
   },
   {
@@ -16994,21 +17383,6 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukGZvj5YBSMvPY8Zknj",
-   "title": "Move the Project docs into the repo (Project is 97% full)",
-   "first": "2026-11-20T12:24:26-08:00",
-   "last": "2026-11-20T13:15:52-08:00",
-   "tags": [
-    "projclean1a",
-    "projclean1b",
-    "projclean1c"
-   ],
-   "cards": [
-    "c-projclean",
-    "c-fix-heist1voice"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukDPY2qNnB59RAn67mF",
    "title": "Fix typing in the REPORT box (keys act like game hotkeys)",
    "first": "2026-11-20T12:54:42-08:00",
@@ -17018,19 +17392,6 @@
    ],
    "cards": [
     "c-reporttype1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
-   "title": "Build the Grace guard video proof",
-   "first": "2026-11-20T12:41:05-08:00",
-   "last": "2026-11-20T13:03:08-08:00",
-   "tags": [
-    "wanproofa",
-    "wanproofb"
-   ],
-   "cards": [
-    "c-wanproof"
    ]
   },
   {
@@ -18550,11 +18911,13 @@
    "takes/20261120T170347-1wa/part-001.json",
    "takes/20261120T170347-1wa/state.json",
    "takes/20261120T211742-sz1/part-001.json",
-   "takes/20261120T211742-sz1/state.json"
+   "takes/20261120T211742-sz1/state.json",
+   "takes/20261120T213706-d43/part-001.json",
+   "takes/20261120T213706-d43/state.json"
   ]
  },
- "synced": "0ef0c758ce50102f847003290fa5ed0e650b6bea",
- "synced_at": "2026-11-20T21:23:36+00:00",
+ "synced": "fdd2f32e55e6899428fcc9673e8c994fd021d4bc",
+ "synced_at": "2026-11-20T21:43:08+00:00",
  "routines": [
   {
    "id": "sonnet-medium",

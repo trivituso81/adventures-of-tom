@@ -241,7 +241,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | TNB | It's been like that since this morning. I held my soda up to it. It's the exact same color. | Tom surprised (at "since this morning") |
 | TNB | I don't know what it is, babe. But it's pretty grape. | Tom happy (at "pretty grape") |
 | Tom | Don't make me laugh, it's freaky! ...Okay. It IS a little grape. | TNB happy (at "It IS a little grape") |
-| Tom | Something strange happened on Long Island too. A blob of mud with eyes climbed in my mother's kitchen window and ran off with her rhubarb crisp. | TNB surprised (at "mud with eyes") |
+| Tom | Something strange happened on Long Island too. A blob of mud with eyes climbed in my mother's kitchen window and ran off with her apple muffins. | TNB surprised (at "mud with eyes") |
 | TNB | The mud took Deedee's crisp? Is the mud okay? | Tom happy (at "Is the mud okay") |
 | Tom | We chased it to the pond. And there was a talking fish as big as a car, wearing her baking tin like a crown. | TNB surprised (at "talking fish") |
 | TNB | A talking fish! What did he say? | Tom happy (at "What did he say") |
@@ -544,7 +544,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Deedee | Hand me my glasses. I want to look at him properly. Where ARE my glasses. | Boppy scared, Rose happy, Tom happy, Grace happy |
 | Rose | Apron pocket, Deedee! | Deedee loving, Tom happy, Grace happy |
 | Boppy | ...Almost isn't eating. Almost is fine. | Deedee unimpressed, Tom happy, Grace happy, Rose happy |
-| Deedee | Sit down, you. I made rhubarb crisp. Everybody sit. And eat SLOWLY. | Boppy loving, Tom loving, Grace happy, Rose happy |
+| Deedee | Sit down, you. I made apple muffins. Everybody sit. And eat SLOWLY. | Boppy loving, Tom loving, Grace happy, Rose happy |
 | Boppy | Slowly. Finally. Somebody in this family gets it. | Deedee unimpressed, Tom happy, Grace happy |
 | Tom | Best fishing trip ever. Nobody fell in. Mostly. | Deedee happy, Boppy proud, Grace happy, Rose happy |
 | Deedee | I love you all to the moon and back. Now eat. | Tom loving, Grace loving, Rose loving, Boppy loving |
@@ -734,7 +734,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | Line | Reactions |
 |---|---|---|
 | Grace | FOR EVERYONE, LOVE DEEDEE. That's Deedee’s handwriting! Everyone means us! | Rose surprised, Tom surprised, Amy surprised, Halverson happy |
-| Rose | Rhubarb crisp! Deedee brings the teachers CRISP? | Grace happy, Tom happy, Amy surprised |
+| Rose | Apple muffins! Deedee brings the teachers CRISP? | Grace happy, Tom happy, Amy surprised |
 | Mr. Halverson | Every conference night. Twelve years. It's the only reason Gary shows up. | Amy surprised, Tom happy, Grace happy, Rose happy |
 | Amy | She never told me that. Of course she never told me that. | Tom loving, Grace loving |
 | Tom | To the moon and back. And apparently to the staff room. | Amy loving, Halverson happy, Grace happy |
@@ -2345,9 +2345,9 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Deedee | Rhubarb crisp, nine minutes. Rhubarb crisp, nine minutes. Hello, sweetie. Rhubarb crisp, nine minutes. | Tom scared, Amy scared, Grace scared, Rose scared |
+| Deedee | Apple muffins, nine minutes. Apple muffins, nine minutes. Hello, sweetie. Apple muffins, nine minutes. | Tom scared, Amy scared, Grace scared, Rose scared |
 | Amy | Mom. It’s Amy. Mom, look at me. | Tom sad, Grace scared, Rose scared |
-| Deedee | Hello, Amy. Rhubarb crisp, nine minutes. Do you want a bite? Rhubarb crisp. Nine minutes. | Tom sad, Amy sad, Grace scared, Rose surprised |
+| Deedee | Hello, Amy. Apple muffins, nine minutes. Do you want a bite? Apple muffins. Nine minutes. | Tom sad, Amy sad, Grace scared, Rose surprised |
 | Tom | She’s looping. Look at the tray. It’s the same crisp. Every time. It’s fresh, it’s perfect, and nobody ever eats it. | Amy sad, Grace sad, Rose sad |
 | Tom | Amber is warmth that got stuck. She’s been baking for nobody for hours, so all that warmth has nowhere to go. | Amy surprised, Grace surprised, Rose surprised |
 | Rose | Maybe somebody just has to eat it. | Tom surprised, Amy surprised, Grace surprised |
@@ -2510,7 +2510,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Boppy | Why am I scooting? | Deedee unimpressed, Tom happy, Amy happy, Grace happy, Rose happy |
 | Deedee | Because you’re the widest. | Boppy angry, Tom happy, Amy happy, TNB happy, Grace happy, Rose happy |
 | Boppy | My BACK is the widest. | Deedee unimpressed, Tom happy, Amy happy, TNB happy, Grace happy, Rose happy |
-| Deedee | Rhubarb crisp. Nine minutes. Eat. | Tom happy, Amy happy, TNB happy, Grace happy, Rose happy, Boppy unimpressed |
+| Deedee | Apple muffins. Nine minutes. Eat. | Tom happy, Amy happy, TNB happy, Grace happy, Rose happy, Boppy unimpressed |
 | HUSH-9 | I do not eat. | Deedee unimpressed, Tom happy, Grace happy, Rose surprised |
 | Deedee | Everybody eats. | Tom happy, Amy happy, TNB happy, Grace happy, Rose happy, Boppy happy |
 | HUSH-9 | ...It is warm. It is loud. It is... acceptable. | Deedee proud, Tom happy, Amy happy, TNB happy, Grace happy, Rose happy, Boppy unimpressed |
@@ -3044,7 +3044,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Forever Engine | Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of rhubarb crisp that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in. | Tom loving, Amy loving, TNB loving, Grace sad, Rose sad, Deedee loving, Boppy happy |
+| Forever Engine | Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of apple muffins that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in. | Tom loving, Amy loving, TNB loving, Grace sad, Rose sad, Deedee loving, Boppy happy |
 | Vance | Clara would be thirty-one. She would say I deserved all of this. | Tom sad, Amy sad, TNB sad, Deedee sad, Boppy sad, Grace sad |
 | Tom | Probably. And then she would sit down next to you anyway. | Amy loving, Deedee loving |
 | Vance | I could not make the minute stop hurting. So I stopped the minute. It did not stop hurting. It only stopped. | Tom sad, Amy sad, TNB sad, Grace sad, Rose sad, Deedee sad, Boppy sad |
@@ -3715,7 +3715,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Speaker | Line | Reactions |
 |---|---|---|
 | Deedee | My favorite son! And my girls! Come here, come here. | Tom loving, Grace loving, Rose loving |
-| Deedee | Rhubarb crisp in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie? | Tom happy, Grace happy, Rose happy |
+| Deedee | Apple muffins in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie? | Tom happy, Grace happy, Rose happy |
 | Deedee | Grace, Rose, Deedee loves you to the moon and back. Say it back. Louder. | Tom loving, Grace loving, Rose loving |
 
 ## map: map grands, revisit (chapter 1-10)
@@ -3728,7 +3728,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 | Deedee | To the moon and back, girls. The MOON. And BACK. | Tom loving, Grace loving, Rose loving |
 | Deedee | Boppy says he's not feeling good. Boppy also won't stop fishing. | Tom unimpressed, Grace happy, Rose happy |
 | Deedee | Grace, Rose, who wants to help Deedee frost something? | Tom happy, Grace happy, Rose happy |
-| Deedee | Rhubarb crisp is cooling on the counter. Don't touch it. Okay, one corner. | Tom happy, Grace happy, Rose happy |
+| Deedee | Apple muffins is cooling on the counter. Don't touch it. Okay, one corner. | Tom happy, Grace happy, Rose happy |
 | Deedee | I already did my walk. Boppy did one lap around the recliner. | Tom happy, Grace happy, Rose happy |
 | Deedee | Retired registered nurse. Tom calls me a registered nut. Tom is due for a checkup. | Tom unimpressed, Grace happy, Rose happy |
 | Deedee | Sunday dinner is at six thirty. Don't make me call twice. | Tom unimpressed, Grace unimpressed, Rose happy |
@@ -3784,7 +3784,7 @@ Source of truth: `docs/emotion-reactions.tsv`. This page is rebuilt from it with
 
 | Speaker | Line | Reactions |
 |---|---|---|
-| Aunt Ellie | Deedee keeps offering me rhubarb crisp. I keep saying yes. That's called manners. | Tom happy, Grace happy, Rose happy |
+| Aunt Ellie | Deedee keeps offering me apple muffins. I keep saying yes. That's called manners. | Tom happy, Grace happy, Rose happy |
 | Aunt Ellie | Boppy says his stomach hurts. I told him to stop eating peppers. He looked at me like I insulted his mother. | Tom happy, Grace happy, Rose happy |
 | Aunt Ellie | Grace, darling, that outfit is wonderful. Rose, darling, that outfit is a choice. A brave one. | Tom happy, Grace proud, Rose proud |
 | Aunt Ellie | Wisdom is remembering what went wrong and saying so before it happens again. | Tom unimpressed, Grace unimpressed, Rose surprised |

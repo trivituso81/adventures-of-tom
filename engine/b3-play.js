@@ -416,7 +416,8 @@ function b3DrawFoe(f,t,picked) {
 // little stretched and settles into its crouch, then holds with a slow breath. The feet never leave their spot. Leaving the guard plays it backwards.
 // After a move of their own a guarding fighter sinks back into the pose the same way.
 const B3_GUARD={dip:.09,settle:.2,rise:.08,up:.14,low:.93,tall:1.1,breath:.006,ghost:.07};
-function b3PaintState(u,state) { const T=u&&B3_BODY_PAINT[u.id],R=T&&T[state],sp=u&&BATTLE_SPRITES[u.id]; return R&&sp&&sp[R.f]&&(!R.f2||sp[R.f2])?R:null; }
+function b3PaintState(u,state) { if(u&&(state==='guard'||state==='idle')&&b3cGuardClip(u)) return null;   // wanproof: the guard video stands in for the painted guard and fidget in its own Lab row only
+  const T=u&&B3_BODY_PAINT[u.id],R=T&&T[state],sp=u&&BATTLE_SPRITES[u.id]; return R&&sp&&sp[R.f]&&(!R.f2||sp[R.f2])?R:null; }
 // The other painted states. Numbers are battle seconds and battle pixels; +x is away from the monsters. A pose slides out, holds, slides home.
 const B3_PAINT={hit:{out:10,t1:.12,hold:.2,back:.25,flash:.08,dur:.57},dodge:{out:14,hop:6,t1:.14,hold:.1,back:.2,dur:.44},
   ko:{hurt:.3,kneel:.3},getup:.8,fidget:{len:.5,fade:.07,on:true},run:.11,vic:.28};
@@ -443,7 +444,7 @@ function b3KoDraw(u,sp,cx,base,t,koE) {
   drawKnockedOut({id:u.id},u.slot,sp,frame,cx-w/2,base+sink-h,cx,base+sink,e,t,{flash:0});
 }
 // Is this family member (by key) standing in a painted guard right now?
-function b3GuardShown(key) { const u=b3Unit(B3.F,key),G=B3P.gd[key]; return !!(u&&G&&G.on&&b3PaintState(u,'guard')); }
+function b3GuardShown(key) { const u=b3Unit(B3.F,key),G=B3P.gd[key]; return !!(u&&((G&&G.on&&b3PaintState(u,'guard'))||(b3cGuardClip(u)&&b3cGuarding(u)))); }
 // What the guard asks of the draw this frame, or null: {pose:true|false (the guard frame or the standing one), sx, sy (about the feet)}, and for
 // the first B3_GUARD.ghost seconds after the pictures trade places, ghost:{a,sx,sy}: the picture just left, fading out underneath.
 function b3GuardDraw(u,t,busy) {
@@ -501,7 +502,7 @@ function b3DrawMember(u,t,picked) {
     const R=b3PaintState(u,'victory'); if(R) { const two=Math.floor((t+u.slot*.14)/B3_PAINT.vic)%2; PF=sp[two?R.f2:R.f]; PS=two?R.s2:R.s; } }
   else if(low) fk=B3_BODY.low;
   // A clip, when one shows this state and is loaded: idle and guard loops, a hit, a dodge, a give or cast, the victory (engine/b3-clips.js).
-  if(!CF&&!(B&&(B.kind==='path'||B.kind==='cmove'||B.kind==='pose'||B.kind==='hit'))&&!(low&&!cheer)) CF=b3cMemberFrame(u,vu,t,B);
+  if(!CF&&!(B&&(B.kind==='path'||B.kind==='cmove'||B.kind==='pose'||(B.kind==='hit'&&!(B.guard&&b3cGuardClip(u)))))&&!(low&&!cheer)) CF=b3cMemberFrame(u,vu,t,B);
   if(CF&&cheer&&!B) hop=0;
   // Running (crossing the field): the two painted run pictures, the mirrored pair on the way home, in place of the leap picture.
   if(fk===B3_BODY.dash&&!CF&&!PF) { const R=b3PaintState(u,'run'); if(R) { const pair=dirR>0&&sp.runFlip?sp.runFlip:sp.run; PF=pair[Math.floor((t-B.t0)/B3_PAINT.run)%2]; PS=R.s; } }

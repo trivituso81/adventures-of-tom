@@ -340,7 +340,7 @@ const ATTACKS={
   amy:[{key:'basic',name:'Sprint Tackle',mp:0,mult:1},{key:'burpee',name:'Burpee Blitz',mp:3,mult:1.3},{key:'finish',name:'Finish Line',mp:4,mult:1.5},{key:'redpen',name:'Red Pen',mp:5,mult:1.7},
        {key:'hills',name:'Hill Repeats',mp:6,mult:2.0,lvl:2},{key:'quiz',name:'Surprise Quiz',mp:7,mult:2.2,lvl:3},{key:'marathon',name:'Marathon',mp:8,mult:2.6,lvl:4},{key:'pb',name:'Personal Best',mp:10,mult:3.2,lvl:5}],
   deedee:[{key:'basic',name:'Spit Shine',mp:0,mult:1},{key:'walk',name:'Power Walk',mp:3,mult:1.3},{key:'nurse',name:'Registered Nut',mp:4,mult:1.5},{key:'mop',name:'Wet Floor',mp:5,mult:1.7},
-       {key:'crisp',name:'Rhubarb Crisp',mp:6,mult:2.0,lvl:2},{key:'wine',name:'Wine O\u2019Clock',mp:7,mult:2.3,lvl:3},{key:'dinner',name:'Sunday Dinner',mp:8,mult:2.6,lvl:4},{key:'moonshot',name:'To the Moon & Back',mp:10,mult:3.2,lvl:5}],
+       {key:'crisp',name:'Apple Muffins',mp:6,mult:2.0,lvl:2},{key:'wine',name:'Wine O\u2019Clock',mp:7,mult:2.3,lvl:3},{key:'dinner',name:'Sunday Dinner',mp:8,mult:2.6,lvl:4},{key:'moonshot',name:'To the Moon & Back',mp:10,mult:3.2,lvl:5}],
   boppy:[{key:'basic',name:'Cap Swat',mp:0,mult:1},{key:'cast',name:'Cast Line',mp:3,mult:1.3},{key:'pepper',name:'Pepper Breath',mp:4,mult:1.5},{key:'recliner',name:'Recliner Drop',mp:5,mult:1.7},
        {key:'hotpepper',name:'Hot Pepper',mp:6,mult:2.0,lvl:2},{key:'bigcatch',name:'Big Catch',mp:7,mult:2.3,lvl:3},{key:'ghost',name:'Ghost Pepper',mp:8,mult:2.6,lvl:4},{key:'gotaway',name:'The One That Got Away',mp:10,mult:3.2,lvl:5}],
   tnb:[{key:'basic',name:'Mug Toss',mp:0,mult:1},{key:'carve',name:'Carve',mp:3,mult:1.3},{key:'quickchange',name:'Quick Change',mp:4,mult:1.5},{key:'metro',name:'Next Stop',mp:5,mult:1.7},

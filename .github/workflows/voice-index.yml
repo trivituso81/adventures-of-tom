@@ -1,0 +1,71 @@
+name: voice-index
+
+# voiceauto1 (Tom 2026-11-20: "the new lines in the game are not in the voice library for recording - can this be automated").
+# On every push to main that touches the game's words, rebuild the Voice Library list (data/voice-index.json) with
+# tools/voice-library/rebuild.py and commit it when a line was added, removed or re-scripted. New lines then show under
+# ADMIN > VOICE LIBRARY > Show > No clip yet without a session remembering to rebuild. Pushes made by this job use
+# GITHUB_TOKEN, so they never start it again. Test: python3 tools/voice-library/rebuild_test.py
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/**'
+      - 'engine/**'
+      - 'tools/voice-library/**'
+      - 'tools/clip-audit/harvest.js'
+      - 'index.html'
+      - '!data/voice-index.json'
+      - '!data/board.json'
+      - '!data/build-history.js'
+      - '!tools/voice-library/harvest.json'
+      - '!tools/voice-library/battle-scripts.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voice-index
+  cancel-in-progress: true
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install the headless browser the line harvest runs in
+        run: |
+          pip install -q playwright
+          python -m playwright install --with-deps chromium
+      - name: Rebuild the Voice Library list
+        run: python3 tools/voice-library/rebuild.py | tee /tmp/rebuild.txt
+      - name: Commit and push it if a line changed
+        run: |
+          if grep -q '^UNCHANGED' /tmp/rebuild.txt; then echo "No line changed."; exit 0; fi
+          summary=$(grep -m1 '^CHANGED' /tmp/rebuild.txt | cut -c1-120)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/voice-index.json tools/voice-library/harvest.json tools/voice-library/battle-scripts.json
+          git commit -q -m "voice-index: ${summary}"
+          for i in 1 2 3 4; do
+            if git push origin HEAD:main; then exit 0; fi
+            # Another push landed first. Take the newest main and rebuild on it.
+            git fetch --depth=1 origin main
+            git reset -q --hard origin/main
+            python3 tools/voice-library/rebuild.py | tee /tmp/rebuild.txt
+            if grep -q '^UNCHANGED' /tmp/rebuild.txt; then echo "Already up to date."; exit 0; fi
+            git add data/voice-index.json tools/voice-library/harvest.json tools/voice-library/battle-scripts.json
+            git commit -q -m "voice-index: $(grep -m1 '^CHANGED' /tmp/rebuild.txt | cut -c1-120)"
+          done
+          echo "::error::Could not push the Voice Library list after 4 tries."; exit 1

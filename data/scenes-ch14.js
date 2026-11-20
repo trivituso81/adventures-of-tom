@@ -2,7 +2,7 @@
 // data/scenes-ch14.js — Part 2, Chapter 14 "The Rikers Wall of Rivituso Row". Loaded after data/scenes-ch13.js.
 // Chapter 13 ended with Boppy at the Rivituso door in the Warden's gold plate. The girls come up the handcar from the Sub-Rail and rejoin the party
 // (setGirlsAway(false) clears the cab-stand copies); TNB and Nara stay to hold the breach against Vance's Auditors. Deedee is on the porch, half in
-// amber, looping a rhubarb crisp. Rose eats the crisp (amber is warmth that got stuck; it needs somewhere to go). Boppy cannot be hit: the fight is
+// amber, looping a plate of apple muffins. Rose eats the crisp (amber is warmth that got stuck; it needs somewhere to go). Boppy cannot be hit: the fight is
 // DEFEND, cheering him up, jokes, and Deedee's MOON & BACK (data/ch14-battle.js). After it: the plate melts, "I just didn't want to get too old to
 // keep you all safe," the Tombo Nobody Gets Past Us (boppy2) unlocks, and Deedee and Boppy go back inside.
 // Flags, in order: ch14-open (the scene played; the girls are back), ch14-deedee (Deedee freed from the loop), ch14-gate (the Warden fight has
@@ -10,7 +10,7 @@
 const CH14={mode:'full',chapter:14};
 Object.assign(items,{
   wardenhelm:{name:'Warden’s Bucket',icon:'🪣',slot:null,keepsake:true,desc:'The gold helm, after the gold ran off it. It is a bucket. Rose has named it Sir Bucket. Boppy asked that it not be mentioned again.'}});
-const CH14_DEEDEE_LINES=['Rhubarb crisp, nine minutes. Rhubarb crisp, nine minutes. Rhubarb crisp...','The amber is up to her waist. She is smiling. She is holding a tray, and she is not looking at it.'];
+const CH14_DEEDEE_LINES=['Apple muffins, nine minutes. Apple muffins, nine minutes. Apple muffins...','The amber is up to her waist. She is smiling. She is holding a tray, and she is not looking at it.'];
 const CH14_DEEDEE_FREE_LINES=['I can’t walk yet, the glass has my feet. Go on, Tom. Don’t hit him. Make him laugh. I’ll know when.','He laughs when he’s scared. He always has. Go on.'];
 const CH14_BOPPY_LINES=['The armor hums. Boppy does not move. “Halt.”','“Go home, Tom. The glass stays up. That’s the deal.”','His eyes keep sliding to the porch. Every time they do, the hum gets louder.'];
 const CH14_BOPPY_WAIT_LINES=['“Halt.” His voice shakes on it. “Your mother is fine. She’s baking. Don’t look at her.”','The armor hums. He is not looking at the porch. He is working very hard at not looking at the porch.'];
@@ -84,9 +84,9 @@ SCENES.ch14Open=[
 
 SCENES.ch14Deedee=[
   {flag:'ch14-deedee',value:'pending'},
-  {talk:'Deedee',lines:['Rhubarb crisp, nine minutes. Rhubarb crisp, nine minutes. Hello, sweetie. Rhubarb crisp, nine minutes.']},
+  {talk:'Deedee',lines:['Apple muffins, nine minutes. Apple muffins, nine minutes. Hello, sweetie. Apple muffins, nine minutes.']},
   {talk:'Amy',lines:['Mom. It’s Amy. Mom, look at me.']},
-  {talk:'Deedee',lines:['Hello, Amy. Rhubarb crisp, nine minutes. Do you want a bite? Rhubarb crisp. Nine minutes.']},
+  {talk:'Deedee',lines:['Hello, Amy. Apple muffins, nine minutes. Do you want a bite? Apple muffins. Nine minutes.']},
   {talk:'Tom',lines:['She’s looping. Look at the tray. It’s the same crisp. Every time. It’s fresh, it’s perfect, and nobody ever eats it.']},
   {talk:'Tom',lines:['Amber is warmth that got stuck. She’s been baking for nobody for hours, so all that warmth has nowhere to go.']},
   {talk:'Rose',lines:['Maybe somebody just has to eat it.']},

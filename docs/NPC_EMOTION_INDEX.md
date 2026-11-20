@@ -333,7 +333,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | Ch | Where | Emotion | Line |
 |---|---|---|---|
 | 1-10 | map grands, base | Loving | My favorite son! And my girls! Come here, come here. |
-| 1-10 | map grands, base | Happy | Rhubarb crisp in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie? |
+| 1-10 | map grands, base | Happy | Apple muffins in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie? |
 | 1-10 | map grands, base | Loving | Grace, Rose, Deedee loves you to the moon and back. Say it back. Louder. |
 | 1-10 | map grands, revisit | Proud | The tomatoes are coming in. You're going home with forty. |
 | 1-10 | map grands, revisit | Proud | I baked at five this morning. The neighbors have stopped asking why. |
@@ -341,7 +341,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 1-10 | map grands, revisit | Loving | To the moon and back, girls. The MOON. And BACK. |
 | 1-10 | map grands, revisit | Unimpressed | Boppy says he's not feeling good. Boppy also won't stop fishing. |
 | 1-10 | map grands, revisit | Happy | Grace, Rose, who wants to help Deedee frost something? |
-| 1-10 | map grands, revisit | Loving | Rhubarb crisp is cooling on the counter. Don't touch it. Okay, one corner. |
+| 1-10 | map grands, revisit | Loving | Apple muffins is cooling on the counter. Don't touch it. Okay, one corner. |
 | 1-10 | map grands, revisit | Unimpressed | I already did my walk. Boppy did one lap around the recliner. |
 | 1-10 | map grands, revisit | Proud | Retired registered nurse. Tom calls me a registered nut. Tom is due for a checkup. |
 | 1-10 | map grands, revisit | Unimpressed | Sunday dinner is at six thirty. Don't make me call twice. |
@@ -395,7 +395,7 @@ Fact: every line a person (not a monster) says in chapters 1 to 20 outside the c
 | 1-10 | map elliehouse, base | Unimpressed | Tom. Stand up straight. There. Now you look like someone I'm related to. |
 | 1-10 | map elliehouse, base | Proud | Yes, Deedee has an aunt. Yes, I'm older. No, you may not ask by how much. |
 | 1-10 | map elliehouse, base | Unimpressed | I've been to Paris eleven times, darling. Long Island is charming. But one must explore the world. |
-| 1-10 | map elliehouse, revisit | Happy | Deedee keeps offering me rhubarb crisp. I keep saying yes. That's called manners. |
+| 1-10 | map elliehouse, revisit | Happy | Deedee keeps offering me apple muffins. I keep saying yes. That's called manners. |
 | 1-10 | map elliehouse, revisit | Unimpressed | Boppy says his stomach hurts. I told him to stop eating peppers. He looked at me like I insulted his mother. |
 | 1-10 | map elliehouse, revisit | Happy | Grace, darling, that outfit is wonderful. Rose, darling, that outfit is a choice. A brave one. |
 | 1-10 | map elliehouse, revisit | Proud | Wisdom is remembering what went wrong and saying so before it happens again. |
