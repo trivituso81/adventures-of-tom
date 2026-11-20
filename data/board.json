@@ -1522,10 +1522,10 @@
    "title": "Switch GitHub Pages to publish from Actions (one setting)",
    "theme": "Project Ops",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "setup",
    "fyi": true,
-   "next": "Open github.com/trivituso81/adventures-of-tom, tap Settings, then Pages. Under Build and deployment, set Source to GitHub Actions. Then push anything and the publish takes about 1.5 minutes. Setting it back to Deploy from a branch undoes it.",
+   "next": "Nothing to do. You said the Pages source is already GitHub Actions, so the faster publish is on. The next time anything is pushed to the game, the publish should take about 1.5 minutes.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -1537,8 +1537,13 @@
     {
      "d": "2026-11-20",
      "t": "Added by pubfast2: the faster publish only runs once this setting is switched."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: the source is already set to GitHub Actions and 'push anything' made no sense to him. Card retired; no action for him."
     }
-   ]
+   ],
+   "note": "Tom 11-20: the source is already GitHub Actions; the card's 'push anything' was unclear."
   },
   {
    "id": "c-facehold1",
