@@ -1,3 +1,7 @@
+## fix-keysecrets2-try-2 (2026-11-20): GENERATE VIDEO works on a clip that is already approved
+
+Tom (t-keysecrets2-try, 11-20): "i got an error This clip is already approved. Reject it first (Battle Lab REVIEW) to make another. why cant i gerneate a new one just cause theres one approved? that shouldnt be". Fact: the page (`clipGenerate`, `engine/art-clips.js`) and the job (`request_queue`, `clipgen.py`) both refused an approved clip. Fix: a press on one clip now always makes a new video; if the clip was approved, the new version is added and becomes the current one (`replace` on `approve`). A chapter press still skips approved clips. Tests: `clipgen_test.py requests` covers it (the one failure `it is listed for Tom and the paid video is kept` was there before this change).
+
 ## reports-2026-11-20a (2026-11-20): the welcome page frame is only as wide as its four buttons and stays centred
 
 Tom's report r-20261120-130739-tr1a: "the choose how to play frame width should be shrunken so that it fits only new game load and the two icon buttons. it should remain centered." (welcomefit1) `#splash-panel.launch` (set by `splashSetMode` only for the welcome layout) is `width:max-content`, centred; other splash screens keep the full-width frame. Looked at in portrait 390x844 and landscape 844x390. Also: board-sync treats a skipped workflow run as not failed. Rose facing report r-20261120-113001-w756 waits on Tom card t-rose-facing. board_sync_test R5 was already failing on main before this push.

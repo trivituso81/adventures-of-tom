@@ -207,7 +207,10 @@ def requests_mode():
         ok(any(m.startswith('clip: requests taken') and '[skip ci]' in m for m in cmsgs), 'the emptied queue is committed with [skip ci] (it must not start another run): %s' % cmsgs[:6])
         # an approved clip is skipped with the reason
         put([{'id': 'clip-tom-cast', 'at': 21}]); out = TMP + '/rq2'; n0 = len(sends()); r = go(out); rep = json.load(open(out + '/clipgen-report.json'))
-        ok(len(sends()) == n0 and rep['skipped'] and 'already approved' in rep['skipped'][0]['why'], 'a press on an approved clip makes nothing and says so: %s' % rep['skipped'])
+        doc, _ = remote_doc(remote); nv0 = len({e['id']: e for e in doc['entries']}['clip-tom-cast']['versions'])
+        ok(len(sends()) == n0 + 1 and rep['approved'] == ['clip-tom-cast'], 'a press on an approved clip makes a new version: %s' % rep)
+        doc, _ = remote_doc(remote); c = {e['id']: e for e in doc['entries']}['clip-tom-cast']
+        ok(len(c['versions']) == nv0 + 1 and c['status'] == 'approved', 'the new version replaces the approved one (latest version is the current)')
         # a group press makes what is not made yet; the held video that hardly moves is not paid for again
         n0 = len(sends()); put([{'group': 'Chapter 9', 'cap': 3, 'at': 31}]); out = TMP + '/rq1'; r = go(out)   # the same output folder: the held video that hardly moves is remembered, as the branch clipgen does in the Action
         rep = json.load(open(out + '/clipgen-report.json')); doc, _ = remote_doc(remote); E = {e['id']: e for e in doc['entries']}

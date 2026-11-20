@@ -98,7 +98,7 @@ class Repo:
             done, today, now = {}, datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d'), int(time.time() * 1000)
             for it in items:
                 e = by.get(it['id'])
-                if not e or e.get('status') == 'approved': continue   # approved meanwhile (the Library, another session): leave it
+                if not e or (e.get('status') == 'approved' and not it.get('replace')): continue   # approved meanwhile (the Library, another session): leave it; a press on one clip asks for a new version (replace)
                 k = max([0] + [v.get('n') or 0 for v in e.get('versions') or []]) + 1
                 while self.exists('art/raw/clips/%s-v%d.mp4' % (e['id'], k)) or self.exists('art/raw/clips/%s-v%d.json' % (e['id'], k)): k += 1
                 rel = 'art/raw/clips/%s-v%d.mp4' % (e['id'], k)
@@ -197,7 +197,7 @@ class Gone(Exception): pass   # this request is dead (failed, expired): the pend
 
 
 def request_queue(doc, repo, reqs):
-    """keysecrets2: the entries the requests ask for, in the order asked. A press of one entry makes it whatever its status except approved (a repeat
+    """keysecrets2: the entries the requests ask for, in the order asked. A press of one entry makes it whatever its status, an approved one too (the new version replaces the approved one; a repeat
     press is another variant; a rejected clip does not wait for a rewritten prompt, Tom asked for it). A group press makes what classify() calls todo or redo.
     The prompt in a request replaces the entry's own for this run (in memory; approve saves it). Returns (queue, asked ids, [{id, why, kind blocked|skipped}], caps)."""
     by = {e['id']: e for e in doc['entries']}; queue, asked, notes, caps = [], [], [], []
@@ -208,11 +208,11 @@ def request_queue(doc, repo, reqs):
         if r.get('id'):
             e = by.get(r['id']); asked.append(r['id'])
             if not e or not e.get('clip') or e['clip'].get('test'): notes.append({'id': r['id'], 'why': 'no such video entry', 'kind': 'skipped'}); continue
-            if e.get('status') == 'approved': notes.append({'id': e['id'], 'why': 'already approved: not made again', 'kind': 'skipped'}); continue
             if (r.get('prompt') or '').strip(): e['prompt'] = r['prompt']
             cl = classify(doc, repo, e.get('group'))
             blk = next((w for b, w in cl['blocked'] if b['id'] == e['id']), '')
             if blk: notes.append({'id': e['id'], 'why': blk, 'kind': 'blocked'}); continue
+            e['_replace'] = e.get('status') == 'approved'   # keysecrets2 fix: a press on an approved clip makes another version that replaces it
             add(e)
         else:
             cl = classify(doc, repo, r['group'])
@@ -347,7 +347,7 @@ def main():
                     say(id_, 'HELD by the gate (not approved; video kept):', ' | '.join(g['reasons'])[:400]); return
                 say(id_, 'gate ok' + ('' if g.get('vision_ran') else ' (measured part only%s)' % ('; vision: ' + g['vision_error'] if g.get('vision_error') else '')))
             with clock:   # one commit at a time: each one rewrites data/art-prompts.json
-                done = repo.approve([{'id': id_, 'video': vid, 'marks': marks, 'prompt': (e.get('prompt') or '').strip(), 'rev': rev}])
+                done = repo.approve([{'id': id_, 'video': vid, 'marks': marks, 'prompt': (e.get('prompt') or '').strip(), 'rev': rev, 'replace': bool(e.get('_replace'))}])
             if done:
                 report['approved'].append(id_); say(id_, 'approved', json.dumps(marks), done[id_])
             else: report['failed'].append({'id': id_, 'why': 'already approved by someone else; the video is kept in the output'}); return

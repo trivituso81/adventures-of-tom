@@ -70,7 +70,6 @@ async function clipGenerate(id,btn){
   if(!LS.get('aot-gh-token')) return setMsg(id,'Open Setup at the top and paste the GitHub token first: videos are made on GitHub, and the token is how this page asks.',true);
   if(blk) return setMsg(id,blk.why,true);
   const prompt=(promptOf(e)||'').trim(); if(!prompt) return setMsg(id,'The prompt is empty.',true);
-  if(e.status==='approved') return setMsg(id,'This clip is already approved. Reject it first (Battle Lab REVIEW) to make another.',true);
   btn.disabled=true; setMsg(id,'Sending the request to GitHub...');
   try{
     await clipReqSend({id,prompt,cap:clipCap(clipCost(e)),at:Date.now()});
