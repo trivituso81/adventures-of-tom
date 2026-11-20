@@ -17187,7 +17187,7 @@
    "id": "c-hollowtrail1",
    "tag": "hollowtrail1",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Areas",
    "title": "Grump Hollow muffin wrapper trail",
    "next": "Tom wants the nine muffin wrappers to lead the party through Grump Hollow in four stages (the Square, the upper left, the log in the screen centre, then the right), one area painting per stage, with each monster placed on the trail before the boss trigger. Reports r-20261120-140805-mhzt, r-20261120-141016-j0za, r-20261120-141209-58bx.",
@@ -17205,12 +17205,17 @@
    },
    "chat": {
     "url": "",
-    "opening": "not started"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
      "d": "2026-11-20",
      "t": "Added by c-reports-5: the reports named here need new pictures, so the backlog sessions left them open."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-20T23:51:41.198Z"
     }
    ]
   },
