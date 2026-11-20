@@ -87,7 +87,7 @@ def seed_repo():
     os.makedirs(work + '/data'); os.makedirs(work + '/art/clips'); os.makedirs(work + '/art/raw/clips')
     shutil.copytree(ROOT + '/art/clips/start', work + '/art/clips/start')
     doc = json.load(open(ROOT + '/data/art-prompts.json', encoding='utf-8'))
-    pick = {'clip-tom-loungepass': 'strike', 'clip-tom-cast': 'state', 'clip-grump-idle': 'loop', 'clip-tom-give': 'state', 'clip-mudling-bump': 'strike', 'clip-mudling-throw': 'strike', 'clip-grace-idle': 'loop'}
+    pick = {'clip-tom-loungepass': 'strike', 'clip-tom-cast': 'state', 'clip-grump-idle': 'loop', 'clip-tom-give': 'state', 'clip-mudling-bump': 'strike', 'clip-mudling-throw': 'strike', 'clip-grace-squeeze': 'strike'}
     keep = []
     for e in doc['entries']:
         if e['id'] in pick:
@@ -97,7 +97,7 @@ def seed_repo():
     E['clip-tom-give']['prompt'] += ' STILL'                                                        # the stand-in server answers this one with a video that never moves
     E['clip-mudling-bump'].update(status='rejected', rejects=[{'date': '2026-11-19', 'note': 'x', 'from': 'v1', 'at': 1, 'rev': 0}], promptRev=0)   # waits for a rewritten prompt
     E['clip-mudling-throw'].update(status='rejected', rejects=[{'date': '2026-11-19', 'note': 'x', 'from': 'v1', 'at': 1, 'rev': 0}], promptRev=1)  # rewritten: made again
-    E['clip-grace-idle']['clip']['start'] = 'art/clips/start/nobody.png'                           # blocked: no start picture
+    E['clip-grace-squeeze']['clip']['start'] = 'art/clips/start/nobody.png'                           # blocked: no start picture
     open(work + '/data/art-prompts.json', 'w', encoding='utf-8').write(json.dumps(doc, indent=1, ensure_ascii=False) + '\n')
     sh('git', 'init', '-q', '-b', 'main', cwd=work); sh('git', 'remote', 'add', 'origin', remote, cwd=work)
     sh('git', '-c', 'user.name=t', '-c', 'user.email=t@t', 'add', '-A', cwd=work); sh('git', '-c', 'user.name=t', '-c', 'user.email=t@t', 'commit', '-q', '-m', 'seed', cwd=work)
@@ -134,7 +134,7 @@ def generation():
         out = TMP + '/out1'
         # dry run: nothing sent, nothing changed
         r = run_gen(work, out, port, '--dry-run'); ok(r.returncode == 0 and 'dry run' in r.stdout and not [x for x in stub_log(port) if x.get('xai')], 'dry run lists the clips and sends nothing')
-        ok('clip-grace-idle: start picture' in r.stdout and '1 redo waiting' in r.stdout, 'dry run names the blocked clip and the redo that waits')
+        ok('clip-grace-squeeze: start picture' in r.stdout and '1 redo waiting' in r.stdout, 'dry run names the blocked clip and the redo that waits')
         # a cap below the estimate stops before any request
         r = run_gen(work, TMP + '/outcap', port, '--cap', '0.05'); ok(r.returncode != 0 and 'cap' in r.stdout and not [x for x in stub_log(port) if x.get('xai')], 'a cap below the estimate stops the run before any request')
         # a refused key stops the run before anything is paid (the first request answers 401)
@@ -158,8 +158,8 @@ def generation():
         ok(E['clip-tom-give'].get('status') == 'draft' and not E['clip-tom-give'].get('versions'), 'the video that never moves is NOT approved')
         rep = json.load(open(out + '/clipgen-report.json'))
         ok(rep['still'] == ['clip-tom-give'] and os.path.exists(out + '/videos/clip-tom-give-rev0.mp4'), 'it is listed for Tom and the paid video is kept')
-        ok([b['id'] for b in rep['blocked']] == ['clip-grace-idle'] and rep['redoWaiting'] == ['clip-mudling-bump'], 'blocked and waiting clips are listed, not made')
-        ok(E['clip-mudling-bump']['status'] == 'rejected' and E['clip-grace-idle']['status'] == 'draft', 'those two are untouched on main')
+        ok([b['id'] for b in rep['blocked']] == ['clip-grace-squeeze'] and rep['redoWaiting'] == ['clip-mudling-bump'], 'blocked and waiting clips are listed, not made')
+        ok(E['clip-mudling-bump']['status'] == 'rejected' and E['clip-grace-squeeze']['status'] == 'draft', 'those two are untouched on main')
         ok(sorted(rep['approved']) == ['clip-grump-idle', 'clip-mudling-throw', 'clip-tom-cast', 'clip-tom-loungepass'] and abs(rep['spent'] - (.07 * 4 + .25)) < .005, 'report: 4 approved, spent about $%.2f' % rep['spent'])
         ok(raw == json.dumps(doc, indent=1, ensure_ascii=False) + '\n', 'data/art-prompts.json keeps its format (indent 1, ensure_ascii False, newline)')
         n = int(sh('git', '--git-dir', remote, 'rev-list', '--count', 'main').stdout) - 1
