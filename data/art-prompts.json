@@ -16009,8 +16009,17 @@
    "group": "Airport"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/rooms/room-gatezero-noplane-v1.png",
+     "date": "2026-11-20",
+     "from": "v1",
+     "at": 1795163955264,
+     "srv": "room-gatezero-noplane@20261120T075037"
+    }
+   ],
    "rejects": [],
    "id": "room-gatezero-noplane",
    "tab": "Rooms",
