@@ -8270,7 +8270,7 @@
    "title": "Install the Gate Zero pictures (no plane, plane)",
    "theme": "Areas",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as gatezero: the Gate Zero window is empty and the plane rolls away at the end of chapter 10. Tom plays the chapter 10 ending (card t-gatezeroplay).",
    "blocks": [],
    "changed": "2026-11-20",
@@ -8345,6 +8345,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped gatezero: kept the current painting, painted the plane out, plane and window frames are separate layers; the plane now rolls out of the window. Tested portrait and landscape."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gatezero: Gate Zero window is empty and Flight Zero rolls away at the end of chapter 10"
     }
    ],
    "prompt": {
@@ -8358,7 +8362,8 @@
    },
    "tag": "gatezero",
    "started_at": "2026-11-20T17:43:02+00:00",
-   "after": "t-gatezeroplay"
+   "after": "t-gatezeroplay",
+   "done": "2026-11-20"
   },
   {
    "id": "t-gatezeroart",
@@ -15340,6 +15345,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukESVQibHd96DoCq68m",
+   "title": "Install the Gate Zero pictures (no plane, plane)",
+   "first": "2026-11-20T09:58:10-08:00",
+   "last": "2026-11-20T10:23:25-08:00",
+   "tags": [
+    "gatezero"
+   ],
+   "cards": [
+    "c-gatezero"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGvjLsGEhjAju5h9Va",
    "title": "Fix Grace's muffin-heist line so it names the muffins",
    "first": "2026-11-20T10:04:38-08:00",
@@ -15402,16 +15419,6 @@
    ],
    "cards": [
     "c-idea-welcomepage"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukESVQibHd96DoCq68m",
-   "title": "Install the Gate Zero pictures (no plane, plane)",
-   "first": "2026-11-20T09:58:10-08:00",
-   "last": "2026-11-20T09:58:10-08:00",
-   "tags": [],
-   "cards": [
-    "c-gatezero"
    ]
   },
   {
@@ -16811,8 +16818,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "0e01c8301740b93cda4c3d763d10b0e39489176f",
- "synced_at": "2026-11-20T18:21:35+00:00",
+ "synced": "0fdf1cbfdfdb9ee65594f7f2e5a83c6d56ec4b6b",
+ "synced_at": "2026-11-20T18:24:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
