@@ -216,7 +216,9 @@ const LE_AREAS=[
     border:{kind:'tree',open:[[12,1],[13,1],[14,1],[12,21],[13,21],[14,21],[0,5],[0,6],[0,7],[0,8],[0,9],[0,13],[0,14],[23,6],[23,7],[23,8],[23,9],[23,10],[23,11],[23,12],[23,13],[23,14],[23,15],[23,16],[23,17]]},
     exits:[[12,1,'town',12,24,'up'],[13,1,'town',13,24,'up'],[14,1,'town',14,24,'up'],[12,20,'pier',11,1,'down'],[13,20,'pier',12,1,'down'],[14,20,'pier',12,1,'down']],
     // The path south to Cattail Pier (chapter 3) stays closed until Boppy takes everyone fishing.
-    gates:[{at:[[12,20],[13,20],[14,20]],cond:{test:S=>S.chapter<3||(S.chapter===3&&!S.flags['ch3-boppy'])},name:'Pier path',
+    // gem-bug08: Amy's door (7,6) stays shut in chapter 1 (nothing there is part of the chapter; going in fired a broken party-leave banner).
+    gates:[{at:[[7,6]],cond:{chapter:1},name:"Amy's House",lines:['The door is locked. A note on it: Amy is out running. Back later. Probably faster than you.']},
+      {at:[[12,20],[13,20],[14,20]],cond:{test:S=>S.chapter<3||(S.chapter===3&&!S.flags['ch3-boppy'])},name:'Pier path',
       lines:['A sign on the fallen branch: CATTAIL PIER. CLOSED FOR THE SEASON. The fish need a break.'],
       when:[{chapter:3,lines:['The path south goes to Cattail Pier.','Going fishing without Boppy? He\'d never, ever let you hear the end of it.']}]}],
     objects:[

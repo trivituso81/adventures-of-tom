@@ -11185,7 +11185,7 @@
    "theme": "Areas",
    "lane": "claude",
    "col": "prog",
-   "next": "Claude fixes this (BUG-08, severity Medium) when its prompt is started.",
+   "next": "Shipped as gem-bug08: Amy's door on Rivituso Row is locked in chapter 1 with a note; it opens from chapter 2.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -11210,6 +11210,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fixed. Confirmed on main (door was not gated), added a chapter 1 gate on the Amy door and made house doors honour area gates. Test tools/gem_bug08_test.py passes."
     }
    ],
    "tag": "gem-bug08",
@@ -11222,7 +11226,8 @@
     "effort": "medium (one door lock and one clipped NPC)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug08 in data/board.json, history included. Your first push is the commit board: start c-gem-bug08.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-08. What the tester saw: Severity Medium. Where: `Amy's House` (`GREGORI`) Premature Entry Glitch. During the Ch. 1 walk back from `grands` to `The Square`, `GREGORI` is enterable: stepping inside fires a `\"Deedee left the party.\"` banner overlapping Tom's head above an empty `Justin` dialogue box, while an orange-dress NPC stands clipped on top of the right half-wall.\n\nThe tester suggested (a suggestion, not an order): Lock `GREGORI` door during Ch. 1 (or provide a clean locked-door bark) so Ch. 1 never triggers broken `Justin` dialogue or premature party-leave state bugs.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug08, push to main, and write the result and the next step onto the card.\n\nYou have my full permission to access the repo."
    },
-   "started_at": "2026-11-20T16:20:00+00:00"
+   "started_at": "2026-11-20T16:20:00+00:00",
+   "after": "nothing for Tom: end"
   },
   {
    "id": "c-gem-bug09",

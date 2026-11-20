@@ -1,3 +1,8 @@
+## gem-bug08 (2026-11-20): Amy's House door is locked in chapter 1, with a note on it
+
+- Gemini chapter 1 report BUG-08 (claude/ch1-gemini-tracker.md): walking back from the grands in chapter 1 let Tom step into Amy's House, which fired a broken party-leave banner over an empty Justin box. Confirmed still possible on current main (the door was not gated).
+- Fix: a gate on the Amy door tile (7,6) in `row` for chapter 1 (`data/maps-le.js`), and `beginTransition` in `engine/story.js` now applies area gates to house doors too (it only did for map edges). Tom steps back and reads: "The door is locked. A note on it: Amy is out running. Back later. Probably faster than you." From chapter 2 the door opens as before.
+- No spoken line changed or added. Test: `python3 tools/gem_bug08_test.py` (chapter 1 stays on the Row with the note; chapter 2 enters). Smoke: only the tag check failed before the bump.
 ## gem-bug09 (2026-11-20): The Big One no longer wears a flat grey plate over its painted pan hat
 
 Gemini BUG-09, checked on current main. (1) Big One: reproduced. The Pie Tin status drew a flat ellipse over the pan the painted frames already show; the status (GRIT +50%) stays, the extra drawing is skipped for foes with `tinPainted` (`engine/battle2-ui.js`, `data/monsters.js`). (3) NPC roof and wall clipping: already fixed in roofnpc2 (`noGoRoof` on town and row matches `tools/npc_roof_tiles.py`, 0 tiles missing); Sal's cap in `taxi` and Boppy in `grands` look clean in portrait. (2) Tan puffs: not reproduced (the only tan puffs are the KO dust and the flight-map contrail, both short-lived); not changed.

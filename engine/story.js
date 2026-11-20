@@ -1271,7 +1271,7 @@ function storyGate(map,x,y) {
 }
 const LE_beginTransition_story=beginTransition;
 beginTransition=function(portal) {
-  if(portal.kind==='edge') {
+  if(portal.kind==='edge'||portal.kind==='enter') {
     const g=storyGate(currentMap,player.x,player.y);
     if(g) {
       const d=DIR[player.facing]; player.x-=d.x; player.y-=d.y; player.move=null; placeFollowers();
