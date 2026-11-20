@@ -5630,7 +5630,7 @@
    "id": "c-fix-ch1art2",
    "tag": "fix-ch1art2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Areas",
    "title": "Fix what you found on: Make the seven chapter 1 pictures",
@@ -5652,7 +5652,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukFjCmABxbJpuMFmDbh",
     "opening": "Something is wrong on t-ch1art2"
    },
    "history": [
@@ -5663,6 +5663,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom reported on t-ch1art2: i dont understand why we need this art. like it doesnt make sense based on how the game works (except grace's list). explain"
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -5687,13 +5691,17 @@
    "changed": "2026-11-19",
    "created": "2026-11-19",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDvEEkuXJtFLApvat9",
     "opening": "\"the font in the battle ability list is just a touch too big. will it accommodate the max number of icons?\""
    },
    "history": [
     {
      "d": "2026-11-19",
      "t": "New card, small follow-up to b3s9a and the open skillinfo1 card (same SKILLS list). Tom: \"the font in the battle ability list is just a touch too big. will it accommodate the max number of icons? also give me a list of every icon, what it represents, and what that effect actually means/does\" then \"The icons can also be smaller\""
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -5836,6 +5844,29 @@
    "cards": [
     "c-starttest",
     "c-copydocs"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDvEEkuXJtFLApvat9",
+   "title": "Fix party followers lagging behind Tom in free walking (follow1)",
+   "first": "2026-11-19T17:23:21-08:00",
+   "last": "2026-11-19T18:47:29-08:00",
+   "tags": [
+    "follow1"
+   ],
+   "cards": [
+    "c-follow1",
+    "c-skilllist1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFjCmABxbJpuMFmDbh",
+   "title": "Fix what you found on: Make the seven chapter 1 pictures",
+   "first": "2026-11-19T18:47:21-08:00",
+   "last": "2026-11-19T18:47:21-08:00",
+   "tags": [],
+   "cards": [
+    "c-fix-ch1art2"
    ]
   },
   {
@@ -6158,18 +6189,6 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukDvEEkuXJtFLApvat9",
-   "title": "Fix party followers lagging behind Tom in free walking (follow1)",
-   "first": "2026-11-19T17:23:21-08:00",
-   "last": "2026-11-19T17:47:16-08:00",
-   "tags": [
-    "follow1"
-   ],
-   "cards": [
-    "c-follow1"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukEZT7UffmxSezt2yvX",
    "title": "Chapter 1 Rivituso Row: show Amy in her window, stop the party clear of the arch sign (amywin1)",
    "first": "2026-11-19T17:02:34-08:00",
@@ -6262,8 +6281,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "b0b376ffb9f0c5c3cd31a7ace7c8d476375dbb23",
- "synced_at": "2026-11-20T02:43:42+00:00",
+ "synced": "dbd5f02cefa00b1b4814a07a801cbdba2debedff",
+ "synced_at": "2026-11-20T02:48:34+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
