@@ -11388,13 +11388,13 @@
    "theme": "Story and Dialogue",
    "lane": "claude",
    "col": "prog",
-   "next": "Claude brings the build to the locked canon for CANON-01 when its prompt is started.",
+   "next": "Claude moves the stretch and Tom's line into the taxi office, adds Sal's send-off line, then Tom walks out into the existing TATA greeting.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "",
-    "opening": "pasted by Tom from the board"
+    "url": "https://claude.ai/code/session_01RXeukEAVEz7ZsgqjE7u2pm",
+    "opening": "\"Gemini found the below issue but override everything below with the following\""
    },
    "history": [
     {
@@ -11405,6 +11405,10 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-20T16:41:01.523Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom overrode the tester's target: \"Tom should do his same old stretching routine in the cab company interior, same dialogue. at the end Sal should say \\\"OK Mr. Fancy Pants. Head outside, I think there's a couple of pip squeeks looking for you.\\\" then Tom exits the taxi company and the existing sequence continue where the girls say tata, he crouches and they hug.\""
     }
    ],
    "tag": "gem-canon01",
