@@ -361,7 +361,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-17",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFZ26fDR3jSE8m4NVH",
+    "url": "https://claude.ai/code/session_01RXeukFZ26fDR3jSE8m4NVH",
     "opening": "unknown"
    },
    "history": [
@@ -425,6 +425,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -13724,10 +13728,37 @@
      "d": "2026-11-20",
      "t": "Made by the gatezero session: the two generated pictures were rejected for size and placement."
     }
-   ]
+   ],
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukET7MxhBU662PA8H6L",
+    "opening": "unknown"
+   }
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFZ26fDR3jSE8m4NVH",
+   "title": "Build chapter 2 to the locked script",
+   "first": "2026-11-20T17:45:06Z",
+   "last": "2026-11-20T17:45:06Z",
+   "tags": [],
+   "cards": [
+    "c-ch2build"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukET7MxhBU662PA8H6L",
+   "title": "Install the Gate Zero pictures (no plane, plane)",
+   "first": "2026-11-20T17:43:59Z",
+   "last": "2026-11-20T17:43:59Z",
+   "tags": [
+    "board-gatezero"
+   ],
+   "cards": [
+    "c-gatezero",
+    "t-gatezero-decide"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDYWGobqKMTx2h2wbX",
    "title": "Test the new START tasks",
@@ -15430,8 +15461,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "653d14b5ac9b3391dbb040daef27e38e5d3c7386",
- "synced_at": "2026-11-20T17:43:04+00:00",
+ "synced": "9ab6fee960a56df90bf36aee4dd5d3822985d1cb",
+ "synced_at": "2026-11-20T17:45:10+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
