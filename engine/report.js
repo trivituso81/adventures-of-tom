@@ -24,6 +24,10 @@ const BRP_KINDS=[['bug','BUG'],['change','CHANGE'],['art','ART'],['dialogue','DI
   window.addEventListener('error',e=>keep(e.message,(e.filename||'').split('/').slice(-2).join('/')+':'+(e.lineno||0)));
   window.addEventListener('unhandledrejection',e=>keep((e.reason&&e.reason.message)||e.reason,'promise'));
 })();
+// Nothing typed or pressed while the report is open reaches the game (reporttype1, Tom 2026-11-20: typing acted like hotkeys and moved
+// focus). Registered here, while this first file loads, so it runs before every other window key listener in capture phase (the welcome
+// screen, Vibes, close-ups and the party banner all listen there and used to see the keys first). The browser still types into the note.
+for(const ev of ['keydown','keyup','keypress']) window.addEventListener(ev,e=>{ if(!brp.open) return; e.stopImmediatePropagation(); if(ev==='keydown'&&e.key==='Escape') brpClose(); },true);
 function brpFreeze() {
   if(brp.frozen) return;
   brp.at=performance.now(); brp.t0=brp.real.now(); brp.frozen=true; brp.audio=false;
@@ -368,8 +372,6 @@ function brpMake() {
   document.getElementById('brp-cancel').addEventListener('click',()=>brpClose());
   document.getElementById('brp-send').addEventListener('click',()=>brpSend());
   document.getElementById('brp-share').addEventListener('click',()=>brpShare());
-  // Nothing typed or pressed here reaches the game.
-  for(const ev of ['keydown','keyup','keypress']) window.addEventListener(ev,e=>{ if(!brp.open) return; e.stopImmediatePropagation(); if(ev==='keydown'&&e.key==='Escape') brpClose(); },true);
 }
 function brpKindMark() { for(const b of brp.el.querySelectorAll('.brp-kinds button')) b.classList.toggle('sel',b.getAttribute('data-kind')===brp.kind); }
 function brpOpen() {

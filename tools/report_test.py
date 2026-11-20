@@ -65,7 +65,16 @@ def run(pw,layout):
         check(d<14,f'{L} {name}: phone picture matches the screen (mean difference {d:.1f}, size {im.size}, {len(mine)//1024} KB)')
         return pg.evaluate("()=>brp.meta")
     # title
-    m=shoot('title'); check(m['mode']=='title',f'{L} title mode'); pg.evaluate("()=>brpClose()")
+    m=shoot('title'); check(m['mode']=='title',f'{L} title mode')
+    # real keystrokes on the welcome screen (reporttype1): its own key handler must not see them, the box keeps focus and every letter
+    s0=pg.evaluate("()=>[splash.active,splash.sel,!!splash.edit]"); lay0=pg.evaluate("()=>layout.mode")
+    pg.click('#brp-note'); pg.keyboard.type('Wasd keys move nothing. Space too'); pg.keyboard.press('Backspace'); pg.keyboard.press('Enter'); pg.keyboard.type('m L x q e')
+    pg.keyboard.press('ArrowUp'); pg.keyboard.press('ArrowDown'); pg.keyboard.press('ArrowRight')
+    v=pg.evaluate("()=>[document.getElementById('brp-note').value,document.activeElement&&document.activeElement.id,splash.active,splash.sel,!!splash.edit,brp.open,layout.mode]")
+    check(v[0]=='Wasd keys move nothing. Space to\nm L x q e',f'{L} every key typed on the welcome screen lands in the note ({v[0]!r})')
+    check(v[1]=='brp-note' and v[5],f'{L} the note keeps focus while typing ({v[1]})')
+    check(v[2:5]==s0 and v[6]==lay0,f'{L} typing in the note did not move the welcome menu or turn the screen ({s0} -> {v[2:5]}, {v[6]})')
+    pg.evaluate("()=>{ document.getElementById('brp-note').value=''; brpClose(); }")
     pg.evaluate(START); pg.wait_for_timeout(1200)
     # freeze: clock, frames and timers stop; they continue after
     pg.evaluate("()=>{ window.__fr=0; const o=updateCamera; updateCamera=function(dt){ window.__fr++; return o.apply(this,arguments); }; window.__tm=0; }")
@@ -75,8 +84,9 @@ def run(pw,layout):
     check(m['mode']=='map' and m['map']['id']=='town' and m['story']['chapter']==2 and m['party'][0]=='tom' and m['save'] and m['screen']['layout']==layout,f'{L} map state recorded')
     # typing does not reach the game; pins; send
     px=pg.evaluate("()=>[player.x,player.y,menuOpen]")
-    pg.fill('#brp-note','Rose is floating here. m')
+    pg.click('#brp-note'); pg.keyboard.type('Rose is floating here. m')
     pg.keyboard.press('ArrowLeft'); pg.keyboard.press('m'); pg.keyboard.press('Enter')
+    check(pg.evaluate("()=>document.activeElement&&document.activeElement.id")=='brp-note',f'{L} the note keeps focus while typing on the map')
     box=pg.locator('#brp-shotwrap canvas').bounding_box(); pg.mouse.click(box['x']+box['width']*.25,box['y']+box['height']*.5); pg.mouse.click(box['x']+box['width']*.75,box['y']+box['height']*.25)
     pg.click('#brp button[data-kind="art"]'); pg.wait_for_timeout(200)
     pg.screenshot(path=os.path.join(OUT,f'filled-{L}-form.png'))
@@ -88,7 +98,7 @@ def run(pw,layout):
     check(len(new)==2 and new[0]['path'].endswith('.jpg') and new[1]['path'].endswith('.json') and all(p['branch']=='inbox' and p['auth']=='Bearer test-token' and '/repos/trivituso81/adventures-of-tom/contents/reports/r-' in p['path'] for p in new),f'{L} filed picture then note on branch inbox ({[p["path"] for p in new]})')
     if len(new)==2:
         doc=json.loads(base64.b64decode(new[1]['content'])); open(os.path.join(OUT,f'sent-{L}.json'),'w').write(json.dumps(doc,indent=1)); open(os.path.join(OUT,f'sent-{L}.jpg'),'wb').write(base64.b64decode(new[0]['content']))
-        check(doc['note'].startswith('Rose is floating here') and doc['kind']=='art' and len(doc['pins'])==2 and abs(doc['pins'][0]['x']-.25)<.03 and doc['shot']==new[0]['path'].split('/contents/')[1] and doc['where']['map']['id']=='town',f'{L} note, kind, pins and place are in the file')
+        check(doc['note'].startswith('Rose is floating here. m') and doc['kind']=='art' and len(doc['pins'])==2 and abs(doc['pins'][0]['x']-.25)<.03 and doc['shot']==new[0]['path'].split('/contents/')[1] and doc['where']['map']['id']=='town',f'{L} note, kind, pins and place are in the file')
     check(pg.evaluate("async()=>(await brpWaiting()).length")==0,f'{L} nothing left waiting after a good send')
     # dialogue
     pg.evaluate("()=>openDialog('Grace',['This is a test line so we can see the dialogue box on the screen. It is long enough to wrap onto a second row.'])"); pg.wait_for_timeout(2500)

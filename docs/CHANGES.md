@@ -1,3 +1,11 @@
+## reporttype1 (2026-11-20): Typing in the REPORT box no longer acts like game hotkeys
+
+Card c-reporttype1. Tom: "when i try to type in the report tool, its acting like hotkeys and taking the focus out of the report text box and making changes to the scren, leaving the tool unsuable to me."
+
+- Cause: the REPORT box's key guard (stop every key from reaching the game while the box is open) was only added when the tab was first built, at page load end. The welcome screen (`engine/splash.js`), Vibes (`engine/b3-menu.js`), close-ups (`engine/closeup.js`) and the party banner (`engine/party-banner.js`) listen for keys at the same early stage and were added before it, so they saw each key first: on the welcome screen W, A, S, D, Space and Backspace never reached the note, the arrows and letters moved the menu, and Enter picked a menu item.
+- Fix: `engine/report.js` adds the guard while the file loads (it is the first script), so it now runs before every other key listener. The browser still types into the note; Escape still closes the box.
+- Test: `tools/report_test.py` now types real keystrokes on the welcome screen and on the map and checks every letter lands, the note keeps focus and the menu does not move (it failed before the fix: "keymovenothing.pcetoomLxqe", menu moved 5 places). ALL PASS, portrait and landscape.
+
 ## wanproofb (2026-11-20): Part 2 of the Grace guard video proof: her large left-facing start picture, made on fal and checked. 15 cents spent
 
 Card c-wanproof, plan `claude/video-battle-plan.md` section 4.3, call 1.
