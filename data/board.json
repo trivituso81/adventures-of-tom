@@ -1224,7 +1224,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then run python3 tools/reports.py list. Seven art reports are open (7v5z, mxvd, 1a2w, c5no, nre4, g4gl, jykk). Their pictures are the approved entries of the Report fixes group in tools/art-library/ch2fix-prompts.js. Install each one where its report says, test in portrait and landscape, push, then run python3 tools/reports.py done for each fixed report. Board card c-reports. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukFraGsc5W54HdP7UDp",
+    "url": "https://claude.ai/code/session_01RXeukEEGSUH9LzPgNRP4w3",
     "opening": "\"Read claude/handoff-rules.md and docs/REPORTS.md, then run python3 tools/reports.py list. Seven art reports are open\""
    },
    "history": [
@@ -1279,6 +1279,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom's pictures are approved (t-reportart: all good). Session started to install the 21 Report fixes pictures and close the 7 art reports."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "blocks": [],
@@ -5952,6 +5956,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEEGSUH9LzPgNRP4w3",
+   "title": "Fix the report backlog (7 open)",
+   "first": "2026-11-19T18:55:42-08:00",
+   "last": "2026-11-19T18:55:42-08:00",
+   "tags": [],
+   "cards": [
+    "c-reports"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDvEEkuXJtFLApvat9",
    "title": "Fix party followers lagging behind Tom in free walking (follow1)",
    "first": "2026-11-19T17:23:21-08:00",
@@ -6399,8 +6413,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "f67652444940459e38f3bdc5be6c96ecb9c15337",
- "synced_at": "2026-11-20T02:55:18+00:00",
+ "synced": "91ec37d60ac91316159a6c39be36a15947c2ab5f",
+ "synced_at": "2026-11-20T02:56:06+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
