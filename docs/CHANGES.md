@@ -1,3 +1,17 @@
+## gracevoice-rest (2026-11-20): Grace's other slowed story lines are back at her real speed, from the takes Tom kept
+
+- Fetched branch `takes` (196 Grace takes, from Send my takes to Claude) and ran `python3 tools/voice-library/unshrink_grace.py --apply`. It replaced only clips that were byte for byte the old Grace filter applied to one of Tom's takes: 126 clips in `dialog-ch1.js`, `dialog-ch10.js`, `dialog-ch26.js`, `dialog-ch28.js`. Nothing was re-filtered, guessed or hand-edited; nothing spent.
+- Tests: `grace_voice_test.py` passes (take 3.00 s 300 Hz, clip 3.00 s 300 Hz); `unused_voice.py` reports the same as before the change (check 4 shows 39 dialogue clips, unchanged and not from this build); smoke's own checks pass except two failures that were there before this change (`heights`, `board_sync_test` R5).
+- Still flagged with no take: 93 Grace clips (per file: dialog-ch1.js 2, dialog-ch26.js 1, dialog-ch27.js 1, dialog-ch28.js 32, dialog-ch29.js 49, dialog-ch5.js 1, dialog-ch7.js 1, dialog-ch8.js 6). The tool's pitch list over-counts (a deadpan take can sit low), so these are lines to check, not known broken. Run the tool again after any new Send my takes to Claude to see the list shrink. Full list: run the tool without `--apply`.
+- `data/takes-wanted.json` kept as is: not every Grace line has a take, so the phone keeps sending Grace takes.
+
+## gracevoice-rest (2026-11-20): Grace's other slowed story lines are back at her real speed, from the takes Tom kept
+
+- Fetched branch `takes` (196 Grace takes, from Send my takes to Claude) and ran `python3 tools/voice-library/unshrink_grace.py --apply`. It replaced only clips that were byte for byte the old Grace filter applied to one of Tom's takes: 126 clips in `dialog-ch1.js`, `dialog-ch10.js`, `dialog-ch26.js`, `dialog-ch28.js`. Nothing was re-filtered, guessed or hand-edited; nothing spent.
+- Tests: `grace_voice_test.py` passes (take 3.00 s 300 Hz, clip 3.00 s 300 Hz); `unused_voice.py` reports the same as before the change (check 4 shows 39 dialogue clips, unchanged and not from this build); smoke's own checks pass except two failures that were there before this change (`heights`, `board_sync_test` R5).
+- Still flagged with no take: 93 Grace clips (per file: dialog-ch1.js 2, dialog-ch26.js 1, dialog-ch27.js 1, dialog-ch28.js 32, dialog-ch29.js 49, dialog-ch5.js 1, dialog-ch7.js 1, dialog-ch8.js 6). The tool's pitch list over-counts (a deadpan take can sit low), so these are lines to check, not known broken. Run the tool again after any new Send my takes to Claude to see the list shrink. Full list: run the tool without `--apply`.
+- `data/takes-wanted.json` kept as is: not every Grace line has a take, so the phone keeps sending Grace takes.
+
 ## gem-polish01 (2026-11-20): The taxi opening line no longer shows a text smiley
 
 - Gemini chapter 1 report POLISH-01 (claude/ch1-gemini-tracker.md): Tom's first line at Taxi Co. ended with `;)` in the dialogue box. Still on main, no standing rule against removing it.

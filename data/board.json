@@ -10751,7 +10751,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "gracevoice-rest",
-   "next": "Waits on card t-gracevoice-distort (you tap Send my takes to Claude, then All good). Then rebuilds every Grace story clip the old filter slowed from the take you kept, by exact match only, and says which lines still have no take.",
+   "next": "Shipped (gracevoice-rest). Nothing for Tom. If a Grace line still sounds slow, send its report from the pencil tab and Claude will look at that line.",
    "blocks": [],
    "after": "nothing for Tom: end",
    "changed": "2026-11-20",
@@ -10777,6 +10777,14 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped in gracevoice-rest: 126 Grace story clips rebuilt from Tom's kept takes (byte-exact match only, nothing spent). 93 Grace clips still flagged with no take; the pitch list over-counts, so they are lines to check, not known broken. Details in docs/CHANGES.md."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped in gracevoice-rest: 126 Grace story clips rebuilt from Tom's kept takes (byte-exact match only, nothing spent). 93 Grace clips still flagged with no take; the pitch list over-counts, so they are lines to check, not known broken. Details in docs/CHANGES.md."
     }
    ],
    "prompt": {
