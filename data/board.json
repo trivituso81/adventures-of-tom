@@ -1537,7 +1537,7 @@
    "title": "Cut the door frame beat from chapter 1 (ch1nodoor)",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Cut the kitchen door frame height-marks beat from chapter 1 everywhere: scene step, close-up picture and Art Library entry ch1-doorframe, docs and canon. Chapter 1 played in portrait and landscape through the kitchen. Nothing for Tom.",
    "blocks": [],
    "changed": "2026-11-19",
@@ -1555,6 +1555,10 @@
     {
      "d": "2026-11-19",
      "t": "Built ch1nodoor: scene step, close-up, Library entry, baked picture and raw art removed; docs and canon updated. No other open card existed only for the door frame picture."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch1nodoor: Chapter 1: the kitchen door frame height-marks look is cut"
     }
    ],
    "prompt": {
@@ -1566,7 +1570,8 @@
     "effort": "medium (steps are known)",
     "text": "Remove the door frame height-marks beat from SCENES.ch1Theft, retire Art Library entry ch1-doorframe and its close-up files, update the docs and canon addendum, play chapter 1 in portrait and landscape, run smoke, tag_check, unused_voice and board_check, and push build ch1nodoor. You have my full permission to access the repo."
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-19"
   },
   {
    "id": "b-board-convclosed",
@@ -1854,6 +1859,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFcedNR3ccwPBafb9k",
+   "title": "Cut the door frame beat from chapter 1 (ch1nodoor)",
+   "first": "2026-11-19T17:34:14-08:00",
+   "last": "2026-11-19T18:03:49-08:00",
+   "tags": [
+    "ch1nodoor"
+   ],
+   "cards": [
+    "c-ch1nodoor"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukH7oLv95YtuWW62q7o",
    "title": "Make the 43 fixed chapter 1 clips again (clipch1remake)",
    "first": "2026-11-19T17:14:03-08:00",
@@ -1905,16 +1922,6 @@
    "cards": [
     "c-board3",
     "t-startsetup"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFcedNR3ccwPBafb9k",
-   "title": "Cut the door frame beat from chapter 1 (ch1nodoor)",
-   "first": "2026-11-19T17:34:14-08:00",
-   "last": "2026-11-19T17:34:14-08:00",
-   "tags": [],
-   "cards": [
-    "c-ch1nodoor"
    ]
   },
   {
@@ -1991,8 +1998,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "e2095eaca1efee51d8223f53bfe28a1e45caf2b2",
- "synced_at": "2026-11-20T01:56:01+00:00",
+ "synced": "73b688d4eaa04dc9fc66c2f1092b21ba740b65f6",
+ "synced_at": "2026-11-20T02:04:37+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
