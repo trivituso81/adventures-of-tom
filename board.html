@@ -145,6 +145,8 @@ textarea{font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px 
 #q{flex:1 1 auto;min-width:0;width:auto}
 #themeb{flex:none;background:var(--surface);border:1px solid var(--btn);border-radius:12px;padding:0 12px;white-space:nowrap}
 #themeb.on{outline:2px solid var(--accent)}
+#newb{flex:none;border-radius:12px;padding:0 12px;white-space:nowrap;min-height:44px}
+#ncchg summary{color:var(--muted);padding:8px 0;cursor:pointer}
 #themes{display:none;background:var(--surface);border:1px solid var(--btn);border-radius:14px;padding:6px;margin:0 0 10px}
 #themes.on{display:block}
 #themes button{display:flex;width:100%;align-items:center;gap:10px;background:none;text-align:left;min-height:44px;padding:0 10px}
@@ -179,7 +181,7 @@ main{padding-bottom:40px}
 <div id="behind"></div>
 <main>
 <button id="since" type="button"></button>
-<div id="tools"><input type="text" id="q" placeholder="Search cards" aria-label="Search cards" autocomplete="off"><button id="themeb" type="button" aria-expanded="false">Theme</button></div>
+<div id="tools"><input type="text" id="q" placeholder="Search cards" aria-label="Search cards" autocomplete="off"><button id="themeb" type="button" aria-expanded="false">Theme</button><button id="newb" class="gold" type="button">+ New card</button></div>
 <div id="themes"></div>
 <div id="tabs" role="tablist"></div>
 <div id="views" data-v="for"><section class="view" id="vFor"></section><section class="view" id="vClaude"></section><section class="view" id="vChats"></section><section class="view" id="vShipped"></section><section class="view" id="vBacklog"></section></div>
@@ -828,6 +830,142 @@ async function flushUndo(){
     if(!sheetOpen()&&next.length)setSheet(savedScreen(id),'saved');else toast('Saved: all good');}
   catch(e){render();toast(e.message,true);}
 }
+// ---- newcard1: New card. Tom types an idea; the page names the card, picks the theme, sizes the model and effort with the logic of
+// claude/handoff-rules.md (rows A to E, then effort; KEEP sizeIdea IN STEP WITH THAT FILE), writes the prompt, and saves a Claude card. A card START can run
+// (a routine matches its model and effort) starts by itself unless he unticks it. He can change theme, model and effort before saving; the session
+// that takes the card checks the size again (the prompt says so), because the page only reads his words.
+const NC_MODELS=['Claude Haiku 5.5','Claude Sonnet 5.5','Claude Opus 5.5','Claude Fable 5.2'],NC_EFFORTS=['low','medium','high'];
+const NC_THEMES=[['Tools',/\b(board|admin|library|editor|lab|tool|tools|report|reports|card|cards)\b/],
+  ['Voice Clips',/\b(voice|voices|elevenlabs|voice take|voice takes|recording|accent|narrator|spoken)\b/],
+  ['Battle Animations',/\b(animation|animations|clip|clips|battle pose|battle poses)\b/],
+  ['Battle System',/\b(battle|battles|fight|fights|combat|tombo|tombos|vibe|vibes|skill|skills|enemy|enemies|boss|bosses|monster|monsters|damage|hp|turn|turns)\b/],
+  ['Areas',/\b(area|areas|map|maps|room|rooms|square|house|kitchen|painting|paintings|town|pier|marsh|shop front|street|park)\b/],
+  ['Characters',/\b(character|characters|sprite|sprites|walk|walking|head|heads|height|hero pose|portrait|portraits|outfit|pose|poses)\b/],
+  ['Story and Dialogue',/\b(story|dialogue|dialog|line|lines|scene|scenes|chapter|chapters|cutscene|cutscenes|joke|jokes|script|funny|banter)\b/],
+  ['Project Ops',/\b(publish|publishing|github|deploy|credits|token|cleanup|docs|repo|project instructions|handoff)\b/],
+  ['Game Shell',/./]];
+function sizeIdea(text){
+  const raw=String(text||'').trim(),s=' '+raw.toLowerCase().replace(/\s+/g,' ')+' ',has=re=>re.test(s);
+  const make=/\b(add|build|make|create|fix|change|redo|rewrite|remove|design|install|merge|move|replace|update|i want|i'd like|we need|should have|let me|let's)\b/;
+  const bug=/\b(bug|bugs|crash|crashes|crashed|broken|freezes|froze|stuck|not working|doesn't work|does not work|stopped working|glitch|glitches)\b/;
+  const tool=/\b(board|admin|library|editor|lab|tool|tools|button|buttons|menu|menus|feature|features|slow|loading|save|saves|autosave|controls|d-pad|landscape|card|cards|report|reports|setting|settings|mode|option|options|shop|inventory|minigame|mini-game|quest log|slider|toggle|checklist|tracker|counter|notification|notifications)\b/;
+  const taste=/\b(dialogue|dialog|line|lines|joke|jokes|funny|funnier|humor|banter|script|voice|voices|tag|tags|elevenlabs|prompt|prompts|picture|pictures|painting|paintings|art|sprite|sprites|portrait|portraits|pose|poses|animation|animations|clip|clips|video|music|song|track|outfit|scene|scenes|cutscene|chapter|story|tone|accent)\b/;
+  const written=/\b(install|merge|apply my|purge|clean up|cleanup|next phase|next stage|fix the backlog|check the backlog|re-?bake|bake)\b/;
+  const found=/\b(battle system|battle rules|rules spec|story structure|story arc|whole story|architecture|save format)\b/,over=/\b(redesign|rework|overhaul|restructure|rethink|new rules|from scratch|replace)\b/;
+  const large=/\b(whole|entire|from scratch|all of|every|each chapter|all chapters|rewrite chapter|new chapter|new scene|full)\b/;
+  const fresh=/\b(new|feature|features|idea|design|tool|system|mode|minigame|mini-game)\b/,unknown=/\b(don't know why|no idea why|sometimes|randomly|intermittent|for some reason|not sure why)\b/;
+  let row,m,why,effort,ewhy,kind;
+  if(has(/\bfable\b/)){row='E';m=3;why='you asked for Fable';kind='build';}
+  else if(!has(make)&&(/\?\s*$/.test(raw)||has(/^ (what|why|how|where|when|which|who|is|are|does|do|did|explain|tell me)\b/))){row='A';m=0;why='a question, nothing changes';kind='ask';}
+  else if(has(written)&&!has(/\b(new|idea|feature)\b/)){row='B';m=1;why='the steps are already written';kind='steps';}
+  else if(has(found)&&has(over)){row='E';m=3;why='a foundation the rest of the game is built on';kind='build';}
+  else if(has(bug)){row='C';m=1;why='a fix, the cause is not known yet';kind='build';}
+  else if(has(tool)){row='C';m=1;why='a build, the steps are not written yet';kind='build';}
+  else if(has(taste)){row='D';m=2;why='judged by taste';kind='taste';}
+  else{row='C';m=1;why='a build, the steps are not written yet';kind='build';}
+  if(row==='A'){effort='low';ewhy='a lookup';}
+  else if(row==='B'){effort='medium';ewhy='the steps are known';}
+  else if(row==='D'){if(has(large)){effort='high';ewhy='a whole piece written from scratch';}else{effort='medium';ewhy='a small piece, starting from what is there';}}
+  else if(row==='E'){if(has(/\b(small|tweak|follow-up|follow up)\b/)){effort='medium';ewhy='a small follow-up';}else{effort='high';ewhy='a large piece with nothing written to follow';}}
+  else if(has(unknown)){effort='high';ewhy='the cause has to be found';}
+  else if(has(fresh)||raw.length>240){effort='high';ewhy='something new designed and built in one session';}
+  else{effort='medium';ewhy='a small piece';}
+  return {row,model:NC_MODELS[m],why,effort,ewhy,kind,theme:(NC_THEMES.find(t=>t[1].test(s))||NC_THEMES[NC_THEMES.length-1])[0],title:ideaTitle(raw)};
+}
+function ideaTitle(raw){
+  let t=clean(raw).split(/\n|(?:[.!?])\s/)[0].replace(/^\s*(new\s+)?(feature\s+)?idea\s*[:,-]\s*/i,'').replace(/^\s*(please\s+|can you\s+|could you\s+|can we\s+|could we\s+|let's\s+|i want to\s+|i want you to\s+|i want\s+|i'd like to\s+|i'd like\s+|we need to\s+|we need\s+)/i,'').replace(/[.!?:;,\s]+$/,'').trim();
+  if(t.length>60)t=t.slice(0,61).replace(/\s+\S*$/,'').replace(/[,:;\s]+$/,'');
+  return t?t.charAt(0).toUpperCase()+t.slice(1):'';
+}
+const NC_STOP=new Set('a an the to of for in on and or with my your our is it that this be can add make new idea feature fix change when where so i we you'.split(' '));
+function ideaTag(title,d){
+  const w=String(title).toLowerCase().replace(/[^a-z0-9 ]/g,' ').split(/\s+/).filter(x=>x&&!NC_STOP.has(x)),base='idea-'+((w.slice(0,2).join('')||'card').slice(0,16));
+  const used=new Set(d.cards.map(k=>k.tag).concat(d.cards.map(k=>String(k.id).replace(/^c-/,''))));let tag=base,n=1;
+  while(used.has(tag)){n++;tag=base+'-'+n;}
+  return tag;
+}
+function ideaPrompt(c,kind){
+  const i=c.idea;
+  let t='Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card '+c.id+' in data/board.json, history included. Your first push is the commit board: start '+c.id+'.\n\n'
+   +'Tom made this card himself with New card on the board. His words: "'+i.words+'"'+(i.shot?' His screenshot: '+i.shot+' on branch inbox (git fetch --depth=1 origin inbox, then git show origin/inbox:'+i.shot+' into a file in /tmp, and look at it).':'')+'\n\n'
+   +'The board sized this from his words alone: '+c.prompt.model+', effort '+c.prompt.effort+'. If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card\'s prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\n'
+   +'Check the open cards first: if one already covers this, add his words to that card\'s history, retire this card with a history line naming it, and work that card. If not, rewrite this card\'s title and next step so they say plainly what is being made.\n\n';
+  if(kind==='ask') t+='This is a question. Answer it in the chat in a few plain sentences, change nothing in the game, write the answer as a history line on this card and move it to Done. Push only the board change.';
+  else if(kind==='steps') t+='The steps for this are already written: find the doc CLAUDE.md names for it and follow it exactly, run its tests, and push build '+c.tag+' with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom).';
+  else if(kind==='taste') t+='Tom judges this by taste. Read docs/CANON.md first, and docs/tom-edits.tsv for any dialogue. Pictures and videos are made only in the Art Library, and their prompts follow the prompt rules in CLAUDE.md. Start from what is there and change only what he names. Test it, look at it in portrait and landscape, and push build '+c.tag+' with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom).';
+  else t+='Design it yourself and make the calls: Tom does not pick between options. Ask one short question only if a choice cannot be undone or is expensive to redo. Build it, test it, look at the frames in portrait and landscape, and push build '+c.tag+' with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom).';
+  return t+PERM;
+}
+let NC=null;   // which of theme, model, effort Tom set by hand in the open form
+const ncOpt=(list,v)=>list.map(x=>'<option'+(x===v?' selected':'')+'>'+esc(x)+'</option>').join('');
+function ncPick(){
+  const z=sizeIdea($('nctxt').value);
+  const p={theme:NC.th?$('ncth').value:z.theme,model:NC.mo?$('ncmo').value:z.model,effort:NC.ef?$('ncef').value:z.effort,title:z.title,kind:z.kind,z};
+  p.modelFull=p.model+(p.model===z.model?' (row '+z.row+': '+z.why+')':' (your choice on the board; the rules said '+z.model.replace('Claude ','')+', row '+z.row+')');
+  p.effortFull=p.effort+(p.effort===z.effort?' ('+z.ewhy+')':' (your choice on the board; the rules said '+z.effort+')');
+  p.rt=(B.routines||[]).find(r=>r.enabled&&p.model===r.model&&p.effort===r.effort)||null;
+  p.auto=!!(p.rt&&p.model==='Claude Sonnet 5.5'&&p.effort==='medium');
+  return p;
+}
+function ncRender(){
+  if(!$('nctxt'))return;
+  const has=!!$('nctxt').value.trim(),p=ncPick();
+  $('ncsize').hidden=!has;$('nchint').hidden=has;
+  if(!NC.th)$('ncth').value=p.theme;if(!NC.mo)$('ncmo').value=p.model;if(!NC.ef)$('ncef').value=p.effort;
+  $('ncbig').textContent=p.model.replace('Claude ','')+', effort '+p.effort;
+  $('ncwhy').textContent='Why: '+reasonOf(p.modelFull)+'; '+reasonOf(p.effortFull)+'.';
+  $('nctitle').textContent=p.title;$('ncthm').textContent=p.theme;
+  $('ncautorow').hidden=!p.auto;
+}
+function newForm(){
+  cur=null;shotData='';NC={th:false,mo:false,ef:false};
+  const body=(hasTok()?'':'<p class="err" style="font-size:15px;margin-top:10px">'+NOTOK+'</p>')
+   +'<h4>What do you want?</h4><textarea id="nctxt" placeholder="One idea, the way you would say it to Claude. A new feature, a fix, a change to a line or a picture, or a question."></textarea>'
+   +'<div class="shot"><button class="small" type="button" id="wpick">Add a screenshot</button><span class="hint" id="wprev">Optional</span><input type="file" accept="image/*" id="wshot" hidden></div>'
+   +'<p class="hint" id="nchint">The board names the card, picks the theme, the Claude model and the effort level, and writes the prompt. You only type the idea.</p>'
+   +'<div id="ncsize" hidden><h4>Claude will get</h4><div class="big" id="ncbig"></div><p class="hint" id="ncwhy"></p>'
+   +'<p><b>Card:</b> <span id="nctitle"></span><br><b>Theme:</b> <span id="ncthm"></span></p>'
+   +'<label id="ncautorow" hidden style="display:flex;gap:8px;align-items:center;margin:8px 0"><input type="checkbox" id="ncauto" checked style="width:22px;height:22px"> Start it by itself as soon as the card is made</label>'
+   +'<details id="ncchg"><summary>Change the theme, model or effort</summary><div class="btns" style="flex-direction:column;align-items:stretch;margin-top:8px">'
+   +'<select id="ncth" aria-label="Theme">'+ncOpt(B.themes||[],'')+'</select><select id="ncmo" aria-label="Model">'+ncOpt(NC_MODELS,'')+'</select><select id="ncef" aria-label="Effort">'+ncOpt(NC_EFFORTS,'')+'</select></div></details></div>';
+  setSheet(shell('<h2>New card</h2>',body,'<div class="barrow"><button class="gold" type="button" id="ncgo">Create card</button><button class="tb" type="button" id="bcancel">Cancel</button></div>'),'new');
+  ncRender();try{$('nctxt').focus({preventScroll:true});}catch(e){}
+}
+async function sendNew(){
+  const words=clean($('nctxt').value).replace(/\s*\n\s*/g,' / ').replace(/"/g,"'");
+  if(!words){$('serr').textContent='Type your idea first.';return;}
+  if(!lsGet(TOKEN)&&!Q.get('gh')){$('serr').textContent=NOTOK;return;}
+  const p=ncPick(),wantAuto=p.auto&&$('ncauto').checked;
+  if(!p.title){$('serr').textContent='Type your idea first.';return;}
+  const btn=$('ncgo');btn.disabled=true;btn.textContent='Creating...';$('serr').textContent='';
+  let shot='',shotErr='';
+  if(shotData){shot='board-shots/new-'+Date.now().toString(36)+'.jpg';
+    try{await putFile(shot,shotData.split(',')[1],'board: screenshot for a new card','inbox');}catch(e){shotErr=e.message;shot='';}}
+  let res=null;
+  try{
+    await save('board: new card '+p.title,d=>{
+      const tag=ideaTag(p.title,d),id='c-'+tag,short=p.model.replace('Claude ','')+', effort '+p.effort;
+      const c={id,tag,lane:'claude',col:'up',theme:p.theme,title:p.title,next:'',blocks:[],created:today(),changed:today(),
+        idea:{at:new Date().toISOString(),words,shot,row:p.z.row,rule:p.z.model+', '+p.z.effort},chat:{url:'',opening:'New card by Tom on the board'},history:[],
+        prompt:{what:(p.kind==='ask'?'Answers your question: ':'Works on your idea: ')+p.title+'.',before:['Nothing to do first. Your words'+(shot?' and screenshot':'')+' are on the card.'],model:p.modelFull,effort:p.effortFull,text:''}};
+      c.prompt.text=ideaPrompt(c,p.kind);
+      touch(c,'Tom made this card on the board: '+words+(shot?' Screenshot: '+shot+' on branch inbox.':'')+(shotErr?' (The screenshot did not upload: '+shotErr+'.)':''));
+      touch(c,'Sized by the board: '+p.modelFull+', effort '+p.effortFull+'.');
+      if(wantAuto){c.auto=true;c.start=true;touch(c,'Auto-start: START can run this size, so it starts by itself.');}
+      c.next='Your idea: '+words.slice(0,200)+(words.length>200?'...':'')+' '+(c.start?'Claude starts it by itself.':'Copy the prompt into a new conversation in the Project on '+short+'.');
+      d.cards.push(c);res={id,auto:!!c.start,title:c.title,short};return d;});
+  }catch(e){btn.disabled=false;btn.textContent='Create card';$('serr').textContent=e.message;return;}
+  render();
+  let h='<p class="what">'+esc(res.title)+'</p>',bar;
+  if(res.auto){h+='<p>Claude starts this by itself in about a minute. The conversation link appears on the card, under CLAUDE.</p>';bar='<div class="barrow"><button class="ob" id="bdone" type="button">Close</button></div>';}
+  else{h+='<p>Paste the prompt into a new conversation in the Project, with this model and effort:</p><div class="big">'+esc(res.short)+'</div><p><a href="'+PROJECT+'" target="_blank" rel="noopener">Open the Project in Claude</a></p>';
+    const k=cardById(res.id);
+    bar='<div class="barrow">'+(k&&startable(k)?'<button class="gold" type="button" data-act="start" data-id="'+esc(res.id)+'">START</button><button class="ob" type="button" data-act="copy" data-id="'+esc(res.id)+'">Copy prompt</button>':'<button class="gold" type="button" data-act="copy" data-id="'+esc(res.id)+'">Copy prompt</button>')+'<button class="tb" id="bdone" type="button">Later</button></div>';}
+  if(shotErr) h+='<p class="err">The screenshot did not upload ('+esc(shotErr)+'). Your words were saved.</p>';
+  setSheet(shell('<h2>Card made.</h2>',h,bar),'made');
+}
+document.addEventListener('input',e=>{if(e.target.id==='nctxt'){if($('serr'))$('serr').textContent='';ncRender();}});
+document.addEventListener('change',e=>{const k={ncth:'th',ncmo:'mo',ncef:'ef'}[e.target.id];if(k&&NC){NC[k]=true;ncRender();}});
 document.addEventListener('input',e=>{if(e.target.id==='wtxt'&&$('serr'))$('serr').textContent='';});
 document.addEventListener('change',async e=>{
   if(e.target.id!=='wshot'||!e.target.files||!e.target.files[0])return;
@@ -860,6 +998,8 @@ document.addEventListener('click',e=>{
   if(act&&act.dataset.act==='good'){allGood(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='wrong'){wrongForm(act.dataset.id);e.stopPropagation();return;}
   if(t.id==='wpick'){$('wshot').click();return;}
+  if(t.closest('#newb')){newForm();return;}
+  if(t.id==='ncgo'){sendNew();return;}
   if(t.id==='wgo'){sendWrong(cur);return;}
   if(t.closest('a'))return;
   const card=t.closest('.card');if(card&&!$('sheet').contains(t)){openSheet(card.dataset.id);return;}
@@ -907,7 +1047,7 @@ loadSince();
 load().then(loadArt).then(()=>{render();if(!SINCE)saveSnap();checkSync(true);}).catch(e=>{$('err').textContent=e.message;$('tabs').textContent='Could not load the board';});
 $('q').addEventListener('input',e=>{query=e.target.value.trim();shipN=20;render();});
 window.addEventListener('resize',()=>{if(B)counts();});
-window.__board={get B(){return B;},render,reload,syncState,statusOf,attnWhy};
+window.__board={get B(){return B;},render,reload,syncState,statusOf,attnWhy,sizeIdea,ideaTitle};
 </script>
 </body>
 </html>
