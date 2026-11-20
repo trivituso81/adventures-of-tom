@@ -697,13 +697,17 @@
    "changed": "2026-11-19",
    "created": "2026-11-19",
    "chat": {
-    "url": "",
-    "opening": ""
+    "url": "https://claude.ai/code/session_01RXeukFDnD4JZi9AK4diAco",
+    "opening": "\"Read claude/battle-build.md and claude/next-addendum-b3s9a.md, then build stage 9b (TNB) of the new battle system.\""
    },
    "history": [
     {
      "d": "2026-11-19",
      "t": "Added by b3s9a: stage 9 split, TNB first."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: this conversation claimed the card."
     }
    ],
    "prompt": {
