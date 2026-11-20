@@ -13177,6 +13177,50 @@
     "effort": "medium (the change is specified)",
     "text": "Read CLAUDE.md. Add two entries to routines in data/board.json: Opus 5.5 medium (env OPUS_MEDIUM) and Sonnet 5.5 high (env SONNET_HIGH). Pass their URL and TOKEN secrets through .github/workflows/board-sync.yml. Make routineFor in board.html and the matching code in tools/board_sync.py send a low-effort card to its model's medium task. Keep auto: true limited to Sonnet 5.5 medium. Fable never starts automatically. Create one Tom card (ask: setup) with the exact steps and paste text to create the two tasks and four secrets, modeled on t-startsetup, blocking this card's test. Update tools/board_newcard_test.py, board_test.py and board_sync_test.py, run them, push. You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "c-idea-checkart",
+   "tag": "idea-checkart",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Tools",
+   "title": "Check the art library for all items in \"to do\" \"in game but",
+   "next": "Your idea: check the art library for all items in 'to do' 'in game but not approved' 'Ready' 'blocked' and 'rejected' to determine if they are sitll needed, or if the art is already in the game but the art galle... Copy the prompt into a new conversation in the Project on Sonnet 5.5, effort high.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "idea": {
+    "at": "2026-11-20T17:23:36.739Z",
+    "words": "check the art library for all items in 'to do' 'in game but not approved' 'Ready' 'blocked' and 'rejected' to determine if they are sitll needed, or if the art is already in the game but the art gallery item was never updated. if the item is no longer needed, delete it. if it is already in the game, mark it approved",
+    "shot": "",
+    "row": "C",
+    "rule": "Claude Sonnet 5.5, high"
+   },
+   "chat": {
+    "url": "",
+    "opening": "New card by Tom on the board"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom made this card on the board: check the art library for all items in 'to do' 'in game but not approved' 'Ready' 'blocked' and 'rejected' to determine if they are sitll needed, or if the art is already in the game but the art gallery item was never updated. if the item is no longer needed, delete it. if it is already in the game, mark it approved",
+     "at": "2026-11-20T17:23:36.739Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Sized by the board: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort high (something new designed and built in one session).",
+     "at": "2026-11-20T17:23:36.739Z"
+    }
+   ],
+   "prompt": {
+    "what": "Works on your idea: Check the art library for all items in \"to do\" \"in game but.",
+    "before": [
+     "Nothing to do first. Your words are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a build, the steps are not written yet)",
+    "effort": "high (something new designed and built in one session)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-checkart in data/board.json, history included. Your first push is the commit board: start c-idea-checkart.\n\nTom made this card himself with New card on the board. His words: \"check the art library for all items in 'to do' 'in game but not approved' 'Ready' 'blocked' and 'rejected' to determine if they are sitll needed, or if the art is already in the game but the art gallery item was never updated. if the item is no longer needed, delete it. if it is already in the game, mark it approved\"\n\nThe board sized this from his words alone: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort high (something new designed and built in one session). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nDesign it yourself and make the calls: Tom does not pick between options. Ask one short question only if a choice cannot be undone or is expensive to redo. Build it, test it, look at the frames in portrait and landscape, and push build idea-checkart with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [
