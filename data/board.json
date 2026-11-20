@@ -7765,7 +7765,7 @@
   {
    "id": "t-boarduxtry",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -7798,9 +7798,14 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Board redesign 3: four views, search and the wide layout is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
     }
    ],
-   "first": "Wait for Board redesign 3 to ship (build boardux3)."
+   "first": "Wait for Board redesign 3 to ship (build boardux3).",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-ch1starving-2",
