@@ -327,7 +327,7 @@ SCENES.ch1Pond=[
   {talk:'The Big One',lines:["GLUB. I was small at breakfast. Then a flash. Now I don't fit under my log."]},
   {talk:'Deedee',lines:["And that's my good twelve-cup pan on your head. It's never been in pond water in its life."]},
   {talk:'The Big One',lines:["It's my crown. A little muddy one brought it. I'm keeping it."]},
-  {talk:'Tom',lines:["Mom. That's a boss. You don't just walk up to a boss."]},
+  {talk:'Tom',lines:["Mom, wait. Bosses hit in a pattern. Watch what he does twice, then go."]},
   {talk:'Deedee',lines:["I worked the night shift, Tom. I've walked up to worse. Mister, take off my pan."]},
   {pose:'The Big One',f:null},
   {battle:'bigone',tut:'bigone'},

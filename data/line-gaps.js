@@ -35,6 +35,6 @@ const LINE_GAPS={
 "The Big One|GLUB. I was small at breakfast. Then a flash. Now I don't fit under my log.": "snap",
 "The Big One|Good. He was in the middle of a story. The one about the race.": "beat",
 "Tom|It's the size of a plum. I carried a suitcase through two airports this morning.": "snap",
-"Tom|Mom. That's a boss. You don't just walk up to a boss.": "snap",
+"Tom|Mom, wait. Bosses hit in a pattern. Watch what he does twice, then go.": "snap",
 "Tom|Your mother says I'm slow.": "snap"
 };

@@ -1,3 +1,10 @@
+## gem-polish06 (2026-11-20): Tom gives Deedee real boss advice before the Big One
+
+- Gemini chapter 1 report POLISH-06 (claude/ch1-gemini-tracker.md). Still on main. Tom's answer on the board: keep "Mom", drop "you don't just walk up to a boss" (no meaning), have Tom share boss knowledge as advice.
+- `ch1Pond` in `data/scenes.js`: "Mom. That's a boss. You don't just walk up to a boss." is now "Mom, wait. Bosses hit in a pattern. Watch what he does twice, then go." Deedee's reply ("I worked the night shift, Tom. I've walked up to worse.") is unchanged and still answers it.
+- Spoken line changed: the baked Tom clip no longer matches and the line plays through speech synthesis until re-recorded. Mood and gap rows moved to the new text; script index rebuilt.
+- Test: `python3 tools/gem_polish06_test.py` (portrait and landscape screenshots of the line).
+
 ## gem-bug08 (2026-11-20): Amy's House door is locked in chapter 1, with a note on it
 
 - Gemini chapter 1 report BUG-08 (claude/ch1-gemini-tracker.md): walking back from the grands in chapter 1 let Tom step into Amy's House, which fired a broken party-leave banner over an empty Justin box. Confirmed still possible on current main (the door was not gated).

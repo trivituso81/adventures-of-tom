@@ -1668,7 +1668,7 @@ const EMOTION_MOODS={
 "Tom|Mom! Dad! Get away from the camera!": "scared",
 "Tom|Mom, there's one more thing. There was a lemon frozen inside an orange block, just like the dragonfly. And this was lying under it.": "scared",
 "Tom|Mom. Dad.": "sad",
-"Tom|Mom. That's a boss. You don't just walk up to a boss.": "scared",
+"Tom|Mom, wait. Bosses hit in a pattern. Watch what he does twice, then go.": "scared",
 "Tom|Moss really put a best foot forward. And it never came back.": "happy",
 "Tom|Mr. Pistachio says happy birthday. Twenty years late.": "loving",
 "Tom|Mr. Pistachio. Brain Freeze. He came out of YOUR shop. Tell us everything.": "proud",
