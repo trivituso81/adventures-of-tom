@@ -11845,7 +11845,7 @@
    "title": "Change centre stage to center stage in Rose's battle text",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as gem-polish02: \"centre stage\" is now \"center stage\" in Rose's Raspberry battle text. Nothing needed from Tom.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -11871,6 +11871,10 @@
     {
      "d": "2026-11-20",
      "t": "Confirmed on main (engine/rose-moves.js line 1113), changed to \"center stage\". It is on-screen battle text, not a spoken line, and no baked clip holds it: no re-bake. Other \"centre\" hits (143) are code comments and names, not shown to the player. Tests: kit_test rose silly passed, smoke screenshots checked."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-polish02: Rose's Raspberry battle text says \"center stage\""
     }
    ],
    "tag": "gem-polish02",
@@ -11883,7 +11887,8 @@
     "effort": "low (one known edit)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-polish02 in data/board.json, history included. Your first push is the commit board: start c-gem-polish02.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is POLISH-02. What the tester saw: Where: Battle Text (`Rose` , `Raspberry`). Uses British spelling `\"centre stage\"`: `\"Rose walks to centre stage and takes an extravagantly serious breath.\"`\n\nThe tester suggested (a suggestion, not an order): Standardize to American English `\"center stage\"`.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-polish02, push to main, and write the result and the next step onto the card.\n\nGrep every file for centre. A spoken line that changes loses its baked clip, so say whether it needs a re-bake.\n\nYou have my full permission to access the repo."
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-20"
   },
   {
    "id": "t-gem-polish03",
@@ -12562,6 +12567,38 @@
      "t": "Added with c-gem-canon01."
     }
    ]
+  },
+  {
+   "id": "c-takes-56fb01",
+   "tag": "takes-2026-11-20",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Voice Clips",
+   "count": 2,
+   "title": "Merge 2 new voice takes",
+   "next": "New voice takes were saved on branch takes. Merge them into the game.",
+   "prompt": {
+    "what": "Merges the voice takes you recorded on your phone.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/VOICE.md, then merge the new voice takes from branch takes. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by board-sync: new files on branch takes."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
@@ -12819,6 +12856,28 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukECtrSqT77v9Xp8TsC",
+   "title": "Chapter 1 fights: HP only, no Warmth bar",
+   "first": "2026-11-20T09:03:55-08:00",
+   "last": "2026-11-20T09:03:55-08:00",
+   "tags": [],
+   "cards": [
+    "c-gem-pillar-hp"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukE2JN2MT3ZAZQETWBM",
+   "title": "Change centre stage to center stage in Rose's battle text",
+   "first": "2026-11-20T08:59:10-08:00",
+   "last": "2026-11-20T09:03:34-08:00",
+   "tags": [
+    "gem-polish02"
+   ],
+   "cards": [
+    "c-gem-polish02"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGW1oQkmK4qtXQ5qMm",
    "title": "Rebuild The Big One as a bog turtle; cut the lure and chair",
    "first": "2026-11-20T08:48:36-08:00",
@@ -12865,16 +12924,6 @@
    ],
    "cards": [
     "c-gem-canon01"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukE2JN2MT3ZAZQETWBM",
-   "title": "Change centre stage to center stage in Rose's battle text",
-   "first": "2026-11-20T08:59:10-08:00",
-   "last": "2026-11-20T08:59:10-08:00",
-   "tags": [],
-   "cards": [
-    "c-gem-polish02"
    ]
   },
   {
@@ -14086,11 +14135,13 @@
    "takes/20261119T230940-0ap/part-001.json",
    "takes/20261119T230940-0ap/state.json",
    "takes/20261120T032059-yoq/part-001.json",
-   "takes/20261120T032059-yoq/state.json"
+   "takes/20261120T032059-yoq/state.json",
+   "takes/20261120T170347-1wa/part-001.json",
+   "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "55107b14650e42e88d35a95219dc297cdbec57c0",
- "synced_at": "2026-11-20T17:03:24+00:00",
+ "synced": "85d0782c5a2c320d992cf0336f3c97fbbcfc306f",
+ "synced_at": "2026-11-20T17:04:08+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
