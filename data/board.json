@@ -14918,7 +14918,7 @@
    "title": "Play the chapter 1 kitchen scene",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1 and play to Deedee and Boppy's kitchen (after the Square). Look at: (1) when Rose hops off Tom's shoulders she appears once, never twice; (2) Tom says \"Hi, Mom! Is that the cinnamon topping...\" with no \"I missed yours too\"; (3) Tom, Grace and Rose change faces while Deedee and Boppy talk. Tap All good, or Something is wrong with a note.",
@@ -14929,8 +14929,14 @@
     {
      "d": "2026-11-20",
      "t": "Added with c-reports-4."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-20T19:30:53.822Z"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "t-gatezeroplay",
