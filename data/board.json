@@ -10303,7 +10303,7 @@
    "created": "2026-11-20",
    "id": "c-tapfb1",
    "tag": "tapfb1",
-   "col": "prog",
+   "col": "done",
    "title": "Every board button and link shows your tap right away",
    "changed": "2026-11-20",
    "next": "Shipped in tapfb1: every button, link, card and tab shrinks and brightens while your finger is on it, and a button that saves shows a spinning ring until the save ends (a second tap on it does nothing). Nothing for Tom.",
@@ -10325,6 +10325,10 @@
      "d": "2026-11-20",
      "t": "Built and pushed tapfb1: pressed look on every tap, a spinner on any button that saves to GitHub and on the sync button, taps on a saving button ignored. Test tools/board_tap_test.py.",
      "at": "2026-11-20T15:45:00Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as tapfb1: every board button and link shows your tap right away"
     }
    ],
    "after": "nothing for Tom: end",
@@ -10336,7 +10340,8 @@
     "model": "Claude Sonnet 5.5 (row C: a small UI build, the design is not written yet)",
     "effort": "medium (a small piece)",
     "text": "Read CLAUDE.md and card c-tapfb1 in data/board.json. In board.html, give every button, link, card and tab an instant pressed look, and make a button that saves to GitHub show a spinner and ignore more taps until the save finishes. Test with python3 tools/board_test.py /tmp/board. You have my full permission to access the repo."
-   }
+   },
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-gracevoice-distort",
@@ -10765,6 +10770,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDiLsBePKA6YtUJVFo",
+   "title": "Every board button and link shows your tap right away",
+   "first": "2026-11-20T07:32:51-08:00",
+   "last": "2026-11-20T07:46:45-08:00",
+   "tags": [
+    "tapfb1"
+   ],
+   "cards": [
+    "c-tapfb1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGGUD269u96cXEAiKs",
    "title": "Fix the report backlog (1 open)",
    "first": "2026-11-20T07:45:26Z",
@@ -10797,16 +10814,6 @@
    "tags": [],
    "cards": [
     "c-fix-gracevoice-distort"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDiLsBePKA6YtUJVFo",
-   "title": "Every board button and link shows your tap right away",
-   "first": "2026-11-20T07:32:51-08:00",
-   "last": "2026-11-20T07:32:51-08:00",
-   "tags": [],
-   "cards": [
-    "c-tapfb1"
    ]
   },
   {
@@ -11797,8 +11804,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "04c3fff59045e2a160994db03ce3c98475c0f9f9",
- "synced_at": "2026-11-20T15:46:01+00:00",
+ "synced": "ace6e0b77e004ebe1520162b2a13de9117f80161",
+ "synced_at": "2026-11-20T15:47:33+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
