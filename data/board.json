@@ -2053,15 +2053,15 @@
    "title": "Reset the chapter 1 clip approach: reflection, one plan, one-clip proof (clipreset)",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "clipreset",
    "next": "Ready. A fresh Fable 5.2 thread (high effort) writes the reflection, checks whether guard, hit, dodge, KO, victory, run and idle can come from the painted battle sheets and the engine instead of new videos, makes one plan, proves it on Grace's guard for at most $0.30, and gives you one decide card. It spends nothing else.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukH7oLv95YtuWW62q7o",
-    "opening": "not started"
+    "url": "",
+    "opening": "pasted by Tom into a Fable 5.2 thread"
    },
    "history": [
     {
@@ -2071,6 +2071,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom (18:13) objected that the prompt repeated the Project instructions. Cut it to the task (board-clipresetb)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom (18:31): \"why is this card listed as up next when it's in progress?\" Its prompt had no first-push line, so the pasted conversation never claimed it. Moved to In progress by hand (board5); from board5 every copied prompt ends with its board: start line and Copy prompt moves the card itself."
     }
    ],
    "prompt": {
@@ -5352,6 +5356,10 @@
     {
      "d": "2026-11-19",
      "t": "Made by ch1art2."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom (18:31): tapped Something is wrong and the card stayed. Nothing reached the repo: the browser he used has no GitHub token, and the page showed only a small red line. board5 adds a token box at the top of the board and the warning at the top of the form."
     }
    ],
    "created": "2026-11-19",
@@ -5525,6 +5533,37 @@
     {
      "d": "2026-11-19",
      "t": "Made by reports-2026-11-19b: your 7 art reports have Library entries (Report fixes group) but none has been generated yet."
+    }
+   ]
+  },
+  {
+   "id": "c-board5",
+   "tag": "board5",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Tools",
+   "title": "Board buttons say when this browser cannot save; Copy prompt claims the card (board5)",
+   "next": "Building: a token box when the browser has no GitHub token; every copied prompt ends with its board: start line; Copy prompt moves the card to In progress.",
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "\"ok i marked something is wrong but he card is still there - did anything happen?\""
+   },
+   "prompt": {
+    "what": "Fixes two board gaps Tom hit on 2026-11-19.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix whose cause had to be found)",
+    "effort": "medium (small, cause known)",
+    "text": "Read CLAUDE.md and card c-board5 in data/board.json, then finish what its history describes and push build board5. You have my full permission to access the repo."
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Tom (18:31): \"ok i marked something is wrong but he card is still there - did anything happen?\" and \"why is this card listed as up next when it's in progres?\" (c-clipreset)."
     }
    ]
   }
