@@ -15647,8 +15647,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (2 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-113001-w756, r-20261120-130739-tr1a. First note: rose facing the wrong way",
+   "title": "Fix the report backlog (1 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-113001-w756. First note: rose facing the wrong way",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -15684,6 +15684,10 @@
     {
      "d": "2026-11-20",
      "t": "The backlog now holds 2 report(s)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "The backlog now holds 1 report(s)."
     }
    ],
    "blocks": [],
@@ -16743,7 +16747,7 @@
   {
    "id": "t-keysecrets2-try",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -16779,15 +16783,18 @@
     {
      "d": "2026-11-20",
      "t": "Fix fix-keysecrets2-try shipped: the page now shows elapsed time while waiting and reads the job report on any phone."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Try GENERATE VIDEO on one clip is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-fix-keysecrets2-try",
    "tag": "fix-keysecrets2-try",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Try GENERATE VIDEO on one clip",
@@ -16835,6 +16842,10 @@
     {
      "d": "2026-11-20",
      "t": "Fixed: page now shows waiting progress and reads report time robustly; build fix-keysecrets2-try."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-keysecrets2-try: GENERATE VIDEO now shows it is still working, and reads the job's report on any phone"
     }
    ],
    "prompt": {
@@ -16848,10 +16859,23 @@
    },
    "after": "t-keysecrets2-try",
    "auto": true,
-   "started_at": "2026-11-20T21:57:29+00:00"
+   "started_at": "2026-11-20T21:57:29+00:00",
+   "done": "2026-11-20"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukELMZXjj5p7XhpH4Rn",
+   "title": "Fix: Try GENERATE VIDEO on one clip",
+   "first": "2026-11-20T22:01:15Z",
+   "last": "2026-11-20T22:01:46Z",
+   "tags": [
+    "fix-keysecrets2-try"
+   ],
+   "cards": [
+    "c-fix-keysecrets2-try"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGhbJajd4cUkbJiFVv",
    "title": "Art Library videos through repo secrets",
@@ -19063,8 +19087,8 @@
    "takes/20261120T213706-d43/state.json"
   ]
  },
- "synced": "277d87f544f9018576c9e23b97bd69c5f76f417f",
- "synced_at": "2026-11-20T21:57:31+00:00",
+ "synced": "26d6a051f5cdb69762e68472a4c84934b72ff342",
+ "synced_at": "2026-11-20T22:02:30+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
