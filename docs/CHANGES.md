@@ -1,3 +1,9 @@
+## 2026-11-20 (461): Art Library bake, clip-tom-give (`artbake1535`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- clip-tom-give: clip `tom-give` cut from art/raw/clips/clip-tom-give-v3.mp4 (24 pictures a second; video frames 0 to 68, every 2, state; 35 pictures kept; played at 1.5x). tom_give frames 35 frame px 392 404 rows 98 101 sheet (1801, 1994) in memory mb 14.4 (as a grid 22.2) kb 621 dur ms 1944 kind state impact ms 0 reach [25.8, 3.9]
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## fix-keysecrets2-try-2 (2026-11-20): GENERATE VIDEO works on a clip that is already approved
 
 Tom (t-keysecrets2-try, 11-20): "i got an error This clip is already approved. Reject it first (Battle Lab REVIEW) to make another. why cant i gerneate a new one just cause theres one approved? that shouldnt be". Fact: the page (`clipGenerate`, `engine/art-clips.js`) and the job (`request_queue`, `clipgen.py`) both refused an approved clip. Fix: a press on one clip now always makes a new video; if the clip was approved, the new version is added and becomes the current one (`replace` on `approve`). A chapter press still skips approved clips. Tests: `clipgen_test.py requests` covers it (the one failure `it is listed for Tom and the paid video is kept` was there before this change).
