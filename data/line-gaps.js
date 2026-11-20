@@ -18,7 +18,6 @@ const LINE_GAPS={
 "Grace|Number two. Deedee made apple muffins. They're for you, so nobody's allowed to have one yet.": "beat",
 "Grace|Rose licked a muffin.": "beat",
 "Grace|Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One again.": "snap",
-"Grace|Tata, stop. You're getting fingerprints on it. And look, it has a dent. Did you do that?": "beat",
 "Grace|The fish ate them, Boppy. The last three.": "beat",
 "Mudling|No. Ours now.": "snap",
 "Rose|AHHH! DEEDEE!": "snap",
@@ -29,12 +28,11 @@ const LINE_GAPS={
 "Rose|He's stuck! Tata, get him out!": "snap",
 "Rose|Hello, mud! Can we please have Deedee's muffins back? Thank you!": "beat",
 "Rose|It's bigger than a BUS! It ate a boat!": "snap",
-"Rose|One more ride, Tata! To the cab! Go the LONG way!": "snap",
+"Rose|One more ride, Tata! To the cab!": "snap",
 "Rose|Thank you, fish! There's a bug on my money!": "beat",
 "Rose|The grass is Boppy color!": "snap",
 "The Big One|GLUB. I was small at breakfast. Then a flash. Now I don't fit under my log.": "snap",
 "The Big One|Good. He was in the middle of a story. The one about the race.": "beat",
-"Tom|It's the size of a plum. I carried a suitcase through two airports this morning.": "snap",
 "Tom|Mom, wait. Bosses hit in a pattern. Watch what he does twice, then go.": "snap",
 "Tom|Your mother says I'm slow.": "snap"
 };

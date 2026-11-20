@@ -159,10 +159,7 @@ function departureNow() {
 const TRAVEL_POOLS={
   // Westbound goodbye at the cab: Sal, Grace, Rose, Tom as one exchange so the girls answer each other.
   west:[
-    {driver:["Los Angeles? You got it. Flights leave whenever I get there.","One thing. The girls stay home. Amy's rule. No flying on a school night."],
-     grace:["Tata, you're leaving AGAIN? You JUST got here!"],
-     rose:["Bring me back a palm tree. A small one. For my room."],
-     tom:["I'll be back before you know it. Go home and listen to your mom.","Rose, I'll see what I can do about the palm tree."]},
+    {driver:["Los Angeles? You got it."]},
     {driver:["Airport? Hop in. Cab seven has been waiting all day.","The girls stay put. Amy's orders. I follow Amy's orders. Everybody does."],
      grace:["Tata, text me when you land. I'll check at exactly seven."],
      rose:["Take a picture of a dolphin. California has dolphins. I looked it up. Sort of."],
@@ -356,9 +353,7 @@ function startTrip(n,dir) {
       const ex=(d.driver&&d.grace&&d.rose&&d.tom)?{}:travelPick('west',TRAVEL_POOLS.west);   // one whole exchange, so the girls answer each other
       steps.push(
       S.talk('Sal',d.driver||ex.driver),
-      S.talk('Grace',d.grace||ex.grace),
-      S.talk('Rose',d.rose||ex.rose),
-      S.talk('Tom',d.tom||ex.tom),
+      ...(d.grace||ex.grace?[S.talk('Grace',d.grace||ex.grace),S.talk('Rose',d.rose||ex.rose),S.talk('Tom',d.tom||ex.tom)]:[]),
       S.call(()=>{ setGirlsAway(true); sfx.doorOut(); showToast('Grace and Rose head home to the Gregori house.',3); }),
       S.wait(.9));
     }

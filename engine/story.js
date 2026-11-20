@@ -1466,6 +1466,14 @@ b7DrawMapFx=function(time) {
 const LE_talkToDriver_story=talkToDriver;
 talkToDriver=function(n) {
   const c=chapterInfo();
+  // Chapter 1 ends when Tom asks Sal for a ride (report r-20261120-144521-mv3p: the cab scene must wait for Tom to talk to Sal).
+  if(STORY.mode==='full'&&STORY.chapter===1&&flag('ch1-job')&&!flag('ch1-done')) {
+    n.visitedOnce=true;
+    openChoice(n.name,['Tom! Cab seven is at your service. Where to?'],[
+      {label:'TO THE AIRPORT',fn:()=>playScene('ch1Sunday')},
+      {label:'JUST VISITING',fn:()=>openDialog(n.name,['Okay. Cab seven is ready when you are.'],n)}],n);
+    return;
+  }
   if(STORY.mode==='full'&&c.noFlight) { const r=typeof c.noFlight==='function'?c.noFlight():c.noFlight; if(r) { openDialog(n.name,r.lines,n); if(r.toast) n.onClose=()=>showToast(r.toast,4.5); return; } }
   // Chapter 1 is over: the brakes came in, and Sal says so before the usual airport offer.
   if(STORY.mode==='full'&&STORY.chapter===1&&flag('ch1-done')&&!flag('ch2-sal')) {

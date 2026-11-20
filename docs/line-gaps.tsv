@@ -41,7 +41,6 @@ ch	scene	speaker	after	text
 1	ch1Mudling	Rose	beat	Hello, mud! Can we please have Deedee's muffins back? Thank you!
 1	ch1Mudling	Mudling	snap	No. Ours now.
 1	ch1Mudling	Rose	snap	But I said PLEASE!
-1	ch1Mudling	Tom	normal	She did. I was right here. It was an excellent please.
 1	ch1Mudling	Deedee	normal	Girls, behind me. You three have till I count to three. Then I'm getting the hose.
 1	ch1Mudling	Deedee	snap	Three.
 1	ch1Mudling	Grace	normal	Nine papers. There were twelve. So the one with the pan still has three.
@@ -50,15 +49,9 @@ ch	scene	speaker	after	text
 1	ch1Spot	Grace	normal	It's grey, Rose. Just that one spot. And that orange cube has a dragonfly in it.
 1	ch1Spot	Rose	snap	He's stuck! Tata, get him out!
 1	ch1Spot	Tom	normal	Yes. Right away. Everybody give the dragonfly some room.
-1	ch1Spot	Tom	snap	It's the size of a plum. I carried a suitcase through two airports this morning.
-1	ch1Spot	Rose	normal	Your face is RED, Tata!
-1	ch1Spot	Grace	beat	Tata, stop. You're getting fingerprints on it. And look, it has a dent. Did you do that?
-1	ch1Spot	Tom	normal	Grace. I couldn't even make it wobble.
 1	ch1Spot	Grace	normal	Deedee, what's that?
 1	ch1Spot	Deedee	snap	A flashbulb. It's burnt. Somebody set it off right here. Look in the glass. Little purple-black sparkles, like crushed-up stars. They change color when you tip it.
 1	ch1Spot	Grace	normal	Don't throw it out! It's a clue. I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it. I'm writing it in pencil.
-1	ch1Spot	Tom	normal	Why pencil?
-1	ch1Spot	Grace	normal	Because I don't know what any of it means yet.
 1	ch1Pond	Tom	normal	GAH! Grace, I'm holding your hand. That's for me, not for you.
 1	ch1Pond	Grace	beat	I know, Tata. You're squeezing. Is that the Big One? Boppy only said it was as big as the couch!
 1	ch1Pond	Deedee	beat	For once in his life he rounded down.
@@ -77,7 +70,6 @@ ch	scene	speaker	after	text
 1	ch1AfterBoss	The Big One	beat	Good. He was in the middle of a story. The one about the race.
 1	ch1AfterBoss	Deedee	normal	He's been in the middle of that one for fifty-one years.
 1	ch1End	Rose	snap	Boppy! Your fish is REAL! He's CAR size and he gave me money!
-1	ch1End	Boppy	normal	CAR size? Cozy Rosie, I told everybody a couch. Twenty years! I didn't want to brag!
 1	ch1End	Boppy	normal	Now that's real gold. Same as these. Look.
 1	ch1End	Rose	normal	You've got money in your TEETH!
 1	ch1End	Boppy	snap	Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look.
@@ -86,11 +78,9 @@ ch	scene	speaker	after	text
 1	ch1End	Grace	beat	The fish ate them, Boppy. The last three.
 1	ch1End	Boppy	normal	The fish gets THREE?
 1	ch1End	Deedee	normal	Twelve more. Forty minutes. The first one's still yours.
-1	ch1End	Boppy	normal	Girls, you heard that. Forty minutes. Somebody watch the clock.
+1	ch1End	Tom	normal	Alright, time for me to head back to LA. Let's head to Sal's!
 1	ch1Job	Grace	normal	Tata, you have a job. If you see anything grey in California, or an orange cube, you write it down and text me.
 1	ch1Job	Tom	normal	I have a job. Yes. Does the job come with a pencil?
 1	ch1Job	Grace	normal	That's my second best one. Don't lose it.
-1	ch1Job	Tom	normal	Second best. It's going in the pocket with the zipper.
-1	ch1Job	Rose	snap	One more ride, Tata! To the cab! Go the LONG way!
-1	ch1Job	Tom	normal	The long way. That's all the way around the Square. Twice.
+1	ch1Job	Rose	snap	One more ride, Tata! To the cab!
 1	ch1Sunday	TNB	normal	hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over.

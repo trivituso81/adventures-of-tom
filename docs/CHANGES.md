@@ -1,3 +1,12 @@
+## reports-2026-11-20b (2026-11-20): report backlog, Chapter 1 script cuts, Sal's ride and Rose's facing
+
+Card c-reports-5. Tom's notes (report ids in brackets), done in ch1 `data/scenes.js`, `engine/story.js`, `engine/travel.js`, `docs/line-gaps.tsv`:
+- Cut lines: "She did. I was right here. It was an excellent please." [r-20261120-140459-spj4]; the plum, "Your face is RED", fingerprints, "couldn't even make it wobble", "Why pencil?" and its answer [r-...-141557-u861, -141613-rahl, -141624-q81w, -141633-eo4t, -142553-3p2h]; Boppy "CAR size?" [-143457-hz96]; Tom "Second best..." and "The long way..." [-144429-z482, -144444-gdez]; Rose's "Go the LONG way!" now ends at "To the cab!".
+- Boppy's "FORTY minutes" line [-143926-d8oa] is cut and Tom now says "Alright, time for me to head back to LA. Let's head to Sal's!" [-143952-847o] (needs a recording).
+- The lap round the Square is cut [-144505-9uqg]. The phone close-up and chapter end now play only after Tom talks to Sal and picks TO THE AIRPORT [-144521-mv3p]; Sal says only "Los Angeles? You got it." [-144624-06ax]; the first westbound goodbye pool entry is cut to that line, which drops "The girls stay home..." [-144644-77qd].
+- Rose faces Tom (right) in the kitchen at the start of ch1Theft, per Tom's answer [r-20261120-113001-w756].
+- Still open (need Tom): muffin wrapper trail art variations and monster positions (-140511-a306, -140805-mhzt, -141016-j0za, -141209-58bx), item banner art (-142626-w74f).
+
 ## 2026-11-20 (461): Art Library bake, clip-tom-give (`artbake1535`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).

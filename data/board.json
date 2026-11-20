@@ -15661,7 +15661,7 @@
    "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (22 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-113001-w756, r-20261120-140459-spj4, r-20261120-140511-a306, r-20261120-140805-mhzt, r-20261120-141016-j0za, r-20261120-141209-58bx and 16 more. First note: rose facing the wrong way",
+   "next": "Open reports left on inbox: r-20261120-140511-a306, -140805-mhzt, -141016-j0za, -141209-58bx (muffin wrapper trail variants and monster positions in Grump Hollow) and r-20261120-142626-w74f (item banner art). Each needs new area art from the Art Library or a layout decision.",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -15738,6 +15738,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped reports-2026-11-20b: 16 reports fixed (Chapter 1 line cuts, Sal ride order, Rose facing). Left open: 5 muffin trail and monster position reports (art variations per area, a level redesign) and the item banner art report; they need Tom's call before a build."
     }
    ],
    "blocks": [],

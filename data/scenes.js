@@ -190,7 +190,7 @@ SCENES.ch1Theft=[
     {if:()=>{ const r=sceneActor('rose'); return !(r&&r.seat); },then:[{walk:'rose',to:routeTo('rose',8,10),speed:.25}]}]},   // they walk in together (no snapping); Rose rides in on Tom's shoulders (a save without the ride flag walks her in)
   {face:'tom',dir:'left'}, {face:'grace',dir:'left'},
   ...CH1_DISMOUNT([8,10]),   // through the door, Rose hops down (cutpolish3: she was taken down in the Square before)
-  {face:'rose',dir:'left'},
+  {face:'rose',dir:'right'},
   {talk:'Deedee',lines:["My favorite son! I missed that face. Now sit, you're having a muffin."]},
   {talk:'Tom',lines:["Hi, Mom! Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas."]},
   {talk:'Deedee',lines:["I made twelve and they're all still there. I've been standing between that pan and your father since six this morning."]},
@@ -305,7 +305,6 @@ SCENES.ch1Mudling=[
   {talk:'Rose',lines:["Hello, mud! Can we please have Deedee's muffins back? Thank you!"]},
   {talk:'Mudling',lines:["No. Ours now."]},
   {talk:'Rose',lines:["But I said PLEASE!"]},
-  {talk:'Tom',lines:["She did. I was right here. It was an excellent please."]},
   {talk:'Deedee',lines:["Girls, behind me. You three have till I count to three. Then I'm getting the hose."]},
   {call:()=>{ for(const n of ['Mudling','Mudling B','Mudling C']) { const a=sceneActor(n); if(a) a.carry=null; } sfx.splat(); }}, {wait:.6},   // the Mudlings push all the muffins into their mouths at once
   {talk:'Deedee',lines:["Three."]},
@@ -330,16 +329,10 @@ SCENES.ch1Spot=[
   {talk:'Rose',lines:["He's stuck! Tata, get him out!"]},
   {talk:'Tom',lines:["Yes. Right away. Everybody give the dragonfly some room."]},
   ch1Tug('tom'), {sfx:'bonk'}, ch1Tug('tom'), {sfx:'bonk'}, {wait:.3},
-  {talk:'Tom',lines:["It's the size of a plum. I carried a suitcase through two airports this morning."]},
-  {talk:'Rose',lines:["Your face is RED, Tata!"]},
-  {talk:'Grace',lines:["Tata, stop. You're getting fingerprints on it. And look, it has a dent. Did you do that?"]},
-  {talk:'Tom',lines:["Grace. I couldn't even make it wobble."]},
   {flag:'ch1-bulb'}, {call:()=>sfx.pickup()},   // Deedee bends down and picks something out of the grass with a tissue
   {talk:'Grace',lines:["Deedee, what's that?"]},
   {talk:'Deedee',lines:["A flashbulb. It's burnt. Somebody set it off right here. Look in the glass. Little purple-black sparkles, like crushed-up stars. They change color when you tip it."]},
   {talk:'Grace',lines:["Don't throw it out! It's a clue. I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it. I'm writing it in pencil."]},
-  {talk:'Tom',lines:["Why pencil?"]},
-  {talk:'Grace',lines:["Because I don't know what any of it means yet."]},
   {call:()=>{ sfx.splat(); sfx.thud(); }}, {wait:.8},   // a huge splash from across the pond; everyone turns
   {toast:'Goal: the splash came from across the pond. Follow it.',time:4.5}
 ];
@@ -409,7 +402,6 @@ SCENES.ch1End=()=>[
   {place:'grace',at:[9,11],dir:'up'}, {place:'rose',at:[7,11],dir:'up'}, {place:'deedee',at:[7,9],dir:'down'},
   {call:()=>sfx.pickup()},   // Deedee tucks the flashbulb, still in its tissue, into the back of the kitchen drawer
   {talk:'Rose',lines:["Boppy! Your fish is REAL! He's CAR size and he gave me money!"]},
-  {talk:'Boppy',lines:["CAR size? Cozy Rosie, I told everybody a couch. Twenty years! I didn't want to brag!"]},
   {talk:'Boppy',lines:["Now that's real gold. Same as these. Look."]},
   {ch1Reveal:'grin'},   // he grins and taps a back tooth
   {talk:'Rose',lines:["You've got money in your TEETH!"]},
@@ -419,32 +411,24 @@ SCENES.ch1End=()=>[
   {talk:'Grace',lines:["The fish ate them, Boppy. The last three."]},
   {talk:'Boppy',lines:["The fish gets THREE?"]},
   {talk:'Deedee',lines:["Twelve more. Forty minutes. The first one's still yours."]},   // Deedee sets the empty pan on the counter and takes the flour down
-  {talk:'Boppy',lines:["Girls, you heard that. Forty minutes. Somebody watch the clock."]},
+  {talk:'Tom',lines:["Alright, time for me to head back to LA. Let's head to Sal's!"]},
   {toast:"Goal: it's Sunday. Head out the front door. Cab 7 is waiting at the Square.",time:5}
 ];
 
-// 8a. Rivituso Row, the front door: Grace's job and her second best pencil; Rose wants the long way.
+// 8a. Rivituso Row, the front door: Grace's job and her second best pencil; Rose waves him to the cab.
 SCENES.ch1Job=[
   {flag:'ch1-job'},
   {talk:'Grace',lines:["Tata, you have a job. If you see anything grey in California, or an orange cube, you write it down and text me."]},
   {talk:'Tom',lines:["I have a job. Yes. Does the job come with a pencil?"]},
   {talk:'Grace',lines:["That's my second best one. Don't lose it."]},   // she thinks, then takes a pencil from behind her ear
   {call:()=>sfx.pickup()},
-  {talk:'Tom',lines:["Second best. It's going in the pocket with the zipper."]},
-  {talk:'Rose',lines:["One more ride, Tata! To the cab! Go the LONG way!"]},
-  {talk:'Tom',lines:["The long way. That's all the way around the Square. Twice."]},
-  {toast:'Goal: Cab 7, at the Square. Take the long way.',time:4}
+  {talk:'Rose',lines:["One more ride, Tata! To the cab!"]},
+  {toast:'Goal: Cab 7, at the Square. Talk to Sal.',time:4}
 ];
 // 8b. The Square: one lap with Rose on his shoulders, a fade for the second, the cab, TNB's text on the seat (Tom does not read it).
 SCENES.ch1Sunday=[
   {flag:'ch1-sunday'},
-  {call:()=>{ const r=sceneActor('rose'); if(r) { r.noShadow=true; r.seat=true; } }},
-  {pose:'tom',f:'tr_sit'},
-  {walk:'tom',to:routeTo('tom',17,14),speed:.2},
-  {walk:'tom',to:[[17,10],[5,10],[5,14],[13,14]],speed:.2},   // one lap round the fountain
-  {fade:'out',time:.8}, {wait:.5},   // the second lap happens while the screen is dark
-  {call:()=>{ const r=sceneActor('rose'); if(r) { r.noShadow=false; r.seat=false; } }}, {pose:'tom'},
-  {fade:'in',time:.8},
+  {talk:'Sal',lines:["Los Angeles? You got it."]},
   {sfx:'doorOut'}, {wait:.6},
   {fade:'out',time:.8},   // Cab 7 pulls away
   {call:()=>sfx.ding()}, {ch1Reveal:'phone'},   // cutpolish4b: the phone lights up on the cab seat
@@ -723,7 +707,6 @@ const TRIGGERS=[
   {id:'ch1-after',map:'hollow',when:{...CH1,flag:{'battle:bigone':'win'},notFlag:'ch1-tin'},scene:'ch1AfterBoss'},
   {id:'ch1-end',map:'grands',when:{...CH1,flag:'ch1-tin',notFlag:'ch1-home'},scene:'ch1End'},
   {id:'ch1-job',map:'row',when:{...CH1,flag:'ch1-home',notFlag:'ch1-job'},scene:'ch1Job'},
-  {id:'ch1-sunday',map:'town',when:{...CH1,flag:'ch1-job',notFlag:'ch1-done'},scene:'ch1Sunday'},
   {id:'ch2-arrive',map:'blvd',when:{...CH2,notFlag:'ch2-goal'},scene:'ch2Arrive'},
   {id:'ch2-loft',map:'lofts',when:{...CH2,notFlag:'ch2-tnb'},scene:'ch2Loft'},
   {id:'ch2-porch',map:'jpark',at:[2,14,11,21],when:{...CH2,flag:'ch2-tnb',notFlag:'ch2-nara'},scene:'ch2Porch'},

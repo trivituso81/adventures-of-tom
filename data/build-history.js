@@ -32,7 +32,7 @@ const BUILD_HISTORY=[
 {"tag":"gatezero","at":"2026-11-20T10:22:58-08:00","what":"Gate Zero window is empty and Flight Zero rolls away at the end of chapter 10","card":"c-gatezero","theme":"Areas"},
 {"tag":"fix-battlelabpagetry-3","at":"2026-11-20T18:20:10+00:00","what":"The Battle Lab page has its own icon and its fights sit in collapsed categories and subcategories","card":"c-fix-battlelabpagetry-3","theme":"Tools"},
 {"tag":"fix-effectslook-2","at":"2026-11-20T18:15:30+00:00","what":"Wince is removed everywhere; the speed difference needs one example","card":"c-fix-effectslook-2","theme":"Tools"},
-{"tag":"reports-2026-11-20","at":"2026-11-20T18:14:29+00:00","what":"Rose no longer shows twice when she jumps off Tom's shoulders; Hi, Mom! line shortened; the family reacts in the kitchen scene","card":"c-reports-2","theme":"Game Shell"},
+{"tag":"reports-2026-11-20","at":"2026-11-20T18:14:29+00:00","what":"Report backlog, Chapter 1 script cuts, Sal's ride and Rose's facing","card":"c-reports-2","theme":"Game Shell"},
 {"tag":"fix-battlelabpagetry-2","at":"2026-11-20T18:08:28+00:00","what":"The Battle Lab page is a page like Admin: difficulty toggles on top, every fight one tap away","card":"c-fix-battlelabpagetry-2","theme":"Tools"},
 {"tag":"ch2build","at":"2026-11-20T18:04:29+00:00","what":"Chapter 2 now plays the locked script: nine scenes, 93 lines word for word","card":"c-ch2build","theme":"Story and Dialogue"},
 {"tag":"buildname1","at":"2026-11-20T10:01:01-08:00","what":"Play and report cards on the board name the build they are in","card":"c-buildname","theme":"Tools"},
