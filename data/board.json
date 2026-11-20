@@ -1989,9 +1989,42 @@
     "effort": "medium (a small engine fix with a test)",
     "text": "Read claude/handoff-rules.md and docs/CHANGES.md skipchain1, then finish the card c-skipchain1 if it is not shipped. You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "b-board-b3s9a",
+   "tag": "board-b3s9a",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Tools",
+   "title": "board only: the stage 9b and 9c prompts read claude/next-addendum-b3s9a.md",
+   "next": "Done: board only: the stage 9b and 9c prompts read claude/next-addendum-b3s9a.md",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGt8KJKK4iu2gwLNP2",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as board-b3s9a. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDRniYMHoLuUHQYtgr",
+   "title": "Handle Tom's note on Switch GitHub Pages to publish from Actions (one setting)",
+   "first": "2026-11-20T02:17:59Z",
+   "last": "2026-11-20T02:17:59Z",
+   "tags": [],
+   "cards": [
+    "c-note-pagessource"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGYUPLZiib59SQWmGs",
    "title": "Make the board the only list of open work (cut claude/next.md down)",
@@ -2061,6 +2094,28 @@
    "cards": [
     "c-starttest",
     "c-copydocs"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGt8KJKK4iu2gwLNP2",
+   "title": "New battle system, stage 9: first late joiners and the next kits",
+   "first": "2026-11-19T17:00:46-08:00",
+   "last": "2026-11-19T18:18:21-08:00",
+   "tags": [
+    "board-b3s9a"
+   ],
+   "cards": [
+    "c-b3s9"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEuuRRV3wp1jnp5CTq",
+   "title": "Fix the four chapter 1 pictures you rejected, from your notes",
+   "first": "2026-11-19T18:17:38-08:00",
+   "last": "2026-11-19T18:17:38-08:00",
+   "tags": [],
+   "cards": [
+    "c-ch1art2"
    ]
   },
   {
@@ -2180,16 +2235,6 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukGt8KJKK4iu2gwLNP2",
-   "title": "New battle system, stage 9: first late joiners and the next kits",
-   "first": "2026-11-19T17:00:46-08:00",
-   "last": "2026-11-19T17:00:46-08:00",
-   "tags": [],
-   "cards": [
-    "c-b3s9"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukFc3ANMLuB2qSqohxj",
    "title": "Board that keeps itself current (board2)",
    "first": "2026-11-19T16:11:14-08:00",
@@ -2229,8 +2274,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "9b4059abee0763babb80cb04ea56ec487f1119cc",
- "synced_at": "2026-11-20T02:17:04+00:00",
+ "synced": "7290c7ab17024ee3795c2d260c504ca3c7ca44c3",
+ "synced_at": "2026-11-20T02:18:47+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
