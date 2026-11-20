@@ -41,6 +41,10 @@ Tom: "for any conversation i initiate, check against the board to see if it's an
 
 A request that makes other cards obsolete retires them. Push the board change with the work (or alone, tag `board-<short>`), run `python3 tools/board_check.py`, and finish with "Theme: <theme>. Pending your action: yes/no."
 
+## Battle animations are out of scope for the battle system (standing rule, Tom 2026-11-19 17:01)
+
+Tom: reviewing battle animations is not part of the battle system; he handles it as a separate task, because the mechanics and the animations have no direct dependency (Battle 3 resolves the whole result first and plays it as beats; a clip only calls `reveal(share)` and the rules never wait on it). For every battle system session (stages 9 to 23, balance, story switches): never ask Tom to review, judge or approve a battle animation or clip, not at a milestone, in a closing reply or on a card; never wait on an animation to finish a stage (a move uses `anim:{kind:'default'}` until an animation task changes its row); do not build, wire, tune or fix clips or animation timing as part of a stage, only keep the seam working (the `anim` and `wind` fields default sensibly, a hit lands with or without its clip). Tom judges mechanics only at Milestones A to D: fun, pace, readable screen and turn bar, fight length, kits that feel like the family. An animation note arriving in a battle session becomes a card in the Battle Animations theme and is not acted on there. Details: `claude/battle-scope.md` in the Project.
+
 ## Hard rules
 
 1. **Everything is a classic script in one shared global scope.** No ES modules, no import/export, no bundler. Files load in the order of the `<script>` tags in `index.html`. A new file must be added to `index.html` at the right point. See `docs/ARCHITECTURE.md` for the load order and what each group depends on.

@@ -1189,6 +1189,30 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/next-addendum-clipch1fix.md and claude/next-addendum-clipgen2.md, then run the clip-gen Action for group Chapter 1 with dry_run=false and cap 5 (it makes only the 43 entries clipch1fix sent back to To do), wait for it and the art-bake it starts, look at the baked frames of the held and remade clips, and put Tom's CHAPTER 1 REVIEW card for the remade clips on the board. Build tag clipch1remake. You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "c-battlescope",
+   "title": "Rule: battle animations are out of scope for the battle system",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "done",
+   "next": "Shipped as board-scope: CLAUDE.md section 'Battle animations are out of scope for the battle system'. Animation review is its own task in the Battle Animations theme.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukH9BhE3vicKhDvG91o",
+    "opening": "\"What do I do with feedback on the battle system\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Tom 17:01: \"reviewing battle animations is out of scope for the battle system ... there really isn't a direct dependency between the mechanics of the system and its animations\". Rule added to CLAUDE.md and claude/battle-scope.md."
+    }
+   ],
+   "tag": "board-scope",
+   "after": "nothing for Tom: end",
+   "done": "2026-11-19"
   }
  ],
  "sessions": [

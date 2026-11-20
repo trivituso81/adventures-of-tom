@@ -1,3 +1,7 @@
+## board-scope (2026-11-19): Battle animations are out of scope for the battle system (rule only, no game change)
+
+- CLAUDE.md now says battle system sessions never ask Tom to review battle animations or clips and never wait on them; he handles animation review as its own task. Mechanics-only judging at Milestones A to D. Details in claude/battle-scope.md (Project). No code or art changed.
+
 ## clipch1fix (2026-11-19): Chapter 1 battle clips: bake fixes and prompt edits from Tom's 45 review notes; 43 clips wait to be made again, nothing generated
 
 - Tom (11-19): "Read claude/clip-gate-plan.md (sections 3, 4.5 and 5) and claude/next-addendum-clipgen2.md, then build clipch1fix." Build 2 of the plan's section 5. No video was made and nothing was spent.
