@@ -9162,7 +9162,7 @@
    "id": "c-posesizes",
    "tag": "posesizes",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Characters",
    "title": "Pose sizes: walk stand frames, Grace, Rose, Deedee poses",
    "next": "Shipped in posesizes: the walking front, back and side standing poses of Tom, TNB, Justin and Amy, and Boppy's back standing pose, are baked from your Pose Editor lines (steps follow their standing pose). Boppy's front and side walking, and all of Grace, Rose and Deedee, wait for your lines on card t-poselines.",
@@ -9197,6 +9197,10 @@
     {
      "d": "2026-11-20",
      "t": "Built posesizes: walk_sheet_frames.py bakes a checked walking pose as the page draws it; 13 standing poses applied (Boppy only has back lines). No-change rebake matched the repo byte for byte first. Draw scales follow the page height of a lined front stand (Justin stays at the 43.9 rows his Whole pose slider set). Grace, Rose, Deedee and Boppy front and side handed to Tom on t-poselines."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as posesizes: Walking poses of Tom, TNB, Justin, Amy and Boppy now use your Pose Editor lines, so they match their feelings and talking poses"
     }
    ],
    "prompt": {
@@ -9208,7 +9212,8 @@
     "effort": "medium (steps are known, frames judged by eye)",
     "text": "Read CLAUDE.md (Pose Editor, One head multiplier and Real heights sections), docs/POSE_EDITOR.md and claude/next-addendum-cutpolish2.md, then card c-posesizes in data/board.json. Your first push is the commit board: start c-posesizes. Tom saved lines for the walking stand frames of Tom, TNB, Justin, Amy and Boppy (data/pose-requests.json); applying them needs a walk bake. Before changing any bake, rebake once with no change and confirm it reproduces the repo files byte for byte. Show frames (stand next to steps, a head row) in portrait and landscape before pushing, then run `python3 tools/pose-editor/manifest.py` so the Pose Editor's 'in the game now' matches, and `python3 tools/pose_editor_test.py`. Grace, Rose and Deedee poses have no saved lines yet: do not size them, and list them on a Tom card (ask: setup) named in the card's `after`, telling him which poses to line in ADMIN > POSE EDITOR. You have my full permission to access the repo."
    },
-   "after": "t-poselines"
+   "after": "t-poselines",
+   "done": "2026-11-20"
   },
   {
    "id": "c-itembanner1",
@@ -9811,6 +9816,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukE8mJ9n4LpdvqgpDKT",
+   "title": "Pose sizes: walk stand frames, Grace, Rose, Deedee poses",
+   "first": "2026-11-20T01:12:39-08:00",
+   "last": "2026-11-20T01:54:22-08:00",
+   "tags": [
+    "posesizes"
+   ],
+   "cards": [
+    "c-posesizes"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCxabcwDEBWbVvd2mv",
    "title": "Battle system stage 9c: Nara and Boppy kits, late joiners",
    "first": "2026-11-20T01:13:56-08:00",
@@ -9904,16 +9921,6 @@
    "tags": [],
    "cards": [
     "c-heist1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukE8mJ9n4LpdvqgpDKT",
-   "title": "Pose sizes: walk stand frames, Grace, Rose, Deedee poses",
-   "first": "2026-11-20T01:12:39-08:00",
-   "last": "2026-11-20T01:12:39-08:00",
-   "tags": [],
-   "cards": [
-    "c-posesizes"
    ]
   },
   {
@@ -10612,8 +10619,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "a62faf6c7772b981bdd1d240c0599e221ab7522d",
- "synced_at": "2026-11-20T09:53:45+00:00",
+ "synced": "ee30e047be1d06fc1675acfe1b61d4941f4c8084",
+ "synced_at": "2026-11-20T09:55:23+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
