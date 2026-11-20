@@ -10252,7 +10252,7 @@
    "id": "c-reports-3",
    "tag": "reports-2026-11-20",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Fix the report backlog (5 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-000831-h5tq, r-20261120-000848-fl38, r-20261120-000910-g9n1, r-20261120-000931-2yx8, r-20261120-001100-lta1. First note: This line needs to be re-recorded. The voice is distorted somehow",
@@ -10299,13 +10299,18 @@
     {
      "d": "2026-11-20",
      "t": "The backlog now holds 5 report(s)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Done by the board: the backlog is empty."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "started_at": "2026-11-20T15:35:40+00:00",
-   "after": "nothing for Tom: c-fix-gracevoice-distort"
+   "after": "nothing for Tom: c-fix-gracevoice-distort",
+   "done": "2026-11-20"
   },
   {
    "theme": "Tools",
@@ -10557,7 +10562,7 @@
     "rule": "Claude Sonnet 5.5, medium"
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukD6ycpauP8Kp48v8ey",
+    "url": "https://claude.ai/code/session_01RXeukD6ycpauP8Kp48v8ey",
     "opening": "New card by Tom on the board"
    },
    "history": [
@@ -10579,6 +10584,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -10595,6 +10604,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukD6ycpauP8Kp48v8ey",
+   "title": "Remove all the toasts that appear at the top of the screen",
+   "first": "2026-11-20T15:52:11Z",
+   "last": "2026-11-20T15:52:11Z",
+   "tags": [],
+   "cards": [
+    "c-idea-removeall"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukEx1ffiitR5B5otnwt",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
@@ -11871,8 +11890,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "43b157d586eafb172ad73d5b0bcbe9a12586391d",
- "synced_at": "2026-11-20T15:51:16+00:00",
+ "synced": "7db36b89f5f0ad101a6da44177552d5559e6d8c0",
+ "synced_at": "2026-11-20T15:52:54+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
