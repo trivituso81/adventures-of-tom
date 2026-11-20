@@ -15287,7 +15287,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEDvcHmfTiPvEWMzm2",
     "opening": "not started"
    },
    "history": [
@@ -15312,7 +15312,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEDvcHmfTiPvEWMzm2",
     "opening": "not started"
    },
    "history": [
@@ -15840,14 +15840,16 @@
   },
   {
    "url": "https://claude.ai/code/session_01RXeukEDvcHmfTiPvEWMzm2",
-   "title": "Listening and thinking poses for chapter 1 conversations",
+   "title": "Listening and thinking poses for chapter 1 listeners",
    "first": "2026-11-20T10:04:02-08:00",
-   "last": "2026-11-20T11:16:01-08:00",
+   "last": "2026-11-20T11:20:03-08:00",
    "tags": [
     "idea-implementlisteni"
    ],
    "cards": [
-    "c-idea-implementlisteni"
+    "c-idea-implementlisteni",
+    "c-listen1-install",
+    "t-listen1-pics"
    ]
   },
   {
@@ -17342,8 +17344,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "bc5558be48b88e99cd54477c1172521e12d5c35e",
- "synced_at": "2026-11-20T19:16:44+00:00",
+ "synced": "55603b5a409d9e77ca9f09a107528dec3123d024",
+ "synced_at": "2026-11-20T19:20:51+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
