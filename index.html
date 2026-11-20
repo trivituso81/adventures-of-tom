@@ -940,14 +940,18 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b3-pv{font-size:14px;padding:5
 /* skilllist1 (Tom 2026-11-19: the name "just a touch too big", "the icons can also be smaller"): in the SKILLS list the name is .86 of the row's size
    (an inner <b>, because the layout rules size every span in a button), the flavor and Pocket pictures 1em instead of 1.35em, the Pep number 1.15em. */
 .b3-sk .b3-snt{font-size:.86em;font-weight:inherit;line-height:1.15}.b3-sk .b3-ico{gap:1px}.b3-sk .b3-ico .bi{width:1em;height:1em}.b3-sk .b3-cost b{font-size:1.15em}
-/* fix-skilllist1look (Tom 2026-11-20: "still looks way too big, all the fonts and icons. kind of needs a redesign"): the SKILLS list is a compact row in fixed sizes,
-   so the phone-landscape rule (21px text on every button) no longer sets them. Name 12px, pictures 13px, Pep pill 12px number over a 7px PEP, thin row. */
-#battle.v2 .b2-btn.b3-sk{padding:4px 8px;gap:5px;min-height:0}
-#battle.v2 .b3-sk .b2-sn,#battle.v2 .b3-sk .b3-snt{font-size:12px;line-height:1.12;letter-spacing:0}
-#battle.v2 .b3-sk .b3-ico .bi{width:13px;height:13px}
-#battle.v2 .b3-sk .b3-cost{font-size:12px;padding:0 6px;gap:2px;border-width:1px}
-#battle.v2 .b3-sk .b3-cost b{font-size:13px}#battle.v2 .b3-sk .b3-cost small{font-size:7px;letter-spacing:.3px}
-html.duo #battle.v2 .b3-sk .b2-sn,html.duo #battle.v2 .b3-sk .b3-snt{font-size:10px}html.duo #battle.v2 .b3-sk .b3-ico .bi{width:11px;height:11px}html.duo #battle.v2 .b3-sk .b3-cost{font-size:10px}html.duo #battle.v2 .b3-sk .b3-cost b{font-size:11px}
+/* fix-skilllist1look-2 (Tom 2026-11-20: "now its too small! you went too far, isnt there a middle ground?"): fixed sizes halfway between skilllist1 and the thin rows.
+   Name 15px, pictures 16px, Pep pill 14px number over a 8px PEP, row padding 6px 9px. */
+#battle.v2 .b2-btn.b3-sk{padding:6px 9px;gap:6px;min-height:0}
+#battle.v2 .b3-sk .b2-sn,#battle.v2 .b3-sk .b3-snt{font-size:15px;line-height:1.15;letter-spacing:0}
+#battle.v2 .b3-sk .b3-ico .bi{width:16px;height:16px}
+#battle.v2 .b3-sk .b3-cost{font-size:14px;padding:0 7px;gap:2px;border-width:1px}
+#battle.v2 .b3-sk .b3-cost b{font-size:16px}#battle.v2 .b3-sk .b3-cost small{font-size:8px;letter-spacing:.3px}
+html.duo #battle.v2 .b3-sk .b2-sn,html.duo #battle.v2 .b3-sk .b3-snt{font-size:12px}html.duo #battle.v2 .b3-sk .b3-ico .bi{width:13px;height:13px}html.duo #battle.v2 .b3-sk .b3-cost{font-size:11px}html.duo #battle.v2 .b3-sk .b3-cost b{font-size:12px}
+/* fix-skilllist1look-2 (Tom: "the back button doesnt match"): the Back row under the SKILLS list is the same size as a Skill row, text 15px, B / Esc hint 11px. */
+#battle.v2 .b2-list:has(.b3-sk) .b2-back{padding:6px 9px;min-height:0}
+#battle.v2 .b2-list:has(.b3-sk) .b2-back span{font-size:15px;font-weight:700;letter-spacing:0}
+#battle.v2 .b2-list:has(.b3-sk) .b2-back em{font-size:11px}
 .b3-cost{display:flex;align-items:baseline;gap:.15em;flex:none;margin-left:auto;background:#1d5a88;border:1px solid #8dc4e6;border-radius:999px;padding:.05em .55em;color:#fff;line-height:1.15;white-space:nowrap}
 .b3-cost b{font-size:1.3em;font-weight:900}.b3-cost small{font-size:.62em;font-weight:900;letter-spacing:.5px;color:#cfe8f7}
 .b3-cost.free{background:#2c6a3b;border-color:#8fe3a6}.b2-btn.no .b3-cost{opacity:.5}
@@ -2070,13 +2074,13 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/emotions.js?v=cutpolish1"></script>
 <script src="engine/script-edits.js?v=scripted2"></script><!-- Script Editor overlay: Tom's line edits applied before a scene plays (script.html) --><!-- mood faces and poses in story dialogue (batch 0: chapter 1) -->
 <script src="engine/tapwalk.js?v=bossbig1"></script><!-- tap to walk -->
-<script src="data/build-history.js?v=skillinfo1"></script><!-- build names and times (tools/build_history.py) -->
+<script src="data/build-history.js?v=fix-skilllist1look-2"></script><!-- build names and times (tools/build_history.py) -->
 <script src="engine/build-history.js?v=buildlog1"></script><!-- build label on the welcome screen and menu, tap for the build history -->
 <script src="engine/amber-spots.js?v=ch1rebuild1"></script><!-- orange blocks left behind are solid and answer A (amberspot1) -->
 <script src="engine/block-break.js?v=ch7t1"></script><!-- breaking an orange block: coin, cracks, colour ring, shrink-back, encounters off (ch6build stage 2) -->
 <script src="engine/scene-props.js?v=fix-cutpolish4b"></script><!-- drawn stand-in props a scene can put on a map: the chart, Rose rolled up, the gold ball, bulbs (ch7build stage 2) -->
 <script src="engine/video-call.js?v=ch6s4"></script><!-- the video call at the end of chapter 6: Long Island seen from Tom's porch (ch6build stage 4) -->
-<script src="engine/main.js?v=skillinfo1"></script>
+<script src="engine/main.js?v=fix-skilllist1look-2"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js?v=adminvol1"></script>

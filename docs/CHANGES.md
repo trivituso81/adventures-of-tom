@@ -50,6 +50,13 @@
 - In-game pencil reports filed since 2026-11-20T02:43:56Z: none (the 7 open reports on branch inbox are all from 11-14 and none is about these pictures), so none marked done.
 - No game file changed (only the build stamp). Tests: `python3 tools/smoke.py` FAILS: [], board_check.py --push, board_sync_test.py, board_test.py, buildlog_test.py all pass; zero references to the six ids remain in the Library files; the Library page checked in portrait and landscape.
 
+## fix-skilllist1look-2 (2026-11-20): SKILLS list rows and Back button at a middle size
+
+- Tom (11-20 on card t-skilllist1look): "lol now its too small! you went too far, isnt there a middle ground? and the back button doesnt match".
+- Kept: the thin fixed-size row design of fix-skilllist1look. Changed: sizes only, halfway between skilllist1 and the thin rows: name 15px (was 12), pictures 16px (was 13), Pep number 16px over an 8px PEP, row padding 6px 9px (Duo panel: 12px, 13px). The Back row under the list now matches a Skill row: same padding, 15px text, 11px B / Esc hint (it was a smaller, tighter button than the rows).
+- Looked at: portrait and landscape frames from `python3 tools/b3_test.py s9ui` (FAILS: []).
+- In-game pencil reports about the SKILLS list since 2026-11-20T03:23:13Z: none, so none marked done.
+
 ## fix-skilllist1look (2026-11-20): SKILLS list redesigned as thin rows with small fixed text and pictures
 
 - Tom (11-20 on card t-skilllist1look): "still looks way too big, all the fonts and icons. kind of needs a redesign".

@@ -5939,7 +5939,7 @@
    "col": "wait",
    "ask": "play",
    "fyi": true,
-   "next": "After the publish of build fix-skilllist1look: RELOAD on the title, ADMIN > BATTLE LAB > NEW BATTLE, start any fight, open SKILLS. Rows should now be thin, with small names and small pictures, in portrait and landscape. Report with the REPORT tab if anything still looks too big (fix-skilllist1look is the build to name).",
+   "next": "After the publish of build fix-skilllist1look-2: RELOAD on the title, ADMIN > BATTLE LAB > NEW BATTLE, start any fight, open SKILLS. Names should now be a middle size (15px, between the first version and the thin rows), pictures a little bigger, and the Back row at the bottom of the list should be as tall and as large in text as the Skill rows above it, in portrait and landscape. Report with the REPORT tab if it is still too big, too small, or Back still does not match (fix-skilllist1look-2 is the build to name).",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -6284,6 +6284,10 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped fix-skilllist1look-2: middle sizes (name 15px, pictures 16px) and Back row matched to the Skill rows."
     }
    ],
    "prompt": {
