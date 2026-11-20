@@ -859,8 +859,8 @@
    "title": "Cutscene polish phase 5: movement and listener reactions (cutpolish5)",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
-   "next": "Stuck: the plan file claude/cutscene-polish-plan.md is not in the repo, so a START session cannot build phase 5. Start it from a conversation that has the Project open (paste the card prompt), or copy the plan and handoff-rules files into the repo under claude/.",
+   "col": "up",
+   "next": "Ready to start: its plan file claude/cutscene-polish-plan.md and claude/handoff-rules.md are now in the repo under claude/, so a START session can read them.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -888,6 +888,10 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Moved back to Up next (syncfix1): the first START stopped because the plan file was not in the repo. It is now (copydocs)."
     }
    ],
    "prompt": {
@@ -1127,10 +1131,10 @@
   {
    "id": "c-nextclean",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "theme": "Project Ops",
    "title": "Make the board the only list of open work (cut claude/next.md down)",
-   "next": "claude/next.md is 45,000 bytes against its own 20,000 limit and still carries a second, older list of open items and prompts. Put every item that is still wanted on a card, drop the rest, and leave next.md with rules, tests and the push steps only.",
+   "next": "Ready to start: claude/next.md and the plans the prompt names are now in the repo under claude/ (copydocs). Put every wanted item on a card and cut next.md to rules, tests and push steps only.",
    "prompt": {
     "what": "Moves every open item out of claude/next.md onto the board and cuts that file down to rules and tests.",
     "before": [
@@ -1164,6 +1168,10 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Moved back to Up next (syncfix1): the first START stopped because claude/next.md was not in the repo. It is now (copydocs)."
     }
    ],
    "blocks": [],
@@ -1175,7 +1183,7 @@
    "id": "c-takes-2337ed",
    "tag": "takes-2026-11-19",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Voice Clips",
    "count": 15,
    "title": "Merge 15 new voice takes",
@@ -1217,12 +1225,17 @@
     {
      "d": "2026-11-19",
      "t": "2 more take file(s) arrived."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Retired to Done (syncfix1): the work shipped as takes1 (board-sync made the separate Done card b-takes1). This card tagged takes-2026-11-19 never matched."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-19"
   },
   {
    "id": "c-reports",
@@ -6981,7 +6994,7 @@
    "col": "prog",
    "theme": "Tools",
    "title": "Fix board-sync: duplicate c-reports card stops every run (syncfix1)",
-   "next": "r7_inbox adds a second card with id c-reports when the old one closes in the same run. Make it pick a unique id, add a test, retire c-takes-2337ed, send c-cutpolish5 and c-nextclean back to Up next.",
+   "next": "Shipped as syncfix1: r7_inbox now picks a unique id for a new report backlog card; test added; c-takes-2337ed retired; c-cutpolish5 and c-nextclean back in Up next.",
    "prompt": {
     "what": "Fixes the board-sync job that fails on a duplicate card id.",
     "before": [
@@ -7003,7 +7016,8 @@
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-19"
+   "changed": "2026-11-19",
+   "after": "nothing for Tom: end"
   },
   {
    "id": "t-adminhub1try",

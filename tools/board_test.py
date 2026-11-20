@@ -279,7 +279,9 @@ try:
         if len(stored()['cards']) != len(b['cards']) + 2: fails.append('cards lost on save')
         if stored().get('sessions') != b['sessions']: fails.append('sessions list changed by a phone save')
         nputs = sum(1 for l in json.load(urllib.request.urlopen('http://127.0.0.1:8092/log')) if l.get('github') == 'PUT')
-        if nputs != 14: fails.append(f'{nputs} PUTs, want 14')
+        print('PUTLOG', [(l['path'], (l.get('message') or l.get('msg') or '')[:50]) for l in json.load(urllib.request.urlopen('http://127.0.0.1:8092/log')) if l.get('github') == 'PUT'])
+        want_puts = 14 + (1 if next(c for c in b['cards'] if c['id'] == target)['col'] == 'up' else 0)   # syncfix1: copying the hand-back card moves it to In progress, one more save, when it starts in Up next
+        if nputs != want_puts: fails.append(f'{nputs} PUTs, want {want_puts}')
         pg.screenshot(path=f'{out}/board-after.png'); ctx.close()
         # no token: the button says so, and the page reads the site copy
         ctx = br.new_context(viewport={'width': 390, 'height': 844}); pg = ctx.new_page()

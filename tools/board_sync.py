@@ -224,7 +224,7 @@ def r7_inbox(B, reports, takes):
     if reports is not None:
         # One card for the whole backlog (not one per report): its text lists the open reports; it closes when the inbox is empty.
         ids = [r['id'] for r in reports]
-        card = next((c for c in B.cards if c['id'] == 'c-reports' and c['col'] != 'done'), None)
+        card = next((c for c in B.cards if (c['id'] == 'c-reports' or c['id'].startswith('c-reports-')) and c['col'] != 'done'), None)
         seen['reports'] = sorted(set(seen['reports']) | set(ids))
         if ids:
             first = plain(reports[0].get('note', ''))[:100] or '(picture only)'
@@ -234,14 +234,14 @@ def r7_inbox(B, reports, takes):
                 if card['title'] != title: B.hist(card, 'The backlog now holds %d report(s).' % len(ids)); B.say('report backlog is %d' % len(ids))
                 card['title'], card['next'] = title, nxt
             else:
-                B.add({'id': 'c-reports', 'tag': 'reports-' + B.today, 'lane': 'claude', 'col': 'up', 'theme': 'Game Shell', 'title': title, 'next': nxt,
+                B.add({'id': next(i for i in ['c-reports'] + ['c-reports-%d' % n for n in range(2, 999)] if not B.get(i)), 'tag': 'reports-' + B.today, 'lane': 'claude', 'col': 'up', 'theme': 'Game Shell', 'title': title, 'next': nxt,
                        'prompt': standing_prompt('Works through the reports you filed in the game.',
                                                  'Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog.', 'reports'),
                        'chat': {'url': '', 'opening': 'not started'}, 'history': [{'d': B.today, 't': 'Added by board-sync: %d report(s) on branch inbox.' % len(ids)}]})
                 B.say('card for the report backlog (%d)' % len(ids))
         elif card:
             card['col'] = 'done'; card['done'] = B.today
-            B.hist(card, 'Done by the board: the backlog is empty.'); B.say('done c-reports')
+            B.hist(card, 'Done by the board: the backlog is empty.'); B.say('done ' + card['id'])
     if takes is not None:
         new = [t for t in takes if t not in seen['takes']]
         if new:

@@ -1,3 +1,8 @@
+## syncfix1 (2026-11-19): The board-sync job no longer stops on a duplicate report card
+- Cause: when the report backlog card (c-reports) closed in the same run that still found an open report in the inbox, `r7_inbox` in tools/board_sync.py looked only for an open card named c-reports, found none and added a second one with the same id. board_check refused it (duplicate card id c-reports), so every run since 19:45 PT failed and no card moved.
+- Fix: `r7_inbox` now also finds an open `c-reports-N` card and gives a new backlog card the first free id (c-reports, c-reports-2, c-reports-3, ...). Test added in tools/board_sync_test.py (a Done c-reports plus one open report gives unique ids, a later run updates the same card, an empty inbox closes it); it fails without the fix.
+- tools/board_test.py: its saved-changes count (14) now adds one when the hand-back card starts in Up next, because copying it moves it to In progress; it failed (15, want 14) once c-nextclean went back to Up next.
+- Board: c-takes-2337ed retired to Done (it shipped as takes1); c-cutpolish5 and c-nextclean back in Up next (their plan files are now in the repo under claude/). The next board-sync run moves the 6 shipped cards (c-reports, c-clipposes, c-ch1retext1, c-heistart, c-fix-ch1starving, c-bannerhold1) to Done.
 ## artgen1c (2026-11-20): art-gen checks out only the files it reads (the checkout took minutes)
 
 - `.github/workflows/art-gen.yml` checks out only data/art-prompts.json, data/board.json, tools/art-library and .github; reference pictures are read from git on demand. Nothing else changed.

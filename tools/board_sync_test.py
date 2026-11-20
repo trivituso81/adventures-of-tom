@@ -113,6 +113,19 @@ check('R8: an In progress card quiet for over 24 hours is flagged', card(b, 'c-q
 bs.sync(b, [], None, [], ['takes/a.json', 'takes/b.json'], NOW)
 check('R7: an empty inbox closes the backlog card', card(b, 'c-reports')['col'] == 'done')
 
+# --- syncfix1: an open report in the same run that closes c-reports must not add a duplicate id
+b = {'cards': [dict(id='c-reports', tag='reports-2026-11-19c', lane='claude', col='done', done='2026-11-19', theme='Game Shell', title='Fix the report backlog (7 open)', next='n', changed='2026-11-19', blocks=[])],
+     'lanes': [{'id': 'tom', 'name': 'Tom'}, {'id': 'claude', 'name': 'Claude'}], 'sessions': []}
+bs.sync(b, [], None, [{'id': 'r-mxvd', 'note': 'The mud blob is wrong', 'kind': 'BUG'}], [], NOW)
+ids = [c['id'] for c in b['cards']]
+check('syncfix1: a Done c-reports plus one open report gives unique ids', len(ids) == len(set(ids)), ids)
+n = card(b, 'c-reports-2')
+check('syncfix1: the new backlog card is c-reports-2 in Up next', n and n['col'] == 'up' and '(1 open)' in n['title'], ids)
+bs.sync(b, [], None, [{'id': 'r-mxvd', 'note': 'x', 'kind': 'BUG'}, {'id': 'r-2', 'note': 'y', 'kind': 'BUG'}], [], NOW)
+check('syncfix1: a later run updates c-reports-2 and adds no third card', len([c for c in b['cards'] if c['id'].startswith('c-reports')]) == 2 and '(2 open)' in card(b, 'c-reports-2')['title'])
+bs.sync(b, [], None, [], [], NOW)
+check('syncfix1: an empty inbox closes c-reports-2', card(b, 'c-reports-2')['col'] == 'done')
+
 # --- the check script accepts the real board and refuses a blank in a prompt
 r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py')], capture_output=True, text=True)
 check('board_check passes on data/board.json', r.returncode == 0, r.stdout)
