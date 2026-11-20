@@ -217,7 +217,7 @@ SCENES.ch1Theft=[
   {wait:.3},
   {face:'Deedee',dir:'left'}, {face:'Boppy',dir:'left'},   // cutpolish4: Deedee and Boppy keep their shock through the whole grab (it was cleared after .3 s)
   {pose:'Big Mudling',f:'mh_reach',dir:'left'}, {wait:.45},
-  {pose:'Big Mudling',f:'mh_grab',dir:'left'}, {sfx:'pickup'}, {prop:'muffinpan',hide:true},
+  {pose:'Big Mudling',f:'mh_grab',dir:'left'}, {sfx:'pickup'}, {prop:'muffinpan',hide:true}, {flag:'muffins-gone'},   // cutpolish4b: the painted island loses its muffins (engine/plate.js grandsEmpty)
   {prop:'crumbs',kind:'crumbs',set:{map:'grands',x:5.2,y:8.4}}, {wait:.5},   // a few crumbs where the muffins were
   {pose:'Big Mudling',f:'mh_hug',dir:'left'}, {pose:'Deedee',f:'em_angry',mid:'deedee',dir:'left'},
   {pose:'Big Mudling',f:'mh_glance',dir:'left'}, {wait:.5},
@@ -411,7 +411,7 @@ SCENES.ch1Sunday=[
   {fade:'in',time:.8},
   {sfx:'doorOut'}, {wait:.6},
   {fade:'out',time:.8},   // Cab 7 pulls away
-  {call:()=>sfx.ding()},
+  {call:()=>sfx.ding()}, {ch1Reveal:'phone'},   // cutpolish4b: the phone lights up on the cab seat
   {talk:'TNB',lines:["hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over."]},
   {card:1,done:true,time:3.4}, {flag:'ch1-done'}, {fade:'in',time:.8},
   {save:true},

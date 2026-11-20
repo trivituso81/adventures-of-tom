@@ -101,15 +101,13 @@ SPK.charttable=(P)=>{
     ctx.save(); ctx.beginPath(); ctx.rect(x+w*.7,y+h*.8,T*2,T); ctx.clip(); ctx.restore(); ctx.fillStyle='#b8782e'; ctx.beginPath(); ctx.ellipse(px+4,py,T*.34,T*.18,0,0,Math.PI*2); ctx.fill(); }
 };
 
-// A muffin pan (twelve-cup, a STAND-IN until Tom approves a painted one) on a tile: fields x,y (tile), z (height in tiles), empty (no muffins).
+// The painted muffin pan (cutpolish4b, art/props/ch1/pan_full.webp and pan_empty.webp from the approved Library entries ch1-muffin-pan and
+// ch1-muffin-pan-empty) on a tile: fields x,y (tile), z (height in tiles), empty (no muffins).
 // Chapter 1: twelve muffins on Deedee's baking island; the empty pan flying off the Big One's head and across the water.
 SPK.muffinpan=(P)=>{
-  const cx=(P.x+.5)*T,b=(P.y+.8)*T-(P.z||0)*T,w=T*.95;
-  ctx.fillStyle='#20202a40'; ctx.beginPath(); ctx.ellipse((P.x+.5)*T,(P.y+.8)*T,w*.5,4,0,0,Math.PI*2); ctx.fill();
-  ctx.fillStyle='#8f969b'; ctx.fillRect(cx-w/2,b-T*.32,w,T*.3); ctx.strokeStyle='#5d6469'; ctx.lineWidth=1.5; ctx.strokeRect(cx-w/2,b-T*.32,w,T*.3);
-  for(let r=0;r<2;r++) for(let c=0;c<6;c++) { const mx=cx-w/2+w*(c+.5)/6,my=b-T*.24+r*T*.12;
-    if(!P.empty) { ctx.fillStyle='#c98a46'; ctx.beginPath(); ctx.arc(mx,my-2,w/14,Math.PI,0); ctx.fill(); ctx.fillStyle='#f1d9a8'; ctx.fillRect(mx-2,my-w/14-2,4,2); }
-    else { ctx.fillStyle='#6f767b'; ctx.beginPath(); ctx.ellipse(mx,my,w/16,3,0,0,Math.PI*2); ctx.fill(); } }
+  const cx=(P.x+.5)*T,b=(P.y+.8)*T-(P.z||0)*T,w=T*1.25;
+  ctx.fillStyle='#20202a40'; ctx.beginPath(); ctx.ellipse((P.x+.5)*T,(P.y+.8)*T,w*.45,4,0,0,Math.PI*2); ctx.fill();
+  PROPART.draw(P.empty?'ch1/pan_empty':'ch1/pan_full',cx,b-w*.3,{w});
 };
 // Mud prints up the hall (cutpolish4): three prints at x, y+1, y+2 (tile), fading over 4 s from t0 (performance.now() when the prop was set).
 SPK.mudprints=(P)=>{ const u=Math.min(1,(performance.now()-(P.t0||0))/4000),a=1-u; if(a<=0) return;
@@ -117,11 +115,8 @@ SPK.mudprints=(P)=>{ const u=Math.min(1,(performance.now()-(P.t0||0))/4000),a=1-
     ctx.fillStyle='rgba(74,54,34,'+(a*.4).toFixed(3)+')'; ctx.beginPath(); ctx.ellipse(cx+T*.1,cy-T*.04,T*.06,T*.04,0,0,Math.PI*2); ctx.fill(); } };
 // Three muffin crumbs on the floor by the island where the Mudling grabbed the pan. Fields x,y (tile).
 SPK.crumbs=(P)=>{ for(const [dx,dy,r] of [[0,0,3],[.45,.22,2.4],[.8,-.05,2.8]]) { const x=(P.x+dx)*T,y=(P.y+dy)*T; ctx.fillStyle='#c98a46'; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#f1d9a8'; ctx.fillRect(x-1,y-r,2,1.5); } };
-// Nine muffin papers scattered in the reeds (STAND-IN). Fields x,y (tile).
-SPK.papers=(P)=>{
-  const pts=[[.1,.5],[.4,.2],[.7,.6],[1.0,.3],[1.3,.7],[.2,.9],[.9,.95],[1.5,.4],[1.2,1.0]];
-  for(const [dx,dy] of pts) { const x=(P.x+dx)*T,y=(P.y+dy)*T; ctx.fillStyle='#f3e9d2'; ctx.beginPath(); ctx.ellipse(x,y,5,3,.3,0,Math.PI*2); ctx.fill(); ctx.strokeStyle='#bfae86'; ctx.lineWidth=1; ctx.stroke(); }
-};
+// The painted nine muffin papers (cutpolish4b, art/props/ch1/papers.webp, entry ch1-muffin-papers) scattered in the reeds. Fields x,y (tile).
+SPK.papers=(P)=>{ PROPART.draw('ch1/papers',(P.x+.75)*T,(P.y+.55)*T,{w:T*1.7}); };
 
 // A painted picture: art/props/<art>.webp drawn with its feet at tile (x,y) and w tiles wide (the ears-row picture over the three of them). Fields art, x, y, w.
 SPK.img=(P)=>{ PROPART.draw(P.art,P.x*T,P.y*T-(P.w*T*(PROPART.ready(P.art)?PROPART.get(P.art).naturalHeight/PROPART.get(P.art).naturalWidth:1))/2,{w:P.w*T}); };

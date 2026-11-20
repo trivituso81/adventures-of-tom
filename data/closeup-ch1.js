@@ -7,7 +7,8 @@ const CH1_REVEAL={
   doorframe:{img:'art/closeup/ch1-doorframe.webp',label:'THE DOOR FRAME',still:true},
   coin:{img:'art/closeup/ch1-coin.webp',label:'A SMALL GOLD COIN'},
   grin:{img:'art/closeup/ch1-grin.webp',label:'BOPPY’S GOLD TEETH',still:true},
-  v:'ch1a'
+  phone:{img:'art/closeup/ch1-phone.webp',label:'A PHONE ON THE SEAT',still:true},
+  v:'ch1b'
 };
 SCENE_OPS.ch1Reveal=o=>lazy(()=>{
   let done=false; const d=CH1_REVEAL[o.ch1Reveal];

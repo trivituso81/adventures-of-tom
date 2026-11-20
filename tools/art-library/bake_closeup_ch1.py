@@ -1,5 +1,5 @@
 """Bakes the approved chapter 1 Library pictures (art/raw/props/ch1-*, art/raw/characters/ch1-boppy-grin-v1.png).
-Writes art/closeup/ch1-doorframe.webp (1024), ch1-coin.webp (512, transparent), ch1-grin.webp (head and shoulders of Boppy, transparent),
+Writes art/closeup/ch1-phone.webp (the phone on the cab seat), art/props/ch1/pan_full, pan_empty, papers.webp (trimmed, transparent), art/closeup/ch1-doorframe.webp (1024), ch1-coin.webp (512, transparent), ch1-grin.webp (head and shoulders of Boppy, transparent),
 and art/props/hollow/ch1_block.webp, ch1_patch.webp, ch1_bulb.webp (trimmed, transparent). Magenta-ish background is keyed from the edge."""
 import os, numpy as np, cv2
 from PIL import Image
@@ -36,4 +36,9 @@ import glob,re
 def newest(stem): return max(glob.glob(RAW+'/props/'+stem+'-v*.png'),key=lambda f:int(re.search(r'-v(\d+)\.png$',f).group(1))).rsplit('/',1)[1][:-4]   # the newest version (amberspot1: grey patch v2)
 for n,src in (('ch1_block',newest('ch1-orange-block')),('ch1_patch',newest('ch1-grey-patch')),('ch1_bulb',newest('ch1-flashbulb'))):
     p=trim(key(RAW+'/props/'+src+'.png')); sc=256/max(p.size); p.resize((max(1,round(p.width*sc)),max(1,round(p.height*sc))),Image.LANCZOS).save('art/props/hollow/%s.webp'%n,quality=92,method=6)
+# cutpolish4b: the muffin pan (full and empty), the muffin papers and the phone on the cab seat
+os.makedirs('art/props/ch1',exist_ok=True)
+for n,src in (('pan_full','ch1-muffin-pan'),('pan_empty','ch1-muffin-pan-empty'),('papers','ch1-muffin-papers')):
+    p=trim(key(RAW+'/props/'+newest(src)+'.png')); sc=512/max(p.size); p.resize((max(1,round(p.width*sc)),max(1,round(p.height*sc))),Image.LANCZOS).save('art/props/ch1/%s.webp'%n,quality=92,method=6)
+Image.open(RAW+'/props/'+newest('ch1-phone-on-seat')+'.png').convert('RGB').save('art/closeup/ch1-phone.webp',quality=90,method=6)
 print('ok')

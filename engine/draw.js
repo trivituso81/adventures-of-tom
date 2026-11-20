@@ -49,6 +49,7 @@ function draw(time) {
     plateBackdrop(plate,currentMap.w*T,currentMap.h*T);
     ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high';
     ctx.drawImage(plate.img,0,0,currentMap.w*T,currentMap.h*T);
+    if(typeof grandsEmptyDraw==='function') grandsEmptyDraw(currentMap,false);   // the island after the muffin heist (engine/plate.js)
     ctx.imageSmoothingEnabled=false;
     if(typeof plateLive==='function') plateLive(currentMap,time);
   }
