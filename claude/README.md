@@ -21,3 +21,5 @@ Added 2026-11-19 by b3s9b (written in both places): next-addendum-b3s9b.md; batt
 Added 2026-11-19 by board-artgen (written in both places): artgen-plan.md. Also adminhub-plan.md.
 
 Added 2026-11-20 by boardux1 (written in both places): boardux-plan.md (its Built section grows with each phase).
+
+Added 2026-11-20 by ch2build (written in both places): story-ch02-draft4.md, story-engine-capabilities.md, story-build.md, story-line-rules.md, next-addendum-ch1rebuild1.md (copied word for word from the Project so a START run can build chapter 2).
