@@ -13181,6 +13181,10 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as projclean1a: first 125 Project docs copied into the repo's claude/ folder, word for word"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Part shipped as projclean1b: 74 more Project docs copied into claude/, word for word"
     }
    ],
    "chat": {
@@ -15558,8 +15562,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (1 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-113001-w756. First note: rose facing the wrong way",
+   "title": "Fix the report backlog (2 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-113001-w756, r-20261120-130739-tr1a. First note: rose facing the wrong way",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -15591,6 +15595,10 @@
      "d": "2026-11-20",
      "t": "Session ended without shipping: report r-20261120-113001-w756 (\"rose facing the wrong way\", ch1Theft, Tom at the grands house) cannot be fixed from the note. In the frame Rose stands at (8,10) facing left, toward Deedee at (7,9), which is what the scene sets (data/scenes.js ch1Theft: face rose left); Tom and Grace use front talk poses. Needs Tom to say which way she should face (toward Tom/right, or the camera). Report left open on inbox.",
      "at": "2026-11-20T20:10:00Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "The backlog now holds 2 report(s)."
     }
    ],
    "blocks": [],
@@ -16523,6 +16531,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGZvj5YBSMvPY8Zknj",
+   "title": "Move the Project docs into the repo (Project is 97% full)",
+   "first": "2026-11-20T12:24:26-08:00",
+   "last": "2026-11-20T13:12:43-08:00",
+   "tags": [
+    "projclean1a",
+    "projclean1b"
+   ],
+   "cards": [
+    "c-projclean"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDPY2qNnB59RAn67mF",
    "title": "Fix typing in the REPORT box (keys act like game hotkeys)",
    "first": "2026-11-20T12:54:42-08:00",
@@ -16555,18 +16576,6 @@
    "tags": [],
    "cards": [
     "c-keysecrets1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGZvj5YBSMvPY8Zknj",
-   "title": "Move the Project docs into the repo (Project is 97% full)",
-   "first": "2026-11-20T12:24:26-08:00",
-   "last": "2026-11-20T13:00:28-08:00",
-   "tags": [
-    "projclean1a"
-   ],
-   "cards": [
-    "c-projclean"
    ]
   },
   {
@@ -18076,7 +18085,8 @@
    "r-20261120-092904-zi93",
    "r-20261120-092931-xkjg",
    "r-20261120-093004-0rco",
-   "r-20261120-113001-w756"
+   "r-20261120-113001-w756",
+   "r-20261120-130739-tr1a"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -18098,8 +18108,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "730556479f98a11bb04609ffa15a2ff0bf6cf0cd",
- "synced_at": "2026-11-20T21:05:45+00:00",
+ "synced": "8c010eb70db7919267e3f2f7babffec80a847a3a",
+ "synced_at": "2026-11-20T21:13:21+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
