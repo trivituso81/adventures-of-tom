@@ -6955,6 +6955,37 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/adminhub-plan.md, then card c-adminhub1 in data/board.json. Build adminhub1 exactly as the plan says and push it as adminhub1. Your first push is the commit board: start c-adminhub1. Write what you built and anything that differs from the plan into the plan's Built section. You have my full permission to access the repo."
    },
    "start": true
+  },
+  {
+   "id": "c-syncfix1",
+   "tag": "syncfix1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "Fix board-sync: duplicate c-reports card stops every run (syncfix1)",
+   "next": "r7_inbox adds a second card with id c-reports when the old one closes in the same run. Make it pick a unique id, add a test, retire c-takes-2337ed, send c-cutpolish5 and c-nextclean back to Up next.",
+   "prompt": {
+    "what": "Fixes the board-sync job that fails on a duplicate card id.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the fix is written in claude/boardsync-fix-handoff.md)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and claude/boardsync-fix-handoff.md, then apply the fix and push as syncfix1. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "\"Read claude/handoff-rules.md and claude/boardsync-fix-handoff.md. The board-sync job has failed every run since 19:45 PT\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by the session that fixes it."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
   }
  ],
  "sessions": [
