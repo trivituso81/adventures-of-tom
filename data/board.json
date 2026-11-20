@@ -13161,7 +13161,7 @@
    "id": "c-idea-implementlisteni",
    "tag": "idea-implementlisteni",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Tools",
    "title": "Listening and thinking poses for chapter 1 conversations",
    "next": "Opus 5.5, high. Designs how a person who is not speaking shows a listening or thinking pose in chapter 1 talking scenes and cut scenes, adds the pictures to the Art Library for your Generate and Approve, and wires the approved ones in.",
@@ -13176,8 +13176,8 @@
     "rule": "Claude Sonnet 5.5, medium"
    },
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukHFSEVSn8L6ETAbMyy",
-    "opening": "New card by Tom on the board"
+    "url": "",
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -13199,6 +13199,11 @@
      "d": "2026-11-20",
      "t": "Session found the sizing wrong: the work includes picture-generator prompts and a new pose system (rows D and high). Resized to Claude Opus 5.5, effort high, prompt rewritten, auto-start removed. Nothing built; Tom starts it from Up next.",
      "at": "2026-11-20T17:30:00.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-20T18:01:29.798Z"
     }
    ],
    "prompt": {
