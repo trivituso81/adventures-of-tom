@@ -361,7 +361,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-17",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGiA3jV2jT4TYuLzs2",
+    "url": "https://claude.ai/code/session_01RXeukGiA3jV2jT4TYuLzs2",
     "opening": "unknown"
    },
    "history": [
@@ -388,6 +388,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -7568,7 +7572,7 @@
    "id": "c-reports-2",
    "tag": "reports-2026-11-20",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Fix the report backlog (7 open)",
    "next": "Fixed and pushed (reports-2026-11-20): the list close-up now comes after Grace's third item; the Amy scene zooms in on the party and her window. Still open on branch inbox: 5 Grace voice reports (need your re-recording, card t-gracevoice-distort) and 1 older art report r-20261114-100555-mxvd (waits on c-heist1).",
@@ -7629,6 +7633,10 @@
     {
      "d": "2026-11-20",
      "t": "Session fixed r-20261120-000755-3h9p (list close-up moved after item three) and r-20261120-001019-feou (zoom on party plus Amy). Voice reports left open for Tom's re-recording."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as reports-2026-11-20: Grace's list shows after her third item, and the Amy scene zooms in on the party and her window"
     }
    ],
    "blocks": [],
@@ -7642,7 +7650,8 @@
     "prev": "https://claude.ai/code/session_01RXeukGGUD269u96cXEAiKs"
    },
    "started_at": "2026-11-20T15:26:24+00:00",
-   "after": "t-gracevoice-distort"
+   "after": "t-gracevoice-distort",
+   "done": "2026-11-20"
   },
   {
    "id": "c-boardux1",
@@ -10140,9 +10149,62 @@
      "t": "Added by c-reports-2 from reports r-20261120-000831-h5tq, -000848-fl38, -000910-g9n1, -000931-2yx8, -001100-lta1 (Tom: \"This line needs to be re-recorded. The voice is distorted somehow\")."
     }
    ]
+  },
+  {
+   "id": "c-reports-3",
+   "tag": "reports-2026-11-20",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix the report backlog (7 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-000755-3h9p, r-20261120-000831-h5tq, r-20261120-000848-fl38, r-20261120-000910-g9n1, r-20261120-000931-2yx8, r-20261120-001019-feou and 1 more. First note: Grace's list shouldn't appear until she finishes the third item, like in the dialogue, so remove it ",
+   "prompt": {
+    "what": "Works through the reports you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by board-sync: 7 report(s) on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDTjJ4EF5ZqM4W3ovf",
+   "title": "Fix the report backlog (7 open)",
+   "first": "2026-11-20T15:27:30Z",
+   "last": "2026-11-20T15:32:15Z",
+   "tags": [
+    "reports-2026-11-20"
+   ],
+   "cards": [
+    "c-reports-2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGiA3jV2jT4TYuLzs2",
+   "title": "Build chapter 2 to the locked script",
+   "first": "2026-11-20T15:31:55Z",
+   "last": "2026-11-20T15:31:55Z",
+   "tags": [],
+   "cards": [
+    "c-ch2build"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDEhxpGxy5knknCF2p",
    "title": "Board redesign 3: four views, search and the wide layout",
@@ -10168,16 +10230,6 @@
    ],
    "cards": [
     "c-adminicons1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDTjJ4EF5ZqM4W3ovf",
-   "title": "Fix the report backlog (7 open)",
-   "first": "2026-11-20T15:27:30Z",
-   "last": "2026-11-20T15:27:30Z",
-   "tags": [],
-   "cards": [
-    "c-reports-2"
    ]
   },
   {
@@ -11342,8 +11394,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "666efe43b1efa087cdee9282171e36b36c1c1d5b",
- "synced_at": "2026-11-20T15:31:16+00:00",
+ "synced": "50e9443879ee68327984e65ff329ff90a083ec2c",
+ "synced_at": "2026-11-20T15:32:36+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
