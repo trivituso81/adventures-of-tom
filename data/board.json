@@ -6256,19 +6256,24 @@
    "title": "Make the Square music on the newer model and listen",
    "theme": "Tools",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "After the publish of build music3 (about 4 minutes after this push): Title > ADMIN > MUSIC LIBRARY, search Square, open The Square card. If a Reset prompt button shows, tap it (the prompt then starts Warm small-town folk tune at 96 BPM). The Model box should say v2.5 (newest). Tap New take twice (about 700 to 850 credits, v2.5 price not measured), then tap Play and Loop test. Come back here: All good, or Something is wrong and write what you hear (one per line).",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-19",
    "history": [
     {
      "d": "2026-11-20",
      "t": "Made by music3."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: all good."
     }
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "c-fix-skilllist1look-2",
