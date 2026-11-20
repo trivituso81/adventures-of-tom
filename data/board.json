@@ -1528,7 +1528,7 @@
    "next": "Nothing to do. You said the Pages source is already GitHub Actions, so the faster publish is on. The next time anything is pushed to the game, the publish should take about 1.5 minutes.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-19",
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukGnrZZnUF1s6ufzVfe",
     "opening": "unknown"
@@ -1541,10 +1541,15 @@
     {
      "d": "2026-11-20",
      "t": "Tom: the source is already set to GitHub Actions and 'push anything' made no sense to him. Card retired; no action for him."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "The note was handed to Claude on card c-note-pagessource."
     }
    ],
    "note": "Tom 11-20: the source is already GitHub Actions; the card's 'push anything' was unclear.",
-   "done": "2026-11-20"
+   "done": "2026-11-20",
+   "note_seen": true
   },
   {
    "id": "c-facehold1",
@@ -1577,6 +1582,60 @@
     "effort": "high (unknown cause)",
     "text": "Read claude/handoff-rules.md and docs/CHANGES.md facehold1, then finish the card c-facehold1 if it is not shipped. You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "b-board-nodonecol",
+   "tag": "board-nodonecol",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Tools",
+   "title": "The board has no Done column; finished cards are a closed list below the lanes",
+   "next": "Done: The board has no Done column; finished cards are a closed list below the lanes",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFYTc9P9AapwKc6ZEM",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as board-nodonecol. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "c-note-pagessource",
+   "tag": "note-pagessource",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Project Ops",
+   "title": "Handle Tom's note on Switch GitHub Pages to publish from Actions (one setting)",
+   "next": "You left a note when you finished \"Switch GitHub Pages to publish from Actions (one setting)\": Tom 11-20: the source is already GitHub Actions; the card's 'push anything' was unclear.",
+   "prompt": {
+    "what": "Reads the note you left on a finished card and acts on it or answers it.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are in the note and the card history)",
+    "effort": "medium (one small piece of work)",
+    "text": "Read claude/handoff-rules.md. Tom left a note on board card t-pagessource (Switch GitHub Pages to publish from Actions (one setting)) when he finished it: Tom 11-20: the source is already GitHub Actions; the card's 'push anything' was unclear.. Read that card's history in data/board.json, work out what the note asks for, do it or rewrite this card for the next session, and tell Tom what you did. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-sync: Tom finished \"Switch GitHub Pages to publish from Actions (one setting)\" with a note and the card blocks nothing."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
   }
  ],
  "sessions": [
@@ -1584,12 +1643,14 @@
    "url": "https://claude.ai/code/session_01RXeukGnrZZnUF1s6ufzVfe",
    "title": "Publishing speed, step 2: art/raw off the site",
    "first": "2026-11-20T01:38:35Z",
-   "last": "2026-11-20T01:40:14Z",
+   "last": "2026-11-20T01:43:13Z",
    "tags": [
-    "pubfast2"
+    "pubfast2",
+    "board-pagessource"
    ],
    "cards": [
-    "c-pubfast2"
+    "c-pubfast2",
+    "t-pagessource"
    ]
   },
   {
@@ -1606,6 +1667,21 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFYTc9P9AapwKc6ZEM",
+   "title": "START button: one tap on a card opens the conversation for you (board3)",
+   "first": "2026-11-19T16:34:00-08:00",
+   "last": "2026-11-19T17:43:16-08:00",
+   "tags": [
+    "board3",
+    "board-convclosed",
+    "board-nodonecol"
+   ],
+   "cards": [
+    "c-board3",
+    "t-startsetup"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEZT7UffmxSezt2yvX",
    "title": "Chapter 1 Rivituso Row: show Amy in her window, stop the party clear of the arch sign (amywin1)",
    "first": "2026-11-19T17:02:34-08:00",
@@ -1616,20 +1692,6 @@
    "cards": [
     "c-amywin1",
     "c-facehold1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFYTc9P9AapwKc6ZEM",
-   "title": "START button: one tap on a card opens the conversation for you (board3)",
-   "first": "2026-11-19T16:34:00-08:00",
-   "last": "2026-11-19T17:38:55-08:00",
-   "tags": [
-    "board3",
-    "board-convclosed"
-   ],
-   "cards": [
-    "c-board3",
-    "t-startsetup"
    ]
   },
   {
@@ -1738,8 +1800,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "7ea32839fcaa7db9faf16c97688e16278eb8a7b2",
- "synced_at": "2026-11-20T01:41:06+00:00",
+ "synced": "f838771946be96e0f4b95b2e2d9eec91237d0ed6",
+ "synced_at": "2026-11-20T01:44:34+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
