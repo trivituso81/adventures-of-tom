@@ -6656,6 +6656,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGDLBuSCmXaKfjjVof",
+   "title": "Plan the redo of the muffin theft scene in Deedee's kitchen (board-heist)",
+   "first": "2026-11-19T19:34:17-08:00",
+   "last": "2026-11-19T19:37:22-08:00",
+   "tags": [
+    "board-heist"
+   ],
+   "cards": [
+    "c-heistplan"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFjXctvj2WWfPf3LUf",
    "title": "Skills list: an i icon opens the skill card, tapping the row uses the skill (skillinfo1)",
    "first": "2026-11-19T18:30:16-08:00",
@@ -7153,8 +7165,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "7ef9a58f421013bf3649af1fdf02b9b1cdfe4607",
- "synced_at": "2026-11-20T03:31:03+00:00",
+ "synced": "1662f28d3343a55b34b95d118b0f14f3a0783a99",
+ "synced_at": "2026-11-20T03:38:23+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
