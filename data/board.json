@@ -6568,7 +6568,7 @@
    "id": "c-fix-ch1starving",
    "tag": "fix-ch1starving",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Voice Clips",
    "title": "Fix what you found on: Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\"",
@@ -6591,7 +6591,7 @@
    ],
    "chat": {
     "url": "",
-    "opening": "Something is wrong on t-ch1starving"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -6601,6 +6601,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom reported on t-ch1starving: i want to drop it - that's why it's not there. you delete it"
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom copied the prompt to paste it into a new conversation."
     }
    ],
    "prompt": {
