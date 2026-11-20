@@ -607,8 +607,8 @@
    "changed": "2026-11-19",
    "created": "2026-11-19",
    "chat": {
-    "url": "",
-    "opening": "unknown"
+    "url": "https://claude.ai/code/session_01RXeukGt8KJKK4iu2gwLNP2",
+    "opening": "\"Read claude/battle-build.md and build stage 9 of the new battle system.\""
    },
    "history": [
     {
@@ -618,6 +618,10 @@
     {
      "d": "2026-11-19",
      "t": "Unblocked by the board audit: you marked milestone A done on 11-19."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started. Tom's testing notes come first: \"I don't like the skill description at the top above the character bars. When tapping a skill it should hide the other skills, show all the information about that skill, then 2 buttons one Back and the other Use. On the view that lists the skills, the clobber support etc should be changed to an icon. The pep used should be more prominent\""
     }
    ],
    "prompt": {
