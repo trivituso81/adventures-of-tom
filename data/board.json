@@ -8260,13 +8260,13 @@
    "title": "Install the Gate Zero pictures (no plane, plane)",
    "theme": "Areas",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Waits on card t-gatezero-decide. The two pictures made (noplane-v1, plane-v1) are 1248x832 not 1280x896, move the window frames and jet bridge, and the plane is a different jet. After Tom's answer: rebuild the entries or install, per his choice.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukET7MxhBU662PA8H6L",
+    "url": "https://claude.ai/code/session_01RXeukESVQibHd96DoCq68m",
     "opening": "not started"
    },
    "history": [
@@ -8327,6 +8327,10 @@
     {
      "d": "2026-11-20",
      "t": "Answer from \"Decide how to get a Gate Zero room with the plane removed\": Keep the current painting and have Claude remove the painted plane by editing it"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -13233,7 +13237,7 @@
    "title": "Look at the Effects page in Admin",
    "theme": "Tools",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "next": "Open https://trivituso81.github.io/adventures-of-tom/admin.html, tap Effects (under Characters). The Preview should now be the full-body person standing on grass, not the face. Pick grace and angry: she stands with arms crossed. Tap Hop, Squash, Pip !, Wince: the whole body does it. Say if it looks right or which effects to change or remove.",
@@ -13253,9 +13257,12 @@
     {
      "d": "2026-11-20",
      "t": "Fix fix-effectslook shipped: the preview draws the full-body painted pose on a map ground instead of the face."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Look at the Effects page in Admin is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-startmore",
@@ -14220,7 +14227,7 @@
    "id": "c-fix-effectslook",
    "tag": "fix-effectslook",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Look at the Effects page in Admin",
@@ -14272,6 +14279,10 @@
     {
      "d": "2026-11-20",
      "t": "Fixed in fix-effectslook. No pencil reports about the Effects page were open."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-effectslook: The Effects page preview shows the full-body person on a map ground, not the dialogue face"
     }
    ],
    "prompt": {
@@ -14285,7 +14296,8 @@
    },
    "after": "t-effectslook",
    "auto": true,
-   "started_at": "2026-11-20T17:55:03+00:00"
+   "started_at": "2026-11-20T17:55:03+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "c-buildname",
@@ -14322,7 +14334,7 @@
    "id": "c-fix-battlelabpagetry-2",
    "tag": "fix-battlelabpagetry-2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Open the Battle Lab page on your home screen",
@@ -14344,7 +14356,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukEhdz3K8a1vVuo5v2g",
     "opening": "Something is wrong on t-battlelabpagetry"
    },
    "history": [
@@ -14362,6 +14374,10 @@
      "d": "2026-11-20",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-20T17:58:23.350Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -14375,7 +14391,7 @@
    },
    "after": "t-battlelabpagetry",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-20T17:58:57+00:00"
   }
  ],
  "sessions": [
@@ -14383,8 +14399,10 @@
    "url": "https://claude.ai/code/session_01RXeukEeg94gABBmqmKonrd",
    "title": "Fix: Look at the Effects page in Admin",
    "first": "2026-11-20T17:55:59Z",
-   "last": "2026-11-20T17:55:59Z",
-   "tags": [],
+   "last": "2026-11-20T17:58:20Z",
+   "tags": [
+    "fix-effectslook"
+   ],
    "cards": [
     "c-fix-effectslook"
    ]
@@ -14757,6 +14775,16 @@
    "title": "Install the Gate Zero pictures (no plane, plane)",
    "first": "2026-11-20T15:27:09Z",
    "last": "2026-11-20T15:27:20Z",
+   "tags": [],
+   "cards": [
+    "c-gatezero"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukESVQibHd96DoCq68m",
+   "title": "Install the Gate Zero pictures (no plane, plane)",
+   "first": "2026-11-20T09:58:10-08:00",
+   "last": "2026-11-20T09:58:10-08:00",
    "tags": [],
    "cards": [
     "c-gatezero"
@@ -16181,8 +16209,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "04b69d618f076dc8dff095d5d7183e1de8041dde",
- "synced_at": "2026-11-20T17:57:31+00:00",
+ "synced": "90e6e6ba12714897414e019f37ce2ff1e93e3c09",
+ "synced_at": "2026-11-20T17:58:59+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
