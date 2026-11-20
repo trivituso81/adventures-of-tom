@@ -13462,6 +13462,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Added c-startmore-opus (Opus 5.5 medium) and c-startmore-sonnet (Sonnet 5.5 high), both with start: true; the board job starts each on its own task. If a later look shows START failed or is not set up on either, the reason goes here and a Tom card is added."
     }
    ],
    "prompt": {
@@ -13580,6 +13584,64 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "done": "2026-11-20"
+  },
+  {
+   "id": "c-startmore-opus",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Tools",
+   "tag": "startmore-opus",
+   "start": true,
+   "title": "START proof: Opus 5.5 medium",
+   "next": "Starts by itself. Writes which model and effort it ran on, then closes.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "after": "nothing for Tom: end",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by c-startmore-test to prove the Opus 5.5 medium START task."
+    }
+   ],
+   "prompt": {
+    "what": "Proves the Opus 5.5 medium START task runs a card.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5",
+    "effort": "medium",
+    "text": "Read CLAUDE.md. You were started by START to prove this task works. Add one history line to your card saying which model and effort you are running on, move the card to Done, and push the build (its tag) with a docs/CHANGES.md entry. You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-startmore-sonnet",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Tools",
+   "tag": "startmore-sonnet",
+   "start": true,
+   "title": "START proof: Sonnet 5.5 high",
+   "next": "Starts by itself. Writes which model and effort it ran on, then closes.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "after": "nothing for Tom: end",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by c-startmore-test to prove the Sonnet 5.5 high START task."
+    }
+   ],
+   "prompt": {
+    "what": "Proves the Sonnet 5.5 high START task runs a card.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5",
+    "effort": "high",
+    "text": "Read CLAUDE.md. You were started by START to prove this task works. Add one history line to your card saying which model and effort you are running on, move the card to Done, and push the build (its tag) with a docs/CHANGES.md entry. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [

@@ -1,3 +1,7 @@
+## startmore-test (2026-11-20): Two tiny cards added to prove the Opus 5.5 medium and Sonnet 5.5 high START tasks
+
+- `c-startmore-opus` and `c-startmore-sonnet` added in Up next with `start: true`; each only writes its model and effort on its card and closes. Board data only, no game files changed.
+
 ## idea-checkart (2026-11-20): Art Library clean-up: 66 entries marked approved because the game already shows them, 71 deleted because they are not needed
 
 Tom (new card): "check the art library for all items in 'to do' 'in game but not approved' 'Ready' 'blocked' and 'rejected' to determine if they are sitll needed, or if the art is already in the game but the art gallery item was never updated. if the item is no longer needed, delete it. if it is already in the game, mark it approved".
