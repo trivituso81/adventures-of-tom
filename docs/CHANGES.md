@@ -1,3 +1,12 @@
+## music3 (2026-11-20): Music Library can make takes on the newer ElevenLabs models; a new Square prompt to try on v2.5
+
+- Card c-music3. Followed `claude/next-addendum-squaremusic.md` (stop-loss after two Square rewrites on music_v1 missed: the cause was the old model, not the wording).
+- Fact (ElevenLabs docs, read 2026-11-20): `music_v2` and `music_v2_5` exist; `music_v1` is deprecated and ElevenLabs removes it on 2027-01-31.
+- `music.html`: a Model dropdown on every card (default music_v2_5, music_v2, music_v1 still selectable); v2 models send `output_format=auto`, v1 keeps `mp3_44100_128`; each take stores and shows its model; Remake N uses each card's own choice; the how-to line says v1 is ending and that v2 credit prices are not measured.
+- `tools/music-library/stub.py` and `test.py` updated (unknown model or wrong output_format is a 400; 44 checks, all pass). smoke passes.
+- `tools/music-library/tracks.json` and `data/music-index.json`: the Square (`town`) prompt rewritten for v2.5: 96 BPM, G major, nylon guitar and clarinet playing the same melody together, walking upright bass, brushed snare, four instruments only, live band room sound, exclusions named (no piano, flute, glockenspiel, accordion, synths). The old prompt (104 BPM, flute, glockenspiel, accordion, "develops across sections") is in git history; the built-in `music/town.mp3` is unchanged.
+- Looked at: the card in portrait (dropdown, take row with model). Not done: a live ElevenLabs call (no key here), so v2.5 on Tom's key and the Square take are unheard.
+
 ## ch1art3 (2026-11-20): Grace's list shows as a close-up when she unfolds her paper in the first Square scene
 
 - Card c-ch1art3. Installed the approved Library picture `ch1-grace-list` the way the phone on the seat was installed (fix-cutpolish4b): `tools/art-library/bake_closeup_ch1.py` bakes `art/closeup/ch1-list.webp` (the full square painting), `data/closeup-ch1.js` has the `list` entry (label GRACE'S LIST, still) and `CH1_REVEAL.v` is now `ch1d`.
