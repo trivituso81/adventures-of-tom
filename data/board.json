@@ -1540,14 +1540,14 @@
   {
    "id": "c-copydocs",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Tools",
    "tag": "copydocs",
    "title": "Copy the Project docs a board card needs into the repo (copydocs)",
    "next": "START runs cannot see the Project's claude/ files. Copy them into the repo so a started card can read them.",
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-19",
    "after": "nothing for Tom: end",
    "prompt": {
     "what": "Makes the Project docs that board cards name (claude/*.md) readable from a conversation started by the START button.",
@@ -1562,10 +1562,14 @@
     {
      "d": "2026-11-20",
      "t": "Created by c-starttest check 1 (claude/ docs not readable from a START run)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukHJDQke3jpTcqvDBk6",
+    "url": "https://claude.ai/code/session_01RXeukCbhVU3ZpBxMRRYR1n",
     "opening": "unknown"
    }
   },
@@ -2191,6 +2195,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCbhVU3ZpBxMRRYR1n",
+   "title": "Copy the Project docs a board card needs into the repo (copydocs)",
+   "first": "2026-11-19T18:21:42-08:00",
+   "last": "2026-11-19T18:21:42-08:00",
+   "tags": [],
+   "cards": [
+    "c-copydocs"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGuQDu3jxcpsGVH4gP",
    "title": "Something is wrong button on test cards (board4)",
    "first": "2026-11-19T18:07:19-08:00",
@@ -2372,8 +2386,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "5b605c3d5f31d6dab4907ef210a4ad993da8bc56",
- "synced_at": "2026-11-20T02:20:28+00:00",
+ "synced": "27c9a49fefbdf314f102ed4505b98b9c9bcccdbc",
+ "synced_at": "2026-11-20T02:22:31+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
