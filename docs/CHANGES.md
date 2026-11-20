@@ -1,3 +1,8 @@
+## permwording1 (2026-11-20): Every prompt the board writes now ends with the sentence the repo permission check accepts
+
+Card c-permwording1. The check refused "You have my full permission to access the repo." and accepted "Attach trivituso81/adventures-of-tom with push access (add_repo)." `PERM` in `board.html` and `tools/board_sync.py`, the tests that assert it, `claude/handoff-rules.md`, `claude/next.md`, CLAUDE.md (one line) and the prompt text of 19 open Claude cards use the new sentence. Done cards, fixtures and older plan notes unchanged.
+- Tests: `board_check.py` ok; `board_sync_test.py` has the same two failures with and without this change; `board_test.py` and `board_newcard_test.py` could not run in this environment (the page does not load in the headless browser here, same with the change stashed), so the changed assertions were not run.
+
 ## wanproofa (2026-11-20): Part 1 of the Grace guard video proof: the wan-gen Action that makes one picture or one video on fal.ai. Nothing spent yet
 
 Card c-wanproof, plan `claude/video-battle-plan.md` section 4.5 ("The Action").

@@ -250,7 +250,7 @@ try:
         c = card('t-test7')
         if (c['lane'], c['col']) != ('claude', 'up') or not c.get('tag'): fails.append(f'Claude takes this: {c["lane"]}/{c["col"]} tag={c.get("tag")}')
         pr = c.get('prompt') or {}
-        if 'make the door bigger (ok)' not in pr.get('text', '') or 't-test7' not in pr.get('text', '') or 'full permission to access the repo' not in pr.get('text', ''): fails.append('handover prompt text wrong: ' + pr.get('text', '')[:120])
+        if 'make the door bigger (ok)' not in pr.get('text', '') or 't-test7' not in pr.get('text', '') or 'push access (add_repo)' not in pr.get('text', ''): fails.append('handover prompt text wrong: ' + pr.get('text', '')[:120])
         if '<' in json.dumps(c): fails.append('handover card holds a "<" blank')
         if 'Sonnet 5.5' not in pr.get('model', '') or not pr.get('effort') or not pr.get('before'): fails.append('handover prompt lacks model, effort or before-steps')
         tid = 't-test8'
@@ -300,7 +300,7 @@ try:
         if 'c-fix-test2' not in z['history'][-1]['t'] or 'the door (is) too small / the cake is gone' not in z['history'][-1]['t']: fails.append('tested card history lacks the words or the fix card id')
         if not f or (f['lane'], f['col']) != ('claude', 'up') or f.get('blocks') != ['t-test2'] or f.get('after') != 't-test2' or f.get('start'): fails.append(f'fix card wrong: {f and (f["lane"], f["col"], f.get("blocks"), f.get("after"), f.get("start"))}')
         pt = (f or {}).get('prompt', {}).get('text', '')
-        for want in ('the door (is) too small / the cake is gone', 'board-shots/t-test2-', 'git show origin/inbox:', 'tools/reports.py list', 'board: start c-fix-test2', 'Card t-test2', 'full permission to access the repo', 'fix-test2'):
+        for want in ('the door (is) too small / the cake is gone', 'board-shots/t-test2-', 'git show origin/inbox:', 'tools/reports.py list', 'board: start c-fix-test2', 'Card t-test2', 'push access (add_repo)', 'fix-test2'):
             if want not in pt: fails.append('fix prompt lacks ' + want)
         if 'claude/handoff' in pt or 'Project docs' not in pt: fails.append('fix prompt must point at repo files only')
         if 'Opus 5.5' not in (f or {}).get('prompt', {}).get('model', '') or not (f or {}).get('prompt', {}).get('effort', '').startswith('medium'): fails.append('pictures fix should be Opus 5.5, medium')

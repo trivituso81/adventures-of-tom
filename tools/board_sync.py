@@ -19,7 +19,7 @@ Rules (R1 to R10) are small functions below; `sync()` is the pure part that tool
 import datetime, hashlib, json, os, re, subprocess, sys, urllib.error, urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PERM = ' You have my full permission to access the repo.'
+PERM = ' Attach trivituso81/adventures-of-tom with push access (add_repo).'
 SERVICE_LANE = {'clip-gen': 'xai', 'art-gen': 'xai', 'clip-gate': 'xai', 'voice-gen': 'elevenlabs', 'art-bake': 'github'}
 TAG_RE = r'[A-Za-z][A-Za-z0-9_.-]*'
 SESSION_KEEP_DAYS = 14

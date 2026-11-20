@@ -79,7 +79,7 @@ try:
             check(f'{name}: it is a Claude card, Up next, with an idea- tag', c['lane'] == 'claude' and c['col'] == 'up' and c['tag'].startswith('idea-') and c['id'] == 'c-' + c['tag'], (c['id'], c['tag']))
             check(f'{name}: model and effort with their reasons', c['prompt']['model'].startswith('Claude Sonnet 5.5 (row C:') and c['prompt']['effort'].startswith('high ('), c['prompt'])
             check(f'{name}: his words are in the prompt and the history, with no blank', 'photo mode' in c['prompt']['text'] and '<' not in json.dumps(c['prompt']) and 'photo mode' in c['history'][0]['t'])
-            check(f'{name}: the prompt claims the card and ends with the permission line', ('board: start ' + c['id']) in c['prompt']['text'] and c['prompt']['text'].endswith('You have my full permission to access the repo.'))
+            check(f'{name}: the prompt claims the card and ends with the permission line', ('board: start ' + c['id']) in c['prompt']['text'] and c['prompt']['text'].endswith('Attach trivituso81/adventures-of-tom with push access (add_repo).'))
             check(f'{name}: not auto-started', not c.get('auto') and not c.get('start'))
             check(f'{name}: the made screen shows the size and Copy prompt', 'Sonnet 5.5, effort high' in pg.inner_text('#sheet') and pg.is_visible(f'#sheet [data-act=copy][data-id="{c["id"]}"]'))
             check(f'{name}: Sonnet high now offers START as well (startmore)', pg.is_visible(f'#sheet [data-act=start][data-id="{c["id"]}"]'))

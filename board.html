@@ -208,7 +208,7 @@ main{padding-bottom:40px}
 'use strict';
 const Q=new URLSearchParams(location.search);
 const REPO='trivituso81/adventures-of-tom',PATH='data/board.json',TOKEN='aot-gh-token';
-const PERM=' You have my full permission to access the repo.';
+const PERM=' Attach trivituso81/adventures-of-tom with push access (add_repo).';
 const GH=()=>(Q.get('gh')||'https://api.github.com').replace(/\/+$/,'');
 const URLF=()=>GH()+'/repos/'+REPO+'/contents/'+PATH;
 const THEME_COL={'Voice Clips':'#ff9bd1','Battle Animations':'#ffb86b','Battle System':'#ff8b97','Areas':'#7be0a6','Characters':'#ffe27a','Story and Dialogue':'#a89dff','Game Shell':'#7fd4ff','Tools':'#c9a5ff','Project Ops':'#b6c2d9'};

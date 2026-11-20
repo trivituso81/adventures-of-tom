@@ -55,6 +55,8 @@ Tom: "for any conversation i initiate, check against the board to see if it's an
 
 **newcard1 (2026-11-20): Tom makes his own cards.** `+ New card` on the board page: he types one idea, and the page (`sizeIdea`, `ideaPrompt`, `sendNew` in `board.html`) names the card, picks the theme, sizes the model and effort by the logic in `claude/handoff-rules.md`, writes the prompt and saves a Claude card (`c-idea-...`, tag `idea-...`, his words in `idea.words`); a Sonnet 5.5 medium card starts by itself through START. A session started on an idea card: check the size against the logic (clearly wrong: rewrite the prompt, push, tell Tom, stop), check the open cards for one that already covers it, then rewrite the title and next step and do the work. If you change the model or effort tables in handoff-rules, change `sizeIdea` and the test's `SIZES` in the same push. Test: `python3 tools/board_newcard_test.py`.
 
+**permwording1 (2026-11-20): prompt ending.** Every prompt the board writes ends with "Attach trivituso81/adventures-of-tom with push access (add_repo)." (`PERM` in `board.html` and `tools/board_sync.py`). The permission check lets add_repo through only when the user's message names that action; the old general sentence ("full permission to access the repo") was refused on 2026-11-20.
+
 A request that makes other cards obsolete retires them. Push the board change with the work (or alone, tag `board-<short>`), run `python3 tools/board_check.py`, and finish with "Theme: <theme>. Pending your action: yes/no."
 
 ## No breathing in the overworld or scenes (standing rule, Tom 2026-11-20)
