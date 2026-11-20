@@ -5485,7 +5485,7 @@
   {
    "id": "t-ch1art2",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Areas",
    "ask": "pictures",
    "title": "Chapter 1 pictures: six were not needed, only Grace's list is left",
@@ -5509,11 +5509,14 @@
     {
      "d": "2026-11-20",
      "t": "Why those pictures were asked for, and why you are right (fix-ch1art2): the chapter 1 teardown made one Library entry per story beat without checking what the game shows there. Amy already leans out of the real window in the street painting with her own figure and face. Aunt Ellie already stands at her own door as a person with her own face. The cab leaving is a fade to black, then the phone on the seat (installed). Tom with Rose on his shoulders is already three painted sheets, and one standing picture cannot become a frame of a sheet. The Mudling already holds the painted muffin pan. The green Big One would bake the pan in and recolour the fish its 11 approved clips were made from, but the pan comes off during the scene and in battle by code. All six are removed from the Library. Grace's list stays: nothing draws it today."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked: Fix what you found on: Make the seven chapter 1 pictures is done."
     }
    ],
    "created": "2026-11-19",
-   "changed": "2026-11-20",
-   "waiting_on": "claude"
+   "changed": "2026-11-19"
   },
   {
    "id": "c-ch1art3",
@@ -5761,7 +5764,7 @@
    "id": "c-fix-ch1art2",
    "tag": "fix-ch1art2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Areas",
    "title": "Fix what you found on: Make the seven chapter 1 pictures",
@@ -5770,7 +5773,7 @@
     "t-ch1art2"
    ],
    "created": "2026-11-19",
-   "changed": "2026-11-20",
+   "changed": "2026-11-19",
    "reports": [
     {
      "at": "2026-11-20T02:43:56.264Z",
@@ -5802,6 +5805,10 @@
     {
      "d": "2026-11-20",
      "t": "Fixed: explained on card t-ch1art2 and removed the six unneeded entries from the Art Library (Amy's window, Aunt Ellie's door, the cab, Rose on shoulders, Mudling with muffins, green Big One); Grace's list stays. No pencil report was filed since 2026-11-20T02:43:56Z, so none was marked done. Shipping as fix-ch1art2."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as fix-ch1art2: six chapter 1 picture requests removed from the Art Library; only Grace's list is left"
     }
    ],
    "prompt": {
@@ -5813,7 +5820,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch1art2 and t-ch1art2 in data/board.json, history included. Your first push is the commit board: start c-fix-ch1art2.\n\nTom tested and found problems:\n1. Card t-ch1art2 (Make the seven chapter 1 pictures, ask pictures). He was asked: ADMIN ) ART LIBRARY, group Chapter 1 (Props, Characters and Enemies tabs). For each of ch1-grace-list, ch1-amy-window, ch1-ellie-door, ch1-cab-pulls-away, ch1-rose-shoulders, ch1-mudling-muffins and ch1-bigone-green-pan: press GENERATE, then APPROVE, or REJECT with a note. When all seven are approved, card c-ch1art3 (Claude installs them in the game) can start. He wrote: i dont understand why we need this art. like it doesnt make sense based on how the game works (except grace's list). explain\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T02:43:56.264Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch1art2 to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch1art2, and give the build fix-ch1art2 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
-   "after": "t-ch1art2"
+   "after": "t-ch1art2",
+   "done": "2026-11-19"
   },
   {
    "id": "c-skilllist1",
@@ -5951,7 +5959,7 @@
    "id": "c-fix-skilllist1look",
    "tag": "fix-skilllist1look",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Battle System",
    "title": "Fix what you found on: Look at the SKILLS list text and icons on your phone",
@@ -5973,7 +5981,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukEpZhMxX5JzsA9YpoM",
     "opening": "Something is wrong on t-skilllist1look"
    },
    "history": [
@@ -5988,6 +5996,10 @@
     {
      "d": "2026-11-19",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -6000,8 +6012,7 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-skilllist1look and t-skilllist1look in data/board.json, history included. Your first push is the commit board: start c-fix-skilllist1look.\n\nTom tested and found problems:\n1. Card t-skilllist1look (Look at the SKILLS list text and icons on your phone, ask play). He was asked: After the publish of build skilllist1: RELOAD on the title, ADMIN ) BATTLE LAB ) NEW BATTLE, start any fight, open SKILLS. The skill names and the pictures should be a little smaller and a long name like Kingdom of Ten-Thousand Blankets should fit in two lines. Report with the REPORT tab if anything still looks too big (skilllist1 is the build to name). He wrote: still looks way too big, all the fonts and icons. kind of needs a redesign\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T03:00:48.054Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-skilllist1look to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-skilllist1look, and give the build fix-skilllist1look a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-skilllist1look",
-   "auto": true,
-   "start": true
+   "auto": true
   }
  ],
  "sessions": [
@@ -6131,6 +6142,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFjCmABxbJpuMFmDbh",
+   "title": "Fix what you found on: Make the seven chapter 1 pictures",
+   "first": "2026-11-19T18:47:21-08:00",
+   "last": "2026-11-19T19:00:38-08:00",
+   "tags": [
+    "fix-ch1art2"
+   ],
+   "cards": [
+    "c-fix-ch1art2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEEGSUH9LzPgNRP4w3",
    "title": "Fix the report backlog (7 open)",
    "first": "2026-11-19T18:55:42-08:00",
@@ -6164,16 +6187,6 @@
    ],
    "cards": [
     "c-clipreset"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFjCmABxbJpuMFmDbh",
-   "title": "Fix what you found on: Make the seven chapter 1 pictures",
-   "first": "2026-11-19T18:47:21-08:00",
-   "last": "2026-11-19T18:47:21-08:00",
-   "tags": [],
-   "cards": [
-    "c-fix-ch1art2"
    ]
   },
   {
@@ -6588,8 +6601,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "f2af19863f1fe1c7f9d75ab6dad59efc86f6b88c",
- "synced_at": "2026-11-20T02:59:26+00:00",
+ "synced": "3083925a58718884d29a4c61ba287d1990366c88",
+ "synced_at": "2026-11-20T03:01:32+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
