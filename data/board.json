@@ -12137,7 +12137,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukECtrSqT77v9Xp8TsC",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -12149,6 +12149,10 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-20T16:59:55.821Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Session started: Tom asked whether this prompt still fits the new battle system."
     }
    ],
    "tag": "gem-pillar-hp",
