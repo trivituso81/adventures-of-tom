@@ -12339,13 +12339,13 @@
    "title": "Purge Rhubarb Crisp from the game everywhere",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "next": "Waiting on Tom: answer the card Decide how far to cut Rhubarb Crisp. Then run the prompt as written, scoped to his answer.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFugoiMUKnQaUUEhir",
+    "url": "https://claude.ai/code/session_01RXeukFugoiMUKnQaUUEhir",
     "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
    },
    "history": [
@@ -12377,6 +12377,10 @@
     {
      "d": "2026-11-20",
      "t": "Rescue outcome: BACK TO YOU. Scope needs Tom (tooltips only vs whole story, which silences voiced lines). Added Tom card t-rhubarb-scope; this card waits on it."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "tag": "gem-pillar-rhubarb",
@@ -12397,7 +12401,6 @@
     "url": "https://claude.ai/code/cse_01RXeukFugoiMUKnQaUUEhir",
     "prev": "https://claude.ai/code/session_01RXeukFkMDqBpY62nm7AFcf"
    },
-   "waiting_on": "tom",
    "after": "t-rhubarb-scope"
   },
   {
@@ -15058,7 +15061,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFPqwb1ZYQTWSoJnuP",
+    "url": "https://claude.ai/code/session_01RXeukFPqwb1ZYQTWSoJnuP",
     "opening": "not started"
    },
    "history": [
@@ -15077,6 +15080,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -15229,10 +15236,35 @@
      "d": "2026-11-20",
      "t": "Made by the rescue of c-gem-pillar-rhubarb: the card is blocked on this scope decision."
     }
-   ]
+   ],
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFugoiMUKnQaUUEhir",
+    "opening": "unknown"
+   }
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFugoiMUKnQaUUEhir",
+   "title": "Purge Rhubarb Crisp from the game everywhere",
+   "first": "2026-11-20T19:13:55Z",
+   "last": "2026-11-20T19:13:59Z",
+   "tags": [],
+   "cards": [
+    "c-gem-pillar-rhubarb",
+    "t-rhubarb-scope"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFPqwb1ZYQTWSoJnuP",
+   "title": "Build history redesign 3: archive, search and its own page",
+   "first": "2026-11-20T19:13:47Z",
+   "last": "2026-11-20T19:13:47Z",
+   "tags": [],
+   "cards": [
+    "c-builds3"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukExaQvGdnDirJdCBFw",
    "title": "Build history redesign 2: statuses and what is pending",
@@ -17218,8 +17250,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "8da15cda7fe7b04bfc4ae4c28bdece4e895fafbe",
- "synced_at": "2026-11-20T19:12:49+00:00",
+ "synced": "c92a07531c58e8cf27466b7896bdd9188bb0be66",
+ "synced_at": "2026-11-20T19:14:28+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
