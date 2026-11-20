@@ -16138,8 +16138,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Voice Clips",
-   "count": 2,
-   "title": "Merge 2 new voice takes",
+   "count": 4,
+   "title": "Merge 4 new voice takes",
    "next": "Merged 2 takes (Tom Delta One line, Deedee flashbulb line) into dialog-ch1.js. Shipped as takes-2026-11-20.",
    "prompt": {
     "what": "Merges the voice takes you recorded on your phone.",
@@ -16175,6 +16175,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "2 more take file(s) arrived."
     }
    ],
    "blocks": [],
@@ -18861,11 +18865,13 @@
    "takes/20261120T170347-1wa/part-001.json",
    "takes/20261120T170347-1wa/state.json",
    "takes/20261120T211742-sz1/part-001.json",
-   "takes/20261120T211742-sz1/state.json"
+   "takes/20261120T211742-sz1/state.json",
+   "takes/20261120T213706-d43/part-001.json",
+   "takes/20261120T213706-d43/state.json"
   ]
  },
- "synced": "ba7453a3db9554406a3709748914d10fa0e07046",
- "synced_at": "2026-11-20T21:36:51+00:00",
+ "synced": "156edd61b914fe59b108413d2a203582d6bd53e6",
+ "synced_at": "2026-11-20T21:37:36+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
