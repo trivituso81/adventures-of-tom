@@ -12770,6 +12770,50 @@
    },
    "auto": true,
    "start": true
+  },
+  {
+   "id": "c-idea-skippingcut",
+   "tag": "idea-skippingcut",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Story and Dialogue",
+   "title": "When skipping cut scenes, any interstitials (eg, Grace's",
+   "next": "Your idea: When skipping cut scenes, any interstitials (eg, Grace's list) should also be skipped. party members joiing and leaving should NEVER be skipped Copy the prompt into a new conversation in the Project on Haiku 5.5, effort low.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "idea": {
+    "at": "2026-11-20T17:12:08.552Z",
+    "words": "When skipping cut scenes, any interstitials (eg, Grace's list) should also be skipped. party members joiing and leaving should NEVER be skipped",
+    "shot": "",
+    "row": "A",
+    "rule": "Claude Haiku 5.5, low"
+   },
+   "chat": {
+    "url": "",
+    "opening": "New card by Tom on the board"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom made this card on the board: When skipping cut scenes, any interstitials (eg, Grace's list) should also be skipped. party members joiing and leaving should NEVER be skipped",
+     "at": "2026-11-20T17:12:08.552Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Sized by the board: Claude Haiku 5.5 (row A: a question, nothing changes), effort low (a lookup).",
+     "at": "2026-11-20T17:12:08.552Z"
+    }
+   ],
+   "prompt": {
+    "what": "Answers your question: When skipping cut scenes, any interstitials (eg, Grace's.",
+    "before": [
+     "Nothing to do first. Your words are on the card."
+    ],
+    "model": "Claude Haiku 5.5 (row A: a question, nothing changes)",
+    "effort": "low (a lookup)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-skippingcut in data/board.json, history included. Your first push is the commit board: start c-idea-skippingcut.\n\nTom made this card himself with New card on the board. His words: \"When skipping cut scenes, any interstitials (eg, Grace's list) should also be skipped. party members joiing and leaving should NEVER be skipped\"\n\nThe board sized this from his words alone: Claude Haiku 5.5 (row A: a question, nothing changes), effort low (a lookup). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nThis is a question. Answer it in the chat in a few plain sentences, change nothing in the game, write the answer as a history line on this card and move it to Done. Push only the board change. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [
