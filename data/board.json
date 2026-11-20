@@ -13171,7 +13171,8 @@
     "url": "https://claude.ai/code/cse_01RXeukD7sCjzp3NJTWyxHVn",
     "prev": "https://claude.ai/code/session_01RXeukDcB3ZSezrrTtg1qT3"
    },
-   "started_at": "2026-11-20T17:43:02+00:00"
+   "started_at": "2026-11-20T17:43:02+00:00",
+   "quiet": true
   },
   {
    "id": "b-board-projclean",
@@ -15520,7 +15521,7 @@
    "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (1 open)",
-   "next": "Report r-20261120-113001-w756 waits on Tom: which way should Rose face in the Deedee kitchen scene (ch1Theft) while Tom says Hi, Mom? Right now she faces left toward Deedee.",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-113001-w756. First note: rose facing the wrong way",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -15561,6 +15562,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFNkCr1k6xT3RqhfT1",
+   "title": "Fix the report backlog (1 open)",
+   "first": "2026-11-20T19:44:58Z",
+   "last": "2026-11-20T19:44:58Z",
+   "tags": [],
+   "cards": [
+    "c-reports-5"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFVfSKr5GPp8cLJbDZ",
    "title": "Install the listening poses",
@@ -17584,8 +17595,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "d78cfdf54a0a3f29c0f2b0eeb888bb38cecbc2da",
- "synced_at": "2026-11-20T19:43:33+00:00",
+ "synced": "fd7192a288202a347f7e13199408f61183de220a",
+ "synced_at": "2026-11-20T19:45:35+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
