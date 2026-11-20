@@ -1,3 +1,7 @@
+## board-starving4 (2026-11-20): board only: your last "I'm starving!" report came 40 seconds before the fix was live
+
+- Card c-fix-ch1starving-4 retired: Tom's report ("it deletes the words as soon as I tap out of the box") is the old page's behaviour; he tapped at 08:44:20 UTC and fix-ch1starving-3 finished publishing at 08:45 UTC. The live voices.html was checked: it has the fix. t-ch1starving is back with him, with a line saying to close and reopen the Voice Library.
+
 ## fix-ch1starving-3 (2026-11-20): "I'm starving!" is back at the end of Tom's "Thank you for telling me, Rose" script, ready for you to re-record
 
 - Card c-fix-ch1starving-3, for t-ch1starving. Tom (11-20): "I'm starving. should not have been dropped". Two earlier fixes (fix-ch1starving, fix-ch1starving-2) read his notes the opposite way, so before a third try I asked in chat; Tom: "Keep it, I'll re-record".

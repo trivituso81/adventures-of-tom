@@ -6713,9 +6713,9 @@
    "title": "Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end",
    "theme": "Voice Clips",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "voice",
-   "next": "After build fix-ch1starving-3 is published: open ADMIN > VOICE LIBRARY with the button below (Open in the Voice Library: Tom's line), or search \"telling me, Rose\". Reload the page once. The script box now ends \"...number two can't wait. [hungry] I'm starving!\". Tap Takes and record, make takes until one says the whole line, keep it, then press Send my takes to Claude. That starts card Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub). Until then the game plays your old take.",
+   "next": "Build fix-ch1starving-3 is live now (your last try was about 40 seconds too early, so you had the old page). Close the Voice Library fully and reopen it with the button below (Open in the Voice Library: Tom's line). The script box ends \"...number two can't wait. [hungry] I'm starving!\" and stays when you tap out. Tap Takes and record, make takes until one says the whole line, keep it, then press Send my takes to Claude. That starts card Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub). Until then the game plays your old take.",
    "blocks": [
     "c-ch1starving-sub"
    ],
@@ -6773,6 +6773,14 @@
     {
      "d": "2026-11-20",
      "t": "Tom: something is wrong: It still doesn't say I'm starving at the end and when I try to type it in and then re-record it, it deletes the words as soon as I tap out of the box Sent to Claude as card c-fix-ch1starving-4; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix what you found on: Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\", Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! , Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! , Fix what you found on: Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Answer from \"Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! \": Keep it, I'll re-record"
     }
    ],
    "links": [
@@ -6783,8 +6791,7 @@
      ],
      "label": "Tom's line"
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-fix-ch1starving",
@@ -8698,7 +8705,7 @@
    "id": "c-fix-ch1starving-4",
    "tag": "fix-ch1starving-4",
    "lane": "claude",
-   "col": "up",
+   "col": "done",
    "fix": true,
    "theme": "Voice Clips",
    "title": "Fix what you found on: Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end",
@@ -8731,6 +8738,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom reported on t-ch1starving: It still doesn't say I'm starving at the end and when I try to type it in and then re-record it, it deletes the words as soon as I tap out of the box"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Retired by boardwait1 session: Tom tapped Something is wrong at 08:44:20 UTC, about 40 seconds before build fix-ch1starving-3 finished publishing (08:45 UTC), so his phone still had the old Voice Library, the one that deleted \"I'm starving!\" when he left the box. The live page now has the fix (checked on the site). Nothing to change in code."
     }
    ],
    "prompt": {
@@ -8742,7 +8753,8 @@
     "effort": "medium (fixing what you named, starting from what is there)",
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch1starving-4 and t-ch1starving in data/board.json, history included. Your first push is the commit board: start c-fix-ch1starving-4.\n\nTom tested and found problems:\n1. Card t-ch1starving (Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end, ask voice). He was asked: After build fix-ch1starving-3 is published: open ADMIN ) VOICE LIBRARY with the button below (Open in the Voice Library: Tom's line), or search \"telling me, Rose\". Reload the page once. The script box now ends \"...number two can't wait. [hungry] I'm starving!\". Tap Takes and record, make takes until one says the whole line, keep it, then press Send my takes to Claude. That starts card Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub). Until then the game plays your old take. He wrote: It still doesn't say I'm starving at the end and when I try to type it in and then re-record it, it deletes the words as soon as I tap out of the box\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:44:20.065Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch1starving to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch1starving, and give the build fix-ch1starving-4 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
-   "after": "t-ch1starving"
+   "after": "t-ch1starving",
+   "done": "2026-11-20"
   }
  ],
  "sessions": [
