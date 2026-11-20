@@ -12,6 +12,12 @@
    "text": "Hello, Rose. Please keep your arms and legs inside the uncle at all times.",
    "script": "[dry, deadpan] Hello, Rose. [official announcement] Please keep your arms and legs inside the uncle at all times.",
    "takeId": "tmwnr6e69kgzb"
+  },
+  {
+   "voice": "tom",
+   "text": "Oof, I'm finally here! At least the 6 hours went by fast on Delta One!",
+   "script": "[weary, relieved] Oof, I'm finally here! [smirking, bragging] At least the 6 hours went by fast on Delta One!",
+   "takeId": "tmwph4l8hwbe4"
   }
  ]
 }

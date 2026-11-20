@@ -16093,7 +16093,7 @@
    "theme": "Voice Clips",
    "count": 2,
    "title": "Merge 2 new voice takes",
-   "next": "New voice takes were saved on branch takes. Merge them into the game.",
+   "next": "Merged 2 takes (Tom Delta One line, Deedee flashbulb line) into dialog-ch1.js. Shipped as takes-2026-11-20.",
    "prompt": {
     "what": "Merges the voice takes you recorded on your phone.",
     "before": [
@@ -16120,12 +16120,17 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Merged the 2 kept takes from branch takes (session 20261120T211742-sz1). Both new lines in dialog-ch1.js; audit clean."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
-   "started_at": "2026-11-20T21:20:13+00:00"
+   "started_at": "2026-11-20T21:20:13+00:00",
+   "after": "nothing for Tom: end"
   },
   {
    "id": "t-keysecrets1-try",
