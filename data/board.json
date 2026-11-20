@@ -15770,7 +15770,7 @@
    "title": "Build the Grace guard video proof",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "wanproof",
    "next": "Waits on your approval (card Approve the WAN proof). Then it makes Grace's large start picture and one 5 second Wan 3.0 guard video through fal.ai, checks every picture of it against the written list before you see anything, and puts it in ADMIN > BATTLE LAB > NEW BATTLE as PROOF: GRACE'S GUARD (VIDEO), tested in portrait and landscape. 54 cents expected, $2 at most.",
    "blocks": [],
@@ -15792,6 +15792,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by session wanproof (Opus 5.5 high). Building the proof per claude/video-battle-plan.md section 4."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -16333,6 +16337,16 @@
    "tags": [],
    "cards": [
     "c-gatezero"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
+   "title": "Build the Grace guard video proof",
+   "first": "2026-11-20T12:41:05-08:00",
+   "last": "2026-11-20T12:41:05-08:00",
+   "tags": [],
+   "cards": [
+    "c-wanproof"
    ]
   },
   {
@@ -17864,8 +17878,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "46f03e29949d1eaaba3c5bd67e9733f35db6ddab",
- "synced_at": "2026-11-20T20:38:56+00:00",
+ "synced": "ff661b782da998b71c4d5e640c05adde51659ec1",
+ "synced_at": "2026-11-20T20:41:44+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
