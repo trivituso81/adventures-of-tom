@@ -12093,7 +12093,7 @@
    "title": "Decide: Tom's line before the boss",
    "theme": "Story and Dialogue",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "decide",
    "next": "Open ADMIN > BOARD, tap this card and pick one choice for Tom's line before The Big One. Your pick unlocks the card Apply your decision on Tom's boss line.",
    "blocks": [
@@ -12119,8 +12119,15 @@
     {
      "d": "2026-11-20",
      "t": "Gemini's report flagged this line for a taste check: `\"Mom. That's a boss. You don't just walk up to a boss.\"` Fourth-wall boss gag versus grounded phrasing, and Mom versus Deedee in front of the girls."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom answered: He can say mom - but not \"you don't just walk up to up to boss\" - it doesnt actually mean naything - a joke isnt a joke if it doesnt haven meaning. i like him throwing in boss knowledge, but instead of just trying to clown her maybe he can suggest advice or educate?",
+     "at": "2026-11-20T16:36:16.579Z"
     }
-   ]
+   ],
+   "done": "2026-11-20",
+   "answer": "He can say mom - but not \"you don't just walk up to up to boss\" - it doesnt actually mean naything - a joke isnt a joke if it doesnt haven meaning. i like him throwing in boss knowledge, but instead of just trying to clown her maybe he can suggest advice or educate?"
   },
   {
    "id": "b-board-gemcards",
