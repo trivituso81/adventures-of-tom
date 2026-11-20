@@ -1958,7 +1958,7 @@
    "title": "Look at the chapter 1 pictures in the game",
    "theme": "Areas",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen. Look at the island: the muffin pan now sits on the bare table to the right of the cake stand and the tart, not over them. After the Mudling grabs the pan it is gone and the table stays as it was. Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one).",
@@ -1997,9 +1997,12 @@
     {
      "d": "2026-11-20",
      "t": "Fix fix-cutpolish4b-2 shipped: the pan moved right on the table so it no longer covers the cake stand."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked: Fix what you found on: Look at the chapter 1 pictures in the game, Fix what you found on: Look at the chapter 1 pictures in the game is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "b-takes1",
@@ -5534,7 +5537,7 @@
   {
    "id": "c-ch1art3",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Areas",
    "tag": "ch1art3",
    "title": "Install Grace's approved list picture in the game (chapter 1 opening scene)",
@@ -5564,16 +5567,19 @@
     {
      "d": "2026-11-19",
      "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDze9tcDwCr1WBu4x4",
     "opening": "not started"
-   },
-   "start": true
+   }
   },
   {
    "id": "c-fix-cutpolish4b",
@@ -5917,7 +5923,7 @@
    "id": "c-fix-cutpolish4b-2",
    "tag": "fix-cutpolish4b-2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Areas",
    "title": "Fix what you found on: Look at the chapter 1 pictures in the game",
@@ -5962,6 +5968,10 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as fix-cutpolish4b-2: the muffin pan now sits fully on the bare table, clear of the cake stand"
     }
    ],
    "prompt": {
@@ -5974,7 +5984,8 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-cutpolish4b-2 and t-cutpolish4b in data/board.json, history included. Your first push is the commit board: start c-fix-cutpolish4b-2.\n\nTom tested and found problems:\n1. Card t-cutpolish4b (Look at the chapter 1 pictures in the game, ask play). He was asked: Chapter select ) Chapter 1, jump to the theft scene in Deedee's kitchen. Look at the island: the table is bare except the tart and the cake stand, and the muffin pan sits on it clear of the other pastries. After the Mudling grabs the pan the pan is gone and the table stays as it was. The Mudling now carries the painted pan, not the little heap. Then the paper muffin liners at the entrance of Grump Hollow (they are bigger now). Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one). Claude fixes them and this card comes back to you to check. He wrote: muffins overlay the background art Screenshot: board-shots/t-cutpolish4b-mwoe2bqk.jpg on branch inbox (git fetch --depth=1 origin inbox, then git show origin/inbox:board-shots/t-cutpolish4b-mwoe2bqk.jpg into a file in /tmp, and look at it).\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T02:57:37.579Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-cutpolish4b to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-cutpolish4b, and give the build fix-cutpolish4b-2 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-cutpolish4b",
-   "auto": true
+   "auto": true,
+   "done": "2026-11-19"
   },
   {
    "id": "c-fix-skilllist1look",
@@ -6042,6 +6053,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGN82mV68qXVnCgA97",
+   "title": "Fix what you found on: Look at the chapter 1 pictures in the game",
+   "first": "2026-11-20T02:59:02Z",
+   "last": "2026-11-20T03:04:33Z",
+   "tags": [
+    "fix-cutpolish4b-2"
+   ],
+   "cards": [
+    "c-fix-cutpolish4b-2"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEpZhMxX5JzsA9YpoM",
    "title": "Fix what you found on: Look at the SKILLS list text and icons on your phone",
    "first": "2026-11-20T03:02:25Z",
@@ -6049,16 +6072,6 @@
    "tags": [],
    "cards": [
     "c-fix-skilllist1look"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGN82mV68qXVnCgA97",
-   "title": "Fix what you found on: Look at the chapter 1 pictures in the game",
-   "first": "2026-11-20T02:59:02Z",
-   "last": "2026-11-20T02:59:02Z",
-   "tags": [],
-   "cards": [
-    "c-fix-cutpolish4b-2"
    ]
   },
   {
@@ -6636,8 +6649,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "0c80741c3bb5d0e103fe81e5a9d1185b1be1128f",
- "synced_at": "2026-11-20T03:03:11+00:00",
+ "synced": "e24a8b8738f68e288ee6baae30a00543f56a63e2",
+ "synced_at": "2026-11-20T03:04:49+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
