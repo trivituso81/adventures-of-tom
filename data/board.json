@@ -1807,7 +1807,7 @@
    "id": "c-board4",
    "tag": "board4",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Tools",
    "title": "Something is wrong button on test cards (board4)",
    "next": "Building: every play, pictures, animations, voice and script card gets All good and Something is wrong. Something is wrong saves your words and screenshot as a Claude fix card, and the tested card waits on it.",
@@ -1815,7 +1815,7 @@
    "created": "2026-11-19",
    "changed": "2026-11-19",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGuQDu3jxcpsGVH4gP",
     "opening": "\"Read CLAUDE.md, claude/handoff-rules.md, claude/next-addendum-board3.md and claude/board3-plan.md, then rework the board\""
    },
    "prompt": {
@@ -1831,8 +1831,35 @@
     {
      "d": "2026-11-19",
      "t": "Tom: on \"Look at the chapter 1 pictures in the game\" (t-cutpolish4b) he found several issues and could not tell what to do next; the pencil tab, come back, I did this, then Done flow is confusing and the fyi card felt like nothing waited on it. He wants one tap from the card to report, and the report to become Claude work."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ]
+  },
+  {
+   "id": "b-board-ch1review",
+   "tag": "board-ch1review",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Tools",
+   "title": "board card t-ch1review said the Grump and Toad idles were in THE BIG ONE fight; they are in the first CHAPTER 1 REVIEW fight",
+   "next": "Done: board card t-ch1review said the Grump and Toad idles were in THE BIG ONE fight; they are in the first CHAPTER 1 REVIEW fight",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukH7oLv95YtuWW62q7o",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as board-ch1review. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
   }
  ],
  "sessions": [
@@ -1898,6 +1925,31 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukH7oLv95YtuWW62q7o",
+   "title": "Make the 43 fixed chapter 1 clips again (clipch1remake)",
+   "first": "2026-11-19T17:14:03-08:00",
+   "last": "2026-11-19T18:08:02-08:00",
+   "tags": [
+    "clipch1remake",
+    "clipch1remakea",
+    "board-ch1review"
+   ],
+   "cards": [
+    "c-clipch1remake",
+    "t-ch1review"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGuQDu3jxcpsGVH4gP",
+   "title": "Something is wrong button on test cards (board4)",
+   "first": "2026-11-19T18:07:19-08:00",
+   "last": "2026-11-19T18:07:19-08:00",
+   "tags": [],
+   "cards": [
+    "c-board4"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFcedNR3ccwPBafb9k",
    "title": "Cut the door frame beat from chapter 1 (ch1nodoor)",
    "first": "2026-11-19T17:34:14-08:00",
@@ -1907,19 +1959,6 @@
    ],
    "cards": [
     "c-ch1nodoor"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukH7oLv95YtuWW62q7o",
-   "title": "Make the 43 fixed chapter 1 clips again (clipch1remake)",
-   "first": "2026-11-19T17:14:03-08:00",
-   "last": "2026-11-19T17:53:17-08:00",
-   "tags": [
-    "clipch1remake",
-    "clipch1remakea"
-   ],
-   "cards": [
-    "c-clipch1remake"
    ]
   },
   {
@@ -2037,8 +2076,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "73b688d4eaa04dc9fc66c2f1092b21ba740b65f6",
- "synced_at": "2026-11-20T02:04:37+00:00",
+ "synced": "50a877946abe7f094c818a01eb94c37397ca0525",
+ "synced_at": "2026-11-20T02:08:06+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
