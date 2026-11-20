@@ -8145,6 +8145,10 @@
     {
      "d": "2026-11-20",
      "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Rescue ended without shipping: the pictures in art/raw/rooms (noplane-v1, plane-v1) are the same files the first session rejected (1248x832, not the plate size 1280x896; the empty room moved the window frames and jet bridge; the plane is a different jet and size). Nothing new to install. Waits on new pictures that keep the painting exactly and put the plane in the same place."
     }
    ],
    "prompt": {
