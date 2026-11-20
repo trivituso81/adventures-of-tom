@@ -15584,7 +15584,7 @@
    "col": "wait",
    "ask": "play",
    "fyi": true,
-   "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1. Play the kitchen at Grandma's (the home scene at the start), then the Square sign and the grey patch. You should see everyone who is not talking stand listening (hands loosely together, face turned a little toward the speaker) or thinking (hand at the chin). Tom while he carries Rose keeps his ride picture. Press All good, or Something is wrong and say which scene and person.",
+   "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1. Play the kitchen scene at Deedee and Boppy's house (the scene where Tom says \"Hi, Mom! Is that the cinnamon topping?\"), then the Square sign and the grey patch. You should see everyone who is not talking stand listening (hands loosely together, face turned a little toward the speaker) or thinking (hand at the chin). Tom while he carries Rose keeps his ride picture. Press All good, or Something is wrong and say which scene and person.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -15597,6 +15597,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: theres no one in the story named Grandma so i cant read this Sent to Claude as card c-fix-listen1-play; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T20:12:16.298Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fix c-fix-listen1-play: the step named \"Grandma's\", a name nothing in the story uses; it now names Deedee and Boppy's house. No game change was needed."
     }
    ],
    "waiting_on": "claude"
@@ -15649,6 +15653,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fixed in fix-listen1-play: only the wording of the step on t-listen1-play was wrong (Grandma's is Deedee and Boppy's house). The one open pencil report (rose facing the wrong way) was filed before this report and is a different problem, so it was left open."
     }
    ],
    "prompt": {

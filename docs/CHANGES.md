@@ -1,3 +1,7 @@
+## fix-listen1-play (2026-11-20): the chapter 1 listening test step now names the right house
+
+Tom on t-listen1-play: "theres no one in the story named Grandma so i cant read this". Cause: the test step said "the kitchen at Grandma's"; the scene is at Deedee and Boppy's House (map `grands`, scene `ch1Theft`). Changed only the step text on the card. No game file changed. The pencil report r-20261120-113001-w756 (rose facing the wrong way) predates this report and stays open.
+
 ## listen1 (2026-11-20): In chapter 1, people who are not talking now stand in the painted listening pose
 
 Card c-listen1-install. Tom approved all 7 pictures (tom, grace, rose, deedee, boppy, ellie, sal); none were rejected.
