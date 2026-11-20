@@ -5143,6 +5143,29 @@ pressAction=function() {
 // Terminal Zero is dim until the clocks start (lamp light round Tom); Gate Zero shows Flight 0 through the window
 // until it pushes back and rolls away.
 const CH10_PLANE={t0:0};
+// Flight Zero outside the Gate Zero window. art/gatezero.webp is the room with the window empty (the apron, no plane); the plane (art/gatezero-plane.webp)
+// and the window frames and jet bridge that stand in front of it (art/gatezero-frame.webp) are drawn over it, same place and size as the first painting
+// (art px, plate 1280 x 896). While it leaves, the plane eases left behind the frames and is clipped to the window opening (it passes behind the board).
+// Drawn from plateLive (engine/plate.js), under the people.
+const GATE_PLANE_IMG={plane:null,frame:null,box:{plane:[516,31],frame:[524,49]}};
+function gatePlaneImgs() {
+  if(!GATE_PLANE_IMG.plane) { GATE_PLANE_IMG.plane=new Image(); GATE_PLANE_IMG.plane.src='art/gatezero-plane.webp?v=gatezero1'; GATE_PLANE_IMG.frame=new Image(); GATE_PLANE_IMG.frame.src='art/gatezero-frame.webp?v=gatezero1'; }
+  return GATE_PLANE_IMG.plane.complete&&GATE_PLANE_IMG.plane.naturalWidth&&GATE_PLANE_IMG.frame.complete&&GATE_PLANE_IMG.frame.naturalWidth;
+}
+function gatePlaneDraw(time) {
+  const gone=STORY.mode==='full'&&(STORY.chapter>10||!!flag('ch10-gone'));
+  const leaving=CH10_PLANE.t0?(performance.now()-CH10_PLANE.t0)/1000:0;
+  if(gone&&!(leaving>0&&leaving<4)) return;
+  if(!gatePlaneImgs()) return;
+  const s=T/64,c=gfx,dx=-leaving*leaving*46,[px,py]=GATE_PLANE_IMG.box.plane,[fx,fy]=GATE_PLANE_IMG.box.frame;
+  c.save(); c.beginPath(); c.rect(412*s,0,(940-412)*s,250*s); c.clip();
+  c.imageSmoothingEnabled=true; c.imageSmoothingQuality='high';
+  c.drawImage(GATE_PLANE_IMG.plane,(px+dx)*s,py*s,GATE_PLANE_IMG.plane.naturalWidth*s,GATE_PLANE_IMG.plane.naturalHeight*s);
+  c.restore();
+  c.save(); c.imageSmoothingEnabled=true; c.imageSmoothingQuality='high';
+  c.drawImage(GATE_PLANE_IMG.frame,fx*s,fy*s,GATE_PLANE_IMG.frame.naturalWidth*s,GATE_PLANE_IMG.frame.naturalHeight*s);
+  c.restore();
+}
 // Julian's walk at the end of chapter 10: out of the jet bridge (16,4), along the carpet in front of the seats (row 5), up to the podium's right side (7,4) and back.
 const CH10_COAT_PATH=[[16,5],[15,5],[14,5],[13,5],[12,5],[11,5],[10,5],[9,5],[8,5],[7,5],[7,4]];
 const CH10_COAT_PATH_BACK=[[7,5],[8,5],[9,5],[10,5],[11,5],[12,5],[13,5],[14,5],[15,5],[16,5],[16,4]];
@@ -5167,17 +5190,6 @@ STORY_MAPFX.push(time=>{
     c.fillStyle=g; c.fillRect(0,0,M.w*T,M.h*T);
   }
   if(id==='gatezero') {
-    const gone=STORY.mode==='full'&&(STORY.chapter>10||!!flag('ch10-gone'));
-    const leaving=CH10_PLANE.t0&&!gone?(performance.now()-CH10_PLANE.t0)/1000:0;
-    if(!plateFor(M)&&(!gone||leaving)) {
-      const dx=-leaving*leaving*40,y0=4,x0=3*T+dx;
-      c.save(); c.beginPath(); c.rect(T,0,(M.w-2)*T,T); c.clip();
-      rect(x0,y0+8,12*T,12,'#e8eaf4'); ellipse(x0+12*T,y0+14,12,6,'#e8eaf4'); rect(x0,y0+18,12*T,2,'#2f5fb0');
-      polygon([[x0+10,y0+8],[x0,y0-6],[x0+16,y0-6],[x0+30,y0+8]],'#2f5fb0');
-      for(let k=0;k<20;k++) rect(x0+44+k*16,y0+11,5,4,'#f2c75a');
-      if(Math.floor(time*2)%2) ellipse(x0+4,y0+2,2,2,'#e85a4a');
-      c.restore();
-    }
     if(STORY.mode==='full'&&STORY.chapter>=10&&(CH10_CARD.t0||flag('ch10-gone'))) {   // the card on the podium counter
       const x=5.5*T,y=3.86*T,w=Math.round(T*.34),h=Math.round(T*.2);
       c.save(); c.translate(x,y); c.rotate(-.12);

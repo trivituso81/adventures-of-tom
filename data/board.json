@@ -8271,13 +8271,13 @@
    "theme": "Areas",
    "lane": "claude",
    "col": "prog",
-   "next": "Waits on card t-gatezero-decide. The two pictures made (noplane-v1, plane-v1) are 1248x832 not 1280x896, move the window frames and jet bridge, and the plane is a different jet. After Tom's answer: rebuild the entries or install, per his choice.",
+   "next": "Shipped as gatezero: the Gate Zero window is empty and the plane rolls away at the end of chapter 10. Tom plays the chapter 10 ending (card t-gatezeroplay).",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukESVQibHd96DoCq68m",
-    "opening": "not started"
+    "opening": "Read claude/next-addendum-ch10vance1.md and install the approved Gate Zero pictures"
    },
    "history": [
     {
@@ -8341,6 +8341,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped gatezero: kept the current painting, painted the plane out, plane and window frames are separate layers; the plane now rolls out of the window. Tested portrait and landscape."
     }
    ],
    "prompt": {
@@ -8354,7 +8358,7 @@
    },
    "tag": "gatezero",
    "started_at": "2026-11-20T17:43:02+00:00",
-   "after": "t-gatezero-decide"
+   "after": "t-gatezeroplay"
   },
   {
    "id": "t-gatezeroart",
@@ -14850,6 +14854,29 @@
      "t": "Added with c-reports-4."
     }
    ]
+  },
+  {
+   "id": "t-gatezeroplay",
+   "title": "Watch Flight Zero roll away at Gate Zero",
+   "theme": "Areas",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Open the game, RELOAD, then CHAPTERS > Chapter 10 and play to the end of the Gate Zero ending (after the Last Call fight). Check: while you talk the plane sits in the window, and after the long coat man leaves it pushes back and rolls left out of the window, leaving an empty runway. Report anything off with the REPORT tab.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added with c-gatezero."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   }
   }
  ],
  "sessions": [
