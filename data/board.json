@@ -356,7 +356,7 @@
    "theme": "Story and Dialogue",
    "lane": "claude",
    "col": "prog",
-   "next": "First writes the chapter 2 teardown list and shows you the questions marked ASK; builds only after you answer. Lines go in word for word from the locked file. One chapter per conversation. Start: claude/story-next.md.",
+   "next": "Not started: the locked chapter 2 script is not in the repo, so a START run cannot build from it. Waits on the script files being copied into claude/ (or starting this from a Project conversation). Then: write the chapter 2 teardown, show you the ASK questions, build after you answer.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-17",
@@ -392,6 +392,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "ended without shipping: this START run cannot read the Project, and the locked script claude/story-ch02-draft4.md (plus claude/story-engine-capabilities.md, claude/story-build.md, claude/story-line-rules.md, claude/next-addendum-ch1rebuild1.md) is not in the repo, only claude/story-next.md is. Nothing was written or built (the build never rewrites dialogue). It needs those files copied into the repo claude/ folder, or the card started from a conversation that has the Project attached."
     }
    ],
    "prompt": {
