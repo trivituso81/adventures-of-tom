@@ -13150,6 +13150,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom made a second card with the same words (c-idea-skippingscene): \"when skipping a scene, any interstitials that are not item retrieval or party members joining/leaving (eg displaying grace's list in scene 1) should be skipped as well\". Merged here; that card is retired to Done."
     }
    ],
    "prompt": {
@@ -16522,10 +16526,10 @@
    "id": "c-idea-skippingscene",
    "tag": "idea-skippingscene",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Story and Dialogue",
    "title": "When skipping a scene, any interstitials that are not item",
-   "next": "Your idea: when skipping a scene, any interstitials that are not item retrieval or party members joining/leaving (eg displaying grace's list in scene 1) should be skipped as well Copy the prompt into a new conversation in the Project on Haiku 5.5, effort low.",
+   "next": "Retired (duplicate): covered by c-idea-skippingcut. The SKIP rule for Grace's list in chapter 1 scene 1 already shipped in c-skipchain1.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -16537,7 +16541,7 @@
     "rule": "Claude Haiku 5.5, low"
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGs4KxT1N7oixmRdtw",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -16555,6 +16559,14 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-20T21:31:01.076Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Answer: yes, this is the rule to build. Grace's list in chapter 1 scene 1 is already skipped (c-skipchain1, shipped). For other cut scenes, the board records that interstitials still play on SKIP; the build is c-idea-skippingcut (Sonnet 5.5, medium), which never skips party joins or leaves. Nothing changed in the game."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Retired to Done: duplicate of c-idea-skippingcut, which holds Tom's words and the build."
     }
    ],
    "prompt": {
@@ -16565,7 +16577,8 @@
     "model": "Claude Haiku 5.5 (row A: a question, nothing changes)",
     "effort": "low (a lookup)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-skippingscene in data/board.json, history included. Your first push is the commit board: start c-idea-skippingscene.\n\nTom made this card himself with New card on the board. His words: \"when skipping a scene, any interstitials that are not item retrieval or party members joining/leaving (eg displaying grace's list in scene 1) should be skipped as well\"\n\nThe board sized this from his words alone: Claude Haiku 5.5 (row A: a question, nothing changes), effort low (a lookup). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nThis is a question. Answer it in the chat in a few plain sentences, change nothing in the game, write the answer as a history line on this card and move it to Done. Push only the board change. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "done": "2026-11-20"
   }
  ],
  "sessions": [
