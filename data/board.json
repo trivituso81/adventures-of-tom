@@ -6622,6 +6622,38 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch1starving and t-ch1starving in data/board.json, history included. Your first push is the commit board: start c-fix-ch1starving.\n\nTom tested and found problems:\n1. Card t-ch1starving (Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\", ask voice). He was asked: ADMIN ) VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. The script you kept ends \"I'm starving!\" but the clip stops after \"number two can't wait.\" Record it again so it says the last sentence, keep it, and Export pending clips. If you would rather drop \"I'm starving!\", delete it from the script and keep the take as it is. He wrote: i want to drop it - that's why it's not there. you delete it\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T03:51:06.694Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch1starving to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch1starving, and give the build fix-ch1starving a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-ch1starving"
+  },
+  {
+   "id": "c-bannerhold1",
+   "title": "A join or leave banner holds the game until you dismiss it",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "bannerhold1",
+   "next": "Building: while a party join or leave banner is up, nothing else can be done (no walking, no menu, no talking, scenes wait) until you tap, press A or Enter, or press a gamepad button. Several banners still show one at a time, each needs its own dismiss.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukH1kiCGvEazM1ZG22h",
+    "opening": "\"i cant find the change where we said nothing can be done when a character join/leave banner is displayed until the user dismisses it.\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Tom: nothing can be done when a character join/leave banner is displayed until the user dismisses it. Checked the board, docs/CHANGES.md, the Project notes and engine/party-banner.js: the rule was never built (banners were non-blocking and faded after 2.6 s). New card."
+    }
+   ],
+   "prompt": {
+    "what": "Makes a party join or leave banner hold the whole game until dismissed, then tests it in portrait and landscape.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the input paths must be found first, tests catch mistakes)",
+    "effort": "medium (one small engine change plus one test)",
+    "text": "Read claude/handoff-rules.md, then build bannerhold1: while a party join or leave banner (engine/party-banner.js) is on screen nothing else can be done until Tom dismisses it with a tap, A, Enter, Space or a gamepad button; the world and scenes wait; queued banners each need their own dismiss. Test portrait and landscape. You have my full permission to access the repo."
+   },
+   "after": "nothing for Tom: end"
   }
  ],
  "sessions": [
