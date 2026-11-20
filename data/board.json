@@ -11831,7 +11831,7 @@
    "title": "Remove the ;) from the taxi opening line",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as gem-polish01: the ;) is gone from the taxi opening line. Nothing to do.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -11857,6 +11857,10 @@
     {
      "d": "2026-11-20",
      "t": "Confirmed on main, removed the ;) from the taxi opening line (build gem-polish01). No re-bake: the baked clip never matched this line."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-polish01: The taxi opening line no longer shows a text smiley"
     }
    ],
    "tag": "gem-polish01",
@@ -11869,7 +11873,8 @@
     "effort": "low (one known edit)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-polish01 in data/board.json, history included. Your first push is the commit board: start c-gem-polish01.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is POLISH-01. What the tester saw: Where: Taxi Co. Exterior (Line 1). Spoken dialogue box contains a literal text emoticon: `\"...on Delta One! ;)\"`\n\nThe tester suggested (a suggestion, not an order): Remove `;)` from spoken dialogue boxes.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-polish01, push to main, and write the result and the next step onto the card.\n\nIf CANON-01 (card gem-canon01) rewrites this line first, retire this card. A spoken line that changes loses its baked voice clip, so say that it needs a re-bake and add nothing unused (CLAUDE.md No unused voice).\n\nYou have my full permission to access the repo."
    },
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-20"
   },
   {
    "id": "c-gem-polish02",
@@ -12683,7 +12688,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEr3zRmZS5WgoQeWYc",
+    "url": "https://claude.ai/code/session_01RXeukEr3zRmZS5WgoQeWYc",
     "opening": "Something is wrong on t-gem-canon01play"
    },
    "history": [
@@ -12705,6 +12710,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -12724,7 +12733,7 @@
    "id": "c-idea-reviewwhatever",
    "tag": "idea-reviewwhatever",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Tools",
    "title": "Review whatever effect is happening to characters in the",
    "next": "Your idea: we need to review whatever effect is happening to characters in the overworld in respond to conversation and emotions. id like to understand the exhaustive list of effects, what triggers each, and a w... Claude starts it by itself.",
@@ -12739,7 +12748,7 @@
     "rule": "Claude Sonnet 5.5, medium"
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukGidKHGEzvhoUBytRY",
     "opening": "New card by Tom on the board"
    },
    "history": [
@@ -12757,6 +12766,10 @@
      "d": "2026-11-20",
      "t": "Auto-start: START can run this size, so it starts by itself.",
      "at": "2026-11-20T17:10:28.085Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -12769,7 +12782,7 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-reviewwhatever in data/board.json, history included. Your first push is the commit board: start c-idea-reviewwhatever.\n\nTom made this card himself with New card on the board. His words: \"we need to review whatever effect is happening to characters in the overworld in respond to conversation and emotions. id like to understand the exhaustive list of effects, what triggers each, and a way to preview them somewhere in Admin\"\n\nThe board sized this from his words alone: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort medium (a small piece). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nDesign it yourself and make the calls: Tom does not pick between options. Ask one short question only if a choice cannot be undone or is expensive to redo. Build it, test it, look at the frames in portrait and landscape, and push build idea-reviewwhatever with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). You have my full permission to access the repo."
    },
    "auto": true,
-   "start": true
+   "started_at": "2026-11-20T17:12:12+00:00"
   },
   {
    "id": "c-idea-skippingcut",
@@ -12817,6 +12830,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukEr3zRmZS5WgoQeWYc",
+   "title": "Fix: Play the new chapter 1 opening in the taxi office",
+   "first": "2026-11-20T17:10:49Z",
+   "last": "2026-11-20T17:10:49Z",
+   "tags": [],
+   "cards": [
+    "c-fix-gem-canon01play"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDNJ7iWP5DDvKaTnnD",
    "title": "Rebuild Grace's other slowed lines from your takes",
@@ -13079,6 +13102,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEpcBb8S5f8oaA1rho",
+   "title": "Remove the ;) from the taxi opening line",
+   "first": "2026-11-20T08:58:59-08:00",
+   "last": "2026-11-20T09:11:44-08:00",
+   "tags": [
+    "gem-polish01"
+   ],
+   "cards": [
+    "c-gem-polish01"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukER5KXdV8sp6XLkaer",
    "title": "Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub)",
    "first": "2026-11-20T08:50:18Z",
@@ -13161,16 +13196,6 @@
    ],
    "cards": [
     "c-gem-canon01"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEpcBb8S5f8oaA1rho",
-   "title": "Remove the ;) from the taxi opening line",
-   "first": "2026-11-20T08:58:59-08:00",
-   "last": "2026-11-20T08:58:59-08:00",
-   "tags": [],
-   "cards": [
-    "c-gem-polish01"
    ]
   },
   {
@@ -14377,8 +14402,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "cd793d706cd59c525f653e1b74623e66a1deb6e0",
- "synced_at": "2026-11-20T17:10:06+00:00",
+ "synced": "97fb9464f13ceeb392661b0daa0d89208da8034d",
+ "synced_at": "2026-11-20T17:12:12+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
