@@ -15672,7 +15672,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukEDERsWxc2T9srXWo7",
+    "url": "https://claude.ai/code/session_01RXeukEDERsWxc2T9srXWo7",
     "opening": "not started"
    },
    "history": [
@@ -15730,6 +15730,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "blocks": [],
@@ -16798,7 +16802,7 @@
   {
    "id": "t-keysecrets2-try",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -16843,9 +16847,12 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: i got an error This clip is already approved. Reject it first (Battle Lab REVIEW) to make another. why cant i gerneate a new one just cause theres one approved? that shouldnt be Sent to Claude as card c-fix-keysecrets2-try-2; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T22:50:51.999Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-fix-keysecrets2-try",
@@ -16962,7 +16969,7 @@
    "id": "c-fix-keysecrets2-try-2",
    "tag": "fix-keysecrets2-try-2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Try GENERATE VIDEO on one clip",
@@ -16984,7 +16991,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukCf5dxEs5Zj4xH87pM",
+    "url": "https://claude.ai/code/session_01RXeukCf5dxEs5Zj4xH87pM",
     "opening": "Something is wrong on t-keysecrets2-try"
    },
    "history": [
@@ -17011,6 +17018,14 @@
      "d": "2026-11-20",
      "t": "Fix shipped: a press on an approved clip now makes a new version that replaces it (page and clip-gen job). No pencil report matched.",
      "at": "2026-11-20T23:05:00.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-keysecrets2-try-2: GENERATE VIDEO works on a clip that is already approved"
     }
    ],
    "prompt": {
@@ -17024,10 +17039,33 @@
    },
    "after": "t-keysecrets2-try",
    "auto": true,
-   "started_at": "2026-11-20T22:51:02+00:00"
+   "started_at": "2026-11-20T22:51:02+00:00",
+   "done": "2026-11-20"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukCf5dxEs5Zj4xH87pM",
+   "title": "Fix: Try GENERATE VIDEO on one clip",
+   "first": "2026-11-20T22:55:41Z",
+   "last": "2026-11-20T22:55:51Z",
+   "tags": [
+    "fix-keysecrets2-try-2"
+   ],
+   "cards": [
+    "c-fix-keysecrets2-try-2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEDERsWxc2T9srXWo7",
+   "title": "Fix the report backlog (22 open)",
+   "first": "2026-11-20T22:55:38Z",
+   "last": "2026-11-20T22:55:38Z",
+   "tags": [],
+   "cards": [
+    "c-reports-5"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukELMZXjj5p7XhpH4Rn",
    "title": "Fix: Try GENERATE VIDEO on one clip",
@@ -19283,8 +19321,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "7bbf62ee8b85281a4568bc26871f836108b73055",
- "synced_at": "2026-11-20T22:52:34+00:00",
+ "synced": "379f00dc39800e8fc6224c2466c127cc54e5ca65",
+ "synced_at": "2026-11-20T22:55:56+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
