@@ -601,7 +601,7 @@
    "title": "New battle system, stage 9: first late joiners and the next kits",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Builds stage 9 as the architecture section 5 row 9 says. Read that row, claude/battle-kit-ops.md, docs/BATTLE3.md and docs/handoff/b3s8.md. Milestone A notes from Tom are handled first.",
    "blocks": [],
    "changed": "2026-11-19",
@@ -622,6 +622,10 @@
     {
      "d": "2026-11-19",
      "t": "Started. Tom's testing notes come first: \"I don't like the skill description at the top above the character bars. When tapping a skill it should hide the other skills, show all the information about that skill, then 2 buttons one Back and the other Use. On the view that lists the skills, the clobber support etc should be changed to an icon. The pep used should be more prominent\""
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -1088,6 +1092,16 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGt8KJKK4iu2gwLNP2",
+   "title": "New battle system, stage 9: first late joiners and the next kits",
+   "first": "2026-11-19T17:00:46-08:00",
+   "last": "2026-11-19T17:00:46-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3s9"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFYTc9P9AapwKc6ZEM",
    "title": "START button: one tap on a card opens the conversation for you (board3)",
    "first": "2026-11-19T16:34:00-08:00",
@@ -1149,8 +1163,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "e3911b135ff01208bf7132a87e009866fef7c535",
- "synced_at": "2026-11-20T00:42:59+00:00",
+ "synced": "56ebb390175ad3b4dd1053b51d2fc300784c7e0a",
+ "synced_at": "2026-11-20T01:01:33+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
