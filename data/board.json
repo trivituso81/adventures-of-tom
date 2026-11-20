@@ -15459,16 +15459,15 @@
    "title": "Install the listening poses",
    "theme": "Characters",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "tag": "listen1",
    "auto": true,
-   "waiting_on": "tom",
    "next": "Waits on your approvals of the 7 listening poses. Then it cuts the approved pictures into the game so chapter 1 listeners show the listening pose, tests every chapter 1 scene in portrait and landscape, and hands you a play card.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukEDvcHmfTiPvEWMzm2",
+    "url": "https://claude.ai/code/cse_01RXeukFVfSKr5GPp8cLJbDZ",
     "opening": "not started"
    },
    "history": [
@@ -15476,6 +15475,18 @@
      "d": "2026-11-20",
      "t": "Added by idea-implementlisteni (card c-idea-implementlisteni). Steps, tests and what is already built: claude/next-addendum-listen1.md.",
      "at": "2026-11-20T20:10:00.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Generate and approve the 7 listening poses is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom answered, so this card starts by itself."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -15486,7 +15497,8 @@
     "model": "Claude Sonnet 5.5 (row B: every step, command and test is written in claude/next-addendum-listen1.md, and tests catch mistakes)",
     "effort": "medium (the steps are known)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/next-addendum-listen1.md, then card c-listen1-install in data/board.json with its history and the notes on card t-listen1-pics. Your first push is the commit board: start c-listen1-install. Install only the listening pictures that are approved, exactly as the addendum's Install steps say: cut them, bake the story poses (put back the rebake drift), add their facing rows after looking at each frame, run tools/listen_cases.json through LATE=1 tools/reaction_test.py and tools/listen_report.py --standin until it reports 0 misses, look at the frames in portrait and landscape, then push build listen1 with a docs/CHANGES.md heading. Create the Tom card t-listen1-play (ask play: start chapter 1 from chapter select, watch the kitchen and the grey patch, people who are not talking should stand listening or thinking) and set this card's after to it. A picture that is rejected stays out; say which. Spend nothing on xAI. You have my full permission to access the repo."
-   }
+   },
+   "started_at": "2026-11-20T19:40:07+00:00"
   },
   {
    "id": "c-reports-5",
@@ -17534,8 +17546,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "4f1229b779b0828dc50a3fce04de482297ba632a",
- "synced_at": "2026-11-20T19:31:39+00:00",
+ "synced": "ddcddcc8dbb406e1fedd8b74ade2f2b52966ebb4",
+ "synced_at": "2026-11-20T19:40:07+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
