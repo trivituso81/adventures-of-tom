@@ -1,6 +1,6 @@
-## artgen1b (2026-11-20): art-gen no longer checks out art/raw (its checkout took minutes)
+## artgen1c (2026-11-20): art-gen checks out only the files it reads (the checkout took minutes)
 
-- `.github/workflows/art-gen.yml` checks out only data, tools and .github; reference pictures are read from git on demand. Nothing else changed.
+- `.github/workflows/art-gen.yml` checks out only data/art-prompts.json, data/board.json, tools/art-library and .github; reference pictures are read from git on demand. Nothing else changed.
 
 ## artgen1 (2026-11-20): Generate all pictures from a board card, made on GitHub for you to review in the Art Library
 

@@ -50,10 +50,12 @@ jobs:
         with:
           fetch-depth: 1
           filter: blob:none
+          sparse-checkout-cone-mode: false
           sparse-checkout: |
-            data
-            tools
-            .github
+            /data/art-prompts.json
+            /data/board.json
+            /tools/art-library/
+            /.github/
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
