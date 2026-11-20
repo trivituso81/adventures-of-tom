@@ -1414,6 +1414,37 @@
     "effort": "medium (each clip is a small edit of a prompt that exists)",
     "text": "Read claude/next-addendum-clipch1fix.md, claude/next-addendum-clipgen2.md and the card c-clipch1remake history on the board. The gate held 27 Chapter 1 clips in clip-gen run 44652080732 (reasons are in its log, videos on branch clipgen). Group the 27 by reason. Some reasons are generator drift (size, feet, forward dodge) and some are the prompt (hit does not stumble, KO does not look dizzy, guard does not raise forearms, idle blink too slow). Fix each with the smallest change to its MOTION in tools/art-library/clip-prompts.js, name what you kept and what you changed, stop if the same fault comes back twice (stop-loss rule), run node tools/art-library/clip-prompts.js, run the clip-gen Action for Chapter 1 with dry_run=false and cap 3, wait for it and the art-bake, look at the baked frames, and put a CHAPTER 1 REVIEW card for the remade clips on the board. Build tag clipch1held. You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "c-ch1nodoor",
+   "title": "Cut the door frame beat from chapter 1 (ch1nodoor)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "prog",
+   "next": "Cut the kitchen door frame height-marks beat from chapter 1 everywhere (scene step, close-up picture, Art Library entry, docs). Tom: \"cut the door frame height-marks beat from chapter 1 everywhere. It is a silent look nobody reads\".",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "tag": "ch1nodoor",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFcedNR3ccwPBafb9k",
+    "opening": "\"Board: updates card t-ch1play. Tom's decision 2026-11-19 17:27: cut the door frame height-marks beat from chapter 1 everywhere.\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "New card. Tom, 17:27: cut the door frame height-marks beat from chapter 1 everywhere; Grace's \"everything you missed\" list already plants his fear of missing the girls growing up."
+    }
+   ],
+   "prompt": {
+    "what": "Removes the door frame close-up beat from chapter 1 and everything that only existed for it.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written, tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Remove the door frame height-marks beat from SCENES.ch1Theft, retire Art Library entry ch1-doorframe and its close-up files, update the docs and canon addendum, play chapter 1 in portrait and landscape, run smoke, tag_check, unused_voice and board_check, and push build ch1nodoor. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [
