@@ -15776,7 +15776,7 @@
    "col": "wait",
    "ask": "play",
    "fyi": true,
-   "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1. Play the kitchen at Grandma's (the home scene at the start), then the Square sign and the grey patch. You should see everyone who is not talking stand listening (hands loosely together, face turned a little toward the speaker) or thinking (hand at the chin). Tom while he carries Rose keeps his ride picture. Press All good, or Something is wrong and say which scene and person.",
+   "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1. Play Deedee's kitchen (the scene where Boppy tells the bread story and the Mudling throws mud), then Boppy's fishing spot (the grey patch). You should see everyone who is not talking stand listening (hands loosely together, face turned a little toward the speaker) or thinking (hand at the chin). Tom while he carries Rose keeps his ride picture. Press All good, or Something is wrong and say which scene and person.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -15789,6 +15789,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: theres no one in the story named Grandma so i cant read this Sent to Claude as card c-fix-listen1-play; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T20:12:16.298Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Wording fix (fix-listen1-play): the steps said \"Grandma's\" and the story has no one by that name; the kitchen is Deedee's. The Square sign is dropped from the steps (no one is listening there)."
     }
    ],
    "waiting_on": "claude"
@@ -15849,6 +15853,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fixed: the test steps on t-listen1-play named the wrong place (Grandma's); they now say Deedee's kitchen and Boppy's fishing spot."
     }
    ],
    "prompt": {
