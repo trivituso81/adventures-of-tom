@@ -15859,6 +15859,37 @@
    },
    "after": "nothing for Tom: end",
    "started_at": "2026-11-20T20:52:23+00:00"
+  },
+  {
+   "id": "c-reporttype1",
+   "tag": "reporttype1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Game Shell",
+   "title": "Fix typing in the REPORT box (keys act like game hotkeys)",
+   "next": "Fixing now: the welcome screen, Vibes, close-up and banner key handlers ran before the REPORT box's key guard, so letters moved menus and took focus.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDPY2qNnB59RAn67mF",
+    "opening": "\"when i try to type in the report tool, its acting like hotkeys and taking the focus out of the report text box\""
+   },
+   "prompt": {
+    "what": "Stops game hotkeys from firing while Tom types in the REPORT box.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a bug fix, cause worked out in session)",
+    "effort": "medium (one file, cause known)",
+    "text": "Read CLAUDE.md and card c-reporttype1 in data/board.json, then finish what its history describes and push build reporttype1. You have my full permission to access the repo."
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: \"when i try to type in the report tool, its acting like hotkeys and taking the focus out of the report text box and making changes to the scren, leaving the tool unsuable to me.\""
+    }
+   ]
   }
  ],
  "sessions": [
