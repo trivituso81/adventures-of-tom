@@ -9140,7 +9140,7 @@
    "title": "An ITEM GAINED banner for items from talks and wins",
    "theme": "Game Shell",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "itembanner1",
    "next": "Not started. Builds a banner like the join and leave banner that shows every time the party gets an item by talking to a character or by defeating one (a fight win, or any other way of beating them): the item's picture and name, a short jingle, held until you tap or press A. It replaces the small 'Got ... It went in a pocket.' popup for those cases. No new pictures or recordings are needed from you.",
    "blocks": [],
@@ -9174,6 +9174,10 @@
     {
      "d": "2026-11-20",
      "t": "Built itembanner1: ITEM GAINED banner for gifts, talks and fight drops; hands to t-itembannerplay."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as itembanner1: An ITEM GAINED banner shows when the party gets an item from a talk, a gift or a defeated monster"
     }
    ],
    "prompt": {
@@ -9185,7 +9189,8 @@
     "effort": "medium (a small piece, modelled on the existing party banner)",
     "text": "Read CLAUDE.md, then build card c-itembanner1 (build itembanner1) from data/board.json: an ITEM GAINED banner in the style of the join and leave banner (engine/party-banner.js), shown every time the party gets an item from a conversation or scene with a character (grantItem in data/party.js, the give step in engine/story.js, NPC onClose gifts, data/ellie-quests.js, engine/nara.js) or from defeating a character by any means (fight rewards in the old battle and in Battle 3, and story defeats). It shows the item's existing picture and name with a short original jingle, holds the game until dismissed exactly like the party banner, queues behind party banners, and puts several items from one source on one banner. It replaces the 'Got ... It went in a pocket.' popup for these cases; keep the auto-gear note as the banner's second line. Shop purchases keep their current message. Reuse the party banner's code where possible. Add a test in portrait and landscape and a Tom play card as the after. You have my full permission to access the repo."
    },
-   "after": "t-itembannerplay"
+   "after": "t-itembannerplay",
+   "done": "2026-11-20"
   },
   {
    "id": "b-board-itembanner",
@@ -9305,8 +9310,7 @@
   {
    "id": "t-itembannerplay",
    "lane": "tom",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Game Shell",
    "ask": "play",
    "fyi": true,
@@ -9324,11 +9328,27 @@
     {
      "d": "2026-11-20",
      "t": "Added by c-itembanner1: Tom's play check of the new banner."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: nothing was left for it to wait on."
     }
    ]
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukH6yUh6dbf3JPguMqy",
+   "title": "An ITEM GAINED banner for items from talks and wins",
+   "first": "2026-11-20T09:11:42Z",
+   "last": "2026-11-20T09:16:54Z",
+   "tags": [
+    "itembanner1"
+   ],
+   "cards": [
+    "c-itembanner1"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDEhxpGxy5knknCF2p",
    "title": "Board redesign 3: four views, search and the wide layout",
@@ -9351,16 +9371,6 @@
    "cards": [
     "c-artgen2",
     "t-artgen2look"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukH6yUh6dbf3JPguMqy",
-   "title": "An ITEM GAINED banner for items from talks and wins",
-   "first": "2026-11-20T09:11:42Z",
-   "last": "2026-11-20T09:11:42Z",
-   "tags": [],
-   "cards": [
-    "c-itembanner1"
    ]
   },
   {
@@ -9683,6 +9693,16 @@
    "cards": [
     "c-starttest",
     "c-copydocs"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCrBsMaC1DBnh8HB8R",
+   "title": "Rebuild the muffin theft scene in Deedee's kitchen",
+   "first": "2026-11-20T01:17:42-08:00",
+   "last": "2026-11-20T01:17:42-08:00",
+   "tags": [],
+   "cards": [
+    "c-heist1"
    ]
   },
   {
@@ -10421,8 +10441,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "50c0a56227b82327150e3a2abea1d87eb91a4885",
- "synced_at": "2026-11-20T09:14:41+00:00",
+ "synced": "b25f4c5a07e1fc450725d1261efb8cb31d05f671",
+ "synced_at": "2026-11-20T09:17:48+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
