@@ -16231,7 +16231,7 @@
   {
    "id": "c-keysecrets2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "tag": "keysecrets2",
    "title": "Art Library videos through repo secrets",
@@ -16274,10 +16274,15 @@
      "d": "2026-11-20",
      "t": "Built keysecrets2 (not run for real): request file, clip-gen --requests, clipPoll, key and Relay boxes and the browser video code purged; tests keysecrets2_test, clip_batch_test (rewritten), clip_lib_test, clipgen_test (request mode), keysecrets_test pass. clipgen_test has one check that already failed on clean main.",
      "at": "2026-11-20T22:00:00Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as keysecrets2: Art Library videos are made by GitHub with the repo secret; the xAI key box and the Relay box are gone"
     }
    ],
    "started_at": "2026-11-20T21:23:32+00:00",
-   "after": "t-keysecrets2-try"
+   "after": "t-keysecrets2-try",
+   "done": "2026-11-20"
   },
   {
    "id": "c-keysecrets3",
@@ -16767,9 +16772,61 @@
      "t": "Created by c-keysecrets2."
     }
    ]
+  },
+  {
+   "id": "svc-clip-gen",
+   "tag": "svc-clip-gen-fix",
+   "service": "clip-gen",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "claude",
+   "theme": "Tools",
+   "title": "clip-gen failed",
+   "next": "The clip-gen run failed: finished as skipped. A session has to look at the run log and fix it.",
+   "run": "https://github.com/trivituso81/adventures-of-tom/actions/runs/44823941318",
+   "prompt": {
+    "what": "Finds why the clip-gen run failed and fixes it.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md. The clip-gen GitHub Action failed (finished as skipped). Open the run log at https://github.com/trivituso81/adventures-of-tom/actions/runs/44823941318, fix the cause, and run it again. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   },
+   "chat": {
+    "url": "",
+    "opening": "service run"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "clip-gen failed: finished as skipped"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Re-run failed to start: GitHub answered 403"
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reruns": 1,
+   "rerun_at": "2026-11-20T21:52:08+00:00"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukGhbJajd4cUkbJiFVv",
+   "title": "Art Library videos through repo secrets",
+   "first": "2026-11-20T21:26:18Z",
+   "last": "2026-11-20T21:51:06Z",
+   "tags": [
+    "keysecrets2"
+   ],
+   "cards": [
+    "c-keysecrets2"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukCYMKUG2mJbWxJECYC",
    "title": "Purge Rhubarb Crisp from the game everywhere",
@@ -16802,16 +16859,6 @@
    "tags": [],
    "cards": [
     "t-welcomepage-request"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGhbJajd4cUkbJiFVv",
-   "title": "Art Library videos through repo secrets",
-   "first": "2026-11-20T21:26:18Z",
-   "last": "2026-11-20T21:26:18Z",
-   "tags": [],
-   "cards": [
-    "c-keysecrets2"
    ]
   },
   {
@@ -18979,8 +19026,8 @@
    "takes/20261120T213706-d43/state.json"
   ]
  },
- "synced": "fdd2f32e55e6899428fcc9673e8c994fd021d4bc",
- "synced_at": "2026-11-20T21:43:08+00:00",
+ "synced": "64e73b4f23f976c1a75509a80864ed799caa48c3",
+ "synced_at": "2026-11-20T21:52:08+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
