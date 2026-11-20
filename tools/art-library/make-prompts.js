@@ -20,12 +20,15 @@ ENTRIES.push(require('./enemy-prompts.js').gridTest('grump', 'art/raw/enemies/te
 ENTRIES.push(require('./enemy-prompts.js').gridShort('grump', 'art/raw/enemies/test-one-mudling-stance-v1.png'));   // short-prompt A/B (11-05 15:50)   // one sheet, matte finish copied from an approved picture (11-05 15:30)
 ENTRIES.push(...[['mudling', 1], ['grump', 1], ['bigshake', 1]].map(([i, k]) => require('./enemy-prompts.js').buildOne(i, k)), require('./enemy-prompts.js').buildOne('mudling', 4, 'art/raw/enemies/test-one-mudling-stance-v1.png'));   // one pose per picture tests (11-05 14:55)   // test card: 2 x 2 grid over a soft underpainting (11-05 14:50)
 // One module per tab group, each exports { entries }. A module that does not exist yet is skipped.
-for (const m of ['party-prompts', 'party2-prompts', 'npc-prompts', 'enemy-prompts', 'area-prompts', 'room-prompts', 'dungeonfind-prompts', 'trail-prompts', 'bubble-prompts', 'ending-prompts', 'gate-prompts', 'battle-prompts', 'walk-sheet-prompts', 'title-prompts', 'portrait-prompts', 'flight-prompts', 'cathy-prompts', 'closeup-prompts', 'closeup2-prompts', 'gatezero-plane-prompts', 'tomride-prompts', 'tomstretch-prompts', 'tomintro-prompts', 'amber-prompts', 'ch01-prompts', 'ch02-05-prompts', 'ch06-prompts', 'ch07-prompts', 'ch08-prompts', 'talk-prompts', 'ch2fix-prompts', 'partybanner-prompts']) {
+for (const m of ['party-prompts', 'party2-prompts', 'npc-prompts', 'enemy-prompts', 'area-prompts', 'room-prompts', 'dungeonfind-prompts', 'trail-prompts', 'bubble-prompts', 'ending-prompts', 'gate-prompts', 'battle-prompts', 'walk-sheet-prompts', 'title-prompts', 'portrait-prompts', 'flight-prompts', 'cathy-prompts', 'closeup-prompts', 'closeup2-prompts', 'gatezero-plane-prompts', 'tomride-prompts', 'tomstretch-prompts', 'tomintro-prompts', 'amber-prompts', 'ch01-prompts', 'ch02-05-prompts', 'ch06-prompts', 'ch07-prompts', 'talk-prompts', 'ch2fix-prompts', 'partybanner-prompts']) {
   if (fs.existsSync(__dirname + '/' + m + '.js')) ENTRIES.push(...require('./' + m + '.js').entries);
 }
 // Every entry gets a `group` (the collapsible section inside its tab in art.html), derived by groups.js from its id and title. An entry that sets its own `group` keeps it.
 const { groupOf } = require('./groups.js');
 for (const e of ENTRIES) if (!e.group) e.group = groupOf(e);
+// idea-checkart (2026-11-20): ids listed in retired-ids.json are not needed any more (Tom: delete them). A rebuild must not bring them back.
+const RETIRED = new Set(require('./retired-ids.json').ids);
+for (let i = ENTRIES.length - 1; i >= 0; i--) if (RETIRED.has(ENTRIES[i].id)) ENTRIES.splice(i, 1);
 const keep = Object.fromEntries(old.map(e => [e.id, e]));
 const entries = ENTRIES.map(e => ({ status: 'draft', versions: [], rejects: [], ...(keep[e.id] ? { status: keep[e.id].status, versions: keep[e.id].versions || [], rejects: keep[e.id].rejects || [] } : {}), ...e, status: keep[e.id] ? keep[e.id].status : 'draft' }));
 fs.writeFileSync(out, JSON.stringify({ version: 1, entries }, null, 1) + '\n');

@@ -8441,7 +8441,7 @@
    "col": "done",
    "ask": "play",
    "fyi": true,
-   "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. Open the game, Chapter Select, and play chapters 2, 6 and 7. Chapter 7 and chapter 8 art is made in the Art Library groups Chapter 7 and Chapter 8 (press GENERATE, then APPROVE on each picture).",
+   "next": "Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. Open the game, Chapter Select, and play chapters 2, 6 and 7.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -8457,22 +8457,6 @@
     {
      "d": "2026-11-20",
      "t": "Retired by boardwait1: chapters 2, 6 and 7 are past chapter 1. Tom (11-20, on t-oldchecks-voice): \"I don't wanna deal with any bugs past chapter 1 right now\"."
-    }
-   ],
-   "links": [
-    {
-     "to": "art",
-     "ids": [
-      "ch7-stacks-grey",
-      "ch8-yard-grey",
-      "ch8-potluck-day",
-      "ch8-potluck-night",
-      "ch8-orange-block",
-      "ch8-coin",
-      "ch8-notice",
-      "ch8-rosebush"
-     ],
-     "label": "chapter 7 and 8 art to make"
     }
    ],
    "done": "2026-11-20"

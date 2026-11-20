@@ -13,8 +13,7 @@ const CAST = [
   ['deedee', 'Deedee', 'an older woman, Tom\'s mom, baker and gardener, a loving smile', 'height 5\'5"'],
   ['boppy', 'Boppy', 'an older man, Tom\'s dad, fisherman, a wry grin', 'height 5\'7"'],
   ['ellie', 'Aunt Ellie', 'an older woman, Tom\'s aunt, kind and sharp-eyed (height assumed 5\'2")', 'height 5\'2" assumed'],
-  ['nara', 'Nara', 'a friendly dog, head and chest, ears up, happy open mouth', 'a dog'],
-  ['boomie', 'Boomie', 'a young woman, Tom\'s friend, a gospel and soul singer, a warm radiant smile', 'an adult']
+  ['nara', 'Nara', 'a friendly dog, head and chest, ears up, happy open mouth', 'a dog']
 ];
 const entries = CAST.map(([id, name, who, h]) => ({
   id: 'portrait-' + id, tab: 'Portraits', ar: '1:1',
@@ -22,7 +21,4 @@ const entries = CAST.map(([id, name, who, h]) => ({
   refs: ['portraits/' + id + '.png', heroOf(id)],
   prompt: 'IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image, nothing else.\n\nThe first attached picture is the current menu portrait of ' + name + ': keep the same person, the same face, hair, skin tone, clothes colors and likeness. The second attached picture is the newest full-body painting of the same person: draw in exactly its style.\n\nPaint a square head-and-shoulders PORTRAIT of ' + name + ', ' + who + '. A realistic caricature: an oversized head, a warm natural expression, eyes clearly readable, facing the viewer with the head turned slightly toward the right. The face fills about 70 percent of the picture height. 1024 x 1024 px, shrunk later to 64 px, so keep big simple shapes and a bold, clear face; nothing finer than about 8 px.\n\nSTYLE\n' + ST + '\n\nBACKGROUND\nA soft plain painted background in one warm muted color that suits ' + name + ', slightly darker toward the edges, full bleed to all four edges. No frame, no border, no text, no watermark. Only ' + name + ' in the picture.'
 }));
-// oldart1: Boomie's old menu portrait (portraits/boomie.png) is purged; her entry attaches her newest approved painting (npc-photo-boomie) once.
-{ const b = entries.find(e => e.id === 'portrait-boomie'), j = JSON.parse(require('fs').readFileSync('data/art-prompts.json', 'utf8')).entries.find(e => e.id === 'portrait-boomie');
-  if (b && j) { b.refs = j.refs.slice(); b.prompt = j.prompt; } }
 module.exports = { entries };

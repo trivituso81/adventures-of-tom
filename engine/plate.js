@@ -459,7 +459,7 @@ function drawSundialSpot(map,after) {
 // Soundstage 7, chapter 4 scene 8 (ch4Hat): once the lights are on, a circle of the floor has no colour, TNB's wardrobe table stands in it, and the
 // hero cowboy hat hangs in a beach-ball-sized orange block above the table. When the table is pulled away the block stays where it was in the air
 // (a faint shadow shows on the floor). All of it stays until the block is opened in chapter 6 (flag bb-stage7). The grey circle is a STAND-IN made in
-// code until the Library picture ch4-stage7-grey is approved; the table is drawn in code too. Centres in plate art px (64 per tile).
+// code; the table is drawn in code too. Centres in plate art px (64 per tile).
 // Block from art/props/stage7/ch4_block.webp (tools/art-library/bake_story_ch4.py).
 const STAGE7_GREY={cx:590,cy:625,r:178}, STAGE7_BLOCK={x:590,y:528,w:118}, STAGE7_TABLE={x:590,y:624,w:156,slide:-150};
 let ch4TableTo=0, ch4TableAt=0, ch4TableT=0;

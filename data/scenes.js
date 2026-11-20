@@ -1697,7 +1697,7 @@ SCENES.ch4Rig=[
 ];
 // 8b. The floor of Soundstage 7 with the lights on (story-ch04.md scene 8): a circle with no colour, TNB's table in it, and the hero cowboy hat
 // frozen on its stand in a beach-ball-sized orange block. Tom knows the signs now. TNB moves the table; the block stays in the air.
-// Drawn by drawStage7Spot (engine/plate.js): the grey circle is a stand-in made in code until ch4-stage7-grey is approved.
+// Drawn by drawStage7Spot (engine/plate.js): the grey circle is a stand-in made in code.
 SCENES.ch4Hat=[
   {flag:'ch4-hat'},
   {call:()=>{ const m=currentMap.npcs.find(n=>n.monster==='extra'); if(m) { m.x=15; m.y=11; m.move=null; m.path=[]; } }},   // the trench-coat extra wanders off to the right so the floor is clear

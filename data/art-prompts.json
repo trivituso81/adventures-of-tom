@@ -8425,8 +8425,17 @@
    ]
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/chars/amy-battle.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/chars/amy-battle.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "amy-battle-stance-1",
    "tab": "Characters",
@@ -8441,8 +8450,17 @@
    "group": "Amy"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/chars/amy-battle.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/chars/amy-battle.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "amy-battle-stance-2",
    "tab": "Characters",
@@ -8491,8 +8509,17 @@
    ]
   },
   {
-   "status": "rejected",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/chars/justin-battle.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/chars/justin-battle.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [
     {
      "date": "2026-11-09",
@@ -8514,8 +8541,17 @@
    "group": "Justin"
   },
   {
-   "status": "rejected",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/chars/justin-battle.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/chars/justin-battle.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [
     {
      "date": "2026-11-09",
@@ -8728,8 +8764,17 @@
    ]
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/chars/olivia-battle.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/chars/olivia-battle.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "olivia-battle-stance-1",
    "tab": "Characters",
@@ -8824,44 +8869,6 @@
    ]
   },
   {
-   "status": "rejected",
-   "versions": [],
-   "rejects": [
-    {
-     "date": "2026-11-09",
-     "note": "not needed",
-     "from": "v2",
-     "at": 1794250782937
-    }
-   ],
-   "id": "michael-battle-stance-1",
-   "tab": "Characters",
-   "title": "Michael battle stance sheet 1, 8 frames 4 x 2 (new; copies his hero and walk sheet)",
-   "ar": "2:1",
-   "refs": [
-    "art/raw/characters/michael-hero-ref-v1.png",
-    "art/raw/characters/michael-walking-sheet-v1.png",
-    "art/raw/characters/tom-battle-stance-1-v2.png"
-   ],
-   "prompt": "Draw one battle sheet of the character in the attached pictures, for a family role-playing game.\n\nPicture 1 is the character, Michael. Picture 2 is his walk sheet. Picture 3 is a battle sheet of a different character: copy only its grid layout, its viewing angle (a three-quarter view from slightly above, facing an opponent), its figure size and its feet on one ground line, never the person. Copy picture 1 and picture 2 as exactly as possible in every frame: the same person, face, age, body, hair, clothes, shoes, colors, painting style, level of detail and head size compared to the body.\n\nOne image, a grid of 4 columns by 2 rows of equal square cells (8 frames, numbered left to right, top to bottom), on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on one ground line, each figure well inside its cell with clear magenta margin. Every figure is full body, from the top of the hair to the soles of both shoes. In every frame he faces the same way as the character in picture 3. No grid lines, numbers, text, effects, shadows or props. Hands empty. Clothing never uses magenta.\n\n1. Ready stance, feet shoulder width apart, knees slightly bent, hands loose, a friendly, easygoing look.\n2. The same stance a moment later, chest risen with a breath, shoulders a little higher, one hand relaxed open.\n3. Standing tall, both hands on his hips, chin lifted, a playful unimpressed look.\n4. One arm stretched toward the opponent, palm up, presenting something, a small proud smile.\n5. Body twisted away from the opponent, arm pulled back, weight on the back leg, eyes narrowed, about to spring.\n6. Lunging far forward toward the opponent, arm at full reach, front knee bent, mouth open in a shout.\n7. Feet planted, both arms flung wide, chest out, chin up, announcing something big.\n8. Crouched low, forearms crossed in front of the chest and face, chin tucked, determined.\n\nDo not add frames, merge frames, repeat a pose or invent props. Family friendly.",
-   "group": "Michael"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "michael-battle-stance-2",
-   "tab": "Characters",
-   "title": "Michael battle stance sheet 2, 6 frames 3 x 2 (new; needs stance sheet 1 approved)",
-   "ar": "3:2",
-   "refs": [
-    "art/raw/characters/michael-hero-ref-v1.png",
-    "art/raw/characters/michael-battle-stance-1-v1.png"
-   ],
-   "prompt": "Draw a second battle sheet of the character in the attached pictures, for a family role-playing game.\n\nPicture 1 is the character, Michael. Picture 2 is his first battle sheet: this sheet must look like it was painted at the same time, with the same viewing angle, the same figure size, the same feet ground line and the same head size compared to the body. Copy the person exactly: the same face, age, body, hair, clothes, shoes, colors, painting style and level of detail.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells (6 frames, numbered left to right, top to bottom), on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet on one ground line (except when he is in the air), each figure well inside its cell with clear magenta margin. Every figure is complete, never cropped. In every frame he faces the same way as in picture 2. No grid lines, numbers, text, effects, shadows or props. Hands empty. Clothing never uses magenta.\n\n1. Startled flinch: body leaning back, head pulled back, eyes squeezed shut, one foot lifted off the ground.\n2. Tired: down on one knee, one hand resting on the knee, head lowered, out of breath, a weary but determined face.\n3. Napping: sitting slumped on the ground with legs stretched out in front, leaning back on one hand, head tilted, eyes closed, dizzy and sleepy.\n4. Cheering: one fist pumped high, the other hand on the hip, a big grin.\n5. Cheering: both fists overhead, laughing, up on the toes.\n6. Signature pose: one arm pointing straight at the opponent, the other hand on the hip, feet planted wide, a confident determined smile.\n\nDo not add frames, merge frames, repeat a pose or invent props. Family friendly.",
-   "group": "Michael"
-  },
-  {
    "status": "approved",
    "versions": [
     {
@@ -8938,8 +8945,17 @@
    ]
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/chars/nara-battle.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/chars/nara-battle.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "nara-battle-stance-1",
    "tab": "Characters",
@@ -8953,8 +8969,17 @@
    "group": "Nara"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/chars/nara-battle.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/chars/nara-battle.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "nara-battle-stance-2",
    "tab": "Characters",
@@ -13829,7 +13854,7 @@
    "group": "Nine Scoops"
   },
   {
-   "status": "rejected",
+   "status": "approved",
    "versions": [
     {
      "n": 1,
@@ -13879,6 +13904,14 @@
      "date": "2026-11-06",
      "from": "v24",
      "at": 1793935260448
+    },
+    {
+     "n": 7,
+     "file": "art/town.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/town.webp; marked approved by idea-checkart"
     }
    ],
    "rejects": [
@@ -14103,7 +14136,7 @@
    "group": "The Square"
   },
   {
-   "status": "rejected",
+   "status": "approved",
    "versions": [
     {
      "n": 1,
@@ -14111,6 +14144,14 @@
      "date": "2026-11-05",
      "from": "v1",
      "at": 1793842351131
+    },
+    {
+     "n": 2,
+     "file": "art/row.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/row.webp; marked approved by idea-checkart"
     }
    ],
    "rejects": [
@@ -14300,62 +14341,6 @@
    "group": "Grump Hollow"
   },
   {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-hollow-cut1",
-   "tab": "Areas",
-   "title": "Grump Hollow: stencil 1 of 4, trees and tall plants (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/hollow.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Grump Hollow painting.\n\nCopy out only its trees, tall bushes, brambles and fern clumps, and the tall cattails and reeds at the pond edge, each down to where it meets the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Grump Hollow"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-hollow-cut2",
-   "tab": "Areas",
-   "title": "Grump Hollow: stencil 2 of 4, exit board and posts (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/hollow.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Grump Hollow painting.\n\nCopy out only its green exit board with both posts down to the ground, and the fence posts beside the entrance trail. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Grump Hollow"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-hollow-cut3",
-   "tab": "Areas",
-   "title": "Grump Hollow: stencil 3 of 4, boulders, stumps and standing logs (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/hollow.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Grump Hollow painting.\n\nCopy out only its mossy boulders, tree stumps, and upright or leaning logs, each whole down to where it touches the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Grump Hollow"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-hollow-cut4",
-   "tab": "Areas",
-   "title": "Grump Hollow: stencil 4 of 4, tall props (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/hollow.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Grump Hollow painting.\n\nCopy out only its soggy wooden bench, Boppy's small bench on the pond shore with the thermos, bucket and leaning fishing rod, and any tall mushroom clump, each whole down to where it touches the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Grump Hollow"
-  },
-  {
    "status": "approved",
    "versions": [
     {
@@ -14383,62 +14368,6 @@
     "art/grands.webp"
    ],
    "prompt": "Create the actual environment painting for Area 04, Cattail Pier, from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update.\n\nATTACHED IMAGES (in this order)\n1) the current painting of this area: use it for LAYOUT AND DETAILS. Keep the same layout: every path, building, prop, exit and open space stays in the same place and the same size, and each building keeps its shape, roof and theme. Paint every detail described below cleanly and correctly on top of that layout. Do not copy its rendering.\n2) the finished painting of Deedee and Boppy's house, the grandparents' home in this game. It is the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame environmental painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page. Landscape canvas, 1536 x 1408 pixels (12:11). If your tool cannot produce that exact size, use the closest landscape aspect at the highest resolution.\n\nSTYLE AND CAMERA\nA hand-painted, hand-brushed painting of a small fishing pier on a bay, in exactly the style of attachment 2, the painting of Deedee and Boppy's house. Visible brushwork everywhere: broad strokes for the large forms, short flicks for foliage, roof tiles, brick, wood and stone, thick ridges of paint where the light hits. Rich, warm, deep color built in layers, so warm and cool tones show through each other. Every surface is matte, like oil paint or gouache on canvas, with a fine canvas grain over the whole picture and soft painted light and shadow. Edges are painted with a small brush, slightly irregular and hand-made. NOT glossy, NOT airbrushed, NOT a digital render, NOT plastic, NOT a 3D look, NOT pixel art. No visible pixels, no thick black outlines, no photorealism, no top-down floor plan.\nFixed elevated three-quarter camera looking down into the scene at about 35 degrees, showing the yard, the shack, the pier and the water together. Same camera across the whole uninterrupted scene.\n\nSCALE AND CAMERA DISTANCE (important)\nThis is a whole game map seen from high above and far away, at the same distance as the town maps of this game: the entire pier, yard and shack fits in the picture with plenty of open ground. Do not zoom in on a corner. Keep everything small compared to the picture:\n- A grown-up person standing on a path would be only about one fifteenth of the picture height.\n- Paths are about two people wide, about one twelfth of the picture width.\n- The exit boards are about one seventh of the picture width.\n- The bait shack is about one fifth of the picture width; the bench is about one twelfth of the picture width; the rowboat about one eighth.\n\nSETTING\nA sunny Long Island bay with a little wooden fishing pier, on a warm golden afternoon. Golden sunlight from the upper left, long soft shadows falling to the lower right, faint lilac light in the shade, soft dabs of pale paint on calm blue-green water. Sandy dirt yard, beach grass, cattails, rocks, weathered wood, rope and fishing gear. Peaceful, salty and cozy.\n\nTHIS IS A WALKABLE GAME MAP: NAVIGATION COMES FIRST\nA character must be able to walk from either entrance to the shack door, the bench and the end of the pier. No fence, crate, rock or prop may wall off a route. Every path is at least two character-widths wide.\n- NORTH ENTRANCE: a sandy dirt road enters from the TOP edge at the center.\n- The road opens into a WIDE SANDY YARD across the upper third of the picture.\n- WEST ENTRANCE: from the yard a dirt road runs to the LEFT edge, about one quarter of the way down.\n- THE BAIT SHACK stands FREESTANDING on the right side of the yard, with sandy ground on every side so you can walk all the way around it. Its door and counter face the yard.\n- THE PIER: a wide wooden boardwalk, wide enough for two people side by side, runs from the middle of the yard straight DOWN the center into the water and ends in a broad square wooden platform about two thirds of the way down. Low rope railings and posts line its edges; the walking surface is open.\n- The lower third of the picture is open water around the platform.\n- No other exits: wherever the yard nears the right edge or the water edge, it ends in beach grass, rocks and a low fence.\n- Barrels, crates, traps and the bench sit beside the paths, never in them.\n\nLANDMARKS AND PROPS\n- Bait shack (REEL'S BAIT), strongly themed so it reads as a bait shop with no sign: a weathered blue-gray clapboard shack with a mossy shingle roof, fishing nets and colorful buoys hanging on its walls, a striped awning over a little bait counter window, a bubbling minnow tank and a worm barrel by the counter, a lobster trap and crates stacked at its side, a fish-shaped weathervane on the roof.\n- Boppy's bench (left side of the yard, facing the water): a weathered wooden bench with a thermos on it.\n- On the pier platform: a tackle box, a bucket, a coil of rope and a folding stool where Boppy fishes.\n- A small wooden rowboat tied to the platform with a rope, floating in the water beside it.\n- Cattails and beach grass along the shore, mooring posts standing in the water, a seagull-free sky.\n\nSIGNS: DESIGN AND LETTER EACH ONE YOURSELF\nALL CAPITALS, two centered lines, large and easy to read, spelled exactly as written, letter by letter. Signs never cover a door, awning or lamp.\n1. Shack sign REEL'S / BAIT (R-E-E-L, apostrophe, S; B-A-I-T): a carved wooden board shaped like a big fish, mounted on the shack front above the awning, letters painted in sea blue and white.\nEXIT BOARDS: two matching green boards with carved cream-gold letters, both the same design and height, each hung HIGH between two tall wooden posts like an archway over its road, the board's bottom edge well above head height, the road open underneath.\n2. North: over the north road, a little below the top edge: RIVITUSO / ROW (R-I-V-I-T-U-S-O; R-O-W).\n3. West: over the west road, a little in from the left edge: WHISPERING / MARSH (W-H-I-S-P-E-R-I-N-G; M-A-R-S-H).\nThese three signs are the only words in the image. No other signs, notices, chalkboards or price tags.\n\nLAYERING (the game cuts trees, posts, boards, the shack roof and tall props out as separate layers)\nSand, grass and boardwalk continue unbroken under and behind every tree, post, barrel, crate and the shack eaves. Every tall object has a clear visible base with ground or deck showing behind it. Clearly separated, small-brush painted silhouettes on tree canopies, posts, boards and the roof edge. Nothing floats.\n\nLIGHT AND COLORS\nWarm golden key light #FFE1A0, lilac accent in shade #C8A5DC, warm sand #E3C99A, weathered wood #9C7A55, bay water #3F8E96, leafy sage #608775, light green grass #B4C395, warm shadows #716351. Clear darker contact shadow under the shack, posts and props, an open sunlit yard and pier.\n\nSTRICT EXCLUSIONS\nNo people, no animals, no birds, no fish visible, no monsters. No chests, items, keys, coins, switches or collectibles. No words, numbers or logos other than the three signs. No other buildings, no cars, no other boats. No grid, colored tiles, diamonds, numbered markers, map or diagram look. No title card, frame, contact sheet or palette chart.\n\nDeliver the single environment painting itself. Do not replace the painting with a description of it.",
-   "group": "Cattail Pier"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-pier-cut1",
-   "tab": "Areas",
-   "title": "Cattail Pier: stencil 1 of 4, trees and tall plants (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/pier.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Cattail Pier painting.\n\nCopy out only its trees, tall bushes, and the tall cattails and beach grass clumps, each down to where it meets the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Cattail Pier"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-pier-cut2",
-   "tab": "Areas",
-   "title": "Cattail Pier: stencil 2 of 4, posts, boards and signs (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/pier.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Cattail Pier painting.\n\nCopy out only its two green exit boards with both posts, the fish-shaped bait sign, and every tall railing post and mooring post with its rope, down to the deck or water. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Cattail Pier"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-pier-cut3",
-   "tab": "Areas",
-   "title": "Cattail Pier: stencil 3 of 4, shack roof, eaves and awning (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/pier.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Cattail Pier painting.\n\nCopy out only the roof of the bait shack with its shingles, moss, fish weathervane and chimney, the eaves, the striped awning, and the nets and buoys hanging from the eaves, cut straight across just below the eaves and awning. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Cattail Pier"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-pier-cut4",
-   "tab": "Areas",
-   "title": "Cattail Pier: stencil 4 of 4, tall props (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/pier.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Cattail Pier painting.\n\nCopy out only Boppy's bench with the thermos, the barrels and minnow tank, the stacked crates and lobster trap, the folding stool, bucket and tackle box, and any tall rock, each whole down to where it touches the ground or deck. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
    "group": "Cattail Pier"
   },
   {
@@ -14491,34 +14420,6 @@
     "art/reeds.webp"
    ],
    "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Whispering Marsh painting.\n\nCopy out only its tall reed and cattail clumps, the two very tall old reed clumps at the top left path, every tree and the twisted dead tree, each down to where it meets the water or ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Whispering Marsh"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-reeds-cut2",
-   "tab": "Areas",
-   "title": "Whispering Marsh: stencil 2 of 3, posts and exit boards (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/reeds.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Whispering Marsh painting.\n\nCopy out only its two green exit boards with both posts, and every boardwalk post and mooring post with its rope, down to the planks or water. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Whispering Marsh"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-reeds-cut3",
-   "tab": "Areas",
-   "title": "Whispering Marsh: stencil 3 of 3, stumps and tall props (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/reeds.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Whispering Marsh painting.\n\nCopy out only its mossy stumps, the half-sunken rowboat, and its tall rocks, each whole down to where it meets the water or ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
    "group": "Whispering Marsh"
   },
   {
@@ -14581,34 +14482,6 @@
    "group": "Sundial Hollow"
   },
   {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-sundial-cut2",
-   "tab": "Areas",
-   "title": "Sundial Hollow: stencil 2 of 3, sundial, standing stones and boulders (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/sundial.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Sundial Hollow painting.\n\nCopy out only its sundial with its pointer and upper base step, every standing stone, and every mossy boulder, each whole down to where it meets the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Sundial Hollow"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-sundial-cut3",
-   "tab": "Areas",
-   "title": "Sundial Hollow: stencil 3 of 3, exit board and bench (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/sundial.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Sundial Hollow painting.\n\nCopy out only its green exit board with both posts, the stone bench, and any tall glowing mushroom clump. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Sundial Hollow"
-  },
-  {
    "status": "approved",
    "versions": [
     {
@@ -14654,48 +14527,6 @@
    "group": "Long Island Elementary (schoolyard)"
   },
   {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-schoolyard-cut2",
-   "tab": "Areas",
-   "title": "Long Island Elementary (schoolyard): stencil 2 of 4, lamps, flagpole and exit board (same chat, send after the painting is approved)",
-   "ar": "4:3",
-   "refs": [
-    "art/schoolyard.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Long Island Elementary painting.\n\nCopy out only its lamp posts from lantern to base, the flagpole with its flag and rope, and the green exit board with both posts. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Long Island Elementary (schoolyard)"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-schoolyard-cut3",
-   "tab": "Areas",
-   "title": "Long Island Elementary (schoolyard): stencil 3 of 4, school roof, cupola and portico (same chat, send after the painting is approved)",
-   "ar": "4:3",
-   "refs": [
-    "art/schoolyard.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Long Island Elementary painting.\n\nCopy out only the roof of the school with its edge, cupola, bell and clock, roof vents and chimneys, the eaves, and the entrance portico roof with its columns and lettering, cut straight across just below the eaves, with the portico columns whole down to the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Long Island Elementary (schoolyard)"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-schoolyard-cut4",
-   "tab": "Areas",
-   "title": "Long Island Elementary (schoolyard): stencil 4 of 4, cars, playground and tall props (same chat, send after the painting is approved)",
-   "ar": "4:3",
-   "refs": [
-    "art/schoolyard.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Long Island Elementary painting.\n\nCopy out only its three parked cars, swing set, slide with its tower, tetherball pole, bike rack with the old bike, pickup bench, playground bench, and the playground fence and gate posts, each whole down to where it touches the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Long Island Elementary (schoolyard)"
-  },
-  {
    "status": "approved",
    "versions": [
     {
@@ -14729,62 +14560,6 @@
     "art/grands.webp"
    ],
    "prompt": "Create the actual environment painting for Area 08, Downtown LA, from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update.\n\nATTACHED IMAGES (in this order): 1) the current painting of this area: use it for LAYOUT ONLY (where the paths, buildings, exits and open spaces sit); do not copy its rendering. 2) the finished painting of Deedee and Boppy's house, the grandparents' home in this game. It is the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame environmental painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page. Landscape canvas, 1920 x 1664 pixels. If your tool cannot produce that exact size, use the closest landscape aspect at the highest resolution.\n\nSTYLE AND CAMERA\nA hand-painted, hand-brushed painting, in exactly the style of attachment 2, the painting of Deedee and Boppy's house. Visible brushwork everywhere: broad strokes for the large forms, short flicks for foliage, roof tiles, brick, wood and stone, thick ridges of paint where the light hits. Rich, warm, deep color built in layers, so warm and cool tones show through each other. Every surface is matte, like oil paint or gouache on canvas, with a fine canvas grain over the whole picture and soft painted light and shadow. Edges are painted with a small brush, slightly irregular and hand-made. NOT glossy, NOT airbrushed, NOT a digital render, NOT plastic, NOT a 3D look, NOT pixel art. No visible pixels, no thick black outlines, no photorealism, no top-down floor plan.\nFixed elevated three-quarter camera looking down into the scene at about 35 degrees, showing building fronts, roofs and walkable ground together. Same camera across the whole uninterrupted scene.\n\nSCALE AND CAMERA DISTANCE (most important rule)\nThis is a whole game map seen from high above and far away, at the same distance as the town maps of this game. The whole area fits in the picture with generous open ground. Do not zoom in on a corner and do not make props large. A grown-up person standing on a path would be only about one fifteenth of the picture height, paths are about two people wide, and each exit board is about one seventh of the picture width.\n\nSETTING\nDowntown Los Angeles on a clear warm afternoon, a boulevard of art deco shops, lofts and a movie palace, with palm trees, awnings, string lights and warm lamp glow. Golden-hour light, long shadows, a hint of smog haze in the far distance. Friendly and lived-in, not a glass skyline.\n\nTHIS IS A WALKABLE GAME MAP: NAVIGATION COMES FIRST\nA character must be able to walk from every exit to every door and landmark and all the way around every building. No building, fence, tree or prop may wall off a route. Every path is at least two character-widths wide.\nKeep the layout of the attached current painting: a wide east-west boulevard runs across the middle, from the left to the east gate at the RIGHT edge, with a sidewalk on each side. A north row of five shops stands along the top (Golden Hour Coffee, Ramen Ramen, The Starlite movie palace, Angel City Cab Co.) and a south row of buildings along the bottom (Backlot Wardrobe, TNB's Loft, the nine-story Grand Tower, Nickel's Shop), all FREESTANDING with a walkable alley between every pair and a walkway behind. In the top left corner stone steps climb to the Griffith Park trail, and a wide arch in the bottom edge at the center leads south to Jefferson Park. East edge: the road continues to the studio gate. No exit on the left edge.\n\nLANDMARKS AND PROPS\nGolden Hour Coffee: deco front, warm amber awning, round coffee cup on the roof. Ramen Ramen: red awning, paper lanterns, steam from a vent. The Starlite: a cream movie palace with a big marquee and a star on top. Angel City Cab Co.: a small cream garage with a gold roof and one yellow cab. Backlot Wardrobe: brick loft with a purple awning and a dress form in the window. TNB's Loft: a plain brick loft, a pottery wheel in the window. The Grand Tower: a tall blue art deco tower, nine floors. Nickel's: a teal corner shop with an awning and a coin on the roof. Palm trees, benches, planters, newspaper boxes, parked bikes.\n\nSIGNS: DESIGN AND LETTER EACH ONE YOURSELF\nALL CAPITALS, large and easy to read, spelled exactly as written, letter by letter. Signs never cover a door, awning or lamp. Exit boards are green boards with carved cream-gold letters, each hung HIGH between two tall posts like an archway over its path, the board's bottom edge well above head height, the path open underneath.\nBuilding signs, each designed in that building's own style: COFFEE (golden hour cup sign), RAMEN (red lantern sign), STARLITE (marquee lights), CABS (checkered roof sign), WARDROBE (hanger sign), LOFTS (iron plate), GRAND (gold deco letters), SHOP (round coin sign). Exit boards: GRIFFITH PARK over the top left steps, JEFFERSON PARK over the bottom arch, STUDIO over the east road.\nThese are the only words in the image. No other signs, notices, price tags, license plate text or logos.\n\nLAYERING\nPaving, ground and grass continue unbroken under and behind every tree, lamp, bench, sign post and roof eave. Every tall object has a clear visible base with ground showing behind it. Clearly separated, small-brush painted silhouettes on tree canopies, lamps, boards and roof edges. Nothing floats. The game cuts trees, lamps, boards and roofs out as separate layers.\n\nLIGHT AND COLORS\nWarm golden key light #FFE1A0 from the upper left with long soft shadows falling to the lower right, faint lilac accent in shade #C8A5DC, warm shadows #716351. Clear darker contact shadow under buildings and props, an open sunlit walkable center. Honey stone #EFDCBC, deco brick #A0523A, teal #2F6F73, marquee gold #FFD968, palm green #608775.\n\nSTRICT EXCLUSIONS\nNo people, no animals, no monsters. No chests, items, keys, coins, switches or collectibles. No cars except the single cab, no buses, no billboards with ads. No grid, colored tiles, diamonds, numbered markers, map or diagram look. No title card, frame, contact sheet or palette chart.\n\nDeliver the single environment painting itself. Do not replace the painting with a description of it.",
-   "group": "Downtown LA"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-blvd-cut1",
-   "tab": "Areas",
-   "title": "Downtown LA: stencil 1 of 4, trees and tall plants (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/blvd.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Downtown LA painting.\n\nCopy out only its palm trees, each from its fronds down to the base of its trunk, the leafy trees and tall flowering bushes along the left edge and the bottom edge, and the tall cypresses on the hillside beside the stone steps, each down to where it meets the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Downtown LA"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-blvd-cut2",
-   "tab": "Areas",
-   "title": "Downtown LA: stencil 2 of 4, lamps, exit boards and string lights (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/blvd.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Downtown LA painting.\n\nCopy out only its street lamps from lantern to base, its three green exit boards with both posts down to the ground, and the strings of lights that hang between the buildings. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Downtown LA"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-blvd-cut3",
-   "tab": "Areas",
-   "title": "Downtown LA: stencil 3 of 4, roofs, tower tops and awnings (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/blvd.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Downtown LA painting.\n\nCopy out only the roof of each of the eight buildings, from the very top (with its chimneys, steam and every roof decoration such as the coffee cup, the gold star, the checkered roof sign and the coin) down to just below the eaves, the upper floors of the tall blue tower and of the movie palace above their entrance canopies, and every awning or canopy over a door or window. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Downtown LA"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-blvd-cut4",
-   "tab": "Areas",
-   "title": "Downtown LA: stencil 4 of 4, tall props (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/blvd.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Downtown LA painting.\n\nCopy out only its benches, flower pots and planters, newspaper boxes, mailboxes, trash bins, the fire hydrant, and the stone balustrade along the bottom edge, each whole down to where it touches the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
    "group": "Downtown LA"
   },
   {
@@ -14825,62 +14600,6 @@
    "group": "Jefferson Park"
   },
   {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-jpark-cut1",
-   "tab": "Areas",
-   "title": "Jefferson Park: stencil 1 of 4, trees and tall plants (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/jpark.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Jefferson Park painting.\n\nCopy out only its jacaranda trees, palm trees, lemon trees and every other tree, and its tall bushes, hedges and flowering shrubs, each with its full canopy or flowers and its trunk or stem down to where it meets the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Jefferson Park"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-jpark-cut2",
-   "tab": "Areas",
-   "title": "Jefferson Park: stencil 2 of 4, lamps, exit boards and mailboxes (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/jpark.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Jefferson Park painting.\n\nCopy out only its street lamps from lantern to base, its three green exit boards with both posts down to the ground, and the two mailboxes on their posts. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Jefferson Park"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-jpark-cut3",
-   "tab": "Areas",
-   "title": "Jefferson Park: stencil 3 of 4, roofs, porch roofs and awnings (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/jpark.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Jefferson Park painting.\n\nCopy out only the roof of each of the four shops and each of the four houses with its chimney, gable and roof sign, the eaves, the porch roofs with their posts, and every awning, cut straight across just below the eaves, porch roofs and awnings. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Jefferson Park"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-jpark-cut4",
-   "tab": "Areas",
-   "title": "Jefferson Park: stencil 4 of 4, tall props (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/jpark.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Jefferson Park painting.\n\nCopy out only its park bench, the two bikes, the porch chairs, the laundry line with its clothes and poles, the potted plants by the shop doors, and the wooden fences, each whole down to where it touches the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Jefferson Park"
-  },
-  {
    "status": "approved",
    "versions": [
     {
@@ -14918,48 +14637,6 @@
    "group": "Griffith Park"
   },
   {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-griffith-cut1",
-   "tab": "Areas",
-   "title": "Griffith Park: stencil 1 of 3, trees and tall plants (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/griffith.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Griffith Park painting.\n\nCopy out only its oak and sycamore trees with their full canopies and trunks, its sage and chaparral bushes, and its agave and tall flowering yucca plants, each down to where it meets the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Griffith Park"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-griffith-cut2",
-   "tab": "Areas",
-   "title": "Griffith Park: stencil 2 of 3, exit board, signs and fence posts (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/griffith.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Griffith Park painting.\n\nCopy out only its green exit board with both log posts down to the ground, the wooden trailhead sign and the small warning sign on their posts, and every trail fence post with its rope. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Griffith Park"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-griffith-cut3",
-   "tab": "Areas",
-   "title": "Griffith Park: stencil 3 of 3, boulders, lookout rock, log and observatory (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/griffith.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Griffith Park painting.\n\nCopy out only its boulders, the lookout rock formation with its railing, the rocks around the tar, the fallen log, and the white observatory building on the hilltop, each whole down to where it touches the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Griffith Park"
-  },
-  {
    "status": "approved",
    "versions": [
     {
@@ -14980,62 +14657,6 @@
     "art/grands.webp"
    ],
    "prompt": "Create the actual environment painting for Area 11, Studio Gate, from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update.\n\nATTACHED IMAGES (in this order): 1) the current painting of this area: use it for LAYOUT ONLY (where the paths, buildings, exits and open spaces sit); do not copy its rendering. 2) the finished painting of Deedee and Boppy's house, the grandparents' home in this game. It is the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame environmental painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page. Landscape canvas, 1536 x 1152 pixels. If your tool cannot produce that exact size, use the closest landscape aspect at the highest resolution.\n\nSTYLE AND CAMERA\nA hand-painted, hand-brushed painting, in exactly the style of attachment 2, the painting of Deedee and Boppy's house. Visible brushwork everywhere: broad strokes for the large forms, short flicks for foliage, roof tiles, brick, wood and stone, thick ridges of paint where the light hits. Rich, warm, deep color built in layers, so warm and cool tones show through each other. Every surface is matte, like oil paint or gouache on canvas, with a fine canvas grain over the whole picture and soft painted light and shadow. Edges are painted with a small brush, slightly irregular and hand-made. NOT glossy, NOT airbrushed, NOT a digital render, NOT plastic, NOT a 3D look, NOT pixel art. No visible pixels, no thick black outlines, no photorealism, no top-down floor plan.\nFixed elevated three-quarter camera looking down into the scene at about 35 degrees, showing building fronts, roofs and walkable ground together. Same camera across the whole uninterrupted scene.\n\nSCALE AND CAMERA DISTANCE (most important rule)\nThis is a whole game map seen from high above and far away, at the same distance as the town maps of this game. The whole area fits in the picture with generous open ground. Do not zoom in on a corner and do not make props large. A grown-up person standing on a path would be only about one fifteenth of the picture height, paths are about two people wide, and each exit board is about one seventh of the picture width.\n\nSETTING\nThe gate lot of Sunset Gold Studios, a Hollywood movie studio, on a warm afternoon. A tall painted studio wall with an arched gate, a guard booth, three trailers, a craft services tent with a snack table, light stands, equipment carts and cable reels. Busy but empty of people, cheerful and slightly chaotic.\n\nTHIS IS A WALKABLE GAME MAP: NAVIGATION COMES FIRST\nA character must be able to walk from every exit to every door and landmark and all the way around every building. No building, fence, tree or prop may wall off a route. Every path is at least two character-widths wide.\nKeep the layout of the attached current painting: the lot is a wide paved area. The WEST ENTRANCE is a wide road at the LEFT edge about the middle of the picture height, with a guard booth beside it. A paved road runs across the lot and then UP the center to the NORTH PASSAGE, a big arch at the TOP edge toward the Backlot. Three trailers stand in a row at the top left, the craft services tent stands on the right, and all of them are FREESTANDING with walkable ground on every side. No exit on the right or bottom edge: they are closed by the studio wall, hedges and palm trees.\n\nLANDMARKS AND PROPS\nA cream studio wall with a big golden arch and a gold star, a guard booth with a striped barrier arm, three silver trailers with little steps, a craft services tent with a snack table, folding chairs, a rolling clapperboard cart, two light stands, a cable reel, a golf cart, a director's chair, palm trees.\n\nSIGNS: DESIGN AND LETTER EACH ONE YOURSELF\nALL CAPITALS, large and easy to read, spelled exactly as written, letter by letter. Signs never cover a door, awning or lamp. Exit boards are green boards with carved cream-gold letters, each hung HIGH between two tall posts like an archway over its path, the board's bottom edge well above head height, the path open underneath.\nGate arch sign: SUNSET GOLD STUDIOS in gold letters on one arch (three words, two lines: SUNSET GOLD / STUDIOS). Craft services tent banner: SNACKS. Exit boards: DOWNTOWN over the west road, BACKLOT over the north arch.\nThese are the only words in the image. No other signs, notices, price tags, license plate text or logos.\n\nLAYERING\nPaving, ground and grass continue unbroken under and behind every tree, lamp, bench, sign post and roof eave. Every tall object has a clear visible base with ground showing behind it. Clearly separated, small-brush painted silhouettes on tree canopies, lamps, boards and roof edges. Nothing floats. The game cuts trees, lamps, boards and roofs out as separate layers.\n\nLIGHT AND COLORS\nWarm golden key light #FFE1A0 from the upper left with long soft shadows falling to the lower right, faint lilac accent in shade #C8A5DC, warm shadows #716351. Clear darker contact shadow under buildings and props, an open sunlit walkable center. Studio cream #F4E6C8, gold #D9A43A, trailer silver #C9D2D8, tent red and white, asphalt #5E5A63.\n\nSTRICT EXCLUSIONS\nNo people, no animals, no monsters. No chests, items, keys, coins, switches or collectibles. No cars except one golf cart. No grid, colored tiles, diamonds, numbered markers, map or diagram look. No title card, frame, contact sheet or palette chart.\n\nDeliver the single environment painting itself. Do not replace the painting with a description of it.",
-   "group": "Studio Gate"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-studio-cut1",
-   "tab": "Areas",
-   "title": "Studio Gate: stencil 1 of 4, trees and tall plants (same chat, send after the painting is approved)",
-   "ar": "4:3",
-   "refs": [
-    "art/studio.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Studio Gate painting.\n\nCopy out only its palm trees, cypress trees, hedges, tall bushes and flowering plants, each down to where it meets the ground or its planter. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Studio Gate"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-studio-cut2",
-   "tab": "Areas",
-   "title": "Studio Gate: stencil 2 of 4, lamps, barrier and posts (same chat, send after the painting is approved)",
-   "ar": "4:3",
-   "refs": [
-    "art/studio.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Studio Gate painting.\n\nCopy out only its street lamp with its banner from top to base, the wall lanterns, the striped barrier arm with its post, and the yellow bollards. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Studio Gate"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-studio-cut3",
-   "tab": "Areas",
-   "title": "Studio Gate: stencil 3 of 4, arches, booth roof and tent (same chat, send after the painting is approved)",
-   "ar": "4:3",
-   "refs": [
-    "art/studio.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Studio Gate painting.\n\nCopy out only the big studio arch with its star, gold sign and green board, and the west gate arch with its green board, each with both pillars down to the ground, the red tile roof of the guard booth down to just below its eaves, and the red and white tent canopy with its banner and poles down to the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Studio Gate"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-studio-cut4",
-   "tab": "Areas",
-   "title": "Studio Gate: stencil 4 of 4, tall props (same chat, send after the painting is approved)",
-   "ar": "4:3",
-   "refs": [
-    "art/studio.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Studio Gate painting.\n\nCopy out only its three silver trailers with their steps, the golf cart, the two light stands, the director's chair, the cable reel, the clapperboard stand, the snack tables and equipment cases, the folding chairs, and the potted plants, each whole down to where it touches the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
    "group": "Studio Gate"
   },
   {
@@ -15062,62 +14683,6 @@
    "group": "The Backlot"
   },
   {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-backlot-cut1",
-   "tab": "Areas",
-   "title": "The Backlot: stencil 1 of 4, trees and tall plants (same chat, send after the painting is approved)",
-   "ar": "4:3",
-   "refs": [
-    "art/backlot.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached The Backlot painting.\n\nCopy out only its leafy trees, the big jungle tree with its roots, the palm and banana plants, the cactus, its tall bushes and flowering plants, and the vine arch, each down to where it meets the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "The Backlot"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-backlot-cut2",
-   "tab": "Areas",
-   "title": "The Backlot: stencil 2 of 4, lamps, exit board and fence (same chat, send after the painting is approved)",
-   "ar": "4:3",
-   "refs": [
-    "art/backlot.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached The Backlot painting.\n\nCopy out only its street lamps from lantern to base, its green exit board with both stone pillars down to the ground, the iron fence with its stone posts, the blank notice board on its legs, and the hitching posts. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "The Backlot"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-backlot-cut3",
-   "tab": "Areas",
-   "title": "The Backlot: stencil 3 of 4, roofs, set tops and awnings (same chat, send after the painting is approved)",
-   "ar": "4:3",
-   "refs": [
-    "art/backlot.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached The Backlot painting.\n\nCopy out only the roof of each Western building with its false front, the windmill and the water tower, the wooden scaffolding, the upper floors and fire escapes of the brick buildings above their awnings, every awning and porch roof with its posts, and the top of the soundstage above its big door with the red light, cut straight across just below the eaves, porch roofs and awnings. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "The Backlot"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-backlot-cut4",
-   "tab": "Areas",
-   "title": "The Backlot: stencil 4 of 4, tall props (same chat, send after the painting is approved)",
-   "ar": "4:3",
-   "refs": [
-    "art/backlot.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached The Backlot painting.\n\nCopy out only its covered wagon, the two striped food carts, the barrels, the benches, the cafe table and chairs, the clapperboard, and the rocks and waterfall of the jungle set, each whole down to where it touches the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "The Backlot"
-  },
-  {
    "status": "approved",
    "versions": [
     {
@@ -15138,48 +14703,6 @@
     "art/grands.webp"
    ],
    "prompt": "Create the actual environment painting for Area 13, Old Oak Park, from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram, infographic, example sheet, or project update.\n\nATTACHED IMAGES (in this order): 1) the current painting of this area: use it for LAYOUT ONLY (where the paths, buildings, exits and open spaces sit); do not copy its rendering. 2) the finished painting of Deedee and Boppy's house, the grandparents' home in this game. It is the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame environmental painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page. Landscape canvas, 1664 x 1408 pixels. If your tool cannot produce that exact size, use the closest landscape aspect at the highest resolution.\n\nSTYLE AND CAMERA\nA hand-painted, hand-brushed painting, in exactly the style of attachment 2, the painting of Deedee and Boppy's house. Visible brushwork everywhere: broad strokes for the large forms, short flicks for foliage, roof tiles, brick, wood and stone, thick ridges of paint where the light hits. Rich, warm, deep color built in layers, so warm and cool tones show through each other. Every surface is matte, like oil paint or gouache on canvas, with a fine canvas grain over the whole picture and soft painted light and shadow. Edges are painted with a small brush, slightly irregular and hand-made. NOT glossy, NOT airbrushed, NOT a digital render, NOT plastic, NOT a 3D look, NOT pixel art. No visible pixels, no thick black outlines, no photorealism, no top-down floor plan.\nFixed elevated three-quarter camera looking down into the scene at about 35 degrees, showing building fronts, roofs and walkable ground together. Same camera across the whole uninterrupted scene.\n\nSCALE AND CAMERA DISTANCE (most important rule)\nThis is a whole game map seen from high above and far away, at the same distance as the town maps of this game. The whole area fits in the picture with generous open ground. Do not zoom in on a corner and do not make props large. A grown-up person standing on a path would be only about one fifteenth of the picture height, paths are about two people wide, and each exit board is about one seventh of the picture width.\n\nSETTING\nOld Oak Park, a Los Angeles neighborhood park on a warm afternoon, anchored by one huge, very old oak tree at the top with a tiny round door at its base. A sandy playground, a community vegetable garden, picnic tables and a dog park. Sun-dappled, soft and welcoming.\n\nTHIS IS A WALKABLE GAME MAP: NAVIGATION COMES FIRST\nA character must be able to walk from every exit to every door and landmark and all the way around every building. No building, fence, tree or prop may wall off a route. Every path is at least two character-widths wide.\nKeep the layout of the attached current painting: the main path enters from the BOTTOM edge at the center and runs straight UP to the Old Oak at the top; a cross path runs LEFT to RIGHT across the middle. The playground (sand, slide, swings, climbing frame) is top left, the community garden (soil beds, trellis, scarecrow) is top right, picnic tables are bottom left, and the fenced dog park (mulch, ramps, a water bowl) is bottom right. All play and garden features are FREESTANDING with walkable ground on every side. Only exit: the bottom edge path. The left, right and top edges are closed by hedges, fences and trees.\n\nLANDMARKS AND PROPS\nThe giant Old Oak with a wide trunk, thick roots and a tiny round wooden door at its base; a sandbox, a slide, a swing set; vegetable beds with tomato stakes and sunflowers; wooden picnic tables with benches; a low fence around the dog park with a gate, a dog agility ramp and tunnel; park benches, a drinking fountain, lamp posts.\n\nSIGNS: DESIGN AND LETTER EACH ONE YOURSELF\nALL CAPITALS, large and easy to read, spelled exactly as written, letter by letter. Signs never cover a door, awning or lamp. Exit boards are green boards with carved cream-gold letters, each hung HIGH between two tall posts like an archway over its path, the board's bottom edge well above head height, the path open underneath.\nExit board: JEFFERSON PARK over the bottom path. Garden sign shaped like a carrot: GARDEN. Dog park sign on the fence: DOG PARK.\nThese are the only words in the image. No other signs, notices, price tags, license plate text or logos.\n\nLAYERING\nPaving, ground and grass continue unbroken under and behind every tree, lamp, bench, sign post and roof eave. Every tall object has a clear visible base with ground showing behind it. Clearly separated, small-brush painted silhouettes on tree canopies, lamps, boards and roof edges. Nothing floats. The game cuts trees, lamps, boards and roofs out as separate layers.\n\nLIGHT AND COLORS\nWarm golden key light #FFE1A0 from the upper left with long soft shadows falling to the lower right, faint lilac accent in shade #C8A5DC, warm shadows #716351. Clear darker contact shadow under buildings and props, an open sunlit walkable center. Oak green #5F8A4A, bark brown #7A5A3A, sand #E3C99A, soil #6A4A3A, lawn green #B4C395.\n\nSTRICT EXCLUSIONS\nNo people, no animals, no monsters. No chests, items, keys, coins, switches or collectibles. No dogs, no cars. No grid, colored tiles, diamonds, numbered markers, map or diagram look. No title card, frame, contact sheet or palette chart.\n\nDeliver the single environment painting itself. Do not replace the painting with a description of it.",
-   "group": "Old Oak Park"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-oakpark-cut1",
-   "tab": "Areas",
-   "title": "Old Oak Park: stencil 1 of 3, the old oak, trees and tall plants (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/oakpark.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Old Oak Park painting.\n\nCopy out only the huge old oak with its whole canopy, trunk and roots, every other tree with its canopy and trunk, the palms along the bottom edge, its tall hedges and bushes, and the tall sunflowers, each down to where it meets the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Old Oak Park"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-oakpark-cut2",
-   "tab": "Areas",
-   "title": "Old Oak Park: stencil 2 of 3, lamps, exit board, signs and fences (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/oakpark.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Old Oak Park painting.\n\nCopy out only its lamp posts from lantern to base, its green exit board with both posts and stone bases, the garden sign, the dog park sign, the two notice boards on their posts, the wooden fences, and the wire dog park fence with its gate. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
-   "group": "Old Oak Park"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "area-oakpark-cut3",
-   "tab": "Areas",
-   "title": "Old Oak Park: stencil 3 of 3, play equipment, garden and tall props (same chat, send after the painting is approved)",
-   "ar": "1:1",
-   "refs": [
-    "art/oakpark.webp"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Old Oak Park painting.\n\nCopy out only its slide tower, swing set, climbing dome and spring rider, the garden shed and bean trellis, the picnic tables with their benches, the grill, the drinking fountain, the park benches, the trash bins, the dog ramp, hoop and tunnel, the fire hydrant, and the boulders, each whole down to where it touches the ground. Each one stays exactly where it is in the painting, at exactly the same size, on the same canvas size and framing. Put them on a plain, flat, pure magenta #FF00FF background with crisp, clean edges. Deliver the image itself.",
    "group": "Old Oak Park"
   },
   {
@@ -15374,8 +14897,17 @@
    "group": "Long Island shops and houses"
   },
   {
-   "status": "rejected",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/amyhouse.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/amyhouse.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [
     {
      "date": "2026-11-09",
@@ -15441,8 +14973,17 @@
    "group": "Long Island shops and houses"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/coffee.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/coffee.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-coffee",
    "tab": "Rooms",
@@ -15456,8 +14997,17 @@
    "group": "Los Angeles shops and homes"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/ramen.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/ramen.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-ramen",
    "tab": "Rooms",
@@ -15471,8 +15021,17 @@
    "group": "Los Angeles shops and homes"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/juicebar.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/juicebar.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-juicebar",
    "tab": "Rooms",
@@ -15486,8 +15045,17 @@
    "group": "Los Angeles shops and homes"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/nickels.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/nickels.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-nickels",
    "tab": "Rooms",
@@ -15501,8 +15069,17 @@
    "group": "Los Angeles shops and homes"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/wardrobe.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/wardrobe.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-wardrobe",
    "tab": "Rooms",
@@ -15516,8 +15093,17 @@
    "group": "Los Angeles shops and homes"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/starlite.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/starlite.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-cinema",
    "tab": "Rooms",
@@ -15531,8 +15117,17 @@
    "group": "Los Angeles shops and homes"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/boards.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/boards.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-boards",
    "tab": "Rooms",
@@ -15546,8 +15141,17 @@
    "group": "Los Angeles shops and homes"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/lacab.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/lacab.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-lacab",
    "tab": "Rooms",
@@ -15561,8 +15165,17 @@
    "group": "Los Angeles shops and homes"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/tomhouse.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/tomhouse.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-tomhouse",
    "tab": "Rooms",
@@ -15576,8 +15189,17 @@
    "group": "Los Angeles shops and homes"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/tomsuite.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/tomsuite.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-tomsuite",
    "tab": "Rooms",
@@ -15591,8 +15213,17 @@
    "group": "Los Angeles shops and homes"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/casa.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/casa.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-casa",
    "tab": "Rooms",
@@ -15606,8 +15237,17 @@
    "group": "Los Angeles shops and homes"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/loftlobby.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/loftlobby.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-loftlobby",
    "tab": "Rooms",
@@ -15621,8 +15261,17 @@
    "group": "Los Angeles shops and homes"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/lofts.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/lofts.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-lofts",
    "tab": "Rooms",
@@ -15636,8 +15285,17 @@
    "group": "Los Angeles shops and homes"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/tower.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/tower.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-tower",
    "tab": "Rooms",
@@ -15651,8 +15309,17 @@
    "group": "Los Angeles shops and homes"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/creole.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/creole.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-creole",
    "tab": "Rooms",
@@ -15666,8 +15333,17 @@
    "group": "Los Angeles shops and homes"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/pupuseria.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/pupuseria.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-pupuseria",
    "tab": "Rooms",
@@ -15681,8 +15357,17 @@
    "group": "Los Angeles shops and homes"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/jordansam.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/jordansam.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-jordansam",
    "tab": "Rooms",
@@ -15696,8 +15381,17 @@
    "group": "Los Angeles shops and homes"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/dakota.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/dakota.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-dakota",
    "tab": "Rooms",
@@ -15711,8 +15405,17 @@
    "group": "Los Angeles shops and homes"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/school.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/school.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-school",
    "tab": "Rooms",
@@ -15726,8 +15429,17 @@
    "group": "School"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/cafetorium.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/cafetorium.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-cafetorium",
    "tab": "Rooms",
@@ -15741,8 +15453,17 @@
    "group": "School"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/stacks.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/stacks.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-stacks",
    "tab": "Rooms",
@@ -15756,8 +15477,17 @@
    "group": "Library and Moon Club"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/readroom.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/readroom.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-readroom",
    "tab": "Rooms",
@@ -15794,8 +15524,17 @@
    "group": "Library and Moon Club"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/dome.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/dome.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-dome",
    "tab": "Rooms",
@@ -16322,8 +16061,17 @@
    "group": "Airport"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/subdepot.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/subdepot.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-subdepot",
    "tab": "Rooms",
@@ -16337,8 +16085,17 @@
    "group": "Sub-Rail"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/subtunnel.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/subtunnel.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-subtunnel",
    "tab": "Rooms",
@@ -16352,8 +16109,17 @@
    "group": "Sub-Rail"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/subchamber.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/subchamber.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-subchamber",
    "tab": "Rooms",
@@ -16367,8 +16133,17 @@
    "group": "Sub-Rail"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/towerlobby.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/towerlobby.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-towerlobby",
    "tab": "Rooms",
@@ -16382,8 +16157,17 @@
    "group": "Glass Tower"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/towerstairs.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/towerstairs.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-towerstairs",
    "tab": "Rooms",
@@ -16397,8 +16181,17 @@
    "group": "Glass Tower"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/towershelves.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/towershelves.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-towershelves",
    "tab": "Rooms",
@@ -16412,8 +16205,17 @@
    "group": "Glass Tower"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/towervault.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/towervault.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-towervault",
    "tab": "Rooms",
@@ -16427,8 +16229,17 @@
    "group": "Glass Tower"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/towerpinnacle.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/towerpinnacle.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-towerpinnacle",
    "tab": "Rooms",
@@ -16442,8 +16253,17 @@
    "group": "Glass Tower"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/deadletter.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/deadletter.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-deadletter",
    "tab": "Rooms",
@@ -16457,8 +16277,17 @@
    "group": "Dead-Letter Office and memories"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/memgrace.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/memgrace.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-memgrace",
    "tab": "Rooms",
@@ -16472,8 +16301,17 @@
    "group": "Dead-Letter Office and memories"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/memrose.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/memrose.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-memrose",
    "tab": "Rooms",
@@ -16487,8 +16325,17 @@
    "group": "Dead-Letter Office and memories"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/memamy.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/memamy.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-memamy",
    "tab": "Rooms",
@@ -16502,8 +16349,17 @@
    "group": "Dead-Letter Office and memories"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/memtnb.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/memtnb.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-memtnb",
    "tab": "Rooms",
@@ -16517,8 +16373,17 @@
    "group": "Dead-Letter Office and memories"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/stillcore.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/stillcore.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-stillcore",
    "tab": "Rooms",
@@ -16532,8 +16397,17 @@
    "group": "Dead-Letter Office and memories"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/foreverheart.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/foreverheart.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-foreverheart",
    "tab": "Rooms",
@@ -16547,8 +16421,17 @@
    "group": "Dead-Letter Office and memories"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/oak.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/oak.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-oak",
    "tab": "Rooms",
@@ -16562,8 +16445,17 @@
    "group": "Old Oak"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/crown.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/crown.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-crown",
    "tab": "Rooms",
@@ -16577,8 +16469,17 @@
    "group": "Old Oak"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/stage7.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/stage7.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-stage7",
    "tab": "Rooms",
@@ -16592,8 +16493,17 @@
    "group": "Studio and Car Barn"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/stageset.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/stageset.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-stageset",
    "tab": "Rooms",
@@ -16607,8 +16517,17 @@
    "group": "Studio and Car Barn"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/carbarn.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/carbarn.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-carbarn",
    "tab": "Rooms",
@@ -16622,8 +16541,17 @@
    "group": "Studio and Car Barn"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "art/boilerroom.webp",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as art/boilerroom.webp; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "room-boiler",
    "tab": "Rooms",
@@ -18281,8 +18209,17 @@
    "group": "Title and icon"
   },
   {
-   "status": "rejected",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "portraits/tom.png",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as portraits/tom.png; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [
     {
      "date": "2026-11-09",
@@ -18303,8 +18240,17 @@
    "group": "Menu portraits"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "portraits/tnb.png",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as portraits/tnb.png; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "portrait-tnb",
    "tab": "Portraits",
@@ -18318,8 +18264,17 @@
    "group": "Menu portraits"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "portraits/grace.png",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as portraits/grace.png; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "portrait-grace",
    "tab": "Portraits",
@@ -18333,8 +18288,17 @@
    "group": "Menu portraits"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "portraits/rose.png",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as portraits/rose.png; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "portrait-rose",
    "tab": "Portraits",
@@ -18348,8 +18312,17 @@
    "group": "Menu portraits"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "portraits/amy.png",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as portraits/amy.png; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "portrait-amy",
    "tab": "Portraits",
@@ -18363,8 +18336,17 @@
    "group": "Menu portraits"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "portraits/justin.png",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as portraits/justin.png; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "portrait-justin",
    "tab": "Portraits",
@@ -18378,8 +18360,17 @@
    "group": "Menu portraits"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "portraits/olivia.png",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as portraits/olivia.png; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "portrait-olivia",
    "tab": "Portraits",
@@ -18393,8 +18384,17 @@
    "group": "Menu portraits"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "portraits/deedee.png",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as portraits/deedee.png; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "portrait-deedee",
    "tab": "Portraits",
@@ -18408,8 +18408,17 @@
    "group": "Menu portraits"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "portraits/boppy.png",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as portraits/boppy.png; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "portrait-boppy",
    "tab": "Portraits",
@@ -18423,8 +18432,17 @@
    "group": "Menu portraits"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "portraits/ellie.png",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as portraits/ellie.png; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "portrait-ellie",
    "tab": "Portraits",
@@ -18438,8 +18456,17 @@
    "group": "Menu portraits"
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 1,
+     "file": "portraits/nara.png",
+     "date": "2026-11-20",
+     "from": "idea-checkart",
+     "at": 1795195968907,
+     "note": "already in the game as portraits/nara.png; marked approved by idea-checkart"
+    }
+   ],
    "rejects": [],
    "id": "portrait-nara",
    "tab": "Portraits",
@@ -18450,20 +18477,6 @@
     "art/raw/characters/nara-hero-v1.png"
    ],
    "prompt": "IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image, nothing else.\n\nThe first attached picture is the current menu portrait of Nara: keep the same person, the same face, hair, skin tone, clothes colors and likeness. The second attached picture is the newest full-body painting of the same person: draw in exactly its style.\n\nPaint a square head-and-shoulders PORTRAIT of Nara, a friendly dog, head and chest, ears up, happy open mouth. A realistic caricature: an oversized head, a warm natural expression, eyes clearly readable, facing the viewer with the head turned slightly toward the right. The face fills about 70 percent of the picture height. 1024 x 1024 px, shrunk later to 64 px, so keep big simple shapes and a bold, clear face; nothing finer than about 8 px.\n\nSTYLE\nA hand-drawn storybook illustration in exactly the style of the second attached picture: sketchy pencil and ink lines, soft colored-pencil shading, visible paper grain, warm golden light from the upper left, no thick outlines. NOT pixel art, NOT retro game art.\n\nBACKGROUND\nA soft plain painted background in one warm muted color that suits Nara, slightly darker toward the edges, full bleed to all four edges. No frame, no border, no text, no watermark. Only Nara in the picture.",
-   "group": "Menu portraits"
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "portrait-boomie",
-   "tab": "Portraits",
-   "ar": "1:1",
-   "title": "Menu portrait: Boomie (portraits/boomie.png, shown at 64 px)",
-   "refs": [
-    "art/raw/npcs/npc-photo-boomie-v2.png"
-   ],
-   "prompt": "IMAGE REQUEST: ONE SINGLE ILLUSTRATION. Return exactly one image, nothing else.\n\nThe attached picture is the newest painting of Boomie: keep the same person, the same face, hair, skin tone, clothes colors and likeness, and draw in exactly its style.\n\nPaint a square head-and-shoulders PORTRAIT of Boomie, a young woman, Tom's friend, a gospel and soul singer, a warm radiant smile. A realistic caricature: an oversized head, a warm natural expression, eyes clearly readable, facing the viewer with the head turned slightly toward the right. The face fills about 70 percent of the picture height. 1024 x 1024 px, shrunk later to 64 px, so keep big simple shapes and a bold, clear face; nothing finer than about 8 px.\n\nSTYLE\nA hand-drawn storybook illustration in exactly the style of the attached picture: sketchy pencil and ink lines, soft colored-pencil shading, visible paper grain, warm golden light from the upper left, no thick outlines. NOT pixel art, NOT retro game art.\n\nBACKGROUND\nA soft plain painted background in one warm muted color that suits Boomie, slightly darker toward the edges, full bleed to all four edges. No frame, no border, no text, no watermark. Only Boomie in the picture.",
    "group": "Menu portraits"
   },
   {
@@ -22565,7 +22578,7 @@
     "art/raw/characters/rose-hero-v1.png"
    ],
    "prompt": "Draw a pose sheet of Tom and his little niece Rose for the scene where she climbs onto his shoulders.\n\nPicture 1 is the approved picture of Tom carrying Rose on his shoulders. Picture 2 is Tom. Picture 3 is Rose.\nCopy the attached pictures as exactly as possible in every frame: the same people, faces, hair, beard, clothes, shoes, colors, linework, painting style, level of detail and head size compared to the body. Only the poses change. Do not redesign anything. Rose is a small child, much smaller than Tom, and keeps the same size difference in every frame.\n\nOne image, a grid of 3 columns by 2 rows of equal tall cells (6 frames, numbered left to right, top to bottom), the same scale in every cell, Tom's soles on one ground line in every cell. In every frame the bodies and both faces point toward the viewer; a slight turn is fine. Rose's two shoes always show.\n\nRow 1:\n1. KNEEL. Tom kneels on one knee and leans forward slightly with a warm smile, hands gripping Rose's ankles. Rose is already seated on his shoulders, hands on top of his head, a happy little smile.\n2. LIFT. Tom half way up from a deep squat, back straight, feet wide, hands gripping Rose's ankles, face straining slightly but smiling. Rose seated on his shoulders, mouth open in an excited gasp, hands on his head.\n3. CHEER. Tom standing tall, feet apart, hands holding Rose's ankles, a proud grin. Rose seated on his shoulders with both arms thrown straight up, eyes squeezed shut, mouth wide open, cheering.\n\nRow 2:\n4. LAUGH. Tom standing and holding Rose at his side by her waist, her legs dangling, both of them laughing, Tom's head tipped toward her, Rose's head thrown back.\n5. HOP OFF. Tom in a half crouch, both hands out open at his sides to catch her, grinning up. Rose already in the air above him, springing off his shoulders, both arms flung wide, a delighted open-mouth smile, one shoe lifted.\n6. SIT. Tom standing straight, hands holding Rose's ankles, a dry half smile with one eyebrow slightly raised. Rose seated on his shoulders, hands resting on top of his head, a pleased small smile.\n\nRose sits on the back of Tom's shoulders behind his head, one leg down each side of his neck, her lower legs on the front of his chest, never in front of his face.\nBackground: one flat solid magenta #FF00FF filling the whole image. No magenta anywhere on the characters: pink shoes stay clearly pink. No grid lines, borders, numbers, labels, text, shadows, dust, motion lines, sparkles or glow effects. Nothing touches a cell edge. Family friendly. No other figures or objects.",
-   "status": "rejected",
+   "status": "approved",
    "versions": [
     {
      "n": 0,
@@ -23589,21 +23602,6 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\nPicture 1 is the finished painting of Tom. Picture 2 is the walking sheet. Pictures 3 and 4 are the battle sheets.\n\nPAINT THIS ONE POSE\nTom, standing, looking up with a patient, ready face, holding a big fishing net with a long wooden pole straight up over his head with both hands, the hoop of the net high above him and slightly tilted. He has a tackle box hanging from one wrist.\nStanding on a plain flat magenta #FF00FF background, nothing else in the picture, no text, no shadow on the ground.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Copy Tom from the attached pictures as exactly as possible: the same face, age, body, head size compared to the body, hair, clothes, colors, painting style and level of detail.\n- The net is painted in the same style as Tom. Keep his height and head size as in his walking sheet."
   },
   {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch4-stage7-grey",
-   "tab": "Rooms",
-   "title": "Chapter 4: Soundstage 7 with a circle of the floor that has lost its color: grey floor, tape marks, wardrobe table, wheel tracks (grey patch on the built plate)",
-   "ar": "4:3",
-   "refs": [
-    "art/stage7.webp",
-    "art/grands.webp"
-   ],
-   "group": "Chapter 4",
-   "prompt": "Create the actual environment painting for Soundstage 7 from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram or example sheet.\n\nATTACHED IMAGES (in this order)\n1) the current painting of this place: use it for LAYOUT AND DETAILS. Keep the room layout, the stairs, the catwalk and the stage set. Keep the same camera, the same canvas size and aspect, and every path, building, prop, exit and open space in the same place and the same size.\n2) the finished painting of Deedee and Boppy's house, the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nTHE ONE CHANGE\nIn the middle of the floor, in front of the stairs to the stage set, is one large circle where rack two used to stand. The color is gone from this one patch: every surface inside it is painted in only grey and pale silver-grey, with no green, no brown and no color at all, but still in the same brushwork and the same light and shadow. The grey patch has one clean, sharp, circular edge all the way round, as if it was cut with scissors. Outside the circle everything keeps its normal rich color, and the color even looks a little stronger next to the grey. Inside the circle are the grey floor boards, the grey colored-tape marks on the floor, and one grey wardrobe table with nothing on it. Four straight wheel tracks lead out of the circle across the floor toward the stairs. The tracks are grey inside the circle and fade to normal color outside. The work lights are on and bright. There is no rack, no people and nothing on the table.\nEverything else stays exactly as in attachment 1, painted with the same care. No people, no animals, no text added anywhere.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right."
-  },
-  {
    "status": "approved",
    "versions": [
     {
@@ -23888,36 +23886,6 @@
    ],
    "group": "Chapter 4",
    "prompt": "Draw the dog Nara in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of Nara, a brown curly dog. Picture 2 is the walking sheet. Pictures 3 and 4 are the battle sheets.\n\nCopy them as exactly as possible in every frame: the same dog, face, age, body, head size compared to the body, brown curly coat, collar, colors, painting style, level of detail, viewing angle and figure size as the battle sheets. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\nThe character is a dog. She has paws, not hands, and wears nothing but her collar unless a frame says otherwise. Nothing is held except in her mouth.\n\nRow 1:\n1. Launching forward off her back paws in a sudden bolt, ears pinned back, eyes locked ahead.\n2. Standing with her nose on a small red fire hydrant (no hydrant drawn bigger than her shoulder height), tail high and thrilled.\n3. Standing proudly, having just dropped a small damp piece of paper tag on the ground in front of her, tail high.\nRow 2:\n4. Planted on all four paws with her head low, giving a small, very serious growl, lips barely lifted.\n5. Sitting, staring straight at something small and shiny at her eye level, tail sweeping the ground behind her.\n6. Standing and leaning her whole side against something to her left, eyes soft and happy, her body pressed flat against it.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch5-field-grey",
-   "tab": "Areas",
-   "title": "Chapter 5: the kickball field with a circle of grey grass and grey second base, six orange cones round it (grey patch on the built schoolyard plate, day)",
-   "ar": "4:3",
-   "refs": [
-    "art/schoolyard.webp",
-    "art/grands.webp"
-   ],
-   "group": "Chapter 5",
-   "prompt": "Create the actual environment painting for Long Island Elementary (the schoolyard) from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram or example sheet.\n\nATTACHED IMAGES (in this order)\n1) the current painting of this place: use it for LAYOUT AND DETAILS. Keep the school, the doors, the benches, the parking lot, the playground, the paths and every exit. Keep the same camera, the same canvas size and aspect, and every path, building, prop, exit and open space in the same place and the same size.\n2) the finished painting of Deedee and Boppy's house, the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nTHE ONE CHANGE\nOn the kickball field beside the school, in the middle of the infield, is one circle about the size of a bus where the color is gone. The color is gone from this one patch: every surface inside it is painted in only grey and pale silver-grey, with no green, no brown and no color at all, but still in the same brushwork and the same light and shadow. The grey patch has one clean, sharp, circular edge all the way round, as if it was cut with scissors. Outside the circle everything keeps its normal rich color, and the color even looks a little stronger next to the grey. Second base, the white square, and the chalk line running through the circle are painted grey inside the circle. Six bright orange safety cones stand evenly spaced in a ring just outside the grey circle. Nothing is in the sky above it.\nEverything else stays exactly as in attachment 1, painted with the same care. No people, no animals, no text added anywhere.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch5-field-grey-night",
-   "tab": "Areas",
-   "title": "Chapter 5: the same kickball field at night, the grey circle and the cones under the lights of the school (night version)",
-   "ar": "4:3",
-   "refs": [
-    "art/schoolyard.webp",
-    "art/grands.webp"
-   ],
-   "group": "Chapter 5",
-   "prompt": "Create the actual environment painting for Long Island Elementary (the schoolyard), at night from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram or example sheet.\n\nATTACHED IMAGES (in this order)\n1) the current painting of this place: use it for LAYOUT AND DETAILS. Keep the school, the doors, the benches, the parking lot, the playground, the paths and every exit. Keep the same camera, the same canvas size and aspect, and every path, building, prop, exit and open space in the same place and the same size.\n2) the finished painting of Deedee and Boppy's house, the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nTHE ONE CHANGE\nIt is a calm night. The sky is deep blue with a few stars. The school's windows and the lamps along the paths glow warm yellow and give soft pools of light. On the kickball field, in the middle of the infield, is one circle about the size of a bus where the color is gone. The color is gone from this one patch: every surface inside it is painted in only grey and pale silver-grey, with no green, no brown and no color at all, but still in the same brushwork and the same light and shadow. The grey patch has one clean, sharp, circular edge all the way round, as if it was cut with scissors. Outside the circle everything keeps its normal rich color, and the color even looks a little stronger next to the grey. Second base and the chalk line in the circle are grey. Six bright orange safety cones stand evenly spaced in a ring just outside the grey circle, lit by the lamps. Nothing is in the sky above it.\nEverything else stays exactly as in attachment 1, painted with the same care. No people, no animals, no text added anywhere.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right."
   },
   {
    "status": "approved",
@@ -24308,21 +24276,6 @@
    ],
    "group": "Chapter 5",
    "prompt": "Draw the dog Nara in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of Nara, a brown curly dog. Picture 2 is the walking sheet. Pictures 3 and 4 are the battle sheets.\n\nCopy them as exactly as possible in every frame: the same dog, face, age, body, head size compared to the body, brown curly coat, collar, colors, painting style, level of detail, viewing angle and figure size as the battle sheets. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\nThe character is a dog. She has paws, not hands, and wears nothing but her collar unless a frame says otherwise. Nothing is held except in her mouth.\n\nRow 1:\n1. Sitting down very firmly on a pair of shoes at her feet (no shoes drawn, her rear low and her paws together), looking up with big stubborn eyes.\n2. Standing with her head and shoulders sagging, eyes closed, a huge sigh, her whole chest deflating.\n3. Walking slowly and leaning her whole side against something to her right, eyes soft and a little sad, her body pressed flat against it.\nRow 2:\n4. Sitting upright and proud like a guard, chest out, ears up, looking straight ahead.\n5. Sitting with her head turned to one side, ears drooping, watching something drive away.\n6. Standing with her head up and her mouth open in a happy smile, her tail sweeping, relieved.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch6-picnic-grey",
-   "tab": "Areas",
-   "title": "Chapter 6: Old Oak Park with a circle of grey grass, three grey picnic tables and grey birthday streamers (grey patch on the built plate)",
-   "ar": "1:1",
-   "refs": [
-    "art/oakpark.webp",
-    "art/grands.webp"
-   ],
-   "group": "Chapter 6",
-   "prompt": "Create the actual environment painting for Old Oak Park from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram or example sheet.\n\nATTACHED IMAGES (in this order)\n1) the current painting of this place: use it for LAYOUT AND DETAILS. Keep the Old Oak, the playground, the community garden, the dog park, the paths, the lamps, the signs and every exit. Keep the same camera, the same canvas size and aspect, and every path, building, prop, exit and open space in the same place and the same size.\n2) the finished painting of Deedee and Boppy's house, the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nTHE ONE CHANGE\nOn the picnic lawn at the lower left of the park, one circle about the size of a house, holding all three picnic tables and the grass and benches round them, has lost its color. The color is gone from this one patch: every surface inside it is painted in only grey and pale silver-grey, with no green, no brown and no color at all, but still in the same brushwork and the same light and shadow. The grey patch has one clean, sharp, circular edge all the way round, as if it was cut with scissors. Outside the circle everything keeps its normal rich color, and the color even looks a little stronger next to the grey. The red-checked blanket, the plates and the picnic basket on the lawn are inside the circle and are grey too. Between the corners of the tables, strings of birthday streamers and paper bunting hang slack, and a plain birthday cake with candles stands on the middle table: all of it, inside the circle, painted grey. The far end of the last table (the one lowest and closest to the viewer) is bare and clear, with nothing on it, because a large object will be placed there by the game. Outside the circle the park keeps its normal rich color, and the greens look a little stronger next to the grey. Nothing in the sky above it.\nEverything else stays exactly as in attachment 1, painted with the same care. No people, no animals, no text added anywhere.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right."
   },
   {
    "status": "approved",
@@ -25103,21 +25056,6 @@
    ],
    "group": "Chapter 6",
    "prompt": "Draw the dog Nara in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of Nara, a brown curly dog. Picture 2 is the walking sheet. Pictures 3 and 4 are the battle sheets.\n\nCopy them as exactly as possible in every frame: the same dog, face, age, body, head size compared to the body, brown curly coat, collar, colors, painting style, level of detail, viewing angle and figure size as the battle sheets. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\nThe character is a dog. She has paws, not hands, and wears nothing but her collar unless a frame says otherwise. Nothing is held except in her mouth.\n\nRow 1:\n1. Standing stiff, all four paws planted, her head thrown back and her nose pointing straight up, her fur raised along her back, her lips lifted in a low growl, staring at something far above her.\n2. Digging hard with both front paws, a spray of brown dirt flying out behind her, her ears flopping, a big mound of earth building up behind her, her tail wagging.\n3. Sitting in a plain wooden bucket, so that only her head, chest and front paws show over the rim of the bucket, her ears flopped and a brave, serious look, her whole body pressed down into it.\nRow 2:\n4. Leaping high into the air, both front paws curled up, her mouth wide open, catching a shiny gold-painted tennis ball in the air, her ears flying.\n5. A play bow: her front legs stretched flat out in front of her, her chest down on the ground, her rear high in the air and her tail up and wagging, her face bright and happy, looking forward.\n6. Sitting, her head tilted far to one side, her ears one up and one down, her eyes wide and puzzled, as if she cannot work something out.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch7-stacks-grey",
-   "tab": "Areas",
-   "title": "Chapter 7: the Stacks hall with a circle of grey floor, a grey globe, grey shelf ends and grey books, the returns cart taken out (grey patch on the built plate)",
-   "ar": "4:3",
-   "refs": [
-    "art/stacks.webp",
-    "art/grands.webp"
-   ],
-   "group": "Chapter 7",
-   "prompt": "Create the actual environment painting for the Stacks under the Hush Library from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram or example sheet.\n\nATTACHED IMAGES (in this order)\n1) the current painting of this place: use it for LAYOUT AND DETAILS. Keep the sign lettering exactly as in attachment 1 (FICTION, NONFICTION, PICTURE BOOKS), the shelves, the picture-book corner, the reading table, the doors and every other landmark. Keep the same camera, the same canvas size and aspect, and every path, building, prop, exit and open space in the same place and the same size.\n2) the finished painting of Deedee and Boppy's house, the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nTHE ONE CHANGE\nIn the middle of the long hall, one circle about as wide as four shelves, holding the big globe on its stand, the floor round it and the ends of the nearest bookshelves with every book on them, has lost its color. The color is gone from this one patch: every surface inside it is painted in only grey and pale silver-grey, with no green, no brown and no color at all, but still in the same brushwork and the same light and shadow. The grey patch has one clean, sharp, circular edge all the way round, as if it was cut with scissors. Outside the circle everything keeps its normal rich color, and the color even looks a little stronger next to the grey. The hall's rug, the globe's brass stand and the rolling ladder foot inside the circle are grey too. The returns cart that stands in the hall in attachment 1 is NOT painted here: leave an empty clear stretch of floor in front of the globe, at least as big as a small car, because the game places a large object there. Outside the circle the Stacks keep their normal rich color, and the wood and the warm lamps look a little stronger next to the grey.\nEverything else stays exactly as in attachment 1, painted with the same care. No people, no animals, no text added anywhere.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right."
   },
   {
    "status": "approved",
@@ -26197,408 +26135,6 @@
    ],
    "title": "Olivia thinking and listening (one full-body pose; the fifth talking pose, for lines where someone thinks about what another person says)",
    "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\n1) The approved full-body hero painting of Olivia from \"The Adventures of Tom\", a family role-playing game. This is exactly how Olivia looks.\n2) The approved talking sheet of Olivia, for the size of the head against the body and the painted finish.\n\nPAINT THIS ONE POSE\nOlivia, alone, standing, full body from the top of the head to the shoes, facing the viewer at a slight three-quarter angle. Thinking hard about what someone else is saying: one hand on the chin, the other arm folded across the body supporting that elbow, the head tilted a little, eyes looking up and to the side, the mouth closed in a thoughtful little line. Curious and attentive, not sad.\n- Keep the face, hair, build, age, clothes and colors exactly as in the attachments. The pose matches the attached talking sheet in size and finish, so it can sit next to those four poses.\n- The figure fills about 85 percent of the picture height, centered, with an even empty margin all round.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient, no floor, no shadow shape and no magenta anywhere on the figure. The game cuts the figure out of this color.\n- No words, letters or numbers anywhere.\n\nART STYLE\n- Painted by hand in the style of the attached paintings: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges, realistic caricature proportions (a large head on a slim body, as in the attachments).\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Family friendly for children aged 6 and up."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-yard-grey",
-   "tab": "Areas",
-   "title": "Chapter 8: a front lawn on 2nd Avenue with a hose and three porch steps, all in grey inside a circle (grey patch on the built Jefferson Park plate)",
-   "ar": "4:3",
-   "refs": [
-    "art/jpark.webp",
-    "art/grands.webp"
-   ],
-   "group": "Chapter 8",
-   "prompt": "Create the actual environment painting for Jefferson Park, the neighborhood with 2nd Avenue from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram or example sheet.\n\nATTACHED IMAGES (in this order)\n1) the current painting of this place: use it for LAYOUT AND DETAILS. Keep every sign lettering exactly as in attachment 1 (DOWNTOWN, CREOLE, PUPUSAS, SKATE, JUICE, CAR BARN, NOVAK, ALVAREZ, RIVITUSO, WESTON, OLD OAK PARK), the road, every house, tree, lamp and mailbox exactly where they are. Keep the same camera, the same canvas size and aspect, and every path, building, prop, exit and open space in the same place and the same size.\n2) the finished painting of Deedee and Boppy's house, the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nTHE ONE CHANGE\nOn the front lawn in the lower left of the picture, the one with the wooden bench and the flower beds beside the RIVITUSO house, one circle about as wide as a minivan and a half has lost its color. Inside the circle the lawn is bare grass with a garden hose coiled on it and, at the edge nearest the street, a small set of three wooden porch steps with a simple railing, all of it painted new. The color is gone from this one patch: every surface inside it is painted in only grey and pale silver-grey, with no green, no brown and no color at all, but still in the same brushwork and the same light and shadow. The grey patch has one clean, sharp, circular edge all the way round, as if it was cut with scissors. Outside the circle everything keeps its normal rich color, and the color even looks a little stronger next to the grey. The bench, the flower beds and the RIVITUSO house stay outside the circle in full color. Leave the middle of the circle completely clear, at least the size of a minivan, because the game places a large object there.\nEverything else stays exactly as in attachment 1, painted with the same care. No people, no animals, no text added anywhere.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-potluck-day",
-   "tab": "Areas",
-   "title": "Chapter 8: 2nd Avenue at six o'clock with long tables down the middle of the road, steaming dishes and folding chairs (potluck on the built plate)",
-   "ar": "4:3",
-   "refs": [
-    "art/jpark.webp",
-    "art/grands.webp"
-   ],
-   "group": "Chapter 8",
-   "prompt": "Create the actual environment painting for Jefferson Park, the neighborhood with 2nd Avenue from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram or example sheet.\n\nATTACHED IMAGES (in this order)\n1) the current painting of this place: use it for LAYOUT AND DETAILS. Keep every sign lettering exactly as in attachment 1, every house, tree, lamp, mailbox and the arches exactly where they are. Only the road in the foreground changes. Keep the same camera, the same canvas size and aspect, and every path, building, prop, exit and open space in the same place and the same size.\n2) the finished painting of Deedee and Boppy's house, the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nTHE ONE CHANGE\nThe road in the lower middle of the picture, between the OLD OAK PARK arch and the houses, has been closed for a neighborhood potluck. Three long tables with white paper cloths run down the middle of the road end to end, crowded with steaming dishes of every kind: a big pot of gumbo at the front, pupusas, a lasagna, salads, pies, bowls and many round loaves of bread in baskets, with wisps of steam rising. Folding chairs stand along both sides of the tables and a few are pushed back as if people have just stood up. Strings of small lamps are lit over the tables. The light is the warm gold of six o'clock. No people.\nEverything else stays exactly as in attachment 1, painted with the same care. No people, no animals, no text added anywhere.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-potluck-night",
-   "tab": "Areas",
-   "title": "Chapter 8: 2nd Avenue at night after the potluck, tables bare, folding chairs half stacked, strings of lamps lit (night version of the potluck)",
-   "ar": "4:3",
-   "refs": [
-    "art/jpark.webp",
-    "art/grands.webp"
-   ],
-   "group": "Chapter 8",
-   "prompt": "Create the actual environment painting for Jefferson Park, the neighborhood with 2nd Avenue from The Adventures of Tom, a family role-playing game. Generate the image now. Do not make a plan, presentation, diagram or example sheet.\n\nATTACHED IMAGES (in this order)\n1) the current painting of this place: use it for LAYOUT AND DETAILS. Keep every sign lettering exactly as in attachment 1, every house, tree, lamp, mailbox and the arches exactly where they are. Only the lighting and the road in the foreground change. Keep the same camera, the same canvas size and aspect, and every path, building, prop, exit and open space in the same place and the same size.\n2) the finished painting of Deedee and Boppy's house, the inspiration for how every picture in this game is painted. Match its hand-painted, hand-brushed look: visible brush strokes, matte painted surfaces, warm golden light from the upper left, soft painted shadows, rich warm color, a fine canvas grain. Take only how it is painted. Do not copy its room, furniture, objects, people or layout.\n\nTHE ONE CHANGE\nIt is night and the potluck is over. The road in the lower middle of the picture still has three long tables with white paper cloths down the middle, now nearly empty: a few bowls, crumpled napkins, one half-eaten pie. Folding chairs are half stacked in tall leaning piles at the edges and a few are still unfolded. Strings of small lamps over the tables glow warm gold against a deep blue night sky with a few stars, and the porch lights of the houses are lit. The whole picture is a dark blue night with warm pools of lamplight. No people.\nEverything else stays exactly as in attachment 1, painted with the same care. No people, no animals, no text added anywhere.\n\nOUTPUT\nOne standalone, edge-to-edge, full-frame painting. No border, title, labels, captions, grid, pins, UI, inset views, or white page.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-orange-block",
-   "tab": "Props",
-   "title": "Chapter 8: the orange block, minivan-sized, a whole rosebush inside with a paper notice taped to one stem, a round hole on the street side (one object)",
-   "ar": "1:1",
-   "refs": [
-    "art/grands.webp",
-    "art/raw/props/ch7-orange-block-v1.png"
-   ],
-   "group": "Chapter 8",
-   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGES\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n2) The finished painting of an orange block from the same game. Paint the same hard, clear, glowing orange material, the same painted finish and the same orange glass, but this block has a round coin-sized hole instead of a dent. Only the size and what is inside change.\n\nPAINT THIS ONE OBJECT\nA hard, clear orange block, as big as a minivan, long and wide and clearly bigger than the golf-cart-sized block of the attached picture, glossy-clear but painted, like a stone of orange glass, with the same warm orange glow as a piece of amber candy. Inside it, frozen and not moving, every detail visible: a whole red rosebush, full and round and a little overgrown, covered in red roses and green leaves, with thorny stems. A single sheet of white paper is taped to one stem near the front, hanging a little crooked, with small lines of printed text on it too small to read. One round hole, about the size of a coin slot big enough to push a gold coin into, is in the side facing the viewer, about halfway up, a clean circular hole, deeper than a dent. The block stands alone with a flat bottom.\n- Exactly ONE object (or the one group described), alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-coin",
-   "tab": "Props",
-   "title": "Chapter 8 close-up: the gold coin with a rosebush stamp (one object, large)",
-   "ar": "1:1",
-   "refs": [
-    "art/grands.webp",
-    "art/raw/props/ch7-coin-v1.png"
-   ],
-   "group": "Chapter 8",
-   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGES\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n2) The finished painting of a gold coin from the same game. Paint the same coin: the same gold, the same raised rim, the same soft highlights, the same size in the picture. Only the stamp changes.\n\nPAINT THIS ONE OBJECT\nA small gold coin, seen face on and filling most of the picture. It has a rosebush stamped in raised relief in the middle: a small round bush with a few five-petal roses and leaves on thin thorny stems, drawn clearly, and a rim around the edge. The gold is warm and shiny, painted with soft highlights and a deeper gold in the shadows. It lies flat, no stand, no shadow on a surface.\n- Exactly ONE object (or the one group described), alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-notice",
-   "tab": "Props",
-   "title": "Chapter 8: Bernadette's paper notice lying on the grass, with its printed words (one object)",
-   "ar": "1:1",
-   "refs": [
-    "art/grands.webp"
-   ],
-   "group": "Chapter 8",
-   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE OBJECT\nOne sheet of white printer paper, a little creased, with a strip of clear tape still stuck to the top edge, lying flat on its back as if it just drifted down, seen from above at a slight angle. Printed on it in neat black capitals, spelled exactly: NOTICE at the top in large letters, below it TRIM TO REGULATION HEIGHT. in medium letters, and at the bottom, in small letters, THE WATCH. Nothing else is printed on it and there is no handwriting. No grass is painted: only the paper and a soft shadow under it.\n- Exactly ONE object (or the one group described), alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-rosebush",
-   "tab": "Props",
-   "title": "Chapter 8: the rosebush in full color, red roses and green leaves (one object, for after the block opens)",
-   "ar": "1:1",
-   "refs": [
-    "art/grands.webp"
-   ],
-   "group": "Chapter 8",
-   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE OBJECT\nA whole red rosebush, full and round and a little overgrown, about as wide as a minivan, covered in red roses in every stage from buds to open flowers, with deep green leaves and thorny stems, standing on a small flat patch of green grass. Painted in rich, bright, saturated color.\n- Exactly ONE object (or the one group described), alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-dough-counter",
-   "tab": "Props",
-   "title": "Chapter 8: a kitchen counter crowded with bowls of rising dough under dish towels, two stockpots with dough rising over the rim, and a salad spinner (one group)",
-   "ar": "3:2",
-   "refs": [
-    "art/grands.webp",
-    "art/raw/props/ch2-loaf-whole-v1.png"
-   ],
-   "group": "Chapter 8",
-   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one wide image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE OBJECT\nOne long kitchen counter seen from the front at a slight angle, crowded edge to edge with rising bread dough: eleven mixing bowls of different sizes and colors (glass, ceramic, steel) each full of pale round dough humped up over the rim, some under checked dish towels, two tall steel stockpots with dough pushing up past the rim, and one clear plastic salad spinner with dough pressed up against its lid. A bag of flour with a scoop in it stands at one end. Everything is painted warm and cozy. The counter is cut out of the picture: just the top of the counter and what sits on it, with a flat bottom edge.\n- Exactly ONE object (or the one group described), alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-spinner",
-   "tab": "Props",
-   "title": "Chapter 8: a salad spinner full of pale bread dough pressed up against its clear lid (one object)",
-   "ar": "1:1",
-   "refs": [
-    "art/grands.webp"
-   ],
-   "group": "Chapter 8",
-   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one square image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE OBJECT\nA salad spinner: a round white plastic bowl with a clear dome lid and a small crank knob on top, packed with pale bread dough that presses up against the clear lid so you can see it, a little flour dusted on the outside of the bowl.\n- Exactly ONE object (or the one group described), alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-loaves",
-   "tab": "Props",
-   "title": "Chapter 8: a stack of forty golden-brown round loaves of bread in neat rows along a wall (one object)",
-   "ar": "3:2",
-   "refs": [
-    "art/grands.webp",
-    "art/raw/props/ch2-loaf-whole-v1.png"
-   ],
-   "group": "Chapter 8",
-   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one wide image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGES\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n2) The finished painting of a round sourdough loaf from the same game. Paint the loaves in the same way: the same golden crust, the same scored top, the same painted finish.\n\nPAINT THIS ONE OBJECT\nForty round loaves of sourdough bread, golden brown with a crisp scored cross on top and a dusting of flour, stacked in four neat rows of ten on a long low wooden shelf, steam rising from the nearest ones, seen from the front at a slight angle. Each loaf the same size, painted with warm light on the crusts. The shelf is cut out of the picture with a flat bottom edge.\n- Exactly ONE object (or the one group described), alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-barn-door",
-   "tab": "Props",
-   "title": "Chapter 8: the old Car Barn door, shut with a heavy rusty chain, and the same door with the chain hanging loose and one leaf open a hand's width (2 objects, side by side)",
-   "ar": "3:2",
-   "refs": [
-    "art/carbarn.webp",
-    "art/grands.webp"
-   ],
-   "group": "Chapter 8",
-   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one wide image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGE\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n\nPAINT THIS ONE OBJECT\nTWO objects side by side, the same on both sides apart from the chain. Left: a tall pair of old double wooden doors in a brick archway with dark green painted wood, tall iron strap hinges and a small round window high up in each leaf, shut tight with a heavy rusty chain wrapped twice across both handles and closed with one big old padlock. Right: exactly the same doors, the padlock open and hanging from one link, the chain slid loose and hanging down in loops, and one leaf of the doors open a hand's width showing a dark gap with a faint cold blue glow inside. The wood is weathered, the brick is soot-dark, and there is a little frost on the lower boards.\n- Exactly TWO objects side by side, each large, alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-blanket-states",
-   "tab": "Props",
-   "title": "Chapter 8: the Damp Blanket draped over a workbench with a small blue flame trapped under it, steaming, and the same blanket as an ordinary blanket on a hook (2 objects, side by side)",
-   "ar": "3:2",
-   "refs": [
-    "art/raw/enemies/enemy-wetblanket-v1.png",
-    "art/carbarn.webp",
-    "art/grands.webp"
-   ],
-   "group": "Chapter 8",
-   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one wide image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGES\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n2) The approved painting of the Wet Blanket monster, a blue-grey wet cloth. Paint the cloth in the same blue-grey, the same painted folds and the same finish. The blanket here has no face.\n\nPAINT THIS ONE OBJECT\nTWO objects side by side. Left: a small wooden workbench with a big wet grey-blue moving blanket draped over it, the soft folds hanging down to the floor on every side, and under the cloth a small blue flame glowing through the fabric from the middle of the bench top, steam curling up from the damp cloth. Right: the same blanket as an ordinary blanket, now dry and plain, hanging folded over a single iron wall hook, with no flame, no face and no steam.\n- Exactly TWO objects side by side, each large, alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-draft-states",
-   "tab": "Props",
-   "title": "Chapter 8: a small blue flame leaning hard sideways on a windowsill, and an old window banging shut (2 objects, side by side)",
-   "ar": "3:2",
-   "refs": [
-    "art/raw/enemies/enemy-thedraft-v1.png",
-    "art/carbarn.webp",
-    "art/grands.webp"
-   ],
-   "group": "Chapter 8",
-   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one wide image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGES\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n2) The approved painting of the Draft monster, a swirl of pale blue wind. Paint the wind lines in the same pale blue and the same painted finish. Nothing here has a face.\n\nPAINT THIS ONE OBJECT\nTWO objects side by side. Left: an old stone windowsill in a brick wall with one small blue pilot flame standing on it, bent almost flat sideways by an unseen wind, its tip streaming to the left, a few pale swirling wind lines around it. Right: a tall old iron-framed window of small glass panes, swung shut with a bang, the panes rattling, a few dust motes and small curved motion lines at its edge to show it just slammed.\n- Exactly TWO objects side by side, each large, alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-lunchbox-states",
-   "tab": "Props",
-   "title": "Chapter 8: a dented red metal lunchbox with a small blue flame glowing inside and its lid snapping, and the same lunchbox ordinary with its lid hanging open (2 objects, side by side)",
-   "ar": "3:2",
-   "refs": [
-    "art/raw/enemies/enemy-pickyeater-v1.png",
-    "art/grands.webp"
-   ],
-   "group": "Chapter 8",
-   "prompt": "IMAGE REQUEST: ONE SINGLE OBJECT. Return exactly one wide image, nothing else. Generate it now. Do not make a plan, a sheet or several states.\n\nATTACHED IMAGES\n1) The attached picture is the finished painting of Deedee and Boppy's house from \"The Adventures of Tom\", a family role-playing game. Take only how it is painted: hand-brushed, matte painted surfaces, rich warm color. Paint only what is described below.\n2) The approved painting of the Picky Eater monster, a red metal lunchbox with arms and legs. Paint the same red lunchbox: the same red, the same silver handle and latch and the same painted finish. The lunchbox here has no face, no arms and no legs.\n\nPAINT THIS ONE OBJECT\nTWO objects side by side. Left: an old dented red metal lunchbox with a silver handle and a silver latch, sitting on a bench, its lid open a crack and snapping, with a small blue flame glowing inside so a blue light spills out of the crack. Right: the same lunchbox, ordinary and empty, the lid hanging wide open, a plain empty inside, a crumb or two, no flame and no face.\n- Exactly TWO objects side by side, each large, alone, centered, large: it fills about 80 percent of the picture, with an even empty margin all round. Nothing else in the picture: no second copy, no background scenery.\n- Background: one flat solid color, pure magenta #FF00FF, edge to edge, with no gradient and no magenta anywhere inside the object. The game cuts the object out of this color.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- No people, no hands, no faces.\n- No words, letters or numbers anywhere unless the description above says to paint them."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-call-grace",
-   "tab": "Props",
-   "title": "Chapter 8: a video call frame of Grace in front of a wall-sized chart with a color key, with LOS ANGELES gone over in pen (one portrait screen picture)",
-   "ar": "2:3",
-   "refs": [
-    "art/raw/characters/grace-hero-v1.png",
-    "art/raw/characters/grace-walking-sheet-v2.png",
-    "art/raw/props/ch7-chart-unrolled-v1.png",
-    "art/raw/props/ch6-videocall-frame-v1.png"
-   ],
-   "group": "Chapter 8",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PICTURE. Return exactly one tall portrait image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The finished painting of Grace, a nine year old girl. 2) Her walking sheet. 3) Her chart, drawn flat. 4) The painted video call frame from the same game.\n\nPAINT THIS ONE PICTURE\nWhat a phone screen shows during a video call, filling the whole picture edge to edge, with no phone around it: Grace, from the waist up, close to the camera and facing it, in front of a bedroom wall completely covered by her chart. The chart is made of many sheets of paper taped edge to edge in rows of boxes joined by lines, with a COLOR KEY box in the top right corner with small colored squares, and on one box in the middle, the words LOS ANGELES written and gone over in thick black pen, spelled exactly LOS ANGELES. She holds a pencil behind her ear and a black pen in one hand, up beside her face, with a very pleased, triumphant, I-told-you-so grin. A warm bedroom lamp lights her from the left. No other words anywhere except small illegible scribbles on the chart.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Copy Grace from the attached pictures as exactly as possible: the same face, age, hair and clothes, the same painting style.\n- The picture looks like a phone camera view, a little close and slightly from below."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-call-rose",
-   "tab": "Props",
-   "title": "Chapter 8: a video call frame of Rose jumping up into the picture from below, mouth open yelling, hair flying (one portrait screen picture)",
-   "ar": "2:3",
-   "refs": [
-    "art/raw/characters/rose-hero-v1.png",
-    "art/raw/characters/rose-walking-sheet-v2.png",
-    "art/raw/props/ch6-videocall-frame-v1.png"
-   ],
-   "group": "Chapter 8",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PICTURE. Return exactly one tall portrait image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The finished painting of Rose, a six year old girl. 2) Her walking sheet. 3) The painted video call frame from the same game.\n\nPAINT THIS ONE PICTURE\nWhat a phone screen shows during a video call, filling the whole picture edge to edge, with no phone around it: Rose jumping up from the bottom of the picture straight into the camera, her face and shoulders huge and close, her arms thrown up and her hands like claws, her mouth wide open yelling, her eyes wide and sparkling, her hair flying up as if she just jumped, her gap-toothed grin showing. Behind her is the blurred edge of a wall covered in colored paper. Warm lamp light.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Copy Rose from the attached pictures as exactly as possible: the same face, age, hair and clothes, the same painting style.\n- No words anywhere."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-flame-sheet",
-   "tab": "Enemies",
-   "title": "Chapter 8: the walking pilot flame (6 poses facing right: standing, two walking steps, hopping up, landing, leaning sideways)",
-   "ar": "3:2",
-   "refs": [
-    "art/raw/enemies/enemy-thedraft-v1.png",
-    "art/grands.webp"
-   ],
-   "group": "Chapter 8",
-   "prompt": "Draw a small living pilot flame, about the size of a pea-green apple: a teardrop of clear bright blue flame with a warmer yellow-white heart, two small round dark eyes in the blue and a tiny curved mouth, standing on two tiny stubby legs made of flame, with a thin soft glow round it. It is cute, calm and a little determined, never scary. as one pose sheet for a family role-playing game.\n\nPicture 1 is the approved painting of the Draft, a swirl of pale blue wind, for the painted finish only. Picture 2 is the finished painting of Deedee and Boppy's house, for the handbrushed finish only.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, the ground line the same in every cell, each figure well inside its cell with clear magenta margin, nothing touching a cell edge, in profile or three-quarter view facing right unless a frame says otherwise. No grid lines, numbers, text, effects or shadows.\n\nRow 1:\n1. Standing still, facing right, upright, calm, looking forward.\n2. Walking, facing right, the left stubby leg forward, the flame leaning a little forward, glowing.\n3. Walking, facing right, the right stubby leg forward, the flame leaning a little back.\nRow 2:\n4. Hopping, facing right, both legs tucked up, high in the air, the flame stretched tall and bright.\n5. Landing, facing right, squashed down low with both legs bent, the flame wide and short.\n6. Standing, facing right, the flame bent hard sideways to the right as if blown by a wind, the little eyes shut tight.\n\nDo not add frames, merge frames or repeat a pose. Paint it like the attached pictures: matte, visible brush strokes, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Family friendly."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-ironbelly-sheet",
-   "tab": "Enemies",
-   "title": "Chapter 8: Old Ironbelly in his story states (6 poses facing right: frosted over with flames in his firebox and the coin on his door, frost cracking, glowing dull red, loaded with loaves, loaves out on the door shelf, an ordinary cold oven)",
-   "ar": "3:2",
-   "refs": [
-    "art/raw/enemies/enemy-ironbelly-v2.png",
-    "art/raw/enemies/ending-ironbelly-v1.png",
-    "art/raw/enemies/enemy-mudling-v2.png"
-   ],
-   "group": "Chapter 8",
-   "prompt": "IMAGE REQUEST: ONE SINGLE SHEET. Return exactly one image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The approved painting of Old Ironbelly, a boss of \"The Adventures of Tom\", a family role-playing game. Keep the same creature, shape, colors and painted finish.\n2) The approved painting of Grump Hollow's Mudling, for the handbrushed finish only.\n\nPAINT THIS SHEET\nThe same 6 poses as attachment 1, in the same 3 by 2 layout: top row poses 1 to 3, bottom row poses 4 to 6, each pose filling most of its cell, nothing overlapping, the creature facing right in every pose.\nPaint the same round cast-iron oven, but keep him an old, proud, plain, male-looking workman of an oven: no eyelashes, no lipstick, no bow, nothing decorative. In these six poses the six cells are different states, all facing right:\n1. Frosted over: his iron is covered in white frost and little icicles, his firebox mouth full of crowded small blue flames, a small gold coin stuck to the middle of his round door, his eyes narrowed and grumpy.\n2. Frosted and cracking: the frost is breaking away in flakes at the top and sides, the flames in the firebox leaning toward the viewer, a flash of warm orange at the rim of the door, the coin still stuck to the door, his eyes surprised.\n3. Glowing dull red: the frost gone, his whole body glowing a soft dull red-orange, a calm warm light in the firebox, three round loaves of bread sitting on a small iron shelf that has swung out under the door, the coin still stuck to the door, his eyes half closed, a gruff satisfied look.\n4. Loading: his door swung wide open to show a bright glowing firebox, a long wooden bread peel with two round loaves on it going in, steam rising, his eyes wide and proud.\n5. Working: his door open and a row of four round golden loaves sliding out onto the door shelf, steam rising, a bright orange glow, his eyes shut in concentration.\n6. Ordinary and cold: the same body as an old cast-iron oven with no face, no eyes and no mouth, the door shut, dark and dull, the iron cool and matte, a thin curl of smoke from the chimney, a plain small iron shelf under the door.\nPaint it like attachment 1: matte, thick visible brush strokes on the creature, canvas grain, crisp painted edges, no gloss, not a smooth digital render. Background: one flat, solid, even magenta #FF00FF with no texture, no brush strokes and no gradient, nothing else in the picture, no text."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-tom-poses",
-   "tab": "Characters",
-   "title": "Chapter 8: Tom story frames (6 frames: carries the salad spinner in both arms, holds out a coin, wraps a flashbulb in a dish towel, stacks folding chairs, holds his phone up high, looks at a photo on his phone)",
-   "ar": "3:2",
-   "refs": [
-    "art/raw/characters/tom-hero-v2.png",
-    "art/raw/characters/tom-walking-sheet-v3.png",
-    "art/raw/characters/tom-battle-sheet-1-v1.png",
-    "art/raw/characters/tom-battle-sheet-2-v1.png"
-   ],
-   "group": "Chapter 8",
-   "prompt": "Draw Tom in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of Tom. Picture 2 is the walking sheet. Pictures 3 and 4 are the battle sheets.\n\nCopy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as the battle sheets. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\n\nRow 1:\n1. Standing, facing the viewer, carrying a white plastic salad spinner with a clear lid in both arms against his chest, the lid full of pale dough, his chin tucked, a determined, slightly embarrassed face.\n2. Standing in profile, facing right, one arm stretched out in front of him with his open palm up and a small gold coin held between his thumb and finger toward someone at the edge of his cell (nobody drawn), a calm, respectful, serious face.\n3. Standing, facing the viewer, a small burnt-out round flashbulb in one hand and a folded checked dish towel in the other, wrapping the bulb carefully, his head bent over it, a careful, concentrating face.\nRow 2:\n4. Standing in profile, facing right, carrying a tall stack of five metal folding chairs held against his side with both arms, leaning a little to balance them, a tired but cheerful face.\n5. Standing, facing the viewer, holding a smartphone up high at arm's length in one hand with the screen turned away to the right as if showing something to someone, his other hand pointing at it, a serious, urgent face.\n6. Standing, facing the viewer, holding a smartphone in both hands in front of his chest and looking down at its screen with a quiet, soft, faraway expression, his shoulders a little low.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-tnb-poses",
-   "tab": "Characters",
-   "title": "Chapter 8: TNB story frames (6 frames: stops at the edge of the grey with one toe back, stares at the turntable, looks back at three little flames, carries a tower of bowls, sits on the counter with a grape soda, kneels to feed a motor)",
-   "ar": "3:2",
-   "refs": [
-    "art/raw/characters/tnb-hero-v1.png",
-    "art/raw/characters/tnb-walking-sheet-v2.png",
-    "art/raw/characters/tnb-battle-sheet-1-v1.png",
-    "art/raw/characters/tnb-battle-sheet-2-v1.png"
-   ],
-   "group": "Chapter 8",
-   "prompt": "Draw TNB in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of TNB. Picture 2 is the walking sheet. Pictures 3 and 4 are the battle sheets.\n\nCopy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as the battle sheets. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\n\nRow 1:\n1. Standing in profile, facing right, hands in his pockets, one foot stopped and his toe drawn back from a line on the ground in front of him (draw no line), his eyebrows raised, a calm, wary, I-am-not-doing-that look.\n2. Standing, facing the viewer, hands loosely at his sides, his head tilted back and his mouth a little open, staring up in delighted wonder, as if looking at the best thing he has ever seen, his eyes shining.\n3. Standing, turned a little to the left and looking down and back over his shoulder, a gentle amused smile, one hand held out low behind him with the fingers open as if letting small things follow him (draw nothing behind him).\nRow 2:\n4. Standing, facing the viewer, carrying a tall wobbling tower of nine colorful pottery bowls stacked in both arms up to his chin, peering round the side of the stack, a mellow, unbothered face.\n5. Sitting on the edge of a counter, facing the viewer, one leg swinging, holding a can of grape soda in one hand, relaxed and easy, a slow smile, his eyes half closed (draw only a plain flat painted counter edge under him).\n6. Kneeling on one knee in profile, facing right, one hand held forward at the level of his chest as if feeding something small into a machine at the edge of his cell (nothing drawn there), the other hand holding a small silver screwdriver, a focused, quiet, happy face.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-bernadette-poses",
-   "tab": "Characters",
-   "title": "Chapter 8: Bernadette story frames (6 frames: holds up a key on a ring, counts loaves with a pen, drinks a grape soda with her back turned, arms folded at a chain, points at the block, leans into a phone screen)",
-   "ar": "3:2",
-   "refs": [
-    "art/raw/npcs/npc-photo-bernadette-v2.png",
-    "art/raw/npcs/npc-walk-bernadette-v1.png"
-   ],
-   "group": "Chapter 8",
-   "prompt": "Draw Bernadette in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of Bernadette. Picture 2 is the walking sheet.\n\nCopy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as the walking sheet. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\n\nRow 1:\n1. Standing, facing the viewer, holding up one big old iron key on a ring in her raised hand beside her face, her chin high, a stern, long-suffering, I-was-never-asked look.\n2. Standing in profile, facing right, her clipboard held against her chest and a pen pointing out in her other hand, moving the pen along as if counting rows of something at the edge of her cell (nothing drawn there), her lips moving, her eyes narrowed.\n3. Standing with her back turned to the viewer, her head turned a little to the right, a can of grape soda held up at her mouth, her clipboard under her other arm, caught mid sip.\nRow 2:\n4. Standing in profile, facing right, her arms folded tight with her clipboard under one elbow, her mouth in a flat line and one eyebrow raised, standing guard.\n5. Standing in profile, facing right, one arm stretched out straight and pointing, the clipboard in the other hand, her mouth open mid-sentence, bossy and exact.\n6. Leaning in toward the viewer from the left, her face large and close, one eyebrow raised and her lips pursed, her clipboard held up at the bottom of the cell, as if peering into a phone screen to inspect someone.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-washington-poses",
-   "tab": "Characters",
-   "title": "Chapter 8: Mr. Washington story frames (6 frames: angry and pointing at his roses, pushes a coin into a hole, reads a notice, bites a slice of bread, stands hands on hips, sighs with a hand on his forehead)",
-   "ar": "3:2",
-   "refs": [
-    "art/raw/npcs/npc-photo-washington-v2.png",
-    "art/raw/npcs/npc-walk-washington-v1.png"
-   ],
-   "group": "Chapter 8",
-   "prompt": "Draw Mr. Washington in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of Mr. Washington. Picture 2 is the walking sheet.\n\nCopy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as the walking sheet. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\n\nRow 1:\n1. Standing in profile, facing right, one arm stretched out pointing straight ahead, the other fist on his hip, his mouth open, his eyebrows low, loudly angry about something at the edge of his cell (nothing drawn there).\n2. Standing in profile, facing right, one arm stretched out in front of him with his thumb and finger pushing a small gold coin into a hole at the edge of his cell (nothing drawn there), his lips pressed together, his eyes narrowed, a doubtful, steady look.\n3. Standing, facing the viewer, holding a white sheet of paper out in front of him in both hands at chest height and reading it with his glasses low on his nose, his eyebrows rising.\nRow 2:\n4. Standing, facing the viewer, one hand holding a thick slice of fresh bread up to his mouth with a big bite just taken, his eyes closed, his face gone still and soft.\n5. Standing, facing the viewer, both fists on his hips, his chin up, a sour, put-upon, patient scowl.\n6. Standing, facing the viewer, one hand flat on his forehead and his eyes closed, his head tilted back a little, a long-suffering sigh.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-cooks-poses",
-   "tab": "Characters",
-   "title": "Chapter 8: Miss Odette and Doña Carmen on the sidewalk holding spoons (6 frames: Odette 3, Carmen 3)",
-   "ar": "3:2",
-   "refs": [
-    "art/raw/npcs/npc-photo-odette-v2.png",
-    "art/raw/npcs/npc-walk-odette-v1.png",
-    "art/raw/npcs/npc-photo-carmen-v2.png",
-    "art/raw/npcs/npc-walk-carmen-v1.png"
-   ],
-   "group": "Chapter 8",
-   "prompt": "Draw Miss Odette (the first three frames) and Doña Carmen (the last three frames) in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of Miss Odette. Picture 2 is her walking sheet. Picture 3 is the finished painting of Doña Carmen. Picture 4 is her walking sheet.\n\nCopy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as the walking sheet. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\n\nRow 1, Miss Odette, always Odette's own face, age, body, hair and clothes:\n1. Standing, facing the viewer, holding a big wooden spoon up in one hand like a scepter and the other hand on her hip, her mouth open scolding, a stern, warm, no-nonsense face.\n2. Standing in profile, facing right, pointing the wooden spoon forward at someone at the edge of her cell (nobody drawn), her eyebrow high, a doubtful look.\n3. Standing, facing the viewer, one hand holding the wooden spoon against her cheek, her eyes rolled up and her mouth a thin line, deeply unimpressed.\nRow 2, Doña Carmen, always Carmen's own face, age, body, hair and clothes:\n4. Standing, facing the viewer, holding a metal spatula up in one hand and her other fist on her hip, her chin up, a fierce, proud, offended face.\n5. Standing in profile, facing right, her spatula held across her chest with both hands and her head tipped back, one eyebrow high, a skeptical look.\n6. Standing, facing the viewer, one hand held out palm up and open, the spatula in the other, her face twisted in a mock-tragic grimace, as if mourning something cold.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-michael-carry",
-   "tab": "Characters",
-   "title": "Chapter 8: Michael carrying everything: a toddler girl on his hip, a small boy tucked under one arm, three dinner plates stacked on his other hand (one pose)",
-   "ar": "2:3",
-   "refs": [
-    "art/raw/characters/michael-hero-ref-v1.png",
-    "art/raw/characters/michael-walking-sheet-v1.png",
-    "art/raw/characters/lachlan-ref-v1.png"
-   ],
-   "group": "Chapter 8",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\nPicture 1 is the finished painting of Michael, a calm dad. Picture 2 is his walking sheet. Picture 3 is a picture of his son Lachlan, a small boy.\n\nPAINT THIS ONE POSE\nMichael, standing and facing the viewer, a toddler girl of about two with curly hair sitting on his left hip with one arm round his neck, a small boy of about five (the boy of picture 3) tucked sideways under his right arm like a parcel, his legs dangling, and on his right hand three white dinner plates balanced in a stack, with a few peas on the top plate. Michael is calm and a little amused, one eyebrow slightly raised, completely unbothered.\nStanding on a plain flat magenta #FF00FF background, nothing else in the picture, no text, no shadow on the ground.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Copy Michael from the attached pictures as exactly as possible: the same face, age, body, head size compared to the body, hair, clothes, colors, painting style and level of detail.\n- Keep his height, figure size and head size as in the walking sheet. The two children are small and painted in the same style."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-olivia-quote",
-   "tab": "Characters",
-   "title": "Chapter 8: Olivia with a phone held out like a microphone and a pleased, sharp smirk (one pose)",
-   "ar": "2:3",
-   "refs": [
-    "art/raw/characters/olivia-hero-v1.png",
-    "art/raw/characters/olivia-walking-sheet-v2.png"
-   ],
-   "group": "Chapter 8",
-   "prompt": "IMAGE REQUEST: ONE SINGLE PAINTING. Return exactly one image, nothing else. Generate it now. Do not make a plan, a sheet or several poses.\n\nATTACHED IMAGES\nPicture 1 is the finished painting of Olivia, a journalist and mom. Picture 2 is her walking sheet.\n\nPAINT THIS ONE POSE\nOlivia, standing and facing the viewer, one arm held straight out toward the viewer with a smartphone in her hand held out flat like a microphone, her other hand on her hip, her chin up and one eyebrow raised, a sharp, delighted, caught-you smirk.\nStanding on a plain flat magenta #FF00FF background, nothing else in the picture, no text, no shadow on the ground.\n\nART STYLE\n- Painted by hand in the style of the attached painting: visible brushwork, matte painted surfaces, rich warm colors, crisp painted edges. Gently simplified, storybook-like shapes.\n- No thick or black outlines. NOT pixel art, NOT retro game art, NOT photorealistic, NOT a 3D render, NOT anime, NOT flat cartoon shading. No pixelation, no dithering, no glossy plastic look.\n- Family friendly for children aged 6 and up.\n- Warm golden light from the upper left, soft shadow falling to the lower right.\n- Copy Olivia from the attached pictures as exactly as possible: the same face, age, body, head size compared to the body, hair, clothes, colors, painting style and level of detail.\n- Keep her height, figure size and head size as in the walking sheet."
-  },
-  {
-   "status": "draft",
-   "versions": [],
-   "rejects": [],
-   "id": "ch8-nara-story",
-   "tab": "Characters",
-   "title": "Chapter 8: Nara story frames (6 frames: jumps up on Tom, watches the flame go, looks up at Tom, looks pointedly away, sits very still by the loaves, under a table with half a loaf)",
-   "ar": "3:2",
-   "refs": [
-    "art/raw/characters/nara-hero-v1.png",
-    "art/raw/characters/nara-walking-sheet-v2.png",
-    "art/raw/characters/nara-battle-sheet-1-v1.png",
-    "art/raw/characters/nara-battle-sheet-2-v1.png"
-   ],
-   "group": "Chapter 8",
-   "prompt": "Draw Nara in the attached pictures as one pose sheet for a family role-playing game.\n\nPicture 1 is the finished painting of Nara. Picture 2 is the walking sheet. Pictures 3 and 4 are the battle sheets.\n\nCopy them as exactly as possible in every frame: the same person, face, age, body, head size compared to the body, hair, clothes, colors, painting style, level of detail, viewing angle and figure size as the battle sheets. Only the pose and the object change.\n\nOne image, a grid of 3 columns by 2 rows of equal square cells, on a flat solid magenta #FF00FF background. One figure per cell, the same size in every cell, feet or paws on the same ground line, each figure well inside its cell with clear magenta margin, nothing touching a cell edge. Held objects are painted in the same style as the character. No grid lines, numbers, text, effects or shadows.\n\nRow 1:\n1. Standing on her hind legs facing right with both front paws up in the air against an invisible person at the edge of her cell (draw nobody), her tongue out and her tail a blur, wild with joy.\n2. Standing in profile, facing right, her head low and turned to follow something small moving away along the ground at the edge of her cell (draw nothing there), her ears up, her eyes wide and still.\n3. Sitting facing the viewer with her head tipped up and a little to the side, looking up at someone above her, a worried, searching, questioning face, one ear lifted.\nRow 2:\n4. Sitting in profile, facing right, her nose lifted and her head turned far away from the viewer, her eyes shut, very obviously not looking at something, her chin high.\n5. Sitting very, very still, facing right, perfectly upright and stiff, her eyes fixed on something just beyond the edge of her cell (draw nothing there), a long string of drool hanging from her mouth, her tail flat on the ground.\n6. Lying flat on her belly facing right, crouched low as if under a table, with half a round loaf of bread held in her mouth, her eyes looking sideways with guilty innocence, her ears back.\n\nDo not add frames, merge frames or repeat a pose. Family friendly."
   },
   {
    "status": "approved",
