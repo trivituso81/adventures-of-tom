@@ -1,3 +1,8 @@
+## fix-cutpolish4b-2 (2026-11-20): the muffin pan now sits fully on the bare table, clear of the cake stand
+
+- Tom (t-cutpolish4b, second report): "muffins overlay the background art". His screenshot showed the pan still covering the glass cake stand.
+- `data/scenes.js` ch1Theft: the pan prop moved from x 3.9 to 4.4 and y 7.1 to 7, so it sits on the bare table to the right of the cake stand and the tart. Checked in a frame in portrait (landscape is the same stage rotated). Nothing else changed.
+
 ## fix-ch1art2 (2026-11-20): six chapter 1 picture requests removed from the Art Library; only Grace's list is left
 
 - Card c-fix-ch1art2. Tom (t-ch1art2, Make the seven chapter 1 pictures): "i dont understand why we need this art. like it doesnt make sense based on how the game works (except grace's list). explain". He is right about six of the seven. They came from the chapter 1 teardown (ch1rebuild1), which made one Library entry per story beat without checking what the game shows at that beat.

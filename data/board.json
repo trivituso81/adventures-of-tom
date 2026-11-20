@@ -1961,7 +1961,7 @@
    "col": "wait",
    "ask": "play",
    "fyi": true,
-   "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen. Look at the island: the table is bare except the tart and the cake stand, and the muffin pan sits on it clear of the other pastries. After the Mudling grabs the pan the pan is gone and the table stays as it was. The Mudling now carries the painted pan, not the little heap. Then the paper muffin liners at the entrance of Grump Hollow (they are bigger now). Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one). Claude fixes them and this card comes back to you to check.",
+   "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen. Look at the island: the muffin pan now sits on the bare table to the right of the cake stand and the tart, not over them. After the Mudling grabs the pan it is gone and the table stays as it was. Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one).",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-20",
@@ -1993,6 +1993,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom: something is wrong: muffins overlay the background art Sent to Claude as card c-fix-cutpolish4b-2; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fix fix-cutpolish4b-2 shipped: the pan moved right on the table so it no longer covers the cake stand."
     }
    ],
    "waiting_on": "claude"
