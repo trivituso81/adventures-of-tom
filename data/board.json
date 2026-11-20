@@ -15481,6 +15481,37 @@
     "effort": "medium (the steps are known)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/next-addendum-listen1.md, then card c-listen1-install in data/board.json with its history and the notes on card t-listen1-pics. Your first push is the commit board: start c-listen1-install. Install only the listening pictures that are approved, exactly as the addendum's Install steps say: cut them, bake the story poses (put back the rebake drift), add their facing rows after looking at each frame, run tools/listen_cases.json through LATE=1 tools/reaction_test.py and tools/listen_report.py --standin until it reports 0 misses, look at the frames in portrait and landscape, then push build listen1 with a docs/CHANGES.md heading. Create the Tom card t-listen1-play (ask play: start chapter 1 from chapter select, watch the kitchen and the grey patch, people who are not talking should stand listening or thinking) and set this card's after to it. A picture that is rejected stays out; say which. Spend nothing on xAI. You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "c-reports-5",
+   "tag": "reports-2026-11-20",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix the report backlog (1 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-113001-w756. First note: rose facing the wrong way",
+   "prompt": {
+    "what": "Works through the reports you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by board-sync: 1 report(s) on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
@@ -17474,7 +17505,8 @@
    "r-20261120-091936-yxqb",
    "r-20261120-092904-zi93",
    "r-20261120-092931-xkjg",
-   "r-20261120-093004-0rco"
+   "r-20261120-093004-0rco",
+   "r-20261120-113001-w756"
   ],
   "takes": [
    "takes/20261118T234857-q6s/part-001.json",
@@ -17496,8 +17528,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "2705a5b21011fb0f54a39a76b5b24ae33d24c6b4",
- "synced_at": "2026-11-20T19:29:43+00:00",
+ "synced": "4f1229b779b0828dc50a3fce04de482297ba632a",
+ "synced_at": "2026-11-20T19:31:39+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
