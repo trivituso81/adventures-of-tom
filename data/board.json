@@ -1543,7 +1543,8 @@
      "t": "Tom: the source is already set to GitHub Actions and 'push anything' made no sense to him. Card retired; no action for him."
     }
    ],
-   "note": "Tom 11-20: the source is already GitHub Actions; the card's 'push anything' was unclear."
+   "note": "Tom 11-20: the source is already GitHub Actions; the card's 'push anything' was unclear.",
+   "done": "2026-11-20"
   },
   {
    "id": "c-facehold1",
