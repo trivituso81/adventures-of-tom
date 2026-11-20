@@ -8825,7 +8825,7 @@
    "changed": "2026-11-20",
    "after": "nothing for Tom: end",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukEF1azCz85WniaHKsE",
     "opening": "Tom asked for Send to backlog on any to-do card and a collapsed BACKLOG section at the bottom with a one-tap Add back"
    },
    "history": [
@@ -8836,6 +8836,10 @@
     {
      "d": "2026-11-20",
      "t": "Built backlog1: board.html (Send to backlog, BACKLOG section, Add to to-do), board_sync.py (a parked card never auto-starts), tools/board_backlog_test.py."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -9176,6 +9180,19 @@
    "cards": [
     "c-starttest",
     "c-copydocs"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEF1azCz85WniaHKsE",
+   "title": "Board: Send to backlog and a BACKLOG section with Add to to-do",
+   "first": "2026-11-20T00:54:15-08:00",
+   "last": "2026-11-20T00:54:16-08:00",
+   "tags": [
+    "backlog1"
+   ],
+   "cards": [
+    "c-backlog1",
+    "b-backlog1"
    ]
   },
   {
@@ -9845,8 +9862,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "912d2c98f2ab64f5d01b175c58ef4a3eeb7ccd67",
- "synced_at": "2026-11-20T08:51:11+00:00",
+ "synced": "e0989a9c291b2b4455fe1df2969e3493ee8c96cc",
+ "synced_at": "2026-11-20T08:56:15+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
