@@ -11471,7 +11471,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGW1oQkmK4qtXQ5qMm",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-canon03\""
    },
    "history": [
@@ -11487,6 +11487,10 @@
     {
      "d": "2026-11-20",
      "t": "Session started: checking current main for the fish Big One, the lure and the folding chair."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "tag": "gem-canon03",
@@ -11511,7 +11515,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukHBKgCAx89hToJ6Gqp",
     "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-canon04\""
    },
    "history": [
@@ -11527,6 +11531,10 @@
     {
      "d": "2026-11-20",
      "t": "Session started. Confirmed on main 047fd95: the line is still in data/scenes.js (ch1 spot scene, Deedee)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "tag": "gem-canon04",
@@ -12551,6 +12559,36 @@
    ],
    "cards": [
     "c-knownwrong"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukHBKgCAx89hToJ6Gqp",
+   "title": "Remove 'camera' and the chair from the flashbulb scene",
+   "first": "2026-11-20T08:48:49-08:00",
+   "last": "2026-11-20T08:48:49-08:00",
+   "tags": [],
+   "cards": [
+    "c-gem-canon04"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGW1oQkmK4qtXQ5qMm",
+   "title": "Rebuild The Big One as a bog turtle; cut the lure and chair",
+   "first": "2026-11-20T08:48:36-08:00",
+   "last": "2026-11-20T08:48:36-08:00",
+   "tags": [],
+   "cards": [
+    "c-gem-canon03"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEAVEz7ZsgqjE7u2pm",
+   "title": "Open chapter 1 inside the taxi office with Sal",
+   "first": "2026-11-20T08:48:07-08:00",
+   "last": "2026-11-20T08:48:07-08:00",
+   "tags": [],
+   "cards": [
+    "c-gem-canon01"
    ]
   },
   {
@@ -13729,8 +13767,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "375555e87ce21e08885144f2296c3f5aac0b7565",
- "synced_at": "2026-11-20T16:43:30+00:00",
+ "synced": "c5cad552ad43d63fd4836d9dc5abb5f56de6a37a",
+ "synced_at": "2026-11-20T16:48:52+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
