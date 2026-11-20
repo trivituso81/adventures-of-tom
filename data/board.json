@@ -6673,7 +6673,7 @@
    "col": "wait",
    "ask": "voice",
    "fyi": true,
-   "next": "ADMIN > VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. The script box should end \"Grace, I'm so sorry but number two can't wait.\" with no \"[hungry] I'm starving!\", and your other directions ([wary, disgusted, amused], [pause, very very deadpan], [very dismissive]) still there. Press play: the take you kept, unchanged. Nothing to record. Then All good.",
+   "next": "ADMIN > VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. Reload the page first (pull down or close and reopen it). The script box must end \"Grace, I'm so sorry but number two can't wait.\" with no \"[hungry] I'm starving!\", and your other directions ([wary, disgusted, amused], [pause, very very deadpan], [very dismissive]) must still be there. If you still see \"I'm starving!\", press Something is wrong and say where (the box, the subtitle in the game, or the voice). If you meant to keep \"I'm starving!\" in the script, say so in the note. Press play: the take you kept, unchanged. Nothing to record. Then All good.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -6701,6 +6701,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom: something is wrong: That's not what I wanted. I don't want. I'm starving to be dropped Sent to Claude as card c-fix-ch1starving-2; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "fix-ch1starving-2: the Voice Library now removes \"I'm starving!\" from every copy of this script (saved edit with a curly apostrophe or no \"!\", the direction stored from ElevenLabs history, take scripts and exports). I read your note as: it still shows, drop it."
     }
    ],
    "waiting_on": "claude",

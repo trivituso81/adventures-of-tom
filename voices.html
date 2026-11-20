@@ -154,12 +154,16 @@ try{ const s=JSON.parse(localStorage.getItem('aot-vl-filters')||'null'); if(s){ 
 function saveF(){ try{ localStorage.setItem('aot-vl-filters',JSON.stringify({who:[...F.who],type:[...F.type],ch:[...F.ch],show:F.show,ord:F.ord,q:F.q})); }catch(e){} }
 let SCRIPTS={}; try{ SCRIPTS=JSON.parse(localStorage.getItem('aot-vl-scripts')||'{}')||{}; }catch(e){}
 const saveScripts=()=>{ try{ localStorage.setItem('aot-vl-scripts',JSON.stringify(SCRIPTS)); }catch(e){} };
-// Sentences Tom dropped from a line after keeping a take that does not say them (fix-ch1starving): removed, with the [direction] just before
-// them, from this device's saved edit of that line; the rest of his edit stays. The repo script (scripts/*.json) already leaves them out.
-const SCRIPT_DROPS=[["d|tom|Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait.","I'm starving!"]];
-(()=>{ let n=0; for(const [k,drop] of SCRIPT_DROPS){ const s=SCRIPTS[k]; if(typeof s!=='string'||!s.includes(drop)) continue;
-  const t=s.replace(new RegExp('\\s*(\\[[^\\]]*\\]\\s*)?'+drop.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')),'').trim(); if(t) SCRIPTS[k]=t; else delete SCRIPTS[k]; n++; }
-  if(n) saveScripts(); })();
+// Sentences Tom dropped from a line after keeping a take that does not say them (fix-ch1starving, fix-ch1starving-2): removed, with the
+// [direction] just before them, from every script this page can show or send for that line: his saved edit, the direction read from his
+// ElevenLabs history, and the scripts of his takes. Typed on an iPhone the apostrophe is curly and the "!" may be missing, so the match
+// ignores both. The repo script (scripts/*.json) already leaves the sentence out.
+let HISTBOOT={}; try{ HISTBOOT=JSON.parse(localStorage.getItem('aot-vl-hist')||'{}')||{}; }catch(e){}
+const SCRIPT_DROPS={"d|tom|Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait.":/\s*(\[[^\]]*\]\s*)?I['\u2019\u2018]m starving[!.]?/gi};
+function dropOf(key,s){ const re=SCRIPT_DROPS[key]; if(!re||typeof s!=='string') return s;
+  const t=s.replace(re,'').replace(/\s*\[[^\]]*\]\s*$/,'').trim(); return t||s; }
+(()=>{ let n=0; for(const k in SCRIPT_DROPS){ for(const M of [SCRIPTS,HISTBOOT]){ const s=M[k]; if(typeof s!=='string') continue; const t=dropOf(k,s); if(t!==s){ M[k]=t; n++; } } }
+  if(n){ saveScripts(); try{ localStorage.setItem('aot-vl-hist',JSON.stringify(HISTBOOT)); }catch(e){} } })();
 
 // ---------- lines ----------
 // Stable key for a line (the index position can change between builds).
@@ -175,7 +179,8 @@ let HIST={}; try{ HIST=JSON.parse(localStorage.getItem('aot-vl-hist')||'{}')||{}
 function accentAll(a,s){ if(!a||!s) return s; const re=/new york/i.test(a)?/new york/i:/long island/i.test(a)?/long island/i:new RegExp(a.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i');
   s=s.replace(/\[([^\]]*)\]/g,(m,t)=>re.test(t)||/^\s*(short|long) pause\s*$/i.test(t)?m:'['+a+(t.trim()?', '+t.trim():'')+']'); return /^\s*\[/.test(s)?s:'['+a+'] '+s; }
 const scriptOf=it=>isDog(it)?rawScriptOf(it):accentAll((voiceOf(it)||{}).accent,rawScriptOf(it));
-const rawScriptOf=it=>SCRIPTS[lk(it)]!=null?SCRIPTS[lk(it)]:(HIST[lk(it)]!=null&&!it.rw&&!(voiceOf(it)||{}).ignore_history?HIST[lk(it)]:(isDog(it)?it.p:it.s));   // ignore_history (index): a recast voice uses its new written scripts; rw (index): a line whose direction was rewritten after its bake does too
+const rawScriptOf=it=>dropOf(lk(it),pickScript(it));
+const pickScript=it=>SCRIPTS[lk(it)]!=null?SCRIPTS[lk(it)]:(HIST[lk(it)]!=null&&!it.rw&&!(voiceOf(it)||{}).ignore_history?HIST[lk(it)]:(isDog(it)?it.p:it.s));   // ignore_history (index): a recast voice uses its new written scripts; rw (index): a line whose direction was rewritten after its bake does too
 const hasWritten=it=>HIST[lk(it)]!=null||!it.auto;
 const voiceOf=it=>IDX.voices[(it.t==='b'?'battle|':'dialog|')+it.v];
 const whoName=it=>it.v==='narrator'&&it.sp?'Narrator ('+it.sp+')':it.sp||(WHO[it.v]&&WHO[it.v].name)||it.v;   // narration boxes: the Narrator voice reads them (data/dialog-cast.js)
@@ -248,7 +253,7 @@ const takesFor=key=>[...TAKES.values()].filter(t=>t.line===key).sort((a,b)=>a.t-
 const localFor=it=>LOCAL.get(rowId(it,kinds(it)[0]));
 async function useTake(it,take){
   const mp3=take.mp3||await mp3Of(TDB,'takes',take.id); if(!mp3) throw new Error('That take is no longer saved on this device.');
-  const rows=kinds(it).map(k=>({id:rowId(it,k),kind:it.t==='b'?'battle':'dialog',voice:it.v,lineKind:k,text:it.x,mp3,script:take.script,takeId:take.id,t:Date.now()}));
+  const rows=kinds(it).map(k=>({id:rowId(it,k),kind:it.t==='b'?'battle':'dialog',voice:it.v,lineKind:k,text:it.x,mp3,script:dropOf(take.line,take.script),takeId:take.id,t:Date.now()}));
   await tx(LDB,'clips',s=>rows.forEach(r=>s.put(r))); rows.forEach(r=>LOCAL.set(r.id,slim(r))); rows.forEach(r=>PH.delete(r.id)); hashPhone();
 }
 async function useBuiltIn(it){
@@ -267,8 +272,8 @@ async function delTake(id){ const t=TAKES.get(id); if(t&&t.script&&t.script!=='(
 // kept = the take the game plays now on this device. deleted = a take he removed (its script was kept, see delTake).
 function trailRows(keys){
   const inUse=new Set([...LOCAL.values()].map(r=>r.takeId).filter(Boolean)), out=[];
-  for(const t of TAKES.values()) if(!keys||keys.has(t.line)) out.push({line:t.line,takeId:t.id,t:t.t,label:t.label,script:t.script,kept:inUse.has(t.id)});
-  for(const t of DROPPED) if(!keys||keys.has(t.line)) out.push({line:t.line,takeId:t.id,t:t.t,label:t.label,script:t.script,kept:false,deleted:true});
+  for(const t of TAKES.values()) if(!keys||keys.has(t.line)) out.push({line:t.line,takeId:t.id,t:t.t,label:t.label,script:dropOf(t.line,t.script),kept:inUse.has(t.id)});
+  for(const t of DROPPED) if(!keys||keys.has(t.line)) out.push({line:t.line,takeId:t.id,t:t.t,label:t.label,script:dropOf(t.line,t.script),kept:false,deleted:true});
   return out.sort((a,b)=>a.line<b.line?-1:a.line>b.line?1:a.t-b.t);
 }
 async function exportTrail(){
@@ -339,7 +344,7 @@ async function sendTakes(onProgress){
       ids.forEach(id=>TSENT.add(id)); saveTSent(); sent+=ids.length; chunks=[]; size=0; ids=[]; };
     for(const t of list){
       const mp3=await mp3Of(TDB,'takes',t.id); if(!mp3){ TSENT.add(t.id); continue; }   // audio gone from this device: nothing to send
-      const piece=(ids.length?',':'')+JSON.stringify({id:t.id,line:t.line,t:t.t,label:t.label,script:t.script,kept:!!([...LOCAL.values()].some(r=>r.takeId===t.id)),mp3});
+      const piece=(ids.length?',':'')+JSON.stringify({id:t.id,line:t.line,t:t.t,label:t.label,script:dropOf(t.line,t.script),kept:!!([...LOCAL.values()].some(r=>r.takeId===t.id)),mp3});
       if(ids.length&&size+piece.length>TK_PART) await flush();
       chunks.push(ids.length?piece:piece.replace(/^,/,'')); size+=piece.length; ids.push(t.id);
     }
