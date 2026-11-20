@@ -355,7 +355,7 @@
    "title": "Build chapter 2 to the locked script",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "next": "Teardown written (claude/ch02-teardown.md). Waiting on Tom's answers to 2 ASK questions in the chapter 2 conversation: (1) replace Nara's built first meeting with locked scene 2, (2) which story moments unlock the Nara and TNB Tombos. Then build to the teardown, test, push as ch2build, stop for Tom's phone play.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -412,6 +412,10 @@
     {
      "d": "2026-11-20",
      "t": "Copied the five story files into claude/ and wrote the chapter 2 teardown. Asked Tom 2 questions in the conversation. No build pushed yet."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Stuck twice: The rescue started 7:35 AM and went quiet for 2 hours. Waiting on Tom (card t-stuck-ch2build)."
     }
    ],
    "prompt": {
@@ -431,7 +435,8 @@
     "why": "A session ended without shipping",
     "url": "https://claude.ai/code/cse_01RXeukEot2oyThJioqaFLjk",
     "prev": "https://claude.ai/code/session_01RXeukGiA3jV2jT4TYuLzs2"
-   }
+   },
+   "waiting_on": "tom"
   },
   {
    "id": "c-b3s8",
@@ -12671,7 +12676,7 @@
    "title": "Play the new chapter 1 opening in the taxi office",
    "theme": "Story and Dialogue",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "first": "Build gem-canon01 shows on the title screen.",
@@ -12705,9 +12710,12 @@
     {
      "d": "2026-11-20",
      "t": "Fix fix-gem-canon01play-2 handled 3 pencil reports: thank-you line moved after the Delta One line, Sal says \"You got it, kid...\", Sal accent noted in canon and voice description."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Play the new chapter 1 opening in the taxi office, Fix: Play the new chapter 1 opening in the taxi office is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-takes-56fb01",
@@ -12992,8 +13000,8 @@
    "lane": "claude",
    "col": "up",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (6 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-091238-jecm, r-20261120-091310-jqps, r-20261120-091936-yxqb, r-20261120-092904-zi93, r-20261120-092931-xkjg, r-20261120-093004-0rco. First note: when Rose jumps off Tom's shoulders, there is a moment when Rose is displayed twice",
+   "title": "Fix the report backlog (3 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-091238-jecm, r-20261120-091310-jqps, r-20261120-091936-yxqb. First note: when Rose jumps off Tom's shoulders, there is a moment when Rose is displayed twice",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -13027,6 +13035,10 @@
     {
      "d": "2026-11-20",
      "t": "The backlog now holds 6 report(s)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "The backlog now holds 3 report(s)."
     }
    ],
    "blocks": [],
@@ -13437,7 +13449,7 @@
    "id": "c-fix-gem-canon01play-2",
    "tag": "fix-gem-canon01play-2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Play the new chapter 1 opening in the taxi office",
@@ -13485,6 +13497,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-gem-canon01play-2: In the taxi office, Tom's thank-you comes after his Delta One line and Sal says \"You got it, kid.\""
     }
    ],
    "prompt": {
@@ -13498,7 +13514,36 @@
    },
    "after": "t-gem-canon01play",
    "auto": true,
-   "started_at": "2026-11-20T17:30:58+00:00"
+   "started_at": "2026-11-20T17:30:58+00:00",
+   "done": "2026-11-20"
+  },
+  {
+   "id": "t-stuck-ch2build",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Story and Dialogue",
+   "ask": "unstick",
+   "unstick": {
+    "card": "c-ch2build",
+    "kind": "stuck"
+   },
+   "title": "Stuck twice: Build chapter 2 to the locked script",
+   "next": "Card c-ch2build (Build chapter 2 to the locked script) stalled again after its one automatic rescue. The rescue started 7:35 AM and went quiet for 2 hours. Tap Start again to give it a fresh session, or Not needed to retire it.",
+   "blocks": [
+    "c-ch2build"
+   ],
+   "chat": {
+    "url": "",
+    "opening": "board"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by board-sync: card c-ch2build stalled after its rescue"
+    }
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
@@ -13506,8 +13551,10 @@
    "url": "https://claude.ai/code/session_01RXeukDtpA6B8jjsrewNUSg",
    "title": "Fix: Play the new chapter 1 opening in the taxi office",
    "first": "2026-11-20T17:31:37Z",
-   "last": "2026-11-20T17:31:37Z",
-   "tags": [],
+   "last": "2026-11-20T17:35:39Z",
+   "tags": [
+    "fix-gem-canon01play-2"
+   ],
    "cards": [
     "c-fix-gem-canon01play-2"
    ]
@@ -15183,8 +15230,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "21a1db1f38233a1fd6dd1937053bdad16f9a0839",
- "synced_at": "2026-11-20T17:33:06+00:00",
+ "synced": "bac7c06a44fab0238b6dc523ff5e2d8d37a4973e",
+ "synced_at": "2026-11-20T17:36:25+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
