@@ -11,6 +11,7 @@ Service mode (the same workflow, on a run of clip-gen, art-gen, voice-gen, clip-
     python3 tools/board_sync.py --service clip-gen --event start|fail|end [--detail TEXT] [--run URL] [--needs-human TEXT]
 
 board3 (2026-11-19, claude/board3-plan.md): R1 also copies a Tom card's `answer`, and starts an `auto` card at once; R2 knows `clips_reviewed`;
+R11 attention (attn1, claude/attn-plan.md: a flagged card gets one automatic move, a free one or one rescue session);
 R9 start (a card with `start: true` is started on the Claude scheduled task for its model and effort, the link lands on the card); R10 note
 (a Tom card finished with a note that blocks nothing gets a Claude card "Your note on: ..."); R8 quiet is 6 hours.
 
@@ -25,6 +26,11 @@ SESSION_KEEP_DAYS = 14
 QUIET_HOURS = 6
 REVIEW_SETTLE_MIN = 20   # clips_reviewed closes this long after his last REDO, so a review in progress is not cut off
 FIRE_BETA = 'experimental-cc-routine-2026-04-01'
+RESCUE_QUIET_HOURS = 2   # attn1: a card started by START runs unattended and finishes in under an hour, so 2 quiet hours means it stopped
+RESCUES_PER_DAY = 4      # attn1: caps Sonnet use when many cards stall at once; the rest wait for the next day, oldest first
+RESCUES_PER_CARD = 1     # attn1: stop-loss rule, a second stall becomes a Stuck twice card for Tom
+TOM_NOTE_HOURS = 6       # attn1: no rescue while Tom wrote a note on the card this recently
+RERUN_GRACE_MIN = 30     # attn1: a re-run service job that has not reported back after this long counts as failed again
 HISTORY_LINE = 'Board card %s. Read its history first: my notes and answers are there.'
 
 
@@ -293,7 +299,7 @@ def routine_for(B, c):
     return None
 
 
-def r9_start(B, fire):
+def r9_start(B, fire, now=None):
     """A card with start: true (Tom tapped START, or R1 auto-started it) is started on the Claude scheduled task for its model and effort."""
     for c in B.cards:
         if not c.get('start'): continue
@@ -311,22 +317,175 @@ def r9_start(B, fire):
         except Exception as e:
             c.pop('start', None); c['start_error'] = plain(str(e))[:200]
             B.hist(c, 'START failed: %s. Use Copy prompt.' % c['start_error']); B.say('start failed on %s' % c['id']); continue
-        c.pop('start', None); c.pop('start_error', None); c['col'] = 'prog'; c.pop('waiting_on', None); c.pop('quiet', None)
+        c.pop('start', None); c.pop('start_error', None); c.pop('start_retried', None); c['col'] = 'prog'; c.pop('waiting_on', None); c.pop('quiet', None)
+        c['started_at'] = (now or datetime.datetime.now(datetime.timezone.utc)).isoformat(timespec='seconds')
         c['chat'] = {'url': url, 'opening': (c.get('chat') or {}).get('opening') or 'started by START'}
         B.hist(c, 'Started by START on %s, effort %s.' % (r['model'], r['effort'])); B.say('started %s' % c['id'])
 
 
+def started_by_start(c):
+    return any(str(h.get('t', '')).startswith('Started by START') for h in c.get('history', [])) or bool(c.get('rescue'))
+
+
 def r8_quiet(B, now):
+    """attn1: a card started by START (or rescued) is quiet after RESCUE_QUIET_HOURS, any other card after QUIET_HOURS."""
     sess = {s['url']: s for s in B.b['sessions']}
     for c in B.cards:
         if c['col'] != 'prog':
             if c.pop('quiet', None): B.say('%s no longer quiet' % c['id'])
             continue
         url = (c.get('chat') or {}).get('url')
-        if url in sess: quiet = now - parse_iso(sess[url]['last']) >= datetime.timedelta(hours=QUIET_HOURS)
+        hrs = RESCUE_QUIET_HOURS if started_by_start(c) else QUIET_HOURS
+        if url in sess:
+            last = parse_iso(sess[url]['last'])
+            if c.get('started_at'): last = max(last, parse_iso(c['started_at']))
+            quiet = now - last >= datetime.timedelta(hours=hrs)
+        elif c.get('started_at'): quiet = now - parse_iso(c['started_at']) >= datetime.timedelta(hours=hrs)
         else: quiet = (datetime.date.fromisoformat(B.today) - datetime.date.fromisoformat(c['changed'])).days >= 1
         if quiet and not c.get('quiet'): c['quiet'] = True; B.say('%s is quiet' % c['id'])
         elif not quiet and c.get('quiet'): c.pop('quiet'); B.say('%s no longer quiet' % c['id'])
+
+
+# ---------------------------------------------------------------- R11 Needs attention fixes itself (attn1, claude/attn-plan.md sections 2 to 5)
+# The plan calls this rule R10; R10 was already the notes rule, so it is R11 here. Free moves need no AI. A rescue is one START session
+# (Sonnet 5.5, medium) whose standing prompt reads the card's `rescue` field. Limits: 1 rescue per card, 4 per day, none while a blocker is
+# open, the card is in the backlog or Tom wrote a note on it in the last 6 hours.
+
+def open_blockers(B, c): return [k for k in B.cards if c['id'] in k.get('blocks', []) and k['col'] != 'done']
+
+
+def attn_reason(B, c):
+    """Mirrors attnWhy in board.html: (kind, words) for a card that needs attention, else None."""
+    if c['lane'] == 'tom' or c['col'] == 'done' or c.get('backlog'): return None
+    if c.get('service') and c['col'] == 'wait':
+        return None if open_blockers(B, c) else ('service_failed', 'A run failed: ' + str(c.get('next', ''))[:120])
+    if c.get('start_error'): return ('start_failed', 'START failed last time: ' + c['start_error'])
+    last = (c.get('history') or [{}])[-1].get('t', '')
+    if re.search(r'without shipping', last, re.I): return ('ended', 'A session ended without shipping')
+    if c['col'] == 'prog':
+        if re.match(r'\s*(shipped|done|built)\b', c.get('next', ''), re.I): return ('shipped_note', 'Its note starts with Shipped but the card is open')
+        if c.get('quiet'): return ('quiet', 'Quiet: the conversation may have stopped')
+    if c['col'] == 'wait' and c.get('waiting_on') in ('tom', 'claude') and not open_blockers(B, c):
+        return ('waits_finished', 'Waits on a card that is already finished')
+    return None
+
+
+def rescue_ref(B, c):
+    """The last sign of life of a rescue: its start, or its conversation's last push."""
+    r = c['rescue']; ref = parse_iso(r['at'])
+    s = next((x for x in B.b['sessions'] if x['url'] and x['url'] == (c.get('chat') or {}).get('url')), None)
+    return max(ref, parse_iso(s['last'])) if s else ref
+
+
+def rescue_running(B, c, now):
+    return bool(c.get('rescue')) and c['col'] == 'prog' and now - rescue_ref(B, c) < datetime.timedelta(hours=RESCUE_QUIET_HOURS)
+
+
+def tom_note_recent(c, now):
+    for h in c.get('history', []):
+        if str(h.get('t', '')).startswith('Tom: ') and h.get('at') and now - parse_iso(h['at']) < datetime.timedelta(hours=TOM_NOTE_HOURS): return True
+    return bool(c.get('note_at')) and now - parse_iso(c['note_at']) < datetime.timedelta(hours=TOM_NOTE_HOURS)
+
+
+def unique_id(B, base):
+    return next(i for i in [base] + ['%s-%d' % (base, n) for n in range(2, 999)] if not B.get(i))
+
+
+def tom_unstick(B, c, kind, title, nxt, why):
+    """A For you card (ask unstick) that blocks the stalled card; the stalled card waits behind it."""
+    old = next((k for k in B.cards if k.get('unstick') == {'card': c['id'], 'kind': kind} and k['col'] != 'done'), None)
+    if old: return old
+    t = B.add({'id': unique_id(B, 't-%s-%s' % (kind, c['id'].replace('c-', '', 1))), 'lane': 'tom', 'col': 'up', 'theme': c.get('theme', 'Project Ops'), 'ask': 'unstick',
+               'unstick': {'card': c['id'], 'kind': kind}, 'title': plain(title)[:60], 'next': plain(nxt), 'blocks': [c['id']],
+               'chat': {'url': '', 'opening': 'board'}, 'history': [{'d': B.today, 't': 'Added by board-sync: ' + plain(why)}]}) or B.cards[-1]
+    c['col'] = 'wait'; c['waiting_on'] = 'tom'; c.pop('quiet', None); c.pop('start', None)
+    return t
+
+
+def stuck_twice(B, c, now, why):
+    ttl = plain(c['title'])
+    tom_unstick(B, c, 'stuck', 'Stuck twice: ' + ttl[:47].strip(),
+                'Card %s (%s) stalled again after its one automatic rescue. %s. Tap Start again to give it a fresh session, or Not needed to retire it.' % (c['id'], ttl[:80], plain(why)),
+                'card %s stalled after its rescue' % c['id'])
+    B.hist(c, 'Stuck twice: %s. Waiting on Tom (card t-stuck-%s).' % (plain(why), c['id'].replace('c-', '', 1)))
+    B.say('stuck twice %s' % c['id'])
+
+
+def sonnet_medium(B):
+    return next((r for r in B.b.get('routines', []) if str(r['model']).startswith('Claude Sonnet 5.5') and str(r['effort']).startswith('medium')), None)
+
+
+def r11_attention(B, now, fire=None, rerun=None, shipped_tags=None):
+    today_n = sum(1 for k in B.cards if (k.get('rescue') or {}).get('at') and local_date(k['rescue']['at']) == B.today)
+    cands = []
+    for k in B.cards:   # a Tom card made by this rule closes itself once the card it was about is being worked on again or is done
+        u = k.get('unstick')
+        if u and k['col'] != 'done':
+            tgt = B.get(u['card'])
+            if not tgt or tgt['col'] in ('prog', 'done'):
+                k['col'] = 'done'; k['done'] = B.today; B.hist(k, 'Done by the board: the card is being worked on again.'); B.say('done %s' % k['id'])
+    for c in sorted(B.cards, key=lambda x: (x.get('changed', ''), x['id'])):
+        if c['col'] == 'prog': c.pop('start_retried', None) if not c.get('start_error') else None
+        if c.get('rescue') and c['col'] == 'prog' and not c.get('backlog') and c['lane'] != 'tom':
+            if rescue_running(B, c, now): continue
+            if now - rescue_ref(B, c) >= datetime.timedelta(hours=RESCUE_QUIET_HOURS):
+                if not open_blockers(B, c): stuck_twice(B, c, now, 'The rescue started %s and went quiet for %d hours' % (clock_str(c['rescue']['at']), RESCUE_QUIET_HOURS))
+                continue
+        a = attn_reason(B, c)
+        if not a: continue
+        kind, words = a
+        if kind == 'waits_finished':
+            c['col'] = 'up'; c.pop('waiting_on', None)
+            B.hist(c, 'Unblocked by the board: nothing was left for it to wait on.'); B.say('unblocked %s (nothing held it)' % c['id'])
+            if c.get('auto') and not c.get('backlog') and c['lane'] == 'claude': c['start'] = True; B.hist(c, 'Auto-start: nothing held it, so this card starts by itself.')
+        elif kind == 'shipped_note' and shipped_tags is not None and c.get('tag') in shipped_tags:
+            c['col'] = 'done'; c['done'] = B.today; c.pop('quiet', None)
+            B.hist(c, 'Done by the board: docs/CHANGES.md has the heading for %s.' % c['tag']); B.say('done %s (shipped as %s)' % (c['id'], c['tag']))
+        elif kind == 'start_failed':
+            if not c.get('start_retried'):
+                c['start_retried'] = True; c['start'] = True; c.pop('start_error', None)
+                B.hist(c, 'START failed once; trying START again.'); B.say('retrying START on %s' % c['id'])
+            else:
+                ttl = plain(c['title'])
+                tom_unstick(B, c, 'hand', 'Start this by hand: ' + ttl[:40].strip(),
+                            'START failed twice for card %s (%s): %s. Tap the card, then Copy prompt and paste it into a new conversation.' % (c['id'], ttl[:80], plain(c['start_error'])),
+                            'START failed twice on %s' % c['id'])
+                c.pop('start_error', None); c.pop('start_retried', None)
+                B.hist(c, 'START failed twice. Waiting on Tom to start it by hand.'); B.say('start by hand %s' % c['id'])
+        elif kind == 'service_failed' and re.search(r'credit', c.get('next', ''), re.I):
+            ttl = plain(c['title'])
+            tom_unstick(B, c, 'credit', ttl[:60], 'The %s run needs credit added by you (%s). Add credit on the service, then tap I did this. Waiting card: %s.' % (c.get('service'), c['id'], c['id']), 'out of credit on %s' % c.get('service'))
+            B.hist(c, 'Out of credit. Waiting on Tom.'); B.say('credit card %s' % c['id'])
+        elif kind == 'service_failed' and c.get('reruns', 0) < 1 and c.get('run'):
+            if rerun is None: continue
+            try: rerun(c['service'], c['run'])
+            except Exception as e: B.hist(c, 'Re-run failed to start: %s' % plain(str(e))[:100]); c['reruns'] = 1; c['rerun_at'] = now.isoformat(timespec='seconds'); continue
+            c['reruns'] = 1; c['rerun_at'] = now.isoformat(timespec='seconds')
+            B.hist(c, 'Board re-ran the failed job once.'); B.say('re-ran %s' % c['service'])
+        elif kind == 'service_failed' and c.get('rerun_at') and now - parse_iso(c['rerun_at']) < datetime.timedelta(minutes=RERUN_GRACE_MIN):
+            continue
+        else:
+            cands.append((c, kind, words))
+    for c, kind, words in cands:   # oldest first
+        if c.get('backlog') or tom_note_recent(c, now) or (c['lane'] != 'tom' and not c.get('service') and open_blockers(B, c)): continue
+        if (c.get('rescue') or {}).get('n', 0) >= RESCUES_PER_CARD:
+            stuck_twice(B, c, now, 'It was rescued once already (%s) and stalled again: %s' % (clock_str(c['rescue']['at']), words)); continue
+        if today_n >= RESCUES_PER_DAY or fire is None: continue
+        r = sonnet_medium(B)
+        if not r or not r.get('enabled'): continue
+        try: url = fire(r, c['id'])
+        except Exception as e:
+            B.hist(c, 'Rescue could not start: %s' % plain(str(e))[:120]); B.say('rescue failed to start on %s' % c['id']); continue
+        old_url = (c.get('chat') or {}).get('url', '')
+        c['rescue'] = {'at': now.isoformat(timespec='seconds'), 'n': 1, 'why': plain(words)[:120], 'url': url, 'prev': old_url}
+        c['col'] = 'prog'; c.pop('waiting_on', None); c.pop('quiet', None); c.pop('start_error', None); c['started_at'] = now.isoformat(timespec='seconds')
+        c['chat'] = {'url': url, 'opening': (c.get('chat') or {}).get('opening') or 'rescue'}
+        B.hist(c, 'Rescue started (%s). One automatic session decides: finish it, back to Tom, start next, or retire.' % plain(words)[:100]); B.say('rescue %s' % c['id']); today_n += 1
+
+
+def clock_str(iso):
+    from zoneinfo import ZoneInfo
+    return parse_iso(iso).astimezone(ZoneInfo('America/Los_Angeles')).strftime('%-I:%M %p')
 
 
 # ---------------------------------------------------------------- R6 service runs
@@ -337,11 +496,13 @@ def service_event(data, name, event, detail='', run='', needs_human='', today=No
     if not lane: raise SystemExit('unknown service %s (known: %s)' % (name, ', '.join(SERVICE_LANE)))
     cid = 'svc-' + name
     old = B.get(cid)
+    carry = {k: old[k] for k in ('reruns', 'rerun_at') if old and k in old}
     if old: B.cards.remove(old)
     if event == 'start':
         B.add({'id': cid, 'service': name, 'lane': lane, 'col': 'prog', 'theme': 'Tools', 'title': '%s is running' % name,
                'next': plain(detail) or '%s started a run.' % name, 'run': run, 'chat': {'url': '', 'opening': 'service run'},
                'history': [{'d': B.today, 't': '%s started.' % name}]})
+        B.cards[-1].update(carry)
         B.say('%s started' % name)
     elif event == 'fail':
         step = plain(detail) or 'the run failed'
@@ -350,6 +511,7 @@ def service_event(data, name, event, detail='', run='', needs_human='', today=No
                'prompt': standing_prompt('Finds why the %s run failed and fixes it.' % name,
                                          'Read claude/handoff-rules.md. The %s GitHub Action failed (%s). Open the run log%s, fix the cause, and run it again.' % (name, step, ' at ' + run if run else ''), cid + '-fix'),
                'chat': {'url': '', 'opening': 'service run'}, 'history': [{'d': B.today, 't': '%s failed: %s' % (name, step)}]})
+        B.cards[-1].update(carry)
         B.say('%s failed' % name)
     else:
         B.say('%s finished' % name)
@@ -365,7 +527,7 @@ def service_event(data, name, event, detail='', run='', needs_human='', today=No
 
 # ---------------------------------------------------------------- the whole pass
 
-def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None, routines_on=None):
+def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None, routines_on=None, rerun=None, shipped_tags=None):
     now = now or datetime.datetime.now(datetime.timezone.utc)
     B = Board(data, local_date(now))
     for r in B.b.get('routines', []):   # START is shown only when the task's address and token are set as repo secrets
@@ -381,7 +543,9 @@ def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None,
     r2_clips(B, art, now)
     r1_unblock(B)
     r10_notes(B)
-    r9_start(B, fire)
+    r8_quiet(B, now)
+    r11_attention(B, now, fire, rerun, shipped_tags)
+    r9_start(B, fire, now)
     r8_quiet(B, now)
     cutoff = (now - datetime.timedelta(days=SESSION_KEEP_DAYS)).isoformat()
     B.b['sessions'] = sorted([s for s in B.b['sessions'] if s['last'] >= cutoff], key=lambda s: s['last'], reverse=True)
@@ -449,6 +613,25 @@ def make_fire(cache_path):
     return fire
 
 
+def make_rerun():
+    """Re-runs the failed jobs of a GitHub Actions run (no AI). Needs GITHUB_TOKEN and GITHUB_REPOSITORY; best effort, the grace period in r11 covers a re-run that never reports back."""
+    def rerun(service, run_url):
+        tok, repo = os.environ.get('GITHUB_TOKEN'), os.environ.get('GITHUB_REPOSITORY')
+        m = re.search(r'/runs/(\d+)', run_url or '')
+        if not (tok and repo and m): raise RuntimeError('no token, repository or run id to re-run with')
+        req = urllib.request.Request('https://api.github.com/repos/%s/actions/runs/%s/rerun-failed-jobs' % (repo, m.group(1)), data=b'', method='POST',
+                                     headers={'Authorization': 'Bearer ' + tok, 'Accept': 'application/vnd.github+json'})
+        try: urllib.request.urlopen(req, timeout=30).read()
+        except urllib.error.HTTPError as e: raise RuntimeError('GitHub answered %s' % e.code)
+    return rerun
+
+
+def shipped_tags_from_changes():
+    try: txt = open(os.path.join(ROOT, 'docs', 'CHANGES.md'), encoding='utf-8').read()
+    except OSError: return None
+    return set(re.findall(r'^## (%s) \(\d{4}-\d\d-\d\d\):' % TAG_RE, txt, re.M))
+
+
 def routines_env(data):
     return {r['id']: bool(os.environ.get('CLAUDE_TASK_%s_URL' % r['env']) and os.environ.get('CLAUDE_TASK_%s_TOKEN' % r['env'])) for r in data.get('routines', [])}
 
@@ -479,7 +662,7 @@ def main(argv):
         art = {e['id']: e for e in load(os.path.join(ROOT, 'data', 'art-prompts.json')).get('entries', [])}
         reports, takes = remote_lists()
         before = json.dumps(data, sort_keys=True)
-        log = sync(data, commits, art, reports, takes, None, make_fire(os.environ.get('BOARD_FIRED', '/tmp/board-fired.json')), routines_env(data))
+        log = sync(data, commits, art, reports, takes, None, make_fire(os.environ.get('BOARD_FIRED', '/tmp/board-fired.json')), routines_env(data), make_rerun(), shipped_tags_from_changes())
         if json.dumps(data, sort_keys=True) != before or not data.get('synced'):
             if not log: log = ['started tracking' if not data.get('synced') else 'bookkeeping']
             data['synced'] = head; data['synced_at'] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds')

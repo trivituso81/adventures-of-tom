@@ -27,10 +27,15 @@ PR = lambda m, e: {'what': 'w', 'before': ['b'], 'model': m, 'effort': e, 'text'
 open_ids = {c['id'] for c in b['cards'] if c['col'] != 'done'}
 target = 'c-handback'   # a fixture the hand-back screen points at (the live board's own cards change every day)
 b['cards'].append({'id': 'c-handback', 'tag': 'handback', 'lane': 'claude', 'col': 'up', 'theme': 'Tools', 'title': 'A hand-back card', 'next': 'Ready.', 'blocks': [], 'changed': T, 'created': T, 'chat': {'url': '', 'opening': 'x'}, 'history': [], 'prompt': {'what': 'w', 'before': ['b'], 'model': 'Claude Opus 5.5 (row D)', 'effort': 'high (x)', 'text': 'Prompt for handback'}})
+b['cards'].append({'id': 'c-rescuing', 'tag': 'rescuing', 'lane': 'claude', 'col': 'prog', 'theme': 'Tools', 'title': 'A rescued card', 'next': 'Working.', 'blocks': [], 'changed': T, 'created': T, 'quiet': True,
+                   'rescue': {'at': iso(1), 'n': 1, 'why': 'Quiet', 'url': 'https://claude.ai/code/session_RESC', 'prev': ''}, 'chat': {'url': 'https://claude.ai/code/session_RESC', 'opening': 'rescue'}, 'history': [], 'prompt': PR('Claude Sonnet 5.5 (row B)', 'medium (x)')})
+b['cards'].append({'id': 'c-stalled', 'tag': 'stalled', 'lane': 'claude', 'col': 'wait', 'waiting_on': 'tom', 'theme': 'Tools', 'title': 'A stalled card', 'next': 'Waits behind a card for you.', 'blocks': [], 'changed': T, 'created': T,
+                   'chat': {'url': '', 'opening': 'x'}, 'history': [], 'prompt': PR('Claude Sonnet 5.5 (row B)', 'medium (x)')})
 b['cards'] += [tomcard('t-test1', 'Test card one', 'Open ADMIN > TEST and tap it.', [target], 'play'), tomcard('t-test2', 'Test card two', 'Do the second thing.', ask='pictures', fyi=True),
                tomcard('t-test3', 'Test card three', 'Do the third thing.', ask='animations', fyi=True),
                tomcard('t-test4', 'Test decide four', 'Pick one.', ask='decide', fyi=True, choices=['Option A (Recommended)', 'Option B'], leads=['A leads to the quick road.', 'B leads to the long road.']),
                tomcard('t-test5', 'Test decide five', 'Pick one too.', ask='decide', fyi=True, choices=['Yes (Recommended)', 'No'], leads=['Yes means go.', 'No means stop.']),
+               tomcard('t-stuck-stalled', 'Stuck twice: A stalled card', 'Card c-stalled stalled again. Tap Start again.', ['c-stalled'], 'unstick', unstick={'card': 'c-stalled', 'kind': 'stuck'}),
                tomcard('t-test6', 'Test setup six', 'Paste the secret.', ask='setup', fyi=True), tomcard('t-test7', 'Test setup seven', 'Set the thing.', ask='setup', fyi=True),
                tomcard('t-test8', 'Test script eight', 'Read the scene.', ask='script', fyi=True),
                tomcard('t-test9', 'Test play nine', 'Chapter select > Chapter 1, look at the <kitchen>.', ask='play', fyi=True, theme='Areas'),
@@ -63,14 +68,15 @@ E_MINE = len([c for c in oc if c['lane'] == 'tom' and c['col'] in ('up', 'prog')
 E_READY = len([c for c in oc if c['lane'] == 'claude' and c['col'] == 'up' and not c.get('start') and not any(c['id'] in k.get('blocks', []) for k in oc)])
 # boardux1: the status words (plan 3.2). Needs attention = a Claude or service card that is quiet, says Shipped, Done or Built while open, or has a failed run or START.
 WAITFIX = lambda c: c['lane'] == 'tom' and c['col'] == 'wait' and any(k['lane'] == 'claude' and c['id'] in k.get('blocks', []) for k in oc)
-BLOCKED = lambda c: any(c['id'] in k.get('blocks', []) for k in oc)
+BLOCKED = lambda c: any(c['id'] in k.get('blocks', []) for k in b['cards'] if k['col'] != 'done')   # a parked (backlog) blocker still blocks, as in the page's blockedBy
 import re as _re
-ATTN = lambda c: c['lane'] != 'tom' and (c.get('start_error') or (c.get('service') and c['col'] == 'wait') or (c['col'] == 'prog' and (c.get('quiet') or _re.match(r'\s*(shipped|done|built)\b', c['next'], _re.I))) or (c['col'] == 'wait' and c.get('waiting_on') in ('tom', 'claude') and not BLOCKED(c)))
+RESCUING = lambda c: bool(c.get('rescue')) and c['col'] == 'prog' and (NOW - datetime.datetime.fromisoformat(c['rescue']['at'])) < datetime.timedelta(hours=2)   # attn1: a rescue running is Working now, not red
+ATTN = lambda c: c['lane'] != 'tom' and not RESCUING(c) and (c.get('start_error') or (c.get('service') and c['col'] == 'wait' and not BLOCKED(c)) or (c['col'] == 'prog' and (c.get('quiet') or _re.match(r'\s*(shipped|done|built)\b', c['next'], _re.I))) or (c['col'] == 'wait' and c.get('waiting_on') in ('tom', 'claude') and not BLOCKED(c)))
 E_ATTN = len([c for c in oc if ATTN(c)])
 E_RUN = len([c for c in oc if c['lane'] != 'tom' and not ATTN(c) and (c['col'] == 'prog' or c.get('start'))])
 E_QUEUED = len([c for c in oc if (c['lane'] != 'tom' and not ATTN(c) and not (c['col'] == 'prog' or c.get('start')) and (c['col'] == 'wait' or BLOCKED(c))) or (c['lane'] == 'tom' and c['col'] == 'wait' and not WAITFIX(c))])
 E_BACK = len([c for c in oc if WAITFIX(c)])
-ORDER = ['play', 'pictures', 'animations', 'voice', 'script', 'decide', 'setup']
+ORDER = ['play', 'pictures', 'animations', 'voice', 'script', 'decide', 'setup', 'unstick']
 PARTS = ', '.join('%d %s' % (n, k) for k in ORDER for n in [len([c for c in oc if c['lane'] == 'tom' and c['col'] in ('up', 'prog') and c.get('ask') == k])] if n)
 WANT = 'For you: %d (%s). Start next: %d. Working now: %d. Queued: %d. Needs attention: %d.' % (E_MINE, PARTS, E_READY, E_RUN, E_QUEUED, E_ATTN)
 HIST = lambda i: ' Board card %s. Read its history first: my notes and answers are there.' % i + FIRST(i)
@@ -117,6 +123,9 @@ try:
                 if 'Unblocks: ' not in pg.inner_text('.card[data-id="t-test1"]'): fails.append(f'{name}: Tom card does not say what it unblocks')
                 rc = pg.inner_text('[data-sec=ready]')
                 if 'Copy prompt' not in rc or 'Sonnet 5.5' not in rc: fails.append(f'{name}: Ready cards lack model or Copy prompt')
+                if 'Rescue started' not in pg.inner_text('.card[data-id="c-rescuing"]') or pg.query_selector('[data-sec=attn] .card[data-id="c-rescuing"]'): fails.append(f'{name}: a running rescue shows Rescue started under Working now, not red')
+                if not pg.query_selector('[data-sec=run] .card[data-id="c-rescuing"]'): fails.append(f'{name}: the rescued card is in Working now')
+                if 'unstick' not in pg.inner_text('#vFor').lower() or not pg.query_selector('.card[data-id="t-stuck-stalled"]'): fails.append(f'{name}: the Stuck twice card has no UNSTICK group under For you')
                 if 'Quiet for 1 day' not in pg.inner_text('[data-sec=attn]'): fails.append(f'{name}: quiet flag text missing in NEEDS ATTENTION')
                 rn = pg.inner_text('[data-sec=run]')
                 if 'Open chat' not in rn or 'last push' not in rn: fails.append(f'{name}: running card lacks Open chat or last push')

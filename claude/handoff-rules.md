@@ -47,6 +47,10 @@ Tom's words: "a kanban style board that i can refer to at anytime ... lanes for 
 - Write cards in plain words, one action per card.
 - A Tom card that sends Tom to the Art, Voice or Music Library carries `links: [{to: "art"|"voice"|"music", ids: [...], label}]` (art: entry ids; voice: line keys or one `{chapter, show}`; music: track ids; a card with `done_when.art_approved` needs none for art). The board page makes them buttons that open that exact entry; `board_check.py` refuses a card that names a Library with no link. The "ADMIN > ..." words stay in `next`.
 
+## A session that stops without shipping (attn1, 2026-11-20)
+
+If a session stops without shipping its card, its last push must do one of two things: move the card to Queued behind a Tom card it creates (one action, with its ask), or write a history line containing "ended without shipping" with the reason. The board job rescues a card that goes quiet anyway (one automatic Sonnet 5.5 medium session per card, 4 a day, then a "Stuck twice" card for Tom): claude/attn-plan.md, claude/next-addendum-attn1.md. `tools/board_check.py` cannot see this rule, so the rescue is the backstop.
+
 ## How the before-steps are written (added 2026-11-18 15:13)
 
 - They sit near the top of the reply, right under the one line saying what was done, under their own heading "Before you paste". Nothing else is in that list.

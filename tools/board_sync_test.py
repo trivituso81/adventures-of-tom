@@ -245,7 +245,7 @@ b = {'cards': [dict(id='t-orphan', lane='tom', col='wait', waiting_on='claude', 
 bs.sync(b, [], None, None, None, NOW)
 check('boardwait1: a Tom card in Waiting with no blocker moves to Up next', card(b, 't-orphan')['col'] == 'up' and 'waiting_on' not in card(b, 't-orphan') and 'nothing was left' in card(b, 't-orphan')['history'][-1]['t'])
 check('boardwait1: a Tom card with an open blocker still waits', card(b, 't-held')['col'] == 'wait')
-check('boardwait1: a Claude card in Waiting with no blocker is left alone', card(b, 'c-svc')['col'] == 'wait')
+check('boardwait1 (changed by attn1): a Claude card in Waiting with no blocker moves to Up next, free', card(b, 'c-svc')['col'] == 'up' and 'nothing was left' in card(b, 'c-svc')['history'][-1]['t'])
 
 # --- board_check board3 rules
 def chk(mut, want, label):
@@ -267,6 +267,143 @@ d = json.load(open(os.path.join(HERE, '..', 'data', 'board.json'), encoding='utf
 open('/tmp/board_bad.json', 'w').write(json.dumps(d))
 r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '--push', 'board3', '/tmp/board_bad.json'], capture_output=True, text=True)
 check('board_check --push refuses a build whose card has no after', r.returncode == 1 and 'no `after`' in r.stdout, r.stdout)
+def bad_fire(r, cid): raise RuntimeError('the task answered 401')
+
+# --- attn1 (claude/attn-plan.md): Needs attention fixes itself or comes back to you. R1 to R6 of the plan's acceptance table.
+NOWA = datetime.datetime.fromisoformat('2026-11-20T15:10:00+00:00')
+RTA = [{'id': 'sonnet-medium', 'model': 'Claude Sonnet 5.5', 'effort': 'medium', 'env': 'SONNET_MEDIUM', 'enabled': True}]
+PRA = {'what': 'w', 'before': ['b'], 'model': 'Claude Sonnet 5.5 (row B)', 'effort': 'medium (x)', 'text': 't'}
+def qc(i, **kw):   # a Claude card In progress whose conversation went quiet
+    d = dict(id=i, tag='t' + i[2:], lane='claude', col='prog', theme='Tools', title='Card ' + i, next='Working.', changed='2026-11-19', blocks=[], prompt=PRA, quiet=True,
+             chat={'url': 'https://claude.ai/code/session_' + i, 'opening': 'x'}, history=[])
+    d.update(kw); return d
+def board(*cards): return {'cards': list(cards), 'lanes': [], 'sessions': [], 'routines': copy.deepcopy(RTA)}
+fires = []
+def fire2(r, cid): fires.append(cid); return 'https://claude.ai/code/session_RESCUE_' + cid
+reruns = []
+def rerun2(service, url): reruns.append((service, url))
+def A(b, now=NOWA, tags=None, f=fire2, rr=rerun2): return bs.sync(b, [], None, None, None, now, f, {'sonnet-medium': True}, rr, tags)
+
+# R1 free rows: no fire
+fires.clear(); reruns.clear()
+def wc(i, **kw): return dict(id=i, tag='w' + i[2:], lane='claude', col='wait', waiting_on='tom', theme='Tools', title='Waits', next='n', changed='2026-11-19', blocks=[], prompt=PRA, chat={'url': '', 'opening': 'x'}, history=[], **kw)
+b = board(wc('c-w1'))
+A(b)
+check('R1: waits on a finished card -> Up next, no AI', card(b, 'c-w1')['col'] == 'up' and not fires and 'waiting_on' not in card(b, 'c-w1'), (card(b, 'c-w1')['col'], fires))
+b = board(wc('c-w2', auto=True))
+A(b)
+check('R1: an auto card that waited on nothing is started by START (not a rescue)', fires == ['c-w2'] and card(b, 'c-w2')['col'] == 'prog' and 'rescue' not in card(b, 'c-w2'), fires)
+fires.clear()
+b = board(qc('c-sn', quiet=None, next='Shipped as snbuild: all done', tag='snbuild'), qc('c-sn2', next='Built the thing', tag='sn2build'))
+b['cards'][0].pop('quiet')
+A(b, tags={'snbuild'})
+check('R1: a Shipped note with the CHANGES heading closes the card, no AI', card(b, 'c-sn')['col'] == 'done' and 'c-sn' not in fires, (card(b, 'c-sn')['col'], fires))
+check('R1: a Shipped note with no heading goes to a rescue', 'c-sn2' in fires and card(b, 'c-sn2')['rescue']['n'] == 1, fires)
+# START failed: retried once, then a For you card
+fires.clear()
+b = board(dict(id='c-sf', tag='sf', lane='claude', col='up', theme='Tools', title='Start fail', next='n', changed='2026-11-19', blocks=[], prompt=PRA, start_error='the task answered 401', chat={'url': '', 'opening': 'x'}, history=[]))
+A(b, f=bad_fire)
+c = card(b, 'c-sf')
+check('R1: START failed -> tried again once (and failed again here)', c['col'] == 'up' and c.get('start_retried') and '401' in c.get('start_error', '') and any('trying START again' in h['t'] for h in c['history']), c)
+A(b, f=bad_fire)
+t = card(b, 't-hand-sf')
+check('R1: START failed twice -> a For you card Start this by hand, nothing fired', t and t['lane'] == 'tom' and t['ask'] == 'unstick' and t['title'].startswith('Start this by hand') and card(b, 'c-sf')['col'] == 'wait' and not fires, (t, fires))
+check('R1: that card blocks the stalled card and names it', t['blocks'] == ['c-sf'] and 'c-sf' in t['next'])
+# service failed: one re-run, then a rescue; out of credit goes to Tom
+fires.clear(); reruns.clear()
+def svc(name='clip-gen', nxt='The clip-gen run failed: finished as failure.'):
+    return dict(id='svc-' + name, tag='svc-' + name + '-fix', service=name, lane='claude', col='wait', waiting_on='claude', theme='Tools', title=name + ' failed', next=nxt, run='https://github.com/x/y/actions/runs/777', prompt=PRA, changed='2026-11-20', blocks=[], chat={'url': '', 'opening': 'service run'}, history=[])
+b = board(svc())
+A(b)
+check('R1: a failed service run is re-run once, no AI', reruns == [('clip-gen', 'https://github.com/x/y/actions/runs/777')] and not fires and card(b, 'svc-clip-gen')['reruns'] == 1)
+A(b)
+check('R1: the re-run is not repeated and is given time to report back', len(reruns) == 1 and not fires)
+A(b, now=NOWA + datetime.timedelta(hours=2))
+check('R1: a second service failure goes to a rescue', fires == ['svc-clip-gen'], fires)
+bs.service_event(b, 'clip-gen', 'start', 'again', 'https://run/2', today='2026-11-20')
+check('service_event keeps the re-run count through a start', card(b, 'svc-clip-gen').get('reruns') == 1)
+fires.clear(); reruns.clear()
+b = board(svc('voice-gen', 'The voice-gen run failed: ElevenLabs is out of credit.'))
+A(b)
+c = next((k for k in b['cards'] if k.get('unstick', {}).get('kind') == 'credit'), None)
+check('R1: out of credit goes to a For you card naming the service, no re-run, no rescue', c and c['lane'] == 'tom' and 'voice-gen' in c['next'] and not reruns and not fires, (c, reruns, fires))
+# quiet and "ended without shipping": rescue
+fires.clear()
+b = board(qc('c-q1'), qc('c-e1', quiet=None, col='up', history=[{'d': '2026-11-20', 't': 'Session ended without shipping: the pictures do not match.'}]))
+b['cards'][1].pop('quiet')
+A(b)
+check('R1: a quiet card is rescued', 'c-q1' in fires and card(b, 'c-q1')['col'] == 'prog' and card(b, 'c-q1')['rescue']['url'].endswith('RESCUE_c-q1'))
+check('R1: a session that ended without shipping is rescued', 'c-e1' in fires and card(b, 'c-e1')['col'] == 'prog')
+check('R1: the rescue leaves a history line and keeps the old chat link', any(h['t'].startswith('Rescue started') for h in card(b, 'c-q1')['history']) and card(b, 'c-q1')['rescue']['prev'].endswith('session_c-q1'))
+snap = json.dumps(b, sort_keys=True); n0 = len(fires)
+A(b)
+check('R1: a rescue running is not rescued again and not flagged', len(fires) == n0 and json.dumps(b, sort_keys=True) == snap, fires)
+
+# R2: rescued once, stalled again -> one Stuck twice card, no second fire
+fires.clear()
+b = board(qc('c-s2'))
+A(b)
+check('R2: first stall fires once', fires == ['c-s2'])
+later = NOWA + datetime.timedelta(hours=3)
+A(b, now=later)
+st = [k for k in b['cards'] if k.get('unstick', {}).get('kind') == 'stuck']
+check('R2: second stall makes exactly one Stuck twice For you card', len(st) == 1 and st[0]['lane'] == 'tom' and st[0]['title'].startswith('Stuck twice') and len(st[0]['title']) <= 60 and card(b, 'c-s2')['col'] == 'wait', st)
+check('R2: and no second fire', fires == ['c-s2'], fires)
+A(b, now=later + datetime.timedelta(hours=3))
+check('R2: later runs add nothing and fire nothing', len([k for k in b['cards'] if k.get('unstick')]) == 1 and fires == ['c-s2'])
+# a card that was rescued, moved on, started again and stalled: stuck twice, not another rescue
+fires.clear()
+b = board(qc('c-s3', rescue={'at': '2026-11-19T10:00:00+00:00', 'n': 1, 'why': 'x', 'url': 'u', 'prev': ''}, col='up', quiet=None))
+b['cards'][0]['col'] = 'prog'; b['cards'][0]['quiet'] = True; b['cards'][0]['chat']['url'] = 'https://claude.ai/code/session_new'
+A(b)
+check('R2: a card already rescued once and quiet again is never fired a second time', not fires and any(k.get('unstick', {}).get('card') == 'c-s3' for k in b['cards']), fires)
+
+# R3: a fifth stall in one day waits until the next day
+fires.clear()
+b = board(*[qc('c-d%d' % i, changed='2026-11-1%d' % i) for i in range(1, 6)])
+A(b)
+check('R3: four rescues in one day, the oldest first', fires == ['c-d1', 'c-d2', 'c-d3', 'c-d4'], fires)
+check('R3: the fifth is not fired the same day', 'c-d5' not in fires and card(b, 'c-d5')['col'] == 'prog')
+A(b, now=NOWA + datetime.timedelta(minutes=50))
+check('R3: still not fired an hour later the same day', 'c-d5' not in fires, fires)
+A(b, now=datetime.datetime.fromisoformat('2026-11-21T17:00:00+00:00'))
+check('R3: fired on the next day', 'c-d5' in fires, fires)
+
+# R4: never fired: backlog, open blocker, Tom's note under 6 hours old
+fires.clear()
+blk = dict(id='t-blk', lane='tom', col='up', ask='play', theme='Tools', title='Play first', next='Play first (Card c-b2).', changed='2026-11-20', blocks=['c-b2'], chat={'url': '', 'opening': 'x'}, history=[])
+b = board(qc('c-b1', backlog={'at': '2026-11-20', 'from': 'prog'}), qc('c-b2'), blk,
+          qc('c-b3', history=[{'d': '2026-11-20', 't': 'Tom: look at the door again', 'at': '2026-11-20T11:00:00+00:00'}]),
+          qc('c-b4', history=[{'d': '2026-11-20', 't': 'Tom: older note', 'at': '2026-11-20T01:00:00+00:00'}]))
+A(b)
+check('R4: backlog, open blocker and a fresh Tom note are never fired', fires == ['c-b4'], fires)
+
+# R5: today's board (data/board.json as it stood at 898f261 plus c-attn1): the three cards fire once each, nothing else
+live = json.load(open(os.path.join(HERE, '..', 'data', 'board.json'), encoding='utf-8'))
+live['cards'] = [k for k in live['cards'] if k['id'] != 'c-attn1']
+fires.clear()
+bs.sync(live, [], None, None, None, datetime.datetime.fromisoformat('2026-11-20T15:10:00+00:00'), fire2, None, rerun2, set())
+check('R5: replaying today fires c-reports-2, c-gatezero and c-adminicons1 once each, nothing else', sorted(fires) == ['c-adminicons1', 'c-gatezero', 'c-reports-2'], fires)
+check('R5: no rescue ends with the card in Waiting on nothing and the page count of attention is 0 while they run',
+      not [k for k in live['cards'] if bs.attn_reason(bs.Board(live, '2026-11-20'), k) and not bs.rescue_running(bs.Board(live, '2026-11-20'), k, datetime.datetime.fromisoformat('2026-11-20T15:10:00+00:00'))])
+
+# R6: a queue of waiting cards shows no red
+b = board(dict(id='c-a', tag='a', lane='claude', col='up', theme='Tools', title='A', next='n', changed='2026-11-20', blocks=['c-b'], prompt=PRA, history=[], chat={'url': '', 'opening': 'x'}),
+          dict(id='c-b', tag='b', lane='claude', col='wait', waiting_on='claude', theme='Tools', title='B', next='n', changed='2026-11-20', blocks=['c-c'], prompt=PRA, history=[], chat={'url': '', 'opening': 'x'}),
+          dict(id='c-c', tag='c', lane='claude', col='wait', waiting_on='claude', theme='Tools', title='C', next='n', changed='2026-11-20', blocks=[], prompt=PRA, history=[], chat={'url': '', 'opening': 'x'}))
+Bq = bs.Board(b, '2026-11-20')
+check('R6: a chain of waiting cards is not Needs attention', all(bs.attn_reason(Bq, k) is None for k in b['cards']))
+fires.clear(); A(b)
+check('R6: and nothing is moved or fired', card(b, 'c-b')['col'] == 'wait' and card(b, 'c-c')['col'] == 'wait' and not fires)
+
+# the board_check accepts the new ask
+def addunstick(d):
+    d['cards'].append(dict(id='t-stuck-x', lane='tom', col='up', ask='unstick', unstick={'card': 'c-ch2build', 'kind': 'stuck'}, theme='Tools', title='Stuck twice: X', next='Card c-ch2build stalled. Tap Start again.', blocks=['c-ch2build'], changed='2026-11-20', created='2026-11-20', chat={'url': '', 'opening': 'board'}, history=[]))
+d = json.load(open(os.path.join(HERE, '..', 'data', 'board.json'), encoding='utf-8')); addunstick(d)
+open('/tmp/board_unstick.json', 'w').write(json.dumps(d))
+r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '/tmp/board_unstick.json'], capture_output=True, text=True)
+check('board_check accepts an unstick card', r.returncode == 0, r.stdout[-300:])
+
 
 print('board_sync_test: %s' % ('FAILED: ' + ', '.join(fails) if fails else 'all passed'))
 sys.exit(1 if fails else 0)

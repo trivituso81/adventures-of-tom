@@ -1,3 +1,10 @@
+## attn1 (2026-11-20): Needs attention fixes itself or comes back to you
+
+- Card c-attn1, plan claude/attn-plan.md. Board-sync rule R11 (the plan calls it R10): every flagged card gets one automatic move within the hour. Free: waits on a finished card goes to Up next (started if `auto`), a Shipped note whose heading is in this file closes the card, START failed is tried once more then becomes the For you card Start this by hand, a failed service run is re-run once, out of credit becomes a For you card. Rescue: quiet (2 hours for cards started by START, 6 otherwise), ended without shipping, a second service failure, or a Shipped note with no heading fire one Board START session (Sonnet 5.5, medium). Limits: 1 rescue per card, 4 a day oldest first, none with an open blocker, a backlog card or Tom's note under 6 hours old. A second stall makes one For you card Stuck twice (ask unstick: Start again, Not needed).
+- Board page: a running rescue shows "Rescue started 7:10 AM. Open chat" under Working now instead of red; the Needs attention count drops it; UNSTICK group under For you; Since you last looked adds "N rescued"; the page stamps `at` on Tom's notes.
+- Tests: board_sync_test R1 to R6 (replaying the live board fires c-reports-2, c-gatezero and c-adminicons1 once each), board_test (running rescue, UNSTICK). One old expectation changed on purpose: a Claude card in Waiting with no blocker now moves to Up next. board_test's blocker mirror now counts a parked (backlog) blocker as the page does.
+- Not done by a session: the Board START task's prompt needs the rescue branch and could not be edited from here; card t-attn-start has the text and the link.
+
 ## stagefollow (2026-11-20): Chapter 16 opening restaged in the open Square, Gridlock Prime's family stands below the bus, bosses stay in the picture
 
 - Card c-stagefollow (the old close1, cutstage1, cutfront1 and bossbig1 follow-ups). Read the four Project addenda first.

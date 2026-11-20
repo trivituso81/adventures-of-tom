@@ -182,7 +182,7 @@ main{padding-bottom:40px}
 <div id="themes"></div>
 <div id="tabs" role="tablist"></div>
 <div id="views" data-v="for"><section class="view" id="vFor"></section><section class="view" id="vClaude"></section><section class="view" id="vChats"></section><section class="view" id="vShipped"></section></div>
-<p class="hint">The board follows the repo: a card moves when something happened (an approval, a shipped build, a finished blocker, a running job). A card is flagged Needs attention when it says it is finished but is still open, a run or START failed, or its conversation has been quiet for 6 hours.</p>
+<p class="hint">The board follows the repo: a card moves when something happened (an approval, a shipped build, a finished blocker, a running job). A card is flagged Needs attention when it says it is finished but is still open, a run or START failed, or its conversation has been quiet for 6 hours (2 hours for a card the board started). Each flagged card gets one automatic move within the hour: a free fix, one rescue session, or a card for you under UNSTICK.</p>
 <p class="err" id="err"></p>
 </main>
 <div id="dim"></div>
@@ -207,7 +207,7 @@ const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth
 const dayNum=s=>{const p=String(s).split('-').map(Number);return Math.round(Date.UTC(p[0],p[1]-1,p[2])/864e5);};
 const ageOf=c=>Math.max(0,dayNum(today())-dayNum(c.changed||c.created||today()));
 const nowMs=()=>Date.now();
-const ASKS=[['play','PLAY AND REPORT'],['pictures','REVIEW PICTURES'],['animations','REVIEW ANIMATIONS'],['voice','VOICE'],['script','READ A SCRIPT'],['decide','DECIDE'],['setup','SET UP']];
+const ASKS=[['play','PLAY AND REPORT'],['pictures','REVIEW PICTURES'],['animations','REVIEW ANIMATIONS'],['voice','VOICE'],['script','READ A SCRIPT'],['decide','DECIDE'],['setup','SET UP'],['unstick','UNSTICK']];
 const askName=k=>(ASKS.find(a=>a[0]===k)||[k,'OTHER'])[1];
 const REVIEW=['play','pictures','animations','voice','script'];   // board4: cards Tom tests or looks at get All good and Something is wrong
 const isReview=c=>!!c&&!c.backlog&&c.lane==='tom'&&c.col!=='done'&&REVIEW.includes(c.ask);
@@ -276,13 +276,14 @@ function renderSync(){
 // ---- boardux1: "Since you last looked". The device keeps the board as it stood when you left (column and history length per card); on return the
 // page compares and says what changed. Cards that changed carry a dot. Tapping the line shows only those cards.
 const SNAPK='aot-board-snap';
-let SINCE=null,CH={ids:new Set(),shipped:0,mine:0,started:0};
+let SINCE=null,CH={ids:new Set(),shipped:0,mine:0,started:0,rescued:0};
 const keyOf=c=>c.col+'|'+((c.history||[]).length)+'|'+c.lane;
 function loadSince(){try{const j=JSON.parse(lsGet(SNAPK)||'null');SINCE=j&&j.t&&j.m?j:null;}catch(e){SINCE=null;}}
 function saveSnap(){if(!B)return;try{const m={};B.cards.forEach(c=>{m[c.id]=keyOf(c);});localStorage.setItem(SNAPK,JSON.stringify({t:new Date().toISOString(),m}));}catch(e){}}
 function changes(){
-  const out={ids:new Set(),shipped:0,mine:0,started:0};
+  const out={ids:new Set(),shipped:0,mine:0,started:0,rescued:0};
   if(!SINCE||!B)return out;
+  B.cards.forEach(c=>{if(c.rescue&&c.rescue.at&&Date.parse(c.rescue.at)>Date.parse(SINCE.t))out.rescued++;});
   B.cards.forEach(c=>{
     const old=SINCE.m[c.id];if(old===keyOf(c))return;
     out.ids.add(c.id);const oc=old?old.split('|')[0]:'';
@@ -295,7 +296,7 @@ function changes(){
 function renderSince(){
   const el=$('since');CH=changes();
   if(!SINCE||!B){el.style.display='none';return;}
-  const parts=[];if(CH.shipped)parts.push(CH.shipped+' shipped');if(CH.mine)parts.push(CH.mine+' new for you');if(CH.started)parts.push(CH.started+' started');
+  const parts=[];if(CH.shipped)parts.push(CH.shipped+' shipped');if(CH.mine)parts.push(CH.mine+' new for you');if(CH.started)parts.push(CH.started+' started');if(CH.rescued)parts.push(CH.rescued+' rescued');
   el.style.display='block';el.className=only==='changed'?'on':'';
   el.textContent='Since '+clock(Date.parse(SINCE.t))+': '+(parts.length?parts.join(', ')+'.':CH.ids.size?CH.ids.size+' card'+(CH.ids.size===1?'':'s')+' changed.':'nothing changed.');
 }
@@ -320,10 +321,19 @@ const waitsOnClaude=c=>c.lane==='tom'&&c.col==='wait'&&blockedBy(c).some(k=>k.la
 // a run failed or START failed, a session ended without shipping, it is In progress with no push for 6 hours (no session link: a day), or it waits on a
 // card that is already finished. Plan difference: "no change for 1 day" applies to Working now cards only, because a card queued behind a long build, or
 // waiting for Tom to press START, is not late, and the plan's own rule is that an ordinary queue is never red.
+// attn1 (claude/attn-plan.md): a flagged card gets one automatic move from the board-sync job. While its rescue session runs the card is Working now,
+// not red. Mirrors rescue_running in tools/board_sync.py: a rescue is running until its conversation has been quiet for 2 hours.
+const RESCUE_MS=2*36e5;
+function rescueRunning(c){
+  if(!c||!c.rescue||c.col!=='prog')return false;
+  const s=sessionFor(c);let ref=Date.parse(c.rescue.at);if(s)ref=Math.max(ref,Date.parse(s.last));
+  return nowMs()-ref<RESCUE_MS;
+}
 function attnWhy(c){
   if(c.lane==='tom'||c.col==='done'||c.backlog)return '';
+  if(rescueRunning(c))return '';
   if(c.start_error)return 'START failed last time: '+c.start_error;
-  if(c.service&&c.col==='wait')return 'A run failed: '+String(c.next||'').slice(0,120);
+  if(c.service&&c.col==='wait'&&!blockedBy(c).length)return 'A run failed: '+String(c.next||'').slice(0,120);
   const last=(c.history||[]).slice(-1)[0];
   if(last&&/without shipping/i.test(last.t))return 'A session ended without shipping';
   if(c.col==='prog'){
@@ -393,6 +403,7 @@ const days=n=>n+' day'+(n===1?'':'s');
 function stateLine(c,ctx){
   if(c.col==='done')return '';
   if(ctx==='backlog')return '<div class="state">'+esc(laneName(c.lane))+(c.backlog&&c.backlog.at?' \u00B7 parked '+esc(c.backlog.at):'')+'</div>';
+  if(rescueRunning(c))return '<div class="state">Rescue started '+esc(clock(Date.parse(c.rescue.at)))+'. '+(c.chat&&c.chat.url?'<a href="'+esc(c.chat.url)+'" target="_blank" rel="noopener">Open chat</a>':'')+'</div>';
   const w=attnWhy(c);if(w)return '<div class="state quiet">'+esc(w)+'</div>';
   const by=blockedBy(c);let s='';
   if(by.length)s='After: '+esc(by.map(x=>dispTitle(x)).join('; '))+(waitsOnClaude(c)?'. Returns to you when fixed.':'');
@@ -634,6 +645,8 @@ function openSheet(id){
   let main='';
   if(bk) main='<button class="gold" type="button" data-act="unbacklog" data-id="'+esc(c.id)+'">Add to '+esc(laneOwner(c.lane))+' to-do</button>';
   else if(isReview(c)&&c.col!=='wait') main='<button class="'+(hasPics(c)?'ob':'gold')+'" type="button" data-act="good" data-id="'+esc(c.id)+'">All good</button><button class="tb bad" type="button" data-act="wrong" data-id="'+esc(c.id)+'">Something is wrong</button>';
+  else if(tom&&open_&&c.ask==='unstick'&&c.unstick&&c.unstick.kind==='stuck') main='<button class="gold" type="button" data-act="restart" data-id="'+esc(c.id)+'">Start again</button>';
+  else if(tom&&open_&&c.ask==='unstick'&&c.unstick&&c.unstick.kind==='hand'&&cardById(c.unstick.card)&&cardById(c.unstick.card).prompt) main='<button class="gold" type="button" data-act="copy" data-id="'+esc(c.unstick.card)+'">Copy prompt</button><button class="ob" id="bdid" type="button">I did this</button>';
   else if(tom&&open_&&!dec&&!isReview(c)&&!bk) main='<button class="gold" id="bdid" type="button">I did this</button><button class="ob" id="btake" type="button">Claude takes this</button>';
   else if(tom&&open_&&dec) main='<button class="ob small" id="btake" type="button">Claude takes this</button>';
   else if(p&&!c.service&&open_&&c.lane==='claude'){
@@ -670,7 +683,7 @@ async function save(msg,fn){
     const j=await w.json();sha=(j.content||{}).sha||sha;B=next;return;
   }
 }
-function touch(c,text){c.changed=today();c.history=(c.history||[]).concat([{d:today(),t:text}]);}
+function touch(c,text){c.changed=today();c.history=(c.history||[]).concat([{d:today(),t:text,at:new Date().toISOString()}]);}
 async function run(msg,fn,okMsg,after){
   $('serr').textContent='';
   try{await save(msg,fn);toast(okMsg);render();if(after){setSheet(after(),'saved');}else closeSheet();}catch(e){$('serr').textContent=e.message;}
@@ -695,6 +708,13 @@ function savedScreen(id){
 }
 const cut50=t=>{t=String(t||'').trim();return t.length<=50?t:t.slice(0,51).replace(/\s+\S*$/,'').trim();};   // boardux2 (plan 3.7): a fix card is titled "Fix: <first 50 characters of the tested card's title>", cut at a word
 const clean=s=>String(s||'').replace(/</g,'(').replace(/>/g,')').replace(/\u2014/g,',').trim();
+// attn1: Start again on a Stuck twice card. The stalled card forgets its rescue (a fresh session gets a fresh count) and is started; the For you card closes.
+function restartCard(tid){
+  const t=cardById(tid);if(!t||!t.unstick)return;const target=t.unstick.card;
+  run('board: restart '+target,d=>{const z=d.cards.find(q=>q.id===target),k=d.cards.find(q=>q.id===tid);
+    if(z&&z.col!=='done'){delete z.rescue;delete z.start_retried;delete z.start_error;delete z.quiet;delete z.waiting_on;z.col='up';z.start=true;touch(z,'Tom tapped Start again after Stuck twice.');}
+    if(k){k.col='done';k.done=today();touch(k,'Tom tapped Start again.');}return d;},'Starting again');
+}
 async function startCard(id){
   $('serr')&&($('serr').textContent='');
   try{await save('board: start-request '+id,d=>{const c=d.cards.find(z=>z.id===id);if(c&&c.col!=='done'&&c.col!=='prog'){c.start=true;touch(c,'Tom tapped START.');}return d;});
@@ -832,6 +852,7 @@ document.addEventListener('click',e=>{
   const act=t.closest('[data-act]');
   if(act&&act.dataset.act==='copy'){const c=cardById(act.dataset.id);if(c&&c.prompt){copyText(withId(c));markCopied(c.id);}e.stopPropagation();return;}
   if(act&&act.dataset.act==='start'){startCard(act.dataset.id);e.stopPropagation();return;}
+  if(act&&act.dataset.act==='restart'){restartCard(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='unbacklog'){unBacklog(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='gen'){genTap(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='good'){allGood(act.dataset.id);e.stopPropagation();return;}

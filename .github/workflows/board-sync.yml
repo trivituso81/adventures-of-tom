@@ -18,6 +18,7 @@ on:
 
 permissions:
   contents: write
+  actions: write   # attn1: re-run a failed service job once (tools/board_sync.py make_rerun)
 
 # One at a time, and none is dropped for a newer one: every run reads the commits since the board's `synced` commit.
 concurrency:
@@ -68,6 +69,7 @@ jobs:
           CLAUDE_TASK_SONNET_MEDIUM_URL: ${{ secrets.CLAUDE_TASK_SONNET_MEDIUM_URL }}
           CLAUDE_TASK_SONNET_MEDIUM_TOKEN: ${{ secrets.CLAUDE_TASK_SONNET_MEDIUM_TOKEN }}
           BOARD_FIRED: /tmp/board-fired.json
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python3 tools/board_sync.py | tee /tmp/git.txt
           cat /tmp/git.txt >> /tmp/msgs.txt
@@ -76,6 +78,7 @@ jobs:
           CLAUDE_TASK_SONNET_MEDIUM_URL: ${{ secrets.CLAUDE_TASK_SONNET_MEDIUM_URL }}
           CLAUDE_TASK_SONNET_MEDIUM_TOKEN: ${{ secrets.CLAUDE_TASK_SONNET_MEDIUM_TOKEN }}
           BOARD_FIRED: /tmp/board-fired.json
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python3 tools/board_check.py
           if git diff --quiet data/board.json; then echo "Nothing moved."; exit 0; fi
@@ -89,7 +92,7 @@ jobs:
             # Another push landed first (Tom's phone, a session). Take the newest board, run the rules on it again, push again.
             git fetch --depth=100 origin main
             git reset -q --hard origin/main
-            python3 tools/board_sync.py | tee -a /tmp/msgs.txt
+            GITHUB_TOKEN="${GITHUB_TOKEN}" python3 tools/board_sync.py | tee -a /tmp/msgs.txt
             if git diff --quiet data/board.json; then echo "Nothing left to move."; exit 0; fi
             git add data/board.json
             git commit -q -m "${msg:-board-sync: cards moved}"

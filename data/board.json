@@ -9846,7 +9846,7 @@
    "theme": "Project Ops",
    "title": "Needs attention fixes itself or comes back to you",
    "next": "Building the automatic rescue from claude/attn-plan.md: rule R10 in tools/board_sync.py, tests, the board page changes, the handoff rules.",
-   "after": "nothing for Tom: end",
+   "after": "t-attn-start",
    "prompt": {
     "what": "Builds the automatic rescue for Needs attention cards.",
     "before": [
@@ -9963,6 +9963,29 @@
    },
    "after": "t-heist1play",
    "auto": true
+  },
+  {
+   "id": "t-attn-start",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Project Ops",
+   "ask": "setup",
+   "fyi": true,
+   "title": "Paste the rescue text into Board START",
+   "next": "Open https://claude.ai/code/routines/trig_01CpAcq3YZdnJoCwPSmGBeEu , replace the whole prompt with the text in claude/next-addendum-attn1.md (section The Board START scheduled task, in the repo; it starts with You were started by Tom's board), and save. Until you do, a rescue session runs the card's old prompt from the top instead of rescuing it. Then tap I did this. Card c-attn1 built the rescue.",
+   "chat": {
+    "url": "",
+    "opening": "board"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by c-attn1: a session cannot edit the Board START task (it was made over the API), so Tom pastes the new prompt."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [

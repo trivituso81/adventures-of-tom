@@ -23,7 +23,7 @@ if args[:1] == ['--push']:
     push_tag, args = args[1], args[2:]
 DEFAULT = os.path.join(HERE, '..', 'data', 'board.json')
 path = args[0] if args else DEFAULT
-ASKS = ['play', 'pictures', 'animations', 'voice', 'script', 'decide', 'setup']
+ASKS = ['play', 'pictures', 'animations', 'voice', 'script', 'decide', 'setup', 'unstick']
 THEMES = ['Voice Clips', 'Battle Animations', 'Battle System', 'Areas', 'Characters', 'Story and Dialogue', 'Game Shell', 'Tools', 'Project Ops']
 bad = []
 try:
