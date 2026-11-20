@@ -18,6 +18,8 @@ SCENES.opening=()=>{
   return [
     {call:toRoom}, {show:'tom'}, {cam:[8.5,6.6]},   // frame Tom and Sal together (landscape shows about six rows)
     {wait:.7},
+    {face:'tom',dir:'up'},
+    {talk:'Tom',lines:["Thanks for the JFK pickup, Sal."]},   // fix-gem-canon01play (Tom 2026-11-20): first words, before the stretch
     {step:stretchStep()},
     {face:'tom',dir:'up'},
     {talk:'Tom',lines:["Oof, I'm finally here! At least the 6 hours went by fast on Delta One!"],voice:[['tom','intro1']]},

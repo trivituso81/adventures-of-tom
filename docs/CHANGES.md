@@ -36,6 +36,12 @@ Tom (11-20): "the context folder is getting full. create a prompt to help me cle
 - Folded through `tools/script-index/apply.py` (mood, talking pose, reactions, Voice Library list), plus the text-keyed rows by hand: Deedee's bulb pose (`data/line-poses.js`), the gap row (`docs/line-gaps.tsv` then `gap-apply.py`), the voice direction in `tools/voice-library/scripts/ch01-story-directions.json` (new tags, old take id removed). Not written to docs/tom-edits.tsv: that guide is Tom's own rewrites only.
 - Voice: Deedee's old baked clip for this line is purged from `data/voice/dialog-ch1.js` (No unused voice). The new line plays through speech synthesis until baked: Voice Library, chapter 1, Deedee.
 - Tests: smoke (tag check fixed by this bump; board_sync_test R5 fails on main without this change too: it depends on the time of day; it passed once mid-session), `scene_frames.py` for ch1Spot in portrait 430 x 860 and landscape 860 x 430: the line fits one page of the box in both. `unused_voice.py`: 39 orphan dialogue clips, the same count as main before this change, not touched here.
+## fix-gem-canon01play (2026-11-20): Tom now says "Thanks for the JFK pickup, Sal." before he stretches in the taxi office
+
+- Tom's report on t-gem-canon01play: "We need a new line of feedback before Tom starts talking and stretching. he should say \"Thanks for the JFK pickup, Sal.\""
+- `SCENES.opening` (`data/scenes.js`): after he faces Sal, Tom says the new line first, then the same eight-pose stretch, his Delta One line and Sal's line. Nothing else changed. The new line has no clip: it plays through speech synthesis until it is baked. `data/script-index.json` rebuilt.
+- Not run: voice bake.
+
 ## gem-canon01 (2026-11-20): chapter 1 opens inside the taxi office: Tom stretches, Sal sends him out to the girls
 
 - Gemini chapter 1 report CANON-01, with Tom's override (11-20): "Tom should do his same old stretching routine in the cab company interior, same dialogue. at the end Sal should say ... then Tom exits the taxi company and the existing sequence continue where the girls say tata, he crouches and they hug."

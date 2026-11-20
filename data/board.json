@@ -12609,7 +12609,7 @@
    "ask": "play",
    "fyi": true,
    "first": "Build gem-canon01 shows on the title screen.",
-   "next": "RELOAD, then CHAPTERS > Chapter 1. Check: Tom stretches inside the taxi office in front of Sal, says his Delta One line, Sal says \"OK Mr. Fancy Pants...\", Tom walks out the door, and outside the girls shout TATA, he crouches and they hug. Sal's line is read by the computer voice until it is recorded.",
+   "next": "RELOAD, then CHAPTERS > Chapter 1. Check: Tom first says \"Thanks for the JFK pickup, Sal.\" in the taxi office, then stretches, says his Delta One line, Sal says \"OK Mr. Fancy Pants...\", Tom walks out the door, and outside the girls shout TATA, he crouches and they hug. The new line and Sal's line are read by the computer voice until recorded.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -12670,7 +12670,7 @@
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Play the new chapter 1 opening in the taxi office",
-   "next": "You reported a problem on Play the new chapter 1 opening in the taxi office. Claude starts the fix by itself. Latest: We need a new line of feedback before Tom starts talking and stretching. he should say \"Thanks for the JFK pickup, Sal.\"",
+   "next": "Shipped as fix-gem-canon01play.",
    "blocks": [
     "t-gem-canon01play"
    ],
@@ -12714,6 +12714,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fix built as fix-gem-canon01play: Tom says the JFK line before the stretch."
     }
    ],
    "prompt": {
