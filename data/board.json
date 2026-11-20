@@ -16426,6 +16426,11 @@
      "d": "2026-11-20",
      "t": "Tom handed this to Claude: i dont understand what i need to do",
      "at": "2026-11-20T21:27:59.078Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped START.",
+     "at": "2026-11-20T21:28:05.075Z"
     }
    ],
    "tag": "t-welcomepage-request",
@@ -16438,7 +16443,8 @@
     "model": "Claude Sonnet 5.5 (row C: the steps are not written yet)",
     "effort": "medium (a handed-over card is usually one piece of work)",
     "text": "Read claude/handoff-rules.md. Tom handed you board card t-welcomepage-request with this note: i dont understand what i need to do. Work out what is needed, rewrite the card, and do it. Attach trivituso81/adventures-of-tom with push access (add_repo)."
-   }
+   },
+   "start": true
   }
  ],
  "sessions": [
