@@ -42,7 +42,7 @@ function startSplash() {
   // index.html?admin=1 (the Area Builder's Exit from its first screen) opens the Welcome screen on the ADMIN list with AREA BUILDER highlighted.
   try{ if(new URLSearchParams(location.search).get('admin')) { splashSetMode('admin',9); history.replaceState(null,'',location.pathname); } }catch(e){}
   // index.html?go=<name> (admin.html, adminhub1) opens one admin tool straight away; an unknown name opens the ADMIN list.
-  try{ const go=new URLSearchParams(location.search).get('go'); if(go) { history.replaceState(null,'',location.pathname); splashGoTool(go); } }catch(e){}
+  try{ const q=new URLSearchParams(location.search),go=q.get('go'); if(go) { history.replaceState(null,'',location.pathname); splashGoTool(go,q.get('i')); } }catch(e){}
   if(!splash.wired) {
     splash.wired=true;
     splashWire(el.querySelector('.sp-choices'));
@@ -57,7 +57,15 @@ function splashWire(box) {
   box.addEventListener('click',e=>{ const b=e.target.closest('.sp-choice'); if(!b) return; unlockAudio(); splashPick(Number(b.dataset.i)); });
   box.addEventListener('pointerover',e=>{ const b=e.target.closest('.sp-choice'); if(b&&splash.active&&splash.sel!==Number(b.dataset.i)) { splash.sel=Number(b.dataset.i); splashMark(); } });
 }
-function splashGoTool(name) {
+function splashGoTool(name,arg) {
+  const n=Number(arg);
+  // battle-lab.html (battlelab2): each fight on that page opens straight into the fight on the difficulty it saved: lab = an old
+  // Battle Lab fight (B2_LAB index; the SOLO row opens its fighter picker), new = a NEW BATTLE fight (B3_LAB index), states = PAINTED STATES.
+  const fight={
+    'lab':()=>{ if(B2_LAB[n]&&B2_LAB[n].solo) { splash.labPage=0; splashSoloOpen(n); } else splashLab(n); },
+    'new':()=>b3LabGo(n)};
+  if(name==='lab'||name==='new') { if((name==='lab'?B2_LAB:B3_LAB)[n]) { fight[name](); return; } }
+  if(name==='states'&&typeof b3LabPaintedStates==='function') { b3LabPaintedStates(); return; }
   const tools={
     'welcome-layout':()=>splashEditOpen(),
     'battle-lab':()=>splashDifficulty(()=>{ splash.labPage=0; splashOpen('lab'); }),

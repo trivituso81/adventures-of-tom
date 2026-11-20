@@ -1,3 +1,12 @@
+## fix-battlelabpagetry-2 (2026-11-20): The Battle Lab page is a page like Admin: difficulty toggles on top, every fight one tap away
+
+Tom (t-battlelabpagetry): "just like in the new chpater select screen, the difficulty toggles should be at the top so it removes an interstital step. / the page should not be the welcome screen. it should be a page like admin with literally every option that will link directly the battle test ( i dont want to have to click more than once assuming im happy with the difficulty default which should be Difficult".
+
+- `battle-lab.html` is now a static page (no game loaded, like `admin.html`): EASY, MEDIUM and HARD toggles at the top (HARD lit by default, the pick is saved in the game's own `aot-diff` setting), then every fight as one link: the 27 NEW BATTLE fights and PAINTED STATES, the tests and reviews, and the chapter 1 to 20 boss fights. One tap opens that fight on the lit difficulty; no welcome screen, no difficulty page, no list in between.
+- `index.html?go=lab&i=<n>`, `?go=new&i=<n>` and `?go=states` (`splashGoTool`, `engine/splash.js`) start a fight directly; an unknown number lands on the ADMIN list.
+- The fight names come from `data/battle-lab-index.json`, written by `node tools/battle_lab_index.js` (`--check` fails when it is stale; re-run it when `B2_LAB` or `B3_LAB` change).
+- Not changed: ADMIN > BATTLE LAB inside the game still shows its difficulty page and paged list. Not looked at: the pencil reports filed since (none about this page).
+- Test: `python3 tools/admin_hub_test.py` (page in portrait and landscape, default HARD, saving, one tap into a boss fight and a NEW BATTLE fight).
 ## ch2build (2026-11-20): Chapter 2 now plays the locked script: nine scenes, 93 lines word for word
 
 Board card c-ch2build. Script: claude/story-ch02-draft4.md. Plan: claude/ch02-teardown.md. Tom's two ASK questions in the teardown got no answer (the chapter 2 conversation was not reachable by this run), so the teardown defaults were built and are listed under "Calls I made".

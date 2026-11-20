@@ -1,0 +1,330 @@
+{
+ "b2": [
+  {
+   "i": 0,
+   "ch": 0,
+   "name": "CHAPTER 1 REVIEW",
+   "sub": "Watch chapter 1's battle clips in a real fight: tap PLAY on a clip (or PLAY ALL) and send REDO with a note on what looks wrong. Mudling, Pond Grump, Bog Toad and Log Lump wait on the field.",
+   "solo": false
+  },
+  {
+   "i": 1,
+   "ch": 0,
+   "name": "CHAPTER 1 REVIEW: THE BIG ONE",
+   "sub": "The same review with The Big One on the field: its idle and its attack clips.",
+   "solo": false
+  },
+  {
+   "i": 2,
+   "ch": 0,
+   "name": "CLIP TEST: ROSE",
+   "sub": "Animation test. Pick ATTACK, then Boop: Rose plays her video-made Boop. The Mudling moves on its own.",
+   "solo": false
+  },
+  {
+   "i": 3,
+   "ch": 0,
+   "name": "JUSTIN’S TRYOUT",
+   "sub": "Test fight. Tom, Grace, Rose and Justin, every move unlocked.",
+   "solo": false
+  },
+  {
+   "i": 4,
+   "ch": 0,
+   "name": "SOLO",
+   "sub": "Test fight. Pick anyone, alone, every move unlocked. Nobody can be hurt. Leave with EXIT.",
+   "solo": true
+  },
+  {
+   "i": 5,
+   "ch": 0,
+   "name": "OLIVIA’S TRYOUT",
+   "sub": "Test fight. Tom, Grace, Rose and Olivia, every move unlocked.",
+   "solo": false
+  },
+  {
+   "i": 6,
+   "ch": 1,
+   "name": "THE BIG ONE",
+   "sub": "Chapter 1. Tom, Grace, Rose and Deedee.",
+   "solo": false
+  },
+  {
+   "i": 7,
+   "ch": 2,
+   "name": "THE BIG SHAKE",
+   "sub": "Chapter 2. Tom, TNB and Nara.",
+   "solo": false
+  },
+  {
+   "i": 8,
+   "ch": 3,
+   "name": "OLD IRON-GILL",
+   "sub": "Chapter 3. Tom, Grace, Rose and Boppy.",
+   "solo": false
+  },
+  {
+   "i": 9,
+   "ch": 4,
+   "name": "THE DIRECTOR’S CUT",
+   "sub": "Chapter 4. Tom, TNB and Nara.",
+   "solo": false
+  },
+  {
+   "i": 10,
+   "ch": 5,
+   "name": "THE RED PEN",
+   "sub": "Chapter 5. Tom, Grace, Rose and Amy.",
+   "solo": false
+  },
+  {
+   "i": 11,
+   "ch": 6,
+   "name": "CHAIRMAN CHEEKS",
+   "sub": "Chapter 6. Tom, TNB and Nara.",
+   "solo": false
+  },
+  {
+   "i": 12,
+   "ch": 7,
+   "name": "THE UNREAD",
+   "sub": "Chapter 7. Tom, Grace and Rose.",
+   "solo": false
+  },
+  {
+   "i": 13,
+   "ch": 8,
+   "name": "OLD IRONBELLY",
+   "sub": "Chapter 8. Tom, TNB and Nara.",
+   "solo": false
+  },
+  {
+   "i": 14,
+   "ch": 9,
+   "name": "THE MIRRORBALL",
+   "sub": "Chapter 9. Tom, Deedee and Boppy.",
+   "solo": false
+  },
+  {
+   "i": 15,
+   "ch": 10,
+   "name": "THE LAST CALL",
+   "sub": "Chapter 10. Tom, Grace, Rose and Amy.",
+   "solo": false
+  },
+  {
+   "i": 16,
+   "ch": 11,
+   "name": "FINAL CALL",
+   "sub": "Chapter 11. Tom, Grace, Rose and Amy.",
+   "solo": false
+  },
+  {
+   "i": 17,
+   "ch": 12,
+   "name": "GRIDLOCK PRIME",
+   "sub": "Chapter 12. Tom, Grace, Rose and Amy.",
+   "solo": false
+  },
+  {
+   "i": 18,
+   "ch": 13,
+   "name": "DRILL WORM",
+   "sub": "Chapter 13. Tom, Amy, TNB and Nara.",
+   "solo": false
+  },
+  {
+   "i": 19,
+   "ch": 14,
+   "name": "WARDEN BOPPY",
+   "sub": "Chapter 14. Tom, Amy, Grace and Rose.",
+   "solo": false
+  },
+  {
+   "i": 20,
+   "ch": 15,
+   "name": "HUSH-9 FINAL FORM",
+   "sub": "Chapter 15. Tom, Amy, Grace and Rose.",
+   "solo": false
+  },
+  {
+   "i": 21,
+   "ch": 16,
+   "name": "MARLOWE TRANSFORMED",
+   "sub": "Chapter 16. Tom, Amy, TNB and Nara.",
+   "solo": false
+  },
+  {
+   "i": 22,
+   "ch": 17,
+   "name": "THE TWIN LENSES",
+   "sub": "Chapter 17. Tom, Grace, Rose and Amy.",
+   "solo": false
+  },
+  {
+   "i": 23,
+   "ch": 18,
+   "name": "JULIAN VANCE",
+   "sub": "Chapter 18. Survival fight, cannot be won. Tom, Grace, Rose and Amy.",
+   "solo": false
+  },
+  {
+   "i": 24,
+   "ch": 19,
+   "name": "THE OBLIVION CENSOR",
+   "sub": "Chapter 19. Tom, Grace, Rose and Amy.",
+   "solo": false
+  },
+  {
+   "i": 25,
+   "ch": 20,
+   "name": "THE CHRONOS-LEVIATHAN",
+   "sub": "Chapter 20. Tom, Grace, Rose and Amy.",
+   "solo": false
+  },
+  {
+   "i": 26,
+   "ch": 20,
+   "name": "JULIAN, LAST FIGHT",
+   "sub": "Chapter 20. Tom, Grace, Rose and Amy.",
+   "solo": false
+  }
+ ],
+ "b3": [
+  {
+   "i": 0,
+   "name": "NEW 1: TWO MUDLINGS",
+   "sub": "Chapter 1 fight. Two Mudlings in Front."
+  },
+  {
+   "i": 1,
+   "name": "NEW 2: MUDLING AND SKEETER",
+   "sub": "Chapter 1 fight. A Mudling in Front, a Skeeter Swarm in Back."
+  },
+  {
+   "i": 2,
+   "name": "NEW 3: POND GRUMP AND MUDLING",
+   "sub": "Chapter 1 fight. A Pond Grump winds up a big Soggy Slap."
+  },
+  {
+   "i": 3,
+   "name": "NEW 4: BOG TOAD AND SKEETER",
+   "sub": "Chapter 1 fight. A Bog Toad sweeps the whole family with its tongue."
+  },
+  {
+   "i": 4,
+   "name": "NEW 5: LOG LUMP",
+   "sub": "Chapter 1 Elite. Log Lump has 4 Composure pips and starts braced. A Skeeter Swarm in Back."
+  },
+  {
+   "i": 5,
+   "name": "NEW 6: THE BIG ONE",
+   "sub": "Chapter 1 boss. 6 Composure pips. It glares at someone, then bites them on its next turn."
+  },
+  {
+   "i": 6,
+   "name": "NEW 7: TNB JOINS (LOG LUMP)",
+   "sub": "TNB takes Deedee’s place: Ceramicist or Longboarder, with Grace, Tom and Rose. Log Lump has 4 Composure pips."
+  },
+  {
+   "i": 7,
+   "name": "NEW 8: NARA JOINS (TOAD AND SKEETER)",
+   "sub": "Chapter 2 party: Tom, TNB and Nara. Nara is Attached Pup (Guard Dog in the Pocket). A Bog Toad sweeps the whole family."
+  },
+  {
+   "i": 8,
+   "name": "NEW 9: BOPPY JOINS (BIG ONE)",
+   "sub": "Chapter 3 party: Tom, Grace, Rose and Boppy. Boppy is The Dep (Pepper Boss in the Pocket). The Big One has 6 Composure pips."
+  },
+  {
+   "i": 9,
+   "name": "NEW 10: AMY, JUSTIN AND OLIVIA (BIG ONE)",
+   "sub": "Tom with the three grown-ups: Amy is Fitness Queen (Classroom Boss in the Pocket), Justin is Basement Boss (Live Wire in the Pocket), Olivia is Rope Champ (Working Mom in the Pocket). The Big One has 6 Composure pips."
+  },
+  {
+   "i": 10,
+   "name": "NEW 11: TWO SMOGLETS",
+   "sub": "Chapter 2 fight. Two Smoglets in Front. Brown Haze blinds one of the family."
+  },
+  {
+   "i": 11,
+   "name": "NEW 12: SMOGLET AND TICKET FLURRY",
+   "sub": "Chapter 2 fight. A Ticket Flurry in Back dodges behind a paper swirl."
+  },
+  {
+   "i": 12,
+   "name": "NEW 13: CANYON COYOTE AND TICKET FLURRY",
+   "sub": "Chapter 2 fight. A Canyon Coyote howls and the whole pack hits harder."
+  },
+  {
+   "i": 13,
+   "name": "NEW 14: GRIDLOCK AND SMOGLET",
+   "sub": "Chapter 2 fight. Gridlock winds up Rush Hour, a sweep along the whole floor."
+  },
+  {
+   "i": 14,
+   "name": "NEW 15: TAR PIT BLOB",
+   "sub": "Chapter 2 Elite. Tar Pit Blob has 4 Composure pips, shrugs off Clobber and starts under its Asphalt Crust. A Ticket Flurry in Back."
+  },
+  {
+   "i": 15,
+   "name": "NEW 16: THE BIG SHAKE",
+   "sub": "Chapter 2 boss. 6 Composure pips. Below half HP it takes Faultline Guard, and Panic Boil! or a Break ends the stance."
+  },
+  {
+   "i": 16,
+   "name": "NEW 17: TWO SOGGY SOCKS",
+   "sub": "Chapter 3 fight. Two Soggy Socks in Front. They shrug off Drench."
+  },
+  {
+   "i": 17,
+   "name": "NEW 18: BOBBER AND SOGGY SOCK",
+   "sub": "Chapter 3 fight. A Bobber bobs on the waves and dodges."
+  },
+  {
+   "i": 18,
+   "name": "NEW 19: TANGLE AND BOBBER",
+   "sub": "Chapter 3 fight. A Tangle winds up a Big Knot."
+  },
+  {
+   "i": 19,
+   "name": "NEW 20: SNAG",
+   "sub": "Chapter 3 Elite. Snag has 4 Composure pips, shrugs off Drench and starts wedged under its Sunken Timber. A Bobber in Back."
+  },
+  {
+   "i": 20,
+   "name": "NEW 21: OLD IRON-GILL",
+   "sub": "Chapter 3 boss. 6 Composure pips. Every 3rd turn and once at half HP it dives to the Back behind a Soggy Sock and charges Deep Dive."
+  },
+  {
+   "i": 21,
+   "name": "NEW 22: THREE EXTRA EXTRAS",
+   "sub": "Chapter 4 fight. Three Extra Extras in Front."
+  },
+  {
+   "i": 22,
+   "name": "NEW 23: EXTRA EXTRA AND BOOM MIC MOTH",
+   "sub": "Chapter 4 fight. The Boom Mic Moth in Back locks Pocket Vibe Skills with Mic Feedback."
+  },
+  {
+   "i": 23,
+   "name": "NEW 24: CLAPPER SNAPPER AND EXTRA EXTRA",
+   "sub": "Chapter 4 fight. The Clapper Snapper opens with Scene One, Marker!"
+  },
+  {
+   "i": 24,
+   "name": "NEW 25: EXTRA EXTRA AND FOG WISP",
+   "sub": "Chapter 4 fight. The Fog Wisp in Back drenches the family and blinds one of them."
+  },
+  {
+   "i": 25,
+   "name": "NEW 26: CUE CARD CRAB",
+   "sub": "Chapter 4 Elite. The Cue Card Crab has 4 Composure pips, shrugs off Clobber and starts behind its Posterboard Shell. A Boom Mic Moth in Back."
+  },
+  {
+   "i": 26,
+   "name": "NEW 27: THE DIRECTOR’S CUT",
+   "sub": "Chapter 4 boss. 6 Composure pips. At 60% HP it shouts ACTION! and calls Extra Extras. CUT! stuns and pushes one of the family."
+  }
+ ]
+}

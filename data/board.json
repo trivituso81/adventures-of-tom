@@ -14139,7 +14139,7 @@
    "lane": "tom",
    "ask": "play",
    "fyi": true,
-   "next": "Your 404 came about 40 seconds before the site finished updating, so the page did not exist yet. Open https://trivituso81.github.io/adventures-of-tom/battle-lab.html in Safari again. You should see 'Battle Lab' for a moment, then the difficulty choice. If it still says 404, tap Something is wrong again. If it opens, tap Share, Add to Home Screen and open it from there. All good, or Something is wrong.",
+   "next": "Open https://trivituso81.github.io/adventures-of-tom/battle-lab.html in Safari (wait a minute after this push). You should see the Battle Lab with EASY, MEDIUM, HARD at the top (HARD lit) and every fight below as one button. Tap any fight once: it should start straight away on HARD. If you add it to the home screen, use Share > Add to Home Screen from that page. All good, or Something is wrong.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -14169,6 +14169,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: just like in the new chpater select screen, the difficulty toggles should be at the top so it removes an interstital step. / the page should not be the welcome screen. it should be a page like admin with literally every option that will link directly the battle test ( i dont want to have to click more than once assuming im happy with the difficulty default which should be Difficult Sent to Claude as card c-fix-battlelabpagetry-2; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T17:58:23.350Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Claude fix c-fix-battlelabpagetry-2: the Battle Lab page is now a page like Admin with the difficulty toggles at the top (HARD by default) and every fight one tap away."
     }
    ],
    "col": "wait",
@@ -14581,6 +14585,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-battlelabpagetry-2; tested in portrait and landscape."
     }
    ],
    "prompt": {
