@@ -816,7 +816,7 @@
   {
    "id": "t-projinstr",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Project Ops",
    "title": "Replace one paragraph in the Project instructions",
    "next": "In Claude, open this Project > Instructions. Replace the bullet that starts \"Session handoff (standing rule)\" with the paragraph in the audit chat (also claude/board2-plan.md section 7). It makes every new conversation start from the board, whatever you type first.",
@@ -828,11 +828,16 @@
     {
      "d": "2026-11-19",
      "t": "Added by the board audit: the Project instructions still tell sessions to start from claude/next.md and never mention the board."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom did this."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-19"
+   "changed": "2026-11-19",
+   "done": "2026-11-19"
   },
   {
    "id": "c-board2",
