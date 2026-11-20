@@ -9015,7 +9015,7 @@
    "id": "c-ch1leftovers",
    "tag": "ch1leftovers",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Story and Dialogue",
    "title": "Chapter 1 staging leftovers: Amy, Aunt Ellie, Gus and Bean",
    "next": "Ready to start. Fixes three small chapter 1 problems: Tom's head under the Square arch sign in ch1Amy, Tom and Grace standing up the path away from Aunt Ellie's door in ch1Ellie, and Gus and Bean still showing the old glass block.",
@@ -9024,12 +9024,16 @@
    "changed": "2026-11-20",
    "chat": {
     "url": "",
-    "opening": "not started"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
      "d": "2026-11-20",
      "t": "Made by c-knownwrong: this item was on the known-wrong list cut out of claude/next.md."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation."
     }
    ],
    "prompt": {
