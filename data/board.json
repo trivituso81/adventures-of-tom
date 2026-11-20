@@ -15663,6 +15663,37 @@
    "after": "t-listen1-play",
    "auto": true,
    "started_at": "2026-11-20T20:12:55+00:00"
+  },
+  {
+   "id": "c-wanplan",
+   "title": "Battle video route: why WAN was dropped, costs, proof plan",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "up",
+   "tag": "wanplan",
+   "next": "In progress in the chat that opened with the rule NO PAINTED POSES IN BATTLE. It records the rule, finds out why the WAN video route was dropped, compares the ways to run WAN by API against xAI, and writes the proof plan for Grace's guard. It spends nothing and stops for your approval.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEkFzpnNXMhJNExAwp",
+    "opening": "\"I'm extremely unhappy with the painted battle poses for the family\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom (12:11): \"I'm extremely unhappy with the painted battle poses for the family (card t-clipreset / c-clipposes). I was happy with the earlier WAN video clips (made through Sorceress); the problem is painted still poses.\" New standing rule: NO PAINTED POSES IN BATTLE. Task: why WAN was dropped, API comparison against xAI, proof plan for Grace's guard, no spend, stop for approval."
+    }
+   ],
+   "prompt": {
+    "what": "Records the rule NO PAINTED POSES IN BATTLE, finds out why the WAN video route was dropped, compares the API routes against xAI and writes the Grace guard proof plan. Spends nothing.",
+    "before": [
+     "Nothing to do first. This card is the conversation Tom already opened."
+    ],
+    "model": "Claude Fable 5.2 (row E, condition 3: the conversation Tom opened runs on it)",
+    "effort": "medium (research and a written plan, no build)",
+    "text": "Read claude/handoff-rules.md and card c-wanplan in data/board.json with its history. Record the rule NO PAINTED POSES IN BATTLE in claude/canon-addendum.md and CLAUDE.md, find out from the board and the claude/ docs why the WAN video route was dropped, compare the API routes for WAN against xAI, and write the proof plan for Grace's guard into claude/video-battle-plan.md. Spend nothing and stop for Tom's approval. Your first push is the commit board: start c-wanplan. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [
