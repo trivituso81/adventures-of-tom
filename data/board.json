@@ -1212,8 +1212,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (6 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100555-mxvd, r-20261114-100734-1a2w, r-20261114-101501-c5no, r-20261114-101538-nre4, r-20261114-104915-g4gl, r-20261114-162358-jykk. First note: We need new frames for this art because it doesn't match the style of the game for the monster, I me",
+   "title": "Fix the report backlog (7 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100352-7v5z, r-20261114-100555-mxvd, r-20261114-100734-1a2w, r-20261114-101501-c5no, r-20261114-101538-nre4, r-20261114-104915-g4gl and 1 more. First note: For this line in particular, we need to create a special frame that can be used in both the dialog a",
    "prompt": {
     "what": "Puts the approved Report fixes pictures into the game and closes the 7 art reports.",
     "before": [
@@ -1271,6 +1271,10 @@
     {
      "d": "2026-11-19",
      "t": "The backlog now holds 6 report(s)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "The backlog now holds 7 report(s)."
     }
    ],
    "blocks": [],
@@ -1937,7 +1941,7 @@
    "title": "Look at the chapter 1 pictures in the game",
    "theme": "Areas",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen. Look at the island: the table is bare except the tart and the cake stand, and the muffin pan sits on it clear of the other pastries. After the Mudling grabs the pan the pan is gone and the table stays as it was. The Mudling now carries the painted pan, not the little heap. Then the paper muffin liners at the entrance of Grump Hollow (they are bigger now). Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one). Claude fixes them and this card comes back to you to check.",
@@ -1964,9 +1968,12 @@
     {
      "d": "2026-11-20",
      "t": "Fix fix-cutpolish4b shipped: the kitchen island is always drawn bare, the muffin pan sits clear of the pastries and vanishes at the grab with no art change, the Mudling carries the painted pan, the muffin papers are 50% larger."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked: Fix what you found on: Look at the chapter 1 pictures in the game is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "b-takes1",
@@ -5412,7 +5419,7 @@
    "id": "c-fix-cutpolish4b",
    "tag": "fix-cutpolish4b",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Areas",
    "title": "Fix what you found on: Look at the chapter 1 pictures in the game",
@@ -5461,6 +5468,10 @@
     {
      "d": "2026-11-20",
      "t": "Fixed all three of Tom's points; build fix-cutpolish4b."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as fix-cutpolish4b: kitchen island bare from the start, muffin pan clear of the pastries, painted pan in the Mudling's hands, bigger muffin papers"
     }
    ],
    "prompt": {
@@ -5473,7 +5484,8 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-cutpolish4b and t-cutpolish4b in data/board.json, history included. Your first push is the commit board: start c-fix-cutpolish4b.\n\nTom tested and found problems:\n1. Card t-cutpolish4b (Look at the chapter 1 pictures in the game, ask play). He was asked: Chapter select ) Chapter 1, jump to the theft scene in Deedee's kitchen: after the Mudling grabs the pan the three muffin plates on the island should be gone and the cake stand stay. Then the paper muffin liners in the Grump Hollow reeds, and the phone lighting up on the cab seat (press A to close). Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one). Claude fixes them and this card comes back to you to check. He wrote: the muffins appear over the other pastries on the table. we dont need art that has all the pastries on the table. muffins should just be on the empty table (fine to leave the tart to the left of the muffins). / right now after the monster takes the muffins, the muffins are still there and the art changes. the art doesnt need to change, but the muffins should be gone. / i dont see the muffin wrappers on the marsh - maybe tney are not visible enough? the mudling holding the muffins looks terrible Screenshot: board-shots/t-cutpolish4b-mwod2g2m.jpg on branch inbox (git fetch --depth=1 origin inbox, then git show origin/inbox:board-shots/t-cutpolish4b-mwod2g2m.jpg into a file in /tmp, and look at it).\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T02:29:43.804Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-cutpolish4b to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-cutpolish4b, and give the build fix-cutpolish4b a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-cutpolish4b",
-   "auto": true
+   "auto": true,
+   "done": "2026-11-19"
   },
   {
    "id": "c-skillinfo1",
@@ -5596,8 +5608,10 @@
    "url": "https://claude.ai/code/session_01RXeukGwuHP7eMa98YuUjg7",
    "title": "Fix what you found on: Look at the chapter 1 pictures in the game",
    "first": "2026-11-20T02:34:58Z",
-   "last": "2026-11-20T02:34:58Z",
-   "tags": [],
+   "last": "2026-11-20T02:38:33Z",
+   "tags": [
+    "fix-cutpolish4b"
+   ],
    "cards": [
     "c-fix-cutpolish4b"
    ]
@@ -6115,8 +6129,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "d38732d1f3332f6adf27b320ff899060140f5c94",
- "synced_at": "2026-11-20T02:38:20+00:00",
+ "synced": "c7013746b3c2cc3491470bf66a39a537e769b8d3",
+ "synced_at": "2026-11-20T02:39:09+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
