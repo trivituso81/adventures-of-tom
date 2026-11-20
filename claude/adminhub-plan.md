@@ -56,4 +56,8 @@ New `tools/admin_hub_test.py` (Playwright, 390x844 and 951x648, screenshots in t
 
 ## 8. Built
 
-(The build session writes here: what exists and what differs from this plan and why.)
+Built as adminhub1 (2026-11-20). Everything in sections 3 to 6 is built as written. Differences and details:
+- The game's ADMIN list order: ADMIN PAGE, Board, Art, Voice, Music, Script, Pose, Head Sizes, Portrait Crops, Area Builder, Welcome Layout, Battle Lab, Block Break Lab, Report tab, DEMO, BACK. The two places that return to a row by number (Area Builder's Exit, Welcome Layout's close) were updated to the new positions.
+- publish.yml and sw.js needed no change: the site bundle includes every file except art/raw and sprite-bake/src, and sw.js already sends any .html to the network.
+- admin.html does not play the admin music track (it loads no script besides its own).
+- Test: tools/admin_hub_test.py.

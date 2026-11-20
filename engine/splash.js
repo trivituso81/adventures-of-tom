@@ -40,7 +40,9 @@ function startSplash() {
   splashMark();
   splashSetMode('launch');
   // index.html?admin=1 (the Area Builder's Exit from its first screen) opens the Welcome screen on the ADMIN list with AREA BUILDER highlighted.
-  try{ if(new URLSearchParams(location.search).get('admin')) { splashSetMode('admin',4); history.replaceState(null,'',location.pathname); } }catch(e){}
+  try{ if(new URLSearchParams(location.search).get('admin')) { splashSetMode('admin',9); history.replaceState(null,'',location.pathname); } }catch(e){}
+  // index.html?go=<name> (admin.html, adminhub1) opens one admin tool straight away; an unknown name opens the ADMIN list.
+  try{ const go=new URLSearchParams(location.search).get('go'); if(go) { history.replaceState(null,'',location.pathname); splashGoTool(go); } }catch(e){}
   if(!splash.wired) {
     splash.wired=true;
     const box=el.querySelector('.sp-choices');
@@ -52,6 +54,19 @@ function startSplash() {
   requestAnimationFrame(splashFrame);
 }
 
+function splashGoTool(name) {
+  const tools={
+    'welcome-layout':()=>splashEditOpen(),
+    'battle-lab':()=>splashDifficulty(()=>{ splash.labPage=0; splashOpen('lab'); }),
+    'block-break-lab':()=>splashGo(bbLabStart)};
+  if(tools[name]) tools[name](); else splashSetMode('admin',0);
+}
+// The ADMIN page (admin.html): every admin tool as grouped buttons, with no game loaded.
+function openAdminPage() {
+  sfx.select(); splash.active=false;
+  $('splash').classList.add('out');
+  setTimeout(()=>{ location.href=new URL('admin.html',location.href).href; },250);
+}
 // Panel menus. Each choice carries its own action (act) or a locked reason (why).
 //   launch: START NEW / LOAD, plus a small ADMIN button.
 //   new:    chapters 1 to 20, BONUS (Nine Scoops), BACK, all in one list.
@@ -142,20 +157,21 @@ const SPLASH_MODES={
         act:()=>{ b7SetDiff(d.id); const go=splash.diffNext; splash.diffNext=null; if(go) go(); }})),
       {name:'BACK',sub:'',cls:'back',act:splashBack}]},
   admin:{tab:'Admin',cue:'A / Enter to pick. B / Esc to go back',choices:()=>[
-    {name:'DEMO',sub:'The original Long Island and Los Angeles.',act:openDemo},
+    {name:'ADMIN PAGE',sub:'All the admin tools on one page.',act:openAdminPage},
     {name:'BOARD',sub:'Who has the next move on every open item.',act:openBoard},
-    {name:'VOICE LIBRARY',sub:'Hear and re-record any line in the game.',act:openVoices},
-    {name:'SCRIPT EDITOR',sub:'Reword, reorder and play every scene.',act:openScript},
     {name:'ART LIBRARY',sub:'Make and approve the game\'s pictures.',act:openArt},
+    {name:'VOICE LIBRARY',sub:'Hear and re-record any line in the game.',act:openVoices},
     {name:'MUSIC LIBRARY',sub:'Hear and re-make any track in the game.',act:openMusic},
-    {name:'AREA BUILDER',sub:'See and fix where you can walk in any area.',act:openAreas},
-    {name:'PORTRAIT CROPS',sub:'Choose how each face is cropped.',act:openPortraits},
-    {name:'HEAD SIZES',sub:'Make any head bigger or smaller and see it on the body.',act:openHeads},
+    {name:'SCRIPT EDITOR',sub:'Reword, reorder and play every scene.',act:openScript},
     {name:'POSE EDITOR',sub:'Size every pose: height, head, chin.',act:openPoses},
+    {name:'HEAD SIZES',sub:'Make any head bigger or smaller and see it on the body.',act:openHeads},
+    {name:'PORTRAIT CROPS',sub:'Choose how each face is cropped.',act:openPortraits},
+    {name:'AREA BUILDER',sub:'See and fix where you can walk in any area.',act:openAreas},
     {name:'WELCOME LAYOUT',sub:'Size and place each character on this screen.',act:splashEditOpen},
-    brpAdminItem(),
-    {name:'BLOCK BREAK LAB',sub:'Old Oak Park: the coin, the cracks, the colour coming back.',act:()=>splashGo(bbLabStart)},
     {name:'BATTLE LAB',sub:'Boss fights from chapters 1 to 20.',act:()=>splashDifficulty(()=>{ splash.labPage=0; splashOpen('lab'); })},
+    {name:'BLOCK BREAK LAB',sub:'Old Oak Park: the coin, the cracks, the colour coming back.',act:()=>splashGo(bbLabStart)},
+    brpAdminItem(),
+    {name:'DEMO',sub:'The original Long Island and Los Angeles.',act:openDemo},
     {name:'BACK',sub:'',cls:'back',act:splashBack}]},
   // Boss fights, six to a page (pick a difficulty first). PREV and NEXT PAGE wrap around. engine/battle2.js b2Lab runs the fight.
   lab:{get tab(){ return splashLabTab(); },cue:'A / Enter to fight. B / Esc to go back',choices:()=>{

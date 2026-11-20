@@ -205,6 +205,7 @@ The game must be served over http. Opening `index.html` as a file will not work.
 
 | Want to change | Look in |
 |---|---|
+| The admin page (every admin tool as grouped buttons) and `index.html?go=welcome-layout\|battle-lab\|block-break-lab` | `admin.html` (https://trivituso81.github.io/adventures-of-tom/admin.html), `splashGoTool` in `engine/splash.js`, `python3 tools/admin_hub_test.py` |
 | A cutscene or story beat | `data/scenes.js` (steps documented at `SCENE_OPS` in `engine/story.js`) |
 | A map, building, room, NPC, NPC dialogue | `data/maps-le.js` (Long Island), `data/maps-la.js` (Los Angeles) |
 | A monster (stats, lines, sprite) | `data/*-monsters.js` (one file per area), numbers in `data/battle2-data.js` |

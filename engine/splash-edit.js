@@ -148,7 +148,7 @@ function splashEditClose() {
   if(splashEditDirty()) { SPLASH_ADJ=splashAdjClean(Object.assign(JSON.parse(splashEdit.saved),{t:splashEdit.t0})); }   // CANCEL: back to the last save
   splash.edit=false; splashEdit.drag=null;
   $('splash').classList.remove('editing'); splashEditBar();
-  sfx.move(); splashSetMode('admin',7);
+  sfx.move(); splashSetMode('admin',10);
 }
 function splashEditKey(code) {
   const sc=splashEditItems().sc||1,n={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[code];

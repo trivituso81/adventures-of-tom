@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#14122b">
+<meta name="apple-mobile-web-app-title" content="AoT Board">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-v10.png">
 <title>Board</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -112,7 +114,7 @@ textarea{font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px 
 </style>
 </head>
 <body>
-<header><a class="back" href="index.html" id="back">Back</a><h1>Board</h1><span class="hint" id="upd"></span><span class="hint" id="src"></span></header>
+<header><a class="back" href="index.html" id="back">Back</a><h1>Board</h1><a class="back" href="admin.html">Admin</a><span class="hint" id="upd"></span><span class="hint" id="src"></span></header>
 <main>
 <div id="tokbar" style="display:none;background:#5a1d28;border:1px solid #b4414f;border-radius:14px;padding:12px 14px;margin:0 0 10px"><b>This browser can only look.</b> Buttons here do not save until you paste your GitHub token once (the same token the Art Library uses).<div style="display:flex;gap:8px;margin-top:8px"><input type="text" id="tokin" placeholder="Paste the GitHub token" autocomplete="off"><button class="gold" type="button" id="toksave">Save</button></div></div>
 <div class="cnt" id="sum"></div>

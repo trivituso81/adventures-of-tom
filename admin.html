@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="AoT Admin">
+<meta name="theme-color" content="#14122b">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-v10.png">
+<link rel="icon" type="image/png" href="icon-v10.png">
+<title>Admin: The Adventures of Tom</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:#14122b;color:#f4f1ff;font:16px/1.4 -apple-system,system-ui,"Segoe UI",sans-serif}
+body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+header{display:flex;align-items:center;gap:12px;padding:10px 16px;position:sticky;top:0;background:#14122b;border-bottom:1px solid #2c2852;z-index:5}
+header h1{font-size:20px;margin:0;flex:1}
+a.back{color:#ffd34d;text-decoration:none;font-weight:600;padding:10px 4px}
+main{max-width:900px;margin:0 auto;padding:12px 16px 80px}
+h2{font-size:13px;color:#b9b3e6;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin:18px 4px 8px}
+.grid{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:700px){.grid{grid-template-columns:1fr 1fr}}
+.btn{display:block;width:100%;text-align:left;text-decoration:none;color:#fff;font:inherit;border:1px solid #3a3566;border-radius:14px;padding:12px 14px;min-height:56px;background:#242050;cursor:pointer}
+.btn b{display:block;font-size:17px}
+.btn span{display:block;color:#b9b3e6;font-size:13px;font-weight:400}
+.btn .live{color:#ffd34d;font-weight:600}
+.btn.gold{background:#ffd34d;color:#241b00;border-color:#ffd34d}.btn.gold span{color:#4a3a00}
+</style>
+</head>
+<body>
+<header><a class="back" href="index.html">Back to the game</a><h1>Admin</h1></header>
+<main id="main"></main>
+<script>
+// admin.html (adminhub1): every admin tool except the demo, grouped by what it does. Loads no game code.
+var GROUPS=[
+ ['What is next',[['Board','Who has the next move on every open item.','board.html','board']]],
+ ['Libraries',[['Art Library','Make and approve the game\'s pictures.','art.html'],['Voice Library','Hear and re-record any line in the game.','voices.html'],['Music Library','Hear and re-make any track in the game.','music.html']]],
+ ['Story',[['Script Editor','Reword, reorder and play every scene.','script.html']]],
+ ['Characters',[['Pose Editor','Size every pose: height, head, chin.','poses.html'],['Head Sizes','Make any head bigger or smaller and see it on the body.','heads.html'],['Portrait Crops','Choose how each face is cropped.','portraits.html']]],
+ ['World and screens',[['Area Builder','See and fix where you can walk in any area.','areas.html'],['Welcome Layout','Size and place each character on the welcome screen. Opens in the game.','index.html?go=welcome-layout']]],
+ ['Labs',[['Battle Lab','Boss fights from chapters 1 to 20. Opens in the game.','index.html?go=battle-lab'],['Block Break Lab','Old Oak Park: the coin, the cracks, the colour coming back. Opens in the game.','index.html?go=block-break-lab']]],
+ ['Reporting',[['Report tab','The pencil tab that sends Claude a note.',null,'report']]]
+];
+var BRP_ON='aot-report',BRP_TOKEN='aot-gh-token';
+function ls(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function reportOn(){var v=ls(BRP_ON);return v==='1'||(v!=='0'&&!!ls(BRP_TOKEN));}
+function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;}
+function render(){
+ var m=document.getElementById('main');m.innerHTML='';
+ GROUPS.forEach(function(g){
+  m.appendChild(el('h2',null,g[0]));var grid=el('div','grid');
+  g[1].forEach(function(b){
+   var a;
+   if(b[3]==='report'){
+    a=el('button','btn','<b>Report tab: <span id="rep" style="display:inline;color:#ffd34d">'+(reportOn()?'On':'Off')+'</span></b><span>'+b[1]+' Tap to switch.</span>');
+    a.id='b-report';a.type='button';
+    a.onclick=function(){try{localStorage.setItem(BRP_ON,reportOn()?'0':'1');}catch(e){}render();};
+   } else {
+    a=el('a','btn','<b>'+b[0]+'</b><span>'+b[1]+'</span>'+(b[3]==='board'?'<span class="live" id="wait">Counting what waits on you...</span>':''));
+    a.href=b[2];a.id='b-'+b[0].toLowerCase().replace(/ /g,'-');
+   }
+   grid.appendChild(a);
+  });
+  m.appendChild(grid);
+ });
+ waiting();
+}
+function waiting(){
+ fetch('data/board.json?t='+Date.now()).then(function(r){return r.json();}).then(function(d){
+  var n=d.cards.filter(function(c){return c.lane==='tom'&&c.col!=='wait'&&c.col!=='done';}).length;
+  var e=document.getElementById('wait');if(e)e.textContent=n===0?'Nothing waits on you.':n+(n===1?' card waits':' cards wait')+' on you.';
+ }).catch(function(){var e=document.getElementById('wait');if(e)e.textContent='';});
+}
+render();
+</script>
+</body>
+</html>

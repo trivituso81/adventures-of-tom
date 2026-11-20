@@ -1,3 +1,10 @@
+## adminhub1 (2026-11-20): one admin page with its own address, `?go=` links into the game, a home screen icon for the board
+
+- Tom (11-19 22:39): one unique address for all admin tools except the demo, grouped by what they do, plus direct links to the labs. Plan: `claude/adminhub-plan.md` (Built section).
+- `admin.html`: Board (with a live count of cards waiting on you), Libraries, Story, Characters, World and screens, Labs, Reporting (report tab On or Off). Loads no game code.
+- `index.html?go=welcome-layout`, `?go=battle-lab` (difficulty first), `?go=block-break-lab`; an unknown name opens the ADMIN list (`splashGoTool`, engine/splash.js). The game's ADMIN list is reordered to the same groups and starts with ADMIN PAGE; DEMO stays at the end.
+- `board.html`: home screen name "AoT Board", icon, and an Admin link in its header. Test: `python3 tools/admin_hub_test.py`.
+
 ## board-adminhub (2026-11-19): board only: the plan for one admin page with its own address
 
 - Tom (11-19 22:39): "creating unique URLs for the following: a landing page for the kanban board; a landing page for admin with only: voice library script editor, art library, music library, area builder, portrait crops head sizes pose editor welcome layout report tab on; labs: battle lab, block break lab. For the admin page, group and reorganize the links based on functionality ... a unique url containing link/buttons for all admin functionality except the demo".
