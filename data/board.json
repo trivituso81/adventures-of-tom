@@ -2080,14 +2080,14 @@
    "title": "Reset the chapter 1 clip approach: reflection, one plan, one-clip proof (clipreset)",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "clipreset",
    "next": "Done, $0 spent. Finding: every chapter 1 fighter already has a painted battle pose for guard, hit, KO, victory, run and idle, and you approved 5 of 46 family videos against 18 of 21 monster videos. Plan: the family's generic states become painted poses moved by the game; videos stay for monsters and the clips you approved. Proof: Grace's guard is built that way and is in the Battle Lab. Your card: Decide on the clip reset (t-clipreset). Reflection and plan: claude/clip-reset-plan.md.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukChRXtkUV9DEJE7zVZ",
     "opening": "\"Read the history of board card c-clipreset, then do the clip reset.\""
    },
    "history": [
@@ -2118,6 +2118,14 @@
     {
      "d": "2026-11-19",
      "t": "Proof shipped as clipreset: Grace's guard is her painted guard pose (crossed forearms), moved by the game. Measured in the real game: no clip loaded, feet on the same ground line, pose size as set, braced hit pushes her back 8 pixels and returns her. Nothing generated."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clipreset: Clip reset proof: Grace's guard is her painted guard pose moved by the game, not a video; one decide card for Tom"
     }
    ],
    "prompt": {
@@ -2129,7 +2137,8 @@
     "effort": "high (a process has to be redesigned with nothing written to follow)",
     "text": "Read the history of board card c-clipreset, then do the clip reset. Spend nothing except the one proof clip (at most $0.30). Tom's verdict on the chapter 1 battle clips (11-19 18:10): \"i just looked at Grace's guard animation and i am done. its awful. she puts her hands into a praying motion. how did this pass your test? this process is painfully slow. we need a massive reflection - we have wasted half a day and my money on an approach that is not working\". 1) Write a short reflection table: what was tried, what it cost in dollars and in Tom's time, what went wrong, which of Claude's own steps were mistakes. 2) Check in the repo whether guard, hit, dodge, KO, victory, run and idle can come from the painted battle sheets and the engine instead of a new video each, and which clips truly need video. 3) Make the call: one plan with the method, dollar cost, Tom's minutes, and what a measured check verifies versus what Tom verifies. 4) Prove it on Grace's guard only and show Tom before anything else is made. 5) Put one decide card on the board, \"Go with this plan (Recommended)\" or \"Stop making battle clips for chapter 1 and keep the old ones\", blocking a Claude card that holds the full build prompt. Build tag clipreset."
    },
-   "after": "t-clipreset"
+   "after": "t-clipreset",
+   "done": "2026-11-19"
   },
   {
    "id": "t-clipreset",
@@ -5925,6 +5934,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukChRXtkUV9DEJE7zVZ",
+   "title": "Reset the chapter 1 clip approach: reflection, one plan, one-clip proof (clipreset)",
+   "first": "2026-11-19T18:51:03-08:00",
+   "last": "2026-11-19T18:51:30-08:00",
+   "tags": [
+    "clipreset"
+   ],
+   "cards": [
+    "c-clipreset"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukDvEEkuXJtFLApvat9",
    "title": "Fix party followers lagging behind Tom in free walking (follow1)",
    "first": "2026-11-19T17:23:21-08:00",
@@ -6359,8 +6380,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "dbd5f02cefa00b1b4814a07a801cbdba2debedff",
- "synced_at": "2026-11-20T02:48:34+00:00",
+ "synced": "93e8fc5e0071c8dd05cf1014d3efc37771795382",
+ "synced_at": "2026-11-20T02:51:35+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
