@@ -9927,6 +9927,19 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukCrBsMaC1DBnh8HB8R",
+   "title": "Rebuild the muffin theft scene in Deedee's kitchen",
+   "first": "2026-11-20T01:17:42-08:00",
+   "last": "2026-11-20T07:00:15-08:00",
+   "tags": [
+    "heist1"
+   ],
+   "cards": [
+    "c-heist1",
+    "c-b3s10"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukH73wsvXxaCC7pr8XL",
    "title": "Generate all of a card's pictures with one approval on the board (artgen1)",
    "first": "2026-11-20T06:41:54Z",
@@ -10079,18 +10092,6 @@
    "tags": [],
    "cards": [
     "c-nextclean"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCrBsMaC1DBnh8HB8R",
-   "title": "Rebuild the muffin theft scene in Deedee's kitchen",
-   "first": "2026-11-20T01:17:42-08:00",
-   "last": "2026-11-20T02:01:46-08:00",
-   "tags": [
-    "heist1"
-   ],
-   "cards": [
-    "c-heist1"
    ]
   },
   {
@@ -10891,8 +10892,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "6126d72826778b2cee2d89300437dfd8a457229d",
- "synced_at": "2026-11-20T14:51:43+00:00",
+ "synced": "905bc37ee01dc9855e9944bb5964657bf92119f8",
+ "synced_at": "2026-11-20T15:01:00+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
