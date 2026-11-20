@@ -9431,7 +9431,7 @@
   {
    "id": "t-itembannerplay",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Game Shell",
    "ask": "play",
    "fyi": true,
@@ -9453,8 +9453,13 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: nothing was left for it to wait on."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "c-amber14",
