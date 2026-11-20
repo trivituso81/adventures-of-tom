@@ -14915,7 +14915,7 @@
    "id": "c-builds1",
    "tag": "builds1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "title": "Build history redesign 1: readable rows by day",
    "next": "Built and pushed as builds1. Redesign 2 (c-builds2) starts next, by itself. You test once, after redesign 3.",
@@ -14944,6 +14944,10 @@
     {
      "d": "2026-11-20",
      "t": "Built as builds1: the build list reads by day (sentence first, THIS PHONE IS HERE marker, retries folded into one row, housekeeping hidden, details sheet on a tap, search over the loaded builds), with the card, theme and kind fields written and backfilled for all 487 builds. Checks B1 to B7 and B14 pass in portrait and landscape (tools/buildlog_test.py). Differences from the plan are in claude/builds-plan.md section 8 (no view buttons yet, a Housekeeping toggle until Filters, board.html?card= not read yet). Not tried on a phone: Tom tests once, after redesign 3."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as builds1: the build history reads by day: sentence first, a marker for this phone, retries folded into one row, a details sheet on a tap"
     }
    ],
    "prompt": {
@@ -14955,14 +14959,14 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/builds-plan.md (all of it, with its Built section, and look at claude/builds-mock.png), then card c-builds1 in data/board.json with its history. Your first push is the commit board: start c-builds1. Build phase 1 (builds1) as the plan's section 6 row says: the data fields and backfill of section 4, sections 3.1, 3.2, 3.4 and 3.6, with checks B1 to B7 and B14. Push it as builds1. Fetch and rebase before every push. Keep everything the screen does today (check B14). Run python3 tools/buildlog_test.py and look at every picture in portrait and landscape before pushing. Write what you built, and anything that differs from the plan, into the plan's section 8. In your last push set start: true on card c-builds2 so it starts by itself. Do not build phase 2 yourself. You have my full permission to access the repo."
    },
-   "after": "nothing for Tom: c-builds2"
+   "after": "nothing for Tom: c-builds2",
+   "done": "2026-11-20"
   },
   {
    "id": "c-builds2",
    "tag": "builds2",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "auto": true,
    "theme": "Tools",
    "title": "Build history redesign 2: statuses and what is pending",
@@ -14980,6 +14984,10 @@
     {
      "d": "2026-11-20",
      "t": "Added from the build history UX audit (planning chat https://claude.ai/code/session_01RXeukFBZzto9KQ2tyVKzmS). Plan: claude/builds-plan.md."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Build history redesign 1: readable rows by day is done."
     }
    ],
    "prompt": {
@@ -15598,6 +15606,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEtzMhZSD8kTMStGnn",
+   "title": "Build history redesign 1: readable rows by day",
+   "first": "2026-11-20T10:39:46-08:00",
+   "last": "2026-11-20T10:55:59-08:00",
+   "tags": [
+    "builds1"
+   ],
+   "cards": [
+    "c-builds1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFovXouovpUQ7r3YLo",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
    "first": "2026-11-20T10:02:24-08:00",
@@ -15607,16 +15627,6 @@
    ],
    "cards": [
     "c-fix-heist1play-5"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEtzMhZSD8kTMStGnn",
-   "title": "Build history redesign 1: readable rows by day",
-   "first": "2026-11-20T10:39:46-08:00",
-   "last": "2026-11-20T10:39:46-08:00",
-   "tags": [],
-   "cards": [
-    "c-builds1"
    ]
   },
   {
@@ -17095,8 +17105,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "ccecdf554e52b3c79df741f68b9fccfbba7708f6",
- "synced_at": "2026-11-20T18:54:04+00:00",
+ "synced": "cb970fbb4e7daa6c41261c11ee3cea499a36e6d9",
+ "synced_at": "2026-11-20T18:56:43+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
