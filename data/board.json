@@ -10716,7 +10716,7 @@
    "id": "c-fix-heist1voice",
    "tag": "fix-heist1voice",
    "lane": "claude",
-   "col": "prog",
+   "col": "up",
    "fix": true,
    "theme": "Voice Clips",
    "title": "Fix: Make takes for the 2 new lines of the muffin theft",
@@ -10760,6 +10760,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Opus 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Sent to backlog from the Needs attention sweep, per Tom: \"I don't need to see this card until the muffin theft is actually good\". Its START session never checked in."
     }
    ],
    "prompt": {
@@ -10773,7 +10777,11 @@
    },
    "after": "t-heist1voice",
    "started_at": "2026-11-20T18:00:30+00:00",
-   "quiet": true
+   "quiet": false,
+   "backlog": {
+    "at": "2026-11-20",
+    "from": "prog"
+   }
   },
   {
    "id": "c-idea-removeall",
