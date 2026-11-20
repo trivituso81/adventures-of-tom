@@ -15904,6 +15904,10 @@
     {
      "d": "2026-11-20",
      "t": "Part shipped as wanproofb: Part 2 of the Grace guard video proof: her large left-facing start picture, made on fal and checked. 15 cents spent"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as wanproof: the Wan 3.0 guard video passed every check in plan 4.4 on the first try; Lab row PROOF: GRACE'S GUARD (VIDEO), wanproof_test portrait and landscape FAILS: []. Spent $0.65 of $2.00 on fal, nothing on xAI. Next: Tom watches it (t-wanproof-watch), then c-wanidle."
     }
    ],
    "prompt": {
@@ -15916,7 +15920,7 @@
     "effort": "high (a new generator Action and a new clip playback are built in one session with no code to follow)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md, then card c-wanproof in data/board.json with its history and the note on card t-wanproof-setup. Your first push is the commit board: start c-wanproof. Build the proof exactly as section 4 of the plan says: the wan-gen Action with its stand-in test and one dry run first, then the start picture and its checks, then the guard video with the prompt in 4.3 word for word, the checks in 4.4 before Tom sees anything, the bake, the playback, the Lab row PROOF: GRACE'S GUARD (VIDEO), and the game checks in portrait and landscape. Spend at most $2.00 on fal and nothing on xAI. A check that fails gets one retry with one change; a second miss the same way is the stop-loss: tell Tom in plain words and hand him no clip. Do not make any other clip and do not remove any painted state. Build tag wanproof. End with a Tom card (ask animations) for the Lab row. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "nothing for Tom: c-wanproof"
+   "after": "t-wanproof-watch"
   },
   {
    "id": "c-permwording1",
@@ -16583,6 +16587,63 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-skippingscene in data/board.json, history included. Your first push is the commit board: start c-idea-skippingscene.\n\nTom made this card himself with New card on the board. His words: \"when skipping a scene, any interstitials that are not item retrieval or party members joining/leaving (eg displaying grace's list in scene 1) should be skipped as well\"\n\nThe board sized this from his words alone: Claude Haiku 5.5 (row A: a question, nothing changes), effort low (a lookup). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nThis is a question. Answer it in the chat in a few plain sentences, change nothing in the game, write the answer as a history line on this card and move it to Done. Push only the board change. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "done": "2026-11-20"
+  },
+  {
+   "id": "t-wanproof-watch",
+   "title": "Watch Grace's guard video once (1 minute)",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "animations",
+   "next": "Open ADMIN > BATTLE LAB > NEW BATTLE and tap PROOF: GRACE'S GUARD (VIDEO). Grace stands alone against one Mudling. Three times she raises her guard (forearms crossed in front of her face), takes a hit that nudges her back, and lowers it again; then the list comes back (about 30 seconds). Her standing picture is the video's first picture, so nothing switches. Then tap All good, or Something is wrong and say what you saw. All good unblocks the card Grace's idle, hit and one own move as Wan videos.",
+   "blocks": [
+    "c-wanidle"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
+    "opening": "\"Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by wanproof. One Wan 3.0 guard video (50 cents) and its start picture (15 cents) passed every check in claude/video-battle-plan.md 4.4 before you see it. The painted guard still shows in every other fight until the purge."
+    }
+   ]
+  },
+  {
+   "id": "c-wanidle",
+   "title": "Grace's idle, hit and one own move as Wan videos",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "tag": "wanidle",
+   "next": "Waits on your verdict on the guard proof (card Watch Grace's guard video once). Then it makes three more Wan 3.0 videos of Grace from the same start picture (idle with breathing, hit, one own move with a held prop), checks each against the list before you see it, and shows them in the proof row. About $1.50.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by wanproof: claude/video-battle-plan.md section 5 step 1. Nothing in section 5 is approved until the guard proof is All good."
+    }
+   ],
+   "prompt": {
+    "what": "Makes Grace's idle (with the breathing in it), hit and one own move with a held prop as Wan 3.0 videos through the wan-gen Action, checks each before you see it, and plays them in the Lab proof row. About $1.50 on fal.",
+    "before": [
+     "Watch the guard proof (card Watch Grace's guard video once) and tap All good.",
+     "Open a NEW conversation in the Little Elsewhere Project, choose Claude Opus 5.5 and set effort to medium, then paste the prompt."
+    ],
+    "model": "Claude Opus 5.5 (row D: video prompts you judge by taste, and a miss costs generation money)",
+    "effort": "medium (the Action, the bake, the guard playback and the checks exist; three new MOTION parts and the idle and hit playback follow them)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md (section 4.7 Built and section 5), then card c-wanidle in data/board.json with its history and the answer on card t-wanproof-watch. Your first push is the commit board: start c-wanidle. Make Grace's idle with breathing, hit and one own move with a held prop as Wan 3.0 videos with the wan-gen Action, from art/clips/start/grace-hero.png, each prompt BOOP_APPROVED with only the MOTION part changed (the guard prompt in tools/art-library/prompts/wan-grace-guard-v1.txt is the model). Run each through the checks in section 4.4 before Tom sees anything; a miss gets one retry with one change, a second miss the same way is the stop-loss. Spend at most $3.00 on fal and nothing on xAI. Bake them, play them in the Lab row PROOF: GRACE'S GUARD (VIDEO) only, test portrait and landscape (tools/wanproof_test.py extended), and do not remove any painted state yet. Build tag wanidle. End with a Tom card (ask animations). Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [

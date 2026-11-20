@@ -76,6 +76,29 @@ function b3LabPaintedStates(opt) {
     },s.sec*1000); };
   setTimeout(go,150);
 }
+// PROOF: GRACE'S GUARD (VIDEO) (wanproof, claude/video-battle-plan.md 4.5): Grace alone against one Mudling. Her guard is the Wan video
+// grace_guard (kind guard, engine/b3-clips.js b3cGuardFrame) and, in this row only, her standing picture is that video's first picture,
+// so the eye never sees a switch between two drawings. The rise plays once, the held guard loops, a braced hit nudges her back, the
+// lowering plays once. Three rounds, then the list comes back. Nobody takes a turn; only this one clip is loaded for her.
+const B3_PROOF={rounds:3,stand:1.6,hold:3.2,hit:.4,after:1.4,down:2.2};
+function b3LabGuardProof(opt) {   // opt.manual: set the fight up and play nothing (tools/wanproof_test.py drives it)
+  b3LabGo(0,{party:['grace'],formation:null,foes:[{id:'mudling',row:'front'}],seed:7,onEnd:()=>{ B3C.over=null; B3C.gs={}; b3LabBack(); }});
+  const F=B3.F,t0=performance.now(),P=B3P,speed0=B7.speed; B7.speed=1;
+  B3C.over={F,map:{grace:{guard:'grace_guard'}}}; B3C.gs={}; b3cWant('grace_guard',60000);
+  const alive=()=>B3.active&&B3.F===F,U=()=>F.party.find(u=>u.id==='grace'),word=x=>b3Word('GRACE: '+x,'#fff1cb');
+  const guard=on=>{ const u=U(); if(!u) return; if(on&&!u.st.guard_stance) b3AddStatus(F,u,'guard_stance',{n:3}); else if(!on&&u.st.guard_stance) b3EndStatus(F,u,'guard_stance'); b3ViewSync(); b3Render(); };
+  const K=B3_PROOF,steps=[{fn:()=>{ guard(false); word('STANDING'); },sec:K.stand}];
+  for(let r=0;r<K.rounds;r++) steps.push({fn:()=>{ word('GUARD'); guard(true); },sec:K.hold},
+    {fn:()=>{ word('BRACED HIT'); P.body[U().key]={kind:'hit',guard:true,t0:P.t,dur:K.hit}; },sec:K.after},
+    {fn:()=>{ word('GUARD DOWN'); guard(false); },sec:K.down});
+  if(opt&&opt.manual) { B7.speed=speed0; return; }
+  let i=0;
+  const go=()=>{ if(!alive()) { B7.speed=speed0; return; }
+    if(battle.state!=='command'||performance.now()-t0<2200||!bclipReady('grace_guard')) { setTimeout(go,150); return; }
+    if(i>=steps.length) { B7.speed=speed0; b3Exit(); return; }
+    const s=steps[i++]; s.fn(); setTimeout(go,s.sec*1000); };
+  setTimeout(go,150);
+}
 // Back on the NEW BATTLE list after a fight (win, lose or EXIT).
 function b3LabBack() {
   const el=$('splash'); if(!el) return;
@@ -88,7 +111,8 @@ SPLASH_MODES.lab3={tab:'Battle Lab: new battle',cue:'A / Enter to fight. B / Esc
   choices:()=>{ const r=b3LabRank();
     return [...B3_LAB.map((L,i)=>({name:L.name,sub:L.sub,cast:L.party,act:()=>b3LabGo(i)})),
       {name:'PAINTED STATES: CHAPTER 1',sub:'The family against one Mudling. Each fighter in turn shows idle, guard, braced hit, hit, dodge, knocked out and get up, victory and a run. After each one it waits: watch again, add a note, then APPROVE or REJECT. Your answers go to Claude.',cast:['tom','grace','rose','deedee'],act:()=>b3LabPaintedStates()},
+      {name:"PROOF: GRACE'S GUARD (VIDEO)",sub:'Grace against one Mudling. Her guard is a video made by Wan 3.0: watch it go up, take a hit and come down, three times (about 30 seconds). Then the list comes back.',cast:['grace'],act:()=>b3LabGuardProof()},
       {name:'VIBES AND RANKS',sub:'Main and Pocket Vibe, Quirks and rows for these fights. '+(r?'Every Vibe is Rank '+r+'.':'The Vibes are at different Ranks.'),cls:'nav',vibes:true,act:()=>b3vOpen('lab')},
       {name:'BACK',sub:'',cls:'back',act:splashBack}]; }};
 SPLASH_PARENT.lab3='lab';
-window.addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{B3,B3P,B3_LAB,b3Start,b3Lab,b3LabGo,b3LabPaintedStates,b3End,b3Dir,b3A,b3Back,b3Pick,b3Commit,b3Auto,b3OpenInfo}); });
+window.addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{B3,B3P,B3_LAB,b3Start,b3Lab,b3LabGo,b3LabPaintedStates,b3LabGuardProof,b3End,b3Dir,b3A,b3Back,b3Pick,b3Commit,b3Auto,b3OpenInfo}); });

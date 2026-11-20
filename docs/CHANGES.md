@@ -1,3 +1,16 @@
+## wanproof (2026-11-20): Grace's guard is now a real video (Wan 3.0, made through fal.ai), shown in Battle Lab > NEW BATTLE > PROOF: GRACE'S GUARD (VIDEO). 65 cents spent
+
+Card c-wanproof, plan `claude/video-battle-plan.md` section 4 (Built notes in 4.7). Tom (11-20 12:11): "I was happy with the earlier WAN video clips (made through Sorceress); the problem is painted still poses."
+
+- The video: run 44817158346 of the wan-gen Action, Wan 3.0 image to video, 720p upright, 5 seconds, seed 81, the start picture `art/clips/start/grace-hero.png` as first and last frame, the prompt of plan 4.3 word for word (`tools/art-library/prompts/wan-grace-guard-v1.txt`). 50 cents; ledger on branch `wangen` $0.65 of the $2.00 cap. Nothing spent on xAI.
+- Checks of plan 4.4 before Tom sees anything, all passed on the first video: a guard (forearms crossed in an X in front of her lower face, fists closed, knees bent, not praying hands); the same girl (colours within 3 of 255 of the start picture); standing height first and last 1,035 px, feet on row 1,153 to 1,154 in all 150 pictures; flat background, clean cutout, never touches an edge; last picture against first 1.03 of 255.
+- Bake: `tools/clip-bake/bake_clip.py` gets kind `guard` (`--rise-end`, `--lower-start`). 49 pictures (video pictures 22 to 118, every 2nd), 3.27 s, hold from picture 50, lowering from 90: `data/clips/grace-guard.js`, `art/clips/grace-guard.webp`, source `art/raw/clips/clip-grace-guard-v1.mp4`.
+- Playback (`engine/b3-clips.js`): `b3cGuardFrame` plays the rise once, loops the held guard forward and back, takes a braced hit (the engine's nudge), plays the lowering once, then holds the video's first picture. Only in a fight that carries its own clip table (`B3C.over`); there the painted guard, the painted fidget and the code breath step aside (`b3PaintState`).
+- The Lab row PROOF: GRACE'S GUARD (VIDEO) (`b3LabGuardProof`, `engine/b3-lab.js`): Grace alone against one Mudling, STANDING, then GUARD, BRACED HIT, GUARD DOWN three times (about 30 seconds), then the list comes back. It loads this one clip for her.
+- Tests: new `tools/wanproof_test.py` (portrait and landscape; standing 126.5 battle px against her painted 126.5, feet within 1 px everywhere, no jump over 2 px at the rise or the end of the lowering) FAILS: []. `b3_test.py s8`, `paint_state_test.py` (its list check now allows this one PROOF row), `clip_test.py`, `clip_kinds_test.py`, smoke: pass.
+- Not done, on purpose: no other clip made, no painted state removed (`B3_BODY_PAINT` and `B3_BODY_CLIPS` unchanged, every other fight still shows the painted guard), no real fight changed, no idle video yet.
+- Board: Tom card t-wanproof-watch (ask animations) blocks the new Claude card c-wanidle (Grace's idle, hit and one own move as Wan videos).
+
 ## gem-pillar-rhubarb (2026-11-20): Rhubarb Crisp is gone from the whole game; Deedee's dish is apple muffins
 
 Card c-gem-pillar-rhubarb. Tom chose "Cut Rhubarb Crisp from the whole story (muffins instead)" on t-rhubarb-scope (Gemini chapter 1 report: Inspect on Mudling, Log Lump and The Big One listed Rhubarb Crisp).
