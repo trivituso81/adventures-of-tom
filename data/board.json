@@ -376,6 +376,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom sent this to the backlog."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom added this back to Claude's to-do."
     }
    ],
    "prompt": {
@@ -387,11 +391,7 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/story-next.md and continue with the chapter 2 build. I have played chapter 1. You have my full permission to access the repo."
    },
-   "tag": "ch2build",
-   "backlog": {
-    "at": "2026-11-20",
-    "from": "up"
-   }
+   "tag": "ch2build"
   },
   {
    "id": "c-b3s8",
