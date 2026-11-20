@@ -5900,7 +5900,7 @@
    "title": "Look at the SKILLS list text and icons on your phone",
    "theme": "Battle System",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "next": "After the publish of build fix-skilllist1look: RELOAD on the title, ADMIN > BATTLE LAB > NEW BATTLE, start any fight, open SKILLS. Rows should now be thin, with small names and small pictures, in portrait and landscape. Report with the REPORT tab if anything still looks too big (fix-skilllist1look is the build to name).",
@@ -5919,9 +5919,12 @@
     {
      "d": "2026-11-19",
      "t": "Tom: something is wrong: still looks way too big, all the fonts and icons. kind of needs a redesign Sent to Claude as card c-fix-skilllist1look; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked: Fix what you found on: Look at the SKILLS list text and icons on your phone is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-fix-cutpolish4b-2",
@@ -5995,7 +5998,7 @@
    "id": "c-fix-skilllist1look",
    "tag": "fix-skilllist1look",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Battle System",
    "title": "Fix what you found on: Look at the SKILLS list text and icons on your phone",
@@ -6044,6 +6047,10 @@
     {
      "d": "2026-11-20",
      "t": "Built fix-skilllist1look: SKILLS rows redesigned with fixed small sizes (name 12px, pictures 13px, Pep 13px); the phone-landscape 21px text rule no longer sets them. b3_test s9ui passes."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as fix-skilllist1look: SKILLS list redesigned as thin rows with small fixed text and pictures"
     }
    ],
    "prompt": {
@@ -6056,10 +6063,23 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-skilllist1look and t-skilllist1look in data/board.json, history included. Your first push is the commit board: start c-fix-skilllist1look.\n\nTom tested and found problems:\n1. Card t-skilllist1look (Look at the SKILLS list text and icons on your phone, ask play). He was asked: After the publish of build skilllist1: RELOAD on the title, ADMIN ) BATTLE LAB ) NEW BATTLE, start any fight, open SKILLS. The skill names and the pictures should be a little smaller and a long name like Kingdom of Ten-Thousand Blankets should fit in two lines. Report with the REPORT tab if anything still looks too big (skilllist1 is the build to name). He wrote: still looks way too big, all the fonts and icons. kind of needs a redesign\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T03:00:48.054Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-skilllist1look to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-skilllist1look, and give the build fix-skilllist1look a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-skilllist1look",
-   "auto": true
+   "auto": true,
+   "done": "2026-11-19"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukEpZhMxX5JzsA9YpoM",
+   "title": "Fix what you found on: Look at the SKILLS list text and icons on your phone",
+   "first": "2026-11-20T03:02:25Z",
+   "last": "2026-11-20T03:06:59Z",
+   "tags": [
+    "fix-skilllist1look"
+   ],
+   "cards": [
+    "c-fix-skilllist1look"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGN82mV68qXVnCgA97",
    "title": "Fix what you found on: Look at the chapter 1 pictures in the game",
@@ -6070,16 +6090,6 @@
    ],
    "cards": [
     "c-fix-cutpolish4b-2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEpZhMxX5JzsA9YpoM",
-   "title": "Fix what you found on: Look at the SKILLS list text and icons on your phone",
-   "first": "2026-11-20T03:02:25Z",
-   "last": "2026-11-20T03:02:25Z",
-   "tags": [],
-   "cards": [
-    "c-fix-skilllist1look"
    ]
   },
   {
@@ -6667,8 +6677,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "617c54514b1f8b328f662f8d22c843d2877341c6",
- "synced_at": "2026-11-20T03:06:22+00:00",
+ "synced": "b8247a68417eee2a1afe42c5c4d71de7e58a06e7",
+ "synced_at": "2026-11-20T03:07:48+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
