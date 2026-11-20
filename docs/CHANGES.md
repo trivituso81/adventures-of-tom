@@ -1,3 +1,7 @@
+## nextclean (2026-11-20): the board is now the only list of open work; claude/next.md holds rules, tests and push steps only
+
+Moved every open item of claude/next.md onto the board: new cards c-ch6left, c-stagefollow, c-alvarez, c-knownwrong, c-gatezero, t-gatezeroart and t-oldchecks; the rest were already cards or finished (clip reset, cutscene polish, battle stage 9c, chapter 2, voice, publishing). next.md went from 74,730 to about 43,000 bytes. The Project copy of next.md is not changed (no Project access in a START run): replace it with claude/next.md from the repo.
+
 ## syncfix1 (2026-11-19): The board-sync job no longer stops on a duplicate report card
 - Cause: when the report backlog card (c-reports) closed in the same run that still found an open report in the inbox, `r7_inbox` in tools/board_sync.py looked only for an open card named c-reports, found none and added a second one with the same id. board_check refused it (duplicate card id c-reports), so every run since 19:45 PT failed and no card moved.
 - Fix: `r7_inbox` now also finds an open `c-reports-N` card and gives a new backlog card the first free id (c-reports, c-reports-2, c-reports-3, ...). Test added in tools/board_sync_test.py (a Done c-reports plus one open report gives unique ids, a later run updates the same card, an empty inbox closes it); it fails without the fix.
