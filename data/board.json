@@ -15889,7 +15889,7 @@
    "id": "c-reporttype1",
    "tag": "reporttype1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Fix typing in the REPORT box (keys act like game hotkeys)",
    "next": "Built as reporttype1: typing in the REPORT box no longer reaches the game. Tom checks it on card t-reporttype1play.",
@@ -15917,9 +15917,14 @@
     {
      "d": "2026-11-20",
      "t": "Built: the REPORT key guard is added when engine/report.js loads (first script), so the welcome screen, Vibes, close-up and banner key handlers no longer see keys typed in the note. tools/report_test.py types real keys on the welcome screen and the map: all pass. Hands to Tom: t-reporttype1play."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as reporttype1: Typing in the REPORT box no longer acts like game hotkeys"
     }
    ],
-   "after": "t-reporttype1play"
+   "after": "t-reporttype1play",
+   "done": "2026-11-20"
   },
   {
    "id": "c-keysecrets1",
@@ -16518,6 +16523,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDPY2qNnB59RAn67mF",
+   "title": "Fix typing in the REPORT box (keys act like game hotkeys)",
+   "first": "2026-11-20T12:54:42-08:00",
+   "last": "2026-11-20T13:05:05-08:00",
+   "tags": [
+    "reporttype1"
+   ],
+   "cards": [
+    "c-reporttype1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
    "title": "Build the Grace guard video proof",
    "first": "2026-11-20T12:41:05-08:00",
@@ -16550,16 +16567,6 @@
    ],
    "cards": [
     "c-projclean"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDPY2qNnB59RAn67mF",
-   "title": "Fix typing in the REPORT box (keys act like game hotkeys)",
-   "first": "2026-11-20T12:54:42-08:00",
-   "last": "2026-11-20T12:54:42-08:00",
-   "tags": [],
-   "cards": [
-    "c-reporttype1"
    ]
   },
   {
@@ -18091,8 +18098,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "311372eb7c25e1387f8fe1a69196a62aeab4895f",
- "synced_at": "2026-11-20T21:04:00+00:00",
+ "synced": "730556479f98a11bb04609ffa15a2ff0bf6cf0cd",
+ "synced_at": "2026-11-20T21:05:45+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
