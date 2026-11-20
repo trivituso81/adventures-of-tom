@@ -13272,8 +13272,8 @@
    "lane": "claude",
    "col": "done",
    "theme": "Tools",
-   "title": "Listening and thinking poses for chapter 1 conversations",
-   "next": "Opus 5.5, high. Designs how a person who is not speaking shows a listening or thinking pose in chapter 1 talking scenes and cut scenes, adds the pictures to the Art Library for your Generate and Approve, and wires the approved ones in.",
+   "title": "Listening and thinking poses for chapter 1 listeners",
+   "next": "Shipped in build idea-implementlisteni. In chapter 1 everyone near the speaker who is not talking now takes the thinking pose on the 11 clue lines (live now) or the listening pose on the rest (shows once the 7 listening pictures are approved and installed). Next: card Generate and approve the 7 listening poses.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -13325,6 +13325,11 @@
     },
     {
      "d": "2026-11-20",
+     "t": "Built idea-implementlisteni: listener poses in every chapter 1 scene and press-A chat (docs/listen-lines.tsv, 110 lines judged by hand: 90 listen, 11 think, 8 none, 1 split), thinking pose live now from the approved think pictures, 7 listening entries added to the Art Library (Characters > Listening poses), install code ready and switched off until they are approved. Tests: 196 listening and 36 thinking poses with a stand-in frame, portrait and landscape, 0 misses. Next: t-listen1-pics, then c-listen1-install.",
+     "at": "2026-11-20T20:10:00.000Z"
+    },
+    {
+     "d": "2026-11-20",
      "t": "Shipped as idea-implementlisteni: In chapter 1, people who are not talking now listen or think, and the listening pictures are in the Art Library"
     }
    ],
@@ -13337,7 +13342,8 @@
     "effort": "high (a new system designed and built with nothing written to follow)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-implementlisteni in data/board.json, history included. Your first push is the commit board: start c-idea-implementlisteni.\n\nTom made this card himself with New card on the board. His words: \"implement listening/thinking poses (should be generated and approved in art library) for all chapter 1 talking interactions, including cut scenes.\"\n\nThe board sized this from his words alone: Claude Sonnet 5.5, effort medium. If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nDesign it yourself and make the calls: Tom does not pick between options. Ask one short question only if a choice cannot be undone or is expensive to redo. Build it, test it, look at the frames in portrait and landscape, and push build idea-implementlisteni with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). You have my full permission to access the repo.\n\nRESIZED 2026-11-20 by the first session: the work includes generator prompts and art direction for pictures Tom judges by taste (row D), and a new pose system across every chapter 1 conversation and cut scene with no steps written (high). Use Claude Opus 5.5, effort high. Start from the existing thinking-pose entries (docs/CHANGES.md 'Report fixes', ch2fix-prompts.js, report c5no) and the mood frames (`portraits/emo/`, docs/NPC_EMOTION_INDEX.md) before designing anything new. Obey the standing rules: pictures only through the Art Library (Tom presses Generate then Approve), each thing once in a prompt, smallest change on a miss, no breathing animation in the overworld or scenes."
    },
-   "done": "2026-11-20"
+   "done": "2026-11-20",
+   "after": "t-listen1-pics"
   },
   {
    "id": "c-fix-heist1play-4",
@@ -15254,6 +15260,76 @@
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFugoiMUKnQaUUEhir",
     "opening": "unknown"
+   }
+  },
+  {
+   "id": "t-listen1-pics",
+   "title": "Generate and approve the 7 listening poses",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "up",
+   "ask": "pictures",
+   "next": "Tap Generate all 7 pictures on this card (about $0.35), then in ADMIN > ART LIBRARY, Characters tab, group Listening poses, APPROVE or REJECT each one with a note. You should see Tom, Grace, Rose, Deedee, Boppy, Aunt Ellie and Sal each standing alone, hands loosely together at the waist, turned a little toward one side as if listening to someone, with a small attentive smile. Approving them starts card Install the listening poses (listen1).",
+   "blocks": [
+    "c-listen1-install"
+   ],
+   "done_when": {
+    "art_approved": [
+     "tom-listen",
+     "grace-listen",
+     "rose-listen",
+     "deedee-listen",
+     "boppy-listen",
+     "ellie-listen",
+     "sal-listen"
+    ]
+   },
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by idea-implementlisteni (card c-idea-implementlisteni). Tom: \"implement listening/thinking poses (should be generated and approved in art library) for all chapter 1 talking interactions, including cut scenes.\"",
+     "at": "2026-11-20T20:10:00.000Z"
+    }
+   ]
+  },
+  {
+   "id": "c-listen1-install",
+   "title": "Install the listening poses",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "wait",
+   "tag": "listen1",
+   "auto": true,
+   "waiting_on": "tom",
+   "next": "Waits on your approvals of the 7 listening poses. Then it cuts the approved pictures into the game so chapter 1 listeners show the listening pose, tests every chapter 1 scene in portrait and landscape, and hands you a play card.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by idea-implementlisteni (card c-idea-implementlisteni). Steps, tests and what is already built: claude/next-addendum-listen1.md.",
+     "at": "2026-11-20T20:10:00.000Z"
+    }
+   ],
+   "prompt": {
+    "what": "Installs the listening poses you approved, so in chapter 1 everyone who is not talking shows the listening pose, then gives you a card to play it.",
+    "before": [
+     "Finish the card Generate and approve the 7 listening poses (approve or reject each one)."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: every step, command and test is written in claude/next-addendum-listen1.md, and tests catch mistakes)",
+    "effort": "medium (the steps are known)",
+    "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/next-addendum-listen1.md, then card c-listen1-install in data/board.json with its history and the notes on card t-listen1-pics. Your first push is the commit board: start c-listen1-install. Install only the listening pictures that are approved, exactly as the addendum's Install steps say: cut them, bake the story poses (put back the rebake drift), add their facing rows after looking at each frame, run tools/listen_cases.json through LATE=1 tools/reaction_test.py and tools/listen_report.py --standin until it reports 0 misses, look at the frames in portrait and landscape, then push build listen1 with a docs/CHANGES.md heading. Create the Tom card t-listen1-play (ask play: start chapter 1 from chapter select, watch the kitchen and the grey patch, people who are not talking should stand listening or thinking) and set this card's after to it. A picture that is rejected stays out; say which. Spend nothing on xAI. You have my full permission to access the repo."
    }
   }
  ],
