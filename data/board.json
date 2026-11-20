@@ -12361,7 +12361,7 @@
    "title": "Purge Rhubarb Crisp from the game everywhere",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as gem-pillar-rhubarb. Lines reworded and waiting for a recording: Deedee's greet, crisp and win battle lines, her kitchen and chapter 14 and 15 lines, Rose's school line, Tom's chapter 14 line, Aunt Ellie's line, the chapter 20 narrator line.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -12424,6 +12424,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped gem-pillar-rhubarb: Rhubarb Crisp and Rhubarb Pie are now apple muffins everywhere shown; baked clips with the old words purged and their lines wait on the bake list. Pick the Rhubarb Tombo and the garden door kept (the plant)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-pillar-rhubarb: Rhubarb Crisp is gone from the whole game; Deedee's dish is apple muffins"
     }
    ],
    "tag": "gem-pillar-rhubarb",
@@ -12437,7 +12441,8 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-pillar-rhubarb in data/board.json, history included. Your first push is the commit board: start c-gem-pillar-rhubarb.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is the \"Cut-Lore Leak in Tooltips\" row of the battle table (1.2). What the tester saw: Observed in the live build: `Inspect` on `Mudling`, `Log Lump`, and `The Big One` explicitly lists `Rhubarb Crisp`! Locked target: Purge `Rhubarb Crisp` everywhere (Deedee's signature bake is warm apple muffins).\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-pillar-rhubarb, push to main, and write the result and the next step onto the card.\n\nRhubarb Crisp is cut lore: Deedee's signature bake is warm apple muffins. Grep the whole repo (data, engine, docs, scenes, inspect text, voice index) for Rhubarb, replace or delete each use, purge anything it leaves behind, and run python3 tools/clip-audit/unused_voice.py (CLAUDE.md No unused voice, Purge replaced files). Do not hand-edit baked voice data: if a baked clip says it, report it on the card. Legacy battle files (engine/battle2-*.js) may be removed by the new engine later; fix them anyway if they still ship.\n\nAttach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "started_at": "2026-11-20T21:18:55+00:00",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-20"
   },
   {
    "id": "c-gem-pillar-pep",
@@ -15862,7 +15867,7 @@
    "title": "Build the Grace guard video proof",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "wanproof",
    "next": "Waits on your approval (card Approve the WAN proof). Then it makes Grace's large start picture and one 5 second Wan 3.0 guard video through fal.ai, checks every picture of it against the written list before you see anything, and puts it in ADMIN > BATTLE LAB > NEW BATTLE as PROOF: GRACE'S GUARD (VIDEO), tested in portrait and landscape. 54 cents expected, $2 at most.",
    "blocks": [],
@@ -15908,6 +15913,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped as wanproof: the Wan 3.0 guard video passed every check in plan 4.4 on the first try; Lab row PROOF: GRACE'S GUARD (VIDEO), wanproof_test portrait and landscape FAILS: []. Spent $0.65 of $2.00 on fal, nothing on xAI. Next: Tom watches it (t-wanproof-watch), then c-wanidle."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as wanproof: Grace's guard is now a real video (Wan 3.0, made through fal.ai), shown in Battle Lab ) NEW BATTLE ) PROOF: GRACE'S GUARD (VIDEO). 65 cents spent"
     }
    ],
    "prompt": {
@@ -15920,7 +15929,8 @@
     "effort": "high (a new generator Action and a new clip playback are built in one session with no code to follow)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/video-battle-plan.md, then card c-wanproof in data/board.json with its history and the note on card t-wanproof-setup. Your first push is the commit board: start c-wanproof. Build the proof exactly as section 4 of the plan says: the wan-gen Action with its stand-in test and one dry run first, then the start picture and its checks, then the guard video with the prompt in 4.3 word for word, the checks in 4.4 before Tom sees anything, the bake, the playback, the Lab row PROOF: GRACE'S GUARD (VIDEO), and the game checks in portrait and landscape. Spend at most $2.00 on fal and nothing on xAI. A check that fails gets one retry with one change; a second miss the same way is the stop-loss: tell Tom in plain words and hand him no clip. Do not make any other clip and do not remove any painted state. Build tag wanproof. End with a Tom card (ask animations) for the Lab row. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
-   "after": "t-wanproof-watch"
+   "after": "t-wanproof-watch",
+   "done": "2026-11-20"
   },
   {
    "id": "c-permwording1",
@@ -16648,6 +16658,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukCYMKUG2mJbWxJECYC",
+   "title": "Purge Rhubarb Crisp from the game everywhere",
+   "first": "2026-11-20T21:22:44Z",
+   "last": "2026-11-20T21:35:44Z",
+   "tags": [
+    "gem-pillar-rhubarb"
+   ],
+   "cards": [
+    "c-gem-pillar-rhubarb"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCe4s7AKboq4xirQLv",
    "title": "Music makes through repo secrets",
    "first": "2026-11-20T21:29:43Z",
@@ -16690,16 +16712,6 @@
    "cards": [
     "c-takes-987c82",
     "c-takes-56fb01"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukCYMKUG2mJbWxJECYC",
-   "title": "Purge Rhubarb Crisp from the game everywhere",
-   "first": "2026-11-20T21:22:44Z",
-   "last": "2026-11-20T21:22:44Z",
-   "tags": [],
-   "cards": [
-    "c-gem-pillar-rhubarb"
    ]
   },
   {
@@ -17253,6 +17265,20 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
+   "title": "Build the Grace guard video proof",
+   "first": "2026-11-20T12:41:05-08:00",
+   "last": "2026-11-20T13:36:44-08:00",
+   "tags": [
+    "wanproofa",
+    "wanproofb",
+    "wanproof"
+   ],
+   "cards": [
+    "c-wanproof"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGs4KxT1N7oixmRdtw",
    "title": "When skipping a scene, any interstitials that are not item",
    "first": "2026-11-20T13:34:18-08:00",
@@ -17316,19 +17342,6 @@
    ],
    "cards": [
     "c-reporttype1"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
-   "title": "Build the Grace guard video proof",
-   "first": "2026-11-20T12:41:05-08:00",
-   "last": "2026-11-20T13:03:08-08:00",
-   "tags": [
-    "wanproofa",
-    "wanproofb"
-   ],
-   "cards": [
-    "c-wanproof"
    ]
   },
   {
@@ -18851,8 +18864,8 @@
    "takes/20261120T211742-sz1/state.json"
   ]
  },
- "synced": "4f44849326b9061ebb1d96ef393122fdc7374c60",
- "synced_at": "2026-11-20T21:35:29+00:00",
+ "synced": "ba7453a3db9554406a3709748914d10fa0e07046",
+ "synced_at": "2026-11-20T21:36:51+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
