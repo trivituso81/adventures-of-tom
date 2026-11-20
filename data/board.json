@@ -12345,7 +12345,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukFkMDqBpY62nm7AFcf",
+    "url": "https://claude.ai/code/cse_01RXeukFugoiMUKnQaUUEhir",
     "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
    },
    "history": [
@@ -12369,6 +12369,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
     }
    ],
    "tag": "gem-pillar-rhubarb",
@@ -12381,7 +12385,14 @@
     "effort": "medium (a grep and purge with a clear target and an audit script)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-pillar-rhubarb in data/board.json, history included. Your first push is the commit board: start c-gem-pillar-rhubarb.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is the \"Cut-Lore Leak in Tooltips\" row of the battle table (1.2). What the tester saw: Observed in the live build: `Inspect` on `Mudling`, `Log Lump`, and `The Big One` explicitly lists `Rhubarb Crisp`! Locked target: Purge `Rhubarb Crisp` everywhere (Deedee's signature bake is warm apple muffins).\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-pillar-rhubarb, push to main, and write the result and the next step onto the card.\n\nRhubarb Crisp is cut lore: Deedee's signature bake is warm apple muffins. Grep the whole repo (data, engine, docs, scenes, inspect text, voice index) for Rhubarb, replace or delete each use, purge anything it leaves behind, and run python3 tools/clip-audit/unused_voice.py (CLAUDE.md No unused voice, Purge replaced files). Do not hand-edit baked voice data: if a baked clip says it, report it on the card. Legacy battle files (engine/battle2-*.js) may be removed by the new engine later; fix them anyway if they still ship.\n\nYou have my full permission to access the repo."
    },
-   "started_at": "2026-11-20T17:01:48+00:00"
+   "started_at": "2026-11-20T19:12:46+00:00",
+   "rescue": {
+    "at": "2026-11-20T19:12:46+00:00",
+    "n": 1,
+    "why": "Quiet: the conversation may have stopped",
+    "url": "https://claude.ai/code/cse_01RXeukFugoiMUKnQaUUEhir",
+    "prev": "https://claude.ai/code/session_01RXeukFkMDqBpY62nm7AFcf"
+   }
   },
   {
    "id": "c-gem-pillar-pep",
@@ -14973,7 +14984,7 @@
    "id": "c-builds2",
    "tag": "builds2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "auto": true,
    "theme": "Tools",
    "title": "Build history redesign 2: statuses and what is pending",
@@ -15007,6 +15018,10 @@
     {
      "d": "2026-11-20",
      "t": "Built as builds2: statuses on every row (PUBLISHING, LIVE RELOAD, YOUR TEST), failed publish named, In the works view, Filters. B8 to B10 pass in portrait and landscape. Differences are in plan section 8."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as builds2: the build history shows where each build is (publishing, live, your test), names a failed publish, and has an In the works view and Filters"
     }
    ],
    "prompt": {
@@ -15019,14 +15034,14 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/builds-plan.md (all of it, with its Built section, and look at claude/builds-mock.png), then card c-builds2 in data/board.json with its history. Your first push is the commit board: start c-builds2. Build phase 2 (builds2) as the plan's section 6 row says: sections 3.3 and 3.5 and the Filters of section 3.7, with checks B8 to B10. Push it as builds2. Fetch and rebase before every push. Keep everything the screen does today (check B14). Run python3 tools/buildlog_test.py and look at every picture in portrait and landscape before pushing. Write what you built, and anything that differs from the plan, into the plan's section 8. In your last push set start: true on card c-builds3 so it starts by itself. Do not build phase 3 yourself. You have my full permission to access the repo."
    },
    "after": "nothing for Tom: c-builds3",
-   "started_at": "2026-11-20T18:58:33+00:00"
+   "started_at": "2026-11-20T18:58:33+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "c-builds3",
    "tag": "builds3",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "prog",
    "auto": true,
    "theme": "Tools",
    "title": "Build history redesign 3: archive, search and its own page",
@@ -15037,7 +15052,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFPqwb1ZYQTWSoJnuP",
     "opening": "not started"
    },
    "history": [
@@ -15048,6 +15063,14 @@
     {
      "d": "2026-11-20",
      "t": "Phase 2 (builds2) is built, so this card is set to start by itself (start: true). Read claude/builds-plan.md section 8 first: it lists what phases 1 and 2 changed from the plan."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Build history redesign 2: statuses and what is pending is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -15060,7 +15083,7 @@
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/builds-plan.md (all of it, with its Built section, and look at claude/builds-mock.png), then card c-builds3 in data/board.json with its history. Your first push is the commit board: start c-builds3. Build phase 3 (builds3) as the plan's section 6 row says: the split of section 4 and sections 3.7 and 3.8 with the docs, with checks B11 to B13. Push it as builds3. Fetch and rebase before every push. Keep everything the screen does today (check B14). Run python3 tools/buildlog_test.py and look at every picture in portrait and landscape before pushing. Write what you built, and anything that differs from the plan, into the plan's section 8. Then rewrite card t-buildstry's next step to match what you built. You have my full permission to access the repo."
    },
    "after": "t-buildstry",
-   "start": true
+   "started_at": "2026-11-20T19:12:46+00:00"
   },
   {
    "id": "t-buildstry",
@@ -15176,6 +15199,18 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukExaQvGdnDirJdCBFw",
+   "title": "Build history redesign 2: statuses and what is pending",
+   "first": "2026-11-20T19:12:08Z",
+   "last": "2026-11-20T19:12:08Z",
+   "tags": [
+    "builds2"
+   ],
+   "cards": [
+    "c-builds2"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFmQjEQBPFWqM9vS6h",
    "title": "Fix: Look at the Effects page in Admin",
@@ -17149,8 +17184,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "acbf081afb3be47c94da0d7681a84cc860ba9152",
- "synced_at": "2026-11-20T18:58:33+00:00",
+ "synced": "8da15cda7fe7b04bfc4ae4c28bdece4e895fafbe",
+ "synced_at": "2026-11-20T19:12:49+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
