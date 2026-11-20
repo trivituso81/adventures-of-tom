@@ -39,7 +39,7 @@ function b3Clone(F) {
 function b3Matchups(F,u,S) {
   return b3Live(F,b3Other(u.side)).map(t=>{
     const peeve=S.flavor.some(f=>b3Peeves(t).includes(f)),resist=S.flavor.some(f=>t.resists.includes(f));
-    let det=null; for(const f of S.flavor) { det=b3FindDetonation(t,f); if(det) break; }
+    let det=null; for(const f of S.flavor) { det=b3FindDetonation(t,f,u); if(det) break; }
     return {key:t.key,name:t.name,peeve,resist,det:det?{id:det.id,name:det.name,prime:det.prime}:null,pips:t.maxPips?t.pips:0,maxPips:t.maxPips||0};
   });
 }

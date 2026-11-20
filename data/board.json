@@ -712,6 +712,10 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Built: TNB complete (Ceramicist and Longboarder, 14 lines, Lab fight NEW 7). 115 new rule checks, screen test in portrait and landscape. Calls made are listed in docs/BATTLE3.md \"What stage 9b holds\". Next: c-b3s9c."
     }
    ],
    "prompt": {
@@ -722,7 +726,8 @@
     "model": "Claude Sonnet 5.5 (row C: a build whose six custom functions are designed in the session)",
     "effort": "high (6 of the 14 lines need a new function worked out from the spec)",
     "text": "Read claude/battle-build.md and claude/next-addendum-b3s9a.md, then build stage 9b (TNB) of the new battle system. You have my full permission to access the repo."
-   }
+   },
+   "after": "nothing for Tom: c-b3s9c"
   },
   {
    "id": "c-b3s9c",
@@ -731,7 +736,7 @@
    "lane": "claude",
    "col": "up",
    "tag": "b3s9c",
-   "next": "After b3s9b. Builds Nara's (Attached Pup, Guard Dog) and Boppy's (The Dep, Pepper Boss) Sig Vibes (28 lines, 6 need their own function) and the late joiners' Vibe Point pool; Lab fights with the chapter 2 and 3 parties.",
+   "next": "After b3s9b (done). Builds Nara's (Attached Pup, Guard Dog) and Boppy's (The Dep, Pepper Boss) Sig Vibes (28 lines, 6 need their own function) and the late joiners' Vibe Point pool, and moves TNB onto that pool; Lab fights with the chapter 2 and 3 parties.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -743,6 +748,10 @@
     {
      "d": "2026-11-19",
      "t": "Added by b3s9a: stage 9 split."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "b3s9b shipped: prompt now reads next-addendum-b3s9b.md; TNB moves onto the late joiners' pool here."
     }
    ],
    "prompt": {
@@ -752,7 +761,7 @@
     ],
     "model": "Claude Sonnet 5.5 (row C: a build whose six custom functions are designed in the session)",
     "effort": "high (6 of the 28 lines need a new function worked out from the spec)",
-    "text": "Read claude/battle-build.md and claude/next-addendum-b3s9a.md, then build stage 9c (Nara and Boppy) of the new battle system. You have my full permission to access the repo."
+    "text": "Read claude/battle-build.md and claude/next-addendum-b3s9b.md, then build stage 9c (Nara and Boppy) of the new battle system. You have my full permission to access the repo."
    }
   },
   {

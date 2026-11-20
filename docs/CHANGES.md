@@ -1,3 +1,13 @@
+## b3s9b (2026-11-19): New battle: TNB joins the Battle Lab with both of his Vibes, Ceramicist and Longboarder
+
+- Tom (11-19): "build stage 9b (TNB) of the new battle system." TNB's two Sig Vibes are built: 2 Traits, 2 Basics, 4 Skills, 2 Capstones and 4 Quirks (14 lines), `data/b3-kit-tnb.js`. Every Skill has a full plain sentence for its card.
+- Ceramicist: Wheel-Thrown Lump (light Clobber, monster 10% slower), Center the Bowl (clay shield of 30% HP, clears Toasty and Bleed), Three-AM Kiln Firing (Sizzle wave, fires every clay shield into Fired Glaze, +15% Attack for the family), Grand Amphora Masterpiece (a vase soaks the next 2 monster attacks whole, then bursts for a heavy Clobber and Razzle wave and 2 Composure pips). Trait Wet Clay to Stoneware, Quirks Coaster Policy and Kintsugi Gold Seam.
+- Longboarder: Longboard Push & Carve, E-Bike Tag-Along (clears debuffs, Fresh Ride, +15% Speed, Attack, Defense), Waymo Tailgate Rescue (Razzle flash, Blind, revives a knocked-out member at 40% or shares HP), Baxter Hill Longboard Express (heavy Razzle wave, doubles every E-Bike, +20% Ruckus). Trait Carving Momentum, Quirks TAP-Card Transfer and No Car, No Tickets.
+- New rule seams (docs/BATTLE3.md "What stage 9b holds"): clay shields and Fired Glaze, the vessel hazard, `allyMods`, the `basic` and `shielded` mod conditions, a Skill's own `rec`, the `tgtAlly` listener field, the status flags `razzleDet` and `blockDebuff`, target `slowestAlly`, a doubled buff, ops `vitrify`, `double`, `rebalance`. The `shieldBroken` event now carries its action, and a family strip no longer clears the family's own vase.
+- Lab: NEW 7 puts TNB in Deedee's place (Grace, Tom, TNB, Rose) against Log Lump. His Vibe Points use the normal start until stage 9c.
+- No picture or clip work: every new Skill uses the default animation.
+- Tests: `node tools/b3-sim.js check` (1123 checks, 115 new in `tools/b3-check-s9b.js`, FAILS: []), `python3 tools/b3_test.py s9b` (portrait and landscape; frames `tools/shots/b3-s9b*.png`). Handoff: docs/handoff/b3s9b.md.
+
 ## skillinfo1 (2026-11-19): New battle: an i icon on each Skill row opens its card, a tap anywhere else on the row uses the Skill
 
 - Tom (11-19): "we need an information "i" icon to the left of each ability name, which should bring the user to the more details screen with the BACK and USE buttons. otherwise if the user taps anywhere on the ability outside of the abilitiy box, it should just execute tha bility or require the character to choose a target as applicable".

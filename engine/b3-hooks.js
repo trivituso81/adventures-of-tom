@@ -33,7 +33,7 @@ const B3_HOOKS=['battleStart','roundStart','turnStart','actionDeclared','beforeH
 //   targetPrime  the event's target carries this Prime, or this action set that Prime off on it
 //   pepAtLeast   the holder has at least this much Pep (Elixir Hoarder, read as its turn starts)
 //   kinds        the event's id is a status of one of these kinds (Creative Mess: 'debuff')
-//   tgtFoe       the event's target is on the other side from the holder
+//   tgtFoe       the event's target is on the other side from the holder;  tgtAlly  the event's target is on the holder's own side (Kintsugi Gold Seam)
 //   attacks      the act in progress deals damage (a foe's wind-up or buff does not)
 // A Trait or Quirk row (data/b3-kit-*.js) is one listener (`on` and the fields above on the row itself) or several
 // (`listen:[{on, ...}, ...]`); engine/b3-progress.js b3KitPassives lays them out as the flat rows a unit carries in `passives`.
@@ -42,7 +42,7 @@ const B3_HOOKS=['battleStart','roundStart','turnStart','actionDeclared','beforeH
 // tgt: who they answered, c: the answer's own small action}; the ops' events carry c too (engine/b3-ops.js).
 //   every        the round number is a multiple of this (Well-Loved Original: every 2nd round)
 //   shieldBy     'holder': the shield that broke or ended was put on by the holder (Emergency Stuffy Swap)
-const B3_LISTEN_IF=['ids','flavor','multiHit','landed','targetPrime','pepAtLeast','kinds','tgtFoe','attacks','every','shieldBy'];
+const B3_LISTEN_IF=['ids','flavor','multiHit','landed','targetPrime','pepAtLeast','kinds','tgtFoe','attacks','every','shieldBy','tgtAlly'];
 function b3ListenOk(F,u,L,ev,putBy,useKey) {
   if(L.limitKey) useKey='lk:'+L.limitKey;
   if(L.carrier==='target'&&ev.tgt!==u) return false;
@@ -58,6 +58,7 @@ function b3ListenOk(F,u,L,ev,putBy,useKey) {
   if(L.pepAtLeast!=null&&!(u.pep>=L.pepAtLeast)) return false;
   if(L.kinds&&!(ev.id&&B3_STATUS[ev.id]&&L.kinds.includes(B3_STATUS[ev.id].kind))) return false;
   if(L.tgtFoe&&!(ev.tgt&&ev.tgt.side!==u.side)) return false;
+  if(L.tgtAlly&&!(ev.tgt&&ev.tgt.side===u.side)) return false;
   if(L.attacks&&!(ev.c&&ev.c.skill&&ev.c.skill.power)) return false;
   if(L.every&&F.round%L.every) return false;
   if(L.shieldBy==='holder'&&ev.by!==u.key) return false;

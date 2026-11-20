@@ -125,6 +125,22 @@ const B3_STATUS={
   // after Tom's turn and lasts until his next turn ends, which is the next Skill he can use.
   new_game_plus:{id:'new_game_plus',name:'New Game Plus',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[{stat:'cost',kind:'ngp',v:-2,when:{skillPep:4}}],flags:[],
     short:'NEXT -2 PEP',color:'#8dc4e6',weight:5,desc:'Tom\u2019s next Skill that costs 4 Pep or less costs 2 less (1 Pep at the least).'},
+  // ---- Kit statuses: TNB's Ceramicist and Longboarder (stage 9b) ----
+  // Wheel-Thrown Lump: "-10% foe Spd".
+  wet_clay:{id:'wet_clay',name:'Wet Clay',kind:'debuff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'spd',kind:'wetClay',v:-.10}],flags:[],
+    short:'CLAYED',color:'#c98a5a',weight:3,desc:'Weighed down by wet clay: 10% slower.'},
+  // Three-AM Kiln Firing: +15% Attack on the whole family for 2 turns.
+  kiln_glow:{id:'kiln_glow',name:'Kiln Glow',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'atk',kind:'kilnGlow',v:.15}],flags:[],
+    short:'ATTACK UP',color:'#ffb38a',weight:4,desc:'Still warm from the 3 AM kiln: 15% more Attack.'},
+  // Kintsugi Gold Seam: for 1 turn the carrier's hits can also set off Razzle Detonations (engine/b3-resolve.js b3FindDetonation).
+  gold_seam:{id:'gold_seam',name:'Gold Seam',kind:'buff',group:null,dur:{n:1,unit:'turn'},mods:[],flags:['razzleDet'],
+    short:'GOLD SEAM',color:'#ffd36b',weight:5,desc:'A gold line where the shield broke: this turn\u2019s hits can also set off Razzle Detonations, such as Short Circuit! on a Drenched monster.'},
+  // E-Bike Tag-Along: Fresh Ride blocks the next debuff (engine/b3-ops.js b3PutStatus; the flag is used up when it blocks one).
+  fresh_ride:{id:'fresh_ride',name:'Fresh Ride',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[],flags:['blockDebuff'],
+    short:'FRESH RIDE',color:'#8fe3a6',weight:5,desc:'The rental e-bike\u2019s lock is on: the next debuff aimed at this family member bounces off, and then the lock is used up.'},
+  // E-Bike Tag-Along: +15% Speed, Attack and Defense. Baxter Hill Longboard Express doubles it (a `mult` of 2 on the carried status).
+  e_bike:{id:'e_bike',name:'E-Bike',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'spd',kind:'ebike',v:.15},{stat:'atk',kind:'ebike',v:.15},{stat:'def',kind:'ebike',v:.15}],flags:[],
+    short:'E-BIKE',color:'#9be39a',weight:6,desc:'Riding a rental e-bike: 15% more Speed, Attack and Defense. Baxter Hill Longboard Express doubles it.'},
   // ---- Enemy statuses: chapter 1 ----
   jitterflight:{id:'jitterflight',name:'Jitterflight',kind:'buff',group:null,dur:{n:2,unit:'turn'},mods:[{stat:'eva',kind:'jitter',v:.20}],flags:[],
     short:'JITTER',color:'#d8e68a',weight:4,desc:'Dodges 20% of attacks. It can be stripped.'},
@@ -164,6 +180,11 @@ const B3_HAZARDS={
   wet_floor:{id:'wet_floor',name:'Wet Floor',side:'foe',uses:2,rounds:3,tags:['melee'],out:-.25,
     effects:[{op:'damage',flavor:['clobber'],power:'light',to:'target'}],short:'WET FLOOR',color:'#8fd0ff',
     desc:'The next monsters to use a melee attack slip: a light Clobber fall, and that attack does 25% less damage.'},
+  // Grand Amphora Masterpiece (spec 3.7): "a vessel absorbing 2 hits before shattering". It stands on the FAMILY's floor (`side:'own'`: the
+  // side of whoever laid it). `vessel:true` hands it to engine/b3-custom.js: the next `uses` monster attacks that would hit the family do
+  // nothing to them (b3VesselTake), and when the last one is soaked, or after `rounds` rounds, it breaks into B3_VESSEL_BURST (b3VesselBurst).
+  amphora:{id:'amphora',name:'Grand Amphora',side:'own',uses:2,rounds:4,tags:['vessel'],vessel:true,out:0,effects:[],short:'AMPHORA',color:'#d98c5f',
+    desc:'A towering terracotta vase stands in front of the family and soaks the next 2 monster attacks whole. Then it shatters into a heavy Clobber and Razzle hit on every monster, knocking 2 Composure pips off each. It shatters by itself when 4 rounds have passed.'},
   // Bedazzle-Gun Glue Trap (spec 3.2): "acting foes take Sizzle/Razzle chip + 20% Recovery Ticks" for 2 rounds. The chip is a light
   // two-flavor hit (Sizzle then Razzle, half each) and Fatigue is the 20% longer wait. Every monster that acts is caught while it
   // lasts (uses 99 is "no limit"); a wind-up turn is not an act, the act it fires is.

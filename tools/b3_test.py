@@ -137,7 +137,7 @@ def hand_fight(pg,idx,fid):
     pg.wait_for_timeout(500); frames.append(shot(pg))
     solo=pg.evaluate("()=>B3.F.foes.length")==1   # one monster: BASIC fires at once, so there is no target to tap
     for k,v in did.items():
-        if not v and not(solo and k=='tapfoe'): fails.append(f'{fid} hand: never used {k}')
+        if not v and not(solo and k=='tapfoe') and not(fid=='new7' and k=='slip'): fails.append(f'{fid} hand: never used {k}')   # new7 has no Drench source (Deedee is out), so no slip is possible
     pg.click('#b3-cmd [data-done]'); pg.wait_for_timeout(700)
     back=pg.evaluate("()=>({mode:splash.mode,active:splash.active,hidden:document.getElementById('battle').hidden,b3:B3.active,v3:!!battle.v3,cls:document.getElementById('battle').className})")
     if not(back['mode']=='lab3' and back['active'] and back['hidden'] and not back['b3'] and not back['v3']): fails.append(f'{fid} hand: CONTINUE did not land on the NEW BATTLE list: {back}')
@@ -1053,6 +1053,67 @@ def stage9ui(pg,lab,landscape=False):
     sheet(caps,3,os.path.join(OUT,'b3-s9ui'+('-land' if landscape else '')+'.png'),scale=.5)
     pg.click('#b3-exit'); pg.wait_for_timeout(500)
 
+# ---------- Stage 9b: TNB complete (Ceramicist and Longboarder), on the Log Lump fight with TNB in Deedee's place ----------
+S9B_BOOK="""(boarder)=>{ const B=b3LabReset(5),Q=boarder?['tap_card_transfer','no_car_no_tickets']:['coaster_policy','kintsugi_gold_seam'];
+  if(boarder) b3SetMain('tnb',B.tnb,B.tnb.pocket); Q.forEach((q,i)=>b3SetQuirk('tnb',B.tnb,i,q)); b3LabSave(); return B.tnb.main+':'+B.tnb.quirks.join('+'); }"""
+def s9b(pg): return pg.evaluate("""()=>{ const F=B3.F,P={}; for(const p of F.party) P[p.id]=p; const f=F.foes[0];
+  return {actor:B3.actor&&B3.actor.id,ui:B3.ui,sh:F.party.map(p=>(p.shields||[]).map(x=>({amt:Math.round(x.amt),clay:!!x.clay,glaze:x.glaze||0}))),
+    haz:F.hazards.map(h=>h.id+':'+h.side+':'+h.uses),st:F.party.map(p=>Object.keys(p.st)),foe:Object.keys(f.st),hp:F.party.map(p=>p.hp),maxHp:F.party.map(p=>p.maxHp),
+    ruckus:F.ruckus,mult:F.party.map(p=>p.st.e_bike?p.st.e_bike.mult||1:0),foeHp:F.foes.map(x=>x.hp),log:B3.log.slice(-80).join(' | '),
+    tags:[...document.querySelectorAll('#b3-party .b2-pc')].map(e=>e.innerText.replace(/\\n/g,' '))}; }""")
+def stage9b(pg,lab,landscape=False):
+    S='stage 9b'+(' landscape' if landscape else '')+': '; caps=[]; idx=lab.index('new7')
+    rot=landscape and pg.evaluate("()=>layout.rotated")
+    R=lambda f: f.rotate(90,expand=True) if rot else f
+    def need(cond,what):
+        if not cond: fails.append(S+what)
+    pg.evaluate("()=>{ B7.speed=1; }")
+    q=pg.evaluate(S9B_BOOK,False); need(q.startswith('tnb_potter:coaster_policy+kintsugi_gold_seam'),f'the Lab book did not take TNB Ceramicist and his Quirks: {q}')
+    start(pg,idx,{'seed':SEED},keep=True); wait_cmd(pg); pg.evaluate(POKE_ROWS); pg.evaluate(S5_PREP); pg.wait_for_timeout(300)
+    names=pg.evaluate("()=>B3.F.party.map(p=>p.id)"); need(names==['grace','tom','tnb','rose'],f'TNB stands third with Grace, Tom and Rose: {names}')
+    if not turn_of(pg,'tnb',S): return
+    caps.append(R(shot(pg)))
+    pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-cmd').innerText")
+    need('Wet Clay to Stoneware' in txt and 'Coaster Policy' in txt and 'Kintsugi Gold Seam' in txt,f"TNB's list should name his Trait and both Quirks: {txt[:300]}")
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
+    names=pg.evaluate("()=>(b3SkillRows(B3.actor)||[]).map(S=>S.name)"); need(all(n in names for n in ['Center the Bowl','Three-AM Kiln Firing','Grand Amphora Masterpiece']),f'the SKILLS list should hold his three Ceramicist Skills: {names}')
+    use(pg,'Center the Bowl','Grace'); wait_cmd(pg); pg.wait_for_timeout(500); v=s9b(pg); caps.append(R(shot(pg)))
+    if not landscape: R(shot(pg)).save(os.path.join(OUT,'b3-s9b-bowl-portrait.png'))
+    need(v['sh'][0] and v['sh'][0][0]['clay'],f"Center the Bowl should give Grace a clay shield: {v['sh']}")
+    if not turn_of(pg,'tnb',S): return
+    use(pg,'Three-AM Kiln Firing'); wait_cmd(pg); pg.wait_for_timeout(500); v=s9b(pg); caps.append(R(shot(pg)))
+    need(any(x['glaze'] for x in v['sh'][0]) or not v['sh'][0],f"Kiln Firing should fire Grace's clay shield into Fired Glaze (or it was already used up): {v['sh'][0]}")
+    need(all('kiln_glow' in st for st in v['st']),f"the whole family should have Kiln Glow: {v['st']}"); need('toasty' in v['foe'],f"the monster should be Toasty: {v['foe']}")
+    if not turn_of(pg,'tnb',S): return
+    use(pg,'Grand Amphora Masterpiece'); wait_cmd(pg); pg.wait_for_timeout(500); v=s9b(pg); caps.append(R(shot(pg)))
+    if not landscape: R(shot(pg)).save(os.path.join(OUT,'b3-s9b-amphora-portrait.png'))
+    need(any(h.startswith('amphora:party') for h in v['haz']) or 'Grand Amphora' in v['log'],f"the Grand Amphora should stand on the family's floor: {v['haz']}")
+    for _ in range(8):
+        if 'soaks' in s9b(pg)['log'] and 'whole' in s9b(pg)['log']: break
+        pg.evaluate(S5_PREP); basic(pg); aim(pg,None); wait_cmd(pg); pg.wait_for_timeout(450)
+    v=s9b(pg); caps.append(R(shot(pg)))
+    need('soaks' in v['log'] and 'whole' in v['log'],f"a monster attack should be soaked whole by the Amphora: {v['log'][-300:]}")
+    # Longboarder as Main
+    pg.click('#b3-exit'); pg.wait_for_timeout(500)
+    q=pg.evaluate(S9B_BOOK,True); need(q.startswith('tnb_boarder:tap_card_transfer+no_car_no_tickets'),f'the Lab book did not take TNB Longboarder and his Quirks: {q}')
+    start(pg,idx,{'seed':SEED},keep=True); wait_cmd(pg); pg.evaluate(POKE_ROWS); pg.evaluate(S5_PREP); pg.wait_for_timeout(300)
+    if not turn_of(pg,'tnb',S): return
+    pg.keyboard.press('KeyI'); pg.wait_for_timeout(300); txt=pg.evaluate("()=>document.getElementById('b3-cmd').innerText")
+    need('Carving Momentum' in txt and 'TAP-Card Transfer' in txt and 'No Car, No Tickets' in txt,f"TNB's list should name Carving Momentum and both Quirks: {txt[:300]}")
+    pg.keyboard.press('Escape'); pg.wait_for_timeout(200)
+    use(pg,'E-Bike Tag-Along','Grace'); wait_cmd(pg); pg.wait_for_timeout(500); v=s9b(pg); caps.append(R(shot(pg)))
+    need('e_bike' in v['st'][0] and 'fresh_ride' in v['st'][0],f"E-Bike Tag-Along should put the e-bike and Fresh Ride on Grace: {v['st'][0]}")
+    if not turn_of(pg,'tnb',S): return
+    pg.evaluate("()=>{ const F=B3.F; F.party[0].hp=40; b3ViewSync(); b3Render(); }"); pg.wait_for_timeout(200)
+    use(pg,'Waymo Tailgate Rescue','Grace'); wait_cmd(pg); pg.wait_for_timeout(500); v=s9b(pg); caps.append(R(shot(pg)))
+    if not landscape: R(shot(pg)).save(os.path.join(OUT,'b3-s9b-waymo-portrait.png'))
+    need(v['hp'][0]>40 and 'shares' in v['log'],f"Waymo Tailgate Rescue on a hurt Grace should share HP with her: {v['hp'][0]} {v['log'][-200:]}")
+    if not turn_of(pg,'tnb',S): return
+    use(pg,'Baxter Hill Longboard Express'); wait_cmd(pg); pg.wait_for_timeout(500); v=s9b(pg); caps.append(R(shot(pg)))
+    need(v['mult'][0]==2 or 'e_bike' not in v['st'][0],f"Baxter Hill should double Grace's E-Bike (unless it ran out): {v['mult']} {v['st'][0]}")
+    sheet(caps,4,os.path.join(OUT,'b3-s9b'+('-land' if landscape else '')+'.png'),scale=.45)
+    pg.click('#b3-exit'); pg.wait_for_timeout(500)
+
 # ---------- Stage 8: video clips in Battle 3 (idle loops, clip moves landing on the impact frame, body states, The Big One's acts) ----------
 S8_TRACE="""()=>{ if(window.__c8) { window.__c8.hits=[]; window.__c8.moves=[]; return; } window.__c8={hits:[],moves:[],cl:{}}; setInterval(()=>{ for(const k in B3P.fa){ const A=B3P.fa[k]; if(A&&A.cl) window.__c8.cl[A.cl.id]=1; } },50);
   const os=b3Show,om=b3PlayMove;
@@ -1164,7 +1225,7 @@ with sync_playwright() as pw:
     pg=br.new_page(viewport={'width':430,'height':860}); errs=[]
     pg.on('pageerror',lambda e: errs.append('page error: '+str(e))); pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.goto(f'http://127.0.0.1:{port}/index.html'); pg.wait_for_function('()=>window.__LE&&window.__LE.b3Start',timeout=180000); pg.wait_for_timeout(1500)
-    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui')] or ([] if only else lab)
+    lab=pg.evaluate("()=>B3_LAB.map(L=>L.id)"); only=[a for a in sys.argv[1:] if a in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b')]; want=[a for a in sys.argv[1:] if not a.startswith('-') and a not in('s3','s4','s5','s5b','s5c','s6','s7','s8','s9ui','s9b')] or ([] if only else lab)
     # The way in: ADMIN > BATTLE LAB shows NEW BATTLE, which opens the list.
     pg.evaluate("()=>{ splashSetMode('lab'); }"); pg.wait_for_timeout(200)
     names=pg.evaluate("()=>[...document.querySelectorAll('#splash .sp-choice .sp-name')].map(e=>e.textContent)")
@@ -1253,6 +1314,11 @@ with sync_playwright() as pw:
     if 's9ui' in sys.argv or not only and len(want)==len(lab):
         print('b3s9: skill card'); stage9ui(pg,lab)
         pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage9ui(pg,lab,True)
+        pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
+    # 6j. b3s9b: TNB complete (portrait, then a pass in landscape)
+    if 's9b' in sys.argv or not only and len(want)==len(lab):
+        print('b3s9b: TNB'); stage9b(pg,lab)
+        pg.evaluate("()=>{ B7.speed=1; splash.active=false; toggleLayout(); }"); pg.wait_for_timeout(500); stage9b(pg,lab,True)
         pg.evaluate("()=>{ toggleLayout(); }"); pg.wait_for_timeout(400)
     # 7. battle 2 still owns its screen
     pg.evaluate("()=>{ B7.speed=1; splash.active=false; document.getElementById('splash').hidden=true; window.__LE.b2Start({party:['tom','grace','rose'],level:12,foes:[['mudling','front']],bag:[]}); }")
