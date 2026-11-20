@@ -25,3 +25,5 @@ Added 2026-11-20 by boardux1 (written in both places): boardux-plan.md (its Buil
 Added 2026-11-20 by ch2build (written in both places): story-ch02-draft4.md, story-engine-capabilities.md, story-build.md, story-line-rules.md, next-addendum-ch1rebuild1.md (copied word for word from the Project so a START run can build chapter 2).
 
 Added 2026-11-20 by ch2build (written in both places): ch02-teardown.md.
+
+Added 2026-11-20 by board-gemcards (written in both places): ch1-gemini-tracker.md (Gemini's chapter 1 test report; the c-gem-* cards name it).

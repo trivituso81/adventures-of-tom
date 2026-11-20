@@ -1,3 +1,12 @@
+## board-gemcards (2026-11-20): board only: one card for every issue in Gemini's chapter 1 test report
+
+Tom (11-20): "Make a card for each and every one of the issues listed in this report, which came from Gemini's testing. and put each one in the Kanban board."
+
+- The report is copied to `claude/ch1-gemini-tracker.md` (and the Project). 35 cards added to `data/board.json`: 11 bugs (`c-gem-bug01` to `c-gem-bug11`), 7 battle table rows (`c-gem-pillar-*`), 9 canon rows (`c-gem-canon01` to `09`), 6 polish rows (`c-gem-polish01` to `06`), and the Keeper note `c-gem-canon10` (Done, nothing to fix) plus Tom's decide card `t-gem-polish06` for the boss line flagged for taste, which blocks `c-gem-polish06` (Waiting).
+- Every card is a Claude card in Up next with a full prompt, model and effort from the logic in `claude/handoff-rules.md` (bugs Sonnet 5.5 medium; canon and dialogue Opus 5.5; one-line edits low). None is `auto`, so nothing starts by itself. Each prompt starts by checking the issue still happens on current main, because Gemini played an older build.
+- The seven battle rows only check which Battle 3 stage covers them (the tester compared to spec v10, current rules are v11); the Rhubarb Crisp row is a real purge.
+- Nothing in the game changed.
+
 ## fix-gracevoice-distort (2026-11-20): Grace's lines play at her real speed and pitch again; the merge step that slowed her is gone
 
 Tom (2026-11-20, card t-gracevoice-distort): "But why does this keep happening? It has nothing to do with 11 labs because when I initially record them, they sound completely fine and then I provide the Jason to you for upload and they seem to be fine in the game and then at later point they become distorted, so I refuse to record more. It's wasting my money". Reports r-20261120-000831-h5tq, -000848-fl38, -000910-g9n1, -000931-2yx8, -001100-lta1 ("This line needs to be re-recorded. The voice is distorted somehow").

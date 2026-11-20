@@ -10783,6 +10783,1087 @@
     "effort": "medium (one small CSS change)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md, then card c-boardbar1 in data/board.json. Your first push is the commit board: start c-boardbar1. In board.html the body adds padding-top env(safe-area-inset-top), which shows as an empty band above the header in landscape on the iPhone Duo. Remove that top padding in landscape and keep the menu position in step, test portrait and landscape, push. You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "c-gem-bug01",
+   "title": "Fix: losing to The Big One leaves the party stuck",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude fixes this (BUG-01, severity P0 Critical (Softlock)) when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, BUG-01 (claude/ch1-gemini-tracker.md). Severity: P0 Critical (Softlock). P0: first in line."
+    }
+   ],
+   "tag": "gem-bug01",
+   "prompt": {
+    "what": "Works on BUG-01 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (the tester named three possible fixes)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug01 in data/board.json, history included. Your first push is the commit board: start c-gem-bug01.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-01. What the tester saw: Severity P0 Critical (Softlock). Where: Grump Hollow (`The Big One` Wipe Recovery). Losing to `The Big One` plays Deedee's recovery scene (`\"Up, up. Everybody up... Then we try again.\"`) and places the party back on the shoreline in a permanent softlock: the one-time right-shore flashbulb cutscene flag is already consumed (leaving only the 4-line repeatable `Inspect orange block`), while `The Big One` sits on unwalkable water tiles out of `A`-button range (`\"Face a neighbor or an object, then press A.\"`).\n\nThe tester suggested (a suggestion, not an order): Either reset the pre-boss trigger zone on wipe, add a shoreline `A`-button re-challenge trigger tile facing `The Big One`, or offer an immediate `\"Retry Boss Battle\"` prompt on defeat.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug01, push to main, and write the result and the next step onto the card.\n\nP0: the player cannot continue. Pick the retry prompt on defeat if it fits the battle code; otherwise reset the pre-boss trigger. Test losing the fight on purpose, then winning the retry.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-bug02",
+   "title": "Fix: AUTO resets to ON and a tap skips unfinished text",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude fixes this (BUG-02, severity High) when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, BUG-02 (claude/ch1-gemini-tracker.md). Severity: High."
+    }
+   ],
+   "tag": "gem-bug02",
+   "prompt": {
+    "what": "Works on BUG-02 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (two small input fixes in the dialogue box)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug02 in data/board.json, history included. Your first push is the commit board: start c-gem-bug02.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-02. What the tester saw: Severity High. Where: Global Cutscene Dialogue (`AUTO ON` / Click-While-Typing). (1) Clicking `AUTO OFF` does not persist,every new dialogue step resets `AUTO` back to `ON`, auto-advancing short lines (`Rose`: `\"Under L...\"`, `Boppy`: `\"The fis...\"`) before they can be read. (2) Clicking a `1/1` box while text is still typing closes/skips the box instead of completing the text first.\n\nThe tester suggested (a suggestion, not an order): Persist the player's `AUTO ON`/`OFF` choice across the entire session, and enforce two-tap behavior on all boxes (Tap 1 finishes typewriter text; Tap 2 advances/closes).\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug02, push to main, and write the result and the next step onto the card.\n\nRead engine/dialog-auto.js and the dialogue box code first.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-bug03",
+   "title": "Fix: closing a banner also walks Tom across the map",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude fixes this (BUG-03, severity High) when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, BUG-03 (claude/ch1-gemini-tracker.md). Severity: High."
+    }
+   ],
+   "tag": "gem-bug03",
+   "prompt": {
+    "what": "Works on BUG-03 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (one input rule applied to several screens)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug03 in data/board.json, history included. Your first push is the commit board: start c-gem-bug03.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-03. What the tester saw: Severity High. Where: Modal & Banner Dismissals (`The Square`, `Amy's House`, `Taxi Co.`). Clicking to dismiss `\"Rose joined the party!\"` (or closing dialogue near doorways) passes a tap-to-walk input straight onto the map canvas underneath, marching Tom involuntarily into `SPROUT HOUSE` or back toward the `Long Island Taxi Co.` exit.\n\nThe tester suggested (a suggestion, not an order): Call `stopPropagation()` on dialogue/banner pointer events and add a ~150–200 ms post-close input cooldown before pathfinding accepts map clicks.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug03, push to main, and write the result and the next step onto the card.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-bug04",
+   "title": "Fix: Rose's shoulder sprite glitches in Grump Hollow fights",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude fixes this (BUG-04, severity High) when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, BUG-04 (claude/ch1-gemini-tracker.md). Severity: High."
+    }
+   ],
+   "tag": "gem-bug04",
+   "prompt": {
+    "what": "Works on BUG-04 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (three visual faults with a known canon target)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug04 in data/board.json, history included. Your first push is the commit board: start c-gem-bug04.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-04. What the tester saw: Severity High. Where: Grump Hollow Battles (Rose Shoulder Composite & Z-Order). Rose remains on Tom's shoulders in combat with three visual bugs: (1) a black horizontal bar across Rose's eyes, (2) Rose's body vanishing during Tom's `Disconnected Controller` attack so only her pink shoes float beside Tom's face, and (3) Rose marching behind Grace's sprite and Tom's legs during `Boop` / `Raspberry`.\n\nThe tester suggested (a suggestion, not an order): Per locked canon (CANON-06), put Rose on her own two feet in `Grump Hollow` and all battles as a standalone 4th party sprite, and fix Z-order sorting by Y-coordinate during melee animations.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug04, push to main, and write the result and the next step onto the card.\n\nStanding canon (CLAUDE.md and the card for CANON-06): Rose is not carried in Grump Hollow. Check the card gem-canon06 first so the two do not collide. The Z-order fix in melee applies to any battle.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-bug05",
+   "title": "Fix: blank portraits in chapter select, battle and dialogue",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude fixes this (BUG-05, severity High) when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, BUG-05 (claude/ch1-gemini-tracker.md). Severity: High."
+    }
+   ],
+   "tag": "gem-bug05",
+   "prompt": {
+    "what": "Works on BUG-05 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (preload fixes in three screens)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug05 in data/board.json, history included. Your first push is the commit board: start c-gem-bug05.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-05. What the tester saw: Severity High. Where: Chapter Select, Battle Load & `Inspect orange block` Portraits. (1) Dark/blank squares appear in `Pick a chapter` mini-portraits (slot 3 of 4 on `CH 1`, plus `CH 3`, `CH 5`, `CH 7`, `CH 8`, `CH 10`–`CH 15`, `CH 17`–`CH 20`, `BONUS`). (2) Rose's portrait flashes blank on Frame 1 of battle in the `TURN` bar and Party Panel. (3) Re-inspecting `orange block` flashes a grumpy green frog or Tom portrait for 1 frame under `Rose`'s name before swapping to Rose.\n\nThe tester suggested (a suggestion, not an order): Preload chapter-select thumbnails and speaker portraits before rendering frame 1 of menus, battle HUD, and dialogue boxes, and clear stale portrait textures before opening a new dialogue box.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug05, push to main, and write the result and the next step onto the card.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-bug06",
+   "title": "Fix: quest log 'Go to' prefix and run-on location toasts",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude fixes this (BUG-06, severity High) when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, BUG-06 (claude/ch1-gemini-tracker.md). Severity: High."
+    }
+   ],
+   "tag": "gem-bug06",
+   "prompt": {
+    "what": "Works on BUG-06 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (two text-format fixes)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug06 in data/board.json, history included. Your first push is the commit board: start c-gem-bug06.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-06. What the tester saw: Severity High. Where: Quest Log (`[!]`) & Location Toasts. (1) Quest log prepends `\"Go to \"` onto full sentences, producing `\"Go to the splash came from across the pond. Follow it.\"` and `\"Go to It's Sunday. Head out the front door. Cab 7 is waiting at the Square.\"` (2) Interior location toasts lack separator punctuation (`\"Deedee and Boppy's House One resident. Four curious things.\"`, `\"Amy's House One resident...\"`, `\"Long Island Taxi Co. One driver...\"`).\n\nThe tester suggested (a suggestion, not an order): Strip automatic `\"Go to \"` prefixing when an objective string is already a full sentence, and render map title + subtitle on two lines or with a colon/period separator.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug06, push to main, and write the result and the next step onto the card.\n\nNote: card c-idea-removeall may have removed location toasts. Check docs/CHANGES.md idea-removeall first; fix only what is left.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-bug07",
+   "title": "Fix: the stolen muffin pan stays on the kitchen island",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude fixes this (BUG-07, severity High) when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, BUG-07 (claude/ch1-gemini-tracker.md). Severity: High."
+    }
+   ],
+   "tag": "gem-bug07",
+   "prompt": {
+    "what": "Works on BUG-07 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (one prop, one sprite size, one stray pixel group)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug07 in data/board.json, history included. Your first push is the commit board: start c-gem-bug07.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-07. What the tester saw: Severity High. Where: `grands` Kitchen Island & Post-Boss Muffin Tin Prop. (1) After the Mudling steals Deedee's `\"good twelve-cup pan\"` (`\"Pan and all\"`), the 12-cup pan stays visibly rendered on the kitchen island in `grands` (and a stray beige dot floats near the left island stool in the ending scene). (2) In post-boss `Grump Hollow`, Tom holds up a 6-hole muffin tin sprite instead of a 12-cup pan.\n\nThe tester suggested (a suggestion, not an order): Make the kitchen-island muffin tin a conditional prop hidden once stolen, clean up the stray beige pixel cluster by the island stool, and match the post-boss prop sprite to 12 cups.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug07, push to main, and write the result and the next step onto the card.\n\nThe muffin heist was redone (claude/heist-redo-plan.md, docs/CHANGES.md heist1). Check current main first.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-bug08",
+   "title": "Fix: Amy's House can be entered early in chapter 1",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude fixes this (BUG-08, severity Medium) when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, BUG-08 (claude/ch1-gemini-tracker.md). Severity: Medium."
+    }
+   ],
+   "tag": "gem-bug08",
+   "prompt": {
+    "what": "Works on BUG-08 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (one door lock and one clipped NPC)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug08 in data/board.json, history included. Your first push is the commit board: start c-gem-bug08.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-08. What the tester saw: Severity Medium. Where: `Amy's House` (`GREGORI`) Premature Entry Glitch. During the Ch. 1 walk back from `grands` to `The Square`, `GREGORI` is enterable: stepping inside fires a `\"Deedee left the party.\"` banner overlapping Tom's head above an empty `Justin` dialogue box, while an orange-dress NPC stands clipped on top of the right half-wall.\n\nThe tester suggested (a suggestion, not an order): Lock `GREGORI` door during Ch. 1 (or provide a clean locked-door bark) so Ch. 1 never triggers broken `Justin` dialogue or premature party-leave state bugs.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug08, push to main, and write the result and the next step onto the card.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-bug09",
+   "title": "Fix: sprite and wall clipping glitches in chapter 1 maps",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude fixes this (BUG-09, severity Medium) when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, BUG-09 (claude/ch1-gemini-tracker.md). Severity: Medium."
+    }
+   ],
+   "tag": "gem-bug09",
+   "prompt": {
+    "what": "Works on BUG-09 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (several known glitches in a few maps)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug09 in data/board.json, history included. Your first push is the commit board: start c-gem-bug09.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-09. What the tester saw: Severity Medium. Where: Sprite Glitches & Walkmesh / Sign Clipping (`town`, `row`, `hollow`, `taxi`). (1) The Big One idle sprite: Flat grey-and-white horizontal oval plate floats across its hat in idle frames; Tom's failed controller shows a red `X` overlay. (2) Grump Hollow arch: Tan puff sprites overlap the first Mudling's face, and 7 tan puff icons stay floating atop the right `THE SQUARE SHOPS` post after battle. (3) NPC roof/wall clipping: Child NPCs walk onto the walls/roofs of `AUNT ELLIE` (`row`) and `SNAIL MAIL` (`town`), Boppy overlaps the stair railing in `grands`, Sal's cap clips at the top edge of `taxi`, and NPCs clip behind `CATTAIL PIER`.\n\nThe tester suggested (a suggestion, not an order): Clean the stray oval layer off `bigone` idle frames, clear Mudling prop particles after battle, and tighten NPC walkmeshes and building roof collision masks on `town`, `row`, `grands`, and `taxi`.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug09, push to main, and write the result and the next step onto the card.\n\nWork in the order listed in the report. Look at screenshots of each place before and after.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-bug10",
+   "title": "Fix: cut-off text and stray bars on battle and map screens",
+   "theme": "Game Shell",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude fixes this (BUG-10, severity Medium) when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, BUG-10 (claude/ch1-gemini-tracker.md). Severity: Medium."
+    }
+   ],
+   "tag": "gem-bug10",
+   "prompt": {
+    "what": "Works on BUG-10 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (several layout fixes with known places)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug10 in data/board.json, history included. Your first push is the commit board: start c-gem-bug10.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-10. What the tester saw: Severity Medium. Where: Battle & Overworld HUD Overlaps / Truncation. (1) `INSPECT` box clips off at the bottom border (`\"...Weak to ??? (Flashcard\"`, `\"...Rhubarb Crisp,\"`) with no scroll. (2) Action buttons truncate (`\"Moon & ...\"`, `\"Disconnec\"`). (3) `TOMBO! DOUBLE-DECKER AIRPLANE` banner collides with `\"DIAMOND\"` / `\"MILE +1\"` while Tom+Rose overlap Mudlings A & B. (4) Open `[!]` quest panel collides with `FAST ))` / `SKIP ))\n\nThe tester suggested (a suggestion, not an order): `; location toasts cover character faces; `HOLD · SLIDE` stays faintly visible during cutscenes and on `CHAPTER 1 COMPLETE`; a stray vertical slider floats above `SCHOOL` in `The Square`; stray brown/striped bars appear under `GRUMP HOLLOW` and `CATTAIL PIER` signs.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug10, push to main, and write the result and the next step onto the card.\n\nNote: card c-idea-removeall may have removed toasts. Check docs/CHANGES.md first. Check portrait and landscape.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-bug11",
+   "title": "Fix: Boppy reacts to the Mudling he should miss",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude fixes this (BUG-11, severity Medium) when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, BUG-11 (claude/ch1-gemini-tracker.md). Severity: Medium."
+    }
+   ],
+   "tag": "gem-bug11",
+   "prompt": {
+    "what": "Works on BUG-11 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "low (one sprite pose in one scene)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug11 in data/board.json, history included. Your first push is the commit board: start c-gem-bug11.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-11. What the tester saw: Severity Medium. Where: `grands` Mudling Intrusion Staging. When the Mudling barges into `grands`, Boppy's sprite raises both hands in shock watching it, contradicting his oblivious punchline moments later (`\"...because the hat kept getting taller. Where'd the muffins go?\"`).\n\nThe tester suggested (a suggestion, not an order): Keep Boppy's sprite turned away / gesturing mid-story during the Mudling intrusion so he genuinely misses the monster.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug11, push to main, and write the result and the next step onto the card.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-canon01",
+   "title": "Open chapter 1 inside the taxi office with Sal",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude brings the build to the locked canon for CANON-01 when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, CANON-01 (claude/ch1-gemini-tracker.md). Priority: High."
+    }
+   ],
+   "tag": "gem-canon01",
+   "prompt": {
+    "what": "Works on CANON-01 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Opus 5.5 (row D: story and dialogue Tom judges by taste)",
+    "effort": "medium (one scene of new dialogue plus its staging)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-canon01 in data/board.json, history included. Your first push is the commit board: start c-gem-canon01.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is CANON-01. What the tester saw: Priority High. Where: Ch. 1 Cold Open (`taxi` vs. Exterior). Current build: `Long Island Taxi Co.` (`taxi`) interior with Sal exists in the build at the *end* of Ch. 1, yet Ch. 1 opens outside `TAXI CO.` with Tom monologuing to himself (`\"Oof, I'm finally here! At least the 6 hours went by fast on Delta One! ;)\"`). Locked target: Open Ch. 1 inside `Long Island Taxi Co.` (`taxi`) with Tom chatting naturally with Sal about Delta One making the LA-to-LI flight easy, then step outside into `The Square`.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-canon01, push to main, and write the result and the next step onto the card.\n\nWrite the new Tom and Sal lines to the voice and humor guide in docs/CANON.md and docs/tom-edits.tsv. New lines are written into the game and play through speech synthesis until Tom bakes them; never edit a baked line. If the chapter 1 rebuild (docs/CHANGES.md ch1rebuild1) already changed this, work from main.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-canon02",
+   "title": "Rose jumps out to scare Tom outside the taxi office",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude brings the build to the locked canon for CANON-02 when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, CANON-02 (claude/ch1-gemini-tracker.md). Priority: High."
+    }
+   ],
+   "tag": "gem-canon02",
+   "prompt": {
+    "what": "Works on CANON-02 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Opus 5.5 (row D: story and dialogue Tom judges by taste)",
+    "effort": "medium (one short scene of new dialogue plus staging)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-canon02 in data/board.json, history included. Your first push is the commit board: start c-gem-canon02.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is CANON-02. What the tester saw: Priority High. Where: Outside `TAXI CO.`. Current build: Off-screen `\"TATA!!!\"` bubble -) immediate hug. Locked target: Rose jumps out to scare Tom (`\"BOO!\"`), startling Tom before both Grace and Rose hug Tata.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-canon02, push to main, and write the result and the next step onto the card.\n\nKeep the same rules as the taxi opening card. Rose says BOO; keep lines short, warm and funny.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-canon03",
+   "title": "Rebuild The Big One as a bog turtle; cut the lure and chair",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude brings the build to the locked canon for CANON-03 when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, CANON-03 (claude/ch1-gemini-tracker.md). Priority: Critical."
+    }
+   ],
+   "tag": "gem-canon03",
+   "prompt": {
+    "what": "Works on CANON-03 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Opus 5.5 (row D: story and dialogue Tom judges by taste)",
+    "effort": "high (a boss, its dialogue and Boppy scenes change across several scenes)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-canon03 in data/board.json, history included. Your first push is the commit board: start c-gem-canon03.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is CANON-03. What the tester saw: Priority Critical. Where: `The Square`, `Grump Hollow`, `The Big One` & `grands` Ending. Current build: `The Big One` is a talking giant blue fish with a red-and-white lure in its mouth (`Found: Boppy's Lost Lure` drops on victory!), asking about Boppy (`\"The man in the folding chair. Will he be back?\"` / Grace: `\"He's here every single day\"`), `Boppy's fishing spot` sits by the pond, `CATTAIL PIER` is signed on `row`, and Grace/Boppy talk about Boppy spotting `The Big One` for 20 years (which even contradicts `The Big One`'s own line `\"I was small at breakfast. Then a flash.\"`!). Locked target: The Big One is a newly woken snapping-turtle bog monster wearing Deedee's 12-cup muffin tin as a crown, holding `Dragonfly Coin`, with NO fishing lure (`Boppy's Lost Lure` is cut). Boppy fishes off a boat on the Long Island Sound for ocean fish,never in a folding chair at `Grump Hollow` pond or `Cattail Pier`!\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-canon03, push to main, and write the result and the next step onto the card.\n\nLargest canon change in the report. Do the text, flags and scenes. Cut Boppy's Lost Lure and every folding-chair-at-the-pond line, make Boppy fish from a boat on the Sound. The new look of The Big One (snapping turtle, 12-cup muffin tin crown, Dragonfly Coin, no lure) needs new art: do not make pictures yourself; create one Tom card that sends Tom to the Art Library with the entries, and keep the old art working until he approves. Add the canon decision as one dated line in claude/canon-addendum.md in the Project and the repo copy.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-canon04",
+   "title": "Remove 'camera' and the chair from the flashbulb scene",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude brings the build to the locked canon for CANON-04 when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, CANON-04 (claude/ch1-gemini-tracker.md). Priority: Critical."
+    }
+   ],
+   "tag": "gem-canon04",
+   "prompt": {
+    "what": "Works on CANON-04 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Opus 5.5 (row D: story and dialogue Tom judges by taste)",
+    "effort": "medium (one scene rewritten to a clear target)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-canon04 in data/board.json, history included. Your first push is the commit board: start c-gem-canon04.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is CANON-04. What the tester saw: Priority Critical. Where: `Grump Hollow` Flashbulb Cutscene. Current build: Deedee immediately says: `\"A flashbulb, from an old camera. It's burnt. Somebody set it off right here and left it by your grandfather's chair.\"` Locked target: Do NOT reveal `\"camera\"` in Ch. 1! (Even in Ch. 9 nobody says `\"camera\"` yet; Julian's camera is first spotted in Ch. 10.) Have them find Burnt Bulb #1 with iridescent violet-black star-glass flecks inside (seeding Ch. 2's purple smog & the Meteor Entity) without deducing an old camera yet, and remove the `\"grandfather's chair\"` pond reference.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-canon04, push to main, and write the result and the next step onto the card.\n\nBurnt Bulb #1 has iridescent violet-black star-glass flecks inside and nobody says camera in chapter 1 (Julian's camera first appears in chapter 10; read the story docs before keeping or changing any later reference).\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-canon05",
+   "title": "Fix Grace's canon: squeeze warning, pen not pencil",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude brings the build to the locked canon for CANON-05 when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, CANON-05 (claude/ch1-gemini-tracker.md). Priority: Critical."
+    }
+   ],
+   "tag": "gem-canon05",
+   "prompt": {
+    "what": "Works on CANON-05 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Opus 5.5 (row D: story and dialogue Tom judges by taste)",
+    "effort": "medium (three small line changes across the chapter)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-canon05 in data/board.json, history included. Your first push is the commit board: start c-gem-canon05.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is CANON-05. What the tester saw: Priority Critical. Where: `The Square`, `Grump Hollow` & `Rivituso Row` Ending (Grace). Current build: (1) Grace scolds Tom: `\"Tata, stop. You're getting fingerprints on it.\"` (2) Grace says `\"I'm writing it in pencil\"` and hands Tom `\"my second best one\"` pencil at the end of Ch. 1. (3) Squishy line omits `\"soup\"` and omits her squeeze warning. Locked target: (1) Grace does NOT care about fingerprints/cleanliness,she only warns Tom not to squeeze her Sparkling Diamond Gold Soup Dumpling Squishy too tightly (`\"do NOT squeeze too hard\"`). (2) Grace keeps her master clue chart strictly in un-erasable pen (never pencil!).\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-canon05, push to main, and write the result and the next step onto the card.\n\nAlso see the Keeper note (CANON-10) in the tracker: do not touch the lines it says to keep. Docs/CANON.md covers Grace's voice.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-canon06",
+   "title": "Tom walks solo to the taxi; no Rose carry in Grump Hollow",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude brings the build to the locked canon for CANON-06 when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, CANON-06 (claude/ch1-gemini-tracker.md). Priority: High."
+    }
+   ],
+   "tag": "gem-canon06",
+   "prompt": {
+    "what": "Works on CANON-06 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix, the cause is not written yet)",
+    "effort": "medium (scene staging across Grump Hollow and the ending walk)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-canon06 in data/board.json, history included. Your first push is the commit board: start c-gem-canon06.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is CANON-06. What the tester saw: Priority High. Where: `Grump Hollow` & Ch. 1 Ending Walk (Rose & Solo Walk). Current build: Tom carries Rose on his shoulders throughout `Grump Hollow` battles and again around `The Square` at sunset (`\"One more ride, Tata! To the cab! Go the LONG way!\"`). Locked target: Tom lifts Rose in `The Square` for the initial walk to `grands`, sets her down at `grands`, never carries her in `Grump Hollow`, hugs the girls goodbye at `grands`, and walks solo back to Sal's (`Long Island Taxi Co.`) when departing for LA.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-canon06, push to main, and write the result and the next step onto the card.\n\nProject canon: Rose rides Tom's shoulders only for Press Start, DEFEND and the team moves that need her up there. The report says never in Grump Hollow and not on the final solo walk to Sal. Follow the report for chapter 1.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-canon07",
+   "title": "Restore the missing grands clues: marks, washer, Gas-X",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude brings the build to the locked canon for CANON-07 when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, CANON-07 (claude/ch1-gemini-tracker.md). Priority: High."
+    }
+   ],
+   "tag": "gem-canon07",
+   "prompt": {
+    "what": "Works on CANON-07 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Opus 5.5 (row D: story and dialogue Tom judges by taste)",
+    "effort": "medium (six small additions to two scenes)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-canon07 in data/board.json, history included. Your first push is the commit board: start c-gem-canon07.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is CANON-07. What the tester saw: Priority High. Where: `grands` Pre-Heist & Post-Boss Scenes. Current build: Pre-heist `grands` omits Grace's height marks, Boppy's bent washer, Boppy's `Gas-X` stomach reason for staying behind, and Boppy recognizing the `Grump Hollow` bog smell. Post-boss `grands` omits Deedee's burnt-bulb utility drawer and Boppy's boat promise. Locked target: Restore: (1) Grace's two doorframe height marks; (2) Boppy's cheap modern washer bending in his fingers; (3) one clean `Gas-X` check explaining why Boppy rests at home; (4) Boppy recognizing the `Grump Hollow` bog smell behind `The Square`; and post-boss (5) Deedee starting her drawer of burnt bulbs + (6) Boppy promising to take Tom and the girls out on his Sound boat next visit.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-canon07, push to main, and write the result and the next step onto the card.\n\nThe heist scenes were redone (claude/heist-redo-plan.md). Check which of the six are already in. Keep Boppy a man who complains of aches; the Gas-X line must be one clean check, not a joke chain.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-canon08",
+   "title": "Fix the speaker name on Rose's first orange-block line",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude brings the build to the locked canon for CANON-08 when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, CANON-08 (claude/ch1-gemini-tracker.md). Priority: Medium."
+    }
+   ],
+   "tag": "gem-canon08",
+   "prompt": {
+    "what": "Works on CANON-08 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the change is written down and tests catch mistakes)",
+    "effort": "low (one known edit, change the speaker id to Rose (happy))",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-canon08 in data/board.json, history included. Your first push is the commit board: start c-gem-canon08.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is CANON-08. What the tester saw: Priority Medium. Where: `Grump Hollow` Initial Orange-Cube Line. Current build: On the first-time right-shore cutscene, `\"The grass is Boppy color!\"` displays speaker name `Orange block` (no portrait) instead of `Rose`. Locked target: Change speaker ID from `'Orange block'` to `'Rose'` (`happy` mood) on the first-time cutscene step to match the repeatable inspection.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-canon08, push to main, and write the result and the next step onto the card.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-canon09",
+   "title": "Change the Cookies caption to muffins; settle Amy's check-in",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude brings the build to the locked canon for CANON-09 when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, CANON-09 (claude/ch1-gemini-tracker.md). Priority: Low."
+    }
+   ],
+   "tag": "gem-canon09",
+   "prompt": {
+    "what": "Works on CANON-09 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the change is written down and tests catch mistakes)",
+    "effort": "low (one caption edit; keep Amy at the window)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-canon09 in data/board.json, history included. Your first push is the commit board: start c-gem-canon09.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is CANON-09. What the tester saw: Priority Low. Where: `Rivituso Row` Caption & `Amy's House`. Current build: `Rivituso Row` toast says `\"Cookies at Deedee's\"` (instead of muffins), and Amy speaks from the `GREGORI` attic window rather than a brief phone/text cameo (`\"Brother\"`). Locked target: Update `\"Cookies at Deedee's\"` to reference muffins/baking, and confirm whether Amy's Ch. 1 check-in stays window dialogue or switches to phone text.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-canon09, push to main, and write the result and the next step onto the card.\n\nDecision made by Claude, not asked: keep Amy's chapter 1 check-in as the existing window dialogue unless the current main already switched it. Say which in the card history.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-polish01",
+   "title": "Remove the ;) from the taxi opening line",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude makes this polish fix (POLISH-01) when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, POLISH-01 (claude/ch1-gemini-tracker.md). "
+    }
+   ],
+   "tag": "gem-polish01",
+   "prompt": {
+    "what": "Works on POLISH-01 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the change is written down and tests catch mistakes)",
+    "effort": "low (one known edit)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-polish01 in data/board.json, history included. Your first push is the commit board: start c-gem-polish01.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is POLISH-01. What the tester saw: Where: Taxi Co. Exterior (Line 1). Spoken dialogue box contains a literal text emoticon: `\"...on Delta One! ;)\"`\n\nThe tester suggested (a suggestion, not an order): Remove `;)` from spoken dialogue boxes.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-polish01, push to main, and write the result and the next step onto the card.\n\nIf CANON-01 (card gem-canon01) rewrites this line first, retire this card. A spoken line that changes loses its baked voice clip, so say that it needs a re-bake and add nothing unused (CLAUDE.md No unused voice).\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-polish02",
+   "title": "Change centre stage to center stage in Rose's battle text",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude makes this polish fix (POLISH-02) when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, POLISH-02 (claude/ch1-gemini-tracker.md). "
+    }
+   ],
+   "tag": "gem-polish02",
+   "prompt": {
+    "what": "Works on POLISH-02 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the change is written down and tests catch mistakes)",
+    "effort": "low (one known edit)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-polish02 in data/board.json, history included. Your first push is the commit board: start c-gem-polish02.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is POLISH-02. What the tester saw: Where: Battle Text (`Rose` , `Raspberry`). Uses British spelling `\"centre stage\"`: `\"Rose walks to centre stage and takes an extravagantly serious breath.\"`\n\nThe tester suggested (a suggestion, not an order): Standardize to American English `\"center stage\"`.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-polish02, push to main, and write the result and the next step onto the card.\n\nGrep every file for centre. A spoken line that changes loses its baked clip, so say whether it needs a re-bake.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-polish03",
+   "title": "Give Boppy a kitchen portrait without fishing gear",
+   "theme": "Characters",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude makes this polish fix (POLISH-03) when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, POLISH-03 (claude/ch1-gemini-tracker.md). "
+    }
+   ],
+   "tag": "gem-polish03",
+   "prompt": {
+    "what": "Works on POLISH-03 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Opus 5.5 (row D: story and dialogue Tom judges by taste)",
+    "effort": "medium (a picture prompt for the Art Library, judged by taste)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-polish03 in data/board.json, history included. Your first push is the commit board: start c-gem-polish03.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is POLISH-03. What the tester saw: Where: `grands` (Boppy Portraits). Boppy's indoor kitchen portrait has a fishing rod and creel strapped to his back at 6 AM in his kitchen.\n\nThe tester suggested (a suggestion, not an order): Use a casual indoor portrait for Boppy without fishing gear strapped to his back.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-polish03, push to main, and write the result and the next step onto the card.\n\nImages are made only in the Art Library (CLAUDE.md). Follow docs/CHARACTER_PIPELINE.md and the dialogue-face rule: dialogue faces come from the emotion sheet or the walking sheet, never a hero painting. Find where the portrait with the rod comes from, then either add an Art Library entry with a self-contained prompt and a Tom card to generate and approve it, or fix the crop. Do not run the generator yourself.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-polish04",
+   "title": "Fix Grace's muffin-heist line so it names the muffins",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude makes this polish fix (POLISH-04) when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, POLISH-04 (claude/ch1-gemini-tracker.md). "
+    }
+   ],
+   "tag": "gem-polish04",
+   "prompt": {
+    "what": "Works on POLISH-04 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Opus 5.5 (row D: story and dialogue Tom judges by taste)",
+    "effort": "low (one line is given in the report)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-polish04 in data/board.json, history included. Your first push is the commit board: start c-gem-polish04.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is POLISH-04. What the tester saw: Where: `grands` (Grace Heist Line). `\"It's mine! Tata, get UP, it's getting away!\"` , `\"It's mine!\"` sounds like her squishy rather than the muffins.\n\nThe tester suggested (a suggestion, not an order): Clarify to `\"Hey, those are OUR muffins! Tata, get UP, it's getting away!\"`.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-polish04, push to main, and write the result and the next step onto the card.\n\nThe heist was redone (claude/heist-redo-plan.md, docs/CHANGES.md heist1). Check current main first; the line may already be different. A changed spoken line loses its baked clip: say so.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-polish05",
+   "title": "Fix Deedee's moods right after the muffin theft",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude makes this polish fix (POLISH-05) when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, POLISH-05 (claude/ch1-gemini-tracker.md). "
+    }
+   ],
+   "tag": "gem-polish05",
+   "prompt": {
+    "what": "Works on POLISH-05 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Opus 5.5 (row D: story and dialogue Tom judges by taste)",
+    "effort": "medium (picking moods line by line for one scene)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-polish05 in data/board.json, history included. Your first push is the commit board: start c-gem-polish05.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is POLISH-05. What the tester saw: Where: `grands` (Deedee Post-Heist Moods). Right after glaring `angry` (`\"That thing took my good twelve-cup pan!\"`), Deedee switches to a serene warm smile while explaining the theft and barking orders.\n\nThe tester suggested (a suggestion, not an order): Use `tell` / `point` or `unimpressed` while rallying the room, saving `loving` for telling `hubby` to rest.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-polish05, push to main, and write the result and the next step onto the card.\n\nThe heist was redone. Check current main first.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-polish06",
+   "title": "Apply your decision on Tom's boss line",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "wait",
+   "next": "Waits for your choice on the card Decide: Tom's line before the boss.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, POLISH-06 (flagged there for a taste check). Waits on Tom's decision card."
+    }
+   ],
+   "tag": "gem-polish06",
+   "prompt": {
+    "what": "Works on POLISH-06 from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Opus 5.5 (row D: story and dialogue Tom judges by taste)",
+    "effort": "low (one line, decided by Tom on the board)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-polish06 in data/board.json, history included. Your first push is the commit board: start c-gem-polish06.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is POLISH-06. What the tester saw: Where: `Grump Hollow` (`Tom` Pre-Boss Line). `\"Mom. That's a boss. You don't just walk up to a boss.\"`\n\nThe tester suggested (a suggestion, not an order): Flagged for Showrunner taste check: fourth-wall `\"boss\"` meta-gag vs. grounded sitcom phrasing (plus `Mom` vs. `Deedee` in front of the girls).\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-polish06, push to main, and write the result and the next step onto the card.\n\nYou have my full permission to access the repo."
+   },
+   "waiting_on": "tom"
+  },
+  {
+   "id": "c-gem-canon10",
+   "title": "Keep: TNB's smog text and the 51 years line",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "next": "Keeper, nothing to fix. When revising the ending scenes, keep TNB's smog text (lowercase, no exclamation marks, babe, one idea) and the fifty-one years marriage count; use Cozy Rosie only in direct affectionate address. Source: CANON-10 in claude/ch1-gemini-tracker.md.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "done": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "tag": "gem-canon10",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, CANON-10. The tester marked this Keeper (positive): kept here as a reminder for the cards on the ending scenes (CANON-05 and CANON-07), closed because there is nothing to fix."
+    }
+   ]
+  },
+  {
+   "id": "c-gem-pillar-hp",
+   "title": "Chapter 1 fights: HP only, no Warmth bar",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude checks which battle-system stage covers this item and records it when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, the \"Win Condition & Enemy Bars\" row of the battle table (1.2) (claude/ch1-gemini-tracker.md). "
+    }
+   ],
+   "tag": "gem-pillar-hp",
+   "prompt": {
+    "what": "Works on the \"Win Condition & Enemy Bars\" row of the battle table (1.2) from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the build plan is read against the report, nothing is built)",
+    "effort": "medium (reading the build plan against the report)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-pillar-hp in data/board.json, history included. Your first push is the commit board: start c-gem-pillar-hp.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is the \"Win Condition & Enemy Bars\" row of the battle table (1.2). What the tester saw: Observed in the live build: Dual `HP` + pink `WARMTH` bar (`0/90` on Mudling, `0/350` on The Big One) with `◀ WARMTH` menu command (`\"make it laugh\"`, `\"Cheer it up with RASPBERRY, Peekaboo, Rhubarb Crisp, MOON & BACK\"`). Locked target: Pure v10 HP depletion only. Zero `Warmth` bars, zero `likes` lists, zero non-violent praise/kindness buttons (empathy beats play in post-0-HP cutscenes).\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-pillar-hp, push to main, and write the result and the next step onto the card.\n\nThe tester compared the build to Battle Spec v10; the current rules are v11 (docs/BATTLE3.md, claude/battle-build.md). Where they differ, v11 and the build plan win. Chapter 1 still runs the old B2 engine; the new engine (Battle 3) is built stage by stage and is not switched on for the story yet. Do NOT build the new engine here. Find out which stage of claude/battle-build.md switches chapter 1 over for this item. If a stage already covers it, add Tom's report to that stage's card and retire this card with a history line naming that card. If none covers it, write what is missing into claude/battle-build.md in the repo and in the Project, and say so on the card. Battle animations are out of scope (CLAUDE.md).\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-pillar-rhubarb",
+   "title": "Purge Rhubarb Crisp from the game everywhere",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude removes every Rhubarb Crisp mention when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, the \"Cut-Lore Leak in Tooltips\" row of the battle table (1.2) (claude/ch1-gemini-tracker.md). "
+    }
+   ],
+   "tag": "gem-pillar-rhubarb",
+   "prompt": {
+    "what": "Works on the \"Cut-Lore Leak in Tooltips\" row of the battle table (1.2) from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the change is written down and tests catch mistakes)",
+    "effort": "medium (a grep and purge with a clear target and an audit script)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-pillar-rhubarb in data/board.json, history included. Your first push is the commit board: start c-gem-pillar-rhubarb.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is the \"Cut-Lore Leak in Tooltips\" row of the battle table (1.2). What the tester saw: Observed in the live build: `Inspect` on `Mudling`, `Log Lump`, and `The Big One` explicitly lists `Rhubarb Crisp`! Locked target: Purge `Rhubarb Crisp` everywhere (Deedee's signature bake is warm apple muffins).\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-pillar-rhubarb, push to main, and write the result and the next step onto the card.\n\nRhubarb Crisp is cut lore: Deedee's signature bake is warm apple muffins. Grep the whole repo (data, engine, docs, scenes, inspect text, voice index) for Rhubarb, replace or delete each use, purge anything it leaves behind, and run python3 tools/clip-audit/unused_voice.py (CLAUDE.md No unused voice, Purge replaced files). Do not hand-edit baked voice data: if a baked clip says it, report it on the card. Legacy battle files (engine/battle2-*.js) may be removed by the new engine later; fix them anyway if they still ship.\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-pillar-pep",
+   "title": "Chapter 1 fights: Pep (starts at 4) replaces VP",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude checks which battle-system stage covers this item and records it when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, the \"Action Economy\" row of the battle table (1.2) (claude/ch1-gemini-tracker.md). "
+    }
+   ],
+   "tag": "gem-pillar-pep",
+   "prompt": {
+    "what": "Works on the \"Action Economy\" row of the battle table (1.2) from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the build plan is read against the report, nothing is built)",
+    "effort": "medium (reading the build plan against the report)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-pillar-pep in data/board.json, history included. Your first push is the commit board: start c-gem-pillar-pep.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is the \"Action Economy\" row of the battle table (1.2). What the tester saw: Observed in the live build: 10-segment `VP` meter starting at `5/10` (`+1 VP` on Basic `ATTACK`). Locked target: 0–10 `Pep` starting at `4 Pep` (`+2 Pep` on 0-cost Basic Action; +3/round non-Basic refund cap).\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-pillar-pep, push to main, and write the result and the next step onto the card.\n\nThe tester compared the build to Battle Spec v10; the current rules are v11 (docs/BATTLE3.md, claude/battle-build.md). Where they differ, v11 and the build plan win. Chapter 1 still runs the old B2 engine; the new engine (Battle 3) is built stage by stage and is not switched on for the story yet. Do NOT build the new engine here. Find out which stage of claude/battle-build.md switches chapter 1 over for this item. If a stage already covers it, add Tom's report to that stage's card and retire this card with a history line naming that card. If none covers it, write what is missing into claude/battle-build.md in the repo and in the Project, and say so on the card. Battle animations are out of scope (CLAUDE.md).\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-pillar-flavors",
+   "title": "Chapter 1 fights: Flavors, Primes, Detonations, Composure",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude checks which battle-system stage covers this item and records it when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, the \"Elements, Primes & Break\" row of the battle table (1.2) (claude/ch1-gemini-tracker.md). "
+    }
+   ],
+   "tag": "gem-pillar-flavors",
+   "prompt": {
+    "what": "Works on the \"Elements, Primes & Break\" row of the battle table (1.2) from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the build plan is read against the report, nothing is built)",
+    "effort": "medium (reading the build plan against the report)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-pillar-flavors in data/board.json, history included. Your first push is the commit board: start c-gem-pillar-flavors.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is the \"Elements, Primes & Break\" row of the battle table (1.2). What the tester saw: Observed in the live build: Legacy `Sparkle` / `Chatter` 2-hit guard break (`STAGGER STUN`), `GOOFED` turn-loss. Locked target: 5 Flavors (`Clobber`, `Sizzle`, `Drench`, `Razzle`, `Racket` + `Support`), 3 Primes (`Toasty`, `Drenched`, `Dazzled`), 6 Detonations, and 4–8 Composure pips (`0 pips = Flustered`).\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-pillar-flavors, push to main, and write the result and the next step onto the card.\n\nThe tester compared the build to Battle Spec v10; the current rules are v11 (docs/BATTLE3.md, claude/battle-build.md). Where they differ, v11 and the build plan win. Chapter 1 still runs the old B2 engine; the new engine (Battle 3) is built stage by stage and is not switched on for the story yet. Do NOT build the new engine here. Find out which stage of claude/battle-build.md switches chapter 1 over for this item. If a stage already covers it, add Tom's report to that stage's card and retire this card with a history line naming that card. If none covers it, write what is missing into claude/battle-build.md in the repo and in the Project, and say so on the card. Battle animations are out of scope (CLAUDE.md).\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-pillar-ruckus",
+   "title": "Chapter 1 fights: Family Ruckus replaces the HEART meter",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude checks which battle-system stage covers this item and records it when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, the \"Party Meter & Combos\" row of the battle table (1.2) (claude/ch1-gemini-tracker.md). "
+    }
+   ],
+   "tag": "gem-pillar-ruckus",
+   "prompt": {
+    "what": "Works on the \"Party Meter & Combos\" row of the battle table (1.2) from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the build plan is read against the report, nothing is built)",
+    "effort": "medium (reading the build plan against the report)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-pillar-ruckus in data/board.json, history included. Your first push is the commit board: start c-gem-pillar-ruckus.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is the \"Party Meter & Combos\" row of the battle table (1.2). What the tester saw: Observed in the live build: `HEART` meter (`0–100%`, 4 pink hearts) firing `25% HEART` pair `TOMBO!` moves (`Squishy Delivery`, `Double-Decker Airplane`). Locked target: `Family Ruckus` (0–100%) firing `50% Double Team` and `100% Full Family Ruckus` for any adjacent timeline ally pair.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-pillar-ruckus, push to main, and write the result and the next step onto the card.\n\nThe tester compared the build to Battle Spec v10; the current rules are v11 (docs/BATTLE3.md, claude/battle-build.md). Where they differ, v11 and the build plan win. Chapter 1 still runs the old B2 engine; the new engine (Battle 3) is built stage by stage and is not switched on for the story yet. Do NOT build the new engine here. Find out which stage of claude/battle-build.md switches chapter 1 over for this item. If a stage already covers it, add Tom's report to that stage's card and retire this card with a history line naming that card. If none covers it, write what is missing into claude/battle-build.md in the repo and in the Project, and say so on the card. Battle animations are out of scope (CLAUDE.md).\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-pillar-levels",
+   "title": "Chapter 1 levels: Character Level plus Vibe Mastery",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude checks which battle-system stage covers this item and records it when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, the \"Level-Up & Vibe Progression\" row of the battle table (1.2) (claude/ch1-gemini-tracker.md). "
+    }
+   ],
+   "tag": "gem-pillar-levels",
+   "prompt": {
+    "what": "Works on the \"Level-Up & Vibe Progression\" row of the battle table (1.2) from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the build plan is read against the report, nothing is built)",
+    "effort": "medium (reading the build plan against the report)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-pillar-levels in data/board.json, history included. Your first push is the commit board: start c-gem-pillar-levels.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is the \"Level-Up & Vibe Progression\" row of the battle table (1.2). What the tester saw: Observed in the live build: Victory awards `+XP` (`Lv 2`) + `+1 Stamp Point` + `Pocket Coins`. Locked target: Dual-track Character Level (`Lv 1–50` via XP) + Vibe Mastery (`Rank 1–5 ★` via `VP`, ~90 Main VP / 45 Pocket VP per chapter) across 3 equippable Vibes per character.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-pillar-levels, push to main, and write the result and the next step onto the card.\n\nThe tester compared the build to Battle Spec v10; the current rules are v11 (docs/BATTLE3.md, claude/battle-build.md). Where they differ, v11 and the build plan win. Chapter 1 still runs the old B2 engine; the new engine (Battle 3) is built stage by stage and is not switched on for the story yet. Do NOT build the new engine here. Find out which stage of claude/battle-build.md switches chapter 1 over for this item. If a stage already covers it, add Tom's report to that stage's card and retire this card with a history line naming that card. If none covers it, write what is missing into claude/battle-build.md in the repo and in the Project, and say so on the card. Battle animations are out of scope (CLAUDE.md).\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-gem-pillar-kits",
+   "title": "Chapter 1 kits: full Signature Loadouts, Rose standing",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "up",
+   "next": "Claude checks which battle-system stage covers this item and records it when its prompt is started.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made from Gemini's chapter 1 test report, the \"Character Kits\" row of the battle table (1.2) (claude/ch1-gemini-tracker.md). "
+    }
+   ],
+   "tag": "gem-pillar-kits",
+   "prompt": {
+    "what": "Works on the \"Character Kits\" row of the battle table (1.2) from the Gemini chapter 1 report.",
+    "before": [
+     "Nothing to do first. Everything it needs is on the card and in claude/ch1-gemini-tracker.md."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the build plan is read against the report, nothing is built)",
+    "effort": "medium (reading the build plan against the report)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-pillar-kits in data/board.json, history included. Your first push is the commit board: start c-gem-pillar-kits.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is the \"Character Kits\" row of the battle table (1.2). What the tester saw: Observed in the live build: Tom `Disconnected Controller`, Grace `Cartwheel` / `Dance` (`TRENDING X1.2`), Rose `Boop` / `Raspberry` (on Tom's shoulders), Deedee `Dish-Towel Flick` / `Moon & Back` (`TAP!` timed hit). Locked target: Full v10 Signature Loadouts (`Frequent Flier` + `Gamer Geek`, `Squishy Collector` + `Craft Artist`, `Sugar Rush` + `Cozy Rosie`, `Neat Freak` + `Registered Nut`), Front/Back rows, and Rose standing independently in slot 3/4.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-pillar-kits, push to main, and write the result and the next step onto the card.\n\nThe tester compared the build to Battle Spec v10; the current rules are v11 (docs/BATTLE3.md, claude/battle-build.md). Where they differ, v11 and the build plan win. Chapter 1 still runs the old B2 engine; the new engine (Battle 3) is built stage by stage and is not switched on for the story yet. Do NOT build the new engine here. Find out which stage of claude/battle-build.md switches chapter 1 over for this item. If a stage already covers it, add Tom's report to that stage's card and retire this card with a history line naming that card. If none covers it, write what is missing into claude/battle-build.md in the repo and in the Project, and say so on the card. Battle animations are out of scope (CLAUDE.md).\n\nYou have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "t-gem-polish06",
+   "title": "Decide: Tom's line before the boss",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "up",
+   "ask": "decide",
+   "next": "Open ADMIN > BOARD, tap this card and pick one choice for Tom's line before The Big One. Your pick unlocks the card Apply your decision on Tom's boss line.",
+   "blocks": [
+    "c-gem-polish06"
+   ],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
+   },
+   "choices": [
+    "Keep the joke as written, \"Mom\" included (Recommended)",
+    "Grounded: no boss gag, same meaning",
+    "Keep the joke, but say Deedee"
+   ],
+   "leads": [
+    "Nothing changes. Tom keeps the line \"Mom. That's a boss. You don't just walk up to a boss.\" (Tom is her son, and the boss gag is his video-game voice.)",
+    "Claude rewrites it to sitcom phrasing a real person would say (a few options are not needed, Claude picks one) and the clip needs a re-bake.",
+    "Claude changes only the name in front of the girls to Deedee; the boss gag stays; the clip needs a re-bake."
+   ],
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Gemini's report flagged this line for a taste check: `\"Mom. That's a boss. You don't just walk up to a boss.\"` Fourth-wall boss gag versus grounded phrasing, and Mom versus Deedee in front of the girls."
+    }
+   ]
   }
  ],
  "sessions": [
