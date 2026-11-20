@@ -1933,6 +1933,37 @@
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19"
+  },
+  {
+   "id": "c-skipchain1",
+   "title": "Chapter 1 scene 1: SKIP skips the whole scene, not just the opening half (skipchain1)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "prog",
+   "next": "Make a SKIP pressed in the opening carry through Grace's list (ch1Goal) so scene 1 is skipped as one scene, and add a test.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "\"the game is still incorrectly seeing scne 1 as two separate scenes - it should be one secne. when i hit skip it should skip until the whole thing is done\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "New card. Tom: \"the game is still incorrectly seeing scne 1 as two separate scenes ... when i hit skip it should skip until the whole thing is done\" (the opening and ch1Goal are two scripts; SKIP reset between them)."
+    }
+   ],
+   "tag": "skipchain1",
+   "prompt": {
+    "what": "Carries SKIP from the chapter 1 opening through Grace's list so scene 1 skips as one scene.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the cause had to be found)",
+    "effort": "medium (a small engine fix with a test)",
+    "text": "Read claude/handoff-rules.md and docs/CHANGES.md skipchain1, then finish the card c-skipchain1 if it is not shipped. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [
