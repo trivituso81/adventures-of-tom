@@ -13182,7 +13182,7 @@
    "id": "c-idea-checkart",
    "tag": "idea-checkart",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Tools",
    "title": "Check the art library for all items in \"to do\" \"in game but",
    "next": "Your idea: check the art library for all items in 'to do' 'in game but not approved' 'Ready' 'blocked' and 'rejected' to determine if they are sitll needed, or if the art is already in the game but the art galle... Copy the prompt into a new conversation in the Project on Sonnet 5.5, effort high.",
@@ -13198,7 +13198,7 @@
    },
    "chat": {
     "url": "",
-    "opening": "New card by Tom on the board"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -13210,6 +13210,11 @@
      "d": "2026-11-20",
      "t": "Sized by the board: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort high (something new designed and built in one session).",
      "at": "2026-11-20T17:23:36.739Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation.",
+     "at": "2026-11-20T17:23:42.201Z"
     }
    ],
    "prompt": {
