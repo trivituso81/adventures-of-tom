@@ -11866,7 +11866,7 @@
    "lane": "tom",
    "col": "up",
    "ask": "decide",
-   "next": "The tester (POLISH-03) says Boppy's kitchen face shows a fishing rod and creel at 6 AM. I checked: the rod and creel are painted into every approved Boppy picture (hero painting, walking sheet, the sprite you walk around with, all 8 feelings and the talking poses), so his body in the kitchen carries them too. A tighter crop cannot remove them. Tap one answer. Your answer starts card c-gem-polish03 (Give Boppy a kitchen portrait without fishing gear).",
+   "next": "The tester (POLISH-03) says Boppy's kitchen face shows a fishing rod and creel at 6 AM. I checked: the rod and creel are painted into every approved Boppy picture (hero painting, walking sheet, the sprite you walk around with, all 8 feelings and the talking poses), so his body in the kitchen carries them too. A tighter crop cannot remove them. Tap one answer. Then copy the prompt of card c-gem-polish03 (Give Boppy a kitchen portrait without fishing gear) into a new conversation.",
    "choices": [
     "Keep the rod and creel: they are his look (Recommended)",
     "Give Boppy an indoor outfit without the rod and creel"
