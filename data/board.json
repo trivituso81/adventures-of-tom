@@ -8669,6 +8669,10 @@
     {
      "d": "2026-11-20",
      "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Session started on the rescue run; building the two icon sets."
     }
    ],
    "prompt": {
