@@ -1,3 +1,10 @@
+## gem-pillar-rhubarb (2026-11-20): Rhubarb Crisp is gone from the whole game; Deedee's dish is apple muffins
+
+Card c-gem-pillar-rhubarb. Tom chose "Cut Rhubarb Crisp from the whole story (muffins instead)" on t-rhubarb-scope (Gemini chapter 1 report: Inspect on Mudling, Log Lump and The Big One listed Rhubarb Crisp).
+- Every shown use of "rhubarb crisp" and "Rhubarb Pie" now says apple muffins: Deedee's move names, descriptions and battle messages (`engine/deedee-moves.js`, `battle2-kind.js`, `battle2-moves.js`, `battle2.js`, `feel.js` Rose Mode), `data/abilities.js`, `battle2-data.js`, `party.js`, `progress.js`, `lines.js`, NPC and scene dialogue (`maps-le.js`, `scenes.js`, `scenes-ch14.js`, `scenes-ch15.js`, `scenes-ch20.js`, `ch15-battle.js`, `ch20-battle.js`), the mood, reaction and talk-type tables, and the docs indexes and tsv files. Internal keys (`crisp`, `rx_rhubarb`) are unchanged, so saves and move wiring are untouched.
+- Kept on purpose (the plant, not the dish): the Tombo Pick the Rhubarb and its painted props, the Garden Bridge rhubarb door in chapter 20, the skeeter line "smells like rhubarb".
+- Voice: 3 baked battle clips and 7 baked dialogue clips said the old words and were purged (`purge_unused.js`); those lines are now on the bake list with the new words. `unused_voice.py` reports 0 on all checks. Rebuilt `data/script-index.json`, `data/voice-index.json`, `tools/voice-library/battle-scripts.json`.
+- Not changed: painted prop art and art prompts that draw a crisp dish (`data/art-prompts.json`, `tools/art-library/*prompts.js`, `props.json`); frozen `demo/`.
 ## keysecrets4 (2026-11-20): Music Library makes takes on GitHub with the repo secret; the ElevenLabs key box is gone
 
 Card c-keysecrets4, stage 4 of 5 (plan: `claude/keysecrets-plan.md`).

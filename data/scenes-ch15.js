@@ -19,7 +19,7 @@ const CH15_SEATS={amy:[7,7,'down'],tom:[8,7,'down'],grace:[9,7,'down'],rose:[10,
 const ch15Hush=()=>{ const g=worlds.grands; return g&&g.npcs.find(n=>n.name==='HUSH-9'); };
 function ch15AddTable() {
   const g=worlds.grands; if(!g||g.objects.some(o=>o.ch15)) return;
-  object(g,'table',7,8,4,2,'The dinner table','Eight places set. A rhubarb crisp, a jar of Boppy’s peppers, the good plates, and a candle that Deedee says is for atmosphere and Boppy says is a fire hazard.',{ch15:true});
+  object(g,'table',7,8,4,2,'The dinner table','Eight places set. A plate of apple muffins, a jar of Boppy’s peppers, the good plates, and a candle that Deedee says is for atmosphere and Boppy says is a fire hazard.',{ch15:true});
 }
 function ch15RemoveTable() {
   const g=worlds.grands; if(!g) return;
@@ -163,7 +163,7 @@ SCENES.ch15After=()=>[
     {talk:'Boppy',lines:['Why am I scooting?']},
     {talk:'Deedee',lines:['Because you’re the widest.']},
     {talk:'Boppy',lines:['My BACK is the widest.']},
-    {talk:'Deedee',lines:['Rhubarb crisp. Nine minutes. Eat.']},
+    {talk:'Deedee',lines:['Apple muffins. Nine minutes. Eat.']},
     {talk:'HUSH-9',lines:['I do not eat.']},
     {talk:'Deedee',lines:['Everybody eats.']},
     {pose:'HUSH-9',foe:'dinner',end:'hush9final'},

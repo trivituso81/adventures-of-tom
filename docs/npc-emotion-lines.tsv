@@ -101,7 +101,7 @@ chapters	file	line	character	where	mood	text
 5-10	data/maps-le.js	1454	Amy	map amyhouse, when {from:5,flag:ch5-done}	happy	Thirty conferences. Zero tears. Well. One. Mine. In the minivan.
 5-10	data/maps-le.js	1454	Amy	map amyhouse, when {from:5,flag:ch5-done}	loving	Tom. Thank you for coming. You're the good uncle. By a lot.
 1-10	data/maps-le.js	1504	Deedee	map grands, base	loving	My favorite son! And my girls! Come here, come here.
-1-10	data/maps-le.js	1505	Deedee	map grands, base	happy	Rhubarb crisp in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?
+1-10	data/maps-le.js	1505	Deedee	map grands, base	happy	Apple muffins in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?
 1-10	data/maps-le.js	1506	Deedee	map grands, base	loving	Grace, Rose, Deedee loves you to the moon and back. Say it back. Louder.
 1-10	data/maps-le.js	1508	Deedee	map grands, revisit	proud	The tomatoes are coming in. You're going home with forty.
 1-10	data/maps-le.js	1509	Deedee	map grands, revisit	proud	I baked at five this morning. The neighbors have stopped asking why.
@@ -109,7 +109,7 @@ chapters	file	line	character	where	mood	text
 1-10	data/maps-le.js	1511	Deedee	map grands, revisit	loving	To the moon and back, girls. The MOON. And BACK.
 1-10	data/maps-le.js	1512	Deedee	map grands, revisit	unimpressed	Boppy says he's not feeling good. Boppy also won't stop fishing.
 1-10	data/maps-le.js	1513	Deedee	map grands, revisit	happy	Grace, Rose, who wants to help Deedee frost something?
-1-10	data/maps-le.js	1514	Deedee	map grands, revisit	loving	Rhubarb crisp is cooling on the counter. Don't touch it. Okay, one corner.
+1-10	data/maps-le.js	1514	Deedee	map grands, revisit	loving	Apple muffins is cooling on the counter. Don't touch it. Okay, one corner.
 1-10	data/maps-le.js	1515	Deedee	map grands, revisit	unimpressed	I already did my walk. Boppy did one lap around the recliner.
 1-10	data/maps-le.js	1516	Deedee	map grands, revisit	proud	Retired registered nurse. Tom calls me a registered nut. Tom is due for a checkup.
 1-10	data/maps-le.js	1517	Deedee	map grands, revisit	unimpressed	Sunday dinner is at six thirty. Don't make me call twice.
@@ -135,7 +135,7 @@ chapters	file	line	character	where	mood	text
 1-10	data/maps-le.js	1585	Aunt Ellie	map elliehouse, base	unimpressed	Tom. Stand up straight. There. Now you look like someone I'm related to.
 1-10	data/maps-le.js	1586	Aunt Ellie	map elliehouse, base	proud	Yes, Deedee has an aunt. Yes, I'm older. No, you may not ask by how much.
 1-10	data/maps-le.js	1587	Aunt Ellie	map elliehouse, base	unimpressed	I've been to Paris eleven times, darling. Long Island is charming. But one must explore the world.
-1-10	data/maps-le.js	1590	Aunt Ellie	map elliehouse, revisit	happy	Deedee keeps offering me rhubarb crisp. I keep saying yes. That's called manners.
+1-10	data/maps-le.js	1590	Aunt Ellie	map elliehouse, revisit	happy	Deedee keeps offering me apple muffins. I keep saying yes. That's called manners.
 1-10	data/maps-le.js	1591	Aunt Ellie	map elliehouse, revisit	unimpressed	Boppy says his stomach hurts. I told him to stop eating peppers. He looked at me like I insulted his mother.
 1-10	data/maps-le.js	1592	Aunt Ellie	map elliehouse, revisit	happy	Grace, darling, that outfit is wonderful. Rose, darling, that outfit is a choice. A brave one.
 1-10	data/maps-le.js	1593	Aunt Ellie	map elliehouse, revisit	proud	Wisdom is remembering what went wrong and saying so before it happens again.

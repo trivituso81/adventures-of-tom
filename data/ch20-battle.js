@@ -21,7 +21,7 @@ const CH20_BARS=[
   {key:'aging',name:'AGING',floor:.52,lines:['An AGING BARRIER locks round the Leviathan. Every second, one more year.'],
     relay:{name:'FIFTY-ONE YEARS & COUNTING',who:['Deedee','Boppy','Tom'],steps:[
       'RELAY! Boppy plants his recliner in the middle of the floor and sits in it. “Nobody ages on my shift.” The AGING BARRIER ticks, a year at a time.',
-      'Deedee slides a pepper-rhubarb pie out of her apron. It is steaming. It is, somehow, exactly the pie it was in 1974.',
+      'Deedee slides a pepper-apple muffin out of her apron. It is steaming. It is, somehow, exactly the muffin it was in 1974.',
       'Boppy holds the recliner up like a shield. Tom steps in beside him. Deedee holds the pie to the barrier. “Fifty-one years, and still hot.”',
       'The AGING BARRIER melts like butter. Boppy: “Fifty-one years and counting. Don’t tell your mother I said it was good.” Deedee: “I heard that.”']}},
   {key:'exhaustion',name:'EXHAUSTION',floor:.28,lines:['An EXHAUSTION BARRIER locks round the Leviathan and settles over the whole family like a wet blanket.'],
@@ -171,7 +171,7 @@ const CH20_ACT_LINE={
   'grace.dance':'Julian watches Grace dance. He does not look away. One corner of his mouth moves, very slightly.',
   'rose.silly':'Rose blows a raspberry at him. He flinches. Then he makes a very small noise, a kind of cough, and covers his mouth.',
   'amy.pep':'Amy: “It is never too late to start the second half of the race.” He looks up at her as if nobody has said that to him in years.',
-  'deedee.hug':'Deedee hugs him, whole, with the warmth of a sixty-year-old grandmother who feeds everyone. He stiffens. Then he does not. She hands him a slice of rhubarb crisp.',
+  'deedee.hug':'Deedee hugs him, whole, with the warmth of a sixty-year-old grandmother who feeds everyone. He stiffens. Then he does not. She hands him a slice of apple muffins.',
   'boppy.grumble':'Boppy: “Stop feeling sorry for yourself and eat a pepper, pal. My stomach hurts worse than yours.” Julian actually laughs. It comes out rusty.',
   'tnb.wardrobe':'TNB drapes a warm hand-knit cardigan over Julian’s shaking shoulders. “It’s a little big. It fits better when you keep it on.”',
   'nara.puppy':'Nara trots over and drops a soggy tennis ball in his lap. She looks up at him with very human eyes. A single excited drop lands on the glass floor.'};

@@ -1,6 +1,6 @@
 'use strict';
 // engine/deedee-moves.js — Deedee's attacks, built from her life: retired registered nurse (Tom says registered nut),
-// rhubarb crisp, big Sunday dinners, power walks, cleaning, and a glass of wine now and then.
+// apple muffins, big Sunday dinners, power walks, cleaning, and a glass of wine now and then.
 // Same shape as tnb-moves.js: RECRUIT_MOVES.deedee[key] queues steps and registers scenes (RFX.SC), held items (RFX.HELD) and props (PROP2).
 // Also holds her special, MOON & BACK (group hug: +5 HP and +2 MP for everyone).
 RECRUIT_MOVES.deedee={};
@@ -85,7 +85,7 @@ HELD.dmop=(h,u,hx,hy)=>{
   R(mx-17,fy-20,34,7,OUT); R(mx-15,fy-19,30,5,'#3f8fd0');
   for(let k=0;k<12;k++) { const x=mx-18+k*3.4,sw=Math.sin(h.t*30+k)*2; Ln(x,fy-14,x+sw-2,fy+3,4,OUT); Ln(x,fy-14,x+sw-2,fy+2,2,k%2?'#e8eef4':'#c8d4de'); }
 };
-// A glass baking dish of rhubarb crisp, in two oven mitts.
+// A glass baking dish of apple muffins, in two oven mitts.
 const crispDish=(x,y,t,steam=true)=>{
   if(PROPART.draw('deedee/crisp_pan',x,y-4,{w:76})) return;   // painted pan with its own steam
   R(x-34,y-12,68,22,OUT); R(x-32,y-10,64,18,'rgba(220,240,255,.55)');
@@ -216,7 +216,7 @@ SC.dwet=(s,u)=>{
 SC.dbubbles=(s,u)=>{
   for(let k=0;k<(s.n||16);k++) { const a=rr(s,k),b=rr(s,k+40),x=s.x+(a-.5)*(s.sp||140)+Math.sin(s.t*3+k)*8,y=s.y-u*(60+b*90),r=4+b*7; gfx.globalAlpha=(1-u)*.9; gfx.strokeStyle='#ffffff'; gfx.lineWidth=2; gfx.beginPath(); gfx.arc(x,y,r,0,Math.PI*2); gfx.stroke(); E(x-r*.35,y-r*.35,r*.25,r*.25,'#ffffff'); }
 };
-// Rhubarb crisp: the pink splat on the monster, and crumble.
+// Apple muffins: the pink splat on the monster, and crumble.
 SC.dsplat=(s,u)=>{
   gfx.globalAlpha=u>.8?(1-u)/.2:1; const k=ez(cl(u/.12));
   const blob=(x,y,r,c)=>E(x,y,r*k,r*.7*k,c);
@@ -324,9 +324,9 @@ D.mop=E2=>{ const {i,m,fx}=E2;
     800,()=>{ sfx.thud(); battle.shakeEnemy=.7; battle.flashEnemy=.3; scene('splashw',.8,{x:GX,y:262,n:14,sp:130}); scene('ring',.6,{x:GX,y:266,r:110,c:'#bfe6ff'}); part(E2,2,1); bt('SLIPPED',96,36,'#9fd8ff',3,1); },
     1000,E2.result+' She did put the sign out. Technically.',()=>checkEnemy()); };
 
-// Rhubarb Crisp: straight from the oven, still bubbling. Dropped on from above, then a scoop of ice cream on top.
+// Apple Muffins: straight from the oven, still bubbling. Dropped on from above, then a scoop of ice cream on top.
 D.crisp=E2=>{ const {i,m,fx}=E2; const top=()=>(battle.enemyTop||170);
-  enqueue(()=>{ setMessage('Deedee pulls a rhubarb crisp out of the oven. It\'s still bubbling. Her recipe. Nobody gets the recipe.'); hold(i,'dcrisp',1.9,{}); pose(fx,'aim',1.9); say(m.id,'crisp',.3); S.bubbling(1.6); },
+  enqueue(()=>{ setMessage('Deedee pulls a plate of apple muffins out of the oven. It\'s still bubbling. Her recipe. Nobody gets the recipe.'); hold(i,'dcrisp',1.9,{}); pose(fx,'aim',1.9); say(m.id,'crisp',.3); S.bubbling(1.6); },
     1700,()=>{ battle.held=null; pose(fx,'throw',.5); const h=hand(); toss('dcrisp',h.x,h.y,GX,-60,0,.45,40,{spin:false}); sfx.whoosh(); },
     700,()=>{ scene('shadow',.5,{x:GX,y:264,r:50}); toss('dcrisp',GX,-60,GX,top()+10,0,.45,0,{spin:false}); sfx.slideWhistle(); },
     450,()=>{ sfx.splat(); sfx.thud(); battle.shakeEnemy=.6; battle.flashEnemy=.3; scene('dsplat',2.6,{x:GX,y:top()+34}); scene('crumbs',1.0,{x:GX,y:top()+14,n:26,sp:150,c:'#e8b46a'}); scene('dsteam',2.4,{x:GX,y:top()+20,w:90}); part(E2,2,0); bt('HOT HOT HOT',96,30,'#ff6f8f',3,.9); },
@@ -706,7 +706,7 @@ D.corner_piece=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),sp=spotFor(
     :[{t:0,x:'home',y:'home',f:'ab_corner_1',hop:3,hn:6},{t:900,x:sp.x,y:sp.y,f:'ab_corner_2'},{t:1300,f:'ab_corner_3',dx:u=>-ez(u)*8},{t:1800,f:'ab_corner_4',dx:-8},{t:2200,f:'ab_corner_5'},{t:2700,f:'ab_corner_6',hop:8},{t:3000,f:back(sp.x,me),hop:3,hn:6},{t:3900,x:'home',y:'home',f:'idle'}];
   ST.keys(fx,K); const lift=self?1000:1500,end=self?3200:4000,dx=self?me.x-60:Math.max(24,H.x-H.w*.5-14),dy=self?me.mid:H.mid+6;
   ST.play(E2,[
-    [0,()=>{ setMessage(self?'Deedee pulls a whole steaming pan of rhubarb crisp out of the oven. One corner is clearly the best corner.':'Deedee marches a whole steaming pan of rhubarb crisp over to '+t.name+'.'); say(m.id,'corner_piece'); scene('dv_pan',(end-300)/1000,{plan:{angle:self?200:950,lift,regrow:lift+500}}); }],
+    [0,()=>{ setMessage(self?'Deedee pulls a whole steaming pan of apple muffins out of the oven. One corner is clearly the best corner.':'Deedee marches a whole steaming pan of apple muffins over to '+t.name+'.'); say(m.id,'corner_piece'); scene('dv_pan',(end-300)/1000,{plan:{angle:self?200:950,lift,regrow:lift+500}}); }],
     [lift,()=>{ sfx.whoosh(); setMessage('She lifts the golden corner onto a dish.'); const h=hand(); ST.fly((x,y)=>{ RO(x-12,y-10,24,20,'#f0b860'); },h.x+10,h.y-10,dx,dy,.35,40); }],
     ['hf',lift+400],
     [lift+400,()=>{ E2.apply(); sfx.heal(); scene('dv_dish',(end-lift-400)/1000,{x:dx,y:dy}); scene('dv_big',1.2,{x:dx,y:Math.min(dy-60,H.top-50),txt:'CORNER PIECE!',c:GOLD,sc:3}); hopOf(t!==m?t:null); }],
@@ -977,7 +977,7 @@ D.grandma_squeeze=E2=>{ const {m,fx}=E2,t=E2.targets[0]||m,H=ST.unit(t),self=t==
 // Deedee for real. Sunday Roast Spread (A6): she rings the dinner bell, ties on her apron at a stove, lights all four burners,
 // cooks at top speed (spoons, a rolling pin, a pot lid and a colander whirl round her), the kitchen whirlwind sweeps through
 // every enemy, then a long oak table with a white cloth slides in, the family takes their seats at the eight places, the food
-// lands (roast turkey, mashed potatoes, salad, gravy, rhubarb crisp) and everyone raises a hand: heal, cure, crusts and Hot
+// lands (roast turkey, mashed potatoes, salad, gravy, apple muffins) and everyone raises a hand: heal, cure, crusts and Hot
 // Dishes. To the Moon and Back (B6): the sky goes dark and starry under a big full moon, the family comes in for a group hug,
 // a golden heart flies from Deedee up to the moon, loops round it and comes back down as a shower of starlight on every enemy,
 // then the starlight falls on the family (fallen friends get up) and wraps them in patchwork quilts; the monsters go soft
@@ -1126,7 +1126,7 @@ D.sunday_ult=E2=>{ const {m,fx}=E2,list=foesOf(E2),Gp=ST.group(list),party=b2Liv
       scene('d5_big',1.3,{x:Gp.x,y:Gp.top-74,txt:'KITCHEN WHIRLWIND!',c:'#ffb04a',sc:3}); }],
     [3350,()=>{ scene('d5_table',3.0,{plan:P,t0:3350}); sfx.whoosh(); setMessage('A long table slides in. White cloth. Eight places, all set.'); }],
     ...P.dishes.map(([dx,t])=>[t,()=>{ sfx.ding(); }]),
-    [4550,()=>{ scene('d5_big',1.1,{x:Math.max(200,Gp.x+60),y:BAR+50,txt:'DINNER IS SERVED!',c:GOLD,sc:3}); sfx.fanfare?sfx.fanfare():sfx.levelUp(); setMessage('Roast turkey, mashed potatoes, salad, gravy and rhubarb crisp. Everybody sits.'); }],
+    [4550,()=>{ scene('d5_big',1.1,{x:Math.max(200,Gp.x+60),y:BAR+50,txt:'DINNER IS SERVED!',c:GOLD,sc:3}); sfx.fanfare?sfx.fanfare():sfx.levelUp(); setMessage('Roast turkey, mashed potatoes, salad, gravy and apple muffins. Everybody sits.'); }],
     [4850,()=>{ E2.apply(); sfx.heal(); for(const p of b2LiveParty()) { const q=ST.unit(p); scene('d5_glow',1.1,{x:seatX(p)||q.x,y:seatY-q.h*.5,c:GOLD}); } }],
     [5300,()=>{ scene('d5_big',1,{st,txt:'EAT, EAT!',c:CREAM,sc:2}); setMessage('Nobody leaves this table hungry. Nobody.'); }],
     [6500,'end',()=>res(E2)+'There are leftovers for the tray. There are always leftovers.']]); };

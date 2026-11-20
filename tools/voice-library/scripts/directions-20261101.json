@@ -74,9 +74,9 @@
 {
 "voice": "grace",
 "speaker": "Grace",
-"text": "Tata! Deedee made rhubarb crisp for you. It's cooling RIGHT NOW.",
+"text": "Tata! Deedee made apple muffins for you. It's cooling RIGHT NOW.",
 "ctx": "",
-"script": "[excited, bossy] Tah Tah! Deedee made rhubarb crisp for you. [eager, emphatic] It's cooling RIGHT NOW."
+"script": "[excited, bossy] Tah Tah! Deedee made apple muffins for you. [eager, emphatic] It's cooling RIGHT NOW."
 },
 {
 "voice": "rose",
@@ -144,9 +144,9 @@
 {
 "voice": "deedee",
 "speaker": "Deedee",
-"text": "Your bread and my rhubarb crisp. Now THAT is a meal.",
+"text": "Your bread and my apple muffins. Now THAT is a meal.",
 "ctx": "",
-"script": "[delighted, warm] Your bread and my rhubarb crisp. [satisfied, emphatic] Now THAT is a meal."
+"script": "[delighted, warm] Your bread and my apple muffins. [satisfied, emphatic] Now THAT is a meal."
 },
 {
 "voice": "deedee",
@@ -1832,9 +1832,9 @@
 {
 "voice": "deedee",
 "speaker": "Deedee",
-"text": "Sit down, you. I made rhubarb crisp. Everybody sit. And eat SLOWLY.",
+"text": "Sit down, you. I made apple muffins. Everybody sit. And eat SLOWLY.",
 "ctx": "",
-"script": "[bossy, loving] Sit down, you. I made rhubarb crisp. [brisk, firm] Everybody sit. And eat SLOWLY."
+"script": "[bossy, loving] Sit down, you. I made apple muffins. [brisk, firm] Everybody sit. And eat SLOWLY."
 },
 {
 "voice": "boppy",
@@ -2665,9 +2665,9 @@
 {
 "voice": "rose",
 "speaker": "Rose",
-"text": "Rhubarb crisp! Deedee brings the teachers CRISP?",
+"text": "Apple muffins! Deedee brings the teachers CRISP?",
 "ctx": "",
-"script": "[astonished, delighted] Rhubarb crisp! [scandalized, shrill] Deedee brings the teachers CRISP?"
+"script": "[astonished, delighted] Apple muffins! [scandalized, shrill] Deedee brings the teachers CRISP?"
 },
 {
 "voice": "amy",
@@ -10592,9 +10592,9 @@
 {
 "voice": "deedee",
 "speaker": "Deedee",
-"text": "Rhubarb crisp, nine minutes. Rhubarb crisp, nine minutes. Hello, sweetie. Rhubarb crisp, nine minutes.",
+"text": "Apple muffins, nine minutes. Apple muffins, nine minutes. Hello, sweetie. Apple muffins, nine minutes.",
 "ctx": "Scene ch14Deedee",
-"script": "[bright, glassy] Rhubarb crisp, nine minutes. Rhubarb crisp, nine minutes. [warm, vacant] Hello, sweetie. Rhubarb crisp, nine minutes."
+"script": "[bright, glassy] Apple muffins, nine minutes. Apple muffins, nine minutes. [warm, vacant] Hello, sweetie. Apple muffins, nine minutes."
 },
 {
 "voice": "amy",
@@ -10606,9 +10606,9 @@
 {
 "voice": "deedee",
 "speaker": "Deedee",
-"text": "Hello, Amy. Rhubarb crisp, nine minutes. Do you want a bite? Rhubarb crisp. Nine minutes.",
+"text": "Hello, Amy. Apple muffins, nine minutes. Do you want a bite? Apple muffins. Nine minutes.",
 "ctx": "Scene ch14Deedee",
-"script": "[sweet, vacant] Hello, Amy. Rhubarb crisp, nine minutes. [bright, hollow] Do you want a bite? [glassy, droning] Rhubarb crisp. Nine minutes."
+"script": "[sweet, vacant] Hello, Amy. Apple muffins, nine minutes. [bright, hollow] Do you want a bite? [glassy, droning] Apple muffins. Nine minutes."
 },
 {
 "voice": "tom",
@@ -14260,16 +14260,16 @@
 {
 "voice": "?Forever Engine",
 "speaker": "Forever Engine",
-"text": "Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of rhubarb crisp that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.",
+"text": "Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of apple muffins that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.",
 "ctx": "Scene ch20Calm",
-"script": "[soft, tender] Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of rhubarb crisp that he has not eaten. [hopeful, luminous] The glass of the living room is cracked right down the middle, and every crack is letting the light in."
+"script": "[soft, tender] Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of apple muffins that he has not eaten. [hopeful, luminous] The glass of the living room is cracked right down the middle, and every crack is letting the light in."
 },
 {
 "voice": "",
 "speaker": "Forever Engine",
-"text": "Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of rhubarb crisp that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.",
+"text": "Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of apple muffins that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.",
 "ctx": "Scene ch20Calm",
-"script": "[soft, tender] Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of rhubarb crisp that he has not eaten. [hopeful, luminous] The glass of the living room is cracked right down the middle, and every crack is letting the light in."
+"script": "[soft, tender] Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of apple muffins that he has not eaten. [hopeful, luminous] The glass of the living room is cracked right down the middle, and every crack is letting the light in."
 },
 {
 "voice": "?Vance",
@@ -16892,9 +16892,9 @@
 {
 "voice": "deedee",
 "speaker": "deedee",
-"text": "Rhubarb crisp in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?",
+"text": "Apple muffins in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?",
 "ctx": "",
-"script": "[brisk, fussing] Rhubarb crisp in the oven, dinner on the stove, floors just mopped. [bossy, sweet] Shoes off. [bright, coaxing] Who wants a cookie?"
+"script": "[brisk, fussing] Apple muffins in the oven, dinner on the stove, floors just mopped. [bossy, sweet] Shoes off. [bright, coaxing] Who wants a cookie?"
 },
 {
 "voice": "deedee",
@@ -16948,9 +16948,9 @@
 {
 "voice": "deedee",
 "speaker": "deedee",
-"text": "Rhubarb crisp is cooling on the counter. Don't touch it. Okay, one corner.",
+"text": "Apple muffins is cooling on the counter. Don't touch it. Okay, one corner.",
 "ctx": "",
-"script": "[stern, warm] Rhubarb crisp is cooling on the counter. Don't touch it. [softening, playful] Okay, one corner."
+"script": "[stern, warm] Apple muffins is cooling on the counter. Don't touch it. [softening, playful] Okay, one corner."
 },
 {
 "voice": "deedee",
@@ -17137,9 +17137,9 @@
 {
 "voice": "ellie",
 "speaker": "ellie",
-"text": "Deedee keeps offering me rhubarb crisp. I keep saying yes. That's called manners.",
+"text": "Deedee keeps offering me apple muffins. I keep saying yes. That's called manners.",
 "ctx": "",
-"script": "[serene, smug] Deedee keeps offering me rhubarb crisp. I keep saying yes. [arch, deadpan] ...That's called MANNERS."
+"script": "[serene, smug] Deedee keeps offering me apple muffins. I keep saying yes. [arch, deadpan] ...That's called MANNERS."
 },
 {
 "voice": "ellie",

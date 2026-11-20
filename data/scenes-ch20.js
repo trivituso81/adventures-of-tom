@@ -216,7 +216,7 @@ SCENES.ch20Fight2=()=>[
 SCENES.ch20Calm=()=>[
   {flag:'ch20-calm',value:'pending'},
   {call:()=>{ setFlag('ch20-julian',false); setFlag('ch20-calm'); }},
-  {talk:'Forever Engine',lines:['Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of rhubarb crisp that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.']},
+  {talk:'Forever Engine',lines:['Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of apple muffins that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.']},
   {talk:'Vance',lines:['Clara would be thirty-one. She would say I deserved all of this.']},
   {talk:'Tom',lines:['Probably. And then she would sit down next to you anyway.']},
   {talk:'Vance',lines:['I could not make the minute stop hurting. So I stopped the minute. It did not stop hurting. It only stopped.']},

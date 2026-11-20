@@ -206,8 +206,8 @@ const B8_KITS={
       p:{key:"registered_nut",name:"Registered Nut, Reporting",src:1,vp:3,elem:["cozy"],desc:"Get a proper check-up from a very energetic nurse. Heal at least 35% HP and remove one debuff."},
       r:{key:"rx_regnut",name:"Registered Nut",src:2,vp:2,elem:["cozy"],desc:"Deedee puts on her RN stethoscope for a rapid grandma check-up, healing an ally 50% HP, curing 2 debuffs, and boosting their GRIT."}},
     A2:{play:'crisp',
-      p:{key:"corner_piece",name:"Corner-Piece Privilege",src:1,vp:4,elem:["cozy"],desc:"Offer the best corner of homemade rhubarb crisp. Heal a friend and add one Warm Crust."},
-      r:{key:"rx_rhubarb",name:"Rhubarb Crisp",src:2,vp:3,elem:["cozy"],desc:"Deedee pulls a bubbling pan of her signature rhubarb crisp from the oven, healing an ally 60% HP, thawing Amber, and placing +1 Warm Crust on the tray."}},
+      p:{key:"corner_piece",name:"Corner-Piece Privilege",src:1,vp:4,elem:["cozy"],desc:"Offer the best corner of homemade apple muffins. Heal a friend and add one Warm Crust."},
+      r:{key:"rx_rhubarb",name:"Apple Muffins",src:2,vp:3,elem:["cozy"],desc:"Deedee pulls a bubbling pan of her signature apple muffins from the oven, healing an ally 60% HP, thawing Amber, and placing +1 Warm Crust on the tray."}},
     A3:{play:'mop',
       p:{key:"wet_floor",name:"Wet Floor!",src:1,vp:3,elem:["cozy"],desc:"She mops around a friend and the sticky stuff comes right up. Heal, clear Amber-Stuck and add a Warm Crust; Boppy gets extra care. Somebody slips."},
       r:{key:"rx_wetfloor",name:"Wet Floor!",src:2,vp:3,elem:["splash"],desc:"Deedee furiously mops the stage floor with pine cleaner, curing 1 debuff on the party while sending the enemy front row skidding into Drowsy and Slowed."}},
@@ -517,7 +517,7 @@ const B8_ST_ALIAS={guard:['brace'],bodyguarded:['guarded'],pep_up:['pepup',.25],
 // Grace: Squishy Squeeze (legacy key squishy) -> Squishy Squeeze (squishy_squeeze), the same squishy; Like and Subscribe (the
 // legacy party heal) -> Welcome Back to My Channel, the vlog kind move she has from level 10.
 // Rose: Peekaboo (now the A1 Remix) -> Boo!!, the same sneak-up-and-pop-out kind move. Deedee: Registered Nut (A1 Remix) ->
-// Registered Nut, Reporting; Rhubarb Crisp (A2 Remix) -> Corner-Piece Privilege, the same crisp; Sunday Dinner (the A6 stand-in
+// Registered Nut, Reporting; Apple Muffins (A2 Remix) -> Corner-Piece Privilege, the same crisp; Sunday Dinner (the A6 stand-in
 // until the Ultimates) -> Corner-Piece Privilege, her homemade food kind move (Pepper-Free Plate became Wet Floor!).
 // Boppy: Recliner Drop (now the A2 Remix) -> Recliner Reservation, the same recliner; Track Star Story (B4 Remix) -> In Nineteen
 // Seventy, the same 1970 story. GRUMBLE keeps its key.

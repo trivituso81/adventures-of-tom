@@ -364,7 +364,7 @@ const B2_SKILLS={
     skills:[
       {key:'nurse',name:'Registered Nut',vp:2,elem:['cozy'],target:'ally',weight:'quick',support:true,kindFoe:true,fx:[['heal',.45,0,'t'],['cure','one','t']],
         desc:'A retired nurse’s check-up. Heals one ally 45% and cures one debuff. Works on grumpy monsters too.'},
-      {key:'crisp',name:'Rhubarb Crisp',vp:3,elem:['cozy'],target:'ally',weight:'standard',support:true,kindFoe:true,fx:[['heal',.6,0,'t'],['crust',1]],
+      {key:'crisp',name:'Apple Muffins',vp:3,elem:['cozy'],target:'ally',weight:'standard',support:true,kindFoe:true,fx:[['heal',.6,0,'t'],['crust',1]],
         desc:'A steaming slice. Heals one ally 60%, or feed it to a monster to warm it right up. Leaves a Warm Crust on the tray.'},
       {key:'mop',name:'Wet Floor',vp:3,elem:['splash'],target:'front',weight:'standard',fx:[['cure','debuff','party'],['st','drowsy',3,'t']],
         desc:'Mops the floor. Clears the party’s debuffs and the front row slips (PEP -30%).'},
@@ -389,7 +389,7 @@ const B2_SKILLS={
       {key:'registered_nut',name:'Registered Nut, Reporting',vp:3,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:30,
         fx:[['heal',.35,.4,'t'],['cure','one','t']],desc:'A proper check-up from a very energetic nurse. Heals a friend 35% and removes one debuff. Kind on a monster.'},
       {key:'corner_piece',name:'Corner-Piece Privilege',vp:4,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:35,baking:true,
-        fx:[['heal',.45,.4,'t'],['crust',1]],desc:'The best corner of homemade rhubarb crisp. Heals a friend 45% and adds one Warm Crust. Kind on a monster.'},
+        fx:[['heal',.45,.4,'t'],['crust',1]],desc:'The best corner of homemade apple muffins. Heals a friend 45% and adds one Warm Crust. Kind on a monster.'},
       {key:'wet_floor',name:'Wet Floor!',vp:3,elem:['cozy'],target:'ally',weight:'standard',o3:true,kindFoe:30,baking:true,
         fx:[['heal',.25,.4,'t'],['cure','amber','t'],['crust',1],['heal',.10,0,'boppy']],desc:'She mops around a friend: the sticky stuff comes right up. Heals 25%, clears Amber-Stuck, adds a Warm Crust. Boppy gets extra care. Somebody always slips. Kind on a monster.'},
       {key:'wine',name:'Wine O’Clock',vp:4,elem:['kinetic'],stat:'warmth',mult:1.6,target:'enemy',weight:'standard',o3:true,

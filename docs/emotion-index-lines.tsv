@@ -155,7 +155,7 @@ chapter	file	line	character	mood	text
 2	tools/voice-library/scripts/ch02-story-directions.json	10	TNB	happy	It's been like that since this morning. I held my soda up to it. It's the exact same color.
 2	tools/voice-library/scripts/ch02-story-directions.json	11	TNB	happy	I don't know what it is, babe. But it's pretty grape.
 2	tools/voice-library/scripts/ch02-story-directions.json	12	Tom	happy	Don't make me laugh, it's freaky! ...Okay. It IS a little grape.
-2	tools/voice-library/scripts/ch02-story-directions.json	13	Tom	surprised	Something strange happened on Long Island too. A blob of mud with eyes climbed in my mother's kitchen window and ran off with her rhubarb crisp.
+2	tools/voice-library/scripts/ch02-story-directions.json	13	Tom	surprised	Something strange happened on Long Island too. A blob of mud with eyes climbed in my mother's kitchen window and ran off with her apple muffins.
 2	tools/voice-library/scripts/ch02-story-directions.json	14	TNB	surprised	The mud took Deedee's crisp? Is the mud okay?
 2	tools/voice-library/scripts/ch02-story-directions.json	15	Tom	surprised	We chased it to the pond. And there was a talking fish as big as a car, wearing her baking tin like a crown.
 2	tools/voice-library/scripts/ch02-story-directions.json	16	TNB	happy	A talking fish! What did he say?
@@ -322,7 +322,7 @@ chapter	file	line	character	mood	text
 3	data/scenes.js	926	Deedee	angry	Hand me my glasses. I want to look at him properly. Where ARE my glasses.
 3	data/scenes.js	927	Rose	happy	Apron pocket, Deedee!
 3	data/scenes.js	929	Boppy	happy	...Almost isn't eating. Almost is fine.
-3	data/scenes.js	930	Deedee	loving	Sit down, you. I made rhubarb crisp. Everybody sit. And eat SLOWLY.
+3	data/scenes.js	930	Deedee	loving	Sit down, you. I made apple muffins. Everybody sit. And eat SLOWLY.
 3	data/scenes.js	931	Boppy	happy	Slowly. Finally. Somebody in this family gets it.
 3	data/scenes.js	933	Tom	happy	Best fishing trip ever. Nobody fell in. Mostly.
 3	data/scenes.js	934	Deedee	loving	I love you all to the moon and back. Now eat.
@@ -552,7 +552,7 @@ chapter	file	line	character	mood	text
 5	data/scenes.js	1503	Tom	none	Then we clear the monsters out of Art, Music and the Gym. After each room, we set its hallway clock to seven o'clock.
 5	data/scenes.js	1503	Tom	none	When all three are right, the Cafetorium opens.
 5	data/scenes.js	1511	Grace	happy	FOR EVERYONE, LOVE DEEDEE. That's Deedee’s handwriting! Everyone means us!
-5	data/scenes.js	1513	Rose	surprised	Rhubarb crisp! Deedee brings the teachers CRISP?
+5	data/scenes.js	1513	Rose	surprised	Apple muffins! Deedee brings the teachers CRISP?
 5	data/scenes.js	1515	Amy	loving	She never told me that. Of course she never told me that.
 5	data/scenes.js	1516	Tom	loving	To the moon and back. And apparently to the staff room.
 5	data/scenes.js	1529	Amy	proud	I've never been late in my life. Not once. Not even when I was born. I was early.
@@ -1462,9 +1462,9 @@ chapter	file	line	character	mood	text
 14	data/scenes-ch14.js	76	Rose	happy	I wasn’t going to touch it. I was going to boop it.
 14	data/scenes-ch14.js	77	Amy	unimpressed	Rose.
 14	data/scenes-ch14.js	78	Rose	happy	A very small boop.
-14	data/scenes-ch14.js	87	Deedee	loving	Rhubarb crisp, nine minutes. Rhubarb crisp, nine minutes. Hello, sweetie. Rhubarb crisp, nine minutes.
+14	data/scenes-ch14.js	87	Deedee	loving	Apple muffins, nine minutes. Apple muffins, nine minutes. Hello, sweetie. Apple muffins, nine minutes.
 14	data/scenes-ch14.js	88	Amy	scared	Mom. It’s Amy. Mom, look at me.
-14	data/scenes-ch14.js	89	Deedee	loving	Hello, Amy. Rhubarb crisp, nine minutes. Do you want a bite? Rhubarb crisp. Nine minutes.
+14	data/scenes-ch14.js	89	Deedee	loving	Hello, Amy. Apple muffins, nine minutes. Do you want a bite? Apple muffins. Nine minutes.
 14	data/scenes-ch14.js	90	Tom	sad	She’s looping. Look at the tray. It’s the same crisp. Every time. It’s fresh, it’s perfect, and nobody ever eats it.
 14	data/scenes-ch14.js	91	Tom	sad	Amber is warmth that got stuck. She’s been baking for nobody for hours, so all that warmth has nowhere to go.
 14	data/scenes-ch14.js	92	Rose	surprised	Maybe somebody just has to eat it.
@@ -1593,7 +1593,7 @@ chapter	file	line	character	mood	text
 15	data/scenes-ch15.js	160	Boppy	angry	Why am I scooting?
 15	data/scenes-ch15.js	161	Deedee	unimpressed	Because you’re the widest.
 15	data/scenes-ch15.js	162	Boppy	angry	My BACK is the widest.
-15	data/scenes-ch15.js	163	Deedee	loving	Rhubarb crisp. Nine minutes. Eat.
+15	data/scenes-ch15.js	163	Deedee	loving	Apple muffins. Nine minutes. Eat.
 15	data/scenes-ch15.js	165	Deedee	loving	Everybody eats.
 15	data/scenes-ch15.js	168	Amy	happy	That’s the point of the loud.
 15	data/scenes-ch15.js	170	Amy	unimpressed	That’s not a photograph. That’s a trap.

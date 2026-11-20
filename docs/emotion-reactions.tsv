@@ -139,7 +139,7 @@ scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	Wait,
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	It's been like that since this morning. I held my soda up to it. It's the exact same color.	tom	surprised	since this morning
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	I don't know what it is, babe. But it's pretty grape.	tom	happy	pretty grape
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	Don't make me laugh, it's freaky! ...Okay. It IS a little grape.	tnb	happy	It IS a little grape
-scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	Something strange happened on Long Island too. A blob of mud with eyes climbed in my mother's kitchen window and ran off with her rhubarb crisp.	tnb	surprised	mud with eyes
+scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	Something strange happened on Long Island too. A blob of mud with eyes climbed in my mother's kitchen window and ran off with her apple muffins.	tnb	surprised	mud with eyes
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	The mud took Deedee's crisp? Is the mud okay?	tom	happy	Is the mud okay
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	Tom	We chased it to the pond. And there was a talking fish as big as a car, wearing her baking tin like a crown.	tnb	surprised	talking fish
 scene	2	tools/voice-library/scripts/ch02-story-directions.json	ch2Loft	TNB	A talking fish! What did he say?	tom	happy	What did he say
@@ -523,10 +523,10 @@ scene	3	data/scenes.js	ch3End	Boppy	...Almost isn't eating. Almost is fine.	deed
 scene	3	data/scenes.js	ch3End	Boppy	...Almost isn't eating. Almost is fine.	tom	happy
 scene	3	data/scenes.js	ch3End	Boppy	...Almost isn't eating. Almost is fine.	grace	happy
 scene	3	data/scenes.js	ch3End	Boppy	...Almost isn't eating. Almost is fine.	rose	happy
-scene	3	data/scenes.js	ch3End	Deedee	Sit down, you. I made rhubarb crisp. Everybody sit. And eat SLOWLY.	boppy	loving
-scene	3	data/scenes.js	ch3End	Deedee	Sit down, you. I made rhubarb crisp. Everybody sit. And eat SLOWLY.	tom	loving
-scene	3	data/scenes.js	ch3End	Deedee	Sit down, you. I made rhubarb crisp. Everybody sit. And eat SLOWLY.	grace	happy
-scene	3	data/scenes.js	ch3End	Deedee	Sit down, you. I made rhubarb crisp. Everybody sit. And eat SLOWLY.	rose	happy
+scene	3	data/scenes.js	ch3End	Deedee	Sit down, you. I made apple muffins. Everybody sit. And eat SLOWLY.	boppy	loving
+scene	3	data/scenes.js	ch3End	Deedee	Sit down, you. I made apple muffins. Everybody sit. And eat SLOWLY.	tom	loving
+scene	3	data/scenes.js	ch3End	Deedee	Sit down, you. I made apple muffins. Everybody sit. And eat SLOWLY.	grace	happy
+scene	3	data/scenes.js	ch3End	Deedee	Sit down, you. I made apple muffins. Everybody sit. And eat SLOWLY.	rose	happy
 scene	3	data/scenes.js	ch3End	Boppy	Slowly. Finally. Somebody in this family gets it.	deedee	unimpressed
 scene	3	data/scenes.js	ch3End	Boppy	Slowly. Finally. Somebody in this family gets it.	tom	happy
 scene	3	data/scenes.js	ch3End	Boppy	Slowly. Finally. Somebody in this family gets it.	grace	happy
@@ -756,9 +756,9 @@ scene	5	data/scenes.js	ch5Snack	Grace	FOR EVERYONE, LOVE DEEDEE. That's Deedee�
 scene	5	data/scenes.js	ch5Snack	Grace	FOR EVERYONE, LOVE DEEDEE. That's Deedee’s handwriting! Everyone means us!	tom	surprised
 scene	5	data/scenes.js	ch5Snack	Grace	FOR EVERYONE, LOVE DEEDEE. That's Deedee’s handwriting! Everyone means us!	amy	surprised
 scene	5	data/scenes.js	ch5Snack	Grace	FOR EVERYONE, LOVE DEEDEE. That's Deedee’s handwriting! Everyone means us!	halverson	happy
-scene	5	data/scenes.js	ch5Snack	Rose	Rhubarb crisp! Deedee brings the teachers CRISP?	grace	happy
-scene	5	data/scenes.js	ch5Snack	Rose	Rhubarb crisp! Deedee brings the teachers CRISP?	tom	happy
-scene	5	data/scenes.js	ch5Snack	Rose	Rhubarb crisp! Deedee brings the teachers CRISP?	amy	surprised
+scene	5	data/scenes.js	ch5Snack	Rose	Apple muffins! Deedee brings the teachers CRISP?	grace	happy
+scene	5	data/scenes.js	ch5Snack	Rose	Apple muffins! Deedee brings the teachers CRISP?	tom	happy
+scene	5	data/scenes.js	ch5Snack	Rose	Apple muffins! Deedee brings the teachers CRISP?	amy	surprised
 scene	5	data/scenes.js	ch5Snack	Mr. Halverson	Every conference night. Twelve years. It's the only reason Gary shows up.	amy	surprised
 scene	5	data/scenes.js	ch5Snack	Mr. Halverson	Every conference night. Twelve years. It's the only reason Gary shows up.	tom	happy
 scene	5	data/scenes.js	ch5Snack	Mr. Halverson	Every conference night. Twelve years. It's the only reason Gary shows up.	grace	happy
@@ -4203,17 +4203,17 @@ scene	14	data/scenes-ch14.js	ch14Open	Amy	Rose.	grace	happy
 scene	14	data/scenes-ch14.js	ch14Open	Rose	A very small boop.	amy	unimpressed
 scene	14	data/scenes-ch14.js	ch14Open	Rose	A very small boop.	tom	unimpressed
 scene	14	data/scenes-ch14.js	ch14Open	Rose	A very small boop.	grace	unimpressed
-scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Rhubarb crisp, nine minutes. Rhubarb crisp, nine minutes. Hello, sweetie. Rhubarb crisp, nine minutes.	tom	scared
-scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Rhubarb crisp, nine minutes. Rhubarb crisp, nine minutes. Hello, sweetie. Rhubarb crisp, nine minutes.	amy	scared
-scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Rhubarb crisp, nine minutes. Rhubarb crisp, nine minutes. Hello, sweetie. Rhubarb crisp, nine minutes.	grace	scared
-scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Rhubarb crisp, nine minutes. Rhubarb crisp, nine minutes. Hello, sweetie. Rhubarb crisp, nine minutes.	rose	scared
+scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Apple muffins, nine minutes. Apple muffins, nine minutes. Hello, sweetie. Apple muffins, nine minutes.	tom	scared
+scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Apple muffins, nine minutes. Apple muffins, nine minutes. Hello, sweetie. Apple muffins, nine minutes.	amy	scared
+scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Apple muffins, nine minutes. Apple muffins, nine minutes. Hello, sweetie. Apple muffins, nine minutes.	grace	scared
+scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Apple muffins, nine minutes. Apple muffins, nine minutes. Hello, sweetie. Apple muffins, nine minutes.	rose	scared
 scene	14	data/scenes-ch14.js	ch14Deedee	Amy	Mom. It’s Amy. Mom, look at me.	tom	sad
 scene	14	data/scenes-ch14.js	ch14Deedee	Amy	Mom. It’s Amy. Mom, look at me.	grace	scared
 scene	14	data/scenes-ch14.js	ch14Deedee	Amy	Mom. It’s Amy. Mom, look at me.	rose	scared
-scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Hello, Amy. Rhubarb crisp, nine minutes. Do you want a bite? Rhubarb crisp. Nine minutes.	tom	sad
-scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Hello, Amy. Rhubarb crisp, nine minutes. Do you want a bite? Rhubarb crisp. Nine minutes.	amy	sad
-scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Hello, Amy. Rhubarb crisp, nine minutes. Do you want a bite? Rhubarb crisp. Nine minutes.	grace	scared
-scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Hello, Amy. Rhubarb crisp, nine minutes. Do you want a bite? Rhubarb crisp. Nine minutes.	rose	surprised
+scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Hello, Amy. Apple muffins, nine minutes. Do you want a bite? Apple muffins. Nine minutes.	tom	sad
+scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Hello, Amy. Apple muffins, nine minutes. Do you want a bite? Apple muffins. Nine minutes.	amy	sad
+scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Hello, Amy. Apple muffins, nine minutes. Do you want a bite? Apple muffins. Nine minutes.	grace	scared
+scene	14	data/scenes-ch14.js	ch14Deedee	Deedee	Hello, Amy. Apple muffins, nine minutes. Do you want a bite? Apple muffins. Nine minutes.	rose	surprised
 scene	14	data/scenes-ch14.js	ch14Deedee	Tom	She’s looping. Look at the tray. It’s the same crisp. Every time. It’s fresh, it’s perfect, and nobody ever eats it.	amy	sad
 scene	14	data/scenes-ch14.js	ch14Deedee	Tom	She’s looping. Look at the tray. It’s the same crisp. Every time. It’s fresh, it’s perfect, and nobody ever eats it.	grace	sad
 scene	14	data/scenes-ch14.js	ch14Deedee	Tom	She’s looping. Look at the tray. It’s the same crisp. Every time. It’s fresh, it’s perfect, and nobody ever eats it.	rose	sad
@@ -4849,12 +4849,12 @@ scene	15	data/scenes-ch15.js	ch15After	Boppy	My BACK is the widest.	amy	happy
 scene	15	data/scenes-ch15.js	ch15After	Boppy	My BACK is the widest.	tnb	happy
 scene	15	data/scenes-ch15.js	ch15After	Boppy	My BACK is the widest.	grace	happy
 scene	15	data/scenes-ch15.js	ch15After	Boppy	My BACK is the widest.	rose	happy
-scene	15	data/scenes-ch15.js	ch15After	Deedee	Rhubarb crisp. Nine minutes. Eat.	tom	happy
-scene	15	data/scenes-ch15.js	ch15After	Deedee	Rhubarb crisp. Nine minutes. Eat.	amy	happy
-scene	15	data/scenes-ch15.js	ch15After	Deedee	Rhubarb crisp. Nine minutes. Eat.	tnb	happy
-scene	15	data/scenes-ch15.js	ch15After	Deedee	Rhubarb crisp. Nine minutes. Eat.	grace	happy
-scene	15	data/scenes-ch15.js	ch15After	Deedee	Rhubarb crisp. Nine minutes. Eat.	rose	happy
-scene	15	data/scenes-ch15.js	ch15After	Deedee	Rhubarb crisp. Nine minutes. Eat.	boppy	unimpressed
+scene	15	data/scenes-ch15.js	ch15After	Deedee	Apple muffins. Nine minutes. Eat.	tom	happy
+scene	15	data/scenes-ch15.js	ch15After	Deedee	Apple muffins. Nine minutes. Eat.	amy	happy
+scene	15	data/scenes-ch15.js	ch15After	Deedee	Apple muffins. Nine minutes. Eat.	tnb	happy
+scene	15	data/scenes-ch15.js	ch15After	Deedee	Apple muffins. Nine minutes. Eat.	grace	happy
+scene	15	data/scenes-ch15.js	ch15After	Deedee	Apple muffins. Nine minutes. Eat.	rose	happy
+scene	15	data/scenes-ch15.js	ch15After	Deedee	Apple muffins. Nine minutes. Eat.	boppy	unimpressed
 scene	15	data/scenes-ch15.js	ch15After	HUSH-9	I do not eat.	deedee	unimpressed
 scene	15	data/scenes-ch15.js	ch15After	HUSH-9	I do not eat.	tom	happy
 scene	15	data/scenes-ch15.js	ch15After	HUSH-9	I do not eat.	grace	happy
@@ -6462,13 +6462,13 @@ scene	20	data/scenes-ch20.js	ch20Fight2	Tom	Everybody up. He’s not going anywh
 scene	20	data/scenes-ch20.js	ch20Fight2	Tom	Everybody up. He’s not going anywhere. That’s rather the point of him.	rose	proud
 scene	20	data/scenes-ch20.js	ch20Fight2	Tom	Everybody up. He’s not going anywhere. That’s rather the point of him.	deedee	proud
 scene	20	data/scenes-ch20.js	ch20Fight2	Tom	Everybody up. He’s not going anywhere. That’s rather the point of him.	boppy	proud
-scene	20	data/scenes-ch20.js	ch20Calm	Forever Engine	Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of rhubarb crisp that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.	tom	loving
-scene	20	data/scenes-ch20.js	ch20Calm	Forever Engine	Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of rhubarb crisp that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.	amy	loving
-scene	20	data/scenes-ch20.js	ch20Calm	Forever Engine	Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of rhubarb crisp that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.	tnb	loving
-scene	20	data/scenes-ch20.js	ch20Calm	Forever Engine	Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of rhubarb crisp that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.	grace	sad
-scene	20	data/scenes-ch20.js	ch20Calm	Forever Engine	Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of rhubarb crisp that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.	rose	sad
-scene	20	data/scenes-ch20.js	ch20Calm	Forever Engine	Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of rhubarb crisp that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.	deedee	loving
-scene	20	data/scenes-ch20.js	ch20Calm	Forever Engine	Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of rhubarb crisp that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.	boppy	happy
+scene	20	data/scenes-ch20.js	ch20Calm	Forever Engine	Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of apple muffins that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.	tom	loving
+scene	20	data/scenes-ch20.js	ch20Calm	Forever Engine	Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of apple muffins that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.	amy	loving
+scene	20	data/scenes-ch20.js	ch20Calm	Forever Engine	Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of apple muffins that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.	tnb	loving
+scene	20	data/scenes-ch20.js	ch20Calm	Forever Engine	Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of apple muffins that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.	grace	sad
+scene	20	data/scenes-ch20.js	ch20Calm	Forever Engine	Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of apple muffins that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.	rose	sad
+scene	20	data/scenes-ch20.js	ch20Calm	Forever Engine	Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of apple muffins that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.	deedee	loving
+scene	20	data/scenes-ch20.js	ch20Calm	Forever Engine	Julian is still in the armchair. He has a cardigan on and a tennis ball in his lap, and a plate of apple muffins that he has not eaten. The glass of the living room is cracked right down the middle, and every crack is letting the light in.	boppy	happy
 scene	20	data/scenes-ch20.js	ch20Calm	Vance	Clara would be thirty-one. She would say I deserved all of this.	tom	sad
 scene	20	data/scenes-ch20.js	ch20Calm	Vance	Clara would be thirty-one. She would say I deserved all of this.	amy	sad
 scene	20	data/scenes-ch20.js	ch20Calm	Vance	Clara would be thirty-one. She would say I deserved all of this.	tnb	sad
@@ -7658,9 +7658,9 @@ map	5-10	data/maps-le.js	map amyhouse, when {from:5,flag:ch5-done}	Amy	Tom. Than
 map	1-10	data/maps-le.js	map grands, base	Deedee	My favorite son! And my girls! Come here, come here.	tom	loving
 map	1-10	data/maps-le.js	map grands, base	Deedee	My favorite son! And my girls! Come here, come here.	grace	loving
 map	1-10	data/maps-le.js	map grands, base	Deedee	My favorite son! And my girls! Come here, come here.	rose	loving
-map	1-10	data/maps-le.js	map grands, base	Deedee	Rhubarb crisp in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?	tom	happy
-map	1-10	data/maps-le.js	map grands, base	Deedee	Rhubarb crisp in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?	grace	happy
-map	1-10	data/maps-le.js	map grands, base	Deedee	Rhubarb crisp in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?	rose	happy
+map	1-10	data/maps-le.js	map grands, base	Deedee	Apple muffins in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?	tom	happy
+map	1-10	data/maps-le.js	map grands, base	Deedee	Apple muffins in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?	grace	happy
+map	1-10	data/maps-le.js	map grands, base	Deedee	Apple muffins in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?	rose	happy
 map	1-10	data/maps-le.js	map grands, base	Deedee	Grace, Rose, Deedee loves you to the moon and back. Say it back. Louder.	tom	loving
 map	1-10	data/maps-le.js	map grands, base	Deedee	Grace, Rose, Deedee loves you to the moon and back. Say it back. Louder.	grace	loving
 map	1-10	data/maps-le.js	map grands, base	Deedee	Grace, Rose, Deedee loves you to the moon and back. Say it back. Louder.	rose	loving
@@ -7682,9 +7682,9 @@ map	1-10	data/maps-le.js	map grands, revisit	Deedee	Boppy says he's not feeling 
 map	1-10	data/maps-le.js	map grands, revisit	Deedee	Grace, Rose, who wants to help Deedee frost something?	tom	happy
 map	1-10	data/maps-le.js	map grands, revisit	Deedee	Grace, Rose, who wants to help Deedee frost something?	grace	happy
 map	1-10	data/maps-le.js	map grands, revisit	Deedee	Grace, Rose, who wants to help Deedee frost something?	rose	happy
-map	1-10	data/maps-le.js	map grands, revisit	Deedee	Rhubarb crisp is cooling on the counter. Don't touch it. Okay, one corner.	tom	happy
-map	1-10	data/maps-le.js	map grands, revisit	Deedee	Rhubarb crisp is cooling on the counter. Don't touch it. Okay, one corner.	grace	happy
-map	1-10	data/maps-le.js	map grands, revisit	Deedee	Rhubarb crisp is cooling on the counter. Don't touch it. Okay, one corner.	rose	happy
+map	1-10	data/maps-le.js	map grands, revisit	Deedee	Apple muffins is cooling on the counter. Don't touch it. Okay, one corner.	tom	happy
+map	1-10	data/maps-le.js	map grands, revisit	Deedee	Apple muffins is cooling on the counter. Don't touch it. Okay, one corner.	grace	happy
+map	1-10	data/maps-le.js	map grands, revisit	Deedee	Apple muffins is cooling on the counter. Don't touch it. Okay, one corner.	rose	happy
 map	1-10	data/maps-le.js	map grands, revisit	Deedee	I already did my walk. Boppy did one lap around the recliner.	tom	happy
 map	1-10	data/maps-le.js	map grands, revisit	Deedee	I already did my walk. Boppy did one lap around the recliner.	grace	happy
 map	1-10	data/maps-le.js	map grands, revisit	Deedee	I already did my walk. Boppy did one lap around the recliner.	rose	happy
@@ -7760,9 +7760,9 @@ map	1-10	data/maps-le.js	map elliehouse, base	Aunt Ellie	Yes, Deedee has an aunt
 map	1-10	data/maps-le.js	map elliehouse, base	Aunt Ellie	I've been to Paris eleven times, darling. Long Island is charming. But one must explore the world.	tom	unimpressed
 map	1-10	data/maps-le.js	map elliehouse, base	Aunt Ellie	I've been to Paris eleven times, darling. Long Island is charming. But one must explore the world.	grace	surprised
 map	1-10	data/maps-le.js	map elliehouse, base	Aunt Ellie	I've been to Paris eleven times, darling. Long Island is charming. But one must explore the world.	rose	surprised
-map	1-10	data/maps-le.js	map elliehouse, revisit	Aunt Ellie	Deedee keeps offering me rhubarb crisp. I keep saying yes. That's called manners.	tom	happy
-map	1-10	data/maps-le.js	map elliehouse, revisit	Aunt Ellie	Deedee keeps offering me rhubarb crisp. I keep saying yes. That's called manners.	grace	happy
-map	1-10	data/maps-le.js	map elliehouse, revisit	Aunt Ellie	Deedee keeps offering me rhubarb crisp. I keep saying yes. That's called manners.	rose	happy
+map	1-10	data/maps-le.js	map elliehouse, revisit	Aunt Ellie	Deedee keeps offering me apple muffins. I keep saying yes. That's called manners.	tom	happy
+map	1-10	data/maps-le.js	map elliehouse, revisit	Aunt Ellie	Deedee keeps offering me apple muffins. I keep saying yes. That's called manners.	grace	happy
+map	1-10	data/maps-le.js	map elliehouse, revisit	Aunt Ellie	Deedee keeps offering me apple muffins. I keep saying yes. That's called manners.	rose	happy
 map	1-10	data/maps-le.js	map elliehouse, revisit	Aunt Ellie	Boppy says his stomach hurts. I told him to stop eating peppers. He looked at me like I insulted his mother.	tom	happy
 map	1-10	data/maps-le.js	map elliehouse, revisit	Aunt Ellie	Boppy says his stomach hurts. I told him to stop eating peppers. He looked at me like I insulted his mother.	grace	happy
 map	1-10	data/maps-le.js	map elliehouse, revisit	Aunt Ellie	Boppy says his stomach hurts. I told him to stop eating peppers. He looked at me like I insulted his mother.	rose	happy

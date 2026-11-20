@@ -37,7 +37,7 @@ const B6_TRAITS={
   grace:{name:'Trending Meter',text:'Each move different from her last one trends higher (x1.0, x1.2, x1.5). Boosts her heals and critical hits. Repeating a move resets it.'},
   rose:{name:'Shoulder Ride',text:'Lamby Launch, Piggyback Pounce and Double-Decker Airplane end with her up on Tom’s shoulders for 3 turns. Tom takes her hits, and her skills hit twice.'},
   amy:{name:'Pace Setter',text:'Every action she takes speeds up the whole party (+5% PEP each, up to +25%). A knockout resets it.'},
-  deedee:{name:'Warm Crust Tokens',text:'Rhubarb Crisp and Sunday Dinner put Warm Crusts on the tray (max 3). Anyone can eat one as a free action to heal 20%. Even Nara.'},
+  deedee:{name:'Warm Crust Tokens',text:'Apple Muffins and Sunday Dinner put Warm Crusts on the tray (max 3). Anyone can eat one as a free action to heal 20%. Even Nara.'},
   boppy:{name:'Heartburn',text:'Peppers and hits he takes while guarding add Heartburn. At 3 his next attack or GRUMBLE lets out the Warden’s Counter-Roar and stuns whoever hit him.'},
   tnb:{name:'Quick-Change Rack',text:'Quick Change and WARDROBE dress the target in the next costume on the rack: Action Hero, Cozy Cardigan, then Final Girl.'},
   nara:{name:'Frantic, Picky, Puddles',text:'POW +50% and PEP +30% while Tom is knocked out. Only eats Chicken Jerky and homemade food. Sometimes leaves a happy puddle after a win.'},

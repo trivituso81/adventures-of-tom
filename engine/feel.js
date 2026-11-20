@@ -7,7 +7,7 @@
 
 const B7_DIFF={
   rose:{id:'rose',name:'ROSE MODE',sub:'Story and kid assist',
-    text:'Monsters hit half as hard and have 25% less HP. High-Fives always land. A gold glow shows a good move each turn. If everyone gets knocked out, Deedee tosses in a Rhubarb Pie and everyone gets back up (once a fight).',
+    text:'Monsters hit half as hard and have 25% less HP. High-Fives always land. A gold glow shows a good move each turn. If everyone gets knocked out, Deedee tosses in an Apple Muffin and everyone gets back up (once a fight).',
     taken:.5,foeHp:.75,autoHf:true,recommend:true,pie:true,pictures:true},
   grace:{id:'grace',name:'GRACE MODE',sub:'Classic, the standard game',
     text:'The game as designed: monsters at full strength, boss shields as written, snacks whenever you like.'},
@@ -248,11 +248,11 @@ function b7AfterRender() {
   }
 }
 
-// ---------- Rose Mode: Deedee's emergency Rhubarb Pie ----------
+// ---------- Rose Mode: Deedee's emergency Apple Muffin ----------
 function b7Pie() {
   if(!b7Diff().pie||!B2.active||B2.pieUsed) return false;
   B2.pieUsed=true; battle.state='busy'; B2.ui='busy'; b2Render();
-  enqueue(()=>{ b2Msg('Everyone is down... Then a Rhubarb Pie comes sailing in from Deedee’s kitchen!'); sfx.whoosh(); },1300,
+  enqueue(()=>{ b2Msg('Everyone is down... Then an Apple Muffin comes sailing in from Deedee’s kitchen!'); sfx.whoosh(); },1300,
     ()=>{ b2Fx({kind:'flash',color:'#ffe8b0',t:0,dur:.6});
       for(const p of B2.party) { p.hp=Math.max(1,Math.round(p.maxHp*.5)); p.st={}; p.guard=false; if(battle.fx[p.idx]) { battle.fx[p.idx].hop=.35; battle.fx[p.idx].koAt=null; } b2PopParty(p,'UP','#ffe08a'); }
       sfx.levelChime(); b2Msg('Everybody takes a bite and gets back up! (Rose Mode: once a fight.)'); b2Render(); },1500,

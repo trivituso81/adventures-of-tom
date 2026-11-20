@@ -1504,7 +1504,7 @@ const LE_ROOMS=[
     npcs:[
       {name:'Deedee',x:7,y:9,look:'pip',sheet:'deedee',grandma:true,duration:0.84,lines:[
         "My favorite son! And my girls! Come here, come here.",
-        'Rhubarb crisp in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?',
+        'Apple muffins in the oven, dinner on the stove, floors just mopped. Shoes off. Who wants a cookie?',
         'Grace, Rose, Deedee loves you to the moon and back. Say it back. Louder.'],
         revisit:[
           'The tomatoes are coming in. You\'re going home with forty.',
@@ -1513,7 +1513,7 @@ const LE_ROOMS=[
           'To the moon and back, girls. The MOON. And BACK.',
           'Boppy says he\'s not feeling good. Boppy also won\'t stop fishing.',
           'Grace, Rose, who wants to help Deedee frost something?',
-          'Rhubarb crisp is cooling on the counter. Don\'t touch it. Okay, one corner.',
+          'Apple muffins is cooling on the counter. Don\'t touch it. Okay, one corner.',
           'I already did my walk. Boppy did one lap around the recliner.',
           'Retired registered nurse. Tom calls me a registered nut. Tom is due for a checkup.',
           'Sunday dinner is at six thirty. Don\'t make me call twice.',
@@ -1589,7 +1589,7 @@ const LE_ROOMS=[
         'I\'ve been to Paris eleven times, darling. Long Island is charming. But one must explore the world.'],
         when:[{...CH9_DONE,lines:['My coat. Ticket seven. I left it at the last dance and never went back for it.','I had a date with a man who turned out to be a disappointment. The coat wasn\'t. Keep it warm for me.']}],
         revisit:[
-          'Deedee keeps offering me rhubarb crisp. I keep saying yes. That\'s called manners.',
+          'Deedee keeps offering me apple muffins. I keep saying yes. That\'s called manners.',
           'Boppy says his stomach hurts. I told him to stop eating peppers. He looked at me like I insulted his mother.',
           'Grace, darling, that outfit is wonderful. Rose, darling, that outfit is a choice. A brave one.',
           'Wisdom is remembering what went wrong and saying so before it happens again.',
