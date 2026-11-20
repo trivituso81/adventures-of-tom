@@ -6448,7 +6448,7 @@
    "title": "Fix the muffin pan that never leaves the counter, and add the new Mudling sheet to the Art Library (heistart)",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "heistart",
    "auto": true,
    "next": "Tap START. It fixes the bug that keeps the muffin pan on the counter after the theft (and the empty pan in Grump Hollow), and adds one new picture to the Art Library: the Mudling of the fights in six poses, carrying the muffin pan. Your card Generate and approve the new Mudling sheet comes next.",
@@ -6457,7 +6457,7 @@
    "changed": "2026-11-19",
    "chat": {
     "url": "",
-    "opening": ""
+    "opening": "pasted by Tom from the board"
    },
    "after": "t-heistart",
    "history": [
@@ -6468,6 +6468,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom tapped START."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom copied the prompt to paste it into a new conversation."
     }
    ],
    "prompt": {
@@ -6478,8 +6482,7 @@
     "model": "Claude Sonnet 5.5 (row B: the cause, the fix and the entry's prompt are written in claude/heist-redo-plan.md, a test and frames catch mistakes)",
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md and claude/heist-redo-plan.md, then build part A (section 6) and push it as heistart. Your first push is the commit board: start c-heistart. Change nothing else in the scene. Keep card t-heistart as the after of c-heistart and rewrite its next if the entry's place in the Art Library differs. You have my full permission to access the repo."
-   },
-   "start": true
+   }
   },
   {
    "id": "t-heistart",
