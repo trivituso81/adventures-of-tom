@@ -1232,7 +1232,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "clipch1remake",
-   "next": "Ready. Runs the clip-gen Action for the 43 Chapter 1 clips clipch1fix sent back to To do (about $3.37 of xAI credit); the gate holds any clip that fails instead of approving it. Then it hands you one card: CHAPTER 1 REVIEW of the remade clips only.",
+   "next": "Shipped as clipch1remake: 43 clips made again ($3.66 of xAI credit, cap $5). 16 passed the gate and are in the game; 27 were held by the gate and are not approved (videos kept on branch clipgen). Next: your card t-ch1review, then card c-clipch1held.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -1248,6 +1248,10 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Ran the clip-gen Action (cap 5): 43 made, 16 approved, 27 held by the gate, 0 failed, $3.66. Baked and published; looked at the frames of the 16 and of the 27 held videos."
     }
    ],
    "prompt": {
@@ -1258,7 +1262,8 @@
     "model": "Claude Sonnet 5.5 (row B: written steps, the gate and tests catch mistakes)",
     "effort": "medium (steps are known)",
     "text": "Read claude/next-addendum-clipch1fix.md and claude/next-addendum-clipgen2.md, then run the clip-gen Action for group Chapter 1 with dry_run=false and cap 5 (it makes only the 43 entries clipch1fix sent back to To do), wait for it and the art-bake it starts, look at the baked frames of the held and remade clips, and put Tom's CHAPTER 1 REVIEW card for the remade clips on the board. Build tag clipch1remake. You have my full permission to access the repo."
-   }
+   },
+   "after": "t-ch1review"
   },
   {
    "id": "c-battlescope",
@@ -1349,6 +1354,65 @@
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukHJDQke3jpTcqvDBk6",
     "opening": "unknown"
+   }
+  },
+  {
+   "id": "t-ch1review",
+   "title": "Review the 16 remade chapter 1 clips",
+   "theme": "Battle Animations",
+   "lane": "tom",
+   "col": "up",
+   "ask": "animations",
+   "next": "Open ADMIN > BATTLE LAB > CHAPTER 1 REVIEW (then CHAPTER 1 REVIEW: THE BIG ONE for the Grump and Toad), press PLAY ALL and watch only these 16: Tom give and run; Grace cast, cube pop, guard, run, squeeze and victory; Rose cast, Floor Is Lava and run; Deedee cast, run and scrub; the Grump idle and the Toad idle. For any that look wrong press REDO and type what is wrong. This card unblocks card c-clipch1held (Claude makes the 27 held clips again with your notes).",
+   "blocks": [
+    "c-clipch1held"
+   ],
+   "done_when": {
+    "clips_reviewed": "Chapter 1"
+   },
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukH7oLv95YtuWW62q7o",
+    "opening": "\"Read claude/next-addendum-clipch1fix.md and claude/next-addendum-clipgen2.md, then run the clip-gen Action\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Made by clipch1remake: 16 remade clips are in the game after the gate."
+    }
+   ]
+  },
+  {
+   "id": "c-clipch1held",
+   "title": "Make the 27 held chapter 1 clips again (clipch1held)",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "tag": "clipch1held",
+   "next": "Waits for your review card t-ch1review. Then: for each of the 27 clips the gate held (its reason is in the Action log), makes the smallest prompt or bake change the reason names, runs clip-gen again for those clips, and gives you a review card for what passes.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Made by clipch1remake: the gate held 27 of the 43 new videos, so they are not approved and the old clips stay in the game. Held: clip-rose-ko, clip-tom-guard, clip-tom-idle, clip-tom-hit, clip-tom-dodge, clip-tom-ko, clip-tom-victory, clip-tom-cast, clip-tom-loungepass, clip-grace-idle, clip-tom-blockade, clip-grace-hit, clip-grace-dodge, clip-grace-ko, clip-rose-idle, clip-rose-guard, clip-rose-hit, clip-rose-dodge, clip-rose-tackle, clip-rose-giddyup, clip-deedee-idle, clip-deedee-guard, clip-deedee-hit, clip-deedee-dodge, clip-deedee-ko, clip-deedee-victory, clip-deedee-wetfloor."
+    }
+   ],
+   "prompt": {
+    "what": "Looks at the 27 clips the gate held (videos on branch clipgen, reasons in the clip-gen run log 44652080732), fixes the cause of each with the smallest change, makes only those again, and gives you one review card.",
+    "before": [
+     "Finish card t-ch1review first (ADMIN > BATTLE LAB > CHAPTER 1 REVIEW, PLAY ALL, REDO with a note on anything wrong in the 16). Pressing START or pasting this prompt is your OK to spend up to $3 of xAI credit."
+    ],
+    "model": "Claude Opus 5.5 (row D: video prompts judged by eye; a miss costs generation money)",
+    "effort": "medium (each clip is a small edit of a prompt that exists)",
+    "text": "Read claude/next-addendum-clipch1fix.md, claude/next-addendum-clipgen2.md and the card c-clipch1remake history on the board. The gate held 27 Chapter 1 clips in clip-gen run 44652080732 (reasons are in its log, videos on branch clipgen). Group the 27 by reason. Some reasons are generator drift (size, feet, forward dodge) and some are the prompt (hit does not stumble, KO does not look dizzy, guard does not raise forearms, idle blink too slow). Fix each with the smallest change to its MOTION in tools/art-library/clip-prompts.js, name what you kept and what you changed, stop if the same fault comes back twice (stop-loss rule), run node tools/art-library/clip-prompts.js, run the clip-gen Action for Chapter 1 with dry_run=false and cap 3, wait for it and the art-bake, look at the baked frames, and put a CHAPTER 1 REVIEW card for the remade clips on the board. Build tag clipch1held. You have my full permission to access the repo."
    }
   }
  ],

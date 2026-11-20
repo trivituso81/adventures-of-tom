@@ -1,3 +1,10 @@
+## clipch1remake (2026-11-19): Chapter 1 clips made again: 16 passed the gate and are in the game, 27 were held
+
+- Tom (11-19): "run the clip-gen Action for group Chapter 1 with dry_run=false and cap 5". The Action (run 44652080732, 9 minutes) made the 43 clips clipch1fix sent back to To do: 43 made, 0 failed, $3.66 of xAI credit (estimate $3.37).
+- Approved and baked (16): tom-give, tom-run, grace-cast, grace-cubepop, grace-guard, grace-run, grace-squeeze, grace-victory, rose-cast, rose-lava, rose-run, deedee-cast, deedee-run, deedee-scrub, grump-idle, toad-idle. Looked at their baked frames: cube pop, squeeze and victory stay the right size; the run loops cycle; the Toad blinks and its mouth moves; the Grump holds still with a slow breath.
+- Held by the gate, not approved, videos kept on branch clipgen (27): the three KOs show no dizzy look (Tom, Grace, Deedee) and Rose's KO falls forward; the hits do not stumble back (Tom, Grace, Rose, Deedee); the dodges go forward (Tom, Grace, Rose, Deedee); the four idles still blink slowly or drift (Tom, Grace, Rose, Deedee); guards do not raise forearms (Tom, Rose) or barely move (Rose, Deedee); size or feet drift (Tom victory, cast; Deedee victory, wet floor); the generator changed the person or colour (Tom Lounge Pass, Blockade; Rose Tackle, Giddyup). The old clips of these stay in the game.
+- Next: Tom's card t-ch1review (the 16), then card c-clipch1held (the 27).
+
 ## starttest (2026-11-20): First conversation started by the START button: it could push to main, it could not read the Project's claude/ docs
 
 - Tom's card c-starttest. Check 1 (read claude/board3-plan.md and the Project instructions): failed, the repo has no claude/ folder; CLAUDE.md was loaded. Check 2 (first push reaches main unapproved): passed. Check 3 (board job reached the task): passed.
