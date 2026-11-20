@@ -17242,8 +17242,14 @@
     {
      "d": "2026-11-20",
      "t": "Added by c-reports-5: the reports named here need new pictures, so the backlog sessions left them open."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped START.",
+     "at": "2026-11-20T23:51:34.297Z"
     }
-   ]
+   ],
+   "start": true
   },
   {
    "id": "t-stuck-b3s12",
