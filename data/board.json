@@ -15303,7 +15303,7 @@
    "title": "Generate and approve the 7 listening poses",
    "theme": "Characters",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "pictures",
    "next": "Tap Generate all 7 pictures on this card (about $0.35), then in ADMIN > ART LIBRARY, Characters tab, group Listening poses, APPROVE or REJECT each one with a note. You should see Tom, Grace, Rose, Deedee, Boppy, Aunt Ellie and Sal each standing alone, hands loosely together at the waist, turned a little toward one side as if listening to someone, with a small attentive smile. Approving them starts card Install the listening poses (listen1).",
    "blocks": [
@@ -15340,6 +15340,11 @@
     {
      "d": "2026-11-20",
      "t": "Pictures job: made 7 pictures, QA: 17 of 18, 15 of 17, 17 of 17, 17 of 17, 18 of 18, 18 of 18, 15 of 17. Spent about $0.52."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-20T19:39:50.375Z"
     }
    ],
    "gen": {
@@ -15446,7 +15451,8 @@
       }
      }
     }
-   }
+   },
+   "done": "2026-11-20"
   },
   {
    "id": "c-listen1-install",
