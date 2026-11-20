@@ -6287,6 +6287,38 @@
    },
    "after": "t-skilllist1look",
    "auto": true
+  },
+  {
+   "id": "c-ch1retext1",
+   "title": "Chapter 1 subtitles match your rerecorded voice clips",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "ch1retext1",
+   "next": "Checks every chapter 1 dialogue clip against its subtitle, merges your new export (3 Deedee takes), and rewords each subtitle to the words the kept take says.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGPg3Q41zGrRaPsq4n",
+    "opening": "\"for chapter 1, ive changed the dialogue in the voicelcips and rerecorded, but the old dialogue still apepars in the game. check for discrepancies and update\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Tom: \"for chapter 1, ive changed the dialogue in the voicelcips and rerecorded, but the old dialogue still apepars in the game. check for discrepancies and update\". New card; started in this conversation."
+    }
+   ],
+   "after": "nothing for Tom: end",
+   "prompt": {
+    "what": "Rewords chapter 1 subtitles to the words Tom's kept voice takes say, and merges his newest takes.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: steps written in tools/voice-library/retext-lines.py and docs/CHANGES.md calib3)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/CHANGES.md section calib3, then check every chapter 1 dialogue clip against its subtitle and reword the subtitles to what the kept takes say. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [
