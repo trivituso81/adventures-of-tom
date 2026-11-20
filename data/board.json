@@ -11848,8 +11848,8 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "",
-    "opening": "pasted by Tom from the board"
+    "url": "https://claude.ai/code/session_01RXeukGYTdzfxUrLfVzoEGr",
+    "opening": "\"Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-polish03\""
    },
    "history": [
     {
@@ -11860,6 +11860,10 @@
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation.",
      "at": "2026-11-20T16:57:06.689Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Session started: checking whether Boppy's kitchen portrait still shows the fishing gear on current main."
     }
    ],
    "tag": "gem-polish03",
