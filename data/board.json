@@ -12262,8 +12262,17 @@
     {
      "d": "2026-11-20",
      "t": "Added by c-gem-bug01: Tom's play check of the retry after losing to The Big One."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom sent this to the backlog.",
+     "at": "2026-11-20T16:46:24.779Z"
     }
-   ]
+   ],
+   "backlog": {
+    "at": "2026-11-20",
+    "from": "up"
+   }
   }
  ],
  "sessions": [
