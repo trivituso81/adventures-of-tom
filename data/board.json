@@ -1237,7 +1237,7 @@
    "title": "Play the Rivituso Row scene with Amy in her window",
    "theme": "Story and Dialogue",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "After build facehold1 shows on the title screen: RELOAD, then CHAPTERS > Chapter 1 and walk south from the Square into Rivituso Row. Check: the party walks down off the steps before anyone talks, Amy pops up in the window over her front door, Tom faces her window while she talks and turns to Grace for the last two lines. Report anything off with the REPORT tab.",
@@ -1256,8 +1256,13 @@
     {
      "d": "2026-11-19",
      "t": "Tom reported Tom facing the wrong way in this scene; fixed by facehold1, the check now includes facing."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom did this."
     }
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "c-clipch1remake",
