@@ -13178,8 +13178,7 @@
     "url": "https://claude.ai/code/cse_01RXeukD7sCjzp3NJTWyxHVn",
     "prev": "https://claude.ai/code/session_01RXeukDcB3ZSezrrTtg1qT3"
    },
-   "started_at": "2026-11-20T17:43:02+00:00",
-   "quiet": true
+   "started_at": "2026-11-20T17:43:02+00:00"
   },
   {
    "id": "b-board-projclean",
@@ -14109,8 +14108,7 @@
     "effort": "medium (a handed-over card is usually one piece of work)",
     "text": "Read claude/handoff-rules.md. Tom handed you board card t-projclean-run with this note: I dont want to do this - Claude should. Work out what is needed, rewrite the card, and do it. You have my full permission to access the repo."
    },
-   "started_at": "2026-11-20T18:02:04+00:00",
-   "quiet": true
+   "started_at": "2026-11-20T18:02:04+00:00"
   },
   {
    "id": "c-idea-searchthrough",
@@ -16238,6 +16236,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGZvj5YBSMvPY8Zknj",
+   "title": "Move the Project docs into the repo (Project is 97% full)",
+   "first": "2026-11-20T12:24:26-08:00",
+   "last": "2026-11-20T12:24:26-08:00",
+   "tags": [],
+   "cards": [
+    "c-projclean"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEkFzpnNXMhJNExAwp",
    "title": "Battle video route: why WAN was dropped, costs, proof plan",
    "first": "2026-11-20T12:20:04-08:00",
@@ -17754,8 +17762,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "708115f43e976f7e6389d3d81a923ab85d428026",
- "synced_at": "2026-11-20T20:20:40+00:00",
+ "synced": "acb9cf8807b7728505c001ab249c4c40d25d01f0",
+ "synced_at": "2026-11-20T20:25:09+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
