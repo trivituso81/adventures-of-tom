@@ -16299,7 +16299,7 @@
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukCe4s7AKboq4xirQLv",
+    "url": "https://claude.ai/code/session_01RXeukCe4s7AKboq4xirQLv",
     "opening": "not started"
    },
    "prompt": {
@@ -16328,6 +16328,10 @@
     {
      "d": "2026-11-20",
      "t": "Session started on this card (first push)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "started_at": "2026-11-20T21:23:32+00:00"
@@ -16377,7 +16381,7 @@
    "id": "c-voiceauto1",
    "tag": "voiceauto1",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Voice Clips",
    "title": "Put new game lines in the Voice Library automatically",
    "next": "Built as voiceauto1: the voice-index job rebuilds the Voice Library list after every push that changes the game's words. Tom records the new lines on card t-voiceauto1rec.",
@@ -16405,9 +16409,14 @@
     {
      "d": "2026-11-20",
      "t": "Shipped voiceauto1: .github/workflows/voice-index.yml runs tools/voice-library/rebuild.py on pushes to main and commits the list when a line was added, removed or re-scripted. First rebuild added Sal's opening line, Tom's JFK line and Tom's boss-pattern line, and dropped a Michael line the game no longer plays."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as voiceauto1: new game lines now reach the Voice Library by themselves"
     }
    ],
-   "after": "t-voiceauto1rec"
+   "after": "t-voiceauto1rec",
+   "done": "2026-11-20"
   },
   {
    "id": "t-welcomepage-request",
@@ -16495,6 +16504,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukCe4s7AKboq4xirQLv",
+   "title": "Music makes through repo secrets",
+   "first": "2026-11-20T21:29:43Z",
+   "last": "2026-11-20T21:29:43Z",
+   "tags": [],
+   "cards": [
+    "c-keysecrets4"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGhbJajd4cUkbJiFVv",
    "title": "Art Library videos through repo secrets",
@@ -17079,10 +17098,24 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEAVEz7ZsgqjE7u2pm",
+   "title": "Open chapter 1 inside the taxi office with Sal",
+   "first": "2026-11-20T08:48:07-08:00",
+   "last": "2026-11-20T13:29:35-08:00",
+   "tags": [
+    "gem-canon01",
+    "voiceauto1"
+   ],
+   "cards": [
+    "c-gem-canon01",
+    "c-voiceauto1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGZvj5YBSMvPY8Zknj",
    "title": "Move the Project docs into the repo (Project is 97% full)",
    "first": "2026-11-20T12:24:26-08:00",
-   "last": "2026-11-20T13:26:48-08:00",
+   "last": "2026-11-20T13:29:29-08:00",
    "tags": [
     "projclean1a",
     "projclean1b",
@@ -17094,19 +17127,6 @@
     "c-idea-searchthrough",
     "c-startmore-opus",
     "c-startmore-sonnet"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEAVEz7ZsgqjE7u2pm",
-   "title": "Open chapter 1 inside the taxi office with Sal",
-   "first": "2026-11-20T08:48:07-08:00",
-   "last": "2026-11-20T13:22:58-08:00",
-   "tags": [
-    "gem-canon01"
-   ],
-   "cards": [
-    "c-gem-canon01",
-    "c-voiceauto1"
    ]
   },
   {
@@ -18666,8 +18686,8 @@
    "takes/20261120T211742-sz1/state.json"
   ]
  },
- "synced": "d9eee85c4004e696e95723cf18aa42c654d371a6",
- "synced_at": "2026-11-20T21:28:38+00:00",
+ "synced": "7faf33ae502bf0505795be8c0fec2561ffc22eda",
+ "synced_at": "2026-11-20T21:30:13+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
