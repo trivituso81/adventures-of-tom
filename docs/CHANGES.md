@@ -18,6 +18,12 @@ Tom (2026-11-20, card t-gracevoice-distort): "But why does this keep happening? 
 - Not fixed yet (needs Tom's one tap): other Grace story lines merged with the same filter. Their original takes are only on his phone, because Send my takes to Claude sent only lines tried more than once. It now also sends every Grace story take (`data/takes-wanted.json`, `WANT` in `voices.html`); card c-gracevoice-rest rebuilds them by exact match. The tool's pitch list flags up to about 180 Grace clips but over-counts (a deadpan take can sit low, "Number three. Rose licked a muffin." is 211 Hz as he kept it), so exact matching decides.
 - Test: `python3 tools/grace_voice_test.py` (no merge tool has the filter; a 44.1 kHz Grace take keeps its length and pitch through `merge-local.js`, and it fails on the old tool with 3.00 s 300 Hz becoming 4.13 s 230 Hz; the 5 lines are not the slowed copies; Send my takes counts a Grace line tried once and not a Rose one; Voice Library shots in portrait and landscape). `unused_voice.py` checks 1, 2, 3, 5 are 0, check 4 is 39 older lines this did not touch. `board_sync_test.py` R5 fails on untouched main too (other cards).
 
+## boardbar1 (2026-11-20): Board has no empty bar above the header in landscape
+- Tom 07:58, screenshot of the Board in landscape on the iPhone Duo: "Why is there a dead big blue bar at the top of the Kanban board iPhone duo horizontal view?"
+- Fact (cause): `board.html` gave the body `padding-top: env(safe-area-inset-top)`. In landscape on the Duo that inset is about 66 px, so an empty band in the page background sat above the sticky header. This is a guess from the screenshot and the code: the inset value was not measured on a phone.
+- Fix: in landscape the Board adds no top padding and the menu sits 58 px from the top (`@media (orientation:landscape)` at the end of the style block). Portrait is unchanged.
+- NOT tested on a phone. The game page has its own viewport fix (vpfit1).
+
 ## idea-removeall (2026-11-20): the small popups at the top of the screen are gone
 
 Tom (11-20): "Remove all the toasts that appear at the top of the screen in small frames with small font. They are unneeded". `showToast` and `queueToast` (`engine/world.js`) now show nothing; the queue timer is removed. Goal updates still pulse the location label as before.

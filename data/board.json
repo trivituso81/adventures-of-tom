@@ -10759,7 +10759,7 @@
    "col": "prog",
    "theme": "Tools",
    "title": "Board: empty bar at the top in landscape on the Duo",
-   "next": "Claude is removing the top padding the Board adds in landscape.",
+   "next": "Built boardbar1: in landscape the Board adds no top padding. Not tested on a phone.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -10772,6 +10772,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom: \"Why is there a dead big blue bar at the top of the Kanban board iPhone duo horizontal view?\" (screenshot of the Board in landscape with an empty band above the header). Related older fix for the game page: vpfit1."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Pushed boardbar1. Cause (not measured on a phone): body padding-top env(safe-area-inset-top) showed as an empty band in landscape. Removed it in landscape."
     }
    ],
    "prompt": {
