@@ -15144,7 +15144,7 @@
   {
    "id": "t-buildstry",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "theme": "Tools",
@@ -15166,8 +15166,14 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Build history redesign 3: archive, search and its own page is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-20T19:31:23.648Z"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "b-board-builds",
