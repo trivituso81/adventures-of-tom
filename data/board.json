@@ -16899,7 +16899,7 @@
    "title": "Which way should Rose face in the kitchen?",
    "theme": "Game Shell",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "decide",
    "next": "Your report \"rose facing the wrong way\" (chapter 1, the grands kitchen, Tom says \"Hi, Mom! Is that the cinnamon topping?\"): right now Rose faces left, toward Deedee. Pick which way she should face. This unblocks the card Fix the report backlog (2 open) (c-reports-5).",
    "choices": [
@@ -16923,8 +16923,15 @@
     {
      "d": "2026-11-20",
      "t": "Made from report r-20261120-113001-w756: the note alone does not say which way is right."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom chose: Toward Tom, who is talking",
+     "at": "2026-11-20T22:50:59.109Z"
     }
-   ]
+   ],
+   "done": "2026-11-20",
+   "answer": "Toward Tom, who is talking"
   },
   {
    "id": "c-fix-keysecrets2-try-2",
