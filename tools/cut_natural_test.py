@@ -54,7 +54,7 @@ SNAP = r"""()=>{ const P=a=>{ const p=position(a); return [Math.round(p.x*100)/1
     line:dialog.active?(dialog.lines[dialog.index]||'').slice(0,34):null,done:dialog.active?dialog.shown>=dialog.chars.length:null,
     cut:vis('cut-ctrl'),cls:document.documentElement.classList.contains('cutscene'),talking:document.documentElement.classList.contains('talking'),
     dpad:dirVis,aw:vis('action-wrap'),toast:tt.classList.contains('visible')?tt.textContent.slice(0,40):null,
-    map:currentMap.id,tom:P(player),tp:pose(player),g:g?P(g):null,gp:pose(g),r:r?P(r):null,rp:pose(r),rs:!!(r&&r.seat),rh:!!(r&&r.hidden),ride:!!STORY.flags.ride,
+    map:currentMap.id,tom:P(player),tp:pose(player),g:g?P(g):null,gp:pose(g),r:r?P(r):null,rp:pose(r),rs:!!(r&&r.seat),rh:!!(r&&r.hidden),ride:!!STORY.flags.ride,pan:(typeof SCENE_PROPS!=='undefined'&&SCENE_PROPS.muffinpan)?!!SCENE_PROPS.muffinpan.show:null,
     close:typeof closeup!=='undefined'&&!!closeup.active,show:!!intro.showcase,card:!!intro.card,
     flags:Object.keys(STORY.flags).filter(k=>/^(opening|ch1)/.test(k)).join(',')};
 }"""
@@ -177,6 +177,10 @@ def analyse(mode, log, walks, errs):
         off = [s for s in walkers if abs(s['r'][0] - s['tom'][0]) > 1.01 or abs(s['r'][1] - s['tom'][1]) > 1.01]
         facts['rose_off_tom_while_seated_samples'] = len(off)
         if off: fails.append(f"{mode}: seated Rose was away from Tom in {len(off)} samples, first {off[0]['r']} vs {off[0]['tom']}")
+    if mode == 'theft':   # heistart: after the grab the pan prop must be hidden (the step {prop,hide:true} once did nothing)
+        pans = [e['pan'] for e in log if e['pan'] is not None]
+        if True not in pans: fails.append('theft: the muffin pan prop was never shown')
+        elif pans[-1]: fails.append('theft: the muffin pan prop is still shown at the end of the scene')
     if mode == 'theft':
         first = next((i for i, s in enumerate(log) if s['ia'] and s['da']), None)
         if first is not None:

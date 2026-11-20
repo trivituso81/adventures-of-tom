@@ -6451,7 +6451,7 @@
    "col": "prog",
    "tag": "heistart",
    "auto": true,
-   "next": "Tap START. It fixes the bug that keeps the muffin pan on the counter after the theft (and the empty pan in Grump Hollow), and adds one new picture to the Art Library: the Mudling of the fights in six poses, carrying the muffin pan. Your card Generate and approve the new Mudling sheet comes next.",
+   "next": "Done: the muffin pan now leaves the counter when the Mudling takes it (build heistart), and the Library has the entry ch1-mudling-heist2. Next: your card t-heistart, then card c-heist1 rebuilds the scene.",
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
@@ -6472,6 +6472,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom copied the prompt to paste it into a new conversation."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Pushed heistart: compileScene now runs a prop step before hide (4 steps fixed: ch1Theft, ch1AfterBoss, ch1Amy, ch6Call), test added in cut_natural_test.py (fails before, passes after), Library entry ch1-mudling-heist2 added as a draft. t-heistart already says where to press, no change."
     }
    ],
    "prompt": {

@@ -26797,6 +26797,21 @@
   },
   {
    "status": "draft",
+   "versions": [],
+   "rejects": [],
+   "id": "ch1-mudling-heist2",
+   "tab": "Enemies",
+   "title": "Chapter 1: the Mudling steals the muffin pan, sheet of 6 poses (3 x 2)",
+   "ar": "3:2",
+   "refs": [
+    "art/raw/enemies/enemy-mudling-v2.png",
+    "art/raw/props/ch1-muffin-pan-v1.png"
+   ],
+   "group": "Chapter 1",
+   "prompt": "IMAGE REQUEST: ONE SINGLE SHEET. Return exactly one image, nothing else. Generate it now.\n\nATTACHED IMAGES\n1) The approved painting of the Mudling. Copy this creature as closely as possible: the same shape, colors, face with two eyes, leaf sprout and matte handbrushed finish.\n2) The approved painting of a twelve-cup muffin pan full of muffins. Copy it as closely as possible wherever the pan appears.\n\nPAINT THIS SHEET\nSix poses of the Mudling in a 3 by 2 layout on a flat magenta background (#FF00FF). Each pose fills most of its cell, nothing overlapping, the creature facing the same way as in attachment 1 in every pose.\nTop row: 1 curled into a tight round ball of mud, the leaf sprout sticking out of the top. 2 standing, head tipped back, looking up with wide eyes and an open mouth. 3 stretched tall and thin, both arms reaching straight up.\nBottom row: 4 standing proud, holding the muffin pan flat above its head with both arms, a big smug grin. 5 the same, pan above its head, sneaking, body leaning forward. 6 the same, pan above its head, sneaking, body leaning back."
+  },
+  {
+   "status": "draft",
    "versions": [
     {
      "n": 0,
