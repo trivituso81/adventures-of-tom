@@ -13148,20 +13148,24 @@
    "title": "Add START for Opus medium and Sonnet high cards",
    "theme": "Tools",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "startmore",
    "next": "Adding two more START tasks (Opus 5.5 medium, Sonnet 5.5 high), sending low-effort cards to their model's medium task, and one Tom card with the setup steps. Fable never starts by itself.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukDt5GX171U9RkvJskx",
     "opening": "\"Add START for more card sizes. Add two entries to routines in data/board.json: Opus 5.5 medium\""
    },
    "history": [
     {
      "d": "2026-11-20",
      "t": "Tom: \"Add START for more card sizes.\" New card; the routines, workflow secrets, routineFor and sync code, one Tom setup card and the tests are in this build."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -13455,6 +13459,17 @@
    "tags": [],
    "cards": [
     "c-gatezero"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDt5GX171U9RkvJskx",
+   "title": "Fix the muffin pan that never leaves the counter, and add the new Mudling sheet to the Art Library (heistart)",
+   "first": "2026-11-19T19:59:41-08:00",
+   "last": "2026-11-20T09:21:34-08:00",
+   "tags": [],
+   "cards": [
+    "c-heistart",
+    "c-startmore"
    ]
   },
   {
@@ -14282,16 +14297,6 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukDt5GX171U9RkvJskx",
-   "title": "Fix the muffin pan that never leaves the counter, and add the new Mudling sheet to the Art Library (heistart)",
-   "first": "2026-11-19T19:59:41-08:00",
-   "last": "2026-11-19T19:59:41-08:00",
-   "tags": [],
-   "cards": [
-    "c-heistart"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukGPg3Q41zGrRaPsq4n",
    "title": "Chapter 1 subtitles match your rerecorded voice clips",
    "first": "2026-11-19T19:25:51-08:00",
@@ -14819,8 +14824,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "565956cdb0c96feebbebf785122f1d52af18e83d",
- "synced_at": "2026-11-20T17:20:53+00:00",
+ "synced": "ac7f2ba8f960b426736e274f229d846eb56c684e",
+ "synced_at": "2026-11-20T17:22:23+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
