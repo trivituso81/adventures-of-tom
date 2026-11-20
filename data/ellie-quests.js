@@ -63,8 +63,7 @@ const ellieBeat=b=>{ const r=ELLIE_BETS.find(x=>x.n===b.n); return !!(r&&r.beat&
 
 // Hand over a prize: stacks go in the bag together, one pickup toast.
 function ellieGive(id,count) {
-  for(let i=1;i<(count||1);i++) bag.push(id);
-  grantItem(id);
+  grantItem(Array.from({length:count||1},()=>id));
 }
 
 // What Ellie says now, or null when she has no bet business (her usual lines play).

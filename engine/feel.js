@@ -407,7 +407,7 @@ function b7InstantWin(n) {
   b6Sync();
   let got='';
   const dr=d.drop;
-  if(dr&&Math.random()<dr.chance&&!(dr.once&&b6Owned(dr.id))) { bag.push(dr.id); const put=typeof autoGear==='function'?autoGear():[]; got=' Found: '+((items[dr.id]||{}).name||dr.id)+'.'+(put.length?' '+put.join(' '):''); }
+  if(dr&&Math.random()<dr.chance&&!(dr.once&&b6Owned(dr.id))) { bag.push(dr.id); const put=typeof autoGear==='function'?autoGear():[]; got=''; if(typeof itemBanner==='function') itemBanner([dr.id],((dr.msg||'')+' '+put.join(' ')).trim()); }   // itembanner1: the banner replaces the Found: line
   const x=(n.x+.5)*T,y=(n.y+1)*T-18,cols=d.vapor||['#ffe08a','#ff9ac0','#9fe8ff','#9be39a'];
   const parts=[]; for(let k=0;k<26;k++) { const a=Math.random()*Math.PI*2,s=40+Math.random()*90; parts.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-70,c:k%3?cols[k%cols.length]:['#ffe08a','#ff9ac0','#9fe8ff'][k%3],s:3+Math.floor(Math.random()*3)}); }
   B7.mapFx.push({x,y,t:0,t0:performance.now(),dur:1.5,parts,txt:'+'+xp+' XP'});

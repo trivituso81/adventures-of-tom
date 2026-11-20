@@ -18,7 +18,7 @@ const PB_NAMES={tom:'Tom',grace:'Grace',rose:'Rose',amy:'Amy',deedee:'Deedee',bo
 function pbEl() {
   let w=document.getElementById('party-banner'); if(w) return w;
   w=document.createElement('div'); w.id='party-banner'; w.setAttribute('role','status'); w.setAttribute('aria-live','polite');
-  w.innerHTML='<div class="pb-card"><img class="pb-art" alt=""><img class="pb-face" alt=""><div class="pb-words"><div class="pb-line"></div><div class="pb-note"></div></div></div><div class="pb-hint">Tap or press A to continue</div>';
+  w.innerHTML='<div class="pb-card"><img class="pb-art" alt=""><img class="pb-face" alt=""><div class="pb-icon"></div><div class="pb-words"><div class="pb-line"></div><div class="pb-note"></div></div></div><div class="pb-hint">Tap or press A to continue</div>';
   (document.getElementById('game')||document.body).appendChild(w);
   return w;
 }
@@ -28,6 +28,10 @@ const pbSound={
     [784,988,1175,1568].forEach((f,i)=>tone({type:'square',f0:f,dur:.12,vol:.06,delay:.34+i*.06}));
     [1047,1319,1568].forEach(f=>tone({type:'triangle',f0:f,dur:.9,vol:.12,delay:.62}));
     tone({type:'sine',f0:2093,dur:.9,vol:.07,delay:.62}); noise({dur:.5,vol:.035,delay:.62,f0:5000,f1:7500}); },
+  // itembanner1: a short original two-step sparkle that lands on a bright chord (shorter than join)
+  item(){ [698,880,1175].forEach((f,i)=>tone({type:'triangle',f0:f,dur:.12,vol:.14,delay:i*.07}));
+    [1397,1760].forEach(f=>tone({type:'triangle',f0:f,dur:.6,vol:.1,delay:.24}));
+    tone({type:'sine',f0:2349,dur:.6,vol:.06,delay:.24}); noise({dur:.3,vol:.03,delay:.24,f0:5500,f1:8000}); },
   leave(){ [784,659,523].forEach((f,i)=>tone({type:'triangle',f0:f,dur:.22,vol:.13,delay:i*.16}));
     [392,523,659].forEach(f=>tone({type:'sine',f0:f,dur:.9,vol:.09,delay:.5})); }
 };
@@ -36,10 +40,37 @@ function partyBanner(id,kind='join',note='') {
   pbQueue.push({id,kind,note});
   if(!pbBusy) pbNext();
 }
+// itembanner1 (Tom 2026-11-20): "anytime a item is retrieved through conversation with a character or through defeating a character by any means,
+// basically similar to the banner that we get when people join and leave the party, we need a banner ... for that item gained."
+// itemBanner(ids,note): one ITEM GAINED banner (the item's icon and name, a jingle, held until dismissed) in the same queue as the party banners; several items from one
+// source share one banner. note is the second line (the monster's drop line, or the auto-gear note). It waits while a fight is on screen.
+function itemBanner(ids,note='') {
+  ids=(Array.isArray(ids)?ids:[ids]).filter(id=>typeof items!=='undefined'&&items[id]);
+  if(!ids.length) return;
+  const go=()=>{ if(typeof battle!=='undefined'&&battle.active) { setTimeout(go,500); return; } pbQueue.push({kind:'item',ids,note}); if(!pbBusy) pbNext(); };
+  go();
+}
+function pbItemLine(ids) {
+  const n={}; ids.forEach(id=>n[id]=(n[id]||0)+1);
+  return 'Got '+Object.keys(n).map(id=>items[id].name+(n[id]>1?' x'+n[id]:'')).join(', ')+'!';
+}
 function pbNext() {
   const b=pbQueue.shift(); if(!b) { pbBusy=false; return; }
   pbBusy=true;
+  if(b.kind==='item') {
+    const w=pbEl(); w.classList.remove('painted','leave'); w.classList.add('item');
+    w.querySelector('.pb-art').removeAttribute('src'); w.querySelector('.pb-face').removeAttribute('src');
+    w.querySelector('.pb-icon').textContent=[...new Set(b.ids)].map(id=>items[id].icon).join('');
+    w.querySelector('.pb-line').textContent=pbItemLine(b.ids);
+    w.querySelector('.pb-note').textContent=b.note||'';
+    w.classList.remove('out'); void w.offsetWidth; w.classList.add('on');
+    pbShown=true; pbAt=performance.now();
+    if(typeof clearInput==='function') clearInput();
+    try { pbSound.item(); } catch(e) {}
+    return;
+  }
   const w=pbEl(),name=PB_NAMES[b.id],key=b.kind+'-'+b.id;
+  w.classList.remove('item');
   const has=typeof PARTY_BANNERS!=='undefined'&&PARTY_BANNERS.includes(key);
   const art=w.querySelector('.pb-art'),face=w.querySelector('.pb-face');
   w.classList.toggle('painted',has);
@@ -74,4 +105,4 @@ function partyBannerHeld() { return pbBusy||pbShown||pbQueue.length>0; }   // tr
   for(const t of ['pointerdown','pointerup','mousedown','mouseup','touchstart','touchmove','contextmenu']) window.addEventListener(t,e=>{ if(partyBannerHeld()) stop(e); },{capture:true,passive:false});
   for(const t of ['touchend','click']) window.addEventListener(t,e=>{ if(!partyBannerHeld()) return; stop(e); partyBannerDismiss(); },{capture:true,passive:false});
 })();
-addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{partyBanner,partyBannerBusy,partyBannerHeld,partyBannerDismiss,pbQueue}); });
+addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{itemBanner,partyBanner,partyBannerBusy,partyBannerHeld,partyBannerDismiss,pbQueue}); });

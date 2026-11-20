@@ -1,3 +1,10 @@
+## itembanner1 (2026-11-20): An ITEM GAINED banner shows when the party gets an item from a talk, a gift or a defeated monster
+
+- Card c-itembanner1. Tom (11-20): "anytime a item is retrieved through conversation with a character or through defeating a character by any means, basically similar to the banner that we get when people join and leave the party, we need a banner for like that item gained".
+- `itemBanner(ids, note)` in engine/party-banner.js: the item's picture (the game's emoji icon) and name ("Got Deedee's Cookie!"), a short original jingle, held until tap or A exactly like the party banner, in the same queue (a join banner shown at the same time comes after it). Several items from one source share one banner ("Got Juice x2, Cookie!"). It waits while a fight is on screen.
+- It replaces the small "Got ... It went in a pocket." popup (`grantItem`, data/party.js: NPC gifts, story give steps, Ellie's prizes, Nara, the first-visit souvenir) and the monster drop line: a win in the old battle shows the banner after the fight (the drop line is its second line, plus the auto-gear note), and a popped monster on the map does the same instead of the "Found:" text. Shop purchases keep their message. The victory card's own "Found:" line stays.
+- Not changed: stealing an item with Big Catch mid-fight keeps its floating text (the item is not from a defeat). Battle 3 has no item drops yet.
+- Test: tools/itembanner_test.py (portrait and landscape, queue order, waits for a fight). Shots: tools/shots/itembanner-portrait.png and -landscape.png.
 ## boardux2 (2026-11-20): Board cards read without opening them, and the card panel keeps its main button in view
 
 - Card c-boardux2, plan claude/boardux-plan.md sections 3.4, 3.5 and 3.7 (Built section has the details and the differences from the plan). Checks A10, A11 and A13.

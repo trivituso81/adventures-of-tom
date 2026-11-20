@@ -455,11 +455,13 @@ function unequipSlot(slot) {
   renderMenu();
 }
 
-function grantItem(id,queued) {   // queued: wait behind other popups (the first-visit souvenir)
-  bag.push(id);
+// itembanner1: the ITEM GAINED banner (engine/party-banner.js) replaces the old 'Got ... It went in a pocket.' popup. id may be a list (several items from one source, one banner).
+function grantItem(id) {
+  const ids=Array.isArray(id)?id:[id];
+  bag.push(...ids);
   const put=typeof autoGear==='function'?autoGear():[];   // Rose Mode dresses the party (engine/menu.js)
   sfx.pickup();
-  (queued?queueToast:showToast)('Got '+items[id].name+'. '+(put.length?put.join(' '):'It went in a pocket.'),put.length?3.2:2.6);
+  if(typeof itemBanner==='function') itemBanner(ids,put.length?put.join(' '):'It went in a pocket.');
 }
 
 function itemRow(id,tag,onClick,isStatic) {
