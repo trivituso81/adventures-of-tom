@@ -1,3 +1,12 @@
+## battlelabpage (2026-11-20): The Battle Lab has its own page and address
+
+Tom (11-20): "create a dedicated page with it's own URL for the Battle Lab".
+
+- New `battle-lab.html` (https://trivituso81.github.io/adventures-of-tom/battle-lab.html): loads no game code, shows a short "Opening the game" line and hands over to `index.html?go=battle-lab`, which asks the difficulty and then opens the Battle Lab fights (adminhub1's `?go=`). The Battle Lab runs on the game's engine, so the game's own files still load; the page is the address, the home screen icon and name ("AoT Battle Lab"), not a separate copy of the game.
+- Own home screen icon `icon-battlelab-180.png` and `-32.png` (gold burst on the admin page's dark blue).
+- `admin.html`: the Battle Lab button now points to `battle-lab.html`.
+- Test: `python3 tools/admin_hub_test.py` (new section: the page answers 200, lands on the difficulty choice, address cleaned, then the Battle Lab fights, 390x844 and 844x390; admin button href). Screenshots `tools/shots/battle-lab-page-*.png`.
+
 ## idea-welcomepage (2026-11-20): The welcome buttons fit their text, Reload and Admin are icons, and the chapter list has a Back and Easy, Medium, Hard bar so chapters start with no difficulty page
 
 Tom (11-20, new card on the board): "on the welcome page, shrink the width of new game and load so that the buttons fit the amount of text, setting a min width based on the widest button. change reload and admin to icon only buttons. / when clicking New Game and seeing the chapter list, at the top above the chpaters on the left should be the BACK button with icon pointing back. to the right of that should be the Easy, Medium, Hard toggles with VERY brief descriptions so they fit within the width of the frame. when clicking on a chapter, the difficulty interstitial should then no longer be needed".

@@ -13878,7 +13878,7 @@
    "lane": "claude",
    "col": "prog",
    "tag": "battlelabpage",
-   "next": "Building battle-lab.html: its own address that opens the Battle Lab straight away, with its own home screen icon and name. Then the admin page links to it.",
+   "next": "Built and pushed as battlelabpage. Tom checks it on his phone (card t-battlelabpagetry).",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -13890,6 +13890,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom (09:40): \"create a dedicated page with it's own URL for the Battle Lab\". Then, after a 404 on the proposed address: \"you have my full approval to access and update the repo\". New card; related to adminhub1, which only gave the Battle Lab the address index.html?go=battle-lab."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built battlelabpage: battle-lab.html, its icon, admin button points to it. Test: tools/admin_hub_test.py (portrait and landscape)."
     }
    ],
    "prompt": {

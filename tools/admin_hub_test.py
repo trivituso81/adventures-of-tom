@@ -12,6 +12,7 @@ def ok(c, m):
     if not c: fails.append(m)
 BUTTONS = ['Board', 'Art Library', 'Voice Library', 'Music Library', 'Script Editor', 'Pose Editor', 'Head Sizes', 'Portrait Crops', 'Effects',
            'Area Builder', 'Welcome Layout', 'Battle Lab', 'Block Break Lab']
+BATTLE_HREF = 'battle-lab.html'
 web = subprocess.Popen([sys.executable, '-m', 'http.server', str(PORT)], cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 time.sleep(2)
 try:
@@ -34,6 +35,7 @@ try:
                 want = 'Nothing waits on you.' if n == 0 else '%d card%s on you.' % (n, ' waits' if n == 1 else 's wait')
                 want = want if n == 0 else ('%d %s' % (n, 'card waits on you.' if n == 1 else 'cards wait on you.'))
                 ok(pg.inner_text('#wait') == want, 'waiting line "%s" matches the board (%d)' % (pg.inner_text('#wait'), n))
+                ok(pg.evaluate("document.getElementById('b-battle-lab').getAttribute('href')") == BATTLE_HREF, 'admin Battle Lab button points to battle-lab.html')
                 links = pg.evaluate("[...document.querySelectorAll('a.btn')].map(a=>a.getAttribute('href'))")
                 for l in links:
                     r = ctx.request.get(base + l)
@@ -59,6 +61,19 @@ try:
         pg.screenshot(path=os.path.join(SHOTS, 'admin-hub-go-battle.png'))
         pg.evaluate('splash.list.find(c=>!c.cls).act()'); pg.wait_for_timeout(500)
         ok(pg.evaluate('splash.mode') == 'lab', 'then the Battle Lab list'); pg.close()
+        # battle-lab.html (battlelabpage): its own address, in portrait and landscape
+        for w, h in ((390, 844), (844, 390)):
+            c2 = b.new_context(viewport={'width': w, 'height': h}); pg = c2.new_page(); errs = []; pg.on('pageerror', lambda e: errs.append(str(e)))
+            ok(c2.request.get(base + 'battle-lab.html').status == 200, '%dpx: battle-lab.html answers 200' % w)
+            ok(c2.request.get(base + 'icon-battlelab-180.png').status == 200, '%dpx: battle lab icon answers 200' % w)
+            pg.goto(base + 'battle-lab.html'); pg.wait_for_function('()=>window.splash&&splash.mode', timeout=120000); pg.wait_for_timeout(2500)
+            ok(pg.evaluate('splash.mode') == 'diff', '%dpx: battle-lab.html lands on the difficulty choice' % w)
+            ok(pg.evaluate("location.pathname.endsWith('index.html')&&!location.search"), '%dpx: address cleaned after the hand-over' % w)
+            pg.screenshot(path=os.path.join(SHOTS, 'battle-lab-page-%d.png' % w))
+            pg.evaluate('splash.list.find(c=>!c.cls).act()'); pg.wait_for_timeout(500)
+            ok(pg.evaluate('splash.mode') == 'lab', '%dpx: then the Battle Lab fights' % w)
+            pg.screenshot(path=os.path.join(SHOTS, 'battle-lab-page-lab-%d.png' % w))
+            ok(not errs, '%dpx: no page errors %s' % (w, errs)); c2.close()
         pg, e = go('?go=block-break-lab')
         pg.wait_for_timeout(3000)
         ok(pg.evaluate("typeof currentMap!=='undefined'&&currentMap===worlds.oakpark"), '?go=block-break-lab lands in Old Oak Park')
