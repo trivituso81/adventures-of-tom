@@ -1213,7 +1213,7 @@
    "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (7 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100352-7v5z, r-20261114-100555-mxvd, r-20261114-100734-1a2w, r-20261114-101501-c5no, r-20261114-101538-nre4, r-20261114-104915-g4gl and 1 more. First note: For this line in particular, we need to create a special frame that can be used in both the dialog a",
+   "next": "Fixed 1 of 8 (Old Iron-Gill overlapping the pier, r-20261114-182326-95v4). 7 art reports remain: r-20261114-100352-7v5z, -100555-mxvd, -100734-1a2w, -101501-c5no, -101538-nre4, -104915-g4gl, -162358-jykk. Next: make Art Library entries for them.",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -1251,11 +1251,16 @@
     {
      "d": "2026-11-19",
      "t": "The backlog now holds 7 report(s)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped part a: Old Iron-Gill moved clear of the pier. 7 art reports still open."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-19"
+   "changed": "2026-11-19",
+   "after": "nothing for Tom: c-reports"
   },
   {
    "id": "t-startsetup",

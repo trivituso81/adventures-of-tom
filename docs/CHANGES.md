@@ -1,3 +1,9 @@
+## reports-2026-11-19a (2026-11-20): Cattail Pier: Old Iron-Gill now surfaces on the water, clear of the pier
+
+- Report r-20261114-182326-95v4 (bug), Tom: "Iron Gil is overlapping the pier. He needs to be purely on the water all the way to the right, and if some of the right side fence is cut off, then so be it, but you can't be overlapping with the pier at all".
+- `SCENES.ch3Pier` (data/scenes.js): Old Iron-Gill spawns at tile (20,13) and stops at (18,13) (was 16 and 14); his swim away starts from the same row at (18,14). Checked in portrait-rotated landscape frames: he sits fully in the water, no overlap with the planks.
+- The other 7 open reports (new art frames: Deedee's glasses, the mud blob, Bapi's mustache, thinking pose, grass/bulb/cube picture, dazed NPCs, holding the flashbulb) are Art Library work and stay open.
+
 ## ch1art2 (2026-11-19): four rejected chapter 1 pictures (and Rose on shoulders) get fixed prompts and go back to To do
 
 - Art Library, group Chapter 1. Each prompt changed only where Tom's reject note points; everything else is word for word the same. Entries back to draft, `promptRev: 1` so an older edit saved on his phone is dropped.
