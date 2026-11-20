@@ -8211,7 +8211,7 @@
   {
    "id": "t-cardlinks1try",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -8231,6 +8231,10 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: nothing was left for it to wait on."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
     }
    ],
    "links": [
@@ -8249,7 +8253,8 @@
      "label": "Tom's line"
     }
    ],
-   "next": "After the publish of build cardlinks1: ADMIN > BOARD, open the card Try Generate all on the new Mudling sheet card and tap Open in the Art Library: the Mudling sheet. The Art Library should open on that exact entry, its group and row open. Then open the card Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped) and tap Open in the Voice Library: it should open on Tom's line with its takes shown. All good or Something is wrong."
+   "next": "After the publish of build cardlinks1: ADMIN > BOARD, open the card Try Generate all on the new Mudling sheet card and tap Open in the Art Library: the Mudling sheet. The Art Library should open on that exact entry, its group and row open. Then open the card Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped) and tap Open in the Voice Library: it should open on Tom's line with its takes shown. All good or Something is wrong.",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-oldchecks",
