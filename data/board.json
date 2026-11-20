@@ -13158,7 +13158,7 @@
    "id": "c-reports-4",
    "tag": "reports-2026-11-20",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Game Shell",
    "title": "Fix the report backlog (3 open)",
    "next": "Done: the three kitchen-scene reports (Rose shown twice, Hi Mom line, feelings frames) are fixed in build reports-2026-11-20. Tom plays the scene to check.",
@@ -13217,13 +13217,18 @@
      "d": "2026-11-20",
      "t": "Fixed r-20261120-091238-jecm, r-20261120-091310-jqps, r-20261120-091936-yxqb in build reports-2026-11-20.",
      "at": "2026-11-20T18:30:00.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Done by the board: the backlog is empty."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
    "started_at": "2026-11-20T18:02:04+00:00",
-   "after": "t-reports4play"
+   "after": "t-reports4play",
+   "done": "2026-11-20"
   },
   {
    "id": "c-idea-implementlisteni",
@@ -14813,6 +14818,20 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEEY5DfFUdRMybmFjx",
+   "title": "Fix the report backlog (3 open)",
+   "first": "2026-11-20T18:04:32Z",
+   "last": "2026-11-20T18:15:03Z",
+   "tags": [
+    "reports-2026-11-20"
+   ],
+   "cards": [
+    "c-reports-4",
+    "c-reports-2",
+    "c-reports-3"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEhdz3K8a1vVuo5v2g",
    "title": "Fix: Open the Battle Lab page on your home screen",
    "first": "2026-11-20T18:08:46Z",
@@ -14844,16 +14863,6 @@
    "tags": [],
    "cards": [
     "t-projclean-run"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEEY5DfFUdRMybmFjx",
-   "title": "Fix the report backlog (3 open)",
-   "first": "2026-11-20T18:04:32Z",
-   "last": "2026-11-20T18:04:32Z",
-   "tags": [],
-   "cards": [
-    "c-reports-4"
    ]
   },
   {
@@ -16715,8 +16724,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "7bfd260d6b192af709bab865f05a65a3a78734c0",
- "synced_at": "2026-11-20T18:12:45+00:00",
+ "synced": "7a27456c58d2b8477b0348568985395c95e31db8",
+ "synced_at": "2026-11-20T18:15:43+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
