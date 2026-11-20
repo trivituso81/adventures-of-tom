@@ -1080,6 +1080,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom: \"what is the fire URL? i see nothing to copy\". Step now says where the plus sign is and what the Fire URL and token look like, with a fallback after Create."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom sent the screen: API trigger set, \"Token will be generated when you save\". Fire URL and token appear only after Create. Steps rewritten to match."
     }
    ],
    "steps": [
@@ -1087,10 +1091,9 @@
     "Name: type Board START.",
     "Prompt box: tap Copy this text (below the steps) and paste it into the big prompt box.",
     "Model picker at the bottom right of the prompt box: Sonnet 5.5 and Medium are already right. Leave it.",
-    "Trigger row: look at the far right end of that row, where there is a plus sign (+). Tap it and pick API from the little menu. A new box appears in that row. If the Schedule, Daily, 09:59 part can be removed, remove it, so API is the only trigger. Do not leave the daily schedule on: it would start a run every morning with no card.",
-    "In that API box, the Fire URL is a long web address starting with https://api.anthropic.com. Tap the copy icon next to it, or select it and copy it, and paste it somewhere you can find it (Notes works). Then tap Generate token. A box titled Token generated appears: copy the token into Notes too, now, because it is shown only once. If no API box appears before you create the task, skip ahead: tap Create, then open the new task from the list, tap the menu next to its name, choose Edit, and do this same plus sign and API step there.",
-    "Advanced settings: Repository should say trivituso81/adventures-of-tom and Cloud environment Default is fine. If there is a switch that lets runs push to branches other than claude/, turn it on.",
+    "Trigger row: it should show API (not Schedule) with the words Token will be generated when you save. That is correct and nothing is missing. If the little menu with Schedule and GitHub event is open, tap an empty part of the screen to close it. Do not add either of those.",
     "Tap Create.",
+    "After Create, a box called Token generated may pop up. If it does, copy the token into Notes right away (it is shown only once). Then find the Fire URL: on the task's page tap the menu next to its name, choose Edit, and look in the Trigger row, where the API part now shows a Fire URL (a long address starting with https://api.anthropic.com) and the token controls. Copy the Fire URL into Notes. If you missed the token, tap Regenerate there to get a new one.",
     "On github.com open the repo, then Settings > Secrets and variables > Actions > New repository secret. Add CLAUDE_TASK_SONNET_MEDIUM_URL (the Fire URL) and CLAUDE_TASK_SONNET_MEDIUM_TOKEN (the token).",
     "Come back here and tap I did this. The board turns START on by itself and starts the test card (Test START on one real card)."
    ]
