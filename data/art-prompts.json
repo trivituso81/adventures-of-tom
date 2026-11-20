@@ -16032,8 +16032,17 @@
    "prompt": "IMAGE REQUEST: ONE SINGLE IMAGE. Return exactly one image, nothing else. Use the attached Gate Zero painting.\n\nReturn the same painting, unchanged in every way, except: remove the white airplane outside the big windows (its body, wings, tail, engines and windows). Where the airplane was, paint what is behind it: the same wet airfield at dusk, the same distant runway lights, hills and evening sky, continuing naturally. Keep the gray jet bridge tunnel attached to the building where it is, simply ending in the open air.\n\nEverything else stays exactly where it is, at exactly the same size: the window frames, pillars, lamps, the departures board, the podium, the jet bridge door, every seat, the carpet, the plants, the posts and the railings. Same canvas size and framing, same colors and light, same painted brushwork. Do not add anything. No people, no words. Deliver the image itself."
   },
   {
-   "status": "draft",
-   "versions": [],
+   "status": "approved",
+   "versions": [
+    {
+     "n": 0,
+     "file": "art/raw/rooms/room-gatezero-plane-v1.png",
+     "date": "2026-11-20",
+     "from": "v1",
+     "at": 1795163961857,
+     "srv": "room-gatezero-plane@20261120T075035"
+    }
+   ],
    "rejects": [],
    "id": "room-gatezero-plane",
    "tab": "Rooms",
