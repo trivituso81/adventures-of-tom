@@ -8601,6 +8601,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukG3eY6YJ7gWZ4DLac2",
+   "title": "Scene staging follow-ups (facing, cut-front, close-up, boss size)",
+   "first": "2026-11-20T00:23:59-08:00",
+   "last": "2026-11-20T00:23:59-08:00",
+   "tags": [],
+   "cards": [
+    "c-stagefollow"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGsiGYgETpYemWpMgR",
    "title": "Give BOARD and ADMIN their own favicon and Home Screen icon (adminicons1)",
    "first": "2026-11-20T00:08:07-08:00",
@@ -9221,8 +9231,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "fbd41a1be4351738515255da39701f4dbb7fb6ec",
- "synced_at": "2026-11-20T08:23:13+00:00",
+ "synced": "eb6d86ed07cbb0d87816bc3a1ef04183dc0ca01e",
+ "synced_at": "2026-11-20T08:24:56+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
