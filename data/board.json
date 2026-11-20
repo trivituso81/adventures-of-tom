@@ -9231,7 +9231,7 @@
    "id": "c-fix-artgen2look",
    "tag": "fix-artgen2look",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Look at the QA results on a real pictures card",
@@ -9254,7 +9254,7 @@
    ],
    "chat": {
     "url": "",
-    "opening": "Something is wrong on t-artgen2look"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -9264,6 +9264,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom reported on t-artgen2look: Well, you need to like check to see if an image is in the game before you tell me I need to generate it, because in this case I had already uploaded a hero of Young Boppy"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation."
     }
    ],
    "prompt": {
