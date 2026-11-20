@@ -427,7 +427,7 @@
    "changed": "2026-11-19",
    "created": "2026-11-18",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGnrZZnUF1s6ufzVfe",
+    "url": "https://claude.ai/code/session_01RXeukGnrZZnUF1s6ufzVfe",
     "opening": "unknown"
    },
    "history": [
@@ -446,6 +446,10 @@
     {
      "d": "2026-11-20",
      "t": "Session started by START; building pubfast2 (the plan doc in the Project was not readable, so the plan was rebuilt from docs/WORKFLOW.md)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -1470,9 +1474,42 @@
     "effort": "medium (steps are known)",
     "text": "Remove the door frame height-marks beat from SCENES.ch1Theft, retire Art Library entry ch1-doorframe and its close-up files, update the docs and canon addendum, play chapter 1 in portrait and landscape, run smoke, tag_check, unused_voice and board_check, and push build ch1nodoor. You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "b-board-convclosed",
+   "tag": "board-convclosed",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Tools",
+   "title": "The Conversations list on the board is closed by default, and a section you open or close stays that way when the page reloads",
+   "next": "Done: The Conversations list on the board is closed by default, and a section you open or close stays that way when the page reloads",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFYTc9P9AapwKc6ZEM",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as board-convclosed. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukGnrZZnUF1s6ufzVfe",
+   "title": "Publishing speed, step 2: art/raw off the site",
+   "first": "2026-11-20T01:38:35Z",
+   "last": "2026-11-20T01:38:35Z",
+   "tags": [],
+   "cards": [
+    "c-pubfast2"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukHJDQke3jpTcqvDBk6",
    "title": "Test START on one real card (starttest)",
@@ -1484,6 +1521,20 @@
    "cards": [
     "c-starttest",
     "c-copydocs"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFYTc9P9AapwKc6ZEM",
+   "title": "START button: one tap on a card opens the conversation for you (board3)",
+   "first": "2026-11-19T16:34:00-08:00",
+   "last": "2026-11-19T17:38:55-08:00",
+   "tags": [
+    "board3",
+    "board-convclosed"
+   ],
+   "cards": [
+    "c-board3",
+    "t-startsetup"
    ]
   },
   {
@@ -1506,19 +1557,6 @@
    ],
    "cards": [
     "c-clipch1remake"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFYTc9P9AapwKc6ZEM",
-   "title": "START button: one tap on a card opens the conversation for you (board3)",
-   "first": "2026-11-19T16:34:00-08:00",
-   "last": "2026-11-19T17:25:29-08:00",
-   "tags": [
-    "board3"
-   ],
-   "cards": [
-    "c-board3",
-    "t-startsetup"
    ]
   },
   {
@@ -1617,8 +1655,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "f2d9f7c9aaecc4f206ee5139ce81cb75c70c2b27",
- "synced_at": "2026-11-20T01:36:09+00:00",
+ "synced": "d21ceb53344ae14b45025e910435df22f14c29c0",
+ "synced_at": "2026-11-20T01:39:20+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
