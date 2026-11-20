@@ -7676,19 +7676,23 @@
    "title": "Casa Alvarez: place the six walkers and check the 18 pages",
    "theme": "Areas",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "next": "Ready to start. Hand-places the walkers in the living room (claude/next-addendum-near1.md) and checks every page in portrait and landscape.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
     "url": "",
-    "opening": "not started"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
      "d": "2026-11-20",
      "t": "Moved off claude/next.md onto the board by c-nextclean."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation."
     }
    ],
    "prompt": {
