@@ -95,6 +95,14 @@ div.card{cursor:pointer}
 .ch{display:block;width:100%;text-align:left;margin:6px 0 0;background:#3a3566;border-radius:12px;padding:10px 12px}
 .ch small{display:block;font-weight:400;color:#cfc9ff;margin-top:2px;font-size:13px}
 .ch.rec{background:#2f9e63}.ch.rec small{color:#e8fff2}
+.rv{display:flex;gap:8px;margin-top:10px}
+.rv button{flex:1;min-height:48px;font-size:15px}
+button.bad{background:#b4414f;color:#fff}
+textarea{font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px solid #3a3566;background:#0f0d24;color:#fff;width:100%;min-height:110px;resize:vertical}
+.shot{display:flex;align-items:center;gap:10px;margin:8px 0;flex-wrap:wrap}
+.shot img{max-height:90px;border-radius:8px;border:1px solid #3a3566}
+.fixnext{color:#7be0a6;font-size:12px;margin-top:6px;font-weight:600}
+.what{font-size:17px;font-weight:700;color:#7be0a6;margin:8px 0}
 #lanesView{display:none}
 @media (min-width:860px){
 #secView{display:none}#lanesView{display:block}
@@ -137,6 +145,8 @@ const ageOf=c=>Math.max(0,dayNum(today())-dayNum(c.changed||c.created||today()))
 const nowMs=()=>Date.now();
 const ASKS=[['play','PLAY AND REPORT'],['pictures','REVIEW PICTURES'],['animations','REVIEW ANIMATIONS'],['voice','VOICE'],['script','READ A SCRIPT'],['decide','DECIDE'],['setup','SET UP']];
 const askName=k=>(ASKS.find(a=>a[0]===k)||[k,'OTHER'])[1];
+const REVIEW=['play','pictures','animations','voice','script'];   // board4: cards Tom tests or looks at get All good and Something is wrong
+const isReview=c=>!!c&&c.lane==='tom'&&c.col!=='done'&&REVIEW.includes(c.ask);
 const HIST=id=>' Board card '+id+'. Read its history first: my notes and answers are there.';
 const withId=c=>{const t=(c.prompt&&c.prompt.text)||'';return t.indexOf('Read its history first')>=0?t:t+HIST(c.id);};
 const PROJECT='https://claude.ai/project/01a14d08-5251-75c8-a191-5d11f4245788';
@@ -169,7 +179,8 @@ const blocksOpen=c=>(c.blocks||[]).map(cardById).filter(x=>x&&x.col!=='done');
 const secYour=()=>open().filter(c=>c.lane==='tom'&&(c.col==='up'||c.col==='prog'));
 const secReady=()=>open().filter(c=>c.lane==='claude'&&c.col==='up');
 const secRun=()=>open().filter(c=>c.col==='prog'&&c.lane!=='tom'&&!c.quiet);
-const secStuck=()=>open().filter(c=>c.col==='wait'||(c.col==='prog'&&c.quiet));
+const waitsOnClaude=c=>c.lane==='tom'&&c.col==='wait'&&blockedBy(c).some(k=>k.lane==='claude');   // a tested card waiting on its fix is Claude's move, not stuck
+const secStuck=()=>open().filter(c=>(c.col==='wait'&&!waitsOnClaude(c))||(c.col==='prog'&&c.quiet));
 const secDone=()=>B.cards.filter(c=>c.col==='done'&&!c.retired&&c.done&&dayNum(today())-dayNum(c.done)<=3&&themeOk(c));
 const routineFor=c=>{const p=c.prompt;if(!p)return null;return (B.routines||[]).find(r=>String(p.model||'').startsWith(r.model)&&String(p.effort||'').startsWith(r.effort))||null;};
 const startable=c=>{const r=routineFor(c);return !!(r&&r.enabled&&c.lane==='claude'&&c.col==='up'&&!c.start&&!blockedBy(c).length);};
@@ -195,13 +206,16 @@ function cardHtml(c,ctx){
   let extra='';
   if(c.lane==='tom'&&c.col!=='done'&&bl.length) extra+='<div class="unb">Unblocks: '+esc(bl[0].title)+(bl.length>1?' and '+(bl.length-1)+' more':'')+'</div>';
   if(ctx==='run'||ctx==='stuck'&&c.col==='prog'){const s=sessionFor(c);extra+='<div class="meta2">'+(c.chat&&c.chat.url?'<a href="'+esc(c.chat.url)+'" target="_blank" rel="noopener" style="color:#ffd34d;font-weight:700">Open chat</a> · ':'')+'last push '+esc(s?ago(s.last):'unknown')+'</div>';}
+  if(c.lane==='claude'&&c.col!=='done'){const back=blocksOpen(c).filter(x=>x.lane==='tom');if(back.length)extra+='<div class="fixnext">When this ships, you check again: '+esc(back.map(x=>x.title).join('; '))+'</div>';}
   if(c.quiet) extra+='<div class="quiet">Quiet for '+quietFor(c)+': the conversation may have stopped</div>';
   if(ctx==='stuck'&&c.col==='wait'){const by=blockedBy(c);extra+='<div class="meta2">'+(by.length?'Waits on: '+esc(by.map(x=>x.title).join('; ')):'Waits on '+esc(laneName(c.waiting_on||'')))+'</div>';}
   let row='';
   if(c.lane==='claude'&&c.col!=='done'&&c.prompt&&(ctx==='ready'||ctx==='stuck')) row='<div class="row">'+(startable(c)?'<button class="small good" type="button" data-act="start" data-id="'+esc(c.id)+'">START</button>':'')+'<button class="small gold" type="button" data-act="copy" data-id="'+esc(c.id)+'">Copy prompt</button></div>';
   if(c.start_error&&c.col!=='done') extra+='<div class="quiet">START failed last time: '+esc(c.start_error)+'</div>';
+  if(isReview(c)&&(c.col==='up'||c.col==='prog')) row+=rvBtns(c.id);
   return '<div class="card" role="button" tabindex="0" data-id="'+esc(c.id)+'"><div class="t">'+esc(c.title)+'</div><div class="n">'+esc(c.next)+'</div><div class="meta">'+meta+'</div>'+extra+row+'</div>';
 }
+const rvBtns=id=>'<div class="rv"><button class="good" type="button" data-act="good" data-id="'+esc(id)+'">All good</button><button class="bad" type="button" data-act="wrong" data-id="'+esc(id)+'">Something is wrong</button></div>';
 function convHtml(s){
   const [k,l]=convState(s),cs=(s.cards||[]).map(cardById).filter(Boolean);
   return '<div class="conv"><div class="t">'+esc(s.title||'Conversation')+'</div><div class="m"><span class="st '+k+'">'+l+'</span><span>last push '+esc(ago(s.last))+'</span>'+((s.tags||[]).slice(0,3).map(t=>'<span class="age">'+esc(t)+'</span>').join(''))+'<a href="'+esc(s.url)+'" target="_blank" rel="noopener">Open chat</a></div>'+(cs.length?'<div class="m">Cards: '+esc(cs.map(c=>c.title).join('; ').slice(0,160))+'</div>':'')+'</div>';
@@ -275,11 +289,12 @@ function openSheet(id){
   if(c.lane==='tom'&&c.ask&&c.col!=='done') h+='<h4>What you do</h4><p><span class="ask">'+esc(askName(c.ask))+'</span></p>';
   h+='<h4>Next step</h4><p style="white-space:pre-line">'+esc(c.next)+'</p>';
   if((c.steps||[]).length) h+='<h4>Steps, in order</h4><ol>'+c.steps.map(x=>'<li style="margin:0 0 8px">'+esc(x)+'</li>').join('')+'</ol>';
+  if(isReview(c)&&c.col!=='wait') h+='<h4>How did it go?</h4>'+rvBtns(c.id)+'<p class="hint" style="margin-top:6px">Something is wrong sends your words to Claude as a fix. This card then waits on the fix and comes back to you to check.</p>';
   if(c.paste) h+='<h4>Text to paste</h4><pre id="ptxt2">'+esc(c.paste)+'</pre><button class="small gold" id="bpaste" type="button">Copy this text</button>';
   if(c.answer) h+='<h4>Your answer</h4><p>'+esc(c.answer)+'</p>';
   if(c.start_error&&c.col!=='done') h+='<p class="err">START failed last time: '+esc(c.start_error)+'</p>';
   if(c.note) h+='<h4>Your note</h4><p>'+esc(c.note)+'</p>';
-  if(c.col==='wait'){const by=bb;h+='<h4>Waiting on</h4><p>'+(by.length?esc(by.map(x=>x.title).join('; ')):esc(laneName(c.waiting_on||'')))+'</p>';}
+  if(c.col==='wait'){const by=bb;h+='<h4>Waiting on</h4><p>'+(by.length?esc(by.map(x=>x.title).join('; ')):esc(laneName(c.waiting_on||'')))+(waitsOnClaude(c)?' When it ships, this card comes back to you to check again.':'')+'</p>';}
   if(bl.length) h+='<h4>Unblocks</h4><ul>'+bl.map(x=>'<li>'+esc(x.title)+' ('+esc(laneName(x.lane))+')</li>').join('')+'</ul>';
   if(bb.length&&c.col!=='wait') h+='<h4>Blocked by</h4><ul>'+bb.map(x=>'<li>'+esc(x.title)+' ('+esc(laneName(x.lane))+')</li>').join('')+'</ul>';
   const ch=c.chat||{};
@@ -297,7 +312,7 @@ function openSheet(id){
   h+='<h4>History</h4><details><summary class="hint">'+((c.history||[]).length)+' entries (tap to open)</summary><ul>'+(c.history||[]).slice().reverse().map(x=>'<li>'+esc(x.d)+': '+esc(x.t)+'</li>').join('')+'</ul></details>';
   const mine=c.lane==='tom'&&c.col!=='done',any=c.col!=='done',dec=mine&&c.ask==='decide'&&(c.choices||[]).length;
   if(dec){h+='<h4>Pick one</h4>'+c.choices.map((x,i)=>'<button class="ch'+(i===0?' rec':'')+'" type="button" data-choice="'+i+'">'+esc(x)+((c.leads||[])[i]?'<small>'+esc(c.leads[i])+'</small>':'')+'</button>').join('')+'<button class="ch" type="button" data-choice="other">Something else<small>Type your own answer</small></button>';}
-  h+='<div class="btns">'+(mine&&!dec?'<button class="good" id="bdid" type="button">I did this</button>':'')+(mine?'<button class="gold" id="btake" type="button">Claude takes this</button>':'')+(any?'<button id="bnot" type="button">Not needed</button>':'')+'<button id="bnote" type="button">Note</button><button id="bclose" type="button">Close</button></div><div id="act"></div><p class="err" id="serr"></p>';
+  h+='<div class="btns">'+(mine&&!dec&&!isReview(c)?'<button class="good" id="bdid" type="button">I did this</button>':'')+(mine&&!isReview(c)?'<button class="gold" id="btake" type="button">Claude takes this</button>':'')+(any?'<button id="bnot" type="button">Not needed</button>':'')+'<button id="bnote" type="button">Note</button><button id="bclose" type="button">Close</button></div><div id="act"></div><p class="err" id="serr"></p>';
   $('sheet').innerHTML=h;$('sheet').style.display='block';$('dim').style.display='block';$('sheet').scrollTop=0;
 }
 function closeSheet(){$('sheet').style.display='none';$('dim').style.display='none';cur=null;}
@@ -347,6 +362,90 @@ async function startCard(id){
     toast('Starting');render();$('sheet').innerHTML='<h2>Starting.</h2><p>The conversation opens on '+esc(modelShort(cardById(id)||{prompt:{}}))+' in about a minute. Its link appears on the card and in CONVERSATIONS. Nothing to copy.</p><div class="btns"><button id="bclose" type="button">Close</button></div>';$('sheet').style.display='block';$('dim').style.display='block';}
   catch(e){if($('serr'))$('serr').textContent=e.message;else toast(e.message);}
 }
+// ---- board4: All good and Something is wrong on the cards Tom tests or looks at.
+// Something is wrong saves his words (and a screenshot on branch inbox, folder board-shots) into a Claude fix card; the tested card waits on it and
+// comes back to him when the fix ships (R1). Prompts name repo files only: a START run cannot read the Project's claude/ docs (card c-copydocs).
+const ASKWORD={pictures:'pictures',animations:'animations',voice:'voice',script:'dialogue'};
+const fixModel=c=>c.ask==='play'?['Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)','medium (one report, a small piece of work)']
+  :['Claude Opus 5.5 (row D: '+(ASKWORD[c.ask]||'this')+' are judged by taste)','medium (fixing what you named, starting from what is there)'];
+const shortOf=p=>String(p.model||'').split(' (')[0].replace('Claude ','')+', effort '+String(p.effort||'').split(' ')[0];
+function fixPrompt(f){
+  const r=f.reports,ids=[...new Set(r.map(x=>x.card))];
+  return 'Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards '+f.id+' and '+ids.join(', ')+' in data/board.json, history included. Your first push is the commit board: start '+f.id+'.\n\n'
+   +'Tom tested and found problems:\n'+r.map((x,i)=>(i+1)+'. Card '+x.card+' ('+x.title+', ask '+x.ask+'). He was asked: '+x.asked+' He wrote: '+x.words+(x.shot?' Screenshot: '+x.shot+' on branch inbox (git fetch --depth=1 origin inbox, then git show origin/inbox:'+x.shot+' into a file in /tmp, and look at it).':'')).join('\n')
+   +'\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since '+r[0].at+' about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\n'
+   +'For each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card '+ids.join(', ')+' to say exactly what to look at again (shipping moves it back to Tom), keep after set to '+ids[0]+', and give the build '+f.tag+' a docs/CHANGES.md heading; the entry quotes his words.'+PERM;
+}
+let shotData='';
+function readShot(file){return new Promise((ok,no)=>{const u=URL.createObjectURL(file),im=new Image();
+  im.onload=()=>{const k=Math.min(1,1280/Math.max(im.width,im.height)),cv=document.createElement('canvas');cv.width=Math.max(1,Math.round(im.width*k));cv.height=Math.max(1,Math.round(im.height*k));
+    cv.getContext('2d').drawImage(im,0,0,cv.width,cv.height);URL.revokeObjectURL(u);ok(cv.toDataURL('image/jpeg',.82));};
+  im.onerror=()=>{URL.revokeObjectURL(u);no(new Error('That picture could not be read. Try a screenshot from Photos.'));};im.src=u;});}
+async function putFile(path,b64,msg,branch){
+  const tok=lsGet(TOKEN);
+  const w=await fetch(GH()+'/repos/'+REPO+'/contents/'+path,{method:'PUT',headers:{Authorization:'Bearer '+(tok||'test'),Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify({message:msg,content:b64,branch})});
+  if(!w.ok) throw new Error('GitHub '+w.status);
+}
+function wrongForm(id){
+  const c=cardById(id);if(!c)return;cur=id;shotData='';
+  $('sheet').innerHTML='<h2>Something is wrong</h2><p class="hint">'+esc(c.title)+'</p>'
+   +'<h4>What did you see?</h4><textarea id="wtxt" placeholder="What is wrong and where. Several problems are fine, one per line."></textarea>'
+   +'<div class="shot"><button class="small" type="button" id="wpick">Add a screenshot</button><span class="hint" id="wprev">Optional</span><input type="file" accept="image/*" id="wshot" hidden></div>'
+   +'<p class="hint">Filed a pencil tab report in the game while you played? This fix picks it up too.</p>'
+   +'<div class="btns"><button class="bad" type="button" id="wgo">Send to Claude</button><button type="button" id="bclose">Cancel</button></div><p class="err" id="serr"></p>';
+  $('sheet').style.display='block';$('dim').style.display='block';$('sheet').scrollTop=0;
+}
+async function sendWrong(id){
+  const words=clean($('wtxt').value).replace(/\s*\n\s*/g,' / ');
+  if(!words){$('serr').textContent='Say what you saw first.';return;}
+  if(!lsGet(TOKEN)&&!Q.get('gh')){$('serr').textContent='No GitHub token on this phone. Open ADMIN > ART LIBRARY > Setup and paste it, then try again.';return;}
+  const btn=$('wgo');btn.disabled=true;btn.textContent='Sending...';$('serr').textContent='';
+  let shot='',shotErr='';
+  if(shotData){shot='board-shots/'+id+'-'+Date.now().toString(36)+'.jpg';
+    try{await putFile(shot,shotData.split(',')[1],'board: screenshot for '+id,'inbox');}catch(e){shotErr=e.message;shot='';}}
+  const at=new Date().toISOString();let res=null;
+  try{
+    await save('board: something is wrong '+id,d=>{
+      const z=d.cards.find(q=>q.id===id);if(!z)throw new Error('This card is gone from the board. Close and reload.');
+      const [model,effort]=fixModel(z),rt=(d.routines||[]).find(r=>r.enabled&&model.startsWith(r.model)&&effort.startsWith(r.effort));
+      const waits=k=>d.cards.some(x=>x.col!=='done'&&(x.blocks||[]).includes(k.id));
+      let f=d.cards.find(k=>k.fix&&k.lane==='claude'&&k.col==='up'&&!k.start&&k.theme===z.theme&&k.prompt&&String(k.prompt.model).split(' (')[0]===model.split(' (')[0]&&!waits(k)),merged=!!f;
+      if(!f){
+        const tags=new Set(d.cards.map(k=>k.tag)),idsT=new Set(d.cards.map(k=>k.id)),base=z.id.replace(/^t-/,'');let n=1,fid='c-fix-'+base,tag='fix-'+base;
+        while(idsT.has(fid)||tags.has(tag)){n++;fid='c-fix-'+base+'-'+n;tag='fix-'+base+'-'+n;}
+        f={id:fid,tag,lane:'claude',col:'up',fix:true,theme:z.theme,title:'Fix what you found on: '+String(z.title).slice(0,90),next:'',blocks:[],created:today(),changed:today(),reports:[],
+           chat:{url:'',opening:'Something is wrong on '+z.id},history:[],prompt:{what:'Fixes the problems you reported on '+String(z.title).slice(0,90)+'.',before:['Nothing to do first. Your words and screenshot are on the card.'],model,effort,text:''}};
+        d.cards.push(f);touch(f,'Made by Something is wrong on '+z.id+'.');
+      }
+      f.reports=(f.reports||[]).concat([{at,card:z.id,title:clean(z.title),ask:z.ask,words,shot,asked:clean(z.next).replace(/\s*\n\s*/g,' ')}]);
+      if(!f.blocks.includes(z.id))f.blocks.push(z.id);
+      f.after=f.reports[0].card;f.prompt.text=fixPrompt(f);
+      touch(f,'Tom reported on '+z.id+': '+words+(shot?' Screenshot: '+shot+' on branch inbox.':'')+(shotErr?' (The screenshot did not upload: '+shotErr+'.)':''));
+      if(rt&&!merged){f.auto=true;f.start=true;touch(f,'Auto-start: Tom reported a problem, so this fix starts by itself.');}
+      const n=f.reports.length;
+      f.next='You reported '+(n===1?'a problem':n+' problems')+' on '+[...new Set(f.reports.map(x=>x.title))].join('; ')+'. '+(f.start?'Claude starts the fix by itself.':'Copy the prompt into a new conversation in the Project on '+shortOf(f.prompt)+'.')+' Latest: '+words.slice(0,160);
+      z.col='wait';z.waiting_on='claude';delete z.quiet;
+      touch(z,'Tom: something is wrong: '+words+' Sent to Claude as card '+f.id+'; this card waits on it and comes back to you when the fix ships.');
+      res={fid:f.id,auto:!!f.start,merged,title:z.title,ftitle:f.title,p:f.prompt};
+      return d;});
+  }catch(e){btn.disabled=false;btn.textContent='Send to Claude';$('serr').textContent=e.message;return;}
+  render();toast('Sent to Claude');
+  let h='<h2>Sent to Claude.</h2><p class="what">';
+  if(res.auto) h+='Claude starts fixing this by itself in about a minute, and "'+esc(res.title)+'" comes back to you to check when the fix ships.</p>';
+  else h+=(res.merged?'Added to the fix "'+esc(res.ftitle)+'" (not started yet): paste':'Paste')+' the prompt below into a new conversation in the Project on '+esc(shortOf(res.p))+', and "'+esc(res.title)+'" comes back to you to check when the fix ships.</p>'
+    +'<div class="big">'+esc(shortOf(res.p))+'</div><div class="btns"><button class="gold" type="button" data-act="copy" data-id="'+esc(res.fid)+'">Copy prompt</button><a href="'+PROJECT+'" target="_blank" rel="noopener">Open the Project in Claude</a></div>';
+  if(shotErr) h+='<p class="err">The screenshot did not upload ('+esc(shotErr)+'). Your words were sent.</p>';
+  $('sheet').innerHTML=h+'<div class="btns"><button id="bclose" type="button">Close</button></div><p class="err" id="serr"></p><div id="act"></div>';$('sheet').scrollTop=0;
+}
+function allGood(id){
+  if(cur!==id)openSheet(id);
+  run('board: all good '+id,d=>{const z=d.cards.find(q=>q.id===id);if(z){z.col='done';z.done=today();delete z.waiting_on;delete z.quiet;touch(z,'Tom: all good.');}return d;},'Marked all good',()=>savedScreen(id));
+}
+document.addEventListener('input',e=>{if(e.target.id==='wtxt'&&$('serr'))$('serr').textContent='';});
+document.addEventListener('change',async e=>{
+  if(e.target.id!=='wshot'||!e.target.files||!e.target.files[0])return;
+  try{shotData=await readShot(e.target.files[0]);$('wprev').innerHTML='<img alt="screenshot" src="'+shotData+'"> <span class="hint">Added</span>';}catch(err){shotData='';$('serr').textContent=err.message;}
+});
 function copyText(x){const ok=()=>toast('Prompt copied');
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(x).then(ok,()=>fall(x,ok));}else fall(x,ok);}
 function fall(x,ok){const ta=document.createElement('textarea');ta.value=x;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){toast('Select the text and copy it');}ta.remove();}
@@ -356,6 +455,10 @@ document.addEventListener('click',e=>{
   const act=t.closest('[data-act]');
   if(act&&act.dataset.act==='copy'){const c=cardById(act.dataset.id);if(c&&c.prompt)copyText(withId(c));e.stopPropagation();return;}
   if(act&&act.dataset.act==='start'){startCard(act.dataset.id);e.stopPropagation();return;}
+  if(act&&act.dataset.act==='good'){allGood(act.dataset.id);e.stopPropagation();return;}
+  if(act&&act.dataset.act==='wrong'){wrongForm(act.dataset.id);e.stopPropagation();return;}
+  if(t.id==='wpick'){$('wshot').click();return;}
+  if(t.id==='wgo'){sendWrong(cur);return;}
   if(t.closest('a'))return;
   const card=t.closest('.card');if(card&&!$('sheet').contains(t)){openSheet(card.dataset.id);return;}
   const chip=t.closest('.chip');if(chip){theme=chip.dataset.t==='All'?'':chip.dataset.t;render();return;}

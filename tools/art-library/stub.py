@@ -107,7 +107,7 @@ class H(BaseHTTPRequestHandler):
         if p in FILES and b.get('sha') != FILES[p]['sha']: return self._send(409, {'message': 'sha mismatch'})
         sha = 'sha%d' % (len(LOG) + 1)
         FILES[p] = {'sha': sha, 'content': b.get('content', '')}
-        LOG.append({'github': 'PUT', 'path': p, 'bytes': len(b.get('content', '')), 'msg': b.get('message', '')[:80]})
+        LOG.append({'github': 'PUT', 'path': p, 'bytes': len(b.get('content', '')), 'msg': b.get('message', '')[:80], 'branch': b.get('branch', '')})
         self._send(201, {'content': {'sha': sha, 'path': p}})
 
 if __name__ == '__main__':

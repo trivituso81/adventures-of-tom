@@ -32,6 +32,10 @@ A report that cannot be sent (no connection, no token, GitHub error) stays on th
 5. A report that needs Tom (a decision, new art from the Art Library, something that cannot be reproduced) is NOT deleted: say so in the reply with the one question or the one Library step, and leave it open. The stop-loss rule applies per report.
 6. Tell Tom per report: fixed (and what to look at on the phone), or still open and why.
 
+## The board link (board4, 2026-11-19)
+
+A board card that asks Tom to play or look at something has a Something is wrong button. It makes a Claude fix card with his words and an optional screenshot (branch `inbox`, folder `board-shots/`, not `reports/`). That card's prompt tells the session to run `python3 tools/reports.py list` and handle, in the same fix, any pencil-tab report filed since he sent the problem, then mark it done. So the pencil tab is still the way to pin an exact frame with the full game state, and the board button is the way to say "this card's check failed"; both end in the same fix. Reports filed with no board card still go to the report backlog card as before.
+
 ## How it works (engine/report.js, loaded first in index.html)
 
 - Freeze: the file wraps `requestAnimationFrame`, `setTimeout` and `performance.now` at load. While frozen, frames and timers that come due are held and the clock stands still; on thaw they are released and the clock continues from where it stopped, so nothing in the game needs to know. `sound.ctx` is suspended; `wakeAudio` (engine/audio.js) will not wake it while frozen. `setInterval` is not held (the 60 second "came back to the app" reload in engine/main.js skips while a report is open).

@@ -261,7 +261,9 @@ def r7_inbox(B, reports, takes):
 
 
 def r10_notes(B):
-    """A Tom card finished with a note that blocks nothing: a Claude card reads it, so a note is never left with no reader."""
+    """A Tom card finished with a note that blocks nothing: a Claude card reads it, so a note is never left with no reader.
+    board4: test cards (play, pictures, animations, voice, script) finish with All good, which saves no note, or Something is wrong, which makes
+    the fix card on the page; so this now fires for setup cards finished with I did this and a note."""
     for c in list(B.cards):
         if c['lane'] != 'tom' or c['col'] != 'done' or c.get('retired') or not c.get('note') or c.get('note_seen') or c.get('blocks'): continue
         c['note_seen'] = True

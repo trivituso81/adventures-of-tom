@@ -199,6 +199,23 @@ check('R8: 5 hours without a push is not quiet', not card(b, 'c-q').get('quiet')
 bs.sync(b, [], None, None, None, datetime.datetime.fromisoformat('2026-11-19T15:30:00-08:00'))
 check('R8: 6 hours without a push is quiet', card(b, 'c-q').get('quiet') is True)
 
+# --- board4: a tested card waits on its fix card (Something is wrong); when the fix ships the card comes back to Tom, and board_check accepts the wait
+def fx():
+    return {'cards': [dict(id='t-pl', lane='tom', col='wait', waiting_on='claude', ask='play', theme='Areas', title='Look at chapter 1', next='n', changed='2026-11-19', blocks=[]),
+                      dict(id='c-fix-pl', tag='fix-pl', fix=True, lane='claude', col='up', theme='Areas', title='Fix what you found on: Look at chapter 1', next='n', changed='2026-11-19',
+                           blocks=['t-pl'], after='t-pl', prompt=PR, chat={'url': '', 'opening': 'x'}, reports=[{'card': 't-pl', 'words': 'w'}])], 'lanes': [], 'sessions': []}
+b = fx(); bs.sync(b, [], None, None, None, NOW)
+check('board4: the tested card keeps waiting while the fix is open', card(b, 't-pl')['col'] == 'wait')
+b = fx(); bs.sync(b, [{'sha': 'f1', 'subject': 'fix-pl: chapter 1 liners fixed', 'time': '2026-11-19T15:00:00-08:00', 'session': 'https://claude.ai/code/session_FIX', 'headings': [['fix-pl', 'chapter 1 liners fixed']], 'files': ['docs/CHANGES.md']}], None, None, None, NOW)
+c = card(b, 't-pl')
+check('board4: when the fix ships the tested card comes back to Tom (Up next)', card(b, 'c-fix-pl')['col'] == 'done' and c['col'] == 'up' and any('Unblocked' in h['t'] for h in c['history']), (card(b, 'c-fix-pl')['col'], c['col']))
+d = json.load(open(os.path.join(HERE, '..', 'data', 'board.json'), encoding='utf-8')); fb = fx()
+d['cards'] += fb['cards']; d['cards'][-1]['chat'] = {'url': '', 'opening': 'x'}
+for k in d['cards'][-2:]: k['created'] = '2026-11-19'
+open('/tmp/board_fix.json', 'w').write(json.dumps(d))
+r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '/tmp/board_fix.json'], capture_output=True, text=True)
+check('board4: board_check accepts a Tom card waiting on its fix (not fyi, blocks nothing)', r.returncode == 0, r.stdout[-300:])
+
 # --- board_check board3 rules
 def chk(mut, want, label):
     d = json.load(open(os.path.join(HERE, '..', 'data', 'board.json'), encoding='utf-8')); mut(d)
@@ -215,7 +232,7 @@ chk(lambda d: next(c for c in d['cards'] if c['id'] == 'c-board3').update(after=
 chk(lambda d: next(c for c in d['cards'] if c['id'] == 'c-ch2build').update(auto=True, prompt=dict(next(c for c in d['cards'] if c['id'] == 'c-b3s9')['prompt'])), 'auto', 'board_check refuses auto on an Opus card')
 r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '--push', 'board3'], capture_output=True, text=True)
 check('board_check --push accepts board3 once its card has after', r.returncode == 0, r.stdout)
-d = json.load(open(os.path.join(HERE, '..', 'data', 'board.json'), encoding='utf-8')); next(c for c in d['cards'] if c['id'] == 'c-board3').pop('after')
+d = json.load(open(os.path.join(HERE, '..', 'data', 'board.json'), encoding='utf-8')); _c3 = next(c for c in d['cards'] if c['id'] == 'c-board3'); _c3.pop('after'); _c3['col'] = 'prog'   # open again, so the test does not depend on the live card's column
 open('/tmp/board_bad.json', 'w').write(json.dumps(d))
 r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '--push', 'board3', '/tmp/board_bad.json'], capture_output=True, text=True)
 check('board_check --push refuses a build whose card has no after', r.returncode == 1 and 'no `after`' in r.stdout, r.stdout)

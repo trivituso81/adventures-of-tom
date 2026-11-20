@@ -2,7 +2,8 @@
 """BOARD page test (board1, rewritten for board2): python3 tools/board_test.py [outdir]
 Serves the repo and the stub GitHub (tools/art-library/stub.py) with a TEST board (data/board.json plus conversations, a quiet card, a service card,
 three Tom cards), loads board.html at 390x844, 951x648 and 1440x900 (screenshots in outdir), checks the sections, counts, Conversations strip,
-quiet flag, copy-prompt and layout rules, then drives I did this, Claude takes this, Not needed and Note through the stub and checks what was written.
+quiet flag, copy-prompt and layout rules, then drives All good, I did this, Claude takes this, Not needed, Note and (board4) Something is wrong with a screenshot through the stub and checks
+what was written: the fix card, its prompt, the merge into a fix card not started yet, auto-start for a Sonnet 5.5 medium fix, the tested card waiting.
 Prints FAILS: []."""
 import base64, copy, datetime, json, os, subprocess, sys, tempfile, time, urllib.request
 from playwright.sync_api import sync_playwright
@@ -29,6 +30,9 @@ b['cards'] += [tomcard('t-test1', 'Test card one', 'Open ADMIN > TEST and tap it
                tomcard('t-test3', 'Test card three', 'Do the third thing.', ask='animations', fyi=True),
                tomcard('t-test4', 'Test decide four', 'Pick one.', ask='decide', fyi=True, choices=['Option A (Recommended)', 'Option B'], leads=['A leads to the quick road.', 'B leads to the long road.']),
                tomcard('t-test5', 'Test decide five', 'Pick one too.', ask='decide', fyi=True, choices=['Yes (Recommended)', 'No'], leads=['Yes means go.', 'No means stop.']),
+               tomcard('t-test6', 'Test setup six', 'Paste the secret.', ask='setup', fyi=True), tomcard('t-test7', 'Test setup seven', 'Set the thing.', ask='setup', fyi=True),
+               tomcard('t-test8', 'Test script eight', 'Read the scene.', ask='script', fyi=True),
+               tomcard('t-test9', 'Test play nine', 'Chapter select > Chapter 1, look at the <kitchen>.', ask='play', fyi=True, theme='Areas'),
                {'id': 'c-startme', 'tag': 'startme', 'lane': 'claude', 'col': 'up', 'theme': 'Tools', 'title': 'A startable card', 'next': 'Ready.', 'blocks': [], 'changed': T, 'created': T,
                 'chat': {'url': '', 'opening': 'x'}, 'history': [], 'prompt': PR('Claude Sonnet 5.5 (row B)', 'medium (x)')},
                {'id': 'c-opuscard', 'tag': 'opuscard', 'lane': 'claude', 'col': 'up', 'theme': 'Tools', 'title': 'An Opus card', 'next': 'Ready.', 'blocks': [], 'changed': T, 'created': T,
@@ -57,7 +61,8 @@ oc = [c for c in b['cards'] if c['col'] != 'done']
 E_MINE = len([c for c in oc if c['lane'] == 'tom' and c['col'] in ('up', 'prog')])
 E_READY = len([c for c in oc if c['lane'] == 'claude' and c['col'] == 'up'])
 E_RUN = len([c for c in oc if c['col'] == 'prog' and c['lane'] != 'tom' and not c.get('quiet')])
-E_STUCK = len([c for c in oc if c['col'] == 'wait' or (c['col'] == 'prog' and c.get('quiet'))])
+WAITFIX = lambda c: c['lane'] == 'tom' and c['col'] == 'wait' and any(k['lane'] == 'claude' and c['id'] in k.get('blocks', []) for k in oc)
+E_STUCK = len([c for c in oc if (c['col'] == 'wait' and not WAITFIX(c)) or (c['col'] == 'prog' and c.get('quiet'))])
 ORDER = ['play', 'pictures', 'animations', 'voice', 'script', 'decide', 'setup']
 PARTS = ', '.join('%d %s' % (n, k) for k in ORDER for n in [len([c for c in oc if c['lane'] == 'tom' and c['col'] in ('up', 'prog') and c.get('ask') == k])] if n)
 WANT = 'Your move: %d (%s). Ready to start: %d. Running: %d. Stuck: %d.' % (E_MINE, PARTS, E_READY, E_RUN, E_STUCK)
@@ -123,12 +128,23 @@ try:
                 want = [x for x in b['cards'] if x['id'] == first][0]['prompt']['text'] + HIST(first)
                 if pg.evaluate('window.__copied') != want: fails.append('Copy prompt did not copy that card\'s prompt plus the board card line: ' + str(pg.evaluate('window.__copied'))[-120:])
                 if pg.query_selector('#sheet').is_visible(): fails.append('Copy prompt opened the sheet')
-                pg.click('.card[data-id="t-test2"]'); pg.wait_for_selector('#bdid')
+                for i in ('t-test1', 't-test2', 't-test3', 't-test8', 't-test9'):
+                    ct = pg.inner_text(f'.card[data-id="{i}"]')
+                    if 'All good' not in ct or 'Something is wrong' not in ct: fails.append(f'{i}: a test card lacks All good or Something is wrong on the card itself')
+                if 'Something is wrong' in pg.inner_text('.card[data-id="t-test6"]'): fails.append('a setup card shows Something is wrong')
+                pg.click('.card[data-id="t-test2"] .t'); pg.wait_for_selector('#sheet [data-act=wrong]')
+                s = pg.inner_text('#sheet')
+                for want_btn in ('All good', 'Something is wrong', 'Not needed', 'Note'):
+                    if want_btn not in s: fails.append(f'test card sheet lacks {want_btn}')
+                if 'I did this' in s or 'Claude takes this' in s: fails.append('test card sheet still offers I did this or Claude takes this (retired by board4)')
+                if s.upper().index('SOMETHING IS WRONG') > s.upper().index('HISTORY'): fails.append('All good / Something is wrong sit below the history (want them near the top)')
+                pg.screenshot(path=f'{out}/board-sheet.png'); pg.click('#bclose')
+                pg.click('.card[data-id="t-test6"]'); pg.wait_for_selector('#bdid')
                 s = pg.inner_text('#sheet')
                 for want_btn in ('I did this', 'Claude takes this', 'Not needed', 'Note'):
-                    if want_btn not in s: fails.append(f'sheet lacks {want_btn}')
+                    if want_btn not in s: fails.append(f'setup sheet lacks {want_btn}')
                 if 'Move to' in s or 'Done\n' in s.replace('I did this', ''): fails.append('old Move to / Done buttons still there')
-                pg.screenshot(path=f'{out}/board-sheet.png'); pg.click('#bclose')
+                pg.click('#bclose')
                 pg.click('.card[data-id="t-test4"]'); pg.wait_for_selector('[data-choice]')
                 ds = pg.inner_text('#sheet')
                 if pg.eval_on_selector_all('#sheet [data-choice]', 'e=>e.length') != 3 or 'A leads to the quick road.' not in ds or 'Something else' not in ds: fails.append('decide sheet: want 2 choices plus Something else, each with what it leads to')
@@ -158,25 +174,30 @@ try:
         # actions against the stub
         ctx = br.new_context(viewport={'width': 390, 'height': 844}); pg = ctx.new_page(); pg.add_init_script(INIT)
         pg.goto(URL); pg.wait_for_selector('.card >> visible=true')
-        pg.click('.card[data-id="t-test1"]'); pg.click('#bdid'); pg.fill('#ntxt', 'it looked fine'); pg.click('#bdidgo'); pg.wait_for_timeout(600)
+        pg.click('.card[data-id="t-test1"] [data-act=good]'); pg.wait_for_timeout(600)
         c = card('t-test1')
-        if c['col'] != 'done' or not c.get('done') or c.get('note') != 'it looked fine' or 'it looked fine' not in c['history'][-1]['t']: fails.append(f'I did this not saved right: {c["col"]} {c.get("note")}')
+        if c['col'] != 'done' or not c.get('done') or c['history'][-1]['t'] != 'Tom: all good.': fails.append(f'All good not saved right: {c["col"]} {c["history"][-1:]}')
         sh = pg.inner_text('#sheet'); tt = [x for x in b['cards'] if x['id'] == target][0]['title']
         if 'Saved.' not in sh or ('Next: ' + tt).lower() not in sh.lower(): fails.append('hand-back screen missing "Saved." or "Next: <title>": ' + sh[:160])
         pg.click('#sheet [data-act=copy]'); pg.wait_for_timeout(150)
         if not (pg.evaluate('window.__copied') or '').endswith(HIST(target)): fails.append('hand-back Copy prompt lacks the board card line')
         pg.screenshot(path=f'{out}/board-handback.png'); pg.click('#bclose')
-        pg.click('.card[data-id="t-test2"]'); pg.click('#btake'); pg.click('#btakego'); pg.wait_for_timeout(200)
+        pg.click('.card[data-id="t-test6"]'); pg.click('#bdid'); pg.fill('#ntxt', 'it looked fine'); pg.click('#bdidgo'); pg.wait_for_timeout(600)
+        c = card('t-test6')
+        if c['col'] != 'done' or c.get('note') != 'it looked fine' or 'it looked fine' not in c['history'][-1]['t']: fails.append(f'I did this not saved right: {c["col"]} {c.get("note")}')
+        if 'Nothing else waits' not in pg.inner_text('#sheet'): fails.append('I did this on an fyi card: hand-back screen should say nothing else waits')
+        pg.click('#bclose')
+        pg.click('.card[data-id="t-test7"]'); pg.click('#btake'); pg.click('#btakego'); pg.wait_for_timeout(200)
         if 'Type what you want done' not in pg.inner_text('#serr'): fails.append('Claude takes this accepted an empty line')
         pg.fill('#ntxt', 'make the door bigger <ok>'); pg.click('#btakego'); pg.wait_for_timeout(600)
-        c = card('t-test2')
+        c = card('t-test7')
         if (c['lane'], c['col']) != ('claude', 'up') or not c.get('tag'): fails.append(f'Claude takes this: {c["lane"]}/{c["col"]} tag={c.get("tag")}')
         pr = c.get('prompt') or {}
-        if 'make the door bigger (ok)' not in pr.get('text', '') or 't-test2' not in pr.get('text', '') or 'full permission to access the repo' not in pr.get('text', ''): fails.append('handover prompt text wrong: ' + pr.get('text', '')[:120])
+        if 'make the door bigger (ok)' not in pr.get('text', '') or 't-test7' not in pr.get('text', '') or 'full permission to access the repo' not in pr.get('text', ''): fails.append('handover prompt text wrong: ' + pr.get('text', '')[:120])
         if '<' in json.dumps(c): fails.append('handover card holds a "<" blank')
         if 'Sonnet 5.5' not in pr.get('model', '') or not pr.get('effort') or not pr.get('before'): fails.append('handover prompt lacks model, effort or before-steps')
-        pg.click('.card[data-id="c-ch1art2"]' if card('c-ch1art2') else '.card[data-id="t-test2"]'); pg.wait_for_selector('#bnot')
-        tid = pg.evaluate('window.__board&&1') and ('c-ch1art2' if card('c-ch1art2') else 't-test2')
+        tid = 't-test8'
+        pg.click('.card[data-id="t-test8"] .t'); pg.wait_for_selector('#bnot')
         pg.click('#bnot'); pg.click('#bnotgo'); pg.wait_for_timeout(200)
         if 'Say why' not in pg.inner_text('#serr'): fails.append('Not needed accepted an empty reason')
         pg.fill('#ntxt', 'covered by another card'); pg.click('#bnotgo'); pg.wait_for_timeout(600)
@@ -206,16 +227,60 @@ try:
         pg.click('#bclose')
         pg.click('.card[data-id="t-test3"]'); pg.click('#bnote'); pg.fill('#ntxt', 'checked the tab'); pg.click('#ngo'); pg.wait_for_timeout(600)
         if card('t-test3')['history'][-1]['t'] != 'Tom: checked the tab': fails.append('note not saved')
-        if len(stored()['cards']) != len(b['cards']): fails.append('cards lost on save')
+        # board4: Something is wrong. A pictures card (Opus fix, copy prompt), then an animations card in the same theme (added to that fix), then a play card (Sonnet, starts by itself)
+        from PIL import Image
+        png = os.path.join(tempfile.mkdtemp(), 'shot.png'); Image.new('RGB', (1170, 2532), (90, 140, 200)).save(png)
+        pg.click('.card[data-id="t-test2"] [data-act=wrong]'); pg.wait_for_selector('#wtxt')
+        pg.click('#wgo'); pg.wait_for_timeout(200)
+        if 'Say what you saw' not in pg.inner_text('#serr'): fails.append('Something is wrong sent an empty report')
+        pg.fill('#wtxt', 'the door <is> too small\nthe cake is gone'); pg.set_input_files('#wshot', png); pg.wait_for_selector('#wprev img')
+        pg.screenshot(path=f'{out}/board-wrong-form.png')
+        pg.click('#wgo'); pg.wait_for_selector('#sheet h2:has-text("Sent to Claude.")', timeout=8000)
+        z, f = card('t-test2'), card('c-fix-test2')
+        if (z['col'], z.get('waiting_on')) != ('wait', 'claude'): fails.append(f'tested card should wait on Claude: {z["col"]} {z.get("waiting_on")}')
+        if 'c-fix-test2' not in z['history'][-1]['t'] or 'the door (is) too small / the cake is gone' not in z['history'][-1]['t']: fails.append('tested card history lacks the words or the fix card id')
+        if not f or (f['lane'], f['col']) != ('claude', 'up') or f.get('blocks') != ['t-test2'] or f.get('after') != 't-test2' or f.get('start'): fails.append(f'fix card wrong: {f and (f["lane"], f["col"], f.get("blocks"), f.get("after"), f.get("start"))}')
+        pt = (f or {}).get('prompt', {}).get('text', '')
+        for want in ('the door (is) too small / the cake is gone', 'board-shots/t-test2-', 'git show origin/inbox:', 'tools/reports.py list', 'board: start c-fix-test2', 'Card t-test2', 'full permission to access the repo', 'fix-test2'):
+            if want not in pt: fails.append('fix prompt lacks ' + want)
+        if 'claude/handoff' in pt or 'Project docs' not in pt: fails.append('fix prompt must point at repo files only')
+        if 'Opus 5.5' not in (f or {}).get('prompt', {}).get('model', '') or not (f or {}).get('prompt', {}).get('effort', '').startswith('medium'): fails.append('pictures fix should be Opus 5.5, medium')
+        shots = [l for l in json.load(urllib.request.urlopen('http://127.0.0.1:8092/log')) if l.get('github') == 'PUT' and l['path'].startswith('board-shots/')]
+        if len(shots) != 1 or shots[0].get('branch') != 'inbox' or not shots[0]['path'].endswith('.jpg') or shots[0]['bytes'] < 1000: fails.append(f'screenshot upload wrong: {shots}')
+        sh = pg.inner_text('#sheet')
+        if 'Paste the prompt below' not in sh or 'Opus 5.5, effort medium' not in sh or 'comes back to you to check' not in sh: fails.append('sent screen (copy case) text: ' + sh[:200])
+        pg.screenshot(path=f'{out}/board-wrong-sent.png')
+        pg.click('#sheet [data-act=copy]'); pg.wait_for_timeout(150)
+        if not (pg.evaluate('window.__copied') or '').startswith(pt): fails.append('sent screen Copy prompt did not copy the fix prompt')
+        pg.click('#bclose')
+        if pg.query_selector('[data-sec=mine] .card[data-id="t-test2"]') or pg.query_selector('[data-sec=stuck] .card[data-id="t-test2"]'): fails.append('a card waiting on its fix still shows in YOUR MOVE or STUCK')
+        if 'When this ships, you check again: Test card two' not in pg.inner_text('[data-sec=ready] .card[data-id="c-fix-test2"]'): fails.append('fix card does not say which card comes back to Tom')
+        pg.click('.card[data-id="t-test3"] [data-act=wrong]'); pg.fill('#wtxt', 'the hop is late'); pg.click('#wgo'); pg.wait_for_selector('#sheet h2:has-text("Sent to Claude.")', timeout=8000)
+        f = card('c-fix-test2')
+        if len(f.get('reports', [])) != 2 or f.get('blocks') != ['t-test2', 't-test3'] or 'the hop is late' not in f['prompt']['text'] or any(x['id'] == 'c-fix-test3' for x in stored()['cards']): fails.append('second report in the same theme was not added to the fix card that was not started')
+        if 'Added to the fix' not in pg.inner_text('#sheet'): fails.append('merge screen does not say it was added')
+        pg.click('#bclose')
+        pg.click('.card[data-id="t-test9"] [data-act=wrong]'); pg.fill('#wtxt', 'the liners float'); pg.click('#wgo'); pg.wait_for_selector('#sheet h2:has-text("Sent to Claude.")', timeout=8000)
+        f = card('c-fix-test9')
+        if not f or not f.get('start') or not f.get('auto') or 'Sonnet 5.5' not in f['prompt']['model'] or f['theme'] != 'Areas': fails.append(f'play fix should be Sonnet 5.5 medium and start by itself: {f and (f.get("start"), f["prompt"]["model"])}')
+        if 'kitchen' not in f['prompt']['text'] or '<' in json.dumps(f): fails.append('play fix prompt lacks what he was asked, or holds a "<"')
+        if 'starts fixing this by itself' not in pg.inner_text('#sheet'): fails.append('auto-start screen text: ' + pg.inner_text('#sheet')[:160])
+        pg.screenshot(path=f'{out}/board-wrong-auto.png'); pg.click('#bclose')
+        pg.evaluate("document.querySelector('[data-sec=ready]').open=true")
+        pg.click('.card[data-id="c-fix-test2"] .t'); pg.wait_for_selector('#bcopy'); pg.click('#bclose')
+        open('/tmp/board_after.json', 'w').write(json.dumps(stored()))
+        r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '/tmp/board_after.json'], capture_output=True, text=True)
+        if r.returncode: fails.append('board_check fails on the board the page wrote: ' + r.stdout[-300:])
+        if len(stored()['cards']) != len(b['cards']) + 2: fails.append('cards lost on save')
         if stored().get('sessions') != b['sessions']: fails.append('sessions list changed by a phone save')
         nputs = sum(1 for l in json.load(urllib.request.urlopen('http://127.0.0.1:8092/log')) if l.get('github') == 'PUT')
-        if nputs != 7: fails.append(f'{nputs} PUTs, want 7')
+        if nputs != 12: fails.append(f'{nputs} PUTs, want 12')
         pg.screenshot(path=f'{out}/board-after.png'); ctx.close()
         # no token: the button says so, and the page reads the site copy
         ctx = br.new_context(viewport={'width': 390, 'height': 844}); pg = ctx.new_page()
         pg.goto('http://127.0.0.1:8091/board.html'); pg.wait_for_selector('.card >> visible=true')
         if pg.inner_text('#src') != 'site copy': fails.append('no-token page source ' + pg.inner_text('#src'))
-        pg.click('[data-sec=mine] .card'); pg.wait_for_selector('#bdid'); pg.click('#bdid'); pg.click('#bdidgo'); pg.wait_for_timeout(300)
+        pg.click('[data-sec=mine] .card [data-act=wrong]'); pg.fill('#wtxt', 'x'); pg.click('#wgo'); pg.wait_for_timeout(300)
         if 'No GitHub token' not in pg.inner_text('#serr'): fails.append('no-token message missing')
         ctx.close()
         real = [e for e in errs if 'Failed to load' not in e]

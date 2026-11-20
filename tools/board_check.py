@@ -7,6 +7,7 @@ open card names that card (title, tag or id) in its next step.
 board3 rules: an open Tom card has a valid `ask` (play, pictures, animations, voice, script, decide, setup); a decide card has 2 to 4 `choices` (the first ends
 "(Recommended)") and one `leads` line per choice; an open Tom card blocks an open Claude card or is marked `fyi: true`; `auto: true` only on a Sonnet 5.5
 medium card; `after` (if present) is a Tom card id or "nothing for Tom: <next Claude card id or end>". With --push the card being shipped must have `after`.
+board4: a Tom card in Waiting that an open Claude card blocks (a tested card waiting on its fix, made by Something is wrong) passes the fyi rule.
 Run: python3 tools/board_check.py [path]
      python3 tools/board_check.py --push <tag> [path]   the build being pushed must be on a card (tag equal, a part of it, or named in a history line)"""
 import json, os, re, sys
@@ -71,7 +72,8 @@ for c in d.get('cards', []):
             if not (isinstance(ch, list) and 2 <= len(ch) <= 4 and all(isinstance(x, str) and x.strip() for x in ch)): bad.append('%s: a decide card needs 2 to 4 choices' % n)
             elif not str(ch[0]).endswith('(Recommended)'): bad.append('%s: the first choice is Claude\'s recommendation and ends with (Recommended)' % n)
             if not (isinstance(ld, list) and isinstance(ch, list) and len(ld) == len(ch) and all(isinstance(x, str) and x.strip() for x in ld)): bad.append('%s: a decide card needs one leads line per choice' % n)
-        if not c.get('fyi') and not any((idmap.get(b) or {}).get('lane') == 'claude' and (idmap.get(b) or {}).get('col') != 'done' for b in c.get('blocks', [])):
+        waits_fix = c.get('col') == 'wait' and any(k.get('lane') == 'claude' and k.get('col') != 'done' and n in k.get('blocks', []) for k in d.get('cards', []))   # board4: a tested card waiting on its fix
+        if not c.get('fyi') and not waits_fix and not any((idmap.get(b) or {}).get('lane') == 'claude' and (idmap.get(b) or {}).get('col') != 'done' for b in c.get('blocks', [])):
             bad.append('%s: an open Tom card must block an open Claude card, or be marked fyi: true' % n)
         for k in d.get('cards', []):
             if k.get('id') in c.get('blocks', []) and k.get('col') != 'done':

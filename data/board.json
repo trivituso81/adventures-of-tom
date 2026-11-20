@@ -1877,7 +1877,7 @@
    "col": "up",
    "ask": "play",
    "fyi": true,
-   "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen: after the Mudling grabs the pan the three muffin plates on the island should be gone and the cake stand stay. Then the paper muffin liners in the Grump Hollow reeds, and the phone lighting up on the cab seat (press A to close). For anything off, write what you saw in a report (pencil tab).",
+   "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen: after the Mudling grabs the pan the three muffin plates on the island should be gone and the cake stand stay. Then the paper muffin liners in the Grump Hollow reeds, and the phone lighting up on the cab seat (press A to close). Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one). Claude fixes them and this card comes back to you to check.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-20",
@@ -1889,6 +1889,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom found several issues on this card and could not tell what to do next. Kept open so he can report them with the new Something is wrong button (card c-board4)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Next step rewritten for the new buttons (board4): All good or Something is wrong right on this card."
     }
    ]
   },
@@ -1922,7 +1926,7 @@
    "col": "prog",
    "theme": "Tools",
    "title": "Something is wrong button on test cards (board4)",
-   "next": "Building: every play, pictures, animations, voice and script card gets All good and Something is wrong. Something is wrong saves your words and screenshot as a Claude fix card, and the tested card waits on it.",
+   "next": "Shipped as board4: test cards have All good and Something is wrong; a problem becomes a Claude fix card and the tested card waits on it, then comes back to you.",
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
@@ -1947,8 +1951,13 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Built: All good and Something is wrong on play, pictures, animations, voice and script cards; fix cards (Sonnet 5.5 medium auto-start for play, Opus 5.5 medium copy prompt for the rest); tested card waits on the fix and comes back when it ships. Hands to Tom: t-cutpolish4b, report the chapter 1 issues with the new button."
     }
-   ]
+   ],
+   "after": "t-cutpolish4b"
   },
   {
    "id": "b-board-ch1review",
