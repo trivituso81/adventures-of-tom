@@ -8395,7 +8395,7 @@
    "id": "c-fix-clipposes",
    "tag": "fix-clipposes",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Battle Animations",
    "title": "Fix what you found on: Watch the painted poses for the family (PAINTED STATES: CHAPTER 1)",
@@ -8418,7 +8418,7 @@
    ],
    "chat": {
     "url": "",
-    "opening": "Something is wrong on t-clipposes"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -8428,6 +8428,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom reported on t-clipposes: Some of these are missing from the screen, like I don't see them in the battle test"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation."
     }
    ],
    "prompt": {
