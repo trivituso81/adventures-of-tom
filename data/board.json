@@ -361,7 +361,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-17",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukGiA3jV2jT4TYuLzs2",
+    "url": "https://claude.ai/code/cse_01RXeukEot2oyThJioqaFLjk",
     "opening": "unknown"
    },
    "history": [
@@ -396,6 +396,10 @@
     {
      "d": "2026-11-20",
      "t": "ended without shipping: this START run cannot read the Project, and the locked script claude/story-ch02-draft4.md (plus claude/story-engine-capabilities.md, claude/story-build.md, claude/story-line-rules.md, claude/next-addendum-ch1rebuild1.md) is not in the repo, only claude/story-next.md is. Nothing was written or built (the build never rewrites dialogue). It needs those files copied into the repo claude/ folder, or the card started from a conversation that has the Project attached."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Rescue started (A session ended without shipping). One automatic session decides: finish it, back to Tom, start next, or retire."
     }
    ],
    "prompt": {
@@ -408,7 +412,14 @@
     "text": "Read claude/story-next.md and continue with the chapter 2 build. I have played chapter 1. You have my full permission to access the repo."
    },
    "tag": "ch2build",
-   "started_at": "2026-11-20T15:31:14+00:00"
+   "started_at": "2026-11-20T15:35:40+00:00",
+   "rescue": {
+    "at": "2026-11-20T15:35:40+00:00",
+    "n": 1,
+    "why": "A session ended without shipping",
+    "url": "https://claude.ai/code/cse_01RXeukEot2oyThJioqaFLjk",
+    "prev": "https://claude.ai/code/session_01RXeukGiA3jV2jT4TYuLzs2"
+   }
   },
   {
    "id": "c-b3s8",
@@ -10171,7 +10182,7 @@
    "id": "c-reports-3",
    "tag": "reports-2026-11-20",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (7 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-000755-3h9p, r-20261120-000831-h5tq, r-20261120-000848-fl38, r-20261120-000910-g9n1, r-20261120-000931-2yx8, r-20261120-001019-feou and 1 more. First note: Grace's list shouldn't appear until she finishes the third item, like in the dialogue, so remove it ",
@@ -10185,7 +10196,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukH9jBnr6vzSqhxpgoT",
     "opening": "not started"
    },
    "history": [
@@ -10202,12 +10213,16 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-20T15:34:59.537Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
-   "start": true
+   "started_at": "2026-11-20T15:35:40+00:00"
   },
   {
    "theme": "Tools",
@@ -10305,6 +10320,16 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukGiA3jV2jT4TYuLzs2",
+   "title": "Build chapter 2 to the locked script",
+   "first": "2026-11-20T15:31:55Z",
+   "last": "2026-11-20T15:34:31Z",
+   "tags": [],
+   "cards": [
+    "c-ch2build"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEYAxmwWRNTjwsrEmZ",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
    "first": "2026-11-20T15:23:59Z",
@@ -10342,16 +10367,6 @@
    ],
    "cards": [
     "c-reports-2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGiA3jV2jT4TYuLzs2",
-   "title": "Build chapter 2 to the locked script",
-   "first": "2026-11-20T15:31:55Z",
-   "last": "2026-11-20T15:31:55Z",
-   "tags": [],
-   "cards": [
-    "c-ch2build"
    ]
   },
   {
@@ -11528,8 +11543,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "3049f4085f9b67802722364aa85d903a193dd1ea",
- "synced_at": "2026-11-20T15:34:14+00:00",
+ "synced": "da6f48464b370b9824f9e1159363c60988de935e",
+ "synced_at": "2026-11-20T15:35:43+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
