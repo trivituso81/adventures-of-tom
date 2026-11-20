@@ -6,6 +6,12 @@
 - Rose Mode picture tiles carry a small i in the top left corner (`engine/b3-pictures.js`, `.b3p-i`) with the same two behaviours.
 - Tests: `tools/b3_test.py s9ui` now checks the i is left of every name with a tap strip as tall as the row, the i opens the card and uses nothing, USE and BACK from the card, a row tap (name and Pep pill) opens the target list or plays, Back from it returns to the list; `s7` (Rose Mode) checks every tile has its i; the skill helpers open the card with I.
 
+## board-heist (2026-11-19): board only: why the muffin theft scene misses, and the plan to redo it
+
+- Tom (11-19 19:28, with a screen recording of the kitchen theft): "the monster animation looks out of place (differnet art style), he is holding a crisp instead of the muffins, the muffins are displayed on the counter after he takes them, and the dialogue of them falling is strange and doesnt feel natural (eg, why are they talking so much on the floor). we need a complete redo of this scene so that it hilarious!"
+- Causes, checked in the repo: the kitchen draws the old glossy heist sheet (`art/foes/mudling-heist.webp`), not the matte Mudling of the fights; the crisp is painted into that sheet; `{prop:'muffinpan',hide:true}` never hides the pan because `compileScene` reads the step as `hide` (an actor), so fix-cutpolish4b, -2 and -3 moved a pan that was never the problem; the floor lines play after the thief has left with everyone lying down, and Boppy and Deedee are staged against the scene's joke.
+- Plan: `claude/heist-redo-plan.md` (also in the Project). Cards: c-heistart (the bug and the Library entry, START), t-heistart (Tom generates and approves the sheet), c-heist1 (the scene rebuild, Opus 5.5 medium). t-cutpolish4b retired. No game change.
+
 ## music3 (2026-11-20): Music Library can make takes on the newer ElevenLabs models; a new Square prompt to try on v2.5
 
 - Card c-music3. Followed `claude/next-addendum-squaremusic.md` (stop-loss after two Square rewrites on music_v1 missed: the cause was the old model, not the wording).

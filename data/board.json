@@ -1962,10 +1962,10 @@
    "title": "Look at the chapter 1 pictures in the game",
    "theme": "Areas",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
-   "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen. Look at the island: the muffin pan now sits fully on the bare table top between the cake stand and the table's right edge, touching neither the stand nor the floor behind. After the Mudling grabs the pan it is gone and the table stays as it was. Then come back here: tap All good, or Something is wrong and write every problem you saw (one per line, a screenshot if you have one).",
+   "next": "Retired: your 19:28 recording showed the pan still on the counter after three fixes. The cause was a code bug, not the pan's position. Replaced by cards c-heistart, t-heistart and c-heist1.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-20",
@@ -2017,8 +2017,13 @@
     {
      "d": "2026-11-19",
      "t": "Unblocked: Fix what you found on: Look at the chapter 1 pictures in the game, Fix what you found on: Look at the chapter 1 pictures in the game, Fix what you found on: Look at the chapter 1 pictures in the game is done."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Retired by board-heist. Tom (19:28): \"the muffins are displayed on the counter after he takes them\". The scene is being redone: cards c-heistart, t-heistart, c-heist1."
     }
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "b-takes1",
@@ -6370,9 +6375,9 @@
    "title": "Plan the redo of the muffin theft scene in Deedee's kitchen (board-heist)",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "board-heist",
-   "next": "Claude is watching your screen recording and working out why the scene misses. The plan and the next cards follow in this same conversation.",
+   "next": "Done: found the cause of all four problems and wrote the redo plan (claude/heist-redo-plan.md in the repo). Nothing in the game changed. Next: card Fix the muffin pan that never leaves the counter, and add the new Mudling sheet to the Art Library (heistart).",
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
@@ -6384,9 +6389,106 @@
     {
      "d": "2026-11-19",
      "t": "Tom (19:28, with a screen recording): \"im struggling with this scene - the monster animation looks out of place (differnet art style), he is holding a crisp instead of the muffins, the muffins are displayed on the counter after he takes them, and the dialogue of them falling is strange and doesnt feel natural (eg, why are they talking so much on the floor). we need a complete redo of this scene so that it hilarious!\""
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Found: (1) the kitchen uses an old glossy cartoon Mudling sheet, not the matte Mudling of the fights; (2) the crisp is painted into that old sheet; (3) the pan stays because the scene step that hides it never runs (a code bug: the step is read as hide an actor), which is why three fixes that moved the pan changed nothing; (4) the floor lines play after the thief has left, with everyone lying down, and Boppy and Deedee are staged against the joke. Plan: keep the opening and closing lines, redo the theft as action with 3 new lines, 1 changed, 1 cut."
     }
    ],
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: c-heistart",
+   "done": "2026-11-19"
+  },
+  {
+   "id": "c-heistart",
+   "title": "Fix the muffin pan that never leaves the counter, and add the new Mudling sheet to the Art Library (heistart)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "tag": "heistart",
+   "auto": true,
+   "next": "Tap START. It fixes the bug that keeps the muffin pan on the counter after the theft (and the empty pan in Grump Hollow), and adds one new picture to the Art Library: the Mudling of the fights in six poses, carrying the muffin pan. Your card Generate and approve the new Mudling sheet comes next.",
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": ""
+   },
+   "after": "t-heistart",
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-heist, part A of claude/heist-redo-plan.md."
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the scene step that should hide the muffin pan and never ran, and adds the Art Library entry ch1-mudling-heist2 (the new Mudling sheet for the kitchen theft).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the cause, the fix and the entry's prompt are written in claude/heist-redo-plan.md, a test and frames catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md and claude/heist-redo-plan.md, then build part A (section 6) and push it as heistart. Your first push is the commit board: start c-heistart. Change nothing else in the scene. Keep card t-heistart as the after of c-heistart and rewrite its next if the entry's place in the Art Library differs. You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "t-heistart",
+   "title": "Generate and approve the new Mudling sheet (six poses with the muffin pan)",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "wait",
+   "waiting_on": "claude",
+   "ask": "pictures",
+   "next": "After card c-heistart ships: ADMIN > ART LIBRARY, Enemies tab, group Chapter 1, entry ch1-mudling-heist2. Press GENERATE. You should see six Mudlings on magenta that look like the Mudling of the fights (matte, brushed): a ball, looking up, reaching up, then three holding the muffin pan over its head. APPROVE, or REJECT with a note. Approving starts card Rebuild the muffin theft scene (heist1) for you to paste.",
+   "blocks": [
+    "c-heist1"
+   ],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "done_when": {
+    "art_approved": [
+     "ch1-mudling-heist2"
+    ]
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-heist. Waits on c-heistart, which adds the entry."
+    }
+   ]
+  },
+  {
+   "id": "c-heist1",
+   "title": "Rebuild the muffin theft scene in Deedee's kitchen (heist1)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "tag": "heist1",
+   "next": "Waits on your approval of the new Mudling sheet (card t-heistart). Then it rebuilds the theft: the Mudling of the fights rolls in, bowls the three of you over, faces Deedee, lifts the pan over its head and sneaks out behind Boppy, who never turns around. 3 new lines, 1 changed, 1 cut. Script and staging: claude/heist-redo-plan.md.",
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": ""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-heist, part B of claude/heist-redo-plan.md. Tom (19:28): \"we need a complete redo of this scene so that it hilarious!\""
+    }
+   ],
+   "prompt": {
+    "what": "Rebuilds the middle of the kitchen theft scene with the approved Mudling sheet, the new staging and the script in the plan. Ends with a card for you to watch the scene.",
+    "before": [
+     "Approve the picture on card Generate and approve the new Mudling sheet (ADMIN > ART LIBRARY, Enemies tab, group Chapter 1, entry ch1-mudling-heist2).",
+     "If you want any of the three new lines changed, write it in the note on that card before you approve."
+    ],
+    "model": "Claude Opus 5.5 (row D: you judge this scene by taste, and a miss costs you another review)",
+    "effort": "medium (one scene; the script, the beats and the steps are written in the plan)",
+    "text": "Read CLAUDE.md and claude/heist-redo-plan.md, then cards c-heist1 and t-heistart in data/board.json, history and note included. Build part B (section 7) and push it as heist1. Your first push is the commit board: start c-heist1. Lines go in word for word from section 3, changed only where my note on t-heistart says so. Look at every beat in portrait and landscape before pushing. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [
