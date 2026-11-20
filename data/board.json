@@ -14179,10 +14179,13 @@
     {
      "d": "2026-11-20",
      "t": "Claude fix c-fix-battlelabpagetry-2: the Battle Lab page is now a page like Admin with the difficulty toggles at the top (HARD by default) and every fight one tap away."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Open the Battle Lab page on your home screen, Fix: Open the Battle Lab page on your home screen is done."
     }
    ],
-   "col": "wait",
-   "waiting_on": "claude"
+   "col": "up"
   },
   {
    "id": "c-fix-heist1play-5",
@@ -14547,7 +14550,7 @@
    "id": "c-fix-battlelabpagetry-2",
    "tag": "fix-battlelabpagetry-2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Open the Battle Lab page on your home screen",
@@ -14595,6 +14598,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped as fix-battlelabpagetry-2; tested in portrait and landscape."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-battlelabpagetry-2: The Battle Lab page is a page like Admin: difficulty toggles on top, every fight one tap away"
     }
    ],
    "prompt": {
@@ -14608,7 +14615,8 @@
    },
    "after": "t-battlelabpagetry",
    "auto": true,
-   "started_at": "2026-11-20T17:58:57+00:00"
+   "started_at": "2026-11-20T17:58:57+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "t-ch2play",
@@ -14643,7 +14651,7 @@
    "id": "c-fix-effectslook-2",
    "tag": "fix-effectslook-2",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Look at the Effects page in Admin",
@@ -14665,7 +14673,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukDCjPdhWiTjqaKzKQt",
     "opening": "Something is wrong on t-effectslook"
    },
    "history": [
@@ -14683,6 +14691,10 @@
      "d": "2026-11-20",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-20T18:08:56.822Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -14696,10 +14708,22 @@
    },
    "after": "t-effectslook",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-20T18:09:24+00:00"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukEhdz3K8a1vVuo5v2g",
+   "title": "Fix: Open the Battle Lab page on your home screen",
+   "first": "2026-11-20T18:08:46Z",
+   "last": "2026-11-20T18:08:46Z",
+   "tags": [
+    "fix-battlelabpagetry-2"
+   ],
+   "cards": [
+    "c-fix-battlelabpagetry-2"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFZ26fDR3jSE8m4NVH",
    "title": "Build chapter 2 to the locked script",
@@ -16591,8 +16615,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "8329d83bf662d47aeac21f42bbd14c059b2ecb74",
- "synced_at": "2026-11-20T18:06:46+00:00",
+ "synced": "d17a6af91d388ed2384cd7d3913f09223f490e07",
+ "synced_at": "2026-11-20T18:09:25+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
