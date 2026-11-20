@@ -12794,11 +12794,17 @@
     {
      "d": "2026-11-20",
      "t": "Added by board-sync: new files on branch takes."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped START.",
+     "at": "2026-11-20T18:00:00.722Z"
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
-   "changed": "2026-11-20"
+   "changed": "2026-11-20",
+   "start": true
   },
   {
    "id": "c-fix-gem-canon01play",
