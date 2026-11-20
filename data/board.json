@@ -9723,7 +9723,7 @@
   {
    "id": "t-heist1play",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Story and Dialogue",
    "ask": "play",
    "fyi": true,
@@ -9758,9 +9758,12 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: Why does no one end up on the floor? It was hilarious when the whole party was knocked down on their butts Sent to Claude as card c-fix-heist1play-2; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T15:37:16.558Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "t-heist1voice",
@@ -10395,7 +10398,7 @@
    "id": "c-fix-heist1play-2",
    "tag": "fix-heist1play-2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
@@ -10443,6 +10446,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-heist1play-2: The muffin theft knocks the three of you onto the floor again"
     }
    ],
    "prompt": {
@@ -10456,7 +10463,8 @@
    },
    "after": "t-heist1play",
    "auto": true,
-   "started_at": "2026-11-20T15:38:28+00:00"
+   "started_at": "2026-11-20T15:38:28+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-heist1voice",
@@ -10516,8 +10524,10 @@
    "url": "https://claude.ai/code/session_01RXeukEx1ffiitR5B5otnwt",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
    "first": "2026-11-20T15:40:04Z",
-   "last": "2026-11-20T15:40:04Z",
-   "tags": [],
+   "last": "2026-11-20T15:45:20Z",
+   "tags": [
+    "fix-heist1play-2"
+   ],
    "cards": [
     "c-fix-heist1play-2"
    ]
@@ -11782,8 +11792,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "b172028134bbd89635c1e4e3bdc248e1b8831d94",
- "synced_at": "2026-11-20T15:44:55+00:00",
+ "synced": "04c3fff59045e2a160994db03ce3c98475c0f9f9",
+ "synced_at": "2026-11-20T15:46:01+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
