@@ -16803,7 +16803,7 @@
    "ask": "play",
    "fyi": true,
    "title": "Try GENERATE VIDEO on one clip",
-   "next": "ADMIN > ART LIBRARY: tap Open in the Art Library below, the Toad idle you tried is already approved, so there is nothing to press on it. Press GENERATE VIDEO on clip-mudling-idle instead (about $0.25; use Open in the Art Library, then find it under Clips > Chapter 1). Under the button you should now see 'Asked N min ago. GitHub is still making the video' updating every 20 seconds, then Made and approved. All good if that line moves. Something is wrong if the line stays on 'Asked' after 10 minutes.",
+   "next": "ADMIN > ART LIBRARY: tap Open in the Art Library below, find clip-toad-idle under Clips > Chapter 1 (it is approved) and press GENERATE VIDEO (about $0.25). It should no longer refuse. Under the button you should see 'Asked N min ago. GitHub is still making the video' updating every 20 seconds, then 'Made and approved'. All good if that line moves. Something is wrong if it stays on 'Asked' after 10 minutes or shows an error.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -17006,6 +17006,11 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fix shipped: a press on an approved clip now makes a new version that replaces it (page and clip-gen job). No pencil report matched.",
+     "at": "2026-11-20T23:05:00.000Z"
     }
    ],
    "prompt": {
