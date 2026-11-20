@@ -13750,7 +13750,7 @@
    "title": "Decide how to get a Gate Zero room with the plane removed",
    "theme": "Areas",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "decide",
    "next": "Read the two choices below and tap one. The two pictures made for this room do not match the current Gate Zero painting (wrong size, window frames and jet bridge moved, plane is a different jet), so they cannot be installed. Your answer starts card Install the Gate Zero pictures (gatezero).",
    "choices": [
@@ -13770,12 +13770,19 @@
     {
      "d": "2026-11-20",
      "t": "Made by the gatezero session: the two generated pictures were rejected for size and placement."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom chose: Keep the current painting and have Claude remove the painted plane by editing it",
+     "at": "2026-11-20T17:55:28.536Z"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukET7MxhBU662PA8H6L",
     "opening": "unknown"
-   }
+   },
+   "done": "2026-11-20",
+   "answer": "Keep the current painting and have Claude remove the painted plane by editing it"
   },
   {
    "id": "t-projclean-run",
