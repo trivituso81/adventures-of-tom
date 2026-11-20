@@ -13951,11 +13951,11 @@
    "id": "c-fix-heist1play-5",
    "tag": "fix-heist1play-5",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
-   "next": "You reported a problem on Watch the new muffin theft in Deedee's kitchen. Claude starts the fix by itself. Latest: i took a video and created a new Fable request directly with Claude to address this",
+   "next": "Retired: no fault to fix; Tom took it to his own Fable request.",
    "blocks": [
     "t-heist1play"
    ],
@@ -13995,6 +13995,11 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "ended without shipping: Tom's report has no fault in it (\"i took a video and created a new Fable request directly with Claude\"), no pencil report was filed after 17:50Z, and the three older ch1Theft pencil reports predate fix-heist1play-4. Nothing to reproduce, so nothing was changed. Retired; Tom's own Fable request now owns the theft scene.",
+     "at": "2026-11-20T18:00:00Z"
     }
    ],
    "prompt": {
@@ -14008,7 +14013,8 @@
    },
    "after": "t-heist1play",
    "auto": true,
-   "started_at": "2026-11-20T17:51:46+00:00"
+   "started_at": "2026-11-20T17:51:46+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-welcomepage-play",
