@@ -356,7 +356,7 @@ def main():
                 for r in rx0:
                     if r[4] == ow and r[5] == ot:
                         at = r[8] if len(r) > 8 else ''
-                        rx_rows.append(r[:4] + [nw, nt] + r[6:8] + [at if at and at in nt else ''])
+                        rx_rows.append(r[:4] + [nw, nt] + r[6:8] + [at if at and at in nt else ''] + [r[9] if len(r) > 9 else ''])
     # reactions Tom set (replace every row for that line)
     for sid, (f, changed) in done.items():
         sc = ix['scenes'].get(sid, {}); ch = str(sc.get('chapter', '')); chn = '21' if ch == 'ns' else ch
@@ -365,8 +365,8 @@ def main():
             if meta.get('react') is None or not new or kind == 'removed': continue
             nw, nt = new
             rx_rows = [r for r in rx_rows if not (r[4] == nw and r[5] == nt)]
-            for l, m, cue in meta['react']:
-                rx_rows.append(['scene', 'Nine Scoops' if ch == 'ns' else ch, f, sid, nw, nt, l, m, cue if cue and cue in nt else ''])
+            for l, m, cue, *fxr in meta['react']:   # cutpolish5: an optional 4th value is the fx (hop, !, ?, ..., sweat)
+                rx_rows.append(['scene', 'Nine Scoops' if ch == 'ns' else ch, f, sid, nw, nt, l, m, cue if cue and cue in nt else '', (fxr[0] if fxr else '') or ''])
     write_tsv('docs/emotion-index-lines.tsv', em_head, em_rows); write_tsv('docs/talk-lines.tsv', tk_head, tk_rows); write_tsv('docs/emotion-reactions.tsv', rx_head, rx_rows)
     # harvest.json: drop the old lines, add the new ones (patched by hand-safe rules: no indent, no trailing newline)
     hp = 'tools/voice-library/harvest.json'

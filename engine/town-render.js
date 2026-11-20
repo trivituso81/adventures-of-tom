@@ -95,14 +95,16 @@ function drawSheetActor(a,set) {
   const painted=!!(rider&&OW.tomRide&&(typeof playerMember!=='function'||playerMember().id==='tom'));
   if(painted) set=OW.tomRide;
   const p=position(a),k=actorK(p.y+1)*(set.k||1)*owBoost(a,set);   // set.k: a painted set drawn a little bigger (Deedee, to Tom's height)   // k: bigger inside painted rooms (engine/plate.js)
-  const cx=Math.round((p.x+.5)*T)+Math.round((kissLean(a)+hugSway(a))*k),base=Math.round((p.y+1)*T-2)-Math.round((a.lift||0)*k);
+  const cx=Math.round((p.x+.5)*T)+Math.round((kissLean(a)+hugSway(a))*k);let base=Math.round((p.y+1)*T-2)-Math.round((a.lift||0)*k);
   const frames=a.facing==='left'?set.left:(a.facing==='right'?set.side:set[a.facing]);
   const ph=walkPhase(a),fi=ph>=0?(set===OW.tom?OW_WALK_CYCLE_TOM:OW_WALK_CYCLE)[walkStepIdx(a,ph)%4]:0;   // stride A, stand, stride B, stand: each pose lasts one tile (half the old speed), all frames kept; walking speed unchanged
   const bp=a.scenePose&&typeof scenePoseDraw==='function'?scenePoseDraw(a,set,k):null;   // a battle pose borrowed for a cutscene (engine/story.js)
-  const fr=bp?bp.rows:frames[fi],kd=bp?bp.k:k;
+  const fr=bp?bp.rows:frames[fi];let kd=bp?bp.k:k;
+  const lf=(!bp||bp.story)&&ph<0&&typeof actorLife==='function'?actorLife(a,a.scenePose?a.scenePose.f:'stand'):null;   // cutpolish5: breathing, squash, bob, hop, pip (engine/emotions.js)
+  if(lf) { kd*=lf.s; base-=Math.round(lf.lift); }
   const w=fr[0].length,h=fr.length,hk=h*kd,wk=w*kd;
   a._figH=hk; a._figW=wk;   // the drawn size, read by the amber figure (engine/ch12-render.js)
-  if(!a.noShadow) ellipse(cx,base+1+Math.round((a.lift||0)*k),Math.round((bp?frames[0][0].length*k:wk)*.45),Math.round(4*k),'#2f493640');   // cutpolish2: the shadow is sized from the standing frame, so a wide pose (Tom pointing) no longer balloons it
+  if(!a.noShadow) ellipse(cx,base+1+Math.round((a.lift||0)*k)+(lf?Math.round(lf.lift):0),Math.round((bp?frames[0][0].length*k:wk)*.45),Math.round(4*k),'#2f493640');   // cutpolish2: the shadow is sized from the standing frame, so a wide pose (Tom pointing) no longer balloons it
   const m=a.isPlayer?(typeof playerMember==='function'?playerMember():hero):a.member;
   const noTint=painted||!!(bp&&bp.story);   // story poses are drawn as painted
   activeTint=noTint?null:(m?garmentTint(bp?'bt':'ow',m.id,memberTopColor(m)):null);
@@ -111,6 +113,7 @@ function drawSheetActor(a,set) {
   drawSprite(fr,bp?bp.pal:set.pal,cx-Math.floor(wk/2),Math.round(base-hk),kd);
   if(rider&&!painted) drawOwRider(rider,a.facing,cx,base-hk,false,k);
   activeTint=null;
+  if(lf&&lf.pip) drawLifePip(lf.pip,lf.pt,cx,base-hk,k);
 }
 
 function drawOutdoorTile(x,y,type,time) {

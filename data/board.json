@@ -860,7 +860,7 @@
    "theme": "Story and Dialogue",
    "lane": "claude",
    "col": "prog",
-   "next": "Ready to start: its plan file claude/cutscene-polish-plan.md and claude/handoff-rules.md are now in the repo under claude/, so a START session can read them.",
+   "next": "Built (cutpolish5): breathing, squash, typing bob, listener turn, fx column (hop, pips), 31 chapter 1 reaction rows, Boppy wince as a code stand-in. Not played on a phone; Tom card t-cutpolish5 asks him to watch chapter 1.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -904,6 +904,10 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "cutpolish5 built by START: see docs/CHANGES.md. Painted pips and Boppy's stomach pose not added to the Art Library (code stand-ins)."
     }
    ],
    "prompt": {
@@ -915,7 +919,8 @@
     "effort": "medium (steps are known; effect sizes are settled by looking at frames)",
     "text": "Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 5 (cutpolish5). You have my full permission to access the repo."
    },
-   "tag": "cutpolish5"
+   "tag": "cutpolish5",
+   "after": "t-cutpolish5"
   },
   {
    "id": "c-boardready",
@@ -7734,6 +7739,25 @@
     {
      "d": "2026-11-20",
      "t": "Collected from the Waiting on Tom list in claude/next.md by c-nextclean."
+    }
+   ]
+  },
+  {
+   "id": "t-cutpolish5",
+   "title": "Watch the chapter 1 scenes for breathing and reactions",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "Play chapter 1 from the start (the opening, then the walk to Aunt Ellie, then the kitchen). Watch people standing in a scene: they should breathe a little, dip when a pose changes, turn to whoever speaks, and hop or show a ! ? ... or sweat drop on cue words. Boppy winces (a sweat drop) on 'Gently. The stomach.' when you talk to him. Tap All good, or Something is wrong with what you saw.",
+   "blocks": [],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by cutpolish5."
     }
    ]
   }

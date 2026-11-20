@@ -1,4 +1,4 @@
-kind	chapter	file	where	speaker	text	listener	mood	at
+kind	chapter	file	where	speaker	text	listener	mood	at	fx
 scene	1	data/scenes.js	opening	Grace	TATA! You're BACK!	tom	loving	TATA!
 scene	1	data/scenes.js	opening	Grace	We waited for you for a hundred years.	tom	loving	waited for you
 scene	1	data/scenes.js	opening	Grace	We waited for you for a hundred years.	rose	happy	a hundred years
@@ -10107,3 +10107,34 @@ table	10	data/ellie-quests.js	ellie bet 10 pay	Aunt Ellie	You told me the whole 
 table	10	data/ellie-quests.js	ellie bet 10 pay	Aunt Ellie	I bet Deedee you would be home for dinner. Take this. Eleven trips to Paris and I never lost a bag. It's luggage tag luck. It will keep you ahead.	tom	proud
 table	10	data/ellie-quests.js	ellie bet 10 pay	Aunt Ellie	I bet Deedee you would be home for dinner. Take this. Eleven trips to Paris and I never lost a bag. It's luggage tag luck. It will keep you ahead.	grace	happy
 table	10	data/ellie-quests.js	ellie bet 10 pay	Aunt Ellie	I bet Deedee you would be home for dinner. Take this. Eleven trips to Paris and I never lost a bag. It's luggage tag luck. It will keep you ahead.	rose	happy
+scene	1	data/scenes.js	ch1Goal	Grace	Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One again.	rose	surprised	the Big One	!
+scene	1	data/scenes.js	ch1Goal	Grace	It did not eat a boat. Nobody's ever seen it but Boppy, and he's been saying it for twenty years.	rose	unimpressed	did not eat a boat	...
+scene	1	data/scenes.js	ch1Goal	Tom	Twenty years, one witness. That's a strong number one. What's number two?	grace	proud	strong number one	
+scene	1	data/scenes.js	ch1Goal	Grace	Number two. Deedee made apple muffins. They're for you, so nobody's allowed to have one yet.	rose	scared	nobody's allowed	sweat
+scene	1	data/scenes.js	ch1Goal	Rose	I licked one. Only the top!	tom	surprised	I licked one	?
+scene	1	data/scenes.js	ch1Goal	Rose	I licked one. Only the top!	grace	angry	Only the top	!
+scene	1	data/scenes.js	ch1Goal	Tom	Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait.	rose	proud	Thank you	hop
+scene	1	data/scenes.js	ch1Goal	Grace	Number three. Rose licked a muffin.	rose	scared	Rose licked	sweat
+scene	1	data/scenes.js	ch1Goal	Grace	Number three. Rose licked a muffin.	tom	happy	licked a muffin	
+scene	1	data/scenes.js	ch1Amy	Amy	Brother! I'm watching you from the window. I've seen people move faster walking on the sand at Robert Moses.	tom	unimpressed	faster walking on the sand	...
+scene	1	data/scenes.js	ch1Amy	Amy	Brother! I'm watching you from the window. I've seen people move faster walking on the sand at Robert Moses.	grace	happy	Robert Moses	
+scene	1	data/scenes.js	ch1Amy	Tom	I'm carrying a child and receiving a news report.	grace	happy	receiving a news report	
+scene	1	data/scenes.js	ch1Amy	Amy	I carried both of them up that street with the groceries. Go see Mom. I'm coming over after my run.	rose	happy	I'm coming over	hop
+scene	1	data/scenes.js	ch1Amy	Tom	Your mother says I'm slow.	grace	proud	slow	
+scene	1	data/scenes.js	ch1Amy	Grace	You are slow. I've been on number four since the taxi place.	tom	unimpressed	You are slow	...
+scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Tom. They gave you a seat that turns into a bed, and you still got off that plane wrinkled.	tom	unimpressed	got off that plane wrinkled	...
+scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Tom. They gave you a seat that turns into a bed, and you still got off that plane wrinkled.	rose	surprised	seat that turns into a bed	?
+scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Then I'll look at you again at dinner. Come in. Rose, darling, what is that on your hands?	rose	scared	what is that on your hands	sweat
+scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Then you'll stay up there, please. Your uncle wipes clean. My chairs don't.	rose	sad	stay up there	...
+scene	1	data/scenes.js	ch1Ellie	Grace	You got new curtains.	tom	happy	new curtains	
+scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Then the curtains are three, Grace. Fix your list. I'm not coming in behind a licked muffin.	grace	sad	Fix your list	sweat
+scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Then the curtains are three, Grace. Fix your list. I'm not coming in behind a licked muffin.	rose	happy	licked muffin	hop
+scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Sure. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind.	tom	loving	I didn't care for it	
+scene	1	data/scenes.js	ch1Ellie	Aunt Ellie	Sure. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind.	grace	loving	quieter without him	
+scene	1	data/scenes.js	ch1Theft	Deedee	My favorite son! I missed that face. Now sit, you're having a muffin.	rose	happy	having a muffin	hop
+scene	1	data/scenes.js	ch1Theft	Tom	Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.	deedee	proud	cinnamon topping	
+scene	1	data/scenes.js	ch1Theft	Tom	Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.	grace	unimpressed	flew over Kansas	...
+scene	1	data/scenes.js	ch1Theft	Deedee	I made twelve and they're all still there. I've been standing between that pan and your father since six this morning.	boppy	unimpressed	your father	...
+scene	1	data/scenes.js	ch1Theft	Boppy	In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat...	deedee	unimpressed	back at Rikers	...
+scene	1	data/scenes.js	ch1Theft	Boppy	In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat...	rose	surprised	whole loaf of bread	!
+scene	1	data/scenes.js	ch1Theft	Grace	It's mine! Tata, get UP, it's getting away!	rose	scared	getting away	!

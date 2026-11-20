@@ -5,13 +5,14 @@
     python3 tools/reaction-apply.py 1 2 3      # later batches are cumulative
 
 Only rows of kind `scene` are used (story dialogue). The tsv is the source: change a mood word, delete a row, add a row, rerun this tool.
-Never hand-edit data/emotion-reactions.js. Key: '<Speaker>|<exact line text>|<chapter>' -> [[listener, mood], ...] or [[listener, mood, position], ...].
+Never hand-edit data/emotion-reactions.js. Key: '<Speaker>|<exact line text>|<chapter>' -> [[listener, mood], ...] or [[listener, mood, position], ...] or [[listener, mood, position, fx], ...] (fx: hop, !, ?, ..., sweat, wince; position 0 = at the line's start).
 Timing (reacttime1, Tom 2026-11-13): the optional last column `at` holds the exact words of the line that cause the reaction. The listener reacts when the
 line has got to the END of those words (first place they appear), not when the line starts. Empty `at` = react as the line starts. The words must be in the
 line exactly (fatal if not). Rows of other chapters may be short (no `at` field).
 Fatal: a line whose listeners get two different moods in one chapter (needs a scene key; not needed in chapter 1).
 """
 import csv, json, os, sys
+FX = ('', 'hop', '!', '?', '...', 'sweat', 'wince')   # cutpolish5: optional column fx
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TSV = os.path.join(ROOT, 'docs/emotion-reactions.tsv')
 OUT = os.path.join(ROOT, 'data/emotion-reactions.js')
@@ -32,7 +33,9 @@ def main():
                 i = r['text'].find(at)
                 if i < 0: bad.append((r['text'][:50], at)); continue
                 pos = i + len(at)
-            val = (r['mood'], pos)
+            fx = (r.get('fx') or '').strip()
+            if fx not in FX: bad.append((r['text'][:50], 'fx ' + fx)); continue
+            val = (r['mood'], pos, fx)
             if r['listener'] in d and d[r['listener']] != val: clash.append((key, r['listener']))
             d[r['listener']] = val
     if bad: sys.exit('at words not found in the line: %r' % bad[:10])
@@ -43,8 +46,8 @@ def main():
              "const REACTION_CHAPTERS=new Set(%s);" % json.dumps([int(w) for w in want]),
              "const EMOTION_REACTIONS={"]
     for k in sorted(table):
-        lines.append('%s: %s,' % (json.dumps(k, ensure_ascii=False), json.dumps([[a, m] if not pos else [a, m, pos] for a, (m, pos) in sorted(table[k].items())])))
+        lines.append('%s: %s,' % (json.dumps(k, ensure_ascii=False), json.dumps([[a, m, pos, fx] if fx else ([a, m] if not pos else [a, m, pos]) for a, (m, pos, fx) in sorted(table[k].items())])))
     lines.append('};')
     open(OUT, 'w', encoding='utf-8').write('\n'.join(lines) + '\n')
-    print('wrote', len(table), 'lines,', sum(len(v) for v in table.values()), 'reactions,', sum(1 for v in table.values() for m, pos in v.values() if pos), 'timed')
+    print('wrote', len(table), 'lines,', sum(len(v) for v in table.values()), 'reactions,', sum(1 for v in table.values() for m, pos, fx in v.values() if pos), 'timed')
 main()

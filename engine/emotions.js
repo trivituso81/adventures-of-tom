@@ -89,15 +89,18 @@ function emoCueReached() {
   if(typeof DV!=='undefined'&&DV.page===dialog.index&&DV.t0!=null) return n;   // the clip has finished
   return dialog.shown;
 }
-function emoPose(lid,mood) {
+function emoPose(lid,mood,fx,isSpk) {
   const a=emoActorById(lid);
-  if(a&&!a.scenePose&&typeof STORY_POSES!=='undefined'&&STORY_POSES[lid]&&STORY_POSES[lid]['em_'+mood]) { a.scenePose={f:'em_'+mood,mid:lid,emo:true}; EMO.listeners.push(a); }
+  if(!a) return;
+  if(isSpk) { if(typeof STORY_POSES!=='undefined'&&STORY_POSES[lid]&&STORY_POSES[lid]['em_'+mood]) { a.scenePose={f:'em_'+mood,mid:lid,emo:true}; EMO.actor=a; } emoFx(a,fx); return; }   // cutpolish5: a row that names the speaker changes the speaker's own pose on a cue word
+  if(!a.scenePose&&typeof STORY_POSES!=='undefined'&&STORY_POSES[lid]&&STORY_POSES[lid]['em_'+mood]) { a.scenePose={f:'em_'+mood,mid:lid,emo:true}; EMO.listeners.push(a); }
+  emoFx(a,fx);
 }
 function emoCueTick() {
   if(!EMO.pending.length) return;
   if(!dialog.active||dialog.index!==EMO.cueLine) { EMO.pending=[]; return; }
   const at=emoCueReached(),keep=[];
-  for(const p of EMO.pending) { if(at>=p[2]) emoPose(p[0],p[1]); else keep.push(p); }
+  for(const p of EMO.pending) { if(at>=p[2]) emoPose(p[0],p[1],p[3],p[4]); else keep.push(p); }
   EMO.pending=keep;
 }
 setInterval(()=>{ try { emoCueTick(); } catch(e) {} },50);
@@ -106,10 +109,11 @@ function emoReact(speakerId,text) {
   const nx=dialog.lines[dialog.index+1],ns=nx&&emoReactionsOf(dialog.name,nx);   // warm the next line's sheets
   for(const [lid] of (ns||[])) if(typeof storyPosesLoad==='function') storyPosesLoad(lid);
   EMO.cueLine=dialog.index;
-  for(const [lid,mood,at] of rs) {
-    if(lid===speakerId||typeof EMOTION_FACES==='undefined'||!EMOTION_FACES.includes(lid)) continue;
+  for(const [lid,mood,at,fx] of rs) {
+    const isSpk=lid===speakerId;
+    if((isSpk&&!at)||typeof EMOTION_FACES==='undefined'||!EMOTION_FACES.includes(lid)) continue;   // the speaker may only be named with a cue (at)
     if(typeof storyPosesLoad==='function') storyPosesLoad(lid);
-    if(at>0) EMO.pending.push([lid,mood,at]); else emoPose(lid,mood);
+    if(at>0) EMO.pending.push([lid,mood,at,fx,isSpk]); else emoPose(lid,mood,fx,isSpk);
   }
 }
 // Talking poses (talk1, Tom 2026-11-13, docs/TALK_POSES.md): four full-body poses per person (Art Library <id>-talk, tools/sprite-bake/talk_frames.py, frames tk_<type>
@@ -138,8 +142,11 @@ function emoApply() {
   const mood=(dialog.emo&&emoMoodOf(dialog.name,text))||emoNpcMoodOf(dialog.name,text);
   const id=String(DIALOG_PORTRAIT_IDS[String(dialog.name||'').trim().toLowerCase()]||'').replace(/^npc_/,'');   // townspeople's keys are npc_<id>; their faces and poses are filed under <id>
   const had=EMO.mood; emoHoldClear(); emoClear();
-  EMO.spk=id?emoActorFor(id,dialog.name,dialog.npc):null;   // the person speaking this line: listeners in a mood pose turn toward them (facing1, poseFacingWant in engine/story.js)
+  EMO.spk=id?emoActorFor(id,dialog.name,dialog.npc):null;
+  if(EMO.spk&&dialog.emo&&lifeOn(EMO.spk)) { EMO.spk._sqT=lifeNow(); emoTurnListeners(EMO.spk); }   // cutpolish5: squash as the line starts, listeners turn
+  // the person speaking this line: listeners in a mood pose turn toward them (facing1, poseFacingWant in engine/story.js)
   if(dialog.emo) emoReact(id,text);
+  else if(EMO.spk&&dialog.name==='Boppy'&&/Gently\. The stomach\./.test(text)) emoFx(EMO.spk,'wince');   // cutpolish5: Boppy's wince, a code stand-in (squash and a sweat drop) until a painted stomach pose is approved; this line is a press-A chat, not a scene step
   const lp=id&&typeof LINE_POSES!=='undefined'&&LINE_POSES[String(dialog.name||'').trim()+'|'+text];   // c-reports: one line, one painted pose and its own face (data/line-poses.js)
   if(lp&&typeof STORY_POSES!=='undefined'&&STORY_POSES[lp.id]&&STORY_POSES[lp.id][lp.f]) {
     const box=$('dialog-portrait'),img=box&&box.querySelector('img');
@@ -211,3 +218,49 @@ updateIntro=function(dt) {
   return r;
 };
 addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{EMO,emoMoodOf,emoCueReached,emoCueWeights}); });
+
+// Life in a scene (cutpolish5, plan claude/cutscene-polish-plan.md phase 5). Only while a scene runs, only for people (never monsters, riders, knocked-down or
+// amber figures), and off during SKIP. actorLife(a,posKey) gives drawSheetActor a scale (breathing: 1.75 percent taller and back over 3.2 s, each person offset;
+// a 120 ms squash and settle 0.94, 1.04, 1.0 when the pose changes or a line starts; a 'wince' fx holds 0.95), a lift in pixels (an 8 px hop; a 1 px bob on the
+// typing tick while that person's line types) and the pip to float over the head. The scale is uniform about the feet (the sprite drawer has no stretch).
+const LIFE_BREATH=.0175, LIFE_PERIOD=3.2, LIFE_SQ=.12, LIFE_HOP_PX=8, LIFE_HOP_SEC=.3, LIFE_PIP_SEC=1.3, LIFE_WINCE_SEC=2.6;
+function lifeOff(a) { const s=String((a.member&&a.member.id)||a.name||(a.isPlayer?'tom':'x')); let h=0; for(let i=0;i<s.length;i++) h=(h*31+s.charCodeAt(i))%997; return h/997*LIFE_PERIOD; }
+function lifeNow() { return (typeof performance!=='undefined'?performance.now():Date.now())/1000; }
+function lifeOn(a) { return !!(a&&!a.monster&&!a.seat&&!a.amber&&typeof intro!=='undefined'&&(intro.active||(a._fx&&a._fx.kind==='wince'))&&!(typeof battle!=='undefined'&&battle.active)&&!(typeof cut!=='undefined'&&(cut.skip||cut.ff))); }
+function emoFx(a,kind) { if(a&&kind) a._fx={kind,t0:lifeNow()}; }
+function actorLife(a,posKey) {
+  if(!lifeOn(a)) { if(a) a._fx=null; return null; }
+  const now=lifeNow();
+  if(a._lifeKey!==posKey) { if(a._lifeKey!==undefined) a._sqT=now; a._lifeKey=posKey; }
+  let s=1+LIFE_BREATH*(.5-.5*Math.cos(2*Math.PI*(now+lifeOff(a))/LIFE_PERIOD)),lift=0,pip=null,pt=0;
+  if(a._sqT!==undefined) { const e=(now-a._sqT)/LIFE_SQ;
+    if(e<1) s*=e<.33?1-.06*(e/.33):(e<.66?.94+.10*((e-.33)/.33):1.04-.04*((e-.66)/.34)); else a._sqT=undefined; }
+  if(EMO.spk===a&&dialog.active&&dialog.chars&&dialog.shown<dialog.chars.length) lift+=Math.floor(dialog.shown)%2;
+  const f=a._fx;
+  if(f) { const e=now-f.t0;
+    if(f.kind==='hop') { if(e<LIFE_HOP_SEC) lift+=LIFE_HOP_PX*Math.sin(Math.PI*e/LIFE_HOP_SEC); else a._fx=null; }
+    else if(f.kind==='wince') { if(e<LIFE_WINCE_SEC) { s*=.95; pip='sweat'; pt=e; } else a._fx=null; }
+    else if(e<LIFE_PIP_SEC) { pip=f.kind; pt=e; if(f.kind==='!'&&e<LIFE_HOP_SEC) lift+=LIFE_HOP_PX*Math.sin(Math.PI*e/LIFE_HOP_SEC); }
+    else a._fx=null; }
+  return {s,lift,pip,pt};
+}
+// The pip floats over the head: '!', '?', '...' are small painted-style bubble text, 'sweat' is a drop (code stand-ins until the Art Library pips are approved).
+function drawLifePip(pip,pt,cx,top,k) {
+  const y=Math.round(top-6*k-Math.min(10,pt*14)),x=Math.round(cx+8*k);
+  if(pip==='sweat') { ellipse(x,y+3,2,3,'#7fc4e8'); rect(x-1,y-3,2,3,'#7fc4e8'); ellipse(x-1,y+2,1,1,'#e8f6ff'); return; }
+  if(typeof BUBBLE!=='undefined'&&BUBBLE.text) BUBBLE.text(pip,x,y,pip==='!'?'#c43c2a':'#4a5a7a',1.6);
+}
+// Listeners turn toward the speaker 80 to 180 ms after a line opens (plan phase 5), unless a step set their facing, they hold a pose or they are walking.
+function emoTurnListeners(spk) {
+  if(!lifeOn(spk)||!spk) return;
+  const sp=position(spk),line=dialog.index,all=[player].concat(followers,(currentMap&&currentMap.npcs)||[]);
+  for(const a of all) {
+    if(!a||a===spk||a.monster||a.seat||a.hidden||a.scenePose||a.stageFaced||a.move||a.amber) continue;
+    const t=80+Math.random()*100;
+    setTimeout(()=>{ try {
+      if(!dialog.active||dialog.index!==line||EMO.spk!==spk||a.scenePose||a.stageFaced||a.move||!lifeOn(a)) return;
+      const p=position(a),dx=sp.x-p.x,dy=sp.y-p.y;
+      a.facing=Math.abs(dx)>=Math.abs(dy)?(dx<0?'left':'right'):(dy<0?'up':'down');
+    } catch(e) {} },t);
+  }
+}
