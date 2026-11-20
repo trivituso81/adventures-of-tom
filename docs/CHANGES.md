@@ -1,3 +1,11 @@
+## skillinfo1 (2026-11-19): New battle: an i icon on each Skill row opens its card, a tap anywhere else on the row uses the Skill
+
+- Tom (11-19): "we need an information "i" icon to the left of each ability name, which should bring the user to the more details screen with the BACK and USE buttons. otherwise if the user taps anywhere on the ability outside of the abilitiy box, it should just execute tha bility or require the character to choose a target as applicable".
+- SKILLS list (`engine/b3-ui.js`): a round i sits left of every Skill name. A tap on it opens the b3s9a skill card (BACK and USE). A tap anywhere else on the row uses the Skill at once, or opens the target list when it needs a target (Back from there returns to the list). The i is a span inside the row's button with an invisible tap strip down the whole left of the row (`.b3-ii::after`, `index.html`), so a thumb that lands near it still opens the card. A Skill that cannot be used still says why when tapped (the nope sound and the message line); its card also shows why.
+- Keys and pad: Enter and A on a row now use the Skill (they opened the card in b3s9a); I (and the pad's Y) with the cursor on a row opens its card. The party-card tap that opens a family member's list is unchanged.
+- Rose Mode picture tiles carry a small i in the top left corner (`engine/b3-pictures.js`, `.b3p-i`) with the same two behaviours.
+- Tests: `tools/b3_test.py s9ui` now checks the i is left of every name with a tap strip as tall as the row, the i opens the card and uses nothing, USE and BACK from the card, a row tap (name and Pep pill) opens the target list or plays, Back from it returns to the list; `s7` (Rose Mode) checks every tile has its i; the skill helpers open the card with I.
+
 ## music3 (2026-11-20): Music Library can make takes on the newer ElevenLabs models; a new Square prompt to try on v2.5
 
 - Card c-music3. Followed `claude/next-addendum-squaremusic.md` (stop-loss after two Square rewrites on music_v1 missed: the cause was the old model, not the wording).

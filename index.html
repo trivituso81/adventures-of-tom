@@ -951,6 +951,16 @@ html.duo #battle.v2 .b3-sk .b2-sn,html.duo #battle.v2 .b3-sk .b3-snt{font-size:1
 .b3-cost{display:flex;align-items:baseline;gap:.15em;flex:none;margin-left:auto;background:#1d5a88;border:1px solid #8dc4e6;border-radius:999px;padding:.05em .55em;color:#fff;line-height:1.15;white-space:nowrap}
 .b3-cost b{font-size:1.3em;font-weight:900}.b3-cost small{font-size:.62em;font-weight:900;letter-spacing:.5px;color:#cfe8f7}
 .b3-cost.free{background:#2c6a3b;border-color:#8fe3a6}.b2-btn.no .b3-cost{opacity:.5}
+/* skillinfo1: the i at the left of a Skill row. The circle is in the row's flow; its ::after is an invisible tap strip over the whole left of the row (the row is position:relative) */
+.b2-btn.b3-sk{position:relative}
+.b3-ii{flex:none;display:flex;align-items:center;justify-content:center;width:2.1em;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.b3-ii::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3.3em}
+.b3-ii i{display:flex;align-items:center;justify-content:center;width:1.7em;height:1.7em;border-radius:50%;border:2px solid #8dc4e6;background:#1d3a5a;color:#cfe8f7;font:italic 900 1.05em Georgia,'Times New Roman',serif;line-height:1;pointer-events:none}
+.b3-sk:has(.b3-ii:active) .b3-ii i{background:#2d5f8f}
+.b2-btn.no .b3-ii i{opacity:.8}
+.bp-grid .bp-btn{position:relative}.b3p-i{position:absolute;left:0;top:0;z-index:2;width:44px;height:44px;display:flex;align-items:flex-start;justify-content:flex-start;padding:3px;cursor:pointer}
+.b3p-i i{display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;border:2px solid #8dc4e6;background:#1d3a5a;color:#cfe8f7;font:italic 900 15px Georgia,'Times New Roman',serif;line-height:1;pointer-events:none}
+html.landscape .b3p-i{width:36px;height:36px}html.landscape .b3p-i i{width:20px;height:20px;font-size:12px}
 .b3-det{--f:15px}.b3-det>*{grid-column:1/-1}
 .b3-det-h{display:flex;align-items:center;gap:8px;font-size:var(--f)}.b3-det-h .b2-sn{font-size:calc(var(--f)*1.15);font-weight:900;flex:1 1 auto;min-width:0;color:#ffe9a8;line-height:1.15}
 .b3-det .b3-cost{font-size:calc(var(--f)*1.1)}
@@ -2037,8 +2047,8 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/b3-foe.js?v=b3s8"></script>
 <script src="engine/b3-clips.js?v=b3s8"></script>
 <script src="engine/b3-play.js?v=clipreset"></script>
-<script src="engine/b3-ui.js?v=skilllist1"></script>
-<script src="engine/b3-pictures.js?v=b3s9a"></script>
+<script src="engine/b3-ui.js?v=skillinfo1"></script>
+<script src="engine/b3-pictures.js?v=skillinfo1"></script>
 <script src="engine/b3-lab.js?v=clipreset"></script>
 <script src="engine/b3-menu.js?v=b3s7"></script>
 <script src="engine/save-backup.js?v=slotless1"></script>
@@ -2060,13 +2070,13 @@ html.landscape:not(.tablet):not(.duo) #battle.v2 .b2-x{font-size:17px}html.lands
 <script src="engine/emotions.js?v=cutpolish1"></script>
 <script src="engine/script-edits.js?v=scripted2"></script><!-- Script Editor overlay: Tom's line edits applied before a scene plays (script.html) --><!-- mood faces and poses in story dialogue (batch 0: chapter 1) -->
 <script src="engine/tapwalk.js?v=bossbig1"></script><!-- tap to walk -->
-<script src="data/build-history.js?v=fix-cutpolish4b-3"></script><!-- build names and times (tools/build_history.py) -->
+<script src="data/build-history.js?v=skillinfo1"></script><!-- build names and times (tools/build_history.py) -->
 <script src="engine/build-history.js?v=buildlog1"></script><!-- build label on the welcome screen and menu, tap for the build history -->
 <script src="engine/amber-spots.js?v=ch1rebuild1"></script><!-- orange blocks left behind are solid and answer A (amberspot1) -->
 <script src="engine/block-break.js?v=ch7t1"></script><!-- breaking an orange block: coin, cracks, colour ring, shrink-back, encounters off (ch6build stage 2) -->
 <script src="engine/scene-props.js?v=fix-cutpolish4b"></script><!-- drawn stand-in props a scene can put on a map: the chart, Rose rolled up, the gold ball, bulbs (ch7build stage 2) -->
 <script src="engine/video-call.js?v=ch6s4"></script><!-- the video call at the end of chapter 6: Long Island seen from Tom's porch (ch6build stage 4) -->
-<script src="engine/main.js?v=fix-cutpolish4b-3"></script>
+<script src="engine/main.js?v=skillinfo1"></script>
 <script src="engine/music.js"></script>
 <script src="data/songs.js"></script>
 <script src="engine/music-clips.js?v=adminvol1"></script>

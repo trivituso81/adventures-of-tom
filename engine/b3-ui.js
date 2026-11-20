@@ -210,6 +210,9 @@ function b3RenderParty() {
 // The flavor of a move as pictures (the same pictures Rose Mode uses), with the names in the title for a mouse.
 const B3_FLAV_IC={clobber:'b3f_clobber',sizzle:'b3f_sizzle',drench:'b3f_drench',razzle:'b3f_razzle',racket:'b3f_racket',support:'b3f_support'};
 function b3FlavorIcons(S) { return '<span class="b3-ico" title="'+b2Esc(S.flavor.map(f=>B3_FLAVORS[f].name).join(' and '))+'">'+S.flavor.map(f=>bpIcon(B3_FLAV_IC[f]||'b3f_support',24)).join('')+'</span>'; }
+// skillinfo1: the i at the left of a Skill row opens that Skill's card (BACK and USE); a tap on the rest of the row uses the Skill.
+// A span, not a button, because it sits inside the row's button; engine/b3-ui.js b3Wire reads [data-info] before the row.
+function b3InfoI(S) { return '<span class="b3-ii" data-info="1" role="button" aria-label="Details: '+b2Esc(S.name)+'" title="What '+b2Esc(S.name)+' does"><i>i</i></span>'; }
 function b3CostPill(c,free) { return '<span class="b3-cost'+(c?'':' free')+'"><b>'+(c?c:'FREE')+'</b>'+(c?'<small>PEP</small>':'')+'</span>'; }
 function b3FlavorChips(S) { return S.flavor.map(f=>'<span class="b2-el" style="color:'+B3_FLAVORS[f].color+'">'+B3_FLAVORS[f].name.toUpperCase()+'</span>').join(''); }
 function b3RenderCmd() {
@@ -237,7 +240,7 @@ function b3RenderCmd() {
     const rows=b3SkillRows(u),free=b3Granted()===u;
     const rc=b3Rec();
     box.innerHTML='<div class="b2-list">'+(free?'<div class="b3-free">FREE SKILL FOR '+b2Esc(u.name.toUpperCase())+'</div>':'')+rows.map((S,i)=>{ const can=b3CanUse(B3.F,u,S),c=b3Cost(B3.F,u,S);
-      return '<button type="button" class="b2-btn b3-sk'+(i===B3.sel?' sel':'')+(can.ok?'':' no')+(rc&&rc.skill===S.id?' rec':'')+'" data-i="'+i+'"><span class="b2-sn"><b class="b3-snt">'+b2Esc(S.name)+'</b></span>'+b3FlavorIcons(S)+
+      return '<button type="button" class="b2-btn b3-sk'+(i===B3.sel?' sel':'')+(can.ok?'':' no')+(rc&&rc.skill===S.id?' rec':'')+'" data-i="'+i+'">'+b3InfoI(S)+'<span class="b2-sn"><b class="b3-snt">'+b2Esc(S.name)+'</b></span>'+b3FlavorIcons(S)+
         (u.pocketSkills.includes(S.id)?'<span class="b3-ico b3-pki" title="From the Pocket Vibe">'+bpIcon('b3_pocket',24)+'</span>':'')+b3CostPill(free&&!c?0:c,free&&!c)+'</button>'; }).join('')+(free?'':back)+'</div>';
   } else if(B3.ui==='skill') {
     const S=b3SkillRows(u)[B3.sel]; if(!S) return;
@@ -265,7 +268,7 @@ function b3Info() {
   if(B3.ui==='cross') { const rc=b3Rec(); b3Say(u.name+'’s turn. ▲ BASIC is free and gives 2 Pep. ▶ SKILLS cost Pep. Tap anyone to see what is on them.'+(rc?' Suggested: '+(rc.kind==='ruckus'?b3RuckusName(rc.skill.slice(7)):B3_SKILLS[rc.skill].name)+(rc.why?'. '+rc.why:'.'):'')); }
   else if(B3.ui==='info') b3Say('What is on '+b3Unit(B3.F,B3.infoKey).name+'. Tap another family member or monster to see theirs.');
   else if(B3.ui==='ruckus') { const k=['double','full'][B3.sel]||'double',P=b3RuckusPlan(B3.F,u,k); b3Say(P.ok?b3RuckusName(k)+' with '+P.partner.name+', who is next on the turn bar: '+(k==='full'?'both fire their best Main Vibe Skill free, one action, up to 4 Composure pips. ':'both use their Basic on one monster at +50% power. ')+'No Pep, and '+P.partner.name+' still gets their own turn.':P.why); }
-  else if(B3.ui==='skills') { const g=b3Granted()===u?b3Unit(B3.F,B3.F.grant.by):null; b3Say((g?'Free from '+g.name+'. ':'')+'Tap a Skill to see what it does.'); }
+  else if(B3.ui==='skills') { const g=b3Granted()===u?b3Unit(B3.F,B3.F.grant.by):null; b3Say((g?'Free from '+g.name+'. ':'')+'Tap a Skill to use it. Tap the i to see what it does.'); }
   else if(B3.ui==='skill') { const S=b3SkillRows(u)[B3.sel]; if(S) { const can=b3CanUse(B3.F,u,S); b3Say(can.ok?u.name+': USE it, or BACK to the list.':can.why); } }
   else if(B3.ui==='target'&&B3.pending) { const o=B3.opts[B3.sel]; b3Say(o&&o.no?o.no:B3.pending.ruckus?B3.pending.desc:'Pick who gets '+B3.pending.name+'.'); }   // b3s9: no description up here
 }
@@ -368,11 +371,14 @@ function b3Cross(d) {
 function b3Pick(i) {
   const u=B3.actor;
   if(B3.ui==='done') { b3Sfx('select'); b3End(B3.F.over); return; }
-  if(B3.ui==='skills') { if(b3SkillRows(u)[i]) { b3Sfx('move'); b3Open('skill',i); } }
+  if(B3.ui==='skills') { const S=b3SkillRows(u)[i]; if(S) { B3.sel=i; b3Choose(S); } }   // skillinfo1: the row uses the Skill (the i opens the card)
   else if(B3.ui==='skill') { const S=b3SkillRows(u)[B3.sel]; if(S) b3Choose(S); }
   else if(B3.ui==='ruckus') { const k=['double','full'][i]; if(!k) return; B3.sel=i; b3ChooseRuckus(k); }
   else if(B3.ui==='target') { const o=B3.opts[i]; if(!o) return; if(o.no) { b3Sfx('nope'); b3Say(o.no); return; } b3Sfx('select'); b3Commit(B3.pending.id,o.key); }
 }
+// The i on a Skill row, or the I key / pad Y with the cursor on a row: the card with everything about that Skill.
+function b3OpenCard(i) { if(B3.ui!=='skills'||!b3SkillRows(B3.actor)[i]) return false; b3Sfx('move'); b3Open('skill',i); return true; }
+function b3IKey() { if(B3.ui==='info') b3Back(); else if(B3.ui==='skills'&&b3OpenCard(B3.sel)) return; else if(B3.actor) b3OpenInfo(B3.actor.key); }
 function b3Back() {
   if(battle.state!=='command'||B3.ui==='done') return;
   if(B3.ui==='info') { b3Sfx('move'); b3Open(B3.infoFrom==='skills'||B3.infoFrom==='skill'?B3.infoFrom:'cross',B3.infoSel||0); }
@@ -407,13 +413,13 @@ function b3Key(e) {
   const c=e.code,dirs={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right',KeyW:'up',KeyS:'down',KeyA:'left',KeyD:'right'};
   if(c==='KeyL') { if(!e.repeat) toggleLayout(); return; }
   if(c==='KeyF') { if(!e.repeat) b3Speed(); return; }
-  if(c==='KeyI') { if(!e.repeat) { if(B3.ui==='info') b3Back(); else if(B3.actor) b3OpenInfo(B3.actor.key); } return; }
+  if(c==='KeyI') { if(!e.repeat) b3IKey(); return; }
   if(dirs[c]) { e.preventDefault(); if(!e.repeat||B3.ui!=='cross') b3Dir(dirs[c]); }
   else if((c==='Enter'||c==='Space')&&!e.repeat) { e.preventDefault(); b3A(); }
   else if((c==='Escape'||c==='Backspace'||c==='KeyX')&&!e.repeat) { e.preventDefault(); b3Back(); }
 }
 function b3Pad(dir,dirEdge,A,B,Y) {
-  if(Y) { if(B3.ui==='info') b3Back(); else if(B3.actor) b3OpenInfo(B3.actor.key); return; }   // the same as the I key
+  if(Y) { b3IKey(); return; }   // the same as the I key
   if(dirEdge&&dir) b3Dir(dir);
   if(A) b3A(); else if(B) b3Back();
 }
@@ -464,10 +470,11 @@ function b3Exit() { if(!B3.active) return; b3Sfx('select'); b3End('run'); }
     const x=e.target.closest('.b2-x'); if(x) { if(B3.ui==='cross') b3Cross(x.dataset.d); return; }
     if(e.target.closest('[data-back]')) { b3Back(); return; }
     if(e.target.closest('[data-use]')) { if(B3.ui==='skill') b3Pick(0); return; }
+    const ii=e.target.closest('[data-info]'); if(ii) { const r=ii.closest('.b2-btn[data-i]'); if(r) b3OpenCard(Number(r.dataset.i)); return; }
     const b=e.target.closest('.b2-btn');
     if(b&&b.dataset.i!=null) {
       const i=Number(b.dataset.i);
-      // A tap on a Skill opens its card (USE is on the card). In RUCKUS and the target list, on a phone the first tap only
+      // A tap on a Skill row uses it (or asks who, when it needs a target); the i opens the card (skillinfo1). In RUCKUS and the target list, on a phone the first tap only
       // highlights a row and previews it; a tap on the highlighted row uses it.
       if(B3.ptr&&B3.ptr!=='mouse'&&(B3.ui==='ruckus'||B3.ui==='target')&&i!==B3.armed) { b3Sfx('move'); b3Hover(i); return; }
       b3Pick(i); return;

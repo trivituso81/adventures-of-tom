@@ -5689,7 +5689,7 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "prog",
-   "next": "Add an i icon left of each skill name in the SKILLS list (words and Rose Mode pictures). The i opens the skill card with BACK and USE. A tap anywhere else on the row uses the skill, or goes to the target list when it needs a target. Update tools/b3_test.py, test portrait and landscape, push.",
+   "next": "Shipped as skillinfo1: an i icon left of each Skill name opens the skill card (BACK and USE); a tap anywhere else on the row uses the Skill or opens the target list. Rose Mode tiles have a small i in the corner. Stage 9 kits continue on c-b3s9b (TNB) and c-b3s9c (Nara, Boppy, late joiners).",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -5701,6 +5701,10 @@
     {
      "d": "2026-11-19",
      "t": "New card, follow-up to b3s9a. Tom: \"we need an information \"i\" icon to the left of each ability name, which should bring the user to the more details screen with the BACK and USE buttons. otherwise if the user taps anywhere on the ability outside of the abilitiy box, it should just execute tha bility or require the character to choose a target as applicable\""
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Built skillinfo1: i icon on every Skill row (words and Rose Mode), row tap uses the Skill or opens the target list, I key and pad Y open the card, Enter and A use. b3_test s9ui passes in portrait and landscape; your phone check is on t-skillinfo1play."
     }
    ],
    "tag": "skillinfo1",
@@ -5712,7 +5716,8 @@
     "model": "Claude Sonnet 5.5 (row C: a small UI change across two list renderers and the click handler, with tests to update)",
     "effort": "medium (small piece, steps known)",
     "text": "Read claude/handoff-rules.md and docs/CHANGES.md b3s9a, then finish the card c-skillinfo1 if it is not shipped (tag skillinfo1): an i icon left of each skill name opens the skill card (BACK and USE), a tap anywhere else on the row uses the skill or opens the target list. You have my full permission to access the repo."
-   }
+   },
+   "after": "t-skillinfo1play"
   },
   {
    "id": "t-reportart",
@@ -6319,6 +6324,29 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/handoff-rules.md and docs/CHANGES.md section calib3, then check every chapter 1 dialogue clip against its subtitle and reword the subtitles to what the kept takes say. You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "t-skillinfo1play",
+   "title": "Try the i icon and the tap-to-use on the Skills list",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "After the publish of build skillinfo1: RELOAD on the title, then ADMIN > BATTLE LAB > NEW BATTLE > any fight, tap SKILLS. Check: the round i at the left of each Skill name opens the card with BACK and USE; a tap anywhere else on a row uses the Skill, or asks who to aim at when it needs a target. Report with the REPORT tab if a tap goes the wrong way (skillinfo1 is the build to name).",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "\"we need an information \"i\" icon to the left of each ability name\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by skillinfo1: your phone check of the i icon and tap-to-use; blocks nothing."
+    }
+   ]
   }
  ],
  "sessions": [
