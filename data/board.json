@@ -6139,6 +6139,37 @@
    },
    "after": "t-cutpolish4b",
    "auto": true
+  },
+  {
+   "id": "c-music3",
+   "tag": "music3",
+   "title": "Newer ElevenLabs music model for the Music Library (Square track)",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "prog",
+   "next": "Checks which ElevenLabs Music model ids exist now, adds a model choice per take to the Music Library (music_v1 stays selectable), then gives you one Square prompt to try on the newer model. Notes: claude/next-addendum-squaremusic.md.",
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "\"Read claude/next-addendum-squaremusic.md in the Project and follow its\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Tom: Square music (track town) was too busy; two rewrites on music_v1 missed (stop-loss). Card made by the session that follows the addendum."
+    }
+   ],
+   "prompt": {
+    "what": "Adds a model choice per take to the Music Library, then writes one prompt for the Square (track id town) to try on the newer model.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a small tool change, tests catch mistakes)",
+    "effort": "medium (the steps are written in the addendum)",
+    "text": "Read claude/next-addendum-squaremusic.md in the Project and follow its \"What the next session should do differently\" list. Check the current ElevenLabs Music API docs for model ids. If one newer than music_v1 exists, add a model choice per take to the Music Library (music.html), keep music_v1 selectable, update the test stub, run the tests and push. Then give me one prompt for the Square (track id town) to try on the newer model. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [
