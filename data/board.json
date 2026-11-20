@@ -9818,7 +9818,7 @@
   {
    "id": "t-heist1play",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Story and Dialogue",
    "ask": "play",
    "fyi": true,
@@ -9884,9 +9884,12 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: i took a video and created a new Fable request directly with Claude to address this Sent to Claude as card c-fix-heist1play-5; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T17:50:30.211Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "t-heist1voice",
@@ -14048,7 +14051,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDzNmpsEQk5DXD5bJh",
+    "url": "https://claude.ai/code/session_01RXeukDzNmpsEQk5DXD5bJh",
     "opening": "Something is wrong on t-welcomepage-play"
    },
    "history": [
@@ -14075,6 +14078,10 @@
      "d": "2026-11-20",
      "t": "Fix session ended without shipping: Tom's report says only \"i added a request to this thread directly in claude\", with no screenshot, and the request itself lives in the other conversation, which a START run cannot read. The 3 open pencil reports are about scene ch1Theft, not the welcome page. Nothing was changed. Needs Tom: press Something is wrong on t-welcomepage-play again and write the change in the box (which screen, which button, what it should do).",
      "at": "2026-11-20T18:00:00.000Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -14116,7 +14123,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukGLRLwqv73KbUgoYtz",
+    "url": "https://claude.ai/code/session_01RXeukGLRLwqv73KbUgoYtz",
     "opening": "Something is wrong on t-battlelabpagetry"
    },
    "history": [
@@ -14138,6 +14145,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -14157,7 +14168,7 @@
    "id": "c-fix-effectslook",
    "tag": "fix-effectslook",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Look at the Effects page in Admin",
@@ -14179,7 +14190,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukEeg94gABBmqmKonrd",
     "opening": "Something is wrong on t-effectslook"
    },
    "history": [
@@ -14197,6 +14208,10 @@
      "d": "2026-11-20",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-20T17:54:43.813Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -14210,10 +14225,40 @@
    },
    "after": "t-effectslook",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-20T17:55:03+00:00"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFEfHJ4Qb2GBqAXJFo",
+   "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
+   "first": "2026-11-20T17:54:39Z",
+   "last": "2026-11-20T17:54:39Z",
+   "tags": [],
+   "cards": [
+    "c-fix-heist1play-5"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGLRLwqv73KbUgoYtz",
+   "title": "Fix: Open the Battle Lab page on your home screen",
+   "first": "2026-11-20T17:54:28Z",
+   "last": "2026-11-20T17:54:28Z",
+   "tags": [],
+   "cards": [
+    "c-fix-battlelabpagetry"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDzNmpsEQk5DXD5bJh",
+   "title": "Fix: Check the new welcome buttons and chapter list top",
+   "first": "2026-11-20T17:54:19Z",
+   "last": "2026-11-20T17:54:24Z",
+   "tags": [],
+   "cards": [
+    "c-fix-welcomepage-play"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukD7sCjzp3NJTWyxHVn",
    "title": "Move the Project docs into the repo (Project is 97% full)",
@@ -15964,8 +16009,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "c5446f796bab4db54b9c232c277754b42944cf72",
- "synced_at": "2026-11-20T17:53:26+00:00",
+ "synced": "cdd29b28b3497680a432dcd65efd5cae808f4db3",
+ "synced_at": "2026-11-20T17:55:04+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
