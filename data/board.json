@@ -7878,7 +7878,7 @@
    "id": "c-fix-oldchecks",
    "tag": "fix-oldchecks",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Game Shell",
    "title": "Fix what you found on: Older phone checks, when you next play (none block anything)",
@@ -7900,7 +7900,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukELyGq8ErEuz6apg1x",
     "opening": "Something is wrong on t-oldchecks"
    },
    "history": [
@@ -7915,6 +7915,10 @@
     {
      "d": "2026-11-20",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -7927,8 +7931,7 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-oldchecks and t-oldchecks in data/board.json, history included. Your first push is the commit board: start c-fix-oldchecks.\n\nTom tested and found problems:\n1. Card t-oldchecks (Older phone checks, when you next play (none block anything), ask play). He was asked: Only when you feel like it, and report with the REPORT tab if something looks wrong. 1) Voices: Voice Library, Show ) No clip yet and Old voice: record Mr. Washington's lines and the Narrator lines (silent until then); send takes with Send my takes to Claude. 2) Chapters 2, 6 and 7: play from Chapter Select; chapter 7 and chapter 8 art is in the Art Library groups Chapter 7 and Chapter 8 (GENERATE then APPROVE). 3) Script Editor: conversations, Workshop and Paste back. 4) Orange blocks: press A on one left behind, the family's lines replay. 5) Pencil tab: tap it, type a note, tap the picture to drop a pin, SEND; expect Report sent. 6) Art still to make: Young Boppy Van Cortlandt '70 in the Art Library. He wrote: Break this out into one card per item that you've listed in\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:06:38.703Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-oldchecks to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-oldchecks, and give the build fix-oldchecks a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-oldchecks",
-   "auto": true,
-   "start": true
+   "auto": true
   }
  ],
  "sessions": [
@@ -8788,8 +8791,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "dada662cacc1b38074f2086fac659e253873ac72",
- "synced_at": "2026-11-20T07:58:16+00:00",
+ "synced": "fffe1900312919319549d735462fecc608ad5235",
+ "synced_at": "2026-11-20T08:07:23+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
