@@ -8110,8 +8110,16 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: nothing was left for it to wait on."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom sent this to the backlog."
     }
-   ]
+   ],
+   "backlog": {
+    "at": "2026-11-20",
+    "from": "up"
+   }
   },
   {
    "id": "t-oldchecks-blocks",
