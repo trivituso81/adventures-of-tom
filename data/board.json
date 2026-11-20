@@ -12656,7 +12656,7 @@
    "id": "c-fix-gem-canon01play",
    "tag": "fix-gem-canon01play",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Play the new chapter 1 opening in the taxi office",
@@ -12678,7 +12678,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukEr3zRmZS5WgoQeWYc",
     "opening": "Something is wrong on t-gem-canon01play"
    },
    "history": [
@@ -12696,6 +12696,10 @@
      "d": "2026-11-20",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-20T17:09:07.164Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -12709,7 +12713,7 @@
    },
    "after": "t-gem-canon01play",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-20T17:10:04+00:00"
   }
  ],
  "sessions": [
@@ -14273,8 +14277,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "a27bbfa380d313c1a117b236b890433bb7dd3cff",
- "synced_at": "2026-11-20T17:07:40+00:00",
+ "synced": "cd793d706cd59c525f653e1b74623e66a1deb6e0",
+ "synced_at": "2026-11-20T17:10:06+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
