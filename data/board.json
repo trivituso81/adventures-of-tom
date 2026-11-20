@@ -9848,7 +9848,7 @@
   {
    "id": "t-heist1play",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Story and Dialogue",
    "ask": "play",
    "fyi": true,
@@ -9930,8 +9930,14 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-20T19:31:01.946Z"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "t-heist1voice",
