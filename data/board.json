@@ -14936,11 +14936,20 @@
     {
      "d": "2026-11-20",
      "t": "Added with c-gatezero."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom sent this to the backlog.",
+     "at": "2026-11-20T19:18:52.848Z"
     }
    ],
    "chat": {
     "url": "",
     "opening": "not started"
+   },
+   "backlog": {
+    "at": "2026-11-20",
+    "from": "up"
    }
   },
   {
