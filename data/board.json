@@ -10189,7 +10189,7 @@
       "col": "prog",
       "theme": "Game Shell",
       "title": "Fix the report backlog (7 open)",
-      "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-000755-3h9p, r-20261120-000831-h5tq, r-20261120-000848-fl38, r-20261120-000910-g9n1, r-20261120-000931-2yx8, r-20261120-001019-feou and 1 more. First note: Grace's list shouldn't appear until she finishes the third item, like in the dialogue, so remove it ",
+      "next": "Done: the two fixable reports were already fixed and closed; five voice reports belong to c-fix-gracevoice-distort.",
       "prompt": {
         "what": "Works through the reports you filed in the game.",
         "before": [
@@ -10221,12 +10221,17 @@
         {
           "d": "2026-11-20",
           "t": "Started by START on Claude Sonnet 5.5, effort medium."
+        },
+        {
+          "d": "2026-11-20",
+          "t": "Checked all 7 reports. Two (list timing r-20261120-000755-3h9p, Amy zoom r-20261120-001019-feou) were already fixed in reports-2026-11-20 and are now closed on inbox. The 5 distorted Grace voice reports stay open: card c-fix-gracevoice-distort owns them. Nothing pushed to the game."
         }
       ],
       "blocks": [],
       "created": "2026-11-20",
       "changed": "2026-11-20",
-      "started_at": "2026-11-20T15:35:40+00:00"
+      "started_at": "2026-11-20T15:35:40+00:00",
+      "after": "nothing for Tom: c-fix-gracevoice-distort"
     },
     {
       "theme": "Tools",
