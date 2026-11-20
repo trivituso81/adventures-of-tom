@@ -1226,12 +1226,12 @@
   },
   {
    "id": "c-reports",
-   "tag": "reports-2026-11-19",
+   "tag": "reports-2026-11-19c",
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (7 open)",
-   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100352-7v5z, r-20261114-100555-mxvd, r-20261114-100734-1a2w, r-20261114-101501-c5no, r-20261114-101538-nre4, r-20261114-104915-g4gl and 1 more. First note: For this line in particular, we need to create a special frame that can be used in both the dialog a",
+   "next": "Done: 6 of the 7 art reports are in the game (build reports-2026-11-19c): 1a2w Boppy's mustache, 7v5z Deedee glasses on her head, c5no the new thinking talking pose (10 people, 19 lines tagged), nre4 the fishing spot as one picture, g4gl dazed frames for the 5 smog neighbours, jykk Deedee and Rose holding the bulb. Not done: mxvd (the mud blob): the scene it came from was rewritten and the new Mudling sheet is carried by cards c-heistart and c-heist1, which close it.",
    "prompt": {
     "what": "Puts the approved Report fixes pictures into the game and closes the 7 art reports.",
     "before": [
@@ -1301,12 +1301,16 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Installed the approved Report fixes pictures as build reports-2026-11-19c; closed 7v5z, 1a2w, c5no, nre4, g4gl, jykk. mxvd stays open: its scene was rewritten and cards c-heistart and c-heist1 replace its picture (ch1-mudling-heist2). Chapters 2, 4, 5, 6, 7 have no Library bulb picture yet, so jykk covers chapters 1 and 3 only."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
-   "after": "t-reportart"
+   "after": "t-reportcheck"
   },
   {
    "id": "t-startsetup",
@@ -6503,6 +6507,30 @@
     "effort": "medium (one scene; the script, the beats and the steps are written in the plan)",
     "text": "Read CLAUDE.md and claude/heist-redo-plan.md, then cards c-heist1 and t-heistart in data/board.json, history and note included. Build part B (section 7) and push it as heist1. Your first push is the commit board: start c-heist1. Lines go in word for word from section 3, changed only where my note on t-heistart says so. Look at every beat in portrait and landscape before pushing. You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "t-reportcheck",
+   "title": "Look at the six fixed report pictures on your phone",
+   "theme": "Characters",
+   "lane": "tom",
+   "col": "wait",
+   "ask": "play",
+   "fyi": true,
+   "next": "After the publish of build reports-2026-11-19c: RELOAD on the title, then load a chapter 1 save. 1) Grump Hollow, the fishing spot at the pond: the grey grass, orange block and burnt bulb should be ONE picture, not three overlapping ones. 2) Deedee's house, press A on Deedee for her glasses chat: she should stand with the glasses on her head and the dialogue face should show them too. 3) Play on into chapter 2 and walk Old Oak Park while the smog is on: Mr. Washington, Marisol and Larry should stand dazed. Report with the REPORT tab if any of these look wrong (reports-2026-11-19c is the build to name).",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "\"Seven art reports are open (7v5z, mxvd, 1a2w, c5no, nre4, g4gl, jykk).\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by reports-2026-11-19c: your phone check of the six installed report pictures; blocks nothing."
+    }
+   ],
+   "waiting_on": "claude"
   }
  ],
  "sessions": [
