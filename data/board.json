@@ -9723,7 +9723,7 @@
   {
    "id": "t-heist1play",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "theme": "Story and Dialogue",
    "ask": "play",
    "fyi": true,
@@ -9753,8 +9753,14 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Watch the new muffin theft in Deedee's kitchen is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: Why does no one end up on the floor? It was hilarious when the whole party was knocked down on their butts Sent to Claude as card c-fix-heist1play-2; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-20T15:37:16.558Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "t-heist1voice",
@@ -10337,6 +10343,65 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-gracevoice-distort and t-gracevoice-distort in data/board.json, history included. Your first push is the commit board: start c-fix-gracevoice-distort.\n\nTom tested and found problems:\n1. Card t-gracevoice-distort (Re-record Grace's distorted chapter 1 lines, ask voice). He was asked: ADMIN ) VOICE LIBRARY, Chapter 1, open each of Grace's 5 lines with the buttons below (they play distorted in the game). Tap Takes, record until one is clean, keep it, press Send my takes to Claude. Your pencil report on 'Grace's chapter 1 voices almost have...' was cut off after those words: if more is wrong than distortion, say so in the note when you send. He wrote: But why does this keep happening? It has nothing to do with 11 labs because when I initially record them, they sound completely fine and then I provide the Jason to you for upload and they seem to be fine in the game and then at later point they become distorted, so I refuse to record more. It's wasting my money\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T15:33:50.599Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-gracevoice-distort to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-gracevoice-distort, and give the build fix-gracevoice-distort a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-gracevoice-distort"
+  },
+  {
+   "id": "c-fix-heist1play-2",
+   "tag": "fix-heist1play-2",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Story and Dialogue",
+   "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
+   "next": "You reported a problem on Watch the new muffin theft in Deedee's kitchen. Claude starts the fix by itself. Latest: Why does no one end up on the floor? It was hilarious when the whole party was knocked down on their butts",
+   "blocks": [
+    "t-heist1play"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T15:37:16.081Z",
+     "card": "t-heist1play",
+     "title": "Watch the new muffin theft in Deedee's kitchen",
+     "ask": "play",
+     "words": "Why does no one end up on the floor? It was hilarious when the whole party was knocked down on their butts",
+     "shot": "",
+     "asked": "Chapter select ) Chapter 1, jump to the theft scene in Deedee's kitchen, and watch it in portrait, then once in landscape. You should see: 1) the Mudling walks in up the hall (no rolling ball) and everyone jumps, Rose screams; 2) Deedee says \"Excuse me! I just washed that floor.\"; 3) it lifts the pan and runs straight out the door, not past Boppy; 4) nobody ends up on the floor, and Grace's and Tom's floor lines are gone; 5) Boppy's steaming-hat line plays while it runs, and he turns only on \"Wait,\". All good if it plays like that; Something is wrong with what you saw."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-heist1play"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-heist1play.",
+     "at": "2026-11-20T15:37:16.558Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-heist1play: Why does no one end up on the floor? It was hilarious when the whole party was knocked down on their butts",
+     "at": "2026-11-20T15:37:16.558Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-20T15:37:16.558Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Watch the new muffin theft in Deedee's kitchen.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-heist1play-2 and t-heist1play in data/board.json, history included. Your first push is the commit board: start c-fix-heist1play-2.\n\nTom tested and found problems:\n1. Card t-heist1play (Watch the new muffin theft in Deedee's kitchen, ask play). He was asked: Chapter select ) Chapter 1, jump to the theft scene in Deedee's kitchen, and watch it in portrait, then once in landscape. You should see: 1) the Mudling walks in up the hall (no rolling ball) and everyone jumps, Rose screams; 2) Deedee says \"Excuse me! I just washed that floor.\"; 3) it lifts the pan and runs straight out the door, not past Boppy; 4) nobody ends up on the floor, and Grace's and Tom's floor lines are gone; 5) Boppy's steaming-hat line plays while it runs, and he turns only on \"Wait,\". All good if it plays like that; Something is wrong with what you saw. He wrote: Why does no one end up on the floor? It was hilarious when the whole party was knocked down on their butts\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T15:37:16.081Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-heist1play to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-heist1play, and give the build fix-heist1play-2 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-heist1play",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
