@@ -690,7 +690,7 @@
    "title": "New battle system, stage 9b: TNB's kit (Ceramicist and Longboarder)",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "b3s9b",
    "next": "Builds TNB's two Sig Vibes in Battle 3: 2 Basics, 4 Skills, 2 Capstones, 2 Traits, 4 Quirks (14 lines, 6 need their own function), a Lab fight with TNB in the party, simulator and screen tests.",
    "blocks": [],
@@ -708,6 +708,10 @@
     {
      "d": "2026-11-19",
      "t": "Started: this conversation claimed the card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -1210,7 +1214,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukCZdiEbyskXvidXtfn",
+    "url": "https://claude.ai/code/session_01RXeukFraGsc5W54HdP7UDp",
     "opening": "not started"
    },
    "history": [
@@ -1225,6 +1229,10 @@
     {
      "d": "2026-11-19",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "blocks": [],
@@ -2066,7 +2074,7 @@
    "title": "Chapter 1 scene 1: SKIP skips the whole scene, not just the opening half (skipchain1)",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Make a SKIP pressed in the opening carry through Grace's list (ch1Goal) so scene 1 is skipped as one scene, and add a test.",
    "blocks": [],
    "changed": "2026-11-19",
@@ -2079,6 +2087,10 @@
     {
      "d": "2026-11-19",
      "t": "New card. Tom: \"the game is still incorrectly seeing scne 1 as two separate scenes ... when i hit skip it should skip until the whole thing is done\" (the opening and ch1Goal are two scripts; SKIP reset between them)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as skipchain1: SKIP in chapter 1's opening now skips all of scene 1 (the opening and Grace's list)"
     }
    ],
    "tag": "skipchain1",
@@ -2091,7 +2103,8 @@
     "effort": "medium (a small engine fix with a test)",
     "text": "Read claude/handoff-rules.md and docs/CHANGES.md skipchain1, then finish the card c-skipchain1 if it is not shipped. You have my full permission to access the repo."
    },
-   "after": "t-skipchain1play"
+   "after": "t-skipchain1play",
+   "done": "2026-11-19"
   },
   {
    "id": "b-board-b3s9a",
@@ -2138,6 +2151,3134 @@
      "t": "Added by skipchain1: your phone check of the SKIP fix; blocks nothing."
     }
    ]
+  },
+  {
+   "id": "b-board2-start",
+   "tag": "board2-start",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Tools",
+   "title": "Audit fixes applied to the board (finished cards closed, blocked cards unblocked, 5 new cards); board2 build started",
+   "next": "Done: Audit fixes applied to the board (finished cards closed, blocked cards unblocked, 5 new cards); board2 build started",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as board2-start. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-board-ready",
+   "tag": "board-ready",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Tools",
+   "title": "Board card added: green Ready badge on Claude cards that are unblocked",
+   "next": "Done: Board card added: green Ready badge on Claude cards that are unblocked",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as board-ready. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch1takes1",
+   "tag": "ch1takes1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "31 phone voice takes merged (30 chapter 1 re-takes, 1 new Mr. Washington line); nothing heard on a phone",
+   "next": "Done: 31 phone voice takes merged (30 chapter 1 re-takes, 1 new Mr. Washington line); nothing heard on a phone",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch1takes1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-scene1fix1",
+   "tag": "scene1fix1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "The girls' party banners wait until all of scene 1 is done, and the TATA bubble is smaller and sits above the running girls",
+   "next": "Done: The girls' party banners wait until all of scene 1 is done, and the TATA bubble is smaller and sits above the running girls",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as scene1fix1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clipgate1",
+   "tag": "clipgate1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle Animations",
+   "title": "A measured quality gate for battle clips, replayed against Tom's chapter 1 review; nothing re-made, nothing spent",
+   "next": "Done: A measured quality gate for battle clips, replayed against Tom's chapter 1 review; nothing re-made, nothing spent",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clipgate1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-cutpolish3",
+   "tag": "cutpolish3",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "Rose rides on Tom's shoulders from the Square to the kitchen, the hug sways, speakers face left or right, followers stop vanishing behind th",
+   "next": "Done: Rose rides on Tom's shoulders from the Square to the kitchen, the hug sways, speakers face left or right, followers stop vanishing behind the half-wall",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as cutpolish3. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-boardrule1",
+   "tag": "boardrule1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Tools",
+   "title": "Board refresh: milestone A and stage 9 added; every session now checks Tom's request against the board",
+   "next": "Done: Board refresh: milestone A and stage 9 added; every session now checks Tom's request against the board",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as boardrule1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-cutpolish2",
+   "tag": "cutpolish2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "Cutscene poses are sharp from the first frame, foot shadows stop ballooning, Tom's Pose Editor sizes are applied to feelings and talking pos",
+   "next": "Done: Cutscene poses are sharp from the first frame, foot shadows stop ballooning, Tom's Pose Editor sizes are applied to feelings and talking poses",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as cutpolish2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-boardclean1",
+   "tag": "boardclean1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Tools",
+   "title": "Board cleanup: 13 out-of-date cards removed, stage 8 closed, chapter 1 checks folded into one",
+   "next": "Done: Board cleanup: 13 out-of-date cards removed, stage 8 closed, chapter 1 checks folded into one",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as boardclean1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-cutpolish1",
+   "tag": "cutpolish1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "Cutscene lifecycle: the girls walk with Tom, popups queue, no (A) button between lines, speakers hold their pose",
+   "next": "Done: Cutscene lifecycle: the girls walk with Tom, popups queue, no (A) button between lines, speakers hold their pose",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as cutpolish1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-b3s8",
+   "tag": "b3s8",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle Animations",
+   "title": "New battle: video clips play in fights, with the Big One's attacks (Lab only)",
+   "next": "Done: New battle: video clips play in fights, with the Big One's attacks (Lab only)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as b3s8. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-board1",
+   "tag": "board1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Tools",
+   "title": "ADMIN ) BOARD, a kanban of every open item by who has the next move",
+   "next": "Done: ADMIN ) BOARD, a kanban of every open item by who has the next move",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as board1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-b3s7",
+   "tag": "b3s7",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle System",
+   "title": "New battle: tap to preview a move, the recommended move, and Rose Mode pictures (Lab only)",
+   "next": "Done: New battle: tap to preview a move, the recommended move, and Rose Mode pictures (Lab only)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as b3s7. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clipgen2b",
+   "tag": "clipgen2b",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle Animations",
+   "title": "Chapter 1's 67 battle clips are made, approved and baked; a bake started by hand now starts the publish",
+   "next": "Done: Chapter 1's 67 battle clips are made, approved and baked; a bake started by hand now starts the publish",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clipgen2b. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-voicegen2",
+   "tag": "voicegen2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "256 generated voice takes merged into the game (chapters 1, 2, 6 and 8); 2 lines stay silent",
+   "next": "Done: 256 generated voice takes merged into the game (chapters 1, 2, 6 and 8); 2 lines stay silent",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as voicegen2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-voicegen1c",
+   "tag": "voicegen1c",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "Voice take job: first real result noted (5 lines made, 245 credits); notes only, no game change",
+   "next": "Done: Voice take job: first real result noted (5 lines made, 245 credits); notes only, no game change",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as voicegen1c. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-voicegen1b",
+   "tag": "voicegen1b",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "Voice take job fixed after its first real run: ffmpeg installed on the runner, a preflight before any paid request, a paid take is never thr",
+   "next": "Done: Voice take job fixed after its first real run: ffmpeg installed on the runner, a preflight before any paid request, a paid take is never thrown away (tools only, no game change)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as voicegen1b. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-b3s6",
+   "tag": "b3s6",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle System",
+   "title": "New battle, stage 6: the Family Ruckus (gauge, Double Team, Full Family Ruckus)",
+   "next": "Done: New battle, stage 6: the Family Ruckus (gauge, Double Team, Full Family Ruckus)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as b3s6. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-b3s5c",
+   "tag": "b3s5c",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle System",
+   "title": "New battle, stage 5c: Rose's Cozy Rosie and Deedee's Registered Nut are complete",
+   "next": "Done: New battle, stage 5c: Rose's Cozy Rosie and Deedee's Registered Nut are complete",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as b3s5c. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-b3s5b",
+   "tag": "b3s5b",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle System",
+   "title": "New battle, stage 5b: Tom's Gamer Geek and Grace's Craft Artist are complete",
+   "next": "Done: New battle, stage 5b: Tom's Gamer Geek and Grace's Craft Artist are complete",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as b3s5b. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clipbatch1",
+   "tag": "clipbatch1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle Animations",
+   "title": "Battle clips by the chapter: GENERATE CHAPTER, marks found by themselves, CHAPTER 1 REVIEW in the Battle Lab",
+   "next": "Done: Battle clips by the chapter: GENERATE CHAPTER, marks found by themselves, CHAPTER 1 REVIEW in the Battle Lab",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clipbatch1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-voicelearn4",
+   "tag": "voicelearn4",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "Voice failure guard: a take checker, a first-tag lint, a loudness report and the plan for a take-making job (tools only, no game change)",
+   "next": "Done: Voice failure guard: a take checker, a first-tag lint, a loudness report and the plan for a take-making job (tools only, no game change)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as voicelearn4. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-b3s5a",
+   "tag": "b3s5a",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle System",
+   "title": "New battle, stage 5a: Traits, Quirks and Grand Capstones for the first Vibes of Tom, Grace, Rose and Deedee",
+   "next": "Done: New battle, stage 5a: Traits, Quirks and Grand Capstones for the first Vibes of Tom, Grace, Rose and Deedee",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as b3s5a. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clipfoes1",
+   "tag": "clipfoes1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle System",
+   "title": "Idle video entries for four chapter 1 monsters, the baker picks the calm stretch itself, two new Battle Lab test fights",
+   "next": "Done: Idle video entries for four chapter 1 monsters, the baker picks the calm stretch itself, two new Battle Lab test fights",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clipfoes1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-voicelearn3",
+   "tag": "voicelearn3",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "voice learning stage 2b: speech-model embeddings do not pick Tom's kept take either; the failure guard is the plan",
+   "next": "Done: voice learning stage 2b: speech-model embeddings do not pick Tom's kept take either; the failure guard is the plan",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as voicelearn3. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clipko1",
+   "tag": "clipko1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle Animations",
+   "title": "animation test: a Rose knocked-out video entry in the Art Library, to see if the video model accepts the words \"knocked out\"",
+   "next": "Done: animation test: a Rose knocked-out video entry in the Art Library, to see if the video model accepts the words \"knocked out\"",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clipko1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-b3s4",
+   "tag": "b3s4",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle System",
+   "title": "New battle, stage 4: Vibes. A Main and a Pocket Vibe each, Ranks, Leans, rows, and a Vibes screen in the pause menu and the Battle Lab",
+   "next": "Done: New battle, stage 4: Vibes. A Main and a Pocket Vibe each, Ranks, Leans, rows, and a Vibes screen in the pause menu and the Battle Lab",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as b3s4. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clippack1",
+   "tag": "clippack1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "animation test: battle clips take less than half the phone memory they did; nothing looks different",
+   "next": "Done: animation test: battle clips take less than half the phone memory they did; nothing looks different",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clippack1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-voicelearn2fix",
+   "tag": "voicelearn2fix",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "voicelearn2 write-up corrected: 49 takes (not 48) carry a first tag of 100+ characters, 32 (65%) fail",
+   "next": "Done: voicelearn2 write-up corrected: 49 takes (not 48) carry a first tag of 100+ characters, 32 (65%) fail",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as voicelearn2fix. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-partybanner1",
+   "tag": "partybanner1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Tools",
+   "title": "every join and every leave now shows its own banner with a jingle, one after another; 20 banner paintings added to the Art Library",
+   "next": "Done: every join and every leave now shows its own banner with a jingle, one after another; 20 banner paintings added to the Art Library",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as partybanner1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clippurge1",
+   "tag": "clippurge1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle Animations",
+   "title": "animation test: the old Rose chop test is removed now that her one-finger Boop video is approved and in the Battle Lab",
+   "next": "Done: animation test: the old Rose chop test is removed now that her one-finger Boop video is approved and in the Battle Lab",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clippurge1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-roselets1",
+   "tag": "roselets1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "Rose no longer says \"Come on, Tata! Let's go!\" at the end of the opening; it goes straight into Grace's list",
+   "next": "Done: Rose no longer says \"Come on, Tata! Let's go!\" at the end of the opening; it goes straight into Grace's list",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as roselets1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-voicelearn1",
+   "tag": "voicelearn1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "Voice Library button \"Send my takes to Claude\" sends every take, kept and thrown away, with audio, to a repo branch",
+   "next": "Done: Voice Library button \"Send my takes to Claude\" sends every take, kept and thrown away, with audio, to a repo branch",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as voicelearn1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-roofnpc2",
+   "tag": "roofnpc2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "chapter 1 house and Rivituso Row fixes from Gemini's second audit: the heist plays in order, the party holds its spots, no pepper mid-greeti",
+   "next": "Done: chapter 1 house and Rivituso Row fixes from Gemini's second audit: the heist plays in order, the party holds its spots, no pepper mid-greeting",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as roofnpc2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clipcal1",
+   "tag": "clipcal1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle System",
+   "title": "Rose's approved Boop is in the Battle Lab; the pinned-picture experiment is removed; rule: fix a miss with the smallest change",
+   "next": "Done: Rose's approved Boop is in the Battle Lab; the pinned-picture experiment is removed; rule: fix a miss with the smallest change",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clipcal1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-roofnpc1",
+   "tag": "roofnpc1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "chapter 1 scene 1 fixes from Gemini's video audit: Rose rides into Grace's list, the party walks onto the plaza, no townsfolk on roofs",
+   "next": "Done: chapter 1 scene 1 fixes from Gemini's video audit: Rose rides into Grace's list, the party walks onto the plaza, no townsfolk on roofs",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as roofnpc1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-b3s3",
+   "tag": "b3s3",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle System",
+   "title": "New battle, stage 3: Composure pips, Breaks, Marks, and two new fights (Log Lump and The Big One)",
+   "next": "Done: New battle, stage 3: Composure pips, Breaks, Marks, and two new fights (Log Lump and The Big One)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as b3s3. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-calib3",
+   "tag": "calib3",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "Your 16 new voice takes are in the game (Aunt Ellie's door scene and three re-takes), and 10 subtitles now say what the voice says",
+   "next": "Done: Your 16 new voice takes are in the game (Aunt Ellie's door scene and three re-takes), and 10 subtitles now say what the voice says",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as calib3. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clippin1",
+   "tag": "clippin1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Areas",
+   "title": "Rose's Boop video is now pinned by pictures: it must pass through her painted jab pose and end standing",
+   "next": "Done: Rose's Boop video is now pinned by pictures: it must pass through her painted jab pose and end standing",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clippin1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clipboop2",
+   "tag": "clipboop2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "Rose's Boop video prompt is now two short lines: one sharp finger jab at shoulder height, then hands on hips",
+   "next": "Done: Rose's Boop video prompt is now two short lines: one sharp finger jab at shoulder height, then hands on hips",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clipboop2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-deskhud1",
+   "tag": "deskhud1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle System",
+   "title": "Desktop battle screen: turn bar 2.5x bigger, one party tile per row, bigger type in the whole right panel",
+   "next": "Done: Desktop battle screen: turn bar 2.5x bigger, one party tile per row, bigger type in the whole right panel",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as deskhud1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-b3s2",
+   "tag": "b3s2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle System",
+   "title": "New battle, stage 2: Skills, wards, the wet floor, Pick-Me-Up, status lists and two more fights",
+   "next": "Done: New battle, stage 2: Skills, wards, the wet floor, Pick-Me-Up, status lists and two more fights",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as b3s2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clipboop1",
+   "tag": "clipboop1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle Animations",
+   "title": "Animation test: Rose's real Boop video is ready to generate in the Art Library (one finger on the nose, not a chop)",
+   "next": "Done: Animation test: Rose's real Boop video is ready to generate in the Art Library (one finger on the nose, not a chop)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clipboop1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-calib2",
+   "tag": "calib2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "Your 10 tuned chapter 1 voice takes are in the game; the Voice Library shows the line before and can send your take history",
+   "next": "Done: Your 10 tuned chapter 1 voice takes are in the game; the Voice Library shows the line before and can send your take history",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as calib2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clippace1",
+   "tag": "clippace1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle Animations",
+   "title": "Animation test: the Mudling's body sways at half the speed and its blink is quick",
+   "next": "Done: Animation test: the Mudling's body sways at half the speed and its blink is quick",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clippace1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-b3tempo1",
+   "tag": "b3tempo1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "New battle: attack animations take twice as long",
+   "next": "Done: New battle: attack animations take twice as long",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as b3tempo1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-adminvol1",
+   "tag": "adminvol1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "music volume slider and Music On/Off button in the Admin top bar",
+   "next": "Done: music volume slider and Music On/Off button in the Admin top bar",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as adminvol1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-b3s1",
+   "tag": "b3s1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle System",
+   "title": "New battle system, stage 1: two test fights in the Battle Lab on the new rules",
+   "next": "Done: New battle system, stage 1: two test fights in the Battle Lab on the new rules",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as b3s1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-pubfast1",
+   "tag": "pubfast1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "New versions reach the phone sooner: a publish in progress is no longer cancelled by the next push",
+   "next": "Done: New versions reach the phone sooner: a publish in progress is no longer cancelled by the next push",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as pubfast1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-cliploop1",
+   "tag": "cliploop1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle Animations",
+   "title": "Animation test: the Mudling moves less and its loop no longer jumps at the repeat",
+   "next": "Done: Animation test: the Mudling moves less and its loop no longer jumps at the repeat",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as cliploop1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clipkinds1",
+   "tag": "clipkinds1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle Animations",
+   "title": "Animation test: a Mudling that moves on its own and Rose lying down for a nap, in two Battle Lab fights",
+   "next": "Done: Animation test: a Mudling that moves on its own and Rose lying down for a nap, in two Battle Lab fights",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clipkinds1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-voicefilter1b",
+   "tag": "voicefilter1b",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "change log cleaned up after voicefilter1",
+   "next": "Done: change log cleaned up after voicefilter1",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as voicefilter1b. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clipstudy1",
+   "tag": "clipstudy1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle Animations",
+   "title": "Art Library clips: four test videos to generate (cheap model, 2 second strike, Rose lying down, Mudling idle)",
+   "next": "Done: Art Library clips: four test videos to generate (cheap model, 2 second strike, Rose lying down, Mudling idle)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clipstudy1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-linegap1",
+   "tag": "linegap1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "story scenes play on AUTO, and each chapter 1 line has its own pause before the next speaker",
+   "next": "Done: story scenes play on AUTO, and each chapter 1 line has its own pause before the next speaker",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as linegap1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch1tags1",
+   "tag": "ch1tags1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "chapter 1 voice tags checked against Gemini's ElevenLabs v4 research, 10 lines retagged",
+   "next": "Done: chapter 1 voice tags checked against Gemini's ElevenLabs v4 research, 10 lines retagged",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch1tags1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clipspeed1",
+   "tag": "clipspeed1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle Animations",
+   "title": "Art Library clips: a SPEED control in the review screen",
+   "next": "Done: Art Library clips: a SPEED control in the review screen",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clipspeed1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clipgen1d",
+   "tag": "clipgen1d",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle Animations",
+   "title": "Rose's first Grok-made punch is in the CLIP TEST fight, floor shadow removed",
+   "next": "Done: Rose's first Grok-made punch is in the CLIP TEST fight, floor shadow removed",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clipgen1d. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clipgen1c",
+   "tag": "clipgen1c",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle Animations",
+   "title": "Art Library: ON THE BATTLEFIELD now works for every clip video",
+   "next": "Done: Art Library: ON THE BATTLEFIELD now works for every clip video",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clipgen1c. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clipgen1b",
+   "tag": "clipgen1b",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle Animations",
+   "title": "Fix: an approved clip video was not being cut into the game",
+   "next": "Done: Fix: an approved clip video was not being cut into the game",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clipgen1b. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch1rebuild1",
+   "tag": "ch1rebuild1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "Chapter 1 rebuilt to Tom's locked script, 95 new lines, stand-in art",
+   "next": "Done: Chapter 1 rebuilt to Tom's locked script, 95 new lines, stand-in art",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch1rebuild1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clip3",
+   "tag": "clip3",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "Rose's test punch plays at 3x the video's speed",
+   "next": "Done: Rose's test punch plays at 3x the video's speed",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clip3. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clip2",
+   "tag": "clip2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "Rose's test punch plays at 2x the video's speed",
+   "next": "Done: Rose's test punch plays at 2x the video's speed",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clip2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clip1",
+   "tag": "clip1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Battle Animations",
+   "title": "Animation test: Rose's video-made punch plays in a real fight (Battle Lab ) CLIP TEST: ROSE)",
+   "next": "Done: Animation test: Rose's video-made punch plays in a real fight (Battle Lab ) CLIP TEST: ROSE)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clip1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-scriptconvo1",
+   "tag": "scriptconvo1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "Script Editor splits scenes into conversations you can review, workshop with any AI and paste back",
+   "next": "Done: Script Editor splits scenes into conversations you can review, workshop with any AI and paste back",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as scriptconvo1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-posefaces2",
+   "tag": "posefaces2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "Every main character's dialogue face re-cut from Tom's Pose Editor lines",
+   "next": "Done: Every main character's dialogue face re-cut from Tom's Pose Editor lines",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as posefaces2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-posefaces1b",
+   "tag": "posefaces1b",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "Tom's and TNB's faces cut from Tom's newest lines",
+   "next": "Done: Tom's and TNB's faces cut from Tom's newest lines",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as posefaces1b. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-scripted2",
+   "tag": "scripted2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "Script Editor: Play now works for all 52 scenes that said \"no working Play recipe yet\"",
+   "next": "Done: Script Editor: Play now works for all 52 scenes that said \"no working Play recipe yet\"",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as scripted2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-poseedit4",
+   "tag": "poseedit4",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Characters",
+   "title": "Pose Editor: every resized pose is now exactly the person's height (the game itself is unchanged)",
+   "next": "Done: Pose Editor: every resized pose is now exactly the person's height (the game itself is unchanged)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as poseedit4. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-poseedit3",
+   "tag": "poseedit3",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "Pose Editor: zoom slider, size sliders, pinching no longer scrambles the lines (the game itself is unchanged)",
+   "next": "Done: Pose Editor: zoom slider, size sliders, pinching no longer scrambles the lines (the game itself is unchanged)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as poseedit3. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-poseedit2",
+   "tag": "poseedit2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Characters",
+   "title": "Pose Editor: feelings and talking poses added, and the page reworked into one simple flow (the game itself is unchanged)",
+   "next": "Done: Pose Editor: feelings and talking poses added, and the page reworked into one simple flow (the game itself is unchanged)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as poseedit2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-poseedit1",
+   "tag": "poseedit1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "Pose Editor, phase 1: set the head, chin and feet lines on every walking pose and size it (the game itself is unchanged)",
+   "next": "Done: Pose Editor, phase 1: set the head, chin and feet lines on every walking pose and size it (the game itself is unchanged)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as poseedit1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-scripted1",
+   "tag": "scripted1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "Script Editor: edit every scene's words, play the edited scene, send the edits to Claude",
+   "next": "Done: Script Editor: edit every scene's words, play the edited scene, send the edits to Claude",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as scripted1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch8assets1",
+   "tag": "ch8assets1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "Chapter 8 assets first: 26 Art Library entries and 178 voice lines queued (the game itself is unchanged)",
+   "next": "Done: Chapter 8 assets first: 26 Art Library entries and 178 voice lines queued (the game itself is unchanged)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch8assets1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch7t1",
+   "tag": "ch7t1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "Chapter 7 tested start to finish, staging fixes",
+   "next": "Done: Chapter 7 tested start to finish, staging fixes",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch7t1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch2fix1b",
+   "tag": "ch2fix1b",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "chapter 2 feedback, part 2: facing, staging, bigger talking heads, even face crops, sneeze and towel, door frame v2",
+   "next": "Done: chapter 2 feedback, part 2: facing, staging, bigger talking heads, even face crops, sneeze and towel, door frame v2",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch2fix1b. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch2fix1a",
+   "tag": "ch2fix1a",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "chapter 2 feedback, part 1: six lines rewritten, TNB mellow, Tom with feeling, dazed voices, drawn-out RUMBLE",
+   "next": "Done: chapter 2 feedback, part 1: six lines rewritten, TNB mellow, Tom with feeling, dazed voices, drawn-out RUMBLE",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch2fix1a. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch6s4",
+   "tag": "ch6s4",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "chapter 6 stage 4: the lemon, the hat and the call home; all five old blocks open one by one and the chapter ends after the call",
+   "next": "Done: chapter 6 stage 4: the lemon, the hat and the call home; all five old blocks open one by one and the chapter ends after the call",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch6s4. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch6s3",
+   "tag": "ch6s3",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "chapter 6 stage 3: scenes 0 to 15 rewritten to the locked script (picnic tables, the Discovery, the gold ball, the crock)",
+   "next": "Done: chapter 6 stage 3: scenes 0 to 15 rewritten to the locked script (picnic tables, the Discovery, the gold ball, the crock)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch6s3. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clips14",
+   "tag": "clips14",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "261 phone voice takes merged (230 new, 31 re-takes)",
+   "next": "Done: 261 phone voice takes merged (230 new, 31 re-takes)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clips14. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch7s4",
+   "tag": "ch7s4",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "Chapter 7 hall scene, the book cart rolls, the wrap-up with Deedee and Boppy",
+   "next": "Done: Chapter 7 hall scene, the book cart rolls, the wrap-up with Deedee and Boppy",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch7s4. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch1fix1",
+   "tag": "ch1fix1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "chapter 1 feedback: Theft and Mudling lines reworded, talking-pose dialog faces, Boppy waits at the back, grey patch v3 baked, Gus faster",
+   "next": "Done: chapter 1 feedback: Theft and Mudling lines reworded, talking-pose dialog faces, Boppy waits at the back, grey patch v3 baked, Gus faster",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch1fix1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clips13",
+   "tag": "clips13",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "232 chapter 7 phone takes merged into the game",
+   "next": "Done: 232 chapter 7 phone takes merged into the game",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clips13. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-bern1b",
+   "tag": "bern1b",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "Bernadette is now bossy, snippy and resentful: new lines, her own voice, and word-by-word voice directions",
+   "next": "Done: Bernadette is now bossy, snippy and resentful: new lines, her own voice, and word-by-word voice directions",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as bern1b. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-adminmusic3",
+   "tag": "adminmusic3",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "admin music at half volume, and no other music under it",
+   "next": "Done: admin music at half volume, and no other music under it",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as adminmusic3. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch7s3",
+   "tag": "ch7s3",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Tools",
+   "title": "chapter 7 build stage 3: the library scenes, the Stacks hall with the block, the three wings, the Reading Room and the bookmark swap",
+   "next": "Done: chapter 7 build stage 3: the library scenes, the Stacks hall with the block, the three wings, the Reading Room and the bookmark swap",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch7s3. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-talk4",
+   "tag": "talk4",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "all ten talking sheets installed from their newest versions (Amy, Justin, Aunt Ellie, Olivia are new)",
+   "next": "Done: all ten talking sheets installed from their newest versions (Amy, Justin, Aunt Ellie, Olivia are new)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as talk4. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-adminmusic2",
+   "tag": "adminmusic2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "Tom's ElevenLabs take replaces the first admin track",
+   "next": "Done: Tom's ElevenLabs take replaces the first admin track",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as adminmusic2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-adminmusic1",
+   "tag": "adminmusic1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "calm \"Admin Calm\" music plays on every admin screen",
+   "next": "Done: calm \"Admin Calm\" music plays on every admin screen",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as adminmusic1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch7s2",
+   "tag": "ch7s2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "chapter 7 build stage 2: the goodbye and flight, the Square with Grace's chart, and Deedee's kitchen",
+   "next": "Done: chapter 7 build stage 2: the goodbye and flight, the Square with Grace's chart, and Deedee's kitchen",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch7s2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clips12",
+   "tag": "clips12",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "merged 7 chapter 2 voice takes from Tom's phone (Carmen, TNB, Tom x5)",
+   "next": "Done: merged 7 chapter 2 voice takes from Tom's phone (Carmen, TNB, Tom x5)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clips12. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch7assets1",
+   "tag": "ch7assets1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "chapter 7 build stage 1: art requests and voice lines queued",
+   "next": "Done: chapter 7 build stage 1: art requests and voice lines queued",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch7assets1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch6s2g",
+   "tag": "ch6s2g",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "The new orange block (small basket, squirrel diving in) is installed on the Old Oak Park table",
+   "next": "Done: The new orange block (small basket, squirrel diving in) is installed on the Old Oak Park table",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch6s2g. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-unread1",
+   "tag": "unread1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Tools",
+   "title": "Art Library: the Unread boss sheet prompt rewritten short, two eyes, back in To do",
+   "next": "Done: Art Library: the Unread boss sheet prompt rewritten short, two eyes, back in To do",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as unread1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch6s2f",
+   "tag": "ch6s2f",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Tools",
+   "title": "Art Library: ch6-orange-block is back in To do so Tom can generate the smaller-basket block",
+   "next": "Done: Art Library: ch6-orange-block is back in To do so Tom can generate the smaller-basket block",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch6s2f. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch6s2e",
+   "tag": "ch6s2e",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "The freed picnic basket is smaller; the block's basket prompt asks for a smaller basket too",
+   "next": "Done: The freed picnic basket is smaller; the block's basket prompt asks for a smaller basket too",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch6s2e. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch6s2d",
+   "tag": "ch6s2d",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "The approved picnic basket replaces the stand-in on the Old Oak Park table",
+   "next": "Done: The approved picnic basket replaces the stand-in on the Old Oak Park table",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch6s2d. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch6s2c",
+   "tag": "ch6s2c",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "When a block breaks, what was inside it stays behind (the basket on the table, the squirrel pops out with a sandwich)",
+   "next": "Done: When a block breaks, what was inside it stays behind (the basket on the table, the squirrel pops out with a sandwich)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch6s2c. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch6s2b",
+   "tag": "ch6s2b",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "fix Block Break Lab on the phone: the welcome screen now closes, so the whole break plays",
+   "next": "Done: fix Block Break Lab on the phone: the welcome screen now closes, so the whole break plays",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch6s2b. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch6s2a",
+   "tag": "ch6s2a",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "chapter 6 stage 2: breaking an orange block (coin, cracks, falling apart, colour ring, shrink-back, encounters off), shown on the picnic tab",
+   "next": "Done: chapter 6 stage 2: breaking an orange block (coin, cracks, falling apart, colour ring, shrink-back, encounters off), shown on the picnic table; voice file split",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch6s2a. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-backlog2",
+   "tag": "backlog2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "fix the backlog from Tom's chapter 2 playthrough: monsters and street staged in view, Big Shake sinks away, caps names read right, Carmen an",
+   "next": "Done: fix the backlog from Tom's chapter 2 playthrough: monsters and street staged in view, Big Shake sinks away, caps names read right, Carmen and loft story edits",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as backlog2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-backlog1",
+   "tag": "backlog1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "fix the backlog from Tom's chapter 1 playthrough (19 reports): bosses stay beaten, party and monster staging, crumbs answer A, WIN NOW optio",
+   "next": "Done: fix the backlog from Tom's chapter 1 playthrough (19 reports): bosses stay beaten, party and monster staging, crumbs answer A, WIN NOW option",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as backlog1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch6assets1",
+   "tag": "ch6assets1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "chapter 6 build stage 1: art requests and voice lines queued",
+   "next": "Done: chapter 6 build stage 1: art requests and voice lines queued",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch6assets1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch5build1",
+   "tag": "ch5build1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "chapter 5 story build installed (the locked claude/story-ch05.md, rev 3)",
+   "next": "Done: chapter 5 story build installed (the locked claude/story-ch05.md, rev 3)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch5build1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-report1",
+   "tag": "report1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "REPORT, an in-game way to file bugs and changes for Claude",
+   "next": "Done: REPORT, an in-game way to file bugs and changes for Claude",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as report1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-amberspot1",
+   "tag": "amberspot1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Areas",
+   "title": "orange blocks left behind are solid and answer A; grey patch picture v2 prompt",
+   "next": "Done: orange blocks left behind are solid and answer A; grey patch picture v2 prompt",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as amberspot1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-facing1",
+   "tag": "facing1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Characters",
+   "title": "painted mood and talking poses turn toward the person or thing they look at",
+   "next": "Done: painted mood and talking poses turn toward the person or thing they look at",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as facing1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-buildlog1",
+   "tag": "buildlog1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "build label with its time on the welcome screen and in the menu, tap it for the build history",
+   "next": "Done: build label with its time on the welcome screen and in the menu, tap it for the build history",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as buildlog1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-cutfront1",
+   "tag": "cutfront1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "painted cutouts no longer cover people standing in front of them",
+   "next": "Done: painted cutouts no longer cover people standing in front of them",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as cutfront1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-closebtn1",
+   "tag": "closebtn1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "close-up reveal button says CONTINUE, not A  CONTINUE",
+   "next": "Done: close-up reveal button says CONTINUE, not A  CONTINUE",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as closebtn1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-coinart2",
+   "tag": "coinart2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "the approved chapter 3 and 4 pose sheets installed as painted cutscene poses",
+   "next": "Done: the approved chapter 3 and 4 pose sheets installed as painted cutscene poses",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as coinart2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-questicon1",
+   "tag": "questicon1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "the quest ! icon closes the open quest frame on a second tap (phone touch handling)",
+   "next": "Done: the quest ! icon closes the open quest frame on a second tap (phone touch handling)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as questicon1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-coinart1",
+   "tag": "coinart1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Tools",
+   "title": "the Director's Cut and Iron Gill wear their coins (approved Art Library sheets installed)",
+   "next": "Done: the Director's Cut and Iron Gill wear their coins (approved Art Library sheets installed)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as coinart1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-talk3",
+   "tag": "talk3",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Characters",
+   "title": "talking poses installed for Tom, TNB, Grace, Rose, Deedee and Boppy",
+   "next": "Done: talking poses installed for Tom, TNB, Grace, Rose, Deedee and Boppy",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as talk3. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clips11",
+   "tag": "clips11",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "Tom's 80 chapter 3 Voice Library takes merged, DONE, nothing heard on a phone",
+   "next": "Done: Tom's 80 chapter 3 Voice Library takes merged, DONE, nothing heard on a phone",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clips11. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch4build1",
+   "tag": "ch4build1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "chapter 4 story build installed (the locked claude/story-ch04.md)",
+   "next": "Done: chapter 4 story build installed (the locked claude/story-ch04.md)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch4build1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-talk2",
+   "tag": "talk2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "every cast line tagged with its talking pose by hand",
+   "next": "Done: every cast line tagged with its talking pose by hand",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as talk2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-talk1",
+   "tag": "talk1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Tools",
+   "title": "four talking poses for the main cast (Art Library entries, line tags, cutter, bake and engine), waiting on Tom's art",
+   "next": "Done: four talking poses for the main cast (Art Library entries, line tags, cutter, bake and engine), waiting on Tom's art",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as talk1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch3build1",
+   "tag": "ch3build1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "chapter 3 story build installed (the locked claude/story-ch03.md)",
+   "next": "Done: chapter 3 story build installed (the locked claude/story-ch03.md)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch3build1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch2build1",
+   "tag": "ch2build1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "chapter 2 story build installed (the locked claude/story-ch02.md)",
+   "next": "Done: chapter 2 story build installed (the locked claude/story-ch02.md)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch2build1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-reacttime1",
+   "tag": "reacttime1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Tools",
+   "title": "listeners react at the right word; moods and reactions for the new chapter 1 and 2 dialogue",
+   "next": "Done: listeners react at the right word; moods and reactions for the new chapter 1 and 2 dialogue",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as reacttime1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-voicetags4",
+   "tag": "voicetags4",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "chapters 1, 3, 4 and 5 voice directions rewritten to Tom's chapter 2 model",
+   "next": "Done: chapters 1, 3, 4 and 5 voice directions rewritten to Tom's chapter 2 model",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as voicetags4. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-clips10",
+   "tag": "clips10",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "Tom's Voice Library export merged (124 dialogue takes) and the four WORDS OWED lines applied",
+   "next": "Done: Tom's Voice Library export merged (124 dialogue takes) and the four WORDS OWED lines applied",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as clips10. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-voicetags3",
+   "tag": "voicetags3",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "chapter 2 voice directions rewritten to Tom's own model",
+   "next": "Done: chapter 2 voice directions rewritten to Tom's own model",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as voicetags3. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-micfix1",
+   "tag": "micfix1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "Voice Library microphone works after a clip has played",
+   "next": "Done: Voice Library microphone works after a clip has played",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as micfix1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-voicetags2",
+   "tag": "voicetags2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "chapter 1 to 5 voice directions redone beat by beat; chapter 1 re-record list",
+   "next": "Done: chapter 1 to 5 voice directions redone beat by beat; chapter 1 re-record list",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as voicetags2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-voicetags1",
+   "tag": "voicetags1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "chapter 1 to 5 voice directions retagged for Eleven v4 (timing, intonation, accents)",
+   "next": "Done: chapter 1 to 5 voice directions retagged for Eleven v4 (timing, intonation, accents)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as voicetags1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-theftorder1",
+   "tag": "theftorder1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "chapter 1 kitchen, height picture and pie theft reordered",
+   "next": "Done: chapter 1 kitchen, height picture and pie theft reordered",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as theftorder1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-voice3",
+   "tag": "voice3",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "three Voice Library exports merged",
+   "next": "Done: three Voice Library exports merged",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as voice3. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch1build1",
+   "tag": "ch1build1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "chapter 1 rebuilt to the locked story (claude/story-ch01.md), WITHOUT the new voice takes",
+   "next": "Done: chapter 1 rebuilt to the locked story (claude/story-ch01.md), WITHOUT the new voice takes",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch1build1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-hugface1",
+   "tag": "hugface1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "Tom faces the girls before the hug",
+   "next": "Done: Tom faces the girls before the hug",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as hugface1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-hugv2",
+   "tag": "hugv2",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Areas",
+   "title": "the greeting uses only the approved hug sheet v2; the separate crouch and kneel pictures are gone",
+   "next": "Done: the greeting uses only the approved hug sheet v2; the separate crouch and kneel pictures are gone",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as hugv2. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-chinfix1",
+   "tag": "chinfix1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "townsfolk chin lines moved to the true chin, Pip 1.25",
+   "next": "Done: townsfolk chin lines moved to the true chin, Pip 1.25",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as chinfix1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-vpfit1",
+   "tag": "vpfit1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "dark bar along the top in landscape on the iPhone home-screen app",
+   "next": "Done: dark bar along the top in landscape on the iPhone home-screen app",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as vpfit1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-bossend5",
+   "tag": "bossend5",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Story and Dialogue",
+   "title": "bosses of chapters 11, 12 and 13 stay for their endings",
+   "next": "Done: bosses of chapters 11, 12 and 13 stay for their endings",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as bossend5. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-bossend3",
+   "tag": "bossend3",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Game Shell",
+   "title": "painted boss endings (Step 2)",
+   "next": "Done: painted boss endings (Step 2)",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as bossend3. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
+  },
+  {
+   "id": "b-ch25assets1",
+   "tag": "ch25assets1",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-19",
+   "theme": "Voice Clips",
+   "title": "Art and Voice libraries for the rewritten chapters 2 to 5",
+   "next": "Done: Art and Voice libraries for the rewritten chapters 2 to 5",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as ch25assets1. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
   }
  ],
  "sessions": [
@@ -2223,6 +5364,228 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
+   "title": "Chapter 1 scene 1: SKIP skips the whole scene, not just the opening half (skipchain1)",
+   "first": "2026-11-19T18:15:20-08:00",
+   "last": "2026-11-19T18:23:39-08:00",
+   "tags": [
+    "skipchain1",
+    "board4",
+    "b3s9a",
+    "board-b3s9a",
+    "board-clipresetb",
+    "board-clipreset",
+    "board-ch1review",
+    "ch1nodoor",
+    "takes1",
+    "clipch1remakea",
+    "cutpolish4b",
+    "follow1",
+    "facehold1",
+    "board-nodonecol",
+    "pubfast2",
+    "board-convclosed",
+    "clipch1remake",
+    "starttest",
+    "board-scope",
+    "clipch1fix",
+    "amywin1",
+    "board3",
+    "board2b",
+    "board2",
+    "clipgate2",
+    "board2-start",
+    "board-ready",
+    "ch1takes1",
+    "scene1fix1",
+    "clipgate2a",
+    "clipgate1",
+    "cutpolish4",
+    "cutpolish3",
+    "boardrule1",
+    "cutpolish2",
+    "boardclean1",
+    "cutpolish1",
+    "b3s8",
+    "board1",
+    "b3s7",
+    "clipgen2b",
+    "clipgen2",
+    "clipch1",
+    "voicegen2",
+    "voicegen1c",
+    "voicegen1b",
+    "voicegen1",
+    "b3s6",
+    "b3s5c",
+    "b3s5b",
+    "clipbatch1",
+    "voicelearn4",
+    "b3s5a",
+    "clipfoes1",
+    "voicelearn3",
+    "clipko1",
+    "b3s4",
+    "clippack1",
+    "voicelearn2fix",
+    "voicelearn2",
+    "partybanner1",
+    "clippurge1",
+    "roselets1",
+    "voicelearn1",
+    "roofnpc2",
+    "clipcal1",
+    "roofnpc1",
+    "b3s3",
+    "calib3",
+    "clippin1",
+    "clipboop2",
+    "deskhud1",
+    "b3s2",
+    "clipboop1",
+    "calib2",
+    "clippace1",
+    "b3tempo1",
+    "adminvol1",
+    "b3s1",
+    "pubfast1",
+    "cliploop1",
+    "clipkinds1",
+    "voicefilter1b",
+    "voicefilter1",
+    "clipstudy1",
+    "linegap1",
+    "ch1tags1",
+    "clipspeed1",
+    "clipgen1d",
+    "clipgen1c",
+    "clipgen1b",
+    "ch1rebuild1",
+    "clipgen1",
+    "clip3",
+    "clip2",
+    "clip1",
+    "scriptconvo1",
+    "posefaces2",
+    "posefaces1b",
+    "posefaces1",
+    "scripted2",
+    "poseedit4",
+    "poseedit3",
+    "poseedit2",
+    "poseedit1",
+    "scripted1",
+    "ch8assets1",
+    "ch7t1",
+    "ch2fix1b",
+    "ch2fix1a",
+    "ch6s4",
+    "ch6s3",
+    "clips14",
+    "ch7s4",
+    "ch1fix1",
+    "clips13",
+    "bern1b",
+    "adminmusic3",
+    "ch7s3",
+    "talk4",
+    "adminmusic2",
+    "adminmusic1",
+    "ch7s2",
+    "clips12",
+    "ch7assets1",
+    "ch6s2g",
+    "unread1",
+    "ch6s2f",
+    "ch6s2e",
+    "ch6s2d",
+    "ch6s2c",
+    "ch6s2b",
+    "ch6s2a",
+    "backlog2",
+    "backlog1",
+    "ch6assets1",
+    "ch5build1",
+    "report1",
+    "amberspot1",
+    "facing1",
+    "buildlog1",
+    "cutfront1",
+    "closebtn1",
+    "coinart2",
+    "questicon1",
+    "coinart1",
+    "talk3",
+    "clips11",
+    "ch4build1",
+    "talk2",
+    "talk1",
+    "ch3build1",
+    "ch2build1",
+    "reacttime1",
+    "voicetags4",
+    "clips10",
+    "voicetags3",
+    "micfix1",
+    "voicetags2",
+    "voicetags1",
+    "theftorder1",
+    "voice3",
+    "ch1build1",
+    "hugface1",
+    "hugv2",
+    "chinfix1",
+    "vpfit1",
+    "bossend5",
+    "bossend3",
+    "ch25assets1"
+   ],
+   "cards": [
+    "c-skipchain1",
+    "b-board-b3s9a",
+    "b-board-ch1review",
+    "b-board-clipreset",
+    "b-board-convclosed",
+    "b-board-nodonecol",
+    "b-takes1",
+    "c-amywin1",
+    "c-b3s9",
+    "c-battlescope",
+    "c-board2",
+    "c-board3",
+    "c-board4",
+    "c-ch1nodoor",
+    "c-clipch1fix",
+    "c-clipch1remake",
+    "c-clipgate2",
+    "c-cutpolish4b",
+    "c-facehold1",
+    "c-follow1",
+    "c-pubfast2",
+    "c-starttest"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFDnD4JZi9AK4diAco",
+   "title": "New battle system, stage 9b: TNB's kit (Ceramicist and Longboarder)",
+   "first": "2026-11-19T18:23:30-08:00",
+   "last": "2026-11-19T18:23:30-08:00",
+   "tags": [],
+   "cards": [
+    "c-b3s9b"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFraGsc5W54HdP7UDp",
+   "title": "Fix the report backlog (8 open)",
+   "first": "2026-11-19T18:23:26-08:00",
+   "last": "2026-11-19T18:23:26-08:00",
+   "tags": [],
+   "cards": [
+    "c-reports"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCbhVU3ZpBxMRRYR1n",
    "title": "Copy the Project docs a board card needs into the repo (copydocs)",
    "first": "2026-11-19T18:21:42-08:00",
@@ -2266,16 +5629,6 @@
    "tags": [],
    "cards": [
     "c-ch1art2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEPmSgndVD2Y8kiHKY",
-   "title": "Chapter 1 scene 1: SKIP skips the whole scene, not just the opening half (skipchain1)",
-   "first": "2026-11-19T18:15:20-08:00",
-   "last": "2026-11-19T18:15:20-08:00",
-   "tags": [],
-   "cards": [
-    "c-skipchain1"
    ]
   },
   {
@@ -2414,8 +5767,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "27c9a49fefbdf314f102ed4505b98b9c9bcccdbc",
- "synced_at": "2026-11-20T02:22:31+00:00",
+ "synced": "4f4b8eb03f20221678f945a2e3f766bdff83eeb7",
+ "synced_at": "2026-11-20T02:23:52+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
