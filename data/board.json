@@ -16501,6 +16501,50 @@
      "t": "Added with c-voiceauto1."
     }
    ]
+  },
+  {
+   "id": "c-idea-skippingscene",
+   "tag": "idea-skippingscene",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Story and Dialogue",
+   "title": "When skipping a scene, any interstitials that are not item",
+   "next": "Your idea: when skipping a scene, any interstitials that are not item retrieval or party members joining/leaving (eg displaying grace's list in scene 1) should be skipped as well Copy the prompt into a new conversation in the Project on Haiku 5.5, effort low.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "idea": {
+    "at": "2026-11-20T21:30:54.535Z",
+    "words": "when skipping a scene, any interstitials that are not item retrieval or party members joining/leaving (eg displaying grace's list in scene 1) should be skipped as well",
+    "shot": "",
+    "row": "A",
+    "rule": "Claude Haiku 5.5, low"
+   },
+   "chat": {
+    "url": "",
+    "opening": "New card by Tom on the board"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom made this card on the board: when skipping a scene, any interstitials that are not item retrieval or party members joining/leaving (eg displaying grace's list in scene 1) should be skipped as well",
+     "at": "2026-11-20T21:30:54.535Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Sized by the board: Claude Haiku 5.5 (row A: a question, nothing changes), effort low (a lookup).",
+     "at": "2026-11-20T21:30:54.535Z"
+    }
+   ],
+   "prompt": {
+    "what": "Answers your question: When skipping a scene, any interstitials that are not item.",
+    "before": [
+     "Nothing to do first. Your words are on the card."
+    ],
+    "model": "Claude Haiku 5.5 (row A: a question, nothing changes)",
+    "effort": "low (a lookup)",
+    "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-skippingscene in data/board.json, history included. Your first push is the commit board: start c-idea-skippingscene.\n\nTom made this card himself with New card on the board. His words: \"when skipping a scene, any interstitials that are not item retrieval or party members joining/leaving (eg displaying grace's list in scene 1) should be skipped as well\"\n\nThe board sized this from his words alone: Claude Haiku 5.5 (row A: a question, nothing changes), effort low (a lookup). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nThis is a question. Answer it in the chat in a few plain sentences, change nothing in the game, write the answer as a history line on this card and move it to Done. Push only the board change. Attach trivituso81/adventures-of-tom with push access (add_repo)."
+   }
   }
  ],
  "sessions": [
