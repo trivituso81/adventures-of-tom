@@ -7648,6 +7648,10 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Board redesign 2: cards and the card panel is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped START."
     }
    ],
    "prompt": {
@@ -7659,7 +7663,8 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/boardux-plan.md (all of it, with its Built section), then card c-boardux3 in data/board.json with its history. Your first push is the commit board: start c-boardux3. Build phase 3 (boardux3) as plan sections 3.1, 3.3 (search and themes) and 5 say, with checks A1 to A6, A12 and A13, and push it as boardux3. Then rewrite card t-boarduxtry's next step to match what you built. Fetch and rebase before every push, because other sessions change board.html. Keep every feature the page has today (check A13). Run tools/board_shots.py and look at every picture before pushing. Write what you built, and anything that differs from the plan, into the plan's Built section (in the repo and in the Project copy). You have my full permission to access the repo."
    },
-   "after": "t-boarduxtry"
+   "after": "t-boarduxtry",
+   "start": true
   },
   {
    "id": "t-boarduxtry",
