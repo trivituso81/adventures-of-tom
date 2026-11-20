@@ -11170,7 +11170,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFuf4u6X8rmNNsNzZk",
+    "url": "https://claude.ai/code/session_01RXeukFuf4u6X8rmNNsNzZk",
     "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
    },
    "history": [
@@ -11186,6 +11186,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "tag": "gem-bug08",
@@ -12145,6 +12149,16 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFuf4u6X8rmNNsNzZk",
+   "title": "Fix: Amy's House can be entered early in chapter 1",
+   "first": "2026-11-20T16:26:07Z",
+   "last": "2026-11-20T16:26:07Z",
+   "tags": [],
+   "cards": [
+    "c-gem-bug08"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGj8aHSkt5pisuZ1bJ",
    "title": "Fix: quest log 'Go to' prefix and run-on location toasts",
@@ -13556,8 +13570,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "befbf17e25687658c5abbae08ee2cc0a5b0637c9",
- "synced_at": "2026-11-20T16:25:30+00:00",
+ "synced": "dc1975f6a82b6f1e8e47cb5ffc825c9838190165",
+ "synced_at": "2026-11-20T16:26:50+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
