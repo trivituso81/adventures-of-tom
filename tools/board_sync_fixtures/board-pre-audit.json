@@ -1,0 +1,716 @@
+{
+ "version": 1,
+ "themes": [
+  "Voice Clips",
+  "Battle Animations",
+  "Battle System",
+  "Areas",
+  "Characters",
+  "Story and Dialogue",
+  "Game Shell",
+  "Tools",
+  "Project Ops"
+ ],
+ "columns": [
+  {
+   "id": "up",
+   "name": "Up next"
+  },
+  {
+   "id": "prog",
+   "name": "In progress"
+  },
+  {
+   "id": "wait",
+   "name": "Waiting"
+  },
+  {
+   "id": "done",
+   "name": "Done"
+  }
+ ],
+ "lanes": [
+  {
+   "id": "tom",
+   "name": "Tom",
+   "covers": "Play-tests, reviews, recording, image generation in the Art Library, decisions, settings only you can change"
+  },
+  {
+   "id": "claude",
+   "name": "Claude",
+   "covers": "Builds, fixes, merges, prompt writing: anything a session does next"
+  },
+  {
+   "id": "xai",
+   "name": "xAI",
+   "covers": "Grok image and video generation (Art Library, clip-gen Action): credit, outages, price checks"
+  },
+  {
+   "id": "elevenlabs",
+   "name": "ElevenLabs",
+   "covers": "Voice and music takes (voice-gen Action, Voice and Music Library): credits, voice slots (account full at 30)"
+  },
+  {
+   "id": "imagegen",
+   "name": "Image generator",
+   "covers": "The outside image AI used from Claude's prompts"
+  },
+  {
+   "id": "github",
+   "name": "GitHub",
+   "covers": "Pages publish, Actions runs, tokens and secrets, repo access"
+  }
+ ],
+ "cards": [
+  {
+   "id": "t-ch1clips",
+   "title": "Review the chapter 1 battle clips",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "next": "Done: you sent 44 of the 67 clips back with 45 notes. The clip gate (clipgate1) replayed against them.",
+   "blocks": [
+    "c-clipch1fix"
+   ],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "clipgen2 made all 67 chapter 1 clips for $5.34; none needed you."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Moved from tom/up to claude/up by Tom."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Review done: 44 clips sent back with notes. Closed by clipgate1."
+    }
+   ],
+   "done": "2026-11-19"
+  },
+  {
+   "id": "t-ch1play",
+   "title": "Play chapter 1 on your phone and report (opening to the kitchen, then the rest)",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "done",
+   "next": "Wait for the publish, RELOAD on the title, START NEW and play chapter 1 from the opening to the end (Boppy at the table, Aunt Ellie's door, the Mudlings, the BOO scene, the lap around the Square, the chapter card). Look for: Rose on your shoulders through Grace's list, Rose staying on your shoulders from the Taxi Co. all the way into the kitchen, where you crouch and she hops down, Grace walking beside you,, the movement tip then the Goal popup one after the other, no (A) button between lines, no townsfolk on roofs or walking in scenes, the group hug swaying with hearts and Rose saying 'Tata, up!' on the ground, you walking over to the door frame before the close-up, the party holding its spots in the kitchen, and poses sharp from the first frame (no blur) with Tom, TNB, Justin, Boppy and Amy in their new sizes. Report anything wrong with the REPORT tab. Heist (cutpolish4): the Mudling bursts in through the front door, the island is on screen when it grabs the pan, you, Grace and Rose land on open floor, Deedee and Boppy stay shocked through the grab. The three muffin plates still sit on the island after the theft until the empty-counter picture is installed.",
+   "blocks": [
+    "c-ch2build"
+   ],
+   "changed": "2026-11-19",
+   "created": "2026-11-17",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-17",
+     "t": "On the board from the first fill (board1)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Folded in the Gemini audit check (roofnpc) and the cutscene polish check (cutpolish1): one chapter 1 play covers all three."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Added the cutpolish2 check (sharp poses, new pose sizes)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Added the cutpolish3 check (Rose carried to the kitchen, hug, door frame)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "cutpolish4 pushed: heist entrance, camera, knock spots, held shock."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Marked done by Tom."
+    }
+   ],
+   "done": "2026-11-19"
+  },
+  {
+   "id": "t-ch1art",
+   "title": "Approve the chapter 1 stand-in pictures",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "up",
+   "next": "ADMIN > ART LIBRARY, group \"Chapter 1\" (picture tabs, not Clips): 11 stand-in entries (muffin pan, empty pan, papers, Mudling with muffins, green Big One with pan, Grace's list, Amy's window, Ellie's door, Rose on shoulders, cab shot, phone on seat). Generate and Approve, or Reject with a note.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-17",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-17",
+     "t": "On the board from the first fill (board1)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Moved from tom/up to claude/up by Tom."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Moved from claude/up to claude/up by Tom."
+    }
+   ]
+  },
+  {
+   "id": "t-narr",
+   "title": "Record the Narrator and Washington lines",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "up",
+   "next": "ADMIN > VOICE LIBRARY. Narr1: record the 57 Narrator lines with no clip (silent until then). Washvoice1: re-record Mr. Washington's 32 lines (Show > Old voice). One export can carry both; send it to the voice conversation. Do not delete takes.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-14",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-14",
+     "t": "On the board from the first fill (board1)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Moved from tom/up to claude/up by Tom."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom sent a pending export (31 takes: 30 chapter 1 re-takes, 1 Washington line, no Narrator, no old-voice Washington) and it was merged (ch1takes1). His Voice Library showed Narrator no clip yet 0 and Old voice 28. Looks done since voice3 (Nov 13); asked Tom whether to remove this card."
+    }
+   ]
+  },
+  {
+   "id": "t-boardtest",
+   "title": "Play-test the new BOARD",
+   "theme": "Tools",
+   "lane": "tom",
+   "col": "done",
+   "next": "ADMIN > BOARD. Check: Tom's lane is first and open; the one-line summary at the top; tap a card; try Done and Move to on a card you do not mind moving (needs the GitHub token from ADMIN > ART LIBRARY > Setup). Report what is confusing.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGLejGvLceposV63gR",
+    "opening": "Read claude/board-plan.md and claude/handoff-rules.md, then build board1."
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "On the board from the first fill (board1)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Marked done by Tom."
+    }
+   ],
+   "done": "2026-11-19"
+  },
+  {
+   "id": "c-clipgate2",
+   "title": "Clip quality gate, vision check (clipgate2)",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "up",
+   "next": "Build the vision check (claude/clip-gate-plan.md section 4), replay it on the 67 clips until measured plus vision flag all 44 of your rejects, then wire the gate into the clip-gen Action so a failing clip is held, not approved. Spends about $1 of xAI credit on looking only, no videos.",
+   "blocks": [
+    "c-clipch1fix"
+   ],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG8zkAesiDwcGiooGb",
+    "opening": "\"Read claude/animation-chapter-plan.md and the review notes saved in data/art-prompts.json\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Planned by clipgate1."
+    }
+   ],
+   "prompt": {
+    "what": "Builds the vision part of the clip gate, replays it against your chapter 1 notes, and wires the whole gate into the clip-gen Action.",
+    "before": [
+     "Nothing to do first. It spends about $1 of xAI credit (cap $2) on the vision check of the 67 existing clips; it makes no videos."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a tool build; the plan is written and the replay against your notes catches mistakes)",
+    "effort": "medium (the steps and the pass bar are written in the plan)",
+    "text": "Read claude/clip-gate-plan.md, then build clipgate2. Spend at most $2 of xAI credit, on the vision check only; make no videos. You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-clipgate1",
+   "title": "Clip quality gate, measured checks (clipgate1)",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "done",
+   "next": "Built: tools/clip-gate/ measures each clip as the game plays it and replays against your 45 notes. Flags 27 of your 44 rejects; the other 17 need the vision check.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "done": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukG8zkAesiDwcGiooGb",
+    "opening": "\"Read claude/animation-chapter-plan.md and the review notes saved in data/art-prompts.json\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Tom: \"Build an automatic quality gate for battle clips before any re-make ... Do not generate or spend anything until the gate flags the clips he rejected.\" Measured part built and replayed; nothing spent."
+    }
+   ]
+  },
+  {
+   "id": "c-clipch1fix",
+   "title": "Fix chapter 1 clips from the review notes (clipch1fix)",
+   "theme": "Battle Animations",
+   "lane": "claude",
+   "col": "wait",
+   "next": "Waits for the clip gate (c-clipgate2). Then: bake fixes first (loop stretch with a blink, speed 1.0 for moves), then prompt edits from your notes by the smallest change, then re-make only what the gate says needs it. Plan: claude/clip-gate-plan.md section 5.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "On the board from the first fill (board1)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "clipgate1 found many notes come from the bake settings or the prompt text; re-making first would repeat them. Now waits on the vision gate."
+    }
+   ],
+   "waiting_on": "claude",
+   "prompt": {
+    "what": "Fixes the chapter 1 clips from your notes: free bake fixes first, then prompt edits, then re-makes only where the gate says so.",
+    "before": [
+     "Nothing to do first (the clip gate, c-clipgate2, must be finished)."
+    ],
+    "model": "Claude Opus 5.5 (row D: generator prompts judged by eye)",
+    "effort": "medium (each note is a small edit of a prompt or a bake setting that exists)",
+    "text": "Read claude/clip-gate-plan.md and claude/next-addendum-clipgen2.md, then build clipch1fix. You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-ch2build",
+   "title": "Build chapter 2 to the locked script",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "wait",
+   "next": "One chapter per conversation. Lines go in word for word from the locked file. Start: claude/story-next.md.",
+   "blocks": [],
+   "changed": "2026-11-17",
+   "created": "2026-11-17",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-17",
+     "t": "On the board from the first fill (board1)."
+    }
+   ],
+   "waiting_on": "tom",
+   "prompt": {
+    "what": "Builds chapter 2 from the locked script, tests it start to finish, then stops for Tom's phone play.",
+    "before": [
+     "Play chapter 1 (card \"Play chapter 1 on your phone and report\").",
+     "Replace the text in angle brackets with what you saw."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the locked script is written, tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/story-next.md and continue. Chapter 1 play feedback: <what Tom saw>. You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-b3s8",
+   "title": "New battle system, stage 8: clips in Battle 3",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "done",
+   "next": "Shipped as b3s8 (main 17f3df7). Stage 9 is next.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "On the board from the first fill (board1)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Pushed as b3s8; card closed by board cleanup."
+    }
+   ],
+   "prompt": {
+    "what": "Builds stage 8 of the new battle system: clips in Battle 3.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: engine wiring; use Claude Opus 5.5 if it turns into judging video by eye)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/battle-build.md and build stage 8 of the new battle system. You have my full permission to access the repo."
+   },
+   "done": "2026-11-19"
+  },
+  {
+   "id": "c-pubfast2",
+   "title": "Publishing speed, step 2: art/raw off the site",
+   "theme": "Project Ops",
+   "lane": "claude",
+   "col": "up",
+   "next": "Take art/raw out of the published site to cut a publish from about 4 min to about 1.5 min. Plan in claude/next-addendum-pubfast1.md.",
+   "blocks": [],
+   "changed": "2026-11-18",
+   "created": "2026-11-18",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-18",
+     "t": "On the board from the first fill (board1)."
+    }
+   ],
+   "prompt": {
+    "what": "Builds pubfast2: moves art/raw off the published site and checks the publish time.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the plan is written)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/next-addendum-pubfast1.md and build pubfast2. You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-board1",
+   "title": "Build the status board (board1)",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "done",
+   "next": "Shipped. Sessions now update this board at the start and end of every session.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGLejGvLceposV63gR",
+    "opening": "Read claude/board-plan.md and claude/handoff-rules.md, then build board1."
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Built board.html, data/board.json, tools/board_check.py."
+    }
+   ],
+   "done": "2026-11-19"
+  },
+  {
+   "id": "c-cutpolish1",
+   "title": "Cutscene polish phase 1: scene lifecycle (cutpolish1)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "next": "Shipped: the girls walk with Tom, popups queue, no (A) button between lines, speakers hold their pose, followers stay where they stand.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEvTQahQ3J3gZ64XxC",
+    "opening": "\"Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 1 (cutpolish1)\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Built cutpolish1; tools/cut_natural_test.py passes in portrait and landscape."
+    }
+   ],
+   "done": "2026-11-19"
+  },
+  {
+   "id": "c-cutpolish2",
+   "title": "Cutscene polish phase 2: sheet preload, then sizes (cutpolish2)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "next": "Shipped: poses decoded and pinned before a scene (no blur, no mid-scene reloads), foot shadow from the standing frame, Pose Editor sizes applied to the 60 feelings and talking poses of Tom, TNB, Justin, Boppy and Amy.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEDL8uccYSyd3BRrGm",
+    "opening": "\"Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 2 (cutpolish2)\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Queued after cutpolish1."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Built cutpolish2. Kitchen run: sheets dropped mid-scene 3 to 0, blurry pose draws 12 to 0; cut_natural_test passes in portrait and landscape. Walking-pose sizes and Grace, Rose, Deedee not applied (see CHANGES)."
+    }
+   ],
+   "done": "2026-11-19"
+  },
+  {
+   "id": "c-cutpolish3",
+   "title": "Cutscene polish phase 3: carry Rose to the kitchen, facing, chapter 1 staging (cutpolish3)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "next": "Shipped: Rose rides on Tom's shoulders from the Square to the kitchen and hops down there, the group hug sways with hearts, kitchen staging so speakers face left or right, Tom walks to the door frame, followers no longer vanish behind the half-wall.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukDqMJnGYj1LrjZyoMp",
+    "opening": "\"Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 3 (cutpolish3)\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Queued after cutpolish2."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Built cutpolish3; tools/cut_natural_test.py passes in portrait and landscape (opening, Row, kitchen)."
+    }
+   ],
+   "done": "2026-11-19"
+  },
+  {
+   "id": "c-cutpolish4",
+   "title": "Cutscene polish phase 4: the heist (cutpolish4)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "done",
+   "next": "Shipped except the empty counter: the Mudling bursts in through the door, the camera shows the island in portrait, the knocked-down family lands on open floor, Deedee and Boppy keep their shock, mud prints and crumbs. The painted empty counter waits on your Art Library approval (card t-kitchenempty).",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "\"Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 4 (cutpolish4)\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Queued after cutpolish3."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Built cutpolish4; cut_natural_test passes in portrait and landscape. Two code attempts at the empty-counter patch came out smeared, so by the stop-loss rule it became an Art Library picture. No session link was readable in this chat, so chat.url is blank."
+    }
+   ],
+   "prompt": {
+    "what": "Builds phase 4 of the cutscene polish: the kitchen heist (Mudling entrance, camera, knock spots, shocked parents, empty counter patch).",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the phase is written down in claude/cutscene-polish-plan.md, and cut_natural_test.py and frames catch mistakes)",
+    "effort": "medium (steps are known; knock tiles and the camera are settled by looking at frames)",
+    "text": "Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 4 (cutpolish4). You have my full permission to access the repo."
+   },
+   "done": "2026-11-19"
+  },
+  {
+   "id": "t-milestonea",
+   "title": "Milestone A: play the new battle (stages 1 to 8)",
+   "theme": "Battle System",
+   "lane": "tom",
+   "col": "done",
+   "next": "ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE, then THE BIG ONE (and NEW 1 with Rose Mode on in settings). About 30 minutes. Judge: the pace of the video attacks and the wait for a clip, how the crossing to the monster looks, whether the turn bar reads in portrait, and Rose Mode (picture menus, the starred move). Send your notes to the stage 9 session; they come first. Steps were in the b3s8 closing reply.",
+   "blocks": [
+    "c-b3s9"
+   ],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board refresh: stage 8 shipped, milestone A is your check (claude/battle-build.md)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Marked done by Tom."
+    }
+   ],
+   "done": "2026-11-19"
+  },
+  {
+   "id": "c-b3s9",
+   "title": "New battle system, stage 9: first late joiners and the next kits",
+   "theme": "Battle System",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "next": "Builds stage 9 as the architecture section 5 row 9 says. Read that row, claude/battle-kit-ops.md, docs/BATTLE3.md and docs/handoff/b3s8.md. Milestone A notes from Tom are handled first.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board refresh: next stage after b3s8."
+    }
+   ],
+   "prompt": {
+    "what": "Builds stage 9 of the new battle system (late joiners and the next characters' kits), after handling any milestone A notes.",
+    "before": [
+     "Play milestone A (card \"Milestone A: play the new battle\") and have notes ready, or say you have none."
+    ],
+    "model": "Claude Opus 5.5 (row D: 12 of the lines need their own function; Sonnet 5.5 if the session splits it like 5a to 5c)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/battle-build.md and build stage 9 of the new battle system. You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "t-kitchenempty",
+   "title": "Generate and approve the kitchen picture with the muffin plates gone",
+   "theme": "Areas",
+   "lane": "tom",
+   "col": "up",
+   "next": "ADMIN > ART LIBRARY, group \"Chapter 1\", entry ch1-kitchen-empty-island (Props tab): press Generate, look at the island (the three muffin plates must be gone, the pie and the cake under the dome kept, the rest of the kitchen unchanged), then Approve, or Reject with a note on what is wrong.",
+   "blocks": [
+    "c-cutpolish4b"
+   ],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "\"Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 4 (cutpolish4)\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by cutpolish4: the empty counter after the theft could not be made by code."
+    }
+   ]
+  },
+  {
+   "id": "c-cutpolish4b",
+   "title": "Install the empty counter after the theft (cutpolish4b)",
+   "theme": "Areas",
+   "lane": "claude",
+   "col": "wait",
+   "waiting_on": "tom",
+   "next": "After you approve ch1-kitchen-empty-island: crop the island patch, draw it in both kitchen layers once the theft has happened, look at it in portrait and landscape.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "\"Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 4 (cutpolish4)\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Queued by cutpolish4; waits on t-kitchenempty."
+    }
+   ],
+   "prompt": {
+    "what": "Crops the empty-island patch from the approved kitchen picture and shows it in both kitchen layers after the theft (audit item 4e).",
+    "before": [
+     "ADMIN > ART LIBRARY, group Chapter 1, entry ch1-kitchen-empty-island: Generate, then Approve (card t-kitchenempty)."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the box, the layers and the flag are written down in claude/next-addendum-cutpolish4.md, frames catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/next-addendum-cutpolish4.md, then install the empty counter patch (cutpolish4b). You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-cutpolish5",
+   "title": "Cutscene polish phase 5: movement and listener reactions (cutpolish5)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "up",
+   "next": "Phase 5 of 5 in claude/cutscene-polish-plan.md: breathing and squash, listeners turn to the speaker, listener reaction effects (hop, pips), reaction rows for the rest of chapter 1, Boppy's stomach wince.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "\"Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 4 (cutpolish4)\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Queued after cutpolish4."
+    }
+   ],
+   "prompt": {
+    "what": "Builds phase 5 of the cutscene polish: idle breathing and pose squash, listeners turning to the speaker, the reaction effect column, reaction rows for chapter 1, code stand-ins for the pips and Boppy's stomach wince.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the phase is written down in claude/cutscene-polish-plan.md, and cut_natural_test.py and frames catch mistakes)",
+    "effort": "medium (steps are known; effect sizes are settled by looking at frames)",
+    "text": "Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 5 (cutpolish5). You have my full permission to access the repo."
+   }
+  },
+  {
+   "id": "c-boardready",
+   "title": "Board: green Ready badge on Claude cards that are unblocked",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "up",
+   "next": "In board.html, a Claude card that is not Done and has no open card blocking it (every card that lists it in Blocks is Done, or none does) shows a green \"Ready, copy prompt\" badge; tapping the badge copies its prompt. A Waiting card whose blockers are all Done also shows it. Add \"Ready for Claude: N\" to the top line, tap to filter. Test with tools/board_test.py at 390x844, 951x648 and 1440x900.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGSt2Hs2ZjStnBC8K1",
+    "opening": "\"i dont udnerstand what happens in the board after i move something to done\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Tom asked what happens after Done (nothing starts by itself; the unblocked Claude card waits for him to copy its prompt). Badge recommended, Tom: \"yes\"."
+    }
+   ],
+   "prompt": {
+    "what": "Adds a green Ready badge to every Claude card whose blockers are all Done, so after you tap Done you see which chat to start next.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (a small change to one page; the board test catches mistakes)",
+    "effort": "low (one rule and one badge on a page that exists)",
+    "text": "Read claude/next-addendum-board1.md, then build the board card c-boardready (green Ready badge). You have my full permission to access the repo."
+   }
+  }
+ ]
+}

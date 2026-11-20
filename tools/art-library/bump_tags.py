@@ -78,7 +78,13 @@ def main():
     for rnd in range(6):
         code, out = run_check(base)
         if code == 0:
-            print('\n'.join(log)); print(out.strip()); return 0
+            print('\n'.join(log)); print(out.strip())
+            # board2: the build being pushed must be on a board card (a push that skips the board stops here). Bakes run by Actions have no card.
+            if not os.environ.get('GITHUB_ACTIONS'):
+                bc = subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'board_check.py'), '--push', new], capture_output=True, text=True, cwd=ROOT)
+                print(bc.stdout.strip())
+                if bc.returncode: print('bump_tags: STOP, the board check failed (put this build on a card first)'); return 1
+            return 0
         progressed = False
         for line in out.splitlines():
             m = re.match(r'\s+(\S+) changed but still loads with \?v=(\S+): bump its tag', line)

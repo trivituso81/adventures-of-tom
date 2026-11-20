@@ -1,0 +1,86 @@
+name: board-sync
+
+# board2 (2026-11-19). Moves cards on data/board.json from what actually happened in the repo (tools/board_sync.py, rules R1 to R8 in
+# claude/board2-plan.md). No AI and no credits. Runs on every push to main, and on the start and end of clip-gen, voice-gen, clip-gate and art-bake
+# (art-bake pushes with the Actions token, which does not start other workflows, so its end starts this one). It commits data/board.json
+# only when a card moved, message "board-sync: <what moved>". That commit is made with the Actions token, so it does not start this workflow
+# again, and publish.yml ignores pushes that change only data/board.json.
+
+on:
+  push:
+    branches: [main]
+  workflow_run:
+    workflows: [clip-gen, voice-gen, clip-gate, art-bake]
+    types: [requested, completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# One at a time, and none is dropped for a newer one: every run reads the commits since the board's `synced` commit.
+concurrency:
+  group: board-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 100
+          sparse-checkout-cone-mode: true
+          sparse-checkout: |
+            data
+            docs
+            tools
+            .github
+      - name: Fetch the branches the rules read (missing ones are skipped)
+        run: |
+          git fetch --depth=1 origin inbox:refs/remotes/origin/inbox || true
+          git fetch --depth=1 origin takes:refs/remotes/origin/takes || true
+          git fetch --depth=1 origin generated:refs/remotes/origin/generated || true
+      - name: A service run started or ended (R6)
+        if: github.event_name == 'workflow_run'
+        env:
+          NAME: ${{ github.event.workflow_run.name }}
+          ACTION: ${{ github.event.action }}
+          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+        run: |
+          if [ "$ACTION" = "requested" ]; then ev=start; detail="$NAME is running"
+          elif [ "$CONCLUSION" = "success" ]; then ev=end; detail=""
+          else ev=fail; detail="finished as $CONCLUSION"; fi
+          human=""
+          if [ "$NAME" = "voice-gen" ] && [ "$ev" = "end" ]; then
+            n=$(git show origin/generated:needs-human.txt 2>/dev/null | grep -c . || true)
+            if [ "${n:-0}" -gt 0 ]; then human="needs-human: $n voice lines need a person (branch generated, file needs-human.txt)"; fi
+          fi
+          python3 tools/board_sync.py --service "$NAME" --event "$ev" --detail "$detail" --run "$RUN_URL" --needs-human "$human" | tee /tmp/svc.txt
+          cat /tmp/svc.txt >> /tmp/msgs.txt
+      - name: Move cards from the repo (R1 to R5, R7, R8)
+        run: |
+          python3 tools/board_sync.py | tee /tmp/git.txt
+          cat /tmp/git.txt >> /tmp/msgs.txt
+      - name: Check the board file, then commit and push it if a card moved
+        run: |
+          python3 tools/board_check.py
+          if git diff --quiet data/board.json; then echo "Nothing moved."; exit 0; fi
+          msg=$(grep -h '^board-sync:' /tmp/msgs.txt | grep -v 'nothing to move' | head -2 | tr '\n' ' ' | cut -c1-200)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/board.json
+          git commit -q -m "${msg:-board-sync: cards moved}"
+          for i in 1 2 3 4; do
+            if git push origin HEAD:main; then exit 0; fi
+            # Another push landed first (Tom's phone, a session). Take the newest board, run the rules on it again, push again.
+            git fetch --depth=100 origin main
+            git reset -q --hard origin/main
+            python3 tools/board_sync.py | tee -a /tmp/msgs.txt
+            if git diff --quiet data/board.json; then echo "Nothing left to move."; exit 0; fi
+            git add data/board.json
+            git commit -q -m "${msg:-board-sync: cards moved}"
+          done
+          echo "::error::Could not push the board after 4 tries."; exit 1

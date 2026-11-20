@@ -35,6 +35,8 @@ Tom: "for any conversation i initiate, check against the board to see if it's an
 - **A new item** (work that will outlast this reply: a build, a fix, something Tom must do or decide, a wait on a service): add a card in the same push (lane, theme, next step, and for Claude work the full prompt with before-steps, model and effort).
 - **No change** (a question, a lookup, a one-off answer).
 
+**board2 (2026-11-19): the board follows the repo.** `.github/workflows/board-sync.yml` runs `tools/board_sync.py` on every push and moves cards itself (approvals, shipped builds, finished blockers, running jobs); Tom never moves a card. Your part: (1) your FIRST push of a session is a commit whose subject is `board: start <card id>` (it moves the card to In progress and links this conversation); (2) a Claude card needs a `tag` equal to the build name you will push (the `## <tag>` heading in docs/CHANGES.md closes it, `<tag>` plus one letter marks a part shipped); (3) `bump_tags.py` stops a push whose build is on no card (`board_check.py --push <tag>`); (4) at the end write the result and the next card's full prompt (no `<` blank for Tom); the job moves the rest; (5) a stale card you find, retire it yourself and say so. Tom's cards that block a Claude card name that card in `next`. Facts: `claude/next-addendum-board2.md`. Tests: `python3 tools/board_sync_test.py`, `python3 tools/board_test.py /tmp/board`.
+
 A request that makes other cards obsolete retires them. Push the board change with the work (or alone, tag `board-<short>`), run `python3 tools/board_check.py`, and finish with "Theme: <theme>. Pending your action: yes/no."
 
 ## Hard rules

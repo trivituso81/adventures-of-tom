@@ -264,7 +264,8 @@
     "effort": "medium (the steps and the pass bar are written in the plan)",
     "text": "Read claude/clip-gate-plan.md, then build clipgate2. Spend at most $2 of xAI credit, on the vision check only; make no videos. You have my full permission to access the repo."
    },
-   "done": "2026-11-19"
+   "done": "2026-11-19",
+   "tag": "clipgate2"
   },
   {
    "id": "c-clipgate1",
@@ -324,7 +325,8 @@
     "model": "Claude Opus 5.5 (row D: generator prompts judged by eye)",
     "effort": "medium (each note is a small edit of a prompt or a bake setting that exists)",
     "text": "Read claude/clip-gate-plan.md (sections 3, 4.5 and 5) and claude/next-addendum-clipgen2.md, then build clipch1fix. You have my full permission to access the repo."
-   }
+   },
+   "tag": "clipch1fix"
   },
   {
    "id": "c-ch2build",
@@ -358,7 +360,8 @@
     "model": "Claude Sonnet 5.5 (row B: the locked script is written, tests catch mistakes)",
     "effort": "medium (steps are known)",
     "text": "Read claude/story-next.md and continue with the chapter 2 build. I have played chapter 1. You have my full permission to access the repo."
-   }
+   },
+   "tag": "ch2build"
   },
   {
    "id": "c-b3s8",
@@ -423,7 +426,8 @@
     "model": "Claude Sonnet 5.5 (row B: the plan is written)",
     "effort": "medium (steps are known)",
     "text": "Read claude/next-addendum-pubfast1.md and build pubfast2. You have my full permission to access the repo."
-   }
+   },
+   "tag": "pubfast2"
   },
   {
    "id": "c-board1",
@@ -616,7 +620,8 @@
     "model": "Claude Opus 5.5 (row D: 12 of the lines need their own function; Sonnet 5.5 if the session splits it like 5a to 5c)",
     "effort": "medium (steps are known)",
     "text": "Read claude/battle-build.md and build stage 9 of the new battle system. You have my full permission to access the repo."
-   }
+   },
+   "tag": "b3s9"
   },
   {
    "id": "t-kitchenempty",
@@ -678,7 +683,8 @@
     "model": "Claude Sonnet 5.5 (row B: the box, the layers and the flag are written down in claude/next-addendum-cutpolish4.md, frames catch mistakes)",
     "effort": "medium (steps are known)",
     "text": "Read claude/next-addendum-cutpolish4.md and claude/next-addendum-ch1rebuild1.md, then install the empty counter patch (cutpolish4b) and every other approved stand-in picture in Art Library group Chapter 1. You have my full permission to access the repo."
-   }
+   },
+   "tag": "cutpolish4b"
   },
   {
    "id": "c-cutpolish5",
@@ -708,15 +714,16 @@
     "model": "Claude Sonnet 5.5 (row B: the phase is written down in claude/cutscene-polish-plan.md, and cut_natural_test.py and frames catch mistakes)",
     "effort": "medium (steps are known; effect sizes are settled by looking at frames)",
     "text": "Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 5 (cutpolish5). You have my full permission to access the repo."
-   }
+   },
+   "tag": "cutpolish5"
   },
   {
    "id": "c-boardready",
    "title": "Board: green Ready badge on Claude cards that are unblocked",
    "theme": "Tools",
    "lane": "claude",
-   "col": "up",
-   "next": "In board.html, a Claude card that is not Done and has no open card blocking it (every card that lists it in Blocks is Done, or none does) shows a green \"Ready, copy prompt\" badge; tapping the badge copies its prompt. A Waiting card whose blockers are all Done also shows it. Add \"Ready for Claude: N\" to the top line, tap to filter. Test with tools/board_test.py at 390x844, 951x648 and 1440x900.",
+   "col": "done",
+   "next": "Done by being replaced: board2 builds the READY TO START section (and more), so this separate badge is no longer built.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -728,6 +735,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom asked what happens after Done (nothing starts by itself; the unblocked Claude card waits for him to copy its prompt). Badge recommended, Tom: \"yes\"."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Retired by board2: its READY TO START section covers the green badge and the Ready count."
     }
    ],
    "prompt": {
@@ -738,7 +749,8 @@
     "model": "Claude Sonnet 5.5 (a small change to one page; the board test catches mistakes)",
     "effort": "low (one rule and one badge on a page that exists)",
     "text": "Read claude/next-addendum-board1.md, then build the board card c-boardready (green Ready badge). You have my full permission to access the repo."
-   }
+   },
+   "done": "2026-11-19"
   },
   {
    "id": "c-ch1art2",
@@ -768,7 +780,8 @@
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-19"
+   "changed": "2026-11-19",
+   "tag": "ch1art2"
   },
   {
    "id": "c-boardaudit",
@@ -816,13 +829,13 @@
   {
    "id": "c-board2",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "theme": "Tools",
    "blocks": [
     "c-board3"
    ],
    "title": "Board that keeps itself current (board2)",
-   "next": "Builds claude/board2-plan.md sections 2 to 6: a GitHub job that moves cards from what actually happened in the repo (your approvals, shipped builds, finished blockers, running jobs), a \"Conversations\" strip that lists every chat with a link, buttons that say what you mean (\"I did this\", \"Claude takes this\"), and a push check so no build skips the board.",
+   "next": "Done: the board now moves its own cards (GitHub job board-sync), lists every conversation with a link, and has the buttons I did this, Claude takes this, Not needed. Details: claude/next-addendum-board2.md. Check Actions > board-sync after the push.",
    "prompt": {
     "what": "Builds the automatic board: cards move by themselves and every conversation is listed with a link.",
     "before": [
@@ -844,16 +857,21 @@
     {
      "d": "2026-11-19",
      "t": "Started: audit fixes applied to the board, build in progress."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as board2: board-sync job, Conversations strip, new buttons, push check."
     }
    ],
    "created": "2026-11-19",
-   "changed": "2026-11-19"
+   "changed": "2026-11-19",
+   "tag": "board2",
+   "done": "2026-11-19"
   },
   {
    "id": "c-board3",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "theme": "Tools",
    "title": "START button: one tap on a card opens the conversation for you (board3)",
    "next": "Waits for board2. Builds claude/board2-plan.md section 8: a START button on Claude cards that starts the conversation on the right model and effort and puts its link on the card. Ends with one setup card for you (about 10 minutes at a computer).",
@@ -874,11 +892,16 @@
     {
      "d": "2026-11-19",
      "t": "Planned by the board audit; waits on board2."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked: Board that keeps itself current (board2) is done."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-19"
+   "changed": "2026-11-19",
+   "tag": "board3"
   },
   {
    "id": "c-nextclean",
@@ -908,7 +931,8 @@
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-19"
+   "changed": "2026-11-19",
+   "tag": "nextclean"
   }
  ]
 }

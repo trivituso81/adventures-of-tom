@@ -38,7 +38,7 @@ if os.path.exists(_seed):
         _raw = (json.dumps(_d, indent=1) + '\n').encode()
     _b = base64.b64encode(_raw).decode()
     FILES['data/art-prompts.json'] = {'sha': 'seed', 'content': '\n'.join(_b[i:i + 60] for i in range(0, len(_b), 60))}   # GitHub wraps base64 lines
-_bp = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'data', 'board.json')
+_bp = os.environ.get('STUB_BOARD') or os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'data', 'board.json')   # STUB_BOARD: a test board (board2)
 if os.path.exists(_bp):   # board1: the Board page saves data/board.json the same way
     _b = base64.b64encode(open(_bp, 'rb').read()).decode()
     FILES['data/board.json'] = {'sha': 'seed', 'content': '\n'.join(_b[i:i + 60] for i in range(0, len(_b), 60))}

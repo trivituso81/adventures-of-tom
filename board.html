@@ -60,7 +60,37 @@ button.gold{background:#ffd34d;color:#241b00}button.good{background:#2f9e63}butt
 select,input[type=text]{font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px solid #3a3566;background:#0f0d24;color:#fff}
 input[type=text]{width:100%}
 #toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#ffd34d;color:#241b00;padding:10px 16px;border-radius:12px;font-weight:600;display:none;z-index:30;max-width:90%}
+.sec{margin:0 0 14px}
+.sec>summary{list-style:none;display:flex;align-items:center;gap:10px;padding:8px 2px;cursor:pointer;min-height:44px}
+.sec>summary::-webkit-details-marker{display:none}
+.sec>summary .nm{font-weight:800;font-size:15px;letter-spacing:.05em}
+.sec>summary .ct{background:#2c2852;border-radius:10px;padding:2px 9px;font-size:13px}
+.sec>summary .ct.has{background:#ffd34d;color:#241b00;font-weight:700}
+.sec>summary .cv{flex:1;color:#8f89c4;font-size:12px}
+.sec>summary::after{content:"\25BE";color:#b9b3e6}
+.sec:not([open])>summary::after{content:"\25B8"}
+.sec .none{color:#6f6a9c;font-size:13px;padding:6px 4px}
+.sec.mine .card{border-color:#ffd34d}
+.cnt{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.cnt button{background:#1d1a3d;border:1px solid #3a3566;border-radius:14px;padding:8px 12px;min-height:44px;font-size:15px;font-weight:600;text-align:left}
+.cnt button b{font-size:18px}
+.cnt button.on{outline:2px solid #ffd34d}
+.cnt button.warn b{color:#ff8b97}
+.card .meta2{color:#b9b3e6;font-size:12px;margin-top:6px}
+.card .row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.card .unb{color:#ffd34d;font-size:12px;margin-top:6px;font-weight:600}
+.card .quiet{color:#ff8b97;font-size:12px;margin-top:6px;font-weight:600}
+.card .mdl{display:inline-block;font-size:12px;border-radius:9px;padding:2px 8px;background:#2f9e63;color:#fff;font-weight:700}
+div.card{cursor:pointer}
+.conv{display:block;background:#242050;border:1px solid #3a3566;border-radius:12px;padding:10px 12px;margin:0 0 8px}
+.conv .t{font-weight:700;font-size:15px;line-height:1.3}
+.conv .m{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center;font-size:12px;color:#b9b3e6}
+.st{font-size:11px;border-radius:9px;padding:2px 8px;font-weight:700;color:#10101e}
+.st.running{background:#7be0a6}.st.you{background:#ffd34d}.st.fin{background:#b6c2d9}
+.conv a{color:#ffd34d;font-weight:700;text-decoration:none;font-size:13px}
+#lanesView{display:none}
 @media (min-width:860px){
+#secView{display:none}#lanesView{display:block}
 .cols{overflow:visible;scroll-snap-type:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
 .col{flex:none}
 }
@@ -69,10 +99,11 @@ input[type=text]{width:100%}
 <body>
 <header><a class="back" href="index.html" id="back">Back</a><h1>Board</h1><span class="hint" id="src"></span></header>
 <main>
-<button id="sum" type="button">Loading...</button>
+<div class="cnt" id="sum"></div>
 <div class="chips" id="chips"></div>
-<div id="board"></div>
-<p class="hint">Lanes are who has the next move. Columns are where it stands. Age turns amber at 3 days and red at 7 without a change: that is a thread that may have dropped.</p>
+<div id="secView"></div>
+<div id="lanesView"></div>
+<p class="hint">The board follows the repo: a card moves when something happened (an approval, a shipped build, a finished blocker, a running job). Age turns amber at 3 days and red at 7 without a change.</p>
 <p class="err" id="err"></p>
 </main>
 <div id="dim"></div>
@@ -83,6 +114,7 @@ input[type=text]{width:100%}
 'use strict';
 const Q=new URLSearchParams(location.search);
 const REPO='trivituso81/adventures-of-tom',PATH='data/board.json',TOKEN='aot-gh-token';
+const PERM=' You have my full permission to access the repo.';
 const GH=()=>(Q.get('gh')||'https://api.github.com').replace(/\/+$/,'');
 const URLF=()=>GH()+'/repos/'+REPO+'/contents/'+PATH;
 const THEME_COL={'Voice Clips':'#ff9bd1','Battle Animations':'#ffb86b','Battle System':'#ff8b97','Areas':'#7be0a6','Characters':'#ffe27a','Story and Dialogue':'#a89dff','Game Shell':'#7fd4ff','Tools':'#c9a5ff','Project Ops':'#b6c2d9'};
@@ -91,13 +123,14 @@ const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;',
 const lsGet=k=>{try{return localStorage.getItem(k)||'';}catch(e){return '';}};
 const b64t=s=>{const u=new TextEncoder().encode(s);let b='';for(let i=0;i<u.length;i+=0x8000)b+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(b);};
 const t64=s=>{const bin=atob(String(s).replace(/\s/g,'')),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new TextDecoder().decode(u);};
-let B=null,sha=null,theme='',onlyMine=false;
+let B=null,sha=null,theme='',only='';   // only: '', mine, ready, run, stuck
 const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
 const dayNum=s=>{const p=String(s).split('-').map(Number);return Math.round(Date.UTC(p[0],p[1]-1,p[2])/864e5);};
 const ageOf=c=>Math.max(0,dayNum(today())-dayNum(c.changed||c.created||today()));
+const nowMs=()=>Date.now();
 let toastT;function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(toastT);toastT=setTimeout(()=>t.style.display='none',3200);}
+function ago(iso){if(!iso)return 'no push yet';const m=Math.max(0,Math.round((nowMs()-Date.parse(iso))/6e4));if(m<2)return 'just now';if(m<90)return m+' min ago';const h=Math.round(m/60);if(h<36)return h+' h ago';return Math.round(h/24)+' days ago';}
 
-// ---- load: with a token the file comes from GitHub (fresh); otherwise from the site
 async function load(){
   const tok=lsGet(TOKEN);
   if(tok||Q.get('gh')){
@@ -112,49 +145,89 @@ async function load(){
 // ---- derived
 const laneName=id=>(B.lanes.find(l=>l.id===id)||{name:id}).name;
 const cardById=id=>B.cards.find(c=>c.id===id);
-const visible=c=>{
-  if(c.col==='done'&&c.done&&dayNum(today())-dayNum(c.done)>7) return false;   // drops off the page after 7 days, stays in the file
-  if(theme&&c.theme!==theme) return false;
-  return true;};
-const openCards=()=>B.cards.filter(c=>c.col!=='done');
-const blockedBy=c=>B.cards.filter(x=>x.col!=='done'&&(x.blocks||[]).includes(c.id));   // open cards that block c
+const themeOk=c=>!theme||c.theme===theme;
+const open=()=>B.cards.filter(c=>c.col!=='done'&&themeOk(c));
+const blockedBy=c=>B.cards.filter(x=>x.col!=='done'&&(x.blocks||[]).includes(c.id));
 const blocksOpen=c=>(c.blocks||[]).map(cardById).filter(x=>x&&x.col!=='done');
-
-function ageClass(a){return a>=7?'red':a>=3?'amber':'';}
-function summary(){
-  const mine=openCards().filter(c=>c.lane==='tom');
-  const oldest=mine.reduce((m,c)=>Math.max(m,ageOf(c)),0);
-  const blocking=mine.filter(c=>blocksOpen(c).length);
-  const cls=oldest>=7?'red':oldest>=3?'amb':'';
-  const b=$('sum');b.classList.toggle('on',onlyMine);
-  b.innerHTML='Waiting on you: '+mine.length+' (oldest <span class="'+cls+'">'+oldest+' day'+(oldest===1?'':'s')+'</span>). Blocking Claude: <span class="'+(blocking.length?'red':'')+'">'+blocking.length+'</span>.'+(onlyMine?' <span class="hint">Tap to show everything.</span>':'');
+const secYour=()=>open().filter(c=>c.lane==='tom'&&(c.col==='up'||c.col==='prog'));
+const secReady=()=>open().filter(c=>c.lane==='claude'&&c.col==='up');
+const secRun=()=>open().filter(c=>c.col==='prog'&&c.lane!=='tom'&&!c.quiet);
+const secStuck=()=>open().filter(c=>c.col==='wait'||(c.col==='prog'&&c.quiet));
+const secDone=()=>B.cards.filter(c=>c.col==='done'&&!c.retired&&c.done&&dayNum(today())-dayNum(c.done)<=3&&themeOk(c));
+const sessionFor=c=>(B.sessions||[]).find(s=>s.url&&s.url===(c.chat||{}).url);
+const modelShort=c=>{const p=c.prompt;if(!p)return '';return String(p.model||'').split(' (')[0].replace('Claude ','')+', '+String(p.effort||'').split(' ')[0];};
+function convState(s){
+  const cs=(s.cards||[]).map(cardById).filter(Boolean);
+  if(cs.some(c=>c.col==='prog'))return ['running','Running'];
+  if(cs.some(c=>c.col!=='done'&&(c.lane==='tom'||blockedBy(c).some(x=>x.lane==='tom'))))return ['you','Waiting on you'];
+  return ['fin','Finished'];
 }
-function cardHtml(c){
-  const a=ageOf(c),bl=blocksOpen(c);
-  const tcol=THEME_COL[c.theme]||'#ccc';
+const recentConvs=()=>(B.sessions||[]).filter(s=>nowMs()-Date.parse(s.last)<=3*864e5);
+function ageClass(a){return a>=7?'red':a>=3?'amber':'';}
+function quietDays(c){const s=sessionFor(c);const d=s?Math.floor((nowMs()-Date.parse(s.last))/864e5):ageOf(c);return Math.max(1,d);}
+
+function cardHtml(c,ctx){
+  const a=ageOf(c),bl=blocksOpen(c),tcol=THEME_COL[c.theme]||'#ccc';
   let meta='<span class="tag" style="background:'+tcol+'">'+esc(c.theme)+'</span>';
   if(c.col!=='done') meta+='<span class="age '+ageClass(a)+'">'+a+'d</span>';
-  if(c.col==='wait'&&c.waiting_on) meta+='<span class="wt">waiting on '+esc(laneName(c.waiting_on))+'</span>';
-  if(bl.length&&c.lane==='tom') meta+='<span class="blk">Blocking: '+esc(bl[0].title)+(bl.length>1?' +'+(bl.length-1):'')+'</span>';
-  else if(bl.length) meta+='<span class="blk soft">Blocks '+bl.length+'</span>';
-  return '<button class="card'+(bl.length&&c.lane==='tom'?' blocking':'')+'" type="button" data-id="'+esc(c.id)+'"><div class="t">'+esc(c.title)+'</div><div class="n">'+esc(c.next)+'</div><div class="meta">'+meta+'</div></button>';
+  if(ctx==='ready'&&c.prompt) meta+='<span class="mdl">'+esc(modelShort(c))+'</span>';
+  let extra='';
+  if(c.lane==='tom'&&c.col!=='done'&&bl.length) extra+='<div class="unb">Unblocks: '+esc(bl[0].title)+(bl.length>1?' and '+(bl.length-1)+' more':'')+'</div>';
+  if(ctx==='run'||ctx==='stuck'&&c.col==='prog'){const s=sessionFor(c);extra+='<div class="meta2">'+(c.chat&&c.chat.url?'<a href="'+esc(c.chat.url)+'" target="_blank" rel="noopener" style="color:#ffd34d;font-weight:700">Open chat</a> · ':'')+'last push '+esc(s?ago(s.last):'unknown')+'</div>';}
+  if(c.quiet) extra+='<div class="quiet">Quiet for '+quietDays(c)+' day'+(quietDays(c)===1?'':'s')+': the conversation may have stopped</div>';
+  if(ctx==='stuck'&&c.col==='wait'){const by=blockedBy(c);extra+='<div class="meta2">'+(by.length?'Waits on: '+esc(by.map(x=>x.title).join('; ')):'Waits on '+esc(laneName(c.waiting_on||'')))+'</div>';}
+  let row='';
+  if(c.lane==='claude'&&c.col!=='done'&&c.prompt&&(ctx==='ready'||ctx==='stuck')) row='<div class="row"><button class="small gold" type="button" data-act="copy" data-id="'+esc(c.id)+'">Copy prompt</button></div>';
+  return '<div class="card" role="button" tabindex="0" data-id="'+esc(c.id)+'"><div class="t">'+esc(c.title)+'</div><div class="n">'+esc(c.next)+'</div><div class="meta">'+meta+'</div>'+extra+row+'</div>';
 }
-function render(){
-  summary();
-  $('chips').innerHTML=['All'].concat(B.themes).map(t=>'<button class="chip'+((t==='All'?!theme:theme===t)?' on':'')+'" type="button" data-t="'+esc(t)+'">'+esc(t)+'</button>').join('');
-  const lanes=onlyMine?B.lanes.filter(l=>l.id==='tom'):B.lanes;
-  $('board').innerHTML=lanes.map(l=>{
-    const inLane=B.cards.filter(c=>c.lane===l.id&&visible(c));
-    const open=inLane.filter(c=>c.col!=='done').length;
+function convHtml(s){
+  const [k,l]=convState(s),cs=(s.cards||[]).map(cardById).filter(Boolean);
+  return '<div class="conv"><div class="t">'+esc(s.title||'Conversation')+'</div><div class="m"><span class="st '+k+'">'+l+'</span><span>last push '+esc(ago(s.last))+'</span>'+((s.tags||[]).slice(0,3).map(t=>'<span class="age">'+esc(t)+'</span>').join(''))+'<a href="'+esc(s.url)+'" target="_blank" rel="noopener">Open chat</a></div>'+(cs.length?'<div class="m">Cards: '+esc(cs.map(c=>c.title).join('; ').slice(0,160))+'</div>':'')+'</div>';
+}
+function sec(id,name,hint,list,fn,openIt,mine){
+  const body=list.length?list.map(fn).join(''):'<div class="none">Nothing here</div>';
+  return '<details class="sec'+(mine?' mine':'')+'" data-sec="'+id+'"'+(openIt?' open':'')+'><summary><span class="nm">'+name+'</span><span class="ct'+(mine&&list.length?' has':'')+'">'+list.length+'</span><span class="cv">'+esc(hint)+'</span></summary>'+body+'</details>';
+}
+function counts(){
+  const n={mine:secYour().length,ready:secReady().length,run:secRun().length,stuck:secStuck().length};
+  const b=(k,l,w)=>'<button type="button" data-only="'+k+'" class="'+(only===k?'on ':'')+(w?'warn':'')+'">'+l+' <b>'+n[k]+'</b></button>';
+  $('sum').innerHTML=b('mine','Your move',n.mine>0)+b('ready','Ready to start')+b('run','Running')+b('stuck','Stuck',n.stuck>0);
+  $('sum').setAttribute('data-text','Your move: '+n.mine+'. Ready to start: '+n.ready+'. Running: '+n.run+'. Stuck: '+n.stuck+'.');
+}
+function renderSections(){
+  const show=k=>!only||only===k;
+  const cv=recentConvs();
+  let h='';
+  if(show('mine')) h+=sec('mine','YOUR MOVE','what only you can do',secYour(),c=>cardHtml(c,'mine'),true,true);
+  if(show('ready')) h+=sec('ready','READY TO START','Claude can start these',secReady(),c=>cardHtml(c,'ready'),true);
+  if(show('run')) h+=sec('run','RUNNING NOW','in progress',secRun(),c=>cardHtml(c,'run'),true);
+  if(show('stuck')) h+=sec('stuck','STUCK','waiting, or quiet for a day',secStuck(),c=>cardHtml(c,'stuck'),true);
+  if(!only) h+=sec('conv','CONVERSATIONS','last 3 days, newest push first',cv,convHtml,true);
+  if(!only) h+=sec('done','DONE','closed in the last 3 days',secDone(),c=>cardHtml(c,'done'),false);
+  if(!only&&!(B.sessions||[]).length) h=h.replace('<div class="none">Nothing here</div></details><details class="sec" data-sec="done"','<div class="none">None recorded yet: the sync job fills this after the next push.</div></details><details class="sec" data-sec="done"');
+  $('secView').innerHTML=h;
+}
+function renderLanes(){
+  const vis=c=>themeOk(c)&&(c.col!=='done'||(!c.retired&&c.done&&dayNum(today())-dayNum(c.done)<=3));
+  const cvh=recentConvs();
+  let h=sec('conv','CONVERSATIONS','last 3 days, newest push first',cvh,convHtml,true);
+  h+=B.lanes.map(l=>{
+    const inLane=B.cards.filter(c=>c.lane===l.id&&vis(c));
+    if(!inLane.length&&l.id!=='tom'&&l.id!=='claude') return '';   // service lanes show only when they hold a card
+    const openN=inLane.filter(c=>c.col!=='done').length;
     const cols=B.columns.map(col=>{
       let cs=inLane.filter(c=>c.col===col.id);
       cs.sort((a,b)=>(col.id==='done'?String(b.done).localeCompare(String(a.done)):ageOf(b)-ageOf(a)));
-      return '<div class="col" data-col="'+col.id+'"><h3><span>'+esc(col.name)+'</span><span>'+cs.length+'</span></h3>'+(cs.length?cs.map(cardHtml).join(''):'<div class="none">'+(inLane.length||col.id!=='up'?'':'')+'Nothing here</div>')+'</div>';
+      return '<div class="col" data-col="'+col.id+'"><h3><span>'+esc(col.name)+'</span><span>'+cs.length+'</span></h3>'+(cs.length?cs.map(c=>cardHtml(c,l.id==='tom'?'mine':col.id==='up'&&l.id==='claude'?'ready':col.id==='prog'?'run':col.id==='wait'?'stuck':'done')).join(''):'<div class="none">Nothing here</div>')+'</div>';
     }).join('');
-    const empty=!inLane.length;
-    const body=empty?'<div class="col" style="margin:0 12px 12px;flex:1 1 100%"><div class="none">Nothing waiting</div></div>':cols;
-    return '<details class="lane" data-lane="'+l.id+'"'+(' open')+'><summary><span class="nm">'+esc(l.name)+'</span><span class="cv">'+esc(l.covers)+'</span><span class="ct'+(open&&l.id==='tom'?' has':'')+'">'+open+'</span></summary>'+(empty?'<div class="cols" style="display:block">'+body+'</div>':'<div class="cols">'+body+'</div>')+'</details>';
+    return '<details class="lane" data-lane="'+l.id+'" open><summary><span class="nm">'+esc(l.name)+'</span><span class="cv">'+esc(l.covers)+'</span><span class="ct'+(openN&&l.id==='tom'?' has':'')+'">'+openN+'</span></summary><div class="cols">'+cols+'</div></details>';
   }).join('');
+  $('lanesView').innerHTML=h;
+}
+function render(){
+  counts();
+  $('chips').innerHTML=['All'].concat(B.themes).map(t=>'<button class="chip'+((t==='All'?!theme:theme===t)?' on':'')+'" type="button" data-t="'+esc(t)+'">'+esc(t)+'</button>').join('');
+  renderSections();renderLanes();
 }
 
 // ---- detail sheet
@@ -164,24 +237,26 @@ function openSheet(id){
   const bl=blocksOpen(c),bb=blockedBy(c),p=c.prompt;
   let h='<h2>'+esc(c.title)+'</h2><div class="meta" style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag" style="background:'+(THEME_COL[c.theme]||'#ccc')+'">'+esc(c.theme)+'</span><span class="age '+ageClass(ageOf(c))+'">'+(c.col==='done'?'done '+esc(c.done||''):ageOf(c)+' days since last change')+'</span><span class="age">'+esc(laneName(c.lane))+' / '+esc((B.columns.find(x=>x.id===c.col)||{}).name)+'</span></div>';
   h+='<h4>Next step</h4><p>'+esc(c.next)+'</p>';
-  if(c.waiting_on) h+='<h4>Waiting on</h4><p>'+esc(laneName(c.waiting_on))+'</p>';
-  if(bl.length) h+='<h4>Blocking</h4><ul>'+bl.map(x=>'<li>'+esc(x.title)+' ('+esc(laneName(x.lane))+')</li>').join('')+'</ul>';
-  if(bb.length) h+='<h4>Blocked by</h4><ul>'+bb.map(x=>'<li>'+esc(x.title)+' ('+esc(laneName(x.lane))+')</li>').join('')+'</ul>';
+  if(c.note) h+='<h4>Your note</h4><p>'+esc(c.note)+'</p>';
+  if(c.col==='wait'){const by=bb;h+='<h4>Waiting on</h4><p>'+(by.length?esc(by.map(x=>x.title).join('; ')):esc(laneName(c.waiting_on||'')))+'</p>';}
+  if(bl.length) h+='<h4>Unblocks</h4><ul>'+bl.map(x=>'<li>'+esc(x.title)+' ('+esc(laneName(x.lane))+')</li>').join('')+'</ul>';
+  if(bb.length&&c.col!=='wait') h+='<h4>Blocked by</h4><ul>'+bb.map(x=>'<li>'+esc(x.title)+' ('+esc(laneName(x.lane))+')</li>').join('')+'</ul>';
   const ch=c.chat||{};
-  h+='<h4>Chat</h4><p>'+(ch.url?'<a href="'+esc(ch.url)+'" target="_blank" rel="noopener">'+esc(ch.url)+'</a>':'Link unknown')+'<br><span class="hint">Started with: '+esc(ch.opening||'unknown')+'</span></p>';
+  h+='<h4>Chat</h4><p>'+(ch.url?'<a href="'+esc(ch.url)+'" target="_blank" rel="noopener">Open chat</a>':'No conversation yet')+'<br><span class="hint">Started with: '+esc(ch.opening||'unknown')+'</span></p>';
   if(p){
     h+='<h4>Next session prompt</h4><p class="hint">'+esc(p.what||'')+'</p>';
     if((p.before||[]).length) h+='<h4>Before you paste</h4><ol>'+p.before.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ol>';
-    h+='<p><b>Model:</b> '+esc(p.model||'')+'<br><b>Effort:</b> '+esc(p.effort||'')+'</p><pre id="ptxt">'+esc(p.text||'')+'</pre><button class="small gold" id="bcopy" type="button">Tap to copy the prompt</button>';
+    h+='<p><b>Model:</b> '+esc(p.model||'')+'<br><b>Effort:</b> '+esc(p.effort||'')+'</p><pre id="ptxt">'+esc(p.text||'')+'</pre><button class="small gold" id="bcopy" type="button">Copy prompt</button>';
   }
   h+='<h4>History</h4><details><summary class="hint">'+((c.history||[]).length)+' entries (tap to open)</summary><ul>'+(c.history||[]).slice().reverse().map(x=>'<li>'+esc(x.d)+': '+esc(x.t)+'</li>').join('')+'</ul></details>';
-  h+='<div class="btns"><button class="good" id="bdone" type="button"'+(c.col==='done'?' disabled':'')+'>Done</button><button id="bmove" type="button">Move to...</button><button id="bnote" type="button">Note</button><button id="bclose" type="button">Close</button></div><div id="act"></div><p class="err" id="serr"></p>';
+  const mine=c.lane==='tom'&&c.col!=='done',any=c.col!=='done';
+  h+='<div class="btns">'+(mine?'<button class="good" id="bdid" type="button">I did this</button><button class="gold" id="btake" type="button">Claude takes this</button>':'')+(any?'<button id="bnot" type="button">Not needed</button>':'')+'<button id="bnote" type="button">Note</button><button id="bclose" type="button">Close</button></div><div id="act"></div><p class="err" id="serr"></p>';
   $('sheet').innerHTML=h;$('sheet').style.display='block';$('dim').style.display='block';$('sheet').scrollTop=0;
 }
 function closeSheet(){$('sheet').style.display='none';$('dim').style.display='none';cur=null;}
-function showAct(html){$('act').innerHTML='<div class="btns" style="margin-top:10px">'+html+'</div>';}
+function showAct(html){$('act').innerHTML='<div class="btns" style="margin-top:10px;flex-direction:column;align-items:stretch">'+html+'</div>';}
 
-// ---- saving: read the latest file, apply the change to that card by id, write it back, so other sessions' edits are kept
+// ---- saving: read the latest file, change that card by id, write it back, so other sessions' edits are kept
 async function save(msg,fn){
   const tok=lsGet(TOKEN);
   if(!tok&&!Q.get('gh')) throw new Error('No GitHub token on this phone. Open ADMIN > ART LIBRARY > Setup and paste it, then try again.');
@@ -202,25 +277,40 @@ async function run(msg,fn,okMsg){
   $('serr').textContent='';
   try{await save(msg,fn);toast(okMsg);closeSheet();render();}catch(e){$('serr').textContent=e.message;}
 }
+const clean=s=>String(s||'').replace(/</g,'(').replace(/>/g,')').replace(/\u2014/g,',').trim();
+function copyText(x){const ok=()=>toast('Prompt copied');
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(x).then(ok,()=>fall(x,ok));}else fall(x,ok);}
+function fall(x,ok){const ta=document.createElement('textarea');ta.value=x;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){toast('Select the text and copy it');}ta.remove();}
+
 document.addEventListener('click',e=>{
   const t=e.target;
+  const act=t.closest('[data-act]');
+  if(act&&act.dataset.act==='copy'){const c=cardById(act.dataset.id);if(c&&c.prompt)copyText(c.prompt.text);e.stopPropagation();return;}
+  if(t.closest('a'))return;
   const card=t.closest('.card');if(card&&!$('sheet').contains(t)){openSheet(card.dataset.id);return;}
   const chip=t.closest('.chip');if(chip){theme=chip.dataset.t==='All'?'':chip.dataset.t;render();return;}
-  if(t.closest('#sum')){onlyMine=!onlyMine;render();return;}
+  const on=t.closest('[data-only]');if(on){only=only===on.dataset.only?'':on.dataset.only;render();return;}
   if(t.id==='dim'||t.id==='bclose'){closeSheet();return;}
-  if(t.id==='bcopy'){const x=$('ptxt').textContent;
-    const ok=()=>toast('Prompt copied');
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(x).then(ok,()=>fall(x,ok));}else fall(x,ok);return;}
-  if(t.id==='bdone'){const id=cur;run('board: done '+id,d=>{const c=d.cards.find(z=>z.id===id);if(c){c.col='done';c.done=today();delete c.waiting_on;touch(c,'Marked done by Tom.');}return d;},'Marked done');return;}
-  if(t.id==='bmove'){const c=cardById(cur);
-    showAct('<select id="mlane">'+B.lanes.map(l=>'<option value="'+l.id+'"'+(l.id===c.lane?' selected':'')+'>'+esc(l.name)+'</option>').join('')+'</select><select id="mcol">'+B.columns.map(x=>'<option value="'+x.id+'"'+(x.id===c.col?' selected':'')+'>'+esc(x.name)+'</option>').join('')+'</select><button class="gold" id="mgo" type="button">Move</button>');return;}
-  if(t.id==='mgo'){const id=cur,ln=$('mlane').value,cl=$('mcol').value;
-    run('board: move '+id,d=>{const c=d.cards.find(z=>z.id===id);if(c){const was=c.lane+'/'+c.col;c.lane=ln;c.col=cl;if(cl==='done')c.done=today();else delete c.done;if(cl!=='wait')delete c.waiting_on;touch(c,'Moved from '+was+' to '+ln+'/'+cl+' by Tom.');}return d;},'Moved');return;}
+  if(t.id==='bcopy'){copyText($('ptxt').textContent);return;}
+  if(t.id==='bdid'){showAct('<input type="text" id="ntxt" placeholder="Anything Claude should know? (optional)"><button class="good" id="bdidgo" type="button">Done</button>');return;}
+  if(t.id==='bdidgo'){const id=cur,tx=clean($('ntxt').value);
+    run('board: done '+id,d=>{const c=d.cards.find(z=>z.id===id);if(c){c.col='done';c.done=today();delete c.waiting_on;delete c.quiet;if(tx)c.note=tx;touch(c,'Tom did this.'+(tx?' Note: '+tx:''));}return d;},'Marked done');return;}
+  if(t.id==='btake'){showAct('<input type="text" id="ntxt" placeholder="What do you want done?"><button class="gold" id="btakego" type="button">Hand to Claude</button>');return;}
+  if(t.id==='btakego'){const id=cur,tx=clean($('ntxt').value);if(!tx){$('serr').textContent='Type what you want done first.';return;}
+    run('board: take '+id,d=>{const c=d.cards.find(z=>z.id===id);if(c){
+      c.lane='claude';c.col='up';delete c.waiting_on;delete c.done;delete c.done_when;c.tag=c.tag||id;c.note=tx;
+      c.next='Handed to Claude by Tom: '+tx;
+      c.prompt={what:'Works out what Tom wants from his note, rewrites this card, and does the work.',before:['Nothing to do first.'],model:'Claude Sonnet 5.5 (row C: the steps are not written yet)',effort:'medium (a handed-over card is usually one piece of work)',
+        text:'Read claude/handoff-rules.md. Tom handed you board card '+id+' with this note: '+tx+'. Work out what is needed, rewrite the card, and do it.'+PERM};
+      touch(c,'Tom handed this to Claude: '+tx);}return d;},'Handed to Claude');return;}
+  if(t.id==='bnot'){showAct('<input type="text" id="ntxt" placeholder="Why is it not needed?"><button class="gold" id="bnotgo" type="button">Retire this card</button>');return;}
+  if(t.id==='bnotgo'){const id=cur,tx=clean($('ntxt').value);if(!tx){$('serr').textContent='Say why in a few words.';return;}
+    run('board: retire '+id,d=>{const c=d.cards.find(z=>z.id===id);if(c){c.col='done';c.done=today();c.retired=true;delete c.waiting_on;delete c.quiet;touch(c,'Not needed: '+tx);}return d;},'Retired');return;}
   if(t.id==='bnote'){showAct('<input type="text" id="ntxt" placeholder="Note"><button class="gold" id="ngo" type="button">Save note</button>');return;}
-  if(t.id==='ngo'){const id=cur,tx=$('ntxt').value.trim();if(!tx){$('serr').textContent='Type a note first.';return;}
+  if(t.id==='ngo'){const id=cur,tx=clean($('ntxt').value);if(!tx){$('serr').textContent='Type a note first.';return;}
     run('board: note '+id,d=>{const c=d.cards.find(z=>z.id===id);if(c)touch(c,'Tom: '+tx);return d;},'Note saved');return;}
 });
-function fall(x,ok){const ta=document.createElement('textarea');ta.value=x;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){toast('Select the text and copy it');}ta.remove();}
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('card')){e.preventDefault();openSheet(e.target.dataset.id);}});
 load().then(render).catch(e=>{$('err').textContent=e.message;$('sum').textContent='Could not load the board';});
 window.__board={get B(){return B;},render};
 </script>

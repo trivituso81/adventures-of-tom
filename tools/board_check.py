@@ -2,10 +2,18 @@
 """Checks data/board.json (the ADMIN > BOARD data, plan in claude/board-plan.md).
 Exit 0 and prints 'board ok' when: the file is valid JSON; every card has an id (unique), title, next step, theme from the list, a lane and a column
 that exist; a Waiting card names an existing lane in waiting_on; every Blocks id exists; a Done card has a done date; no em dashes in the text.
-Run: python3 tools/board_check.py [path]"""
+board2 rules: a Claude card that is not Done has a `tag` and a complete prompt with no "<" blank for Tom to fill in; an open Tom card that blocks an
+open card names that card (title, tag or id) in its next step.
+Run: python3 tools/board_check.py [path]
+     python3 tools/board_check.py --push <tag> [path]   the build being pushed must be on a card (tag equal, a part of it, or named in a history line)"""
 import json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
-path = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, '..', 'data', 'board.json')
+args = sys.argv[1:]
+push_tag = None
+if args[:1] == ['--push']:
+    if len(args) < 2: print('usage: board_check.py --push <tag> [path]'); raise SystemExit(2)
+    push_tag, args = args[1], args[2:]
+path = args[0] if args else os.path.join(HERE, '..', 'data', 'board.json')
 THEMES = ['Voice Clips', 'Battle Animations', 'Battle System', 'Areas', 'Characters', 'Story and Dialogue', 'Game Shell', 'Tools', 'Project Ops']
 bad = []
 try:
@@ -36,6 +44,24 @@ for c in d.get('cards', []):
         for k in ('text', 'model', 'effort', 'before'):
             if not c['prompt'].get(k): bad.append('%s: prompt missing %s' % (n, k))
     if '—' in json.dumps(c, ensure_ascii=False): bad.append('%s: em dash in text' % n)
+    if c.get('lane') == 'claude' and c.get('col') != 'done':
+        if not c.get('tag'): bad.append('%s: a Claude card needs a tag (the build name its session will push)' % n)
+        p = c.get('prompt')
+        if not p: bad.append('%s: a Claude card in Claude\'s lane needs a prompt' % n)
+        elif '<' in json.dumps(p, ensure_ascii=False): bad.append('%s: the prompt has a "<" blank for Tom to fill in' % n)
+    if c.get('lane') == 'tom' and c.get('col') != 'done':
+        for k in d.get('cards', []):
+            if k.get('id') in c.get('blocks', []) and k.get('col') != 'done':
+                nx = c.get('next', '').lower()
+                if not any(x and x.lower() in nx for x in (k.get('title'), k.get('tag'), k.get('id'))):
+                    bad.append('%s: blocks "%s" but its next step does not name that card' % (n, k.get('id')))
+if push_tag:
+    def on_card(c):
+        t = c.get('tag')
+        if t and (push_tag == t or (push_tag.startswith(t) and len(push_tag) == len(t) + 1 and push_tag[-1].isalpha())): return True
+        return any(push_tag in h.get('t', '') for h in c.get('history', [])) or push_tag == c.get('id')
+    if not any(on_card(c) for c in d.get('cards', [])) and not push_tag.startswith('board'):
+        bad.append('the build %r being pushed is not on any card: add a card with tag %r (or name the build in a history line of the card it belongs to), then push. Plan: claude/board2-plan.md section 4.' % (push_tag, push_tag))
 if bad:
     print('board FAIL:'); [print('  ' + b) for b in bad]; raise SystemExit(1)
 print('board ok (%d cards, %d lanes)' % (len(d['cards']), len(d['lanes'])))
