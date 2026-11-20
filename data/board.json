@@ -5781,7 +5781,7 @@
    "title": "SKILLS list: name text and flavor icons a touch smaller, and a check that the most icons a row can hold fit (skilllist1)",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as skilllist1: SKILLS list names 14% smaller, flavor and Pocket pictures 25% smaller, Pep number 12% smaller (words mode only). The most a row holds (2 flavors + Pocket + the planned i icon) fits at every layout checked. Narrow Duo panel still wraps long names to 3 or 4 lines, as before.",
    "blocks": [],
    "changed": "2026-11-19",
@@ -5798,6 +5798,10 @@
     {
      "d": "2026-11-19",
      "t": "Built skilllist1: .b3-snt name at .86, flavor and Pocket pictures 1em, Pep number 1.15em. Worst-case rows (longest names, 2 flavors + Pocket, plus a fourth icon) checked at desktop, phone portrait, phone landscape and Duo open: no overflow. b3_test s9ui passes."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as skilllist1: SKILLS list names and pictures a little smaller"
     }
    ],
    "prompt": {
@@ -5810,7 +5814,8 @@
     "text": "Read claude/handoff-rules.md, then finish card c-skilllist1 (tag skilllist1) if it is not shipped: in the SKILLS list the name is .86 of the row size and the flavor and Pocket pictures 1em (index.html, .b3-snt), check the worst case row in portrait, landscape and Duo, run python3 tools/b3_test.py s9ui, push. You have my full permission to access the repo."
    },
    "tag": "skilllist1",
-   "after": "t-skilllist1look"
+   "after": "t-skilllist1look",
+   "done": "2026-11-19"
   },
   {
    "id": "t-skilllist1look",
@@ -5943,6 +5948,20 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukDvEEkuXJtFLApvat9",
+   "title": "Fix party followers lagging behind Tom in free walking (follow1)",
+   "first": "2026-11-19T17:23:21-08:00",
+   "last": "2026-11-19T18:54:29-08:00",
+   "tags": [
+    "follow1",
+    "skilllist1"
+   ],
+   "cards": [
+    "c-follow1",
+    "c-skilllist1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukChRXtkUV9DEJE7zVZ",
    "title": "Reset the chapter 1 clip approach: reflection, one plan, one-clip proof (clipreset)",
    "first": "2026-11-19T18:51:03-08:00",
@@ -5952,19 +5971,6 @@
    ],
    "cards": [
     "c-clipreset"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDvEEkuXJtFLApvat9",
-   "title": "Fix party followers lagging behind Tom in free walking (follow1)",
-   "first": "2026-11-19T17:23:21-08:00",
-   "last": "2026-11-19T18:47:29-08:00",
-   "tags": [
-    "follow1"
-   ],
-   "cards": [
-    "c-follow1",
-    "c-skilllist1"
    ]
   },
   {
@@ -6389,8 +6395,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "93e8fc5e0071c8dd05cf1014d3efc37771795382",
- "synced_at": "2026-11-20T02:51:35+00:00",
+ "synced": "f67652444940459e38f3bdc5be6c96ecb9c15337",
+ "synced_at": "2026-11-20T02:55:18+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
