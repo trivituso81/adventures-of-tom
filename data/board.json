@@ -1019,7 +1019,7 @@
   {
    "id": "c-nextclean",
    "lane": "claude",
-   "col": "prog",
+   "col": "wait",
    "theme": "Project Ops",
    "title": "Make the board the only list of open work (cut claude/next.md down)",
    "next": "claude/next.md is 45,000 bytes against its own 20,000 limit and still carries a second, older list of open items and prompts. Put every item that is still wanted on a card, drop the rest, and leave next.md with rules, tests and the push steps only.",
@@ -1048,12 +1048,17 @@
     {
      "d": "2026-11-19",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Not shipped: the repo has no claude/ folder (next.md and the plans the prompt names live in the claude.ai Project), so they could not be read. Stuck until run in a session that has the Project files."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-19",
-   "tag": "nextclean"
+   "changed": "2026-11-20",
+   "tag": "nextclean",
+   "waiting_on": "tom"
   },
   {
    "id": "c-takes-2337ed",
