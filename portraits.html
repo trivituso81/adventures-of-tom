@@ -205,7 +205,8 @@ async function loadJson(path,live){
 }
 // newest approved hero painting (<id>-hero-vN.png from the Art Library), else the original <id>-hero-ref-v1.png (walkv2); must match hero_src() in tools/sprite-bake/bake_portraits.py
 function loadImg(id){const names=[3,2,1].map(n=>id+'-hero-v'+n+'.png').concat([id+'-hero-ref-v1.png']);
-  const tryAt=i=>new Promise(res=>{if(i>=names.length)return res();const im=new Image();im.onload=()=>{imgs[id]=im;res();};im.onerror=()=>tryAt(i+1).then(res);im.src='art/raw/characters/'+names[i];});
+  const RAWB=/\.github\.io$/.test(location.hostname)?'https://raw.githubusercontent.com/trivituso81/adventures-of-tom/main/':'';
+  const tryAt=i=>new Promise(res=>{if(i>=names.length)return res();const im=new Image();im.onload=()=>{imgs[id]=im;res();};im.onerror=()=>tryAt(i+1).then(res);im.crossOrigin='anonymous';im.src=RAWB+'art/raw/characters/'+names[i];});
   return tryAt(0);}
 (async()=>{
   const chips=$('chips');

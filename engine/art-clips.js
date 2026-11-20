@@ -277,7 +277,7 @@ function clipRvDraw(e,r){
   v.pause(); clipPaintMarks();
   // An approved video this device holds only as an address: fetch the game's own copy (same site, so it can be kept) and use it from now on.
   const prior=!r.blob&&clipPrior(e,r);
-  if(prior) fetch(prior,{cache:'no-store'}).then(x=>x.ok?x.blob():null).then(async b=>{ if(!b||b.size<1000||r.blob) return; r.blob=new Blob([b],{type:'video/mp4'}); r.url=''; await tx('readwrite',st=>st.put(r)); if(CV.r===r){ clipBf(false); v.src=clipSrc(r); v.load(); clipPaintMarks(); } }).catch(()=>{});
+  if(prior) fetch(rawU(prior),{cache:'no-store'}).then(x=>x.ok?x.blob():null).then(async b=>{ if(!b||b.size<1000||r.blob) return; r.blob=new Blob([b],{type:'video/mp4'}); r.url=''; await tx('readwrite',st=>st.put(r)); if(CV.r===r){ clipBf(false); v.src=clipSrc(r); v.load(); clipPaintMarks(); } }).catch(()=>{});
 }
 function clipRvStop(){ clipBf(false); const v=cg('rvvid'); if(v) v.pause(); }
 // ON THE BATTLEFIELD: START to END, looping, at the game's speed, magenta removed, over a battle background. A look at

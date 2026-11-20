@@ -79,7 +79,8 @@ const LAYERS=[['cabin','flight-cabin','Cabin'],['skyLe','flight-sky-le','Sky, Lo
 const MAP_SPOTS={'flight-usmap-v1.png':{le:[.913,.403],la:[.076,.565]},'*':{le:[.94,.343],la:[.125,.653]}};
 
 // ---------- Loading ----------
-const loadImg=src=>new Promise((res,rej)=>{ const im=new Image(); im.onload=()=>res(im); im.onerror=()=>rej(new Error('could not load '+src)); im.src=src; });
+const RAWB=/\.github\.io$/.test(location.hostname)?'https://raw.githubusercontent.com/trivituso81/adventures-of-tom/main/':'', rawU=p=>RAWB&&/^art\/raw\//.test(p)?RAWB+p:p;   // pubfast2: art/raw is not on the published site; the public repo serves it (local server: the folder itself)
+const loadImg=src=>new Promise((res,rej)=>{ const im=new Image(); im.crossOrigin='anonymous'; im.onload=()=>res(im); im.onerror=()=>rej(new Error('could not load '+src)); im.src=src; });
 function canvasOf(im,w,h){ const c=document.createElement('canvas'); c.width=w||im.naturalWidth||im.width; c.height=h||im.naturalHeight||im.height; const g=c.getContext('2d',{willReadFrequently:true}); g.drawImage(im,0,0,c.width,c.height); return c; }
 const asImg=c=>{ c.naturalWidth=c.width; c.naturalHeight=c.height; return c; };   // the engine reads naturalWidth / naturalHeight
 let DATA=null;
@@ -104,7 +105,7 @@ async function loadLibrary(useDevice){
   for(const [k,id,name] of LAYERS){
     const r=dev[id],f=approvedFile(E[id]);
     if(r){ src[k]={url:URL.createObjectURL(r.blob),file:id+'-v'+r.n+'.png'}; used.push([name,'v'+r.n+' on this device']); }
-    else if(f){ src[k]={url:f,file:f.split('/').pop()}; used.push([name,f.split('/').pop().replace(/^flight-/,'').replace(/\.png$/,'')+' approved']); }
+    else if(f){ src[k]={url:rawU(f),file:f.split('/').pop()}; used.push([name,f.split('/').pop().replace(/^flight-/,'').replace(/\.png$/,'')+' approved']); }
     else missing.push(name);
   }
   if(missing.length) throw new Error('Not approved yet: '+missing.join(', ')+'. Approve them first, or pick Live game.');

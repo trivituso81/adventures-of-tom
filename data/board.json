@@ -461,7 +461,8 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/next-addendum-pubfast1.md and build pubfast2. You have my full permission to access the repo."
    },
-   "tag": "pubfast2"
+   "tag": "pubfast2",
+   "after": "t-pagessource"
   },
   {
    "id": "c-board1",
@@ -1497,6 +1498,29 @@
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19"
+  },
+  {
+   "id": "t-pagessource",
+   "title": "Switch GitHub Pages to publish from Actions (one setting)",
+   "theme": "Project Ops",
+   "lane": "tom",
+   "col": "up",
+   "ask": "setup",
+   "fyi": true,
+   "next": "Open github.com/trivituso81/adventures-of-tom, tap Settings, then Pages. Under Build and deployment, set Source to GitHub Actions. Then push anything and the publish takes about 1.5 minutes. Setting it back to Deploy from a branch undoes it.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/cse_01RXeukGnrZZnUF1s6ufzVfe",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by pubfast2: the faster publish only runs once this setting is switched."
+    }
+   ]
   }
  ],
  "sessions": [

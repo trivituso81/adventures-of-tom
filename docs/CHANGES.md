@@ -1,3 +1,12 @@
+## pubfast2 (2026-11-20): art/raw is off the published site: a publish drops from about 4 minutes to about 1.5, the site is about 0.7 GB
+
+- Card c-pubfast2. The Project plan doc (`claude/next-addendum-pubfast1.md`) could not be read in this session, so I rebuilt the plan from docs/WORKFLOW.md "How main reaches the phone".
+- `.github/workflows/publish.yml`: `!/art/raw/` added to the sparse-checkout list. Site size without `art/raw` and `tools/sprite-bake/src`: 718 MB (was 2.17 GB; GitHub's limit is 1 GB).
+- Proof nothing in the game needs it: no file under `index.html`'s scripts or `engine/` loads `art/raw` (only comments in `data/`). Only the admin pages read it: `art.html` (reference thumbnails, the HEAD check that a reference exists, the reference fetch for a make, `engine/art-clips.js` fetch of an approved video), `portraits.html` (hero paintings) and `flight-preview.html` (approved flight layers).
+- Those pages now read `art/raw/...` from `https://raw.githubusercontent.com/trivituso81/adventures-of-tom/main/` when the host ends in `.github.io` (`rawU` in `art.html` and `flight-preview.html`, `RAWB` in `portraits.html`); on the local server they still read the folder. The repo is public, so no token is needed. Pictures drawn into a canvas load with `crossOrigin='anonymous'` (the raw host allows it). A just-pushed file shows up on the raw host within about 5 minutes; `refMiss` still falls back to the token read.
+- Still needed from Tom: Settings > Pages > Source = "GitHub Actions" (the faster publish only runs after that). Until then the built-in publish carries on and still uploads `art/raw`.
+- Not done: I did not open the admin pages on the live site (the site cannot change before the setting does); `tools/smoke.py` could not run (no Playwright here); I only syntax-checked the four changed scripts with node.
+
 ## board-convclosed (2026-11-19): The Conversations list on the board is closed by default, and a section you open or close stays that way when the page reloads
 
 - board.html: CONVERSATIONS starts collapsed on the phone and wide layouts; the 60 second reload no longer resets sections you opened. tools/board_test.py checks it.
