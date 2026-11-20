@@ -7981,7 +7981,7 @@
    "title": "Watch the chapter 1 scenes for breathing and reactions",
    "theme": "Story and Dialogue",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "next": "Play chapter 1 from the start (the opening, then the walk to Aunt Ellie, then the kitchen). People standing in a scene should now stand still with no breathing at all (breathing is battle only). Everything else is as before: a small dip when a pose changes, turning to whoever speaks, a hop or a ! ? ... or sweat drop on cue words, and Boppy's sweat drop on 'Gently. The stomach.' Tap All good, or Something is wrong with what you saw.",
@@ -8000,9 +8000,12 @@
     {
      "d": "2026-11-20",
      "t": "fix-cutpolish5: removed overworld breathing, rule added to CLAUDE.md; squash, turns, hops and pips kept."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix what you found on: Watch the chapter 1 scenes for breathing and reactions is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "t-cardlinks1try",
@@ -8251,7 +8254,7 @@
    "id": "c-fix-cutpolish5",
    "tag": "fix-cutpolish5",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix what you found on: Watch the chapter 1 scenes for breathing and reactions",
@@ -8296,6 +8299,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-cutpolish5: People in the overworld and in scenes no longer breathe (breathing is battle only)"
     }
    ],
    "prompt": {
@@ -8308,7 +8315,8 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-cutpolish5 and t-cutpolish5 in data/board.json, history included. Your first push is the commit board: start c-fix-cutpolish5.\n\nTom tested and found problems:\n1. Card t-cutpolish5 (Watch the chapter 1 scenes for breathing and reactions, ask play). He was asked: Play chapter 1 from the start (the opening, then the walk to Aunt Ellie, then the kitchen). Watch people standing in a scene: they should breathe a little, dip when a pose changes, turn to whoever speaks, and hop or show a ! ? ... or sweat drop on cue words. Boppy winces (a sweat drop) on 'Gently. The stomach.' when you talk to him. Tap All good, or Something is wrong with what you saw. He wrote: Undo this change, and remember forever that we don't make characters in the overworld breathing that breathing animation is only while in battle\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:18:55.454Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-cutpolish5 to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-cutpolish5, and give the build fix-cutpolish5 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-cutpolish5",
-   "auto": true
+   "auto": true,
+   "done": "2026-11-20"
   }
  ],
  "sessions": [
@@ -8316,8 +8324,10 @@
    "url": "https://claude.ai/code/session_01RXeukFEAHCq9DEF8qGDvCv",
    "title": "Fix what you found on: Watch the chapter 1 scenes for breathing and reactions",
    "first": "2026-11-20T08:20:19Z",
-   "last": "2026-11-20T08:20:19Z",
-   "tags": [],
+   "last": "2026-11-20T08:22:26Z",
+   "tags": [
+    "fix-cutpolish5"
+   ],
    "cards": [
     "c-fix-cutpolish5"
    ]
@@ -9207,8 +9217,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "e7c3cff1b2a48587675ff07ed2cd51a349cf9f87",
- "synced_at": "2026-11-20T08:21:35+00:00",
+ "synced": "fbd41a1be4351738515255da39701f4dbb7fb6ec",
+ "synced_at": "2026-11-20T08:23:13+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
