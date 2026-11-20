@@ -5782,7 +5782,7 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "prog",
-   "next": "Name 14% smaller, flavor and Pocket pictures 25% smaller, Pep number 12% smaller, in the SKILLS list only (words mode). Worst case (2 flavors + Pocket on the longest names) checked at desktop, phone portrait, phone landscape and Duo open: no overflow. Then update tools/b3_test.py (name size is measured on the new inner element), run s9ui, push.",
+   "next": "Shipped as skilllist1: SKILLS list names 14% smaller, flavor and Pocket pictures 25% smaller, Pep number 12% smaller (words mode only). The most a row holds (2 flavors + Pocket + the planned i icon) fits at every layout checked. Narrow Duo panel still wraps long names to 3 or 4 lines, as before.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -5797,7 +5797,7 @@
     },
     {
      "d": "2026-11-19",
-     "t": "Started: the conversation claimed this card."
+     "t": "Built skilllist1: .b3-snt name at .86, flavor and Pocket pictures 1em, Pep number 1.15em. Worst-case rows (longest names, 2 flavors + Pocket, plus a fourth icon) checked at desktop, phone portrait, phone landscape and Duo open: no overflow. b3_test s9ui passes."
     }
    ],
    "prompt": {

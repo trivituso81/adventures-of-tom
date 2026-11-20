@@ -1,3 +1,10 @@
+## skilllist1 (2026-11-19): SKILLS list names and pictures a little smaller
+
+- Tom (11-19 18:34 and 18:36): "the font in the battle ability list is just a touch too big. will it accommodate the max number of icons?" and "The icons can also be smaller".
+- Words mode SKILLS list only (`engine/b3-ui.js` `b3RenderCmd`, CSS in `index.html` next to `.b3-ico`): the name is now .86 of the row's text size (it sits in an inner `<b class="b3-snt">`, because the layout rules size every span inside a button), the flavor and Pocket pictures are 1em (were 1.35em), the Pep number is 1.15em (was 1.3em). The skill card, Rose Mode pictures and every other list are unchanged.
+- Most a row can hold today: 2 flavor pictures + the Pocket backpack (3 pictures) plus the Pep pill; the only 2-flavor Skill is "Giddyup, Tata!" Launch (Rose). Checked with the longest names (Kingdom of Ten-Thousand Blankets, Colossal Diamond-Gold Dumpling) at desktop, phone portrait, phone landscape and Duo open, with a fourth picture added on every row (the planned i icon of skillinfo1): no row overflows or scrolls sideways. Names wrap to 2 lines on desktop and 1 line on a phone held upright; in the narrow Duo panel (179 px) they still wrap to 3 or 4 lines, as they did before.
+- Test: `tools/b3_test.py` s9ui measures the name size on the new inner element (the Pep number is still bigger than the name). `python3 tools/b3_test.py s9ui` passes, portrait and landscape.
+
 ## clipreset (2026-11-19): Clip reset proof: Grace's guard is her painted guard pose moved by the game, not a video; one decide card for Tom
 
 - Tom (11-19 18:10) on the chapter 1 battle clips: "i just looked at Grace's guard animation and i am done. its awful. she puts her hands into a praying motion. how did this pass your test? this process is painfully slow. we need a massive reflection". Card c-clipreset. Reflection, repo findings and the one plan: `claude/clip-reset-plan.md` in the Project. Nothing was generated and nothing was spent.

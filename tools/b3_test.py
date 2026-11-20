@@ -993,7 +993,7 @@ TAP9="(sel)=>{ const e=document.querySelector('#b3-cmd '+sel); e.dispatchEvent(n
 def s9(pg): return pg.evaluate("""()=>{ const q=s=>[...document.querySelectorAll('#b3-cmd '+s)],cmd=document.getElementById('b3-cmd'),msg=document.getElementById('b3-msg').textContent,u=B3.actor;
   const descs=u?b3SkillRows(u).map(S=>S.desc).filter(Boolean):[],fs=e=>e?parseFloat(getComputedStyle(e).fontSize):0,use=document.querySelector('#b3-cmd [data-use]'),cb=cmd.getBoundingClientRect();
   return {ui:B3.ui,turns:B3.F.turnLog.length,rows:q('.b3-sk').length,iconRows:q('.b3-sk').filter(b=>b.querySelector('.b3-ico img')).length,chips:q('.b2-el').length,costs:q('.b3-sk .b3-cost').length,
-    costPx:fs(document.querySelector('#b3-cmd .b3-cost b')),namePx:fs(document.querySelector('#b3-cmd .b2-sn')),msgHasDesc:descs.some(d=>msg.includes(d.slice(0,30))),msg,
+    costPx:fs(document.querySelector('#b3-cmd .b3-cost b')),namePx:fs(document.querySelector('#b3-cmd .b3-snt')||document.querySelector('#b3-cmd .b2-sn')),msgHasDesc:descs.some(d=>msg.includes(d.slice(0,30))),msg,
     cardDesc:(document.querySelector('#b3-cmd .b3-det-d')||{}).textContent||'',use:q('[data-use]').length,backs:q('[data-back]').length,others:q('.b2-btn[data-i]').length,
     useIn:!!use&&(()=>{ const r=use.getBoundingClientRect(),h=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2); return r.height>0&&r.top>=cb.top-1&&r.bottom<=cb.bottom+1&&!!h&&use.contains(h); })(),wide:cmd.scrollWidth>cmd.clientWidth+2}; }""")
 def stage9ui(pg,lab,landscape=False):

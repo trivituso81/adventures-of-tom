@@ -237,7 +237,7 @@ function b3RenderCmd() {
     const rows=b3SkillRows(u),free=b3Granted()===u;
     const rc=b3Rec();
     box.innerHTML='<div class="b2-list">'+(free?'<div class="b3-free">FREE SKILL FOR '+b2Esc(u.name.toUpperCase())+'</div>':'')+rows.map((S,i)=>{ const can=b3CanUse(B3.F,u,S),c=b3Cost(B3.F,u,S);
-      return '<button type="button" class="b2-btn b3-sk'+(i===B3.sel?' sel':'')+(can.ok?'':' no')+(rc&&rc.skill===S.id?' rec':'')+'" data-i="'+i+'"><span class="b2-sn">'+b2Esc(S.name)+'</span>'+b3FlavorIcons(S)+
+      return '<button type="button" class="b2-btn b3-sk'+(i===B3.sel?' sel':'')+(can.ok?'':' no')+(rc&&rc.skill===S.id?' rec':'')+'" data-i="'+i+'"><span class="b2-sn"><b class="b3-snt">'+b2Esc(S.name)+'</b></span>'+b3FlavorIcons(S)+
         (u.pocketSkills.includes(S.id)?'<span class="b3-ico b3-pki" title="From the Pocket Vibe">'+bpIcon('b3_pocket',24)+'</span>':'')+b3CostPill(free&&!c?0:c,free&&!c)+'</button>'; }).join('')+(free?'':back)+'</div>';
   } else if(B3.ui==='skill') {
     const S=b3SkillRows(u)[B3.sel]; if(!S) return;
