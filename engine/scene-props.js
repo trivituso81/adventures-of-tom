@@ -105,7 +105,7 @@ SPK.charttable=(P)=>{
 // ch1-muffin-pan-empty) on a tile: fields x,y (tile), z (height in tiles), empty (no muffins).
 // Chapter 1: twelve muffins on Deedee's baking island; the empty pan flying off the Big One's head and across the water.
 SPK.muffinpan=(P)=>{
-  const cx=(P.x+.5)*T,b=(P.y+.8)*T-(P.z||0)*T,w=T*1.25;
+  const cx=(P.x+.5)*T,b=(P.y+.8)*T-(P.z||0)*T,w=T*1.25*(P.s||1);
   ctx.fillStyle='#20202a40'; ctx.beginPath(); ctx.ellipse((P.x+.5)*T,(P.y+.8)*T,w*.45,4,0,0,Math.PI*2); ctx.fill();
   PROPART.draw(P.empty?'ch1/pan_empty':'ch1/pan_full',cx,b-w*.3,{w});
 };

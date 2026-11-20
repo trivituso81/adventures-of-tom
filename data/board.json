@@ -9821,7 +9821,7 @@
    "ask": "play",
    "fyi": true,
    "title": "Watch the new muffin theft in Deedee's kitchen",
-   "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen, and watch it in portrait, then once in landscape. Look again at 1) the Mudling hops UP onto the baking island, grabs the pan there and hops back DOWN before running out (it no longer stands inside the counter); 2) as it walks through, Deedee is shoved back a step with a shocked face and stays on her feet while Tom, Rose and Grace go down. All good if it plays like that; Something is wrong with what you saw.",
+   "next": "Open Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen, and watch it in portrait, then once in landscape. Look again at 1) the pan in the mud blob's hands is now about the same size as the pan was on the counter; 2) when the mud blob hops off the island with the pan it lands to the right of the stool and nothing cuts it off. All good if it plays like that; if the hop still looks wrong, press Something is wrong and say what you see.",
    "first": "Wait for Rebuild the muffin theft scene to ship (build heist1).",
    "blocks": [],
    "created": "2026-11-20",
@@ -9869,6 +9869,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: when the mud blob is holding the apple muffins, it appears in his hands much larger than it was on the counter. / when he hops off the counter, something bizarre happens in the animation - check this Sent to Claude as card c-fix-heist1play-4; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T17:19:15.497Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "fix-heist1play-4 shipped: held pan scaled to match the counter pan, hop down lands clear of the stool. Back to Tom to check both."
     }
    ],
    "waiting_on": "claude"
@@ -13114,6 +13118,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fixed the pan size and the hop landing; built fix-heist1play-4. Next: Tom checks on t-heist1play."
     }
    ],
    "prompt": {

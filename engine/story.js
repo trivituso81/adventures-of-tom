@@ -1365,6 +1365,7 @@ function foePoseRows(a,d) {
   const key=a.monster+':'+nm; return FOE_POSE_ROWS[key]||(FOE_POSE_ROWS[key]=mirrorRows(r));
 }
 const MH_ROWS={};
+const MH_CARRY={mh_hold:.9,mh_sneak_a:.9,mh_sneak_b:.9};   // fix-heist1play-4 (Tom: held in its hands the pan looks much larger than on the counter): the painted pan is drawn about 1.45 times the counter's, so the carrying frames are drawn at .9 and the counter pan at 1.3 (scene prop field s)
 function mhAtlas() { const H=typeof MUDLING_HEIST!=='undefined'?MUDLING_HEIST:null; if(!H) return null; if(!MH_ROWS.atlas) MH_ROWS.atlas=paintedAtlas('mudlingHeist',H.src,H.rects,H.k); return MH_ROWS.atlas; }
 function mudlingHeistDraw(a,cx,base) {
   const P=a.scenePose,H=typeof MUDLING_HEIST!=='undefined'?MUDLING_HEIST:null; if(!P||!H||!P.f) return false;
@@ -1372,7 +1373,7 @@ function mudlingHeistDraw(a,cx,base) {
   const atl=mhAtlas(); if(!atl) return false;
   const flip=P.dir==='left',key=f+(flip?'L':'R');
   if(!MH_ROWS[key]) { const r=paintRows(H.rows[f].slice(),atl,f,false); MH_ROWS[key]=flip?mirrorRows(r):r; }
-  const rows=MH_ROWS[key],m=H.meta[f],s=a.mscale||1,w=rows[0].length,h=rows.length,ax=flip?w-m.ax:m.ax;
+  const rows=MH_ROWS[key],m=H.meta[f],s=(a.mscale||1)*(MH_CARRY[f]||1),w=rows[0].length,h=rows.length,ax=flip?w-m.ax:m.ax;
   const lift=(m.lift+(a.lift||0))*s;
   ellipse(cx,base+1,Math.round(w*s*.42*(1-Math.min(.35,lift/60))),5*s,'#2f493640');
   const x0=cx-Math.round(ax*s),y0=Math.round(base-h*s-lift);

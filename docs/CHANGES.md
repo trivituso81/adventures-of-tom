@@ -1,3 +1,11 @@
+## fix-heist1play-4 (2026-11-20): The mud blob's held pan matches the counter pan, and it lands clear of the stool when it hops down
+
+Tom (11-20, card t-heist1play): "when the mud blob is holding the apple muffins, it appears in his hands much larger than it was on the counter. / when he hops off the counter, something bizarre happens in the animation - check this".
+
+- Size: the painted pan in the carrying frames was about 1.45 times the counter pan. The three carrying frames (hold and both sneaks) are now drawn at .9 (`MH_CARRY`, `engine/story.js`) and the counter pan in this scene at 1.3 (field `s` on the `muffinpan` prop, `engine/scene-props.js`; other scenes keep 1.0). Kept: the idle, look and reach frames, the mud's size at mscale 1.1.
+- Hop down: it used to land on the stool at the island's corner, and the stool and the island front covered its lower body while it fell. It now lands to the right of both (6.6, 8.6, 0.45 s) and the sneak walk starts from there. Kept: the hop up and the pose order. I could not name a second fault from the frames; if the hop still looks wrong, Tom's next note should say what he sees.
+- Looked at portrait frames before and after, and one landscape run. Not done: no pencil report was filed after 17:19 UTC, so none was closed.
+
 ## idea-reviewwhatever (2026-11-20): Admin has an Effects page: every effect on people in the overworld, what sets it off, and a preview
 
 Tom (11-20, new card): "we need to review whatever effect is happening to characters in the overworld in respond to conversation and emotions. id like to understand the exhaustive list of effects, what triggers each, and a way to preview them somewhere in Admin".

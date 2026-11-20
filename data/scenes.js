@@ -185,7 +185,7 @@ SCENES.ch1Theft=[
   {flag:'ch1-theft'}, {noHuddle:true},   // staged by hand below: the party holds its spots by the island instead of hopping between speakers
   {call:()=>{ if(typeof storyPosesLoad==='function') { storyPosesLoad('deedee'); storyPosesLoad('boppy'); } }},
   {place:'Deedee',at:[7,9],dir:'right'}, {place:'Boppy',at:[13,10],dir:'up'},   // Boppy sits at the dining table with an empty plate, his back to the door; Deedee faces Tom (cutpolish3: people who talk stand side by side and face left or right, never the camera)
-  {prop:'muffinpan',kind:'muffinpan',set:{map:'grands',x:4.3,y:7.25}},   // twelve muffins on the baking island (stand-in)
+  {prop:'muffinpan',kind:'muffinpan',set:{map:'grands',x:4.3,y:7.25,s:1.3}},   // twelve muffins on the baking island (stand-in)
   {all:[{walk:'tom',to:routeTo('tom',9,9),speed:.25},{walk:'grace',to:routeTo('grace',10,10),speed:.25},
     {if:()=>{ const r=sceneActor('rose'); return !(r&&r.seat); },then:[{walk:'rose',to:routeTo('rose',8,10),speed:.25}]}]},   // they walk in together (no snapping); Rose rides in on Tom's shoulders (a save without the ride flag walks her in)
   {face:'tom',dir:'left'}, {face:'grace',dir:'left'},
@@ -237,10 +237,10 @@ SCENES.ch1Theft=[
   {pose:'Big Mudling',f:'mh_hold',dir:'right'}, {sfx:'pickup'}, {prop:'muffinpan',hide:true}, {flag:'muffins-gone'},   // the painted island loses its muffins too (engine/plate.js grandsEmpty)
   {prop:'crumbs',kind:'crumbs',set:{map:'grands',x:5.2,y:8.4}}, {wait:.6},   // a few crumbs where the muffins were
   // Beat 4, the escape: straight to the door while everyone watches it go, Boppy's story goes on behind it.
-  {hop:'Big Mudling',from:()=>[4.7,7.5],to:[5.7,8.9],time:.4,arc:10,lift:[20,0]},
+  {hop:'Big Mudling',from:()=>[4.7,7.5],to:[6.6,8.6],time:.45,arc:10,lift:[20,0]},   // fix-heist1play-4 (Tom: "when he hops off the counter, something bizarre happens"): it landed behind the stool and the island front and was cut off there; it now lands clear of both, to the right
   {all:[
     {seq:[{pose:'Big Mudling',f:['mh_sneak_a','mh_sneak_b'],fps:8,dir:'right'},
-          {walk:'Big Mudling',to:[[6.4,9.8],[7.2,10.8],[8,11.8]],speed:.4},
+          {walk:'Big Mudling',to:[[7.2,10.8],[8,11.8]],speed:.4},
           {pose:'Big Mudling',f:['mh_sneak_a','mh_sneak_b'],fps:8,dir:'left'},
           {walk:'Big Mudling',to:[[8,13.2],[8,14.6]],speed:.3,onStep:()=>sfx.splat()},
           {sfx:'doorOut'},{despawn:'Big Mudling'}]},
