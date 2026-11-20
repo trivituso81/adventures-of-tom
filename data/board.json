@@ -9728,7 +9728,7 @@
    "ask": "play",
    "fyi": true,
    "title": "Watch the new muffin theft in Deedee's kitchen",
-   "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen, and watch it in portrait, then once in landscape. You should see: 1) the Mudling walks in up the hall (no rolling ball) and everyone jumps, Rose screams; 2) Deedee says \"Excuse me! I just washed that floor.\"; 3) it lifts the pan and runs straight out the door, not past Boppy; 4) nobody ends up on the floor, and Grace's and Tom's floor lines are gone; 5) Boppy's steaming-hat line plays while it runs, and he turns only on \"Wait,\". All good if it plays like that; Something is wrong with what you saw.",
+   "next": "Chapter select > Chapter 1, jump to the theft scene in Deedee's kitchen, and watch it in portrait, then once in landscape. You should see: 1) the Mudling walks in up the hall (no rolling ball) and everyone jumps, Rose screams; 2) it walks through Rose, Tom and Grace and all three end up flat on the floor while Deedee says \"Excuse me! I just washed that floor.\" (no floor lines from Grace or Tom); 3) it lifts the pan and runs straight out the door while the three get up; 4) Boppy's steaming-hat line plays while it runs, and he turns only on \"Wait,\". All good if it plays like that; Something is wrong with what you saw.",
    "first": "Wait for Rebuild the muffin theft scene to ship (build heist1).",
    "blocks": [],
    "created": "2026-11-20",

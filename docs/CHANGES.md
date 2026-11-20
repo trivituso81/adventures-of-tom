@@ -30,6 +30,13 @@
 - Tests: board_sync_test R1 to R6 (replaying the live board fires c-reports-2, c-gatezero and c-adminicons1 once each), board_test (running rescue, UNSTICK). One old expectation changed on purpose: a Claude card in Waiting with no blocker now moves to Up next. board_test's blocker mirror now counts a parked (backlog) blocker as the page does.
 - Not done by a session: the Board START task's prompt needs the rescue branch and could not be edited from here; card t-attn-start has the text and the link.
 
+## fix-heist1play-2 (2026-11-20): The muffin theft knocks the three of you onto the floor again
+
+- Card c-fix-heist1play-2. Tom (11-20, t-heist1play): "Why does no one end up on the floor? It was hilarious when the whole party was knocked down on their butts"
+- Changed in `ch1Theft` (data/scenes.js), one thing: the Mudling still walks in on its standing frame (no rolling ball), but on the way to the island it walks through Rose, Tom and Grace, three bonks and a thud, and all three are flat on the floor while Deedee says "Excuse me! I just washed that floor." They get up as it runs out the door, facing it.
+- Kept: the walk-in, everyone startled, Rose's scream, straight run to the door, Boppy's hat line and his turn on "Wait,", Grace's and Tom's floor lines stay cut (no new lines, no voice change).
+- Not done: Rose still screams once, on entry, not on the fall. Landscape ran with no errors but its frames were not looked at; portrait frames of every beat were.
+- Tests: scene frames in portrait.
 ## fix-heist1play (2026-11-20): The muffin theft is plainer: the Mudling walks in and straight out, everyone is startled and Rose screams, nobody is on the floor
 
 - Card c-fix-heist1play. Tom (11-20, t-heist1play): "Looks very sloppy. ... Why does the mud blob? roll now the animation before where he came in and walked normally he was much more natural and then I don't understand after he takes the muffin tin why he goes to Bobby and then exits and then the dialog between I think it's Tom and I can't remember if it's Grace or Rose on the floor isn't funny and then Tom is really rude and why isn't anyone surprised or shocked like why aren't the girls screaming or Rose at least should be screaming and the whole thing is totally botched."

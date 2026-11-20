@@ -205,7 +205,13 @@ SCENES.ch1Theft=[
     {cam:[6.5,9.6],time:.6}
   ]},
   // Beat 2, the stand-off: it walks up to the island and looks up at the pan, then at Deedee. She stands her ground, angry.
-  {walk:'Big Mudling',to:[[7.4,10.4],[5.7,8.9]],speed:.2,onStep:()=>sfx.splat()},
+  {all:[
+    {walk:'Big Mudling',to:[[8.4,9.9],[7.4,10.4],[5.7,8.9]],speed:.2,onStep:()=>sfx.splat()},
+    {seq:[{wait:.2},{sfx:'bonk'},{wait:.25},{sfx:'bonk'},{wait:.25},{sfx:'bonk'},{wait:.2},{sfx:'thud'}]},
+    {knock:'rose',to:[8.6,10.9],delay:.2,dir:'right'},
+    {knock:'tom',to:[9.9,8.5],delay:.45,dir:'right'},
+    {knock:'grace',to:[11,10.7],delay:.7,dir:'right'}
+  ]},   // fix-heist1play-2 (Tom: "Why does no one end up on the floor? It was hilarious"): it walks through the three and knocks them flat again
   {pose:'Big Mudling',f:'mh_look',dir:'left'}, {sfx:'look'}, {wait:.5},
   {pose:'Big Mudling',f:'mh_look',dir:'right'}, {face:'Deedee',dir:'left'}, {pose:'Deedee',f:'em_angry',mid:'deedee',dir:'left'},
   {wait:.4},
@@ -222,7 +228,10 @@ SCENES.ch1Theft=[
           {pose:'Big Mudling',f:['mh_sneak_a','mh_sneak_b'],fps:8,dir:'left'},
           {walk:'Big Mudling',to:[[8,13.2],[8,14.6]],speed:.3,onStep:()=>sfx.splat()},
           {sfx:'doorOut'},{despawn:'Big Mudling'}]},
-    {seq:[{wait:.6},{face:'tom',dir:'down'},{face:'rose',dir:'down'},{face:'grace',dir:'down'},{face:'Deedee',dir:'down'},{cam:[8,10.2],time:.8}]},
+    {seq:[{wait:.6},{face:'Deedee',dir:'down'},{cam:[8,10.2],time:.8}]},
+    {getup:'tom',to:[9,9],delay:.25,dir:'down'},
+    {getup:'rose',to:[8,9],delay:.4,dir:'down'},
+    {getup:'grace',to:[10,10],delay:.55,dir:'down'},
     {seq:[{wait:.4},{talk:'Boppy',lines:["...so I say to him, \"Nice hat.\" He says, \"Thank you.\" And the hat is steaming."]}]}
   ]},
   {cam:null},
