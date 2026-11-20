@@ -965,9 +965,53 @@
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19"
+  },
+  {
+   "id": "c-reports",
+   "tag": "reports-2026-11-19",
+   "lane": "claude",
+   "col": "up",
+   "theme": "Game Shell",
+   "title": "Fix the report backlog (8 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100352-7v5z, r-20261114-100555-mxvd, r-20261114-100734-1a2w, r-20261114-101501-c5no, r-20261114-101538-nre4, r-20261114-104915-g4gl and 2 more. First note: For this line in particular, we need to create a special frame that can be used in both the dialog a",
+   "prompt": {
+    "what": "Works through the reports you filed in the game.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: the steps are written in the repo docs)",
+    "effort": "medium (steps are known)",
+    "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. You have my full permission to access the repo."
+   },
+   "chat": {
+    "url": "",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by board-sync: 8 report(s) on branch inbox."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-19",
+   "changed": "2026-11-19"
   }
  ],
- "sessions": [],
+ "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukFc3ANMLuB2qSqohxj",
+   "title": "Board that keeps itself current (board2)",
+   "first": "2026-11-19T16:11:14-08:00",
+   "last": "2026-11-19T16:11:14-08:00",
+   "tags": [
+    "board2b"
+   ],
+   "cards": [
+    "c-board2"
+   ]
+  }
+ ],
  "seen": {
   "reports": [
    "r-20261114-100352-7v5z",
@@ -995,6 +1039,6 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "6ac15c7c844c93eaec5e1ecd79c7767bf546374b",
- "synced_at": "2026-11-20T00:09:57+00:00"
+ "synced": "94a7dc0e4115656c02d8286548ee3c7f35f373be",
+ "synced_at": "2026-11-20T00:12:06+00:00"
 }
