@@ -15773,7 +15773,7 @@
    "title": "Play chapter 1 and watch people listen",
    "theme": "Characters",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "next": "Open the game, RELOAD, then CHAPTERS > Chapter 1. Play Deedee's kitchen (the scene where Boppy tells the bread story and the Mudling throws mud), then Boppy's fishing spot (the grey patch). You should see everyone who is not talking stand listening (hands loosely together, face turned a little toward the speaker) or thinking (hand at the chin). Tom while he carries Rose keeps his ride picture. Press All good, or Something is wrong and say which scene and person.",
@@ -15793,15 +15793,18 @@
     {
      "d": "2026-11-20",
      "t": "Wording fix (fix-listen1-play): the steps said \"Grandma's\" and the story has no one by that name; the kitchen is Deedee's. The Square sign is dropped from the steps (no one is listening there)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Play chapter 1 and watch people listen is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-fix-listen1-play",
    "tag": "fix-listen1-play",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Characters",
    "title": "Fix: Play chapter 1 and watch people listen",
@@ -15857,6 +15860,10 @@
     {
      "d": "2026-11-20",
      "t": "Fixed: the test steps on t-listen1-play named the wrong place (Grandma's); they now say Deedee's kitchen and Boppy's fishing spot."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-listen1-play: the listening test steps named \"Grandma's\"; they now say Deedee's kitchen"
     }
    ],
    "prompt": {
@@ -15877,7 +15884,8 @@
     "why": "Quiet: the conversation may have stopped",
     "url": "https://claude.ai/code/cse_01RXeukEFveyJjLzGjhxUQUA",
     "prev": "https://claude.ai/code/cse_01RXeukEUP25DYUQnZmk23ex"
-   }
+   },
+   "done": "2026-11-20"
   },
   {
    "id": "c-wanplan",
@@ -16853,7 +16861,7 @@
   {
    "id": "t-keysecrets2-try",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -16924,10 +16932,13 @@
     {
      "d": "2026-11-20",
      "t": "Fix fix-keysecrets2-try-4 shipped: the page reads the job report through the GitHub API instead of the 5 minute cached copy. Back to Tom."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip, Fix: Try GENERATE VIDEO on one clip is done."
     }
    ],
-   "after": null,
-   "waiting_on": "claude"
+   "after": null
   },
   {
    "id": "c-fix-keysecrets2-try",
@@ -17332,7 +17343,7 @@
    "id": "c-fix-keysecrets2-try-4",
    "tag": "fix-keysecrets2-try-4",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Tools",
    "title": "Fix: Try GENERATE VIDEO on one clip",
@@ -17354,7 +17365,7 @@
     }
    ],
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFeUGJNd3JxnfEJ18k",
+    "url": "https://claude.ai/code/session_01RXeukFeUGJNd3JxnfEJ18k",
     "opening": "Something is wrong on t-keysecrets2-try"
    },
    "history": [
@@ -17380,6 +17391,14 @@
     {
      "d": "2026-11-20",
      "t": "Shipped as fix-keysecrets2-try-4 (see docs/CHANGES.md). Cause not reproduced on a phone; the job side finished in 2 minutes."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-keysecrets2-try-4: the page reads the video job's report through the GitHub API, not the 5 minute cached copy"
     }
    ],
    "prompt": {
@@ -17393,7 +17412,8 @@
    },
    "after": "t-keysecrets2-try",
    "auto": true,
-   "started_at": "2026-11-20T23:51:48+00:00"
+   "started_at": "2026-11-20T23:51:48+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "c-idea-madelot",
@@ -17455,10 +17475,24 @@
    "url": "https://claude.ai/code/session_01RXeukEFveyJjLzGjhxUQUA",
    "title": "Fix: Play chapter 1 and watch people listen",
    "first": "2026-11-20T23:54:00Z",
-   "last": "2026-11-20T23:54:00Z",
-   "tags": [],
+   "last": "2026-11-20T23:55:18Z",
+   "tags": [
+    "fix-listen1-play"
+   ],
    "cards": [
     "c-fix-listen1-play"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFeUGJNd3JxnfEJ18k",
+   "title": "Fix: Try GENERATE VIDEO on one clip",
+   "first": "2026-11-20T23:54:46Z",
+   "last": "2026-11-20T23:54:46Z",
+   "tags": [
+    "fix-keysecrets2-try-4"
+   ],
+   "cards": [
+    "c-fix-keysecrets2-try-4"
    ]
   },
   {
@@ -19780,8 +19814,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "f819a9b6ab8e5df70a325e8b1551d1f902f024fa",
- "synced_at": "2026-11-20T23:54:43+00:00",
+ "synced": "c6667e4de0957ddbf3be1b4a7b812bccde10332b",
+ "synced_at": "2026-11-20T23:55:28+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
