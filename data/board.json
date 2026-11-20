@@ -6670,7 +6670,7 @@
    "title": "Rebuild the muffin theft scene in Deedee's kitchen",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "heist1",
    "next": "Waits on your approval of the new Mudling sheet (card t-heistart). Then it rebuilds the theft: the Mudling of the fights rolls in, bowls the three of you over, faces Deedee, lifts the pan over its head and sneaks out behind Boppy, who never turns around. 3 new lines, 1 changed, 1 cut. Script and staging: claude/heist-redo-plan.md.",
    "blocks": [],
@@ -6678,7 +6678,7 @@
    "changed": "2026-11-20",
    "chat": {
     "url": "",
-    "opening": ""
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -6692,6 +6692,10 @@
     {
      "d": "2026-11-20",
      "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation."
     }
    ],
    "prompt": {
