@@ -13142,6 +13142,37 @@
      "t": "Added with c-idea-reviewwhatever."
     }
    ]
+  },
+  {
+   "id": "c-startmore",
+   "title": "Add START for Opus medium and Sonnet high cards",
+   "theme": "Tools",
+   "lane": "claude",
+   "col": "up",
+   "tag": "startmore",
+   "next": "Adding two more START tasks (Opus 5.5 medium, Sonnet 5.5 high), sending low-effort cards to their model's medium task, and one Tom card with the setup steps. Fable never starts by itself.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "\"Add START for more card sizes. Add two entries to routines in data/board.json: Opus 5.5 medium\""
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom: \"Add START for more card sizes.\" New card; the routines, workflow secrets, routineFor and sync code, one Tom setup card and the tests are in this build."
+    }
+   ],
+   "prompt": {
+    "what": "Adds START tasks for Opus 5.5 medium and Sonnet 5.5 high, sends low-effort cards to their model's medium task, and creates the Tom card with the setup steps.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a change across the board page, the sync job and the tests)",
+    "effort": "medium (the change is specified)",
+    "text": "Read CLAUDE.md. Add two entries to routines in data/board.json: Opus 5.5 medium (env OPUS_MEDIUM) and Sonnet 5.5 high (env SONNET_HIGH). Pass their URL and TOKEN secrets through .github/workflows/board-sync.yml. Make routineFor in board.html and the matching code in tools/board_sync.py send a low-effort card to its model's medium task. Keep auto: true limited to Sonnet 5.5 medium. Fable never starts automatically. Create one Tom card (ask: setup) with the exact steps and paste text to create the two tasks and four secrets, modeled on t-startsetup, blocking this card's test. Update tools/board_newcard_test.py, board_test.py and board_sync_test.py, run them, push. You have my full permission to access the repo."
+   }
   }
  ],
  "sessions": [
