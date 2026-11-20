@@ -1,3 +1,12 @@
+## follow1 (2026-11-19): Grace and Rose stay one tile behind Tom in free walking again (no more lag and catch-up in chapter 1)
+
+- Tom (11-19): the party followers lag behind Tom during free walking in chapter 1 and then catch up.
+- Reproduced first: a new free-walk check in `tools/cut_natural_test.py` (mode `free`: Tom walks 52 tiles from the north-west of the Long Island Square to the Row's south end with no scene running). On the build before this one Grace and Rose fell up to 8.1 tiles behind their spot in the walking line, for 1.8 s at a time (the test fails above 0.5 s).
+- Cause confirmed by switching it off on the same walk: `hiddenSpot` (engine/followers.js, cutpolish3) froze a follower whenever its next spot sat behind a painted cutout, and `movePlayer` applied that in normal walking. The Square is full of cutouts (trees, gate boards, roofs), so the followers froze 51 times in one walk (0 times with it off) and ran to catch up once past them. `followersWhereTheyStand` (cutpolish1) is not involved: it only runs at the end of a scene.
+- Fix: `hiddenSpot` returns false unless a scene is running (`intro.active`). The kitchen half-wall case it was written for (Rose vanishing behind it in ch1Theft) is a scene, so it still holds there.
+- New check, mode `free` of `python3 -I tools/cut_natural_test.py <out> free` (also in the default modes, also `LAYOUT=landscape`): at least 30 tiles walked, no scene or error, and no follower more than 2 tiles from its spot in the walking line for more than 0.5 s. The autopilot replaces `moveInput` (what the arrow keys feed), so it walks through the real `movePlayer`, `update` and map transitions. With the fix the worst gap is 1.0 tile in portrait and landscape.
+- Tests: `cut_natural_test.py` open, row, theft and free, portrait and landscape.
+
 ## facehold1 (2026-11-19): Cutscenes: when a scene turns someone, they stay turned; Tom faces Amy's window on Rivituso Row
 
 - Tom (11-19 17:18, screenshot of amywin1): "Tom faces the wrong way. how come you always make things facing the wrong way? ... this is a persistent issue in cut scenes".

@@ -1,6 +1,6 @@
 # Natural-play cutscene test (cutpolish1, from claude/cutscene-polish/cut_natural_run.py).
 # Plays chapter 1 scenes the way a player does: no SKIP, no FAST, Enter only after a line finished typing, state logged every 100 ms.
-# Usage: python3 -I tools/cut_natural_test.py <out dir> [modes: open row theft] [LAYOUT=landscape in the environment]
+# Usage: python3 -I tools/cut_natural_test.py <out dir> [modes: open row theft free] [LAYOUT=landscape in the environment]
 # Needs CHROMIUM and PLAYWRIGHT_BROWSERS_PATH (see claude/next.md "Tests"). Prints FAILS: [] when every check passes.
 # Checks: a scene has not ended 5 s after its last line closed; a party member named in a walk step moves; two party members share a tile
 # at the end of a scene; the arrows show during a scene; FAST or SKIP show over a modal; a queued toast shows for under 2.5 s;
@@ -10,7 +10,7 @@ from playwright.sync_api import sync_playwright
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = sys.argv[1] if len(sys.argv) > 1 else '/tmp/cutnat'
-MODES = sys.argv[2:] or ['open', 'row', 'theft']
+MODES = sys.argv[2:] or ['open', 'row', 'theft', 'free']
 LAYOUT = os.environ.get('LAYOUT', 'portrait')
 os.makedirs(OUT, exist_ok=True)
 
@@ -71,6 +71,28 @@ SETUP = {
   placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; storyWorld();
   const portal=currentMap.portals.get(key(h.door.x,h.door.y)); beginTransition(portal); }""",
 }
+
+# follow1: free walking. `moveInput` (what the arrow keys feed) is replaced by an autopilot that follows window.__ap.goals; every animation frame the page
+# records Tom's position and, for each follower in the line, where it is and where its spot in the walking line is (the same formula movePlayer uses).
+FREE_HOOK = r"""()=>{ const ap=window.__ap={goals:[],on:false,rec:[],stuck:0};
+  moveInput=function(){ if(!ap.on||player.move||transition||intro.active||dialog.active) return null;
+    const g=ap.goals[0]; if(!g){ ap.on=false; return null; }
+    if(g.map!==currentMap.id){ if(ap.goals.some(h=>h.map===currentMap.id)) ap.goals.shift(); return null; }   // the portal took Tom to the next map before his goal tile counted
+    const p={x:Math.round(player.x),y:Math.round(player.y)}; if(p.x===g.x&&p.y===g.y){ ap.goals.shift(); return null; }
+    const path=findPath(currentMap,player,g); if(!path.length){ ap.stuck++; return null; }
+    const n=path[0]; return n.x>p.x?'right':n.x<p.x?'left':n.y>p.y?'down':'up'; };
+  const spot=f=>{ const k=lineIndex(f),gap=(currentMap&&!currentMap.outside)?1.5:1,at=Math.max(0,trail.length-1-gap*(k+1)-(f.lag||0)),lo=Math.floor(at),a=trail[lo],b=trail[Math.ceil(at)];
+    if(!a||!b) return null; const fr=at-lo; return {x:a.x+(b.x-a.x)*fr,y:a.y+(b.y-a.y)*fr}; };
+  const tick=()=>{ if(ap.on){ const tp=position(player);
+      ap.rec.push({t:performance.now()/1000,map:currentMap.id,tx:tp.x,ty:tp.y,ia:!!intro.active,da:!!dialog.active,tr:!!transition,
+        f:followers.filter(f=>!f.seat).map(f=>{ const p=position(f),s=spot(f); return {id:(f.member&&f.member.id)||f.name,x:p.x,y:p.y,sx:s?s.x:null,sy:s?s.y:null,hid:!!f.hidden}; })}); }
+    requestAnimationFrame(tick); };
+  requestAnimationFrame(tick); }"""
+FREE_SETUP = """()=>{ endIntro(); resetStory('full',1); b6Prep(1); for(const k of ['opening-done','ch1-goal','ch1-amy','saw-squishy','tombo:rose1','tombo:grace1']) STORY.flags[k]=true;   // no `ride`: Rose walks too
+  setChapter(1,{apply:false}); for(const f of followers){ f.hidden=false; f.seat=false; } currentMap=town; player.x=8; player.y=6; player.facing='down'; player.hidden=false; player.move=null;
+  placeFollowers(); refreshAreaUI(); resize(); camera.snap=true; storyWorld(); }"""
+FREE_GOALS = [{'map': 'town', 'x': 13, 'y': 25}, {'map': 'row', 'x': 14, 'y': 19}]
+FREE_LIMIT = 150
 ENDFLAG = {'open': 'ch1-goal', 'row': 'ch1-amy', 'theft': 'ch1-theft'}
 LIMIT = {'open': 330, 'row': 200, 'theft': 300}
 
@@ -200,10 +222,69 @@ def analyse(mode, log, walks, errs):
     facts['pose_held_after_line'] = f'{kept}/{held}'
     return fails, facts
 
+
+def run_free(pw):
+    kw = {'args': ['--headless=new', '--no-proxy-server', '--autoplay-policy=no-user-gesture-required']}
+    if os.environ.get('CHROMIUM'): kw['executable_path'] = os.environ['CHROMIUM']
+    br = pw.chromium.launch(**kw)
+    pg = br.new_page(viewport={'width': 430, 'height': 860} if LAYOUT == 'portrait' else {'width': 860, 'height': 430})
+    errs = []; pg.on('pageerror', lambda e: errs.append(str(e)))
+    pg.goto(f'http://127.0.0.1:{port}/index.html')
+    pg.wait_for_function('()=>window.__LE&&window.__LE.playScene&&window.__LE.chapterJump', timeout=240000)
+    pg.evaluate("()=>{ splash.active=false; document.getElementById('splash').hidden=true; }")
+    if LAYOUT == 'landscape': pg.evaluate("()=>{ layout.mode='landscape'; applyLayout(); }")
+    pg.evaluate(FREE_SETUP)
+    pg.evaluate(FREE_HOOK)
+    pg.evaluate("g=>{ window.__ap.goals=g; window.__ap.on=true; }", FREE_GOALS)
+    t0 = time.time(); shots = 0
+    while time.time() - t0 < FREE_LIMIT:
+        pg.wait_for_timeout(500)
+        st = pg.evaluate("()=>({on:window.__ap.on,n:window.__ap.goals.length,map:currentMap.id,ia:!!intro.active,stuck:window.__ap.stuck})")
+        if shots < 6 and st['on']: pg.screenshot(path=os.path.join(OUT, f'free-{LAYOUT}-{shots}.png')); shots += 1
+        if not st['on'] or st['ia'] or st['stuck'] > 20: break
+    res = pg.evaluate("()=>({rec:window.__ap.rec,stuck:window.__ap.stuck,ia:!!intro.active,left:window.__ap.goals.length})")
+    br.close()
+    return res, errs
+
+def analyse_free(res, errs):
+    fails = []; rec = res['rec']; facts = {}
+    if errs: fails.append(f'free: page errors {errs[:3]}')
+    if res['ia']: fails.append('free: a scene started during the walk')
+    if res['stuck'] > 20: fails.append('free: the autopilot found no path')
+    if res['left']: fails.append(f"free: the walk did not finish ({res['left']} goals left)")
+    tiles = 0; last = None
+    for r in rec:
+        c = (r['map'], round(r['tx']), round(r['ty']))
+        if abs(r['tx'] - round(r['tx'])) < .01 and abs(r['ty'] - round(r['ty'])) < .01 and c != last: tiles += 1 if last and last[0] == c[0] else 0; last = c
+    facts['tom_tiles_walked'] = tiles
+    if tiles < 30: fails.append(f'free: Tom walked only {tiles} tiles (need 30)')
+    worst = {}; bad = {}; first = {}
+    for r in rec:
+        if r['tr']: continue
+        for f in r['f']:
+            if f['sx'] is None: continue
+            d = ((f['x'] - f['sx']) ** 2 + (f['y'] - f['sy']) ** 2) ** .5
+            worst[f['id']] = max(worst.get(f['id'], 0), d)
+            if d > 2:
+                b = bad.setdefault(f['id'], {'start': None, 'longest': 0})
+                if b['start'] is None: b['start'] = r['t']; first.setdefault(f['id'], (r['map'], round(r['tx'], 1), round(r['ty'], 1), round(f['x'], 1), round(f['y'], 1), round(f['sx'], 1), round(f['sy'], 1)))
+                b['longest'] = max(b['longest'], r['t'] - b['start'])
+            elif f['id'] in bad: bad[f['id']]['start'] = None
+    facts['frames'] = len(rec); facts['worst_follower_off_spot_tiles'] = {k: round(v, 2) for k, v in worst.items()}
+    facts['longest_off_spot_over_2_tiles_s'] = {k: round(v['longest'], 2) for k, v in bad.items()}
+    for k, v in bad.items():
+        if v['longest'] > .5: fails.append(f"free: {k} was more than 2 tiles off its line spot for {v['longest']:.2f} s (map, tom, follower, spot: {first[k]})")
+    return fails, facts
+
 if __name__ == '__main__':
     allf = []; res = {}
     with sync_playwright() as pw:
         for m in MODES:
+            if m == 'free':
+                fr, ferrs = run_free(pw)
+                json.dump({'res': fr, 'errs': ferrs}, open(os.path.join(OUT, f'free-{LAYOUT}.json'), 'w'))
+                f, facts = analyse_free(fr, ferrs); allf += f; res[m] = facts
+                print(m, LAYOUT, json.dumps(facts)[:900]); continue
             log, walks, errs, pre = run(pw, m)
             json.dump({'log': log, 'walks': walks, 'errs': errs, 'pre': pre}, open(os.path.join(OUT, f'{m}-{LAYOUT}.json'), 'w'))
             f, facts = analyse(m, log, walks, errs); allf += f; res[m] = facts

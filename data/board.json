@@ -1353,7 +1353,7 @@
    "theme": "Story and Dialogue",
    "lane": "claude",
    "col": "prog",
-   "next": "Reproduce the lag with a free-walk test, confirm whether hiddenSpot (cutpolish3) or followersWhereTheyStand (cutpolish1) causes it, restrict the fix to the cause, test portrait and landscape, push.",
+   "next": "Shipped: Grace and Rose stay one tile behind Tom in free walking. The lag came from hiddenSpot (cutpolish3) freezing followers behind painted cutouts; it now applies only while a scene runs. New free-walk check in tools/cut_natural_test.py.",
    "blocks": [],
    "changed": "2026-11-19",
    "created": "2026-11-19",
@@ -1369,6 +1369,10 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Built follow1: reproduced the lag (followers up to 8.1 tiles off their spot in a 52 tile walk), confirmed hiddenSpot as the cause (51 freezes; 0 and worst gap 1.0 with it off), restricted it to running scenes, added the free-walk check. cut_natural_test open, row, theft, free pass in portrait and landscape."
     }
    ],
    "prompt": {
@@ -1380,7 +1384,8 @@
     "effort": "medium (one suspected cause, one test to add)",
     "text": "Read claude/handoff-rules.md, then fix the follower lag in free walking (tag follow1): reproduce it first with a free-walk check in tools/cut_natural_test.py, confirm the cause (hiddenSpot in engine/followers.js, else followersWhereTheyStand), fix only that, test portrait and landscape. You have my full permission to access the repo."
    },
-   "tag": "follow1"
+   "tag": "follow1",
+   "after": "t-follow1play"
   },
   {
    "id": "c-copydocs",
@@ -1651,6 +1656,29 @@
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19"
+  },
+  {
+   "id": "t-follow1play",
+   "title": "Walk the Square and Rivituso Row and check Grace and Rose keep up",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "up",
+   "ask": "play",
+   "fyi": true,
+   "next": "After the publish of build follow1: RELOAD on the title, load a chapter 1 save after the kitchen, and walk from the top of the Long Island Square down to the south exit and on through Rivituso Row. Grace and Rose should stay one tile behind you the whole way and never stop and run to catch up. Report with the REPORT tab if they still do (follow1 is the build to name).",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "\"Party followers lag behind Tom during free walking in chapter 1 and then catch up.\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Added by follow1: your phone check of the follower fix; blocks nothing."
+    }
+   ]
   }
  ],
  "sessions": [

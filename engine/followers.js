@@ -56,9 +56,12 @@ function followerToSpot(f,k,duration) {
 function lineIndex(f) { let k=0; for(const o of followers) { if(o===f) return k; if(!o.seat) k++; } return k; }
 // True when the spot t sits behind a painted cutout (engine/story.js huddleHidden) and the follower's own tile does not: it stays on its last visible spot
 // (audit 3l: Rose walked behind the kitchen half-wall and vanished). The tile stays walkable for everyone else; a follower already hidden is let out.
+// Scenes only (follow1): in free walking the Square's trees and gate boards hid the next spot all the time, so the followers stood still until Tom was
+// several tiles ahead and then ran to catch up.
 const _hiddenMemo={map:null,memo:null};
 function hiddenSpot(f,t) {
   if(typeof huddleHidden!=='function'||!currentMap) return false;
+  if(typeof intro==='undefined'||!intro.active) return false;   // follow1: only while a scene runs; in free walking it froze followers behind every tree and board (the Square lag)
   if(_hiddenMemo.map!==currentMap) { _hiddenMemo.map=currentMap; _hiddenMemo.memo=new Map(); }
   const m=_hiddenMemo.memo,tx=Math.round(t.x),ty=Math.round(t.y);
   return huddleHidden(currentMap,tx,ty,m)&&!huddleHidden(currentMap,Math.round(f.x),Math.round(f.y),m);
