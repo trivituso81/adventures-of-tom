@@ -179,6 +179,14 @@ b = mk(); card(b, 'c-auto').update(col='up', start=True, prompt=dict(PR, model='
 bs.sync(b, [], None, None, None, NOW, fire, {'sonnet-medium': True})
 check('R9: an Opus card is never started (no task for it)', card(b, 'c-auto')['col'] == 'up' and 'not set up' in card(b, 'c-auto')['history'][-1]['t'])
 
+# backlog1: a card Tom parked in the backlog never starts by itself, even when its blocker finishes or START is set
+b = mk(auto=True, backlog={'at': '2026-11-20', 'from': 'wait'}); fired.clear()
+bs.sync(b, [], None, None, None, NOW, fire, {'sonnet-medium': True})
+check('backlog1: an auto card in the backlog is released but not started', not fired and card(b, 'c-auto')['col'] == 'up' and card(b, 'c-auto').get('backlog') and not card(b, 'c-auto').get('start'), (fired, card(b, 'c-auto')['col']))
+card(b, 'c-auto')['start'] = True
+bs.sync(b, [], None, None, None, NOW, fire, {'sonnet-medium': True})
+check('backlog1: START on a card in the backlog is dropped', not fired and not card(b, 'c-auto').get('start') and card(b, 'c-auto')['col'] == 'up')
+
 b = {'cards': [dict(id='t-n', lane='tom', col='done', done='2026-11-19', ask='play', theme='Tools', title='Play it', next='n', changed='2026-11-19', blocks=[], note='the door <sticks>'),
                dict(id='t-m', lane='tom', col='done', done='2026-11-19', ask='play', theme='Tools', title='No note', next='n', changed='2026-11-19', blocks=[])], 'lanes': [], 'sessions': []}
 bs.sync(b, [], None, None, None, NOW)

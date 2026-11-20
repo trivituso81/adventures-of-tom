@@ -131,6 +131,8 @@ textarea{font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px 
 .shot{display:flex;align-items:center;gap:10px;margin:8px 0;flex-wrap:wrap}
 .shot img{max-height:90px;border-radius:8px;border:1px solid var(--btn)}
 .fixnext{color:var(--muted);font-size:13px;margin-top:6px;font-weight:600}
+.card .bkl{color:var(--muted);font-size:13px;margin-top:6px}
+button.addto{width:100%;margin-top:8px;min-height:44px}
 .what{font-size:17px;font-weight:700;color:var(--text);margin:8px 0}
 #lanesView{display:none}
 @media (min-width:860px){
@@ -177,7 +179,7 @@ const nowMs=()=>Date.now();
 const ASKS=[['play','PLAY AND REPORT'],['pictures','REVIEW PICTURES'],['animations','REVIEW ANIMATIONS'],['voice','VOICE'],['script','READ A SCRIPT'],['decide','DECIDE'],['setup','SET UP']];
 const askName=k=>(ASKS.find(a=>a[0]===k)||[k,'OTHER'])[1];
 const REVIEW=['play','pictures','animations','voice','script'];   // board4: cards Tom tests or looks at get All good and Something is wrong
-const isReview=c=>!!c&&c.lane==='tom'&&c.col!=='done'&&REVIEW.includes(c.ask);
+const isReview=c=>!!c&&!c.backlog&&c.lane==='tom'&&c.col!=='done'&&REVIEW.includes(c.ask);
 const HIST=id=>' Board card '+id+'. Read its history first: my notes and answers are there.';
 const FIRST=id=>' Your first push is the commit board: start '+id+' (it moves this card to In progress and links your conversation).';
 const withId=c=>{let t=(c.prompt&&c.prompt.text)||'';if(t.indexOf('Read its history first')<0)t+=HIST(c.id);if(t.indexOf('board: start '+c.id)<0)t+=FIRST(c.id);return t;};   // board5: a pasted prompt always claims its card
@@ -273,7 +275,11 @@ function menuOpen(v){$('menu').style.display=v?'block':'none';$('menub').setAttr
 const laneName=id=>(B.lanes.find(l=>l.id===id)||{name:id}).name;
 const cardById=id=>B.cards.find(c=>c.id===id);
 const themeOk=c=>!theme||c.theme===theme;
-const open=()=>B.cards.filter(c=>c.col!=='done'&&themeOk(c));
+const inBacklog=c=>!!c&&!!c.backlog&&c.col!=='done';   // backlog1: parked by Tom; keeps its lane, out of every list until Add to ... puts it back
+const open=()=>B.cards.filter(c=>c.col!=='done'&&!c.backlog&&themeOk(c));
+const secBacklog=()=>B.cards.filter(c=>inBacklog(c)&&themeOk(c)).sort((a,b)=>String((b.backlog||{}).at||'').localeCompare(String((a.backlog||{}).at||'')));
+const laneOwner=id=>{const n=laneName(id);return n+(/s$/i.test(n)?"'":"'s");};
+const BKL_HINT='parked work: tap Add to put it back on the to-do list';
 const blockedBy=c=>B.cards.filter(x=>x.col!=='done'&&(x.blocks||[]).includes(c.id));
 const blocksOpen=c=>(c.blocks||[]).map(cardById).filter(x=>x&&x.col!=='done');
 const QUIET_MS=6*36e5;
@@ -284,7 +290,7 @@ const waitsOnClaude=c=>c.lane==='tom'&&c.col==='wait'&&blockedBy(c).some(k=>k.la
 // card that is already finished. Plan difference: "no change for 1 day" applies to Working now cards only, because a card queued behind a long build, or
 // waiting for Tom to press START, is not late, and the plan's own rule is that an ordinary queue is never red.
 function attnWhy(c){
-  if(c.lane==='tom'||c.col==='done')return '';
+  if(c.lane==='tom'||c.col==='done'||c.backlog)return '';
   if(c.start_error)return 'START failed last time: '+c.start_error;
   if(c.service&&c.col==='wait')return 'A run failed: '+String(c.next||'').slice(0,120);
   const last=(c.history||[]).slice(-1)[0];
@@ -301,6 +307,7 @@ function attnWhy(c){
 }
 function statusOf(c){
   if(c.col==='done')return 'done';
+  if(c.backlog)return 'backlog';
   if(c.lane==='tom')return c.col==='wait'?(waitsOnClaude(c)?'back':'queued'):'mine';
   if(attnWhy(c))return 'attn';
   if(c.col==='prog'||c.start)return 'run';
@@ -311,7 +318,7 @@ const byStatus=k=>open().filter(c=>statusOf(c)===k);
 const secYour=()=>byStatus('mine'),secBack=()=>byStatus('back'),secReady=()=>byStatus('ready'),secRun=()=>byStatus('run'),secQueued=()=>byStatus('queued'),secAttn=()=>byStatus('attn');
 const secDone=()=>B.cards.filter(c=>c.col==='done'&&!c.retired&&c.done&&dayNum(today())-dayNum(c.done)<=3&&themeOk(c));
 const routineFor=c=>{const p=c.prompt;if(!p)return null;return (B.routines||[]).find(r=>String(p.model||'').startsWith(r.model)&&String(p.effort||'').startsWith(r.effort))||null;};
-const startable=c=>{const r=routineFor(c);return !!(r&&r.enabled&&c.lane==='claude'&&c.col==='up'&&!c.start&&!blockedBy(c).length);};
+const startable=c=>{const r=routineFor(c);return !!(r&&r.enabled&&!c.backlog&&c.lane==='claude'&&c.col==='up'&&!c.start&&!blockedBy(c).length);};
 const sessionFor=c=>(B.sessions||[]).find(s=>s.url&&s.url===(c.chat||{}).url);
 const modelShort=c=>{const p=c.prompt;if(!p)return '';return String(p.model||'').split(' (')[0].replace('Claude ','')+', '+String(p.effort||'').split(' ')[0];};
 function convState(s){
@@ -357,6 +364,7 @@ function cardHtml(c,ctx){
   if(c.lane==='claude'&&c.col!=='done'&&c.prompt&&(ctx==='ready'||ctx==='queued'||ctx==='attn')) row='<div class="row">'+(startable(c)?'<button class="small good" type="button" data-act="start" data-id="'+esc(c.id)+'">START</button>':'')+'<button class="small gold" type="button" data-act="copy" data-id="'+esc(c.id)+'">Copy prompt</button></div>';
   if(c.start_error&&c.col!=='done'&&ctx!=='attn') extra+='<div class="quiet">START failed last time: '+esc(c.start_error)+'</div>';
   if(isReview(c)&&(c.col==='up'||c.col==='prog')) row+=picsHtml(c,true)+rvBtns(c.id);
+  if(ctx==='backlog'){extra='<div class="bkl">'+esc(laneName(c.lane))+(c.backlog&&c.backlog.at?' · parked '+esc(c.backlog.at):'')+'</div>';row='<button class="good addto" type="button" data-act="unbacklog" data-id="'+esc(c.id)+'">Add to '+esc(laneOwner(c.lane))+' to-do</button>';}
   const dot=CH.ids.has(c.id)?'<span class="chg" title="Changed since you last looked"></span>':'';
   return '<div class="card" role="button" tabindex="0" data-id="'+esc(c.id)+'"><div class="t">'+esc(c.title)+dot+'</div><div class="n">'+esc(c.next)+'</div>'+linksHtml(c)+'<div class="meta">'+meta+'</div>'+extra+row+'</div>';
 }
@@ -401,11 +409,12 @@ function renderSections(){
   if(show('attn')) h+=sec('attn','NEEDS ATTENTION','late, failed or stopped',secAttn().filter(ch),c=>cardHtml(c,'attn'),true,false,true);
   if(!only) h+=sec('conv','CONVERSATIONS','last 3 days, newest push first',cv,convHtml,false);
   if(!only) h+=sec('done','DONE','closed in the last 3 days',secDone(),c=>cardHtml(c,'done'),false);
+  if(!only) h+=sec('backlog','BACKLOG',BKL_HINT,secBacklog(),c=>cardHtml(c,'backlog'),false);   // backlog1: always last, closed until Tom opens it
   if(!only&&!(B.sessions||[]).length) h=h.replace('<div class="none">Nothing here</div></details><details class="sec" data-sec="done"','<div class="none">None recorded yet: the sync job fills this after the next push.</div></details><details class="sec" data-sec="done"');
   $('secView').innerHTML=h;
 }
 function renderLanes(){
-  const vis=c=>themeOk(c)&&(c.col!=='done'||(!c.retired&&c.done&&dayNum(today())-dayNum(c.done)<=3));
+  const vis=c=>themeOk(c)&&!inBacklog(c)&&(c.col!=='done'||(!c.retired&&c.done&&dayNum(today())-dayNum(c.done)<=3));
   const cvh=recentConvs();
   let h=sec('conv','CONVERSATIONS','last 3 days, newest push first',cvh,convHtml,false);
   h+=B.lanes.map(l=>{
@@ -419,7 +428,8 @@ function renderLanes(){
     }).join('');
     return '<details class="lane" data-lane="'+l.id+'" open><summary><span class="nm">'+esc(l.name)+'</span><span class="cv">'+esc(l.covers)+'</span><span class="ct'+(openN&&l.id==='tom'?' has':'')+'">'+openN+'</span></summary><div class="cols">'+cols+'</div></details>';
   }).join('');
-  h+=sec('done','DONE','closed in the last 3 days',secDone(),c=>cardHtml(c,'done'),false);   // no Done column: finished cards sit below the board, closed
+  h+=sec('done','DONE','closed in the last 3 days',secDone(),c=>cardHtml(c,'done'),false);
+  h+=sec('backlog','BACKLOG',BKL_HINT,secBacklog(),c=>cardHtml(c,'backlog'),false);   // no Done column: finished cards sit below the board, closed
   $('lanesView').innerHTML=h;
 }
 // ---- artgen1: Generate all pictures from the card. The page saves `gen` on the card with the message "board: generate <id>"; the GitHub Action art-gen
@@ -515,6 +525,7 @@ function openSheet(id){
   const c=cardById(id);if(!c)return;cur=id;
   const bl=blocksOpen(c),bb=blockedBy(c),p=c.prompt;
   let h='<h2>'+esc(c.title)+'</h2><div class="meta" style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag" style="background:'+(THEME_COL[c.theme]||'#ccc')+'">'+esc(c.theme)+'</span><span class="age">'+(c.col==='done'?'done '+esc(c.done||''):ageOf(c)+' days since last change')+'</span><span class="age">'+esc(laneName(c.lane))+' / '+esc((B.columns.find(x=>x.id===c.col)||{}).name)+'</span></div>';
+  if(inBacklog(c)) h+='<h4>In the backlog</h4><p>Parked'+(c.backlog.at?' on '+esc(c.backlog.at):'')+'. Nothing happens to it until you add it back.</p><button class="good addto" type="button" data-act="unbacklog" data-id="'+esc(c.id)+'">Add to '+esc(laneOwner(c.lane))+' to-do</button>';
   if(c.lane==='tom'&&c.ask&&c.col!=='done') h+='<h4>What you do</h4><p><span class="ask">'+esc(askName(c.ask))+'</span></p>';
   h+='<h4>Next step</h4><p style="white-space:pre-line">'+esc(c.next)+'</p>';
   h+=linksHtml(c);
@@ -541,9 +552,9 @@ function openSheet(id){
     h+='<button class="small gold" id="bcopy" type="button">Copy prompt</button>';
   }
   h+='<h4>History</h4><details><summary class="hint">'+((c.history||[]).length)+' entries (tap to open)</summary><ul>'+(c.history||[]).slice().reverse().map(x=>'<li>'+esc(x.d)+': '+esc(x.t)+'</li>').join('')+'</ul></details>';
-  const mine=c.lane==='tom'&&c.col!=='done',any=c.col!=='done',dec=mine&&c.ask==='decide'&&(c.choices||[]).length;
+  const bk=inBacklog(c),mine=c.lane==='tom'&&c.col!=='done'&&!bk,any=c.col!=='done',dec=mine&&c.ask==='decide'&&(c.choices||[]).length;
   if(dec){h+='<h4>Pick one</h4>'+c.choices.map((x,i)=>'<button class="ch'+(i===0?' rec':'')+'" type="button" data-choice="'+i+'">'+esc(x)+((c.leads||[])[i]?'<small>'+esc(c.leads[i])+'</small>':'')+'</button>').join('')+'<button class="ch" type="button" data-choice="other">Something else<small>Type your own answer</small></button>';}
-  h+='<div class="btns">'+(mine&&!dec&&!isReview(c)?'<button class="good" id="bdid" type="button">I did this</button>':'')+(mine&&!isReview(c)?'<button class="gold" id="btake" type="button">Claude takes this</button>':'')+(any?'<button id="bnot" type="button">Not needed</button>':'')+'<button id="bnote" type="button">Note</button><button id="bclose" type="button">Close</button></div><div id="act"></div><p class="err" id="serr"></p>';
+  h+='<div class="btns">'+(mine&&!dec&&!isReview(c)?'<button class="good" id="bdid" type="button">I did this</button>':'')+(mine&&!isReview(c)?'<button class="gold" id="btake" type="button">Claude takes this</button>':'')+(any&&!bk?'<button id="bback" type="button">Send to backlog</button>':'')+(any?'<button id="bnot" type="button">Not needed</button>':'')+'<button id="bnote" type="button">Note</button><button id="bclose" type="button">Close</button></div><div id="act"></div><p class="err" id="serr"></p>';
   $('sheet').innerHTML=h;$('sheet').style.display='block';$('dim').style.display='block';$('sheet').scrollTop=0;
 }
 function closeSheet(){$('sheet').style.display='none';$('dim').style.display='none';cur=null;}
@@ -578,7 +589,8 @@ function savedScreen(id){
   nx.forEach(k=>{
     const other=blockedBy(k);
     h+='<h4>Next: '+esc(k.title)+'</h4>';
-    if(other.length) h+='<p>It still waits on: '+esc(other.map(x=>x.title).join('; '))+'.</p>';
+    if(k.backlog) h+='<p>It is in the backlog. Open BACKLOG at the bottom and tap Add to put it back.</p>';
+    else if(other.length) h+='<p>It still waits on: '+esc(other.map(x=>x.title).join('; '))+'.</p>';
     else if(k.lane==='claude'&&k.prompt){
       h+=k.auto&&routineFor(k)&&routineFor(k).enabled?'<p>It starts by itself in about a minute. The link appears on its card.</p>':'<p>Start it in a NEW conversation. Your note and answer are on its card, so you never go back to the old chat.</p><p><b>Model:</b> '+esc(k.prompt.model||'')+'<br><b>Effort:</b> '+esc(k.prompt.effort||'')+'</p>';
       if(!(k.auto&&routineFor(k)&&routineFor(k).enabled)) h+='<div class="btns">'+(startable(k)?'<button class="good" type="button" data-act="start" data-id="'+esc(k.id)+'">START</button>':'')+'<button class="small gold" type="button" data-act="copy" data-id="'+esc(k.id)+'">Copy prompt</button></div>';
@@ -592,6 +604,16 @@ async function startCard(id){
   try{await save('board: start-request '+id,d=>{const c=d.cards.find(z=>z.id===id);if(c&&c.col!=='done'&&c.col!=='prog'){c.start=true;touch(c,'Tom tapped START.');}return d;});
     toast('Starting');render();$('sheet').innerHTML='<h2>Starting.</h2><p>The conversation opens on '+esc(modelShort(cardById(id)||{prompt:{}}))+' in about a minute. Its link appears on the card and in CONVERSATIONS. Nothing to copy.</p><div class="btns"><button id="bclose" type="button">Close</button></div>';$('sheet').style.display='block';$('dim').style.display='block';}
   catch(e){if($('serr'))$('serr').textContent=e.message;else toast(e.message);}
+}
+// ---- backlog1: Send to backlog (any open card, any lane) and Add to <lane>'s to-do (one tap on the backlog card). The card keeps its lane; `backlog`
+// hides it from every list. In progress goes back to Up next (nobody is on it); Waiting stays Waiting, and the sync job still releases it when its blocker finishes.
+function sendBacklog(id){
+  run('board: backlog '+id,d=>{const z=d.cards.find(q=>q.id===id);if(z&&z.col!=='done'){z.backlog={at:today(),from:z.col};if(z.col==='prog')z.col='up';delete z.start;delete z.quiet;touch(z,'Tom sent this to the backlog.');}return d;},'Sent to the backlog');
+}
+function unBacklog(id){
+  const c=cardById(id);if(!c)return;const who=laneOwner(c.lane);
+  save('board: unbacklog '+id,d=>{const z=d.cards.find(q=>q.id===id);if(z&&z.backlog){delete z.backlog;touch(z,'Tom added this back to '+who+' to-do.');}return d;})
+    .then(()=>{toast('Added to '+who+' to-do');if(cur===id)closeSheet();render();}).catch(e=>toast(e.message));
 }
 // ---- board4: All good and Something is wrong on the cards Tom tests or looks at.
 // Something is wrong saves his words (and a screenshot on branch inbox, folder board-shots) into a Claude fix card; the tested card waits on it and
@@ -640,7 +662,7 @@ async function sendWrong(id){
       const z=d.cards.find(q=>q.id===id);if(!z)throw new Error('This card is gone from the board. Close and reload.');
       const [model,effort]=fixModel(z),rt=(d.routines||[]).find(r=>r.enabled&&model.startsWith(r.model)&&effort.startsWith(r.effort));
       const waits=k=>d.cards.some(x=>x.col!=='done'&&(x.blocks||[]).includes(k.id));
-      let f=d.cards.find(k=>k.fix&&k.lane==='claude'&&k.col==='up'&&!k.start&&k.theme===z.theme&&k.prompt&&String(k.prompt.model).split(' (')[0]===model.split(' (')[0]&&!waits(k)),merged=!!f;
+      let f=d.cards.find(k=>k.fix&&k.lane==='claude'&&k.col==='up'&&!k.start&&!k.backlog&&k.theme===z.theme&&k.prompt&&String(k.prompt.model).split(' (')[0]===model.split(' (')[0]&&!waits(k)),merged=!!f;
       if(!f){
         const tags=new Set(d.cards.map(k=>k.tag)),idsT=new Set(d.cards.map(k=>k.id)),base=z.id.replace(/^t-/,'');let n=1,fid='c-fix-'+base,tag='fix-'+base;
         while(idsT.has(fid)||tags.has(tag)){n++;fid='c-fix-'+base+'-'+n;tag='fix-'+base+'-'+n;}
@@ -682,7 +704,7 @@ document.addEventListener('change',async e=>{
 async function markCopied(id){
   const c=cardById(id);if(!c||c.lane!=='claude'||c.col!=='up'||blockedBy(c).length)return;
   if(!hasTok()){toast('Prompt copied. This browser cannot save, so the card moves when the conversation first pushes.');return;}
-  try{await save('board: copied '+id,d=>{const z=d.cards.find(q=>q.id===id);if(z&&z.col==='up'){z.col='prog';delete z.start;delete z.quiet;z.chat={url:'',opening:'pasted by Tom from the board'};touch(z,'Tom copied the prompt to paste it into a new conversation.');}return d;});render();toast('Prompt copied. Card moved to In progress.');}
+  try{await save('board: copied '+id,d=>{const z=d.cards.find(q=>q.id===id);if(z&&z.col==='up'){z.col='prog';delete z.backlog;delete z.start;delete z.quiet;z.chat={url:'',opening:'pasted by Tom from the board'};touch(z,'Tom copied the prompt to paste it into a new conversation.');}return d;});render();toast('Prompt copied. Card moved to In progress.');}
   catch(e){toast('Prompt copied, but the card did not move: '+e.message);}
 }
 function copyText(x){const ok=()=>toast('Prompt copied');
@@ -698,6 +720,7 @@ document.addEventListener('click',e=>{
   const act=t.closest('[data-act]');
   if(act&&act.dataset.act==='copy'){const c=cardById(act.dataset.id);if(c&&c.prompt){copyText(withId(c));markCopied(c.id);}e.stopPropagation();return;}
   if(act&&act.dataset.act==='start'){startCard(act.dataset.id);e.stopPropagation();return;}
+  if(act&&act.dataset.act==='unbacklog'){unBacklog(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='gen'){genTap(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='good'){allGood(act.dataset.id);e.stopPropagation();return;}
   if(act&&act.dataset.act==='wrong'){wrongForm(act.dataset.id);e.stopPropagation();return;}
@@ -730,6 +753,7 @@ document.addEventListener('click',e=>{
       c.prompt={what:'Works out what Tom wants from his note, rewrites this card, and does the work.',before:['Nothing to do first.'],model:'Claude Sonnet 5.5 (row C: the steps are not written yet)',effort:'medium (a handed-over card is usually one piece of work)',
         text:'Read claude/handoff-rules.md. Tom handed you board card '+id+' with this note: '+tx+'. Work out what is needed, rewrite the card, and do it.'+PERM};
       touch(c,'Tom handed this to Claude: '+tx);}return d;},'Handed to Claude');return;}
+  if(t.id==='bback'){sendBacklog(cur);return;}
   if(t.id==='bnot'){showAct('<input type="text" id="ntxt" placeholder="Why is it not needed?"><button class="gold" id="bnotgo" type="button">Retire this card</button>');return;}
   if(t.id==='bnotgo'){const id=cur,tx=clean($('ntxt').value);if(!tx){$('serr').textContent='Say why in a few words.';return;}
     run('board: retire '+id,d=>{const c=d.cards.find(z=>z.id===id);if(c){c.col='done';c.done=today();c.retired=true;delete c.waiting_on;delete c.quiet;touch(c,'Not needed: '+tx);}return d;},'Retired');return;}

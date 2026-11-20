@@ -6710,14 +6710,15 @@
   },
   {
    "id": "t-ch1starving",
-   "title": "Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped)",
+   "title": "Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end",
    "theme": "Voice Clips",
    "lane": "tom",
-   "col": "wait",
+   "col": "done",
    "ask": "voice",
-   "fyi": true,
-   "next": "ADMIN > VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. Reload the page first (pull down or close and reopen it). The script box must end \"Grace, I'm so sorry but number two can't wait.\" with no \"[hungry] I'm starving!\", and your other directions ([wary, disgusted, amused], [pause, very very deadpan], [very dismissive]) must still be there. If you still see \"I'm starving!\", press Something is wrong and say where (the box, the subtitle in the game, or the voice). If you meant to keep \"I'm starving!\" in the script, say so in the note. Press play: the take you kept, unchanged. Nothing to record. Then All good.",
-   "blocks": [],
+   "next": "Build fix-ch1starving-3 is live now (your last try was about 40 seconds too early, so you had the old page). Close the Voice Library fully and reopen it with the button below (Open in the Voice Library: Tom's line). The script box ends \"...number two can't wait. [hungry] I'm starving!\" and stays when you tap out. Tap Takes and record, make takes until one says the whole line, keep it, then press Send my takes to Claude. That starts card Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub). Until then the game plays your old take.",
+   "blocks": [
+    "c-ch1starving-sub"
+   ],
    "changed": "2026-11-20",
    "created": "2026-11-19",
    "chat": {
@@ -6756,6 +6757,38 @@
     {
      "d": "2026-11-20",
      "t": "Tom: something is wrong: I'm starving. should not have been dropped Sent to Claude as card c-fix-ch1starving-3; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "fix-ch1starving-3: \"[hungry] I'm starving!\" is back in the script (repo copy and Voice Library), the line is listed under Show > New direction, the old take keeps playing. Tom chose: \"Keep it, I'll re-record\"."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix what you found on: Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\", Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! , Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving!  is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Answer from \"Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! \": Keep it, I'll re-record"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: It still doesn't say I'm starving at the end and when I try to type it in and then re-record it, it deletes the words as soon as I tap out of the box Sent to Claude as card c-fix-ch1starving-4; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix what you found on: Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\", Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! , Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! , Fix what you found on: Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Answer from \"Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! \": Keep it, I'll re-record"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
     }
    ],
    "links": [
@@ -6767,7 +6800,7 @@
      "label": "Tom's line"
     }
    ],
-   "waiting_on": "claude"
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-ch1starving",
@@ -7039,7 +7072,7 @@
    "created": "2026-11-19",
    "changed": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDZUaRAm9k2zMUUbic",
+    "url": "https://claude.ai/code/session_01RXeukDZUaRAm9k2zMUUbic",
     "opening": "not started"
    },
    "history": [
@@ -7058,6 +7091,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -8184,7 +8221,7 @@
   {
    "id": "t-cardlinks1try",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -8204,6 +8241,14 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: nothing was left for it to wait on."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good."
     }
    ],
    "links": [
@@ -8222,7 +8267,8 @@
      "label": "Tom's line"
     }
    ],
-   "next": "After the publish of build cardlinks1: ADMIN > BOARD, open the card Try Generate all on the new Mudling sheet card and tap Open in the Art Library: the Mudling sheet. The Art Library should open on that exact entry, its group and row open. Then open the card Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped) and tap Open in the Voice Library: it should open on Tom's line with its takes shown. All good or Something is wrong."
+   "next": "After the publish of build cardlinks1: ADMIN > BOARD, open the card Try Generate all on the new Mudling sheet card and tap Open in the Art Library: the Mudling sheet. The Art Library should open on that exact entry, its group and row open. Then open the card Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped) and tap Open in the Voice Library: it should open on Tom's line with its takes shown. All good or Something is wrong.",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-oldchecks",
@@ -8331,11 +8377,11 @@
    "id": "c-fix-ch1starving-3",
    "tag": "fix-ch1starving-3",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Voice Clips",
    "title": "Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! ",
-   "next": "You reported a problem on Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped). Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: I'm starving. should not have been dropped",
+   "next": "Shipped as fix-ch1starving-3: \"I'm starving!\" restored in the script; the stripping code from the two earlier fixes is removed. Tom re-records (t-ch1starving), then c-ch1starving-sub changes the subtitle and merges the take.",
    "blocks": [
     "t-ch1starving"
    ],
@@ -8376,6 +8422,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-ch1starving-3: \"I'm starving!\" is back at the end of Tom's \"Thank you for telling me, Rose\" script, ready for you to re-record"
     }
    ],
    "prompt": {
@@ -8388,7 +8438,8 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch1starving-3 and t-ch1starving in data/board.json, history included. Your first push is the commit board: start c-fix-ch1starving-3.\n\nTom tested and found problems:\n1. Card t-ch1starving (Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! dropped), ask voice). He was asked: ADMIN ) VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. Reload the page first (pull down or close and reopen it). The script box must end \"Grace, I'm so sorry but number two can't wait.\" with no \"[hungry] I'm starving!\", and your other directions ([wary, disgusted, amused], [pause, very very deadpan], [very dismissive]) must still be there. If you still see \"I'm starving!\", press Something is wrong and say where (the box, the subtitle in the game, or the voice). If you meant to keep \"I'm starving!\" in the script, say so in the note. Press play: the take you kept, unchanged. Nothing to record. Then All good. He wrote: I'm starving. should not have been dropped\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:16:40.684Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch1starving to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch1starving, and give the build fix-ch1starving-3 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-ch1starving",
-   "answer": "Keep it, I'll re-record"
+   "answer": "Keep it, I'll re-record",
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-oldchecks-voice",
@@ -8634,9 +8685,196 @@
      "t": "Added with c-ch6left."
     }
    ]
+  },
+  {
+   "id": "c-ch1starving-sub",
+   "title": "Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub)",
+   "theme": "Voice Clips",
+   "lane": "claude",
+   "col": "prog",
+   "tag": "ch1starving-sub",
+   "auto": true,
+   "next": "Waits on your new take of Tom's line (card t-ch1starving). Then it adds \"I'm starving!\" to the end of the line in the game (subtitle) and merges your take, so the game shows and plays the whole line.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukER5KXdV8sp6XLkaer",
+    "opening": "not started"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by fix-ch1starving-3. Tom (11-20): \"Keep it, I'll re-record\". The takes merge leaves out a take whose words differ from the subtitle, so the subtitle must change in the same push as the merge."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom answered, so this card starts by itself."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
+    }
+   ],
+   "prompt": {
+    "what": "Adds \"I'm starving!\" to Tom's line in the game and merges your new take of it.",
+    "before": [
+     "Make and keep the new take in the Voice Library, then press Send my takes to Claude (card t-ch1starving)."
+    ],
+    "model": "Claude Sonnet 5.5 (row B: written steps, tests catch mistakes)",
+    "effort": "medium (steps are known)",
+    "text": "Read CLAUDE.md, docs/VOICE.md and docs/CHANGES.md sections fix-ch1starving-3 and takes1, then card c-ch1starving-sub in data/board.json with its history. Your first push is the commit board: start c-ch1starving-sub. In data/scenes.js (scene ch1, Tom's line \"Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait.\") append \" I'm starving!\" to the subtitle, move the line's script entry in tools/voice-library/scripts/ch01-story-directions.json and tools/voice-library/retake.json to the new text, then merge Tom's newest kept take of that line from branch takes under the new text (the take whose script ends \"[hungry] I'm starving!\"; check with the transcription method of ch1retext1 that the clip says it). Merge only that take unless others match their current subtitles. Run python3 tools/script-index/build.py, python3 tools/clip-audit/unused_voice.py (0 for all four), node tools/voice-library/make-index.js, smoke, and push as ch1starving-sub with after nothing for Tom: end. You have my full permission to access the repo."
+   },
+   "after": "nothing for Tom: end"
+  },
+  {
+   "id": "c-fix-ch1starving-4",
+   "tag": "fix-ch1starving-4",
+   "lane": "claude",
+   "col": "done",
+   "fix": true,
+   "theme": "Voice Clips",
+   "title": "Fix what you found on: Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end",
+   "next": "You reported a problem on Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: It still doesn't say I'm starving at the end and when I try to type it in and then re-record it, it deletes the words as soon as I tap out of the box",
+   "blocks": [
+    "t-ch1starving"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T08:44:20.065Z",
+     "card": "t-ch1starving",
+     "title": "Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end",
+     "ask": "voice",
+     "words": "It still doesn't say I'm starving at the end and when I try to type it in and then re-record it, it deletes the words as soon as I tap out of the box",
+     "shot": "",
+     "asked": "After build fix-ch1starving-3 is published: open ADMIN ) VOICE LIBRARY with the button below (Open in the Voice Library: Tom's line), or search \"telling me, Rose\". Reload the page once. The script box now ends \"...number two can't wait. [hungry] I'm starving!\". Tap Takes and record, make takes until one says the whole line, keep it, then press Send my takes to Claude. That starts card Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub). Until then the game plays your old take."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-ch1starving"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-ch1starving."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-ch1starving: It still doesn't say I'm starving at the end and when I try to type it in and then re-record it, it deletes the words as soon as I tap out of the box"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Retired by boardwait1 session: Tom tapped Something is wrong at 08:44:20 UTC, about 40 seconds before build fix-ch1starving-3 finished publishing (08:45 UTC), so his phone still had the old Voice Library, the one that deleted \"I'm starving!\" when he left the box. The live page now has the fix (checked on the site). Nothing to change in code."
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: voice are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch1starving-4 and t-ch1starving in data/board.json, history included. Your first push is the commit board: start c-fix-ch1starving-4.\n\nTom tested and found problems:\n1. Card t-ch1starving (Re-record Tom's line \"Thank you for telling me, Rose\" with \"I'm starving!\" at the end, ask voice). He was asked: After build fix-ch1starving-3 is published: open ADMIN ) VOICE LIBRARY with the button below (Open in the Voice Library: Tom's line), or search \"telling me, Rose\". Reload the page once. The script box now ends \"...number two can't wait. [hungry] I'm starving!\". Tap Takes and record, make takes until one says the whole line, keep it, then press Send my takes to Claude. That starts card Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub). Until then the game plays your old take. He wrote: It still doesn't say I'm starving at the end and when I try to type it in and then re-record it, it deletes the words as soon as I tap out of the box\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:44:20.065Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch1starving to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch1starving, and give the build fix-ch1starving-4 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-ch1starving",
+   "done": "2026-11-20"
+  },
+  {
+   "id": "b-board-starving4",
+   "tag": "board-starving4",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-20",
+   "theme": "Tools",
+   "title": "board only: your last \"I'm starving!\" report came 40 seconds before the fix was live",
+   "next": "Done: board only: your last \"I'm starving!\" report came 40 seconds before the fix was live",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGqkSQR8RWqB1nkDck",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as board-starving4. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
+  },
+  {
+   "id": "c-backlog1",
+   "tag": "backlog1",
+   "lane": "claude",
+   "col": "prog",
+   "theme": "Tools",
+   "title": "Board: Send to backlog and a BACKLOG section with Add to to-do",
+   "next": "Shipped as backlog1: Send to backlog in every open card sheet, BACKLOG closed at the bottom, one-tap Add to (lane) to-do.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "after": "nothing for Tom: end",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukEF1azCz85WniaHKsE",
+    "opening": "Tom asked for Send to backlog on any to-do card and a collapsed BACKLOG section at the bottom with a one-tap Add back"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Tom (11-20 00:45): \"The compound board needs a send to backlog feature for anything that is in the to-do list, no matter if it's for me, for Claude, or for any other, and then there needs to be a collapse by default section at the bottom bottom with the backlog in it, where I can tap in a single tap on a button inside of all the backlog items, a button that will add that item to the appropriate parties to do list\""
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built backlog1: board.html (Send to backlog, BACKLOG section, Add to to-do), board_sync.py (a parked card never auto-starts), tools/board_backlog_test.py."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
+    }
+   ],
+   "prompt": {
+    "what": "Adds the backlog to the board page.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Opus 5.5",
+    "effort": "medium",
+    "text": "Read CLAUDE.md. Board card c-backlog1: add Send to backlog and a BACKLOG section to board.html as Tom asked in its history."
+   }
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukER5KXdV8sp6XLkaer",
+   "title": "Add \"I'm starving!\" to the subtitle and merge your new take (ch1starving-sub)",
+   "first": "2026-11-20T08:50:18Z",
+   "last": "2026-11-20T08:50:18Z",
+   "tags": [],
+   "cards": [
+    "c-ch1starving-sub"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukDZUaRAm9k2zMUUbic",
+   "title": "QA for generated pictures, with the results on the card (artgen2)",
+   "first": "2026-11-20T08:42:04Z",
+   "last": "2026-11-20T08:42:04Z",
+   "tags": [],
+   "cards": [
+    "c-artgen2"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukDDTYqvsqg42v3dVXm",
    "title": "Chapter 6 leftovers: talk and emotion rows, landscape frames, Chairman finale",
@@ -8946,6 +9184,34 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEF1azCz85WniaHKsE",
+   "title": "Board: Send to backlog and a BACKLOG section with Add to to-do",
+   "first": "2026-11-20T00:54:15-08:00",
+   "last": "2026-11-20T00:54:16-08:00",
+   "tags": [
+    "backlog1"
+   ],
+   "cards": [
+    "c-backlog1",
+    "b-backlog1"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGqkSQR8RWqB1nkDck",
+   "title": "Unstick your cards that sat in Waiting with nothing left to wait on (boardwait1)",
+   "first": "2026-11-20T00:26:34-08:00",
+   "last": "2026-11-20T00:46:13-08:00",
+   "tags": [
+    "boardwait1",
+    "fix-ch1starving-3",
+    "board-starving4"
+   ],
+   "cards": [
+    "c-boardwait1",
+    "c-fix-ch1starving-3"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc",
    "title": "Board redesign 1: an honest header and status",
    "first": "2026-11-19T23:36:20-08:00",
@@ -8976,19 +9242,6 @@
    "tags": [],
    "cards": [
     "c-fix-clipposes"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGqkSQR8RWqB1nkDck",
-   "title": "Unstick your cards that sat in Waiting with nothing left to wait on (boardwait1)",
-   "first": "2026-11-20T00:26:34-08:00",
-   "last": "2026-11-20T00:36:09-08:00",
-   "tags": [
-    "boardwait1"
-   ],
-   "cards": [
-    "c-boardwait1",
-    "c-fix-ch1starving-3"
    ]
   },
   {
@@ -9610,8 +9863,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "779f155be5b996259f5a25a479152c08b3cfc839",
- "synced_at": "2026-11-20T08:41:34+00:00",
+ "synced": "e0989a9c291b2b4455fe1df2969e3493ee8c96cc",
+ "synced_at": "2026-11-20T08:56:15+00:00",
  "routines": [
   {
    "id": "sonnet-medium",

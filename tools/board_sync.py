@@ -214,7 +214,7 @@ def r1_unblock(B):
             for k in blockers:
                 if k.get('answer'): B.hist(c, 'Answer from "%s": %s' % (k['title'], plain(k['answer'])))
                 if k.get('note'): B.hist(c, 'Note from "%s": %s' % (k['title'], plain(k['note'])))
-            if c.get('auto') and c.get('lane') == 'claude' and any(k.get('lane') == 'tom' for k in blockers):
+            if c.get('auto') and not c.get('backlog') and c.get('lane') == 'claude' and any(k.get('lane') == 'tom' for k in blockers):   # backlog1: a parked card never starts by itself
                 c['start'] = True; B.hist(c, 'Auto-start: Tom answered, so this card starts by itself.'); B.say('auto-start %s' % c['id'])
             B.say('unblocked %s' % c['id']); moved = True
 
@@ -297,7 +297,7 @@ def r9_start(B, fire):
     """A card with start: true (Tom tapped START, or R1 auto-started it) is started on the Claude scheduled task for its model and effort."""
     for c in B.cards:
         if not c.get('start'): continue
-        if c['lane'] != 'claude' or c['col'] in ('done', 'prog') or not c.get('prompt'):
+        if c['lane'] != 'claude' or c['col'] in ('done', 'prog') or not c.get('prompt') or c.get('backlog'):
             c.pop('start', None); continue
         blockers = [k for k in B.cards if c['id'] in k.get('blocks', []) and k['col'] != 'done']
         r = routine_for(B, c)

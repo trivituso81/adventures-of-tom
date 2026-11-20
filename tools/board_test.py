@@ -95,7 +95,7 @@ try:
             if pg.inner_text('#src') != 'live': fails.append(f'{name}: page did not read the stub')
             if w < 860:
                 order = pg.eval_on_selector_all('#secView .sec', 'e=>e.map(x=>x.dataset.sec)')
-                if order != ['mine', 'back', 'ready', 'run', 'queued', 'attn', 'conv', 'done']: fails.append(f'{name}: section order {order}')
+                if order != ['mine', 'back', 'ready', 'run', 'queued', 'attn', 'conv', 'done', 'backlog']: fails.append(f'{name}: section order {order}')
                 cnt = pg.eval_on_selector_all('#secView .sec', 'e=>Object.fromEntries(e.map(x=>[x.dataset.sec,x.querySelectorAll(".card,.conv").length]))')
                 for k, v in (('mine', E_MINE), ('back', E_BACK), ('ready', E_READY), ('run', E_RUN), ('queued', E_QUEUED), ('attn', E_ATTN)):
                     if cnt[k] != v: fails.append(f'{name}: section {k} has {cnt[k]} cards, want {v}')
