@@ -10862,7 +10862,7 @@
    "title": "Fix: losing to The Big One leaves the party stuck",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as gem-bug01: after a loss the fight restarts at once. Tom checks it on his phone (card t-gem-bug01play).",
    "blocks": [],
    "changed": "2026-11-20",
@@ -10892,6 +10892,10 @@
     {
      "d": "2026-11-20",
      "t": "Confirmed on main (Big One on water 4 tiles from shore, A retry unreachable). Fixed: loss heals, Deedee speaks, fight restarts at once (up to 8 times, then the pond scene is re-armed). Tested a loss, loss, win in portrait and landscape."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-bug01: losing to The Big One now heals the party and starts the fight again at once, so nobody is stuck on the shore"
     }
    ],
    "tag": "gem-bug01",
@@ -10905,7 +10909,8 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug01 in data/board.json, history included. Your first push is the commit board: start c-gem-bug01.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-01. What the tester saw: Severity P0 Critical (Softlock). Where: Grump Hollow (`The Big One` Wipe Recovery). Losing to `The Big One` plays Deedee's recovery scene (`\"Up, up. Everybody up... Then we try again.\"`) and places the party back on the shoreline in a permanent softlock: the one-time right-shore flashbulb cutscene flag is already consumed (leaving only the 4-line repeatable `Inspect orange block`), while `The Big One` sits on unwalkable water tiles out of `A`-button range (`\"Face a neighbor or an object, then press A.\"`).\n\nThe tester suggested (a suggestion, not an order): Either reset the pre-boss trigger zone on wipe, add a shoreline `A`-button re-challenge trigger tile facing `The Big One`, or offer an immediate `\"Retry Boss Battle\"` prompt on defeat.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug01, push to main, and write the result and the next step onto the card.\n\nP0: the player cannot continue. Pick the retry prompt on defeat if it fits the battle code; otherwise reset the pre-boss trigger. Test losing the fight on purpose, then winning the retry.\n\nYou have my full permission to access the repo."
    },
    "started_at": "2026-11-20T16:18:35+00:00",
-   "after": "t-gem-bug01play"
+   "after": "t-gem-bug01play",
+   "done": "2026-11-20"
   },
   {
    "id": "c-gem-bug02",
@@ -11035,7 +11040,7 @@
    "title": "Fix: blank portraits in chapter select, battle and dialogue",
    "theme": "Game Shell",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Shipped as gem-bug05: portraits preloaded in chapter select, battle and dialogue. Nothing needed from Tom.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -11065,6 +11070,10 @@
     {
      "d": "2026-11-20",
      "t": "Confirmed on main (chapter list drew an untagged, unloaded address). Fixed in gem-bug05."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as gem-bug05: Chapter select faces, battle faces and dialogue faces no longer show a blank or wrong picture for a frame"
     }
    ],
    "tag": "gem-bug05",
@@ -11078,7 +11087,8 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug05 in data/board.json, history included. Your first push is the commit board: start c-gem-bug05.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-05. What the tester saw: Severity High. Where: Chapter Select, Battle Load & `Inspect orange block` Portraits. (1) Dark/blank squares appear in `Pick a chapter` mini-portraits (slot 3 of 4 on `CH 1`, plus `CH 3`, `CH 5`, `CH 7`, `CH 8`, `CH 10`–`CH 15`, `CH 17`–`CH 20`, `BONUS`). (2) Rose's portrait flashes blank on Frame 1 of battle in the `TURN` bar and Party Panel. (3) Re-inspecting `orange block` flashes a grumpy green frog or Tom portrait for 1 frame under `Rose`'s name before swapping to Rose.\n\nThe tester suggested (a suggestion, not an order): Preload chapter-select thumbnails and speaker portraits before rendering frame 1 of menus, battle HUD, and dialogue boxes, and clear stale portrait textures before opening a new dialogue box.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug05, push to main, and write the result and the next step onto the card.\n\nYou have my full permission to access the repo."
    },
    "started_at": "2026-11-20T16:21:44+00:00",
-   "after": "nothing for Tom: end"
+   "after": "nothing for Tom: end",
+   "done": "2026-11-20"
   },
   {
    "id": "c-gem-bug06",
@@ -12184,6 +12194,30 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEk93mJfgwTJ2d8xWD",
+   "title": "Fix: losing to The Big One leaves the party stuck",
+   "first": "2026-11-20T16:19:26Z",
+   "last": "2026-11-20T16:27:57Z",
+   "tags": [
+    "gem-bug01"
+   ],
+   "cards": [
+    "c-gem-bug01"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEEvdnM3Hcz8aCVazR",
+   "title": "Fix: blank portraits in chapter select, battle and dialogue",
+   "first": "2026-11-20T16:22:24Z",
+   "last": "2026-11-20T16:27:18Z",
+   "tags": [
+    "gem-bug05"
+   ],
+   "cards": [
+    "c-gem-bug05"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFuf4u6X8rmNNsNzZk",
    "title": "Fix: Amy's House can be entered early in chapter 1",
    "first": "2026-11-20T16:26:07Z",
@@ -12203,16 +12237,6 @@
    ],
    "cards": [
     "c-gem-bug06"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEEvdnM3Hcz8aCVazR",
-   "title": "Fix: blank portraits in chapter select, battle and dialogue",
-   "first": "2026-11-20T16:22:24Z",
-   "last": "2026-11-20T16:22:24Z",
-   "tags": [],
-   "cards": [
-    "c-gem-bug05"
    ]
   },
   {
@@ -12243,16 +12267,6 @@
    "tags": [],
    "cards": [
     "c-gem-bug09"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEk93mJfgwTJ2d8xWD",
-   "title": "Fix: losing to The Big One leaves the party stuck",
-   "first": "2026-11-20T16:19:26Z",
-   "last": "2026-11-20T16:19:26Z",
-   "tags": [],
-   "cards": [
-    "c-gem-bug01"
    ]
   },
   {
@@ -13604,8 +13618,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "dc1975f6a82b6f1e8e47cb5ffc825c9838190165",
- "synced_at": "2026-11-20T16:26:50+00:00",
+ "synced": "70ab0e00749869dceab374545920345ede174dfc",
+ "synced_at": "2026-11-20T16:28:03+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
