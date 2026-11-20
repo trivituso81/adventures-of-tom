@@ -9996,7 +9996,7 @@
    "col": "prog",
    "theme": "Tools",
    "title": "New card button: type an idea, get a sized Claude prompt",
-   "next": "Building: a New card button on the board. Tom types an idea; the page names the card, picks the theme, sizes the model and effort by the rules in claude/handoff-rules.md, writes the prompt, and starts it by itself when START can run it.",
+   "next": "Built as newcard1: + New card on the board (beside Search and Theme). Tom tests it on card t-newcard.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -10017,6 +10017,38 @@
     {
      "d": "2026-11-20",
      "t": "Tom: \"Design a board feature where I can create a new card on my own that then creates a Claude prompt with the appropriate model and effort level. Automate as much as possible.\" And: \"Eg, For a new feature idea\"."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built: + New card form, sizing by the handoff rules (sizeIdea), the prompt writer, auto-start for Sonnet 5.5 medium, Change lists for theme, model and effort, test tools/board_newcard_test.py. Hands to Tom: t-newcard."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Found, not fixed here: tools/board_test.py fails with and without this build (Queued 4 and Needs attention 4, expects 3 and 5 on the live cards)."
+    }
+   ],
+   "after": "t-newcard"
+  },
+  {
+   "id": "t-newcard",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Tools",
+   "ask": "play",
+   "fyi": true,
+   "title": "Make your first card with + New card",
+   "next": "ADMIN > BOARD, tap the gold + New card button at the top. Type a real idea you have for the game, the way you would say it to Claude. Under the box you should see the model and effort, a card name and a theme before you save. Tap Create card. You should land on a screen with the model and effort in large type and a Copy prompt button (or, for a small Sonnet job, a line saying Claude starts it by itself). Check that the model and effort fit the idea. Then press All good, or Something is wrong and say which idea got which wrong size.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "made by newcard1"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by build newcard1 (card c-newcard)."
     }
    ]
   },
