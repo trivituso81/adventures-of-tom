@@ -1,10 +1,3 @@
 {
- "requests": [
-  {
-   "id": "clip-tom-give",
-   "prompt": "IMAGE TO VIDEO REQUEST: ONE SHORT ANIMATION CLIP.\n\nWHAT THIS IS\nA 2D sprite animation of the exact character in the attached first-frame image, preserving his exact face, proportions, hair, outfit, accessories, and hand-drawn colored pencil and ink caricature style throughout every frame.\n\nCAMERA AND BACKGROUND\nLocked static camera with zero movement. The character stays facing left with his feet planted on the exact same spot on a flat, solid pure magenta background with no shadows, lighting changes, or visual effects. Silent clip.\n\nMOTION: HAND SOMETHING OVER\nFrom his starting relaxed stance, he brings a small wrapped snack out from behind his back and holds it out forward at chest height once, as if handing it to a friend. Without repeating the gesture, he tucks it behind his back again. He returns to his starting relaxed stance and remains completely still in that pose for the rest of the clip.",
-   "cap": 1,
-   "at": 1795215261121
-  }
- ]
+ "requests": []
 }
