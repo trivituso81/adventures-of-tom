@@ -15660,8 +15660,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (22 open)",
-   "next": "Open reports left on inbox: r-20261120-140511-a306, -140805-mhzt, -141016-j0za, -141209-58bx (muffin wrapper trail variants and monster positions in Grump Hollow) and r-20261120-142626-w74f (item banner art). Each needs new area art from the Art Library or a layout decision.",
+   "title": "Fix the report backlog (6 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-140511-a306, r-20261120-140805-mhzt, r-20261120-141016-j0za, r-20261120-141209-58bx, r-20261120-142626-w74f, r-20261120-144650-ae66. First note: apple muffins are covering the mud blob's face",
    "prompt": {
     "what": "Works through the reports you filed in the game.",
     "before": [
@@ -15742,6 +15742,10 @@
     {
      "d": "2026-11-20",
      "t": "Shipped reports-2026-11-20b: 16 reports fixed (Chapter 1 line cuts, Sal ride order, Rose facing). Left open: 5 muffin trail and monster position reports (art variations per area, a level redesign) and the item banner art report; they need Tom's call before a build."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "The backlog now holds 6 report(s)."
     }
    ],
    "blocks": [],
@@ -17053,6 +17057,21 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukEDERsWxc2T9srXWo7",
+   "title": "Fix the report backlog (22 open)",
+   "first": "2026-11-20T22:55:38Z",
+   "last": "2026-11-20T23:04:02Z",
+   "tags": [
+    "reports-2026-11-20b"
+   ],
+   "cards": [
+    "c-reports-5",
+    "c-reports-2",
+    "c-reports-3",
+    "c-reports-4"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukCf5dxEs5Zj4xH87pM",
    "title": "Fix: Try GENERATE VIDEO on one clip",
    "first": "2026-11-20T22:55:41Z",
@@ -17062,16 +17081,6 @@
    ],
    "cards": [
     "c-fix-keysecrets2-try-2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEDERsWxc2T9srXWo7",
-   "title": "Fix the report backlog (22 open)",
-   "first": "2026-11-20T22:55:38Z",
-   "last": "2026-11-20T22:55:38Z",
-   "tags": [],
-   "cards": [
-    "c-reports-5"
    ]
   },
   {
@@ -19339,8 +19348,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "5476cfb39c0b34aea0ffb235d7d34542d6161694",
- "synced_at": "2026-11-20T22:57:31+00:00",
+ "synced": "64712f34faf43011eb9b55c13079fab1919e30b7",
+ "synced_at": "2026-11-20T23:04:48+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
