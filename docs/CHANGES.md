@@ -1,3 +1,13 @@
+## wanproofb (2026-11-20): Part 2 of the Grace guard video proof: her large left-facing start picture, made on fal and checked. 15 cents spent
+
+Card c-wanproof, plan `claude/video-battle-plan.md` section 4.3, call 1.
+
+- The wan-gen dry run (run 44814650701) showed the request and the cost and fal accepted the key. Then one paid run (44814828750): Nano Banana 2.1 edit, the hero `art/raw/characters/grace-hero-v1.png` as the one reference, the prompt word for word, 2:3, 1K. Ledger on branch `wangen`: $0.15 of the $2.00 cap.
+- Checks against the hero: same face, hair, outfit and pencil style (pass); head share .265 against the hero's .266 (pass, limit 3 points); whole figure inside the frame, 16 px above the hair and 27 below the shoes (pass); background flat (253, 23, 253), spread under 2 of 255, no shadow under the feet (pass); facing the left edge: FAIL, it came back turned to the right like the hero.
+- The one retry, with one change: the same picture mirrored left to right (free; a second paid try of the same prompt would most likely keep the hero's facing). It then faces left in three-quarter view and passes every check. Mirroring puts the star pouch on her other hip and the bracelets on her other wrist; her battle sheet already has the pouch on that side.
+- Saved as the Art Library entry `clipstart-grace` (Clips tab, Grace group, approved; source `art/raw/clips/clipstart-grace-v1.png`) and installed as `art/clips/start/grace-hero.png`. It has no bake: the art-bake run only stores it.
+- Pre-existing test failures seen on clean main as well (not from this build): `clip_lib_test.py` (price $0.07 line), `clip_batch_test.py`, `clipgen_test.py`.
+
 ## projclean1a (2026-11-20): first 125 Project docs copied into the repo's claude/ folder, word for word
 
 Card c-projclean, part 1. Project docs 1 to 125 (newest first) copied to the same path in claude/ so every reference still resolves. Repo copies that already had more than the Project (artgen-plan.md, boardux-plan.md Built sections) were kept. The Project copies are deleted only after this push is confirmed on origin/main. Nothing in the game changes.
