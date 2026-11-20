@@ -269,7 +269,8 @@ function openSheet(id){
   const bl=blocksOpen(c),bb=blockedBy(c),p=c.prompt;
   let h='<h2>'+esc(c.title)+'</h2><div class="meta" style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag" style="background:'+(THEME_COL[c.theme]||'#ccc')+'">'+esc(c.theme)+'</span><span class="age '+ageClass(ageOf(c))+'">'+(c.col==='done'?'done '+esc(c.done||''):ageOf(c)+' days since last change')+'</span><span class="age">'+esc(laneName(c.lane))+' / '+esc((B.columns.find(x=>x.id===c.col)||{}).name)+'</span></div>';
   if(c.lane==='tom'&&c.ask&&c.col!=='done') h+='<h4>What you do</h4><p><span class="ask">'+esc(askName(c.ask))+'</span></p>';
-  h+='<h4>Next step</h4><p>'+esc(c.next)+'</p>';
+  h+='<h4>Next step</h4><p style="white-space:pre-line">'+esc(c.next)+'</p>';
+  if((c.steps||[]).length) h+='<h4>Steps, in order</h4><ol>'+c.steps.map(x=>'<li style="margin:0 0 8px">'+esc(x)+'</li>').join('')+'</ol>';
   if(c.paste) h+='<h4>Text to paste</h4><pre id="ptxt2">'+esc(c.paste)+'</pre><button class="small gold" id="bpaste" type="button">Copy this text</button>';
   if(c.answer) h+='<h4>Your answer</h4><p>'+esc(c.answer)+'</p>';
   if(c.start_error&&c.col!=='done') h+='<p class="err">START failed last time: '+esc(c.start_error)+'</p>';
