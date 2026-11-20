@@ -739,7 +739,7 @@
    "title": "Battle system stage 9c: Nara and Boppy kits, late joiners",
    "theme": "Battle System",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "b3s9c",
    "next": "After b3s9b (done). Builds Nara's (Attached Pup, Guard Dog) and Boppy's (The Dep, Pepper Boss) Sig Vibes (28 lines, 6 need their own function) and the late joiners' Vibe Point pool, and moves TNB onto that pool; Lab fights with the chapter 2 and 3 parties.",
    "blocks": [],
@@ -747,7 +747,7 @@
    "created": "2026-11-19",
    "chat": {
     "url": "",
-    "opening": ""
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -761,6 +761,10 @@
     {
      "d": "2026-11-20",
      "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation."
     }
    ],
    "prompt": {
