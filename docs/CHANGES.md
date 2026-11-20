@@ -1,3 +1,7 @@
+## gem-bug09 (2026-11-20): The Big One no longer wears a flat grey plate over its painted pan hat
+
+Gemini BUG-09, checked on current main. (1) Big One: reproduced. The Pie Tin status drew a flat ellipse over the pan the painted frames already show; the status (GRIT +50%) stays, the extra drawing is skipped for foes with `tinPainted` (`engine/battle2-ui.js`, `data/monsters.js`). (3) NPC roof and wall clipping: already fixed in roofnpc2 (`noGoRoof` on town and row matches `tools/npc_roof_tiles.py`, 0 tiles missing); Sal's cap in `taxi` and Boppy in `grands` look clean in portrait. (2) Tan puffs: not reproduced (the only tan puffs are the KO dust and the flight-map contrail, both short-lived); not changed.
+
 ## gem-bug01 (2026-11-20): losing to The Big One now heals the party and starts the fight again at once, so nobody is stuck on the shore
 
 - Gemini BUG-01 (P0 softlock), confirmed on current main: The Big One sits on open water at tile (18,8) and the nearest walkable shore is about 4 tiles away, so the old "Face The Big One and press A to try again" after a loss could never be done, and the pond scene had already used up its one-time flag.

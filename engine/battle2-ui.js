@@ -194,7 +194,7 @@ function b2DrawEnemies(t) {
     if(dying) continue;
     const top=y+(R._clip?h-R0.length*sc:0)+(f.def._top||0)*sc;   // a clip frame has more empty rows above the head than the stance
     // Deedee's pie tin, worn like a helmet.
-    if(f.st.pietin) { const hx=x+w/2,hy=f.def.tinY!=null?y+h*f.def.tinY:top+4; ellipse(hx,hy,w*.26+4,9,OUT); ellipse(hx,hy,w*.26+2,7,'#c9ccd4'); ellipse(hx,hy-3,w*.2,5,'#e8ecf2'); rect(hx-w*.2,hy-2,w*.4,2,'#9aa0aa'); }
+    if(f.st.pietin&&!f.def.tinPainted) { const hx=x+w/2,hy=f.def.tinY!=null?y+h*f.def.tinY:top+4; ellipse(hx,hy,w*.26+4,9,OUT); ellipse(hx,hy,w*.26+2,7,'#c9ccd4'); ellipse(hx,hy-3,w*.2,5,'#e8ecf2'); rect(hx-w*.2,hy-2,w*.4,2,'#9aa0aa'); }
     // Goofed: spinning stars and question marks. Smitten: hearts. Staggered: stars. Grumbled: a sulky "...".
     if(f.st.goofed) for(let k=0;k<4;k++) { const a=t*4+k*1.57; label(k%2?'+':'?',x+w/2+Math.round(Math.cos(a)*w*.42),top-8+Math.round(Math.sin(a)*8),k%2?'#ffe08a':'#fff1cb',3); }
     if(f.st.smitten) for(let k=0;k<3;k++) { const ph=(t*1.2+k/3)%1; gfx.globalAlpha=1-ph; paintHeart(x+w/2-20+k*20,top-1-Math.round(ph*30),5.5,'#ff9ac0'); gfx.globalAlpha=1; }
