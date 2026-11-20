@@ -12339,8 +12339,8 @@
    "title": "Purge Rhubarb Crisp from the game everywhere",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
-   "next": "Waiting on Tom: say if the purge is only the chapter 1 monster tooltip (small) or Rhubarb Crisp is cut from the whole story (large, needs re-bakes).",
+   "col": "wait",
+   "next": "Waiting on Tom: answer the card Decide how far to cut Rhubarb Crisp. Then run the prompt as written, scoped to his answer.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -12373,6 +12373,10 @@
     {
      "d": "2026-11-20",
      "t": "Rescue started (Quiet: the conversation may have stopped). One automatic session decides: finish it, back to Tom, start next, or retire."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Rescue outcome: BACK TO YOU. Scope needs Tom (tooltips only vs whole story, which silences voiced lines). Added Tom card t-rhubarb-scope; this card waits on it."
     }
    ],
    "tag": "gem-pillar-rhubarb",
@@ -12392,7 +12396,9 @@
     "why": "Quiet: the conversation may have stopped",
     "url": "https://claude.ai/code/cse_01RXeukFugoiMUKnQaUUEhir",
     "prev": "https://claude.ai/code/session_01RXeukFkMDqBpY62nm7AFcf"
-   }
+   },
+   "waiting_on": "tom",
+   "after": "t-rhubarb-scope"
   },
   {
    "id": "c-gem-pillar-pep",
@@ -15196,6 +15202,34 @@
    "auto": true,
    "started_at": "2026-11-20T18:54:02+00:00",
    "done": "2026-11-20"
+  },
+  {
+   "id": "t-rhubarb-scope",
+   "title": "Decide how far to cut Rhubarb Crisp",
+   "theme": "Story and Dialogue",
+   "lane": "tom",
+   "col": "up",
+   "ask": "decide",
+   "next": "Open this card and tap one answer. Gemini's test found Rhubarb Crisp in the Inspect tooltips of Mudling, Log Lump and The Big One, and says Deedee's bake should be warm apple muffins. Fact: Rhubarb Crisp is also canon (docs/CANON.md), a running gag in chapters 14 and 15, in Deedee's moves and Rose Mode, and spoken in baked voice clips. Cutting it everywhere would reword voiced lines, which silences them until you re-record. Your answer starts the card c-gem-pillar-rhubarb (Purge Rhubarb Crisp) by itself.",
+   "choices": [
+    "Only fix the chapter 1 monster tooltips (Recommended)",
+    "Cut Rhubarb Crisp from the whole story (muffins instead)"
+   ],
+   "leads": [
+    "Card c-gem-pillar-rhubarb changes only the Inspect text on Mudling, Log Lump and The Big One. No voice clips change, nothing to re-record. The later chapters keep the gag.",
+    "Card c-gem-pillar-rhubarb rewords every Rhubarb Crisp line in scenes, moves and canon to apple muffins. Every reworded voiced line goes silent until you re-record it, and a re-bake card follows."
+   ],
+   "blocks": [
+    "c-gem-pillar-rhubarb"
+   ],
+   "changed": "2026-11-20",
+   "created": "2026-11-20",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by the rescue of c-gem-pillar-rhubarb: the card is blocked on this scope decision."
+    }
+   ]
   }
  ],
  "sessions": [
