@@ -14526,7 +14526,7 @@
   {
    "id": "t-buildnametry",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -14543,8 +14543,14 @@
     {
      "d": "2026-11-20",
      "t": "Made by build buildname1 (card c-buildname)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-20T18:10:31.791Z"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-battlelabpagetry-2",
