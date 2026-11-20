@@ -7102,12 +7102,12 @@
    "title": "Try the admin page and the board on your home screen",
    "theme": "Tools",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "On your iPhone open https://trivituso81.github.io/adventures-of-tom/admin.html in Safari, tap Share, Add to Home Screen. Tap each button once: each should open its tool, and Battle Lab, Block Break Lab and Welcome Layout should open inside the game without going through the menu. Do the same for https://trivituso81.github.io/adventures-of-tom/board.html. All good, or Something is wrong with the button that missed.",
    "blocks": [],
-   "changed": "2026-11-20",
+   "changed": "2026-11-19",
    "created": "2026-11-20",
    "chat": {
     "url": "",
@@ -7117,8 +7117,13 @@
     {
      "d": "2026-11-20",
      "t": "Added by adminhub1: your phone check of the admin page; blocks nothing."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: all good."
     }
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "t-artgen1try",
