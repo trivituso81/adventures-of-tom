@@ -6583,7 +6583,7 @@
    "title": "Generate and approve the new Mudling sheet (six poses with the muffin pan)",
    "theme": "Story and Dialogue",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "pictures",
    "next": "After card c-heistart ships: ADMIN > ART LIBRARY, Enemies tab, group Chapter 1, entry ch1-mudling-heist2. Make it either way: tap Generate all on this card (the board makes it for you, about two minutes, then tap Review them in the Art Library), or press GENERATE in the Library yourself. You should see six Mudlings on magenta that look like the Mudling of the fights (matte, brushed): a ball, looking up, reaching up, then three holding the muffin pan over its head. APPROVE, or REJECT with a note. Approving starts card Rebuild the muffin theft scene (heist1) for you to paste.",
    "blocks": [
@@ -6616,6 +6616,10 @@
     {
      "d": "2026-11-20",
      "t": "Pictures job: made 1 picture. Spent about $0.06."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Done by the board: you approved ch1-mudling-heist2 in the Art Library."
     }
    ],
    "gen": {
@@ -6638,20 +6642,20 @@
      "failed": [],
      "spent": 0.06
     }
-   }
+   },
+   "done": "2026-11-20"
   },
   {
    "id": "c-heist1",
    "title": "Rebuild the muffin theft scene in Deedee's kitchen (heist1)",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "tom",
+   "col": "up",
    "tag": "heist1",
    "next": "Waits on your approval of the new Mudling sheet (card t-heistart). Then it rebuilds the theft: the Mudling of the fights rolls in, bowls the three of you over, faces Deedee, lifts the pan over its head and sneaks out behind Boppy, who never turns around. 3 new lines, 1 changed, 1 cut. Script and staging: claude/heist-redo-plan.md.",
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-19",
+   "changed": "2026-11-20",
    "chat": {
     "url": "",
     "opening": ""
@@ -6660,6 +6664,10 @@
     {
      "d": "2026-11-19",
      "t": "Added by board-heist, part B of claude/heist-redo-plan.md. Tom (19:28): \"we need a complete redo of this scene so that it hilarious!\""
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Generate and approve the new Mudling sheet (six poses with the muffin pan) is done."
     }
    ],
    "prompt": {
@@ -7627,7 +7635,7 @@
    "title": "Chapter 6 leftovers: talk and emotion rows, landscape frames, Chairman finale",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "next": "Checked in portrait and landscape; no code change needed. Your phone play of chapter 6 is next (t-ch6play).",
    "blocks": [],
    "changed": "2026-11-20",
@@ -7652,6 +7660,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as ch6left: Chapter 6 leftovers checked: kitchen and park in landscape, Chairman hop-off; nothing needed fixing"
     }
    ],
    "prompt": {
@@ -7664,7 +7676,8 @@
     "text": "Read claude/next-addendum-ch6stage4done.md and claude/story-ch06.md. Fix the chapter 6 leftovers (talk and emotion rows for new lines, landscape frames of ch6Park and ch6Kitchen, the Chairman finale at the picnic table), test, push, then tell me what to play. You have my full permission to access the repo."
    },
    "tag": "ch6left",
-   "after": "t-ch6play"
+   "after": "t-ch6play",
+   "done": "2026-11-20"
   },
   {
    "id": "c-stagefollow",
@@ -7716,7 +7729,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukF9WyZvzUwNPb9AsGe",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -7727,6 +7740,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -8595,6 +8612,18 @@
  ],
  "sessions": [
   {
+   "url": "https://claude.ai/code/session_01RXeukDDTYqvsqg42v3dVXm",
+   "title": "Chapter 6 leftovers: talk and emotion rows, landscape frames, Chairman finale",
+   "first": "2026-11-20T08:33:19Z",
+   "last": "2026-11-20T08:39:28Z",
+   "tags": [
+    "ch6left"
+   ],
+   "cards": [
+    "c-ch6left"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGkSQR8RWqB1nkDck",
    "title": "Clear the known-wrong list from the old next.md",
    "first": "2026-11-20T08:36:39Z",
@@ -8612,16 +8641,6 @@
    "tags": [],
    "cards": [
     "c-gatezero"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukDDTYqvsqg42v3dVXm",
-   "title": "Chapter 6 leftovers: talk and emotion rows, landscape frames, Chairman finale",
-   "first": "2026-11-20T08:33:19Z",
-   "last": "2026-11-20T08:33:19Z",
-   "tags": [],
-   "cards": [
-    "c-ch6left"
    ]
   },
   {
@@ -8901,6 +8920,29 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc",
+   "title": "Board redesign 1: an honest header and status",
+   "first": "2026-11-19T23:36:20-08:00",
+   "last": "2026-11-20T00:40:01-08:00",
+   "tags": [
+    "boardux1"
+   ],
+   "cards": [
+    "c-boardux1",
+    "c-boardux2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukF9WyZvzUwNPb9AsGe",
+   "title": "Casa Alvarez: place the six walkers and check the 18 pages",
+   "first": "2026-11-20T00:39:49-08:00",
+   "last": "2026-11-20T00:39:49-08:00",
+   "tags": [],
+   "cards": [
+    "c-alvarez"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFiXq97j4v19xAg1P9",
    "title": "Fix what you found on: Watch the painted poses for the family (PAINTED STATES: CHAPTER 1)",
    "first": "2026-11-20T00:36:32-08:00",
@@ -8953,18 +8995,6 @@
    ],
    "cards": [
     "c-fix-ch1starving-2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc",
-   "title": "Board redesign 1: an honest header and status",
-   "first": "2026-11-19T23:36:20-08:00",
-   "last": "2026-11-19T23:53:18-08:00",
-   "tags": [
-    "boardux1"
-   ],
-   "cards": [
-    "c-boardux1"
    ]
   },
   {
@@ -9554,8 +9584,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "dddf9766c297ca90825dfc8989e150e7f921caa2",
- "synced_at": "2026-11-20T08:36:47+00:00",
+ "synced": "a04249fd9e52161216afbb5b0b0ecb74ff749f27",
+ "synced_at": "2026-11-20T08:40:05+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
