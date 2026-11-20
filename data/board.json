@@ -12671,7 +12671,7 @@
    "title": "Play the new chapter 1 opening in the taxi office",
    "theme": "Story and Dialogue",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "fyi": true,
    "first": "Build gem-canon01 shows on the title screen.",
@@ -12696,8 +12696,14 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Play the new chapter 1 opening in the taxi office is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: i left several feedback items on this scene using the Report feature Sent to Claude as card c-fix-gem-canon01play-2; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-20T17:30:46.885Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-takes-56fb01",
@@ -13409,6 +13415,65 @@
     "effort": "medium (two known checks)",
     "text": "Read CLAUDE.md. In data/board.json add two tiny Claude cards in Up next (col up), theme Tools, each with start: true, after: \"nothing for Tom: end\", blocks [], a prompt with before [\"Nothing to do first.\"], and the tag equal to the build name. Card 1: id c-startmore-opus, tag startmore-opus, model Claude Opus 5.5, effort medium. Card 2: id c-startmore-sonnet, tag startmore-sonnet, model Claude Sonnet 5.5, effort high. Each prompt text is: Read CLAUDE.md. You were started by START to prove this task works. Add one history line to your card saying which model and effort you are running on, move the card to Done, and push the build (its tag) with a docs/CHANGES.md entry. You have my full permission to access the repo. Run python3 tools/board_check.py, then push the board change as the build board-startmore-test; the board job starts both cards. Write on this card's history that both were added, then push. If a later look shows START failed or START is not set up on either card, write the reason on this card and add a Tom card for it. You have my full permission to access the repo."
    }
+  },
+  {
+   "id": "c-fix-gem-canon01play-2",
+   "tag": "fix-gem-canon01play-2",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Story and Dialogue",
+   "title": "Fix: Play the new chapter 1 opening in the taxi office",
+   "next": "You reported a problem on Play the new chapter 1 opening in the taxi office. Claude starts the fix by itself. Latest: i left several feedback items on this scene using the Report feature",
+   "blocks": [
+    "t-gem-canon01play"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T17:30:43.909Z",
+     "card": "t-gem-canon01play",
+     "title": "Play the new chapter 1 opening in the taxi office",
+     "ask": "play",
+     "words": "i left several feedback items on this scene using the Report feature",
+     "shot": "",
+     "asked": "RELOAD, then CHAPTERS ) Chapter 1. Check: Tom first says \"Thanks for the JFK pickup, Sal.\" in the taxi office, then stretches, says his Delta One line, Sal says \"OK Mr. Fancy Pants...\", Tom walks out the door, and outside the girls shout TATA, he crouches and they hug. The new line and Sal's line are read by the computer voice until recorded."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-gem-canon01play"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-gem-canon01play.",
+     "at": "2026-11-20T17:30:46.885Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-gem-canon01play: i left several feedback items on this scene using the Report feature",
+     "at": "2026-11-20T17:30:46.885Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-20T17:30:46.885Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Play the new chapter 1 opening in the taxi office.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-gem-canon01play-2 and t-gem-canon01play in data/board.json, history included. Your first push is the commit board: start c-fix-gem-canon01play-2.\n\nTom tested and found problems:\n1. Card t-gem-canon01play (Play the new chapter 1 opening in the taxi office, ask play). He was asked: RELOAD, then CHAPTERS ) Chapter 1. Check: Tom first says \"Thanks for the JFK pickup, Sal.\" in the taxi office, then stretches, says his Delta One line, Sal says \"OK Mr. Fancy Pants...\", Tom walks out the door, and outside the girls shout TATA, he crouches and they hug. The new line and Sal's line are read by the computer voice until recorded. He wrote: i left several feedback items on this scene using the Report feature\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T17:30:43.909Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-gem-canon01play to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-gem-canon01play, and give the build fix-gem-canon01play-2 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-gem-canon01play",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
