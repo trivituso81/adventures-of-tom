@@ -355,7 +355,7 @@
    "title": "Build chapter 2 to the locked script",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "wait",
+   "col": "up",
    "next": "Teardown written (claude/ch02-teardown.md). Waiting on Tom's answers to 2 ASK questions in the chapter 2 conversation: (1) replace Nara's built first meeting with locked scene 2, (2) which story moments unlock the Nara and TNB Tombos. Then build to the teardown, test, push as ch2build, stop for Tom's phone play.",
    "blocks": [],
    "changed": "2026-11-20",
@@ -416,6 +416,11 @@
     {
      "d": "2026-11-20",
      "t": "Stuck twice: The rescue started 7:35 AM and went quiet for 2 hours. Waiting on Tom (card t-stuck-ch2build)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped Start again after Stuck twice.",
+     "at": "2026-11-20T17:42:31.484Z"
     }
    ],
    "prompt": {
@@ -429,14 +434,7 @@
    },
    "tag": "ch2build",
    "started_at": "2026-11-20T15:35:40+00:00",
-   "rescue": {
-    "at": "2026-11-20T15:35:40+00:00",
-    "n": 1,
-    "why": "A session ended without shipping",
-    "url": "https://claude.ai/code/cse_01RXeukEot2oyThJioqaFLjk",
-    "prev": "https://claude.ai/code/session_01RXeukGiA3jV2jT4TYuLzs2"
-   },
-   "waiting_on": "tom"
+   "start": true
   },
   {
    "id": "c-b3s8",
@@ -13552,7 +13550,7 @@
   {
    "id": "t-stuck-ch2build",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Story and Dialogue",
    "ask": "unstick",
    "unstick": {
@@ -13572,10 +13570,16 @@
     {
      "d": "2026-11-20",
      "t": "Added by board-sync: card c-ch2build stalled after its rescue"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom tapped Start again.",
+     "at": "2026-11-20T17:42:31.484Z"
     }
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-20"
+   "changed": "2026-11-20",
+   "done": "2026-11-20"
   }
  ],
  "sessions": [
