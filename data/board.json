@@ -7417,17 +7417,17 @@
    "title": "Board redesign 2: cards and the card panel",
    "theme": "Tools",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "boardux2",
    "next": "Waits on Board redesign 1 (c-boardux1). Then it redraws every card (short title, the instruction readable without opening it, one status line, one main button, undo on All good) and the panel that opens on a tap (main action always in view), and shortens the titles of the open cards.",
    "blocks": [
     "c-boardux3"
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-19",
+   "changed": "2026-11-20",
    "chat": {
     "url": "",
-    "opening": "not started"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
@@ -7437,6 +7437,10 @@
     {
      "d": "2026-11-19",
      "t": "Unblocked: Board redesign 1: an honest header and status is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation."
     }
    ],
    "prompt": {
