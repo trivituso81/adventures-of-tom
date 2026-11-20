@@ -133,7 +133,7 @@ SCENES.ch1Amy=[
   {talk:'Tom',lines:["I'm carrying a child and receiving a news report."]},
   {talk:'Amy',lines:["I carried both of them up that street with the groceries. Go see Mom. I'm coming over after my run."]},
   {propTo:'amywin',field:'u',to:0,time:.3}, {prop:'amywin',hide:true},
-  {cam:null},
+  {cam:null}, {face:'tom',dir:'right'},   // Amy is gone: Tom turns to Grace for the last two lines (facehold1)
   {talk:'Tom',lines:["Your mother says I'm slow."]},
   {talk:'Grace',lines:["You are slow. I've been on number four since the mailbox."]},
   {call:()=>{ if(typeof storyPosesLoad==='function') { storyPosesLoad('deedee'); storyPosesLoad('boppy'); } }}   // Deedee's greeting poses are ready before the kitchen (roofnpc2); last, so the 20 s idle release (engine/painted.js) does not drop them during this scene (amywin1)

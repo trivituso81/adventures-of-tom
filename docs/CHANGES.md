@@ -1,3 +1,12 @@
+## facehold1 (2026-11-19): Cutscenes: when a scene turns someone, they stay turned; Tom faces Amy's window on Rivituso Row
+
+- Tom (11-19 17:18, screenshot of amywin1): "Tom faces the wrong way. how come you always make things facing the wrong way? ... this is a persistent issue in cut scenes".
+- Cause (engine, not the art): before every line the automatic staging (the huddle, engine/story.js) turned each person toward the middle of the group. It ignored a turn the scene had set with a {face} step. On Rivituso Row Amy is not standing on the map, so the huddle turned Tom to Grace, away from Amy's window, at her first line. The same thing could happen in any scene that turns someone and then has them talk.
+- Fix: a {face} turn now holds until that person walks again (`huddleTurns` skips anyone with `stageFaced`; a {walk} clears it). The huddle's re-layout clears it only for someone it actually moves.
+- Rivituso Row: Tom faces Amy's window for her lines, then turns to Grace (a new {face} step) for "Your mother says I'm slow."
+- New test check: `tools/cut_natural_test.py` fails when the automatic staging turns someone who stands still away from their {face} step. Without the fix it fails on Rivituso Row; with it, the chapter 1 opening, Rivituso Row and the kitchen pass in portrait and landscape. Frames looked at.
+- Not yet checked by this test: scenes outside chapter 1 (the check runs only on the three chapter 1 scenes the test plays).
+
 ## board-nodonecol (2026-11-19): The board has no Done column; finished cards are a closed list below the lanes
 
 - board.html: the wide layout shows Up next, In progress and Waiting only, and a closed DONE list (last 3 days) under the lanes, like the phone layout. tools/board_test.py checks it. The Done cards are still kept in data/board.json (the file grows until an archive rule is built).

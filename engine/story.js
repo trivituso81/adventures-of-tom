@@ -286,7 +286,7 @@ const SCENE_OPS={
   call:o=>S.call(o.call),
   step:o=>o.step,
   talk:o=>S.talk(o.talk,Array.isArray(o.lines)?o.lines:[o.lines],o.voice),
-  walk:o=>lazy(()=>{ const a=sceneActor(o.walk); storyHold(a); if(a) a.stagePlaced=true; return S.walk(a,scenePos(o.to),o.speed||.3,o.onStep); }),
+  walk:o=>lazy(()=>{ const a=sceneActor(o.walk); storyHold(a); if(a) { a.stagePlaced=true; a.stageFaced=false; } return S.walk(a,scenePos(o.to),o.speed||.3,o.onStep); }),
   face:o=>S.call(()=>{ const a=sceneActor(o.face); if(a) { a.facing=o.dir; a.stageFaced=true; } }),
   place:o=>S.call(()=>{ const a=sceneActor(o.place),[x,y]=scenePos(o.at); if(!a) return; storyHold(a); a.stagePlaced=true; a.x=x; a.y=y; a.move=null; a.scr=null; if(o.dir) a.facing=o.dir; }),
   hop:o=>lazy(()=>{ const l=o.lift||[0,0]; return S.hop(sceneActor(o.hop),scenePos(o.from),scenePos(o.to),o.time||.5,o.arc||16,l[0],l[1]); }),
@@ -595,7 +595,7 @@ function huddleGroup(withName,focus) {
   return {roster,others,key:named&&others.includes(named)?named:fk&&fk.actor&&others.includes(fk.actor)?fk.actor:null};
 }
 const huddleFixed=(g,a)=>g.others.includes(a)||a.scenePose||a.scr;
-const huddleTurns=(g,a)=>!a.scenePose&&!a.scr&&(!a.still||a.held)&&!a.monster&&!a.move;
+const huddleTurns=(g,a)=>!a.scenePose&&!a.scr&&(!a.still||a.held)&&!a.monster&&!a.move&&!a.stageFaced;   // facehold1: a {face} step holds until that person walks again (Tom 2026-11-19: "Tom faces the wrong way ... a persistent issue in cut scenes")
 // Closeness (close1, Tom 2026-11-12: "as close as possible without significantly overlapping each other"). A figure is about one tile wide and
 // 2.3 tiles tall, so rows count half: two people are "together" when hudNear <= 1.5 (next column, up to two rows off; or the same column three
 // rows off). hudTight: the party members are all linked to each other through such neighbours (NPCs in the group can be links).
@@ -810,7 +810,7 @@ function huddleStep(o) {
           if(P.some((p,i)=>P.some((q,j)=>j>i&&!stageApart(p,q)))) L={slots:null}; }
         if(!L.slots) { L=huddleLayout(g,clr,false,memo,keep);
           if(!L.slots||!L.tight||L.cost>=6) { const L2=huddleLayout(g,clr,true,memo,keep); if(L2.slots&&(!L.slots||(L2.tight&&!L.tight)||(L2.tight===L.tight&&L2.cost<L.cost))) L=L2; } }   // Tom stays unless that leaves the group cramped or apart
-        if(L.slots) L.movers.forEach((a,k)=>{ const t=L.slots[k],p=stagePos(a); a.x=p.x; a.y=p.y; a.move=null; a.lag=0; if(a.stageFaced!==undefined) a.stageFaced=false;
+        if(L.slots) L.movers.forEach((a,k)=>{ const t=L.slots[k],p=stagePos(a); a.x=p.x; a.y=p.y; a.move=null; a.lag=0; if(a.stageFaced!==undefined&&(t.x!==p.x||t.y!==p.y)) a.stageFaced=false;   // facehold1: only someone the huddle actually moves loses their {face}
           let path=(t.x===p.x&&t.y===p.y)?[]:findPath(currentMap,a,t);
           if(!path.length&&(t.x!==p.x||t.y!==p.y)) path=[{x:t.x,y:t.y}];   // no walkable route: slide straight there
           this.moves.push({a,path,i:0}); });

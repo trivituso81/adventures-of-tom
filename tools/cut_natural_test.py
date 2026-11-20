@@ -28,6 +28,19 @@ HOOK = r"""()=>{ window.__walks=[]; const orig=S.walk;
     st.update=function(dt){ const r=u0(dt); if(r&&a&&!rec.done){ const p=position(a); rec.to=[p.x,p.y]; rec.done=true; } return r; };
     return st; };
   // cutpolish2: count (a) story sheets released while a scene runs and (b) draws of a painted story pose that fell back to the small row-string copy (the blur).
+  // facehold1: the automatic staging (huddle, gather, approach, around) must never turn someone standing still away from the way a {face} step set them.
+  // {face} sets the want, a {walk} clears it; a turn by any authored step (a call, a hop, the scene end) is the script's own and is not counted.
+  window.__wf=[]; const of=SCENE_OPS.face,ow=SCENE_OPS.walk;
+  SCENE_OPS.face=o=>{ const st=of(o),s0=st.start.bind(st); st.start=function(){ const r=s0(); const a=sceneActor(o.face); if(a) a._faceWant=o.dir; return r; }; return st; };
+  SCENE_OPS.walk=o=>{ const st=ow(o); if(st&&st.start){ const s0=st.start.bind(st); st.start=function(){ const a=sceneActor(o.walk); if(a) a._faceWant=null; return s0(); }; } return st; };
+  for(const op of ['huddle','gather','approach','around']) { const f=SCENE_OPS[op]; if(!f) continue;
+    SCENE_OPS[op]=o=>{ const st=f(o); if(!st||!st.start) return st; const who=()=>[player,...followers].filter(a=>!a.hidden&&!a.seat);
+      const look=(snap)=>{ for(const [a,fc,x,y] of snap) { const p=position(a); if(a._faceWant&&a.facing!==fc&&a.facing!==a._faceWant&&Math.abs(p.x-x)<.01&&Math.abs(p.y-y)<.01)
+        window.__wf.push({op,who:a.isPlayer?'tom':(a.member&&a.member.id)||a.name,now:a.facing,set:a._faceWant,line:dialog.active?dialog.name:null}); } };
+      const s0=st.start.bind(st),u0=st.update?st.update.bind(st):null; let snap=null;
+      st.start=function(){ snap=who().map(a=>{ const p=position(a); return [a,a.facing,p.x,p.y]; }); const r=s0(); if(!u0) look(snap); return r; };
+      if(u0) st.update=function(dt){ const r=u0(dt); if(r&&snap) { look(snap); snap=null; } return r; };   // judged when the step ends: someone it walked has moved
+      return st; }; }
   window.__rel=[]; window.__blur=[]; const pr=paintedRelease; paintedRelease=function(a){ if(intro.active&&/Story$|^mudlingHeist$/.test(a.id)) window.__rel.push(a.id); return pr.apply(this,arguments); };
   const pc=paintedCanvas; paintedCanvas=function(rows,flash){ const r=pc.apply(this,arguments); if(!r&&intro.active&&rows&&rows._paint){ const A=rows._paint.a,id=typeof A==='string'?A:(A&&A.id); if(/Story$|^mudlingHeist$/.test(id||'')) window.__blur.push(id+':'+rows._paint.f); } return r; }; }"""
 
@@ -94,7 +107,7 @@ def run(pw, mode):
         last = key
         pg.wait_for_timeout(100)
     walks = pg.evaluate("()=>window.__walks")
-    pre = pg.evaluate("()=>({rel:window.__rel,blur:window.__blur})")
+    pre = pg.evaluate("()=>({rel:window.__rel,blur:window.__blur,wf:window.__wf})")
     br.close()
     return log, walks, errs, pre
 
@@ -149,6 +162,7 @@ def analyse(mode, log, walks, errs):
             if f0['rs'] or f0['ride']: fails.append(f"theft: Rose still on Tom's shoulders at Deedee's first line {facts['rose_at_first_line']}")
             if tuple(f0['r']) == tuple(f0['tom']): fails.append(f"theft: Rose on Tom's tile at the first line {facts['rose_at_first_line']}")
         if any(s['rh'] and s['ia'] for s in log): fails.append('theft: Rose hidden during the scene')
+    # facehold1: nobody turned away from the way a {face} step set them while they stood still
     # 4. arrows during a scene; 5. FAST/SKIP over a modal; 6. (A) button between lines
     sc = [s for s in log if s['ia'] and s['ph'] == 'scene']
     if any(s['dpad'] for s in sc[3:]): fails.append(f'{mode}: arrows showed during a scene')
@@ -194,6 +208,8 @@ if __name__ == '__main__':
             json.dump({'log': log, 'walks': walks, 'errs': errs, 'pre': pre}, open(os.path.join(OUT, f'{m}-{LAYOUT}.json'), 'w'))
             f, facts = analyse(m, log, walks, errs); allf += f; res[m] = facts
             facts['story_sheets_released_in_scene'] = len(pre['rel']); facts['blurred_pose_draws'] = len(pre['blur'])
+            wf = pre.get('wf') or []; facts['wrong_facing_turns'] = len(wf)   # facehold1
+            if wf: allf.append(f"{m}: the automatic staging turned someone away from their {{face}} step {len(wf)} times, first {wf[0]}")
             if pre['rel']: allf.append(f"{m}: story sheets released mid-scene {sorted(set(pre['rel']))}")
             if pre['blur']: allf.append(f"{m}: painted pose drawn blurry (sheet not ready) {len(pre['blur'])} times, e.g. {sorted(set(pre['blur']))[:4]}")
             print(m, LAYOUT, 'frames', len(log), json.dumps(facts)[:900])
