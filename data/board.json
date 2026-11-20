@@ -15687,7 +15687,7 @@
    "title": "Battle video route: why WAN was dropped, costs, proof plan",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "wanplan",
    "next": "Done, $0 spent, no game change. The rule NO PAINTED POSES IN BATTLE is in CLAUDE.md and claude/canon-addendum.md. Finding: WAN was dropped because it could only be run by hand in Sorceress at 70 cents a clip, not for quality; the family batch you rejected was made on the cheapest Grok model from a small battle-sheet drawing. Recommendation: Wan 3.0 through fal.ai for the family (50 cents a clip), xAI Grok lite stays for monsters. The proof plan for Grace's guard (54 cents expected, $2 cap) is claude/video-battle-plan.md section 4. Your card: Approve the WAN proof.",
    "blocks": [],
@@ -15717,6 +15717,10 @@
     {
      "d": "2026-11-20",
      "t": "Retired t-clipposes, c-clipposesfix and c-fix-clipposes-3 (painted pose review and fixes). Made t-wanproof-setup and c-wanproof. Nothing generated, no painted state removed yet: each goes when its video exists."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as wanplan: Rule: no painted poses in battle; plan to bring back video (WAN by API) with a proof of Grace's guard. No game change, nothing spent"
     }
    ],
    "prompt": {
@@ -15728,7 +15732,8 @@
     "effort": "medium (research and a written plan, no build)",
     "text": "Read claude/handoff-rules.md and card c-wanplan in data/board.json with its history. Record the rule NO PAINTED POSES IN BATTLE in claude/canon-addendum.md and CLAUDE.md, find out from the board and the claude/ docs why the WAN video route was dropped, compare the API routes for WAN against xAI, and write the proof plan for Grace's guard into claude/video-battle-plan.md. Spend nothing and stop for Tom's approval. Your first push is the commit board: start c-wanplan. You have my full permission to access the repo."
    },
-   "after": "t-wanproof-setup"
+   "after": "t-wanproof-setup",
+   "done": "2026-11-20"
   },
   {
    "id": "t-wanproof-setup",
@@ -16318,6 +16323,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukEkFzpnNXMhJNExAwp",
+   "title": "Battle video route: why WAN was dropped, costs, proof plan",
+   "first": "2026-11-20T12:20:04-08:00",
+   "last": "2026-11-20T12:29:42-08:00",
+   "tags": [
+    "wanplan"
+   ],
+   "cards": [
+    "c-wanplan"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukGZvj5YBSMvPY8Zknj",
    "title": "Move the Project docs into the repo (Project is 97% full)",
    "first": "2026-11-20T12:24:26-08:00",
@@ -16325,16 +16342,6 @@
    "tags": [],
    "cards": [
     "c-projclean"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEkFzpnNXMhJNExAwp",
-   "title": "Battle video route: why WAN was dropped, costs, proof plan",
-   "first": "2026-11-20T12:20:04-08:00",
-   "last": "2026-11-20T12:20:04-08:00",
-   "tags": [],
-   "cards": [
-    "c-wanplan"
    ]
   },
   {
@@ -17844,8 +17851,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "acb9cf8807b7728505c001ab249c4c40d25d01f0",
- "synced_at": "2026-11-20T20:25:09+00:00",
+ "synced": "408bfa46da9a297c93c21572ff8e7bf95dc0de7d",
+ "synced_at": "2026-11-20T20:30:20+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
