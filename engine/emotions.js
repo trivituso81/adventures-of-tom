@@ -95,7 +95,7 @@ function emoPose(lid,mood,fx,isSpk) {
   const a=emoActorById(lid);
   if(!a||a.storyBack) return;
   if(isSpk) { if(typeof STORY_POSES!=='undefined'&&STORY_POSES[lid]&&STORY_POSES[lid]['em_'+mood]) { a.scenePose={f:'em_'+mood,mid:lid,emo:true}; EMO.actor=a; } emoFx(a,fx); return; }   // cutpolish5: a row that names the speaker changes the speaker's own pose on a cue word
-  if(!a.scenePose&&typeof STORY_POSES!=='undefined'&&STORY_POSES[lid]&&STORY_POSES[lid]['em_'+mood]) { a.scenePose={f:'em_'+mood,mid:lid,emo:true}; EMO.listeners.push(a); }
+  if((!a.scenePose||a.scenePose.listen)&&typeof STORY_POSES!=='undefined'&&STORY_POSES[lid]&&STORY_POSES[lid]['em_'+mood]) { a.scenePose={f:'em_'+mood,mid:lid,emo:true}; EMO.listeners.push(a); }   // listen1: a reaction replaces a listener pose
   emoFx(a,fx);
 }
 function emoCueTick() {
@@ -116,6 +116,48 @@ function emoReact(speakerId,text) {
     if((isSpk&&!at)||typeof EMOTION_FACES==='undefined'||!EMOTION_FACES.includes(lid)) continue;   // the speaker may only be named with a cue (at)
     if(typeof storyPosesLoad==='function') storyPosesLoad(lid);
     if(at>0) EMO.pending.push([lid,mood,at,fx,isSpk]); else emoPose(lid,mood,fx,isSpk);
+  }
+}
+// Listener poses (listen1, card c-idea-implementlisteni, Tom 2026-11-20: "implement listening/thinking poses (should be generated and approved in art library) for all
+// chapter 1 talking interactions, including cut scenes"). While a line shows in a chapter of LISTEN_CHAPTERS, every person near the speaker who is not speaking stands in
+// tk_listen (Art Library <id>-listen) or tk_think (<id>-think), as docs/listen-lines.tsv says for that line (data/listen-types.js); a line with no row gets `listen` when its
+// speaker stands on the map. Skipped: the speaker, monsters, Nara and anyone with no such frame, hidden or seated people, Tom carrying Rose, anyone walking, anyone a scene
+// step posed or turned away (scenePose, storyBack). A listener reaction (docs/emotion-reactions.tsv) wins: it replaces the listener pose, also on a cue word. The listener
+// faces the speaker (left or right; a step that set their facing keeps it). A person with no baked frame keeps the old behaviour, so a pose appears as soon as it is baked.
+const LISTEN_R=8;   // tiles from the speaker (or from Tom when the speaker is off the map); outside a scene only Tom and his followers listen
+function listenRowOf(name,text) {
+  if(typeof LISTEN_TYPES==='undefined'||typeof STORY==='undefined'||!LISTEN_CHAPTERS.has(STORY.chapter)) return undefined;
+  return LISTEN_TYPES[name+'|'+text+'|'+STORY.chapter]||null;
+}
+function listenParse(cell) {
+  const r={def:'listen',by:{}}; let first=true;
+  for(const w of String(cell||'listen').split(/\s+/)) { if(!w) continue; const i=w.indexOf(':'); if(i>0) r.by[w.slice(0,i)]=w.slice(i+1); else if(first) { r.def=w; first=false; } }
+  return r;
+}
+function listenerIdOf(a) {
+  if(a===player) { if(typeof roseRider==='function'&&roseRider()) return null; const pm=typeof playerMember==='function'?playerMember():null; return pm?pm.id:null; }
+  if(a.member) return a.member.id;
+  if(a.name&&typeof DIALOG_PORTRAIT_IDS!=='undefined') { const k=DIALOG_PORTRAIT_IDS[String(a.name).toLowerCase()]; if(k&&!/^foe_/.test(k)) return String(k).replace(/^npc_/,''); }
+  return null;
+}
+function emoListen(name,text) {
+  const row=listenRowOf(name,text); if(row===undefined) return;
+  const low=String(name||'').trim().toLowerCase();
+  const mon=EMO.spk?null:(currentMap&&currentMap.npcs.find(x=>x.monster&&!x.hidden&&x.name&&x.name.toLowerCase()===low))||null,spk=EMO.spk||mon;
+  if(!row&&!spk) return;   // narration, an off-map voice or a sign with no row: no listener poses
+  // distance from a person speaking; a monster (a boss's map spot is far from where it stands) counts from Tom
+  const L=listenParse(row),c=position(EMO.spk||player),all=[player].concat(followers,dialog.emo?((currentMap&&currentMap.npcs)||[]):[]);   // a press-A chat is with Tom's party only; a scene includes everyone near
+  for(const a of all) {
+    if(!a||a===spk||a.monster||a.hidden||a.seat||a.amber||a.storyBack||a.move||a.scenePose) continue;
+    const id=listenerIdOf(a); if(!id) continue;
+    const t=L.by[id]||L.def,f='tk_'+t;
+    if(t==='none'||typeof STORY_POSES==='undefined'||!STORY_POSES[id]||!STORY_POSES[id][f]) continue;
+    const p=position(a),dx=c.x-p.x;
+    if(Math.hypot(dx,c.y-p.y)>LISTEN_R) continue;
+    const fx=spk?position(spk).x-p.x:0;
+    if(spk&&!a.stageFaced&&Math.abs(fx)>=.5) a.facing=fx<0?'left':'right';
+    if(typeof storyPosesLoad==='function') storyPosesLoad(id);
+    a.scenePose={f,mid:id,emo:true,listen:true}; EMO.listeners.push(a);
   }
 }
 // Talking poses (talk1, Tom 2026-11-13, docs/TALK_POSES.md): four full-body poses per person (Art Library <id>-talk, tools/sprite-bake/talk_frames.py, frames tk_<type>
@@ -148,6 +190,7 @@ function emoApply() {
   if(EMO.spk&&dialog.emo&&lifeOn(EMO.spk)) { EMO.spk._sqT=lifeNow(); emoTurnListeners(EMO.spk); }   // cutpolish5: squash as the line starts, listeners turn
   // the person speaking this line: listeners in a mood pose turn toward them (facing1, poseFacingWant in engine/story.js)
   if(dialog.emo) emoReact(id,text);
+  emoListen(String(dialog.name||'').trim(),text);   // listen1: everyone else near the speaker listens or thinks (after the reactions, which win)
   const lp=id&&typeof LINE_POSES!=='undefined'&&LINE_POSES[String(dialog.name||'').trim()+'|'+text];   // c-reports: one line, one painted pose and its own face (data/line-poses.js)
   if(lp&&typeof STORY_POSES!=='undefined'&&STORY_POSES[lp.id]&&STORY_POSES[lp.id][lp.f]) {
     const box=$('dialog-portrait'),img=box&&box.querySelector('img');
@@ -195,15 +238,18 @@ loadDialogLine=function() { LE_loadDialogLine_emo(); emoApply(); };
 // Pose hold (cutpolish1): inside a scene the speaker keeps the mood or talking pose for up to 0.6 s of scene time after the box closes, so a person does not drop
 // to a plain stand between two lines. It ends when the next box opens, when a step moves or re-poses that person, at a fight, on SKIP and at scene end.
 const EMO_HOLD_SEC=.6;
-let emoHold=null;   // {a,P,t}
-function emoHoldClear() { if(emoHold) { if(emoHold.a.scenePose===emoHold.P) emoHold.a.scenePose=null; emoHold=null; } }
+// listen1: listeners in a listener pose are held the same way, so they do not drop to a plain stand (and squash twice) at every line change.
+let emoHold=[];   // [{a,P,t}]
+function emoHoldClear() { for(const h of emoHold) if(h.a.scenePose===h.P) h.a.scenePose=null; emoHold=[]; }
 const LE_advanceDialog_emo=advanceDialog;
 advanceDialog=function() {
   LE_advanceDialog_emo();
   if(dialog.active||!(EMO.mood||EMO.actor||EMO.listeners.length)) return;
-  const a=EMO.actor,P=a&&a.scenePose&&a.scenePose.emo?a.scenePose:null;
+  const keep=[];
+  if(EMO.actor&&EMO.actor.scenePose&&EMO.actor.scenePose.emo) keep.push([EMO.actor,EMO.actor.scenePose]);
+  for(const l of EMO.listeners) if(l.scenePose&&l.scenePose.listen) keep.push([l,l.scenePose]);
   emoClear();
-  if(P&&intro.active&&intro.phase==='scene'&&!battle.active&&!(typeof cut!=='undefined'&&(cut.skip||cut.ff))) { a.scenePose=P; emoHold={a,P,t:0}; }
+  if(keep.length&&intro.active&&intro.phase==='scene'&&!battle.active&&!(typeof cut!=='undefined'&&(cut.skip||cut.ff))) for(const [a,P] of keep) { a.scenePose=P; emoHold.push({a,P,t:0}); }
 };
 setInterval(()=>{ if(!dialog.active&&(EMO.mood||EMO.actor||EMO.listeners.length||EMO.pending.length)) emoClear(); },100);   // a skipped or interrupted scene must leave no pose behind
 const LE_endIntro_emo=endIntro;
@@ -211,11 +257,11 @@ endIntro=function() { emoClear(); emoHoldClear(); return LE_endIntro_emo(); };
 const LE_updateIntro_emo=updateIntro;
 updateIntro=function(dt) {
   const r=LE_updateIntro_emo(dt);
-  if(emoHold) {
-    const h=emoHold;
-    if(dialog.active||battle.active||!intro.active||h.a.scenePose!==h.P||h.a.move||h.a.scr) { if(h.a.scenePose===h.P&&!dialog.active) h.a.scenePose=null; emoHold=null; }   // a step moved or re-posed them
-    else if((h.t+=dt)>=EMO_HOLD_SEC) emoHoldClear();
-  }
+  if(emoHold.length) emoHold=emoHold.filter(h=>{
+    if(dialog.active||battle.active||!intro.active||h.a.scenePose!==h.P||h.a.move||h.a.scr) { if(h.a.scenePose===h.P&&!dialog.active) h.a.scenePose=null; return false; }   // a step moved or re-posed them
+    if((h.t+=dt)>=EMO_HOLD_SEC) { if(h.a.scenePose===h.P) h.a.scenePose=null; return false; }
+    return true;
+  });
   return r;
 };
 addEventListener('DOMContentLoaded',()=>{ if(window.__LE) Object.assign(window.__LE,{EMO,emoMoodOf,emoCueReached,emoCueWeights}); });

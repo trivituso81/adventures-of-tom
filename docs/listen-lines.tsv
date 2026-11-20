@@ -1,0 +1,111 @@
+chapter	where	speaker	listen	why	text
+1	opening	Tom	listen		Oof, I'm finally here! At least the 6 hours went by fast on Delta One!
+1	opening	Tom	listen		Thanks for the JFK pickup, Sal.
+1	opening	Sal	listen		You got it, kid. Head outside, I think there's a couple of pipsqueaks looking for you.
+1	opening	Grace	listen		TATA! You're BACK!
+1	opening	Grace	listen		We waited for you for a hundred years.
+1	opening	Rose	listen		A hundred MILLION years!
+1	opening	Rose	listen		Tata, up! Up up up!
+1	opening	Rose	listen		I'm the tallest! Giddyup, Tata!
+1	opening	Tom	listen		Hello, Rose. Please keep your arms and legs inside the uncle at all times.
+1	opening	Grace	listen		Tata, LOOK. A sparkling diamond gold dumpling squishy!
+1	opening	Grace	listen		It's limited edition. There are only two in the whole world. You can squeeze it!
+1	opening	Tom	listen		That's the shiniest dumpling I've ever seen. And I've seen a LOT of dumplings.
+1	ch1Goal	Grace	listen		Tata, don't walk yet. I wrote down everything that happened since you left. Number one. Boppy saw the Big One again.
+1	ch1Goal	Rose	listen		It's bigger than a BUS! It ate a boat!
+1	ch1Goal	Grace	think	Tom weighs the evidence (one witness, twenty years)	It did not eat a boat. Nobody's ever seen it but Boppy, and he's been saying it for twenty years.
+1	ch1Goal	Tom	listen		Twenty years, one witness. That's a strong number one. What's number two?
+1	ch1Goal	Grace	listen		Number two. Deedee made apple muffins. They're for you, so nobody's allowed to have one yet.
+1	ch1Goal	Rose	listen		I licked one. Only the top!
+1	ch1Goal	Tom	listen		Thank you for telling me, Rose. That one's yours. Grace, I'm so sorry, but number two can't wait. I'm starving!
+1	ch1Goal	Grace	listen		Number three. Rose licked a muffin.
+1	ch1Amy	Amy	listen		Brother! I'm watching you from the window. I've seen people move faster walking on the sand at Robert Moses.
+1	ch1Amy	Tom	listen		I'm carrying a child and receiving a news report.
+1	ch1Amy	Amy	listen		I carried both of them up that street with the groceries. Go see Mom. I'm coming over after my run.
+1	ch1Amy	Tom	listen		Your mother says I'm slow.
+1	ch1Amy	Grace	listen		You are slow. I've been on number four since the taxi place.
+1	ch1Ellie	Aunt Ellie	listen		Tom. They gave you a seat that turns into a bed, and you still got off that plane wrinkled.
+1	ch1Ellie	Tom	listen		Hi, Aunt Ellie. It's a travel wrinkle. It's supposed to fall out by dinner.
+1	ch1Ellie	Aunt Ellie	listen		Then I'll look at you again at dinner. Come in. Rose, darling, what is that on your hands?
+1	ch1Ellie	Rose	listen		Cinnamon! From Deedee's muffin!
+1	ch1Ellie	Aunt Ellie	listen		Then you'll stay up there, please. Your uncle wipes clean. My chairs don't.
+1	ch1Ellie	Grace	listen		Aunt Ellie, I'm reading Tata everything he missed. You're number four.
+1	ch1Ellie	Aunt Ellie	listen		Am I? What did I do?
+1	ch1Ellie	Grace	listen		You got new curtains.
+1	ch1Ellie	Aunt Ellie	listen		I did. And what's number three?
+1	ch1Ellie	Grace	listen		Rose licked a muffin.
+1	ch1Ellie	Aunt Ellie	listen grace:think	Grace has to fix her list	Then the curtains are three, Grace. Fix your list. I'm not coming in behind a licked muffin.
+1	ch1Ellie	Rose	listen		Aunt Ellie, did you miss Tata?
+1	ch1Ellie	Aunt Ellie	listen		Sure. The street was quieter without him, and I didn't care for it. Now go and see your mother, Tom, before I change my mind.
+1	ch1Theft	Deedee	listen		My favorite son! I missed that face. Now sit, you're having a muffin.
+1	ch1Theft	Tom	listen		Hi, Mom. I missed yours too. Is that the cinnamon topping? I've been thinking about that topping since I flew over Kansas.
+1	ch1Theft	Deedee	listen		I made twelve and they're all still there. I've been standing between that pan and your father since six this morning.
+1	ch1Theft	Boppy	listen		In my own kitchen! Tom, back at Rikers I had a key to every door in the place, and here I can't get near a muffin. You know, one time a fella tried to walk out of the mess hall with a whole loaf of bread under his hat...
+1	ch1Theft	Rose	none	Rose screams: shock, not listening	AHHH! DEEDEE!
+1	ch1Theft	Deedee	none	the mud blob is in the kitchen	Excuse me! I just washed that floor.
+1	ch1Theft	Boppy	none	everyone watches the theft, not Boppy	...so I say to him, "Nice hat." He says, "Thank you." And the hat is steaming.
+1	ch1Theft	Deedee	none	the pan was just stolen	That thing took my good twelve-cup pan! I don't even put that pan in the DISHWASHER.
+1	ch1Theft	Boppy	listen		...and I only caught him because the hat kept getting taller. Wait, where'd the muffins go?
+1	ch1Theft	Deedee	listen		A ball of mud came through the door and took them. Pan and all.
+1	ch1Theft	Boppy	listen		The mud gets a muffin and I don't?
+1	ch1Theft	Deedee	listen		Girls, sneakers. Tom, hold the door. Hubby, you stay right there.
+1	ch1Theft	Boppy	listen		Tom, you heard her.
+1	ch1Mudling	Rose	listen		Hello, mud! Can we please have Deedee's muffins back? Thank you!
+1	ch1Mudling	Mudling	listen		No. Ours now.
+1	ch1Mudling	Rose	listen		But I said PLEASE!
+1	ch1Mudling	Tom	listen		She did. I was right here. It was an excellent please.
+1	ch1Mudling	Deedee	listen		Girls, behind me. You three have till I count to three. Then I'm getting the hose.
+1	ch1Mudling	Deedee	listen		Three.
+1	ch1Mudling	Deedee	listen		Up, up. Everybody up. Deedee will make it better.
+1	ch1Mudling	Deedee	listen		There. Good as new. Try not to do that again.
+1	ch1Mudling	Grace	think	Grace counts the papers: a deduction	Nine papers. There were twelve. So the one with the pan still has three.
+1	ch1Mudling	Deedee	listen		Then it has three of my muffins and my pan. Keep walking.
+1	ch1Spot	Rose	think	everyone looks at the grey patch	The grass is Boppy color!
+1	ch1Spot	Grace	think	examining the patch and the cube	It's grey, Rose. Just that one spot. And that orange cube has a dragonfly in it.
+1	ch1Spot	Rose	listen		He's stuck! Tata, get him out!
+1	ch1Spot	Tom	listen		Yes. Right away. Everybody give the dragonfly some room.
+1	ch1Spot	Tom	listen		It's the size of a plum. I carried a suitcase through two airports this morning.
+1	ch1Spot	Rose	listen		Your face is RED, Tata!
+1	ch1Spot	Grace	listen		Tata, stop. You're getting fingerprints on it. And look, it has a dent. Did you do that?
+1	ch1Spot	Tom	listen		Grace. I couldn't even make it wobble.
+1	ch1Spot	Grace	think	Grace asks about the bulb: everyone looks at it	Deedee, what's that?
+1	ch1Spot	Deedee	think	the flashbulb clue (report c5no scenario)	A flashbulb. It's burnt. Somebody set it off right here. Look in the glass. Little purple-black sparkles, like crushed-up stars. They change color when you tip it.
+1	ch1Spot	Grace	think	Grace lists the clues	Don't throw it out! It's a clue. I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it. I'm writing it in pencil.
+1	ch1Spot	Tom	listen		Why pencil?
+1	ch1Spot	Grace	think	nobody knows what it means yet	Because I don't know what any of it means yet.
+1	ch1Pond	Tom	none	Tom yelps at the boss	GAH! Grace, I'm holding your hand. That's for me, not for you.
+1	ch1Pond	Grace	none	first sight of the Big One	I know, Tata. You're squeezing. Is that the Big One? Boppy only said it was as big as the couch!
+1	ch1Pond	Deedee	listen		For once in his life he rounded down.
+1	ch1Pond	The Big One	think	the Big One mentions the flash: a clue	GLUB. I was small at breakfast. Then a flash. Now I don't fit under my log.
+1	ch1Pond	Deedee	listen		And that's my good twelve-cup pan on your head. It's never been in pond water in its life.
+1	ch1Pond	The Big One	listen		It's my crown. A little muddy one brought it. I'm keeping it.
+1	ch1Pond	Tom	listen		Mom, wait. Bosses hit in a pattern. Watch what he does twice, then go.
+1	ch1Pond	Deedee	listen		I worked the night shift, Tom. I've walked up to worse. Mister, take off my pan.
+1	ch1Pond	Deedee	listen		Tom, you stand in front of whoever it stares at. Cozy Rosie, make it laugh. Then we try again.
+1	ch1AfterBoss	Rose	none	BOO: surprise	BOO!
+1	ch1AfterBoss	The Big One	listen		GLUB! HA! You got me! I see everybody. I never saw you!
+1	ch1AfterBoss	Tom	listen		Nobody does. She's gotten me in an empty room.
+1	ch1AfterBoss	The Big One	listen		Take the pan. The sneaky one gets this. It's the only thing I've got.
+1	ch1AfterBoss	Rose	listen		Thank you, fish! There's a bug on my money!
+1	ch1AfterBoss	The Big One	think	the fish asks about Boppy	The man in the folding chair. Will he be back?
+1	ch1AfterBoss	Grace	listen		That's Boppy. He's here every single day.
+1	ch1AfterBoss	The Big One	listen		Good. He was in the middle of a story. The one about the race.
+1	ch1AfterBoss	Deedee	listen		He's been in the middle of that one for fifty-one years.
+1	ch1End	Rose	listen		Boppy! Your fish is REAL! He's CAR size and he gave me money!
+1	ch1End	Boppy	listen		CAR size? Cozy Rosie, I told everybody a couch. Twenty years! I didn't want to brag!
+1	ch1End	Boppy	think	Boppy shows his gold teeth	Now that's real gold. Same as these. Look.
+1	ch1End	Rose	listen		You've got money in your TEETH!
+1	ch1End	Boppy	listen		Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look.
+1	ch1End	Rose	listen		Under Lamby! Nobody looks under Lamby!
+1	ch1End	Boppy	listen		Good girl. Now. Your grandmother promised me the first muffin. Who's got my muffin?
+1	ch1End	Grace	listen		The fish ate them, Boppy. The last three.
+1	ch1End	Boppy	listen		The fish gets THREE?
+1	ch1End	Deedee	listen		Twelve more. Forty minutes. The first one's still yours.
+1	ch1End	Boppy	listen		Girls, you heard that. Forty minutes. Somebody watch the clock.
+1	ch1Job	Grace	listen		Tata, you have a job. If you see anything grey in California, or an orange cube, you write it down and text me.
+1	ch1Job	Tom	listen		I have a job. Yes. Does the job come with a pencil?
+1	ch1Job	Grace	listen		That's my second best one. Don't lose it.
+1	ch1Job	Tom	listen		Second best. It's going in the pocket with the zipper.
+1	ch1Job	Rose	listen		One more ride, Tata! To the cab! Go the LONG way!
+1	ch1Job	Tom	listen		The long way. That's all the way around the Square. Twice.
+1	ch1Sunday	TNB	none	a phone text: nobody is speaking aloud	hey babe. safe flight. the smog over 2nd ave turned purple this morning. it'll probably blow over.

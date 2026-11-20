@@ -24,6 +24,9 @@ STRIPS = {
 }
 for _n in ['washington', 'odette', 'carmen', 'marisol', 'larry']:                # r-20261114-104915-g4gl: the smog's daze
     STRIPS[_n + 'dz'] = (_n, ['ch2-dazed-' + _n])
+import glob as _glob
+if _glob.glob(os.path.join(ROOT, 'art/raw/characters/sal-listen-v*.png')):    # listen1 (2026-11-20): Sal listening in the opening, frame tk_listen in bake_story_poses.py
+    STRIPS['salls'] = ('sal', ['sal-listen'])
 
 
 def bake(name):

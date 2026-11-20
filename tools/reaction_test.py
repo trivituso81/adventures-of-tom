@@ -52,7 +52,7 @@ SNAP=r"""(boss)=>{ const P=a=>{ const p=position(a); return [Math.round(p.x*100)
     return ({left:'l',right:'r',up:'u',down:'d'})[a.facing]||'?'; };
   const ids=[{id:(typeof playerMember==='function'?playerMember():hero).id,a:player},...followers.filter(f=>!f.hidden&&(party.includes(f.member)||(typeof onBench==='function'&&onBench(f.member)))).map(f=>({id:f.member.id,a:f}))];
   const b=boss?(sceneActor(boss)||currentMap.npcs.find(n=>n.monster===boss)||null):null;
-  return {who:dialog.name, idx:dialog.index, line:(dialog.pages&&dialog.pages[dialog.index])||'', map:currentMap.id, outside:!!currentMap.outside,
+  return {who:dialog.name, idx:dialog.index, line:(dialog.pages&&dialog.pages[dialog.index])||(dialog.lines&&dialog.lines[dialog.index])||'', map:currentMap.id, outside:!!currentMap.outside,
     party:ids.map(o=>({id:o.id,pos:P(o.a),facing:o.a.facing,pose:o.a.scenePose?String(o.a.scenePose.f):null,draw:DR(o.a),hidden:!!o.a.hidden,hid:!!(typeof huddleHidden==='function'&&huddleHidden(currentMap,Math.round(P(o.a)[0]),Math.round(P(o.a)[1]),new Map()))})),
     cam:(typeof camera!=='undefined'?[camera.x,camera.y,camera.zoom||camera.scale||null]:null),ppos:P(player),dock:(document.getElementById('dialog').getBoundingClientRect().top),npcs:currentMap.npcs.filter(n=>n.scenePose&&n.scenePose.emo).map(n=>[n.name,n.scenePose.f,DR(n),P(n)]),
     spk:(typeof EMO!=='undefined'&&EMO.spk&&!EMO.spk.hidden)?P(EMO.spk):null,boss:b&&!b.hidden?{pos:P(b),name:b.name,mfl:b._bossFaceLeft,fac:b.facing}:null};

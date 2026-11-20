@@ -27,3 +27,5 @@ Added 2026-11-20 by ch2build (written in both places): story-ch02-draft4.md, sto
 Added 2026-11-20 by ch2build (written in both places): ch02-teardown.md.
 
 Added 2026-11-20 by board-gemcards (written in both places): ch1-gemini-tracker.md (Gemini's chapter 1 test report; the c-gem-* cards name it).
+
+Added 2026-11-20 by idea-implementlisteni (written in both places): next-addendum-listen1.md (install steps for card c-listen1-install).

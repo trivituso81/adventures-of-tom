@@ -77,11 +77,21 @@ def head_grow(cid, figs):
     return max(fct, T * (1 - s) / (s * (1 - T))), s
 
 
-def think_figure(cid, figs):
-    """The fifth talking pose, `think` (c-reports 2026-11-19, report r-20261114-101501-c5no): the approved single picture `<id>-think`, scaled to the height of the two standing
-    talking figures (a hand rests at the chin, so the chin reading cannot size it), cleaned like a sheet cell. None when the person has no think picture."""
-    if not glob.glob(os.path.join(RAW, f'{cid}-think-v*.png')): return None
-    f = EF.single_figure(cid + '-think'); h = float(np.median([figs[0].height, figs[1].height]))
+# Single-picture poses appended after the four sheet poses, in this order (bake_story_poses.py names the frames the same way, by which pictures exist):
+#   think  (c-reports 2026-11-19, report r-20261114-101501-c5no) Art Library <id>-think, frame tk_think
+#   listen (listen1 2026-11-20, card c-idea-implementlisteni)     Art Library <id>-listen, frame tk_listen (drawn on people who are not speaking)
+SINGLES = ['think', 'listen']
+
+
+def has_single(cid, kind):
+    return bool(glob.glob(os.path.join(RAW, f'{cid}-{kind}-v*.png')))
+
+
+def think_figure(cid, figs, kind='think'):
+    """A single-picture talking pose (`think`, `listen`): the approved picture `<id>-<kind>`, scaled to the height of the two standing
+    talking figures (a hand may rest at the chin, so the chin reading cannot size it), cleaned like a sheet cell. None when the person has no such picture."""
+    if not has_single(cid, kind): return None
+    f = EF.single_figure(cid + '-' + kind); h = float(np.median([figs[0].height, figs[1].height]))
     # The think pictures are painted with a smaller head share than the talking sheets, so a pure height match makes the head 3 to 18 percent small (width of the hair at the
     # top of the head, median of the two standing figures). Size = the geometric mean of the height match and the head match: heads close to the other four poses, bodies within
     # 9 percent of the standing height.
@@ -99,8 +109,9 @@ def _head_width(f):
 
 def bake(cid):
     figs = cut(cid); fct, sh = head_grow(cid, figs)
-    th = think_figure(cid, figs)
-    if th is not None: figs = figs + [th]
+    for kind in SINGLES:
+        th = think_figure(cid, figs, kind)
+        if th is not None: figs = figs + [th]
     if fct != 1.0:
         figs = [EF.grow_frame_head(f, fct, int(round(sh * f.height))) for f in figs]
     fw = max(f.width for f in figs) + 4; fh = max(f.height for f in figs) + 2

@@ -105,4 +105,4 @@ ${ART}` },
       'The pose matches the attached talking sheet in size and finish, so it can sit next to those four poses.') })),
 ];
 
-module.exports = { entries };
+module.exports = { entries, pose, HERO, TALK, NPC, CAST };   // pose and the reference lines are reused by listen-prompts.js (listen1)

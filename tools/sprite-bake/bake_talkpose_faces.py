@@ -7,7 +7,7 @@ Each talking frame (art/talk/<id>.webp: tell, point, ask, answer, side by side) 
 (256 x 256) and data/talkpose-faces.js (ids that have them). engine/emotions.js shows the face on a line that plays that talking pose.
     python3 tools/sprite-bake/bake_talkpose_faces.py [ids]     CHECK=/tmp/tp.png  writes a contact sheet (plain talk face, then the 4 poses, per person)
 """
-import os, sys, json
+import glob, os, sys, json
 from PIL import Image
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bake_emotion_faces as BE
@@ -24,7 +24,9 @@ BE.head_scale = lambda pid: float(os.environ.get('HS', '1.0'))
 
 
 def frames(pid):
-    sh = Image.open(os.path.join(SRC, pid + '.webp')).convert('RGBA'); fw = sh.width // len(TYPES)   # tell, point, ask, answer, think (c-reports: the fifth talking pose)
+    # tell, point, ask, answer, think (c-reports: the fifth talking pose); listen1: talk_frames.py appends a sixth frame, tk_listen, when <id>-listen is approved (no face is cut from it)
+    n = len(TYPES) + (1 if glob.glob(os.path.join(ROOT, 'art', 'raw', 'characters', pid + '-listen-v*.png')) else 0)
+    sh = Image.open(os.path.join(SRC, pid + '.webp')).convert('RGBA'); fw = sh.width // n
     return [sh.crop((i * fw, 0, (i + 1) * fw, sh.height)) for i in range(len(TYPES))]
 
 

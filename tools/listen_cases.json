@@ -1,0 +1,10 @@
+[
+ {"name": "l1-opening", "ch": 1, "map": "town", "scenes": ["opening"], "party": ["tom", "grace", "rose"]},
+ {"name": "l1-goal", "ch": 1, "map": "town", "scenes": ["ch1Goal"], "party": ["tom", "grace", "rose"]},
+ {"name": "l1-amy-ellie", "ch": 1, "map": "row", "scenes": ["ch1Amy", "ch1Ellie"], "party": ["tom", "grace", "rose"]},
+ {"name": "l1-theft", "ch": 1, "map": "grands", "scenes": ["ch1Theft"], "party": ["tom", "grace", "rose"]},
+ {"name": "l1-mud-spot", "ch": 1, "map": "hollow", "scenes": ["ch1Mudling", "ch1Spot"], "party": ["tom", "grace", "rose", "deedee"], "start": [9, 11, "right"]},
+ {"name": "l1-pond", "ch": 1, "map": "hollow", "scenes": ["ch1Pond", "ch1AfterBoss"], "party": ["tom", "grace", "rose", "deedee"], "boss": "The Big One", "start": [9, 11, "right"], "walk": ["right", "right"]},
+ {"name": "l1-end", "ch": 1, "map": "grands", "scenes": ["ch1End"], "party": ["tom", "grace", "rose", "deedee"]},
+ {"name": "l1-job", "ch": 1, "map": "row", "scenes": ["ch1Job"], "party": ["tom", "grace", "rose"]}
+]

@@ -89,10 +89,14 @@ for _k in list(EMO_HEAD): EMO_HEAD[_k] *= EMO_HG.get(_k, 1.0)
 # Telling figure (standing straight) as tall as the overworld stand ('h' as for the moods); talk_frames.py already grew the head by the HEAD SIZES factor,
 # so the head is the walk's size and the figure keeps its real height (the walk keeps height too). Look at it next to the stand when the first sheet is baked.
 TALK_TYPES = ['tell', 'point', 'ask', 'answer', 'think']   # think (c-reports 2026-11-19): the fifth pose, for lines where someone thinks about or examines what is being said
+# listen1 (2026-11-20): talk_frames.py appends one frame per approved single picture, think then listen (talk_frames.SINGLES), so the names follow the pictures that exist.
+import glob as _glob
+def _talk_names(cid):
+    return ['tk_' + t for t in TALK_TYPES[:4]] + ['tk_' + k for k in ('think', 'listen') if _glob.glob(os.path.join(RAW, f'{cid}-{k}-v*.png'))]
 for _id, _h in EMO_H.items():
     if _id != 'nara' and os.path.exists(os.path.join(ROOT, 'art/talk', _id + '.webp')):
         SETS[_id + 'talk'] = {'member': _id, 'strip': os.path.join('art/talk', _id + '.webp'), 'k': 0, 'h': _h, 'ref': 'tk_tell', 'talk': True,
-                              'names': ['tk_' + t for t in TALK_TYPES]}
+                              'names': _talk_names(_id)}
 
 # Chapter 3 and 4 story poses (coinart2, 2026-11-14): strips cut by story_ch4_frames.py from the approved Art Library sheets ch4-tom-poses, ch4-tnb-poses, ch4-nara-story-1/2
 # and ch3-tom-net. Each is one set under its member. 'h' makes the reference standing frame as tall as the overworld stand; tomnet's one figure includes the raised net, and
@@ -173,6 +177,10 @@ for _id in NPC_EMO:
 for _id in DAZED_NPCS:   # c-reports: the dazed frame of each neighbour in chapter 2, at the same scale as that neighbour's feelings frames
     if os.path.exists(os.path.join(ROOT, 'art/story', _id + 'dz.webp')):
         SETS[_id + 'dz'] = {'member': _id, 'strip': os.path.join('art/story', _id + 'dz.webp'), 'k': 0, 'h': 40, 'ref': 'dz_dazed', 'names': ['dz_dazed'], 'npc': True}
+# listen1 (2026-11-20): Sal's listening frame (Art Library sal-listen, cut by report_singles.py into art/story/salls.webp), at the scale of his feelings frames, frame tk_listen
+# so engine/emotions.js emoListen finds it the same way as the family's.
+if os.path.exists(os.path.join(ROOT, 'art/story/salls.webp')):
+    SETS['salls'] = {'member': 'sal', 'strip': 'art/story/salls.webp', 'k': 0, 'h': 40, 'ref': 'tk_listen', 'names': ['tk_listen'], 'npc': True}
 
 
 def cut_cells(rgba, cols, rows, n, dil=6):
