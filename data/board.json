@@ -15013,6 +15013,29 @@
      "t": "Added from the build history UX audit. It opens when Build history redesign 3 (c-builds3) ships."
     }
    ]
+  },
+  {
+   "id": "b-board-builds",
+   "tag": "board-builds",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-20",
+   "theme": "Tools",
+   "title": "board only: UX audit of the build history screen, a redesign plan and its four cards",
+   "next": "Done: board only: UX audit of the build history screen, a redesign plan and its four cards",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFBZzto9KQ2tyVKzmS",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as board-builds. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
@@ -15473,6 +15496,18 @@
    "tags": [],
    "cards": [
     "c-gatezero"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFBZzto9KQ2tyVKzmS",
+   "title": "board only: UX audit of the build history screen, a redesign plan and its four cards",
+   "first": "2026-11-20T10:25:22-08:00",
+   "last": "2026-11-20T10:26:02-08:00",
+   "tags": [
+    "board-builds"
+   ],
+   "cards": [
+    "b-board-builds"
    ]
   },
   {
@@ -16949,8 +16984,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "0fdf1cbfdfdb9ee65594f7f2e5a83c6d56ec4b6b",
- "synced_at": "2026-11-20T18:24:03+00:00",
+ "synced": "6e6601d54ae3ab475df23c5ab29b2c49d59571f5",
+ "synced_at": "2026-11-20T18:27:05+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
