@@ -9829,7 +9829,7 @@
   {
    "id": "t-heist1play",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "theme": "Story and Dialogue",
    "ask": "play",
    "fyi": true,
@@ -9899,8 +9899,13 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom (09:46 recording, reviewed frame by frame): \"there are still several issues with the mudblob animation\". Plan: claude/heist-fix5-plan.md, eight rows. Fixed by card c-fix-heist1play-5 (build fix-heist1play-5); this card waits on it and comes back to you when it ships."
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "t-heist1voice",
@@ -14108,11 +14113,11 @@
    "id": "c-fix-heist1play-5",
    "tag": "fix-heist1play-5",
    "lane": "claude",
-   "col": "done",
+   "col": "prog",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
-   "next": "Retired: no fault to fix; Tom took it to his own Fable request.",
+   "next": "Rebuilding the whole path of the mud blob in the muffin theft (eight rows of claude/heist-fix5-plan.md in the Project): short hops, stop clear of Rose, a path that knocks people down on contact, wait clear of the stool, up on the counter in front, down onto open floor, a real run out the door, and the others stay down until it is gone. Every frame from the bang to the despawn gets looked at in portrait and landscape before it ships.",
    "blocks": [
     "t-heist1play"
    ],
@@ -14157,21 +14162,23 @@
      "d": "2026-11-20",
      "t": "ended without shipping: Tom's report has no fault in it (\"i took a video and created a new Fable request directly with Claude\"), no pencil report was filed after 17:50Z, and the three older ch1Theft pencil reports predate fix-heist1play-4. Nothing to reproduce, so nothing was changed. Retired; Tom's own Fable request now owns the theft scene.",
      "at": "2026-11-20T18:00:00Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Reopened by the session that took Tom's own request (the Project plan claude/heist-fix5-plan.md, written from his 09:46 recording). The earlier auto run retired this card because the board report held no fault in words; the fault is in the recording and the plan lists it in eight rows."
     }
    ],
    "prompt": {
-    "what": "Fixes the problems you reported on Watch the new muffin theft in Deedee's kitchen.",
+    "what": "Fixes the whole path of the mud blob in the kitchen muffin theft (eight rows of the Project plan claude/heist-fix5-plan.md), checked frame by frame in portrait and landscape.",
     "before": [
-     "Nothing to do first. Your words and screenshot are on the card."
+     "Nothing to do first. The plan is in the Project."
     ],
     "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
     "effort": "medium (one report, a small piece of work)",
-    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-heist1play-5 and t-heist1play in data/board.json, history included. Your first push is the commit board: start c-fix-heist1play-5.\n\nTom tested and found problems:\n1. Card t-heist1play (Watch the new muffin theft in Deedee's kitchen, ask play). He was asked: Open Chapter select ) Chapter 1, jump to the theft scene in Deedee's kitchen, and watch it in portrait, then once in landscape. Look again at 1) the pan in the mud blob's hands is now about the same size as the pan was on the counter; 2) when the mud blob hops off the island with the pan it lands to the right of the stool and nothing cuts it off. All good if it plays like that; if the hop still looks wrong, press Something is wrong and say what you see. He wrote: i took a video and created a new Fable request directly with Claude to address this\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T17:50:29.746Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-heist1play to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-heist1play, and give the build fix-heist1play-5 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+    "text": "Read CLAUDE.md, then claude/heist-fix5-plan.md in the Project (an interactive session reads it there; the repo has no copy). Cards c-fix-heist1play-5 and t-heist1play in data/board.json, history included. Your first push is the commit board: start c-fix-heist1play-5. Do all eight rows of the plan, then record the scene in portrait and landscape, cut frames at 10 per second from the bang to the despawn and look at every frame against the plan's fail list before you push. You have my full permission to access the repo."
    },
    "after": "t-heist1play",
-   "auto": true,
-   "started_at": "2026-11-20T17:51:46+00:00",
-   "done": "2026-11-20"
+   "started_at": "2026-11-20T18:05:00+00:00"
   },
   {
    "id": "c-fix-welcomepage-play",
