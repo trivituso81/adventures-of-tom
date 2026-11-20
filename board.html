@@ -88,6 +88,13 @@ div.card{cursor:pointer}
 .st{font-size:11px;border-radius:9px;padding:2px 8px;font-weight:700;color:#10101e}
 .st.running{background:#7be0a6}.st.you{background:#ffd34d}.st.fin{background:#b6c2d9}
 .conv a{color:#ffd34d;font-weight:700;text-decoration:none;font-size:13px}
+.sub{display:flex;align-items:center;gap:8px;margin:10px 2px 6px;font-size:12px;font-weight:800;letter-spacing:.06em;color:#ffd34d}
+.sub .ct{background:#2c2852;color:#fff;border-radius:10px;padding:1px 8px;font-size:12px}
+.ask{font-size:11px;border-radius:9px;padding:2px 8px;background:#ffd34d;color:#241b00;font-weight:700}
+.big{font-size:20px;font-weight:800;color:#7be0a6;margin:6px 0}
+.ch{display:block;width:100%;text-align:left;margin:6px 0 0;background:#3a3566;border-radius:12px;padding:10px 12px}
+.ch small{display:block;font-weight:400;color:#cfc9ff;margin-top:2px;font-size:13px}
+.ch.rec{background:#2f9e63}.ch.rec small{color:#e8fff2}
 #lanesView{display:none}
 @media (min-width:860px){
 #secView{display:none}#lanesView{display:block}
@@ -97,7 +104,7 @@ div.card{cursor:pointer}
 </style>
 </head>
 <body>
-<header><a class="back" href="index.html" id="back">Back</a><h1>Board</h1><span class="hint" id="src"></span></header>
+<header><a class="back" href="index.html" id="back">Back</a><h1>Board</h1><span class="hint" id="upd"></span><span class="hint" id="src"></span></header>
 <main>
 <div class="cnt" id="sum"></div>
 <div class="chips" id="chips"></div>
@@ -128,6 +135,12 @@ const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth
 const dayNum=s=>{const p=String(s).split('-').map(Number);return Math.round(Date.UTC(p[0],p[1]-1,p[2])/864e5);};
 const ageOf=c=>Math.max(0,dayNum(today())-dayNum(c.changed||c.created||today()));
 const nowMs=()=>Date.now();
+const ASKS=[['play','PLAY AND REPORT'],['pictures','REVIEW PICTURES'],['animations','REVIEW ANIMATIONS'],['voice','VOICE'],['script','READ A SCRIPT'],['decide','DECIDE'],['setup','SET UP']];
+const askName=k=>(ASKS.find(a=>a[0]===k)||[k,'OTHER'])[1];
+const HIST=id=>' Board card '+id+'. Read its history first: my notes and answers are there.';
+const withId=c=>{const t=(c.prompt&&c.prompt.text)||'';return t.indexOf('Read its history first')>=0?t:t+HIST(c.id);};
+const PROJECT='https://claude.ai/project/01a14d08-5251-75c8-a191-5d11f4245788';
+let lastLoad=0;
 let toastT;function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(toastT);toastT=setTimeout(()=>t.style.display='none',3200);}
 function ago(iso){if(!iso)return 'no push yet';const m=Math.max(0,Math.round((nowMs()-Date.parse(iso))/6e4));if(m<2)return 'just now';if(m<90)return m+' min ago';const h=Math.round(m/60);if(h<36)return h+' h ago';return Math.round(h/24)+' days ago';}
 
@@ -135,12 +148,16 @@ async function load(){
   const tok=lsGet(TOKEN);
   if(tok||Q.get('gh')){
     try{const r=await fetch(URLF()+'?ref=main&t='+Date.now(),{cache:'no-store',headers:{Authorization:'Bearer '+(tok||'test'),Accept:'application/vnd.github+json'}});
-      if(r.ok){const j=await r.json();sha=j.sha;B=JSON.parse(t64(j.content));$('src').textContent='live';return;}}catch(e){}
+      if(r.ok){const j=await r.json();sha=j.sha;B=JSON.parse(t64(j.content));$('src').textContent='live';stamp();return;}}catch(e){}
   }
   const r=await fetch('data/board.json?t='+Date.now(),{cache:'no-store'});
   if(!r.ok) throw new Error('Could not load data/board.json ('+r.status+')');
-  B=await r.json();sha=null;$('src').textContent='site copy';
+  B=await r.json();sha=null;$('src').textContent='site copy';stamp();
 }
+function stamp(){lastLoad=nowMs();$('upd').textContent='Updated '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});}
+async function reload(){if($('sheet').style.display==='block')return false;try{await load();render();return true;}catch(e){return false;}}
+setInterval(reload,60000);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&nowMs()-lastLoad>5000)reload();});
 
 // ---- derived
 const laneName=id=>(B.lanes.find(l=>l.id===id)||{name:id}).name;
@@ -154,6 +171,8 @@ const secReady=()=>open().filter(c=>c.lane==='claude'&&c.col==='up');
 const secRun=()=>open().filter(c=>c.col==='prog'&&c.lane!=='tom'&&!c.quiet);
 const secStuck=()=>open().filter(c=>c.col==='wait'||(c.col==='prog'&&c.quiet));
 const secDone=()=>B.cards.filter(c=>c.col==='done'&&!c.retired&&c.done&&dayNum(today())-dayNum(c.done)<=3&&themeOk(c));
+const routineFor=c=>{const p=c.prompt;if(!p)return null;return (B.routines||[]).find(r=>String(p.model||'').startsWith(r.model)&&String(p.effort||'').startsWith(r.effort))||null;};
+const startable=c=>{const r=routineFor(c);return !!(r&&r.enabled&&c.lane==='claude'&&c.col==='up'&&!c.start&&!blockedBy(c).length);};
 const sessionFor=c=>(B.sessions||[]).find(s=>s.url&&s.url===(c.chat||{}).url);
 const modelShort=c=>{const p=c.prompt;if(!p)return '';return String(p.model||'').split(' (')[0].replace('Claude ','')+', '+String(p.effort||'').split(' ')[0];};
 function convState(s){
@@ -164,20 +183,23 @@ function convState(s){
 }
 const recentConvs=()=>(B.sessions||[]).filter(s=>nowMs()-Date.parse(s.last)<=3*864e5);
 function ageClass(a){return a>=7?'red':a>=3?'amber':'';}
-function quietDays(c){const s=sessionFor(c);const d=s?Math.floor((nowMs()-Date.parse(s.last))/864e5):ageOf(c);return Math.max(1,d);}
+function quietFor(c){const s=sessionFor(c);if(!s){const d=Math.max(1,ageOf(c));return d+' day'+(d===1?'':'s');}const h=Math.max(1,Math.floor((nowMs()-Date.parse(s.last))/36e5));return h<24?h+' hour'+(h===1?'':'s'):Math.floor(h/24)+' day'+(Math.floor(h/24)===1?'':'s');}
 
 function cardHtml(c,ctx){
   const a=ageOf(c),bl=blocksOpen(c),tcol=THEME_COL[c.theme]||'#ccc';
   let meta='<span class="tag" style="background:'+tcol+'">'+esc(c.theme)+'</span>';
+  if(c.lane==='tom'&&c.ask&&c.col!=='done') meta+='<span class="ask">'+esc(askName(c.ask))+'</span>';
   if(c.col!=='done') meta+='<span class="age '+ageClass(a)+'">'+a+'d</span>';
+  if(c.start) meta+='<span class="age amber">Starting...</span>';
   if(ctx==='ready'&&c.prompt) meta+='<span class="mdl">'+esc(modelShort(c))+'</span>';
   let extra='';
   if(c.lane==='tom'&&c.col!=='done'&&bl.length) extra+='<div class="unb">Unblocks: '+esc(bl[0].title)+(bl.length>1?' and '+(bl.length-1)+' more':'')+'</div>';
   if(ctx==='run'||ctx==='stuck'&&c.col==='prog'){const s=sessionFor(c);extra+='<div class="meta2">'+(c.chat&&c.chat.url?'<a href="'+esc(c.chat.url)+'" target="_blank" rel="noopener" style="color:#ffd34d;font-weight:700">Open chat</a> · ':'')+'last push '+esc(s?ago(s.last):'unknown')+'</div>';}
-  if(c.quiet) extra+='<div class="quiet">Quiet for '+quietDays(c)+' day'+(quietDays(c)===1?'':'s')+': the conversation may have stopped</div>';
+  if(c.quiet) extra+='<div class="quiet">Quiet for '+quietFor(c)+': the conversation may have stopped</div>';
   if(ctx==='stuck'&&c.col==='wait'){const by=blockedBy(c);extra+='<div class="meta2">'+(by.length?'Waits on: '+esc(by.map(x=>x.title).join('; ')):'Waits on '+esc(laneName(c.waiting_on||'')))+'</div>';}
   let row='';
-  if(c.lane==='claude'&&c.col!=='done'&&c.prompt&&(ctx==='ready'||ctx==='stuck')) row='<div class="row"><button class="small gold" type="button" data-act="copy" data-id="'+esc(c.id)+'">Copy prompt</button></div>';
+  if(c.lane==='claude'&&c.col!=='done'&&c.prompt&&(ctx==='ready'||ctx==='stuck')) row='<div class="row">'+(startable(c)?'<button class="small good" type="button" data-act="start" data-id="'+esc(c.id)+'">START</button>':'')+'<button class="small gold" type="button" data-act="copy" data-id="'+esc(c.id)+'">Copy prompt</button></div>';
+  if(c.start_error&&c.col!=='done') extra+='<div class="quiet">START failed last time: '+esc(c.start_error)+'</div>';
   return '<div class="card" role="button" tabindex="0" data-id="'+esc(c.id)+'"><div class="t">'+esc(c.title)+'</div><div class="n">'+esc(c.next)+'</div><div class="meta">'+meta+'</div>'+extra+row+'</div>';
 }
 function convHtml(s){
@@ -192,13 +214,23 @@ function counts(){
   const n={mine:secYour().length,ready:secReady().length,run:secRun().length,stuck:secStuck().length};
   const b=(k,l,w)=>'<button type="button" data-only="'+k+'" class="'+(only===k?'on ':'')+(w?'warn':'')+'">'+l+' <b>'+n[k]+'</b></button>';
   $('sum').innerHTML=b('mine','Your move',n.mine>0)+b('ready','Ready to start')+b('run','Running')+b('stuck','Stuck',n.stuck>0);
-  $('sum').setAttribute('data-text','Your move: '+n.mine+'. Ready to start: '+n.ready+'. Running: '+n.run+'. Stuck: '+n.stuck+'.');
+  const parts=ASKS.map(a=>[secYour().filter(c=>c.ask===a[0]).length,a[0]]).concat([[secYour().filter(c=>!ASKS.some(a=>a[0]===c.ask)).length,'other']]).filter(x=>x[0]).map(x=>x[0]+' '+x[1]);
+  $('sum').setAttribute('data-text','Your move: '+n.mine+(parts.length?' ('+parts.join(', ')+')':'')+'. Ready to start: '+n.ready+'. Running: '+n.run+'. Stuck: '+n.stuck+'.');
+}
+function mineGroups(list){
+  if(!list.length)return '<div class="none">Nothing here</div>';
+  let h='';
+  for(const [k,name] of ASKS.concat([['','OTHER']])){
+    const g=list.filter(c=>k?c.ask===k:!ASKS.some(a=>a[0]===c.ask));if(!g.length)continue;
+    h+='<div class="sub" data-ask="'+k+'"><span>'+name+'</span><span class="ct">'+g.length+'</span></div>'+g.map(c=>cardHtml(c,'mine')).join('');
+  }
+  return h;
 }
 function renderSections(){
   const show=k=>!only||only===k;
   const cv=recentConvs();
   let h='';
-  if(show('mine')) h+=sec('mine','YOUR MOVE','what only you can do',secYour(),c=>cardHtml(c,'mine'),true,true);
+  if(show('mine')) h+='<details class="sec mine" data-sec="mine" open><summary><span class="nm">YOUR MOVE</span><span class="ct'+(secYour().length?' has':'')+'">'+secYour().length+'</span><span class="cv">what only you can do, by kind</span></summary>'+mineGroups(secYour())+'</details>';
   if(show('ready')) h+=sec('ready','READY TO START','Claude can start these',secReady(),c=>cardHtml(c,'ready'),true);
   if(show('run')) h+=sec('run','RUNNING NOW','in progress',secRun(),c=>cardHtml(c,'run'),true);
   if(show('stuck')) h+=sec('stuck','STUCK','waiting, or quiet for a day',secStuck(),c=>cardHtml(c,'stuck'),true);
@@ -236,7 +268,11 @@ function openSheet(id){
   const c=cardById(id);if(!c)return;cur=id;
   const bl=blocksOpen(c),bb=blockedBy(c),p=c.prompt;
   let h='<h2>'+esc(c.title)+'</h2><div class="meta" style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag" style="background:'+(THEME_COL[c.theme]||'#ccc')+'">'+esc(c.theme)+'</span><span class="age '+ageClass(ageOf(c))+'">'+(c.col==='done'?'done '+esc(c.done||''):ageOf(c)+' days since last change')+'</span><span class="age">'+esc(laneName(c.lane))+' / '+esc((B.columns.find(x=>x.id===c.col)||{}).name)+'</span></div>';
+  if(c.lane==='tom'&&c.ask&&c.col!=='done') h+='<h4>What you do</h4><p><span class="ask">'+esc(askName(c.ask))+'</span></p>';
   h+='<h4>Next step</h4><p>'+esc(c.next)+'</p>';
+  if(c.paste) h+='<h4>Text to paste</h4><pre id="ptxt2">'+esc(c.paste)+'</pre><button class="small gold" id="bpaste" type="button">Copy this text</button>';
+  if(c.answer) h+='<h4>Your answer</h4><p>'+esc(c.answer)+'</p>';
+  if(c.start_error&&c.col!=='done') h+='<p class="err">START failed last time: '+esc(c.start_error)+'</p>';
   if(c.note) h+='<h4>Your note</h4><p>'+esc(c.note)+'</p>';
   if(c.col==='wait'){const by=bb;h+='<h4>Waiting on</h4><p>'+(by.length?esc(by.map(x=>x.title).join('; ')):esc(laneName(c.waiting_on||'')))+'</p>';}
   if(bl.length) h+='<h4>Unblocks</h4><ul>'+bl.map(x=>'<li>'+esc(x.title)+' ('+esc(laneName(x.lane))+')</li>').join('')+'</ul>';
@@ -246,11 +282,17 @@ function openSheet(id){
   if(p){
     h+='<h4>Next session prompt</h4><p class="hint">'+esc(p.what||'')+'</p>';
     if((p.before||[]).length) h+='<h4>Before you paste</h4><ol>'+p.before.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ol>';
-    h+='<p><b>Model:</b> '+esc(p.model||'')+'<br><b>Effort:</b> '+esc(p.effort||'')+'</p><pre id="ptxt">'+esc(p.text||'')+'</pre><button class="small gold" id="bcopy" type="button">Copy prompt</button>';
+    h+='<p><b>Model:</b> '+esc(p.model||'')+'<br><b>Effort:</b> '+esc(p.effort||'')+'</p><pre id="ptxt">'+esc(withId(c))+'</pre>';
+    if(c.col!=='done'&&c.lane==='claude'){
+      if(startable(c)) h+='<button class="good" id="bstart" type="button">START</button> <span class="hint">starts the conversation on '+esc(modelShort(c))+'</span> ';
+      else if(c.col==='up') h+='<div class="big">'+esc(modelShort(c))+'</div><span class="hint">No START for this model and effort yet. Copy the prompt, open the Project, pick this model and effort, paste.</span><p><a href="'+PROJECT+'" target="_blank" rel="noopener">Open the Project in Claude</a></p>';
+    }
+    h+='<button class="small gold" id="bcopy" type="button">Copy prompt</button>';
   }
   h+='<h4>History</h4><details><summary class="hint">'+((c.history||[]).length)+' entries (tap to open)</summary><ul>'+(c.history||[]).slice().reverse().map(x=>'<li>'+esc(x.d)+': '+esc(x.t)+'</li>').join('')+'</ul></details>';
-  const mine=c.lane==='tom'&&c.col!=='done',any=c.col!=='done';
-  h+='<div class="btns">'+(mine?'<button class="good" id="bdid" type="button">I did this</button><button class="gold" id="btake" type="button">Claude takes this</button>':'')+(any?'<button id="bnot" type="button">Not needed</button>':'')+'<button id="bnote" type="button">Note</button><button id="bclose" type="button">Close</button></div><div id="act"></div><p class="err" id="serr"></p>';
+  const mine=c.lane==='tom'&&c.col!=='done',any=c.col!=='done',dec=mine&&c.ask==='decide'&&(c.choices||[]).length;
+  if(dec){h+='<h4>Pick one</h4>'+c.choices.map((x,i)=>'<button class="ch'+(i===0?' rec':'')+'" type="button" data-choice="'+i+'">'+esc(x)+((c.leads||[])[i]?'<small>'+esc(c.leads[i])+'</small>':'')+'</button>').join('')+'<button class="ch" type="button" data-choice="other">Something else<small>Type your own answer</small></button>';}
+  h+='<div class="btns">'+(mine&&!dec?'<button class="good" id="bdid" type="button">I did this</button>':'')+(mine?'<button class="gold" id="btake" type="button">Claude takes this</button>':'')+(any?'<button id="bnot" type="button">Not needed</button>':'')+'<button id="bnote" type="button">Note</button><button id="bclose" type="button">Close</button></div><div id="act"></div><p class="err" id="serr"></p>';
   $('sheet').innerHTML=h;$('sheet').style.display='block';$('dim').style.display='block';$('sheet').scrollTop=0;
 }
 function closeSheet(){$('sheet').style.display='none';$('dim').style.display='none';cur=null;}
@@ -273,11 +315,33 @@ async function save(msg,fn){
   }
 }
 function touch(c,text){c.changed=today();c.history=(c.history||[]).concat([{d:today(),t:text}]);}
-async function run(msg,fn,okMsg){
+async function run(msg,fn,okMsg,after){
   $('serr').textContent='';
-  try{await save(msg,fn);toast(okMsg);closeSheet();render();}catch(e){$('serr').textContent=e.message;}
+  try{await save(msg,fn);toast(okMsg);render();if(after){$('sheet').innerHTML=after();$('sheet').scrollTop=0;}else closeSheet();}catch(e){$('serr').textContent=e.message;}
+}
+// The hand-back screen (board3 part B): after I did this or a choice, say what it unblocked and put that card's prompt right there.
+function savedScreen(id){
+  const c=cardById(id),nx=((c&&c.blocks)||[]).map(cardById).filter(Boolean);
+  let h='<h2>Saved.</h2>';
+  if(!nx.length) h+='<p>Nothing else waits on this card'+(c&&c.note?'. A session reads your note next (the board hands it to Claude).':'.')+'</p>';
+  nx.forEach(k=>{
+    const other=blockedBy(k);
+    h+='<h4>Next: '+esc(k.title)+'</h4>';
+    if(other.length) h+='<p>It still waits on: '+esc(other.map(x=>x.title).join('; '))+'.</p>';
+    else if(k.lane==='claude'&&k.prompt){
+      h+=k.auto&&routineFor(k)&&routineFor(k).enabled?'<p>It starts by itself in about a minute. The link appears on its card.</p>':'<p>Start it in a NEW conversation. Your note and answer are on its card, so you never go back to the old chat.</p><p><b>Model:</b> '+esc(k.prompt.model||'')+'<br><b>Effort:</b> '+esc(k.prompt.effort||'')+'</p>';
+      if(!(k.auto&&routineFor(k)&&routineFor(k).enabled)) h+='<div class="btns">'+(startable(k)?'<button class="good" type="button" data-act="start" data-id="'+esc(k.id)+'">START</button>':'')+'<button class="small gold" type="button" data-act="copy" data-id="'+esc(k.id)+'">Copy prompt</button></div>';
+    }else h+='<p>'+esc(k.next)+'</p>';
+  });
+  return h+'<div class="btns"><button id="bclose" type="button">Close</button></div><p class="err" id="serr"></p><div id="act"></div>';
 }
 const clean=s=>String(s||'').replace(/</g,'(').replace(/>/g,')').replace(/\u2014/g,',').trim();
+async function startCard(id){
+  $('serr')&&($('serr').textContent='');
+  try{await save('board: start-request '+id,d=>{const c=d.cards.find(z=>z.id===id);if(c&&c.col!=='done'&&c.col!=='prog'){c.start=true;touch(c,'Tom tapped START.');}return d;});
+    toast('Starting');render();$('sheet').innerHTML='<h2>Starting.</h2><p>The conversation opens on '+esc(modelShort(cardById(id)||{prompt:{}}))+' in about a minute. Its link appears on the card and in CONVERSATIONS. Nothing to copy.</p><div class="btns"><button id="bclose" type="button">Close</button></div>';$('sheet').style.display='block';$('dim').style.display='block';}
+  catch(e){if($('serr'))$('serr').textContent=e.message;else toast(e.message);}
+}
 function copyText(x){const ok=()=>toast('Prompt copied');
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(x).then(ok,()=>fall(x,ok));}else fall(x,ok);}
 function fall(x,ok){const ta=document.createElement('textarea');ta.value=x;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){toast('Select the text and copy it');}ta.remove();}
@@ -285,16 +349,26 @@ function fall(x,ok){const ta=document.createElement('textarea');ta.value=x;ta.st
 document.addEventListener('click',e=>{
   const t=e.target;
   const act=t.closest('[data-act]');
-  if(act&&act.dataset.act==='copy'){const c=cardById(act.dataset.id);if(c&&c.prompt)copyText(c.prompt.text);e.stopPropagation();return;}
+  if(act&&act.dataset.act==='copy'){const c=cardById(act.dataset.id);if(c&&c.prompt)copyText(withId(c));e.stopPropagation();return;}
+  if(act&&act.dataset.act==='start'){startCard(act.dataset.id);e.stopPropagation();return;}
   if(t.closest('a'))return;
   const card=t.closest('.card');if(card&&!$('sheet').contains(t)){openSheet(card.dataset.id);return;}
   const chip=t.closest('.chip');if(chip){theme=chip.dataset.t==='All'?'':chip.dataset.t;render();return;}
   const on=t.closest('[data-only]');if(on){only=only===on.dataset.only?'':on.dataset.only;render();return;}
   if(t.id==='dim'||t.id==='bclose'){closeSheet();return;}
-  if(t.id==='bcopy'){copyText($('ptxt').textContent);return;}
+  if(t.id==='bpaste'){const c=cardById(cur);if(c)copyText(c.paste);return;}
+  if(t.id==='bcopy'){const c=cardById(cur);copyText(c?withId(c):$('ptxt').textContent);return;}
+  const chb=t.closest('[data-choice]');
+  if(chb){const id=cur,c=cardById(id);if(!c)return;
+    if(chb.dataset.choice==='other'){showAct('<input type="text" id="ntxt" placeholder="Your answer"><button class="gold" id="bchgo" type="button">Save my answer</button>');return;}
+    const ans=clean(String(c.choices[+chb.dataset.choice]).replace(/\s*\(Recommended\)$/,''));
+    run('board: answer '+id,d=>{const z=d.cards.find(q=>q.id===id);if(z){z.col='done';z.done=today();z.answer=ans;delete z.waiting_on;delete z.quiet;touch(z,'Tom chose: '+ans);}return d;},'Answer saved',()=>savedScreen(id));return;}
+  if(t.id==='bchgo'){const id=cur,tx=clean($('ntxt').value);if(!tx){$('serr').textContent='Type your answer first.';return;}
+    run('board: answer '+id,d=>{const z=d.cards.find(q=>q.id===id);if(z){z.col='done';z.done=today();z.answer=tx;delete z.waiting_on;delete z.quiet;touch(z,'Tom answered: '+tx);}return d;},'Answer saved',()=>savedScreen(id));return;}
+  if(t.id==='bstart'){startCard(cur);return;}
   if(t.id==='bdid'){showAct('<input type="text" id="ntxt" placeholder="Anything Claude should know? (optional)"><button class="good" id="bdidgo" type="button">Done</button>');return;}
   if(t.id==='bdidgo'){const id=cur,tx=clean($('ntxt').value);
-    run('board: done '+id,d=>{const c=d.cards.find(z=>z.id===id);if(c){c.col='done';c.done=today();delete c.waiting_on;delete c.quiet;if(tx)c.note=tx;touch(c,'Tom did this.'+(tx?' Note: '+tx:''));}return d;},'Marked done');return;}
+    run('board: done '+id,d=>{const c=d.cards.find(z=>z.id===id);if(c){c.col='done';c.done=today();delete c.waiting_on;delete c.quiet;if(tx)c.note=tx;touch(c,'Tom did this.'+(tx?' Note: '+tx:''));}return d;},'Marked done',()=>savedScreen(id));return;}
   if(t.id==='btake'){showAct('<input type="text" id="ntxt" placeholder="What do you want done?"><button class="gold" id="btakego" type="button">Hand to Claude</button>');return;}
   if(t.id==='btakego'){const id=cur,tx=clean($('ntxt').value);if(!tx){$('serr').textContent='Type what you want done first.';return;}
     run('board: take '+id,d=>{const c=d.cards.find(z=>z.id===id);if(c){
@@ -312,7 +386,7 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('card')){e.preventDefault();openSheet(e.target.dataset.id);}});
 load().then(render).catch(e=>{$('err').textContent=e.message;$('sum').textContent='Could not load the board';});
-window.__board={get B(){return B;},render};
+window.__board={get B(){return B;},render,reload};
 </script>
 </body>
 </html>

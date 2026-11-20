@@ -17,12 +17,22 @@ T = datetime.date.today().isoformat()
 b = json.load(open(os.path.join(ROOT, 'data', 'board.json'), encoding='utf-8'))
 for c in b['cards']:   # a fixed set of open cards, whatever the live board holds today
     pass
-def tomcard(i, title, nxt, blocks=()):
-    return {'id': i, 'lane': 'tom', 'col': 'up', 'theme': 'Tools', 'title': title, 'next': nxt, 'blocks': list(blocks), 'changed': T, 'created': T,
-            'chat': {'url': '', 'opening': 'x'}, 'history': []}
+def tomcard(i, title, nxt, blocks=(), ask='play', **kw):
+    d = {'id': i, 'lane': 'tom', 'col': 'up', 'theme': 'Tools', 'title': title, 'next': nxt, 'blocks': list(blocks), 'changed': T, 'created': T, 'ask': ask,
+         'chat': {'url': '', 'opening': 'x'}, 'history': []}
+    d.update(kw); return d
+b['routines'] = [{'id': 'sonnet-medium', 'model': 'Claude Sonnet 5.5', 'effort': 'medium', 'env': 'SONNET_MEDIUM', 'enabled': True}]
+PR = lambda m, e: {'what': 'w', 'before': ['b'], 'model': m, 'effort': e, 'text': 'Prompt for ' + m}
 open_ids = {c['id'] for c in b['cards'] if c['col'] != 'done'}
 target = 'c-nextclean' if 'c-nextclean' in open_ids else next(c['id'] for c in b['cards'] if c['lane'] == 'claude' and c['col'] == 'up')
-b['cards'] += [tomcard('t-test1', 'Test card one', 'Open ADMIN > TEST and tap it.', [target]), tomcard('t-test2', 'Test card two', 'Do the second thing.'), tomcard('t-test3', 'Test card three', 'Do the third thing.')]
+b['cards'] += [tomcard('t-test1', 'Test card one', 'Open ADMIN > TEST and tap it.', [target], 'play'), tomcard('t-test2', 'Test card two', 'Do the second thing.', ask='pictures', fyi=True),
+               tomcard('t-test3', 'Test card three', 'Do the third thing.', ask='animations', fyi=True),
+               tomcard('t-test4', 'Test decide four', 'Pick one.', ask='decide', fyi=True, choices=['Option A (Recommended)', 'Option B'], leads=['A leads to the quick road.', 'B leads to the long road.']),
+               tomcard('t-test5', 'Test decide five', 'Pick one too.', ask='decide', fyi=True, choices=['Yes (Recommended)', 'No'], leads=['Yes means go.', 'No means stop.']),
+               {'id': 'c-startme', 'tag': 'startme', 'lane': 'claude', 'col': 'up', 'theme': 'Tools', 'title': 'A startable card', 'next': 'Ready.', 'blocks': [], 'changed': T, 'created': T,
+                'chat': {'url': '', 'opening': 'x'}, 'history': [], 'prompt': PR('Claude Sonnet 5.5 (row B)', 'medium (x)')},
+               {'id': 'c-opuscard', 'tag': 'opuscard', 'lane': 'claude', 'col': 'up', 'theme': 'Tools', 'title': 'An Opus card', 'next': 'Ready.', 'blocks': [], 'changed': T, 'created': T,
+                'chat': {'url': '', 'opening': 'x'}, 'history': [], 'prompt': PR('Claude Opus 5.5 (row D)', 'high (x)')}]
 quiet_url = 'https://claude.ai/code/session_QUIET'
 b['cards'].append({'id': 'c-quiet', 'tag': 'quiet', 'lane': 'claude', 'col': 'prog', 'quiet': True, 'theme': 'Tools', 'title': 'A quiet card', 'next': 'Went silent.', 'blocks': [],
                    'changed': T, 'created': T, 'chat': {'url': quiet_url, 'opening': 'x'}, 'history': [],
@@ -48,7 +58,10 @@ E_MINE = len([c for c in oc if c['lane'] == 'tom' and c['col'] in ('up', 'prog')
 E_READY = len([c for c in oc if c['lane'] == 'claude' and c['col'] == 'up'])
 E_RUN = len([c for c in oc if c['col'] == 'prog' and c['lane'] != 'tom' and not c.get('quiet')])
 E_STUCK = len([c for c in oc if c['col'] == 'wait' or (c['col'] == 'prog' and c.get('quiet'))])
-WANT = 'Your move: %d. Ready to start: %d. Running: %d. Stuck: %d.' % (E_MINE, E_READY, E_RUN, E_STUCK)
+ORDER = ['play', 'pictures', 'animations', 'voice', 'script', 'decide', 'setup']
+PARTS = ', '.join('%d %s' % (n, k) for k in ORDER for n in [len([c for c in oc if c['lane'] == 'tom' and c['col'] in ('up', 'prog') and c.get('ask') == k])] if n)
+WANT = 'Your move: %d (%s). Ready to start: %d. Running: %d. Stuck: %d.' % (E_MINE, PARTS, E_READY, E_RUN, E_STUCK)
+HIST = lambda i: ' Board card %s. Read its history first: my notes and answers are there.' % i
 def files(): return json.load(urllib.request.urlopen('http://127.0.0.1:8092/files'))
 def stored():
     f = files()['data/board.json']['content']; return json.loads(base64.b64decode(f.replace('\n', '')).decode())
@@ -75,6 +88,13 @@ try:
                 for k, v in (('mine', E_MINE), ('ready', E_READY), ('run', E_RUN), ('stuck', E_STUCK)):
                     if cnt[k] != v: fails.append(f'{name}: section {k} has {cnt[k]} cards, want {v}')
                 if cnt['conv'] != 2: fails.append(f'{name}: conversations {cnt["conv"]}, want 2 (the 10 day old one is left out)')
+                subs = pg.eval_on_selector_all('[data-sec=mine] .sub', 'e=>e.map(x=>x.dataset.ask+":"+x.querySelector(".ct").textContent)')
+                wsubs = [k + ':' + str(len([c for c in oc if c['lane'] == 'tom' and c['col'] in ('up', 'prog') and c.get('ask') == k])) for k in ORDER if any(c['lane'] == 'tom' and c['col'] in ('up', 'prog') and c.get('ask') == k for c in oc)]
+                if subs != wsubs: fails.append(f'{name}: YOUR MOVE groups {subs}, want {wsubs}')
+                if 'REVIEW PICTURES' not in pg.inner_text('[data-sec=mine]') or 'PLAY AND REPORT' not in pg.inner_text('[data-sec=mine]'): fails.append(f'{name}: ask names missing in YOUR MOVE')
+                if not pg.inner_text('#upd').startswith('Updated '): fails.append(f'{name}: no Updated time in the header')
+                if 'START' not in pg.inner_text('.card[data-id="c-startme"]'): fails.append(f'{name}: startable card has no START')
+                if 'START' in pg.inner_text('.card[data-id="c-opuscard"]').replace('Copy prompt', ''): fails.append(f'{name}: Opus card has START but no task exists for it')
                 if pg.eval_on_selector('[data-sec=done]', 'e=>e.open'): fails.append(f'{name}: Done should be closed by default')
                 if pg.eval_on_selector('#secView', 'e=>getComputedStyle(e).display') == 'none': fails.append(f'{name}: sections hidden')
                 if pg.eval_on_selector('#lanesView', 'e=>getComputedStyle(e).display') != 'none': fails.append(f'{name}: lane grid shown on a phone')
@@ -99,8 +119,8 @@ try:
                 # copy prompt on a Ready card
                 first = pg.eval_on_selector('[data-sec=ready] .card', 'e=>e.dataset.id')
                 pg.click('[data-sec=ready] .card [data-act=copy]'); pg.wait_for_timeout(150)
-                want = [x for x in b['cards'] if x['id'] == first][0]['prompt']['text']
-                if pg.evaluate('window.__copied') != want: fails.append('Copy prompt did not copy that card\'s prompt')
+                want = [x for x in b['cards'] if x['id'] == first][0]['prompt']['text'] + HIST(first)
+                if pg.evaluate('window.__copied') != want: fails.append('Copy prompt did not copy that card\'s prompt plus the board card line: ' + str(pg.evaluate('window.__copied'))[-120:])
                 if pg.query_selector('#sheet').is_visible(): fails.append('Copy prompt opened the sheet')
                 pg.click('.card[data-id="t-test2"]'); pg.wait_for_selector('#bdid')
                 s = pg.inner_text('#sheet')
@@ -108,6 +128,15 @@ try:
                     if want_btn not in s: fails.append(f'sheet lacks {want_btn}')
                 if 'Move to' in s or 'Done\n' in s.replace('I did this', ''): fails.append('old Move to / Done buttons still there')
                 pg.screenshot(path=f'{out}/board-sheet.png'); pg.click('#bclose')
+                pg.click('.card[data-id="t-test4"]'); pg.wait_for_selector('[data-choice]')
+                ds = pg.inner_text('#sheet')
+                if pg.eval_on_selector_all('#sheet [data-choice]', 'e=>e.length') != 3 or 'A leads to the quick road.' not in ds or 'Something else' not in ds: fails.append('decide sheet: want 2 choices plus Something else, each with what it leads to')
+                if 'I did this' in ds: fails.append('a decide card offers I did this')
+                pg.screenshot(path=f'{out}/board-decide.png'); pg.click('#bclose')
+                pg.click('.card[data-id="c-opuscard"]'); pg.wait_for_selector('#bcopy')
+                os_ = pg.inner_text('#sheet')
+                if 'Opus 5.5, high' not in os_ or 'Open the Project in Claude' not in os_ or pg.query_selector('#bstart'): fails.append('Opus card sheet: want large model and effort, the Project link, no START')
+                pg.click('#bclose')
                 pg.click(f'.card[data-id="{first}"]'); pg.wait_for_selector('#bcopy')
                 if 'I did this' in pg.inner_text('#sheet'): fails.append('a Claude card offers I did this')
                 pg.click('#bclose')
@@ -127,6 +156,11 @@ try:
         pg.click('.card[data-id="t-test1"]'); pg.click('#bdid'); pg.fill('#ntxt', 'it looked fine'); pg.click('#bdidgo'); pg.wait_for_timeout(600)
         c = card('t-test1')
         if c['col'] != 'done' or not c.get('done') or c.get('note') != 'it looked fine' or 'it looked fine' not in c['history'][-1]['t']: fails.append(f'I did this not saved right: {c["col"]} {c.get("note")}')
+        sh = pg.inner_text('#sheet'); tt = [x for x in b['cards'] if x['id'] == target][0]['title']
+        if 'Saved.' not in sh or ('Next: ' + tt).lower() not in sh.lower(): fails.append('hand-back screen missing "Saved." or "Next: <title>": ' + sh[:160])
+        pg.click('#sheet [data-act=copy]'); pg.wait_for_timeout(150)
+        if not (pg.evaluate('window.__copied') or '').endswith(HIST(target)): fails.append('hand-back Copy prompt lacks the board card line')
+        pg.screenshot(path=f'{out}/board-handback.png'); pg.click('#bclose')
         pg.click('.card[data-id="t-test2"]'); pg.click('#btake'); pg.click('#btakego'); pg.wait_for_timeout(200)
         if 'Type what you want done' not in pg.inner_text('#serr'): fails.append('Claude takes this accepted an empty line')
         pg.fill('#ntxt', 'make the door bigger <ok>'); pg.click('#btakego'); pg.wait_for_timeout(600)
@@ -145,12 +179,32 @@ try:
         if c['col'] != 'done' or not c.get('retired') or 'covered by another card' not in c['history'][-1]['t']: fails.append('Not needed not saved right')
         if not any(x['id'] == tid for x in stored()['cards']): fails.append('retired card removed from the file (it must stay)')
         if tid in pg.inner_text('#secView') or c['title'] in pg.inner_text('[data-sec=done]'): fails.append('retired card still shown on the page')
+        pg.click('.card[data-id="t-test4"]'); pg.click('#sheet [data-choice="0"]'); pg.wait_for_timeout(600)
+        c = card('t-test4')
+        if c['col'] != 'done' or c.get('answer') != 'Option A' or 'Option A' not in c['history'][-1]['t']: fails.append(f'choice not saved: {c["col"]} {c.get("answer")}')
+        if 'Saved.' not in pg.inner_text('#sheet'): fails.append('choice did not show the Saved screen')
+        pg.click('#bclose')
+        pg.click('.card[data-id="t-test5"]'); pg.click('#sheet [data-choice="other"]'); pg.click('#bchgo'); pg.wait_for_timeout(200)
+        if 'Type your answer' not in pg.inner_text('#serr'): fails.append('Something else accepted an empty answer')
+        pg.fill('#ntxt', 'Maybe later <ok>'); pg.click('#bchgo'); pg.wait_for_timeout(600)
+        c = card('t-test5')
+        if c['col'] != 'done' or c.get('answer') != 'Maybe later (ok)': fails.append(f'something else not saved: {c.get("answer")}')
+        pg.click('#bclose')
+        pg.click('.card[data-id="c-startme"] [data-act=start]'); pg.wait_for_timeout(600)
+        c = card('c-startme')
+        if c.get('start') is not True or 'START' not in c['history'][-1]['t'] or c['col'] != 'up': fails.append(f'START not saved right: {c.get("start")} {c["col"]}')
+        if 'Starting' not in pg.inner_text('#sheet'): fails.append('START showed no confirmation')
+        pg.click('#bclose')
+        if not pg.evaluate('window.__board.reload()'): fails.append('reload returned false with no sheet open')
+        pg.click('.card[data-id="t-test3"]')
+        if pg.evaluate('window.__board.reload()'): fails.append('reload ran while a card sheet was open (it would wipe what Tom is typing)')
+        pg.click('#bclose')
         pg.click('.card[data-id="t-test3"]'); pg.click('#bnote'); pg.fill('#ntxt', 'checked the tab'); pg.click('#ngo'); pg.wait_for_timeout(600)
         if card('t-test3')['history'][-1]['t'] != 'Tom: checked the tab': fails.append('note not saved')
         if len(stored()['cards']) != len(b['cards']): fails.append('cards lost on save')
         if stored().get('sessions') != b['sessions']: fails.append('sessions list changed by a phone save')
         nputs = sum(1 for l in json.load(urllib.request.urlopen('http://127.0.0.1:8092/log')) if l.get('github') == 'PUT')
-        if nputs != 4: fails.append(f'{nputs} PUTs, want 4')
+        if nputs != 7: fails.append(f'{nputs} PUTs, want 7')
         pg.screenshot(path=f'{out}/board-after.png'); ctx.close()
         # no token: the button says so, and the page reads the site copy
         ctx = br.new_context(viewport={'width': 390, 'height': 844}); pg = ctx.new_page()

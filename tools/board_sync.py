@@ -10,14 +10,22 @@ Git mode (run by .github/workflows/board-sync.yml on every push to main, and by 
 Service mode (the same workflow, on a run of clip-gen, voice-gen, clip-gate or art-bake):
     python3 tools/board_sync.py --service clip-gen --event start|fail|end [--detail TEXT] [--run URL] [--needs-human TEXT]
 
-Rules (R1 to R8) are small functions below; `sync()` is the pure part that tools/board_sync_test.py replays."""
-import datetime, hashlib, json, os, re, subprocess, sys
+board3 (2026-11-19, claude/board3-plan.md): R1 also copies a Tom card's `answer`, and starts an `auto` card at once; R2 knows `clips_reviewed`;
+R9 start (a card with `start: true` is started on the Claude scheduled task for its model and effort, the link lands on the card); R10 note
+(a Tom card finished with a note that blocks nothing gets a Claude card "Handle Tom's note on ..."); R8 quiet is 6 hours.
+
+Rules (R1 to R10) are small functions below; `sync()` is the pure part that tools/board_sync_test.py replays."""
+import datetime, hashlib, json, os, re, subprocess, sys, urllib.error, urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PERM = ' You have my full permission to access the repo.'
 SERVICE_LANE = {'clip-gen': 'xai', 'clip-gate': 'xai', 'voice-gen': 'elevenlabs', 'art-bake': 'github'}
 TAG_RE = r'[A-Za-z][A-Za-z0-9_.-]*'
 SESSION_KEEP_DAYS = 14
+QUIET_HOURS = 6
+REVIEW_SETTLE_MIN = 20   # clips_reviewed closes this long after his last REDO, so a review in progress is not cut off
+FIRE_BETA = 'experimental-cc-routine-2026-04-01'
+HISTORY_LINE = 'Board card %s. Read its history first: my notes and answers are there.'
 
 
 def local_date(iso_or_dt):
@@ -149,6 +157,27 @@ def r3_heading(B, com, tag, desc):
 
 # ---------------------------------------------------------------- R2 Tom's work seen, R1 unblock
 
+def r2_clips(B, art, now):
+    """done_when {"clips_reviewed": "Chapter 1"}: every clip of the group is approved or rejected, and Tom sent at least one back from the Battle Lab
+    review (a reject with from 'review') since the card was made, and his last REDO is REVIEW_SETTLE_MIN old. A review where every clip was fine leaves
+    no trace in the repo (batch approvals look the same), so for that case he taps I did this."""
+    if art is None: return
+    for c in B.cards:
+        w = c.get('done_when')
+        if c['col'] == 'done' or not w or 'clips_reviewed' not in w: continue
+        group = w['clips_reviewed']
+        es = [e for e in art.values() if e.get('clip') and e.get('group') == group]
+        if not es or any(e.get('status') not in ('approved', 'rejected') for e in es): continue
+        since = int(datetime.datetime.combine(datetime.date.fromisoformat(c.get('created') or B.today), datetime.time(0, 0), tzinfo=datetime.timezone.utc).timestamp() * 1000)
+        back = [e for e in es if any(r.get('from') == 'review' and r.get('at', 0) >= since for r in e.get('rejects', []))]
+        if not back: continue
+        last = max(r.get('at', 0) for e in back for r in e['rejects'] if r.get('from') == 'review')
+        if now.timestamp() * 1000 - last < REVIEW_SETTLE_MIN * 60000: continue
+        c['col'] = 'done'; c['done'] = B.today; c.pop('waiting_on', None)
+        B.hist(c, 'Done by the board: you reviewed %s in the Battle Lab. %d clip(s) sent back with notes, %d left as they were.' % (group, len(back), len(es) - len(back)))
+        B.say('done %s (clips reviewed)' % c['id'])
+
+
 def r2_art(B, art):
     if art is None: return
     for c in B.cards:
@@ -176,7 +205,10 @@ def r1_unblock(B):
             c['col'] = 'up'; c.pop('waiting_on', None)
             B.hist(c, 'Unblocked: %s is done.' % ', '.join(k['title'] for k in blockers))
             for k in blockers:
+                if k.get('answer'): B.hist(c, 'Answer from "%s": %s' % (k['title'], plain(k['answer'])))
                 if k.get('note'): B.hist(c, 'Note from "%s": %s' % (k['title'], plain(k['note'])))
+            if c.get('auto') and c.get('lane') == 'claude' and any(k.get('lane') == 'tom' for k in blockers):
+                c['start'] = True; B.hist(c, 'Auto-start: Tom answered, so this card starts by itself.'); B.say('auto-start %s' % c['id'])
             B.say('unblocked %s' % c['id']); moved = True
 
 
@@ -228,6 +260,53 @@ def r7_inbox(B, reports, takes):
             B.say('card for %d new take file(s)' % len(new))
 
 
+def r10_notes(B):
+    """A Tom card finished with a note that blocks nothing: a Claude card reads it, so a note is never left with no reader."""
+    for c in list(B.cards):
+        if c['lane'] != 'tom' or c['col'] != 'done' or c.get('retired') or not c.get('note') or c.get('note_seen') or c.get('blocks'): continue
+        c['note_seen'] = True
+        cid = 'c-note-' + c['id'].replace('t-', '', 1)
+        if B.get(cid): continue
+        ttl, note = plain(c['title']), plain(c['note'])
+        B.add({'id': cid, 'tag': 'note-' + c['id'].replace('t-', '', 1), 'lane': 'claude', 'col': 'up', 'theme': c.get('theme', 'Project Ops'),
+               'title': "Handle Tom's note on " + ttl[:100], 'next': 'You left a note when you finished "%s": %s' % (ttl[:100], note[:200]),
+               'prompt': {'what': 'Reads the note you left on a finished card and acts on it or answers it.', 'before': ['Nothing to do first.'],
+                          'model': 'Claude Sonnet 5.5 (row B: the steps are in the note and the card history)', 'effort': 'medium (one small piece of work)',
+                          'text': 'Read claude/handoff-rules.md. Tom left a note on board card %s (%s) when he finished it: %s. Read that card\'s history in data/board.json, work out what the note asks for, do it or rewrite this card for the next session, and tell Tom what you did.' % (c['id'], ttl[:100], note) + PERM},
+               'chat': {'url': '', 'opening': 'not started'}, 'history': [{'d': B.today, 't': 'Added by board-sync: Tom finished "%s" with a note and the card blocks nothing.' % ttl[:100]}]})
+        B.hist(c, 'The note was handed to Claude on card %s.' % cid); B.say('card for the note on %s' % c['id'])
+
+
+def routine_for(B, c):
+    p = c.get('prompt') or {}
+    for r in B.b.get('routines', []):
+        if str(p.get('model', '')).startswith(r['model']) and str(p.get('effort', '')).startswith(r['effort']): return r
+    return None
+
+
+def r9_start(B, fire):
+    """A card with start: true (Tom tapped START, or R1 auto-started it) is started on the Claude scheduled task for its model and effort."""
+    for c in B.cards:
+        if not c.get('start'): continue
+        if c['lane'] != 'claude' or c['col'] in ('done', 'prog') or not c.get('prompt'):
+            c.pop('start', None); continue
+        blockers = [k for k in B.cards if c['id'] in k.get('blocks', []) and k['col'] != 'done']
+        r = routine_for(B, c)
+        if blockers:
+            c.pop('start', None); B.hist(c, 'START ignored: still waits on %s.' % ', '.join(k['title'] for k in blockers)); B.say('start ignored on %s' % c['id']); continue
+        if not r or not r.get('enabled'):
+            c.pop('start', None); B.hist(c, 'START is not set up for this model and effort. Use Copy prompt.'); B.say('start not set up for %s' % c['id']); continue
+        if fire is None: continue   # no way to fire from here (a test or a dry run): leave the flag
+        try:
+            url = fire(r, c['id'])
+        except Exception as e:
+            c.pop('start', None); c['start_error'] = plain(str(e))[:200]
+            B.hist(c, 'START failed: %s. Use Copy prompt.' % c['start_error']); B.say('start failed on %s' % c['id']); continue
+        c.pop('start', None); c.pop('start_error', None); c['col'] = 'prog'; c.pop('waiting_on', None); c.pop('quiet', None)
+        c['chat'] = {'url': url, 'opening': (c.get('chat') or {}).get('opening') or 'started by START'}
+        B.hist(c, 'Started by START on %s, effort %s.' % (r['model'], r['effort'])); B.say('started %s' % c['id'])
+
+
 def r8_quiet(B, now):
     sess = {s['url']: s for s in B.b['sessions']}
     for c in B.cards:
@@ -235,8 +314,8 @@ def r8_quiet(B, now):
             if c.pop('quiet', None): B.say('%s no longer quiet' % c['id'])
             continue
         url = (c.get('chat') or {}).get('url')
-        if url in sess: quiet = now - parse_iso(sess[url]['last']) >= datetime.timedelta(hours=24)
-        else: quiet = (datetime.date.fromisoformat(B.today) - datetime.date.fromisoformat(c['changed'])).days >= 2
+        if url in sess: quiet = now - parse_iso(sess[url]['last']) >= datetime.timedelta(hours=QUIET_HOURS)
+        else: quiet = (datetime.date.fromisoformat(B.today) - datetime.date.fromisoformat(c['changed'])).days >= 1
         if quiet and not c.get('quiet'): c['quiet'] = True; B.say('%s is quiet' % c['id'])
         elif not quiet and c.get('quiet'): c.pop('quiet'); B.say('%s no longer quiet' % c['id'])
 
@@ -277,9 +356,12 @@ def service_event(data, name, event, detail='', run='', needs_human='', today=No
 
 # ---------------------------------------------------------------- the whole pass
 
-def sync(data, commits, art=None, reports=None, takes=None, now=None):
+def sync(data, commits, art=None, reports=None, takes=None, now=None, fire=None, routines_on=None):
     now = now or datetime.datetime.now(datetime.timezone.utc)
     B = Board(data, local_date(now))
+    for r in B.b.get('routines', []):   # START is shown only when the task's address and token are set as repo secrets
+        if routines_on is not None and bool(r.get('enabled')) != bool(routines_on.get(r['id'])):
+            r['enabled'] = bool(routines_on.get(r['id'])); B.say('START is %s for %s, effort %s' % ('on' if r['enabled'] else 'off', r['model'], r['effort']))
     for com in commits:
         if com['subject'].startswith('board-sync'): continue
         r4_claim(B, com)
@@ -287,7 +369,10 @@ def sync(data, commits, art=None, reports=None, takes=None, now=None):
         for tag, desc in com['headings']: r3_heading(B, com, tag, desc)
     r7_inbox(B, reports, takes)
     r2_art(B, art)
+    r2_clips(B, art, now)
     r1_unblock(B)
+    r10_notes(B)
+    r9_start(B, fire)
     r8_quiet(B, now)
     cutoff = (now - datetime.timedelta(days=SESSION_KEEP_DAYS)).isoformat()
     B.b['sessions'] = sorted([s for s in B.b['sessions'] if s['last'] >= cutoff], key=lambda s: s['last'], reverse=True)
@@ -333,6 +418,32 @@ def remote_lists():
     return reports, takes
 
 
+def make_fire(cache_path):
+    """POST to the task's /fire address with only the card id as text; the answer holds the new conversation's link. Remembers answers in a file so a
+    retried push (board-sync.yml runs the rules again after a lost race) never starts the same card twice."""
+    try: cache = json.load(open(cache_path))
+    except Exception: cache = {}
+    def fire(routine, cid):
+        if cache.get(cid): return cache[cid]
+        url, tok = os.environ.get('CLAUDE_TASK_%s_URL' % routine['env']), os.environ.get('CLAUDE_TASK_%s_TOKEN' % routine['env'])
+        if not url or not tok: raise RuntimeError('the task address or token is not set')
+        req = urllib.request.Request(url, data=json.dumps({'text': cid}).encode(), method='POST', headers={
+            'Authorization': 'Bearer ' + tok, 'anthropic-beta': FIRE_BETA, 'anthropic-version': '2023-06-01', 'Content-Type': 'application/json'})
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r: j = json.load(r)
+        except urllib.error.HTTPError as e: raise RuntimeError('the task answered %s' % e.code)
+        except Exception as e: raise RuntimeError('could not reach the task (%s)' % type(e).__name__)
+        u = j.get('claude_code_session_url')
+        if not u: raise RuntimeError('the task answered without a conversation link')
+        cache[cid] = u; json.dump(cache, open(cache_path, 'w'))
+        return u
+    return fire
+
+
+def routines_env(data):
+    return {r['id']: bool(os.environ.get('CLAUDE_TASK_%s_URL' % r['env']) and os.environ.get('CLAUDE_TASK_%s_TOKEN' % r['env'])) for r in data.get('routines', [])}
+
+
 def load(path): return json.load(open(path, encoding='utf-8'))
 
 
@@ -359,7 +470,7 @@ def main(argv):
         art = {e['id']: e for e in load(os.path.join(ROOT, 'data', 'art-prompts.json')).get('entries', [])}
         reports, takes = remote_lists()
         before = json.dumps(data, sort_keys=True)
-        log = sync(data, commits, art, reports, takes)
+        log = sync(data, commits, art, reports, takes, None, make_fire(os.environ.get('BOARD_FIRED', '/tmp/board-fired.json')), routines_env(data))
         if json.dumps(data, sort_keys=True) != before or not data.get('synced'):
             if not log: log = ['started tracking' if not data.get('synced') else 'bookkeeping']
             data['synced'] = head; data['synced_at'] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds')

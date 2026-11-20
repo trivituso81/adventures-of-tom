@@ -1,7 +1,7 @@
 name: board-sync
 
 # board2 (2026-11-19). Moves cards on data/board.json from what actually happened in the repo (tools/board_sync.py, rules R1 to R8 in
-# claude/board2-plan.md). No AI and no credits. Runs on every push to main, and on the start and end of clip-gen, voice-gen, clip-gate and art-bake
+# claude/board2-plan.md; board3 adds notes, START and the clip-review closer). No AI and no credits. Runs on every push to main, and on the start and end of clip-gen, voice-gen, clip-gate and art-bake
 # (art-bake pushes with the Actions token, which does not start other workflows, so its end starts this one). It commits data/board.json
 # only when a card moved, message "board-sync: <what moved>". That commit is made with the Actions token, so it does not start this workflow
 # again, and publish.yml ignores pushes that change only data/board.json.
@@ -13,6 +13,8 @@ on:
     workflows: [clip-gen, voice-gen, clip-gate, art-bake]
     types: [requested, completed]
   workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'   # hourly: the 6 hour quiet flag and the clip-review closer depend on time passing, not on a push
 
 permissions:
   contents: write
@@ -60,11 +62,19 @@ jobs:
           fi
           python3 tools/board_sync.py --service "$NAME" --event "$ev" --detail "$detail" --run "$RUN_URL" --needs-human "$human" | tee /tmp/svc.txt
           cat /tmp/svc.txt >> /tmp/msgs.txt
-      - name: Move cards from the repo (R1 to R5, R7, R8)
+      - name: Move cards from the repo (R1 to R5, R7 to R10; R9 starts cards on the Claude task)
+        env:
+          CLAUDE_TASK_SONNET_MEDIUM_URL: ${{ secrets.CLAUDE_TASK_SONNET_MEDIUM_URL }}
+          CLAUDE_TASK_SONNET_MEDIUM_TOKEN: ${{ secrets.CLAUDE_TASK_SONNET_MEDIUM_TOKEN }}
+          BOARD_FIRED: /tmp/board-fired.json
         run: |
           python3 tools/board_sync.py | tee /tmp/git.txt
           cat /tmp/git.txt >> /tmp/msgs.txt
       - name: Check the board file, then commit and push it if a card moved
+        env:
+          CLAUDE_TASK_SONNET_MEDIUM_URL: ${{ secrets.CLAUDE_TASK_SONNET_MEDIUM_URL }}
+          CLAUDE_TASK_SONNET_MEDIUM_TOKEN: ${{ secrets.CLAUDE_TASK_SONNET_MEDIUM_TOKEN }}
+          BOARD_FIRED: /tmp/board-fired.json
         run: |
           python3 tools/board_check.py
           if git diff --quiet data/board.json; then echo "Nothing moved."; exit 0; fi

@@ -129,5 +129,96 @@ check('board_check refuses a Claude card with no tag', r.returncode == 1 and 'ta
 r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '--push', 'nobuild-xyz'], capture_output=True, text=True)
 check('board_check --push refuses a build with no card', r.returncode == 1)
 
+
+# --- board3: R1 copies an answer, auto-start, START with a stubbed fire, notes, clips_reviewed, 6 hour quiet
+PR = {'what': 'w', 'before': ['b'], 'model': 'Claude Sonnet 5.5 (row B)', 'effort': 'medium (x)', 'text': 't'}
+RT = [{'id': 'sonnet-medium', 'model': 'Claude Sonnet 5.5', 'effort': 'medium', 'env': 'SONNET_MEDIUM', 'enabled': False}]
+def mk(auto=False, **kw):
+    return {'cards': [dict(id='t-d', lane='tom', col='done', done='2026-11-19', ask='decide', theme='Tools', title='Pick', next='n', changed='2026-11-19', blocks=['c-auto'], answer='Option A'),
+                      dict(id='c-auto', tag='autob', lane='claude', col='wait', waiting_on='tom', theme='Tools', title='Auto card', next='n', changed='2026-11-19', blocks=[], prompt=PR, auto=auto, chat={'url': '', 'opening': 'x'}, **kw)],
+            'lanes': [], 'sessions': [], 'routines': copy.deepcopy(RT)}
+fired = []
+def fire(r, cid): fired.append(cid); return 'https://claude.ai/code/session_FIRED'
+b = mk(auto=True)
+bs.sync(b, [], None, None, None, NOW, fire, {'sonnet-medium': True})
+c = card(b, 'c-auto')
+check('R1: the answer is copied into the unblocked card', any('Answer from "Pick": Option A' in h['t'] for h in c['history']))
+check('routines: START is switched on when the secrets exist', b['routines'][0]['enabled'] is True)
+check('R9: an auto card is started at once when Tom answered', fired == ['c-auto'] and c['col'] == 'prog' and c['chat']['url'].endswith('FIRED') and not c.get('start'), (fired, c['col']))
+check('R9: the history says it was started by START', any(h['t'].startswith('Started by START') for h in c['history']))
+b = mk(auto=False); fired.clear()
+bs.sync(b, [], None, None, None, NOW, fire, {'sonnet-medium': True})
+check('R9: a card without auto waits for the tap', not fired and card(b, 'c-auto')['col'] == 'up')
+card(b, 'c-auto')['start'] = True
+bs.sync(b, [], None, None, None, NOW, fire, {'sonnet-medium': True})
+check('R9: a START tap starts the card', fired == ['c-auto'] and card(b, 'c-auto')['col'] == 'prog')
+b = mk(); card(b, 'c-auto').update(col='up', start=True); card(b, 'c-auto').pop('waiting_on')
+bs.sync(b, [], None, None, None, NOW, fire, {'sonnet-medium': False})
+check('R9: START with no task set up is dropped with a history line', not card(b, 'c-auto').get('start') and card(b, 'c-auto')['col'] == 'up' and 'not set up' in card(b, 'c-auto')['history'][-1]['t'])
+def bad_fire(r, cid): raise RuntimeError('the task answered 401')
+b = mk(); card(b, 'c-auto').update(col='up', start=True); card(b, 'c-auto').pop('waiting_on')
+bs.sync(b, [], None, None, None, NOW, bad_fire, {'sonnet-medium': True})
+check('R9: a failed START stays Up next with the reason (Copy prompt still works)', card(b, 'c-auto')['col'] == 'up' and '401' in card(b, 'c-auto').get('start_error', ''))
+b = mk(); b['cards'][0]['col'] = 'up'; del b['cards'][0]['done']; card(b, 'c-auto').update(start=True)
+bs.sync(b, [], None, None, None, NOW, fire, {'sonnet-medium': True})
+check('R9: START on a card that still waits is ignored', card(b, 'c-auto')['col'] == 'wait' and 'still waits' in card(b, 'c-auto')['history'][-1]['t'])
+b = mk(); card(b, 'c-auto').update(col='up', start=True, prompt=dict(PR, model='Claude Opus 5.5 (row D)', effort='high (x)')); card(b, 'c-auto').pop('waiting_on')
+bs.sync(b, [], None, None, None, NOW, fire, {'sonnet-medium': True})
+check('R9: an Opus card is never started (no task for it)', card(b, 'c-auto')['col'] == 'up' and 'not set up' in card(b, 'c-auto')['history'][-1]['t'])
+
+b = {'cards': [dict(id='t-n', lane='tom', col='done', done='2026-11-19', ask='play', theme='Tools', title='Play it', next='n', changed='2026-11-19', blocks=[], note='the door <sticks>'),
+               dict(id='t-m', lane='tom', col='done', done='2026-11-19', ask='play', theme='Tools', title='No note', next='n', changed='2026-11-19', blocks=[])], 'lanes': [], 'sessions': []}
+bs.sync(b, [], None, None, None, NOW)
+n = card(b, 'c-note-n')
+check('R10: a note on a card that blocks nothing gets a Claude card', n and n['lane'] == 'claude' and n['col'] == 'up' and n['tag'] and 'the door (sticks)' in n['prompt']['text'], n)
+check('R10: that card has no "<" blank and no em dash', '<' not in json.dumps(n) and '\u2014' not in json.dumps(n))
+check('R10: a card with no note makes none', card(b, 'c-note-m') is None)
+snap = json.dumps(b, sort_keys=True); bs.sync(b, [], None, None, None, NOW)
+check('R10: it is made once', json.dumps(b, sort_keys=True) == snap)
+
+AT = lambda iso: int(datetime.datetime.fromisoformat(iso).timestamp() * 1000)
+art2 = {'a': {'id': 'a', 'clip': {'k': 1}, 'group': 'Chapter 2', 'status': 'approved', 'rejects': []},
+        'b': {'id': 'b', 'clip': {'k': 1}, 'group': 'Chapter 2', 'status': 'rejected', 'rejects': [{'from': 'review', 'at': AT('2026-11-19T15:00:00-08:00'), 'note': 'x'}]},
+        'c': {'id': 'c', 'clip': {'k': 1}, 'group': 'Chapter 2', 'status': 'approved', 'rejects': [{'from': 'v1', 'at': AT('2026-11-10T15:00:00-08:00'), 'note': 'old'}]}}
+def rv(): return {'cards': [dict(id='t-rv', lane='tom', col='up', ask='animations', theme='Battle Animations', title='Review chapter 2 clips', next='n', changed='2026-11-19', created='2026-11-19', blocks=[], done_when={'clips_reviewed': 'Chapter 2'})], 'lanes': [], 'sessions': []}
+b = rv(); bs.sync(b, [], art2, None, None, NOW)
+check('clips_reviewed: closes when all are decided, one was sent back from the review, and he stopped 20 minutes ago', card(b, 't-rv')['col'] == 'done' and '1 clip(s) sent back' in card(b, 't-rv')['history'][-1]['t'], card(b, 't-rv'))
+b = rv(); bs.sync(b, [], art2, None, None, datetime.datetime.fromisoformat('2026-11-19T15:10:00-08:00'))
+check('clips_reviewed: stays open 10 minutes after his last REDO (a review in progress)', card(b, 't-rv')['col'] == 'up')
+art3 = copy.deepcopy(art2); art3['c']['status'] = 'draft'
+b = rv(); bs.sync(b, [], art3, None, None, NOW)
+check('clips_reviewed: stays open while a clip is undecided', card(b, 't-rv')['col'] == 'up')
+art4 = copy.deepcopy(art2); art4['b']['rejects'][0]['from'] = 'v3'
+b = rv(); bs.sync(b, [], art4, None, None, NOW)
+check('clips_reviewed: a Library reject is not a review (he taps I did this when all clips were fine)', card(b, 't-rv')['col'] == 'up')
+
+b = {'cards': [dict(id='c-q', tag='q', lane='claude', col='prog', theme='Tools', title='Q', next='n', changed='2026-11-19', blocks=[], chat={'url': 'https://claude.ai/code/session_Q', 'opening': 'x'})],
+     'lanes': [], 'sessions': [{'url': 'https://claude.ai/code/session_Q', 'title': 'Q', 'first': '2026-11-19T08:00:00-08:00', 'last': '2026-11-19T09:00:00-08:00', 'tags': [], 'cards': ['c-q']}]}
+bs.sync(b, [], None, None, None, datetime.datetime.fromisoformat('2026-11-19T14:00:00-08:00'))
+check('R8: 5 hours without a push is not quiet', not card(b, 'c-q').get('quiet'))
+bs.sync(b, [], None, None, None, datetime.datetime.fromisoformat('2026-11-19T15:30:00-08:00'))
+check('R8: 6 hours without a push is quiet', card(b, 'c-q').get('quiet') is True)
+
+# --- board_check board3 rules
+def chk(mut, want, label):
+    d = json.load(open(os.path.join(HERE, '..', 'data', 'board.json'), encoding='utf-8')); mut(d)
+    open('/tmp/board_bad.json', 'w').write(json.dumps(d))
+    r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '/tmp/board_bad.json'], capture_output=True, text=True)
+    check(label, r.returncode == 1 and want in r.stdout, r.stdout[-200:])
+tom1 = lambda d: next(c for c in d['cards'] if c['lane'] == 'tom' and c['col'] != 'done')
+chk(lambda d: tom1(d).pop('ask'), 'needs an ask', 'board_check refuses an open Tom card with no ask')
+chk(lambda d: tom1(d).update(ask='whatever'), 'needs an ask', 'board_check refuses an unknown ask')
+chk(lambda d: tom1(d).update(ask='decide'), 'decide card', 'board_check refuses a decide card with no choices')
+chk(lambda d: tom1(d).update(ask='decide', choices=['A', 'B'], leads=['a', 'b']), 'Recommended', 'board_check wants the recommendation first and marked')
+chk(lambda d: (tom1(d).update(blocks=[]), tom1(d).pop('fyi', None)), 'must block', 'board_check refuses a Tom card that blocks nothing and is not fyi')
+chk(lambda d: next(c for c in d['cards'] if c['id'] == 'c-board3').update(after='t-nope'), 'after', 'board_check refuses an after that names no Tom card')
+chk(lambda d: next(c for c in d['cards'] if c['id'] == 'c-ch2build').update(auto=True, prompt=dict(next(c for c in d['cards'] if c['id'] == 'c-b3s9')['prompt'])), 'auto', 'board_check refuses auto on an Opus card')
+r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '--push', 'board3'], capture_output=True, text=True)
+check('board_check --push accepts board3 once its card has after', r.returncode == 0, r.stdout)
+d = json.load(open(os.path.join(HERE, '..', 'data', 'board.json'), encoding='utf-8')); next(c for c in d['cards'] if c['id'] == 'c-board3').pop('after')
+open('/tmp/board_bad.json', 'w').write(json.dumps(d))
+r = subprocess.run([sys.executable, os.path.join(HERE, 'board_check.py'), '--push', 'board3', '/tmp/board_bad.json'], capture_output=True, text=True)
+check('board_check --push refuses a build whose card has no after', r.returncode == 1 and 'no `after`' in r.stdout, r.stdout)
+
 print('board_sync_test: %s' % ('FAILED: ' + ', '.join(fails) if fails else 'all passed'))
 sys.exit(1 if fails else 0)
