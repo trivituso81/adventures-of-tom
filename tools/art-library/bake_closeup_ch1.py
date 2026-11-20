@@ -1,6 +1,6 @@
 """Bakes the approved chapter 1 Library pictures (art/raw/props/ch1-*, art/raw/characters/ch1-boppy-grin-v1.png).
 Writes art/closeup/ch1-phone.webp (the phone on the cab seat), art/closeup/ch1-list.webp (Grace's list), art/props/ch1/pan_full, pan_empty, papers.webp (trimmed, transparent), ch1-coin.webp (512, transparent), ch1-grin.webp (head and shoulders of Boppy, transparent),
-and art/props/hollow/ch1_block.webp, ch1_patch.webp, ch1_bulb.webp (trimmed, transparent). Magenta-ish background is keyed from the edge."""
+and art/props/hollow/ch1_block.webp, ch1_bulb.webp, ch1_spot.webp, ch1_spot_nobulb.webp (trimmed, transparent). Magenta-ish background is keyed from the edge."""
 import os, numpy as np, cv2
 from PIL import Image
 RAW='art/raw'
@@ -30,8 +30,20 @@ g=g.crop((0,0,g.width,int(g.height*.58)))   # head, cap, hand on the teeth, vest
 square(g,640).save('art/closeup/ch1-grin.webp',quality=92,method=6)
 import glob,re
 def newest(stem): return max(glob.glob(RAW+'/props/'+stem+'-v*.png'),key=lambda f:int(re.search(r'-v(\d+)\.png$',f).group(1))).rsplit('/',1)[1][:-4]   # the newest version (amberspot1: grey patch v2)
-for n,src in (('ch1_block',newest('ch1-orange-block')),('ch1_patch',newest('ch1-grey-patch')),('ch1_bulb',newest('ch1-flashbulb'))):
+for n,src in (('ch1_block',newest('ch1-orange-block')),('ch1_bulb',newest('ch1-flashbulb'))):   # c-reports: the patch is part of ch1_spot now (old ch1_patch purged)
     p=trim(key(RAW+'/props/'+src+'.png')); sc=256/max(p.size); p.resize((max(1,round(p.width*sc)),max(1,round(p.height*sc))),Image.LANCZOS).save('art/props/hollow/%s.webp'%n,quality=92,method=6)
+# c-reports (r-20261114-101538-nre4): Boppy's fishing spot as ONE picture (grey grass, orange block and burnt bulb painted together, Library entry ch1-spot-together), and the same
+# picture with the bulb removed (a clone of the ground to its left) for after Deedee picks it up (flag ch1-bulb). Both share one canvas. Printed: the block's centre and width
+# as shares of the picture, which engine/plate.js HOLLOW_SPOT uses to put the block exactly where block-break.js expects it.
+sp=key(RAW+'/props/'+newest('ch1-spot-together')+'.png'); a=np.array(sp).astype(np.float32); H,W=a.shape[:2]
+mk=np.zeros((H,W),np.float32); cv2.ellipse(mk,(725,575),(98,106),0,0,360,1,-1); mf=cv2.GaussianBlur(mk,(0,0),8)[...,None]; sh=np.roll(a,470,axis=1)
+nb=np.dstack([a[...,:3]*(1-mf)+sh[...,:3]*mf, np.maximum(a[...,3:4]*(1-mf)+sh[...,3:4]*mf, a[...,3:4]*(1-(mf>.5)))]).clip(0,255).astype(np.uint8)
+nb=Image.fromarray(nb,'RGBA'); bb=sp.getchannel('A').point(lambda v:255 if v>20 else 0).getbbox(); bb=(max(0,bb[0]-4),max(0,bb[1]-4),min(W,bb[2]+4),min(H,bb[3]+4))
+og=(a[...,0]>190)&(a[...,1]>70)&(a[...,1]<190)&(a[...,2]<90)&(a[...,3]>200); og[:,640:]=False; ys,xs=np.where(og)
+sc=512/max(bb[2]-bb[0],bb[3]-bb[1])
+for n,im in (('ch1_spot',sp),('ch1_spot_nobulb',nb)):
+    c=im.crop(bb); c.resize((round(c.width*sc),round(c.height*sc)),Image.LANCZOS).save('art/props/hollow/%s.webp'%n,quality=92,method=6)
+print('spot picture %dx%d, block centre %.4f,%.4f of the picture, block width %.4f'%(round((bb[2]-bb[0])*sc),round((bb[3]-bb[1])*sc),((xs.min()+xs.max())/2-bb[0])/(bb[2]-bb[0]),((ys.min()+ys.max())/2-bb[1])/(bb[3]-bb[1]),(xs.max()-xs.min())/(bb[2]-bb[0])))
 # cutpolish4b: the muffin pan (full and empty), the muffin papers and the phone on the cab seat
 os.makedirs('art/props/ch1',exist_ok=True)
 for n,src in (('pan_full','ch1-muffin-pan'),('pan_empty','ch1-muffin-pan-empty'),('papers','ch1-muffin-papers')):

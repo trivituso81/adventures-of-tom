@@ -14,7 +14,7 @@ import bake_emotion_faces as BE
 
 ROOT = BE.ROOT
 SRC = os.path.join(ROOT, 'art', 'talk')
-TYPES = ['tell', 'point', 'ask', 'answer']
+TYPES = ['tell', 'point', 'ask', 'answer', 'think']
 BE.OUT = os.path.join(ROOT, 'portraits', 'talk', 'pose')
 BE.MOODS = TYPES
 BE.KEY_PREFIX = 'tk_'
@@ -24,8 +24,8 @@ BE.head_scale = lambda pid: float(os.environ.get('HS', '1.0'))
 
 
 def frames(pid):
-    sh = Image.open(os.path.join(SRC, pid + '.webp')).convert('RGBA'); fw = sh.width // 4
-    return [sh.crop((i * fw, 0, (i + 1) * fw, sh.height)) for i in range(4)]
+    sh = Image.open(os.path.join(SRC, pid + '.webp')).convert('RGBA'); fw = sh.width // len(TYPES)   # tell, point, ask, answer, think (c-reports: the fifth talking pose)
+    return [sh.crop((i * fw, 0, (i + 1) * fw, sh.height)) for i in range(len(TYPES))]
 
 
 BE.frames = frames
@@ -61,7 +61,7 @@ def main():
         rows.append([Image.open(tf).convert('RGB')] + outs); print('baked', pid)
     chk = os.environ.get('CHECK')
     if chk:
-        w = 160; sheet = Image.new('RGB', (w * 5, w * len(rows)), 'white')
+        w = 160; sheet = Image.new('RGB', (w * 6, w * len(rows)), 'white')
         for r, row in enumerate(rows):
             for i, c in enumerate(row): sheet.paste(c.resize((w, w), Image.LANCZOS), (i * w, r * w))
         sheet.save(chk); print('wrote', chk)

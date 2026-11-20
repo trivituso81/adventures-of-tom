@@ -396,16 +396,19 @@ function drawHomeJar(time) {
 // playing (block-break.js draws the grey circle, the block and the colour ring), 'done' = opened. ring = how far the colour ring has run (art px).
 const bbState=id=>(typeof BB!=='undefined'&&BB.run&&BB.run.id===id)?'run':(typeof flag==='function'&&flag('bb-'+id)?'done':'on');
 const bbRing=id=>typeof bbRingR==='function'?bbRingR(currentMap.id):-1;
-const HOLLOW_SPOT=[['hollow/ch1_patch',1100,700,100,null],['hollow/ch1_block',1100,682,52,null],['hollow/ch1_bulb',1166,696,20,'ch1-bulb']];
+// c-reports (r-20261114-101538-nre4, Tom: "we need to create one image together because right now they all look very strange, like kind of overlap each other"): the spot is
+// ONE painted picture (grey grass, orange block and burnt bulb together, Library entry ch1-spot-together) until Deedee picks the bulb up (flag ch1-bulb); after that the same
+// picture with the bulb cleared away. Placed so its block sits exactly where engine/block-break.js has the block (centre 1100,682, 52 wide): the picture is 185.6 art px wide
+// and the block's centre is .4784,.4929 of it (tools/art-library/bake_closeup_ch1.py prints these). The old separate patch is gone.
+const HOLLOW_SPOT_PIC={cx:1104,cy:682.8,w:185.6};
 function drawHollowSpot(after) {
   if(typeof flag!=='function') return;
   const s=T/64,st=bbState('hollow');
   if((st==='run')!==!!after) return;   // during the break these are drawn after the grey circle (bbUnderDraw), so it does not cover them
-  for(const [id,x,y,w,gone] of HOLLOW_SPOT) {
-    if((gone&&flag(gone))||!PROPART.ready(id)) continue;
-    if(st==='done'||(st==='run'&&id!=='hollow/ch1_bulb')) continue;   // the patch and the block go with the break
-    PROPART.draw(id,x*s,y*s,{w:w*s});
-  }
+  if(st==='run'){ if(!flag('ch1-bulb')&&PROPART.ready('hollow/ch1_bulb')) PROPART.draw('hollow/ch1_bulb',1166*s,696*s,{w:20*s}); return; }   // the bulb stays through the break if nobody took it
+  if(st!=='on') return;                // the spot goes with the break
+  const id=flag('ch1-bulb')?'hollow/ch1_spot_nobulb':'hollow/ch1_spot',P=HOLLOW_SPOT_PIC;
+  if(PROPART.ready(id)) PROPART.draw(id,P.cx*s,P.cy*s,{w:P.w*s});
 }
 // The lemon tree below the Observatory, chapter 2 scene 9 (ch2Lemon): a small tree with no colour in a grey circle of dirt, one lemon hanging in a
 // grapefruit-sized orange block. Both stay until the family comes back after chapter 6. Centres in plate art px (64 per tile), width in art px.

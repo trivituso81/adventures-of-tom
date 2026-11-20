@@ -434,20 +434,20 @@
      "img": "art/poses/tom/talk-tk_tell.webp",
      "w": 314,
      "h": 582,
-     "ax": 109.5,
+     "ax": 106.0,
      "link": null,
      "sheet": "tom-talk-v2.png",
      "marks": {
-      "top": 22.0,
-      "chin": 148.7,
+      "top": 19.3,
+      "chin": 130.8,
       "feet": 582
      },
      "conf": "low",
-     "s0": 0.071066,
+     "s0": 0.068071,
      "now": {
       "f": 1.0,
-      "h": 1.05555,
-      "anchor": 148.74
+      "h": 1.25041,
+      "anchor": 130.77
      }
     },
     "tk_point": {
@@ -457,20 +457,20 @@
      "img": "art/poses/tom/talk-tk_point.webp",
      "w": 397,
      "h": 584,
-     "ax": 242.8,
+     "ax": 195.1,
      "link": null,
      "sheet": "tom-talk-v2.png",
      "marks": {
-      "top": 22.1,
-      "chin": 149.2,
+      "top": 19.4,
+      "chin": 131.2,
       "feet": 584
      },
      "conf": "low",
-     "s0": 0.071066,
+     "s0": 0.068071,
      "now": {
       "f": 1.0,
-      "h": 1.05555,
-      "anchor": 149.25
+      "h": 1.25041,
+      "anchor": 131.22
      }
     },
     "tk_ask": {
@@ -480,20 +480,20 @@
      "img": "art/poses/tom/talk-tk_ask.webp",
      "w": 266,
      "h": 599,
-     "ax": 129.0,
+     "ax": 107.0,
      "link": null,
      "sheet": "tom-talk-v2.png",
      "marks": {
-      "top": 22.6,
-      "chin": 153.1,
+      "top": 19.9,
+      "chin": 134.6,
       "feet": 599
      },
      "conf": "low",
-     "s0": 0.071066,
+     "s0": 0.068071,
      "now": {
       "f": 1.0,
-      "h": 1.05555,
-      "anchor": 153.08
+      "h": 1.25041,
+      "anchor": 134.59
      }
     },
     "tk_answer": {
@@ -503,20 +503,20 @@
      "img": "art/poses/tom/talk-tk_answer.webp",
      "w": 271,
      "h": 603,
-     "ax": 174.5,
+     "ax": 148.5,
      "link": null,
      "sheet": "tom-talk-v2.png",
      "marks": {
-      "top": 22.8,
-      "chin": 154.1,
+      "top": 20.0,
+      "chin": 135.5,
       "feet": 603
      },
      "conf": "low",
-     "s0": 0.071066,
+     "s0": 0.068071,
      "now": {
       "f": 1.0,
-      "h": 1.05555,
-      "anchor": 154.1
+      "h": 1.25041,
+      "anchor": 135.49
      }
     }
    },
@@ -983,20 +983,20 @@
      "img": "art/poses/tnb/talk-tk_tell.webp",
      "w": 327,
      "h": 573,
-     "ax": 201.2,
+     "ax": 195.2,
      "link": null,
      "sheet": "tnb-talk-v2.png",
      "marks": {
-      "top": 24.9,
-      "chin": 140.0,
+      "top": 23.5,
+      "chin": 132.4,
       "feet": 573
      },
      "conf": "low",
-     "s0": 0.063689,
+     "s0": 0.062624,
      "now": {
       "f": 1.0,
-      "h": 1.49877,
-      "anchor": 140.01
+      "h": 1.61271,
+      "anchor": 132.41
      }
     },
     "tk_point": {
@@ -1006,20 +1006,20 @@
      "img": "art/poses/tnb/talk-tk_point.webp",
      "w": 397,
      "h": 565,
-     "ax": 175.5,
+     "ax": 101.5,
      "link": null,
      "sheet": "tnb-talk-v2.png",
      "marks": {
-      "top": 24.5,
-      "chin": 138.1,
+      "top": 23.2,
+      "chin": 130.6,
       "feet": 565
      },
      "conf": "low",
-     "s0": 0.063689,
+     "s0": 0.062624,
      "now": {
       "f": 1.0,
-      "h": 1.49877,
-      "anchor": 138.06
+      "h": 1.61271,
+      "anchor": 130.56
      }
     },
     "tk_ask": {
@@ -1029,20 +1029,20 @@
      "img": "art/poses/tnb/talk-tk_ask.webp",
      "w": 311,
      "h": 592,
-     "ax": 147.6,
+     "ax": 141.8,
      "link": null,
      "sheet": "tnb-talk-v2.png",
      "marks": {
-      "top": 25.7,
-      "chin": 144.7,
+      "top": 24.3,
+      "chin": 136.8,
       "feet": 592
      },
      "conf": "low",
-     "s0": 0.063689,
+     "s0": 0.062624,
      "now": {
       "f": 1.0,
-      "h": 1.49877,
-      "anchor": 144.66
+      "h": 1.61271,
+      "anchor": 136.8
      }
     },
     "tk_answer": {
@@ -1052,20 +1052,20 @@
      "img": "art/poses/tnb/talk-tk_answer.webp",
      "w": 313,
      "h": 593,
-     "ax": 140.2,
+     "ax": 138.6,
      "link": null,
      "sheet": "tnb-talk-v2.png",
      "marks": {
-      "top": 25.7,
-      "chin": 144.9,
+      "top": 24.3,
+      "chin": 137.0,
       "feet": 593
      },
      "conf": "low",
-     "s0": 0.063689,
+     "s0": 0.062624,
      "now": {
       "f": 1.0,
-      "h": 1.49877,
-      "anchor": 144.9
+      "h": 1.61271,
+      "anchor": 137.03
      }
     }
    },
@@ -1906,7 +1906,7 @@
       "feet": 498
      },
      "conf": "low",
-     "s0": 0.068433,
+     "s0": 0.068432,
      "now": {
       "f": 1.0,
       "h": 1.1,
@@ -1929,7 +1929,7 @@
       "feet": 495
      },
      "conf": "low",
-     "s0": 0.068433,
+     "s0": 0.068432,
      "now": {
       "f": 1.0,
       "h": 1.1,
@@ -1952,7 +1952,7 @@
       "feet": 477
      },
      "conf": "low",
-     "s0": 0.068433,
+     "s0": 0.068432,
      "now": {
       "f": 1.0,
       "h": 1.1,
@@ -1975,7 +1975,7 @@
       "feet": 482
      },
      "conf": "low",
-     "s0": 0.068433,
+     "s0": 0.068432,
      "now": {
       "f": 1.0,
       "h": 1.1,
@@ -1998,7 +1998,7 @@
       "feet": 508
      },
      "conf": "low",
-     "s0": 0.068433,
+     "s0": 0.068432,
      "now": {
       "f": 1.0,
       "h": 1.1,
@@ -2021,7 +2021,7 @@
       "feet": 508
      },
      "conf": "low",
-     "s0": 0.068433,
+     "s0": 0.068432,
      "now": {
       "f": 1.0,
       "h": 1.1,
@@ -2044,7 +2044,7 @@
       "feet": 515
      },
      "conf": "low",
-     "s0": 0.068433,
+     "s0": 0.068432,
      "now": {
       "f": 1.0,
       "h": 1.1,
@@ -2056,22 +2056,22 @@
      "key": "em_unimpressed",
      "label": "Boppy, feeling unimpressed",
      "img": "art/poses/boppy/mood-em_unimpressed.webp",
-     "w": 272,
-     "h": 520,
-     "ax": 112.5,
+     "w": 268,
+     "h": 545,
+     "ax": 140.5,
      "link": null,
-     "sheet": "boppy-emotions-v6.png",
+     "sheet": "boppy-em-unimpressed-v1.png",
      "marks": {
-      "top": 16.5,
-      "chin": 142.0,
-      "feet": 520
+      "top": 19.0,
+      "chin": 164.0,
+      "feet": 545
      },
      "conf": "low",
-     "s0": 0.068433,
+     "s0": 0.068432,
      "now": {
       "f": 1.0,
       "h": 1.1,
-      "anchor": 142.0
+      "anchor": 164.0
      }
     },
     "tk_tell": {
@@ -5066,20 +5066,20 @@
      "img": "art/poses/grace/talk-tk_tell.webp",
      "w": 341,
      "h": 563,
-     "ax": 153.0,
+     "ax": 153.3,
      "link": null,
      "sheet": "grace-talk-v2.png",
      "marks": {
-      "top": 20.3,
-      "chin": 135.0,
+      "top": 19.5,
+      "chin": 129.5,
       "feet": 563
      },
      "conf": "low",
-     "s0": 0.046005,
+     "s0": 0.045365,
      "now": {
       "f": 1.0,
-      "h": 1.52438,
-      "anchor": 135.0
+      "h": 1.60955,
+      "anchor": 129.5
      }
     },
     "tk_point": {
@@ -5089,20 +5089,20 @@
      "img": "art/poses/grace/talk-tk_point.webp",
      "w": 411,
      "h": 563,
-     "ax": 234.0,
+     "ax": 228.7,
      "link": null,
      "sheet": "grace-talk-v2.png",
      "marks": {
-      "top": 20.3,
-      "chin": 135.0,
+      "top": 19.5,
+      "chin": 129.5,
       "feet": 563
      },
      "conf": "low",
-     "s0": 0.046005,
+     "s0": 0.045365,
      "now": {
       "f": 1.0,
-      "h": 1.52438,
-      "anchor": 135.0
+      "h": 1.60955,
+      "anchor": 129.5
      }
     },
     "tk_ask": {
@@ -5112,20 +5112,20 @@
      "img": "art/poses/grace/talk-tk_ask.webp",
      "w": 333,
      "h": 583,
-     "ax": 164.7,
+     "ax": 170.6,
      "link": null,
      "sheet": "grace-talk-v2.png",
      "marks": {
-      "top": 21.0,
-      "chin": 139.8,
+      "top": 20.2,
+      "chin": 134.1,
       "feet": 583
      },
      "conf": "low",
-     "s0": 0.046005,
+     "s0": 0.045365,
      "now": {
       "f": 1.0,
-      "h": 1.52438,
-      "anchor": 139.8
+      "h": 1.60955,
+      "anchor": 134.1
      }
     },
     "tk_answer": {
@@ -5135,20 +5135,20 @@
      "img": "art/poses/grace/talk-tk_answer.webp",
      "w": 332,
      "h": 584,
-     "ax": 155.7,
+     "ax": 162.6,
      "link": null,
      "sheet": "grace-talk-v2.png",
      "marks": {
-      "top": 21.1,
-      "chin": 140.0,
+      "top": 20.2,
+      "chin": 134.3,
       "feet": 584
      },
      "conf": "low",
-     "s0": 0.046005,
+     "s0": 0.045365,
      "now": {
       "f": 1.0,
-      "h": 1.52438,
-      "anchor": 140.04
+      "h": 1.60955,
+      "anchor": 134.33
      }
     }
    },
@@ -5619,16 +5619,16 @@
      "link": null,
      "sheet": "rose-talk-v2.png",
      "marks": {
-      "top": 21.1,
-      "chin": 149.2,
+      "top": 20.7,
+      "chin": 146.1,
       "feet": 598
      },
      "conf": "low",
-     "s0": 0.035199,
+     "s0": 0.034938,
      "now": {
       "f": 1.0,
-      "h": 1.44693,
-      "anchor": 149.15
+      "h": 1.48684,
+      "anchor": 146.13
      }
     },
     "tk_point": {
@@ -5638,20 +5638,20 @@
      "img": "art/poses/rose/talk-tk_point.webp",
      "w": 389,
      "h": 593,
-     "ax": 190.4,
+     "ax": 186.1,
      "link": null,
      "sheet": "rose-talk-v2.png",
      "marks": {
-      "top": 20.9,
-      "chin": 147.9,
+      "top": 20.5,
+      "chin": 144.9,
       "feet": 593
      },
      "conf": "low",
-     "s0": 0.035199,
+     "s0": 0.034938,
      "now": {
       "f": 1.0,
-      "h": 1.44693,
-      "anchor": 147.91
+      "h": 1.48684,
+      "anchor": 144.91
      }
     },
     "tk_ask": {
@@ -5661,20 +5661,20 @@
      "img": "art/poses/rose/talk-tk_ask.webp",
      "w": 287,
      "h": 629,
-     "ax": 135.5,
+     "ax": 136.0,
      "link": null,
      "sheet": "rose-talk-v2.png",
      "marks": {
-      "top": 22.2,
-      "chin": 156.9,
+      "top": 21.7,
+      "chin": 153.7,
       "feet": 629
      },
      "conf": "low",
-     "s0": 0.035199,
+     "s0": 0.034938,
      "now": {
       "f": 1.0,
-      "h": 1.44693,
-      "anchor": 156.89
+      "h": 1.48684,
+      "anchor": 153.7
      }
     },
     "tk_answer": {
@@ -5684,20 +5684,20 @@
      "img": "art/poses/rose/talk-tk_answer.webp",
      "w": 338,
      "h": 628,
-     "ax": 127.1,
+     "ax": 126.6,
      "link": null,
      "sheet": "rose-talk-v2.png",
      "marks": {
-      "top": 22.2,
-      "chin": 156.6,
+      "top": 21.7,
+      "chin": 153.5,
       "feet": 628
      },
      "conf": "low",
-     "s0": 0.035199,
+     "s0": 0.034938,
      "now": {
       "f": 1.0,
-      "h": 1.44693,
-      "anchor": 156.64
+      "h": 1.48684,
+      "anchor": 153.46
      }
     }
    },

@@ -13,7 +13,7 @@ import csv, json, os, sys, collections
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TSV = os.path.join(ROOT, 'docs/talk-lines.tsv')
 OUT = os.path.join(ROOT, 'data/talk-types.js')
-TYPES = ('tell', 'point', 'ask', 'answer')
+TYPES = ('tell', 'point', 'ask', 'answer', 'think')   # think: c-reports 2026-11-19, report r-20261114-101501-c5no
 SPEAKERS = {'tom', 'tnb', 'grace', 'rose', 'amy', 'justin', 'olivia', 'deedee', 'boppy', 'ellie', 'aunt ellie'}
 
 

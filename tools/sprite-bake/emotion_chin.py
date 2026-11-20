@@ -93,7 +93,12 @@ def chin_rows(cid, figs, src):
     if not e or e.get('src') != os.path.basename(src) or len(e.get('chin', [])) != 8:
         d[cid] = e = {'src': os.path.basename(src), 'chin': measure(cid, figs)}
         json.dump(dict(sorted(d.items())), open(PATH, 'w'), indent=0, separators=(',', ':')); open(PATH, 'a').write('\n')
-    return e['chin']
+    rows = list(e['chin'])
+    import emotion_frames as EF
+    if EF.REPLACE.get(cid):   # a cell replaced by a single painted figure (emotion_frames.REPLACE): its chin is read on that figure, not taken from the sheet's stored row
+        fresh = measure(cid, figs)
+        for i in EF.REPLACE[cid]: rows[i] = fresh[i]
+    return rows
 
 
 if __name__ == '__main__':

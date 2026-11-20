@@ -60,7 +60,7 @@ def story_sets(cid, ch, cells):
         figs = EF.cut(cid); sheet = os.path.basename(EF.src_path(cid)); fct = EF.head_factor(cid); rows = EC.chin_rows(cid, figs, EF.src_path(cid))
         grown = [EF.grow_frame_head(f, fct, c) for f, c in zip(figs, rows)] if fct != 1.0 else figs
         hg = float(np.median([grown[i].height / figs[i].height for i in EF.UPRIGHT])); u = owk / (EMO_HEAD[cid] * hg * HT.stand(cid)[1])
-        for mname, f, c in zip(MOODS, figs, rows): add('mood', 'em_' + mname, '%s, feeling %s' % (ch['name'], mname), f, c, u, fct, sheet)
+        for mi, (mname, f, c) in enumerate(zip(MOODS, figs, rows)): add('mood', 'em_' + mname, '%s, feeling %s' % (ch['name'], mname), f, c, u, fct, EF.sheet_label(cid, mi))
         ch['sets']['mood'] = {'name': 'Feelings', 'keys': ['em_' + x for x in MOODS], 'upright': ['em_' + x for x in MOOD_UP]}
     if cid in TF.CAST and TF.src_path(cid) and cid in EMO_H:
         figs = TF.cut(cid); sheet = os.path.basename(TF.src_path(cid)); fct, sh = TF.head_grow(cid, figs)

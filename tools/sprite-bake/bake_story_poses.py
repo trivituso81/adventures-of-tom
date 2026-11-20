@@ -88,7 +88,7 @@ for _k in list(EMO_HEAD): EMO_HEAD[_k] *= EMO_HG.get(_k, 1.0)
 # A set exists only once its strip exists, so with no talking sheets this bake writes exactly what it wrote before. Size: one factor per person that makes the
 # Telling figure (standing straight) as tall as the overworld stand ('h' as for the moods); talk_frames.py already grew the head by the HEAD SIZES factor,
 # so the head is the walk's size and the figure keeps its real height (the walk keeps height too). Look at it next to the stand when the first sheet is baked.
-TALK_TYPES = ['tell', 'point', 'ask', 'answer']
+TALK_TYPES = ['tell', 'point', 'ask', 'answer', 'think']   # think (c-reports 2026-11-19): the fifth pose, for lines where someone thinks about or examines what is being said
 for _id, _h in EMO_H.items():
     if _id != 'nara' and os.path.exists(os.path.join(ROOT, 'art/talk', _id + '.webp')):
         SETS[_id + 'talk'] = {'member': _id, 'strip': os.path.join('art/talk', _id + '.webp'), 'k': 0, 'h': _h, 'ref': 'tk_tell', 'talk': True,
@@ -110,6 +110,15 @@ STORY_STRIPS = {
 }
 for _id, _S in STORY_STRIPS.items():
     if os.path.exists(os.path.join(ROOT, 'art/story', _id + '.webp')): SETS[_id] = dict(_S, strip=os.path.join('art/story', _id + '.webp'), k=0, talk=True)
+
+# c-reports (2026-11-19): single painted figures of the Art Library group "Report fixes", cut by report_singles.py into art/story/<name>.webp and drawn at the MOOD scale of
+# their person (same path as the em_ frames: EMO_HEAD, so a frame stands at the size of that person's feelings frames). Frame names:
+#   deedeech1 c1d_glasses (r-20261114-100352-7v5z), c1d_bulb (jykk); rosech3 c3r_bulb (jykk); <npc>dz dz_dazed (r-20261114-104915-g4gl: the smog's daze).
+REPORT_STRIPS = {'deedeech1': ('deedee', ['c1d_glasses', 'c1d_bulb']), 'rosech3': ('rose', ['c3r_bulb'])}
+for _n, _S in REPORT_STRIPS.items():
+    if os.path.exists(os.path.join(ROOT, 'art/story', _n + '.webp')):
+        SETS[_n] = {'member': _S[0], 'strip': os.path.join('art/story', _n + '.webp'), 'k': 0, 'h': EMO_H[_S[0]], 'ref': _S[1][0], 'names': _S[1]}
+DAZED_NPCS = ['washington', 'odette', 'carmen', 'marisol', 'larry']
 
 # npcemo7 (2026-11-10, Tom: "implement them"): the 58 townsfolk plus Jojo and Michael get mood poses too (art/emotions/<id>.webp). Their sets are written to data/npc-poses.js, not
 # data/story-poses.js, so the cast file stays small. Size rule, same as the cast (mean of height match and face match), computed here per person, no hand tuning:
@@ -161,6 +170,9 @@ def npc_emo_head(pid):
 
 for _id in NPC_EMO:
     EMO_HEAD[_id] = npc_emo_head(_id)[0]
+for _id in DAZED_NPCS:   # c-reports: the dazed frame of each neighbour in chapter 2, at the same scale as that neighbour's feelings frames
+    if os.path.exists(os.path.join(ROOT, 'art/story', _id + 'dz.webp')):
+        SETS[_id + 'dz'] = {'member': _id, 'strip': os.path.join('art/story', _id + 'dz.webp'), 'k': 0, 'h': 40, 'ref': 'dz_dazed', 'names': ['dz_dazed'], 'npc': True}
 
 
 def cut_cells(rgba, cols, rows, n, dil=6):
@@ -305,6 +317,9 @@ def apply_pose_lines(S, figs):
     ent = {n: e for n, e in ent.items() if e and e.get('ok') and e.get('page') and not S.get('npc')}
     if not ent: return []
     import emotion_frames as EF, talk_frames as TF
+    # c-reports (2026-11-19): his lines belong to the picture they were set on; a frame whose picture was replaced (EF.REPLACE) is baked by the rule until he sets new lines.
+    if S['names'][0].startswith('em_'): ent = {n: e for n, e in ent.items() if e.get('sheet', EF.sheet_label(S['member'], EF.MOODS.index(n[3:]))) == EF.sheet_label(S['member'], EF.MOODS.index(n[3:]))}
+    if not ent: return []
     src = EF.cut(S['member']) if S['names'][0].startswith('em_') else TF.cut(S['member'])
     applied = []
     for i, n in enumerate(S['names']):

@@ -835,11 +835,18 @@ const STORY_WORLD=[
     for(const n of currentMap.npcs) {
       n.trance=on&&CH2_TRANCE.includes(n.name);
       if(n.trance&&!n.held) { n.path=[]; n.idle=1; }
+      // r-20261114-104915-g4gl (Tom: "a special animation frame for every single NPC who's in this dazed state"): each entranced neighbour stands in a painted dazed pose
+      const zid=CH2_TRANCE_ID[n.name];
+      if(zid) {
+        if(n.trance) { if(!n.scenePose&&typeof STORY_POSES!=='undefined'&&STORY_POSES[zid]&&STORY_POSES[zid].dz_dazed) { if(typeof storyPosesLoad==='function') storyPosesLoad(zid); n.scenePose={f:'dz_dazed',mid:zid,dazed:true}; } }
+        else if(n.scenePose&&n.scenePose.dazed) n.scenePose=null;
+      }
     }
   }
 ];
 // Who the smog puts in a trance (they stand still with a purple swirl over their heads).
 const CH2_TRANCE=['Mr. Washington','Marisol','Larry','Miss Odette','Doña Carmen'];
+const CH2_TRANCE_ID={'Mr. Washington':'washington','Marisol':'marisol','Larry':'larry','Miss Odette':'odette','Doña Carmen':'carmen'};   // whose painted dazed pose (data/npc-poses.js <id>dz)
 // Grump Hollow's monsters hold still until the three tutorial fights are done.
 // HOLD_RULES: one function per chapter; any that returns true keeps that map monster still. Later chapters push onto it.
 const HOLD_RULES=[

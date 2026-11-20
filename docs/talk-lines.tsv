@@ -63,7 +63,7 @@ chapter	file	line	character	mood	talk	text
 1	data/scenes.js	237	Grace	none	tell	Nine papers. There were twelve. So the one with the pan still has three.
 1	data/scenes.js	238	Deedee	unimpressed		Then it has three of my muffins and my pan. Keep walking.
 1	data/scenes.js	248	Rose	happy		The grass is Boppy color!
-1	data/scenes.js	249	Grace	none	tell	It's grey, Rose. Just that one spot. And that orange cube has a dragonfly in it.
+1	data/scenes.js	249	Grace	none	think	It's grey, Rose. Just that one spot. And that orange cube has a dragonfly in it.
 1	data/scenes.js	250	Rose	scared		He's stuck! Tata, get him out!
 1	data/scenes.js	251	Tom	proud	answer	Yes. Right away. Everybody give the dragonfly some room.
 1	data/scenes.js	253	Tom	none	tell	It's the size of a plum. I carried a suitcase through two airports this morning.
@@ -536,7 +536,7 @@ chapter	file	line	character	mood	talk	text
 5	data/scenes.js	1483	Grace	unimpressed		Doors don't just not open. That's not how doors work.
 5	data/scenes.js	1485	Rose	happy		Tata. A school. At NIGHT. With MONSTERS, probably.
 5	data/scenes.js	1486	Tom	unimpressed	point	Stay close, everybody. This is a professional learning environment.
-5	data/scenes.js	1493	Tom	surprised	tell	...Every clock in this hall says a different time.
+5	data/scenes.js	1493	Tom	surprised	think	...Every clock in this hall says a different time.
 5	data/scenes.js	1494	Amy	angry		That one says four. That one says nine. That one is going BACKWARDS. I teach time, Tom. This is personal.
 5	data/scenes.js	1495	Rose	happy		Tata! Tata! SPARKLY FOOTPRINTS!
 5	data/scenes.js	1497	Rose	happy		Little paper feet. With glitter. They go EVERYWHERE.
@@ -798,7 +798,7 @@ chapter	file	line	character	mood	talk	text
 6	data/scenes.js	2081	TNB	surprised		Was that a pun? Babe. Did you just make a PUN?
 6	data/scenes.js	2082	Tom	unimpressed		He's a starter. Sour is a compliment.
 6	data/scenes.js	2083	TNB	surprised	tell	And look. Something taped to the lid. A gold coin. With a little clock face.
-6	data/scenes.js	2084	Tom	surprised	point	Squirrels hoard shiny things. Squirrels don't tape things. Look at those corners.
+6	data/scenes.js	2084	Tom	surprised	think	Squirrels hoard shiny things. Squirrels don't tape things. Look at those corners.
 6	data/scenes.js	2084	Tom	surprised	tell	That makes four. The sundial, your steamer, the sign-up sheet, and now my jar.
 6	data/scenes.js	2084	Tom	surprised	tell	He finds something lonely, hands it a gold coin, and it tries to make one thing last forever.
 6	data/scenes.js	2085	TNB	happy		And then we show up and make friends with it, and the coin falls right off. Babe. We are ruining this man's whole year. Spooky. I love it. I hate it.
@@ -873,7 +873,7 @@ chapter	file	line	character	mood	talk	text
 7	data/scenes.js	2496	Tom	surprised	tell	A gold coin. Same little clock face.
 7	data/scenes.js	2496	Tom	surprised	tell	That's five coins. The sundial, the steamer, the sign-up sheet, my jar, and now a book that nobody has opened since 1952.
 7	data/scenes.js	2497	Grace	proud		Somebody DID open it, then. To put the coin in.
-7	data/scenes.js	2497	Grace	surprised		And look at the checkout card in the pocket. It has one stamp, DUE BACK 1952, and no name. There's just a little clock where the name should be.
+7	data/scenes.js	2497	Grace	surprised	think	And look at the checkout card in the pocket. It has one stamp, DUE BACK 1952, and no name. There's just a little clock where the name should be.
 7	data/scenes.js	2498	Rose	sad		Somebody took it out and didn't READ it? That's so sad.
 7	data/scenes.js	2499	Tom	surprised	tell	And then he brought it back last week with a coin in it. Either he's very old, or he's very, very late.
 7	data/scenes.js	2499	Tom	proud	answer	I'm adding it to the list.
@@ -903,7 +903,7 @@ chapter	file	line	character	mood	talk	text
 8	data/scenes.js	2725	Olivia	scared		Bring her back fed! Please! Michael, Isla is eating the lasagna. It's a brick. She's eating a brick.
 8	data/scenes.js	2733	TNB	surprised		Oh. Oh, babe. Look at it. The tracks are still in the floor. The time clock. The crew bench. I'm going to cry a little.
 8	data/scenes.js	2734	Tom	loving		It's beautiful. You can cry a little. I'll wait.
-8	data/scenes.js	2734	Tom	unimpressed		...It's also freezing in here, and it's seventy-four degrees outside.
+8	data/scenes.js	2734	Tom	unimpressed	think	...It's also freezing in here, and it's seventy-four degrees outside.
 8	data/scenes.js	2735	Nara	surprised		Nara watches a little blue flame drift past her nose, along the floor, toward the back. Then another one. Then another.
 8	data/scenes.js	2736	Tom	surprised	tell	Those little flames are pilot lights. They're the pilot lights from every stove on the block, and something down here is collecting them.
 8	data/scenes.js	2737	TNB	none	tell	And three of them got stuck on the way. Look: the Paint Shop, the Machine Shop and the Lunchroom.
@@ -972,7 +972,7 @@ chapter	file	line	character	mood	talk	text
 9	data/scenes.js	3086	Tom	unimpressed		You licked my mail.
 9	data/scenes.js	3087	Rose	happy		A LITTLE.
 9	data/scenes.js	3088	Grace	surprised	tell	Also the moon is gone. Look. It's supposed to be a full moon. Luna said so. Luna is very upset.
-9	data/scenes.js	3089	Tom	surprised		...There's no moon.
+9	data/scenes.js	3089	Tom	surprised	think	...There's no moon.
 9	data/scenes.js	3089	Tom	unimpressed		There's no moon, and I have a gold letter. Okay.
 9	data/scenes.js	3097	Deedee	happy		Tom! There you are. Sit. No, stand. Read it. Read it out loud. I have read it eleven times.
 9	data/scenes.js	3099	Tom	none	tell	"THE MOON CLUB requests the pleasure of TOM. Tonight, at moonrise. Admit three. Adults only. Dress: your very best."
@@ -1330,13 +1330,13 @@ chapter	file	line	character	mood	talk	text
 12	data/scenes-ch12.js	0	TNB	loving		It’s hard like glass, but it’s warm. Babe, it’s as warm as a mug right out of the kiln.
 12	data/scenes-ch12.js	0	Tom	none	tell	He’s all right in there. He’s just stopped, right in the middle of one second.
 12	data/scenes-ch12.js	0	Amy	none	tell	This is what Vance told us he does. He stops people at a nice moment so that nothing ever changes. This is what it looks like up close.
-12	data/scenes-ch12.js	144	TNB	none	tell	When that man took the color and the music, the warm part of the day had nowhere to go. So it set hard, right around him. That’s what amber is: warmth that got stuck.
+12	data/scenes-ch12.js	144	TNB	none	think	When that man took the color and the music, the warm part of the day had nowhere to go. So it set hard, right around him. That’s what amber is: warmth that got stuck.
 12	data/scenes-ch12.js	0	Tom	proud	point	Doña Carmen’s is right there, and the Alvarez house is down 2nd. If it happened to him, it happened to them. We check on the neighbors first.
-12	data/scenes-ch12.js	0	Tom	none	tell	And if amber is warmth that got stuck, maybe we can get it moving again.
+12	data/scenes-ch12.js	0	Tom	none	think	And if amber is warmth that got stuck, maybe we can get it moving again.
 12	data/scenes-ch12.js	152	Rose	surprised		Tata. Doña Carmen turned into candy.
 12	data/scenes-ch12.js	153	Tom	none	tell	She’s in amber too, frozen right in the middle of a sentence.
 12	data/scenes-ch12.js	154	Grace	surprised	tell	She’s still pointing at the volcano.
-12	data/scenes-ch12.js	155	TNB	loving	tell	It’s warm, same as Mr. Washington’s. I don’t think we can break it, and I don’t think we should. If amber is warmth that got stuck, we have to give the warmth somewhere to go.
+12	data/scenes-ch12.js	155	TNB	loving	think	It’s warm, same as Mr. Washington’s. I don’t think we can break it, and I don’t think we should. If amber is warmth that got stuck, we have to give the warmth somewhere to go.
 12	data/scenes-ch12.js	156	Amy	proud	point	Warmth. We’re good at warmth. Something warm from outside the amber might get it flowing again. Everybody find the warmest thing in the room.
 12	data/scenes-ch12.js	157	Rose	happy		The comal! The pupusas!
 12	data/scenes-ch12.js	159	Tom	loving		Doña Carmen. It’s Tom. Nobody on this block has ever left your door hungry. We’re here to eat. Please wake up.
@@ -1359,7 +1359,7 @@ chapter	file	line	character	mood	talk	text
 12	data/scenes-ch12.js	216	Rose	surprised		It’s the biggest car in the WORLD.
 12	data/scenes-ch12.js	217	Tom	surprised	tell	Every light on the block is red. Every single one.
 12	data/scenes-ch12.js	218	Grace	sad		Tata. Its headlights are pointed at the ground. It looks sad.
-12	data/scenes-ch12.js	221	TNB	loving	tell	If it’s stuck, maybe it just needs somewhere to go. Kindness first. Hit it if it hits back.
+12	data/scenes-ch12.js	221	TNB	loving	think	If it’s stuck, maybe it just needs somewhere to go. Kindness first. Hit it if it hits back.
 12	data/scenes-ch12.js	222	Amy	proud	point	Here’s the plan. I stay with the girls. If anybody needs a break, sit on a couch or a bench and we’ll swap.
 12	data/scenes-ch12.js	223	Tom	proud		Nobody gets run over. I’ll step in front of anyone who needs it.
 12	data/scenes-ch12.js	228	Amy	proud	point	Everybody okay? Good. It floors Rush Hour every third turn, so we heal before, not after.
@@ -1850,7 +1850,7 @@ chapter	file	line	character	mood	talk	text
 19	data/scenes-ch19.js	88	Grace	unimpressed		The post office. We already said that.
 19	data/scenes-ch19.js	89	Rose	proud	answer	Nara found it first.
 19	data/scenes-ch19.js	90	Nara	surprised		Nara is sitting very straight in front of Tom’s mailbox, and she is staring into the slot. She has not blinked. A thin gold light is coming out of the slot, like a sleeping lamp.
-19	data/scenes-ch19.js	91	TNB	surprised	tell	That’s not a regular mailbox. That’s a mailbox that’s thinking about something.
+19	data/scenes-ch19.js	91	TNB	surprised	think	That’s not a regular mailbox. That’s a mailbox that’s thinking about something.
 19	data/scenes-ch19.js	92	Amy	surprised	tell	It’s his. It’s the mailbox at the bottom of his steps, where his bills and my birthday cards go. It’s warm.
 19	data/scenes-ch19.js	93	Grace	surprised	ask	If you drop a letter in a mailbox and it goes nowhere... where does it go?
 19	data/scenes-ch19.js	94	TNB	none	answer	Down. I think it goes down.
@@ -1861,7 +1861,7 @@ chapter	file	line	character	mood	talk	text
 19	data/scenes-ch19.js	111	TNB	sad		It’s still wet. Somebody erased him and left the space, like they were going to write somebody else in.
 19	data/scenes-ch19.js	112	Grace	none	tell	There are four doors, one for each of us.
 19	data/scenes-ch19.js	113	TNB	loving	tell	Four people who would never forget him. Behind each door there must be a memory of Tom that only one of us has.
-19	data/scenes-ch19.js	113	TNB	loving	tell	If we bring them back to this desk, maybe his name comes back too.
+19	data/scenes-ch19.js	113	TNB	loving	think	If we bring them back to this desk, maybe his name comes back too.
 19	data/scenes-ch19.js	114	Amy	surprised	tell	The desk in the middle has four little brass niches in the front. Four of us, four niches. And a chair that someone just stood up out of.
 19	data/scenes-ch19.js	115	Rose	surprised	answer	There’s a thermos on it.
 19	data/scenes-ch19.js	116	TNB	loving		That’s his. I’d know that thermos in the dark.
@@ -2112,11 +2112,11 @@ Nine Scoops	data/bonus-nine-scoops.js	891	Rose	proud		I have a pepper in my pock
 Nine Scoops	data/bonus-nine-scoops.js	892	Tom	unimpressed		Nobody's afraid of the pepper, Rose. Everybody ready? Warm things out.
 Nine Scoops	data/bonus-nine-scoops.js	895	Grace	scared		Tata, nothing WORKS.
 Nine Scoops	data/bonus-nine-scoops.js	896	Rose	proud		He tried to freeze me AGAIN. I'm spicy now. He can't.
-Nine Scoops	data/bonus-nine-scoops.js	898	Grace	surprised		...Wait. Mr. Pistachio said. The DOOR.
+Nine Scoops	data/bonus-nine-scoops.js	898	Grace	surprised	think	...Wait. Mr. Pistachio said. The DOOR.
 Nine Scoops	data/bonus-nine-scoops.js	898	Grace	surprised		Tata. He needs something on his door. Something that's HIS.
 Nine Scoops	data/bonus-nine-scoops.js	899	Tom	loving		...Okay. Presents are before cake. New rule.
 Nine Scoops	data/bonus-nine-scoops.js	902	Grace	happy		An INSTAX. Tata. A PRINTER. For PHOTOS.
-Nine Scoops	data/bonus-nine-scoops.js	902	Grace	loving		...The cab photo. This morning. All of us.
+Nine Scoops	data/bonus-nine-scoops.js	902	Grace	loving	think	...The cab photo. This morning. All of us.
 Nine Scoops	data/bonus-nine-scoops.js	903	Tom	none	point	Pair it to my phone. One tap. It's still on there.
 Nine Scoops	data/bonus-nine-scoops.js	907	Grace	none	answer	Printing...
 Nine Scoops	data/bonus-nine-scoops.js	912	Grace	loving		You don't have to freeze it. You just take a picture. See? It stays.
@@ -2189,7 +2189,7 @@ Nine Scoops	data/bonus-nine-scoops.js	1047	Rose	happy	answer	Count the duck too.
 9	scene:ch9AfterBoss		Boppy	none	tell	Fifty years that ball waited for somebody to come back. Same as Old Iron-Gill at my pier. This fella knows where all the lonely things are.
 9	scene:ch9AfterBoss		Boppy	none	tell	I don't like a fella who knows that.
 10	scene:ch10Sec		Tom	none	tell	A long brass clock hand. Stamped on the back: GATE 0, HOUR. It goes on the gate clock.
-10	scene:ch10Sec		Tom	none	tell	Each coin was holding a piece of time still. I think this clock is where they came from. Put them back, and the time goes back too.
+10	scene:ch10Sec		Tom	none	think	Each coin was holding a piece of time still. I think this clock is where they came from. Put them back, and the time goes back too.
 10	scene:ch10Bag		Tom	none	tell	A long brass clock hand. Stamped on the back: GATE 0, MINUTE. It goes on the gate clock.
 10	scene:ch10Lounge		Tom	none	tell	A long brass clock hand. Stamped on the back: GATE 0, SECOND. It goes on the gate clock.
 	scene:part2Open		Tom	none	tell	Dad. That card has a little clock on it.
@@ -2204,7 +2204,7 @@ Nine Scoops	data/bonus-nine-scoops.js	1047	Rose	happy	answer	Count the duck too.
 11	scene:ch11Vance		Amy	none	answer	I think you are too.
 11	scene:ch11After		Tom	none	tell	And Vance is gone. He slipped away while we were busy with his board.
 11	scene:ch11After		Tom	none	tell	He closed Long Island. He couldn’t make us stay, so he stopped our home instead.
-19	scene:ch19Open		Amy	none	tell	Vance said the Loom has no place to put him. So maybe he ended up where undelivered things go. We follow the mailbox down.
+19	scene:ch19Open		Amy	none	think	Vance said the Loom has no place to put him. So maybe he ended up where undelivered things go. We follow the mailbox down.
 	npc:amyhouse:lines		Justin	unimpressed		Tom. Hey. Hold this. No, the other end. Don't touch the copper.
 	npc:amyhouse:lines		Justin	loving	tell	Rewiring the hallway. Amy wanted a dimmer. Amy gets a dimmer.
 	npc:amyhouse:lines		Justin	loving		Grace, Rose, come here. Who's Daddy's favorite? Both. Correct. Go get 'em.
@@ -2399,7 +2399,7 @@ Nine Scoops	data/bonus-nine-scoops.js	1047	Rose	happy	answer	Count the duck too.
 	dep:9:tnb		TNB	none	tell	Forty loaves, zero leftovers. Not bad for two guys and one oven.
 	dep:9:tnb		TNB	none	point	Go open your fancy letter. Wear the blue shirt. I fixed the button. You're welcome.
 	dep:9:flight		Tom	none	tell	A letter with a seal. Nobody sends a seal for good news.
-	dep:9:flight		Tom	none	ask	Or do they? Six hours to think about it. Great.
+	dep:9:flight		Tom	none	think	Or do they? Six hours to think about it. Great.
 	arr:4:tom		Tom	none	tell	Downtown LA. Seventy-two and sunny. I didn't have to check.
 	arr:4:tom		Tom	none	tell	Six hours, no fish, and a pepper to find for Boppy. In that order.
 	arr:5:tom		Tom	none	tell	Long Island. Quiet. Thursday is conference night. It won't stay quiet.
@@ -2420,7 +2420,7 @@ Nine Scoops	data/bonus-nine-scoops.js	1047	Rose	happy	answer	Count the duck too.
 	arr:9:tom		Tom	none	tell	Long Island. No moon tonight. Somebody's going to make that my problem.
 	arr:9:Grace		Grace	none	tell	Tata! FOUR! I have a chart now. You're on it.
 	arr:9:Rose		Rose	none	tell	Deedee has your letter. She hasn't opened it. She's LOOKED at it. A lot.
-	arr:9:Tom		Tom	none	tell	A wax seal with a clock on it. I'd look at it a lot too.
+	arr:9:Tom		Tom	none	think	A wax seal with a clock on it. I'd look at it a lot too.
 	arr:9:Rose		Rose	none	answer	I named the seal Flippers.
 	pool:west:0:grace		Grace	none	ask	Tata, you're leaving AGAIN? You JUST got here!
 	pool:west:0:rose		Rose	none	point	Bring me back a palm tree. A small one. For my room.
@@ -2501,7 +2501,7 @@ Nine Scoops	data/bonus-nine-scoops.js	1047	Rose	happy	answer	Count the duck too.
 	pool:flightW:3		Tom	none	answer	...Rose would love this.
 	pool:flightW:4		Tom	none	tell	Window seat. The clouds look like a save screen. I'm not going to say that out loud.
 	pool:flightW:4		Tom	none	tell	...Oh, I said it out loud.
-	pool:flightW:5		Tom	none	ask	Lie flat, warm nuts, no sibling clipboards. Why does that feel suspicious?
+	pool:flightW:5		Tom	none	think	Lie flat, warm nuts, no sibling clipboards. Why does that feel suspicious?
 	pool:flightW:6		Tom	none	tell	Six hours. If a kid asks me to carry them, I'll say yes. There are no kids. I checked twice.
 	pool:flightE:0		Tom	none	tell	Six hours. Then two small people will jump on me at full speed.
 	pool:flightE:0		Tom	none	answer	Worth it.
