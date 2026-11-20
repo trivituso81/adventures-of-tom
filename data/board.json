@@ -16372,6 +16372,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFtsSRVAYExWvAe8An",
+   "title": "Make card prompts use the wording the repo check accepts",
+   "first": "2026-11-20T12:43:30-08:00",
+   "last": "2026-11-20T12:43:30-08:00",
+   "tags": [],
+   "cards": [
+    "c-permwording1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEYKQ8AVWTjtj5CY9a",
    "title": "Build the Grace guard video proof",
    "first": "2026-11-20T12:41:05-08:00",
@@ -17910,8 +17920,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "ff661b782da998b71c4d5e640c05adde51659ec1",
- "synced_at": "2026-11-20T20:41:44+00:00",
+ "synced": "cdc5750d58e9c4f3eaae5852ec8df11ca012c9f6",
+ "synced_at": "2026-11-20T20:44:12+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
