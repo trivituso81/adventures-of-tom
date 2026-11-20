@@ -1476,7 +1476,7 @@
    "lane": "tom",
    "col": "up",
    "ask": "animations",
-   "next": "Open ADMIN > BATTLE LAB > CHAPTER 1 REVIEW (after RELOAD on the title screen). The 16 clips that were made again are at the top of the list with a NEW tag: press PLAY NEW to watch only those, and press REDO with a note on any that look wrong. The clips without a NEW tag are the old ones you already rejected (27 of them wait for the next Claude card). Do the same in CHAPTER 1 REVIEW: THE BIG ONE for the Grump and Toad idles. The 16: Tom give, run; Grace cast, cube pop, guard, run, squeeze, victory; Rose cast, Floor Is Lava, run; Deedee cast, run, scrub; Grump idle; Toad idle. This card unblocks card c-clipch1held (Claude makes the 27 held clips again with your notes).",
+   "next": "Open ADMIN > BATTLE LAB > CHAPTER 1 REVIEW (after RELOAD on the title screen). The 16 clips that were made again are at the top of the list with a NEW tag: press PLAY NEW to watch only those, and press REDO with a note on any that look wrong. The clips without a NEW tag are the old ones you already rejected (27 of them wait for the next Claude card). The Grump and Toad idles are in this same first fight (Mudling, Pond Grump, Bog Toad and Log Lump wait on the field together); CHAPTER 1 REVIEW: THE BIG ONE has only The Big One and none of the 16. The 16: Tom give, run; Grace cast, cube pop, guard, run, squeeze, victory; Rose cast, Floor Is Lava, run; Deedee cast, run, scrub; Grump idle; Toad idle. This card unblocks card c-clipch1held (Claude makes the 27 held clips again with your notes).",
    "blocks": [
     "c-clipch1held"
    ],
@@ -1497,6 +1497,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom (17:45): \"the animations looked the same as when i rejected them\" and \"unless i dont know whihc 16 to look at?\" The review list had no marker for the new clips. Build clipch1remakea adds a NEW tag, puts the 16 first and adds PLAY NEW."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom (18:06): \"i dont understand what Waiting in place is for\". Corrected the card (board-ch1review): the Grump and Toad idles are in the first CHAPTER 1 REVIEW fight, not THE BIG ONE. \"Waiting in place\" is the idle loop."
     }
    ]
   },

@@ -1,3 +1,7 @@
+## board-ch1review (2026-11-19): board card t-ch1review said the Grump and Toad idles were in THE BIG ONE fight; they are in the first CHAPTER 1 REVIEW fight
+
+- Tom (11-19 18:06): "i dont understand what Waiting in place is for". Card text only; no game change.
+
 ## ch1nodoor (2026-11-19): Chapter 1: the kitchen door frame height-marks look is cut
 
 - Tom (11-19 17:27): "cut the door frame height-marks beat from chapter 1 everywhere. It is a silent look nobody reads, and Grace's 'everything you missed' list in Scene 1 already plants Tom's fear of missing the girls growing up." Card c-ch1nodoor (updates t-ch1play).
