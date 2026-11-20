@@ -1,3 +1,9 @@
+## gem-polish02 (2026-11-20): Rose's Raspberry battle text says "center stage"
+
+- Gemini chapter 1 report POLISH-02 (claude/ch1-gemini-tracker.md). Still on main at `engine/rose-moves.js` line 1113: "Rose walks to centre stage..." now reads "Rose walks to center stage...".
+- It is on-screen battle text (`setMessage`), not a spoken line, and no baked clip holds it (grep of data/voice*, data/voice-clips.js: 0), so no re-bake.
+- Grep for the whole word "centre": the other hits are code comments and variable names (centred, centres), none shown to the player, left alone.
+
 ## gem-canon03 (2026-11-20): board only: the turtle Big One card is retired because it goes against Tom's chapter 1 canon
 
 - Gemini chapter 1 report CANON-03 asked to turn The Big One into a snapping-turtle bog monster with a muffin-tin crown, cut Boppy's Lost Lure and the folding chair at the pond, and have Boppy fish from a boat on the Long Island Sound.

@@ -1110,7 +1110,7 @@ Rm.sillyShow=E2=>{ const {m,fx}=E2,t=E2.targets[0],F=ST.unit(t),cx=Math.min(470,
   const st=ST.keys(fx,[{t:0,x:'home',y:'home',f:'walk',hop:4,hn:5},{t:900,x:cx,y:cy,f:'ab_silly_1'},{t:1100,f:'ab_silly_2'},{t:1800,f:'ab_silly_3',dx:(u,tt)=>Math.sin(tt*45)*2},
     {t:2250,f:'ab_silly_4',dx:(u,tt)=>Math.sin(tt*45)*2},{t:2700,f:'ab_silly_5',dy:(u,tt)=>-Math.abs(Math.sin(tt*16))*3},{t:3350,f:'ab_silly_6',hop:10},{t:3650,f:'runR'},{t:4300,x:'home',y:'home',f:'idle'}]);
   ST.play(E2,[
-    [0,()=>{ setMessage('Rose walks to centre stage and takes an extravagantly serious breath.'); say(m.id,'silly'); }],
+    [0,()=>{ setMessage('Rose walks to center stage and takes an extravagantly serious breath.'); say(m.id,'silly'); }],
     [1100,()=>{ scene('ro_breath',.8,{st}); sfx.charge(); }],
     [1800,()=>{ sfx.pbbt(.95,.65); const p=mouthAt(st);
       scene('rp_spray',1.0,{mx:p.x-20,my:p.y+3,F}); scene('rp_pbbt',1.25,{x:(p.x+F.x)/2-10,y:Math.max(34,F.top-86),sc:5}); }],
