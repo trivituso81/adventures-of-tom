@@ -42,6 +42,7 @@ def now_iso():
 class Repo:
     def __init__(self, root, remote):
         self.root, self.remote = root, remote
+        self.branch = 'artgen'   # keysecrets4: musicgen.py reuses this class with branch `musicgen`
         self.data = os.path.join(root, 'data', 'art-prompts.json')
         self.board = os.path.join(root, 'data', 'board.json')
         self.requests = os.path.join(root, 'data', 'art-requests.json')
@@ -97,7 +98,7 @@ class Repo:
 
     # ---- branch artgen: the output folder, saved without touching the working copy
     def branch_restore(self, out):
-        if self.git('fetch', '--depth', '1', self.remote, 'artgen', check=False).returncode: return False
+        if self.git('fetch', '--depth', '1', self.remote, self.branch, check=False).returncode: return False
         os.makedirs(out, exist_ok=True)
         tar = subprocess.run(['git', '-C', self.root, 'archive', 'FETCH_HEAD'], stdout=subprocess.PIPE)
         if tar.returncode: return False
@@ -105,7 +106,7 @@ class Repo:
         return True
 
     def branch_save(self, out, msg='artgen: pictures and index [skip ci]'):
-        idx = os.path.join(self.root, '.git', 'artgen-index')
+        idx = os.path.join(self.root, '.git', self.branch + '-index')
         env = dict(os.environ, GIT_WORK_TREE=os.path.abspath(out), GIT_INDEX_FILE=idx, GIT_DIR=os.path.join(self.root, '.git'))
         cfg = ['-c', 'core.sparseCheckout=false', '-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com']
         def g(*a, check=True):
@@ -117,8 +118,8 @@ class Repo:
         tree = g('write-tree').stdout.strip()
         sha = g('commit-tree', tree, '-m', msg).stdout.strip()
         if os.path.exists(idx): os.remove(idx)
-        p = self.git('push', '--force', self.remote, sha + ':refs/heads/artgen', check=False)
-        if p.returncode: raise RuntimeError('could not save branch artgen: ' + p.stdout[-300:])
+        p = self.git('push', '--force', self.remote, sha + ':refs/heads/' + self.branch, check=False)
+        if p.returncode: raise RuntimeError('could not save branch %s: ' % self.branch + p.stdout[-300:])
 
 
 def cost_of(e):

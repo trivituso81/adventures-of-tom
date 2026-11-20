@@ -1,3 +1,11 @@
+## keysecrets4 (2026-11-20): Music Library makes takes on GitHub with the repo secret; the ElevenLabs key box is gone
+
+Card c-keysecrets4, stage 4 of 5 (plan: `claude/keysecrets-plan.md`).
+- `music.html`: New take and Remake commit `data/music-requests.json` ("music: make <id>"; many at once is ONE commit) with the full prompt (loop or jingle wording added), length and model. `pollPending` (every 20 s, `?poll=<s>`) keeps the take the Action made from branch `musicgen` in this browser's takes and Uses it, or shows the Action's reason (key refused, no credit, prompt refused) on the card. A request survives closing the page (localStorage `aot-music-pending`, 40 minutes). The ElevenLabs key box is replaced by a GitHub token status (same `aot-gh-token` the Art Library holds; the one allowed exception). The browser no longer calls ElevenLabs. The two-tap credit estimate stays.
+- `tools/music-library/musicgen.py` and `.github/workflows/music-gen.yml`: runs on a push of `data/music-requests.json` with the message "music: make ..." and by hand (dry run by default). Queue emptied on main before anything is paid; key is repo secret `ELEVENLABS_API_KEY`; two takes at a time; cap 900 seconds of music per run; takes, `index.json` and `musicgen-report.json` on branch `musicgen` (never merge). `artgen.Repo` now takes a `branch` (default `artgen`). `publish.yml` ignores pushes that change only the request file.
+- Test: `tools/music-library/test.py` rewritten (GitHub is the art stub, the Action is the real `musicgen.py` on a local bare remote, ElevenLabs is the music stub); 0 fails. `artgen_test.py` and `keysecrets_test.py` still 0 fails.
+- Not done: the Action was not run for real (needs a repo secret `ELEVENLABS_API_KEY`; the voice-gen job already uses the same name). Voice Library takes and recast pages are cards c-keysecrets3 and c-keysecrets5.
+
 ## voiceauto1 (2026-11-20): new game lines now reach the Voice Library by themselves
 
 - Tom: "the new lines in the came are not in the voice library for recording - can this be automated". Cause: `data/voice-index.json` (the Voice Library list) was rebuilt only when a session ran three scripts by hand, so the new chapter 1 opening lines (Sal's send-off, Tom's JFK thank-you) never showed under No clip yet.

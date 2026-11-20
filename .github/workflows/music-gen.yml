@@ -1,0 +1,62 @@
+name: music-gen
+
+# keysecrets4. Makes the music takes the Music Library asked for (tools/music-library/musicgen.py). The page's MAKE buttons commit
+# data/music-requests.json with the message "music: make <id>"; this workflow runs on that push only (every other push skips it without a checkout).
+# The key is the repo secret ELEVENLABS_API_KEY (never printed). Takes wait on branch `musicgen` (never merged, never served); the page polls it.
+# By hand (workflow_dispatch) it defaults to a dry run: it lists what is queued and sends nothing.
+
+on:
+  push:
+    branches: [main]
+    paths: ['data/music-requests.json']
+  workflow_dispatch:
+    inputs:
+      cap_seconds:
+        description: 'Most seconds of music made in this run.'
+        required: false
+        default: '900'
+      dry_run:
+        description: 'true: list what is queued, call nothing, spend nothing.'
+        required: false
+        default: 'true'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: music-gen
+  cancel-in-progress: false
+
+jobs:
+  gen:
+    if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'music: make ')"
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /data/music-requests.json
+            /tools/art-library/artgen.py
+            /tools/music-library/musicgen.py
+            /.github/
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - name: Make the takes
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          EVENT: ${{ github.event_name }}
+          CAP: ${{ inputs.cap_seconds }}
+          DRY: ${{ inputs.dry_run }}
+        run: |
+          set -o pipefail
+          ARGS=(--out "$RUNNER_TEMP/musicgen" --cap-seconds "${CAP:-900}")
+          if [ "$EVENT" = "workflow_dispatch" ] && [ "$DRY" = "true" ]; then ARGS+=(--dry-run); fi
+          python3 -I tools/music-library/musicgen.py "${ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/run.log"
+          { echo '### music-gen'; echo '```'; tail -60 "$RUNNER_TEMP/run.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"

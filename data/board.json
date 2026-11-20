@@ -16294,7 +16294,7 @@
    "theme": "Tools",
    "tag": "keysecrets4",
    "title": "Music makes through repo secrets",
-   "next": "Music Library MAKE starts a music Action; the key box goes.",
+   "next": "Shipped as keysecrets4: Music Library MAKE asks the music-gen Action; the key box is gone. Needs repo secret ELEVENLABS_API_KEY for a real run.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -16332,9 +16332,14 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built keysecrets4: music.html asks data/music-requests.json, music-gen Action + musicgen.py, branch musicgen. Test music-library/test.py 0 fails. Action not run for real."
     }
    ],
-   "started_at": "2026-11-20T21:23:32+00:00"
+   "started_at": "2026-11-20T21:23:32+00:00",
+   "after": "nothing for Tom: c-keysecrets5"
   },
   {
    "id": "c-keysecrets5",
