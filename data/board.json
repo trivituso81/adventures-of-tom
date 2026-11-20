@@ -10773,6 +10773,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -10786,7 +10790,7 @@
    },
    "started_at": "2026-11-20T17:05:34+00:00",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukDNJ7iWP5DDvKaTnnD",
+    "url": "https://claude.ai/code/session_01RXeukDNJ7iWP5DDvKaTnnD",
     "opening": "started by START"
    }
   },
@@ -12210,13 +12214,13 @@
    "title": "Purge Rhubarb Crisp from the game everywhere",
    "theme": "Story and Dialogue",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "next": "Waiting on Tom: say if the purge is only the chapter 1 monster tooltip (small) or Rhubarb Crisp is cut from the whole story (large, needs re-bakes).",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFkMDqBpY62nm7AFcf",
+    "url": "https://claude.ai/code/session_01RXeukFkMDqBpY62nm7AFcf",
     "opening": "Make a card for each and every one of the issues listed in this report (Gemini testing, chapter 1)"
    },
    "history": [
@@ -12236,6 +12240,10 @@
     {
      "d": "2026-11-20",
      "t": "Ended without shipping. Rhubarb Crisp is not only a tooltip leak: it is canon (docs/CANON.md lines 78 and 124), a running gag in chapter 14 and 15 scenes, Deedee's moves and Rose Mode, and spoken in baked voice clips (data/voice/*, dialog-ch1, ch3, ch5). A full purge would reword voiced lines (silencing them, CLAUDE.md rule 5) and needs baked clips changed (rule 4). The tooltip text itself comes from the old Warmth battle system that the new battle spec retires. Needs Tom: purge only the chapter 1 monster tooltips, or really reword Deedee's rhubarb lines everywhere and re-bake."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "tag": "gem-pillar-rhubarb",
@@ -12248,8 +12256,7 @@
     "effort": "medium (a grep and purge with a clear target and an audit script)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-pillar-rhubarb in data/board.json, history included. Your first push is the commit board: start c-gem-pillar-rhubarb.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is the \"Cut-Lore Leak in Tooltips\" row of the battle table (1.2). What the tester saw: Observed in the live build: `Inspect` on `Mudling`, `Log Lump`, and `The Big One` explicitly lists `Rhubarb Crisp`! Locked target: Purge `Rhubarb Crisp` everywhere (Deedee's signature bake is warm apple muffins).\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-pillar-rhubarb, push to main, and write the result and the next step onto the card.\n\nRhubarb Crisp is cut lore: Deedee's signature bake is warm apple muffins. Grep the whole repo (data, engine, docs, scenes, inspect text, voice index) for Rhubarb, replace or delete each use, purge anything it leaves behind, and run python3 tools/clip-audit/unused_voice.py (CLAUDE.md No unused voice, Purge replaced files). Do not hand-edit baked voice data: if a baked clip says it, report it on the card. Legacy battle files (engine/battle2-*.js) may be removed by the new engine later; fix them anyway if they still ship.\n\nYou have my full permission to access the repo."
    },
-   "started_at": "2026-11-20T17:01:48+00:00",
-   "waiting_on": "tom"
+   "started_at": "2026-11-20T17:01:48+00:00"
   },
   {
    "id": "c-gem-pillar-pep",
@@ -12641,6 +12648,26 @@
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukDNJ7iWP5DDvKaTnnD",
+   "title": "Rebuild Grace's other slowed lines from your takes",
+   "first": "2026-11-20T17:07:12Z",
+   "last": "2026-11-20T17:07:12Z",
+   "tags": [],
+   "cards": [
+    "c-gracevoice-rest"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFkMDqBpY62nm7AFcf",
+   "title": "Purge Rhubarb Crisp from the game everywhere",
+   "first": "2026-11-20T17:06:55Z",
+   "last": "2026-11-20T17:06:56Z",
+   "tags": [],
+   "cards": [
+    "c-gem-pillar-rhubarb"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukFuf4u6X8rmNNsNzZk",
    "title": "Fix: Amy's House can be entered early in chapter 1",
@@ -14181,8 +14208,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "35277b3fa564109af948991521bc230e73de87b4",
- "synced_at": "2026-11-20T17:05:35+00:00",
+ "synced": "a27bbfa380d313c1a117b236b890433bb7dd3cff",
+ "synced_at": "2026-11-20T17:07:40+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
