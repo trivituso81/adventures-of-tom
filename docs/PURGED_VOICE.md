@@ -2,6 +2,10 @@
 
 Tom asked (again) for voice lines and clips that the full game never plays to be removed, because every unused line shows up in the Voice Library and the bake lists and costs ElevenLabs credits. This is the record. The audio itself is not lost: it is in git history at commit `6624b03` (the parent of the purge commit), so `git show 6624b03:data/voice/<id>.js` brings any of it back.
 
+## 2026-11-20 (`ch2build`): 42 dialogue clips nothing plays
+
+Chapter 2 was rebuilt to the locked script, and the audit (`unused_voice.py` check 4) listed 42 baked dialogue clips that no scene, harvest line or source plays: old chapter 2 lines (the sky over Griffith Park, the starter jar, pottery wheel, "One down", Mr. Washington would never say that, six Nara narrator lines), plus chapter 7 leftovers it found at the same time (Page, Books overhear things, the checkout card). Removed from data/voice/dialog-ch*.js (spec `tools/clip-audit/purge-ch2build.json`). Git history keeps the audio.
+
 ## 2026-11-20 (`fix-heist1play`): 2 lines that never had a clip
 
 The muffin theft lost its floor talk. Cut from `data/scenes.js` and every index (spec `tools/clip-audit/purge-fixheist1play.json`; no clip had been baked): `grace|Tata, get UP, it's getting away!` and `tom|I'm up. I've been here four minutes.`

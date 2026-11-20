@@ -1,5 +1,5 @@
 """Bakes the approved chapter 2 Library pictures (art/raw/props/ch2-*).
-Writes art/closeup/ch2-coin.webp (512, transparent) and ch2-loaf.webp (512, transparent, the whole round loaf),
+Writes art/closeup/ch2-coin.webp (512, transparent),
 and art/props/griffith/ch2_tree.webp and ch2_block.webp (trimmed, transparent, 384 px on the long side).
 Same keying as bake_closeup_ch1.py (the magenta background is keyed from the edge)."""
 import os, sys
@@ -30,7 +30,6 @@ def square(im,side):
     s=max(im.size); sq=Image.new('RGBA',(s,s),(0,0,0,0)); sq.paste(im,((s-im.width)//2,(s-im.height)//2),im); return sq.resize((side,side),Image.LANCZOS)
 os.makedirs('art/closeup',exist_ok=True); os.makedirs('art/props/griffith',exist_ok=True)
 square(trim(key(RAW+'/ch2-coin-v1.png')),512).save('art/closeup/ch2-coin.webp',quality=92,method=6)
-square(trim(key(RAW+'/ch2-loaf-whole-v1.png')),512).save('art/closeup/ch2-loaf.webp',quality=92,method=6)
 for n,src in (('ch2_tree','ch2-lemon-tree-grey-v1'),('ch2_block','ch2-orange-block-v1')):
     p=trim(key(RAW+'/'+src+'.png')); sc=384/max(p.size); p.resize((max(1,round(p.width*sc)),max(1,round(p.height*sc))),Image.LANCZOS).save('art/props/griffith/%s.webp'%n,quality=92,method=6)
 import sys as _s; _s.path.insert(0,os.path.dirname(os.path.abspath(__file__))); import shrink_mound; shrink_mound.shrink('art/props/griffith/ch2_tree.webp')

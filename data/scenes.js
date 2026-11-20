@@ -439,345 +439,254 @@ SCENES.ch1Sunday=[
 ];
 
 // ======================================================================================================
-// CHAPTER 2: Smog on 2nd Avenue (build plan C2). Tom flies to LA alone; TNB and Nara join; purple smog from Griffith Park.
-// Flags, in story order: ch2-sal (Sal's brakes line), ch2-goal, ch2-tnb (TNB joins), met-nara, ch2-nara (Nara joins,
-// tombo:nara1), ch2-starter, ch2-smog (the smog rolls in; neighbors in a trance), tombo:tnb1, ch2-lawn (the 2nd Ave fight),
-// ch2-odette, ch2-carmen, ch2-source (the trail opens), ch2-t1, ch2-tuts, ch2-lemon (the grey lemon tree), ch2-boss, battle:bigshake ('win'), ch2-clear, ch2-done.
+// CHAPTER 2: Smog on 2nd Avenue, built to the locked script claude/story-ch02-draft4.md (ch2build). Tom flies to LA alone; TNB and Nara join.
+// Flags, in story order: ch2-sal (Sal's brakes line), ch2-goal, ch2-tnb (scene 1, TNB joins), ch2-nara (scene 2, Nara joins, met-nara,
+// tombo:nara1, ch2-smog), tombo:tnb1, ch2-lawn (scene 3, the Smoglet fight), ch2-odette, ch2-carmen, ch2-source (scene 4, the trail opens),
+// ch2-t1, ch2-tuts (scene 5), ch2-lemon + ch2-bulb (scene 6), ch2-boss (scene 7), battle:bigshake ('win'), ch2-clear (scene 8), ch2-done (scene 9).
 // ======================================================================================================
 const CH2={mode:'full',chapter:2};
+const ch2Tap=id=>({hop:id,from:()=>{ const a=sceneActor(id); return [a.x,a.y]; },to:()=>{ const a=sceneActor(id); return [a.x,a.y]; },time:.22,arc:4});
+const CH2_LOST=(f,name)=>({if:()=>flag('battle:'+f)!=='win',then:[{heal:true},{toast:'Face '+name+' and press A to try again. Everyone is healed.',time:5}],else:[]});
 
-// 1. Landing downtown: where TNB is.
+// Landing downtown. The script has no landing line; only the goal toast.
 SCENES.ch2Arrive=[
   {flag:'ch2-goal'},
-  {zoom:2,time:.9},   // report r-20261114-160528-230r (Tom: "Should be zoomed in on Tom, look at the beginning of chapter 1"): push in on Tom as he lands, out at the end
-  {talk:'Tom',lines:['TNB said he\'d be home. Spring Street loft.']},
-  {zoom:1,time:.8},
   {toast:"Goal: TNB's Loft (LOFTS), Spring Street, bottom middle of Downtown.",time:4.5}
 ];
-// 2. The loft: the heart-kiss greeting, SkyMiles, the purple sky, and the pond told to TNB, who believes every word. TNB joins.
+// Scene 1. TNB's loft: Tom insists TNB go first, then can't hold his news in. TNB joins.
 SCENES.ch2Loft=[
   {flag:'ch2-tnb'},
   {place:'TNB',at:[8,9],dir:'down'},
   {walk:'tom',to:routeTo('tom',8,10),speed:.22}, {face:'tom',dir:'up'},
-  {call:()=>{ const t=sceneActor('TNB'); if(t) { kiss={npc:t,start:elapsedTime}; sfx.kiss(); } }},
-  {talk:'TNB',lines:['Well, well, well...'],voice:[['tnb','greet',0,'Well, well, well...']]},
-  {talk:'TNB',lines:['Look who flew three thousand miles to see me.']},
-  {talk:'Tom',lines:['Um, actually, it\'s two thousand four hundred and seventy-five. Delta counts every one, and so do I.']},
-  {talk:'TNB',lines:['How many SkyMiles is that now?']},
-  {talk:'Tom',lines:['Four hundred and twelve thousand.']},
-  {talk:'TNB',lines:['Babe! What are you saving them for?']},
-  {talk:'Tom',lines:['Something really special.']},
-  {talk:'TNB',lines:['You said that at three hundred thousand.']},
-  {talk:'Tom',lines:['It has to be REALLY special. But I\'d have flown here for zero miles.']},
-  {talk:'TNB',lines:['Zero miles. Babe. That\'s the most romantic thing a Delta person can say.']},
-  {trace:'tnb-hello'},
-  {talk:'TNB',lines:['My call time got pushed to Thursday. The lead actor lost a shoe. I already found it. So I\'m all yours.']},
-  {talk:'Tom',lines:['...']},
-  {talk:'Tom',lines:['Something strange happened on Long Island too. A blob of mud with eyes climbed in my mother\'s kitchen window and ran off with her rhubarb crisp.']},
-  {talk:'TNB',lines:['The mud took Deedee\'s crisp? Is the mud okay?']},
-  {talk:'Tom',lines:['We chased it to the pond. And there was a talking fish as big as a car, wearing her baking tin like a crown.']},
-  {talk:'TNB',lines:['A talking fish! What did he say?']},
-  {talk:'Tom',lines:['He said "Glub." Then he gave Rose a gold coin.']},
-  {talk:'TNB',lines:['Mud in the kitchen and a talking fish. Babe, something fishy is going on.']},
-  {talk:'Tom',lines:['I flew six hours for that pun?']},
-  {talk:'Tom',lines:['Let\'s go home to Jefferson Park. Bready Mercury has been alone all week.']},
-  {talk:'TNB',lines:['He hasn\'t been alone. Come on, I\'ll show you.']},
+  {talk:'TNB',lines:["Hey, babe. You've got your news face on."]},
+  {talk:'Tom',lines:["I do have news. But you go first. I can wait."]},
+  {talk:'TNB',lines:["Sure. So I got up this morning, and I was thinking about toast..."]},
+  {talk:'Tom',lines:["A FISH was wearing my mom's muffin pan. As a crown. I'm so sorry. Please. Toast."]},
+  {talk:'TNB',lines:["No, yours wins. How big a fish?"]},
+  {talk:'Tom',lines:["Big. No, sorry. TAXI big."]},
+  {talk:'TNB',lines:["Huh. That'd tip the scales."]},
+  {talk:'Tom',lines:["Ha! It WOULD. Okay. Your turn. Toast."]},
+  {talk:'TNB',lines:["Right. Toast. So I look out the window to see what kind of day it is, the sky's purple, and it turns out we're out of bread."]},
+  {talk:'Tom',lines:["Go back one."]},
+  {talk:'TNB',lines:["The window?"]},
+  {talk:'Tom',lines:["The PURPLE."]},
+  {talk:'TNB',lines:["Oh. Yeah. All day. It's coming off the hills. The bread's the real problem."]},
+  {walk:'tom',to:routeTo('tom',8,10),speed:.2}, {face:'tom',dir:'up'},   // Tom goes to the window
+  {talk:'Tom',lines:["That is a very purple sky. Okay. Hills first. Then bread."]},
+  {talk:'TNB',lines:["Hills, then bread. I figure we walk up and poke it."]},
+  {talk:'Tom',lines:["Poke it. Yes. But maybe just gently."]},
+  {talk:'TNB',lines:["Nara's already on it. She's been barking at it from your porch since breakfast."]},
+  {talk:'Tom',lines:["Then we're her backup."]},
   {join:'tnb'},
-  {wait:2.6},
+  {wait:1.2},
   {toast:'Goal: home to 2nd Ave in Jefferson Park, south of Downtown. Tom’s house is 3468.',time:4.5}
 ];
-// 2b. Outside the loft, on the boulevard: the purple sky (report r-20261114-103411-rd99, Tom: they cannot see the sky from inside the loft; it
-// happens once they step out, when the haze is over Downtown). Triggers on the first step onto the boulevard after TNB joins.
-SCENES.ch2Sky=[
-  {flag:'ch2-sky'},
-  {call:()=>{ sfx.pickup&&sfx.pickup(); }}, {wait:.9},
-  {talk:'Tom',lines:['Wait, why is the sky PURPLE? It\'s two in the afternoon!']},
-  {talk:'TNB',lines:['It\'s been like that since this morning. I held my soda up to it. It\'s the exact same color.']},
-  {talk:'TNB',lines:['I don\'t know what it is, babe. But it\'s pretty grape.']},
-  {talk:'Tom',lines:['Don\'t make me laugh, it\'s freaky! ...Okay. It IS a little grape.']}
-];
-// 3. Jefferson Park: Nara is waiting on Tom's porch (her meeting scene is engine/nara.js). Then she joins, and TNB's bread bowl (Sit. Paw. Treat.).
+// Scene 2. Tom's porch: Nara jumps on Tom, the work stick, the smog rolls down 2nd Avenue. Nara joins.
 SCENES.ch2Porch=[
   {flag:'ch2-nara'},
+  {call:()=>{ NARA_NPC.visitedOnce=true; NARA_NPC.path=[]; NARA_NPC.move=null; NARA_NPC.idle=1e9; }},
+  {walk:'tom',to:()=>sceneRoute('tom',Math.round(NARA_NPC.x),Math.round(NARA_NPC.y)+1),speed:.22}, {face:'tom',dir:'up'},
+  {face:'nara',dir:'down'},
+  {call:()=>{ sfx.bark(); sfx.bark(.16); }},
+  {hop:'nara',from:()=>[NARA_NPC.x,NARA_NPC.y],to:()=>[NARA_NPC.x,NARA_NPC.y],time:.5,arc:10},   // paws on his chest, up he goes
+  {call:()=>{ snd.oof&&snd.oof(0); sfx.giggle&&sfx.giggle(); }}, {hearts:'tom'}, {wait:.5},
+  {talk:'Tom',lines:["Nara, no jumping. Hello. Yes. Hello. That's my whole face. Thank you."]},
+  {call:()=>{ sfx.pickup(); }}, {wait:.4},   // Tom picks a long stick off the lawn
+  {call:()=>{ sfx.whoosh(); }}, {hearts:'nara'},   // Nara drops flat, tail going
+  {talk:'Tom',lines:["No. This isn't that kind of stick. This is a work stick."]},
+  {talk:'TNB',lines:["She thinks you're sticking around."]},
+  {talk:'Tom',lines:["Ha! I am. Right after we gently poke a cloud."]},
+  {call:()=>{ setFlag('ch2-smog'); storyWorld(); sfx.growl?sfx.growl():sfx.bark(); sfx.whoosh(); }}, {wait:1},   // Nara goes stiff and growls; purple smog rolls down 2nd Avenue
+  {talk:'TNB',lines:["Huh. Now it's between us and the bread."]},
+  {talk:'Tom',lines:["Okay. Work stick. This is what you're for."]},
   {join:'nara'},
-  {wait:.6},
-  {talk:'TNB',lines:['Olivia dropped her off this morning. Family trip to the desert. No dogs at the hotel.','She\'s been sitting on your porch since eight. I tried to take her to the loft. She refused.']},
-  {talk:'TNB',lines:['So I stayed here with her. I was coming over anyway. I\'ve been feeding Bready Mercury every day.']},
-  {talk:'Tom',lines:['Every day? Fifty grams of flour and fifty grams of water?']},
-  {talk:'TNB',lines:['Fifty and fifty. I used your little scale.']},
-  {talk:'TNB',lines:['He got so big he was climbing out of the jar. So I baked a loaf with him.']},
-  {ch2Reveal:'loaf'},
-  {talk:'Tom',lines:['It\'s perfectly round! How did you get it so round?']},
-  {talk:'TNB',lines:['I shaped it on my pottery wheel.']},
-  {talk:'Tom',lines:['On the pottery wheel! That\'s brilliant. Why have I been doing it with my hands?']},
-  {talk:'TNB',lines:['I make bowls all day, babe. So I made you a bread bowl.']},
-  {talk:'Tom',lines:['A bread bowl! Now we need soup.']},
-  {call:()=>{ sfx.whoosh(); }},
-  {talk:'Tom',lines:['Nara, sit.']},
-  {hearts:'nara'},
-  {talk:'Tom',lines:['Paw.']},
-  {call:()=>{ sfx.bark&&sfx.bark(); sfx.bark&&sfx.bark(.15); }},
-  {hearts:'nara'},
+  {call:()=>{ grantItem('naraball'); if(typeof heartTrace==='function') { heartTrace('nara-meet'); setFlag('met-nara'); } }},
   {flag:'tombo:nara1'},
-  {talk:'Tom',lines:['Sit, paw, treat. She knows the whole routine. So polite!']},
   {toast:'New Tombo: Sit. Paw. Treat. (Tom + Nara). In battle, it is inside ▲ ATTACK.',time:3.6},
-  {toast:'Goal: feed the starter. Kitchen island, inside Tom’s house.',time:4.5}
+  {toast:'Goal: the smog is coming down 2nd Ave. Walk toward Mr. Washington’s porch.',time:4.5}
 ];
-// 4. Tom's kitchen: feeding Bready Mercury. TNB sings to it. Through the window, the street is purple.
-SCENES.ch2Starter=[
-  {flag:'ch2-starter'},
-  {around:[918/78.4,322/78.4],tom:[12,4]},   // everyone stands around the jar on the kitchen island (same point as drawHomeJar, engine/plate.js); Tom beside it at the island's right end
-  {talk:'Tom',lines:['Hello, Bready Mercury. Did you miss me? You missed me.']},
-  {call:()=>{ sfx.splat&&sfx.splat(); }},
-  {talk:'Tom',lines:['Fifty grams of flour, fifty grams of water. Stir. Look at those bubbles.']},
-  {trace:'starter'}, {hearts:'tom'},
-  {talk:'Tom',lines:['He\'s twice as big as when I left! What have you been doing with him?']},
-  {talk:'TNB',lines:['I sing to him while I stir. He\'s Bready Mercury. He needs his music.']},
-  {talk:'Tom',lines:['Which songs?']},
-  {talk:'TNB',lines:['"Another One Bites the Crust."']},
-  {talk:'Tom',lines:['"Bohemian Rye-psody!"']},
-  {talk:'TNB',lines:['Babe. That\'s so good. I\'m singing that one tomorrow.']},
-  {call:()=>sfx.whine&&sfx.whine()},
-  {talk:'TNB',lines:['Babe. Look outside. Is the street... purple?']},
-  {talk:'Tom',lines:['That\'s the same purple as the sky! An hour ago it was way up on the hill. Now it\'s on my lawn!']},
-  {talk:'Tom',lines:['Mr. Washington is sitting out on his porch in that. Come on!']},
-  {toast:'Goal: go out to 2nd Ave and see what\'s going on.',time:4}
-];
-// 5. 2nd Ave: the smog rolls in. Mr. Washington repeats his story. Two Smoglets drift onto the street and one coughs in Tom's face. First fight.
+// Scene 3. 2nd Avenue: Mr. Washington is stuck on one greeting; two Smoglets; one fight.
 SCENES.ch2Smog=[
   {flag:'ch2-smog'}, {call:()=>{ storyWorld(); sfx.whoosh(); }},
-  {wait:.8},
+  {wait:.6},
   {place:'Mr. Washington',at:[10,18],dir:'left'},
   {walk:'tom',to:routeTo('tom',8,18),speed:.22}, {face:'tom',dir:'right'},
   {place:'tnb',at:[7,18],dir:'right'}, {place:'nara',at:[8,19],dir:'up'},
-  {talk:'Tom',lines:['Mr. Washington! Is everything okay?']},
-  {talk:'Mr. Washington',lines:['Tom. Back in 1979, this whole block...']},
-  {wait:1.2},
-  {talk:'Mr. Washington',lines:['...']},
-  {talk:'Tom',lines:['What happened in 1979?']},
-  {talk:'Mr. Washington',lines:['Tom. Back in 1979, this whole block...']},
-  {talk:'Tom',lines:['He just said the same thing again, word for word.']},
-  {talk:'TNB',lines:['He always finishes that story. I\'ve heard it nine times. It ends with gumbo.']},
-  {talk:'Mr. Washington',lines:['Such a nice afternoon. It should always be this afternoon.']},
-  {talk:'Tom',lines:['It\'s not a nice afternoon, Mr. Washington! The air is purple!']},
+  {talk:'Mr. Washington',lines:["Morning, Tom! Back from your folks? How's your mama?"]},
+  {talk:'Tom',lines:["Morning, Mr. Washington. She's well, thank you."]},
+  {talk:'Mr. Washington',lines:["Morning, Tom! Back from your folks? How's your mama?"]},
+  {talk:'Tom',lines:["Still well! Thank you."]},
+  {talk:'Mr. Washington',lines:["Morning, Tom! Back from your folks? How's your mama?"]},
+  {talk:'Tom',lines:["She's... consistently well."]},
+  {talk:'TNB',lines:["Babe. He's stuck. You're just keeping him company."]},
   {spawn:{name:'Smoglet',monster:'smoglet',at:[14,18],dir:'left'}},
   {spawn:{name:'Smoglet B',monster:'smoglet',at:[14,20],dir:'left'}},
-  // report r-20261114-161716-9078 (Tom: "the smog is still behind the post ... Mr Washington needs to have moved away as the smog approaches.
-  // They can stand where he is"): he drifts back up his walk while the smog rolls in, and the first Smoglet takes his spot, facing Tom and TNB.
-  {all:[{walk:'Mr. Washington',to:[[11,18],[11,17],[11,16]],speed:.2},{walk:'Smoglet',to:[[13,18],[12,18],[11,18],[10,18]],speed:.4},{walk:'Smoglet B',to:[[13,20],[12,20],[12,19]],speed:.36}]},
+  // The first Smoglet drifts onto the porch; Mr. Washington drifts back up his walk (report r-20261114-161716-9078).
+  {all:[{walk:'Mr. Washington',to:[[11,18],[11,17],[11,16]],speed:.2},{walk:'Smoglet',to:[[13,18],[12,18],[11,18],[10,18]],speed:.4}]},
   {face:'Mr. Washington',dir:'down'},
-  {call:()=>{ sfx.whoosh(); sfx.splat&&sfx.splat(); }}, {hearts:'tom'},
-  {talk:'Tom',lines:['Excuse me, smog. That was UNCALLED for.'],voice:[['tom','hurt',0,'That was UNCALLED for!']]},
-  {talk:'Smoglet',lines:['Cough. Nice street. We\'re going to sit on it for a while. Forever, actually.']},
-  {talk:'TNB',lines:['Babe. That cloud has a face. And it just talked to us.']},
-  {talk:'Tom',lines:['It\'s like the mud at my mother\'s house! I told you they talk!']},
-  {talk:'TNB',lines:['You did tell me. It\'s a lot scarier in person.']},
-  {talk:'TNB',lines:['Scarier than movie night. Remember? You threw the whole popcorn bowl.']},
-  {talk:'Tom',lines:['The man in the mask jumped out! I jumped higher!']},
-  {talk:'TNB',lines:['And it rained popcorn on the whole room. Let\'s do that to these clouds.']},
-  {talk:'Tom',lines:['I don\'t have any popcorn!']},
-  {talk:'TNB',lines:['You don\'t need popcorn. You just need to be that scared.']},
-  {talk:'Tom',lines:['Oh, I\'m that scared.']},
+  {call:()=>{ sfx.whoosh(); sfx.splat&&sfx.splat(); }},
+  {talk:'Smoglet',lines:["Ahem. You're in my way."]},
+  {talk:'Tom',lines:["Okay. So. You coughed on Mr. Washington's porch. He sweeps that porch every MORNING."]},
+  {talk:'TNB',lines:["Huh. So that's a monster. Smaller than I pictured."]},
+  {walk:'Smoglet B',to:[[13,20],[12,20],[12,19]],speed:.36},   // a second cloud floats up beside the first
+  {talk:'Smoglet',lines:["Ahem. There's two of us."]},
+  {talk:'Tom',lines:["We can do this! I've done this one time."]},
   {flag:'tombo:tnb1'},
   {toast:'New Tombo: Popcorn Jump (Tom + TNB).',time:2.6},
-  {battle:()=>findMonster('smoglet'),tut:'ch2lawn'},
+  {battle:()=>findMonster('smoglet'),tut:'ch2lawn',count:2},
   {despawn:'Smoglet'}, {despawn:'Smoglet B'},
-  {if:()=>flag('battle:smoglet')!=='win',then:[{heal:true},{talk:'TNB',lines:['Okay. Okay. Everybody breathe. Through the nose. Not the smog.']}],else:[]},
+  {if:()=>flag('battle:smoglet')!=='win',then:[{heal:true},{toast:'Everyone is healed. Try again: walk back toward Mr. Washington’s porch.',time:5}],else:[]},
   {flag:'ch2-lawn'},
-  {talk:'TNB',lines:['The smog monsters are gone, but Mr. Washington is still in a daze. Look at him.']},
-  {talk:'Mr. Washington',lines:['Nobody needs to go anywhere. Nobody needs to get any older.']},
-  {talk:'Tom',lines:['That doesn\'t sound like him at all. He tells me how old he is every single morning. He\'s proud of it!']},
-  {talk:'TNB',lines:['If the smog did this to him, what about everybody on the boulevard?']},
-  {talk:'Tom',lines:['Miss Odette and Doña Carmen! Come on!']},
-  {toast:'Goal: check on Miss Odette (CREOLE) and Doña Carmen (PUPUSAS) on Jefferson Boulevard.',time:5}
+  {toast:'Goal: the smoke on Jefferson Boulevard, at the top of the park (CREOLE and PUPUSAS).',time:5}
 ];
-// 6. The boulevard: both kitchens are stuck in the same afternoon, and nobody scolds anybody.
+// Scene 4. The boulevard: Doña Carmen's griddle is smoking. One outdoor scene at the two storefronts; the trail opens at the end.
 SCENES.ch2Odette=[
-  {flag:'ch2-odette'},
-  {talk:'Miss Odette',lines:['Stirring. Stirring. The gumbo never has to be done, baby. Isn’t that nice?']},
-  {talk:'TNB',lines:['Miss Odette, it\'s me! Can I get a bowl of gumbo?']},
-  {talk:'Miss Odette',lines:['Stirring. Stirring.']},
-  {talk:'TNB',lines:['Babe, this is bad. Every time I walk in here she yells "Sit down, you\'re too skinny!" before the door even closes.']},
-  {talk:'Tom',lines:['Miss Odette? I\'m sorry to bother you. TNB is standing up, and he\'s very skinny today.']},
-  {talk:'Miss Odette',lines:['Stirring. Stirring.']},
-  {talk:'Tom',lines:['Nothing. She\'s just like Mr. Washington.']},
-  {if:()=>!flag('ch2-carmen'),then:[{talk:'Tom',lines:['Okay. One down. Let\'s check on Doña Carmen next door.']},{toast:'Goal: Doña Carmen next door (PUPUSAS).',time:3.5}],else:[]}
-];
-SCENES.ch2Carmen=[
-  {flag:'ch2-carmen'},
-  {talk:'Doña Carmen',lines:['The pupusas are fine. Everything is fine. It\'s always this afternoon. Why did I ever flip them?']},
-  {call:()=>sfx.sizzle?sfx.sizzle():sfx.whoosh()},
-  {talk:'TNB',lines:['Babe, the pupusas are burning!']},
-  {talk:'Tom',lines:['Doña Carmen, I\'m so sorry. I\'m reaching over your counter. I know nobody touches the griddle.']},
-  {call:()=>sfx.sizzle?sfx.sizzle():sfx.whoosh()}, {wait:1.2},
-  {talk:'Tom',lines:['I flipped them. I\'m ready for the towel. Go ahead.']},
-  {wait:1},
-  {talk:'TNB',lines:['She smacks you with that towel if you even look at the griddle.']},
-  {talk:'Tom',lines:['I know! I\'ve never wanted to be hit with a towel so badly!']},
-  {call:()=>{ sfx.whoosh(); sfx.bark&&sfx.bark(); }}, {hearts:'nara'},
-  {talk:'TNB',lines:['Nara is right. That\'s not kitchen smoke. It\'s the same purple smog, and it\'s blowing down from the hills.']},
-  {if:()=>!flag('ch2-odette'),then:[{talk:'Tom',lines:['Okay. One down. Let\'s check on Miss Odette next door.']},{toast:'Goal: Miss Odette next door (CREOLE).',time:3.5}],else:[]}
-];
-// 7. Back outside: the smog is coming down from Griffith Park.
-SCENES.ch2Source=[
+  {flag:'ch2-odette'}, {flag:'ch2-carmen'},
+  {spawn:{name:'Miss Odette',look:'odette',at:[5,7],dir:'right'}},
+  {spawn:{name:'Doña Carmen',look:'carmen',at:[11,7],dir:'left'}},
+  {call:()=>{ sfx.sizzle?sfx.sizzle():sfx.whoosh(); }},
+  {talk:'Miss Odette',lines:["This gumbo is perfect. Doesn't need a thing."]},
+  {talk:'TNB',lines:["She's never said that. Last week she sent a bowl back to herself."]},
+  {talk:'Doña Carmen',lines:["Everything's fine. Everything's fine."]},
+  {call:()=>{ sfx.sizzle?sfx.sizzle():sfx.whoosh(); }},
+  {walk:'tom',to:routeTo('tom',10,8),speed:.24}, {face:'tom',dir:'up'},   // Tom steps up to the griddle and flips the pupusas
+  {call:()=>{ sfx.sizzle?sfx.sizzle():sfx.whoosh(); }}, ch2Tap('tom'), {wait:.8},
+  {talk:'Doña Carmen',lines:["Perfect. You cook so well, Tom."]},
+  {talk:'Tom',lines:["Did you hear that? She said I cook WELL."]},
+  {talk:'TNB',lines:["She's in the smog, babe."]},
+  {talk:'Tom',lines:["I know. I'm keeping it."]},
+  {call:()=>{ sfx.whoosh(); }}, {hearts:'tom'}, {wait:.8},   // more smog pours down; the Observatory pipes puff purple
+  {talk:'Tom',lines:["It's coming out of the Observatory. But the Observatory's so nice."]},
+  {talk:'TNB',lines:["It's always the nice ones."]},
   {flag:'ch2-source'},
-  // report r-20261114-104958-4dlv (Tom: "the dog is not standing next to them"): Nara stands right beside Tom on the sidewalk.
-  {place:'nara',at:()=>{ const t=sceneActor('tnb'),busy=(x,y)=>t&&Math.round(t.x)===x&&Math.round(t.y)===y;
-    for(const [dx,dy] of [[-1,0],[1,0],[-1,1],[1,1],[0,1],[2,0],[-2,0]]) { const x=Math.round(player.x)+dx,y=Math.round(player.y)+dy; if(walkable(currentMap,x,y)&&!busy(x,y)) return [x,y]; }
-    return [player.x,player.y+1]; },dir:'up'},
-  {talk:'TNB',lines:['Babe. Look north. It\'s all coming down off the hills.','It\'s coming from the Observatory. The pipes on its side are pumping out smog like a smoke machine on a bad set.']},
-  {talk:'Tom',lines:['Then that\'s where we\'re going. Nara, stay close.']},
-  {hearts:'nara'},
+  {despawn:'Miss Odette'}, {despawn:'Doña Carmen'},
   {toast:'Goal: Griffith Park, north through Downtown. The trail is open now.',time:5}
 ];
-// 8. Griffith Park: two story fights on the trail, the lemon tree, then the Observatory.
-const CH2_AFTER=(lost,lines)=>[
-  {if:()=>lost(),then:[{heal:true},{talk:'TNB',lines:['Up, everybody. Wardrobe says nobody is cut from this scene.']}],else:[]},
-  ...lines
-];
+// Scene 5. The trail: a parking ticket from a monster, then a coyote who only looks at Nara.
 SCENES.ch2Flurry=[
   {flag:'ch2-t1'},
   {place:'Ticket Flurry',at:()=>[player.x-5,player.y]},
   {walk:'Ticket Flurry',to:()=>[[player.x-4,player.y],[player.x-3,player.y],[player.x-2,player.y]],speed:.25},
-  {talk:'Ticket Flurry',lines:['Street cleaning. Tuesday. Eight to ten. You didn\'t read the sign. And the smog says we can stay forever.']},
-  {talk:'Tom',lines:['The parking tickets can TALK now? They were bad enough when they were quiet!']},
-  {talk:'Tom',lines:['And I moved my car on Monday night! I set two alarms!']},
-  {talk:'TNB',lines:['I take the Metro. You have nothing on me.']},
-  {talk:'Tom',lines:['Fine. Can I pay it in SkyMiles?']},
+  {talk:'Ticket Flurry',lines:["No parking Saturdays. Noon to two. You parked."]},
+  {talk:'Tom',lines:["I was in New York on Saturday. I still have my boarding pass."]},
+  {talk:'Ticket Flurry',lines:["Denied."]},
+  {talk:'Tom',lines:["Denied?"]},
   {battle:'tickets',tut:'ch2flurry'},
-  ...CH2_AFTER(()=>flag('battle:tickets')!=='win',[{talk:'Tom',lines:['I contest that ticket, and I\'m granting my own appeal. Let\'s keep going.']}])
+  CH2_LOST('tickets','the Ticket Flurry')
 ];
 SCENES.ch2Coyote=[
   {flag:'ch2-tuts',value:'pending'},
   {place:'Canyon Coyote',at:()=>[player.x-5,player.y]},
   {walk:'Canyon Coyote',to:()=>[[player.x-4,player.y],[player.x-3,player.y],[player.x-2,player.y]],speed:.3},
-  {talk:'Canyon Coyote',lines:['Nice hike. You look like you have snacks. And the dog looks like a snack.']},
-  {call:()=>{ sfx.growl?sfx.growl():sfx.bark&&sfx.bark(); }},
-  {talk:'Tom',lines:['Excuse me! She is not a snack. She is our guest!']},
-  {talk:'TNB',lines:['We do have snacks, though. I\'ve got half a bag of gummy worms.']},
-  {talk:'Canyon Coyote',lines:['Coyotes don\'t eat gummy worms.']},
-  {talk:'Canyon Coyote',lines:['Pack Howl. For the fluffy one.']},
+  {talk:'Canyon Coyote',lines:["Dog. Run with us. We never sit."]},
+  {call:()=>{ sfx.bark(); }}, {hearts:'nara'},   // Nara plants herself in front of Tom and barks once, very loudly
+  {talk:'Tom',lines:["She's standing on my feet. Both of them. I'm going to hold very still."]},
+  {talk:'TNB',lines:["Easy. She's spoken for. You want the rest of my soda?"]},
+  {call:()=>{ sfx.growl?sfx.growl():sfx.bark(); }}, {wait:.4},
   {battle:'coyote',tut:'ch2coyote'},
-  ...CH2_AFTER(()=>flag('battle:coyote')!=='win',[]),
+  CH2_LOST('coyote','the Canyon Coyote'),
   {flag:'ch2-tuts'},
   {heal:true},
-  {talk:'TNB',lines:['Quick wardrobe adjustment, quick heal, and a quick kiss for the road. Ready, babe?']},
-  {call:()=>{ const t=sceneActor('tnb'); if(t) { kiss={npc:t,start:elapsedTime}; sfx.kiss(); } }},
-  {talk:'Tom',lines:['Ready. Kiss accepted. The Observatory is up at the top left. Follow the purple.']},
-  {toast:'Goal: the Observatory, top left of the park. The park’s monsters are awake now.',time:5}
+  {toast:'Goal: the grey lemon tree, up the trail near the Observatory. The park’s monsters are awake now.',time:5}
 ];
-// 8b. The last bend of the trail: the grey lemon tree, one lemon in a hard orange block, a burnt flashbulb (new scene, story-ch02.md scene 9).
+// Scene 6. The grey lemon tree: the cloud made sense, the block does not. Tom texts Grace.
 SCENES.ch2Lemon=[
   {flag:'ch2-lemon'},
   {around:[3.6,7.9],size:[2.2,1.1]},   // the tree stands at art px (225,455), its dirt circle at tile 3 to 4, row 8
-  {talk:'TNB',lines:['Babe, look at that tree. It\'s grey. The leaves, the trunk, even the dirt. It looks like an old black and white movie.']},
-  {talk:'Tom',lines:['There\'s one lemon on it. And the lemon is inside a block of something orange.']},
-  {talk:'Tom',lines:['I\'ve seen this before. There\'s one exactly like it at my parents\' pond, with a dragonfly inside.']},
-  {talk:'TNB',lines:['On Long Island? Babe, that\'s three thousand miles away.']},
-  {talk:'Tom',lines:['Two thousand four hundred and seventy-five.']},
-  ch1Tug('tnb'), {sfx:'bonk'},
-  {talk:'TNB',lines:['It\'s not glass, and it\'s not glaze. I work with this kind of stuff all day and I have no idea what it is.']},
-  {talk:'TNB',lines:['There\'s a little round hole in the side, like somebody took a bite out of it.']},
-  {talk:'Tom',lines:['The one at the pond has a bite out of it too. It\'s stuck solid. Rose tried, and then I tried.']},
-  {talk:'TNB',lines:['Can I try anyway?']},
-  ch1Tug('tnb'), {sfx:'bonk'}, ch1Tug('tnb'), {wait:.2},
-  {talk:'TNB',lines:['Okay. Wow. Your turn.']},
-  {talk:'Tom',lines:['I couldn\'t pull the one at the pond out either. ...Maybe it\'s easier in California.']},
-  ch1Tug('tom'), {sfx:'bonk'}, ch1Tug('tom'), {wait:.3},
-  {talk:'Tom',lines:['It\'s not easier in California.']},
-  {call:()=>{ sfx.bark&&sfx.bark(); }}, {hearts:'nara'},
-  {pose:'tom',f:'c4t_bulb',mid:'tom'}, {call:()=>sfx.pickup()}, {wait:.6},   // report r-20261114-162358-jykk: Tom holds the bulb up (his painted chapter 4 bulb frame)
-  {talk:'Tom',lines:['It\'s a burnt-out flashbulb. My mother found one exactly like it next to the dragonfly.']},
-  {pose:'tom'},
-  {talk:'TNB',lines:['Who leaves the same bulb at a pond in New York and on a hill in Los Angeles?']},
-  {talk:'Tom',lines:['I don\'t know. And I really don\'t like it.']},
-  {talk:'TNB',lines:['Me neither. And I like almost everything.']},
+  {talk:'Tom',lines:["That's the block. From the pond. The dragonfly was in one just like it."]},
+  {talk:'TNB',lines:["You didn't mention a dragonfly."]},
+  {talk:'Tom',lines:["The fish took up a lot of the story."]},
+  ch2Tap('tom'), {sfx:'bonk'}, {wait:.4},   // Tom taps the block with the stick, very lightly
+  {talk:'Tom',lines:["Excuse me. Sorry. I had to check."]},
+  ch2Tap('tnb'), {sfx:'bonk'}, {wait:.2}, ch2Tap('tnb'), {sfx:'bonk'}, {wait:.3},   // TNB knocks on it with his knuckles
+  {talk:'TNB',lines:["It's not glass. It's not resin. I don't like it."]},
+  {talk:'Tom',lines:["You don't like it? You liked the talking cloud."]},
+  {talk:'TNB',lines:["The cloud made sense."]},
+  {call:()=>{ sfx.bark&&sfx.bark(); }}, {hearts:'nara'}, {call:()=>sfx.pickup()}, {wait:.5},   // Nara drops a burnt flashbulb on Tom's shoe and backs up
+  {talk:'Tom',lines:["Thank you, Nara. A burnt flashbulb. Grace has one just like it on her clue list."]},
+  {call:()=>sfx.ding&&sfx.ding()},
+  {talk:'Tom',lines:["Grace, I'm on the job. There's a lemon stuck in an orange block up here, and Nara just found a burnt flashbulb next to it. I wrote it all down. It's on page nine."]},
+  {call:()=>sfx.ding&&sfx.ding()},
+  {talk:'Grace',lines:["Tata, step away from the block. You left fingerprints on the last one. Send me a picture with the lemon AND the bulb in it. I'm writing them both down. In pencil."]},
+  {call:()=>{ sfx.squeak&&sfx.squeak(); }}, {wait:.3},   // camera click
+  {talk:'Tom',lines:["Picture taken. Not touching. I'm two feet back. Two and a half."]},
+  {call:()=>{ sfx.pickup(); setFlag('ch2-bulb'); }},   // Tom pockets the bulb (chapter 3 needs it); no line
   {call:()=>{ sfx.thud(); }}, {wait:.5}, {call:()=>{ sfx.thud(); }},
   {toast:'Goal: the Observatory, just up the trail. The ground is humming.',time:4.5}
 ];
-// 9. The Observatory: the hill stands up. Boss fight.
+// Scene 7. The Big Shake stands up. Boss fight.
 SCENES.ch2Boss=[
   {flag:'ch2-boss'}, {call:()=>storyWorld()},
   {hide:'The Big Shake'},
   {call:()=>{ sfx.thud(); }},
-  {talk:'TNB',lines:['The ground is humming. That\'s never a good sign. I\'ve seen this movie forty-seven times.']},
   {call:()=>{ sfx.thud(); sfx.whoosh(); }},
   {show:'The Big Shake'}, {face:'The Big Shake',dir:'right'},
-  {talk:'Tom',lines:['That hill has EYES! The whole hill just stood up!']},
-  {talk:'TNB',lines:['Babe. I take naps on that hill.']},
-  {talk:'Tom',lines:['I think you\'ve been napping on his face!']},
-  {talk:'TNB',lines:['I\'m so sorry, sir!']},
-  {talk:'The Big Shake',lines:['RUMBLE. There was a big flash up here this morning, and it woke me up.','Now all my grumbling comes out of those pipes as purple smog, and everything it touches gets stuck. And I LIKE stuck.','If everybody is stuck, nobody can leave. No moving trucks. No airports. No goodbyes.','A million years under this city, and everybody up top is always leaving. Today nobody leaves. Not ever.']},
-  {talk:'Tom',lines:['Everybody says goodbye. Then they come back. That\'s what planes are for.']},
-  {talk:'TNB',lines:['He\'d know. He has four hundred and twelve thousand miles.']},
-  {talk:'Tom',lines:['Things have to move.']},
-  {call:()=>{ sfx.bark&&sfx.bark(); }}, {wait:.5}, {hearts:'nara'},
-  {talk:'TNB',lines:['Well, well, well... looks like we\'re in a bit of a shaky situation.']},
+  {call:()=>{ snd.gasp&&snd.gasp(); }},
+  {hop:'nara',from:()=>{ const a=sceneActor('nara'); return [a.x,a.y]; },to:()=>[player.x,player.y+1],time:.35,arc:10},   // Tom picks up Nara without deciding to
+  {hearts:'nara'},
+  {talk:'Tom',lines:["GAH! I've picked up Nara. I don't remember deciding to."]},
+  {talk:'The Big Shake',lines:["RUMBLE. A flash woke me up. Now everybody runs."]},
+  {talk:'TNB',lines:["Well, well, well... look who's up."]},
+  {talk:'The Big Shake',lines:["RUMBLE. Stay back. I shake."]},
+  {talk:'Tom',lines:["Excuse me. You're wearing the Observatory. Please don't drop it."]},
   {battle:'bigshake',tut:'bigshake'},
-  {if:()=>flag('battle:bigshake')!=='win',then:[
-    {heal:true},
-    {talk:'TNB',lines:['Cut. Reset. Back to one, everybody.','Babe, heal right after the Aftershock. When it clogs up, hit it with water or sparkle. Or one of our Tombos.']},
-    {toast:'Face The Big Shake and press A to try again. Everyone is healed.',time:5}],else:[]}
+  CH2_LOST('bigshake','The Big Shake')
 ];
-// 10. After the boss (won in the scene, or on a retry with A): the pipes unclog, the hill sneezes out the lemon coin, the smog blows out to sea.
+// Scene 8. After the fight (won in the scene, or on a retry with A): the sneeze, the coin, the blue sky, the tree stays grey.
 SCENES.ch2AfterBoss=[
   {flag:'ch2-clear'},
   {call:()=>{ sfx.whoosh(); sfx.levelChime&&sfx.levelChime(); }},
-  {if:()=>!!flag('kind:bigshake'),
-    then:[{talk:'The Big Shake',lines:['Rumble. You asked how I was doing. Nobody has asked in a million years.','...I\'ll let things move. A little. Two inches a year. That\'s my best offer.']}],
-    else:[{talk:'The Big Shake',lines:['Rumble. Fine. The pipes are clear. I\'m going back under the hill to think about my choices.']}]},
-  {talk:'TNB',lines:['I\'m sorry I kept falling asleep on you. I didn\'t know you were a person.']},
-  {talk:'The Big Shake',lines:['I liked the naps. You were the only one who ever stayed.']},
+  {talk:'Tom',lines:["Excuse me. Mr. Shake. How are you doing?"]},
+  {talk:'The Big Shake',lines:["RUMBLE. ...Nobody asks. They just run."]},
+  {talk:'TNB',lines:["I don't run. I've been sleeping on you every Sunday. Sorry. I thought you were a hill."]},
+  {talk:'The Big Shake',lines:["RUMBLE. That was you? You snore."]},
+  {talk:'TNB',lines:["Yeah. That's fair."]},
   {call:()=>{ if(typeof bossFrame==='function') bossFrame('bigshake','touched'); }},   // w82d: eyes wide, mouth open for the build-up
-  {talk:'The Big Shake',lines:['Something shiny has been stuck in my pipe all day. It tickles. Ah... ah... A-CHOO!']},
+  {talk:'The Big Shake',lines:["My pipe itches. Hold on. Hh... HHH..."]},
   {call:()=>{ sfx.whoosh(); sfx.thud(); }}, {endfx:'sneeze',on:'The Big Shake'}, {wait:.25},
   {call:()=>{ sfx.thud(); if(typeof bossFrame==='function') bossFrame('bigshake','calm'); }}, {endfx:'dust',on:'The Big Shake'},
-  {call:()=>{ sfx.pickup(); }}, {hearts:'nara'}, {wait:.6},
+  {call:()=>{ sfx.pickup(); }},
+  {hop:'nara',from:()=>{ const a=sceneActor('nara'); return [a.x,a.y]; },to:()=>{ const a=sceneActor('nara'); return [a.x,a.y]; },time:.5,arc:12},   // Nara catches the coin in the air
+  {hop:'nara',from:()=>{ const a=sceneActor('nara'); return [a.x,a.y]; },to:()=>{ const a=sceneActor('nara'); return [a.x,a.y]; },time:.4,arc:5},   // her one full circle (hops; no walk frames yet)
+  {hearts:'nara'}, {wait:.4},
+  {talk:'Tom',lines:["Yes. I saw. Very good. May I?"]},
+  {call:()=>{ sfx.pickup(); }}, {wait:.4},   // Nara drops the coin in his hand
   {ch2Reveal:'coin'},
   {if:()=>!bag.includes('lemoncoin'),then:[{give:'lemoncoin'}],else:[]},
-  {talk:'Tom',lines:['It\'s a gold coin with a lemon on it. Rose\'s has a dragonfly.']},
-  {talk:'TNB',lines:['The one the fish gave her?']},
-  {talk:'Tom',lines:['Yes. A fish gave her one, and now a hill sneezed one at me.']},
-  {talk:'TNB',lines:['Nara thinks it\'s a very small frisbee.']},
-  {talk:'Tom',lines:['Nara, I\'m sorry. We don\'t play fetch with gold.']},
-  {finale:'bigshake'},
-  {talk:'TNB',lines:['Look. The sky is blue again. Los Angeles blue. Slightly brown, but blue.']},
-  {talk:'Tom',lines:['The hill said a flash woke it up this morning. The fish at the pond said the same thing.']},
-  {talk:'TNB',lines:['Two flashes, two orange blocks and two gold coins. Babe, I don\'t love that. Let\'s go check on Mr. Washington.']},
-  {toast:'Goal: back to 2nd Ave in Jefferson Park.',time:4.5}
+  {talk:'Tom',lines:["Gold. And there's a lemon stamped on it."]},
+  {talk:'TNB',lines:["Huh. Sour dough."]},
+  {talk:'Tom',lines:["Ha! I'm keeping that too."]},
+  {finale:'bigshake'},   // the hill sits back down, the smog thins, the sky turns blue
+  {talk:'TNB',lines:["Sky's blue again. Shame. The purple was growing on me."]},
+  {talk:'Tom',lines:["Still grey. Sorry, tree. We'll come back."]},
+  {toast:'Goal: back to 2nd Ave in Jefferson Park. Bread.',time:4.5}
 ];
-// 11. 2nd Ave: Mr. Washington finishes his story, and both scoldings come back in person. Chapter complete.
+// Scene 9. 2nd Avenue again: everyone is back to normal, Doña Carmen takes the compliment back, and there is finally bread.
 SCENES.ch2End=[
   {flag:'ch2-done',value:'pending'},
   {place:'Mr. Washington',at:[12,18],dir:'right'},
-  {all:[{walk:'tom',to:routeTo('tom',14,18),speed:.22},   // alvarez: TNB and Nara walk down with him (they stayed at the arch, 16 tiles off screen, and TNB talked from there)
+  {all:[{walk:'tom',to:routeTo('tom',14,18),speed:.22},   // TNB and Nara walk down with him
     {if:()=>{ const a=sceneActor('tnb'); return !!(a&&!a.hidden); },then:[{seq:[{wait:.3},{walk:'tnb',to:routeTo('tnb',16,17),speed:.22},{face:'tnb',dir:'left'}]}]},
     {if:()=>{ const a=sceneActor('nara'); return !!(a&&!a.hidden); },then:[{seq:[{wait:.6},{walk:'nara',to:routeTo('nara',16,19),speed:.22},{face:'nara',dir:'left'}]}]}]},
   {face:'tom',dir:'left'},
-  {talk:'Mr. Washington',lines:['...smelled like gumbo on a Saturday night. Zydeco from the boulevard. Kids on every porch.','Where was I? Oh. I was done. That was the whole story.']},
-  {talk:'TNB',lines:['That\'s ten times now. It gets better every time.']},
-  {talk:'Mr. Washington',lines:['Funny. For a while there I didn\'t want anything to change. Then I remembered the best parts all came from things changing.']},
-  {talk:'Tom',lines:['Keep the old windows, though.']},
-  {talk:'Mr. Washington',lines:['Keep the old windows. Smart man.']},
+  {talk:'Mr. Washington',lines:["Morning, Tom! Back from your folks? How's your mama?"]},
+  {talk:'Tom',lines:["She's well, Mr. Washington."]},
+  {talk:'Mr. Washington',lines:["Glad to hear it. Tell her I said hello."]},
+  {talk:'Tom',lines:["A second sentence! Welcome back, Mr. Washington."]},
   {trace:'washington'},
   {spawn:{name:'Miss Odette',look:'odette',at:[8,19],dir:'right'}},
   {spawn:{name:'Doña Carmen',look:'carmen',at:[8,17],dir:'right'}},
   {all:[{walk:'Miss Odette',to:routeTo('Miss Odette',13,19),speed:.3},{walk:'Doña Carmen',to:routeTo('Doña Carmen',13,17),speed:.3}]},
-  {talk:'Miss Odette',lines:['I brought gumbo for the whole block. TNB! Sit DOWN. You\'re too skinny!']},
-  {talk:'TNB',lines:['Yes, ma\'am!']},
-  {talk:'Doña Carmen',lines:['And YOU. Who touched my griddle?']},
-  {walk:'Doña Carmen',to:[[13,18]],speed:.18}, {face:'Doña Carmen',dir:'right'},   // 2mrs: she steps up to him, whips the towel, he staggers back a step
-  {towel:{from:'Doña Carmen',to:'tom'}}, {wait:.22},
-  {pose:'tom',f:'hurtPose',dir:'left'}, {hop:'tom',from:[14,18],to:[14,18],time:.25,arc:6}, {wait:.35}, {pose:'tom'}, {face:'tom',dir:'left'},
-  {talk:'Tom',lines:['Thank you, Doña Carmen! That\'s the best towel I\'ve ever been hit with!']},
-  {talk:'Doña Carmen',lines:['They came out perfectly crispy. Don\'t ever do it again.']},
-  {talk:'TNB',lines:['Babe. Gumbo. Go get the bread bowl!']},
-  {talk:'Tom',lines:['It has a hole in the top. I gave that piece to Nara.']},
-  {talk:'TNB',lines:['That\'s not a hole. That\'s where the gumbo goes in.']},
-  {call:()=>{ if(typeof naraPuddle==='function') { const n=sceneActor('nara'); if(n) naraPuddle(currentMap,n.x,n.y); } }}, {hearts:'nara'},
-  {talk:'Tom',lines:['Long Island is home, and so is this. I have two homes. Okay. Good.']},
-  {talk:'TNB',lines:['With two thousand four hundred and seventy-five miles in between.']},
-  {talk:'Tom',lines:['Each way. That\'s a lot of SkyMiles.']},
+  {talk:'Doña Carmen',lines:["Tom! Who turned my pupusas? They're all wrong."]},
+  {talk:'Tom',lines:["You told me I cook well."]},
+  {talk:'Doña Carmen',lines:["I never said that."]},
+  {talk:'TNB',lines:["You said it. I was there."]},
+  {talk:'Doña Carmen',lines:["Then I wasn't feeling well."]},
+  {talk:'Miss Odette',lines:["Sit down, both of you. This gumbo needs salt and you two need lunch."]},
+  {talk:'Tom',lines:["We were going to get bread."]},
+  {talk:'Miss Odette',lines:["I have bread. Sit."]},
+  {call:()=>{ sfx.pickup(); }}, {hearts:'nara'}, {wait:.8},   // a piece of bread is gone from Tom's plate; Nara sits very straight beside it
+  {talk:'TNB',lines:["Hills, then bread."]},
   {despawn:'Miss Odette'}, {despawn:'Doña Carmen'},
   {hearts:'tom'}, {call:()=>sfx.levelChime()},
   {fade:'out',time:.8}, {card:2,done:true,time:3.4}, {flag:'ch2-done'}, {fade:'in',time:.8},
@@ -801,13 +710,9 @@ const TRIGGERS=[
   {id:'ch1-sunday',map:'town',when:{...CH1,flag:'ch1-job',notFlag:'ch1-done'},scene:'ch1Sunday'},
   {id:'ch2-arrive',map:'blvd',when:{...CH2,notFlag:'ch2-goal'},scene:'ch2Arrive'},
   {id:'ch2-loft',map:'lofts',when:{...CH2,notFlag:'ch2-tnb'},scene:'ch2Loft'},
-  {id:'ch2-sky',map:'blvd',when:{...CH2,flag:'ch2-tnb',notFlag:'ch2-sky'},scene:'ch2Sky'},
-  {id:'ch2-porch',map:'jpark',when:{...CH2,flag:'met-nara',notFlag:'ch2-nara'},scene:'ch2Porch'},
-  {id:'ch2-starter',map:'tomhouse',when:{...CH2,flag:'ch2-nara',notFlag:'ch2-starter'},scene:'ch2Starter'},
-  {id:'ch2-smog',map:'jpark',when:{...CH2,flag:'ch2-starter',notFlag:'ch2-smog'},scene:'ch2Smog'},
-  {id:'ch2-odette',map:'creole',when:{...CH2,flag:'ch2-lawn',notFlag:'ch2-odette'},scene:'ch2Odette'},
-  {id:'ch2-carmen',map:'pupuseria',when:{...CH2,flag:'ch2-lawn',notFlag:'ch2-carmen'},scene:'ch2Carmen'},
-  {id:'ch2-source',map:'jpark',when:{...CH2,flag:['ch2-odette','ch2-carmen'],notFlag:'ch2-source'},scene:'ch2Source'},
+  {id:'ch2-porch',map:'jpark',at:[2,14,11,21],when:{...CH2,flag:'ch2-tnb',notFlag:'ch2-nara'},scene:'ch2Porch'},
+  {id:'ch2-smog',map:'jpark',when:{...CH2,flag:'ch2-nara',notFlag:'ch2-lawn'},scene:'ch2Smog'},
+  {id:'ch2-odette',map:'jpark',at:[1,6,13,10],when:{...CH2,flag:'ch2-lawn',notFlag:'ch2-source'},scene:'ch2Odette'},
   {id:'ch2-t1',map:'griffith',at:[1,1,22,19],when:{...CH2,flag:'ch2-source',notFlag:'ch2-t1'},scene:'ch2Flurry'},
   {id:'ch2-t2',map:'griffith',at:[1,1,22,12],when:{...CH2,flag:'ch2-t1',notFlag:'ch2-tuts'},scene:'ch2Coyote'},
   {id:'ch2-lemon',map:'griffith',at:[1,1,8,9],when:{...CH2,flag:'ch2-tuts',notFlag:'ch2-lemon'},scene:'ch2Lemon'},
@@ -897,7 +802,7 @@ const STORY_MAPFX=[
       if(smog||!flag('ch2-tnb')) for(let k=0;k<4;k++) { const ph=(time*.5+k/4)%1; gfx.globalAlpha=(1-ph)*.7; ellipse(x+1+Math.sin(time*2+k)*5,y-18-ph*40,5+ph*12,4+ph*8,k%2?'#8a5aa8':'#b48ad0'); }
       gfx.globalAlpha=1;
     }
-    if(!smog&&!(M.id==='blvd'&&flag('ch2-goal')&&!flag('ch2-clear'))) return;   // Downtown is already under the haze when Tom lands (ch2Sky)
+    if(!smog&&!(M.id==='blvd'&&flag('ch2-goal')&&!flag('ch2-clear'))) return;   // Downtown is already under the haze when Tom lands (chapter 2 scene 1)
     const a=CH2_SMOG_MAPS[M.id]; if(!a) return;
     // A purple haze over the whole map, with slow drifting puffs.
     gfx.globalAlpha=a; rect(0,0,M.w*T,M.h*T,'#7a4aa0');

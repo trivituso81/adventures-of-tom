@@ -342,7 +342,7 @@ function startNaraMeet(n) {
 
 // Talking to her after that: barks, wiggles, sometimes a puddle, then the offer to come along.
 function talkToNara(n) {
-  if(!n.visitedOnce) { startNaraMeet(n); return; }
+  if(!n.visitedOnce) { if(STORY.mode==='full'&&STORY.chapter===2&&!flag('ch2-nara')) return; startNaraMeet(n); return; }   // chapter 2: her first meeting is story scene 2 (ch2Porch)
   say('nara','greet');
   const excited=Math.random()<.3;
   n.lines=[pick(['Nara wiggles so hard her whole back half goes sideways.','Nara brings Tom a stick. It\'s the best stick. He has to see it.','Nara sniffed every jacaranda on 2nd Ave. She has a full report.','Nara rolls over for belly rubs. She\'s earned them. She says.','Somebody offered Nara a biscuit. She looked at it like it was a rock.','Nara drops the tennis ball at Tom’s feet. Then picks it back up. Then drops it. Throw it. THROW IT.'])];
@@ -357,6 +357,7 @@ const LE_update_nara=update;
 update=function(dt) {
   LE_update_nara.apply(this,arguments);
   if(inParty(nara)) NARA_NPC.visitedOnce=true;   // a save made while she was in the party still counts as met
+  if(STORY.mode==='full'&&STORY.chapter===2&&!flag('ch2-nara')) return;   // chapter 2: scene 2 (ch2Porch) is her meeting
   if(NARA_NPC.visitedOnce||currentMap!==worlds.jpark||intro.active||dialog.active||transition||battle.active||menuOpen||shopOpen||player.move) return;
   if(!worlds.jpark.npcs.includes(NARA_NPC)) return;
   if(Math.abs(NARA_NPC.x-player.x)+Math.abs(NARA_NPC.y-player.y)<=4) startNaraMeet(NARA_NPC);

@@ -28,7 +28,7 @@ with sync_playwright() as pw:
             if pg.evaluate("()=>!intro.active&&!dialog.active&&!transition"): break
             pg.keyboard.press('Enter'); pg.wait_for_timeout(90)
         check(name+': op registered',pg.evaluate("()=>typeof SCENE_OPS.ch2Reveal==='function'"))
-        for which in ('loaf','coin'):
+        for which in ('coin',):
             pg.evaluate("(w)=>{ SCENES.__t1=[{ch2Reveal:w},{talk:'Tom',lines:['After the picture.']}]; playScene('__t1'); }",which)
             ok=pg.wait_for_function("()=>closeup.active&&closeup.reveal&&!dialog.active",timeout=6000) is not None
             check(f'{name} {which}: reveal opens',ok); pg.wait_for_timeout(2000)

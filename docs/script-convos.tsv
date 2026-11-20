@@ -15,28 +15,16 @@ ch1End	8	Boppy! Your fish is REAL! He's CAR size 		Boppy is finally proved right
 ch1End	12	You've got money in your TEETH!				merge
 ch1Job	1	Tata, you have a job. If you see anythin		Grace gives Tom a job so he stays on the case from California.		
 ch1Sunday	15	hey babe. safe flight. the smog over 2nd		Rose makes Tom take the long way to the cab, and he does. TNB's text lights up on the seat and Tom never reads it.		
-ch2AfterBoss	2.then.0	Rumble. You asked how I was doing. Nobod		Kindness wins: the Big Shake was lonely, lets things move again and sneezes up a gold lemon coin.	The Big Shake: Something shiny ; Tom: It's a gold coin with a lemon	
-ch2AfterBoss	17	It's a gold coin with a lemon on it. Ros				merge
-ch2AfterBoss	23	Look. The sky is blue again. Los Angeles		The sky clears and they line up the pattern: two flashes, two orange blocks, two coins.	TNB: Two flashes	
-ch2Arrive	2	TNB said he'd be home. Spring Street lof		Tom lands in Los Angeles and heads for TNB's loft.		
-ch2Boss	4	The ground is humming. That's never a go		The hill TNB naps on stands up: the Big Shake, woken by a flash, wants nothing to move; boss fight.	The Big Shake: RUMBLE. There was a big flash	
-ch2Carmen	1	The pupusas are fine. Everything is fine		Tom flips Doña Carmen's burning pupusas; Nara shows the smog is blowing down from the hill.	TNB: Nara is right	
-ch2Coyote	3	Nice hike. You look like you have snacks		A coyote sees Nara as a snack; fight; TNB heals and points the way to the Observatory.		
-ch2Coyote	13	Quick wardrobe adjustment, quick heal, a				merge
-ch2End	4	...smelled like gumbo on a Saturday nigh		Mr. Washington finishes his story at last and is himself again.		
-ch2End	13	I brought gumbo for the whole block. TNB		The neighbors are back to normal with gumbo and a towel smack; Tom says he has two homes.		
-ch2Flurry	3	Street cleaning. Tuesday. Eight to ten.		Parking-ticket monsters on the hike and Tom's car grudge; fight.		
-ch2Lemon	2	Babe, look at that tree. It's grey. The		Second clue spot: a grey lemon tree with a lemon in an orange block and the same burnt bulb; Long Island and Los Angeles are linked.	TNB: Babe, look at that tree ; Tom: I've seen this before ; Tom: It's a burnt-out flashbulb	
-ch2Loft	5	Well, well, well...		Reunion with TNB: SkyMiles banter, then Tom tells him about the mud and the talking fish.	Tom: He said	
-ch2Odette	1	Stirring. Stirring. The gumbo never has		Miss Odette is stuck stirring and doesn't know TNB: shows how far the daze reaches.		
-ch2Porch	3	Olivia dropped her off this morning. Fam		Nara is staying with them while Olivia's family is away, and TNB has kept Bready Mercury fed.	TNB: Olivia dropped her off	
-ch2Porch	9	It's perfectly round! How did you get it		TNB's pottery-wheel bread bowl and Nara's tricks: home life before the trouble.		
-ch2Sky	3	Wait, why is the sky PURPLE? It's two in		They notice the sky over Los Angeles is purple.	Tom: Wait, why is the sky PURPLE	
-ch2Smog	8	Mr. Washington! Is everything okay?		Mr. Washington is dazed, repeating himself and wanting the afternoon to never end: what the smog does to people.	Mr. Washington: Such a nice afternoon	
-ch2Smog	24	Excuse me, smog. That was UNCALLED for.		Talking smog appears; TNB's movie-night memory turns fear into a plan; the first fight in Los Angeles.		
-ch2Smog	42	The smog monsters are gone, but Mr. Wash		Mr. Washington is still in a daze, so they go check on Miss Odette and Doña Carmen.	Tom: Miss Odette and Doña Carmen	
-ch2Source	2	Babe. Look north. It's all coming down o		They trace the smog to the Observatory and set the goal.	TNB: It's coming from the Observatory	
-ch2Starter	2	Hello, Bready Mercury. Did you miss me?		Tom greets his starter, the Bready Mercury song puns, then the purple smog reaches the street and they go check on Mr. Washington.	TNB: Babe. Look outside ; Tom: Mr. Washington is sitting	
+ch2Loft	4	Hey, babe. You've got your news face on.		Tom insists TNB go first, then can't hold his news in. To TNB the purple sky is a detail and the bread is the problem.		
+ch2Porch	10	Nara, no jumping. Hello. Yes. Hello. Tha		Tom finds his poking stick. Nara thinks every stick is for her.		
+ch2Smog	8	Morning, Tom! Back from your folks? How'		Mr. Washington is stuck on one greeting, and Tom keeps answering it properly.		
+ch2Odette	5	This gumbo is perfect. Doesn't need a th		Doña Carmen thinks Tom can't cook. In the smog she says he can, and he keeps the compliment.		
+ch2Flurry	3	No parking Saturdays. Noon to two. You p		Tom gets a parking ticket from a monster and tries to contest it the proper way.		
+ch2Coyote	3	Dog. Run with us. We never sit.		A coyote looks only at Nara, and Nara chooses Tom.		
+ch2Lemon	2	That's the block. From the pond. The dra		The cloud didn't bother TNB at all. The block does.		
+ch2Boss	10	GAH! I've picked up Nara. I don't rememb		Tom's body reacts before he does. Then he worries about the building on the monster's head.		
+ch2AfterBoss	2	Excuse me. Mr. Shake. How are you doing?		The hill has known TNB for two years. TNB didn't know.		
+ch2End	4	Morning, Tom! Back from your folks? How'		Everyone is back to normal, so Doña Carmen takes the compliment back. And there is finally bread.		
 ch3AfterBoss	18	Boppy got treasure! Now your mouth match		Boppy finally catches Iron-Gill and lets him go with a promise to visit.		
 ch3AfterBoss	32	Boppy, can we go home now? I want to tel		Heading home; Boppy notes the fish still stuck mid-jump in its block.		
 ch3AfterBoss	c40	Blorp. You told me about 1970. Nobody te		Kindness wins: Iron-Gill wants company, gives back the jar and gives Boppy a gold fish coin.	Old Iron-Gill: And take this	
