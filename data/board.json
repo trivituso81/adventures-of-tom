@@ -15669,7 +15669,7 @@
    "title": "Battle video route: why WAN was dropped, costs, proof plan",
    "theme": "Battle Animations",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "wanplan",
    "next": "In progress in the chat that opened with the rule NO PAINTED POSES IN BATTLE. It records the rule, finds out why the WAN video route was dropped, compares the ways to run WAN by API against xAI, and writes the proof plan for Grace's guard. It spends nothing and stops for your approval.",
    "blocks": [],
@@ -15683,6 +15683,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom (12:11): \"I'm extremely unhappy with the painted battle poses for the family (card t-clipreset / c-clipposes). I was happy with the earlier WAN video clips (made through Sorceress); the problem is painted still poses.\" New standing rule: NO PAINTED POSES IN BATTLE. Task: why WAN was dropped, API comparison against xAI, proof plan for Grace's guard, no spend, stop for approval."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     }
    ],
    "prompt": {
@@ -16223,6 +16227,16 @@
    "tags": [],
    "cards": [
     "c-gatezero"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukEkFzpnNXMhJNExAwp",
+   "title": "Battle video route: why WAN was dropped, costs, proof plan",
+   "first": "2026-11-20T12:20:04-08:00",
+   "last": "2026-11-20T12:20:04-08:00",
+   "tags": [],
+   "cards": [
+    "c-wanplan"
    ]
   },
   {
@@ -17732,8 +17746,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "8cd5826e7cb35803b2b4f1bfae130c00cc4edcf3",
- "synced_at": "2026-11-20T20:12:56+00:00",
+ "synced": "708115f43e976f7e6389d3d81a923ab85d428026",
+ "synced_at": "2026-11-20T20:20:40+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
