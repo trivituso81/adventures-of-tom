@@ -5,6 +5,8 @@
 
   python3 -I tools/art-library/clipgen.py [--group "Chapter 1"] [--limit 0] [--ids id1,id2] [--cap 8] [--par 3] [--dry-run] [--out DIR] [--repo DIR]
   python3 -I tools/art-library/clipgen.py --dispatch-bake            (only starts the art-bake Action)
+  python3 -I tools/art-library/clipgen.py --requests [--dry-run]     (keysecrets2: works through data/clip-requests.json, what GENERATE VIDEO and
+                                                                      GENERATE CHAPTER in the Art Library asked for; see do_requests notes below)
 
 Env: XAI_API_KEY (never printed), XAI_BASE (test stand-in; default https://api.x.ai), GITHUB_TOKEN or GH_TOKEN and GITHUB_REPOSITORY (the
 bake is started through the API), CLIPGEN_REMOTE (git remote to push to; default `origin`).
@@ -17,8 +19,12 @@ that was sent and not finished is kept in OUT/state.json and picked up again (no
 pushed on its own, so a later failure cannot lose an earlier one.
 Approve writes what decide('ok') writes in art.html: art/raw/clips/<id>-v<k>.mp4 and, in data/art-prompts.json, status approved and a
 `versions` entry {n, file, date, from, at, marks}. A video that barely moves is NOT approved: it stays in OUT/videos and in the report.
+Request mode (keysecrets2): data/clip-requests.json holds {requests:[{id, prompt, at}] or [{group, cap, at}]}. A press of GENERATE VIDEO
+asks for one entry (its prompt as on Tom's screen replaces the entry's own for that run and is what approve saves); GENERATE CHAPTER asks for a
+group. The queue is emptied BEFORE the first paid call, so a second run can never pay twice. The report carries `at`, `asked`, `approved`,
+`held`, `still`, `failed`, `blocked`, `skipped`; the Action keeps it on branch `clipgen` and the Art Library page reads it.
 Output: OUT/clipgen-report.json."""
-import os, sys, re, json, time, base64, argparse, datetime, subprocess, threading, concurrent.futures
+import os, sys, re, json, time, hashlib, base64, argparse, datetime, subprocess, threading, concurrent.futures
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -55,6 +61,25 @@ class Repo:
 
     def entries(self):
         return json.load(open(self.data, encoding='utf-8'))
+
+    def load_requests(self):
+        f = os.path.join(self.root, 'data', 'clip-requests.json')
+        try: return json.load(open(f, encoding='utf-8'))
+        except (OSError, ValueError): return {'requests': []}
+
+    def take_requests(self, ats):
+        """Remove the requests with these `at` stamps from data/clip-requests.json on main (retried against a main that moved)."""
+        for attempt in range(8):
+            self.sync()
+            doc = self.load_requests()
+            doc['requests'] = [r for r in (doc.get('requests') or []) if r.get('at') not in ats]
+            open(os.path.join(self.root, 'data', 'clip-requests.json'), 'w', encoding='utf-8').write(jdump(doc))
+            self.git('add', 'data/clip-requests.json')
+            if not self.git('status', '--porcelain', '--', 'data/clip-requests.json', check=False).stdout.strip(): return
+            self.git('-c', 'user.name=github-actions[bot]', '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com', 'commit', '-q', '-m', 'clip: requests taken [skip ci]')
+            if self.git('push', self.remote, 'HEAD:main', check=False).returncode == 0: return
+            say('push refused, trying again (%d)' % (attempt + 1)); time.sleep(3 + attempt * 2)
+        raise RuntimeError('could not push the emptied request list 8 times')
 
     def exists(self, rel):
         return os.path.exists(os.path.join(self.root, rel))
@@ -171,6 +196,33 @@ class Stop(Exception): pass   # the whole run stops (the key was refused)
 class Gone(Exception): pass   # this request is dead (failed, expired): the pending record is dropped
 
 
+def request_queue(doc, repo, reqs):
+    """keysecrets2: the entries the requests ask for, in the order asked. A press of one entry makes it whatever its status except approved (a repeat
+    press is another variant; a rejected clip does not wait for a rewritten prompt, Tom asked for it). A group press makes what classify() calls todo or redo.
+    The prompt in a request replaces the entry's own for this run (in memory; approve saves it). Returns (queue, asked ids, [{id, why, kind blocked|skipped}], caps)."""
+    by = {e['id']: e for e in doc['entries']}; queue, asked, notes, caps = [], [], [], []
+    def add(e):
+        if e['id'] not in [q['id'] for q in queue]: queue.append(e)
+    for r in reqs:
+        if isinstance(r.get('cap'), (int, float)) and r['cap'] > 0: caps.append(float(r['cap']))
+        if r.get('id'):
+            e = by.get(r['id']); asked.append(r['id'])
+            if not e or not e.get('clip') or e['clip'].get('test'): notes.append({'id': r['id'], 'why': 'no such video entry', 'kind': 'skipped'}); continue
+            if e.get('status') == 'approved': notes.append({'id': e['id'], 'why': 'already approved: not made again', 'kind': 'skipped'}); continue
+            if (r.get('prompt') or '').strip(): e['prompt'] = r['prompt']
+            cl = classify(doc, repo, e.get('group'))
+            blk = next((w for b, w in cl['blocked'] if b['id'] == e['id']), '')
+            if blk: notes.append({'id': e['id'], 'why': blk, 'kind': 'blocked'}); continue
+            add(e)
+        else:
+            cl = classify(doc, repo, r['group'])
+            asked.extend(e['id'] for e in cl['all'])
+            if not cl['all']: notes.append({'id': '*', 'why': 'no clips in the group %s' % r['group'], 'kind': 'skipped'})
+            for e in cl['redo'] + cl['todo']: add(e)
+            for b, w in cl['blocked']: notes.append({'id': b['id'], 'why': w, 'kind': 'blocked'})
+    return queue, asked, notes, caps
+
+
 def gate_check(e, vid, marks, key, vcap):
     """The clip gate (tools/clip-gate/hold.py). A gate that cannot run holds nothing back but says so in the log."""
     sys.path.insert(0, os.path.join(HERE, '..', 'clip-gate'))
@@ -184,7 +236,7 @@ def gate_check(e, vid, marks, key, vcap):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--group', default='Chapter 1'); ap.add_argument('--limit', type=int, default=0); ap.add_argument('--cap', type=float, default=8.0)
-    ap.add_argument('--par', type=int, default=3); ap.add_argument('--ids', default=''); ap.add_argument('--dry-run', action='store_true'); ap.add_argument('--dispatch-bake', action='store_true')
+    ap.add_argument('--par', type=int, default=3); ap.add_argument('--ids', default=''); ap.add_argument('--dry-run', action='store_true'); ap.add_argument('--dispatch-bake', action='store_true'); ap.add_argument('--requests', action='store_true')
     ap.add_argument('--gate', action='store_true', help='clipgate2: judge each video with tools/clip-gate (measured, then vision) before approving; a clip that fails is held, not approved')
     ap.add_argument('--gate-vision-cap', type=float, default=.08, help='most dollars of vision calls per clip')
     ap.add_argument('--out', default=os.path.join(os.getcwd(), 'clipgen-out')); ap.add_argument('--repo', default=os.path.abspath(os.path.join(HERE, '..', '..')))
@@ -203,8 +255,16 @@ def main():
     if not a.dry_run:
         if repo.git('status', '--porcelain', check=False).stdout.strip() and not os.environ.get('CI'): raise SystemExit('The repo working copy is not clean; clipgen resets it to main, so it will not run here.')
         repo.sync()
-    cl = classify(repo.entries(), repo, a.group)
+    doc0 = repo.entries()
+    cl = classify(doc0, repo, a.group)
     queue = cl['redo'] + cl['todo']
+    reqs, asked, notes = [], [], []
+    if a.requests:
+        reqs = [r for r in (repo.load_requests().get('requests') or []) if isinstance(r, dict) and (r.get('id') or r.get('group'))]
+        if not reqs: say('no request waiting: nothing to do'); return 0
+        queue, asked, notes, caps = request_queue(doc0, repo, reqs); by0 = {e['id']: e for e in doc0['entries']}
+        cl = {'all': queue, 'approved': [], 'blocked': [(by0[n['id']], n['why']) for n in notes if n['kind'] == 'blocked' and n['id'] in by0], 'redo': [], 'redoWait': []}
+        if caps: a.cap = min(40.0, max(caps))
     if a.ids:   # a small first run: only these entries (comma separated ids)
         want = [x.strip() for x in a.ids.split(',') if x.strip()]; miss = [x for x in want if x not in [e['id'] for e in queue]]
         if miss: say('not in the queue (approved, blocked, waiting or not in the group): %s' % ', '.join(miss))
@@ -213,27 +273,32 @@ def main():
     queue.sort(key=lambda e: (e['id'] not in state['held'], e['id'] not in state['pending']))
     if a.limit > 0: queue = queue[:a.limit]
     need = sum(cost(e) for e in queue if e['id'] not in state['held'] and e['id'] not in state['pending'])
-    say('%s: %d clips, %d to make now (%d redo), %d approved, %d blocked, %d redo waiting for a rewritten prompt. Estimate $%.2f of the $%.2f cap.' % (a.group, len(cl['all']), len(queue), len(cl['redo']), len(cl['approved']), len(cl['blocked']), len(cl['redoWait']), need, a.cap))
+    say('%s: %d clips, %d to make now (%d redo), %d approved, %d blocked, %d redo waiting for a rewritten prompt. Estimate $%.2f of the $%.2f cap.' % ('requests' if a.requests else a.group, len(cl['all']), len(queue), len(cl['redo']), len(cl['approved']), len(cl['blocked']), len(cl['redoWait']), need, a.cap))
     for e, why in cl['blocked']: say('  blocked: %s: %s' % (e['id'], why))
     for e in queue: say('  %s%s  %s %s %ss $%.2f%s' % (e['id'], '' if e['id'] not in state['held'] else ' (video already held)', e['clip']['model'], e['clip']['res'], e['clip']['dur'], cost(e), ' (request pending)' if e['id'] in state['pending'] else ''))
     report = {'group': a.group, 'cap': a.cap, 'dry_run': a.dry_run, 'queued': [e['id'] for e in queue], 'made': [], 'approved': [], 'still': [], 'held': [], 'failed': [], 'blocked': [{'id': e['id'], 'why': w} for e, w in cl['blocked']], 'redoWaiting': [e['id'] for e in cl['redoWait']], 'spent': 0.0, 'estimate': round(need, 2)}
     rf = os.path.join(a.out, 'clipgen-report.json')
+    if a.requests:   # keysecrets2: what the Art Library reads to tell Tom what happened to each press
+        report.update({'mode': 'requests', 'at': datetime.datetime.now(datetime.timezone.utc).isoformat(), 'asked': asked, 'skipped': [n for n in notes if n['kind'] == 'skipped'], 'blocked': [{'id': n['id'], 'why': n['why']} for n in notes if n['kind'] == 'blocked']})
+    def bail(msg):
+        report['failed'].append({'id': '*', 'why': msg}); json.dump(report, open(rf, 'w'), indent=1); say('STOP:', msg); return 1
     if a.dry_run or not queue:
+        if a.requests and not a.dry_run: repo.take_requests({r.get('at') for r in reqs})
         json.dump(report, open(rf, 'w'), indent=1); say('dry run' if a.dry_run else 'nothing to make'); return 0
-    if need > a.cap + 1e-9: raise SystemExit('This run needs about $%.2f and the cap is $%.2f. Raise the cap input or lower the limit.' % (need, a.cap))
+    if a.requests: repo.take_requests({r.get('at') for r in reqs})   # the queue is emptied BEFORE anything is paid, so a second run cannot pay twice
+    if need > a.cap + 1e-9: return bail('This run needs about $%.2f and the cap is $%.2f. Raise the cap input or lower the limit.' % (need, a.cap))
 
     # ---- preflight: every check that can fail runs BEFORE the first paid request
     key = os.environ.get('XAI_API_KEY', '')
-    if not key: raise SystemExit('Repo secret XAI_API_KEY is empty or missing.')
+    if not key: return bail('Repo secret XAI_API_KEY is empty or missing.')
     for t in ('ffmpeg', 'ffprobe'):
-        if subprocess.run([t, '-version'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode: raise SystemExit(t + ' is not installed on this runner.')
+        if subprocess.run([t, '-version'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode: return bail(t + ' is not installed on this runner.')
     p = repo.git('push', '--dry-run', repo.remote, 'HEAD:main', check=False)
-    if p.returncode: raise SystemExit('The push to main would fail, so no video is made: ' + p.stdout[-300:])
+    if p.returncode: return bail('The push to main would fail, so no video is made: ' + p.stdout[-300:])
     xai = Xai(key, os.environ.get('XAI_BASE', 'https://api.x.ai'))
     try:
         r = xai.s.get(xai.base + '/v1/models', headers={'Authorization': 'Bearer ' + key}, timeout=30)
-        if r.status_code == 401: raise SystemExit('xAI refused the key (401). Check the repo secret XAI_API_KEY.')
-    except SystemExit: raise
+        if r.status_code == 401: return bail('xAI refused the key (401). Check the repo secret XAI_API_KEY.')
     except Exception as x: say('warning: could not reach the xAI key check (%s); going on' % str(x)[:100])
     say('preflight ok')
 
@@ -241,13 +306,14 @@ def main():
 
     def work(e):
         id_, rev = e['id'], e.get('promptRev') or 0
+        ph = hashlib.sha1((e.get('prompt') or '').strip().encode()).hexdigest()[:10]   # a changed prompt (a request carries Tom's edit) never reuses an older video
         try:
             if stop.is_set(): return
             held = state['held'].get(id_)
-            if held and held.get('rev') == rev and os.path.exists(held['file']): vid = held['file']; say(id_, 'video held from an earlier run')
+            if held and held.get('rev') == rev and held.get('ph', ph) == ph and os.path.exists(held['file']): vid = held['file']; say(id_, 'video held from an earlier run')
             else:
                 pend = state['pending'].get(id_)
-                if pend and pend.get('rev') != rev: state['pending'].pop(id_, None); pend = None
+                if pend and (pend.get('rev') != rev or pend.get('ph', ph) != ph): state['pending'].pop(id_, None); pend = None
                 if not pend:
                     c = cost(e)
                     with clock:
@@ -260,13 +326,13 @@ def main():
                     except Exception:
                         with clock: spend['total'] -= c   # not accepted: nothing charged
                         raise
-                    pend = {'rid': rid, 'rev': rev, 'cost': c, 't': time.time()}; state['pending'][id_] = pend; save_state(); say(id_, 'sent', rid)
+                    pend = {'rid': rid, 'rev': rev, 'ph': ph, 'cost': c, 't': time.time()}; state['pending'][id_] = pend; save_state(); say(id_, 'sent', rid)
                 try: url = xai.wait(pend['rid'], None)
                 except Gone: state['pending'].pop(id_, None); save_state(); raise
                 data = xai.download(url)
                 vid = os.path.join(a.out, 'videos', '%s-rev%d.mp4' % (id_, rev))
                 open(vid, 'wb').write(data)
-                state['held'][id_] = {'file': vid, 'rev': rev}; state['pending'].pop(id_, None); save_state()   # paid for and kept
+                state['held'][id_] = {'file': vid, 'rev': rev, 'ph': ph}; state['pending'].pop(id_, None); save_state()   # paid for and kept
                 report['made'].append(id_); say(id_, 'video in (%d KB)' % (len(data) // 1024))
             kind = e['clip'].get('kind', 'strike')
             try: marks = clipmarks.auto_marks(vid, kind)

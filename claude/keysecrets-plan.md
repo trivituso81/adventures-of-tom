@@ -24,7 +24,7 @@ An entry made from Tom's own photo (`own` field, 14 entries, all approved today)
 | Card | Scope | State |
 |---|---|---|
 | c-keysecrets1 | Art Library pictures through art-gen | built (keysecrets1) |
-| c-keysecrets2 | Art Library videos (GENERATE VIDEO, GENERATE CHAPTER) through clip-gen; remove the xAI key and Relay boxes and the browser video code | not started |
+| c-keysecrets2 | Art Library videos (GENERATE VIDEO, GENERATE CHAPTER) through clip-gen; remove the xAI key and Relay boxes and the browser video code | built (keysecrets2) |
 | c-keysecrets3 | Voice Library takes and Script Editor takes through a new ElevenLabs Action; remove the ElevenLabs key box | not started |
 | c-keysecrets4 | Music Library makes through a new music Action | not started |
 | c-keysecrets5 | recast pages and the baker templates (`aot-baker-key`) | not started, needs a design call |
@@ -36,3 +36,7 @@ A key box goes away only in the build that moves its last button. Until then its
 - Tests that fail identically without these changes (old, not caused here): `tools/art-library/test.py` (stale entry counts, then a click timeout), `tools/art-library/clip_batch_test.py` (five portrait checks).
 - `artgen_test.py` had three stale checks (QA money counted in "spent"); fixed with `--no-qa` on those runs.
 - Tests: `python3 tools/art-library/artgen_test.py` (now includes request mode), `keysecrets_test.py` (the page), `review_test.py`, `artgen_lib_test.py`.
+
+## Built in keysecrets2 (videos)
+
+Same pattern as pictures with its own file and branch: `data/clip-requests.json` (message "clip: generate <id or group>"), the `clip-gen` Action with `--requests` (it also approves, so there is no browser review step for a made clip), the report on branch `clipgen` (`clipgen-report.json`: `mode`, `at`, `asked`, `approved`, `held`, `still`, `failed`, `blocked`, `skipped`, `spent`), `clipPoll` in `engine/art-clips.js` every 20 s. A request carries `cap` (the job stops before passing it, hard limit $40). Videos the gate holds or that hardly move stay on branch `clipgen`; the page shows the reason and the press is made again with GENERATE VIDEO. Facts: docs/CHANGES.md "keysecrets2".

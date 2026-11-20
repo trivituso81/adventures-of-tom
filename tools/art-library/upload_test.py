@@ -9,7 +9,7 @@ fails = []
 def ok(c, m):
     print(('PASS ' if c else 'FAIL ') + m)
     if not c: fails.append(m)
-URL = 'http://localhost:8831/art.html?xai=http://127.0.0.1:8832&gh=http://127.0.0.1:8832'
+URL = 'http://localhost:8831/art.html?gh=http://127.0.0.1:8832'
 async def main():
     web = subprocess.Popen([sys.executable, '-m', 'http.server', '8831'], cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     stub = subprocess.Popen([sys.executable, os.path.join(ROOT, 'tools', 'art-library', 'stub.py'), '8832'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

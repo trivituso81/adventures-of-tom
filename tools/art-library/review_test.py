@@ -10,10 +10,10 @@ fails = []
 def ok(c, m):
     print(('PASS ' if c else 'FAIL ') + m)
     if not c: fails.append(m)
-URL = 'http://localhost:8821/art.html?xai=http://127.0.0.1:8822&gh=http://127.0.0.1:8822'
+URL = 'http://localhost:8821/art.html?gh=http://127.0.0.1:8822'
 async def fresh(b, vp):
     c = await b.new_context(viewport=vp)
-    await c.add_init_script("localStorage.setItem('aot-art-key','test');localStorage.setItem('aot-gh-token','test');")
+    await c.add_init_script("localStorage.setItem('aot-gh-token','test');")
     pg = await c.new_page(); errs = []
     pg.on('pageerror', lambda e: errs.append(str(e)))
     await pg.goto(URL); await pg.wait_for_selector('#tabs .tab')

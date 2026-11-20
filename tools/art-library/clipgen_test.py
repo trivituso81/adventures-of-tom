@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 """Test for clipgen2 (the clip-gen Action: tools/art-library/clipgen.py and clipmarks.py). No real keys, no money.
 Run from the repo root:  python3 tools/art-library/clipgen_test.py        (about 2 minutes; needs ffmpeg and playwright)
-  1. marks parity: clipmarks.py and the browser's clipAutoMarks (engine/art-clips.js) on the same stand-in videos (several speeds, sizes, frame
-     rates, kinds): the same marks within 1 frame; a video that never moves gives none in both.
+  1. marks: clipmarks.py on stand-in videos (several speeds, sizes, frame rates, kinds) finds START at 0, HIT near the limb's farthest reach and END
+     after the last movement; a video that never moves gives none. (The browser's own copy of this code was removed in keysecrets2.)
   2. a run against the stand-in xAI server (tools/art-library/stub.py) and a local git remote: every clip of the group that is not approved is
      made (never more than 3 at once, the request shape the Library sends), approved with its marks and committed one by one (files and
      data/art-prompts.json as decide('ok') writes them), a video that does not move is held and listed (not approved), a blocked clip and a
      rejected one that waits for a rewritten prompt are listed and not made, a rejected one with a rewritten prompt is made again.
   3. nothing is paid twice: a second run makes nothing new; a request that was sent and not finished is picked up again.
   4. a cap too low for the run stops it before any request; a refused key stops the run.
-  5. approve against a main that moved (another session's commit) keeps both."""
+  5. approve against a main that moved (another session's commit) keeps both.
+  6. request mode (keysecrets2, --requests): the clips named in data/clip-requests.json are made (a pressed clip's own prompt replaces the entry's and is what
+     approve saves; an approved clip is skipped with the reason; a group request makes what is not made yet), the queue is emptied on main BEFORE any
+     request is paid, the report carries at, asked, approved, still, skipped, blocked, a cap too low fails with the reason in the report, a dry run empties nothing."""
 import os, sys, json, time, shutil, subprocess, tempfile, threading, http.server, socketserver, functools
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
 HERE = os.path.join(ROOT, 'tools', 'art-library')
@@ -51,38 +54,21 @@ VIDS = {   # name: (args, plays in the browser: VP9 webm only)
     'wide': dict(size=(854, 480)), 'still': dict(amp=0), 'quick': dict(t0=.3, t1=.9, secs=4),
 }
 
-def parity():
-    from playwright.sync_api import sync_playwright
+def marks_check():
     for n, kw in VIDS.items(): make_video('%s/%s.webm' % (TMP, n), **kw)
-    handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=ROOT)
-    class Q(handler.func):
-        def log_message(self, *a): pass
-    srv = socketserver.TCPServer(('127.0.0.1', 0), functools.partial(Q, directory=ROOT)); port = srv.server_address[1]
-    threading.Thread(target=srv.serve_forever, daemon=True).start()
-    shutil.copy(os.path.join(ROOT, 'engine', 'art-clips.js'), TMP + '/art-clips.js')
-    open(TMP + '/page.html', 'w').write('<!doctype html><meta charset=utf-8><script src="art-clips.js"></script>')
-    srv2 = socketserver.TCPServer(('127.0.0.1', 0), functools.partial(Q, directory=TMP)); port2 = srv2.server_address[1]
-    threading.Thread(target=srv2.serve_forever, daemon=True).start()
-    kw = {'args': ['--headless=new', '--no-proxy-server', '--autoplay-policy=no-user-gesture-required']}
-    if os.environ.get('CHROMIUM'): kw['executable_path'] = os.environ['CHROMIUM']
-    with sync_playwright() as pw:
-        br = pw.chromium.launch(**kw); pg = br.new_page(); errs = []
-        pg.on('pageerror', lambda e: errs.append(str(e)))
-        pg.goto('http://127.0.0.1:%d/page.html' % port2); pg.wait_for_function('()=>typeof clipAutoMarks==="function"')
-        for n in VIDS:
-            for kind in ('strike', 'state', 'loop'):
-                b = pg.evaluate("""async ([u,k])=>{ const r=await fetch(u), blob=await r.blob(); return await clipAutoMarks(blob,k); }""", ['http://127.0.0.1:%d/%s.webm' % (port2, n), kind])
-                p = clipmarks.auto_marks('%s/%s.webm' % (TMP, n), kind)
-                if b is None or p is None: ok(b is None and p is None, 'parity %s %s: browser %s, port %s' % (n, kind, b, p)); continue
-                diff = {k: abs(b[k] - p[k]) * 30 for k in b}
-                ok(set(b) == set(p) and all(v <= 1.01 for v in diff.values()), 'parity %s %s: browser %s, port %s (frames apart %s)' % (n, kind, b, p, {k: round(v, 2) for k, v in diff.items()}))
-        ok(not errs, 'the browser page raised no error: %s' % errs[:2])
-        br.close()
-    srv.shutdown(); srv2.shutdown()
+    for n, kw in VIDS.items():
+        t0, t1, secs = kw.get('t0', 1.0), kw.get('t1', 2.0), kw.get('secs', 3)
+        for kind in ('strike', 'state', 'loop'):
+            m = clipmarks.auto_marks('%s/%s.webm' % (TMP, n), kind)
+            if n == 'still' and kind != 'loop': ok(m is None, 'marks %s %s: a video that never moves gives none (%s)' % (n, kind, m)); continue
+            if kind == 'loop': ok(m is not None and m['first'] == 0 and secs - .15 <= m['last'] <= secs and 'hit' not in m, 'marks %s loop: the first and the last picture %s' % (n, m)); continue
+            good = m is not None and m['first'] == 0 and t1 <= m['last'] <= min(secs, t1 + .8) and (kind == 'state') == ('hit' not in m)
+            if good and kind == 'strike': good = abs(m['hit'] - (t0 + t1) / 2) <= .2
+            ok(good, 'marks %s %s: %s (move %.1f to %.1f s)' % (n, kind, m, t0, t1))
 
-def seed_repo():
+def seed_repo(sfx=''):
     """A bare remote and a working copy holding what clipgen reads: data/art-prompts.json (a test group), the start pictures."""
-    remote, work = TMP + '/remote.git', TMP + '/work'
+    remote, work = TMP + '/remote%s.git' % sfx, TMP + '/work' + sfx
     sh('git', 'init', '-q', '--bare', '-b', 'main', remote)
     os.makedirs(work + '/data'); os.makedirs(work + '/art/clips'); os.makedirs(work + '/art/raw/clips')
     shutil.copytree(ROOT + '/art/clips/start', work + '/art/clips/start')
@@ -180,6 +166,61 @@ def generation():
         p.terminate()
     return remote, work
 
+def requests_mode():
+    """keysecrets2: --requests on a fresh seed. Port 8832 for the stand-in."""
+    remote, work = seed_repo('r')
+    for n, kw in (('moving', {}), ('still', dict(amp=0))):
+        if not os.path.exists('%s/%s.webm' % (TMP, n)): make_video('%s/%s.webm' % (TMP, n), **kw)
+    port = 8832
+    p = stub(port, {'STUB_VIDEO': TMP + '/moving.webm', 'STUB_VIDEO_STILL': TMP + '/still.webm'})
+    def put(reqs):
+        sh('git', 'fetch', '-q', 'origin', 'main', cwd=work); sh('git', 'reset', '-q', '--hard', 'FETCH_HEAD', cwd=work)
+        json.dump({'requests': reqs}, open(work + '/data/clip-requests.json', 'w'), indent=1)
+        sh('git', '-c', 'user.name=t', '-c', 'user.email=t@t', 'add', '-A', cwd=work); sh('git', '-c', 'user.name=t', '-c', 'user.email=t@t', 'commit', '-q', '-m', 'clip: generate test', cwd=work)
+        r = sh('git', 'push', '-q', 'origin', 'main', cwd=work); assert r.returncode == 0, r.stdout
+    def queue(): return json.loads(sh('git', '--git-dir', remote, 'show', 'main:data/clip-requests.json').stdout)['requests']
+    def go(out, *a, key='test'):
+        env = dict(os.environ, XAI_API_KEY=key, XAI_BASE='http://127.0.0.1:%d' % port, CLIPGEN_POLL='0.05')
+        return sh(sys.executable, '-I', HERE + '/clipgen.py', '--repo', work, '--out', out, '--requests', *a, env=env)
+    sends = lambda: [x for x in stub_log(port) if x.get('xai') == '/v1/videos/generations']
+    try:
+        # no request waiting: nothing happens
+        put([]); r = go(TMP + '/rq0'); ok(r.returncode == 0 and 'no request waiting' in r.stdout and not sends(), 'request mode with an empty queue does nothing')
+        # a dry run empties nothing and sends nothing
+        put([{'id': 'clip-tom-cast', 'prompt': 'dry', 'cap': 1, 'at': 1}]); r = go(TMP + '/rq0d', '--dry-run')
+        ok(r.returncode == 0 and 'dry run' in r.stdout and not sends() and len(queue()) == 1, 'a dry run sends nothing and leaves the queue as it was')
+        # a cap below the price: nothing paid, the queue is emptied, the report says why
+        put([{'id': 'clip-tom-cast', 'prompt': 'dry', 'cap': 0.01, 'at': 1}]); out = TMP + '/rqcap'; r = go(out)
+        rep = json.load(open(out + '/clipgen-report.json'))
+        ok(r.returncode == 1 and not sends() and queue() == [] and rep['failed'] and 'cap' in rep['failed'][0]['why'] and rep['mode'] == 'requests' and rep['asked'] == ['clip-tom-cast'], 'a cap below the price pays nothing, empties the queue and says why in the report: %s' % rep['failed'])
+        # the pressed clips: an edited prompt, one that is already approved, one that hardly moves
+        put([{'id': 'clip-tom-cast', 'prompt': 'my edited prompt for cast', 'cap': 2, 'at': 11}, {'id': 'clip-tom-give', 'cap': 2, 'at': 12}, {'id': 'clip-nobody', 'at': 13}]); out = TMP + '/rq1'
+        r = go(out); print(r.stdout[-1800:])
+        rep = json.load(open(out + '/clipgen-report.json')); doc, _ = remote_doc(remote); E = {e['id']: e for e in doc['entries']}
+        ok(r.returncode == 0 and queue() == [], 'the queue is emptied on main')
+        ok(len(sends()) == 2, 'two requests were sent, one per pressed clip: %d' % len(sends()))
+        ok(rep['mode'] == 'requests' and rep['asked'] == ['clip-tom-cast', 'clip-tom-give', 'clip-nobody'] and rep['at'] and rep['approved'] == ['clip-tom-cast'] and rep['still'] == ['clip-tom-give'], 'report: mode, at, asked, approved, still: %s' % {k: rep[k] for k in ('asked', 'approved', 'still')})
+        ok([x['id'] for x in rep['skipped']] == ['clip-nobody'], 'a name that is not a video entry is skipped with a reason: %s' % rep['skipped'])
+        ok(E['clip-tom-cast']['status'] == 'approved' and E['clip-tom-cast']['prompt'] == 'my edited prompt for cast', "the approved clip keeps the prompt that was on Tom's screen")
+        ok(E['clip-tom-loungepass']['status'] == 'draft', 'a clip nobody asked for is not made')
+        cmsgs = sh('git', '--git-dir', remote, 'log', '--format=%s', 'main').stdout.split('\n')
+        ok(any(m.startswith('clip: requests taken') and '[skip ci]' in m for m in cmsgs), 'the emptied queue is committed with [skip ci] (it must not start another run): %s' % cmsgs[:6])
+        # an approved clip is skipped with the reason
+        put([{'id': 'clip-tom-cast', 'at': 21}]); out = TMP + '/rq2'; n0 = len(sends()); r = go(out); rep = json.load(open(out + '/clipgen-report.json'))
+        ok(len(sends()) == n0 and rep['skipped'] and 'already approved' in rep['skipped'][0]['why'], 'a press on an approved clip makes nothing and says so: %s' % rep['skipped'])
+        # a group press makes what is not made yet; the held video that hardly moves is not paid for again
+        n0 = len(sends()); put([{'group': 'Chapter 9', 'cap': 3, 'at': 31}]); out = TMP + '/rq1'; r = go(out)   # the same output folder: the held video that hardly moves is remembered, as the branch clipgen does in the Action
+        rep = json.load(open(out + '/clipgen-report.json')); doc, _ = remote_doc(remote); E = {e['id']: e for e in doc['entries']}
+        ok(len(sends()) - n0 == 3, 'a group press makes the clips of the group that are not made yet (3 new requests): %d' % (len(sends()) - n0))
+        ok(sorted(rep['approved']) == ['clip-grump-idle', 'clip-mudling-throw', 'clip-tom-loungepass'] and [b['id'] for b in rep['blocked']] == ['clip-grace-squeeze'], 'report: approved %s, blocked %s' % (rep['approved'], [b['id'] for b in rep['blocked']]))
+        ok('clip-mudling-bump' in rep['asked'] and E['clip-mudling-bump']['status'] == 'rejected', 'a rejected clip with an unchanged prompt waits (it is in the group, not made)')
+        ok(queue() == [] and rep['spent'] <= 3, 'the queue is empty again and the spend stayed under the request\'s cap (%s)' % rep['spent'])
+        # the run needs a key: without it the report says so
+        put([{'id': 'clip-mudling-bump', 'at': 41}]); out = TMP + '/rq4'; r = go(out, key=''); rep = json.load(open(out + '/clipgen-report.json'))
+        ok(r.returncode == 1 and queue() == [] and 'XAI_API_KEY' in rep['failed'][0]['why'], 'with no key the report says the secret is missing (nothing paid)')
+    finally:
+        p.terminate()
+
 def approve_on_moved_main(remote, work):
     # another session pushes while this one is working: a note on another entry, and a new file
     other = TMP + '/other'; sh('git', 'clone', '-q', remote, other)
@@ -201,9 +242,10 @@ def approve_on_moved_main(remote, work):
 if __name__ == '__main__':
     only = sys.argv[1] if len(sys.argv) > 1 else 'all'
     try:
-        if only in ('all', 'parity'): parity()
+        if only in ('all', 'marks'): marks_check()
         if only in ('all', 'gen'):
             remote, work = generation(); approve_on_moved_main(remote, work)
+        if only in ('all', 'requests'): requests_mode()
     finally:
         print(open(TMP + '/stub.err').read()[-1500:] if os.path.exists(TMP + '/stub.err') else ''); shutil.rmtree(TMP, ignore_errors=True)
     print('FAILS:', fails); sys.exit(1 if fails else 0)

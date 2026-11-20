@@ -100,10 +100,10 @@ async def main():
             os.remove(folder + '/artgen-report.json')
             await pg.reload(); await pg.wait_for_selector('#tabs .tab')
             ok('Waiting for GitHub' in await pg.evaluate("(id)=>(MSG[id]||{}).text||''", B), 'a request still pending when the page reopens is watched again')
-            # the setup card: xAI key box says videos only, GitHub token stays
+            # the setup card (keysecrets2): no xAI key box and no relay box any more, the GitHub token stays
             await pg.click('#setuptog') if await pg.evaluate("()=>document.getElementById('setupbody').hidden") else None
             kt = await pg.inner_text('#keys')
-            ok('videos only' in kt and 'GitHub token' in kt, 'the keys card says the xAI key is for videos only and keeps the GitHub token')
+            ok('GitHub token' in kt and 'xAI' not in kt and 'Relay' not in kt and not await pg.evaluate("()=>!!(document.getElementById('kx')||document.getElementById('kr'))"), 'the keys card keeps only the GitHub token: no xAI key box, no relay box')
             ok(not errs, 'no page error: %s' % errs[:2])
             await b.close()
     finally:

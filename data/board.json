@@ -16179,7 +16179,7 @@
    "theme": "Tools",
    "tag": "keysecrets2",
    "title": "Art Library videos through repo secrets",
-   "next": "Starts after you try GENERATE on one picture. GENERATE VIDEO and GENERATE CHAPTER start the clip-gen Action by request file; the xAI key and Relay boxes are removed.",
+   "next": "Shipped as build keysecrets2: GENERATE VIDEO and GENERATE CHAPTER now ask the clip-gen Action by request file (data/clip-requests.json) and the xAI key and Relay boxes are gone. Next for you: press GENERATE VIDEO once on clip-toad-idle (card Try GENERATE VIDEO on one clip).",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -16209,9 +16209,15 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built keysecrets2 (not run for real): request file, clip-gen --requests, clipPoll, key and Relay boxes and the browser video code purged; tests keysecrets2_test, clip_batch_test (rewritten), clip_lib_test, clipgen_test (request mode), keysecrets_test pass. clipgen_test has one check that already failed on clean main.",
+     "at": "2026-11-20T22:00:00Z"
     }
    ],
-   "started_at": "2026-11-20T21:23:32+00:00"
+   "started_at": "2026-11-20T21:23:32+00:00",
+   "after": "t-keysecrets2-try"
   },
   {
    "id": "c-keysecrets3",
@@ -16364,6 +16370,39 @@
     {
      "d": "2026-11-20",
      "t": "Tom: \"the new lines in the came are not in the voice library for recording - can this be automated\". Cause: data/voice-index.json is rebuilt only when a session runs three scripts by hand; Sal's and Tom's new opening lines were missing."
+    }
+   ]
+  },
+  {
+   "id": "t-keysecrets2-try",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Tools",
+   "ask": "play",
+   "fyi": true,
+   "title": "Try GENERATE VIDEO on one clip",
+   "next": "ADMIN > ART LIBRARY: tap Open in the Art Library below, then press GENERATE VIDEO on that clip (about $0.25, a monster idle). The button changes to ASKED, WAITING. Wait about 3 to 6 minutes, with the page open or closed: the message under the button goes to Made and approved, or says why not (held by the gate, the video hardly moves, not made). All good if one of those lines appears. Something is wrong if nothing changes after 15 minutes or the page asks for a key.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "started by c-keysecrets2"
+   },
+   "links": [
+    {
+     "to": "art",
+     "ids": [
+      "clip-toad-idle"
+     ],
+     "label": "the clip to generate"
+    }
+   ],
+   "first": "Wait for the build keysecrets2 to be published.",
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Created by c-keysecrets2."
     }
    ]
   }

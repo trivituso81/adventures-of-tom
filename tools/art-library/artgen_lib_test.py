@@ -37,9 +37,9 @@ async def main():
     try:
         async with async_playwright() as p:
             b = await p.chromium.launch(executable_path=os.environ.get('CHROMIUM') or None)
-            c = await b.new_context(viewport={'width': 390, 'height': 844}); await c.add_init_script("localStorage.setItem('aot-art-key','test');localStorage.setItem('aot-gh-token','test');")
+            c = await b.new_context(viewport={'width': 390, 'height': 844}); await c.add_init_script("localStorage.setItem('aot-gh-token','test');")
             pg = await c.new_page(); errs = []; pg.on('pageerror', lambda e: errs.append(str(e)))
-            base = 'http://localhost:8851/art.html?xai=http://127.0.0.1:8852&gh=http://127.0.0.1:8852&artgen=http://127.0.0.1:8853'
+            base = 'http://localhost:8851/art.html?gh=http://127.0.0.1:8852&artgen=http://127.0.0.1:8853'
             await pg.goto(base + '&review=' + ID); await pg.wait_for_selector('#tabs .tab'); await pg.wait_for_function('()=>!document.getElementById("rv").hidden', timeout=8000)
             ok(await pg.evaluate("(id)=>(RES[id]||[]).length", ID) == 1 and await pg.evaluate("(id)=>RES[id][0].srv", ID) == ID + '@20261120T010000', 'the made picture is imported as the entry\'s result with srv')
             ok(await pg.evaluate("(id)=>ST[id]", ID) == 'wait', 'the entry shows as waiting on Tom')

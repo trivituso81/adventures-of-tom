@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """Test for the Clips tab of the Art Library (engine/art-clips.js, art.html) and the clip branch of art_bake.py. No real keys:
-the fake xAI and GitHub server (tools/art-library/stub.py) answers the video calls and serves a test video made here.
+the fake GitHub server (tools/art-library/stub.py) serves a test video made here.
 Run from the repo root:  python3 tools/art-library/clip_lib_test.py     (pictures go to tools/shots/artclip-*.png)
-Checks: GENERATE VIDEO sends the start picture and polls; a result appears; APPROVE is refused until START, HIT and END are
-marked in order; the battlefield preview draws; APPROVE commits the .mp4 and the marks; a half-made video is picked up again
-without a second charge; a video the browser may not copy is approved as its address; art_bake cuts the approved video
+Checks (keysecrets2: GENERATE VIDEO itself is tested in keysecrets2_test.py; here a result is put into the store): the page sends nothing to xAI; a result appears; APPROVE is refused until START, HIT and END are
+marked in order; the battlefield preview draws; APPROVE commits the .mp4 and the marks; a video the browser may not copy is approved as its address; art_bake cuts the approved video
 into a clip (in a scratch copy of the repo, nothing in the real tree changes)."""
 import os, re, sys, subprocess, time, json, base64, shutil, tempfile, importlib.util
 from playwright.sync_api import sync_playwright
@@ -37,7 +36,7 @@ def servers(nocors, video):
     stub = subprocess.Popen([sys.executable, os.path.join(ROOT, 'tools', 'art-library', 'stub.py'), '8814'], env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     time.sleep(1.2); return web, stub
 
-URL = 'http://localhost:8813/art.html?xai=http://127.0.0.1:8814&gh=http://127.0.0.1:8814'
+URL = 'http://localhost:8813/art.html?gh=http://127.0.0.1:8814'
 ID = 'clip-rose-boop'
 def open_card(pg):
     pg.goto(URL); pg.wait_for_selector('[data-tab="Clips"]'); pg.click('[data-tab="Clips"]')
@@ -48,6 +47,12 @@ def open_card(pg):
 def seek(pg, t):
     pg.evaluate("t=>{ const s=document.getElementById('cps'); s.value=String(t); s.dispatchEvent(new Event('input')); }", t)
     pg.wait_for_function("t=>{ const v=document.getElementById('rvvid'); return !v.seeking&&Math.abs(v.currentTime-t)<.05; }", arg=t)
+def give(pg, id, nocors):
+    """keysecrets2: a video no longer arrives from a button on this page (the clip-gen Action makes it), so a result is put into the device's store the way an
+    older GENERATE left it; REVIEW, the marks and APPROVE are what is tested here. nocors: the result keeps only the video's address."""
+    pg.evaluate("""async([id,addr,nocors])=>{ const e=ENTRY[id]; let blob=null; if(!nocors){ const r=await fetch(addr); blob=await r.blob(); }
+      await tx('readwrite',s=>s.put({key:id+'|1',id,n:1,blob,url:blob?'':addr,video:true,prompt:e.prompt,refs:[e.clip.start],t:Date.now()}));
+      RES[id]=await results(id); e.status='generated'; refreshItem(id); }""", [id, 'http://127.0.0.1:8814/video.bin', nocors])
 def log(pg): return json.loads(pg.request.get('http://127.0.0.1:8814/log').text())
 def files(pg): return json.loads(pg.request.get('http://127.0.0.1:8814/files').text())
 
@@ -56,16 +61,15 @@ def page_run(br, name, vp, nocors, video):
     try:
         c = br.new_context(viewport=vp); pg = c.new_page(); errs = []
         pg.on('pageerror', lambda e: errs.append(str(e)))
-        pg.goto(URL); pg.evaluate("()=>{ localStorage.setItem('aot-art-key','test'); localStorage.setItem('aot-gh-token','test'); localStorage.removeItem('aot-art-spend'); localStorage.removeItem('aot-clip-pending'); }")
+        pg.goto(URL); pg.evaluate("()=>{ localStorage.setItem('aot-gh-token','test'); }")
         open_card(pg)
         card = pg.locator(f'.card[data-id="{ID}"]')
         ok('GENERATE VIDEO' in card.inner_text() and '$0.07' in card.inner_text(), f'{name}: the card offers GENERATE VIDEO and shows the price ($0.07)')
         pg.wait_for_function("()=>{ const i=document.querySelector('.card[data-id=clip-rose-boop] .ref img'); return i&&i.complete; }")
         ok(card.locator('.ref img').evaluate('i=>i.naturalWidth>0'), f'{name}: the start picture shows on the card')
-        pg.click(f'.card[data-id="{ID}"] [data-gen]'); pg.wait_for_selector('.res video', timeout=60000)
+        give(pg, ID, nocors); pg.wait_for_selector('.res video', timeout=60000)
         L = log(pg); gen = [x for x in L if x.get('xai') == '/v1/videos/generations']; polls = [x for x in L if x.get('xai') == 'poll']
-        ok(len(gen) == 1 and gen[0]['duration'] == 3 and gen[0]['resolution'] == '480p' and gen[0]['model'] == 'grok-imagine-video-1.5-lite' and len(polls) >= 3, f'{name}: one video request (3 s, 480p, start picture attached), polled until done ({len(polls)} polls)')
-        ok(pg.evaluate("()=>localStorage.getItem('aot-clip-pending')") in ('{}', None) and abs(pg.evaluate("()=>spendGet().total") - .07) < 1e-6, f'{name}: the waiting note is cleared and $0.07 is counted once')
+        ok(not gen and not polls, f'{name}: this page sends no request to the video service (the key lives on GitHub)')
         ok(('address only' in pg.locator(f'.card[data-id="{ID}"]').inner_text()) == nocors, f'{name}: the result is ' + ('kept as an address only' if nocors else 'kept as a copy on the device'))
         pg.click('.res [data-res]'); pg.wait_for_selector('#rv:not([hidden])'); pg.wait_for_function("()=>document.getElementById('rvvid').readyState>=2", timeout=20000)
         ok(pg.evaluate("()=>!document.getElementById('rvvid').hidden&&document.getElementById('rvimg').hidden&&!document.getElementById('cliptools').hidden"), f'{name}: the review screen shows the video and its tools')
@@ -107,12 +111,6 @@ def page_run(br, name, vp, nocors, video):
         pg.screenshot(path=os.path.join(SHOTS, f'artclip-{name}-approved.png'))
         ok(not errs, f'{name}: no page errors {errs[:2]}')
         out = base64.b64decode(F[p]['content']) if not nocors else None
-        if name == 'portrait':   # a half-made video is picked up again, with no second request
-            rid = pg.evaluate("async()=>{ const r=await fetch('http://127.0.0.1:8814/v1/videos/generations',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer test'},body:JSON.stringify({model:'m',prompt:'p',image:{url:'data:image/png;base64,AA'},duration:3,resolution:'480p'})}); const j=await r.json(); localStorage.setItem('aot-clip-pending',JSON.stringify({'clip-rose-boop':{rid:j.request_id,t:Date.now(),prompt:'p',cost:.25}})); return j.request_id; }")
-            open_card(pg); ok('FETCH THE VIDEO' in pg.locator(f'.card[data-id="{ID}"]').inner_text(), 'after a reload the card offers FETCH THE VIDEO for the half-made video')
-            n0 = len([x for x in log(pg) if x.get('xai') == '/v1/videos/generations']); s0 = pg.evaluate("()=>spendGet().total")
-            pg.click(f'.card[data-id="{ID}"] [data-gen]'); pg.wait_for_function("()=>document.querySelectorAll('.res video').length==2", timeout=60000)
-            ok(len([x for x in log(pg) if x.get('xai') == '/v1/videos/generations']) == n0 and pg.evaluate("()=>spendGet().total") == s0, 'the half-made video arrived with no new request and no new charge')
         c.close(); return out
     finally:
         web.terminate(); stub.terminate(); time.sleep(.3)
@@ -127,7 +125,7 @@ def study_run(br, video):
     try:
         c = br.new_context(viewport={'width': 390, 'height': 844}); pg = c.new_page(); errs = []
         pg.on('pageerror', lambda e: errs.append(str(e)))
-        pg.goto(URL); pg.evaluate("()=>{ localStorage.setItem('aot-art-key','test'); localStorage.setItem('aot-gh-token','test'); localStorage.removeItem('aot-art-spend'); localStorage.removeItem('aot-clip-pending'); }")
+        pg.goto(URL); pg.evaluate("()=>{ localStorage.setItem('aot-gh-token','test'); }")
         pg.goto(URL); pg.wait_for_selector('[data-tab="Clips"]'); pg.click('[data-tab="Clips"]'); pg.evaluate("()=>{ UI.filter='all'; paintList(); }")
         ids = pg.evaluate("()=>DATA.entries.filter(e=>e.clip).map(e=>e.id+':'+e.clip.model+':'+e.clip.dur+':'+clipCost(e).toFixed(2))")
         ok(ids == ['clip-rose-boop:grok-imagine-video-1.5-lite:3:0.07', 'clip-rose-sleep:grok-imagine-video-1.5:4:0.33', 'clip-mudling-idle:grok-imagine-video-1.5:3:0.25'] + [f'clip-{o}-idle:grok-imagine-video-1.5:3:0.25' for o in ('grump', 'toad', 'log', 'bigone')] + CH1, f'study: the clip entries with their models, lengths and prices {ids}')
@@ -136,7 +134,7 @@ def study_run(br, video):
         if not pg.locator(f'.card[data-id="{SID}"]').count(): pg.click(f'[data-toggle="{SID}"]')
         pg.wait_for_function("()=>{ const i=document.querySelector('.card[data-id=clip-rose-boop] .ref img'); return i&&i.complete&&i.naturalWidth>0; }"); ok(True, 'study: the start picture shows on its card')
         pg.screenshot(path=os.path.join(SHOTS, 'artclip-study-card.png'))
-        pg.click(f'.card[data-id="{SID}"] [data-gen]'); pg.wait_for_selector(f'.card[data-id="{SID}"] .res video', timeout=60000)
+        give(pg, SID, False); pg.wait_for_selector(f'.card[data-id="{SID}"] .res video', timeout=60000)
         ok('No marks needed' in pg.locator(f'.card[data-id="{SID}"]').inner_text(), 'study: the card says no marks are needed')
         pg.click(f'.card[data-id="{SID}"] .res [data-res]'); pg.wait_for_selector('#rv:not([hidden])'); pg.wait_for_function("()=>document.getElementById('rvvid').readyState>=2", timeout=20000)
         vis = pg.evaluate("()=>({marks:document.querySelector('.cliprow.marks').offsetHeight, speed:document.querySelector('.cliprow.speed').offsetHeight, note:document.getElementById('clipstudy').offsetHeight, play:document.getElementById('cpplay').offsetHeight})")
@@ -165,12 +163,12 @@ def kind_run(br, video):
     try:
         c = br.new_context(viewport={'width': 390, 'height': 844}); pg = c.new_page(); errs = []
         pg.on('pageerror', lambda e: errs.append(str(e)))
-        pg.goto(URL); pg.evaluate("()=>{ localStorage.setItem('aot-art-key','test'); localStorage.setItem('aot-gh-token','test'); localStorage.removeItem('aot-art-spend'); localStorage.removeItem('aot-clip-pending'); }")
+        pg.goto(URL); pg.evaluate("()=>{ localStorage.setItem('aot-gh-token','test'); }")
         pg.goto(URL); pg.wait_for_selector('[data-tab="Clips"]'); pg.click('[data-tab="Clips"]'); pg.evaluate("()=>{ UI.filter='all'; paintList(); }")
         if not pg.locator(f'[data-toggle="{SID}"]').count(): pg.click('[data-grp="Clips|Chapter 1"]')
         if not pg.locator(f'.card[data-id="{SID}"]').count(): pg.click(f'[data-toggle="{SID}"]')
         pg.wait_for_function("()=>{ const i=document.querySelector('.card[data-id=clip-mudling-idle] .ref img'); return i&&i.complete&&i.naturalWidth>0; }"); ok(True, 'loop: the Mudling start picture shows on its card')
-        pg.click(f'.card[data-id="{SID}"] [data-gen]'); pg.wait_for_selector(f'.card[data-id="{SID}"] .res video', timeout=60000)
+        give(pg, SID, False); pg.wait_for_selector(f'.card[data-id="{SID}"] .res video', timeout=60000)
         ok('mark the start and the end' in pg.locator(f'.card[data-id="{SID}"]').inner_text(), 'loop: the card asks for the start and the end only')
         pg.click(f'.card[data-id="{SID}"] .res [data-res]'); pg.wait_for_selector('#rv:not([hidden])'); pg.wait_for_function("()=>document.getElementById('rvvid').readyState>=2", timeout=20000)
         vis = pg.evaluate("()=>({hit:document.querySelector('[data-mark=hit]').offsetHeight, first:document.querySelector('[data-mark=first]').offsetHeight, last:document.querySelector('[data-mark=last]').offsetHeight, help:document.getElementById('cliphelp').textContent})")
@@ -238,7 +236,7 @@ def edit_run(br, video):
     try:
         c = br.new_context(viewport={'width': 390, 'height': 844}); pg = c.new_page(); errs = []
         pg.on('pageerror', lambda e: errs.append(str(e)))
-        pg.goto(URL); pg.evaluate("(id)=>{ localStorage.setItem('aot-art-key','test'); localStorage.setItem('aot-gh-token','test'); localStorage.setItem('aot-art-edits',JSON.stringify({[id]:'an old edit made on the phone'})); localStorage.removeItem('aot-art-edit-rev'); }", BID)
+        pg.goto(URL); pg.evaluate("(id)=>{ localStorage.setItem('aot-gh-token','test'); localStorage.setItem('aot-art-edits',JSON.stringify({[id]:'an old edit made on the phone'})); localStorage.removeItem('aot-art-edit-rev'); }", BID)
         pg.goto(URL); pg.wait_for_selector('[data-tab="Clips"]'); pg.click('[data-tab="Clips"]'); pg.evaluate("()=>{ UI.filter='all'; paintList(); }")
         r = pg.evaluate("(id)=>({rev:ENTRY[id].promptRev||0,same:promptOf(ENTRY[id])===ENTRY[id].prompt,kept:JSON.parse(localStorage.getItem('aot-art-edits'))[id]!==undefined,words:ENTRY[id].prompt.split(/\\s+/).length})", BID)
         ok(r['rev'] >= 1, f"edits: the rewritten Boop prompt carries a promptRev ({r['rev']})")

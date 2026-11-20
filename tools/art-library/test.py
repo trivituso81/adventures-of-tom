@@ -91,7 +91,7 @@ async def main():
                 c = await b.new_context(viewport=vp, accept_downloads=True)
                 pg = await c.new_page(); errs = []
                 pg.on('pageerror', lambda e: errs.append(str(e)))
-                await pg.goto('http://localhost:8811/art.html?xai=http://127.0.0.1:8812&gh=http://127.0.0.1:8812')
+                await pg.goto('http://localhost:8811/art.html?gh=http://127.0.0.1:8812')
                 await ux_checks(pg, name, DATA)
                 await pg.click('[data-tab="Enemies"]')
                 await pg.click('[data-grp="Enemies|Test card"]'); await pg.click('[data-toggle="test-mudling"]'); await pg.wait_for_selector('.card[data-id="test-mudling"] [data-gen]')
@@ -162,7 +162,7 @@ async def main():
                     ok(doc['version'] == 1 and [e['id'] for e in doc['entries']][1:3] == ['tom-ab-button-mash', 'tom-ab-defend'] and len(doc['entries']) == EXPECT_TOTAL and all((e['status'], len(e['versions'])) == (lambda x: (x['status'], len(x['versions'])))(next(x for x in json.load(open(os.path.join(ROOT, 'data', 'art-prompts.json')))['entries'] if x['id'] == e['id'])) for e in doc['entries'][1:]), 'json otherwise untouched (every other entry keeps its committed status and versions)')
                     ok('gh-fixture-7731' not in await pg.content(), 'the GitHub token is not written into the page')
                     ls = await pg.evaluate('JSON.stringify(Object.keys(localStorage))')
-                    ok('aot-art-key' in ls, 'key lives in localStorage only')
+                    ok('aot-gh-token' in ls and 'xai' not in ls.lower(), 'the GitHub token lives in localStorage only, no xAI key is kept')
                     # --- UX: the page remembers where you were, and folds Setup once both keys are saved
                     await pg.evaluate('scrollTo(0, 250)'); await pg.wait_for_timeout(700)
                     await pg.reload(); await pg.wait_for_selector('[data-filter="all"]'); await pg.wait_for_timeout(600)   # the page now reads the prompts live from (mock) GitHub, so after the approve the test card is no longer under "To do" (2026-11-04)

@@ -9,7 +9,14 @@ name: clip-gen
 # for and not approved (a video that hardly moves), the report. Each run restores it first, so nothing is paid for twice.
 # Run it again after clipch1fix: it makes again only the clips whose prompt was rewritten since their rejection.
 
+# keysecrets2: GENERATE VIDEO and GENERATE CHAPTER in the Art Library commit data/clip-requests.json with the message "clip: generate <id or group>";
+# that push runs this workflow with --requests (the same job; gate on; the spend cap is the one the request carries, at most $40). The key stays the
+# repo secret XAI_API_KEY. A push that is not such a request skips the job without a checkout.
+
 on:
+  push:
+    branches: [main]
+    paths: ['data/clip-requests.json']
   workflow_dispatch:
     inputs:
       group:
@@ -32,6 +39,10 @@ on:
         description: 'true: judge each video with the clip gate (tools/clip-gate) before approving; a clip that fails is held on branch clipgen, not approved.'
         required: false
         default: 'true'
+      requests:
+        description: 'keysecrets2: true = work through data/clip-requests.json (what the Art Library asked for) instead of a group.'
+        required: false
+        default: 'false'
       dry_run:
         description: 'true: list what would be made and the cost, call nothing, spend nothing.'
         required: false
@@ -47,6 +58,7 @@ concurrency:
 
 jobs:
   gen:
+    if: "github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, 'clip: generate ')"
     runs-on: ubuntu-latest
     timeout-minutes: 240
     env:
@@ -91,10 +103,14 @@ jobs:
           CAP: ${{ inputs.cap }}
           DRY: ${{ inputs.dry_run }}
           GATE: ${{ inputs.gate }}
+          EVENT: ${{ github.event_name }}
+          REQ: ${{ inputs.requests }}
         run: |
           set -o pipefail
           ARGS=(--group "${GROUP:-Chapter 1}" --limit "${LIMIT:-0}" --cap "${CAP:-8}" --out "$RUNNER_TEMP/clipgen")
           [ -n "$IDS" ] && ARGS+=(--ids "$IDS")
+          if [ "$EVENT" = "push" ]; then GATE=true; REQ=true; fi
+          [ "$REQ" = "true" ] && ARGS+=(--requests)
           [ "$GATE" = "true" ] && ARGS+=(--gate)
           [ "$DRY" = "true" ] && ARGS+=(--dry-run)
           if [ "$DRY" != "true" ] && [ -z "$XAI_API_KEY" ]; then echo "Repo secret XAI_API_KEY is empty or missing."; exit 2; fi
