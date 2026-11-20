@@ -1712,7 +1712,7 @@
    "title": "Walk the Square and Rivituso Row and check Grace and Rose keep up",
    "theme": "Story and Dialogue",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "After the publish of build follow1: RELOAD on the title, load a chapter 1 save after the kitchen, and walk from the top of the Long Island Square down to the south exit and on through Rivituso Row. Grace and Rose should stay one tile behind you the whole way and never stop and run to catch up. Report with the REPORT tab if they still do (follow1 is the build to name).",
@@ -1727,8 +1727,13 @@
     {
      "d": "2026-11-19",
      "t": "Added by follow1: your phone check of the follower fix; blocks nothing."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom did this."
     }
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "t-cutpolish4b",
