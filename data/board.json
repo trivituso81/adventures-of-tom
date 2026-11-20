@@ -7565,7 +7565,7 @@
    "title": "Board redesign 2: cards and the card panel",
    "theme": "Tools",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "boardux2",
    "next": "Built and pushed as boardux2: every card is kicker, short title, the instruction (precondition on its own First line), one state line and one button row; All good can be undone for 8 seconds; the card panel keeps its main button in a bar at the bottom with More for the rest; open card titles shortened and checked by board_check. Nothing for you to do: you test once, after redesign 3. Next is Board redesign 3 (c-boardux3).",
    "blocks": [
@@ -7597,6 +7597,10 @@
     {
      "d": "2026-11-20",
      "t": "Built boardux2 (plan sections 3.4, 3.5, 3.7). Checks A10, A11 and A13 pass; what differs from the plan is in claude/boardux-plan.md, Built section (in the repo and the Project)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as boardux2: Board cards read without opening them, and the card panel keeps its main button in view"
     }
    ],
    "prompt": {
@@ -7608,15 +7612,15 @@
     "effort": "medium (the design is written in the plan)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/boardux-plan.md (all of it, with its Built section), then card c-boardux2 in data/board.json with its history. Your first push is the commit board: start c-boardux2. Build phase 2 (boardux2) as plan sections 3.4, 3.5, 3.7 and 5 say, with checks A10, A11 and A13, and push it as boardux2. Fetch and rebase before every push, because other sessions change board.html. Keep every feature the page has today (check A13). Run tools/board_shots.py and look at every picture before pushing. Write what you built, and anything that differs from the plan, into the plan's Built section (in the repo and in the Project copy). Do not start the next phase. You have my full permission to access the repo."
    },
-   "after": "nothing for Tom: c-boardux3"
+   "after": "nothing for Tom: c-boardux3",
+   "done": "2026-11-20"
   },
   {
    "id": "c-boardux3",
    "title": "Board redesign 3: four views, search and the wide layout",
    "theme": "Tools",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "tag": "boardux3",
    "next": "Waits on Board redesign 2 (c-boardux2). Then the board becomes four views with the same names at every screen size (For you, Claude, Chats, Shipped), with a tab bar on the phone, two columns clear of the fold on the open Duo, search, and Shipped grouped by day. After it ships you try the whole redesign once (card t-boarduxtry).",
    "blocks": [
@@ -7636,6 +7640,10 @@
     {
      "d": "2026-11-20",
      "t": "From boardux2: the card and sheet are rebuilt (cardHtml, stateLine, actsHtml, openSheet with shell()); the lanes grid still uses them. Send to backlog, Not needed and Note sit behind More. See the Built section of claude/boardux-plan.md before starting."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Board redesign 2: cards and the card panel is done."
     }
    ],
    "prompt": {
@@ -7848,7 +7856,7 @@
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukF9WyZvzUwNPb9AsGe",
+    "url": "https://claude.ai/code/session_01RXeukCqNGVM6VpAdv1kfVV",
     "opening": "pasted by Tom from the board"
    },
    "history": [
@@ -7859,6 +7867,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom copied the prompt to paste it into a new conversation."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started: the conversation claimed this card."
     },
     {
      "d": "2026-11-20",
@@ -9067,14 +9079,14 @@
    "title": "An ITEM GAINED banner for items from talks and wins",
    "theme": "Game Shell",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "tag": "itembanner1",
    "next": "Not started. Builds a banner like the join and leave banner that shows every time the party gets an item by talking to a character or by defeating one (a fight win, or any other way of beating them): the item's picture and name, a short jingle, held until you tap or press A. It replaces the small 'Got ... It went in a pocket.' popup for those cases. No new pictures or recordings are needed from you.",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukH7Bt1pVs2P9KoLzqc",
+    "url": "https://claude.ai/code/cse_01RXeukH6yUh6dbf3JPguMqy",
     "opening": "\"I do think we need to add to our Kanban board a feature that basically anytime a item is retrieved through conversation with a character or through defeating a character...\""
    },
    "history": [
@@ -9089,6 +9101,10 @@
     {
      "d": "2026-11-20",
      "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -9099,8 +9115,7 @@
     "model": "Claude Sonnet 5.5 (row C: every place that hands out an item must be found first, tests catch mistakes)",
     "effort": "medium (a small piece, modelled on the existing party banner)",
     "text": "Read CLAUDE.md, then build card c-itembanner1 (build itembanner1) from data/board.json: an ITEM GAINED banner in the style of the join and leave banner (engine/party-banner.js), shown every time the party gets an item from a conversation or scene with a character (grantItem in data/party.js, the give step in engine/story.js, NPC onClose gifts, data/ellie-quests.js, engine/nara.js) or from defeating a character by any means (fight rewards in the old battle and in Battle 3, and story defeats). It shows the item's existing picture and name with a short original jingle, holds the game until dismissed exactly like the party banner, queues behind party banners, and puts several items from one source on one banner. It replaces the 'Got ... It went in a pocket.' popup for these cases; keep the auto-gear note as the banner's second line. Shop purchases keep their current message. Reuse the party banner's code where possible. Add a test in portrait and landscape and a Tom play card as the after. You have my full permission to access the repo."
-   },
-   "start": true
+   }
   },
   {
    "id": "b-board-itembanner",
@@ -9462,6 +9477,30 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc",
+   "title": "Board redesign 1: an honest header and status",
+   "first": "2026-11-19T23:36:20-08:00",
+   "last": "2026-11-20T01:09:42-08:00",
+   "tags": [
+    "boardux1",
+    "boardux2"
+   ],
+   "cards": [
+    "c-boardux1",
+    "c-boardux2"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukCqNGVM6VpAdv1kfVV",
+   "title": "Casa Alvarez: place the six walkers and check the 18 pages",
+   "first": "2026-11-20T01:09:04-08:00",
+   "last": "2026-11-20T01:09:04-08:00",
+   "tags": [],
+   "cards": [
+    "c-alvarez"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukH7Bt1pVs2P9KoLzqc",
    "title": "An ITEM GAINED banner whenever the party gets an item from a conversation or from beating someone (itembanner1)",
    "first": "2026-11-20T01:05:19-08:00",
@@ -9512,19 +9551,6 @@
    "cards": [
     "c-boardwait1",
     "c-fix-ch1starving-3"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc",
-   "title": "Board redesign 1: an honest header and status",
-   "first": "2026-11-19T23:36:20-08:00",
-   "last": "2026-11-20T00:40:01-08:00",
-   "tags": [
-    "boardux1"
-   ],
-   "cards": [
-    "c-boardux1",
-    "c-boardux2"
    ]
   },
   {
@@ -10156,8 +10182,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "dc42db608cf507df107d6e8e4d9b90972b2aa78a",
- "synced_at": "2026-11-20T09:07:15+00:00",
+ "synced": "a04c3f9f240271a0428d5590b42907d01cb01652",
+ "synced_at": "2026-11-20T09:10:07+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
