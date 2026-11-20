@@ -16126,7 +16126,7 @@
   {
    "id": "t-keysecrets1-try",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "play",
    "title": "Try GENERATE on one picture",
@@ -16153,9 +16153,15 @@
     {
      "d": "2026-11-20",
      "t": "Created by c-keysecrets1 when it shipped."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-20T21:22:49.797Z"
     }
    ],
-   "first": "Wait for the build keysecrets1 to be published."
+   "first": "Wait for the build keysecrets1 to be published.",
+   "done": "2026-11-20"
   },
   {
    "id": "c-keysecrets2",
