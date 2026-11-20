@@ -13795,10 +13795,10 @@
    "id": "t-projclean-run",
    "title": "Run the Project clean-up inside the Project",
    "theme": "Project Ops",
-   "lane": "tom",
+   "lane": "claude",
    "col": "up",
    "ask": "setup",
-   "next": "Open a new conversation INSIDE the Little Elsewhere Project (not a code session). Paste: Board card c-projclean. Read CLAUDE.md and claude/handoff-rules.md, then follow the prompt of card c-projclean in data/board.json. If the copy is stopped by a safety check again, do the copying yourself in the main conversation, 20 docs at a time, no forks. You should see the first push named board: start c-projclean.",
+   "next": "Handed to Claude by Tom: I dont want to do this - Claude should",
    "blocks": [
     "c-projclean"
    ],
@@ -13808,11 +13808,27 @@
     {
      "d": "2026-11-20",
      "t": "Made by a START run of c-projclean, which cannot reach the Project."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom handed this to Claude: I dont want to do this - Claude should",
+     "at": "2026-11-20T17:56:38.783Z"
     }
    ],
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukD7sCjzp3NJTWyxHVn",
     "opening": "unknown"
+   },
+   "tag": "t-projclean-run",
+   "note": "I dont want to do this - Claude should",
+   "prompt": {
+    "what": "Works out what Tom wants from his note, rewrites this card, and does the work.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the steps are not written yet)",
+    "effort": "medium (a handed-over card is usually one piece of work)",
+    "text": "Read claude/handoff-rules.md. Tom handed you board card t-projclean-run with this note: I dont want to do this - Claude should. Work out what is needed, rewrite the card, and do it. You have my full permission to access the repo."
    }
   },
   {
