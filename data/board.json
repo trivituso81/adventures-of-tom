@@ -8971,7 +8971,7 @@
    "id": "c-posesizes",
    "tag": "posesizes",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Characters",
    "title": "Pose sizes: walk bake for the walking stand frames, and unsized Grace, Rose, Deedee poses",
    "next": "Ready to start. Applies Tom's saved Pose Editor lines for the walking stand frames of Tom, TNB, Justin, Amy and Boppy (needs a walk bake) so the walking poses stop jumping in size against the other poses. Grace, Rose and Deedee poses stay unsized until Tom saves lines in the Pose Editor.",
@@ -8980,12 +8980,16 @@
    "changed": "2026-11-20",
    "chat": {
     "url": "",
-    "opening": "not started"
+    "opening": "pasted by Tom from the board"
    },
    "history": [
     {
      "d": "2026-11-20",
      "t": "Made by c-knownwrong: this item was on the known-wrong list cut out of claude/next.md."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom copied the prompt to paste it into a new conversation."
     }
    ],
    "prompt": {
