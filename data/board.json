@@ -13961,7 +13961,8 @@
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukD7bLW4PRyJD2QqaXo",
     "opening": "started by START"
-   }
+   },
+   "quiet": true
   },
   {
    "id": "c-startmore-sonnet",
@@ -13998,7 +13999,8 @@
    "chat": {
     "url": "https://claude.ai/code/cse_01RXeukD59Es2YREGQE1ccjc",
     "opening": "started by START"
-   }
+   },
+   "quiet": true
   },
   {
    "id": "t-gatezero-decide",
@@ -17577,8 +17579,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "2ca0a60cce5e2bbccdb09cb909323d5b647927d1",
- "synced_at": "2026-11-20T19:42:41+00:00",
+ "synced": "d78cfdf54a0a3f29c0f2b0eeb888bb38cecbc2da",
+ "synced_at": "2026-11-20T19:43:33+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
