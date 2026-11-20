@@ -5488,22 +5488,11 @@
    "col": "wait",
    "theme": "Areas",
    "ask": "pictures",
-   "title": "Make the seven chapter 1 pictures",
-   "next": "ADMIN > ART LIBRARY, group Chapter 1 (Props, Characters and Enemies tabs). For each of ch1-grace-list, ch1-amy-window, ch1-ellie-door, ch1-cab-pulls-away, ch1-rose-shoulders, ch1-mudling-muffins and ch1-bigone-green-pan: press GENERATE, then APPROVE, or REJECT with a note. When all seven are approved, card c-ch1art3 (Claude installs them in the game) can start.",
+   "title": "Chapter 1 pictures: six were not needed, only Grace's list is left",
+   "next": "ADMIN > ART LIBRARY, Props tab, group Chapter 1: it now reads 10 of 10 approved. The six pictures you questioned are gone (Amy's window, Aunt Ellie's door, the cab pulling away, Rose on shoulders, Mudling with muffins, green Big One). Nothing to generate. Read the last line of this card's history for why, then tap All good: card c-ch1art3 then installs Grace's list (already approved) in the game.",
    "blocks": [
     "c-ch1art3"
    ],
-   "done_when": {
-    "art_approved": [
-     "ch1-grace-list",
-     "ch1-amy-window",
-     "ch1-ellie-door",
-     "ch1-cab-pulls-away",
-     "ch1-rose-shoulders",
-     "ch1-mudling-muffins",
-     "ch1-bigone-green-pan"
-    ]
-   },
    "history": [
     {
      "d": "2026-11-19",
@@ -5516,10 +5505,14 @@
     {
      "d": "2026-11-19",
      "t": "Tom: something is wrong: i dont understand why we need this art. like it doesnt make sense based on how the game works (except grace's list). explain Sent to Claude as card c-fix-ch1art2; this card waits on it and comes back to you when the fix ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Why those pictures were asked for, and why you are right (fix-ch1art2): the chapter 1 teardown made one Library entry per story beat without checking what the game shows there. Amy already leans out of the real window in the street painting with her own figure and face. Aunt Ellie already stands at her own door as a person with her own face. The cab leaving is a fade to black, then the phone on the seat (installed). Tom with Rose on his shoulders is already three painted sheets, and one standing picture cannot become a frame of a sheet. The Mudling already holds the painted muffin pan. The green Big One would bake the pan in and recolour the fish its 11 approved clips were made from, but the pan comes off during the scene and in battle by code. All six are removed from the Library. Grace's list stays: nothing draws it today."
     }
    ],
    "created": "2026-11-19",
-   "changed": "2026-11-19",
+   "changed": "2026-11-20",
    "waiting_on": "claude"
   },
   {
@@ -5529,26 +5522,30 @@
    "waiting_on": "tom",
    "theme": "Areas",
    "tag": "ch1art3",
-   "title": "Install the seven approved chapter 1 pictures in place of the code stand-ins",
-   "next": "Waits on card t-ch1art2 (your approvals). Then replace each chapter 1 stand-in with its approved picture, the way cutpolish4b did, test the scenes in portrait and landscape, push.",
+   "title": "Install Grace's approved list picture in the game (chapter 1 opening scene)",
+   "next": "Waits on card t-ch1art2 (your All good). Then show ch1-grace-list as a close-up in the Square scene where Grace unfolds her list, the way the phone on the seat was installed, test portrait and landscape, push.",
    "prompt": {
-    "what": "Puts the seven approved chapter 1 pictures (Grace's list, Amy's window, Aunt Ellie's door, the cab, Rose on shoulders, Mudling with muffins, green Big One with pan) into the game in place of the code stand-ins.",
+    "what": "Puts Grace's approved list picture into the game: the close-up that shows when Grace unfolds her notebook paper in the first Square scene.",
     "before": [
-     "Card t-ch1art2 is done: all seven entries are approved in ADMIN > ART LIBRARY, group Chapter 1."
+     "Card t-ch1art2 is done (you tapped All good). Grace's list, ch1-grace-list, is already approved in ADMIN > ART LIBRARY, group Chapter 1."
     ],
-    "model": "Claude Sonnet 5.5 (row C: no written install steps for these seven, the session works them out from cutpolish4b)",
-    "effort": "medium (each install is small and follows the cutpolish4b pattern)",
-    "text": "Install the seven approved chapter 1 pictures from ADMIN > ART LIBRARY group Chapter 1 (ch1-grace-list, ch1-amy-window, ch1-ellie-door, ch1-cab-pulls-away, ch1-rose-shoulders, ch1-mudling-muffins, ch1-bigone-green-pan) in place of their code stand-ins, the way cutpolish4b installed the muffin pan and the phone close-up. Board card c-ch1art3. You have my full permission to access the repo."
+    "model": "Claude Sonnet 5.5 (row C: one picture, the install pattern is in the repo)",
+    "effort": "medium (one close-up, follows the phone-on-seat install)",
+    "text": "Read CLAUDE.md. Install the approved Art Library picture ch1-grace-list as a chapter 1 close-up. The pattern is the phone on the seat from cutpolish4b: data/closeup-ch1.js (CH1_REVEAL entry and the ch1Reveal step), tools/art-library/bake_closeup_ch1.py (bakes art/closeup/ch1-*.webp from the approved entry), docs/CHANGES.md fix-cutpolish4b. In SCENES.ch1Goal in data/scenes.js, where the comment says Grace unfolds a piece of notebook paper, add a {ch1Reveal:'list'} step so the list shows, then the scene carries on. No dialogue text changes. Look at the frames in portrait and landscape. Board card c-ch1art3. You have my full permission to access the repo."
    },
    "history": [
     {
      "d": "2026-11-19",
      "t": "Made by ch1art2."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Narrowed to Grace's list only by fix-ch1art2: the other six pictures were removed from the Art Library because the game has no place to show them."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
-   "changed": "2026-11-19",
+   "changed": "2026-11-20",
    "chat": {
     "url": "",
     "opening": "not started"
@@ -5773,7 +5770,7 @@
     "t-ch1art2"
    ],
    "created": "2026-11-19",
-   "changed": "2026-11-19",
+   "changed": "2026-11-20",
    "reports": [
     {
      "at": "2026-11-20T02:43:56.264Z",
@@ -5801,6 +5798,10 @@
     {
      "d": "2026-11-19",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fixed: explained on card t-ch1art2 and removed the six unneeded entries from the Art Library (Amy's window, Aunt Ellie's door, the cab, Rose on shoulders, Mudling with muffins, green Big One); Grace's list stays. No pencil report was filed since 2026-11-20T02:43:56Z, so none was marked done. Shipping as fix-ch1art2."
     }
    ],
    "prompt": {

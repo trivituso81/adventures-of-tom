@@ -1,3 +1,22 @@
+## fix-ch1art2 (2026-11-20): six chapter 1 picture requests removed from the Art Library; only Grace's list is left
+
+- Card c-fix-ch1art2. Tom (t-ch1art2, Make the seven chapter 1 pictures): "i dont understand why we need this art. like it doesnt make sense based on how the game works (except grace's list). explain". He is right about six of the seven. They came from the chapter 1 teardown (ch1rebuild1), which made one Library entry per story beat without checking what the game shows at that beat.
+- What the game does at each beat, checked by playing the scene in portrait and landscape (`tools/scene_frames.py`, ch1Amy, ch1Ellie, ch1Pond):
+
+| Entry removed | What the game already does | Why a picture has no place |
+|---|---|---|
+| ch1-amy-window | Amy leans out of the real dormer window in the Row painting, with her own street figure and her talking face (amywin1, Tom 11-19) | No scene step shows a window close-up |
+| ch1-ellie-door | Aunt Ellie is spawned at her own door on the Row as a person with her own sheet and talking face | No scene step shows a door close-up |
+| ch1-cab-pulls-away | ch1Sunday fades to black as the cab leaves, then shows the phone on the seat (installed) | No step shows the cab |
+| ch1-rose-shoulders | Tom with Rose on his shoulders is already three painted sheets (walk, scene poses `tr_*`, battle) | One standing picture cannot become a frame of a sheet; the ear-turn in ch1Goal is a 0.25 s beat |
+| ch1-mudling-muffins | The Mudling already holds the painted `ch1/pan_full` (fix-cutpolish4b) | No screen shows a large Mudling |
+| ch1-bigone-green-pan | The pan is a prop the code puts on and takes off: it flies off in ch1Pond and when Rose's Raspberry hits in battle | A sheet with the pan baked in cannot come off; recolouring the fish green would also break the 11 approved Big One clips, which were made from the blue sheet |
+
+- Removed from `tools/art-library/ch01-prompts.js` and `data/art-prompts.json` (126 lines, no other change). Chapter 1 Props in the Library now reads 10 of 10 approved (checked in portrait and landscape). `ch1-grace-list` stays: it is approved, and ch1Goal still has Grace unfolding paper with nothing drawn. Installing it is card c-ch1art3, now rewritten to that one picture.
+- Seen, not changed: in ch1Pond the Big One shows its baked tin cap under a small code-drawn silver pan (a double hat); battle draws a code helmet the same way (`engine/battle2-ui.js` pietin). A fix would be the painted `ch1/pan_empty` on the head, no new art. Not done: Tom did not ask for it.
+- In-game pencil reports filed since 2026-11-20T02:43:56Z: none (the 7 open reports on branch inbox are all from 11-14 and none is about these pictures), so none marked done.
+- No game file changed (only the build stamp). Tests: `python3 tools/smoke.py` FAILS: [], board_check.py --push, board_sync_test.py, board_test.py, buildlog_test.py all pass; zero references to the six ids remain in the Library files; the Library page checked in portrait and landscape.
+
 ## skilllist1 (2026-11-19): SKILLS list names and pictures a little smaller
 
 - Tom (11-19 18:34 and 18:36): "the font in the battle ability list is just a touch too big. will it accommodate the max number of icons?" and "The icons can also be smaller".
