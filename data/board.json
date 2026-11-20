@@ -7298,14 +7298,14 @@
    "title": "Board redesign 1: an honest header and status",
    "theme": "Tools",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "tag": "boardux1",
    "next": "Built and pushed as boardux1: one row header with a menu, a sync light and behind bar, the new status words (Needs attention is the only red), Since you last looked, and the new colour tokens. Nothing for you to do: you test once, after redesign 3. Next is Board redesign 2 (c-boardux2).",
    "blocks": [
     "c-boardux2"
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-19",
    "chat": {
     "url": "https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc",
     "opening": "not started"
@@ -7322,6 +7322,10 @@
     {
      "d": "2026-11-20",
      "t": "Built boardux1 (plan sections 3.2, 3.3 without search and themes, 3.6). Checks A1, A2, A7, A8, A9 and A13 pass; what differs from the plan is in claude/boardux-plan.md, Built section."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Shipped as boardux1: The board header fits a phone, says when its data is behind, and a normal queue is no longer red"
     }
    ],
    "prompt": {
@@ -7333,22 +7337,22 @@
     "effort": "medium (steps are known)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and the Project docs claude/boardux-plan.md and claude/boardux-cards.json. Your first push is the commit board: start c-boardux1. In that same push add the four cards from claude/boardux-cards.json to data/board.json (re-read the board first and merge; skip any already there) and copy the plan into the repo as claude/boardux-plan.md. Then build phase 1 (boardux1) as plan sections 3.2, 3.3 (not search or themes), 3.6 and 5 say, with checks A1, A2, A7, A8, A9 and A13, and push it as boardux1. Fetch and rebase before every push, because other sessions change board.html. Keep every feature the page has today (check A13). Run tools/board_shots.py and look at every picture before pushing. Write what you built, and anything that differs from the plan, into the plan's Built section (in the repo and in the Project copy). Do not start the next phase. You have my full permission to access the repo."
    },
-   "after": "nothing for Tom: c-boardux2"
+   "after": "nothing for Tom: c-boardux2",
+   "done": "2026-11-19"
   },
   {
    "id": "c-boardux2",
    "title": "Board redesign 2: cards and the card panel",
    "theme": "Tools",
    "lane": "claude",
-   "col": "wait",
-   "waiting_on": "claude",
+   "col": "up",
    "tag": "boardux2",
    "next": "Waits on Board redesign 1 (c-boardux1). Then it redraws every card (short title, the instruction readable without opening it, one status line, one main button, undo on All good) and the panel that opens on a tap (main action always in view), and shortens the titles of the open cards.",
    "blocks": [
     "c-boardux3"
    ],
    "created": "2026-11-20",
-   "changed": "2026-11-20",
+   "changed": "2026-11-19",
    "chat": {
     "url": "",
     "opening": "not started"
@@ -7357,6 +7361,10 @@
     {
      "d": "2026-11-20",
      "t": "Added from the board design assessment (planning chat https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc). Plan: claude/boardux-plan.md."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Unblocked: Board redesign 1: an honest header and status is done."
     }
    ],
    "prompt": {
@@ -7980,6 +7988,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc",
+   "title": "Board redesign 1: an honest header and status",
+   "first": "2026-11-19T23:36:20-08:00",
+   "last": "2026-11-19T23:53:18-08:00",
+   "tags": [
+    "boardux1"
+   ],
+   "cards": [
+    "c-boardux1"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukHFr2kMgU1c6NePBaP",
    "title": "Fix what you found on: Check Tom's line \"Thank you for telling me, Rose\" now ends at \"can't wait\" (I'm starving! ",
    "first": "2026-11-19T23:43:31-08:00",
@@ -7987,16 +8007,6 @@
    "tags": [],
    "cards": [
     "c-fix-ch1starving-2"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFvqFwkYY6QshQt5jc",
-   "title": "Board redesign 1: an honest header and status",
-   "first": "2026-11-19T23:36:20-08:00",
-   "last": "2026-11-19T23:36:20-08:00",
-   "tags": [],
-   "cards": [
-    "c-boardux1"
    ]
   },
   {
@@ -8579,8 +8589,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "3e55178d3554e52846f6e9c3d1a20ee5d06b695d",
- "synced_at": "2026-11-20T07:47:54+00:00",
+ "synced": "fa9d0d00340892bba52971ee788d114ee1ef4d35",
+ "synced_at": "2026-11-20T07:55:00+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
