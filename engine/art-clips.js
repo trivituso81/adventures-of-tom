@@ -84,7 +84,7 @@ async function clipPoll(){
   for(const p of P){
     // repAt is NaN when the phone cannot read the report's time: then the report counts when it names this clip (the job replaces the file on every run)
     const mine=rep&&rep.mode==='requests'&&(repAt!==repAt||repAt>=p.at-120000)&&(p.ids||[]).some(i=>(rep.asked||[]).includes(i));
-    if(!mine){ left.push(p); const mins=Math.max(0,Math.round((Date.now()-p.at)/60000)); for(const id of p.ids||[]) if(ENTRY[id]&&MSG[id]&&!MSG[id].err){ MSG[id]={text:'Asked '+mins+' min ago. GitHub is still making the video; this line updates by itself (checked '+new Date().toLocaleTimeString()+').',err:false}; refreshItem(id); } continue; }
+    if(!mine){ left.push(p); const mins=Math.max(0,Math.round((Date.now()-p.at)/60000)); for(const id of p.ids||[]) if(ENTRY[id]&&MSG[id]&&!MSG[id].err){ MSG[id]={text:'Asked '+mins+' min ago. GitHub is still making the video'+(rep?'':' (this phone could not read the job report just now; it tries again)')+'; this line updates by itself (checked '+new Date().toLocaleTimeString()+').',err:false}; refreshItem(id); } continue; }
     const why=(rep.failed||[]).find(x=>x.id==='*');
     for(const id of p.ids||[]){
       const f=(rep.failed||[]).find(x=>x.id===id)||why, h=(rep.held||[]).find(x=>x.id===id), b=(rep.blocked||[]).find(x=>x.id===id), s=(rep.skipped||[]).find(x=>x.id===id);

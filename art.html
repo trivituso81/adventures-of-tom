@@ -143,7 +143,7 @@ header{padding:10px 28px}
 </div>
 <div id="toast"></div>
 <script src="engine/admin-music.js?v=adminvol1"></script>
-<script src="engine/art-clips.js?v=fix-keysecrets2-try"></script>
+<script src="engine/art-clips.js?v=fix-keysecrets2-try-3"></script>
 <script>
 // Art Library (Phase B). Prompts come from data/art-prompts.json (Claude writes them with tools/art-library/make-prompts.js).
 // GENERATE (keysecrets1) does not call xAI from this device: it commits data/art-requests.json ("art: generate <id>") and the art-gen Action makes the picture
@@ -439,9 +439,10 @@ const textToB64=s=>{ const u=new TextEncoder().encode(s); let b=''; for(let i=0;
 const b64ToText=c=>{ const bin=atob(String(c).replace(/\s/g,'')), u=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i); return new TextDecoder().decode(u); };
 async function gh(method,path,body){
   const tok=LS.get('aot-gh-token'); if(!tok) throw new Error('Paste the GitHub token at the top first.');
-  let r; try{ r=await fetch(ghUrl(path)+(method==='GET'?'?ref='+GH_BRANCH+'&t='+Date.now():''),{method,cache:'no-store',headers:Object.assign({Authorization:'Bearer '+tok,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},body?{'Content-Type':'application/json'}:{}),body:body?JSON.stringify(body):undefined}); }
-  catch(err){ throw new Error('The browser could not reach GitHub. Check the network and try again.'); }
-  const txt=await r.text(); let j=null; try{j=JSON.parse(txt);}catch(x){}
+  const ab=new AbortController(), tm=setTimeout(()=>ab.abort(),25000);   // a stalled network ends in a plain error instead of hanging
+  let r; try{ r=await fetch(ghUrl(path)+(method==='GET'?'?ref='+GH_BRANCH+'&t='+Date.now():''),{method,signal:ab.signal,cache:'no-store',headers:Object.assign({Authorization:'Bearer '+tok,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},body?{'Content-Type':'application/json'}:{}),body:body?JSON.stringify(body):undefined}); }
+  catch(err){ clearTimeout(tm); throw new Error('The browser could not reach GitHub. Check the network and try again.'); }
+  const txt=await r.text(); clearTimeout(tm); let j=null; try{j=JSON.parse(txt);}catch(x){}
   return {status:r.status,ok:r.ok,json:j,text:txt.split(tok).join('[token]').slice(0,300)};
 }
 // Read a repo file straight from GitHub (fresh within seconds of a push; the GitHub Pages copy can lag up to 10 minutes). Needs the token. Files over 1 MB come by blob id.

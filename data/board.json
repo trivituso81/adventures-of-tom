@@ -16819,7 +16819,7 @@
    "ask": "play",
    "fyi": true,
    "title": "Try GENERATE VIDEO on one clip",
-   "next": "ADMIN > ART LIBRARY: tap Open in the Art Library below, find clip-toad-idle under Clips > Chapter 1 (it is approved) and press GENERATE VIDEO (about $0.25). It should no longer refuse. Under the button you should see 'Asked N min ago. GitHub is still making the video' updating every 20 seconds, then 'Made and approved'. All good if that line moves. Something is wrong if it stays on 'Asked' after 10 minutes or shows an error.",
+   "next": "ADMIN > ART LIBRARY: first close the Art Library and open it again from the home-screen app (it now loads a new script, build fix-keysecrets2-try-3). Tap Open in the Art Library below, find clip-toad-idle under Clips > Chapter 1 and press GENERATE VIDEO (about $0.25). You should see 'Asked N min ago. GitHub is still making the video' updating every 20 seconds, then 'Made and approved' after about 3 to 6 minutes. All good if that line moves to 'Made and approved'. Something is wrong if it shows an error, or says the phone could not read the job report for more than 10 minutes.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -16868,9 +16868,14 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: it hangs Sent to Claude as card c-fix-keysecrets2-try-3; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T23:06:32.121Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fix fix-keysecrets2-try-3 shipped: the phone was still running the old video script because its cache tag had not moved; now it loads the new one, and a stalled network ends in a plain error."
     }
    ],
-   "waiting_on": "claude"
+   "waiting_on": "claude",
+   "after": null
   },
   {
    "id": "c-fix-keysecrets2-try",
@@ -17108,6 +17113,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Cause found: stale cached script (tag not bumped in try-2). Fixed and pushed as build fix-keysecrets2-try-3."
     }
    ],
    "prompt": {

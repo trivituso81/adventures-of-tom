@@ -1,3 +1,11 @@
+## fix-keysecrets2-try-3 (2026-11-20): the Art Library page no longer serves a stale video script, and a stalled network ends in a plain line
+
+Card c-fix-keysecrets2-try-3. Tom (t-keysecrets2-try): "it hangs".
+- Cause (fact): the try-2 fix changed `engine/art-clips.js` (it dropped the client refusal for an approved clip) but `art.html` still loaded it as `?v=fix-keysecrets2-try`. The service worker keeps `?v=` files cache-first, so the phone kept the old script. The tag is now `fix-keysecrets2-try-3`.
+- `gh()` in `art.html` gives up after 25 seconds with the plain "could not reach GitHub" line instead of waiting forever on "Sending the request to GitHub...".
+- While waiting, if the phone cannot read the job report, the line says so instead of looking frozen.
+- The server side was checked: the clip-gen runs for clip-toad-idle (21:53) and clip-tom-give (22:54) both finished and approved; no request was pushed after 22:57.
+
 ## reports-2026-11-20b (2026-11-20): report backlog, Chapter 1 script cuts, Sal's ride and Rose's facing
 
 Card c-reports-5. Tom's notes (report ids in brackets), done in ch1 `data/scenes.js`, `engine/story.js`, `engine/travel.js`, `docs/line-gaps.tsv`:
