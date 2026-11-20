@@ -12964,6 +12964,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "ended without shipping: copy forks were stopped twice by a safety classifier partway through writing Project docs (next-addendum-b3s11.md first, then next-addendum-calib2.md). Nothing was pushed or deleted from the Project; 16 docs sit unverified in the session clone only. Stop-loss: not retrying the same copy. Needs Tom to say how to proceed."
     }
    ],
    "chat": {
