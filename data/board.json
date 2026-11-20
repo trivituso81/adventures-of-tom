@@ -15658,7 +15658,7 @@
    "id": "c-reports-5",
    "tag": "reports-2026-11-20",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Game Shell",
    "title": "Fix the report backlog (22 open)",
    "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261120-113001-w756, r-20261120-140459-spj4, r-20261120-140511-a306, r-20261120-140805-mhzt, r-20261120-141016-j0za, r-20261120-141209-58bx and 16 more. First note: rose facing the wrong way",
@@ -15672,7 +15672,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then fix the backlog. Attach trivituso81/adventures-of-tom with push access (add_repo)."
    },
    "chat": {
-    "url": "https://claude.ai/code/cse_01RXeukFNkCr1k6xT3RqhfT1",
+    "url": "https://claude.ai/code/cse_01RXeukEDERsWxc2T9srXWo7",
     "opening": "not started"
    },
    "history": [
@@ -15726,14 +15726,17 @@
      "d": "2026-11-20",
      "t": "Tom tapped START.",
      "at": "2026-11-20T22:51:36.474Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
-   "started_at": "2026-11-20T19:42:40+00:00",
-   "after": "t-welcomepage-play",
-   "start": true
+   "started_at": "2026-11-20T22:52:33+00:00",
+   "after": "t-welcomepage-play"
   },
   {
    "id": "t-listen1-play",
@@ -19275,8 +19278,8 @@
    "takes/20261120T224602-cq5/state.json"
   ]
  },
- "synced": "1501485d843bbb4fc7883923f1ec24ba22d1e09b",
- "synced_at": "2026-11-20T22:51:02+00:00",
+ "synced": "7bbf62ee8b85281a4568bc26871f836108b73055",
+ "synced_at": "2026-11-20T22:52:34+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
