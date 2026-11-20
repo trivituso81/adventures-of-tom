@@ -5959,7 +5959,7 @@
    "title": "Look at the SKILLS list text and icons on your phone",
    "theme": "Battle System",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "ask": "play",
    "fyi": true,
    "next": "After the publish of build fix-skilllist1look-2: RELOAD on the title, ADMIN > BATTLE LAB > NEW BATTLE, start any fight, open SKILLS. Names should now be a middle size (15px, between the first version and the thin rows), pictures a little bigger, and the Back row at the bottom of the list should be as tall and as large in text as the Skill rows above it, in portrait and landscape. Report with the REPORT tab if it is still too big, too small, or Back still does not match (fix-skilllist1look-2 is the build to name).",
@@ -5990,8 +5990,13 @@
     {
      "d": "2026-11-19",
      "t": "Unblocked: Fix what you found on: Look at the SKILLS list text and icons on your phone, Fix what you found on: Look at the SKILLS list text and icons on your phone is done."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: all good."
     }
-   ]
+   ],
+   "done": "2026-11-19"
   },
   {
    "id": "c-fix-cutpolish4b-2",
