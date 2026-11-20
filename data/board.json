@@ -7977,7 +7977,7 @@
    "title": "Watch the chapter 1 scenes for breathing and reactions",
    "theme": "Story and Dialogue",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "fyi": true,
    "next": "Play chapter 1 from the start (the opening, then the walk to Aunt Ellie, then the kitchen). Watch people standing in a scene: they should breathe a little, dip when a pose changes, turn to whoever speaks, and hop or show a ! ? ... or sweat drop on cue words. Boppy winces (a sweat drop) on 'Gently. The stomach.' when you talk to him. Tap All good, or Something is wrong with what you saw.",
@@ -7988,8 +7988,13 @@
     {
      "d": "2026-11-20",
      "t": "Made by cutpolish5."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: Undo this change, and remember forever that we don't make characters in the overworld breathing that breathing animation is only while in battle Sent to Claude as card c-fix-cutpolish5; this card waits on it and comes back to you when the fix ships."
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "t-cardlinks1try",
@@ -8233,6 +8238,62 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-oldchecks-voice and t-oldchecks-voice in data/board.json, history included. Your first push is the commit board: start c-fix-oldchecks-voice.\n\nTom tested and found problems:\n1. Card t-oldchecks-voice (Voices: record the old voice gaps, ask voice). He was asked: Optional, only when you feel like it. Report with the REPORT tab if something looks wrong. Open Voice Library, set Show to No clip yet and Old voice. Record Mr. Washington's lines and the Narrator lines (silent until then), then press Send my takes to Claude. He wrote: I don't wanna deal with any bugs past chapter 1 right now\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:18:09.380Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-oldchecks-voice to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-oldchecks-voice, and give the build fix-oldchecks-voice a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-oldchecks-voice"
+  },
+  {
+   "id": "c-fix-cutpolish5",
+   "tag": "fix-cutpolish5",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Story and Dialogue",
+   "title": "Fix what you found on: Watch the chapter 1 scenes for breathing and reactions",
+   "next": "You reported a problem on Watch the chapter 1 scenes for breathing and reactions. Claude starts the fix by itself. Latest: Undo this change, and remember forever that we don't make characters in the overworld breathing that breathing animation is only while in battle",
+   "blocks": [
+    "t-cutpolish5"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T08:18:55.454Z",
+     "card": "t-cutpolish5",
+     "title": "Watch the chapter 1 scenes for breathing and reactions",
+     "ask": "play",
+     "words": "Undo this change, and remember forever that we don't make characters in the overworld breathing that breathing animation is only while in battle",
+     "shot": "",
+     "asked": "Play chapter 1 from the start (the opening, then the walk to Aunt Ellie, then the kitchen). Watch people standing in a scene: they should breathe a little, dip when a pose changes, turn to whoever speaks, and hop or show a ! ? ... or sweat drop on cue words. Boppy winces (a sweat drop) on 'Gently. The stomach.' when you talk to him. Tap All good, or Something is wrong with what you saw."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-cutpolish5"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-cutpolish5."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-cutpolish5: Undo this change, and remember forever that we don't make characters in the overworld breathing that breathing animation is only while in battle"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself."
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Watch the chapter 1 scenes for breathing and reactions.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-cutpolish5 and t-cutpolish5 in data/board.json, history included. Your first push is the commit board: start c-fix-cutpolish5.\n\nTom tested and found problems:\n1. Card t-cutpolish5 (Watch the chapter 1 scenes for breathing and reactions, ask play). He was asked: Play chapter 1 from the start (the opening, then the walk to Aunt Ellie, then the kitchen). Watch people standing in a scene: they should breathe a little, dip when a pose changes, turn to whoever speaks, and hop or show a ! ? ... or sweat drop on cue words. Boppy winces (a sweat drop) on 'Gently. The stomach.' when you talk to him. Tap All good, or Something is wrong with what you saw. He wrote: Undo this change, and remember forever that we don't make characters in the overworld breathing that breathing animation is only while in battle\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T08:18:55.454Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-cutpolish5 to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-cutpolish5, and give the build fix-cutpolish5 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-cutpolish5",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
