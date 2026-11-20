@@ -12595,7 +12595,7 @@
    "title": "Play the new chapter 1 opening in the taxi office",
    "theme": "Story and Dialogue",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "fyi": true,
    "first": "Build gem-canon01 shows on the title screen.",
@@ -12611,8 +12611,14 @@
     {
      "d": "2026-11-20",
      "t": "Added with c-gem-canon01."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: We need a new line of feedback before Tom starts talking and stretching. he should say \"Thanks for the JFK pickup, Sal.\" Sent to Claude as card c-fix-gem-canon01play; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-20T17:09:07.164Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-takes-56fb01",
@@ -12645,6 +12651,65 @@
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20"
+  },
+  {
+   "id": "c-fix-gem-canon01play",
+   "tag": "fix-gem-canon01play",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Story and Dialogue",
+   "title": "Fix: Play the new chapter 1 opening in the taxi office",
+   "next": "You reported a problem on Play the new chapter 1 opening in the taxi office. Claude starts the fix by itself. Latest: We need a new line of feedback before Tom starts talking and stretching. he should say \"Thanks for the JFK pickup, Sal.\"",
+   "blocks": [
+    "t-gem-canon01play"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T17:09:06.475Z",
+     "card": "t-gem-canon01play",
+     "title": "Play the new chapter 1 opening in the taxi office",
+     "ask": "play",
+     "words": "We need a new line of feedback before Tom starts talking and stretching. he should say \"Thanks for the JFK pickup, Sal.\"",
+     "shot": "",
+     "asked": "RELOAD, then CHAPTERS ) Chapter 1. Check: Tom stretches inside the taxi office in front of Sal, says his Delta One line, Sal says \"OK Mr. Fancy Pants...\", Tom walks out the door, and outside the girls shout TATA, he crouches and they hug. Sal's line is read by the computer voice until it is recorded."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-gem-canon01play"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-gem-canon01play.",
+     "at": "2026-11-20T17:09:07.164Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-gem-canon01play: We need a new line of feedback before Tom starts talking and stretching. he should say \"Thanks for the JFK pickup, Sal.\"",
+     "at": "2026-11-20T17:09:07.164Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-20T17:09:07.164Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Play the new chapter 1 opening in the taxi office.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-gem-canon01play and t-gem-canon01play in data/board.json, history included. Your first push is the commit board: start c-fix-gem-canon01play.\n\nTom tested and found problems:\n1. Card t-gem-canon01play (Play the new chapter 1 opening in the taxi office, ask play). He was asked: RELOAD, then CHAPTERS ) Chapter 1. Check: Tom stretches inside the taxi office in front of Sal, says his Delta One line, Sal says \"OK Mr. Fancy Pants...\", Tom walks out the door, and outside the girls shout TATA, he crouches and they hug. Sal's line is read by the computer voice until it is recorded. He wrote: We need a new line of feedback before Tom starts talking and stretching. he should say \"Thanks for the JFK pickup, Sal.\"\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T17:09:06.475Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-gem-canon01play to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-gem-canon01play, and give the build fix-gem-canon01play a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-gem-canon01play",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
