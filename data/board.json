@@ -7014,7 +7014,7 @@
    "title": "Watch the family's painted battle poses",
    "theme": "Battle Animations",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "animations",
    "next": "ADMIN > BATTLE LAB > pick a difficulty > NEW BATTLE > PAINTED STATES: CHAPTER 1. Now each state plays once, then the run stops on a panel: the fighter and state (for example TOM: KNOCKED OUT, 6 of 36), WATCH AGAIN, an optional note, REJECT and APPROVE. Nothing plays until you answer. It always runs at 1x, and Tom no longer shows his guard pose during IDLE, HIT and DODGE. Answer all 36 (STOP leaves; your answers so far are kept, and running it again lets you finish). Each answer and note is saved for Claude as you go, so you do not need All good or Something is wrong here: this card closes by itself when every state has an answer, and your rejections go to the card Apply your notes on the painted poses. If the panel's last line says No GitHub token on this phone, follow that line once, then run it again.",
    "blocks": [
@@ -7054,11 +7054,17 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix what you found on: Watch the painted poses for the family (PAINTED STATES: CHAPTER 1), Fix: Watch the family's painted battle poses is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: These need to be video animations, not frames. Why did we take a step backwards in the quality by reverting to our old method after we did all of that work to figure out a way to animate the images Sent to Claude as card c-fix-clipposes-3; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-20T16:07:08.269Z"
     }
    ],
    "done_when": {
     "poses_reviewed": "ch1"
-   }
+   },
+   "waiting_on": "claude"
   },
   {
    "id": "c-clipposesfix",
@@ -11896,6 +11902,58 @@
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20"
+  },
+  {
+   "id": "c-fix-clipposes-3",
+   "tag": "fix-clipposes-3",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Battle Animations",
+   "title": "Fix: Watch the family's painted battle poses",
+   "next": "You reported a problem on Watch the family's painted battle poses. Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: These need to be video animations, not frames. Why did we take a step backwards in the quality by reverting to our old method after we did all of that work to f",
+   "blocks": [
+    "t-clipposes"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T16:07:07.793Z",
+     "card": "t-clipposes",
+     "title": "Watch the family's painted battle poses",
+     "ask": "animations",
+     "words": "These need to be video animations, not frames. Why did we take a step backwards in the quality by reverting to our old method after we did all of that work to figure out a way to animate the images",
+     "shot": "",
+     "asked": "ADMIN ) BATTLE LAB ) pick a difficulty ) NEW BATTLE ) PAINTED STATES: CHAPTER 1. Now each state plays once, then the run stops on a panel: the fighter and state (for example TOM: KNOCKED OUT, 6 of 36), WATCH AGAIN, an optional note, REJECT and APPROVE. Nothing plays until you answer. It always runs at 1x, and Tom no longer shows his guard pose during IDLE, HIT and DODGE. Answer all 36 (STOP leaves; your answers so far are kept, and running it again lets you finish). Each answer and note is saved for Claude as you go, so you do not need All good or Something is wrong here: this card closes by itself when every state has an answer, and your rejections go to the card Apply your notes on the painted poses. If the panel's last line says No GitHub token on this phone, follow that line once, then run it again."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-clipposes"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-clipposes.",
+     "at": "2026-11-20T16:07:08.269Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-clipposes: These need to be video animations, not frames. Why did we take a step backwards in the quality by reverting to our old method after we did all of that work to figure out a way to animate the images",
+     "at": "2026-11-20T16:07:08.269Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Watch the family's painted battle poses.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: animations are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-clipposes-3 and t-clipposes in data/board.json, history included. Your first push is the commit board: start c-fix-clipposes-3.\n\nTom tested and found problems:\n1. Card t-clipposes (Watch the family's painted battle poses, ask animations). He was asked: ADMIN ) BATTLE LAB ) pick a difficulty ) NEW BATTLE ) PAINTED STATES: CHAPTER 1. Now each state plays once, then the run stops on a panel: the fighter and state (for example TOM: KNOCKED OUT, 6 of 36), WATCH AGAIN, an optional note, REJECT and APPROVE. Nothing plays until you answer. It always runs at 1x, and Tom no longer shows his guard pose during IDLE, HIT and DODGE. Answer all 36 (STOP leaves; your answers so far are kept, and running it again lets you finish). Each answer and note is saved for Claude as you go, so you do not need All good or Something is wrong here: this card closes by itself when every state has an answer, and your rejections go to the card Apply your notes on the painted poses. If the panel's last line says No GitHub token on this phone, follow that line once, then run it again. He wrote: These need to be video animations, not frames. Why did we take a step backwards in the quality by reverting to our old method after we did all of that work to figure out a way to animate the images\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T16:07:07.793Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-clipposes to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-clipposes, and give the build fix-clipposes-3 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-clipposes"
   }
  ],
  "sessions": [
