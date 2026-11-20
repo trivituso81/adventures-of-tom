@@ -13223,7 +13223,7 @@
    "title": "Look at the Effects page in Admin",
    "theme": "Tools",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "play",
    "fyi": true,
    "next": "Open https://trivituso81.github.io/adventures-of-tom/admin.html, tap Effects (under Characters). You should see a face with Squash, Hop, Pip and Wince buttons, then 15 effect cards. Tap Hop: the face jumps. Tap a face in the gallery at the bottom: it appears in the preview. Say which effects you want changed or removed.",
@@ -13234,8 +13234,14 @@
     {
      "d": "2026-11-20",
      "t": "Added with c-idea-reviewwhatever."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: the Preview is showing the characters portrait which is irrelevant (or does the portrait change? i dont think is hould) i want to see a preview of the full body character and how the effect looks in game in the overworld Sent to Claude as card c-fix-effectslook; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-20T17:54:43.813Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "c-startmore",
@@ -14146,6 +14152,65 @@
    "after": "t-battlelabpagetry",
    "auto": true,
    "started_at": "2026-11-20T17:53:24+00:00"
+  },
+  {
+   "id": "c-fix-effectslook",
+   "tag": "fix-effectslook",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Tools",
+   "title": "Fix: Look at the Effects page in Admin",
+   "next": "You reported a problem on Look at the Effects page in Admin. Claude starts the fix by itself. Latest: the Preview is showing the characters portrait which is irrelevant (or does the portrait change? i dont think is hould) i want to see a preview of the full body",
+   "blocks": [
+    "t-effectslook"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T17:54:43.343Z",
+     "card": "t-effectslook",
+     "title": "Look at the Effects page in Admin",
+     "ask": "play",
+     "words": "the Preview is showing the characters portrait which is irrelevant (or does the portrait change? i dont think is hould) i want to see a preview of the full body character and how the effect looks in game in the overworld",
+     "shot": "",
+     "asked": "Open https://trivituso81.github.io/adventures-of-tom/admin.html, tap Effects (under Characters). You should see a face with Squash, Hop, Pip and Wince buttons, then 15 effect cards. Tap Hop: the face jumps. Tap a face in the gallery at the bottom: it appears in the preview. Say which effects you want changed or removed."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-effectslook"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-effectslook.",
+     "at": "2026-11-20T17:54:43.813Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-effectslook: the Preview is showing the characters portrait which is irrelevant (or does the portrait change? i dont think is hould) i want to see a preview of the full body character and how the effect looks in game in the overworld",
+     "at": "2026-11-20T17:54:43.813Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-20T17:54:43.813Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Look at the Effects page in Admin.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-effectslook and t-effectslook in data/board.json, history included. Your first push is the commit board: start c-fix-effectslook.\n\nTom tested and found problems:\n1. Card t-effectslook (Look at the Effects page in Admin, ask play). He was asked: Open https://trivituso81.github.io/adventures-of-tom/admin.html, tap Effects (under Characters). You should see a face with Squash, Hop, Pip and Wince buttons, then 15 effect cards. Tap Hop: the face jumps. Tap a face in the gallery at the bottom: it appears in the preview. Say which effects you want changed or removed. He wrote: the Preview is showing the characters portrait which is irrelevant (or does the portrait change? i dont think is hould) i want to see a preview of the full body character and how the effect looks in game in the overworld\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T17:54:43.343Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-effectslook to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-effectslook, and give the build fix-effectslook a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-effectslook",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
