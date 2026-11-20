@@ -12605,7 +12605,7 @@
    "title": "Play the new chapter 1 opening in the taxi office",
    "theme": "Story and Dialogue",
    "lane": "tom",
-   "col": "wait",
+   "col": "up",
    "ask": "play",
    "fyi": true,
    "first": "Build gem-canon01 shows on the title screen.",
@@ -12626,9 +12626,12 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: We need a new line of feedback before Tom starts talking and stretching. he should say \"Thanks for the JFK pickup, Sal.\" Sent to Claude as card c-fix-gem-canon01play; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T17:09:07.164Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Unblocked: Fix: Play the new chapter 1 opening in the taxi office is done."
     }
-   ],
-   "waiting_on": "claude"
+   ]
   },
   {
    "id": "c-takes-56fb01",
@@ -12666,7 +12669,7 @@
    "id": "c-fix-gem-canon01play",
    "tag": "fix-gem-canon01play",
    "lane": "claude",
-   "col": "prog",
+   "col": "done",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Play the new chapter 1 opening in the taxi office",
@@ -12718,6 +12721,10 @@
     {
      "d": "2026-11-20",
      "t": "Fix built as fix-gem-canon01play: Tom says the JFK line before the stretch."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as fix-gem-canon01play: Tom now says \"Thanks for the JFK pickup, Sal.\" before he stretches in the taxi office"
     }
    ],
    "prompt": {
@@ -12731,7 +12738,8 @@
    },
    "after": "t-gem-canon01play",
    "auto": true,
-   "started_at": "2026-11-20T17:10:04+00:00"
+   "started_at": "2026-11-20T17:10:04+00:00",
+   "done": "2026-11-20"
   },
   {
    "id": "c-idea-reviewwhatever",
@@ -12931,7 +12939,7 @@
    "id": "c-idea-implementlisteni",
    "tag": "idea-implementlisteni",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Tools",
    "title": "Implement listening/thinking poses (should be generated and",
    "next": "Your idea: implement listening/thinking poses (should be generated and approved in art library) for all chapter 1 talking interactions, including cut scenes. Claude starts it by itself.",
@@ -12946,7 +12954,7 @@
     "rule": "Claude Sonnet 5.5, medium"
    },
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukHFSEVSn8L6ETAbMyy",
     "opening": "New card by Tom on the board"
    },
    "history": [
@@ -12964,6 +12972,10 @@
      "d": "2026-11-20",
      "t": "Auto-start: START can run this size, so it starts by itself.",
      "at": "2026-11-20T17:14:36.144Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -12976,10 +12988,22 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-implementlisteni in data/board.json, history included. Your first push is the commit board: start c-idea-implementlisteni.\n\nTom made this card himself with New card on the board. His words: \"implement listening/thinking poses (should be generated and approved in art library) for all chapter 1 talking interactions, including cut scenes.\"\n\nThe board sized this from his words alone: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort medium (a small piece). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nDesign it yourself and make the calls: Tom does not pick between options. Ask one short question only if a choice cannot be undone or is expensive to redo. Build it, test it, look at the frames in portrait and landscape, and push build idea-implementlisteni with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). You have my full permission to access the repo."
    },
    "auto": true,
-   "start": true
+   "started_at": "2026-11-20T17:15:30+00:00"
   }
  ],
  "sessions": [
+  {
+   "url": "https://claude.ai/code/session_01RXeukEr3zRmZS5WgoQeWYc",
+   "title": "Fix: Play the new chapter 1 opening in the taxi office",
+   "first": "2026-11-20T17:10:49Z",
+   "last": "2026-11-20T17:15:19Z",
+   "tags": [
+    "fix-gem-canon01play"
+   ],
+   "cards": [
+    "c-fix-gem-canon01play"
+   ]
+  },
   {
    "url": "https://claude.ai/code/session_01RXeukGidKHGEzvhoUBytRY",
    "title": "Effects Lab: every effect on people in the overworld, what triggers it, and a preview in Admin",
@@ -12988,16 +13012,6 @@
    "tags": [],
    "cards": [
     "c-idea-reviewwhatever"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukEr3zRmZS5WgoQeWYc",
-   "title": "Fix: Play the new chapter 1 opening in the taxi office",
-   "first": "2026-11-20T17:10:49Z",
-   "last": "2026-11-20T17:10:49Z",
-   "tags": [],
-   "cards": [
-    "c-fix-gem-canon01play"
    ]
   },
   {
@@ -14576,8 +14590,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "fcea730b7e0b577557aced72a239c473e4598e03",
- "synced_at": "2026-11-20T17:13:58+00:00",
+ "synced": "6d8c8a0eeb76c6c061154accf1d1af1156af3e39",
+ "synced_at": "2026-11-20T17:15:30+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
