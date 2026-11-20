@@ -1,0 +1,8 @@
+# clips11 (2026-11-14, main 1f30536): Tom's 80 chapter 3 Voice Library takes merged. Nothing heard on a phone.
+
+- Merged `local-clips-pending_9.json` (made 2026-11-14T15:03Z): 80 dialogue takes (Boppy 31, Tom 14, Deedee 12, Grace 11, Rose 8, The Big One 2, Oolong 2), all new keys in data/voice/dialog-ch28.js. No battle clips, none replaced. All takes are newer than their rewrites in retake.json `ats` (Oolong's line has no entry).
+- Tom's tuned scripts were copied into tools/voice-library/scripts/ch03-story-directions.json (43 changed, 36 already matched). These are the first scripts on record for Boppy, Deedee, Grace and Rose: read them as the model before writing any script for those voices (voicetags STOP rule).
+- Rebased over ch4build1 (d6413eb): took upstream data files, reran merge-local.js on them, rebuilt the index.
+- OPEN, not mine: `unused_voice.py` check 4 shows 28 dialogue clips not in harvest or source (e.g. tom "It's very fast. And very loud.", tnb "Stage 7 is locked from the inside..."). They sit in data/voice/dialog-ch25.js on main before this merge; `harvest.py` does not clear them. Likely chapter 4 lines whose scene text changed in ch4build1 or ch3build1. Next session: compare with the ch4build1 scene text. If the lines were reworded, reword the clip keys (clipfix1 method) if the audio still matches; purge only if it does not, and tell Tom which lines to re-record. Do not purge without looking.
+- Smoke FAILS [], tag_check ok, title stamp `build clips11`.
+- NOTE: claude/next.md itself was not rewritten (too large to resend safely); its header does not list clips11. Treat this file as an addendum to it.

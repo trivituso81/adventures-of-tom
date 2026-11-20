@@ -1,0 +1,20 @@
+# Chapter 6 build, stage 3 handoff (updated 2026-11-14 15:55, chapter 6 build conversation, stage 2 done)
+
+Read this with claude/story-build.md (section 11), claude/story-ch06.md and claude/next-addendum-ch6stage2.md (its stage 2 list is now DONE, its dialog-ch29 risk is FIXED). Does not replace claude/next.md. The tracker's Live cell for chapter 6 and section 11 were NOT rewritten this session (too large to round-trip safely): treat this file as newer than them.
+
+## Done (stage 2), pushed as ch6s2a to ch6s2g (latest ch6s2g)
+- Voice file risk fixed: data/voice/dialog-ch29.js (empty, loaded after ch28 in data/dialog-cast.js); tools/voice-library/merge-local.js now writes NEW dialogue keys there. Not changed: tools/clip-audit/merge.py (old tool, still names ch28). unused_voice.py check 4 shows 52 (old Stage 7 / Amy lines, none from this work).
+- engine/block-break.js (loaded after amber-spots.js): the reusable break. Scene step `{blockbreak:'oakpark',onPhase:fn}` waits for the whole sequence. Phases for onPhase: roll, click, close, still, crack, fall, ring, done. Per-area config in `BB_SPOTS` (map, `on` flag, `done` flag, grey circle, block picture and position, what each monster turns into, and `keep`). Old Oak Park entry: on flag `ch6-oak-block`, done flag `bb-oakpark`.
+- NEW `keep` entry per spot (ch6s2c, from Tom's report r-20261114-142911-utr2, closed): what the block held stays behind. Oak Park: the basket (art/props/oakpark/ch6_basket.webp, approved Library `ch6-basket`) stays on the table; the squirrel finishes its dive (agent_dive.webp), pops out with a sandwich (agent_sandwich.webp) and sits beside it. Reuse for the dragonfly, lemon, hat, fish and kickball blocks: add a `keep` entry and its pictures. Still to do in the scene: the two squirrels run up the Old Oak afterwards (story scene 14 beats 6 to 11).
+- Orange block picture: Library `ch6-orange-block` v3 (small basket, squirrel diving in) baked to ch6_block.webp (ch6s2g). Tom says the basket inside still looks bigger than the freed one and he does not want more rounds on it: leave it. Freed basket width is `keep.basket.w` (50 art px), squirrel sizes `diveW`, `sitW`.
+- Stand-ins (say so to Tom): the grey circle is the plate turned grey in code (Library `ch6-picnic-grey` still not approved); cracks and pieces are cut from the block picture in code; the close-up socket is drawn in CSS.
+- ADMIN > BLOCK BREAK LAB (`bbLabStart`): Old Oak Park with Tom, TNB, Nara; plays the break. Test: `python3 tools/blockbreak_test.py /tmp/bb` (portrait and landscape, FAILS: []). Smoke FAILS [].
+- Also this session: Library `ch7-unread-boss` prompt rewritten short (two eyes), now approved v2, NOT installed (chapter 7 session owns it). Tom asked that art tweaks like this go through the in-game bug report, not repeated checking rounds.
+
+## Stage 3 plan (NOT started): chapter 6 scenes 0 to 15
+1. Wire the break into the real chapter: set `ch6-oak-block` when the park scene reaches the picnic tables (scene 4 beat 3), play `{blockbreak:'oakpark'}` in scene 14 between the coin drop and TNB's first line. Today's built chapter still has the OLD lookout fights and `ch6-clear`; `bb-oakpark` is separate from `ch6-clear` (stage 4 sets the other five areas the same way with new BB_SPOTS entries: griffith, stage7, hollow, sundial, schoolyard; the old drawers in engine/plate.js and amber-spots.js `show()` must then also check the new done flags).
+2. The Chairman shrinking mid-sentence: onPhase('fall') and onPhase('ring') are the hooks; he is not on the oakpark map (the crown), so stage him on the picnic table as a scene actor (`monster:'chairman'`, `ordinary.chairman` is already in BB_SPOTS); his shrink uses `bbShrink`. The two squirrels running up the Oak: scene 14 beats 6 to 11.
+3. Nobody speaks from the click until the colour has finished. Wire all 179 chapter 6 voice lines in the same change or remove the unused (no-unused-voice rule).
+
+## Prompt for the next session
+"Read claude/story-build.md, claude/next-addendum-ch6stage3.md and claude/story-ch06.md. Continue the chapter 6 build at stage 3 (scenes 0 to 15)."

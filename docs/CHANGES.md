@@ -1,3 +1,7 @@
+## projclean1b (2026-11-20): 74 more Project docs copied into claude/, word for word
+
+Card c-projclean, part 2: Project docs 126 to 205 (newest first). Left in the Project because they hold Tom's full street address: story-ch08.md, story-ch08-rejected.md, story-ch08-brief.md, story-ch06.md, bernadette-rewrite.md, comedy-bible.md. report-audit.md not copied yet (a tool refused its name). Nothing in the game changes.
+
 ## reporttype1 (2026-11-20): Typing in the REPORT box no longer acts like game hotkeys
 
 Card c-reporttype1. Tom: "when i try to type in the report tool, its acting like hotkeys and taking the focus out of the report text box and making changes to the scren, leaving the tool unsuable to me."
