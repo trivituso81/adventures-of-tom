@@ -10044,7 +10044,7 @@
   {
    "id": "t-newcard",
    "lane": "tom",
-   "col": "up",
+   "col": "done",
    "theme": "Tools",
    "ask": "play",
    "fyi": true,
@@ -10061,8 +10061,14 @@
     {
      "d": "2026-11-20",
      "t": "Made by build newcard1 (card c-newcard)."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: all good.",
+     "at": "2026-11-20T15:52:24.461Z"
     }
-   ]
+   ],
+   "done": "2026-11-20"
   },
   {
    "id": "c-fix-heist1play",
