@@ -9811,7 +9811,7 @@
   {
    "id": "t-heist1play",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "theme": "Story and Dialogue",
    "ask": "play",
    "fyi": true,
@@ -9859,8 +9859,14 @@
     {
      "d": "2026-11-20",
      "t": "Unblocked: Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen, Fix: Watch the new muffin theft in Deedee's kitchen is done."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom: something is wrong: when the mud blob is holding the apple muffins, it appears in his hands much larger than it was on the counter. / when he hops off the counter, something bizarre happens in the animation - check this Sent to Claude as card c-fix-heist1play-4; this card waits on it and comes back to you when the fix ships.",
+     "at": "2026-11-20T17:19:15.497Z"
     }
-   ]
+   ],
+   "waiting_on": "claude"
   },
   {
    "id": "t-heist1voice",
@@ -13040,6 +13046,65 @@
     "effort": "high (a new system designed and built with nothing written to follow)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-implementlisteni in data/board.json, history included. Your first push is the commit board: start c-idea-implementlisteni.\n\nTom made this card himself with New card on the board. His words: \"implement listening/thinking poses (should be generated and approved in art library) for all chapter 1 talking interactions, including cut scenes.\"\n\nThe board sized this from his words alone: Claude Sonnet 5.5, effort medium. If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nDesign it yourself and make the calls: Tom does not pick between options. Ask one short question only if a choice cannot be undone or is expensive to redo. Build it, test it, look at the frames in portrait and landscape, and push build idea-implementlisteni with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). You have my full permission to access the repo.\n\nRESIZED 2026-11-20 by the first session: the work includes generator prompts and art direction for pictures Tom judges by taste (row D), and a new pose system across every chapter 1 conversation and cut scene with no steps written (high). Use Claude Opus 5.5, effort high. Start from the existing thinking-pose entries (docs/CHANGES.md 'Report fixes', ch2fix-prompts.js, report c5no) and the mood frames (`portraits/emo/`, docs/NPC_EMOTION_INDEX.md) before designing anything new. Obey the standing rules: pictures only through the Art Library (Tom presses Generate then Approve), each thing once in a prompt, smallest change on a miss, no breathing animation in the overworld or scenes."
    }
+  },
+  {
+   "id": "c-fix-heist1play-4",
+   "tag": "fix-heist1play-4",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Story and Dialogue",
+   "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
+   "next": "You reported a problem on Watch the new muffin theft in Deedee's kitchen. Claude starts the fix by itself. Latest: when the mud blob is holding the apple muffins, it appears in his hands much larger than it was on the counter. / when he hops off the counter, something bizarr",
+   "blocks": [
+    "t-heist1play"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "reports": [
+    {
+     "at": "2026-11-20T17:19:15.044Z",
+     "card": "t-heist1play",
+     "title": "Watch the new muffin theft in Deedee's kitchen",
+     "ask": "play",
+     "words": "when the mud blob is holding the apple muffins, it appears in his hands much larger than it was on the counter. / when he hops off the counter, something bizarre happens in the animation - check this",
+     "shot": "",
+     "asked": "Chapter select ) Chapter 1, jump to the theft scene in Deedee's kitchen, and watch it in portrait, then once in landscape. Look again at 1) the Mudling hops UP onto the baking island, grabs the pan there and hops back DOWN before running out (it no longer stands inside the counter); 2) as it walks through, Deedee is shoved back a step with a shocked face and stays on her feet while Tom, Rose and Grace go down. All good if it plays like that; Something is wrong with what you saw."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-heist1play"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Made by Something is wrong on t-heist1play.",
+     "at": "2026-11-20T17:19:15.497Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom reported on t-heist1play: when the mud blob is holding the apple muffins, it appears in his hands much larger than it was on the counter. / when he hops off the counter, something bizarre happens in the animation - check this",
+     "at": "2026-11-20T17:19:15.497Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
+     "at": "2026-11-20T17:19:15.497Z"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Watch the new muffin theft in Deedee's kitchen.",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: a fix from your report, the cause is not known yet)",
+    "effort": "medium (one report, a small piece of work)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-heist1play-4 and t-heist1play in data/board.json, history included. Your first push is the commit board: start c-fix-heist1play-4.\n\nTom tested and found problems:\n1. Card t-heist1play (Watch the new muffin theft in Deedee's kitchen, ask play). He was asked: Chapter select ) Chapter 1, jump to the theft scene in Deedee's kitchen, and watch it in portrait, then once in landscape. Look again at 1) the Mudling hops UP onto the baking island, grabs the pan there and hops back DOWN before running out (it no longer stands inside the counter); 2) as it walks through, Deedee is shoved back a step with a shocked face and stays on her feet while Tom, Rose and Grace go down. All good if it plays like that; Something is wrong with what you saw. He wrote: when the mud blob is holding the apple muffins, it appears in his hands much larger than it was on the counter. / when he hops off the counter, something bizarre happens in the animation - check this\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T17:19:15.044Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-heist1play to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-heist1play, and give the build fix-heist1play-4 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-heist1play",
+   "auto": true,
+   "start": true
   }
  ],
  "sessions": [
