@@ -1210,10 +1210,10 @@
    "id": "c-reports",
    "tag": "reports-2026-11-19",
    "lane": "claude",
-   "col": "wait",
+   "col": "prog",
    "theme": "Game Shell",
-   "title": "Fix the report backlog (7 open, waiting on your pictures)",
-   "next": "Iron-Gill is off the pier (builds reports-2026-11-19a and b, report r-20261114-182326-95v4). The other 7 reports are art. Their pictures wait on your card t-reportart (Art Library, group Report fixes, 21 entries). When those are approved this card starts the install: glasses and bulb frames in the scenes, the Mudling heist frames, Boppy's mustache, the grey patch together, dazed frames, and the thinking pose.",
+   "title": "Fix the report backlog (6 open)",
+   "next": "Reports from the in-game REPORT tab wait on branch inbox: r-20261114-100555-mxvd, r-20261114-100734-1a2w, r-20261114-101501-c5no, r-20261114-101538-nre4, r-20261114-104915-g4gl, r-20261114-162358-jykk. First note: We need new frames for this art because it doesn't match the style of the game for the monster, I me",
    "prompt": {
     "what": "Puts the approved Report fixes pictures into the game and closes the 7 art reports.",
     "before": [
@@ -1224,7 +1224,7 @@
     "text": "Read claude/handoff-rules.md and docs/REPORTS.md, then run python3 tools/reports.py list. Seven art reports are open (7v5z, mxvd, 1a2w, c5no, nre4, g4gl, jykk). Their pictures are the approved entries of the Report fixes group in tools/art-library/ch2fix-prompts.js. Install each one where its report says, test in portrait and landscape, push, then run python3 tools/reports.py done for each fixed report. Board card c-reports. You have my full permission to access the repo."
    },
    "chat": {
-    "url": "https://claude.ai/code/session_01RXeukCZdiEbyskXvidXtfn",
+    "url": "https://claude.ai/code/session_01RXeukFraGsc5W54HdP7UDp",
     "opening": "not started"
    },
    "history": [
@@ -1263,13 +1263,20 @@
     {
      "d": "2026-11-19",
      "t": "reports-2026-11-19b: Iron-Gill's swim away also kept off the pier. 7 art reports wait on your pictures: card t-reportart."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Part shipped as reports-2026-11-19b: Old Iron-Gill's swim away from the pier now stays on open water too"
+    },
+    {
+     "d": "2026-11-19",
+     "t": "The backlog now holds 6 report(s)."
     }
    ],
    "blocks": [],
    "created": "2026-11-19",
    "changed": "2026-11-19",
-   "after": "t-reportart",
-   "waiting_on": "tom"
+   "after": "t-reportart"
   },
   {
    "id": "t-startsetup",
@@ -5534,13 +5541,17 @@
      "d": "2026-11-19",
      "t": "Made by reports-2026-11-19b: your 7 art reports have Library entries (Report fixes group) but none has been generated yet."
     }
-   ]
+   ],
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukFraGsc5W54HdP7UDp",
+    "opening": "unknown"
+   }
   },
   {
    "id": "c-board5",
    "tag": "board5",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "theme": "Tools",
    "title": "Board buttons say when this browser cannot save; Copy prompt claims the card (board5)",
    "next": "Building: a token box when the browser has no GitHub token; every copied prompt ends with its board: start line; Copy prompt moves the card to In progress.",
@@ -5548,7 +5559,7 @@
    "created": "2026-11-19",
    "changed": "2026-11-19",
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/session_01RXeukGuQDu3jxcpsGVH4gP",
     "opening": "\"ok i marked something is wrong but he card is still there - did anything happen?\""
    },
    "prompt": {
@@ -5564,6 +5575,10 @@
     {
      "d": "2026-11-19",
      "t": "Tom (18:31): \"ok i marked something is wrong but he card is still there - did anything happen?\" and \"why is this card listed as up next when it's in progres?\" (c-clipreset)."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Started: the conversation claimed this card."
     }
    ]
   }
@@ -5670,6 +5685,32 @@
    "cards": [
     "c-starttest",
     "c-copydocs"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukGuQDu3jxcpsGVH4gP",
+   "title": "Something is wrong button on test cards (board4)",
+   "first": "2026-11-19T18:07:19-08:00",
+   "last": "2026-11-19T18:37:48-08:00",
+   "tags": [
+    "board4"
+   ],
+   "cards": [
+    "c-board4",
+    "c-board5"
+   ]
+  },
+  {
+   "url": "https://claude.ai/code/session_01RXeukFraGsc5W54HdP7UDp",
+   "title": "Fix the report backlog (7 open, waiting on your pictures)",
+   "first": "2026-11-19T18:23:26-08:00",
+   "last": "2026-11-19T18:37:34-08:00",
+   "tags": [
+    "reports-2026-11-19b"
+   ],
+   "cards": [
+    "c-reports",
+    "t-reportart"
    ]
   },
   {
@@ -5907,16 +5948,6 @@
    ]
   },
   {
-   "url": "https://claude.ai/code/session_01RXeukFraGsc5W54HdP7UDp",
-   "title": "Fix the report backlog (8 open)",
-   "first": "2026-11-19T18:23:26-08:00",
-   "last": "2026-11-19T18:23:26-08:00",
-   "tags": [],
-   "cards": [
-    "c-reports"
-   ]
-  },
-  {
    "url": "https://claude.ai/code/session_01RXeukCbhVU3ZpBxMRRYR1n",
    "title": "Copy the Project docs a board card needs into the repo (copydocs)",
    "first": "2026-11-19T18:21:42-08:00",
@@ -5924,18 +5955,6 @@
    "tags": [],
    "cards": [
     "c-copydocs"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukGuQDu3jxcpsGVH4gP",
-   "title": "Something is wrong button on test cards (board4)",
-   "first": "2026-11-19T18:07:19-08:00",
-   "last": "2026-11-19T18:20:23-08:00",
-   "tags": [
-    "board4"
-   ],
-   "cards": [
-    "c-board4"
    ]
   },
   {
@@ -6088,8 +6107,8 @@
    "takes/20261119T230940-0ap/state.json"
   ]
  },
- "synced": "d2f2e9926d56e8d13523b9566d2f62127d22a73c",
- "synced_at": "2026-11-20T02:35:43+00:00",
+ "synced": "d38732d1f3332f6adf27b320ff899060140f5c94",
+ "synced_at": "2026-11-20T02:38:20+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
