@@ -13930,7 +13930,7 @@
    "id": "c-fix-heist1play-5",
    "tag": "fix-heist1play-5",
    "lane": "claude",
-   "col": "up",
+   "col": "prog",
    "fix": true,
    "theme": "Story and Dialogue",
    "title": "Fix: Watch the new muffin theft in Deedee's kitchen",
@@ -13952,7 +13952,7 @@
     }
    ],
    "chat": {
-    "url": "",
+    "url": "https://claude.ai/code/cse_01RXeukFEfHJ4Qb2GBqAXJFo",
     "opening": "Something is wrong on t-heist1play"
    },
    "history": [
@@ -13970,6 +13970,10 @@
      "d": "2026-11-20",
      "t": "Auto-start: Tom reported a problem, so this fix starts by itself.",
      "at": "2026-11-20T17:50:30.211Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Started by START on Claude Sonnet 5.5, effort medium."
     }
    ],
    "prompt": {
@@ -13983,7 +13987,7 @@
    },
    "after": "t-heist1play",
    "auto": true,
-   "start": true
+   "started_at": "2026-11-20T17:51:46+00:00"
   }
  ],
  "sessions": [
@@ -14329,6 +14333,18 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukFk9aCyXxGuLYrXm1L",
+   "title": "Welcome page buttons and chapter list difficulty bar",
+   "first": "2026-11-20T09:30:02-08:00",
+   "last": "2026-11-20T09:51:01-08:00",
+   "tags": [
+    "idea-welcomepage"
+   ],
+   "cards": [
+    "c-idea-welcomepage"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukFqBS2BeSqBbkNRBQ1",
    "title": "Battle Lab page with its own address",
    "first": "2026-11-20T09:46:41-08:00",
@@ -14336,18 +14352,6 @@
    "tags": [],
    "cards": [
     "c-battlelabpage"
-   ]
-  },
-  {
-   "url": "https://claude.ai/code/session_01RXeukFk9aCyXxGuLYrXm1L",
-   "title": "Welcome page buttons and chapter list difficulty bar",
-   "first": "2026-11-20T09:30:02-08:00",
-   "last": "2026-11-20T09:46:32-08:00",
-   "tags": [
-    "idea-welcomepage"
-   ],
-   "cards": [
-    "c-idea-welcomepage"
    ]
   },
   {
@@ -15735,8 +15739,8 @@
    "takes/20261120T170347-1wa/state.json"
   ]
  },
- "synced": "1e742771d2befe9c589645daf8637ca98734c682",
- "synced_at": "2026-11-20T17:47:38+00:00",
+ "synced": "b32d26e1d769367a86da3e7365743bee6f5a820d",
+ "synced_at": "2026-11-20T17:51:47+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
