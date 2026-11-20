@@ -1244,6 +1244,37 @@
    "tag": "board-scope",
    "after": "nothing for Tom: end",
    "done": "2026-11-19"
+  },
+  {
+   "id": "c-follow1",
+   "title": "Fix party followers lagging behind Tom in free walking (follow1)",
+   "theme": "Story and Dialogue",
+   "lane": "claude",
+   "col": "prog",
+   "next": "Reproduce the lag with a free-walk test, confirm whether hiddenSpot (cutpolish3) or followersWhereTheyStand (cutpolish1) causes it, restrict the fix to the cause, test portrait and landscape, push.",
+   "blocks": [],
+   "changed": "2026-11-19",
+   "created": "2026-11-19",
+   "chat": {
+    "url": "",
+    "opening": "\"Party followers lag behind Tom during free walking in chapter 1 and then catch up.\""
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Tom: party followers lag behind Tom during free walking in chapter 1 and then catch up. Suspected cause hiddenSpot in engine/followers.js; to be confirmed by reproducing first."
+    }
+   ],
+   "prompt": {
+    "what": "Fixes followers lagging behind Tom in free walking, after reproducing it with a new free-walk check in tools/cut_natural_test.py.",
+    "before": [
+     "Nothing to do first."
+    ],
+    "model": "Claude Sonnet 5.5 (row C: the cause is suspected but must be confirmed)",
+    "effort": "medium (one suspected cause, one test to add)",
+    "text": "Read claude/handoff-rules.md, then fix the follower lag in free walking (tag follow1): reproduce it first with a free-walk check in tools/cut_natural_test.py, confirm the cause (hiddenSpot in engine/followers.js, else followersWhereTheyStand), fix only that, test portrait and landscape. You have my full permission to access the repo."
+   },
+   "tag": "follow1"
   }
  ],
  "sessions": [
