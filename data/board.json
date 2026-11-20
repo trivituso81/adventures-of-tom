@@ -17188,6 +17188,16 @@
    ]
   },
   {
+   "url": "https://claude.ai/code/session_01RXeukGs4KxT1N7oixmRdtw",
+   "title": "When skipping a scene, any interstitials that are not item",
+   "first": "2026-11-20T13:34:18-08:00",
+   "last": "2026-11-20T13:34:18-08:00",
+   "tags": [],
+   "cards": [
+    "c-idea-skippingscene"
+   ]
+  },
+  {
    "url": "https://claude.ai/code/session_01RXeukEAVEz7ZsgqjE7u2pm",
    "title": "Open chapter 1 inside the taxi office with Sal",
    "first": "2026-11-20T08:48:07-08:00",
@@ -18776,8 +18786,8 @@
    "takes/20261120T211742-sz1/state.json"
   ]
  },
- "synced": "5aada26480aaa7340afa06e2ccca0c80fa7c852a",
- "synced_at": "2026-11-20T21:34:11+00:00",
+ "synced": "4f44849326b9061ebb1d96ef393122fdc7374c60",
+ "synced_at": "2026-11-20T21:35:29+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
