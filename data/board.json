@@ -11544,7 +11544,7 @@
    "theme": "Story and Dialogue",
    "lane": "claude",
    "col": "prog",
-   "next": "Claude brings the build to the locked canon for CANON-04 when its prompt is started.",
+   "next": "Shipped in gem-canon04. Deedee no longer says \"camera\" or \"your grandfather's chair\" at the fishing spot; she points out purple-black sparkles inside the bulb that change color. Her new line plays through speech synthesis until it is recorded (Voice Library, chapter 1, Deedee).",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -11569,6 +11569,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Shipped gem-canon04: one Deedee line in ch1Spot reworded (kept flashbulb, burnt, set it off right here; dropped camera and the chair; added purple-black sparkles like crushed-up stars that change color). No other dialogue in any chapter says camera. Old baked clip purged; checked in portrait and landscape."
     }
    ],
    "tag": "gem-canon04",
@@ -11580,7 +11584,8 @@
     "model": "Claude Opus 5.5 (row D: story and dialogue Tom judges by taste)",
     "effort": "medium (one scene rewritten to a clear target)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-canon04 in data/board.json, history included. Your first push is the commit board: start c-gem-canon04.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is CANON-04. What the tester saw: Priority Critical. Where: `Grump Hollow` Flashbulb Cutscene. Current build: Deedee immediately says: `\"A flashbulb, from an old camera. It's burnt. Somebody set it off right here and left it by your grandfather's chair.\"` Locked target: Do NOT reveal `\"camera\"` in Ch. 1! (Even in Ch. 9 nobody says `\"camera\"` yet; Julian's camera is first spotted in Ch. 10.) Have them find Burnt Bulb #1 with iridescent violet-black star-glass flecks inside (seeding Ch. 2's purple smog & the Meteor Entity) without deducing an old camera yet, and remove the `\"grandfather's chair\"` pond reference.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-canon04, push to main, and write the result and the next step onto the card.\n\nBurnt Bulb #1 has iridescent violet-black star-glass flecks inside and nobody says camera in chapter 1 (Julian's camera first appears in chapter 10; read the story docs before keeping or changing any later reference).\n\nYou have my full permission to access the repo."
-   }
+   },
+   "after": "nothing for Tom: end"
   },
   {
    "id": "c-gem-canon05",

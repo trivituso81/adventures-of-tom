@@ -71,7 +71,6 @@ chapter	file	line	character	mood	talk	text
 1	data/scenes.js	255	Grace	unimpressed		Tata, stop. You're getting fingerprints on it. And look, it has a dent. Did you do that?
 1	data/scenes.js	256	Tom	unimpressed	point	Grace. I couldn't even make it wobble.
 1	data/scenes.js	258	Grace	surprised		Deedee, what's that?
-1	data/scenes.js	259	Deedee	none	tell	A flashbulb, from an old camera. It's burnt. Somebody set it off right here and left it by your grandfather's chair.
 1	data/scenes.js	260	Grace	surprised		Don't throw it out! It's a clue. I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it. I'm writing it in pencil.
 1	data/scenes.js	261	Tom	none	ask	Why pencil?
 1	data/scenes.js	262	Grace	none	tell	Because I don't know what any of it means yet.
@@ -2556,3 +2555,4 @@ Nine Scoops	data/bonus-nine-scoops.js	1047	Rose	happy	answer	Count the duck too.
 	pool:welcome:6:Tom		Tom	none	answer	A spreadsheet. Of course.
 	pool:welcome:6:Grace		Grace	none	tell	It was a very good spreadsheet.
 	dep:4:flight		Tom	none	tell	Rose, please don't lose that tooth until I'm back. I want to see the hole.
+1	data/scenes.js	259	Deedee	none	tell	A flashbulb. It's burnt. Somebody set it off right here. Look in the glass. Little purple-black sparkles, like crushed-up stars. They change color when you tip it.

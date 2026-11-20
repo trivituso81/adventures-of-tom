@@ -7,7 +7,7 @@ const LINE_GAPS={
 "Boppy|Safest place there is. Gold is for keeping, Cozy Rosie. You put that where nobody's going to look.": "snap",
 "Boppy|The mud gets a muffin and I don't?": "snap",
 "Deedee|A ball of mud came through the door and took them. Pan and all.": "beat",
-"Deedee|A flashbulb, from an old camera. It's burnt. Somebody set it off right here and left it by your grandfather's chair.": "snap",
+"Deedee|A flashbulb. It's burnt. Somebody set it off right here. Look in the glass. Little purple-black sparkles, like crushed-up stars. They change color when you tip it.": "snap",
 "Deedee|Excuse me! I just washed that floor.": "snap",
 "Deedee|For once in his life he rounded down.": "beat",
 "Deedee|I made twelve and they're all still there. I've been standing between that pan and your father since six this morning.": "snap",

@@ -7,7 +7,7 @@ const LINE_POSES={
   // Deedee looks for the reading glasses that sit on top of her head (her press-A chat in her house, data/maps-le.js).
   "Deedee|Have you seen my reading glasses? I had them a minute ago. I've looked everywhere. Twice.":{id:'deedee',f:'c1d_glasses',face:'glasses'},
   // Chapter 1: Deedee holds up the burnt flashbulb she found at the pond (SCENES.ch1Spot).
-  "Deedee|A flashbulb, from an old camera. It's burnt. Somebody set it off right here and left it by your grandfather's chair.":{id:'deedee',f:'c1d_bulb',face:'bulb'},
+  "Deedee|A flashbulb. It's burnt. Somebody set it off right here. Look in the glass. Little purple-black sparkles, like crushed-up stars. They change color when you tip it.":{id:'deedee',f:'c1d_bulb',face:'bulb'},
   // Chapter 3: Rose holds the bulb up high on the sundial rock (SCENES, ch3-bulb).
   "Rose|And there's Deedee's litter! On the clock rock!":{id:'rose',f:'c3r_bulb',face:'bulb'}
 };

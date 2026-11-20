@@ -434,10 +434,9 @@
   {
    "voice": "deedee",
    "speaker": "Deedee",
-   "text": "A flashbulb, from an old camera. It's burnt. Somebody set it off right here and left it by your grandfather's chair.",
+   "text": "A flashbulb. It's burnt. Somebody set it off right here. Look in the glass. Little purple-black sparkles, like crushed-up stars. They change color when you tip it.",
    "ctx": "chapter 1 (locked rebuild)",
-   "script": "[warm Long Island accent, plain, certain] A flashbulb, from an old camera. It's burnt. [warm Long Island accent, annoyed] Somebody set it off right here and left it by your grandfather's chair.",
-   "takeId": "gen-b3d0c580e0"
+   "script": "[warm Long Island accent, plain, certain] A flashbulb. It's burnt. [warm Long Island accent, annoyed] Somebody set it off right here. [warm Long Island accent, softer, curious] Look in the glass. Little purple-black sparkles, like crushed-up stars. [quiet, a little amazed] They change color when you tip it."
   },
   {
    "voice": "grace",

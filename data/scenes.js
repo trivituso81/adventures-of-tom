@@ -318,7 +318,7 @@ SCENES.ch1Spot=[
   {talk:'Tom',lines:["Grace. I couldn't even make it wobble."]},
   {flag:'ch1-bulb'}, {call:()=>sfx.pickup()},   // Deedee bends down and picks something out of the grass with a tissue
   {talk:'Grace',lines:["Deedee, what's that?"]},
-  {talk:'Deedee',lines:["A flashbulb, from an old camera. It's burnt. Somebody set it off right here and left it by your grandfather's chair."]},
+  {talk:'Deedee',lines:["A flashbulb. It's burnt. Somebody set it off right here. Look in the glass. Little purple-black sparkles, like crushed-up stars. They change color when you tip it."]},
   {talk:'Grace',lines:["Don't throw it out! It's a clue. I'm starting a new list. Burnt bulb. Grey grass. Orange cube with a dragonfly in it. I'm writing it in pencil."]},
   {talk:'Tom',lines:["Why pencil?"]},
   {talk:'Grace',lines:["Because I don't know what any of it means yet."]},
