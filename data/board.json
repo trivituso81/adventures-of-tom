@@ -6541,7 +6541,7 @@
    "title": "Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\"",
    "theme": "Voice Clips",
    "lane": "tom",
-   "col": "up",
+   "col": "wait",
    "ask": "voice",
    "fyi": true,
    "next": "ADMIN > VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. The script you kept ends \"I'm starving!\" but the clip stops after \"number two can't wait.\" Record it again so it says the last sentence, keep it, and Export pending clips. If you would rather drop \"I'm starving!\", delete it from the script and keep the take as it is.",
@@ -6556,8 +6556,63 @@
     {
      "d": "2026-11-19",
      "t": "Made by ch1retext1: the only chapter 1 line whose kept script has words the clip does not say."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom: something is wrong: i want to drop it - that's why it's not there. you delete it Sent to Claude as card c-fix-ch1starving; this card waits on it and comes back to you when the fix ships."
     }
-   ]
+   ],
+   "waiting_on": "claude"
+  },
+  {
+   "id": "c-fix-ch1starving",
+   "tag": "fix-ch1starving",
+   "lane": "claude",
+   "col": "up",
+   "fix": true,
+   "theme": "Voice Clips",
+   "title": "Fix what you found on: Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\"",
+   "next": "You reported a problem on Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\". Copy the prompt into a new conversation in the Project on Opus 5.5, effort medium. Latest: i want to drop it - that's why it's not there. you delete it",
+   "blocks": [
+    "t-ch1starving"
+   ],
+   "created": "2026-11-19",
+   "changed": "2026-11-19",
+   "reports": [
+    {
+     "at": "2026-11-20T03:51:06.694Z",
+     "card": "t-ch1starving",
+     "title": "Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\"",
+     "ask": "voice",
+     "words": "i want to drop it - that's why it's not there. you delete it",
+     "shot": "",
+     "asked": "ADMIN ) VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. The script you kept ends \"I'm starving!\" but the clip stops after \"number two can't wait.\" Record it again so it says the last sentence, keep it, and Export pending clips. If you would rather drop \"I'm starving!\", delete it from the script and keep the take as it is."
+    }
+   ],
+   "chat": {
+    "url": "",
+    "opening": "Something is wrong on t-ch1starving"
+   },
+   "history": [
+    {
+     "d": "2026-11-19",
+     "t": "Made by Something is wrong on t-ch1starving."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom reported on t-ch1starving: i want to drop it - that's why it's not there. you delete it"
+    }
+   ],
+   "prompt": {
+    "what": "Fixes the problems you reported on Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\".",
+    "before": [
+     "Nothing to do first. Your words and screenshot are on the card."
+    ],
+    "model": "Claude Opus 5.5 (row D: voice are judged by taste)",
+    "effort": "medium (fixing what you named, starting from what is there)",
+    "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-ch1starving and t-ch1starving in data/board.json, history included. Your first push is the commit board: start c-fix-ch1starving.\n\nTom tested and found problems:\n1. Card t-ch1starving (Re-take Tom's line \"Thank you for telling me, Rose\" so it says \"I'm starving!\", ask voice). He was asked: ADMIN ) VOICE LIBRARY, Chapter 1, search \"telling me, Rose\", select Tom's line. The script you kept ends \"I'm starving!\" but the clip stops after \"number two can't wait.\" Record it again so it says the last sentence, keep it, and Export pending clips. If you would rather drop \"I'm starving!\", delete it from the script and keep the take as it is. He wrote: i want to drop it - that's why it's not there. you delete it\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T03:51:06.694Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-ch1starving to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-ch1starving, and give the build fix-ch1starving a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
+   },
+   "after": "t-ch1starving"
   }
  ],
  "sessions": [
