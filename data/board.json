@@ -9907,6 +9907,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom (09:46 recording, reviewed frame by frame): \"there are still several issues with the mudblob animation\". Plan: claude/heist-fix5-plan.md, eight rows. Fixed by card c-fix-heist1play-5 (build fix-heist1play-5); this card waits on it and comes back to you when it ships."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom (09:46 recording, reviewed frame by frame): \"there are still several issues with the mudblob animation\". Plan: claude/heist-fix5-plan.md, eight rows. Fixed by card c-fix-heist1play-5 (build fix-heist1play-5); this card waits on it and comes back to you when it ships."
     }
    ],
    "waiting_on": "claude"
@@ -14166,6 +14170,10 @@
      "d": "2026-11-20",
      "t": "ended without shipping: Tom's report has no fault in it (\"i took a video and created a new Fable request directly with Claude\"), no pencil report was filed after 17:50Z, and the three older ch1Theft pencil reports predate fix-heist1play-4. Nothing to reproduce, so nothing was changed. Retired; Tom's own Fable request now owns the theft scene.",
      "at": "2026-11-20T18:00:00Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Reopened by the session that took Tom's own request (the Project plan claude/heist-fix5-plan.md, written from his 09:46 recording). The earlier auto run retired this card because the board report held no fault in words; the fault is in the recording and the plan lists it in eight rows."
     },
     {
      "d": "2026-11-20",
