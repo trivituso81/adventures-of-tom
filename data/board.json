@@ -358,7 +358,7 @@
    "col": "up",
    "next": "First writes the chapter 2 teardown list and shows you the questions marked ASK; builds only after you answer. Lines go in word for word from the locked file. One chapter per conversation. Start: claude/story-next.md.",
    "blocks": [],
-   "changed": "2026-11-19",
+   "changed": "2026-11-20",
    "created": "2026-11-17",
    "chat": {
     "url": "",
@@ -372,6 +372,10 @@
     {
      "d": "2026-11-19",
      "t": "Unblocked by the board audit: you marked the chapter 1 play done on 11-19. The prompt no longer has a blank for you to fill in."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Tom sent this to the backlog."
     }
    ],
    "prompt": {
@@ -383,7 +387,11 @@
     "effort": "medium (steps are known)",
     "text": "Read claude/story-next.md and continue with the chapter 2 build. I have played chapter 1. You have my full permission to access the repo."
    },
-   "tag": "ch2build"
+   "tag": "ch2build",
+   "backlog": {
+    "at": "2026-11-20",
+    "from": "up"
+   }
   },
   {
    "id": "c-b3s8",
