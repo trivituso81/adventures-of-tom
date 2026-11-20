@@ -1,3 +1,6 @@
+## fix-heist1play-3 (2026-11-20): the mud blob hops up onto the kitchen counter for the muffins and hops back down, and Deedee gets shoved back a step, shocked, without falling
+
+Tom (t-heist1play, 11-20): "Almost perfect - but the blob overlaps too much with art that doesn't make sense for example the counter. Can he hop on the counter to grab the muffins then hop back down and run away? Also Deedee should get knocked backwards by him with the respective emotion but she should not fall down". Changed in `data/scenes.js` (`ch1Theft`) only: the walk into the island is now a hop up onto it, the grab happens on top, a hop down, then the run out as before. Deedee gets a short hop back with her surprised face while Tom, Rose and Grace still go down. Kept: everything else in the scene. No spoken line changed. Frames looked at in portrait; landscape not separately captured.
 ## board-gemcards (2026-11-20): board only: one card for every issue in Gemini's chapter 1 test report
 
 Tom (11-20): "Make a card for each and every one of the issues listed in this report, which came from Gemini's testing. and put each one in the Kanban board."

@@ -210,18 +210,21 @@ SCENES.ch1Theft=[
     {seq:[{wait:.2},{sfx:'bonk'},{wait:.25},{sfx:'bonk'},{wait:.25},{sfx:'bonk'},{wait:.2},{sfx:'thud'}]},
     {knock:'rose',to:[8.6,10.9],delay:.2,dir:'right'},
     {knock:'tom',to:[9.9,8.5],delay:.45,dir:'right'},
-    {knock:'grace',to:[11,10.7],delay:.7,dir:'right'}
+    {knock:'grace',to:[11,10.7],delay:.7,dir:'right'},
+    {seq:[{wait:.95},{pose:'Deedee',f:'em_surprised',mid:'deedee',dir:'down'},{hop:'Deedee',from:()=>[7,9],to:[7.6,8.1],time:.35,arc:8}]}   // fix-heist1play-3 (Tom: "Deedee should get knocked backwards by him with the respective emotion but she should not fall down"): shoved back a step, shocked, stays on her feet
   ]},   // fix-heist1play-2 (Tom: "Why does no one end up on the floor? It was hilarious"): it walks through the three and knocks them flat again
   {pose:'Big Mudling',f:'mh_look',dir:'left'}, {sfx:'look'}, {wait:.5},
   {pose:'Big Mudling',f:'mh_look',dir:'right'}, {face:'Deedee',dir:'left'}, {pose:'Deedee',f:'em_angry',mid:'deedee',dir:'left'},
   {wait:.4},
   {talk:'Deedee',lines:["Excuse me! I just washed that floor."]},
   // Beat 3, the lift: up against the island, it stretches, and the pan leaves the counter on the frame it is over its head.
-  {walk:'Big Mudling',to:[[4.9,8.15]],speed:.3},
+  {pose:'Big Mudling',f:'mh_reach',dir:'left'}, {wait:.2},   // fix-heist1play-3 (Tom: "he overlaps the counter ... hop on the counter to grab the muffins then hop back down"): it hops up onto the island instead of standing inside it
+  {hop:'Big Mudling',from:()=>[5.7,8.9],to:[4.7,7.5],time:.4,arc:12,lift:[0,20]},
   {pose:'Big Mudling',f:'mh_reach',dir:'left'}, {wait:.45},
   {pose:'Big Mudling',f:'mh_hold',dir:'right'}, {sfx:'pickup'}, {prop:'muffinpan',hide:true}, {flag:'muffins-gone'},   // the painted island loses its muffins too (engine/plate.js grandsEmpty)
   {prop:'crumbs',kind:'crumbs',set:{map:'grands',x:5.2,y:8.4}}, {wait:.6},   // a few crumbs where the muffins were
   // Beat 4, the escape: straight to the door while everyone watches it go, Boppy's story goes on behind it.
+  {hop:'Big Mudling',from:()=>[4.7,7.5],to:[5.7,8.9],time:.4,arc:10,lift:[20,0]},
   {all:[
     {seq:[{pose:'Big Mudling',f:['mh_sneak_a','mh_sneak_b'],fps:8,dir:'right'},
           {walk:'Big Mudling',to:[[6.4,9.8],[7.2,10.8],[8,11.8]],speed:.4},
