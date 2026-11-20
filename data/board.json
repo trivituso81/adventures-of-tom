@@ -10549,8 +10549,8 @@
    "lane": "claude",
    "col": "prog",
    "theme": "Game Shell",
-   "title": "Remove all the toasts that appear at the top of the screen",
-   "next": "Your idea: Remove all the toasts that appear at the top of the screen in small frames with small font. They are unneeded Claude starts it by itself.",
+   "title": "Remove the small popups at the top of the screen",
+   "next": "Built: showToast and queueToast show nothing now.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -10600,7 +10600,8 @@
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-idea-removeall in data/board.json, history included. Your first push is the commit board: start c-idea-removeall.\n\nTom made this card himself with New card on the board. His words: \"Remove all the toasts that appear at the top of the screen in small frames with small font. They are unneeded\"\n\nThe board sized this from his words alone: Claude Sonnet 5.5 (row C: a build, the steps are not written yet), effort medium (a small piece). If the logic in claude/handoff-rules.md clearly gives a different model for the real work, stop before building: rewrite this card's prompt with the right model and effort, push that, and tell Tom in two lines. Otherwise go on.\n\nCheck the open cards first: if one already covers this, add his words to that card's history, retire this card with a history line naming it, and work that card. If not, rewrite this card's title and next step so they say plainly what is being made.\n\nDesign it yourself and make the calls: Tom does not pick between options. Ask one short question only if a choice cannot be undone or is expensive to redo. Build it, test it, look at the frames in portrait and landscape, and push build idea-removeall with a docs/CHANGES.md heading that quotes his words. Give this card after (a Tom card that names the screen to open and what to check, or nothing for Tom). You have my full permission to access the repo."
    },
    "auto": true,
-   "started_at": "2026-11-20T15:51:14+00:00"
+   "started_at": "2026-11-20T15:51:14+00:00",
+   "after": "nothing for Tom: end"
   }
  ],
  "sessions": [

@@ -1,3 +1,7 @@
+## idea-removeall (2026-11-20): the small popups at the top of the screen are gone
+
+Tom (11-20): "Remove all the toasts that appear at the top of the screen in small frames with small font. They are unneeded". `showToast` and `queueToast` (`engine/world.js`) now show nothing; the queue timer is removed. Goal updates still pulse the location label as before.
+
 ## tapfb1 (2026-11-20): every board button and link shows your tap right away
 
 Tom (2026-11-20): "In the board, when tapping any button or any link, there needs to be some feedback to the user that the tap happened, even if it's not ready to finish processing the tap yet." Card c-tapfb1.
