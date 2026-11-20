@@ -279,7 +279,7 @@ def main():
     report = {'group': a.group, 'cap': a.cap, 'dry_run': a.dry_run, 'queued': [e['id'] for e in queue], 'made': [], 'approved': [], 'still': [], 'held': [], 'failed': [], 'blocked': [{'id': e['id'], 'why': w} for e, w in cl['blocked']], 'redoWaiting': [e['id'] for e in cl['redoWait']], 'spent': 0.0, 'estimate': round(need, 2)}
     rf = os.path.join(a.out, 'clipgen-report.json')
     if a.requests:   # keysecrets2: what the Art Library reads to tell Tom what happened to each press
-        report.update({'mode': 'requests', 'at': datetime.datetime.now(datetime.timezone.utc).isoformat(), 'asked': asked, 'skipped': [n for n in notes if n['kind'] == 'skipped'], 'blocked': [{'id': n['id'], 'why': n['why']} for n in notes if n['kind'] == 'blocked']})
+        report.update({'mode': 'requests', 'at': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3] + 'Z', 'asked': asked, 'skipped': [n for n in notes if n['kind'] == 'skipped'], 'blocked': [{'id': n['id'], 'why': n['why']} for n in notes if n['kind'] == 'blocked']})
     def bail(msg):
         report['failed'].append({'id': '*', 'why': msg}); json.dump(report, open(rf, 'w'), indent=1); say('STOP:', msg); return 1
     if a.dry_run or not queue:

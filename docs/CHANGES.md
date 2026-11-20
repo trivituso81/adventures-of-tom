@@ -1,3 +1,7 @@
+## fix-keysecrets2-try (2026-11-20): GENERATE VIDEO now shows it is still working, and reads the job's report on any phone
+
+Tom (t-keysecrets2-try, 11-20): "waited for over a minute but seeems to be hanging". Fact: the job did run (request 21:53:50, video made and approved 21:55:34, report saved 21:55:36), so the page was the part that hung: it printed one fixed line and changed it only when it could read the report's time. The report's time had six fraction digits (`21:55:07.098388+00:00`), which a phone may not read; then the page never matched the report. Fix: the page cuts the time to milliseconds (`clipTs`), accepts a report that names the clip when the time cannot be read, and while it waits writes "Asked N min ago. GitHub is still making the video" with the time of the last check; the job now writes its time in milliseconds. Not reproduced on a phone (Chromium test passes; I could not run Safari). `keysecrets2_test.py` passes.
+
 ## 2026-11-20 (460): Art Library bake, clip-toad-idle (`artbake1534`, made by the art-bake Action)
 
 - Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).

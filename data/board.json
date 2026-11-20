@@ -16748,7 +16748,7 @@
    "ask": "play",
    "fyi": true,
    "title": "Try GENERATE VIDEO on one clip",
-   "next": "ADMIN > ART LIBRARY: tap Open in the Art Library below, then press GENERATE VIDEO on that clip (about $0.25, a monster idle). The button changes to ASKED, WAITING. Wait about 3 to 6 minutes, with the page open or closed: the message under the button goes to Made and approved, or says why not (held by the gate, the video hardly moves, not made). All good if one of those lines appears. Something is wrong if nothing changes after 15 minutes or the page asks for a key.",
+   "next": "ADMIN > ART LIBRARY: tap Open in the Art Library below, the Toad idle you tried is already approved, so there is nothing to press on it. Press GENERATE VIDEO on clip-mudling-idle instead (about $0.25; use Open in the Art Library, then find it under Clips > Chapter 1). Under the button you should now see 'Asked N min ago. GitHub is still making the video' updating every 20 seconds, then Made and approved. All good if that line moves. Something is wrong if the line stays on 'Asked' after 10 minutes.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -16775,6 +16775,10 @@
      "d": "2026-11-20",
      "t": "Tom: something is wrong: waited for over a minute but seeems to be hanging Sent to Claude as card c-fix-keysecrets2-try; this card waits on it and comes back to you when the fix ships.",
      "at": "2026-11-20T21:56:30.603Z"
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fix fix-keysecrets2-try shipped: the page now shows elapsed time while waiting and reads the job report on any phone."
     }
    ],
    "waiting_on": "claude"
@@ -16827,6 +16831,10 @@
     {
      "d": "2026-11-20",
      "t": "Started by START on Claude Sonnet 5.5, effort medium."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Fixed: page now shows waiting progress and reads report time robustly; build fix-keysecrets2-try."
     }
    ],
    "prompt": {

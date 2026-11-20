@@ -54,6 +54,8 @@ const CLIP_REQ_PATH='data/clip-requests.json', CLIP_ASKED='aot-clip-asked', CLIP
 const clipGenBase=()=> (Q.get('clipgen')||'https://raw.githubusercontent.com/trivituso81/adventures-of-tom/clipgen').replace(/\/+$/,'')+'/';
 const clipAskedGet=()=>{ try{ return (JSON.parse(LS.get(CLIP_ASKED)||'[]')||[]).filter(p=>p&&p.at&&Date.now()-p.at<180*60000); }catch(x){ return []; } };
 const clipAskedSet=a=>LS.set(CLIP_ASKED,JSON.stringify(a));
+// A report time such as 2026-11-20T21:55:07.098388+00:00 (six fraction digits) is cut to milliseconds so every browser reads it; NaN when it cannot be read.
+const clipTs=t=>t?Date.parse(String(t).replace(/(\.\d{3})\d+/,'$1')):NaN;
 let CLIP_POLL=0;
 const clipAsked=id=>clipAskedGet().some(p=>(p.ids||[]).includes(id));
 const clipCap=n=>Math.min(CLIP_HARD_CAP,Math.max(1,Math.ceil(n*1.2)));
@@ -79,10 +81,11 @@ async function clipGenerate(id,btn){
 async function clipPoll(){
   CLIP_POLL=0; const P=clipAskedGet(); if(!P.length) return;
   let rep=null; try{ const r=await fetch(clipGenBase()+'clipgen-report.json?t='+Date.now(),{cache:'no-store'}); if(r.ok) rep=await r.json(); }catch(x){}
-  const repAt=rep&&rep.at?Date.parse(rep.at):0, left=[];
+  const repAt=clipTs(rep&&rep.at), left=[];
   for(const p of P){
-    const mine=rep&&rep.mode==='requests'&&repAt>=p.at-120000&&(p.ids||[]).some(i=>(rep.asked||[]).includes(i));
-    if(!mine){ left.push(p); continue; }
+    // repAt is NaN when the phone cannot read the report's time: then the report counts when it names this clip (the job replaces the file on every run)
+    const mine=rep&&rep.mode==='requests'&&(repAt!==repAt||repAt>=p.at-120000)&&(p.ids||[]).some(i=>(rep.asked||[]).includes(i));
+    if(!mine){ left.push(p); const mins=Math.max(0,Math.round((Date.now()-p.at)/60000)); for(const id of p.ids||[]) if(ENTRY[id]&&MSG[id]&&!MSG[id].err){ MSG[id]={text:'Asked '+mins+' min ago. GitHub is still making the video; this line updates by itself (checked '+new Date().toLocaleTimeString()+').',err:false}; refreshItem(id); } continue; }
     const why=(rep.failed||[]).find(x=>x.id==='*');
     for(const id of p.ids||[]){
       const f=(rep.failed||[]).find(x=>x.id===id)||why, h=(rep.held||[]).find(x=>x.id===id), b=(rep.blocked||[]).find(x=>x.id===id), s=(rep.skipped||[]).find(x=>x.id===id);
