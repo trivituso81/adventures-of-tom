@@ -8764,6 +8764,29 @@
    },
    "after": "t-ch1starving",
    "done": "2026-11-20"
+  },
+  {
+   "id": "b-board-starving4",
+   "tag": "board-starving4",
+   "lane": "claude",
+   "col": "done",
+   "done": "2026-11-20",
+   "theme": "Tools",
+   "title": "board only: your last \"I'm starving!\" report came 40 seconds before the fix was live",
+   "next": "Done: board only: your last \"I'm starving!\" report came 40 seconds before the fix was live",
+   "chat": {
+    "url": "https://claude.ai/code/session_01RXeukGqkSQR8RWqB1nkDck",
+    "opening": "unknown"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Shipped as board-starving4. Added by board-sync because the build had no card."
+    }
+   ],
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20"
   }
  ],
  "sessions": [
@@ -9089,10 +9112,11 @@
    "url": "https://claude.ai/code/session_01RXeukGqkSQR8RWqB1nkDck",
    "title": "Unstick your cards that sat in Waiting with nothing left to wait on (boardwait1)",
    "first": "2026-11-20T00:26:34-08:00",
-   "last": "2026-11-20T00:42:40-08:00",
+   "last": "2026-11-20T00:46:13-08:00",
    "tags": [
     "boardwait1",
-    "fix-ch1starving-3"
+    "fix-ch1starving-3",
+    "board-starving4"
    ],
    "cards": [
     "c-boardwait1",
@@ -9751,8 +9775,8 @@
    "takes/20261120T032059-yoq/state.json"
   ]
  },
- "synced": "94f0c0801316579b453f745a8209664b630468b8",
- "synced_at": "2026-11-20T08:43:13+00:00",
+ "synced": "29ade7d6dd084dd5843238095d501e0db1d6fb73",
+ "synced_at": "2026-11-20T08:47:02+00:00",
  "routines": [
   {
    "id": "sonnet-medium",
