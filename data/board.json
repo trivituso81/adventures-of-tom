@@ -10863,7 +10863,7 @@
    "theme": "Battle System",
    "lane": "claude",
    "col": "prog",
-   "next": "Claude fixes this (BUG-01, severity P0 Critical (Softlock)) when its prompt is started.",
+   "next": "Shipped as gem-bug01: after a loss the fight restarts at once. Tom checks it on his phone (card t-gem-bug01play).",
    "blocks": [],
    "changed": "2026-11-20",
    "created": "2026-11-20",
@@ -10888,6 +10888,10 @@
     {
      "d": "2026-11-20",
      "t": "Started: the conversation claimed this card."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Confirmed on main (Big One on water 4 tiles from shore, A retry unreachable). Fixed: loss heals, Deedee speaks, fight restarts at once (up to 8 times, then the pond scene is re-armed). Tested a loss, loss, win in portrait and landscape."
     }
    ],
    "tag": "gem-bug01",
@@ -10900,7 +10904,8 @@
     "effort": "medium (the tester named three possible fixes)",
     "text": "Read CLAUDE.md and claude/handoff-rules.md (both in the repo), then card c-gem-bug01 in data/board.json, history included. Your first push is the commit board: start c-gem-bug01.\n\nThis card comes from a tester (Gemini) who played an older build (board-ch1review) of chapter 1. The full report is claude/ch1-gemini-tracker.md in the repo; this card is BUG-01. What the tester saw: Severity P0 Critical (Softlock). Where: Grump Hollow (`The Big One` Wipe Recovery). Losing to `The Big One` plays Deedee's recovery scene (`\"Up, up. Everybody up... Then we try again.\"`) and places the party back on the shoreline in a permanent softlock: the one-time right-shore flashbulb cutscene flag is already consumed (leaving only the 4-line repeatable `Inspect orange block`), while `The Big One` sits on unwalkable water tiles out of `A`-button range (`\"Face a neighbor or an object, then press A.\"`).\n\nThe tester suggested (a suggestion, not an order): Either reset the pre-boss trigger zone on wipe, add a shoreline `A`-button re-challenge trigger tile facing `The Big One`, or offer an immediate `\"Retry Boss Battle\"` prompt on defeat.\n\nFIRST confirm it still happens on current main (the chapter 1 rebuild, the muffin heist redo and other sessions may already have fixed or changed it, and a standing rule in CLAUDE.md wins over the report). If it is already fixed, or it contradicts a standing rule, retire this card to Done with a history line saying why, and stop. Otherwise make the change, run python3 tools/smoke.py and the test for the area, look at screenshots in portrait and landscape, bump the tags with bump_tags.py, add a docs/CHANGES.md entry headed ## gem-bug01, push to main, and write the result and the next step onto the card.\n\nP0: the player cannot continue. Pick the retry prompt on defeat if it fits the battle code; otherwise reset the pre-boss trigger. Test losing the fight on purpose, then winning the retry.\n\nYou have my full permission to access the repo."
    },
-   "started_at": "2026-11-20T16:18:35+00:00"
+   "started_at": "2026-11-20T16:18:35+00:00",
+   "after": "t-gem-bug01play"
   },
   {
    "id": "c-gem-bug02",
@@ -12151,6 +12156,30 @@
     "text": "Read CLAUDE.md. You can read only the repo: there is no claude/ folder, so do not look for the Project docs. Read cards c-fix-clipposes-3 and t-clipposes in data/board.json, history included. Your first push is the commit board: start c-fix-clipposes-3.\n\nTom tested and found problems:\n1. Card t-clipposes (Watch the family's painted battle poses, ask animations). He was asked: ADMIN ) BATTLE LAB ) pick a difficulty ) NEW BATTLE ) PAINTED STATES: CHAPTER 1. Now each state plays once, then the run stops on a panel: the fighter and state (for example TOM: KNOCKED OUT, 6 of 36), WATCH AGAIN, an optional note, REJECT and APPROVE. Nothing plays until you answer. It always runs at 1x, and Tom no longer shows his guard pose during IDLE, HIT and DODGE. Answer all 36 (STOP leaves; your answers so far are kept, and running it again lets you finish). Each answer and note is saved for Claude as you go, so you do not need All good or Something is wrong here: this card closes by itself when every state has an answer, and your rejections go to the card Apply your notes on the painted poses. If the panel's last line says No GitHub token on this phone, follow that line once, then run it again. He wrote: These need to be video animations, not frames. Why did we take a step backwards in the quality by reverting to our old method after we did all of that work to figure out a way to animate the images\n\nAlso run python3 tools/reports.py list (docs/REPORTS.md): an in-game pencil report filed since 2026-11-20T16:07:07.793Z about the same thing belongs to this fix. Fix it here and mark it with python3 tools/reports.py done and its id.\n\nFor each problem: reproduce it, fix it, test, and look at the frames in portrait and landscape. A problem you cannot fix without Tom: write why, and the one thing needed, as a history line on his card. Before you push, rewrite the next step of card t-clipposes to say exactly what to look at again (shipping moves it back to Tom), keep after set to t-clipposes, and give the build fix-clipposes-3 a docs/CHANGES.md heading; the entry quotes his words. You have my full permission to access the repo."
    },
    "after": "t-clipposes"
+  },
+  {
+   "id": "t-gem-bug01play",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Battle System",
+   "ask": "play",
+   "fyi": true,
+   "title": "Lose to The Big One on purpose and check you are not stuck",
+   "next": "Chapter select > Chapter 1, play to the Big One at Grump Hollow's pond and lose the fight on purpose. Look for: Deedee heals everyone and says her line, then the Big One fight starts again by itself (no walking back, no A button needed). Win it the second time and the BOO scene should play. All good if so; Something is wrong with what you saw.",
+   "first": "Wait for the gem-bug01 build to publish, then RELOAD on the title.",
+   "blocks": [],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "started by c-gem-bug01"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by c-gem-bug01: Tom's play check of the retry after losing to The Big One."
+    }
+   ]
   }
  ],
  "sessions": [

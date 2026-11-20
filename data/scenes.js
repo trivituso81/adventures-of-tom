@@ -331,11 +331,20 @@ SCENES.ch1Pond=[
   {talk:'Deedee',lines:["I worked the night shift, Tom. I've walked up to worse. Mister, take off my pan."]},
   {pose:'The Big One',f:null},
   {battle:'bigone',tut:'bigone'},
-  {if:()=>flag('battle:bigone')!=='win',then:[
+  ...bigOneRetry(8)
+];
+// gem-bug01 (Gemini BUG-01): the Big One sits on open water, so the old "face it and press A" retry could never be reached after a loss. Losing now heals
+// the party, Deedee says her line and the fight starts again at once; this repeats up to 8 losses in a row. If that is ever used up, the pond scene is
+// re-armed (its flag cleared) so walking back into the hollow plays it again.
+function bigOneRetry(left){
+  const lost=()=>flag('battle:bigone')!=='win';
+  if(left<=0) return [{if:lost,then:[{heal:true},{call:()=>setFlag('ch1-pond',false)},{toast:'Deedee healed everyone. Walk back toward the pond to try again.',time:5}],else:[]}];
+  return [{if:lost,then:[
     {heal:true},
     {talk:'Deedee',lines:['Up, up. Everybody up. Deedee will make it better.','Tom, you stand in front of whoever it stares at. Cozy Rosie, make it laugh. Then we try again.']},
-    {toast:'Face The Big One and press A to try again. Deedee healed everyone.',time:5}],else:[]}
-];
+    {battle:'bigone'},
+    ...bigOneRetry(left-1)],else:[]}];
+}
 // 6b. After the fight (won in the scene, or on a retry with A): the fish still wears the pan and sulks. BOO. It laughs, the pan comes off, the coin.
 SCENES.ch1AfterBoss=[
   {flag:'ch1-tin'},

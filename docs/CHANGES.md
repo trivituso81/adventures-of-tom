@@ -1,3 +1,10 @@
+## gem-bug01 (2026-11-20): losing to The Big One now heals the party and starts the fight again at once, so nobody is stuck on the shore
+
+- Gemini BUG-01 (P0 softlock), confirmed on current main: The Big One sits on open water at tile (18,8) and the nearest walkable shore is about 4 tiles away, so the old "Face The Big One and press A to try again" after a loss could never be done, and the pond scene had already used up its one-time flag.
+- Fix (`data/scenes.js`, `bigOneRetry`): after a loss Deedee heals everyone and says her existing "Up, up. Everybody up..." lines (no spoken line changed), then the fight starts again straight away; this repeats for up to 8 losses in a row. If that is ever used up, the pond scene is re-armed so walking back into the hollow plays it again.
+- Tested: lost on purpose twice, won the third fight, the "Rose BOO" after-boss scene played (`ch1-tin` set), in portrait 390 x 844 and landscape 844 x 390 (`tools/shots/gembug01-390.png`, `gembug01-844.png`). `python3 tools/smoke.py` ran with the Chromium path; its only failures are not from this change (heights test needs scipy, a board_sync_test replay check on today's cards).
+- No picture, voice or clip work.
+
 ## gem-bug05 (2026-11-20): Chapter select faces, battle faces and dialogue faces no longer show a blank or wrong picture for a frame
 
 Gemini BUG-05 (build board-ch1review). Cause: the chapter list drew `portraits/<id>.png` with no `?v=` tag, a different address from the one the menus and battle use, so nothing had loaded it yet and each 26 px face showed its dark background until it arrived; the battle turn bar and party panel drew the same hero pictures on first use; the dialogue box kept the last speaker's face until the next one loaded. Changes: `engine/menu.js` fetches and decodes every hero portrait once at load and keeps them; `engine/splash.js` draws the chapter faces from the same tagged address (`PORTRAITS`); `engine/overworld.js` hides the dialogue face until the new one has loaded. Not changed: which pictures are used (hero paintings stay out of dialogue).
