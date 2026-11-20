@@ -37,6 +37,12 @@
 - Already on a card: muffin plates and pan (c-heist1), Flight Zero in the Gate Zero window (c-gatezero), Gridlock Prime staging (c-stagefollow). New cards: c-ch1leftovers (Amy arch sign, Aunt Ellie positions, Gus and Bean glass block) and c-posesizes (walking pose size jumps, unsized Grace, Rose and Deedee poses).
 - Dropped, already tracked in claude/battle-build.md: the simple player rarely picking second-Vibe shield and ally-buff Skills (stage 14 only if the balance pass needs it) and the Ruckus gauge in the save file (stage 15). Kitchen side-view mood art: art only (claude/next-addendum-cutpolish3.md), waits on Tom wanting side-view mood sheets drawn.
 - Not done: no game code changed, so no phone check is needed; smoke was run (see below).
+## artgen2 (2026-11-20): QA for generated pictures is finished: measured on 40 pictures you approved, f_same made advisory
+
+- Replay (art-gen Action, `replay` 40, cap $1.50, spent $0.55, model grok-4.20-0309-non-reasoning): QA said no to a picture you approved for f_same 8 of 40 (20%), f_text 4 (10%), f_paint 3 (8%), f_crop 1 (3%), f_one, f_bg, f_count, f_anat 0; prompt questions 39 of 393 (10%). 25 of 40 were at score 0.9 or more with every fixed question yes.
+- `tools/art-library/artqa-policy.json`: f_same moved from hold to advisory (more than 1 in 10); the other seven stay hold. Nothing is auto-approved in this build; the record of QA against your decisions starts now (`qa` and `qaFail` on every approve and reject, `artqa_report.py`, the line on the board card).
+- Card t-artgen2look is yours: tap Generate all on a real card and judge the QA lines.
+
 ## artgen2a (2026-11-20): Pictures made from a board card now get a QA check (code and tests; the replay on your approved pictures comes next)
 
 - Plan: `claude/artgen-plan.md` section 5. `tools/art-library/artqa.py` asks an xAI vision model a fixed checklist (one image, painted not outlined, no stray text, background, nothing cut off, right count, same character as the reference, faces and hands) plus up to 10 requirements it reads out of the prompt, three runs, majority. `artgen.py` runs it right after each picture arrives (`--no-qa` turns it off); a failed or capped QA keeps the picture and says so.

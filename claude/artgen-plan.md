@@ -183,3 +183,12 @@ Tom (11-19 22:21): "Can we also create a prompt to link to the corresponding art
 - board_check: a link needs `to` of art, voice or music and non-empty ids; an open Tom card whose next step names a Library must link it. Something is wrong keeps the card, so `links` stay on it (nothing was changed there).
 - claude/handoff-rules.md (repo copy; write the same line in the Project copy): one line under "The board".
 - Measured: no xAI or ElevenLabs call was made.
+
+### artgen2 (2026-11-20, Sonnet 5.5): built as section 5 says, with these differences
+
+- Files: `tools/art-library/artqa.py` (judge, replay), `artqa-policy.json`, `artqa_report.py`, `artqa_test.py`; `artgen.py` runs QA after each picture (`--no-qa` off); `art-gen.yml` has the `replay` input and checks out `tools/clip-gate/vision.py`; stub.py answers `/v1/language-models` and `/v1/chat/completions`; board.html (thumbnail, score, failed lines, record line) and art.html (review panel, `qa` carried in on import, `qa` and `qaFail` written by decide) changed.
+- Differences: the QA transport reuses `vision.Xai._post`, `pick_model`, `usd` and `parse` but has its own system prompt and chat call (vision.chat has an animation prompt baked in). A checker that is down stops after the first failed run (no waiting through three). The question picker is regex on the prompt text. The card's `gen.run.qa` carries each picture's score, failed lines and file so the board needs no second fetch.
+- Measured (replay of 40 newest approved non-clip pictures, $0.55, model grok-4.20-0309-non-reasoning, three runs): said no to approved pictures: f_same 20%, f_text 10%, f_paint 8%, f_crop 3%, f_one, f_bg, f_count, f_anat 0%; prompt questions 10%. 25 of 40 (62%) at 0.9 or more with every fixed question yes. f_same moved to advisory (more than 1 in 10). f_text sits at exactly 1 in 10 and stays hold.
+- Not measured: rejected pictures (none are kept), so only false alarms are known. The record of QA against Tom's decisions starts with the next generated pictures. The replay judges with the newest reference versions, not the ones used at approval time.
+- Project copy: a session with the Project must write this section to claude/artgen-plan.md there too.
+

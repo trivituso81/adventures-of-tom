@@ -1,6 +1,16 @@
 {
  "threshold": 0.9,
- "hold": ["f_one", "f_paint", "f_text", "f_bg", "f_crop", "f_count", "f_same", "f_anat"],
- "advisory": {},
+ "hold": [
+  "f_one",
+  "f_paint",
+  "f_text",
+  "f_bg",
+  "f_crop",
+  "f_count",
+  "f_anat"
+ ],
+ "advisory": {
+  "f_same": "said no to 8 of 40 pictures you approved (20%) in the 2026-11-20 replay, more than 1 in 10"
+ },
  "min_record": 20
 }

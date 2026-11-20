@@ -7097,7 +7097,7 @@
    "col": "prog",
    "tag": "artgen2",
    "auto": true,
-   "next": "Waits on Generate all (artgen1) and your try of it. Then it adds a QA check of every generated picture against its prompt (a score and what failed, on the board card and in the Art Library review) and starts the record of QA against your own decisions. Nothing is auto-approved in this build.",
+   "next": "Built and shipped as artgen2: every generated picture is checked against its prompt (score and failed lines on the board card and in the Art Library review); nothing is auto-approved. Replay on 40 pictures you approved: 25 of 40 passed clean, $0.55. Waiting on your look at a real run (card Look at the QA results).",
    "blocks": [
     "c-artgen3"
    ],
@@ -7135,6 +7135,10 @@
     {
      "d": "2026-11-20",
      "t": "Title shortened for the board redesign (boardux2): titles are 60 characters or less with no build name."
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Replay on 40 approved pictures, $0.55 spent: said no to f_same 8 of 40 (20%, moved to advisory), f_text 4 (10%), f_paint 3 (8%), f_crop 1, f_one, f_bg, f_count, f_anat 0; 25 of 40 at score 0.9 or more with every fixed question yes."
     }
    ],
    "prompt": {
@@ -7146,7 +7150,7 @@
     "effort": "medium (the questions, files and tests are written in the plan)",
     "text": "Read CLAUDE.md, claude/handoff-rules.md and claude/artgen-plan.md (sections 1 to 3 and section 5), then card c-artgen2 in data/board.json with its history and the notes of the Tom cards that blocked it. Build artgen2 exactly as the plan says and push it as artgen2. Your first push is the commit board: start c-artgen2. The replay in section 5.3 is the only paid step: keep its cap at $1.50. Write what you built and anything that differs from the plan into the plan's Built section. Do not start the next phase. You have my full permission to access the repo."
    },
-   "after": "nothing for Tom: c-artgen2"
+   "after": "t-artgen2look"
   },
   {
    "id": "c-artgen3",
@@ -9139,6 +9143,39 @@
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20"
+  },
+  {
+   "id": "t-artgen2look",
+   "lane": "tom",
+   "col": "up",
+   "theme": "Tools",
+   "ask": "pictures",
+   "title": "Look at the QA results on a real pictures card",
+   "next": "ADMIN > BOARD, open a card that needs pictures (for example Art to make: Young Boppy Van Cortlandt '70). Tap Generate all, tap again to confirm. When the job finishes the card shows each picture with a QA score and what failed. Open each in the Art Library and APPROVE or REJECT as usual. All good if the QA lines matched what you saw; Something is wrong with what it missed or wrongly flagged. This starts card Auto-approve pictures that pass QA (artgen3).",
+   "blocks": [
+    "c-artgen3"
+   ],
+   "created": "2026-11-20",
+   "changed": "2026-11-20",
+   "chat": {
+    "url": "",
+    "opening": "started by c-artgen2"
+   },
+   "history": [
+    {
+     "d": "2026-11-20",
+     "t": "Added by c-artgen2 (artgen2 shipped)."
+    }
+   ],
+   "links": [
+    {
+     "to": "art",
+     "ids": [
+      "boppy-young-hero"
+     ],
+     "label": "Young Boppy Van Cortlandt '70"
+    }
+   ]
   }
  ],
  "sessions": [
