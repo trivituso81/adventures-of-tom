@@ -1,3 +1,9 @@
+## 2026-11-20 (462): Art Library bake, clip-toad-idle (`artbake1536`, made by the art-bake Action)
+
+- Tom approved these pictures in the Art Library; the Action baked them and moved the cache tags (tools/art-library/art_bake.py, bump_tags.py).
+- clip-toad-idle: clip `toad-idle` cut from art/raw/clips/clip-toad-idle-v4.mp4 (24 pictures a second; video frames 0 to 72, every 2, loop; 37 pictures kept; played at 1x). toad_idle frames 37 frame px 400 336 rows 50 42 sheet (1804, 2512) in memory mb 18.1 (as a grid 19.9) kb 928 dur ms 3083 kind loop impact ms 0 reach [22.0, 3.9]
+- Not seen on the phone yet. If something is stale, press RELOAD on the title screen first.
+
 ## reports-2026-11-20c (2026-11-20): muffin tray off the Mudling's face, "Nine wrappers", and the voice and table purge for the Chapter 1 line cuts
 
 A second session worked card c-reports-5 at the same time as the one that shipped reports-2026-11-20b, and found b already pushed. It kept b's changes (including b's Sal flow: TO THE AIRPORT choice, then the cab scene) and added what b left out:
