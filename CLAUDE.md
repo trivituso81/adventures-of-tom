@@ -47,6 +47,8 @@ Tom: "for any conversation i initiate, check against the board to see if it's an
 
 **cardlinks1 (2026-11-20): open the Library entry from the card.** A Tom card that sends Tom to the Art, Voice or Music Library has `links` (`to`, `ids`, `label`; a card with `done_when.art_approved` gets its Art Library button from those ids); the board shows Open in the ... Library buttons, and `art.html?open=<ids>`, `voices.html?line=<key>` or `?chapter=<n>&show=<filter>`, `music.html?track=<id>` open that entry. `board_check.py` refuses a card that names a Library with no link. Test: `python3 tools/cardlinks_test.py`. Notes: `claude/artgen-plan.md` "cardlinks1".
 
+**backlog1 (2026-11-20): the backlog.** Tom can park any open card with Send to backlog (`backlog: {at, from}` on the card, lane kept, In progress goes to Up next). Parked cards show only in BACKLOG at the bottom of the board, closed by default, each with a one-tap Add to <lane>'s to-do that removes the flag. Never start, ship to or count a parked card as open work for a session; the sync job never auto-starts one. Test: `python3 tools/board_backlog_test.py`.
+
 A request that makes other cards obsolete retires them. Push the board change with the work (or alone, tag `board-<short>`), run `python3 tools/board_check.py`, and finish with "Theme: <theme>. Pending your action: yes/no."
 
 ## No breathing in the overworld or scenes (standing rule, Tom 2026-11-20)

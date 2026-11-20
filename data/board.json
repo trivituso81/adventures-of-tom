@@ -8819,7 +8819,7 @@
    "col": "prog",
    "theme": "Tools",
    "title": "Board: Send to backlog and a BACKLOG section with Add to to-do",
-   "next": "Building: Send to backlog on every open card, BACKLOG closed at the bottom, one-tap Add to (lane) to-do.",
+   "next": "Shipped as backlog1: Send to backlog in every open card sheet, BACKLOG closed at the bottom, one-tap Add to (lane) to-do.",
    "blocks": [],
    "created": "2026-11-20",
    "changed": "2026-11-20",
@@ -8832,6 +8832,10 @@
     {
      "d": "2026-11-20",
      "t": "Tom (11-20 00:45): \"The compound board needs a send to backlog feature for anything that is in the to-do list, no matter if it's for me, for Claude, or for any other, and then there needs to be a collapse by default section at the bottom bottom with the backlog in it, where I can tap in a single tap on a button inside of all the backlog items, a button that will add that item to the appropriate parties to do list\""
+    },
+    {
+     "d": "2026-11-20",
+     "t": "Built backlog1: board.html (Send to backlog, BACKLOG section, Add to to-do), board_sync.py (a parked card never auto-starts), tools/board_backlog_test.py."
     }
    ],
    "prompt": {
