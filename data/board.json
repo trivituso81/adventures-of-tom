@@ -760,6 +760,10 @@
     {
      "d": "2026-11-19",
      "t": "Queued after cutpolish4."
+    },
+    {
+     "d": "2026-11-19",
+     "t": "Tom tapped START."
     }
    ],
    "prompt": {
@@ -771,7 +775,8 @@
     "effort": "medium (steps are known; effect sizes are settled by looking at frames)",
     "text": "Read claude/handoff-rules.md and claude/cutscene-polish-plan.md, then build phase 5 (cutpolish5). You have my full permission to access the repo."
    },
-   "tag": "cutpolish5"
+   "tag": "cutpolish5",
+   "start": true
   },
   {
    "id": "c-boardready",
